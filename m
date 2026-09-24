@@ -1,150 +1,152 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA24B42E8DC
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:30:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43C0C425898
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:33:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790235008; cv=none; b=MdbPlKosUFLivqkyyfa33CnpRDSX5vbzlkzZ6b4dT6ZWEpwx5mzjHseZKirCMzPAWf3nJg2ZMV6jp2YYcLsViTICEzXFi6cTm8ChbtsxEP3nA/ydvQdAYoXxFRWSKD9b+CsP8jJwlKzJx4WwKEsuQTDUmlrorCNLQWH8fuxFnBY=
+	t=1790235193; cv=none; b=I61RdXwex/QDUiQDWgOYyyxUgUBiiZEN4ATroZvu0QK6IzTthH4TQvn94NVe1ALU9LXtwMftNLdZv0/4VY4S+rSn8qSm/cq4kWvCSzmkE8hYBqq/nYHOPP1JWhZA+dNaE6Mtb2BVviMcVqRhNzpkWj+WijhiBBcCBgyE0wAl9Mg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790235008; c=relaxed/simple;
-	bh=uLnagpfUFVqNy8Hx6YY4OSsrTwJNd/dKrsdS6zcaC5A=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=PcET60rYbAmzh93CW1+G5Ff4vF7dzBUu77HyC3CclBHU3dBYfA4TQ7GnebdQ9YX4Sn35eiICHCRuCOyP4ZZEQnr5JEBv1rYncBMLWHLneuhnCkvD80sa0U2YowzQ7N4fdo2gmc/L7Y/LAvZX3k6glNLFs0HDnGwovDXL4wkN2K4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=HBfQbUYa; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1790235193; c=relaxed/simple;
+	bh=4HUozPl6P8WQA6fqZG5KiRI0jrfGMQDXBfRnaSUaukQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Oiv8a2+4Z5pP5ZuDGfWOcL6Ixi1mL7twGsmSnlfd3LlqZj0O4jvX9+3ZvSAKhJpbDL6UtVq8akow66PRyxNAeGFbdG6Y4WGEn8IGrruf1RFFXJG6q+2W5b8XS4AuspAXvUW8Im35OS4SsGrT4O/gKMzyBy8szcSxCKQG7npkeYs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cg9m3Cgy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZK4j4+IX; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="HBfQbUYa"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49cd38e0f79so9387655e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 00:30:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cg9m3Cgy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZK4j4+IX"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O5fEl81149716
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:33:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=2WA7LsDGNuQYaD6cNjqTA1FGgaI7kzn1QW6
+	oz4DCzYk=; b=cg9m3Cgyp5c7m5GsozMjxVeHReoL5dYl+zXpL+SoXAqn38fDCPh
+	SKro/kMouiBTvCACnWJmSH7VHIxuwn30EKJrvRmrJtH/qVnAgxJ23LAXcax+ltM9
+	kfYVoNNraZqaV5WDRv/LAKAwhY07DHqH9Cz1BRUCe8ukNh6eCz9rEF/Oysjyvvkd
+	VtxBOaYmtGvfLNAue4MNeu7mOqAKv3FzdNYrQUuqNXAXATvOQ9lp64ES/kX1e2cc
+	6hE+poVXlcgTDX5d4LspuU5M2TbGsZjukF5JKBEbRnGTaBFfe3njrSYKA5KZObb4
+	pz7tLVz6+TIEZSSghmaGHn22p5lgnIjMJNA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvmrraape-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:33:10 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-334f782d1abso1298058eec.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 00:33:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1790235003; x=1790839803; darn=vger.kernel.org;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Mdc4xxWsL55mn3imyt0LizMFSY4UfYvhYLzlk2F0w9U=;
-        b=HBfQbUYadkpBJvEeftpMYsA9H2eDOHHBeXZb6/tTo95bkBiTqEEVk6EUNtcbUKNqhz
-         3TEZBI7qfSsBWG/qE/Wzdz3jc1kQatAr8yp5g3i/AwvqISj2/RW4cZS8sJUFCgH/J1fB
-         uDUybzSuIw01kr6cPFGw3LM1Z6pXjQguyquvtlhpPTRDjip5S2uPRDtEYutkpxGH9WuM
-         1+EzT/gZVTZmnP7ebKZHdo5Nj+E39kdaSAOgncx62Iro4hxCWpGMGsD9KMxo557bG/Ps
-         Ky/wEcFbY1kz6nMp9V/b1LZPaN5gKz7rDgEysgJ5sI60ruRBA0+d49oTIF+MdTEZj443
-         gbKQ==
+        d=oss.qualcomm.com; s=google; t=1790235190; x=1790839990; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2WA7LsDGNuQYaD6cNjqTA1FGgaI7kzn1QW6oz4DCzYk=;
+        b=ZK4j4+IXs6RCLfEsUU0SxLdFaNGYcfkFZxhmSRKb3hhPnZUn9iQiRl/Yl0frUJAus+
+         ZSBv9OP1GdykHiPUIiHXBu+h2vrNS7jHYBwWvw/UCYvAvRXlobNStxN3L3+GwGWEn088
+         9sf5WzcyNosM2Itbp/62GSYIUhaJh40ULXgSHgq+Z0xRFhZtq1FtsqRmKbioGAwwWLNd
+         JutIvbzp0iOJnSKPyjB5sB5i/Zxa/iVR8O5np/7POrG6XY5k766DSattNYLloxmky7FC
+         Z9FY7zwNeQty6ZFuthDC2wxxYtMw6XThX0rUkPMdtogB5RzcfV/5ld12kdUBtkXJ9UcS
+         DZjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790235003; x=1790839803;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Mdc4xxWsL55mn3imyt0LizMFSY4UfYvhYLzlk2F0w9U=;
-        b=H36aumUys+tDfggxeg5cL8lhwzM2d0lHHRQX0284TtB52UNseEIXjOM4sNfmsj9Oqd
-         anPUvroAOTZvOufCu/mLLuHiqkiN6Yhld5q5Noh8zEsvExSVNvNbxjnXcw/QE/lsr9MO
-         P3AZ3ivgFHI1QxK8zT85dtgUecBJJfgTRTZFpxhZ1/duD+C2kU6xh11xiQRQuBhwq5+8
-         v9psd2Vqe8CLm+BcZ/rjmoMnJO4L22bVPzXEGYoan1V+Gp91puG5RU4FKTFFR5NLLl/s
-         qSRxA6yhAxzewlmH07omauM6meX2B9G3Zl2czAG0gNWS2P16no34aT8e+IVLmmY1ImR0
-         JQQw==
-X-Forwarded-Encrypted: i=1; AKwUvBzPlWpPBmSEskPX9SODVwNMWIU/aHahYpNDZxv/ddhBHCBruL+kbC0XFmmCjWOvQuQl8Rwv9OEH/dJlXAEW@vger.kernel.org
-X-Gm-Message-State: AFuF++lBOIjoGaL3UcqYS5PW0AeCUCWukafQ8Boaf9gpKQjw0a0Ty1mn
-	s8CHozq85RKt2Dmb3QK77ABiemuNAxGOBlSrYKIuMRuEDdnmncRgfC9tU/yc/203GsY=
-X-Gm-Gg: AYBFou0iZo70/Pv2FLEWFzGg/OM5BO36sYd7kNX3lSklSNHU1olF0ynB+bXAT5sTeIB
-	wsCwPOmtwwSgP6aEgTWElmgE6vBt5Ge7oeI1TNZ84/vkDORunjLnKpcOda1BXLnF+S8dmvOEWVG
-	jiiKxi/TQw22KBuzWDQUSTdMiD/8mZcE1UYH/AL09t1578ZAvzZpqGT0MlTf3r8OZ+qsNa1xkq2
-	niz71RGAB+j9Jj3CP/ANIb0vk3+0aFXoliIp1MiNrutQvKx7nq9QqVfRZxAS9pDc/JMbC1SciDC
-	szzMfls9xb1q/tVbo10p8PgFtbZ3LR+AvPMN7k1EJPkFn1JEPEsfY3upB+biEF+Lx/PVGNAXpbL
-	vZADxqOE5rzhcWQeI1+QfKE4KXILBL/1ILR7dwOj5ObsUXVvLNBjGYo8p1bZXHR1kSUmRjV3RTg
-	r4UDE//ZQDncJYSNSfzYYmvq5e5G9vFu+icwdpgpZzGFJZKp+WweoZq4pmn3m82+N9KF0Rgdbdl
-	jhmijSJKy+M7woSYg==
-X-Received: by 2002:a05:600c:a47:b0:49e:823a:9dec with SMTP id 5b1f17b1804b1-49fe66c892cmr22336635e9.3.1790235002814;
-        Thu, 24 Sep 2026 00:30:02 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5bae43dsm45721935e9.5.2026.09.24.00.30.02
+        d=1e100.net; s=20260707; t=1790235190; x=1790839990;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2WA7LsDGNuQYaD6cNjqTA1FGgaI7kzn1QW6oz4DCzYk=;
+        b=GfFMWwj81Mlw2rgmW2UwsTdhU2vRjghfwaW92hS6V5P4fF47EOvfKrYETg5LCh90mT
+         5H06UyB51K4HJqeg+DgdXayLnX5YkQiGR8V+azd7sPOmAsalmMNNgv73VIAHFly7M+VH
+         KatWT5AYNiDL8yPU23EEp0x1nLeUuEb3ya5otbm59N+f8omeR4Zq0YipZFjQLVpg7GrE
+         LEhFpjjFJ/8Jo5mh+sgsI5/sjw+dJjmU1Md2DEFXhHIs+VNLnxWcGlfXPOVbmo8/JD82
+         NueSElX8Lt4aqes5dGpUB7UT7QTNzVyFunncBUSYJl9iRdwIR2ftkI+7ZCT0l7Q9MMWY
+         XfSA==
+X-Forwarded-Encrypted: i=1; AKwUvBwcWkpP5AjdeyVg/4I/jSWyKfzv5cD4mqr388C79zKhqUvMoTBbNimtzqIe4kf6bmP4N9tWJoPANzIxTiQO@vger.kernel.org
+X-Gm-Message-State: AFuF++mn0eHbts4Ru7s+eXapEWVANX6lfEkUzJlbCmC0LbSzb8Q96X5+
+	ZbGVtDJZC23PrDEYBJ+GEK14NECmTt/zaB9X/THy2Esncs5Svr2sR6QniK7m36rnVYwVmSPi1GS
+	z61zrgXQ8MBZWZYYM+YUBqiDX34dN53TW+m7zcKYfQATOxCvo3nGCqDzU5yewNKwJDnDN
+X-Gm-Gg: AYBFou0vjTgmtdut2vhc6jcmP8PYGCMna4UvZWuKw79mN4lUg0VuoFBTj1N1zQmXi1X
+	PPfpQyLbWvyHCppEOhInA4FGuh9Xt4fGeaOUlOUlj3XRhA5J752JhXaQDrhn3U8dM36bqNkXzCw
+	ob0kXZjFfGVi5ZdzRWmRmn53j2QeeyOPUNMzPuPM1c1jqRvbNo57EvP6o5jO8ZjpPYXeO9kjYK1
+	s467LkvDGQ13DvN9mOBVemHvsPop+fyc9z7TPRAnpXEGvX661XQDRw6oKKIv/q/Zj9w0CZPcay2
+	MK/oaTaljoh8dIu5VMID0V9ZITX5l7atiIuhVxumaQQxwuAjIZ25LkJ8HG45Dz+I970QaS89BA0
+	nnMW9cWnfHs2YaA4QuJHl6/xaBYr9+vpRoa0J42JdzeptuL60r4LtCuoWLVs=
+X-Received: by 2002:a05:693c:880c:10b0:33b:fc17:e781 with SMTP id 5a478bee46e88-3400697415bmr1260052eec.27.1790235189770;
+        Thu, 24 Sep 2026 00:33:09 -0700 (PDT)
+X-Received: by 2002:a05:693c:880c:10b0:33b:fc17:e781 with SMTP id 5a478bee46e88-3400697415bmr1260028eec.27.1790235189198;
+        Thu, 24 Sep 2026 00:33:09 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e939fe502sm11052635eec.2.2026.09.24.00.33.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 00:30:02 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Alex Elder <elder@riscstar.com>, Brian Masney <bmasney@redhat.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
- daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and
- reset driver
-In-Reply-To: <7147ce22-fc6d-4cff-9470-98e341da0a87@riscstar.com>
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
- <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
- <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
- <7147ce22-fc6d-4cff-9470-98e341da0a87@riscstar.com>
-Date: Thu, 24 Sep 2026 09:29:56 +0200
-Message-ID: <1ja4p79kej.fsf@starbuckisacylon.baylibre.com>
+        Thu, 24 Sep 2026 00:33:08 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Georgi Djakov <djakov@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
+        Pushpendra Singh <pussin@qti.qualcomm.com>, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] Add BWMON support for Nord SoC
+Date: Thu, 24 Sep 2026 15:32:20 +0800
+Message-ID: <20260924073222.1000666-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAzMSBTYWx0ZWRfXxPB8wIa2irVg
+ xascA6psgWEPTrOKdP3yGHhO1cByiMiPOzNiCsN9i5mMAPIvWnjLeSCRetB6q/By7xD6K2DsO6Z
+ PNxHg9h//BoKlmYLbpKK7t0OtLc/6GOThqkMtF8GZHiNamBeYDJRHFL14umNr5smHNsMg1p6E5T
+ /28Q5Ai0ioKUd5JbIveCwnoUKLMILvnfE45AxWhNc7Io8CzgZEHxMUlWJ7P7ISPeaWE7nZPsKLY
+ 1+rLWSqKEzlONreCTh7ayJLM10gry3yWVVZ0/B+nI1Fmt+VgH4vZ7QVLkoip5h9hQJuALEBF3EH
+ cZhDbdRKxpzJkfyMJug7PlT3n5zdx9ZXhQTGvgcTdORr1PvZQ2PrTb3wfhccjPSqMx4EAs7D6jT
+ IReg02qS6f+J6Gbhvbjh5aIbYfKQLqSQDYiSTxiPs8lD5OZVK9bccTpbKQUe3r08m6280uUeLXm
+ hHPR33c+eyvVR94UO8Q==
+X-Authority-Analysis: v=2.4 cv=TYwDJhQh c=1 sm=1 tr=0 ts=6ab4d236 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=PYu-U4Ynb8dZ3rZs9soA:9 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAzMSBTYWx0ZWRfX+oHCyAUDh0RO
+ i9qgJlymyvtb7FntH4MYHCHdE2Deh46kB1fnSGxnMLG0oAIg9J8C1fyzLeWFK/sHABeGiYlN9Xr
+ g7q5TRNM4ld9cYXfTTIlwc3xGtQhuGQ=
+X-Proofpoint-GUID: KL4KsHfVRC4NURzW6S7G5u9bFORgLrxB
+X-Proofpoint-ORIG-GUID: KL4KsHfVRC4NURzW6S7G5u9bFORgLrxB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 phishscore=0 spamscore=0 lowpriorityscore=0
+ bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240031
 
-On mer. 23 sept. 2026 at 16:33, Alex Elder <elder@riscstar.com> wrote:
+The series adds BWMON support for Nord SoC by documenting the compatible
+and adding DTS nodes.
 
-> On 9/23/26 3:58 PM, Jerome Brunet wrote:
->>>>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
->>>>> index f9592fd9ec2bb..50efa10d48450 100644
->>>>> --- a/drivers/clk/Kconfig
->>>>> +++ b/drivers/clk/Kconfig
->>>>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
->>>>>    	  clock. These multi-function devices have two (S2MPS14) or three
->>>>>    	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
->>>>>    
->>>>> +config COMMON_CLK_TC9564
->>>>> +	tristate "Toshiba TC9564 clock support"
->>>>> +	depends on TC9564_PCI
->>>> select RESET_CONTROLLER
->>> Thank you.  The reset and clock drivers were previously separate
->>> and the reset only became available if RESET_CONTROLLER was enabled.
->>> Combining them means I need this.  I will add it.
->> Why did you combine them ?
->> 
->> it would be a lot better if the reset were handled in
->> drivers/reset rather than in clock. There has already been some work to
->> move reset from clock back to reset. This often involve auxiliary drivers.
-> To be honest, I got a suggestion from someone to combine them, but
-> I said "no, I got feedback last year that separating them was
-> better."  But then a second person told me that these are often
-> combined, so I took that as "two against one" and decided to
-> merge them.
->
-> The other reason is that four registers are used:
->    #define CLK_CTRL0_OFFSET	0x1004
->    #define RST_CTRL0_OFFSET	0x1008
->    #define CLK_CTRL1_OFFSET	0x100c
->    define RST_CTRL1_OFFSET	0x1010
->
-> They alternate between clock and reset.  The previous separated
-> drivers specified the two offsets for each driver in the reg
-> property.  But somehow these interleaved registers seemed a
-> little off, so I thought the combined driver cleaned that up
-> a little.
->
-> I don't have any strong preference one way or another.  If you
-> think they're better separate, I don't mind separating them
-> again.  The two drivers are extremely simple.
+Georgi's Acked-by on the binding suggests that we can apply it via
+soc tree.
 
-Yes, SoC manufacturer tend to mix the 2, it is fairly usual and we used
-to have many drivers in clock providing reset too. We have been slowly
-cleaning that up over the past few years.
+Changes for v2:
+- Fix "reg" length to be 0x500 for all three bwmon nodes (Thanks Konrad!)
+- Combine bindging and DTS as one series
+- Link to v1:
+  https://lore.kernel.org/all/20260831090134.585588-1-zhangfei.gao@oss.qualcomm.com/
+  https://lore.kernel.org/all/20260922080416.484280-1-shengchao.guo@oss.qualcomm.com/
 
-To be clear it is not strictly forbbiden to mix ressources but putting
-things where they belong help review and maintainance.
+Pushpendra Singh (1):
+  arm64: dts: qcom: nord: Add bwmon node for Nord
 
-There are several examples you can look at with auxiliary device
-support, ./tenstorrent/atlantis-prcm.c is a good example.
+Zhangfei Gao (1):
+  dt-bindings: interconnect: qcom-bwmon: add nord cpu-bwmon compatible
 
->
-> 					-Alex
+ .../interconnect/qcom,msm8998-bwmon.yaml      |  1 +
+ arch/arm64/boot/dts/qcom/nord-embedded.dtsi   | 21 ++++++
+ arch/arm64/boot/dts/qcom/nord.dtsi            | 67 +++++++++++++++++++
+ 3 files changed, 89 insertions(+)
 
 -- 
-Jerome
+2.43.0
+
