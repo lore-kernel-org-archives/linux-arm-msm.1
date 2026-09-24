@@ -1,46 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B50EB377AB2;
-	Thu, 24 Sep 2026 20:09:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 725594BD7B2;
+	Thu, 24 Sep 2026 20:09:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790280582; cv=none; b=GVOqMd3V4TON7MAqAqdWdzOBUkVYGQK+93Pw3PSWocKUn1DngUx/5lfFfWuUQPhZk9WCro3qQKLxl2cJNedWxNL6v0bBN4DSKhjo0c+A0g1v5ZP5ELOtHSsKxjy2FVCle2cZvgLcmahbBGQgcpdfPmekgiawC2WUF/KKa8mMTEw=
+	t=1790280597; cv=none; b=cdDKiAfZKwKF7uB2v7N2NWm8AlR4b/NAq8ar8sr4muyTQk5gvVz4px1btLFWRko65qJFsGsQ59JGI5i0PThf34ai7gU7srv0O7N/fMje8qwmz/P4A1Ue1TCT7q1tBg62EVwdcC862j5ju9jTHCCAox0Qa+0hynBPM2cPeGfLL3A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790280582; c=relaxed/simple;
-	bh=8r77lv41Y+BSsQOSrxCC0qUKAKCkhR10BAen7p3I2eA=;
+	s=arc-20240116; t=1790280597; c=relaxed/simple;
+	bh=k0VSI9Xje2iq1txPz4aUwwslHAlsiTP3UtNhX8PUPYU=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=dkBZX6XDSmO0KgXZyS4gOgt8zmu/WYkPoEzjsd1ojLWdm5qaEZCghXf0lBTtcWfhcQtzOsk1DU/KS7eKKMK9SC/uRIksXMStvpUA6RixURj0BcfHy0QH5q87mLkTwpTqpV0HjJ34FtpmUQcLDjdSx5Jx3lf+2KPmtp+N7X6Js0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mxk3tB9P; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=ufTfmE/1UQ/cFDdX2FZlaNj2WtxFHdSJ0v8UzzYsZyfH5WLC/vmoU+0CeXSyjqqe0YU5p9YWTsJMH7OkeFaBY6GWucVYOvutkzr0FWyJCzVZfPp6Ijos5HkE2tsGJ//gaxoXrAYAQjlVk9etWColaJk2GBSgppUb9/n9OK5Hdm4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PRJLWZoV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mxk3tB9P"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6ED351F00893;
-	Thu, 24 Sep 2026 20:09:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PRJLWZoV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63D471F00893;
+	Thu, 24 Sep 2026 20:09:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790280571;
-	bh=CfT0IA0fjDQQ8vfTtzX8JPsthxmsdMYwTsZjiz8d5m4=;
+	s=k20260515; t=1790280593;
+	bh=CQu78KLwTEVbiYZbpFLBvZknwpDQdFRkcZnlV1T0Nwc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=mxk3tB9PNAaPyWcQdnbt4q6+gO2YTkBKNyo237uh/6O6D/gdVCKL1PEx8eiyPLaP2
-	 fHxbP8vJLGhJoxgLkOsrtoibuvkSg7C+uzq96nppHmo/+1s8Vn6rHYQVugUAND5Gfg
-	 s9zEsjjgfvt3jHzghwXXjoc8Uv40SePyVeUpYeUR40YHx8T38l+jiOlJ+Wo7W/iCHo
-	 l6xwDSDFvZ2jzqCzoNXGU40KOuzNIv+9Bu+05Cceit0juKEFbjx4RgSSyZgdIdLZIn
-	 3WsyjnvzLaVjWVEb00bGdiWmUpmInbUa48pd9pF44K+aOqXyuDIV09Wfe9xp6QeZ6y
-	 XWpC7W54Uxsvw==
+	b=PRJLWZoV8qL+VhzPZsgQJTFScwTpVqZihRhIWsHyuu5iPluTcbDLsxqfOMk2bgoZq
+	 epFbXSrzFFXHShYIxIbEYNn2xCDkEHCfAwhu/dsA9O39zM0Pyqz7KVMu9aGhyY5z2m
+	 Zldy0tBEeyl4e7v6zNxs+M+c8f97w7Kal0wwraVQE2JEBZ4vvKbzfQRlQ2sqgJX5mI
+	 gt7TQXK51wbjODnvqMlMIbVtv43gkCLZChEhF2zeWeX0amr0FYY/qR2oxYmr2wUCLj
+	 N52x/I4SdJmhxNNS+RgB4OU9dSaqW5VUf5lDLzEZxNJLc2QlsvpEC3rhLBW3A/q7p2
+	 4CZgiUpZrky2Q==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/8] mtd: rawnand: qcom: make check_flash_errors() more
- generic
+Subject: Re: [PATCH 6/8] mtd: rawnand: qcom: make nandc_set_read_loc_last()
+ more generic
 Reply-To: sashiko-reviews@lists.linux.dev
-To: "Vignesh Raghavendra" <vigneshr@ti.com>, "Manivannan Sadhasivam" <mani@kernel.org>, "Gabor
- Juhos" <j4g8y7@gmail.com>, "Miquel Raynal" <miquel.raynal@bootlin.com>, "Richard
- Weinberger" <richard@nod.at>
-Cc: linux-kernel@vger.kernel.org, "Md Sadre Alam" <md.alam@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-mtd@lists.infradead.org
-In-Reply-To: <20260924-qcom_nandc-share-more-code-v1-1-f3012199b161@gmail.com>
+To: "Manivannan Sadhasivam" <mani@kernel.org>, "Gabor Juhos" <j4g8y7@gmail.com>, "Miquel
+ Raynal" <miquel.raynal@bootlin.com>, "Richard Weinberger" <richard@nod.at>, "Vignesh
+ Raghavendra" <vigneshr@ti.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, "Md Sadre
+ Alam" <md.alam@oss.qualcomm.com>, linux-mtd@lists.infradead.org
+In-Reply-To: <20260924-qcom_nandc-share-more-code-v1-6-f3012199b161@gmail.com>
 References: <20260924-qcom_nandc-share-more-code-v1-0-f3012199b161@gmail.com>
- <20260924-qcom_nandc-share-more-code-v1-1-f3012199b161@gmail.com>
+ <20260924-qcom_nandc-share-more-code-v1-6-f3012199b161@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 24 Sep 2026 20:09:31 +0000
-Message-Id: <20260924200931.6ED351F00893@smtp.kernel.org>
+Date: Thu, 24 Sep 2026 20:09:53 +0000
+Message-Id: <20260924200953.63D471F00893@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,49 +50,49 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Medium] mtd: rawnand: qcom: mismatch between commit message and function=
- prefix
+- [Medium] mtd: commit message incorrectly claims 'qpic_nandc' prefix is us=
+ed
 --
 
-commit a83607e63ec53429dc425262093eef9dee3bfd4e
+commit 640e8b0121507d995cca38494c17f8a44fcdb750
 Author: Gabor Juhos <j4g8y7@gmail.com>
 
-mtd: rawnand: qcom: make check_flash_errors() more generic
+mtd: rawnand: qcom: make nandc_set_read_loc_last() more generic
 
-The function gets a qcom_nand_host pointer as a parameter but it is
-only used to extract the nand controller's private structure from that.
-In order to make the function more generic, change the declaration to
-get a qcom_nandc_controller pointer directly, and update the callers
-accordingly.
+This commit modifies nandc_set_read_loc_last() to take a qcom_nand_controll=
+er
+pointer directly instead of a nand_chip pointer, aiming to make it more
+generic. It also renames the function as part of a preparation to move it
+into common code.
 
-> diff --git a/drivers/mtd/nand/raw/qcom_nandc.c b/drivers/mtd/nand/raw/qco=
-m_nandc.c
-> index d7642db2e2df1..12bfb14cd9a37 100644
-> --- a/drivers/mtd/nand/raw/qcom_nandc.c
-> +++ b/drivers/mtd/nand/raw/qcom_nandc.c
-> @@ -449,10 +449,9 @@ struct read_stats {
->  };
-> =20
->  /* reads back FLASH_STATUS register set by the controller */
-> -static int check_flash_errors(struct qcom_nand_host *host, int cw_cnt)
-> +static int qcom_nandc_check_flash_errors(struct qcom_nand_controller *na=
-ndc,
-> +					 int cw_cnt)
->  {
+>     In order to make the function more generic, change the declaration
+>     to get a 'qcom_nandc_controller' pointer directly, and update the
+>     callers accordingly. While at it, also change the function name to
+>     use a 'qpic_nandc' prefix.
 
 [Severity: Medium]
-This isn't a bug, but there is a mismatch between the commit message and
-the actual function renaming.
+Does the commit message accurately reflect the new function name? The messa=
+ge
+states the function is renamed using a 'qpic_nandc' prefix, but looking at
+the changes to drivers/mtd/nand/raw/qcom_nandc.c, the function is actually
+renamed to use a 'qcom_nandc' prefix:
 
-The commit message states the function will use the "qpic_nandc" prefix:
-"While at it, also change the function name to use a 'qpic_nandc' prefix."
+> --- a/drivers/mtd/nand/raw/qcom_nandc.c
+> +++ b/drivers/mtd/nand/raw/qcom_nandc.c
 
-However, the code changes the name to qcom_nandc_check_flash_errors, using
-the "qcom_nandc" prefix instead.
+[ ... ]
 
-Could the commit message be updated to match the code, or should the
-function be named qpic_nandc_check_flash_errors?
+> -static void nandc_set_read_loc_last(struct nand_chip *chip,
+> -				    int reg_base, u32 cw_offset,
+> -				    u32 read_size, u32 is_last_read_loc)
+> +static void qcom_nandc_set_read_loc_last(struct qcom_nand_controller *na=
+ndc,
+> +					 int reg_base, u32 cw_offset,
+> +					 u32 read_size, u32 is_last_read_loc)
+
+Should the commit message be updated to mention 'qcom_nandc' instead, or was
+the function intended to be named qpic_nandc_set_read_loc_last()?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260924-qcom_nandc=
--share-more-code-v1-0-f3012199b161@gmail.com?part=3D1
+-share-more-code-v1-0-f3012199b161@gmail.com?part=3D6
