@@ -1,132 +1,122 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A592D4A5EC3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 15:55:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0626A4A68A8
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 15:56:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790265305; cv=none; b=F4krfiWaCutvd42nbA8iXWlTQIvhrXkEeLeziOkGtrNapDl49fhkbjB3Wo9tvtv+FRVRZtlzuSfArbBjYAKl3U3K3PCFRVb+edb86KCPvoso4Z5D1i7xHm+8CJFD1a77BqVLsAcqW9YUvOfFsTs/pqJR4R64vi8UlEYzrnjcg4o=
+	t=1790265380; cv=none; b=MJFQD7m0r6VYbHeKvWjxPAQyKFeuKQnv8isff+Ze4ey9u1L+ebLuYtVgw9HqVtf3SbSIcEEm+yphD0ekA9Wg6HKjF0OvSv5nqhpguT00MSi5bsbUGPCh6uOJM73RYn1yJHscLhupgLiHCykxm9pSezuv+Rr7DgrtAom3pAFZ91E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790265305; c=relaxed/simple;
-	bh=U4AhA6BUfq+SolELH9yCaE3z5oAyAj54BShh4/smobw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=TgiS3Fe/zCCNU9yVAs3HhPoqq0Snm9qPceiObLWttx9kqoshDnLgGYVtMTSqfn90BFbKpt8Q1QGSBSg7t1Hi3DThPMlEhnWsNPbn13xYGK4o24LzbN9Muxy/Lg/wner24QQ2JqCRGxsuUX1mKOkzJQ2Pm6MFtvP58WqxCmLLwvc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=I6eOmBKf; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790265380; c=relaxed/simple;
+	bh=vcOjnbGn1ShWJBNTNFJrGQnXqDa49XfATRpJvsoyBjA=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=kiLToM3BhclCXbzQ68KRAdYl07TKqhFeZDy2el/VcUHj/q+wm5eOSZeQvEC2zSFp9gjwQVlsQJ1SRpN5US0gaN8BvAkjiLdjTtgng2IE04LNvDUpnk4PINDUfSOi+3vlunI0hcUnlQs/tpH3x6Szy8Jkck0aeact+PLJkNo/loA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZNzAyLUf; arc=none smtp.client-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="I6eOmBKf"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4843c3ea1f6so1339060f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:55:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790265302; x=1790870102; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Wtag/akuhNvJA+6vXIkSDjTSuJ4EXyen97JWOA2z3A4=;
-        b=I6eOmBKf+K7J5SOaiGbLwo0DaXRc8+u35/4CkUvxbRqHbPn1iw40w6CW/CQOlaIS0N
-         ZYvdCXpSFMrFOe4fGT8noG4FikOd88mfnE1w+7t6F8hqKbnrAY+iS0bHPk+qUfNxaihd
-         p5Cx+o/JAKDSPOfM2PLZD3S4bLSMrK2N3Q9vru1KNFNgJvE/8SyZ6m8GxUk0LYXKp8ze
-         c+UqFjs+GapgfovqgJj89KDG55Jh20UGZgU5SeriHx0tgY2J0RBiyiU8G4hjTWHuG2EY
-         8PH9nTGV54ProYI/wxiAxkkqTXVeqqJ6OW4SSQpwxiXnGKGpLyopbIFXucSqIu6krezR
-         dRBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790265302; x=1790870102;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Wtag/akuhNvJA+6vXIkSDjTSuJ4EXyen97JWOA2z3A4=;
-        b=mKw+JUCR4AGjJb2TpZ8JiksSdZomqsR6+fJGg4V3DWyuelOOUCCIKNaamcxx6sFlNg
-         k6L0edqLkSHsI0MpIFHpxIbXSblBYOvYLNwAXsggQH4aGRS5nJM92wRpTT3+8fkBeh+Z
-         gnMqw4t0ky9i2Ya3Um/SENtBaZvKeMygBWr25fpHDcZ5Rpp/olaBwA3eIIY8wWXBVqdh
-         wW4b3oXhFtCvt5nDneIyMIs8/sn3El6snLg4UQejsJY+zuRk9rBaAJ9IIlSsE14Cesyr
-         F0m8hSl2sO/svYGqe8b0SJ3WVU1SKp0uzk9LQdOWB2sun5OXzE83dZ2xHwpfz7HS9CjD
-         /pJg==
-X-Gm-Message-State: AFuF++nIrZ04D1eNrXpujmEyvlMgkhAUU1yvCvtheZOR8em27c6lp88B
-	b+H9uv9nOSOfbtBHrarEBWeVK1msWmgCFlMdKGXTF3BRMQUnXm3yo5YC9GP0ra/JCMU=
-X-Gm-Gg: AYBFou1Vnk9GFCLNLNfJCMnc+0ZAsNYJpKIgEnrgKI2VpVaD1I6Ux7JMuRT5JUCb/v5
-	Ikb/XbMw4WCFwKNLqW0ACIneJ6evM/QatOuu4VDgI/gNkL92VYomv3Ih4vBe6ibZJHxcmkPTUxg
-	pPPYvO4+JVFL+2dIwimtmDOZfltd4zu1A9ypMxue0H1NZWt826mQSz5ZzJwbOHYp/Zg+YVS643v
-	Pi3zLGL8MA3NtATvztNV/t5uUdLx+f8oqfpkZdDN2R0bck/Wdluepd4o/vJyDIe8BoESQS77fWY
-	ixnOoygnTdFLxpmMvIVzFNCA344IqsDvAat0Ddq5EVBHUGON731iZ3mYMpTeF/vwE+ZxSFREt0C
-	DuW1GzplqgFj/xEk7crJS1PfUuR2VSf40204/VcehggGD7ndcDVqIZ8LQkoOJXoFiihyP/WzhB0
-	Fq77BOugE/aJcSizFericq+MfoeAdp9QuzagdFyrUKYQVhwBa9cQeNq11Fivzju1BpmZtJFWvbz
-	E/dLDjXuX3v8GLXgCwy
-X-Received: by 2002:a05:6000:41ef:b0:487:72f:fb41 with SMTP id ffacd0b85a97d-4887169fe48mr4664434f8f.39.1790265301644;
-        Thu, 24 Sep 2026 08:55:01 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a349731sm4944f8f.12.2026.09.24.08.55.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 08:55:01 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 24 Sep 2026 17:54:59 +0200
-Subject: [PATCH] arm64: dts: qcom: sm8650-valve-deckard: add chassis-type
- property
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZNzAyLUf"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 48094C211F1;
+	Thu, 24 Sep 2026 15:57:02 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id B999060738;
+	Thu, 24 Sep 2026 15:56:14 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 46DCB10329450;
+	Thu, 24 Sep 2026 17:56:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790265373; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=QhjUZkH6Uy6DN6tthN3/8kVaM0dMZm+WmEFrO9JFRZI=;
+	b=ZNzAyLUfSoPkWoZTqf6l3E0tBhL2q8BDOq+Og4GUhIpWMmzx7bs9+YPDni1u7MmNze1HgN
+	z23wVm91nNUDIhUXrthZOsvk/q5fjHwPiDd4h+WtrB2ici++xiE2cY9WfuWsYQlveKRDNy
+	r9gbAoBtXbWyqixkGfIuaZ1KlEOm6HHraAjgat5QaqepzyIfoO83zuJIXrVK5zROB2JGra
+	ABxo7STNk7WMclI8HuY9tAIQgb+ehgqjboimQ2/FSoMdsiCWUYOiTYjPK9FwmgxipFJSWO
+	vepfIs+hT/n0iXGF7x1X6BaeNKRhtmkZjtlMonjEv05l3XXIbqbi1/4HSYGPyQ==
+Date: Thu, 24 Sep 2026 17:56:03 +0200
+From: Herve Codina <herve.codina@bootlin.com>
+To: Alex Elder <elder@riscstar.com>
+Cc: Bjorn Helgaas <helgaas@kernel.org>, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, arnd@arndb.de, gregkh@linuxfoundation.org,
+ bhelgaas@google.com, andersson@kernel.org, konradybcio@kernel.org,
+ abelvesa@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org,
+ linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Andrea della Porta <andrea.porta@suse.com>,
+ Lizhi Hou <lizhi.hou@amd.com>
+Subject: Re: [PATCH v4 2/3] misc: tc9564: introduce base PCI driver
+Message-ID: <20260924175603.2a20e2b1@bootlin.com>
+In-Reply-To: <e9bd7954-1cec-4ffb-a5b2-2389469b0c05@riscstar.com>
+References: <20260918173003.GA1166280@bhelgaas>
+	<e9bd7954-1cec-4ffb-a5b2-2389469b0c05@riscstar.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-topic-sm8650-deckard-chassis-type-v1-1-a58729799bb4@linaro.org>
-X-B4-Tracking: v=1; b=H4sIANJHtWoC/yXNQQ6CMBCF4auQWTtJqUCrVyEuSjvqaISmU42Gc
- HcKLr/k5X8zCCUmgXM1Q6IPC09jQX2owN/deCPkUAxa6U6ddIN5iuxRXrZrFQbyT5cClqkIC+Z
- fJDT6aO3QGkO1g9KJia783T/6y9/yHh7k8xaGZVkBhx6S3IUAAAA=
-X-Change-ID: 20260924-topic-sm8650-deckard-chassis-type-72388b577e1a
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1062;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=U4AhA6BUfq+SolELH9yCaE3z5oAyAj54BShh4/smobw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqtUfUx+Xz5WQJ6kj7ORV41bi8ykRzO9zdrviD7nzE
- dF6QWQWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCarVH1AAKCRB33NvayMhJ0UtjD/
- 4ptyU7LFqGjImapTtmhRn2HpLTVpCNIS85AfPPhUPqdFzl3DhyY/MXIt2jAN/ofE9zmVmFsSzg+Ikc
- n/YCVezeMcORoW7MoGQDILUMUkhhb0tfMPC2jNi+P0V9ebhZWKOVvFYDZIz0OLCPGoGOT0sIfhlm+F
- Gc51o2luLuGxyyoy1TUR3JvH6+LkvcfOQFxCTlyXxXsobvZ0HH2wafCuOtjc/4+c/8lf+m3noecUdo
- 2N5Zd6U34Mv++hICeogtODqPbNOr21TTyQO98/XHAkj8FXgTnZ4gwaqcspC1ulwIfJbqvdMcJ4br8J
- 0FIg1vfUvtj9Kj23VUnR/gs7DHfBo+xKLyDPzWTpvxGdHlAqoFx+gyVQE90y7Dbh+wOX3PxS2BWM12
- uFvmDz3Wl9UPMrfe4Vj8BFNW8QGuxml5JuXi7onpAajy3LjlqhxV/j4tgAUlL+RBuPZPEuwKVuPUXy
- HEpyj6HBuFkodWZnWi4V03FwJq6ez0tQyNY5EhMik1yzP968jS8ERioqzlWrsVPYpeMhCMQG1UWeEI
- +EiJTMv6xzfaKE95KcL9gLav57GbTZYLiFBCiHdMe6D8PWD0b0wQgmD0k3M8sY3o+IyKGwk/MNO3bc
- +udnMmcWWEdfgXR48+as/8zQBLCt9VbDzH6RWeyV/LRkNTJOeSUcQ7X7EiPg==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-Set the chassis-type property to "headset" following acceptance in
-the Device Tree specification [1] and dt-schema meta-schema [2].
+Hi Alex, Bjorn,
 
-[1] https://github.com/devicetree-org/devicetree-specification/pull/87
-[2] https://github.com/devicetree-org/dt-schema/pull/211
+On Fri, 18 Sep 2026 12:49:53 -0500
+Alex Elder <elder@riscstar.com> wrote:
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts | 1 +
- 1 file changed, 1 insertion(+)
+> On 9/18/26 12:30 PM, Bjorn Helgaas wrote:
+> > [+cc Andrea, Herve, Lizhi for of_pci_make_dev_node() quirks]
+> > 
+> > On Fri, Sep 18, 2026 at 10:26:57AM -0500, Alex Elder wrote:  
+> >> The Toshiba TC9564 is small and highly-specialized SoC that implements
+> >> a PCIe switch as well as an Ethernet AVB/TSN bridge.  In addition to
+> >> these, the SoC implements other functions, including a reset and clock
+> >> controller, an address translation unit, and a few other devices.  PCIe
+> >> BARs provide access to registers that manage these IP blocks, and the
+> >> SoC is modeled using a PCI endpoint bus in devicetree.  This allows the
+> >> IP blocks to be bound to platform drivers that do MMIO via the PCI BARs.
+> >>
+> >> Create a new PCI driver under drivers/misc that binds with the embedded
+> >> PCI endpoint functions within the TC9564 SoC.  Because these functions
+> >> will use devicetree pci-ep-bus to provide access to other IP blocks
+> >> within the TC9564 chip, the main purpose of this driver is to do basic
+> >> PCI initialization, then call of_platform_default_populate() to scan for
+> >> the any endpoint bus children, and probe all devices defined therein.
+> >>
+> >> Because we're using pci-ep-bus, we need to use the PCI quirks mechanism
+> >> to have of_pci_make_dev_node() be called for each endpoint device in
+> >> pci_bus_add_device() (via pci_fixup_device(pci_fixup_final, dev)).
+> >>
+> >> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+> >> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+> >> Signed-off-by: Alex Elder <elder@riscstar.com>  
+> > 
+> > Acked-by: Bjorn Helgaas <bhelgaas@google.com>	# quirks.c
+> > 
+> > Not an issue for this patch, but I'm not sure the quirk mechanism is
+> > the best mechanism for doing this.  It's not working around a device
+> > defect like most quirks do.  
+> 
+> I pretty much agree with you.  I think I mentioned this before
+> (though it might have been in a private conversation) that it
+> is an intentional act to call of_pci_make_dev_node() for an
+> endpoint (and not just a bridge).  And that's different from
+> a hardware quirk.  You only need to do it if there's a pci-ep-bus
+> sub-node on the endpoint.  (I'd have to verify this on the other
+> users of this approach to be 100% sure though.)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
-index d25a09e162dd..1671f884a65d 100644
---- a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
-@@ -41,6 +41,7 @@
- / {
- 	model = "Valve Deckard";
- 	compatible = "valve,deckard", "qcom,sm8650";
-+	chassis-type = "headset";
- 
- 	aliases {
- 		serial0 = &uart15;
+I agree, a quirk is not the best way to trig the of_pci_make_dev_node()
+call. An allow-list seems better.
 
----
-base-commit: eaaaf4a2a53d04da85e4ed13e7c822d00aa2a54b
-change-id: 20260924-topic-sm8650-deckard-chassis-type-72388b577e1a
+Alex, on LAN966x, the pci-ep-bus is not present. The OF node must be
+created (call to of_pci_make_dev_node()) and the lan966x_pci driver
+will apply an overlay on this OF node created at run-time.
+
+The pci-ep-bus is described in the OF overlay [1].
+
+[1] https://elixir.bootlin.com/linux/v7.3-rc3/source/drivers/misc/lan966x_pci.dtso#L50
 
 Best regards,
---  
-Neil Armstrong <neil.armstrong@linaro.org>
-
+Hervé
