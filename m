@@ -1,601 +1,262 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A44733254B8
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 03:58:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4382D3CF051
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790222293; cv=none; b=EQ1d7Sso0K7uiIzViEPL7lwoOpwcr3/00Yr/T9a8hQuGmfPIl9d10FL+e6uPmbMCEImJdE4pz85ROYp2TkFkme/i0g3bCwiQbAPE5qhWJDh5Sr7taDOXJONx4ivZxFxe6ew3ZxioNsf5E/0YROxGBRv6pTo5klYJHh0CmymxiQY=
+	t=1790222647; cv=none; b=igD80I2+8M+BR3RVi3jJCD7nNCriugp1yiAG00GNrjFdmVPJIpIGmO4dWi5urmhi6+M0hxS0onGFL/mb+EwiJMOPqx3gxZCYnF48XRshk7EO0WmBm/3M9+TUoJxFxofK/KOD40i1r0NZjVYfMrYnHDy9k6ZnFgTdu7R9kpWqDRE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790222293; c=relaxed/simple;
-	bh=uulX5FGojWJSDtZc7ii0G+XzCHyxRxCELQ1PGoS8gtM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bi6hNukUp6qTLLZCfI9EKdEg9tEhbqKOtD0YK6BpwRXBpSpEJxHsijjP15JPuNa6cljfKBWRQRmvFwR+hD3Oq2rd1sSxo1/jTmcS+2q+r+CnYQ56bEnRQlvTexCd3vsur7oNZR+DP2YhUGDnQWbEM/FR0ATpXUnqQxaTVtMbCO0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ulvq1dS5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IJV2ummp; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790222647; c=relaxed/simple;
+	bh=8GrHNaH3UU6tDPCZUYMa03D4McTC8KMAgnFcmHoTHyI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OdMA0g621oEhMIgwcncpzpcs6LPNWMdND9t+3skgyBoftO/GogdeNiyrq14WSZB40LsuOhPG6GdMTEo4PwEWU6VgtX9vADcJPLj7BgkxqLCnQiv0rrLHRHWdSyKEP2sBnEQZnoGgX6uOeJmfjDvLR7R0trSNf1Ng7daZYlI88lg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iNwH5XSZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ia+YDqTv; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ulvq1dS5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IJV2ummp"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O36k8D244062
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 03:58:11 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iNwH5XSZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ia+YDqTv"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O36gVR3822916
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IRbK7/D1d28dTJHPBr6uYKi6Nho6ZnHImdmDHXyGjS0=; b=Ulvq1dS5hG3t0r69
-	LPnsC/asfEOyowRlKcpvBzpihFsnx9obj/En5dgaGggMsxtJ9md9qCnL3dOkJNEw
-	2gEumHzN8BnKsqRrV0dyYDQAVyoz1RxgTcFFHe7+/PwCZmteZFB7SFif447CSG2n
-	JIAFF5Nt7sYN2QH12vk+X6qqe7gS6GVFBcRNuJDi/hJ9FDoZIFWr4g5vWTsplsZC
-	CNgYw/gs4FsOcEhg1+0gVvwyg23jVx2/k+jyo62IyyWRpfBcCEKEHh4izOMZGzmZ
-	BpqCT32iLicCi1o0L5e8QCPSOMQiKlsBWKGDMHktndwtnlrx9MqDpFck7HF/h9Eh
-	ktY1Ww==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvbx7m3sv-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=Gs355wJs7yuoPs7Ve/S/Bniq
+	wQWS8mKiXLMYMNNYV+c=; b=iNwH5XSZzssTFN6Vb9kni/Fvq0FkHyPljy0oJPd+
+	NaxGftlHyG3j/5Xhylil/BYCy6Rd+djEmyv0KQbvNN7hLaCmpvgidcti5vgsZKBc
+	xmD/axRXnfGmMLAlCjOale34Hhd4pt+/sKJ3zf5stLLKdU04lqup+jF0IfCkf/wJ
+	1fKyHFa9W8zfcZJsV+VIo15h+dQj8+fqjNMXLu7/+ZvXeIdcTOJMmeSxp6jaxZnE
+	ecm+IV3Nb/+IVIhUFYaM5ZHHRVxP6UKwI1IaMuyjmlhrMNpcjE6SnlSb0Kr2mgSx
+	e6vuhDNacHMpMNiajZE033YLVjMa4Jqt1GzbF/9lzdeEAw==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfjv35jk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 03:58:10 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-334f782d1abso697479eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 20:58:10 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:05 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-33baaba6371so1054470eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 21:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790222290; x=1790827090; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IRbK7/D1d28dTJHPBr6uYKi6Nho6ZnHImdmDHXyGjS0=;
-        b=IJV2ummpAmN8fB92RX9xJE3XxNpp23mBTg3Pv1utQxnbc+DCQksmGtcJLBEGPnAo4D
-         IZK1CKrIyGORD+wILI0TjSIgFDfOMiAXvC4kimyOC21xTyUlcKZZ7LWFxAzoXUq6nSGB
-         GAdh4XyygZghU+khpLaMPL419TYhe7qVfZIiZea2MPx+ymqdMXm7kD1InWrsKCdTitJ/
-         iP//3qk7Bx4x5VMWRLQH6hcf8PR4nzfDBJqAMWmyIXAvgFLf0BNeVHw3bI76tOcxOXxR
-         SUVGFrg4QCVLsXpb/ygi6onjfX9Fxy4L124gAWkhA8qrPAw07nW+Awa7hk7zvRv+HbmD
-         vgig==
+        d=oss.qualcomm.com; s=google; t=1790222645; x=1790827445; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Gs355wJs7yuoPs7Ve/S/BniqwQWS8mKiXLMYMNNYV+c=;
+        b=ia+YDqTv6/lz7qLjP0TB3665OxJiCQaphKAnj5takBI2d8frxknldk71IVy8KtnDT6
+         DPp9ZVxU1H91S9xdx10KyyhYPWaTRufojQRKt8ROwgv+TkDI8k5TGJCJ3sr9Z+cw7D2y
+         wn1uejtvJMpgmetVGTSi7UJsChPFSnLGx/5x+nM+q6zM1CkespKdnld8oxOPk3Q2Yaw7
+         0eeNfV6U42HyJzj3O3nzgAv0WLJEpxH3HEtFGcu4yKpeLhgnEnA9lriZ+cY6RobaC0ch
+         aqW0LSFfuxUEKYDVyCwmySuNyDUBJDUm0gfYpwtLQN/jCQcoSY1AVEDknZeW5d7Kdyne
+         k4rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790222290; x=1790827090;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IRbK7/D1d28dTJHPBr6uYKi6Nho6ZnHImdmDHXyGjS0=;
-        b=qWvtfpV9B6qPz2ma5cGI+rUTZz1w8pbuE//8lPHS/hajls7h19ZZD5CwnuaHaVpRpf
-         VdTGFfXaDANlbU1IE0xX8v1FrtKG30/jMhrurMD2KuzMxxpyuFOUbSpVapqsKGf+N83U
-         wyIZIVf+zKzuTEVBuxDqP77s9SHhtXalinORzJzpgnR6/qWU2C83VTfCrerxd+xCbrgO
-         zvrTrGyVMORMYfwSyBjslmkE+lKKr8K5lg4yzC5B+FsfAFC+vx5mSauhNL4Bo9l3T5+R
-         1+6XjOa2jcj/3nKRwLJla/t3a2w7WpHwl4Kz72e23OUZZOcn3TYkqHjZGn1zltzvfKx1
-         hCcQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxvz6ES4F3N1O+RKA0k27vfhr2YHPNsgYGoUvlyWA5E/HaXxRw3n4/N6o/vVyJw3f5jwlzR0kmUfY4IgZUh@vger.kernel.org
-X-Gm-Message-State: AFuF++nWQEH4FgbyrSq6ETVFw36j+IQTONiriS3+N1kuHJ7KipO2YG/2
-	/ASxP5yIF+bCO4pNC3JS0zYRgZzWMShm6fLwEjNHdBCEOKienvXCaY9h+M81ilYL5R6qpOVTlPX
-	sfmeRGDKw5Md4nmGMHcGYQ+f9UjTt0xnPIpJ+liBzEauCzNRTfAAOt1VnoOTd7GCyyl9x
-X-Gm-Gg: AYBFou0ort3BPj31AQYt/kDfXt603x8siq7y0JI43mCOBGc0DmoAJaTGrRiuonJokT5
-	6ggfdqqiDfg7MUAFOGJCtObmAU8WADZcBA5qYnX1raWT7CFMYFzXutEc6gYZmGRGptpj1M91oTi
-	RyaASW3oveco9AQHyouYoQo+dJJKBde3yxx7gel961uRLSvPxxG/znvrM80+z1QutiC+X7Te57n
-	ubR3tT3nNuABPH10iMk4Dpfd0YXi9pRgO/W7izd1KSRgSBZGB5+rEQ2j9A5oM16FSBSfbe+giOo
-	OpFsUZRDztZh+GI7BHFn3fabVSW7JoKgkMF4KAMnHaUGEEx5JuEzpFdEtauhUJZhXD/C+0y1Mou
-	Nrg4XiwNGHwP60qwFG1Nv9kAsh5pN8r8=
-X-Received: by 2002:a05:7300:c019:10b0:334:7f2a:1188 with SMTP id 5a478bee46e88-34004d8689fmr994546eec.14.1790222289930;
-        Wed, 23 Sep 2026 20:58:09 -0700 (PDT)
-X-Received: by 2002:a05:7300:c019:10b0:334:7f2a:1188 with SMTP id 5a478bee46e88-34004d8689fmr994517eec.14.1790222289134;
-        Wed, 23 Sep 2026 20:58:09 -0700 (PDT)
-Received: from [10.206.101.140] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e96e48e3esm11090061eec.26.2026.09.23.20.58.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 20:58:08 -0700 (PDT)
-Message-ID: <9b39dbf2-dff6-a2ee-0164-03b82fae4ae9@oss.qualcomm.com>
-Date: Thu, 24 Sep 2026 09:28:01 +0530
+        d=1e100.net; s=20260707; t=1790222645; x=1790827445;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Gs355wJs7yuoPs7Ve/S/BniqwQWS8mKiXLMYMNNYV+c=;
+        b=0nvkeE/D/6YUDdFuF4oaNZ+cwDvUJ0werLlSPZNdH9jp0pg948r08v6nhdCAi1l1jl
+         ooMNJKOyLs0gxFyPWT9HTrw0qws0Gd/T6I43AC0ofaONm3mGSzmnvSo0MN1A/68rLH9r
+         O6EI4fSZsx72NrIO5WfHFwqe+iFiRV4t503aOG4JILXVELWY2wrJRmGKjcs95eopXoFu
+         BP7/QO/V/xdUth6eLidKSY9hmIVa2CdDt0dyI81H762xozzmf1ymyXukZTVQXfudjGj4
+         shbt9G0GrhE3jZ+aYAdatGx3l/wRKt3ZuJOpXDSgUzQ0QJoVpYUQtquIa1Djz4tLjzzY
+         CEXg==
+X-Forwarded-Encrypted: i=1; AKwUvBwTC70NC0Ct2FxbzquP5HSXvv7IP55iZ/KRiNUtXXhrRLOM2zWk86t3iG5syc5WpX9OV/cqvJO5gv7imEFM@vger.kernel.org
+X-Gm-Message-State: AFuF++n6NBtAcbj4QFrOJ1JS5mysgP/42LsL27wYBNw/TYecJfC6I/Yv
+	h9C93ynTV5FXRDGEYlevE/XEL/llMfmlUPkFeN8qan+GTyWVQNiS7W1RaxpSialGREWueGOabC3
+	PIJqmh6fOncQvUdWT0RDR6U7LkqPL9od5RRcHBrk0BSKNiE8aABSXKvPyzvSnKJLNRvTr
+X-Gm-Gg: AYBFou3K/vvCOsiFdjxwXAAOlipxNLr5sxiYPm4FhWdPXzrown08KrbWy+Ky3PD9PA4
+	zSjCSTyACaWZnhyiyuY/LwAuXb3nSOF7qb0zBlXMtNoI3pu0Mw9nawMjVTtgMuw+kvtmHYVRGAG
+	ml1XKskmPLqBiDdIAZlvIPQY+hbQTKqr5pJNKJxR1Y/TwtAeWLM9LAcR+Jh8FuFdJSfuSmd9Qz2
+	nQc9syl3CdPr72L+FuEUxWgyNqW82jBUA8V4V7slgH2OACeiBkCRcf92x3JgPr8E+Dt4i98JF/i
+	1CWAzpSuvzLfUplHpYS2B0pu6kb6mynx7DcZ1WoPv/ErgV/PHKAnR7U3jUvT5nhfyQsasxx4kFt
+	f4kmSA5qdw6MPA3vgEQtz+KYOoYMjlBu741cgi+QRvw==
+X-Received: by 2002:a05:7300:5624:b0:33e:538c:c3f1 with SMTP id 5a478bee46e88-34002edee4fmr963869eec.25.1790222644383;
+        Wed, 23 Sep 2026 21:04:04 -0700 (PDT)
+X-Received: by 2002:a05:7300:5624:b0:33e:538c:c3f1 with SMTP id 5a478bee46e88-34002edee4fmr963851eec.25.1790222643728;
+        Wed, 23 Sep 2026 21:04:03 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e95c7bf6bsm9457507eec.8.2026.09.23.21.04.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Sep 2026 21:04:03 -0700 (PDT)
+Date: Thu, 24 Sep 2026 12:03:58 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Yu Zhang <yu.zhang@oss.qualcomm.com>, linux-gpio@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] pinctrl: qcom: spmi-gpio: make direction changes
+ exclusive
+Message-ID: <arShLkiDKQvrBLLV@QCOM-aGQu4IUr3Y>
+References: <20260924032314.948638-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v9 02/19] media: iris: Add Gen2 firmware autodetect and
- fallback
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
- <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
-Content-Language: en-US
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: arJReAE_Es728r7Hzll7hK0ZrZ2xS04f
-X-Authority-Analysis: v=2.4 cv=J4s/fwnS c=1 sm=1 tr=0 ts=6ab49fd2 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=JaYJuxMhrG_Ych6-DJMA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAxNyBTYWx0ZWRfX9qlDRSt5yPf1
- qCB2Wdm81gxvOdWlTPKWJnzB6QXpo5JW5Jaj3Cxv5ZcYTRxchCpKOYlp41Gv03HivDsQQlxismS
- BfmDcZySK3epKSoChrcqEYL2sU/xPCWXgTp2vOW2GkDIucJYfc++jl8F6dNm4XCKDgVm5n4+zy7
- Qytq/Vwo62vIxGfeM11CWHh6wkgA+zjl41ak5mmiAljrVNjn0y975l6Rsm/dgJaBFXeiTSaX3iw
- ZJbZ/xtr4Alx/KrC1XgGF8iEQnrLRINvz7Gd2HFvbcA6QG97TlrjH3S2sUhfNBPSLDBRJk6GIMN
- 6UcXfpgevPnvRiNqbnbjgiz9KgWpvlltAEsJsTfFvx67Wgr5UfjPXAEN6bIuMYHtr4HZzPig2TY
- jn7LQp9U/wnxp/SBSIvvNTszN6hnOdSHpKWaDwXhPhvZEd6BYoHtD/WD5TD+GaKFDPPGHMJ0N5/
- 1eNdoM9x/0eDaU99Xlg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAxNyBTYWx0ZWRfX7wY344yTBftq
- PHvUHfG3Z9bOHudl1sxNVVaVmZRStKmD5JbsB8wHIh6NiywXoTAK5E8oReAn/bRjKGFvINmdiQ0
- l9r3tAMakbXuP1sYY4hUw1/pQnLQ6Bc=
-X-Proofpoint-GUID: arJReAE_Es728r7Hzll7hK0ZrZ2xS04f
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260924032314.948638-1-shengchao.guo@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAxOCBTYWx0ZWRfX5KgL7M0AH3s+
+ IXEuTZRQuAvFZSfYKTQ7lRr9viPqAB8m5VHG93xJPWNb2Lje1lmVenRdA2JHZ2qXSM4BJUBx4L2
+ Iz6h2hy7+rWSOzOGQ/GlrF46vPm27gLQB7jByQp/KLzF4nxZoFQ8eH1w5Yup5EupzmORG5EY6nT
+ Vun6pO/5+tYrL3jhQ6iRJxyF3RAz1Jwo8N6vXaJ8rV6Ef3mMLMooK0yKSuGDdLV1+aQcT9RvVAk
+ z/3ws4WWHhfQFu3w7ZnEOcXCsYWtSsgxgf6CvfrtoW0/5dAN+bk7MRE13qvHQTTb48xWDQsi2V3
+ xq0WyTJrCejRVs4//ptGe/4SbFJwfqP4SccFJ98y5D8eyZ2arU2FOMyv84y29D6PKxsWbUliSoZ
+ Tyiz00Kj5uBYp7OuOXPHSt3izt3zTJzEyDVkW0oShPTxea8au/BXrVTZqQNAPru/wTILMwrUgFq
+ pKeddvwpj7wXlnoWg3w==
+X-Authority-Analysis: v=2.4 cv=aIxlOr9m c=1 sm=1 tr=0 ts=6ab4a135 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=sRq9MN_325cdMohnSFwA:9 a=CjuIK1q_8ugA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-GUID: ERHvQGJLGh7xH6uPC3JwFEF66VHQsZyf
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAxOCBTYWx0ZWRfX6KesSW1WZDjL
+ XfE+RD9r/IPiipTD5pqhozSMmQNXC1S1fAiwtHJqtSOPPYvLcpocvX+LX15ZeRf/PimofODJ3eN
+ Atm5WigagFBSSbgfPIJLm64zmyRHqRQ=
+X-Proofpoint-ORIG-GUID: ERHvQGJLGh7xH6uPC3JwFEF66VHQsZyf
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-24_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 spamscore=0 impostorscore=0 priorityscore=1501
- phishscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 suspectscore=0 priorityscore=1501 spamscore=0 phishscore=0
+ malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240017
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240018
 
-
-On 7/31/2026 5:18 AM, Dmitry Baryshkov wrote:
-> From: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
->
-> Some Iris platforms support both Gen1 and Gen2 HFI firmware images.
-> Update the firmware loading logic to handle this generically by
-> preferring Gen2 when available, while safely falling back to Gen1
-> when required.
->
-> The firmware loading logic is updated with the following priority:
-> 1. Device Tree (`firmware-name`): If specified, load unconditionally.
-> 2. Gen2 default : If no DT override exists, select the Gen2 firmware
->    descriptor when present and attempt to load the corresponding
->    firmware image.
-> 3. Gen1 Fallback: If loading the Gen2 firmware fails and a Gen1
->    descriptor is available, retry with the Gen1 firmware image.
->
-> Loading and generation detection are split into two steps.
-> iris_load_firmware() applies the priority above and returns the loaded
-> image together with a candidate descriptor. iris_detect_firmware() then
-> runs only after qcom_mdt_load() has succeeded and publishes the chosen
-> descriptor, so the driver commits to a HFI generation only for an image
-> that has actually been loaded.
->
-> When a platform provides both Gen1 and Gen2 firmware descriptors and the
-> firmware is loaded via a DT override, the candidate descriptor is only a
-> default: iris_detect_firmware() inspects the loaded image to pick the
-> generation, before authentication. It scans the memory populated by
-> qcom_mdt_load() rather than the request_firmware() blob, so that a split
-> .mdt image, whose version string lives in the .bNN data segments and not
-> in the ELF headers, is classified correctly. The firmware is classified
-> as Gen2 if the QC_IMAGE_VERSION_STRING starts with "vfw" or matches the
-> "video-firmware.N.M" format with N >= 2.
->
-> If a Gen1 firmware image is detected in this case, the driver switches
-> to the Gen1 firmware descriptor and associated platform data so that
-> the correct HFI implementation is used.
->
-> This change makes firmware generation detection platform‑agnostic,
-> preserves DT overrides, prefers newer Gen2 firmware when available,
-> and maintains compatibility with platforms that only support Gen1.
->
-> Signed-off-by: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> Co-developed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+On Thu, Sep 24, 2026 at 11:23:14AM +0800, Shawn Guo wrote:
+> pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
+> the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+> DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+> buffer enabled.  Neither direction callback clears the opposite buffer:
+> .direction_output() only packs PIN_CONFIG_LEVEL, which sets
+> output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
+> which sets input_enabled.  Requesting either direction on such a pad
+> therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+> direction.
+> 
+> That silently breaks both directions.  After gpiod_direction_input() the
+> pad keeps driving the line.  And after gpiod_direction_output()
+> pmic_gpio_get_direction() still reports GPIO_LINE_DIRECTION_IN, because it
+> cannot tell plain input from input+output, which makes gpiolib consider
+> the line an input while the driver is driving it.  On a board where
+> several regulator-fixed nodes share one PMIC GPIO the shared GPIO proxy
+> reads that direction back and rejects every consumer after the first:
+> 
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
+> 
+> Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+> direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+> DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
+> once after walking all configs, so this stays a single register write.
+> 
+> Open-drain and open-source outputs are the exception: such a pad only ever
+> drives one rail, so DIGITAL_INPUT_OUTPUT is physically correct for it, and
+> pmic_gpio_get() needs the input buffer to sample the line rather than
+> return the value last written.  Keep it enabled for those pads, and key
+> pmic_gpio_get_direction() off output_enabled so they still read back as
+> outputs.  gpiolib applies PIN_CONFIG_DRIVE_OPEN_DRAIN before calling
+> .direction_output(), so pad->buffer_type is up to date there.
+> 
+> An input must not drive the line whatever the buffer type, so
+> .direction_input() clears output_enabled unconditionally.
+> 
+> Pads that are genuinely bidirectional can still be described that way
+> through pinconf, which is the interface that has always been able to
+> express it; the gpiolib direction callbacks now mean what gpiolib says
+> they mean.
+> 
+> Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
+> Assisted-by: LLM
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
->  drivers/media/platform/qcom/iris/iris_core.c       |   2 +
->  drivers/media/platform/qcom/iris/iris_firmware.c   | 188 +++++++++++++++++++--
->  .../platform/qcom/iris/iris_platform_common.h      |   6 +-
->  .../media/platform/qcom/iris/iris_platform_vpu2.c  |  11 +-
->  .../media/platform/qcom/iris/iris_platform_vpu3x.c |  10 +-
->  drivers/media/platform/qcom/iris/iris_probe.c      |   4 -
->  drivers/media/platform/qcom/iris/iris_vidc.c       |   1 +
->  7 files changed, 188 insertions(+), 34 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-> index 8c335dbfce16..676baa8087a8 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.c
-> +++ b/drivers/media/platform/qcom/iris/iris_core.c
-> @@ -6,6 +6,7 @@
->  #include <linux/pm_runtime.h>
+> Changes for v3:
+> - .direction_output() clears PIN_CONFIG_INPUT_ENABLE only for
+>   PMIC_GPIO_OUT_BUF_CMOS pads; open-drain/open-source keep the input
+>   buffer so pmic_gpio_get() samples the wire.
+> - pmic_gpio_get_direction() now keys on output_enabled instead of
+>   input_enabled - required, or an open-drain output reports IN again and
+>   the -EPERM regression returns.
+> - Link to v2: https://lore.kernel.org/all/20260922065908.477523-1-shengchao.guo@oss.qualcomm.com/
+> 
+> Changes for v2:
+> - Drop GPIO shared-proxy patch
+> - Update Fixes tag (Thanks Neil!)
+> - Link to v1: https://lore.kernel.org/all/20260915014447.282121-1-shengchao.guo@oss.qualcomm.com/
+> 
+>  drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 35 ++++++++++++++++++------
+>  1 file changed, 27 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> index f6dc43e27b38..dd9c212da6ee 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> @@ -734,29 +734,48 @@ static int pmic_gpio_get_direction(struct gpio_chip *chip, unsigned pin)
+>  	    (!pad->input_enabled && !pad->output_enabled))
+>  		return -EINVAL;
 >  
->  #include "iris_core.h"
-> +#include "iris_ctrls.h"
->  #include "iris_firmware.h"
->  #include "iris_state.h"
->  #include "iris_vpu_common.h"
-> @@ -85,6 +86,7 @@ int iris_core_init(struct iris_core *core)
->  		goto error_unload_fw;
->  
->  	core->iris_firmware_data->init_hfi_ops(core);
-> +	iris_session_init_caps(core);
->  
->  	ret = iris_hfi_core_init(core);
->  	if (ret)
-> diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c b/drivers/media/platform/qcom/iris/iris_firmware.c
-> index 1a476146d758..ea3b3a9793e8 100644
-> --- a/drivers/media/platform/qcom/iris/iris_firmware.c
-> +++ b/drivers/media/platform/qcom/iris/iris_firmware.c
-> @@ -14,22 +14,175 @@
->  
->  #define IRIS_PAS_ID				9
->  
-> -#define MAX_FIRMWARE_NAME_SIZE	128
-> +/* Detect Gen2 firmware by scanning the blob for:
-> + *   QC_IMAGE_VERSION_STRING=<version>
-> + * and then checking:
-> + *   - version starts with "vfw", OR
-> + *   - version matches "video-firmware.N.M" with N >= 2
-> + */
-> +
-> +static bool iris_detect_gen2_from_fwdata(const u8 *data, size_t size)
-> +{
-> +	static const char *marker = "QC_IMAGE_VERSION_STRING=";
-> +	const size_t mlen = strlen(marker);
-> +	static const char *vfw = "vfw";
-> +	const size_t vfwlen = strlen(vfw);
-> +	static const char *vf = "video-firmware.";
-> +	const size_t vflen = strlen(vf);
-> +
-> +	for (size_t i = 0; i + mlen < size; i++) {
-> +		const char *found;
-> +
-> +		if (memcmp(data + i, marker, mlen))
-> +			continue;
-> +
-> +		found = data + i + mlen;
-> +		size -= i + mlen;
-> +
-> +		/* vfw => Gen2 */
-> +		if (size > vfwlen && !memcmp(found, vfw, vfwlen))
-> +			return true;
-> +
-> +		if (size < vflen ||
-> +		    memcmp(found, vf, vflen))
-> +			return false;
-> +
-> +		found += vflen;
-> +		size -= vflen;
-> +
-> +		/*
-> +		 * video-firmware.1.x is Gen1.
-> +		 * video-firmware.2.x and video-firmware.10.x are Gen2.
-> +		 */
-> +		return size >= 2 &&
-> +			(*found >= '2' || (*found == '1' && found[1] != '.'));
-> +	}
-> +
-> +	return false;
-> +}
->  
-> -static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
-> +/*
-> + * Load the firmware image and return the descriptor that was used to pick the
-> + * file. On a platform that provides only one generation, or when no DT
-> + * firmware-name override is present, the returned descriptor is final. With a
-> + * DT override on a dual-generation platform the returned descriptor is only a
-> + * default; iris_detect_firmware() inspects the loaded image to confirm it.
-> + */
-> +static const struct firmware *iris_load_firmware(struct iris_core *core,
-> +						 const char **fw_name,
-> +						 const struct iris_firmware_desc **fw_desc)
->  {
-> +	const struct iris_firmware_desc *desc;
-> +	const struct firmware *firmware;
-> +	bool has_both_gens;
-> +	int ret;
-> +
-> +	*fw_name = NULL;
-> +	ret = of_property_read_string_index(dev_of_node(core->dev), "firmware-name", 0, fw_name);
-> +
+> -	/* Make sure the state is aligned on what pmic_gpio_get() returns */
+> -	return pad->input_enabled ? GPIO_LINE_DIRECTION_IN : GPIO_LINE_DIRECTION_OUT;
 > +	/*
-> +	 * A platform may support both Gen1 and Gen2 firmware; which one is used
-> +	 * depends on the firmware image installed on the system, not on the
-> +	 * hardware. That installed image does not change while the device is
-> +	 * bound, so the generation is detected only once and the chosen
-> +	 * descriptor is reused on later core bring-ups (e.g. after a system
-> +	 * error recovery).
+> +	 * An open-drain or open-source pad keeps its input buffer enabled while
+> +	 * driving, so the output buffer is what tells the direction.
 > +	 */
-> +	if (core->iris_firmware_desc) {
-> +		if (ret)
-> +			*fw_name = core->iris_firmware_desc->fwname;
-> +		ret = request_firmware(&firmware, *fw_name, core->dev);
-> +		if (ret)
-> +			return ERR_PTR(ret);
-> +		*fw_desc = core->iris_firmware_desc;
-> +		return firmware;
-> +	}
-> +
-> +	has_both_gens = core->iris_platform_data->firmware_desc_gen2 &&
-> +		core->iris_platform_data->firmware_desc_gen1;
-> +
-> +	if (core->iris_platform_data->firmware_desc_gen2)
-> +		desc = core->iris_platform_data->firmware_desc_gen2;
-> +	else if (core->iris_platform_data->firmware_desc_gen1)
-> +		desc = core->iris_platform_data->firmware_desc_gen1;
-> +	else
-> +		return ERR_PTR(-EINVAL);
-> +
-> +	if (ret) {
-> +		/* No firmware-name in DT: select by probing Gen2 then Gen1. */
-> +		*fw_name = desc->fwname;
-> +		if (has_both_gens)
-> +			ret = firmware_request_nowarn(&firmware, *fw_name, core->dev);
-> +		else
-> +			ret = request_firmware(&firmware, *fw_name, core->dev);
-> +		if (ret && has_both_gens) {
-> +			desc = core->iris_platform_data->firmware_desc_gen1;
-> +			*fw_name = desc->fwname;
-> +			ret = request_firmware(&firmware, *fw_name, core->dev);
-> +		}
-> +	} else {
-> +		/* firmware-name given: iris_detect_firmware() picks the gen. */
-> +		ret = request_firmware(&firmware, *fw_name, core->dev);
-> +	}
-> +	if (ret)
-> +		return ERR_PTR(ret);
-> +
-> +	*fw_desc = desc;
-> +	return firmware;
-> +}
-> +
-> +/*
-> + * Detect the firmware generation and publish the descriptor. Run only after
-> + * qcom_mdt_load() has succeeded, so the driver commits to a HFI generation
-> + * only for a firmware image that has actually been loaded.
-> + *
-> + * The generation is detected from the loaded image (@data / @size point at the
-> + * reserved memory region populated by qcom_mdt_load()) rather than from the
-> + * request_firmware() blob: for a split .mdt the latter holds only the ELF
-> + * headers, while QC_IMAGE_VERSION_STRING lives in the .bNN data segments.
-> + *
-> + * The descriptor and firmware data are published exactly once, before any
-> + * session exists, so the lockless readers in the ioctl paths never observe a
-> + * reassignment. Later bring-ups reuse the already published descriptor.
-> + */
-> +static void iris_detect_firmware(struct iris_core *core, const char *fw_name,
-> +				 const u8 *data, size_t size,
-> +				 const struct iris_firmware_desc *desc)
-> +{
-> +	if (core->iris_firmware_desc)
-> +		return;
-> +
-> +	/*
-> +	 * With a DT firmware-name override on a dual-generation platform the
-> +	 * image on disk decides the generation, so inspect it and switch to the
-> +	 * Gen1 descriptor when a Gen1 image was loaded.
-> +	 */
-> +	if (desc == core->iris_platform_data->firmware_desc_gen2 &&
-> +	    core->iris_platform_data->firmware_desc_gen1 &&
-> +	    of_property_present(dev_of_node(core->dev), "firmware-name") &&
-> +	    !iris_detect_gen2_from_fwdata(data, size)) {
-> +		dev_info(core->dev, "Gen1 FW detected in %s\n", fw_name);
-> +		desc = core->iris_platform_data->firmware_desc_gen1;
-> +	}
-> +
-> +	/* Publish iris_firmware_data first, then iris_firmware_desc (the guard). */
-> +	core->iris_firmware_data = desc->firmware_data;
-> +	core->iris_firmware_desc = desc;
-> +}
-> +
-> +static int iris_load_fw_to_memory(struct iris_core *core)
-> +{
-> +	const struct iris_firmware_desc *desc;
->  	const struct firmware *firmware = NULL;
->  	struct device *dev = core->dev;
->  	struct resource res;
->  	phys_addr_t mem_phys;
-> +	const char *fw_name;
->  	size_t res_size;
->  	ssize_t fw_size;
->  	void *mem_virt;
->  	int ret;
->  
-> -	if (strlen(fw_name) >= MAX_FIRMWARE_NAME_SIZE - 4)
-> -		return -EINVAL;
-> -
->  	ret = of_reserved_mem_region_to_resource(dev->of_node, 0, &res);
->  	if (ret)
->  		return ret;
-> @@ -37,9 +190,9 @@ static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
->  	mem_phys = res.start;
->  	res_size = resource_size(&res);
->  
-> -	ret = request_firmware(&firmware, fw_name, dev);
-> -	if (ret)
-> -		return ret;
-> +	firmware = iris_load_firmware(core, &fw_name, &desc);
-> +	if (IS_ERR(firmware))
-> +		return PTR_ERR(firmware);
->  
->  	fw_size = qcom_mdt_get_size(firmware);
->  	if (fw_size < 0 || res_size < (size_t)fw_size) {
-> @@ -53,9 +206,14 @@ static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
->  		goto err_release_fw;
->  	}
->  
-> +	memset(mem_virt, 0, res_size);
-> +
->  	ret = qcom_mdt_load(dev, firmware, fw_name,
->  			    IRIS_PAS_ID, mem_virt, mem_phys, res_size, NULL);
->  
-> +	if (!ret)
-> +		iris_detect_firmware(core, fw_name, mem_virt, res_size, desc);
-> +
->  	memunmap(mem_virt);
->  err_release_fw:
->  	release_firmware(firmware);
-> @@ -66,18 +224,12 @@ static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
->  int iris_fw_load(struct iris_core *core)
->  {
->  	const struct tz_cp_config *cp_config;
-> -	const char *fwpath = NULL;
->  	int i, ret;
->  
-> -	ret = of_property_read_string_index(core->dev->of_node, "firmware-name", 0,
-> -					    &fwpath);
-> -	if (ret)
-> -		fwpath = core->iris_firmware_desc->fwname;
-> -
-> -	ret = iris_load_fw_to_memory(core, fwpath);
-> +	ret = iris_load_fw_to_memory(core);
->  	if (ret) {
-> -		dev_err(core->dev, "firmware download failed\n");
-> -		return -ENOMEM;
-> +		dev_err(core->dev, "firmware download failed %d\n", ret);
-> +		return ret;
->  	}
->  
->  	ret = qcom_scm_pas_auth_and_reset(IRIS_PAS_ID);
-> @@ -99,7 +251,7 @@ int iris_fw_load(struct iris_core *core)
->  		}
->  	}
->  
-> -	return ret;
-> +	return 0;
+> +	return pad->output_enabled ? GPIO_LINE_DIRECTION_OUT : GPIO_LINE_DIRECTION_IN;
 >  }
 >  
->  int iris_fw_unload(struct iris_core *core)
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> index a9453d539fc2..974809509146 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> @@ -292,11 +292,7 @@ struct iris_firmware_desc {
->  };
+>  static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned pin)
+>  {
+>  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	unsigned long configs[2];
 >  
->  struct iris_platform_data {
-> -	/*
-> -	 * XXX: replace with gen1 / gen2 pointers once we have platforms
-> -	 * supporting both firmware kinds.
-> -	 */
-> -	const struct iris_firmware_desc *firmware_desc;
-> +	const struct iris_firmware_desc *firmware_desc_gen1, *firmware_desc_gen2;
+> -	config = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_OUTPUT_ENABLE, 0);
+> +	configs[1] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
 >  
->  	const struct vpu_ops *vpu_ops;
->  	const struct icc_info *icc_tbl;
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> index fa5bb143158d..bbdbf21961d7 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> @@ -29,6 +29,12 @@ static const struct iris_firmware_desc iris_vpu20_p1_gen1_desc = {
->  	.fwname = "qcom/vpu/vpu20_p1.mbn",
->  };
+> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
+> +	return pmic_gpio_config_set(state->ctrl, pin, configs,
+> +				    ARRAY_SIZE(configs));
+>  }
 >  
-> +static const struct iris_firmware_desc iris_vpu20_p1_gen2_s6_desc = {
-> +	.firmware_data = &iris_hfi_gen2_data,
-> +	.get_vpu_buffer_size = iris_vpu33_buf_size,
-> +	.fwname = "qcom/vpu/vpu20_p1_gen2_s6.mbn",
-> +};
+>  static int pmic_gpio_direction_output(struct gpio_chip *chip,
+>  				      unsigned pin, int val)
+>  {
+>  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	struct pmic_gpio_pad *pad = state->ctrl->desc->pins[pin].drv_data;
+> +	unsigned long configs[2];
+> +	unsigned int nconfigs = 0;
+>  
+> -	config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> +	/*
+> +	 * An open-drain or open-source pad only ever drives one rail, so the
+> +	 * line can still be sampled while the pad is an output.  Leave the
+> +	 * input buffer enabled for those, so that pmic_gpio_get() reports what
+> +	 * is on the wire rather than the value last written.  gpiolib applies
+> +	 * PIN_CONFIG_DRIVE_OPEN_DRAIN before calling this, so buffer_type is
+> +	 * already up to date here.
+> +	 */
+> +	if (pad->buffer_type == PMIC_GPIO_OUT_BUF_CMOS)
+> +		configs[nconfigs++] =
+> +			pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 0);
+>  
+> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
+> +	configs[nconfigs++] = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+
+Sashiko has a valid comment on this (again, damn). I will send v4.
+
+Shawn
+
 > +
->  static const struct iris_firmware_desc iris_vpu20_p4_gen1_desc = {
->  	.firmware_data = &iris_hfi_gen1_data,
->  	.get_vpu_buffer_size = iris_vpu_buf_size,
-> @@ -100,7 +106,8 @@ const struct iris_platform_data milos_data = {
->  };
+> +	return pmic_gpio_config_set(state->ctrl, pin, configs, nconfigs);
+>  }
 >  
->  const struct iris_platform_data sc7280_data = {
-> -	.firmware_desc = &iris_vpu20_p1_gen1_desc,
-> +	.firmware_desc_gen1 = &iris_vpu20_p1_gen1_desc,
-> +	.firmware_desc_gen2 = &iris_vpu20_p1_gen2_s6_desc,
->  	.vpu_ops = &iris_vpu2_ops,
->  	.icc_tbl = iris_icc_info_vpu2,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
-> @@ -129,7 +136,7 @@ const struct iris_platform_data sc7280_data = {
->  };
->  
->  const struct iris_platform_data sm8250_data = {
-> -	.firmware_desc = &iris_vpu20_p4_gen1_desc,
-> +	.firmware_desc_gen1 = &iris_vpu20_p4_gen1_desc,
->  	.vpu_ops = &iris_vpu2_ops,
->  	.icc_tbl = iris_icc_info_vpu2,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> index 2c63adbc5579..74626b35d9cb 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> @@ -90,7 +90,7 @@ static const struct tz_cp_config tz_cp_config_vpu3[] = {
->   * - inst_caps to platform_inst_cap_qcs8300
->   */
->  const struct iris_platform_data qcs8300_data = {
-> -	.firmware_desc = &iris_vpu30_p4_s6_gen2_desc,
-> +	.firmware_desc_gen2 = &iris_vpu30_p4_s6_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -119,7 +119,7 @@ const struct iris_platform_data qcs8300_data = {
->  };
->  
->  const struct iris_platform_data sm8550_data = {
-> -	.firmware_desc = &iris_vpu30_p4_gen2_desc,
-> +	.firmware_desc_gen2 = &iris_vpu30_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -154,7 +154,7 @@ const struct iris_platform_data sm8550_data = {
->   * - controller_rst_tbl to sm8650_controller_reset_table
->   */
->  const struct iris_platform_data sm8650_data = {
-> -	.firmware_desc = &iris_vpu33_p4_gen2_desc,
-> +	.firmware_desc_gen2 = &iris_vpu33_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu33_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -185,7 +185,7 @@ const struct iris_platform_data sm8650_data = {
->  };
->  
->  const struct iris_platform_data sm8750_data = {
-> -	.firmware_desc = &iris_vpu35_p4_gen2_desc,
-> +	.firmware_desc_gen2 = &iris_vpu35_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu35_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -220,7 +220,7 @@ const struct iris_platform_data sm8750_data = {
->   * - different num_vpp_pipe
->   */
->  const struct iris_platform_data x1p42100_data = {
-> -	.firmware_desc = &iris_vpu30_p1_gen2_desc,
-> +	.firmware_desc_gen2 = &iris_vpu30_p1_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-> index 81cccb756b94..5db6398433a4 100644
-> --- a/drivers/media/platform/qcom/iris/iris_probe.c
-> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
-> @@ -253,8 +253,6 @@ static int iris_probe(struct platform_device *pdev)
->  		return core->irq;
->  
->  	core->iris_platform_data = of_device_get_match_data(core->dev);
-> -	core->iris_firmware_desc = core->iris_platform_data->firmware_desc;
-> -	core->iris_firmware_data = core->iris_firmware_desc->firmware_data;
->  
->  	core->ubwc_cfg = qcom_ubwc_config_get_data();
->  	if (IS_ERR(core->ubwc_cfg))
-> @@ -273,8 +271,6 @@ static int iris_probe(struct platform_device *pdev)
->  	if (ret)
->  		return ret;
->  
-> -	iris_session_init_caps(core);
-> -
->  	ret = v4l2_device_register(dev, &core->v4l2_dev);
->  	if (ret)
->  		return ret;
-> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-> index 1c052ca235be..84d70beec350 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-> @@ -9,6 +9,7 @@
->  #include <media/v4l2-mem2mem.h>
->  #include <media/videobuf2-dma-contig.h>
->  
-> +#include "iris_ctrls.h"
->  #include "iris_vidc.h"
->  #include "iris_instance.h"
->  #include "iris_vdec.h"
-
-Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-
+>  static int pmic_gpio_get(struct gpio_chip *chip, unsigned pin)
+> -- 
+> 2.43.0
+> 
