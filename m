@@ -1,69 +1,68 @@
 Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CFC7370AC6
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:27:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A28948643C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:27:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790256424; cv=none; b=rYbcv46Q/F/umC3NPPMFxJrvMGE7cjwhPxqCTFvHqPnGkSSLoG9cbVuQLelo0LswQDAiMzKZ5Nu5aeAvs+st9w0I3GanwrLNoQLIIau/jS44v2lUzIvoHfUJpyTZXnZiCxOde5DkQ+T311XkQBt3IdngNCWrVJM2oh5kNF9Qx8c=
+	t=1790256450; cv=none; b=ELpoogMlpy9yDg+KRYHgv/a4wJvD5FVS1W6DDysUXxI1Ldpa+HBQhbXAHYrZRbLypanL80rSANi8zBrVaRhf3/OhDFWWCCrClvdDcu9+1qbI15A2btpU2simOopQ3BlBjSoZ+57ZUO9XCCCk9Genx/Cg9DBP+U98ibSuWxYQRJk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790256424; c=relaxed/simple;
-	bh=NrTUc2Ujr6zR78Ms94ZBr3uoJ6uW4y4swNxgYb4M0ls=;
+	s=arc-20240116; t=1790256450; c=relaxed/simple;
+	bh=IY/IVZ+d9lMPZ1c2n2yTKvRchjsa75lOTKWkfytjpl4=;
 	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=BYdq0xQ2xNB2UfLb4z7v/hh6n4Jd45l3zZCJjUGmcHXo2C7kKQGgD2arOKggwx+zPlmQnc2L8MfhqEmjYRkn+lJgPYHk2F4g8G+LmFDNLa26HOSj8PMT0tUBoFjAtLt6BC36JouwuP11T8f4F1iTpskb4RIyeubzZ0UzpLmsLOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=SOvdmxi1; arc=none smtp.client-ip=74.125.225.140
+	 In-Reply-To:Content-Type; b=t/wHF348iJtqZYyoIY2hvTgry3TDgD4fOZ92Pdtp7G5m/32mognOGVHK6/lbUNxTFEVHd94egi+CG7wBN4M2dCW/7LnVZ5GUd65y/MS/q71xCiliOLcIZieI2Iuo96DCecFsKge+nZKAiLno+WQTOoTaTUKpvr2LhUNh674zp4Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=k7o5ecNU; arc=none smtp.client-ip=74.125.225.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="SOvdmxi1"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912e64ccso13539505e9.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:27:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="k7o5ecNU"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ce364488dso6690855e9.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:27:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790256419; x=1790861219; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1790256444; x=1790861244; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:organization
          :autocrypt:content-language:references:cc:to:subject:reply-to:from
          :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bR8KLVmfkqlUwLeA5NPAg5mdoYKwiz6mqVtLy5sMUQI=;
-        b=SOvdmxi1Lb4DkYXczUnYSs/mmUhqZ/VhRHbx73u1InDj+mPdU8aICfTlA/zA/EaW6K
-         FtGOB9Frn5DBOfGs2tfb+S1px9GKCP7sD1OJaEahg+QCkJ6ElXCMIBMY1YROb/uhvqq/
-         QBlrM1Hx373urPNhl2NdbcrDiBzd8zsZ403ziZT+gv3ACDoTeexcnmNdgn26cOEbe7aj
-         dQbwsqW7MPf5B4RomRkFvrvd86PulIuGIcw41OlOVjJbNoNmgIbLzX8agCjD3BNmXm7F
-         Ls3etXcVBVXeFRPqbGiSEZrKoZH+9F8mni5bvfejO4bS1/J0Co0Ez4kfObPZBVbsLzh4
-         hvgA==
+        bh=Jfb2GnzFdumBY8sSVQT0iDXZ6nvLBLs0k9mm9TK0BfE=;
+        b=k7o5ecNUJtHxg/H3bMdnk/vu8Ux0SZmvdgQRcq6gDgE/ygjLUmqNFxZoUicQRYQNll
+         vOgbDazQB8p3BwrLPnEgIO4e6qascGBWcd4VspMnFj+2ZMJtmKCRx9ch1o+CiMfHiCn1
+         QVYKHjX7i6NNPRmyNwDR1Xcn0EEzyg1oelGei/+mwjezirZGNER+sNQVz6TS1uV93CcG
+         aPV55DB6lcZw9i1nL3hZfQ8CkY+j2WI0qFsKXOKVDSeOueNkQ8JP/QJ1xSF8EyBV/4u0
+         KEB0HrPRagUw0xgZKU85hWbUKPsw/bRK3TSisbZnjlzdBo1ZPR1B1uzsUXlLUqbhf4NH
+         OB0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790256419; x=1790861219;
+        d=1e100.net; s=20260707; t=1790256444; x=1790861244;
         h=content-transfer-encoding:content-type:in-reply-to:organization
          :autocrypt:content-language:references:cc:to:subject:reply-to:from
          :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bR8KLVmfkqlUwLeA5NPAg5mdoYKwiz6mqVtLy5sMUQI=;
-        b=UYTJLbKv1exy2Zsyk6NKq9Axnm+ie/spqSGhGh/mWotc2RYua2zxQnCrwxqT+YaydT
-         psHJ3Ayk3s/Md7/QoAFBI9nfvkzqXEcQ4MXRcBRTIJttgh1BI0bO5pnE24fOZtPLGZLW
-         MKfv2Lbz+zMyxPSyjN4BlfdeuvH5C3fXu718S9r+LNI8I0N+SB6J23FFisnB7Yj/S6FF
-         n1sHP7UMCfnJVp+B5kVD+ktrO/8FWERX+xuvLzGktSZ1JeVgE6tOB2jlOEPScgTDJ+Xc
-         QSomRR/FmXfj2S6QsexlJrbYmXo71uyRmRBg+S5dqWMjQrpPyX9ApXOAzOB+Gfotd9YC
-         0bqg==
-X-Forwarded-Encrypted: i=1; AKwUvBwHcmtuoYDKvlV0Jl7ZA05SLNqlnGVsesBshZmNcbgLOCLGYI8LihEFfWJ/exiRgUTtidhokN3QrAABZdEo@vger.kernel.org
-X-Gm-Message-State: AFuF++mhqLOwXGOFojbJgsPrstCQyGq8jAAa9cltaV3Ibk6WPPOiuvZi
-	kth+YeJ0Tbm6bk8zqK/X9ZsPjVdcUY60cfHQ8Lp0ZbWpQEEC+tekhqHeGS4TfY1+AWLqyOAeWit
-	UxspLOBM=
-X-Gm-Gg: AYBFou1FPsqH3Y54g8BIdvuRDuMBkTNsQei3Skc1l2iQpw1tp+5Ge/+yoZBStywsoE5
-	sfSE499FEvt4hCOA/Ac8XhFZRkMTLn48078pR78O0Uvam3KqYSXd/lNVcJK0JuvRIW4ZiQ4PN9v
-	8EPDdfGmiN6yb3IG26KptU6aNV5hq+D87KTaBIxVPdNYZSvfeIDzBgQsg8/9kCYNeorT6dY7eEJ
-	sbiNqOp0l2Ro2mY9NqJKGOvfEkgrMb0M+0N9oQlFObzUKCmQSLEfSv7ZBR7sl+tmg00CC8oyEE0
-	U6zO3U9wrpQeD99CLk80Ty/U5WiY2EQ6u9l/aW2ockD9eWIykxkvQftPz1q8OA70ZwLPvzU7R1h
-	isE/L9vwVQrs/cU4gu1uF0B1SZxOhbzK18S1g5bIvZ73NAxVCiwvE7F+z2/VXPlRMYD7S7PkQTx
-	wWzzlYfDJyi+nIjgne4wpUKyiAkSdzR0IA9ao61mRGjQmot0uIfZWsfwNLVFqojjTxGcLJ97BVS
-	bOt0w11kYvC5a22arcOrreiCCkI7XmsG1dmHqxtvPR+lzxo9N5PHQ==
-X-Received: by 2002:a05:600c:1c08:b0:49f:e0f4:1aac with SMTP id 5b1f17b1804b1-49fe66fd431mr48391305e9.25.1790256418908;
-        Thu, 24 Sep 2026 06:26:58 -0700 (PDT)
+        bh=Jfb2GnzFdumBY8sSVQT0iDXZ6nvLBLs0k9mm9TK0BfE=;
+        b=j1WRxIMxao/jowcXXgp7rXGKpliOB/6NJg+yXmFzJYBDnYwbMce4Ui67DnP4HiTAl7
+         Uw49L6cnPc347BWGpo67uiJdyenxGdS/0daT6CkwRqKj8NCp93MBQAyuooq0zFD9U7ZW
+         oW0ZEWpKdFC7cKzYHdzl918DY6UjW44QhRwBK2lrT0Ctn6WFosIix7XE108LPRtk+mTN
+         1dNTo+jqKtStSA0C8+p0tW54yTGAyyA9gqrql2Rc8ishZnN7hD9NFL6EsH1tKqX39K4e
+         d7oQkRocN1Jd+RXfKPJgtrCcUThtjsTUF4+xL++sUsFOmSL3cn1/ghQWb3MFrUhALFly
+         3kTw==
+X-Forwarded-Encrypted: i=1; AKwUvByUMzkjC6ecsp+qRba2OPZ3AIhMTIhFyKxBgFFjLLmoZhM5JmWgkr40QeYMAX9oi9MXzteJTOXXvtWis7UB@vger.kernel.org
+X-Gm-Message-State: AFuF++mAbOdXu1+604Xyr1YsJW/zO1T3zxnlfSvG7jhuHy4sUCnaAe39
+	oM2dtIAgBEaj2x/0S3BAPydfdVJ9NwU6EJYOqaNhzhSxpYIkcGTO5KREXf6TdVoSms8=
+X-Gm-Gg: AYBFou3RKoNF9MmF41TC4NPAAjpOP+VAtdXYgb1ts62caeCmmlBBFs7B1c+3JZw67Sx
+	pkYnX4C68IcvvFF3BMZlrqk1pWOOVXbK5QZYQyRfsr2RP1cLFbsnbqCTr9VQQ1GCAwHgeovVJ1E
+	i7F0mZeXQN3DI8KzWT3bxivHaPKFsz6TlHxsTSmeZ+/4cMghrqlv9WEoI6Wxwb216N9FPwCXlzu
+	UZAnE6GFXMv3gNW/9kP1d1ukZ+W5CHvxTTmvNnsgLAjsGVXhxXZqkrlb7HKEbymih82eOUceWKP
+	HbMePlkQPIuI+RukhPX97R8XQBFG4Nuwc6O4IdvmEAztfoWI4GHwOKyhfFQ/Fjo0yuwyDnj6/1k
+	Qd+X6RSCvlLxoj/Rca1in2JdrR3IDIiW5+O+jRucdwHvxwtEaKfwtivF0LDUTs67ujZDHTyVyxH
+	K/MSH6QErdYPhSgDB7IEQcJRTl1lGwP5OgjfPQkW+GDDTrH8tV2QcIu7C0tyAOd6eZgKP0980kF
+	no0u5xCnEFT+vlSpCBolGqSd02nCIuN7gEeEcs62h+W4yX2+SX5/g==
+X-Received: by 2002:a05:600c:3513:b0:49e:6836:5386 with SMTP id 5b1f17b1804b1-49fe66ca6f5mr46789385e9.0.1790256444044;
+        Thu, 24 Sep 2026 06:27:24 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:336e:a1a0:8f96:9f7a? ([2a01:e0a:106d:1080:336e:a1a0:8f96:9f7a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fdf99df60sm108015625e9.1.2026.09.24.06.26.58
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5cbd134sm68870805e9.9.2026.09.24.06.27.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Sep 2026 06:26:58 -0700 (PDT)
-Message-ID: <aac7a74b-e1e8-4956-b1e9-4c4e1e04a6ec@linaro.org>
-Date: Thu, 24 Sep 2026 15:26:57 +0200
+        Thu, 24 Sep 2026 06:27:23 -0700 (PDT)
+Message-ID: <bfbe08b3-2de1-47c3-8436-a4f4013ba844@linaro.org>
+Date: Thu, 24 Sep 2026 15:27:22 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -73,8 +72,7 @@ MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 06/11] drm/panel: s6e3ha8: Correct the polarity logic
- within
+Subject: Re: [PATCH 07/11] drm/panel: s6e3ha8: Assert reset GPIO in unprepare
 To: david@ixit.cz, Dzmitry Sankouski <dsankouski@gmail.com>,
  Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>,
@@ -87,7 +85,7 @@ Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  phone-devel@vger.kernel.org
 References: <20260920-crosshatch-panel-v1-0-de6e9512da96@ixit.cz>
- <20260920-crosshatch-panel-v1-6-de6e9512da96@ixit.cz>
+ <20260920-crosshatch-panel-v1-7-de6e9512da96@ixit.cz>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -114,158 +112,43 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260920-crosshatch-panel-v1-6-de6e9512da96@ixit.cz>
+In-Reply-To: <20260920-crosshatch-panel-v1-7-de6e9512da96@ixit.cz>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 9/20/26 13:05, David Heidelberg via B4 Relay wrote:
 > From: David Heidelberg <david@ixit.cz>
 > 
-> The reset was introduced with wrong polarity. Correct for the future
-> compatibles and keep current with reverted logic.
-> 
-> Old DTs keep GPIO_ACTIVE_HIGH and are fixed up via
-> gpiod_toggle_active_low() on the deprecated compatible.
+> For correct shutdown, the reset should be asserted.
 > 
 > Assisted-by: LLM
 > Signed-off-by: David Heidelberg <david@ixit.cz>
 > ---
->   drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 23 +++++++++++++++++++----
->   1 file changed, 19 insertions(+), 4 deletions(-)
+>   drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
 > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
-> index 5e1e997b83b36..99290913de69a 100644
+> index 99290913de69a..2591b8c1a7753 100644
 > --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
 > +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
-> @@ -20,16 +20,17 @@
->   #include "panel-samsung-dsi.h"
+> @@ -58,16 +58,17 @@ static int s6e3ha8_get_modes(struct drm_panel *panel,
 >   
->   struct s6e3ha8_desc {
->   	const struct drm_panel_funcs *funcs;
->   	const struct drm_display_mode *mode;
->   	unsigned long mode_flags;
->   	const struct regulator_bulk_data *supplies;
->   	unsigned int num_supplies;
-> +	bool broken_reset_polarity;
->   };
+>   	return drm_connector_helper_get_modes_fixed(connector, priv->desc->mode);
+>   }
 >   
->   struct s6e3ha8 {
->   	struct drm_panel panel;
->   	struct mipi_dsi_device *dsi;
->   	const struct s6e3ha8_desc *desc;
->   	struct drm_dsc_config dsc;
->   	struct gpio_desc *reset_gpio;
-> @@ -62,22 +63,22 @@ static int s6e3ha8_unprepare(struct drm_panel *panel)
+>   static int s6e3ha8_unprepare(struct drm_panel *panel)
 >   {
 >   	struct s6e3ha8 *priv = to_s6e3ha8(panel);
 >   
+> +	gpiod_set_value_cansleep(priv->reset_gpio, 1);
 >   	return regulator_bulk_disable(priv->desc->num_supplies, priv->supplies);
 >   }
 >   
 >   static void s6e3ha8_amb577px01_wqhd_reset(struct s6e3ha8 *priv)
 >   {
-> -	gpiod_set_value_cansleep(priv->reset_gpio, 1);
-> -	usleep_range(5000, 6000);
 >   	gpiod_set_value_cansleep(priv->reset_gpio, 0);
 >   	usleep_range(5000, 6000);
 >   	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->   	usleep_range(5000, 6000);
-> +	gpiod_set_value_cansleep(priv->reset_gpio, 0);
-> +	usleep_range(5000, 6000);
->   }
->   
->   static int s6e3ha8_amb577px01_wqhd_on(struct s6e3ha8 *priv)
->   {
->   	struct mipi_dsi_device *dsi = priv->dsi;
->   	struct mipi_dsi_multi_context ctx = { .dsi = dsi };
->   
->   	dsi->mode_flags |= MIPI_DSI_MODE_LPM;
-> @@ -203,17 +204,17 @@ static int s6e3ha8_amb577px01_wqhd_prepare(struct drm_panel *panel)
->   	ret = regulator_bulk_enable(priv->desc->num_supplies, priv->supplies);
->   	if (ret < 0)
->   		return ret;
->   	mipi_dsi_msleep(&ctx, 120);
->   	s6e3ha8_amb577px01_wqhd_reset(priv);
->   
->   	ret = s6e3ha8_amb577px01_wqhd_on(priv);
->   	if (ret < 0) {
-> -		gpiod_set_value_cansleep(priv->reset_gpio, 0);
-> +		gpiod_set_value_cansleep(priv->reset_gpio, 1);
->   		goto err;
->   	}
->   
->   	drm_dsc_pps_payload_pack(&pps, &priv->dsc);
->   
->   	samsung_dsi_test_key_on_lvl1(&ctx);
->   	mipi_dsi_picture_parameter_set_multi(&ctx, &pps);
->   	samsung_dsi_test_key_off_lvl1(&ctx);
-> @@ -243,16 +244,27 @@ static const struct drm_display_mode s6e3ha8_amb577px01_wqhd_mode = {
->   static const struct drm_panel_funcs s6e3ha8_amb577px01_wqhd_panel_funcs = {
->   	.prepare = s6e3ha8_amb577px01_wqhd_prepare,
->   	.unprepare = s6e3ha8_unprepare,
->   	.get_modes = s6e3ha8_get_modes,
->   	.enable = s6e3ha8_amb577px01_wqhd_enable,
->   	.disable = s6e3ha8_amb577px01_wqhd_disable,
->   };
->   
-> +static const struct s6e3ha8_desc s6e3ha8_amb577px01_wqhd_desc_legacy = {
-> +	.funcs = &s6e3ha8_amb577px01_wqhd_panel_funcs,
-> +	.mode = &s6e3ha8_amb577px01_wqhd_mode,
-> +	.mode_flags = MIPI_DSI_CLOCK_NON_CONTINUOUS |
-> +		MIPI_DSI_MODE_VIDEO_NO_HFP | MIPI_DSI_MODE_VIDEO_NO_HBP |
-> +		MIPI_DSI_MODE_VIDEO_NO_HSA | MIPI_DSI_MODE_NO_EOT_PACKET,
-> +	.supplies = s6e3ha8_vddr_supplies,
-> +	.num_supplies = ARRAY_SIZE(s6e3ha8_vddr_supplies),
-> +	.broken_reset_polarity = true,
-> +};
-> +
->   static const struct s6e3ha8_desc s6e3ha8_amb577px01_wqhd_desc = {
->   	.funcs = &s6e3ha8_amb577px01_wqhd_panel_funcs,
->   	.mode = &s6e3ha8_amb577px01_wqhd_mode,
->   	.mode_flags = MIPI_DSI_CLOCK_NON_CONTINUOUS |
->   		MIPI_DSI_MODE_VIDEO_NO_HFP | MIPI_DSI_MODE_VIDEO_NO_HBP |
->   		MIPI_DSI_MODE_VIDEO_NO_HSA | MIPI_DSI_MODE_NO_EOT_PACKET,
->   	.supplies = s6e3ha8_vddr_supplies,
->   	.num_supplies = ARRAY_SIZE(s6e3ha8_vddr_supplies),
-> @@ -283,16 +295,19 @@ static int s6e3ha8_probe(struct mipi_dsi_device *dsi)
->   		return ret;
->   	}
->   
->   	priv->reset_gpio = devm_gpiod_get(dev, "reset", GPIOD_OUT_HIGH);
->   	if (IS_ERR(priv->reset_gpio))
->   		return dev_err_probe(dev, PTR_ERR(priv->reset_gpio),
->   				     "Failed to get reset-gpios\n");
->   
-> +	if (priv->desc->broken_reset_polarity)
-> +		gpiod_toggle_active_low(priv->reset_gpio);
-> +
->   	priv->dsi = dsi;
->   	mipi_dsi_set_drvdata(dsi, priv);
->   
->   	dsi->lanes = 4;
->   	dsi->format = MIPI_DSI_FMT_RGB888;
->   	dsi->mode_flags = priv->desc->mode_flags;
->   
->   	priv->panel.prepare_prev_first = true;
-> @@ -323,17 +338,17 @@ static int s6e3ha8_probe(struct mipi_dsi_device *dsi)
->   
->   	return 0;
->   }
->   
->   static const struct of_device_id s6e3ha8_of_match[] = {
->   	{
->   		/* deprecated */
->   		.compatible = "samsung,s6e3ha8",
-> -		.data = &s6e3ha8_amb577px01_wqhd_desc,
-> +		.data = &s6e3ha8_amb577px01_wqhd_desc_legacy,
->   	}, {
->   		.compatible = "samsung,s6e3ha8-amb577px01",
->   		.data = &s6e3ha8_amb577px01_wqhd_desc,
->   	},
->   	{ /* sentinel */ }
->   };
->   MODULE_DEVICE_TABLE(of, s6e3ha8_of_match);
->   
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
