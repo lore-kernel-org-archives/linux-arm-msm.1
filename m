@@ -1,116 +1,90 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10476481252
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:11:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF04247F2DD;
+	Thu, 24 Sep 2026 13:22:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790255479; cv=none; b=dcAZuE0cIFwTHIMoUwVDRFGELxAMygkvilTIAdSc5LVR9L7p14Oysyq59DNDFNd47my9oKPZ86oKdcfYdqlN9FNrUPEdolb5H1pGjDr08YovVFDX6tLempSpqMa0feCZw4+mvS/XoNHzZI2U4xZ63yDKEMGyzufZEKm6/AI8rCA=
+	t=1790256160; cv=none; b=FliT0FjoSwwXJ4WWwhOxYdBd2p6O06LoqGaUxULy9a9HD8iR6YiIFcNqDKjQsD8LvGbChyvOh6pbiiI/HC9quwmafuyoLnbtG/CyWrXPpWFeOXtcKFfwTQpLr+sqbeGoX6g8AH2VWdjr/cu72P9CdvFj2YBHJ2qZ8P22U4QYND4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790255479; c=relaxed/simple;
-	bh=me56oTO/TOBSqsm3f2x4P/XfTor+iq5IBnVYHVS2BVY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=iY1I4LC93F61maPIeto3E7PjmSV1y5RFr0T7VzWbtoeE8XADiYD8RjfH9KZhDj/AuQ7pnxEOpNFsku0e21WAsfjj0KqvXsSbmr9acgmL8jdUioZacS/5T8ZRgfGnax7dJUyWG+TNxNY4Gmma9Mvf/fAHtpOlAULY1wuQybBUo8I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=SIGWzdtS; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1790256160; c=relaxed/simple;
+	bh=7LSJuHWbf7zWMenXZbU2vMC6u93w8r3XTA4dO7mr7+I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=cy7JnDuPf2pEhtTxTztnpecMI2WKduYLCs0JiWzgRl5OdXRHrPrugl2lJthwGZliUMeq1bhJ2SMRrttyccSIrbZ4yvmYQg+PWP/5LsCqY6yYXMKO4mlnq8SVFAYA0i/KR6DLNnrpgUXR8Fm4SXhtDdcc/EVYYbQUTIt0N1ev8js=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FDnHmgUm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SIGWzdtS"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790255477;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CK9h24tbKUqAp/U2G5VravT+5URHwmwyNjh2EclKSmQ=;
-	b=SIGWzdtSNpQ8bcg14PxBzrmnW383VspKdTXxi/tnkVADmvrHMD1uUaqbpVDVwc2VV0a1LH
-	Uhm3KmfxtZBMxOp+lVkOt0kzUhBltuOh1ijfFAeD594U3i84ck3i9Ogvz0aafW+8Psg0wm
-	1ymaz7L6TIh9qoZuXjeq7PjPdCaq1RM=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-500-osQ3COd8PReZyKXmPefo_Q-1; Thu,
- 24 Sep 2026 09:11:12 -0400
-X-MC-Unique: osQ3COd8PReZyKXmPefo_Q-1
-X-Mimecast-MFC-AGG-ID: osQ3COd8PReZyKXmPefo_Q_1790255471
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3746C1828ABD;
-	Thu, 24 Sep 2026 13:11:11 +0000 (UTC)
-Received: from aesteve-thinkpadp1gen8.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B03B31800586;
-	Thu, 24 Sep 2026 13:11:09 +0000 (UTC)
-From: Albert Esteve <aesteve@redhat.com>
-Date: Thu, 24 Sep 2026 15:10:38 +0200
-Subject: [PATCH v3 4/4] soc: qcom: smem: ignore multi remote host
- partitions
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FDnHmgUm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58CF41F00893;
+	Thu, 24 Sep 2026 13:22:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790256149;
+	bh=u1v1eJ1dTnpQo/8U1PoAH4WTm7EYUCskGS2V3g6xaF8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=FDnHmgUmffigrIAX0NkzkOQjU6RD4poOU2tsQl9zry0+fc4+h+Ul/WmyS4ocuCMuh
+	 HYrZmcnzTDDWyu77b4TFUqib5cDSOuarF+gECTDZnUSgQVciUNumTtDkcqTrHDZOC7
+	 mTqWNBEUvIqR17EBmBrpBuasK/vJIbEu+BN9e46EDwePFAl0O1mt2tIjniafYqu3m/
+	 3ULeisknIZ8G7TFOdOOaIU4nTPAERNOniUdzAVluDn+9ub5Xyk1dIbT9lFE/vvlEXW
+	 t5FbVgsh8ncQLIqRv38DIrxtz+olOmqZ2UA8g5H4SGtlciXUlGqNv7tX+xnywOtJaJ
+	 IMlMIK0tr6shg==
+Date: Thu, 24 Sep 2026 15:22:25 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, shengchao.guo@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, 
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-pci@vger.kernel.org
+Subject: Re: [PATCH v4 1/6] dt-bindings: phy: qcom: add Nord QMP PCIe PHY
+ binding
+Message-ID: <20260924-lumpy-robust-fulmar-1bfbe0@quoll>
+References: <20260921-nord-v4-0-ed05c6e09240@oss.qualcomm.com>
+ <20260921-nord-v4-1-ed05c6e09240@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-port-smem-v3-4-fbc2ea81a654@redhat.com>
-References: <20260924-port-smem-v3-0-fbc2ea81a654@redhat.com>
-In-Reply-To: <20260924-port-smem-v3-0-fbc2ea81a654@redhat.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Albert Esteve <aesteve@redhat.com>, 
- Tony Truong <quic_truong@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790255460; l=1357;
- i=aesteve@redhat.com; s=20260827; h=from:subject:message-id;
- bh=3ju3KHFjQna22sHC5wqI6gfy3u13jdoSmHuNzJTX+nA=;
- b=0rZdUYJc1AZKljjzwEOoHoqIefdC1AodXci5myT0K27k7nn52im+FjER1xb1rjOIGlD+PkbXy
- mSB0YZZkv0NCRH64xwdAaaa2T0wJFHLzApFOuzhKhAH8h3z5kK5NOWE
-X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
- pk=zI2RBeZgocwYm3AkJW4CtjoJnKoDZrfBl1xe5Ed6h+U=
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260921-nord-v4-1-ed05c6e09240@oss.qualcomm.com>
 
-From: Tony Truong <quic_truong@oss.qualcomm.com>
+On Mon, Sep 21, 2026 at 11:07:09AM +0530, Krishna Chaitanya Chundru wrote:
+> +
+> +  vdda-pll-d-supply: true
+> +
+> +  qcom,link-mode:
+> +    description:
+> +      Reference to the TCSR syscon register containing the PCIe link mode
+> +      selected by firmware. The property consists of the TCSR syscon
+> +      phandle followed by the offset of the TCSR_PCIE_LINK_CONFIG_MODE
+> +      register.
+> +      The register value selects one of these topologies.
+> +        0 (QMP_PCIE_NORD_MODE_X16)         =E2=80=94 all ports combined =
+as one x16 PHY
+> +        1 (QMP_PCIE_NORD_MODE_X8_X8)       =E2=80=94 port A as x8 and po=
+rts B+C+D as x8
+> +        2 (QMP_PCIE_NORD_MODE_X8_X4_X4)    =E2=80=94 port A as x8, port =
+B as x4, and ports C+D as x4
+> +        3 (QMP_PCIE_NORD_MODE_X8_X4_X2_X2) =E2=80=94 port A as x8, port =
+B as x4, and ports C and D as x2
 
-SMEM now supports more than just 1-to-1 partitions. It is possible for
-a partition to have multiple remote host and the logic to handle that
-does not exist. For now, skip all partitions which has multiple remote
-hosts.
+Same question as last time. phy-cells tells which mode you are here.
+This is duplicating it and the register value CANNOT choose the
+topology. If it does, then phy-cells should be 0 as topology is defined
+by hardware already, no?
 
-Signed-off-by: Tony Truong <quic_truong@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Albert Esteve <aesteve@redhat.com>
----
- drivers/soc/qcom/smem.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+> +    $ref: /schemas/types.yaml#/definitions/phandle-array
+> +    items:
+> +      - items:
+> +          - description: Phandle of the TCSR syscon
+> +          - description: Offset of TCSR_PCIE_LINK_CONFIG_MODE register
 
-diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
-index 393257cbe5e1..a7a1840b7ff7 100644
---- a/drivers/soc/qcom/smem.c
-+++ b/drivers/soc/qcom/smem.c
-@@ -89,6 +89,9 @@
- /* Processor/host identifier for the global partition */
- #define SMEM_GLOBAL_HOST	0xfffe
- 
-+/* Processor/host identifier for multi host partition */
-+#define SMEM_MULTI_HOST		0xfffc
-+
- /* Entry range check
-  * ptr >= start : Checks if ptr is greater than the start of access region
-  * ptr + size >= ptr: Check for integer overflow (On 32bit system where ptr
-@@ -1091,6 +1094,9 @@ qcom_smem_enumerate_partitions(struct qcom_smem *smem, u16 local_host)
- 		else
- 			continue;
- 
-+		if (remote_host == SMEM_MULTI_HOST)
-+			continue;
-+
- 		if (xa_load(&smem->partitions, remote_host)) {
- 			dev_err(smem->dev, "duplicate host %u\n", remote_host);
- 			return -EINVAL;
-
--- 
-2.55.0
+Best regards,
+Krzysztof
 
