@@ -1,33 +1,87 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35A94471400;
-	Thu, 24 Sep 2026 10:28:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C602836C0D6
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 10:32:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790245704; cv=none; b=eiqFQCbGGkkrWlIG558rnaVr+ubRWr6a9/mT+Dm1H45cFzod2sN1TzijFP1L6PoeuCjn06UhtvIFjtl6EETjEYtFBKn6TWr4NIeVIeLfdDX82xUdtKr29k8AL4l7gGzbqvVycE9FoE7c958H0YDv7GE/WKtgpDn6t6DcWBYbfSg=
+	t=1790245980; cv=none; b=A39oZJl83WfAegVf9aHKwImcBaYDaidW9Q/X/Aea5KVdoMSbfayieRS15hU1DesGSP8+sdIfzq/PJfbbooQvCzULEShWMposs8PS/6ONB6lHPXk7XNa/LHGhHuwu0dx2DOXkdphVbHHSo4x1LtOP5A/ERM9VCkAV7gvgk6kJe+Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790245704; c=relaxed/simple;
-	bh=TFe/rkio0Xb7YAAPo9GyCH1G11f02LaQiYMT79+8PkE=;
+	s=arc-20240116; t=1790245980; c=relaxed/simple;
+	bh=7zwTmehAKssK3FDdkKixE6p0T3SMJhlXr4OxhLaCzT0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RiR++rqoFICTi5q0A9HakfKUAOqJcBw5mZUUqxE+VXBbYV8QRmdVU0nzlCT4terptARR1k41gy3qOHdwkbgw5+TKRDCPjBXuBZkNK8+M8RazzpgWSDygdPwdWIaejPppOpQKHTF4G7AxEwilUcQSjBrjKjXEGBarSwMndmxtTQ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ehN9kY3S; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=LjMeG20A0AmAU2V/mxuv7Rd44hCaC6CVCn1sMAiufQEsDqCq7tpGadodSVb3tMZ3nGwYxAZQTd8QAQk4v2UtuL90UF3R925PLfoSHWmqqD/3nRpKNOLAsoypSDBLPKIjPVPVo5boDvGg7/JMk1yn3hxCpdnWQ1M2P6izettOjSA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VkxisI+Y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VNzXJFl4; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ehN9kY3S"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37CA21F000FF;
-	Thu, 24 Sep 2026 10:28:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790245702;
-	bh=RO3pD7Q9+eQAPt4mIEHLCPHWj9ylSpQSd8EUvJUV68k=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=ehN9kY3S16mwiPpWIqXUBkd5hPCW7NXCUfm9dHVmmKs4VS6gwEyV4j4nHHdB+cYCq
-	 smsa3uzpTXcx7YKAzxQk6HHTQ//Ny2fNiiO3UgY4qY0oXBC0fbqcxW4LbvNnqbRLgd
-	 Fxy36ADnplqbxDgOAPCO7KWlW5sOPi1dz1GMuiwRJazYJvcZCYM3ebKF/AotMiau7N
-	 50lAdyTvxvOOCn5e3y6C2VUacOASKaVi+8smHAh3g+dQSzGsvdX6Y2i0IbvLPQ4Q0P
-	 yXNKFB7X9cBLMsdR1N0cmttdd9NOplVn2yGzyY/5Wje2139C1/kKvbME3lAvh36cOH
-	 g1xCKrxl/idMw==
-Message-ID: <19a05a1e-6d27-40ad-bb61-b7ff4e3ddbb9@kernel.org>
-Date: Thu, 24 Sep 2026 11:28:17 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VkxisI+Y";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VNzXJFl4"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O9PAOX1923777
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 10:32:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	WXg6dqUWJExGXR8prNtrYiyQGTXd5oj5ngmptCv+11A=; b=VkxisI+YzShJEnnF
+	ow4m60Uh0zvZE6FuBB2KnVj8dhkhItWm8D/XxGnFt4cP5lf+AEC8TK9lvb+Dyl2g
+	+l52UE32hRvbXffzjrqK9Ey/zhHrhrKyKjdLLrz7XLRGmNhUpDnjFfNSf0uOkJOt
+	rpLfFyEnBWwL0zg7fGLm9ArHD5bQWxzrtHXiC8OXXXKVmTLFsYhyapnvGgY9tri9
+	fNcgiZGNfWNcPijpzVdfxa/nzNdvUclw+wlqXwn+C2hqTkpg6C3ieFTxtViEnbxA
+	L7VeO1WKgkF86wc8BguxbsqUux7jGMWOK6IbnRexRMjOkqbhshvPC7ghVRFWnXlR
+	sJHnfg==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvx8ah4n7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 10:32:57 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1438492fb40so2974914c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 03:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790245977; x=1790850777; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WXg6dqUWJExGXR8prNtrYiyQGTXd5oj5ngmptCv+11A=;
+        b=VNzXJFl4SdX9cH80sEqorvFG38lRdwljEj9FPuvY/2diCpkSi6yD/inRwpDRxUAdRN
+         VEzWw1b588VtwKPgXOOd9vutJveN9VGCQ66tzeJtJ4gfNZwkqSq5x3ztuI9veksj9k3D
+         qQUyVu/ufBa94yOkyfV8DzRpB8vVvjYMhyMroeQ78zHm7Jod4Myku+D4FB8MeZfbjcia
+         DpbYXWfOc40P81XYjl0V3coxAfYSZcL0t3eYl8KZ7EFVyEQyEkBBSPxieglYiS0ZjLbQ
+         2Oq0e6FzNkHdyECtg2bTi3bwXMwlyBvg49/7yuXxGNV+tClAfZHm39hKtl9C1bjHlVpK
+         IBMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790245977; x=1790850777;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WXg6dqUWJExGXR8prNtrYiyQGTXd5oj5ngmptCv+11A=;
+        b=XOLvFxOZucYfd28kd0zkbsOAGuxORsSqvH8RRtIGRrqQFCRLZ2MANJhIu3cmcDHIcL
+         Hf+3LJPBi1tEGsj5z1rMD5dHzUtugCDhd+xdP5FhlrLT/DfauWhNeP3xBKV8QVrTPWIi
+         ve2e8ztUDtjSwxcJWH+U/O5eUk19HGcQb9j04qcaiA/PoCmlfPsBtDbz8Muu8uVmQg3n
+         Dpuw8xlu8CV/YuZpFQIO67i0+YsG3RTGrl0Unk+YNigD3fCs/sT2T2Hcux8QiNCv+2lJ
+         sZX7IKqmzgGfg9c5vdXkM8F5Hni6LD9Iu8tYY4FgUWsOLRhNnTRzlRoBPYsMomW94RhQ
+         0Obw==
+X-Forwarded-Encrypted: i=1; AKwUvBwQgPWEh7Vu0E6IiJIq2s7W57CXAMTaJ51eo59cvJN3rmalCGibOEPkpI6140kKmY1Q52ChYNjg+0rRi0yu@vger.kernel.org
+X-Gm-Message-State: AFuF++nhz2ucm0+DMQXLmZ9wDEMUXZv6+efy6twwMRmXVJdbWe8IT+oe
+	IF14BAojlEMJuzg2v9zJG6JL4QblX6CXefKQm1S5oW0fn1PCth2HAgx4b43q6MZW5AbHYF8Q6QA
+	8h+PhktywAhn4I7xtjXksv9OnvULmVlQarzD8uXP6HjbFwDhHlcj21EIXAd2Si4DO0xWD
+X-Gm-Gg: AYBFou3slBkYGAmw3zM3GfPqRmHR/s68xGADMXDSfsq7CfTNKR2JI563ewGzPpHPFO1
+	5ysaAT9p/V40TU9cs58MeXQcNo6Goh1Dwhf3ttJjf1FYXjoITJnA8jPTzqLrXP12jVlsDy5tG3a
+	dtDsRMOcgSRZW6+rWHqBQAdXfRuE+JQRiqGkfVIzx5p3Rkzx/kHeK1ubvNbWnJtZp/HqLaAQ3lZ
+	hhYkrWzMQzUu6sLIHD7BMYmvYej2TWEbxeO/Z01rxyd6YY706P7VZR3hRtz+j0Pfn7ZukMw0a6Y
+	MP/VkD6uFs7V6H/PLNDoCI9Gmb++zxxNa4AsUGRLFOXvhvBM7vJuoiZ8sGfNTaJ9O68R97IU8iE
+	QtDozmlmy2YYysyoJCkifk6Bqu7c=
+X-Received: by 2002:a05:7022:e80d:b0:143:2719:566d with SMTP id a92af1059eb24-145040d4075mr1964991c88.41.1790245976842;
+        Thu, 24 Sep 2026 03:32:56 -0700 (PDT)
+X-Received: by 2002:a05:7022:e80d:b0:143:2719:566d with SMTP id a92af1059eb24-145040d4075mr1964960c88.41.1790245976229;
+        Thu, 24 Sep 2026 03:32:56 -0700 (PDT)
+Received: from [10.218.18.193] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f9877462sm12068303c88.10.2026.09.24.03.32.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 24 Sep 2026 03:32:55 -0700 (PDT)
+Message-ID: <3752b72e-82a7-4fc2-be1b-5a5954062bee@oss.qualcomm.com>
+Date: Thu, 24 Sep 2026 16:02:40 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,107 +89,124 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 1/2] dma-buf: keep DMABUF_DEBUG off by default
-To: Jianfeng Liu <liujianfeng1994@gmail.com>,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org, Jessica Zhang <jesszhan0024@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Simona Vetter <simona@ffwll.ch>, freedreno@lists.freedesktop.org,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Karl Mehltretter <kmehltretter@gmail.com>
-References: <20260923074256.9357-1-liujianfeng1994@gmail.com>
- <rm4C3dzRACNd_2ryMMuye2bD7vs_rT_4nbtr2DN7t0Y3bTLnwruweMpVv4J_x2FOoSXvakXCuo7vOpCvY5Sr4g==@protonmail.internalid>
- <20260923074256.9357-2-liujianfeng1994@gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20260923074256.9357-2-liujianfeng1994@gmail.com>
+Subject: Re: [PATCH v7 06/10] ASoC: qcom: Switch lpass-cpu and qaif-cpu to
+ snd_soc_of_xlate_dai_name()
+To: Harendra Gautam <harendra.gautam@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+References: <20260923-b4-qaif-shikra-audio-v7-0-d5b6f056568e@oss.qualcomm.com>
+ <20260923-b4-qaif-shikra-audio-v7-6-d5b6f056568e@oss.qualcomm.com>
+Content-Language: en-US
+From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+In-Reply-To: <20260923-b4-qaif-shikra-audio-v7-6-d5b6f056568e@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA0MyBTYWx0ZWRfX29P2l2PNfsGQ
+ 2px99T+Hf/pfqoESwu0QIH2aPOIwXWe4xlU3hiwVd9P45l1gGWP/DDD6A+iHK5XYoSMlQXcz8Fu
+ eq/ShSudVOE/wHvn89FBgOgnnw8q7EA=
+X-Proofpoint-ORIG-GUID: kkxhiDhiC8WLlPjJ95vgP7TkdNdnNu30
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA0MyBTYWx0ZWRfXzZuoL+hRcW2i
+ K1Gpe+7xn1jQnoTZGG1Sya1iYjkGBykTAs4eZb8LI/B8mYMhxtxN2itZSMhT6qq04/N137RQHMT
+ CFO7xUsFs3nqMpUmt9pZ3lhafzNrnzF6eR13Jj42cTfjgNE0M3fpJbVMtO8p8gWgPJ7lIx5QLzO
+ NjeGhUqYyhkPpEH0ZtEr5oOJwL0wPBbCeKBhRMnloi1Ma3vCmSF35Tg4vkSVyfA/8mmNMu+ie8K
+ rJtwy4tjP7U4kDJ7QsNFpx1JNvBmMVe7QLurVU58OTzhmkIcXj0ZqOdSxtHUSaQb8Q7hjHhaem7
+ fkuqbcgRuw/E3qxSqFi1vDbI6Zt5nBkt5+UkIVlthxxLsdPoFPlStPLGSu+kv/Z4dc4SIBD0r4A
+ IQ3aW3727hnEX74R+y02y0VqPUWSBQ9/wh1YaUXBzJ6ttKnYfXq39eBkER/4kSbkC5mBek/oHqC
+ mETvcwo4IIt/XHVBJ+w==
+X-Authority-Analysis: v=2.4 cv=a6SlZkSF c=1 sm=1 tr=0 ts=6ab4fc59 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=kcWvErFG8IZCALGPlGoA:9 a=QEXdDO2ut3YA:10
+ a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-GUID: kkxhiDhiC8WLlPjJ95vgP7TkdNdnNu30
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 spamscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 impostorscore=0 phishscore=0 lowpriorityscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609240043
 
-On 23/09/2026 08:42, Jianfeng Liu wrote:
-> Commit 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on
-> DEBUG_KERNEL kernels") fixed a dangling reference in the DMABUF_DEBUG
-> default, which had the side effect of enabling the option (and with it
-> the page-stripping sg_table wrapper handed to importers) on every
-> kernel with DEBUG_KERNEL=y - i.e. virtually every distro kernel.
-> 
-> drm/msm is broken by this: it maps imported dma-bufs into the GPU's
-> own pagetables with iommu_map_sgtable(), which needs the struct page
-> of the attachment sg_table, and it fills the GEM object's page array
-> through drm_prime_sg_to_page_array().  With the debug wrapper in
-> place both silently produce garbage (the wrapper zeroes sg->length,
-> so the page iterator yields nothing and an uninitialized array is
-> kept).  The VM_BIND map job then fails asynchronously after userspace
-> has already enqueued GPU work referencing the mapping, which shows up
-> as an arm-smmu translation fault from UCHE, e.g.:
-> 
->    gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
->    type=TRANSLATION source=UCHE
-> 
-> This breaks hardware video decode (clapper, chromium) on Adreno
-> systems; bisected on a Snapdragon laptop as v7.3-rc3 good,
-> v7.3-rc4 bad, culprit 143755bdabaa9.
-> 
-> Revert the default until importers that legitimately need to build
-> phys-based mappings have been converted.
-> 
-> Fixes: 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on DEBUG_KERNEL kernels")
-> Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 
-This is a very obviously LLM generated patch.
 
-Please state so in the commit log.
+On 9/23/2026 12:18 PM, Harendra Gautam wrote:
+> Use the new generic snd_soc_of_xlate_dai_name() helper in lpass-cpu.c
+> and qaif-cpu.c, and remove the local lpass implementation.
+> 
+> Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+> ---
 
-Also I don't believe reverting the change is correct. Fix the bug where 
-it exists in Adreno.
+LGTM
 
----
-bod
+Reviewed-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+
+>   sound/soc/qcom/lpass-cpu.c | 23 +----------------------
+>   sound/soc/qcom/qaif-cpu.c  |  1 +
+>   2 files changed, 2 insertions(+), 22 deletions(-)
+> 
+> diff --git a/sound/soc/qcom/lpass-cpu.c b/sound/soc/qcom/lpass-cpu.c
+> index 242bc16da36d..61efa45376cd 100644
+> --- a/sound/soc/qcom/lpass-cpu.c
+> +++ b/sound/soc/qcom/lpass-cpu.c
+> @@ -458,30 +458,9 @@ const struct snd_soc_dai_ops asoc_qcom_lpass_cpu_dai_ops2 = {
+>   };
+>   EXPORT_SYMBOL_GPL(asoc_qcom_lpass_cpu_dai_ops2);
+>   
+> -static int asoc_qcom_of_xlate_dai_name(struct snd_soc_component *component,
+> -				   const struct of_phandle_args *args,
+> -				   const char **dai_name)
+> -{
+> -	struct lpass_data *drvdata = snd_soc_component_get_drvdata(component);
+> -	const struct lpass_variant *variant = drvdata->variant;
+> -	int id = args->args[0];
+> -	int ret = -EINVAL;
+> -	int i;
+> -
+> -	for (i = 0; i  < variant->num_dai; i++) {
+> -		if (variant->dai_driver[i].id == id) {
+> -			*dai_name = variant->dai_driver[i].name;
+> -			ret = 0;
+> -			break;
+> -		}
+> -	}
+> -
+> -	return ret;
+> -}
+> -
+>   static const struct snd_soc_component_driver lpass_cpu_comp_driver = {
+>   	.name = "lpass-cpu",
+> -	.of_xlate_dai_name = asoc_qcom_of_xlate_dai_name,
+> +	.of_xlate_dai_name = snd_soc_of_xlate_dai_name,
+>   	.legacy_dai_naming = 1,
+>   };
+>   
+> diff --git a/sound/soc/qcom/qaif-cpu.c b/sound/soc/qcom/qaif-cpu.c
+> index e1868dc95cf4..c096ef5133bb 100644
+> --- a/sound/soc/qcom/qaif-cpu.c
+> +++ b/sound/soc/qcom/qaif-cpu.c
+> @@ -594,6 +594,7 @@ EXPORT_SYMBOL_GPL(asoc_qcom_qaif_aif_cpu_dai_ops);
+>   
+>   static const struct snd_soc_component_driver qaif_cpu_comp_driver = {
+>   	.name = "qaif-cpu",
+> +	.of_xlate_dai_name = snd_soc_of_xlate_dai_name,
+>   };
+>   
+>   static const struct regmap_config audio_qaif_regmap_config = {
+> 
+
