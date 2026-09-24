@@ -1,81 +1,78 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D7AC31619C;
-	Thu, 24 Sep 2026 01:06:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27FE33B995D;
+	Thu, 24 Sep 2026 02:51:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790211980; cv=none; b=s9kmujuzd6VZ0yUDARPJnDD/gBHGb3k9K2/R+2vG+OO7smKjsLOf2PggJQNJHbVo6qygUFLHkKFzkZx+moLvWeN1WKF76WXH7FR5Dcl2WwwCO34Q6r4sE9qDK8exI8TZtYgBrGkEmjIWsmDmisSGJ8ceei3BijeILDHzq+vbS58=
+	t=1790218280; cv=none; b=BScDjXnwgN+m6j++YnKboJYB69P1tXsLFPOHN0mRLaCP2VoxqafZ7raxEwFb1C6QeTvZjf5LuTfQivvCPeBP+/DNsL1x9HXeMFnVcQwr3T2e7NTgXYxmJA1zJhWoFkalWGub/9F4d9bPB6HhjQwbvzkECoSFdoK7aLK4/wCNo/o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790211980; c=relaxed/simple;
-	bh=hKisWWthgIJ05EeHf1WTfYArOSrLOYklqZFFV/KQRPw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lmrtGKbWJ3Z6JLHsrSc/qbZ+gyU8p9/PENI+28WfyxPo2dAECB3pxpa0YDgqrWkxa5UWbx4drbexcN0UwJ0xmMY+ElgcN+23C2wmG1fDKVYEMdayjuc0Olu8UXc1j7ucAf63AhUCJJLwKUaN/ZcIUygmqzWb4YqYQgCHyJcE9q0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ItqBHU/6; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790218280; c=relaxed/simple;
+	bh=Gy/qa+NbNLt/dx3hCaZU3UQrKU1LA2ULNMhU+gsKr18=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=C1esQKM4aBOUE7jDeQpTtQttqAtMKd6GrfrmMXcy5V6TjT+hkwWpnG2HHUU8zrbT2ox0NNGiz9/YzKGA73HRyScMOI9LY0eaU3jVaZgEIL8y+ioYkjygFsWX98Wv10juq25HcpQ4EWSEyZfA3YBCeZUo+SY65Bd48l/rj4lg0ac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=Fv3iShXv; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ItqBHU/6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93AA51F00893;
-	Thu, 24 Sep 2026 01:06:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790211979;
-	bh=YqeoSLYdALq7MaNF/Lip153sMjpfNRvuTEwdt27dlio=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ItqBHU/6xrX+o5ajBfb1WeNJuzm3tcV0prkKruNTHHp+a2NiGeB2cRA/PIZPFuOPw
-	 6iRYAKnr/rUh845Y7z478UEpAfp0CEkXX2TMlLGcx1rfDnLt3iraHw2TQ2xj1NA6U3
-	 kYcW2NlEx47QQbNkiStiauMUN6ZW0dIxmipqwo0sAVELQ/VCjEXpyzgaKBlqoXrF5H
-	 pOswLU+/24hUIKSKUqGejhzuIyf3b54xfPJqkcnGxzVS/3DVbwkyc8afsp6eWvo+7b
-	 s+1xTPR4EmoobGAm+6CZZz4aA/HRm/OBdemZNtsqw9dziBBG6cU+Eotk52ZhR4ySub
-	 7IcBSyeIie+dA==
-From: Bjorn Andersson <andersson@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Jagadeesh Kona <quic_jkona@quicinc.com>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/2] clk: qcom: add camera clock controller support for Hawi SoC
-Date: Wed, 23 Sep 2026 20:06:13 -0500
-Message-ID: <179021133113.298587.12180746570506133992.b4-ty@b4>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260915-camcc-hawi-v3-0-5b57f45477f1@oss.qualcomm.com>
-References: <20260915-camcc-hawi-v3-0-5b57f45477f1@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="Fv3iShXv"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=fRZRUAQGtdbTlWUxn+HO7PkGr8VFeQjlaiGB0WK3BhY=; b=Fv3iShXvZE+w3SeYUcwvo2rAPB
+	PynUUtrIsHtIdN8B5n01vsVbRxnhqfcqlyNjZDfiuAKo10U82VX2bgLHZCzMj0bvRHBXFzlDfsBMV
+	vHFSViWHcsbtnKvKqdiOVdIIGtf31Za4i/ravf40Oxouur/zHQrNu2MDalCz3Dr0FcQI=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1x9ZY9-006uqZ-1t; Thu, 24 Sep 2026 04:51:05 +0200
+Date: Thu, 24 Sep 2026 04:51:05 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Yongzhao Chen <yongzhao.derek@gmail.com>
+Cc: netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, Ziyang Huang <hzyitc@outlook.com>
+Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337
+ internal CPU PHYs for SmartSpeed
+Message-ID: <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch>
+References: <20260923215858.1653-1-yongzhao.derek@gmail.com>
+ <20260923215858.1653-5-yongzhao.derek@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260923215858.1653-5-yongzhao.derek@gmail.com>
 
+On Wed, Sep 23, 2026 at 11:58:56PM +0200, Yongzhao Chen wrote:
+> Flag QCA8337 internal PHYs used as CPU links for SmartSpeed suppression.
+> SmartSpeed is the Qualcomm PHY driver downshift feature configured in
+> register 0x14.
 
-On Tue, 15 Sep 2026 10:33:00 -0700, Vivek Aknurwar wrote:
-> Add support for the camera clock controllers on the upcoming
-> Qualcomm Hawi SoC.
+As far as i can see, nothing configures register 0x14, so this is not
+very useful.
 
-Applied, thanks!
+Please look at other PHYs which support downshift. There is a tunable
+for it. Also, the read_status is expected to return the real speed,
+which often is not in BMSR, but in a vendor register.
 
-[1/2] dt-bindings: clock: qcom: Add Hawi CAMCC compatible strings
-      commit: 5cea6b0bbf1ca6e2b20262b4790aa7b7db48ec04
-[2/2] clk: qcom: Add support for the camera clock controller (CAMCC) on Hawi
-      commit: 5e5669f4519779ac9c1ac3aa8adba62167744cfd
+Is there an errata which covers this?
 
-Best regards,
--- 
-Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+It would be interesting to know if downshift is broken in general, or
+only when used in switch integrated PHYs.
+
+What might be possible here it to look at phydev->is_internal, rather
+than add a flag, to differentiate switch internal PHYs and discrete
+PHYs.
+
+	Andrew
