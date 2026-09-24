@@ -1,144 +1,80 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEE383C2798;
-	Thu, 24 Sep 2026 12:22:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D05635C1B2
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:25:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790252536; cv=none; b=jdvgeTrzagOFp4TjKumBD1glRtnewlSBMQNwT3fpawBwS/WDwBk2io8n5dXqSJ+lNAkCZsioP1XmNzDrfkjFR7RYKuNGmEGb9I5SZrjixERBd/wTo4XZanAqccCXX0kfGL5XYRzmttUQa3Fdw804HJvAeRiHqDC4TwksMKvjSTY=
+	t=1790252723; cv=none; b=hQ+rsvtU8Oihllbur0zIp4dxGViNzImta16z/vYfKYuGF6MYcwnKtUySvCdQi/kabtqmZZntaZ7lyEd2vYx6PrdtSGyJJpc0w1Wq4K11NUokIIA4bmd0fH7PdjhoVM+RjsjfwaPVZxaPilJCqkTtX+hCp+x0X9xA0B7j/gZbGd0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790252536; c=relaxed/simple;
-	bh=/WVhz6i6OeW3PNBya1cIfv1hhDwszh0Ad/KNMaLwHX8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=EB2RHHNwiZpT78ByTqvRV9dQ8Gf6EuBjS8S2nK8qyMOfkKL8sIKmaWd+9G3CzOL5k87Bse6GUgQ3n9Hy+KAh2ZhsTNtn/9Ayq5s5EIJjJHCH+xl6aP0CdP2LB7H1CgzTBMEcR1KKMqqlwV2AJ/wRPmxEXYLLIUy1hEM9GhU0m8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PX3aT1SY; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1790252723; c=relaxed/simple;
+	bh=hufhkWEppg21lSvR71FpDUp4y3tdpeTY9IN5XuG+mBk=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=i9hpfbUTyv1paEIMdtkOQeAa8F/YdthETHKY6H3/FbO3mDbIIRBW41jlZXTkwcl2bxP1H+EwBjXVSW+27Ghor51tc8IekhzxX1EaK9/PiNGbKJfkLWDjsiCuqHEPsqdAKiDrWVUQw6sAA2Cse1FvOkY6tpUcTTERWG8jApF/smE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=olCQVasl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PX3aT1SY"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7F02CC2BCB8;
-	Thu, 24 Sep 2026 12:22:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1790252536;
-	bh=/WVhz6i6OeW3PNBya1cIfv1hhDwszh0Ad/KNMaLwHX8=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=PX3aT1SYJhIlOzh/BKSnRC4K2I7k02cUJc9dyidS0pRQNrnNwFdRbLNrEPLCqd0RJ
-	 tRYEKp2rEbTqLhjF9O4yxgYQAP7l6DmpxVkSfqcOe4T48iv7mUTfoyexAm+XjZP0MP
-	 ca0goBrOlIuxUDDEMkj2p2dlPsffXTMt2St096ZSPsbWsyKBnYsvmvYc0yXn9zfQE7
-	 XfY8ByQj7XiRvrjXo2cV9vtZjtnOorAb3tsNN5916dc5PkVqr6CyN/RTpECJTVjuxl
-	 yMPbUwd0VY0hF0FTfQWrxQ62lHkKAADFh1Uxgka5+QC8c5HDvlQ5wLW0+H0gQ1cZ1e
-	 6darjb4lCy01w==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54703C98314;
-	Thu, 24 Sep 2026 12:22:16 +0000 (UTC)
-From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
-Date: Thu, 24 Sep 2026 16:22:11 +0400
-Subject: [PATCH] pinctrl: qcom: ipq5018: add required gpios and missing PWM
- functions
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="olCQVasl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 308191F008A4
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:25:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790252721;
+	bh=hufhkWEppg21lSvR71FpDUp4y3tdpeTY9IN5XuG+mBk=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=olCQVaslxgAiBSQ9jOP1F7r97R1FUQSm2ZqUtcIBT+qpfDaKY70mqbZ7nAhpzDRVY
+	 bOM/Knx7V63pe+kPiecaLwOqrcrmgGnIS34q1xYD8AKW5EQAnVLQim5VvNXg6TgKaM
+	 r/2GmReq3/sbkpnCTcVpJEOywtFBpwk17Nvs9hx1fi7aTDVboZ2s+6KlXNlx6bsyX0
+	 QpqwxUl2a9fMbOgMIejcmWgkb946dHTed4PbPLBSKKFgKwdnMvasQRRs7qzti2rkWp
+	 4M6twPJYiVB6zHK112WaHZhGoK2FGoViuqZATBN7AkrbbgBFHemjnT3ZT3XXdgN95i
+	 iHk5WtVygkguw==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f15cfdso1747489e87.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 05:25:21 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzd1vfSHQ0T689d5Pm93YqNQXQIMO/C7nWD7Db1LEvEO1fRh74vz0t9Re6+zpz7OJIEmYH2pK9GOB9NrgSz@vger.kernel.org
+X-Gm-Message-State: AFuF++kp2KuJ0X4s6SWnaQxviCGApXtdcV/EW8vLdxdj1awyfODJlXxB
+	f0A5jSecth1SiLqquQe8oOxFlobmGdd4OnLLdH1hW2LRmCmOiMrEEDm4NdKMqy33394fkb4NOjT
+	nwDey0O2LVZez8NxKT2V7jPg/cNZkvyEBMzCxdTo/Vw==
+X-Received: by 2002:ac2:51ce:0:b0:5b8:d47b:551c with SMTP id
+ 2adb3069b0e04-5b8e11e5d07mr721642e87.63.1790252719801; Thu, 24 Sep 2026
+ 05:25:19 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 24 Sep 2026 05:25:17 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 24 Sep 2026 05:25:17 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260924073222.1000666-2-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-ipq5018-pwm-functions-v1-1-8990a4e85b2f@outlook.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MwQ5FMBBA0V+RWZukM0HwK2IhNZiFqtZ7JOLfN
- ZZ3ce4NUYJKhDa7Ichfo24uBeUZ2GVws6COqYENV6bhAtXvpaEa/bni9HP2SCAiizVMNFalJUj
- WB5n0+r5d/zwvMhTZo2cAAAA=
-X-Change-ID: 20260924-ipq5018-pwm-functions-2ec0211d65c1
-To: Bartosz Golaszewski <brgl@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- George Moussalem <george.moussalem@outlook.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790252534; l=3386;
- i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
- bh=FCX8QU8cgCFtMwn95hhkJ8nA0NaX4isbuKSBdSUSSME=;
- b=ipKmPUjyRRYjYNfcp1cI8uSg5mp3lxE5My9Z10KKCYIONhmvlxiZpbojY3CIljTzXbILtMuYD
- 3ueUc+Wfc1tARYxMEaAob7irKyuJydrQeWWxc+moimbMKFNpHVlQO3m
-X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
- pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
-X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
- with auth_id=364
-X-Original-From: George Moussalem <george.moussalem@outlook.com>
-Reply-To: george.moussalem@outlook.com
+References: <20260924073222.1000666-1-shengchao.guo@oss.qualcomm.com> <20260924073222.1000666-2-shengchao.guo@oss.qualcomm.com>
+Date: Thu, 24 Sep 2026 05:25:17 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Md+PAU5uNQWWp2xJJ3nQoWKP2d3oucOitNVEuFE=Dz=3Q@mail.gmail.com>
+X-Gm-Features: AclHuK_iCa3nokOE49HBPp4DGampBHqAYBs4EahL7FpISxOJPU8BYfqyB_QeiRM
+Message-ID: <CAMRc=Md+PAU5uNQWWp2xJJ3nQoWKP2d3oucOitNVEuFE=Dz=3Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] dt-bindings: interconnect: qcom-bwmon: add nord
+ cpu-bwmon compatible
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Georgi Djakov <djakov@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>, Pushpendra Singh <pussin@qti.qualcomm.com>, 
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Bjorn Andersson <andersson@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-From: George Moussalem <george.moussalem@outlook.com>
+On Thu, 24 Sep 2026 09:32:21 +0200, Shawn Guo
+<shengchao.guo@oss.qualcomm.com> said:
+> From: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+>
+> Document the qcom,nord-cpu-bwmon fallback compatible used by the
+> CPU bandwidth monitors on Nord.
+>
+> Signed-off-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Acked-by: Georgi Djakov <djakov@kernel.org>
+> ---
 
-On multiple Linksys routers, GPIO 1, 30, and 46 are used to drive the
-PWM led on PWM1, PWM3, and PWM0 channels respectively, so let's update
-the pwm# and pingroups accordingly.
-
-Signed-off-by: George Moussalem <george.moussalem@outlook.com>
----
- drivers/pinctrl/qcom/pinctrl-ipq5018.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq5018.c b/drivers/pinctrl/qcom/pinctrl-ipq5018.c
-index 84392fe258c9..74fccdd5146a 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq5018.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq5018.c
-@@ -539,7 +539,7 @@ static const char * const qdss_tracectl_b_groups[] = {
- };
- 
- static const char * const pwm0_groups[] = {
--	"gpio42",
-+	"gpio42", "gpio46",
- };
- 
- static const char * const qdss_cti_trig_out_b0_groups[] = {
-@@ -547,7 +547,7 @@ static const char * const qdss_cti_trig_out_b0_groups[] = {
- };
- 
- static const char * const pwm1_groups[] = {
--	"gpio43",
-+	"gpio43", "gpio1",
- };
- 
- static const char * const qdss_cti_trig_in_b0_groups[] = {
-@@ -563,7 +563,7 @@ static const char * const qdss_cti_trig_out_b1_groups[] = {
- };
- 
- static const char * const pwm3_groups[] = {
--	"gpio45", "gpio13",
-+	"gpio45", "gpio30", "gpio13",
- };
- 
- static const char * const qdss_cti_trig_in_b1_groups[] = {
-@@ -677,7 +677,7 @@ static const struct pinfunction ipq5018_functions[] = {
- 
- static const struct msm_pingroup ipq5018_groups[] = {
- 	PINGROUP(0, atest_char, _, qdss_cti_trig_out_a0, wci_txd, wci_rxd, xfem, _, _, _),
--	PINGROUP(1, atest_char, _, qdss_cti_trig_in_a0, wci_txd, wci_rxd, xfem, _, _, _),
-+	PINGROUP(1, atest_char, pwm1, qdss_cti_trig_in_a0, wci_txd, wci_rxd, xfem, _, _, _),
- 	PINGROUP(2, atest_char, _, qdss_cti_trig_out_a1, wci_txd, wci_rxd, xfem, _, _, _),
- 	PINGROUP(3, atest_char, _, qdss_cti_trig_in_a1, wci_txd, wci_rxd, xfem, _, _, _),
- 	PINGROUP(4, sdc1_data, qspi_data, blsp1_spi1, btss, dbg_out, qdss_traceclk_a, _, burn0, _),
-@@ -706,7 +706,7 @@ static const struct msm_pingroup ipq5018_groups[] = {
- 	PINGROUP(27, audio_txmclk, wsa_swrm, audio_txmclk, blsp2_spi, btss, _, qdss_tracedata_b, _, _),
- 	PINGROUP(28, audio_txbclk, wsa_swrm, blsp0_uart1, btss, qdss_tracedata_b, _, _, _, _),
- 	PINGROUP(29, audio_txfsync, _, blsp0_uart1, _, qdss_tracedata_b, _, _, _, _),
--	PINGROUP(30, audio_txd, led2, led0, _, _, _, _, _, _),
-+	PINGROUP(30, audio_txd, led2, led0, pwm3, _, _, _, _, _),
- 	PINGROUP(31, blsp2_spi0, blsp1_uart1, _, qdss_tracedata_b, eud_gpio, _, _, _, _),
- 	PINGROUP(32, blsp2_spi0, blsp1_uart1, _, qdss_tracedata_b, eud_gpio, _, _, _, _),
- 	PINGROUP(33, blsp2_i2c0, blsp2_spi0, blsp1_uart1, _, qdss_tracedata_b, eud_gpio, _, _, _),
-@@ -722,7 +722,7 @@ static const struct msm_pingroup ipq5018_groups[] = {
- 	PINGROUP(43, pwm1, qdss_cti_trig_in_b0, wci_txd, wci_rxd, xfem, _, _, _, _),
- 	PINGROUP(44, pwm2, qdss_cti_trig_out_b1, wci_txd, wci_rxd, xfem, _, _, _, _),
- 	PINGROUP(45, pwm3, qdss_cti_trig_in_b1, wci_txd, wci_rxd, xfem, _, _, _, _),
--	PINGROUP(46, led0, _, _, _, _, _, _, _, _),
-+	PINGROUP(46, led0, pwm0, _, _, _, _, _, _, _),
- };
- 
- static const struct msm_pinctrl_soc_data ipq5018_pinctrl = {
-
----
-base-commit: 3d7783543c2646af69ad65825e810060494bea21
-change-id: 20260924-ipq5018-pwm-functions-2ec0211d65c1
-
-Best regards,
--- 
-George Moussalem <george.moussalem@outlook.com>
-
-
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
