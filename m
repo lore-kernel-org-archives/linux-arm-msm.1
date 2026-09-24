@@ -1,113 +1,132 @@
-Received: from mail-dy2-f42.google.com (mail-dy2-f42.google.com [74.125.229.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97E9E371D1F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 22:55:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D21C41E6C5;
+	Thu, 24 Sep 2026 23:19:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790290537; cv=none; b=pDic90BFjtjd3lZTG6G+XhUQMd3D/CRoZRjzzmaGSwYsTcGsLV9Yf6W1ExOViGTpoVykuERQhZIt+mZoMV6wQnWCyFa6znHc5l3LhCIlFBs5OOJDVj2BVhfnBFDf43oZtaKBhGbwxGRQYFpblqGdNwWfj3q1x3Syk5HbJ0zRajI=
+	t=1790291973; cv=none; b=pDTHu6CVd5mrRVLrC0uEAIq5cLzsANFc5/5WIED/AxveJzAxsa6rHC5i+P1d07BYXSSno8LAQESJm0i6swtbk49uDSswgzguIVllSK40dDhxuGbXIfVYLjCESCDXptHCs3ANyfgQHoV4gFiGbDLMIFYP8nelDIRmyUavOixkW4c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790290537; c=relaxed/simple;
-	bh=Ot0cDlosSJ7B0rKy6gYVAmZetDbxU6jeRs6fzTiE2ZQ=;
+	s=arc-20240116; t=1790291973; c=relaxed/simple;
+	bh=VUYEEE3HevbpBaBEh98rRlQ6afkhGNAfaMMbUMmhrRU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CBfmIebDWAm5kwzdgc5dLKoniR94l7V3UTOGCHO4lADcBZayufwXdvCUzhMGoisQwX+DTvI6Optgd0tWwbBpLnFhOGnblar6qbqh+FzcBCdwoN0+p9PgMmExsoD1Zj6xWnzGaGi9FWlhn6J5h26rwufRyrbIq8WXNnjLGo6CeYE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=aLacATwX; arc=none smtp.client-ip=74.125.229.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+	 Content-Type:Content-Disposition:In-Reply-To; b=VH8Jcq44S98dbzhcBMJNCmYN0/xmMdE93XJe4VfYmiOq4MYgNed1JS4cTFNkECX0o5NKSHZLYaDKb9gP2WaUQRDfu0XNPCrXjVTYwIZYcov2QSYLecSf2luvlzlZcgaEWUKwMNCs62ZBFOUPrt2qucdWKBKOuCqNO/PX7XBIWgU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hx/LMMZp; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="aLacATwX"
-Received: by mail-dy2-f42.google.com with SMTP id 5a478bee46e88-34182b58c7eso85996eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 15:55:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1790290536; x=1790895336; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=tIp+aiyQTzTnGdKMDtuefZl/ywWVdEoeMd4a05iequo=;
-        b=aLacATwXjKl9i52SEYMYnrs0OGOUMX1JlWUXwVDtvblpkgbAmp2aebKC/OrLKReD7J
-         v2Y5D2cJv/bmpJ3TD8hxFAnY8u4lFWHBBa2Dk3pGqQCFcjAPn0b1RcgXp5uEXEVs0rPA
-         odm0JW94q6NaYcysaS0JZ1rBWEKyeyyDJ81TRthDEMAqilBazfuo6tZI4gfB+didmW0S
-         w/VBkMSMx0+XsgK0IurMa1OyWGNOSXlL3K8icsewIYO0imWqCuicEHdvdQFscoym++HQ
-         h8dkHHGt8HPtqdaltXCGq2nSGVY8x1BorLhAGDbjk+MILFhb4W87MUucY5RxzUwVhziQ
-         2APw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790290536; x=1790895336;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tIp+aiyQTzTnGdKMDtuefZl/ywWVdEoeMd4a05iequo=;
-        b=fSdgBpn9pJj6pdryvzzR9FHUIpvzq2IpAcB7taG9GJiKoQlkinqXUhzG0gCpJq3CwW
-         WX8RDuUQIvptqrtPcJWQOCA7VhE/Dg/240h+oH9Nn+AUbDmdwZnQ6dlI3uoEq96ZRU4y
-         aWKpAONGSbshMTjnsh/ZSPEkeY69avTjLny3er0p7RLA9GsR72GfGVE5+Rzu04PmZuco
-         6H16CtV1YRBbYLrziY8a1FgqzdH5DdeSkSXddcxy9BbfrBxv9VXnYriIVBXJYTM44JkD
-         r+yH6CoGMLlPmJaNbEjMsiHyXP/Hh0yQzzPQ37qtV64A1U3YaBJk3Eon/jjBP+pH1Ll9
-         rFAQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzm3hrkVfo7czMQbldb5AmAqroZahJVU6XPWz2bv2fPiJPx84RGvJk21Fx0ya81CEc3PpidrDLpdjS0henJ@vger.kernel.org
-X-Gm-Message-State: AFuF++l45WpDrfDRNUODAjO1wgDdWon5BB2/i7Zk8m1UNYLQEQiZLqwZ
-	D00DTqptk1x7E7MqStAxlfEJdLd4uJODkYMHr6w4n10vZRLxnSok0pB/C1xPkuRE5wM=
-X-Gm-Gg: AYBFou0bbFxcUuXfE+24YSwEkjekXrIY7WW16YTQoyjXRHe2Q7RSZScEipYKZcheSbu
-	yjkkb1SF5mN+zU4/KhLKogmaY7xucjlzMqLXlCFlZaTV946s5qaM0lCBB1nZxxaCQoHwNbNNEaq
-	sMlLdit7fbc092iDUTRlEzqwKVlrF3zyrdqsvpUKxx3VtNGW2Genk6mRJJLQMUctLMgZN7/lGHJ
-	Fjq8bb9weG203zbsPfO+a3KIKB/2NBlNVTdBpWDWIfr4bP/sx//2Tx8pN/aPtIAocph8qwguuDg
-	GwjiQBdwuo5YBQlXbb/l2xoFdqIXIv028OMa7+0jQR2U+nUrGJCpPKzTnbJZg1ZDs2uNUcK8RjC
-	yllp+WGI3cHt8xVrHbdv1lOFf3jeqiarw/NWY+T9lnKRMOnahGFdTntm+mCrJRcEwTEsc2oI7v3
-	1tSgHvKHvVocv5etq7VjlcXmsG2TRGJH88w5qXsCactzTT
-X-Received: by 2002:a05:7300:7312:b0:33b:dd45:716c with SMTP id 5a478bee46e88-340cc11f887mr2763537eec.13.1790290535581;
-        Thu, 24 Sep 2026 15:55:35 -0700 (PDT)
-Received: from ziepe.ca ([130.41.10.202])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34141d2fe4bsm1639551eec.4.2026.09.24.15.55.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 15:55:35 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1x9sLm-00000000elU-0EsA;
-	Thu, 24 Sep 2026 19:55:34 -0300
-Date: Thu, 24 Sep 2026 19:55:34 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Daniel Mentz <danielmentz@google.com>
-Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	"Joerg Roedel (AMD)" <joro@8bytes.org>,
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
-	Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-Subject: Re: [PATCH v5] iommu/io-pgtable-arm: Add support for contiguous hint
- bit
-Message-ID: <20260924225534.GD16465@ziepe.ca>
-References: <20260921-iommu_contig_hint-v5-1-e7fbd1c3774d@oss.qualcomm.com>
- <CAE2F3rAMAnV9+WNLZtGQX6cHPsZ6wbfRJ1Z3d5mF1+8WHL-uMA@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hx/LMMZp"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB38A1F00893;
+	Thu, 24 Sep 2026 23:19:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790291971;
+	bh=58txGiUYq2o3vDEpNYOXBhgESMZOWm8Yh5OzD7flxWs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Hx/LMMZpDqXxSUq4Ps9iyk/DvO84jO7vrOHI7QGUK0/3u+qPYj1fbPk9HjocHzPHa
+	 GCQC6ftH+HYwS0E14C4lXK/gFIJ0IOrqW/rXyaU/R82RSjd7GeMYDIDC2/0hVPr7y3
+	 Iqoef6j89dA8muGvk1Uxzy/QDWLV03WptSO0Osu0LIcepbOHLuXvEYsT7vGrX7vwZL
+	 gg/L8HvHjoQHYvISgobMg/RwBVEYfFsRFDyn8CAjzpWdKxq2TpbkhgMzPtLEGtODf/
+	 WpdA+ESbaem7uXhuKp+jX1oFk09qjjE6Zj1u8x8A+ujPSJ9xzrP0Z5kqf6F7J9rn1B
+	 coSq3UH3GMp2w==
+Date: Fri, 25 Sep 2026 00:19:27 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Georgi Djakov <djakov@kernel.org>, Evan Green <evgreen@chromium.org>,
+	Yassine Oudjana <y.oudjana@protonmail.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Adam Skladowski <a39.skl@gmail.com>, linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Aishwarya.TCV@arm.com
+Subject: Re: [PATCH 0/6] Assorted fixes for icc-rpm
+Message-ID: <a4439f1d-6c2c-43ee-966c-239eaee148df@sirena.org.uk>
+References: <20260909-topic-icc_rpm_smd_qol-v1-0-6dc5b5e97626@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="viEvHksDB/4cQVa2"
+Content-Disposition: inline
+In-Reply-To: <20260909-topic-icc_rpm_smd_qol-v1-0-6dc5b5e97626@oss.qualcomm.com>
+X-Cookie: A grammarian's life is always in tense.
+
+
+--viEvHksDB/4cQVa2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAE2F3rAMAnV9+WNLZtGQX6cHPsZ6wbfRJ1Z3d5mF1+8WHL-uMA@mail.gmail.com>
 
-On Thu, Sep 24, 2026 at 01:36:12PM -0700, Daniel Mentz wrote:
+On Wed, Sep 09, 2026 at 06:41:53PM +0200, Konrad Dybcio wrote:
+> This series brings multi-port QoS programming and squashes some
+> minor existing issues. No dependencies.
 
-> Interaction with Hardware Dirty Tracking (IO_PGTABLE_QUIRK_ARM_HD)
-> 
-> When Hardware Dirty Tracking (ARM_LPAE_PTE_DBM) is enabled on Stage-1 tables:
->  * In visit_dirty() / arm_lpae_read_and_clear_dirty(), dirty bits are
-> queried and cleared on a page-by-page granularity
-> (iopte_set_writeable_clean(ptep)).
->  * If a single 4KB page within a 64KB CONT group is marked clean while
-> neighboring pages remain marked dirty/writeable, the descriptors in
-> that group will differ in access permissions (AP[2]).
->  * According to Arm ARM D8.3.1, all descriptors in a contiguous block
-> must share identical permissions and attributes. If dirty tracking is
-> active on a domain, consider whether IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT
-> should be set or whether CONT sizes should be suppressed when
-> IO_PGTABLE_QUIRK_ARM_HD is active.
+Something about this series seems to break network boot on db845c, the
+system comes up but the USB and network never appears and eventually the
+board reboots (I guess a watchdog?):
 
-This is right, handling dirty and CONT together is a PITA. You should
-probably make them exclusive for this simplified implementation.
+<6>[    3.127987] Trying to probe devices needed for running init ...
+<4>[    3.131178] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
+<4>[    3.133600] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
+<4>[    3.133765] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
+<4>[    3.145996] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
+<4>[    3.147172] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
+<4>[    3.147292] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Format: Log Type - Time(microsec) - Message - Optional Info
+Log Type: B - Since Boot(Power On Reset),  D - Delta,  S - Statistic
 
-SMMUv3 is the only user of dirty and it will switch to iommupt which
-does all this right.
+bisect log seems to coverge fairly nicely, but only on the merge commit
+unfortunately:
 
-Jason
+git bisect start
+# status: waiting for both good and bad commits
+# good: [93f51579e7df248780214094418f205253383cc5] Linux 7.3-rc4
+git bisect good 93f51579e7df248780214094418f205253383cc5
+# status: waiting for bad commit, 1 good commit known
+# bad: [3d7783543c2646af69ad65825e810060494bea21] Add linux-next specific files for 20260923
+git bisect bad 3d7783543c2646af69ad65825e810060494bea21
+# skip: [f5c66cf1cc3d0412aae3a79defe24f2558fd3796] Merge branch 'main' of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git
+git bisect skip f5c66cf1cc3d0412aae3a79defe24f2558fd3796
+# good: [f5c66cf1cc3d0412aae3a79defe24f2558fd3796] Merge branch 'main' of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git
+git bisect good f5c66cf1cc3d0412aae3a79defe24f2558fd3796
+# good: [25bd2398be78da6f80b39de910027470b29617ae] Merge branch 'for-next' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git
+git bisect good 25bd2398be78da6f80b39de910027470b29617ae
+# good: [294dea4858e9113fd11d22a1b8cbf1e8c0aa7876] Merge branch 'for-next' of https://git.kernel.org/pub/scm/linux/kernel/git/tj/wq.git
+git bisect good 294dea4858e9113fd11d22a1b8cbf1e8c0aa7876
+# bad: [23c47f595e5eb361f426eb541d56fd2cdb96b30f] Merge branch 'staging-next' of https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging.git
+git bisect bad 23c47f595e5eb361f426eb541d56fd2cdb96b30f
+# bad: [ffa9e57e6ed0b967209bf65aad8d834fe2103e1d] Merge branch 'icc-next' of https://git.kernel.org/pub/scm/linux/kernel/git/djakov/icc.git
+git bisect bad ffa9e57e6ed0b967209bf65aad8d834fe2103e1d
+# good: [ade03fa0fb64ac61c6eb1b409baa2c2f710c27d8] Merge branch 'driver-core-next' of https://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core.git
+git bisect good ade03fa0fb64ac61c6eb1b409baa2c2f710c27d8
+# good: [bbed88f72dbbb960080282de3b90ca0933fa6226] usb: dwc2: fix typos in comments
+git bisect good bbed88f72dbbb960080282de3b90ca0933fa6226
+# good: [f9b0809c23123401290e3a144d231aa40fff692e] Merge branch 'char-misc-next' of https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git
+git bisect good f9b0809c23123401290e3a144d231aa40fff692e
+# bad: [07bf225c62c00b9b934b9125e78e2208b961d9c3] Merge branch 'icc-rpm' into icc-next
+git bisect bad 07bf225c62c00b9b934b9125e78e2208b961d9c3
+# good: [041e725a102fbf3a4e484e28abe66575bc515888] Merge branch 'icc-milos' into icc-next
+git bisect good 041e725a102fbf3a4e484e28abe66575bc515888
+# good: [ddbacca26d1db5bd9c477253b0af83b028136a24] interconnect: qcom: icc-rpm: Program SMD RPM auxiliary QoS ports
+git bisect good ddbacca26d1db5bd9c477253b0af83b028136a24
+# good: [cc91c1b99101f2dcd2f624a27bec6f6f557e5421] interconnect: qcom: msm8976: Configure auxiliary GPU QoS port
+git bisect good cc91c1b99101f2dcd2f624a27bec6f6f557e5421
+# good: [24e7422ce31189502d07279c083646aaca513311] interconnect: qcom: use 64-bit SMD RPM bus votes
+git bisect good 24e7422ce31189502d07279c083646aaca513311
+# first bad commit: [07bf225c62c00b9b934b9125e78e2208b961d9c3] Merge branch 'icc-rpm' into icc-next
+
+--viEvHksDB/4cQVa2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq1r/4ACgkQJNaLcl1U
+h9Dh9gf/eGI/sxImujr0Sy/J0ViycI4sDeeZsyoN/+XpufUAbGSqYfgGWcEzcw8N
+Fy4s0lr6rGF5wusBlBbSubkJt/AJL4wbA4WnMMrYJzkt0SPby3CBp+5yYV+dk8NP
+shNeo4vgPVdESbC/vbYab91uhni3HPNWQq5HE7xsXQEUfHXc2m0DuzNUwffJCJ0X
+Ym+jsciOCK9VvC1T0AY+kaHlcPf34PMovWi0+8uweLZFn2u/6jrPUMfuFDsR/Pll
+Anr09x/LsxBjteZ9lpUMyvyFD/uwlZviNDO8EcIviqHf4oiFpnteLleyq/Fsnals
+vdtIk/VJB+lpGOd8yaGqSQs2Whw93w==
+=2+KG
+-----END PGP SIGNATURE-----
+
+--viEvHksDB/4cQVa2--
