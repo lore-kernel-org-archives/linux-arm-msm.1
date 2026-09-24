@@ -1,137 +1,143 @@
-Received: from mail-vs2-f40.google.com (mail-vs2-f40.google.com [74.125.227.40])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D54E92F60CC
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 19:52:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.227.40
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790279585; cv=pass; b=Q5jKywyBhV/+Q2TEW1OWWn96fmNXRZ9E6K0RrQvEyf/a4WwonioNh33LTivlb99i8K4ikcEmUXPhniRMEFg2mD23KgLNEujScZ4kv1+gBWzIZdG6y/gP4hDtUQJhtgJRSOkDnHH5ou3kEmMrtZ0SKmbsWN3X07CSBj32KEsgsdI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790279585; c=relaxed/simple;
-	bh=QoubT9CoXhKpEUyyyBiFnbmENvqSUiUg/q8bBXketCM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uKtqixnyHJVY84djI3jZTiBDQHAWv+EBbSM0x2WqiZDI6QaPARlWIXfGlu6J5gIMmIxo6ePVpZ5RvjGNEO2Qjq1U6vqw80ORj2fST+4pmEoU0+Vk4EEmuMl2Xx5jNqtr6Khkn35tXna+lVZEiZtq/ZnA7qYo7vnEqJOZ1t7s8SM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=qyRdLfhc; arc=pass smtp.client-ip=74.125.227.40
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76F094AB1D1
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 20:00:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790280043; cv=none; b=A7Bd85VxQ5vilEpa4uID53v2DATEGzBm8LcI9ShJrLeTElH5+mSfM1NSyacEDCt4vUR9oSYu8SPljCXx8gnEDL0RhKSA4R4aCJA5uT7KuaiKFfA0h8aqTBk+JN5lJQIMgDVVffge5LPoHfXcP/1iFicQUpJ8MSIdyDmWUhFLWKs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790280043; c=relaxed/simple;
+	bh=800XYnUFGFmLVgaPHONWcqohdi4VWbF2CAwETY0CmUw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tzh0ogBcaOXnKuvrAFrQUZ+jPghhRw3ZIz97OLntSBtGMvox/iupI8zDlGcNNw0f88DvQllbaaZT92HQQWYqbXnTTZUvMrwWedNIz0vI5O/Wpc+DRXltqcKHl0oi62PEDuz4eoWXwoK1RzD3DGf3+skdFtTDM2gQeQaMp94qXyw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ow6egLXd; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="qyRdLfhc"
-Received: by mail-vs2-f40.google.com with SMTP id ada2fe7eead31-7ac5b4011a4so105261137.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:52:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790279574; cv=none;
-        d=google.com; s=arc-20260327;
-        b=gQUI16z2CeRmi/7WgImmNISNt2gCH4pNe0ql5j5DIeaLrerMiRDE/u1MRLAUuS6tll
-         oNrhkPuOkAMbd2JndhINkPsVGTb7qfIQfU5p48U6eWqO/7pPja4xD3UdiVf3wqW5osjZ
-         1AaQ/DsV6jBDY2PcXlRIF6CNcjqnahJnsjlv0SGfCofxMkBM9VWM2VYZl4b0p11Cb1VU
-         CRNILkROyRCZOyb1LayzxOMVcdSpDVnJ9K6XPT64iZl+2I5n5C/M6QaqqKHu8fAOHAiK
-         lNG4AphFxC2ZHxXqraPekIKwYnjbWBS0Q60Q+nRcNtU/Y6SgSBDBc3U/c3glvmYYR7jF
-         Y/QA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=UWTnqz7gHpCXSb1m9qCCSqzvyxAbuc/zoS0Ar8FS4l4=;
-        fh=Ue8O49kHBu3SM4vg8vl98xTMvvVquWhV5R7mw/oZtJ8=;
-        b=JImriS4HGJ4bGVkaG55Rtc60Z60vvKRgRtIzx1QUdKVB974ZwU970dxIO4qhdn9kdL
-         FFaA1ty7EGj+r4A3h+qJNNS7DQJodaBPWgsFyClwDuTeEZADbl7qC1x+nmtwb0xYFZZe
-         ibW5mlUyR/k80z5Vjylw47XB4Lx7AGSdTTtzpFM+py7bX59KPPbW4NpGGbzmr8wY7cmL
-         gHSKso5kJGULARiz36ZySgkheFAH8VTl/oVfc1o6JdDDLsfoeuBfYTer1p2p9pKFtpfh
-         AfzThx4biqmcHN21+vSZWnsDkuoi37/APvQoq53mkydO7SrDQlQ54UtbgUPh/XVSV0+n
-         Ytcg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ow6egLXd"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49d1fb0cf5eso1537935e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:00:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790279574; x=1790884374; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=UWTnqz7gHpCXSb1m9qCCSqzvyxAbuc/zoS0Ar8FS4l4=;
-        b=qyRdLfhcgyRcsb9h50M0Xs2yyGilj46mmpAW1RrzesjpafuKgEpQCxfLZXUess3oyg
-         WYpiruTSta4ce4G6sFP3W7we6wx9kHBbZehNbuOYCPhmjDkqLLSI5pdElXzF6htOVRXl
-         Zo57zg/nuSEZi6nbv1skbB7Z2okM7mV+BXmIc/wr2x1CBNyyob62IYe6G7CI4VwLA7jL
-         8s4iADFbqGOc6et8S3HvhCmH0C8CBU9YU/Tmxm3n2cCoPgOVEWzRDBp9oiPOJzDOJIgg
-         q38RtBoz9gg0hCxWQBnY0MmEgZaeDI3FI0+QMdbMI1Y4N+TMfqg89CgU3Y7PTVcoEVYw
-         MoaA==
+        d=gmail.com; s=20251104; t=1790280040; x=1790884840; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:reply-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Waq+q+bs9tZHLy6mj9/0dS73pghCJzNJ2Bb0y33c6Wk=;
+        b=Ow6egLXdUfKSeLXNcN8inGMHH3j/Nv1eS8h+/efytKaVamRQ6LVbRzuFW7soKKy3Ob
+         mrqn0EFF9pmnf0epea4MS0EuJHFitUwlwgFN4VnkHG6VCEyW9h9BkfLdpPIcmNgXk+Ph
+         GRzHJN6GAgwoV397ugVtvyZuIm1sEX2dWCKER5AzJ7PZrOJ4fjz1ABPUG3k1HVbF3EGC
+         U78OOQc46HLOLbHoAU7+CGYKUNRxbegg83yCO3/K42ufzixIhwwb9yacysP0W8Gf8M8g
+         eajEAlBZN6RN3lvbKiAEgkkNii9A99u20tuIjfBtoVYMUPsSAi4in0VRvJK46Sm72eRK
+         LzKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790279574; x=1790884374;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20260707; t=1790280040; x=1790884840;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:reply-to:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UWTnqz7gHpCXSb1m9qCCSqzvyxAbuc/zoS0Ar8FS4l4=;
-        b=Xx1hPjCq1c+aPndDZNYtjDTWj2tfFDn+VD3S9BYRDc/YcV923Gv8L0QKZt/pthaHCj
-         1zYSAwPFTZiJxhPsMZIkVnhUI61Le31WlUCbE4dYE7ze+a7Jguvynov7fklEnHlLkjvQ
-         JOJz82p11UxiCZZcnGHA56hpG3XoGCd9clnhcJ3Z3MKlBvBMZLgDG+YhWV19r8B+9sIY
-         1JpBB1tV4lXxV9tVUgZDc0Ae7ip+wC20Xuvdw7++WmKK9PFIne0qg56as/gHVT7OcbZm
-         rKgPKiXvXzzaCzWPfDh0FgfAxYzkIzgoY66aDYWE+gfOrDV9jq24UbX9D1fi0CRc+n2Y
-         ydSw==
-X-Forwarded-Encrypted: i=1; AKwUvBxv86Qwh1MAmRdgZG7Dcuvo3EAf2O5X8ZovJJAh2jIQFQds3Ze2pJXJwGrmyS61kc4sk0apvamq4VO4nUn1@vger.kernel.org
-X-Gm-Message-State: AFuF++mPOt3pGpEY07Y25AneF8YekBkuyoQjEURRD44HRiSRoRImFvoF
-	F88nbHkzipmZXHCc7NmBxpzux4ns5Qhu7TBbrP7qi851cIWKQFtz0bj7aFMNN+051RG/pYlBxZl
-	YpdaQvW27bWj3SN9bvcBt0hfHyYQ4PiHXojFDRDcBEA==
-X-Gm-Gg: AYBFou3Kyll6Tk0rEyH4x3CujczyflCweG5dl1+pgvWqXpmPvVI3USRixC5h5L+DLqa
-	Di8Rii3L61AHiz+mCED+X+vszguU/1Twnya/H2zUFeKUayK+voSbdFCkUK9YU1QMq9Q3UmYKVtM
-	b4aD2C1w78W88VVmtDz0GRi2GMvQikxy2F2KjNqWNWgjPTFJQkvwnLm++yoiXWP0bzlHOLJDkj1
-	cfnKtrh8ygPR2OxUi/NJnOooFLUG2sGno3c3Pq3RmfkvoJjv9PddWkiD4z5iR3rSDl5C1z4AcfO
-	6K8D2NMie/hdyMID+oAp9SJibQaMHMt7xkhQU4ZqQo9kZ/UO35ZJeZ6Zgnxc0nJELvw=
-X-Received: by 2002:a05:6102:6a83:b0:7a2:2068:6b67 with SMTP id
- ada2fe7eead31-7af1dddb820mr1606892137.25.1790279573796; Thu, 24 Sep 2026
- 12:52:53 -0700 (PDT)
+        bh=Waq+q+bs9tZHLy6mj9/0dS73pghCJzNJ2Bb0y33c6Wk=;
+        b=kx+gz69aZCgUWqI68yNjphzggpaMyxk3RVD4DePh+NVMflvLGjMryFotYXORyA8GUx
+         LFa8bMLtb8su68LLq6+GiRmMEh3VA4LcNvs7MQuaU64MQ+Y2lOT75SxQHVuO2OeiIWnE
+         wQWGAAkz4dleNoKE/KiWXbOA8c3tWjEuNG1ilOZFVRG7xt9fn4oSJzQEKI0mJ3FGlnax
+         BF/tB9gTDGk+nwCI3YOlInIve52axpFGVqvsnI4M0oD4BLaiv/NVsdtsk6zdvemZ74cj
+         eMgm3q6n1ERWQaLMqqwMxCOcYh7vZaN747JpUs5nNSJ4yDQG1VKFoznJpQE0TZCipLT/
+         tugg==
+X-Forwarded-Encrypted: i=1; AKwUvBwDR45uoMkPpa8m7noTEwRypPBZyRoHrwEM3FQ9QfZkWRoElYD/39xMEqV3yiZdaWSUfZTbYcBU4UUUnhZx@vger.kernel.org
+X-Gm-Message-State: AFuF++kE6r+6h7F/ufAPM6t2dWiwHPQ9428LHMhdh7F5kNlACwzyCRZn
+	dghnZIN0sA5LAewCI56rMBHV5yiqmrYZcCvuuwIjUwltkNUfDT8y/x3T
+X-Gm-Gg: AYBFou2dXc5ZeQXZmiJGsqKaHeDRAxQSURUFiwmuqKtHzVIpZxU+kjM5cjYFGclvcF/
+	k+cIkxPGkwZhLpHN3NMEizJjGAwWYYu5juQDuEbYyk1j4qsOD87U/3jX+pvWRcLlxy49cJ1IgZT
+	lx7ePS1cL7vl5/uS5dVSBJTAeum7u6AzWKnVJjzCsVvj/Xv9T2jkyjPc2amsGC+PrYVFDrwM4dh
+	a7SipD4G55PtTzd/tyacaNjk/r/k0knBEStiYjVFdCAPwRu5MSBysNzUUP9fS4RKVJJ/jxSPFZ2
+	JnRaU5ipW2QanYm738Io533KzIbi09wpyteK11NrEFUUuWtzlr/2QEdjNYTjNjTChIhSGZHGcQY
+	h4pt587CzOGT7KOcjfu3TPmNN330VdBvp0LcwVEK+IduoX6bhz3IOcj0XD67hFd+qYDzQF6/bc+
+	R2SjFjcbpu86Ir69r3yUPent82DK7sBrDJvuftuhMu9pJ+cpo4LyeGCd0ene+AesbWzea0YTiVc
+	HLpSsYcvJ45dhT2aRJLqZW5m547Uksu3GE=
+X-Received: by 2002:a05:600c:6207:b0:49f:bd3c:bc20 with SMTP id 5b1f17b1804b1-49fe66ff476mr67110105e9.27.1790280039460;
+        Thu, 24 Sep 2026 13:00:39 -0700 (PDT)
+Received: from pevik (gw1.ms-free.net. [185.243.124.10])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ff069ceebsm1872715e9.3.2026.09.24.13.00.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 13:00:38 -0700 (PDT)
+Date: Thu, 24 Sep 2026 22:00:35 +0200
+From: Petr Vorel <petr.vorel@gmail.com>
+To: david@ixit.cz
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>, dri-devel@lists.freedesktop.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v2 03/11] drm/panel: s6e3ha8: Really assert reset on the
+ failure
+Message-ID: <20260924200035.GA194087@pevik>
+Reply-To: Petr Vorel <petr.vorel@gmail.com>
+References: <20260924-crosshatch-panel-v2-0-08d5c7bf72fc@ixit.cz>
+ <20260924-crosshatch-panel-v2-3-08d5c7bf72fc@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260924125940.22665-1-lnicoara@thinkoid.org> <54f8af3d-a01c-d1fb-36b4-7eac71174f92@marek.ca>
-In-Reply-To: <54f8af3d-a01c-d1fb-36b4-7eac71174f92@marek.ca>
-From: Liviu Nicoara <lnicoara@thinkoid.org>
-Date: Thu, 24 Sep 2026 15:52:43 -0400
-X-Gm-Features: AclHuK_leAsQLblHRxuOpdcET2NRKKGqkd34mCi1ubZfnnfcE3YhUz2hrAzgGrU
-Message-ID: <CAAhq3a6OV6+Z0p=qVqpUiL-QoP92fYTsf5MBQL-f2oedddW=Dg@mail.gmail.com>
-Subject: Re: [PATCH] ASoC: codecs: lpass-wsa-macro: rewrite the interpolator
- volume after enabling clocks
-To: Jonathan Marek <jonathan@marek.ca>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	Johan Hovold <johan@kernel.org>, linux-sound@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260924-crosshatch-panel-v2-3-08d5c7bf72fc@ixit.cz>
 
-On Thu, Sep 24, 2026 at 3:02=E2=80=AFPM Jonathan Marek <jonathan@marek.ca> =
-wrote:
->
-> this is just papering over the real problem, which would be the regmap
-> cache being out of sync with the HW registers. there's no requirement
-> that the volume register be written after the int/path clock enable
->
-> (fwiw, this problem doesn't reproduce on my setup, where this driver
-> does not autosuspend and the regmap doesn't go into cache-only mode)
->
->
+Hi all,
 
-Thanks for looking. I checked whether the cache and the hardware
-disagree on this machine (v7.2.6, where the macro runtime-suspends after
-3 s). With the macro suspended, I changed the digital volume from 81 to
-69, which updates only the cache.  I then forced a runtime resume, which
-runs regcache_sync(), and read the volume register straight from the
-hardware with the regmap debugfs cache_bypass: it held the new value
-(0xf1).
+LGTM.
+Reviewed-by: Petr Vorel <petr.vorel@gmail.com>
 
-However, on my unpatched driver an idle volume change did not take place
-when playback starts (changed it from 69 to 81 and it played at 69). A
-change done during playback though, takes effect at once. I don't think
-anything writes the register in between.
+Kind regards,
+Petr
 
-The register holds the new value, but the path does not use it until it
-is written with the interpolator clock running. The read/write-back that
-902f497a1ff5 removed did exactly that; Johan kept it deliberately in
-46188db080bd ("Note that the volume registers still need to be written
-after enabling clocks in order for any prior updates to take
-effect"). Unless I am reading it wrong.
+> Due to incorrect implementation 0 == asserted, thus when driver fails it
+> needs to assert reset.
 
-On your setup, does a volume change made with no stream running take
-effect when the next stream starts?  If your changes land while the path
-is active, that could explain why it does not reproduce there.
+> Minimal fix for stable; the polarity convention is corrected properly
+> later in this series.
 
-Thanks again.
+> Fixes: 779679d3c1640 ("drm/panel: Add support for S6E3HA8 panel driver")
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+>  drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+> diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
+> index 078523df48860..835121b322f4a 100644
+> --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
+> +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
+> @@ -179,17 +179,17 @@ static int s6e3ha8_amb577px01_wqhd_prepare(struct drm_panel *panel)
+>  	ret = regulator_bulk_enable(ARRAY_SIZE(s6e3ha8_supplies), priv->supplies);
+>  	if (ret < 0)
+>  		return ret;
+>  	mipi_dsi_msleep(&ctx, 120);
+>  	s6e3ha8_amb577px01_wqhd_reset(priv);
+
+>  	ret = s6e3ha8_amb577px01_wqhd_on(priv);
+>  	if (ret < 0) {
+> -		gpiod_set_value_cansleep(priv->reset_gpio, 1);
+> +		gpiod_set_value_cansleep(priv->reset_gpio, 0);
+>  		goto err;
+>  	}
+
+>  	drm_dsc_pps_payload_pack(&pps, &priv->dsc);
+
+>  	samsung_dsi_test_key_on_lvl1(&ctx);
+>  	mipi_dsi_picture_parameter_set_multi(&ctx, &pps);
+>  	samsung_dsi_test_key_off_lvl1(&ctx);
