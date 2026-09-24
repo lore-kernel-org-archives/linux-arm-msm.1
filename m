@@ -1,262 +1,152 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4382D3CF051
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F00E3B9617
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:57:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790222647; cv=none; b=igD80I2+8M+BR3RVi3jJCD7nNCriugp1yiAG00GNrjFdmVPJIpIGmO4dWi5urmhi6+M0hxS0onGFL/mb+EwiJMOPqx3gxZCYnF48XRshk7EO0WmBm/3M9+TUoJxFxofK/KOD40i1r0NZjVYfMrYnHDy9k6ZnFgTdu7R9kpWqDRE=
+	t=1790225842; cv=none; b=nvcAz1CFKIqggNUcyCcTGGb3nam5AqEeQm11Ru2eLGMYq5OIV69/gzYsF4aqT50es0ahrscRE+HYT0Z9e4NOyiRqHPeBf+JtQ8QV4SzXTwnfrB/0xdrDy99i0tK6Ngr1G/s25nOWyzBWnIDSbqUdmBNnhH3WJrmSpGDfbqFx2cY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790222647; c=relaxed/simple;
-	bh=8GrHNaH3UU6tDPCZUYMa03D4McTC8KMAgnFcmHoTHyI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OdMA0g621oEhMIgwcncpzpcs6LPNWMdND9t+3skgyBoftO/GogdeNiyrq14WSZB40LsuOhPG6GdMTEo4PwEWU6VgtX9vADcJPLj7BgkxqLCnQiv0rrLHRHWdSyKEP2sBnEQZnoGgX6uOeJmfjDvLR7R0trSNf1Ng7daZYlI88lg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iNwH5XSZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ia+YDqTv; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790225842; c=relaxed/simple;
+	bh=Mpco+6yNdH2y+nlCpp5arIK1VEtWdHw1yaMXxUPtWOE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=W04WZXMG3qW0ZP/fEYmo6YOuEbXVikMgz0PUhxe0drGRZyW8F5v/SXZQBhcfAP3yYfYy05bGhHx6rHOexCKc1py5N5k91vlUg4ofYHxu59XdlDO7I/mdkYxV9paTHPT18LQldXcduI151R2vdHe1/uvTu3tf9mRCWXePhDVtcWI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fFiYGhSW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RCSXbeCm; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iNwH5XSZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ia+YDqTv"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O36gVR3822916
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:05 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fFiYGhSW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RCSXbeCm"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O36gRd953521
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:57:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Gs355wJs7yuoPs7Ve/S/Bniq
-	wQWS8mKiXLMYMNNYV+c=; b=iNwH5XSZzssTFN6Vb9kni/Fvq0FkHyPljy0oJPd+
-	NaxGftlHyG3j/5Xhylil/BYCy6Rd+djEmyv0KQbvNN7hLaCmpvgidcti5vgsZKBc
-	xmD/axRXnfGmMLAlCjOale34Hhd4pt+/sKJ3zf5stLLKdU04lqup+jF0IfCkf/wJ
-	1fKyHFa9W8zfcZJsV+VIo15h+dQj8+fqjNMXLu7/+ZvXeIdcTOJMmeSxp6jaxZnE
-	ecm+IV3Nb/+IVIhUFYaM5ZHHRVxP6UKwI1IaMuyjmlhrMNpcjE6SnlSb0Kr2mgSx
-	e6vuhDNacHMpMNiajZE033YLVjMa4Jqt1GzbF/9lzdeEAw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfjv35jk-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ut8DVTQEfpH6qJZsAQxJYFs6sRDVv54/ARUFWr3kTyw=; b=fFiYGhSWRQWymu2b
+	PSG/AjuiAoXlbs0NkxQmWgI4tCo4OFt4fiFScB94yiFXfGxQRm2LWFkZegMNY2XP
+	Dyo1ieW4T3dkXjj3CVgckAAwQih8li0WUZqrVWLHlhyIhFaqtWSTLxUU88kha6+N
+	zrKiaaytH73VlTeEJBLo5yMZcsijNGTbT10S+GinUN/Z1jqLH0DhscPBfT8dQYTS
+	s05FiE/rJggcmh6ri6VTIvS0d7DDYbSLlyfTxanwRDtAF6c7S7zI5Sua0DKwqww3
+	Oy5NrcNd4HFDzyQdDgv5NYjGGnkSqfyS9EAYgbgFeMeVTPmKaFUCQqJ/7LzJgX69
+	Cc4gyQ==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvhsb2nwp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:04:05 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-33baaba6371so1054470eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 21:04:05 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:57:20 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1416f32fe11so2199908c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 21:57:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790222645; x=1790827445; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Gs355wJs7yuoPs7Ve/S/BniqwQWS8mKiXLMYMNNYV+c=;
-        b=ia+YDqTv6/lz7qLjP0TB3665OxJiCQaphKAnj5takBI2d8frxknldk71IVy8KtnDT6
-         DPp9ZVxU1H91S9xdx10KyyhYPWaTRufojQRKt8ROwgv+TkDI8k5TGJCJ3sr9Z+cw7D2y
-         wn1uejtvJMpgmetVGTSi7UJsChPFSnLGx/5x+nM+q6zM1CkespKdnld8oxOPk3Q2Yaw7
-         0eeNfV6U42HyJzj3O3nzgAv0WLJEpxH3HEtFGcu4yKpeLhgnEnA9lriZ+cY6RobaC0ch
-         aqW0LSFfuxUEKYDVyCwmySuNyDUBJDUm0gfYpwtLQN/jCQcoSY1AVEDknZeW5d7Kdyne
-         k4rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790222645; x=1790827445;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1790225839; x=1790830639; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Gs355wJs7yuoPs7Ve/S/BniqwQWS8mKiXLMYMNNYV+c=;
-        b=0nvkeE/D/6YUDdFuF4oaNZ+cwDvUJ0werLlSPZNdH9jp0pg948r08v6nhdCAi1l1jl
-         ooMNJKOyLs0gxFyPWT9HTrw0qws0Gd/T6I43AC0ofaONm3mGSzmnvSo0MN1A/68rLH9r
-         O6EI4fSZsx72NrIO5WfHFwqe+iFiRV4t503aOG4JILXVELWY2wrJRmGKjcs95eopXoFu
-         BP7/QO/V/xdUth6eLidKSY9hmIVa2CdDt0dyI81H762xozzmf1ymyXukZTVQXfudjGj4
-         shbt9G0GrhE3jZ+aYAdatGx3l/wRKt3ZuJOpXDSgUzQ0QJoVpYUQtquIa1Djz4tLjzzY
-         CEXg==
-X-Forwarded-Encrypted: i=1; AKwUvBwTC70NC0Ct2FxbzquP5HSXvv7IP55iZ/KRiNUtXXhrRLOM2zWk86t3iG5syc5WpX9OV/cqvJO5gv7imEFM@vger.kernel.org
-X-Gm-Message-State: AFuF++n6NBtAcbj4QFrOJ1JS5mysgP/42LsL27wYBNw/TYecJfC6I/Yv
-	h9C93ynTV5FXRDGEYlevE/XEL/llMfmlUPkFeN8qan+GTyWVQNiS7W1RaxpSialGREWueGOabC3
-	PIJqmh6fOncQvUdWT0RDR6U7LkqPL9od5RRcHBrk0BSKNiE8aABSXKvPyzvSnKJLNRvTr
-X-Gm-Gg: AYBFou3K/vvCOsiFdjxwXAAOlipxNLr5sxiYPm4FhWdPXzrown08KrbWy+Ky3PD9PA4
-	zSjCSTyACaWZnhyiyuY/LwAuXb3nSOF7qb0zBlXMtNoI3pu0Mw9nawMjVTtgMuw+kvtmHYVRGAG
-	ml1XKskmPLqBiDdIAZlvIPQY+hbQTKqr5pJNKJxR1Y/TwtAeWLM9LAcR+Jh8FuFdJSfuSmd9Qz2
-	nQc9syl3CdPr72L+FuEUxWgyNqW82jBUA8V4V7slgH2OACeiBkCRcf92x3JgPr8E+Dt4i98JF/i
-	1CWAzpSuvzLfUplHpYS2B0pu6kb6mynx7DcZ1WoPv/ErgV/PHKAnR7U3jUvT5nhfyQsasxx4kFt
-	f4kmSA5qdw6MPA3vgEQtz+KYOoYMjlBu741cgi+QRvw==
-X-Received: by 2002:a05:7300:5624:b0:33e:538c:c3f1 with SMTP id 5a478bee46e88-34002edee4fmr963869eec.25.1790222644383;
-        Wed, 23 Sep 2026 21:04:04 -0700 (PDT)
-X-Received: by 2002:a05:7300:5624:b0:33e:538c:c3f1 with SMTP id 5a478bee46e88-34002edee4fmr963851eec.25.1790222643728;
-        Wed, 23 Sep 2026 21:04:03 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e95c7bf6bsm9457507eec.8.2026.09.23.21.04.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 21:04:03 -0700 (PDT)
-Date: Thu, 24 Sep 2026 12:03:58 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Yu Zhang <yu.zhang@oss.qualcomm.com>, linux-gpio@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3] pinctrl: qcom: spmi-gpio: make direction changes
- exclusive
-Message-ID: <arShLkiDKQvrBLLV@QCOM-aGQu4IUr3Y>
-References: <20260924032314.948638-1-shengchao.guo@oss.qualcomm.com>
+        bh=ut8DVTQEfpH6qJZsAQxJYFs6sRDVv54/ARUFWr3kTyw=;
+        b=RCSXbeCmY5kIV6rLkpryqp7Cjw9oPcTE4bs/KKiG7foUoTZF5rPYr88RN2ekDKmxDb
+         SyxTqIV9mQMtvEVnBSSE3697jHqnbzU6Y9jd1Yq7+GlPazbVZXMP0SAhfJLrjoN6ynhU
+         CTXuTiFRcn6/GTs5dE3m/g2La4NWV8PVE7NkP+h2fTV67Ib5WNua7bmy2TVHbHJcjOtv
+         TzaTE4Vsq8ic9UYOMesqPsP/jmy6BAP1EFF+FMYYfjWHkXKqv9gXnYFItkSYvAJSCgbJ
+         1HS/LQmeZpGXw+kaqi/k57u0XufxMMyykHLVttfYSXXNtK08DedUX2EijnbM1uDXKQ83
+         oYrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790225839; x=1790830639;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ut8DVTQEfpH6qJZsAQxJYFs6sRDVv54/ARUFWr3kTyw=;
+        b=K3nAFY/UxRpBBxx2rvi9P7zqcCKwhaFUJHIRV1mcGa3PwIRTJe19MKJORQD3pX+8yW
+         CwHGLMsUIWYVIXvox/0MdcrglkWtqMa+YCJ7lr1GDmon10zZyDw7pX7+QYzDtMk/Ue4/
+         Xd0rdidMfsFw8ViKhK7q0bz5mzM2Ios/vNhdGglnEvoe86wApfrPDCXjPsX/ZkT0dc0+
+         H3Z8pwxh/TWb6TvNDwxPT3fPGkdIdBBIMswAxuu+BdFQF5jAbCEnAXUW3wtERqqR7+J9
+         jgan15K2CjTN+2y2veaolQHePXWC21JyZ78UB8Z925TEJduZoX1W/pjWbREVWVEGgJLm
+         Bn+Q==
+X-Forwarded-Encrypted: i=1; AKwUvBz82wwXsJF32zYiedU13nanN6NsGNbq7Tu+yNpoD0zatqq4wjlfTjUMn3MYnVmxnMGTYmo1EdUx1/IpqmXB@vger.kernel.org
+X-Gm-Message-State: AFuF++nQTgv3gtPuftkLhgDbhHfd8Vjta/uRKWEOsE0QSJ31ktJETIKa
+	03ESvg7BJA2sBSnmUfvpHfihreqQRp8Tj/m85Oabh/NlLkwsX4rxEJETTEfra5GjUnsLSztpAhg
+	diK5ygsJvZKc8jVLa7WtuJaxVBzEVqj2aCgbRW60ajgr4K5Wb4xibcgvP5m2PbJIw09tD
+X-Gm-Gg: AYBFou3ldl6za4uLLC8mDzuGqqIW6PaHvtC+7pAWIjOYzNFK2Ul0neOUdUDfNMxCqVO
+	M611cfSlH7LKe85JZuANVFKr6nlmZcii9yOx31qbN5Z1fch6Y9jQyo/2x7D/5PhOfGZyjcPpdTj
+	Stp8mx0IZPvoOSGkcO6szE+hvRXHSYOnRN6ysETjYd4WfF/HwwDcKrahIHmn2X1dpJi3HZeSYFT
+	Nq8uT/8A/Cat1e3RBmeR7p453/oRkI4klU/vpI5wZcTM+dHGLG9yyQ3e9o3VVJJC1eHh/Zl2CyN
+	C8GPnensj2St7B9Wx2LAwcQiibsDC69KtoBqtMSPISxshdht8QbVIadm2flJCZOYhXJbxjdn6e0
+	BBZ7mNntoVex8sPiJhHLmfuhC1aMn
+X-Received: by 2002:a05:7022:eb47:10b0:144:f480:3541 with SMTP id a92af1059eb24-14503fe8205mr1007944c88.21.1790225838858;
+        Wed, 23 Sep 2026 21:57:18 -0700 (PDT)
+X-Received: by 2002:a05:7022:eb47:10b0:144:f480:3541 with SMTP id a92af1059eb24-14503fe8205mr1007916c88.21.1790225838269;
+        Wed, 23 Sep 2026 21:57:18 -0700 (PDT)
+Received: from [192.168.1.25] ([122.183.173.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f983d73fsm12919002c88.6.2026.09.23.21.57.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2026 21:57:17 -0700 (PDT)
+Message-ID: <92ec9d68-2baf-4b8e-a8ff-74e0d2c7295c@oss.qualcomm.com>
+Date: Thu, 24 Sep 2026 10:27:01 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260924032314.948638-1-shengchao.guo@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAxOCBTYWx0ZWRfX5KgL7M0AH3s+
- IXEuTZRQuAvFZSfYKTQ7lRr9viPqAB8m5VHG93xJPWNb2Lje1lmVenRdA2JHZ2qXSM4BJUBx4L2
- Iz6h2hy7+rWSOzOGQ/GlrF46vPm27gLQB7jByQp/KLzF4nxZoFQ8eH1w5Yup5EupzmORG5EY6nT
- Vun6pO/5+tYrL3jhQ6iRJxyF3RAz1Jwo8N6vXaJ8rV6Ef3mMLMooK0yKSuGDdLV1+aQcT9RvVAk
- z/3ws4WWHhfQFu3w7ZnEOcXCsYWtSsgxgf6CvfrtoW0/5dAN+bk7MRE13qvHQTTb48xWDQsi2V3
- xq0WyTJrCejRVs4//ptGe/4SbFJwfqP4SccFJ98y5D8eyZ2arU2FOMyv84y29D6PKxsWbUliSoZ
- Tyiz00Kj5uBYp7OuOXPHSt3izt3zTJzEyDVkW0oShPTxea8au/BXrVTZqQNAPru/wTILMwrUgFq
- pKeddvwpj7wXlnoWg3w==
-X-Authority-Analysis: v=2.4 cv=aIxlOr9m c=1 sm=1 tr=0 ts=6ab4a135 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=sRq9MN_325cdMohnSFwA:9 a=CjuIK1q_8ugA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-GUID: ERHvQGJLGh7xH6uPC3JwFEF66VHQsZyf
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAxOCBTYWx0ZWRfX6KesSW1WZDjL
- XfE+RD9r/IPiipTD5pqhozSMmQNXC1S1fAiwtHJqtSOPPYvLcpocvX+LX15ZeRf/PimofODJ3eN
- Atm5WigagFBSSbgfPIJLm64zmyRHqRQ=
-X-Proofpoint-ORIG-GUID: ERHvQGJLGh7xH6uPC3JwFEF66VHQsZyf
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 5/8] arm64: dts: qcom: hawi-mtp: enable audio playback
+ and capture
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
+ <20260923084627.748920-6-prasad.kumpatla@oss.qualcomm.com>
+Content-Language: en-US
+From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+In-Reply-To: <20260923084627.748920-6-prasad.kumpatla@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: AWZCXjLz0w_sns0-O13V8oA-jW6Wk_2x
+X-Proofpoint-ORIG-GUID: AWZCXjLz0w_sns0-O13V8oA-jW6Wk_2x
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAyMSBTYWx0ZWRfX1gS20Rs1dToz
+ DTAZS9DH7VEVqF7V5T18GRFPEYv2J5QjqJ6CWNq/9keZoF3HzOHXO4viMr+It7TCNLnKQul7S5H
+ BzB1in9EWxOeXtqDznLS7z4cYEOmLto760uu81iHQgvL/msvQbxuUuaiWtOXDePUu8lY03a8rZe
+ M3OunFQ+KyWAjSe9iTLHb8CnG70OfEufqHpFPWvKVDeLeqw+Tdy77hrDecByzl+wQ4rY2fiiboJ
+ hUDCk/o5Ab5YBfzhY7vn5bf3bFDe8jGUkLIZGqCpp1e4RC/GIL3FZE2RnTxAdWLcZJ/053EtoHN
+ Cy9o7vW15v7U6wXjK/mN8pf1QPnXkKJpbBYfRt97zMrHZMgttdCk1aYyRluxSYAeo8fwfcJdMtJ
+ VCrIzKGxLYirYjMcd0Mv6oSx82H8Wzkj40GmFCyCyfojqsNmwYKDQDYdBFMnHyaXrEP5MjC+aZL
+ L2sJCtej4dre0lzvMKg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAyMSBTYWx0ZWRfX9cXZawqM+Rub
+ 1WesbEpc1OQ5lbBNI3n2Nqi8lvrpKzY6sWpPJc6e1kld4tS/Zks36aW0+s7BpeAJ2axUDD16uil
+ EcvcoZoVBzn68HLHyD1fjQmALoQF2cM=
+X-Authority-Analysis: v=2.4 cv=f7vdl+yM c=1 sm=1 tr=0 ts=6ab4adb0 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=uk8ae9/F1LYL5lfeGCaUoA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=xu3tYevT26_x5ihNIyMA:9 a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-24_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 priorityscore=1501 spamscore=0 phishscore=0
- malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ clxscore=1015 phishscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240018
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240021
 
-On Thu, Sep 24, 2026 at 11:23:14AM +0800, Shawn Guo wrote:
-> pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
-> the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
-> DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
-> buffer enabled.  Neither direction callback clears the opposite buffer:
-> .direction_output() only packs PIN_CONFIG_LEVEL, which sets
-> output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
-> which sets input_enabled.  Requesting either direction on such a pad
-> therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
-> direction.
-> 
-> That silently breaks both directions.  After gpiod_direction_input() the
-> pad keeps driving the line.  And after gpiod_direction_output()
-> pmic_gpio_get_direction() still reports GPIO_LINE_DIRECTION_IN, because it
-> cannot tell plain input from input+output, which makes gpiolib consider
-> the line an input while the driver is driving it.  On a board where
-> several regulator-fixed nodes share one PMIC GPIO the shared GPIO proxy
-> reads that direction back and rejects every consumer after the first:
-> 
->   reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
->   reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
-> 
-> Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
-> direction so that the resulting MODE_CTL is DIGITAL_INPUT or
-> DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
-> once after walking all configs, so this stays a single register write.
-> 
-> Open-drain and open-source outputs are the exception: such a pad only ever
-> drives one rail, so DIGITAL_INPUT_OUTPUT is physically correct for it, and
-> pmic_gpio_get() needs the input buffer to sample the line rather than
-> return the value last written.  Keep it enabled for those pads, and key
-> pmic_gpio_get_direction() off output_enabled so they still read back as
-> outputs.  gpiolib applies PIN_CONFIG_DRIVE_OPEN_DRAIN before calling
-> .direction_output(), so pad->buffer_type is up to date there.
-> 
-> An input must not drive the line whatever the buffer type, so
-> .direction_input() clears output_enabled unconditionally.
-> 
-> Pads that are genuinely bidirectional can still be described that way
-> through pinconf, which is the interface that has always been able to
-> express it; the gpiolib direction callbacks now mean what gpiolib says
-> they mean.
-> 
-> Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
-> Assisted-by: LLM
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
-> Changes for v3:
-> - .direction_output() clears PIN_CONFIG_INPUT_ENABLE only for
->   PMIC_GPIO_OUT_BUF_CMOS pads; open-drain/open-source keep the input
->   buffer so pmic_gpio_get() samples the wire.
-> - pmic_gpio_get_direction() now keys on output_enabled instead of
->   input_enabled - required, or an open-drain output reports IN again and
->   the -EPERM regression returns.
-> - Link to v2: https://lore.kernel.org/all/20260922065908.477523-1-shengchao.guo@oss.qualcomm.com/
-> 
-> Changes for v2:
-> - Drop GPIO shared-proxy patch
-> - Update Fixes tag (Thanks Neil!)
-> - Link to v1: https://lore.kernel.org/all/20260915014447.282121-1-shengchao.guo@oss.qualcomm.com/
-> 
->  drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 35 ++++++++++++++++++------
->  1 file changed, 27 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
-> index f6dc43e27b38..dd9c212da6ee 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
-> @@ -734,29 +734,48 @@ static int pmic_gpio_get_direction(struct gpio_chip *chip, unsigned pin)
->  	    (!pad->input_enabled && !pad->output_enabled))
->  		return -EINVAL;
->  
-> -	/* Make sure the state is aligned on what pmic_gpio_get() returns */
-> -	return pad->input_enabled ? GPIO_LINE_DIRECTION_IN : GPIO_LINE_DIRECTION_OUT;
-> +	/*
-> +	 * An open-drain or open-source pad keeps its input buffer enabled while
-> +	 * driving, so the output buffer is what tells the direction.
-> +	 */
-> +	return pad->output_enabled ? GPIO_LINE_DIRECTION_OUT : GPIO_LINE_DIRECTION_IN;
->  }
->  
->  static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned pin)
->  {
->  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
-> -	unsigned long config;
-> +	unsigned long configs[2];
->  
-> -	config = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
-> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_OUTPUT_ENABLE, 0);
-> +	configs[1] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
->  
-> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
-> +	return pmic_gpio_config_set(state->ctrl, pin, configs,
-> +				    ARRAY_SIZE(configs));
->  }
->  
->  static int pmic_gpio_direction_output(struct gpio_chip *chip,
->  				      unsigned pin, int val)
->  {
->  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
-> -	unsigned long config;
-> +	struct pmic_gpio_pad *pad = state->ctrl->desc->pins[pin].drv_data;
-> +	unsigned long configs[2];
-> +	unsigned int nconfigs = 0;
->  
-> -	config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
-> +	/*
-> +	 * An open-drain or open-source pad only ever drives one rail, so the
-> +	 * line can still be sampled while the pad is an output.  Leave the
-> +	 * input buffer enabled for those, so that pmic_gpio_get() reports what
-> +	 * is on the wire rather than the value last written.  gpiolib applies
-> +	 * PIN_CONFIG_DRIVE_OPEN_DRAIN before calling this, so buffer_type is
-> +	 * already up to date here.
-> +	 */
-> +	if (pad->buffer_type == PMIC_GPIO_OUT_BUF_CMOS)
-> +		configs[nconfigs++] =
-> +			pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 0);
->  
-> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
-> +	configs[nconfigs++] = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
-
-Sashiko has a valid comment on this (again, damn). I will send v4.
-
-Shawn
 
 > +
-> +	return pmic_gpio_config_set(state->ctrl, pin, configs, nconfigs);
->  }
->  
->  static int pmic_gpio_get(struct gpio_chip *chip, unsigned pin)
-> -- 
-> 2.43.0
-> 
+> +	vdd-micb-supply = <&vreg_l10b_1p8>;
+> +	qcom,dmic-sample-rate = <4800000>;
+> +};
+> +
+> +
+> +&q6apmbedai {
+Nit: extra blank line here; please keep a single blank line
+
+Thanks
+Ajay Kumar Nandam
