@@ -1,122 +1,106 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0626A4A68A8
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 15:56:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B60E4A5EA8;
+	Thu, 24 Sep 2026 15:58:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790265380; cv=none; b=MJFQD7m0r6VYbHeKvWjxPAQyKFeuKQnv8isff+Ze4ey9u1L+ebLuYtVgw9HqVtf3SbSIcEEm+yphD0ekA9Wg6HKjF0OvSv5nqhpguT00MSi5bsbUGPCh6uOJM73RYn1yJHscLhupgLiHCykxm9pSezuv+Rr7DgrtAom3pAFZ91E=
+	t=1790265519; cv=none; b=FR//zakYSlNtrTVHKeRlkYi48eUbP6bRT77hHXqLn6ZcFQQ2h0pzG+aK7ThwPsffUCYcprUE+C2LzTsmyGF7bpTvgcR2sU9+w+iVfueS76YAcxjNMIM+oYxSDVMaIZHgrxczloZtE0/8aD7AJwdgrMtl4hkS4xKt12YX06lBqP0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790265380; c=relaxed/simple;
-	bh=vcOjnbGn1ShWJBNTNFJrGQnXqDa49XfATRpJvsoyBjA=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kiLToM3BhclCXbzQ68KRAdYl07TKqhFeZDy2el/VcUHj/q+wm5eOSZeQvEC2zSFp9gjwQVlsQJ1SRpN5US0gaN8BvAkjiLdjTtgng2IE04LNvDUpnk4PINDUfSOi+3vlunI0hcUnlQs/tpH3x6Szy8Jkck0aeact+PLJkNo/loA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZNzAyLUf; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1790265519; c=relaxed/simple;
+	bh=YHn8oI1G1NSH7wZ6dpgnFVvrOA9GqBQ7HoSldOqR6MQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=j/4hcW57eZXuJDT2fN4u02rMNdRiMi2LToe+732A/Z52nqcTVAz93eO/nyHKx54h18Vg49LARlI9f7hsoZO3uWYyhkmiBhCV3Ghrwq8P86C5XtEHsQY28VTgpjTQrL3bxqKNN/LDX3aJEwkOtUQMGoJs5mrrIBVBpNX8gcD8TjM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IuWWk/eh; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZNzAyLUf"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 48094C211F1;
-	Thu, 24 Sep 2026 15:57:02 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id B999060738;
-	Thu, 24 Sep 2026 15:56:14 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 46DCB10329450;
-	Thu, 24 Sep 2026 17:56:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790265373; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=QhjUZkH6Uy6DN6tthN3/8kVaM0dMZm+WmEFrO9JFRZI=;
-	b=ZNzAyLUfSoPkWoZTqf6l3E0tBhL2q8BDOq+Og4GUhIpWMmzx7bs9+YPDni1u7MmNze1HgN
-	z23wVm91nNUDIhUXrthZOsvk/q5fjHwPiDd4h+WtrB2ici++xiE2cY9WfuWsYQlveKRDNy
-	r9gbAoBtXbWyqixkGfIuaZ1KlEOm6HHraAjgat5QaqepzyIfoO83zuJIXrVK5zROB2JGra
-	ABxo7STNk7WMclI8HuY9tAIQgb+ehgqjboimQ2/FSoMdsiCWUYOiTYjPK9FwmgxipFJSWO
-	vepfIs+hT/n0iXGF7x1X6BaeNKRhtmkZjtlMonjEv05l3XXIbqbi1/4HSYGPyQ==
-Date: Thu, 24 Sep 2026 17:56:03 +0200
-From: Herve Codina <herve.codina@bootlin.com>
-To: Alex Elder <elder@riscstar.com>
-Cc: Bjorn Helgaas <helgaas@kernel.org>, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, arnd@arndb.de, gregkh@linuxfoundation.org,
- bhelgaas@google.com, andersson@kernel.org, konradybcio@kernel.org,
- abelvesa@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, Andrea della Porta <andrea.porta@suse.com>,
- Lizhi Hou <lizhi.hou@amd.com>
-Subject: Re: [PATCH v4 2/3] misc: tc9564: introduce base PCI driver
-Message-ID: <20260924175603.2a20e2b1@bootlin.com>
-In-Reply-To: <e9bd7954-1cec-4ffb-a5b2-2389469b0c05@riscstar.com>
-References: <20260918173003.GA1166280@bhelgaas>
-	<e9bd7954-1cec-4ffb-a5b2-2389469b0c05@riscstar.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IuWWk/eh"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D30C51F000FF;
+	Thu, 24 Sep 2026 15:58:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790265517;
+	bh=ntCPRNmhHP0xEpdWDgj6ZKP31wN/fxbhz+6bG3Gb24k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=IuWWk/ehkegX/ttgIRCu0DLztu+mvo32r6PgEGd9HryTT44P3aBcJxQPfSvfVY1XA
+	 O4QRPNnGtQNEDb5nlxrbDmMFN240bWTyPmrY+xYGQ7+SPGRuKhqk2hgInQPV0aqMsM
+	 S7NKZk+t7prFPLguTH2qrdOTYx+xxwPPbaTwFu9TpnQnjI/D2/cPpIBTci0jtORbPw
+	 B70lWjPeN9I2drRegbZS9zEjSRnduMjfHz07hOCcirqwayUBsPh/ilDwDeS9LqVv7C
+	 MzREzUOg0b06utFzXw50TGVLFw38rqFXOs46EIQdVfy9MmZzwPuvDbTE/mDiW1Tgzo
+	 vpG8LaduoGTeQ==
+Date: Thu, 24 Sep 2026 17:58:17 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
+Cc: Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
+	"David S . Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
+	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
+	Chris Lew <christopher.lew@oss.qualcomm.com>, Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+	Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/4] net: qrtr: Assign unique node id for MHI endpoints
+Message-ID: <ayyrvpxnxonroz6kafehepplhltnzgopgt6pn5fnpdmft6rbxm@a5sps2dnso47>
+References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
+ <20260921-qrtr-multi-ep-v2-2-27dd80d841a0@oss.qualcomm.com>
+ <a16d507e-17f7-4074-8817-4b8da3a71c3b@oss.qualcomm.com>
+ <8ed398ba-2ebe-488a-a213-8ca7ecbe861d@app.fastmail.com>
+ <CANyhwx0hZJC6xXaSC2g4GFgUOp5n_KN4tdXksW+s8Mk_+7xEAA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+In-Reply-To: <CANyhwx0hZJC6xXaSC2g4GFgUOp5n_KN4tdXksW+s8Mk_+7xEAA@mail.gmail.com>
 
-Hi Alex, Bjorn,
+On Wed, Sep 23, 2026 at 04:03:38PM +0100, Youssef Samir wrote:
+> On Tue, Sep 22, 2026 at 6:24 PM Juha-Matti Tilli
+> <juha-matti.tilli@iki.fi> wrote:
+> >
+> > On Tue, Sep 22, 2026, at 20:14, Youssef Samir wrote:
+> > > On 9/21/2026 12:23 PM, Manivannan Sadhasivam via B4 Relay wrote:
+> > > > +
+> > > > +/* The offset is chosen carefully to not collide with the node ids allocated by
+> > > > + * the remote nodes. All the remote nodes use node ids in range 0 to 0xffff.
+> > > This assumption does not hold up for QRTR V1 headers where the node ids are 32bit.
+> > > QAIC devices use BHI_SERIALNUM as the node ID, and it is definitely larger than
+> > > 0xFFFF.> + */
+> >
+> > Does that mean we have to go back to my endpoint id patchset?  It's an
+> > option, but a quite complex one.
+> I'm not sure. Last time I tested the endpoint ID series was its v5 and it was
+> functionally acceptable, and other than switching to sendmsg(2) instead of
+> send(2) and sendto(2), it did not require much changing on the user-space
+> side. But as you mentioned, it was/is complex compared to this one.
+> >
+> > However, what is the likelihood that serial number would clash with
+> > these host node id values? Maybe just adjusting the comment could be
+> > acceptable.
+> The chance of collision is slim, but still not impossible.
 
-On Fri, 18 Sep 2026 12:49:53 -0500
-Alex Elder <elder@riscstar.com> wrote:
+When you mean collision, do you mean node id collision due to bridged nodes?
+Because, even if the directly connected QAIC devices use 32bit node ids, the
+collision won't affect the functionality.
 
-> On 9/18/26 12:30 PM, Bjorn Helgaas wrote:
-> > [+cc Andrea, Herve, Lizhi for of_pci_make_dev_node() quirks]
-> > 
-> > On Fri, Sep 18, 2026 at 10:26:57AM -0500, Alex Elder wrote:  
-> >> The Toshiba TC9564 is small and highly-specialized SoC that implements
-> >> a PCIe switch as well as an Ethernet AVB/TSN bridge.  In addition to
-> >> these, the SoC implements other functions, including a reset and clock
-> >> controller, an address translation unit, and a few other devices.  PCIe
-> >> BARs provide access to registers that manage these IP blocks, and the
-> >> SoC is modeled using a PCI endpoint bus in devicetree.  This allows the
-> >> IP blocks to be bound to platform drivers that do MMIO via the PCI BARs.
-> >>
-> >> Create a new PCI driver under drivers/misc that binds with the embedded
-> >> PCI endpoint functions within the TC9564 SoC.  Because these functions
-> >> will use devicetree pci-ep-bus to provide access to other IP blocks
-> >> within the TC9564 chip, the main purpose of this driver is to do basic
-> >> PCI initialization, then call of_platform_default_populate() to scan for
-> >> the any endpoint bus children, and probe all devices defined therein.
-> >>
-> >> Because we're using pci-ep-bus, we need to use the PCI quirks mechanism
-> >> to have of_pci_make_dev_node() be called for each endpoint device in
-> >> pci_bus_add_device() (via pci_fixup_device(pci_fixup_final, dev)).
-> >>
-> >> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-> >> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-> >> Signed-off-by: Alex Elder <elder@riscstar.com>  
-> > 
-> > Acked-by: Bjorn Helgaas <bhelgaas@google.com>	# quirks.c
-> > 
-> > Not an issue for this patch, but I'm not sure the quirk mechanism is
-> > the best mechanism for doing this.  It's not working around a device
-> > defect like most quirks do.  
+Also, there is a collision with SMD and TUN endpoints, but that's out of scope
+for this series.
+
+> I think a solution would be to treat qrtr_host_node_id(idx) as the
+> preferred id, not
+> the one that will actually be assigned to the node. And before
+> assigning the nid,
+> we check it against the radix tree, and if it exists, we try to probe
+> the next available
+> id (so an IDA). This will also require exposing the nid to the user in
+> sysfs (i.e. /sys/bus/mhi/devices/mhix/mhix_IPCR/nid).
 > 
-> I pretty much agree with you.  I think I mentioned this before
-> (though it might have been in a private conversation) that it
-> is an intentional act to call of_pci_make_dev_node() for an
-> endpoint (and not just a bridge).  And that's different from
-> a hardware quirk.  You only need to do it if there's a pci-ep-bus
-> sub-node on the endpoint.  (I'd have to verify this on the other
-> users of this approach to be 100% sure though.)
 
-I agree, a quirk is not the best way to trig the of_pci_make_dev_node()
-call. An allow-list seems better.
+I guess the QAIC userspace tooling needs the allocated node id. This can be
+added.
 
-Alex, on LAN966x, the pci-ep-bus is not present. The OF node must be
-created (call to of_pci_make_dev_node()) and the lan966x_pci driver
-will apply an overlay on this OF node created at run-time.
+- Mani
 
-The pci-ep-bus is described in the OF overlay [1].
-
-[1] https://elixir.bootlin.com/linux/v7.3-rc3/source/drivers/misc/lan966x_pci.dtso#L50
-
-Best regards,
-Hervé
+-- 
+மணிவண்ணன் சதாசிவம்
