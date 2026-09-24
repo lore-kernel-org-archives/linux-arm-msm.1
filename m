@@ -1,156 +1,236 @@
-Received: from mail-ua2-f12.google.com (mail-ua2-f12.google.com [74.125.226.204])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C5EA4BFE96
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 19:02:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.226.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 100C14195DC
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 19:23:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790276545; cv=none; b=krsOJMWh39TQhtCw8OSE1NeSpP07DMLQ0JsF+iJpJuxF3Vis9M3jvv//I9E10AZ4XDxEa6APCDBrLbTHitJ2E74ysjgOcpNGQFd6x5OVsfYiy2WjyZXyZWeJuLlONSrfX6evAUAmVIHDrc5uyUOx6DTh1WmKWmRc0bsr2/1fmMU=
+	t=1790277787; cv=none; b=KqnqM4Iw8QMfnnhf5U6plExEaxWB0GLau3D9veALzS6MUFsk4eBAOALYybmSqWR7xsmb3Td3S1tXNLpRlahy+0HLjaC9Ah8RgL7axH33W7wuAfqWpuLytVcrM1XW9pV/8k5X5zKhG08yj6WvbAw3QcLIyUXjDHLqjaKryfFlG20=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790276545; c=relaxed/simple;
-	bh=I9rjMdylwRXMbZI50fmpd3PtoFlN+qirBSdlSQ+FEgg=;
-	h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:
-	 In-Reply-To:Content-Type; b=qgQ2OaB+9NXajb0k9Tu8Tz+IS9UT7OuLBk9m5iL1kbSHWi898CFFsFXIkCcBeVuuVRGxTOzNSo2wouJZIIpg09PrackXksnYj6Op/UeD3IOV+1cR2CIBUB4BLJmgw1HP8Q8om2N+r4qUI1YwNiWstc5Hty/U9Pjctf67yPy0RDg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=marek.ca; spf=pass smtp.mailfrom=marek.ca; dkim=pass (2048-bit key) header.d=marek.ca header.i=@marek.ca header.b=ARqz6Czv; arc=none smtp.client-ip=74.125.226.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=marek.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=marek.ca
+	s=arc-20240116; t=1790277787; c=relaxed/simple;
+	bh=qrXIRZFdJBniWCU8VJvuUKRMxq4CJ7LwdmKsYq3i5G4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qszx6zSBgwMlL2b90Te+uscCKjoHqzHxSudSzSmcstsYuS7IGZJV8NWaJnJehKJZxqoorZ6b51n2ii+t61XteQ1m4kfaCouUIqnd+O6Sy/DfnCIJnohxwsBmophl5Or6eF+bAoTJxSy/AONtvcg1JL5rXJQbVCOsDvOF4u7KAzc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=G78L1xx3; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=N95dKTlT; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=marek.ca header.i=@marek.ca header.b="ARqz6Czv"
-Received: by mail-ua2-f12.google.com with SMTP id a1e0cc1a2514c-97e7c7b4ed2so123736241.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:02:17 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="G78L1xx3";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="N95dKTlT"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790277784;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ut0W8EJcCupEWBHDQXwLOk3ZkvjvxuM4fNB2BlLxpCg=;
+	b=G78L1xx3rfydoQBG4QvE60ezaA/K8S0xYYM5RVz1AqbrEfXNTfLT8l13ANiljmdqI7R2O7
+	WdC0yIzXJ0fOIG1u9UXdFJZgRx2nuOxlnKT2Q/pfSatD1dTKMh+ObSmKZL/xR/GzwQmfk+
+	4QdDasC53/2bVvakDSwarLIT5P0nKpM=
+Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
+ [74.125.224.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-96-wBKTK9A4P-qDDHb799Hu-w-1; Thu, 24 Sep 2026 15:23:02 -0400
+X-MC-Unique: wBKTK9A4P-qDDHb799Hu-w-1
+X-Mimecast-MFC-AGG-ID: wBKTK9A4P-qDDHb799Hu-w_1790277782
+Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-66f8a19cf9cso296438d50.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:23:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=marek.ca; s=google; t=1790276536; x=1790881336; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-language:content-type:in-reply-to
-         :mime-version:user-agent:date:message-id:from:references:cc:to
-         :subject:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FWQWTkpRc4mjMwr+vW7xfwNCAyBMZNGtR2Jki2MQhHc=;
-        b=ARqz6CzvBJHEdx5GkyMPwb5HgkwVuHhCUBU2C4uKpjxxodRk9ko6nIfHGSoXOzCRe3
-         3MWjHj9npWLFN02JRMwOSymEe9gPdj5FvEX8mSu/Swo2h5hnlK21UPtKlo/Fvo+SN8SN
-         U1cYlmfV7ULFXk38xNY3Mkmo0OwcRG7XDseg9qPiOg2+Cl4Iz86tB245zwvYBL49e+Dr
-         BdN874tZ2dadCH98HCAjHI7qwAriRqXUT+8ZNmS+NqlutvdvLfBpMLCynOtjrMzZz4+M
-         Ky/mxdiIvrX3rFXZwlWC5qrJkeadad3vjtj6uLFQ7MaS/uhNUUbXh5wK/0kNioOb/myG
-         +OxQ==
+        d=redhat.com; s=google; t=1790277782; x=1790882582; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:content-type
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=ut0W8EJcCupEWBHDQXwLOk3ZkvjvxuM4fNB2BlLxpCg=;
+        b=N95dKTlTwt4kKn+VRlK4TwqkQewnnzX0KN7QPYd2gw3V8cevdRK+p7NKmi3p/4/FZx
+         VSSPSoCJ8ZsLIgA5U690GDE0Gdd4okUdZIf7/BhJo336SPTyDjbqhzam8+qK8sA3Wz/l
+         2lDfGYsc7x62RmVSA24Xo/IXDCzYJ8OPLu+MIM+/YVD8n1h3ajv7d1pSzEsFviFIZgmi
+         W5bdu3raO8RNsryX5maPPmI4RuNhsdbyAEpMsVJLToedCTbkkU615az9TD5EUa7ngrbZ
+         4h4QPfCUFDTdUlnIrF1NMx5540z/K20wWW5mT3HWqo7jYHA5skzXdCV6AB1VOIaerNUW
+         Mw1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790276536; x=1790881336;
-        h=content-transfer-encoding:content-language:content-type:in-reply-to
-         :mime-version:user-agent:date:message-id:from:references:cc:to
-         :subject:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FWQWTkpRc4mjMwr+vW7xfwNCAyBMZNGtR2Jki2MQhHc=;
-        b=IutWYdWOc9PhWGtsn5YX91M2EC1sr61iR02x2xspj3FNkS0H8qqORAFhlfSeJqMhCI
-         pR/+s0iakbfIbJ6Akx/+ThCPB2Bhd7MPChr7deJnuxT/8LZRMT+fXNo7lW4lIrwB9ZPY
-         8mrRZdEcHnzxBN7S1ItHEnjaxTc8Jfbuyz8586MXpHBzmLjkGYVa1bHwL/jyhg3OeRZi
-         +WdbNFrsHE38U/6rG75nMzcG/FD7flKSh4SwukG1JT3QRptNYC8gQqJilne+pzQJQsJZ
-         z9SGg7FrZL/OvKoA1+vUsKLkZKWff40lNI10EUCVFk0m8pbhoSeLcKbNzYO5s3iv8F9d
-         fAFQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwpB4r4V243dXWsFrMk0BwvXUHAWNB8yq7h4Jdu49Il6esY5Zs3kZtVid/9qfSGQPSIZL6LbLU1z4dxPHqH@vger.kernel.org
-X-Gm-Message-State: AFuF++n5JJ8Bd6BA5uUZIGAW4COpl/vUSFhapqKOYQeanLIHIUYJdjJG
-	Ob5gt6++oK/11EhyRa4ims3pnCC1pVRtTIbKyIeXZyVVMyLQ8LDepJRWtgKBsAPDCpU=
-X-Gm-Gg: AYBFou37FfiCP8s5uzgGMocKuV6SzSTh8RsGEFKFx4d+XNafTxyL9YEeoh3Ah/MBZ/2
-	OH2dQ6QfrI1oihJHCpNEd59DUB0ESJdxY0rKFsaalD5QIJJr5ee1fZ9enc4jYovp9G7ueTELaAD
-	XdIy2TW0A7fuZtUAVAwBwryC33aff+PAy6hVkqgxuCINtkQmlPKNVOwYoftYWH/4EzuEQuFBDUO
-	NQiIlD1pHlSy075mfv3y/cT5sbBkRTlICaKMIwm76f/zp7adxdYHo3t31JTviBT9NOfZt1KAhKN
-	NFw4lRHiiJJx+GMDf/2sDRKB4TQAHtsO/RlOEn1tJANqfGBb3BSE/MjuiIEAI92G/RlLPGRPkBH
-	jQ+h6LxRqEp7DwzuPqOk3p4Ypi06cvFCNqYxq9e2hjwZeNqY8PoopGA73UoZIx7rDGPE1ls3HbK
-	mI4iIabmyJIc+gpe4i2xdn+keXFFTsnI7RyxpPKNJvG7SgXoqyJ8Uh127oPjsPNC3m5DD0i1qMj
-	o2YVidDYkLwOEQQDTOlhPvCQQZiIL4E0C5ltnWz5Kzq
-X-Received: by 2002:a05:6102:441e:b0:7a6:a24e:811f with SMTP id ada2fe7eead31-7af1c79966cmr1958653137.7.1790276535690;
-        Thu, 24 Sep 2026 12:02:15 -0700 (PDT)
-Received: from [192.168.0.189] (modemcable125.110-19-135.mc.videotron.ca. [135.19.110.125])
-        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-9851e8c4f2csm5199683241.10.2026.09.24.12.02.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Sep 2026 12:02:15 -0700 (PDT)
-Subject: Re: [PATCH] ASoC: codecs: lpass-wsa-macro: rewrite the interpolator
- volume after enabling clocks
-To: Liviu Nicoara <lnicoara@thinkoid.org>,
- Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>
-Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Johan Hovold <johan@kernel.org>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260924125940.22665-1-lnicoara@thinkoid.org>
-From: Jonathan Marek <jonathan@marek.ca>
-Message-ID: <54f8af3d-a01c-d1fb-36b4-7eac71174f92@marek.ca>
-Date: Thu, 24 Sep 2026 14:57:01 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+        d=1e100.net; s=20260707; t=1790277782; x=1790882582;
+        h=user-agent:in-reply-to:content-disposition:content-type
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ut0W8EJcCupEWBHDQXwLOk3ZkvjvxuM4fNB2BlLxpCg=;
+        b=Xk5aiBQemOrlRk3EOCXBT9hIFvhO/Qnf4b47JFR80yGxbgXI1lUke4XLqCzyaoEF1+
+         cJRzUzAndmpZZbtTbHetBveplNHm/hPN6I/3kEpoLehhV1fnNhgd08qykwhn+su4AaAe
+         fxhkW+9mvwaK0jkSSiHwPSX3lY4aFko5+oJpGMKusrg11yADGKr3NVUbRmaoJW9amb4R
+         cBN82PMaOc/SWjaq9o19JWq3GimQ05H8h5V0shMlfK5Cmnnh7C2bgImw0Cw7L748u553
+         qNyaXvJNsTSTGfl7IkcxtslMWc46mm3rwH5C58kS6j6uGtGyPL1Uerb2TV3B9OFESUIK
+         2i1A==
+X-Forwarded-Encrypted: i=1; AKwUvBwMmhpz14bDsUowxx+oFhDVJxSO7WKky8WCPq55JC3v6XKyG7RC+UFl4DX0OHmGLHar3yKf8+6B4HWDpTmg@vger.kernel.org
+X-Gm-Message-State: AFuF++mqmhlh/l4/pSoj+MvRQ0GaA9qyu7uu3baLJ10Xv2XJ6BG4BRos
+	kcYTkoYlq8oEgCQzOdHcyFFNM8gq0CXl3XTlIk9K/yYhNh+pGrOtzbxuSYwmEmFRg9Q6lsKVAUU
+	A1mYjSs8ETeI1AUtdODRir0Ax1rzkD3KfYyk7X6w/WSEo/b+Q2bQ5fflW673fBwK7xkA=
+X-Gm-Gg: AYBFou2FKbPqjIPGiBT74mVLqXxouVr7dVm9nXrUukO8ErekbW0upI9TwUWbaCAd3gL
+	qJJQKQTpCR6nHDpMoGvRiMd2UPvh8be2Qe1nd8Est8ZRD1R50tjz24N0O4gfjEQ8DqmMeeVVSeF
+	9v+q8PL4h9LS62gy3scWt6FYRGOwPc9DZ+WHTgA9zb8dw6XUXoIZ8kJKLekJtYGWKRxU/fbUkOb
+	Zk1UweFD8kzJrXVWXGjIyRqzYnSntZDRz6RLlQ2R7FAT0WCeni0xThEF86qGw9lWia2qs2KCC0r
+	6BW5WTwHnNlTzsr12OdBrnnOEi0TEZifxxxW+5su6AJQIghOUniw++A3+lF5IoVqj4ergFGeEQ=
+	=
+X-Received: by 2002:a05:690e:bc2:b0:66f:c1bc:87db with SMTP id 956f58d0204a3-672ed2b90a5mr1641057d50.52.1790277781840;
+        Thu, 24 Sep 2026 12:23:01 -0700 (PDT)
+X-Received: by 2002:a05:690e:bc2:b0:66f:c1bc:87db with SMTP id 956f58d0204a3-672ed2b90a5mr1641049d50.52.1790277781356;
+        Thu, 24 Sep 2026 12:23:01 -0700 (PDT)
+Received: from redhat.com ([2600:382:8501:4f43:e566:7498:c7c8:a7ec])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6740ef31df6sm26520d50.13.2026.09.24.12.22.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 12:23:00 -0700 (PDT)
+Date: Thu, 24 Sep 2026 15:22:57 -0400
+From: Brian Masney <bmasney@redhat.com>
+To: Alex Elder <elder@riscstar.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+	lee@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+	abelvesa@kernel.org, kees@kernel.org, gustavoars@kernel.org,
+	p.zabel@pengutronix.de, daniel@riscstar.com,
+	mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
+	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+	mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
+ driver
+Message-ID: <arV4kYRFHM0rW8Km@redhat.com>
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-4-elder@riscstar.com>
+ <arG238GS8bMB6DkW@redhat.com>
+ <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20260924125940.22665-1-lnicoara@thinkoid.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
+User-Agent: Mutt/2.4.0 (2026-06-19)
 
-this is just papering over the real problem, which would be the regmap 
-cache being out of sync with the HW registers. there's no requirement 
-that the volume register be written after the int/path clock enable
+Hi Alex,
 
-(fwiw, this problem doesn't reproduce on my setup, where this driver 
-does not autosuspend and the regmap doesn't go into cache-only mode)
+On Tue, Sep 22, 2026 at 08:33:37AM -0500, Alex Elder wrote:
+> On 9/21/26 5:59 PM, Brian Masney wrote:
+> > On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
+> > > Define a new platform driver that manages clock and reset signals
+> > > within the TC9564 SoC.  There are 21 clocks, which can only be
+> > > enabled and disabled, as well as 13 reset signals.
+> > > 
+> > > Two registers manage the state of the clocks and two others manage
+> > > the state of the resets.  The registers are accessed via a regmap
+> > > supplied by a system controller, which coordinates access to a
+> > > region of memory that will be shared with another driver.
+> > > 
+> > > Access to the memory region is provided via a BAR on a PCIe endpoint
+> > > function embedded in the TC9564 SoC.  For that reason, neither the
+> > > PCIe clock nor PCIe reset can be manipulated by this driver (they
+> > > are assumed always on and deasserted, respectively).
+> > > 
+> > > Similarly, control is not available for the I2C clock and reset,
+> > > because the PCIe subsystem on the TC9564 relies on I2C
+> > > 
+> > > Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+> > > Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+> > > Signed-off-by: Alex Elder <elder@riscstar.com>
+> > > ---
+> > >   MAINTAINERS              |   1 +
+> > >   drivers/clk/Kconfig      |  11 ++
+> > >   drivers/clk/Makefile     |   1 +
+> > >   drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
+> > >   4 files changed, 379 insertions(+)
+> > >   create mode 100644 drivers/clk/clk-tc9564.c
+> > > 
+> > > diff --git a/MAINTAINERS b/MAINTAINERS
+> > > index 66d0e7e65adcb..39346a5cd9a7f 100644
+> > > --- a/MAINTAINERS
+> > > +++ b/MAINTAINERS
+> > > @@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
+> > >   M:	Daniel Thompson <danielt@kernel.org>
+> > >   S:	Maintained
+> > >   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
+> > > +F:	drivers/clk/clk-tc9564.c
+> > >   F:	include/dt-bindings/clock/toshiba,tc9564.h
+> > >   TOSHIBA TC9564 PCI DRIVER
+> > > diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> > > index f9592fd9ec2bb..50efa10d48450 100644
+> > > --- a/drivers/clk/Kconfig
+> > > +++ b/drivers/clk/Kconfig
+> > > @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
+> > >   	  clock. These multi-function devices have two (S2MPS14) or three
+> > >   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+> > > +config COMMON_CLK_TC9564
+> > > +	tristate "Toshiba TC9564 clock support"
+> > > +	depends on TC9564_PCI
+> > 
+> > select RESET_CONTROLLER
+> 
+> Thank you.  The reset and clock drivers were previously separate
+> and the reset only became available if RESET_CONTROLLER was enabled.
+> Combining them means I need this.  I will add it.
+> 
+> I also need to select MFD_SYSCON to get syscon_node_to_regmap()
+> (or perhaps something similar, depending on the answers to my
+> questions about the proper way to define the syscon).
+> > 
+> > > +	default m
+> > 
+> > default n
+> 
+> This depends on TC9564_PCI, and if TC9564_PCI is enabled I would
+> like this to (automatically) be available (at least as a module).
+> 
+> Why do you recommend "n"?
 
-On 9/24/26 8:59 AM, Liviu Nicoara wrote:
-> Commit 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless
-> gain read/write sequence") removed the read and write of the digital
-> volume register in wsa_macro_enable_interpolator(), on the grounds that
-> writing back the value just read does nothing. The comment above it,
-> "apply gain after int clk is enabled", was left in place.
+There is no existing 'default m' or 'default y' in the toplevel clk Kconfig.
+How about this instead?
+
+    depends on TC9564_PCI || COMPILE_TEST
+    default TC9564_PCI
+
+> > > +	help
+> > > +	  This enables support for the clock and reset controller embedded
+> > > +	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
+> > > +	  clock and reset lines is controlled by MMIO to a region managed
+> > > +	  by a system controller; this ensures access to the region is
+> > > +	  coordinated between this and other drivers.
+> > 
+> > Rather than 'other drivers', outline specifically which other drivers.
 > 
-> On the Dell XPS 13 9345 (X1E80100, four WSA8845 amplifiers on two WSA
-> macros) the write does something: a volume change made while the path
-> is idle does not take effect when playback starts. Lowering the digital
-> volume from 81 to 63 with nothing playing, then playing a test tone,
-> gave about the same level as before the change. With the rewrite
-> restored, lowering it from 81 to 69 while idle played audibly quieter,
-> and restoring 81 while idle brought the level back. Changes made during
-> playback take effect with or without the rewrite.
+> I was intentionally vague at this point because the one other driver
+> has not yet gone out for upstream review for this iteration of the
+> code.  But I do agree with you, so I'll change this to say:
 > 
-> This is the behaviour described in commit 46188db080bd ("ASoC: codecs:
-> lpass-wsa-macro: fix compander volume hack"): "the volume registers
-> still need to be written after enabling clocks in order for any prior
-> updates to take effect." The value read comes from the register cache,
-> so the write pushes the last requested volume to the hardware once its
-> clock runs.
+>    ... between this and the XGMAC (stmmac) driver.
 > 
-> Restore the rewrite in the interpolator's POST_PMU event only. The mix
-> path event removed later in the same series is not brought back.
+> Then it will be correct without modification once that driver goes
+> out for review.  Is that better, or do you suggest something else?
+
+Yes that sounds good.
+
+> > > +static const struct tc9564_clock_init tc9564_clock_init[] = {
+> > > +	TC9564_CLOCK_INIT0(MCU, 0),
+> > > +	TC9564_CLOCK_INIT0(INTC, 4),
+> > > +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
+> > > +	/* TC9564_CLOCK_INIT0(I2C, 12), */
+> > 
+> > A comment would be useful here to outline why these are commented out.
+> > Is the PCIE one comment out because of what's outlined in the commit
+> > message?
 > 
-> Fixes: 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless gain read/write sequence")
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
-> ---
+> Yes, that is why.  We are downstream of PCIe, and PCIe in this
+> case depends on I2C.  So we don't want to mess with these two
+> clocks or their reset counterparts.
 > 
-> Notes:
->      Tested on v7.2.6 on the machine above, by listening. This function is
->      unchanged between v7.2 and for-next; the driver's clocks moved to the
->      PM clock framework in cd054a6e272c after v7.2, which was not tested
->      here. Build-tested on broonie/for-next (arm64 defconfig).
+> I only provide this for the benefit of documentation.  If someone
+> happens to see bit 9 set in this register, it means the PCIe clock
+> is enabled.
 > 
->   sound/soc/codecs/lpass-wsa-macro.c | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/sound/soc/codecs/lpass-wsa-macro.c b/sound/soc/codecs/lpass-wsa-macro.c
-> index 4242366601a5..899c8bee4645 100644
-> --- a/sound/soc/codecs/lpass-wsa-macro.c
-> +++ b/sound/soc/codecs/lpass-wsa-macro.c
-> @@ -1849,6 +1849,7 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
->   					 int event)
->   {
->   	struct snd_soc_component *component = snd_soc_dapm_to_component(w->dapm);
-> +	unsigned int gain;
->   	u16 gain_reg;
->   	u16 reg;
->   	struct wsa_macro *wsa = snd_soc_component_get_drvdata(component);
-> @@ -1890,6 +1891,8 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
->   					CDC_WSA_RX_PGA_HALF_DB_MASK,
->   					CDC_WSA_RX_PGA_HALF_DB_ENABLE);
->   		}
-> +		gain = snd_soc_component_read(component, gain_reg);
-> +		snd_soc_component_write(component, gain_reg, gain);
->   		wsa_macro_config_ear_spkr_gain(component, wsa,
->   						event, gain_reg);
->   		break;
-> 
+> Anyway, others have suggested simply removing these comments.
+> So I'll do what you suggest, but I'm interested to know whether
+> you would favor just deleting them instead.
+
+I also think to delete these comments. Would it make sense to include
+the comment in just include/dt-bindings/clock/toshiba,tc9564.h ?
+
+Brian
+
