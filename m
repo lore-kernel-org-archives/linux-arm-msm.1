@@ -1,190 +1,263 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f41.google.com (mail-pj2-f41.google.com [74.125.227.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340A4380FC5
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 14:01:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8238376BC1
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 14:06:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.227.169
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790258520; cv=pass; b=AJzeUXP1akGZBiaqOdtusZA1T+kXvo9bdhxaPxXePSvp9V+bo+N8yEDzd7rmztDhm7G1ISjVKbpKWAQczjNexYFgSYxSbNlEBx8Sge7+z2vlKS70pfJb2SXhI+xLhttkXmhAhJJDv7l9BSdF9s4jfyeY5+ZU7aSRpVLXIanzIUo=
+	t=1790258811; cv=pass; b=HOAIDfIt7qrfr+HaaE+NcQ1juYkO9lAJPjtHVqwvaDliz8+0/XlEuyhcpI8yhzy8BWS461CsoP0y5kjzvL0OTPO6LD5ijSwVpCVo0q3299UMQnyTXvDna/2ijaBIREXdMLwj99DyQUClXZFwQnsAPh3z5pfvBqKqHKbLuRIgoGg=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790258520; c=relaxed/simple;
-	bh=tdJyJTnBDHp4ZjjlmGWLTbMPtruRmMD9xWxDu8H5VaI=;
+	s=arc-20240116; t=1790258811; c=relaxed/simple;
+	bh=U48nhcTIb1O9uC38fXHDr78q+i4puswp1WXXMZmRwIo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZbJrFB7WGyJT7869bM+0GSdlY0Btoz9+RBwPmJB/NVcckf2rBTcIbrphgc5BEBgdqKoFX5F7sIzHi3I49bFJ1XtwsGVz95IeSPt9Kvw2a/+cRoWQbqR5cNRhA/5MeasaofeC0Z19xb7XHhFUEYDOBZ1VHryPTzvhGoC7JXMhkNI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BlgJG9IT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cqPf2Ee5; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 To:Cc:Content-Type; b=eUNcFj6FXt8wLfdYKcEspicj3hXNkV/wIK1hbz2rbntgEfKFZ2Pyvd8t8hz43TRGcN8GXqdNKB4Q/CyvSy2L2wXW0NJGES4I1+yarLrOJV6EhcWBGBK2p9ZyeeXv2RY1r8gkDtObot2QXGeRlTic2+xBlaSd/JV9OSUdKeqant8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bQH6OqI1; arc=pass smtp.client-ip=74.125.227.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BlgJG9IT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cqPf2Ee5"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68OC4nZY2002257
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 14:01:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=Y+5dXl8x9fmntpeFxM19iIhvgt0k/LL7dD1+C5hddi8=; b=Bl
-	gJG9ITL1KLa26czRDWH5FL6HTQZiUh4Aayd7GRzDH2YRHWbWFm1y19lHI2EbF023
-	PKSHxZgkQPGZ57OxZ1T2cL7yOcpxC6JnLtFYMvh6/ls22YixeU2YCkFaYt+J7OHt
-	qyhMk+nOQMnDctXoHdlUT62K/omXSESpdyysD7EglnJND1UBo3YfbZ5MJXq5tq/3
-	ec7Q2Q7dP+7rIvVXBFG9wHD6NQnDxGrFfqfPAf9cSzMhPMgAL13rZomlnjTtklEV
-	YlRQXY198PYemdgOzz0CQZyy26LPjGK/RjQfb0wflZ5jYjkB+xdgfRjXyPJLhyio
-	kCBh18+ANf6JOpdp9uvg==
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvmrrbvss-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 14:01:57 +0000 (GMT)
-Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-6bfcf73dcd5so2722891eaf.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:01:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790258517; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bQH6OqI1"
+Received: by mail-pj2-f41.google.com with SMTP id 98e67ed59e1d1-3a0aa8aea53so39248a91.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:06:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790258809; cv=none;
         d=google.com; s=arc-20260327;
-        b=b2yhbF5Hywi80XnYopjCZXKrur3QDPzqSkZmFuGWy+WIZUyZp1d1vZUPLD+VKcZqSe
-         GJ1mWA72FzxztABXf+C10xnxE4SQ7rDISGVLTEKdCV0LOskIpCtUFfA7ECkF2APCYGiN
-         CKunbX1lMfd+xbVNqbiOm9z71xCNqijyti2N0QPmhLPXi8HJlnS++jzXdv/ZL6qVzx0i
-         K/9Q2duYkE4R75x0Q1x9SLYSf8daEii5Jz/bH5p6OLpYYjqa/+V/cqgjhHLTRs6TMUmq
-         GS/04tb0xXDxOD0to41/9ITGyYZuIUSx7vSX5tCXJN7+zhETaFPJUM29QaNYITVfZ6GF
-         QsGg==
+        b=OFFTJf9LTsQO5uQpvHbSg10rQGyxe20waI0qqFEVb+dDeD+hKvgrsWBZgbL5/vpSje
+         v+XJZpdRpgatOJJlriS/y4PGfnGs3W946hTXSqmNDtQpmhl+nnXNTLZE62vdQOdg6Y9U
+         ZaPZz+P79sO4YmHt17A6s7V9rAzxo/E5Y0EtnlH1gMlKXnQQ7v2am2UFtYu8vmV/g6UD
+         y3JFH5TsCRsacEWODJtipzATYRCECDTbhV7LY8BNTfDjgqGnt5ob77ufvnyM3qirBSFH
+         9sSPOeLQVMtb8fl4UO4IyuWG0Sd615F02md5XoOe0A+B16bllAJzXULHoq4A4O3hFrUF
+         hWtQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=Y+5dXl8x9fmntpeFxM19iIhvgt0k/LL7dD1+C5hddi8=;
-        fh=MKPN1jTlxRCunKwD1W6YMl8cwjc2Gnh+whQg0Tv5Czw=;
-        b=e4AkhppqdlMXTjtrDorVSguIzImJ7N8LaOlthiq7vZpSa67PJELZr/73Vu+YiXAQfZ
-         LJUjk3IxI3Yp/GLPIPbiktQhmRGltgiI52QIBOpOyGPhBhxW66RZEg+cdGMElepTFVB5
-         omRAvppyt+YaF/rMzHRLKSuCIK47TKBgYMM43a/LXkw5l5NlQFN7Cll+BM/Di0Pge8KB
-         ILWg1NFM9l6xsIjRNEajrUGcpAsvsTSCA6WyVdLpxkxJojg4PCq/LNU1rrZsQk7wxh3q
-         nfhqDskdIdCVolDqOS2WwZ4Hq1LpaL4vyjFs2ih0GleIG6bZ9n327KX4FXyRIxypFRFX
-         dcIw==;
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=JcTZ3ffRCO1EwcSB6GSlnipqVfq4JrFIZdul9BjBkvw=;
+        fh=EOlIiE7sSzoBVapWDA9YAk4/UDyWoTM+vmsjLZ09588=;
+        b=F2lfS9FLRdiryxboWN0PX+sMr+kL4+sMJxSEiZw6/V8poTt5xHcX1SaZy7H5YmOFFO
+         GOrjvpQJz//Qpl6pk0Eajm/6mU1ENi7N+rXbkoRY/eRYeDNNH8ZjkBNNlb9EnkvNyZ01
+         MNDsAvON6atXD+TIFKCE15CkWbbXBJa2alCOUmkMyY7o/6qLShDTwFIi8P86xjNFeseW
+         HYAHOVKU4ul2q9NXIat51Mt1KV0FsXnlLqAhlUw/00AzJJLQQZUVHqZ1/n1nPx3tc7pq
+         m5m3YI/oz+f6mbfo37eluuXFw63KH1ZM4sL1JWAh5uJxoTeCyCKzs/kpXcCs5ZKAVjT5
+         9FQw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790258517; x=1790863317; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790258809; x=1790863609; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Y+5dXl8x9fmntpeFxM19iIhvgt0k/LL7dD1+C5hddi8=;
-        b=cqPf2Ee5+CLD9+TxVVClg7Awkyd4kUp2oDi49jWs86Xq2JV3U4qKjTmbIwovazPs1t
-         2OfNaAP0pD0dwTmfoSu879bXaT97NQspOBKilL1BCVsPO5zIe8Oa4+ERuH8ONxFHxDwv
-         OUcPBoi+vgLkbD5I16Bgpx6Ky54HsndDZJ1lmKX+MiRtCBobhzKHQhZf+3RDCpAx5DP+
-         fjflEtFC35Cjk2iHt3ijqsWMHnPOpVqnIvYtRtLb30HAXMK/nTgyF/Em4cpf0TTci+zJ
-         /D2qDXJBX9pJ4q+vJgWv1iCwRq/1GilMyRp/vkp4onNGfehEpvC/0rvZqYYf1UJLvKiN
-         HjJg==
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=JcTZ3ffRCO1EwcSB6GSlnipqVfq4JrFIZdul9BjBkvw=;
+        b=bQH6OqI1uKKUqJodAQL4+Vo1bm3i/t+uSx0+Rx+0Yy61zEDmpRq+zehoNaDbsAsan0
+         LPL55fckjP6sPsKS/vgUMEmuLw0Rl5dZQ2udDOvniqbaacyU4xFTj4oTXe3tN4BwUGca
+         4/Jn7OMLFB49xiOXAUyfVrvBodvhQg3fb3KlXGuyO5Fdz5WIulGjW1HYN5UZL3BCESDT
+         ms7Efa95WMXSiBOFR3adawbCQ3sI9pb1jTxEjADz1CNcB0TtpOAKD/wdRl9UWcr/XySQ
+         f+lJ9HALMq05zN2fWZv0fPO9QV4pp5MXsQdAvb4+nRzzXxJ1rZC0/DVPlb+B7MvaPE0J
+         JqcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790258517; x=1790863317;
+        d=1e100.net; s=20260707; t=1790258809; x=1790863609;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Y+5dXl8x9fmntpeFxM19iIhvgt0k/LL7dD1+C5hddi8=;
-        b=GyUuRxNSaBRMYvvSu41Du8OhvPoAbR2pMqqBUWusTLZHMu1TVIO/+aDNF+H5jsDWd2
-         635xb/qUfNUFnQAi03DPCJN/Rtmb4X26qkyygMUUCyb7TYZHn5gOW1XIE08CGNCVGdDC
-         xU9y+gEVBGuoDINlDr/KRPCIMoCD1RawCFa8dItmaDE5CGu6raOo8O2WE0Oe/bsd65gA
-         Va41mu2s1/H6YxB4Z6wciqVqgYQ6N3czqqyb4n2eBqKEc8NSL57urWAAh7aIUqVN8fqo
-         WmAm2Ezz2QBuhJ8ir8KwbKW4r77eR0pemehlDpjEiaBa/hq/40RfI+40Px6l/7ethuzI
-         RoXA==
-X-Forwarded-Encrypted: i=1; AKwUvBx/p3Sj4Fl+z2ao1btkeLLi5h3aJ1nFRXcNbPhoJ27TjlsheEnFQnhopSVfaMK/GR0nwi4IBkYyunrqJ5zy@vger.kernel.org
-X-Gm-Message-State: AFuF++n4K568NtdZ0d9DpQ/1VK+SxJbnptoDOPr3OXudl3uAHnNLLCVl
-	wn9NX5uBu5S9BtjN6NPWPFZL5w80AIOzbh/5LaOOIu/PCIaWrFOY14Dbzc5SaAI8vq1W40AHDXF
-	vVejdNhaihkmzsPtXkEjbqKmQgCa4uWAjuZD6NlPi+NbySNeTBtxLB9S/NtXvkuDzghsF6CgFQU
-	gS5WuGR3tmfdrBcsLGYxVFCJkPCIN04JO/g9PmpheJsh0=
-X-Gm-Gg: AYBFou163dcpLmU2cJIOeOYDMco2rg8Bh1vkJWxiJ9AE/wGs4QisUPB18RoigCcKERg
-	oeA+a9zBnDb6FPXTghghsKkdwci4mR8AQaC/V1lECpSO7YH/0cw2LFRZw+4zDyTpsDrhgPpHoOw
-	9kBMhq3j4jGA8D84MY5Hd74tMxpDSGjfq4rxuKp0tIqj1tvMBx54vngY7c
-X-Received: by 2002:a05:6820:180a:b0:6cd:3fec:de81 with SMTP id 006d021491bc7-6d441e6d077mr2471541eaf.87.1790258516922;
-        Thu, 24 Sep 2026 07:01:56 -0700 (PDT)
-X-Received: by 2002:a05:6820:180a:b0:6cd:3fec:de81 with SMTP id
- 006d021491bc7-6d441e6d077mr2471495eaf.87.1790258516334; Thu, 24 Sep 2026
- 07:01:56 -0700 (PDT)
+        bh=JcTZ3ffRCO1EwcSB6GSlnipqVfq4JrFIZdul9BjBkvw=;
+        b=uciEN9f30PKS7e1iyujCxsXtC0vl0+0LOfSLeA1rCKclRcFpL9K8a3/segFTpPs/Bk
+         nEf0/F/h+1gV1z59/eFu30WZilNy3B2kuGziyUP3mE/HSTmBSPwc2e8jtbN44DqLk5ay
+         SsXanVvLVDxVNPkH1+qTrxEmLzFF0PBL+nGQn3qyLAUxlnj/TwlodBM246TqLN/SZ3NP
+         iQe7Q0zvl13eFaQK94ULRKSNWbfidErT2qdGvG9fNwGy/IYhhJ3FtUizwno3XWjUG/Mt
+         yL7hTSgggVFKJRl0np8Oj4rzry/3noaU+by7pR5k0WHw8ERFZ9ErugOW6VMGWfhu1z1f
+         uY+A==
+X-Forwarded-Encrypted: i=1; AKwUvBzyDV6WB7h5RXlBCJiG0icFlSpTYDQVrO4m2VgMHHiZwbHIASmzzDOfeMrMQHd2G7IPLhLeNOz0O/oN5dFv@vger.kernel.org
+X-Gm-Message-State: AFuF++nbl4abmnKIleOARkQhQgU8k89/u7qGW4ZCnF6WZQQ872rmsahc
+	1iIQuz4QrMrs0azEqFcjWEid14XdfHeQgdWfQ4e5e3xDGEtyE8Jd65d4pdIBAYY5PAoSaEzhcI+
+	DYudx7sdlTpD9JE3wf7lLO234SyhI9t8=
+X-Gm-Gg: AYBFou08XFbFv3AgF6N2aHP4ccBkaHEnjGxN0lbp2IiUji/4+ozULpKYQ4NfaLFKD5o
+	121Ceg9Ob3lk8GfvpDMFK/HQTNyfCTkjtiDGYV5Z4PvZLCNcOSZKftZFgm+0nzoHsMqJ1JrCEhS
+	A8eJhvmz5LR0GRvunp1Ed/NyrFclJAkA1qZHY5pkbu8PSweKXBLinENX3SsXw+wOCnE9puq4XT/
+	QBdJgtLqumja6OeGcN1GmY9nEaMvbfZMz/jAsDkgpT6t0arGgJ67cYoaEAhSckK8QOk4aXidt5+
+	Oh23oVwzjLp0AvakCz5gY/jWSj/tXgpPOsDDzElsxqc+ws6XMkHwshiSvSaCK6PVjwL7OHHreEJ
+	0X31/kUlOacgf
+X-Received: by 2002:a17:90b:3c06:b0:39d:f130:ba54 with SMTP id
+ 98e67ed59e1d1-3a09837f56dmr4405287a91.0.1790258809042; Thu, 24 Sep 2026
+ 07:06:49 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260923074256.9357-1-liujianfeng1994@gmail.com>
- <20260923074256.9357-2-liujianfeng1994@gmail.com> <fe3a4297-f300-451d-9763-0b3016706111@amd.com>
-In-Reply-To: <fe3a4297-f300-451d-9763-0b3016706111@amd.com>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Thu, 24 Sep 2026 07:01:44 -0700
-X-Gm-Features: AclHuK8PCKMtH5RJ_KGTSVVtHj2pbRynhRsLbl6BgMXL5O4KYIi_8g5-kxz9ApI
-Message-ID: <CACSVV01NZROH9U5Qjd1TSDu+BPyyPLC9pFByqSfrxXrPJV+wZQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 1/2] dma-buf: keep DMABUF_DEBUG off by default
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: Jianfeng Liu <liujianfeng1994@gmail.com>, dri-devel@lists.freedesktop.org,
-        linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, Jessica Zhang <jesszhan0024@gmail.com>,
-        Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org,
-        Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>,
-        freedreno@lists.freedesktop.org,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Karl Mehltretter <kmehltretter@gmail.com>
+References: <20260923-hawi-gpu-v1-0-0c3c79a1a470@oss.qualcomm.com>
+ <CACu1E7GndBnSj75ZVqic9NxdSakZJL3ZJOuz7D+RbVWA4DUqTQ@mail.gmail.com> <692ff69a-330e-40db-bffc-a53987fa4bce@oss.qualcomm.com>
+In-Reply-To: <692ff69a-330e-40db-bffc-a53987fa4bce@oss.qualcomm.com>
+From: Connor Abbott <cwabbott0@gmail.com>
+Date: Thu, 24 Sep 2026 10:06:37 -0400
+X-Gm-Features: AclHuK_K3H4oMYks1o-_9RZ45Z4Udp7YxXFegQ_4Y9VAlkof6K_6cES08nQszX4
+Message-ID: <CACu1E7FuCVhu_0gKmVVeBL=e4=zghvXJT=mZVfg8UjUzRrv3Yw@mail.gmail.com>
+Subject: Re: [PATCH 00/15] drm/msm: Support for Hawi & Maili GPU
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Jordan Crouse <jordan@cosmicpenguin.net>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA1NyBTYWx0ZWRfXznWTYhY6LnV0
- jfEWuHdHkQ62cwjF2DV8MfM8RKF4Eb4TrM1nbGO54bPdo02qsMKWmcVsn4pT9+9TibGM75iiU/8
- 7Bgd6HZqihsoXk9eE5pfl3TR6lBQaFmAd7tFNvRZq/c/1/AtMxNIsydA/KcEj4v0vCUh3AnPe7V
- 0/K4XJ4gSSxAb4WQMiVnXzDZLGpuJavSSs6Rm3QY7yaap5f2M6Hck9pZfoJbmDqPXU3a40pq8P7
- KqFIixp+AgOyHscxWqYtfvS6WkkvVrd/3Z+UJ0juIohP/wv8GobC45dKf+PZ61+Fix1Zu/g+itD
- YhykHBrIviG3IMGQ4vVJaHBe4aqcMAX7ONGprp/gRxyautGd72V+NP084kCCAXE2EDCy/ADX27D
- FJ3OZd9uyzwarQsb/HFL1Kk6u7n3fAaw093fTsAWLvaMbe8nMSRITvwedTvcDwYHgHnUJBx5+/2
- h4TBelHbBnswv2sfWTQ==
-X-Authority-Analysis: v=2.4 cv=TYwDJhQh c=1 sm=1 tr=0 ts=6ab52d55 cx=c_pps
- a=lkkFf9KBb43tY3aOjL++dA==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=_EeEMxcBAAAA:8 a=zd2uoN0lAAAA:8 a=pGLkceISAAAA:8
- a=KFY_g6KMpv9GzmgDfC4A:9 a=QEXdDO2ut3YA:10 a=ejeoeQMvoq0A:10
- a=czjwGCTIUPoA:10 a=k4UEASGLJojhI9HsvVT1:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA1NyBTYWx0ZWRfX5lQtiuQTQhFJ
- xadg2NbDEUiY185iZa/N9yaTGt6+Z10bA/VOWISrZl34nCBAiPHY2yN34qyhwX7SGSNsO30B7dB
- 9D3MkKdLfQu+IqOQh/xCqG1DnCLzbcI=
-X-Proofpoint-GUID: EybjZUsjGvlbhacMLsq1LCpGj1hxnMpI
-X-Proofpoint-ORIG-GUID: EybjZUsjGvlbhacMLsq1LCpGj1hxnMpI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-24_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 phishscore=0 spamscore=0 lowpriorityscore=0
- bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240057
 
-On Wed, Sep 23, 2026 at 1:03=E2=80=AFAM Christian K=C3=B6nig
-<christian.koenig@amd.com> wrote:
+On Thu, Sep 24, 2026 at 9:41=E2=80=AFAM Akhil P Oommen <akhilpo@oss.qualcom=
+m.com> wrote:
 >
-> On 9/23/26 09:42, Jianfeng Liu wrote:
-> > [Sie erhalten nicht h=C3=A4ufig E-Mails von liujianfeng1994@gmail.com. =
-Weitere Informationen, warum dies wichtig ist, finden Sie unter https://aka=
-.ms/LearnAboutSenderIdentification ]
-> >
-> > Commit 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on
-> > DEBUG_KERNEL kernels") fixed a dangling reference in the DMABUF_DEBUG
-> > default, which had the side effect of enabling the option (and with it
-> > the page-stripping sg_table wrapper handed to importers) on every
-> > kernel with DEBUG_KERNEL=3Dy - i.e. virtually every distro kernel.
-> >
-> > drm/msm is broken by this: it maps imported dma-bufs into the GPU's
-> > own pagetables with iommu_map_sgtable(), which needs the struct page
-> > of the attachment sg_table, and it fills the GEM object's page array
-> > through drm_prime_sg_to_page_array().  With the debug wrapper in
-> > place both silently produce garbage (the wrapper zeroes sg->length,
 >
-> Interesting point, we should probably change that.
+>
+> On 9/24/2026 12:54 AM, Connor Abbott wrote:
+> > On Wed, Sep 23, 2026 at 6:26=E2=80=AFAM Akhil P Oommen <akhilpo@oss.qua=
+lcomm.com> wrote:
+> >>
+> >> Adreno 850 is the next generation of A8x GPU present in Hawi SoC. It s=
+hares
+> >> the ADRENO_8XX_GEN2 family and slice architecture with A840, but has m=
+any
+> >> architectural improvements. There is a new block Matrix core (MALU) wh=
+ich
+> >> helps to accelerate certain compute workloads. Also, there is a new Bx=
+ rail
+> >> that powes a part of the GPU IP. GMU is now powered by a dedicated GDS=
+C
+> >> powered by MxG rail.
+> >
+> > If there is a dedicated rail for GMU, then
+> > VK_KHR_calibrated_timestamps is likely broken, assuming that the GMU
+> > AO counter is on this rail. The AO offset logic in kgsl probably needs
+> > to be ported here. Has this been tested?
+>
+> Not sure how GMU core's power domain affect the AO timer. Could you pleas=
+e point
+> me to the AO offset related change in KGSL? I will check.
 
-So the assessment of what is going wrong looks pretty wrong..  VM_BIND
-should never lead to iommu_map_sgtable() (which is never used for gpu
-per-process pgtables), for example.. but is used for mapping for
-scanout.  And pages are never used for mapping in either path.
+Previously the GMU AO counter was part of CX, which is kept on by
+other things in the system, so it continues to tick even if the GPU is
+suspended. However kgsl does not rely on that, and recalibrates the
+GMU AO timer whenever booting the GMU [1], which we currently don't
+do. I don't know if the timer is still part of CX, but if not, then
+this part of kgsl could become load-bearing in a way it wasn't before.
+It seems possible that it isn't part of CX anymore, given your
+description that GMU and other things have been moved to new
+GPU-specific power domains.
 
-However there are a few places where sg->length is used (in iommu code
-and msm).. AFAICT dma_buf_wrap_sg_table() zeroing out sg->length is
-what the actual problem here is, rather than any use of struct page.
+Connor
 
-(And yeah, I should get rid of use of drm_prime_sg_to_page_array()..
-but that cleanup that I haven't found time for shouldn't be the
-problem here.)
+[1] https://git.codelinaro.org/clo/la/platform/vendor/qcom/opensource/graph=
+ics-kernel/-/blob/gfx-kernel.lnx.16.0.r14-rel/adreno_gen8.c?ref_type=3Dhead=
+s#L917
 
-BR,
--R
+>
+> -Akhil.
+> >
+> > Connor
+> >
+> >>
+> >> Maili GPU (Adreno 845) is very similar to A850, except that it doesn't
+> >> have the MALU block.
+> >>
+> >> We will post the Mesa support and linux-firmware support soon. MALU su=
+pport
+> >> will be brought in separately along with its support in Mesa.
+> >>
+> >> As there is no display support available for Hawi/Maili, validated off=
+screen
+> >> testcases that render basic triangles, glmark2-offscreen etc.
+> >>
+> >> The driver/dt-binding patches are for Rob to pickup and the DT patches
+> >> are for Bjorn.
+> >>
+> >> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+> >> ---
+> >> To: Rob Clark <robin.clark@oss.qualcomm.com>
+> >> To: Sean Paul <sean@poorly.run>
+> >> To: Konrad Dybcio <konradybcio@kernel.org>
+> >> To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+> >> To: Dmitry Baryshkov <lumag@kernel.org>
+> >> To: Abhinav Kumar <abhinav.kumar@linux.dev>
+> >> To: Jessica Zhang <jesszhan0024@gmail.com>
+> >> To: Marijn Suijten <marijn.suijten@somainline.org>
+> >> To: David Airlie <airlied@gmail.com>
+> >> To: Simona Vetter <simona@ffwll.ch>
+> >> To: Jordan Crouse <jordan@cosmicpenguin.net>
+> >> To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> >> To: Maxime Ripard <mripard@kernel.org>
+> >> To: Thomas Zimmermann <tzimmermann@suse.de>
+> >> To: Rob Herring <robh@kernel.org>
+> >> To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+> >> To: Conor Dooley <conor+dt@kernel.org>
+> >> To: Bjorn Andersson <andersson@kernel.org>
+> >> Cc: linux-arm-msm@vger.kernel.org
+> >> Cc: dri-devel@lists.freedesktop.org
+> >> Cc: freedreno@lists.freedesktop.org
+> >> Cc: linux-kernel@vger.kernel.org
+> >> Cc: devicetree@vger.kernel.org
+> >>
+> >> ---
+> >> Akhil P Oommen (11):
+> >>       drm/msm/a6xx: Honor perfmode_bw threshold on A8x
+> >>       drm/msm/a6xx: Fix secondary rail vote in ARC votes
+> >>       drm/msm/a6xx: Fix RPMH dependency votes
+> >>       drm/msm/a6xx: Factor out RPMh arc-vote helpers
+> >>       drm/msm/a6xx: Add BX rail support to GMU dependency votes
+> >>       drm/msm/a6xx: Clamp MX dependency vote
+> >>       drm/msm/a8xx: Add Adreno 850 support
+> >>       drm/msm/a6xx: Send THINMEM config to GMU for A850
+> >>       dt-bindings: display/msm: Document A850 GPU and GMU
+> >>       arm64: dts: qcom: hawi: Add GPU support
+> >>       arm64: dts: qcom: hawi-mtp: Enable GPU
+> >>
+> >> Bhaskar Reddy Valluru (4):
+> >>       drm/msm/a8xx: Add Adreno 845 support
+> >>       dt-bindings: display/msm: Document A845 GPU and GMU
+> >>       arm64: dts: qcom: maili: Add GPU support
+> >>       arm64: dts: qcom: maili-mtp: Enable GPU
+> >>
+> >>  .../devicetree/bindings/display/msm/gmu.yaml       |  90 ++++-
+> >>  .../devicetree/bindings/display/msm/gpu.yaml       |   4 +
+> >>  arch/arm64/boot/dts/qcom/hawi-mtp.dts              |   8 +
+> >>  arch/arm64/boot/dts/qcom/hawi.dtsi                 | 336 ++++++++++++=
+++++
+> >>  arch/arm64/boot/dts/qcom/maili-mtp.dts             |   8 +
+> >>  arch/arm64/boot/dts/qcom/maili.dtsi                | 309 ++++++++++++=
+++
+> >>  drivers/gpu/drm/msm/adreno/a6xx_catalog.c          | 446 ++++++++++++=
++++++++++
+> >>  drivers/gpu/drm/msm/adreno/a6xx_gmu.c              | 231 +++++++----
+> >>  drivers/gpu/drm/msm/adreno/a6xx_gmu.h              |   1 +
+> >>  drivers/gpu/drm/msm/adreno/a6xx_gpu.h              |   2 +
+> >>  drivers/gpu/drm/msm/adreno/a6xx_hfi.c              |  25 ++
+> >>  drivers/gpu/drm/msm/adreno/a6xx_hfi.h              |   1 +
+> >>  drivers/gpu/drm/msm/adreno/a8xx_gpu.c              |  16 +-
+> >>  drivers/gpu/drm/msm/adreno/adreno_gpu.h            |  21 +
+> >>  drivers/gpu/drm/msm/registers/adreno/a6xx.xml      |   8 +
+> >>  15 files changed, 1407 insertions(+), 99 deletions(-)
+> >> ---
+> >> base-commit: 1e9b8055458b92f9ebab6f39d97ade5265a0b012
+> >> change-id: 20260811-hawi-gpu-05b4ecfc3c4c
+> >> prerequisite-message-id: 20260923-hawi-dt-post-v1-0-e41473b6298b@oss.q=
+ualcomm.com
+> >> prerequisite-patch-id: 239c169e15da44519b2dad09ecd92f0052757929
+> >> prerequisite-patch-id: 6c586be864944bb1eed773e8c211b898bb1289fe
+> >> prerequisite-patch-id: f3d8748ccdb6760563f3e07f701a18388a9408ed
+> >> prerequisite-patch-id: b1639353868bed10fd3cbfcd01cfb88b7e737ead
+> >> prerequisite-message-id: 20260922-maili-dts-v1-0-ac2b1b76bfd9@oss.qual=
+comm.com
+> >> prerequisite-patch-id: 36f12c16bf9cb0411d8be2f396407c724162189d
+> >> prerequisite-patch-id: 28ede1ab83d4b5b56423ebb09bae74b6599b3bac
+> >> prerequisite-patch-id: 6b3e28c55c07bfcdca8bfa9219fa0c6c763c6f6e
+> >> prerequisite-patch-id: a2007fdaaeaf2981860c54ae5514f5a6f06c6bb3
+> >> prerequisite-patch-id: af8aa3c630647336bdaeffa9c88de3650f1e49e4
+> >>
+> >> Best regards,
+> >> --
+> >> Akhil P Oommen <akhilpo@oss.qualcomm.com>
+> >>
+>
