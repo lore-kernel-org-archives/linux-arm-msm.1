@@ -1,142 +1,307 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f42.google.com (mail-qk2-f42.google.com [74.125.230.234])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 671A914A8B;
-	Fri, 25 Sep 2026 17:52:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98CB8411FAA
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 18:10:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.234
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790358774; cv=none; b=klqFJh7u6aL/HVJzalSrEpEXVEOyhm50xRJK7qVqz0wnxmWwUM7SFNZSmiLE00cPeaFea+ucX5aTjmiHgoqfnAz5tINjEUr6h+u+OUDRlDUgH7UMurFucqKmKBXjL72Ysa8dHm5i2hS5nru2psB8DHduqwmrRAHYlIBXcrhaWKI=
+	t=1790359841; cv=none; b=Mrx04eulcttuv3jf1p5ShsqNFC5vMp+FTh9Zeo2iAvO/pdSueOG1lX2+lYOF7+NIiKPv4QmQAGpU0F04KZdFfIlxVd6QrkAj72bCoWDLk/LKW62M5N9XIR0pjzze9phJu56Eku5i5vw2RsQRoR9LQPftFTX4kbYQRbOwNQCsci4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790358774; c=relaxed/simple;
-	bh=h2F6Wlrr7DWF4srFC6zkGugGEjHOBZnfF68/9H/Z5rY=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=neQAcEHkDqHMX9A/p7P8XHzbkYXI30wo6s3JoLEdQMx5u38G52jsha0ctIaqp+pdZyCd0pZHL6NQzmO9UKmaQlwPlv6ro8x/Rax4dah8e7rAH7h+1CIr0eq3Q5+gUqvWkiYjgfIew2VRhCITSaNgRj81kCbydF7XMr7qMGJMNts=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=dybEE07j; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=6hkU80fp; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1790359841; c=relaxed/simple;
+	bh=yiPfRUOL+OZ9/QfnnwJ5h2P+82mwFzI3sPg4U6hlGHs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=LFrh/Aak0i2vcRz9bAkuWRfnfuYBmURbI8EMJU9OGpiosoiMHsuSEM1x2J8ADmwnE8uqTeEXiqG/QcU48kU7kQ9tqCfxQtyAfaqhBWaM5uKMLlJNjxrb8hMdHYiRQVcHG0Bl26V10e3dY6QKBPvaHB/P6wHOA6ntZ9kRWABWK1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=M6FNnlNy; arc=none smtp.client-ip=74.125.230.234
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="dybEE07j";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="6hkU80fp"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1790358748; bh=nNXRZZyO5E6gJXFXSSEbRo7
-	RUD3G589ViTisRDLWX74=; b=dybEE07jOsSg2uVQbdrgvnpMJTnRpLxDanSAyANWMHaXeM16IC
-	g+Oov4sM3WMnWkgiJGGW8xu4nutrv3Tr/NqSZZvIVJ8s9+uiaRf/Typxm1P5yJhO8ZB88O64D+0
-	lpOMx0wfsRL/dNzTfD7yiUy+89mL5zAxuU9//TMhic3wpj8yvnmPjWXaTl3gJAlNnSYnYr9KDbC
-	NmJFr4eOi9atCKMb2gbjhSGewJ2gXNBKZseJlACHY1NqlMahuFSMUNWb4DNRVxR3qHaIJmrSwJ3
-	dpm8w2QjZAy4+1mrqgOGkOBJAMz65Oo/fgW/8jFyNuEMTzdv2S4kfo7lmIfDipvSa6g==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1790358748; bh=nNXRZZyO5E6gJXFXSSEbRo7
-	RUD3G589ViTisRDLWX74=; b=6hkU80fpF18eaotihI8czs8zqTmN9aBl918adzBeqol+4g+4I5
-	AX114HYqQ5r0FqT8+yWyI6FklC5LOVeiPUBg==;
+	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="M6FNnlNy"
+Received: by mail-qk2-f42.google.com with SMTP id af79cd13be357-93bd580489dso112387985a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 11:10:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790359838; x=1790964638; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Yos8fjWl7KQaz4RsBjbMVq1d086QRYEcPbUkmGEv6p4=;
+        b=M6FNnlNynhyrLUtOfOa8OYgFCVoNnZY6ukZGi56t0okbTSbilBbFcfFM2uNh3CaVpm
+         42Ym7355Gj9o8pMjtCte7UiW0xbftWAcxovzPa9WsnNm3pCCNgUoAF9WXQ33j+4DmPvn
+         kezYzVmQ941RzwkmpBpDAB/txByCFpXsTZ8lcwhnKsvYxR/SaAhGykn/fOFC6iWSk9S5
+         RlrcnUxRpmZMHaBUbXsMUEPseqJhARSEm373k/UEK3jfkqQxwB2P5k98KIEuQBihLeAF
+         tFT6ySrqwB3U1jYK5sSpIdhSQ2zuFTDLkvd3lMavmbOnckhUxdYojby4m9oIS67/8qHy
+         uaOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790359838; x=1790964638;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Yos8fjWl7KQaz4RsBjbMVq1d086QRYEcPbUkmGEv6p4=;
+        b=VrFjFEFCAWVr2nv2eD8zMbrrXVh+3N7QyFwk67tNKefuljr9i0/1v5zJGUX4XZm+yg
+         HHA+Wrx+mmxNMlCH+yoAg22jaW+YVg67LsTLFbYDX5pnuIOwNH8CUNdg8YOtrYD2Hd8D
+         9S+R9W1yUnNs0WBg5Y/ri0dyYHyj9QcAYjjeb5KLTzg7bnPF4ndE14L0L6Ph2+rnqQE9
+         lNfjsCt0DHDyIsqWCY05DO9LBGvlNsc+ljx+MqKS+dS9YydfbtFz9zRR41VUoHB/XtTq
+         HYmcNWuY16j7/u0xNySYS9zE3D2NZU7CbYm82nBA7jJBzeL21IIVS45JOwBTy36n0ymC
+         /2Tw==
+X-Forwarded-Encrypted: i=1; AKwUvBxfNyYMCVSr2LsaSCUHzYYUt9/DDgboVYQevQ+O2pv1x5T7tzQ4fwmATH/2Pe7Q0S5iIjob++owoMCa3dHw@vger.kernel.org
+X-Gm-Message-State: AFuF++lR2hH6m/HeTVGBrApjD5lM/OzNc+v0NwkuKtqV/IuGsWpNmkfN
+	/8yIKGm4N/wdtRD5eioqow9qY5o4lphcqBNtTNvN92lOt7rJBUSA9zYm+gZO70xdy9k=
+X-Gm-Gg: AYBFou368zoxQR+UJAzT4PWlujdE5KAj87s+2QtURD6MTiqWK/IAgkkqcJTILQ6OpKm
+	SkEkP8wQUEN0wePpKzs6nGwEOe7ydsPxHfaZpNdGCNQMdjocn3okA8ZT2eu5S4oMQP4EDbkBh2e
+	ZJiUwHeZc6In5xQpw68013NMDmFT1cUmBlbsdITKF4ExoAuDvbVQoA+nkVz2CHFAj/M+JnWCXUm
+	wd1pkcfNwMjQGVg2xK+10Wftn04XydOxNFYToFp4CMRlZ47rzjUOmqeL+JSMId8HP/QmFI1D8pN
+	kau8w+1tiL2blffbSWx/isgMj47fbUWUobcluFoL64OYfU++uYe4CqyPRqIp6VoBQmr02Hvf4PX
+	CwGf2JPifEFOddpDJ1Dd2C57FfBLwCW7ckAidmNtjMgHPi8fMus0jkPASYwDnNyvaYm6rsnboIJ
+	GVNVX7mA+kriGQhBZLYxZ8/sbnHNfscJM1/L90bNz0I6FRZE8=
+X-Received: by 2002:a05:620a:2683:b0:939:3100:750c with SMTP id af79cd13be357-93c43bbd482mr641540985a.22.1790359838322;
+        Fri, 25 Sep 2026 11:10:38 -0700 (PDT)
+Received: from armok ([2605:a601:a61d:7a00::2])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91430dda494sm22529336d6.23.2026.09.25.11.10.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 11:10:38 -0700 (PDT)
+From: Liviu Nicoara <lnicoara@thinkoid.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
+Date: Fri, 25 Sep 2026 14:10:24 -0400
+Message-ID: <20260925181024.20352-1-lnicoara@thinkoid.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Fri, 25 Sep 2026 19:52:27 +0200
-From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
- <barnabas.czeman@mainlining.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: kavakliyigitcan@gmail.com, Lee Jones <lee@kernel.org>, Daniel Thompson
- <danielt@kernel.org>, Jingoo Han <jingoohan1@gmail.com>, Pavel Machek
- <pavel@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
- <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Helge Deller
- <deller@gmx.de>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
- <broonie@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Dmitry Torokhov
- <dmitry.torokhov@gmail.com>, Henrik Rydberg <rydberg@bitmath.org>, Rob Clark
- <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav
- Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>, Marijn Suijten
- <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fbdev@vger.kernel.org,
- linux-input@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org
-Subject: Re: [PATCH RFC 10/10] arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable
- display, backlight and touchscreen
-In-Reply-To: <fe437142-eb1e-49d3-ad3f-704066bea53b@oss.qualcomm.com>
-References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
- <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
- <fe437142-eb1e-49d3-ad3f-704066bea53b@oss.qualcomm.com>
-Message-ID: <37bb460f800995ee97b4867e09c04ebb@mainlining.org>
-X-Sender: barnabas.czeman@mainlining.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2026-09-21 13:26, Konrad Dybcio wrote:
-> On 9/11/26 10:51 AM, YİĞİTCAN KAVAKLI via B4 Relay wrote:
->> From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
->> 
->> Enable the display subsystem (MDSS/MDP/DSI0), Kinetic KTD3136 
->> backlight,
->> and Novatek NT36672A SPI touchscreen on the Xiaomi Redmi Note 8 
->> (ginkgo).
->> 
->> Hardware nodes added:
->> - Fixed LCDB regulators (lcdb_lab and lcdb_ibb at +/- 5.5V)
->> - MDSS and DSI0 with Tianma 1080x2340 FHD+ video panel
->> - I2C1 backlight node at 0x36 with PMI632 GPIO 6 hardware enable
->> - SPI2 touchscreen node at CS0 with GPIO 88 interrupt and panel 
->> follower
->>   reference
->> - Touchscreen active pinctrl definition on GPIO 88
->> 
->> Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
->> ---
->>  .../boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 100 
->> +++++++++++++++++++++
->>  1 file changed, 100 insertions(+)
->> 
->> diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi 
->> b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
->> index 
->> 59042a5937535c4acda064fa0f865f4f5a52d01b..f4b9e2092a814e56cdc23218025cb4166dec110a 
->> 100644
->> --- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
->> @@ -26,11 +26,30 @@ / {
->>  	chassis-type = "handset";
->> 
->>  	qcom,msm-id = <QCOM_ID_SM6125 0x10000>;
->> +	qcom,board-id = <34 0>, <34 1>, <34 2>, <34 3>, <34 4>, <0 0>;
-> 
-> This should be a separate patch with the reasoning for the change
+Describe the OV02C10 front camera on CCI1 bus 1 at 0x36, fed by MCLK4
+at 19.2 MHz into CSIPHY4 over two D-PHY lanes at 400 MHz, the only
+link frequency the ov02c10 driver offers.
 
-board-id is not neccesary for this device to be able to boot so it can 
-be removed. I have already done that before so it should not be readded.
-> 
->> 
->>  	aliases {
->>  		serial0 = &uart4;
->>  	};
->> 
->> +	lcdb_lab: regulator-lcdb-lab {
->> +		compatible = "regulator-fixed";
->> +		regulator-name = "lcdb_lab";
->> +		regulator-min-microvolt = <5500000>;
->> +		regulator-max-microvolt = <5500000>;
->> +		regulator-boot-on;
->> +		regulator-always-on;
->> +	};
->> +
->> +	lcdb_ibb: regulator-lcdb-ibb {
->> +		compatible = "regulator-fixed";
->> +		regulator-name = "lcdb_ibb";
->> +		regulator-min-microvolt = <5500000>;
->> +		regulator-max-microvolt = <5500000>;
->> +		regulator-boot-on;
->> +		regulator-always-on;
->> +	};
-> 
-> LAB/IBB and LCDB are separate hardware blocks, only LCDB is
-> present on PMI632. It provides a pair of pos/neg bias
-> voltages. Looks like downstream has a driver for controlling
-> this block.
-> 
-> Konrad
+The wiring comes from the Windows driver store. CAMF_RES_QRD.bin
+switches a single rail, GPIO 91, before releasing reset on GPIO 237;
+GPIOs 235 and 236 are muxed to aon_cci there, the CCI1 bus 1 pins, not
+rail enables. No camera resource file votes a PMIC rail for the
+sensor, so avdd and dvdd are left out and fall to dummy regulators.
+The CSI PHY file votes LDO1_C at 1.2 V and LDO2_C at 0.88 V for the
+PHYs, which is vdda-1p2 and vdda-0p9 here, as on the Inspiron 14 Plus.
+MCLK drive strength is 2 mA, as CAMP_RES_QRD.bin programs GPIO 100,
+and tested streaming.
+
+The module sits upside down in the lid: with both sensor flips on, the
+picture is upright and unmirrored, so rotation is 180.
+
+The white camera indicator on GPIO 110 becomes the sensor's privacy LED,
+so the V4L2 core lights it while the sensor streams and takes it away
+from sysfs; the comment waiting for a "camera on" trigger goes.
+
+Depends on the x1e80100 camera DT series (v7), and on the CAMSS PHY API
+patches (v20 5/6 and 6/6), which read the CAMSS endpoint's data-lanes
+as 1-based.
+
+Assisted-by: LLM
+Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
+---
+Depends on the x1e80100 camera DT series, v7:
+https://lore.kernel.org/all/20260917-x1e-camss-csi2-phy-dtsi-v7-0-1a63eb35838b@linaro.org/
+
+Built and checked (dtbs_check, W=1) on next-20260925 with that series
+applied. Run-tested on 7.2.6 with the same board hunks, the CSI2 PHY
+driver v18, the PHY API series v20 and patches 1-4 of the DT series:
+the sensor streams at 30 fps through libcamera's software ISP, and the
+privacy LED lights while it streams and goes out after.
+
+Bryan, happy for you to fold this into your next version of the DT
+series if that is easier.
+
+ .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 120 +++++++++++++++++-
+ 1 file changed, 118 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+index ad62350ba670..73f06fdcd138 100644
+--- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
++++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+@@ -10,6 +10,8 @@
+ #include <dt-bindings/input/gpio-keys.h>
+ #include <dt-bindings/input/input.h>
+ #include <dt-bindings/leds/common.h>
++#include <dt-bindings/media/video-interfaces.h>
++#include <dt-bindings/media/video-interface-devices.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+ 
+ #include "hamoa.dtsi"
+@@ -46,14 +48,13 @@ leds {
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&cam_indicator_en>;
+ 
+-		led-camera-indicator {
++		privacy_led: led-camera-indicator {
+ 			label = "white:camera-indicator";
+ 			function = LED_FUNCTION_INDICATOR;
+ 			color = <LED_COLOR_ID_WHITE>;
+ 			gpios = <&tlmm 110 GPIO_ACTIVE_HIGH>;
+ 			linux,default-trigger = "none";
+ 			default-state = "off";
+-			/* Reuse as a panic indicator until we get a "camera on" trigger */
+ 			panic-indicator;
+ 		};
+ 	};
+@@ -151,6 +152,25 @@ linux,cma {
+ 		};
+ 	};
+ 
++	/*
++	 * The one rail Windows switches for the front camera
++	 * (CAMF_RES_QRD.bin: TLMM 91 high before reset release), the 1.8 V
++	 * LDO enable on the sibling thena boards.
++	 */
++	vreg_cam_1p8: regulator-cam-1p8 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "VREG_CAM_1P8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 91 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_ldo_en>;
++		pinctrl-names = "default";
++	};
++
+ 	vreg_edp_3p3: regulator-edp-3p3 {
+ 		compatible = "regulator-fixed";
+ 
+@@ -674,6 +694,78 @@ vreg_l3j_0p8: ldo3 {
+ 	};
+ };
+ 
++&camss {
++	status = "okay";
++};
++
++&camss_csiphy4_in_port {
++	camss_csiphy4_inep: endpoint {
++		data-lanes = <1 2>;
++		remote-endpoint = <&csiphy4_out_ep>;
++	};
++};
++
++&cci1 {
++	status = "okay";
++};
++
++&cci1_i2c1 {
++	camera@36 {
++		compatible = "ovti,ov02c10";
++		reg = <0x36>;
++
++		reset-gpios = <&tlmm 237 GPIO_ACTIVE_LOW>;
++		pinctrl-0 = <&cam_rgb_default>;
++		pinctrl-names = "default";
++
++		clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clock-rates = <19200000>;
++
++		orientation = <MEDIA_ORIENTATION_FRONT>;
++		/* upside down in the lid; both sensor flips give an upright, unmirrored image */
++		rotation = <180>;
++
++		leds = <&privacy_led>;
++		led-names = "privacy";
++
++		/*
++		 * Windows switches no rail for avdd or dvdd, only GPIO 91; they
++		 * are left to dummy regulators rather than invented.
++		 */
++		dovdd-supply = <&vreg_cam_1p8>;
++
++		port {
++			ov02c10_ep: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <400000000>;
++				remote-endpoint = <&csiphy4_in_ep>;
++			};
++		};
++	};
++};
++
++&csiphy4 {
++	vdda-0p9-supply = <&vreg_l2c_0p8>;
++	vdda-1p2-supply = <&vreg_l1c_1p2>;
++
++	status = "okay";
++};
++
++&csiphy4_in_port {
++	csiphy4_in_ep: endpoint {
++		bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++		data-lanes = <1 2>;
++		remote-endpoint = <&ov02c10_ep>;
++	};
++};
++
++&csiphy4_out_port {
++	csiphy4_out_ep: endpoint {
++		remote-endpoint = <&camss_csiphy4_inep>;
++	};
++};
++
+ &gpu {
+ 	status = "okay";
+ };
+@@ -1102,6 +1194,30 @@ cam_indicator_en: cam-indicator-en-state {
+ 		bias-disable;
+ 	};
+ 
++	cam_ldo_en: cam-ldo-en-state {
++		pins = "gpio91";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_rgb_default: cam-rgb-default-state {
++		/* 2 mA streams; the sibling X1E boards use 16 */
++		mclk-pins {
++			pins = "gpio100";
++			function = "cam_aon";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		reset-n-pins {
++			pins = "gpio237";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++	};
++
+ 	edp_bl_en: edp-bl-en-state {
+ 		pins = "gpio74";
+ 		function = "gpio";
+
+base-commit: f5f84daefcd92d7a630066635ecea1433ed5eac7
+prerequisite-patch-id: a7fbea14628b62a8de096dea420473b283010aba
+prerequisite-patch-id: 270d82b4c1760f1ec0a64a1b56c68ce26e6ae3b1
+prerequisite-patch-id: a12186bafac9b287c19fd719aeceb8ff1372dfbf
+prerequisite-patch-id: 4bc923fa59ee4c1ff68e64497f11e937c0ab3918
+prerequisite-patch-id: 4d000086386a3b344b1d6d345ab93d9b2b569615
+prerequisite-patch-id: 8cde6fd860c857dd7f3efce25970c88c783193b3
+prerequisite-patch-id: 1f22ff7fc93d0135e8759d45955bf998b037e11e
+prerequisite-patch-id: edb32e32f2b6be0b93f66d8da460c9f9de0c52e2
+prerequisite-patch-id: 09444936808e801a58c83356c9ae95415bacc83a
+prerequisite-patch-id: 348caa9cd0d1d70f181a47b40e2d75e8b25b5938
+prerequisite-patch-id: 1c4e4c457d8f95d8f5aaa2d93976c374b8282bf0
+prerequisite-patch-id: deedbed2643ca8a0f26bd87175d787d2f0c87417
+-- 
+2.55.0
+
