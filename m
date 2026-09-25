@@ -1,68 +1,68 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA8CE41A914
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 19:06:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB48A4DD3CE
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 19:06:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790363195; cv=none; b=AiI3WNPyL2tkc1ysjzlE5SSveYxfUIY9mLeMB9j0wvYafz+J1m3P3flYYS8EGLScKd0OIGYTSq+IK1oJj3HwZ+h6zIwh4xJQ+xFAWDqyrIoRnPpx0yyzC+eKMCaywAhtuNLe8+MQRKUQgdYsq2HGOIBoMwMt/HJ4tS4O7/BAK+o=
+	t=1790363196; cv=none; b=K2cmWDyJNRWudNdiZSpTvykCR/w15LgICxY15y1Q1HLWjU8JpDxlySkvnRT1ttdQL2z4XI61U264nfSdwCUyz+CXbAdiVM2dQKaGlWWCdUw4dyUdm23o1odjDZTz5UcjYxdopedQOHkdiz3NFixmdtVPwLMuAgYQxvjK1TSnnYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790363195; c=relaxed/simple;
-	bh=M9XAQoKHNT++eljy95R+Wekl96QexZqHjSEdesdLFFs=;
+	s=arc-20240116; t=1790363196; c=relaxed/simple;
+	bh=6G4RPAGmaDjpZzyTNKEyFHqA72+bQZgK1jkJfyamAUY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kkpZyxM7R0P3eAgE2LmxdYDLaeuMfFax9TxB8vVIl7v7xl4o+iBcvUuc/u6+TUKxLAq2WnZGGweL5jVnyNpUnDSkrngUJLtW1DUmYV/MIL2DCCD6vGhwp7tIqPxD3vCuWlb9Ul/PuA8p1sMyHEAXXrdADb6J8O/31HcLmXBmwio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hlQAv+Wo; arc=none smtp.client-ip=74.125.225.140
+	 In-Reply-To:To:Cc; b=ly/P3VivuUKC9Llb9cDeR0WozySmNF5M9JEKtd4/D7VyXwDD80zjGkB6azZ5B+tJbFWt/nTa9MhBjsMTkJ25gYbpjBkiMFPj3FAChhLw8XbN8LMLy7FEXA2JitjEbITxDVF16+EMiPINqReYBHokkr6+dE4oycbh5do9GPrs7ho=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=php9i9se; arc=none smtp.client-ip=74.125.225.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hlQAv+Wo"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912df756so9833645e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 12:06:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="php9i9se"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f63546c5so1023381f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 12:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790363192; x=1790967992; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790363193; x=1790967993; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RylOsdWttuJv0zUKYqfOnUuW8XaXL0HCgCqarZWQL6Y=;
-        b=hlQAv+WoBr3NJZYm5wPBLUz5f/5Toun7bJiBQxDuchxJ1vnnNzmPt8qOLRzbhMLSwa
-         SytR0YHGwEVbBpqnvDr4kiVzempH3nXmWeyMvH5Jtko8NjcUHkMYg32hpNDYTBgqztXn
-         xByVoiiyKUc2NeGqfMyrFK07udHm2WE60V2PCXlFH/HgQPosBhF+hWhqpwfUvX54p2kT
-         IJ4y2A8eyHKBtUZopVLvWw+Ux/vP9IoxjxwZmQL1AUhGhV/ObWMepSPs4hb71FP9Nnsf
-         4Exl97/DGuBxYEOifL86+BMDwgkHMia0xwMoMVlDWfHvuxqLXblHfBcNpj82s9EjRvM2
-         cgJw==
+        bh=Z5Srgm6JvxgKCcCMFCgkofRyicWdcx23+kTiGji8Q80=;
+        b=php9i9seJKsDNK0o64FvuoXovWEty/gssKo9UMJ1I6Mo1bDFU7ATR4skdEdq5pwueh
+         XgxAuQaQNjZgNuuD491sTA35QtnARXAxVpzpN5yQe6+AfWUMSfDLmPqP8xwKzVtdpEDy
+         8otdnhVfiwlOM2Gzqqu0lbyLIJbw8bya/OnxrOBG+dh37ZQYY+GNrYSJFFmY43O/l/xp
+         HSLMQVlyve89TH1eXm68z3tYNXM4ylMcmYegfyGQvlAm1nZP3Qa8EnxsD8vGZmwRlGxq
+         cC3Y1Wpq78TmNm7upWDfaD8wUwtyvP1ucvg7pLJ2AYkk+bGUKHKEoZZB/DAMBBEGX3IM
+         vWrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790363192; x=1790967992;
+        d=1e100.net; s=20260707; t=1790363193; x=1790967993;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=RylOsdWttuJv0zUKYqfOnUuW8XaXL0HCgCqarZWQL6Y=;
-        b=vZ+4vTbTxWaPhuqwFKpX6Kjl9i/nFrPeHvLQGFUQqkp5NO1dDspUparfysB9ZZdUht
-         v7EXki9hz52otTGo9kkpywFuvG7Mjw6wi+lcJYe+JcIZb2K0/RyYIB96mTxPogbKO6RK
-         zT2gAMZ44OG2dMUsaNE1NvZvcgUGtEKjqePNzLWa5vCI52hLgCRKGy932uJvqZQ86QAL
-         0Mq19kaC2S3sto6RuD6jmJBRGOVw4jNJnznP3Ss33IpmzVSVfGmRwMtq3iwjVAyovyIF
-         BLYe9fW77ngcAiLkUF4AVXMI5mCDWrauhCZJdjAFYs4PBK3uJjQm0ZeJL1J0RWcBLDkG
-         p7eA==
-X-Forwarded-Encrypted: i=1; AKwUvBx6kx4AQAGkYy7ckKoXMF4MHWtDZ5fVHKHe3YfXS+MUhexZXEsN6ZVIQZkzx3YqEHO9aCHoe3RFesy+vIlZ@vger.kernel.org
-X-Gm-Message-State: AFuF++mrq2jCLD51ZARF5ILtrDyvjQmNKMSWXJdGrn2GQCa6oEgSZ5U1
-	tisQJHTATMTWioQZi0tldgCdaviPdWyVZCQ7eKAzzhGGSw3EoLK+FnqwgR70dQ==
-X-Gm-Gg: AYBFou3y+Y45rTAffOJvWU+0FXieAmXdCsfoCoNQL+aDruGkjkXDbr0c1h4exoZo5Gw
-	q4Ik0i6LNvEatmWUE/sUIT8swT3fXj0ZwaYSZJoFjc4auhb9Gqi873x85R2BkDt+iR+5BJwfzVo
-	yfCsJN+w0U1P/kmA03ea26yHwf6WS2J1zLcl3E8AEIYfrtbPyusGBRXwJ+atK09dAxiuff7c2PH
-	r7UCZbRCceA6A2w+oMuI7BomLXPPsc6V5glxn7KS7qILZ8PT268ZroiGSBoINpUy2rZ1+11UbgU
-	0+yrwzTqJGmLGcgXlz7y+ztMCeEzMGoBDVc2uQ5lwogRkxWBaSzzIiCWd6g/jxQW+MSXdxkXLtx
-	CvBNeG3WkRjy9gnFO3JOchOD7eKvUJtMS/0a+p0pyT/dvuTANepiWt0AV21C5UCoj5ETIN+N6oR
-	pprkidVXtSghGc7GF5pcwEr9Vj8P1HvbdFeeaxx3nA+m00dXU3U39Q7EaDW6Sr67Tn6UP5bjs1/
-	BsMpFrUKE4mncieJQscOJb0Lwb6wxYBSBMUYQ==
-X-Received: by 2002:a05:600c:4f12:b0:49f:e194:a062 with SMTP id 5b1f17b1804b1-49fe66fc6b7mr139981575e9.32.1790363191708;
-        Fri, 25 Sep 2026 12:06:31 -0700 (PDT)
+        bh=Z5Srgm6JvxgKCcCMFCgkofRyicWdcx23+kTiGji8Q80=;
+        b=kachY4bcjjpQeOTCVB3D9a5EAN+61wVnwOyvs6GwbjfYEJJIhx0PUbQAUQRPTP0hx9
+         /AFgJcMDABq4VLosHYNn/0dGjs8WBEEqsLBlc+JiKFLg+i+iCZ5gRWlQ3gu6rceL7Olt
+         ra1SNcA/3oRkDf0K860YWUSedQg88/QqQQ49YXNpdiRwjzw/ybykQDWCjKITr+cuhaTn
+         YhsyJQGypMKB3M+u8nVRZxEkj7goC1202uA0X1T9oLQKdfQSaCL4mtuGHLbYFEpZq9Dw
+         Hwzw090r8eOnozmdJIgyLZnEjBobRg1ON1DImyCcK8kyQQQygmUk0CbklnufAJEKpPYF
+         zsbw==
+X-Forwarded-Encrypted: i=1; AKwUvBylaiWl2hpwcHM4yjjNU340jnK6EISM7j/p6VeuGorBnYboy4R+lAMTyZWEYLVe+mXzmCmgVjmcoTZYQCro@vger.kernel.org
+X-Gm-Message-State: AFuF++mvN01q+ZyG3VdsomD7WvVL/85jddsdY/iq+4/PM+6teN8Nlw5v
+	rf8p3ZeN57VKA0v3JrnCGnaJl3X1KYazWDz2rteYB7fD5XBSzUi+sl+yUo8xoA==
+X-Gm-Gg: AYBFou1A+j9RXOPeBiLhFCcqWNqlI91lWe9Qg1RpCMTm9xTsF50UWwM24z5E+x9SN3W
+	VM3XjGHa6kIjxKpMqx2aQ9YhhoXhRp5YzEXK5UEATji4eT9g9HDM+8SDXANujZsd0kR9kQC5XKl
+	C1TOrQHqLAmJYnHJuw7x6g3p/2QODygf8qUyp1xUOS1qGS5AWFiqkX4+uVDOAU7QM8A+JwHNUno
+	nCtdeul5EltvxkyYG7KA+q1qj6SkYiMYy3pRhtE8+TDGmx6D1YKc2ixaDwmYtJG+kX3HfyZfFTJ
+	6F2zqQWBkMS4gzSc+XgDA4CEFaZ6Hjob/8bxoqAcZtiXjbvZ7rloAEWIl1RIHZb9muk87sONEL+
+	zHf9UGMHWeJZQzMIg1OorjVfEiQQkGHRh3sLVwov/3qjA1IMGNoY9XbtM260Fshq3aA2v2FlP2Q
+	J23Ox+DLW61nF9KVQeEaKOBDPdP5lowqAne7rxH44rQUWNmr3QUJ0ACDiaDE3678T8kcuZ/x95d
+	8KHdQ+/bRh9EoF6XM3wP282KTc=
+X-Received: by 2002:a5d:5e03:0:b0:487:370:c511 with SMTP id ffacd0b85a97d-488717147e2mr11934205f8f.8.1790363193010;
+        Fri, 25 Sep 2026 12:06:33 -0700 (PDT)
 Received: from [192.168.0.253] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4887a30b1dfsm9467234f8f.4.2026.09.25.12.06.30
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4887a30b1dfsm9467234f8f.4.2026.09.25.12.06.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 12:06:31 -0700 (PDT)
+        Fri, 25 Sep 2026 12:06:32 -0700 (PDT)
 From: Gabor Juhos <j4g8y7@gmail.com>
-Date: Fri, 25 Sep 2026 21:06:14 +0200
-Subject: [PATCH v2 5/8] mtd: rawnand: qcom: make nandc_set_read_loc_first()
+Date: Fri, 25 Sep 2026 21:06:15 +0200
+Subject: [PATCH v2 6/8] mtd: rawnand: qcom: make nandc_set_read_loc_last()
  more generic
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -72,7 +72,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260925-qcom_nandc-share-more-code-v2-5-a1b088052d6a@gmail.com>
+Message-Id: <20260925-qcom_nandc-share-more-code-v2-6-a1b088052d6a@gmail.com>
 References: <20260925-qcom_nandc-share-more-code-v2-0-a1b088052d6a@gmail.com>
 In-Reply-To: <20260925-qcom_nandc-share-more-code-v2-0-a1b088052d6a@gmail.com>
 To: Manivannan Sadhasivam <mani@kernel.org>, 
@@ -106,56 +106,56 @@ Changes in v2:
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/qcom_nandc.c b/drivers/mtd/nand/raw/qcom_nandc.c
-index 99fbf5458083..96a1a5a03de8 100644
+index 96a1a5a03de8..cc1e64ac4245 100644
 --- a/drivers/mtd/nand/raw/qcom_nandc.c
 +++ b/drivers/mtd/nand/raw/qcom_nandc.c
-@@ -150,8 +150,8 @@ static bool qcom_nandc_is_last_cw(struct nand_ecc_ctrl *ecc, int cw)
+@@ -181,8 +181,8 @@ static void qcom_nandc_set_read_loc_first(struct qcom_nand_controller *nandc,
  }
  
  /**
-- * nandc_set_read_loc_first() - to set read location first register
+- * nandc_set_read_loc_last - to set read location last register
 - * @chip:		NAND Private Flash Chip Data
-+ * qcom_nandc_set_read_loc_first() - to set read location first register
++ * qcom_nandc_set_read_loc_last - to set read location last register
 + * @nandc:		NAND controller's private data
   * @reg_base:		location register base
   * @cw_offset:		code word offset
   * @read_size:		code word read length
-@@ -159,11 +159,10 @@ static bool qcom_nandc_is_last_cw(struct nand_ecc_ctrl *ecc, int cw)
+@@ -190,11 +190,10 @@ static void qcom_nandc_set_read_loc_first(struct qcom_nand_controller *nandc,
   *
-  * This function will set location register value
+  * This function will set location last register value
   */
--static void nandc_set_read_loc_first(struct nand_chip *chip,
--				     int reg_base, u32 cw_offset,
--				     u32 read_size, u32 is_last_read_loc)
-+static void qcom_nandc_set_read_loc_first(struct qcom_nand_controller *nandc,
-+					  int reg_base, u32 cw_offset,
-+					  u32 read_size, u32 is_last_read_loc)
+-static void nandc_set_read_loc_last(struct nand_chip *chip,
+-				    int reg_base, u32 cw_offset,
+-				    u32 read_size, u32 is_last_read_loc)
++static void qcom_nandc_set_read_loc_last(struct qcom_nand_controller *nandc,
++					 int reg_base, u32 cw_offset,
++					 u32 read_size, u32 is_last_read_loc)
  {
 -	struct qcom_nand_controller *nandc = get_qcom_nand_controller(chip);
  	__le32 locreg_val;
  	u32 val = FIELD_PREP(READ_LOCATION_OFFSET_MASK, cw_offset) |
  		  FIELD_PREP(READ_LOCATION_SIZE_MASK, read_size) |
-@@ -230,8 +229,9 @@ static void nandc_set_read_loc(struct nand_chip *chip, int cw, int reg,
- 		return nandc_set_read_loc_last(chip, reg_base, cw_offset,
- 				read_size, is_last_read_loc);
- 	else
--		return nandc_set_read_loc_first(chip, reg_base, cw_offset,
+@@ -226,8 +225,9 @@ static void nandc_set_read_loc(struct nand_chip *chip, int cw, int reg,
+ 	reg_base += reg * 4;
+ 
+ 	if (nandc->props->qpic_version2 && qcom_nandc_is_last_cw(ecc, cw))
+-		return nandc_set_read_loc_last(chip, reg_base, cw_offset,
 -				read_size, is_last_read_loc);
-+		return qcom_nandc_set_read_loc_first(nandc, reg_base, cw_offset,
-+						     read_size,
-+						     is_last_read_loc);
- }
- 
- /* helper to configure address register values */
-@@ -1918,7 +1918,7 @@ static int qcom_param_page_type_exec(struct nand_chip *chip,  const struct nand_
- 	if (nandc->props->qpic_version2)
- 		nandc_set_read_loc_last(chip, reg_base, 0, len, 1);
++		return qcom_nandc_set_read_loc_last(nandc, reg_base, cw_offset,
++						    read_size,
++						    is_last_read_loc);
  	else
--		nandc_set_read_loc_first(chip, reg_base, 0, len, 1);
-+		qcom_nandc_set_read_loc_first(nandc, reg_base, 0, len, 1);
+ 		return qcom_nandc_set_read_loc_first(nandc, reg_base, cw_offset,
+ 						     read_size,
+@@ -1916,7 +1916,7 @@ static int qcom_param_page_type_exec(struct nand_chip *chip,  const struct nand_
+ 	len = nand_subop_get_data_len(subop, op_id);
  
- 	if (!nandc->props->has_onfi_read_op) {
- 		qcom_write_reg_dma(nandc, &nandc->regs->vld, NAND_DEV_CMD_VLD, 1, 0);
+ 	if (nandc->props->qpic_version2)
+-		nandc_set_read_loc_last(chip, reg_base, 0, len, 1);
++		qcom_nandc_set_read_loc_last(nandc, reg_base, 0, len, 1);
+ 	else
+ 		qcom_nandc_set_read_loc_first(nandc, reg_base, 0, len, 1);
+ 
 
 -- 
 2.55.0
