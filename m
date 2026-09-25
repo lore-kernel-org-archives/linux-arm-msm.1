@@ -1,116 +1,98 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12FC94DAFB6
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:59:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 799F64D9F97
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 16:11:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790351968; cv=none; b=Wws+x5yAz+fm7rshkQwujL2W4RI7FIGRUhEOT+F0SLXjkBrUaJQCKu8DEz9AwOBsskzY/QVbdXJW+f9zCztk1J5g8YoJ3XXV/qhlPaqdGuIb9BD3EeF/ShzeEVhhGLNaPEPr65+N/TxSbXDL+xDEfjmNy38qhOOQ7jcS6OapdCI=
+	t=1790352685; cv=none; b=HEY9aH089FPNmxIQr/C7484Oz/86VP0j6ZOMx4y4+m/Cikal3lyxHsctJ46ijemkmI2giPQ2x7BmadMPXKbHjz2ad+nlebupz0B4Zu5TL5q4Co9mf5StLTgnVX9mqsjRBn9kg222HP4xp8zO51ZL6bnzKkKTjEjfJUaD7fGlqys=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790351968; c=relaxed/simple;
-	bh=zDuJCdpny4nvDijWnjUood5Ogh4JDdDd4/+inxDkgqY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VFVAMVvafXub1yoVOQ45FHD8nyVVGGpdy2TKfQ+UGi27T3MzNlfFj/nqlEyvlVHS2OheIzefPW7hcm0Jgwq4DQeo1cifCpcc6EF+KHWl2v5fVVoy2pnunjkjE9PZfj+oAumqlhS4lsakALP6xzuwcjcZHteGJ5cLjluCpxfVxQA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QI86Rg99; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YKzPcWLD; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790352685; c=relaxed/simple;
+	bh=F/iXP+JEwA9EqSDT0Nx7e8u4H23peONoXgJq6hUIwXg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cMj65/KCtGEkfst9mv+WwdWIXe3+fdEqGBkJodRC8Vp7U4b+Fa+TQCET2Kkv4ZvDbg1EQqq/trJxfZDFZhY6Kdzwf5aDnzXhswC7w1WUjkWchcGi3zYG0k8QmpsdjbVYfrQdjB0rlfBWaRwUtVhCZy9Imc4Duaq4ouuX+LYwiac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H6QBTTPx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UQ34gC6y; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QI86Rg99";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YKzPcWLD"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PDG3mc2911815
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:59:24 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H6QBTTPx";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UQ34gC6y"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PG0Ijq1001989
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 16:11:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=9+1rwJEQXq1
-	lO/cD3GiWTUUYzCO5JaKWtBAY2RhYZaI=; b=QI86Rg99O/cQBiooeAMdGH6d2qr
-	/2ApE7DEiMzD3YrXNmwz+AFIQiuSiyeU538+94tBUEGoj2itMo2gej/TfPXlqIaF
-	zZ72GNYlwbjhiqHnwtDgSSGltE9iecu43LiWKRH0DKQEAzXnXEZewprdY2FRNWfm
-	3wweR+e6s0j74nJNxeHevQQbBp3T3hxokyJL8PRt6yueJf2AFuxy/RkmsnSgBBNn
-	TXc9twwC6JYh28lCZk+wcQNgeeVN+eTQiS0oTdNHyZe+4VJlNRsnfvPoTUwC1OCN
-	6/DfLq+X7JrgAdJpeU7WAmXzD0xZrYB28w+K3rYTyvBwyJiFwLIJro0IqDg==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwhm528sp-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=98Nyoih8+3YA2/Q1yypaUxBVERYILXDNomX
+	DQkZMf+A=; b=H6QBTTPxTtU7MVj/xJvc1Oe9/O/wJ5RTAKLBbXPlRy0wNKLjDat
+	Kk48gFVHpw7Bxj5FMBE8eVFHIoam8bQgNXOLiUjec+6tfaMyLKJNH+vxPOGqbSCe
+	e077FnBXVRIR0mgEQqmwnCw00SsfeFsI0cU4k/UGCTSjdrjSgw+sCqpiWILbTPad
+	ix0TpAmu+hxRxMWTWxea06y7lctEFASsjmVqfu6uSGUDeRxfvNeHk6o7sZACjtUk
+	aNRL8BPRea7S7KUvWQiwMDRYqi1jwOOvpLmlUmbrgSQk2bDS3kkuewfJBooE/NfQ
+	yWkQVTiCo4FRI3j8+FhwNvzh0LMGGoWKHBw==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwr5e91db-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:59:24 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-877ef1457aeso954721b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:59:24 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 16:11:22 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97e9909eeeaso89010241.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 09:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790351964; x=1790956764; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9+1rwJEQXq1lO/cD3GiWTUUYzCO5JaKWtBAY2RhYZaI=;
-        b=YKzPcWLDNXe3MtN5nPHe7AMahJJfC5aAzY9RgQ0E4OiQIqAJ5vJdPBdBcC929Gnu+s
-         KTwauVDtIPN/1zQCsSLhh/EcGWoY0UMe/DOpIEJd4X36TvF/bWxj0cnRsgEYZR+yT9FH
-         qGej+XZmWs7RJYd7pcolOjn1AkYeuTrgBcKOWaP11r8f8vmHPFD6Rmhm5cggK84OD5P9
-         8sU5h6PpV6xrHzL4q03gFW6tdhsDrKsH8BD0m7P/ONKNbBfkMCYjd/IFo63NkAEvxLEi
-         xmOXBS7lGJRzaLk0949U2R7jkxnOA1wz8SinQxt9cuN0481cxNnVjSmW+ATTlluhBGJV
-         T5Eg==
+        d=oss.qualcomm.com; s=google; t=1790352681; x=1790957481; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=98Nyoih8+3YA2/Q1yypaUxBVERYILXDNomXDQkZMf+A=;
+        b=UQ34gC6yFCzNUvx7UaHLBKXcdnmYSS0z+LRpDDLSByjA/g6skJ4Nye9V8hDiVr61nw
+         XDFqDPiAAu7JJfG2/05RSuFYDNWtfspAUJb9SxGKWinZbSRTsOkLzzDJQfeXuREZ80FX
+         lO1rV84s9M5NTAg2fQof508a+aRLwOErPF/VMq3Qqordu/yeXzywL4Xa65PkjcKkVHcy
+         9VK+YmreDSI5S+3BmJtNUPEVqlVspDsvXz7MCb1OzWVejAq571dG6AWcMYccNCBFw+lp
+         5pGVNZ12QntycyO/SAtEJ1XhlkPxU6Bm0ToiY4MaIMnO35IcdQucppnZOnxyxpT7EGLi
+         pcLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790351964; x=1790956764;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9+1rwJEQXq1lO/cD3GiWTUUYzCO5JaKWtBAY2RhYZaI=;
-        b=b1sArmltTXMATIgjXEgHKxnVjj/iUJrroBc+vjNpt+Rs6lYbIV0Fj8nOn1g2HRX2bL
-         MShqvXHOUZU0khaY96kSYvb7TT5VBtIaLk10szxgr/xYuM+ssj8JAYAt6pUyjNZobFZ2
-         OnFX6Yr6XA319dzG6u+TPiyDHydEwNSaA+wo+prttEyp+e12wyTbst5YeZt4+2X8uufe
-         zSd/WOv5d8RoWXbNmM6nGYHj3XP5tC/p7iX7hKqkGJMInfVf0CQenc+iaZhFey2TwTCF
-         7mbsjcpEeruRwi7GaA0LunsmSSflShSF5T6d3GzWiQzXOWPl6HT37ftP3q30XlvzfLtS
-         Es9Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwoE6leELhpOLKHoubTKTea8CGRgZ4jcjv/btQp+6H4zUvONDrJSVANCSk3KRtMhoF5oDTiK4J1EfjXMkxA@vger.kernel.org
-X-Gm-Message-State: AFuF++lSUpr4iKL11ksoKBh506zVQJP1e97jE/7R6y+fWru62SEk39zm
-	KisPFvQXvaQlsNMW5+k9+Cry01jt6j1RZybR1UHHGBiKyjlYjywMoIwCjddzHS8rZm9qf4e12dO
-	zZP0aShlHCNXcBGW4nadoEoMVPjsf9T0lbmEwFpmZAJUEQ7X8MP6uapCjUGl6/W/sDfhlYRCUnJ
-	O/
-X-Gm-Gg: AYBFou1lSM7DAID7aSOlft7fAId2hmDQ5NuWQFVE5ZX2tszQ/voHzQkia2tt+UbbYNI
-	FXl1hOz/Np3WgxNCNGyU8+B3UAe1ymKe9/PeBH0A0m1Wq+jHMyfQAL4cGkHGMSUAasARsrbZOXf
-	PkLb9C8AguD92YHF0ZmdXSsUAgefv79tlP0yogIVmZGp2yP9F7mX8rk87sydJ4GJutYMaE/n0rR
-	W0OgOupkGMlHdl2z8AjH3OChcBQZXf7VGRgWj4EJvP46oNxqhn1755X/g5epuKjZP7rF/CKIpCd
-	CMqpcRMiayNa9R2Bjx0Er29V8dDk1npMsyP/9wS+0XRbQB9PFiu0j/R6SnM2JE1w1A16TJgvGmQ
-	otThA20BH5vVlF3uZW7tlHw28hOk=
-X-Received: by 2002:a05:6a00:6f12:b0:880:a842:bb06 with SMTP id d2e1a72fcca58-880a842c13cmr905894b3a.45.1790351963314;
-        Fri, 25 Sep 2026 08:59:23 -0700 (PDT)
-X-Received: by 2002:a05:6a00:6f12:b0:880:a842:bb06 with SMTP id d2e1a72fcca58-880a842c13cmr905860b3a.45.1790351962748;
-        Fri, 25 Sep 2026 08:59:22 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87ff354d854sm1361299b3a.2.2026.09.25.08.59.12
+        d=1e100.net; s=20260707; t=1790352681; x=1790957481;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=98Nyoih8+3YA2/Q1yypaUxBVERYILXDNomXDQkZMf+A=;
+        b=GGclup3hdWoGSvWmPqmRo3JeN+h+AexZxazRtF9O3d2ZNe76k1IyqokbUHuFmpCc+A
+         U+yiTnAk313P7fSsNNU/tSNRVvO+VGBCqkGqyVx9ccbxQbdUQ8Iezofh543En3X4bXiG
+         hVCCR5NJLVwQPTgVNsJrkpNYgVoJu5Gk2zxk8xiqZ76kPmbYkYL4fofRK6R4qqhvyeS0
+         R1WGRYBGELQRPM/i564Fceqofy8oNGRsHX6dGqVpaCtZAISIBwLLWRcOVEAOI6tcVfA3
+         m/hx1nZ6d4Jy8r98cpCZrn/tFBmnuPrLTfHXD86TBIMufIkVJ8rr+29Slj+ML8afVYDg
+         InXQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw2NsaEuVGKjZIvoT8vOUPcfZaZl3Y5MnnhMLs0DvwdHAXw+aUbFgpZXxIdDq2wznJ8XVkKxMg1wX9C6yE+@vger.kernel.org
+X-Gm-Message-State: AFuF++lt1ztO4lFdvHoAR0tPYqb06cclOOfit0FbFFXVLzsstCytuzSC
+	gvgqwNbTn9nmKp1zdOuuOMpLzxxV0hqw/J362khMvZdIof5wtF5xwpxxV9HWIUgR4aJO/MiVOux
+	YWb4NI4fpDpzJazbxXRmlMwBXdEcaQanlNEmHQbPBLygwyc0pXerQAeKSZYgvGjElHGZk
+X-Gm-Gg: AYBFou1RYg5J06othv15id2ospfhy1zV5zBHjcFps9Te6uyVG1b+XqL/01UZEWxE2dm
+	3gEe8YNBR6KcjKWMyEvPxAxBft5MyTeD/DxyPwUDUT9F38/uB9v+lAxxXmtX2rhHQqEtFjvIemK
+	bP65a9zc9hXzXXUI3lByXL3ITog/X8JG6zC2UbrXrzEHc4snEXilyoHCZUG0xSVB/PjsX1xJKJT
+	5s1zv/DIa9KsP1022uRReyGjtOg1CB4YOMvZmJUQzs9tutPcPxtF+PJQvEjRudt+r756VQHsr0C
+	V7EZS8JvQLlrJ5v6Oq0DiF9UwrFGaGdmDl4WSH+wiy6uvz8N0guWwmtmDE8dFcca6HfSAHOyJp4
+	xNmd8J/9YtdtJ
+X-Received: by 2002:a05:6102:2914:b0:7a6:e08f:9fa with SMTP id ada2fe7eead31-7af1cc992f3mr2742524137.13.1790352681250;
+        Fri, 25 Sep 2026 09:11:21 -0700 (PDT)
+X-Received: by 2002:a05:6102:2914:b0:7a6:e08f:9fa with SMTP id ada2fe7eead31-7af1cc992f3mr2742498137.13.1790352680681;
+        Fri, 25 Sep 2026 09:11:20 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ff06b4d45sm73019505e9.7.2026.09.25.09.11.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 08:59:21 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
-        Simona Vetter <simona@ffwll.ch>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        "Bryan O'Donoghue" <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Alex Elder <elder@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Jeff Johnson <jjohnson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, Sean Paul <sean@poorly.run>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-media@vger.kernel.org, netdev@vger.kernel.org,
-        linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
-        linux-remoteproc@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH 8/8] firmware: qcom: pas: remove qcom_pas_auth_and_reset()
-Date: Fri, 25 Sep 2026 21:27:37 +0530
-Message-ID: <20260925155737.4161358-9-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260925155737.4161358-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260925155737.4161358-1-mukesh.ojha@oss.qualcomm.com>
+        Fri, 25 Sep 2026 09:11:19 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        patches@opensource.cirrus.com,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v5 0/7] ASoC: Qualcomm Tambora (WCD9378) SDCA codec
+Date: Fri, 25 Sep 2026 17:10:41 +0100
+Message-ID: <20260925161049.758913-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -118,175 +100,119 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: o-440df9yTRLskL5W1sK3V-kKdXosr8P
-X-Authority-Analysis: v=2.4 cv=QYnzLcbv c=1 sm=1 tr=0 ts=6ab69a5c cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2NCBTYWx0ZWRfX3NaZPkDC0xqX
+ s/Hq1mpMGI1d9YlLm1xFS3p+BPBsd/9rjUCyde1aQCnkDZFwgZXbvRCBHC0l5GkblmlKz5Vynn+
+ r+q2ZijTCMAiLuPZpHgw0gzQzo+HD5M=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2NCBTYWx0ZWRfX2yETnZmgLPWR
+ g6rTS2WyqpHCadFvGGdUHej+3hlRH5IUNPGen8uYpmrEPDDzTCKwSjOepwfZOXcizV1lf1FmaAF
+ Tpr9rPgWRDnM6fmCRYOp71NroFasJmQwc0+8Z3GFGtwje/asLNoJl1dfVtNHWOzCH3+Kxt41bjg
+ FOswmVPcr3Jdl3vBlSCJ3ulkmjMt/9/1v/JrjNmc44YpNT93CT3z8eFuoUj3JGgVaddEQOlpzhs
+ /65HS0PhM+OhdGsI5HNiRZkSvCYOrFBsk09V1Vpx7280zeU62NrYSKm9qlopUxJekL9xM6RAmz3
+ oqhEcNWe0qUcw3MR25FbKEPj1hDarFpYK3TElcnGP9W5NqrqKQXoybfSQlr0mmfgpjAPhLU/fZe
+ SoHU9o42NfGBgVmQOUZosZYNJPj13qKqYV90WFF0ZBp6VI1nOqI8b7tL6IYEmFBIGnEMz2AZDD+
+ Vgs6pOCJS8Ph3Z9OKaw==
+X-Proofpoint-GUID: Eg5-VjHe7n5uI1PoOQHY9Sxr0w7iPVNX
+X-Proofpoint-ORIG-GUID: Eg5-VjHe7n5uI1PoOQHY9Sxr0w7iPVNX
+X-Authority-Analysis: v=2.4 cv=Hf2B3SE8 c=1 sm=1 tr=0 ts=6ab69d2a cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=sV0Ut8U-cAKt8JUqj3YA:9 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2MyBTYWx0ZWRfX8qar9VHMZKH8
- dt1i/hqFFruuBl7l6SSpm2tvkMpz6b6hzGH6nZ0NR0qzHtJ+toafxG9kNcxbykBZTnDURKoHlH9
- FJAZm1euaaJPtBVQKA///zO+/x+6G9uBppIb+yhesITtgz/IZIrGnm9JS9QPuP6FCNOWR7rdDp/
- nLOtqO7qRf4BFZacAkKn1d2m7KL9w+NarR3WB6lAxWau8CeD3dl7H2NMkDmQLYTrSBlN2JFO/yy
- 4Gvq1fvU0rSkHWdEKuP9XYWoOaFpmvO02dufU04BEby0fXH+APuPJ7cweYaUrBuT4+2AOsOtUr4
- JyeebaNyvrrnayEyzVoK38KkZf2rPqv0/9aQlPPKNhkGhJWZ6RRyc6L83CpoELNa+fzCEDY00eK
- NIKut+G7qGF3t6/8HYs65uft4TXt7naoRvpAXMTavhubHwdtr1y0IAzsRmjG+rrxOJ1EaJngPE3
- X17D2BockMcql3JuPzQ==
-X-Proofpoint-ORIG-GUID: o-440df9yTRLskL5W1sK3V-kKdXosr8P
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2MyBTYWx0ZWRfX5toqbOd+WkC6
- 6OSvoPs3q0+ZHRhimu4fGeVTa0lCI4NR6GAWFez/mOyJwYAnu81xDWAxousBoD4CPJVUMU3vYGQ
- OmWs3JyyegP68FIem2OtOBNXlLbv3hw=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=hYdbEgFD419NYT9lHAoA:9 a=o1xkdb1NAhiiM49bd1HK:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
+ definitions=2026-09-25_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 bulkscore=0 priorityscore=1501 malwarescore=0
- phishscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ impostorscore=0 priorityscore=1501 malwarescore=0 phishscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250063
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250064
 
-All callers have been migrated to qcom_pas_prepare_and_auth_reset(),
-which additionally sets up a shmbridge over firmware memory before
-TrustZone authentication.  Remove the bare pas_id-only wrapper, its
-EXPORT_SYMBOL_GPL, the header declaration, the auth_and_reset ops slot
-from struct qcom_pas_ops and both backend implementations.
+Add support for the Qualcomm Tambora (WCD9378) headset codec in
+SDCA-compliant mode over SoundWire. On ARM/DT platforms without
+ACPI/DisCo firmware, the SDCA topology and SoundWire port properties
+are supplied as static data through the codec driver.
 
-The internal helper functions (__qcom_scm_pas_auth_and_reset,
-__qcom_pas_tee_auth_and_reset) remain as they are called directly by
-their respective prepare_and_auth_reset implementations.
+Patches 1-5 extend the ASoC SDCA class framework so that a
+class-based codec driver can be built on ARM/DT: allow builds
+without ACPI, expose the SoundWire probe/remove library entry
+points, add class_ops with a populate_function hook, and translate
+sound-dai cells by entity index.
 
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
----
- drivers/firmware/qcom/qcom_pas.c       | 16 ----------------
- drivers/firmware/qcom/qcom_pas.h       |  3 ---
- drivers/firmware/qcom/qcom_pas_tee.c   |  6 ------
- drivers/firmware/qcom/qcom_scm.c       |  7 +++----
- include/linux/firmware/qcom/qcom_pas.h |  1 -
- 5 files changed, 3 insertions(+), 30 deletions(-)
+Patches 6-7 add the WCD9378 dt-binding and driver. The same
+silicon can be fused for a mobile (non-SDCA) or an SDCA-compliant
+mode; the two share the SoundWire class-ID compatible
+(sdw20217011000) and are selected apart by the qcom,sdca-compliant
+boolean property.
 
-diff --git a/drivers/firmware/qcom/qcom_pas.c b/drivers/firmware/qcom/qcom_pas.c
-index 93d78a5c1201..6de6d62adfde 100644
---- a/drivers/firmware/qcom/qcom_pas.c
-+++ b/drivers/firmware/qcom/qcom_pas.c
-@@ -166,22 +166,6 @@ struct resource_table *qcom_pas_get_rsc_table(struct qcom_pas_context *ctx,
- }
- EXPORT_SYMBOL_GPL(qcom_pas_get_rsc_table);
- 
--/**
-- * qcom_pas_auth_and_reset() - Authenticate the given peripheral firmware
-- *			       and reset the remote processor
-- * @pas_id:	peripheral authentication service id
-- *
-- * Return: 0 on success.
-- */
--int qcom_pas_auth_and_reset(u32 pas_id)
--{
--	if (!ops_ptr)
--		return -ENODEV;
--
--	return ops_ptr->auth_and_reset(ops_ptr->dev, pas_id);
--}
--EXPORT_SYMBOL_GPL(qcom_pas_auth_and_reset);
--
- /**
-  * qcom_pas_prepare_and_auth_reset() - Prepare, authenticate, and reset the
-  *				       remote processor
-diff --git a/drivers/firmware/qcom/qcom_pas.h b/drivers/firmware/qcom/qcom_pas.h
-index 8643e2760602..a296be2be8c0 100644
---- a/drivers/firmware/qcom/qcom_pas.h
-+++ b/drivers/firmware/qcom/qcom_pas.h
-@@ -18,8 +18,6 @@ struct device;
-  * @get_rsc_table:		Peripheral get resource table callback.
-  * @prepare_and_auth_reset:	Peripheral prepare firmware authentication and
-  *				reset callback.
-- * @auth_and_reset:		Peripheral firmware authentication and reset
-- *				callback.
-  * @set_remote_state:		Peripheral set remote state callback.
-  * @shutdown:			Peripheral shutdown callback.
-  * @metadata_release:		Image metadata release callback.
-@@ -37,7 +35,6 @@ struct qcom_pas_ops {
- 			       size_t *output_rt_size);
- 	int (*prepare_and_auth_reset)(struct device *dev,
- 				      struct qcom_pas_context *ctx);
--	int (*auth_and_reset)(struct device *dev, u32 pas_id);
- 	int (*set_remote_state)(struct device *dev, u32 state, u32 pas_id);
- 	int (*shutdown)(struct device *dev, u32 pas_id);
- 	void (*metadata_release)(struct device *dev,
-diff --git a/drivers/firmware/qcom/qcom_pas_tee.c b/drivers/firmware/qcom/qcom_pas_tee.c
-index ac33a00687aa..dbab9a43e6ca 100644
---- a/drivers/firmware/qcom/qcom_pas_tee.c
-+++ b/drivers/firmware/qcom/qcom_pas_tee.c
-@@ -320,11 +320,6 @@ static int __qcom_pas_tee_auth_and_reset(struct device *dev, u32 pas_id,
- 	return ret;
- }
- 
--static int qcom_pas_tee_auth_and_reset(struct device *dev, u32 pas_id)
--{
--	return __qcom_pas_tee_auth_and_reset(dev, pas_id, 0, 0);
--}
--
- static int qcom_pas_tee_prepare_and_auth_reset(struct device *dev,
- 					       struct qcom_pas_context *ctx)
- {
-@@ -401,7 +396,6 @@ static struct qcom_pas_ops qcom_pas_ops_tee = {
- 	.init_image		= qcom_pas_tee_init_image,
- 	.mem_setup		= qcom_pas_tee_mem_setup,
- 	.get_rsc_table		= qcom_pas_tee_get_rsc_table,
--	.auth_and_reset		= qcom_pas_tee_auth_and_reset,
- 	.prepare_and_auth_reset	= qcom_pas_tee_prepare_and_auth_reset,
- 	.set_remote_state	= qcom_pas_tee_set_remote_state,
- 	.shutdown		= qcom_pas_tee_shutdown,
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index dc57c87870cf..08b9c5049dd9 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -845,7 +845,7 @@ static void *qcom_scm_pas_get_rsc_table(struct device *dev,
- 	return ret ? ERR_PTR(ret) : tbl_ptr;
- }
- 
--static int qcom_scm_pas_auth_and_reset(struct device *dev, u32 pas_id)
-+static int __qcom_scm_pas_auth_and_reset(struct device *dev, u32 pas_id)
- {
- 	int ret;
- 	struct qcom_scm_desc desc = {
-@@ -886,7 +886,7 @@ static int qcom_scm_pas_prepare_and_auth_reset(struct device *dev,
- 	 * memory region and then invokes a call to TrustZone to authenticate.
- 	 */
- 	if (!ctx->use_tzmem)
--		return qcom_scm_pas_auth_and_reset(dev, ctx->pas_id);
-+		return __qcom_scm_pas_auth_and_reset(dev, ctx->pas_id);
- 
- 	/*
- 	 * When Linux runs @ EL2 Linux must create the shmbridge itself and then
-@@ -896,7 +896,7 @@ static int qcom_scm_pas_prepare_and_auth_reset(struct device *dev,
- 	if (ret)
- 		return ret;
- 
--	ret = qcom_scm_pas_auth_and_reset(dev, ctx->pas_id);
-+	ret = __qcom_scm_pas_auth_and_reset(dev, ctx->pas_id);
- 	qcom_tzmem_shm_bridge_delete(handle);
- 
- 	return ret;
-@@ -977,7 +977,6 @@ static struct qcom_pas_ops qcom_pas_ops_scm = {
- 	.init_image		= qcom_scm_pas_init_image,
- 	.mem_setup		= qcom_scm_pas_mem_setup,
- 	.get_rsc_table		= qcom_scm_pas_get_rsc_table,
--	.auth_and_reset		= qcom_scm_pas_auth_and_reset,
- 	.prepare_and_auth_reset	= qcom_scm_pas_prepare_and_auth_reset,
- 	.set_remote_state	= qcom_scm_pas_set_remote_state,
- 	.shutdown		= qcom_scm_pas_shutdown,
-diff --git a/include/linux/firmware/qcom/qcom_pas.h b/include/linux/firmware/qcom/qcom_pas.h
-index 1d132e89536e..07d0f1fad85f 100644
---- a/include/linux/firmware/qcom/qcom_pas.h
-+++ b/include/linux/firmware/qcom/qcom_pas.h
-@@ -46,7 +46,6 @@ struct resource_table *qcom_pas_get_rsc_table(struct qcom_pas_context *ctx,
- 					      void *input_rt, size_t input_rt_size,
- 					      size_t *output_rt_size);
- int qcom_pas_mem_setup(u32 pas_id, phys_addr_t addr, phys_addr_t size);
--int qcom_pas_auth_and_reset(u32 pas_id);
- int qcom_pas_prepare_and_auth_reset(struct qcom_pas_context *ctx);
- int qcom_pas_set_remote_state(u32 state, u32 pas_id);
- int qcom_pas_shutdown(u32 pas_id);
+Tested with HPH playback and headset-mic capture on the Snapdragon
+X2 Elite Glymur CRD and Lenovo T14s Gen7.
+
+Jack detection is not wired up in this series.
+
+Changes since v4 [1]:
+ - ASoC: SDCA: add class_ops with populate_function -- callback
+   now takes the SDCA function device instead of the parent
+   sdw_slave (Charles).
+ - Drop the v4 sdca_apply_default_control_classifiers() helper
+   and set is_volatile / has_reset directly in the WCD9378 static
+   control tables (Charles).
+ - dt-bindings: sound: qcom,wcd9378-sdw.yaml -- $ref
+   dai-common.yaml# and switch to unevaluatedProperties
+   (Krzysztof).
+ - ASoC: codecs: wcd9378-sdca: fix SU 35 Selector mode RO -> RW
+   so the class-layer DAPM mux can drive it; keep SU 43/45
+   cached; reduce reset_max_delay to 25ms; drop the
+   sdw_slave_read_prop() call (Charles); lower-case hex literals.
+ - Commit body / Kconfig help corrections across 1/7, 2/7 and
+   7/7 (Mark, Sashiko).
+
+Changes since v3 [2]:
+ - dt-bindings: sound: qcom,wcd9378-sdw.yaml -- drop the
+   qcom,wcd9378c front compatible so the schema plays nicely with
+   the SoundWire class-ID compatible; introduce a
+   qcom,sdca-compliant boolean flag to select the SDCA fuse; drop
+   the fake top-level wrapper node so the slave sits directly
+   under the SoundWire controller; drop '|' from qcom,port-mapping
+   description (Krzysztof).
+ - ASoC: codecs: wcd9378-sdca: gate probe on qcom,sdca-compliant.
+ - set SDCA_NO_INTERRUPT correctly on controls, (Mark).
+
+[1] https://lore.kernel.org/all/20260918131914.681588-1-srinivas.kandagatla@oss.qualcomm.com/
+[2] https://lore.kernel.org/all/20260915165652.914893-1-srinivas.kandagatla@oss.qualcomm.com/
+
+Srinivas Kandagatla (7):
+  ASoC: SDCA: allow building without ACPI
+  ASoC: SDCA: export PM helpers keyed on sdca_class_drv
+  ASoC: SDCA: expose class SoundWire probe/remove as library
+  ASoC: SDCA: add class_ops with populate_function
+  ASoC: SDCA: class_function: xlate sound-dai cell by entity index
+  ASoC: dt-bindings: qcom: add Tambora WCD9378 SDCA codec
+  ASoC: codecs: add Qualcomm Tambora (WCD9378) SDCA codec
+
+ .../bindings/sound/qcom,wcd9378-sdw.yaml      |  105 ++
+ include/sound/sdca.h                          |   23 +-
+ include/sound/sdca_class.h                    |   70 ++
+ sound/soc/codecs/Kconfig                      |   11 +
+ sound/soc/codecs/Makefile                     |    2 +
+ sound/soc/codecs/wcd9378-sdca.c               | 1080 +++++++++++++++++
+ sound/soc/codecs/wcd9378-sdca.h               |   20 +
+ sound/soc/codecs/wcd9378-sdw.c                |   51 +
+ sound/soc/sdca/Kconfig                        |    6 +-
+ sound/soc/sdca/sdca_class.c                   |  148 ++-
+ sound/soc/sdca/sdca_class.h                   |   35 -
+ sound/soc/sdca/sdca_class_function.c          |   45 +-
+ sound/soc/sdca/sdca_device.c                  |    4 +
+ sound/soc/sdca/sdca_functions.c               |    2 +
+ 14 files changed, 1531 insertions(+), 71 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+ create mode 100644 include/sound/sdca_class.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.c
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdw.c
+ delete mode 100644 sound/soc/sdca/sdca_class.h
+
+
+base-commit: 4c253ac4b29b8c6cc6fdef8f92d4facde62e63b9
 -- 
-2.55.0
+2.53.0
 
