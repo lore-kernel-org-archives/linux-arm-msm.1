@@ -1,97 +1,82 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DFEF395243;
-	Fri, 25 Sep 2026 21:52:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A426647044E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 21:54:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.210.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790373145; cv=none; b=SRJbnCjVlyPEdWpT4bUZ8lrzS1Yxkt1JZ9efBV/h98YQzSjJXw8rWJqzy9Y55GfZ9fJ5rhBnY4pwloysvsIrmvo90tmM8QIOeQ7vaXuuD9KlmxCmcDZPtXnv8oNencbGz6nknCxTd1TVnhaGEfk3/3IObzNhyOEUK+H/dIvQums=
+	t=1790373278; cv=none; b=FtYpsacLvWvT9n8wUfGuglCcEfLdRYiVshsOU8YrekWXsGVyRZapx5Iq5fhWTthIhxiXl0Q+EnTnmOoTRwDnqCzN/zKRzur+2dugOdS0ey6vaCLUBOslV9PH4ii3eYfbjJDWNHrZq0PoQtP2VEmhpU6Rqs+RMzFt90juNut4zkg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790373145; c=relaxed/simple;
-	bh=RDS6yZNNxj2nJN3muesoIlX1hvTIfihxzOAf2aEMt1Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cIQZTV7/4mDoBPszZud5bBRgfixTvs08ofxa30UtHjEymFAeLTBdZBS9kfYViUrDOWMuaj/79iiKCD/o/nIus4DYgE8gCXaRA6uZhO+v1TVMUNpMtPisKhOzw6aoMwWUzjV7C3dZD6R9dgU4cCHDAfqsLedIwBsEmObwlCtjbH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mRmmZAzH; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790373278; c=relaxed/simple;
+	bh=dh5D3G836DUj2lo2Ng6i8fYgw0FVBnlELE3fvOwftbE=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=XFP9EP70mNVQOJzSCGedWuSmDuIie6H0z4jn6Wc8DKbuRuCzHkBCuBb9+DSl7vDW/py9T/8V1uJPLoiEcdUzR1EJJ0VO/hCSe0BDG/bqR5rH3+utj8A6zVO9oxQ1FKVu+39hSBRfTISNk2y/41PdEHkN9LbCX6LsA9gGAxKoVfM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=RfY4ixGe; arc=none smtp.client-ip=85.9.210.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mRmmZAzH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4F891F000FF;
-	Fri, 25 Sep 2026 21:52:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790373144;
-	bh=RDS6yZNNxj2nJN3muesoIlX1hvTIfihxzOAf2aEMt1Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mRmmZAzHfZI7iqIwGGwkbYveyq6QGL43nbtmHnrd/CvQv4Nb9syvBwIVK64Q2chkd
-	 MPUR8HjDMX5I6pVMOUqjtG9eW+CAl48cZNRi+YBL6Zg3Bi5Uk/5pbxS1pUCWaDWxWt
-	 geh/x80XiNZ4dASPYn3jRikYJxueUPSLSJ4/oUYSMQ5YJJZmTTLmUwk2DcvSdBfnRV
-	 631b4Fftnz2FlV9OvnHKNI0q8qecjT3q0cUhicAX1DCp6WuYCj+sZ4Gpy3FISbVUm7
-	 tORmqevK3U3LObTY5rSFUiVgo8Qf/zWWgjQIUFfkoUfzRm3HTYq9DrEnXuDNbtuTZY
-	 CM5fGWFj6LJZg==
-Date: Fri, 25 Sep 2026 22:52:17 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Maciej Strozek <mstrozek@opensource.cirrus.com>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	patches@opensource.cirrus.com
-Subject: Re: [PATCH v5 7/7] ASoC: codecs: add Qualcomm Tambora (WCD9378) SDCA
- codec
-Message-ID: <c8a786a9-0104-4da8-ad9e-52aa2c622ac8@sirena.org.uk>
-References: <20260925161049.758913-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260925161049.758913-8-srinivas.kandagatla@oss.qualcomm.com>
- <e3797f4f-2e46-46ff-99ff-6ba9324bb427@sirena.org.uk>
- <43a45cca-e214-4f0b-a026-14da8b33b3f8@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="RfY4ixGe"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
+	s=protonmail3; t=1790373265; x=1790632465;
+	bh=ErF7CfE2J2KkQtLXok6mhVam2RRVJtrfwuAWVpvttw8=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=RfY4ixGeeqbIgW6Ps5HNNRwWQZQqaalQsPRQOqylEjHFYYveDPqWbsT3BbT2PCukC
+	 dgMI/3XcBWhOAnpvkdY46YmmULKBza51EHpecGYZ96jOdFTuvdWlpmpzQe14+izML+
+	 Keb+IrMyQWfxHVVeJTcvux4IPv/mnp+iDZARYNgj0jbo9hGFNXn+ZWTQy55dzw0aGh
+	 7Sxfr3NzuHM3XDdsvkyHWVC91/6Gws0ZiFLUWMDJOM2nOX/2Iwvha9cUv2VrzcPRh7
+	 y5VrRbPg2MgTzdkinVz4pUIDfcmxhgiSnuvU5YRokqid/CUanlQrznSOiD6144W2J2
+	 hsBABMSZnHIzg==
+Date: Fri, 25 Sep 2026 21:54:20 +0000
+To: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+From: Clover <alex@ironrobin.net>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] Lenovo ThinkPad X13s embedded controller support
+Message-ID: <20260925215358.33417-1-alex@ironrobin.net>
+Feedback-ID: 54785507:user:proton
+X-Pm-Message-ID: 5c58b5ca42a24e4d87b2ec8efb1ab51cb726a9f6
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="JQbGe5UXgaftHFqU"
-Content-Disposition: inline
-In-Reply-To: <43a45cca-e214-4f0b-a026-14da8b33b3f8@oss.qualcomm.com>
-X-Cookie: Love America -- or give it back.
-
-
---JQbGe5UXgaftHFqU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 25, 2026 at 09:28:51PM +0100, Srinivas Kandagatla wrote:
-> On 9/25/26 6:31 PM, Mark Brown wrote:
-> > On Fri, Sep 25, 2026 at 05:10:48PM +0100, Srinivas Kandagatla wrote:
+Add support for the embedded controller found in the Lenovo ThinkPad X13s.
 
-> > Why do only these have nbits and type?
+The X13s EC uses an I2C command transport similar to the ThinkPad T14s EC,
+but its event, keyboard backlight, and power-management interfaces differ
+enough to warrant a separate driver.
 
-> These are the the controls exposed to user as mute and Volume.
-> Looks like asoc_sdca.c does not use type and derive nbits, it directly
-> uses control->nbits. We can add the conversion in framework, if that is
-> something preferable.
+The EC event interrupt is provided by GPIO103. GPIO176 is a separate
+host-controlled power-state signal used during low-power transitions. The
+driver follows the EC command and GPIO sequencing described by the X13s
+ACPI DSDT and defers EC event queries during suspend until the I2C
+controller is available again on resume.
 
-If it's not needed that's fine, I just saw that there was an
-inconsistency and don't really know the SDCA code. =20
+This initial series provides EC transport and power-management support,
+wake handling, and keyboard-backlight control. Other EC events have been
+left for follow-up work rather than exposing unverified input mappings.
 
---JQbGe5UXgaftHFqU
-Content-Type: application/pgp-signature; name="signature.asc"
+This follows earlier X13s EC work by Konrad Dybcio and Steev Klimaszewski.
 
------BEGIN PGP SIGNATURE-----
+Development was assisted by an LLM, including analysis of the decompiled
+X13s ACPI DSDT and review of the resulting implementation. The resulting
+behavior was verified against the hardware.
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq27REACgkQJNaLcl1U
-h9DToAf+Ihd1/73oz37XG0CW1y27I9F6meLWQgXBMzD5YRil4KRiw34fSDKthyUc
-Vc+Q2PHu572TapUJbkUG/+qJNcjw33ingCevuR/DCzRuuLd6Tb1xxRG2aVarILDo
-X3kRI5z24wy1UdzNVoW3WoiRBbB18XjEvyFp8+euKrgGyIJ2r0mLJeHWBLgc9TCZ
-EOdKgD67Md/OEOV6Rw5Q6qB1m+6wVIJP2CrO3Xu6ok0OXHHZPFuv0ZuEwXz5l/n1
-ImIkyolDZRDaVEDowUMKhbNLIuLTODcPgkM7qk2CjO7m8mICifbz1W9ICesNGcyK
-El3ifhxXUPd7DJ+voHqeq/Zcnoi2Vg==
-=KIOH
------END PGP SIGNATURE-----
+This series is based on Linux v7.3-rc4.
 
---JQbGe5UXgaftHFqU--
+The series has been tested on a Lenovo ThinkPad X13s, including keyboard
+backlight control and firmware-driven brightness changes, s2idle
+suspend/resume, keyboard-backlight state restoration, and wake from EC
+events.
+
+The binding passes dt_binding_check. The X13s DTB has also been validated
+against the binding, and the driver builds cleanly with W=3D1.
+
+Clover (3):
+  dt-bindings: embedded-controller: Add Lenovo ThinkPad X13s EC
+  platform: arm64: Add Lenovo ThinkPad X13s EC driver
+  arm64: dts: qcom: sc8280xp-x13s: Add embedded controller
+
