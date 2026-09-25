@@ -1,81 +1,171 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C954E37B010;
-	Fri, 25 Sep 2026 15:25:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A15E74CE663;
+	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790349934; cv=none; b=Cmns0YJfFbgvbPRczHOMkQ9H4RnFAR33V0klZw7kPSFPr/DCEG39j5e8mqFw1Ij/io6dd9yW6Q4rZ6c//gEvz1GfUFOS0LZp7O0FMElQoik+J4ZD12PnpCF91AJ20surH50ekGOdLBsZy7kpli+8DpVTgCCqCwel/uD5D71/miY=
+	t=1790350088; cv=none; b=bCp6A+RnNjHBzV33vqDH4gz5DZhTfbQEIuZo6AchtZQi9VxLC/uttWJ1HOU20iy12LXTAPZsspImnQA+lScVh2Au1oC16uDIFT5zH43/RodSJoNxpBLDcHKPsEdWk2GCH6MpYmtN/pVGBuOYetG9tV6mD6C4FxxZ/yN/P/tZw4g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790349934; c=relaxed/simple;
-	bh=8oTDXYZ0a/tY7uho0asmRnYog3FDhF0bwW68FLL7OEo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=indhB7ZgT8d50FBChV2YT4/nyg5kn8koqt8JQoxStxz1xFEQhzyQfa1zfxoWjciy2B9QFbD0GaEDMPIjSfv+uozI1Ue+vSUfrgZ3IulVnxYNB1HWFCsqUVoc25BYFZWWaYkCmFoLvqfPemmp5c+8Y/qDV+qRme9HoT5dCcIMG2I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TklBtAtv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790350088; c=relaxed/simple;
+	bh=6/mDj/MdwcFfMPvPwgKItcrvAfwEbVC42umbKoJP8GU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=b4Agl/jlXuePePr9pOz66ChdfepmqcROASJS60nFUTgJtV5/kFSHzCsrfeWnrd1Zk5SG13D+K3YVWPBP+83zLbQVltNRFk6JKhsL40d7QBFF+yFwmPbgLaXYT6fZpmsDg4+EVwF+qPnUVd1VxAOtuHizUCDl7qAkvrbxfK2mGEU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QkK/tGEP; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TklBtAtv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDE2E1F000FF;
-	Fri, 25 Sep 2026 15:25:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790349933;
-	bh=XjJu85d7wfISfmZzNSzPkWwyChELnjkdxti837YiI74=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=TklBtAtvfD4nKCooVinJbxY9ggCZg+43JN5Q8zDDCGOS4uG5RKMm55zXl3VbJpGKg
-	 J47SESdECcQgOBxpGz0mKeWEcyGcDOXNiN3eXsjOLxhXyi/5xF09/VxrH3D6USBb6W
-	 tbCKDpLicK7Hkus/J5y85XbqUhWWHw9BLpaQF+rplzaH9zNmLelzrjShAA6cVbeNon
-	 Isfq6SxEv7TD8gHhILn9TsO053Hk/dQNU58rhuhrb5IYURSuhpvY/cuLFGLuXq6qWr
-	 isHX+UVJ3uALkTHTFdq+eI/K+eMvShr5z6+MwTnbNoAi2WpI0RBiK/FUcQ2gIvCG62
-	 Vzsk3UmQnlLzg==
-Date: Fri, 25 Sep 2026 17:25:13 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Maxime Chevallier <maxime.chevallier@bootlin.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	shengchao.guo@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org
-Subject: Re: [PATCH v4 6/6] phy: qcom: qmp-pcie: Add Nord Gen5x16 PCIe
- multi-PHY support
-Message-ID: <q6trptalussxqayvkvfti7cm2uje4a6novrhelxp4adzd7smtu@3j5rpztp7jmr>
-References: <20260921-nord-v4-0-ed05c6e09240@oss.qualcomm.com>
- <20260921-nord-v4-6-ed05c6e09240@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QkK/tGEP"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3D686C2BCF6;
+	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790350088;
+	bh=6/mDj/MdwcFfMPvPwgKItcrvAfwEbVC42umbKoJP8GU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=QkK/tGEPyJioJ3GZhdEtEFXdbMX0Qm60NRTHYpxOFkPU45cFso7oIvsAfSrriy5w4
+	 0XhmMEdu1blTfmcSObqsYfSKowr3LIhEgy7REeZsk+XZK+39TlZMFam1AR9OcNP7sm
+	 Wi1QjLe2dojciW2b6KQ8pgjVKk+hIhW9opj0NUmSlZmkaweScdw4MiFU6s92yBLHYO
+	 8zf2SlNxT8RKcbExpJ4lupGubD8pTmMMAV9JMEGG0jW/EkFElvZz4fcuczNPOMksHC
+	 pN4xIVsegfVzrwPZRrtvUd2XSM/bFGLk6QbuiqqOEQhJiNvfYGBEoWcbyxJCCRI6Uf
+	 qOKeep3yzXOow==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CAE5C98321;
+	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Fri, 25 Sep 2026 17:28:02 +0200
+Subject: [PATCH v5 1/7] ASoC: qcom: sdm845: Demystify TDM masks a bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260921-nord-v4-6-ed05c6e09240@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260925-pixel3-audio-v5-1-7ffb32c980bf@ixit.cz>
+References: <20260925-pixel3-audio-v5-0-7ffb32c980bf@ixit.cz>
+In-Reply-To: <20260925-pixel3-audio-v5-0-7ffb32c980bf@ixit.cz>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ David Rhodes <david.rhodes@cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ David Rhodes <drhodes@opensource.cirrus.com>, 
+ Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
+ devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2760; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=OBe52DHgRUl+sZAYSKZs/z/tb5vA9VGkR+bezPzuldo=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtpMFUNOMOPKIzduzGIgENmg75SgpxDjPEPhjw
+ bcu0O2CFUaJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaraTBQAKCRBgAj/E00kg
+ ciDmD/9p+qBoC4RWKX0CpMecPNtRpZkL97QNBAMkYpBSikF42SuIj0govDX5HTrbR6qI/gcWhnB
+ fBROITVmMu30i3tHU7yLdctMegcRBRCntSsDU2xPua3+3jM1scN4DhrppIsqyWbUp+i0zV6YSP4
+ dEAHSKqx9P2zYZ/4ylSG8SfW+kxNR34aKnWJ51wgLvkjh74zoGsEQLbBHVDUazf1ZHyMZ0j2Vtz
+ dwkhSj2ehBWAhlxdAs8RN4rE2xg6ZFRwF4ODJZFOo1PGw+ZSjh+oflX1s8LyfjgYECepu23gRYq
+ YK9KNfhH4GouUabJZXwAMJbcmjeNpsztQbGrgFEjlfhXB3idzcYZ24erAE/0zUJFp4m3jvGuIzt
+ WSHlAMCy2KGvMWnFG9uYe+hPq8bdJA7YAZmIk+WAm9yzI89PpqOsU74pBKqECfiv/2N77uNAPQs
+ 2CfisQ+jzs+4UiJmIyLjs3Oi21x4Uz1Bfmw0/cuPQB33cRmhmbjHunkay18FQlhVU9vI3j5UOKV
+ xNksTuoi58hR43Q3fxLUK0/MjYO4ly6dK2B2YD+CGskCUE65lCys85XJY7s4dXkg0W+c11CDfUB
+ kNBc/AsG07WNlwCCkuMEJK8M5St8ifEDp7iKAGubB7WFlKwk46cyzJbUCdg6ya0tqKTR4wiGtP6
+ lFWnSRhCgxaiJKA==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Mon, Sep 21, 2026 at 11:07:14AM +0530, Krishna Chaitanya Chundru wrote:
-> Add support for the Nord Gen5x16 bifurcated QMP PCIe PHY.
-> 
-> Nord has a single PCIe PHY block split into four ports which can be
-> used in multiple lane configurations: x16, x8+x8, x8+x4+x4 and
-> x8+x4+x2+x2. The active topology is selected through the link mode
-> configuration register, and the driver exposes the corresponding PHY
-> instances based on that mode.
-> 
-> Unlike Glymur, where the PHY is initialized by firmware, Nord requires
-> Linux to program the PHY registers. Add the PLL, TXRXZ, PCS and PCS
-> lane initialization tables, along with the required power-up,
-> power-down and soft-reset sequencing.
-> 
-> Add per-port and grouped PHY configurations for all supported Nord
-> lane modes. Also add support for regular PHY resets in addition to the
-> NOCSR reset.
-> 
-> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+From: David Heidelberg <david@ixit.cz>
 
-Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Describe the mask with the bits used for each RX/TX.
 
-- Mani
+Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ sound/soc/qcom/sdm845.c | 21 ++++++++++++++-------
+ 1 file changed, 14 insertions(+), 7 deletions(-)
+
+diff --git a/sound/soc/qcom/sdm845.c b/sound/soc/qcom/sdm845.c
+index 6843ab8ba017e..0ce8265ab1c1f 100644
+--- a/sound/soc/qcom/sdm845.c
++++ b/sound/soc/qcom/sdm845.c
+@@ -18,19 +18,24 @@
+ #include "sdw.h"
+ #include "../codecs/rt5663.h"
+ 
+ #define DRIVER_NAME	"sdm845"
+ #define DEFAULT_SAMPLE_RATE_48K		48000
+ #define DEFAULT_MCLK_RATE		24576000
+ #define TDM_BCLK_RATE		6144000
+ #define MI2S_BCLK_RATE		1536000
+-#define LEFT_SPK_TDM_TX_MASK    0x30
+-#define RIGHT_SPK_TDM_TX_MASK   0xC0
+-#define SPK_TDM_RX_MASK         0x03
++#define LEFT_SPK_TDM_RX_MASK	BIT(0)
++#define RIGHT_SPK_TDM_RX_MASK	BIT(1)
++#define SPK_TDM_RX_MASK		(LEFT_SPK_TDM_RX_MASK | RIGHT_SPK_TDM_RX_MASK)
++#define MIC1_TDM_RX_MASK	BIT(2)
++#define MIC2_TDM_RX_MASK	BIT(3)
++#define MIC_TDM_RX_MASK		(MIC1_TDM_RX_MASK | MIC2_TDM_RX_MASK)
++#define LEFT_SPK_TDM_TX_MASK	(BIT(4) | BIT(5))
++#define RIGHT_SPK_TDM_TX_MASK	(BIT(6) | BIT(7))
+ #define NUM_TDM_SLOTS           8
+ #define SLIM_MAX_TX_PORTS 16
+ #define SLIM_MAX_RX_PORTS 13
+ #define WCD934X_DEFAULT_MCLK_RATE	9600000
+ 
+ struct sdm845_snd_data {
+ 	struct snd_soc_jack jack;
+ 	bool jack_setup;
+@@ -107,34 +112,36 @@ static int sdm845_tdm_snd_hw_params(struct snd_pcm_substream *substream,
+ 	default:
+ 		dev_err(rtd->dev, "%s: invalid param format 0x%x\n",
+ 				__func__, params_format(params));
+ 		return -EINVAL;
+ 	}
+ 
+ 	channels = params_channels(params);
+ 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
+-		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0, 0x3,
+-				8, slot_width);
++		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0, SPK_TDM_RX_MASK,
++					       NUM_TDM_SLOTS, slot_width);
+ 		if (ret < 0) {
+ 			dev_err(rtd->dev, "%s: failed to set tdm slot, err:%d\n",
+ 					__func__, ret);
+ 			goto end;
+ 		}
+ 
+ 		ret = snd_soc_dai_set_channel_map(cpu_dai, 0, NULL,
+ 				channels, tdm_slot_offset);
+ 		if (ret < 0) {
+ 			dev_err(rtd->dev, "%s: failed to set channel map, err:%d\n",
+ 					__func__, ret);
+ 			goto end;
+ 		}
+ 	} else {
+-		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0xf, 0,
+-				8, slot_width);
++		ret = snd_soc_dai_set_tdm_slot(cpu_dai,
++					       SPK_TDM_RX_MASK |
++					       MIC_TDM_RX_MASK, 0,
++					       NUM_TDM_SLOTS, slot_width);
+ 		if (ret < 0) {
+ 			dev_err(rtd->dev, "%s: failed to set tdm slot, err:%d\n",
+ 					__func__, ret);
+ 			goto end;
+ 		}
+ 
+ 		ret = snd_soc_dai_set_channel_map(cpu_dai, channels,
+ 				tdm_slot_offset, 0, NULL);
 
 -- 
-மணிவண்ணன் சதாசிவம்
+2.55.0
+
+
