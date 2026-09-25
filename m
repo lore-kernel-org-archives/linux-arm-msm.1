@@ -1,229 +1,203 @@
-Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
+Received: from mail-lr2-f12.google.com (mail-lr2-f12.google.com [74.125.230.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6DD0418346
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 06:41:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.229.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB6BF394499
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 06:43:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.230.76
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790318511; cv=pass; b=cZt7xSth0AnQzKDwP7KrNqqSBC5EI3H2mebRvGWMqrNwWyK5hj1ZJrtHgbUNelkSNyc4oBKmuf+Qp0UgGuLaek/CcGQtOQUraeQWGC/0yXHlwIc6l53Yak6GAHUYSEROSjEWBGPZtJm450keM/ygp36F00lCDuaFZGoJTcZt3hE=
+	t=1790318603; cv=pass; b=eAR3kqP1L4TGqG2+TUqzz4vOR5Y7Ojgxbdnt8KCQsMNdCbpwyhfhSMaGVK2+WW3sFqEm16jFoQVJGbm2AzZ353Gnm9156f0pi/1ct38rdmHugsuw2BsEwVojmfSAVp2bZV5rjyrBCam0tsOajzD2aXWvJu79wuKd+0vv6xO8ABs=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790318511; c=relaxed/simple;
-	bh=RkD0ncrXK0q4FdIjZkUOUclIn2t5h5U0/ZqoP0P9Mzw=;
+	s=arc-20240116; t=1790318603; c=relaxed/simple;
+	bh=qT0MFd176BYrXuQDaeaSPtSk6fF2oBF9InGKPMdZ6cw=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=oynEN/VBoxByQ7o71r6RKpekMpsqnqgU3b8YsxKjJrS0wZWWSInh0h4NrgH6qenfqWDy/FZXpsQ9rL7x5lrGqsmYq8giivO8BBybx77d8vYSLpPHCHL+egBHokNrcoI3tKEZMf7gICebyScEOW005el3h0RMwdHBSdtO5T2SOVI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k8OriHiS; arc=pass smtp.client-ip=74.125.229.204
+	 To:Cc:Content-Type; b=QbbDCDIW2P39NVxbSplqC1vJ1ogy2dQDZRL/Tz6MwTNUzccLdh59w4ZaZsqnj8Q9ZGgbgI+HILgHBV+v6gvC7VNs+xtLGsejzJIPkt3NIK6vNrGrqSfcgwfPKNoNluzDE4sYHByhf8SKMXs9Jbvpenb5oYmsTO+G1A0CDPIwiwU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f21oXaGA; arc=pass smtp.client-ip=74.125.230.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="k8OriHiS"
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b76ff64d78so568222e87.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 23:41:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790318508; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f21oXaGA"
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a2ff176d5bso3665731fa.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 23:43:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790318599; cv=none;
         d=google.com; s=arc-20260327;
-        b=lp7DznDQvnO4OZaL35FlDqFkGqfamM+e+7WfniHbEuoPMoLwX39As9QuxPBvBVUkhK
-         FzUqTup1/oElmInFe65FzfC7Vp6YiSR+7lRIo8yl0UUcU5HpRX81lu76eCiTI4mNb2oI
-         qTlWYK5saVwRYqThEJtvbqY1dhzrn+vpKm4jjXN6VbDXnpgrbTHah06AzLiHngOBOvFF
-         yYtMfDODzbkROkzzn702B+qMjRuTiDJqcKEmEzKP8TGuxXdDMZomvpDsy9HbQV49ajDd
-         ejrjEmYzfABiyJ48FeWUPIPyiJmQeLE/rk/epPm6GXHBCBD5MMDMlugWX0+372Hf++o7
-         R3Xg==
+        b=g7IkBKzFS/BB7Sq9z1HTz+NKBmMPr/LFETXqwFrbcJZXkxQLYVGtAGSXnc9Sbw9VOv
+         hcN2NGd9gjGNKXndMkyb8Vqm2XoJeb+zBL99LwDVk8eY7KyfzmfiUdsBjUuV+tuZIZ6y
+         lc/DSBGUzSnTkbXAryYLrRQnRfIA3+9eNx3uK4ZiBfpa0rXudBskMGWmJkC6XXOKlj2L
+         fGahAzL3dIg4YzA7EPvI2JZIWagWrMVjCGX3tIWyT7rND1AXwOJRQTHA0IR8tL2VgwhT
+         i5xs85sTKRtUMvU4KLVurP8kUSwRhfQeLSsZn/ZggXnD15lK4KrmzrFzoKdqHLVIydh6
+         I7Kg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=oCUKdWQbsHJgUOSvdlicS2cHjAoZu9s1v/XdrzjTDIU=;
-        fh=uSwp8skuuL46+mBj9CyKeY2bXRR5y3FNQlgO7deQhnE=;
-        b=IjoaYkElqNmvWLu5qbL1N8DzmxEKuYTQzxt4Od/qOykHTTMlbBg+T+9kQdZB/Uuda7
-         BE2JZ+tYAGPFKN+KouiUPzDw9rxwLrbDgAcwOU65cMLmk0KA4ilqgbP6sksjQ6ne9eHU
-         PW1cTkIVrlMIpR3AjkiQFwJ80jrLSw0MyDLLkKduLgTXZCH2JzdTYVkxWaBvoE0MaD3O
-         guUemypZhHvsPXUcrXK4zaMnz+QOzagb45/2XCJuJeXJwtS2JmU0qRh2VLZPz3A7j/Bp
-         YmJSKB3kdcvgbWbntNbGnsIFXlLv0u3hUTV1MEpy7SCSQL8ymeQl87qjN6hG20TMbMXX
-         QaNw==;
+        bh=73oLTu7jCnqlLzTg5ExaWSXRUj31YyCrfn3RnTCN//A=;
+        fh=NOt9bVa6l/poy6zx1xxf+Z9un6kC2Dnwnv7QGFPGP38=;
+        b=HfRgiwj8KvrlvjLIqCqN5EMMTqN4+YnudcK6kZyPr+tXIkAALlW3EpXZXFbBPygEt6
+         bMvmk1CHNS1yCn3rp5UD/3+Y1g54MzZKv62CF+7wfIhOhI+wlIL8fM1p7k9ygc3CTuDv
+         Pd8d3zPxh0KQ0RKMUAgpCMcYoIY+pp5+MOonQ6qQq9oOj4vvCEdyJvJdyM2UfcRsmAJC
+         nrrjD8tucGIIQtZyzniCjdiOJIagnjojhZ3tXINHK2jlCnljM8HHkocHTDCgKDOLmyQK
+         OS2DsVjBUuBvh+s2VwWPd3DsH/LSPjz7J/Ya/0aeRzQNljl0EynipHbpJrVzDMZjadwV
+         qo5A==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790318508; x=1790923308; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790318599; x=1790923399; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=oCUKdWQbsHJgUOSvdlicS2cHjAoZu9s1v/XdrzjTDIU=;
-        b=k8OriHiSUhYSimjZzzOgSQ7fiEthApf0hKVCTywB39HydjMmF7ElQ7E5hbLnK/D7X2
-         lsL+IyNTnAFrXfSBQBDEKiRXUlIOgrhcaKVz+yOoVuKumnZqlVZa+NyBzq8aFLPzaJMf
-         qwywzm58NdIhx26NEYDfvBloknkhd6IXUp8s+t8t84SGSA5n5/CnvHAQxeclKQtBkVTc
-         ISodHerrV/Vsr9t5pzFAGVWJwCmTBXm5vfgMt8QxX+iDDCWc3ZfyhEbr0tUOKBjKJXCN
-         SMjQLydGyjTJL6rON25JN7RW31yvpkk83v15UaIczLo42OXj9zQdgPc32hQowIGcNtX2
-         8SSA==
+        bh=73oLTu7jCnqlLzTg5ExaWSXRUj31YyCrfn3RnTCN//A=;
+        b=f21oXaGAmwkdA1ElT5Ql0b82KFg4o2oMHEBraDYAEpvFDOefls3aJHTVsKmYiI08ph
+         cYlvsNVcWVkz6Bvp340Zt3bfeK7kDYEFI9RisqfuKA+E7+GCyZY/r9qpqZ6PXxp/74If
+         76C2E0qdkwIXbw72Syp4D7Rkcofu6/uYBJKPMDhRu4BqEtCw/smfaIklQB+ox0j7g43T
+         tB6kYaqaS5TmxJQLCI1UN6LPilS1pdo0ceP8WT+zd+E3ki5Y0r9pteCQCa/fE+AoDjkH
+         OiBitWpjaANZYVBtTBvo3VTuXQwxXoTWtm54wOkQ0gI3SFj1YSC53EeOwxiW4dktnAht
+         8QXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790318508; x=1790923308;
+        d=1e100.net; s=20260707; t=1790318599; x=1790923399;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oCUKdWQbsHJgUOSvdlicS2cHjAoZu9s1v/XdrzjTDIU=;
-        b=EiHpxgBgRC3uwAuD/I0T12oDJxA769JDKWk8g96cnbX4HAUyKoOZVFe9WFa+qOQaCu
-         kkxqbuXJYwNldxrFW2WyOXnxSr21jx2J0UP/uvGeqa6050zCN972ZsJkdIOTnRN9SvTd
-         SpcrycTh84epSovqDvpdj3Lz0lPjSCyqo9nHXL06FODQnVxAsP1zr2M2N1KCSi5Dw4Ga
-         qmAt5olPxO6kO/LKcAikR/NQPbs1bkQ5rHOoF4g4rNWTSZHCgFTdY4j2lXNAKwJh1j2L
-         jtLYY3wpOuTfmk3nPlVe/Y7vhC/IAq/KfUyaLrLKlH+BTpiNr0CBTUBH+gnYW4nB0TE2
-         UYnw==
-X-Forwarded-Encrypted: i=1; AKwUvBwPTNUWcPdAKjil0VCVREuPjUo7Nhj7MU6iLtVV0Po5J4v6q/2X4assSuUSEMJCPgVPrtXxpWIseGqjgPLM@vger.kernel.org
-X-Gm-Message-State: AFuF++lLO3riM78PGsc/j4OfoYN6BNdq2yEvzrg6rabJDs4BOQ6sFMiN
-	mdSHOXGI5ZlHH9IY+aSatvkgoX334JHi/R7FFN1N30sdedrgg8voHMb5LL4Je76cqRqIrUOgAoz
-	gXPFyCFzUFicAG25Chq/PwZWp5P4F7qo6uw==
-X-Gm-Gg: AYBFou0PpllCQTiXWtRJRd5U82lyBWOg9lyLRBuQ9RxQPg2qJ1VPk2UpeIXTIUpnOAx
-	LA3jV26yzR/RJrV5miVIV8MHNmvk08YLFv+DTzfVguIfmshdVDzqXpjg0ONVdyylOzTIwVzl7U/
-	V18GuVYD3T8U7W7g+zGtduOzj0tbnP4tE65RMD+SqLdl9wqJJnN0YYe83CbNh76hNb0FxwaOh/2
-	PBC/h586zs8+JFCFyONrqEO+0Ntbx06/vOrPf4gwOhQ4NTbNFIkkUa+3nMDMHnOjGOnqpVxmVUL
-	liE5BFTGgNmYht2Jts9+jfVrpMeqI1ulOXhF0P25VstWdzbim4+S206v+HgzJ8h/V76ZSABGv+R
-	Yq3hJddZ9xjB9h0v3hj+8NkVlZWU0GUmeyElsgklQsTw=
-X-Received: by 2002:a05:6512:b23:b0:5b6:1a7c:59e7 with SMTP id
- 2adb3069b0e04-5b8e0fda144mr1478322e87.65.1790318507668; Thu, 24 Sep 2026
- 23:41:47 -0700 (PDT)
+        bh=73oLTu7jCnqlLzTg5ExaWSXRUj31YyCrfn3RnTCN//A=;
+        b=AnU35hJR0au2xubKtaoKTSIBd9q/uiITPyyPW3XjLjalp/7EWl+FpzvLalUIteen87
+         hUCqQw1NMHgZ5/eRusrmdZWuDDO7Drb+BwJ1MIDfcLcfm8J47ksu/8dpsMrBv2zTmx+d
+         Bzga7TmZm84tad6pFU1IgWgkqATI6oXHBkqsT+v79E2ZqnXZ3pF7PYmauN2YB3AIMUSh
+         iqSLj9IZJq7CZzhtkx2qbJ4JBwDpvnOVFLAt6IffN7KTJcDTVhb0AwOYkp6Sz57VV5em
+         45z6m+0Fn9IaIFcYUiVBntdh9JrDFOjucjgXcs5T1xJHxtyI31B+tzaGTMi4iGs4SFEd
+         Nolw==
+X-Forwarded-Encrypted: i=1; AKwUvBwCb6I31/0QeBqnJx4Ki0y1jpNqm4/Wd8ioM/PTsMqzUer2lot0Ok+eWdFPJw77Da1Ig8mKUPfA3fzxICK2@vger.kernel.org
+X-Gm-Message-State: AFuF++lqHkKTZqB7fQpELHDyL0zhy2MmEmavqrX30GIIvUH9I/+5kMfe
+	2jyYY7z1u68evpEy1B+DJMGrpBfSblMVcm8Z2ZcPN1fFfG9nzlMTAO50EY5UY8s/ddsn33IBqt+
+	8T/XUQWRAZlpC1lGkz8Nm0NYCbpfLt4k=
+X-Gm-Gg: AYBFou0I7mx1fglXMp89dRcyqG16Yw1Xz2Wp8BudTAQDDOxwoU3NLqk6yMzehRbmjEJ
+	Cyji3GjnsTfcQQn4MmkKXHtFfpwq06gtRjoiuK9Dd5RMAmr2URxppAad4tuKiU+tHt3aX9sECWW
+	NZXM51uC2Si7o8Df4XKB1rXIBZ7iggGmMQYCqfoNghi0+Ux8klQBiTX71TH/EL62EDJntkUucLJ
+	KZB/CHglCfc36P4HmqSvw3mtmpORGE3f08fwmXiwya5zLgjmJYu8YNxF5IJT2svZ15LlHOs9ZmZ
+	pVymaFef0HGjxKd5L9sCG8laggUf9v82eZPFEtFYiKAN70qnu/cH7zi6kZS2ole2S+FG8x08tVc
+	G2fshL1dAH/wqJ5XRsyCec4a6CXCvG2b7I5P9hMYUKE0MLmfPAO/D7g==
+X-Received: by 2002:a2e:b893:0:b0:3a5:f044:fcba with SMTP id
+ 38308e7fff4ca-3a63c0f6f99mr11331361fa.20.1790318599360; Thu, 24 Sep 2026
+ 23:43:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com>
-In-Reply-To: <20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com>
+References: <20260605-sm8750-ddr-bw-scaling-v1-1-f39f918c95a7@gmail.com>
+ <eddd77cc-fabc-4a2e-aff9-602895495ad1@oss.qualcomm.com> <CALHNRZ-J6DH1ebhUcRqbVRmStO_MGBJr63TEQg5vxNO_UpF-vQ@mail.gmail.com>
+ <36dce215-8266-434b-968c-b68d7ac1ff2f@oss.qualcomm.com> <CALHNRZ8UGRzr48RaTufn_CXq0si1_uwYQSnbX+8YAtf3=d04YA@mail.gmail.com>
+In-Reply-To: <CALHNRZ8UGRzr48RaTufn_CXq0si1_uwYQSnbX+8YAtf3=d04YA@mail.gmail.com>
 From: Aaron Kling <webgeek1234@gmail.com>
-Date: Fri, 25 Sep 2026 01:41:36 -0500
-X-Gm-Features: AclHuK_MIE9jeQicmnij_O4juXzqsKzVql5g7gyWzlaf76vc-yY3NplBZb2k_9o
-Message-ID: <CALHNRZ8kFm98HAxoSya1uzV9TnPL8NAey3y5nUaaiqPiE+Fe4Q@mail.gmail.com>
-Subject: Re: [PATCH v9 0/6] arm64: dts: qcom: Support AYN QCS8550 Devices
-To: webgeek1234@gmail.com
+Date: Fri, 25 Sep 2026 01:43:07 -0500
+X-Gm-Features: AclHuK8hFndtmQNtvynjaSVQTF7UEYz0rQLDWaAywywoMi1VKc4BOSKxgrXEbsM
+Message-ID: <CALHNRZ-JtxOft6GVvb=fgZf7YVLTx2n5wf9t=BJ4KdoeCefX2g@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: qcom: sm8750: add cpu OPP table with DDR and
+ LLCC bandwidths
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
 	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
 	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Teguh Sobirin <teguh@sobir.in>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+	linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 27, 2026 at 7:20=E2=80=AFPM Aaron Kling via B4 Relay
-<devnull+webgeek1234.gmail.com@kernel.org> wrote:
+On Thu, Jul 23, 2026 at 3:32=E2=80=AFPM Aaron Kling <webgeek1234@gmail.com>=
+ wrote:
 >
-> This specifically includes:
-> * Odin 2 Mini
-> * Odin 2 Portal
-> * Thor
+> On Thu, Jun 25, 2026 at 7:23=E2=80=AFAM Konrad Dybcio
+> <konrad.dybcio@oss.qualcomm.com> wrote:
+> >
+> >
+> >
+> > On 18-Jun-26 06:37, Aaron Kling wrote:
+> > > On Wed, Jun 17, 2026 at 5:41=E2=80=AFAM Konrad Dybcio
+> > > <konrad.dybcio@oss.qualcomm.com> wrote:
+> > >>
+> > >> On 6/6/26 12:36 AM, Aaron Kling via B4 Relay wrote:
+> > >>> From: Aaron Kling <webgeek1234@gmail.com>
+> > >>>
+> > >>> Add the OPP tables for each CPU cluster (cpu0-1-2-3-4-5 & cpu6-7) t=
+o
+> > >>> permit scaling the Last Level Cache Controller (LLCC) and DDR frequ=
+ency
+> > >>> by aggregating bandwidth requests of all CPU core with reference to=
+ the
+> > >>> current OPP they are configured in by the hardware.
+> > >>>
+> > >>> The effect is proper caches & DDR frequency scaling when CPU cores
+> > >>> change frequency.
+> > >>>
+> > >>> The OPP tables were built using the downstream memlat ddr & llcc ta=
+bles
+> > >>> for each cluster types with the actual cpufreq LUT tables from runn=
+ing a
+> > >>> CQ8725S device.
+> > >>>
+> > >>> Also add the interconnect entry for each cpu, with 2 different path=
+s:
+> > >>> - CPU to Last Level Cache Controller (LLCC)
+> > >>> - Last Level Cache Controller (LLCC) to DDR
+> > >>>
+> > >>> Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
+> > >>> ---
+> > >>> arm64: dts: qcom: sm8750: add cpu OPP table with DDR and LLCC bandw=
+idths
+> > >>> ---
+> > >>
+> > >> [...]
+> > >>
+> > >>> +     cpu6_opp_table: opp-table-cpu6 {
+> > >>> +             compatible =3D "operating-points-v2";
+> > >>> +             opp-shared;
+> > >>> +
+> > >>> +             opp-1017600000 {
+> > >>> +                     opp-hz =3D /bits/ 64 <1017600000>;
+> > >>> +                     opp-peak-kBps =3D <(1353000 * 16) (350000 * 4=
+)>;
+> > >>
+> > >> I think this should be * 4 in both cases since the interconnect driv=
+er
+> > >> ignores the channel count for a node in peak voting. We may have a b=
+ug
+> > >> in all other DTs here.
+> > >
+> > > If this is confirmed, I can update this patch. I based the
+> > > calculations on my sm8550 copy of this change, which in turn was base=
+d
+> > > on the sm8650 change. If this is wrong, that means one piece is
+> > > scaling 4x too quickly? Making it a power consumption issue, not a
+> > > performance issue.
+> > >
+> > >> BTW, are there no lower OPPs for the fast cores?
+> > >
+> > > Not on cq8725s at least. These lists came from an AYN Odin 3 with tha=
+t
+> > > soc. I don't have any sm8750 proper devices to see if that's any
+> > > different.
+> >
+> > Mobile SM8750:
+> >
+> > root@qcom-armv8a:~# cat /sys/bus/cpu/devices/cpu6/cpufreq/scaling_avail=
+able_frequencies
+> > 1017600 1209600 1401600 1689600 1958400 2246400 2438400 2649600 2841600=
+ 3072000 3283200 3513600 3840000 4089600
+> >
+> > root@qcom-armv8a:~# cat /sys/bus/cpu/devices/cpu0/cpufreq/scaling_avail=
+able_frequencies
+> > 384000 556800 748800 960000 1152000 1363200 1555200 1785600 1996800 222=
+7200 2400000 2745600 2918400 3072000 3321600 3532800
+> >
+> > root@qcom-armv8a:~# grep ^ /sys/bus/soc/devices/soc0/*
+> > /sys/bus/soc/devices/soc0/family:Snapdragon
+> > /sys/bus/soc/devices/soc0/machine:SM8750
+> > /sys/bus/soc/devices/soc0/revision:2.0
+> > /sys/bus/soc/devices/soc0/serial_number:<snip>
+> > /sys/bus/soc/devices/soc0/soc_id:618
 >
-> The original Odin 2 dts is not currently included as it has not yet
-> been verified.
->
-> The initial port was done by Teguh Sobirin for ROCKNIX and was made
-> available on the AYN github [0].
->
-> Support has been removed for things not yet supported by the upstream
-> kernel, these will be added later when the related drivers are submitted
-> and picked up. Such includes:
->
-> * The Odin 2 Mini panel, backlight, and touch
-> * All rgb leds
-> * The built-in uart gamepad
->
-> [0] https://github.com/AYNTechnologies/linux/commits/sm8550/v6.17.5/
->
-> Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
-> ---
-> Changes in v9:
-> - Add mi2s clock control in patch 2 as driver support for such was
->   recently picked up
-> - Drop unnecessary address and size cells from patches 4 and 5
-> - Track renamed pcie port label from current linux-next
-> - Add panels to patches 4 and 5 as driver support has been picked up
-> - Add patch to document chipwealth vendor as used by patch 5
-> - Delete ipa node in patch 2 as it now depends on the mem node already
->   being deleted
-> - Link to v8: https://lore.kernel.org/r/20260503-ayn-qcs8550-v8-0-d733f5e=
-57446@gmail.com
->
-> Changes in v8:
-> - Properly order and format amplifier properties
-> - Set amplifiers name prefix to Amplifier L/R
-> - Link to v7: https://lore.kernel.org/r/20260430-ayn-qcs8550-v7-0-591a967=
-35fa3@gmail.com
->
-> Changes in v7:
-> - Add back pinmuxes dropped last revision, but without output-low
-> - Link to v6: https://lore.kernel.org/r/20260430-ayn-qcs8550-v6-0-06a7e7b=
-54aaa@gmail.com
->
-> Changes in v6:
-> - Fix comment style in patch 3
-> - Drop a pair of unnecessary pinmuxes in patch 3
-> - Lower usb sbu pins drive strength in patch 3
-> - Link to v5: https://lore.kernel.org/r/20260408-ayn-qcs8550-v5-0-c90abeb=
-7a152@gmail.com
->
-> Changes in v5:
-> - Fix some style reviews in patch 6 which required matching labels in
->   patch 3
-> - Drop hdmi support in patch 4, since it doesn't work
-> - Link to v4: https://lore.kernel.org/r/20260323-ayn-qcs8550-v4-0-33a8ac3=
-d53fa@gmail.com
->
-> Changes in v4:
-> - Fold vendor description patch into the series
-> - Link to v3: https://lore.kernel.org/r/20260322-ayn-qcs8550-v3-0-4afa89c=
-20888@gmail.com
->
-> Changes in v3:
-> - Drop unused backlight regulator in patch 3
-> - Move zap shader firmware to standalone reference
-> - Move i2c controller enables from common to devices
-> - Add ABL dtbo workarounds to patch 2 as per:
->   https://lore.kernel.org/linux-arm-msm/dczz4uvcq4hc6p3zb6xnrsgmfeomwliag=
-whf36tewdz4z6mndp@afbxzhjziiwv/
-> - Fix multiple property alphabetical order issues in patch 2
-> - Use interrupts-extended for pwm-fan in patch 2
-> - Ensure blank line before status in patches 2-5
-> - Rename spk_amp_l/r to amplifier in patch 2
-> - Remove a few properties that are already in the soc dtsi in patch 2
-> - Order tlmm nodes by pin index in patch 2
-> - Drop qcom,dll-config from sdhc node in patch 2
-> - Drop dtbo support, convert common to dtsi, and include it directly in
->   device specific dts'
-> - Link to v2: https://lore.kernel.org/r/20260311-ayn-qcs8550-v2-0-e66986e=
-0f0cb@gmail.com
->
-> Changes in v2:
-> - Drop awinic bindings dep as a duplicated patch already exists
-> - Change Co-authored-by tags to Co-developed-by
-> - Drop alias to currently unused uart15 in patch 2
-> - Link to v1: https://lore.kernel.org/r/20260311-ayn-qcs8550-v1-0-fe8b2fa=
-ad1ea@gmail.com
->
-> ---
-> Aaron Kling (2):
->       dt-bindings: vendor-prefixes: Add Chip Wealth Technology
->       dt-bindings: arm: qcom: Add AYN QCS8550 Devices
->
-> Teguh Sobirin (4):
->       arm64: dts: qcom: Add AYN QCS8550 Common
->       arm64: dts: qcom: Add AYN Odin 2 Mini
->       arm64: dts: qcom: Add AYN Odin 2 Portal
->       arm64: dts: qcom: Add AYN Thor
->
->  Documentation/devicetree/bindings/arm/qcom.yaml    |    9 +
->  .../devicetree/bindings/vendor-prefixes.yaml       |    2 +
->  arch/arm64/boot/dts/qcom/Makefile                  |    3 +
->  .../arm64/boot/dts/qcom/qcs8550-ayntec-common.dtsi | 1819 ++++++++++++++=
-++++++
->  .../boot/dts/qcom/qcs8550-ayntec-odin2mini.dts     |   44 +
->  .../boot/dts/qcom/qcs8550-ayntec-odin2portal.dts   |   99 ++
->  arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts   |  250 +++
->  7 files changed, 2226 insertions(+)
-> ---
-> base-commit: 0d33d21e47d9dc66f91e44da3fc9220c74d93df7
-> change-id: 20260217-ayn-qcs8550-16c07b63de26
->
-> Best regards,
-> --
-> Aaron Kling <webgeek1234@gmail.com>
+> This list matches cq8725s and what I put in the commit. Is there
+> anything I need to change for this patch to move forward?
 
-Is there anything holding this series and the matching Retroid Pocket
-one? As far as I know, there's nothing more I need to do. Could these
-please get picked up?
+This patch has been sitting for quite a while with no negative
+feedback. Could it please get picked up?
 
 Aaron
