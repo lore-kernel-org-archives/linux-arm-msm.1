@@ -1,111 +1,92 @@
-Received: from mail-07.mail-europe.com (mail-07.mail-europe.com [37.187.220.204])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE183484225
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 21:55:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=37.187.220.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F8393655E0;
+	Fri, 25 Sep 2026 22:05:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790373317; cv=none; b=H5Z5idEyHOaDxeFNhBQIuYpS/FX/mz+weQbS/EALEcW/83GJDZc7tb7bbm87bOr+psGG8VlBNyzo/nUGuKE0egD9bY+sA+gCzkxCy9wSoHQfRhx+m48tFwAwfDwOxgH0mqHtObuH5Xs2jmp37Sri+DzzxX3QmPJtZz5BrkNSeug=
+	t=1790373933; cv=none; b=hAs0N6c7RoZzZkadnO4Xo2kugLWBkYqQ2QRUWFDBsR3UwiGhrZvKHt29sh3wrXdFC8ugxO57MlyPmoe4LVi2cxFgF/ijX+TA7a/1gKqEmCQYdhzLOKpfeBwBtiJ4WmJMMFHF3ZmsBclewbZDTJ7hv63AC4O6+1hbPVrOMO00GqY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790373317; c=relaxed/simple;
-	bh=Z1Lz6VjC1nfLX9tXpB5qWzouczKMgmXaaDgJwAcCH/8=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fxeya+Q4A7WCY0E5JAPuoWAcDga3oibWch8BOEMYHdjlImvtSR7G5+CvjKORMlKSEVtiEHnNM1iwsdwuXP+z+JFUUbMviYYinfAp+MzH6gFA+92vS4vIrpKMep5E0u7yUjoM+1lV9SJ6gFnW8Cu6luKDu0wtorrp1UMqKGEF7Cs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=J0e7aHpn; arc=none smtp.client-ip=37.187.220.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
+	s=arc-20240116; t=1790373933; c=relaxed/simple;
+	bh=7eT7PUWjs0411v6rxIUz8bDPPZYI8hiqKSOCtT9YKjg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=mGjIESLASdKyGel9mtqDjeHrDv9BtAUfeoWFUFEA+k8UFns04ZgImHSEnK5b70yjNPZA4eYloE7BDA44pA/ycFG953DMREzJC0XS1t6HZ6v+iG845ApKnew8xzUY9wfn2TtG+1qoHBfOZpDkTZFtHYzBhqUatg+6F5RgsZwgmbw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BPjkV3ko; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="J0e7aHpn"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
-	s=protonmail3; t=1790373305; x=1790632505;
-	bh=Z1Lz6VjC1nfLX9tXpB5qWzouczKMgmXaaDgJwAcCH/8=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=J0e7aHpnhMvTla5ZsVkYceEaavqRnFjq8OBYD+79M7qxGUF4bQlQpMbjx/xSsM7zb
-	 7kqvZ/lcQKt49IJ9XJwbAhcVtkGYVGgL5UtD+Y6t2K0XhQMrISzoPCe2CCZIv948Nh
-	 jkEisp2AJHYJc7GXiKZv24Ny/843aamMyOpmdL/ph4+IwfqP1tQ4AxUwvEaijUJXNX
-	 FzUKqfgJYJ0HkZwbDpHrugJ5CozFZ+0+pI+WgXlF16ZUqkD5mRmc6PrWyn/Oej+jhu
-	 3wIdcgAhqsvmMkfpJxcUqOfTaqAWVsdX8pZMqPhueMnKnG6aLw7iyDHDbjbQke+MtS
-	 C7+RWHQpo7zTQ==
-Date: Fri, 25 Sep 2026 21:55:02 +0000
-To: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-From: Clover <alex@ironrobin.net>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 3/3] arm64: dts: qcom: sc8280xp-x13s: Add embedded controller
-Message-ID: <20260925215358.33417-4-alex@ironrobin.net>
-In-Reply-To: <20260925215358.33417-1-alex@ironrobin.net>
-References: <20260925215358.33417-1-alex@ironrobin.net>
-Feedback-ID: 54785507:user:proton
-X-Pm-Message-ID: acb58e6e5e5453966f081b866d275785b5b308a2
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BPjkV3ko"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52EFD1F000FF;
+	Fri, 25 Sep 2026 22:05:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790373931;
+	bh=q8F8aEDs/291b5v0Gs+UkW/M3P9nH0yxcjIqX8tJU5k=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=BPjkV3koxNIwP2tAzGB1Dd9bOyZhEelIETl2+BazMXVpoUya29S7FoyfcIjgBiIWs
+	 Ymv0wRPlsFAbc/umhcihg4CLlxLSrKle1vIhZVkX+CQFthIZo/gj4KdQm50Jk8X8St
+	 v2g3AKmpciVuTfXxBHA/PuJYSL+aAGtUKi+D/8FAJb4hGTc/Fb91J4hdqPTIX7CwhT
+	 5PUL9gcFxtSBu+GYEeoEZp4qhI8Tum+K/IvjCN7ETVQnyCkJFpbg2Y2XAsHTJKciA3
+	 W7RA1TGMB8Dv0FJtRV3Co7aA4mCbe7ffM4P3Q3TXCeATgT6m5dLb5goFRlV6JfXddm
+	 FcZ0y/GUyoMBA==
+From: Mark Brown <broonie@kernel.org>
+To: srini@kernel.org, lgirdwood@gmail.com, perex@perex.cz, tiwai@suse.com, 
+ vkoul@kernel.org, Ma Ke <make_ruc2021@163.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, akpm@linux-foundation.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20260914095009.12049-1-make_ruc2021@163.com>
+References: <20260914095009.12049-1-make_ruc2021@163.com>
+Subject: Re: [PATCH] ASoC: wcd9335: Fix device reference leak in
+ wcd9335_slim_status()
+Message-Id: <179035784658.204944.1147782981571580690.b4-ty@b4>
+Date: Fri, 25 Sep 2026 18:37:26 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1141; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=7eT7PUWjs0411v6rxIUz8bDPPZYI8hiqKSOCtT9YKjg=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqtvAmSmZ0fAswx905+x5MJ2hrow3dndKNNnlR6
+ r4dl7wExKWJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCarbwJgAKCRAk1otyXVSH
+ 0CfBB/0ROktEnIEFi7Hm1T4IXfVZy9NStJ+0Pyad4GyOCUAnf62JPEaekX77+08Slwbcgp8bErr
+ zUtkJFWqOjYfcHV5WwUq0zV0No4pTItMNKvBjH3wYnuOwQuknCc9ZBtDfeJ7C9kq4ifLy519sfK
+ TIU+ElVxbDMnjZ9/4OMXVlafBuLhpm5WT4hHDp/V6eECor+LFxl9fqQ+9n2J8rZUOCIy0FZ+ipT
+ EzdcsyinXZxfbULi0SSSXS9scgcHf27G2ewAtXrYoJ757cJkUPZvOcfA2yNgwg5QQgQIL7UX4Mj
+ ZOuHdQTu+DJALq66oZQS3yRMucJUfEWTyaJHKBzEg8fsDA8C
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Enable the embedded controller at address 0x28 on i2c8, with GPIO103 as
-its falling-edge event interrupt and wake source.
+On Mon, 14 Sep 2026 17:50:09 +0800, Ma Ke wrote:
+> ASoC: wcd9335: Fix device reference leak in wcd9335_slim_status()
 
-Configure GPIO103 as an input without overriding its existing pull
-configuration. Describe GPIO176 as the separate active-high power-state
-output and configure it initially high with bias disabled.
+Applied to
 
-Assisted-by: LLM
-Signed-off-by: Clover <alex@ironrobin.net>
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
 
----
-diff --git a/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts b/a=
-rch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-index 218573a97785b04528854b03a99c837558a33c1e..e0eb415ef9b42efb28fc9d5a101=
-0162f057aa558 100644
---- a/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-+++ b/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-@@ -885,6 +885,21 @@ vreg_l7q: ldo7 {
- =09};
- };
-=20
-+&i2c8 {
-+=09clock-frequency =3D <400000>;
-+=09status =3D "okay";
-+
-+=09embedded-controller@28 {
-+=09=09compatible =3D "lenovo,thinkpad-x13s-ec";
-+=09=09reg =3D <0x28>;
-+=09=09interrupts-extended =3D <&tlmm 103 IRQ_TYPE_EDGE_FALLING>;
-+=09=09power-state-gpios =3D <&tlmm 176 GPIO_ACTIVE_HIGH>;
-+=09=09pinctrl-0 =3D <&ec_int_n>, <&ec_power_state>;
-+=09=09pinctrl-names =3D "default";
-+=09=09wakeup-source;
-+=09};
-+};
-+
- &i2c21 {
- =09clock-frequency =3D <400000>;
-=20
-@@ -1540,6 +1555,21 @@ hastings_reg_en: hastings-reg-en-state {
- &tlmm {
- =09gpio-reserved-ranges =3D <70 2>, <74 6>, <125 2>, <128 2>, <154 4>;
-=20
-+=09ec_power_state: ec-power-state {
-+=09=09pins =3D "gpio176";
-+=09=09function =3D "gpio";
-+=09=09drive-strength =3D <2>;
-+=09=09bias-disable;
-+=09=09output-high;
-+=09};
-+
-+=09ec_int_n: ec-int-n-state {
-+=09=09pins =3D "gpio103";
-+=09=09function =3D "gpio";
-+=09=09input-enable;
-+=09=09/* Preserve firmware pull configuration; no bias override. */
-+=09};
-+
- =09bt_default: bt-default-state {
- =09=09hstp-bt-en-pins {
- =09=09=09pins =3D "gpio133";
+Thanks!
+
+[1/1] ASoC: wcd9335: Fix device reference leak in wcd9335_slim_status()
+      https://git.kernel.org/broonie/sound/c/f0cc352be29b
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
 
