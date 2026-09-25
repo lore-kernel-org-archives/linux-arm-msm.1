@@ -1,137 +1,215 @@
-Received: from mail-ej2-f42.google.com (mail-ej2-f42.google.com [74.125.228.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8BF14F6489
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 21:02:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB66F49CF45;
+	Fri, 25 Sep 2026 21:22:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790370130; cv=none; b=OK9yVlbw+aX8vpb4sj0+PVCbhesRO2/Lzp/CKwXGuDxxe0BH37sqjQvx+OhiU7kx9VT0LSiNul4yBCbUTpyHAqpcRB1A6l3FWpFo+5yv0WZiuYCdWHcLiOgaTLl7PtN1qEZf/yzmtoDh6B633eCIhhn1bww6IWUFDDdFvJMNoYg=
+	t=1790371342; cv=none; b=BbQ8fdjoCo3P3cxVA6oNR2k7qvDcNkH6i0Yz5WWEHNspzXa6/d2L92eWeM1o6yaxeyOqdSw2/A/ZFXgV/VWwJrQnuul494YMU+99w1/DQU/sMEXqVTrjMpvp/BLPHAS5k58XCRP/ZAC2jEX+FYFR5xrZ8FiIPITwGLdx0RI+ymw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790370130; c=relaxed/simple;
-	bh=Qbyuka3GiyzI8GcOPcPBKISMBjQR5N/Oom1sUT6XUUw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=H5clM5UGHinoJ2eBq/mRlwu2E1Y0u5gunTMQ6EsNCU4VExNZ3mnVy58daWxvOCniQR9H6P1EOM6KV5QF9kb2PyILNYeVQtTy8pcG/rsi+TQhz7pTTH35W1MgOkw+yfOxRQqdslZ/UStWoB+N/jwvOKhdkZQlSYgNJr4a+4TA3qE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=oYkBDx6R; arc=none smtp.client-ip=74.125.228.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790371342; c=relaxed/simple;
+	bh=NYGGX08Rh22ux8AkT9s+UILhXOkXRQN1DhjSewJHGj4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=eTy9joWjC+w2ZLc61EFc9cICScqHxlitSn2jkL16O9eNUPu+kEky4l2/+utUggsqU1vRL4N3k3Yo0GBRGMc5WHpWejelytU/k/3qj3QPmEuRGQMdTlvEwGett0WwfystQZYux7w1RNg66kZ/d6cZSCYAdVDLBtj0L4cZ81nkcZ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EF7K2XMG; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oYkBDx6R"
-Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2c570a3030so29408966b.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 14:02:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790370127; x=1790974927; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Qbyuka3GiyzI8GcOPcPBKISMBjQR5N/Oom1sUT6XUUw=;
-        b=oYkBDx6RSrPyUWLQ8cGXg+XE7agKlIF+K8YIUSDhpCpY/TGFUOmzk5tRm3FUK6e3O6
-         cHrFC9YcXB//NLzk+JHQdnu4B/eDv/ahK2j8Jvu2Wab5y5PouDk34CXg13Y1iutu+vnD
-         hlGVV+eCfxHxMxRsFjyS2FNGs30GqK+T6i3C0CCXMmF8NtywFK39DVRixtRbKpJnIexY
-         fzDpsvaX7UEXNi6NRMbYnWIcHMRHNWdZbMMhn+qtnmLG/7+Oa1mBwYRt++NYi6MzwGIw
-         uIiXzaLRihY6jJxkmWwjc6eQXsni5fUB2iY3//m5giItzsMbcg/N9xHZUjeqSDZVgb2I
-         47GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790370127; x=1790974927;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Qbyuka3GiyzI8GcOPcPBKISMBjQR5N/Oom1sUT6XUUw=;
-        b=ineUUD84BKsh3EoCUnn7syXXs8HkcrW3anW2P4/PeJY3PCdc76vwQSsel96Ki+lujh
-         ZsDKlyrThzIEM2B5tITzHdNLxH+bS4vHv+U2bUh7EyCF4dVZR867SYCzjeDoqL+mlnge
-         GXZT2ekxu6BjDw3GEkMaP7vOy27bKy+KKxEcsDqVS8euiX1mhB3MwV1ktnlrlgpeOdiG
-         oWrD04d6jZUHhkEgplnFR9JmPGJ2MqKKdk35OkWkFyhMx+pCgXTQIsH38aEg4EBMpI2+
-         4g7mX+zmkb/Ly/m54uO3y9AMvmveFLFPjfu/EAfkSs8RRoHW9PXZQcDrsbomxaCvG2gh
-         9Z0Q==
-X-Forwarded-Encrypted: i=1; AKwUvBypjqHYDoRxpypV1U38JU6r3ZGs+YjliEj7oomU2K/uUEsRK4/CTVKAXvOXQFWutHR0s49VCEONtdNHz7Nl@vger.kernel.org
-X-Gm-Message-State: AFuF++m0/1EcmiFuAC5YBUV4PwV6nplbYssDchew3sz4N13SC9vemTx5
-	dZNw+19YM9vqquKZD3epB8pb2pSdp/9RC75HTx6pr0Re83MV0VJwX9J4
-X-Gm-Gg: AYBFou0ABasbsdUAoCxd5Jare93Mqni6QmZRJfbCN4to7MQ3CLkONXdze9zRG9yrZpq
-	ylq5rnMVMPlGA3/wLrvrl25Sf7tkf87YRmI981zOD0gkenn8jeFdkKN5lvooMSGL72cugALE79k
-	WBfhW/614IxemrNTuJtE1quPM6jtZIEnYEWp26f5Y57JjgfIYeC/KKtEaal6U6LrSXLOOuNQhAK
-	SX82U8SBw5NuawlUUiUXwyj/q155G92ctwy698bgAV9Wi6IOHAKGdLECuvA/qVnljejZuAdiIur
-	1fsGTdW4xyEV6wpQlrAaGMsutZ66NMz0niMNs85248s0DnQ8LC/lp+ypPNoog3Ax5dNgFE9NBtV
-	Xvu13ZG6nucAbEZN1JZQ8iV43uPUoEcxTdUmMVhiTPn2jVJPCgGseyYefnjRktQGSYJBkMMCgwF
-	XtmkA5t+I0gsEPkDPvubu9ueyGtz8aEHG7Mbgi35W6LD09nip1He0OLw8yvgVETZSnWwsOqm0hy
-	9ygRh0A3H+KimTnnmhUe8L35a2y/bQcgZ9rk577avYajzxwhbmK5/y4
-X-Received: by 2002:a17:907:7b9e:b0:c29:4970:abec with SMTP id a640c23a62f3a-c2ac24cb86cmr657977766b.19.1790370126717;
-        Fri, 25 Sep 2026 14:02:06 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:aa1:1647:5faf:ac50:9dfb:d1bf:ddf6])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aae5df167esm1421523a12.25.2026.09.25.14.02.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 14:02:06 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: netdev@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Ziyang Huang <hzyitc@outlook.com>
-Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
-Date: Fri, 25 Sep 2026 23:01:53 +0200
-Message-ID: <20260925210153.8717-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
-In-Reply-To: <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch>
-References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EF7K2XMG"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8A258C2BCB8;
+	Fri, 25 Sep 2026 21:22:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790371342;
+	bh=NYGGX08Rh22ux8AkT9s+UILhXOkXRQN1DhjSewJHGj4=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=EF7K2XMGYlIp9VpZQw30KyQD+fexSlKECTJBsvLNMH6BfUlvK9Y80EnsKCxWQuEYQ
+	 SOqp0Ld1yHR5NeCq6oKNlRxv1Kefv+k8eP1mNDEW9UAtTf38AcOHfzwsrHcuYkK6bL
+	 OptVH+MmZApIKTWKDPBHb6aIBSg+9a64TxreeA5qXT97SVlbAKgbYuEV18vfaaaSHa
+	 pzib1ZR2OI21zMgj4MZOXhnLReE0xI00Jmbd1CmzcszovRJoCHLJwq5XxWAHjXW0jv
+	 8RE/esKwJm/CFhCWL0uRGxTlXKHFo6bkPB/jOjuhJvpA2vduYnriU7f+tkRIgtew2m
+	 CXelqqLGa0Dwg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61D77C9832A;
+	Fri, 25 Sep 2026 21:22:22 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v8 0/5] Input: support for STM FTS5
+Date: Fri, 25 Sep 2026 23:22:18 +0200
+Message-Id: <20260925-stmfts5-v8-0-0fcf49e2c85f@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13QTU7DMBAF4KtUXhM047E9NivugVjEf9QLWhRHU
+ aHK3XGKhNMu33i+p5GvoqappCpeDlcxpaXUcj61YJ8OIhzH00caSmxZSJAGJKqhzp95rnrwigk
+ x+8gkRdv+mlIul1vT23vLx1Ln8/R9K15wm/51EOB/x4IDDFIGpa13YzD2tVzK/Bx+xNawyJ1C3
+ ZVsisEHSyk57fBeUVcKqCtqSseRjQ05SnhQaq9cV6opo3Iy7Ymj1/dKd2URutJNQWDi6KRzbO6
+ V6cqB6cpsF0L22YzZMj78Bu8Vd8VNqVETWQwRaKfWdf0FhRF3QeABAAA=
+X-Change-ID: 20260214-stmfts5-b47311fbd732
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Petr Hodina <petr.hodina@protonmail.com>, linux-input@vger.kernel.org, 
+ linux-stm32@st-md-mailman.stormreply.com, 
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>, stable@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5706; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=NYGGX08Rh22ux8AkT9s+UILhXOkXRQN1DhjSewJHGj4=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtuYMZRK6dVaJ8gJpvVKh2HmICVoHNTi2sCpAt
+ jefMomniYaJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarbmDAAKCRBgAj/E00kg
+ chd4D/0W2SNOEooROfqD6meWgaQDNnkiYb0LaZSwBE9pwsOD20aRosXFOkB23BHUkmsBXRJhvg3
+ ROuuOp9OuOR1RVpbzPuyLp132K9cs7KAeWOw7IODS6qPmJMfYC8HE1EaJfxgYaVmDZEG5W+vDup
+ EuiULs74RDDlQmcX5qgbMEydMGwzuLzXGrWnrfUM+PkTp8+lThqxf8WxKRgyLsYn6/aL2nuRpn5
+ ZiqJFJ4qoYKDIn3yH7pwvfNzb30shKGSFxI/UpMB1X61X93gLWjas9FgyvIgfzvFcdX6XR270yy
+ pHfLjpuH5OQoOckxaKddivReiX/m80PwDyznLl9AugrZMpjtVzg1MT1u9NgAsMD9kxJ0HcrM6Bu
+ tiz2zvZncgWyQKCdMn1WLLjrEgcvJp5mgAoqEbDJJFC07W5+Qk5oF4Wsx2VV8Yzvd9qzVWM4WIG
+ zIHWfZW+xvSemfAJ0htIXGwtfTXvlkWcGBtp0KRvOtEekejIl0Z/YDl+yI5Ctefu+M+s8yDlIBd
+ CGbR0wkWJRR1A65YPrlTfHdWxaOUJtuVMuXSbB5If4XZwTNAk0dFdj2Tg8ZKqVqInhHidSbKj1g
+ IbhcK6KZFNi3IMPxiPzDeG/LhRzkG2bqjyKT80CuCjz+X39NDP+Hx0PMucz5JZKiK09jA01X2hu
+ JAY7lx0s38bWwTA==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-Hi Andrew,
+Used on various phones. Minimal viable driver.
 
-> But this is testing the wrong thing. This is testing downshift
-> works. What you are actually interested in is downshift happening when
-> it should not....
->
-> So take a closer look at the user ports. phylib should report when a
-> downshift occurs:
+Includes device-tree enabling touchscreen on Pixel 3.
+Also, tested on Xiaomi Mi 8 (device-tree is not yet inside the mainline).
 
-Thanks, that is a better test. I ran it on RA74 with the OpenWrt 6.18.52
-backport that includes the read_status change, so phy_check_downshift()
-sees the speed from 0x11. The user ports keep SmartSpeed at its hardware
-default (enabled). The CPU PHY keeps the existing workaround, so
-SmartSpeed stays disabled there.
+What is missing:
+ - switching between AP and SLPI mode (to be able to wake up phone by touch)
+ - firmware loading
+ - anything above basic touch
 
-Across 8 boots (1 after flashing, 4 warm reboots, 3 power cycles) and 10
-"ethtool -r" on each of wan, lan1, lan2 and lan3, there was no
-"Downshift occurred" message. CTRL1000 stayed at 0x0600 on all four user
-PHYs, and each port came up at the speed its link partner supports. The
-only unexpected event was one link drop on lan3 about 7 seconds after
-its last renegotiation; it came back at 1 Gb/s after 3 seconds.
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Changes in v8:
+- Split DT binding example changes into own commit (Krzysztof, Dmitry)
+- Refectored the stmfts_power_on fix. (Dmitry)
+- Added ABS_MT_TOOL_TYPE. (Dmitry, Sashiko)
+- Link to v7: https://patch.msgid.link/20260907-stmfts5-v7-0-4a53381cd038@ixit.cz
 
-I also tried to recreate what the CPU link sees at boot, where the
-IPQ5018 PHY does not advertise 1000BASE-T at first and adds it a few
-seconds later. On lan1 I switched the PC NIC 30 times between
-advertising only up to 100 Mb/s, with autonegotiation still enabled,
-and full autonegotiation, then restarted it another 10 times. lan1
-returned to 1 Gb/s every time. In 741 once-per-second samples CTRL1000
-stayed at 0x0600 and 0x11 bit 5 was never set, and there was no
-downshift warning.
+Changes in v7:
+- Added 'Input: stmfts - wait for controller ready after reset',
+  the waiting is done for both FTS4 and FTS5, similarly to the
+  downstream driver. Should improve reliability everywhere.
+- Link to v6: https://patch.msgid.link/20260906-stmfts5-v6-0-50fbf6af8718@ixit.cz
 
-So on this board I have not seen downshift misbehave on the user ports,
-including when the link partner changes its advertisement in a similar
-way. This is one board and a limited number of attempts, and the link
-partner was a PC NIC rather than the IPQ5018 PHY. It also does not show
-that downshift works on a bad cable, and the CPU link failure itself was
-not exercised because SmartSpeed stays disabled on that PHY.
+Changes in v6:
+- Enable only the multi-touch scan on FTS5 sense-on (0xff was wrong,
+  only 0x01 is needed. This broke Xiaomi Mi 8 toucschreen).
+- Fixed Y-coordinate comments. (Dmitry)
+- Corrected event[0] parsing. (Dmitry)
+- Dropped checking < 0 on unsigned area. (Dmitry)
+- Dropped unnecessary i2c writes after reset. Verified against
+  downstream driver. (Dmitry, Sashiko)
+- Added pieces for supporting non-OF integration. (Sashiko)
+- Shared input open/close into one impl. (Dmitry).
+- Link to v5: https://patch.msgid.link/20260810-stmfts5-v5-0-0c737d929976@ixit.cz
 
-Disabling downshift for all qca83xx PHYs would also remove it from the
-user ports, where I have not seen it misbehave. The CPU link has no
-cable, only a fixed on-board connection, so disabling it there should
-cost little. Given this, would you accept keeping the workaround limited
-to the CPU link, or would you still prefer disabling it in the PHY
-driver without a flag?
+Changes in v5:
+- 3.3V is analog, 1.8V is digital supply. Fix that.
+- Name the error variables "err" (Dmitry)
+- Use scoped_guard() for ->running, and only set it once the scan
+  mode has actually been enabled. (Dmitry)
+- Use i2c_master_send() instead of open-coding a single-message
+  i2c_transfer(). (Dmitry)
+- Drivers may report coordinates outside the declared min/max, so
+  remove the clamping. (Dmitry)
+- BTN_TOUCH and INPUT_PROP_DIRECT are already set up by
+  input_mt_init_slots(..., INPUT_MT_DIRECT). (Dmitry)
+- Let the input core track contacts: drop the touch_id/stylus_id
+  bitmaps and the hand-rolled BTN_TOUCH reporting, and sync the frame
+  once per interrupt with input_mt_sync_frame() instead of calling
+  input_sync() per contact event. The controller pushes contacts one
+  by one into the event FIFO and only resends the ones that changed,
+  so INPUT_MT_DROP_UNUSED is wrong here and is dropped as well. (Dmitry)
+- Restore the FTS4 interrupts accidentally dropped by introduction of
+  FTS5.
+- mode-switch-gpios isn't required with stmfts5. Some designs, such as
+  Xiaomi Mi 8, has no such GPIO connected and is limited to AP mode.
+- Nit: updated example to use interrupts-extended.
+- Nit: (maximum x/y coordinate reported + 1), corrected example.
+- Link to v4: https://lore.kernel.org/r/20260409-stmfts5-v4-0-64fe62027db5@ixit.cz
 
-Thanks,
-Yongzhao Chen
+Changes in v4:
+- Wrap everything below enabling the supplies into stmfts_configure()
+  to avoid bunch of gotos to power off on error (Dmitry T.)
+- Finished chip specific ops and removed is_fts5. (Dmitry T.)
+- Link to v3: https://lore.kernel.org/r/20260403-stmfts5-v3-0-5da768cfd201@ixit.cz
+
+Changes in v3:
+- s/touchscreen_pins/touchscreen_irq_n. (Konrad)
+- Use interrupts-extended. (Konrad)
+- Fixed rebase conflict against 8665ceb926ec ("Input: stmfts - use guard notation when acquiring mutex")
+- Rename switch-gpios to mode-switch-gpios.
+- Do not define properties in if:then: branches. (Krzysztof)
+- Link to v2: https://lore.kernel.org/r/20260315-stmfts5-v2-0-70bc83ee9591@ixit.cz
+
+Changes in v2:
+- Fix typo in the binding s/switch-gpio/switch-gpios/.
+- Deduplacate allOf. (Rob yamllint)
+- Add missing S-off-by. (Dmitry B.)
+- Dropped irq-gpios as it's not needed. (Konrad)
+- Correct x and y touchscreen area size. (Konrad)
+- Correct reset introduction commit description. (Krzysztof)
+- Partially implemented chip specific ops. (Dmitry T.)
+- Separeted license naming cleanup into separate commit (Dmitry T.)
+- Link to v1: https://lore.kernel.org/r/20260301-stmfts5-v1-0-22c458b9ac68@ixit.cz
+
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+To: Maxime Coquelin <mcoquelin.stm32@gmail.com>
+To: Alexandre Torgue <alexandre.torgue@foss.st.com>
+To: Petr Hodina <petr.hodina@protonmail.com>
+To: David Heidelberg <david@ixit.cz>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Henrik Rydberg <rydberg@bitmath.org>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-input@vger.kernel.org
+Cc: linux-stm32@st-md-mailman.stormreply.com
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: devicetree@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+
+---
+David Heidelberg (4):
+      Input: stmfts - wait for controller ready after reset
+      dt-bindings: input: touchscreen: st,stmfts: Improve example
+      dt-bindings: input: touchscreen: st,stmfts: Introduce STM FTS5
+      Input: stmfts - support FTS5
+
+Petr Hodina (1):
+      arm64: dts: qcom: sdm845-google: Add STM FTS touchscreen support
+
+ .../bindings/input/touchscreen/st,stmfts.yaml      |  29 +-
+ .../arm64/boot/dts/qcom/sdm845-google-blueline.dts |  19 +-
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi |   2 +-
+ drivers/input/touchscreen/stmfts.c                 | 462 ++++++++++++++++++---
+ 4 files changed, 443 insertions(+), 69 deletions(-)
+---
+base-commit: 944a035ecca915ae947905dcfb03f2b9dc6d032c
+change-id: 20260214-stmfts5-b47311fbd732
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
+
+
