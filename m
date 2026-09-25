@@ -1,234 +1,141 @@
-Received: from mail-dl2-f43.google.com (mail-dl2-f43.google.com [74.125.229.171])
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69A3F4F0543
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:36:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA174F474B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:51:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790368593; cv=none; b=G3WQmCBVmrNXsSeBYPh21CZqPs1llyuvKJUyLruUXaWmaQcoM7NFvNrnqwIx0+AMowcdx+Q+QVxHFZKPLZC5Ob4nz6kGn0LI3+ZSLPMaGJAQKFgh/P5iMpgUtPlQ6k7YzPFzrQOJUlgdXzOD+WqjnY+JQ20W6AcM/LhOHxw8lqY=
+	t=1790369471; cv=none; b=kyX4JL6Xz7s1U0SFdXTXtz7jFxBiAEKTUGLxQ66DSaiO7oDo877RkYYBCichfLbxZmDUWl5jSpbyfbM8W1qjqeFM1hUSoThe5jVVj8rCVe7MIifnwXFbtXT/LNqTrf5gyBLwxj2HfOuv2XWc/2A8DAnFR+8Lws/49BxRLMROovo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790368593; c=relaxed/simple;
-	bh=JA1MmlvysdwOS02CEm2fbSKD0SzlpVAbqKq6s8T/mfk=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=X51KrNDSnEX+BH2jH2lOfx5sT6Yyt3m5Y/kQWXbz2nXoBpBvhw0S0pMC3IUFlKMwSkMrb42UFkwFdHk46f+/N0BW2Ws1r6Sf4ITn6sDbnIZrtfLv/cMqUxKcW924n6pEmyb3vpWNaQSsSvMWilYsTp0XlATmMyZEbT6oWAomDo8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rUQoARdI; arc=none smtp.client-ip=74.125.229.171
+	s=arc-20240116; t=1790369471; c=relaxed/simple;
+	bh=6USNyc5xxVCFFsAWD4sZciwnMJCKEn7B4pxnM7sZR0o=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=p/xC1Rv8DziXs404/AXik3b0OIHjvMlMOii4zNoTVaje4up9dxkpxiNQGkWkzDLfyDdvh0GS297NBsT+ObptTgleKGKcqyYRqgBYZqK12z9rT3RnLj0y2UcPz3udjXKhA6r7PlHlMnMtRa+vHsQFmU/schdlWf11KnEo+IrdKxo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C75jfPqS; arc=none smtp.client-ip=74.125.225.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rUQoARdI"
-Received: by mail-dl2-f43.google.com with SMTP id a92af1059eb24-1438f55921fso514858c88.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 13:36:28 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C75jfPqS"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49d097b4939so7932505e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 13:51:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790368585; x=1790973385; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id
-         :references:in-reply-to:user-agent:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=4RNJ5nQR9k5gmyuH0UoJLYl6j03ODsgZ0SnhdOWBbVs=;
-        b=rUQoARdIqa7zC5jv8hEpX+gubV1tNKAP/VULSdvg4ONtky2R9Bk6rSfbWJEPfamK4A
-         b1fzg38bIjCaXnVivkD0QGNNl4gijLyUIFIJZTIvg0Id8dZsDgyTC16/DzWoULc3O87P
-         JcaBhIjwsvcs0wIj01D7sC/OGWUupO5DYVcL8c6h/twInBtbabpygzLoaDHO9MWhALPL
-         pJ7Gyk1J6VcfzdVxWae2SrFiRpewXdTndy1GJ8I7J5Qbj0qJkqlKvI94DGjK8532d34I
-         ES1v1CzJoglwra7xBNsyijJ4skcl2qwaJSnmMSlOwGRWtsFUx1Futcv1p+UQRkhZ0fzZ
-         GGnw==
+        d=gmail.com; s=20251104; t=1790369467; x=1790974267; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=ahg5ua1PTUMcgmuM5eYk7uL8e9EmcDVrOFvRyDnDKwo=;
+        b=C75jfPqSWrMYCP26j6w3PuYEzpqbGnu5TXB/Se9z7QpWcxP+UhTUgVTQBa2vEcdrsQ
+         WDVY+3MILY88GfEk0n+ckp3u/1CqaTOKd2+Rbv+3NjPaW7jrzF509sv7btiqWjXNDi4L
+         H7Q8qlowz57fo5XBq1BL0aTsxtL4Jb+zzzeL7oIkcf287Pm53OPXH+ZVgh9agcWFLuE1
+         I/vQp2YIghcRs7I5BJBCiutwhzvzCNZBZq2IzTcEmNnOdSiPNkEIpBNWOCT36hf2U9cF
+         8DtsjkWTX9N58XvulWl/QeL8wYy5JbbDr+QPs56DXrr2PW8mPSQRhmlHWGXXgnB7rvKA
+         qDlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790368585; x=1790973385;
-        h=content-transfer-encoding:content-type:mime-version:message-id
-         :references:in-reply-to:user-agent:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=4RNJ5nQR9k5gmyuH0UoJLYl6j03ODsgZ0SnhdOWBbVs=;
-        b=Q7KU6LKve0Gx8k8wsBT+DpJt3F7c06zGSQSovTQ2acsBA3wHJenSO9BblGDdHGJ/1w
-         9yyQTuJDCoBRC+kegu4GUZzCJJPj0kNfe5axk54Vdjdk7/D4iTljFlr7B2YSrT2YTeWe
-         EL3lBDMv0IUNoCHo0zDOrjM8UMLEwBHhpW2wySFQIFn+nYX/DcU5vtYyFfvvLZ6TV+7D
-         knT8QjNfZMD/0wNBN+XxMgCUhaxzyD9ofTvGdlh9Z/M7oHQP39/JfoXy5aQx49vSb+VS
-         Z4kkWp0DTXXt0O18qAeZonlgebIokBcAOyphSaA4kJ3JaO/eXrIkG8Rime5aI4RIRRnX
-         NTIQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzIlp2Vyd9eK2HraO9Lze46D1eSO+2/tqRDPD/PyaSlxL2zJ+hmoOmZvSY9GeZh6grT6lhK/ZeuPo4G7n7S@vger.kernel.org
-X-Gm-Message-State: AFuF++l1t1FOpBiDQcvl8Hwp035RAhDcA9tMnE2VyD0KLGCQdH5ZSTUc
-	8kms576gcmf0/eJNqGz5dXpHXgeSswvqo30QwUG+zDxRQybpBrwdpBLO1mElmA==
-X-Gm-Gg: AYBFou1V16lM4H3L2qx12xaYKK9OmGTWaB6uqgVEjiTGMj0Me9UmLvHdIAzFe8OktHv
-	auZow5Gxi1yuxntE58X1gRadLienerBHjpmShfis+tYGj0eYtxcbJIwjn+7YI8t7fZUU4K942nw
-	mYR1NYVYCyvjhr4BvFN1igftWwBSWhvzw7emGixUGzHyxHcxNzQC8kn2Be7oEUBeUNaYbQniQyY
-	PRsm0rZWvoquXrQrCQhzPzcXtVK5xbkQOkl80GVOciXJkDXoC0rpfktsSu5kMG6+qKp6KhsyFQX
-	p9liie9lB4petWeVF30rYQyVYGn92QYo9RxBJJ0cG3PxeX5TOvF3nP+qXmcj4Ks/LepDgtcyF2O
-	O6d/g5RPiOUOTLe9Ic1NaqntUnWqNcDPTcgzBaNWgtQFUyI7i7/Z6aVAOvOvx937Hj/JpNEVn9o
-	jTlmOJvpzgxAg62Hg3EkJwG8rJ3DzAaF423wrwyjooNZRVkylud14goS0nnsbqdlJBPK/dqF6sd
-	T9W0B0p0BVtwpj1njTIiUZQ/inD2MOKbbUCt0ewFl45M/gvDVQg74O4K/OHR7mCx/KkJA==
-X-Received: by 2002:a05:701b:4346:b0:13e:aa58:89f8 with SMTP id a92af1059eb24-146ce86dbddmr949798c88.15.1790368585236;
-        Fri, 25 Sep 2026 13:36:25 -0700 (PDT)
-Received: from ehlo.thunderbird.net ([2a00:79e1:2e00:6c01:e929:591c:a76d:ca9c])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ad9e097fsm8107732c88.13.2026.09.25.13.36.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 25 Sep 2026 13:36:24 -0700 (PDT)
-Date: Fri, 25 Sep 2026 13:36:24 -0700
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To: David Heidelberg <david@ixit.cz>
-CC: Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Petr Hodina <petr.hodina@protonmail.com>, linux-input@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org,
- stable@vger.kernel.org
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v7_1/4=5D_Input=3A_stmfts_-_w?=
- =?US-ASCII?Q?ait_for_controller_ready_after_reset?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <b684b88b-55a6-41a9-a4da-3bca33550164@ixit.cz>
-References: <20260907-stmfts5-v7-0-4a53381cd038@ixit.cz> <20260907-stmfts5-v7-1-4a53381cd038@ixit.cz> <arbJrK9zfoO1dGzy@google.com> <b684b88b-55a6-41a9-a4da-3bca33550164@ixit.cz>
-Message-ID: <B0EA1BC5-3B3E-4D31-9A37-974E38309C74@gmail.com>
+        d=1e100.net; s=20260707; t=1790369467; x=1790974267;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=ahg5ua1PTUMcgmuM5eYk7uL8e9EmcDVrOFvRyDnDKwo=;
+        b=Rfk8NQh/8q9AwFuy+lMg+egNZIBen3O/4zl0juMBQ4A1Npqa4BmFuyfrYIgjwigLVc
+         Z6GtIOqqQaVpC2ze//BTpmTRGJ00jnfwa5qZyfDWTAuidcMlvuCR7BMbx5eKDxzZJ2dF
+         hcsSbvUA2U+opySl7hnzq8I2PAbf6PpWnVjEjlTA6sJjTfxgWkjwNSHNqcneXP7/WZNT
+         R8FYSZZ3CnbPYe4Qda3sQlwbIzTWPRS7R5eyEmHlFT47H0XPCv/2ZYdm/Bv08qtNqXpQ
+         lIRgXIsZL4eJu0l5wL53etEi0Sfb194m7xkAgvPUYegKG/QljCBF2JNGacCbrl6PUhO+
+         7crg==
+X-Gm-Message-State: AFuF++k5dDu12BjZTUox3lfkavzJCUI20ggwbuZ9K/wYK3Zt+vodClhO
+	fKfVgkrcVZgBEqLHu0Qe6VR7ztyXuhPVMtAjBrzw+2UGoWPBWskD0Plv
+X-Gm-Gg: AYBFou2s+8wnHIfx1UjVL01TI0ImRPe9weNBg0roR9Ht16xbbPG5Pc9BtAjb+PZ3fqB
+	QRhBWo3OlzjOypDpUtbr4MWsrzOEu9WzqOJeWtVFScQIsDLCJJZcMz4A4ZVYF6N908RlmD17pwa
+	3D2wnzw1EXVnYkl4BLtsjcBdb0yYAWWx9kG+gzJgsY4YsEeyWAyQc8XLBvFgZHJO6BOtppLiG9S
+	LM9Fe83GUr7qAZR36AVsZSOVK1NDoFsayKF5Pt6zUHotZd5CGwJu06N2dAc1Rw5EL7hudRV9lFl
+	/UsDnsbbIVZM3BvC4PFCUQztk9NFhEels1iG06OnWB01Xs0uFaxHqep2pGsOe4ZiXm3mH3v6beH
+	iZsN1960hxMy5sB8KW66JrZJWA+RIHdnoD5Tk2PsoRaaajqdnbWlVOjlGf2QkQKE0VF849WK2vi
+	dFr+jz5BaTbp/cZveZ7nLmUPGN5oKkArmUaUnamAJPXxNyHLmz13nwigo3Zw7ZgNkN8aFo7CNBa
+	7+kXBDCZI/10uqxmVTLZ4pl7LxupQ==
+X-Received: by 2002:a05:600c:620e:b0:49f:f233:4439 with SMTP id 5b1f17b1804b1-49ff2334791mr58719225e9.30.1790369467326;
+        Fri, 25 Sep 2026 13:51:07 -0700 (PDT)
+Received: from [192.168.1.9] ([148.252.146.112])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a6450a3sm8688433f8f.25.2026.09.25.13.51.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 13:51:06 -0700 (PDT)
+From: Dale Whinham <daleyo@gmail.com>
+Date: Fri, 25 Sep 2026 21:51:03 +0100
+Subject: [PATCH] arm64: dts: qcom: x1-denali: Enable IRIS video codec
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260925-sp11-iris-v1-1-967f1a3a6b6e@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBBA0avIrDXpVEjqKmLR1mAskA4iEXdXL
+ F/y8y8QikwCdXZBpIOFlzkB8wzC6OaBFHfJYLSptDWlkhVRcWRRxhZYOYfaewupXyP1fH6vpv0
+ tu58obO8A7vsBBqjHuW0AAAA=
+X-Change-ID: 20260925-sp11-iris-29316aa10bb9
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790369465; l=1694;
+ i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
+ bh=6USNyc5xxVCFFsAWD4sZciwnMJCKEn7B4pxnM7sZR0o=;
+ b=Q/Ln4er3K9ruBTo0rjsqXa1WGW0M4BUkd4v8bQpLlRmC2GVbM9MNZt0VU30JrR7Pmbgwfz3Q2
+ ZhZoAkqy2CaD1ZslVjAuoSD0nZ5akp7pwc9d/BKbNssN7vTkfWoBDGO
+X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
+ pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
 
-On September 25, 2026 1:20:56 PM PDT, David Heidelberg <david@ixit=2Ecz> wr=
-ote:
->On 25/09/2026 21:27, Dmitry Torokhov wrote:
->> Hi David,
->>=20
->> On Mon, Sep 07, 2026 at 12:50:19PM +0200, David Heidelberg via B4 Relay=
- wrote:
->>>   -static void stmfts_reset(struct stmfts_data *sdata)
->>> +static int stmfts_reset(struct stmfts_data *sdata)
->>>   {
->>>   	gpiod_set_value_cansleep(sdata->reset_gpio, 1);
->>>   	msleep(20);
->>>   +	reinit_completion(&sdata->cmd_done);
->>>   	gpiod_set_value_cansleep(sdata->reset_gpio, 0);
->>> -	msleep(50);
->>> +	enable_irq(sdata->client->irq);
->>> +
->>> +	if (!wait_for_completion_timeout(&sdata->cmd_done,
->>> +					 msecs_to_jiffies(STMFTS_RESET_TIMEOUT_MS)))
->>> +		return -ETIMEDOUT;
->>> +
->>> +	return 0;
->>>   }
->>>     static int stmfts_configure(struct stmfts_data *sdata)
->>>   {
->>>   	int err;
->>>     	err =3D stmfts_command(sdata, STMFTS_SYSTEM_RESET);
->>>   	if (err)
->>> @@ -593,42 +602,47 @@ static int stmfts_power_on(struct stmfts_data *s=
-data)
->>>   		return err;
->>>     	/*
->>>   	 * The datasheet does not specify the power on time, but considerin=
-g
->>>   	 * that the reset time is < 10ms, I sleep 20ms to be sure
->>>   	 */
->>>   	msleep(20);
->>>   -	if (sdata->reset_gpio)
->>> -		stmfts_reset(sdata);
->>> +	if (sdata->reset_gpio) {
->>> +		err =3D stmfts_reset(sdata);
->>> +		if (err) {
->>> +			dev_err(&sdata->client->dev,
->>> +				"controller not ready after reset: %d\n", err);
->>> +			goto err_disable_irq;
->>> +		}
->>> +	} else {
->>> +		enable_irq(sdata->client->irq);
->>> +		msleep(50);
->>> +	}
->>>     	err =3D stmfts_read_system_info(sdata);
->>>   	if (err)
->>> -		goto err_disable_regulators;
->>> -
->>> -	enable_irq(sdata->client->irq);
->>> -
->>> -	msleep(50);
->>> +		goto err_disable_irq;
->>=20
->>=20
->> I think the logic is becoming quite convoluted here, and factored out
->> stmfts_reset() does not help=2E How about we make it look like this:
->>=20
->> static int stmfts_power_on(struct stmfts_data *sdata)
->> {
->> 	int err;
->>=20
->> 	if (sdata->reset_gpio) {
->> 		gpiod_set_value_cansleep(sdata->reset_gpio, 1);
->> 		/* a short delay before powering up */
->> 		usleep_range(1000, 1500);
->> 	}
->>=20
->> 	err =3D regulator_bulk_enable(ARRAY_SIZE(stmfts_supplies),
->> 				    sdata->supplies);
->> 	if (err)
->> 		return err;
->>=20
->> 	if (sdata->reset_gpio) {
->> 		reinit_completion(&sdata->cmd_done);
->>=20
->> 		/*
->> 		 * The datasheet does not specify the power on time, but
->> 		 * considering that the reset time is < 10ms, sleep for 20ms
->> 		 * to be sure before releasing reset line=2E
->> 		 */
->> 		msleep(20);
->> 		gpiod_set_value_cansleep(sdata->reset_gpio, 0);
->>=20
->> 		enable_irq(sdata->client->irq);
->>=20
->> 		if (!wait_for_completion_timeout(&sdata->cmd_done,
->> 						 msecs_to_jiffies(STMFTS_RESET_TIMEOUT_MS))) {
->> 			dev_err(&sdata->client->dev, "controller not ready after reset");
->> 			err =3D -ETIMEDOUT;
->> 			goto err_disable_irq;
->> 		}
->> 	} else {
->> 		/*
->> 		 * We do not know the real controller state (was it powered
->> 		 * off or reset)=2E Let's hope that this is enough time to
->> 		 * initialize=2E
->> 		 */
->> 		msleep(70);
->>=20
->> 		enable_irq(sdata->client->irq);
->> 	}
->>=20
->> 	err =3D sdata->ops->configure(sdata);
->> 	if (err)
->> 		goto err_disable_irq;
->>=20
->> 	/*
->> 	 * At this point no one is using the touchscreen
->> 	 * and I don't really care about the return value
->> 	 */
->> 	(void)i2c_smbus_write_byte(sdata->client, STMFTS_SLEEP_IN);
->>=20
->> 	return 0;
->>=20
->> err_disable_irq:
->> 	disable_irq(sdata->client->irq);
->>=20
->> 	regulator_bulk_disable(ARRAY_SIZE(stmfts_supplies), sdata->supplies);
->> 	return err;
->> }
->
->Thanks, it seems to be better (thou would be nicer if we didn't have two =
-branches, but=2E=2E=2E what we can do)=2E
+Enable the video codec and point it at the Denali firmware.
 
-That's that enable_irq() in the middle=2E=2E=2E We could have more "ifs" b=
-ut that also looks ugly=2E=20
+With the firmware in place video0 and video1 appear:
 
->
->I added you as Co-developed-by :)
+$ v4l2-ctl -d /dev/video0 --info --list-formats-out
+      Driver name      : iris_driver
+      Card type        : Iris Decoder
+      Bus info         : plat:aa00000.video-codec:dec
+      [0]: 'H264' (H.264, compressed, dyn-resolution)
+      [1]: 'HEVC' (HEVC, compressed, dyn-resolution)
+      [2]: 'VP90' (VP9, compressed, dyn-resolution)
+      [3]: 'AV01' (AV1 OBU Stream, compressed, dyn-resolution)
 
-Thanks but I don't think the change was large enough to warrant it=2E
+$ v4l2-ctl -d /dev/video1 --info --list-formats
+      Driver name      : iris_driver
+      Card type        : Iris Encoder
+      Bus info         : plat:aa00000.video-codec:enc
+      [0]: 'H264' (H.264, compressed, enc-cap-frame-interval)
+      [1]: 'HEVC' (HEVC, compressed, enc-cap-frame-interval)
 
+Signed-off-by: Dale Whinham <daleyo@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
---=20
-Dmitry
+diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+index ce7d958ca687..a75f55879463 100644
+--- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+@@ -853,6 +853,12 @@ retimer_ss1_con_sbu_out: endpoint {
+ 	};
+ };
+ 
++&iris {
++	firmware-name = "qcom/x1e80100/microsoft/Denali/qcvss8380.mbn";
++
++	status = "okay";
++};
++
+ &lpass_tlmm {
+ 	spkr_01_sd_n_active: spkr-01-sd-n-active-state {
+ 		pins = "gpio12";
+
+---
+base-commit: 93f51579e7df248780214094418f205253383cc5
+change-id: 20260925-sp11-iris-29316aa10bb9
+
+Best regards,
+--  
+Dale Whinham <daleyo@gmail.com>
+
