@@ -1,271 +1,227 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A593F470112;
-	Fri, 25 Sep 2026 08:34:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D72AB64A8D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:46:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790325274; cv=none; b=o5S3LPSgdHH8gsWcIwjhGr6V+e5g/IzURbV9LwYriGw6/Esfo6qHvbAGqNEH3dsje5NPOkyQ0BlOXXkYyQqyvQMsEUD3obn0WclPp6dHJXgnHNtOfq9T0hRkPhV9BL0666/3/Tlj9C45aOupPLWXqYr/DwplzaxkAey2it2G0ak=
+	t=1790326019; cv=none; b=DYzM3F3HyASQ2NGowt15TZfVm+S3BdsKN6d6dzo5Q/al/uLUvWoEZkij7B64ugO+wtdtSjzIxDYxgOl/fVtin6qLhJ5rgfhWKAwhr5F7njcwUEKswy9zfpGGIWPF+7FOoxUSKX9I7q1cxf5M+QHt7/VJ7dZA84nt37ijReDygEc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790325274; c=relaxed/simple;
-	bh=w6ywcHMkyM8rtMeu9B48oh6riDbeDBqi7cfGO7Y+9mc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CAYzS5oma8eIrAMHRCjRgkPTcymDRKVeVzzKKSeaRusgO5yjCgSLaiiyoT5qU8dWjd2k1BiPP4lG2bY2RZBY9NVyjPlDJZs/SJ0fcDhDJNOLkfuNvSGmIVH5ozRArWC5H8kyWlpEfRrTvfP+UpBRyWozlHaXgmuQHTFN1qKKE6w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=N9/rNSfJ; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1790326019; c=relaxed/simple;
+	bh=xhxIA7Wnqk3AsQNrfoSlf+f+2hDRBWo7ifCUUnxI5LE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=iGT22B4N8hipsLmmZbhp7kf8OY25zjb8K2iSQHA3SWkagowv+9V0hfre66cOBDXS/wizRg8j7LwTySire3M7nGbyB0he9GbG/P9Hk407weirtkwvBV++U0yIP8WyUuAxk+N4QF4xNVBOADbdSzbmI0PAhWkWpdUat364pURmBJ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ox+TPQ4I; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ua0mOtIi; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="N9/rNSfJ"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id E95E4534023E;
-	Fri, 25 Sep 2026 10:34:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1790325270;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=8y8dG9e5KwfnZqSHWEwd/5CyUzoc4d2nDEOP4jvbfhA=;
-	b=N9/rNSfJW9Yss5EOAUAoWqOw9wksNeWOKxhSSOvULKancJf3HgmLtRoDdphdGJ8NeQ07pw
-	OM2nHQY8uS5UXVZjyksFXvBDcVruWmFOHkrVkeQ4VIYOFIpHrMuHujdAO/VJF+JpIpzUMe
-	5+y4g2gtbhaRLF6k+YlJMXh5yYij8YY=
-Message-ID: <f15ad2f9-dfde-4156-980a-bac9596b45bf@ixit.cz>
-Date: Fri, 25 Sep 2026 10:34:29 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ox+TPQ4I";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ua0mOtIi"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68P4Yi6C4102869
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:46:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=+yDeC3B2RiB
+	ycyMmfze1FG+9+MWYoq+9jpdfX+2cBFU=; b=Ox+TPQ4Ic/Vkj/LiIilebPImI2s
+	OCUTYvJLAE/64M6JYrWbQOyLJ7eFI/03p9DjfB1ibi7Z68F9ShjHa5MRlE5va0a9
+	3jpYrph1daX1rC9NcawOYbfTY2NYG23rBYcmC+Wue9Ci9oLXL0smkJlbYGGkopYe
+	hsHaMbCB8qt76k9RuPnzcx4RYYTXfnvZlFk3BpXvDzaGyRv107CobCbybUKzh9rC
+	PQ9uOQURmJx/uQ8pAw76bWb5pj6uwfk0/zXHP33t0L6mUAbbKVUJl50bp5L3dGA2
+	Gy2qJ3FkvO2Izxpa+F1U5ZOASyjyX/GvxJT8VtEqAiu/wvVSHfmEAMTQeUg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gw5q8ujec-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:46:49 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93be6ed214eso131612585a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 01:46:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790326008; x=1790930808; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+yDeC3B2RiBycyMmfze1FG+9+MWYoq+9jpdfX+2cBFU=;
+        b=Ua0mOtIiZPvM3YgLgGpi8pZ3NTRuXLJ+BOgiI0mdCugxV3M6i6Osi3SgbxXjPw+me9
+         4W8cJzI8+rLSGPomAlorxgOjkadtJ/sok0upb4F+4uLnWbqBuO7HjvEPjm+/L2KY5O2m
+         P5vXLUeGOXF1n82J4YrkY+JX8GO3hy1zrWhBjGjaLtlneXECOijdXjAeqfosZRiW/U69
+         gaLlV3w7mwJQzzJXNrhk3njd48zBkBGa9zUx87GoZOjuI9kVhi4jJR+JMnwLh6hCkKT9
+         hP0qNvrgq+RPV1X5L4XmbUv14fteRBLF/BG8ihP0g2gaFsYBNKgacrsooGBEcfWzdwao
+         FuAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790326008; x=1790930808;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+yDeC3B2RiBycyMmfze1FG+9+MWYoq+9jpdfX+2cBFU=;
+        b=XtG9EtD/rkMPb2UnRQJ7HHMfEOkLxwXKZuWFUW+gEzPs+CVMOxYQdagKamy1IfUwgf
+         46+g6xDmDcPzAWA3iCzQV0kjeEFnKi2X3BX8Fu2ElTlisBYXC+oDlmTHo0F8KfRsCl2+
+         T/59HZZKRTkBgxD01YbDo44L7fjexOCszUQ15bzPfAsOFsHSfFfU+MP5ZvRJA+eQ019n
+         y8ZlFK2PsWwTpUcdiiek3u2Wb8NrH5Dw4Z+2pxuXAQtiNn0BbiHBdrTWPQGIaX2GxSTQ
+         kkHHHIyXlnCDohHnzLDFnVacF/nzvrPxgULXv2ZVslMKUPj4vHqAv3DijMoyYSAMxepR
+         bg/Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzX1/V5s50EzyfN4s1qWUL1O/+sPek7KwlLZkPRDHySuxro7t8LopN3tzTAJ6znQzJ74jI5dBtYWQE9b2tn@vger.kernel.org
+X-Gm-Message-State: AFuF++lEDIS6tsIQDSd0Zdr+jdqgfBBQ86WeDnw6xBWyBgOuo6FqpGD6
+	RuvjggIPUj0ZpDXI0T4UQaif8Fxc6GRZ+Bwky+ALzhNj9aQwx6M8w0CRhMaoa0tK1ri6c5cwmlU
+	6zBN5hNFeiM6O6ttZXqa9gy4mxFCC3+4+FQxBAawzr72M4vZ9TsjuSOjxJ18SllJbKlrh
+X-Gm-Gg: AYBFou2RfQkqdJp1M+OlWG0pGZ4iKFac3iDU7z11Dix0oL6D2v7KuHr/HB4dIV5ZhPj
+	NlGU28gy+2AZsES2F422hnjHGYkj3iK2XWy5cZsfydkeVa+tHAHYaGsQacJSbz97tuveEISuHDz
+	oeZP8mdHuzE+0X4Y3jNZ9NtuuqZ8xROp/DGE9eDb1LIDtCs6iL6+TK3qBFx13gJUOpod7Y9lBV1
+	6k5hLPNjmCt31xSD49Ca3gIW/TsuhJf62VccGAeXhu1PR1evEbbGC1+0eg8QWe70cuNh1NyS7UI
+	Bl8cSSV+ZRKxzNG1apYO3NOXkYI6mL7JXxtCFMTK/0HweWIfv0QJmPUO4+pIMkJVtZTwNBTCxEv
+	/SIG0nD+YfNER
+X-Received: by 2002:a05:620a:40c3:b0:93a:c102:1123 with SMTP id af79cd13be357-93c43bc8ee5mr325647485a.15.1790326008345;
+        Fri, 25 Sep 2026 01:46:48 -0700 (PDT)
+X-Received: by 2002:a05:620a:40c3:b0:93a:c102:1123 with SMTP id af79cd13be357-93c43bc8ee5mr325644585a.15.1790326007881;
+        Fri, 25 Sep 2026 01:46:47 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a64f9bcsm5281953f8f.32.2026.09.25.01.46.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 01:46:47 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 1/4] dt-bindings: clock: Add LPASS AUDIOCC and reset controller for Glymur
+Date: Fri, 25 Sep 2026 09:46:32 +0100
+Message-ID: <20260925084635.112399-2-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260925084635.112399-1-srinivas.kandagatla@oss.qualcomm.com>
+References: <20260925084635.112399-1-srinivas.kandagatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/8] slimbus: qcom-ngd-ctrl: Remove data channels on
- stream disable
-To: Srinivas Kandagatla <srini@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- David Rhodes <david.rhodes@cirrus.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- David Rhodes <drhodes@opensource.cirrus.com>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
- devicetree@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260924-pixel3-audio-v4-0-85b5d133aa5e@ixit.cz>
- <20260924-pixel3-audio-v4-7-85b5d133aa5e@ixit.cz>
- <781fc756-bde6-4d83-a09c-19d4fd70e588@kernel.org>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <781fc756-bde6-4d83-a09c-19d4fd70e588@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDAzNCBTYWx0ZWRfX5mEZvosTGgvW
+ EEdEKEKh6txVjHitPnDzkRxGScTK5J3Xf+M9dHje8dmNtb8lZ9WcXdnuWP34sdJ8+Ya9l0wc+jG
+ uqnrUKFw4BGQtO3yQNGiP7nVeJHDvgE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDAzNCBTYWx0ZWRfX31qDWjLCRxlK
+ Wh7V77IgggmGWSe+JbFZB9cXBiS8c5Rkwy7Z0LzsFi3Y2P6m/1oT9JFpUtEjgjGyHc0+HjDd2T9
+ Gpkrnl9fRRwku7xohRc7O7gOy7koctvdx8Z291+CzAceLujPPPGZGvmLTh2dYtFOpAEdZy97BDD
+ NZVEgv22hCc2kC6HizgrfGZOYfZlIU2SiIq6ayYUh/zkYWseBaM/Baq4J40ZHAGINROR36mat+1
+ cFMGkkyH3JkgFr96bbkLWe8LeP3ZUHiO6AgFl+grgkYrgCyXZwqxnZyC6jDppSw8SK/TrJeaYnY
+ KI2qSoqQxYX3M4tsM6IQHXhxpAL4s3PFlT8+TZqLlBN6cngD6KKkvQXgOmx6mVXoOrrDup10Ss5
+ G/PRCnOHNFXQczVqx9MQAkNxD4i6LrFAnjaZtXpVoD+Wi+XRIoLziQE86shz0zhVERiNRZrTVe/
+ 2+nHJCJtDfqPw/0fSOg==
+X-Authority-Analysis: v=2.4 cv=SYRi5fRu c=1 sm=1 tr=0 ts=6ab634f9 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=gEfo2CItAAAA:8
+ a=EUspDBNiAAAA:8 a=yiKMOllxs-7wBVDooBUA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: JbWoEH4SvKN5BsU4_nADn6EFek0mD7K2
+X-Proofpoint-ORIG-GUID: JbWoEH4SvKN5BsU4_nADn6EFek0mD7K2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 malwarescore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250034
 
-On 25/09/2026 10:09, Srinivas Kandagatla wrote:
-> On 9/24/26 2:24 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
->>
->> qcom_slim_ngd_xfer_msg() silently returns success for every core
->> reconfiguration message, so the generic channel removal done by
->> slim_stream_disable() never reaches the ADSP SLIMbus master. The
->> master therefore keeps the channels of a closed stream. When the next
->> stream defines the same channel numbers again, the WCD9340 capture
->> completes without any error but records only zeros; removing the
->> channels explicitly when the stream is disabled makes it work again.
->>
->> Implement the disable_stream controller op with the sequence the
->> downstream NGD driver sends for channel removal, CHAN_CTRL(REMOVE)
->> listing the stream's channels followed by RECONFIG_NOW. Like
->> downstream, treat -EREMOTEIO from the removal as success: it means the
->> controller is being restarted and the channels are gone anyway.
->>
->> Based on work done by Casey Tunturi.
->>
->> Assisted-by: Claude:claude-fable-5-1
->> Signed-off-by: David Heidelberg <david@ixit.cz>
->> ---
-> 
-> there is an identical patch on the list,
-> https://lore.kernel.org/linux-arm-msm/247e4ce7-1ba2-43b8-8a11-ec70f99a4fc1@linaro.org/T/#m3b50aa43a6493f8d3b607b1607b37bf14b199f69
+The LPASS (Low Power Audio Subsystem) Audio clock controller provides reset
+support when it is under the control of Q6DSP.
 
-I was not aware, I'll try to look into it today and address the comments on the 
-original one (and keep the credits as LLM likely "got heavily inspired there").
+Add support for those resets and adds IDs for clients to request the reset.
 
-David
+Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+---
+ .../bindings/clock/qcom,glymur-lpasscc.yaml   | 50 +++++++++++++++++++
+ .../dt-bindings/clock/qcom,glymur-lpasscc.h   | 16 ++++++
+ 2 files changed, 66 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/clock/qcom,glymur-lpasscc.yaml
+ create mode 100644 include/dt-bindings/clock/qcom,glymur-lpasscc.h
 
-> 
-> --srini
-> 
-> 
->>   drivers/slimbus/qcom-ngd-ctrl.c | 81 +++++++++++++++++++++++++++++++++++++++++
->>   1 file changed, 81 insertions(+)
->>
->> diff --git a/drivers/slimbus/qcom-ngd-ctrl.c b/drivers/slimbus/qcom-ngd-ctrl.c
->> index eb0ccb31e9074..0a4859466c82d 100644
->> --- a/drivers/slimbus/qcom-ngd-ctrl.c
->> +++ b/drivers/slimbus/qcom-ngd-ctrl.c
->> @@ -1081,16 +1081,96 @@ static int qcom_slim_ngd_enable_stream(struct slim_stream_runtime *rt)
->>   		slim_free_txn_tid(ctrl, &txn);
->>   		dev_err(&sdev->dev, "TX timed out:MC:0x%x,mt:0x%x", txn.mc,
->>   				txn.mt);
->>   	}
->>   
->>   	return ret;
->>   }
->>   
->> +/* CHAN_CTRL operation, bits [7:6] of the first payload byte */
->> +#define SLIM_USR_CHAN_CTRL_REMOVE	2
->> +
->> +static int qcom_slim_ngd_disable_stream(struct slim_stream_runtime *rt)
->> +{
->> +	struct slim_device *sdev = rt->dev;
->> +	struct slim_controller *ctrl = sdev->ctrl;
->> +	struct slim_val_inf msg =  {0};
->> +	u8 wbuf[SLIM_MSGQ_BUF_LEN];
->> +	u8 rbuf[SLIM_MSGQ_BUF_LEN];
->> +	struct slim_msg_txn txn = {0,};
->> +	int i, ret;
->> +
->> +	txn.mt = SLIM_MSG_MT_DEST_REFERRED_USER;
->> +	txn.dt = SLIM_MSG_DEST_LOGICALADDR;
->> +	txn.la = SLIM_LA_MGR;
->> +	txn.ec = 0;
->> +	txn.msg = &msg;
->> +	txn.msg->num_bytes = 0;
->> +	txn.msg->wbuf = wbuf;
->> +	txn.msg->rbuf = rbuf;
->> +
->> +	/*
->> +	 * The NGD drops the core reconfiguration messages that
->> +	 * slim_stream_disable() uses to remove channels, so ask the master
->> +	 * to remove them the way the downstream NGD driver does:
->> +	 * CHAN_CTRL(REMOVE) listing every channel, then RECONFIG_NOW.
->> +	 * Without this the master keeps the channels active and a later
->> +	 * DEF_ACT_CHAN with the same channel numbers is a no-op, so the
->> +	 * data path is never re-armed and a reopened stream moves no data.
->> +	 */
->> +	/* 5-bit client number, operation in bits [7:6] */
->> +	wbuf[txn.msg->num_bytes++] = (SLIM_USR_CHAN_CTRL_REMOVE << 6) |
->> +				     (sdev->laddr & 0x1f);
->> +
->> +	ret = slim_alloc_txn_tid(ctrl, &txn);
->> +	if (ret) {
->> +		dev_err(&sdev->dev, "Fail to allocate TID\n");
->> +		return ret;
->> +	}
->> +	wbuf[txn.msg->num_bytes++] = txn.tid;
->> +
->> +	for (i = 0; i < rt->num_ports; i++)
->> +		wbuf[txn.msg->num_bytes++] = rt->ports[i].ch.id;
->> +
->> +	txn.mc = SLIM_USR_MC_CHAN_CTRL;
->> +	txn.rl = txn.msg->num_bytes + 4;
->> +	ret = qcom_slim_ngd_xfer_msg_sync(ctrl, &txn);
->> +	if (ret) {
->> +		slim_free_txn_tid(ctrl, &txn);
->> +		/* Controller restarting, the channels are gone anyway */
->> +		if (ret == -EREMOTEIO)
->> +			return 0;
->> +		dev_err(&sdev->dev, "TX timed out:MC:0x%x,mt:0x%x", txn.mc,
->> +				txn.mt);
->> +		return ret;
->> +	}
->> +
->> +	txn.mc = SLIM_USR_MC_RECONFIG_NOW;
->> +	txn.msg->num_bytes = 2;
->> +	wbuf[1] = sdev->laddr;
->> +	txn.rl = txn.msg->num_bytes + 4;
->> +
->> +	ret = slim_alloc_txn_tid(ctrl, &txn);
->> +	if (ret) {
->> +		dev_err(ctrl->dev, "Fail to allocate TID\n");
->> +		return ret;
->> +	}
->> +
->> +	wbuf[0] = txn.tid;
->> +	ret = qcom_slim_ngd_xfer_msg_sync(ctrl, &txn);
->> +	if (ret) {
->> +		slim_free_txn_tid(ctrl, &txn);
->> +		dev_err(&sdev->dev, "TX timed out:MC:0x%x,mt:0x%x", txn.mc,
->> +				txn.mt);
->> +	}
->> +
->> +	return ret;
->> +}
->> +
->>   static int qcom_slim_ngd_get_laddr(struct slim_controller *ctrl,
->>   				   struct slim_eaddr *ea, u8 *laddr)
->>   {
->>   	struct slim_val_inf msg =  {0};
->>   	u8 failed_ea[6] = {0, 0, 0, 0, 0, 0};
->>   	struct slim_msg_txn txn;
->>   	u8 wbuf[10] = {0};
->>   	u8 rbuf[10] = {0};
->> @@ -1620,16 +1700,17 @@ static int qcom_slim_ngd_ctrl_probe(struct platform_device *pdev)
->>   	ctrl->framer.rootfreq = SLIM_ROOT_FREQ >> 3;
->>   	ctrl->framer.superfreq =
->>   		ctrl->framer.rootfreq / SLIM_CL_PER_SUPERFRAME_DIV8;
->>   
->>   	ctrl->ctrl.a_framer = &ctrl->framer;
->>   	ctrl->ctrl.clkgear = SLIM_MAX_CLK_GEAR;
->>   	ctrl->ctrl.get_laddr = qcom_slim_ngd_get_laddr;
->>   	ctrl->ctrl.enable_stream = qcom_slim_ngd_enable_stream;
->> +	ctrl->ctrl.disable_stream = qcom_slim_ngd_disable_stream;
->>   	ctrl->ctrl.xfer_msg = qcom_slim_ngd_xfer_msg;
->>   	ctrl->ctrl.wakeup = NULL;
->>   	ctrl->state = QCOM_SLIM_NGD_CTRL_DOWN;
->>   
->>   	mutex_init(&ctrl->tx_lock);
->>   	mutex_init(&ctrl->ssr_lock);
->>   	spin_lock_init(&ctrl->tx_buf_lock);
->>   	init_completion(&ctrl->reconf);
->>
-> 
+diff --git a/Documentation/devicetree/bindings/clock/qcom,glymur-lpasscc.yaml b/Documentation/devicetree/bindings/clock/qcom,glymur-lpasscc.yaml
+new file mode 100644
+index 000000000000..c047c0174a93
+--- /dev/null
++++ b/Documentation/devicetree/bindings/clock/qcom,glymur-lpasscc.yaml
+@@ -0,0 +1,50 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/clock/qcom,glymur-lpasscc.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm LPASS Core & Audio Clock Controller on Glymur
++
++maintainers:
++  - Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
++
++description: |
++  Qualcomm LPASS core and audio clock control module provides the clocks,
++  and reset on Glymur.
++
++  See also:
++    include/dt-bindings/clock/qcom,glymur-lpasscc.h
++
++properties:
++  compatible:
++    enum:
++      - qcom,glymur-lpassaudiocc
++
++  reg:
++    maxItems: 1
++
++  '#clock-cells':
++    const: 1
++
++  '#reset-cells':
++    const: 1
++
++required:
++  - compatible
++  - reg
++  - '#clock-cells'
++  - '#reset-cells'
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,glymur-lpasscc.h>
++    lpass_audiocc: clock-controller@32a9000 {
++        compatible = "qcom,glymur-lpassaudiocc";
++        reg = <0x032a9000 0x1000>;
++        #clock-cells = <1>;
++        #reset-cells = <1>;
++    };
++...
+diff --git a/include/dt-bindings/clock/qcom,glymur-lpasscc.h b/include/dt-bindings/clock/qcom,glymur-lpasscc.h
+new file mode 100644
+index 000000000000..3006b12e385e
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,glymur-lpasscc.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef _DT_BINDINGS_CLK_QCOM_LPASSCC_GLYMUR_H
++#define _DT_BINDINGS_CLK_QCOM_LPASSCC_GLYMUR_H
++
++/* LPASS AUDIO CC CSR */
++#define LPASS_AUDIO_SWR_RX_CGCR				0
++#define LPASS_AUDIO_SWR_WSA1_CGCR			1
++#define LPASS_AUDIO_SWR_WSA2_CGCR			2
++#define LPASS_AUDIO_SWR_WSA3_CGCR			3
++#define LPASS_AUDIO_SWR_WSA4_CGCR			4
++
++#endif
+-- 
+2.53.0
 
