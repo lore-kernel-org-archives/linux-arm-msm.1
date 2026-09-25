@@ -1,131 +1,117 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+Received: from mail-ej2-f39.google.com (mail-ej2-f39.google.com [74.125.228.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D843A30DEA3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 23:48:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790293712; cv=none; b=t1LH6Z0S8kUNGez6vNsXWsWwaMkAarVYg0DqDqemLQ6nJNhbzdxyFqIlNe2fdqSYVQmomNWDPAarC1ZqS3nN7qAI2GQsaPEltzas/VzjWpWmbn3XjH+qiquJLXXzUYKncqTHYNIxp2iZAu/nxZad5zygHb2y/SE61PYG2/zGMN0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790293712; c=relaxed/simple;
-	bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FKGraM4DXJWZn7pQTLwEYF1gYNC+5FPRmNuBRGH/AVxjjceDAwoJTRbKJg9X1xvePdhk5GBHJaBsPOMT1ZfHa9u9XXu8QvyvAOHQMySCpcgbO3iqXmNeWiCi3EucYwMeOGDl1H2eUdo3DIr8Gka6wTBOmigGGoCqTeDs/SIgO/A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qBVFtLBH; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3D2E61FCE
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 00:09:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.167
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790294951; cv=pass; b=AibIM36ybXzL9gfrR0ofKqj+s5daazsvP6rVxAjTgu1UyD9lL8P9dsqXmpO7b6SYRH4Im7HNTZjnbNSvMPrMNM7zC9ZbLnIJe923YqIntnGts2LL63qAafS56f5m0B7EO9bsog1osWL8mpcavfLXehW37BuVqr5lBLzq1FyvcVw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790294951; c=relaxed/simple;
+	bh=CECXwz9NVJRqM1zgzja4MxTHWcCU82DN3pcsUZd/76I=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=HCQ1bB/oT7f22o0RImDhjGccnPumwh6+zxuPE/r5rzcEigvQUtzBstMnX8kci7TUfpZbgNxQsEuo8uR6wYQR9YNM3nGxeYu4kAfMYLTb1tF47PLaropdVMYrA0Wku6wgscivg/Mh4JUGGJFeRpCwMPcmuwzAqtqd8Tzhcza9YTw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iYP5aIVy; arc=pass smtp.client-ip=74.125.228.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qBVFtLBH"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c294af0caa8so40942066b.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 16:48:30 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iYP5aIVy"
+Received: by mail-ej2-f39.google.com with SMTP id a640c23a62f3a-c2940ef15c1so41467666b.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 17:09:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790294948; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ciudAsw4i5rfXc3VOLBnibkQf4IiB6kUMkjci2TvjUzYhoaDYc4EbAbIApQ74rtVbJ
+         ybpLf+C/amoUnk9IOBXZ3idSio6bBOTNK5AEQURmLA6HxLL+N4h/pOl+TvnjeBPPMsXX
+         ZmeodxS9T3ChNTUTBTrLhCO2ZXVhP388f6+60urrPxCRWAn+uvkfjJXopgFzYRg8lkqa
+         3gAc15lVObjO01tvTD3jMhTHtgyNG71ynJ6aM7vdfTi2nGTfVCYNOn1qxq5DH5RQqbdE
+         OnrmZXItqbSiYSt1zD9kePDs3rDpdOjU2lvhSX0/DT7C2Qd4l83zehapZK1skpdrba4U
+         h8pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=JvVb1ppKBUi1pgXwEpUrjpuTGibjVjV3ESWoiV2gIGo=;
+        fh=eH03YnGn6xdxrQYesOy3c8zCRsov2YeAmsfqZqbGUDY=;
+        b=o7u8JVpAMtRzT9b2OdsuLr2wjrsbb7octI5bMlOxhiw5hRDL5LYVINJjMSvHhV9XO+
+         oUQDFNu28DuY2+dSBl1kQKJELvTA/ICQqWT9OvlxsBVd6TVPidN1vXMc0oERKSkh9Gy3
+         ibS3FXnohMKa/xm2GlPpwrWsKfIknGPJV91Az773pK6qevAJToMr4psso+Vq/KaN6iHd
+         P49hN7mRlekaKnpMKzWXmRIfybsKHmcKpWGeS0jSdsDNTKDs0FLbWoGvYANaKNGgbWdv
+         OaX6GFaO/+9gv5cX0CWXuTTV0JM8DRgsQOKgLbgL1L6QgNnc6YrrdudvOx8+k7IaiCyx
+         bfxw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790293709; x=1790898509; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
-        b=qBVFtLBHXgfqQCXXcoxj7qkzhAsEivvXU6kw4vyxa1TKK6wRL79uYkcq+a9EAl7nZI
-         K0CaNxnX3fg+uHjmPuWaQXbTdOAi96NkVZ7QZ9ZC2X9Ik1W8qGh4vIpa+DxYQprpCug6
-         Ex7gB96zEO5fot+yVby4Gor4bw5nNFpOVAcZm3s63cAV2ZmSpNPtJNS70KLVHozKDwqK
-         WpJb4tTNMFAap7Rxtdgj+gx4tTB+iLHgXalyO8duI1sN5kVCOuxy+zcsShp0fBN4oX5d
-         leZweJz501CDmXn8Dx+dqW0m8I5vAgg9XzoacPCPvUP3euVyoQ65UJOiXYyRRTdCh1X7
-         4Ufw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790293709; x=1790898509;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=gmail.com; s=20251104; t=1790294948; x=1790899748; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
-        b=KOQ9MLoxXgWstpYppsuGXFBFCUwRGxuKEdnq6y5hY8ZjbkqnESONqftPX98Yg8s53R
-         vSCUfXrU9y0zjxkyP0OklWzjV0KSajGQROqdad0f8ttwyBp8Q4oLiVb0rXaVBT64ezbv
-         dnnG5AbslzvMlSixYulmRzRiP0ZkNZV4mYlh9/NwL5dA5ezDPHKRRILsnmBhCBARUpIt
-         Hi5qqnMr63waPaizzquYf5GWoP15LizLZY89dHDaOVGOCzCdTinFxoHNFLOSXMoy40wG
-         EC7T99Wu7wScWT1z18G4vYDsq+Pifl7jHcfVLVaeS5VvEFl47vlqhDnSUSFl6HwCdO1V
-         kVUg==
-X-Forwarded-Encrypted: i=1; AKwUvBz9N0fi9KvHKVItK4MUBRcU3AGukqYuhAJTt2ROFEFuDDGYvNku6fYRL0xCCy/w3tDrnjx2KHbN161DO89J@vger.kernel.org
-X-Gm-Message-State: AFuF++lqgsL6KVNTW6GtQo1WtmcKn7nvu8NU/8braNp4VIfYzY2UUGjX
-	51e/GODnl1TT5SaGKpMuJafaRFsYl52k/G8KA6odL40WLLpe3qXgnNAg
-X-Gm-Gg: AYBFou2/UlXEAoh4tyGP/rwG8vsQS1DyBF7M+aryD69IE9+rjYwlTKemFEBp/RFd9FS
-	dvACBEGxH0bWLCmW57KsqLyS1TpioZk3vj8IpF9i9T02+lSHQFbb1G7ESyJtvXWr61qcBvtbL0Q
-	iyJXm4RMe58OqOPbdmgm45Noh0oyf2O3RorMV6hdoiCQwab/7sr6eoiFtdCkTAIHY6BDOgpxpTa
-	6uToO7OTUOw5wOM+jEvicL6FeYJLaCn75bj+I/k/bQpjkUxHJs+AtayBi18+rsARl8l9qJZ2Iv7
-	uUKU7cZvVtOfmu/NyXcit3kxYYCaT908j47Qe9QTQ74p5+UHWvFw7A9+7mCMBrQ+U/YqYaF8BNL
-	kMNqte/ocprJPegCcvqopCtqolfQRgEUkQRtEWfB8DgQI64wcHKYc7zukg6YdE3mEjZmtQ6Vm4X
-	/5SfY7ko5r6CBV9Gg/+KlrU5oJf88/LCdOIgXFi6sxJFxdhoXNrTvKREieAoMgLIHM0kaB7CQPU
-	Cf4Jnz1nQbFKKdKg2oOt3kgI1IPxL75TXpRwDWp/o4GrBHAZSbBxZ8zDX94e9CARM0Hg0OkGqcn
-	3CnqXDQH5mp2zL/yhe+k
-X-Received: by 2002:a17:907:94cc:b0:c1f:e9d9:64d4 with SMTP id a640c23a62f3a-c2ac24747fbmr368025566b.11.1790293708996;
-        Thu, 24 Sep 2026 16:48:28 -0700 (PDT)
-Received: from localhost.localdomain (31-208-26-100.cust.bredband2.com. [31.208.26.100])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae757b9c1sm30757766b.33.2026.09.24.16.48.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 16:48:28 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: netdev@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Ziyang Huang <hzyitc@outlook.com>
-Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
-Date: Fri, 25 Sep 2026 01:48:14 +0200
-Message-ID: <20260924234814.1734-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
-In-Reply-To: <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch>
-References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch>
+        bh=JvVb1ppKBUi1pgXwEpUrjpuTGibjVjV3ESWoiV2gIGo=;
+        b=iYP5aIVyIeeS1wxy0RrhItS7i7zqc16eXkOgnFkJjoUNC/uyPZ+Yz1nI5FISpHqyET
+         DZ7gGonG9YtPmxlKQVGoSykkEKghqLCJPEHZKCv3ZCaDsg/ceH+LGcY8mmiu1Q3YZxep
+         MVCbh9Y1umWemrFjuN9suStgzII0kccsWFi9MZjuP+i4WlFlDeSwQhZfkGSoVtaTf9bs
+         4WLlS13TQXIIseuxOHINovaI/4h1aZzpMCzhMtmFB1Aumna8Y/YHeUvRYzu5iqD3RJUS
+         74bdH2QMbdZPuDJ9AmHfTcuqnw1rUlKOV9AqATiWV1W6hLbHpZGU23SMkz/v7bY0aHaD
+         puWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790294948; x=1790899748;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JvVb1ppKBUi1pgXwEpUrjpuTGibjVjV3ESWoiV2gIGo=;
+        b=GTn5Mv8tqVnTZ9M3EmFbTm7EmB2LTxde3jUc61gKgNTBAyjpxZ0XsClHWVuB/2DxvX
+         4sRhSNiwdk0wAkHUgh853FThC1jsBSlWR9dcJ32DNm5x1qX64Nm4s6J7yNp7+F5ZmHGL
+         BPPWlHmCckEmoNntXyz/lWp+2xRiBQZeWxiOcipdvDjdrI7r1BVVMAGerBbskdCyMf/p
+         FxzkydSxhfC5J7xG1ORahhYAveO+dIWnvUBoQrkKSpb9kD/6hnqFoR0+XIZeP9RqI3jr
+         8o8IEOZFokO/tCMcz3HHC4DaoMTIz/lXZEmv+ifFFGkZoHvk377Y4/18cN6YUpnxu2Yf
+         fJrQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy1IF9qTmqsSKoDLeZLSwWt3W6U7LfmIAAYnqvKKal2ph6Yb7p/CARbDW7vuhRyRSao0kdesUL87BvM1Vut@vger.kernel.org
+X-Gm-Message-State: AFuF++k/5LA2s4jOKwf5y5fqr5tYQYA/3r4+/YPxbBuXQhytNDpRUbZm
+	XdfrYFBF1Qcuq5CjLMbNKmyipuYH8YAhugwEj/T7cbNU/if6pRQdVA3fyvCS+gmn5tXNkkEEENt
+	6BH80ujSrYpTc7cFzwDzHHqiCrCUFiXhi
+X-Gm-Gg: AYBFou2i/h6xauzTZpaMxrQqqj5PhOqwyC2aaGD1xskU7m1DHsk9MCPgDl6Pnn7V+sa
+	JuuIUAIl9mjGQBxq+lE+R3WaCoYrJHDt48TXx4MzdLGuGtyd1X4Oqw4P+wESiYPcZTa6NQ20zL7
+	WSxETbijYpoCHqxLTx8kMmX8KNviiDFa/A2jc5IqoB6a2P/RzX0BcpAIkqTND7D8CdV1nKKvvrw
+	uYwfx9A72jE6jhKTAzzx21gR4OJUHi6e9+IW0kKc8ZijsFzUWFHA6MXBfjNqqyL0fbOrSY6nntv
+	xZYzllqZ+ZHjMpiobb3SCySK2kvh/KIFSe22ohlf5pC6+HHYx2uuJG+L+rLAwTq+M6M2Az5Xf3f
+	nXAX3wBee7fUWjzJYMD0fgV/6ruqya+j59GhyoWWKjtegHcUTaXANFtq2wXQIz90+
+X-Received: by 2002:a17:907:97c3:b0:c25:9102:ed with SMTP id
+ a640c23a62f3a-c2ac2311b07mr339426566b.5.1790294947745; Thu, 24 Sep 2026
+ 17:09:07 -0700 (PDT)
+Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST;
+ Fri, 25 Sep 2026 00:09:06 +0000
+Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST;
+ Fri, 25 Sep 2026 00:09:06 +0000
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: mhun512@gmail.com
+Date: Fri, 25 Sep 2026 00:09:06 +0000
+X-Gm-Features: AclHuK_ad8LwT8kuVDl63QDbO1AN6EHbYByYWzU8WNbNKdgNeemyDEcExbIrb2Q
+Message-ID: <CAGEsz8GkK7ZZoweuoR0DwA=CaDzJtQnmTWasEW=wPRv-yBeKew@mail.gmail.com>
+Subject: [PATCH 0/2] media: venus: fix HFI teardown races
+To: vikash.garodia@oss.qualcomm.com, dikshita.agarwal@oss.qualcomm.com
+Cc: bod@kernel.org, mchehab@kernel.org, linux-media@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	mhun512@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Andrew,
+As part of our ongoing static-analysis research, we reviewed the Venus
+teardown path and confirmed the race reported by Sashiko.
 
-The register 0x14 configuration is in patch 5. For a QCA8337 CPU PHY
-marked by patch 4, qca8337_soft_reset() clears SmartSpeed enable and
-bypass before the software reset. I should have made that relationship
-explicit in patch 4.
+This series fixes two HFI lifetime races during teardown. The first patch
+waits for the hard and threaded IRQ handlers before releasing HFI state.
+The second disables and drains recovery work so it cannot be requeued
+while HFI state is being torn down.
 
-I have a local read_status change for QCA8337, which I plan to include
-in the next RFC. When autonegotiation is enabled, it reads the resolved
-speed and duplex from register 0x11, retaining generic link-partner and
-master/slave handling. It holds the link down until those values are
-valid; forced mode keeps the generic BMCR handling. Local tests that run
-the callback and the PHY state machine against a simulated MDIO bus
-pass, including a case where 0x11 reports 100 Mb/s while the generic
-path resolves 1 Gb/s. W=1 object builds for x86 and arm64 are clean.
+The later Sashiko report also identifies a separate resource leak when IRQ
+registration fails during probe. That issue is outside this series.
 
-I also tested it on RA74 in an OpenWrt backport on Linux 6.18.52, not
-the net-next series itself, with the existing CPU SmartSpeed workaround.
-On normal 100 and 1000 Mb/s LAN links the reported speed matched 0x11,
-including after renegotiating the 100 Mb/s port and after a warm
-reboot. These were normal links; I could not force a downshift, so the
-downshifted case is only covered by the simulated test.
+Myeonghun Pak (2):
+  media: venus: hfi: disable IRQ before freeing HFI device
+  media: venus: disable recovery work before HFI teardown
 
-The existing at803x downshift tunable cannot be reused directly here.
-Its setter calls phy_init_hw() after writing 0x14, which would run
-qca8337_soft_reset() and clear a requested enable on the flagged CPU
-PHY. This shared-port PHY also has no net_device->phydev through which
-ethtool can reach it; ethtool on the conduit or wan addresses a
-different PHY. I have left tunable support out of this follow-up.
+ drivers/media/platform/qcom/venus/core.c      | 2 +-
+ drivers/media/platform/qcom/venus/hfi_venus.c | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-I don't know whether downshift is broken in general or only in
-switch-integrated PHYs. My only data point is the RA74 CPU link
-failure, and I have no downshift results from user ports or discrete
-at803x PHYs. phydev->is_internal is set for every PHY that qca83xx
-matches, since they are all switch-internal, including user ports and
-QCA8327, so it cannot select just the CPU link. I have not found a
-verified erratum for this switch revision.
-
-Thanks,
-Yongzhao Chen
+-- 
+2.53.0
