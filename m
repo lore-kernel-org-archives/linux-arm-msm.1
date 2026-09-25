@@ -1,83 +1,79 @@
-Received: from mail-qk2-f17.google.com (mail-qk2-f17.google.com [74.125.230.209])
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55DD64E3784
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 19:17:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.209
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D2254E50D6
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 19:17:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790363822; cv=none; b=WKQXQARwMyeA+xpjB6aXhwchczpm7TTDfp7SyXf0M7p1idHU7+VZBISyrFBG8mslk0vEZ5A5Lfqna4tqcYy+C84XWppZQwCyeaGmszd0GRD+3cydEsdkYg6xx48BYVPm9B28TvTlC2ZML4aiRSKbwk9V1vBeNR303T9NPCjdqTU=
+	t=1790363838; cv=none; b=NzBYbKcqvL8fuOfBePK63jLFCoBOwBA1dWDNXqarIaErX4e+mn5H4CqkQMahxKqwkpFkRHDy7L0K77ahYKtq82a1B3XYuU3H+J1lz1kVLcbBCB8BqBwU3PuSxlP8N5gyk4rX5ZiKmgMnBunvMArSsY7iJVus8gy0aDpbhc1fpek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790363822; c=relaxed/simple;
-	bh=+96OmNdu52OLdp6PqNcnZbKt8nrAE4bnHJngCEEGTaE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=aoEMJsV0V0R6YLNJg6cacA8itVba561dpSqKv3B66ZrHs0yHdg8EAgz0jwzvqWAoqa7w+xRxdZaK+6ik9cLhEimoFInW8MpcvHdwLwvWCTzxDIz9zohKlGg5O1zeF1aGkpGWJAgtGqZK7jj3hN3Yg81tvlNvgVRMlwiI1XIFKKY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ruPTmgrk; arc=none smtp.client-ip=74.125.230.209
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790363838; c=relaxed/simple;
+	bh=eut8Cv4jfu2+xcxUpOFcKOIZy7il2Fd4FaptjLAhI0c=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=muVMKh3e6aQQEiHxO/WJO/nuxX/HUmzxX7TXxV0Pq0R+fZsyTuC2gDfjRsowtg0T1EZ/p62Arp92afZ8sITSR2IPXUVGRgfp6CR8kUYSpBP88am2lqpQFGN9QHbIDzIwc3+ejuw/Lif97kSaugocwOUAEjHkGIxupbTFndlj/yU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=sartura.hr; spf=pass smtp.mailfrom=sartura.hr; dkim=pass (2048-bit key) header.d=sartura.hr header.i=@sartura.hr header.b=JTNXrVcG; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sartura.hr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ruPTmgrk"
-Received: by mail-qk2-f17.google.com with SMTP id af79cd13be357-93910ca5aa7so123817385a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 12:17:00 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=sartura.hr header.i=@sartura.hr header.b="JTNXrVcG"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c29d50b7cf9so201464466b.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 12:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790363819; x=1790968619; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wvpGMpsWr2y15kZYUKT28HeHCdI9j+YtoSYsRebbgn4=;
-        b=ruPTmgrkZnuKH7sceS0e5xg0u0Ob7erHTEHHECzWYsDJmsfJ9WfHojMjTlMvfUak26
-         8TtmeyjGbwa6x+q3ImVrgkXp1cZzq922hUaR1ftJops/zXaNOJ+lQZ6JiUGcN4iDfJSJ
-         ujp/ziptN666wraCJf3zIPF2le9K8NWyusg0SjLwYgrFsXYlGlj37u6pig3oZO4SV7y+
-         jwd/DTAaV68lRCBticIVsF98trlNgESmNEalLtdSm7iL5oFBwb5Ol2csVQLlYNKDtWC+
-         jcZoT+OlLh/r6RcSRpNbqgfl4GhCGtwZPf/HQ8hBwbDRuu4NJKmAOyD6qSfWJYHnR+/8
-         YvjA==
+        d=sartura.hr; s=sartura; t=1790363835; x=1790968635; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GIUbYqTz3s4MkcnIs81Mp9c9fGlqFAgb/HyFW+foZ1Y=;
+        b=JTNXrVcGYtuPL/Jr+fr/lve9oCbNKcV3IWLq/7Rpnd0cWmGqjZZIkZKCE5GwZhS2nC
+         yv1qtmlZA5qK6G+z7IJzZItxloPMzKXsplpSbmYDjZrXAdqt9hBoXToP0DxJ7T8LMt1A
+         Hwo3PgtV5UIgTyy7oOUWwfGNTE+E8JpYJ2j8hTnk1qwlvedvje9Y9x0BbrzUPgKR/ene
+         3MAdatgW3BjE8gjBsOwpQjKI6FaQ6Lm2IYDYyvl1+Rs/wXbQYUDQJc+3E2bSJf2Q+j8k
+         d6wvrFzatjuMwgvYGX+82ox4m5BzmbuuFrM1cngyRjLutu2CcV9WpW/NFZnYT/kL1889
+         +20w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790363819; x=1790968619;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wvpGMpsWr2y15kZYUKT28HeHCdI9j+YtoSYsRebbgn4=;
-        b=r96ZpUfKKT+bb+t5zyBzJJ+y3lbDGbae73Z2uZYXoVkDNo0QhJxxuoIM0Pq4SVl0bf
-         FkEcoM/uVLxv4Ry44Yi8dUqhqRTYxveEFmQHJBpSTckZFwvkPhkb1UpoNDOI8Irt9qBz
-         oII9E6TqZYOKUd1WK0XaJHBSpAsaw+maqC0FZbI6feyhHLekTANdwToLYpRPG9qt2mp2
-         qDU6WwVw8oio7CT0zEKzlR1vpUGvslztH7hPAYgLtKedjHrvHIBr08Ps6vDvsZ77TmsC
-         EWLoyzfmWmpehMP9ShlaORmrxXrXySwYMeLdngKfQXsrXkIU7fUcfHsoNa9EoH7p8DLy
-         3raA==
-X-Forwarded-Encrypted: i=1; AKwUvBwTjkZ1uz7DeZGPpOTwZ3GvNX2UsLoXw2Udi9V+lR2v/OOYw6Ma9+nLySz9gsGubQ0/iejI9dyUzZZs8hAG@vger.kernel.org
-X-Gm-Message-State: AFuF++mqcCBA4DQ+DSvmhI/G1mg9NBe4ZV1hvAJvYu3gG6ds+RUq47jM
-	Spa6SKuYRwhTLU/fizJC8T5GRzWS/7zWpA3snEo8SvBgeDaB6RgfU80=
-X-Gm-Gg: AYBFou1+E1/mMqHn8Wv4NCAReYkDPTcUTjjwH2a7gVpfLEbcGorMb6hZkQxhL4pD0Ni
-	he+rTLbngEU8mIOu9QXGvTpQscpzgmjWtOT+EtmXTuStXRo4H9grCzA55+UJ9e8If497BQ87xic
-	u9GBbDOBXm+UtVCVsw+A7WphCk3E1COfl/22ADgISruBYTVxa1hz1ws6j+zsxo9TW9eo6HOoAbh
-	8+0fIP9SzIS/quZFKERRGfbOCS3DpmN4XYXRLKqZ5TT6CzeWO6jr8NrJgl5u8q4pVIgHJxjS14Q
-	A6C23fCdKueuIIZRQc7VNbLna0WlrfI/VzsYgXWkb74e/H5AS+qEGUsXyzAi/EuzVQPiRLIHZkc
-	+9LOeTh61zmXuR+V18ts5VD9C+OL4s3z3cljZEsdpaBodoZapEMbeWKGlvZM0XCiPVwmflHlmeV
-	J9bjJfBYIXRshF3aGWdM3mlR9IyNlHKuOAmxIinDKaCIPYKB/7H0I4B3jNu10Yi5TxRIN2uDUJL
-	0Swzd6VDOKVbYpvHi/t8uUcrxYglH0n+9JD4X2J11ScJJnASXBHuYUJ4EWJvQ4kqIgEEjVOCCbz
-	EpPYW59K3Jm4ljvZAmFz/GboFQHh
-X-Received: by 2002:a05:620a:1a1b:b0:939:7c8:78a9 with SMTP id af79cd13be357-93c43b61a84mr653468985a.3.1790363818750;
-        Fri, 25 Sep 2026 12:16:58 -0700 (PDT)
-Received: from i4-gl-tmk5904-1.ad.psu.edu ([130.203.156.90])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-914309a24c4sm24142666d6.6.2026.09.25.12.16.57
+        d=1e100.net; s=20260707; t=1790363835; x=1790968635;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GIUbYqTz3s4MkcnIs81Mp9c9fGlqFAgb/HyFW+foZ1Y=;
+        b=dgLoDMD98RXrt5eKkoCIK0IVkgPiabeuES5KExydiyN4RPFxufJxrh90b3vfTcUbR+
+         +oeuLH8cBaOv9YcY1CkeYtBf85NegZyIirKouH72aKZtaAzY8IgsyR6FP3ar5AtC2q3m
+         pyEhhoqrCjc6q/EEP0/hIvYnrJnmMdq2WozeZ5T7AAv1eS52NKVsD0M1tqToBDAPegqd
+         izKMdOEdvfRNUztMPOwsCIcyIZPI4ZE7SuiN6Q1AothQRxl3aJyoA1FDmjHuuOVSJSss
+         B+/8K0bKLmq7aCASmTZiwwwDdxbiwa9/lNTeVjnCTfVk4uGZ4PuGnSCVJ76EzEO5JMn6
+         D+yg==
+X-Forwarded-Encrypted: i=1; AKwUvBx4VqU58Wa3b70hXVa6jHpqVIZBREZzUwvyOpQj4GP+gy/3vX8v64cpB++ozERr6kPVhy/+rjnMucwg2Wcs@vger.kernel.org
+X-Gm-Message-State: AFuF++mCUzPsmbgWtnPKgRjCwzg6PYkIucIjkeHMYgAN0IVvYgHSRbfG
+	oyPAQPU1oYdkzDQINyd8zAriuXrhkifa4gAyqAXPcYBv9e5GPibn+QiVin/gWO4/s3Q=
+X-Gm-Gg: AYBFou11PPBpwdS4P95Fye4QZTs7gAl2LvAyx+flUkTlZ1l1pAMYyEbrhTYUDXS0YyS
+	VMHtVwIxkJ4hwRAsdrBoj3MaQirEfQ7rPcp5jvGdOIbVVOn6AyRirvkIs5qPzq6sxIFb4s4IZE5
+	vxjvUBpnTo93dx1tIpXauBb6mmhv1iZGa1BrEcUbDAdkll3syJogjBxd9N7dLQse6C+6/y8mOUw
+	rIfKULmu70jAUNFLyDWHeN0sQDOZWzlDxAJ5cYo0FcDf3zDcBte7lxc7Zapzu1ZBV4e/zmiIbGr
+	Day2zknXjfmuIWf2qgEoxBnRTgVAZIWACkeLD2QUxbXIjpPrLHnUuPOslasOFazw/D+GRq39zTM
+	oU9LoWvpm8SEYvuuyuw4meisXLdme8hsNG+ptyGCsAvSVRjZH0B53F8Xe3mCiy4JJ4FgkPygcV3
+	8Nt3Xagn+Zwov0Qu0C6+BiFwYwJZI3464YUuo2OfdpaTxClxjWJZDfX7hhKEFJQfm8N7Q2nRUx9
+	Rxe14MuXy3Ez4kbGN23ao1mZqpAJJbmZljDsmriXUTSbYNow26c/QY6eNw7AXU0qStIA/9TZRka
+	Y1mklJWr4VbZt4e6inJCv0q2osyvPvjf
+X-Received: by 2002:a17:907:c23:b0:c29:659e:2fd6 with SMTP id a640c23a62f3a-c2ac23dcbfemr638910066b.10.1790363834719;
+        Fri, 25 Sep 2026 12:17:14 -0700 (PDT)
+Received: from threadripper-fedora-workstation (d-zg2-212.globalnet.hr. [213.149.37.212])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae782a309sm160881566b.62.2026.09.25.12.17.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 12:16:57 -0700 (PDT)
-From: Myeonghun Pak <mhun512@gmail.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: Myeonghun Pak <mhun512@gmail.com>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-media@vger.kernel.org,
+        Fri, 25 Sep 2026 12:17:14 -0700 (PDT)
+From: Robert Marko <robert.marko@sartura.hr>
+To: andersson@kernel.org,
+	konradybcio@kernel.org,
+	abelvesa@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sashiko <sashiko-bot@kernel.org>,
-	stable@vger.kernel.org,
-	Ijae Kim <ae878000@gmail.com>
-Subject: [PATCH v3 2/2] media: venus: disable recovery work before HFI teardown
-Date: Fri, 25 Sep 2026 15:16:53 -0400
-Message-ID: <20260925191653.3144006-3-mhun512@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260925191653.3144006-1-mhun512@gmail.com>
-References: <20260925191653.3144006-1-mhun512@gmail.com>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: luka.perkov@sartura.hr,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH] arm64: dts: qcom: ipq9574: add reset to SDHC
+Date: Fri, 25 Sep 2026 21:16:34 +0200
+Message-ID: <20260925191706.1579990-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -86,57 +82,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-venus_remove() cancels core->work before the IRQ is disabled. An IRQ
-thread can queue the work again after cancellation. The work can then
-access HFI state after venus_hfi_destroy() frees it. The work also
-requeues itself when recovery fails, so cancelling an already running
-instance alone does not close the race.
+Add reset to SDHCI controller so it can be reset to avoid timeout issues
+after software reset due to bootloader set configuration.
 
-Disable and drain the work at the start of remove, before other resources
-are dismantled. Do the same in venus_hfi_destroy() for paths that bypass
-remove, including probe unwind. Disabling the work prevents both IRQ
-handlers and the work itself from requeuing it. Drain the work before
-disabling the IRQ so an active recovery can finish any IRQ based
-completion waits. Then synchronize the IRQ before freeing HFI state.
-
-Fixes: af2c3834c8ca ("[media] media: venus: adding core part and helper functions")
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Link: https://lore.kernel.org/all/20260730153912.BAC5E1F00A3D@smtp.kernel.org/
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Co-developed-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- drivers/media/platform/qcom/venus/core.c      | 2 +-
- drivers/media/platform/qcom/venus/hfi_venus.c | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/ipq9574.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/media/platform/qcom/venus/core.c b/drivers/media/platform/qcom/venus/core.c
-index 243e342b0ae7..94d4b8688ac2 100644
---- a/drivers/media/platform/qcom/venus/core.c
-+++ b/drivers/media/platform/qcom/venus/core.c
-@@ -538,7 +538,7 @@ static void venus_remove(struct platform_device *pdev)
- 	struct device *dev = core->dev;
- 	int ret;
- 
--	cancel_delayed_work_sync(&core->work);
-+	disable_delayed_work_sync(&core->work);
- 	ret = pm_runtime_get_sync(dev);
- 	WARN_ON(ret < 0);
- 
-diff --git a/drivers/media/platform/qcom/venus/hfi_venus.c b/drivers/media/platform/qcom/venus/hfi_venus.c
-index e7e4e78a186a..20b8ba1e62f1 100644
---- a/drivers/media/platform/qcom/venus/hfi_venus.c
-+++ b/drivers/media/platform/qcom/venus/hfi_venus.c
-@@ -1689,6 +1689,7 @@ void venus_hfi_destroy(struct venus_core *core)
- {
- 	struct venus_hfi_device *hdev = to_hfi_priv(core);
- 
-+	disable_delayed_work_sync(&core->work);
- 	disable_irq(core->irq);
- 	core->priv = NULL;
- 	venus_interface_queues_release(hdev);
+diff --git a/arch/arm64/boot/dts/qcom/ipq9574.dtsi b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
+index 5a5bda5f21a11..ecafd4cda6e7a 100644
+--- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
+@@ -471,6 +471,7 @@ sdhc_1: mmc@7804000 {
+ 				 <&xo_board_clk>,
+ 				 <&gcc GCC_SDCC1_ICE_CORE_CLK>;
+ 			clock-names = "iface", "core", "xo", "ice";
++			resets = <&gcc GCC_SDCC_BCR>;
+ 			non-removable;
+ 			supports-cqe;
+ 			pinctrl-0 = <&sdc_default_state>;
 -- 
-2.53.0
+2.55.0
 
