@@ -1,143 +1,114 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2323E4AB3BA;
-	Fri, 25 Sep 2026 14:30:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3B754AEBEF
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 14:32:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790346649; cv=none; b=mks9kwVL8nmtDNRY/VKgwJGJkt45mYEhz/GkXBxOf/Qx4/17Zr3TAeqoMn1DpzBbHylDaPXi+Ko4O+1C5tmguQ4puROtmaIw0o3wJHZ9VdzJlkaOKiRGFuJVH8WTncTHEXyqPcCbz2HijnE3XdLonnlYp/fp4OtqjWB3ORceUJk=
+	t=1790346760; cv=none; b=lXNdoBc8F7S+lKcIlW6D/WcccXTuLDEsuWvqcyFngeIuQP9Qwp8wBGY36ZXr5mUh4We3K3JoX7BpCLiN7O3XUqWvEWDUzUCFm9kxg0gi62Et3t81rO1Z4Wvmg0MH9A78rNMnSFm+XuOXSEh59JrKt3dTsfIMqHnqETZDlUFDowI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790346649; c=relaxed/simple;
-	bh=6Wf6jHCTwL2K2cIr6roRfegbj1Hd6Da0VdPpPXfyWuM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GlpojiohAF7eiMs2xjbN5y0FL3pNgZ9o5P+gd3zL1s+d/z7TjEPtWf0LO7aqN/2HuXOctWUCocpYwJoGYgwDEePCDoZR0MFffo63NVLa3Rp5xpZH1KS10BiWBk8s+6mglfar+P45qlHE9NSGHm7Uoi48eezw/UMpp22iYbmfnAE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=QW1ATyam; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1790346760; c=relaxed/simple;
+	bh=JfjNdOkV6czIA57rgjyzP2vkzS7QeX8zyexGClAHNV4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=DgOZCbJkRMAX27Q8OJh7mfzRonn9uhd/fM90evqxh1hjKKqRkpduIiTO5Mtoyl4QHZ22/Gp/7t7ZTQLKwOVV9MfTtKopfcUXKdP9INameXjG2Jq9l8LMOE/AdldTjtFK+r87R1tlm80cNyM03otiG4wuMnNXeBp4yFuVMwq+UOU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hR6z2bMD; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="QW1ATyam"
-Received: from [IPV6:2001:1aef:17c:c89a:bc5a:ffa6:6d36:3fe4] (2001-1aef-17c-c89a-bc5a-ffa6-6d36-3fe4.ip6.tmcz.cz [IPv6:2001:1aef:17c:c89a:bc5a:ffa6:6d36:3fe4])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 5F0A95340216;
-	Fri, 25 Sep 2026 16:30:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1790346638;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=1I7TVVSAL3yzjHMt4Xk4O9F3G9eiWVAIMs9JyVDBNaU=;
-	b=QW1ATyamLhSpEB1XayiWfW2qLEV2nWM5s430ovQ6kqmy23RtMN4h5DSf8vuri6Q/GA1njr
-	bCIKn7jTsPkEmWvSd+zZ1kAVjUTrtzAc+BRcqHQMwkasoGvufHrOzLQzKSGl+6UqH6u+Sw
-	nJ+7JThly1SGOywhEaqbY5+HhIiKAT8=
-Message-ID: <75e9fa56-7cf8-46ec-83ca-100170e83f2a@ixit.cz>
-Date: Fri, 25 Sep 2026 16:30:36 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hR6z2bMD"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e620fa473so6080065e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 07:32:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790346754; x=1790951554; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/6G1/nB52qdf+pNA4653UiqYpDMxleEfU1TnV94wJwE=;
+        b=hR6z2bMDq0jmYglEjbKA6Xre+kvsAjX8/IzpTm1EJ6QgiwpvJCih0EXAlrxlJz2W3A
+         wJZ1JOw9THj8GCx47p+kfz36Y/OzHfp2zob0r2RoDe884ozVMZ5HbVVJ1ia61z70EGMe
+         PHefQOn4mO0HWamibHpSI2VrdReQecoqKdUrQFB33grsv5u6DfeHyCJDBrIN90u3oY3j
+         N0O1lKaMOfm3rLwF9lZDOMBfXLfVbrDaSnrCGejig34YxvmBEYnumAZ51grxe0aj63nl
+         ScL4wKQ5r5UD4OM1EBiOmvSQb+IAXAoVltLnaKAFjsQRIGBbbHNED7YxycdxVDtqWsoS
+         Yriw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790346754; x=1790951554;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/6G1/nB52qdf+pNA4653UiqYpDMxleEfU1TnV94wJwE=;
+        b=HxYGQYLQXDh+8ttf22sLoVjZSVU6Z58nmFT6sovThOVExBiz6UPkVWWevrTJyg15nL
+         KMijIp40TYWGr5HkahnPnWrHpRcD9fJHJNSj8od/cppdJp/K0nFFfOzz1RuLxTwNWJS0
+         N//uizAjz43cvX06chERaLoELfqYJsqkFHjRKDk+cowqO+bDt4rPejg1KS18EHD4EYGU
+         OaVAvy6VcAAnFzJSn3GTMYrDoFa9H1G4ugqk3+NO6Ak87+WLtounVRL973a5iC3T0YWz
+         gO2GOahu7nLcierfwl++tTVxKCotFpmlurR7pIUdFLcF7dwDEFkgzetRCrFZV9gpgcvE
+         y68A==
+X-Forwarded-Encrypted: i=1; AKwUvBzLTb62riLEcpyXDYDMThH6bZa8rKHmZiYP7g2zR1SZkK1ud3xSWWR8pwachgsPh/IBIOjeYnZYavuNa05a@vger.kernel.org
+X-Gm-Message-State: AFuF++n1X1GcL3i2vaDZPg/Meh4GdzRhT/KYMcR9fqtoWc8YFVcJXShb
+	obrvjfGpqQhKFS1LSaeE8FTPmOZjPAT/4ORg7EDvQS0bS/eDAMhaXs6N
+X-Gm-Gg: AYBFou1ghHUNI2+WxEzz2Pzd/gLcJ8g5jS5JRDJvNJKj9taMsL9lHz71VHrWz4vaudR
+	8XWaNpjXhpDhr9U/oZE34ehMLlKKvlzDiXmys7UAU3Kb0QxbPpz927SYsFo6brJcya7vQF2AF3+
+	2YSwf7zMj/MRkKNkidBS6TQn8y5YeQG5jjub+S6FlWB0pAF/1L87gbwtaKwzDpGJsr0cwCFrnfX
+	q0iGbgVtujhZ5FZIQqPd5MVgnqj8g50cAvf+hpaPSjtWGfPkl+Y8tvp3/Sth7kmmuW2ybVuIDTJ
+	qsey4nSE06iVVnV/B04aUKuNlvGBFMyJtUhmLGFmBLQrT/DOtJJcCyExfFTeVZ7be2Bk8recr9v
+	ur6Rrj9M1WukTwTV9SwYQTxqrHoVlAd7K5l5GtY01NA3shj4zRAzm3wexbxHVl1cML2oYcXrL3e
+	UTrcn7yZiuE+dtY47cRUccFmD3rQiqJ0FlxlcRbBasa2Q0yt14nuOCxnjv3nJWZ9mQMFiPuDyym
+	xQ06MnvmRGz9O9N9QoG7QUvBpFS1CZICEnTk1jyEuVmfFpQw091
+X-Received: by 2002:a05:600c:4f47:b0:49f:c199:e1e2 with SMTP id 5b1f17b1804b1-49ff06ed9c1mr51897165e9.28.1790346754282;
+        Fri, 25 Sep 2026 07:32:34 -0700 (PDT)
+Received: from VivoBook-ASUS-X712UA-M712UA.lan (public-gprs197761.centertel.pl. [46.134.111.194])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a746c57sm7034706f8f.35.2026.09.25.07.32.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 07:32:33 -0700 (PDT)
+From: Stanislaw Pal <kuncy7@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>
+Cc: Gabor Juhos <j4g8y7@gmail.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Jie Luo <jie.luo@oss.qualcomm.com>,
+	Georg Seema <georgseema@gmail.com>,
+	Mieczyslaw Nalewaj <namiltd@yahoo.com>,
+	Brian Masney <bmasney@redhat.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v4] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks enabled
+Date: Fri, 25 Sep 2026 16:32:28 +0200
+Message-ID: <20260925143228.386299-1-kuncy7@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260813093351.178419-1-kuncy7@gmail.com>
+References: <20260813093351.178419-1-kuncy7@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/8] slimbus: qcom-ngd-ctrl: Remove data channels on
- stream disable
-To: Srinivas Kandagatla <srini@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- David Rhodes <david.rhodes@cirrus.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- David Rhodes <drhodes@opensource.cirrus.com>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
- devicetree@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260924-pixel3-audio-v4-0-85b5d133aa5e@ixit.cz>
- <20260924-pixel3-audio-v4-7-85b5d133aa5e@ixit.cz>
- <781fc756-bde6-4d83-a09c-19d4fd70e588@kernel.org>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <781fc756-bde6-4d83-a09c-19d4fd70e588@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 25/09/2026 10:09, Srinivas Kandagatla wrote:
-> On 9/24/26 2:24 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
->>
->> qcom_slim_ngd_xfer_msg() silently returns success for every core
->> reconfiguration message, so the generic channel removal done by
->> slim_stream_disable() never reaches the ADSP SLIMbus master. The
->> master therefore keeps the channels of a closed stream. When the next
->> stream defines the same channel numbers again, the WCD9340 capture
->> completes without any error but records only zeros; removing the
->> channels explicitly when the stream is disabled makes it work again.
->>
->> Implement the disable_stream controller op with the sequence the
->> downstream NGD driver sends for channel removal, CHAN_CTRL(REMOVE)
->> listing the stream's channels followed by RECONFIG_NOW. Like
->> downstream, treat -EREMOTEIO from the removal as success: it means the
->> controller is being restarted and the channels are gone anyway.
->>
->> Based on work done by Casey Tunturi.
->>
->> Assisted-by: Claude:claude-fable-5-1
->> Signed-off-by: David Heidelberg <david@ixit.cz>
->> ---
-> 
-> there is an identical patch on the list,
-> https://lore.kernel.org/linux-arm-msm/247e4ce7-1ba2-43b8-8a11-ec70f99a4fc1@linaro.org/T/#m3b50aa43a6493f8d3b607b1607b37bf14b199f69
-> 
-...and I see you just merged resent v3 today :)
+Please drop this patch.
 
-I'll drop this patch from the series then.
+Gabor's fix for the same hang has been applied:
 
-Thank you
-David
+  33f9cb56cc28 ("clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as critical")
+
+It addresses the platform-level cause: 'gpll0_main' feeds the CPUs
+through GPLL0 during early boot, before the APCS clock is registered
+and CCF can see that consumer, so the first driver to drop a runtime PM
+reference on a GCC clock under it takes the CPUs down with it. The
+ipq-cmn-pll probe was only the first driver to do so on the AX55 v1; I
+had verified on that board that Gabor's change alone gives a reliable
+boot with this patch absent, and OpenWrt has since replaced this patch
+with his in its tree.
+
+That also answers the two open questions here. Jie's suggestion of
+making the GCC a consumer of the CMN PLL outputs is no longer needed
+for this hang, and Konrad's question about crashdump mode I cannot
+answer: I never captured that state, and with the fix in place I have
+nothing left that reproduces it.
+
+Thank you all for the review, and Gabor for finding the actual cause.
+
+Best regards,
+Stanislaw
