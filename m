@@ -1,470 +1,193 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BCE9484246
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 10:37:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B447B43DEA8
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 11:02:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790332637; cv=none; b=LSpmqoxYZhK1cUDXrOmLx32AwpUeax8sFwsZXOgH1Van5JXEHErQvS7oSiNO82N4RptEORd+z9au50dZCiiD/njXD9cyUjr8HTUjcyp5MGXh8jlGs5tbkVdHqsi9nDyYgC+yAbptSbQuEBmgd2cBXvoLeXYQn5vsaTW2QfBMY/s=
+	t=1790334167; cv=none; b=hPUXKn+6I/0NlTgddnUEMaQWPOoTX52i3PDTE6DvngVJIzyLijITI2lA9HoqBG0re+Dx3FRK31WKxpBVw0w/xKzC0fHL2ADAxabzoXqI2pQhgcVH5KHMM8bOwDi30iJfoa/QfUeF/d1GaHmeef9Fzy674BlNe4BMuFYThrsfyTs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790332637; c=relaxed/simple;
-	bh=+nUN6rz6zzeX1HgQdsA2louWR2cCdGehoJ2jFGP13JQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=i2CWjRVKyAbeE5BuY4PiZmazhTq5V0axs5E0jn9TlV0Zw0VHQNg8lsz1qXczwf2U/CDEGVFuke+bNLelQ8QDnyzHNX182Vw53eeh18bnpm+XJTCJBxc4KTCi1bdEYX0P8DK4c0t+qXAvaCOV2M5hedLbgCZrENz2Dqb6coM6pzc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P9lG1xZx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AtHutlD1; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1790334167; c=relaxed/simple;
+	bh=LNOMjLy6wAcR7Zrv2JQzDuQOs+io2+5LVXSdmKnrQY0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RCz6ny2aR5Em8ARFxBuPzuWT7d2ItibVm7LlN+2HmnPlBJIFult7MLlz2bsFYxI6OCPiFMWC9UcOwXs11tKCCv5iDf8f/k9Elhxh6To0AoNKFq0sx1do1LGUPiGPkGSvXOqz/hWpxt0YmH8U8cMJXloRW/BiE13Nk4pROBj/pRI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KvFh2CFL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bisctOx5; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P9lG1xZx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AtHutlD1"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68P5IjGH600035
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 10:37:14 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KvFh2CFL";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bisctOx5"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68P4YeOF1193864
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 11:02:43 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Dc2b3E2dU/PKCiTvrUVIT4Jv
-	Egyr5BpHbH25kJGzFm4=; b=P9lG1xZxSB3Ijc1XZQYp/LQOQ3W2Ia8/e0e95mf8
-	7q05Owzr7wbi94CZiKaOiieiMHEupmEL3RZXt4EVkRng2Ag868gpiusquMeXI+8f
-	XNV453o7Alrt+BsIDS9BrL64pQigfcNqP6OfbSS9QuvqGCeCjq4q2/kfqfJ7sCYz
-	lSYL798rceJnSWjIXIfE65x9nCXlKQ35AQo/uvMDGveaQg/Qj7STDYWFG3uHUMCu
-	fVN5OTC+fOOgNRWtsmJqKwuSbIHKyOm7VPY6z5MZAwJDCuDMqI27LOgpBKnDKBml
-	N7TBL7nh4ikEz2aZmAomlxTdlQ/+q32i7qT2WCS6ib2r1g==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwjpvry5m-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	VoIWBlJoo0FiwEjddlsFzE0cCw/HF0hLVfs9qwlvuz8=; b=KvFh2CFL0Ck4gOAb
+	oI26+pbdmpqxQbPkecyHre41ejQiajPuhGGBInHpPGWQbdFySia5lL6pZ5F1B3Ma
+	GIockcThtNcuuiBI1f0w7/fjjcsAu1GKzdpEgeYCTdOwzYWn4AQvrqeIl0GOA4w/
+	5ZS7CAxkvhO5O/KFIuMTcE4xBxWRVDpewgKusJ0S1g5Gslp1tBg8Y1AC91ZVC16C
+	I6bTOYJ5eJKQPjb/oE/8dHv85aGJ0OzjRfDTgppuAkWjFdZhjbFrN/W6MERqqKLF
+	psjK+AiB+jJ2oD2ZC+/XHxzz7dYFhRGuLavtAkQLoPzyd2yvcW8iY/4TnOJUScbC
+	MXKhrw==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gw874k4s0-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 10:37:14 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9390a2c895bso205508985a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 03:37:14 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 11:02:43 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30c0d568830so1556506eec.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 04:02:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790332633; x=1790937433; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Dc2b3E2dU/PKCiTvrUVIT4JvEgyr5BpHbH25kJGzFm4=;
-        b=AtHutlD19V4/NCMiMLG0jR4PHezqQ0Oe8GD5Z7mKnnEmcYGmtVEZslsijNGyTNqz7r
-         8CLQ/b66/OlMNkTIjc7DwtIcWrjN+aRatGigvuDIL0Nv7ZguoEq8Fl2M4L2A5VksiS6J
-         NiQn17N+kPcBbFYJY7/iVzO4cFmHfs1jgh/7EKIfMG0LxmsbzIb89NJ0I4MiaiW+u0UJ
-         wBiv0+PXuaiL6HSKfdvUlzB/DhwekpblJn1+OQ2pFCuIAAXmHdSaiFn+DVroQSyFyB+M
-         d2+tEzyDEqgOv7vP105ZVyDwmJW5tdF/4Iuy2+VuMbj3gjcKSLb6ULyT3oTOW3T1+MF7
-         8YoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790332633; x=1790937433;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1790334162; x=1790938962; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Dc2b3E2dU/PKCiTvrUVIT4JvEgyr5BpHbH25kJGzFm4=;
-        b=lzEJ35+cz3vvL440Jr7GmoWDozMCrMh3YzUdCl5+TxVdk92BXsCf3+7xxw0sY/WGfN
-         IgzHrvHwBKlW66cOxxCtnBv2brhIXIXXXDEPEBi5S96MEBP5IqGkB1d/FLqqByuqiYjO
-         7L2qHxZF2HcwVmSa4ga/O4B+FRCYNTiUlkqurxhI79YLzbqQ/4RwVAB4dznEI/CPHw61
-         5xI+GguNgDgw/y0zC/JbH0cwis/7XHW40KUY2JweTxjTyfMHxm9GNkLNc32tfKlMKRJt
-         7U5ZM71yZa5eYLAhVCovcoT+IzCgWwgNvnYrpgMI2z6IlMcSS3uv7DftZxJ5f1Ov20BK
-         4pSQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzKkiERVcNcJu/tBieWIXv4SmW5OedQTJv5awOZvfHccG7F29qZgCaNJfhzwsPO0rAy0d1qQj4zZ7+FnrZd@vger.kernel.org
-X-Gm-Message-State: AFuF++lULoMTRlYqOHWDbINGfKzOd2AGtYOTbMTBSiSy1971CFx50XvX
-	tnpxPZgv3LLZ0ptGW24xbIXs/A5yh/ms1QGLcMW+XUG9w7fPyzVglAGCxaTgO1P8V/zSbX3e4eV
-	OTgvbbprLSwUvMBtioUDcyS6YDQNGTPrr6DcdGDtqwI/8w4EHbVVvu+J8N4hf2X8yJ3sX
-X-Gm-Gg: AYBFou1gY4bVXK7d4bz11rdGipc1jv93UJAjZRBDgRY+FTpb75RruWkjPpongC91uEO
-	Il/GTpyMtcWMBKfot0AiXVmbLUQU1lLcm4lXbXULYlYamGe0i1/Z9RcGw+i/ZrWGUaS9XbNfiW9
-	b2rcCoLmkmwFFhlkRqZotm09zvzV2xIJURWxzfljlSpF47XUc8J3nejXF3k6Dv+AOWF3suSLXVb
-	ms8ty/sL0yKC+N1IDou1diIi2naXuFwtGhabElk7L3yLCRlv8BpyJFnAUXGafHG/9k7iztGK3fV
-	DAaeiTIWRsmpqdM17oI1INU1DSZl6dRXMgBMYgoLXpv2RgY2LoLr6NMkzg3NXRqLq17akceLiZf
-	8u1k8a37a6rN7gg==
-X-Received: by 2002:a05:620a:6493:b0:936:77d7:55a4 with SMTP id af79cd13be357-93c43cfc87emr347684185a.19.1790332633388;
-        Fri, 25 Sep 2026 03:37:13 -0700 (PDT)
-X-Received: by 2002:a05:620a:6493:b0:936:77d7:55a4 with SMTP id af79cd13be357-93c43cfc87emr347677285a.19.1790332632792;
-        Fri, 25 Sep 2026 03:37:12 -0700 (PDT)
-Received: from localhost ([188.216.77.92])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a2acb4dsm6202787f8f.0.2026.09.25.03.37.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 03:37:11 -0700 (PDT)
-Date: Fri, 25 Sep 2026 12:37:10 +0200
-From: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Serge Semin <fancer.lancer@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
-        Jitendra Vegiraju <jitendra.vegiraju@broadcom.com>
-Subject: Re: [PATCH RFC net-next 4/9] net: pcs: xpcs: add Qualcomm Nord
- platform support
-Message-ID: <arZO1niyhIEnAv5J@lore-desk>
-References: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
- <20260923-qcom_xpcs_nord_emac-v1-4-4b1c682af70f@oss.qualcomm.com>
+        bh=VoIWBlJoo0FiwEjddlsFzE0cCw/HF0hLVfs9qwlvuz8=;
+        b=bisctOx57CevOHI2baXrK83xChr3w0N3tdNDy232PBOtzftVnfyal2lpgJKvVt19yf
+         XrIUHUm01XO0G+Kn4trf2YWcDtOgX05UqtsqlxK0kzxraXnXtG0MTWTnLF7uGfvFptZj
+         U/SDWkKdFnUHh+8gpoU1xMh/vAlJAwbHHbPKhgS+6bHXhSJ8H6sr/FqZzvUJBduynveI
+         8+FxgxSOghK0xwNaiiPNfxpdCsidFv9oRnbTh4PhoDc0gJRY1ihP84BHCWUyLj6GdaB3
+         7lkQw53qvXE0xq6/0aQv49Vx48l5f5btY7jXYJdkWs51XD7EyNigrtKhbF3OkUoZDLuu
+         qERg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790334162; x=1790938962;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VoIWBlJoo0FiwEjddlsFzE0cCw/HF0hLVfs9qwlvuz8=;
+        b=fWss1DOfmuuTvtC7MjBvmcvIYdV+4WbSn7R5C1Xvyztsj1WrgYJXM92i5JmnWPyVTA
+         iwF5wHZGeiJnrWn9ksBp9N85ArEFycyfrOmSfR0QNPfl3ZtGMnoW7y6RnvJCxsfRnUwd
+         7sriW8kLEDebdW7JQzjy+xpGSjzfC7lrgyUQQAYY/9MUfhF4MZCSWsZQn+wPqAQl7RnI
+         Mnza8oDJm1rqqOkLivyJRqkRTI+EfcPHubV/Xct4XUrbeblB7NSo+gymMff7NFAqXXSP
+         zUep1Hw9JUmfVKvwI6s53zrZgyVBhZDbMeSjh+0kL+AwGSPRIlqmmfaWLswzdCi4KwB4
+         iLsw==
+X-Forwarded-Encrypted: i=1; AKwUvBzAr2lYVx4asY3KjSD71TXX8Bqrioedngr6ozyHVvdyBUHUlTmKRVLtdHLhkoBRvVAcG6TYGW1w188JRBTO@vger.kernel.org
+X-Gm-Message-State: AFuF++nnd0xBJfJxb3S4sjGF/hxgW8RoeKgetWP/1xsj+iG2vg8/cuS4
+	eq9rjrDLBithvmyUV/cAYHgsrc8XqN3c/1f3Zw5t9AyjzAOIMV/R0CTz6iYTyAeY6vLx0/s68GL
+	eb1r97nIa14ThHu2gTMfoRBgu1XENRvtX1lH0KXDh0bke0C46KlDIpc4pjfdca0DCEke8
+X-Gm-Gg: AYBFou2aFjyXrSp7YLTOPzKnG/kM8lC1Y6XbOCz+BNC4ahl4a93oLj5djPYS8l7Vsun
+	qsfHMAsFouHUSSaeG7Rh74//iTdN5p21oJLSoNVx0s6tVGvJJ5seA/QDuJJ/diHNN9yGYipfgRI
+	F91qoPD8mv9uzQM9BA/qkCWzCjTBFLg19GYVeWfXltEUfDuMypB1u1pQ2jmdyl+GuzmiAYJi04Q
+	6RmP9fw3twh/UEIeFoa/8KIOj+jcslWvH9jgu47o6lmG8tTE91pZ5zHcqEabDL14j1d3CgxBH5M
+	uIJTq2JpSH4H8K/ffP4of/X8ZY3vplTBcm2AWRdRbv8N2EeZxTmTOqmIZfEDCAQMwGOEQ8wZW5K
+	ml4BME9Q3qXGkyBYrFozBfQEH6oh9
+X-Received: by 2002:a05:701b:2085:20b0:144:eac6:cf37 with SMTP id a92af1059eb24-14503ffef9dmr4634819c88.47.1790334162208;
+        Fri, 25 Sep 2026 04:02:42 -0700 (PDT)
+X-Received: by 2002:a05:701b:2085:20b0:144:eac6:cf37 with SMTP id a92af1059eb24-14503ffef9dmr4634776c88.47.1790334161284;
+        Fri, 25 Sep 2026 04:02:41 -0700 (PDT)
+Received: from [192.168.1.25] ([122.183.173.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ac67c0ccsm5428954c88.4.2026.09.25.04.02.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 25 Sep 2026 04:02:41 -0700 (PDT)
+Message-ID: <6f2afa91-6355-45f8-b6be-6b556c679813@oss.qualcomm.com>
+Date: Fri, 25 Sep 2026 16:32:33 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ySQnkYGEMas/aZSk"
-Content-Disposition: inline
-In-Reply-To: <20260923-qcom_xpcs_nord_emac-v1-4-4b1c682af70f@oss.qualcomm.com>
-X-Proofpoint-GUID: vOO7OdzzhxwW3lNgkOrOuzx0fZlAofZu
-X-Proofpoint-ORIG-GUID: vOO7OdzzhxwW3lNgkOrOuzx0fZlAofZu
-X-Authority-Analysis: v=2.4 cv=aLBlOr9m c=1 sm=1 tr=0 ts=6ab64eda cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=WpTaRW6qxYHRGzLzQsVYzg==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=TBIoFk-jyhqgT34sUlAA:9 a=CjuIK1q_8ugA:10 a=6T2aJRpNhVgXhit-X0gA:9
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA0MiBTYWx0ZWRfX1SpsZ7EVriEz
- jGjXr1MbuBYtinf0stSZJwz1JZMQRJ2pB1QKZe4No1S/xJVC2AwZnp/5KWFF0Az4DVFafYt1Y1W
- QECCSWaF77G0hVpmyBZ6TrjbrzxkMx4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA0MiBTYWx0ZWRfX921G3WBwW/Lj
- sT7cIE7XC9q9etBAy7ay8tHdRH21R5m16YghjyjXcLIT/2pRqF7oErmtfxYPP67Br9+G4Uxam96
- dZbAy9nSBd4TaaSW9bmCXSg5ZHUvrPvkRdtH3bQRE7EQ9apLw1VYz+ci7XBeKxyJoMy3u3oKYjf
- QcijjMTh3Kq+wtV7OG7DQGMPNea2BuqzclYIyKyJOE7mtddiwFAjzuFTP+ZFtT48HDrH2Ssl87M
- PcZIbruGpn+ZR8tVXMmJAEwmV4ZDRfd/n7o+1klezY/5ipJPlxss+ybsZsBIWYOy0VP+dh+pFF6
- ZEVMUjxK+uR8KzRY3vaJ0ndkze6nosa69hHHRyY0XC+cPR/VmFiyL1L0M+HWOdgCoe8wg2Ys/Dd
- 6KNqZlmAL+vT+7YHUGfb5x0S+Sq0Nu7FkYprVgYWuMcuegqTvA5Cwxs28C5yXhz5N7F2LObUlW1
- 03Oyib5/Zsmy7VLjtaA==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 8/8] ASoC: qcom: lpass: Add support for LPASS codec
+ v4.0
+To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+References: <20260922-add_shikra_support-v1-0-6c6cb6444caf@oss.qualcomm.com>
+ <20260922-add_shikra_support-v1-8-6c6cb6444caf@oss.qualcomm.com>
+Content-Language: en-US
+From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+In-Reply-To: <20260922-add_shikra_support-v1-8-6c6cb6444caf@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: KJIsSpKD7gWBPahf91y20go1CVe23PCN
+X-Authority-Analysis: v=2.4 cv=MI71C8Zl c=1 sm=1 tr=0 ts=6ab654d3 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=uk8ae9/F1LYL5lfeGCaUoA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=vpuhTeqA5xwXINrO_jgA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA0MyBTYWx0ZWRfX1M6FtCyqfddp
+ Pfq9qbNz19kzhWRkGwnuXEQXCB8R7pZtNCPh0jLsfiBChxGpzRPquqMSUPfXL7uVvaKKT4m0DeG
+ vBti3QfuOQ1lDkyDoq+GwqmtdcHVkEpng/qpSoBwq5JIrF20y2Wf/Lr4hJtwd7SKVO+3bVQ5Nbj
+ fx9aqkoNjR3acpMa/0OqDlRt5h7zQwXfEMIV0Dm6rvdgnMTsbGfuvAErt6hScN0agm8iWVLlm6P
+ sQdrdb5i7Fosc8WrqzIMVzsHK2avwGJdW1zL7eRdCGf4VaIdWHtP4wmjhHUGR3zrOToMYVziecd
+ MON7pa0TVqbeQoEzA02bGR0ZDV/wZZ/HKer8tDZ9nFqYVOknt9lpds2PQPJxd73ASRM8mIJOSUR
+ HMSNuHHTEyUmFH1H1mA7kOQtC7tqvC2zjOwEgzqilAphpxcb+MBRonl399JXhBPKyJ+3uIE06rm
+ 6yLE5GQ/Q5nZ8O4DUpg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA0MyBTYWx0ZWRfX2brqTImeBBPD
+ d3S0pea+dzAx7NbdtSk/6s9ppGzuEaarLOqC0ALobrUnyx1hAo6Tp2fkH4r3Y3JBWgkWn+eAvk6
+ 5HtgELYI+jOp1Yxi37UgeHlbokmlUmI=
+X-Proofpoint-GUID: KJIsSpKD7gWBPahf91y20go1CVe23PCN
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 malwarescore=0 priorityscore=1501
- clxscore=1015 phishscore=0 adultscore=0 impostorscore=0 spamscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609250042
+ suspectscore=0 malwarescore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ impostorscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250043
 
---ySQnkYGEMas/aZSk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-> Qualcomm Nord exposes the DesignWare XPCS register blocks through
-> separate direct-MMIO windows instead of the standard contiguous
-> MMD/register layout. Add accessors that translate MMD accesses to the
-> Nord windows:
->=20
->   MMD 3 (PCS), standard registers: SR_XS at 0x0000
->   MMD 3 (PCS), vendor registers:   VR_XS at 0x2000
->   MMD 1 (PMA/PMD):                  SR_PMA at 0x3000
->   MMD 31 (VEND2), standard regs:    SR_MII at 0x4000
->   MMD 31 (VEND2), vendor registers: VR_MII at 0x5000
->=20
-> Each register uses a 32-bit MMIO stride. The vendor bit is removed from
-> the register index before calculating a vendor-window offset.
->=20
-> Select these accessors using the Nord synthetic XPCS ID, allow its
-> smaller direct-MMIO resource, and add the Nord USXGMII Clause 37
-> compatibility.
->=20
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-> ---
->  drivers/net/pcs/Makefile        |  3 +-
->  drivers/net/pcs/pcs-xpcs-plat.c | 17 +++++++-
->  drivers/net/pcs/pcs-xpcs-qcom.c | 86 +++++++++++++++++++++++++++++++++++=
-++++++
->  drivers/net/pcs/pcs-xpcs-qcom.h | 16 ++++++++
->  drivers/net/pcs/pcs-xpcs.c      | 13 +++++++
->  include/linux/pcs/pcs-xpcs.h    |  1 +
->  6 files changed, 134 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/net/pcs/Makefile b/drivers/net/pcs/Makefile
-> index 4f7920618b90051e839a74a7101aaaf055a77f74..3d7cf1a5cd0783078edcefc6d=
-fec626af469495d 100644
-> --- a/drivers/net/pcs/Makefile
-> +++ b/drivers/net/pcs/Makefile
-> @@ -2,7 +2,8 @@
->  # Makefile for Linux PCS drivers
-> =20
->  pcs_xpcs-$(CONFIG_PCS_XPCS)	:=3D pcs-xpcs.o pcs-xpcs-plat.o \
-> -				   pcs-xpcs-nxp.o pcs-xpcs-wx.o
-> +				   pcs-xpcs-nxp.o pcs-xpcs-qcom.o \
-> +				   pcs-xpcs-wx.o
-> =20
->  obj-$(CONFIG_PCS_XPCS)		+=3D pcs_xpcs.o
->  obj-$(CONFIG_PCS_LYNX)		+=3D pcs-lynx.o
-> diff --git a/drivers/net/pcs/pcs-xpcs-plat.c b/drivers/net/pcs/pcs-xpcs-p=
-lat.c
-> index e78a233fb198d940951064a71e8597c6c666bc9d..e013a5253a22651220e62352d=
-03faabc3a3c3658 100644
-> --- a/drivers/net/pcs/pcs-xpcs-plat.c
-> +++ b/drivers/net/pcs/pcs-xpcs-plat.c
-> @@ -20,6 +20,7 @@
->  #include <linux/sizes.h>
-> =20
->  #include "pcs-xpcs.h"
-> +#include "pcs-xpcs-qcom.h"
-> =20
->  /* Page select register for the indirect MMIO CSRs access */
->  #define DW_VR_CSR_VIEWPORT		0xff
-> @@ -239,8 +240,14 @@ static int xpcs_mmio_write_c45(struct mii_bus *bus, =
-int addr, int dev,
->  		return xpcs_mmio_write_reg_direct(pxpcs, dev, reg, val);
->  }
-> =20
-> +static const struct dw_xpcs_plat_ops xpcs_qcom_ops =3D {
-> +	.reg_read =3D xpcs_qcom_reg_read,
-> +	.reg_write =3D xpcs_qcom_reg_write,
-> +};
-> +
->  static struct dw_xpcs_plat *xpcs_plat_create_data(struct platform_device=
- *pdev)
->  {
-> +	const struct dw_xpcs_info *info;
->  	struct dw_xpcs_plat *pxpcs;
-> =20
->  	pxpcs =3D devm_kzalloc(&pdev->dev, sizeof(*pxpcs), GFP_KERNEL);
-> @@ -248,6 +255,12 @@ static struct dw_xpcs_plat *xpcs_plat_create_data(st=
-ruct platform_device *pdev)
->  		return ERR_PTR(-ENOMEM);
-> =20
->  	pxpcs->pdev =3D pdev;
-> +	info =3D device_get_match_data(&pdev->dev);
-> +	if (!info)
-> +		return ERR_PTR(-EINVAL);
-> +
-> +	if (info->pcs =3D=3D QCOM_NORD_XPCS_ID)
-> +		pxpcs->ops =3D &xpcs_qcom_ops;
-> =20
->  	dev_set_drvdata(&pdev->dev, pxpcs);
-> =20
-> @@ -285,7 +298,7 @@ static int xpcs_plat_init_res(struct dw_xpcs_plat *px=
-pcs)
->  	else
->  		spc_size =3D pxpcs->reg_width * SZ_2M;
-> =20
-> -	if (resource_size(res) < spc_size) {
-> +	if (!pxpcs->ops && resource_size(res) < spc_size) {
->  		dev_err(dev, "Invalid reg-space size\n");
->  		return -EINVAL;
->  	}
-> @@ -452,8 +465,10 @@ DW_XPCS_INFO_DECLARE(xpcs_pma_gen4_3g, DW_XPCS_ID_NA=
-TIVE, DW_XPCS_PMA_GEN4_3G_ID
->  DW_XPCS_INFO_DECLARE(xpcs_pma_gen4_6g, DW_XPCS_ID_NATIVE, DW_XPCS_PMA_GE=
-N4_6G_ID);
->  DW_XPCS_INFO_DECLARE(xpcs_pma_gen5_10g, DW_XPCS_ID_NATIVE, DW_XPCS_PMA_G=
-EN5_10G_ID);
->  DW_XPCS_INFO_DECLARE(xpcs_pma_gen5_12g, DW_XPCS_ID_NATIVE, DW_XPCS_PMA_G=
-EN5_12G_ID);
-> +DW_XPCS_INFO_DECLARE(xpcs_qcom_nord, QCOM_NORD_XPCS_ID, DW_XPCS_PMA_ID_N=
-ATIVE);
-> =20
->  static const struct of_device_id xpcs_of_ids[] =3D {
-> +	{ .compatible =3D "qcom,nord-dw-xpcs", .data =3D &xpcs_qcom_nord },
->  	{ .compatible =3D "snps,dw-xpcs", .data =3D &xpcs_generic },
->  	{ .compatible =3D "snps,dw-xpcs-gen1-3g", .data =3D &xpcs_pma_gen1_3g },
->  	{ .compatible =3D "snps,dw-xpcs-gen2-3g", .data =3D &xpcs_pma_gen2_3g },
-> diff --git a/drivers/net/pcs/pcs-xpcs-qcom.c b/drivers/net/pcs/pcs-xpcs-q=
-com.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..63c95c951454819b62eb3fd00=
-abcc6b529e2004b
-> --- /dev/null
-> +++ b/drivers/net/pcs/pcs-xpcs-qcom.c
-> @@ -0,0 +1,86 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Qualcomm DesignWare XPCS platform helpers
-> + *
-> + * Copyright (c) 2026 Qualcomm Innovation Center, Inc. All rights reserv=
-ed.
-> + */
-> +
-> +#include <linux/io.h>
-> +#include <linux/mdio.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/pm_runtime.h>
-> +
-> +#include "pcs-xpcs.h"
-> +#include "pcs-xpcs-qcom.h"
-> +
-> +/* Qualcomm Nord direct MMIO XPCS windows. */
-> +#define QCOM_XPCS_SR_XS_BASE		0x0000
-> +#define QCOM_XPCS_VR_XS_BASE		0x2000
-> +#define QCOM_XPCS_SR_PMA_BASE		0x3000
-> +#define QCOM_XPCS_SR_MII_BASE		0x4000
-> +#define QCOM_XPCS_VR_MII_BASE		0x5000
-> +
-> +static int xpcs_qcom_reg_offset(int dev, int reg)
-> +{
-> +	switch (dev) {
-> +	case MDIO_MMD_PCS:
-> +		if (reg & DW_VENDOR)
-> +			return QCOM_XPCS_VR_XS_BASE +
-> +			       ((reg & ~DW_VENDOR) << 2);
-> +
-> +		return QCOM_XPCS_SR_XS_BASE + (reg << 2);
-> +
-> +	case MDIO_MMD_PMAPMD:
-> +		return QCOM_XPCS_SR_PMA_BASE + (reg << 2);
-> +
-> +	case MDIO_MMD_VEND2:
-> +		if (reg >=3D DW_VENDOR)
-> +			return QCOM_XPCS_VR_MII_BASE +
-> +			       ((reg - DW_VENDOR) << 2);
-> +
-> +		return QCOM_XPCS_SR_MII_BASE + (reg << 2);
-> +
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +}
-
-This seems to be the real difference with respect to the
-xpcs_mmio_read_reg_direct()/xpcs_mmio_write_reg_direct(), right?
-Maybe a different approach (simpler but probably less flexible is to make
-xpcs_mmio_addr_format() SoC dependent. What do you think?
-
-> +
-> +int xpcs_qcom_reg_read(struct platform_device *pdev, void __iomem *reg_b=
-ase,
-> +		       int dev, int reg)
-> +{
-> +	int offset, ret;
-> +
-> +	offset =3D xpcs_qcom_reg_offset(dev, reg);
-> +	if (offset < 0)
-> +		return offset;
-> +
-> +	ret =3D pm_runtime_resume_and_get(&pdev->dev);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret =3D readl(reg_base + offset) & 0xffff;
-> +
-> +	pm_runtime_put(&pdev->dev);
-> +
-> +	return ret;
-> +}
-> +
-> +int xpcs_qcom_reg_write(struct platform_device *pdev, void __iomem *reg_=
-base,
-> +			int dev, int reg, u16 val)
-> +{
-> +	int offset, ret;
-> +
-> +	offset =3D xpcs_qcom_reg_offset(dev, reg);
-> +	if (offset < 0)
-> +		return offset;
-> +
-> +	ret =3D pm_runtime_resume_and_get(&pdev->dev);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	writel(val, reg_base + offset);
-> +
-> +	pm_runtime_put(&pdev->dev);
-> +
-> +	return 0;
-> +}
-> diff --git a/drivers/net/pcs/pcs-xpcs-qcom.h b/drivers/net/pcs/pcs-xpcs-q=
-com.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..a1084f6a10a96baa8ba0d192e=
-e64cdaed90da125
-> --- /dev/null
-> +++ b/drivers/net/pcs/pcs-xpcs-qcom.h
-> @@ -0,0 +1,16 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +
-> +#ifndef __PCS_XPCS_QCOM_H
-> +#define __PCS_XPCS_QCOM_H
-> +
-> +#include <linux/io.h>
-> +#include <linux/types.h>
-> +
-> +struct platform_device;
-> +
-> +int xpcs_qcom_reg_read(struct platform_device *pdev, void __iomem *reg_b=
-ase,
-> +		       int dev, int reg);
-> +int xpcs_qcom_reg_write(struct platform_device *pdev, void __iomem *reg_=
-base,
-> +			int dev, int reg, u16 val);
-> +
-> +#endif /* __PCS_XPCS_QCOM_H */
-> diff --git a/drivers/net/pcs/pcs-xpcs.c b/drivers/net/pcs/pcs-xpcs.c
-> index 7f5c7a275630f2b064e4b9abdd6c3619e9346cec..1f556b4f7c44f06f24a2f7247=
-34d3a7d71424de3 100644
-> --- a/drivers/net/pcs/pcs-xpcs.c
-> +++ b/drivers/net/pcs/pcs-xpcs.c
-> @@ -1571,6 +1571,15 @@ static const struct dw_xpcs_compat nxp_sja1110_xpc=
-s_compat[] =3D {
->  	}
->  };
-> =20
-> +static const struct dw_xpcs_compat qcom_nord_xpcs_compat[] =3D {
-> +	{
-> +		.interface =3D PHY_INTERFACE_MODE_USXGMII,
-> +		.supported =3D xpcs_usxgmii_features,
-> +		.an_mode =3D DW_AN_C37_USXGMII,
+>   		rx->rxn_reg_stride = 0xc0;
+>   		rx->rxn_reg_stride2 = 0x0;
+> @@ -3959,6 +3962,8 @@ static const struct of_device_id rx_macro_dt_match[] = {
+>   		.data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
+>   	}, {
+>   		.compatible = "qcom,sm8550-lpass-rx-macro",
 > +	}, {
-> +	}
-> +};
-> +
->  static const struct dw_xpcs_desc xpcs_desc_list[] =3D {
->  	{
->  		.id =3D DW_XPCS_ID,
-> @@ -1584,6 +1593,10 @@ static const struct dw_xpcs_desc xpcs_desc_list[] =
-=3D {
->  		.id =3D NXP_SJA1110_XPCS_ID,
->  		.mask =3D DW_XPCS_ID_MASK,
->  		.compat =3D nxp_sja1110_xpcs_compat,
-> +	}, {
-> +		.id =3D QCOM_NORD_XPCS_ID,
-> +		.mask =3D DW_XPCS_ID_MASK,
-> +		.compat =3D qcom_nord_xpcs_compat,
->  	},
+> +		.compatible = "qcom,hawi-lpass-rx-macro",
+>   	}, {
 
-I guess this part is supposed to be part of patch 2/9, right?
+Patch 6 documents qcom,hawi-lpass-rx-macro with `clock-names` containing 
+`lpr` instead of `macro`:
 
-Regards,
-Lorenzo
+     clock-names = "mclk", "lpr", "dcodec", "fsgen"
 
->  };
-> =20
-> diff --git a/include/linux/pcs/pcs-xpcs.h b/include/linux/pcs/pcs-xpcs.h
-> index 4ea995b70150e33e1e1a47cc7aa324c53742fbdc..0f69e14b2a4c8d17b59a570de=
-bd14a77ab040182 100644
-> --- a/include/linux/pcs/pcs-xpcs.h
-> +++ b/include/linux/pcs/pcs-xpcs.h
-> @@ -26,6 +26,7 @@ enum dw_xpcs_pcs_id {
->  	DW_XPCS_ID_NATIVE =3D 0,
->  	NXP_SJA1105_XPCS_ID =3D 0x00000010,
->  	NXP_SJA1110_XPCS_ID =3D 0x00000020,
-> +	QCOM_NORD_XPCS_ID =3D 0x00000030,
->  	DW_XPCS_ID =3D 0x7996ced0,
->  	DW_XPCS_ID_MASK =3D 0xffffffff,
->  };
->=20
-> --=20
-> 2.34.1
->=20
+https://lore.kernel.org/all/20260922095522.193FC1F00893@smtp.kernel.org/
 
---ySQnkYGEMas/aZSk
-Content-Type: application/pgp-signature; name=signature.asc
+However, this patch only adds the compatible string and reuses the 
+existing RX probe path, which still requests the clock as `macro`:
 
------BEGIN PGP SIGNATURE-----
+     rx->macro = devm_clk_get_optional(dev, "macro");
 
-iHUEABYKAB0WIQTquNwa3Txd3rGGn7Y6cBh0uS2trAUCarZO1gAKCRA6cBh0uS2t
-rBWpAQCWF+cS4RIEIgUz5tLtSpKvBFgHeyoBfhSvBs9EIH2WlQEA35iDZn/bftHZ
-vU+Kq52oiCfQCvVfHwNGyP7zLB+vcgw=
-=5a1d
------END PGP SIGNATURE-----
+I do not see any Hawi-specific handling which requests or enables `lpr`.
+Should the driver be updated to request `lpr` for the Hawi compatible, 
+or should the binding continue to use `macro` if this is the same clock 
+from the driver's point of view?
 
---ySQnkYGEMas/aZSk--
+>   		.compatible = "qcom,sc8280xp-lpass-rx-macro",
+>   		.data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
+> diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
+> index 79abbdd158b7..46ae627ca594 100644
+> --- a/sound/soc/codecs/lpass-va-macro.c
+> +++ b/sound/soc/codecs/lpass-va-macro.c
+> @@ -1896,6 +1896,9 @@ static int va_macro_set_lpass_codec_version(struct va_macro *va)
+>   		}
+>   	} else if (maj == 4) {
+>   		switch (min) {
+> +		case 0:
+> +			version = LPASS_CODEC_VERSION_4_0;
+> +			break;
+>   		case 1:
+>   			version = LPASS_CODEC_VERSION_4_1;
+>   			break;
+> @@ -2166,6 +2169,7 @@ static const struct of_device_id va_macro_dt_match[] = {
+>   	{ .compatible = "qcom,sm8250-lpass-va-macro", .data = &sm8250_va_data },
+>   	{ .compatible = "qcom,sm8450-lpass-va-macro", .data = &sm8450_va_data },
+>   	{ .compatible = "qcom,sm8550-lpass-va-macro", .data = &sm8550_va_data },
+> +	{ .compatible = "qcom,hawi-lpass-va-macro", .data = &sm8550_va_data },
+>   	{ .compatible = "qcom,sc8280xp-lpass-va-macro", .data = &sm8450_va_data },
+>   	{ .compatible = "qcom,shikra-lpass-va-macro", .data = &shikra_va_data },
+>   	{}
+> 
+
