@@ -1,100 +1,132 @@
-Received: from mail-qv2-f12.google.com (mail-qv2-f12.google.com [74.125.230.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69E0C4D0A1F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 18:13:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81CB73CC330;
+	Fri, 25 Sep 2026 18:16:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790360015; cv=none; b=LBwy+pqlFVtsdORJgP8IQCC+VrBvFfXVJ/kYohGkXznC6mHorV1hx9CmljcvOtMyqpXMgmbE4NeAZ9RldZdu3Fzd/VEhUKYGkjiKprQSRAxX7YaCRP3zF3DEuuknQ+eXK86L2xqUIK+LaNNuyG2T21g3g2CQeulivmqx8XJh3ac=
+	t=1790360209; cv=none; b=GsIjcKn8tKlS1S3xXxiCmtt3PHKuIR1yMfxxDHfjYMQjc6dGLqNHGK3kCwEwam55mgDxxqsDqmOO3Kw2vY/DxMPeVQTG9h+grf4EwE/9rPeAokX71I5UU1SJ7ZM/QIGcp6HFxkN5dlvFy5kjgSL5iqA2EmUXliDrlqPLPONVioo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790360015; c=relaxed/simple;
-	bh=m7cyx8ZFMDDwydxGqFeynq7iB3D+yw4T82PlEIczfTQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=M941wTCJw70+YNPYHKj8tkgyp81J39RbjWFVdJ8VuX1rKPe8wkLOKjht02OPLp9KaIbrE4vh3AwqiB+hZUtYbqVgEgtkJgrQ+g4/tz/W9zJbvqnH82z7ci4ZIIRoYx7qk7X8dXOpcQh6wcyyGtqKp8L16zdzu0MRSV1yEZpo4yY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=jUgYvHah; arc=none smtp.client-ip=74.125.230.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
+	s=arc-20240116; t=1790360209; c=relaxed/simple;
+	bh=e7YcTSG3JNePysFqDol3WEbcUqdGmOQ4IkGhWY86vEc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Lr1gQcMMwXf1eBvLZUpeOmOjkP/oKG04+YnroGB2DXKBxEXnQwmVY/YdI3acsmdYeXW8dvFE9k41V9xH+Ysx2uaJcpLm9mbYQhzaOlUdanpHs9qCg6aNmHEyGoRP+9Re1Bg/xV5f4ClHgi2Jm9g093ndQW4aoSFNyFqqgmQLExM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nHGh2WDq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="jUgYvHah"
-Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-91071ba92a8so7677686d6.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 11:13:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790360013; x=1790964813; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=m7cyx8ZFMDDwydxGqFeynq7iB3D+yw4T82PlEIczfTQ=;
-        b=jUgYvHahIGtLjFSWGaODdXohLdw7g544iNlxxuLC/HWV+0AnhtplD9xON60klLVHd8
-         RUkKXcp/ZBrIBNSRa05aqMfkzhPT/RovLtKRy1t+kvNQOigG+Wboq/hQliV0heKb+nzg
-         KhsoHsapwVE6llOKCG4xvtqe46dohfMbTprU9893lBhABvBphuHZtyfAwd6P+v81Q/5W
-         xpseYIcf51sEmOy4o2x470L6AhB0aVMU8KD5hnzawpeYRPgjjS9iPNlTqtXqMpwbhyFF
-         0YgH7XY0dp+NP4Uf+5DRPOy5udy0toPbzbpwTKmCMejvBqzffHpkgEpphfeByrIvHzNM
-         ZAdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790360013; x=1790964813;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=m7cyx8ZFMDDwydxGqFeynq7iB3D+yw4T82PlEIczfTQ=;
-        b=frQw5Nj895SQ6fFIhqf2vpdq9m/nDg+SMbCTKlSIFkR2CwRfGTo5deQMAXlkDrk3hw
-         ainKCee8lcnXje3NP8/WAnZFevTt3lDr4iWY4J2FD6IAJw29ZZrK5tqNmQmmtWt3R7a4
-         wkcbdFa1SFDfx+3gFPpmsfHcVkhlbvZmTdk8QTI5Niyi/+B2qRBwIbAGqxU41JzpkIjj
-         rEIpwkamqV9jVz5fbnnYKbqixZtUTjyyOM65H15nPsUDQu+HpeObbGCNKQM2k3Tkv+KS
-         sGDc9CQ4B0ujJzQnWtJ/+zc/Bg/BqgdNs7cZbZdDk0abRoGSN+5iysTOlGM76IzPHNlO
-         SlFg==
-X-Gm-Message-State: AFuF++nlilVv2limCZ4L00PQnLRV52bm17l2QDc+DYABFAvUTEA2Tjlb
-	wAqFjGla8uPvm1bTUvb+tyY4OTNPe0fPMFQVJxrdE0KiBBWsdFszQJc6AZRiEcXO0MU=
-X-Gm-Gg: AYBFou3fFnQ0jI5LavYmEI/m0iFtWir1b/D2+ZMecp/xb3LOrZNByB3CkzECHBkO1zN
-	RZGEn/r/We/TPZ7jM8HIUgfHa4ZwG/ihiXwXyVtLqqjJNnXDWB+tsf5u/gz8N1tXUGb1FntuGlG
-	c6EoBv1YBOURm4BJ9gvAvky8DoeKclXFordL3HFskO6KjyFA7ud72VfP42EjzYWHq1sw8MJ6QGc
-	fVQTXSR1dsFnDi/v5FA+Gl2U21XQiUiAerHNVoRvd6b8Utc2ei1AMmpyaeNF3DvHrfXbcyAEaqr
-	xj1DWoCAtBJwGoJg8gmAhRbt7wEq8NzGyuPdUhAsfVYo1z/McvrGEMbnPJrn1L1PiwQwqXR9YGE
-	5PTLlvYolfhaNEyj8/BEJc//im90cJ9nRhdrbMpBc1Lb2RWh9sLSbIMHEhgFOqt1p00iOKcFP0V
-	2+2NbvSsOE5uQPQtJEaDeU4m1I/XVUyhhxagMADKUAaN6W5EE=
-X-Received: by 2002:a05:6214:212c:b0:914:433a:59ac with SMTP id 6a1803df08f44-914433a5edcmr9586606d6.38.1790360013409;
-        Fri, 25 Sep 2026 11:13:33 -0700 (PDT)
-Received: from armok ([2605:a601:a61d:7a00::2])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91430dacc41sm22471816d6.14.2026.09.25.11.13.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 11:13:33 -0700 (PDT)
-From: Liviu Nicoara <lnicoara@thinkoid.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v7 04/12] arm64: dts: qcom: x1e80100: Add CAMSS block definition
-Date: Fri, 25 Sep 2026 14:13:30 -0400
-Message-ID: <20260925181330.22794-1-lnicoara@thinkoid.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260917-x1e-camss-csi2-phy-dtsi-v7-4-1a63eb35838b@linaro.org>
-References: <20260917-x1e-camss-csi2-phy-dtsi-v7-4-1a63eb35838b@linaro.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nHGh2WDq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 884521F000FF;
+	Fri, 25 Sep 2026 18:16:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790360203;
+	bh=C10OfJrTYrQwW2kHvp4SQjJlJjZdUq9RgN2NQu4kbDU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=nHGh2WDqjA05pVPtQb61qOpaXARQXuvnjw2U4K0vg7GZOk6Egj4XnxYBi9XranQ9z
+	 5t9zkIUq7EkPt2XNrNAo3twzZvovyQb5D6ZdQ7azyAIfssZFAT/SX6+FhqL7wDZc0n
+	 gIxH8o5UUIeuFBIF8BWIrMYqydhsTZyQPossDC7jkwA2vb5xRwJlVnsWwb/KdU4yKT
+	 QvMKACnDJMHYAmV+0drmdjSwKtAKMcRu5NE1yWmgynB2NRePPQ4okicudL0aMBJb8U
+	 YcNP28Y+J8/Mla8ZJLcl+rpiUYlqvHY4+K5J0T1yDXPC3qS5DvDSzPIlmC2DtWdDUS
+	 iN2cB0/7isbmA==
+Date: Fri, 25 Sep 2026 13:16:40 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, 
+	Chenna Kesava Raju <quic_chennak@quicinc.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Mahima Bhattaram <mbhattar@qti.qualcomm.com>, Pankaj Patil <pankaj.patil@oss.qualcomm.com>, 
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v2] arm64: dts: qcom: glymur: Fix fastrpc compute-cb reg
+ values for cdsp
+Message-ID: <ara6DbubyajRiJ51@zenbook>
+References: <20260923-glymur-dtfix-v2-1-a4b1928e0c72@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260923-glymur-dtfix-v2-1-a4b1928e0c72@oss.qualcomm.com>
 
-On Thu, 17 Sep 2026 14:20:29 +0100, Bryan O'Donoghue wrote:
-> Add dtsi to describe the x1e80100 CAMSS block
+On Wed, Sep 23, 2026 at 09:29:39AM +0530, Ekansh Gupta wrote:
+> The reg value of a compute-cb node must match the SID (the lower
+> nibble of its IOMMU stream ID) it is associated with. In the cdsp
+> fastrpc node, compute-cb@10, compute-cb@11 and compute-cb@12 were
+> mistakenly given reg values of 10, 11 and 12 instead of 12, 13 and
+> 14, which don't match their SIDs and leads to SMMU translation errors.
+> Fix the reg values, and rename the nodes accordingly.
+> 
+> Fixes: cd1d174c75f7 ("arm64: dts: qcom: glymur: Add ADSP and CDSP for Glymur SoC")
+> Co-developed-by: Mahima Bhattaram <mbhattar@qti.qualcomm.com>
+> Signed-off-by: Mahima Bhattaram <mbhattar@qti.qualcomm.com>
+> Reviewed-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Change unit adress to hex.
+> - Link to v1: https://lore.kernel.org/r/20260922-glymur-dtfix-v1-1-159da6b0eed9@oss.qualcomm.com
+> ---
+>  arch/arm64/boot/dts/qcom/glymur.dtsi | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+> index de7c395d9c35..3219603372ce 100644
+> --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+> @@ -8471,9 +8471,9 @@ compute-cb@8 {
+>  
+>  					/* note: compute-cb@9 is secure */
+>  
+> -					compute-cb@10 {
+> +					compute-cb@c {
 
-Tested on a Dell XPS 13 9345, with the board DT for it [1] on CSIPHY4,
-two lanes, and the PHY API series v20 and CSI2 PHY driver v18, on
-7.2.6: the OV02C10 streams at 30 fps through libcamera's software ISP
-and into a browser.
+This looks better, but it's not allowed by the fastrpc binding. Please
+resubmit this together with adequate dt-binding updates; and please run
+dtbs_check when you're patching DeviceTree files.
 
-[1] https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.org/
+Thanks,
+Bjorn
 
-Tested-by: Liviu Nicoara <lnicoara@thinkoid.org> # Dell XPS 13 9345
+>  						compatible = "qcom,fastrpc-compute-cb";
+> -						reg = <10>;
+> +						reg = <12>;
+>  
+>  						iommus = <&apps_smmu 0x240c 0x440>,
+>  							 <&apps_smmu 0x196c 0x0>,
+> @@ -8481,9 +8481,9 @@ compute-cb@10 {
+>  						dma-coherent;
+>  					};
+>  
+> -					compute-cb@11 {
+> +					compute-cb@d {
+>  						compatible = "qcom,fastrpc-compute-cb";
+> -						reg = <11>;
+> +						reg = <13>;
+>  
+>  						iommus = <&apps_smmu 0x240d 0x440>,
+>  							 <&apps_smmu 0x196d 0x0>,
+> @@ -8491,9 +8491,9 @@ compute-cb@11 {
+>  						dma-coherent;
+>  					};
+>  
+> -					compute-cb@12 {
+> +					compute-cb@e {
+>  						compatible = "qcom,fastrpc-compute-cb";
+> -						reg = <12>;
+> +						reg = <14>;
+>  
+>  						iommus = <&apps_smmu 0x240e 0x440>,
+>  							 <&apps_smmu 0x196e 0x0>,
+> 
+> ---
+> base-commit: 5c4d4169604b335c38bbc79bc1fc03042981fc6f
+> change-id: 20260922-glymur-dtfix-6314526b4b02
+> 
+> Best regards,
+> -- 
+> Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> 
