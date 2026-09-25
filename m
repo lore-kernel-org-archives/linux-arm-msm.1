@@ -1,50 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FB784E3EFC;
-	Fri, 25 Sep 2026 16:44:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 479554E237D;
+	Fri, 25 Sep 2026 16:44:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790354653; cv=none; b=TjZ7cDu+YtUjU8Hp9ojc+UB7IyTtAJMMbdsZmKm+q7Auw2XbLV0MYki8hjRPjNV6SRo6atKlrV8zz7AzY+fvaqIjDnmJ8m6wSX/eHNs3fWcWvG9Fmivi9bSrnAd2ZUVfIyJ2uznHTF/BklNTXvX7/UVVv7RLtK1RPT+ufYqi1SY=
+	t=1790354654; cv=none; b=CY6n3G5F02vnqzJNxM/ArSTw5nOj8oF72RymNuFq/A6Key7Tp5M/Io11yKtZgjcQwzj/0mrZqQEQViA3bsVNTBuUPLDOjRkPhCSNA+p2w8lcjYAhqrnqBLjprlcx9R13DM/2Q0eUC4To96EDQYoeiWYqBn1zfA5fmLn0BSslkzs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790354653; c=relaxed/simple;
-	bh=dOBEGIQtMJi3KyEd0JisrI5Up/OLmXa+pw1vErLI0b4=;
+	s=arc-20240116; t=1790354654; c=relaxed/simple;
+	bh=YZ4UobMsPd4KJIzwnOKvZUmAbWOiEy9I5VlizZvXbFA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=nhd5c50VgrU3kDTJCrIFqzppc98BrDm2qsJnuQK4i0kQfPSwe4Qu6+SRyg0xH1fSsAHM5diE3VNXW8IXlNVLwW/wgUGUsB9OmXN5vDJMieMzM3MVLaSNvTTH4wI3XMYbVtwxVOP8tTStWVD+Z4hIXE3m4X4RPbEAP3RqzOYLLdM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DkOvw2/K; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=CaBp5TbGc4iNks8zQcQnR27uCyh/e5//o8sM+rlXRs3ZeIKIUnfzGnScePAPfoyEZ9dJ1hK0QXaLqXZV/ki7SDuRYrqkLZJhq8VWTtXoYqyFNqUGMK10WqwWVYrBYk4SJp3Jx84kofutBclCcdnOxeYG4RIdHpiNzhqLgQyDUOI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F+FXwWQA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DkOvw2/K"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D65C1F00893;
-	Fri, 25 Sep 2026 16:43:56 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F+FXwWQA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 629F91F008A0;
+	Fri, 25 Sep 2026 16:44:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790354637;
-	bh=kn0obPV5ydy5Ru9WFgJv0zuDn2drdBWekrb5BDSICjA=;
+	s=k20260515; t=1790354642;
+	bh=aeEtUYNtyTfO6u6IyMgBQCLgK3Axq/o+pc0kQCQ2h74=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=DkOvw2/KzOz4PlNqA/ENeTOh2L8cm028uE0yNfu73UlW16nNjVkGYpWC6yJdHL/EA
-	 YzrFlGMyCkVrSZt0/iFIcVabUnFVmv/6xWL50WHHnXYLU49BkUDunZB7RCoVIN88EE
-	 dRMUljUc80PhW/rJJT/rAwYAQoIkxb3KDgiJ55I7Ttk3BVNMmxiefP18uyGwLgRsLn
-	 O3D5u+xjR9ARTt+TzhOHiSW17nTwn/UTm0veOuXJmRiXloQlHgjW0h+V2camEX29jZ
-	 LnLQjCEPZcfZSxHuaAAThHbkA7mBUAlF8DrhmnsPL3VC6uerOmD6TjzWmW0mcd2D73
-	 h00li36nbsGsw==
+	b=F+FXwWQA/qaEpaaT6uLlBdpczu/IfB2N6ZnT6eAJ8f+VpXDtQtZJSHDC9OxTGVz2c
+	 J70KCrnqeMSdCOsJuxmf6pJpkYEP6KVCCqJuK8CFqJMmfTgodicCwDlU+R+shp3bGV
+	 O2FKVszq0IfBWNVFx/w5tgMd7wwajE7l6SNWyYKyY9S+Zlq2NKDH5RsgI1Jm67LTzk
+	 HeY7k2UGrM8/0ilFGdDDqvmE+9tj508X6PJ0wHBlOCj5zg/WzdNik6/D+YmlmmZO6P
+	 HJNZF763Bhh+O88DZ22NFntDp7w3N4trt3TpyOcokQz6XlVUiRT42Z4NgAdxEkq8Wh
+	 MAtfxwyczdtzw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Amit Nischal <quic_anischal@quicinc.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH 0/3] Assorted fix-ups for clk/qcom/rcg2
-Date: Fri, 25 Sep 2026 11:43:28 -0500
-Message-ID: <179035461249.1296652.15594940609307519440.b4-ty@b4>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Sasha Levin <sashal@kernel.org>
+Cc: kernel test robot <lkp@intel.com>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] firmware: qcom: scm: Hide QCOM_SCM instead of depending on ARCH_QCOM
+Date: Fri, 25 Sep 2026 11:43:31 -0500
+Message-ID: <179035461257.1296652.13743164122712255603.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260917-topic-qc_clk_fixes-v1-0-5531cb00514b@oss.qualcomm.com>
-References: <20260917-topic-qc_clk_fixes-v1-0-5531cb00514b@oss.qualcomm.com>
+In-Reply-To: <20260913173049.1168963-1-sashal@kernel.org>
+References: <20260913173049.1168963-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -55,18 +52,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 17 Sep 2026 11:06:52 +0200, Konrad Dybcio wrote:
-> The robot found a couple of small issues that I believe are valid.
-> Compile-tested only.
+On Sun, 13 Sep 2026 13:30:49 -0400, Sasha Levin wrote:
+> imx_v6_v7_defconfig fails to link:
+> 
+>   arm-linux-gnueabihf-ld: drivers/firmware/qcom/qcom_scm.o: in function
+>   `qcom_scm_pas_init_image':
+>   qcom_scm.c:(.text+0xecc): undefined reference to `qcom_tzmem_alloc'
+>   qcom_scm.c:(.text+0x2b0): undefined reference to `qcom_tzmem_free'
+>   qcom_scm.c:(.text+0x1514): undefined reference to `qcom_tzmem_to_phys'
+> 
+> [...]
 
 Applied, thanks!
 
-[1/3] clk: qcom: rcg2: Initialize shared floor clock state
-      commit: b9a14395e6edfeb3ce241f19f84991106efcd3b3
-[2/3] clk: qcom: rcg2: Propagate force-enable status errors
-      commit: 396e900a120db686c3fe375df3b9fb6a62f173a6
-[3/3] clk: qcom: rcg2: Clear force enable after rate failure
-      commit: ae881bdb1b1d081ea3febcc16fe6ee16d3a2a0d1
+[1/1] firmware: qcom: scm: Hide QCOM_SCM instead of depending on ARCH_QCOM
+      commit: 99fda744d8ae70c1bd34064496b80a6f7591e4e5
 
 Best regards,
 -- 
