@@ -1,193 +1,168 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D97034D09EA;
-	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EA7C4A4402
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:29:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790350088; cv=none; b=gXbUs8IywDGZT/aSyW6w/EDOIP+c37+kr97hoP/+RM1PtaSfrevrSAUgCNn/UU9Ghl7gcGHS9sSoX+2fYL2qjaJ64IAjsesJqcu3XlRlSjOOhHoa0iyerBDcESMrlavxlx+RMqdjJxqcj5bw+uXPxrYDx9VMjnXcog1cY47Wy0A=
+	t=1790350187; cv=none; b=fbZzouBakJM4jthaHs5QCRvNYmQGnMcn6s+75GFMgjvoKCKoDhQcgs2Ry3mc0uVeC2lZdmjxk9hTfsN8iuX+QZaNp0cdi47mNYj112iBTU1d7FsmQDOxJYaO32jp3HTq6whc4gYJ/nSpO86z/aWGek9kEjMPiU1IafK8YozYXKA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790350088; c=relaxed/simple;
-	bh=WY5Pa/IoTptAnigdJrDowsAaPRaTH97AAEpBIH8qAvA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=M+2N22vtlgwBCHzFYwwvGaV/r57epA9adZ2GxQsLDsF5MuZQHNCOH2FHqdmKLWE9yzXUrq2iTzHZUi1sgJ6+VQuKUW1tG0zpe0RX2DXS+vOPdyOgJ15dH5nMPBrecIMIFaYEW3Fi6t9MT81S98TG0R8IjUyVSZ8dVA2+0P8d/pA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YGFJPQsH; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1790350187; c=relaxed/simple;
+	bh=upblnXNb+p2KtLS8GurcmAtzvFFSYd4j6PFmlGgUicg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MLn+4NixLpVjX846Y3x28RpCc5A+77xIwdCb/wp1FhCA45i5462wP1SiI3Zw5WUQ4xA/3hO6RnKYnQJn58lWZN5oxBUOLQOo9nIx45yCI7I4hSlcTtcnkKyj8H9LvFq0Z1YEriga0yPe+jTcqMY5Pk90hUDLMWlJuVhASpuYu7E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=W/MHFSkB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Q+tAkuBa; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YGFJPQsH"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7F4E9C4AF18;
-	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1790350088;
-	bh=WY5Pa/IoTptAnigdJrDowsAaPRaTH97AAEpBIH8qAvA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=YGFJPQsHupvMER3y0ThPUcPLA5L/nzoKD+xejGq96aWzV2IlRYQyTtQ4SZzuIGZ64
-	 E/hS+DF2G5dCWNAI/pfVmppjuNImViCQY7slT+U/sJ2tRRL2BU0gRT5XTOBcfrecA6
-	 00lWIgR9+auciCZ3yx2rqNl/g6vykYaDW1WAOw9XsX2jBg0W/re+Uh5YQGsTAtqYpq
-	 ROJcQtHVxy6IsZvaQp4q1JaxmN+AKFwtisOezyp32Pg5WSQx46USDUPvYsz8sdG2D3
-	 y+pY3ZwCC4P8frz8SEBi2w5+Zn4V/0sw5jjeSm7+KNyrsZElFUNUjtdE2M/aFRzaNb
-	 kcRApABnL5sYA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A55DC9832B;
-	Fri, 25 Sep 2026 15:28:08 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Fri, 25 Sep 2026 17:28:06 +0200
-Subject: [PATCH v5 5/7] ASoC: cs35l36: Implement set_tdm_slot to program RX
- and TX slots
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="W/MHFSkB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q+tAkuBa"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PD80Dp289464
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:29:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=EugQq82UdCAjcqop/r7zwdrt
+	/Yc1q9zAWsDcJB9IHDQ=; b=W/MHFSkBdsCw9c2KQmz/KGAY3vAaZNc4yS/AEkn8
+	VYlLY/yyn+SLqyp28hFYzS9vF+x1U28X9OmBVqMit6/9ZpK6eKX3aLa/HFOcfo73
+	xYJRCEYMnImNx/rT6YInlQFfs8i/OoGF9jP1ToshJj9SPTR+EMyURpRHj7eC/yky
+	oVYiG+4WGrb/mTs/swKbo7ROa7H/h+fTH0ZxxnmDc1BiwaJxaoXP7EcmhGT2KIfi
+	cue2cpXBSVS5E9Fd8PwyrgyULvv4ON9LmqNAKuJrXTMhExASM4Ivhm7XoeKLtzMK
+	A3Iei8AnSc+cpPY6KEnrdcImp7RAkQ6WSe6E9y8fllidqg==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gw881v6ee-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:29:45 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2d55d8cd938so14205985ad.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:29:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790350184; x=1790954984; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=EugQq82UdCAjcqop/r7zwdrt/Yc1q9zAWsDcJB9IHDQ=;
+        b=Q+tAkuBaqxiSfLYd8XGLW6kphzDgi3ANHRy+SMT24XvdCn7KWXd/pSM/oB/qGenHGY
+         Xe4sJgQ8gFRfRcXzzlA795weeY89TtprS/Ou65GjlyahFVHvM92jIVsXSNXlGGNR3Yf6
+         URBMy0C/kWVjTBKaU4gh55nXPypk2dozk+vKe4U3fSfVkDG323wWOZSY8juGG1/lwp/G
+         QizhsLiNnU3Y3ay1dZ5OO892G+8AjIZGA0cOyEIBbLFa4weQTyyQrVFDQtJTTsPZY9P7
+         zLd4NkI1Lf/4OWCzv9OcWCndzzXzei0jAg0jOTXNtnhUORQuOtyuc938/F6V/oxVUyk6
+         dzrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790350184; x=1790954984;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EugQq82UdCAjcqop/r7zwdrt/Yc1q9zAWsDcJB9IHDQ=;
+        b=sSy6ez1q/4BGlvNflIHxRfEIC+o4WQczI7bS+HhrGYlmGlshurIAXDpI9FFJh/00yM
+         oQ2WUaxLXMt4fQseFV29pWMJgAdtN9o9RND6R8H9/G3CVzsceoaKM67yFtKgCCFH0xoO
+         +y+m2IiRgzCo3LX1jWnW4ZUM2v8gUGHcWka2In8BUjQR8CH9gdz2KG+bd9I0M+eh86XP
+         xajUk9jdRTzWkPCNWS/BzXsF6qsDPiHHQNpELpU77pnBN+aQw4XWUHsQu+VUQNPqoMN6
+         J8n3VDulFocEVStYUKDfm6vl5mxf2Xl0txG9lvbAbOzpW+EOtB2Z+kFw0JI/NLliw5Y4
+         uq3A==
+X-Forwarded-Encrypted: i=1; AKwUvBxLuL4vkfq33mxMMIO7ziQD3x/Lb0ZOZtFvwECYxEAO+hvBD/K6tfb9MEqYswEdhLypmCL8/WDme4Mr1bEl@vger.kernel.org
+X-Gm-Message-State: AFuF++mH9ET/gw1MNt3HuOeqTq0JPI05MS44yNhX/saMGpKIclT6wkks
+	OtDL/JZtxMENOOMxO3j5lO8TUxUGF6d9uRdBOn9qlzWP9bGF6wF8+edIdO8EegWudpcUJVVYyAA
+	DtBp6jJ5wmEBZg0vKn4SkJj8Va6wBWPGRgxM/72Qqes5vcp591tj74IBu5OJOO1ldjewA
+X-Gm-Gg: AYBFou1WFl2x9gCZUUAiOUCykgRDSGQ6rojoDjjtBoQp3Y6ePjJ6UiUJB2E3TpnbpAC
+	gPyFl+T79zW4pL2qTijaw4PW2yVBd4M+8U47PkdqpSw+BuZAfkEE/4kKUMJy/9EfJukNNK6E/re
+	3bBeroXdNbsf2j4P9/SYhLGcXRv0+c497p1N+YAD1y74dXWTDoWhho2nuasuXzmAEMS6ZxqnPqc
+	TAcW1XZP2Shni/GjDY17eL4uQR295CitjdH8xCSX4RKwCSCzj2Xn6rzcNdAX6iZIThN5JPDHNe5
+	Pgx3eBuyq2bZ4UfceHJiMMfgNeVlSKQFkHXFAmgkQuzNri9bnW/J4/f3kGMybweXQZrP/BJxeUS
+	O4F0wM2qxTttr+hQwi83sVdgfUSXCngUd3i+TnvsygA==
+X-Received: by 2002:a17:902:cf42:b0:2dd:ad74:ac7c with SMTP id d9443c01a7336-2df949937edmr18018795ad.23.1790350184128;
+        Fri, 25 Sep 2026 08:29:44 -0700 (PDT)
+X-Received: by 2002:a17:902:cf42:b0:2dd:ad74:ac7c with SMTP id d9443c01a7336-2df949937edmr18018655ad.23.1790350183693;
+        Fri, 25 Sep 2026 08:29:43 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df91468978sm12693375ad.79.2026.09.25.08.29.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 08:29:43 -0700 (PDT)
+Date: Fri, 25 Sep 2026 23:29:36 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <quic_jkona@quicinc.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/3] arm64: dts: qcom: sm8750: Fix videocc clock inputs
+Message-ID: <araTYLZoYUKyQw5b@QCOM-aGQu4IUr3Y>
+References: <20260924161152.1162301-1-shengchao.guo@oss.qualcomm.com>
+ <20260924161152.1162301-4-shengchao.guo@oss.qualcomm.com>
+ <3l6v5idon2edkritzyqlmvdjn5ijt3lytp656sxicfnqah2rga@o6plxiv5d53u>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260925-pixel3-audio-v5-5-7ffb32c980bf@ixit.cz>
-References: <20260925-pixel3-audio-v5-0-7ffb32c980bf@ixit.cz>
-In-Reply-To: <20260925-pixel3-audio-v5-0-7ffb32c980bf@ixit.cz>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- David Rhodes <david.rhodes@cirrus.com>, 
- Richard Fitzgerald <rf@opensource.cirrus.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- David Rhodes <drhodes@opensource.cirrus.com>, 
- Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
- devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>, 
- Charles Keepax <ckeepax@opensource.cirrus.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3455; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=QCDauQWrYVk2oMrA2lmeV2L5dI8FaDlTbmA3MpK6x3I=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtpMFui09s2ua1oS+Xbo9QMefjsbzP0xS7PGiX
- XTkMIrBS52JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaraTBQAKCRBgAj/E00kg
- cvXpD/9s+sM3vbiqdsWkPODhuwMFKApCHeFupH6S8KJMCamBQkyFeChv6W0np4WMGtCrn5T7MCx
- Egn/nMjIJN4O4IOWIJ4vg4z+rC+W7jOONZdVRmBaSpkYG0R2GyWP4F94/BCAkEjMtjURqyKjI5t
- 5VcQH/RkFGsew+KzS4rw1XEjSyuM13ZuG0PHjZSQfnZtnk0PY4UbYzubwnNQ8rwmTOtzZpvQK1e
- GbNR2rNvRATgyoklPCKpWUWzb6Wa8+hDsQ0BPXxcJWWmNOPrb6cGzbsZzxTw9oE9c/EUsifOvzs
- 2QsR1aenPOsZ7rJAZL8aqg4lSb1hUy9DrjOG024xfLAef40lEA6qkAEJ1yhDKF/bg/drnL0UIw6
- FBJPT7LEXATx6NcUFN56AF1ng6YMAGD4BIIROb2tupDXTYvK0yYmhUGsG1Dkd0uccktlJG1UQar
- 8dnpFvhVsXl7spMXt7x+GzswMaKqjQjI0ZbdWmFQflcYfHNJjzKA/ZWbtMeIk7G8HFQ6OGBxxtr
- DXqDUB4b7VvKubzm2BqE6FzPhEH6un0wIfCUONA62+g6AzL7mtqSNnSZpSmenqOn9bD1oWjXXqr
- NwP1YR9XsmdLyJQwrqekv10x8b6de1yMBlX82P3dOri8JWZ9O6x3RNgsZNkUnsdG+yeFgr6eaS7
- APldtYyto2dlxeg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3l6v5idon2edkritzyqlmvdjn5ijt3lytp656sxicfnqah2rga@o6plxiv5d53u>
+X-Authority-Analysis: v=2.4 cv=TptzFzXh c=1 sm=1 tr=0 ts=6ab69369 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=91EBbpWxNo6HCqDt5gIA:9 a=CjuIK1q_8ugA:10 a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2MSBTYWx0ZWRfX7tZREAkXXVsL
+ 1CSqSv8XkbifFpRYHkezPxqfbv+G7ckyFnHK9ttaHFEpVM0qWlnTE1Y+5NswMji1paMecih0rq8
+ d+6HzCOiCOfXJcP9Q8Tb5Ot8em6ASqIgiN5PXllNGVpxEen3y/r69zZmH1uV3JjYeSACsoX2PKV
+ d9a1I9nMAaptJyYMhTFlxKuykHTePA2eoF4SY9Ab3V1c6TRqburd+ufHq+ZgiEHtUMBQypxR2R9
+ XoZNgDIyU1IT+XRlhiaPm5GeCGNTpjbeZIAjQ0wnwv06KE3QJw8ZsrzDsH3iRGa01OyWnIDqxfG
+ 8mJKqwF4lUeSArmzf52PcQHeFug4S57hkm819i2fPMhWO3PWIhllqLhfQYcdJuexCGxO8Q3U5dM
+ /ZwQ2UU6ogYW8+VMNrJQhKPIcrObQmqSaPkG+E6CFEJaiUfSz8aNwkQzPDcWB4O/bF8NxlfUWCz
+ 9nV72Rh2rZS3TjOwVdw==
+X-Proofpoint-ORIG-GUID: zBJPU99suXXwPyjAlqZGyqbHPBu8X5CT
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2MSBTYWx0ZWRfX3ufNU3ffojI0
+ A/yNnhvT9Qn7A+M9xz3GtUO4Iz+T3WUZm0679QLDEp0J3Lo/RgOCVBagGWPygCAyF3bUxC61HSx
+ 4F37Hsmkqe383Hed2l2F9vcXxoTFzXA=
+X-Proofpoint-GUID: zBJPU99suXXwPyjAlqZGyqbHPBu8X5CT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250061
 
-From: David Heidelberg <david@ixit.cz>
+On Fri, Sep 25, 2026 at 12:47:16PM +0300, Abel Vesa wrote:
+> On 26-09-25 00:11:52, Shawn Guo wrote:
+> > The videocc node passes GCC_VIDEO_AHB_CLK as its second input and stops
+> > there. videocc-sm8750.c declares its DT inputs as DT_BI_TCXO,
+> > DT_BI_TCXO_AO and DT_SLEEP_CLK, so the second input is the always-on
+> > board XO rather than an AHB clock, and the sleep clock is missing
+> > entirely.
+> > 
+> > The missing third input leaves video_cc_sleep_clk_src unable to resolve
+> > its parent, so it registers as an orphan clock and cannot be rated.
+> > The AHB phandle in the always-on XO slot is not resolved by the driver
+> > today, but it implies a parent relationship the hardware does not have.
+> > 
+> > Pass bi_tcxo_ao_div2 and the board sleep clock instead.
+> 
+> So videocc can still function properly without the GCC video AHB clock then?
 
-Program the ASP RX and TX slot registers from the TDM masks passed by
-the machine driver. Each set bit in a mask names a slot; codec channels
-are assigned to those slots in order, ASPRX1 taking the first RX slot
-and ASPTX1..TX8 the first eight TX slots, with a warning if the mask
-names more slots than the device has channels.
+I do not have a sm8750 device to test, but I did verify the same change
+on Nord, and videocc can still function properly.
 
-Passing slots == 0 or an empty mask restores the hardware defaults,
-ASPRX1 in slot 0 and ASPTX1..TX8 in slots 0..7.
+Dropping gcc_video_ahb_clk as a videocc input clock shouldn't break
+sm8750 videocc from what I can see.
 
-This lets a machine driver with several amplifiers on one bus, such as
-sdm845 with two CS35L36, put each amplifier on its own RX slot and keep
-their TX slots from colliding.
+- The AHB clock isn't a videocc input at all. The videocc clocks array is
+  positional and the driver maps index 0/1/2 to
+  DT_BI_TCXO/DT_BI_TCXO_AO/DT_SLEEP_CLK.
 
-Assisted-by: LLM
-Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- sound/soc/codecs/cs35l36.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+- gcc_video_ahb_clk cannot be consumed anyway. gcc_sm8750_probe() leaves
+  it always enabled in probe and never registers it as a clk at all. So
+  <&gcc GCC_VIDEO_AHB_CLK> resolves to nothing.
 
-diff --git a/sound/soc/codecs/cs35l36.c b/sound/soc/codecs/cs35l36.c
-index 170588be4dbe3..5fc8ec292e3c4 100644
---- a/sound/soc/codecs/cs35l36.c
-+++ b/sound/soc/codecs/cs35l36.c
-@@ -942,32 +942,76 @@ static const struct cs35l36_pll_config *cs35l36_get_clk_config(
- 	for (i = 0; i < ARRAY_SIZE(cs35l36_pll_sysclk); i++) {
- 		if (cs35l36_pll_sysclk[i].freq == freq)
- 			return &cs35l36_pll_sysclk[i];
- 	}
- 
- 	return NULL;
- }
- 
-+static void cs35l36_mask_to_slots(struct cs35l36_private *cs35l36,
-+				  unsigned long mask, unsigned int base_reg,
-+				  unsigned int nchan)
-+{
-+	unsigned int chan = 0, shift;
-+	int slot;
-+
-+	/* Two 6-bit slot fields per register, at bits 0 and 16 */
-+	for_each_set_bit(slot, &mask, BITS_PER_TYPE(mask)) {
-+		if (chan == nchan) {
-+			dev_warn(cs35l36->dev,
-+				 "Too many slots in TDM mask: %lx\n", mask);
-+			return;
-+		}
-+
-+		shift = (chan % 2) * CS35L36_ASP_TX2_SLOT_SHIFT;
-+		regmap_update_bits(cs35l36->regmap, base_reg + (chan / 2) * 4,
-+				   CS35L36_ASP_RX1_SLOT_MASK << shift,
-+				   slot << shift);
-+		chan++;
-+	}
-+}
-+
-+static int cs35l36_set_tdm_slot(struct snd_soc_dai *dai,
-+				unsigned int tx_mask, unsigned int rx_mask,
-+				int slots, int slot_width)
-+{
-+	struct cs35l36_private *cs35l36 =
-+			snd_soc_component_get_drvdata(dai->component);
-+
-+	/* Note: rx/tx is from point of view of the CPU end */
-+	if (!slots || !rx_mask)
-+		rx_mask = BIT(0);		/* ASPRX1 in slot 0 */
-+
-+	if (!slots || !tx_mask)
-+		tx_mask = GENMASK(7, 0);	/* ASPTX1..8 in slots 0..7 */
-+
-+	cs35l36_mask_to_slots(cs35l36, rx_mask, CS35L36_ASP_RX1_SLOT, 1);
-+	cs35l36_mask_to_slots(cs35l36, tx_mask, CS35L36_ASP_TX1_TX2_SLOT, 8);
-+
-+	return 0;
-+}
-+
- static const u64 cs35l36_selectable_formats =
- 	SND_SOC_POSSIBLE_DAIFMT_I2S	|
- 	SND_SOC_POSSIBLE_DAIFMT_DSP_A	|
- 	SND_SOC_POSSIBLE_DAIFMT_GATED	|
- 	SND_SOC_POSSIBLE_DAIFMT_CONT	|
- 	SND_SOC_POSSIBLE_DAIFMT_NB_NF	|
- 	SND_SOC_POSSIBLE_DAIFMT_NB_IF	|
- 	SND_SOC_POSSIBLE_DAIFMT_IB_NF	|
- 	SND_SOC_POSSIBLE_DAIFMT_IB_IF;
- 
- static const struct snd_soc_dai_ops cs35l36_ops = {
- 	.set_fmt = cs35l36_set_dai_fmt,
- 	.hw_params = cs35l36_pcm_hw_params,
- 	.set_sysclk = cs35l36_dai_set_sysclk,
- 	.auto_selectable_formats = &cs35l36_selectable_formats,
- 	.num_auto_selectable_formats = 1,
-+	.set_tdm_slot = cs35l36_set_tdm_slot,
- };
- 
- #define CS35L36_RATES (		    \
- 	SNDRV_PCM_RATE_8000_48000 | \
- 	SNDRV_PCM_RATE_12000 |	    \
- 	SNDRV_PCM_RATE_24000 |	    \
- 	SNDRV_PCM_RATE_88200 |	    \
- 	SNDRV_PCM_RATE_96000 |	    \
-
--- 
-2.55.0
-
-
+Shawn
