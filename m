@@ -1,39 +1,43 @@
 Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A426647044E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 21:54:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17501484250;
+	Fri, 25 Sep 2026 21:54:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.210.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790373278; cv=none; b=FtYpsacLvWvT9n8wUfGuglCcEfLdRYiVshsOU8YrekWXsGVyRZapx5Iq5fhWTthIhxiXl0Q+EnTnmOoTRwDnqCzN/zKRzur+2dugOdS0ey6vaCLUBOslV9PH4ii3eYfbjJDWNHrZq0PoQtP2VEmhpU6Rqs+RMzFt90juNut4zkg=
+	t=1790373296; cv=none; b=LV3Jeg1XGxe6Ea0XSZWNO867SJ1V0njJtcHnR2m8FpJCb5aDhYbKxFIwcpEOPoyCZXhym8Xymn7RRStxhXOnV1AHU6P/DhSbleq6Oi5wkX34GuITi+vuWLiTxBPTxIpGBr2Y1fCF4lPNJ2KraWLRSHvVt5R3oPsZV7lnMdhWl+Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790373278; c=relaxed/simple;
-	bh=dh5D3G836DUj2lo2Ng6i8fYgw0FVBnlELE3fvOwftbE=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=XFP9EP70mNVQOJzSCGedWuSmDuIie6H0z4jn6Wc8DKbuRuCzHkBCuBb9+DSl7vDW/py9T/8V1uJPLoiEcdUzR1EJJ0VO/hCSe0BDG/bqR5rH3+utj8A6zVO9oxQ1FKVu+39hSBRfTISNk2y/41PdEHkN9LbCX6LsA9gGAxKoVfM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=RfY4ixGe; arc=none smtp.client-ip=85.9.210.45
+	s=arc-20240116; t=1790373296; c=relaxed/simple;
+	bh=oHjgKyWVc3myOgWQuYaErGagqd179GMhrTKxj/1ya1k=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mf1ppsUusolk3eYsscdpbNKMrUyAkIEgnM6RMSvaowojN0hOxwQzFVUrTxs3p82bK8sBpSEPRsUa4wV75HcjbP94wISu9GA1BMJdFAlXZgUCtVyaZUOudjSSfi2uFbhUVGIJit4CWmF6RNb8AAKmCCTBRPbvg6dtPcdQ9KmEuqs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=FZwrfr3g; arc=none smtp.client-ip=85.9.210.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="RfY4ixGe"
+	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="FZwrfr3g"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
-	s=protonmail3; t=1790373265; x=1790632465;
-	bh=ErF7CfE2J2KkQtLXok6mhVam2RRVJtrfwuAWVpvttw8=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=RfY4ixGeeqbIgW6Ps5HNNRwWQZQqaalQsPRQOqylEjHFYYveDPqWbsT3BbT2PCukC
-	 dgMI/3XcBWhOAnpvkdY46YmmULKBza51EHpecGYZ96jOdFTuvdWlpmpzQe14+izML+
-	 Keb+IrMyQWfxHVVeJTcvux4IPv/mnp+iDZARYNgj0jbo9hGFNXn+ZWTQy55dzw0aGh
-	 7Sxfr3NzuHM3XDdsvkyHWVC91/6Gws0ZiFLUWMDJOM2nOX/2Iwvha9cUv2VrzcPRh7
-	 y5VrRbPg2MgTzdkinVz4pUIDfcmxhgiSnuvU5YRokqid/CUanlQrznSOiD6144W2J2
-	 hsBABMSZnHIzg==
-Date: Fri, 25 Sep 2026 21:54:20 +0000
+	s=protonmail3; t=1790373280; x=1790632480;
+	bh=gnxEzuWvdTQthETEvJeX8qiBwt1jzgNiFgc7PfOVSRM=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=FZwrfr3ghORjRSh5g/HjKtmAVG1TgTEJb4QA4fN8vHilck3pNaKmWk/mDGd/uIjCR
+	 i/sQczNBufFIrVRuRbWKeoZTTXYET/9XhLnMO6Bq77OWUxCGZZVq+Awp8Q8suGS5a6
+	 wsQWt7KdyqokIE5eQ5yfMAHlxerO/DLv8vBYQCmR96ddRI00CdJNpL38X8ziWrnDG4
+	 Uhw/Caj4d62fO0Rk927SXyXrbNWyR4vqEGvU7VPdyN9ojDnpUg1gQqRUspfrpdvz9F
+	 KoEPBaoy7mIYJiIi8/e0Qk64O1b4pmdTmZCXZ7ZwR//JBDBssCllrBlnSLsudX8Svs
+	 U0A/ogbY71VPw==
+Date: Fri, 25 Sep 2026 21:54:36 +0000
 To: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
 From: Clover <alex@ironrobin.net>
 Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 0/3] Lenovo ThinkPad X13s embedded controller support
-Message-ID: <20260925215358.33417-1-alex@ironrobin.net>
+Subject: [PATCH 1/3] dt-bindings: embedded-controller: Add Lenovo ThinkPad X13s EC
+Message-ID: <20260925215358.33417-2-alex@ironrobin.net>
+In-Reply-To: <20260925215358.33417-1-alex@ironrobin.net>
+References: <20260925215358.33417-1-alex@ironrobin.net>
 Feedback-ID: 54785507:user:proton
-X-Pm-Message-ID: 5c58b5ca42a24e4d87b2ec8efb1ab51cb726a9f6
+X-Pm-Message-ID: 3c7e2bee16a1507f56110204a53332006d401c3a
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -43,40 +47,95 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Add support for the embedded controller found in the Lenovo ThinkPad X13s.
+Add a standalone binding for the embedded controller in the Lenovo
+ThinkPad X13s. Although its I2C command transport resembles that of the
+T14s EC, its keyboard-backlight, event and power-management interfaces
+differ.
 
-The X13s EC uses an I2C command transport similar to the ThinkPad T14s EC,
-but its event, keyboard backlight, and power-management interfaces differ
-enough to warrant a separate driver.
+Describe the event interrupt and the separate host-controlled power-state
+signal, which is high during normal operation and low in the low-power
+state. Require this GPIO and allow wakeup-source to describe wake
+capability.
 
-The EC event interrupt is provided by GPIO103. GPIO176 is a separate
-host-controlled power-state signal used during low-power transitions. The
-driver follows the EC command and GPIO sequencing described by the X13s
-ACPI DSDT and defers EC event queries during suspend until the I2C
-controller is available again on resume.
+Assisted-by: LLM
+Signed-off-by: Clover <alex@ironrobin.net>
 
-This initial series provides EC transport and power-management support,
-wake handling, and keyboard-backlight control. Other EC events have been
-left for follow-up work rather than exposing unverified input mappings.
-
-This follows earlier X13s EC work by Konrad Dybcio and Steev Klimaszewski.
-
-Development was assisted by an LLM, including analysis of the decompiled
-X13s ACPI DSDT and review of the resulting implementation. The resulting
-behavior was verified against the hardware.
-
-This series is based on Linux v7.3-rc4.
-
-The series has been tested on a Lenovo ThinkPad X13s, including keyboard
-backlight control and firmware-driven brightness changes, s2idle
-suspend/resume, keyboard-backlight state restoration, and wake from EC
-events.
-
-The binding passes dt_binding_check. The X13s DTB has also been validated
-against the binding, and the driver builds cleanly with W=3D1.
-
-Clover (3):
-  dt-bindings: embedded-controller: Add Lenovo ThinkPad X13s EC
-  platform: arm64: Add Lenovo ThinkPad X13s EC driver
-  arm64: dts: qcom: sc8280xp-x13s: Add embedded controller
+---
+diff --git a/Documentation/devicetree/bindings/embedded-controller/lenovo,t=
+hinkpad-x13s-ec.yaml b/Documentation/devicetree/bindings/embedded-controlle=
+r/lenovo,thinkpad-x13s-ec.yaml
+new file mode 100644
+--- /dev/null
++++ b/Documentation/devicetree/bindings/embedded-controller/lenovo,thinkpad=
+-x13s-ec.yaml
+@@ -0,0 +1,65 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/embedded-controller/lenovo,thinkpad-x13=
+s-ec.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Lenovo ThinkPad X13s Embedded Controller
++
++maintainers:
++  - Clover <alex@ironrobin.net>
++
++description:
++  The Lenovo ThinkPad X13s has an I2C-connected embedded controller (EC)
++  providing keyboard backlight control and event notifications. In additio=
+n
++  to its event interrupt, the EC has a separate host-controlled power-stat=
+e
++  input used during transitions between normal operation and low power.
++
++properties:
++  compatible:
++    const: lenovo,thinkpad-x13s-ec
++
++  reg:
++    const: 0x28
++
++  interrupts:
++    maxItems: 1
++
++  power-state-gpios:
++    maxItems: 1
++    description:
++      GPIO connected to the EC power-state input, driven by the host.
++      The signal is high during normal operation and low in the low-power
++      state. It is used together with I2C power-state commands, rather tha=
+n
++      as a power-supply enable or reset signal. The GPIO is active high.
++
++  wakeup-source: true
++
++required:
++  - compatible
++  - reg
++  - interrupts
++  - power-state-gpios
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/gpio/gpio.h>
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    i2c {
++        #address-cells =3D <1>;
++        #size-cells =3D <0>;
++
++        embedded-controller@28 {
++            compatible =3D "lenovo,thinkpad-x13s-ec";
++            reg =3D <0x28>;
++            interrupts-extended =3D <&gpio 1 IRQ_TYPE_EDGE_FALLING>;
++            power-state-gpios =3D <&gpio 2 GPIO_ACTIVE_HIGH>;
++            pinctrl-0 =3D <&ec_int_n>, <&ec_power_state>;
++            pinctrl-names =3D "default";
++            wakeup-source;
++        };
++    };
++...
 
