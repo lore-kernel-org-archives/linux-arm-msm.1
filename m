@@ -1,162 +1,167 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 050E34D0CC7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:35:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48BFF4A3D41
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:50:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790350517; cv=none; b=DSU0gbLMtnI5uZzlkjo1Ee0Xq+37MPhAyUVDiQOpKY7+pozbRK8DsjgjWRnCwioByIKTppjTqMJGbZN+6WfRmdUpnIAgmkdwuvFUnsSTYWdukqOJztFP4jyCzVubc6idjM3GuefiFjqdlRDJakjyUsk5c2n0QWMkxkXAPfHoTiw=
+	t=1790351404; cv=none; b=ha4nVC7T1fu9C51psp6Ji/xEFyQtnEf1O0oNFPvm0SB1Q4rIuZWr5OmXmKse0gNz7v8fAnsZJ3GM8FNM+XMBW4HhVfxQ1I7orJcIBHhGFHGQzewYnoEBSdwdZRnRLhNZ62v2cmi6kDsPbXoqLZQHwgnluiU9J3Wdn/6WPrR9x7I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790350517; c=relaxed/simple;
-	bh=JaK3xKbkE7wgtjaM89B5KJpD0MqI4l82LuAW/Bbj87w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=vAoacaltm+FEPhiFAwFEEsZH/pXFmq3idO5ZlasY/YR9syeg6f3Un1LmgcNqO/lsrtN730n2IGA6aHxuZF8M0idCR6Rg8eRMXQjcJk3OGrAANf0ZQAbRN7lpetBlkmqcC0rc0Zi2+1/sQ917HTfT0pFkzouF9V25pvgi4SOXau8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IdiLf6Ps; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=b9PrFBxA; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1790351404; c=relaxed/simple;
+	bh=oL9x51PEBLfHmQbHRNyTBoADFNFh07BHQ6Ff44okLJw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KwisQJi916V4uEOJ13eoBIPdAtT3b4mN99Ikritfdj/Ix+SmUtgo1zARhB6tYJEGoMmR9ZV06CUj3dYlz44dwkLW9hclc5CmZSUljLfhUCcPe9KvbPDfuxtiBx+D5IezPioO2rlp+BurNUKI4kQrRAZGobuuH/mAXXwF00IWcKw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oc9Ss/sk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NcW4QnRq; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IdiLf6Ps";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="b9PrFBxA"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PDb4r93627541
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:35:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oc9Ss/sk";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NcW4QnRq"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PA4Nhs609372
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:50:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=iLVqjTd3vlJrX7TuKVolKFoP
-	zagTa2lbaJ2iN6D9p1w=; b=IdiLf6PsV6W9P9nqrPW6yS7IfgFot2tki0Bd+sZK
-	k0DVKOgu+wPaHKoQcPbVZSTQ4CFnv3eaVNZdresMoVzq3+CvnH/Djs363T8EQTeg
-	BT8pRD/UPV40EBAvt+VXjlhoflqt7OP8ZrmkpAL1R7BO3+y0YgufP0BBTGn7gPBe
-	QehtM9mIr3mUvWvBMCUx6wzigpxIrXOfX6Hss5qo5YJQN6hcY4BKB8s0RmKsjbYh
-	Kq5YAlloBernxsWP/or4VTr81KHvXg90nIcih9uXr/Ar4GczmyO0REaYngZI1NsS
-	e9f+WMyRnrlNZ0OzMszXaKjax+kbUSAtqKGL61E7u2jGzg==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwjq3a0ga-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1rCb94k3VkKhCrxCNCXwFs/lYdfkRp35r7QhubIVMUI=; b=oc9Ss/sk7qbHjQ5q
+	JHgqGn4+8Em1lxpk/JSyqyKbEbRGvdqiRudnjMIhGGUtUtLxWbPdV8W6xkQgijRf
+	v2lBDS5PfIs7KmdPuORa4JMtkGKlxw916AI7ydcw24YL8Bmz0aptz3Kss31CMbIG
+	5urCg4F1vjx58uy8+rO1A9knIvvdJ/tiSMK1HgSPvK6RxBBgyS+79CCeY+OfR0ds
+	YTDOCFjZI1YSJDX+A00sJR2umL+GbM3V6lRBqsU3wmPn6JTPt6c+3vM9HZMsL8AF
+	vkz4MYm/1ONavTjxl9Z8Wp0XAepXRIqSp2YDcAdoXw4DbN6wA6mkYl58wP+sNDpL
+	LHUYkA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwpvns5mr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:35:13 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-86b4048367cso1221188b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:35:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 15:50:00 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-398dcfabbf8so2721384a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 08:50:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790350512; x=1790955312; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=iLVqjTd3vlJrX7TuKVolKFoPzagTa2lbaJ2iN6D9p1w=;
-        b=b9PrFBxAEreQhngEM9eZiNk0rr6nmPzQSmwAEFmSJGeLHGS95HkI8CkxbyMXfuS+Sp
-         LTNuiU+Kgq+b1+4KBx+Tf1undKd2G8Nf7nD3UNfueRFyGLCrg1cQh9XTVXC+5KfOI56f
-         DWLqgRVsCuPAAm2RwSlSyjxD3BuM9WhuVUHvT4GTRBmGzMM0V5mpDxoJJvcXoxycwWW8
-         kNEejLnXjEY+zRCmzfqp3KViE+cJ9+MKhDVapzt0Qx7Wj15C1KBD+WF7BKvUMqh0EXJz
-         j+zjVLWxQwxbwqDpo46EdZ0GznQ1/SgAdIAPkYa2Q458wCpD/PPenHbPtMTi0o3FOWig
-         UA2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790350512; x=1790955312;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1790351399; x=1790956199; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=iLVqjTd3vlJrX7TuKVolKFoPzagTa2lbaJ2iN6D9p1w=;
-        b=rtjDb5M0BIyf0HfLSByIHU8q1jAkJXpE2lLmDdkwPJPB6xx7BSl7pGKKK2kfcQYhjn
-         uE2tFPKyVBRDWn5VUF8D/uooXvI3koJ2W0xDPa4eZNonjpMpcipB0p0EWUtywVSqEsdm
-         YZ+Z4CocJFE1HFFLbVaD59AWuWe4jdXq9HWIpV6QBaG+jRKA6vRPEinKamLjDmt51NuD
-         xlIfUe5SLGgjuScLab1Dnw+6euHymbS4eb3AjB4ArK3Xq98uQOL3vcaOPzrcJGVCNUH0
-         cgCv2Ai6hB4KXjGaCtiYLCO4DRuzRNwsA+2mFbPivJuq2525jiTCZeS63jPudnxQg43E
-         EpTg==
-X-Forwarded-Encrypted: i=1; AKwUvBwTo/V7UAMbXJjT6RvIaJA/3qEuSXnN3TiY4nQ8/rPZ9cyx7Hq1KnlHZvoni/eoc0SyXH8Gr2fs1E9DZl2w@vger.kernel.org
-X-Gm-Message-State: AFuF++nRFTzCxbjjdQqbt1FuI31jjSbM8VuGcis3BmxOr6IY6x1IGXGw
-	t0FdW1G+sH+k7hacJGfzdUUeFSalp0hBQgFukSBUAusGzZ/XCTUTeKP0Ctp/PvCitytqEs1PgI/
-	3tRdSHdGZpFaKqOZtqzAA3jY7rXk9VQLHPtXZ+s5OdHUXMl5eIzYFSA/4aibMOmRcMu9K
-X-Gm-Gg: AYBFou3N1PhIMj9rMjyhkgRH1G+HPWygHSup2pdUY/pET8hURAUMA6Xer0GoY6vpzJo
-	g47tSNALkAx1rh+kKx8G5zfagSdbTByaRM50FLGwuldmJa3QaVMHI/rdetJAsjv130KCb9z543h
-	Eo4X3/J0DjQGu1G6st166TNTf+1df4yCcOUFT74+GAp7a3kCmBLtxpn8OD2odKn/1oQEXIaiNuq
-	D0/seSsem3mlcJ0t/PCWNSaJAAHffcZTEerSG0RdZsP9t+mxUjhrCSkluB0GcmGcKMIVB4Qc8kc
-	VCqZifXpb08a9fJ1oWmvNmUriw2x0eI4z/rv9PNtNJp91VWdOIbmFj9C8HGTJGDylZUDb0JRZcU
-	aFto/JOTD7+B5UqTNlwzDFNVREDzoLpiOgTQdwf1fOg==
-X-Received: by 2002:a05:6a00:3385:b0:851:b03a:fcb with SMTP id d2e1a72fcca58-88029fb84admr1967836b3a.14.1790350512071;
-        Fri, 25 Sep 2026 08:35:12 -0700 (PDT)
-X-Received: by 2002:a05:6a00:3385:b0:851:b03a:fcb with SMTP id d2e1a72fcca58-88029fb84admr1967806b3a.14.1790350511480;
-        Fri, 25 Sep 2026 08:35:11 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87fea884749sm1325581b3a.27.2026.09.25.08.35.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 08:35:10 -0700 (PDT)
-Date: Fri, 25 Sep 2026 23:35:03 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Jagadeesh Kona <quic_jkona@quicinc.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/3] arm64: dts: qcom: glymur: Add videocc sleep clock
-Message-ID: <araUpwTAp1xjhnqV@QCOM-aGQu4IUr3Y>
-References: <20260924161152.1162301-1-shengchao.guo@oss.qualcomm.com>
- <20260924161152.1162301-3-shengchao.guo@oss.qualcomm.com>
- <nwpxqyjjusepqubva4hsf7e2wfvvigz22p7yp6c2tblezz7qj6@2s2tmiggu2dw>
+        bh=1rCb94k3VkKhCrxCNCXwFs/lYdfkRp35r7QhubIVMUI=;
+        b=NcW4QnRqMrchHn2s2VSXeCvM7GpEdB7jJdwmoCSIBfbessfWGQCmh58OnIHbW5QeKK
+         LyFxH2V1GFH0cOEx8PVRkExZrEI13R24dZHBkC4O0oQ3JvtFXoK5oRHNCOOPzpMsAiFm
+         Pb8Se9WSn2sVV8Fe1BVxrTJqkGxCjDFkyGVhveR9CX8QciGH5fiS6xi0fLLG6yDxFP3w
+         SZGk/9dljZCCKZEZVkK42sp40dK+JD2LE3MeuOaobt8QWdkh/1wxaDLbLwqkkLIpbCWm
+         p5IfMOtzt06MUHH3cWYfOlyyl5KxjYuxHfhUrXKnuwwytMYGfSQNK4K4VM0uPOqRuUOJ
+         z09w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790351399; x=1790956199;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=1rCb94k3VkKhCrxCNCXwFs/lYdfkRp35r7QhubIVMUI=;
+        b=AOvvUZe7qagxSUdSKHya42SsApTsIddle1J+3QRZek5RsE08nspjfqJsEKh12V2yQO
+         0OJdyUResZNlzj2O3k97hDBDwclo3oyHQu0Y4GoB62CRTgChfU3X/NZEyg+zUkI2o0oT
+         w1YHzB0u3kRNa2FZ7LmYVCzIMWTNuazZrG3WD0oOfMDAfV4FSmvBN6qCA/w4ZaSldzFp
+         siH5ugjbdL/eS0rvKpAXEFt6AN9dmhm2gud8XTlDxUgqWn5IJM4O5PYdEJZAYW1SEBoZ
+         TBoFDYbzMYauPuoSGyaLhOr9hioR9UX61WpM0kcbt55pVYoTSAX8NuR6Bg2IMxA/7P6L
+         Ro0Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwZ213T6HV/4v7Yy27yNyodEYOUVzDN0W7xZ7BFzLZCZdb7KAaxWuiM1eLsUYKH2lmcpQEBGhoYKdBNYMAy@vger.kernel.org
+X-Gm-Message-State: AFuF++nLuIIPU5T8/pz4rwv8qa1Zk3I1kKBE7r2WA5HDyb5YeGtfEZ6g
+	zRFfMQT7E0ZCWW94vgH4FFD2TnnqGMrdDkDIrnvIDuF+ed3iGtgo38lWQyXcpORmv8bTcbEYBLr
+	gLkQAwA/40YPZZIHUgEgHrCJf1MczNTQM2Gz4ZeLiYXA7d4G4I6wVGPuo5vhMhU8i72UO
+X-Gm-Gg: AYBFou1NwUy/icc1mAmdR3rJj78r2J0lZ+lq21hfVW4FhPnh+BpVYWDDQMCL9D1u5KZ
+	XbUtadmbl/AOy23zuEQVl1/4+lm+o2ma8f1LeMji4Lxu1q4gX9JkXoQWcMUJfC6Dr1s+On7MZSk
+	NXtlhdlMmbxHELjLEnmh9RmQKfg0ydsNcSLdROLINJeV59fWDBC1zoiJfiNVd+3nQNs6Ol3yGLI
+	vVfXaTL2onEgCMmQWn+Ac4QCqGxfXs58oYhgPW8DD+15tz+hGTKaVlD6AxJlewSAIqNFh4JpUPM
+	KFB/E0irkEr3/yihVtVbXjxL7+2CNGwez0vOUn/pG3juSfR7XyguU8ppfpy7f4H1ugoQOs33xF4
+	ZgcUv69wGQlZrrFInlbqmFeSenKQSv3ET
+X-Received: by 2002:a17:90b:4a86:b0:39e:6a82:afd3 with SMTP id 98e67ed59e1d1-3a098feb5c6mr5878781a91.37.1790351398857;
+        Fri, 25 Sep 2026 08:49:58 -0700 (PDT)
+X-Received: by 2002:a17:90b:4a86:b0:39e:6a82:afd3 with SMTP id 98e67ed59e1d1-3a098feb5c6mr5878751a91.37.1790351398188;
+        Fri, 25 Sep 2026 08:49:58 -0700 (PDT)
+Received: from [192.168.1.8] ([122.177.242.141])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0b9357f64sm5541774a91.3.2026.09.25.08.49.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 25 Sep 2026 08:49:57 -0700 (PDT)
+Message-ID: <0e80efa9-9377-474e-99f5-d458d81bfcde@oss.qualcomm.com>
+Date: Fri, 25 Sep 2026 21:19:49 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <nwpxqyjjusepqubva4hsf7e2wfvvigz22p7yp6c2tblezz7qj6@2s2tmiggu2dw>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2MiBTYWx0ZWRfX0CMXEKf7gQh2
- UBPq9mx5+v3LaO1UJoLFr4nRKwS6sY7PF8quxbljIhsVZkZZqQ9lIJ5rdqqBf96Y4j1BPcAU4hp
- 9Sw6Okn8EfpNGbRJI/GgYlDWPr14s4s=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2MiBTYWx0ZWRfX1eTdUH68Jn8Z
- 8BHE6JDOyGN2vX8aE1L0D7SuBEqFDhCIhrT/OtShM1YtUEiiG1iRlBYjKEyCMNUfk2KluGu/oJu
- 5AmBaj+aEVS0t1pfYMmCPqN07yURLZoFYnvwseFFCUycCww4xydf3ed50Be8nL4FAzoLqgBlazW
- Y72ncuUaUTUIQIPoQM7JAWSHqB4b4py29GwhKr7u+ANA3+dcIenGLO1F+4sNUV82wt44npUQ4W0
- YEkbiWCj4VN1wleaKNrqDZXStmNZ78TkpkSi08nWutUIlllZZvnYr+QbO01IaIfANNGO0olN4i9
- 2K08PBsnrag/6x8CQgBFJag3tG7IseAhWpwWeVMJv8PuRV/wc6c2A6JZYXG2O3EQx2jXeLh9PXh
- IspS9qOlSuhkoBzm3zCbVxeX3WtW7o2LtK87NOsBXleOUSTolCz0qggB8/wN35sjdOJuEyX0Gqo
- FHTu+ZUqrLVqDsJ1diw==
-X-Authority-Analysis: v=2.4 cv=VuO2kO2n c=1 sm=1 tr=0 ts=6ab694b1 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=XM2o5SXsTojDuVAecT4A:9 a=CjuIK1q_8ugA:10 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-GUID: AWGlYY_0BHYWdb1L92_J06dzwbXlEJVF
-X-Proofpoint-ORIG-GUID: AWGlYY_0BHYWdb1L92_J06dzwbXlEJVF
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] arm64: dts: qcom: glymur: Add videocc sleep clock
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <quic_jkona@quicinc.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260924161152.1162301-1-shengchao.guo@oss.qualcomm.com>
+ <20260924161152.1162301-3-shengchao.guo@oss.qualcomm.com>
+Content-Language: en-US
+From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+In-Reply-To: <20260924161152.1162301-3-shengchao.guo@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: 8YHPlcyUmuaOJksBCbPOZHGRK_OsnXJY
+X-Proofpoint-GUID: 8YHPlcyUmuaOJksBCbPOZHGRK_OsnXJY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2MyBTYWx0ZWRfX9hh8WJXB8EXy
+ Q4z0fbjjdmYtPiHxjpbcj1znpnIj1XWas+loEo5OAwQC7v7OEPJURP1uFg6kMLcqDRKd+1er8J9
+ 3h2Ne+Cj8k9EdQMu/tVVHr048uNxVb0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2MyBTYWx0ZWRfX3QvyZ8RTtXiJ
+ tyb+DqweCNsrJFhRV1OU+WaBBHfgWIGX5wDzz3kleG1jmlZmjqWAOWdO55uZZzsvr2PQGQmrLwX
+ sNkbXTpxFkbgPfnmRAsgH2KG1mCzywGP8FG8fnwnDaH6PI7UY03hFtsi06S8CkuEQ964nS2vvhA
+ 4cQK2o1LACvfE+PddSVegiN2nWGsjh9soLLPSgMIFXxVj3OHZxaBkFbwZUPJGDB+Y3BiXlDYGPK
+ D4P8SH0vlAE6kree9xWFZmU/JOtQ69FohlOxkTu1WuM7Z8TE9NlMogF6V3SBMP5TspM5SD1EvyA
+ w75qcHhT5f3mwhOE7BbtzQ+8qSlTX0yAIdzTlUToA4Ianbiy8YAQ60/yVFOUf2Jfg+VMMYVebQH
+ 3UPj7Rj8EMD6VR4eBWG1Dh5PyTawxnydxu9db7kIqTKql7+xQYD9Rg68W0gUeoWrXkeox0r3Cj5
+ h+CRIELO9Ycokkv0uRQ==
+X-Authority-Analysis: v=2.4 cv=eNmGH3p1 c=1 sm=1 tr=0 ts=6ab69828 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=c6pmHQ1/mDMFVLCaehS4aA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=cRXVm2DszLkgEr1CbDgA:9 a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-25_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 spamscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 clxscore=1015 priorityscore=1501 suspectscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ priorityscore=1501 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ phishscore=0 clxscore=1015 spamscore=0 bulkscore=0 impostorscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609250062
+ definitions=main-2609250063
 
-On Fri, Sep 25, 2026 at 12:48:07PM +0300, Abel Vesa wrote:
-> On 26-09-25 00:11:51, Shawn Guo wrote:
-> > The videocc node supplies only the two XO inputs. videocc-glymur.c
-> > expects a third input, DT_SLEEP_CLK, and uses it as the parent of
-> > video_cc_sleep_clk_src, so that RCG cannot resolve its parent and ends
-> > up as an orphan clock: any clk_set_rate() on it fails, and it shows up
-> > parentless in /sys/kernel/debug/clk/clk_summary.
-> > 
-> > Nothing is broken at runtime today because VIDEO_CC_SLEEP_CLK (0x8138)
-> > is listed in video_cc_glymur_critical_cbcrs and is therefore force
-> > enabled through regmap, bypassing the clock framework; the sleep source
-> > simply keeps whatever rate the bootloader left. The orphan still blocks
-> > any future rate management of the video sleep path.
-> > 
-> > Pass the board sleep clock as the third input. The sibling evacc node
-> > on the same SoC already does this.
+
+
+On 9/24/2026 9:41 PM, Shawn Guo wrote:
+> The videocc node supplies only the two XO inputs. videocc-glymur.c
+> expects a third input, DT_SLEEP_CLK, and uses it as the parent of
+> video_cc_sleep_clk_src, so that RCG cannot resolve its parent and ends
+> up as an orphan clock: any clk_set_rate() on it fails, and it shows up
+> parentless in /sys/kernel/debug/clk/clk_summary.
 > 
-> Same question as on the 3rd patch.
+> Nothing is broken at runtime today because VIDEO_CC_SLEEP_CLK (0x8138)
+> is listed in video_cc_glymur_critical_cbcrs and is therefore force
+> enabled through regmap, bypassing the clock framework; the sleep source
+> simply keeps whatever rate the bootloader left. The orphan still blocks
+> any future rate management of the video sleep path.
+> 
 
-This patch doesn't drop GCC_VIDEO_AHB_CLK or any videocc input clock
-like 3rd patch but only adding the board sleep clock as the third input.
-So it shouldn't break videocc either. It would nice if you can give it a
-test on your X2 laptop though :)
+Hi Shawn,
 
-Shawn
+The sleep clock supports only a fixed 32KHz frequency and does not support
+any other frequencies. Additionally, this clock is not currently used or voted
+on by any consumers. Therefore, leaving it in its default bootloader configured
+rate should be sufficient, and this change isn't really required.
+
+Thanks,
+Jagadeesh
