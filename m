@@ -1,65 +1,85 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA174F474B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:51:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6881E4F55C6
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:51:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790369471; cv=none; b=kyX4JL6Xz7s1U0SFdXTXtz7jFxBiAEKTUGLxQ66DSaiO7oDo877RkYYBCichfLbxZmDUWl5jSpbyfbM8W1qjqeFM1hUSoThe5jVVj8rCVe7MIifnwXFbtXT/LNqTrf5gyBLwxj2HfOuv2XWc/2A8DAnFR+8Lws/49BxRLMROovo=
+	t=1790369508; cv=none; b=miWcjZT/3yRVFDDn7ltjwzOIc+jiuv815HnRQmuEU/fO3vRXX3qxNfXYybkEPqHaJKBRq/usTd2evnL6AxcB4SBvCNp+7aLlp00/l/FvTk/pYdmQGZ9PmVPL8g2YOtdppho1wK++Mo2kPviv/edlmfVQjy5AHCeRlTKE3VSPVLo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790369471; c=relaxed/simple;
-	bh=6USNyc5xxVCFFsAWD4sZciwnMJCKEn7B4pxnM7sZR0o=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=p/xC1Rv8DziXs404/AXik3b0OIHjvMlMOii4zNoTVaje4up9dxkpxiNQGkWkzDLfyDdvh0GS297NBsT+ObptTgleKGKcqyYRqgBYZqK12z9rT3RnLj0y2UcPz3udjXKhA6r7PlHlMnMtRa+vHsQFmU/schdlWf11KnEo+IrdKxo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C75jfPqS; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790369508; c=relaxed/simple;
+	bh=ts9DOEaWf1lBa+eQI547Ro/oe0Z02nVSejCO7cX47qg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=m5i3y9CiHuGr8IvxvWh+jyMlhj2XDRSLbJgtNhXkypelv/sV86eTWv21qJyTiUBtLAEZK4w10CCHNL5m11+4Fn1KSB1pi1QaiXcKQsn3sJYBg0hOwm6ftWSGdOgeqUXA7wMZuS/yQPYILzZTplOwqqN5wNurroXEMu4IOJaRMuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RdcZgjxJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Wx/g4gqY; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C75jfPqS"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49d097b4939so7932505e9.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 13:51:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RdcZgjxJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Wx/g4gqY"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PIoZOL2496503
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:51:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=pEVAjbFWnMm/lUi5VG3+Ez
+	bqFp3o1qRYwGZDsG3MLYo=; b=RdcZgjxJ9JSf1+Ey1elKEXGW4DC+8xleOCd6+m
+	s8H56mFZhPaZl+QzJOVKD6Nj/nPnm7kavhuPvKe6Rd09gpl4qKO6/8pliN0YG2aq
+	NUyduOpIjVz6UKBgMTGlmZwN6Pmc9qGInQTZVB+aCxLuVkWPL+etQyQlPFkh20hQ
+	DPv+Iah+7YB3P33O1aGgn9AXiIzHQN7OwamTkQDhkdbqHjqVDEphDjWKGoUkFBeL
+	2Yjj5/nznXIAn6isgx87DsH0MJLjY/mo8C8iy3AfZDjEykMkfT4EBqmRT52NWyoh
+	abpd7cTknCLnyn4Mxxu/2Y2JgoQgo9XZqeGJIYzR4LEOmgyg==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwjq0b624-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 20:51:44 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-313d1015161so4461476eec.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 13:51:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790369467; x=1790974267; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1790369504; x=1790974304; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=ahg5ua1PTUMcgmuM5eYk7uL8e9EmcDVrOFvRyDnDKwo=;
-        b=C75jfPqSWrMYCP26j6w3PuYEzpqbGnu5TXB/Se9z7QpWcxP+UhTUgVTQBa2vEcdrsQ
-         WDVY+3MILY88GfEk0n+ckp3u/1CqaTOKd2+Rbv+3NjPaW7jrzF509sv7btiqWjXNDi4L
-         H7Q8qlowz57fo5XBq1BL0aTsxtL4Jb+zzzeL7oIkcf287Pm53OPXH+ZVgh9agcWFLuE1
-         I/vQp2YIghcRs7I5BJBCiutwhzvzCNZBZq2IzTcEmNnOdSiPNkEIpBNWOCT36hf2U9cF
-         8DtsjkWTX9N58XvulWl/QeL8wYy5JbbDr+QPs56DXrr2PW8mPSQRhmlHWGXXgnB7rvKA
-         qDlw==
+        bh=pEVAjbFWnMm/lUi5VG3+EzbqFp3o1qRYwGZDsG3MLYo=;
+        b=Wx/g4gqYRPigiEJJxUOtcJxoBTJH/b1upSFJyyDO82kQmBP0734R8jtt83mLt+I/sf
+         MiTlr122rTPOPk1o8455OfLD2oAG0HfQS82snpgj/kZ3DO4Xd6EaCmud92Dv5+egH4DU
+         FOI2k165Bj9HHht75wJvOIBgqzi7up+j6cDU/Cj4UPQ1VV5qVpIdwAgzLf9A2u9J//J5
+         CQc1kHvr5cupZIrJsf5QkuMGYmINxkD+gTpM4Ii5XV3ZWJ1k3oY2xpSV1Uvz4tN1wZ+P
+         XooruyLykW+kPFPQcyevQ/vdQ6akPSLd5V3h8SR34n8emm/NtmEsjjaqZw4eBnyiCT3Y
+         E+oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790369467; x=1790974267;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=ahg5ua1PTUMcgmuM5eYk7uL8e9EmcDVrOFvRyDnDKwo=;
-        b=Rfk8NQh/8q9AwFuy+lMg+egNZIBen3O/4zl0juMBQ4A1Npqa4BmFuyfrYIgjwigLVc
-         Z6GtIOqqQaVpC2ze//BTpmTRGJ00jnfwa5qZyfDWTAuidcMlvuCR7BMbx5eKDxzZJ2dF
-         hcsSbvUA2U+opySl7hnzq8I2PAbf6PpWnVjEjlTA6sJjTfxgWkjwNSHNqcneXP7/WZNT
-         R8FYSZZ3CnbPYe4Qda3sQlwbIzTWPRS7R5eyEmHlFT47H0XPCv/2ZYdm/Bv08qtNqXpQ
-         lIRgXIsZL4eJu0l5wL53etEi0Sfb194m7xkAgvPUYegKG/QljCBF2JNGacCbrl6PUhO+
-         7crg==
-X-Gm-Message-State: AFuF++k5dDu12BjZTUox3lfkavzJCUI20ggwbuZ9K/wYK3Zt+vodClhO
-	fKfVgkrcVZgBEqLHu0Qe6VR7ztyXuhPVMtAjBrzw+2UGoWPBWskD0Plv
-X-Gm-Gg: AYBFou2s+8wnHIfx1UjVL01TI0ImRPe9weNBg0roR9Ht16xbbPG5Pc9BtAjb+PZ3fqB
-	QRhBWo3OlzjOypDpUtbr4MWsrzOEu9WzqOJeWtVFScQIsDLCJJZcMz4A4ZVYF6N908RlmD17pwa
-	3D2wnzw1EXVnYkl4BLtsjcBdb0yYAWWx9kG+gzJgsY4YsEeyWAyQc8XLBvFgZHJO6BOtppLiG9S
-	LM9Fe83GUr7qAZR36AVsZSOVK1NDoFsayKF5Pt6zUHotZd5CGwJu06N2dAc1Rw5EL7hudRV9lFl
-	/UsDnsbbIVZM3BvC4PFCUQztk9NFhEels1iG06OnWB01Xs0uFaxHqep2pGsOe4ZiXm3mH3v6beH
-	iZsN1960hxMy5sB8KW66JrZJWA+RIHdnoD5Tk2PsoRaaajqdnbWlVOjlGf2QkQKE0VF849WK2vi
-	dFr+jz5BaTbp/cZveZ7nLmUPGN5oKkArmUaUnamAJPXxNyHLmz13nwigo3Zw7ZgNkN8aFo7CNBa
-	7+kXBDCZI/10uqxmVTLZ4pl7LxupQ==
-X-Received: by 2002:a05:600c:620e:b0:49f:f233:4439 with SMTP id 5b1f17b1804b1-49ff2334791mr58719225e9.30.1790369467326;
-        Fri, 25 Sep 2026 13:51:07 -0700 (PDT)
-Received: from [192.168.1.9] ([148.252.146.112])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a6450a3sm8688433f8f.25.2026.09.25.13.51.06
+        d=1e100.net; s=20260707; t=1790369504; x=1790974304;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=pEVAjbFWnMm/lUi5VG3+EzbqFp3o1qRYwGZDsG3MLYo=;
+        b=yu1Jfn31N0L8ElgXMrCmuLW/rzrKbY7pzob2KQa5E5Ny6CrYYCJo9VpUt7W5d1kBiz
+         Kjvl9OCt+PhDxtZEzJfQhyKcLtKN7QKaS0hgLyyvhzWQV36ciVzQFz/E+8Q4/ospccdN
+         yGdjL7InVG+JTzHoy/130O2wHF+vn8R1uQ2H5sVBiuvEEOO0q04KbsA3bab10cGF8HLm
+         qutqBSecDhlokBhb1q7nyIofd5GwAAlO7/cLltN8rsdnqNws6xxeh2+paVgsTanw0TvO
+         1zDluxbMSEswSMGNNSw9UMH7Bv6h5TDoW/eWMCFOtgkl09MduS65qgT+3JHtPa8rwG79
+         lEIQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzdiNpsdn4MksMtiGA+xtQFyfYVwYgYIs1DVIczyDclIJXT89EMIa4D+W8FBuezPFMYWMFswkRbVVDxquL1@vger.kernel.org
+X-Gm-Message-State: AFuF++mQvvzwzQD3bBoCdgdcle6y08GQmTtAeETkvjRAkOsz0cufhbkC
+	Z6KBNz+ikgAteMUVmLgclqPlwCPehWjs0v86Qi9wQvWOOMsswvb1h1ICYPr5t2MayK2W3Iy1UXM
+	DFBog23CmPDwN6sY8/Z/V/tWFp3irholqwqKJ6OkEM/JZu+sDc+f6bJEut8AqFSyvdvKq
+X-Gm-Gg: AYBFou3u449KS60m9HaR54PzgDndo8PKQD6MnjSosZvL/vkapmCHOrU3saI2Lf/NCbu
+	Xf7QpXef5V/23bGcIDbl/tTArQ7dJZe/ObJ16sVmoR2jOO3CK9P3YdwMH5s44B43cZWtofvz/r6
+	zZWhHP8yzYP6C58K97A4YEd8dd0Y1y9aQXxSAFTFJDoI3i/PQcdAdNXALL5LsJw1UJIxIOuXWj4
+	onVCwp/gXDIJNj48l5uH6H87yzzjc8VlRJzTUeAnPmyYaGuSYh3RRiAGxPiXt2KnpnQDmnBPAgY
+	xeF6mKsksO7ff4QLetVqmzIS9YKji+DSrj/bqexJDicDkLJ7ySV91ghcIW3sdGh+9BAaSJ4bPpQ
+	ouYnNaAsHgGukKurXOf2nD4XXxsoa+mll
+X-Received: by 2002:a05:7300:d204:b0:33b:f8f9:c8e8 with SMTP id 5a478bee46e88-3426feb9da1mr1237306eec.1.1790369503948;
+        Fri, 25 Sep 2026 13:51:43 -0700 (PDT)
+X-Received: by 2002:a05:7300:d204:b0:33b:f8f9:c8e8 with SMTP id 5a478bee46e88-3426feb9da1mr1237274eec.1.1790369503231;
+        Fri, 25 Sep 2026 13:51:43 -0700 (PDT)
+Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34144757f31sm13085734eec.14.2026.09.25.13.51.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 13:51:06 -0700 (PDT)
-From: Dale Whinham <daleyo@gmail.com>
-Date: Fri, 25 Sep 2026 21:51:03 +0100
-Subject: [PATCH] arm64: dts: qcom: x1-denali: Enable IRIS video codec
+        Fri, 25 Sep 2026 13:51:42 -0700 (PDT)
+From: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Subject: [PATCH v3 0/2] dmaengine: qcom: gpi: Add trace event support
+Date: Sat, 26 Sep 2026 02:21:34 +0530
+Message-Id: <20260926-add-trace-support-gpio-v3-0-8572bf7456b2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,74 +88,98 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260925-sp11-iris-v1-1-967f1a3a6b6e@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBBA0avIrDXpVEjqKmLR1mAskA4iEXdXL
- F/y8y8QikwCdXZBpIOFlzkB8wzC6OaBFHfJYLSptDWlkhVRcWRRxhZYOYfaewupXyP1fH6vpv0
- tu58obO8A7vsBBqjHuW0AAAA=
-X-Change-ID: 20260925-sp11-iris-29316aa10bb9
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
+X-B4-Tracking: v=1; b=H4sIANbetmoC/4WNyw6CMBBFf4V0bUkfKNSV/2FctLRAjdDagUZD+
+ HcLLtxozCST3OTec2YEJlgD6JjNKJhowbohBb7LUN3JoTXY6pQRI+xAKk6x1BqPQdYGw+S9CyN
+ uvXVYCKP2hS5YyQRKYx9MYx8b+Hx5Z5jU1dTjSlsbnYXRhedmjnTt/ZVEigkuFWk0SacVPzmA/
+ D7JW+36Pk8Pra7IPjRBxE8aSzRCm4qWXChVVV9oy7K8AE/PSo4jAQAA
+X-Change-ID: 20260831-add-trace-support-gpio-99eb54d42729
+To: konrad.dybcio@oss.qualcomm.com, Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, mukesh.savaliya@oss.qualcomm.com,
+        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        Praveen Talari <praveen.talari@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790369465; l=1694;
- i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
- bh=6USNyc5xxVCFFsAWD4sZciwnMJCKEn7B4pxnM7sZR0o=;
- b=Q/Ln4er3K9ruBTo0rjsqXa1WGW0M4BUkd4v8bQpLlRmC2GVbM9MNZt0VU30JrR7Pmbgwfz3Q2
- ZhZoAkqy2CaD1ZslVjAuoSD0nZ5akp7pwc9d/BKbNssN7vTkfWoBDGO
-X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
- pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790369498; l=1972;
+ i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
+ bh=ts9DOEaWf1lBa+eQI547Ro/oe0Z02nVSejCO7cX47qg=;
+ b=emdfuG2GAP2OB7/X4F59dGDE24GgzSnqsrAyM30SzdpZprd0kVmSz1qSgnQNvJIR72EjhD8NX
+ MCyVhecKWc0Ai6HGkTJkvh/OA+ZZzWvsRBcN+hjzDBpp6azgPzxTFUr
+X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
+ pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA4MyBTYWx0ZWRfX2qfiVl8x0Xb6
+ Xqk384xREdoSOWTrArk2MMdpu5dD7IuDSNTjJlTGElh3y9tdkjC0p/Kv6dVQPEbPxE2m/g6dGwj
+ m05SeNIXTKU4Q1ZGjqjo9izNEZZdZ8s=
+X-Proofpoint-GUID: 4YBD5bjgLQ5MTxNT48iefbtyGjEVzZ5U
+X-Proofpoint-ORIG-GUID: 4YBD5bjgLQ5MTxNT48iefbtyGjEVzZ5U
+X-Authority-Analysis: v=2.4 cv=LNPz05W9 c=1 sm=1 tr=0 ts=6ab6dee0 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=n0A2qb7kpkoggacqyAEA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA4MyBTYWx0ZWRfX/WAfAyDmNVEF
+ Ou4Iyp9vcSqfYq9hFJUnpF+PjRZr+LbwIgXr3pdRuxjZl9w0lwXvn6hBiZaaPMrYn9dO38NmUZx
+ 3SOBYkVLTCyg6PzTG09i+Ck926l1IHmekJU2dClPAgU06HP572f7tiGHzdTyDNCXplm+mX0BpK0
+ 1OxY+aPgdIZMUA/Mrn4CGpnso44IQVgsbL1ZPg3QmthNWTrIf1DHrLLA1nerqtAZoUnyre3AehO
+ hsfpYH2THJTYbERonxhT0lqQPvOgDd2zadqlTHQPe1wPPj4A6qYMNFisCnGj644tweJ1/M4UF/9
+ HHTzw8scCxPH1gNi6BMmevd+5/BaU7yWnTN6/zsJ+nyYwlFstrEDGVSKJFqMJGgOjgQkSv04NmX
+ uLAy4lnQ4tu7T5fzzqOqbJnrEQgbHcXDiYUnJJI37h4VvMU9n7mJ3WR/dn2TS/Vi+7UTjlHD/fY
+ Lz36jfB3FUpnFDZEccQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-25_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 suspectscore=0 impostorscore=0 malwarescore=0
+ adultscore=0 priorityscore=1501 clxscore=1015 bulkscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250083
 
-Enable the video codec and point it at the Denali firmware.
+This series adds tracepoint support to the Qualcomm GPI DMA engine
+driver, giving structured runtime visibility into GPI DMA behavior
+without requiring invasive debug patches.
 
-With the firmware in place video0 and video1 appear:
+Patch 1 adds the qcom_gpi trace events header (private to the driver,
+in drivers/dma/qcom/gpi_trace.h) and wires the tracepoints into the
+driver alongside the existing dev_dbg() calls.
 
-$ v4l2-ctl -d /dev/video0 --info --list-formats-out
-      Driver name      : iris_driver
-      Card type        : Iris Decoder
-      Bus info         : plat:aa00000.video-codec:dec
-      [0]: 'H264' (H.264, compressed, dyn-resolution)
-      [1]: 'HEVC' (HEVC, compressed, dyn-resolution)
-      [2]: 'VP90' (VP9, compressed, dyn-resolution)
-      [3]: 'AV01' (AV1 OBU Stream, compressed, dyn-resolution)
+Patch 2 converts the remaining dev_dbg() call sites in the driver to
+use the new tracepoints instead.
 
-$ v4l2-ctl -d /dev/video1 --info --list-formats
-      Driver name      : iris_driver
-      Card type        : Iris Encoder
-      Bus info         : plat:aa00000.video-codec:enc
-      [0]: 'H264' (H.264, compressed, enc-cap-frame-interval)
-      [1]: 'HEVC' (HEVC, compressed, enc-cap-frame-interval)
-
-Signed-off-by: Dale Whinham <daleyo@gmail.com>
+Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+Changes in v3:
+- Move the qcom_gpi trace events header from
+  include/trace/events/qcom_gpi.h into drivers/dma/qcom/gpi_trace.h,
+  since it has no users outside the GPI DMA driver, and squash it
+  into the tracepoint-wiring patch.
+- Drop the redundant per-function breakdown paragraph from the
+  dev_dbg()-to-tracepoint conversion patch; the first paragraph
+  already describes the change.
+- Link to v2: https://patch.msgid.link/20260909-add-trace-support-gpio-v2-0-01f81739bb88@oss.qualcomm.com
 
-diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index ce7d958ca687..a75f55879463 100644
---- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -853,6 +853,12 @@ retimer_ss1_con_sbu_out: endpoint {
- 	};
- };
- 
-+&iris {
-+	firmware-name = "qcom/x1e80100/microsoft/Denali/qcvss8380.mbn";
-+
-+	status = "okay";
-+};
-+
- &lpass_tlmm {
- 	spkr_01_sd_n_active: spkr-01-sd-n-active-state {
- 		pins = "gpio12";
+Changes in v2:
+- Reorder TP_STRUCT__entry() fields in gpi_ev_process, gpi_alloc_ring,
+  and gpi_ring_info to avoid holes: 8/16-bit fields moved to the end,
+  and 64-bit/size_t fields moved before the __string() field (treating
+  __string() as 4 bytes of metadata). (Steven Rostedt)
+- Link to v1: https://patch.msgid.link/20260831-add-trace-support-gpio-v1-0-7b0fd0d0ddb3@oss.qualcomm.com
 
 ---
-base-commit: 93f51579e7df248780214094418f205253383cc5
-change-id: 20260925-sp11-iris-29316aa10bb9
+Praveen Talari (2):
+      dmaengine: qcom: gpi: Add trace event support
+      dmaengine: qcom: gpi: Convert dev_dbg() calls to tracepoints
+
+ drivers/dma/qcom/gpi.c       |  69 ++++------
+ drivers/dma/qcom/gpi_trace.h | 317 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 344 insertions(+), 42 deletions(-)
+---
+base-commit: 4c253ac4b29b8c6cc6fdef8f92d4facde62e63b9
+change-id: 20260831-add-trace-support-gpio-99eb54d42729
 
 Best regards,
 --  
-Dale Whinham <daleyo@gmail.com>
+Praveen Talari <praveen.talari@oss.qualcomm.com>
 
