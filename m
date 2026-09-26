@@ -1,117 +1,150 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pz2-f42.google.com (mail-pz2-f42.google.com [74.125.228.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84387288C2D;
-	Sat, 26 Sep 2026 01:50:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FCDF1B3B19
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 02:20:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790387423; cv=none; b=G2zFuK1ZjFTMY7FCSE2G1/DF64Z5ZhdDXpDaLmPoSuz1QpFZW2zAYQbSV5WIlfuQy9x7UnBixkHEfNajyX9ze7qJBbvFg0gL1vfAQOjLwFuhwZm/9KeRcfDzZTuXPW5MfNI6rso9lCHih7ffkw0DWnbNj4/SvGShaFHJu+DykoU=
+	t=1790389237; cv=none; b=QQApoPvxDJg5fMfJSZj/GkYTNFCuSLGD62nI8cA+YZ7DqpRo13IRCUukbonjADOZ8I3Ehhlw9GebSk3ru3za6oxj1Rr1009zQMXa4ltwSpvfVRFoKeGfX9AMOBBRygPo0JMvaf/dTUGmfSaJciBw/y06jDlScT6RtMHlddbQuNE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790387423; c=relaxed/simple;
-	bh=gvlAMryz1WLaIdzCvIYBahSgwylu41M6JAq44ILGcJM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HD8wRfcOkHeYyKjMrl8NT5DAaeDQ7qCI6PgZJFITcMGd43r+IfGmkVjNGJJW3TZS+4PJMUzkFbYlcnz/ppC7+DpLGjt5Vzt52CmeNvR85WXjU6PETFA9sz755nMpeHMQWBiPEJ+UWHYKCHN2JppvTGs1JBnK1EhEAC4gA02fvC8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=W+CZuW+o; arc=none smtp.client-ip=192.198.163.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1790389237; c=relaxed/simple;
+	bh=jg7+FemWVFBVpRrvIizD8nTkz/V6UqciTlpbBKfXenw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=nEjr5ubcprIMqnwBRSCmQWd0iwXrZJAJ8m7wBu8eQw4mbQ/WbjG0C0A7kGVJgUbimU3BzQJSRHitJ8L72FLWzNdMQJmDAskU9xVNl4hbXFAsYNAFSG49oHqhUGTIySw5QbiSgPgY40zieGGFpSuYBjx0ghCjs6zIAjf/NC4ITQI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EHuDUt/Z; arc=none smtp.client-ip=74.125.228.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="W+CZuW+o"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790387421; x=1821923421;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=gvlAMryz1WLaIdzCvIYBahSgwylu41M6JAq44ILGcJM=;
-  b=W+CZuW+ooGS9IlaGcfbPL77CKHkTGNYMyCtTBiKzVtAfBSYXUmMVQTjH
-   TVkMDnxGNY/ur68cGR7mYay8820e17kxl8OiZuAJYcf3aqhZnQ40pKVRp
-   7UTcmKu/c1eZ4hDGHGGUUTdizJpbvGUGt4pKxzY+0Eijbp+Ijx4j2Gnp3
-   0JlkT+rxAMpoPMcy2q+7l/hB+bCJz7h9eYagJw1eHLw8W+TIiM0CPC37I
-   73H38U+jnvmXTidHvypjIFpKlfYlvCeoMf9+rUu2orNzVKXhUjaWix8eM
-   XwE0DA1S5TdxcY5aIxdWi6ddXrMSMYuF40dgB3KsudlQMO48XX57JWLgC
-   g==;
-X-CSE-ConnectionGUID: MglgMDdvR2ewoMCjNSAXmQ==
-X-CSE-MsgGUID: HewxSX91SBS31UvmyePn5w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11916"; a="102541840"
-X-IronPort-AV: E=Sophos;i="6.27,123,1787036400"; 
-   d="scan'208";a="102541840"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2026 18:50:20 -0700
-X-CSE-ConnectionGUID: X3qFXGIDQuGf03P7+LteNg==
-X-CSE-MsgGUID: /hzAtJMeT7CGXtiLpgUxpw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,123,1787036400"; 
-   d="scan'208";a="272636984"
-Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
-  by orviesa010.jf.intel.com with ESMTP; 25 Sep 2026 18:50:17 -0700
-Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xAHYM-00000000LRJ-2CH3;
-	Sat, 26 Sep 2026 01:50:14 +0000
-Date: Sat, 26 Sep 2026 09:49:36 +0800
-From: kernel test robot <lkp@intel.com>
-To: Dmitry Baryshkov <lumag@kernel.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>,
-	Can Guo <can.guo@oss.qualcomm.com>, Bean Huo <beanhuo@micron.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-scsi@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH] scsi: ufs: rpmb: register and unregister the ufs_rpmb bus
-Message-ID: <202609260913.FY1vuM99-lkp@intel.com>
-References: <20260920-fix-ufs-rpmb-v1-1-560b842c589d@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EHuDUt/Z"
+Received: by mail-pz2-f42.google.com with SMTP id 41be03b00d2f7-cc4e4979c55so35996a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 19:20:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790389235; x=1790994035; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=A35dxfOiF0vku1a8AiorVl5ekNNXinTf80Wsr1D60yQ=;
+        b=EHuDUt/ZBWEjyfij3XI/E3UAqcKeMYA+ZocKWN/eC19pbXFhhxdZeV6cVVs0upGTZy
+         jijebJbLJ3I2+CJilum1ZgEEW/ZQQdX7hdZuj8x5QN2ndU8Zzgy1jU9mIKlthqkR43M7
+         usmzLItap8UseMSD7Lp08Swss2D35sKCNU6U/1DubELH8ok2IXRs7eK20K1v7ZWhVfoO
+         oTSukA7SqvrwZLdEyeo8c5Jl5tRh+MlZsADvv0nMSw/VzJCIgj4uYwAZvsJrcRMJ4Zfr
+         BPMD0agC6Y8lts+GfAVV4lptV93Dme6bbuo5dlY0d1d2SI6D5oyEautbw3n4WFlAE7kl
+         vWHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790389235; x=1790994035;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=A35dxfOiF0vku1a8AiorVl5ekNNXinTf80Wsr1D60yQ=;
+        b=IjjWmX2zREccA2Xp/0othB7yT35yvumN3ZZbpchqWLMnO8W7prw4vD/bQbCzqmpedd
+         0CkSxy4AYk3fkENH/woM8OIEhv87mmnmIAmWY9cax+wtMnP1xM7mjPED0V7NK1bugtvG
+         TxYBBuLjTfZXP4SfO+PoUwNyiw9Jvbh9L8rp9SALLD3SwTHFIxudhABd6WF49BMmcOBE
+         LJcgAV1uw4gcNFdR7LMiPBn25LO8E8bIoeGaPSm0UN0AsUnVKg1ktj1VkFjzqMaNVpdz
+         RYdo6JD9nsq+H0SiXjEmBT3/LEOhkemE4hvcojFXVOPMvx27q0zMjka7IXo5ggw02/J1
+         AIBA==
+X-Forwarded-Encrypted: i=1; AKwUvBxVoo3oQY1csA+mf3vJyql6w8aJYob/K3DPYmGQGFrVy47bqC3Ky9WYwsb6FKnUCGZ1TrZC6b5IZGv/v7jL@vger.kernel.org
+X-Gm-Message-State: AFuF++lm6wAEUFW3/w4nJ5QFOc7hdFJdGDCUMPHHtuQQcSL1xf4sBOx6
+	B1/vcemqV/E1UY3MGCvmILlQ0wZhZh32pY9OyAgq90nAP366hJZGRD1h
+X-Gm-Gg: AYBFou1SNBbHyg9YAsLzwVl1AnQxudabg0kucR4GEvng/GNeKWl9n4/aEuBd5gaV89D
+	3DDNZnGZjMIYMmBIF6A/lYQKc0YdlVWmn1Mq3VTUhmckqGOtaBWNf92W7A39UzZBIOtMBg+T8hq
+	hM584LtYMk5D2BXZjCFvFEr0tbo/RSagebk31ednDjnDRbh4bd/u7mgsg4FyEtuJEyeIXi6uwMe
+	otgCzSNvXStW//2ORuHY6KQIzlmObMdwUVCj/dsamKyPh4YDUrGZtxK1QkYvyFC3Gz2RtNO4PUU
+	fuF7mJ31QYesjjyJOrYtOQIrmYr2TIfEbvYRd/TGi412V8bHMIi59R4gUGvf+5rQ+PQcLIiPO+r
+	nMwDn4pTnsKy4Br72iTN1uct3eINNbdO/0akq3w+Akayto9sPIYM/0I8VQD6ylOgdM8ELEiFevf
+	Zfawzg2kRpMjlzVLvyF4T+disOx2GQxOePbhhPwx+yLib5wcwQVfWwl6891ysjOuxNMgRBeKvMs
+	lbCbSieXKdySw==
+X-Received: by 2002:a17:902:c94c:b0:2db:2846:ce3c with SMTP id d9443c01a7336-2df8e59a4e9mr65359735ad.1.1790389235476;
+        Fri, 25 Sep 2026 19:20:35 -0700 (PDT)
+Received: from jfliu-sfa1411.. ([129.227.183.200])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df90fbac49sm17687415ad.3.2026.09.25.19.20.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 19:20:34 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: dri-devel@lists.freedesktop.org,
+	linux-media@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Bryan O'Donoghue <bod.linux@nxsw.ie>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Karl Mehltretter <kmehltretter@gmail.com>,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Jianfeng Liu <liujianfeng1994@gmail.com>
+Subject: [PATCH] Revert "dma-buf: Make DMABUF_DEBUG default to y on DEBUG_KERNEL kernels"
+Date: Sat, 26 Sep 2026 10:20:17 +0800
+Message-ID: <20260926022026.10539-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260920-fix-ufs-rpmb-v1-1-560b842c589d@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Dmitry,
+This reverts commit 143755bdabaa96776c24f878014608e9cb44f930.
 
-kernel test robot noticed the following build errors:
+That commit fixed a dangling reference in the DMABUF_DEBUG default
+and thereby enabled the option - and with it the page-stripping
+sg_table wrapper that dma_buf_map_attachment() hands to importers -
+on every kernel with DEBUG_KERNEL=y, i.e. virtually every distro
+kernel.
 
-[auto build test ERROR on 3f2425f5b5bbbdd991ca9cdfd5502e68d8895998]
+drm/msm is broken by the wrapper.  Both of msm's map paths consume
+sg->length and sg_phys() of the attachment sg_table:
+msm_iommu_pagetable_map() for the per-process GPU pagetables, and
+iommu_map_sg() (via iommu_map_sgtable()) for scanout.  The wrapper
+zeroes sg->length and strips the page pointers, so mappings of
+imported dma-bufs silently map nothing, and userspace observes
+arm-smmu translation faults from UCHE, e.g. during hardware video
+decode (clapper, chromium) on Adreno systems:
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Dmitry-Baryshkov/scsi-ufs-rpmb-register-and-unregister-the-ufs_rpmb-bus/20260920-175018
-base:   3f2425f5b5bbbdd991ca9cdfd5502e68d8895998
-patch link:    https://lore.kernel.org/r/20260920-fix-ufs-rpmb-v1-1-560b842c589d%40oss.qualcomm.com
-patch subject: [PATCH] scsi: ufs: rpmb: register and unregister the ufs_rpmb bus
-config: arc-randconfig-1001-20260926 (https://download.01.org/0day-ci/archive/20260926/202609260913.FY1vuM99-lkp@intel.com/config)
-compiler: arc-linux-gcc (GCC) 12.5.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260926/202609260913.FY1vuM99-lkp@intel.com/reproduce)
+  gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
+  type=TRANSLATION source=UCHE
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202609260913.FY1vuM99-lkp@intel.com/
+Bisected on a Snapdragon X1E78100 laptop as v7.3-rc3 good,
+v7.3-rc4 bad, culprit 143755bdabaa9.
 
-All errors (new ones prefixed by >>):
+Switching msm to sg_dma_address()/sg_dma_len() is not a trivial fix
+either: those fields are only valid for sg_tables that msm has
+dma-mapped itself, which native non-MSM_BO_WC objects' sg_tables
+are not, so the conversion needs more work.  The msm maintainer has
+therefore requested restoring the previous default for v7.3, to be
+revisited once msm no longer consumes struct page and sg->length of
+imported sg_tables.
 
-   arc-linux-ld: drivers/ufs/core/ufs-rpmb.o: in function `ufs_rpmb_init':
->> drivers/ufs/core/ufs-rpmb.c:280: multiple definition of `init_module'; drivers/ufs/core/ufshcd.o:drivers/ufs/core/ufshcd.c:11609: first defined here
-   arc-linux-ld: drivers/ufs/core/ufs-rpmb.o: in function `ufs_rpmb_exit':
->> drivers/ufs/core/ufs-rpmb.c:285: multiple definition of `cleanup_module'; drivers/ufs/core/ufshcd.o:drivers/ufs/core/ufshcd.c:11623: first defined here
+Link: https://lore.kernel.org/linux-arm-msm/20260923074256.9357-1-liujianfeng1994@gmail.com/
+Suggested-by: Rob Clark <robin.clark@oss.qualcomm.com>
+Cc: Christian König <christian.koenig@amd.com>
+Cc: Sumit Semwal <sumit.semwal@linaro.org>
+Cc: Karl Mehltretter <kmehltretter@gmail.com>
 
+Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
+---
 
-vim +280 drivers/ufs/core/ufs-rpmb.c
+ drivers/dma-buf/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-   277	
-   278	static int __init ufs_rpmb_init(void)
-   279	{
- > 280		return bus_register(&ufs_rpmb_bus_type);
-   281	}
-   282	
-   283	static void __exit ufs_rpmb_exit(void)
-   284	{
- > 285		bus_unregister(&ufs_rpmb_bus_type);
-   286	}
-   287	
+diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+index e4f078a326a41..7efc0f0d07126 100644
+--- a/drivers/dma-buf/Kconfig
++++ b/drivers/dma-buf/Kconfig
+@@ -43,7 +43,7 @@ config UDMABUF
+ config DMABUF_DEBUG
+ 	bool "DMA-BUF debug checks"
+ 	depends on DMA_SHARED_BUFFER
+-	default y if DEBUG_KERNEL
++	default y if DEBUG
+ 	help
+ 	  This option enables additional checks for DMA-BUF importers and
+ 	  exporters. Specifically it validates that importers do not peek at the
+---
+base-commit: 93f51579e7df248780214094418f205253383cc5
+branch: revert-dmabuf-debug-for-7.3
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+-- 
+2.47.3
+
