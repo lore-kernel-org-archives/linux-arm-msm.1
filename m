@@ -1,37 +1,88 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DDA443F4CD;
-	Sat, 26 Sep 2026 12:40:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18C1F362154
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 13:08:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790426434; cv=none; b=sSjOgBX4oRcRixFUgsnLrXILFcPiTtEb8UYEicIPXaksg4jnjgzubyDa8OS2+u1PTsf+pSdTtcxcun4tJA1taO1eIz4ygMbQO4GfoBTCk0+RNxTT/KVxXcJkavY0/tm+/bkUJyEKwwelhxBJilCDlQjygRuDNPYdwDXlmAjcaWc=
+	t=1790428100; cv=none; b=U8A/eYvAP0CeajhlRiYdgwD1n3Pch/w440wuSBeASEMiH+wzvvHkhZBkO71Wu8NB5w+7TND0N6B6K1Htqbp3ApQfu0NFnOY8hMqVVWadUozzE3s/Ip1p4TYUSKgnOGHuP1fDmqvyG9Uf9TyX6M23f45wME4uTPN5xFVGR2olPV4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790426434; c=relaxed/simple;
-	bh=CbitlEm4C1LRXGOhGoMRNWKo7JTZBmlS8VhWp6mv4So=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tAIO7pdmnp5/AWPJmnEHZMnHtHAmml8PjwRLL2uPdVw2QeVlGNf//51tknSUsgZElHPn+QCwhJlUXy2wg/YSJf+46NhHq4LkJ9uj64i0uGsSlCRPJ4lKjSHk/bRzGI4DORx6EjSgA74rY/YkBsRX8jbx43uJ1yEB+WmGVrkwIkw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EtTU4rbo; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1790428100; c=relaxed/simple;
+	bh=O5RHq8VbDNAX2oaGL7TqD33eUDnNypgHfkK31Ne8IfM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 In-Reply-To:References:To:Cc; b=bBXoM9yAsfv/60GMGpW54i6OivcpExwLdpyvWW8g2FffrUuGuFkRnhI4NuP9PE9rTMoGVaNWu7QSZgCS/SQ0MKe8/WUaku5AyuboXxyERySBv/H4hXRVEt76ggLb9fPlbDv2IaBV+PCx11qA8UBf4NuZ7XbXUn2WuW6t2NlTJBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HB7pgl9B; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WbuHzyJv; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EtTU4rbo"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id BDE79C2BCFF;
-	Sat, 26 Sep 2026 12:40:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1790426433;
-	bh=CbitlEm4C1LRXGOhGoMRNWKo7JTZBmlS8VhWp6mv4So=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=EtTU4rbovS4xzokNa0EkTP0r7i/iYHE892Cypj64EyF2UinfUWotb0TiN31tSLaAW
-	 a65HAJCizuuSJJ0NVERNazHzHVyTVTO+VxRlEsnFEtGukUefOTCl6YifRwz1/QNHKz
-	 P8VRQjR8NB8kXaeyQ7PJwy9mWAi5Z1hFK+2yT6xF1ZYNzj55CTZthiSoGHBk3q3v+K
-	 i0D5DmGOx5OfNBwpPYatJ7yYkGH1aA/JGu8t4CdFL8Y4Ew9KnKIXHBu3WwLZE799n1
-	 jtgLCKRqdzbF9kCejl1HRka4EOISu7q7QPdfrXnhQF8dRiCF0jXBk1D6ND/iN3WAI3
-	 XQIaKQ3HaLlsQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0B4BC98332;
-	Sat, 26 Sep 2026 12:40:33 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sat, 26 Sep 2026 14:40:25 +0200
-Subject: [PATCH RFC 06/12] usb: typec: qcom: Add gen1 Type-C port support
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HB7pgl9B";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WbuHzyJv"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68QAoh4S738804
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 13:08:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	AR+q3wVR+Kss3Eawd9nmtdjN9B3OfgoqT4zSL+4Xwr8=; b=HB7pgl9B/gtAdyJZ
+	XFU47cdYI9sSP+fA19FFjeyuhh9XDoZDXMwEIaPgkPFAZcBjZsELQvTvsquoIL9D
+	oTMcqEn0/LjrcosJLl9buHV2tEgQ77gRLAbyLhWGsIi+YbHo20bHQ4WRsIT/giCH
+	7w4xikgyjfxqnyF3wKNsq/gpHkiUIAaV8Lg8XkMUx8QC0sQchtuSejF/NEodP8KM
+	ogLsBeAMrYPfUGeXuVTvYNZ2q0Nz4NZlhUrUIH1HaeZ/wF1SyR7r9xXmg6nQQbjZ
+	pyXUHiu44MTdn5rhr1EdNvgU3mIEBLz/usuSkgyb64NmpvIHVvNTOp3t5xIkCq9s
+	kp4GiQ==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx3rfs6p6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 13:08:17 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-338c2e27430so1433383eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790428097; x=1791032897; darn=vger.kernel.org;
+        h=cc:to:references:in-reply-to:content-transfer-encoding:content-type
+         :mime-version:message-id:date:subject:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AR+q3wVR+Kss3Eawd9nmtdjN9B3OfgoqT4zSL+4Xwr8=;
+        b=WbuHzyJvKRlPtUhQKTdlmD5GzWp9LAmyNlBELusAg9HgPkVcrHiqP1lkdUWu6rl7vU
+         AoxdS8vzH00aYQWxmwCD9Aoz/EeOdZFiyWMzpB7tNShGQicrSV5zXIMDFFhgmlsZOxTT
+         Yyfg+v4JX1B+Gx9aSjwwuRQYlrHb5U7+7bfcYNlCw7MoqkvtZgYGF546ZEzj8txZ5fjS
+         O73RuLQ7Kzhma7LPWC00xdVS+vcEQrpl8v1TMLdpRWwDPrRzqYYTa8tRoBK3B3mT4tIr
+         QGi20ILJKEDvLTQcyOCY/3wh/hnhXBWrDgUvhn6K97l4cI5MtfrBMq7QpxRDXFrYIaCs
+         +4Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790428097; x=1791032897;
+        h=cc:to:references:in-reply-to:content-transfer-encoding:content-type
+         :mime-version:message-id:date:subject:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AR+q3wVR+Kss3Eawd9nmtdjN9B3OfgoqT4zSL+4Xwr8=;
+        b=JGA8a2P0Q32m5R0GUrdTLZzHfNpmmXOWNIW3GWh+VxlOosLF7Fsgu/oviYRc2zYOj+
+         zlR8XDe7l7gJVa0EyctnvOZ/pK8pWlofIdZtjp5fpD1yHYUafBBCcmv0Pk2D8Wn7WllG
+         XyW46jeZt5C9ckRFPS3rvkCVDKh8cb8m4eGxCg3D89XTebCt0YZzA+dvfDycR2RXReHQ
+         Y04Ms0EIU+oq7lM2cKHOrFhuP6kA+Nlqnra/bL0NDv6AzESPQ3iHVvV2oWb2KJduNYOP
+         ZwXJkVXQ7INiOP7qwA3TrO4R5CQA/NBb30SD3+h4ksb4vMe1zezsE39pqtHZ+pQUDd/A
+         rVsA==
+X-Forwarded-Encrypted: i=1; AKwUvBwiIw/gOFyzyoIuU/eVEnQihDo6vaidSrcru+TM24lo8eoMd8CvL1Ru84E1ePVYa7JG6NHIY3YOCP5KK58L@vger.kernel.org
+X-Gm-Message-State: AFuF++lw1NIYLvaAKIk0KX7nEsFgcImEZYVCaEVkhCLgm//2lgBv7u9V
+	1Mx6mkTloVBSxqDlqU8mc/Fnuzmmz8FXD+Miod3BcKYbrCxu1GrTFLSDrG6w3WzZsAs6a/o1mxx
+	YrRbB/qrssJarLOMwFEGQIkZWfg+dfZyFtjxGJNK3BDMxwz57KgZxQYeBVRV5QeuGhu8h
+X-Gm-Gg: AYBFou2BscmNiJNYLP24JUJIw6M5SAN8xCg4z9WSaOzGH/zBloalObYeIjQgVi/ccdL
+	F+sAF2lt6PilzaWDJjK/dir8iM0jjN/O2WFMmF8HjaGx3U5D24tPbU876pckD/Jq1Wg6I35/HVc
+	AegSYr3SGuyO/CSNU7q+4v2MtFjZfhM5WlBjcEX9FiK3IqXRE88XlzzK0cfR4nMJ6QFpKQYFVMM
+	hT48FLcp7nI/dh31kcz3+zIDyCK/Vw5eFEsr0rDQh9It8ng7QkfR3AF/P4Rc7FGEc3mXlRmPY+m
+	5yhhT/iCTLHYcyYWQLGibT6outE5BfvqgK93HKhxiq6SHCxsOm004TEKfehrquqPl8JmzGN/FG+
+	LpFd6JtbGND3UTwikZbRQMGqOGD1hSVQ=
+X-Received: by 2002:a05:7300:3e95:b0:33b:e842:c0ff with SMTP id 5a478bee46e88-3426cce7bcdmr2549571eec.0.1790428097089;
+        Sat, 26 Sep 2026 06:08:17 -0700 (PDT)
+X-Received: by 2002:a05:7300:3e95:b0:33b:e842:c0ff with SMTP id 5a478bee46e88-3426cce7bcdmr2549538eec.0.1790428096372;
+        Sat, 26 Sep 2026 06:08:16 -0700 (PDT)
+Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-341460f5166sm15356614eec.29.2026.09.26.06.08.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Sep 2026 06:08:15 -0700 (PDT)
+From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] media: iris: add vbv delay support
+Date: Sat, 26 Sep 2026 18:38:05 +0530
+Message-Id: <20260926-iris_vbv_delay-v2-0-83dd80765dee@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,791 +91,119 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260926-typec-v1-6-31adc19f32c6@ixit.cz>
-References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
-In-Reply-To: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
-To: Alexey Minnekhanov <alexeymin@minlexx.ru>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
- phone-devel@vger.kernel.org, mfd@lists.linux.dev, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=20810; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=lwCi5F7brUNbuKWKf7yWNCLhdQnuROjga0askdAs3Zs=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqt70+VdzhcG/H+UXlk7jrDe6NT+n49kEgOk84V
- lSWXArNAliJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCare9PgAKCRBgAj/E00kg
- csTxD/9r2ndOi/phci0sa/0U0fIjnuh0i16zTYsvkkeK7OF1Q3zacSEnAZIwTn4/PxaTptX+yzI
- Wcb+3SBE3fg56/O4/vHprcP7JoFw64AlgKz/1HLDX20tAa9AyGbkGp4a7E8QL/idBZOO8IuM70R
- HOr9XRO+hNR+IfwZcEBvHW5Us2bPEfHWN1VOIw4Mfie4gxzwf7YRe5VB/u0vImOzsJb1BvaJlpt
- 53V5b2U0/jp7/Plseo+z40mSPUyygS+chiCSjVzMf9EU+SJ8spHRyGFOQGR8OVoiut1Z/F2Ykdq
- xPgThqjiyvp/8gZoQnBVpLMPs+3NKcXlrYBUgeq3eAEmRXba87xsVvS0tCUW2iYG9U66RsVozUE
- OcnXUwmrbFJqKy4F+SnZP8IXWD8BkgcaBugT8Ta6FvqQtSc6AztvEa3n/hPQnC1Qjm5ROtIu8bZ
- L9LOp9VuHXYOyayjTLoDU6vr8L24SBgeHSYUntJf0yTPbMmCyhWv3RCwJbUYgdWC/FPlKdAUuJx
- Pb0SLlF7gtgoB4nRPG/sMwz1J51QVg1XGQ/Pe02+Wn1GhABI7+shb0BckxIWtgy/X/CAbRJrHyT
- 73sZ1b86TfM9UvbV552w3bGGTuyl+XrC0L513z/01se7f63fu08pi0ZhV1M4itIlBQSdJUdwpXD
- fICnl8OHIEdCWlw==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+X-B4-Tracking: v=1; b=H4sIALbDt2oC/3WMyw6CMBBFf4XM2pLSgqgr/8MQ0hcyCVDtaCMh/
+ Xcrezc3OTc5ZwNyAR3BpdgguIiEfskgDgWYUS13x9BmBsHFkbeSMwxIfdSxt25SK5O1tGJQkp9
+ qAVl6BDfgZw/euswj0suHde/H6vf+TcWKcdbqRrXnRmpjh6snKp9vNRk/z2Ue6FJKX4XDTnSzA
+ AAA
+X-Change-ID: 20260730-iris_vbv_delay-343d2fa30842
+In-Reply-To: <20260730-iris_vbv_delay-v1-0-7b5a7953bcdf@oss.qualcomm.com>
+References: <20260730-iris_vbv_delay-v1-0-7b5a7953bcdf@oss.qualcomm.com>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790428092; l=3228;
+ i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
+ bh=O5RHq8VbDNAX2oaGL7TqD33eUDnNypgHfkK31Ne8IfM=;
+ b=fI76ZFFysWZsEgisPaLk6ES6kEfc1D3mbz/CRegf8D8j9A7m5vc3x4xZqqfsI2tYgDtF3XDQG
+ rhS7F8azeacDlRc0zv92RKY13NTYPP54UX5OeQHI+eZpu10iwpkSpfK
+X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
+ pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDA1MiBTYWx0ZWRfX/ET/8+H7nUAR
+ SZunAbZq2NCgz46uheQwOlxUd8in3VfcHLdO9IWMn5XOc7r3MGfFN5St+XetEp/fumRrcJyToeZ
+ BtOy9OcCEgTF5aTBm6NXsl90MF/DWPg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDA1MiBTYWx0ZWRfX2Ga7Ihq9jddt
+ bi49nK3seWUeTjyLErhrKEEEKkfUzOupq35PfJiwYTAXjCSHjCuufGs560Npo/q+wWm/M7ys6BU
+ R6qtxuC7rN4m7S+dqhvSzOI11ciqXBRNOnxSRKZ27TbXCVHH9ym0smbx48pG3hVuocxX83r0yi/
+ MWXm4RelsD7CPJi7BBplBRcFFGH7xehfWG9EjD8JryFfbE7DCFowEqKMTM7GLC6OJMhMPcEC1Yy
+ 4y3zu1+XrRg/GD77hdCq0dWdfwVLPrQjB/lHFqmCwuBSHBWzqqzQDgYlBuDf48Kb73cey7tbY4t
+ ssqVL1XoFa03X1IxusZHzEl0fM5qpoVnFvNc7gsOyB3z6/qq3QFHRakqccgZpOAgdfmVoC9zYdm
+ AmM/7k+wiCW5O/mMD7yx6U6Nkykdh3b9KFE4RMvqN7qDzR64wZqKe4uWOWPZT4kyp53msYN8mMd
+ oqNBOvNXZ//vUuTVoJg==
+X-Proofpoint-GUID: F_CmtfCgYvF4-dNu6TvASUyA4ox2j5Bo
+X-Proofpoint-ORIG-GUID: F_CmtfCgYvF4-dNu6TvASUyA4ox2j5Bo
+X-Authority-Analysis: v=2.4 cv=K6G3jCWI c=1 sm=1 tr=0 ts=6ab7c3c2 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=C5IDlBnpNeGhfuk2CuwA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-26_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 suspectscore=0 clxscore=1011 lowpriorityscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260052
 
-From: David Heidelberg <david@ixit.cz>
+This series adds VBV_DELAY (V4L2_CID_MPEG_VIDEO_VBV_DELAY) support
+for Qualcomm iris encoder sessions, allowing users to configure the
+initial VBV (Video Buffer Verifier) delay for CBR-encoded streams.
+This is useful for latency-sensitive encoding use cases (e.g.
+low-latency streaming) where the client needs explicit control over
+the encoder's buffering delay.
 
-Add a port backend for the first generation of the Qualcomm PMIC Type-C
-block, found on PM660 and PMI8998.
+Patch 1 is a prerequisite for patch 2. The PIPE capability (control
+over the number of VPP hardware pipes used for a session) was
+previously only wired up for decoder sessions. Achieving low VBV delay
+values (34-100 ms) requires the encoder to be constrained to a single
+VPP pipe, so patch 1 enables the PIPE capability on the encoder path as
+well, which patch 2 then relies on to force single-pipe operation when
+VBV delay falls in that low-latency range.
 
-On gen1 the Type-C CC logic is part of the charger's USBIN peripheral
-(base 0x1300) instead of the standalone Type-C peripheral used by
-PM8150B and later PMICs. All Type-C events (CC state change,
-tCCDebounce done, VBUS change and error) are signalled through a single
-aggregate "type-c-change" interrupt, the handler re-reads TYPEC_STATUS_4
-to find out what changed. The PD PHY is register compatible with PM8150B
-and is reused as is.
+Patch 2 adds the VBV_DELAY capability: it registers HFI_PROP_VBV_DELAY,
+wires up the V4L2_CID_MPEG_VIDEO_VBV_DELAY control for the gen2
+encoder, and only applies the property when rate control is set to CBR
+since VBV delay is only meaningful for constant-bitrate encoding.
+It adds vbv_delay support for iris HFI Gen2 based targets (qcs8300,
+sm8550, sm8650, sm8750, x1p42100). Support for HFI Gen1 targets will
+be added in a follow-up series.
 
-Differences to the PM8150B backend:
- - get_cc() returns -EBUSY until the hardware reports tCCDebounce done,
-   instead of using a software debounce.
- - As a source, only the default and 1.5A Rp can be advertised, 3.0A
-   requests are advertised as 1.5A.
- - The PBS workaround of the downstream SMB2 driver (TM_IO_DTEST4_SEL)
-   is applied on every power role change.
+This series has been verified with GST level testing.
+Command used:
+gst-launch-1.0 -v videotestsrc ! video/x-raw,format=NV12, \
+width=1280,height=720,framerate=30/1 ! v4l2h264enc output-io-mode=4 \
+capture-io-mode=4 extra-controls="controls,video_bitrate_mode=1, \
+initial_delay_for_vbv_control=300;" ! filesink location=/opt/test_enc.h264
 
-VBUS sourcing is optional and only used when the connector provides
-a vbus-supply, as the charger doesn't expose a VBUS regulator yet.
-
-Assisted-by: LLM
-Co-developed-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
-Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 ---
- drivers/usb/typec/tcpm/qcom/Makefile               |   1 +
- drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c      |   9 +
- .../typec/tcpm/qcom/qcom_pmic_typec_port_gen1.c    | 605 +++++++++++++++++++++
- .../typec/tcpm/qcom/qcom_pmic_typec_port_gen1.h    |  15 +
- 4 files changed, 630 insertions(+)
+Changes in v2:
+- iris_set_pipe(): use inclusive VBV_DELAY bounds (>= 34 && <= 100 ms)
+  matching the documented range.
+- iris_set_pipe(): only force single-pipe under CBR rate control so
+  a stale in-range VBV_DELAY no longer affects non-CBR streams.
+- iris_set_pipe(): read fw_caps[VBV_DELAY].value once instead of
+  twice in the same condition, and derive the default work_route from
+  the immutable fw_caps[PIPE].max instead of the self-mutated .value,
+  writing the final decision back into .value so frequency scaling
+  picks up the corrected pipe count instead of a stale one.
+- iris_set_vbv_delay(): drop the dev_err() logged for non-CBR rate
+  control; that is an expected, valid configuration, not an error.
+- Link to v1: https://lore.kernel.org/r/20260730-iris_vbv_delay-v1-0-7b5a7953bcdf@oss.qualcomm.com
 
-diff --git a/drivers/usb/typec/tcpm/qcom/Makefile b/drivers/usb/typec/tcpm/qcom/Makefile
-index cc23042b94878..b8b9350184c19 100644
---- a/drivers/usb/typec/tcpm/qcom/Makefile
-+++ b/drivers/usb/typec/tcpm/qcom/Makefile
-@@ -1,7 +1,8 @@
- # SPDX-License-Identifier: GPL-2.0
- #
- obj-$(CONFIG_TYPEC_QCOM_PMIC)		+= qcom_pmic_tcpm.o
- qcom_pmic_tcpm-y			+= qcom_pmic_typec.o \
- 					   qcom_pmic_typec_port.o \
-+					   qcom_pmic_typec_port_gen1.o \
- 					   qcom_pmic_typec_pdphy.o \
- 					   qcom_pmic_typec_pdphy_stub.o \
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-index 41aaae6bb3724..ea1d5b0927436 100644
---- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-@@ -12,16 +12,17 @@
- #include <linux/slab.h>
- #include <linux/usb/tcpm.h>
- 
- #include <drm/bridge/aux-bridge.h>
- 
- #include "qcom_pmic_typec.h"
- #include "qcom_pmic_typec_pdphy.h"
- #include "qcom_pmic_typec_port.h"
-+#include "qcom_pmic_typec_port_gen1.h"
- 
- typedef int (*pmic_typec_port_probe_fn)(struct platform_device *pdev,
- 					struct pmic_typec *tcpm,
- 					const struct pmic_typec_port_resources *res,
- 					struct regmap *regmap, u32 base);
- 
- struct pmic_typec_resources {
- 	const struct pmic_typec_pdphy_resources	*pdphy_res;
-@@ -134,31 +135,39 @@ static void qcom_pmic_typec_remove(struct platform_device *pdev)
- 	struct pmic_typec *tcpm = platform_get_drvdata(pdev);
- 
- 	tcpm->pdphy_stop(tcpm);
- 	tcpm->port_stop(tcpm);
- 	tcpm_unregister_port(tcpm->tcpm_port);
- 	fwnode_handle_put(tcpm->tcpc.fwnode);
- }
- 
-+static const struct pmic_typec_resources gen1_typec_res = {
-+	.pdphy_res = &pm8150b_pdphy_res,
-+	.port_res = &gen1_port_res,
-+	.port_probe = qcom_pmic_typec_gen1_port_probe,
-+};
-+
- static const struct pmic_typec_resources pm8150b_typec_res = {
- 	.pdphy_res = &pm8150b_pdphy_res,
- 	.port_res = &pm8150b_port_res,
- 	.port_probe = qcom_pmic_typec_port_probe,
- };
- 
- static const struct pmic_typec_resources pmi632_typec_res = {
- 	/* PD PHY not present */
- 	.port_res = &pm8150b_port_res,
- 	.port_probe = qcom_pmic_typec_port_probe,
- };
- 
- static const struct of_device_id qcom_pmic_typec_table[] = {
-+	{ .compatible = "qcom,pm660-typec", .data = &gen1_typec_res },
- 	{ .compatible = "qcom,pm8150b-typec", .data = &pm8150b_typec_res },
- 	{ .compatible = "qcom,pmi632-typec", .data = &pmi632_typec_res },
-+	{ .compatible = "qcom,pmi8998-typec", .data = &gen1_typec_res },
- 	{ }
- };
- MODULE_DEVICE_TABLE(of, qcom_pmic_typec_table);
- 
- static struct platform_driver qcom_pmic_typec_driver = {
- 	.driver = {
- 		.name = "qcom,pmic-typec",
- 		.of_match_table = qcom_pmic_typec_table,
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.c
-new file mode 100644
-index 0000000000000..b4e3e49664f9d
---- /dev/null
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.c
-@@ -0,0 +1,605 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Qualcomm Type-C port backend (1st gen)
-+ *
-+ * GEN1 predates the standalone PM8150B-style Type-C register block.
-+ * Its CC/role controls live in the USBIN peripheral, while the PD PHY
-+ * is a separate PMIC peripheral.
-+ */
-+
-+#include <linux/interrupt.h>
-+#include <linux/kernel.h>
-+#include <linux/mutex.h>
-+#include <linux/of.h>
-+#include <linux/platform_device.h>
-+#include <linux/property.h>
-+#include <linux/regmap.h>
-+#include <linux/regulator/consumer.h>
-+#include <linux/slab.h>
-+#include <linux/usb/tcpm.h>
-+
-+#include "qcom_pmic_typec.h"
-+#include "qcom_pmic_typec_port.h"
-+#include "qcom_pmic_typec_port_gen1.h"
-+
-+/* USBIN Type-C status */
-+#define TYPEC_STATUS_1_REG				0x0b
-+#define  UFP_TYPEC_MASK					GENMASK(7, 5)
-+#define  UFP_TYPEC_RDSTD				BIT(7)
-+#define  UFP_TYPEC_RD1P5				BIT(6)
-+#define  UFP_TYPEC_RD3P0				BIT(5)
-+
-+#define TYPEC_STATUS_2_REG				0x0c
-+#define  DFP_TYPEC_MASK					GENMASK(3, 0)
-+#define  DFP_RD_OPEN					BIT(3)
-+#define  DFP_RD_RA_VCONN				BIT(2)
-+#define  DFP_RD_RD					BIT(1)
-+#define  DFP_RA_RA					BIT(0)
-+
-+#define TYPEC_STATUS_4_REG				0x0e
-+#define  UFP_DFP_MODE_STATUS				BIT(7)
-+#define  TYPEC_VBUS_STATUS				BIT(6)
-+#define  TYPEC_VBUS_ERROR				BIT(5)
-+#define  TYPEC_DEBOUNCE_DONE				BIT(4)
-+#define  CC_ORIENTATION					BIT(1)
-+#define  CC_ATTACHED					BIT(0)
-+
-+/* USBIN Type-C configuration */
-+#define TYPEC_CFG_REG					0x58
-+#define  TYPEC_OR_U_USB					BIT(0)
-+
-+#define TYPEC_CFG_2_REG					0x59
-+#define  EN_TRY_SOURCE_MODE				BIT(3)
-+#define  EN_80UA_180UA_CUR_SOURCE			BIT(0)
-+
-+#define TYPEC_CFG_3_REG					0x5a
-+#define  EN_TRYSINK_MODE				BIT(2)
-+
-+#define TYPEC_INTRPT_ENB_REG				0x67
-+#define  VBUS_ERROR_INT_EN				BIT(5)
-+#define  DEBOUNCE_DONE_INT_EN				BIT(3)
-+#define  CCSTATE_CHANGE_INT_EN				BIT(2)
-+#define  VBUS_DEASSERT_INT_EN				BIT(1)
-+#define  VBUS_ASSERT_INT_EN				BIT(0)
-+
-+#define TYPEC_SW_CTRL_REG				0x68
-+#define  VCONN_EN_ORIENTATION				BIT(6)
-+#define  VCONN_EN_SRC					BIT(4)
-+#define  VCONN_EN_VALUE					BIT(3)
-+#define  POWER_ROLE_CMD_MASK				GENMASK(2, 0)
-+#define  UFP_EN_CMD					BIT(2)
-+#define  DFP_EN_CMD					BIT(1)
-+#define  TYPEC_DISABLE_CMD				BIT(0)
-+
-+/* GEN1 TYPEC_PBS_WA_BIT workaround used by the downstream SMB2 driver. */
-+#define MISC_BASE_OFFSET				0x300
-+#define TM_IO_DTEST4_SEL				0xe9
-+#define PBS_CRUDE_SENSOR_ENABLE				0xa5
-+
-+/* Interrupt numbers */
-+#define PMIC_TYPEC_CHANGE_IRQ				0x0
-+
-+struct gen1_typec_port {
-+	struct device		*dev;
-+	struct tcpm_port	*tcpm_port;
-+	struct regmap		*regmap;
-+	u32			base;
-+	int			irq;
-+
-+	struct regulator	*vbus;
-+	bool			vbus_enabled;
-+	bool			vbus_present;
-+	bool			vbus_valid;
-+	struct mutex		lock; /* serializes register RMW and VBUS state */
-+};
-+
-+const struct pmic_typec_port_resources gen1_port_res = {
-+	.nr_irqs = 1,
-+	.irq_params = {
-+		{
-+			.irq_name = "type-c-change",
-+			.virq = PMIC_TYPEC_CHANGE_IRQ,
-+		},
-+	},
-+};
-+
-+/*
-+ * Failure of this workaround write is non-fatal and
-+ * we can continue with the role transition.
-+ */
-+static void gen1_typec_pbs_wa(struct gen1_typec_port *port, bool sink)
-+{
-+	unsigned int val = sink ? 0 : PBS_CRUDE_SENSOR_ENABLE;
-+	int ret;
-+
-+	ret = regmap_write(port->regmap, port->base +
-+			   MISC_BASE_OFFSET + TM_IO_DTEST4_SEL, val);
-+	if (!ret)
-+		return;
-+
-+	dev_warn(port->dev,
-+		 "failed to update GEN1 Type-C PBS workaround: %d\n",
-+		 ret);
-+}
-+
-+static int gen1_typec_set_power_role(struct gen1_typec_port *port,
-+				     unsigned int role)
-+{
-+	int ret;
-+
-+	gen1_typec_pbs_wa(port, role == UFP_EN_CMD);
-+
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_SW_CTRL_REG,
-+				 POWER_ROLE_CMD_MASK, role);
-+	if (ret)
-+		dev_err(port->dev, "failed to set Type-C power role: %d\n", ret);
-+
-+	return ret;
-+}
-+
-+static int gen1_typec_get_vbus(struct tcpc_dev *tcpc)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	unsigned int status;
-+	int ret;
-+
-+	mutex_lock(&port->lock);
-+	ret = regmap_read(port->regmap, port->base +
-+			  TYPEC_STATUS_4_REG, &status);
-+	if (ret)
-+		ret = port->vbus_enabled;
-+	else
-+		ret = port->vbus_enabled || !!(status & TYPEC_VBUS_STATUS);
-+	mutex_unlock(&port->lock);
-+
-+	return ret;
-+}
-+
-+static int gen1_typec_set_vbus(struct tcpc_dev *tcpc, bool on, bool sink)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	bool changed = false;
-+	int ret = 0;
-+
-+	if (!port->vbus)
-+		return 0;
-+
-+	mutex_lock(&port->lock);
-+
-+	if (port->vbus_enabled == on)
-+		goto out;
-+
-+	if (on)
-+		ret = regulator_enable(port->vbus);
-+	else
-+		ret = regulator_disable(port->vbus);
-+
-+	if (!ret) {
-+		port->vbus_enabled = on;
-+		changed = true;
-+	}
-+
-+out:
-+	mutex_unlock(&port->lock);
-+
-+	/*
-+	 * set_vbus() may run during tcpm_register_port() before port_start()
-+	 * provides tcpm_port. Once registered, notify TCPM whenever the
-+	 * source regulator actually changes state. get_vbus() also accounts
-+	 * for vbus_enabled when GEN1 does not reflect sourced VBUS in
-+	 * TYPEC_VBUS_STATUS.
-+	 */
-+	if (changed && port->tcpm_port)
-+		tcpm_vbus_change(port->tcpm_port);
-+
-+	return ret;
-+}
-+
-+static int gen1_typec_get_cc(struct tcpc_dev *tcpc,
-+			     enum typec_cc_status *cc1,
-+			     enum typec_cc_status *cc2)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	enum typec_cc_status active = TYPEC_CC_OPEN;
-+	unsigned int status1, status2, status4;
-+	bool orientation_cc2;
-+	int ret;
-+
-+	*cc1 = TYPEC_CC_OPEN;
-+	*cc2 = TYPEC_CC_OPEN;
-+
-+	mutex_lock(&port->lock);
-+
-+	ret = regmap_read(port->regmap, port->base +
-+			  TYPEC_STATUS_4_REG, &status4);
-+	if (ret)
-+		goto out;
-+
-+	if (!(status4 & CC_ATTACHED))
-+		goto out;
-+
-+	/*
-+	 * CC is not stable until tCCDebounce has elapsed. TCPM ignores
-+	 * -EBUSY and the DEBOUNCE_DONE interrupt triggers a new read.
-+	 */
-+	if (!(status4 & TYPEC_DEBOUNCE_DONE)) {
-+		ret = -EBUSY;
-+		goto out;
-+	}
-+
-+	ret = regmap_read(port->regmap, port->base +
-+			  TYPEC_STATUS_1_REG, &status1);
-+	if (ret)
-+		goto out;
-+
-+	ret = regmap_read(port->regmap, port->base +
-+			  TYPEC_STATUS_2_REG, &status2);
-+	if (ret)
-+		goto out;
-+
-+	orientation_cc2 = !!(status4 & CC_ORIENTATION);
-+
-+	if (status4 & UFP_DFP_MODE_STATUS) {
-+		/* Local port is DFP/source; decode the partner's Rd/Ra. */
-+		switch (status2 & DFP_TYPEC_MASK) {
-+		case DFP_RA_RA:
-+			*cc1 = TYPEC_CC_RA;
-+			*cc2 = TYPEC_CC_RA;
-+			goto out;
-+		case DFP_RD_RD:
-+			*cc1 = TYPEC_CC_RD;
-+			*cc2 = TYPEC_CC_RD;
-+			goto out;
-+		case DFP_RD_RA_VCONN:
-+			active = TYPEC_CC_RD;
-+			*cc1 = TYPEC_CC_RA;
-+			*cc2 = TYPEC_CC_RA;
-+			break;
-+		case DFP_RD_OPEN:
-+			active = TYPEC_CC_RD;
-+			break;
-+		default:
-+			dev_dbg(port->dev, "unhandled GEN1 DFP status %#x\n",
-+				status2);
-+			goto out;
-+		}
-+	} else {
-+		/* Local port is UFP/sink; decode the partner's advertised Rp. */
-+		switch (status1 & UFP_TYPEC_MASK) {
-+		case UFP_TYPEC_RDSTD:
-+			active = TYPEC_CC_RP_DEF;
-+			break;
-+		case UFP_TYPEC_RD1P5:
-+			active = TYPEC_CC_RP_1_5;
-+			break;
-+		case UFP_TYPEC_RD3P0:
-+			active = TYPEC_CC_RP_3_0;
-+			break;
-+		default:
-+			dev_dbg(port->dev, "unhandled GEN1 UFP status %#x\n",
-+				status1);
-+			goto out;
-+		}
-+	}
-+
-+	if (orientation_cc2)
-+		*cc2 = active;
-+	else
-+		*cc1 = active;
-+
-+out:
-+	mutex_unlock(&port->lock);
-+	return ret;
-+}
-+
-+static int gen1_typec_set_cc(struct tcpc_dev *tcpc,
-+			     enum typec_cc_status cc)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	unsigned int role;
-+	unsigned int rp_current = 0;
-+	int ret;
-+
-+	switch (cc) {
-+	case TYPEC_CC_OPEN:
-+		role = TYPEC_DISABLE_CMD;
-+		break;
-+	case TYPEC_CC_RD:
-+		role = UFP_EN_CMD;
-+		break;
-+	case TYPEC_CC_RP_DEF:
-+		role = DFP_EN_CMD;
-+		rp_current = 0;
-+		break;
-+	case TYPEC_CC_RP_1_5:
-+	case TYPEC_CC_RP_3_0:
-+		/*
-+		 * GEN1 can only source 80 uA (default) or 180 uA (1.5 A).
-+		 * Advertise 1.5 A for 3.0 A requests, TCPM ignores set_cc()
-+		 * errors and would otherwise keep a stale Rp.
-+		 */
-+		role = DFP_EN_CMD;
-+		rp_current = EN_80UA_180UA_CUR_SOURCE;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	mutex_lock(&port->lock);
-+
-+	if (role == DFP_EN_CMD) {
-+		ret = regmap_update_bits(port->regmap,
-+					 port->base + TYPEC_CFG_2_REG,
-+					 EN_80UA_180UA_CUR_SOURCE,
-+					 rp_current);
-+		if (ret)
-+			goto out;
-+	}
-+
-+	ret = gen1_typec_set_power_role(port, role);
-+
-+out:
-+	mutex_unlock(&port->lock);
-+	return ret;
-+}
-+
-+static int gen1_typec_set_polarity(struct tcpc_dev *tcpc,
-+				   enum typec_cc_polarity polarity)
-+{
-+	/* USB PHY orientation is handled outside this PMIC Type-C block. */
-+	return 0;
-+}
-+
-+static int gen1_typec_set_vconn(struct tcpc_dev *tcpc, bool on)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	unsigned int status4, orientation, mask, val;
-+	int ret;
-+
-+	mutex_lock(&port->lock);
-+
-+	ret = regmap_read(port->regmap, port->base +
-+			  TYPEC_STATUS_4_REG, &status4);
-+	if (ret)
-+		goto out;
-+
-+	/* VCONN is driven on the inactive CC pin. */
-+	orientation = (status4 & CC_ORIENTATION) ?
-+		      0 : VCONN_EN_ORIENTATION;
-+
-+	if (on) {
-+		mask = VCONN_EN_ORIENTATION | VCONN_EN_VALUE;
-+		val = orientation | VCONN_EN_VALUE;
-+	} else {
-+		mask = VCONN_EN_VALUE;
-+		val = 0;
-+	}
-+
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_SW_CTRL_REG,
-+				 mask, val);
-+
-+out:
-+	mutex_unlock(&port->lock);
-+	return ret;
-+}
-+
-+static int gen1_typec_start_toggling(struct tcpc_dev *tcpc,
-+				     enum typec_port_type port_type,
-+				     enum typec_cc_status cc)
-+{
-+	struct pmic_typec *tcpm = tcpc_to_tcpm(tcpc);
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	unsigned int role;
-+	unsigned int try_src = 0;
-+	unsigned int try_snk = 0;
-+	int ret;
-+
-+	switch (port_type) {
-+	case TYPEC_PORT_SRC:
-+		role = DFP_EN_CMD;
-+		break;
-+	case TYPEC_PORT_SNK:
-+		role = UFP_EN_CMD;
-+		break;
-+	case TYPEC_PORT_DRP:
-+		role = 0;
-+		/*
-+		 * Like the PM8150B backend, keep hardware Try.SNK enabled
-+		 * while TCPM owns the policy state machine.
-+		 */
-+		try_snk = EN_TRYSINK_MODE;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	mutex_lock(&port->lock);
-+
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_CFG_2_REG,
-+				 EN_TRY_SOURCE_MODE, try_src);
-+	if (ret)
-+		goto out;
-+
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_CFG_3_REG,
-+				 EN_TRYSINK_MODE, try_snk);
-+	if (ret)
-+		goto out;
-+
-+	/* Disable first so the state machine restarts toggling. */
-+	ret = gen1_typec_set_power_role(port, TYPEC_DISABLE_CMD);
-+	if (ret)
-+		goto out;
-+
-+	ret = gen1_typec_set_power_role(port, role);
-+
-+out:
-+	mutex_unlock(&port->lock);
-+	return ret;
-+}
-+
-+static irqreturn_t gen1_typec_irq(int irq, void *data)
-+{
-+	struct gen1_typec_port *port = data;
-+	unsigned int status4;
-+	bool vbus;
-+	bool vbus_changed = false;
-+
-+	/*
-+	 * GEN1 exposes a single aggregate Type-C change interrupt. Always
-+	 * notify TCPM of CC changes. Only generate a VBUS event when the
-+	 * hardware VBUS state changes, or on the first observation so TCPM
-+	 * can establish the initial vSafe0V state.
-+	 */
-+	mutex_lock(&port->lock);
-+
-+	if (!regmap_read(port->regmap, port->base +
-+			 TYPEC_STATUS_4_REG, &status4)) {
-+		if (status4 & TYPEC_VBUS_ERROR)
-+			dev_warn_ratelimited(port->dev, "Type-C VBUS error\n");
-+
-+		vbus = !!(status4 & TYPEC_VBUS_STATUS);
-+
-+		if (!port->vbus_valid || vbus != port->vbus_present) {
-+			port->vbus_present = vbus;
-+			port->vbus_valid = true;
-+			vbus_changed = true;
-+		}
-+	}
-+
-+	mutex_unlock(&port->lock);
-+
-+	if (port->tcpm_port) {
-+		if (vbus_changed)
-+			tcpm_vbus_change(port->tcpm_port);
-+
-+		tcpm_cc_change(port->tcpm_port);
-+	}
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static int gen1_typec_port_start(struct pmic_typec *tcpm,
-+				 struct tcpm_port *tcpm_port)
-+{
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+	unsigned int irq_mask;
-+	int ret;
-+
-+	/*
-+	 * TYPE_C_OR_U_USB == 0 selects the Type-C state machine on GEN1.
-+	 */
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_CFG_REG,
-+				 TYPEC_OR_U_USB, 0);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * GEN1 exposes a single aggregate type-c-change interrupt, the
-+	 * handler re-reads TYPEC_STATUS_4 to find out what changed.
-+	 */
-+	irq_mask = CCSTATE_CHANGE_INT_EN | DEBOUNCE_DONE_INT_EN |
-+		   VBUS_ASSERT_INT_EN | VBUS_DEASSERT_INT_EN |
-+		   VBUS_ERROR_INT_EN;
-+
-+	ret = regmap_write(port->regmap,
-+			   port->base + TYPEC_INTRPT_ENB_REG,
-+			   irq_mask);
-+	if (ret)
-+		return ret;
-+
-+	/* Select software control for VCONN, initially disabled. */
-+	ret = regmap_update_bits(port->regmap,
-+				 port->base + TYPEC_SW_CTRL_REG,
-+				 VCONN_EN_SRC | VCONN_EN_VALUE,
-+				 VCONN_EN_SRC);
-+	if (ret)
-+		return ret;
-+
-+	port->tcpm_port = tcpm_port;
-+	enable_irq(port->irq);
-+
-+	return 0;
-+}
-+
-+static void gen1_typec_port_stop(struct pmic_typec *tcpm)
-+{
-+	struct gen1_typec_port *port = tcpm->pmic_typec_port;
-+
-+	disable_irq(port->irq);
-+	port->tcpm_port = NULL;
-+}
-+
-+int qcom_pmic_typec_gen1_port_probe(struct platform_device *pdev,
-+				    struct pmic_typec *tcpm,
-+				    const struct pmic_typec_port_resources *res,
-+				    struct regmap *regmap,
-+				    u32 base)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct gen1_typec_port *port;
-+	struct fwnode_handle *connector;
-+	int ret;
-+
-+	if (!res->nr_irqs || res->nr_irqs > PMIC_TYPEC_MAX_IRQS)
-+		return -EINVAL;
-+
-+	port = devm_kzalloc(dev, sizeof(*port), GFP_KERNEL);
-+	if (!port)
-+		return -ENOMEM;
-+
-+	connector = device_get_named_child_node(dev, "connector");
-+	if (!connector)
-+		return -EINVAL;
-+
-+	port->vbus = devm_of_regulator_get_optional(dev,
-+						    to_of_node(connector),
-+						    "vbus");
-+	fwnode_handle_put(connector);
-+	if (IS_ERR(port->vbus)) {
-+		if (PTR_ERR(port->vbus) != -ENODEV)
-+			return PTR_ERR(port->vbus);
-+		port->vbus = NULL;
-+	}
-+
-+	port->irq = platform_get_irq_byname(pdev,
-+					    res->irq_params[0].irq_name);
-+	if (port->irq < 0)
-+		return port->irq;
-+
-+	port->dev = dev;
-+	port->regmap = regmap;
-+	port->base = base;
-+	mutex_init(&port->lock);
-+
-+	ret = devm_request_threaded_irq(dev, port->irq, NULL,
-+					gen1_typec_irq,
-+					IRQF_ONESHOT | IRQF_NO_AUTOEN,
-+					res->irq_params[0].irq_name, port);
-+	if (ret)
-+		return ret;
-+
-+	tcpm->pmic_typec_port = port;
-+
-+	tcpm->tcpc.get_vbus = gen1_typec_get_vbus;
-+	tcpm->tcpc.set_vbus = gen1_typec_set_vbus;
-+	tcpm->tcpc.get_cc = gen1_typec_get_cc;
-+	tcpm->tcpc.set_cc = gen1_typec_set_cc;
-+	tcpm->tcpc.set_polarity = gen1_typec_set_polarity;
-+	tcpm->tcpc.set_vconn = gen1_typec_set_vconn;
-+	tcpm->tcpc.start_toggling = gen1_typec_start_toggling;
-+
-+	tcpm->port_start = gen1_typec_port_start;
-+	tcpm->port_stop = gen1_typec_port_stop;
-+
-+	return 0;
-+}
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.h b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.h
-new file mode 100644
-index 0000000000000..45e373d22edca
---- /dev/null
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port_gen1.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __QCOM_PMIC_TYPEC_PORT_GEN1_H__
-+#define __QCOM_PMIC_TYPEC_PORT_GEN1_H__
-+
-+#include "qcom_pmic_typec_port.h"
-+
-+extern const struct pmic_typec_port_resources gen1_port_res;
-+
-+int qcom_pmic_typec_gen1_port_probe(struct platform_device *pdev,
-+				    struct pmic_typec *tcpm,
-+				    const struct pmic_typec_port_resources *res,
-+				    struct regmap *regmap,
-+				    u32 base);
-+
-+#endif /* __QCOM_PMIC_TYPEC_PORT_GEN1_H__ */
+---
+Sachin Kumar Garg (2):
+      media: iris: enable pipe for hfi gen2 encoder
+      media: iris: add support for vbv delay
 
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 52 ++++++++++++++++++++--
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 19 +++++++-
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  1 +
+ .../platform/qcom/iris/iris_platform_common.h      |  1 +
+ 5 files changed, 69 insertions(+), 5 deletions(-)
+---
+base-commit: a52e6f7923c17a672135b485ffd96fbd72f46267
+change-id: 20260730-iris_vbv_delay-343d2fa30842
+
+Best regards,
 -- 
-2.55.0
-
+Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 
