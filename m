@@ -1,133 +1,355 @@
-Received: from mail-ej2-f39.google.com (mail-ej2-f39.google.com [74.125.228.167])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 106C03749EE
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 08:21:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.167
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F7163890E4;
+	Sat, 26 Sep 2026 08:41:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790410903; cv=none; b=tX/JYUmY2fHiTPzWBd/1tgsDVmiCxK7MpPuBXDSAGDQbzULw4dcZkGPIbMGsXGJRijK1QUL7uvuTp+RGSPtLvqB2Ua3eGDzHlo2FYhDy2dRaXcUjHO0XulOlonpDmFhdfYq6/aWIPANsl1jedzJOIFyf51fJ2AOkiT/ckO/yyi0=
+	t=1790412094; cv=none; b=pR2J/CXsiJU1ATQKlQvzbR2wCcWiuRr7MIGVysGceu4WJBmEHsXJyF7b/TMKqlrqW79I5MHzlwqFYMjITwQVDRv2xsSlD72M2/Tn8FwFi2xQf2vlWlzbzw9yxGwCMoG0SxtNK4B3F8i3LIHedFbruXUxm18KvI5HsPpkIIo9AZs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790410903; c=relaxed/simple;
-	bh=42ncMuF0hJOCZTSNQcVScQZ4OLbQtyIuJ7lJJJTb56w=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tpm73ufJVQlU3CBJlESGzghDOZgivxMu6Nf6S1YBtmxBpMab6xDZnz2LinN2nuYgx2/uPHhnWedOuFcdqOK65HN1ltpuS5y8RdK5hzqZGSpLeLyDBp8dcIb+pCtOnTH3yuysaL4HC/IPFQyAMCls5dmsbOA6sjtmwQkn3nroNcw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iipG7UFN; arc=none smtp.client-ip=74.125.228.167
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790412094; c=relaxed/simple;
+	bh=LLm+ZqSNsynAo06tkRic+CA/iWyG5WOhtBzQj8B/x/A=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=laGZOUd9gZQCpXssxuf53V3wlWVereHjkjRxG+W4pqJSH+WcDVYqkanLtHpXqIxeFzCPyKbWeWtfoZfZfgEkyu/OaGUXLzEMZiGsh/j8yQ5XsGPjdMbLFEgXZhecXApLzWPO6YIGP40M7DC3xX2eDQLZjiJ4oK05FcHS7QfjggM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=he1vvRNG; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iipG7UFN"
-Received: by mail-ej2-f39.google.com with SMTP id a640c23a62f3a-c2940ef15c1so199801166b.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 01:21:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790410900; x=1791015700; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TNJvgLaOMMaIX1HcfX+1NsIf1Oi9+zZ060VpifOgBLY=;
-        b=iipG7UFNjD0G0tYq/d+GFM9w9c00uaXMi93ftWgJZM9h+NOMXxlwfdlhE1TUCWgg3j
-         z13r88YW42qE8mszVRGdtg+PsVWt8NbjFy4EZr1BCaecrXEGPZr8fhnT1y87umdNLOP4
-         HL24Yuqzweht6XGSXZCTaMgAeUAy8o6oENZ4KyYAR6uccWQiNrgsRw4ZuHUld+5RdW7J
-         jLtnCXlvUxbXTTUJfYeJsYN0GD9Xcj1ENg+OXbvwPiDqSAKfGos+5XfCkkwJb/kTQbAE
-         6DGnjKwxXzlwkccHklFtvJ+dAdgNHjOLtQ39+qxSz5ltZegxRFdU4Qjr1RyGbClSqtgS
-         DcEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790410900; x=1791015700;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TNJvgLaOMMaIX1HcfX+1NsIf1Oi9+zZ060VpifOgBLY=;
-        b=2oX937OgJqVei7TFPjOcl+hyry9ZwIGfyQkQcZaY19rBvC9OWEZboP2/MNl76I4hhs
-         V9jmvgHt6o3YvW/Ko1Mp46jifOy5hhF/fHTOFqveEk/uEDQmCYoP0e54a6Sc1KWQo218
-         uxD47u18SI5k0LcMKldYREujf+Iri10yjbn4ksq35VFf0VwDAcxUnn0FJktntIXESXec
-         I8Q1xGXs8ah8oNNue6yvyDHFWlt1R6RvXmh/nxKSUU2IEG5edz4X6GHN2SYtjBHxhQ3p
-         1a3VZXkmR+ZPwMVlDEURpomc83PC8KuArlvAzGFbpHdKs5VKx5EYQ7aGJJ3j9Mj6IUlh
-         BZ8A==
-X-Forwarded-Encrypted: i=1; AKwUvBygvkEu5dG6xMoslDqhvemG/rgGFVu3F6WACvxPMEPmFCJYMjAbuAbRz/VtOQCwfkKPwHpCIiBFPWbSjg1l@vger.kernel.org
-X-Gm-Message-State: AFuF++lrK1XA23K4jWyDLZ3NFz6zTUeHuPJFJAl6PAwjDUM8gpH24p0f
-	tmK+tAsHlHHJWiQ/a1ywXPs6fhaz3h8Rzss1l3ZEJEgU1hyYEdT7xL/R
-X-Gm-Gg: AYBFou3hnl1PyOw6lWXuyQkssbzBbpek37ry4gylo4x6fbP+CfVusOZ018xgQ2wDm2H
-	nFCi8HqomC4qU6eUWTSDB1Xf8HrUmw2IQiQ5SwUoHSacjuWjA1EasyZMWImWeXneJmrd/qHpOix
-	hBv41Aj+Hg+q5SPjaKk/nsZ68VfjAmdm4fL7XGKYRFW2mF+jxk873aps0tRfhbKV2KzChdvaqHF
-	znQsVSygjZqmf4NtkH6EhdL6j+zOCIx3IgFbYKcGCPoRGEF+NH+61Taql6GzLYVGNS3SHeAPC1a
-	mEmtGiLE54H1Jz3gYNMbwV5A6gA/iM65hM+Km4yixaUH0SMRDTlRdLaiXUVclQasAAxcdMwXwmP
-	R1Rgjs6UxMezQB+sXQFKan/SyHnMoj+ijMvln1V+DG0d3l9YCArITRCRg5peij6vCPbka1I2I+N
-	VAXXzrSQZB06HD+TBUmJGd+qlu53UMVqZe00LVZqA+1/frZ48HeFb/r8RXHUtuKRj3QX/C4dNsx
-	hms7Y5WssoJ3HSen+KsemRNB39tQlIDVhW65Pnre5QsoSywArdjGlWuvc4KT9S0gXY95D7X4yKG
-	mR7HA95Ayh3a25W2vV0zvZosx+pM9Jw=
-X-Received: by 2002:a17:907:7289:b0:c29:52dd:317c with SMTP id a640c23a62f3a-c2ac24c5d47mr702668766b.30.1790410900001;
-        Sat, 26 Sep 2026 01:21:40 -0700 (PDT)
-Received: from localhost.localdomain (83-233-221-53.cust.bredband2.com. [83.233.221.53])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae735737csm218957666b.11.2026.09.26.01.21.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 01:21:39 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: netdev@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Ziyang Huang <hzyitc@outlook.com>
-Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
-Date: Sat, 26 Sep 2026 10:21:29 +0200
-Message-ID: <20260926082129.1632-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
-In-Reply-To: <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch>
-References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch> <20260925210153.8717-1-yongzhao.derek@gmail.com> <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="he1vvRNG"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 06255C2BCF7;
+	Sat, 26 Sep 2026 08:41:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790412094;
+	bh=LLm+ZqSNsynAo06tkRic+CA/iWyG5WOhtBzQj8B/x/A=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=he1vvRNGkn5DlMFl5GsnuJpNCapRTZ96799htAfwyX47hZkzkE8MfPcnV+MCdCpWn
+	 AQRxxmPMtThYy+Bhh2uNoaD+pqVx41XG1IJG9giUnRrODPBZtyLNvmiCeRdlUy3rdp
+	 0qMwj14/ILwGVvv16/1qxTQF5bNJ3LJvd4ZseK1sXBaBj9/mbmbElOs3FDKnTSkAKT
+	 pMBecNoyJv4tFxxUy/koW4dLKMSppNpvsty1DneV5UtUeTeQxr+o/rqwZag1MmuHyh
+	 Ebu2LB8l7qbow+FqJQvRn5s6cEeKmPNjEk+T82hj+UseAUUA/Z9kM9ySLeDYJgxNiO
+	 tbNZg8SnVDncQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9A08C98318;
+	Sat, 26 Sep 2026 08:41:33 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Date: Sat, 26 Sep 2026 18:41:32 +1000
+Subject: [PATCH v5 1/3] arm64: dts: qcom: sdm670: add default uart pinctrl
+ nodes
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Message-Id: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-1-db74ff64a7e7@samcday.com>
+References: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-0-db74ff64a7e7@samcday.com>
+In-Reply-To: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-0-db74ff64a7e7@samcday.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>, 
+ =?utf-8?q?Pablo_Correa_G=C3=B3mez?= <pabloyoyoista@postmarketos.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790412092; l=5952;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=hUNBmM8bvKT0yQH74K4n83NfYx+CXMZCZPR8Oii1LAM=;
+ b=+XOS3tpF0pNO7nb/Hy8axf5ILTuwICauA8ye8Qh8t+2gOqac60evnXsR6OXvS8SlZ6lbLLVSd
+ Dt4rUDomL9IAEIbKVOnkklj5xEAOXhlGgKC3oDEieCNNMsZHlHK5yVE
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with
+ auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
+Reply-To: me@samcday.com
 
-Hi Andrew,
+From: Pablo Correa Gómez <pabloyoyoista@postmarketos.org>
 
-> How are the two ports coupled?
->
-> Are there magnetics? Capacitor coupling?
+This is a pre-requisite to enable UART in sargo and bonito. Values for
+the pins have been taken from sdm845, and cross-checking dowstream,
+where available.
 
-I don't have a schematic and have not inspected the board closely
-myself. What I have are third-party photos of the Redmi AX5400 board
-(board marking M74). A teardown with the shields removed:
+Signed-off-by: Pablo Correa Gómez <pabloyoyoista@postmarketos.org>
+[sam: drop the tx/rx subnode labels, add drive-strength/bias-disable]
+Assisted-by: LLM
+Signed-off-by: Sam Day <me@samcday.com>
+---
+ arch/arm64/boot/dts/qcom/sdm670.dtsi | 256 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 256 insertions(+)
 
-https://www.acwifi.net/19451.html
+diff --git a/arch/arm64/boot/dts/qcom/sdm670.dtsi b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+index 5c60ea36f04a1..09e9d5afa6f65 100644
+--- a/arch/arm64/boot/dts/qcom/sdm670.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+@@ -1343,6 +1343,262 @@ qup_i2c15_default: qup-i2c15-default-state {
+ 				function = "qup15";
+ 			};
+ 
++			qup_uart0_default: qup-uart0-default-state {
++				tx-pins {
++					pins = "gpio2";
++					function = "qup0";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio3";
++					function = "qup0";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart1_default: qup-uart1-default-state {
++				tx-pins {
++					pins = "gpio19";
++					function = "qup1";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio20";
++					function = "qup1";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart2_default: qup-uart2-default-state {
++				tx-pins {
++					pins = "gpio29";
++					function = "qup2";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio30";
++					function = "qup2";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart3_default: qup-uart3-default-state {
++				tx-pins {
++					pins = "gpio43";
++					function = "qup3";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio44";
++					function = "qup3";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart4_default: qup-uart4-default-state {
++				tx-pins {
++					pins = "gpio91";
++					function = "qup4";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio92";
++					function = "qup4";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart5_default: qup-uart5-default-state {
++				tx-pins {
++					pins = "gpio87";
++					function = "qup5";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio88";
++					function = "qup5";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart6_default: qup-uart6-default-state {
++				tx-pins {
++					pins = "gpio47";
++					function = "qup6";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio48";
++					function = "qup6";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart7_default: qup-uart7-default-state {
++				tx-pins {
++					pins = "gpio95";
++					function = "qup7";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio96";
++					function = "qup7";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart8_default: qup-uart8-default-state {
++				tx-pins {
++					pins = "gpio67";
++					function = "qup8";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio68";
++					function = "qup8";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart9_default: qup-uart9-default-state {
++				tx-pins {
++					pins = "gpio4";
++					function = "qup9";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio5";
++					function = "qup9";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart10_default: qup-uart10-default-state {
++				tx-pins {
++					pins = "gpio53";
++					function = "qup10";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio54";
++					function = "qup10";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart11_default: qup-uart11-default-state {
++				tx-pins {
++					pins = "gpio33";
++					function = "qup11";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio34";
++					function = "qup11";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart12_default: qup-uart12-default-state {
++				tx-pins {
++					pins = "gpio51";
++					function = "qup12";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio52";
++					function = "qup12";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart13_default: qup-uart13-default-state {
++				tx-pins {
++					pins = "gpio107";
++					function = "qup13";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio108";
++					function = "qup13";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart14_default: qup-uart14-default-state {
++				tx-pins {
++					pins = "gpio31";
++					function = "qup14";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio32";
++					function = "qup14";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
++			qup_uart15_default: qup-uart15-default-state {
++				tx-pins {
++					pins = "gpio83";
++					function = "qup15";
++					drive-strength = <2>;
++					bias-disable;
++				};
++
++				rx-pins {
++					pins = "gpio84";
++					function = "qup15";
++					drive-strength = <2>;
++					bias-disable;
++				};
++			};
++
+ 			sdc1_state_on: sdc1-on-state {
+ 				clk-pins {
+ 					pins = "sdc1_clk";
 
-Full board: https://www.acwifi.net/wp-content/uploads/2022/03/DSC_4718.jpg
-Close-up:   https://www.acwifi.net/wp-content/uploads/2022/03/DSC_4725.jpg
+-- 
+2.55.0
 
-And a repair forum photo of the same board with the shields on:
 
-https://remont-aud.net/forum/103-124057-1
-Photo: https://remont-aud.net/_fr/1240/2027121.jpg
-
-In the full board photo the QCA8337 is under the small shield at the top
-left and the IPQ5018 is under the diagonal shield in the middle. They
-are a few centimetres apart, judging from the photo, and I cannot see
-magnetics or common-mode chokes between them.
-
-Just outside the chamfered corner of the QCA8337 shield, between the two
-chips, the silkscreen shows eight capacitor positions in pairs, C548 to
-C555. In the forum photo, parallel traces appear to run from this group
-towards the IPQ5018 shield. That looks like AC coupling on the four
-pairs, but from the photos I cannot tell whether they are populated,
-what their values are, or whether they are capacitors at all rather than
-0 ohm links. I also cannot identify any bias or termination parts, so I
-cannot say whether it matches the arrangement in the Micrel note.
-
-The OpenWrt DTS for this board sets qcom,dac-preset-short-cable on the
-IPQ5018 GE PHY. The qca,ar803x.yaml binding describes it as adjusting
-amplitude, bias current and error correction for a PHY connected to
-another PHY over a short distance. There is no equivalent setting on the
-QCA8337 side.
-
-Thanks,
-Yongzhao Chen
