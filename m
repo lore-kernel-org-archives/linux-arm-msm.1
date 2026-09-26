@@ -1,236 +1,132 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej2-f41.google.com (mail-ej2-f41.google.com [74.125.228.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CA2939656E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 19:56:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F53F378D8E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 21:52:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790452619; cv=none; b=IB0dItCK3Bptvyw5L0IaGbvey8cOiPciqOhrbDuAPZwgQWkPx6bkDhVB4ga/KxHUJqo7r7VKbZHf5ny7K+AsL4fnz/gqMo1Pu2wIXcpbnGFFvxDVaLpFZDOD6098wbMdI97+fLZPtfBYHWNHPH+LFyhQITTEVLHg21HdrgGeu8s=
+	t=1790459529; cv=none; b=uaKkoLyUT8EAkMpvF1X5qzmxG2pTAygFTAh6VWBmKS7JBqqNRQmS72fUAWPniXUWV5q0N7VhA+O/xaYj9JJr8t6N1BGQJNUlv1VbRjEAxdGqQi7DAwphH9jabexlWa69ebGUN4JTo5hFBqPx/X3Q2/Q1Zl978h0x+bRzbSBlhlU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790452619; c=relaxed/simple;
-	bh=LYsTZYTFw77y4vhzBNm5ZfPLRJ3QTOdjYnl4iGPDAfU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HYzAz7+r/LXgTQ2iOK7hFuhrQVOwBv9XckJW7VXRzmvKHWVnA57OIUSTuRMETfmPdiP7y0/9eVovM8JmrRbwoX7ga8d9+PDGD69drIk6uggEEozyv+Q+4jnBvkP3IOmgH4IpnwgAzFoo74NYloWIFOFR1y5EjmBQQW+UZ2t4krE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IVTubUNd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TPcbZm3F; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790459529; c=relaxed/simple;
+	bh=nozFzjCHoY9nJR0dTI8x7puPhIPAjPpq12LYsWc3nm8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Dtcw6IWIzCen95gdiNgQC/JcdNyle4X2znVLlojtEo8ZWsVwaVsYw86cxHeDaW+97Cb+k/sOhm4UOo+cHJ/T9iL0CiPaZsjtaawXVcaVnpv2RKUpUwSWKj+eP8sN05jpiGL2o+ZXv5s4vVXADShh5OSwLVDli5nx0m+nsUsSg/4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h2bdXPk+; arc=none smtp.client-ip=74.125.228.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IVTubUNd";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TPcbZm3F"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68QGxjw8499844
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 19:56:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hI5C4U1EW+2wjdrpG7VIcsYRtJ0qa1gaLwmcQGCX2QI=; b=IVTubUNdmJqrKIJH
-	Ac86WJRsz6Uu5Aozp5R4VwQB3XldecJZYVqX0nDaqJIdPqVWOmRR9zIGnKdcO7K9
-	h2+IMEV4uJLvtgSQHs09X1B80lneXccRL3iShrSn9zxTiW13rcS7p17ETbNhEGxg
-	feODvC8moIP2JjYSoh0b1VbKybFuQZ250RbQ3QYCqeH07xeT33DBWngikyEXB71b
-	dunMAYdK/LQcmEnilfUVa86Q9479j3U0OW51Zq4QDuPVgtwa2/LCNwe9wPb0DHI7
-	gokRM4v7S9F/r7FxiILVG3wmOF9c02kQOzAfdyBubtBgofxSpywh+Em4dNEEtdD6
-	SijxDA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx64ussf6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 19:56:57 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-342138eeff2so4717937eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 12:56:57 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h2bdXPk+"
+Received: by mail-ej2-f41.google.com with SMTP id a640c23a62f3a-c2dc50c6edfso34882866b.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 14:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790452616; x=1791057416; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1790459526; x=1791064326; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hI5C4U1EW+2wjdrpG7VIcsYRtJ0qa1gaLwmcQGCX2QI=;
-        b=TPcbZm3FK37VuCl7kIk1O3esAnIsKDj9dSlOonKcEajRw+J4/llgkr2sCYh/yBauNV
-         EyHJK/UM4d84Mz4zYm9G+uGzozhd4oi2bNuAo6QZNOg+LHMuMwqB6b0nWwBJ9pIoKr5M
-         3hHBJIzqok3//QM+p4sYHKhghgKcvxcDL8LEfmRCo/eQq9+EbArGfaIprPb4iEvV3/8C
-         pQXo9d3qN8ju9moisgn42b2hQZabpisHrpnwj3JH+ZHWSnnRnM4EGc+1baPThPM3t+FB
-         GZW3194v6bSxiBNcP7e80b2fXaAoLA7wkua5euoGHLnIPS3fjf0eOVsh8hTTQaE6yULG
-         36Sg==
+        bh=8GTHY8dj9isNKlVEtk2ciNN+C6fWLQRwd0CxCymnmGc=;
+        b=h2bdXPk+25Lg/c1XQ2vrZ1RzVvvfKgplaPbXHVXmYId2D4zNJ7UfZbW3lttaCft+As
+         E2FqJqX8eEzsfDcEBsgQHcoARGLDRg3HCgEXfxK5YVa09nQiD+mH90ZC83Wfyz0OTpId
+         +tJOlvJc1x/Ko9bMCfk94TPnAkiE8+4XFGZCYMG1YlVpguhpVvzR+Ahryn6GxrH+sYkw
+         ajsbcTObgpgyOC5FnbqdPp0JqMhd4QEqHIq9cYuE+X1TEeHc9unAMOf6bsTbZZ51ceGp
+         sA1MnpEwK1WiZg/MJmvUUHTeaX17CD+5/vAZu1Hmqvb2gp41gyh2bI5rMzbIiUtvWD+u
+         aRBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790452616; x=1791057416;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hI5C4U1EW+2wjdrpG7VIcsYRtJ0qa1gaLwmcQGCX2QI=;
-        b=kX93DnhLMC9kBjteHgTWOV6K1iL5Ef72IhktK6cM1mi8QVC0Rhn46Fvl4IZ43bc51g
-         KxJ5HgPop3W0eff8BOC5WVUcH87liiL3lQ+Swo9HsTWCC939U+d+JJYCvLH6M40BX58v
-         JYPA5B6RH6hqhWa/RO5KpsjagL9Dn5Lhn9O91YnYkuNI1iT5hCywt0mmBxSqz5v9bwia
-         3RzXTtSIVil8B+PgYkHjUZYtvphE3FS0TLHIQF+Tmq6h7FWV72YbleRmjDDPo4s3+FRr
-         +zxefyv7iTkgQsdNwRJ8plE9EW3Jj2dcC+j4AgM2Ehnvh/m5J3rNp3YhLP4J121C+k7N
-         JZUQ==
-X-Forwarded-Encrypted: i=1; AKwUvByVAR44aMemLMOwA9422h6qzKbt5e9rnFoS5kZZ6D0TyLqVp3RDIKjcICCRo4rvTOc0IpglDZ+AGYEM6qPj@vger.kernel.org
-X-Gm-Message-State: AFq9FYLcJe+ZFE0CsUX9tgiUgRWtYJbdPlWXOwte+cLpGLXuhgXTkjgf
-	wXGA+C6azXo7Qq3XvxdGLrXyb+VlCupgP+EFr9qkhEKZX7/6aIrPxbzO8dO8iho944bYuQfmJur
-	Lw2136izZKMCewX8KdeQAEIRzYjvtzt0+vTfALwcMUyf3DGIF9B130vSOdPkdhv5V7NS+
-X-Gm-Gg: AYBFou1LGKKTa1HYD+Q866AWrGMI0wft8wMIY8K/EYIJjTgznd8p+qDUNi3tyBsJ3Ko
-	U4+kZxCMik+rkCqrxqpaMNaSCT7yjrXrqG4vKmhO2zymIrfJMIZ07zyx2KVxWpjgzSl7pAMkzG6
-	FRCw/sUs/zkc4h2TeTRFcgM1y7lFy+CbDuhQZoTMONzc6xgoBOuUy9FWr4iCn4JhFcj5Dqa6zcy
-	vAPjTpoy8KFfAwWSG+bxEeZqb9twOMVjfcRtdb2DeFLrkMKKkQiP4rpQgKvVuV0gBR2QhnGiHO8
-	8fch5EK2Zf8lbYuydKR135OrD+E2BuqvIdq/CUUR6+KrMxPVTvukgWuaFGhnNvM1LUyhUJqyJ+v
-	Aj2BPU3oQSyDXaiZ2CTzshn3jBvaRovEZ
-X-Received: by 2002:a05:7300:de0b:b0:342:cbae:b1f7 with SMTP id 5a478bee46e88-342cbbdff28mr3273250eec.27.1790452616251;
-        Sat, 26 Sep 2026 12:56:56 -0700 (PDT)
-X-Received: by 2002:a05:7300:de0b:b0:342:cbae:b1f7 with SMTP id 5a478bee46e88-342cbbdff28mr3273214eec.27.1790452615533;
-        Sat, 26 Sep 2026 12:56:55 -0700 (PDT)
-Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3414407ea69sm17179025eec.7.2026.09.26.12.56.51
+        d=1e100.net; s=20260707; t=1790459526; x=1791064326;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8GTHY8dj9isNKlVEtk2ciNN+C6fWLQRwd0CxCymnmGc=;
+        b=kgHc1b10QLuTwhD7WcYrBqIPtpwaePt++ro+7PYu4yh6Jzvw7ToSD3j8TLoKF7CEAX
+         ngRRbjVhlkuSThDXza9Lqh5xgpJ1eNY0JrwTKv4Yu50JU3rAvpbZeu1smKvYM7xgi+Dd
+         Vpj464GScRNjMQg3J2I+BGZ+RAbClVYkSQ6F6Zu2Hd5aKn/zmVLuUbMDmofLMDywRrbI
+         TQhVxepNw/pMvvSJltndU9rWYRh5ZMSudxDoSXYp7W4pFIcYAiWYVvkjVq1YIMDnutEw
+         axPoeveJL6M4i+XXQfvF68JGTH8KRlcidSzDAEPnak91tFvb8fPlOEVrXHcGa+u/Ntax
+         IRqg==
+X-Forwarded-Encrypted: i=1; AKwUvBxnX8TYwMF550O82nSvgSU9F/Fga6F04eMpWaLjxQpD6uxyr1UO9AJCnqGJhsmyhmIIyJPenbBvnRSw1LcQ@vger.kernel.org
+X-Gm-Message-State: AFuF++nQeGRAjessi5WNohAf84p5PI//DYqjy2tubpUkg/jBroU/JgEV
+	JdxfoXGid58BgtV47rRMTxSkwaGgxEhZVxxaVEaF16HaLsU79eSNl8OE
+X-Gm-Gg: AYBFou0mpHh1IFjxEwdgp7q/ev8V8Fu1PLeTyUUf7Qd7d2hbHL0Xj48k2OMlSzuRYTs
+	duGTu9SeJBvr3glwAVNy445zu2+NJIomP6aMkr9dCdxyZE2tNueSdyn2129QEhJBLKvlaC3QxfR
+	RSCSQyu1PYsPYWvkIT9ehv0Mc3LejytxoijMCOENVVIVtyyRjMD1EU2MDD9ZGXQHadvoTSfQAVv
+	Cmr0cXGbokcgAB8TUzGv1CqY5993xcn+uM5q/dxM1QQZ1YAO3+bQjZmXi21DokEWtuv5ezuicMM
+	XdTMbju0ZwDvXC8xIPZNgGRayWExsM1s9ipXq5HQLrkgKbRiAAW5F4JoLGAMycjR9A9bbNJx9Cn
+	8RwnFd58eO20XxmCb2keRq285aIB++qIuM9u+QJxyPVzjLb0bHGJN/VHdAztLwn/qoFoUvYfCEq
+	jShVYNj4d50PwnuRUZ5RciJjgoBAU5xDYBT104mfAbwD7LVEKPSEtPWx0Sfg5UB215jRShLUqnA
+	47eVR25ymqP8GQOA7zUk/qD3StWkJN5mPQzFOVjRWpmhsWphv533SqiIBiK3dUcbgFtTAqk/H9X
+	rRCNcL2/yc/JcpXha7YE
+X-Received: by 2002:a17:906:c115:b0:c26:22ae:b66b with SMTP id a640c23a62f3a-c2ac2328075mr821985666b.15.1790459525741;
+        Sat, 26 Sep 2026 14:52:05 -0700 (PDT)
+Received: from localhost.localdomain (83-233-221-53.cust.bredband2.com. [83.233.221.53])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae7353f0asm274704166b.15.2026.09.26.14.52.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 12:56:55 -0700 (PDT)
-From: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Date: Sun, 27 Sep 2026 01:26:34 +0530
-Subject: [PATCH v5 2/2] spi: qcom-geni: Use GPIO to notify master of SPI
- target activity
+        Sat, 26 Sep 2026 14:52:05 -0700 (PDT)
+From: Yongzhao Chen <yongzhao.derek@gmail.com>
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: netdev@vger.kernel.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	Ziyang Huang <hzyitc@outlook.com>
+Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
+Date: Sat, 26 Sep 2026 23:51:52 +0200
+Message-ID: <20260926215152.376-1-yongzhao.derek@gmail.com>
+X-Mailer: git-send-email 2.45.2.windows.1
+In-Reply-To: <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch>
+References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch> <20260925210153.8717-1-yongzhao.derek@gmail.com> <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch> <20260926082129.1632-1-yongzhao.derek@gmail.com> <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260927-use_gpio_to_notify_master_of_spi_target_activity-v5-2-9b973623080f@oss.qualcomm.com>
-References: <20260927-use_gpio_to_notify_master_of_spi_target_activity-v5-0-9b973623080f@oss.qualcomm.com>
-In-Reply-To: <20260927-use_gpio_to_notify_master_of_spi_target_activity-v5-0-9b973623080f@oss.qualcomm.com>
-To: konrad.dybcio@oss.qualcomm.com, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>
-Cc: chandana.chiluveru@oss.qualcomm.com, Krzysztof Kozlowski <krzk@kernel.org>,
-        linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Praveen Talari <praveen.talari@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790452601; l=3505;
- i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
- bh=LYsTZYTFw77y4vhzBNm5ZfPLRJ3QTOdjYnl4iGPDAfU=;
- b=/Zd1tifboPqeD+SVtk/DxTxt97fWniJHlp5apQ72MRM0D7UCU1gc3YItV5drMn8dXo+BDmkpe
- nFEJyhMZN0QC1Wsf5bzwzUPlBVPEWgOQcOp1cL/piPkC0IuM9uYI/I9
-X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
- pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDA3OSBTYWx0ZWRfX0PmNYRvP5Z+9
- mubYj9vbGeLZdDNAJFl8O1buyO/Hsf/fYg1uSUDwBRSh1CB1esYIlEdmZHaYRnZL/WSY0CMszo1
- YH0CZumOMgYy78A/rO9+coj8s0eoFi4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDA3OSBTYWx0ZWRfX22tRPWa2/wi8
- YWIlU3qsTVHQ6EtoTNmK6ERUb5aY33sU6g8H8wrmnP0M79sCZSc9gVBzIxDaZjI+4C8VFw/gU9r
- 1uw/r2EBb6/7Y3ihCmQC77TXwOmriqCT4ah7Swj4Q2xbRXASZZp46q4mZmY0XYVvUEwxKWUd5nO
- x6trpDq1EQndkMHIXTStbzs5Q885+z6WI2EROuDj5TL5VatSJ9EF5bUC70uqunQF/oQhWCaTnmf
- mmn9B2ja0hUoosDbp6vPxXCgv7YKl6CBYoiMI5WzrSwpem829LzS1kNDrT/RIyiHtOeKi9+eODQ
- 2qS+uVyRA3gnlOK1Zi4fZ/rhok8OtcTHVUfsghnOIZmMmg8A+g0dZTXjDUnQlHCtJgP/42J2oLS
- 8LO/4EioNPr8Qz6by1KGxRrczLv7UjfjrqKCB2fC0c6F535Iasi/ayYxS3c5+n0U38wsDTFhcMC
- UbUSQOKgpKImAHjCN+w==
-X-Proofpoint-ORIG-GUID: MkYBMtdo87SFmZ0D07t65kQgNMrk2a6F
-X-Authority-Analysis: v=2.4 cv=E6xYNqdl c=1 sm=1 tr=0 ts=6ab82389 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=HWq8w0C2B1yOpf0TK-AA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: MkYBMtdo87SFmZ0D07t65kQgNMrk2a6F
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 priorityscore=1501 suspectscore=0 impostorscore=0
- malwarescore=0 adultscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260079
+Content-Transfer-Encoding: 8bit
 
-When operating in SPI target mode, the GENI controller relies on an
-external GPIO to notify the SPI master about the target's active state.
+Hi Andrew,
 
-Add support for an optional ready GPIO that is asserted when a target
-transfer begins and deasserted when the transfer completes, is aborted,
-or hits a timeout. This allows the target to explicitly signal its
-availability to the master and ensures the GPIO is released in all error
-and completion paths, preventing the master from observing a stale or
-incorrect target-ready indication.
+> The IPQ5018 PHY driver does have cable test support, have you tried it
+> out?
 
-The ready GPIO is intentionally made optional and is requested only
-when target mode is enabled. This preserves existing behaviour for
-systems that do not require the signal and avoids regressions on
-deployed platforms where the GPIO is already controlled from userspace.
-Targets without a ready GPIO continue to operate unchanged by using
-devm_gpiod_get_optional().
+Yes. I ran it seven times on the IPQ5018 PHY under OpenWrt 6.18.44
+(NSS build). All four pairs reported OK each time. This was a working
+link, so the result does not show what the QCA8337 sees during a failed
+boot, or confirm or rule out insufficient attenuation.
 
-Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
----
- drivers/spi/spi-geni-qcom.c | 21 +++++++++++++++++++--
- 1 file changed, 19 insertions(+), 2 deletions(-)
+I also ran an A/B test on the OpenWrt 6.18.52 backport, using identical
+kernel and rootfs contents. Before the initial PHY software reset,
+both paths read register 0x14 once and unconditionally wrote it once:
+either the original value, or the value with SmartSpeed disabled.
 
-diff --git a/drivers/spi/spi-geni-qcom.c b/drivers/spi/spi-geni-qcom.c
-index bced6279a062..91e75e213f92 100644
---- a/drivers/spi/spi-geni-qcom.c
-+++ b/drivers/spi/spi-geni-qcom.c
-@@ -10,6 +10,7 @@
- #include <linux/dmaengine.h>
- #include <linux/dma-mapping.h>
- #include <linux/dma/qcom-gpi-dma.h>
-+#include <linux/gpio/consumer.h>
- #include <linux/interrupt.h>
- #include <linux/io.h>
- #include <linux/iopoll.h>
-@@ -118,6 +119,7 @@ struct spi_geni_master {
- 	int cur_xfer_mode;
- 	const struct geni_spi_desc *dev_data;
- 	struct notifier_block panic_nb;
-+	struct gpio_desc *ready_gpio;
- };
- 
- static void spi_slv_setup(struct spi_geni_master *mas)
-@@ -176,6 +178,9 @@ static void handle_se_timeout(struct spi_controller *spi)
- 	xfer = mas->cur_xfer;
- 	mas->cur_xfer = NULL;
- 
-+	if (spi->target)
-+		gpiod_set_value(mas->ready_gpio, 0);
-+
- 	/* The controller doesn't support the Cancel commnand in target mode */
- 	if (!spi->target) {
- 		reinit_completion(&mas->cancel_done);
-@@ -936,8 +941,12 @@ static int spi_geni_transfer_one(struct spi_controller *spi,
- 	if (mas->cur_xfer_mode == GENI_SE_FIFO || mas->cur_xfer_mode == GENI_SE_DMA) {
- 		ret = setup_se_xfer(xfer, mas, slv->mode, spi);
- 		/* SPI framework expects +ve ret code to wait for transfer complete */
--		if (!ret)
-+		if (!ret) {
-+			if (spi->target)
-+				gpiod_set_value(mas->ready_gpio, 1);
- 			ret = 1;
-+		}
-+
- 		return ret;
- 	}
- 	return setup_gsi_xfer(xfer, mas, slv, spi);
-@@ -1023,6 +1032,8 @@ static irqreturn_t geni_spi_isr(int irq, void *data)
- 		if (dma_rx_status & RX_RESET_DONE)
- 			complete(&mas->rx_reset_done);
- 		if (!mas->tx_rem_bytes && !mas->rx_rem_bytes && xfer) {
-+			if (spi->target)
-+				gpiod_set_value(mas->ready_gpio, 0);
- 			spi_finalize_current_transfer(spi);
- 			mas->cur_xfer = NULL;
- 		}
-@@ -1192,8 +1203,14 @@ static int spi_geni_probe(struct platform_device *pdev)
- 	init_completion(&mas->rx_reset_done);
- 	spin_lock_init(&mas->lock);
- 
--	if (spi->target)
-+	if (spi->target) {
- 		spi->target_abort = spi_geni_target_abort;
-+		mas->ready_gpio = devm_gpiod_get_optional(dev, "ready",
-+							  GPIOD_OUT_LOW);
-+		if (IS_ERR(mas->ready_gpio))
-+			return dev_err_probe(dev, PTR_ERR(mas->ready_gpio),
-+					      "Failed to request GPIO\n");
-+	}
- 
- 	pm_runtime_use_autosuspend(&pdev->dev);
- 	pm_runtime_set_autosuspend_delay(&pdev->dev, 250);
+Across six alternating warm boots on this board:
 
--- 
-2.34.1
+- Writing back 0x082c failed all three times. PHY4's CTRL1000 read
+  0x0400, register 0x11 read 0x1030, and the CPU link did not come up.
+- Writing 0x080c worked all three times. CTRL1000 read 0x0600 and the
+  CPU link came up at 1 Gb/s.
 
+The pre-reset value was 0x082c in every run; the two written values
+therefore differed only in the SmartSpeed enable bit. Writing the
+original value back did not avoid the failure, despite the same MDIO
+access sequence. This strengthens the case for disabling SmartSpeed
+on this link, but does not establish the electrical cause.
+
+I'm open to selecting the workaround through DT, so that it is enabled
+only on boards known to need it. What I can document at this point is
+the PHY-to-PHY connection, the reproducible boot failure and the effect
+of disabling SmartSpeed. I have not established whether the cause is
+the board's electrical design or something else.
+
+Would that be sufficient justification for a DT property, with the
+underlying cause left open in the commit message? If so, would you
+prefer a generic PHY property to disable downshift, or a
+Qualcomm-specific property for this workaround?
+
+Thanks,
+Yongzhao Chen
