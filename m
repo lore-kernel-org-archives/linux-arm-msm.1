@@ -1,112 +1,94 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5057D3A2E00;
-	Sat, 26 Sep 2026 08:41:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A56E37478;
+	Sat, 26 Sep 2026 08:49:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790412094; cv=none; b=HZFmAOWfvPSKo2nM6MKTJar6pLw0Rkjv3YSFJWezW2FEYcwrPwR8ucr/tLlxMxNwH1tz+Gftfm/iFrv5BCMKef/EwEzV+iToGSOc3vpp0i56RazB2y+bo9Ro5kvBb+EIgyaIsgQqD0KJhal2movhYXnHNhDh/trxA32/LZLIGW0=
+	t=1790412559; cv=none; b=jGMP3M4URTQhD+k5c+3bwEFleB7GzBe6yUGDn3QIXsVmFJo3T9lVJau4OXYvK/h7f0zJxOVaURijg4R/wqxnpMX5dj5SmZqrcD4g2R1cto36OI7xta3ieaWQPdFm9pfZbyjj4ht3yVYAgj3fENKSBNJXwL70QGr1X2BIPdunfaY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790412094; c=relaxed/simple;
-	bh=+U9/w5AoIy43URp6QkdXdBTkBCIkzB7HlS6qAzlR47M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=DRZ/qFStXZE8afGaE7EEjIfgP9NQU8FmJPpQRxw5QThBv+HccGbP2ZwYlMHRMl/4fAqedNy8kgUXazTp7g9S4OQlmUzqQ5pVSYxVMzRzT5mRzsqd0ikPSfvCKwa7IK7NX9ymkNBMiPWrZjpcNz/jt69670Z8KRewnS6OyAQZW54=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KxfUrhr9; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1790412559; c=relaxed/simple;
+	bh=z2Y2BYaLt4DQXbLx6S/OQNCYizRiWRx0Wa2mXGLaif4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=prcv/OZpM3FFTlDVlhmme168Dbl9b72Rm/Snkcl3f3fRxwOxvBFQ8+sruWUuKYOwN/nNWqhfsT84ybPvvjPDvE+BhxYx+v7B89FFMtrFiH+wBoT5UA/M1i7NjKg7MP2zA+ooaVCiirW6pH0f5WebEeDznElTRHjj+PoLurASNPQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HjNtj4VZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KxfUrhr9"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 19BD1C2BCF4;
-	Sat, 26 Sep 2026 08:41:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1790412094;
-	bh=+U9/w5AoIy43URp6QkdXdBTkBCIkzB7HlS6qAzlR47M=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=KxfUrhr9aNYVnJ9Q6SCMgc7Ag6neQqQr/k4qWK3KwwTmvXHODv0gPwVjt0G1iBPMv
-	 cqhrLxLaOxpAtKZGVsJwDAxqmvsNWOi69Uy7OaIMOoMnxgLAQTysE7doQdkiuhM+iS
-	 qTnktZKBd0KWZNChsq0+Ucz2dwdqnF1d15Q/g+dAc78pGqNnsYBuHQ7DMzjv1Ae1Wz
-	 /ZbgajXhG3k6VZ1he7gzn0zzuS5wDTADU29lyqHtLIyE1ENxcSVsX+us561YNzD3bI
-	 tD8TfU5jLj8WYOzQ+i3aN+sHNuKObaIIJWgBnuvDnXegCBnopwuIx7xHLQJze+A0rz
-	 j4Zw7v5Vg7Xxw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02D3CC98338;
-	Sat, 26 Sep 2026 08:41:34 +0000 (UTC)
-From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Sat, 26 Sep 2026 18:41:34 +1000
-Subject: [PATCH v5 3/3] arm64: dts: qcom: sdm670-google-common: enable
- debug uart
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HjNtj4VZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC1831F000FF;
+	Sat, 26 Sep 2026 08:49:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790412558;
+	bh=uzhsfGFro+u+wLnkktG3mmK5Fb3Rm5c/4uVwSXwXcXw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=HjNtj4VZiGyoV3iD3U21Lcv86RGkT7ycywPtTwek0rq+SsVB4S9QMMz2qwfmifwhl
+	 cF4y60iTTlTtzNtVat5gPZ/QGnoYaJgMzdixm1y6kTSW8bnkZfcAKHvYuxPz1LaNyU
+	 WidkIrwv+N57PyaFk95Ardt5ts+bxzTNV1Gd0j3s5S0pDsSryNUoWnCqYzazEA8SjG
+	 TiFPNAd+Uo8US8WLjlHlW9fAniJXcGzpuMAFW7vLJIRynAxrC6AVzSjoMmI+9F03J2
+	 7aNil5IetD3ETf5nSYM89bI4s8Wn5y5fTY+nhO0BuTCFuUlvMqKpZbBDwuME0UHFl7
+	 auorkI18U/z6g==
+Date: Sat, 26 Sep 2026 10:49:04 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Frank Li <Frank.li@oss.nxp.com>, 
+	Sumit Kumar <sumit.kumar@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Jeff Hugo <jeff.hugo@oss.qualcomm.com>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, dmaengine@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mhi@lists.linux.dev, 
+	linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org
+Subject: Re: [PATCH v2 4/5] PCI: epf-mhi: Add batched DMA read support
+Message-ID: <ep3rjgc4idxt2ta53cebdzpqvyvvm2rnpxbo2ka3sqcmgqwdb2@cwi6gixldtxg>
+References: <20260803-dma_multi_sg-v2-0-c12bb05e42d6@oss.qualcomm.com>
+ <20260803-dma_multi_sg-v2-4-c12bb05e42d6@oss.qualcomm.com>
+ <anTARsISvCPUA9_v@SMW015318>
+ <szx7jctqp4h6yhgvhwmiqfjtsemwlu3iardtntp4nfc22u3bfi@ux5ioixmfdnh>
+ <90fcc9ff-4ba6-4e16-a322-17ad8e4a51e7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-3-db74ff64a7e7@samcday.com>
-References: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-0-db74ff64a7e7@samcday.com>
-In-Reply-To: <20260926-pabloyoyoista-debug-uart-on-rdacayan-next-v5-0-db74ff64a7e7@samcday.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>, 
- =?utf-8?q?Pablo_Correa_G=C3=B3mez?= <pabloyoyoista@postmarketos.org>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Sam Day <me@samcday.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790412092; l=1026;
- i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=4t9TyOvqm1xc8L6ZKobS6WwoS/3BC2akDdnkT3vrAH4=;
- b=a1Q+xMLta01WnB0B9K5UPih450rSeVSbYPH7iumYaFjpaxqi9ysbCqh0Ni3g867P7KW0LxBIg
- tlnfY6nB0ZmA14QlfotxzQyUM9yaf1BQAmMAeLJO8vUQtXwO0Q+jlZJ
-X-Developer-Key: i=me@samcday.com; a=ed25519;
- pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
-X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with
- auth_id=595
-X-Original-From: Sam Day <me@samcday.com>
-Reply-To: me@samcday.com
+In-Reply-To: <90fcc9ff-4ba6-4e16-a322-17ad8e4a51e7@oss.qualcomm.com>
 
-From: Pablo Correa Gómez <pabloyoyoista@postmarketos.org>
+On Tue, Sep 15, 2026 at 10:42:39AM +0530, Sumit Kumar wrote:
+> 
+> 
+> On 8/14/2026 8:22 PM, Manivannan Sadhasivam wrote:
+> > On Thu, Aug 06, 2026 at 12:11:34PM -0500, Frank Li wrote:
+> > 
+> > [...]
+> > 
+> > > > +       config.direction = DMA_DEV_TO_MEM;
+> > > > +       ret = dmaengine_slave_config(chan, &config);
+> > > > +       if (ret) {
+> > > > +               dev_err(dev, "Failed to configure DMA channel for %u-buffer batch read: %d\n",
+> > > > +                       num_buffers, ret);
+> > > > +               goto err_unmap;
+> > > > +       }
+> > > > +
+> > > > +       desc = dmaengine_prep_dma_sg(chan, dst_sg, num_buffers,
+> > > > +                                    src_sg, num_buffers,
+> > > > +                                    DMA_CTRL_ACK | DMA_PREP_INTERRUPT);
+> > > Although both side memory address, but as previous discussion, which is not
+> > > memcpy, still memory to IO space transfer.
+> > > 
+> > I agree, it is peripheral DMA nevertheless.
+> > 
+> > > Maybe enhence device_prep_peripheral_dma_vec(). Actually eDMA still split
+> > > it to small trunk and linked together.
+> > > 
+> > By enhance you mean keeping the semantics of device_prep_peripheral_dma_vec()
+> > API? I don't know how it helps because we would most likely end up with two
+> > vector arguments and duplicating scatter-gather lists.
+> Frank can you comment on this.
 
-This has been tested on the Pixel 3a with USB Cereal board
+Frank, ping!
 
-Signed-off-by: Pablo Correa Gómez <pabloyoyoista@postmarketos.org>
-[sam: drop the board-level tx/rx pinconf and stale Depends link]
-Assisted-by: LLM
-Signed-off-by: Sam Day <me@samcday.com>
----
- arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-index b4854801a5f5e..79d66fd2d6e41 100644
---- a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-@@ -26,7 +26,9 @@
- /delete-node/ &gpu_mem;
- 
- / {
--	aliases { };
-+	aliases {
-+		serial0 = &uart12;
-+	};
- 
- 	battery: battery {
- 		compatible = "simple-battery";
-@@ -693,6 +695,10 @@ ts-switch-pins {
- 	};
- };
- 
-+&uart12 {
-+	status = "okay";
-+};
-+
- &usb_1_hsphy {
- 	vdd-supply = <&vreg_l1b_0p925>;
- 	vdda-pll-supply = <&vreg_l10a_1p8>;
+- Mani
 
 -- 
-2.55.0
-
-
+மணிவண்ணன் சதாசிவம்
