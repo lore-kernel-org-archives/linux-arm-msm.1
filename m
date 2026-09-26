@@ -1,233 +1,178 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AFB0303A37;
-	Fri, 25 Sep 2026 22:45:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1625C286D60
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 00:18:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790376360; cv=none; b=Cr+uII/3Z/tkfFc+0dP/3ZRRT2JHzcXZY5TkCA/XNW2JO4stuxKK+VyZbBDC4+nK+RU3+ezAXQbbChLeg4FLw9jmJNbdtJqUuMOwb/UepzaAck/LaQJmRJPh8elP3oQCtsIlWRxkiQQCwnGuaBIceWh0vBzrCEhjcYGTM1loBjw=
+	t=1790381920; cv=none; b=aDIV3scCocYIAgreVUXHmsxu7ZJqojV6Y2vA3+MzdvNHfY9XdylmVNq28jd6z5EZfZRnKqt/iivKwYWvHNnDRBkvZ8ArPHkgiwHCh1mDtdTHBHFwfN+yPPKdsATHFYAmWByyXOZb0zJGvGiH3p20SkIofh2lRHeAnewwlsEZ8BU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790376360; c=relaxed/simple;
-	bh=1LTLSmmDIm3zEHWlztd9u1KmLa10pIzF1K9lw/Xe3uo=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=gT0pza95DKO4h50vZ2T+2AAN8PiAtMTwWmOcXbW1I5gmbQruvDeJTUvk9+xECBp/U5YpAFNW1bQH2yU6cG/3WjCkBAxajVJcjWWv0yn/HByxc0j4OitClxR6saaqlHxC6C8lLu+u5F/ElLTEUlvh1e25xbC7BaTEQQlzQ+EDvyM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=NRt1HdD0; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=f49sx4Ub; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1790381920; c=relaxed/simple;
+	bh=VMH0mqnfAjpj745TSAU4jjYfnm19/jeV8l68qOpJ5oo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ePbu1wDl3KZ0R8Vedr3+i5gJ4uXn3PbjOOxKadxXsPBBSJL+OqIv9P16jQTrv+j5cvlaN79LbVjwqarDRPyIOvpKdqzLp1YQTo00UM50UP7wm9HW/inA1lbX54cdVTuxYnPfjdWsF5Cw4DP0vwVJTWvb+6qqRMcXqJ9sx22WrOA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=p4Hmps4j; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RQeNK50C; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="NRt1HdD0";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="f49sx4Ub"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1790376346; bh=3fP4A8XqSiZproBMyI4rt5Z
-	MRgAfuAYNcNwBKsQAy3c=; b=NRt1HdD014G4QY7CdzYDHjQbkvWTm6mHN46uNbM7XSyQIwLqXo
-	J2SN5jP5e2++SSwC3foVKgx8Xidj2yxSgvGeZR8jeLG+Cqq7GMr2Chi/7GUWjP67vmXdrdkqwVB
-	M3vAl658btE21945iZuANxlZd/gw/dzAViHyqZ9Bz44DAa1iJr6LXQiZ8IWsJBcykdjYTUKs2Tr
-	pcnowi6Nruh71R6IP1WHpqMH32z+Mx5HFNU2AxoLSvyvyNQocirqum7/MZAw823V/itty8BBySc
-	nrpx1hXW36ipJ/HFCzAxWgyGc92TrbLIl3kPYUPzFpmEa19bYJUM5thE5BXLfqIUm+w==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1790376346; bh=3fP4A8XqSiZproBMyI4rt5Z
-	MRgAfuAYNcNwBKsQAy3c=; b=f49sx4UblQKoqfUpRSOpx7ezK1eYpLiC47p2aQg2M4FSBFLDEl
-	O3cmF693e3Db/DRdJz5iX96ZYRKZWRohtZBw==;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="p4Hmps4j";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RQeNK50C"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68PNcUGu3487643
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 00:18:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=PLHqighbw75XO+o+nLzJ9wS8
+	/3X1F2owG1+Hq4/kqUs=; b=p4Hmps4jrZ8v8NOnHAtjkQGpaTWCzo/gba9lsiI1
+	sfiUt9MsDzs8qsTVX/9wzuJbPB95+NQ9twQkQLlU6rhNXNh/wf/fpT+wycM937vH
+	U4GO8A8c/awXNnYuofz2626/q114zkGeolI/4Lv2EuFVSEUufh0wc83JrYaG0lTd
+	PiYc1qnPYLk8P534hrwmQ3yeF1iDG6KS5dAswzLXjFL/v5Dh4iGW3qev2LOGclTB
+	lFq6jpCIVvD/k6aks2YPoc4Rk8s7qbErzSb5bUlmLGcBEAusC51RbLmsHNj1TwgI
+	n8Fzleox9kfudKZucVdb3KF6azN9V2TubftgxLM9vZA55A==
+Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwwjc9759-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 00:18:38 +0000 (GMT)
+Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-1416f32fe11so879810c88.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 17:18:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790381917; x=1790986717; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=PLHqighbw75XO+o+nLzJ9wS8/3X1F2owG1+Hq4/kqUs=;
+        b=RQeNK50CkDauzspCqUMCMNkp4i0xHUj8d4g5F37EX3hsbNnIrk7jYJDmmpiF51vZJS
+         OAUXhqN9JzPR4OJPc/SaXYSahlxKQlUWbye1sM5cL/wX/ZjsE+89XW2h8RFAckqsi7ZS
+         Eyj+vrg4C9ZM5G7/4Zbu08/qE7KhQDIzfAc9hKhoSaULC5dphpHNPxqh11j+xlmcRXbd
+         uPdpfZ+I7ql+veh89dTcHp0N1US7UTx/ofHp80PrKNEq0dv6TaCV67r63V5hzFQg+ygk
+         0AxcXD7UUtW8G8LLodL3YQLmmprRF6msomOjHcmAXELyaf20ZK44ME/jkjmWackJH4Du
+         +nuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790381917; x=1790986717;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PLHqighbw75XO+o+nLzJ9wS8/3X1F2owG1+Hq4/kqUs=;
+        b=CudjULaZmrBbEfua3V7ieOUhFSXjjh9V4ymYKUjGuEstSKu3GqZqpwscxEUV81aOuc
+         Bao/TS6W6LFYXI95pzyDvgXueheJ4T+KAINyuZO8DEuFVpHryWe/uGvx0+RhAzQhJBjh
+         vNqPUp9UHguSJt99GOR1GvNtRJxXLmEPDs/m5fXi2PIprEH/TRQQhZohZ9bRIDvyPTW9
+         DCeI454NF5hxEntuRViz+QYmIQBM6y8AzI6Y3/MWvT+KbDA8qDga9PBbROGWZ3NJf9lP
+         KGoNsw/gOrT3Yt7Suqbh60GwtznmcrgHahAjH88KFcNe7gp2H/6hTtdTlPbWpSoilgWt
+         9EgA==
+X-Forwarded-Encrypted: i=1; AKwUvBxj2FrhTiayQ85RIuwoCgYAYqlXojJvMqk22fSIk7+9Som6GrLc8hoOsIlnqVSHBm+xyguwoM6ij4RdewsS@vger.kernel.org
+X-Gm-Message-State: AFuF++lazHVgFTu01Gqs62txxF3g4646m3zsihZ2C5Y5+fMB66TfSB58
+	N6MWt/UBf0ZOqQJbrddGqQVzVrUxXXcO3Pu0N6/8LdFBcfcWzpw1Wo03M8irraqxjVbs3NZ8rJB
+	5WZhEs7R0T5IwOdy94QpPtdYRhL1Z/SL/FeOINL1nU/435V7S7dKOdtQKw2ayiPBUNXS2
+X-Gm-Gg: AYBFou2wt2SB2ZZkt/AWLJyxKdZTOuMG3CPlyuzfuy0G+r8OgfMjnESm61lBzbfMr1k
+	9htvaWteYqotpbelMkB+uDXp5NFCvVSoREyfVChr2VtNXP17LcdlGSBndj42iiC0qPzC6jc3tZB
+	WZjotbSUeXfpBjDe9Cmv2eHvP6yXb5b3c0G4le8mOYUtAjsibllI2+/qD1cAzeQwneS5j0fjSMI
+	zBGZvdFMj73/c3a3hn0B1J6DsjmgnGhkz32NmZD1A9rYbPhRa0WpK3eeeOEvFg4vUbVrlAKW3Hv
+	u63tr59wWXXi5GaCbCmtBZO2bkovQyEifaO63aFTCQ5O/W4fka10Ik6R5yNIoVNxYfr0F2X7bie
+	RDaDXidz78ebqr09sfV+paAnJG9jL4Yv+LMT9Brat9w==
+X-Received: by 2002:a05:701b:2612:b0:145:4ef:e905 with SMTP id a92af1059eb24-146d096bfb9mr1141137c88.42.1790381916822;
+        Fri, 25 Sep 2026 17:18:36 -0700 (PDT)
+X-Received: by 2002:a05:701b:2612:b0:145:4ef:e905 with SMTP id a92af1059eb24-146d096bfb9mr1141114c88.42.1790381916202;
+        Fri, 25 Sep 2026 17:18:36 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ac67c505sm7988612c88.5.2026.09.25.17.18.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2026 17:18:35 -0700 (PDT)
+Date: Sat, 26 Sep 2026 08:18:29 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <quic_jkona@quicinc.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/3] arm64: dts: qcom: glymur: Add videocc sleep clock
+Message-ID: <arcPVcaWqnX-tG6O@QCOM-aGQu4IUr3Y>
+References: <20260924161152.1162301-1-shengchao.guo@oss.qualcomm.com>
+ <20260924161152.1162301-3-shengchao.guo@oss.qualcomm.com>
+ <0e80efa9-9377-474e-99f5-d458d81bfcde@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Sat, 26 Sep 2026 00:45:46 +0200
-From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
- <barnabas.czeman@mainlining.org>
-To: =?UTF-8?Q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
-Cc: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, Jingoo
- Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Helge Deller <deller@gmx.de>, Liam Girdwood
- <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Sumit Semwal
- <sumit.semwal@linaro.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Jessica Zhang <jesszhan0024@gmail.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dmitry Torokhov
- <dmitry.torokhov@gmail.com>, Henrik Rydberg <rydberg@bitmath.org>, Rob Clark
- <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav
- Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>, Marijn Suijten
- <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fbdev@vger.kernel.org,
- linux-input@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org
-Subject: Re: [PATCH RFC 10/10] arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable
- display, backlight and touchscreen
-In-Reply-To: <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
-References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
- <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
-Message-ID: <6374e0a9d6ab38436d8f38c3903e1f78@mainlining.org>
-X-Sender: barnabas.czeman@mainlining.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0e80efa9-9377-474e-99f5-d458d81bfcde@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDAwMCBTYWx0ZWRfX8iBnTdN85VLz
+ P4tyHgiKaWAvwKwJD7ymr7RFepAVCFIb5f8Edj1nYjgjIBjVCZLl3kUt8hxUc+Aa9hyvxTVL/AT
+ 9MF+pZAkGwYMHRzeb1zKhwQc7uD937Y=
+X-Authority-Analysis: v=2.4 cv=dZwVTnXe c=1 sm=1 tr=0 ts=6ab70f5e cx=c_pps
+ a=JYo30EpNSr/tUYqK9jHPoA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=ztxlnROUaC2VjM3YxSgA:9 a=CjuIK1q_8ugA:10 a=Fk4IpSoW4aLDllm1B1p-:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDAwMCBTYWx0ZWRfXw40e0eoed/VG
+ V3n01DgcUs9XNRB8Ol/3UT3VlE1sDI+eRAq2xtA51WXOJ2Nqp8sn1lpyTbbZZDA443MmKMQJJTH
+ nJa3tCwOZBrhHQBXbLUBb6L+maVz+3T8Tc1tnzja2GlDCo7x0/taZhB5wnt+u/ZFFAdUY476axw
+ GRrF77wvmDkZL/5QJ8Tpo0NexeK4cdpEy342xHvEYuzh7bwqWmh04UYUoNFfzLzOt6vl+CKELmE
+ ZJZeKwaqmUrIPgNP0gHo462Yat/R6+8jEX6oO1Es4EBEn6+T0ne2WXrj5cZvEgnKfa3ChHaKJB8
+ eXYUtE6EssjSp5or1LE7FhX//xo/7zwS0hAT0iUJka9zMo5jsUFmU4ATYTeEQ/RHVE3aoXaYkIv
+ gnD8CHyJDpo3/XaFZAGW0WBpHVUVXr5QnTJycC6O2/wOnFWO+DqhmDXBVLfTdyl2NJ+fg8ErouS
+ yDBFK3fxFaO2pxhcPHA==
+X-Proofpoint-GUID: AbFGJOBU31F9qNZE6QAL8Fm83ZZ5g3AQ
+X-Proofpoint-ORIG-GUID: AbFGJOBU31F9qNZE6QAL8Fm83ZZ5g3AQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-25_05,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0
+ phishscore=0 priorityscore=1501 adultscore=0 clxscore=1015 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260000
 
-On 2026-09-11 10:51, YİĞİTCAN KAVAKLI wrote:
-> Enable the display subsystem (MDSS/MDP/DSI0), Kinetic KTD3136 
-> backlight,
-> and Novatek NT36672A SPI touchscreen on the Xiaomi Redmi Note 8 
-> (ginkgo).
+On Fri, Sep 25, 2026 at 09:19:49PM +0530, Jagadeesh Kona wrote:
 > 
-> Hardware nodes added:
-> - Fixed LCDB regulators (lcdb_lab and lcdb_ibb at +/- 5.5V)
-> - MDSS and DSI0 with Tianma 1080x2340 FHD+ video panel
-> - I2C1 backlight node at 0x36 with PMI632 GPIO 6 hardware enable
-> - SPI2 touchscreen node at CS0 with GPIO 88 interrupt and panel 
-> follower
->   reference
-> - Touchscreen active pinctrl definition on GPIO 88
+> On 9/24/2026 9:41 PM, Shawn Guo wrote:
+> > The videocc node supplies only the two XO inputs. videocc-glymur.c
+> > expects a third input, DT_SLEEP_CLK, and uses it as the parent of
+> > video_cc_sleep_clk_src, so that RCG cannot resolve its parent and ends
+> > up as an orphan clock: any clk_set_rate() on it fails, and it shows up
+> > parentless in /sys/kernel/debug/clk/clk_summary.
+> > 
+> > Nothing is broken at runtime today because VIDEO_CC_SLEEP_CLK (0x8138)
+> > is listed in video_cc_glymur_critical_cbcrs and is therefore force
+> > enabled through regmap, bypassing the clock framework; the sleep source
+> > simply keeps whatever rate the bootloader left. The orphan still blocks
+> > any future rate management of the video sleep path.
+> > 
 > 
-> Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
-> ---
->  .../boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 100 
-> +++++++++++++++++++++
->  1 file changed, 100 insertions(+)
+> Hi Shawn,
 > 
-> diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi 
-> b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> index 
-> 59042a5937535c4acda064fa0f865f4f5a52d01b..f4b9e2092a814e56cdc23218025cb4166dec110a 
-> 100644
-> --- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> @@ -26,11 +26,30 @@ / {
->  	chassis-type = "handset";
-> 
->  	qcom,msm-id = <QCOM_ID_SM6125 0x10000>;
-> +	qcom,board-id = <34 0>, <34 1>, <34 2>, <34 3>, <34 4>, <0 0>;
-> 
->  	aliases {
->  		serial0 = &uart4;
->  	};
-> 
-> +	lcdb_lab: regulator-lcdb-lab {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "lcdb_lab";
-> +		regulator-min-microvolt = <5500000>;
-> +		regulator-max-microvolt = <5500000>;
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +	};
-> +
-> +	lcdb_ibb: regulator-lcdb-ibb {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "lcdb_ibb";
-> +		regulator-min-microvolt = <5500000>;
-> +		regulator-max-microvolt = <5500000>;
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +	};
-> +
->  	chosen {
->  		#address-cells = <2>;
->  		#size-cells = <2>;
-> @@ -356,6 +375,13 @@ irled@1 {
-> 
->  &tlmm {
->  	gpio-reserved-ranges = <0 4>, <30 4>;
-> +
-> +	ts_int_active: ts-int-active-state {
-         touch_default: touch-default-state
-> +		pins = "gpio88";
-                 pins = "gpio87", "gpio88";
-> +		function = "gpio";
-> +		drive-strength = <8>;
-> +		bias-pull-up;
-> +	};
->  };
-> 
->  &uart4 {
-> @@ -369,3 +395,77 @@ &usb3 {
->  &usb_dwc3_hs {
->  	remote-endpoint = <&pmi632_hs_in>;
->  };
-> +
-> +&mdss {
-> +	status = "okay";
-> +};
-> +
-> +&mdss_mdp {
-> +	status = "okay";
-> +};
-> +
-> +&mdss_dsi0_phy {
-> +	vdds-supply = <&vreg_l7a>;
-> +	status = "okay";
-> +};
-> +
-> +&mdss_dsi0 {
-> +	vdda-supply = <&vreg_l18a>;
-> +	status = "okay";
-> +
-> +	panel: panel@0 {
-> +		compatible = "tianma,fhd-video-ginkgo", "novatek,nt36672a";
-This should be moved out from the common, you should split the 
-devicetree becasue
-ginkgo and willow have three display variants:
-- nt36672a tianma and shenchao with novatek touch controller
-- ft8719 huaxing with focaltech touch controller
-> +		reg = <0>;
-> +
-> +		reset-gpios = <&tlmm 90 GPIO_ACTIVE_LOW>;
-> +		vddio-supply = <&vreg_l9a>;
-> +		vddpos-supply = <&lcdb_lab>;
-> +		vddneg-supply = <&lcdb_ibb>;
-> +		backlight = <&backlight>;
-> +
-> +		port {
-> +			panel_in: endpoint {
-> +				remote-endpoint = <&mdss_dsi0_out>;
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&mdss_dsi0_out {
-> +	remote-endpoint = <&panel_in>;
-> +	data-lanes = <0 1 2 3>;
-> +};
-> +
-> +&qupv3_id_0 {
-> +	status = "okay";
-> +};
-> +
-> +&i2c1 {
-> +	clock-frequency = <400000>;
-> +	status = "okay";
-> +
-> +	backlight: backlight@36 {
-> +		compatible = "kinetic,ktd3136";
-> +		reg = <0x36>;
-> +		enable-gpios = <&pmi632_gpios 6 GPIO_ACTIVE_HIGH>;
-> +		default-brightness = <2047>;
-> +		max-brightness = <2047>;
-> +	};
-> +};
-> +
-> +&spi2 {
-> +	status = "okay";
-> +
-> +	touchscreen@0 {
-> +		compatible = "novatek,nt36672a-spi", "novatek,nt36672a-ts";
-> +		reg = <0>;
-> +		spi-max-frequency = <4000000>;
-> +		interrupt-parent = <&tlmm>;
-> +		interrupts = <88 IRQ_TYPE_EDGE_RISING>;
-You can use interrupts-extended here.
-> +		pinctrl-0 = <&ts_int_active>;
-> +		pinctrl-names = "default";
-> +		panel = <&panel>;
-> +		touchscreen-size-x = <1080>;
-> +		touchscreen-size-y = <2340>;
+> The sleep clock supports only a fixed 32KHz frequency and does not support
+> any other frequencies. Additionally, this clock is not currently used or voted
+> on by any consumers. Therefore, leaving it in its default bootloader configured
+> rate should be sufficient, and this change isn't really required.
 
-You should add a status = "disable"; here since this device have 
-multiple touch variants,
-novatek touch only should be enabled for novatek displays.
-> +	};
-> +};
+Hi Jagadeesh,
+
+Agreed on both facts, and the commit message says as much: nothing is
+broken at runtime and there is no rate to manage.  The patch is not
+about fixing a functional failure though, it is about the DT describing
+the hardware inputs the block actually has.
+
+video_cc_sleep_clk_src's parent_map contains P_SLEEP_CLK and its
+freq_tbl has F(32000, P_SLEEP_CLK, 1, 0, 0), so the RCG really does
+take a sleep clock input in hardware, and videocc-glymur.c asks the DT
+for it via DT_SLEEP_CLK.  A DT that stops at two inputs leaves that
+input undescribed regardless of whether anyone votes on it today.
+
+It also matters for the binding.  The schema currently documents two
+inputs for every compatible, which is wrong for qcom,glymur-videocc,
+and I am fixing that in the preceding patch of this series.  If the
+DTS keeps only two entries it no longer matches its own binding.
+
+Shawn
