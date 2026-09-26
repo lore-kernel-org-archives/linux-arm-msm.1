@@ -1,66 +1,67 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 015E043DA26
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 13:39:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22EEF43551D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 13:40:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790429975; cv=none; b=cIJ3CEgAkGaTw5X0mHiCFBGztTL2z9uDvOvClV9jBel2NMbd2YhB3bb+mUyIBVNX8WsZqURsLt88qk6wfS+aQP9VBqEcM3IXSnXSBlvKnDwK3+LgMW9ZkPYGMfNMTgj5fK4mIirhYPLf+12R5rCMZMHYtQefz5ZXPdDSkhpGmmg=
+	t=1790430059; cv=none; b=Gd/ErEZ5Gx9l8ru/oF2Mh7XDTFvGo2CN1HhmuoSvcYZnZAGqSQ15ndfC34pHV61k3pTt6Xun1ZV+IT6HIltkUxCO64MT80ySEZvC9UnAXxY5tkzp7QFgzrfmWYLxWfrX6CChLg0KtvrDDyrSRDTqLjhgqSI++6fNwjgGQAp/DxA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790429975; c=relaxed/simple;
-	bh=4PCF/pTuaQyrbWnAxj22N/OYcuTbKlF5oGBXIAB9HlY=;
+	s=arc-20240116; t=1790430059; c=relaxed/simple;
+	bh=w6XavIMw57aHLiDolrRY4GGk/U21PS94Ij+L0KosGQ0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qry6uLKzrnlEqTCqZFAnugD/QF4uSDs7ue43NYV/5k8XoXfU2KQRpYKosZiv9lFtNNnxzhD2618K9l6qjWubDZPFRBmOyfr/BPDZPxPrdBgID6UVIDQ3oa0ycS8Ayg9biDwEYLVFqy/MRJ+zGpuKQLy7e2E+SiIy0Ybv9nClMdY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ihBQu6b0; arc=none smtp.client-ip=74.125.225.141
+	 In-Reply-To:Content-Type; b=RXjH0GqzcceAagBSnt8FqToy4ZvpNLJHKQF5y7OCAjpLd2kEEY2cwHNX1XanNT64VKZIC9J+Fy1o0cvZPgsokTIUcfyKgsdkE36czQI29fq66z0mEDG3KcXU6gNOMIBH1+rL2ht1PU01RGWGwf3cACEVC5ovhx3YlKvjs/tWppE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=LS4C5tZH; arc=none smtp.client-ip=74.125.225.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ihBQu6b0"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49d1fb0cf5eso15493795e9.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:39:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="LS4C5tZH"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4834977ae75so985774f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790429972; x=1791034772; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1790430055; x=1791034855; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Z7fw3g78kgiNXX0wSmQAAF31Sb6byeELkTa2HVDBpw=;
-        b=ihBQu6b09GQpB3/He72I1I2v3E07wXqqmjmsqIP37DuzjzuVmmABwkkLhduGoWmsYH
-         3Jf4ADssSWbaTfm8tWx3K6Ur/bS4GQ0Ca0zZ5x7GZYOoCHkqdrXVEoFNrD1+uX4s0W1M
-         mv6BO6eHrVTqzPmtmVPpJBthPJR5aO5koB6ecyAjWTHmAFbAPJCt56+PlR/G280162Az
-         UMKIQ7QNn3EuhBnprpcuedFgJ4uV1NuxjBlg0tQ2IcK9s+WH8I6B/CUk6X/vYffr+mAH
-         eL7/Y2ipqi6v9Nw1GsUIqNeYtvopTcs9DxRRPpMyTAGiZWj+QCqIzSN02eHd2srToM+q
-         9n8Q==
+        bh=bAJZqOMLmiD+huTN0vJljnBzZgWbzy5vIPKgZ6U/QBA=;
+        b=LS4C5tZH+706MxGAzyunUKi/UJ8wRPQ2MUXJVBh7oJkifoIQPaPsc1s8FCz5ZHyauE
+         RBT1SdJRlhjpxqvnjXMPM+q6hiVwrV83uj/wUqWEP1q2CJTbF93G5QNhpfT60CY2H/rz
+         t5oQWch3G08E+hcEiTnQPvpzTeQu89sk8UQpKnRbITfFnlX+ecAYatDgMg83zTAB0jh3
+         lHSlS4alRSj3oNWs5hiP1fc9yi3tEwk8zOm/nbqGdQmI+/Y8LWHL+a1L0gF/WMO0dQSv
+         dfhszJc9qgKoFMMm/z8yQmgfkjt4VWJZcW+7f1QjOgpORVx1G78KPFJ2U7AOdzjmyi2D
+         fV2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790429972; x=1791034772;
+        d=1e100.net; s=20260707; t=1790430055; x=1791034855;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8Z7fw3g78kgiNXX0wSmQAAF31Sb6byeELkTa2HVDBpw=;
-        b=MHXReJ81m0R+ZV1a3+q97Ua/tlKmucWyVcHsIhUbH7EqNukC+4BTtfojCAd4gHwSzN
-         R8yqAvyso2WGE/0KMO5LzT6nGAvkvnu5HnFJYoXz05VTbdJC+HX7DEZ38lBvMXK/PAEe
-         Lh1/bhGdPfbos+STicHN1ava1u66xJDFZcCv6VAB2Jrd+pTGph5eJnIqSnr0/fvNSsz5
-         JT0bxVcVmDv37NyuOFSbVOAhJ3XTSUQygB7fxUkthQs6Zjo2rye1y19rjLBl+bWHl04V
-         SiUYsaoQTR7MQfBqc6oySuV+AbpsDkt9l/or9NLWlE1hoVpMYUwNMSNWD9D43FD+/jbS
-         ClQQ==
-X-Gm-Message-State: AFuF++mC3XeHUeeqasKq6o7FQfbndPHKmTkfermPR582+qry6apVEG3y
-	oC2dzjcPzE17mB8Ey+LEKgLr+mi7EMDH1y7DQEc5TxyxoJmr0b+0eH149ek36HaQUsQ=
-X-Gm-Gg: AYBFou2Tr/sIpWRVP89NuSBrOnM+6anKr+g6o3Ynzg34F3H4JKj3YEPDmiBm+qqBcZu
-	+jVxKQ/Z0q5ZchWEf4n+hCCshut4pBOgGllWw55OkOb1us+MvtwuGEuJ0nxXhCSVKL/qzZtTKiu
-	moPuYmod1trhi7Qsp6JNRgmb60WFuj34Gi/ZbEHqDlOgGnIXrzEcYSK4NHb1LXmXfJ2K7BA2xM2
-	Gcm7Yh2GNtg5IILZ/2DEA7/uaDcy3v1kllb9YVpusVhBC2cXCBsP5tM3RIvLxaawrKn7HIa6kMU
-	SgxGyi63hYSJ6Nl7Apu10lZp6qKk1XlrToPLI1u+4KHvcqZWlPe0tZHxXIF1tY5LNvx30ifm5GV
-	l5pURo+nKJxrrXe4qZN3WXR/cYiPS5Squ540XgRjlGZ5e5+TX+A8quXk0utAatY8I+fbW0lC/zK
-	RIG67iuGmV2hE5hg/HjL2OTuMxUzaimvZIE/hHyGxMG+VAGkPXcPiElfb0SIxF+Y3NrvD5mCjm6
-	XaNUP2DAeE=
-X-Received: by 2002:a05:600c:a10d:b0:49f:e8bf:8f9b with SMTP id 5b1f17b1804b1-49fe8bf91bbmr113280505e9.4.1790429972111;
-        Sat, 26 Sep 2026 06:39:32 -0700 (PDT)
+        bh=bAJZqOMLmiD+huTN0vJljnBzZgWbzy5vIPKgZ6U/QBA=;
+        b=YeevfILRIej4V+tGClzrd+LM4rJMF2dv3VNRnR++AtVDl5ETGgYCamAOQH6l5ec+C7
+         UlLKA3rAPA4vE5dkL0APHuH+4DWyDsY9tA+IYlmI0o2Tmr4BJkVl5TdY0bfIejvYPxFl
+         v5huad5e5ijinHltSyNO4VATTpWmLrxeigBhgWzp+raUrsEchL85b0CDDUI9Jfv3fjfu
+         6Z+9b9nvCyvliD3d/N4PPw0KMIhJTlY257QGmqnOEYzRRBx1XuXR1gt4qULC4ODwdM7x
+         5Nhgj2lN9FkP+LMCMUMcPIArIN8sGRmKXP4KCORxWhQCQkk0NWyJypaO6bnVleiH0OcP
+         XXcw==
+X-Gm-Message-State: AFq9FYJIMbUnc2IBbE/nTANbRrkaK1cJ321wg+mzpGVwguzaK8BrZqfu
+	+spTbZ9CCLa/5jQ80vGVoXojVO23goaSNCwtOuIpIG0yhpBEF5ToJ2460xdTfHnflhhVLkemXkG
+	XpI7N2zg=
+X-Gm-Gg: AYBFou05rVx0sWTxEV8xVHC8CBjtPJQcdxmQ0PLRxE9tYkERjzbGsq749yrtlEd6ups
+	LTUYsEbOKZ/kETKECMFqIsoLyXeLlE/IIUlKFa994tWgcY2X/A+MUlt3TMWtjKeHVBgv3FKrHVA
+	tuL0U6JgGOM34Ztgj4iPJ27o7QTn1uT9jH25pYbf37fUSgRYrlTVA5hsg3MkI05E3N0u4OLIFH/
+	VvqbFsRdsHKiatMDbdD/RI4C/VytwGBcEIK3mH8gI/IIif/6IGVq2Nri7xQvbHaLTx4dEEVMjb0
+	zN3vKUQZ7meprlOOu6tgw+GP687vIuuRL6ULYfEvyI+L0HtZHVgKPeU9DqZ1F0BECwFMb/kRxqB
+	L/E4RqoB75U2NOwEQrt6Fju5rEjW96nnAQFRObFxQ4AyCCyVpbohjWwPvisnGuiZn9Y5oGCht8y
+	S0RMkYZw/YhPWfa6RX59hGV/kECYjOE2PvH+fVgF/NOP6sjTCxDwn/P7UpmsLegAH8kRtV4G08v
+	dWG04n4afo=
+X-Received: by 2002:a05:6000:2910:b0:488:8987:663b with SMTP id ffacd0b85a97d-48889876a66mr2785861f8f.23.1790430055389;
+        Sat, 26 Sep 2026 06:40:55 -0700 (PDT)
 Received: from [192.168.0.167] ([109.77.79.156])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a34a76fsm14706746f8f.7.2026.09.26.06.39.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4887a349731sm14660447f8f.12.2026.09.26.06.40.54
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 26 Sep 2026 06:39:31 -0700 (PDT)
-Message-ID: <0946da1a-e8e5-4ccf-a422-abcbc24cdab3@linaro.org>
-Date: Sat, 26 Sep 2026 14:39:24 +0100
+        Sat, 26 Sep 2026 06:40:54 -0700 (PDT)
+Message-ID: <bd0a8dd8-7d0b-441d-9b14-25fb153465db@linaro.org>
+Date: Sat, 26 Sep 2026 14:40:53 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,8 +69,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 04/12] usb: typec: qcom: Make PMIC port probe
- selectable
+Subject: Re: [PATCH RFC 05/12] usb: typec: qcom: Make typec_port accept also
+ different structure
 To: david@ixit.cz, Alexey Minnekhanov <alexeymin@minlexx.ru>,
  Heikki Krogerus <heikki.krogerus@linux.intel.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -84,26 +85,28 @@ Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
  phone-devel@vger.kernel.org, mfd@lists.linux.dev
 References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
- <20260926-typec-v1-4-31adc19f32c6@ixit.cz>
+ <20260926-typec-v1-5-31adc19f32c6@ixit.cz>
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 Content-Language: en-GB
-In-Reply-To: <20260926-typec-v1-4-31adc19f32c6@ixit.cz>
+In-Reply-To: <20260926-typec-v1-5-31adc19f32c6@ixit.cz>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 26/09/2026 13:40, David Heidelberg via B4 Relay wrote:
 > From: David Heidelberg<david@ixit.cz>
 > 
-> This is a preparation for extending the support with 1st generation
-> Type-C.
+> This is needed by followup commit introducing 1st gen of type-c support.
 > 
 > Assisted-by: LLM
 > Co-developed-by: Alexey Minnekhanov<alexeymin@minlexx.ru>
 > Signed-off-by: Alexey Minnekhanov<alexeymin@minlexx.ru>
 > Signed-off-by: David Heidelberg<david@ixit.cz>
-The code looks fine but, I think the commit log could do with a bit more 
-flesh on the bones. "We want our own probe function because"
+Same comment.
 
-Then:
+Understood its needed but, please describe why. I haven't read the next 
+patch yet but I guess you are going to have something other than struct 
+pmic_typec_port *
+
+Again a minor nit you an fixup in the next rev
 
 Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
