@@ -1,88 +1,88 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB73D395ADC
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD2BD38D01B
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790404527; cv=none; b=jViLbtlWt3Rhx3DwqqCYmU8/hEcbvJ4GCyCOjM4OrZXjPPWYALXxk5B1bCpvnGJQJD/80i8cxeKTS0BMZKrBsM/7aeiUeUL6WiS0jFY+JY/Uv9IIcgcAfaPr9piAQ0mtpJ8IaSxVpuVj0PwZyQZvTr2ZBjaoaPeHGM98AvfOYbE=
+	t=1790404540; cv=none; b=noZ1LGFXq/XZtrxNIZQeoiWAlYHNKzh6LdInMNDdYzayE6Ty2ZToG7hoCYOGcjGaRfenfDnpnPjXOWNBBhMSc/j9syL40qx8+S1H1FmP58Fy/wOFLRuy02IN3QKxMyYWDB4lXFzwfOvL3dVhQSuPNM5rPlqRFv8H6olQwD1Tpyg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790404527; c=relaxed/simple;
-	bh=u4T/TiBVjk6sDPMeOEWKmkDa4GYeq4h6p7YKB7q310c=;
+	s=arc-20240116; t=1790404540; c=relaxed/simple;
+	bh=JeatBeEgQBpNQ+47fHavyvUBUmtN55Pep8qBWx831Mg=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Q+nSClh+46DsvlZVW6T2/w7zwGTnh5StPTKs214znFTxaYKnGZ+bV8OqUI7YqMgaAldsw+rQdNUj4zM7LolfZAGGbK42HSdKwgoelIU1CgFNnZgy1D/UXssOT5QCJtIF9VmPms5y8PjhQhIoHll975MZdeO/C6f4ZJGYRbhl2as=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WvR/bx7x; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Lx04ZDXr; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=C2agGf7LeOEoqZYOwtW1zCV1upXbU2EHt7bZNnrywZacOJqt8NTWhC9PnhmEAdVRBhiT6opEyegXxv0RRpYgMW26OAkEA2raHHmAlV+E9hUDzUpgAM7sdJLzbj1AvZ56F21La7RFbLBcEiwfttVNGyuV2f9EdOMOwVLpbgXDNrI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G2XRmC9v; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=j22uHIAn; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WvR/bx7x";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lx04ZDXr"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68Q6OjDK2569046
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:24 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="G2XRmC9v";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j22uHIAn"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68Q6OabG3267653
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6m/+51lEBEN8BFk27SUULRpvRuJnuqvGtKovB+gc4D8=; b=WvR/bx7xA6cg/5QG
-	CGjdZX3ivwO7uwmiG97FC9fd49lpN7cjcvyXxGgGrdoYXGtW2n1caCg68wPEXrQT
-	JSoAOlp7TbaAU1S0VEFU04qMjbQE1sJ90/gxC6l+3nKCYfBnPiyvZQzC5eP7ePDi
-	Josc4qaef6dbY5tagV480CNnuG9P4PW3DJR8nvZ4GxZYHHtL01xEmvhI1///23xP
-	whGLk4HpR3R2Zs9kQcxEDTuaEYLuFetywpEKpApDjmd6O/dgcXvY4SpzEN9HtSx0
-	F1C75XOV4D3axqVw8z1hgyV92NhT5Qz7heldK3gOROo0b6YryTIeFSsR7Sz0jajL
-	kVPdPw==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx6e8090s-1
+	4r2KBrsge8lNI/uWrq/Be2wfr2s4MkmN/KinCueTco0=; b=G2XRmC9vAp9Rp1LM
+	fZUlXfAUV3v/5kBzIORosH4cXhy7xfGXCocPiPAJggWV8M+kZPA1n5j95jBijvgM
+	PZR4Z8aTCh7jBHD5ycAvLgHKOaoqLaQZnNOIGd56SCun5GD+kgbwwi5kEtxgE/aq
+	NSmZW27XLyDaqOp9Dfn9CX2P8nl7BEay4QKvqYqZOf2eNaeW6VxphTxt5bVa6xhF
+	geqg9tc0DtDhqfeJsyMNlvGGbkQisFpJW6Bg3mtb3EzXLtyUnzcbzLR6vbSWMESh
+	ph+cyUQ9nTeRP9eKVJy9R0mqgQogXQ4tOnZ8L1a1lrzxVeMO5ZvJYD3uYiOTxF8T
+	ws0Oag==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx3dp0ndm-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:24 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-342b66c0b06so695443eec.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 23:35:24 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 06:35:32 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-34318e88ba2so367801eec.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 25 Sep 2026 23:35:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790404524; x=1791009324; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790404531; x=1791009331; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6m/+51lEBEN8BFk27SUULRpvRuJnuqvGtKovB+gc4D8=;
-        b=Lx04ZDXrYBoWhirP/m2ePdRDTPq3GXgkrCLInm4TclEMo6r332r453/g8azg9/eRvL
-         pMNZJ7HgFZelA/OSLrv1if+VvDVx6zkPZvDPCtgtx8aow6GCaXDdZ2rQ5ifLzULTDIEj
-         MwY8rf55lFbtNOc7JHO/au3ekgHZTiMys0qqk/oVOdtGKdvhUxv7IcvW/TVvisopOOdp
-         ElOUh6MuPxfN3rOdiFADSGyHasV7YqWRSr8eerPo6sfPokS7c7SaJfpIFyaLEQm6l8Qm
-         WUgEAbSgji1G/RhScrC0LzVaAJLbmkAANhPjfkLVIN4rY6qIwiLPo+Nt1mjATTf3Uw9x
-         wuCg==
+        bh=4r2KBrsge8lNI/uWrq/Be2wfr2s4MkmN/KinCueTco0=;
+        b=j22uHIAnqJUHC6DobUOJo9KLag6kFsTzTK7907IIc7i92/N/G/yTXWM5d/5xNpD4xo
+         89D9AWmDUJDWkEs0wVQ7p2vNQoRvMJGsydx18dgp9GsCmT4PjzeASOnK4pT+BB7/Jkj+
+         loydP5zqnJ6y4jsnD44rIciiV21RPbOOU1Cd1yl6h81PlUlpUMeXRLhe9PlMJ0fbZi8O
+         FNVVh06taBnFhowZUXmiqHGrRde2jaUNh1M43yOJE/04DSM1Rpkf88qK4I8g2KJlf9bj
+         loADusMw9W+P0xzEukjQ0Xk6dJkG1Zbhfus9YZLqDtR1Ngs9tBbPYjAKhVll1sKrjL5F
+         Ztjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790404524; x=1791009324;
+        d=1e100.net; s=20260707; t=1790404531; x=1791009331;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6m/+51lEBEN8BFk27SUULRpvRuJnuqvGtKovB+gc4D8=;
-        b=MaUkw12v7B4WScUdcUL16rzv+iOeAOSxLQ5WZ+TSXa+mplsKpNieYnMUYS5IR4wes/
-         AOpCrSXox+/PRS8ySyDNFALZWsXsZRIk680R0DJVASXrYVV5DWaTkuscf/WmZQozmr5G
-         gvbj9YbM0wu90RHPOKsYYUwA+Lo5mqSWzMC/+F64jB63Ta4Dy6C2ZZcfC0N5qgUwGTit
-         /zLZLP7EPh6feJ7sSiNTbAGStGWH8f9X6mi6/GSE/VwXG1YJyLF2vNRCHwACCP/mYtVo
-         pUCFwZSxChhCYqDfIs/S4fsDAVWs3rwh8s05KY4yFKVSxOCwsOYl+2ePFb5Um66a7JU0
-         vTRw==
-X-Forwarded-Encrypted: i=1; AKwUvBxdEeCDosAss+2ZnhPdBoXB/MKvNEQN3sGTAov4ynaWYX1p5hoTvemaZKC08ob9k/b8DEJgke0ACAmwsd8a@vger.kernel.org
-X-Gm-Message-State: AFuF++l/pzj/oySByinTshcWCD0eNNbGfj/CUdDaogp4x6fglB16g0hk
-	1jKgjApc3tfSH4RkB+9Xslv8goErxOq2T97JRkxLq0C0PT4I7/1pQRMZU5CrTHaG5sP9TMY6h3b
-	KrLO5yoLnGoesgs5I/k2wwPZnYU92IazdsxRW27MC8VZkMgPwjDLuzI+skPEmVUYNAG+3
-X-Gm-Gg: AYBFou3cZdnJbpGFBexAnaBqe3GPmxkxM4+6JhsmR7zHR4QrKurOSnOtshq0GrLWCE5
-	AmkMZSyEhd7F4gUpZ+m10xtT0hSNxDg29KcD/clJl50giigLNivEcVMJ4T0jn5PxfThzRtOFWhR
-	PzTpyeM5LOdwfViZ7A9e0anxWVlMN1KtwnaVB7T6+3dz2QwgbGC1T4iRoCpqRoybE8/3UUKEze8
-	ELIZfSbceXTkU9cznWeJwg7gkbpVaSQnnuzdrtptkcxSryAk2MDh/U1JM1vY82XvXYKeD5SP8vK
-	V48QrbyeWqJI7j7mWk+Zn7UtoiW+qg8o99kWoVn/WNUy4Bdf+3E3rByMUcjFXQCP3DMmnBZol/f
-	E+M9DlUdIAw1dDwBhV9neU8RlHoEwapHbKQ==
-X-Received: by 2002:a05:7022:288:b0:144:fb8d:4706 with SMTP id a92af1059eb24-146ce4928a8mr1873685c88.6.1790404523064;
-        Fri, 25 Sep 2026 23:35:23 -0700 (PDT)
-X-Received: by 2002:a05:7022:288:b0:144:fb8d:4706 with SMTP id a92af1059eb24-146ce4928a8mr1873655c88.6.1790404522317;
-        Fri, 25 Sep 2026 23:35:22 -0700 (PDT)
+        bh=4r2KBrsge8lNI/uWrq/Be2wfr2s4MkmN/KinCueTco0=;
+        b=0cu/N3UT5L/XEd+UIIhwE3D1+i/Ob7e5m5untjIGv56QsgEeIYtZsl8YHPnVSk/SQK
+         Od9G5B8wnrKzywjkUo/hZr+FptS5SCt5rNBDVMAPxAI12cDsLrq4cDXVcRufUlUssgUj
+         SpAse86H0xlvaK8+bXu/xFDaA30gRywyuyVOVhgENExeiR67Qkgy6JTmZTi2aNj4MJjT
+         Zr46ALAhb9NpHe5lDdVUDpolmY+LogjGd361AuShjCcP8smG2OWzbkXlw6HBWUXd8ij/
+         F7a0JmrSlZspJu4iKuFSexAOAeJ9ybaDPdlDTA4x2kdVXal+M386+uuQByYpQ8mflrYy
+         Oi2A==
+X-Forwarded-Encrypted: i=1; AKwUvBytLavMP+RVpB1v1reYdNDkjPOwkWitcbzlruoNfQHBA6bgIy0dtyjw0tvPPDtwq8+34NqRr1ZNiq/zhhzu@vger.kernel.org
+X-Gm-Message-State: AFuF++mHKR0BNgU6nZVRDcp7yMvWrtVrf63BEv7ManD/IOXDvhc1U9Jy
+	ajVu8mmcwdGq1BAFcRMTrkZTpdLKBC6KwDru4C6KSNt9OMx7RdkusdT9g7fxVeyTJZTMiOAE9A8
+	1n4XmEGFZgh03sIcnVMPH0HPaLxFx3hhtG5hddtMFMXycuiv901cod9f40WRkZbYCdQpF
+X-Gm-Gg: AYBFou3Dk182lSc6OGMy6AnFpHP+pXbl+hYvalQ/ecYVdXE/AM04VekmKZitTxv3pla
+	DSk2PxagEpsiPmDzCSCf1E+uEoDy5LUsMBFtDNlGVOc45KMS3v+vEMiQ4f6k3NFNV8L+wLzvLhY
+	QtOue4965tDDw0yCfLxouaCzRBZKvrdbxIgYuq63CZK0iBg1ZpN3+bs+hMs+Z9aWqIltjAcixhA
+	1VIak/euCZAJuqSNquumOzZ3eyp6jbpUvtxBbRVeExkQY+0y+kMOEfRZR5AsM/sPUc+YwpNHS/i
+	fKqYyGNnh3HBFHqa3EYB4Gn40La7ZnFaGJ46ZuSUlMviQpWIqIGNvehMtzKASvaEYCl2fUPECQ0
+	Bo4nNR02uuBxgfKdq3ZQfAlQ4+vTgEgs4xQ==
+X-Received: by 2002:a05:701b:4314:b0:143:50a0:56d6 with SMTP id a92af1059eb24-146cdfbe26dmr1832519c88.7.1790404530891;
+        Fri, 25 Sep 2026 23:35:30 -0700 (PDT)
+X-Received: by 2002:a05:701b:4314:b0:143:50a0:56d6 with SMTP id a92af1059eb24-146cdfbe26dmr1832500c88.7.1790404530367;
+        Fri, 25 Sep 2026 23:35:30 -0700 (PDT)
 Received: from hu-vgarodia-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145acc45f03sm9700691c88.7.2026.09.25.23.35.14
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145acc45f03sm9700691c88.7.2026.09.25.23.35.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Sep 2026 23:35:21 -0700 (PDT)
+        Fri, 25 Sep 2026 23:35:30 -0700 (PDT)
 From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-Date: Sat, 26 Sep 2026 12:04:06 +0530
-Subject: [PATCH v5 07/13] media: iris: Skip DMA mask setup when the core
- device has no IOMMU
+Date: Sat, 26 Sep 2026 12:04:07 +0530
+Subject: [PATCH v5 08/13] arm64: dts: qcom: hamoa: Add Iris context bank
+ subnodes
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260926-vpu_iommu_iova_handling-v5-7-0322ca5dc10c@oss.qualcomm.com>
+Message-Id: <20260926-vpu_iommu_iova_handling-v5-8-0322ca5dc10c@oss.qualcomm.com>
 References: <20260926-vpu_iommu_iova_handling-v5-0-0322ca5dc10c@oss.qualcomm.com>
 In-Reply-To: <20260926-vpu_iommu_iova_handling-v5-0-0322ca5dc10c@oss.qualcomm.com>
 To: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
@@ -117,80 +117,117 @@ Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
         Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790404457; l=1806;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790404457; l=3399;
  i=vikash.garodia@oss.qualcomm.com; s=20241104; h=from:subject:message-id;
- bh=u4T/TiBVjk6sDPMeOEWKmkDa4GYeq4h6p7YKB7q310c=;
- b=aTqmwyfdbwKoeMl31qn9fn8d/WIqjVmq4VkgJAeoaw/HXo1bp90GA/WRWEOOP9Ty2MVmVeS7G
- 45JC5KMPsiYDk2FGCR2jaytaTpGPRzXzBq/kGzSG0HCQj46VCQazbHD
+ bh=JeatBeEgQBpNQ+47fHavyvUBUmtN55Pep8qBWx831Mg=;
+ b=PlmiyIHr0Ap/yAmfx6s+hLQS+XVKalhA9uvS+87mKdVJqnpjdLdwykaEvy7zPDLzwG78mXQgP
+ mtTXg5qtAg7BADltUwHr5TxuMI4yj/nR5LZjh61z89f8/yHMcoNx1rq
 X-Developer-Key: i=vikash.garodia@oss.qualcomm.com; a=ed25519;
  pk=LY9Eqp4KiHWxzGNKGHbwRFEJOfRCSzG/rxQNmvZvaKE=
-X-Proofpoint-GUID: lZoPDPaYNpNsdGsalSkdwTL4iYmIH_M1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDAyNiBTYWx0ZWRfX+6r+9ploOJEA
- 0cd+MDeadUn0D2XjzBUIoWXgUyEIenVP2qKTcmv22cJOXbcasD4iLkIHqaW8FDQN7401LkQnBaJ
- s/Koo2Xu5L6LQ9T+Zweis9I+hGyswBWaJ9K/2WtXDwEjK4lDc94tfp8a7bM4+ThVh64guyzMruz
- yudO69suMKyHM8/VFqPMAnyC9gCeWFl+nKQQ71bhH41SnJQa2WEpzE+SDCUvBPOCPcnMCRlydM6
- VQVWXiy0FdSJJ5ri8eibtRbJNshvnY0YwulSc6GKjSTk/fvxS60lPrCTSTVwHAbOzWQP7Ii170K
- YxlsUx77oAN42DUBCOeAaE0HYS0SPZg5fbol60dUDmVHAimI58bMAW8N4SkQMZESRxo2MAdRebQ
- q6azIf09Ao6FI53Vaa0VB/hotSrQB2wpplyPNSU+Wi+sLVkUOjXH2U+or1nnC/zk1WDPadEU7oE
- oO0VAQJOs2827KuxXpQ==
-X-Proofpoint-ORIG-GUID: lZoPDPaYNpNsdGsalSkdwTL4iYmIH_M1
-X-Authority-Analysis: v=2.4 cv=aIFlOr9m c=1 sm=1 tr=0 ts=6ab767ac cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDAyNiBTYWx0ZWRfX2ZOT8L/arUb1
+ FkMrolxmaOlLyb/cmlmDv/UwMqZvUgEatUcoe6SU8as+chlz5xlViXwJVRWu8EplCH50FBNh+mf
+ SBo1QU5dmlznNvVEX6Nr668tPTAxHl/Wxr5hrL9r+ysxkKo03AgjMXvyLEFrR9CPxVSEUuSGDT8
+ AyFkviqtSBxfxJDJw13/3nHaPPo7lTLnTCXrQCwanGyVgRlvuhfRgKfl4PqvxsjzFIc6G16gOIo
+ xuqGY2DJ7f7rWkIo8aT8h9NOV7rZSps0tlExuNdkSKW1lhppsA0YWvdAYijY/HYqipf9TSbVR9x
+ g9Pja1HEg/hL/n2ozMqbV+mbQhoUJZsrlPw4YnTmqr3zIRESaYYk2uYx4jTfBZqZyvFkZ1mKHqm
+ Gr+Wi01HIj8w6kFCBkbfAKXvASQq2PEb6yREv++73rw24TfuqcCfU/WwYN7KdZ4/DGtCfnisKPL
+ bNztCUg+kZOg3SmFURg==
+X-Authority-Analysis: v=2.4 cv=QsXLTlyd c=1 sm=1 tr=0 ts=6ab767b4 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=1uU0fEruEEfCXXW2WGwA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDAyNiBTYWx0ZWRfX8wa9IGPSGYmv
- ZEHK/iGBhKTIihWySmxfFniFasOajOXbBCcSUvO5z4kdW9hLg91HkwEruqfR8SALxi4sAHIJnZL
- +mKSWHn13DRIe4ClPpxhd1nA7/zXYHs=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=e5mUnYsNAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=w7pRem5UOBajBC5HA0sA:9
+ a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-GUID: sIjNREMf4EX-6vwnO5dS1nvRxJMTfs6b
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDAyNiBTYWx0ZWRfX3l7GAFiB+Al8
+ OHUC1p4H+oAk6Ax0fFHKYa9uvX2yj3cmDrXpqmvGYz+9wpMYRnbXr6SxzVIyCw2wqH79aAAzd51
+ GtJJ1zpdpzDThP4PWL7oowRkyfW1aOw=
+X-Proofpoint-ORIG-GUID: sIjNREMf4EX-6vwnO5dS1nvRxJMTfs6b
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-26_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 suspectscore=0 adultscore=0 priorityscore=1501
- clxscore=1015 malwarescore=0 spamscore=0 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 suspectscore=0 clxscore=1015 malwarescore=0 phishscore=0
+ adultscore=0 bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260026
 
-Once the streams are described as context bank subnodes, the "iommus"
-property no longer sits on the parent iris node. That device then has no
-IOMMU domain of its own and never performs DMA directly, so calling
-dma_set_mask_and_coherent() on it is meaningless, and on a device with no
-IOMMU it can fail and abort probe.
+The VPU issues DMA through several SMMU streams, and the hardware does
+not give every stream the same addressable range. The non-pixel stream
+cannot address the low 600MB of IOVA space, while the pixel stream can
+address the full range:
+    +-----------------------------------------------------------+
+    | non-pixel stream addressable range (600 MB - 3.5 GB)      |
+    | 0x25800000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
+    | pixel stream addressable range (0 - 3.5 GB)               |
+    | 0x00000000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
+A single "iommus" property on the video-codec node puts every stream in
+one IOMMU domain sharing one IOVA allocator, so nothing restricts a
+non-pixel buffer to avoid 0 to 600MB. Once an allocation lands below
+that boundary the hardware faults, which shows up as unhandled SMMU page
+faults and spontaneous reboots:
+https://gitlab.freedesktop.org/drm/msm/-/work_items/100
 
-Set the DMA mask only when device_iommu_mapped() reports an IOMMU on the
-core device. Platforms that have not been converted still carry "iommus"
-on the parent node and keep the existing setup. For converted platforms
-the mask is applied to each context bank device instead, in
-iris_create_cb_dev().
+Given that the address range restriction is for specific VPU stream, it
+should be ideally be moved to that stream. To achieve the same, a subset
+of streams is now represented as subnodes, so that each can be
+associated with its respective addressable range. The design was discussed
+and agreed by mainatiners here
+https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+In the past, this limitation was addressed with an iommu-map approach,
+with the iris driver dynamically creating the devices. That approach
+was later concluded to be a hack to avoid having subnodes, and was NAKed
+by the iommu maintainers. It was discussed in detail here:
+https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org/
+
+The video-codec node includes address-cells, size-cells and dma-ranges
+to declare 1:1 mapping for DMA translation to the parent.
+
 Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/iris/iris_probe.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ arch/arm64/boot/dts/qcom/hamoa.dtsi | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index debd1f0e57038d7abf463e82fd80f887b67750e8..4bdb078d83b5c331869dab2409bc4d10ab302737 100644
---- a/drivers/media/platform/qcom/iris/iris_probe.c
-+++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -352,9 +352,11 @@ static int iris_probe(struct platform_device *pdev)
+diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+index 4e35254cdd11a87eb5e4817abd09a603522309e2..9819a1f5686ce92c2249cc1dd65a491665fcfb94 100644
+--- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
++++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+@@ -5468,10 +5468,12 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
+ 			resets = <&gcc GCC_VIDEO_AXI0_CLK_ARES>;
+ 			reset-names = "bus";
  
- 	dma_mask = core->iris_platform_data->dma_mask;
+-			iommus = <&apps_smmu 0x1940 0>,
+-				 <&apps_smmu 0x1947 0>;
+ 			dma-coherent;
  
--	ret = dma_set_mask_and_coherent(dev, dma_mask);
--	if (ret)
--		goto err_vdev_unreg_enc;
-+	if (device_iommu_mapped(dev)) {
-+		ret = dma_set_mask_and_coherent(dev, dma_mask);
-+		if (ret)
-+			goto err_vdev_unreg_enc;
-+	}
++			#address-cells = <1>;
++			#size-cells = <1>;
++			dma-ranges = <0x0 0x0 0x0 0xe0000000>;
++
+ 			/*
+ 			 * IRIS firmware is signed by vendors, only
+ 			 * enable on boards where the proper signed firmware
+@@ -5479,6 +5481,15 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
+ 			 */
+ 			status = "disabled";
  
- 	dma_set_max_seg_size(&pdev->dev, DMA_BIT_MASK(32));
- 	dma_set_seg_boundary(&pdev->dev, DMA_BIT_MASK(32));
++			non-pixel {
++				iommus = <&apps_smmu 0x1940 0x0>;
++				iommu-ranges = <0x25800000 0xba800000>;
++			};
++
++			pixel {
++				iommus = <&apps_smmu 0x1947 0x0>;
++			};
++
+ 			iris_opp_table: opp-table {
+ 				compatible = "operating-points-v2";
+ 
 
 -- 
 2.34.1
