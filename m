@@ -1,61 +1,61 @@
-Received: from mail-qv2-f12.google.com (mail-qv2-f12.google.com [74.125.230.140])
+Received: from mail-qk2-f40.google.com (mail-qk2-f40.google.com [74.125.230.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA96D3E275F
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 12:20:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38969415B74
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 12:25:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790425243; cv=none; b=kaQkcyxPoJwsfa/EtbjNvv/VhM4hdhO3VoLtwL4VNCghYnVQR7pvVExGI3mbGRwkfv6HwKhUdR22VlO4s2heR+NoTnInp4lzDNgKYbK2LmZRMIrTixUZr8SHlx7KEuwahb8PLpWDY+o6/yePZoXNttf0yi8YnHM45sgXG6m0rZg=
+	t=1790425539; cv=none; b=B9vlG2cig7W8E9eFKL3vXD3VRc6m/sS1jxTHmaoJmaaqicupYgEj6oWNiTspz2UmdjwQG/Lq0rbjBYhxqjnNrCOF5XGF3xm+R86sEg5xFe/isPmrSiVTXEcyRVzvtrP0R1QaNteajBpuEYuUirEfG+OdddQxSOOiSDp5/eXXShA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790425243; c=relaxed/simple;
-	bh=IBYztrV0tY4V7QEYijOF7gx0QmCZePFsfBjD6WlXg/s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=l9FAzpzviHOKcmPP5E9vq1ajprtMz4BYjbtHivMhkaFbMraoQ4fJSJ5GSdKk7s5yYP65QVgSmXS5nBiTBVG/wecycFXHG3I/nkO/NhS0Hr6DOe4hTHFrLgqn7n3WEL5d8THHFFFzsLu4ldqvOGwQOlM6FNqVMcdGxAVyt3jw4LE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=YxLW2jZd; arc=none smtp.client-ip=74.125.230.140
+	s=arc-20240116; t=1790425539; c=relaxed/simple;
+	bh=+MxQJxfxyXhn2hlgfXKOF0r0b76GvWH1hzAhmky7Su0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HWQktY8QASHx8o/cWP8plkaggoQfDSvp8621Y76ZwmuCsFDIFsS+5QLc8fn4tlCIZVVavvBJ2lfL4bLIkZ12r2iQ/Svif39MB04dnju2hQS7moj8WvpN7RpzajvfJ2gdXqZ0l84aqRzcbPKd69xUhJljpPKfBFkrhAu5P6tcjJ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=obIhTuA+; arc=none smtp.client-ip=74.125.230.232
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="YxLW2jZd"
-Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-910704e63a9so7089226d6.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 05:20:39 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="obIhTuA+"
+Received: by mail-qk2-f40.google.com with SMTP id af79cd13be357-93c5d67aa05so49428285a.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 05:25:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790425239; x=1791030039; darn=vger.kernel.org;
+        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790425536; x=1791030336; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pAsdC2YpnuT6zTnGshJ75DxjPfJCKBC7fNG6VgdNlYM=;
-        b=YxLW2jZd0QcRtq+NAEgkfqvU6gfloRx9Vb4pJiDSqeYsJYLQ9Wbtzi2TGqRnyjTUwc
-         W/uZxtx2/jKr46dGET8qLFjl75+Tpf1JSZNssnXXCde8/mMp6SeTBTYPYE431BLPDbpZ
-         tZHcBakSxvVhxnWCck2rdgSB3xdWct2jPkuTqaORPffWyuMnkb75n3EGXC52Mi+t3Cbj
-         fIuqoLwiEjO3VqV+k38dNCtSlPZi4/bXzp3Lf+UaIiOssBYrT/FKD3O6oaLGnZdqv/Zg
-         zVmlyH8snuky1XP+7qHWqXkONDDvhq/FBXyRMTURMVtsIWJ02cYsZrKDmhiiltCpu8j4
-         U5PA==
+        bh=0+TVRBcBiysASXeDoTATHtlh2YPl6QD63Z7oJTtZse0=;
+        b=obIhTuA+jQeOg9izWUIJPJxrccKgQZMI0pjvD7UfJJirtoAuXMDkmrVWQH/r6NWzrn
+         H9F1eud6IGa/CV+jJGNACz7CQKAvNqXiSJeKmIRye8bCQTHzCdt1uP9aDKLiseapNrpX
+         e3WUSzXYrrJlcHsDngnHUu+/HYagKqTfqDC+HgJKvSJos3C87Dncsx1ctrecJYRBvLOI
+         HWtK148xuKPCNLg4Cvh77ecr5kLhWyWlquB6byKTZeLYgHh5JTQI0DfPUK2bHx/CvUQ2
+         8ZM8PFRX2Irjl2J/32M8Zs3dJ1UX6Zspn2YOUJaarZemgYPAZGgwWL77MQmXzbkue+jc
+         tJwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790425239; x=1791030039;
+        d=1e100.net; s=20260707; t=1790425536; x=1791030336;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pAsdC2YpnuT6zTnGshJ75DxjPfJCKBC7fNG6VgdNlYM=;
-        b=pabidbx2Ymuw1I9pCDvmHq/vEo3/g1BaSiGt/lfd/gwoiIGHmIAdfq1ZicuOH5cnNM
-         n0p2JpY79vMxxNf1Sxv0J/UHMyKlFDUdFnkrIvSw4Y14u28ycIQMzjwOz+l9biu/H0MQ
-         O+zVRVzxMhzM6mhZTN4Q4Sv/Q2qzFnSBxyADgbapXg8G52Y1+jtVRsFklRqoIovosoUn
-         kB31j6e7y613HPBexPaixCQVa+EDh5p5ESlMy/Vw38BW5UZrVxMS2XXAX3EAzuekr/SH
-         gdZhkS5uy0Yn8I5yKj0XWCaCgaf65x5DfeWNX4GFE2Amy8RMM38GouHRMD3ZLnwz616u
-         fPfg==
-X-Forwarded-Encrypted: i=1; AKwUvBzhzeCSikD6ebfAnYXZyfocSTqZGzAxlOac4JigMNOF03nKn6zxv8/SIvKksNzSr+vVYbGxYfNuJHi1qYB8@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ5xUhY2mL8JVzDpQr3fKGbfmeguVVniXeQtqyTq45mzmHnVXzD
-	4MUgwEiDP+GGKQwBun5x8f7tVGk0XowfLkLuCcCHxSKIZcEzoMXNFtZwpCoUmWwjPr4=
-X-Gm-Gg: AYBFou24u//axT1N4pfbozzALpJhel5HNmAmJdB5TYECc5q1X8hnkRtOy3MxvnRFyNb
-	T9pomOqYV56NRgnVx0B6JM8XTkN05mgF5iEjtaBu60CmQ8tMPyPmcEFvgq+VbOBnho8N/Ue1e3Y
-	VSCtpjhjTFXlNy8B9SnFipiickfqg83de/eim0jz4zBEA6Qd0t2s7WBnQneMqtIHB5jlvCkS+dk
-	HeO/k6XEG7rrJB+Jzy22jGWuzNnXU96Xz2u7H1ceG18N1TvZbrv4p7LmTLS9WjT/+2xFHWZED8A
-	eWiXr87bzh8gAPqgrMMPQwqNeCQGMvBkEy0cqV3TlnX2bHzoPGzxnzZnCnBbXhP09TSMF/JE0s+
-	1lJW6qjsjMkJ9Gwfoml56kKql/HRiU5J2YNyb/lnhj8YOrpZY9raRDafzifuP+gOFUCW06SuRO1
-	1Uj3XhTMGU+wQXLKsYBHcxJkhzZxGY1WRbceEQmS4dzbIWhto=
-X-Received: by 2002:a05:6214:319b:b0:914:4fc3:e85d with SMTP id 6a1803df08f44-9144fc3f607mr11238846d6.4.1790425238783;
-        Sat, 26 Sep 2026 05:20:38 -0700 (PDT)
+        bh=0+TVRBcBiysASXeDoTATHtlh2YPl6QD63Z7oJTtZse0=;
+        b=kWrNt8IAKb1tjCb7GLtvX6GVXgdesAaa6kJyqPN5MtrMjgQKg1NVGfdWPH+Sj9WmKA
+         wy2TyTZBWZoV3mdeRzXdmgcrM+MAsAaEWFqxzovU50JqCOd2AqfKOFRpzcWbI2Ync5tJ
+         3KXZnkIVxS2eockWoKO6csYS4yZtFPwVbATz4VWgfHNx3XdwJRw1KVW8TsiKSaSlLirp
+         tuPDA7/zBv/95KbKMn5Nlj7CY9yUUWfZITKvZsCZXQau3N6jgTAUfEcSwPFJcbU8A/Pt
+         tCnFvhbx4/cCHVzHvCeQ55yRTDFrhBMzSp8LlzRgxnQ2aG90gdjm+GkQtdj+sKqSUzew
+         8xfg==
+X-Forwarded-Encrypted: i=1; AKwUvBwuhw9GKeT5+TPcN4UR5ys/UHG+Y7IZeUVo75GdW7T2cCIu0VYe/xpgyRMxZGDoVmf+xmiUZt9QvuBuzXph@vger.kernel.org
+X-Gm-Message-State: AFuF++mEPOacK+SOXg+pbAhoW+hWm88OQZozE0iaecTNT7ALfvh+vH0V
+	aIivVrxCYzsi6qQeGlY/iEtC05SLIz6UxUdPujv/iDSF/h/rfBpyxGFgPDsFX6DXRo8=
+X-Gm-Gg: AYBFou0Tfb8GQF99mx0Hy8qURtqZ7NBEzRWxQF1nZE1aRy38PRDgSwTtpbuHc7C8g0+
+	ZMuwpCTtQF/czHgnPHYrip9H1ZJ2kPwNjZ0S2x8jPeu9CCJeBWV8abd7KMV/L7A36l0ODeE3Vpv
+	G6r5KmtNGARtzQBDwDCQkZxl72yRblvhAE67s2GgKeqNQwjWkGxG/qHdXJASSDvkKFONNQf85WO
+	pRR+Y4E6BdsgnVySVV7b39+zl88uD1m3+j2RrFzdtjMD7fmDocUKMjjdDor5ljMLDZXRfFaWX/Y
+	Xzkjto8nmEDZr3+22iwUkvhVjGa0dori0pvDvWf7kYrGErt3ZXkEFXNjnTr7B2oTnAF8PeYXCwM
+	edxDK3kDxzZwrh2mTIckfd4PX/nwR5is6De5Q+s9KcwoFEOo20SdEgfwWXnBmaI6zcQPT/p7O/E
+	RIIRzsUHgLxPqJrEyZWpU5S2UuShv3XUCwJEZfNFppXw7D6DfC840Vf20KrQ==
+X-Received: by 2002:a05:620a:6602:b0:939:f89:3688 with SMTP id af79cd13be357-93c47498f78mr873998785a.42.1790425535907;
+        Sat, 26 Sep 2026 05:25:35 -0700 (PDT)
 Received: from armok ([2605:a601:a61d:7a00::2])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-914309a27dcsm39308096d6.3.2026.09.26.05.20.38
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91430ecf80csm38377966d6.49.2026.09.26.05.25.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 05:20:38 -0700 (PDT)
+        Sat, 26 Sep 2026 05:25:35 -0700 (PDT)
 From: Liviu Nicoara <lnicoara@thinkoid.org>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>
@@ -69,9 +69,9 @@ Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: [PATCH v2] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
-Date: Sat, 26 Sep 2026 08:20:32 -0400
-Message-ID: <20260926122032.4847-1-lnicoara@thinkoid.org>
+Subject: [PATCH v3] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
+Date: Sat, 26 Sep 2026 08:25:33 -0400
+Message-ID: <20260926122533.8200-1-lnicoara@thinkoid.org>
 X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -104,12 +104,16 @@ from sysfs; the comment waiting for a "camera on" trigger goes, and
 panic-indicator stays, as on the X13s.
 
 Assisted-by: LLM
+Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
 ---
+v3: add the Signed-off-by missing from v2; no other change.
+
 v2:
 - Drop the dependency paragraph from the commit message (Abel).
 - Say in the message that panic-indicator stays, as on the X13s.
 No change to the DT.
 
+v2: https://lore.kernel.org/all/20260926122032.4847-1-lnicoara@thinkoid.org/
 v1: https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.org/
 
 Depends on the x1e80100 camera DT series, v7:
