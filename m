@@ -1,132 +1,176 @@
-Received: from mail-ej2-f41.google.com (mail-ej2-f41.google.com [74.125.228.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F53F378D8E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 21:52:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE3A83115A2
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 22:35:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790459529; cv=none; b=uaKkoLyUT8EAkMpvF1X5qzmxG2pTAygFTAh6VWBmKS7JBqqNRQmS72fUAWPniXUWV5q0N7VhA+O/xaYj9JJr8t6N1BGQJNUlv1VbRjEAxdGqQi7DAwphH9jabexlWa69ebGUN4JTo5hFBqPx/X3Q2/Q1Zl978h0x+bRzbSBlhlU=
+	t=1790462129; cv=none; b=C8Gc5XBIpYODUBbWWNuuXNY/6d+bOGZXT4+siaoA5NublCurKv9frLXPhNlLm2sGx6FDkGUcBfALcFCkKCq97hT0bmFZcPbaF2j/d4SAkEfzCVlS0azugHPrZum2Mz1Fw/fU9lc4WGuGHsdHllGZexjgVMs0iboe8sNL9u8NPWw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790459529; c=relaxed/simple;
-	bh=nozFzjCHoY9nJR0dTI8x7puPhIPAjPpq12LYsWc3nm8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Dtcw6IWIzCen95gdiNgQC/JcdNyle4X2znVLlojtEo8ZWsVwaVsYw86cxHeDaW+97Cb+k/sOhm4UOo+cHJ/T9iL0CiPaZsjtaawXVcaVnpv2RKUpUwSWKj+eP8sN05jpiGL2o+ZXv5s4vVXADShh5OSwLVDli5nx0m+nsUsSg/4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h2bdXPk+; arc=none smtp.client-ip=74.125.228.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790462129; c=relaxed/simple;
+	bh=XbeBt17n53buFEuUFIwiHhEOrMc/kxrKrQ8+RfPTFRE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=imciS2Gbup+1KUJSZG/N0Xlv4N58wxcgSBbyO6OzfAmmqG/BovF/N9bbJ0XleMrzDcKukIrRovOCLyqBAKGy4Yxl4pHmU43ueiONxhUAIV+c/w8BVVdNEWvT/3AhQPhlSMrNbRvV2Q1fHuafALCrIlB2PaXc1MrHpYsW1RRLv1Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cF3Gnvep; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h2bdXPk+"
-Received: by mail-ej2-f41.google.com with SMTP id a640c23a62f3a-c2dc50c6edfso34882866b.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 14:52:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790459526; x=1791064326; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8GTHY8dj9isNKlVEtk2ciNN+C6fWLQRwd0CxCymnmGc=;
-        b=h2bdXPk+25Lg/c1XQ2vrZ1RzVvvfKgplaPbXHVXmYId2D4zNJ7UfZbW3lttaCft+As
-         E2FqJqX8eEzsfDcEBsgQHcoARGLDRg3HCgEXfxK5YVa09nQiD+mH90ZC83Wfyz0OTpId
-         +tJOlvJc1x/Ko9bMCfk94TPnAkiE8+4XFGZCYMG1YlVpguhpVvzR+Ahryn6GxrH+sYkw
-         ajsbcTObgpgyOC5FnbqdPp0JqMhd4QEqHIq9cYuE+X1TEeHc9unAMOf6bsTbZZ51ceGp
-         sA1MnpEwK1WiZg/MJmvUUHTeaX17CD+5/vAZu1Hmqvb2gp41gyh2bI5rMzbIiUtvWD+u
-         aRBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790459526; x=1791064326;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8GTHY8dj9isNKlVEtk2ciNN+C6fWLQRwd0CxCymnmGc=;
-        b=kgHc1b10QLuTwhD7WcYrBqIPtpwaePt++ro+7PYu4yh6Jzvw7ToSD3j8TLoKF7CEAX
-         ngRRbjVhlkuSThDXza9Lqh5xgpJ1eNY0JrwTKv4Yu50JU3rAvpbZeu1smKvYM7xgi+Dd
-         Vpj464GScRNjMQg3J2I+BGZ+RAbClVYkSQ6F6Zu2Hd5aKn/zmVLuUbMDmofLMDywRrbI
-         TQhVxepNw/pMvvSJltndU9rWYRh5ZMSudxDoSXYp7W4pFIcYAiWYVvkjVq1YIMDnutEw
-         axPoeveJL6M4i+XXQfvF68JGTH8KRlcidSzDAEPnak91tFvb8fPlOEVrXHcGa+u/Ntax
-         IRqg==
-X-Forwarded-Encrypted: i=1; AKwUvBxnX8TYwMF550O82nSvgSU9F/Fga6F04eMpWaLjxQpD6uxyr1UO9AJCnqGJhsmyhmIIyJPenbBvnRSw1LcQ@vger.kernel.org
-X-Gm-Message-State: AFuF++nQeGRAjessi5WNohAf84p5PI//DYqjy2tubpUkg/jBroU/JgEV
-	JdxfoXGid58BgtV47rRMTxSkwaGgxEhZVxxaVEaF16HaLsU79eSNl8OE
-X-Gm-Gg: AYBFou0mpHh1IFjxEwdgp7q/ev8V8Fu1PLeTyUUf7Qd7d2hbHL0Xj48k2OMlSzuRYTs
-	duGTu9SeJBvr3glwAVNy445zu2+NJIomP6aMkr9dCdxyZE2tNueSdyn2129QEhJBLKvlaC3QxfR
-	RSCSQyu1PYsPYWvkIT9ehv0Mc3LejytxoijMCOENVVIVtyyRjMD1EU2MDD9ZGXQHadvoTSfQAVv
-	Cmr0cXGbokcgAB8TUzGv1CqY5993xcn+uM5q/dxM1QQZ1YAO3+bQjZmXi21DokEWtuv5ezuicMM
-	XdTMbju0ZwDvXC8xIPZNgGRayWExsM1s9ipXq5HQLrkgKbRiAAW5F4JoLGAMycjR9A9bbNJx9Cn
-	8RwnFd58eO20XxmCb2keRq285aIB++qIuM9u+QJxyPVzjLb0bHGJN/VHdAztLwn/qoFoUvYfCEq
-	jShVYNj4d50PwnuRUZ5RciJjgoBAU5xDYBT104mfAbwD7LVEKPSEtPWx0Sfg5UB215jRShLUqnA
-	47eVR25ymqP8GQOA7zUk/qD3StWkJN5mPQzFOVjRWpmhsWphv533SqiIBiK3dUcbgFtTAqk/H9X
-	rRCNcL2/yc/JcpXha7YE
-X-Received: by 2002:a17:906:c115:b0:c26:22ae:b66b with SMTP id a640c23a62f3a-c2ac2328075mr821985666b.15.1790459525741;
-        Sat, 26 Sep 2026 14:52:05 -0700 (PDT)
-Received: from localhost.localdomain (83-233-221-53.cust.bredband2.com. [83.233.221.53])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae7353f0asm274704166b.15.2026.09.26.14.52.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 14:52:05 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: netdev@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Ziyang Huang <hzyitc@outlook.com>
-Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
-Date: Sat, 26 Sep 2026 23:51:52 +0200
-Message-ID: <20260926215152.376-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
-In-Reply-To: <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch>
-References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch> <20260925210153.8717-1-yongzhao.derek@gmail.com> <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch> <20260926082129.1632-1-yongzhao.derek@gmail.com> <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cF3Gnvep"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67BF61F00898
+	for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 22:35:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790462127;
+	bh=MK5SHYxXLJAvLu7cLrqWwZej2N+QB4omlWiFjp3JXW4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=cF3GnvepXKHDAEMd9IqPfYoAQ12LklT82LcTQmYzCRIjf/zyqlFnzVY+R6lCU+tyF
+	 n5EQzOzhyb9lqopcwgn0CgJEZ+2gS6iDBJyhoqJM5SljGNI/7ONbfqN0QD3ndhB2GD
+	 xEKQm/OzFQKoKY5nmXTP7jjpb44wfBc7NwIkClCsABX2M54tp7PhSzm7IMXwPn8eXu
+	 Nx0LwGpx0grfP1sDB2/hvSc36B+o6EQCkLoMf9WvvO8RpHznI0jLesbxocxypWX6Ro
+	 yB5CcnrceYcb8amTich5JngjhsA5KwFG5ZT3jqGQX8+TZwnW2cbTaEsgdpNcdqE2Ji
+	 Ajfa+N93CtwvQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b79784a6edso1750157e87.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 15:35:27 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxgubFXoRAhtbbr5msHRGLrixI9TEtotQ4930EuH9S8Ktr4+95fYDSPCuXN16+tOSMCP79rbDMF89eTDBgQ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJUEK6dCGusVSXy748v+OgYtY9x6GXGWWzuBmpt6OnocrPjVUTR
+	GZhjTv1ZQ80GkxcKoz6BBfhvX3i+moKSJaRHQciyuHlIR9wHosMUUpziYGxjgHhCyRUNRDEGnM4
+	iCm6Ii29HylsXoCjLs6Doaak9babDn2w=
+X-Received: by 2002:a05:6512:33cf:b0:5b8:f356:694d with SMTP id
+ 2adb3069b0e04-5b8f35669e3mr509348e87.42.1790462126146; Sat, 26 Sep 2026
+ 15:35:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260924070323.983528-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20260924070323.983528-1-shengchao.guo@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Sun, 27 Sep 2026 00:35:13 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkj-9=2sduOOJDA6bTN=HWVNeHwKcN1N6YvYNg4YNT6Cg@mail.gmail.com>
+X-Gm-Features: AclHuK88PDOBsokjieKeZXQVtMMVCkLLoYpQXgQGraJp_IQrA8KT8Hdi_-BMVOY
+Message-ID: <CAD++jLkj-9=2sduOOJDA6bTN=HWVNeHwKcN1N6YvYNg4YNT6Cg@mail.gmail.com>
+Subject: Re: [PATCH v4] pinctrl: qcom: spmi-gpio: make direction changes exclusive
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Yu Zhang <yu.zhang@oss.qualcomm.com>, 
+	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Andrew,
+Hi Shawn,
 
-> The IPQ5018 PHY driver does have cable test support, have you tried it
-> out?
+thanks for your patch!
 
-Yes. I ran it seven times on the IPQ5018 PHY under OpenWrt 6.18.44
-(NSS build). All four pairs reported OK each time. This was a working
-link, so the result does not show what the QCA8337 sees during a failed
-boot, or confirm or rule out insufficient attenuation.
+On Thu, Sep 24, 2026 at 9:03=E2=80=AFAM Shawn Guo
+<shengchao.guo@oss.qualcomm.com> wrote:
 
-I also ran an A/B test on the OpenWrt 6.18.52 backport, using identical
-kernel and rootfs contents. Before the initial PHY software reset,
-both paths read register 0x14 once and unconditionally wrote it once:
-either the original value, or the value with SmartSpeed disabled.
+> pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled fro=
+m
+> the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+> DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+> buffer enabled.  Neither direction callback clears the opposite buffer:
+> .direction_output() only packs PIN_CONFIG_LEVEL, which sets
+> output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE=
+,
+> which sets input_enabled.  Requesting either direction on such a pad
+> therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+> direction.
+>
+> That silently breaks both directions.  After gpiod_direction_input() the
+> pad keeps driving the line.  And after gpiod_direction_output()
+> pmic_gpio_get_direction() still reports GPIO_LINE_DIRECTION_IN, because i=
+t
+> cannot tell plain input from input+output, which makes gpiolib consider
+> the line an input while the driver is driving it.  On a board where
+> several regulator-fixed nodes share one PMIC GPIO the shared GPIO proxy
+> reads that direction back and rejects every consumer after the first:
+>
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) f=
+ailed: -1
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get G=
+PIO
+>
+> Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+> direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+> DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the register=
+s
+> once after walking all configs, so this stays a single register write.
+>
+> Open-drain and open-source outputs are the exception: such a pad only eve=
+r
+> drives one rail, so DIGITAL_INPUT_OUTPUT is physically correct for it, an=
+d
+> pmic_gpio_get() needs the input buffer to sample the line rather than
+> return the value last written.  So .direction_output() programs the input
+> buffer from pad->buffer_type in either case, rather than only clearing it
+> for a CMOS pad: the buffer may have been left off by the bootloader or by
+> an earlier direction change made with a different buffer type, and an
+> open-drain pad that keeps it off would fall back to reporting the value
+> last written.  gpiolib applies PIN_CONFIG_DRIVE_OPEN_DRAIN before calling
+> .direction_output(), so pad->buffer_type is up to date there.  Key
+> pmic_gpio_get_direction() off output_enabled so that these pads still rea=
+d
+> back as outputs.
+>
+> An input must not drive the line whatever the buffer type, so
+> .direction_input() clears output_enabled unconditionally.
+>
+> Pads that are genuinely bidirectional can still be described that way
+> through pinconf, which is the interface that has always been able to
+> express it; the gpiolib direction callbacks now mean what gpiolib says
+> they mean.
+>
+> Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction(=
+)")
+> Assisted-by: LLM
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 
-Across six alternating warm boots on this board:
+It's a bit in the style of LLM:s to write overly verbose commit
+logs, can you put this into your AGENTS.md file:
 
-- Writing back 0x082c failed all three times. PHY4's CTRL1000 read
-  0x0400, register 0x11 read 0x1030, and the CPU link did not come up.
-- Writing 0x080c worked all three times. CTRL1000 read 0x0600 and the
-  CPU link came up at 1 Gb/s.
+- Use terse commit messages.
 
-The pre-reset value was 0x082c in every run; the two written values
-therefore differed only in the SmartSpeed enable bit. Writing the
-original value back did not avoid the failure, despite the same MDIO
-access sequence. This strengthens the case for disabling SmartSpeed
-on this link, but does not establish the electrical cause.
+>  static int pmic_gpio_direction_output(struct gpio_chip *chip,
+>                                       unsigned pin, int val)
+>  {
+>         struct pmic_gpio_state *state =3D gpiochip_get_data(chip);
+> -       unsigned long config;
+> +       struct pmic_gpio_pad *pad =3D state->ctrl->desc->pins[pin].drv_da=
+ta;
+> +       unsigned long configs[2];
+>
+> -       config =3D pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> +       /*
+> +        * An open-drain or open-source pad only ever drives one rail, so=
+ the
+> +        * line can still be sampled while the pad is an output.  Keep th=
+e input
+> +        * buffer enabled for those, so that pmic_gpio_get() reports what=
+ is on
+> +        * the wire rather than the value last written, and disable it fo=
+r a
+> +        * CMOS pad, so that the pad ends up in DIGITAL_OUTPUT rather tha=
+n
+> +        * DIGITAL_INPUT_OUTPUT.  Program it either way, as the buffer ma=
+y have
+> +        * been left in the opposite state by the bootloader or by an ear=
+lier
+> +        * direction change with a different buffer type.  gpiolib applie=
+s
+> +        * PIN_CONFIG_DRIVE_OPEN_DRAIN before calling this, so buffer_typ=
+e is
+> +        * already up to date here.
+> +        */
+> +       configs[0] =3D pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE,
+> +                                            pad->buffer_type !=3D PMIC_G=
+PIO_OUT_BUF_CMOS);
+> +       configs[1] =3D pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
 
-I'm open to selecting the workaround through DT, so that it is enabled
-only on boards known to need it. What I can document at this point is
-the PHY-to-PHY connection, the reproducible boot failure and the effect
-of disabling SmartSpeed. I have not established whether the cause is
-the board's electrical design or something else.
+It is also typical for LLMs to insert verbose comments like that.
 
-Would that be sufficient justification for a DT property, with the
-underlying cause left open in the commit message? If so, would you
-prefer a generic PHY property to disable downshift, or a
-Qualcomm-specific property for this workaround?
+BUT! I like the comment, so it can stay!
 
-Thanks,
-Yongzhao Chen
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+
+Yours,
+Linus Walleij
