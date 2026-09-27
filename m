@@ -1,126 +1,75 @@
-Received: from mail-pj2-f41.google.com (mail-pj2-f41.google.com [74.125.227.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch [79.135.106.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61C2A1F192E
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 01:10:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CCA8175A92
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 03:48:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790471422; cv=none; b=towAKB8rAp8by0sjLEvWpFA0zqX61owbrnaDx47S5I8bXNY4duhI4W91P5O6yWoYth7hCqejVlItXqFLVIVpgCo56aSQGXAxrOMtvRHP1wE5DAun0AnXLN9GJxe2IGX6kDF4ieAQlMqroEZxP6qyN2L0erNzehN/J3fqpN+0NQE=
+	t=1790480898; cv=none; b=VRyOg00o7wBYu3aSlzI8hBgvp2yLPFDU/2+LV9kNMz1lvIqiz2A7341Z65R7nHYmJro/96ibuc2oPk8/+1YL2JC7pDN+Dz1yQYfJuX4Uu3GYHMJNybynxpOB3s9Ll1aU1fZV3DrLS6RHUb9nazzAj5wd6qwHq3I8eEXSJ7L13Y4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790471422; c=relaxed/simple;
-	bh=GNR4fpZUGJ21uZ1t/ZUAIEe6gTLZnkX4Ug2geMzO4fo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CMPy09CVop1pOWvOUOog3k5ifXbfa78KGkTo/jfkfR3tkRCcmfG+Qu3ETolA37UIQ/8m1eP++pNz2lTa2w/u3H70hHfn31pE8XSCV+9sXv0moLU6zXrOZqbGnxxopmrlLvXF57mIpNDU6BArIuESUfuQqev/g1Nmwy1tnKWgkm0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.227.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj2-f41.google.com with SMTP id d9443c01a7336-2df9754484aso7980075ad.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 18:10:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790471420; x=1791076220;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eHub96pVZHtUuiGqtZ06K3QF0eNyRXbrpGkCUdoQKHg=;
-        b=OXCFON39cB349C7vzudvsS1TW8I6tr9PpkTlb+uM/1NbMO7pcTmhaUQhDzrD4fYITr
-         b38cMo9L1aK+zXMIKG7G8kjpcpzBG7/uDAIAbIeuHjkoyqMASa3jHbE0v1mOdgeKf3bh
-         J/10E0YGetr2qGPj/ExpmhPsR//GkIX8IGDJYohu39Yfi50euij+EwjmYNPG69sPCzsj
-         73bmJucBiNCh9k2PGZWL5i+fmhiKjD67uyEDs6CBeS1/wq9dC4k4IOUzRDKDIjHirGYZ
-         8IXU0f/poFXgwqrn1dBgttNnChMXnSP5GPiJ1uGt9QKOinBA7fBEAS+3XIlJhz6lCKP1
-         U3bw==
-X-Forwarded-Encrypted: i=1; AKwUvBzF0RHWzQHPbjYiepWlJKxK97VEnIyq9fZb1A6iILfcMGkwwKwCUh7ks7jDxqBYngWYIqbrtILQunZYApRR@vger.kernel.org
-X-Gm-Message-State: AFuF++ky7JYmFKPfhnVDjezFj8Xmf75ocmRoWkARCC5jZbAeWkpEuc4C
-	wDnlpM5+WeriJLVWMscPvDycNA7jJtxtoU1Tj/PuCM6Q5ZlN44FG8ngd
-X-Gm-Gg: AYBFou1TbS5/ENm9bDcy2PCpKRU9EXlDCRs7vUcD9QAZBLpbjAIWci7yfzNcxlm52E0
-	oShxAK70Z4WCv8k9ni0ZAf94FbonOn8n5hCId6DsBrT4SC6uS1tqTnt6pg1WeQm5KCswDYvgdKF
-	TrljoU4jY+JvmW2uA/TBO1GptPluB9Oo5zNHWP5R77giAXq9ox+t85uAY4SC/UkRW0sBtkLiyuQ
-	2Unl2nlK/cHWqx3A1PSDFYv/g6tMT+aXacVQmUQHej+L5QnHceYXH6n5wkgYUbT01fX8IkvHGZo
-	dleV949iwZ3Og9I/aJCu9/IouiwvUtKmkgYweFVCXlKMIPXgXCPTuE1f9cPsWtFa37zWgVffqK7
-	g2Jih+JEHd+Kf0mI9f6dF34VnRBBD1zgR/d6yQZR2eJB7dZaJpiqWUl8s3N+2ua/c/XWOD+EdF4
-	tO4Cko9tkewwyxb4lIy5Mcab7nUYqr/2kav2OvC+/o/NQbrAyHFVcaN8Ikg1sBDUJlwt5rGw9UX
-	4WPBt4IKqK9hmUquo2A
-X-Received: by 2002:a05:6300:6cc5:10b0:3de:489a:7530 with SMTP id adf61e73a8af0-3de489a77c8mr1267646637.72.1790471419502;
-        Sat, 26 Sep 2026 18:10:19 -0700 (PDT)
-Received: from navi ([113.140.3.77])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87feaf89651sm2514829b3a.41.2026.09.26.18.10.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 18:10:18 -0700 (PDT)
-From: Zimeng Li <me@lizi.moe>
-To: srini@kernel.org,
-	broonie@kernel.org
-Cc: lgirdwood@gmail.com,
-	tiwai@suse.com,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org,
-	Zimeng Li <me@lizi.moe>
-Subject: [PATCH v3] ASoC: qcom: lpass-cpu: use DAI table index for playback constraints
-Date: Sun, 27 Sep 2026 09:09:11 +0800
-Message-ID: <20260927010911.51980-1-me@lizi.moe>
-X-Mailer: git-send-email 2.55.0
+	s=arc-20240116; t=1790480898; c=relaxed/simple;
+	bh=72jOmKJsKtZbMfexR6DU2MSAN3lb/BvgsBkTbYP0Jow=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=pLn1ZwPBqiK3k1ouRW45t/8q2J8Jz/iOOU4eQ/diikudvv96fQaT0wpziQHyjsTj0qdGnj6rI1mVmtR3KuBFXqw/+vgElKsVGfSlT0Gb723iBevVr4IiE1puISDbc9HUkMfc6uAQziRlqw218u714j1YS3ouVjRtD1WjqvPvN4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=BUuAj1lg; arc=none smtp.client-ip=79.135.106.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="BUuAj1lg"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1790480887; x=1790740087;
+	bh=2n7v/f900ujYlkPeMFvncKXsx01rexWG+WoC8pk4+js=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=BUuAj1lgFGUnkpYeDBk0B5qaCypJk7m+iRRthctsXUPOhcEx20nFxompc4oPawyR0
+	 4I7PIiNFMHGpPKt/6cMwCRntk28dxo1zxdw9hTmfpjAa8TDaH0RwdKzyv1I3ciJj9P
+	 7wxRvOZ4Z8AxEGWwAi3/fZa+3Wq5I/Wp35f7BrXhYHAfIp/jyvhIfIRcTNban+zq8Z
+	 qYVd0ZI04ykGpbOsp6WqrUcYalse+aoXK04NUd5MgKrVdWJ63MDy3BpBBWLq0+w4pl
+	 XfZJieSOtkpeE9moC3vZc+3Yj04v5VHk/puYbey/OHGVyYP7Kafl9JxKsG5PYFkgeU
+	 HiR1JCNyFD9+w==
+Date: Sun, 27 Sep 2026 03:48:01 +0000
+To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+From: Alexander Koskovich <akoskovich@pm.me>
+Cc: David Heidelberg <david@ixit.cz>, Krzysztof Kozlowski <krzk@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Andrew Lunn <andrew+netdev@lunn.ch>, Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Conor Dooley <conor.dooley@microchip.com>, "David S . Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>, Luca Weiss <luca.weiss@fairphone.com>, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, oe-linux-nfc@lists.linux.dev
+Subject: Re: [PATCH v5 6/6] arm64: dts: qcom: milos-fairphone-fp6: Add NFC
+Message-ID: <AA1gQ_nENEVHK1oebVbNS1EUMIkabrgIPTl649QGQZvq_1LAMw5msh-2bmJt1DbB6K09JX1xc_VN0retl7XFImBTbpm81ucumJM_nzVKfYI=@pm.me>
+In-Reply-To: <20260811220135.472380-7-jorijnvdgraaf@catcrafts.net>
+References: <20260811220135.472380-1-jorijnvdgraaf@catcrafts.net> <20260811220135.472380-7-jorijnvdgraaf@catcrafts.net>
+Feedback-ID: 37836894:user:proton
+X-Pm-Message-ID: f3ec71461e33f107fcfa8c1f6b9d2d515788ab04
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-The DAI ID is a hardware port ID and is not necessarily the index of
-the corresponding entry in variant->dai_driver.
+On Tuesday, August 11th, 2026 at 6:04 PM, Jorijn van der Graaf <jorijnvdgra=
+af@catcrafts.net> wrote:
 
-When configuring a DAI with LPAIF_I2SCTL_MODE_QUAD01, the probe code
-currently uses dai_id to index variant->dai_driver. This is incorrect
-for platforms where DAI IDs are sparse. For example, the IPQ806x MI2S
-DAI has ID 4 while it is the only entry in the DAI driver table. If
-that DAI is configured for QUAD01 and probe reaches this branch, the
-code writes beyond that single entry via dai_driver[4] instead of
-updating the DAI being processed.
+> +=09nfc@27 {
+> +=09=09compatible =3D "samsung,s3nrn4v";
+> +=09=09reg =3D <0x27>;
+> +
+> +=09=09interrupts-extended =3D <&tlmm 31 IRQ_TYPE_EDGE_RISING>;
+> +=09=09en-gpios =3D <&tlmm 56 GPIO_ACTIVE_HIGH>;
+> +=09=09wake-gpios =3D <&tlmm 7 GPIO_ACTIVE_HIGH>;
+> +=09=09clocks =3D <&rpmhcc RPMH_LN_BB_CLK2>;
+> +
+> +=09=09pvdd-supply =3D <&vreg_l20b>;
 
-Use the loop index i when updating the current DAI's playback channel
-constraints, while retaining dai_id for indexing the hardware-port
-specific playback SD-line mode array.
+Looking at schematic, think this should be L7B? L20B is used for SIMVDD1_EX=
+T.
 
-This fixes the incorrect DAI table access for platforms where the DAI
-ID does not match its position in the driver table.
+> +
+> +=09=09pinctrl-0 =3D <&nfc_default>;
+> +=09=09pinctrl-names =3D "default";
+> +=09};
+>  };
+>=20
 
-Fixes: c223f41c1a52 ("ASoC: qcom: Add four speaker support on MI2S secondary")
-Cc: stable@vger.kernel.org
-Signed-off-by: Zimeng Li <me@lizi.moe>
-Assisted-by: LLM-assisted source analysis
----
-Changes in v3:
-- Describe the assistance in Assisted-by, no longer name the model.
-
-Changes in v2:
-- Add stable to Cc.
-- Identify the model in the Assisted-by trailer (superseded in v3).
-- Clarify the conditions for the IPQ806x out-of-bounds access.
-
-The code change is unchanged from v1 and v2.
-Compile-tested with LLVM for ARM using multi_v7_defconfig with
-CONFIG_SND_SOC_STORM=m. The lpass-cpu.o, lpass-ipq806x.o and
-lpass-platform.o targets built successfully. Not hardware-tested;
-the IPQ806x example is based on static analysis, not a reproduced crash.
-
- sound/soc/qcom/lpass-cpu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/sound/soc/qcom/lpass-cpu.c b/sound/soc/qcom/lpass-cpu.c
-index 242bc16da..079177a6d 100644
---- a/sound/soc/qcom/lpass-cpu.c
-+++ b/sound/soc/qcom/lpass-cpu.c
-@@ -1234,8 +1234,8 @@ int asoc_qcom_lpass_cpu_platform_probe(struct platform_device *pdev)
- 		}
- 		if (drvdata->mi2s_playback_sd_mode[dai_id] ==
- 			LPAIF_I2SCTL_MODE_QUAD01) {
--			variant->dai_driver[dai_id].playback.channels_min = 4;
--			variant->dai_driver[dai_id].playback.channels_max = 4;
-+			variant->dai_driver[i].playback.channels_min = 4;
-+			variant->dai_driver[i].playback.channels_max = 4;
- 		}
- 	}
- 
-
-base-commit: 0ed6f7f62318a581fe9698f8a4e98c7ca01160e4
--- 
-2.55.0
+Thanks,
+Alex
