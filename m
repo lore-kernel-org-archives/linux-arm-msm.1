@@ -1,88 +1,89 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68BA33F3277
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:30:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EAFC3F4827
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:30:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790515803; cv=none; b=XcohnmC3AzyU5S6kKnf2WgYSNVwcjtdvjOPxwUH6OURJf+lrEOOq/uOUhjy54tSG/mNNsU8raP8rULP5y9uZhyfh80MUNhD4/cY0prsRlZ8eHb8MPuSG+1sCG98Nn7qL4bwRL+2gOaqeFsi1EtWx/T8zP4YG490OiLAcZS7o4Oc=
+	t=1790515804; cv=none; b=QJ09DKyIQ5+kCgui/6pCcb9xZ6zcgbRxeomzlFFZ5gZ6V3r5edjaykImrS2RDiZSVLP1KQRX/TVe39ZUSW5/hK+SSsFpe1puonkEpAQAwxvpX2pjwwzphbKurhjwdNvQhzvN0f8lnrAoiwTEtAVwxUFchdpJja4uPayWgiAhylM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790515803; c=relaxed/simple;
-	bh=AiV+UgMZj/8Xbz75FJ/bRBCuJFbHFnWTyvBbyi9SIaA=;
+	s=arc-20240116; t=1790515804; c=relaxed/simple;
+	bh=FL7ldl9LU54gpf6PaJsIAMaKHdINinRa+Hmc9p0bjVs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pH+rpGJ7un7Gd9teujg3HjMHUTYCM10kxpUm76XjbNz8DrmorYyYNGoHHxNovhFZ+076QkTrVRqNg6kCnjWHttcZPLI9FEihD9PcxLrcBl3F5IMbz1xNLxKFDZt8Y6XikIqmALEfKBNQtKdmdWA/km/1qbAwXwzWnySAOWpQWIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HNoGM5u5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QFcg5ZFo; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=GXL+JqoN7Z6uvW4hTNTXFVUKNPyBNwpdQqNv3ZdyG8JKqaAm7dQcDaI9PbphMTb8USUtpAik5lHBdIqWRQOogdxSC4jBC1g9WIuf2BKKiFde6ihkj2nIzUcgArR8QmRxPDqmX+QXUdvxvkzYfyYk0jh3+RZehQ5MshPWOkdMn2U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GxRkIzyf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bd9DuAFq; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HNoGM5u5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QFcg5ZFo"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68QMnFQi945518
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:29:59 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GxRkIzyf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bd9DuAFq"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68RAC1kK3506648
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:30:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	j0W3hrgF4xqqK3S9Nv7s61X5LJpvgGVvfqcGo/cmYe4=; b=HNoGM5u5/oUKnvLx
-	P5MwcDL+ZdO+Y5HfOMr/uflKSOHqpmkn8QTMy0QLASSN9o6OtvCG0nhgv/Y8ZFRz
-	Vm20jVnxj75SEKurrlaVhaODh9MR83oKviAJB9sNWg4KMSOlBAgBfyhMI/kmiLFj
-	ZaQ99SOi0l5Z2wFa/YsaA+cZup0QXEGjpfsnbNxCyNlteETUpqZYfiyLZhvGHazo
-	qNw/4p+xXdnuewivtIjTKwlA7rDymbOlmvXyTYVxr1kheoQiD/TELjbrJI+uyydk
-	cGmo08cQWYZ/Uff8b9duxdNyVRGOqUFr+NRpxLd7ltQ/JDLD7e8hyQAdEK3JvfSH
-	zwMBqA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx3dp3aq0-1
+	Obygb7aPUf7Z+CJroQ+0vxrBlTyHCRZkXWI/whnPI/8=; b=GxRkIzyfJNJqW7s+
+	qWt1A+ohXbjcyJ2NkEKq74pQIsMhxsTiOanYYlmcTYuFbG9mOvQ9k1aBwkvCNpR0
+	1DYL+UjR1MaznzBiz1J5dQ79+IQNTl6+wNjHjqcB3f2x0uX9HkHCg+mOwZ9Jsb4F
+	6vr/Qd+VkKkLS87xPEL24rtfh1ZYWJg4N4dnx8AcU62mwzSINgSQFRRZOMEjA53G
+	MN5aVO9YjfzwswY4l5LrAGXUj3ifOFM4GzsBYLed3HpQudGkn79Ce1KUTT2TvVAm
+	tRIOqDcEZVZXNueXtEgDzHGX/p2xseRjVexZ+JP9crYWghfiD3aleEnVHgwIiT5x
+	mNEbUw==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx3rfuaru-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:29:58 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-936708f129aso447872385a.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 06:29:58 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 13:30:01 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-91457ba4f48so8876076d6.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 06:30:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790515798; x=1791120598; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790515800; x=1791120600; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=j0W3hrgF4xqqK3S9Nv7s61X5LJpvgGVvfqcGo/cmYe4=;
-        b=QFcg5ZFoho/zbdPRsqCeqhMaiGkKrUjaFDXhs1nVng/ZFg7UctFe/rKxYSafcRCk+J
-         BBOJsHYoNWkg5uJWgpK0vjJV+hpdc4nRo6Q+seay5+i6aSp06pCN93A3U1Zh9QZ1T4IP
-         guJKSStDt2TqXj+qKE25GEqvn3pQX6qXIKvxE5bDMn8yZwYvBQ1tr9YoBfTrtGOeoI8C
-         7FgFJ+Gl1VAyG+eusJPO/IAX8FXtoxgMtjnvHoaaQT0Cw0LThZdSaiGpS1hu3RPbj0Gd
-         dZ7GDqN1j+c3Al2BMpxoN4G31DInSSwIOHcSpj1VEU82rJFyhv1sFAg9MUzOwMeAP/cU
-         m4Xg==
+        bh=Obygb7aPUf7Z+CJroQ+0vxrBlTyHCRZkXWI/whnPI/8=;
+        b=bd9DuAFqaRB27onP9KeFHuwbSHJlbqVBZ7Tu4FQqu8bqRbky8FZO0azlUGhzWPK8fJ
+         iFf9VO8CT/gaCc/0OYmoIyaip1yeY03pUfijt/zUICRxodcDlVWpzhmyTkKRUwZf9fMx
+         3FJbTQ53AEOYTODcK+ZmLfPscPZtL1kVr0qpkYWYNvX4YLM+mZt+6cphx5mF1q3RGX1S
+         IQYPeZpr5DxWQAwLPfrHqtExPyPqA2upctx0Kcxc3nsMtP9XMj4xLUfBGgc94fgR88jV
+         NX/9LI/F7eVyf/nji0oRZoKUaV2mKwQRvhDAgqf1JHxsTH4x1/0n2t/j0/TcWYleBtBW
+         3psw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790515798; x=1791120598;
+        d=1e100.net; s=20260707; t=1790515800; x=1791120600;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=j0W3hrgF4xqqK3S9Nv7s61X5LJpvgGVvfqcGo/cmYe4=;
-        b=kzFecSdTMMQxDsZqjVVh7u8KBQNq2miOjod3v/q9pK8uXLP2qf33zw1myyd/behbt+
-         R4aylPpmkl4T+xC8tOjjtYH5ynIz4xd3yHYQ6X0wOeWWHuAnzptc2zJeLzL0BZ0baUIE
-         96+gAucdLd+1nn0d959S4Ec5W6b6GyNuNzkd2TGyyTrSy5dGyU4ZAyK9Y2YX2djhceUx
-         eOze+1BJbDCNT8p0ThR5xNzOHyi03MsQyLO3pmRD4oJgXo6pm5FFce+C7GzElh6xA4Tm
-         67IpQZ4ElZeY+pHIwdNi50MmscXf3twrphDgEAfpm1H0pauXC7ZM26JhLlaQxXYGrc3A
-         qm8Q==
-X-Forwarded-Encrypted: i=1; AKwUvBx2BqIsRw+YOs1NLGzrm55Sp/Xs9aFpJRcudGjP6VzMiYH6XAsZ0H65e4KA8v+gtd+BoUCFqlCSSkru0jbR@vger.kernel.org
-X-Gm-Message-State: AFuF++m6dtvTh+rhooC+krxQi6BJ4kLZzsYh1tTS8CaGa6vcp0xI6fJ2
-	RPSLYffurzA55/ICyvrWjwQNr5DVtl2w1K+1W3ubBLnXocd53kOwIqwLj9u7kNez9y+kbkg+xek
-	zOzuh6W3wrKtnYcgXWL5AaXsRurbwhvWbf9qgmXGzx6o2vo7gu69wRieZgTDmrUj1Tdwh
-X-Gm-Gg: AYBFou1vYovulXTeq7xQRnlKayp0/xGIv3xAczuIrvBdxQ1hR0FzLajEu6rvM1Safjh
-	Qeo+1ZBm2bd/bU8grtztEqRcr3m8QyVXc2YCwPCSEu7tjr3u7VFHdjLnUQ2Ex4IUuNJjqLPgFDk
-	79huIXrD/mBk61sSjgeTeRDdassPaPFCZ1/X5PZ0vdF1VTFk72dK7+G3bIpTvN6cT86G7uXUFPL
-	BFzXEMssagZXdu9asR/I/zEAfIVzlHkyyBNexLc3GoNzcobgWhka6ls9M6JNBIuKPn646BwEca4
-	/WoPYnp+AR7plEk+CO3Duqa3sxFHs4S6SsRWZ9l/oLPaI4uQhFfO3yJodlP/iHhhgMkwJ6Q87PC
-	5H7FTwKcvfLlal+sbExCeR8ZARQKzc/1AiERk9PjcymEDZ3TpwZyDiG+t2GUZdIRxbm+/wMUnpl
-	sroZ5YAFOKVM1V6XfIb9RmY8RTOSIlUZGS0W94g+H0z86InYzLO8Q=
-X-Received: by 2002:a05:620a:284a:b0:93b:d79a:c460 with SMTP id af79cd13be357-93c43e0ef20mr1570232785a.56.1790515798342;
-        Sun, 27 Sep 2026 06:29:58 -0700 (PDT)
-X-Received: by 2002:a05:620a:284a:b0:93b:d79a:c460 with SMTP id af79cd13be357-93c43e0ef20mr1570228385a.56.1790515797866;
-        Sun, 27 Sep 2026 06:29:57 -0700 (PDT)
+        bh=Obygb7aPUf7Z+CJroQ+0vxrBlTyHCRZkXWI/whnPI/8=;
+        b=hTA4+yRiu6/XhiWnmMcYw7niNcjg7qboOlQvQ2qoubqaUu7+U5BNJRYf11TSjV8z9X
+         giBih2hWKkmva2ZaEp/EdEgeKxQYpOziSINtXs1gflO5lInvHrweoDjHDNZJRvGUnO6+
+         8tQL/1KutSibZWAgTpoIxhj+TwhZrY3Nyn5Zl02eUqJp7La2GDlGxquxowQvLie93NA3
+         FJwhhALdpRGOLOf7x8PViSiGKwvNvSmifuE27fHh1qkWznbNsZutqoThpSD1cx2arnnL
+         aEmGCqiiHo21+IAxUMEMo0DFt4yo7LaSQ1ci2y/Lojyfss3V7+rfpTG0jbpfmocMVuaK
+         +lFg==
+X-Forwarded-Encrypted: i=1; AKwUvBxx52G1OSquZpij/mzcZzCwAN42kp3QE/P34AYE+g1Zrp8MNwrnTfxJXRnD4PzJ/2zHZoANRfO/AJSvQkX2@vger.kernel.org
+X-Gm-Message-State: AFuF++nmxID/AhUbATrgbA6sEnxMTrr4Njqo9lS5SZw/7K/MmpT/jveu
+	C5XtoXofRFareNYt6Kzmsex0rdsWDTDsO+eA3tdCK6r6+xxaO5dI4OQVAQ2mTAfGsqr5/sKmWqe
+	zfdRllNvO4w5vVGsdUT2w5dbvt4tAB1FB1TPMo2MhsmxJmCEGYgy/PA7UdPCU3yDtMEMn
+X-Gm-Gg: AYBFou1dsXrgvjHTKZxbJBqKDE+IpRbUgMzw05ByqYCCu0eSgu4klrOJ+n4VTPyMsdp
+	/X43jVd5K0ojuXf7O1ufIVPImK3icHfLir6nqKmWRk12l3AHoMGspedL7cpWD4pA++mpT9FLRbn
+	DW7V6SpdFgc95hv4Ll5GxYi0hpaTPzl1s/PrDcAsV7fSHJD5ZeMmupKZLDQsy33agsis1b2u+kX
+	KORg2UsJshF1sKXwzZ+4Qz3q/ARROTTNw2eAC983/O0UNMfo7qSiyH6uCDTsBsWyXoHZJg0dRIL
+	j0ivixK9ZowNQeJ4KW4sOSuWRjpjvVT8n8pYJa3sgkXjwF1UGVL3n1ZDvsGc7bxKkifl+XGMsBX
+	UfZo55KqmR5z3u+3ceQ16LQL3nnAs0JxzuJMzrbO9RKs/Fq8QZgGHvVzi0R/Un2UGaqM/1JZewT
+	p26SiC+hGc+kt4ad9l/xAXRbSX+ehAyjFTcU5ceDuLMEzRpDlHOPY=
+X-Received: by 2002:a05:620a:4608:b0:93c:7800:bc55 with SMTP id af79cd13be357-93c7800d31bmr107413685a.18.1790515799869;
+        Sun, 27 Sep 2026 06:29:59 -0700 (PDT)
+X-Received: by 2002:a05:620a:4608:b0:93c:7800:bc55 with SMTP id af79cd13be357-93c7800d31bmr107410385a.18.1790515799360;
+        Sun, 27 Sep 2026 06:29:59 -0700 (PDT)
 Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:5c1f:3897:a4a1:99e1])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a00179c729sm94636745e9.15.2026.09.27.06.29.56
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a00179c729sm94636745e9.15.2026.09.27.06.29.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 06:29:57 -0700 (PDT)
+        Sun, 27 Sep 2026 06:29:58 -0700 (PDT)
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Sun, 27 Sep 2026 15:29:52 +0200
-Subject: [PATCH v5 3/5] i2c: qcom-cci: Add 19.2 MHz timings for the v2 CCI
+Date: Sun, 27 Sep 2026 15:29:53 +0200
+Subject: [PATCH v5 4/5] i2c: qcom-cci: Share the timing table across CCI
+ revisions
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260927-cci-clk-fix-v5-3-4cd498559ae5@oss.qualcomm.com>
+Message-Id: <20260927-cci-clk-fix-v5-4-4cd498559ae5@oss.qualcomm.com>
 References: <20260927-cci-clk-fix-v5-0-4cd498559ae5@oss.qualcomm.com>
 In-Reply-To: <20260927-cci-clk-fix-v5-0-4cd498559ae5@oss.qualcomm.com>
 To: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
@@ -104,65 +105,72 @@ Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         Loic Poulain <loic.poulain@oss.qualcomm.com>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI3MDA1MyBTYWx0ZWRfX2BWR8Iz4Ibmu
- vfYDEarc3bOw+BlzD0ChAz3hjOJiGLAlyE6HMZFU9CzsMJ76icS7tnV5M4xmiJZV0B+WqVQVINj
- ZsMXUjQNodVu9Mv7Eji5hs7lDuZocClufl2iOClqEhjq0UQLZzHOqifd15LCYzopIMySuyqVTz6
- RrSGp92xA8qMo6D+C0QHwQm23ew+2/cSFCKfoEFh8XQgIUTKWHYsBpYf2EK4LK+ymRn3F95gkM1
- aBHC9xSRlA243Jt5naHEnrlB4G2GojW8YeRubcPaIYkGrmhzIDmOMwHACbQIs/JpemL+4SWWWKA
- LEOKJh0ufFa1leuf6ozmG51phAlF8KgPPENNxyED+ZHbZVLVszjKRikK4qSTrxpkeXKzRlZDrcL
- sqVdR+G5f4AukCXCZUX2louD4TxC88HMYxKL7IA328Rfyyr1NNgNrHSU8cFccKp+oT9Iv3K1ahR
- 3QTz4D4EFLs+9JPTctw==
-X-Authority-Analysis: v=2.4 cv=QsXLTlyd c=1 sm=1 tr=0 ts=6ab91a57 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI3MDA1MyBTYWx0ZWRfX4uVPv2zpI6Oj
+ CMuR9NZg4mofiI8GPUBtHEzd8kyAsrR5i9gb2sn+ij+ZbNigOSCmErqtCtX93dKN3GV8q3Df7EB
+ E1hUmHb2cjurAl4al8xGvhfRgMIQqNE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI3MDA1MyBTYWx0ZWRfX0Ef/QOPoVRAd
+ il5Xv2hxBQRPtCoYsLCRAGvoEQUa8zAlSuDjKk2xoT+JBQa+aF3lXU8GmLX4pfVlvYR6bWcWBph
+ KyEGWZ5Q9EN2tnyNIWrJQpm+9OTNYPgsPK7GxlptXD7thrqLJkgwoCivE6yHmYjULoowEauv6Im
+ i8/ywExrTxCSHTP+9sWUDEHbyIprxWXU6zd5krr89l6pCCogkeFW+AyGKUqA5ndTf8FRkjNX1lS
+ s7KM8mV2vsGr6YO/yXOnK/V9e+MwJt+/fLCO7AvwaiJ7VhiOEw9JAb9OU01xmVM4cKSnm6ZgKhl
+ BUfr8gDR9MYD8fDex9S9GnPiYxPWc5/CbQiWhGR3X0DpqVMpwC451SOoDwKKwocKXD+xzrEHJwy
+ 0ZCirc5577GcqjcM+L/704dE4bFClVDb+oybQfJ/Bx7/eOC4x/BMbsnVSucg01fAIrfdJzyifnQ
+ bfQBk0lTc03PHeQehuA==
+X-Proofpoint-GUID: jKBDcJj2S92S56m3lHYMYkIcoG4F2SfH
+X-Proofpoint-ORIG-GUID: jKBDcJj2S92S56m3lHYMYkIcoG4F2SfH
+X-Authority-Analysis: v=2.4 cv=K6G3jCWI c=1 sm=1 tr=0 ts=6ab91a59 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=KKAkSRfTAAAA:8 a=butnsgrUGOw-u3YEFNkA:9 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: pm0r8gooax6G_kfoEgSqVFFlx4j0cqlj
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI3MDA1MyBTYWx0ZWRfXwNX7+DeF9uIl
- Eq7QrfVZamPVXfVLUqEk14kDY51OGbdoYXKh1Zg8zbkBIruP2wQJbJYD6Df3Pwm7LKOA2PzQvVV
- KWgpN6205+PNH/2bkkXqH4ronKbs/CQ=
-X-Proofpoint-ORIG-GUID: pm0r8gooax6G_kfoEgSqVFFlx4j0cqlj
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=KKAkSRfTAAAA:8
+ a=EUspDBNiAAAA:8 a=aKP0LZVuKWpzAjQh7DIA:9 a=QEXdDO2ut3YA:10
+ a=1HOtulTD9v-eNWfpl4qZ:22 a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 clxscore=1015 malwarescore=0 phishscore=0
- adultscore=0 bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0
+ spamscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609270053
 
-The v2 CCI (msm8996/sdm630/msm8953/...) is normally clocked at 37.5 MHz,
-but its CCI clock can also be configured and run at 19.2 MHz. Add the
-Standard and Fast timing sets calibrated for 19.2 MHz so that a v2
-controller left at that rate still has valid timings for those modes
-(Fast+ requires 37.5 MHz).
+The hw_params timing values only depend on the CCI clock rate and the
+I2C mode, not on the hardware revision: every per-variant table used
+identical values for a given [rate][mode]. Only the set of supported
+modes differs between revisions.
 
-The values mirror the v1/v1.5 19.2 MHz Standard/Fast timings, which
-share the same CCI clock rate.
+Move the timings into a single shared cci_hw_params[rate][mode] table
+and describe each variant's highest supported mode in cci_data with
+max_mode instead of duplicating the timing values. This removes the
+per-variant timing tables without any functional change.
 
-Note the "v1"/"v1.5"/"v2" labels are arbitrary driver-internal names for
-the cci_data configs, not actual CCI hardware version numbers (the real
-hw versions are e.g. v1.0.7 on msm8974, v1.4.0 on msm8996, v1.6.3 on
-sdm630/660, ...). They only distinguish the timing/mode configurations
-used by the driver, and will be subsequently removed.
-
+Suggested-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 ---
- drivers/i2c/busses/i2c-qcom-cci.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/i2c/busses/i2c-qcom-cci.c | 181 +++++++++++++++-----------------------
+ 1 file changed, 70 insertions(+), 111 deletions(-)
 
 diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
-index 1092ce0371429ef64c7cc44cc23a42ba4c135af5..b6fa37a306758ec33ede6fcc39ce4412b86d9a84 100644
+index b6fa37a306758ec33ede6fcc39ce4412b86d9a84..21695c744502f7fb5d333f1272f3771e4d9d5508 100644
 --- a/drivers/i2c/busses/i2c-qcom-cci.c
 +++ b/drivers/i2c/busses/i2c-qcom-cci.c
-@@ -762,6 +762,30 @@ static const struct cci_data cci_v2_data = {
- 		.max_write_len = 11,
- 		.max_read_len = 12,
- 	},
-+	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+@@ -124,7 +124,8 @@ struct cci_data {
+ 	unsigned int num_masters;
+ 	struct i2c_adapter_quirks quirks;
+ 	u16 queue_size[NUM_QUEUES];
+-	struct hw_params params[NUM_CCI_CLK_RATES][NUM_I2C_MODES];
++	/* Highest I2C mode supported by this variant. */
++	u8 max_mode;
+ };
+ 
+ struct cci {
+@@ -249,13 +250,76 @@ static int cci_clk_rate_idx(unsigned long rate)
+ 	return -EINVAL;
+ }
+ 
++static const struct hw_params cci_hw_params[NUM_CCI_CLK_RATES][NUM_I2C_MODES] = {
++	[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
 +		.thigh = 78,
 +		.tlow = 114,
 +		.tsu_sto = 28,
@@ -174,7 +182,7 @@ index 1092ce0371429ef64c7cc44cc23a42ba4c135af5..b6fa37a306758ec33ede6fcc39ce4412
 +		.trdhld = 6,
 +		.tsp = 1
 +	},
-+	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
++	[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
 +		.thigh = 20,
 +		.tlow = 28,
 +		.tsu_sto = 21,
@@ -186,9 +194,188 @@ index 1092ce0371429ef64c7cc44cc23a42ba4c135af5..b6fa37a306758ec33ede6fcc39ce4412
 +		.trdhld = 6,
 +		.tsp = 3
 +	},
- 	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_STANDARD] = {
- 		.thigh = 201,
- 		.tlow = 174,
++	[CCI_CLK_RATE_37_5MHZ][I2C_MODE_STANDARD] = {
++		.thigh = 201,
++		.tlow = 174,
++		.tsu_sto = 204,
++		.tsu_sta = 231,
++		.thd_dat = 22,
++		.thd_sta = 162,
++		.tbuf = 227,
++		.scl_stretch_en = 0,
++		.trdhld = 6,
++		.tsp = 3
++	},
++	[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST] = {
++		.thigh = 38,
++		.tlow = 56,
++		.tsu_sto = 40,
++		.tsu_sta = 40,
++		.thd_dat = 22,
++		.thd_sta = 35,
++		.tbuf = 62,
++		.scl_stretch_en = 0,
++		.trdhld = 6,
++		.tsp = 3
++	},
++	[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST_PLUS] = {
++		.thigh = 16,
++		.tlow = 22,
++		.tsu_sto = 17,
++		.tsu_sta = 18,
++		.thd_dat = 16,
++		.thd_sta = 15,
++		.tbuf = 24,
++		.scl_stretch_en = 0,
++		.trdhld = 3,
++		.tsp = 3
++	},
++};
++
+ static const struct hw_params *cci_get_hw_params(struct cci *cci, int mode)
+ {
+ 	unsigned long rate = clk_get_rate(cci->cci_clk);
+ 	int ri = cci_clk_rate_idx(rate);
+ 
+-	if (ri >= 0 && cci->data->params[ri][mode].thigh)
+-		return &cci->data->params[ri][mode];
++	if (ri >= 0 && mode <= cci->data->max_mode && cci_hw_params[ri][mode].thigh)
++		return &cci_hw_params[ri][mode];
+ 
+ 	return NULL;
+ }
+@@ -696,30 +760,7 @@ static const struct cci_data cci_v1_data = {
+ 		.max_write_len = 10,
+ 		.max_read_len = 12,
+ 	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+-		.thigh = 78,
+-		.tlow = 114,
+-		.tsu_sto = 28,
+-		.tsu_sta = 28,
+-		.thd_dat = 10,
+-		.thd_sta = 77,
+-		.tbuf = 118,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 1
+-	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
+-		.thigh = 20,
+-		.tlow = 28,
+-		.tsu_sto = 21,
+-		.tsu_sta = 21,
+-		.thd_dat = 13,
+-		.thd_sta = 18,
+-		.tbuf = 32,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 3
+-	},
++	.max_mode = I2C_MODE_FAST,
+ };
+ 
+ static const struct cci_data cci_v1_5_data = {
+@@ -729,30 +770,7 @@ static const struct cci_data cci_v1_5_data = {
+ 		.max_write_len = 10,
+ 		.max_read_len = 12,
+ 	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+-		.thigh = 78,
+-		.tlow = 114,
+-		.tsu_sto = 28,
+-		.tsu_sta = 28,
+-		.thd_dat = 10,
+-		.thd_sta = 77,
+-		.tbuf = 118,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 1
+-	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
+-		.thigh = 20,
+-		.tlow = 28,
+-		.tsu_sto = 21,
+-		.tsu_sta = 21,
+-		.thd_dat = 13,
+-		.thd_sta = 18,
+-		.tbuf = 32,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 3
+-	},
++	.max_mode = I2C_MODE_FAST,
+ };
+ 
+ static const struct cci_data cci_v2_data = {
+@@ -762,66 +780,7 @@ static const struct cci_data cci_v2_data = {
+ 		.max_write_len = 11,
+ 		.max_read_len = 12,
+ 	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+-		.thigh = 78,
+-		.tlow = 114,
+-		.tsu_sto = 28,
+-		.tsu_sta = 28,
+-		.thd_dat = 10,
+-		.thd_sta = 77,
+-		.tbuf = 118,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 1
+-	},
+-	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
+-		.thigh = 20,
+-		.tlow = 28,
+-		.tsu_sto = 21,
+-		.tsu_sta = 21,
+-		.thd_dat = 13,
+-		.thd_sta = 18,
+-		.tbuf = 32,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 3
+-	},
+-	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_STANDARD] = {
+-		.thigh = 201,
+-		.tlow = 174,
+-		.tsu_sto = 204,
+-		.tsu_sta = 231,
+-		.thd_dat = 22,
+-		.thd_sta = 162,
+-		.tbuf = 227,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 3
+-	},
+-	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST] = {
+-		.thigh = 38,
+-		.tlow = 56,
+-		.tsu_sto = 40,
+-		.tsu_sta = 40,
+-		.thd_dat = 22,
+-		.thd_sta = 35,
+-		.tbuf = 62,
+-		.scl_stretch_en = 0,
+-		.trdhld = 6,
+-		.tsp = 3
+-	},
+-	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST_PLUS] = {
+-		.thigh = 16,
+-		.tlow = 22,
+-		.tsu_sto = 17,
+-		.tsu_sta = 18,
+-		.thd_dat = 16,
+-		.thd_sta = 15,
+-		.tbuf = 24,
+-		.scl_stretch_en = 0,
+-		.trdhld = 3,
+-		.tsp = 3
+-	},
++	.max_mode = I2C_MODE_FAST_PLUS,
+ };
+ 
+ static const struct of_device_id cci_dt_match[] = {
 
 -- 
 2.34.1
