@@ -1,141 +1,167 @@
-Received: from mail-wr2-f35.google.com (mail-wr2-f35.google.com [74.125.225.99])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4909A379EEF
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 21:00:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.99
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A606231A3B;
+	Sun, 27 Sep 2026 21:17:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790542814; cv=none; b=V9Xb5RDWm/iCYGaGzmBTeMTBq35VGh91hWqHvZwx7yvjH5C8G8ak5g7XpWFfVQiCw71zSHNqN9p3QyHgk+R645vluagIDTGSi6hEeCQDmCJHi487vi1izcL6l1nEHYj68/OwYDSurJOpdU3zzUgtlLF8XZ0UiitefEAp7SXPIi8=
+	t=1790543838; cv=none; b=teBxx6F1RNFg57rYS/xcnVzinAtFFKAy9gtWFJLY8zn5Ve7zL5gfmFiglNTzOYXLB5i/pW3lmSkpkCsDboeiZQAIZNdPiSHHLq8oyE/BfCOM3qeexxeN+wMEoPUwz4Joib95rCBkt03JP/E64m3udZdA6Eua6t1FHfnIvawbFXA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790542814; c=relaxed/simple;
-	bh=G2oUcl4PFuECTL7Wrpefi90ylipzCMBA/vio+TVO4HQ=;
-	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Cc:Subject:
-	 References:In-Reply-To; b=twivELI3nxEttzuiIRDnLu4Qfe+2AxyKn824mSrKAj/ynHosBdWoYzxTIupeyk0/ROyaAzqzzPIztyun7cl7qLFvBbgIui+R8MbMaWnrs/JsseseYDj2L/KUhxA489sIt3EzDfrg9edZ4CPQsaTyb/+iuJP7YMnROQ0/fBP2IV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=mvIk9pMc; arc=none smtp.client-ip=74.125.225.99
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1790543838; c=relaxed/simple;
+	bh=CyPnmzIJSUvBRZI0xOHTGgHHjBuYikIrDMNDtsOUfZs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=NdWy5MZiO+tFqx98u/4POpxf03A+t07Al9Uc2r7yveWvUmDoxxRPDIF6qEA+46BMTEfTrQ3o/YPl21pwpeOdymgWrTBJHdmU5WvOTBMifg0RGXRTZTVVWYGC15G2z25p3a8/hm4sG36p/IeazxI8wt6wFepaJ4T7vFv9mW9/KPI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UkBJWt30; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="mvIk9pMc"
-Received: by mail-wr2-f35.google.com with SMTP id ffacd0b85a97d-4887840c529so877058f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 14:00:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1790542809; x=1791147609; darn=vger.kernel.org;
-        h=in-reply-to:references:subject:cc:to:from:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=HdQLpvgoc2kmRQGNUAWswTV8bwgORG4pWTKI2Gc4aS0=;
-        b=mvIk9pMcmF/eoSKyOQNUNXVRwuDcWeZMzIBthXsDBkf+q+dEkzkyD8+ch2buQsB0/T
-         owvU5qY5AobLL5aHYwK58mA/NA2iPOddJOprjf/tVVN5gryy5yBCAOWtkxgPbP4ZnWSZ
-         pb0NiEitsJt0Q7WUtLr/PR7ymVOWL1qQ5SZtvL92oruXlrRNaPc5npWURrKpfGS6bT0J
-         wqf4MnTSmZtz2fjVkLl67Yjf/lRhpS9dfQZNXtpafrBCD5r0mS/Lcv7FbL6ONrk6bfh+
-         ZqczdNFyfdYyn/pzVTYxPDjCj4lbwU2HNxrDCQd3iV6MUkRoUJdFeRfDlImDItCmFN5K
-         2mrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790542809; x=1791147609;
-        h=in-reply-to:references:subject:cc:to:from:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HdQLpvgoc2kmRQGNUAWswTV8bwgORG4pWTKI2Gc4aS0=;
-        b=VfaQEHLz2mMsjczNFe3eSZ8UsuIfOjzWSorfVYKaFe+gxN3P2/n1GeLslhKCxx2S8x
-         RlvvSmylBr2rYaF+O/dM/acQSESqSjdKBdXBAwzKV13YYL71E7cgSM0nMnPLevmhKFpI
-         O2Mi509sEy6bXzPjgtkPQ6LuT/3OQLDVN2krrtMCtk4+m9MweT4dvTT5+O56yLFd3GwZ
-         3ISu040wcraHlvMi1CEbIxpotgWst1MzOuln84PO9CVGjVABp75urQcahtNAEsb6tpLh
-         VMo8zOcs5TvsopbkcOvgluyaWaBOuw6+FO3jSmkciq7ytEyF10yVCS4SY1j/gyRJERgt
-         5Ibg==
-X-Forwarded-Encrypted: i=1; AKwUvByMVSCeRz0M1MmxVHmdJ/yAXER3gos3+2CdPWNXzjmQaC8X5pM+xhY57XhKU46xCEEsjvRVdloDOr4PUJlR@vger.kernel.org
-X-Gm-Message-State: AFuF++m1h4IhRVlFD+AQQbRpnHM3t5YvW/arnG5nXVmedR6sa2T1q1Uy
-	76rxvNMruqU5AR5SzP9JqUZgAQ3gUMQrTJ5Zh4uf3D6yLi9WGRxESRg7nUwUS6FieD0=
-X-Gm-Gg: AYBFou0S3wEYXpy9AbiLRA7rzNcBIbaKofneULDTx8K0SJH1RzrItoIw3L7Nu8KZilM
-	ZQjA5bddX3gP69A4/j7J8PuQaNPl1Kk4tctylLI4R6aFihrODvLwSAEEoepfKnkNQFXfaSaTJGi
-	iwe2PeO/wNOTrJYxwSg+Ee2nrcdS8Mhvc6aQ6lPdd4p+yG9jL1f6EBF9C1MVHP79M1E0IuFZpnv
-	pQn4IygkV2E4mMSCVe4tBdDcinVWJUzX9xHzpjRt3OjcFkKkWQd7zN9sgnyfqCYpJibC4Bi4+H7
-	aTtI9T7vOkrmXc2ebDsHxA0RVFZX3sNUH0I2uJjFszOy+WU6o45Bk1KG+ZHLGWDzKcodlQQxWYd
-	X6NzNl2R5NlFu/qdaFKF9bbGIALNBGYFkocp1z+x8Jut7wcMIK541KYp/3dT3DPxSQcxm96PXxR
-	FWGIhZGn5jh6TE71We/yyqGVWFrGB8mPuIVl0QjXfvOFIxHzMKMJH0hAxfxjK3v9N4T1GpK1g=
-X-Received: by 2002:a05:600c:4e53:b0:49c:e37e:4389 with SMTP id 5b1f17b1804b1-49fe66c8288mr201327785e9.4.1790542809339;
-        Sun, 27 Sep 2026 14:00:09 -0700 (PDT)
-Received: from localhost ([62.217.52.92])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fee6ced69sm146468965e9.0.2026.09.27.14.00.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 27 Sep 2026 14:00:08 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UkBJWt30"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D1E47C2BCB3;
+	Sun, 27 Sep 2026 21:17:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790543837;
+	bh=CyPnmzIJSUvBRZI0xOHTGgHHjBuYikIrDMNDtsOUfZs=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=UkBJWt30VJLZOHX+vvw5M4BSvbVbSlFEzyuzL/AHfNcPS+E3g8433bOg53iVIjIEv
+	 GCdxyc92NzQ1MPKz48yp2fcBYIGj41CThwZTAa7cVwS4IBOakcpDZJNtk3pC4hThcX
+	 v1JcCig4HcW7V8PxvPQZ8g/621qkZOEj5/L7rqFU6+PzkNND3FBlhD1ZQkjtEzcrPA
+	 K7yWNL/1WkRO/BF+vc1hAFkSL1Iw8HyGwNY84XE/n6xXpGRfG4jLfuV2GGoxiktA1Q
+	 iX0leW25zGU2w+nSYxKt23u5c20sCzgKj5Jb0fIdwfQ76SeId84AChgH5W18NsNfJv
+	 6LbCwEG0bjDgg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB5F5C9830E;
+	Sun, 27 Sep 2026 21:17:17 +0000 (UTC)
+From: Rinat Muhamedgaliev via B4 Relay <devnull+rinat.muhamedgaliev.gmail.com@kernel.org>
+Date: Mon, 28 Sep 2026 00:17:17 +0300
+Subject: [PATCH v4] power: supply: bq27xxx: detect bq27541 behind bq27411
+ compatible
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 27 Sep 2026 23:00:07 +0200
-Message-Id: <DLQEGA48W7X8.21N6R6EPU8C@fairphone.com>
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "erebion" <erebion@erebion.eu>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Jessica Zhang" <jesszhan0024@gmail.com>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Bjorn
- Andersson" <andersson@kernel.org>, "Konrad Dybcio"
- <konradybcio@kernel.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>
-Cc: <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>
-Subject: Re: [PATCH v2 1/8] arm64: dts: qcom: sm6350-lena: Add flash LED
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260926-pdx213-upstream-3-v2-0-b4612e3eb536@erebion.eu>
- <20260926-pdx213-upstream-3-v2-1-b4612e3eb536@erebion.eu>
-In-Reply-To: <20260926-pdx213-upstream-3-v2-1-b4612e3eb536@erebion.eu>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260928-master-v4-1-052c73ec1767@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqAIBCF4avErBNEwrCrRAvLsSbIwqkIpLtnt
+ fzgfy8BYyRkaIoEEU9iWkNGVRYwTDaMKMhlg5JKS6NqsVjeMYreSeud0UajhxxvET1d31Hb/ea
+ jn3HY3zXc9wOttx+dagAAAA==
+X-Change-ID: 20260927-master-bd0afd9696ef
+To: linux-pm@vger.kernel.org
+Cc: pali@kernel.org, sre@kernel.org, afd@ti.com, 
+ konrad.dybcio@oss.qualcomm.com, david@ixit.cz, krzk@kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790543836; l=3730;
+ i=rinat.muhamedgaliev@gmail.com; s=default; h=from:subject:message-id;
+ bh=LDPX+qzAP96f/Gr3A6zlVkUDdRUYlzESJ8Imhmnzv+I=;
+ b=m6FAG85DpMn9tIEfxK9ou8OCXPNKB8uTyCksgF2mZnuU06ZuOMNtvC0KMptQurVe8pprOt8u6
+ 7YbQJBWkUdSBMaey72SC7Z6mCg5osAN2GRHfps9gnrfmhitrGNMC+Y4
+X-Developer-Key: i=rinat.muhamedgaliev@gmail.com; a=ed25519;
+ pk=qkYQO8LRlRErWiLzlpK8jHbRIxv8+7v06+ytcxX8mec=
+X-Endpoint-Received: by B4 Relay for rinat.muhamedgaliev@gmail.com/default
+ with auth_id=1072
+X-Original-From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Reply-To: rinat.muhamedgaliev@gmail.com
 
-Hi erebion,
+From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
 
-On Sat Sep 26, 2026 at 4:00 PM CEST, erebion wrote:
-> Add a node for the camera flash LED found on the Xperia 10 III
->
+OnePlus 6 and 6T replacement battery packs may contain either a bq27411 or a bq27541 fuel gauge at I2C address 0x55. The device tree currently identifies the gauge as bq27411, but a bq27541 uses a different register map and then reports invalid battery values.
 
-Reviewed-by: Luca Weiss <luca.weiss@fairphone.com>
+Read the DeviceType control subcommand when probing a bq27411. Keep the existing profile for DeviceType 0x0421, but select the bq27541 profile for DeviceType 0x0541. This retains the established DT ABI and supports replacement packs without introducing a generic compatible.
 
-> Signed-off-by: erebion <erebion@erebion.eu>
-> ---
->  .../boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts      | 15 +++++++++=
-++++++
->  1 file changed, 15 insertions(+)
->
-> diff --git a/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts =
-b/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-> index 6e2bbf4f060ac..79aa2521aed40 100644
-> --- a/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-> +++ b/arch/arm64/boot/dts/qcom/sm6350-sony-xperia-lena-pdx213.dts
-> @@ -4,9 +4,11 @@
->   */
->  /dts-v1/;
-> =20
-> +#include <dt-bindings/leds/common.h>
->  #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
->  #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
->  #include "sm6350.dtsi"
-> +#include "pm6150l.dtsi"
->  #include "pm6350.dtsi"
-> =20
->  / {
-> @@ -302,6 +304,19 @@ touchscreen@48 {
->  	};
->  };
-> =20
-> +&pm6150l_flash {
-> +	status =3D "okay";
-> +
-> +	led-0 {
-> +		function =3D LED_FUNCTION_FLASH;
-> +		color =3D <LED_COLOR_ID_WHITE>;
-> +		led-sources =3D <1>;
-> +		led-max-microamp =3D <180000>;
-> +		flash-max-microamp =3D <1000000>;
-> +		flash-max-timeout-us =3D <1280000>;
-> +	};
-> +};
-> +
->  &pm6350_gpios {
->  	vol_down_n: vol-down-n-state {
->  		pins =3D "gpio2";
+Tested on OnePlus 6T (fajita) with DeviceType 0x0541: voltage, state of charge, and temperature were reported correctly. Testing on hardware with DeviceType 0x0421 would be appreciated.
+
+Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+---
+OnePlus 6 and 6T replacement battery packs can contain either a bq27411 or a
+bq27541 fuel gauge. The latter requires a different register map and produces
+invalid battery readings when interpreted as a bq27411.
+
+v4 drops the proposed generic DT compatible and DTS changes. The I2C driver
+instead reads DeviceType while probing the existing bq27411 compatible, and
+selects the bq27541 profile if the device reports 0x0541.
+
+The bq27541 path was tested on a OnePlus 6T. Testing on an OnePlus 6 or 6T
+whose fuel gauge reports DeviceType 0x0421 (bq27411) would be appreciated.
+
+Changes in v4:
+- Drop the generic compatible and binding update.
+- Keep the established OnePlus DTS unchanged.
+- Detect bq27541 from DeviceType in the bq27411 probe path.
+- Send as a new thread.
+---
+ drivers/power/supply/bq27xxx_battery_i2c.c | 37 ++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+diff --git a/drivers/power/supply/bq27xxx_battery_i2c.c b/drivers/power/supply/bq27xxx_battery_i2c.c
+index 94b00bb89c17..732164423423 100644
+--- a/drivers/power/supply/bq27xxx_battery_i2c.c
++++ b/drivers/power/supply/bq27xxx_battery_i2c.c
+@@ -16,6 +16,11 @@
+ static DEFINE_IDR(battery_id);
+ static DEFINE_MUTEX(battery_mutex);
+ 
++#define BQ27XXX_REG_CTRL		0x00
++#define BQ27XXX_DEVICE_TYPE		0x0001
++#define BQ27411_DEVICE_TYPE		0x0421
++#define BQ27541_DEVICE_TYPE		0x0541
++
+ static irqreturn_t bq27xxx_battery_irq_handler_thread(int irq, void *data)
+ {
+ 	struct bq27xxx_device_info *di = data;
+@@ -136,6 +141,32 @@ static int bq27xxx_battery_i2c_bulk_write(struct bq27xxx_device_info *di,
+ 	return 0;
+ }
+ 
++static int bq27xxx_battery_i2c_check_device_type(struct bq27xxx_device_info *di)
++{
++	int ret;
++
++	ret = di->bus.write(di, BQ27XXX_REG_CTRL, BQ27XXX_DEVICE_TYPE,
++			    false);
++	if (ret < 0)
++		return ret;
++
++	ret = di->bus.read(di, BQ27XXX_REG_CTRL, false);
++	if (ret < 0)
++		return ret;
++
++	switch (ret) {
++	case BQ27411_DEVICE_TYPE:
++		return 0;
++	case BQ27541_DEVICE_TYPE:
++		dev_warn(di->dev, "detected bq27541 instead of bq27411\n");
++		di->chip = BQ27541;
++		return 0;
++	default:
++		dev_err(di->dev, "unsupported device type 0x%04x\n", ret);
++		return -ENODEV;
++	}
++}
++
+ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 				     const struct i2c_device_id *id)
+ {
+@@ -169,6 +200,12 @@ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 	di->bus.read_bulk = bq27xxx_battery_i2c_bulk_read;
+ 	di->bus.write_bulk = bq27xxx_battery_i2c_bulk_write;
+ 
++	if (di->chip == BQ27411) {
++		ret = bq27xxx_battery_i2c_check_device_type(di);
++		if (ret)
++			goto err_failed;
++	}
++
+ 	ret = bq27xxx_battery_setup(di);
+ 	if (ret)
+ 		goto err_failed;
+
+---
+base-commit: 830b3c68c1fb1e9176028d02ef86f3cf76aa2476
+change-id: 20260927-master-bd0afd9696ef
+
+Best regards,
+--  
+Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
 
 
