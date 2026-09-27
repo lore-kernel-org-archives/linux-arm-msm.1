@@ -1,272 +1,121 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 204B93B71A1
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 17:13:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790529233; cv=pass; b=chg2+NzMco94D1l0l6wgOYtx1Z3a5DDmEF8lzokTY6Rv5e/+KU+M3JBStd1YfszGlzFLjxfysvPKhsdKi2xMX+0lJ00dS8Vr6qFSBSjCXDOtWDUsqttNUU38EK88QQIzymzquo02lwhTjDdL19L5RjYGICtAkMEyMHeh2UrzSJ4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790529233; c=relaxed/simple;
-	bh=qhpeV6xC393HUUEe3bBoDSZ+AUrlQUeME4qIGHFCF2s=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=F/MikQy+RYdglHQWX6IuEyLtUOIDd6eA/6vuLeWGs/pIbnw6YmccxWqGSQud0WN16E5l9ZpxSigrEViE2wP40H4jdDGkd+y+Q8XN1yIJxQ9GJcmW90zcMtVNJy2BFtIe6iSOIpmNNHBPvyefoYskzPq7YLOuiERtoXXoKq+fzFw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WLyDTyic; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=N3IVc+Mm; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F67341CB2E;
+	Sun, 27 Sep 2026 17:21:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790529673; cv=none; b=p+gXGd2xLdRqBMd1SHf3dfx5KRJek402L3lulDlPFZCF6+NP3vWyP/8oQC6J5M3VZBSPNKTnOcrRg8h38CxoGMUG5UVpG30ksUGNUhxX0P4DxWXue95JXRitF20reaIHWR8x7cN5/rKGiRQGZ3HqJvu9TrSN3RZMG9fehieAi54=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790529673; c=relaxed/simple;
+	bh=QnZY/A0Z/m7D6LYP8zYoDCU2wPHkBbrq9onZ540cNyI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=tJZWXxBhQZRKR1EGrpFp8oZvHm0i6eHymd/8Fu8jhPfF4MlJdd8pimKS6UKSlctmnhGgPnwiCtfq6rcERX3dqWbrfX/CF6hX/XutVZXIj2CNPVyNKqMjHsBK9WNHRLpumP8o2TzBiKCpRhaaihNC9FfIKi+flTP1iU/rCM2PPyM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Kv4Ciah3; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WLyDTyic";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="N3IVc+Mm"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68R1JRII1475150
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 17:13:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	VB3Pq/tX2cY81/H0fpS3ys8Gxm8NGlgIcdjzVRBuiEo=; b=WLyDTyic/e7d1S4p
-	teiHEFWbEdelZHTmpBvFNeUM2WcWX/PTsRbb2mnkeZIK7ZoTrQsZpKlsgFgv+UC/
-	Cm96VL7uCQBY6kB8mLSZTX4zvkZc1fDeaFjz7nJk2+fTc17BJXwIhWvzw5yB8e8W
-	oE4lVcHINm0zKqYfwCMfZ+sV44fee6lEhp5cZ44BQWGyFDLG+V3jIUPyIPEOcTJm
-	WcT+vSJc50LM1feCWNsbcUwWHY3fQVL8JL9K9uy48b0A8UuWIiB9HE0ifkK4fLF9
-	AUZEs79GB4USOOc6mhHsrcJ6BBna7MHdavdGrNc8yZ9TnK4iLJUGE/B9h8yjgvmE
-	vC886g==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx693beej-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 17:13:51 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7a8e3cc28e6so1961986137.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 10:13:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790529230; cv=none;
-        d=google.com; s=arc-20260327;
-        b=CR/zoYPWg8Bq0TE/O5kJ/u/NARIma7MvITccZUwu1S1W0ZodmyYtE6CFwfBxQn9FzQ
-         UlaQwnea2ShYBkDUuDr+cNIwxtFV1e8FFQU0rV++GCqTAj5fNQbcqhZxRoAhnyNnyOG4
-         ZsXetv+w7jexKksL/kpHU8Hioc+a1/oidpbO/BnBjx6orXHaeYj/aWYsa0EpSycXdxzY
-         9D5zSIi6pKyqRDV5Hiej4wDFpddyvt+Vaylp7ITHdO+6ihXAj3kVzgU85Q27RmFe9Saf
-         eifQfbIcOhmA0PS31UwBvCZeaIkJDpGIqNtkBpnSzelOElYra3OA73BS62l5jDkKC21n
-         CWjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=VB3Pq/tX2cY81/H0fpS3ys8Gxm8NGlgIcdjzVRBuiEo=;
-        fh=fGCSNsr3QF1PTEtN0sMA9aEUi/J3eS/BZAojI8+jmTA=;
-        b=C/Q/PQU9Gh79FletNiOpF1/47v2Y8B6APcATKHbw46NbT9ySzmacWc8zcXja1xEUoj
-         NcuLwWsPBcobNcPJeXBanMmWjNAlZRrAbutBHcBjw3kKVoRkkno7gBmPAI2/F9f8QqPF
-         Tf3SRGgt585xEMKzrucBU8kVc9lQ9/X2zYhuUJYtiOCrLBDWDLdiiFBT44EFM6p+7p6H
-         /kU/gLQAmagmOU+9d8QnpNQFmyRJ5g47c/EYNbwIlaIqSlhwjj7VvvuuiAW5jmvKvOCL
-         tu+zDXWUVLUB67Nnk6hYwxh4lMqhSEfN3Kci7UkXwKoH3uNVhHRGm7wjc79RIonCjvsf
-         oPtg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790529230; x=1791134030; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=VB3Pq/tX2cY81/H0fpS3ys8Gxm8NGlgIcdjzVRBuiEo=;
-        b=N3IVc+MmJwXQ/LJiVaDuskd4h2UIuFKxfYPNdojpmNtTQRcmds8nxka1oteD0UWPfz
-         ZZE6FtIi/kGwWVcepwUD9jq/PW8333Tp5U2BK3+Xi1mwzNMupnwsqGqMzjdpeU2OCxDz
-         fJadiEjfr0ZRx0OAHfYFdXCMrUkEJ8GK5IbGbQdg7wv22vEnONtdj9LG7mtaHiMdduMN
-         gIWF+tNTlkSOqwNplDLmKMu2WOsI7wp1RPuhYslFMZNmjAA08wh1WnUCayogzDvFQ1xW
-         zjXXrIm6bmW0zuPaLMwXtymF5bZrakBZuGjwDRmwP2rrDKPeGKKMpsqn2Bao4k/QO4lE
-         dutQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790529230; x=1791134030;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VB3Pq/tX2cY81/H0fpS3ys8Gxm8NGlgIcdjzVRBuiEo=;
-        b=2XNl8w12ryg/kzzOYu81AoVGV+kZNeBkeO4W8q93xhRBGKNrK9KHdp387JDVKFqze5
-         +Jlp1AEZBZCh8UT6To3tPuU0YJqbzfLCpcQsjnlNvXJyoGP2ULHOTPmsCHYpTy/9o0/j
-         aAlyyLpyD9Y3JSMKYD2HOhqUdwfa8BnCnhKtyIlQFECXPZWSuE6PiSq53CFlZYWm3k0T
-         q14GVKIPElMrKafrBdfEZ4H9jzDfiww3CzJJE9az9xA8cOj0d2xlqGONxNHKB7QQKiYN
-         MamXd+LACVUdzKOTTKjoMxDS8oJpOncB4UXG8N/zZCpx9vS1wrB5irbI1TrhoCCWXo+r
-         AAwQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzhsHbxfr5fp6PjwLtM13SE4kbdlOXNNMwReyMvlnSGQ++pf7pccmCl1T5PCjfUs/oDaGG0Nhp1divol2Yt@vger.kernel.org
-X-Gm-Message-State: AFq9FYLWSZJJyedqHYUZH7v8qKpzR/aoG1xj4Q6DtRDrPPLxnEascfcJ
-	6FYS6VkmeELnZFKppHjNO7pMFLTFRnLmhaTxs1gs5QqBePQ7uhRNSncptcxA/47PDN6HQKgNK7o
-	alj8vDTqmTM4vrf9RatRsTm3ygG5anlCOH+DnbHzafuq7MsTsSYl+NZipb3njZ7KfAvm2IqBrnV
-	6AK9ppYLEtp7T1ajBii9jVEcD5amVweVHEzWAP4E/AAD0=
-X-Gm-Gg: AYBFou2QxglY2Lbo27A/2V0s8HIbmdA+oYduOV2L2zgj4/Ug553WJyv5aTSMGdObDDM
-	byGz1tCoryW6UU+icoMgxKzuy90wlcN2B3VJGgs2jJPTaj+q3Qu4N3W5sOc1krrG4+Akh0a6yom
-	SNKoO/q23YQpvkRb9hegQswGLEWuN1lchh23rnuFpF8Ft4GuS0NuTQ3iylppQ=
-X-Received: by 2002:a05:6102:3f47:b0:798:24e8:23f4 with SMTP id ada2fe7eead31-7af1cfa46e2mr3316281137.7.1790529230245;
-        Sun, 27 Sep 2026 10:13:50 -0700 (PDT)
-X-Received: by 2002:a05:6102:3f47:b0:798:24e8:23f4 with SMTP id
- ada2fe7eead31-7af1cfa46e2mr3316275137.7.1790529229806; Sun, 27 Sep 2026
- 10:13:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kv4Ciah3"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E4B91F000FF;
+	Sun, 27 Sep 2026 17:21:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790529670;
+	bh=zXqUbjdOufaZZQextakeQb2Z5JBuQMYWladdr+ali/w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Kv4Ciah3L22Uss08I5HK1yZxgQdSkGpIFtTlQRs6hXzis0XJBvt9UxutHNVmrjRjX
+	 OL4ymEmiEYwJnR0feXI4zQkZPgvo5s6dC8KrYbZAa/hesbo7wCd9wGfjf++Rta6XJw
+	 Qr9XkMuXEOFYSLx6hGpoPyLaFu9uHgBTv/Qvycn1+LfWZWZELOXuQHWWTmqCkW3cpG
+	 AnZNFzx+i90+SmD9l8thursk3KI9r4s1sYc4H8fbB0fdDFKg0cHVuVR6kmdOoRlt0Q
+	 qd7zJL1MdZP3mS10Vv1+39BV9k/761GXrF/ygl36B0l9RPiLeJRQ19tw+COy1XQFSL
+	 t222swtk+cXNg==
+Message-ID: <fc7b99d8-f737-4dac-adfc-ccb9b12e30d7@kernel.org>
+Date: Sun, 27 Sep 2026 19:21:02 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260806051915.2234481-1-pravinku@quicinc.com>
- <CAPd7Qn3QYyrzBFFjB4+M9Je7uykYgxHiM+vh-mNVJ16QaoPkJA@mail.gmail.com> <2140e7f2-d329-4726-b593-72e935fca4f4@amd.com>
-In-Reply-To: <2140e7f2-d329-4726-b593-72e935fca4f4@amd.com>
-From: Pravin Kumar Ravi <pravin.ravi@oss.qualcomm.com>
-Date: Sun, 27 Sep 2026 10:13:37 -0700
-X-Gm-Features: AclHuK8PwoThA0mV-kKOw3eDm5hmBFXr8MOx4tYGbb0EL6wStiYs_DNf1J_IlbI
-Message-ID: <CAPd7Qn3ecF7+TBp4xDUoukVaDCjLjcDjVg+BndhqPN89i=4dUQ@mail.gmail.com>
-Subject: Re: [RFC] Synx: A global synchronization framework
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-        linux-accel@vger.kernel.org, sumit.semwal@linaro.org,
-        andersson@kernel.org, mathieu.poirier@linaro.org,
-        konrad.dybcio@oss.qualcomm.com, faith@gfxstrand.net, simona@ffwll.ch,
-        simona.vetter@ffwll.ch, airlied@gmail.com, matthew.brost@intel.com,
-        srinivasan.shanmugam@amd.com, rob.clark@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI3MDA2OCBTYWx0ZWRfXz+dcoh5jrH0+
- aeuUlPo6/GcJ+L0CM4O85p+ImrAfDsehKwrPKwWf5disEKXwlcbX6u5YDS2HvDLyAgq+OSq6Jnu
- gdKbs0qRTs+ggBX4GncgZNx6WFwIb2E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI3MDA2OCBTYWx0ZWRfX/C1Xqk7GX77z
- EP9L80Y07DLKrtJkG2uT8vfeW3E01iD1mR7mjQF0QsJLVHtjkDVr5enNg+gtz5AswN7mjGqsuKh
- rBhz/s14H5DIypTt3ZwlqcM95e167277H1lz5KXHvQ9C8zSXzQjCkVNtqsQU3tjLKRUYrfoDvjG
- Rcwv43L4TJvyZOOqD34L2/LF6PTqWCMKgORS/UcaxN/djrLcUCWRMI+IhQVPXkDx5aXnaesm/PV
- 1H+qehzMQaaThqzP81F2+m9IwShJk7VovwM6nR3yFkCnYuM8LHlK6E39nJSuIeyGze660zOSUpZ
- 0qIdLis2EniOsHtc4vgjN6Wdq6LsrKFkdRANcvkdD5d+u6IiPwI19HiiDUVCxuIRCbJmPzTPuze
- hzWZZSHGNiShex3YhlYAcnySZu+6EKVI9GGNrx9DJz4QvMPQ7Yvy/gg6Ju46EM9jPMUYaKWED6n
- Ca/qyxSlbMteGY6bhdg==
-X-Proofpoint-GUID: 2urN0OOv2mxQF6KtC7iYGMffiuLQv54L
-X-Authority-Analysis: v=2.4 cv=f6Pdl+yM c=1 sm=1 tr=0 ts=6ab94ecf cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=zd2uoN0lAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=X73fn1zfpKsA7NX-Z3gA:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
-X-Proofpoint-ORIG-GUID: 2urN0OOv2mxQF6KtC7iYGMffiuLQv54L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 adultscore=0 impostorscore=0 malwarescore=0
- clxscore=1015 bulkscore=0 spamscore=0 suspectscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609270068
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] dt-bindings: embedded-controller: Add Lenovo
+ ThinkPad X13s EC
+To: Clover <alex@ironrobin.net>, Hans de Goede <hansg@kernel.org>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Steev Klimaszewski <threeway@gmail.com>,
+ platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260926195415.5995-1-alex@ironrobin.net>
+ <20260926195415.5995-2-alex@ironrobin.net>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260926195415.5995-2-alex@ironrobin.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 25, 2026 at 5:13=E2=80=AFAM Christian K=C3=B6nig
-<christian.koenig@amd.com> wrote:
->
-> Hi Ravi,
->
-> Essentially you can have two different modes of operation:
->
-> 1. Preallocate resources on work submission to the HW. This is what the d=
-ma_fence framework implements.
->
-> The restriction here is that you don't have any dependency to userspace o=
-r other device drivers, e.g. no page faulting, waiting for memory values et=
-c...
->
-> Background is that the core memory management depends so hard on the exec=
-ution properties of the dma_fence that none of those advanced features are =
-possible without breaking core assumptions.
->
-> Inter device operation is only allowed if the device drivers "know" about=
- each other, for example between rendering and displaying pipelines.
->
-> But we have intentionally rejected any approach of generalizing device to=
- device signaling in a framework because it makes dma_fence practically a r=
-ecipe for trouble and we have more than enough evidence to confirm this now=
-.
->
->
-> 2. On demand resource allocation using PCIe functionalities like IOMMUv2/=
-ATC/ATS/PRI or device specific page fault handling.
->
-> The point is that you can do things like generating commands on the fly, =
-long running jobs, device to device signaling etc...
->
-> The only restriction is that you can't create a dma_fence with this as ou=
-tput, you can only consume them as input to the operation.
->
-> There was also an absolutely great presentation on the topic from Faith o=
-n LPC a few years ago.
->
-> Regards,
-> Christian.
->
+On 26/09/2026 21:54, Clover wrote:
+> Add a standalone binding for the embedded controller in the Lenovo
+> ThinkPad X13s. Although its I2C command transport resembles that of the
+> T14s EC, its keyboard-backlight, event and power-management interfaces
+> differ.
+> 
+> Describe the event interrupt and the separate host-controlled power-state
+> signal, which is high during normal operation and low in the low-power
+> state. Require this GPIO and allow wakeup-source to describe wake
+> capability.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Clover <alex@ironrobin.net>
 
-Christian and I discussed offline whether a fixed, kernel-controlled
-pipeline could support this safely. The contracts and enforcement remain
-open, and input from others working on these use cases would be welcome.
+Please use real and known identity. See submitting patches.
 
-Mode 1 (preallocated): The kernel must guarantee completion or safe
-termination so resources can be reclaimed when subsystems stop making
-progress. Arbitrary cross-device dependencies can break that guarantee.
-We discussed restricting the allowed pipelines as one possible approach,
-but still need to figure out how to enforce the dependencies and recover
-resources when a stage hangs.
-
-Mode 2 (on-demand): Standalone signaling is fine but very few accelerators
-fall under this category.
+> 
 
 
-(Bringing Rob's September 27 reply from the parallel thread
-CACSVV00oBPN=3Drw1yVBjNm2TMHuQ+3iv84jKP4djQcnKRxcvWCQ@mail.gmail.com/)
-Rob Clark <rob.clark@oss.qualcomm.com> wrote:
-> So I'm just starting to think a bit about this, since it will be
-> potentially relevant when we implement fwsched for adreno..
->
-> Do we really need anything more than some sort of dma_fence signaling
-> extension?  Ie. signaling on the CPU remains exactly the same as
-> today, anything waiting on the CPU would see no change.  But if both
-> exporter and importer support the same extension, that can be used to
-> extract extra information to pass to fw.
->
-> The fw might observe the fence getting signaled with lower latency,
-> but that's fine, there isn't really any guarantee (other than timeline
-> ordering) about the order that multiple waiters observe that the fence
-> is signaled.  We've just pushed one of the waiters down to firmware,
-> that is all.  Ie. something like
->
->    rcu_read_lock();
->    if (fence->ops->signaling_ext &&
-> do_I_understand_this(fence->ops->signaling_ext)) {
->       fence->ops->get_magic_signaling_foo(fence, &magic);
->       ... pass magic to fw ...
->    } else {
->       ... same as before ...
->    }
->    rcu_read_unlock();
->
-> If either the importer or exporter don't understand the same signaling
-> extension, everything works as before.  For ex, external eGPU/dGPU
-> sharing with say the on-chip ISP.  But if both do support it, the
-> signaling extension provides a way to extract whatever magic thing is
-> needed to do the wait in fw.
->
-> BR,
-> -R
->
 
-Hi Rob,
-For operations that already satisfy the dma_fence completion contract,
-this looks worth exploring.
-
-Christian, does this fit the case you described about known drivers,
-provided the participating drivers preserve the resource-lifetime
-and recovery guarantees?
-
-Rob, could we have the shared signaling mechanism in an independent
-and generic synx_global.c layer? dma-fence can tap into this
-layer for the signaling extension you mentioned.
-
-The reason for keeping this layer independent is that we have clients
-who use reusable synx objects (signal same handle multiple times)
-which don't interop with dma-fence. And we continue to get more feature
-requirements from performance-critical clients around reusable objects
-with timelines. Assuming this is where global synchronization is headed,
-these clients should be able to tap into reusability via a route other than
-dma-fence.
-
-For existing dma-fence operations, your extension could expose the
-information firmware needs for its wait, preserving CPU signaling
-and the fallback you described. Other clients could use the synx
-global layer under a separately defined resource-management contract.
-Would such layering address your use case while also supporting
-clients that need reusable remote synchronization?
-
-Thanks,
-Pravin
+Best regards,
+Krzysztof
