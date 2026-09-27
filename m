@@ -1,253 +1,233 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDF9B2673B0;
-	Sat, 26 Sep 2026 23:33:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC70A1632E7
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 01:03:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790465626; cv=none; b=QZJimrczJKU1mzmL4cWN+GlTiR3d9jtijYfBLgGAirH70R8799SwNGz65IV8/f0cNL7aMgw2GQE1vebYHiRpMIyGa3S8p4BypEGTc8epG682Wvj7LL6mWpwZvqHSUMPQLTfUX+6x8N9jPXoqRRktHgO9tHw3Of0ESm6Cq/eyUrU=
+	t=1790471038; cv=none; b=nLtJbbmsY6UW1OL+M99CXJgHsOSxwJCMbgt1Duy5DXsxCyG3hJYFlEEyABOGiG+vVd3QvaaPYorsWvpaWmnAC6gIUE+2zz76KAtEAZu4XNedHrjv6Tub1zYAFh0Ukg+YjCU8vqDPuqZ4LnNYSCozxb1jYAHlQngUlqRaaZZZSlQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790465626; c=relaxed/simple;
-	bh=MfGzSCc8SXHx1oywkMzxZQGcgBju3HaeHsl7BrLtmws=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=UjR4sv8WZ/K9KoKHIDgEtHlgDzBpp62dqhD58SqH2RP8gOuBrAh5B/1HMicZ9zxN4A1hZtC89gSfqksE3tX3fhlSoke8jFJQR8Azz665bGrqYumd8QV+DHfgCZmTYRKKYHltTsnWEp9Ow/TLBR+ofeCf5tfF+uI1mPalwuLPpHE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eRXjA+ZW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790471038; c=relaxed/simple;
+	bh=marhlNipNbMxI0CgItd+Pi+fWx7oIWXPz9lfA+qzFG8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GuPQekOUIpMZZnBsnl4RLu+jyhP3Q3UJGo6KUokhyeJHusDlcxgi0qT1ubgmfBMgK2cYshbuIVVengiODtuwXuAioZrkT08IF7KrENFhLoZuymD06e0TbJQKgsNm8VMXKzQep8ghFex/PDpMP0Q+bkpYSc55mOeBd/jR17uf1Fw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jaZW3NE3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U+r3TGea; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eRXjA+ZW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C07141F000FF;
-	Sat, 26 Sep 2026 23:33:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790465624;
-	bh=9RkUhFAL62ohEscAjBGNX48Voa4MxdKcG5fMWMesOEM=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=eRXjA+ZWYBY5SpjosjiSNnRcuD2bGsAOppwZrn26rDr2DTi0LG+wVEfD3cA0pHG1z
-	 RVDvA+Cc12RqemZBm7+g/3bGDmTwh/QPziSN8xmFzvpLKxFEjli13KybXwxsOF1vNR
-	 at3FaPCmjEB6Uq6yYijqEqV0nfES1krwVPIbEt7l7tQ8drsXevcrAKpE+mtxXRlRot
-	 fHMZ37Ew7cg6s70HKY/uaDbccZFrJ49tsYyUB4kznQv5cdjIuhoK6OQK/3orgrfhCq
-	 9rzf/JBvk5j1kX/ESEuq8DiVVcQfzD1ybpT7aDeHCSxE7e7tc+ow262nQeQuc+YQyZ
-	 i7UCQSkFE0Dng==
-Subject: Re: [PATCH] net: stmmac: dwxgmac2: enable L2 split header support
-From: netdev-bot+sashiko@kernel.org
-To: sagar.cheluvegowda@oss.qualcomm.com
-Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
- netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- lorenzo.bianconi@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com,
- abhishek.chauhan@oss.qualcomm.com, sarosh.hasan@oss.qualcomm.com
-Date: Sat, 26 Sep 2026 23:33:43 +0000
-Message-ID: <179046562333.2160803.721625925826147093@kernel.org>
-In-Reply-To: <20260922232116.889630-1-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20260922232116.889630-1-sagar.cheluvegowda@oss.qualcomm.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jaZW3NE3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U+r3TGea"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68QNI8792091533
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 01:03:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	mkJnuUvBBH41ew5VjxCDAwhZ8UYDA/JF5rRhoojlH2g=; b=jaZW3NE3jvYDCx0q
+	VBU9algM7+7txHj2jH7SSHP6v7tgLLgJWSfpTJd4kKv3uvCveP8I5fBULR6X0NjN
+	KzExL2RI6amQRkECCZusA5gJ4Ox6S2V9UrON31pE3gK+kcW0wnAsIPBjTH5lu4Il
+	qmj//lKYr8Fc4WG2DaKj7VKMSxp4h7d8oB2GnxzpRA8MMcVauTawXKOAHVA8sPop
+	mLvx+/UdXqlIl7gkBb22k0iYmCkNt2vR0kmc4nXnvcRwiZRzUq1efZHfTtoM0qLC
+	UW9tvhGR0m/8zAASe1VTNH4gJiyYjwGQlrUe0eRAKv/MKmduqn0vHebp/mbrm635
+	Luu63g==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx50sa66t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 01:03:55 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-333543ac378so2567208eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 26 Sep 2026 18:03:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790471035; x=1791075835; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mkJnuUvBBH41ew5VjxCDAwhZ8UYDA/JF5rRhoojlH2g=;
+        b=U+r3TGeaeqSQkrAGz4ZrIGVCNnwZVMeo48glUrHkK6PxLnzwcGE+31FkbY5KHuD0he
+         ZUU11L1UCtcqSBf6wwJ5zf7aI4QBeCrEHjzhzHMtsM171muqcNM77fviJ7FMaH0aRsA/
+         Ml6/gorJAbWWilXJXTW+obelTby2y4dTHTJfdV5vipzkxjLFmb0Kao2HvwHA3gtvDFCj
+         HR8GwG3tZ3khNjNQASFgKNgiisCbMAIUgYQ8F2tJ9mEbOsYMYtMOXrzzwquAg3JGrmof
+         lJ8mbwEchYRGXW6R52vsCi3PJDwPjcPwFUFf+tBTUV+3Lf51OjEwgnOJEtVe7W7fU42/
+         QfGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790471035; x=1791075835;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=mkJnuUvBBH41ew5VjxCDAwhZ8UYDA/JF5rRhoojlH2g=;
+        b=zK3uI8kfhr5pwZQxXAL90owV4vkxr2NRbqi/j0OwHOEvIfMaBbt7zGHf3ukIqZ1nXm
+         UbX3iMgAtVqE+mZyAEyWzFJab7bCOBYAoEoN1a0p8ypy+ew3zaSTNeACMlLBUfEiiPlT
+         hb8kMGbdXp/Z1Gf916GCXa1Z65HnOv0qCIXGDgNGMFe4YowmczSuWcHzGzQOgmxzbX72
+         WIe00XmWlRsL+00iqM8IHTOOFcaAt2H14b4ydtp+OUmR0RPYv1sfe4AzSV7KsmX8ISBY
+         53k7fTJWan4xs3vgP8o/Ip0fzX4wC2dic9zBYYMQrJfRl9lpZ5lnihwh7ipTVXfdRJ/0
+         gZ7w==
+X-Forwarded-Encrypted: i=1; AKwUvBz2d3nMASj6CJ4b/i8r3kv6qmB0hKw0r+cQnDs6J5H/6tJY9IjlRQnT+5/DV/fn0rcE6jOMIGFEQLV4RQnd@vger.kernel.org
+X-Gm-Message-State: AFq9FYIWKDTk+1VeuNrrmWp6ZPhoqRraJ9E9uAQqU4+5XMCwc23LWJ/8
+	+0jL6SsxuzqIvCcAwkxSp4jd4F7EZN6wX70uwFXf7AmkGnPcvBTJ/mJCGepQUShL/ffJL95tdkj
+	Fgm+C/FaPHwYiieP95qNRSaGsk3Q0Z7+bCc2Tes8OqH1bS0TU2nBzitig0estYCPEugci
+X-Gm-Gg: AYBFou17o5Vv8uzGR4aia3aGA64dLxpXHI8YKDBccax0v5xxEHeh8V/Q48X4MOfKLi6
+	5wGcdiQQuizNXr/Lq1QSwrjV4ld3U26Qf3cfIXbPXD9e4V45WBwvdSGGY9QYz3zW8rXDpaOCLJw
+	fmT1cW/PFdhuX6byVC9ktfQd2uUHXwHzXA8IK2dyAh1BIt8wsuBfluES/CnmDd4OrKjXHFP45Bg
+	QEDl6KIHSB0tGyCC7NHw8AjlPo4SK3uocolNNcTNAobFkhagOMn/1RGNSIqHK0tbfdSdBe2kFNv
+	i1I6h4Bz6NJSxpE779KusdNexvqe38cN8DsVuuUbiQCliNpIBOiMsCKXFI0lYZl/YFYhH9J1M1s
+	6JATp6YPTnYQTqZdjmd8THj0HHCM1bxw8RYJ1BahOxw==
+X-Received: by 2002:a05:7300:aca2:b0:342:2e4e:7890 with SMTP id 5a478bee46e88-3427334af32mr5827954eec.36.1790471035104;
+        Sat, 26 Sep 2026 18:03:55 -0700 (PDT)
+X-Received: by 2002:a05:7300:aca2:b0:342:2e4e:7890 with SMTP id 5a478bee46e88-3427334af32mr5827915eec.36.1790471034462;
+        Sat, 26 Sep 2026 18:03:54 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34144172de6sm27974387eec.9.2026.09.26.18.03.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Sep 2026 18:03:54 -0700 (PDT)
+Date: Sun, 27 Sep 2026 09:03:49 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Yu Zhang <yu.zhang@oss.qualcomm.com>, linux-gpio@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4] pinctrl: qcom: spmi-gpio: make direction changes
+ exclusive
+Message-ID: <arhrdSHreagHA-dc@QCOM-aGQu4IUr3Y>
+References: <20260924070323.983528-1-shengchao.guo@oss.qualcomm.com>
+ <CAD++jLkj-9=2sduOOJDA6bTN=HWVNeHwKcN1N6YvYNg4YNT6Cg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAD++jLkj-9=2sduOOJDA6bTN=HWVNeHwKcN1N6YvYNg4YNT6Cg@mail.gmail.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI3MDAwMyBTYWx0ZWRfX/azN2reBYS2p
+ ex2KbAk7DwaizIKIMgNTBUy8mTEESgxMyrfKwAO1yEVmCiRWYfcYTrzBtW/G5DJD1mUB0TRKO4Z
+ x4Ov5h1efXoaBf8/6znZGMcRi/HV2OA=
+X-Proofpoint-ORIG-GUID: F8h_hTvEjCI49TQlYl1o_2wghVBwV0Qr
+X-Authority-Analysis: v=2.4 cv=WuK+otfv c=1 sm=1 tr=0 ts=6ab86b7c cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=z4sq5ar2yq4UgXueNjYA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI3MDAwMyBTYWx0ZWRfXx89fIhtif1RT
+ I4zpuW9gaSdAzEY7AGi2VgcZofr3maV/mCj+IZ6jWTN+g6WNwppFM3jnujFFfOW1EiGr/gaAWFR
+ Jb/k23X7A2M5DZms+UxFVXBZwOg9vtfa3453UCIBdvSrJFjfiRnkowyDLNp+rdCUbI9ddN6oVf0
+ UfTg35MEtx+JKW2/5bClrV3W0Vczzlo9odldk6Fx3GHdvBHa0BMF5ul8F7mJxiLUxHi/DePS9rW
+ P/2bnBiZl9lM+JPPwIkVsi7kUk//uZFzMjE6hu2X7Rv65nbIN3d6szoXufo3JX+D1QRoSgzeAdB
+ QD1A+R8pnBvqN+6zzltMdbmMVu6EPpvvMTbwCENftiA004yQqyVxUptQ4QJYRrA8FrOM3EF/dT1
+ b6dnol37A0WLpUx3HTJ2fbeA75l7D60E5vHLc7Z1lwCIXCJF4B3BL62u4okA7JYVnF3EigpvpmH
+ mKgtmxd7H9fxIsg7rvQ==
+X-Proofpoint-GUID: F8h_hTvEjCI49TQlYl1o_2wghVBwV0Qr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 clxscore=1015 malwarescore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609270003
 
-Thank you for your contribution! Sashiko AI review found 4 potential
-issue(s) to consider.
+On Sun, Sep 27, 2026 at 12:35:13AM +0200, Linus Walleij wrote:
+> Hi Shawn,
+> 
+> thanks for your patch!
+> 
+> On Thu, Sep 24, 2026 at 9:03 AM Shawn Guo
+> <shengchao.guo@oss.qualcomm.com> wrote:
+> 
+> > pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
+> > the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+> > DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+> > buffer enabled.  Neither direction callback clears the opposite buffer:
+> > .direction_output() only packs PIN_CONFIG_LEVEL, which sets
+> > output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
+> > which sets input_enabled.  Requesting either direction on such a pad
+> > therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+> > direction.
+> >
+> > That silently breaks both directions.  After gpiod_direction_input() the
+> > pad keeps driving the line.  And after gpiod_direction_output()
+> > pmic_gpio_get_direction() still reports GPIO_LINE_DIRECTION_IN, because it
+> > cannot tell plain input from input+output, which makes gpiolib consider
+> > the line an input while the driver is driving it.  On a board where
+> > several regulator-fixed nodes share one PMIC GPIO the shared GPIO proxy
+> > reads that direction back and rejects every consumer after the first:
+> >
+> >   reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
+> >   reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
+> >
+> > Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+> > direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+> > DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
+> > once after walking all configs, so this stays a single register write.
+> >
+> > Open-drain and open-source outputs are the exception: such a pad only ever
+> > drives one rail, so DIGITAL_INPUT_OUTPUT is physically correct for it, and
+> > pmic_gpio_get() needs the input buffer to sample the line rather than
+> > return the value last written.  So .direction_output() programs the input
+> > buffer from pad->buffer_type in either case, rather than only clearing it
+> > for a CMOS pad: the buffer may have been left off by the bootloader or by
+> > an earlier direction change made with a different buffer type, and an
+> > open-drain pad that keeps it off would fall back to reporting the value
+> > last written.  gpiolib applies PIN_CONFIG_DRIVE_OPEN_DRAIN before calling
+> > .direction_output(), so pad->buffer_type is up to date there.  Key
+> > pmic_gpio_get_direction() off output_enabled so that these pads still read
+> > back as outputs.
+> >
+> > An input must not drive the line whatever the buffer type, so
+> > .direction_input() clears output_enabled unconditionally.
+> >
+> > Pads that are genuinely bidirectional can still be described that way
+> > through pinconf, which is the interface that has always been able to
+> > express it; the gpiolib direction callbacks now mean what gpiolib says
+> > they mean.
+> >
+> > Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
+> > Assisted-by: LLM
+> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> 
+> It's a bit in the style of LLM:s to write overly verbose commit
+> logs, can you put this into your AGENTS.md file:
+> 
+> - Use terse commit messages.
 
-Critical: 0 · High: 2 · Medium: 1 · Low: 1
+Ah, nice tip! I will update the commit log.
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+> 
+> >  static int pmic_gpio_direction_output(struct gpio_chip *chip,
+> >                                       unsigned pin, int val)
+> >  {
+> >         struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> > -       unsigned long config;
+> > +       struct pmic_gpio_pad *pad = state->ctrl->desc->pins[pin].drv_data;
+> > +       unsigned long configs[2];
+> >
+> > -       config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> > +       /*
+> > +        * An open-drain or open-source pad only ever drives one rail, so the
+> > +        * line can still be sampled while the pad is an output.  Keep the input
+> > +        * buffer enabled for those, so that pmic_gpio_get() reports what is on
+> > +        * the wire rather than the value last written, and disable it for a
+> > +        * CMOS pad, so that the pad ends up in DIGITAL_OUTPUT rather than
+> > +        * DIGITAL_INPUT_OUTPUT.  Program it either way, as the buffer may have
+> > +        * been left in the opposite state by the bootloader or by an earlier
+> > +        * direction change with a different buffer type.  gpiolib applies
+> > +        * PIN_CONFIG_DRIVE_OPEN_DRAIN before calling this, so buffer_type is
+> > +        * already up to date here.
+> > +        */
+> > +       configs[0] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE,
+> > +                                            pad->buffer_type != PMIC_GPIO_OUT_BUF_CMOS);
+> > +       configs[1] = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> 
+> It is also typical for LLMs to insert verbose comments like that.
+> 
+> BUT! I like the comment, so it can stay!
+> 
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-- [High] The new writes in dwxgmac2_enable_sph() use XGMAC register
-  offsets, but the XLGMAC core runs the same code and its register map…
-- [High] net: stmmac: kernel memory information leak in split-header path
-- [Medium] In dwxgmac2_enable_sph(), the new MAC-global writes (SPLM(1)
-  and SAVE_EN in XGMAC_EXT_CFG1, and clearing VPRE in XGMAC_EXT_CFG0)…
-- [Low] The commit message says it fixes an existing bug in
-  dwxgmac2_get_rx_header_len(): on a first-but-not-last descriptor,…
+Thanks Linus!
 
---
-
-net: stmmac: dwxgmac2: enable L2 split header support
-
-This patch programs SPLM and SAVE_EN in XGMAC_EXT_CFG1 and clears the
-variable-length preamble bit in XGMAC_EXT_CFG0 from dwxgmac2_enable_sph().
-It also changes dwxgmac2_get_rx_header_len() to read RDES2[9:0] on
-non-last descriptors, and adds L2T-based header length decoding on the
-last descriptor.
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> index 6719ac6e395bc..65ac5403ec583 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> @@ -292,8 +292,18 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
->  
->  static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
->  {
-> -	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-> +	u32 rdes3 = le32_to_cpu(p->des3);
-> +
-> +	/* when FD=1 and LD=0, HL is RDES2[9:0] */
-> +	if (!(rdes3 & XGMAC_RDES3_LD)) {
-> +		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +		return;
-> +	}
-
-[Severity: Low]
-The commit message presents this as a fix for an existing bug: on a
-first-but-not-last descriptor, RDES3.L34T can hold stale write-back data.
-The L34T-gated logic being replaced came from commit 67afd6d1cfdf ("net:
-stmmac: Add Split Header support and enable it in XGMAC cores") and commit
-96147375d49f ("net: stmmac: xgmac: Only get SPH header len if available").
-
-If that is correct, current kernels would compute the wrong buffer 1
-length for multi-descriptor split packets in stmmac_rx_buf1_len():
-
-	stmmac_get_rx_header_len(priv, p, &hlen);
-	if (priv->sph_active && hlen) {
-
-Could this part go in its own patch with a Fixes: tag, so it can reach
-stable? Right now it is bundled into a feature patch. The new
-L2T/NONIPHL decoding also relies on the SPLM/SAVE_EN programming added
-in the same patch, so the fix cannot be backported by itself.
-
-> +
-> +	if (rdes3 & XGMAC_RDES3_L34T)
->  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +	else if (rdes3 & XGMAC_RDES3_L2T)
-> +		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
->  }
-
-[Severity: High]
-The non-IP path masks RDES2 with GENMASK(9, 2) and shifts the result
-down by 2. If RDES2 holds the header length in bytes, as it does on
-the L34T path, this gives roughly a quarter of the real length. A
-14-byte untagged Ethernet header becomes 3, and an 18-byte tagged
-header becomes 4.
-
-stmmac_rx_buf1_len() returns that hlen as the buffer 1 length on the
-first descriptor. stmmac_rx_buf2_len() then computes the buffer 2
-length on the last descriptor as the frame length minus the
-accumulated len. An undersized buffer 1 length therefore has two
-effects:
-
-- the header copied into the skb is truncated;
-- buffer 2 is treated as longer than what the DMA wrote, by the same
-  number of bytes.
-
-Those trailing bytes come from a recycled page_pool page. They can
-hold data from an earlier packet, which is then handed to the stack
-and possibly to userspace or forwarded out.
-
-The wire can trigger this with any non-IP frame (ARP, AVTP, ...) that
-fits in one descriptor, since FD and LD are both set then. That is the
-common case for the tagged AV traffic this patch targets.
-
-This is also inconsistent within the function. The non-last
-descriptor path just above reads RDES2[9:0] with no shift.
-dwmac4_get_rx_header_len() uses RDES2_HL, bits 9:0, directly as a
-byte count.
-
-What unit does the XGMAC2 databook give for the header length on L2T
-packets? If it is a byte count in RDES2[9:0], should the mask and
-shift be dropped? If the field really is an 8-bit byte count starting
-at bit 2, could a comment or the commit message say so, and explain
-why the non-LD path reads the same register differently?
-
-[ ... ]
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> index ff83858ebc1f3..0a9c787305a4e 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> @@ -561,6 +561,16 @@ static void dwxgmac2_enable_sph(struct stmmac_priv *priv, void __iomem *ioaddr,
->  	value |= XGMAC_CONFIG_HDSMS_256; /* Segment max 256 bytes */
->  	writel(value, ioaddr + XGMAC_RX_CONFIG);
->  
-> +	value = readl(ioaddr + XGMAC_EXT_CFG1);
-> +	value |= XGMAC_CONFIG1_SPLM(1);
-> +	value |= XGMAC_CONFIG1_SAVE_EN;
-> +	writel(value, ioaddr + XGMAC_EXT_CFG1);
-> +
-> +	/* Disable variable preambles to keep the L2 split offset deterministic. */
-> +	value = readl(ioaddr + XGMAC_EXT_CFG0);
-> +	value &= ~XGMAC_EXT_CFG0_VPRE;
-> +	writel(value, ioaddr + XGMAC_EXT_CFG0);
-
-[Severity: High]
-XLGMAC cores run this code as well. Is offset 0x140 still EXT_CFG0 on
-those cores? The XLGMAC entry in stmmac_hw[] in hwif.c reuses the XGMAC
-DMA ops:
-
-		.dma = &dwxgmac210_dma_ops,
-		.mac = &dwxlgmac2_ops,
-
-On XLGMAC, 0x140 is the RX queue enable register (dwxlgmac2.h):
-
-#define XLGMAC_RXQ_ENABLE_CTRL0		0x00000140
-
-dwxlgmac2_rx_queue_enable() programs it using 2-bit per-queue fields:
-
-	value = readl(ioaddr + XLGMAC_RXQ_ENABLE_CTRL0) & ~XGMAC_RXQEN(queue);
-	if (mode == MTL_QUEUE_AVB)
-		value |= 0x1 << XGMAC_RXQEN_SHIFT(queue);
-
-With RX queue 4 in AVB mode, that sets BIT(8), which is the same bit as
-XGMAC_EXT_CFG0_VPRE. Would clearing VPRE here disable RX queue 4 on
-XLGMAC?
-
-In stmmac_hw_setup(), stmmac_mtl_configuration() ->
-stmmac_mac_enable_rx_queues() runs first. The split header loop runs
-after it, with no sph_capable check:
-
-	sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
-	for (chan = 0; chan < rx_cnt; chan++)
-		stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
-
-That means the clear would happen on every open, whether or not SPH is
-supported. stmmac_xdp_open() and stmmac_set_features() repeat it.
-
-The EXT_CFG1 write at 0x144 (SPLM bits 9:8 and bit 24) also lands on
-XLGMAC. The driver headers do not say what register sits at that
-offset on XLGMAC.
-
-Should these writes be limited to XGMAC cores?
-
-> +
->  	value = readl(ioaddr + XGMAC_DMA_CH_CONTROL(chan));
->  	if (en)
->  		value |= XGMAC_SPH;
-
-[Severity: Medium]
-Only XGMAC_SPH depends on en here. The new MAC-global EXT_CFG0/EXT_CFG1
-writes run for both values of en.
-
-stmmac_hw_setup() and stmmac_xdp_open() call stmmac_enable_sph() for
-every RX channel without checking priv->sph_capable. Does this mean
-every XGMAC gets VPRE cleared and SPLM/SAVE_EN set? That would include
-parts without SPH, parts with STMMAC_FLAG_SPH_DISABLE, and parts where
-SPH is inactive because of XDP or because rx_csum is off.
-
-That does not match the commit message:
-
-    Finally, disable the variable-length preamble when L2 splitting
-    is enabled.
-
-When SPH is turned off at runtime, through stmmac_set_features() or an
-XDP attach via stmmac_xdp_open(), only the DMA SPH bit is cleared. VPRE
-is never restored, and SPLM/SAVE_EN are never cleared.
-
-Also, value |= XGMAC_CONFIG1_SPLM(1) does not clear GENMASK(9, 8) first.
-If the field already holds a non-zero value, it is ORed with 1 rather
-than replaced. And since enable_sph() is called per channel, these
-MAC-global writes are repeated once per RX channel.
-
-dwmac4_enable_sph() also writes SPLM/SAVE_EN unconditionally, but the
-unconditional VPRE clear is new in this patch.
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260922232116.889630-1-sagar.cheluvegowda%40oss.qualcomm.com
+Shawn
