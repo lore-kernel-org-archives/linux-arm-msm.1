@@ -1,170 +1,72 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FA7D37EFE3;
-	Mon, 28 Sep 2026 12:22:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5E891A6835;
+	Mon, 28 Sep 2026 12:41:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790598160; cv=none; b=puXDxY73hzIdZDYiYJ/NMxnoErVsC1k3q02U+Sc57VNiOBObd8Oj/7sbLGnGvhX1Q1hOAuCGOXLTeLDrNR86R4zEE8zy5rv683WvPaVR3BPkX97N08tnTgBtItOF6Gz+yZIFTgNCzGyluJlCEfNqPAVI45t0w4/o5H8Y/sM/L1Q=
+	t=1790599262; cv=none; b=O7ITAh+3sGqYpgcpKY/p2//nPqvsszlxmoiHD/Ds8dNga4xzKpx1qFFzD+8OpAclQJ8xEBZWbB464+04bptzmT9MzYlVfX8T7x48rZaXzkrAENE27nvSfUwJVn0x7PBZLf48YM/3r+wItJlPP5A0/WBxFHXmkWndCJsmdApJVKs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790598160; c=relaxed/simple;
-	bh=YqYdTxNeBlZi+/azfWQ1G2jvXgUS9DTeh9xNNha/Wvk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Xq0+QKIhowdEkexpj8KktvhcJMvGDJwu8L0S25RHtgaJGFxzWUBzsHwAwL8DOn2VFaQy6B2f+R0kpRdGw9fKjseF3Bh8c3Hbrq3j4IxEwgEKIZ8IFxwoTWaW6Fqpz+iZKLO7mi8Fp9X0RVpKx3ZI2hkGQcaqtycb93XHjib/XXc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=IOTsN3UU; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	s=arc-20240116; t=1790599262; c=relaxed/simple;
+	bh=SP+yN0c8hoQ3LTJlfJEiOyn+JLXnmSLJbw/vTA1xMuc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=aATjdczqrhih6voiWGSOeofcQXTUmKLIGWDFmA0hHJGBSKm/4elBkNUJPs8SZHxaoQFnxRx1BmJ5MsM5jPSQc7FGMm36yibNcEf6BzdEYNbv4Uwjc7EOfGZXrmV0uk4yYJnf1jxCV2CQpKCx+LLG/gJfvAqo9+y7UO/NxI6qZI8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=DHXxSOpM; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="IOTsN3UU"
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 433F41570;
-	Mon, 28 Sep 2026 05:22:34 -0700 (PDT)
-Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 90E813F86F;
-	Mon, 28 Sep 2026 05:22:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790598157; bh=YqYdTxNeBlZi+/azfWQ1G2jvXgUS9DTeh9xNNha/Wvk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=IOTsN3UUwyJ+fUcqsO0r7V8LIhv8FhEMvL5PNRQ9AAtbUomLDP+Vi786MDTQUb4xs
-	 X4gc4rNxMMtoFgW9Qw+KnIguPEsQ7cIBNuch13kl+q6izgXNMpROd9iMio08KKWZsF
-	 /4Ox0sC5g4QnA0oWPFApbogXCvGaaHwEqwD11SG8=
-Message-ID: <887e91bc-03a0-4977-aed6-baa2e069d9ee@arm.com>
-Date: Mon, 28 Sep 2026 13:22:34 +0100
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="DHXxSOpM"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=0mqZx8zLsL7pTXePuoXro0FVbrVzpZkNRCXvhtwEpE8=; b=DHXxSOpMA32CVnuAeEnpjtrXlQ
+	q5iFbyZyDiTD6cZUFrBl7lT3ur+oApYIAcvql1c6YXKzOGXNTrOvOyYwXBps3dJ07qFj+fFSFpMSs
+	1Ny7o5pvlO0DweqUXjgTrheLfLivRwA//jUc3XWwcBenQ8NXbgsggCWwY+6YdiOGJW3s=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1xBAf5-007hx6-5X; Mon, 28 Sep 2026 14:40:51 +0200
+Date: Mon, 28 Sep 2026 14:40:51 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Yongzhao Chen <yongzhao.derek@gmail.com>
+Cc: netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, Ziyang Huang <hzyitc@outlook.com>,
+	George Moussalem <george.moussalem@outlook.com>
+Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337
+ internal CPU PHYs for SmartSpeed
+Message-ID: <c3c050f0-9a9a-4c98-8b0f-94320739dd29@lunn.ch>
+References: <20260924234814.1734-1-yongzhao.derek@gmail.com>
+ <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch>
+ <20260925210153.8717-1-yongzhao.derek@gmail.com>
+ <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch>
+ <20260926082129.1632-1-yongzhao.derek@gmail.com>
+ <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch>
+ <20260926215152.376-1-yongzhao.derek@gmail.com>
+ <e18c66e9-7ba2-46c0-baf5-b4281a45755d@lunn.ch>
+ <20260927153616.2317-1-yongzhao.derek@gmail.com>
+ <20260928065758.5507-1-yongzhao.derek@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] iommu/qcom: Invalidate TLB during context init
-To: me@samcday.com, Rob Clark <robin.clark@oss.qualcomm.com>,
- Will Deacon <will@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>,
- Joerg Roedel <jroedel@suse.de>
-Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-References: <20260928-qcom-iommu-clean-contexts-v1-1-c88fe2b4ff48@samcday.com>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20260928-qcom-iommu-clean-contexts-v1-1-c88fe2b4ff48@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260928065758.5507-1-yongzhao.derek@gmail.com>
 
-On 28/09/2026 7:27 am, Sam Day via B4 Relay wrote:
-> From: Sam Day <me@samcday.com>
-> 
-> qcom_iommu derives each context bank's ASID from DT data, so a kernel
-> booted via kexec reuses the same ASIDs as its predecessor.
-> 
-> Programming a new TTBR0 doesn't discard entries the SMMU has already
-> cached under that ASID, so these residual and stale
-> translations/table-walks will go into effect as soon as the context is
-> enabled again.
-> 
-> On MSM8916 devices (I confirmed it on both a Samsung Galaxy A5 and a
-> DragonBoard 410c) the result is MDP5 taking context faults on
-> framebuffer IOVAs and stuck in a continuous underrun storm during scan
-> out, if the previous kernel had itself initialized the display and
-> programmed the SMMU.
-> 
-> arm-smmu invalidates the whole TLB in arm_smmu_device_reset() before
-> enabling the SMMU. qcom_iommu can't do that on these TZ-managed devices
-> (SMMU_SCR1.GASRAE=1), however.
+> So I will not add the workaround property. I will send the at803x
+> change to net together with the DAC fix
 
-Can you not hit SMMU_CBn_TLBIALL in qcom_iommu_ctx_probe()? That would 
-seem like the logical equivalent.
+Thanks for keeping at this. It is always better to understand why
+something does not work, than try to work around it.
 
-Thanks,
-Robin.
-
-> Instead, qcom_iommu now invalidates each context bank by ASID whilst it
-> is still disabled, before programming it for the new domain. Secured
-> contexts are protected by TZ so they're skipped.
-> 
-> There's been previous discussion on the list (see link) about how to
-> best deal with this kind of situation. This patch opts for a fix in the
-> incoming kernel, rather than the outgoing one. This ensures newer
-> kernels will always behave correctly, and also covers the kdump use
-> case.
-> 
-> Fixes: 0ae349a0f33f ("iommu/qcom: Add qcom_iommu")
-> Link: https://lore.kernel.org/all/20240319154756.GB2901@willie-the-truck/
-> Assisted-by: LLM
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
-> Tested on my DragonBoard 410c. Starting from one unpatched kernel
-> scanning out at 640x480 and kexecing into the same kernel at 1280x720
-> results in context faults starting at the first IOVA past the previous
-> kernel's mapped extent, with continuous MDP5 underruns thereafter.
-> During this time I observed an all-blue HDMI signal. With the patch
-> applied, the same kexec hop is free of faults, and the HDMI signal is
-> clean throughout.
-> 
-> Further, it was proven that kexecing into an unpatched kernel and
-> causing the fault storm can then be resolved by subsequently kexecing
-> into a patched kernel.
-> ---
->   drivers/iommu/arm/arm-smmu/qcom_iommu.c | 32 +++++++++++++++++++++-----------
->   1 file changed, 21 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-> index 21d18ce67b982..a37955cd90d5e 100644
-> --- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-> +++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-> @@ -111,23 +111,26 @@ iommu_readq(struct qcom_iommu_ctx *ctx, unsigned reg)
->   	return readq_relaxed(ctx->base + reg);
->   }
->   
-> +static void qcom_iommu_ctx_tlb_sync(struct qcom_iommu_ctx *ctx)
-> +{
-> +	unsigned int val, ret;
-> +
-> +	iommu_writel(ctx, ARM_SMMU_CB_TLBSYNC, 0);
-> +
-> +	ret = readl_poll_timeout(ctx->base + ARM_SMMU_CB_TLBSTATUS, val,
-> +				 (val & 0x1) == 0, 0, 5000000);
-> +	if (ret)
-> +		dev_err(ctx->dev, "timeout waiting for TLB SYNC\n");
-> +}
-> +
->   static void qcom_iommu_tlb_sync(void *cookie)
->   {
->   	struct qcom_iommu_domain *qcom_domain = cookie;
->   	struct iommu_fwspec *fwspec = qcom_domain->fwspec;
->   	unsigned i;
->   
-> -	for (i = 0; i < fwspec->num_ids; i++) {
-> -		struct qcom_iommu_ctx *ctx = to_ctx(qcom_domain, fwspec->ids[i]);
-> -		unsigned int val, ret;
-> -
-> -		iommu_writel(ctx, ARM_SMMU_CB_TLBSYNC, 0);
-> -
-> -		ret = readl_poll_timeout(ctx->base + ARM_SMMU_CB_TLBSTATUS, val,
-> -					 (val & 0x1) == 0, 0, 5000000);
-> -		if (ret)
-> -			dev_err(ctx->dev, "timeout waiting for TLB SYNC\n");
-> -	}
-> +	for (i = 0; i < fwspec->num_ids; i++)
-> +		qcom_iommu_ctx_tlb_sync(to_ctx(qcom_domain, fwspec->ids[i]));
->   }
->   
->   static void qcom_iommu_tlb_inv_context(void *cookie)
-> @@ -270,6 +273,13 @@ static int qcom_iommu_init_domain(struct iommu_domain *domain,
->   		/* Disable context bank before programming */
->   		iommu_writel(ctx, ARM_SMMU_CB_SCTLR, 0);
->   
-> +		/* The TLB may still hold cached and stale entries for this
-> +		 * ASID, if a previous kernel programmed the SMMU before
-> +		 * a kexec into this kernel.
-> +		 */
-> +		iommu_writel(ctx, ARM_SMMU_CB_S1_TLBIASID, ctx->asid);
-> +		qcom_iommu_ctx_tlb_sync(ctx);
-> +
->   		/* Clear context bank fault address fault status registers */
->   		iommu_writel(ctx, ARM_SMMU_CB_FAR, 0);
->   		iommu_writel(ctx, ARM_SMMU_CB_FSR, ARM_SMMU_CB_FSR_FAULT);
-> 
-> ---
-> base-commit: 3339792beb5fb1c9c423c544ba2fbc235e7d7f75
-> change-id: 20260926-qcom-iommu-clean-contexts-3ccda804c08d
-> 
-> Best regards,
-
+	  Andrew
