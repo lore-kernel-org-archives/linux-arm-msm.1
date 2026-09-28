@@ -1,184 +1,170 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 551F93BAD92
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 12:18:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790597892; cv=pass; b=nc2SlOsEv+MOPDo/Cmfgly+q2cYEBw9U7gzDjSYcuD5xijRV1E+qOjkCKLmtl6Gg7WX/ysi+IyU0hh3VPGbjZESLVjbQpeVvEAfOizFYRhkcDPyMJDXaAwNeEylpdy+nwqaZ1ZBxyjtpaobWDNIjaunOCR3BnU+aWVhlN/Y7wHU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790597892; c=relaxed/simple;
-	bh=QD+IP/JQeXFvG68TvIWuMoLOYB24jv3h0RzVmWZVzU8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=m/4BGwdIREqKDmtkoHupQ8iTbF/NCSWzKxRJGTWPJl5U1Fgvw/omdpgKuwGW32/RjbsTSGowf++M7kAavnU/RJWh9g77R4vB4wEQfC+YneF3+/AQJSa6GClrZkUUShq/nxcLHnwWOXfM06MckuoUzbl7eeL/0U9GUuRvnIr1SzU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=F7IJNSFc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FmTc9wGU; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FA7D37EFE3;
+	Mon, 28 Sep 2026 12:22:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790598160; cv=none; b=puXDxY73hzIdZDYiYJ/NMxnoErVsC1k3q02U+Sc57VNiOBObd8Oj/7sbLGnGvhX1Q1hOAuCGOXLTeLDrNR86R4zEE8zy5rv683WvPaVR3BPkX97N08tnTgBtItOF6Gz+yZIFTgNCzGyluJlCEfNqPAVI45t0w4/o5H8Y/sM/L1Q=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790598160; c=relaxed/simple;
+	bh=YqYdTxNeBlZi+/azfWQ1G2jvXgUS9DTeh9xNNha/Wvk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Xq0+QKIhowdEkexpj8KktvhcJMvGDJwu8L0S25RHtgaJGFxzWUBzsHwAwL8DOn2VFaQy6B2f+R0kpRdGw9fKjseF3Bh8c3Hbrq3j4IxEwgEKIZ8IFxwoTWaW6Fqpz+iZKLO7mi8Fp9X0RVpKx3ZI2hkGQcaqtycb93XHjib/XXc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=IOTsN3UU; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="F7IJNSFc";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FmTc9wGU"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68SBABUl481619
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 12:18:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XzefpZA05xL3xDa+q/jRzRAJHenJne+6yuOvzxu+MdM=; b=F7IJNSFc4XLasLfh
-	wmCm3cOuG1L32UjmoTkxsrcwdVAUOlzyb3CB/oKsvkNsdaBJpOWSQ+n1VFj+XMEN
-	Kr75rJwm4IQ+BrJcwP9H9r05BmcCZ3ZuW1+gasBqKJZ49SHE8wYg0ycVny2i/yoQ
-	3HKo3yopBMQL6EfHeJSpNGrThfOrRdS4kXbcV7sxk6B7NS9e6eLttyf7iW4XcImH
-	ZSqb+W/fFfPdv2ejzE4ywZsTAiBf7h1P/jIUy9Y7Qiyw4fDNSGhFYKA2bxxjw0jF
-	sqIlvYUu4kfvg4GeWeuOxXy1QHIL3DXBqagYCgeKpXv4kGwq8RsyJeyLRXI+fQlN
-	qm3aMw==
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com [74.125.224.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyjt11abb-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 12:18:09 +0000 (GMT)
-Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-67139d2e528so4431562d50.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 05:18:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790597889; cv=none;
-        d=google.com; s=arc-20260327;
-        b=c9ZxJRLtfQ5Mpmt1vgjeufcCdRxkqu8MOzBaQ4b9rs5ljXRMPICh4vIMnBy9MWpO5V
-         4MAUKlTpGVDS5yMxBjgFzaxWDbgw7z4JwwdjCawqiUs/xQRHUtwTTbB/BD4BEa/1AJ2x
-         56yW4SFvsmxbLoVbC4nsVU6yfgRPOJz7UrmFNeEqsZvmEKOElQOZbe2IyfWmBs1lOKIv
-         CZKSxn3eGpIoZK6zGSXyjDTyPpSsC1fUSJY/O9fKSwhalazI8QL4NlmZZlT1l3WZ6XbH
-         VgeWWxRGeRMNKESXDkT5KDVdWWSj4nPRG6DBAVVFh3zh5aZ5a2e49G00pwqU5Ca1ZTfR
-         +kig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=XzefpZA05xL3xDa+q/jRzRAJHenJne+6yuOvzxu+MdM=;
-        fh=aHXwKPf0IbjvE4vY/QXiFaV1QunEGtifKAXf7Iq4y0s=;
-        b=D5NmHIFcN8zq3TDBpTEjoMyBWnyTwtwfUvFsbJfyXfNlBZoqjzCvpIl3Pe8Y2olKKN
-         TM7DjJj7l6zKMKDE7Rx5diFdHGEAcubWMVaRmMRmFJPQ5U1Kfl+ma39dMUVEPLPi1CsK
-         YzQAso7ftRHgKvS9IDAOP9/RkvfY6psmJYpjb/DxkxPqIM829XJVifBP78NrQYyOiMr7
-         PFIoy3nypKEi+tzjaKJaV8tDwvJ6+14faXX8ZMbjJ5z9901E2xI0V1Qbpx2bs7melgfX
-         /R/RN3qepTvjrhsJf0jpmYayX+IJXTLGQvPM7VtBC0T11cB716CRcQ4Iv0ZNnFBzPCop
-         0pCA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790597889; x=1791202689; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XzefpZA05xL3xDa+q/jRzRAJHenJne+6yuOvzxu+MdM=;
-        b=FmTc9wGUwoWQb7Mh5xXHr1LAIxgIHf/0qnlkwZgp9VrPc9mmOI2yyqwXvDnQpoWQ16
-         3YKJqSML/bclOi/5a9exdNjgDZvRPVAw5MZ3Un6DuonMxj27pglgB4EWr7PYFcRX46RR
-         4j1C5t0V18RhUDjEmfkB9vNvYgwe4U5IlSIzANrAUjuVjuzd6MO5b+ZXW+ravr9JUXbT
-         6ZVPrlKAz2he5uEP6mWPIKwoPjnftBAF1G2F1dD4eFxSCtHL5onuq9gdGkU6D9KkMTWj
-         yfg+GINxIlT7k0wzG2lR0K1+kw8cmkmniNnJl3KT7o1mTztpqqih9U8bsy5vjrMXgrO9
-         QUiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790597889; x=1791202689;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XzefpZA05xL3xDa+q/jRzRAJHenJne+6yuOvzxu+MdM=;
-        b=pQ5z2f/cq+E4q5pTgIrz0YNhACIgu+Y9pTWEebatZmUNu74JSf5EfhrdCIML5dI2b9
-         kEX6C2hkRgEvYhGZezHlZtHhtHjrXvaeoFLaXm+F6MKUEI4f2wVqA1EQuxw0bAHgl+FU
-         Nd+ytNs6g9E6NCvOoLtiLBtRBgajBykUNJr+KUnEbotMtlmZIpnFoJvC6l8kIW/gWhY8
-         Up10BA1DfFdvGBC+I+sQrYH/CF2byDUJPKAotnfQdj4ecBn94J6TD7yDsCHXrGsqnNVq
-         k6XD9uyk7L4qnYACAT47OKFNu3lDYvH0k99TT9AOHr91ULoeHZcHUqdaeujUdHBexx4V
-         QfTA==
-X-Forwarded-Encrypted: i=1; AKwUvBz36HOgVx1eqK78pE5gKUOrGrdgqZudxXMXznm+EFbdfBWhAVrIgqL74C5kx+Drh89s0bU43xDKYLnCGvXA@vger.kernel.org
-X-Gm-Message-State: AFq9FYKnXGUSWoEzLJN66yaWVVB3cz9vvZrOll9Xe9NwkhrX157leciH
-	IT+Nb6Z9rJExq+oQJoua9wu+uSW40BoJZHBuVcdPeWsc/flarIco5Xr5Vh+pk0JARI7tx+Oisle
-	oQYi2kia6+ytzJEPPMnrw8s7F4Ihw3kySNBSMl6d2eJMQTFU9q5EFWVPbTEAebE0YykQo9bbwX9
-	oUQdmRgzup0wT2OiuJ8zvCuLYvmG4Uo18IYPPkKeAo+1M=
-X-Gm-Gg: AYBFou24iDYnpyK0T6ibVRaCkfV6q+JkCJ4B2KD/NMd3y245NAwveC8TyFFIkgZ95GW
-	+Z3PR7GxHD/YicVSyzQc3cRJwzihJbn7vDpxlor9uYIekZdtVk9z6d6LJuHnViiT4IvxN8UPBIF
-	Z2mF8paaKXYW1SLzbREdIrX2UYqq/oIOFSFp4crlhHxgq2CK7zWa9lSaK7ng==
-X-Received: by 2002:a05:690e:e8c:b0:671:70d2:528d with SMTP id 956f58d0204a3-672ed3a1adcmr5448710d50.80.1790597889301;
-        Mon, 28 Sep 2026 05:18:09 -0700 (PDT)
-X-Received: by 2002:a05:690e:e8c:b0:671:70d2:528d with SMTP id
- 956f58d0204a3-672ed3a1adcmr5448691d50.80.1790597888749; Mon, 28 Sep 2026
- 05:18:08 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="IOTsN3UU"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 433F41570;
+	Mon, 28 Sep 2026 05:22:34 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 90E813F86F;
+	Mon, 28 Sep 2026 05:22:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1790598157; bh=YqYdTxNeBlZi+/azfWQ1G2jvXgUS9DTeh9xNNha/Wvk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=IOTsN3UUwyJ+fUcqsO0r7V8LIhv8FhEMvL5PNRQ9AAtbUomLDP+Vi786MDTQUb4xs
+	 X4gc4rNxMMtoFgW9Qw+KnIguPEsQ7cIBNuch13kl+q6izgXNMpROd9iMio08KKWZsF
+	 /4Ox0sC5g4QnA0oWPFApbogXCvGaaHwEqwD11SG8=
+Message-ID: <887e91bc-03a0-4977-aed6-baa2e069d9ee@arm.com>
+Date: Mon, 28 Sep 2026 13:22:34 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260923-b4-qaif-shikra-audio-v7-0-d5b6f056568e@oss.qualcomm.com>
- <20260923-b4-qaif-shikra-audio-v7-4-d5b6f056568e@oss.qualcomm.com>
- <arOe2yA4KOvhYqRb@sirena.co.uk> <CAC-tS8ASR899SH45=mbr+8z6xcOBoRgYJWXfXXER9CUXdYCOrw@mail.gmail.com>
-In-Reply-To: <CAC-tS8ASR899SH45=mbr+8z6xcOBoRgYJWXfXXER9CUXdYCOrw@mail.gmail.com>
-From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-Date: Mon, 28 Sep 2026 17:47:56 +0530
-X-Gm-Features: AclHuK_s5MCzD1RecRG5TV0tZYeXGtKCs8wJ16v90jxnA5FxxzHDjGMMxqJkfeA
-Message-ID: <CAC-tS8DUxJ4uD5s_BYc52v7bigMc9Mn585YGDQ_x9VaZdLe+yA@mail.gmail.com>
-Subject: Re: [PATCH v7 04/10] ASoC: qcom: Add QAIF CPU DAI ops, regmap, DT
- parsing and platform init
-To: Mark Brown <broonie@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>,
-        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
-        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
-        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA0OCBTYWx0ZWRfX/ndWPritzS5K
- ItLRO+CIPMEcsJBgxdqLI2k4Nfs7bRCgqCynfzwbyTOpP7S1UH+EpoJNrQ4sD9zhPRMmhDaqfTu
- GWV8kloHXzcGAuDSipH7wtaTmCB99PZXj2Q68nURCy6Ntgi4Q2uON8xcdmhqibuSzMBeZ3O9LZb
- 923EHgh8/0ie8eX32b6eU5JLEO4JPy2fYuqThYvSbhev/zbkuchTFYwth4cHjWFB41UC0nfmgtl
- iInLS6bnSc1yak3r3azX2DWTrpalF/7GvjjuSpkbaMf4espEQ9U1LyMMDM+Muv0nlmJet3iI+id
- s1VYTrmvjm616CkEsmDBHh5mg6KO0Acc12LSUg8Z5nFdU7GdOOEDUh110qN0dVbsETmJd/iAiGN
- iJuCOYulrl5sqBDdKwkUqmxcuYsg3NhXPYJ8QT+vCIJW8XjWzypYu5ynvu+Lo8muSMfJeezb8Oe
- DN5jgMFcJ6SSVNd2SAQ==
-X-Authority-Analysis: v=2.4 cv=V8foQuni c=1 sm=1 tr=0 ts=6aba5b01 cx=c_pps
- a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=6YM43U1n-Uw7COpwBTIA:9
- a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22
-X-Proofpoint-ORIG-GUID: r3R_Z1WTFSZgvZmYkgB33fj_W_RVxjVb
-X-Proofpoint-GUID: r3R_Z1WTFSZgvZmYkgB33fj_W_RVxjVb
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA0OCBTYWx0ZWRfX4dxqIqetVt5E
- KDqkL1UgJQgtfHyIqGZpFWZC0Bu5kvB7bt6DkjJ7Qbqct1brl6f62dtrnMT6WdH/8vrWuF3z9DX
- 4IsC8xa6HZGxSsdy5QzOUulXi4QWVcs=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-28_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 lowpriorityscore=0 phishscore=0 impostorscore=0
- malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609280048
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] iommu/qcom: Invalidate TLB during context init
+To: me@samcday.com, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Will Deacon <will@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>,
+ Joerg Roedel <jroedel@suse.de>
+Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+References: <20260928-qcom-iommu-clean-contexts-v1-1-c88fe2b4ff48@samcday.com>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260928-qcom-iommu-clean-contexts-v1-1-c88fe2b4ff48@samcday.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 28, 2026 at 3:08=E2=80=AFPM Harendra Gautam
-<harendra.gautam@oss.qualcomm.com> wrote:
->
-> >
-> > > +     /*
-> > > +      * The sync, lane and frame configuration and the MI2S bit cloc=
-k are
-> > > +      * shared by both directions of an AIF. Concurrent playback and
-> > > +      * capture on the same interface are therefore expected to use =
-a
-> > > +      * compatible format, rate and slot configuration.
-> > > +      */
-> >
-> > What enforces this?
-> Both directions share the bit clock and slot width, so rate and sample
-> bits must match on concurrent streams. Would adding symmetric_rate and
-> symmetric_sample_bits to the AIF DAI entries work?
->
-Please ignore my earlier symmetric_rate/symmetric_sample_bits
-suggestion, Playback and capture are separate DAIs on separate
-dai_links so it won't work.
-The comment text in hw_param() is misleading, hw_params() doesn't set
-rate or bit clock (the machine driver does via set_sysclk()). It only
-writes sync/lane/frame config from aif_intf_cfg[idx], fixed at probe
-and via set_fmt()/set_tdm_slot(), so both directions write the same
-values. Will reword the comment.
--Harendra
+On 28/09/2026 7:27 am, Sam Day via B4 Relay wrote:
+> From: Sam Day <me@samcday.com>
+> 
+> qcom_iommu derives each context bank's ASID from DT data, so a kernel
+> booted via kexec reuses the same ASIDs as its predecessor.
+> 
+> Programming a new TTBR0 doesn't discard entries the SMMU has already
+> cached under that ASID, so these residual and stale
+> translations/table-walks will go into effect as soon as the context is
+> enabled again.
+> 
+> On MSM8916 devices (I confirmed it on both a Samsung Galaxy A5 and a
+> DragonBoard 410c) the result is MDP5 taking context faults on
+> framebuffer IOVAs and stuck in a continuous underrun storm during scan
+> out, if the previous kernel had itself initialized the display and
+> programmed the SMMU.
+> 
+> arm-smmu invalidates the whole TLB in arm_smmu_device_reset() before
+> enabling the SMMU. qcom_iommu can't do that on these TZ-managed devices
+> (SMMU_SCR1.GASRAE=1), however.
+
+Can you not hit SMMU_CBn_TLBIALL in qcom_iommu_ctx_probe()? That would 
+seem like the logical equivalent.
+
+Thanks,
+Robin.
+
+> Instead, qcom_iommu now invalidates each context bank by ASID whilst it
+> is still disabled, before programming it for the new domain. Secured
+> contexts are protected by TZ so they're skipped.
+> 
+> There's been previous discussion on the list (see link) about how to
+> best deal with this kind of situation. This patch opts for a fix in the
+> incoming kernel, rather than the outgoing one. This ensures newer
+> kernels will always behave correctly, and also covers the kdump use
+> case.
+> 
+> Fixes: 0ae349a0f33f ("iommu/qcom: Add qcom_iommu")
+> Link: https://lore.kernel.org/all/20240319154756.GB2901@willie-the-truck/
+> Assisted-by: LLM
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+> Tested on my DragonBoard 410c. Starting from one unpatched kernel
+> scanning out at 640x480 and kexecing into the same kernel at 1280x720
+> results in context faults starting at the first IOVA past the previous
+> kernel's mapped extent, with continuous MDP5 underruns thereafter.
+> During this time I observed an all-blue HDMI signal. With the patch
+> applied, the same kexec hop is free of faults, and the HDMI signal is
+> clean throughout.
+> 
+> Further, it was proven that kexecing into an unpatched kernel and
+> causing the fault storm can then be resolved by subsequently kexecing
+> into a patched kernel.
+> ---
+>   drivers/iommu/arm/arm-smmu/qcom_iommu.c | 32 +++++++++++++++++++++-----------
+>   1 file changed, 21 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> index 21d18ce67b982..a37955cd90d5e 100644
+> --- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> +++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> @@ -111,23 +111,26 @@ iommu_readq(struct qcom_iommu_ctx *ctx, unsigned reg)
+>   	return readq_relaxed(ctx->base + reg);
+>   }
+>   
+> +static void qcom_iommu_ctx_tlb_sync(struct qcom_iommu_ctx *ctx)
+> +{
+> +	unsigned int val, ret;
+> +
+> +	iommu_writel(ctx, ARM_SMMU_CB_TLBSYNC, 0);
+> +
+> +	ret = readl_poll_timeout(ctx->base + ARM_SMMU_CB_TLBSTATUS, val,
+> +				 (val & 0x1) == 0, 0, 5000000);
+> +	if (ret)
+> +		dev_err(ctx->dev, "timeout waiting for TLB SYNC\n");
+> +}
+> +
+>   static void qcom_iommu_tlb_sync(void *cookie)
+>   {
+>   	struct qcom_iommu_domain *qcom_domain = cookie;
+>   	struct iommu_fwspec *fwspec = qcom_domain->fwspec;
+>   	unsigned i;
+>   
+> -	for (i = 0; i < fwspec->num_ids; i++) {
+> -		struct qcom_iommu_ctx *ctx = to_ctx(qcom_domain, fwspec->ids[i]);
+> -		unsigned int val, ret;
+> -
+> -		iommu_writel(ctx, ARM_SMMU_CB_TLBSYNC, 0);
+> -
+> -		ret = readl_poll_timeout(ctx->base + ARM_SMMU_CB_TLBSTATUS, val,
+> -					 (val & 0x1) == 0, 0, 5000000);
+> -		if (ret)
+> -			dev_err(ctx->dev, "timeout waiting for TLB SYNC\n");
+> -	}
+> +	for (i = 0; i < fwspec->num_ids; i++)
+> +		qcom_iommu_ctx_tlb_sync(to_ctx(qcom_domain, fwspec->ids[i]));
+>   }
+>   
+>   static void qcom_iommu_tlb_inv_context(void *cookie)
+> @@ -270,6 +273,13 @@ static int qcom_iommu_init_domain(struct iommu_domain *domain,
+>   		/* Disable context bank before programming */
+>   		iommu_writel(ctx, ARM_SMMU_CB_SCTLR, 0);
+>   
+> +		/* The TLB may still hold cached and stale entries for this
+> +		 * ASID, if a previous kernel programmed the SMMU before
+> +		 * a kexec into this kernel.
+> +		 */
+> +		iommu_writel(ctx, ARM_SMMU_CB_S1_TLBIASID, ctx->asid);
+> +		qcom_iommu_ctx_tlb_sync(ctx);
+> +
+>   		/* Clear context bank fault address fault status registers */
+>   		iommu_writel(ctx, ARM_SMMU_CB_FAR, 0);
+>   		iommu_writel(ctx, ARM_SMMU_CB_FSR, ARM_SMMU_CB_FSR_FAULT);
+> 
+> ---
+> base-commit: 3339792beb5fb1c9c423c544ba2fbc235e7d7f75
+> change-id: 20260926-qcom-iommu-clean-contexts-3ccda804c08d
+> 
+> Best regards,
+
