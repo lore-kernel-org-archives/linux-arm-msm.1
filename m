@@ -1,157 +1,340 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from mail-m32113.qiye.163.com (mail-m32113.qiye.163.com [220.197.32.113])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 869F84B44B7
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 11:48:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABAB34B53ED;
+	Mon, 28 Sep 2026 11:55:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.113
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790596103; cv=none; b=VSXJ72tZMmnfu8z6YngGW8+fQeU38mat3jSdgZuRZEO7uPSrF1kHj+q6b4+0DFmNG4pL8RfpOXy5QsvO+4CiPLXwC9fM51Zv0cMy4Cb4GsiactmP3m+ZSMRxZOOvakMRyW1dYfHFMOJDzQ0R6Jgm3eqIV0SQ5IQtfbpRaozaxKY=
+	t=1790596507; cv=none; b=Jgz8QKVx3hzL1Q60SvYbWA6Ydd9QykwOwSZ0SGI2blWqaTybJOQ8l7iLhEtkbWRuRKa/q3+70phJJvmRI/bEty1D+IulRz+Pz1TVUfXDQT2i8C/+ox0xsnBX52aqasYQxJNoA+YSCT4ItUk8ldd8dDgs/8SwGdCi00z9YtIPq/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790596103; c=relaxed/simple;
-	bh=EgPFAuP9qvQBrProAV6Bi/9+EkS0oVZfziknCw4Lrlg=;
-	h=Mime-Version:Content-Type:Date:Message-Id:To:From:Subject:Cc:
-	 References:In-Reply-To; b=pstxIicdiK9nmuTHWI5wWebM4V1j0eI+ARtls6d7H+gON/PumFwOPaJVya8HRW/+C7x2LCLKhOiNBwxLrO0uVzKJ/INpvqDlNbRHWXiRRzxd/uimSoZoShMLkp0DVwQAFgA/pTvYbAAZWCvOHiyKyMpNQ73gwsqx2uzDOAdIToo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=MGXKKc4c; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1790596507; c=relaxed/simple;
+	bh=uIUFM6sD6dQr2mDmLTHvvREcRmoIOEcrCNusNEMyhJM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=LOgJLdP010mE783+yNryMJ7G95qSHeLjhPSfhBCzQ14FyFxmEjFYL8HPbQluvBwaqmBk68QmYgSQWIm8BUqB84TkHexdwEkH/2iF7V7uExCDnVtvDqVtlDjleNLSAb0qVF8/wU9pjt/ujmbrOCemnx7GYu0kLo8V0fIJY9aySd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=K9gKAnrq; arc=none smtp.client-ip=220.197.32.113
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="MGXKKc4c"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id C891A4E410A4;
-	Mon, 28 Sep 2026 11:48:18 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 73DFD60504;
-	Mon, 28 Sep 2026 11:48:18 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DAA5A102F2227;
-	Mon, 28 Sep 2026 13:47:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790596095; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=TR2EoUedzfwkF3107b5KNS7BcXvPvkAv8bW+yYycLg8=;
-	b=MGXKKc4c5SOmaVWp/phoair6djFZb7UjXYb4g7L1mu9HkDS45D2Mlcr5y0nCwPGAVqpsGv
-	OEyWMqiy3ker2qxJrAW/UnrGrRHX0U5FTADuUuUtmWYUjbjs5sEQnRZOMUAMqnzQlFMAjA
-	pPfwXpH8+1YUt2r57oV6Vdkon/lXPcVhV54ca8km8DMGpKDscvP2exc0uf2Nu6SDXfkR44
-	TLdVQPBbaKuqlM8N4aAFilFSY0cAFNPEgcpSiJcNTfZYNkrgZ0RKbrheWBH8E5cEAIKAjr
-	8JuIZsDLIGY++CVbtEFdbI5WenxcI1Asgjh4lbJzwiQZuHiUsB0V5sy5A7bfEQ==
+	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="K9gKAnrq"
+Received: from [127.0.1.1] (unknown [36.129.139.90])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4f5b33f58;
+	Mon, 28 Sep 2026 19:49:41 +0800 (GMT+08:00)
+From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+Date: Mon, 28 Sep 2026 19:49:16 +0800
+Subject: [PATCH v4] arm64: dts: qcom: qcs6490-rubikpi3: Add audio support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 28 Sep 2026 13:47:52 +0200
-Message-Id: <DLQXBZQ8KOCD.17XT73H60GTNJ@bootlin.com>
-To: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>, "Krzysztof
- Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
-From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-Subject: Re: (subset) [PATCH 1/2] dt-bindings: display: Use consistent
- indentation in the example
-Cc: "Luca Ceresoli" <luca.ceresoli@bootlin.com>, "Chen-Yu Tsai"
- <wens@kernel.org>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
- "Maxime Ripard" <mripard@kernel.org>, "Thomas Zimmermann"
- <tzimmermann@suse.de>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Samuel Holland"
- <samuel@sholland.org>, "Liu Ying" <victor.liu@nxp.com>, "Andrzej Hajda"
- <andrzej.hajda@intel.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
- "Robert Foss" <rfoss@kernel.org>, "Jonas Karlman" <jonas@kwiboo.se>, "Frank
- Li" <Frank.Li@nxp.com>, "Sascha Hauer" <s.hauer@pengutronix.de>,
- "Pengutronix Kernel Team" <kernel@pengutronix.de>, "Fabio Estevam"
- <festevam@gmail.com>, "Francesco Dolcini" <francesco@dolcini.it>, "Philipp
- Zabel" <p.zabel@pengutronix.de>, "Chun-Kuang Hu" <chunkuang.hu@kernel.org>,
- "Rob Clark" <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov"
- <lumag@kernel.org>, "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica
- Zhang" <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn
- Suijten" <marijn.suijten@somainline.org>, "Marcus Folkesson"
- <marcus.folkesson@gmail.com>, "Maxime Coquelin"
- <mcoquelin.stm32@gmail.com>, "Alexandre Torgue"
- <alexandre.torgue@foss.st.com>, "Yannick Fertre"
- <yannick.fertre@foss.st.com>, "Raphael Gallais-Pou"
- <raphael.gallais-pou@foss.st.com>, "Philippe Cornu"
- <philippe.cornu@foss.st.com>, "Matthias Brugger" <matthias.bgg@gmail.com>,
- "AngeloGioacchino Del Regno" <angelogioacchino.delregno@collabora.com>,
- "Adrien Grassein" <adrien.grassein@gmail.com>, "Russell King"
- <linux@armlinux.org.uk>, "Simha BN" <simhavcs@gmail.com>, "CK Hu"
- <ck.hu@mediatek.com>, "Jitao shi" <jitao.shi@mediatek.com>, "Yongxing Mou"
- <yongxing.mou@oss.qualcomm.com>, "Abel Vesa" <abelvesa@kernel.org>, "Chris
- Morgan" <macromorgan@hotmail.com>, "Martinez Canillas"
- <javierm@redhat.com>, <dri-devel@lists.freedesktop.org>,
- <devicetree@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
- <linux-sunxi@lists.linux.dev>, <linux-kernel@vger.kernel.org>,
- <imx@lists.linux.dev>, <linux-mediatek@lists.infradead.org>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- <linux-stm32@st-md-mailman.stormreply.com>
-X-Mailer: aerc 0.22.0
-References: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
- <179057359762.92994.13773102514654073802.b4-ty@b4>
- <8499ed1a-df9e-4e5a-b609-3da8499a47b5@oss.qualcomm.com>
- <20260928065837.GA22609@killaraus.ideasonboard.com>
- <ccb949ea-5fa9-47e5-be75-af8155328dc8@oss.qualcomm.com>
- <20260928100841.GC22609@killaraus.ideasonboard.com>
-In-Reply-To: <20260928100841.GC22609@killaraus.ideasonboard.com>
-X-Last-TLS-Session-Version: TLSv1.3
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260928-rubikpi-next-20260605-v4-1-56ac4da896fd@thundersoft.com>
+X-B4-Tracking: v=1; b=H4sIADtUumoC/3XN0Q6CIBiG4VtxHEcDRMCOuo/WAQkka4EDZDbnv
+ Ye21UHz8P22//lnEHWwOoJTNYOgs43WuxL0UIGul+6uoVWlAUGEIYYaGMabfQwWOj0l+F2NUhJ
+ jKghVHJTbIWhjp829XEv3NiYfXtubTNb1I3K8J2YCEWScIay4FI3A59SPTukQvUnHzj/B6ub6Z
+ 7WI7ll1sQxtMWVKNNLU/9ayLG9LUpiEDAEAAA==
+X-Change-ID: 20260605-rubikpi-next-20260605-fdda114824d7
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Mark Brown <broonie@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Hongyang Zhao <hongyang.zhao@thundersoft.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790596181; l=6970;
+ i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
+ bh=uIUFM6sD6dQr2mDmLTHvvREcRmoIOEcrCNusNEMyhJM=;
+ b=dYoKiThLwQkehT1fg1icElz5b+xEk0oNPL2GF+J/Ewq1kI95IrMyvwPfuPh+dJitIyc7TgFIY
+ ucLse/Tu6YRAYhlX5LpN5oaDj0V89vjHOJHsOvuiK7VdmO+1EuU47ur
+X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
+ pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
+X-HM-Tid: 0aa0e7d96c0009d5kunm7599b9d8470ca8
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDHkgZVkNKTEhJSR8dQ0NPS1YVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
+	lPT09IVUpLS1VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=K9gKAnrqGygN4pQUBPnBWw5q7ycNBAFWBog86kHNGvQc3Yuhap64Ia6+mrshnpRhcTIMhUBhXREDvuoJAbPX9M5WoU5BHVFYRiOJCulWig1jGdyqKu9UcNXIoNzQWjGW+wFdNtBaF0T9U/BT738zJkZybOLRDZG2Uw1YLiCjk9c=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
+	bh=gJTZhoNmZEvie520qbaHv+dSvK0//N9JErmbNt9XBwE=;
+	h=date:mime-version:subject:message-id:from;
 
-Hello Krzysztof, Laurent,
+RubikPi 3 uses the AudioReach firmware path for its external audio
+interfaces. Primary MI2S connects to an ES8316 codec for headset playback
+and capture, while quaternary MI2S feeds the LT9611 HDMI bridge.
 
-On Mon Sep 28, 2026 at 12:08 PM CEST, Laurent Pinchart wrote:
-> On Mon, Sep 28, 2026 at 10:08:43AM +0200, Krzysztof Kozlowski wrote:
->> On 28/09/2026 08:58, Laurent Pinchart wrote:
->> > On Mon, Sep 28, 2026 at 08:03:18AM +0200, Krzysztof Kozlowski wrote:
->> >> On 28/09/2026 07:33, Luca Ceresoli wrote:
->> >>> On Sun, 13 Sep 2026 14:33:32 +0200, Krzysztof Kozlowski wrote:
->> >>>> Correct indentation in the examples to consistent 2- or 4-spaces
->> >>>> indentation to fix dt-check-style warnings ("example 0
->> >>>> [indent-consistent] indent mismatch ...").  Preferred is 4-spaces, =
-but
->> >>>> re-indenting entire example just for that is too much churn.
->> >>>
->> >>> Applied, thanks!
->> >>>
->> >>> [1/2] dt-bindings: display: Use consistent indentation in the exampl=
-e
->> >>>       commit: 370c5d9004f8b754351981d59fc26851bf943e93
->> >>
->> >> Thanks, but I expected no one will pick it up, so I asked Rob to take
->> >> it, thus it is already queued.
+Describe the ES8316 supplies, MCLK, jack detection and audio routing, and
+add the primary and quaternary MI2S links. The 1.8 V and 3.3 V codec
+supplies are both controlled by GPIO117.
 
-Sorry that this caused confusion.
+Link: https://lore.kernel.org/r/b4e0dbd4-f50b-4366-add5-e99cd4432aa8@oss.qualcomm.com
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+---
+This revision contains only the Rubik Pi 3 device-tree patch. The five
+ASoC patches from v3 have been applied to sound.git and are already in
+next-20260925. The AudioReach topology and ALSA UCM updates will be
+submitted separately.
 
->> > Please explain your merge plans in the cover letter next time.
->>
->> The merge plan was this going through drm-misc. It got reviews, no one
->> applied, even Dmitry for msm only reviewed the msm-bits (second patch),
->> so I asked Rob to take it. This was not planned, but result of usual
->> drm-misc inactivity for bindings (many bindings were not taken in the
->> past or with noticeable delay/pings).
+Changes in v4:
 
-My personal rule of thumb to apply patches to drm-misc is to wait at least
-(the latest of):
+- Set I2C0 clock-frequency to 100 kHz explicitly, preserving the rate
+  used by the GENI I2C driver's default.
+- Rebase the device-tree patch onto next-20260925 and omit the five
+  ASoC patches already applied to sound.git.
 
- * 2w after the patch has been sent
- * 1w after it's reviewed/acked
+Link: https://lore.kernel.org/r/20260904-rubikpi-next-20260605-v3-0-f49146d85af3@thundersoft.com
+---
+ .../boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 171 +++++++++++++++++++++
+ 1 file changed, 171 insertions(+)
 
-This is to give everyone reasonable time to chime in and nack if needed.
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+index 0f21777c480b..702faf78ef03 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+@@ -19,6 +19,7 @@
+ #include "pm7325.dtsi"
+ #include "pm8350c.dtsi" /* PM7350C */
+ #include "pmk8350.dtsi" /* PMK7325 */
++#include "qcs6490-audioreach.dtsi"
+ 
+ /delete-node/ &adsp_mem;
+ /delete-node/ &cdsp_mem;
+@@ -128,6 +129,33 @@ fan0: pwm-fan {
+ 		pinctrl-names = "default";
+ 	};
+ 
++	vreg_es8316_1v8: regulator-es8316-1v8 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "vreg_es8316_1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 117 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&es8316_power_on>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_l18b_1p8>;
++	};
++
++	vreg_es8316_3v3: regulator-es8316-3v3 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "vreg_es8316_3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++
++		gpio = <&tlmm 117 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
+ 	vreg_eth_1v8: regulator-eth-1v8 {
+ 		compatible = "regulator-fixed";
+ 
+@@ -743,6 +771,32 @@ &gpu_zap_shader {
+ 	firmware-name = "qcom/qcs6490/a660_zap.mbn";
+ };
+ 
++&i2c0 {
++	clock-frequency = <100000>;
++
++	status = "okay";
++
++	es8316: audio-codec@11 {
++		compatible = "everest,es8316";
++		reg = <0x11>;
++		#sound-dai-cells = <0>;
++
++		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++		clock-names = "mclk";
++
++		interrupts-extended = <&tlmm 63 IRQ_TYPE_LEVEL_HIGH>;
++		avdd-supply = <&vreg_es8316_3v3>;
++		cpvdd-supply = <&vreg_es8316_1v8>;
++		dvdd-supply = <&vreg_es8316_1v8>;
++		pvdd-supply = <&vreg_es8316_1v8>;
++
++		pinctrl-0 = <&es8316_jack_detect>;
++		pinctrl-names = "default";
++
++		everest,jack-detect-inverted;
++	};
++};
++
+ /* Pin 3, 5 in 40-pin connector */
+ &i2c1 {
+ 	status = "okay";
+@@ -756,6 +810,7 @@ &i2c9 {
+ 	lt9611_codec: hdmi-bridge@39 {
+ 		compatible = "lontium,lt9611";
+ 		reg = <0x39>;
++		#sound-dai-cells = <1>;
+ 
+ 		interrupts-extended = <&tlmm 20 IRQ_TYPE_EDGE_FALLING>;
+ 		reset-gpios = <&tlmm 21 GPIO_ACTIVE_HIGH>;
+@@ -994,6 +1049,23 @@ &pon_resin {
+ 	status = "okay";
+ };
+ 
++&q6apmbedai {
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	dai@10 {
++		reg = <PRIMARY_MI2S_RX>;
++		clocks = <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++		clock-names = "bclk";
++	};
++
++	dai@11 {
++		reg = <PRIMARY_MI2S_TX>;
++		clocks = <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++		clock-names = "bclk";
++	};
++};
++
+ &qupv3_id_0 {
+ 	firmware-name = "qcom/qcm6490/qupv3fw.elf";
+ 
+@@ -1030,6 +1102,69 @@ &sdhc_2 {
+ 	status = "okay";
+ };
+ 
++&sound {
++	compatible = "thundercomm,qcs6490-rubikpi3-sndcard";
++	model = "QCS6490-Thundercomm-RubikPi3";
++
++	pinctrl-0 = <&mi2s0_data0>, <&mi2s0_data1>, <&mi2s0_mclk>,
++		    <&mi2s0_sclk>, <&mi2s0_ws>,
++		    <&lpass_qua_mi2s_sclk>, <&lpass_qua_mi2s_ws>,
++		    <&lpass_qua_mi2s_data>;
++	pinctrl-names = "default";
++
++	audio-routing = "Headphone Jack", "HPOL",
++			"Headphone Jack", "HPOR",
++			"MIC2", "Mic Jack";
++
++	mi2s-capture-dai-link {
++		link-name = "Primary MI2S Capture";
++
++		codec {
++			sound-dai = <&es8316>;
++		};
++
++		cpu {
++			sound-dai = <&q6apmbedai PRIMARY_MI2S_TX>;
++		};
++
++		platform {
++			sound-dai = <&q6apm>;
++		};
++	};
++
++	mi2s-playback-dai-link {
++		link-name = "Primary MI2S Playback";
++
++		codec {
++			sound-dai = <&es8316>;
++		};
++
++		cpu {
++			sound-dai = <&q6apmbedai PRIMARY_MI2S_RX>;
++		};
++
++		platform {
++			sound-dai = <&q6apm>;
++		};
++	};
++
++	quaternary-mi2s-playback-dai-link {
++		link-name = "HDMI Playback";
++
++		codec {
++			sound-dai = <&lt9611_codec 0>;
++		};
++
++		cpu {
++			sound-dai = <&q6apmbedai QUATERNARY_MI2S_RX>;
++		};
++
++		platform {
++			sound-dai = <&q6apm>;
++		};
++	};
++};
++
+ /* Pin 19, 21, 23, 24 in 40-pin connector */
+ &spi12 {
+ 	status = "okay";
+@@ -1244,6 +1379,29 @@ &sdc2_data {
+ 	drive-strength = <10>;
+ };
+ 
++&lpass_tlmm {
++	lpass_qua_mi2s_sclk: qua-mi2s-sclk-state {
++		pins = "gpio0";
++		function = "qua_mi2s_sclk";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	lpass_qua_mi2s_ws: qua-mi2s-ws-state {
++		pins = "gpio1";
++		function = "qua_mi2s_ws";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	lpass_qua_mi2s_data: qua-mi2s-data-state {
++		pins = "gpio2", "gpio3", "gpio4";
++		function = "qua_mi2s_data";
++		drive-strength = <8>;
++		bias-disable;
++	};
++};
++
+ &tlmm {
+ 	pcie1_reset_n: pcie1-reset-n-state {
+ 		pins = "gpio2";
+@@ -1389,6 +1547,12 @@ m2_vcc_pin: m2-vcc-state {
+ 		input-disable;
+ 	};
+ 
++	es8316_jack_detect: es8316-jack-detect-state {
++		pins = "gpio63";
++		function = "gpio";
++		bias-disable;
++	};
++
+ 	lt9611_vcc_pin: lt9611-vcc-pin-state {
+ 		pins = "gpio83";
+ 		function = "gpio";
+@@ -1418,6 +1582,13 @@ pcie0_wake_n: pcie0-wake-n-state {
+ 		bias-pull-up;
+ 	};
+ 
++	es8316_power_on: es8316-power-on-state {
++		pins = "gpio117";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-down;
++	};
++
+ 	wifi_power_on: wifi-power-on-state {
+ 		pins = "gpio125";
+ 		function = "gpio";
 
-According to that policy, which is of course debatable and not ubiquitous,
-this patch got applied timely.
+---
+base-commit: f5f84daefcd92d7a630066635ecea1433ed5eac7
+change-id: 20260605-rubikpi-next-20260605-fdda114824d7
 
-> If that happens again, could you please reply to the series on the
-> dri-devel list to tell it will be merged through the DT tree ? I don't
-> think there's any issue with merging patches that way, it's just
-> coordination that's lacking.
+Best regards,
+-- 
+Hongyang Zhao <hongyang.zhao@thundersoft.com>
 
-I agree a ping over e-mail or on #dri-devel would be good and less noisy.
-
-But if the patch has multiple eligible branches an "applied, thanks" e-mail
-would let everyone know. I do it very cheaply with 'b4 ty'.
-
-Kind regards,
-Luca
-
---
-Luca Ceresoli, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
