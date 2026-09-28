@@ -1,69 +1,60 @@
-Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazon11011021.outbound.protection.outlook.com [52.101.62.21])
+Received: from PNZPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11021105.outbound.protection.outlook.com [40.107.51.105])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6E7540926C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 10:22:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.62.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 580002931E9;
+	Mon, 28 Sep 2026 10:22:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.51.105
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790590945; cv=fail; b=Lj7gEYR5mGHhSWX0J84ijkpMXYOsOmsTE8MRM3/AX5/NqWD2WANvxMb7QdK9DmSjyjTh1h0SRM7FYyyY7M8kS4LIJxYHFkWbdbqIYcckg4GsOCmGbL3M87I5qL0KgaYa1tYuCnGjWAVBa4yvm6A7MEtj/ToO9la7NBGdJpJaPGY=
+	t=1790590974; cv=fail; b=HkoJG5s6MKXabV5RC0/uyZLVcuNi2pemoi2p5S+EBMC4FZDb+WH8A8wzMf9rPgaQfl/KzOf+61z7MwHtJD2SkVvG7RCGpxKigUpmxHG35SWDRlENRlsdNCz28FxKTSOdjHbbcjswcclIOJqqZ8wvAU1Vgz3WXJKBI5rfc1FLyao=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790590945; c=relaxed/simple;
-	bh=5/nLzW8HWaAysZyK9TjctdWnpm5aB/X+JGk2AXLWiqw=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=ckZTtF9yzWICUZL2CTyoNlqtmHgHyKJWlxm899hZ+zo396AOh86lsHmpYT30XyRXPXtzJhwkAj8QHUHJ8wpPVd29ci0r2pKh+hv1Pdekdb8B18agrEMBCp1mSADDnpqF85ElruRnmZVMvNeWjpwVY7tg73sYRlitRORHl2At3Pw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=16tgGGhH; arc=fail smtp.client-ip=52.101.62.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="16tgGGhH"
+	s=arc-20240116; t=1790590974; c=relaxed/simple;
+	bh=TdwMiHJ9bsNHeRcGjkbG/E31IpTS7LPAUn/XaErKfnQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=QJnKdLepDugfNJalxqJZaN50T1nlArKA0g4bjE0fDot0bqLo0sjSLOdiQRB+MgBescYn8ly367gMsvLaUE03GUI5EsElLjlRAfkOJMj+JgTsD8Jn/kb6LjbVelrVXplbjzGkA31MtpW2a/T1mkbvFDiCm606F6Hemru7pfBZQ/0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=40.107.51.105
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Rfr2+gtyKZPNwKAczzHqSCaNVsDHrctz1aivBxT3AjsYdnynyFa9F/DnQUuJCPb6udZ+UjNMXvTj8YOUcFiCTEVomzPSvbu60XAZnxuLaXEbigsuilYXi8E38eRD10ucLQA+XXLu2QRAuIWHnEy9IIp2C3mzl9eQNBRNGsowbhNAaQ3EU+id3s7f8YDO/326prYW6J/IkV/NUeKfE2TrLFDVjYcdyQBUznBAOw0JZEkS+x4QtY4FlGcRZo7lTlC7Y8otWlW6dcS4jlqS/7/8Nzgn6N9hh5aIlVNO3/5iEf24Mxz3vlfvCv+RpuGnEjC/OjCxcqz8P4LdkkfQGTr01w==
+ b=MT8OV70QfiWMcUNZPCebQ+nHVoDS0Mb6CV/Wa/XDzYu+8D7IrDHXhzt5BCg7NlpEbDizh+s8/qrXBitovrKy65obSRn/CcMrlaUe4lg2LWSzNUbj++VSk2GcKwoMQpKLbjPJLMZwlhfaQ4Ok7iT+61JX2rCaAMsZAoJ9vFziroeRCQ4OcYXC/FE1aylTtYwq+D71ITYiFRcp2IxMkdaJeHuqGdyAoW4zRDRFvUCFuBk2I+GdhwU3ic2nRIY6jMiLg92ioEmenXCa/x61BsW9wAWM58+X7uYpbL4VuBF7zJwtVVTVPKus8hQJLN/468n3HfSPX8GyW8DsGpXJg/BSbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fJdIjuvaOGcx2DMmEzDSSyQMcQWd3XYAmnGuzp/bTYE=;
- b=O9hGQaN0GRflk+XR+v4UgJqFGh5zpNpSgi2B1guYKjAPjHSIiIH9V0BgfoEyq48mKNWa0DuxpywyOHozumZD626M3H6evMsJMvh0bqLAPy19loY+ngEwsOD6Pb4q+Z81kQzAkMMmioNXCfviVsH/9f7OTNK3swclhPgqd7hJ/asUiPmHENn52QMT+9O5YD+xYrr6yEuW7+G5oI63kSaD+zWBXePX2VQtZmKZFlDBgJ0g1V5xotbuQJJ9Obc+8vVcgDj1LdeJtlmiaWHR6nUN37cB6XZbIHf577G6qYwU3Ztg2F5g2I35iZ+8POginG8ZPZIHQDtVfZf/4vz6xUFfSw==
+ bh=ISF/t0rRQcEmUlZCv2zU4JhdoNHVRCfLtJDZ+ccb6BE=;
+ b=SMdsX3BT8T0+3sCRhLwJy9k3nlhpbCF6J+jlW3tsokkvkQIln1IV6QlUz6VwknLBZWCf2N9joXANwkM/JNraK0itdbVASa7Cqmo1Fmo+jr14MCpdbJusPfoamYIkTL3/WKH5HUhnfVWnIhGXcVgAj7VZWZplxxTxiNmb5rJjNTFjDHYRkUxR+fImuLJ4XAVT9/QBJMMlaFO4O4Lwh8GCcqy2h3kiS/xu2ZmoRmnDJhl+C8rj/0aW//7VImaqESsBRiGNKvWOBaLyWZYkK/rTOH0Mx0vIbiyDPIk5juGvouh0FikuEzN6jIAMfz71OmFLj348ezOr2iogn9LzmyWzvw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fJdIjuvaOGcx2DMmEzDSSyQMcQWd3XYAmnGuzp/bTYE=;
- b=16tgGGhHufmyG53Q/MCv7vzqmK5PNtDHrlumguChyj6kMQerrUUjjmJOCEiRfkFhqd05qPBppAqdEJnEazrjAnL4oAQWB/t3Nk1Scr7q8yRJ0DHTegaU+qZR4tEOjHYkykyqdhmK35v2/8zMnKpBj7C/I83igPbgtttFN0+3ebM=
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by SA1PR12MB6749.namprd12.prod.outlook.com (2603:10b6:806:255::22) with
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by MAUP287MB6171.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:226::8) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Mon, 28 Sep
- 2026 10:21:32 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%3]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 10:21:31 +0000
-Message-ID: <b16574e7-f8b1-4a2a-b063-7c565c0a9708@amd.com>
-Date: Mon, 28 Sep 2026 12:21:26 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] Synx: A global synchronization framework
-To: Pravin Kumar Ravi <pravin.ravi@oss.qualcomm.com>
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- linux-accel@vger.kernel.org, sumit.semwal@linaro.org, andersson@kernel.org,
- mathieu.poirier@linaro.org, konrad.dybcio@oss.qualcomm.com,
- faith@gfxstrand.net, simona@ffwll.ch, simona.vetter@ffwll.ch,
- airlied@gmail.com, matthew.brost@intel.com, srinivasan.shanmugam@amd.com,
- rob.clark@oss.qualcomm.com
-References: <20260806051915.2234481-1-pravinku@quicinc.com>
- <CAPd7Qn3QYyrzBFFjB4+M9Je7uykYgxHiM+vh-mNVJ16QaoPkJA@mail.gmail.com>
- <2140e7f2-d329-4726-b593-72e935fca4f4@amd.com>
- <CAPd7Qn3ecF7+TBp4xDUoukVaDCjLjcDjVg+BndhqPN89i=4dUQ@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <CAPd7Qn3ecF7+TBp4xDUoukVaDCjLjcDjVg+BndhqPN89i=4dUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0049.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:cc::13) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Mon, 28 Sep
+ 2026 10:22:47 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
+ 10:22:47 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: linux-media@vger.kernel.org
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	ravi@ebytelogic.com,
+	Hitesh Patel <hitesh@ebytelogic.com>
+Subject: [PATCH v4 0/5] media: qcom: camss: fixes for several cameras behind a CSI-2 bridge
+Date: Mon, 28 Sep 2026 15:52:32 +0530
+Message-ID: <20260928102237.533341-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN4P287CA0060.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:270::6) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,177 +62,161 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SA1PR12MB6749:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74e2f11d-6059-4d2f-11bc-08df1d4a43f3
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MAUP287MB6171:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8f32888-8ca3-45d9-554f-08df1d4a7115
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|7416014|376014|1800799024|6133799003|10067099003|11063799006|56012099006|4143699003|22082099003|18002099003;
+	BCL:0;ARA:13230040|366016|52116014|376014|10070799003|23010399003|1800799024|3023799007|6133799003|10067099003|5023799004|56012099006|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	yeUovYF8TSQK6uv0EWlV4StROwrCivq8vm0qwEMnebL4vKeGV6rxdFGRh5K9x5VFAbIgMpxu1or8FJ6CAkQaK3cbB/Ik/87AsWHdJ/MnOGHwABzGhQyq5ozg2YZC/cO38R0ih9Z+AewUyNZ2x3NKuLj9g/OYI8FenNaMpGzt3TYKCIwTMME1xkGLaFKRPX269nUrQW1WHDiHPcT5lk0vVYvYB41LiOCf0c9QKNy6+8n7j4hzCyyhJsqmKS+GaxAvT8hdevq0R1wRowmZcnXR1XKjt8L6D0nbhVB/3JVSiljJKuPKWY0Qslbymj8RRIewkpy85HMonjetArB6G++rhgH7lthW5odK2yQt0b/w8bFsNy31kJkdQJofcEiizOllOs7Fihs1TokLwUCbWx7fTji6/+8NiZL+fttEaoEJHnZ2dSLLauYPXKsbmuogmBJJmjQM6yc67RcgWGLiP5grR2fEGA1s4FwRthXZwN2makz0HdFBuX0Hotj9rceJUJHhrzgn+2DRMIooj5DahSylvzbWctVUq3aE4xcYHPSbwWwHLtuSLrYKkuivokA06Sbx3/HnxomjebvVAw8K1oCRsgTKRKX70JbujlYaDzE3LI3p3k3BaGEhb0k8dXoOPbm2YHmHlmTaK5MJZQJsVWIAdSnqiQLjuiuGtDXZc23hukU=
+	oIUIkGPvzY5EROhYH3risJfNHIpIbyUBD7Roo0zLW+IteH3JngZPjdGwhoZLSHHqD8Sm+F6yaBRbBfyGWHI6N1AIw6puLerq6EUUBTV9UYzqapAYQoZwMFFKI/gle6Q/hjubNZY5vyY5j13slzNCuIczAaJEHt0ll3Dd8J6iT/cKOC3bhE85U+qO3urTSLkVw88zfGP9lzSSN2J1IYJQ9KW+5oUVk7EG2uuNbdHZELPVepZiT3WNcsMPfQD7AAKyrR4rDM2B7jx0e7bF19Y3EQpUVivYg0yQp2v9v01ZYAay1w8DP6/mluOzE/ZfgvCnupAYXqtufqVV0uNt0YPQb0LgdN/I38I1h8VwxHtIYTRRr9UcJIUVqAeDGOn74t+u8czH9SKHSGg5j4HXyIqx48PQLwcEf9LDZcDTMN07FA7fm0/ubLmtBJfyf9sQHdAdqEGysFBvCzHlNi+0CTvRqag/v2qwl5yypuGnr8znBaDzSmPXUj3hXaDARGCusew/NCAc4fyhjwuxsfhNULdVIQ6azK+LH4LmXRmhm5eC3OqoDg+gXYk52orxW0/1GaHUEKdBQc1DZ+dmD+ftSvbjTkgTXk2t6y7Nq4Rfqw6ax1nmmUS8dzApkwlBbWyQMhzr
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(7416014)(376014)(1800799024)(6133799003)(10067099003)(11063799006)(56012099006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(10070799003)(23010399003)(1800799024)(3023799007)(6133799003)(10067099003)(5023799004)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?OWI0ejBvTXJwUWpPZERPWG1LK2NOOWhpODcvMVV1Mkk2N0xVYXlSS0pZTjd0?=
- =?utf-8?B?czVLWUF3ZmhTV20vUjJFN083QlRNQ3ZKamV4cHU0dEh0a1lvcDAzRWRodEpw?=
- =?utf-8?B?bDlGYlpUaTdMWU8rNXdDckdEdmVIOG9VclhZRE92YWhRR25SVEtMajV1QkRT?=
- =?utf-8?B?QUt3ZzNicmczNklJZkpYck9DeTNsSEEvclV4ZU5xOTQ5dGxEOHFxQWNaa0JR?=
- =?utf-8?B?K1VsSzdIRWRBaHRyUjlnMVNvMmNPM3doL2lBZ1dHSVNlbnRVZVV6c2dwNjJl?=
- =?utf-8?B?MmN3YUtQdUpYd1VUTDcwTUhTU3VjK3QxSGxTS2FMSXRtMUhyNy9BM1pLN05w?=
- =?utf-8?B?NFNWY2N2S25RUWJsZGtvNjFOczJrU09BMm9rWDl3QXpWbDhnTmphdkRjUWNE?=
- =?utf-8?B?Y0d3N21NbURyVUNSRS85N0xaNm1abDUzRE1ZZmxmZGFHNFh4ckdoSmtGUlJj?=
- =?utf-8?B?bW1CNFBWeWQvK1Azanh4NzdqSThqb3Frc0VwNjJmK0p1dmVBMmsrZFBxYStH?=
- =?utf-8?B?SWtDTHlJcU1KMnRMc21uekNmVFBva0tMdkMyT2RvU1Q5dTErdWg1UmR0R0Zm?=
- =?utf-8?B?UUtVb0tWcnd4MUF4eVJ2WXZBaGVpQ1haVnFacndzcWVMaXV3SmgzMjJPdm1l?=
- =?utf-8?B?cWI5eEVvUEdEYk1SajROZmQxOE5pWTZzOFRXaGFOVklJdzliM0Y5d0VOODJr?=
- =?utf-8?B?SmJ0c2wrek5xRXZ5VHhoNmpWMnFWQnhyekdtUVBIWGk4d3gwenJsd3dTQ3Ru?=
- =?utf-8?B?N041ZWNvK3dnbUFGRnFVVjkvY0hHOUx4M2NnMHViN1hjaEI1RkhqL1F4eUhz?=
- =?utf-8?B?ayt0WGlIQzFtV0lsSGloZ1Q2bmIvZGY3cytBME1sMnRhRE1JK0UxUGZzQ2FO?=
- =?utf-8?B?c3Y5QmYrWWhFTUNLZFNYcWp4R2ozY3Vtd0NNVWJ2VHFibUdXbWNLUk5MRjVR?=
- =?utf-8?B?YXpJd1pxYXp5L2EydGs4NmczcFVsWG1JUnd3NnZZR1FTTG5GendUQXQrQVEr?=
- =?utf-8?B?WWUyczNMM0tpSyt4ZHg0eVlYdWREbExydm9KQks5S1VXQWlzcnlLWDMxbFI4?=
- =?utf-8?B?RnVwaWVFam95Q2c5S0REM2trWlBvY21PNzBTNTRkV0w1Ym40emptelZZRVhw?=
- =?utf-8?B?VTc3cTVRcnB1Y1ZWVndSSDFQcTdnblFpd0FOZmNxUHFpV3dRdHphRDRTcWVW?=
- =?utf-8?B?QkxseHZoc2JscGlWRU1zREZzL0dURzVxZGFQbW8xVEVpNWtQZ0NUdDNDSEt2?=
- =?utf-8?B?RmtrV05HMzl4RGZkZTF5OEpMOWJCb0pGaTFROGVwcjVybjArcnpIZFYvYy82?=
- =?utf-8?B?S3VLL2pMNk96eWFDWW5TbHU2eUNPaWdUNkR2Ym9sTHJGS0lnUW84YkkwM2dy?=
- =?utf-8?B?RDY1Q0V3Y0ZHSmhQRzkwQytRZXdsSWE4VEhMNEt4ZFV2aU5MM3pHd0hSd0h5?=
- =?utf-8?B?Uk42L09FaWtyNUhncXFPVzZiK2tWbkUyZWVLOVRHRmZpeStBd1pGOWs0UlFC?=
- =?utf-8?B?T0FOQi9pV3dlZ2plTTd1K1RDbVJKVTJuMU4zS1JZdzVZUkQ2NnR3QnY4VVRx?=
- =?utf-8?B?bCs5SUQxTDdid3R5aW1UZFhwbCtTOERwa0RQazlieUZuN09KWFc4djZIUFFN?=
- =?utf-8?B?S1pPZW83V1JQT0RrVGd5N09ScE9FbHIreWNsNVJkNEpGb0xzaVBWM1RlSXBk?=
- =?utf-8?B?bGk1bTFuc3duckd4M1ZZUWRYeGtpeG5qbnA2WE8vVklBaEE0UFNGa1d4cjFx?=
- =?utf-8?B?MitSVlVjZmxLdlNKWGc0TnkvMW1aRWw0UEFJVlQ2a1UyZDNuKy9zNExEdEtV?=
- =?utf-8?B?ZGYzdjVlRHBOMXY4NWdMSUNIWmtmR0VNNXB6bUF6MGE1TzlmYkVES1hValNU?=
- =?utf-8?B?TWxvR2xDSDQxSlg2a1VBSmliWTVEZE5mSjZRbDhMd0l3UFBYa0MrRXJ3cWhU?=
- =?utf-8?B?UTkvQkp5MGNLT0RrbTNJQit0SzhuSVAxTU91WnFrellXQnVFdEw4QlpZcGNJ?=
- =?utf-8?B?VXFaK3NyRFN0d2VHMFczblN5TkoyVy8wMURMRE5WcjQrRU5CTWdxNkFacndT?=
- =?utf-8?B?VzRBRGM4OVFNNTZqL25LekFUL05VWDJsbUxmelEvSW9PVS94TVNoMjdTUUE0?=
- =?utf-8?B?VkZjZU9yOGlCYWtDV0ZjNTdqVHNEaTBNNEptcUdRVURJUEVFaENJMkdSM1p6?=
- =?utf-8?B?R2lJN0xKY3lSUTZENlpoQlhPdUo1UVFUc2VQSWVGMTJBNSsxYTM2U0w5Qy9h?=
- =?utf-8?B?VGZLTVNsb0ZFRDZPOGtXTE1DT1ZqWDJoUjB1VFZaOUhHYkV2SVp1d0VUMkk4?=
- =?utf-8?Q?n/8tnRpazXoK/fgrkk?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74e2f11d-6059-4d2f-11bc-08df1d4a43f3
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+	=?us-ascii?Q?mB3w/KeZnYggaPoMqBpgxD8JcPA9mKpRsWAMY8c1dKaay8/khVQnUm2dM2YK?=
+ =?us-ascii?Q?H5Y/aI3qQbgxmsvrmRR888kqE2ySGlAsjhCpTZJWULp3ZJYQ+NX1M+jQc3tg?=
+ =?us-ascii?Q?bjrYdZCzRLWUnzB1C8qoNGE184+93PumevzdDBfNBvNMSofsoZ46oJ6zbedo?=
+ =?us-ascii?Q?WYxVLrBzjr3O5EA0gQ0/ETz8cFOECjvQoNGXw6+HvIum9VJ/+5HVmyJm3p0A?=
+ =?us-ascii?Q?sI78dwOUTlrE9Cvr6mb48AvVHp4gLdY716uo/bPq5mhg/v113gylsVgWrIGz?=
+ =?us-ascii?Q?BGRVbJ8NCQcBqS7U7LLxBMi00zHi/pvQcCu4kT6GJK+HH106yFlBlQhsf8sn?=
+ =?us-ascii?Q?DBbpDBoQmi2TpU1BFCSACQG7peP4OUwtV6Kvdmodpla1rs8eWLhnXvDSp0JH?=
+ =?us-ascii?Q?xRhyu3Hz5F1ku9mtfWacXgAoQ00EWt16xDIPZPRv+ieEXqL9vp/tPqtA/1eT?=
+ =?us-ascii?Q?i+wCen/xmffUdawS2zyyoM9C4+9H8raVduEOAoyzBnddQcBj9jvdnZ3UlogM?=
+ =?us-ascii?Q?Mu6UbX+5mYtYvlmuureaxNwCGBJneEe6rS1A9Tvb60z9lekl+wQV483k+DdW?=
+ =?us-ascii?Q?pp+7SVflzobcNL94Yg0gE+NCkbrMG/NJwDF2wTNLeFutvvU7VOde9buJFRdT?=
+ =?us-ascii?Q?/mr1/KtXvSUHLQnnS/GrrEB9EEp8CztyuoDiVBwgcpdQoLLcBDuYI7I7VRaw?=
+ =?us-ascii?Q?vqvjCBpmcuv+K9SSIkhnwkBBpv8Ous8jthMWTePu6NSINkVFt4FO/nJP4tFL?=
+ =?us-ascii?Q?UucO29BnaoC1afXpPRQrPeUuelYXTs9o15nVLUoV0RE4aiImgf/oZJexlIr/?=
+ =?us-ascii?Q?tO+CNX5qDoMC6JVe6SWS9AOblpkwPKQ12q0/zuovi6fFQmC1OLEuI/ZXU0K6?=
+ =?us-ascii?Q?rLq+M2AocPLkomrvf6nqqbWW1ud+E6f0HNP3rlHn8i5WcrsxyQEdFNEx0uOf?=
+ =?us-ascii?Q?yQZsT5tjr/6bf9yxkBtgZ3Ypqug2ph1JWWVWwCD/QovqsPEmzVsyzimGlcLN?=
+ =?us-ascii?Q?XfNBSLDTVP/yrvSMrwN6GGCKt9HC6Z3yvwPPW1L/iZAquzK2IuDWl3Rd3DQV?=
+ =?us-ascii?Q?WtzMvzh1zyadAltiCADnRgNUHzvDVboIszKONx10fnT45vxOM3574XAV0+Vn?=
+ =?us-ascii?Q?o2U7XuDcTl+TiofB/Op7BSITpZtut9JJzsgGeHTntdZSjrN17N/LFoT6PuKs?=
+ =?us-ascii?Q?WnCshp/xUUJz8VkeOkFscfW9TAOf5f5sLivVJQZk/UutSwDyPBhl7eBFSr/l?=
+ =?us-ascii?Q?v0P1MthqbDUWdjuW3R/O8ArxECmHTozXt/Wz7uzwIDjdEvgRSrfqOPEsR+zd?=
+ =?us-ascii?Q?NEXmPUcYUgO3jy+kIv/XKXy8nhdIRD4lBx331ODA8fkD3qzZYk+LY7K6+gbW?=
+ =?us-ascii?Q?M+4qyF39BB1gtrFQB7+dsM+h5DdZAvu8hbCyn6A4PqDMYko7JmDh1tHr7Ti+?=
+ =?us-ascii?Q?IFmj/RJsPjji76YnGjRoSPJsVoM/v3Eo7zYEGHyGX1xAEXaUFI+jcbGQCmeU?=
+ =?us-ascii?Q?QJCiQ9UI0ijTkJ3VaVpKpkl3xbXPIDLmg5Srd8pUJ/3AHiQPgtztYcS104ff?=
+ =?us-ascii?Q?VLRp0gKH5VOgM4+gOLl0RmGAm0txYvprCRnrpW0rwD1s26MZcoRpOZuq401I?=
+ =?us-ascii?Q?vlBeFoh6oi3FeoOm53rV686NtOWjqkl2Mf4kYjJpFl3i2Ydq5gBkxCqdaYZ+?=
+ =?us-ascii?Q?w63uZG8QLJScl/VV6K38SPrlN/STpcucyKP68Wwh2Wkxtr5MG9tXRqJ5Gy9X?=
+ =?us-ascii?Q?t9AWQ1sG6Er/a5aPV01AC6VRjOG1lSyMdkezwQEkIgSM3xs+Vu8QKpHOMn7C?=
+X-MS-Exchange-AntiSpam-MessageData-1: 1JT1n3lj1lsVDw==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8f32888-8ca3-45d9-554f-08df1d4a7115
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 10:21:31.6000
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 10:22:47.4052
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HlAGKERch6ESUdVVsh9FEuPfnXr6kgbaG4nqrKxqpZdSh3gHHH4Y2fDMNmneiUcu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6749
+X-MS-Exchange-CrossTenant-UserPrincipalName: iXzC3xBVFkvb95uIiWXwKg5FXQzyxwLN341CTFH/Rml3DFu5ZXMp76QyNUtlraeN8QQTeGs7WFnO2z0mZCR9yg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAUP287MB6171
 
-On 9/27/26 19:13, Pravin Kumar Ravi wrote:
-...
-> (Bringing Rob's September 27 reply from the parallel thread
-> CACSVV00oBPN=rw1yVBjNm2TMHuQ+3iv84jKP4djQcnKRxcvWCQ@mail.gmail.com/)
-> Rob Clark <rob.clark@oss.qualcomm.com> wrote:
->> So I'm just starting to think a bit about this, since it will be
->> potentially relevant when we implement fwsched for adreno..
->>
->> Do we really need anything more than some sort of dma_fence signaling
->> extension?  Ie. signaling on the CPU remains exactly the same as
->> today, anything waiting on the CPU would see no change.  But if both
->> exporter and importer support the same extension, that can be used to
->> extract extra information to pass to fw.
+This series contains the CAMSS changes needed to run two GMSL cameras
+on the RB3 Gen2 (QCS6490 / SC7280) vision mezzanine, where a MAX9296A
+deserializer sits between the sensors and the SoC. The deserializer and
+serializer drivers (the out-of-tree maxim-serdes work for MAX9296A and
+MAX96717) and the AR0234/IMX900 sensor drivers are out of tree and not
+part of this submission; only the SoC side is here.
 
-Yes, I completely agree to you Rob.
+Patches 1-3 are fixes for two RDI lines streaming on the same VFE, hit
+by any configuration in which the CSID demultiplexes several virtual
+channels, not only by a bridge: the VFE 17x interrupt handler drops
+write master buffer done events, VFE 17x hands the second line the
+wrong write master, and stopping one line resets the VFE underneath
+the other.
 
-The existing uAPI is perfectly fine to handle this use case as far as I can see.
+Patch 4 addresses the assumption that the sensor is the CSI-2
+transmitter: the rate the receiver has to be programmed for belongs to
+whatever drives the bus, and v4l2_get_link_freq() already knows how to
+ask it. Patch 5 lets one transmitter with several CSI-2 outputs link
+each output to its own CSIPHY.
 
-I mean it was designed in the first place to handle this, so that is not so surprising.
+The v1 patches 6-8 (shared CSIPHY/CSID refcount and the streams API
+handling in camss-video) remain dropped. Gjorgji's "add V4L2 subdev
+streams API support" series [1] covers that ground properly: tested on
+RB3 Gen2 with streams enabled for SC7280, both cameras stream and start
+and stop independently without them.
 
->>
->> The fw might observe the fence getting signaled with lower latency,
->> but that's fine, there isn't really any guarantee (other than timeline
->> ordering) about the order that multiple waiters observe that the fence
->> is signaled.  We've just pushed one of the waiters down to firmware,
->> that is all.  Ie. something like
->>
->>    rcu_read_lock();
->>    if (fence->ops->signaling_ext &&
->> do_I_understand_this(fence->ops->signaling_ext)) {
->>       fence->ops->get_magic_signaling_foo(fence, &magic);
->>       ... pass magic to fw ...
->>    } else {
->>       ... same as before ...
->>    }
->>    rcu_read_unlock();
->>
->> If either the importer or exporter don't understand the same signaling
->> extension, everything works as before.  For ex, external eGPU/dGPU
->> sharing with say the on-chip ISP.  But if both do support it, the
->> signaling extension provides a way to extract whatever magic thing is
->> needed to do the wait in fw.
->>
->> BR,
->> -R
->>
-> 
-> Hi Rob,
-> For operations that already satisfy the dma_fence completion contract,
-> this looks worth exploring.
-> 
-> Christian, does this fit the case you described about known drivers,
-> provided the participating drivers preserve the resource-lifetime
-> and recovery guarantees?
+A CCI fix found during the same bring-up, enabling SCL clock stretching,
+has been sent separately to linux-i2c [2]. It is independent of this
+series.
 
-Unfortunately not. The problem is that when you have HW specific signaling paths between your devices you also need HW specific recovery methods.
+Tested on RB3 Gen2 with AR0234 and IMX900 cameras on MAX96717
+serializers, on the vendor 6.18 tree and on the qualcomm-linux qcom-next
+branch (v7.2 based): both cameras streaming concurrently on the two
+CSI-2 ports, and each camera started and stopped repeatedly while the
+other keeps streaming, without interference. The CSID test pattern
+generator was exercised after patch 4 as well.
 
-So for example let's say we have device A and device B and A can notify B about finished work using shared memory and an interrupt line.
+v4 was re-tested on the RB3 Gen2 with the reworked 3/5 and 4/5 in place,
+including the case patches 1-3 address: with both cameras aggregated as
+VC0 and VC1 on one CSIPHY, so that CSID0 feeds RDI0 and RDI1 of the same
+VFE, the two of them stream concurrently and one can be restarted five
+times out of five while the other keeps streaming without losing a
+frame. Dual-port streaming, the per-camera captures and the resulting
+IFE and CSID clock rates are unchanged from before the series.
 
-Now let's also say we have a submission to device A which locks up, e.g. an endless loop in a shader or corrupted video bitstream gets the FW stuck or...., we somehow need to somehow unstuck submissions to device B.
+Re-checked against next-20260925: the series applies cleanly, every
+patch builds on its own with W=1 for arm64 (defconfig plus
+CONFIG_VIDEO_QCOM_CAMSS=m) and checkpatch --strict is clean.
 
-When we have a CPU round trip for the signaling that isn't much of a problem since we can pinpoint what submission was problematic and have per submission timeouts etc...
+Changes in v4:
+- 3/5: move the reset into vfe_disable() and do it under stream_lock as
+  part of the decrement that reaches zero, instead of sampling
+  stream_count in vfe_disable_output(), which raced with a concurrent
+  disable and could skip the reset entirely (Bryan, Loic)
+- 4/5: replace camss_find_sensor_pad() with camss_find_transmitter_pad()
+  rather than keeping both; camss_get_pixel_clock() and the g_skip_frames
+  query use it too, and the commit log spells out what that changes
+  (Loic)
+- 1/5, 2/5: Reviewed-by added (Bryan, Loic); 5/5 unchanged
+- Rebased on next-20260925
 
-But when you let the drivers talk directly with each other both submissions to A and B become inter dependent and you might need stuff like inter device error handling and resets.
+Changes in v3:
+- Resend as a standalone series rather than a reply to the v1 thread
+  (Bryan); no code changes
 
-That is a whole different beasts you are tackling here.
+Changes in v2:
+- Fixes first, with Fixes: tags and "Fix" titles, commit logs rewritten
+  (Bryan)
+- 1/5: no PIX special case, plain removal of the IRQ_STATUS_0 gate
+  (Bryan)
+- 2/5: use vfe_get_output_v2() on 17x like the other gen2 VFEs instead
+  of a 17x-only mapping; no PIX special case (Bryan)
+- 3/5: commit log rewritten without part names and with the affected
+  line spelled out (Bryan)
+- 4/5: camss taken from the entity's media device instead of an extra
+  argument, so the callers are unchanged; multi-line clause split
+  (Bryan)
+- 5/5: Reviewed-by added (Bryan)
+- v1 6-8 dropped in favour of [1] (Loic, Bryan)
 
-> Rob, could we have the shared signaling mechanism in an independent
-> and generic synx_global.c layer? dma-fence can tap into this
-> layer for the signaling extension you mentioned.
+[1] https://lore.kernel.org/all/20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com/
+[2] https://lore.kernel.org/linux-i2c/20260921131954.1690578-1-hitesh@ebytelogic.com/
 
-Well to be honest forget about your synx stuff. At least upstream I don't see that flying at all and I strongly suggest to the issues we are pointing out here into account for downstream as well.
+Hitesh Patel (5):
+  media: qcom: camss: vfe-17x: Fix write master buffer done being
+    dropped
+  media: qcom: camss: vfe-17x: Fix write master selection for RDI lines
+  media: qcom: camss: vfe: Fix VFE reset while another line is streaming
+  media: qcom: camss: Take the link frequency from the CSI-2 transmitter
+  media: qcom: camss: Create the source to CSIPHY link per endpoint
 
-You basically have repeated a lot of the mistakes we have already seen with dma_fences and re-implementing it in a different kind of framework doesn't make such problems go away.
+ .../media/platform/qcom/camss/camss-vfe-17x.c |  46 +------
+ .../platform/qcom/camss/camss-vfe-gen1.c      |   8 +-
+ drivers/media/platform/qcom/camss/camss-vfe.c |  15 ++-
+ drivers/media/platform/qcom/camss/camss.c     | 115 ++++++++++--------
+ drivers/media/platform/qcom/camss/camss.h     |   2 +-
+ 5 files changed, 84 insertions(+), 102 deletions(-)
 
-The issue here is that your solution seems to work in testing for you but if you have fundamental design issues similar to what I have pointed out so far then that will sooner or later blow up in production use cases.
 
-> The reason for keeping this layer independent is that we have clients
-> who use reusable synx objects (signal same handle multiple times)
-> which don't interop with dma-fence. And we continue to get more feature
-> requirements from performance-critical clients around reusable objects
-> with timelines. Assuming this is where global synchronization is headed,
-> these clients should be able to tap into reusability via a route other than
-> dma-fence.
-
-Yeah that again is a complete no-go for upstreaming any of this.
-
-That dma_fences are one time use and have clear state transitions was one of the things which has proven to be mandatory for correct operation.
-
-What is re-used in the uAPI are containers for dma_fences, e.g. sync_file and drm_syncobj.
-
-> For existing dma-fence operations, your extension could expose the
-> information firmware needs for its wait, preserving CPU signaling
-> and the fallback you described. Other clients could use the synx
-> global layer under a separately defined resource-management contract.
-> Would such layering address your use case while also supporting
-> clients that need reusable remote synchronization?
-
-Well what would be useful is a functionality so that multiple device drivers can consume dma_fences by utilizing direct interconnects.
-
-E.g. something device tree or dma_fence extension based so that device A and device B can say "Hey I'm consuming your signals directly, please use this interrupt line, memory address for polling or whatever functionality we share and BTW this is the interface for error handling".
-
-But non of this needs any new uAPI at all. That must all be inside the kernel so that userspace can't mess with it.
-
-Regards,
-Christian.
-
-> 
-> Thanks,
-> Pravin
+base-commit: f5f84daefcd92d7a630066635ecea1433ed5eac7
+-- 
+2.43.0
 
