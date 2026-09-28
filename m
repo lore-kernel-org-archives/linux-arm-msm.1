@@ -1,81 +1,95 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E841481A82
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 08:38:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05F7148488F;
+	Mon, 28 Sep 2026 08:48:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790584706; cv=none; b=fbmJ4e8sVktpw68fR2rKbSvUzrC3+vEidNIKd+Yg5mimroI0+wJgM1sr02iORhmftHeElV/0q7LCq4WC77d0urRL2+qvtfKNqPePkJZuQh934arSPxz/yJUERzdnbdg94XvaE3Ti+GsNuoWt94jbONcX4i6QIl0DtqGs3K+EWtU=
+	t=1790585326; cv=none; b=O7Ot6m4DZo7+1jFy95BxoApUmTgBO6sHY9YHCoUV/Gxa7gJgjC+xSahEq3yTNqkY2UerVhurePN9iifl/yyEenrFCn6iYBrSkjNw+rbJW54hRWA8p9i7flrmZ3Evb2bYLDIZPDX3NmEJMHhOcjz7Ou4qOw2HhvaINHT3pYBzstI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790584706; c=relaxed/simple;
-	bh=KzmtaBx/W7Qo6eJlSIglcMY97ok4d4GtoRfvLF0hscI=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=EKij4lQdulm2wrfKTpUz32dWccBecfM66bcfyPOpmk4gBcmgw9koyHD8uNZd7Vni8PF/bVr0DMqsM6eV3Uwpnu80b00fuZAf0oNB1BmQSmTuALu7YjWhx6NvWh8lF6QVPrL6njVDCJ7WOaWwHs31njwKwKOzzMCe0GYpswlYSno=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fk3TfVQ8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790585326; c=relaxed/simple;
+	bh=4TrL1LK87jREhsshgj9afbV5g3GJEMSvHjNMsw4bwYc=;
+	h=Mime-Version:Content-Type:Date:Message-Id:To:From:Subject:Cc:
+	 References:In-Reply-To; b=hjZcICg8tA7WAxvB5VbnFgf7qEFjgdpJ8ssnxRar/ekihoi2J+QNrrJy33mgtianl3OHB+BuL5FQ/WtQ+BQKeZtVIcPQk//Z5ofxvBAxHQUGBWnFT4MaXVbwpWILpLBZg47V/v5Y0JrzOqY8NhoNaYaxOmI3Y1W7vNLAPeyD8OA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZDa58Au2; arc=none smtp.client-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fk3TfVQ8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3F4B1F00899
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 08:38:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790584705;
-	bh=KzmtaBx/W7Qo6eJlSIglcMY97ok4d4GtoRfvLF0hscI=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=fk3TfVQ8MwNrWU6IzYBQXGVhC+7X8nYQZRYw+k3Yoy5mHGBU5bsNSttCLOn4tIcf6
-	 alM50OyxM2mXVJpsTVzS0j8N4MhabhzahjBjUpa77Lr2VzbbC0MPDef8EPEsa1zqQf
-	 27EY3yixr6k0zTBpNh6+HLvn3ATCMb47fylmkf1oStT9Z+N4SO0XLMAyzdptmYGOSQ
-	 WMyb2fXIyw/tYnaqM2N+emPTnuAuj+NAYgE6L0y7VBunrm8/IIqV433U+3aQVTcILL
-	 d8mKJCXoh3WoDHK0RRMTxhaSae9ZsSgrIUs9YbFGjYYcWka8e5T5LCUxBQU8JoFq2s
-	 jdGTbhUN0h73g==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b8f27a48cfso1046285e87.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 01:38:24 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzjQWFdGxLGglYVqrb+ISH7G51LoiULpirYK51C1idODIw+/WahsBszBAyZImQeN++5JQI1OUczJOYX0TMb@vger.kernel.org
-X-Gm-Message-State: AFq9FYId4qhhqnixB9KWkwHSwJmIRy49LJnPy8V5q+UmaGnouh00wiFD
-	O0NvD9GlSELrvzKWXGkNEKxQMRbUAU8rqg/Ht9I1DT/gsKICKmxXsHgEJbql3MbFQjqVicCsaY2
-	24c9sWDQx21f+ZQxAAqSqaV1ZbA66CsXXtcZsya2gdw==
-X-Received: by 2002:a05:6512:2c86:b0:5b8:9978:a2bc with SMTP id
- 2adb3069b0e04-5b8e6d91f8cmr2796693e87.23.1790584703696; Mon, 28 Sep 2026
- 01:38:23 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 28 Sep 2026 03:38:21 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 28 Sep 2026 03:38:21 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260924-ipq5018-pwm-functions-v1-1-8990a4e85b2f@outlook.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZDa58Au2"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 003371A0D72;
+	Mon, 28 Sep 2026 08:48:40 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id BA3E4601BD;
+	Mon, 28 Sep 2026 08:48:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B9ED0102F1EA6;
+	Mon, 28 Sep 2026 10:48:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790585317; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=4TrL1LK87jREhsshgj9afbV5g3GJEMSvHjNMsw4bwYc=;
+	b=ZDa58Au2RHTizRo43gJ1JRUszIzTyZQkH6fdz231iZk+mFK47kmlmDY+0VETY5yPpnsekI
+	H2W47fDdg16ql/VlkfIClEu+3ESEBPzsHVxHQwSdkpqq7xS/LmLFAZ+c1Cwv0IKbwSw7wN
+	UNguMPFymrWlqGCyroCsOi8X9w+cBGPYBNKhNvYG1RBg11GdeNJxoWlU5ueicQVxlBuyqM
+	rssKNaxcGDmyEx8/mRYdRbY6UDDqUJjccvTKQdvCwKLp+ozx2FfNr7mFPECEsnr5mrfBuE
+	Qly9BUoYG+GYmxYZ6jpGEQOn3mIhX3sFqMhz33riAziOXByw/e3sDqg5nym3vw==
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <20260924-ipq5018-pwm-functions-v1-1-8990a4e85b2f@outlook.com>
-Date: Mon, 28 Sep 2026 03:38:21 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MeJcYezVbqVq4cM2RuAtP3mxCuKKLMS3z+XqyS4DEa5qA@mail.gmail.com>
-X-Gm-Features: AclHuK9pVuYMjJOL3S9OWFCVZ-No99gs9AaKgirufX3RDkqpWzOUGcwSuUMSUDU
-Message-ID: <CAMRc=MeJcYezVbqVq4cM2RuAtP3mxCuKKLMS3z+XqyS4DEa5qA@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: qcom: ipq5018: add required gpios and missing
- PWM functions
-To: george.moussalem@outlook.com
-Cc: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 28 Sep 2026 10:48:20 +0200
+Message-Id: <DLQTIJA71AQ1.1RASTM0D6GMGX@bootlin.com>
+To: "Luca Ceresoli" <luca.ceresoli@bootlin.com>, "Andrzej Hajda"
+ <andrzej.hajda@intel.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Robert Foss" <rfoss@kernel.org>, "Laurent Pinchart"
+ <Laurent.pinchart@ideasonboard.com>, "Jonas Karlman" <jonas@kwiboo.se>,
+ "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Laurentiu Palcu" <laurentiu.palcu@oss.nxp.com>,
+ "Lucas Stach" <l.stach@pengutronix.de>, "Frank Li" <Frank.Li@nxp.com>,
+ "Sascha Hauer" <s.hauer@pengutronix.de>, "Pengutronix Kernel Team"
+ <kernel@pengutronix.de>, "Fabio Estevam" <festevam@gmail.com>, "Paul
+ Cercueil" <paul@crapouillou.net>, "Paul Kocialkowski" <paulk@sys-base.io>,
+ "Linus Walleij" <linusw@kernel.org>, "Inki Dae" <inki.dae@samsung.com>,
+ "Jagan Teki" <jagan@amarulasolutions.com>, "Marek Szyprowski"
+ <m.szyprowski@samsung.com>, "Sean Paul" <sean@poorly.run>, "Jonathan
+ Corbet" <corbet@lwn.net>, "Shuah Khan" <skhan@linuxfoundation.org>, "Randy
+ Dunlap" <rdunlap@infradead.org>
+From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
+Subject: Re: [PATCH v3 00/19] drm/panel: embed a drm_bridge into every
+ drm_panel
+Cc: "Albert Esteve" <aesteve@redhat.com>, "Anusha Srivatsa"
+ <asrivats@redhat.com>, "Dmitry Baryshkov"
+ <dmitry.baryshkov@oss.qualcomm.com>, "Hui Pu" <Hui.Pu@gehealthcare.com>,
+ "Ian Ray" <ian.ray@gehealthcare.com>, "Thomas Petazzoni"
+ <thomas.petazzoni@bootlin.com>, <dri-devel@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <imx@lists.linux.dev>,
+ <linux-arm-kernel@lists.infradead.org>, <linux-mips@vger.kernel.org>,
+ <linux-rockchip@lists.infradead.org>,
+ <linux-stm32@st-md-mailman.stormreply.com>, <asahi@lists.linux.dev>,
+ <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
+ <linux-tegra@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+ <linux-samsung-soc@vger.kernel.org>
+X-Mailer: aerc 0.22.0
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+In-Reply-To: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Thu, 24 Sep 2026 14:22:11 +0200, George Moussalem via B4 Relay
-<devnull+george.moussalem.outlook.com@kernel.org> said:
-> From: George Moussalem <george.moussalem@outlook.com>
->
-> On multiple Linksys routers, GPIO 1, 30, and 46 are used to drive the
-> PWM led on PWM1, PWM3, and PWM0 channels respectively, so let's update
-> the pwm# and pingroups accordingly.
->
-> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
-> ---
+On Wed Sep 16, 2026 at 3:45 PM CEST, Luca Ceresoli wrote:
+> This series embeds a drm_bridge into every drm_panel, as previously
+> discussed [1][2] and in previous iterations.
 
-Are we *updating* or *adding missing*? Depending on the answer, this can be
-interpreted as a fix that should be backported or a new feature that should
-be queued for v7.4.
+Series applied to drm-misc-next.
 
-If this is a fix, can you add a Fixes tag?
+Luca
 
-Bart
+--
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
