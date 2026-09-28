@@ -1,125 +1,115 @@
-Received: from mail-ed2-f34.google.com (mail-ed2-f34.google.com [74.125.228.98])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B825B4562BA
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 06:58:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D4DB35DA61;
+	Mon, 28 Sep 2026 06:58:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790578700; cv=none; b=pu+VzWWzLomwCGTB0Y6C0MMweXRqV25cIlTXAt6nYSJAL5cA2l1qEN1JBHz6AK/R59obcb5mruwcZOa/DhFOM0KMrO0tQhhSftf4pJl/W9V/05D52G/bw0yH6T2fTwIVMym2lQp+VOnZ/NofCYBGnV4qFoLiPl5GLC0y7cqLQ5E=
+	t=1790578730; cv=none; b=g5roAQsWFJI43yMHBZn3hLF/lk4lOvQDcqECWgRpPADF8l6kIzqv4Y8fUIMy4a1xt3bbQs52Muv3O//nThTN6cZ0WYWzbAV5KE9nefZVKP7derr2R861K5yN0rljJvy+8Jxj3eZMmnaFFIP6b4rbGmyxmVWUBwak8DOZkK0cYwA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790578700; c=relaxed/simple;
-	bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=cYYM53KzXHgAvkCJ9Brftq2tbfGwyokkpSyOLdveaQvWHp/J6+08sNILUiBvN5btH0nvSZUnwewRhoaSKqKFKoK5he9VfcPgMHXAK30fsK74749KYkOKLcB2HwsxSACaAolEw+ff33DNqDhZl0/y97MwuQuK7PK/PCbHhb05jqU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IxiqWaJg; arc=none smtp.client-ip=74.125.228.98
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790578730; c=relaxed/simple;
+	bh=SKNv0KIWks9eXS0CBfGLJAuvGThHXuD57HmBN1fRLoo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=B4kt6esq2c1104ZqEOW112yJXC9qgGvTl/QhCjx4I6NekeUQY6i2QMEFMsxs0R2Rj+Tda7DtWsN/W8YWr81gie9Y+ijg4L2IP/lmFxAdhjEcFVzSZI37d7gUfX7+NUVz/TK9pW0IUknbkEIV9dTt4iORozUW2hbIJK3riQcBtJU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=hj1xWJ4m; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IxiqWaJg"
-Received: by mail-ed2-f34.google.com with SMTP id 4fb4d7f45d1cf-6aaf8415866so2979000a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 23:58:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790578693; x=1791183493; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
-        b=IxiqWaJgcx+Ue7br5kHQeGpbeQrXrlPvARZyiN3d++H+1Z/HfN+Nx43yRdJYe37dpB
-         fXuW0WsWccQDd1BptViX1wA75MRuHPWDpsRHw8DaryqBp1tajZQjRBQBuTms1GdI5aH7
-         a24YvQX/N7l9JHJ6KHIkqFgEB89IC3TZcX2DbG4Rne3e7em18E3mtUOzvj/ufquY3v9r
-         u9tCve5tHZ/ycFatCaUh08N2pg6IAHK1onuxFWdAc8UmYO02SDOQywv4IOqZoDK7l3nT
-         6oiy5TUyuYutCjxMH2CUp1dgcOIogPMEatfxQKVAfot21TnPCbmk2dMLIeOmZ+pgrpkJ
-         DpJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790578693; x=1791183493;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
-        b=J9N33QulBjZ4hJSkv0//Kq1PCRXFD5pgHM2RQfyVohwXTD84mT5xFJTdodHjTThPlb
-         5ZB5tff7vqo1/9ZrU4X22YVtLijsQDnMgZ2DovU148RjXdxV7McALyobvWAevuFrQzWN
-         4AZyJQl5BGBrV1ViqtHn2iG3Pd9QpEJOpP3EIlam8w1aLeqbzBcAnp5dZi15Oj7oM3ue
-         wHx1L1g3O00ElgAfEyYZem6b8Pg6ZlK7asH+Dnm/JGz82/gCazt6J38k5mXb/w0Pb0fo
-         kILhzoKKmNQrpfO9UAeXbWcXSYdR15gHCaqiaD5y+HVCzmZP+oLqYCv9OeOL4GfC7+Ze
-         rRSA==
-X-Forwarded-Encrypted: i=1; AKwUvBy+bkODqZez88gpL9DFlG3MzAGsJSNSliF+H1Qbn33DIWPUTbrc4/L2KNkOp9aCybm6Z5ek6xvGm+fwEGZT@vger.kernel.org
-X-Gm-Message-State: AFq9FYIDWL64b//6iObc8eR1UgfIkjpjw2sWszX9+8vzPnaZgrYf9cNI
-	vaSKUV9cDrLMicy9LoLFPwDUCgys4iGuqMyhWKvDLD3supqIBNfSVFZl
-X-Gm-Gg: AYBFou0i8w0oHF7oMxheXvtDMgvREGbBYJ9RFvXzGnmYCOi4Bwy9pd6W+kOmeQoJxEJ
-	966u2RD6jhv8e3wuH1J8YFyHjuEJzjb1B3i6yG4XWsDZBaPvDEPWGtwEc0dvyk+IhHz70Op1OgP
-	tdmCtUfw5Yn8VTg0nntb/964yiJpJJrN5C2ifpROceBzUmjnozFL2i1A+rh7Y9DuX4SvUkJWHZD
-	IxL0rNH5i3SBEJsQ+ExYeuc06sp93VUxqkkuLi1N1NttDpvdfNQotZVhtLJs1roKc+UIr1U5Exi
-	L3s+9lXNfCTKegzIuKn652OAkEGQnEkLWi5YRjUgGKAFfHj5qxky1nnGLd2tYTa2jXuTaj9tWut
-	zuR/YnXlpBf6L99KIhVHC9kGBae43bcvQUY0Wxv4h1duDG2N00N+q3U8Ox31Mgp5Tsk8YAO9+jK
-	rAoiraLnssCxEtoKhniKBOh1IDyQOuKkcX1FG6PLq91DVyGEQJzRp4Fj+t1HBNUlP2JTX1gCJZq
-	mc92bjB2Mm8CynrUQfgbujIuHoOn0Yd3isVssfSy1PRMm75UIqn7tdL
-X-Received: by 2002:a05:6402:21c2:b0:6aa:7ff:4ebf with SMTP id 4fb4d7f45d1cf-6aac8ef938fmr8251360a12.15.1790578692435;
-        Sun, 27 Sep 2026 23:58:12 -0700 (PDT)
-Received: from localhost.localdomain ([2a00:801:793:68fd:c07a:9093:1956:b4bf])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ab5be57b13sm2286016a12.33.2026.09.27.23.58.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 23:58:12 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: netdev@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Ziyang Huang <hzyitc@outlook.com>,
-	George Moussalem <george.moussalem@outlook.com>
-Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
-Date: Mon, 28 Sep 2026 08:57:58 +0200
-Message-ID: <20260928065758.5507-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
-In-Reply-To: <20260927153616.2317-1-yongzhao.derek@gmail.com>
-References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch> <20260925210153.8717-1-yongzhao.derek@gmail.com> <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch> <20260926082129.1632-1-yongzhao.derek@gmail.com> <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch> <20260926215152.376-1-yongzhao.derek@gmail.com> <e18c66e9-7ba2-46c0-baf5-b4281a45755d@lunn.ch> <20260927153616.2317-1-yongzhao.derek@gmail.com>
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="hj1xWJ4m"
+Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6FE7E8FD;
+	Mon, 28 Sep 2026 08:56:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1790578608;
+	bh=SKNv0KIWks9eXS0CBfGLJAuvGThHXuD57HmBN1fRLoo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=hj1xWJ4mu2e5rvAlwdrxXot05PweQhrCapf6yZPUPce/J8GO/DMaHGoDP6yXpWcRr
+	 NQzarMYAR0ORUpSwL+JBf7re51ZBbwhbS3x4LoAxPCo6iTwTa2RJ4JWJx0rAIQ+0pZ
+	 dvC2UGqksgD4BhwpnqkKAxEJLhJzgOmaQ/NHlXd0=
+Date: Mon, 28 Sep 2026 09:58:37 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Chen-Yu Tsai <wens@kernel.org>, David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>, Liu Ying <victor.liu@nxp.com>,
+	Andrzej Hajda <andrzej.hajda@intel.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Francesco Dolcini <francesco@dolcini.it>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Marcus Folkesson <marcus.folkesson@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Yannick Fertre <yannick.fertre@foss.st.com>,
+	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+	Philippe Cornu <philippe.cornu@foss.st.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Adrien Grassein <adrien.grassein@gmail.com>,
+	Russell King <linux@armlinux.org.uk>, Simha BN <simhavcs@gmail.com>,
+	CK Hu <ck.hu@mediatek.com>, Jitao shi <jitao.shi@mediatek.com>,
+	Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Chris Morgan <macromorgan@hotmail.com>,
+	Martinez Canillas <javierm@redhat.com>,
+	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev,
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	linux-stm32@st-md-mailman.stormreply.com
+Subject: Re: (subset) [PATCH 1/2] dt-bindings: display: Use consistent
+ indentation in the example
+Message-ID: <20260928065837.GA22609@killaraus.ideasonboard.com>
+References: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
+ <179057359762.92994.13773102514654073802.b4-ty@b4>
+ <8499ed1a-df9e-4e5a-b609-3da8499a47b5@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <8499ed1a-df9e-4e5a-b609-3da8499a47b5@oss.qualcomm.com>
 
-Hi Andrew,=0D
-=0D
-Following up on the initialisation order, as promised. On this board=0D
-it was the cause, and the DT workaround is not needed.=0D
-=0D
-The IPQ5018 GE PHY leaves reset in ipq5018_probe() and starts=0D
-autonegotiating with its reset defaults. Its LDO, EEE, MSE and DAC=0D
-settings are only written in ipq5018_config_init(), when stmmac=0D
-attaches the PHY on open, about 39 s later on this board. I sampled=0D
-both PHYs during that window. They resolved 1000BASE-T every 2.5 to 3 s=0D
-without getting link, and after about five attempts SmartSpeed=0D
-downshifted on both sides at the same moment: the IPQ5018 PHY's=0D
-CTRL1000 went 0x0200 -> 0x0000 and PHY4's 0x0600 -> 0x0400. The soft=0D
-reset at attach restores the IPQ5018 side, but nothing touches PHY4=0D
-again, so the CPU link never came up.=0D
-=0D
-Applying the same analog settings in probe, right after the reset, and=0D
-restarting autonegotiation, fixed it with SmartSpeed left enabled on=0D
-the QCA8337: 3 of 3 warm boots came up at 1 Gb/s about 2.5 s after PHY4=0D
-was reset, against 0 of 3 without it. Both groups ran the same kernel=0D
-and rootfs, with the probe-time writes enabled by a private DT property.=0D
-The final patch was then checked on the same board over a first boot,=0D
-three reboots, three interface down/up cycles, three renegotiations, a=0D
-network restart and a 10 minute observation, all at 1 Gb/s with=0D
-SmartSpeed enabled. It is still one board, and I have not done a=0D
-power-cycle test on this kernel.=0D
-=0D
-So I will not add the workaround property. I will send the at803x=0D
-change to net together with the DAC fix, and v4 of this series without=0D
-patches 4 and 5. George, I've Cc'd you since the at803x change touches=0D
-the IPQ5018 probe path you added.=0D
-=0D
-Thanks,=0D
-Yongzhao=0D
+On Mon, Sep 28, 2026 at 08:03:18AM +0200, Krzysztof Kozlowski wrote:
+> On 28/09/2026 07:33, Luca Ceresoli wrote:
+> > On Sun, 13 Sep 2026 14:33:32 +0200, Krzysztof Kozlowski wrote:
+> >> Correct indentation in the examples to consistent 2- or 4-spaces
+> >> indentation to fix dt-check-style warnings ("example 0
+> >> [indent-consistent] indent mismatch ...").  Preferred is 4-spaces, but
+> >> re-indenting entire example just for that is too much churn.
+> > 
+> > Applied, thanks!
+> > 
+> > [1/2] dt-bindings: display: Use consistent indentation in the example
+> >       commit: 370c5d9004f8b754351981d59fc26851bf943e93
+> 
+> Thanks, but I expected no one will pick it up, so I asked Rob to take
+> it, thus it is already queued.
+
+Please explain your merge plans in the cover letter next time.
+
+-- 
+Regards,
+
+Laurent Pinchart
