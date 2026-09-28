@@ -1,97 +1,82 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-106117.protonmail.ch (mail-106117.protonmail.ch [79.135.106.117])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AB43329E4B;
-	Mon, 28 Sep 2026 02:40:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0910036195B;
+	Mon, 28 Sep 2026 02:53:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.117
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790563208; cv=none; b=WZcU+4+ucwlrDJ17MzSz2wCvpaSbYOP6vWOcTWquomJyrbRU57VE7jBDbfIlL9Gb36dvBfLh1bwWMSxcX1JGwfxSRpiTo9vmxn2ewreJWEgewtXhOa47HlWyIK7E6j6TdPpWaKtEadkoBQYSEmvF2IBlchGe6egz9leoq7nljlY=
+	t=1790564005; cv=none; b=UWaCv+uughnwstUEU0X7UcdVfYZOv3oc2qigzBNCIBLXjLxfmhqYTK9kB9SJoyMSeEKuT8efsO19FXJLtjoTgGsN5BHLoHJfwqsasRUq19TrC9tiK2WrSunTh6yxJad8YVbI/O3hlHwuExU79xVzi4a4vNKzrdHBMb3UcJDVlQw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790563208; c=relaxed/simple;
-	bh=gIYgvCAT33uGsXxmtXdJLRQsYOlRYUJ9+xztLqWDSZs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FVDZjAU3vA38zWkhpG+PEykc6shQE+JocNzYZUN2nunE4CjpXV8QITuhs1eslY3IaHo1bf7KVfsSUmjN4zhR4c6ksUlKbgkjpLqRz7K9eIe4xWNiuMwXI7FFklGerMYcL7MsCxp7e27el/R7ttc8ZXlHrvPDLdM2BJL9wg9cSfM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QGr2WhW2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790564005; c=relaxed/simple;
+	bh=VQdfyEA0NDRxKyfUnJ9+wBkpHy95AGsPUUbAH59kA8s=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=kBACBuKIMvrCagDfy+woc/7vfkUdCD8s32ldzKomYcqHhp/aKtnqJSYH6JBW559VSWymZQo6pj5NJFtwrFVl23K6Wk9JT8HCBlYYAI57yrEANum4e+DTAOGKr4/lroexKgrza+cybvVDeIN/Mxsz3FJh+FKGxyvAycWTo66d4CY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=aPmTtCeT; arc=none smtp.client-ip=79.135.106.117
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QGr2WhW2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF5D81F000FF;
-	Mon, 28 Sep 2026 02:40:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790563206;
-	bh=LDjkTaw420ertubegWm220eZKiu4uuw5cWFVc9oA6uY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=QGr2WhW2WEUAwM3aHRJliMiYDcrXq4joIi7Nca5Rasl3buOs9w77iMKaHXBPmcmzq
-	 +OYWvRRuwCfpVo3FvpHFxXDqOKUjvmjFw/DL3Lq5kEajbhB0hFYe4EC/8VfXEhjCaB
-	 QsqGdq6M8ceow4CoUFoZxXCnAW8vfE42RncxVFPrn7zWhYLsLUJo8TcXR31r45M6SY
-	 Bt9aJlCgUzFLGlZPIsG+FCfFgcS1k788P+6PPQtANHCMa4EMYsJ06I/q7zD3I0MdhB
-	 SWVADjBmtoe+ZctJQg0+0zy1VkvOXxP2uW3sHQ47woMWzhynOEyun26plVyvp/Xeaf
-	 /l46pwikFdUqA==
-Date: Sun, 27 Sep 2026 21:40:02 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Jie Zhang <jie.zhang@oss.qualcomm.com>
-Subject: Re: [PATCH 1/5] dt-bindings: display/msm/gmu: Fix Glymur's compatible
-Message-ID: <arnTH0_tjrspIymm@zenbook>
-References: <20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qualcomm.com>
- <20260925-mahua-gpu-v1-1-0fa0bfd8d315@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="aPmTtCeT"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
+	s=protonmail3; t=1790563993; x=1790823193;
+	bh=VQdfyEA0NDRxKyfUnJ9+wBkpHy95AGsPUUbAH59kA8s=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=aPmTtCeTVNAmZx68XmiiobjJqg+8m24IsKtvFcoHN2qBs5d1Bc5bNJst2eDrKQ+Hu
+	 2DBWIrXOdMEuAO/29yGd0QLasQdWNHNGyiv/bQcPp3eZIlIgP4MDwtUw61f8rah+E0
+	 o8/FS8/ySSeQSebjV+TFnxMhiY0QV3+59BhVeJf0D22tbSSQoxCvGEwkkjbZ2SdNfX
+	 JBvazMb80Sud/cLdK7K9RCzRxBJMPr1LHvM4vgQ/23dsbaAGuT3slZCuqGI44wRcTJ
+	 nl6lfiq5yupRBY06kRhjC9EgWjzG6sqIDB0wshn7WGmmSXEtXcOdM1vdQfWJ2EsTcf
+	 wAnC67Lp9z6tw==
+Date: Mon, 28 Sep 2026 02:53:08 +0000
+To: Krzysztof Kozlowski <krzk@kernel.org>
+From: Alex R <alex@ironrobin.net>
+Cc: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/3] dt-bindings: embedded-controller: Add Lenovo ThinkPad X13s EC
+Message-ID: <SfCR0yNml_1hJk2DhXw0x7peYzRH52nThRG5dAjAiAYPzsw0ZIrIV3EaEV_O_G8hR8x1XnIZ4Wv5hBkdKqQG_pV-5fvPuMaVdpyXh3KMk_E=@ironrobin.net>
+In-Reply-To: <fc7b99d8-f737-4dac-adfc-ccb9b12e30d7@kernel.org>
+References: <20260926195415.5995-1-alex@ironrobin.net> <20260926195415.5995-2-alex@ironrobin.net> <fc7b99d8-f737-4dac-adfc-ccb9b12e30d7@kernel.org>
+Feedback-ID: 54785507:user:proton
+X-Pm-Message-ID: cc1fd69cb7f2e4397e6db992214d548540af8263
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260925-mahua-gpu-v1-1-0fa0bfd8d315@oss.qualcomm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 25, 2026 at 02:44:32AM +0530, Akhil P Oommen wrote:
-> From: Jie Zhang <jie.zhang@oss.qualcomm.com>
-> 
-> The Glymur GMU compatible string was incorrectly documented as
-> qcom,adreno-gmu-x285.1. Fix it to use the correct string
-> qcom,adreno-gmu-x290.1.
-> 
-> Fixes: 7bc29d5fb6fa ("dt-bindings: display/msm/gmu: Add Adreno X2-85 GMU")
-> Signed-off-by: Jie Zhang <jie.zhang@oss.qualcomm.com>
-> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-> ---
->  Documentation/devicetree/bindings/display/msm/gmu.yaml | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/msm/gmu.yaml b/Documentation/devicetree/bindings/display/msm/gmu.yaml
-> index 9e459f12ce3f..f22661447e7c 100644
-> --- a/Documentation/devicetree/bindings/display/msm/gmu.yaml
-> +++ b/Documentation/devicetree/bindings/display/msm/gmu.yaml
-> @@ -363,7 +363,7 @@ allOf:
->        properties:
->          compatible:
->            contains:
-> -            const: qcom,adreno-gmu-x285.1
-> +            const: qcom,adreno-gmu-x290.1
+Thanks, I'll fix the author and Signed-off-by identity in the next revision=
+.
 
-It would be preferrable if you add the new compatible and then once the
-dts has moved you remove the old one (i.e. after next -rc1) - that way
-my dtbs_check doesn't light up while we're trying to dance these patches
-into the different branches.
+Alex
 
-Regards,
-Bjorn
 
->      then:
->        properties:
->          reg:
-> 
-> -- 
-> 2.55.0
-> 
+Sent from Proton Mail for Android.
+
+-------- Original Message --------
+On Sunday, 09/27/26 at 12:21 Krzysztof Kozlowski <krzk@kernel.org> wrote:
+On 26/09/2026 21:54, Clover wrote:
+> Add a standalone binding for the embedded controller in the Lenovo
+> ThinkPad X13s. Although its I2C command transport resembles that of the
+> T14s EC, its keyboard-backlight, event and power-management interfaces
+> differ.
+>
+> Describe the event interrupt and the separate host-controlled power-state
+> signal, which is high during normal operation and low in the low-power
+> state. Require this GPIO and allow wakeup-source to describe wake
+> capability.
+>
+> Assisted-by: LLM
+> Signed-off-by: Clover <alex@ironrobin.net>
+
+Please use real and known identity. See submitting patches.
+
+>
+
+
+
+Best regards,
+Krzysztof
+
