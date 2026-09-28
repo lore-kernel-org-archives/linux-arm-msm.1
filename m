@@ -1,154 +1,149 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f36.google.com (mail-qk2-f36.google.com [74.125.230.228])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DE6749D582
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 14:51:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F1514E2F3A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 14:52:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.228
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790607115; cv=none; b=lOp+vkC2Rahi6rsWdHfTqbOZfT+FxRA/nxkASpZBaW51TSHHQ38nIocAspdrqj2HcFQ4Pjg/X0Ib9L9aRtQEz1fNT1AmQNBxoXqmdxuQve6q9fL5Czw0AhKM5i31FDwmvoV4PpvCW0rf4lhAQilT+wMzU4Gn7rVd/nLEnfxa7PI=
+	t=1790607144; cv=none; b=bP0iSCKluHzKsUPh34uzuojvscPBq9BswjdqcYallWlTc/quLDc5DFBnSyRGo/hlR9ulVpDsuWqt/4yESXyyVBgsiVUim5BnvBvrWANaIE/NWREh4EonUDFOfqiHI9foRn1EQs/1agVvnlhKjIk96VMRB/cE15fWmEj4Ctyefno=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790607115; c=relaxed/simple;
-	bh=RIbldL7RmoZJB+4oI+sOM02ju88vpR1QbLJnL5LcQDI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rdumCzeI9P1MmHKEYaYDHk3gcS94FoWWl3zEjnMFH3nAxsTngWczboNbsyqnDCP1tAB5yQYgir6OlonX5jGcAjn1+q6naLOfL8OPxV3li1Op83AoX+sYtWBAiaYuSqqyUuUDcWrX6URH98RtGlO+djGALoLU3QALpKtY/9OhdB0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fks7Ov+E; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ey7q3/Rs; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790607144; c=relaxed/simple;
+	bh=gbzmEAe7Yh7EOMgc4+9QLCGtiswt+t1xIkHm6+slPpI=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=BPwbHdJ3oTuCERKmmuLr88zpvJ9u89SekKbmHB6096LREHnCOR7bu1O2geref+pAWXG4yIdmMt+0G1uCq5hpJfnXqb25XBFpkXGmzj8JfNPgV/kVEERzee6xZYTVebutRaXiQ1HyFttyw2fxpgHYLxk4cSyb+PxzuwxlTR8Svt0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=FDqWuNjA; arc=none smtp.client-ip=74.125.230.228
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fks7Ov+E";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ey7q3/Rs"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68SEeCYQ380520
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 14:51:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=efWurbXWJr4
-	abrZmzfxo7NYYbMEg/gvYeU9UOZfHRdE=; b=fks7Ov+ERMIEyZ1hg6hQ3JQ+JDx
-	9jovEp7r2GLunvBLLOGliSH2RQgbJqlnnHzwXockoEtJzU1KTfYZ/EwKxnQGj1DH
-	xDW2DygapA+oY1eduUgPvV4wO1uDcjEUs2132N/eqsLCu4EMk8OmSKBB7oSnKbuu
-	lMpan3KMcK0dUHxEoCnRRxjsKBIn+OxAn9ojvfkqrlLmR8WC0YI3loaU5SGBLIWw
-	a5o0dLr6DvdOadpUYyOzuckYXY8qX5DVhoIMMMxZD2V2MZ+zFXULYfFpMGXgSCkh
-	3RmakP8R/X2zqOhQQX+8esai0dfpzbqUO09EJr0mvv1RrUcVNuUkS9wr/PA==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyqx38nd6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 14:51:53 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7a04805f8f1so2737818137.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 07:51:53 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="FDqWuNjA"
+Received: by mail-qk2-f36.google.com with SMTP id d75a77b69052e-533264052d0so17772231cf.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 07:52:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790607112; x=1791211912; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=efWurbXWJr4abrZmzfxo7NYYbMEg/gvYeU9UOZfHRdE=;
-        b=Ey7q3/RswWetT3vX3F43QDjmWQfN+oxPJRSWAOxNpxn1/Z3aMMCK5GW7VND5To5mSQ
-         BNF0rBiN0areV6Ml+Z9mMy2BOz5pgfkekOm5+SY4f7NyBdQ+Pkh42S+4H+jlPFixnj5d
-         UNP71Lq4SwGN5jkeG6ZqVG7SeYirRXfkp29EpA8Jrhe5rjsr1dVbjiY82AgBjHS94oeF
-         dvDL8EMDIBta4sAG17/q0CJ+4Fhwb9+qZkOh+bx21wJgfsUBSlXY7YA0jRUcXC33so9m
-         EoebANRBGxgT/0jCEUA4TenaBmdIwd63TdSAQdBQriWUAKa8/pkS1fTx8coBJ/BzQT1u
-         1xsA==
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790607141; x=1791211941; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=D0iK2V+cwCYdpmdm6x/CD7QqyYK9DucF2a2Yc6LfV+Q=;
+        b=FDqWuNjABukzKRzw9j9AeENfk+VdW4d2IKIKeLY04RhkHrcLodVa5vzu2ayPZTFmU2
+         YgIEpNt5aF3CKv+Lm3vdZv93zh6cJEFRXAQ37eJjQP6vEl6AOEUpxaPmb0DpDshytg15
+         Qr8FWveyXbsvOWq2IfQmmtp7wVQS/c5aYvDf9xVrJz8iGMT/wpC8vR6ybDTqR2ht1Z/1
+         siKsBv1Osf3StVEg5eEJ0arAf0xGky4mT8zBINXsEzB1FhmrTDycNpkolr/Ml8PSoTmW
+         hnGI+zBsWq23+ggECpMcKOHeymUmhe1R+ctciyl5dfo+TFcOUIkZHSdYupCUW/1hr2QE
+         lDMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790607112; x=1791211912;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=efWurbXWJr4abrZmzfxo7NYYbMEg/gvYeU9UOZfHRdE=;
-        b=mj21Ynzf0KrOCINTMOXYFQfYGqPC1gqtd7r9bF3qK/ltSyLYmB1zf6eiuajlQpAjGN
-         R36+nfnRnZBSJ6pvZvgV4KLDxhLjU2YdGGUv8NmUG071WpJrFAncTFPIC66TFvmLs/P8
-         3WvjO81TGiHU6cTmWfPbvlXxUz+clfD3Zp67nh7UxxyzJFPqTExQhGREIuIhAah2ZkW7
-         sBanP0xBALXZYX7SbafmNzf8fsWm5+R93JGvayywcMEm5VbVsV1FJ4gINAKnAGuyeLld
-         W8Z+EUUxbDFLJWK7aqzJWFzSzKW9/yoFjwPEnIOoPvYoFTAldm4i64EOZb6sgZB8P6Ga
-         ChQg==
-X-Forwarded-Encrypted: i=1; AKwUvBxDGvqPbNGPEBXrwAuaqtN1+Hvga/Lr2ZyHvrm7EFAM/8IciQgQzGHGuR/GnGVRuWIPedBe5lJzZDHRE/qc@vger.kernel.org
-X-Gm-Message-State: AFq9FYIX/HGTWcA62HdVxJQIe4ECW+YCOauDhRBol0yjaux3rVVwDfbT
-	Qw3C+5+eohplvsKr8MOsizCWs4zridsL8QCYhOZ9Jpiy6IAh0yjFURsXc1Cje50rg9h8Qp0k+m2
-	Ph9BgAIEiaqpsSUSHG0WFfA5J6cEQXyZpyuRLjgZ2UaKQgqUuFiprNn+TEDsSodui/ft2
-X-Gm-Gg: AYBFou2RqpBWyINeq4Yo5+Tx5+6NcQYOPriHkE4XqQEtfpNbd/zsCBUf8O4v8mlDXeL
-	SG4McKLL9QzX/Jk/D9Xb9y4KgidyZh7LN2J3r4kuTT7iTOK5N69XcRLawPWz+ZqD/D2wm5yCmVH
-	/HkKrVK8aMp/2IiGF3T0Qjrss2YqxoGwZ8fvU4iFYCgrO55ZCYZ5IFsN9Xiq/pp9KU2HfKmPJEE
-	e7rCENxSI7xriHN1gTh+WZFzA2seJ14CbNKHp4nOWyPqZFbAy9hSm6NfeIyo0DHBVDX2IeWwaMS
-	Is73+8uvHmbajxHhpdtfccXgvHYBAlh9kBQEkLK2QxWeWpEhLJaIqAJwkEAOIyuAJ2fv8o5e15J
-	8tA4eheoY03YG
-X-Received: by 2002:a05:6102:3f0d:b0:7b3:4199:2de2 with SMTP id ada2fe7eead31-7b34199441bmr2429260137.35.1790607112140;
-        Mon, 28 Sep 2026 07:51:52 -0700 (PDT)
-X-Received: by 2002:a05:6102:3f0d:b0:7b3:4199:2de2 with SMTP id ada2fe7eead31-7b34199441bmr2429216137.35.1790607109922;
-        Mon, 28 Sep 2026 07:51:49 -0700 (PDT)
-Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a007fd1a01sm42777315e9.0.2026.09.28.07.51.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 07:51:47 -0700 (PDT)
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Dmitry Baryshkov <lumag@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH v3 3/3] firmware: qcom: scm: Allow QSEECOM on ThinkPad T14s Gen 7
-Date: Mon, 28 Sep 2026 15:51:22 +0100
-Message-ID: <20260928145122.1337186-4-srinivas.kandagatla@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260928145122.1337186-1-srinivas.kandagatla@oss.qualcomm.com>
-References: <20260928145122.1337186-1-srinivas.kandagatla@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1790607141; x=1791211941;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=D0iK2V+cwCYdpmdm6x/CD7QqyYK9DucF2a2Yc6LfV+Q=;
+        b=l9O4JvSdtWsn15RL+tgf9QFgZqJNunH5vbPaEODfglpjRASSUNEP3//JWOj485Y0KQ
+         qcNKVq/LA6AvU7mAGXTZ6jcoS43+AexiSsoAES/w2L7G9EjrubB7dYeXdDmwjbfjKS5h
+         3aexP7TQyxSXe70/vJduR9vH2HxI6xNuRBuiblljImxACj6L8mOid8Lfs+PQ8loWnl9k
+         3iRQx6TNdiZcYg62fS5C1KjoSJ/ZxS9cPQ4ZUnOXm/ULFHjnoJ3XJPA5/UfMVHMp1CeQ
+         L3jPIwiw2ND7WrKqJX2MTF9knAKWrG+Gwnw6rFXJfV9yFhH5Rl9Cp6s4UkvT9AvVz0b8
+         FJqg==
+X-Forwarded-Encrypted: i=1; AKwUvBw8tpSIVT5Uof2EOhhDKTvylF4Koo8sILwHjykQ8AQCggRJ449jJzGXAiFrjRKETCZtnmUeV8iGx+PXZBbp@vger.kernel.org
+X-Gm-Message-State: AFuF++nGgkDkmcXfKKaRs5SOImpu+MKwO1GHRGbVeSi1TGZCnE8qdoaS
+	viCgcRjXQTUn3N4nZ5luSAWVJLnpTYGzlN4knfhUKgPPxSlkDoUy6jf1b7954NHRSt4=
+X-Gm-Gg: AYBFou2MDW9qC4orcEMzw2rUTz6qGHQZ3Yyy/wDVDcRojMmKmYWhbsS7+GbW7J+cB8F
+	EoivnC+7yA+sMPdzMLrOZX8FrIdXFmy4euAprCwDrIIPNr2LphIYk2mKn2LvtpnOhfYDlV1mfQ6
+	UhD1YHvfQg2fUzq+6XPCY0gnd0rjn6BS5/F9v+Zk9A1W8koX9Uxgpg+wHAxiWdCCR3YnQtPV3x3
+	FenIzDheCSbNfF861AZpkQWD3Z0xkxxGCRKnk/PHMqj48hLk+xgUlZnhxwW/w/5hmswdu2VrFxI
+	A//KJUk/z3VeNh0R87VD/zr1QRQKc8fJREkh+tfZP38Yzpfd6q9oSu2i9Kwg0Bmg6fhqGfLdUS8
+	8wEzw2q5e1jldhgF7FD1VJ+rOyXwfavAFkUwgVg/Iy+1bI0WV7p6OordticyaZUMDNzpIQrjuuc
+	QUDwOltLx9cFc+mOjXKTExhjk4L38TtalgAOoTFt4OEU41JZrcD3PvYEyv3XCaeQK2c9ocNyl6q
+	cV8aEDeHnKpUg==
+X-Received: by 2002:a05:622a:13c8:b0:530:e52a:8ef1 with SMTP id d75a77b69052e-5330b5dff3dmr218288981cf.26.1790607141221;
+        Mon, 28 Sep 2026 07:52:21 -0700 (PDT)
+Received: from [10.211.55.5] ([199.59.119.56])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53322388d06sm64157141cf.16.2026.09.28.07.52.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 28 Sep 2026 07:52:20 -0700 (PDT)
+Message-ID: <4bb9c85e-f991-484e-861f-1940b8263890@riscstar.com>
+Date: Mon, 28 Sep 2026 09:52:18 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA1OSBTYWx0ZWRfXzfs1KbrbBfzp
- d7McrTpFp6e6jj8d8N9VmadlruCGkcnoWX4lpZ/6wr022LsQcfMk9SQ8/jHj7xGLI9uh/kVukaB
- /qu9kqgQVQfNIxYVOTlK8uTowBvYqxOJsogoPCaS7/mfPKFsUPZaZ4XCyRXQL6uUN9xIFK3lqeM
- h3vKRPUlwX1go37S3WfrlX+v36kzTXVEFyuxQR9O3m8ZavVkrJyDsso8k6dzXW/nO782ftcs7Qp
- txRtmSEikbrO23L6iUIgdSoKaYXb9XqWTJHPDaH7U55aGWZugWbdTRJn59riGK93aogULnZU5Y9
- FEHf9ll4YrzpIqhFbhuziI9SuuvFjzPgVjWuQPDUMt8amWwjgZa2/dLcWXkU4vkD3p1O2fMoP4n
- sIryhQVGi5sydSZSc990TeOSM73wnj1IWcaNmW4dIo5UqaYWt1D2UYvdXCHz8shn+Pn1bBgFGok
- Q/bMGFoGQr/lm+BOSNg==
-X-Authority-Analysis: v=2.4 cv=f7jdl+yM c=1 sm=1 tr=0 ts=6aba7f09 cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=qIna1hWlAHbsUj6keHIA:9 a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-ORIG-GUID: X6LBailcZb1XKfple6Pmdu0xfabu8k5E
-X-Proofpoint-GUID: X6LBailcZb1XKfple6Pmdu0xfabu8k5E
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA1OSBTYWx0ZWRfX62o94etlzLKS
- ivzUU+tfdkzfUNey4EcL7ejG6F5JdjVj5Lf48rNPl27u1t9a6gXDx5gokdAMPyVTXKPbfI2qqXs
- 4L+jIhcIqk3pS6qzFFriIYtzPIM1Pwk=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-28_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609280059
+User-Agent: Mozilla Thunderbird
+From: Alex Elder <elder@riscstar.com>
+Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-2-elder@riscstar.com>
+ <20260920-fiery-fanatic-manticore-6abf0a@quoll>
+ <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
+ <7e32063f-f1a4-4259-96c9-fcbdd25c7f2f@riscstar.com>
+ <fbeac5ba-a28d-4d34-8d23-4946aef515ea@kernel.org>
+Content-Language: en-US
+In-Reply-To: <fbeac5ba-a28d-4d34-8d23-4946aef515ea@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Allow the use of QSEECOM on the Mahua-based Lenovo ThinkPad T14s Gen 7,
-matching the pattern established for the Yoga Slim 7x Gen 11.
+On 9/23/26 2:25 AM, Krzysztof Kozlowski wrote:
+> I think nothing behind PCI EP should be described in DT, because
+> everything is internal to the device and implied by compatible (or
+> vid/pid). We do describe internals of devices in DT usually for complex
+> devices (like some display blocks with multiple subblocks) or when they
+> are used outside of that device. That's why I asked how are all these
+> clocks and resets exposed to the host. If the syscon is used only by the
+> device itself, I don't quite get the benefits of describing it in DT.
 
-Assisted-by: Claude:claude-opus-4-7
-Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
----
- drivers/firmware/qcom/qcom_scm.c | 1 +
- 1 file changed, 1 insertion(+)
+You say you think "nothing behind PCI EP should be described in DT".
+However the mere existence of the PCI endpoint bus as an option
+contradicts that statement, by providing a means of doing *exactly*
+that:  using devicetree to describe things behind a PCI endpoint.
+This is the model we are using.
 
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 899573674c2e..43e250faea75 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -2244,6 +2244,7 @@ static const struct of_device_id qcom_scm_qseecom_allowlist[] __maybe_unused = {
- 	{ .compatible = "lenovo,ideacentre-mini-01q8x10" },
- 	{ .compatible = "lenovo,thinkbook-16" },
- 	{ .compatible = "lenovo,thinkpad-t14s" },
-+	{ .compatible = "lenovo,thinkpad-t14s-gen7" },
- 	{ .compatible = "lenovo,thinkpad-x13s", },
- 	{ .compatible = "lenovo,yoga-slim7x" },
- 	{ .compatible = "lenovo,yoga-slim7x-gen11" },
--- 
-2.53.0
+In June we switched over to using the pci-ep-bus model based on a
+suggestion from Rob Herring (and Mani Sadhasivam).  Rob felt our
+previous auxiliary device approach wasn't right for the peripherals
+found within the SoC, given we were accessing them via PCI BARs.
+   https://lore.kernel.org/lkml/20260605144032.GA3659201-robh@kernel.org/
 
+We found that using pci-ep-bus provided a very natural and familiar
+way of representing the organization of the TC9564 SoC, and used
+it to represent all of the peripherals (including XGMAC).  It
+nicely partitions the hardware design, as well as providing a
+well-understood connection with the software.
+
+The switch involved quite a bit of work, and the result is a set
+of basically independent platform drivers that are modular and
+easily reviewed.  I really would rather not go back to to what
+we had before.
+
+Do you have criteria for what in a chip/SoC is sufficiently
+"complex" to warrant allowing devicetree to describe some of
+its internal details?
+
+I believe the TC9564 *is* such a "complex" SoC.  And in any case,
+anywhere pci-ep-bus is used, it implies that some chip internals
+would be described using devicetree.
+
+Would incorporating the chip internals in a devicetree *overlay*
+have any effect on your opinion on this?  I.e., the "main"
+devicetree nodes would simply define the PCI device hierarchy,
+but anything behind an endpoint would be described in an overlay.
+This way, pci-ep-bus on a PCI endpoint just provides an external
+interface onto which a very complex device could be "mounted"
+(and described in an overlay).
+
+I'd like to continue to move ahead with upstreaming support for
+this SoC, but to me it seems you have basic doubts about
+pci-ep-bus and I'd like to get past that.
+
+Thanks.
+
+					-Alex
