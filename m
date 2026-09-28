@@ -1,184 +1,82 @@
-Received: from mail-ej2-f42.google.com (mail-ej2-f42.google.com [74.125.228.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BDFF5013CA
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:08:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BA7620D4FC;
+	Mon, 28 Sep 2026 22:18:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790633293; cv=none; b=eWiMOv1sUdYN4B/CIIaIJu5FSRVtd5iJX5ZxpV3Rq0YLuUjB8Q32dCsrUzxRqIUvRnFSgFO+EyUbQX2HYJL0YICYiv+FVqfhsg302j+dNnxNv1xANp5IfePLJFV8HqNhRZsewBPObDnjUyoDxNp9PpTYK37b4TKdeKGeBod33Nc=
+	t=1790633889; cv=none; b=uVvyjtol981PfDRItNrvJUGFNmyEp9Vo2NVNgLHRF1eMbHAS5XYyxHCZvg9zZyZkQZ5P2bTi1EUza1E8g7D77jt6fw9IAUzLK5w6bY0a+pcUQYud3B8e46+k1cJ1tQyxbyF5nrakoyU6PQbhyIPwG4pHHrlXLY1bhEpBN0+ivi0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790633293; c=relaxed/simple;
-	bh=nlXgiiV99w8ZBfNrOPQjdiWpm2RFKdVvbnpO9GV2U6o=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=aI3QeTS5kDxr+jSHBFIx3qQsYsE2iIY2X1duB5PLUWX/zVtmUTkZ7s0Y13rh4SKJhChIp09Y2fgB0jlqOVHmFu/sr18rDLC2+0FzhCTRExAfc9IY19BBtQ0jxare/9OYbyQx6RiQor0dRnIEOluGwioctEnfLl/RL4P/aJMxSg4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=p4fsg7w5; arc=none smtp.client-ip=74.125.228.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790633889; c=relaxed/simple;
+	bh=8R3/BbhrDMmvNHH76fn5GwLsTMpqwHu1f3r2mdLQfXc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hI53gOjX33saRzA3sLfBf8LuiOwMbg5Tsv79IFJCzufNlNcfenn0DUnwVQ9aHcWyekD5RCusxg4nGgX6jbJ04WOWUKtibXj7JCO3lfWCJ7aeMlK01s03uCSDAR29+2i5wztqvfnTkPR3cCyn9tnxKShbZjzmpFVlrH67WH5Y6IY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eyOf9mY2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="p4fsg7w5"
-Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2da4eea067so295761166b.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 15:08:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790633290; x=1791238090; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CfOyZrdRgBydy7uhLfSubYYuTbaNZt6oFV4VOnfbokY=;
-        b=p4fsg7w5UMtXDA/ZZWJdCPAHCN+rUXFbho8En92fXK3YLKjFXwNR2iLGZ6bgcZ+srW
-         zu2tXxHBwfyWxOQkJPgzqbqlPw1UBad0szUz3o4UXJQ2F74ldgpbT/+L6B92AqG3otqd
-         c4bYLXV9Xr17iWfEjTloW1l9dt6Ccy0z/ijZeeNTjFY7rHJxQr0bZ4nQW6G4u1WWRxnf
-         SSqgwHK4qtOfrX9nOgPs2mVpGnkNRzaPvobppPJ4lVozHB00X3Am4G+sevAvptI8Ow2y
-         zVNJwEvYlXoIU6578XF/ncmIbOAmuqpZCKE/PC+Ro7EEysuuKPL1xMOFTWR7VGkcHvUP
-         Frzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790633290; x=1791238090;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CfOyZrdRgBydy7uhLfSubYYuTbaNZt6oFV4VOnfbokY=;
-        b=uKtBSKuPfJbyII4wwf/r1MeLFLkqqNdi42CavYY0HlDVJRfWwWB+4pVFYUjk4vOmoP
-         aGaNHVylP39aTsNpaAzRglIwoUhiIt5L614MubcxpaIKisqIWJmh8FKHEdkwd22QbLEe
-         TVTmXwKPVCauEMaJeeZ/g5pAOOgG5LuArMiau/7/7MonwBt3P682xZ09Wi262S2iJyO6
-         qsIMX6le6O5Pr/gFmGswRW0cTY/YehG2c3Ug2oo+Fn1pkL5HZUVxBGrWFoDwUbuibONT
-         OHE40kYJTyfrvf3vEQs2GRprmFlVgKa2W3AjAqPki254Yh+m/opesPdxrY8/0atJlryF
-         U+3A==
-X-Forwarded-Encrypted: i=1; AKwUvBwW8r9pZr7wFjUBQt7JI+WojLrQMg2TtlE+2o8z/xjTo2Xh8aosg0y9lUBxE4/4ZDm/VNMLrp2G/pNNnqOd@vger.kernel.org
-X-Gm-Message-State: AFuF++nbGTRs4cxLn/ISXZszDDtO8Vodi9lfqMYpumgH5KgkHBD97vw4
-	IaVt1EWnghaBkdiBQXb0dZjRWfSqSXCKizVZE24hw4lyo4tHBjRBL+PK
-X-Gm-Gg: AYBFou1JW+xpWIsth4EpKMdmwnWGacck5kcyDpAP2DurgdseXwaVah5pzOiUJ2obxM9
-	tceKfn7vifotKBDxJUm/YPR6pBVvBHX4P6sf07RD1jECaishmqASi4WXdunjLDbkiFd6Xoh8/5E
-	DAekYpJ3kFhfACJhXmv0F4ioQKoV6WFMPldMXJbSuU6NQCZAAQW0l4/tmgKPcxLNLdTgVXB7ohp
-	AJurW85s4Ym0Q6/S4ECoQuOQrW3ERpgL1JZRaWdf7uwaPt5Fa96Grf1qjebz5+rkh83DQ9Osbe6
-	6aGwe2v03ENwuwuJNRwyNR0H59A1dBuhVtHpa/7GRV9qotIEJ//O2eGlXVJtOCBbCVY0c5+eCcl
-	sx93ox+ymoZNjLRsH4D2HqsvGppPmrJCnCQJ8DwGEoU/PkWbO6iA82tMbEhrQKt03MGjkOpp3Xl
-	qhscxOspimy3XtvziflawhmFWY4cq9PK8kXxUhHmGD/n79fmhdOhMIdw7SH58ObCIqIIzUwEphh
-	HX+VG0Z11MzQJ6C/wjYKyV7jGsxUzvCow443yhqleUFlatlbhS9Yrxi
-X-Received: by 2002:a17:907:c308:b0:c28:ec7c:27ae with SMTP id a640c23a62f3a-c2ac5396f65mr1136646966b.25.1790633290384;
-        Mon, 28 Sep 2026 15:08:10 -0700 (PDT)
-Received: from localhost.localdomain ([2a00:801:793:68fd:c07a:9093:1956:b4bf])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2dbd3bcac3sm335878966b.73.2026.09.28.15.08.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 15:08:10 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: netdev@vger.kernel.org
-Cc: Andrew Lunn <andrew@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net-next] net: phy: qca83xx: read resolved QCA8337 link status
-Date: Tue, 29 Sep 2026 00:07:49 +0200
-Message-ID: <20260928220749.857-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eyOf9mY2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4D991F000FF;
+	Mon, 28 Sep 2026 22:18:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790633888;
+	bh=Y5njVTOmYr+X0yyc6IPDazh9pfwPlRrvD2EpwW79+6w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=eyOf9mY28UPgiDqEMYs96aVfi0epPdGLf4MrlL933PScyAN37kECV9Uda7IREN3UA
+	 azMmRZFdshY3RtnwcddPcE+aABaU9RZyfhfsF3bfOOfVFrWaNZWV7+VYFNS3+MiU0+
+	 mxXzNVa6dvUy+d76IKyWlRdranl43068/+9ScQfLBEiefTcicyTH7Id0vbz3PEkNBw
+	 hHZrUph3xJ85ZIlSJe4BBZkwCxowG05gNJ5bTt1ODvH5JIcdgRkiN3iUK2Abu8KLd5
+	 M6rXWMyrcerb6D4EZPjTAjZhRcv58MQuBh+1TxZTZuTk1hafBukUnctf5J0qdcSP5E
+	 Cg0ANitDfcpZA==
+Date: Mon, 28 Sep 2026 17:18:04 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>, 
+	Anandu Krishnan E <anandu.e@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Abel Vesa <abel.vesa@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v3 6/6] arm64: dts: qcom: Add initial support for Nord
+ Ride Embedded board
+Message-ID: <arrnd5wzif1ALS_z@zenbook>
+References: <20260920084920.2201418-1-shengchao.guo@oss.qualcomm.com>
+ <20260920084920.2201418-7-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260920084920.2201418-7-shengchao.guo@oss.qualcomm.com>
 
-Read QCA8337's vendor status on each autonegotiated link check so the
-reported speed matches the PHY after SmartSpeed changes negotiation.
-Keep link down while that status is unresolved or encodes a reserved
-speed; PHYLIB then notifies its consumers when valid status returns.
-Forced mode continues to use the generic BMCR result.
+On Sun, Sep 20, 2026 at 04:49:20PM +0800, Shawn Guo wrote:
+> From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+[..]
+> diff --git a/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts b/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
+> new file mode 100644
+> index 000000000000..09ee525764ef
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
+> @@ -0,0 +1,442 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+> +
+> +#include "nord-embedded.dtsi"
+> +#include "pmau0102-nord.dtsi"
+> +#include "pmm8650au-nord.dtsi"
+> +
+> +/ {
+> +	model = "Qualcomm Technologies, Inc. SA8797P Ride Embedded";
 
-Suggested-by: Andrew Lunn <andrew@lunn.ch>
-Signed-off-by: Yongzhao Chen <yongzhao.derek@gmail.com>
-Assisted-by: LLM
----
-Andrew suggested this in his review of RFC v3 4/5, where he noted that
-read_status should report the real speed from the vendor register.
-Thanks, Andrew. I mentioned this change in the same thread:
-https://lore.kernel.org/netdev/20260924234814.1734-1-yongzhao.derek@gmail.com/
+What is the actual name of this board?
 
-It does not depend on the qca8k series and applies to net-next on its own.
-
-Testing: a model test compiles this function with the real
-genphy_read_status(), phy_resolve_aneg_pause(), phy_read_status() and
-phy_check_link_status() and covers 10/100/1000 in both duplexes,
-unresolved and reserved speed codes, a speed change while the link
-stays up, forced mode, pause resolution and MDIO read errors. W=1
-builds for arm64 are clean. The same function is in my OpenWrt Linux
-6.18.52 build for a Redmi AX5400 (QCA8337), including the build used
-to test the at803x IPQ5018 fixes. I have not injected a real SmartSpeed
-downshift on a user port.
-
- drivers/net/phy/qcom/qca83xx.c | 49 ++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
-
-diff --git a/drivers/net/phy/qcom/qca83xx.c b/drivers/net/phy/qcom/qca83xx.c
-index bc70ed8efd8..b3f3183d4a4 100644
---- a/drivers/net/phy/qcom/qca83xx.c
-+++ b/drivers/net/phy/qcom/qca83xx.c
-@@ -92,6 +92,54 @@ static int qca83xx_probe(struct phy_device *phydev)
- 	return 0;
- }
- 
-+static int qca8337_read_status(struct phy_device *phydev)
-+{
-+	int ret, ss;
-+
-+	ret = genphy_read_status(phydev);
-+	if (ret)
-+		return ret;
-+	if (phydev->autoneg == AUTONEG_DISABLE)
-+		return 0;
-+
-+	phydev->speed = SPEED_UNKNOWN;
-+	phydev->duplex = DUPLEX_UNKNOWN;
-+	phydev->pause = false;
-+	phydev->asym_pause = false;
-+	if (!phydev->link)
-+		return 0;
-+
-+	/* SmartSpeed can make the actual speed differ from the advertised modes. */
-+	ss = phy_read(phydev, AT803X_SPECIFIC_STATUS);
-+	if (ss < 0)
-+		return ss;
-+	if (!(ss & AT803X_SS_SPEED_DUPLEX_RESOLVED)) {
-+		phydev->link = 0;
-+		return 0;
-+	}
-+
-+	switch ((ss & AT803X_SS_SPEED_MASK) >> 14) {
-+	case AT803X_SS_SPEED_10:
-+		phydev->speed = SPEED_10;
-+		break;
-+	case AT803X_SS_SPEED_100:
-+		phydev->speed = SPEED_100;
-+		break;
-+	case AT803X_SS_SPEED_1000:
-+		phydev->speed = SPEED_1000;
-+		break;
-+	default:
-+		phydev->link = 0;
-+		return 0;
-+	}
-+
-+	phydev->duplex = ss & AT803X_SS_DUPLEX ? DUPLEX_FULL : DUPLEX_HALF;
-+	if (phydev->autoneg == AUTONEG_ENABLE && phydev->autoneg_complete)
-+		phy_resolve_aneg_pause(phydev);
-+
-+	return 0;
-+}
-+
- static int qca83xx_config_init(struct phy_device *phydev)
- {
- 	u8 switch_revision;
-@@ -220,6 +268,7 @@ static struct phy_driver qca83xx_driver[] = {
- 	.flags			= PHY_IS_INTERNAL,
- 	.config_init		= qca83xx_config_init,
- 	.soft_reset		= genphy_soft_reset,
-+	.read_status		= qca8337_read_status,
- 	.get_sset_count		= qca83xx_get_sset_count,
- 	.get_strings		= qca83xx_get_strings,
- 	.get_stats		= qca83xx_get_stats,
-
-base-commit: 014d795c73837ea2339a4ea8e8f82c6e959b845d
--- 
-2.43.0
-
+Regards,
+Bjorn
