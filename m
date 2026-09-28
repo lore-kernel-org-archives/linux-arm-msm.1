@@ -1,75 +1,91 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBC164F4D0C;
-	Mon, 28 Sep 2026 19:49:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D67633E37C;
+	Mon, 28 Sep 2026 21:02:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790624968; cv=none; b=oHuEv3FODKaaCDiCgUojdHuQaNDu8TAduxN4ivDxDQmAvxtALgmQUwVsNBJx1TSWlP1JgRYlKgtIUclvsh63ixcB4y0+bY+iBpmdgYd8fqeEhqarlFtfXWrbp6n/25ufuohk9pHbLgO4hjVFOkOlk7dVZ63gxCBFX7eUbXTfz2A=
+	t=1790629365; cv=none; b=BRGfg2XDCIW2n9bLRxJyx+Ln/N/naPhUJzQK0UI+pfgXN0ZhyxCP09zuuIuWu4HJ9q3txHVPsIUJHjJO0gdZqhwsgHoSfljJZY5pbu49fErXhxWOlYPT9+P42JEQJ+W81d5RtBRGAfgPJjOJhcw77zydPRHbpGhNQtQc8ylUG9c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790624968; c=relaxed/simple;
-	bh=7o77pTnjeOSoxoDD5ssxk5NZ1eXZMFCj1o3WvZtRivA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rS7ADzookEoCChE8Bq+Y9zXM2QI2y5UjeMvdug1MDOhUTqc8UhNgmuTM4ERAkuLcpziiILGhlYNsbvgOk0p84oQf7VwvIss9dYO46OEk7Rvsa1s9siGdbLjm/eo5b/WgXXqCQN8/RSx40H/vc2wzOcEiHozW5osN6kF//h2ulEE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mqnckNh0; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790629365; c=relaxed/simple;
+	bh=YIBTHCMGPr7u/AIAx7AOxyZ4KyASKRxONHbPcn7COCE=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=XzjgB9uKL7DSOnRX+El+d90nSv3K7Xv6FFxKgtZhW4x/CkEVXiXLcD+VJBNaIIB0OIlH3HrM1sKXbEzG7Pcjk+pGP/WW1ABIlfKNzjQNG2dn9UoBsLAqvlQXYbZniRfVTpYm1zD6SlVFxb3IAKe/TDgjRevLQozlPvIllIzj1dQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zo//HJtk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mqnckNh0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6579A1F000FF;
-	Mon, 28 Sep 2026 19:49:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zo//HJtk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72D9C1F000FF;
+	Mon, 28 Sep 2026 21:02:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790624966;
-	bh=l7/YI7FRrETb/asOI5PeYj4PbFYIEGS/JQzmYoPYRog=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mqnckNh0hwVI289fKVflvhqdBpe2kttgW/bxIl2L1t2BcDLyN1GDuCrEMB6xAKF1P
-	 1qv9BiGL3s8+nZoOx3VujZ1BauU6Hg4+p4McJeeM64W+ABfgjuxSBqE58Q5/bxNG9Z
-	 Yev3SS/VGWarV0X2J/glPLF4orllSgQJWXzq0Wy9natgtUpYnVoybwGuluPIzUZ7W/
-	 f8IUecnnCFr03QkpbOvlEytL+0BAjtZFUl39ffvMpjQX8/YP9MSWrjIZr+RLZNV0RW
-	 mntE6GWv2Y/zAzdabVJXnv5tu37c5FyFQhncBjZ7q3QFm7771q/GooqeYsv6qleucp
-	 tl9Kssm5LZrng==
-Date: Mon, 28 Sep 2026 14:49:24 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>, mfd@lists.linux.dev,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Lee Jones <lee@kernel.org>, Oleg Keri <okerixx@gmail.com>,
-	devicetree@vger.kernel.org,
-	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 5/6] dt-bindings: mfd: pm8008: Make interrupts optional
-Message-ID: <179062496368.460012.2064781260995453767.robh@kernel.org>
-References: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
- <20260918-pm8010_i2c_support-v1-5-de33d78fad9d@oss.qualcomm.com>
+	s=k20260515; t=1790629364;
+	bh=HZ/WEzkBIU9A05VT2kgF1uov4xnMpyIeWcCto5V+UAM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=Zo//HJtk0ZRMBObe0pGjJ+7D/yPjufR5VbAEon0YR5/LnI4gJzxd+BoQtU7jAlGaO
+	 yCwER3GhPxEzoBVdqpVTCAsAtz9fF/Uh2cvPDcX4MhoNx3zJoliaLHPlC7coEaCrDK
+	 oppvm3CXYrOkUeJDBq8I0klvtz6J/EBIIyk9ewaSNF7wNYx0EO1AvphnK1ZCDv+zLJ
+	 3uvnji23o7GEtvX7mKoBdObHEEhPMRp5hf/KiR9oLOLHtrmD7TienIdFcThAbQtUbt
+	 5cJZbzgJaxWaiTxl9SkLIk71b3FRVBLB1ThLZ+1QKDCgGKiSDYp1ayQrMWfix850X0
+	 FuV1PTyR73VoQ==
+From: Mark Brown <broonie@kernel.org>
+To: Wentao Liang <vulab@iscas.ac.cn>
+Cc: lgirdwood@gmail.com, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, perex@perex.cz, 
+ srini@kernel.org, tiwai@suse.com, vkoul@kernel.org, stable@vger.kernel.org
+In-Reply-To: <20260917164853.2163184-1-vulab@iscas.ac.cn>
+References: <20260917164853.2163184-1-vulab@iscas.ac.cn>
+Subject: Re: [PATCH] ASoC: codecs: wcd9335: Fix SLIM interface device leak
+ in wcd9335_slim_status()
+Message-Id: <179060118005.139547.15844525180224544063.b4-ty@b4>
+Date: Mon, 28 Sep 2026 14:13:00 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260918-pm8010_i2c_support-v1-5-de33d78fad9d@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1174; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=YIBTHCMGPr7u/AIAx7AOxyZ4KyASKRxONHbPcn7COCE=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqutXwQWqY68SZP5CED+FTQSEMkzIdSUM1Sl5Eo
+ lCsZIEF6TaJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCarrV8AAKCRAk1otyXVSH
+ 0CBAB/99HDxwcX0HGWcGraeAByZixlcAeb6lkQi2HGG/xbxP2ZLwRCv7gtr5wUPCECd4TDqTc87
+ ZB9ah035VqSO6XlxujIKAug+ol/Gc6B6z1yyTf5dL4EiYPuxreX7I6Misd9wfwNIhCHhGkcFF3e
+ PjzwHBkN0ckL04HKdoT8zNxiERPAp5dYi8RwO0QAjHet994kjAygemTxzS4zpZ+FXzMc6h6x/9x
+ Y60dbh7z8V1DF3wr6aANU+D/ZfV3Ai9QhNGaVBl9ORyxANqTY9dbmv7XMU0MGqQcwBJvFvR6oI7
+ aESgtxsOmCkzjP8kr+lAoRxFL1y+VHhQMqKINnxv0ld+H1Gs
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
+On Thu, 17 Sep 2026 16:48:53 +0000, Wentao Liang wrote:
+> ASoC: codecs: wcd9335: Fix SLIM interface device leak in wcd9335_slim_status()
 
-On Fri, 18 Sep 2026 22:12:49 +0530, Jishnu Prakash wrote:
-> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> Some designs integrate the PMIC with the interrupt pin left
-> unconnected, deliberately. That of course compromises some
-> functionality, but the core function of programming the voltage
-> regulators remains there.
-> 
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Co-developed-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-> ---
->  Documentation/devicetree/bindings/mfd/qcom,pm8008.yaml | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
+Applied to
 
-Acked-by: Rob Herring (Arm) <robh@kernel.org>
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
+
+Thanks!
+
+[1/1] ASoC: codecs: wcd9335: Fix SLIM interface device leak in wcd9335_slim_status()
+      https://git.kernel.org/broonie/sound/c/082723fee626
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
 
