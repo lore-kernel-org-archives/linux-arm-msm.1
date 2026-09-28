@@ -1,203 +1,125 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 666BB4E9C1D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:41:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E38E3815DF;
+	Mon, 28 Sep 2026 23:28:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790635309; cv=none; b=mccp36XeSGjC4tSqWUKEglfzLPCn6QzG+DkXmQf43Z0gPJxhv92mVGFxZW13+LFXaLYvrb1croI/Hn0AzXgpYb/Y1vs7qDISkSqCCRtt3q29H38gJuIOk/qkcY8Qc2pPx0bLv7vp4I6rbzmeJzoRK+eNhziSP3ktSZJNZNXJlbk=
+	t=1790638104; cv=none; b=WnRCQ4ciUWMXTxic0FFI5t0tbvzcaWHE5l3ozCBW78WRdD3ZbqY2+L2IGDfgsqypt5MrwRerWLHuxNTpUOB4UQ4UnzrKzyYwFPDzeX2HDwShn9Dw7+D3lVPmWvq+LyHhHFj7wAtREJEJ1nrgN48LUVa3CpnGbgAXK4cvKcH9970=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790635309; c=relaxed/simple;
-	bh=Y7TrbY07MB1wxA/bsFezV+7VtGSYdawE26S7EDf+DDQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eDd7+EIVRQyMTcZfM6pjEMK4M1EppCu1R9v+RB3frVWheQhfA9nFoT+X7GY72D0lMvqpWKOl8Y08K4EFF/pr/jKbSh0RpTPv/2nLcdiaCrWCt7JqKO4TJVFoCyokId1e5jQ1UX6UudGVBs+zA6eqAdn7jos7/pH8Pcit9KeAnJo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ey0VdUVh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NE8HRNk7; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790638104; c=relaxed/simple;
+	bh=YutVHJG0sZy7YrGij8d8zLfjEvsbc5uRWluQnIWAHEo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PWOtWekp3NpIKZddgxhuvqIn2v9S7fooQ0UZ2GVuIS1FRrK2bT6i2ajFSv2Qybo853AgxTSUY3g+fF8hBVQySYBOAt0p/po6GTWQbNz+yqy4IAeBWjgFeZ+XKHKdWPfWiUwNMmnab+TJVK8Fj7uzQTVo5eG+KR0b+ZHKlYJdS6E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SVpgVMkQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ey0VdUVh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NE8HRNk7"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68SLTZRW1282944
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:41:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lc0k+BB+B+pR9YWQ1iPcOnfiXQnv9hmfa3Jo581awKM=; b=ey0VdUVhTiQujIvu
-	rGOGRtg+9yJrmlcbf6Hr5HkLn11O5bp17i7/sX4iSRzZ0+jo9q6CHcogLe/AbW7Y
-	YBDGBKgqvxLsuaJaTiGaSi/2BF7AI3Q5y7EmQJQ03N4JkCHVRDkNLbFOTF/vnE1a
-	l1A1jz7V85ITb8dqyS18HxGllsQOwBscxmCaYZsWjbJckw5MSyqJy/XRbbSm+zjb
-	gReSYLUqJEIaGye2KK2IrV+RukChEpEPE1yJoi9P8kcn/R3rY9dyLX9g1Gx+rGrz
-	RqQ2x3uFs/VocJJ0DFcYNImWhNg8XAK4wer8zM8A2umryL5K/gsJMkC9psn8vfYD
-	5HtOTQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyqx3ajjh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:41:47 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-30bcb065bfdso6288815eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 15:41:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790635307; x=1791240107; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lc0k+BB+B+pR9YWQ1iPcOnfiXQnv9hmfa3Jo581awKM=;
-        b=NE8HRNk7vbRjwdtkKVZmF+gv/LeR5ZLYEe5Ae29Or77jM4n/XudyjW65cKxIqg0mxM
-         CyWsQHFvpwa7vh3h8rZQB2E8HFoBh/QB0zgStTIsPbxwXJfHG1kelP/AM4t14ZWWIhuf
-         IA3LR+r18LNo8lf4XXe1cOI1eZvA21D4Fuuir+R3gQz8jZtjniYhc1pR14cclQ6Ganu1
-         bmZhHh4fqYSMpFRgXh95yhNM/WI3Fr3oGvXfAZ2Cp5vr6OkVXitZr7+NpkKh8l9lwpuW
-         ZvSVYd6tOoFsH5knG7+YsyAj4qeFtFkHyNoQ99H8MZm3M53o4FeYleoDeJLi+dcd+qDY
-         KLZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790635307; x=1791240107;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lc0k+BB+B+pR9YWQ1iPcOnfiXQnv9hmfa3Jo581awKM=;
-        b=Q9K9udxQR9JhO9vjFlquZuMzN7yhtHxBGIHjn6lHXgZaF6Ky732uY15GZiUKaO90gX
-         ozbdgwjL8DloCYj0Ww9YhxG2h0AUS3gT44HnogObUoyhIeCFr3G8F08u7SVhdvfp/v1j
-         yFWbVt5o69+CIoRoSNqDP4dpkd6oMJjQfkoZ0ga+flbMN6nIfl2+8ERhRs7xIvfVuC0e
-         QOYMHmq9tMz5OKFPMCCzS2HFJyCdtxGv1jCfFVAnvCTpUQqNW5uMFuXxmM4NV1fZkeL/
-         dNyYXenLZA2j5/Y4LAf5uFJ38Mg7ZF41sHfzgX6cFPWG9WZQiu1q64Jvoa/1EVkpcc/A
-         Oi6w==
-X-Forwarded-Encrypted: i=1; AKwUvByJ+zkruVW32KVk2l9OQTCkfutCxtHDxBKRNSFiAPZkRrKeX241LM4nAcRoHPGrZpMef0SOEvM//Pf0xjzb@vger.kernel.org
-X-Gm-Message-State: AFq9FYKH1lfcbSEkg6yaq7xbs0rCWKh7pnWTaupqC/RTzQZFvpsINekb
-	4QK3qqPPoJzzmQYOtOD53ixRR+1cpYhpZlaKh8xLa+A8Lm8uGScerNs3AYCxKDnx2dgOm/D6aPJ
-	09kYa5xFm4L++4SLvXCKPWF+B4G1XxYUbH2FxxFuCu+PStUbaFnY2IwZ4D5TVHI8mDcuk
-X-Gm-Gg: AYBFou0X/hdU1wMvF7NwUYqWh2x9BM02EllBEMMgG9OScYnkYmCLAvGJ4DJ8LPfD02T
-	+E9IY16TpfwuY9kjmSIEh93GfE3og6MeQ5klSefVMf8+4hJp2kJswSbJ77JP/dMheIX+K/woGEd
-	V8FLMUl2Q3lXR30n3xob5zsO/6dqZ5dCbSCrsFlvymE3Pqd2uttNEnI0Lmt0suoQSQmTjjzOc2x
-	C1sSQ6S8eWc6/nBMiMvMbq1X6/4Vtchue8hGlwnIeeQ3aVLKxBYzIC6kCGonnNGcUDpQhYTH14+
-	EYRcgEG2w986wXDgOS+2hvbzQQImlCD0Z+foZEDUQwMXIyy72s+CCVmcf4kd09FTfty67e877M9
-	uecmPtfK20+ruL3wfgssjyv3xwwGU8PBuS1GCwzTqP6ZbwWDyMzTsG8+yWPtIxcE=
-X-Received: by 2002:a05:7301:6781:b0:341:a4ed:d910 with SMTP id 5a478bee46e88-3426fcc826cmr14033353eec.7.1790635306790;
-        Mon, 28 Sep 2026 15:41:46 -0700 (PDT)
-X-Received: by 2002:a05:7301:6781:b0:341:a4ed:d910 with SMTP id 5a478bee46e88-3426fcc826cmr14033328eec.7.1790635306198;
-        Mon, 28 Sep 2026 15:41:46 -0700 (PDT)
-Received: from [10.71.40.138] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-341459234a1sm29893248eec.24.2026.09.28.15.41.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 28 Sep 2026 15:41:45 -0700 (PDT)
-Message-ID: <db2e1a67-4b15-4bec-ab08-1a22457b52ba@oss.qualcomm.com>
-Date: Mon, 28 Sep 2026 15:41:44 -0700
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SVpgVMkQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 770821F000FF;
+	Mon, 28 Sep 2026 23:28:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790638103;
+	bh=YCK46affos81d8aICOHNKYT/US3ZEkCXaLZboaoPCAQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SVpgVMkQqjporxpG0TbdmbxYZEdDwbkX8AodyOeL2/pn0nCLsLgLEUURkeCQv3c94
+	 N6Lp+MTCphYa8S2oNLJts1/RUcW57tIzgD/i4FGE0PbALfE0AvSushgXBydWZEh0iW
+	 f+2Dgy04YrxY5Bl85Xh8mUWFwW0doeDFxXFQoq2Rp8PDNL0ehrdXMY5HSL1coL1IMj
+	 LOv1RvybgDz89UX4VqBCTTxqU0mcnC91/C4FQuJL6mY+5bDWyPm7xNnH22lmf1xpON
+	 VWyPqHzXOEjy6nPg4luz4i/+uhoR0OhjitZ36w1OyAc6k5QSboYCcd2z071zg0dyQr
+	 pNoLTa3uSEPZg==
+Date: Tue, 29 Sep 2026 01:28:20 +0200
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Robert Foss <rfoss@kernel.org>, 
+	Wolfram Sang <wsa+renesas@sang-engineering.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Luca Weiss <luca@lucaweiss.eu>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, vladimir.zapolskiy@linaro.org, konradybcio@kernel.org, 
+	stephan.gerhold@linaro.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v5 5/5] i2c: qcom-cci: Enforce the required CCI clock rate
+Message-ID: <arrymkYqBOzLrgnV@zenone.zhora.eu>
+References: <20260927-cci-clk-fix-v5-0-4cd498559ae5@oss.qualcomm.com>
+ <20260927-cci-clk-fix-v5-5-4cd498559ae5@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: stmmac: dwxgmac2: enable L2 split header support
-To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-Cc: Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S . Miller"
- <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-        Hongmei Xu <hongmei.xu@oss.qualcomm.com>,
-        Abhishek Chauhan <abhishek.chauhan@oss.qualcomm.com>,
-        Sarosh Hasan <sarosh.hasan@oss.qualcomm.com>
-References: <20260922232116.889630-1-sagar.cheluvegowda@oss.qualcomm.com>
- <aro7Yijt_d-KRD0Y@lore-desk>
-Content-Language: en-US
-From: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
-In-Reply-To: <aro7Yijt_d-KRD0Y@lore-desk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA5MCBTYWx0ZWRfXweSqfHLygbki
- qPIYIYq8zx0SDZiInez1MVusC/8QrhhIKi6iTgpYKGFWTiUGZcZSJiDL/tm0JAduB0Apxw3waoF
- RK15TWOk/NO1afTXcqb8bhoZDVpLU/MeI8dL7hnMRuzwqi9TP0deXyFpDzAPzM7/g3wCl7sA+5v
- Z25w3Cz68K4CzSq1Ha39bpoCLeuQpdt5vJod3IltpT9jI03cTNP7rWncGRtw5tkgC7tZJtEo6Ck
- J/b289tNs8lWd+nfsTC6MR47XR/1e/9Z1s2/DVderVzvbJ6omjFhaAjZWmjO3oedHw8PHPRoxZp
- esnl2XK59VuW2wfNpX9hysd7ooEV9BMFTJN4VgyFTtXZFkI/ELVlpucx4+eE7x2EMeRKDFswaJO
- meFq9H2zQaWavFhMysf2MKSL0hvVwqhV5TYwgdcWvbdOUN4aKqOePtvCnIUWHWoqhesvKPIBIa7
- ViLDIxrMdHLenL35xDA==
-X-Authority-Analysis: v=2.4 cv=f7jdl+yM c=1 sm=1 tr=0 ts=6abaed2b cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=IMd6QsT5PRD0yrB2h3IA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-ORIG-GUID: yvuRmsI1RZUA9kiNzuvtqWPQozKUyi4x
-X-Proofpoint-GUID: yvuRmsI1RZUA9kiNzuvtqWPQozKUyi4x
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA5MCBTYWx0ZWRfXzaHU9aJsiVzb
- tHc9+oEDWtOdwRrp3cmvVhbbukiZ5k/CIcEz6Iw8HEOas8G9jlOglsqo9aEqd9hpRsDug/E+IbT
- xFdr2/G5KjkzjG5AF9vdiaISu4NBcDc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-28_06,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609280090
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260927-cci-clk-fix-v5-5-4cd498559ae5@oss.qualcomm.com>
 
-Hi Lorenzo,
+Hi Loic,
 
-Thanks for the review.
+...
 
-> Hi Sagar,
->
-> are we missing to set dma_cap->sphen for dwxgmac2?
+> @@ -318,7 +319,7 @@ static const struct hw_params *cci_get_hw_params(struct cci *cci, int mode)
+>  	unsigned long rate = clk_get_rate(cci->cci_clk);
+>  	int ri = cci_clk_rate_idx(rate);
+>  
+> -	if (ri >= 0 && mode <= cci->data->max_mode && cci_hw_params[ri][mode].thigh)
+> +	if (ri >= 0 && mode <= cci->data->max_mode)
 
-No, that's already set — dwxgmac2_dma.c reads it from the HW_FEATURE1
-register (dma_cap->sphen = (hw_cap & XGMAC_HWFEAT_SPHEN) >> 17;),
-predates this patch and is unrelated to the sequence added here.
+why are you removing the .thigh check here?
 
-> +#define XGMAC_EXT_CFG0_VPRE		BIT(8)
-> +#define XGMAC_EXT_CFG1			0x00000144
-> +#define XGMAC_CONFIG1_SAVE_EN		BIT(24)
-> +#define XGMAC_CONFIG1_SPLM(v)		FIELD_PREP(GENMASK(9, 8), v)
-> I guess it would be better to define a mask for XGMAC_CONFIG1_SPLM.
+>  		return &cci_hw_params[ri][mode];
+>  
+>  	return NULL;
 
-Agreed, will send a v2 with:
-    #define XGMAC_CONFIG1_SPLM_MASK        GENMASK(9, 8)
-    #define XGMAC_CONFIG1_SPLM(v)        FIELD_PREP(XGMAC_CONFIG1_SPLM_MASK, v)
+...
+
+> +static int cci_set_core_rate(struct cci *cci)
+> +{
+> +	struct device *dev = cci->dev;
+> +	unsigned long rate;
+> +	int ret;
+> +
+> +	ret = cci_get_required_rate(cci, &rate);
+> +	if (ret) {
+> +		dev_err(dev, "no CCI clock rate satisfies all masters\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = dev_pm_opp_set_rate(dev, rate);
+> +	if (ret) {
+> +		dev_warn(dev, "CCI clock could not be set to %lu Hz\n", rate);
+> +		return ret;
+> +	}
+> +
+> +	/*
+> +	 * Sanity: The hw_params timings are only valid at the exact
+> +	 * expected rate, verify what landed on the hardware.
+> +	 */
+> +	if (clk_get_rate(cci->cci_clk) != rate)
+> +		dev_warn(dev, "CCI clock is not at expected %lu Hz\n", rate);
+> +
+> +	return 0;
+> +}
+> +
+>  static int __maybe_unused cci_suspend_runtime(struct device *dev)
+>  {
+>  	struct cci *cci = dev_get_drvdata(dev);
+> @@ -678,6 +739,19 @@ static int cci_probe(struct platform_device *pdev)
+>  		return dev_err_probe(dev, PTR_ERR(cci->cci_clk),
+>  				     "failed to get CCI clock\n");
+>  
+> +	ret = devm_pm_opp_set_clkname(dev, "cci");
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to set CCI OPP clk\n");
+> +
+> +	/* OPP table is optional */
+> +	ret = devm_pm_opp_of_add_table(dev);
+> +	if (ret && ret != -ENODEV)
+> +		return dev_err_probe(dev, ret, "failed to add OPP table\n");
+> +
+> +	ret = cci_set_core_rate(cci);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to set CCI clock rate\n");
+
+The error logging is a bit messed up here: you either print here
+or in cci_set_core_rate(). Besides why is a warning there and an
+error here? I would just print error in cci_set_core_rate() and
+return here.
+
+Andi
 
 > +
-> +	/* when FD=1 and LD=0, HL is RDES2[9:0] */
-> +	if (!(rdes3 & XGMAC_RDES3_LD)) {
-> +		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> If XGMAC_RDES3_L34T is not defined on non-last descriptor, is it fine to use it
-> here? IIUC XGMAC_RDES2_HL depends on XGMAC_RDES3_L34T, right?
-
-The data book has the following table for this (Header Length
-Availability in RDES2):
-    Value of FD   Value of LD   Header Length (HL) Availability in RDES2
-    0             1             HL not available
-    1             0             HL is [9:0]
-    1             1             - IP packets, HL is [9:0]
-                                 - Non-IP packets, HL is [9:2]
-
-So when FD=1,LD=0 the full RDES2[9:0] is valid regardless of packet
-type; the L34T/L2T-gated split only applies when FD=1,LD=1
-(single-descriptor packet). So the non-last-descriptor branch
-deliberately doesn't consult L34T at all. This function is also only
-ever called on the first descriptor (dwxgmac2_get_rx_header_len() is
-invoked from stmmac_rx_buf1_len() only when len == 0), so that
-precondition holds at the call site too.
-
-Will send v2 with the SPLM mask fix.
-
->> +		return;
->> +	}
->> +
->> +	if (rdes3 & XGMAC_RDES3_L34T)
->>  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
->> +	else if (rdes3 & XGMAC_RDES3_L2T)
->> +		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
->>  }
->>  
-
-Regards,
-Sagar
-
