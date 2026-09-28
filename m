@@ -1,228 +1,91 @@
-Received: from PNZPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11021105.outbound.protection.outlook.com [40.107.51.105])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej2-f42.google.com (mail-ej2-f42.google.com [74.125.228.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F1DD49AA56;
-	Mon, 28 Sep 2026 10:23:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.51.105
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790590988; cv=fail; b=ib1PsbO1WKXKYgNy/YICNrZaXNP1kM0vdDnGbDr5/RbgBZ7bDwFfV1WIWuv2Qi+siTLXycZ2GwYURTiFFeoLBCYv2IBv6u118/Fcdp/U4vdfVybn8t7+/bUZQOIPZrLTrAruDU70jQHGRA0Vn8frl9I2E5qvrHpWRrXweq6dfTI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790590988; c=relaxed/simple;
-	bh=Oo7rxCLCUKM5Feyknh5ybAj41e1uZvWnI/ju2hMhTqM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=BoNF2IXsQ5fxyyk1bo5LYzJQab6DWDR7hAj5Vy3LAenY0bSNosdCp1lgbW2sTVIKrdaf4hQTB7MLYVaBNhNMQvG82wKjlNTbyq+U+ZycTKcpG0YETCNxHpxdbmvQCfm6UEzD2SOOjXChoQZPYPQE7CHK5BmeaE5HAj9i75Judp4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=40.107.51.105
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J3v6y4vAAHBcF+2v+zIjuMZJButZuWhuDVNcafa0RQypR/p3d3nveNm7++LQT7DNGvoKyQiKGNU9d7fouVGmnlI+uY/fQ7iiWOy8AywpW345v4gu+D1XRqd4dBCU9m8RrsPLe0XjN5hzhvfVBfydlhHViHuCqk5NqZi4dIcar4yHKsP9jKt8BdpNSVbchnq9eHtVceMUb21H+Yn+S/vWInyScYnH5LqgWGYC8pQSbqAZ+lDp8qrnWn8EbBXSWJ9JhRCJwqG81GJb1NCdqXZFUzm91x1vgdjEMA3PjipQjduP8XNkqhEDrym+Ak2Q8BfwK6yKnr9AyPgan29cntvLXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/SKf5W5i1EhiZsuWkDMijEPNiuBJuxK2EntiQFy9/ek=;
- b=Yx+EtiLK1SYwGBWYeWvyhse4s63d/xGIdAHB9xq05mq8mT5eKHCIKQGPFR+7QP86dQNz8XWKk6RODkIDfGI9lA6ZMYb1GD4PdpNqFRGdbotYN+AQRNeRc3z50yx47HdOwYAXVZBWl7GrHF0Rk/rTMmVcTP1gYdQ5ZGpiqm1HADCdp93/ZIpeZ3pVr1hx0w0QSlMBtPhumrMIZa7XeKoTKhO3DyB6PhL7zlkbWMcv4yrG0rxvzNrlOyPBq1oEj6CMjqS38E8ZNoSPPgrvJQO6PoyglV/R3dbvGkZX/6scqUxMl7Dk6WrE0l0VRw2ESFY/NSRQ2h5FXUBH2VTt2pofYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
- header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ebytelogic.com;
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
- by MAUP287MB6171.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:226::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Mon, 28 Sep
- 2026 10:23:01 +0000
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 10:23:01 +0000
-From: Hitesh Patel <hitesh@ebytelogic.com>
-To: linux-media@vger.kernel.org
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	ravi@ebytelogic.com,
-	Hitesh Patel <hitesh@ebytelogic.com>
-Subject: [PATCH v4 5/5] media: qcom: camss: Create the source to CSIPHY link per endpoint
-Date: Mon, 28 Sep 2026 15:52:37 +0530
-Message-ID: <20260928102237.533341-6-hitesh@ebytelogic.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928102237.533341-1-hitesh@ebytelogic.com>
-References: <20260928102237.533341-1-hitesh@ebytelogic.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PN4P287CA0060.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c01:270::6) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c04:1::97)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEC3049D5A0
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 10:23:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.170
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790591005; cv=none; b=LnXUhVlvJkUh+lE8DMN3kZKJOqkfLI0ry0l6F5kLhMj7+MqlcbBJwQhY1eD9LXsthi+rQKepwz+dggd3rBumpm78/wvYDo34A6h8qIsm6NXFCfMHAyCNSaYchQIA0daGWR/qdFyMOHXVVnGpY5o3cp4GQfPTsEm+FKLAopql5nM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790591005; c=relaxed/simple;
+	bh=Zfuo4MY7PIOTujR94JDa5G6M8PRZiDvEWeZJmTK8f5A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GWi2S2G/r9vnGX/tGNT7MEDSNfhjxw36yWf0Ga8ULPGDsmIoTZ3Qtgs9MWRJ/bbo5uM9s7fujuk974SJN7ORW9HoCDWl6YzZ/P5nl6C+TNmkpc22D6vhGd9cQ0qsqsXF9uqpyOOPWuzokONhe09yRCCr4phOqA52mAHfIlNBqLA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=U9uEngRt; arc=none smtp.client-ip=74.125.228.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="U9uEngRt"
+Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2bf3cc16baso222286366b.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 03:23:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=imd-tec.com; s=google; t=1790591002; x=1791195802; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Zfuo4MY7PIOTujR94JDa5G6M8PRZiDvEWeZJmTK8f5A=;
+        b=U9uEngRtKkY7mvafN702Hdxj/4YmhjXHyIa9/ozX8gTOUxadhNawGBBGt7439H4q0C
+         Pdano1VUy0D8dwIUBF64yO/J8SKR/agU3awPsNd23uf/BOAGVQLppqwJOFbTIwVVYkZr
+         8BbOKItVRuNjXPCZHyJDWltVBjrf2gs5OuFrMqLKZTxQn0plfbFTNzOiT/1JuVCpKHJL
+         poU1C2dI6TMlzywDaBUdXvFTRvqXZhMuZmoPphDKQStpHxbcYJHInMRY2ueR/84prwf0
+         p4iz/NIZEzEAvRSnFj8B20y5tcJrSucZhH/gyyOIOb2OEJ8ki1L89NMCK0asBnZwXdla
+         IlLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790591002; x=1791195802;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Zfuo4MY7PIOTujR94JDa5G6M8PRZiDvEWeZJmTK8f5A=;
+        b=crVsItu8AIBbvP2XSTdDurOvOAuoAC0RwB1QCe/niMH8hMQ7sUNwiB88N6XceS0Y5x
+         3+BdAR48ZIDcj4xzKrW/f/59vcQ9MSpQnakr2v7/lXnH5U5VV5b0hJkb9RWizD2HJLmv
+         uCiLsTQmA4GjKQ0Yuf4X5z86xLIldRqBSrhdm/K/e2ThRl6FWHb1syyI3Yf4uZx/H8Dc
+         7wO9f9uaUzIOlI370J0QhOfZMEmVFSvmvWynXz0XT0N0skFf/jN9ioQjBHrFtwjewHDQ
+         SfdFoNqzUal97Wd8zKvPTwUbsyVFSVhDxpy8Wdd3Ci+N5FPsCcfBuNAFWtyBz8661xu8
+         yZDA==
+X-Forwarded-Encrypted: i=1; AKwUvBx8o+cwPoZOR2Z3M5Q6Xs38ySJxRbDP+0wspkUXdbvZCf+S9TKvyv3sfaM+OZvv1LKr0uTrTM9KVX5hj0jg@vger.kernel.org
+X-Gm-Message-State: AFuF++mMESvNzYlagQx0o8pN6uFOXBK12SsHvpOJZw+PuMnkoikhCVGm
+	NhMCe/F3IuD1uHfv0hJwyfqVUz1T1xImKgxskjvJEc4F209b4M82w4oXYPCnVbehGhA=
+X-Gm-Gg: AYBFou1hFOyrH+Go6TKm37aVC0HDGlgPUZ9+2byU8Bq3C32ppYW9FrOamrf7O0ReznV
+	ZNrtLITjUhmF1a8v+MZGmtwTwHbZXXxoHMz04cUNYELzn+qymn8ZgUjDGRvFwb6LjlswGIG6GBi
+	fOZmIL2vMDi+IQSDmfys9w+blr0Jw91FqenZaYTm2BWF+VD6Tnwynj64rXNbkAj/pK4dZU3HRp0
+	dmGHg2aEWsXl9zHPKYwzJh1pilQ1GAhT8OeOgS62c56SAfku4bChQDtJQSHgseUM3kdsYvJ9csi
+	6hlCzFN1t7rXuq+om0DRN9TJyHo5cadkDUXHBBWyKwBE3jotIFrpLBZbItsnRq17du5pAuH/FKz
+	ceOvhMOc278tc+8j/sKDqF48WuaG4YhebGFPBkp46pxb3+pjhO/MEMwq+L1RyE4qkl/ecXvYj0B
+	cEJi9ml/qlWk4xKaT24/pTMRG9upCEtoehqnIrcwv4p/VBrfniQ8X6cmJdNte5VcExQk3umpm4z
+	exTfzeRMiXOC9X623H+CHlEeRDjYD1Hk33qVfBDeSL9jUKXOgQnCUPOjAerKjpeMcTPKzbBVPoW
+	cFCHOgc2s/oFtH5IBnLlY5N0CHuOWJ1TsFUUxnrs
+X-Received: by 2002:a17:907:3895:b0:c26:1649:47a5 with SMTP id a640c23a62f3a-c2ac53964cemr968869466b.27.1790591002152;
+        Mon, 28 Sep 2026 03:23:22 -0700 (PDT)
+Received: from will-Legion-Slim-5-16APH8 ([82.71.135.85])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae757ade3sm450982266b.29.2026.09.28.03.23.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Sep 2026 03:23:21 -0700 (PDT)
+Date: Mon, 28 Sep 2026 11:23:19 +0100
+From: William Bright <william.bright@imd-tec.com>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v5 0/4] arm64: dts: qcom: Add IMDT QCS8550 SBC
+Message-ID: <arpAF3tYlxKw9hjj@will-Legion-Slim-5-16APH8>
+References: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MAUP287MB6171:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7b2a8a64-d981-4229-86c7-08df1d4a79cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|52116014|376014|10070799003|23010399003|1800799024|3023799007|10067099003|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	V2OfTAtGCsBevcN+A+nDqOGpoyvWzHs/2urzVhow34o48GyuS/I3dJ7GKVwUklJ72TnoQq10SbPPn+IlEZDpSvhsbf7tTHEkTZ6SVSKndegX6b2N13+sh02dVkMLKBtuKZXasPetf+2TCPWtt8NWPT7gAqhJtokQkhCbAqSiCyReSPicdmExV5BxV1IKXSfK6rZJgkfAnzG+4z4xn3KwqTHVAxMiSP6UJ70RlegcsZrpPQw5knAgQpmc3z9CdimWby8tEiVmodHTV1XpvWis8Pw111urtWGWmIvng2DpVPBZNNhpJ9+2f+4IJAYzIr0B6B4ihYoQyQv/0simXWId7033XC96kjMqWuVzArg5gmCXfaQbuypxVO7rZqd+xYlxQLVfNadDVjSKs/bhd9sYcOkA9kGHc+lfgMmh90Kxw4Q/z1wVk7gwysmEQCkxIO0VtIiXW6ge2h7uLj8QV/E663CqmjCM1rnCbJuC4yR+3mgIcaFRCvCReus43xOTG8ry+Aa0+F7qgffvRUc//qN2Wv7mj7ISj1RqmWN7A81MFncX6u53CIYRMQHWzQ03vnXxxup/fqUlAJIATjXq+bklqF6c0O9avn6qfwlQdmrHtMekgLq3hO/3NwG3CeEpT0fWgVe+vqi1nGTtIKSb1KX5OxL6I228QgDJS0VLiq1b+RM=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(10070799003)(23010399003)(1800799024)(3023799007)(10067099003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?gZ22UPuv4L7cq/mG9h8+1HkbAuacigX8v3Dp3z0lh+uFLKoJ7eo3pmmIiTfp?=
- =?us-ascii?Q?H6uBjDOFmEJqUugdzNyn3fd/r/FnzOdtq1H0tSbXw/SViRLQ/syQ6vAI6gHJ?=
- =?us-ascii?Q?AEtl+JyT8UKQ0DREnMH5Kgakjpg7oiIlbIH6RbmTAJAbFl3SguWEuC4gt7se?=
- =?us-ascii?Q?w9pFtXjkaHJbBpeb6gq3S0jxqMem9PrS1P4LEa3s9OVWbnlTuIX8P7wT0Qs0?=
- =?us-ascii?Q?/N69xtrK+hGDHbTf6MYwaJc8LNOuschJr2gz9UKrbPJpZ+a8tyNdnYJNDVjW?=
- =?us-ascii?Q?por8IXG7KElTMiI412L3uHSje92MoIM6LMeg2E6YnhRuHCp3dhtYEmoGxeyy?=
- =?us-ascii?Q?MiEPoCrvSCeIqpwjlDRLTz9ZLpUxIWZvGv91SVBoIXipIpNhL/TlCjuWtaGJ?=
- =?us-ascii?Q?tRupQvwVJr+6CyzbojHi9/FebU/zpozjVvoUujtWIXLsD/e2GI6gRR2/rRQG?=
- =?us-ascii?Q?4KfYdbg/j1ZqSzqE0krnaLQJ5rth/PWBQHDaYfu0Vo1UKfkcTdHDwttBcWFl?=
- =?us-ascii?Q?PWEvgis9JjXNewd2kXynT6y7ZYqcrOGGsrysaaTl2tDTJzJa0Vgys8ig9CYl?=
- =?us-ascii?Q?87idS78ifJBVeLgAhbUNptX1MvGZSomcB9Tv5bEnyFmYGzmj+ImBYdFmZpvR?=
- =?us-ascii?Q?eppOhSQr8+lN4/5rZv0mSCPyW+5BIbOkWIsdDIwA+OcpssvI9dE1qxO+zGLi?=
- =?us-ascii?Q?2xEi9S0Lvcbo+J5/X+/XXpIcVsnUJMZQgQlThJ/iYHLnpfm8qTdIBIY3/C8W?=
- =?us-ascii?Q?DfgYCkSBTzvGPcuzIhRfyEJypMC+QfJIU0+g2X3u+2JfZHH51sImLF4H2uOS?=
- =?us-ascii?Q?YxiefaqBT0sq/UOIRVGWJaVhPzmi3F7j82rQtP3W+SGAGgDE6TkvjBn8pyjr?=
- =?us-ascii?Q?js8NQReaOQiVDy4zlYMRD6sfju3I7D6SAtKmO5zrLYCW+KE13fLVeSnXBsM3?=
- =?us-ascii?Q?ZthW9pHeyJ8OHZaCd3RvxYkpoEtvpN5abXlt6X7a+YBDe0T2/Tt1ANG/UGp9?=
- =?us-ascii?Q?kqyUkZohvV0HInNlgUDEsK7icsFCDqjCH1SJaQfDXU8MURqb1knXs+aYmsB6?=
- =?us-ascii?Q?wfyA+GTZolW7y4Ob2ko9FQGIdGeFHmP0DdJBcnGtycu9eIId6qMcl2tsGfBf?=
- =?us-ascii?Q?0kAamjLSlICmxTgnS9gOZZYuzEBfWecMjCllnx1q5KWGuucH6SU8hPhbsAjK?=
- =?us-ascii?Q?m2tn0hMXI4t2NV02dX/AcF2yrF/EmfEBjXmEwqnhD/CkKipgFUlPvR0cL+lg?=
- =?us-ascii?Q?zKsy4We9y26h9n5jbHXVFvvfBaIBmpBBFFyGe7dbbpzZWH55zI3lfqQ4+x7c?=
- =?us-ascii?Q?3zsPj7VwcMgmy/K1z8Gt6IDiPu6LK/gyE7owgt/E1E6+8coqyrwMWjpKtGWI?=
- =?us-ascii?Q?3sd8d5hg0VIKwbTYK9H/KXtijscI7ogTxC84/buRBLUTyk8DKj7l2cUWgOd4?=
- =?us-ascii?Q?vGNndmQTScUHoFdIY0SOd7KmsgvlIj6Ib7OUJ63AFJMXbf6QauHjswBIju5j?=
- =?us-ascii?Q?TuI2KZOB7rEnA590e3/PL1pFut9XibM44cVgYeIpgC7nq8KJAs81HFLRedzq?=
- =?us-ascii?Q?2ehrwnJ1K21jx5SP04SQzB16anTFwJdtYpMbPrLGQ4OCzbohNK9ke/+JSiCc?=
- =?us-ascii?Q?YZcZ02crvVHlUpzTp6ilq4BXTSKE5pE9qW7sm0124tFVOnJqJWLOy6+94y4G?=
- =?us-ascii?Q?NGiNYrcP1eEQ5YluKiqx9X6IYeTo4phci+SCPdRTtgfUlMo5k2XB29+wHkBp?=
- =?us-ascii?Q?FhrRpbaa27r8foQzoMEgKr/UDwLj0N89ZZKHmEJD/8gOqeJWkzS32xbPAvJS?=
-X-MS-Exchange-AntiSpam-MessageData-1: 9NSz7Ni2RNKKnQ==
-X-OriginatorOrg: ebytelogic.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b2a8a64-d981-4229-86c7-08df1d4a79cc
-X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 10:23:01.8964
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: iSdkuP3f5Kmr/8sFWrTmXwBkJHyj8d+6d+0VU5fOs1MA9CW4l0Nv098qwiOPr0nSMQb0UQC4c8TI3a4uUX4cng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAUP287MB6171
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 
-The link from the external CSI-2 transmitter to the CSIPHY is created
-in the notifier .complete() callback by walking every registered
-subdev, reading the CSIPHY it was bound to from sd->host_priv and
-linking the subdev's first source pad to that CSIPHY.
+Gentle ping,
 
-This assumes one transmitter feeds exactly one CSIPHY. A GMSL
-deserializer such as the MAX9296A has two independent CSI-2 output
-ports which, on the RB3 Gen2 vision mezzanine, are wired to two
-different SoC CSIPHYs. The same subdev is then bound once per CAMSS
-port endpoint, the second .bound() overwrites host_priv, and
-.complete() creates a single link from source pad 0 to the last
-CSIPHY. The second output port is left with no link at all, so a
-second camera can never be routed to the SoC.
+Can patches 3 & 4 also be applied?
 
-Move the link creation into .bound(), where both the endpoint and
-the CSIPHY are known, and resolve the transmitter's source pad from
-the endpoint fwnode with media_entity_get_fwnode_pad(). Each
-endpoint then gets its own link between the right source pad and
-the right CSIPHY.
+Regards,
 
-For a subdev that does not implement .get_fwnode_pad,
-media_entity_get_fwnode_pad() falls back to the first pad matching
-the requested direction, which is exactly what the .complete() loop
-did, so ordinary single-output sensors keep the same link as before.
-
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
----
- drivers/media/platform/qcom/camss/camss.c | 51 ++++++++---------------
- 1 file changed, 18 insertions(+), 33 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 42d8654fd0..c58306e574 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -5198,49 +5198,34 @@ static int camss_subdev_notifier_bound(struct v4l2_async_notifier *async,
- 		container_of(asd, struct camss_async_subdev, asd);
- 	u8 id = csd->interface.csiphy_id;
- 	struct csiphy_device *csiphy = &camss->csiphy[id];
-+	struct media_entity *input = &csiphy->subdev.entity;
-+	struct media_entity *sensor = &subdev->entity;
-+	int pad, ret;
- 
- 	csiphy->cfg.csi2 = &csd->interface.csi2;
- 	subdev->host_priv = csiphy;
- 
-+	pad = media_entity_get_fwnode_pad(sensor, asd->match.fwnode,
-+					  MEDIA_PAD_FL_SOURCE);
-+	if (pad < 0) {
-+		dev_err(camss->dev, "No source pad in external entity %s: %d\n",
-+			sensor->name, pad);
-+		return pad;
-+	}
-+
-+	ret = media_create_pad_link(sensor, pad, input, MSM_CSIPHY_PAD_SINK,
-+				    MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED);
-+	if (ret < 0) {
-+		camss_link_err(camss, sensor->name, input->name, ret);
-+		return ret;
-+	}
-+
- 	return 0;
- }
- 
- static int camss_subdev_notifier_complete(struct v4l2_async_notifier *async)
- {
- 	struct camss *camss = container_of(async, struct camss, notifier);
--	struct v4l2_device *v4l2_dev = &camss->v4l2_dev;
--	struct v4l2_subdev *sd;
--
--	list_for_each_entry(sd, &v4l2_dev->subdevs, list) {
--		struct csiphy_device *csiphy = sd->host_priv;
--		struct media_entity *input, *sensor;
--		unsigned int i;
--		int ret;
--
--		if (!csiphy)
--			continue;
--
--		input = &csiphy->subdev.entity;
--		sensor = &sd->entity;
--
--		for (i = 0; i < sensor->num_pads; i++) {
--			if (sensor->pads[i].flags & MEDIA_PAD_FL_SOURCE)
--				break;
--		}
--		if (i == sensor->num_pads) {
--			dev_err(camss->dev,
--				"No source pad in external entity\n");
--			return -EINVAL;
--		}
--
--		ret = media_create_pad_link(sensor, i, input,
--					    MSM_CSIPHY_PAD_SINK,
--					    MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED);
--		if (ret < 0) {
--			camss_link_err(camss, sensor->name, input->name, ret);
--			return ret;
--		}
--	}
- 
- 	return v4l2_device_register_subdev_nodes(&camss->v4l2_dev);
- }
--- 
-2.43.0
-
+Will
