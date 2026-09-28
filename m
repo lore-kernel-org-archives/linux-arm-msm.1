@@ -1,228 +1,125 @@
-Received: from PNYPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11020132.outbound.protection.outlook.com [52.101.225.132])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f34.google.com (mail-ed2-f34.google.com [74.125.228.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0291B453A4F;
-	Mon, 28 Sep 2026 06:44:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.225.132
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790577844; cv=fail; b=UH3N4Vwx3RS4LpMPlfKFBqIW7j2qz2D0o/BOZIn80tWXDgQKCzz6trQm13xKRUQFJzPAag2LD43jnSJYgt3Y3SnDGD7fQOMibDCsjnUE4GAh76sPNz4E97C704yDftoDNxRiWxu8pjsDuPcQVfiI0Zz235Nt6hTPm2Fv8LuV4Sw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790577844; c=relaxed/simple;
-	bh=0RNemxBr1PDb3U7J8o+YKizI91dHt/DXL6Z9AvqXkxw=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B825B4562BA
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 06:58:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.98
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790578700; cv=none; b=pu+VzWWzLomwCGTB0Y6C0MMweXRqV25cIlTXAt6nYSJAL5cA2l1qEN1JBHz6AK/R59obcb5mruwcZOa/DhFOM0KMrO0tQhhSftf4pJl/W9V/05D52G/bw0yH6T2fTwIVMym2lQp+VOnZ/NofCYBGnV4qFoLiPl5GLC0y7cqLQ5E=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790578700; c=relaxed/simple;
+	bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ifdxbc+8ZuVoP4M2b1fIXxEkGf+ohp9MENYC4CNNPDvtSYlgS2RdVFeSRSmmR+SOD6JGPs/cWCO3fIn7rdKHGkPZQJ/uemRLjafXSei6MOZI5bnln/9aab4IZPFZroNpEKMJZ/hUq//WgB0NYYWI11zgVmG9cYz47N8cvgP34Ss=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=52.101.225.132
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wQS3X2zKgpMdwsO004A2X68IchEpkzBQUcHUW9X2Nw/MWFd+M121akEIbitN+ybz/Pgvkw41Mi4DdfOEjp7yjImjyvLQDs/KfXGNKs2xqCllo+wtZidx2gIg5jXCSwoFqsjZPM47XJzKbf1V/yzCam4RyTP+NrGPi4B3Ew9tlkxkM7EDPQexwdidJxL5ZNqbMErqYfV2EjzmZp/pso6XaLbVFdMr6av6iRwsSkxwhhoepwov3uEARk8coLOXQcx526LhjXzJgo9yd6P+5ky5t2/Xqv/7LGbPwrOZJd07RwszJIi++l2DaU4yaBN5xsyXvnmc0HPNNjPE3x8DBER/WA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EcqVma6JmGYMMdXuV/0/KoR6ja2SZgU+Mypid0YDvRY=;
- b=ix8/pnRfWaaTNUPJFVfjXjSoKOOBEoAHium0toL0UB+78emHwpCczVHrLEThhHXTHMizb8Rl5leJvrRoO9jczBMQKJcaRtvt5TMAzOCRww13866MFXIBPlsN/DkwpnsOS/BWPivUMDSf3yO/TFwQtD3HB6QML12q6t0gCw9/TpyuqlnsahreQos9h36HQw/pbPk0fEFNytjqnhobrneyDXSKQJ1zvJMh6fkbIcn4G5/O8/5D4q/gWfOYUpKHrzL9MAtScwTcFvnmYqM+dmGe0lYekTeA04yKuo7LIkr+faruOZ1J0M28ULEnQNfd9Tjv2sOML9lZURMQmgameo/fBA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
- header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ebytelogic.com;
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
- by PNWP287MB6163.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:333::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.22; Mon, 28 Sep
- 2026 06:43:58 +0000
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 06:43:58 +0000
-From: Hitesh Patel <hitesh@ebytelogic.com>
-To: linux-media@vger.kernel.org
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
+	 MIME-Version; b=cYYM53KzXHgAvkCJ9Brftq2tbfGwyokkpSyOLdveaQvWHp/J6+08sNILUiBvN5btH0nvSZUnwewRhoaSKqKFKoK5he9VfcPgMHXAK30fsK74749KYkOKLcB2HwsxSACaAolEw+ff33DNqDhZl0/y97MwuQuK7PK/PCbHhb05jqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IxiqWaJg; arc=none smtp.client-ip=74.125.228.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IxiqWaJg"
+Received: by mail-ed2-f34.google.com with SMTP id 4fb4d7f45d1cf-6aaf8415866so2979000a12.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 23:58:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790578693; x=1791183493; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
+        b=IxiqWaJgcx+Ue7br5kHQeGpbeQrXrlPvARZyiN3d++H+1Z/HfN+Nx43yRdJYe37dpB
+         fXuW0WsWccQDd1BptViX1wA75MRuHPWDpsRHw8DaryqBp1tajZQjRBQBuTms1GdI5aH7
+         a24YvQX/N7l9JHJ6KHIkqFgEB89IC3TZcX2DbG4Rne3e7em18E3mtUOzvj/ufquY3v9r
+         u9tCve5tHZ/ycFatCaUh08N2pg6IAHK1onuxFWdAc8UmYO02SDOQywv4IOqZoDK7l3nT
+         6oiy5TUyuYutCjxMH2CUp1dgcOIogPMEatfxQKVAfot21TnPCbmk2dMLIeOmZ+pgrpkJ
+         DpJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790578693; x=1791183493;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=x4UOc67gdqAtkLbv3EOLJ2rgbePcLiaPfOeYJPFnXHM=;
+        b=J9N33QulBjZ4hJSkv0//Kq1PCRXFD5pgHM2RQfyVohwXTD84mT5xFJTdodHjTThPlb
+         5ZB5tff7vqo1/9ZrU4X22YVtLijsQDnMgZ2DovU148RjXdxV7McALyobvWAevuFrQzWN
+         4AZyJQl5BGBrV1ViqtHn2iG3Pd9QpEJOpP3EIlam8w1aLeqbzBcAnp5dZi15Oj7oM3ue
+         wHx1L1g3O00ElgAfEyYZem6b8Pg6ZlK7asH+Dnm/JGz82/gCazt6J38k5mXb/w0Pb0fo
+         kILhzoKKmNQrpfO9UAeXbWcXSYdR15gHCaqiaD5y+HVCzmZP+oLqYCv9OeOL4GfC7+Ze
+         rRSA==
+X-Forwarded-Encrypted: i=1; AKwUvBy+bkODqZez88gpL9DFlG3MzAGsJSNSliF+H1Qbn33DIWPUTbrc4/L2KNkOp9aCybm6Z5ek6xvGm+fwEGZT@vger.kernel.org
+X-Gm-Message-State: AFq9FYIDWL64b//6iObc8eR1UgfIkjpjw2sWszX9+8vzPnaZgrYf9cNI
+	vaSKUV9cDrLMicy9LoLFPwDUCgys4iGuqMyhWKvDLD3supqIBNfSVFZl
+X-Gm-Gg: AYBFou0i8w0oHF7oMxheXvtDMgvREGbBYJ9RFvXzGnmYCOi4Bwy9pd6W+kOmeQoJxEJ
+	966u2RD6jhv8e3wuH1J8YFyHjuEJzjb1B3i6yG4XWsDZBaPvDEPWGtwEc0dvyk+IhHz70Op1OgP
+	tdmCtUfw5Yn8VTg0nntb/964yiJpJJrN5C2ifpROceBzUmjnozFL2i1A+rh7Y9DuX4SvUkJWHZD
+	IxL0rNH5i3SBEJsQ+ExYeuc06sp93VUxqkkuLi1N1NttDpvdfNQotZVhtLJs1roKc+UIr1U5Exi
+	L3s+9lXNfCTKegzIuKn652OAkEGQnEkLWi5YRjUgGKAFfHj5qxky1nnGLd2tYTa2jXuTaj9tWut
+	zuR/YnXlpBf6L99KIhVHC9kGBae43bcvQUY0Wxv4h1duDG2N00N+q3U8Ox31Mgp5Tsk8YAO9+jK
+	rAoiraLnssCxEtoKhniKBOh1IDyQOuKkcX1FG6PLq91DVyGEQJzRp4Fj+t1HBNUlP2JTX1gCJZq
+	mc92bjB2Mm8CynrUQfgbujIuHoOn0Yd3isVssfSy1PRMm75UIqn7tdL
+X-Received: by 2002:a05:6402:21c2:b0:6aa:7ff:4ebf with SMTP id 4fb4d7f45d1cf-6aac8ef938fmr8251360a12.15.1790578692435;
+        Sun, 27 Sep 2026 23:58:12 -0700 (PDT)
+Received: from localhost.localdomain ([2a00:801:793:68fd:c07a:9093:1956:b4bf])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ab5be57b13sm2286016a12.33.2026.09.27.23.58.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Sep 2026 23:58:12 -0700 (PDT)
+From: Yongzhao Chen <yongzhao.derek@gmail.com>
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: netdev@vger.kernel.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
 	linux-kernel@vger.kernel.org,
-	ravi@ebytelogic.com,
-	Hitesh Patel <hitesh@ebytelogic.com>
-Subject: [PATCH v3 5/5] media: qcom: camss: Create the source to CSIPHY link per endpoint
-Date: Mon, 28 Sep 2026 12:13:36 +0530
-Message-ID: <20260928064336.272659-6-hitesh@ebytelogic.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928064336.272659-1-hitesh@ebytelogic.com>
-References: <20260928064336.272659-1-hitesh@ebytelogic.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PNYP287CA0048.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c01:23e::19) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c04:1::97)
+	linux-arm-msm@vger.kernel.org,
+	Ziyang Huang <hzyitc@outlook.com>,
+	George Moussalem <george.moussalem@outlook.com>
+Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
+Date: Mon, 28 Sep 2026 08:57:58 +0200
+Message-ID: <20260928065758.5507-1-yongzhao.derek@gmail.com>
+X-Mailer: git-send-email 2.45.2.windows.1
+In-Reply-To: <20260927153616.2317-1-yongzhao.derek@gmail.com>
+References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch> <20260924234814.1734-1-yongzhao.derek@gmail.com> <d2797713-9b92-43c8-a26e-bf3bc9817ad8@lunn.ch> <20260925210153.8717-1-yongzhao.derek@gmail.com> <69b36e16-eece-4739-9208-96bd8e60943f@lunn.ch> <20260926082129.1632-1-yongzhao.derek@gmail.com> <426f9dcb-7473-48d5-a473-4435cc81312c@lunn.ch> <20260926215152.376-1-yongzhao.derek@gmail.com> <e18c66e9-7ba2-46c0-baf5-b4281a45755d@lunn.ch> <20260927153616.2317-1-yongzhao.derek@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PNWP287MB6163:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ffc102a-89c5-40ca-ce19-08df1d2bdfd6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|366016|52116014|376014|23010399003|3023799007|10067099003|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	gktmIanFwmW/CL9FlRFmjfrj5W7k5pjnz/RRSMAx6eA8mssDQiTJidhyIqSr8pxdPOxD5vu/cJ3fTqog8sLnm0egTgdMIUB6aFO+PCfRmXurGd87Sj8ahSLM75t/EWXVRIsF1eT2trz8J3YqiOtl3II6TE0EKmTEFuU/NoZ8elyI0sb5B5aKZSrR32xMmAmrqsHmDdClLwUByZmkQwa6irZuAL2A8Gn3n4SgQWGRVGdXc4qslcBrmL66RRM4QCj8XBIk2DlL+25cc2/VQgsAFQ1v7o0B0DK/c1g6j1wQg8IhbOS59hQyMzynqaXP6BCSkJzXDA0y9lQEA28EiIQWQutCgC96Tdak/aK/bqS7W+oA2fqj2Rn5SMLkltHxCBPCj+T/aeLC7716sFiuTYN/MkyMsRLrXJngYzJjHQOTmoC8ZeIn6hde/Ms/2m7/y2lflTTi7r3oElSCAKx+odREZghKxlMz+6nvZZDi+HbPjuHoB+ew1LEy9AggX7Qt6uHyrUz+86QUvJ9OWJaKeP2Wk9wlScDK02rMAPJjD7KMM228OlyiXuHfTUnpzro+eBrNG4yWYCAS2XLH16YWk21fzmErdCb2T+PuA28fPD3or1xl7VHg0rPnnqtuXoZXHZKWzlWRnHKexpPo+TVF0rkaArepwdbMwSjnMU4/2FeO5hI=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(52116014)(376014)(23010399003)(3023799007)(10067099003)(18002099003)(22082099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?y7w0QejetIvBfDfWDo9sN/IC8OW9ieTdg7rfeN6QwdDHrX7VCL21aVgI0JQX?=
- =?us-ascii?Q?jMGru6EKgKABj2mL2UbAF+FgyPNpFlVFEobS1pIUDkNcEuw4vB/bLqPhKtAH?=
- =?us-ascii?Q?Fem1GWgkC+fh2JJ8jdb7vSGqg2l+VwDMWWhEm1qteYqmHMG95LfdIUSSg+OC?=
- =?us-ascii?Q?dWmfG7OILAa51QoliUQvaGuvPV37L8qA5V7dG7e2zTagDk3C7vkoIyJB3N0p?=
- =?us-ascii?Q?ycSTXEAeMccSrxGGiy9r1W6ZOqVq4uF/pk2yDAVTLObEVz/gJuy/ppCy4AEv?=
- =?us-ascii?Q?cOlmhMX4ULCuHyChlutCPc8VVcu5tXr6agCr5jwptZdSOqXYozX7pJzSUcQK?=
- =?us-ascii?Q?rCvDFe7iWDSwbHSmFdRti3l49JtGx0RANO+bQitVuDjubGe+yx4mawlIdIg6?=
- =?us-ascii?Q?1s33Cw6vzbLd+u0l7I7mOvba8FFG+aZ+9tAYb/WLBX1sGxU9dXFYxex9I9Rq?=
- =?us-ascii?Q?8cHa86fIqETakwKgZ/knpOmUN2wHlAKvq4BW+mGKj2ppM4pKfG5NGWlsJJWk?=
- =?us-ascii?Q?9MpaXe4X7ZA0Dmsj+zkEzq0ui0VLpIy94MY1AkVFK3oIs7Me2doYkJTd/cYT?=
- =?us-ascii?Q?rAjYDAINxoNgeHx1STx/4/0r9ConrknZnSnfNv2kLEK6zk1YWqClUNjCn/O7?=
- =?us-ascii?Q?2VzCT2G8ztpQnEKE6oyJrs4XXBOoCSpr/iLeVX/CVTYsmDfIgEdtBDyKFFlX?=
- =?us-ascii?Q?FKD+7XStOg2va66L3uqHHAQI690WY3t7PU2CMTzBAqbjCtMeMOTapAQcqA2f?=
- =?us-ascii?Q?4WQvZMz8D/8EmxDBe1OU2YVpR5uWADol5Kz3mWjPGmt4Z8p6N7R9VghXfRnE?=
- =?us-ascii?Q?0YyQ/K3VzsSlHvGt0aLw9diU0p05ga0tnrcWqvbbllq0moETOf/B5Jufl5mn?=
- =?us-ascii?Q?zHbpgxG4tBo4UB/EkNOgTYIo4MYx575LrXC3hW5YdKfKAPbj4Pe/pNSdsQ0b?=
- =?us-ascii?Q?LeGW2H6nHc9SN7nJQFYWX8bka/7nCrt1XRdQdE9DBJp877oQR02n1fSPWTXA?=
- =?us-ascii?Q?v2fXQOPqWsMjtQYlpMPFlcM/gmgpNxq1hI3zq1OVO3F3RYpB3EbPwpqk3STm?=
- =?us-ascii?Q?+PWl2n/BgOUK4d/vX+hj7KLU60sO9TwTqhycXW3wAP3+UJw9iVNM2tA0QgPI?=
- =?us-ascii?Q?Vg+vrft8Y9eDMsIwykJYyd9YCnC30laBBdEGqdXt4MIBYlQbtrCs7YssH6NI?=
- =?us-ascii?Q?3UoWLVvJ1Pgt4K7B3rtG3sTOEsE//bhEKzmU9pyjxjiYzbB5A1e4nJ0m2Tu2?=
- =?us-ascii?Q?YlqDm+b/Hy6tVnONYkmgqaSQulAaVD29xEzvaiN5gpD4WZ4pj3/W4LLBxB7Y?=
- =?us-ascii?Q?uYy7vrADzXdP2M9KAzefFp0D3CnFHLlgAAWg3a9tcMGANjgt0sp6V9t/i1Ku?=
- =?us-ascii?Q?A3GRymNdvt9GndQmX+JCemFvbIO2V9taxPXH9X5vLiWH+w8e5WswPwIDwkgB?=
- =?us-ascii?Q?sRxyw67QIQD5bPvl5If5q9HEYzrRXk8H/Hez9W7cCMmWnzYqkAkhCrIfUzeJ?=
- =?us-ascii?Q?NiJ5quFi0r33dJa1rABX9a5aAEAwMyqHQvnnWj2C70z+G1df04nogrlQdyH1?=
- =?us-ascii?Q?9//J/NX7psY1p4OUSXhetqNpQ/Rclu0OGDVy05I1p0xcwpK1JUOfR9XWBI9B?=
- =?us-ascii?Q?WR0qG4g1G+MBT0mQz2b/w/A3jXZLu0W+mvuZPK2kMGGvpjckcZ94HTIiGizA?=
- =?us-ascii?Q?t3emyDFiiv3XUSi3y2Gl8ywWhMEBj/x8qg5dMEKrsW4KYK+wkr+CxlKMk4g9?=
- =?us-ascii?Q?NTRQjojjrQx4bAI0ZTh3SSJFgkUw+74JJZ6egTTYZ7SRQP3PyPMk0Bn8gR+J?=
-X-MS-Exchange-AntiSpam-MessageData-1: MV/omkN4uALMHg==
-X-OriginatorOrg: ebytelogic.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ffc102a-89c5-40ca-ce19-08df1d2bdfd6
-X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 06:43:58.8861
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xc81R6aYKgnobvoUESMSKC0wJ+lvxDXHTdZLmCeOkMKA6MgvZGX0JfnQMF7z62OZ95/+/Rz9ZkL5qepI6qhf4Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNWP287MB6163
+Content-Transfer-Encoding: quoted-printable
 
-The link from the external CSI-2 transmitter to the CSIPHY is created
-in the notifier .complete() callback by walking every registered
-subdev, reading the CSIPHY it was bound to from sd->host_priv and
-linking the subdev's first source pad to that CSIPHY.
-
-This assumes one transmitter feeds exactly one CSIPHY. A GMSL
-deserializer such as the MAX9296A has two independent CSI-2 output
-ports which, on the RB3 Gen2 vision mezzanine, are wired to two
-different SoC CSIPHYs. The same subdev is then bound once per CAMSS
-port endpoint, the second .bound() overwrites host_priv, and
-.complete() creates a single link from source pad 0 to the last
-CSIPHY. The second output port is left with no link at all, so a
-second camera can never be routed to the SoC.
-
-Move the link creation into .bound(), where both the endpoint and
-the CSIPHY are known, and resolve the transmitter's source pad from
-the endpoint fwnode with media_entity_get_fwnode_pad(). Each
-endpoint then gets its own link between the right source pad and
-the right CSIPHY.
-
-For a subdev that does not implement .get_fwnode_pad,
-media_entity_get_fwnode_pad() falls back to the first pad matching
-the requested direction, which is exactly what the .complete() loop
-did, so ordinary single-output sensors keep the same link as before.
-
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
----
- drivers/media/platform/qcom/camss/camss.c | 51 ++++++++---------------
- 1 file changed, 18 insertions(+), 33 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 327ac7b280..cd9b66f265 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -5224,49 +5224,34 @@ static int camss_subdev_notifier_bound(struct v4l2_async_notifier *async,
- 		container_of(asd, struct camss_async_subdev, asd);
- 	u8 id = csd->interface.csiphy_id;
- 	struct csiphy_device *csiphy = &camss->csiphy[id];
-+	struct media_entity *input = &csiphy->subdev.entity;
-+	struct media_entity *sensor = &subdev->entity;
-+	int pad, ret;
- 
- 	csiphy->cfg.csi2 = &csd->interface.csi2;
- 	subdev->host_priv = csiphy;
- 
-+	pad = media_entity_get_fwnode_pad(sensor, asd->match.fwnode,
-+					  MEDIA_PAD_FL_SOURCE);
-+	if (pad < 0) {
-+		dev_err(camss->dev, "No source pad in external entity %s: %d\n",
-+			sensor->name, pad);
-+		return pad;
-+	}
-+
-+	ret = media_create_pad_link(sensor, pad, input, MSM_CSIPHY_PAD_SINK,
-+				    MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED);
-+	if (ret < 0) {
-+		camss_link_err(camss, sensor->name, input->name, ret);
-+		return ret;
-+	}
-+
- 	return 0;
- }
- 
- static int camss_subdev_notifier_complete(struct v4l2_async_notifier *async)
- {
- 	struct camss *camss = container_of(async, struct camss, notifier);
--	struct v4l2_device *v4l2_dev = &camss->v4l2_dev;
--	struct v4l2_subdev *sd;
--
--	list_for_each_entry(sd, &v4l2_dev->subdevs, list) {
--		struct csiphy_device *csiphy = sd->host_priv;
--		struct media_entity *input, *sensor;
--		unsigned int i;
--		int ret;
--
--		if (!csiphy)
--			continue;
--
--		input = &csiphy->subdev.entity;
--		sensor = &sd->entity;
--
--		for (i = 0; i < sensor->num_pads; i++) {
--			if (sensor->pads[i].flags & MEDIA_PAD_FL_SOURCE)
--				break;
--		}
--		if (i == sensor->num_pads) {
--			dev_err(camss->dev,
--				"No source pad in external entity\n");
--			return -EINVAL;
--		}
--
--		ret = media_create_pad_link(sensor, i, input,
--					    MSM_CSIPHY_PAD_SINK,
--					    MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED);
--		if (ret < 0) {
--			camss_link_err(camss, sensor->name, input->name, ret);
--			return ret;
--		}
--	}
- 
- 	return v4l2_device_register_subdev_nodes(&camss->v4l2_dev);
- }
--- 
-2.43.0
-
+Hi Andrew,=0D
+=0D
+Following up on the initialisation order, as promised. On this board=0D
+it was the cause, and the DT workaround is not needed.=0D
+=0D
+The IPQ5018 GE PHY leaves reset in ipq5018_probe() and starts=0D
+autonegotiating with its reset defaults. Its LDO, EEE, MSE and DAC=0D
+settings are only written in ipq5018_config_init(), when stmmac=0D
+attaches the PHY on open, about 39 s later on this board. I sampled=0D
+both PHYs during that window. They resolved 1000BASE-T every 2.5 to 3 s=0D
+without getting link, and after about five attempts SmartSpeed=0D
+downshifted on both sides at the same moment: the IPQ5018 PHY's=0D
+CTRL1000 went 0x0200 -> 0x0000 and PHY4's 0x0600 -> 0x0400. The soft=0D
+reset at attach restores the IPQ5018 side, but nothing touches PHY4=0D
+again, so the CPU link never came up.=0D
+=0D
+Applying the same analog settings in probe, right after the reset, and=0D
+restarting autonegotiation, fixed it with SmartSpeed left enabled on=0D
+the QCA8337: 3 of 3 warm boots came up at 1 Gb/s about 2.5 s after PHY4=0D
+was reset, against 0 of 3 without it. Both groups ran the same kernel=0D
+and rootfs, with the probe-time writes enabled by a private DT property.=0D
+The final patch was then checked on the same board over a first boot,=0D
+three reboots, three interface down/up cycles, three renegotiations, a=0D
+network restart and a 10 minute observation, all at 1 Gb/s with=0D
+SmartSpeed enabled. It is still one board, and I have not done a=0D
+power-cycle test on this kernel.=0D
+=0D
+So I will not add the workaround property. I will send the at803x=0D
+change to net together with the DAC fix, and v4 of this series without=0D
+patches 4 and 5. George, I've Cc'd you since the at803x change touches=0D
+the IPQ5018 probe path you added.=0D
+=0D
+Thanks,=0D
+Yongzhao=0D
