@@ -1,64 +1,64 @@
 Received: from mail-ej2-f43.google.com (mail-ej2-f43.google.com [74.125.228.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD28750256C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:07:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA19950278E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 22:07:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790633255; cv=none; b=rgIj+2o68IhvAv3d8CnsyLlGEIgFeuNKVwk/PI+EJNQOGMGZrMNxdm1GSyV8a7mUABwfRZre4qLRKRyZoKBEpphAktRxYutZAonC9ET/34p8GpYWyoJizCuW7KmXY+a4vBJVwvoDTHfPMTCITTgCRqxNbd7NqdrJR+w9GEmRvjY=
+	t=1790633258; cv=none; b=oyFHP36oGgAOZVyAVrVfO1CM53aLXo3JIYgV235mbWL1gLMDKshHFFxHAs4wjF6cpS2cic1ZP5vVcZB2nBnok3v2B2Yv6X28GUj1HEcD2+c7EqCGTWb20y+i/204k3KEI6Jc1I+FjNZK4vBIEZo6llG85oD/doaZQUPMPLYqpUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790633255; c=relaxed/simple;
-	bh=Ot/8R66e/mkPVx670tudpj7xs96d6ihMr8n1GprTSKs=;
+	s=arc-20240116; t=1790633258; c=relaxed/simple;
+	bh=zD3M3CBCJdpPC7S8m351jeyj/gsPNWVUtdStjI+MALw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=kbKgtRw1C7z8TV5E+RZ0bx2p8kDYqApGbcI2fArOUExy2QsWj9dqLNM9C9+MwID2K8jbfSeC8r3qa+od8Tc7th1xUNODRA7m3vTUBgSEC8bhs7gJ46zTkaNr+xajdU62PFhjkwFHsB/30vBa5tQ7NzA2gZ9JnGrqUNoYliLldBM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VMgOZV27; arc=none smtp.client-ip=74.125.228.171
+	 MIME-Version; b=K3weaX/lANs70hWWrXFwsREdkrJtRQjyW78SOw/LsL0AmdgvD6CzRYEFDHkXGa1X3fyZBIqwCcMZNUiqV9errdEGvNVnDM+a5miaNzA8O2V8/sPfY+Ieobcv4ZXzmpjFEckMwT4+pzimU3hw8uvs3W44JGjM/toOW3YupbB3MDk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BbilFBnk; arc=none smtp.client-ip=74.125.228.171
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VMgOZV27"
-Received: by mail-ej2-f43.google.com with SMTP id a640c23a62f3a-c2afb4e9977so403226066b.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 15:07:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BbilFBnk"
+Received: by mail-ej2-f43.google.com with SMTP id a640c23a62f3a-c2af7721e4aso472353266b.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 15:07:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790633252; x=1791238052; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790633253; x=1791238053; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pO83qbmBUiFGt2TePIWrrliB13OXaWfE2B6nEGDhy3A=;
-        b=VMgOZV273ujEOTho9QT7k8DCW4jLLHGlN61TamKFUCzMrEWcUoXHcYxcbZ4cucQDI2
-         /9udYfDI84R63cFIs8b72H8UyEQrcJAmiOpBvjaXmqSBmlE6zhPvHkfrVGV2URZm7kHK
-         HQ5KiiiHJawAE4UzJy1OS4QmMxdvwPVs1OlrRjv6ng27rTc899KeEo3zIRgXSj1GULhA
-         5JqTiY2UWCuRDO7tWcMrYk9RE7I2r/SwCMRXGM5qmrGz+jzVyuI48crddFn2zD59ktpi
-         OL2U8xH4LiFxtD1G4WvjWaJzCBi2f4iF75k6t4KavmzaeR5TK4VX2oBHimlat2tQpS7H
-         oXKQ==
+        bh=mlKmUSED6Ws/3pkdZYMZVn9BgxD5dhN9L6Sjup7zJgM=;
+        b=BbilFBnkB+HcuiqFUT1o9qVSgiWJbqJ5T4ALaqmLdnZuFvEnr+C72ZRagkGnxMaAnW
+         px66yYaA1P6Yfo39mDKNfmxWJHNwNoOunvfD4jRUI6Ct5iLfMDmjPYQ27Fq8l4L9yCJH
+         NOOffrDzdVSDlTCoVJbRk448ohl93CNt2OnC9mXWJmy+cCIzpe1ioiqlx76Vnl6YLv0I
+         vtqumiFsXz8XEk/7cFAgW2EM8Kfsf3Tqs2w6pPFfX/C4xyUCCL8IhZaPcb56NFcX+4Oi
+         0Ktr86HiYQOkKljZEKTk9/9d+MffGocn56lgFeP9nroBratcH85d0Y1jXgk9Q0l0jzYg
+         IfwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790633252; x=1791238052;
+        d=1e100.net; s=20260707; t=1790633253; x=1791238053;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pO83qbmBUiFGt2TePIWrrliB13OXaWfE2B6nEGDhy3A=;
-        b=g5PR6pkLCBNobWkz5YpBjqBUI4gECHqszAvHzz1l82foLW5FESVp+0CZL53aZJEL/y
-         +O94vkoMSG45uW+b5LlVg9J37Hvd3lbyZFYnzikm6oZuAicJJ1wlGdAOvzHCkxK/1Gkf
-         Dg/oEwqAE34zE4g9jdUeB7Vu+fxwj92ruzS+GV4SIlH+yPN3g/edr5iFdBPLGJObWAbR
-         FdUVpXcfwo2Bsm4DWnU1R6kinNqLkCYGWCxrB67C9Z0RbDmyYlbMJnJwpFv2/yMoJGrI
-         A6n7yxS4CK7+DXuQhVuABjGluzAcYCT+M4EnXyncD9no8/3ZENFPyA8PS76SjrXNBzkx
-         alpQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzJ/tAR89FfqJKSSH00+wT26BDviIrLKc8aMVzVRjoSvJBSKO2tO6rlhLdnQenOXl28RztDTJno9+8oyPlY@vger.kernel.org
-X-Gm-Message-State: AFuF++ks026kHsSlSX5QjUdDaAk+csVujwdRJd0W0ItoaCg/tbUP5KOM
-	+3LySNn8CnXA8XRpOCy/ySJ/kpE8qnZpF3w1KjtRDKZ39h+4DHM50OTG
-X-Gm-Gg: AYBFou0DXHGrrNYx2Q3mBWa9L/W2vtyCouKWQH4KwIT5h2R2iTydjyXsFm76KyyL0mP
-	NG+BfIzkOC+BqZFoqR/a3h6wN14VZFyQbb54s7YjW274/8MUwugLgJRLYgEI/r8xE0SbxP0eYqY
-	Mc6KhOzGfyR9G7jmkRR61JTI2BDh0hnLn3rA0g8c6TGNlkr/7MPPPFVTYR68BVUwF8PVdqyaKxt
-	zfq8FAF7IrtePVs610zZ4xGtCpNup/NlFNtQXzjprfORDYJihvVFHPnxqYRu/7XJa2r/Xt1Qulj
-	4wjEEGwTdxY9Sid1PMFIq37t6acQGceYHD84pHpRHhVvmncwmpLMr6ELE5Q7IbFnke3mQYRmykS
-	s+XBzupMkUaly8dNnw6cT96vuAGPjCCVuEASN+3UBWkdqVjyHPgdQJteJlk7vSKUYun9/Z2Dspx
-	DB0tPOaoG+NzEetI+4GiVTYHKVdL9lUmd0P0p726JQd2XKNJIXNHByXRQI6+G8vYpkOIdAay43x
-	Le5QhHk0OTuDsYh+qzBzApqBEDGrHPw6zfGwJ6TcUlk9erJfsHL3Bwn
-X-Received: by 2002:a17:907:3e87:b0:c29:f5d8:9c78 with SMTP id a640c23a62f3a-c2ac229ee9cmr1188419966b.39.1790633251888;
-        Mon, 28 Sep 2026 15:07:31 -0700 (PDT)
+        bh=mlKmUSED6Ws/3pkdZYMZVn9BgxD5dhN9L6Sjup7zJgM=;
+        b=1dCQRcAU6LiHxY67Bh+HyUzNq4ljA6lxhOfZs6/GBM/Aq4DSZuv8PgjzFJv2vUz5XQ
+         9rr4QhEIh2AXPX7dCGabgmTMf7vCBQXOIn9fDuJEe42z/bcuXGJT18PwG6OKlPzN2ERP
+         UXc05e2pmKRpZnj6ACwPN3MJoNaKHFtbhJj2owMVr8m0aL9j9WreKlGtXSsak58Pilxm
+         rVxKqnHLnMgPk/SyTEgM7dyDBEk7dJF9TqpXIrjFAAPoC/G0g6EsmGZQ1EUuUCN4ThAk
+         ZYMBNdgLQhTuqOgg3qcn3hiINKA/8gRrxngl6YEHXVdt+vbTXqF7cdL1XO3wDTTEyIIr
+         Rh4A==
+X-Forwarded-Encrypted: i=1; AKwUvBwSu24Pmroa56fkoQl0YYILYYbEY9Av21zES04BN2rn0WgIxDVaeKKbRqkAOodboqGr5/0maVf6wpHvoftV@vger.kernel.org
+X-Gm-Message-State: AFuF++nqZiySGGWQKAq3Vx745ZmShyym94ckzGGtibpgp4u11c2klOQn
+	lPzpCyHenJoS7nyiaPpWsfNf+7DyxYUiUkK1RkGMC8jRvaDbuIjmf4h0
+X-Gm-Gg: AYBFou0jGgJCMlWPnU2A1Dh6Wro5s869EpheEknAzZJG0VQHz43TLT+nKH+89bTV3UI
+	xlND8Z9d6W9x5xWG+qdLJD+SkDvl3sFkgiPxtz+jDgEtO61Rp9/+kk2ZHqcmFX6YJkapx1RvTCB
+	aAXWJHuR4TPe7L7YjDAvm0zij4ZL/OyEzvEHCqpUk1ZJMbg5m5TxqYdk5pKHnU/xTXXrP/zkDvh
+	Uhxm0qieRqb1SxesMyZXX15RrjjSPFrVaV/ddwRgA7hLxnO8hMJb+tv5033W7HwE9nsUoVgakkn
+	mMbNRGFvw73mqgwniTitCp0azbeP797b9iAjHpRgVCM7+Lo+Q2TKgQXEtgwo6O6aL6PBMvijERQ
+	icPs2f0x7g+R9mluCqNnVtDqqoQl08MyCfZqxWY1cwtUIc0yl7IklDFxWxZnPFWx02pEZf20Jg6
+	q+luRE0cDGcc/0T1RwBXzUCw+IDTpzVjQ6G2sCLvK6i5iE8qWHsDDuYuBFyCkdnKZdbVM3EAbmm
+	9Fps76zntWsLHBia/0CsSOXaBqs65qHmi38Cu/cj6omsaR7O0XWT+lq
+X-Received: by 2002:a17:907:3c8d:b0:c2d:ccfb:25e7 with SMTP id a640c23a62f3a-c2dccfb345bmr429312066b.17.1790633253430;
+        Mon, 28 Sep 2026 15:07:33 -0700 (PDT)
 Received: from localhost.localdomain ([2a00:801:793:68fd:c07a:9093:1956:b4bf])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae757b9c1sm540308966b.33.2026.09.28.15.07.30
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae757b9c1sm540308966b.33.2026.09.28.15.07.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 15:07:31 -0700 (PDT)
+        Mon, 28 Sep 2026 15:07:33 -0700 (PDT)
 From: Yongzhao Chen <yongzhao.derek@gmail.com>
 To: Andrew Lunn <andrew@lunn.ch>,
 	Heiner Kallweit <hkallweit1@gmail.com>,
@@ -72,9 +72,9 @@ Cc: netdev@vger.kernel.org,
 	Ziyang Huang <hzyitc@outlook.com>,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH net v2 1/2] net: phy: qcom: at803x: Fix IPQ5018 short-cable DAC values
-Date: Tue, 29 Sep 2026 00:07:16 +0200
-Message-ID: <20260928220717.939-2-yongzhao.derek@gmail.com>
+Subject: [PATCH net v2 2/2] net: phy: qcom: at803x: Apply IPQ5018 analog settings at probe
+Date: Tue, 29 Sep 2026 00:07:17 +0200
+Message-ID: <20260928220717.939-3-yongzhao.derek@gmail.com>
 X-Mailer: git-send-email 2.45.2.windows.1
 In-Reply-To: <20260928220717.939-1-yongzhao.derek@gmail.com>
 References: <20260928220717.939-1-yongzhao.derek@gmail.com>
@@ -86,60 +86,191 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When "qcom,dac-preset-short-cable" is set, ipq5018_config_init()
-programs the MDAC (MMD1 0x8100) and EDAC (debug 0x4380) fields. Both
-fields occupy bits 15:8 (IPQ5018_PHY_DAC_MASK), but the value 0x10 is
-passed unshifted as the set argument of phy_modify_mmd() and
-at803x_debug_reg_mask(). Neither helper shifts or masks that argument,
-so both fields are cleared to 0x00 instead of being set to 0x10, and
-bit 4 of the low byte, which is outside the field, is set.
+ipq5018_probe() pulses the PHY reset, and the IPQ5018 internal GE PHY
+then starts autonegotiation on its own with its reset-default analog
+settings. The LDO, EEE timer, MSE threshold and optional short-cable
+DAC values are only written by ipq5018_config_init(), which runs when
+the MAC attaches the PHY, usually when the interface is opened.
 
-Use FIELD_PREP() to place the value in the field. This matches the
-vendor SDK, which clears bits 15:8 and ORs in the value shifted left
-by 8.
+On a Redmi AX5400 board, the IPQ5018 PHY is connected without a cable
+to PHY4 of a QCA8337 switch, and "qcom,dac-preset-short-cable" is set.
+Between probe and attach, about 39 s in these boots, both PHYs
+resolved 1000BASE-T every 2.5 to 3 s, but the link did not come up.
+After about five attempts, SmartSpeed downshifted on both sides at the
+same time: the IPQ5018 PHY stopped advertising 1000BASE-T (CTRL1000
+0x0200 -> 0x0000), and so did the QCA8337 PHY (0x0600 -> 0x0400). The
+soft reset at attach restores the IPQ5018 advertisement, but nothing
+restores the QCA8337 side, and the link stayed down, also after
+taking the interface down and up again.
 
-On a Redmi AX5400 board, where the IPQ5018 internal PHY connects to a
-QCA8337 switch PHY without a cable, MDAC and EDAC read 0x6868 and
-0x7800 before the write. With this change they read back 0x1068 and
-0x1000, with the low byte preserved. Without it, the same writes would
-leave 0x0078 and 0x0010.
+Apply the analog settings in probe right after the reset and restart
+autonegotiation, so that negotiation runs with them from the start.
+Factor the settings into a helper that is also used by
+ipq5018_config_init(), and return MDIO errors from it instead of
+ignoring them. Probe fails with the error; config_init() returns it.
 
-No in-tree DTS sets this property yet, but it is documented in
-qca,ar803x.yaml and used by several IPQ5018 boards in OpenWrt.
+genphy_restart_aneg() sets ANENABLE and ANRESTART and clears ISOLATE.
+With the reset-default BMCR value of 0x1140 read on this board, this
+is the same write that was tested (BMCR | BMCR_ANRESTART).
+
+The same values are written on every board with this PHY; only the
+time of the write changes. On boards without the DAC property, no
+DAC register is written.
+
+The same writes and the autonegotiation restart were tested in probe
+on that board, in OpenWrt's Linux 6.18.52 kernel, over 3 warm boots
+with and 3 without them. Without them, the link did not come up in
+any boot, with both sides downshifted as described above. With them,
+1000BASE-T came up in every boot less than 3 s after the QCA8337 PHY
+was reset, before the interface was opened, and the QCA8337 PHY kept
+advertising 1000BASE-T with SmartSpeed enabled. The DAC values written
+in probe were still in place after the BMCR soft reset at attach.
+
+This patch, backported to the same kernel without the downstream
+SmartSpeed workaround, then kept the link at 1000BASE-T with SmartSpeed
+enabled on that board over a first boot, a power cycle, three reboots,
+three interface down/up cycles, three autonegotiation restarts, a
+network restart and 10 minutes of operation.
 
 Fixes: d46502279a11 ("net: phy: qcom: at803x: Add Qualcomm IPQ5018 Internal PHY support")
-Suggested-by: Ziyang Huang <hzyitc@outlook.com>
-Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 Signed-off-by: Yongzhao Chen <yongzhao.derek@gmail.com>
 Assisted-by: LLM
 ---
- drivers/net/phy/qcom/at803x.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ drivers/net/phy/qcom/at803x.c | 98 +++++++++++++++++++++++++----------
+ 1 file changed, 70 insertions(+), 28 deletions(-)
 
 diff --git a/drivers/net/phy/qcom/at803x.c b/drivers/net/phy/qcom/at803x.c
-index 6872dbf7785..cacbadf1f48 100644
+index cacbadf1f48..09105f1e373 100644
 --- a/drivers/net/phy/qcom/at803x.c
 +++ b/drivers/net/phy/qcom/at803x.c
-@@ -1051,11 +1051,15 @@ static int ipq5018_config_init(struct phy_device *phydev)
- 	if (priv->set_short_cable_dac) {
- 		/* setting MDAC (Multi-level Digital-to-Analog Converter) in MMD1 */
- 		phy_modify_mmd(phydev, MDIO_MMD_PMAPMD, IPQ5018_PHY_MMD1_MDAC,
--			       IPQ5018_PHY_DAC_MASK, IPQ5018_PHY_MMD1_MDAC_VAL);
-+			       IPQ5018_PHY_DAC_MASK,
-+			       FIELD_PREP(IPQ5018_PHY_DAC_MASK,
-+					  IPQ5018_PHY_MMD1_MDAC_VAL));
- 
- 		/* setting EDAC (Error-detection and Correction) in debug register */
- 		at803x_debug_reg_mask(phydev, IPQ5018_PHY_DEBUG_EDAC,
--				      IPQ5018_PHY_DAC_MASK, IPQ5018_PHY_DEBUG_EDAC_VAL);
-+				      IPQ5018_PHY_DAC_MASK,
-+				      FIELD_PREP(IPQ5018_PHY_DAC_MASK,
-+						 IPQ5018_PHY_DEBUG_EDAC_VAL));
- 	}
- 
+@@ -1019,10 +1019,10 @@ static int ipq5018_cable_test_start(struct phy_device *phydev)
  	return 0;
-
-base-commit: a7bfaba4823e3c165bb2004c74eff7c096672bc7
+ }
+ 
+-static int ipq5018_config_init(struct phy_device *phydev)
++static int ipq5018_analog_init(struct phy_device *phydev)
+ {
+ 	struct ipq5018_priv *priv = phydev->priv;
+-	u16 val;
++	int val, ret;
+ 
+ 	/*
+ 	 * set LDO efuse: first temporarily store ANA_DAC_FILTER value from
+@@ -1030,39 +1030,66 @@ static int ipq5018_config_init(struct phy_device *phydev)
+ 	 * is written to
+ 	 */
+ 	val = at803x_debug_reg_read(phydev, IPQ5018_PHY_DEBUG_ANA_DAC_FILTER);
+-	at803x_debug_reg_mask(phydev, IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE,
+-			      IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE_MASK,
+-			      IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE_DEFAULT);
+-	at803x_debug_reg_write(phydev, IPQ5018_PHY_DEBUG_ANA_DAC_FILTER, val);
++	if (val < 0)
++		return val;
++
++	ret = at803x_debug_reg_mask(phydev, IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE,
++				    IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE_MASK,
++				    IPQ5018_PHY_DEBUG_ANA_LDO_EFUSE_DEFAULT);
++	if (ret)
++		return ret;
++
++	ret = at803x_debug_reg_write(phydev, IPQ5018_PHY_DEBUG_ANA_DAC_FILTER,
++				     val);
++	if (ret)
++		return ret;
+ 
+ 	/* set 8023AZ EEE TX and RX timer values */
+-	phy_write_mmd(phydev, MDIO_MMD_PCS, IPQ5018_PHY_PCS_EEE_TX_TIMER,
+-		      IPQ5018_PHY_PCS_EEE_TX_TIMER_VAL);
+-	phy_write_mmd(phydev, MDIO_MMD_PCS, IPQ5018_PHY_PCS_EEE_RX_TIMER,
+-		      IPQ5018_PHY_PCS_EEE_RX_TIMER_VAL);
++	ret = phy_write_mmd(phydev, MDIO_MMD_PCS, IPQ5018_PHY_PCS_EEE_TX_TIMER,
++			    IPQ5018_PHY_PCS_EEE_TX_TIMER_VAL);
++	if (ret)
++		return ret;
++
++	ret = phy_write_mmd(phydev, MDIO_MMD_PCS, IPQ5018_PHY_PCS_EEE_RX_TIMER,
++			    IPQ5018_PHY_PCS_EEE_RX_TIMER_VAL);
++	if (ret)
++		return ret;
+ 
+ 	/* set MSE threshold values */
+-	phy_write_mmd(phydev, MDIO_MMD_PMAPMD, IPQ5018_PHY_MMD1_MSE_THRESH1,
+-		      IPQ5018_PHY_MMD1_MSE_THRESH1_VAL);
+-	phy_write_mmd(phydev, MDIO_MMD_PMAPMD, IPQ5018_PHY_MMD1_MSE_THRESH2,
+-		      IPQ5018_PHY_MMD1_MSE_THRESH2_VAL);
++	ret = phy_write_mmd(phydev, MDIO_MMD_PMAPMD,
++			    IPQ5018_PHY_MMD1_MSE_THRESH1,
++			    IPQ5018_PHY_MMD1_MSE_THRESH1_VAL);
++	if (ret)
++		return ret;
++
++	ret = phy_write_mmd(phydev, MDIO_MMD_PMAPMD,
++			    IPQ5018_PHY_MMD1_MSE_THRESH2,
++			    IPQ5018_PHY_MMD1_MSE_THRESH2_VAL);
++	if (ret)
++		return ret;
+ 
+ 	/* PHY DAC values are optional and only set in a PHY to PHY link architecture */
+-	if (priv->set_short_cable_dac) {
+-		/* setting MDAC (Multi-level Digital-to-Analog Converter) in MMD1 */
+-		phy_modify_mmd(phydev, MDIO_MMD_PMAPMD, IPQ5018_PHY_MMD1_MDAC,
+-			       IPQ5018_PHY_DAC_MASK,
+-			       FIELD_PREP(IPQ5018_PHY_DAC_MASK,
+-					  IPQ5018_PHY_MMD1_MDAC_VAL));
+-
+-		/* setting EDAC (Error-detection and Correction) in debug register */
+-		at803x_debug_reg_mask(phydev, IPQ5018_PHY_DEBUG_EDAC,
+-				      IPQ5018_PHY_DAC_MASK,
+-				      FIELD_PREP(IPQ5018_PHY_DAC_MASK,
+-						 IPQ5018_PHY_DEBUG_EDAC_VAL));
+-	}
++	if (!priv->set_short_cable_dac)
++		return 0;
+ 
+-	return 0;
++	/* setting MDAC (Multi-level Digital-to-Analog Converter) in MMD1 */
++	ret = phy_modify_mmd(phydev, MDIO_MMD_PMAPMD, IPQ5018_PHY_MMD1_MDAC,
++			     IPQ5018_PHY_DAC_MASK,
++			     FIELD_PREP(IPQ5018_PHY_DAC_MASK,
++					IPQ5018_PHY_MMD1_MDAC_VAL));
++	if (ret)
++		return ret;
++
++	/* setting EDAC (Error-detection and Correction) in debug register */
++	return at803x_debug_reg_mask(phydev, IPQ5018_PHY_DEBUG_EDAC,
++				     IPQ5018_PHY_DAC_MASK,
++				     FIELD_PREP(IPQ5018_PHY_DAC_MASK,
++						IPQ5018_PHY_DEBUG_EDAC_VAL));
++}
++
++static int ipq5018_config_init(struct phy_device *phydev)
++{
++	return ipq5018_analog_init(phydev);
+ }
+ 
+ static void ipq5018_link_change_notify(struct phy_device *phydev)
+@@ -1111,6 +1138,21 @@ static int ipq5018_probe(struct phy_device *phydev)
+ 
+ 	phydev->priv = priv;
+ 
++	/*
++	 * The PHY starts autonegotiation as soon as it leaves reset. Apply the
++	 * analog settings now instead of waiting for config_init() at attach
++	 * time, and restart autonegotiation so that it uses them.
++	 */
++	ret = ipq5018_analog_init(phydev);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to apply analog settings\n");
++
++	ret = genphy_restart_aneg(phydev);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to restart autonegotiation\n");
++
+ 	return 0;
+ }
+ 
 -- 
 2.43.0
 
