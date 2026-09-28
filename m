@@ -1,131 +1,157 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B258F4B0E22;
-	Mon, 28 Sep 2026 11:45:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 869F84B44B7
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 11:48:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790595959; cv=none; b=WDCQRF0fmFzhktsNRuSRREcAGLO6nAkwm7kwTUlUicGdJF/UurSq4qBPWxyrqe2mmQJpQ5fHATPkZkwlggiTDBV1yQWJfArBLaePI7EOSGmj104mkL6grt07J/CM4/fXb8lylKfXvilg4fAkftG/QhN9CM/zBKvRjgOo7I9c7hI=
+	t=1790596103; cv=none; b=VSXJ72tZMmnfu8z6YngGW8+fQeU38mat3jSdgZuRZEO7uPSrF1kHj+q6b4+0DFmNG4pL8RfpOXy5QsvO+4CiPLXwC9fM51Zv0cMy4Cb4GsiactmP3m+ZSMRxZOOvakMRyW1dYfHFMOJDzQ0R6Jgm3eqIV0SQ5IQtfbpRaozaxKY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790595959; c=relaxed/simple;
-	bh=xzrXrhwrYA/nGNzNh844W+Q0tLQx5FRyl+iZGxYVkBk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mzp9mmrSOf3JESUQGxeyaiD8NxW45PauQ8903fpdqDjfNNTXI1TedABXv4hwZAoz2I/VFvDIw4CcSr+C/CGnfIbQ8PQl6DlHf2XUnSBJuPa3/6f54kqSf0stOOTgQ61nu/ldOSsz2YRF+LDGTuRsAzdaMCp2RhzWiZp4gGl1lMA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=SV6prVxK; arc=none smtp.client-ip=198.175.65.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1790596103; c=relaxed/simple;
+	bh=EgPFAuP9qvQBrProAV6Bi/9+EkS0oVZfziknCw4Lrlg=;
+	h=Mime-Version:Content-Type:Date:Message-Id:To:From:Subject:Cc:
+	 References:In-Reply-To; b=pstxIicdiK9nmuTHWI5wWebM4V1j0eI+ARtls6d7H+gON/PumFwOPaJVya8HRW/+C7x2LCLKhOiNBwxLrO0uVzKJ/INpvqDlNbRHWXiRRzxd/uimSoZoShMLkp0DVwQAFgA/pTvYbAAZWCvOHiyKyMpNQ73gwsqx2uzDOAdIToo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=MGXKKc4c; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="SV6prVxK"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790595956; x=1822131956;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=xzrXrhwrYA/nGNzNh844W+Q0tLQx5FRyl+iZGxYVkBk=;
-  b=SV6prVxKVkhE48Il1vfsC9PMpd8r5j/J7/cpGqSkYq5YNIyS6iX965I3
-   We/cZqII3f7wgW/bto7eJJ27QSTx9ZjmRgz6bkMaCm4tFCtKy/H1fSeEx
-   kiNCwrXx+C0TT3bKE5qzIKzILKPs91iSpvdobQ0bq5fwJEAiQPV13mc1m
-   Q/mZp3xNo4lzeEUFOrWhvQnNNVHcoJFPzdMJh/+6bHDsEf64L/i194GDm
-   ASQ3VZMQqB86CHCwJqSv+DQaK4zmJWMUwm9SFTOK+JwMWm+YnV5IwQPrK
-   cDrVpg+T0XCdHpT9Uc0ULqBbikDBHNZx2WGLH0HXEz0CQSGOJ6YUaQfvH
-   g==;
-X-CSE-ConnectionGUID: E37x8rWRStebksC1RClmVQ==
-X-CSE-MsgGUID: W3mJMpBdQYyY2Hvvng2+6g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11918"; a="94006862"
-X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; 
-   d="scan'208";a="94006862"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2026 04:45:55 -0700
-X-CSE-ConnectionGUID: 6dylwVTGSwK9zi9Wt0d6nw==
-X-CSE-MsgGUID: q38WUgFKT5qpN1xOcVWNQw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; 
-   d="scan'208";a="275070954"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by orviesa009.jf.intel.com with ESMTP; 28 Sep 2026 04:45:53 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1008)
-	id 4A16799; Mon, 28 Sep 2026 13:45:52 +0200 (CEST)
-Date: Mon, 28 Sep 2026 13:45:52 +0200
-From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-To: Fan Wu <fanwu01@zju.edu.cn>
-Cc: linux-usb@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org, Song Li <songl@zju.edu.cn>
-Subject: Re: [PATCH] usb: typec: ucsi: yoga-c630: unregister EC notifier
- before UCSI teardown
-Message-ID: <arpTcLdnyuZ83bLs@black.igk.intel.com>
-References: <20260923074828.489562-1-fanwu01@zju.edu.cn>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="MGXKKc4c"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id C891A4E410A4;
+	Mon, 28 Sep 2026 11:48:18 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 73DFD60504;
+	Mon, 28 Sep 2026 11:48:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DAA5A102F2227;
+	Mon, 28 Sep 2026 13:47:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790596095; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=TR2EoUedzfwkF3107b5KNS7BcXvPvkAv8bW+yYycLg8=;
+	b=MGXKKc4c5SOmaVWp/phoair6djFZb7UjXYb4g7L1mu9HkDS45D2Mlcr5y0nCwPGAVqpsGv
+	OEyWMqiy3ker2qxJrAW/UnrGrRHX0U5FTADuUuUtmWYUjbjs5sEQnRZOMUAMqnzQlFMAjA
+	pPfwXpH8+1YUt2r57oV6Vdkon/lXPcVhV54ca8km8DMGpKDscvP2exc0uf2Nu6SDXfkR44
+	TLdVQPBbaKuqlM8N4aAFilFSY0cAFNPEgcpSiJcNTfZYNkrgZ0RKbrheWBH8E5cEAIKAjr
+	8JuIZsDLIGY++CVbtEFdbI5WenxcI1Asgjh4lbJzwiQZuHiUsB0V5sy5A7bfEQ==
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260923074828.489562-1-fanwu01@zju.edu.cn>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 28 Sep 2026 13:47:52 +0200
+Message-Id: <DLQXBZQ8KOCD.17XT73H60GTNJ@bootlin.com>
+To: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>, "Krzysztof
+ Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
+From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
+Subject: Re: (subset) [PATCH 1/2] dt-bindings: display: Use consistent
+ indentation in the example
+Cc: "Luca Ceresoli" <luca.ceresoli@bootlin.com>, "Chen-Yu Tsai"
+ <wens@kernel.org>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>, "Thomas Zimmermann"
+ <tzimmermann@suse.de>, "Rob Herring" <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Samuel Holland"
+ <samuel@sholland.org>, "Liu Ying" <victor.liu@nxp.com>, "Andrzej Hajda"
+ <andrzej.hajda@intel.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Robert Foss" <rfoss@kernel.org>, "Jonas Karlman" <jonas@kwiboo.se>, "Frank
+ Li" <Frank.Li@nxp.com>, "Sascha Hauer" <s.hauer@pengutronix.de>,
+ "Pengutronix Kernel Team" <kernel@pengutronix.de>, "Fabio Estevam"
+ <festevam@gmail.com>, "Francesco Dolcini" <francesco@dolcini.it>, "Philipp
+ Zabel" <p.zabel@pengutronix.de>, "Chun-Kuang Hu" <chunkuang.hu@kernel.org>,
+ "Rob Clark" <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov"
+ <lumag@kernel.org>, "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica
+ Zhang" <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn
+ Suijten" <marijn.suijten@somainline.org>, "Marcus Folkesson"
+ <marcus.folkesson@gmail.com>, "Maxime Coquelin"
+ <mcoquelin.stm32@gmail.com>, "Alexandre Torgue"
+ <alexandre.torgue@foss.st.com>, "Yannick Fertre"
+ <yannick.fertre@foss.st.com>, "Raphael Gallais-Pou"
+ <raphael.gallais-pou@foss.st.com>, "Philippe Cornu"
+ <philippe.cornu@foss.st.com>, "Matthias Brugger" <matthias.bgg@gmail.com>,
+ "AngeloGioacchino Del Regno" <angelogioacchino.delregno@collabora.com>,
+ "Adrien Grassein" <adrien.grassein@gmail.com>, "Russell King"
+ <linux@armlinux.org.uk>, "Simha BN" <simhavcs@gmail.com>, "CK Hu"
+ <ck.hu@mediatek.com>, "Jitao shi" <jitao.shi@mediatek.com>, "Yongxing Mou"
+ <yongxing.mou@oss.qualcomm.com>, "Abel Vesa" <abelvesa@kernel.org>, "Chris
+ Morgan" <macromorgan@hotmail.com>, "Martinez Canillas"
+ <javierm@redhat.com>, <dri-devel@lists.freedesktop.org>,
+ <devicetree@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+ <linux-sunxi@lists.linux.dev>, <linux-kernel@vger.kernel.org>,
+ <imx@lists.linux.dev>, <linux-mediatek@lists.infradead.org>,
+ <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
+ <linux-stm32@st-md-mailman.stormreply.com>
+X-Mailer: aerc 0.22.0
+References: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
+ <179057359762.92994.13773102514654073802.b4-ty@b4>
+ <8499ed1a-df9e-4e5a-b609-3da8499a47b5@oss.qualcomm.com>
+ <20260928065837.GA22609@killaraus.ideasonboard.com>
+ <ccb949ea-5fa9-47e5-be75-af8155328dc8@oss.qualcomm.com>
+ <20260928100841.GC22609@killaraus.ideasonboard.com>
+In-Reply-To: <20260928100841.GC22609@killaraus.ideasonboard.com>
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Wed, Sep 23, 2026 at 07:48:28AM +0000, Fan Wu wrote:
-> Both yoga_c630_ucsi_remove() and the probe error path call
-> ucsi_unregister() while the EC notifier is still registered.
-> ucsi_unregister() frees the connector array, so an EC event (USB, HPD or
-> UCSI) arriving before yoga_c630_ec_unregister_notify() makes
-> yoga_c630_ucsi_notify() run on freed memory: typec_set_orientation() on the
-> freed port and ucsi_connector_change() queuing work in the freed connector
-> array. USB and HPD events do not depend on the UCSI notification-enable
-> state, so the disable command ucsi_unregister() sends to the EC does not
-> close this window.
-> 
-> Fix this by unregistering the EC notifier before ucsi_unregister() in both
-> paths, restoring the teardown ordering from before the error and remove
-> paths were reworked. blocking_notifier_chain_unregister() waits for a
-> running callback, so once it returns the EC interrupt thread can no longer
-> reach the UCSI instance and ucsi_unregister() can tear the connectors down
-> undisturbed.
-> 
-> The callback is also the only external source that requeues the connector
-> work, so the cancel_work_sync() calls in ucsi_unregister() can no longer
-> race with a new connector-change event.
-> 
-> This issue was found by an in-house static analysis tool.
-> 
-> Fixes: 168c3896f32e ("usb: typec: ucsi: yoga-c630: fix error and remove paths")
-> Cc: stable@vger.kernel.org
-> Co-developed-by: Song Li <songl@zju.edu.cn>
-> Signed-off-by: Song Li <songl@zju.edu.cn>
-> Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
+Hello Krzysztof, Laurent,
 
-Reviewed-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+On Mon Sep 28, 2026 at 12:08 PM CEST, Laurent Pinchart wrote:
+> On Mon, Sep 28, 2026 at 10:08:43AM +0200, Krzysztof Kozlowski wrote:
+>> On 28/09/2026 08:58, Laurent Pinchart wrote:
+>> > On Mon, Sep 28, 2026 at 08:03:18AM +0200, Krzysztof Kozlowski wrote:
+>> >> On 28/09/2026 07:33, Luca Ceresoli wrote:
+>> >>> On Sun, 13 Sep 2026 14:33:32 +0200, Krzysztof Kozlowski wrote:
+>> >>>> Correct indentation in the examples to consistent 2- or 4-spaces
+>> >>>> indentation to fix dt-check-style warnings ("example 0
+>> >>>> [indent-consistent] indent mismatch ...").  Preferred is 4-spaces, =
+but
+>> >>>> re-indenting entire example just for that is too much churn.
+>> >>>
+>> >>> Applied, thanks!
+>> >>>
+>> >>> [1/2] dt-bindings: display: Use consistent indentation in the exampl=
+e
+>> >>>       commit: 370c5d9004f8b754351981d59fc26851bf943e93
+>> >>
+>> >> Thanks, but I expected no one will pick it up, so I asked Rob to take
+>> >> it, thus it is already queued.
 
-> ---
->  drivers/usb/typec/ucsi/ucsi_yoga_c630.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/typec/ucsi/ucsi_yoga_c630.c b/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
-> index 1be18d1..59738dc 100644
-> --- a/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
-> +++ b/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
-> @@ -296,7 +296,9 @@ static int yoga_c630_ucsi_probe(struct auxiliary_device *adev,
->  	return 0;
->  
->  err_ucsi_unregister:
-> +	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
->  	ucsi_unregister(uec->ucsi);
-> +	goto err_destroy;
->  
->  err_unregister:
->  	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
-> @@ -311,8 +313,8 @@ static void yoga_c630_ucsi_remove(struct auxiliary_device *adev)
->  {
->  	struct yoga_c630_ucsi *uec = auxiliary_get_drvdata(adev);
->  
-> -	ucsi_unregister(uec->ucsi);
->  	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
-> +	ucsi_unregister(uec->ucsi);
->  	ucsi_destroy(uec->ucsi);
->  }
->  
+Sorry that this caused confusion.
 
--- 
-heikki
+>> > Please explain your merge plans in the cover letter next time.
+>>
+>> The merge plan was this going through drm-misc. It got reviews, no one
+>> applied, even Dmitry for msm only reviewed the msm-bits (second patch),
+>> so I asked Rob to take it. This was not planned, but result of usual
+>> drm-misc inactivity for bindings (many bindings were not taken in the
+>> past or with noticeable delay/pings).
+
+My personal rule of thumb to apply patches to drm-misc is to wait at least
+(the latest of):
+
+ * 2w after the patch has been sent
+ * 1w after it's reviewed/acked
+
+This is to give everyone reasonable time to chime in and nack if needed.
+
+According to that policy, which is of course debatable and not ubiquitous,
+this patch got applied timely.
+
+> If that happens again, could you please reply to the series on the
+> dri-devel list to tell it will be merged through the DT tree ? I don't
+> think there's any issue with merging patches that way, it's just
+> coordination that's lacking.
+
+I agree a ping over e-mail or on #dri-devel would be good and less noisy.
+
+But if the patch has multiple eligible branches an "applied, thanks" e-mail
+would let everyone know. I do it very cheaply with 'b4 ty'.
+
+Kind regards,
+Luca
+
+--
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
