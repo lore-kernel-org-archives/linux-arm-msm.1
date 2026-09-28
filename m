@@ -1,92 +1,115 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2B0D4E77F6;
-	Mon, 28 Sep 2026 15:26:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43E2C4E9C29
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 15:54:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790609168; cv=none; b=QxU8h+nW2+lm5aJpcIbcalEbzsaPuK8+Ngk6D7pnxUp74hniVP0d8JaqD4y7Ue2j62XFAtrFW5E0HjwAQzrMYtE/DbY3UsJEMRW9pPsFnhZeXT/t0DtY2KsnDgmRNQ/r6mSRMgucjO1EIKUXehLEN2yfVqk1KoDIiamWjDuQnEc=
+	t=1790610857; cv=none; b=ko64WVwzFl6rUG9E+ppJD64CBNt8kz5VyCFLlXNdimd+5rLa9IOMTXtSqm5rksQVTprULp0osn4FziCpUNojieZqvl3ZJ3UUqFaubC+Cafw/qhc6g0MnCWZYGtksx1KPAnHZi8NuIv0hn3AcAvfcRYR8UuKoLeqAmTqYE3alHpU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790609168; c=relaxed/simple;
-	bh=eQ0oqytzJ8vWXFWZtcRnAGFQJAXYoWIugUoR4MpEhKs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LDqavTR/qm4DsVhSiRgyfT/L8612NME4ocNrDQGpKli5U661TKVRfx7QnlKUrPDjhEm3AnlwfHMgRlHPwCkPMXX36DdL+dtu1RYtYrX/0DO+gt6DQ0p6ouyUx0WeN2SEwKOsOoh4GZQvuiW2TzednaBnCfAQ4adu1VnaHrEWEzg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gCQlm0fw; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790610857; c=relaxed/simple;
+	bh=btGCnFhlcQ9Tjp2kCrPOIBm9c9H5F/PoS4B9XE+7z0E=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=m1DtHl4jcpjGjP2gSAtvvANyeid1L1yfXvRrmWGaNxtt8ynCmsnFCHgmvf9YmfacCHePa+u+gwDqyVSS26yI3I8tW7NwVZPzuGKujdLzv/P1MHT0rHVgTtPD/QLsTPjl0ESANTT1gvgPILK1DHGoq65lJhO01GsJ9HVQuplYZzI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=SXEIvKXy; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gCQlm0fw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73AB61F000FF;
-	Mon, 28 Sep 2026 15:26:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790609164;
-	bh=pOoCF6MK9EIVi8+GIATHY1F0oU3kga1CPCt/SemTgs0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=gCQlm0fwbMvrASH2i0NE090nknFjUNDkg4U4USbT+/yhpr0uHxilM8wc/WvR4fGzp
-	 aY1SvgaLUyhoPdLCwzCtb0JiM8Kv26WoYJVW7X8ndV+nwnYrBjHp5MP2jHbEAZ2xOp
-	 rmXJhaIljJ6zbIcxqwVHaLWnjccaxegpOhPEjTuN2x6H3Id+lOrMI2P0WkvyKkn7et
-	 BZ3cbXaperX35HfUIRG6F9dBpa7WriAQMpBQ8aLIy/doTNiYiopYqWNeKM7xMvrc2d
-	 fuDp44KnYoGfIz84ZZnd6MIfGwhh+DQe4F4DA6FrtRTdNswz9Zv6r72EbC1osM+wGv
-	 EhUZW5S45I03Q==
-Received: from johan by xi.lan with local (Exim 4.99.5)
-	(envelope-from <johan@kernel.org>)
-	id 1xBDEv-00000003gnv-31HH;
-	Mon, 28 Sep 2026 17:26:01 +0200
-Date: Mon, 28 Sep 2026 17:26:01 +0200
-From: Johan Hovold <johan@kernel.org>
-To: Liviu Nicoara <lnicoara@thinkoid.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Jonathan Marek <jonathan@marek.ca>, linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] ASoC: codecs: lpass-wsa-macro: rewrite the interpolator
- volume after enabling clocks
-Message-ID: <arqHCRgQUcKPVpoJ@hovoldconsulting.com>
-References: <20260924125940.22665-1-lnicoara@thinkoid.org>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="SXEIvKXy"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f635552aso2549990f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 08:54:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1790610850; x=1791215650; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=NZXqqboH9bZP57KAcRjQkDCBUvfiHeVgKVSx3nYEKBI=;
+        b=SXEIvKXyIXNyFGjC9wAfQ0wy7KpcoEEft6qj2cHLHzkCiGslmRG/3MdJuJAd4Cq9FR
+         MR6kMsItepCIZ2L5cZwnwFJgaV7Y7mEdsqQqfm9bFETjH5tE0Rvym9wtjWuJwxKMKA0R
+         Ics/VBsilEY3UVL8fhPLv7ao9FTAQt5fVmpE0FSIoW7LYDRgdf2vp8fwuA8f1QkZRmIE
+         OKDsGnEFRR+5bFfat3vOBfeLWQ+WumxqfImwIH41Ma4PWOOQfGSCTz/hghhCh/mo4b9K
+         vrcZ9L++fhIGc0KcglADhiqx/8qkPL/lgvDuZ6fZXQRbNntavrUqMoW4yHhVdqDKXces
+         gNqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790610850; x=1791215650;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NZXqqboH9bZP57KAcRjQkDCBUvfiHeVgKVSx3nYEKBI=;
+        b=rPt9OI/ZZtFBMvLghSkk0qO2Aw4UjUzRIE4CKn7H93rrgyXkWwkpfpRxDZ/oCCcTqg
+         C+vNhmWB/HgmssKMWlA3S+k5U1/C/U2ayMj2Gw0xBGvH4UAaRNXFg1lJ9fJmdme60MC6
+         4THwfEi8ZwDRc9MvGskaZFj+uSzz0lhx/PmGv/z6xuT7JUVOy3vEax+8oeFJp8KbP12m
+         EHaxK4z8xTITqn+GYX05V59LiBq0P0M0ymtCF0jNnZZAOd34Hxkk2cUXu76geQPgwN3Y
+         zOUsKmHZzP6i3bab/jTUvsMWwF+In70Vj5RkRB3nxy2CHflT9M6skVcBMUl8r8ubqNtQ
+         ZtfA==
+X-Forwarded-Encrypted: i=1; AKwUvBywtzUqcOlhXwPQ0x3OgUSvu/hTYczIv4d0oVMAKGmpvZmt2jef6UQBnBBlRFQzvYy5qdvQVaIommU8I7yN@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKRd5B+rzNQSvkOh+03snkvuGuEnzb02cPCLuD3GZ33eQt4Ono
+	TkHmgt6pt+ZZHHlZNM8tPd8zZCej7gVT4NEsdPnWjbZ7Xi5t0cK//3ClYxnFR9oN9tA=
+X-Gm-Gg: AYBFou2VbOLtvMbGAjc4j04OUZoUzBs9gl/PvpmPwTyCoqCMmHkkUo94ZkYbvbV7f3n
+	Gcl0uA2edycKeT6cr8EE6IMqyoDGtLG0U2bKdL6HK0jMiwg1YyhyVI+4DdbCW16ldyRf2ZPnTqY
+	zdcrQ3Ity04IkRw7XVDwlHxK1y25/T1XUcZBoB+tekrpqe2KAbZ7WIZZOoffMY9s2TSjnnMLMyX
+	lElycDg3ook6euzp6y73GCv0t+GvtZuOZeQvm1aLL5DHgR72BGk8j6tzdR0jBh98HeADeDBx3CW
+	hkkMKMEIgt0YpvSt/X/z5n7r7vVjBoNEE0jYhlwP8rl6U2zC11/WSF1/SD5PLuQJG7U1il2Swdm
+	9e3yFvWkplTm2d9wnPS8fXgBnjapTrFus5MSF/HgtsiEeTKoJxot8ybuMkVvVgDA4K0N4SNoTMl
+	w5vkhXma+027VhBjNUbye1mqwXjHtYYnH1P6MzH5NwTAOi6F1PD/ZOJYTS6GvYsndcFutYSZegF
+	Yhq5Ca4WVsAefprguWO3q8=
+X-Received: by 2002:a05:6000:2608:b0:488:84ba:ae2e with SMTP id ffacd0b85a97d-48884baaf4emr13756148f8f.0.1790610850114;
+        Mon, 28 Sep 2026 08:54:10 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.243.160])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-489bd7b1df0sm7993153f8f.31.2026.09.28.08.54.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 28 Sep 2026 08:54:09 -0700 (PDT)
+Message-ID: <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
+Date: Mon, 28 Sep 2026 16:54:08 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260924125940.22665-1-lnicoara@thinkoid.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ David Heidelberg <david@ixit.cz>
+Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ phone-devel@vger.kernel.org, mfd@lists.linux.dev
+References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+ <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
+ <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
+ <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 24, 2026 at 08:59:40AM -0400, Liviu Nicoara wrote:
-> Commit 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless
-> gain read/write sequence") removed the read and write of the digital
-> volume register in wsa_macro_enable_interpolator(), on the grounds that
-> writing back the value just read does nothing. The comment above it,
-> "apply gain after int clk is enabled", was left in place.
-> 
-> On the Dell XPS 13 9345 (X1E80100, four WSA8845 amplifiers on two WSA
-> macros) the write does something: a volume change made while the path
-> is idle does not take effect when playback starts. Lowering the digital
-> volume from 81 to 63 with nothing playing, then playing a test tone,
-> gave about the same level as before the change. With the rewrite
-> restored, lowering it from 81 to 69 while idle played audibly quieter,
-> and restoring 81 while idle brought the level back. Changes made during
-> playback take effect with or without the rewrite.
-> 
-> This is the behaviour described in commit 46188db080bd ("ASoC: codecs:
-> lpass-wsa-macro: fix compander volume hack"): "the volume registers
-> still need to be written after enabling clocks in order for any prior
-> updates to take effect." The value read comes from the register cache,
-> so the write pushes the last requested volume to the hardware once its
-> clock runs.
-> 
-> Restore the rewrite in the interpolator's POST_PMU event only. The mix
-> path event removed later in the same series is not brought back.
-> 
-> Fixes: 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless gain read/write sequence")
+On 27/09/2026 17:33, Dmitry Baryshkov wrote:
+>>> One major comment. As we see, on SMB2 PMICs parts of the Type-C
+>>> functionality are provided by the charger / FG device. I guess that on
+>>> SMB5 PMICs we will get the same problem once somebody tries to implement
+>>> additional charger features. Would it make sense to rework the PMIC TCPM
+>>> driver to be a composite driver, taking several components via the
+>>> existing Linux interface?
+>> As this gets decided from the QCOM side, I'm fine with whatever suits the
+>> hardware best.
+> Bryan, as you are a maintainer of the PMIC-TCPM? Would the use of
+> components be fine?
 
-Since this fixes a regression that may affect the speaker limits imposed
-by the machine driver, please make sure that this gets backported as
-well:
+I mean maybe. Would it not make more sense to land the TCPM 
+functionality and then look into adding charging moving then ?
 
-Cc: stable@vger.kernel.org
+i.e. finish off adding this piece first
 
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
-
-Johan
+---
+bod
