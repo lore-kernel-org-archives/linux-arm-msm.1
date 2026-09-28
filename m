@@ -1,90 +1,265 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi2-f13.google.com (mail-oi2-f13.google.com [74.125.231.205])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB0BF4D6C3C;
-	Mon, 28 Sep 2026 14:11:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFA0C4D9541
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 14:32:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.205
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790604703; cv=none; b=At5KeAYNQ+LYvg3wa8VaOtPDLHYfqz3Xbu+YlhD3mDhK7N4bmDFvXleFNgxceV7ttJPBnPEwr6R+4mfKzUcgJ7sinNgqnMkzWgJg9NZeF0l+wUMhdfDfd5/3DUnpi/IOQLGzKPP6ZdUpKl/7igovCKCXFjLJQCDUHFxuQ+dMNSY=
+	t=1790605933; cv=none; b=pbEn08e+I7nLXw9KijumHAVoM3LXPrnkfKjKdjSSzNMmJth06xMmtehRgLnKVW2PwtuFhL4a60hH5GTsk15mc7Knmlp8HZh9GE81NJKwcA0ZVO6A+Jl38uxyeoEOtoeN8o2pIiDOeAvmU+0UYDADSPOvsFqgOjsMA7yngpr9kpU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790604703; c=relaxed/simple;
-	bh=2eP5f1rC2G5giHatLBd6b7XUPgX5PW7havgM7U/tMFs=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=FnwTWTgWE7DUb+5blEayNyPONvNlzCz4cDsTlr2xRCF8CRL7/2LhfaOQUh0PogJMAt8d4sQIz5ISgHG7PbCG0eRp96N5ckZ6m6TQqlnANR8d5+msfacOtiMqwqKxInkoauTrCks3A/vBiTmOOfT3MMfj9gevMK2xLgvYi5mxi20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FilZl3yf; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790605933; c=relaxed/simple;
+	bh=PlUKL150dn2du9L3IVzBI7wLkDXJFZiENeb7jzv74sw=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=bJekndEti4Utp9hWU7E6BvNerqOsPWhaRLvbgs69fUmaCB/mDkfgKCjE94hPowjsQzv7WD5fYmZjyr/wqpN/5H3rn4N4POuMEltmOrEwpMpdiMVYxqu1NVp8TJBRkMZyfMxj0te1vPnIvQbmpEmCEdmWas7czWGvBdY5ZBnW/oc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ndufresne.ca; spf=pass smtp.mailfrom=ndufresne.ca; dkim=pass (2048-bit key) header.d=ndufresne-ca.20251104.gappssmtp.com header.i=@ndufresne-ca.20251104.gappssmtp.com header.b=qL1QSMre; arc=none smtp.client-ip=74.125.231.205
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ndufresne.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ndufresne.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FilZl3yf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04F401F000FF;
-	Mon, 28 Sep 2026 14:11:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790604701;
-	bh=/JkV/Sw9hstmhD/AD+QsTDqQ77j7eEPvuBV/wLIAZlQ=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=FilZl3yfjI0otOpLyDYwzbxlXWXRDsg5rzC5ts+2saEdI6MgdxQi3AA5uOnWi4apD
-	 juYXxS7uVxVyGeEMr9B0P7rCW282TEYu+lPfn9J7iMr/gZq+lp/Au7eFuKBYXug2n3
-	 RvFPjch+73FwIzQo5LQLS3jtoUej1K7t0CAESWVX0beZTNRrOZ4AZ+yxDqehWlM3UK
-	 T4XgLRaxFW3ecE4JXZFiD4pFvTjzzRG1zFErOa2koGysoOeieqJMl/KZLiatM4XQdf
-	 eojKOarmO9FbdjLxZ+LWr/XbeyQHkMIJGblgdT+KNg7qJnuEpdKpHywdkGxJ53q1MV
-	 bkIbV3dmK0i2g==
-From: Mark Brown <broonie@kernel.org>
-To: srini@kernel.org, Zimeng Li <me@lizi.moe>
-Cc: lgirdwood@gmail.com, tiwai@suse.com, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-In-Reply-To: <20260927010911.51980-1-me@lizi.moe>
-References: <20260927010911.51980-1-me@lizi.moe>
-Subject: Re: [PATCH v3] ASoC: qcom: lpass-cpu: use DAI table index for
- playback constraints
-Message-Id: <179059599429.109964.10222268664920619691.b4-ty@b4>
-Date: Mon, 28 Sep 2026 12:46:34 +0100
+	dkim=pass (2048-bit key) header.d=ndufresne-ca.20251104.gappssmtp.com header.i=@ndufresne-ca.20251104.gappssmtp.com header.b="qL1QSMre"
+Received: by mail-oi2-f13.google.com with SMTP id 5614622812f47-4c2c08ff3f8so1501977b6e.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 07:32:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ndufresne-ca.20251104.gappssmtp.com; s=20251104; t=1790605923; x=1791210723; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-type:autocrypt:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wplymnUDmIm0BRSXdlFUTBVv5g6UzG2wi49zmSLRRpU=;
+        b=qL1QSMrek7nWRhd6mafQbAxpI0T2f/A5trFhlnK6Z53ZVIzUfhv8sNyl/uP4LmKee8
+         DF6HDXOOWtuOaZBM8C+epFLQJZFfS10sF4mfTDDtCJbFRDwno9+nMw4NIMQ+e3+t1b4W
+         ws45jkx0q19kJ7Kf+dRG/pNcvD3zBy1YXu1i1u4R0UN4PmGI8uH3laVtTgEpBtKc/ad3
+         vWJqM7Xp9xXtDpZ261wAC/LTJSRAmz5C/0Xr5FMrOQUce0qnXPMgKi79Eu6uVGq8zFbY
+         DQbG8ZvujFc+VqwoIMEMHPykE2Lya9hJa+O4veajCecxmS41ltG+QanBu9odg8Jg/hoI
+         5tGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790605923; x=1791210723;
+        h=mime-version:user-agent:content-type:autocrypt:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wplymnUDmIm0BRSXdlFUTBVv5g6UzG2wi49zmSLRRpU=;
+        b=Ap0a4y8/4iJJcN+/PkzMnZzihnFB5yb1b5edMMS5WvydXnzYnNTddpUgRzWa6E9EKj
+         x3wttlw8UXAUEUw2L7TwzG2V0aaQ8+3zwcxSoRLZNup3GT/OOqfRjNsUJ56ccwJA+tgK
+         T5QzkLl5fF39ozebm3C7MYYLuGTdK+bHavg70vdHJYxTdgA5AaNR2f/D1b4mlNgSr3VR
+         MuFCWlca6Q2Q52kt/QJQNZuoFn2qcR5PckzUGgLb9kDM8Ty+dprFYYJ9A7E6NnBK5NiE
+         eWVsoVUXhvl5CV1OB3LB+ToSEIJOLyXQSM9ESotFpvy5YtARonv+hJkyjkjxyL6hV39d
+         +qiw==
+X-Forwarded-Encrypted: i=1; AKwUvBxC1V9ySDGGqLEjOjb1XuJbHl5j/e8rFofa1AsXNOELlBHMkHTGM9rkv028KTmdBINs8zdqOEgTAA5bsoVE@vger.kernel.org
+X-Gm-Message-State: AFuF++nl7gxNXE2UcigQe8ms/I3zD7c36I9kKrtVXouY6Rbosp+xzez+
+	efKvfUH1VSw7uEpSYerAslVlZ3BDrQXInEdNJM2Yae1ALgT9X9cO1F6LwjdV9TowDhA=
+X-Gm-Gg: AYBFou3MPGCboSzqODxldBFoJnzSfUPWMrn+Y2jG49texZeVjYV0S9zkjIH1Wd00qCH
+	glw86SG7nPdH9tEXCx67ov7N2CnZFD6VSg0z6ooTdLgqE/OW0NykcFptTi6APHRiJJ85s/55l9g
+	v8TrFPirr2EMqIZXmn/gGH3gJx3nBedKrxr3mFxJy9rhigkXQcpC3Tk+wl8zTH9G7MYAo2stGcg
+	RNyFr4ZcZ593igZp4jgRZvCs9nwkrINljaQyNVDVSzMTFujrs7U/ixYxA3KpiwUZu/r9vpi8qof
+	kl0NRyo8ku1Xb5zhLKRO9erzusloQ2GnhbbFCk2yP1+zfnrHWHIhjjr3ob7k49MMPL+Mr4ENPrA
+	31aENwyDL12dVFh8VeeI86C3PZMnbV9DJ+K/8/8s5O3SXRYpSMNW9psmaploSrteghJ9ReA9ftq
+	tZFBB+tejWZOigLBli8QcS2mGrukdYdLT/9AAjx/lJ8nO2g10vbCOrn+OWOkvWNcJ1hDGRX6+Sy
+	fNIac08+jTxo6goo3X7O42f
+X-Received: by 2002:a05:6808:10c7:b0:4d6:48c4:a819 with SMTP id 5614622812f47-4d72cb41616mr12356739b6e.29.1790605923559;
+        Mon, 28 Sep 2026 07:32:03 -0700 (PDT)
+Received: from ?IPv6:2606:6d00:11:34bd::5ac? ([2606:6d00:11:34bd::5ac])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-4ebbaf87920sm1581461b6e.3.2026.09.28.07.32.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Sep 2026 07:32:02 -0700 (PDT)
+Message-ID: <0235d9d9418c998b6fe18c51db4e7ff308cc2282.camel@ndufresne.ca>
+Subject: Re: [PATCH v7 2/5] media: uapi: Introduce new control for video
+ encoder ROI
+From: Nicolas Dufresne <nicolas@ndufresne.ca>
+To: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>, Mauro
+ Carvalho Chehab <mchehab@kernel.org>, Vikash Garodia
+ <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal	
+ <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>,  Bryan O'Donoghue	 <bod@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, kernel test robot <lkp@intel.com>
+Date: Mon, 28 Sep 2026 10:32:00 -0400
+In-Reply-To: <20260924-enc_roi_enable-v7-2-6fa7413af23c@oss.qualcomm.com>
+References: <20260924-enc_roi_enable-v7-0-6fa7413af23c@oss.qualcomm.com>
+	 <20260924-enc_roi_enable-v7-2-6fa7413af23c@oss.qualcomm.com>
+Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
+ keydata=mDMEaCN2ixYJKwYBBAHaRw8BAQdAM0EHepTful3JOIzcPv6ekHOenE1u0vDG1gdHFrChD
+ /e0J05pY29sYXMgRHVmcmVzbmUgPG5pY29sYXNAbmR1ZnJlc25lLmNhPoicBBMWCgBEAhsDBQsJCA
+ cCAiICBhUKCQgLAgQWAgMBAh4HAheABQkJZfd1FiEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrjo
+ CGQEACgkQ2UGUUSlgcvQlQwD/RjpU1SZYcKG6pnfnQ8ivgtTkGDRUJ8gP3fK7+XUjRNIA/iXfhXMN
+ abIWxO2oCXKf3TdD7aQ4070KO6zSxIcxgNQFtDFOaWNvbGFzIER1ZnJlc25lIDxuaWNvbGFzLmR1Z
+ nJlc25lQGNvbGxhYm9yYS5jb20+iJkEExYKAEECGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4
+ AWIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaCyyxgUJCWX3dQAKCRDZQZRRKWBy9ARJAP96pFmLffZ
+ smBUpkyVBfFAf+zq6BJt769R0al3kHvUKdgD9G7KAHuioxD2v6SX7idpIazjzx8b8rfzwTWyOQWHC
+ AAS0LU5pY29sYXMgRHVmcmVzbmUgPG5pY29sYXMuZHVmcmVzbmVAZ21haWwuY29tPoiZBBMWCgBBF
+ iEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrGYCGwMFCQll93UFCwkIBwICIgIGFQoJCAsCBBYCAw
+ ECHgcCF4AACgkQ2UGUUSlgcvRObgD/YnQjfi4+L8f4fI7p1pPMTwRTcaRdy6aqkKEmKsCArzQBAK8
+ bRLv9QjuqsE6oQZra/RB4widZPvphs78H0P6NmpIJ
+Content-Type: multipart/signed; micalg="pgp-sha512";
+	protocol="application/pgp-signature"; boundary="=-EGki3gnESU+nfIDZ1ISo"
+User-Agent: Evolution 3.60.2 (3.60.2-1.fc44) 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1149; i=broonie@kernel.org;
- h=from:subject:message-id; bh=2eP5f1rC2G5giHatLBd6b7XUPgX5PW7havgM7U/tMFs=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqunWZzwsXv1Sl/skIb+0NPksNcuEHBirUxYy0w
- 3dAVhWuzfaJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCarp1mQAKCRAk1otyXVSH
- 0Os9B/9l72MKnKurLzHvVHgHLONVKdwgpkheNOYoJQ/YRXgYejujWPGfMiyaEtEX7v/P0+dmlsl
- 94XBj2RWQ4u4NLZjcbbQb9V6PS1fRCVJgd7pyiCKFTGm6ehXIiSBij3a7B3z8UW2tsXexBZ6qJe
- CO99m48F29oVyHQR2DwtH8LCC/+qISe4IU9kBxvDLhBXzXeaAZhPLN70pwXlGUGpirlh4zqcFeQ
- qi2L29Z92VLvD0JwmwMSucqOIM5l5YlsVN7EU6awGr8bmAJBjfmiZ3n5dnfCiTqlb9HfbZM+MZ/
- G7C/VPqFlMHPUi4Jc8IJdC2PdI6ZVyjcOVeTD/OCKkQ8rXsi
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Sun, 27 Sep 2026 09:09:11 +0800, Zimeng Li wrote:
-> ASoC: qcom: lpass-cpu: use DAI table index for playback constraints
 
-Applied to
+--=-EGki3gnESU+nfIDZ1ISo
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
+Le jeudi 24 septembre 2026 =C3=A0 17:28 -0700, Deepa Guthyappa Madivalara a=
+ =C3=A9crit=C2=A0:
+> Add array control, V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP for
+> video encoder Region of Interest to allow applications to specify
+> different quality levels for specific regions in video frames. Define
+> V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE to retrieve supported MB size based on
+> codec from the hardware encoder and set the corresponding ROI MB delta_qp
+> map that adjusts quantization relative to the frame QP's base value.
+>=20
+> This enables use cases like prioritizing quality for faces in video
+> conferencing or important objects in surveillance footage while reducing
+> bitrate for less critical areas.
+>=20
+> Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.=
+com>
+> ---
+>  .../userspace-api/media/v4l/ext-ctrls-codec.rst    | 26 ++++++++++++++++=
+++++++
+>  drivers/media/v4l2-core/v4l2-ctrls-core.c          |  3 +++
+>  drivers/media/v4l2-core/v4l2-ctrls-defs.c          | 10 +++++++++
+>  include/uapi/linux/v4l2-controls.h                 |  2 ++
+>  4 files changed, 41 insertions(+)
+>=20
+> diff --git a/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst b/=
+Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
+> index ab865a1a6ba929f1725ce2ab0fd3aeee4a69329a..a02ec20ec18f0e684973964d2=
+de1759ad179b819 100644
+> --- a/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
+> +++ b/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
+> @@ -1674,6 +1674,32 @@ enum v4l2_mpeg_video_h264_hierarchical_coding_type=
+ -
+>      Codecs need to always use the specified range, rather then a HW cust=
+om range.
+>      Applicable to encoders
+> =20
+> +``V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP (__s8 array)``
+> +    This control is a dynamically sized 1-dimensional array,
+> +    V4L2_CTRL_FLAG_DYNAMIC_ARRAY flag must be set when using it.
+> +    This array control is used to set ROI MB map delta_Qp for the whole =
+frame.
+> +    The frame is divided into a grid of MB Size by MB Size pixels (MB Si=
+ze is
+> +    obtained from querying ``V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE``). Each bl=
+ock
+> +    is configured with delta_Qp in raster order. The valid range for del=
+ta_Qp
+> +    is encoder dependent.
+> +    Applicable to encoders.
 
-Thanks!
+Since there is no manue to enable/disable this. Can you define in the spec =
+how
+one should disable this feature ?
 
-[1/1] ASoC: qcom: lpass-cpu: use DAI table index for playback constraints
-      https://git.kernel.org/broonie/sound/c/ca51771c8efd
+> +
+> +``V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE`` (integer)
+> +    A read-only control that reports the MB Size used for the ROI delta_=
+QP map.
+> +    The supported MB Size depends on the encoder codec.
+> +    Only square MBs are supported. The value returned represents the
+> +    width and height of each block in pixels. The ROI delta_QP map provi=
+ded
+> +    through the ROI control must use the MB Size reported by this contro=
+l.
+> +    The number of entries in the ROI delta_QP array is determined by the
+> +    frame resolution and the reported MB Size. If frame_width or frame_h=
+eight
+> +    is not MB Size aligned, they must be ceiled using ceil(frame_width/M=
+B Size)
+> +    ceil(frame_height/MB Size) for calculating the array size.
+> +    For example, for a QCIF frame if reported MB Size is 16,
+> +    the delta_QP array must contain 99 entries, ceil(176/16) * ceil(144/=
+16) =3D 99.
+> +    For frame resolutions that are not aligned to the MB size, for examp=
+le
+> +    1920x1080, if the reported MB size is 32, the delta_qp array
+> +    must contain ceil(1920/32) * ceil(1080/32) =3D 2040 entries.
+> +
+>  .. raw:: latex
+> =20
+>      \normalsize
+> diff --git a/drivers/media/v4l2-core/v4l2-ctrls-core.c b/drivers/media/v4=
+l2-core/v4l2-ctrls-core.c
+> index c5df0e0a54f81c73975f427957b7c99fd421d5ad..2318a548f16ebc1ec582f829c=
+7945a8998b96708 100644
+> --- a/drivers/media/v4l2-core/v4l2-ctrls-core.c
+> +++ b/drivers/media/v4l2-core/v4l2-ctrls-core.c
+> @@ -1410,6 +1410,9 @@ static int std_validate_compound(const struct v4l2_=
+ctrl *ctrl, u32 idx,
+>  			return -EINVAL;
+>  		break;
+> =20
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP:
+> +		break;
+> +
+>  	default:
+>  		return -EINVAL;
+>  	}
+> diff --git a/drivers/media/v4l2-core/v4l2-ctrls-defs.c b/drivers/media/v4=
+l2-core/v4l2-ctrls-defs.c
+> index e062f2088490470c42d6c579ff7675be454a29b0..8f895060799ea13443143edd3=
+98dfb97f4ba0085 100644
+> --- a/drivers/media/v4l2-core/v4l2-ctrls-defs.c
+> +++ b/drivers/media/v4l2-core/v4l2-ctrls-defs.c
+> @@ -974,6 +974,8 @@ const char *v4l2_ctrl_get_name(u32 id)
+>  	case V4L2_CID_MPEG_VIDEO_AVERAGE_QP:			return "Average QP Value";
+>  	case V4L2_CID_FWHT_I_FRAME_QP:				return "FWHT I-Frame QP Value";
+>  	case V4L2_CID_FWHT_P_FRAME_QP:				return "FWHT P-Frame QP Value";
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP:		return "Encoder ROI MB Delta=
+ QP";
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE:			return "Encoder ROI MB Size";
+> =20
+>  	/* VPX controls */
+>  	case V4L2_CID_MPEG_VIDEO_VPX_NUM_PARTITIONS:		return "VPX Number of Par=
+titions";
+> @@ -1622,6 +1624,14 @@ void v4l2_ctrl_fill(u32 id, const char **name, enu=
+m v4l2_ctrl_type *type,
+>  	case V4L2_CID_COLORIMETRY_HDR10_MASTERING_DISPLAY:
+>  		*type =3D V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY;
+>  		break;
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP:
+> +		*type =3D V4L2_CTRL_TYPE_S8;
+> +		*flags |=3D V4L2_CTRL_FLAG_DYNAMIC_ARRAY;
+> +		break;
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE:
+> +		*type =3D V4L2_CTRL_TYPE_U8;
+> +		*flags |=3D V4L2_CTRL_FLAG_READ_ONLY;
+> +		break;
+>  	default:
+>  		*type =3D V4L2_CTRL_TYPE_INTEGER;
+>  		break;
+> diff --git a/include/uapi/linux/v4l2-controls.h b/include/uapi/linux/v4l2=
+-controls.h
+> index d17e41d51d2ec1ccb9e8ceb3ccc89ebc4381a4cd..be484156ed35a19229be23ad2=
+4fd224cb5a8a0cc 100644
+> --- a/include/uapi/linux/v4l2-controls.h
+> +++ b/include/uapi/linux/v4l2-controls.h
+> @@ -941,6 +941,8 @@ enum v4l2_mpeg_video_av1_level {
+>  };
+> =20
+>  #define V4L2_CID_MPEG_VIDEO_AVERAGE_QP  (V4L2_CID_CODEC_BASE + 657)
+> +#define V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP  (V4L2_CID_CODEC_BASE + 658)
+> +#define V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE  (V4L2_CID_CODEC_BASE + 659)
+> =20
+>  /*  MPEG-class control IDs specific to the CX2341x driver as defined by =
+V4L2 */
+>  #define V4L2_CID_CODEC_CX2341X_BASE				(V4L2_CTRL_CLASS_CODEC | 0x1000)
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+--=-EGki3gnESU+nfIDZ1ISo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+-----BEGIN PGP SIGNATURE-----
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCarp6YAAKCRDZQZRRKWBy
+9PLZAQDqqutEjxJKBF4aX4VidB8wRkgp5wKrCMvgAzo3hEozvwEAgMiLNzE2wCcL
+zJPflDm0uNaEu8cgQxyhN3K/CJspfAc=
+=+3eK
+-----END PGP SIGNATURE-----
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+--=-EGki3gnESU+nfIDZ1ISo--
