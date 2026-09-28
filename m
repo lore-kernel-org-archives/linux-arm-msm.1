@@ -1,316 +1,176 @@
-Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FBA7390219
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 05:39:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.40
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790573968; cv=none; b=NIsma3XpNHc7AZTuHNv9rL2rf+Aolxppk0Y1xUWuPB+UmJB3/4y0W72YKw/nm04SChpBLcdqLcGDZldJoGARZf2u27VcxN99ZCZbuNbUD4g69m54KgnfOMM2ArkOpJfiW+vLlfBCyfiJL54CpbTCOxjkb2KOpZXltROJjmMiGA4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790573968; c=relaxed/simple;
-	bh=vU3G+Dpf20aZ+9WW19yBDyvOCi9xmow7DgGMoyE68S0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=UNPsLWzSpdgu12IDfmx7EysNqWoZwB4kri96vGfmXgj0GZst6tqgVV0a8auUUUAqH1tXJLJcPSWPcq1ZeyWiqTOO5PAiURcNt8mPBXFY/EgctmXHTXI4kbHK7Mu+u72RFvAcCWxs+JF0t3XzyKRy+auc0+jwcWS6OdKgHiAeVCY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=N+TNqcIU; arc=none smtp.client-ip=74.125.228.40
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0D3E3ACA48
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 05:44:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790574298; cv=pass; b=cZ2JoyoT2o8I+N8GihFjypLyk4U9Oyp56kLAaXa45uoY7YRT+o1Iy8wpoQ/UeNtpVy1Sq0cYK3tI9b6Ld353xpeQ8PEoqnR5hbqPTDO1t2yWYH6JEMDTuBM6CCSr4GsgT7/Kra4zztD7M6x4AMqwxwvGqxbuPC+lOWKjbIDFmac=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790574298; c=relaxed/simple;
+	bh=I9Mp/Py13xSxFWieB7EbhwjPp/EFqEXl6CXyIvK73sY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=VSNz8uHOrLgxpufsoN4qHKngT534glo0Eja1xitdYuE+G4d14LSHiFxQLvou6gQBKJ3o3PUcD+Tui4D3kD1U61MCg25UNTdegSJbJH6Bfj6T6fU7PLLjorxN18vK4LJ0XH3Ey8w90GwDneH0cfbRg8X1fR287T1V6hM4a3uRNl4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AnlEQq0r; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OKb3OSTt; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="N+TNqcIU"
-Received: by mail-pz2-f40.google.com with SMTP id d2e1a72fcca58-87887996990so76143b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 22:39:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AnlEQq0r";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OKb3OSTt"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68S0sTBw1478410
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 05:44:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LwgxT6g7CzK/lb0vgQ1MfEf1Woq38eVDHc4Gj0WfteY=; b=AnlEQq0rZX1irCcW
+	e1eybMhm5vHLxz5hTbuHab+sMTVHDvt6joyW67y35GODMR06qdkalK8lqGw2/+kV
+	OonGx7d9eWraCLsJSZtgG8CuOTY2bq1qEQoWyBXfuvcZMwS/80AyTrNvyFPaZe4e
+	BhKW8SiuT/f6X7LxLBZw8TLjXdZApQ+0qhsImm8lVdD5bGieALA31FDkFDZu+WUv
+	XqDtkqVdQbG5MyQaHyDFtSor/TfA+vjLzzrjng4VNN3gK4Ck4m4dLzLcvC3s50Qr
+	HHCy7VoQImDgYYgIEC0BVSRgG9MIRoTnbTftATleLWUl6y7MkBQqk6Ne2jHCZNL8
+	I8ZnnQ==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx526ms0x-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 05:44:52 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-6711a336db0so3994830d50.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 22:44:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790574292; cv=none;
+        d=google.com; s=arc-20260327;
+        b=eSCrIc3K+uVDynl3vTeJQJC/N1dkCLIKxftvq7dFN37wyJ0S4QwlDdTSrU6R70oZRH
+         BchATwN4EtMLWi5hZgdkRue+07d++i6Tuf0GCLKv/kOA9rY/9m2JsYH+vHD3S2nIf12g
+         rAbPHFx4ZlPz0oC+YuavHscn6ZVz0wiG/3ksYnp8yUPc1MFT2Zi1v/7eigb5iwRP4P6b
+         SLRh+7Bhz+bYdbGaMlQ4bGWHJEiS8DHiyA4tu9kRGGE9bFwWY4b4Yy//XPAn/gVKie42
+         vU8Fea508mgU1Szt9ZwMI0WFwX1iAUycjsUgQN05jnRHMzOCPdQEFXR+NZHpUKPp2E1R
+         gvbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=LwgxT6g7CzK/lb0vgQ1MfEf1Woq38eVDHc4Gj0WfteY=;
+        fh=K4JHpq0Rv5Fv/pc03/sMfp23OQYLbRvrYaVGMIoX3uA=;
+        b=NBDMRuv32Lir17nsCLLrjrqmXvuaBMt69kbi/cBFYNw8imiU90F099OHCnwAptNckr
+         R60fOmDLUy7p9OCqqwHxVuD79tT4R8TzlNGHhmP3fMl8iyDlsOiXtejqDgh+HYjFcATm
+         fVka5VhDtnzwqOq+RWC+Y8cBNIP9d2/gxZkAOyYVG9utPoBCbage+RoBaw2eWhGrEsgu
+         RK7uIcEZA5pINynxTNzqGoe4JS1ekUGryxLVAoY+IxMV8lGatwf65yrXC/x27PNkVkRA
+         2CgBCyprOcHJtG2SO0W9ThxxKZZUzejk2hpeyumJg7Zhf9gufPsv8FYVQJ78ob9LsOXH
+         dgQA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790573959; x=1791178759; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1790574292; x=1791179092; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=x+ooTTX9f0Dee2MM//tZyofUwOPATbbov9mICSl7hdg=;
-        b=N+TNqcIUeslpBd6SZHB0o3v/bYT9mKWQBC4J8LS0j+fHA7YwK1zMZsO+e4wmxjGSYG
-         SfEsPD69g6KjE94zcv9GPhmx8rnD5POErVStUKRvA5MA7xkKaklmKAdRrB7N4vX1G5cF
-         tDVKBSvTgLD2UUKlzFxrURm21k8YL3uJkdQ0gNiTvLowGYrOrN+xVCtP84KR2ta3Z0nu
-         CqSnMY9g1WkDXgRUR1e8gRTPiavSsoEMSwqNM+IFzMgDSK3FIw8Ii3OcwLdNyAQm175i
-         W48CGSVzDmw48ELcl0MK0iNNMws9U3NTM91lAeW/1hIoYnlU+mwO/A2dm24vSBLDLC2W
-         JZVQ==
+        bh=LwgxT6g7CzK/lb0vgQ1MfEf1Woq38eVDHc4Gj0WfteY=;
+        b=OKb3OSTtXcbXxLH8ak6HbUTJDuH1q+y8yM5yRA9SW8J3ykfhl5Hc6bnNPSvn9+Jp8v
+         WRfIKZveWUD+rlcvc/Durj01iyy5KJQnTL/wVBZJ4xq9Y7f4hdDufiGLEAfgE+YmFBp6
+         yQhLjAwUPDYRZqpMKSJ+ADN1nFTYREDQaAj7uDUszPpsrUlqTH0MP2XxA4outVFN/703
+         1klRLVqapIz2UNc0vsbj6ZxUkeCkOgzlDLjOxE8YniCKzUOLsR+xGMYN8F4efgjv68/Y
+         yVfNdnxFeqg32Dg7YpjBhJxLAsYfK8aQMIUzOuAeGe0MNHnrGHI7LDXrTnCph/UgLiok
+         SCzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790573959; x=1791178759;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1790574292; x=1791179092;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=x+ooTTX9f0Dee2MM//tZyofUwOPATbbov9mICSl7hdg=;
-        b=XhwtteNk+YKqu6fdUZIJy1XA2/14DLLCYLzi60GpxJQqvXljeEZlAzC21Cy06gy5K1
-         PzWUr4TMOxD2mziM0RcmCsED6Gp0qfBFUr86aZSGCeSTVq2Ww5RWovg7Fe2FeJRTjdjW
-         6T8gN9bd7V/5ucLcIXdIqdksqQPGn0rCV5ZcCorvbRIg3wd0VXa+PDiUZK+VUfdV9L8G
-         t63ODh2oRFagQ3Dalc9D/wU382dDuwrMZ0SuNb7EKAa5llJPrq0gaK5qel02Har+tN19
-         3hkRT/fJGkdw5iNfc4ZFD1fUxXb+UojOraHlgmsqlWFMTgMBeNeewQkADxxzm4WMH2r0
-         0Czw==
-X-Forwarded-Encrypted: i=1; AKwUvBxkcCYEciV0mfRYT+0km97qdzxDCvtaG6+YGE1J7vVwDq0dQLXXC0eZYfJaGKG71Zekb/kNnMMf8DdEGWXP@vger.kernel.org
-X-Gm-Message-State: AFuF++k8HCHoKKks91AM5JkxzqkVV/N3VTAMvYf20x6mdN2kwDR9jVxu
-	Qg0MuW993Id3qV3k77z4z+oUUw9wE0XL6ZK0085+4TOd0zP4maG60h0x
-X-Gm-Gg: AYBFou2NmBtgQPnRlyn7uX0vmgAwdLZ97IblmKzWEAuGNlp4SgwTJzJHCd6qpiOZ0HM
-	zQzDH9E7TBdT4/6r4F0ddcj7CFeje7OyQK/6SAWzsCMyedZnsaOQTLjrZbxqNPTacFyXPsWdvea
-	sntpCCT3Gd/xYfCrQ/ZR1J1U0VqmSGvV+z0AsihPXtsruogFHbMAgTB1hyWlQfHOYmpwl0esCLh
-	T6C0FQ6BQA8MA3oNpg0RTTU0xgTdP0RvNJoKhI0/biXInmUdbdgQA5Ckjbvo3LDqbSBaC+ak3xN
-	vVtQm21lJod8FrsiLAzXoB0zJLK/aIDT522Re2SHlA1YvRj9lYYitmSmv1KXD6j6J4vW6LXOjck
-	RPo6N8fbNeCszlW2HsPxu7MyUIpJPyjpiAKfipIgekRmbY8PtUbNAIXXgbyl4/OtCN2RaTvw5S+
-	7Q9mzYCi5fYW1YjXIdQm4bkVpzWNFn32kXHraRggFnxZHWgvCNAbMC/Kf06aF1fOC6cOf8Yi2Nz
-	KVQ65t82AgZsQ==
-X-Received: by 2002:aa7:9193:0:b0:880:4b51:af11 with SMTP id d2e1a72fcca58-8804b51b2e5mr8040887b3a.2.1790573959042;
-        Sun, 27 Sep 2026 22:39:19 -0700 (PDT)
-Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87febb82357sm3591121b3a.61.2026.09.27.22.39.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 22:39:18 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: dri-devel@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	freedreno@lists.freedesktop.org,
-	iommu@lists.linux.dev,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	linux-media@vger.kernel.org,
-	Bryan O'Donoghue <bod.linux@nxsw.ie>,
-	Jianfeng Liu <liujianfeng1994@gmail.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	David Airlie <airlied@gmail.com>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Sean Paul <sean@poorly.run>,
-	Simona Vetter <simona@ffwll.ch>
-Subject: [PATCH v1 2/2] drm/msm: map page-less imported sg_tables from their DMA addresses
-Date: Mon, 28 Sep 2026 13:38:51 +0800
-Message-ID: <20260928053901.7270-3-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260928053901.7270-1-liujianfeng1994@gmail.com>
-References: <20260928053901.7270-1-liujianfeng1994@gmail.com>
+        bh=LwgxT6g7CzK/lb0vgQ1MfEf1Woq38eVDHc4Gj0WfteY=;
+        b=dSITjfWBcwz31CSIXTcaTXAm1EjEFqIXy/HnOKNZQ2nDtT4kCbTmh+rY8iR1GbqksY
+         4bAGtYCYVubGWUU+jH+HNisHS8wwxIfe35xMoRdAD8fdHglTY0jS1AhLkpGdq3uRcqqJ
+         7QJATH7Ivp7mugfTeVK6CgZhFKzIkQDjshbhnEh9nJs7oJADUg3lWDMArLvpHa6F1ijP
+         /BbL6D5OYQPiSppId6zXkWosax0gg06nVKyJlBNAAA2lGCM1Z1loNJMJwy32K600pXJT
+         hHn4IspQN7BXpAWLM3Dy4eVT4m6Ytqg/Za24UYQoyvPugt+P6Wwb23umZnJg3ir7UIIK
+         17wA==
+X-Forwarded-Encrypted: i=1; AKwUvBzYy8mOP7cM86S05aVQwYedRpd9aeXudDFlLXfWt9uaAmlDG4xq2Ug6M6jHeWppWfJ0e/5DmDzra+C85BKi@vger.kernel.org
+X-Gm-Message-State: AFq9FYI3Xz1oCh0Yd7lf35Stdvry1M1BrBEdt9zuY4bt+aic204AQgmq
+	XaCWlcO28MaK8oK2aTW/uJBAN1LEzkuswsEtSHd9tUBopilDvbn4TD1peQNW4LPACNlSuRvtPZf
+	bJa7YjIZDYD4Y8SOAvNPHyPVfngON8jgXXcQIuVMwsM1y5TbcMd85tD3B2ZVblAQBrIPCp9IHUA
+	UJf8XJWmXzynWYcELoDlUImJB1jhKTrjBVADEAHO5sWaU=
+X-Gm-Gg: AYBFou0GyuxyVxw97pgKp50Krt6rLshLN2a2L5hRgEomdnXOd+JoyPF6UcziFpBvxgi
+	JTNicA8V/BnD1ZsRWhOi4RKhn8w7zOssFzK3xPbd6Q+gVmNwZ4qj3oYXx/Jh97yjmV4QWEvWphT
+	dZBaH626N4eU7tv7weJavN7rXYnl+ewBYRElSAhev64k5V1OYM0kBzMX6UTGg=
+X-Received: by 2002:a05:690e:4004:b0:674:1cc0:3523 with SMTP id 956f58d0204a3-6741cc07025mr2873105d50.10.1790574292220;
+        Sun, 27 Sep 2026 22:44:52 -0700 (PDT)
+X-Received: by 2002:a05:690e:4004:b0:674:1cc0:3523 with SMTP id
+ 956f58d0204a3-6741cc07025mr2873087d50.10.1790574291796; Sun, 27 Sep 2026
+ 22:44:51 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260923-b4-qaif-shikra-audio-v7-0-d5b6f056568e@oss.qualcomm.com> <arObexxuRRmQ5qqw@sirena.co.uk>
+In-Reply-To: <arObexxuRRmQ5qqw@sirena.co.uk>
+From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+Date: Mon, 28 Sep 2026 11:14:41 +0530
+X-Gm-Features: AclHuK8wlZTyoF8oTJGu3l_EQgkbegRC3BqnooxmGUCthXkptRkdIGPllML5mPo
+Message-ID: <CAC-tS8CpbnvV28AtziXzOd9CTCwN8ToM5JqFXPRn-4h3=GAGog@mail.gmail.com>
+Subject: Re: [PATCH v7 00/10] ASoC: qcom: Add QAIF driver for Shikra audio platform
+To: Mark Brown <broonie@kernel.org>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=VvS2kO2n c=1 sm=1 tr=0 ts=6ab9fed4 cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=6K1A5ce8U_YVOHI9IiYA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=nd2WpGr1bMy9NW-iytEl:22
+X-Proofpoint-GUID: TdrwQ4TCclF_cxj_algdfzi5Ep1YAFa8
+X-Proofpoint-ORIG-GUID: TdrwQ4TCclF_cxj_algdfzi5Ep1YAFa8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDAyMiBTYWx0ZWRfXxCBMMShjeAB4
+ DSbF8g6j75y4BpiB3w2E7lNyBcagMYn98tSXW1Myn8U0YHB8atxqt0nNmHWq3sv838RuhnBgdPF
+ ftsyES98SWmd82OugKk1h2t/qXm6Smpubpu2srsGaOyxZzrcs5l8aQbDMz0+tfWnry5XkSS6yh6
+ oExLa2uZKa/wxz8PDcEzU18UskQfs27EGOMsgcNxri/bLjGy6ahGm6odLFINWG4UZ2XsW31hDvH
+ xYixfMIedbW0YkiQkE5pc1IkFvYZBnGBXCWRBsg5OKTA/5W1u/Gh1U9cp9hHvIKc6+02Elbt8tV
+ GWvXFqswC1uB9WmrqECWRd4GhAOwO9az+1oQaZcBimDxk9/Ql6902MbqVitJhTexDN2dckhtFK6
+ H2EMXvSqqgasGCf7Lb8bY/RQgLTwWgUEPCPqb7q0LGMb3MZgm6rexFQ1DElol2drpNGCHeubM+Q
+ 9urA+7I74ydInFgXv3g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDAyMiBTYWx0ZWRfX5cTYM7DmGHE6
+ JLLvX68RKFZRoEkjlzRFOwPRyap+TEMBLtY6P4vxIMxU4cqEqnjodLB8Om7YI4SP/Y8uMCaBQuW
+ NBpJgxfBlK2hDfrQCtyTm3dSTFtcOao=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 malwarescore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609280022
 
-With CONFIG_DMABUF_DEBUG=y, dma_buf_map_attachment() hands importers a
-copy of the attachment sg_table with the struct page pointers stripped
-and sg->length zeroed; only sg_dma_address()/sg_dma_len() are carried
-over.  msm consumes sg->length and sg_phys() in both of its map paths:
-
- - msm_iommu_pagetable_map() (userspace managed, per-process GPU
-   pagetables) walks the sg_table with sg->length and sg_phys()
-
- - msm_iommu_map() (kernel managed mappings: display, and TTBR1 for the
-   GPU), via iommu_map_sgtable(), which consumes sg->length and
-   sg_phys() as well
-
-With a page-stripped sg_table both paths silently map nothing and
-return success.  Userspace then observes arm-smmu translation faults
-once the GPU first touches the mapping, e.g. during hardware video
-decode:
-
-  gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
-  type=TRANSLATION source=UCHE
-
-and __arm_lpae_unmap() WARNs for the never-mapped ranges when the GEM
-handles are closed (a WARN storm of ~470 traces within a minute of
-video playback on my x1e78100 laptop).
-
-For sg entries that still carry a struct page (native objects, and
-imports without the DMABUF_DEBUG wrapper) keep using sg_phys(), so
-native objects which msm never dma-maps itself (non-MSM_BO_WC) are
-unaffected.  For page-less entries, recover the physical address from
-the DMA address instead: dmabuf attachments are dma-mapped against
-the msm drm device, so the dma_addr -> phys lookup can be done with
-iommu_iova_to_phys() in that device's DMA-API domain, cached per VM
-in struct msm_mmu::dma_domain at msm_gem_vm_create() time.  If the
-drm device is direct mapped the DMA address already is a physical
-address and the lookup degenerates to the identity.
-
-Applied on top of "drm/msm/gem: Drop use of pages for imported
-dma-bufs" [1], which removes the remaining struct page consumers for
-imported buffers.  With both, hardware video decode works with
-DMABUF_DEBUG=y, tested with clapper and chromium on x1e78100
-(Snapdragon X1E78100): zero arm-smmu faults, zero io-pgtable WARNs,
-correct frames.  Without this patch, the same system logs a WARN
-trace per unmap and falls back to a copy path for video playback.
-
-[1] <20260926183051.25754-1-robin.clark@oss.qualcomm.com>
-
-Suggested-by: Rob Clark <robin.clark@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <lumag@kernel.org>
-Cc: Christian König <christian.koenig@amd.com>
-
-Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
----
-
- drivers/gpu/drm/msm/msm_gem_vma.c |  9 ++++
- drivers/gpu/drm/msm/msm_iommu.c   | 90 ++++++++++++++++++++++++++++++-
- drivers/gpu/drm/msm/msm_mmu.h     | 13 +++++
- 3 files changed, 110 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_gem_vma.c b/drivers/gpu/drm/msm/msm_gem_vma.c
-index f687a629629d3..322b96e0e07ec 100644
---- a/drivers/gpu/drm/msm/msm_gem_vma.c
-+++ b/drivers/gpu/drm/msm/msm_gem_vma.c
-@@ -840,6 +840,15 @@ msm_gem_vm_create(struct drm_device *drm, struct msm_mmu *mmu, const char *name,
- 		goto err_free_vm;
- 	}
- 
-+	/*
-+	 * dma-buf imports attach against the msm drm device, and their
-+	 * sg_dma_address() lives in that device's DMA-API domain.  Keep it
-+	 * so the map paths can translate page-less sg_table entries (the
-+	 * DMABUF_DEBUG wrapper) back to physical addresses.
-+	 */
-+	if (device_iommu_mapped(drm->dev))
-+		mmu->dma_domain = iommu_get_dma_domain(drm->dev);
-+
- 	if (!managed) {
- 		struct drm_sched_init_args args = {
- 			.ops = &msm_vm_bind_ops,
-diff --git a/drivers/gpu/drm/msm/msm_iommu.c b/drivers/gpu/drm/msm/msm_iommu.c
-index da6782fca6bd2..8407a37f9efee 100644
---- a/drivers/gpu/drm/msm/msm_iommu.c
-+++ b/drivers/gpu/drm/msm/msm_iommu.c
-@@ -140,6 +140,24 @@ static int msm_iommu_pagetable_unmap(struct msm_mmu *mmu, u64 iova,
- 	return ret;
- }
- 
-+/**
-+ * msm_mmu_dma_to_phys() - recover the physical address of a dma address
-+ *
-+ * dma-buf attachments are dma-mapped against the msm drm device, so the
-+ * DMA domain of that device (msm_mmu::dma_domain) holds the mapping.
-+ * For a direct-mapped drm device the DMA address already is a physical
-+ * address.
-+ */
-+static phys_addr_t msm_mmu_dma_to_phys(struct msm_mmu *mmu, dma_addr_t dma_addr)
-+{
-+	struct iommu_domain *dma_domain = mmu->dma_domain;
-+
-+	if (!dma_domain)
-+		return (phys_addr_t)dma_addr;
-+
-+	return iommu_iova_to_phys(dma_domain, dma_addr);
-+}
-+
- static int msm_iommu_pagetable_map_prr(struct msm_mmu *mmu, u64 iova, size_t len, int prot)
- {
- 	struct msm_iommu_pagetable *pagetable = to_pagetable(mmu);
-@@ -184,8 +202,35 @@ static int msm_iommu_pagetable_map(struct msm_mmu *mmu, u64 iova,
- 		return msm_iommu_pagetable_map_prr(mmu, iova, len, prot);
- 
- 	for_each_sgtable_sg(sgt, sg, i) {
--		size_t size = sg->length;
--		phys_addr_t phys = sg_phys(sg);
-+		size_t size;
-+		phys_addr_t phys;
-+
-+		if (sg_page(sg)) {
-+			/* CPU-view entry: native objects, and imported
-+			 * sg_tables that still carry struct page
-+			 */
-+			size = sg->length;
-+			phys = sg_phys(sg);
-+		} else {
-+			/*
-+			 * Page-less entry, e.g. the sg_table wrapper
-+			 * that dma_buf_map_attachment() hands out when
-+			 * CONFIG_DMABUF_DEBUG=y (page pointers stripped,
-+			 * sg->length zeroed, only the DMA fields carried
-+			 * over).  Recover the physical address by
-+			 * translating the DMA address through the drm
-+			 * device's DMA-API domain.
-+			 */
-+			size = sg_dma_len(sg);
-+			phys = msm_mmu_dma_to_phys(mmu, sg_dma_address(sg));
-+
-+			if (!size || !phys) {
-+				dev_err(mmu->dev,
-+					"cannot map page-less sg entry: dma=%pad len=%zu\n",
-+					&sg_dma_address(sg), size);
-+				return -EINVAL;
-+			}
-+		}
- 
- 		if (!len)
- 			break;
-@@ -697,6 +742,47 @@ static int msm_iommu_map(struct msm_mmu *mmu, uint64_t iova,
- 	if (iova & BIT_ULL(48))
- 		iova |= GENMASK_ULL(63, 49);
- 
-+	/*
-+	 * With CONFIG_DMABUF_DEBUG=y, imported sg_tables carry no struct
-+	 * page and sg->length is zeroed; iommu_map_sgtable() would consume
-+	 * zero length and silently map nothing.  Map from the (translated)
-+	 * DMA addresses instead.
-+	 */
-+	if (!sg_page(sgt->sgl)) {
-+		struct scatterlist *sg;
-+		size_t mapped = 0;
-+		unsigned int i;
-+
-+		for_each_sgtable_dma_sg(sgt, sg, i) {
-+			phys_addr_t phys =
-+				msm_mmu_dma_to_phys(mmu, sg_dma_address(sg));
-+			size_t size = sg_dma_len(sg);
-+
-+			if (!phys || !size) {
-+				ret = -EINVAL;
-+				goto err_unmap;
-+			}
-+
-+			ret = iommu_map(iommu->domain, iova + mapped, phys,
-+					size, prot, GFP_KERNEL);
-+			if (ret)
-+				goto err_unmap;
-+
-+			mapped += size;
-+		}
-+
-+		if (mapped != len) {
-+			ret = -EINVAL;
-+			goto err_unmap;
-+		}
-+
-+		return 0;
-+
-+err_unmap:
-+		iommu_unmap(iommu->domain, iova, mapped);
-+		return ret;
-+	}
-+
- 	ret = iommu_map_sgtable(iommu->domain, iova, sgt, prot);
- 	if (ret < 0)
- 		return ret;
-diff --git a/drivers/gpu/drm/msm/msm_mmu.h b/drivers/gpu/drm/msm/msm_mmu.h
-index 8915662fbd4d0..116daf6ce47cb 100644
---- a/drivers/gpu/drm/msm/msm_mmu.h
-+++ b/drivers/gpu/drm/msm/msm_mmu.h
-@@ -64,6 +64,19 @@ struct msm_mmu {
- 	 * msm_gem_vm::mmu_lock.
- 	 */
- 	struct msm_mmu_prealloc *prealloc;
-+
-+	/**
-+	 * @dma_domain: DMA-API domain of the msm drm device
-+	 *
-+	 * dma-buf attachments are dma-mapped against the msm drm device,
-+	 * so this domain holds the mapping dma_addr -> phys for imported
-+	 * buffers.  Used to recover the physical address of sg_table
-+	 * entries which carry no struct page (e.g. the page-stripped
-+	 * sg_table wrapper that dma_buf_map_attachment() hands out when
-+	 * CONFIG_DMABUF_DEBUG=y).  NULL if the drm device is direct
-+	 * mapped, in which case DMA addresses are physical addresses.
-+	 */
-+	struct iommu_domain *dma_domain;
- };
- 
- static inline void msm_mmu_init(struct msm_mmu *mmu, struct device *dev,
--- 
-2.47.3
-
+On Wed, Sep 23, 2026 at 2:57=E2=80=AFPM Mark Brown <broonie@kernel.org> wro=
+te:
+>
+> On Wed, Sep 23, 2026 at 12:18:20PM +0530, Harendra Gautam wrote:
+>
+> > base-commit: 46e864b539a2d2f6c0e5d08623654513ee50c556
+> > change-id: 20260907-b4-qaif-shikra-audio-729007ceff72
+> > prerequisite-message-id: <20260918-qaif_dai_id_support-v1-0-ed863c0e5e4=
+5@oss.qualcomm.com>
+> > prerequisite-patch-id: 446fe28b27dbf5ce4240704d89296a5af69e8b21
+> > prerequisite-patch-id: dc5ac9645789f25b3742dc4fca08dab4c1e4826d
+> > prerequisite-patch-id: 0521512205679cad2462ecda959239aadc48cce6
+>
+> So, this does actually apply independently but does have the
+> dependencies above.  I have repeatedtly asked Qualcomm in general to
+> please stop sending things with in flight dependencies, it makes things
+> very hard to manage.
+Thanks for your input, Raised with dependency to avoid any compilation
+error. I see that the dependent change is merged, and will raise the
+next version without prerequisite or dependencies.
+-Harendra
