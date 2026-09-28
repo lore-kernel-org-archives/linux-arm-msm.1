@@ -1,83 +1,67 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A0493ACF1B
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 06:59:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65C0E45562C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 07:02:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790578760; cv=none; b=KfWUTPZP2e5AEdp+XUN+E/6U9Hyp4vBaCwC4wrMTc3CZF+WRBAz8VspQs5KTeny0meeez+P/9C7txFgr0hLFweI6dG+fiFUSxLINsS2ouxCoNgI0lbHN/fWucTKSb7yyJN5I8ERT/gtTU3rwxLtJUj8TiCY8kmqcH2rdP9POUVY=
+	t=1790578934; cv=none; b=ioycYjFJfnY29xPIEScghiwV7l8SrXdMxBaJpxwFPgWK3fLxn9P8vH3ruGiPGidnQPWup3ho+hWw/aBmsVENkUWJ9wfXzIE5dmsUGPSle+xZ1AtMgesl4DAfuYhjr5xMdNkJuAeH40J6J8cw5eX4VoD3Y5l7P2WgvE+NtV7WctU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790578760; c=relaxed/simple;
-	bh=Qbu1ajf2zMMBmGHIiRKeFRx8ze0javq01HlVA1lp2Mc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Qju5qfl0EznTT/i+e2BznVx1uU3jK4MkW+B0bKjp4YKXenqbEGAGxV/dI6QOPmd/KG4wmeaybJ0dYAMzh7RviHSdE2Kzw1OqPn4GVXa2hy01lviNldHMN5fUM77v7ccqZRig04J5pYD0iZfqsk9Hj0cZfn/g9gqMYg9xZpjtJ3E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X4M8ulpk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=juKn9Rar; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790578934; c=relaxed/simple;
+	bh=zza9TnXjTa58vqN+CvSp3ju1UX2D2hlDXXN3AqqsBZk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=diR0KdlPczRhiG1dH/8PKp3YQT334NR1zp+Kik6/WBQ/NitKuyFESflI9N0JEeCE7l300GwsB6zl+DhFzv1z2VFD2Hecj0v0tCBDcV8XyC2LGDDNNZ4Iva3Rt1a8EAaxiOwVWng5tede9ImtUHNo23ibAB7hcH42PHfzxpNcEz4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZLt4zvMq; arc=none smtp.client-ip=209.85.218.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X4M8ulpk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="juKn9Rar"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68S5XkA21666760
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 06:59:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=6riuziqggSIQ5VIX9CrxjJ
-	eBcpTwr5JJlcJHLZ23opo=; b=X4M8ulpk943Ba2JoFbRRWMnNYbasonQENBHUd0
-	bU9rQs/jHENvvD4HVpLKoVanGGjyyCzOTGXhqOvZZPfjvlGm+S4tMZtloCM0ttzy
-	w8GWnFgb0qSGepjnT0ItKuMj1pd2qWa1EnOu9hK1G5K86rlt6oleKtJrQhQecrbR
-	FMh6VH+HM5iuxN46gaupSXrUyrNuNJOOTqo9a/+uet7FX4IatQTwBjzLOozpYTOG
-	rp/FFVOEU8DyRutdBFZTpa/sR+9ioLC9S/BxAyDAYsmXRsTB4uoRZCegttpnC9Ry
-	3CXIlx8NHVAf1c0JnZhk9PaReva/Sa+ffSYKc4PzFfubz3XQ==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyj6t08wv-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 06:59:15 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-86917d18880so2000908b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 27 Sep 2026 23:59:15 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZLt4zvMq"
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c294ad260fdso443103566b.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 00:02:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790578755; x=1791183555; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790578930; x=1791183730; darn=vger.kernel.org;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=6riuziqggSIQ5VIX9CrxjJeBcpTwr5JJlcJHLZ23opo=;
-        b=juKn9RarOi68WpZlvyqZ9QJ+UOa6A5VhZYyokSkZb6+/PXx+BlG5sei17dbn4xb8BY
-         VIvjpqulM6RfBOJ7wtu0II0J6YIcDDIYj8cBQXMYrfXQvidbYlK5ft3tKDMMNvpUEk/g
-         RrqJIpXVohnWIYTJVeX2nbSoV4TLPCgFCLHRA3wO93Wp5j86tiGKhi351JpkQhDcCS7M
-         fnf4vfPJOEBuFdXEWhsdrZK3Sa8KMR39NyQ2WAuOY0Lp777ZO1SIxU0UsPEtKAMNkyz9
-         Ss62OXuadQDi35nfuLxsN4Mcecriza9DaZkHLwaU9nRnGGnJYB+1oRirZONNmWm5zPlw
-         MFRQ==
+        bh=OPkNPJmzSuKsV3tYjzk5WCFitXsvoG1mbaUmgEkFosA=;
+        b=ZLt4zvMqIZ4IGgQIZPIovTA2RjGBg09wOaal7DScEU/WgnzVCgFC7WM6+vvPsaDDYv
+         C/fmdo2utPvbA8QvCzBUyyz+BcRpJjvHL+ngd7Yxt2/syI+1tviMBInt4WCe3HVjkrJO
+         Gl9QqizNBPmzQlp9w51cAG9ZAJZb4d/ceZ/k76ZlVXrIGfhEi298Z9JgrMx2mvWPVQDT
+         TSM2e0p4ew/jQ1Z1N7cGUvBj8kElXihfZlluB0dTnQsN/aCwiOSYnSt20YWwhdN+7X0o
+         yBOX/cUnb8z0DgbowQUWjwdF//OXevQALtqPNrtr2QxZL4Le01iNv3wAoSNF2OHNjUXC
+         990g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790578755; x=1791183555;
+        d=1e100.net; s=20260707; t=1790578930; x=1791183730;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=6riuziqggSIQ5VIX9CrxjJeBcpTwr5JJlcJHLZ23opo=;
-        b=D/r4n8pOg0vuWbBlfAIL2UlGTnKmyULAS3Tm5ApzqINNQt+scWNxRLJMe9GadeR4yf
-         hjY4GoKO5/KyJrRZ+mxyE8IvSfhP9gjg64vZPC2xm4yl5tlZJg+SZ2vGimyQqlck6Us6
-         SqzfTn5eqqUHa4QqiaV53rEL3FSpALLCorB23Ig4FOMlq8MlTMqp0+IGZc8edWuiHtfP
-         jcFPqKJHn94GPyaneGkLXwbZBVquKolRMkOPHOwPwkWwGMLy65Lu3ctfW0Cfq+hVdngK
-         T+0lU4Ae2qJv/YqmnaO/Ic1E4WEwKCiE327EhrUpxbpXXRGcAqVdpFrzfGT0kxEDC89x
-         Y5Gw==
-X-Gm-Message-State: AFuF++mGQDwiuwKXwkX61unWY5HHNgJAhv4W3lVB4rkQV8l9g40aq2b7
-	VpZy1TM4GvQR/DpWM9y9ONTENPMo0O4p19SqGkPj7wsGOhF1opxwYq2zM+WnxbpELFE6EQpj3uA
-	wG3rgMK1Ra9+gPyfsdzlJL6CL1bWHlhrcYn21ht4CQKBA4WRa5GPHMPyE/nOPc4+LnQTl
-X-Gm-Gg: AYBFou0NE2BaPZZUtnkiekOM18C1ua6HTPMjapW/yGBNlJyD14H91vzxdcKcLTqlxdW
-	NaidHtM9qPxX+2M49d9WL3zZ1bvsPQMGPOmvhEkfDMACFEugNQOH5T1QdF+dMkRapjSxCF9adF4
-	HB8iaQdJDKzNdxr4Eitkn652hA/kO7dTHKqJ0XJoAFz/nSCtJzgKft7bMfbkNIiVAo3ydORPPXW
-	HZ7BETl37Y1dWC4or3jUb/I33ZM7RiNNbDxsHDKibpUmRhu9VrZQVEmh9PuLaCPM/AS2nz3iI1c
-	+YUIAVakxDIDcmQS5G+kxmuMv3hrPBKow9XxWkFZgAFjDc94piQMnhcJAbYo5iVeOBOqmCW5t68
-	KffRcjSW6a1o5eLyLcZpoUJlOwA==
-X-Received: by 2002:a05:6a00:4fd2:b0:882:157d:95c7 with SMTP id d2e1a72fcca58-882157da533mr3260905b3a.14.1790578754522;
-        Sun, 27 Sep 2026 23:59:14 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4fd2:b0:882:157d:95c7 with SMTP id d2e1a72fcca58-882157da533mr3260890b3a.14.1790578754068;
-        Sun, 27 Sep 2026 23:59:14 -0700 (PDT)
-Received: from hu-mahap-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-883218be96bsm1106706b3a.52.2026.09.27.23.59.09
+        bh=OPkNPJmzSuKsV3tYjzk5WCFitXsvoG1mbaUmgEkFosA=;
+        b=mmTJfa9JHlRLTSjkKzYqS955Ix6fEBiKWP63Ss6XjcKHroox0OuFDrO5bdPHUBkGlh
+         aYi8BqrRzG7s10X1KrSZ1ZJGPIsKJd7DCXx+MhsAyIr3W6VVfVKVXTwbbseIRyjwWCXN
+         G7WwvQZj7QyiqP6rsI/+ew5yvcXMv+5N2geSNafXKmO3yFnOnguKvoQWudGKooQ3KBoi
+         GJj9ujCQlVdZXIDjIrABeODTI3tKOMTIgNPM2iHIWtfcRvn0ehe6Vkws0Vn4AO4tk/K8
+         vvUK27zh5y6fdOCEqsdbx2RtP5/eb9+/+n/matxxC0ASzWOIkkebcLxeNX5GX5a4SbrV
+         Oucg==
+X-Forwarded-Encrypted: i=1; AKwUvBz4GAXKEe9pFoDPut7P8r4Cnx3SeacpY/RRoUTYmbManYrBX1zrbwE7IbDou/HRFvdbogYA6WRkAdaDcQeU@vger.kernel.org
+X-Gm-Message-State: AFuF++mf7Nh2yZk96gtejgZCZ+fB0BK++MdK4OLTyhEG1t00F0rH+Ime
+	W2ue7kK0ccRqbUMCVO4TAEU3lqmGDk2d50vBxx4s8TYbZMkJbTZXnZ/v
+X-Gm-Gg: AYBFou12uasWA8lVCNdxZ1YndM4HrAhvR9HFydpkveCaUtXTNcN8zxYXcGImLcckiF5
+	kihPOWze7jfABw1fiCGsrvM3I2H2vJYHE0DoEont91XJrhZzucxbuer8vhGUhZ96knfcTdlKArt
+	MtCN83xdnRn4PRZUJ01JnpfXc2XPUSo2Urd/E1KUo7eaHUKvdwXhOx3rfhgV72ctx2j30Wk0Mqc
+	AAeWU8Mkqhs1mfEda6mwMoelFdpXF3V9VH6vU7FsSMN73TBoZdPFu11O1HdNCQz7BrXBeh++XML
+	9p/SbsFZihdRK7SefwGAvPa2B9PDg/Q6YrSnN02GOycmDau4Kp41H3cmPLXyu1vaSY2Df/jpq1J
+	cG9iaMSG/f1jXgavz5aCdYHXloGQYvcU+Tfk1EygxbQ4md6oRTI++0GfuV3V+EZ5H2Umm4zRzrW
+	AfK04pR6+JzdhUKdmZB3ItR6q2DfFleEgfGihRqlFtYmEz/783PGGJUxElgyFU7jEgAMmNFHnxP
+	3FEI8MJoglsj9eXBRR2QAVBPAU=
+X-Received: by 2002:a17:907:9301:b0:c2a:b008:8cc0 with SMTP id a640c23a62f3a-c2ac2382bf4mr1095005966b.28.1790578930459;
+        Mon, 28 Sep 2026 00:02:10 -0700 (PDT)
+Received: from [192.168.0.253] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4887a349a0esm35536952f8f.10.2026.09.28.00.02.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 23:59:13 -0700 (PDT)
-From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Date: Mon, 28 Sep 2026 12:28:45 +0530
-Subject: [PATCH v4] drm/msm: default separate_gpu_kms to auto selection
+        Mon, 28 Sep 2026 00:02:09 -0700 (PDT)
+From: Gabor Juhos <j4g8y7@gmail.com>
+Date: Mon, 28 Sep 2026 09:01:53 +0200
+Subject: [PATCH] mtd: rawnand: qcom: fix read location register usage in
+ config_nand_cw_read()
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -86,341 +70,67 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-separate_gpu_kms-v4-1-3f33175de133@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIACQQumoC/3XOwQrCMAwG4FeRnq00aV2tJ99DRLou06Jzs9Wiy
- N7dTg8q6iXwB/4vubFIwVNk89GNBUo++vaQgxqPmNvaw4a4r3JmKLAQEgoeqbPBnmi96c7rXRO
- 5UBW6WlUGCFmudYFqf3mQy1XOWx9Pbbg+LiQYtk8MUQ4YfWAJOHCaoQTSNRSz6aKNcXI8271rm
- 2aSBxvMhC9Hgv5+KmF2SoHaWaNLU9MfR745UvxwZHaspKkqjTMK9A+n7/s7j+4jLUcBAAA=
-X-Change-ID: 20260316-separate_gpu_kms-04d2cf4d91e2
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Message-Id: <20260928-qcom_nandc-config_nand_cw_read-fix-v1-1-98edccaaea0f@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3NQQqDMBCF4avIrB2I01bRq0gJYTLaWXRSE7AF8
+ e4NLr9/8d4BRbJKgak5IMuuRZNVdG0D/Aq2CmqsBnLUu5EIN05vb8EiIydbdL3g+euzhIiL/lD
+ Ge/+4DcF1NEAd+mSp+TqZn+f5B4jgbIN0AAAA
+X-Change-ID: 20260922-qcom_nandc-config_nand_cw_read-fix-e946537a0127
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ Md Sadre Alam <md.alam@oss.qualcomm.com>
+Cc: linux-mtd@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Gabor Juhos <j4g8y7@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790578749; l=10135;
- i=mahadevan.p@oss.qualcomm.com; s=20250923; h=from:subject:message-id;
- bh=Qbu1ajf2zMMBmGHIiRKeFRx8ze0javq01HlVA1lp2Mc=;
- b=9eYVLlvU5vvz5oTTfbLCudBaNI1mc7M3jI39PZOEPJ0cVYtedY3jGoCe54N/1lmDeITPuVBHN
- TEboS2ZjU7hCnVUtm/DF4nK0ONHSutDwcH5P+pMknpWyUJVtLOtIp0y
-X-Developer-Key: i=mahadevan.p@oss.qualcomm.com; a=ed25519;
- pk=wed9wuAek0VbCYfkANx7ujIG4VY0XfCYrffFKPN2p0Y=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDAyNyBTYWx0ZWRfX4jWKJf8bEXrm
- tgaSdqPboMxwoh29prfcEx63DR1PQLLMzk4Z7EIuyfVB8cvgqCLKB2HFUudAfsumvEB0mzpe3Pt
- 1FP1IWjpZ1lCNO8Hc32clFaGEWYuVGNwyzme493/sEj0e1TJzw0Dtq1OSnEJ2VyIvv6IFkHqYof
- gSS2izUwy4c37RVQOavgeIiK+TUvFiOmsSi3QFPLpH1ppXiw3HKvknUQ3UnuBYuNATXUCiuANSy
- B/YJgF50QxPB8HH6Gg3x81hnWwJyKz0mNJXuvyS0fXSqFmnUlz8+eWgnt5DdLg/QLPJq32CAaHN
- AoYcjf5CPU5pF6Ir7YY0YGd102Wtd0T8aeGlZhCKDv5e4v8j3z+ZN6v4xCfEAy5qeNOU5SV7o7H
- XgaKuk5CNitv1mcI9kjlgYNmd5NU4iWmvyNHSrEUkR3vht4IFeP8F8JvAWWnF7QBtd49AinySIm
- aFvdromLrJngVGkn2/Q==
-X-Proofpoint-ORIG-GUID: 2RpdwoJkiNghXho20Z496Q6Ijysl8TPC
-X-Authority-Analysis: v=2.4 cv=dZkVTnXe c=1 sm=1 tr=0 ts=6aba1043 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=_92pshTILgvs2gbH5AkA:9 a=QEXdDO2ut3YA:10
- a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-GUID: 2RpdwoJkiNghXho20Z496Q6Ijysl8TPC
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDAyNyBTYWx0ZWRfX/3NTPze+S8Yh
- dMsFwuaeV7Wj+HbkBORBcqHgZmNO6EMBB/5wZp9qIDcYOjzaCr4f+HHOnf+kha1B4rvh3BNSR3H
- NpxrePtpMynyW31HojpXe2P2RsH9o5o=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 clxscore=1015 phishscore=0
- malwarescore=0 impostorscore=0 suspectscore=0 adultscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609280027
 
-On platforms with multiple display subsystems, such as SA8775P, the GPU
-binds to the first display subsystem that probes. This implicit binding
-prevents subsequent display subsystems from probing successfully,
-breaking multi-display support.
+On QPIC v2 controllers, when the last codeword is being read, the read
+location values must be programmed into the READ_LOCATION_LAST_CW_*
+registers. Prior to commit 8c52932da5e6 ("mtd: rawnand: qcom: cleanup
+qcom_nandc driver"), the config_nand_cw_read() function did it right,
+but since then it always writes the read location values to the
+READ_LOCATION_* registers even if the actual codeword is the last one.
 
-Use the tristate separate_gpu_kms module parameter with the default
-value set to auto (-1). In auto mode, the driver selects the binding
-behavior based on the number of GPUs and display subsystems. This allows
-display subsystems to probe independently when required, while
-preserving the existing single-card behavior on simpler systems.
+Change the function to always configure the registers corresponding to
+the actual codeword to restore the correct behaviour.
 
-The separate_gpu_kms module parameter has the following semantics:
-
-  -1 (auto, default):
-     Select the binding mode based on hardware topology. If exactly one
-     GPU and one display subsystem are present, bind them together to
-     form a single DRM device. Otherwise, expose the GPU and display
-     subsystems as separate DRM devices.
-
-   0:
-     Always bind the GPU and display together to form a single DRM
-     device.
-
-   1:
-     Always expose the GPU and display subsystems as separate DRM
-     devices.
-
-Additionally, ensure that display subsystems are always exposed as
-separate DRM devices when no recognized Adreno GPU is present,
-regardless of the separate_gpu_kms setting.
-
-This ensures correct probing on multi-display platforms without
-affecting single-display, single-GPU systems.
-
-Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Cc: stable@vger.kernel.org
+Fixes: 8c52932da5e6 ("mtd: rawnand: qcom: cleanup qcom_nandc driver")
+Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
 ---
-Changes in v4:
-- Fix OF node refcount leak in msm_separate_gpu_kms_components(). (sashiko-bot)
-- Fix build errors when MDSS/MDP4 are disabled by adding stubs. (kernel test robot)
-- Drop msm_count_mdp5(); MDP5 always sits under a qcom,mdss node, so it was
-  counted twice.
-- adreno_probe(): don't create a standalone GPU device for an unrecognized
-  GPU.
-- Link to v3: https://lore.kernel.org/r/20260330-separate_gpu_kms-v3-1-a3e54b9c9417@oss.qualcomm.com
+ drivers/mtd/nand/raw/qcom_nandc.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- Ensure display subsystems are always exposed as separate DRM devices when
-  no recognized Adreno GPU is present (!adreno_has_gpu()), regardless of
-  separate_gpu_kms setting. (Dmitry)
-- Extend auto-selection logic to account for legacy display controllers (MDP4 and MDP5). (Dmitry)
-- Rename msm_mdss_count_masters() to msm_mdss_count() to better reflect functionality. (Dmitry)
-- Common helper to determine presence of a valid Adreno GPU node, avoiding repeated
-  adreno_has_gpu() and availability checks.
-- Update commit message to reflect the above behavior.
-- Link to v2: https://lore.kernel.org/r/20260317-separate_gpu_kms-v2-1-b027ca97b9fe@oss.qualcomm.com
-
-Changes in v2:
-- Drop dependency on Lemans dual-DPU device tree changes as this patch
-  works independently (Dmitry)
-- Switch separate_gpu_kms to tristate and default to auto mode (Rob)
-- Rename msm_gpu_no_components() to msm_separate_gpu_kms_components() for clarity
-- Link to v1: https://lore.kernel.org/r/20260223-seperate_gpu_kms-v1-1-e8231e7f1685@oss.qualcomm.com
----
- drivers/gpu/drm/msm/adreno/adreno_device.c |  6 ++-
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c   | 14 +++++++
- drivers/gpu/drm/msm/msm_drv.c              | 65 ++++++++++++++++++++++++++----
- drivers/gpu/drm/msm/msm_drv.h              |  6 ++-
- drivers/gpu/drm/msm/msm_mdss.c             | 15 +++++++
- 5 files changed, 95 insertions(+), 11 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/adreno/adreno_device.c b/drivers/gpu/drm/msm/adreno/adreno_device.c
-index 05c77fe27e62..7108d4aa59b5 100644
---- a/drivers/gpu/drm/msm/adreno/adreno_device.c
-+++ b/drivers/gpu/drm/msm/adreno/adreno_device.c
-@@ -271,8 +271,10 @@ static const struct component_ops a3xx_ops = {
- 
- static int adreno_probe(struct platform_device *pdev)
+diff --git a/drivers/mtd/nand/raw/qcom_nandc.c b/drivers/mtd/nand/raw/qcom_nandc.c
+index d7642db2e2df..170af9f26d47 100644
+--- a/drivers/mtd/nand/raw/qcom_nandc.c
++++ b/drivers/mtd/nand/raw/qcom_nandc.c
+@@ -328,14 +328,16 @@ config_nand_cw_read(struct nand_chip *chip, bool use_ecc, int cw)
  {
--	if (of_device_is_compatible(pdev->dev.of_node, "amd,imageon") ||
--	    msm_gpu_no_components())
-+	struct device_node *node = pdev->dev.of_node;
-+
-+	if (of_device_is_compatible(node, "amd,imageon") ||
-+	    (msm_separate_gpu_kms_components() && adreno_has_gpu(node)))
- 		return msm_gpu_probe(pdev, &a3xx_ops);
+ 	struct qcom_nand_controller *nandc = get_qcom_nand_controller(chip);
+ 	struct nand_ecc_ctrl *ecc = &chip->ecc;
+-
+ 	__le32 *reg = &nandc->regs->read_location0;
++	int reg_base = NAND_READ_LOCATION_0;
  
- 	return component_add(&pdev->dev, &a3xx_ops);
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-index 9b1d1982e683..c299fef1a400 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-@@ -15,6 +15,20 @@
- #include "msm_mmu.h"
- #include "mdp4_kms.h"
- 
-+static const struct of_device_id mdp4_dt_match[];
-+int msm_count_mdp4(void)
-+{
-+	struct device_node *np;
-+	int count = 0;
-+
-+	for_each_matching_node(np, mdp4_dt_match) {
-+		if (of_device_is_available(np))
-+			count++;
+-	if (nandc->props->qpic_version2 && qcom_nandc_is_last_cw(ecc, cw))
++	if (nandc->props->qpic_version2 && qcom_nandc_is_last_cw(ecc, cw)) {
+ 		reg = &nandc->regs->read_location_last0;
++		reg_base = NAND_READ_LOCATION_LAST_CW_0;
 +	}
-+
-+	return count;
-+}
-+
- static int mdp4_hw_init(struct msm_kms *kms)
- {
- 	struct mdp4_kms *mdp4_kms = to_mdp4_kms(to_mdp_kms(kms));
-diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
-index f3d2eaa04f14..2ac7fcd468d3 100644
---- a/drivers/gpu/drm/msm/msm_drv.c
-+++ b/drivers/gpu/drm/msm/msm_drv.c
-@@ -54,16 +54,65 @@ static bool modeset = true;
- MODULE_PARM_DESC(modeset, "Use kernel modesetting [KMS] (1=on (default), 0=disable)");
- module_param(modeset, bool, 0600);
  
--static bool separate_gpu_kms;
--MODULE_PARM_DESC(separate_gpu_kms, "Use separate DRM device for the GPU (0=single DRM device for both GPU and display (default), 1=two DRM devices)");
--module_param(separate_gpu_kms, bool, 0400);
-+/*
-+ * separate_gpu_kms (tristate):
-+ *   -1 (default): decide automatically based on hardware topology. Split devices
-+ *                 if there is more than one GPU or more than one display master.
-+ *    0: force single DRM device (bind display + GPU)
-+ *    1: force separate DRM devices
-+ */
-+static int separate_gpu_kms = -1;
-+MODULE_PARM_DESC(separate_gpu_kms,
-+		 "Use separate DRM device for the GPU (-1=auto (default), 0=single DRM device, 1=separate DRM devices)");
-+module_param(separate_gpu_kms, int, 0400);
+ 	if (nandc->props->supports_bam)
+-		qcom_write_reg_dma(nandc, reg, NAND_READ_LOCATION_0, 4, NAND_BAM_NEXT_SGL);
++		qcom_write_reg_dma(nandc, reg, reg_base, 4, NAND_BAM_NEXT_SGL);
  
- DECLARE_FAULT_ATTR(fail_gem_alloc);
- DECLARE_FAULT_ATTR(fail_gem_iova);
- 
--bool msm_gpu_no_components(void)
-+static const struct of_device_id msm_gpu_match[];
-+static inline bool msm_gpu_node_present(struct device_node *np)
-+{
-+	return np && of_device_is_available(np) && adreno_has_gpu(np);
-+}
-+
-+static int msm_count_gpus(void)
- {
--	return separate_gpu_kms;
-+	struct device_node *np;
-+	int count = 0;
-+
-+	for_each_matching_node(np, msm_gpu_match) {
-+		if (msm_gpu_node_present(np))
-+			count++;
-+	}
-+
-+	return count;
-+}
-+
-+static bool msm_separate_gpu_kms_auto(void)
-+{
-+	int gpus = msm_count_gpus();
-+	int display_subsystems = msm_count_mdss() + msm_count_mdp4();
-+
-+	if (gpus <= 0 || display_subsystems <= 0)
-+		return false;
-+
-+	/* Single card if there is exactly one GPU and one display subsystem */
-+	return gpus > 1 || display_subsystems > 1;
-+}
-+
-+bool msm_separate_gpu_kms_components(void)
-+{
-+	if (msm_count_gpus() == 0)
-+		return true;
-+
-+	switch (separate_gpu_kms) {
-+	case 0:
-+		return false;
-+	case 1:
-+		return true;
-+	default:
-+		return msm_separate_gpu_kms_auto();
-+	}
- }
- 
- static int msm_drm_uninit(struct device *dev, const struct component_ops *gpu_ops)
-@@ -1029,7 +1078,7 @@ static int add_gpu_components(struct device *dev,
- 	if (!np)
- 		return 0;
- 
--	if (of_device_is_available(np) && adreno_has_gpu(np))
-+	if (msm_gpu_node_present(np))
- 		drm_of_component_match_add(dev, matchptr, component_compare_of, np);
- 
- 	of_node_put(np);
-@@ -1040,7 +1089,7 @@ static int add_gpu_components(struct device *dev,
- static int msm_drm_bind(struct device *dev)
- {
- 	return msm_drm_init(dev,
--			    msm_gpu_no_components() ?
-+			    msm_separate_gpu_kms_components() ?
- 				    &msm_kms_driver :
- 				    &msm_driver,
- 			    NULL);
-@@ -1079,7 +1128,7 @@ int msm_drv_probe(struct device *master_dev,
- 			return ret;
- 	}
- 
--	if (!msm_gpu_no_components()) {
-+	if (!msm_separate_gpu_kms_components()) {
- 		ret = add_gpu_components(master_dev, &match);
- 		if (ret)
- 			return ret;
-diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
-index eb4bbae8557b..2840e8a5052d 100644
---- a/drivers/gpu/drm/msm/msm_drv.h
-+++ b/drivers/gpu/drm/msm/msm_drv.h
-@@ -394,9 +394,11 @@ static inline bool msm_dp_wide_bus_available(const struct msm_dp *dp_display)
- #ifdef CONFIG_DRM_MSM_MDP4
- void msm_mdp4_register(void);
- void msm_mdp4_unregister(void);
-+int msm_count_mdp4(void);
- #else
- static inline void msm_mdp4_register(void) {}
- static inline void msm_mdp4_unregister(void) {}
-+static inline int msm_count_mdp4(void) { return 0; }
- #endif
- 
- #ifdef CONFIG_DRM_MSM_MDP5
-@@ -418,9 +420,11 @@ static inline void msm_dpu_unregister(void) {}
- #ifdef CONFIG_DRM_MSM_MDSS
- void msm_mdss_register(void);
- void msm_mdss_unregister(void);
-+int msm_count_mdss(void);
- #else
- static inline void msm_mdss_register(void) {}
- static inline void msm_mdss_unregister(void) {}
-+static inline int msm_count_mdss(void) { return 0; }
- #endif
- 
- #ifdef CONFIG_DEBUG_FS
-@@ -534,6 +538,6 @@ void msm_kms_shutdown(struct platform_device *pdev);
- 
- bool msm_disp_drv_should_bind(struct device *dev, bool dpu_driver);
- 
--bool msm_gpu_no_components(void);
-+bool msm_separate_gpu_kms_components(void);
- 
- #endif /* __MSM_DRV_H__ */
-diff --git a/drivers/gpu/drm/msm/msm_mdss.c b/drivers/gpu/drm/msm/msm_mdss.c
-index 9087c4b290db..e69b122f2687 100644
---- a/drivers/gpu/drm/msm/msm_mdss.c
-+++ b/drivers/gpu/drm/msm/msm_mdss.c
-@@ -73,6 +73,21 @@ static int msm_mdss_parse_data_bus_icc_path(struct device *dev,
- 	return 0;
- }
- 
-+static const struct of_device_id mdss_dt_match[];
-+
-+int msm_count_mdss(void)
-+{
-+	struct device_node *np;
-+	int count = 0;
-+
-+	for_each_matching_node(np, mdss_dt_match) {
-+		if (of_device_is_available(np))
-+			count++;
-+	}
-+
-+	return count;
-+}
-+
- static void msm_mdss_irq(struct irq_desc *desc)
- {
- 	struct msm_mdss *msm_mdss = irq_desc_get_handler_data(desc);
+ 	qcom_write_reg_dma(nandc, &nandc->regs->cmd, NAND_FLASH_CMD, 1, NAND_BAM_NEXT_SGL);
+ 	qcom_write_reg_dma(nandc, &nandc->regs->exec, NAND_EXEC_CMD, 1, NAND_BAM_NEXT_SGL);
 
 ---
-base-commit: 3f2425f5b5bbbdd991ca9cdfd5502e68d8895998
-change-id: 20260316-separate_gpu_kms-04d2cf4d91e2
+base-commit: 55c5b6d5f59f59a8c98a7effc3195226cc20175c
+change-id: 20260922-qcom_nandc-config_nand_cw_read-fix-e946537a0127
 
 Best regards,
 -- 
-Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Gabor Juhos <j4g8y7@gmail.com>
 
