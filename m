@@ -1,177 +1,278 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay12.grserver.gr (relay12.grserver.gr [88.99.38.195])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 188F250B8CB
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 11:04:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA2E13AA4E4
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 11:22:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=88.99.38.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790679850; cv=none; b=iCm4conhwhieVx/AuYlOgUm9oGXEyxuq9Syx+icUMN66FWQvyrx+dsuE7P4ldMnT1Wrtx9/5n1LW0Cv2wajrFIWQBkzi3Eg3FYvAsjeMf71n1hASnATGoIfgVcod8S/xvwbTQT2gayrBHxvyjdSg/LFEIG1o8gOjh1TQhoR5CZs=
+	t=1790680975; cv=none; b=rs8Ur46HakL7yYYf9bKvLrreYG1fwKpRexhFyUvp7ulmipb4cFA7+KflXErG/997ILhB6v+mIjjQnOvLw8HDZqUihq1b2cEpu3cauvjzkyDsrHAOq3Bq9h7Eqp6/alqMdW8dBz9btqd7w6+ou8CU9JoknsMOZKq0+E6JWubnPSw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790679850; c=relaxed/simple;
-	bh=vxKnnCHNNDSwrTGavRBlmv754hG+/NT0i3RV5dsh0hI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=KL4Mn6KRxe7oBpvXCLYPdwfInzhmoJR4bwcNATqAPxq5fR0wGVJgOAflK0D1hMbWyrjgraNgp3/TJ8P895Zdsw1RC4H7LQER8fuhn0iBHIbSYnFhEX5clGa08VvSPYvFG5wO8kuiehyhq6x9NwXU/osv4+Aoa5/jxcPlYyk/x9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=tDxwJMWu; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790680975; c=relaxed/simple;
+	bh=1WNdcs5Gpsf8AQQ3hwCDXZNxCECNgyLrcTeCWS3HtQo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=po4A6/gsbtOojjeCecVCSR03WBiJRxcvYBQT/c6QGOpnuLSFkYFZVCZFe5HAYSMcXCiq4RkTrOO5ipWa9+xNdtc/+BN6fBi3qsLoZtoi/6I4WhUqfIEF0rmkrz/us3ZwjHtbC3WzxZ6zsM/q7Sk6ngbUFZZae2+Q1NIiaqyACJo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=EirIH5qd; arc=none smtp.client-ip=88.99.38.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tDxwJMWu"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-4a006bb267eso9910165e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 04:04:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790679846; x=1791284646; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=VVFrF0P3aNAlc4hqq61CHFto2LvhHViKAoylOIr9WSk=;
-        b=tDxwJMWuugizDs2I4psTROy0SLT5ipl3kkWy26vNsOAy8e/GQulyifGMqaWbN/ownq
-         +fIZrrnV35sowrliABqgJhuwe16ibzOTBp4dZ/BGT46vpfVYsgHBxv/HAFuLV06susyp
-         SVQxdJw59vud8D8kdYAeTfyR6vt0D+00lVpo/TnMrJpUAoPqAGHQ0xH6Z1ZI4m1U134l
-         K6fkt++7uwb0wRzs8cCSDWkaEFRYSs0T3wLeiGHTzcaNGvnK8WL3k3bmlxmKyTLfvkyU
-         Sj/VPyOcJISmpFE2ag1uoxTY0Rkh2hbJkrmQJq1vjjX5RsoslfOVArkzYc+gz/DXne09
-         150Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790679846; x=1791284646;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=VVFrF0P3aNAlc4hqq61CHFto2LvhHViKAoylOIr9WSk=;
-        b=aqySYFf7DQW/ZBONN0AZ0Wb94bFLTrnA1L2U++NeJUI5qSdbu0e3BF+R685kq5akp8
-         WaBP0JNzZAyOM3oHAU4/dnhaYfjz2qg/PftQHOZkEZa/cOUKjnYwwUyIx+m72IzIjbtr
-         chPExrohKDqmZbuYExBq2Nj52dBZp9PsP4JTf/kSKkAXJQZp8B6oQT4OvLjFEVQaQknB
-         5LH4yZ+QfVuet1EA0iounbx2EBRH25RbwI88auLgcgXMVzVv1bKGlK99RC1ngoopvDw5
-         lgb280cWv1H5iUjiUsWxEOCktuUlhedplx1kXf6bow6V+LfJd7PblNSFGJYpNize0s4R
-         wevQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxotTA+3cqfl+fc+M/K79HqysjBV6GcN26OwZuNkqDb66SqabKlO3wFLRy8elZjMsihpt2eVQ6vVkVi8/5+@vger.kernel.org
-X-Gm-Message-State: AFuF++mlWxOwUEsISly2OmfVfehPQC5qSoRyNlrMIxds6oRdbj/rEe6B
-	XEbRpSKY51UiWJ8YiwQefT9CYpQjxv4fAbop4LrSPSgDYT6OMblryiU1DJXKAQ==
-X-Gm-Gg: AYBFou1Kqs6lB00H6d1GY9fWZAABjMN9+i++sj4rkEFbR26IosWMAAOa2jxFe/oaWS0
-	lE+ofp40ixw1xfhlQKvi1KyfD3qUxJL9XIPTDmrV40AisScF0i3sZs44XVhXyS/JGuAczbZMK0U
-	jd33pBFsIl7hs/8plgQNQUVFUT3Bj9tFmdDe880Bnihcni/VWyamA0ppbkTdA7CBl3LJzc3BRI5
-	q6kS9fzoTUaA9iFQzXzRF7qj7FGsTxImSvgja8aIksPwXiBEtUB6W9X/xXZf4zPFa81b67Xiokr
-	rX0FMvB+A6I3e2JzwdLHORh+M6kQrOW3myvkPytXvCPCmBvz9qMo+qUyLC6CIuvMm+b4NSbFZzv
-	BznPHrVry6uy0wLjD2jA9Uud3Y9RVumdWOWEaMp5lhV2PIwzggHMwoodvvWCZGq9/j2b3FnrSa8
-	UdRhWaWphNX3+q9qxJGK+tE+FJbjTzD2EdlRwXnbDODtq+QxMWym1GPEp0UBJqStw1TrXDx7bH7
-	eR7dEndUAZIHvFq+qMUShXjbZ3y6pohMi/QgQ==
-X-Received: by 2002:a05:600c:354e:b0:49e:6e7c:d895 with SMTP id 5b1f17b1804b1-49fe66ef3f5mr281148975e9.26.1790679845901;
-        Tue, 29 Sep 2026 04:04:05 -0700 (PDT)
-Received: from [192.168.0.253] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4a00ebcd353sm83102985e9.3.2026.09.29.04.04.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 04:04:05 -0700 (PDT)
-From: Gabor Juhos <j4g8y7@gmail.com>
-Date: Tue, 29 Sep 2026 13:04:00 +0200
-Subject: [PATCH] spi: spi-qpic-snand: remove 'ecc_buf_cfg' member of struct
- 'qpic_ecc'
+	dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="EirIH5qd"
+Received: from relay12 (localhost [127.0.0.1])
+	by relay12.grserver.gr (Proxmox) with ESMTP id 5BFA1BD8F6
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:51 +0300 (EEST)
+Received: from linux3247.grserver.gr (linux3247.grserver.gr [213.158.90.240])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by relay12.grserver.gr (Proxmox) with ESMTPS id 4D36ABD900
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:50 +0300 (EEST)
+Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
+	by linux3247.grserver.gr (Postfix) with ESMTPSA id 851351FD48D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:46 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
+	s=default; t=1790680969;
+	bh=qN0ReYj7ZTDg8LS4DEPMhXSlo/3LSlmilhpS+l0dExw=;
+	h=Received:From:Subject:To;
+	b=EirIH5qdUtQjuI1O4f0+g3m4J6A8kj9GzsDRuohcjQRtJCOkI2KlDIrOA/YthTNbj
+	 9XeaUe/NIS8pkuLKcNBfulshDaqa7Wd8SJovwZU8pntCXJUtanaZy5nOJsgwTVN0tO
+	 cLrycTImG5rHQKfiV08B9Dw+Neot/rzkkFnZ8AZVjvz9/qCQgp+NiwoyNPTpEbgwo1
+	 udq59FakyCJ2ccSvBeX7kUDOmEect5aiVqeeqNWptP/21uQ1bJ7mrnT9egYmbyprwO
+	 4yog+pnpI21AVtsXKX44kBPebVuYFqpznl4thQIGHLMewVRwi00SqmFjCDkA1EY2aO
+	 4/kHNnTBEZURA==
+Authentication-Results: linux3247.grserver.gr;
+        spf=pass (sender IP is 74.125.227.170) smtp.mailfrom=lkml@antheas.dev smtp.helo=mail-pj2-f42.google.com
+Received-SPF: pass (linux3247.grserver.gr: connection is authenticated)
+Received: by mail-pj2-f42.google.com with SMTP id
+ 98e67ed59e1d1-396ccda24afso2092328a91.3
+        for <linux-arm-msm@vger.kernel.org>;
+ Tue, 29 Sep 2026 04:22:46 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AKwUvBw1HwQJ0AJAd90/PQysAzZhcmwPVgiBNUIUe9mNTcS3cLLlqnIGMZB+/5OihD1N4bQhyBjl8QZ3jMzuaBnd@vger.kernel.org
+X-Gm-Message-State: AFq9FYJnaFGsh3cCI6xbsz10IZwvErgnuq3UGkGgxkWy/8NnuyRByhOl
+	+XXK+svPTm/srjT08QnDveGpzqCQSboK3IQVf+ax4JxZpcd0sNzd5QAIClX1VPaejmCLsJJaUmP
+	QdZq1WgoFsvV4G6s+iKpXGIVqwp1gYf4=
+X-Received: by 2002:a17:90b:540e:b0:3a4:ac5c:1919 with SMTP id
+ 98e67ed59e1d1-3a4ac5c19afmr363754a91.49.1790680964966; Tue, 29 Sep 2026
+ 04:22:44 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260929-qpic-snand-drop-ecc_buf_cfg-v1-1-c9de93142815@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MwQpAQBAA0F/RnE2tScSvSGJ2lrmstRsp+Xeb4
- 7u8B5JElQR98UCUS5PuPqMqC+Bt9qug2mwgQ43pqMMjKGPys7do4x5QmKfldBO7FRdn2qomJts
- Q5CFEcXr/+zC+7wfHG4LTbQAAAA==
-X-Change-ID: 20260929-qpic-snand-drop-ecc_buf_cfg-bf07142c2d62
-To: Mark Brown <broonie@kernel.org>
-Cc: Md Sadre Alam <md.alam@oss.qualcomm.com>, 
- Sricharan Ramabadhran <quic_srichara@quicinc.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- linux-spi@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Gabor Juhos <j4g8y7@gmail.com>
-X-Mailer: b4 0.14.3
+References: <20260623145225.143218-1-johannes.goede@oss.qualcomm.com>
+In-Reply-To: <20260623145225.143218-1-johannes.goede@oss.qualcomm.com>
+From: Antheas Kapenekakis <lkml@antheas.dev>
+Date: Tue, 29 Sep 2026 13:22:33 +0200
+X-Gmail-Original-Message-ID: 
+ <CAGwozwG5u6fVGqCGN6wn8816Bs1MSW4h7soAX7+k=3T8UvHLjw@mail.gmail.com>
+X-Gm-Features: AclHuK-N_kkArlfU-4FCYmt0YX-fm7tZEIh1YZorpgFANORXNez-PUS0peDFSU0
+Message-ID: 
+ <CAGwozwG5u6fVGqCGN6wn8816Bs1MSW4h7soAX7+k=3T8UvHLjw@mail.gmail.com>
+Subject: Re: [RFC 00/12] RFC: Devicetree-ACPI hybrid mode
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+ Srinivas Kandagatla <srini@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Dmitry Baryshkov <lumag@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-acpi@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-PPP-Message-ID: 
+ <179068096936.1049705.5762052970837282367@linux3247.grserver.gr>
+X-PPP-Vhost: antheas.dev
+X-Virus-Scanned: clamav-milter 1.4.6 at linux3247.grserver.gr
+X-Virus-Status: Clean
 
-The 'ecc_buf_cfg' member of struct 'qpic_ecc' is used to store
-a configuration value for the QPIC_EBI2_ECC_BUF_CFG register.
-However that register is obsolete on the QPIC v2 controller the
-driver is written for and programming of the register has been
-removed in commit 930a7312c946 ("spi: spi-qpic-snand: avoid
-writing QPIC_EBI2_ECC_BUF_CFG register").
+On Tue, 23 Jun 2026 at 16:52, Hans de Goede
+<johannes.goede@oss.qualcomm.com> wrote:
+>
+> Hi All,
+>
+> Currently as soon as the kernel boots with a populated DT provided then
+> the arch/arm64 code sets acpi_disabled=1 and the complete ACPI subsystem
+> gets disabled. On WoA Snapdragon laptops where the factory Windows OS
+> actually boots using these tables this is not necessarily desirable.
+>
+> It might still be interesting to at least parse the ACPI tables and make
+> the ACPI fwnodes available for device-drivers to use. I call this DT-ACPI
+> hybrid mode.
+>
+> This mainly is an experiment for now and possibly a method for accelerating
+> the ongoing effort to run Linux on currently available Snapdragon laptops.
+>
+> On current laptops Linux cannot boot using ACPI due to some information
+> missing from the ACPI tables. People are working on changing this so that
+> for future WoA Snapdragon laptops Linux can boot using ACPI only without
+> requiring Devicetree.
+>
+>
+> There are a couple of scenarios where DT-ACPI hybrid mode is useful:
+>
+> a) This leads to a populated /sys/firmware/acpi/tables allowing one to run
+> acpidump, which is useful to grab info from the ACPI tables when e.g.
+> creating a DT for a new laptop model. As a bonus /sys/firmware/acpi/bgrt
+> is also populated allowing the boot-splash to show the vendor logo.
+>
+> b) It might be useful for device-drivers to be able to access ACPI data
+> for the device even when running in DT mode. E.g. Srini Kandagatla first
+> got me thinking about this because he wants to use the ACPI MIPI SDCA
+> tables for audio codec routing when booting Linux on Windows Qualcomm X2
+> (Glymur) laptops.
+>
+> c) It is also possible to go truely hybrid and use ACPI to instantiate
+> some of the kernel device objects representing the hardware. For example
+> the last patch in this RFC series switches to using ACPI instantiation for
+> the I2C clients for the keyboard and touchpad on the Snapdragon X1E Lenovo
+> ThinkPad T14s gen 6.
+>
+> d) This may help identify shortcomings in the current ACPI tables which
+> need to be fixed to allow future laptop generations to use ACPI only.
 
-Since thaen, the value stored in 'ecc_buf_cfg' has no real use,
-so drop the member from the structure. Also remove the remaining
-code which uses that.
+Hi Hans,
+interesting discussion.
 
-Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
----
- drivers/spi/spi-qpic-snand.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+It seems that at least for these laptops, windows relies on a PEP
+(Windows specific) power driver to setup initial clocks/power rails
+then ACPI for peripherals if I understood correctly.
 
-diff --git a/drivers/spi/spi-qpic-snand.c b/drivers/spi/spi-qpic-snand.c
-index edfac4866a96..00072c44db7a 100644
---- a/drivers/spi/spi-qpic-snand.c
-+++ b/drivers/spi/spi-qpic-snand.c
-@@ -97,7 +97,6 @@ struct qpic_ecc {
- 	u32 cfg1;
- 	u32 cfg0_raw;
- 	u32 cfg1_raw;
--	u32 ecc_buf_cfg;
- 	u32 ecc_bch_cfg;
- 	bool bch_enabled;
- };
-@@ -407,8 +406,6 @@ static int qcom_spi_ecc_init_ctx_pipelined(struct nand_device *nand)
- 			       FIELD_PREP(ECC_MODE_MASK, ecc_cfg->ecc_mode) |
- 			       FIELD_PREP(ECC_PARITY_SIZE_BYTES_BCH_MASK, ecc_cfg->ecc_bytes_hw);
- 
--	ecc_cfg->ecc_buf_cfg = FIELD_PREP(NUM_STEPS_MASK, 0x203);
--
- 	conf->step_size = ecc_cfg->step_size;
- 	conf->strength = ecc_cfg->strength;
- 
-@@ -1198,13 +1195,12 @@ static int qcom_spi_program_ecc(struct qcom_nand_controller *snandc,
- 	u8 *data_buf = NULL, *oob_buf = NULL;
- 	int i, ret;
- 	int num_cw = snandc->qspi->num_cw;
--	u32 cfg0, cfg1, ecc_bch_cfg, ecc_buf_cfg;
-+	u32 cfg0, cfg1, ecc_bch_cfg;
- 
- 	cfg0 = (ecc_cfg->cfg0 & ~CW_PER_PAGE_MASK) |
- 	       FIELD_PREP(CW_PER_PAGE_MASK, num_cw - 1);
- 	cfg1 = ecc_cfg->cfg1;
- 	ecc_bch_cfg = ecc_cfg->ecc_bch_cfg;
--	ecc_buf_cfg = ecc_cfg->ecc_buf_cfg;
- 
- 	if (snandc->qspi->data_buf)
- 		data_buf = snandc->qspi->data_buf;
-@@ -1222,7 +1218,6 @@ static int qcom_spi_program_ecc(struct qcom_nand_controller *snandc,
- 	snandc->regs->cfg0 = cpu_to_le32(cfg0);
- 	snandc->regs->cfg1 = cpu_to_le32(cfg1);
- 	snandc->regs->ecc_bch_cfg = cpu_to_le32(ecc_bch_cfg);
--	snandc->regs->ecc_buf_cfg = cpu_to_le32(ecc_buf_cfg);
- 	snandc->regs->exec = cpu_to_le32(1);
- 
- 	qcom_spi_config_page_write(snandc);
-@@ -1275,13 +1270,12 @@ static int qcom_spi_program_oob(struct qcom_nand_controller *snandc,
- 	u8 *oob_buf = NULL;
- 	int ret, col, data_size, oob_size;
- 	int num_cw = snandc->qspi->num_cw;
--	u32 cfg0, cfg1, ecc_bch_cfg, ecc_buf_cfg;
-+	u32 cfg0, cfg1, ecc_bch_cfg;
- 
- 	cfg0 = (ecc_cfg->cfg0 & ~CW_PER_PAGE_MASK) |
- 	       FIELD_PREP(CW_PER_PAGE_MASK, 0);
- 	cfg1 = ecc_cfg->cfg1;
- 	ecc_bch_cfg = ecc_cfg->ecc_bch_cfg;
--	ecc_buf_cfg = ecc_cfg->ecc_buf_cfg;
- 
- 	col = ecc_cfg->cw_size * (num_cw - 1);
- 
-@@ -1297,7 +1291,6 @@ static int qcom_spi_program_oob(struct qcom_nand_controller *snandc,
- 	snandc->regs->cfg0 = cpu_to_le32(cfg0);
- 	snandc->regs->cfg1 = cpu_to_le32(cfg1);
- 	snandc->regs->ecc_bch_cfg = cpu_to_le32(ecc_bch_cfg);
--	snandc->regs->ecc_buf_cfg = cpu_to_le32(ecc_buf_cfg);
- 	snandc->regs->exec = cpu_to_le32(1);
- 
- 	/* calculate the data and oob size for the last codeword/step */
+From my understanding this is not unique to ARM? After all, from my
+experience s2idle on AMD is also configured using a PEP like driver on
+Windows/Linux. A lot of the AMD platforms I tested rely on triggering
+a specific mailbox on the SMU to enter s2idle instead of the modern
+standby dsms. This is implemented by amd_pmc. Then hw vendors use the
+DSMs for additional functionality such as disabling gamepads and
+keyboard backlight.
 
----
-base-commit: f3c0a2b557ea87cbd802b278783c32484a063ded
-change-id: 20260929-qpic-snand-drop-ecc_buf_cfg-bf07142c2d62
+In this RFC, you propose using a DP/ACPI hybrid to have the
+configuration that should be performed by a platform driver be
+performed by a DT instead. But this hybrid mode is only useful to
+bring up these platforms and is not expected to help in the future. So
+it is a lot of refactoring for not much gain?
 
-Best regards,
--- 
-Gabor Juhos <j4g8y7@gmail.com>
+Therefore, have you considered if a small qualcomm driver would be
+realistic / possible where all it does is setup the configuration the
+same way as its windows counterpart does? Would it be too big,
+cumbersome etc, not worth the squeeze, where we should just stick with
+DTs for these laptops and ameliorate this deficit on the BIOS side for
+future laptops instead, since I understand some Qualcomm folk are
+working on making newer laptop variants ACPI only and that is great.
+
+Best,
+Antheas
+
+
+>
+> Upstreaming of these patches (to upstream or not to upstream?).
+>
+> 1. The first couple of patches in this series mainly implement a) + b) from
+> above. This seems like something genuinely useful to have; and except for
+> missing DT-bindings for hybrid mode this seems mostly ready to go upstream.
+>
+> 2. I see c) as a way to slowly evolve support for current Snapdragon laptops
+> to use more and more info from ACPI and get closer to a point where we only
+> need a single DT describing the SoC and any info related to laptop model
+> specific bits outside of the SoC can be read from the ACPI tables.
+>
+> As mentioned above work is being done to have Linux boot on future laptop
+> generations using ACPI only, so all this applies to currently available
+> Snapdragon laptop generations only.
+>
+> The question is what to do wrt upstreaming patches necessary for c) though
+> (patches 7-12) are we going to allow new Devicetree files for not yet
+> supported laptop models to partially rely on ACPI?
+>
+> The current demo ACPI usage in this RFC series just instantiates I2C-HID
+> devices from ACPI. More interesting would be to hookup the embedded
+> controller (EC) handling in the ACPI tables instead of having to write
+> a special EC driver for each laptop model separately. For the EC parts
+> I believe that it might be worthwhile to implement c).
+>
+> This new DT-ACPI hybrid mode works as follows:
+>
+> 1. A new global ACPI subsys flag called acpi_dt_hybrid is introduced which
+> can be set to 1 combined with acpi_disabled=1. When this is done, then
+> despite acpi_disabled being set the ACPI tables will still get parsed and
+> /sys/firmware/acpi (tables) and /sys/bus/acpi/devices (fwnodes) will still
+> get populated. No devices will be instantiated, no fwnodes will get
+> attached to any other (e.g. PCI, USB) devices and no other actions will
+> be taken.
+>
+> 2. Add acpi=hybrid kernel-commandline option to the arch/arm64 code.
+> TODO: Add a DT-binding for selecting hybrid mode from Devicetree.
+>
+> 3. drivers/acpi/glue.c changes to support devices with an of_node as
+> primary fwnode having a "acpi-path" string property and when present look
+> up the ACPI fwnode for that path, e.g. "\\_SB.GIO0", "\\_SB.I2C1" and
+> set that fwnode as secondary node.
+>
+> 4. pinctrl-msm changes to map special WoA ACPI table virtual GPIO numbers
+> for PDC pins back to regular TLMM GPIO numbers.
+>
+> 5. Tiny drivers/i2c/i2c-core-acpi.c change to make it instantiate ACPI
+> described I2C clients under a DT instantiated I2C adapter if that
+> adapter has an ACPI secondary fwnode.
+>
+> With this I can drop the DT description of the ThinkPad T14s gen 6
+> keyboard and touchpad and instead have these be instantiated by ACPI,
+> as shown in patch 12/12.
+>
+> Comments, thoughts ?
+>
+> Regards,
+>
+> Hans
+>
+>
+> Hans de Goede (12):
+>   ACPI: Introduce DT-ACPI hybrid mode
+>   arm64: acpi: Cleanup acpi=[on|off|force] handling
+>   arm64: acpi: add acpi=hybrid support
+>   ACPI: Add helpers for dealing with ACPI fwnode as secondary fwnode
+>   ACPI: glue: Implement setting secondary-fwnode for DT-ACPI hybrid mode
+>   ACPI: scan: Retry acpi_device_notify() in DT-ACPI hybrid mode
+>   ACPI: Make device_match_acpi_handle() also check the secondary fwnode
+>   irqchip/gic-v3: Always call acpi_set_irq_model()
+>   pinctrl: qcom: Add support for WoA ACPI tables virtual TLMM pin
+>     numbers
+>   i2c: acpi: Also register ACPI i2c_clients for adapters with a
+>     secondary ACPI fwnode
+>   i2c: qcom-geni: Fall back to i2c_acpi_find_bus_speed()
+>   arm64: dts: qcom: x1e78100-thinkpad-t14s: Move keyb and touchpad to
+>     ACPI enumeration
+>
+>  .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   |  61 +-----
+>  arch/arm64/include/asm/acpi.h                 |   1 +
+>  arch/arm64/kernel/acpi.c                      |  47 +++--
+>  arch/loongarch/include/asm/acpi.h             |   1 +
+>  arch/riscv/include/asm/acpi.h                 |   3 +-
+>  arch/x86/include/asm/acpi.h                   |   1 +
+>  drivers/acpi/acpi_apd.c                       |   3 +
+>  drivers/acpi/acpi_memhotplug.c                |   3 +
+>  drivers/acpi/acpi_processor.c                 |   3 +
+>  drivers/acpi/arm64/init.c                     |   2 +
+>  drivers/acpi/bus.c                            |   6 +-
+>  drivers/acpi/glue.c                           |  70 ++++++-
+>  drivers/acpi/property.c                       |  13 ++
+>  drivers/acpi/scan.c                           |  33 +++
+>  drivers/acpi/tables.c                         |   4 +-
+>  drivers/base/core.c                           |   4 +-
+>  drivers/firmware/efi/efi-bgrt.c               |   2 +-
+>  drivers/i2c/busses/i2c-qcom-geni.c            |  10 +-
+>  drivers/i2c/i2c-core-acpi.c                   |   8 +-
+>  drivers/irqchip/irq-gic-v3.c                  |  29 ++-
+>  drivers/pinctrl/qcom/Makefile                 |   4 +-
+>  drivers/pinctrl/qcom/pinctrl-msm-acpi.c       | 196 ++++++++++++++++++
+>  drivers/pinctrl/qcom/pinctrl-msm.c            |  47 ++++-
+>  drivers/pinctrl/qcom/pinctrl-msm.h            |  35 ++++
+>  include/acpi/acpi_bus.h                       |  16 ++
+>  include/linux/acpi.h                          |  10 +
+>  26 files changed, 502 insertions(+), 110 deletions(-)
+>  create mode 100644 drivers/pinctrl/qcom/pinctrl-msm-acpi.c
+>
+> --
+> 2.54.0
+>
 
