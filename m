@@ -1,87 +1,87 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D8984052D7
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F95429CD6
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651887; cv=none; b=r0jZNiCoWKp/zBwEUfiWueElnE+1SUl1IghRNadjfLPsH/Z7tVGkBfXoQOGxcIL8Uj5/x5OovlVIwCCGG2vdw5A5YdFfRd5QZJ6e7Cerj7aF8D/+G7M+Uwnqk3B5YYs48ZdBeN+yXcapn2u+eSr7bpk6i9kZBfmQxphFGfjOST8=
+	t=1790651888; cv=none; b=czsMlMGYt5aDM2kVUvSqsrQg8tszTEjl8KZvsHZJugISqJUeefbEzJ+lsfFS7ZfaGrdX/XCZ0E7IFGMcloEp2aExMRH+AAd5W2higbYIsJ//1Fgzzffn5Ol4ASeVJWqSzuxZifAVH75QtxnQM5r1Anm5szis/C8GiHbzbHsYEtE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651887; c=relaxed/simple;
-	bh=bSWJwBXlrOCPPqMALAdhvCQnU0VIUIjmfsdSClCsa70=;
+	s=arc-20240116; t=1790651888; c=relaxed/simple;
+	bh=ylXzUuTIz4l9YRe/EquAV7rS8KwuDXeJiQfbzvSBq/c=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=o2BeKc35B9haaO188uLuenSOjXlYoypD3CYzhLm/Q8WwsyQjarTNeCkUFxmmqrfXN+9geqCInCxR90SqT7renRHb2vxyExaHQnlAUh3YUJ6cC5cYp2NhQJLM7jcrZcxDczKylPYVPgGW6oWa3qaSCHQE6dA0o1fBL+qkVb3AuKs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GKT3R2mq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i79Hg3qX; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=dy0B2XPl5BbJqbflkxtm/PzsHOUgGioAuKOQi+glGsyAr2zoKmM3soIejca7bZ8ap8xagNqTXpk1ZuDzzb2cQQV8Mc8bh/ls/I1CVktj626D/CUoAx2/sRnrxh5qn4h6PqO21xSYH/k8xwOBKOsagAPT3mveqYZ+nMQ9Mg/qpqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Sn/nVrmS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RCmzLpl4; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GKT3R2mq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i79Hg3qX"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T0ilGh4079599
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:54 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Sn/nVrmS";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RCmzLpl4"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T0ikXk2959286
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kcSXSBxb/P7PFQu+uBDPb0bMiJ0Tnsz8E3Lxm0x6K9o=; b=GKT3R2mqvCxnLNwk
-	MaPwyxtJMJyYzdQsjwZmJWp7IbfY8Zr3udPp8SlMw7FPOrUfytFUZjMhBs48qk6j
-	O2lmRaXKGDZyVP7QIwaywHrUOMj5d3ShSaGRp62tT714Tf9p1LdzlI8prPX7zIFf
-	mfsh0kPa94vuH9ROF5ZdLdaUZx4bU+M/KXfGw8U0cwGqFbqhJh9lG69u8gmEdB8W
-	Z+OOfcM2obE5coxYy0/GMoSkprdS1vXhj/ztmnRiIEck46BkGbKiaJPZ6dh5OZtL
-	Cmz5wiqL7TxQYCjL/w0xoZvtw/K3bbJFHFl/Inmu5agvnGTXIEvEv8W4SJeYd/fC
-	Llczig==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyw03hw04-1
+	f9ov8W6fE9gqAZsQlIuIktm/LEGd+4kh4Ula1IscwgI=; b=Sn/nVrmSAs/z35+b
+	i52DBtVuzdBRekqSzu2e++XRcRt4n246q4TZ5tP2rSTkJL2T15PNxb4LNpzwgePl
+	sZaS2i69xNG/uYeBAmsIVofoGMK51wRi4kHGxs/ZSjBXyM8ErgEeDduwHICQ9ofW
+	PUDPU8miEzus2tOLgNsWvdGCigN6h1t+BlCnt2EKY9dns2+PX8dO/ARsuidEkAn5
+	icIM0pdkearuVJ67tYifd/NlvBAxgdolZNaTuGAm7c/PxDcLzbjlg+w18Yz60yyX
+	w3QIcVdRyoGq8H5EKJMv3inlpTVeJ8sooMjM2Wdz6fk9DOLdvaoaIT5BfvbGifSg
+	AxS//A==
+Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h01vkgnkk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:53 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-33713e5e6daso5768846eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:17:53 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:56 +0000 (GMT)
+Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-1416f32fe11so1481556c88.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790651873; x=1791256673; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790651876; x=1791256676; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kcSXSBxb/P7PFQu+uBDPb0bMiJ0Tnsz8E3Lxm0x6K9o=;
-        b=i79Hg3qX5dn+ToeX0Cvf981LamrZvzTle2J6Zw06Lkhv8hVb+JO47p57pNQkofZBQo
-         Fxl13ktA0m/+RZMzUKVheFLaKAGe8kP6ie1m5oiPjcVPuDcPJLsX0hZuqbMFqfbBm64o
-         61zvKITTVFPqwZ1iwIIlikhQzeUOKYp3ypM0Io9MY/xpszdTloy8wHVF7eJ1DMU2GP68
-         EN2RUTjMiG88E93TQ7FxBkk1X0cU97byRWk9DlfHYsutUncw8T0wLWwTVgiNhRy+o/qs
-         K/V1gREP6V9KlWaxWP5vYZvQ/DRv2vV9MxnW8bAu2WsSuD6vHyhEy0rSE+oG2qq/H35o
-         rk4A==
+        bh=f9ov8W6fE9gqAZsQlIuIktm/LEGd+4kh4Ula1IscwgI=;
+        b=RCmzLpl4Em+Wa5wntMINPjNjYwvOf0fyEjroMavv46TfHCfT228tiljdpKTjUK7Bgx
+         GOsZILhtEuZetF3d07F+TX3reyen1DQ8m+MP4GQqd6JeDmkJvLrWy3YSAq7Zv8Rq2KKq
+         hb7V6O//ei8MApvFx6LGlzir0O8d/Y8oB3L8kOb6I2h/PfKtEV76b7xrAHwmfunK5ASk
+         sgHp1kd3jbcqC2CnL9FrQ9c0PRlGqVxFeGcJYV/FrD+liOenFHkpV43x5vBLIzK04xKG
+         +GSpPr33eiX+Fpe7uRsxdilyeZ7sfErIPeY7TWpnKeAyPQ36WMTl0VKe9P2hEu2UEjKs
+         oPVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790651873; x=1791256673;
+        d=1e100.net; s=20260707; t=1790651876; x=1791256676;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=kcSXSBxb/P7PFQu+uBDPb0bMiJ0Tnsz8E3Lxm0x6K9o=;
-        b=NaEvcfxPUfI/qFpYfGAUOILoJgYC2R+t5fmf0ryXExeXhdVQ053bxByCh9Wiv30wvl
-         aPcVcyruB74BSV0sRKEOVKhbZkkLwh6GByXbwd0M33bnFvIUBWzQm/o/QJ5x0SENksim
-         Dq1Kw0aNeAPy4f8Mpe03uRbseHv8O9ShZDdVd8x4bl6nHdaCCdrdg+t9XaYy8U+5hmDz
-         YEEqw/+GYc+r1MeNUXvBEhFAif5teq0w2/CabM6kOs/5viDXwv/HgVL5A/TQ+efMLy/1
-         ZIxhSR45kXvxq5aiyQYoZ+Cy8PfMO1Q3zUfsCp4eg3/eD13t7cN4yf9GMBHRHSkESOVB
-         bfFw==
-X-Gm-Message-State: AFuF++nyR3wMX0/mPidInn9OubUPRnnz6zH//L5w+3VKrRnZXZzQrrrG
-	2o5HNRVMb2vI64VKMfKWEB+Je++wEAl4maZWdFdRwTktu0XKFjg7QeZEfyaAbq2t6Sx3n9HeCOr
-	W5VtNPVAShzvAh7r6fZxke+RdT7FDYFnI78KZKZgWTOD59kgXsLODavz+qT6roX7/5SA=
-X-Gm-Gg: AYBFou20mh+PYoJ1p4uabdZQ1XFK/hcafMmmRmyde0daCVQ8Z5Th7QkyyG/YHGhE0gH
-	EbX1K8CF4+2arnGfO1xa0TuVUFl3WeBKpMJui6F1tr73VOnB6UKSVqgiVmM6ZcK/uuhRwaSo7Ns
-	Ga0AqlMwP6nqkXqfwn4zVnVyzNK4hto6FoYVZYTpxcvh2ESKmRDWAb/SvsBJb6DAwk07nBrD7vH
-	H8fapddaeGaquSDWFQdZ2dSHU3KLdikVP66O+9PINucFkTwqL1Kq9ZVuII/hdJEZrolZNm0fko5
-	W+MMDMm7lLtgXSWLqkzhuBkr6YUxTF3JdpgPrD/gZogh1eYH/kdvlxE/AKvoZnH8ZCeijW9T6WP
-	+FjMvHupPqre5qxOrF6CmrqKYKC3OPyQwaqYHuKsPYY+zCDd2Hi7UMaAffiw=
-X-Received: by 2002:a05:7022:7f13:b0:148:dfc9:425d with SMTP id a92af1059eb24-148dfc947fbmr8103471c88.46.1790651872554;
-        Mon, 28 Sep 2026 20:17:52 -0700 (PDT)
-X-Received: by 2002:a05:7022:7f13:b0:148:dfc9:425d with SMTP id a92af1059eb24-148dfc947fbmr8103437c88.46.1790651871705;
-        Mon, 28 Sep 2026 20:17:51 -0700 (PDT)
+        bh=f9ov8W6fE9gqAZsQlIuIktm/LEGd+4kh4Ula1IscwgI=;
+        b=edAEer2tNcLIzPaIUCW6+FXTEw/c12a1wuClAtvU7tuWM272ymJNkqX4AG2JqiaDJm
+         4SALE1HPXmMwB8BwHeM7a+zvEMaUNLFpotDUxCyepnZwpzhEpkkHkLK7YUdw9/bMskz9
+         0uGKc9pjaV4JIZXGjGQZkO6TIfxMGq42J8oaMbDqLidkoYtCRnU5IC/Rp68J/4cEDbBo
+         ANAESxLDBcNnlZoRM2M05CdhzqMz7tbgpQ2P0BqSDhELar/sAMstmcOXI1RQuW62nVdl
+         z5Z5iUhIt1o56AyqVJ0b33S5K5Jsmqwlqg/ct66yyAAsO4T/nQJSLa4MK0ygmzToRC9E
+         IDww==
+X-Gm-Message-State: AFuF++mHHbGgNgSD03nZdTJkLI036998WqTV8gvPLKq54IOvRXfUIv7C
+	TRr2w/tiXpbF43qQIFV8wWpSotUQUFEGNDJ8Rc7fBUrVssrJCeSAVT9Y0SZ+BKyi+gJ26gIILq1
+	FD+N0aM4yS8goVVMuOnFhfGWEDV7S2+O+IQrHJ3Yg1BE8MNSKAgUCBpeUhM/DnlO6vww=
+X-Gm-Gg: AYBFou2Gcw57hVIo/fiI6DpmAKc3rkhqs/Hy2VDINBpgTtFMV/jOnFlzDRuAvJEwWy3
+	P77wBRwCrEkRxE6me84d9UV+jS+TnmEvNRpFaKLJu5FmFgHx49SFvgfy7H9FNbhCswJ39u45N8o
+	F091wlMxiNFjCQwkJAdh7ywrbtd2STDAGLWg48/M7xiIykSdQ1ENlBQKHrk383+kpnyo1ZnvY2P
+	Fsd/ZM0i7nocoggRpYS/LXfFXSXkFMdEgO4oRnn+ut+IA0NaJAUgjMQGlRMl7AkcoTa5ibTnNGW
+	mg0AJ8Dbhmw/UBw2snHrJ6LlaqDJGAyBl21yIB61gwZi9FB5Rwz121yEpLPLM4/Hnd3Bi+yUD2q
+	G6bpa5sB0k99MTuS+40q0t/uig0DhyK7NejFLbsK0yg/976QHpGcppo06OGc=
+X-Received: by 2002:a05:7022:28d:10b0:149:8354:ba29 with SMTP id a92af1059eb24-1498354f52bmr5383825c88.8.1790651875694;
+        Mon, 28 Sep 2026 20:17:55 -0700 (PDT)
+X-Received: by 2002:a05:7022:28d:10b0:149:8354:ba29 with SMTP id a92af1059eb24-1498354f52bmr5383798c88.8.1790651875144;
+        Mon, 28 Sep 2026 20:17:55 -0700 (PDT)
 Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ad4028a9sm24789368c88.11.2026.09.28.20.17.50
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ad4028a9sm24789368c88.11.2026.09.28.20.17.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 20:17:51 -0700 (PDT)
+        Mon, 28 Sep 2026 20:17:53 -0700 (PDT)
 From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Date: Mon, 28 Sep 2026 20:16:57 -0700
-Subject: [PATCH RFC 06/10] firmware: riscv: rpmi-tee: parse system
- information tables
+Date: Mon, 28 Sep 2026 20:16:59 -0700
+Subject: [PATCH RFC 08/10] firmware: riscv: rpmi-tee: cache TEE
+ capabilities
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-riscv-rpmi-tee-abi-v1-6-04908b81d885@oss.qualcomm.com>
+Message-Id: <20260928-riscv-rpmi-tee-abi-v1-8-04908b81d885@oss.qualcomm.com>
 References: <20260928-riscv-rpmi-tee-abi-v1-0-04908b81d885@oss.qualcomm.com>
 In-Reply-To: <20260928-riscv-rpmi-tee-abi-v1-0-04908b81d885@oss.qualcomm.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>, Paul Walmsley <pjw@kernel.org>,
@@ -106,704 +106,110 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         devicetree@vger.kernel.org,
         Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 X-Mailer: b4 0.13.0
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfXyFgUaGXAksM+
- vhMgPAJPlGG7sZF1kio4iHDKfNVRqrYvtaqgCl8SDxdx5Xbk3Q4Cn8+Td96LpNv3nQaauRi4J5j
- ieCiZUFnQdnwZmnzyAtHxcUVuYkk9JQ=
-X-Authority-Analysis: v=2.4 cv=SIbXx+vH c=1 sm=1 tr=0 ts=6abb2de1 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfXz8cu/EuEdeS1
+ j5gluUY2kcM1mCR7csrp4zgWJ7qh7JIT+ztrLzSHNPnRxaMRscZE4lBrjhC/TBRyhzEZbfV7Omz
+ ZR8UCHG7xmqbWPyVJcAKUQ+jahcPEBMU/1dWC18yJweBJKiRmBaS5TNXDetKTMzfhZ3NCoH8egP
+ mBWlhxyvOHtjlUPStw5/so0Vx6Md6nTO66Njx6kzOqJwJKOcx4gRhn1YvVWrTlIFin6JVytsD9r
+ gTfuJoFxOMQEaeiErsH50pua/GI25XLRk+ly2iUmCQRw5BB18tW7FDKDMTnO7RpyM84VYpi/YU7
+ PsJOl7xjp4LvMEbowUSNK+EiEl4jsuLOQdrcHG3mveJLipzvJod1QGdc37QJjxj6PH6OYf8fg7+
+ c8tUtv6YjT3WLYkc1WDSeMnk34J6FzjG4ZY2M3XdSfv6/Dgxyw3qZznT35MPK/28xOpnB6epTKd
+ ahifGHBatZi/E6K7lFA==
+X-Proofpoint-GUID: ztQqaCxN8ukRE1NtctOa4Sk40DXyF9Z7
+X-Authority-Analysis: v=2.4 cv=VcVir1p9 c=1 sm=1 tr=0 ts=6abb2de4 cx=c_pps
+ a=JYo30EpNSr/tUYqK9jHPoA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=POWkj4GtxbLqprlqRRMA:9 a=qLrqz2gbWCqx0rJJ:21
- a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfX9yQj6YA6VGGL
- 2T3d32lAwN1o7UXBEAn2oWUlOK2wlercWtaciladzU/j6ZkDJcxkpNlJ8L+F/SG9D6+lRy0xHZS
- Id40qmoGwtymhAWzVSUNYH7P2lWWow4oYNMY8oY9EcVs8qcVMBLxXjkcd+MKjZNyycQoLBa6XgW
- AA9w3lN7HELlVj4Dra1kr+Cm8IWLRF60O1U0yZ6YBxDR2HJFS2s6vMTuN+dCn+87m7u61qNARyY
- stuUYNuVolL6uUYXs8z/wlQEyG7SCTb4Y5I70BgDYebpl8N+tZ/WzV39CXlzGvWcTOXZ7r5Oa+e
- 2owuXapj4UvfJ03BNOomQriuXHwj9bZ/XSa+tYTxyV3rLkdzf+mEnzMNPFPih9NsR7t4kZxl/0l
- 8nIggi17ZdqflovjZWetAGogzk2VaznTEb3g9qVJ2fodv/X1C6t43pmSX7eWKFlSNxBaQCqIdjT
- MYRCo25wMgGIU466Dcg==
-X-Proofpoint-GUID: Amx0PV9AkH87cQzSEGh2wXPAo4INiMmj
-X-Proofpoint-ORIG-GUID: Amx0PV9AkH87cQzSEGh2wXPAo4INiMmj
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=ViJ-rRY3MSY-B2NivjAA:9 a=QEXdDO2ut3YA:10
+ a=Fk4IpSoW4aLDllm1B1p-:22
+X-Proofpoint-ORIG-GUID: ztQqaCxN8ukRE1NtctOa4Sk40DXyF9Z7
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfX31/rGzPbrEJm
+ +BwHgzQPsRvxHAYCE3iOHIRxcMIlnWxDInnqkWRTNYuMNgoq3GBgnzhD1Y1t1PjK6MpG/yLN4ly
+ FnmtKbqcXUG6+vuR4KypSgKVQ7hv1ww=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-29_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 clxscore=1011 suspectscore=0
- priorityscore=1501 malwarescore=0 impostorscore=0 adultscore=0 bulkscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ priorityscore=1501 bulkscore=0 clxscore=1015 suspectscore=0
+ lowpriorityscore=0 spamscore=0 phishscore=0 malwarescore=0 adultscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
  definitions=main-2609290012
 
-Add parsing for the RPMI TEE descriptor-table SYSINFO format used
-during discovery. Validate the V1 header, the table directory, each
-table's byte range, endpoint role flags, and endpoint-to-service
-ownership before any record is trusted.
-
-Support both the Self SYSINFO response, which identifies the local
-REE endpoint, and the Whole-system SYSINFO response, which enumerates
-the physical TEE endpoints and their service UUIDs.
+Query TEE features during discovery and cache memory, multisegment,
+and signal-bus capabilities in the transport.
 
 Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 ---
- drivers/firmware/riscv_rpmi_tee/Makefile  |   2 +-
- drivers/firmware/riscv_rpmi_tee/sysinfo.c | 385 ++++++++++++++++++++++++++++++
- drivers/firmware/riscv_rpmi_tee/sysinfo.h | 244 +++++++++++++++++++
- 3 files changed, 630 insertions(+), 1 deletion(-)
+ drivers/firmware/riscv_rpmi_tee/driver.c | 40 ++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
 
-diff --git a/drivers/firmware/riscv_rpmi_tee/Makefile b/drivers/firmware/riscv_rpmi_tee/Makefile
-index 8984127535ed..90cc6c39b273 100644
---- a/drivers/firmware/riscv_rpmi_tee/Makefile
-+++ b/drivers/firmware/riscv_rpmi_tee/Makefile
-@@ -3,6 +3,6 @@
- rpmi-tee-bus-y = bus.o
- rpmi-tee-core-objs := $(rpmi-tee-bus-y)
- obj-$(CONFIG_RISCV_RPMI_TEE_TRANSPORT) = rpmi-tee-core.o
--rpmi-tee-driver-y = driver.o
-+rpmi-tee-driver-y = driver.o sysinfo.o
- rpmi-tee-module-objs := $(rpmi-tee-driver-y)
- obj-$(CONFIG_RISCV_RPMI_TEE_TRANSPORT) += rpmi-tee-module.o
-diff --git a/drivers/firmware/riscv_rpmi_tee/sysinfo.c b/drivers/firmware/riscv_rpmi_tee/sysinfo.c
-new file mode 100644
-index 000000000000..5829ab6db042
---- /dev/null
-+++ b/drivers/firmware/riscv_rpmi_tee/sysinfo.c
-@@ -0,0 +1,385 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
-+ * RPMI TEE system-information descriptor table parsing
-+ */
+diff --git a/drivers/firmware/riscv_rpmi_tee/driver.c b/drivers/firmware/riscv_rpmi_tee/driver.c
+index db3dbab53078..7b06c1f96ba8 100644
+--- a/drivers/firmware/riscv_rpmi_tee/driver.c
++++ b/drivers/firmware/riscv_rpmi_tee/driver.c
+@@ -25,8 +25,16 @@
+ #define RPMI_TEE_SRV_PROBE_SYSTEM	0x03
+ #define RPMI_TEE_SRV_CALL		0x13
+ 
++#define RPMI_TEE_FEATURE_MEMORY_LEND		2
++#define RPMI_TEE_FEATURE_MEMORY_SHARE		3
++#define RPMI_TEE_FEATURE_SIGNAL_BUS		4
++#define RPMI_TEE_FEATURE_MULTISEGMENT_OPS	5
+ #define RPMI_TEE_FEATURE_SYSINFO_FORMAT	6
+ 
++#define RPMI_TEE_MEMORY_FEATURE_UNSUPPORTED		0
++#define RPMI_TEE_MEMORY_FEATURE_TEE_ONLY		1
++#define RPMI_TEE_MEMORY_FEATURE_FULLY_SUPPORTED	2
 +
-+#include <linux/errno.h>
-+#include <linux/overflow.h>
-+#include <linux/string.h>
-+#include <linux/unaligned.h>
-+
-+#include "sysinfo.h"
-+
-+struct rpmi_tee_sysinfo_table {
-+	const u8 *data;
-+	u32 count;
-+	u16 desc_size;
-+	bool present;
-+};
-+
-+/**
-+ * struct rpmi_tee_sysinfo - Validated SYSINFO descriptor-table state
-+ * @data: Start of the complete SYSINFO response buffer.
-+ * @len: Size of @data in bytes.
-+ * @tables: Table views indexed by &enum rpmi_tee_sysinfo_table_type.
-+ *
-+ * Each table view is populated only after the header, directory, table
-+ * range, and descriptor size have been validated.
-+ */
-+struct rpmi_tee_sysinfo {
-+	const u8 *data;
-+	size_t len;
-+	struct rpmi_tee_sysinfo_table tables[RPMI_TEE_SYSINFO_TABLE_MAX];
-+};
-+
-+/* Assign table record @i in @t to a typed pointer @ptr. */
-+#define rpmi_tee_sysinfo_entry_at(t, i, ptr)			\
-+	do {							\
-+		typeof(t) table = (t);				\
-+		(ptr) = (typeof(ptr))(table->data +		\
-+			(size_t)(i) * table->desc_size);	\
-+	} while (0)
-+
-+/**
-+ * rpmi_tee_sysinfo_buffer_range() - Validate a serialized SYSINFO range
-+ * @total: Total SYSINFO buffer size in bytes.
-+ * @offset: Byte offset of the first record.
-+ * @count: Number of records.
-+ * @size: Size of one record in bytes.
-+ * @start: Optional returned byte offset of the range.
-+ *
-+ * Check that @count records of @size bytes beginning at @offset neither
-+ * overflow nor extend beyond @total. If non-NULL, @start receives the byte
-+ * offset of the validated range.
-+ *
-+ * Return: 0 on success or -EINVAL if the range is invalid.
-+ */
-+static int rpmi_tee_sysinfo_buffer_range(size_t total, u32 offset, u32 count,
-+					 u16 size, size_t *start)
-+{
-+	size_t bytes, end;
-+
-+	if (check_mul_overflow((size_t)count, (size_t)size, &bytes) ||
-+	    check_add_overflow((size_t)offset, bytes, &end) || end > total)
-+		return -EINVAL;
-+
-+	if (start)
-+		*start = offset;
-+
-+	return 0;
-+}
-+
-+/* Validate a directory descriptor and record its table range in @info. */
-+static int rpmi_tee_sysinfo_get_table(struct rpmi_tee_sysinfo *info,
-+				      const struct rpmi_tee_sysinfo_table_desc *desc)
-+{
-+	u16 desc_size = get_unaligned_le16(&desc->desc_size);
-+	u32 offset = get_unaligned_le32(&desc->offset);
-+	u32 count = get_unaligned_le32(&desc->count);
-+	u16 type = get_unaligned_le16(&desc->type);
-+	struct rpmi_tee_sysinfo_table *table;
-+	size_t start;
-+
-+	/* Validate table buffer. */
-+	if (rpmi_tee_sysinfo_buffer_range(info->len, offset, count, desc_size,
-+					  &start))
-+		return -EINVAL;
-+
-+	switch (type) {
-+	case RPMI_TEE_SYSINFO_TABLE_ENDPOINT:
-+		if (desc_size < sizeof(struct rpmi_tee_sysinfo_endpoint))
-+			return -EINVAL;
-+		break;
-+	case RPMI_TEE_SYSINFO_TABLE_SERVICE:
-+		if (desc_size < sizeof(struct rpmi_tee_sysinfo_service))
-+			return -EINVAL;
-+		break;
-+	case RPMI_TEE_SYSINFO_TABLE_PARCEL:
-+		if (desc_size < sizeof(struct rpmi_tee_sysinfo_parcel))
-+			return -EINVAL;
-+		break;
-+	case RPMI_TEE_SYSINFO_TABLE_PARCEL_RECEIVER:
-+		if (desc_size < sizeof(struct rpmi_tee_sysinfo_parcel_receiver))
-+			return -EINVAL;
-+		break;
-+	case RPMI_TEE_SYSINFO_TABLE_MEMORY_BLOCK:
-+		if (desc_size < sizeof(struct rpmi_tee_sysinfo_memory_block))
-+			return -EINVAL;
-+		break;
-+	case RPMI_TEE_SYSINFO_TABLE_BLOB:
-+		/* BLOB table is defined as raw bytes. */
-+		if (desc_size != 1)
-+			return -EINVAL;
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+
-+	table = &info->tables[type];
-+	if (table->present)
-+		return -EINVAL;
-+
-+	table->data = info->data + start;
-+	table->count = count;
-+	table->desc_size = desc_size;
-+	table->present = true;
-+
-+	return 0;
-+}
-+
-+/* Validate the header and directory, then populate table views. */
-+static int rpmi_tee_sysinfo_init(struct rpmi_tee_sysinfo *info,
-+				  const void *data, size_t len)
-+{
-+	const struct rpmi_tee_sysinfo_header *header = data;
-+	u32 i, table_count, dir_off;
-+	u16 header_size, dir_size;
-+
-+	memset(info, 0, sizeof(*info));
-+
-+	if (len < sizeof(struct rpmi_tee_sysinfo_header))
-+		return -EINVAL;
-+
-+	if (get_unaligned_le32(&header->magic) != RPMI_TEE_SYSINFO_MAGIC ||
-+	    get_unaligned_le16(&header->major) != RPMI_TEE_SYSINFO_VERSION_MAJOR ||
-+	    get_unaligned_le32(&header->total_size) != len)
-+		return -EINVAL;
-+
-+	header_size = get_unaligned_le16(&header->header_size);
-+	dir_size = get_unaligned_le16(&header->table_desc_size);
-+	table_count = get_unaligned_le32(&header->table_count);
-+	dir_off = get_unaligned_le32(&header->table_dir_offset);
-+
-+	if (header_size < sizeof(struct rpmi_tee_sysinfo_header) ||
-+	    dir_size < sizeof(struct rpmi_tee_sysinfo_table_desc) ||
-+	    /* Directory can not overlap with the header. */
-+	    dir_off < header_size)
-+		return -EINVAL;
-+
-+	/* Validate directory buffer. */
-+	if (rpmi_tee_sysinfo_buffer_range(len, dir_off, table_count, dir_size,
-+					  NULL))
-+		return -EINVAL;
-+
-+	info->data = data;
-+	info->len = len;
-+	for (i = 0; i < table_count; i++) {
-+		const struct rpmi_tee_sysinfo_table_desc *desc;
-+		int ret;
-+
-+		desc = rpmi_tee_sysinfo_desc_at(header, i);
-+		ret = rpmi_tee_sysinfo_get_table(info, desc);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * rpmi_tee_sysinfo_table_check() - Check a table index range
-+ * @table: Validated table view.
-+ * @offset: First record index, or first byte index for a BLOB table.
-+ * @count: Number of records, or bytes for a BLOB table.
-+ *
-+ * An empty range @count = 0 is valid.
-+ * A non-empty range must fit wholly within @table.
-+ *
-+ * Return: %true if the range is valid or %false otherwise.
-+ */
-+static bool
-+rpmi_tee_sysinfo_table_check(const struct rpmi_tee_sysinfo_table *table,
-+			     u32 offset, u32 count)
-+{
-+	size_t end;
-+
-+	if (!count)
-+		return true;
-+	/* For table->present = false or empty table, table->count is zero. */
-+	return !check_add_overflow((size_t)offset, (size_t)count, &end) &&
-+		end <= table->count;
-+}
-+
-+/* Validate endpoint records and their service ranges. */
-+static int rpmi_tee_sysinfo_validate_endpoints(struct rpmi_tee_sysinfo *info,
-+					       bool require_single_ree,
-+					       u32 *self_ep_id)
-+{
-+	const struct rpmi_tee_sysinfo_table *service_table;
-+	const struct rpmi_tee_sysinfo_table *ep_table;
-+	const struct rpmi_tee_sysinfo_endpoint *ep;
-+	u32 ree_count = 0, ep_idx;
-+
-+	ep_table = &info->tables[RPMI_TEE_SYSINFO_TABLE_ENDPOINT];
-+	service_table = &info->tables[RPMI_TEE_SYSINFO_TABLE_SERVICE];
-+	/* Endpoint table should exist and not empty; service table can be empty. */
-+	if (!ep_table->present || !ep_table->count || !service_table->present)
-+		return -EINVAL;
-+
-+	for (ep_idx = 0; ep_idx < ep_table->count; ep_idx++) {
-+		rpmi_tee_sysinfo_entry_at(ep_table, ep_idx, ep);
-+
-+		/* struct rpmi_tee_sysinfo_endpoint. */
-+		u32 ep_id = get_unaligned_le32(&ep->id);
-+		u32 parent_id = get_unaligned_le32(&ep->parent_id);
-+		u32 ep_flags = get_unaligned_le32(&ep->flags);
-+		u32 service_first = get_unaligned_le32(&ep->service_first);
-+		u32 service_range_count =
-+			get_unaligned_le32(&ep->service_count);
-+
-+		bool is_physical =
-+			ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL;
-+		bool is_ree = ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_REE;
-+		/* Require exactly one endpoint location and security role. */
-+		if (is_physical ==
-+			    !!(ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_PROXIED) ||
-+		    is_ree == !!(ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_TEE) ||
-+		    ep_flags & ~RPMI_TEE_SYSINFO_ENDPOINT_F_MASK)
-+			return -EINVAL;
-+
-+		if (!rpmi_tee_sysinfo_table_check(service_table, service_first,
-+						  service_range_count))
-+			return -EINVAL;
-+
-+		if (is_physical) {
-+			if (parent_id != RPMI_TEE_SYSINFO_ENDPOINT_NO_PARENT)
-+				return -EINVAL;
-+
-+			if (is_ree) {
-+				ree_count++;
-+				if (self_ep_id)
-+					*self_ep_id = ep_id;
-+			}
-+		}
-+	}
-+
-+	if (require_single_ree && ree_count != 1)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+/**
-+ * rpmi_tee_sysinfo_parse_self() - Parse a Self SYSINFO table
-+ * @data: SYSINFO response buffer.
-+ * @len: Size of @data in bytes.
-+ * @self_ep_id: Returned local REE endpoint identifier.
-+ *
-+ * Return: 0 on success or a negative error code.
-+ */
-+int rpmi_tee_sysinfo_parse_self(const void *data, size_t len, u32 *self_ep_id)
-+{
-+	struct rpmi_tee_sysinfo info;
-+	int ret;
-+
-+	if (!self_ep_id)
-+		return -EINVAL;
-+
-+	ret = rpmi_tee_sysinfo_init(&info, data, len);
+ #define RPMI_TEE_SYSTEM_WHOLE		0
+ #define RPMI_TEE_SYSTEM_SELF		3
+ 
+@@ -581,6 +589,7 @@ static int rpmi_tee_setup_endpoints(struct rpmi_tee_transport *priv)
+ static int rpmi_tee_transport_probe(struct platform_device *pdev)
+ {
+ 	struct rpmi_tee_transport *priv;
++	u32 value;
+ 	int ret;
+ 
+ 	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
+@@ -604,6 +613,37 @@ static int rpmi_tee_transport_probe(struct platform_device *pdev)
+ 		goto out_failed;
+ 	}
+ 
++	ret = rpmi_tee_probe_features(priv, RPMI_TEE_FEATURE_SYSINFO_FORMAT,
++				      &value);
 +	if (ret)
-+		return ret;
-+	/* Expect single endpoint in a self SYSINFO response. */
-+	if (info.tables[RPMI_TEE_SYSINFO_TABLE_ENDPOINT].count != 1)
-+		return -EINVAL;
-+
-+	return rpmi_tee_sysinfo_validate_endpoints(&info, true, self_ep_id);
-+}
-+
-+/**
-+ * rpmi_tee_sysinfo_parse_system() - Parse a Whole-system SYSINFO table
-+ * @data: SYSINFO response buffer.
-+ * @len: Size of @data in bytes.
-+ * @self_ep_id: Local REE endpoint identifier from the Self table.
-+ * @system: Caller-provided discovery-result storage and returned counts.
-+ *
-+ * The parser records the number of required endpoint and service entries in
-+ * @system. If either caller-provided array is too small, it fills the entries
-+ * that fit, returns -ENOSPC, and reports the required counts. The caller may
-+ * then allocate the reported capacities and call this function again.
-+ *
-+ * Return: 0 on success, -ENOSPC if an output array is too small, or a
-+ * negative error code.
-+ */
-+int rpmi_tee_sysinfo_parse_system(const void *data, size_t len, u32 self_ep_id,
-+				  struct rpmi_tee_sysinfo_system *system)
-+{
-+	const struct rpmi_tee_sysinfo_table *service_table;
-+	const struct rpmi_tee_sysinfo_table *ep_table;
-+	const struct rpmi_tee_sysinfo_endpoint *ep;
-+	size_t ep_count = 0, service_count = 0;
-+	struct rpmi_tee_sysinfo info;
-+	bool self_ep_found = false;
-+	u32 ep_idx, service_idx;
-+	int ret;
-+
-+	if ((system->ep_capacity && !system->eps) ||
-+	    (system->service_capacity && !system->services))
-+		return -EINVAL;
-+
-+	ret = rpmi_tee_sysinfo_init(&info, data, len);
-+	if (ret)
-+		return ret;
-+
-+	ret = rpmi_tee_sysinfo_validate_endpoints(&info, false, NULL);
-+	if (ret)
-+		return ret;
-+
-+	ep_table = &info->tables[RPMI_TEE_SYSINFO_TABLE_ENDPOINT];
-+	service_table = &info->tables[RPMI_TEE_SYSINFO_TABLE_SERVICE];
-+
-+	for (ep_idx = 0; ep_idx < ep_table->count; ep_idx++) {
-+		rpmi_tee_sysinfo_entry_at(ep_table, ep_idx, ep);
-+
-+		/* struct rpmi_tee_sysinfo_endpoint. */
-+		u32 ep_flags = get_unaligned_le32(&ep->flags);
-+		u32 ep_id = get_unaligned_le32(&ep->id);
-+		u32 service_first = get_unaligned_le32(&ep->service_first);
-+		u32 service_range_count =
-+			get_unaligned_le32(&ep->service_count);
-+
-+		/* Make sure self_ep_id exists in the list of endpoints. */
-+		if ((ep_flags & (RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL |
-+			      RPMI_TEE_SYSINFO_ENDPOINT_F_REE)) ==
-+		    (RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL |
-+		     RPMI_TEE_SYSINFO_ENDPOINT_F_REE) && ep_id == self_ep_id)
-+			self_ep_found = true;
-+
-+		if (!(ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL) ||
-+		    !(ep_flags & RPMI_TEE_SYSINFO_ENDPOINT_F_TEE))
-+			continue;
-+
-+		if (ep_count < system->ep_capacity)
-+			system->eps[ep_count].endpoint_id = ep_id;
-+
-+		ep_count++;
-+
-+		/* Extract per-endpoint services. */
-+		for (service_idx = service_first;
-+		     service_idx < service_first + service_range_count;
-+		     service_idx++) {
-+			const struct rpmi_tee_sysinfo_service *service;
-+
-+			if (service_count < system->service_capacity) {
-+				rpmi_tee_sysinfo_entry_at(service_table,
-+							  service_idx, service);
-+				system->services[service_count].endpoint_id = ep_id;
-+				import_uuid(&system->services[service_count].uuid,
-+					    service->uuid);
-+			}
-+
-+			if (check_add_overflow(service_count, 1, &service_count))
-+				return -EOVERFLOW;
-+		}
++		goto out_failed;
++	if (!(value & RPMI_TEE_SYSINFO_FORMAT_TABLE)) {
++		ret = -EOPNOTSUPP;
++		goto out_failed;
 +	}
 +
-+	system->ep_count = ep_count;
-+	system->service_count = service_count;
++	ret = rpmi_tee_probe_features(priv, RPMI_TEE_FEATURE_MEMORY_LEND,
++				      &value);
++	if (ret)
++		goto out_failed;
++	priv->mem.lend_ok = value == RPMI_TEE_MEMORY_FEATURE_FULLY_SUPPORTED;
 +
-+	if (!self_ep_found)
-+		return -EINVAL;
++	ret = rpmi_tee_probe_features(priv, RPMI_TEE_FEATURE_MEMORY_SHARE,
++				      &value);
++	if (ret)
++		goto out_failed;
++	priv->mem.share_ok = value == RPMI_TEE_MEMORY_FEATURE_FULLY_SUPPORTED;
 +
-+	return ep_count > system->ep_capacity ||
-+	       service_count > system->service_capacity ? -ENOSPC : 0;
-+}
-diff --git a/drivers/firmware/riscv_rpmi_tee/sysinfo.h b/drivers/firmware/riscv_rpmi_tee/sysinfo.h
-new file mode 100644
-index 000000000000..f275a612f720
---- /dev/null
-+++ b/drivers/firmware/riscv_rpmi_tee/sysinfo.h
-@@ -0,0 +1,244 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
++	ret = rpmi_tee_probe_features(priv, RPMI_TEE_FEATURE_MULTISEGMENT_OPS,
++				      &priv->mem.multisegment_max);
++	if (ret)
++		goto out_failed;
 +
-+#ifndef __RISC_V_RPMI_TEE_SYSINFO_H__
-+#define __RISC_V_RPMI_TEE_SYSINFO_H__
++	ret = rpmi_tee_probe_features(priv, RPMI_TEE_FEATURE_SIGNAL_BUS,
++				      &priv->notif.feature);
++	if (ret)
++		goto out_failed;
 +
-+#include <linux/bitops.h>
-+#include <linux/limits.h>
-+#include <linux/types.h>
-+#include <linux/unaligned.h>
-+#include <linux/uuid.h>
-+
-+/* RPMI_TEE_FEATURE_SYSINFO_FORMAT. */
-+#define RPMI_TEE_SYSINFO_FORMAT_CBOR  BIT(31)	/* CBOR format. */
-+#define RPMI_TEE_SYSINFO_FORMAT_TABLE BIT(30)	/* Descriptor-table format. */
-+
-+/* "SYSINFO descriptor-table format". */
-+
-+#define RPMI_TEE_SYSINFO_MAGIC 0x49535452	/* Table magic ("RTSI"). */
-+#define RPMI_TEE_SYSINFO_VERSION_MAJOR 1	/* Supported major version. */
-+
-+/**
-+ * struct rpmi_tee_sysinfo_header - SYSINFO descriptor-table header
-+ * @magic: RPMI_TEE_SYSINFO_MAGIC.
-+ * @major: Major format version.
-+ * @minor: Minor format version.
-+ * @header_size: Header size, including compatible extensions.
-+ * @table_desc_size: Size of one table-directory descriptor.
-+ * @total_size: Total response size in bytes.
-+ * @table_count: Number of table-directory descriptors.
-+ * @table_dir_offset: Byte offset of the table directory.
-+ * @flags: Ignored by version 1 Linux.
-+ * @reserved: Ignored by version 1 Linux.
-+ */
-+struct rpmi_tee_sysinfo_header {
-+	__le32 magic;
-+	__le16 major;
-+	__le16 minor;
-+	__le16 header_size;
-+	__le16 table_desc_size;
-+	__le32 total_size;
-+	__le32 table_count;
-+	__le32 table_dir_offset;
-+	__le32 flags;
-+	__le32 reserved;
-+} __packed;
-+
-+enum rpmi_tee_sysinfo_table_type {
-+	RPMI_TEE_SYSINFO_TABLE_ENDPOINT = 0,	/* Endpoint records. */
-+	RPMI_TEE_SYSINFO_TABLE_SERVICE,		/* Service UUID records. */
-+	RPMI_TEE_SYSINFO_TABLE_PARCEL,		/* Memory parcel records. */
-+	RPMI_TEE_SYSINFO_TABLE_PARCEL_RECEIVER,	/* Parcel receiver records. */
-+	RPMI_TEE_SYSINFO_TABLE_MEMORY_BLOCK,	/* Memory block records. */
-+	RPMI_TEE_SYSINFO_TABLE_BLOB,		/* Arbitrary byte data. */
-+	RPMI_TEE_SYSINFO_TABLE_MAX,		/* One past the last table type. */
-+};
-+
-+/**
-+ * struct rpmi_tee_sysinfo_table_desc - SYSINFO table-directory descriptor
-+ * @type: Table type from &enum rpmi_tee_sysinfo_table_type.
-+ * @desc_size: Size of one record in this table.
-+ * @count: Number of records in the table.
-+ * @offset: Byte offset of the first record.
-+ * @flags: Ignored by version 1 Linux.
-+ */
-+struct rpmi_tee_sysinfo_table_desc {
-+	__le16 type;
-+	__le16 desc_size;
-+	__le32 count;
-+	__le32 offset;
-+	__le32 flags;
-+} __packed;
-+
-+/**
-+ * rpmi_tee_sysinfo_desc_at() - Get a table-directory descriptor
-+ * @header: SYSINFO response header at the start of the response buffer.
-+ * @index: Table-directory descriptor index.
-+ *
-+ * The caller must validate the table-directory range and @index before using
-+ * the returned descriptor.
-+ *
-+ * Return: Pointer to the descriptor's known prefix.
-+ */
-+static inline const struct rpmi_tee_sysinfo_table_desc *
-+rpmi_tee_sysinfo_desc_at(const struct rpmi_tee_sysinfo_header *header,
-+			 u32 index)
-+{
-+	u32 offset = get_unaligned_le32(&header->table_dir_offset);
-+	u16 stride = get_unaligned_le16(&header->table_desc_size);
-+
-+	return (const void *)((const u8 *)header + offset +
-+			      (size_t)index * stride);
-+}
-+
-+/* Records. */
-+
-+#define RPMI_TEE_SYSINFO_ENDPOINT_NO_PARENT	U32_MAX /* No parent endpoint. */
-+
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL	BIT(0) /* Physical endpoint. */
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_PROXIED	BIT(1) /* Proxied endpoint. */
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_REE		BIT(2) /* REE endpoint. */
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_TEE		BIT(3) /* TEE endpoint. */
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_PERSISTENT	BIT(4) /* Persistent endpoint. */
-+#define RPMI_TEE_SYSINFO_ENDPOINT_F_MASK		\
-+	(RPMI_TEE_SYSINFO_ENDPOINT_F_PHYSICAL | \
-+	 RPMI_TEE_SYSINFO_ENDPOINT_F_PROXIED | \
-+	 RPMI_TEE_SYSINFO_ENDPOINT_F_REE | \
-+	 RPMI_TEE_SYSINFO_ENDPOINT_F_TEE | \
-+	 RPMI_TEE_SYSINFO_ENDPOINT_F_PERSISTENT)
-+
-+/**
-+ * struct rpmi_tee_sysinfo_endpoint - Endpoint table record
-+ * @id: Endpoint identifier.
-+ * @parent_id: Parent endpoint identifier, if proxied.
-+ * @flags: RPMI_TEE_SYSINFO_ENDPOINT_F_* flags.
-+ * @service_first: First service record owned by the endpoint.
-+ * @service_count: Number of service records owned by the endpoint.
-+ * @parcel_first: First parcel record owned by the endpoint.
-+ * @parcel_count: Number of parcel records owned by the endpoint.
-+ * @name_offset: Byte offset of the endpoint name in the blob table.
-+ * @name_length: Endpoint name length in bytes.
-+ * @metadata_offset: Byte offset of endpoint metadata in the blob table.
-+ * @metadata_length: Endpoint metadata length in bytes.
-+ */
-+struct rpmi_tee_sysinfo_endpoint {
-+	__le32 id;
-+	__le32 parent_id;
-+	__le32 flags;
-+	__le32 service_first;
-+	__le32 service_count;
-+	__le32 parcel_first;
-+	__le32 parcel_count;
-+	__le32 name_offset;
-+	__le32 name_length;
-+	__le32 metadata_offset;
-+	__le32 metadata_length;
-+} __packed;
-+
-+/**
-+ * struct rpmi_tee_sysinfo_service - Service table record
-+ * @uuid: Service UUID.
-+ */
-+struct rpmi_tee_sysinfo_service {
-+	u8 uuid[16];
-+} __packed;
-+
-+/**
-+ * struct rpmi_tee_sysinfo_parcel - Memory parcel table record
-+ * @id: Parcel identifier.
-+ * @residual_access: Residual access permissions after relinquish.
-+ * @receiver_first: First parcel receiver record.
-+ * @receiver_count: Number of parcel receiver records.
-+ * @block_first: First memory block record.
-+ * @block_count: Number of memory block records.
-+ * @label_offset: Byte offset of the parcel label in the blob table.
-+ * @label_length: Parcel label length in bytes.
-+ * @flags: Parcel flags.
-+ * @reserved: Must be zero.
-+ */
-+struct rpmi_tee_sysinfo_parcel {
-+	__le32 id;
-+	__le32 residual_access;
-+	__le32 receiver_first;
-+	__le32 receiver_count;
-+	__le32 block_first;
-+	__le32 block_count;
-+	__le32 label_offset;
-+	__le32 label_length;
-+	__le32 flags;
-+	__le32 reserved;
-+} __packed;
-+
-+/**
-+ * struct rpmi_tee_sysinfo_parcel_receiver - Parcel receiver table record
-+ * @endpoint_id: Receiver endpoint identifier.
-+ * @access: Access permissions granted to the receiver.
-+ * @flags: Receiver flags.
-+ * @reserved: Must be zero.
-+ */
-+struct rpmi_tee_sysinfo_parcel_receiver {
-+	__le32 endpoint_id;
-+	__le32 access;
-+	__le32 flags;
-+	__le32 reserved;
-+} __packed;
-+
-+/**
-+ * struct rpmi_tee_sysinfo_memory_block - Memory block table record
-+ * @address: Physical base address.
-+ * @size: Block size in bytes.
-+ */
-+struct rpmi_tee_sysinfo_memory_block {
-+	__le64 address;
-+	__le64 size;
-+} __packed;
-+
-+/**
-+ * struct rpmi_tee_sysinfo_service_info - Discovered TEE service
-+ * @endpoint_id: Owning TEE endpoint identifier.
-+ * @uuid: Service UUID.
-+ */
-+struct rpmi_tee_sysinfo_service_info {
-+	u32 endpoint_id;
-+	uuid_t uuid;
-+};
-+
-+/**
-+ * struct rpmi_tee_sysinfo_endpoint_info - Discovered physical TEE endpoint
-+ * @endpoint_id: TEE endpoint identifier.
-+ */
-+struct rpmi_tee_sysinfo_endpoint_info {
-+	u32 endpoint_id;
-+};
-+
-+/**
-+ * struct rpmi_tee_sysinfo_system - Parsed Whole-system discovery result
-+ * @eps: Caller-provided array of physical TEE endpoints.
-+ * @ep_capacity: Number of entries available in @eps.
-+ * @ep_count: Number of discovered physical TEE endpoints.
-+ * @services: Caller-provided array of TEE services.
-+ * @service_capacity: Number of entries available in @services.
-+ * @service_count: Number of discovered TEE services.
-+ *
-+ * The caller supplies storage and capacities. A sizing call with zero
-+ * capacities reports the required counts and returns -ENOSPC for a nonempty
-+ * result.
-+ */
-+struct rpmi_tee_sysinfo_system {
-+	struct rpmi_tee_sysinfo_endpoint_info *eps;
-+	size_t ep_capacity;
-+	size_t ep_count;
-+	struct rpmi_tee_sysinfo_service_info *services;
-+	size_t service_capacity;
-+	size_t service_count;
-+};
-+
-+int rpmi_tee_sysinfo_parse_self(const void *data, size_t len, u32 *self_ep_id);
-+int rpmi_tee_sysinfo_parse_system(const void *data, size_t len,
-+				  u32 self_ep_id,
-+				  struct rpmi_tee_sysinfo_system *system);
-+
-+#endif /* __RISC_V_RPMI_TEE_SYSINFO_H__ */
+ 	ret = rpmi_tee_setup_endpoints(priv);
+ 	if (ret) {
+ 		dev_err_probe(&pdev->dev, ret,
 
 -- 
 2.34.1
