@@ -1,86 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45FDE4BFE94
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06D70472F7A
 	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651875; cv=none; b=Wx9m4thgDLjVb7Yt/yw/a55S4Bqv3fRoTLMWxuPQd2lpc9IqKlEGN1ezeYYyaI2q7JEjUu7W+97pH7tcQHG+z19SJ468ZylIP0oFDeueeiGN8+PY8luzwa7GUoexngxuCfbl5mr/m8NcuHXtkQhWM4vB6g77bwtpjwHQ3oTH4Wg=
+	t=1790651874; cv=none; b=CeQesbysi5B9t7iMJmFlLM5t+nk91YsCvFMJGK/GMPMiJ0KNOzULgR0ZPCkLku/YKdALDtTKclsUndUN7YMIs2+LDLQ7vJg0CZh4o6sZMpKZ0Ea6Kk/25XSEySxxwPXCntfpkGGgViDZeaHKF8ES9fjHIF6cxUT7ZZHTzUv9L8A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651875; c=relaxed/simple;
-	bh=N/GoXXPvoD19zUb9BSvoUOZ49eNN/9Uv+mNF62wn3GA=;
+	s=arc-20240116; t=1790651874; c=relaxed/simple;
+	bh=rARwHkFKjjbvU4trPhh8WewFiGLZGn3L4375nqv/M2U=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Hx4F2fR0EMldXulAVZb5HldKLyJ+/j25RRp5UYMWFxXu40qCnfgzTzlmby4ECMDKYdPZvWBnFGco8SX+vVbKoYRoH9AuhBMOZWmjnTxwS43BAm9bCiB3AOkEO9B3ELli5MJbVM4wF0obFbEVvV0+xVo17pml6yaxxQq+2s3YjL4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=J2zUHReD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BPRUcTKA; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=ANGsCExCJ1909yUw/kAPAyrouMDUa1nY2GLuAG1Be9FVJIYCL33+UziIG82RdaAtRJw5o8hDIVYPNAmS/tTovf+Xt+VDD6Wl0FuLelx+e5W/WjcDafGuZQ1xKpHUlRQQVMUsUlhHAcY51KG4caEFwcuox9OaZbst7AvgY2c2Pds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UsgkN6yF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KPFdO3M8; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="J2zUHReD";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BPRUcTKA"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T0j1Ch4180592
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UsgkN6yF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KPFdO3M8"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T0jDmG3459160
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	4WXFbSFSr1/RQ2vXdoBOENE9gIt1QGKOfRFfzDrKe+A=; b=J2zUHReDk5sg9gVd
-	f7LIXb2G3xqE04HSQG6WjzxYb+O2OcWDxp+WbdXxvS4Y5/oxO7EVvtEJzK/ami+D
-	fzk/xdp1+OjmzDAB2AOx3/c0lgDlcBs70OoyhJjwVeAW6QC7vEqg/x5IZvmz+o13
-	P8EmMlPFJ5P7ay2PlpVxBlSNACF54mJNQ+ggV0G8YRjvCaRUascCDkPwXJ7xjnQc
-	LqW2irlPPa1gfHmlJDYR6AePsQxjusmFHjCi3v08w6ntFgpIiWx0Uv8/cAQTqGpR
-	TONhdK/TMB6WpyxZX2LJ9+0byySACPoasc5tZ8u4fmMBAEn5P82aBBXp7zok0iFs
-	vYGA5A==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyxmu9c4n-1
+	gtcvnUkmVqQAt+w19mrphwNYznnIA8lvytR0upTmt8I=; b=UsgkN6yFojUiuOd3
+	DOCjn11uCmmzBbcO9ysR/mgKI240zYFG/7WDi4NudPTl+zLm0W676rPem4wQyFbA
+	CZoevaxAvaayMeObkQo2Nc/7GAVlhgbzbF8mHjUyYjk6f9lmw4y7S65DzuYWOf7/
+	M9mf+hmfUfW2ELT0p5QW92QCTcUrjnFzs0PcrOwIF8VlwD8+s+2Vb3f0QvzLJQUC
+	tYZL/VAqzI4qTP71OkGlDdRBlvRZZROaxDCEk5QcJVeXbivFbuXlfIOmuC9hYbiJ
+	uqA6+jWLAKP/ZOyoodAQKU1fSSUNFNE8GjVaEy6uw9KSK/4PuEK+JQzNtjhvgfNZ
+	1bzOxg==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gynfkuvjs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:48 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-34afa104860so585103eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:17:48 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:17:47 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-1383723dfddso2356463c88.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790651868; x=1791256668; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790651866; x=1791256666; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4WXFbSFSr1/RQ2vXdoBOENE9gIt1QGKOfRFfzDrKe+A=;
-        b=BPRUcTKAPmLA14FyrD40k4O/o7NyMW+TbeUOiteAzPtUFPhodQgjN4dhEY6zyfIKJu
-         S81GvcZFBZDx/GHls+vno+UU4Qe7DkMB7QCkWyHQx9aNHzcYVXiAuPyYluMi35JDupb0
-         dMn/fhx/nW4FnIZfxPBfN5FcXkyRAattSvV6ST+K54bsQDx4L/VpqJEl7szoiGuRtJFz
-         4zVsYb+VnuDFgqlvRNcSmsZ92FJYU6GZZjgS8n0/6nthTirbQ8mqIwnQZD1ZyqpKOlS2
-         UT49uof7fK/BIVVPOMDG383eIoON937YlE8K3yXYodwSYsMZNfzJevPODsqBWt2bCjD1
-         ueHg==
+        bh=gtcvnUkmVqQAt+w19mrphwNYznnIA8lvytR0upTmt8I=;
+        b=KPFdO3M8NgxBuHoj6NN8ILF73XmKlbPOS72qnwPCT6SGdP6nbtMWk7HyOHX4/MoFul
+         7LH+dTdjEFlY4XOOfRha5bxkpVwXoIo6cCp7NvBaQ1O5qgMtXeF8vlfcDRaIzQSg63Vr
+         1sST1KcUobsi+9SX+wHwM8dW9nQ5hBeEh5UeC1lpZBDHYxRRY59uT7soPBPLsnsTs/wF
+         5ZvFJu8IYxZS2+WscUBAjbPT0984VTZezatnQGAZgobtNUdc6JSA9K8XobkfD64tW1Oe
+         /JS5HOFcibMKnqg0xguPgWUOfR+m8w5xPIRIzE1DDHoP/3TG0de0P8Sl6IL4uBvtiMFR
+         5l1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790651868; x=1791256668;
+        d=1e100.net; s=20260707; t=1790651866; x=1791256666;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4WXFbSFSr1/RQ2vXdoBOENE9gIt1QGKOfRFfzDrKe+A=;
-        b=UP4ec79S1GGFm7csMdeNo0sCAdLZgKugUYMEaU8VZ9KkO90kLAc/jcuj0wTdiU5LyJ
-         SOoxuzvpy8Lj1qaDkbRcFAG9uKAJ74weiToh+hQAOUzRGin8dWJZ58CJwhAMVYwW9RQf
-         J2gYjf/ctpd0s+ZKXEQqHtLJVhQ9vUEBn9BzDy9OxqPLvwunpaZJa6UxakI9s+zcnTJd
-         TrrOEtJxUNDOKDWIpKlPi5zLv8hzsbFsdoLtDju5Yv1FZSysRPDEv/e1ptAj9GmZiXPD
-         ELWmJrpIU2xtohs36MLWDjYAMRz/GTaExIAUfm5nAl5Dv73FeSK7b+jibH8rXwwqRfGT
-         G1cg==
-X-Gm-Message-State: AFuF++lqyI61R2cgzsJpFpgj/LO3yVJv9npzqwk09MnWyBKuliczscy0
-	Ersu+PK+Ow+2XgbicKzwLDYkOOoqoY5hdMXNxAt1Lj1WbW3u/jwvL+kJJ2h//c8V6s0e1Go1w2z
-	HBbfxT/Mnhpze0Ns+kabXUeZGqEX5fVS0fZvWp0EszB+WGVyyuZ4b8H2h917WzDglxxg=
-X-Gm-Gg: AYBFou3uaKGrzOTg6LuACPBFKslr5j25JqSApx9DfJaIrpCppnAeVLng/s4Ah5X1CNh
-	wSYU8QTDqHMtVuAFg6hf4el5n697ReSd8A8kqYeDZ9kz46Y6DS3A9SM4HC+7kgCDdSRC9CVGeRp
-	RsSX4BPwrnJysD8ZS3YAVRoZpMH84/k80DtitoBAwJwiBc9SdCsCqG7gNmrxhT44Ys8pBtFesSb
-	K7M+kF3W5gRMoL4IU7SWQe1FU8x5Mz8xkmf+cpCwkawPgG/TL0pgOgU4OaKt7jnJZwJXVprg5W3
-	MZNa1PWmlnKZwKv/Ix5nMLN0bpmd5QWtunn/c7uG0icokIFtUBf0+QUPEcWn7IG2xfPJW/08YcN
-	iEV6/X0w0iIHwdx4+b2vJ70vIsQC2SvmRQm+m/teQNR7ig3hR9ZFHzgIiBjo=
-X-Received: by 2002:a05:701b:42ce:10b0:143:5c63:23bb with SMTP id a92af1059eb24-146ce4958fbmr12821652c88.11.1790651867422;
-        Mon, 28 Sep 2026 20:17:47 -0700 (PDT)
-X-Received: by 2002:a05:701b:42ce:10b0:143:5c63:23bb with SMTP id a92af1059eb24-146ce4958fbmr12821622c88.11.1790651866843;
+        bh=gtcvnUkmVqQAt+w19mrphwNYznnIA8lvytR0upTmt8I=;
+        b=mgx6Yub8jgBpgmNB+nIBYwSN97/1/ysi632wREauIXbGAMzZeuBdT2h5wZ8A7wLFSl
+         VkTUw9XGLhssjC23zIsEtuedNBSW745prUYzzy9hv1IksMsb0VUG0yXDxNDoB1UHZA4/
+         TA930l9oAL62Iz4j1PPFjH3nNLia1+klzrGWMli2hl8QMn4NwUvA6wzMvHdwHM0PPjXr
+         zJfzpqY4cbp6mPsCgpV1VjGSThpANgxYF6nmngQdL62VyPaxHqL54ipnZ8tvqVIxx6gk
+         T/wBuXwBsTfEdZQehsSCuzLfhySBL2LKOXpDcT3tUHPsgiv9EuCwpNSJN7nhz+mq8Dvs
+         0TPA==
+X-Gm-Message-State: AFuF++k2EKzwZRRctdUDqLTRxmxV/4VQaxa9fLBG5OpYv1xLlwh/ezah
+	3iWMbs4ATz3D/k2Emw8MvVN/CV6YYy1DL9MthCN/C2QjH1ouZJJwZXmn2++aZNH+sXPmimpPV3s
+	zgMAPWJVJJGOR604IMIaVo40SNpaZjbm0icInGm7GqQ2/Rp75s9JUuL0TCddPL1rDe18=
+X-Gm-Gg: AYBFou36zq83URyXsqbXDjycQRznAZ3esrqPrV9By18It3LH7Rec91b9yRKfkSwIGyK
+	cAiclKX1G9jsanFrRWxcLMjU0kt/1rWTwa5tIPI2rK9CbQdmJf8PVxwNCsS3ORDzXiKpeofYPud
+	dJSh7KffH907bzIYgqeKsNVrq5TjcTsB/6WFv8HUA8B0ebRyvnnov3uILyo4f7IaFZuJ6hhE3KO
+	+UFqpTG+MBn+uoN12pCF4DF0BBcmbr5y5PtnYPZdUXLONtAhd43V3AHWDFt+ByuVXbMdeUStZxj
+	TxvERpAYQpqT1ZvR5hIC89fsYoZf5aE5cWCWAD17wpfZVVvGAUrATkaAKPOiDSZFslPqOukczT4
+	bIVHEKlq+3CU9M0gzD+Rsar/0CoBKfsvow/cmVwbjOD7lhI5Vwvtg8GACERI=
+X-Received: by 2002:a05:701b:428e:20b0:143:298e:913d with SMTP id a92af1059eb24-146d096d371mr12208814c88.47.1790651866236;
         Mon, 28 Sep 2026 20:17:46 -0700 (PDT)
+X-Received: by 2002:a05:701b:428e:20b0:143:298e:913d with SMTP id a92af1059eb24-146d096d371mr12208779c88.47.1790651865636;
+        Mon, 28 Sep 2026 20:17:45 -0700 (PDT)
 Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ad4028a9sm24789368c88.11.2026.09.28.20.17.45
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-145ad4028a9sm24789368c88.11.2026.09.28.20.17.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 20:17:46 -0700 (PDT)
+        Mon, 28 Sep 2026 20:17:45 -0700 (PDT)
 From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Date: Mon, 28 Sep 2026 20:16:53 -0700
-Subject: [PATCH RFC 02/10] mailbox: mpxy: add direct synchronous send
+Date: Mon, 28 Sep 2026 20:16:52 -0700
+Subject: [PATCH RFC 01/10] mailbox: add direct synchronous send support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,7 +89,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-riscv-rpmi-tee-abi-v1-2-04908b81d885@oss.qualcomm.com>
+Message-Id: <20260928-riscv-rpmi-tee-abi-v1-1-04908b81d885@oss.qualcomm.com>
 References: <20260928-riscv-rpmi-tee-abi-v1-0-04908b81d885@oss.qualcomm.com>
 In-Reply-To: <20260928-riscv-rpmi-tee-abi-v1-0-04908b81d885@oss.qualcomm.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>, Paul Walmsley <pjw@kernel.org>,
@@ -105,446 +105,251 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         devicetree@vger.kernel.org,
         Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 X-Mailer: b4 0.13.0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfX2brFVjzass/l
- t7eyuuFQHno2b4QKK4vnAFKppOsuxiQ2HoU7Zyh46k3aPTESzwpM60n9sNPdB6EIh/Caajxcj4F
- 0llFTyYrBUfkiuq3NGIYUYaxSuQ57gocKXqAHP0+9ZAhZbWFsVk+hBPS2NvYcW3N7oFrfCNU6tI
- W9Q2vlMXDIk+7e4RGCAkoRSYggpyZGbYUKLRii2K1jczTd9aYw+jRvsQvFaqX7zlK82O/0I8ekQ
- yQ33+BFsP0whiq7IiNpqBUjd3nZwuCHyqdQ8oNrn9uldmNTYiifd6xk3CQ0s3tbdjt0Q1vwSq1p
- SsJkqgCWMJWXtuZrW6iykhAGZ6ZTH8foPwff4vGF/Lx3gGzy1ajy10dLizLd5bN58OwyxcVagYj
- TkQz2bsODKk0XSNPNf4dZjn2KFf4nKVd0hz+HALLKTammgrG0A2DZ40oTEmPrTKxRf2vBXgLu99
- 3d4x6tAJ1zg/+q7d+yQ==
-X-Proofpoint-GUID: KEcFqfMeTA7AQ0LbYDZfZr-D1Qi68be5
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfXy8P4cKHwqJQY
- zWkUYx0KyKbyRGXPluGOBL6H+Sl9CWCBBviHV6qyRX9hAHPAf9KwrNbH3euBUnhbWmxs0I9pKVG
- p11tV4lVtVTkZ+gVX0iG3vo6kC4OCnw=
-X-Proofpoint-ORIG-GUID: KEcFqfMeTA7AQ0LbYDZfZr-D1Qi68be5
-X-Authority-Analysis: v=2.4 cv=c70+0h9l c=1 sm=1 tr=0 ts=6abb2ddc cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfX8yJicZRiQJf3
+ pHrBrfS2XDirwBJ/D0ss/eW3Yn9VoO5CgLidIK47T7PSYM05RoAHEh258UrUs6BopOd7gbuDgdb
+ ZXsxUDk9eOAnWiUWYIiFrQx5Zx+JzmWn6QVUT3EOxmzMYTqwYVqpBmDI31BdUrKhz8zcPkjOpp0
+ 7RGfsBQcaWbHRVJLZ76B2+s4IRAUBWpR5JWPPaUaCMTRe+/aoqadWrxHsa24oycKyIThtFx58jo
+ +IYy1DmyLOpynQexM9jvgyUNyTkKYmWC8DgefVZIWTFydn3VHvTMHVZMx9BswDtBCZ6foTysG6u
+ 6plKrcqUT/HTxNQXhiWSzoH2sukkQbN7JkUgE9gF0AE4herIIbzz3bOSl+Ri7VBAh/UlTi9/A05
+ GxMJ8cVugsHQzRo+eNF9CwLxKL9mAhXnf976CErjW4E9PB5SkfvhTj5faRfRuatEg84WH3B0xSZ
+ k3PHgrBVOqxebeymQgw==
+X-Authority-Analysis: v=2.4 cv=e6aT2qp/ c=1 sm=1 tr=0 ts=6abb2ddb cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=Tu2Rjsi-ZZ_FYV3k_IYA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=F4dQRpG-GgUDkkGoPlYA:9 a=QEXdDO2ut3YA:10
+ a=Kq8ClHjjuc5pcCNDwlU0:22
+X-Proofpoint-GUID: 0qUEtkT-_hh5msRMNljel_0kNWWKOsmw
+X-Proofpoint-ORIG-GUID: 0qUEtkT-_hh5msRMNljel_0kNWWKOsmw
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDAxMiBTYWx0ZWRfX+/HmKbfLOiHs
+ qzGOIq9f3ZrdKaaf0tqz10/fUst46fYdXFAPPhcSlWrSLoFb9viATrwZ59+4x8ChykDQRXTT9M4
+ a4cYsSywemz54YiijUxlKYymExfeBT0=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-29_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 bulkscore=0 priorityscore=1501 impostorscore=0
- spamscore=0 malwarescore=0 suspectscore=0 adultscore=0 lowpriorityscore=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609290012
 
-Implement send_data_sync() for RPMI MPXY channels, reusing the
-existing RPMI message dispatch and returning its status directly
-instead of going through mbox_chan_txdone().
+Some mailbox controllers can complete a transaction entirely within
+the calling context, without going through the queued TX state
+machine or a TX-done interrupt. Add a synchronous send path so their
+clients can request one and wait for the result directly.
 
-Factor per-hart shared-memory acquisition into mpxy_shmem_get()/
-mpxy_shmem_put() so both the queued and the new synchronous path pin
-the CPU around the same per-hart buffer, keeping a request and its
-response on one hart. Calls on separate harts remain independent,
-subject to firmware support.
+Controllers advertise support via the new send_data_sync() op and
+clients opt in by setting tx_sync when requesting the channel.
 
-Add rpmi_mbox_send_message_sync() as the RPMI counterpart to
-rpmi_mbox_send_message(), for use by the upcoming TEE transport.
+Channels bound this way must not call mbox_chan_txdone() or
+mbox_client_txdone(), and mbox_send_message() and mbox_flush() now
+reject them, since only mbox_send_message_sync() is a valid
+transmit path. The client remains responsible for serializing calls
+to mbox_send_message_sync() against mbox_free_channel().
 
 Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 ---
- drivers/mailbox/riscv-sbi-mpxy-mbox.c      | 196 ++++++++++++++++++-----------
- include/linux/mailbox/riscv-rpmi-message.h |  13 ++
- 2 files changed, 139 insertions(+), 70 deletions(-)
+ drivers/mailbox/mailbox.c          | 72 ++++++++++++++++++++++++++++++++++++--
+ include/linux/mailbox_client.h     |  3 ++
+ include/linux/mailbox_controller.h | 10 ++++++
+ 3 files changed, 83 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mailbox/riscv-sbi-mpxy-mbox.c b/drivers/mailbox/riscv-sbi-mpxy-mbox.c
-index ea69c6b6b4f9..5ca1b6d87f5c 100644
---- a/drivers/mailbox/riscv-sbi-mpxy-mbox.c
-+++ b/drivers/mailbox/riscv-sbi-mpxy-mbox.c
-@@ -125,54 +125,83 @@ static DEFINE_PER_CPU(struct mpxy_local, mpxy_local);
- static unsigned long mpxy_shmem_size;
- static bool mpxy_shmem_init_done;
- 
-+static int mpxy_shmem_get(struct mpxy_local **out)
-+{
-+	struct mpxy_local *mpxy;
-+
-+	get_cpu();
-+	mpxy = this_cpu_ptr(&mpxy_local);
-+	if (!mpxy->shmem_active) {
-+		put_cpu();
-+		return -ENODEV;
+diff --git a/drivers/mailbox/mailbox.c b/drivers/mailbox/mailbox.c
+index efacd24a085d..c640b19de608 100644
+--- a/drivers/mailbox/mailbox.c
++++ b/drivers/mailbox/mailbox.c
+@@ -166,6 +166,12 @@ EXPORT_SYMBOL_GPL(mbox_chan_received_data);
+  */
+ void mbox_chan_txdone(struct mbox_chan *chan, int r)
+ {
++	if (unlikely(chan->txdone_method & MBOX_TXDONE_BY_RETURN)) {
++		dev_err(chan->mbox->dev,
++			"TX-done notification on direct synchronous channel\n");
++		return;
 +	}
 +
-+	*out = mpxy;
-+	return 0;
-+}
-+
-+static void mpxy_shmem_put(void)
-+{
-+	put_cpu();
-+}
-+
- static int mpxy_get_channel_count(u32 *channel_count)
+ 	if (unlikely(!(chan->txdone_method & MBOX_TXDONE_BY_IRQ))) {
+ 		dev_err(chan->mbox->dev,
+ 		       "Controller can't run the TX ticker\n");
+@@ -187,6 +193,12 @@ EXPORT_SYMBOL_GPL(mbox_chan_txdone);
+  */
+ void mbox_client_txdone(struct mbox_chan *chan, int r)
  {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
--	struct sbi_mpxy_channel_ids_data *sdata = mpxy->shmem;
-+	struct mpxy_local *mpxy;
-+	struct sbi_mpxy_channel_ids_data *sdata;
- 	u32 remaining, returned;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!channel_count)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
-+	sdata = mpxy->shmem;
- 
- 	/* Get the remaining and returned fields to calculate total */
- 	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_CHANNEL_IDS,
- 			 0, 0, 0, 0, 0, 0);
--	if (sret.error)
--		goto err_put_cpu;
-+	if (sret.error) {
-+		rc = sbi_err_map_linux_errno(sret.error);
-+		goto out;
++	if (unlikely(chan->txdone_method & MBOX_TXDONE_BY_RETURN)) {
++		dev_err(chan->mbox->dev,
++			"TX-done notification on direct synchronous channel\n");
++		return;
 +	}
- 
- 	remaining = le32_to_cpu(sdata->remaining);
- 	returned = le32_to_cpu(sdata->returned);
- 	*channel_count = remaining + returned;
-+	rc = 0;
- 
--err_put_cpu:
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+out:
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_get_channel_ids(u32 channel_count, u32 *channel_ids)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
--	struct sbi_mpxy_channel_ids_data *sdata = mpxy->shmem;
-+	struct mpxy_local *mpxy;
-+	struct sbi_mpxy_channel_ids_data *sdata;
- 	u32 remaining, returned, count, start_index = 0;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!channel_count || !channel_ids)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
-+	sdata = mpxy->shmem;
- 
- 	do {
- 		sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_CHANNEL_IDS,
- 				 start_index, 0, 0, 0, 0, 0);
--		if (sret.error)
--			goto err_put_cpu;
-+		if (sret.error) {
-+			rc = sbi_err_map_linux_errno(sret.error);
-+			goto out;
-+		}
- 
- 		remaining = le32_to_cpu(sdata->remaining);
- 		returned = le32_to_cpu(sdata->returned);
-@@ -182,55 +211,61 @@ static int mpxy_get_channel_ids(u32 channel_count, u32 *channel_ids)
- 		memcpy_from_le32(&channel_ids[start_index], sdata->channel_array, count);
- 		start_index += count;
- 	} while (remaining && start_index < channel_count);
-+	rc = 0;
- 
--err_put_cpu:
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+out:
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_read_attrs(u32 channel_id, u32 base_attrid, u32 attr_count,
- 			   u32 *attrs_buf)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
-+	struct mpxy_local *mpxy;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!attr_count || !attrs_buf)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
- 
- 	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_READ_ATTRS,
- 			 channel_id, base_attrid, attr_count, 0, 0, 0);
--	if (sret.error)
--		goto err_put_cpu;
-+	if (sret.error) {
-+		rc = sbi_err_map_linux_errno(sret.error);
-+		goto out;
-+	}
- 
- 	memcpy_from_le32(attrs_buf, (__le32 *)mpxy->shmem, attr_count);
-+	rc = 0;
- 
--err_put_cpu:
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+out:
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_write_attrs(u32 channel_id, u32 base_attrid, u32 attr_count,
- 			    u32 *attrs_buf)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
-+	struct mpxy_local *mpxy;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!attr_count || !attrs_buf)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
- 
- 	memcpy_to_le32((__le32 *)mpxy->shmem, attrs_buf, attr_count);
- 	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_WRITE_ATTRS,
- 			 channel_id, base_attrid, attr_count, 0, 0, 0);
- 
--	put_cpu();
-+	mpxy_shmem_put();
- 	return sbi_err_map_linux_errno(sret.error);
- }
- 
-@@ -239,16 +274,17 @@ static int mpxy_send_message_with_resp(u32 channel_id, u32 msg_id,
- 				       void *rx, unsigned long max_rx_len,
- 				       unsigned long *rx_len)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
-+	struct mpxy_local *mpxy;
- 	unsigned long rx_bytes;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!tx && tx_len)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
- 
- 	/* Message protocols allowed to have no data in messages */
- 	if (tx_len)
-@@ -259,8 +295,8 @@ static int mpxy_send_message_with_resp(u32 channel_id, u32 msg_id,
- 	if (rx && !sret.error) {
- 		rx_bytes = sret.value;
- 		if (rx_bytes > max_rx_len) {
--			put_cpu();
--			return -ENOSPC;
-+			rc = -ENOSPC;
-+			goto out;
- 		}
- 
- 		memcpy(rx, mpxy->shmem, rx_bytes);
-@@ -268,22 +304,25 @@ static int mpxy_send_message_with_resp(u32 channel_id, u32 msg_id,
- 			*rx_len = rx_bytes;
- 	}
- 
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+	rc = sbi_err_map_linux_errno(sret.error);
-+out:
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_send_message_without_resp(u32 channel_id, u32 msg_id,
- 					  void *tx, unsigned long tx_len)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
-+	struct mpxy_local *mpxy;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!tx && tx_len)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
- 
- 	/* Message protocols allowed to have no data in messages */
- 	if (tx_len)
-@@ -292,40 +331,45 @@ static int mpxy_send_message_without_resp(u32 channel_id, u32 msg_id,
- 	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP,
- 			 channel_id, msg_id, tx_len, 0, 0, 0);
- 
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+	rc = sbi_err_map_linux_errno(sret.error);
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_get_notifications(u32 channel_id,
- 				  struct sbi_mpxy_notification_data *notif_data,
- 				  unsigned long *events_data_len)
- {
--	struct mpxy_local *mpxy = this_cpu_ptr(&mpxy_local);
-+	struct mpxy_local *mpxy;
- 	struct sbiret sret;
-+	int rc;
- 
--	if (!mpxy->shmem_active)
--		return -ENODEV;
- 	if (!notif_data || !events_data_len)
- 		return -EINVAL;
- 
--	get_cpu();
-+	rc = mpxy_shmem_get(&mpxy);
-+	if (rc)
-+		return rc;
- 
- 	sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_GET_NOTIFICATION_EVENTS,
- 			 channel_id, 0, 0, 0, 0, 0);
--	if (sret.error)
--		goto err_put_cpu;
-+	if (sret.error) {
-+		rc = sbi_err_map_linux_errno(sret.error);
-+		goto out;
-+	}
- 	if (sret.value < 0 || mpxy_shmem_size < sizeof(*notif_data) ||
- 	    sret.value > mpxy_shmem_size - sizeof(*notif_data)) {
--		put_cpu();
--		return -EOVERFLOW;
-+		rc = -EOVERFLOW;
-+		goto out;
- 	}
- 
- 	memcpy(notif_data, mpxy->shmem, sret.value + sizeof(*notif_data));
- 	*events_data_len = sret.value;
- 
--err_put_cpu:
--	put_cpu();
--	return sbi_err_map_linux_errno(sret.error);
-+	rc = sbi_err_map_linux_errno(sret.error);
-+out:
-+	mpxy_shmem_put();
-+	return rc;
- }
- 
- static int mpxy_get_shmem_size(unsigned long *shmem_size)
-@@ -402,8 +446,8 @@ struct mpxy_mbox {
- 
- /* ====== MPXY RPMI processing ====== */
- 
--static void mpxy_mbox_send_rpmi_data(struct mpxy_mbox_channel *mchan,
--				     struct rpmi_mbox_message *msg)
-+static int mpxy_mbox_send_rpmi_data(struct mpxy_mbox_channel *mchan,
-+				    struct rpmi_mbox_message *msg)
- {
- 	msg->error = 0;
- 	switch (msg->type) {
-@@ -474,6 +518,8 @@ static void mpxy_mbox_send_rpmi_data(struct mpxy_mbox_channel *mchan,
- 		msg->error = -EOPNOTSUPP;
- 		break;
- 	}
 +
-+	return msg->error;
- }
+ 	if (unlikely(!(chan->txdone_method & MBOX_TXDONE_BY_ACK))) {
+ 		dev_err(chan->mbox->dev, "Client can't run the TX ticker\n");
+ 		return;
+@@ -278,6 +290,9 @@ int mbox_send_message(struct mbox_chan *chan, void *mssg)
+ 	if (!chan || !chan->cl || mssg == MBOX_NO_MSG)
+ 		return -EINVAL;
  
- static void mpxy_mbox_peek_rpmi_data(struct mbox_chan *chan,
-@@ -516,12 +562,21 @@ static int mpxy_mbox_send_data(struct mbox_chan *chan, void *data)
- {
- 	struct mpxy_mbox_channel *mchan = chan->con_priv;
- 
--	if (mchan->attrs.msg_proto_id == SBI_MPXY_MSGPROTO_RPMI_ID) {
--		mpxy_mbox_send_rpmi_data(mchan, data);
--		return 0;
--	}
-+	if (mchan->attrs.msg_proto_id != SBI_MPXY_MSGPROTO_RPMI_ID)
++	if (chan->txdone_method & MBOX_TXDONE_BY_RETURN)
 +		return -EOPNOTSUPP;
 +
-+	mpxy_mbox_send_rpmi_data(mchan, data);
-+	return 0;
-+}
-+
-+static int mpxy_mbox_send_data_sync(struct mbox_chan *chan, void *data)
-+{
-+	struct mpxy_mbox_channel *mchan = chan->con_priv;
-+
-+	if (mchan->attrs.msg_proto_id != SBI_MPXY_MSGPROTO_RPMI_ID)
-+		return -EOPNOTSUPP;
- 
--	return -EOPNOTSUPP;
-+	return mpxy_mbox_send_rpmi_data(mchan, data);
+ 	t = add_to_rbuf(chan, mssg);
+ 	if (t < 0) {
+ 		dev_err(chan->mbox->dev, "Try increasing MBOX_TX_QUEUE_LEN\n");
+@@ -308,6 +323,43 @@ int mbox_send_message(struct mbox_chan *chan, void *mssg)
  }
+ EXPORT_SYMBOL_GPL(mbox_send_message);
  
- static bool mpxy_mbox_peek_data(struct mbox_chan *chan)
-@@ -713,10 +768,11 @@ static void mpxy_mbox_shutdown(struct mbox_chan *chan)
- }
- 
- static const struct mbox_chan_ops mpxy_mbox_ops = {
--	.send_data = mpxy_mbox_send_data,
--	.peek_data = mpxy_mbox_peek_data,
--	.startup = mpxy_mbox_startup,
--	.shutdown = mpxy_mbox_shutdown,
-+	.send_data	= mpxy_mbox_send_data,
-+	.send_data_sync	= mpxy_mbox_send_data_sync,
-+	.peek_data	= mpxy_mbox_peek_data,
-+	.startup	= mpxy_mbox_startup,
-+	.shutdown	= mpxy_mbox_shutdown,
- };
- 
- /* ====== MPXY platform driver ===== */
-diff --git a/include/linux/mailbox/riscv-rpmi-message.h b/include/linux/mailbox/riscv-rpmi-message.h
-index d5362b5821f9..16fa85f65d80 100644
---- a/include/linux/mailbox/riscv-rpmi-message.h
-+++ b/include/linux/mailbox/riscv-rpmi-message.h
-@@ -251,4 +251,17 @@ static inline int rpmi_mbox_send_message(struct mbox_chan *chan,
- 	return ret;
- }
- 
-+static inline int rpmi_mbox_send_message_sync(struct mbox_chan *chan,
-+					      struct rpmi_mbox_message *msg)
++/**
++ * mbox_send_message_sync - Send data and wait for transaction completion
++ * @chan: Mailbox channel assigned to this client
++ * @mssg: Client specific message typecasted
++ *
++ * For a channel bound with tx_sync, ask the controller to transmit @mssg and
++ * only return on completion. This function may sleep and must not be called
++ * from atomic context. @mssg must remain valid until this function returns.
++ *
++ * The direct synchronous path does not queue @mssg, does not use active_req,
++ * and does not use a TX-done notification. The client must serialize this
++ * function against mbox_free_channel().
++ *
++ * Return: 0 on success or a negative error code.
++ */
++int mbox_send_message_sync(struct mbox_chan *chan, void *mssg)
 +{
 +	int ret;
 +
-+	/* Send message for the underlying mailbox channel synchronously */
-+	ret = mbox_send_message_sync(chan, msg);
-+	if (ret)
-+		return ret;
++	if (!chan || !chan->cl || mssg == MBOX_NO_MSG)
++		return -EINVAL;
 +
-+	return msg->error;
++	if (!(chan->txdone_method & MBOX_TXDONE_BY_RETURN))
++		return -EOPNOTSUPP;
++
++	if (chan->cl->tx_prepare)
++		chan->cl->tx_prepare(chan->cl, mssg);
++	/* Try to submit a message to the MBOX controller synchonously */
++	ret = chan->mbox->ops->send_data_sync(chan, mssg);
++
++	if (chan->cl->tx_done)
++		chan->cl->tx_done(chan->cl, mssg, ret);
++
++	return ret;
 +}
++EXPORT_SYMBOL_GPL(mbox_send_message_sync);
 +
- #endif /* _LINUX_RISCV_RPMI_MESSAGE_H_ */
+ /**
+  * mbox_flush - flush a mailbox channel
+  * @chan: mailbox channel to flush
+@@ -326,8 +378,11 @@ int mbox_flush(struct mbox_chan *chan, unsigned long timeout)
+ {
+ 	int ret;
+ 
++	if (chan->txdone_method & MBOX_TXDONE_BY_RETURN)
++		return -EOPNOTSUPP;
++
+ 	if (!chan->mbox->ops->flush)
+-		return -ENOTSUPP;
++		return -EOPNOTSUPP;
+ 
+ 	ret = chan->mbox->ops->flush(chan, timeout);
+ 	if (ret < 0)
+@@ -343,7 +398,9 @@ static void mbox_clean_and_put_channel(struct mbox_chan *chan)
+ 	scoped_guard(spinlock_irqsave, &chan->lock) {
+ 		chan->cl = NULL;
+ 		chan->active_req = MBOX_NO_MSG;
+-		if (chan->txdone_method == MBOX_TXDONE_BY_ACK)
++		if (chan->txdone_method & MBOX_TXDONE_BY_RETURN)
++			chan->txdone_method &= ~MBOX_TXDONE_BY_RETURN;
++		else if (chan->txdone_method == MBOX_TXDONE_BY_ACK)
+ 			chan->txdone_method = MBOX_TXDONE_BY_POLL;
+ 	}
+ 
+@@ -355,6 +412,14 @@ static int __mbox_bind_client(struct mbox_chan *chan, struct mbox_client *cl)
+ 	struct device *dev = cl->dev;
+ 	int ret;
+ 
++	if (cl->tx_sync) {
++		if (!chan->mbox->ops->send_data_sync)
++			return -EOPNOTSUPP;
++
++		if (cl->tx_block || cl->tx_tout || cl->knows_txdone)
++			return -EINVAL;
++	}
++
+ 	if (chan->cl || !try_module_get(chan->mbox->dev->driver->owner)) {
+ 		dev_err(dev, "%s: mailbox not free\n", __func__);
+ 		return -EBUSY;
+@@ -380,6 +445,9 @@ static int __mbox_bind_client(struct mbox_chan *chan, struct mbox_client *cl)
+ 		}
+ 	}
+ 
++	if (cl->tx_sync)
++		chan->txdone_method |= MBOX_TXDONE_BY_RETURN;
++
+ 	return 0;
+ }
+ 
+diff --git a/include/linux/mailbox_client.h b/include/linux/mailbox_client.h
+index e5997120f45c..32b1d5ad3bfa 100644
+--- a/include/linux/mailbox_client.h
++++ b/include/linux/mailbox_client.h
+@@ -21,6 +21,7 @@ struct mbox_chan;
+  * @knows_txdone:	If the client could run the TX state machine. Usually
+  *			if the client receives some ACK packet for transmission.
+  *			Unused if the controller already has TX_Done/RTR IRQ.
++ * @tx_sync:		Bind the channel for mbox_send_message_sync().
+  * @rx_callback:	Atomic callback to provide client the data received
+  * @tx_prepare: 	Atomic callback to ask client to prepare the payload
+  *			before initiating the transmission if required.
+@@ -31,6 +32,7 @@ struct mbox_client {
+ 	bool tx_block;
+ 	unsigned long tx_tout;
+ 	bool knows_txdone;
++	bool tx_sync;
+ 
+ 	void (*rx_callback)(struct mbox_client *cl, void *mssg);
+ 	void (*tx_prepare)(struct mbox_client *cl, void *mssg);
+@@ -42,6 +44,7 @@ struct mbox_chan *mbox_request_channel_byname(struct mbox_client *cl,
+ 					      const char *name);
+ struct mbox_chan *mbox_request_channel(struct mbox_client *cl, int index);
+ int mbox_send_message(struct mbox_chan *chan, void *mssg);
++int mbox_send_message_sync(struct mbox_chan *chan, void *mssg);
+ int mbox_flush(struct mbox_chan *chan, unsigned long timeout);
+ void mbox_client_txdone(struct mbox_chan *chan, int r); /* atomic */
+ bool mbox_client_peek_data(struct mbox_chan *chan); /* atomic */
+diff --git a/include/linux/mailbox_controller.h b/include/linux/mailbox_controller.h
+index 26a238a6f941..c7dc098324ef 100644
+--- a/include/linux/mailbox_controller.h
++++ b/include/linux/mailbox_controller.h
+@@ -18,6 +18,7 @@ struct mbox_chan;
+ #define MBOX_TXDONE_BY_IRQ	BIT(0) /* controller has remote RTR irq */
+ #define MBOX_TXDONE_BY_POLL	BIT(1) /* controller can read status of last TX */
+ #define MBOX_TXDONE_BY_ACK	BIT(2) /* S/W ACK received by Client ticks the TX */
++#define MBOX_TXDONE_BY_RETURN	BIT(3) /* TX completes by function return */
+ 
+ /**
+  * struct mbox_chan_ops - methods to control mailbox channels
+@@ -28,6 +29,14 @@ struct mbox_chan;
+  *		transmission of data is reported by the controller via
+  *		mbox_chan_txdone (if it has some TX ACK irq). It must not
+  *		sleep.
++ * @send_data_sync: The API asks the MBOX controller driver, in non-atomic
++ *		context, to transmit a message on the bus and wait for the
++ *		transaction to complete. It returns 0 if the transaction
++ *		completed successfully or a negative error code otherwise.
++ *		The controller must not call mbox_chan_txdone() or
++ *		mbox_client_txdone() for this operation. Concurrent calls for one
++ *		controller must support them, serialize them internally, or
++ *		return -EBUSY for a conflicting transaction.
+  * @flush:	Called when a client requests transmissions to be blocking but
+  *		the context doesn't allow sleeping. Typically the controller
+  *		will implement a busy loop waiting for the data to flush out.
+@@ -53,6 +62,7 @@ struct mbox_chan;
+  */
+ struct mbox_chan_ops {
+ 	int (*send_data)(struct mbox_chan *chan, void *data);
++	int (*send_data_sync)(struct mbox_chan *chan, void *data);
+ 	int (*flush)(struct mbox_chan *chan, unsigned long timeout);
+ 	int (*startup)(struct mbox_chan *chan);
+ 	void (*shutdown)(struct mbox_chan *chan);
 
 -- 
 2.34.1
