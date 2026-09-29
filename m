@@ -1,174 +1,166 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D80E4EC664
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:01:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A25F526A9C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:03:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790686878; cv=none; b=J1Jmur6G7NSGIFuUknCw84bg6OAgv3dFPGxz50d2iBqV1TWpP1OPLnOQJyiTXaoJLQ2fBvwRknwBShnBYn/qCO6JU5bEfS0XiOHwUa8cgW8iAuTDvyg026t4JeUruzvKFemvkXRw9UDF0nMGefV6icHI7RM2jbUAkv2zX8QOyt0=
+	t=1790686990; cv=none; b=kGd1xOr/9CF+iFlYYKxjQ1Xjtu1RE17hYJUbfrSW8zIHrd/rxoxPePwaxXJ0tRFfa+lFHTh6KG9r7w/Scs6zxHDEUrh1cHkkvaDv89gq6TEwZtemCz9R7oaRXLbcpbsuJtHgCzOOOCEvTrLQMrjXJL2bWdloiD1zFq8Gyo3Itck=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790686878; c=relaxed/simple;
-	bh=bc41fhPq1AbUDyoEQ0R//kmi81si+zDzpXWyjPOGmXk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TU1XNBwsWGYDwc80b3rhMGFWMa2k77/tAWdemTSUoO1dmPCja7oz5AeF9GAR9j5WBo+xmnEmuHc/niXi6Ds5fdGpAm07LdZn+gwfy4SQyAMo5BytPnLlBpCGBlrxEn94eskNvfHwEhS1L+1y3HXlDCk/o/IEOXif7KXC+QQPaKg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=A3YQDfBk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Gher5/UL; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790686990; c=relaxed/simple;
+	bh=Cz6yzoqzZZKggbHRYEUoEWMBF2GsBR1cUX34xnIoG/k=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=hoCOERBJupolJGjrWW+zC5AK2SSspdwuSXdVXfK7jdSpFwcXU2aGtVG4MPeMBNYZZUcSpO9KLnIyXYPdbib0HUvvjlRUMhQvhJLq0aPYPza3BH1y6jfvEzaC0Q9FrztNOU8p4lQ0xQPdoe6UEhW+RpokzgbdWXpJscEOJ+soWBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xioas2p8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="A3YQDfBk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gher5/UL"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68TCqjTi1477271
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:01:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=SHTaJ91zIZJtCVD1ysUK05e9
-	DvOS2NaF0UZdJm1rljQ=; b=A3YQDfBkPQdwXYBg7n4fWd87UVcMtpmwtfP64YpZ
-	QhKTpKx9Jw1SdM31N2x3yaZk9uigW8tUaMAjdPzb4Izzw8+uaPDEBZ/jG5tbW9Xi
-	1jm2FVsg95wKSWew1jPZwg0a85eqmWnTfU1Ljv3MjshJt01dxwG6wNt6smHVc2MD
-	oWq735BicAqWtEZKZIB3xKz1Z5/nx9kfQfSyHaY8mI23sylDbTye438xXlUL6Gd8
-	GV2lDTDt7yGTieKNEmfsD/xbYAzJdjQFrBe4YsCPS/f9bf0WUT7Fge8s4mebZOQQ
-	lOka3icnVX9omN4LoFmzLLRY2slsLh1IMJHpLNpfaBvnYw==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyw03m47n-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:01:16 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-988c7363ee1so189121241.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:01:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790686875; x=1791291675; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=SHTaJ91zIZJtCVD1ysUK05e9DvOS2NaF0UZdJm1rljQ=;
-        b=Gher5/ULiKfm6Cm0N5hni+//ZcRmlmRoPcj+4mU0oC/fjZD2bq/DuXI+L/F2AE+dQ3
-         czr0br9SpgoaEEkwxQ7/RsfNrWqigXqgcL0Uy1JIuv/Trb+LrauKJ0u51Fw+COzhagCA
-         DqjG+c81bp5R9yG+7F9iH0R1oEByJKau83qNXUxHoJapnZzw55FVf0WJwg/qkhsITPxH
-         oOVScZ4xVnbPwswiB5iLHv5JBA2KR01CZGI245yN0m7cD+Vv406PclMamw/T0BXNo0Z4
-         UC0QAfK9cteG2PsN3ZZX6KE+Sx30++rhWUFKfoigiBKR9Fubm1JMdodym2gCPPFBpsgQ
-         VhiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790686875; x=1791291675;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SHTaJ91zIZJtCVD1ysUK05e9DvOS2NaF0UZdJm1rljQ=;
-        b=Pblkj/QpyfMFg9d6/OyY7uG4imBAByQMN6Ud22PbeKp3GGgnUmrbYGO0l3/YDT36p0
-         BagKWAxozNMJOeIW9hCMmpmguROjDOP/LfwMjBkUlxpYSd/xx2wygNyaqaLbMANFQ4+N
-         2y5kBNtWKX+uNI9PqfxJ59NIgYgmcYbgcjHfo0CU4i6bs5x/ezYJ7rqexqUug5bkC3Yd
-         oJLXPlKfKe0fThKOzf89lBl/519gARTpX+bFnr8e/OBywmmnXJXX+va7rKvD/b6snRSj
-         R36pSdrt6k1TJ0QBGSsjEpuyAo0xvpZgnG3dqTbkpDztxnjM/hdnfwP+4qvMv4p0c3FN
-         STQw==
-X-Forwarded-Encrypted: i=1; AKwUvBwklV7Oop8xpfIyqlugAhUWk2GY4flyJU7D2//ZuOh8KfiQxXOm2hVf2LVeWOw7UBiTVgMT8Q1z3+bEkMQf@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ/tjUGDHeoyPhRRdjpyIRslUIHzYmcPTGzZPZ5islM1pZrhNiD
-	1Q4QWXzbEZ9yodbAIZhRewIwidBEpkocOAuP/L5yf3zQPJTPp/nv3A1CMExKbHNesDWX+RhUk5Y
-	hOEDCaEm96V2GEn82Gp2ctiluIS6SqwUGqWQFH+oJHLK56FF6v9+uoacfGC2vAdMcqdNk
-X-Gm-Gg: AYBFou0dok8SrETg3BP7GDH82fclCqg0fjeo0X03TyomO0ev6PEOlpOHjuL01mGlubr
-	3gYueUGiZFwKmtYhbWWoBchLA/tDL47wP0xNjUHvzXPs5e40hAmL/DScxtEoFxmkCOQZGpvwR44
-	K9A5TQKWrq6PqyaTYk4BFkHg9l6lFXdSOHvMXFdGLWclMlQFQr28UxI3UmoVPx35cwCg+w+Yfvp
-	0GKrTp58rDK3ETR1cUDUOxdFUsUsPO1B7+u8O3OqJkmkT5ks0gdJIe2RRuODe3WjEVVQVQ4NrXZ
-	esWqQTv51wcXKDB9nxCwZTQBkJa6s2sXmchXL5oZ3ZRWGmoXi/t+wkblYIACPw1fpUxCAnIdYBq
-	B//7+iFf6K3vwKNs=
-X-Received: by 2002:a05:6102:32c3:b0:7b5:b51:63ae with SMTP id ada2fe7eead31-7b50b51701fmr2323500137.26.1790686874844;
-        Tue, 29 Sep 2026 06:01:14 -0700 (PDT)
-X-Received: by 2002:a05:6102:32c3:b0:7b5:b51:63ae with SMTP id ada2fe7eead31-7b50b51701fmr2323457137.26.1790686874122;
-        Tue, 29 Sep 2026 06:01:14 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.162.105])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48af4f88352sm4244682f8f.4.2026.09.29.06.01.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 06:01:13 -0700 (PDT)
-Date: Tue, 29 Sep 2026 16:01:11 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, aiqun.yu@oss.qualcomm.com,
-        tingwei.zhang@oss.qualcomm.com, trilok.soni@oss.qualcomm.com,
-        yijie.yang@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/5] arm64: dts: qcom: Introduce Maili SoC
-Message-ID: <m5g274qs3zyukhzbdx2izd4kigohajcr7btart7fb32uox6h5u@ropvegiaobbw>
-References: <20260922-maili-dts-v1-0-ac2b1b76bfd9@oss.qualcomm.com>
- <20260922-maili-dts-v1-3-ac2b1b76bfd9@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xioas2p8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7A051F008A2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:03:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790686988;
+	bh=37EPhNuTofFwtN/QAT2xqnB++jVEO++YPBVY4Xssh88=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Xioas2p8H4G3BPXKSBoQm8qv5Y0qkNH/Dh4bXBx8BgT8RZSoSTRy/pUE5Hb1MgrdE
+	 XFAjYhgcYYXgnvDw9mHm4SnAI/b1blzYSpVOXw775h+kKrblbro+VeawpEmPXlUyCd
+	 /zL9g8dEaP5BiGApY3VpCqFxo1OozVLKqOi+5SYuFGeW8VW6B0130uEl+iy5oq56jG
+	 o/zHv+BRjMY/88QbYr+TPU7544cDmhD9bKQhvvwEihnC+k4wrtSoaun2SLQAEYq7pz
+	 tdW99p/akMYBiTbuWo7Cuh9wys1BSJ23qVCMvkkdwkouYWlyVHZbtvcl+TIrJPGxZS
+	 6OxtZzojNk4Jw==
+Received: by mail-oa2-f26.google.com with SMTP id 586e51a60fabf-466cc88a9b9so2706294fac.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:03:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwk6pPOl+8L6x9UR0IdFTWCegc8HZ581oY/gFerxO/4z/FYlzjftBkMmn7cjqVDHZDz0SDa29Fff+AF8Aqe@vger.kernel.org
+X-Gm-Message-State: AFuF++kQjXMdZJ8k7Lk4+6k1nsxVSS62t2D8AWHvNr1HS0YD5bRy4aiv
+	bLleDoyjeAhrrJPBsPaMWMWKFzLlCR8Hnt75J3vKdW8N2W+wloSNbwkmf6GNeDTT+oAkJgIiEA/
+	OuNetIpIUjz44mBsxUnwLgWGBTxdghQg=
+X-Received: by 2002:a05:6870:d404:b0:499:f197:d79 with SMTP id
+ 586e51a60fabf-499f197114emr1076008fac.17.1790686988186; Tue, 29 Sep 2026
+ 06:03:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260922-maili-dts-v1-3-ac2b1b76bfd9@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA1MSBTYWx0ZWRfX9VESCULQ9lzh
- 3A+Rjs9K5RJ09haT8X/5IUY5UM8GvHqy4pEpc74+DzJvn57kEROzSh06t/Tp2DpzYRgQWmloHEQ
- JtENLuV/OHm3sFpfDOs5HqhoJ3/9x/U=
-X-Authority-Analysis: v=2.4 cv=SIbXx+vH c=1 sm=1 tr=0 ts=6abbb69c cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=6/JeGS87fU6CufIuUkUOiA==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=8uDdfusW4S966u9v8EQA:9 a=CjuIK1q_8ugA:10
- a=TOPH6uDL9cOC6tEoww4z:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA1MSBTYWx0ZWRfX3+Loq4O7d4PI
- m3Zs/gZVtJrJWWgHDD6cxzW5YLSXwVmFVhwaycN9pKR4QCiJDAzPMXib/5c/ywiiy96qkUv45iK
- 3QzzwSooGpsPw53FgwKY+IiVM9ZB7dqSEDP34oyDj2LjrWZB7agAJ0Jpn5+A7lFV3+2vRyRVx5G
- qyBhf1nhAd/ABSsKBfaiNI0uKpMdXvhZidxy/1o0tKiW6l1ZZNQ+TWNNO+u+/f7gA4Mo+jX+/VL
- NAKZlovBUm0gQ1DD6WoTBMg2E0O3s5/ZFWtMX0EhlziFiT1Ly8SgA5LZGbY+4FS3fSuibltQnIG
- uo1Dvf87QtSfG4e2DY/yLH7lesMyiogX/MuDwCEThO4Y1KO3s3ejgh0rnIt4B9gqSVN3/oQoI7D
- WaIzSlnJzQEyI9GrDtAmlmXS0WmcwpFiCSyxONrtKeawyBaLeyU2o+3dUeylYuxd9eRkZCVvKwn
- K7Zd61VPCC1ydEoKFcg==
-X-Proofpoint-GUID: w2s0CP-kF_p9nJ-66EsYNTNnEJZiGPFR
-X-Proofpoint-ORIG-GUID: w2s0CP-kF_p9nJ-66EsYNTNnEJZiGPFR
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-29_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0
- priorityscore=1501 malwarescore=0 impostorscore=0 adultscore=0 bulkscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609290051
+References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org> <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
+In-Reply-To: <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 29 Sep 2026 15:02:54 +0200
+X-Gmail-Original-Message-ID: <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com>
+X-Gm-Features: AclHuK-Qd0URk-jzkKvP69eKU__69SXNOlyvT8nHCDMV5m7lT3rRWZmfmDiZ-Kw
+Message-ID: <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] drm/panel: Add driver for Synaptics R63455 DSI panel
+To: Jun Nie <jun.nie@linaro.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 26-09-22 16:20:00, Jingyi Wang wrote:
-> Maili is Snapdragon SoC from Qualcomm.
-> 
-> Features added in this patch:
-> - CPUs with PSCI idle states and cpufreq
-> - Interrupt-controller with PDC wakeup support
-> - Timers, TCSR Clock Controllers
-> - Reserved Shared memory
-> - GCC and RPMHCC
-> - TLMM
-> - Interconnect
-> - QuP with UART
-> - SMMU
-> - RPMHPD
-> - UFS with Inline Crypto Engine
-> - Watchdog
-> - remoteprocs with smp2p and fastrpc
-> - QUPv3 serial engine protocols
-> - IPCC
-> - PCIe
-> - SPMI PMIC
-> - USB
-> - SD Card
-> - videocc and gpucc
-> - Adreno SMMU
-> - BWMONs
-> - LLCC
-> - Temperature Sensor (TSENS)
-> 
-> Written with help from Raviteja Laggyshetty (added interconnect nodes),
-> Taniya Das (added Clock Controllers and cpufreq), Fenglin Wu (added RPMhPD
-> and PMICs), Nitin Rawat (added UFS and SD Card), Kyle Deng (added IPCC
-> and smp2p), Kumari Pallavi (added fastrpc), Vivek Pernamitta (added PCIe),
-> Jyothi Kumar Seerapu(added QUPv3), Krishna Kurapati PSSNV(added USB) and
-> Haritha S K (added TSENS).
-> 
-> Co-developed-by: Yijie Yang <yijie.yang@oss.qualcomm.com>
-> Signed-off-by: Yijie Yang <yijie.yang@oss.qualcomm.com>
-> Signed-off-by: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+Hi Jun,
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+thanks for your patch!
+
+On Mon, Jul 27, 2026 at 10:09=E2=80=AFAM Jun Nie <jun.nie@linaro.org> wrote=
+:
+
+> +#define R63455_MF_CMD_ACCESS_PROTECT   0xb0
+> +#define R63455_SEQ_CTL                 0xd6
+> +#define R63455_DSI_CTL                 0xb6
+> +#define R63455_DISP_MODE               0xb7
+> +#define R63455_GEN_OUTPIN_SET          0xb9
+> +#define R63455_DISP_SET1               0xc0
+> +#define R63455_DISP_SET2               0xf1
+> +#define R63455_DISP_SET3               0xc6
+> +#define R63455_DISP_SET3_2             0xcd
+> +#define R63455_DISP_SET4               0xcf
+> +#define R63455_DISP_SET5               0xec
+> +#define R63455_DISP_SET6               0xef
+> +#define R63455_TE_GPIO_CTL             0xbe
+> +#define R63455_PPS_SET                 0xe6
+
+This is more details than we usually get, which is nice.
+
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_MF_CMD_ACCESS_PROTECT, =
+0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_SEQ_CTL, 0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx,
+> +                            R63455_DSI_CTL,
+> +                            0x20, 0x6b, 0x80, 0x06, 0x33, 0x9a, 0x00, 0x=
+1a,
+> +                            0x7a);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_MODE,
+> +                            0x54, 0x00, 0x00, 0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_GEN_OUTPIN_SET,
+> +                            0xf, 0xe4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
+0,
+> +                            0xf, 0xb2, 0x00, 0x64);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET3,
+> +                            0x08, 0x70, 0x28, 0x48, 0x00, 0x00, 0x13, 0x=
+21,
+> +                            0xff, 0x00, 0x0f, 0x01, 0x14, 0x17, 0x00, 0x=
+00,
+> +                            0x00, 0x02, 0x40, 0x0C, 0x00, 0x00, 0x00, 0x=
+20,
+> +                            0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x70, 0x=
+08,
+> +                            0xD0, 0x02, 0x21, 0x6F, 0x08, 0x5A, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET1,
+> +                            RTN, 0x86, LE16_BYTE0(VBP), LE16_BYTE1(VBP),=
+ 0x08,
+> +                            0x70, BE16_BYTE0(VFP), BE16_BYTE1(VFP), 0x00=
+,
+> +                            0x00, 0x08, 0x3B, 0x00, 0x00, 0x19, 0x01, 0x=
+22);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET3_2, 0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET4,
+> +                            0x8b, 0x00, 0x80, 0x46, 0x61, 0x00, 0x8b);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET5,
+> +                            BE16_BYTE0(VID_VS_DELAY),
+> +                            BE16_BYTE1(VID_VS_DELAY),
+> +                            0x00, 0x00, 0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET6,
+> +                            0x00, 0x24, 0x00, 0x00, 0x1f, 0x00, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
+00,
+> +                            0x03, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x0A, 0x0A, 0x00, 0x00, 0x00, 0x=
+03,
+> +                            0x1D, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x=
+00,
+> +                            0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x=
+00,
+> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
+00,
+> +                            0x00);
+> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_TE_GPIO_CTL,
+> +                            0x00, 0x6A, 0x02);
+
+So for the commands above we have a little more knowledge than just
+opaque numbers about what the display controller is doing.
+
+If you have a datasheet for this display controller, then please add some
+one-line comments before each command to explain what is being set
+up.
+
+It still bugs me that we accept this much magic numbers in panel
+drivers but I guess I just take a deep breath and live with it.
+
+Yours,
+Linus Walleij
