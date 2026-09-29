@@ -1,39 +1,88 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C15FF4F4746;
-	Tue, 29 Sep 2026 09:59:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 520223DA7ED
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 09:59:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790675949; cv=none; b=rFRSd8H0Q3OSQ8BE0wuatb66ujrjFLQ9lPPq67bWjh9wr73dWBvmeILfu3WYG0x6kgjwRfv2/GrHcAlTOde1j3zUq5hLjkkQ0+gDlonie6aTTcNnqoSE2XavBa3bwKlFyER5QIFo/zliUxFrC3AS0QCQUNiD4Ksxz9DH0741Y/4=
+	t=1790675996; cv=none; b=fegJaLBnMVE4Zhq4CJyzty8Lv015xCXR+M8DdccF+o6nG1KUvw+JWUs+dKjcmFmYkE9AzpbYiDW38qsU3DU6Pftp25235849ybnD7RiZIq5BVUlWG5P+R4pO/ULHjSvFDOdJYztkak+6x2EHQov2/3GsCg16b9emtxF7zwCtu6M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790675949; c=relaxed/simple;
-	bh=H1ubWGVZudozaTwHoxQRcAvtFvrYuFbe1gCFrJb0zCc=;
+	s=arc-20240116; t=1790675996; c=relaxed/simple;
+	bh=9Xgc6UQ5KNhU9TgRSQYjuJRejAzY/LAix8Z0rUXJIYg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fkfoixgb7SCP8FiNEJ7kjnHisXc1lFsmftHOZnghA1QPdtyNcE6zOqrgTg/QAi9L7FWr2Nv4bMdKFUVL3h2eV/lTQFk2IXMBf4s5yb52P2gWGMkseHVCBhBQ9v+OpToBwFdkMrrxQ4AIIPdLPyTaGK7son9V3EUFm3IchB8OArE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=UUnihWFa; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	 In-Reply-To:Content-Type; b=nyMNWe7UfiScdyqIULZBO+VLC/P/3qaWvDeQntviWEPRGPmWAZ/iTdRAAf++tcsfZ1XmCSNrsECh1UNs2H9rJhuYteRSPKf0FtChmowpMm/4kyBZZuxb//GfEbFDBjbKREVGrc7RLag/7qyQ3w8FMksxJEbMKzQ2huSnpgZz0WM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mXDRv9bj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ayiJtHeJ; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="UUnihWFa"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 231C453423B2;
-	Tue, 29 Sep 2026 11:59:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1790675945;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ypdC/Y2QVx/ngT6s7C2ZYMJtG1EVfJBgff5dSYAsDyM=;
-	b=UUnihWFaiIBdBuw1X4/ZWiK2h/izidM1d1G12sFqC6r+Xf256X0zxskEsNLnPQBFHUnYPF
-	aBhNcEMIgkUQO3hlC9MB0hHSVkoTyiZl8Rd09nBnT2lKfGjWhX3SJTE9XKhyYanhioi//d
-	fMVE5rs/3gKV972jwoB/8wO88C0e0bE=
-Message-ID: <739ce9f4-8bdb-4bc4-9cc1-9a1a7eba80ce@ixit.cz>
-Date: Tue, 29 Sep 2026 11:59:04 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mXDRv9bj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ayiJtHeJ"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T7U1Oq3684787
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 09:59:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	SitGaPdS1185rMwXB618H8QLsSJ3+iy3JIMMMT0jpes=; b=mXDRv9bjA58j+Tob
+	SE7hSwMlWvbcfx41LCoagatKQWM0+TWRE1ieogFPw8Gh61qLUUoVmvh8cAdPCyLV
+	bLBDAe42vT46BMmSiEmh5vChlAQyYSHtVYpsH4Rpqu4VYeLSsBOGHzSSltGEY2du
+	TT+UhktN863kN6EQRmd0Y+aS6+dNqIa/q/0tKnYYppaf2MqAaS5Dr3b1+pITBfn+
+	Qvy9i0mwJwJ+okxnimNlLBvKRwbDgsWqhdnXYDyPxa5tfmSbyoMfZFrJvuJXwWqe
+	RtorqU6ZP3j5VFwBvh0jR90J9bhugvyag8QVQ28Ruk/kl/a/3gGeKyRZZyIuaDKt
+	5zLKyw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0144tba6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 09:59:49 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93c57e0436aso321520085a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 02:59:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790675989; x=1791280789; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SitGaPdS1185rMwXB618H8QLsSJ3+iy3JIMMMT0jpes=;
+        b=ayiJtHeJKy/Bcyaw0vMyyh6HbSXZWOgVYsnW0SMXMpDKUEhqFsKA9YZDd0ZB34K1Uf
+         /GktmIG0K5Vb7axF1VMD1mKzC3z99NyrL2JoU9bK1AH/GvrEKD7iI6znioIZAseTJ9Ga
+         KVyNylqlx10rsZSZGzsv5GkSYDz0CHTYL/IIBd5KQb0+/ykr8D2Qd2LT+1XpGkYgt2aH
+         ZIr4xWlcw4IvRaS1SQtr/motzH3L8B44/GoV15V6toxAGfr1+t4zODQGDrl1LcXvUJmc
+         1JKKb4l9UaBYmNFmDKByZDi+E0mwi+apwT/eGImOIzkqcBexkoXySC0bCY1wQKjNVUjx
+         bP9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790675989; x=1791280789;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=SitGaPdS1185rMwXB618H8QLsSJ3+iy3JIMMMT0jpes=;
+        b=MMkHPQROXASaVgC89DIV+rns8BA+BPjxBWCaLNXThVHrXNBYviKRkVkM0uNYK0T9Re
+         fG4d8R5GzIenUo5rvE8BRmLpAdUiFhSoKOMwMkuuVh7Tt7VlJLQY/VavSE7l9yXvDsIs
+         ADtG4oKuzs0Bhww/lY2+iDvtmyctr5YbLuNZCotqb8kebWR+n05OGe4aKr0g5muua9iK
+         zV5AeM9Zdby+Tv5VzTZJQRqRmSfdBhlStCOcUShp1m2FR7PnYcB6aQRtPeO0yZ6USNZX
+         dpR71k2XvfdHbKAHTgbdW07zKI5/BH0CF9xVUO/ZJk+rXC5iYt5EJQY/gv8/Ing9ntoV
+         gDUQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwUSg/k5OH0O9Rj8Af3QgJbrUGgyIPS9Jcpp2cxrkHWRkQ3IEcMCg/SD4jg8hxXOMZiNJhRTC24ceiosom/@vger.kernel.org
+X-Gm-Message-State: AFuF++kYu6/x7q+xg0VXBmpEQsjBt1J9EecgpWz/Z89luByVptZK4wky
+	PI9GBj09e868S/IBs7M9bN43F4WAWiMII7pOqaU7rieyrttI9XAEGDn6K6jNzSRa7QXSlfmZqXk
+	sz6kCuR9DuQv6x4tEaGqEKd4cxDkzt3zlInMxxN38lEtcQfZt9yyzwmQhFsDyV/tuwEX/RBLi9m
+	JA
+X-Gm-Gg: AYBFou3RdcNIXOBeU9o5r7zd+nWin2/Fc1TLPuHclhvAajs/zDNkO6A6JptOMbwC9GB
+	E0w2Hq0RwZK/cBMGtF9Bz6b/PiMcBxMYHgKzydW2pd9Uk6/MXZCeewI6srGBDPv1toyipGzgQ/V
+	v1xAkEZPHVhkV/W8VN6OXsVzix65GZsYEJQKkLkKcYhXvG9zke3+1DpxgbJ3CUS6u+ELvD4sZYI
+	NAwuYOoiMGTG0Z9f00B2rBEImNWgQY3f4/V29ejxtqASA8rI0zNnaZn3pFM4+rUsyieVZKjLENl
+	2+NRBEBI2cj75GYpIZyW0mGqGfMopXQiQHLwjbIlbbVa4tDZU66eIIJyeZzdOrIj+BB/Pm+KYGf
+	Qjbu1s12+POlef8PYm+4ZFiVVTnE3w5C5goeKvtrX+KmSZQxmFL7UrM+5mvZgFw==
+X-Received: by 2002:a05:620a:6cc4:b0:939:fd0e:9fd7 with SMTP id af79cd13be357-93c43cf88d6mr2578310985a.43.1790675988722;
+        Tue, 29 Sep 2026 02:59:48 -0700 (PDT)
+X-Received: by 2002:a05:620a:6cc4:b0:939:fd0e:9fd7 with SMTP id af79cd13be357-93c43cf88d6mr2578307785a.43.1790675988156;
+        Tue, 29 Sep 2026 02:59:48 -0700 (PDT)
+Received: from ?IPV6:2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7? ([2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48af502da06sm3353200f8f.11.2026.09.29.02.59.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 29 Sep 2026 02:59:47 -0700 (PDT)
+Message-ID: <4846bb08-9317-407a-a25a-8437a599ee7d@oss.qualcomm.com>
+Date: Tue, 29 Sep 2026 11:59:45 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,151 +90,164 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/11] drm/panel: s6e3ha8: Correct the polarity logic
- within
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260924-crosshatch-panel-v2-0-08d5c7bf72fc@ixit.cz>
- <20260924-crosshatch-panel-v2-6-08d5c7bf72fc@ixit.cz>
- <20260929-dramatic-ocelot-of-support-2aa377@quoll>
- <d1183441-ee4e-4700-90d9-996769eaaa11@ixit.cz>
- <b7d5d018-116f-46dd-b037-4d46c25a8435@kernel.org>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <b7d5d018-116f-46dd-b037-4d46c25a8435@kernel.org>
+Subject: Re: [PATCH] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal
+ zones for PMICs
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, johannes.goede@oss.qualcomm.com
+References: <20260922181818.5503-1-daniel.lezcano@oss.qualcomm.com>
+ <aruFjEq4AfcIOxa3@linaro.org>
+Content-Language: en-US
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+In-Reply-To: <aruFjEq4AfcIOxa3@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDAzOSBTYWx0ZWRfXz0z7REzCIzbf
+ 5396kSfjw28QJD40JypHeHay5tVgYVN/7JCZGNsXP5Vi8KmZ+CvArQpbQpqeh662zucvQpBPIoS
+ xl+fLpdUO+144BEgJkzuP3unEK3zv2SrObijtSU1vNUrTvy4cGWIzDMBNMjhEdSIKig038xpip4
+ hHdWM3ts4N5fk/QlnY+obt3md6AmDpdhWCu+Yg3S3a7wzCGie/sRCsjqwPvw+vKp1n1tqmUpZ9F
+ jW64wb8O9MhF18K5hIffO4LG9LA982f+7QPg12JlPCq8Zsl6w6HAEdg73kEOJ9CnySuyWEqXPWS
+ PpWYyYrsL7JnWyauxIPutJhdcQYGY3xJrJ4rg+H9VtaxVgaAd++qz5JidWflUkumwMrU3T8+grj
+ v5zoP48Ienu9rqgQycV9MmLUvUokoRYzr/8zn5h+ebnTSWavXxfPx1wAgZDxWrVo3l26iSnJB+z
+ /ynfwxVV2wsFlGQmSQQ==
+X-Authority-Analysis: v=2.4 cv=FJSOVOos c=1 sm=1 tr=0 ts=6abb8c15 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=8k6WQxmsAAAA:8
+ a=7Jf4kJHaAAAA:8 a=EUspDBNiAAAA:8 a=yHKr3JDVMgr7eIydpkwA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=B30mOkiisUNQCrgcu9ts:22
+X-Proofpoint-ORIG-GUID: C18eYFZThNKOIrAdX1V-_TyDSB66PoAb
+X-Proofpoint-GUID: C18eYFZThNKOIrAdX1V-_TyDSB66PoAb
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDAzOSBTYWx0ZWRfX6a5ZtjwzYPJO
+ tZDZp3L9k09I80sdXQ66vQE3sUO7hFKcclt46KC1oyJuArUvPxUqkXzZm9oTpeJnbk0qY6n6eXx
+ FHPTpeyR8TUyF4TgkZ4VDWqZzIacWG0=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-29_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609290039
 
-On 29/09/2026 11:51, Krzysztof Kozlowski wrote:
-> On 29/09/2026 11:41, David Heidelberg wrote:
->> On 29/09/2026 09:45, Krzysztof Kozlowski wrote:
->>> On Thu, Sep 24, 2026 at 04:01:34PM +0200, David Heidelberg wrote:
->>>> The reset was introduced with wrong polarity. Correct for the future
->>>> compatibles and keep current with reverted logic.
->>>>
->>>> Old DTs keep GPIO_ACTIVE_HIGH and are fixed up via
->>>> gpiod_toggle_active_low() on the deprecated compatible.
->>>>
->>>> Assisted-by: LLM
->>>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->>>> Signed-off-by: David Heidelberg <david@ixit.cz>
->>>> ---
->>>>    drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 23 +++++++++++++++++++----
->>>>    1 file changed, 19 insertions(+), 4 deletions(-)
->>>>
->>>> diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->>>> index 5e1e997b83b36..99290913de69a 100644
->>>> --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->>>> +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->>>> @@ -20,16 +20,17 @@
->>>>    #include "panel-samsung-dsi.h"
->>>>    
->>>>    struct s6e3ha8_desc {
->>>>    	const struct drm_panel_funcs *funcs;
->>>>    	const struct drm_display_mode *mode;
->>>>    	unsigned long mode_flags;
->>>>    	const struct regulator_bulk_data *supplies;
->>>>    	unsigned int num_supplies;
->>>> +	bool broken_reset_polarity;
->>>>    };
->>>>    
->>>>    struct s6e3ha8 {
->>>>    	struct drm_panel panel;
->>>>    	struct mipi_dsi_device *dsi;
->>>>    	const struct s6e3ha8_desc *desc;
->>>>    	struct drm_dsc_config dsc;
->>>>    	struct gpio_desc *reset_gpio;
->>>> @@ -62,22 +63,22 @@ static int s6e3ha8_unprepare(struct drm_panel *panel)
->>>>    {
->>>>    	struct s6e3ha8 *priv = to_s6e3ha8(panel);
->>>>    
->>>>    	return regulator_bulk_disable(priv->desc->num_supplies, priv->supplies);
->>>>    }
->>>>    
->>>>    static void s6e3ha8_amb577px01_wqhd_reset(struct s6e3ha8 *priv)
->>>>    {
->>>> -	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->>>> -	usleep_range(5000, 6000);
->>>>    	gpiod_set_value_cansleep(priv->reset_gpio, 0);
->>>>    	usleep_range(5000, 6000);
->>>>    	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->>>>    	usleep_range(5000, 6000);
->>>> +	gpiod_set_value_cansleep(priv->reset_gpio, 0);
->>>
->>> This breaks all users and this usage of ABI was already released.
+On 9/29/26 11:31, Stephan Gerhold wrote:
+> On Tue, Sep 22, 2026 at 08:18:18PM +0200, Daniel Lezcano wrote:
+>> Add the thermal zones for the ThinkPad T14s and describe the board
+>> temperature sensors exposed through the PMK8550 VADC.
 >>
->> See the gpiod_toggle_active_low() usage later in the patch which keep the logic
->> for the original compatible as intended.
+>> The keyboard area is the main thermal constraint under sustained CPU
+>> load. Add a passive thermal zone for it and progressively throttle the
+>> three CPU groups as the temperature approaches the 53°C limit. The
+>> groups are activated at 49°C, 51°C and 53°C respectively, with a
+>> 1000 m°C hysteresis and a 500 ms passive polling interval.
 >>
+>> The cooling maps limit each CPU cooling device to state 6, which
+>> corresponds to approximately 1.9 GHz. Testing showed that the system can
+>> sustain the workload with all three CPU clusters capped at this
+>> frequency while maintaining the expected performance, making it a
+>> suitable upper cooling state for thermal regulation.
+>>
+>> Several configurations were evaluated while tuning the keyboard zone.
+>> Using a single 53°C trip for all CPUs allowed the temperature to rise
+>> quickly but resulted in a stable operating point around 54.3°C, about
+>> 1.3°C above the intended limit. Introducing staged cooling before the
+>> target significantly reduced the thermal overshoot. A 49/51/53°C
+>> configuration kept the steady-state temperature close to 53°C, while a
+>> later 49.5/51.5/53°C configuration improved the heating response but
+>> shifted the equilibrium slightly above the target. Based on these
+>> results, keep the earlier 49/51/53°C staging.
+>>
+>> Also add a passive back-cover thermal zone which uses the GPU as a
+>> cooling device at 64°C, together with a 73°C critical shutdown trip.
+>>
+>> Describe the remaining SMB, SDX, east and west board temperature
+>> sensors as monitoring-only thermal zones, and enable ADC thermal
+>> monitoring on the corresponding PMK8550 VADC channels.
+>>
+>> Signed-off-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+>> ---
+>>   .../qcom/x1e78100-lenovo-thinkpad-t14s.dts    | 142 ++++++++++++++++++
+>>   1 file changed, 142 insertions(+)
+>>
+>> diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dts b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dts
+>> index 5cc6a63d1ef6..9407868864ad 100644
+>> --- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dts
+>> +++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dts
+>> @@ -10,6 +10,117 @@ / {
+>>   	compatible = "lenovo,thinkpad-t14s-lcd", "lenovo,thinkpad-t14s",
+>>   		     "qcom,x1e78100", "qcom,x1e80100";
+>>   
+>> +	thermal-zones {
+>> +		soc-thermal {
+>> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
+>> +		};
+>> +
+>> +		keyboard-thermal {
+>> +			critical-action = "shutdown";
+>> +			polling-delay-passive = <500>;
+>> +
+>> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
 > 
-> OK, I went way too fast, that's correct part. But splitting fix is still
-> just confusing. Backporting to stable is a different thing than fixing
-> issues.
-
-Sure, I already droped the previous commit changing it for stable.
-
-Btw. looking at gpiod_toggle_active_low(), would it make sense to do a series 
-correcting panel reset logic? I see many panels keep "reset asserted" in the 
-driver (but ofc not in the reality).
-
-Thanks
-David
-
+> I believe this is "towards back cover next to heat pipe" on T14s, not
+> "keyboard".
 > 
-> Best regards,
-> Krzysztof
+> SYS_THERM1 is RT8502 and you can find that labelled on the top bottom
+> right in this mainboard picture:
+> https://download.lenovo.com/Images/Parts/5B21P83385/5B21P83385_A.jpg
+> 
+> In the T14s, the mainboard is mounted 180° rotated, you can see the same
+> part of the mainboard in the top middle here, above the heat pipe,
+> facing towards the back cover:
+> https://www.notebookcheck.net/fileadmin/_processed_/d/c/csm_DSC_0003_aadae1ddd2.jpg
 
+Thanks for pointing it out, I'll double check
+
+>> +
+>> +			trips {
+>> +
+>> +				keyboard_alert0: trip-point0 {
+>> +					temperature = <49000>;
+>> +					hysteresis = <1000>;
+>> +					type = "passive";
+>> +				};
+> 
+> If I'm reading the Windows ACPI setup correctly, it starts throttling
+> much later. The main thermal zone used for throttling on Windows is
+> TZ40, which is thermistor 2 read through the qcom-hamoa-ec interface
+> (b94000.i2c, 'i2cget -y N 0x36 0x2a b'). TZ39 with thermistor 1 looks
+> like the SoC thermistor, so TZ40 could be the EC equivalent of
+> SYS_THERM1, i.e. RT8202 also visible in the mainboard picture above.
+> 
+> On Windows, TZ40 is configured as follows on my T14s:
+> 
+> Passive throttling starting at:
+>   - 3310 dK (57.85°C), power mode "balanced" (current default for EC)
+>   - 3330 dK (59.85°C), power mode "performance"
+>   - 3230 dK (49.85°C), power mode "low power"
+
+Yes, probably it is time to take benefit of the platform profile in 
+order to change the trip points.
+
+> Cooling devices:
+>   - CLS0.CPU0-3
+>   - CLS1.CPU0-3
+>   - CLS2.CPU0-3
+>   - GPU0
+> 
+> If we start throttling earlier than Windows, I would be worried that the
+> EC will not reach the trip point for maximum fan speed, and we'll end up
+> overly throttling the device.
+
+Mmmh, that is a good point.
+
+I don't know the thermal management in Windows and if it has exactly the 
+same design as the Linux thermal framework.
+
+As we can set multiple passive trip points, may be we can try to step in 
+the different cooling devices instead of making them all together tied 
+with a single trip point.
+
+Or do you think it is better to just make all devices capped at the same 
+time ?
