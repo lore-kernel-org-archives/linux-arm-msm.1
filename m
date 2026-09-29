@@ -1,278 +1,172 @@
-Received: from relay12.grserver.gr (relay12.grserver.gr [88.99.38.195])
+Received: from fout-a8-smtp.messagingengine.com (fout-a8-smtp.messagingengine.com [103.168.172.151])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA2E13AA4E4
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 11:22:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=88.99.38.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF5504FDA55;
+	Tue, 29 Sep 2026 11:27:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.151
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790680975; cv=none; b=rs8Ur46HakL7yYYf9bKvLrreYG1fwKpRexhFyUvp7ulmipb4cFA7+KflXErG/997ILhB6v+mIjjQnOvLw8HDZqUihq1b2cEpu3cauvjzkyDsrHAOq3Bq9h7Eqp6/alqMdW8dBz9btqd7w6+ou8CU9JoknsMOZKq0+E6JWubnPSw=
+	t=1790681232; cv=none; b=dneC5kw3Cfs9VpDEhj34cvQX9zBqaEJs5ppU/AN++JGjYcxecIV6f6QAHOJKIkrMK6ebCkWrFYgtMhaBo86z/W5Lm7N/cQylJOlnZ/TbuOhNEkaBg6jHmmoSgPA0MJHY0vsn323esMlkwiwPuLqxXiViObfzp1eOZhWUFuy3d8w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790680975; c=relaxed/simple;
-	bh=1WNdcs5Gpsf8AQQ3hwCDXZNxCECNgyLrcTeCWS3HtQo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=po4A6/gsbtOojjeCecVCSR03WBiJRxcvYBQT/c6QGOpnuLSFkYFZVCZFe5HAYSMcXCiq4RkTrOO5ipWa9+xNdtc/+BN6fBi3qsLoZtoi/6I4WhUqfIEF0rmkrz/us3ZwjHtbC3WzxZ6zsM/q7Sk6ngbUFZZae2+Q1NIiaqyACJo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=EirIH5qd; arc=none smtp.client-ip=88.99.38.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
+	s=arc-20240116; t=1790681232; c=relaxed/simple;
+	bh=YM3+c1WRIWYb+SV1yQ30hgqvyfKEvXQJdImu3QeAUdI=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=D8yfnLyyWOhtosp9iOEnO+hw4PeMlteJ7kRvf8MgI7SR33x0kqlm53wO6lHyJO4lcVvX4n71mGe+7FVkeaZIOJD2BTXwu//QRW6cFYUcSZIyMTU8PYFfPJZXuDb8rjFAypciWubyKgeBmaYqu6tE5uq/b6SBQ3oIh2enL0yABPk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de; spf=pass smtp.mailfrom=arndb.de; dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b=lqrhs3ji; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=GTy+dqgK; arc=none smtp.client-ip=103.168.172.151
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="EirIH5qd"
-Received: from relay12 (localhost [127.0.0.1])
-	by relay12.grserver.gr (Proxmox) with ESMTP id 5BFA1BD8F6
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:51 +0300 (EEST)
-Received: from linux3247.grserver.gr (linux3247.grserver.gr [213.158.90.240])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by relay12.grserver.gr (Proxmox) with ESMTPS id 4D36ABD900
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:50 +0300 (EEST)
-Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
-	by linux3247.grserver.gr (Postfix) with ESMTPSA id 851351FD48D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:22:46 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
-	s=default; t=1790680969;
-	bh=qN0ReYj7ZTDg8LS4DEPMhXSlo/3LSlmilhpS+l0dExw=;
-	h=Received:From:Subject:To;
-	b=EirIH5qdUtQjuI1O4f0+g3m4J6A8kj9GzsDRuohcjQRtJCOkI2KlDIrOA/YthTNbj
-	 9XeaUe/NIS8pkuLKcNBfulshDaqa7Wd8SJovwZU8pntCXJUtanaZy5nOJsgwTVN0tO
-	 cLrycTImG5rHQKfiV08B9Dw+Neot/rzkkFnZ8AZVjvz9/qCQgp+NiwoyNPTpEbgwo1
-	 udq59FakyCJ2ccSvBeX7kUDOmEect5aiVqeeqNWptP/21uQ1bJ7mrnT9egYmbyprwO
-	 4yog+pnpI21AVtsXKX44kBPebVuYFqpznl4thQIGHLMewVRwi00SqmFjCDkA1EY2aO
-	 4/kHNnTBEZURA==
-Authentication-Results: linux3247.grserver.gr;
-        spf=pass (sender IP is 74.125.227.170) smtp.mailfrom=lkml@antheas.dev smtp.helo=mail-pj2-f42.google.com
-Received-SPF: pass (linux3247.grserver.gr: connection is authenticated)
-Received: by mail-pj2-f42.google.com with SMTP id
- 98e67ed59e1d1-396ccda24afso2092328a91.3
-        for <linux-arm-msm@vger.kernel.org>;
- Tue, 29 Sep 2026 04:22:46 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AKwUvBw1HwQJ0AJAd90/PQysAzZhcmwPVgiBNUIUe9mNTcS3cLLlqnIGMZB+/5OihD1N4bQhyBjl8QZ3jMzuaBnd@vger.kernel.org
-X-Gm-Message-State: AFq9FYJnaFGsh3cCI6xbsz10IZwvErgnuq3UGkGgxkWy/8NnuyRByhOl
-	+XXK+svPTm/srjT08QnDveGpzqCQSboK3IQVf+ax4JxZpcd0sNzd5QAIClX1VPaejmCLsJJaUmP
-	QdZq1WgoFsvV4G6s+iKpXGIVqwp1gYf4=
-X-Received: by 2002:a17:90b:540e:b0:3a4:ac5c:1919 with SMTP id
- 98e67ed59e1d1-3a4ac5c19afmr363754a91.49.1790680964966; Tue, 29 Sep 2026
- 04:22:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b="lqrhs3ji";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="GTy+dqgK"
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfout.phl.internal (Postfix) with ESMTP id 6BFA1EC101E;
+	Tue, 29 Sep 2026 07:27:09 -0400 (EDT)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Tue, 29 Sep 2026 07:27:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1790681229;
+	 x=1790767629; bh=wTvvV6l4+D0DDEvQZ4FQw43WlY8/FKGuhNm/go7qrHc=; b=
+	lqrhs3ji6e1nUSfWDJcN7JlzJ7kA5P6e9t3O+qreOZdMk63ce3LXKkAi5GlB6Lyn
+	QEccDhnvycoD3M+GxpPDF4xgRHX5IZ5xDcH9utzuAqTLVz38y+t0XTJTGw5cN510
+	4cLIKRo5YaBQp4SHy243pLZt5gBbeIfFlXJNhnrPoWIdRaxI4FbBzyAWyFUe2hLy
+	w0Xvfthg6bDGSRo5iznRmpwsbFHAQDOFTArREiCDo0rFsaUSqhrZduuo/TNQLY1q
+	XJ27axl/nB5bEXOkFBohpxrZx3sOmU4C15MRRMtYcJb8Uav7NGQL2TOy+V0hKDJy
+	Txpl7BBBn0OVhXe95YkqaQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1790681229; x=
+	1790767629; bh=wTvvV6l4+D0DDEvQZ4FQw43WlY8/FKGuhNm/go7qrHc=; b=G
+	Ty+dqgKXb8w9sUdgVZqI1XIO9oNUZ/E6FiTXSNpB1FBpCLm6BsJpdtTEGI/CZgUZ
+	GkHHQdF/AGX62cqYzFws6IHKIJchP29xOy6e038AbLWObRhXcyTApDeRnWh/he71
+	RE0WDnUjOHBwNeKVRW2IBNpyfkB0FBPV+HQ9TQ5P3SxHmmABDD7ER+a+PoTqSzOA
+	CVUgFgZWgRNjLkB/dKhYCnqTEDvpK7IwVQJh3MMAcIaOliSvprnAAxtuh4lwLqca
+	5E2ApylK8f2pZHLbvIsmtbo4ZA4VgireH5uPVuPx1hMa/Pqmf/bFxMLbb0492qP7
+	fbWEsEfavarzJ25RPYvXA==
+X-ME-Sender: <xms:i6C7agSkBg8tMVWHBEt0HUcVOIUxly0Y_-GJAxOGHzR4IC_uAmOjTw>
+    <xme:i6C7aolBbuRPbCxqAimidKEJrwa5e-ILmzRP4QQfY2viwM3o1NBcdRZveWP6h5PpY
+    J9rANTqfM9oVDKytv19XnmeaahxYC1XCh4hw-Jm2NwPlfoxb-rkdeHd>
+X-ME-Proxy-Cause: dmFkZTFaYJ4UOaM/YCwFiIyeO72OzZZ8wJwxticpHL2lx2SgcpWhfgewo7nqjzKR7f9Uco
+    nB6ZlTdwqZRAsBFF18rc6sG3HoTsR86SFyOpwnXQKDk9Ksip61QjkS/pMBs0QtJjioql8z
+    2FRl/D/+O00NkE+AMunJHXDpv0i3mM8+Ryk1Ck5NWCA7zFF/ltRfTHuGCd9/SYiFxl4d75
+    BpyduVe9BfJO5KhE3HYOaXLC5lcflKLiIbr+PBRGaLKmD+qjc3NQ2A8+2wZTBBeu9rmiT7
+    Bibq+XdHiB1vtSP6z4BIEfpKuoZrPYS8kWvXjN+kLgwFC0fFt2GuA2fk5tV5Brmh1Fl3Qq
+    ch2qJc1CFaEamJyHJrHI+Wk06bCDpQBDtjneT1j2ICExQ8RSl108X451KBq6rA93yDLwhs
+    PhUlM12nqy1YPGxvlRPE9teorSEcMI7+jTeS9QEri1/4ch7s19XoOdvjs5GdrVLj9Ilnhk
+    Rmlw3NCPJfDPDY+3oEfb0EVCNF6DYelmxzSfA9kuNtt0c7g34BZCRhlOU0ooY9uEyJjWBl
+    7DbHdhZ6vdKBYWQi5w7s/JhxwtbXFBD0kkmvRCONNIg6AKyoUX432oigZr/m+PClcPETaH
+    Tvd/BjpwcoWsk92hpPlI/3dA6VTyASJlQZD7ABeENHmUEI8wtIS5VbY+J55Q
+X-ME-Proxy: <xmx:jKC7ap3o7SuGCfUYXpctuk65s40APN84UG5IEgTEUrRDWaCa4Ery6w>
+    <xmx:jKC7agOalhSB5mDxMkgF0ovUbqiH4OHCUl8OIvKh_VAb6oWvlF56Dw>
+    <xmx:jKC7ah1PFRVSd2W6k_EFpS7iim1dU0CToYzzGKKdEQreJ68Q25lLwg>
+    <xmx:jKC7avF9EZeoDX6JcA10U0XVuoA-gVhF5V6L5HxsE3WiM_z38KT-Iw>
+    <xmx:jaC7ahr43dR7CAohRep2N3abx2D0FMKS0tlHIIqXcvUyveeM2Cu3FMVV>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 2F97632A008D; Tue, 29 Sep 2026 07:27:07 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260623145225.143218-1-johannes.goede@oss.qualcomm.com>
-In-Reply-To: <20260623145225.143218-1-johannes.goede@oss.qualcomm.com>
-From: Antheas Kapenekakis <lkml@antheas.dev>
-Date: Tue, 29 Sep 2026 13:22:33 +0200
-X-Gmail-Original-Message-ID: 
- <CAGwozwG5u6fVGqCGN6wn8816Bs1MSW4h7soAX7+k=3T8UvHLjw@mail.gmail.com>
-X-Gm-Features: AclHuK-N_kkArlfU-4FCYmt0YX-fm7tZEIh1YZorpgFANORXNez-PUS0peDFSU0
-Message-ID: 
- <CAGwozwG5u6fVGqCGN6wn8816Bs1MSW4h7soAX7+k=3T8UvHLjw@mail.gmail.com>
-Subject: Re: [RFC 00/12] RFC: Devicetree-ACPI hybrid mode
-To: Hans de Goede <johannes.goede@oss.qualcomm.com>
-Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
- Srinivas Kandagatla <srini@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Dmitry Baryshkov <lumag@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-acpi@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-PPP-Message-ID: 
- <179068096936.1049705.5762052970837282367@linux3247.grserver.gr>
-X-PPP-Vhost: antheas.dev
-X-Virus-Scanned: clamav-milter 1.4.6 at linux3247.grserver.gr
-X-Virus-Status: Clean
+X-ThreadId: AxWFZG7AZFUJ
+Date: Tue, 29 Sep 2026 13:26:36 +0200
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Luca Ceresoli" <luca.ceresoli@bootlin.com>,
+ "Arnd Bergmann" <arnd@kernel.org>, "Dave Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>
+Cc: "Sasha Finkelstein" <k@chaosmail.tech>, "Janne Grunau" <j@jannau.net>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>,
+ "Manikandan Muralidharan" <manikandan.m@microchip.com>,
+ "Dharma.B" <dharma.b@microchip.com>,
+ "Nicolas Ferre" <nicolas.ferre@microchip.com>,
+ "Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+ "Claudiu Beznea" <claudiu.beznea@tuxon.dev>,
+ "Jagan Teki" <jagan@amarulasolutions.com>,
+ "Andrzej Hajda" <andrzej.hajda@intel.com>,
+ "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Robert Foss" <rfoss@kernel.org>,
+ "laurent.pinchart" <Laurent.pinchart@ideasonboard.com>,
+ "Jonas Karlman" <jonas@kwiboo.se>,
+ "Jernej Skrabec" <jernej.skrabec@gmail.com>,
+ "Liu Ying" <victor.liu@nxp.com>, "Frank Li" <Frank.Li@nxp.com>,
+ "Sascha Hauer" <s.hauer@pengutronix.de>,
+ "Pengutronix Kernel Team" <kernel@pengutronix.de>,
+ "Fabio Estevam" <festevam@gmail.com>,
+ "Doug Anderson" <dianders@chromium.org>,
+ "Philipp Zabel" <p.zabel@pengutronix.de>,
+ "Chun-Kuang Hu" <chunkuang.hu@kernel.org>,
+ "Matthias Brugger" <matthias.bgg@gmail.com>,
+ "AngeloGioacchino Del Regno" <angelogioacchino.delregno@collabora.com>,
+ "Rob Clark" <robin.clark@oss.qualcomm.com>,
+ "Dmitry Baryshkov" <lumag@kernel.org>,
+ "Abhinav Kumar" <abhinav.kumar@linux.dev>,
+ "Jessica Zhang" <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>,
+ "Marijn Suijten" <marijn.suijten@somainline.org>,
+ "Marek Vasut" <marex@denx.de>, "Stefan Agner" <stefan@agner.ch>,
+ "Orson Zhai" <orsonzhai@gmail.com>,
+ "Baolin Wang" <baolin.wang@linux.alibaba.com>,
+ "Chunyan Zhang" <zhang.lyra@gmail.com>, "Jyri Sarha" <jyri.sarha@iki.fi>,
+ "Tomi Valkeinen" <tomi.valkeinen@ideasonboard.com>,
+ "Icenowy Zheng" <zhengxingda@iscas.ac.cn>,
+ dri-devel@lists.freedesktop.org, asahi@lists.linux.dev,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ imx@lists.linux.dev, linux-mediatek@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
+Message-Id: <4a566036-af8c-494e-9749-cd713d952d39@app.fastmail.com>
+In-Reply-To: <DLRMF4TI56I2.3PTB24KN9ORJ3@bootlin.com>
+References: <20260928161605.2271412-1-arnd@kernel.org>
+ <DLRMF4TI56I2.3PTB24KN9ORJ3@bootlin.com>
+Subject: Re: [PATCH] drm/bridge: add missing drm/drm_panel.h inclusions
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, 23 Jun 2026 at 16:52, Hans de Goede
-<johannes.goede@oss.qualcomm.com> wrote:
->
-> Hi All,
->
-> Currently as soon as the kernel boots with a populated DT provided then
-> the arch/arm64 code sets acpi_disabled=1 and the complete ACPI subsystem
-> gets disabled. On WoA Snapdragon laptops where the factory Windows OS
-> actually boots using these tables this is not necessarily desirable.
->
-> It might still be interesting to at least parse the ACPI tables and make
-> the ACPI fwnodes available for device-drivers to use. I call this DT-ACPI
-> hybrid mode.
->
-> This mainly is an experiment for now and possibly a method for accelerating
-> the ongoing effort to run Linux on currently available Snapdragon laptops.
->
-> On current laptops Linux cannot boot using ACPI due to some information
-> missing from the ACPI tables. People are working on changing this so that
-> for future WoA Snapdragon laptops Linux can boot using ACPI only without
-> requiring Devicetree.
->
->
-> There are a couple of scenarios where DT-ACPI hybrid mode is useful:
->
-> a) This leads to a populated /sys/firmware/acpi/tables allowing one to run
-> acpidump, which is useful to grab info from the ACPI tables when e.g.
-> creating a DT for a new laptop model. As a bonus /sys/firmware/acpi/bgrt
-> is also populated allowing the boot-splash to show the vendor logo.
->
-> b) It might be useful for device-drivers to be able to access ACPI data
-> for the device even when running in DT mode. E.g. Srini Kandagatla first
-> got me thinking about this because he wants to use the ACPI MIPI SDCA
-> tables for audio codec routing when booting Linux on Windows Qualcomm X2
-> (Glymur) laptops.
->
-> c) It is also possible to go truely hybrid and use ACPI to instantiate
-> some of the kernel device objects representing the hardware. For example
-> the last patch in this RFC series switches to using ACPI instantiation for
-> the I2C clients for the keyboard and touchpad on the Snapdragon X1E Lenovo
-> ThinkPad T14s gen 6.
->
-> d) This may help identify shortcomings in the current ACPI tables which
-> need to be fixed to allow future laptop generations to use ACPI only.
-
-Hi Hans,
-interesting discussion.
-
-It seems that at least for these laptops, windows relies on a PEP
-(Windows specific) power driver to setup initial clocks/power rails
-then ACPI for peripherals if I understood correctly.
-
-From my understanding this is not unique to ARM? After all, from my
-experience s2idle on AMD is also configured using a PEP like driver on
-Windows/Linux. A lot of the AMD platforms I tested rely on triggering
-a specific mailbox on the SMU to enter s2idle instead of the modern
-standby dsms. This is implemented by amd_pmc. Then hw vendors use the
-DSMs for additional functionality such as disabling gamepads and
-keyboard backlight.
-
-In this RFC, you propose using a DP/ACPI hybrid to have the
-configuration that should be performed by a platform driver be
-performed by a DT instead. But this hybrid mode is only useful to
-bring up these platforms and is not expected to help in the future. So
-it is a lot of refactoring for not much gain?
-
-Therefore, have you considered if a small qualcomm driver would be
-realistic / possible where all it does is setup the configuration the
-same way as its windows counterpart does? Would it be too big,
-cumbersome etc, not worth the squeeze, where we should just stick with
-DTs for these laptops and ameliorate this deficit on the BIOS side for
-future laptops instead, since I understand some Qualcomm folk are
-working on making newer laptop variants ACPI only and that is great.
-
-Best,
-Antheas
-
+On Tue, Sep 29, 2026, at 09:27, Luca Ceresoli wrote:
+> On Mon Sep 28, 2026 at 6:04 PM CEST, Arnd Bergmann wrote:
 
 >
-> Upstreaming of these patches (to upstream or not to upstream?).
+> So I see two option for a better fix:
 >
-> 1. The first couple of patches in this series mainly implement a) + b) from
-> above. This seems like something genuinely useful to have; and except for
-> missing DT-bindings for hybrid mode this seems mostly ready to go upstream.
+>  * Option 1 -- fix the really affected drivers by switching from the
+>    deprecated API to the one they recommended one. Based on quick analysis
+>    there are about 6.
 >
-> 2. I see c) as a way to slowly evolve support for current Snapdragon laptops
-> to use more and more info from ACPI and get closer to a point where we only
-> need a single DT describing the SoC and any info related to laptop model
-> specific bits outside of the SoC can be read from the ACPI tables.
+>  * Option 2 -- a quick surgical fix:
 >
-> As mentioned above work is being done to have Linux boot on future laptop
-> generations using ACPI only, so all this applies to currently available
-> Snapdragon laptop generations only.
+>    In drm_of.h:
 >
-> The question is what to do wrt upstreaming patches necessary for c) though
-> (patches 7-12) are we going to allow new Devicetree files for not yet
-> supported laptop models to partially rely on ACPI?
+>      #if IS_ENABLED(CONFIG_OF) && IS_ENABLED(CONFIG_DRM_PANEL_BRIDGE)
+>       #include <linux/of.h>
+>       #include <drm/drm_bridge.h>
+>      -#include <drm/drm_panel.h>
+>       #endif
+>      +#include <drm/drm_panel.h> /* Temporary for *_of_get_bridge() */
 >
-> The current demo ACPI usage in this RFC series just instantiates I2C-HID
-> devices from ACPI. More interesting would be to hookup the embedded
-> controller (EC) handling in the ACPI tables instead of having to write
-> a special EC driver for each laptop model separately. For the EC parts
-> I believe that it might be worthwhile to implement c).
+>    This can easily be tracked and reverted once all
+>    devm_drm_of_get_bridge() users are converted to
+>    of_drm_get_bridge_by_endpoint().
 >
-> This new DT-ACPI hybrid mode works as follows:
->
-> 1. A new global ACPI subsys flag called acpi_dt_hybrid is introduced which
-> can be set to 1 combined with acpi_disabled=1. When this is done, then
-> despite acpi_disabled being set the ACPI tables will still get parsed and
-> /sys/firmware/acpi (tables) and /sys/bus/acpi/devices (fwnodes) will still
-> get populated. No devices will be instantiated, no fwnodes will get
-> attached to any other (e.g. PCI, USB) devices and no other actions will
-> be taken.
->
-> 2. Add acpi=hybrid kernel-commandline option to the arch/arm64 code.
-> TODO: Add a DT-binding for selecting hybrid mode from Devicetree.
->
-> 3. drivers/acpi/glue.c changes to support devices with an of_node as
-> primary fwnode having a "acpi-path" string property and when present look
-> up the ACPI fwnode for that path, e.g. "\\_SB.GIO0", "\\_SB.I2C1" and
-> set that fwnode as secondary node.
->
-> 4. pinctrl-msm changes to map special WoA ACPI table virtual GPIO numbers
-> for PDC pins back to regular TLMM GPIO numbers.
->
-> 5. Tiny drivers/i2c/i2c-core-acpi.c change to make it instantiate ACPI
-> described I2C clients under a DT instantiated I2C adapter if that
-> adapter has an ACPI secondary fwnode.
->
-> With this I can drop the DT description of the ThinkPad T14s gen 6
-> keyboard and touchpad and instead have these be instantiated by ACPI,
-> as shown in patch 12/12.
->
-> Comments, thoughts ?
->
-> Regards,
->
-> Hans
->
->
-> Hans de Goede (12):
->   ACPI: Introduce DT-ACPI hybrid mode
->   arm64: acpi: Cleanup acpi=[on|off|force] handling
->   arm64: acpi: add acpi=hybrid support
->   ACPI: Add helpers for dealing with ACPI fwnode as secondary fwnode
->   ACPI: glue: Implement setting secondary-fwnode for DT-ACPI hybrid mode
->   ACPI: scan: Retry acpi_device_notify() in DT-ACPI hybrid mode
->   ACPI: Make device_match_acpi_handle() also check the secondary fwnode
->   irqchip/gic-v3: Always call acpi_set_irq_model()
->   pinctrl: qcom: Add support for WoA ACPI tables virtual TLMM pin
->     numbers
->   i2c: acpi: Also register ACPI i2c_clients for adapters with a
->     secondary ACPI fwnode
->   i2c: qcom-geni: Fall back to i2c_acpi_find_bus_speed()
->   arm64: dts: qcom: x1e78100-thinkpad-t14s: Move keyb and touchpad to
->     ACPI enumeration
->
->  .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   |  61 +-----
->  arch/arm64/include/asm/acpi.h                 |   1 +
->  arch/arm64/kernel/acpi.c                      |  47 +++--
->  arch/loongarch/include/asm/acpi.h             |   1 +
->  arch/riscv/include/asm/acpi.h                 |   3 +-
->  arch/x86/include/asm/acpi.h                   |   1 +
->  drivers/acpi/acpi_apd.c                       |   3 +
->  drivers/acpi/acpi_memhotplug.c                |   3 +
->  drivers/acpi/acpi_processor.c                 |   3 +
->  drivers/acpi/arm64/init.c                     |   2 +
->  drivers/acpi/bus.c                            |   6 +-
->  drivers/acpi/glue.c                           |  70 ++++++-
->  drivers/acpi/property.c                       |  13 ++
->  drivers/acpi/scan.c                           |  33 +++
->  drivers/acpi/tables.c                         |   4 +-
->  drivers/base/core.c                           |   4 +-
->  drivers/firmware/efi/efi-bgrt.c               |   2 +-
->  drivers/i2c/busses/i2c-qcom-geni.c            |  10 +-
->  drivers/i2c/i2c-core-acpi.c                   |   8 +-
->  drivers/irqchip/irq-gic-v3.c                  |  29 ++-
->  drivers/pinctrl/qcom/Makefile                 |   4 +-
->  drivers/pinctrl/qcom/pinctrl-msm-acpi.c       | 196 ++++++++++++++++++
->  drivers/pinctrl/qcom/pinctrl-msm.c            |  47 ++++-
->  drivers/pinctrl/qcom/pinctrl-msm.h            |  35 ++++
->  include/acpi/acpi_bus.h                       |  16 ++
->  include/linux/acpi.h                          |  10 +
->  26 files changed, 502 insertions(+), 110 deletions(-)
->  create mode 100644 drivers/pinctrl/qcom/pinctrl-msm-acpi.c
->
-> --
-> 2.54.0
->
+> I'm working right now on option 1, hoping to get a series in a few hours
+> from now.
 
+Sounds good to me.
+
+> I can switch to option 2 in case of unexpected issues with option
+> 1, or if a fix "really right now" is wanted.
+
+It's only really a problem for randconfig build bots, so as long as
+you are fine with getting more reports (and possibly patches from
+others) until your fix is in linux-next, I don't think we need
+another workaround first.
+
+I've added your new series on my randconfig tree in place of my
+patch and will let you know if something comes up. 
+
+     Arnd
