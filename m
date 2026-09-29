@@ -1,44 +1,80 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 148C44F96BD;
-	Tue, 29 Sep 2026 15:14:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C15A43D88F2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 15:37:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790694879; cv=none; b=ZE/KfV9mhqdeRoYrSb11U1YscHZYDvySCHbu3Wvo7QTSoCYpyFCX7UWMzZ82JZKLh4YiRUm2lgp8gOcvMrqpk29FvW695YxjmMMnm45fvF60QHVF5/0FD233TB6f9/aCye+KupySGu7LTQRt8WmtPJg1Y2QFmLVhqLls7dK3Wlw=
+	t=1790696225; cv=none; b=HzlhWoqPv+NCHSGNsHJSV/L/OU6ukT4TdxoeG3DbMWDM2xr4OjGbBx4nwAHf/HNwHggBBlAQNmGXUeCSEj2jyMaS7Yr1v7AOLWQTb3QSSeqvhsGkiqa9dOPreKAK4D0aOHfCPCZZBE3ctZ9eQhmJVPnXdVRXA1QulWI2/QsVJso=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790694879; c=relaxed/simple;
-	bh=cBmrkm0EPkAggtTwxvkfGmwase8wo6C3mxJxvL0mNZo=;
+	s=arc-20240116; t=1790696225; c=relaxed/simple;
+	bh=ZfXedYkqY+BKBZBXX5A6LoKC4jkyILJ/d8OB5hU1wtA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=euZroNme8Tr8zLTb91AFgD+/JSsO1lhwC2LRmnsJM0h5q5uHBelFnc/eXaog7mq1KLGDJqVHxf+tTMVkiQYr3sHRTb35CU4K/NbiyphetFRJjAXLRzn9b2lRK3B7cCQueodBGvlUCS0R22to5kSUbFZfmnXAi65umZ1rnS3lZr8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CtI0l9nR; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=r7Pyp0A4FEsqtK3gS8ONgi0a/I3rHlcyMtqTG0Y/VgmNqmZhoRT5h/4aXfoneIFQdKifjXH3t942Tpfcff1z8qj84w6npHIkt9JqroLfcUKTi345bAML5St1hZlGFn7+NB/LJyf+AmsMULxzo9B8dbMbqXk7N5pSd7tcO+gXcdM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=MfEUS7kf; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CtI0l9nR"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68F8B1F000FF;
-	Tue, 29 Sep 2026 15:14:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790694867;
-	bh=n7ZrRQ1chnmodqK9THKeJa8hJHMiPCs9pg0BQi2fXeA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=CtI0l9nRs7p8TrmCKmtq7/sHv67qDSFDpaAXLUVYFOCVC3vVAcMCW/rOGX2x5xgtA
-	 NF/60wtgHieH95Ne7N5E7/0QhoXUKYn1nW+awwmcXlr+sJVGxJlXr2ivjTAnHCTSRZ
-	 z9QT0XPRduWmsdEzfW9hm5lokdohQtxBA/0duxgW8qRpm1NmUyI23NOryC7f+4+zA5
-	 0E9QTOCHdAjH2exdZyQ3C/1OsfbhgPlBwK2pm0+YHW0muVVuzo7PhKZ9Wp6neTuAq0
-	 qWTQDZK6XMTfrNdIpN8jNjDn+ZeaIEVIrtaYgQ28Mbb/6KciVUviJDNHUU+2R5H1ZN
-	 WbiRoyW6NbzaA==
-Date: Tue, 29 Sep 2026 16:14:22 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Runyu Xiao <runyu.xiao@seu.edu.cn>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Prasad Kumpatla <quic_pkumpatl@quicinc.com>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Jianhao Xu <jianhao.xu@seu.edu.cn>
-Subject: Re: [PATCH] ASoC: codecs: wcd937x: use devm_free_irq() for watchdog
- IRQs
-Message-ID: <442d1d5a-44fb-4165-9a04-9b81ffd6b15e@sirena.org.uk>
-References: <20260929094223.2086750-1-runyu.xiao@seu.edu.cn>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="MfEUS7kf"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4843f22dc83so3650727f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 08:37:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1790696222; x=1791301022; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ZfXedYkqY+BKBZBXX5A6LoKC4jkyILJ/d8OB5hU1wtA=;
+        b=MfEUS7kf3BfNEpEuhCbI81Ifa5dndCSQQkiMHyHrB3a1NMdqijQ6ks5FR28rYfF+9A
+         6RKRw/ugqykQX4WFVF+4bT4cZ+CTMkB1Td83Epxf+i+nJSGv0+7vE8vkr3oX7/J+Ook/
+         eFbWH/bcq+W412kY98c2oAxnQK6nEhk/nzo72W/pbUFDqK+9vat4/EFjYLz+zLnOBQgL
+         EwVcs+1MSIHdqhyToUmMxKz057Ur+neTthZTSxzCPt7mbFBWD1nLbFTEjF+W/DIoWuqi
+         Go6Us9wTJjt9K/3YdI97/QscLCHRA2b/X6cJQfReEeW2rRUZQACJGT8BCrETESkpGeM2
+         GhlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790696222; x=1791301022;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZfXedYkqY+BKBZBXX5A6LoKC4jkyILJ/d8OB5hU1wtA=;
+        b=Dj63tJwd0qUXOd0v0unORFA9E/3C+O7R5dWFF/UCct0Ho+1jvQnm3bXJ94yFCXhxSF
+         F+IXiUZ3Nl7bOC6lEacTUb8NTXOGi04/0FHH4wq9rth/yqMHZ5PZ9Ecab6+XHu2msWq6
+         /bs5XtvrmTuNVHk5t4pDcx0n56f2Z4ExHmj8vMgHsY/tudy7zylOnOw1aYDI93t7tfm8
+         RAO/31lD2aneVA1BJpYN8+G8njOyEZObxCz9sC4NAKeSHexT/bVmk9lWIzX5J6trY7Y2
+         0qodMjAHJ8NImYAyIyKEAdnqVrn+CQcn/7dzQ8tLY83q5EjdzyGY/a3EAZendyCVVUy6
+         awww==
+X-Forwarded-Encrypted: i=1; AKwUvBzgYeetNRoNkyrIT/QeQ4I2smeJt1edlvn3ez9mNMDWeQ0Yjr1HwiY2PAToex9cr3Wu8qIcutvGUhR9aHbx@vger.kernel.org
+X-Gm-Message-State: AFq9FYL1a5TSBQAKUVhk/m64DlJmS+KSYar/XXipcN4/7lmvlKzow+aX
+	iZBRltahsZxbSVeTcCWVwDwb2LOZ1mrgh69VGWDyKkM99dw0ECqzY70zhXwN9jlQWFIGnbChjVo
+	zhmkW
+X-Gm-Gg: AYBFou3gWC2u2hkW+Wx0zK6vv7jByI7Q4wePPWiI7Sy9OsglBtem9Qb99N+56m0z6K4
+	7F/eyickW5eXyGM5gx9+nLN9n/ErWzM0kw+9P3k/WJPGc9HCs9/X3BOv5YmuLGW3YbTNVi38DZA
+	awPqyjpFqe560tXxV9YVGQ8kJkNo9xV4m9xVpHG7EI3HNuS3wur0OAfN7NpUjHwV7g8re/zPKgt
+	aukPgCBEp/3q3NqG/Ulfm7xif6SOGAehLlMF9OMOtBl0ZcsY3WtG8JOtNVn5ro+wM4yyjtniYRs
+	3dedKVQcci0BEW+ldMAp3asotDXXiZ35/wHSUP5ToSocYuhg9CdxyN2U71tTdeDrruUe06M+VLl
+	EhkoszLB41B9Y5tk0m08NCZA4fW9pxhufcjbPT77nQ8x2Tgi0wzIOT8sqaW6Fpla46lvxmMIroX
+	7gnrKLNSnyjfzB3OMUF3pSX959jNeo00z834idLOJgjuvhv5tySti8DV6k8/POqJBV3FvdWBJsY
+	u/tIKiLI7s9Dy2mGEpj/vocLs2PnPgW9YJYqoABbp8GNBXcoSZ4zpBUcTAPgA==
+X-Received: by 2002:a05:6000:703:b0:487:13ab:142 with SMTP id ffacd0b85a97d-48872abc483mr31447342f8f.35.1790696222042;
+        Tue, 29 Sep 2026 08:37:02 -0700 (PDT)
+Received: from localhost (p200300f65f19a904123cb16e9a8bb736.dip0.t-ipconnect.de. [2003:f6:5f19:a904:123c:b16e:9a8b:b736])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-48af5056a16sm4647768f8f.18.2026.09.29.08.37.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Sep 2026 08:37:01 -0700 (PDT)
+Date: Tue, 29 Sep 2026 17:37:00 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/4] clk: qcom: Add lpass audio clock controller driver
+ for Glymur
+Message-ID: <arvaq9M5aO7RVYSl@monoceros>
+References: <20260922184425.56114-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260922184425.56114-4-srinivas.kandagatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,40 +82,53 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="0gqpM7CipBeFoiIo"
+	protocol="application/pgp-signature"; boundary="bxlqyfqepcg4nu2t"
 Content-Disposition: inline
-In-Reply-To: <20260929094223.2086750-1-runyu.xiao@seu.edu.cn>
-X-Cookie: 1 bulls, 3 cows.
+In-Reply-To: <20260922184425.56114-4-srinivas.kandagatla@oss.qualcomm.com>
 
 
---0gqpM7CipBeFoiIo
-Content-Type: text/plain; charset=us-ascii
+--bxlqyfqepcg4nu2t
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
+Subject: Re: [PATCH 3/4] clk: qcom: Add lpass audio clock controller driver
+ for Glymur
+MIME-Version: 1.0
 
-On Tue, Sep 29, 2026 at 05:42:23PM +0800, Runyu Xiao wrote:
-> The watchdog IRQs are requested with devm_request_threaded_irq() from the
-> codec component probe, but the remove callback frees them with free_irq().
-> The devres entries remain in place. Component teardown later tries to free
-> the same IRQs again.
+Hello,
 
-Surely the obvious thing here is that we shouldn't be using devm for the
-interrupts in the first place, and/or should be moving to the driver
-probe and not having to manually free them in the first place?  This
-isn't the right fix.
+On Tue, Sep 22, 2026 at 07:44:24PM +0100, Srinivas Kandagatla wrote:
+> +#include <linux/clk-provider.h>
+> +#include <linux/err.h>
+> +#include <linux/kernel.h>
+> +#include <linux/mod_devicetable.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
 
---0gqpM7CipBeFoiIo
+Please don't use <linux/mod_devicetable.h>. That pulls in many unneeded
+dependencies and I'm working on getting rid of it.
+
+Just rely on <linux/platform_device.h> to provide of_device_id
+(preferred), or include <linux/device-id/of.h> if you want to go full
+iwyu.
+
+Best regards
+Uwe
+
+--bxlqyfqepcg4nu2t
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq71c4ACgkQJNaLcl1U
-h9B/Gwf+LmLi7L4KpHRMV4uNMb+G7iruhgUAc8R49wEdQm6Rmkyo3uWGWBDXf7mb
-dKPybGCA3Y6LmrbqaFfksOvVfz9sEWg7sj55xtzdhuYoDGP4yhOAz78Y6/9RfQaq
-y18LyAkuN0XfYmC2FP0t8eRGkEuzYhKskObFlvCaYriSHLDUS4WNGm7ZftBP+ewT
-sRRsjAlSgHC/s+61x4OynhgQ/219KGeMcWLOapCn41AgvvAsPTJSf2u/2wYeiUJA
-B5NkAfvVV1FjALI8NMQNifIICuWW0MO9rsiJ0T03PM6T4xyOoZgpBq/OrELYw468
-U34gvHfTY0EfAeuPqYrl4Pu7f6ha2g==
-=bu/Q
+iQEyBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmq72xkACgkQj4D7WH0S
+/k6kBAf4kOBFV8X54QSaUA2drytAFm1AWOMNOdRBmU6yY64TUWxW0ucR2aSy7o/J
+/yrQTDzdn8RgenjsGrl9iGOfOs2G0TGRLNMiJ+xivGPKPZoVAmKvjLV17B2xTfy0
+31Qgy8JGmoxizoOfsQP/BMJnnThCdEAqHLuLW/WSFNqZlGGOPZ7O+OnsNn8KD1l1
+ZyRNOo6+uFI0N49sVHcrSVau/vkV6B0RQIZRWHVn3czU8qT+XEAPayaSULauF+6S
+lfvqQSraHK3Ji+Q6Kg7SmQV++dN9xwTQnTvoe5c/VgB9pb5x8MSt6ckDOh5ber73
+DLYbbptZH2au4aATXTKSCEIgt8k/
+=Dnk/
 -----END PGP SIGNATURE-----
 
---0gqpM7CipBeFoiIo--
+--bxlqyfqepcg4nu2t--
