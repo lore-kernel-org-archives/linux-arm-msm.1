@@ -1,37 +1,37 @@
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 399F454CF69;
-	Tue, 29 Sep 2026 18:29:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26761545DAF;
+	Tue, 29 Sep 2026 18:29:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790706547; cv=none; b=YCtv+OqdpHGlSwquEXJrTpe/Z27fkoj39tOtdG3S9euxVY7BxMppjGXaVcWmmOKRSLccBdtbdUytb6QXiRHPCNzJymveJjJD+DxRDRR8/T+YEyZt4k+CQ3wcqNCXcnzrivox1Rfze/kz0jytHfFDd8XkydOigXf6qp3J2F41b28=
+	t=1790706549; cv=none; b=BFozkmlnIDLhhhTN3BUqlWRg2QJmMVgoDCtZYzShnUD4YDiBL5xwbK9NjybReoprdgJeeGHmrvg0Z3ACxca3ncwqkn/YdzZygFICTOhm99yaVNSd2a6gudU9RZsmnDmJIE/VXTNiDRJHn0sB+J6uxCw/Ut1Nck0kNtGJ8DqNFQQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790706547; c=relaxed/simple;
-	bh=E08EmZqj+7SJGDa5d2FXqN8Ur6cIxJrbWl6Z3TSjPmY=;
+	s=arc-20240116; t=1790706549; c=relaxed/simple;
+	bh=oxkAfnnfUHZLCN1LsIX3vfohY3GBL9Qx6kRG0WJioMA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Bu/ovLzzNp82QT4OG+KMXaeb+96W46jtHZtk1ozC3nYs7wdDfaxt0i0VkX1cgeRvZXrcYB06Q/N8XMG25Zl36F2XMe7VISfs/TThFwOtAmxwLj/rOi15R4wqNYzun77w8/e3IGmxO7ayrcrBwk7FDva2CFG9MI7W6oXHW3w/TfM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=oxJIbMXI; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=lRnn0EpT; arc=none smtp.client-ip=5.75.144.95
+	 In-Reply-To:To:Cc; b=VLmWiWWa4zRcye+aFq3rIHWL99shWd+S1eOWA8YzFfgcp81joOZsebSuvTDOX6JPkgjR4vtfg7cSxYvu00pyeXD2UpQ8aolVV1DRr3BQR040X0rX/2dHSznkur2DyI+c6o4321FCmtctx1YOPZrSbvIkdgIEez0+ZvPoh1Yt1uc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=dIVo02SX; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=x1Vg+25n; arc=none smtp.client-ip=5.75.144.95
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="oxJIbMXI";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="lRnn0EpT"
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="dIVo02SX";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="x1Vg+25n"
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1790706528; bh=S9o7ScQfkfSzLz17lK4NdKG
-	74KRbwYSWMnVJGKXD7HA=; b=oxJIbMXIo77wMpY7hM4dkmTiRfersrolHnIZD4db+lvbPHXqRJ
-	3gqNIMO/hMGCvJrFm2vgTuQvjsof7Yo4zDiOdbuu7gdmz1ySnN3YyVzgcWeKeXr5U7czsTYzFTm
-	oBExZyqp7fscunmW9dkhU5ioAo8jMlQjdsGkdt0i42JaT+noXZNOIanK29OK1+jQSE/CbrocTRM
-	fSDugVSvvgHKqOZDrjm0iELiQlF79B2Rgbt8cV/C1nayBcSSTkrH2VNKQl1ss0+k/vMRX9J1oPv
-	A0xvEmtvp5VaFtExN10u11+Klmy16OJXvuZv04+xSreeekj+BVHvaWDubJgiqLbtFGA==;
+	h=To:Message-Id:Subject:Date:From; t=1790706524; bh=uyLBclGccRqlV/1Ed7yjAWa
+	or8gd7y11+OdY3H6pDgQ=; b=dIVo02SXZjiXYdAJoDxKe6ZgUPbdKESQWuyL2bKNXzfk5fRbLo
+	w6qrYvFudYIPCOCKxg7OPT6HFBC1cCE2CoXUUq0rahVkbTmTquFi7rxvH+F1Cdt+C29NHRPczQ2
+	Bw19KSx0wwpnTD20gsi+ibOM06vZq6yOaFNRULCtgNFs2EY8BuMQADBIVBDan2Xh6xuI3B0Oces
+	d8afrl7Kk6SjzhGh5LmIp3o6ETCNlpiyUWaJnBezwf6u5HLOhhZICyVb3LUM9m0fSEJSY/PSSoy
+	mzV3ljPYxWVe3AAOcnxpyWt0KRf4OB6kWVQbXUPBjEs4dgcdobjw6MJsUGdWueK8MKQ==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=To:Message-Id:Subject:Date:From; t=1790706528; bh=S9o7ScQfkfSzLz17lK4NdKG
-	74KRbwYSWMnVJGKXD7HA=; b=lRnn0EpTk6qSvjBFzmwCEum8ZLZ6XV5PMZxvBLvN9CQF2OcSC0
-	7npsq47mthlPamg1nrpUaf14gjKOYQDm9aDg==;
+	h=To:Message-Id:Subject:Date:From; t=1790706524; bh=uyLBclGccRqlV/1Ed7yjAWa
+	or8gd7y11+OdY3H6pDgQ=; b=x1Vg+25nC+gqOI5w0R6SIwmNJDEVrOnUek8aM5sDy+YoR0tvEZ
+	CLWMr+geA/+KTVelmu4ZbO2uqHyzhLYrXBBg==;
 From: =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
-Date: Tue, 29 Sep 2026 20:28:31 +0200
-Subject: [PATCH v2 2/6] pmdomain: qcom: rpmpd: Split SDM632 pm domains from
- MSM8953
+Date: Tue, 29 Sep 2026 20:28:30 +0200
+Subject: [PATCH v2 1/6] dt-bindings: power: qcom-rpmpd: Remove unused
+ MSM8953 indices
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,7 +40,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260929-sdm632-rpmpd-v2-2-97ef8858161b@mainlining.org>
+Message-Id: <20260929-sdm632-rpmpd-v2-1-97ef8858161b@mainlining.org>
 References: <20260929-sdm632-rpmpd-v2-0-97ef8858161b@mainlining.org>
 In-Reply-To: <20260929-sdm632-rpmpd-v2-0-97ef8858161b@mainlining.org>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -54,87 +54,58 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-remoteproc@vger.kernel.org, 
  =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790706517; l=2562;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790706517; l=1718;
  i=barnabas.czeman@mainlining.org; s=20240730; h=from:subject:message-id;
- bh=E08EmZqj+7SJGDa5d2FXqN8Ur6cIxJrbWl6Z3TSjPmY=;
- b=A/NJjHR8sIwZnYdHS7JdnvX09wQtDMZ0h6P+Xs4UxDLtM2FLMJXpgmNJ44dvdxFVLiTNEkedK
- ptIxoc+R6aaCr25tgg2Q5jthteKW/aoroDu+QScsYnIBRtlUFXm/qQq
+ bh=oxkAfnnfUHZLCN1LsIX3vfohY3GBL9Qx6kRG0WJioMA=;
+ b=4mGy5INwQZDh9bueSuLa7B8mFN8FN75ToDgFjyjNlj9QG6KbFHvxwbuLKJRknJwnNuzD3y/rm
+ wPbD4GXOsbqA5lfecpBp7n7xPilQ3VCd3KIFHpW8KlBnMUExAmeL0qn
 X-Developer-Key: i=barnabas.czeman@mainlining.org; a=ed25519;
  pk=TWUSIGgwW/Sn4xnX25nw+lszj1AT/A3bzkahn7EhOFc=
 
-Remove modem related pm domains from MSM8953 rpmpd because MSM8953 MSS
-is using mss-supply as regulator.
-Split SDM632 rpmpd from MSM8953 because SDM632 MSS is using mss-supply
-as pm domain.
+Remove unused MSM8953_VDDMD and MSM8953_VDDMD_AO used for MSM8953 MSS
+because it is using mss-supply as a regulator.
+Define RPMPD_VDDMD for SDM632 MSS because it is using mss-supply
+as a pm domain.
 
 Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
 ---
- drivers/pmdomain/qcom/rpmpd.c | 29 ++++++++++++++++-------------
- 1 file changed, 16 insertions(+), 13 deletions(-)
+ Documentation/devicetree/bindings/power/qcom,rpmpd.yaml | 1 +
+ include/dt-bindings/power/qcom-rpmpd.h                  | 3 +--
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pmdomain/qcom/rpmpd.c b/drivers/pmdomain/qcom/rpmpd.c
-index 5f55fc791131..c37a79d6bc43 100644
---- a/drivers/pmdomain/qcom/rpmpd.c
-+++ b/drivers/pmdomain/qcom/rpmpd.c
-@@ -503,19 +503,8 @@ static struct rpmpd md_s1a_corner_ao = {
- 	.key = KEY_CORNER,
- };
+diff --git a/Documentation/devicetree/bindings/power/qcom,rpmpd.yaml b/Documentation/devicetree/bindings/power/qcom,rpmpd.yaml
+index a70bfacbc5d1..4b263a982fca 100644
+--- a/Documentation/devicetree/bindings/power/qcom,rpmpd.yaml
++++ b/Documentation/devicetree/bindings/power/qcom,rpmpd.yaml
+@@ -51,6 +51,7 @@ properties:
+           - qcom,sc7280-rpmhpd
+           - qcom,sc8180x-rpmhpd
+           - qcom,sc8280xp-rpmhpd
++          - qcom,sdm632-rpmpd
+           - qcom,sdm660-rpmpd
+           - qcom,sdm670-rpmhpd
+           - qcom,sdm845-rpmhpd
+diff --git a/include/dt-bindings/power/qcom-rpmpd.h b/include/dt-bindings/power/qcom-rpmpd.h
+index 4371ac941f29..120f8855b427 100644
+--- a/include/dt-bindings/power/qcom-rpmpd.h
++++ b/include/dt-bindings/power/qcom-rpmpd.h
+@@ -19,6 +19,7 @@
+ #define RPMPD_SSCCX_VFL		7
+ #define RPMPD_SSCMX		8
+ #define RPMPD_SSCMX_VFL		9
++#define RPMPD_VDDMD		10
  
--static struct rpmpd md_s1a_lvl_ao;
- static struct rpmpd md_s1a_lvl = {
- 	.pd = { .name = "md", },
--	.peer = &md_s1a_lvl_ao,
--	.res_type = RPMPD_SMPA,
--	.res_id = 1,
--	.key = KEY_LEVEL,
--};
--
--static struct rpmpd md_s1a_lvl_ao = {
--	.pd = { .name = "md_ao", },
--	.peer = &md_s1a_lvl,
--	.active_only = true,
- 	.res_type = RPMPD_SMPA,
- 	.res_id = 1,
- 	.key = KEY_LEVEL,
-@@ -703,8 +692,6 @@ static const struct rpmpd_desc msm8917_desc = {
- };
+ /*
+  * Platform-specific power domain bindings. Don't add new entries here, use
+@@ -84,8 +85,6 @@
+ #define QM215_VDDMX_AO		MSM8917_VDDMX_AO
  
- static struct rpmpd *msm8953_rpmpds[] = {
--	[MSM8953_VDDMD] =	&md_s1a_lvl,
--	[MSM8953_VDDMD_AO] =	&md_s1a_lvl_ao,
- 	[MSM8953_VDDCX] =	&cx_s2a_lvl,
- 	[MSM8953_VDDCX_AO] =	&cx_s2a_lvl_ao,
- 	[MSM8953_VDDCX_VFL] =	&cx_s2a_vfl,
-@@ -844,6 +831,21 @@ static const struct rpmpd_desc qm215_desc = {
- 	.max_state = RPM_SMD_LEVEL_TURBO,
- };
- 
-+static struct rpmpd *sdm632_rpmpds[] = {
-+	[RPMPD_VDDMD] =		&md_s1a_lvl,
-+	[RPMPD_VDDCX] =		&cx_s2a_lvl,
-+	[RPMPD_VDDCX_AO] =	&cx_s2a_lvl_ao,
-+	[RPMPD_VDDCX_VFL] =	&cx_s2a_vfl,
-+	[RPMPD_VDDMX] =		&mx_s7a_lvl,
-+	[RPMPD_VDDMX_AO] =	&mx_s7a_lvl_ao,
-+};
-+
-+static const struct rpmpd_desc sdm632_desc = {
-+	.rpmpds = sdm632_rpmpds,
-+	.num_pds = ARRAY_SIZE(sdm632_rpmpds),
-+	.max_state = RPM_SMD_LEVEL_TURBO,
-+};
-+
- static struct rpmpd *sdm660_rpmpds[] = {
- 	[RPMPD_VDDCX] =		&cx_rwcx0_lvl,
- 	[RPMPD_VDDCX_AO] =	&cx_rwcx0_lvl_ao,
-@@ -954,6 +956,7 @@ static const struct of_device_id rpmpd_match_table[] = {
- 	{ .compatible = "qcom,qcm2290-rpmpd", .data = &qcm2290_desc },
- 	{ .compatible = "qcom,qcs404-rpmpd", .data = &qcs404_desc },
- 	{ .compatible = "qcom,qm215-rpmpd", .data = &qm215_desc },
-+	{ .compatible = "qcom,sdm632-rpmpd", .data = &sdm632_desc },
- 	{ .compatible = "qcom,sdm660-rpmpd", .data = &sdm660_desc },
- 	{ .compatible = "qcom,shikra-rpmpd", .data = &shikra_desc },
- 	{ .compatible = "qcom,sm6115-rpmpd", .data = &sm6115_desc },
+ /* MSM8953 Power Domain Indexes */
+-#define MSM8953_VDDMD		0
+-#define MSM8953_VDDMD_AO	1
+ #define MSM8953_VDDCX		2
+ #define MSM8953_VDDCX_AO	3
+ #define MSM8953_VDDCX_VFL	4
 
 -- 
 2.55.0
