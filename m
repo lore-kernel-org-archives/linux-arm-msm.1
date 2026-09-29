@@ -1,47 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BFE03EF670;
-	Tue, 29 Sep 2026 03:16:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79C9B439351;
+	Tue, 29 Sep 2026 03:16:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651783; cv=none; b=KBRm9HcocEps/K48vC6VV7sw6dqlnrwvMyLar82Hv7O7gmjVg+rDvKWa/J04elD5Af4VCIVRjmA6rDcvZBRrd901OvKhG2P91wSEQUHQ/dl8VZljCK04KvZQqpEcAJdufjTXxQg+BGWyBWxLtqtKzob6Jy38Y4NaLBW3zfprVNM=
+	t=1790651775; cv=none; b=e76K4pKh+nnkqstxRznuVrxGmo31wy+8cdR8AfF6EvjT4CP0QA5LVynFvwyf6zrqwI6Jl61UklW7DwZlLNnuttSTsRq4my1JEg8re47+pWbNzKgmwS36xlrc3ae7DaWqT5BvQCFFzexhYn52K96k09UqaTCt9jnraaExZT4Tu+o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651783; c=relaxed/simple;
-	bh=Tv6c29E3oPUK8ET6kCm2bmwGECRoq1rFJ6nVBQiLbHQ=;
+	s=arc-20240116; t=1790651775; c=relaxed/simple;
+	bh=BJc/YxdYCyotbfwriRpcpylvaPg1cMaBsyVlUZ8plfU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qZbWjnXlukBg/ef/K8ye+KkArd7Guz68pINMUIXPJkZPEhIJbIZJ8EoQvjHiPRZuQ0EYcqbIsLRIniSZOgFQZdycwUfP2rG1hZeAt/oGwr+ilDNqlTpH2joorseZfQMPQkzeGn9Kfjas41SVKkfslLuZ51DPrsC01AhK2WDabWo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Gs9fa7Od; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=B/sedeoWyOzHgxbDqzchpJVFeb87WqhPkG70IGV53uH9kM1gL/6RS1iGw/wkAk85OuctAUPNxskycrESb3sgniUTx027hhipuPgIzUTe/1e3POYNjrGuqDSzh8MVG3AuYfkmdWlOZr3cW12u5Nv7kpXz/JM4I4hiAzwv/uZQCQ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oowM13dg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Gs9fa7Od"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66A811F000FF;
-	Tue, 29 Sep 2026 03:16:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oowM13dg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAA2E1F00893;
+	Tue, 29 Sep 2026 03:16:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790651776;
-	bh=qDqr6/DCmkM7zSogsKePJKjRw3YTxUIZkVQYVzKC7bs=;
+	s=k20260515; t=1790651769;
+	bh=gg3aBBfEcK/nyaczZkB5x4PV1iemV2YK7rLvy6L1j24=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Gs9fa7OdxirM+jqu4k+x+MCQNv+fzvWhfYofxDbcN9JY7Nqt12a/18T1R6AwE5HaZ
-	 y04/Bdyiicwy3MeL9kPHM1SWne3qRK3+G4FJsC04Kii2klc7heypSX9PJkYmIPtfSF
-	 qVuN1ImWC4GOO0hqpLjh4kJjbaKCPBU+2cSIYw03Gwe9a7Go9zqxg1gSYkMf/zOZ4j
-	 0GPwipBC0Vyvb2ng/+Ukd65U42fl9eoGa6nXkRUqccPNoRqOBHxT7OrkhRLKlf3sks
-	 yMQtE0CEGIT2WiR728Zj2f5q7HfHjOAsqQh2JhY+LOp6TEsQjRy0a11FrnyTc85qNZ
-	 iSABinZFWuRKA==
+	b=oowM13dgJs/rEtGQfx3gYJOIezEOZdK/hGdm1gv56QmyBkAkhloV6dPRlKDFWvNwe
+	 UW8ru6kBc4BM/tnSGgS153uGmRZo1DgAFs5sQCI9oq/uPxYBLv7/f0VS4YpEgeyVKU
+	 x8bTtZ6K5uSVgcku7kReKXhh7rRKltdBvDnS7qS9Ay5ufafMWJe9V9FbIgYHexcgWE
+	 MtuvGZzb6bCZ/jLrQuLSJSGPrf4M5lBvdQfB83T1AmFKdmIpFxkkwpYSO8bGczRQuF
+	 3Hwvb7HZvA8UkOB0/yqfjMQ6fJC3zYILKzLwVt7Fdv0x1S99B9g/GZJyRa2+0IOFbq
+	 OZflU3g7pPbsA==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Md Sadre Alam <md.alam@oss.qualcomm.com>
+	Loic Poulain <loic.poulain@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v2 0/3] Enable quad SPI mode for SPI-NAND on IPQ RDP boards
-Date: Mon, 28 Sep 2026 22:15:08 -0500
-Message-ID: <179065170932.2673486.1188980179031046742.b4-ty@b4>
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] arm64: dts: qcom: monaco-arduino-monza: Rework fan cooling map
+Date: Mon, 28 Sep 2026 22:15:03 -0500
+Message-ID: <179065170892.2673486.12612519104927393729.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260807-quad_dts-v2-0-6f578d4152b7@oss.qualcomm.com>
-References: <20260807-quad_dts-v2-0-6f578d4152b7@oss.qualcomm.com>
+In-Reply-To: <20260803-fix-fan-monza-v2-1-c10af16c552c@oss.qualcomm.com>
+References: <20260803-fix-fan-monza-v2-1-c10af16c552c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,27 +51,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 07 Aug 2026 22:05:30 +0530, Md Sadre Alam wrote:
-> Several Qualcomm IPQ RDP platforms support quad (x4) SPI transfers
-> between the QPIC SPI-NAND controller and the attached SPI-NAND device.
-> However, the corresponding device trees do not currently describe the
-> bus width capabilities of the flash device, causing transfers to fall
-> back to the default single-bit (x1) mode.
+On Mon, 03 Aug 2026 13:55:57 +0200, Loic Poulain wrote:
+> The fan thermal zone previously had a single "active" trip at 32C mapped
+> to the fan over the full cooling range (<&fan 0 THERMAL_NO_LIMIT>). With
+> the default step_wise governor this only ramps the fan one step per poll
+> according to the thermal trend, so the fan speed tracked whether the
+> temperature was rising or falling rather than the temperature itself.
 > 
-> This series enables quad SPI operation on supported IPQ reference
-> design platforms by adding spi-rx-bus-width and spi-tx-bus-width
-> properties to the SPI-NAND device nodes.
+> A visible consequence is at boot/reboot: if the board comes up already
+> hot but thermally stable (temperature above the trip but not rising),
+> step_wise sees no upward trend and leaves the fan at a low or zero
+> cooling state, so the fan stays slow despite the high temperature.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/3] arm64: dts: qcom: ipq9574-rdp-common: Enable quad SPI mode for SPI-NAND
-      commit: 1f6925d80ae327ab4e18e21b7c87c57b793c462c
-[2/3] arm64: dts: qcom: ipq5424-rdp466: Enable quad SPI mode for SPI-NAND
-      commit: 4d36e6d8c5a489c85d9440fc7330beee9b74f6f0
-[3/3] arm64: dts: qcom: ipq5332-rdp-common: Enable quad SPI mode for SPI-NAND
-      commit: be63397b43a4b1b3c4fbdb149413dacd8ad5a844
+[1/1] arm64: dts: qcom: monaco-arduino-monza: Rework fan cooling map
+      commit: 4e7a6ce7925c463f9e888c87a1a40e68db8a32a9
 
 Best regards,
 -- 
