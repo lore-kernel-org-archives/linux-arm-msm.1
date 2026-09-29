@@ -1,49 +1,53 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8E26443C26;
-	Tue, 29 Sep 2026 03:16:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCFF543DEA4;
+	Tue, 29 Sep 2026 03:16:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651783; cv=none; b=Dp09B6AHy90bjP+K9Garzktp/g+2bknW9xp2g2l7J9iycn2MuX2ENVoAMoGh9pchpl7EZHa6I1rs42Xrt9nfSXZMQPLhZ7Qh/tYpMYaEa0BcyXVV1AuR8SF9XJl6Ly2JvRBkSFURqHF+q4cn40KhzqAgzrqnM/hLpqQMq5pA5Ic=
+	t=1790651776; cv=none; b=iQVoTF4TYKX1vz1qeG8/Jj0aJHW0Xnvi4E5X9J0E8SBc1dHZEui1vu/nF90lUCsYSKpgz7ANAVBgwrv+q2BYz9CCHzrKnm8nW4LV0JDYW7CCwpug+7tH9sU8aHKy2hOM2tpsTHyGg5TQaiUIfNCIqx6IKtNKxkuJ1nT+30e/TJk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651783; c=relaxed/simple;
-	bh=v7VPoa4lzxOzrwlGfJKA0ieVZ+g3dgqkncfJGHlkWGU=;
+	s=arc-20240116; t=1790651776; c=relaxed/simple;
+	bh=xrlWi6Hgqw5dqCNreFy9RZCbFcBfFsn0QSaFeIQz00I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GBQvmLAgkHORrHBw13806d6Sk36Xwt4V/z2FNf4C2ml9n+wtwTN9NOnzjGEFUud0BV5QJr6hDSHVyanfD4tty6IYcnO/jzmYvHIDQe594gBqUskUNUPo+lnET4EBcqvSlWTfuZW80T+fcCauDFofIUsz5dRETrmTDk9wGHzo4LU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QgSXb/gz; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=h9QrOdC9rQXka98T0oQzHg2YM6b78BimqvchhFAm8gY0XOOcQKbp+cjuqi1Mh5xwOItPDmJAvuTXJEnNolnV++J5LgBEEfbfxrzv7/ZEqDZPPPN64j4hs7dxilkjpvBQ6LUoL6KsXduVA2ZUSo0Fu7u72IstkUcvIR3B6CgaElM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wu7egh8b; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QgSXb/gz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DABF1F00899;
-	Tue, 29 Sep 2026 03:16:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wu7egh8b"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D7EF1F00898;
+	Tue, 29 Sep 2026 03:16:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790651775;
-	bh=0ohlPmIWFldfey9QmVeEfxogMhYCAEr8G7bJBmDnMBo=;
+	s=k20260515; t=1790651767;
+	bh=Pu60Aonp5fRplcoVv/G3kuYa4Y5jeXS0EUFSRyUhXag=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=QgSXb/gzdvD4RkSp9sinryAaUE8SsPp8nY0/cgu1AEB0zZQDbzEef5/wZs1Til14k
-	 opA/jy6nLSjgrRiI06er7zhh60mUmxdbsiiSj0R9zFR/BcC+jD+wr12eWEyebyIVfX
-	 MX/3v/NCYREqCFWDuoD5KndvqCtvnWXEsRre50EJ7AcfmDswJR1NlcFfR/+gk0Sgzb
-	 bum0eNcl2ZofZzJC0bEmKAXkptb6j/SBDsGln0urn4PFWxBFVGAvjULsy8MMuLmBC6
-	 4wntOlKIFSevXmy/Wd7HqZDPTTiEmvaQwbrLt39eOHZrj2KBYxCmWV1xLspzeIeljv
-	 414ONv/8p/h1Q==
+	b=Wu7egh8biytkkYmc7niCCCIG4XDAaR7Gz2/TxaJdUAA7P9IEfXyQnajP4bv+OKVf3
+	 ips9wyRZZ441mKZdOd8eMhYyCcmUQXfKRqpdUHH6L9ykQR5wNu4vXRVYYBHZ7Hs7Q0
+	 OTPrv7m8rEQrmuafCUfofLrQcJb/7ySfD6pmTtjnFnRv4ee/vf0tLKAl32lxVyxCSj
+	 Jgghd4EzYlzp1gbnqHJMVO00AR9C16UWwLcXuIrcuIT3vnHCnbvqdEtFXlDojEJ0k/
+	 oHEC1Po5GTUflL7o/2ADp38B+kxaps8n2U7dbpO3ufG/GgMmcX0fmQ2gl8mzPCF/NY
+	 TRIglySJO8+Rw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
+To: Lee Jones <lee@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Luca Weiss <luca.weiss@fairphone.com>
-Cc: ~postmarketos/upstreaming@lists.sr.ht,
-	phone-devel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Antony Kurniawan Soemardi <linux@smankusors.com>
+Cc: phone-devel@vger.kernel.org,
+	Rudraksha Gupta <guptarud@gmail.com>,
+	mfd@lists.linux.dev,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Subject: Re: [PATCH v5] arm64: dts: qcom: sm6350: Add CAMSS node
-Date: Mon, 28 Sep 2026 22:15:07 -0500
-Message-ID: <179065170964.2673486.936406235602291576.b4-ty@b4>
+	linux-arm-msm@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v4 0/7] ARM: qcom: msm8960: enable WCNSS (Bluetooth & Wi-Fi)
+Date: Mon, 28 Sep 2026 22:15:01 -0500
+Message-ID: <179065170989.2673486.6364941402563355375.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260901-sm6350-camss-v5-1-49020da3bf35@fairphone.com>
-References: <20260901-sm6350-camss-v5-1-49020da3bf35@fairphone.com>
+In-Reply-To: <20260803-msm8960-wifi-v4-0-5ffa27aea39d@smankusors.com>
+References: <20260803-msm8960-wifi-v4-0-5ffa27aea39d@smankusors.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,13 +58,30 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 01 Sep 2026 11:44:09 +0200, Luca Weiss wrote:
-> Add a node for the CAMSS on the SM6350 SoC.
+On Mon, 03 Aug 2026 02:03:44 +0700, Antony Kurniawan Soemardi wrote:
+> Enable the WCNSS (Riva) subsystem on MSM8960-based devices to support
+> Bluetooth and Wi-Fi.
+> 
+> Add the required device tree nodes and resources, including memory
+> regions, clocks, interconnects, and communication interfaces used by
+> the WCNSS firmware and drivers.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sm6350: Add CAMSS node
-      commit: 0d30774864138136e46e2f209515f7b332cd5c48
+[2/7] ARM: dts: qcom: msm8960: add RPM clock controller and fix USB clocks
+      commit: 852f2692b8ecb8ea48595ed24ade3b44cfc3f4ae
+[3/7] ARM: dts: qcom: msm8960: add SCM
+      commit: f3da0adc48f09ea11d38781e062a47f22c31d8fd
+[4/7] ARM: dts: qcom: msm8960: add SMEM & hwlock
+      commit: c55503516d8ac3957f2181de021ce97ec1b008f4
+[5/7] ARM: dts: qcom: msm8960: add SMSM & SPS
+      commit: 0abc6d0c187f390353559571aa7c57d0cb933b23
+[6/7] ARM: dts: qcom: msm8960: add Riva
+      commit: 6453789d4362f325cfe4f95afc34663e6966c4b6
+[7/7] ARM: dts: qcom: msm8960: huashan: enable Wi-Fi and Bluetooth
+      commit: 54d08947a7eb9163938853bf00588ebcf64f6561
 
 Best regards,
 -- 
