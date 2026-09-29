@@ -1,56 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CDA1443C07;
-	Tue, 29 Sep 2026 03:16:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E525A476CD2;
+	Tue, 29 Sep 2026 03:16:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651791; cv=none; b=YhwErAaMZl3uIgi+g77dEJqx/K3jNmigNWGjgoz+qlF7uoP/UmgID4Bz1nDx0LmYeQrWE1LeYax9o63CplL3ESTgQPgCBHc8ej0dMlIbnMMBHXy94HbyFuAyn2pBJn1ifu2LTMZNH5O4mdsy9pLcDDF++mQytM16wN/Tn+dYKr4=
+	t=1790651798; cv=none; b=Yoi01s9QvzWclvkysWZ0+dgnvHjzWD2bT50o8ETHEaJGG8beDrOyxXzI1rKZFCaawuaxqbSGobHsL6UsBHddxQlQzVQGDbfj26msRXleiAyqZ4vfnWx+eqTq+MbOChZTnfSi76MEwJ4xV9PGB6DW0JTkriEF1PNUJuxxZl286lE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651791; c=relaxed/simple;
-	bh=FhKS573eypf9ACHhX4eCBPBBT42THTnvtGEfkXUVxsA=;
+	s=arc-20240116; t=1790651798; c=relaxed/simple;
+	bh=OmG/LK986iAnKXSEmqSWcHKQosBNBSZElEeTZjb4HVw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=T73NXutCSEcMK1eJEO2mYWw+pPcyTNazI5O+GRLnPk3QGdCKnbQ4a3cRQ9dU3Bt57h3wlfpaqfI5wAu9pb2W55QfbzEw8GNy9i4DgQdq9dRdLJzCabXNQ0MXOt2SB4i5Eho6FQK9moLHFA5Ak8xT6Ph2HAL2uQEmApar9rtFWcY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dIkkvw/g; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=u5Xn4+iopAqOmsVlgwv8JZRFArAVGg578I9sesbElVbE0Q/VZiDsdNzwVAj77zEU8y8iAt85QadOi9TKZKdtBc5qYUe9B8IHuvrTbm4e9AHkMhnQWZ6+bAE29LbK/s3l+gy4MIaYwCjiB/dYvrP3D6V8iLpUahYNS+4bvBiEH8I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CV+W9lGw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dIkkvw/g"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09ED21F00898;
-	Tue, 29 Sep 2026 03:16:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CV+W9lGw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8E8F1F0089D;
+	Tue, 29 Sep 2026 03:16:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790651782;
-	bh=xLqPBDxX/z5XHXrJJdZYoBFeEYJMYZzsdkw/9Q/j/aw=;
+	s=k20260515; t=1790651795;
+	bh=6a4cHSbY5v21ngoJOuWxgIWxVKOLrKeyW1cQsp4CeIU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=dIkkvw/gHCeGIbWDg/aQJly4PgmeIcc+zAbpFeTgJeWMHrNyhfklT1lN44r0pFK1G
-	 VBigjES+oCQcbXpNVWTdBXqBRwEuyysFkCW3wGFQEfaTtVILBVLA4OL2ixxtNC3cvm
-	 LZMImjvkFVNnDAbFj7mHeEElVxPy4zIYyewqgb90/aBRkU8ETIlpU5gB+eooBmGslV
-	 FMzNygAzn4POwWALHllgrPHEnz57/ykYCjrrWS3pWOebnK2P8Xkj8Y9Gv39yON3VIl
-	 Jtm/Dkfv6Kn1jUAQD2GlrljiaGXbaAZVEvtwNIQo6G+0UC5cbuSLYFX8c4CGvekbcZ
-	 PwpUbQ/mLTy+w==
+	b=CV+W9lGwbhyB1+wbnS85lup6E9MR13uVEd2wbUVL5kQLqL09JOoMoOuDKb4u9TlWY
+	 TmyDT1JG7eUMIbTMB1wqoaZ9MJEjVMyUjSST+D6jjeaKq4KxLZ1xEinBQEyf+ksLKi
+	 qKp9z4Und/jCzxt4AlSPkuKaN/mjK9EQrDU1Y16FdeBAbxS1PYAeRfWLrDoFfbKKXK
+	 v/bLibfMLugso5MO1CG8AQXuGRdQ6zC2K7Up5uze86NDfjU1SM+FpPNKxKpTio0zL5
+	 New/J5V1zSuPn/6+YYCeSifTIBZ2X5QAZr+MmQrW1+LQmC41Tk9GyJu0cHbZZxBUzS
+	 /7zg58p+6p4GA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
+To: Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Wesley Cheng <quic_wcheng@quicinc.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Kernel Team <kernel@oss.qualcomm.com>,
-	Monish Chunara <monish.chunara@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Aaron Kling <webgeek1234@gmail.com>
+Cc: devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-mmc@vger.kernel.org,
-	Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
-	Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
-	Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH V4 0/2] arm64: dts: qcom: Shikra SD Card support
-Date: Mon, 28 Sep 2026 22:15:12 -0500
-Message-ID: <179065170886.2673486.3376256399465170072.b4-ty@b4>
+	linux-arm-msm@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v3 0/4] arm64: dts: qcom: Support Retroid Pocket QCS8550 Devices
+Date: Mon, 28 Sep 2026 22:15:22 -0500
+Message-ID: <179065170958.2673486.3807179788063261684.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260804122054.3462145-1-monish.chunara@oss.qualcomm.com>
-References: <20260804122054.3462145-1-monish.chunara@oss.qualcomm.com>
+In-Reply-To: <20260829-rp-qcs8550-v3-0-198d5b2fc475@gmail.com>
+References: <20260829-rp-qcs8550-v3-0-198d5b2fc475@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -61,22 +52,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 04 Aug 2026 17:50:52 +0530, Monish Chunara wrote:
-> This is v4 of the Shikra SD Card support series.
+On Sat, 29 Aug 2026 14:35:30 -0500, Aaron Kling wrote:
+> This specifically includes:
+> * Nova
+> * RP6
 > 
-> This series adds SD card support for the Shikra platform.
-> 
-> The first patch adds the SDHC2 controller node and the necessary pinctrl
-> configurations to the base Shikra SoC dtsi. The second patch enables
-> this support on the Shikra EVK (CQS, CQM, and IQS variants) by defining
-> the regulator supplies and the card detection GPIO.
+> Retroid Pocket is effectively a sister company/brand to AYN. They are
+> both under Moorechip and all hardware designs are handled by Moorechip.
+> Thus the electrical designs are largely shared within a SoC generation.
+> Hence these include the AYN QCS8550 common dtsi. As such, this series
+> depends on the AYN QCS8550 series [0].
 > 
 > [...]
 
 Applied, thanks!
 
-[2/2] arm64: dts: qcom: Enable SD card for Shikra EVK
-      commit: 87494196c2f551710b4ae90ea78912d4d3abcc6b
+[1/4] dt-bindings: vendor-prefixes: Add Retroid Pocket
+      commit: ea55bba4c68a49fcb527da6c71dd48879b705fd1
+[2/4] dt-bindings: arm: qcom: Add Retroid Pocket QCS8550 Devices
+      commit: 198d38cc6e6f40835b7191950e7c84f34bd08adf
 
 Best regards,
 -- 
