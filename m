@@ -1,278 +1,207 @@
-Received: from relay10.grserver.gr (relay10.grserver.gr [37.27.248.198])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7649C3DD528
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 10:15:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=37.27.248.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A6C9344D91
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 10:20:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790676946; cv=none; b=AzajVIeW1SYlc1L6xvlHTlOtcXnEmmZTC27kH+QqVU+zlAocMnXRCXC0JQiiSnePdL2lcEuwmSg6RImFf8XFIwvOxLwGAZzyGn8A7jjg7szxgPFw9mmMouhP9jPh1Tg152x9ue41OAoc95g6hknPi4nxvN5sEA5TjJA7VFwkLQU=
+	t=1790677217; cv=none; b=F20q9dFXfik7wx9fbvO3S8BEY8aa8xgjovd8UV7+sUjC+lh0xZzACAsXNAkklqaDqeagdqfoTFJ8TIe4/OBGmvQXZo9JhoT89RRmL5aGVeogNueMee4DhsBjiuRJzsEaM7i9umLSD7L6f6aF/Y8mwZvp/yI65D5T/lL2IXqt4Tc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790676946; c=relaxed/simple;
-	bh=7E/FyJ/TvooU1Eq7DhSqLlMVSAu9nLzNeNoUUqFgvQI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZBquW7cAaz1wsZu7HuBPVQXI2zuVjgcc+VIHlmjNLRGsJxXUkqZn3t6gagO77QEqnFdXE5rJYvz4z+Sv/LRWcjT7v82THrMcQTXkZguSV4497DKvbHABoiluLITZyQ2n4jqxby8lKmJypUfUUJgeXWAt0NLOhleib95MrNs1PDs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=hpQXvfvK; arc=none smtp.client-ip=37.27.248.198
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
+	s=arc-20240116; t=1790677217; c=relaxed/simple;
+	bh=Is+lHiAImJP4njetw1RNIkDlKPu3XtLpipofyQnPd04=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=XMSOqsFzuZDKn4uc5zMziPPj5sUU5JB7tjsH45bJlAZF9jqU5vfEKydEXWCWj/KRo0OETXySpOn9pzGwCgFtR2SbNcm2vJi9SeijEqUcccU/65/kA4/lMLL7zAdNeMSUVfX+bGgDszyqrPkTZTPf5bzUHskVENsIvXOl9fB4jsA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KOHehtqr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jQcU3jRW; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="hpQXvfvK"
-Received: from relay10 (localhost.localdomain [127.0.0.1])
-	by relay10.grserver.gr (Proxmox) with ESMTP id 1D45742C12
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:15:28 +0300 (EEST)
-Received: from linux3247.grserver.gr (linux3247.grserver.gr [213.158.90.240])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by relay10.grserver.gr (Proxmox) with ESMTPS id 0381D42B9B
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:15:26 +0300 (EEST)
-Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
-	by linux3247.grserver.gr (Postfix) with ESMTPSA id D239B1FFAA9
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:15:24 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
-	s=default; t=1790676925;
-	bh=7E/FyJ/TvooU1Eq7DhSqLlMVSAu9nLzNeNoUUqFgvQI=;
-	h=Received:From:Subject:To;
-	b=hpQXvfvKUH5vug/p570h1sZJT4tsjCnR0IxPsRTaX/DwJpTZ0u49HtCuFnzeRpO1p
-	 2RXu2s15SfRhx33vldH7TygRBok0twgFzA5//Ezs7K+Z8BiqhPBOTixRUHfa8AVyiM
-	 bi0j0yWHPzcrM0aT5EYQFBZz56jp56DtlimyRSjniReJj7CKKHNbIjYhdoVmvt2bGq
-	 ke7ntyjOj+W+4jFklDg6lZGTqp98fOqxHAzzSjuuWy3bGfKv/MNY/PZfnDyE74DnH4
-	 1uwcCR12Q6rGH8EJHMJmmm86YVpLkRnWZhbztQXAbCrPhUIol33eVg5z+bAHwgyjuP
-	 xoP3lDgHrW5ow==
-Authentication-Results: linux3247.grserver.gr;
-        spf=pass (sender IP is 74.125.228.41) smtp.mailfrom=lkml@antheas.dev smtp.helo=mail-pz2-f41.google.com
-Received-SPF: pass (linux3247.grserver.gr: connection is authenticated)
-Received: by mail-pz2-f41.google.com with SMTP id
- d2e1a72fcca58-86212a185dcso2799596b3a.1
-        for <linux-arm-msm@vger.kernel.org>;
- Tue, 29 Sep 2026 03:15:24 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AKwUvBwesv036u/PIF76sXP4A8l3Sp6hCCsN5DGi0/bIuYBDosLUT2YqnLBI75s/mf667ZIHycaeDUoa9SkVjaGv@vger.kernel.org
-X-Gm-Message-State: AFuF++kAbYZmNisEhfAYdqgdDQjVPQ28TAPfBe2sjw6Qi4Zjpaj9v1hh
-	Q0DCFzeg9VbHF71VxQas8S3vA09Eg3q5lfuM6u2Y1MS3MxDF1k1amEEWXi9bwItFcoXeU++tEGL
-	6j94bLuT3wkS09MaELYw1tkqACQt+anI=
-X-Received: by 2002:a05:6a00:a90:b0:882:359f:ef17 with SMTP id
- d2e1a72fcca58-88235a00258mr6854298b3a.12.1790676923332; Tue, 29 Sep 2026
- 03:15:23 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KOHehtqr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jQcU3jRW"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68T7Thgj761151
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 10:20:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	dD0HqSAcI0z3CstFwBJdbtAFCT9aHW+6ENJUka6C3ZM=; b=KOHehtqrVzWVW9G2
+	CctEaHyqTg7r/dA3sEvAde5DDdhBr93n10NEeVhJLGAMXnFrAulfn5JeFAxwGLPo
+	SG722N5GH61W+2rwGnjp1mlCin7g8F/zY9dY23kZ+n5+5HVJmtsLpMHLOlsKqtmi
+	cQ8mMmGD4PHPTdC8YSbuDKCOHo4LehWyx69dFnLH8ZB55JEM1tKOhay9TZSbPjrJ
+	ALKC7Hv/pGypCyr2Es8bCb4YF6qeZopBztATKWQzt9MqePgP2v1KANkAvXi+m8e/
+	RcFxu5HhygGzSLCpapgkyxWX1ettiG+4fgGOH+5V9+JYGp/gEB+1Eq+PdaZhd9C+
+	Fctd5w==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyw03kfgx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 10:20:05 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39de4e72b33so7535509a91.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:20:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790677205; x=1791282005; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=dD0HqSAcI0z3CstFwBJdbtAFCT9aHW+6ENJUka6C3ZM=;
+        b=jQcU3jRW2r2gKkTiA9dkoThuMS1mCjhOan+BqFtC1L0/DN2HcGi3Grd1xhUmLHUm0l
+         DBDVXgrY4ExrUxdBl5XCzYXp7WzUU4yHkz3D/tp1rLvUjmVDjbjYIfnHMiclm2erAAhL
+         zOXxZsxMbtWwWkRJdKOSXkHi2QOce+ly92mP0scuzmyI80fKO4P+0ilmUHwkMOudKxh/
+         T8GYzgB0RI/vgPS5KdCxVI0mSteXz74PRLiaNNs7yTqi1sa+9RExSgh384fRyAn3pH4l
+         oLa29ACf8mpQEAdE7yoX2ShHnlBa03PVBztKviA0o+sAeV9dJJoP4aGKHiYvmnXQ/sFH
+         GRlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790677205; x=1791282005;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dD0HqSAcI0z3CstFwBJdbtAFCT9aHW+6ENJUka6C3ZM=;
+        b=PYqDA0IkAFyz/OT99vhBup3xqXg28S4yuRyxtUAgXkahpxXfKT3AuX3NIc7fSOsdcn
+         Egrf9MSEBAO94zKkO+JsCbSJu2eKHYCTNr5j7jMQoSm6Mc803SN2hY5j4YhuYoGbWpwr
+         Yh1PFSh2XUVyL3Hyx1jHtBCmLlM0Rq5BzwbPxUIp1G6c9Gr4qItTz9jvSRNppg76eEgp
+         u0oJx0XHy1sFCKVz3PGWdFlQC9mrcQmdNFaltCWd7APfk6YkwcgvVaxK3xOs8KFSiMPy
+         iyPcdAlSf495qmDzbYF1gFPDfSKfP78dXj/M2aYTZEj29tFOVJ2ZrxGRwEiLIhiyTlHV
+         MFqw==
+X-Forwarded-Encrypted: i=1; AKwUvBxbYYi53jePC4W4Mns7M4jY2wkhBguS54xiqQ9hzcmVSjUUaiQohNM/qU8XHBo430ROMMfUkMUB90EgkpLK@vger.kernel.org
+X-Gm-Message-State: AFq9FYKvk7yqffzPzfuvxuQwJtzM7EZlWxuVqixRtwmW7OH4KUcv20uQ
+	MRlNEcv64TrAG3lgea25Mtum60lOaxgDpG/AUQliHpEkTP5LopTzyDvFxFCKDmLJzAKK/Yn/4Lk
+	iid2DGHForoaLpRRco3HFtK+khisPy3n3TXC0SeYIS1+0chc07BIsE9oJA0A2FGkIPykr
+X-Gm-Gg: AYBFou3YHSe7F3+BqHgM5uLTSBgZ38EdALaMlBX0NaFaxVhv4RalWTIi8z4O43i/HZZ
+	WWrPosxHsn8wE6Zuty8KFsGgjsXfeGghdDWg1HcymLRxUg7ofJtQ0CozSaNZCTI5mBu6N7cbCRF
+	Je7r2ec9PfPk3UxvLrLRbkLischEmDRbYhcKmRirgnK+TB3xPPYvaeAOjC+pyC36d+xM62HBZkG
+	+GT2oVEBtUXGFh14U80Jd+oDNwTw9u4orrkX7WXHscVDfQ+yHtl0Khf+GQnBm1k6Wa+wWZ3uwI4
+	yb5HQW6gYquoDbnQyC5gq0SvA7iqSkQEcuOKke66to8CUY7UIsYVDn3JW6+WRtRfRpMfit2tiMT
+	li1rw4gHU8hhsWgQ8Iif52P7C
+X-Received: by 2002:a17:90b:17ce:b0:39e:4c80:44be with SMTP id 98e67ed59e1d1-3a0bb60b2ddmr10202070a91.33.1790677205200;
+        Tue, 29 Sep 2026 03:20:05 -0700 (PDT)
+X-Received: by 2002:a17:90b:17ce:b0:39e:4c80:44be with SMTP id 98e67ed59e1d1-3a0bb60b2ddmr10202042a91.33.1790677204730;
+        Tue, 29 Sep 2026 03:20:04 -0700 (PDT)
+Received: from [10.219.1.5] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc78791c072sm5997988a12.15.2026.09.29.03.20.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 29 Sep 2026 03:20:04 -0700 (PDT)
+Message-ID: <e3ae21db-b777-4d3f-9587-50687d297abc@oss.qualcomm.com>
+Date: Tue, 29 Sep 2026 15:49:41 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260920184148.31541-1-mstoretv@cern.ch>
- <20260920184148.31541-4-mstoretv@cern.ch>
- <CAGwozwGzw1CE03kbWJaV7iC=1o0QXg9PpreTunenm-vHPe515A@mail.gmail.com>
- <6f2e0c22-0be6-4daa-8ab3-28d92f41197b@cern.ch>
- <CAGwozwGwccsppaCUETVJzNN8uGd8Pzujf9pz08SyHUQFKEOxCQ@mail.gmail.com>
- <3c0701fb-9f8e-41d3-a815-d48b1a29716f@cern.ch>
-In-Reply-To: <3c0701fb-9f8e-41d3-a815-d48b1a29716f@cern.ch>
-From: Antheas Kapenekakis <lkml@antheas.dev>
-Date: Tue, 29 Sep 2026 12:15:12 +0200
-X-Gmail-Original-Message-ID: 
- <CAGwozwGHyA5Lqh28LQkGVNf-Xj=hFPM_DZ9nQXQ9Rk9KynTfFA@mail.gmail.com>
-X-Gm-Features: AclHuK92o2D9MoL45RS67cVnRLXbDC2jGhqffGiqh1vzVrLrNn6TUItqsz0paY8
-Message-ID: 
- <CAGwozwGHyA5Lqh28LQkGVNf-Xj=hFPM_DZ9nQXQ9Rk9KynTfFA@mail.gmail.com>
-Subject: Re: [PATCH v7 3/3] arm64: dts: qcom: Add hamoa Samsung Galaxy Book4
- Edge devicetrees
-To: Maxim Storetvedt <mstoretv@cern.ch>
-Cc: andersson@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, marcus@nazgul.ch, marijn.suijten@somainline.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, abel.vesa@linaro.org,
-	abel.vesa@oss.qualcomm.com, johan@kernel.org, konradybcio@kernel.org,
-	kirill@korins.ky
-Content-Type: text/plain; charset="UTF-8"
-X-PPP-Message-ID: 
- <179067692516.741965.18085157585793838244@linux3247.grserver.gr>
-X-PPP-Vhost: antheas.dev
-X-Virus-Scanned: clamav-milter 1.4.6 at linux3247.grserver.gr
-X-Virus-Status: Clean
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] Bluetooth: hci_qca: Add WCN clock management for
+ pwrseq-based power path
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        quic_mohamull@quicinc.com, quic_hbandi@quicinc.com
+References: <20260925-bt-wcn-clk-enable-v1-0-30bee88c4de4@oss.qualcomm.com>
+ <20260925-bt-wcn-clk-enable-v1-1-30bee88c4de4@oss.qualcomm.com>
+ <CAFEp6-1J_nnD1OY=GBET19p9+j28n9LFmt5CgoiyWr7FVSmOFQ@mail.gmail.com>
+Content-Language: en-US
+From: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+In-Reply-To: <CAFEp6-1J_nnD1OY=GBET19p9+j28n9LFmt5CgoiyWr7FVSmOFQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA0MSBTYWx0ZWRfX3L+iVwxn3B0a
+ dysyAK8wOG0ObVhfynF286nHJ1vkxPC54+e5q3ROENdB+SmC1uNUdekAc80HBYCNvu/3GvB757+
+ +PeGJerGqc8D4dvc79ABCiL34GwlzaI=
+X-Authority-Analysis: v=2.4 cv=SIbXx+vH c=1 sm=1 tr=0 ts=6abb90d5 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aVxM1FiM0cXrEgfon2wA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA0MSBTYWx0ZWRfX5c85mdz0r4hq
+ jgI5PMVuQM3uKBiLKKWTmqRakxnX0m3N6NGkbrzoRnNj2YpYjXriaM768y88XRVuskzE2MaiXq3
+ YD3rqLXKB3pUDWEBg8I/XUM9cwrS0vtIJs9jWRWuFY4OMifGOD1fgYXvEPgyBFyQ5rhcYNoZCUt
+ cSmyWRrdlAVmAX1T8s4EyJg/DBsIc4DPgC3G4ksjSHfNZzte4JVVtyw5P+TBV9xSo5XM+kfjQW5
+ Ld7Pw4/SFCZ0NVRfzZrwUrX8GeX+eqqEkKv1GzgEKChvSRvi56B7zOQPGDpBpWucFUwEyEwt44V
+ JtQ9Y4HSELsGCJUDvmntS1KnHlG+C5m5P16MPdNLr0t/InyTwAP5vpkQ6pJBus6PSjgFsLU2pa4
+ JRtSoH9yEe/fo8pTGbHrPX+JIzx/vYHqJBtirOBZR+j+TS2N5DzlsPy95PWyLs6vgcYs55C7Y0V
+ 2NUNioQI0X4eZfljGYQ==
+X-Proofpoint-GUID: E93Ks48q4Br3CEOqfFzXw13fRkrNRpw4
+X-Proofpoint-ORIG-GUID: E93Ks48q4Br3CEOqfFzXw13fRkrNRpw4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-29_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 adultscore=0 bulkscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609290041
 
-On Tue, 29 Sept 2026 at 00:22, Maxim Storetvedt <mstoretv@cern.ch> wrote:
->
->
-> On 9/28/26 21:09, Antheas Kapenekakis wrote:
-> > On Mon, 28 Sept 2026 at 20:41, Maxim Storetvedt <mstoretv@cern.ch> wrote:
-> >>
-> >>
-> >> On 9/28/26 18:44, Antheas Kapenekakis wrote:
-> >>> On Sun, 20 Sept 2026 at 20:41, Maxim Storetvedt <mstoretv@cern.ch> wrote:
-> >>>>
-> >>>> Adds devicetrees for the 14-inch and 16-inch hamoa SKUs of the Samsung Galaxy Book4 Edge.
-> >>>>
-> >>>> These use a common dtsi derived from nodes that were able to work on Linux
-> >>>> from the initial Galaxy Book4 Edge DTS by Marcus:
-> >>>>
-> >>>> Link: https://lore.kernel.org/all/p3mhtj2rp6y2ezuwpd2gu7dwx5cbckfu4s4pazcudi4j2wogtr@4yecb2bkeyms/
-> >>>>
-> >>>> combined with the patch series the Honor Magicbook Art 14, which shares device similarities:
-> >>>>
-> >>>> Link: https://lore.kernel.org/all/20260629154812.9066-1-mail@etehtsea.me/
-> >>>
-> >>> Links go in the bottom, Based-on-a-patch is not a thing, you may add a
-> >>> Coby as noted in a parallel thread.
-> >>>
-> >>>> as well as a few more adjustments on top of that again to get additional features working.
-> >>>> Special thanks to Jesse Ahn for helping expand on what would eventually become this dtsi.
-> >>>
-> >>> Hi Maxim,
-> >>> I tested this series on a kernel with various other backports on two
-> >>> european (norwegian market) galaxy book4 edges.
-> >>>
-> >>> Specifically, the 14in NP940XMA and the 15.6in (not 16) NP750XQB.
-> >>> Specifically, the later is an X1Plus variant that came out a year
-> >>> later with cheaper components. It does not work properly on either on
-> >>> them. I was hoping that at least the 14in model would work as is but
-> >>> no.
-> >>>
-> >>> My test devices have proprietary Samsung battery controllers
-> >>> (ENE-KB9058) and type C controllers (Samsung EmuEC). Also the speaker
-> >>> amplifiers are different. So the battery reporting, audio, and USB C
-> >>> ports do not work at all using your DTs. The TPM does not bind either
-> >>> but you do not claim that it does. At least they got me to boot and
-> >>> for that I am grateful.
-> >>>
-> >>> Other stuff also does not work, but I am just listing the main ones.
-> >>>
-> >>> I suggest you change the -14/-16 suffixes on both models with
-> >>> something more specific.
-> >>>
-> >>> The prior patches in the series look fine to my eyes. I did not A/B
-> >>> test them, just pulled them in.
-> >>>
-> >>> Best,
-> >>> Antheas
-> >>>
-> >>
-> >> Hi Antheas,
-> >>
-> >> Thanks for giving it a test! I think we both have the (almost) same
-> >> device, and your experience on the 14" NP940XMA (NO) probably mirrors
-> >> that of my NP940XMA (IT).
-> >>
-> >> USB-C should already work for this SKU with the patch DT, but not USB-C
-> >> hotplug (yet). For now, everything is just left as already set up by the
-> >> firmware, so peripherals plugged in after boot will not be detected.
-> >> Everything inserted before boot, and hotplug on USB hubs, should still
-> >> be fine. Could you give it a try on your device?
-> >
-> > Yes, that mirrors my experience. But without a TypeC driver you don't
-> > get renegotiation. So no USB3, no fast charging, no hotplugging, and
-> > no DP alt mode. I wrote one but it's still buggy and a bit too
-> > complicated.
-> >
-> >> Battery state monitoring should also be with the same caveats on both
-> >> these devices, going via a separate protocol over I2C instead of
-> >> following the other X1Es. There is a separate battery driver for this,
-> >> and also other useful patches (like the webcam and kb backlight)
-> >> downstream. For now at least, only the features listed in the cover are
-> >> included here, but our repo linked there has pointers to the other
-> >> relevant patches needed for now.
-> >
-> > I did not find a battery driver so likewise I wrote mine. I think the
-> > battery driver is more upstreamable than the TypeC driver. That will
-> > take a lot of work.
-> >
-> > But it also means you have a spurious hunk on your dt then. The hunk
-> > that registers the dead battery and supposedly controls the TypeC
-> > connectors from qualcomm can be removed as it is not present on your
-> > device. It can then be replaced with one that registers the proper
-> > driver later.
->
-> Just left as-is as placeholders, but yes, can otherwise be removed.
-> Do not really affect anything otherwise.
 
-Unfortunately, there is no such thing as placeholder. When your series
-merges it will have no placeholders. Fold the contents of [1] into
-this patch for next revision. This node should not be included and is
-not used for these devices. This will drop the duplicate battery and
-also allow you to drop your external rule.
 
-[1] https://github.com/anatase-org/patchwork/commit/4b9fe35f55c78342b24c2ab309acc8dc38a890cf
+On 9/29/2026 3:33 PM, Loic Poulain wrote:
+> On Fri, Sep 25, 2026 at 8:21 AM Yepuri Siddu
+> <yepuri.siddu@oss.qualcomm.com> wrote:
+>>
+>> RPMCC previously kept WCN clocks enabled via proxy votes, so the pwrseq
+>> power path in hci_qca did not need to explicitly manage the clock.
+>> With proxy vote removal, each consumer must explicitly enable and disable
+>> its required clocks.
+>>
+>> Extend the pwrseq-based power path to acquire and manage an optional
+>> WCN clock. In qca_serdev_probe(), acquire the clock using
+>> devm_clk_get_optional(). In qca_regulator_enable(), enable the clock
+>> after a successful pwrseq_enable() with proper rollback on failure.
+>> In qca_power_off(), disable the clock before pwrseq_disable().
+>>
+>> Targets that do not define a clock in DTS are unaffected since
+>> devm_clk_get_optional() returns NULL and all clock operations are
+>> guarded accordingly.
+>>
+>> Signed-off-by: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+>> ---
+>>   drivers/bluetooth/hci_qca.c | 23 ++++++++++++++++++++---
+>>   1 file changed, 20 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+>> index 7089e9b639b2..489a059e519a 100644
+>> --- a/drivers/bluetooth/hci_qca.c
+>> +++ b/drivers/bluetooth/hci_qca.c
+>> @@ -2265,6 +2265,8 @@ static void qca_power_off(struct hci_uart *hu)
+>>          }
+>>
+>>          if (power && power->pwrseq) {
+>> +               if (qcadev->susclk)
+>> +                       clk_disable_unprepare(qcadev->susclk);
+>>                  pwrseq_disable(power->pwrseq);
+>>                  set_bit(QCA_BT_OFF, &qca->flags);
+>>                  return;
+>> @@ -2324,8 +2326,17 @@ static int qca_regulator_enable(struct qca_serdev *qcadev)
+>>          struct qca_power *power = qcadev->bt_power;
+>>          int ret;
+>>
+>> -       if (power->pwrseq)
+>> -               return pwrseq_enable(power->pwrseq);
+>> +       if (power->pwrseq) {
+>> +               ret = pwrseq_enable(power->pwrseq);
+>> +               if (ret)
+>> +                       return ret;
+>> +               if (qcadev->susclk) {
+>> +                       ret = clk_prepare_enable(qcadev->susclk);
+> 
+> Why is susclk guarded by the pwrseq? They seem unrelated to me.
 
-> >
-> >> On that topic, you will also find links to devicetrees for the X1P42100
-> >> Book4 Edge there (via Ciscobugger). This might not be the same X1P SKU,
-> >> but could also be worth a try.
-> >
-> > I had a quick look at your repo. In my initial attempt, I tried to
-> > reference your upstream (not you) but quickly gave up due to the large
-> > number of commits and dtbs.
-> >
-> > I only see a polling commit in your tree after it diverges, I do not
-> > see a battery driver?
-> >
->
-> Plenty of old branches here, but README should always be up-to-date with
-> links to all the patches used [1]. In this case, we just use the
-> existing battery driver by Saddy [2].
->
-> > I think the only realistic way forward for me is to wait for upstream
-> > to catch up and only add support for my reference devices (the 14 and
-> > 15.6) so I can flesh out my userspace until qualcomm starts to deliver
-> > results on mainline kernels.
-> >
-> > I attach my current tree below [1], note it is very unclean and I am
-> > currently doing fix commits. Once I get to a place where I am happy
-> > with base functionality, I will squash everything send it as a series.
-> > If you tell me that your device works with the drivers I wrote (note
-> > the LLM assistance), we can synergize. I do not expect the typec
-> > driver to get upstreamed unless someone more familiar with the type c
-> > internals gets involved, as a lot of the changes go over my head. But
-> > I think it is realistic for me to upstream the battery driver, unless
-> > you have a simpler alternative.
-> >
-> > the drivers relevant to you are ene-kb9058 and samsung-emuec. If they
-> > work with your laptop and are universal for these devices great. Note
-> > that they are both interrupt based so the battery reporting changes
-> > instantly. You can also take my dt for the 14 in for a spin or just
-> > deploy my tree as a test.
-> >
->
-> Thanks for that link! Tested your np940xma.dtb + ene-kb9058 and
-> samsung-emuec drivers on top of my tree, and they seem to boot
-> fine on my NP940XMA as well. Battery monitoring displayed, and there
-> is hotplug detection (for the charger).
+You are right. On further thought, the clock belongs to the WCN hardware
+and its power sequencing is already handled by the wcn3988-pmu driver.
+So the hci_qca driver does not need to manage it at all.
 
-Good to know. I will base on your V7 going forward and only do my
-changes on top (removing the separate dbts I did thinking there was a
-deviation). This will hopefully help you to push this through.
+In v2 we dropped the hci_qca changes and moved the clock property to the
+wcn3988-pmu node in DTS instead:
+https://lore.kernel.org/all/20260929-bt-wcn-clk-enable-v2-1-7a90902f3df5@oss.qualcomm.com/
 
-> > I am contemplating whether an initial series using DTs, then a
-> > follow-up switching to ACPI is simpler for everyone involved. But as I
-> > see the huge amount of dts, I start to get concerned. So I might send
-> > my initial series that enables the device to boot using ACPI instead.
-> > As you know, Windows uses ACPI to boot the device and a lot of the dt
-> > i derived was from the ACPI tables I dumped in Windows. The DT was
-> > important for me to get an initial bring up for the device. I can now
-> > sync kernels to it in ~2 minutes so I can rapidly iterate.
-> >
-> > To that end, can anyone tell me why are we not attempting to use ACPI
-> > to boot these devices and relying on DTs on the ARM side? I know that
-> > traditionally for phones DTs are used but these are UEFI devices and
-> > contain proper BIOS data for autodiscovery. What is the current
-> > blocker? Switching to ACPI should let us drop all laptop specific DTs
-> > by adding parsers to their currently DT only drivers. Am I wrong?
-> >
->
-> There's an interesting discussion for that here that's worth a look [3]
-
-I had a look. Interesting discussion. So that's where Hans went. Good
-to know. Great hire by Qualcomm. I will consider his points and track
-followups for ACPI
-
-Best,
-Antheas
-
-> Cheers,
-> -Max
->
-> [1]
-> https://github.com/zensanp/linux-book4-edge/blob/x1e80100-book4e-7.2-14-tmp/README.md
-> [2] https://github.com/Saddytech/Galaxy-Book4-Edge-linux/tree/main/driver
-> [3]
-> https://lore.kernel.org/linux-acpi/20260623145225.143218-1-johannes.goede@oss.qualcomm.com/
->
->
-
+Thanks,
+Siddu
