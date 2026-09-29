@@ -1,62 +1,62 @@
-Received: from mail-pz2-f38.google.com (mail-pz2-f38.google.com [74.125.228.38])
+Received: from mail-pj2-f38.google.com (mail-pj2-f38.google.com [74.125.227.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88417525A81
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:06:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.38
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67A6C526A84
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:06:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790687194; cv=none; b=F8d3vi+ldnvLcmMIkr7Mu62rXxF6GGsG2lPJgQavDtUQR3fRCtphNdffIKfY5g6JqnJ40OvIhhUwmxHHQ359+kWJFlX5tzGa3n16szU0Txxd2e44tX4WdP44YnX7i9w46c3gJIBqk+Hj7M76iwABHgZrxt9V5lQ0R9M++2QIvnI=
+	t=1790687201; cv=none; b=nceOl++uDiiPhBP4rdfy5TcyILl3RAhM0ay9wooOC4frMwVPmhbxe4dercks7t+Pgq8aS8csJ76nRH61ZThqoxdhSJFwIi8qs8yFMxazVBi1gI7bFMoFbwFkSkHhQ7JJaE2mGZqUs3x2Cj4gR955sGj9fuTsB/Kg6/bM4LglSko=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790687194; c=relaxed/simple;
-	bh=E+SoyM3wZnYL7zAxxRPMWuhQ88ZtIEqQmaydJIWdN9Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KwNb8/vCpqdpxf8r24rR4EC5ytosoGlXBF1W+EOzr9apaxx2uP0M1MmB39r6yvwgemzyEfSRmgwFAUgQdTaEcPu08ZHcQ5QUVS4pgQeZ0O+AWHMqxaGW/8IxB/4DsWoNc1f1BmV9e+pS1q2muvElqzIYQyDObcE06cM4ETAcQMQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qKmQ4hlo; arc=none smtp.client-ip=74.125.228.38
+	s=arc-20240116; t=1790687201; c=relaxed/simple;
+	bh=KKlXeG4EWEHG8V9wWhgZ48hd2vq9Tr+1FGJhYZ4ceaQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=hR74r3b6U4TSBfQQ6zkyuJa7a4y+o2vg0TxDViSsVo09jbT2dnjFnEPwFMSjS4nKXYdWSs2MR7t5RLlGp5wA0WmQe3UX5vWbwDDdU1yu/qYCGwp+B1gq9foel0N88eL0wD20FbMABh7KyyY2yPbo48PNEdUK7PiFH5huT1p1uC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=agoL3X0R; arc=none smtp.client-ip=74.125.227.166
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qKmQ4hlo"
-Received: by mail-pz2-f38.google.com with SMTP id d2e1a72fcca58-88272e1d069so1786800b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:06:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="agoL3X0R"
+Received: by mail-pj2-f38.google.com with SMTP id d9443c01a7336-2d747ec6185so17969475ad.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:06:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790687191; x=1791291991; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790687198; x=1791291998; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y5LyVPNhnJ5Rp7yPTDFXlLblOQWcWIIfQuz7DLHUCd8=;
-        b=qKmQ4hloNMUzClUEeqfv/19VWZaIcU22TAYfSOhnHm4rrYVejrSOxQgpp1pTJF2umC
-         hJmaOaCxucZz+zJnMaSVfDW4MF9Gh2ave8Uty6OPliiH1gbE4IbSx8LOzJYSDcr1ZyAl
-         8lJ35CeSuUvCjKyulyHtuuHLvLep1BcR9gbhkA3Pxe02u9J7QlCQjrDYNdD2tvonZsl7
-         tox4QLZJ1pM4ldwgw2X00QY/LYDnXwTQUuySQNRXnxYcgTntuSb1Xbx247kukrtFeOQe
-         CO5wK9b0JYEn5jdH+lFu9cQtt0eu5OrxGegQE0+je7rPydh/aEm1/PF5axC0ktENaESI
-         9qzA==
+        bh=rGEWCLC1FPZDP0SnOnB5resnwfxQezT/YHoUyZYHjyE=;
+        b=agoL3X0RXteHgriIWFkSkCROwdLI8yqHUfJeqEHW2G63mf84CludM5UQD2lZN1glaV
+         1HgJed0aGEy1KuaUZ/ZahcvYx71uxNjwWbocEohKTfnjH8GN8Jb9YI49g4pAcbWLVFjp
+         MiNijWsrkCBh+UGuybIkC5BNTnZ7z9Mn1PTVFb6kUIiKR0+XVvmK7UcFkDWoQMU4CKcS
+         QEKfMoQ251/Odye8Sk5BM7swZcibHSTceM/FV2LO+7WEbuMJK0mIEEBJk0Qwlh/Yyzuy
+         rWuF2Dc6ei5vRyiS1kOE9PKcWPgfrHteQeSgWbkqZ19U28CxvT+Vq7d4SkzxkBpo2S6s
+         m1Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790687191; x=1791291991;
+        d=1e100.net; s=20260707; t=1790687198; x=1791291998;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Y5LyVPNhnJ5Rp7yPTDFXlLblOQWcWIIfQuz7DLHUCd8=;
-        b=UQXvXHLYK9qk/cXOpudz7dW2paEeOlG0YtZZp6vhkwnnlNGWUKFCVsrOrSuveeT3p4
-         R0GtFmjLhZeBzGyn7hXZfqshBNObnfj3oE26yKZo+CSosBYdaNSzyefn0Tokf2SL46KG
-         6p1i34geFZdVbtgvWDSV8/VR4YIQHTXjSZVQB1qbrw+XTv4XbkxMdymkj842LWogdFDp
-         J6Ja0N3hlIyqYU2sSrnsScU/K1ba+WSUOPuLFZ4cdQVOT5VPR0fVZZD3xMKylUgYHOBJ
-         +ltC/nVpHqTleSLh+QT8751jD4zEJHz1B3Bs1cflREio09+MhLnNAQfvOpsX7w+0lIU7
-         DkHQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxi1qkDIc1zUZpLxj9lGa69BPykUuQPMfm8stxsrQhvWxPlsmFyWj//0s64RsD+IkCkkwD01ilKj02rU4Ar@vger.kernel.org
-X-Gm-Message-State: AFuF++kJaq+R/segmURtDkpJTd8B0FCf7imzvMIXE8x+nqYjj1bX2qUj
-	SM/W70vfcq5dwpcuGADwiRdh1R4E+9gq83vVIO70Wk5ltNKhtWuxwdZC
-X-Gm-Gg: AYBFou2ObinYRt7pbNbb8Y/Hqr4moYZga3etRMnvWk6DkwBk+zkgl9BfaeIlZ7In9Sb
-	d+5qBhQVIes5YLLPZrVSNg5aC+Xac7cL4lKjPSq+5P7DgjxK6cVngquHoa1x5KEhlJnhPYxvYb2
-	wdLu/A8GyTcLcayeTJcEdxDrnDK7ahmamWBBVQgqL26zUF6YGKJAx58lj2J8q6tCMGVu4XVPfMr
-	VdGfWF/c5wmInqKWtoaf/vei/IFoyt6/qtsWjLrUQ41BrKJQp5gwTwlUhJEmMZNTN84eir4t7nl
-	hWDlgUuxWL+MOF3AOxf3+ogMBQlhoTK0KvSdOWr01CM4bz+xJGTMdJrp+WWGRkGZsFcpyEmZqJf
-	VR6zcyAc9W00fFGy1JsfcxFA3JgIdhMuJRLID2vWKrh4QZP78PgTHz15nYMA//ml5V5akdiSNzO
-	PFkg0PGl7DfJWF/yoZX0djjjHrr/BKnzod3v1GJuwDNVIKvF8eLq2pU4PEBEhC2tIo7dATNG8NU
-	qPhOuV0snnY0A==
-X-Received: by 2002:a05:6300:44:b0:3dd:85a9:55ac with SMTP id adf61e73a8af0-3de26db6d92mr12641170637.37.1790687191466;
-        Tue, 29 Sep 2026 06:06:31 -0700 (PDT)
+        bh=rGEWCLC1FPZDP0SnOnB5resnwfxQezT/YHoUyZYHjyE=;
+        b=uoh0MXuHFHsm0+k7ys6UHpRp3Z7yjKSqAo8qGAyvX5HkRk4MUVS2NQNsZBpToMJiTs
+         bWFGQ/VJq/WkCIPa8bmsy1UUVxeuzwlaXzRZzl0SfKWDlWtoIQcejLXuf1RT23GNYYHh
+         laoIRD371VM5xd8oNTZ0KXyGpxUB7l+x6PBvr5RA2nUGK+P1dgVI1v40YUiaVTfRJKaw
+         ctsFBPV2Q2d8BmhOzf/WVFByQ7SBck9+6jg3ifyrwsVgd6/RtmgHSuPBtwPfvH0d/Fnx
+         0YvFocdMkxkg0ZJT7/sMBa1QJdpfkwA6+Gn44quSwNf1ZQXMQDu8I3t0hEGy7yyVy+oA
+         wavQ==
+X-Forwarded-Encrypted: i=1; AKwUvByYOYDRAyyv2EJGRnEdUOSZfOKgd6eDU0WRmgWZeAUFEuKxtEnjo6McS9mAwDCILSuFAznNjD59WOBtNF1v@vger.kernel.org
+X-Gm-Message-State: AFq9FYJFcdSPQvf/gZqVTwB8V1k03+nr7PSSG8ZDVyqVOybr85uW/y6/
+	ujGegX4TqgMLbov3mvvgG9c+UcA4XmjSFYRbtRG2GxLLZrTKvfHIB7vt
+X-Gm-Gg: AYBFou22/wGEhWO8q1X18NF52jRBNnA8/yoyPfxjogeUvEVxoF8xpwrO5sG3kfyj/HM
+	9lbHqWr4jAPSuwHK1x6RPZU4Dd/0vf4XfKMLq3XvwAqhtbJ4Taqc4TpKKxdQQjFOGktVnQtF0Io
+	helNofBxKZCpQaVVymSmxfCOQYsqynTc+ctyX3/aYCGoyZZaw3Kq/JIl1VOflQUZvV3Bw6kePxw
+	2UhxQ+6+iVEcWLirRd0t4NVGiCHj/btZo6kGpzXybmaTS/+MLkneEaBZGcpeNdWjAaCMnHagtdb
+	FUeiI30YjEjOdZPMQ34LNqz4DXlnIM+ih0dOdFgSKHgucFgYeYXzb6+/dXrx6DTBc0C88papggV
+	OlBQAZrsCSXVEUaAfHsAXBGA+2YXPad0CwWhS+O2i8oOHIjIeeTAvaVQBcETnrEp+6TsK8btJM9
+	gQJhe2Bd6mVp6q29cfTa8BY5cKcRq+bMoXEVq5myRGXpSvpVRUCKfdi/m56bn4tcW4K0ddDdQ2n
+	ycj+5e5KN/7gH3stPyp4PZd
+X-Received: by 2002:a17:902:cec9:b0:2dd:ad74:ac2f with SMTP id d9443c01a7336-2df7dea09b6mr135005155ad.24.1790687197690;
+        Tue, 29 Sep 2026 06:06:37 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-885e115e41asm841108b3a.10.2026.09.29.06.06.28
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df914024c4sm55838485ad.31.2026.09.29.06.06.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 06:06:30 -0700 (PDT)
+        Tue, 29 Sep 2026 06:06:37 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
 To: robin.clark@oss.qualcomm.com,
 	lumag@kernel.org
@@ -70,11 +70,10 @@ Cc: abhinav.kumar@linux.dev,
 	dri-devel@lists.freedesktop.org,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	yongxing.mou@oss.qualcomm.com,
 	Joonhoe Kim <26rote@gmail.com>
-Subject: [PATCH] drm/msm/dp: hold one runtime PM reference per plugged state
-Date: Tue, 29 Sep 2026 22:06:27 +0900
-Message-ID: <20260929130627.959-1-26rote@gmail.com>
+Subject: [PATCH] drm/msm/dpu: compute the CRTC bandwidth from the state being checked
+Date: Tue, 29 Sep 2026 22:06:33 +0900
+Message-ID: <20260929130633.977-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -84,102 +83,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The plug handler takes a runtime PM reference every time it runs and
-sets dp->plugged; the unplug handler drops a single reference when
-dp->plugged is set. msm_dp_bridge_detect() also takes a reference and
-marks the sink plugged, and keeps that reference as well -- on every
-detect while the sink stays connected. On top of that, in the current
-tree the plug handler runs more than once per plug:
-drm_bridge_connector_detect() calls .detect() and then .hpd_notify(),
-and pmic_glink altmode reports an IRQ_HPD as "connected" too. Every
-extra reference is leaked on unplug.
+_dpu_core_perf_calc_bw() is called with the new CRTC state but sums
+plane_fetch_bw over drm_atomic_crtc_for_each_plane(), i.e. the planes
+of the committed state. When the CRTC is re-enabled (DPMS on, system
+resume) the committed state has no planes attached, so the check
+computes bw_ctl = 0 and the display runs without an average bandwidth
+vote on the MDP path until some later commit changes a plane -- which
+may not happen for a long time on a static screen such as a lock
+screen.
 
-On a Lenovo TB323FU (SM8850, DP over the USB-C port via pmic_glink
-altmode) the DP controller's usage count reached 28-34 after a few
-plugs (rpm_usage tracepoint), so the controller never runtime-suspended
-after the display was unplugged. It in turn kept the MDSS core GDSC on
-while all displays were off.
+Seen on a Lenovo TB323FU (SM8850) through the interconnect and DPU
+tracepoints: after DPMS off/on or s2idle, dpu_perf_crtc_update reported
+bw_ctl=0 and qnm_mdp was left at avg_bw=0 (peak 800000) instead of the
+3728793 kBps voted before, until the next mode change.
 
-Make the plugged state own exactly one reference: the plug handler
-only takes it when the sink was not plugged yet, and detect() returns
-its own reference when the plugged state already holds one, or drops
-both when it finds the sink gone.
+Iterate the plane states of the CRTC state being checked instead.
+drm_atomic_crtc_state_for_each_plane_state() falls back to the current
+plane state for planes that are not part of the commit, so the result
+is unchanged for commits that do touch the planes.
 
-With this the count stays at 1-3 while a display is connected, the
-controller suspends 3-4 s after unplug, MDSS suspends and its GDSC
-powers off on DPMS off, and replugging (quickly or after 20 s) still
-brings the picture back. Only tested on this device.
+With this, bw_ctl is 3728793600 right after DPMS on and after resume.
+Only tested on this device.
 
-Fixes: 3ea2d1c3d154 ("drm/msm/dp: turn link_ready into plugged")
+Fixes: c33b7c0389e1 ("drm/msm/dpu: add support for clk and bw scaling for display")
 Assisted-by: LLM
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
-Related pending work: "drm: handle IRQ_HPD events correctly" v5
-(https://lore.kernel.org/all/20260920-hpd-irq-events-v5-0-ff1de0090c72@oss.qualcomm.com/)
-removes the IRQ_HPD-as-plug path, and MST v7 26/35
-(https://lore.kernel.org/all/20260929-msm-dp-mst-v7-26-4b81473185e7@oss.qualcomm.com/)
-the detect-based hpd_notify for DP; the reference that
-msm_dp_bridge_detect() keeps is leaked either way. MST v7 27/35 touches
-the same lines as the first hunk; happy to rebase on top of it.
+_dpu_core_perf_calc_clk() walks the planes the same way; it is not
+touched here since I have not seen a wrong clock vote from it.
 
- drivers/gpu/drm/msm/dp/dp_display.c | 23 +++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c | 24 ++++++++++---------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index 6abe30bdff12..4e47b659c71d 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -412,10 +412,17 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
+index fea173e37464..343c41550637 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
+@@ -54,24 +54,26 @@ u64 dpu_core_perf_adjusted_mode_clk(u64 mode_clk_rate,
+ /**
+  * _dpu_core_perf_calc_bw() - to calculate BW per crtc
+  * @perf_cfg: performance configuration
+- * @crtc: pointer to a crtc
++ * @state: the CRTC state
+  * Return: returns aggregated BW for all planes in crtc.
+  */
+ static u64 _dpu_core_perf_calc_bw(const struct dpu_perf_cfg *perf_cfg,
+-		struct drm_crtc *crtc)
++		struct drm_crtc_state *state)
+ {
+ 	struct drm_plane *plane;
+-	struct dpu_plane_state *pstate;
++	const struct drm_plane_state *plane_state;
+ 	u64 crtc_plane_bw = 0;
+ 	u32 bw_factor;
  
- 	guard(mutex)(&dp->plugged_lock);
- 
--	ret = pm_runtime_resume_and_get(&pdev->dev);
--	if (ret) {
--		DRM_ERROR("failed to pm_runtime_resume\n");
--		return ret;
+-	drm_atomic_crtc_for_each_plane(plane, crtc) {
+-		pstate = to_dpu_plane_state(plane->state);
+-		if (!pstate)
+-			continue;
+-
+-		crtc_plane_bw += pstate->plane_fetch_bw;
+-	}
 +	/*
-+	 * The plugged state holds one runtime PM reference, dropped by the
-+	 * unplug handler. The Type-C side repeats "connected" notifications,
-+	 * and detect() may have seen the sink first: take it only once.
++	 * The planes of the CRTC state being checked: iterating the committed
++	 * state (drm_atomic_crtc_for_each_plane()) summed nothing when the CRTC
++	 * was being re-enabled (DPMS on, resume), whose old state has no
++	 * planes, and the display ran without a bandwidth vote until the next
++	 * plane update.
 +	 */
-+	if (!dp->plugged) {
-+		ret = pm_runtime_resume_and_get(&pdev->dev);
-+		if (ret) {
-+			DRM_ERROR("failed to pm_runtime_resume\n");
-+			return ret;
-+		}
++	drm_atomic_crtc_state_for_each_plane_state(plane, plane_state, state)
++		crtc_plane_bw += to_dpu_plane_state(plane_state)->plane_fetch_bw;
+ 
+ 	bw_factor = perf_cfg->bw_inefficiency_factor;
+ 	if (bw_factor) {
+@@ -131,7 +133,7 @@ static void _dpu_core_perf_calc_crtc(const struct dpu_core_perf *core_perf,
+ 		return;
  	}
  
- 	msm_dp_aux_enable_xfers(dp->aux, true);
-@@ -897,6 +904,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 	u8 dpcd[DP_RECEIVER_CAP_SIZE];
- 	struct drm_dp_desc desc;
- 	bool phy_deinit;
-+	bool was_plugged;
- 	int ret;
- 
- 	dp = to_dp_bridge(bridge)->msm_dp_display;
-@@ -910,6 +918,7 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 		return status;
- 	}
- 
-+	was_plugged = priv->plugged;
- 	phy_deinit = msm_dp_display_host_phy_init(priv);
- 
- 	msm_dp_aux_enable_xfers(priv->aux, true);
-@@ -960,6 +969,12 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 		}
- 
- 		pm_runtime_put_sync(&dp->pdev->dev);
-+		/* the sink is gone: drop the plugged state's reference too */
-+		if (was_plugged)
-+			pm_runtime_put_sync(&dp->pdev->dev);
-+	} else if (was_plugged) {
-+		/* the plugged state already holds its reference */
-+		pm_runtime_put_sync(&dp->pdev->dev);
- 	}
- 
- 	return status;
+-	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, crtc);
++	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, state);
+ 	perf->max_per_pipe_ib = perf_cfg->min_dram_ib;
+ 	perf->core_clk_rate = _dpu_core_perf_calc_clk(perf_cfg, crtc, state);
+ 	DRM_DEBUG_ATOMIC(
 
 base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
 -- 
