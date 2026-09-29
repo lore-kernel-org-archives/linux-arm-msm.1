@@ -1,74 +1,118 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail.holtmann.org (mail.holtmann.org [81.169.141.235])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA3EC53B613;
-	Tue, 29 Sep 2026 20:34:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DCCA3B2D1A;
+	Tue, 29 Sep 2026 20:37:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.169.141.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790714063; cv=none; b=tT6SWiYqbzSqYVrG3PhNr3rurqh+DMat8j4k5w+u9Z0vGRoF8RH3ns1C+6kLEW8unWvdEcCNxvF2KKdekBrfSc/1SQRL2Ru3NPjV4BhVheMbctogfO11ZiV1eOWl5rocpdk348wcDHOrLq/H88JXuxoDj6eJX78HYz9l/lcSaVA=
+	t=1790714268; cv=none; b=D83u9ZmBYzkecdT9uzI1AE96TXchXWCReVulUkK0K+tkHRuRBmJZVJ7xfkVdMgwOt29CqkZOfxZBsKArlWo1IECPOnBq1faSj5uwbde31l9ebsLKT6FPRB2Orr/oTvueIEGHs+CMroYquavC89BYcS6J7c/NJyCVvNRtgdnz/rg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790714063; c=relaxed/simple;
-	bh=uqzPvssUpU0NWV7aeqFhFC1Ds8F9yGTwzUx3rMzSJfw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Tcl8Fwme+XTM3w56aK4VxSMRPmOB92KguNGzICuUPMnMLNNrUWozI3A8VuZlgWX5Bjdb1HSrYmXuCPY8cEG8dhuXzMN9JynmfULwi5eg2d9jRl5q4xckfZTzgH0d5+dEbZ4K8pTM83GyfPrMLXfo45HXT3arviTHZ7ILgVaJGzs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E2U/jp51; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E2U/jp51"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09D821F0089C;
-	Tue, 29 Sep 2026 20:34:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790714062;
-	bh=eVDGXtda6alBwsEddGUj6QdZKxkb6ETP0ChakBOah6g=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=E2U/jp51+5HhnrCYQQhxCUTkz11TyWvbDR/oIjRg2249zcr5KQ2NmeCIOQSvYqm06
-	 OPd+IOkLjKZx1qN4Te05xbgp3g4DywN55mRYZKrj7HVfKswvan2iFIQ3jSAIxZTPFb
-	 gdtHz4HJRqeKW/BXmm9WRocpuFr8rdIlz5EuZ/CP89D4Xw+IYEXsESjbZpC2g3hJ8K
-	 /k3xd3rziQJVLq+M9R28nHSaYoQ1Qi1+7zucW/MuzjwbWuvfDT1xK8C6cinWcYSofo
-	 sYgcsxYwPdBiXlC+tLa2eFAamPIn38Z/jtJa2wg4VkwqJR5DrqIiU3ae0Yxnk6AoFB
-	 vTUhwRbxH1Cag==
-From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>,
-	Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v5] dt-bindings: mailbox: qcom: Document Maili CPUCP mailbox controller
-Date: Tue, 29 Sep 2026 15:34:14 -0500
-Message-ID: <179071404937.2903617.11280795356567912201.b4-ty@b4>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260907-maili_initial_clock-v5-1-e79bb6b93a49@oss.qualcomm.com>
-References: <20260907-maili_initial_clock-v5-1-e79bb6b93a49@oss.qualcomm.com>
+	s=arc-20240116; t=1790714268; c=relaxed/simple;
+	bh=D76+O3ZMCQadvcJz+XOKNWC2ilHPP4lTIXNv9esP98g=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=m9eGSFMarfH95b8QZbpM9IttAocMviRjL0KTCij7GVSWX9dncsVDqEu0y7lUKtyCXHEavqDW7DpvXT9Y+D59oqi9+PgUmXPVtXXrd7Eu6dhqriieLa4yphUTdaVyFinusCR8dXESFHydNer0dZREQhHM1D67Hli0q57dfjR1Wfk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org; spf=pass smtp.mailfrom=holtmann.org; arc=none smtp.client-ip=81.169.141.235
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtmann.org
+Received: from smtpclient.apple (p5b0a9ac0.dip0.t-ipconnect.de [91.10.154.192])
+	by mail.holtmann.org (Postfix) with ESMTPSA id 73FF2FF13C;
+	Tue, 29 Sep 2026 22:37:44 +0200 (CEST)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3901.100.1.1.12\))
+Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
+From: Marcel Holtmann <marcel@holtmann.org>
+In-Reply-To: <m657dtesuagn7vdajsuzjb4mfysf5xabsu3s6n6lujj7yb3z4p@m2e7e3n4zyev>
+Date: Tue, 29 Sep 2026 22:37:34 +0200
+Cc: Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+ "David S . Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>,
+ Jeff Johnson <jjohnson@kernel.org>,
+ linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org,
+ ath12k@lists.infradead.org,
+ Bjorn Andersson <andersson@kernel.org>,
+ Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <10091679-7567-42C2-B77E-EFD95CEDD649@holtmann.org>
+References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+ <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
+ <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+ <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
+ <05e539f8-bb7c-4038-8a83-8ab0d1a5b917@app.fastmail.com>
+ <m657dtesuagn7vdajsuzjb4mfysf5xabsu3s6n6lujj7yb3z4p@m2e7e3n4zyev>
+To: Manivannan Sadhasivam <mani@kernel.org>
+X-Mailer: Apple Mail (2.3901.100.1.1.12)
 
+Hi Mani,
 
-On Mon, 07 Sep 2026 14:07:18 +0530, Taniya Das wrote:
-> Document the CPU Control Processor (CPUCP) mailbox controller for the
-> Qualcomm Maili SoC. It is software compatible with the X1E80100 CPUCP
-> mailbox controller and uses it as a fallback compatible string.
+>>>>> +#define QRTR_NODE_HOST_BASE 0x10000u
+>>>>=20
+>>>> Can it be exposed with include/uapi/linux/qrtr.h also. There are =
+user space clients like modem manager
+>>>> which need to calculate modified node id to distinguish same =
+service from multi modem over mhi.
+>>>> This is same as wlan use case.
+>>>=20
+>>> did anybody actually looked at the proposal that Denis and I came up =
+with. It was exactly addressing this properly.
+>>>=20
+>>> It seems you guys came up with some hot fix and want to run with it. =
+After month and month of silence and not bothering to review the =
+proposal, you are trying to push your thing?
+>>>=20
+>>> If you don=E2=80=99t support userspace, your proposal is broken. =
+Plain and simple.
+>>=20
+>> I'm still willing to submit a new version of that patchset originally =
+by
+>> Denis, if the kernel devs so decide that it's the way. For example, =
+the
+>> "radix tree of radix trees" approach could be replaced with a hash
+>> table.
+>>=20
+>> There was also some criticism about a layering violation in storing =
+the
+>> endpoint id to mhi controller. However, maybe that could be reduced =
+by
+>> providing a correct abstraction around it, so that other code doesn't
+>> touch the mhi controller structure directly.
+>>=20
+>> Other criticism for that patchset by Denis was its overt complexity.
+>> Yes, it has more lines of code changed.
+>>=20
+>> This dual-card setup needs to be handled somehow, either by Denis's
+>> patchset or by Manivannan's patchset.
+>>=20
+>=20
+> I wish to go ahead with my series as it is simple and tested across =
+the
+> multi-WLAN setups. For concern around exposing the nid to userspace, =
+I'll
+> implement it in next version, thanks!
 
-Applied, thanks!
+actually no. Seems you have no plan on how to address the userspace =
+problem.
 
-[1/1] dt-bindings: mailbox: qcom: Document Maili CPUCP mailbox controller
-      commit: dd647489dadd1f9460fa7280f08e4b65cb9aa349
+It would be useful to actually review the endpoint_id concept introduced =
+by Denis since it has a userspace facing API. What is your plan? Are you =
+planning to break all existing userspace code?
 
-Best regards,
--- 
-Bjorn Andersson <andersson@kernel.org>
+Regards
+
+Marcel
+
