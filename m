@@ -1,210 +1,153 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mail-m155101.qiye.163.com (mail-m155101.qiye.163.com [101.71.155.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FA934C2259;
-	Tue, 29 Sep 2026 09:41:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5134ED1AC;
+	Tue, 29 Sep 2026 09:42:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790674902; cv=none; b=V4AoWTfG4X9/DbeZ+oFUQbuQjtjtt5mtu5DDlHGu8XwpmzuOQ8dW33zds49QF5Tama7iQTSctmcZEIfJaZRsjc63XlvAKVawlEHfRoxLzK0oan0XDbqZjVHRpQZ1S9kBActG/FgBZyJUhUbDYozyifA4fsIcwW61vbUwBCOh/PM=
+	t=1790674958; cv=none; b=l7C+mIg/cSLkUlNd4mFmEm5e/KOgq6abYyQfY/mNYNK7Kj6J8kmyRUkofj8b98bGYVqR2S4XyLDHJOY1NxADYiTUjFnOiyjU7THZWrHJTGXhO03wer7YROQ7pcWQ9Sqa1YznY0GvMuAK/8p/2zHvEOHlsCjE460ktp6FQhuCKIw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790674902; c=relaxed/simple;
-	bh=vSyGGV86aqK0w4gGiHH6xzLPE2b/IbJZUAsCU8hRASw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jdMI6c090VeHhWbPZ37bD7S+PrMMP6lk0k99reNEN8u2o1axFLSjqvPSk1A3ose7193bxZZmiUpmNeJj/b1OchKOhu5+pBWzif892MhgLfQJ5ZmYzjtBGggpCTkfeEJY9qW2hplVPBZBS0HW9OK4CmlywIvzUkCOcmzXpQiCBmU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=lMSD/JeC; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1790674958; c=relaxed/simple;
+	bh=VnYrNWJVmU9MCGcyPogJztfGV446YXDWQsf2nvHzMhQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=X8BUX3pWzsaAD9BR6TyLg33UkzmUe7XNX/ONEqu5383Bu9Amffe4euBz2+nbZYGiedkhGnDC9svbpEtFlIzSic7ikn7cozqlqiBPCf0lpBZr1p1IsxAySPTBtP9s+C272df9ZoWPXph6Li0cump96Cz06QXocycJ3/RUwvXfd2k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn; spf=pass smtp.mailfrom=seu.edu.cn; dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b=GvLqbRrx; arc=none smtp.client-ip=101.71.155.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=seu.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="lMSD/JeC"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 87438534023D;
-	Tue, 29 Sep 2026 11:41:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1790674891;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=wJGOOqzEs1mbvq1qJy6TGteYLvXk6pJNRTFzzZau6J0=;
-	b=lMSD/JeCoVbCM2uadFIcpeu8dTNvVFPKQUlH3dJQHsFKpEy7Cs7IYdFHC0rjmjVgVgNa3p
-	cAEldOxXlkqm47BfTonW8sVpOh8l2Zfx7oMJXYwvKGZ4HqShpJbWAm8W5AX+Qyo1U7q3lx
-	597o/nfOwGzqKpMFRzytCYR5ldbmPyo=
-Message-ID: <d1183441-ee4e-4700-90d9-996769eaaa11@ixit.cz>
-Date: Tue, 29 Sep 2026 11:41:31 +0200
+	dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b="GvLqbRrx"
+Received: from PC-202605011814.localdomain (unknown [221.228.238.82])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4f7d6b327;
+	Tue, 29 Sep 2026 17:42:29 +0800 (GMT+08:00)
+From: Runyu Xiao <runyu.xiao@seu.edu.cn>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Prasad Kumpatla <quic_pkumpatl@quicinc.com>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Runyu Xiao <runyu.xiao@seu.edu.cn>,
+	Jianhao Xu <jianhao.xu@seu.edu.cn>
+Subject: [PATCH] ASoC: codecs: wcd937x: use devm_free_irq() for watchdog IRQs
+Date: Tue, 29 Sep 2026 17:42:23 +0800
+Message-Id: <20260929094223.2086750-1-runyu.xiao@seu.edu.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/11] drm/panel: s6e3ha8: Correct the polarity logic
- within
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260924-crosshatch-panel-v2-0-08d5c7bf72fc@ixit.cz>
- <20260924-crosshatch-panel-v2-6-08d5c7bf72fc@ixit.cz>
- <20260929-dramatic-ocelot-of-support-2aa377@quoll>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20260929-dramatic-ocelot-of-support-2aa377@quoll>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0aa0ec8b556503a1kunmd3a60ad42352c2
+X-HM-MType: 10
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaQkJKVkwfHklKGhpNH0pCSlYeHw
+	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlJSUpVSUlDVUlIQ1VDSVlXWRYaDxIVHRRZQVlPS0hVSktISk
+	9ITFVKS0tVSkJLS1kG
+DKIM-Signature: a=rsa-sha256;
+	b=GvLqbRrxZ96hmKW72qzePjJAFK/KCXNGRAFnUseef/viKdUpo2lIHN3GI+2ui7L8RCe5Fi13SMWURqjwTBvRePMMrbLUx1+3wIRov8p04DkxBzD66zKnwTQ1tg5yECTv5IwstWVVDz3wkxQCisoeGRYd//x42oE4lTW7kIOHgxs=; c=relaxed/relaxed; s=default; d=seu.edu.cn; v=1;
+	bh=zPoTI/RMsEj8z90RqksdLYgjap1eGGOdbOg7FzjEGjQ=;
+	h=date:mime-version:subject:message-id:from;
 
-On 29/09/2026 09:45, Krzysztof Kozlowski wrote:
-> On Thu, Sep 24, 2026 at 04:01:34PM +0200, David Heidelberg wrote:
->> The reset was introduced with wrong polarity. Correct for the future
->> compatibles and keep current with reverted logic.
->>
->> Old DTs keep GPIO_ACTIVE_HIGH and are fixed up via
->> gpiod_toggle_active_low() on the deprecated compatible.
->>
->> Assisted-by: LLM
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Signed-off-by: David Heidelberg <david@ixit.cz>
->> ---
->>   drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 23 +++++++++++++++++++----
->>   1 file changed, 19 insertions(+), 4 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->> index 5e1e997b83b36..99290913de69a 100644
->> --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->> +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
->> @@ -20,16 +20,17 @@
->>   #include "panel-samsung-dsi.h"
->>   
->>   struct s6e3ha8_desc {
->>   	const struct drm_panel_funcs *funcs;
->>   	const struct drm_display_mode *mode;
->>   	unsigned long mode_flags;
->>   	const struct regulator_bulk_data *supplies;
->>   	unsigned int num_supplies;
->> +	bool broken_reset_polarity;
->>   };
->>   
->>   struct s6e3ha8 {
->>   	struct drm_panel panel;
->>   	struct mipi_dsi_device *dsi;
->>   	const struct s6e3ha8_desc *desc;
->>   	struct drm_dsc_config dsc;
->>   	struct gpio_desc *reset_gpio;
->> @@ -62,22 +63,22 @@ static int s6e3ha8_unprepare(struct drm_panel *panel)
->>   {
->>   	struct s6e3ha8 *priv = to_s6e3ha8(panel);
->>   
->>   	return regulator_bulk_disable(priv->desc->num_supplies, priv->supplies);
->>   }
->>   
->>   static void s6e3ha8_amb577px01_wqhd_reset(struct s6e3ha8 *priv)
->>   {
->> -	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->> -	usleep_range(5000, 6000);
->>   	gpiod_set_value_cansleep(priv->reset_gpio, 0);
->>   	usleep_range(5000, 6000);
->>   	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->>   	usleep_range(5000, 6000);
->> +	gpiod_set_value_cansleep(priv->reset_gpio, 0);
-> 
-> This breaks all users and this usage of ABI was already released.
+The watchdog IRQs are requested with devm_request_threaded_irq() from the
+codec component probe, but the remove callback frees them with free_irq().
+The devres entries remain in place. Component teardown later tries to free
+the same IRQs again.
 
-See the gpiod_toggle_active_low() usage later in the patch which keep the logic 
-for the original compatible as intended.
+The IRQs must be released before the SoundWire components are unbound. Use
+devm_free_irq() to remove each IRQ and its devres entry at that point. Fail
+component probe if an IRQ request fails, and unwind only IRQs that were
+successfully requested.
 
-David
+Fixes: 9be3ec196da4 ("ASoC: codecs: wcd937x: add wcd937x codec driver")
+Assisted-by: LLM
+Signed-off-by: Runyu Xiao <runyu.xiao@seu.edu.cn>
+---
+ sound/soc/codecs/wcd937x.c | 32 +++++++++++++++++++++-----------
+ 1 file changed, 21 insertions(+), 11 deletions(-)
 
-...
-+	if (priv->desc->broken_reset_polarity)
-+		gpiod_toggle_active_low(priv->reset_gpio);
+diff --git a/sound/soc/codecs/wcd937x.c b/sound/soc/codecs/wcd937x.c
+index 0dd05604f5b88..ec902c81d5a4e 100644
+--- a/sound/soc/codecs/wcd937x.c
++++ b/sound/soc/codecs/wcd937x.c
+@@ -2540,19 +2540,19 @@ static int wcd937x_soc_codec_probe(struct snd_soc_component *component)
+ 					IRQF_ONESHOT | IRQF_TRIGGER_RISING,
+ 					"HPHR PDM WDOG INT", wcd937x);
+ 	if (ret)
+-		dev_err(dev, "Failed to request HPHR watchdog interrupt (%d)\n", ret);
++		goto err_free_clsh;
+ 
+ 	ret = devm_request_threaded_irq(dev, wcd937x->hphl_pdm_wd_int, NULL, wcd937x_wd_handle_irq,
+ 					IRQF_ONESHOT | IRQF_TRIGGER_RISING,
+ 					"HPHL PDM WDOG INT", wcd937x);
+ 	if (ret)
+-		dev_err(dev, "Failed to request HPHL watchdog interrupt (%d)\n", ret);
++		goto err_free_hphr_irq;
+ 
+ 	ret = devm_request_threaded_irq(dev, wcd937x->aux_pdm_wd_int, NULL, wcd937x_wd_handle_irq,
+ 					IRQF_ONESHOT | IRQF_TRIGGER_RISING,
+ 					"AUX PDM WDOG INT", wcd937x);
+ 	if (ret)
+-		dev_err(dev, "Failed to request Aux watchdog interrupt (%d)\n", ret);
++		goto err_free_hphl_irq;
+ 
+ 	/* Disable watchdog interrupt for HPH and AUX */
+ 	disable_irq_nosync(wcd937x->hphr_pdm_wd_int);
+@@ -2564,24 +2564,34 @@ static int wcd937x_soc_codec_probe(struct snd_soc_component *component)
+ 						ARRAY_SIZE(wcd9375_dapm_widgets));
+ 		if (ret < 0) {
+ 			dev_err(component->dev, "Failed to add snd_ctls\n");
+-			wcd_clsh_ctrl_free(wcd937x->clsh_info);
+-			return ret;
++			goto err_free_irqs;
+ 		}
+ 
+ 		ret = snd_soc_dapm_add_routes(dapm, wcd9375_audio_map,
+ 					      ARRAY_SIZE(wcd9375_audio_map));
+ 		if (ret < 0) {
+ 			dev_err(component->dev, "Failed to add routes\n");
+-			wcd_clsh_ctrl_free(wcd937x->clsh_info);
+-			return ret;
++			goto err_free_irqs;
+ 		}
+ 	}
+ 
+ 	ret = wcd937x_mbhc_init(component);
+-	if (ret)
++	if (ret) {
+ 		dev_err(component->dev, "mbhc initialization failed\n");
++		goto err_free_irqs;
++	}
+ 
+ 	return ret;
 +
-
-> 
-> NAK
-> 
->> +	usleep_range(5000, 6000);
->>   }
->>   
->>   static int s6e3ha8_amb577px01_wqhd_on(struct s6e3ha8 *priv)
->>   {
->>   	struct mipi_dsi_device *dsi = priv->dsi;
->>   	struct mipi_dsi_multi_context ctx = { .dsi = dsi };
->>   
->>   	dsi->mode_flags |= MIPI_DSI_MODE_LPM;
->> @@ -203,17 +204,17 @@ static int s6e3ha8_amb577px01_wqhd_prepare(struct drm_panel *panel)
->>   	ret = regulator_bulk_enable(priv->desc->num_supplies, priv->supplies);
->>   	if (ret < 0)
->>   		return ret;
->>   	mipi_dsi_msleep(&ctx, 120);
->>   	s6e3ha8_amb577px01_wqhd_reset(priv);
->>   
->>   	ret = s6e3ha8_amb577px01_wqhd_on(priv);
->>   	if (ret < 0) {
->> -		gpiod_set_value_cansleep(priv->reset_gpio, 0);
->> +		gpiod_set_value_cansleep(priv->reset_gpio, 1);
-> 
-> No, you just changed it!
-
-> 
-> Implement correct and logical fixes, not half-baked fix which is
-> immediately wrong.
-> 
-> Best regards,
-> Krzysztof
-> 
-
++err_free_irqs:
++	devm_free_irq(dev, wcd937x->aux_pdm_wd_int, wcd937x);
++err_free_hphl_irq:
++	devm_free_irq(dev, wcd937x->hphl_pdm_wd_int, wcd937x);
++err_free_hphr_irq:
++	devm_free_irq(dev, wcd937x->hphr_pdm_wd_int, wcd937x);
++err_free_clsh:
++	wcd_clsh_ctrl_free(wcd937x->clsh_info);
++	return ret;
+ }
+ 
+ static void wcd937x_soc_codec_remove(struct snd_soc_component *component)
+@@ -2589,9 +2599,9 @@ static void wcd937x_soc_codec_remove(struct snd_soc_component *component)
+ 	struct wcd937x_priv *wcd937x = snd_soc_component_get_drvdata(component);
+ 
+ 	wcd937x_mbhc_deinit(component);
+-	free_irq(wcd937x->aux_pdm_wd_int, wcd937x);
+-	free_irq(wcd937x->hphl_pdm_wd_int, wcd937x);
+-	free_irq(wcd937x->hphr_pdm_wd_int, wcd937x);
++	devm_free_irq(component->dev, wcd937x->aux_pdm_wd_int, wcd937x);
++	devm_free_irq(component->dev, wcd937x->hphl_pdm_wd_int, wcd937x);
++	devm_free_irq(component->dev, wcd937x->hphr_pdm_wd_int, wcd937x);
+ 
+ 	wcd_clsh_ctrl_free(wcd937x->clsh_info);
+ }
+-- 
+2.34.1
