@@ -1,43 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 288BD3C2B8F;
-	Tue, 29 Sep 2026 02:59:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CC103C9896;
+	Tue, 29 Sep 2026 03:05:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790650765; cv=none; b=OrmMmLuLJj9tUokGZVqlWwc3gGYVLTl8PPg2NaVm4RgJYCV9eX1hJjrw+ZxYBDNY8hWRT0rBwMiZc4NRoMwolfCKFXGqOYKAp4Dibl+wcP1WH91PcCIrJbeKE/N+nx7RZZkJKeuFCd63i8etitTRdjsynRV28SAbIM7+KaFzCZI=
+	t=1790651136; cv=none; b=X2rmtvS8SZeoEctjOn50Vqp2nDCbB7+OOW1ebl5lIl70+LtzGOQ2c49z/BjuZ6uZUknS+hwJRmCO5a3RCU5uhx4tX9FZ5ITUynwmw0U5BHcLhStO06+4tdQZUe44ETAWEE+HKeNL0SCtkWFfNgTz5XEWGliWkfikKQ29aQKpoas=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790650765; c=relaxed/simple;
-	bh=wLckDscphnGkh0WFF1ytv7QkveXFxmU6gRikvjheuik=;
+	s=arc-20240116; t=1790651136; c=relaxed/simple;
+	bh=UTyaWHrrtgUu29EL2bxdQPs3r+p8tFUZWrk6ieq8R+A=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pFnjckY6lbqaIuQuEFuevtYEeG/YMM2OAdtWflpS+8uDETjsp0M9fW9paa8eu4CNUw8/+mWMCACz3B1zT6c2kpsVSf7ON6W7wE4OJkD2Ok0ytxWF6r0h8UKv4DapzH9nNPDHd19cVTlbZ6e2KD74n16jG+vJlDKeprOnsJpIun4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EZvdQBkU; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Be29gxXD4oDyApWRL2Mr29L63gRH/Cog54ioPMFZxWaFEdcm6eRXzvfq7rfJxveZ4Nt+AfQb8fKJHIB4Si7WXVC/zAZBaUdtzn4ul+RtZM4JwHaGn//AIp2NkKYBgfX8dnI9wbumvQunjulcwIAqTubqyO10v/Ahxaqpv8J/3Y4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jst1H8Fl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EZvdQBkU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BABD31F000FF;
-	Tue, 29 Sep 2026 02:59:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jst1H8Fl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F02801F000FF;
+	Tue, 29 Sep 2026 03:05:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790650763;
-	bh=45G97lMmELMR3HYz20XZUa8kHahrLVd6UZEJZLiYSeM=;
+	s=k20260515; t=1790651124;
+	bh=wN+dPoLvjUdzOubg5yOWipnDclWmGuYXl68rAIhKrs4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EZvdQBkUK0GdtfivQYf2Be4sU71zPoxxz8iKyNjp5m5RHr9ssojPZEfEZkiPYzzTP
-	 0tkB64ZQ9h9dERtePq3iUylPyoN2ecGHVSHErItDG+rArHuw2/L0kBvaIK+AB5uuLH
-	 uYDU9HCBBqBNdWTktFG929kAaW58D2SROM+ksixaCTNv3O4rtgo9gvpPdCrk+PDhJD
-	 vDlUNHvjC4yW4iJ9zDtE5FvqYrmkCrjk9XMmB6uAtZRqKaztNUoGv1oGMxgfJ9AZqO
-	 eF9j0/uD6NYu+Fm6YFhZDM8flgiDlCa4ziaMCrmHxOTuDqA5fLlffv63CFi4O1l7Bs
-	 b6wDBv0h0hOnw==
-Date: Mon, 28 Sep 2026 21:59:20 -0500
+	b=jst1H8Flgrq1+3nX9cUs/Aj2g5l1buTMNHfcFzX475/4uSQnhnpl8JYBuVziWVXE2
+	 THMV0ldE2MRJM/kyCwxqk+V/YJTo8ezuL2Rh9tmTwE1e49+r+/8ufM5VC2ZNhBxLEG
+	 Iev6mnmci3c4XW0dcsJLjkcPWRChoKLM4NO0Lo/ixQaGBHsro9ias5+eqTmHd4FlqF
+	 ejV0c5IJ4WMae+jxu/Z7leYRqEmNA0ewtlXfux6XcwX1Rou6PPhdvx+ilXmjXYK2o+
+	 4QEDHHScBOP0F94JGS5Tcnyb3TqhTRSTLgAGHWhCoMDwEDbHwby3oKnO/tkKI8GyR+
+	 rJ8zuNiPgPSDg==
+Date: Mon, 28 Sep 2026 22:05:20 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: david@ixit.cz
-Cc: Rob Herring <robh@kernel.org>, 
+To: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Richard Acayan <mailingradian@gmail.com>, Petr Vorel <petr.vorel@gmail.com>, 
-	Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH RFC 1/4] dt-bindings: soc: google: Add modemsmem
-Message-ID: <arsoHnkYnxMIP2ZM@zenbook>
-References: <20260906-modemsmem-v1-0-a3634b553841@ixit.cz>
- <20260906-modemsmem-v1-1-a3634b553841@ixit.cz>
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com, 
+	Jessica Zhang <jesszhan0024@gmail.com>
+Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: Add RPi 7-inch DSI panel
+ overlays for Monaco/Lemans EVK
+Message-ID: <arsp-8KPqD_skD5D@zenbook>
+References: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
+ <aqLGFfQ20mCGFkfl@baldur>
+ <aqt72zoSNVGrcY9t@hu-ssmaurya-hyd.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,89 +50,92 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260906-modemsmem-v1-1-a3634b553841@ixit.cz>
+In-Reply-To: <aqt72zoSNVGrcY9t@hu-ssmaurya-hyd.qualcomm.com>
 
-On Sun, Sep 06, 2026 at 02:41:12AM +0200, David Heidelberg via B4 Relay wrote:
-> From: David Heidelberg <david@ixit.cz>
+On Thu, Sep 17, 2026 at 11:04:19AM +0530, Shashank Maurya wrote:
+> On Thu, Sep 10, 2026 at 02:35:41PM -0500, Bjorn Andersson wrote:
+> > On Mon, Sep 07, 2026 at 12:03:52PM +0530, Shashank Maurya wrote:
+> > > Add device tree overlays to enable support for the Raspberry Pi 7-inch
+> > > DSI touchscreen panel on Qualcomm Monaco and Lemans EVK platforms.
+> > > 
+> > > The overlays configure the panel on the primary DSI interface using
+> > > a 2-lane DSI connection and instantiate the panel MCU on the
+> > > corresponding touchscreen I2C bus for each platform. The changes
+> > > allow the Raspberry Pi 7-inch display to be used as an external
+> > > display option on both EVKs without affecting the default platform
+> > > configuration.
+> > > 
+> > > ---
+> > > To: Bjorn Andersson <andersson@kernel.org>
+> > > To: Konrad Dybcio <konradybcio@kernel.org>
+> > > To: Rob Herring <robh@kernel.org>
+> > > To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+> > > To: Conor Dooley <conor+dt@kernel.org>
+> > > To: Florian Fainelli <florian.fainelli@broadcom.com>
+> > > To: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+> > > Cc: linux-arm-msm@vger.kernel.org
+> > > Cc: devicetree@vger.kernel.org
+> > > Cc: linux-kernel@vger.kernel.org
+> > > Cc: linux-rpi-kernel@lists.infradead.org
+> > > Cc: linux-arm-kernel@lists.infradead.org
+> > > 
+> > > ---
+> > > Shashank Maurya (2):
+> > >       arm64: dts: qcom: monaco-evk: Add Raspberry Pi 7-inch DSI panel overlay
+> > >       arm64: dts: qcom: lemans-evk: Add Raspberry Pi 7-inch DSI panel overlay
+> > > 
+> > >  arch/arm64/boot/dts/qcom/Makefile                  |  4 ++
+> > >  .../dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso | 83 ++++++++++++++++++++++
+> > >  .../dts/qcom/monaco-evk-raspberrypi-dsi-7inch.dtso | 82 +++++++++++++++++++++
+> > >  3 files changed, 169 insertions(+)
+> > > ---
+> > > base-commit: ed2647532a225739e86c7f236a2ce82764ec2772
+> > > change-id: 20260907-rpi_dts_overlay-58088ffce047
+> > > prerequisite-message-id: <20260907-rpi_reg-v2-0-0c59aa60d31f@oss.qualcomm.com>
+> > 
+> > The two dts patches in this series clearly relates to those two
+> > regulator patches, which has received change requests.
+> > 
+> > I would have sent the 4 patches together in a series, but as you didn't
+> > you sent this series with unmet dependencies.
+> > 
+> > All I can do now is reject this series as well. Please send v2 once the
+> > driver changes has been merged and you have validated this again.
+> > 
+> > Regards,
+> > Bjorn
+> > 
+> > > prerequisite-patch-id: 5212bf185b35c36ed8857a67f29e60386d59ac60
+> > > prerequisite-patch-id: 056a90b913170106a6f8c1feb2366ee83c4375b9
+> > > 
+> > > Best regards,
+> > > --  
+> > > Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+> > > 
 > 
-> The modem firmware on Google Pixel 3 - 5a devices expects the application
-> processor to publish SoC platform information in a vendor-defined SMEM
-> item before the modem boots.
+> Hi Bjorn,
 > 
-> Assisted-by: LLM
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
->  .../bindings/soc/google/google,modemsmem.yaml      | 39 ++++++++++++++++++++++
->  1 file changed, 39 insertions(+)
+> Thanks for the review.
 > 
-> diff --git a/Documentation/devicetree/bindings/soc/google/google,modemsmem.yaml b/Documentation/devicetree/bindings/soc/google/google,modemsmem.yaml
-> new file mode 100644
-> index 0000000000000..a5214a8093ba0
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/soc/google/google,modemsmem.yaml
-> @@ -0,0 +1,39 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/soc/google/google,modemsmem.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Google Modem Shared Memory
-> +
-> +maintainers:
-> +  - Richard Acayan <mailingradian@gmail.com>
-> +
-> +description:
-> +  The modem firmware on Google Pixel devices (Pixel 3 through Pixel 5a)
-> +  expects the application processor to publish SoC information (platform
-> +  type and revision) in a vendor-defined Qualcomm Shared Memory (SMEM)
-> +  item before the modem boots.
-> +
-> +properties:
-> +  compatible:
-> +    const: google,modemsmem
+> The regulator patches and DTS patches are targeting different maintainer trees 
+> and therefore were developed and submitted from separate workspaces. While the
+> DTS changes depend on the regulator updates, the two sets of patches cannot 
+> realistically be carried in a single series because they are reviewed and 
+> merged through different paths.
+> 
 
-To me it is seems node represents the attribute of the modem remoteproc
-requiring this information to be populated before its started, rather
-than a thing of its own.
+In reality, Mark has shown many times that he's able to pick individual
+patches from a series and the 4 patches are better reviewed together.
 
-How about representing this as a property of the modem remoteproc node
-instead (perhaps "google,require-socinfo"?) and then put the conditional
-snippet in the remoteproc driver?
+> I submitted the DTS series separately to start the review process in parallel,
+> but I understand your concern about the unresolved dependency.
+> 
 
+Please send patches that are ready to be merged, and when you do make
+sure you send them in a way and at a time where they can be merged.
 
-I'm not particularly fond of the additional codepath in the remoteproc
-drivers, but I think the DeviceTree representation would be more
-appropriate - and the driver changes are reasonably isolated.
-
-> +
-> +  qcom,smem-id:
-
-Let's just hard code this in the implementation until there's a need for
-this to change.
-
-Regards,
+Thanks,
 Bjorn
 
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      Identifier of the SMEM item the SoC information is written to. Google
-> +      firmware uses the first vendor-reserved item.
-> +
-> +required:
-> +  - compatible
-> +  - qcom,smem-id
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    modemsmem {
-> +        compatible = "google,modemsmem";
-> +        qcom,smem-id = <134>;
-> +    };
-> 
-> -- 
-> 2.55.0
-> 
-> 
+> Regards,
+> Shashank
