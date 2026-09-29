@@ -1,137 +1,77 @@
-Received: from mail.holtmann.org (mail.holtmann.org [81.169.141.235])
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 820EF51815B;
-	Tue, 29 Sep 2026 17:14:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.169.141.235
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84AC5427E5;
+	Tue, 29 Sep 2026 17:17:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=124.126.103.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790702078; cv=none; b=uQOF2U8RPdB5SJUFTxgYmkywecfFfI7XYjMypWFV9KpfIgWFJ58+62TfZrvif3lmCYsBaE35FNKKWZ5ZFCxrjxuBKsSOV2Z/u4L6O8PXRfPfyEL99srYIQvOnyVkK2EgomOaD//AGSWYx4Ioe5WUFR/ZD8e+g5er0x31deKBe8Q=
+	t=1790702231; cv=none; b=ZCcirEFGNZkMzSDfuUoJ3OV1pMHc8Ig3xMtdHzqWONWC5IqcAHVFMyF9BcwAddgdblVyGqgVU9VJAeywC8GOGr4xKFzk1wvhDgYWZR94wZEa7vBqUUlZC3AqzmvseSVUS18TNkzafCqEprYazv7dyDjxZBGF8qgXX4xsSxk0F00=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790702078; c=relaxed/simple;
-	bh=kmQ1hbQPD5iWUSj9w4INyopw+EVylQeht+K3g4IU9JM=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=qKllbXwfRAiwxvGIAnWGtdClGFyJxCdEAHEmGNCDnzm0lVK26xxM1HTuJvvgaQaGrq+KJ73jZqW+kdW6YxjtOUKQ1/tWA9bsCJB6uUOAr8rVodabYCFHsHq3nJJC8eg198AY4+GDTvnj0ULn9QDju/HReT2wZ86ubRhXrbBuoQ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org; spf=pass smtp.mailfrom=holtmann.org; arc=none smtp.client-ip=81.169.141.235
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtmann.org
-Received: from smtpclient.apple (p5b0a9ac0.dip0.t-ipconnect.de [91.10.154.192])
-	by mail.holtmann.org (Postfix) with ESMTPSA id 0F38CFF100;
-	Tue, 29 Sep 2026 19:05:42 +0200 (CEST)
-Content-Type: text/plain;
-	charset=utf-8
+	s=arc-20240116; t=1790702231; c=relaxed/simple;
+	bh=/pHfoKgokia/MdRzHNMrVcLo021G7LgctLnT21f/BYM=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=R3ZMmBxX036blnkwAHxMyYblginm7xEiH6hfTMisSIMq+jANnX02v5w7i9QJ5gehGAz43W+J7mpiIwzaIVSj+uX7VnXES6yem9FLP7qBluzSvkCv8GSGhdG91maKgPi+S6vrGCB2Tk5JNrIEYV9AoxRVHaJE7KSx4gVEeXbpjww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kylinos.cn
+X-UUID: 93e4361ebc2911f19a56ed5b684f684d-20260930
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.19,REQID:2b340d9d-b854-44b7-b308-5ce70dc73aaa,IP:0,U
+	RL:0,TC:0,Content:0,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:25
+X-CID-META: VersionHash:7db8b62,CLOUDID:916476fa9f55dfc2dc4ea2b3266bf061,BulkI
+	D:nil,BulkQuantity:0,SF:81|82|83|102|850|865|898,TC:nil,Content:0|15|50|99
+	,EDM:5,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OS
+	A:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 93e4361ebc2911f19a56ed5b684f684d-20260930
+X-User: huangwei@kylinos.cn
+Received: from localhost.localdomain [(10.44.16.150)] by mailgw.kylinos.cn
+	(envelope-from <huangwei@kylinos.cn>)
+	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
+	with ESMTP id 152541326; Wed, 30 Sep 2026 01:16:58 +0800
+From: Huang Wei <huangwei@kylinos.cn>
+To: Fabricio Akio <fabricioakio@gmail.com>
+Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	huangwei@kylinos.cn
+Subject: Re: [PATCH] usb: dwc3: qcom: Check for L2 only when suspending a host with wakeup
+Date: Wed, 30 Sep 2026 01:16:53 +0800
+Message-Id: <20260929171653.3167156-1-huangwei@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20260928-dwc3-qcom-l2-check-v1-1-43c5c6e97922@gmail.com>
+References: <20260928-dwc3-qcom-l2-check-v1-1-43c5c6e97922@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3901.100.1.1.12\))
-Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
-From: Marcel Holtmann <marcel@holtmann.org>
-In-Reply-To: <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
-Date: Tue, 29 Sep 2026 19:05:31 +0200
-Cc: manivannan.sadhasivam@oss.qualcomm.com,
- Manivannan Sadhasivam <mani@kernel.org>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>,
- Jeff Johnson <jjohnson@kernel.org>,
- linux-arm-msm@vger.kernel.org,
- netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org,
- ath12k@lists.infradead.org,
- Bjorn Andersson <andersson@kernel.org>,
- Chris Lew <christopher.lew@oss.qualcomm.com>,
- Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
- Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
-References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
- <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
- <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
-To: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-X-Mailer: Apple Mail (2.3901.100.1.1.12)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Hi Deepak,
+Hi Fabricio,
 
->> Now that the QRTR driver allows using the unique node id for each =
-device,
->> which is different from the node id received from the remote node, =
-compute
->> a unique node id using a new API, qrtr_host_node_id().
->>=20
->> This API takes the 'index' parameter and adds it to =
-QRTR_NODE_HOST_BASE,
->> whose value is outside of the node id range used by the remote nodes =
-(0 to
->> 0xffff).
->>=20
->> Finally, call the new API from MHI endpoint driver by passing the MHI
->> controller index as the parameter. The MHI controller index is unique =
-for
->> each controller, thereby for each MHI endpoint device.
->>=20
->> Signed-off-by: Manivannan Sadhasivam =
-<manivannan.sadhasivam@oss.qualcomm.com>
->> ---
->>  MAINTAINERS        |  1 +
->>  include/net/qrtr.h | 21 +++++++++++++++++++++
->>  net/qrtr/mhi.c     |  4 +++-
->>  3 files changed, 25 insertions(+), 1 deletion(-)
->>=20
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index df8ab9b82402..9c8bb086be28 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -22511,6 +22511,7 @@ QUALCOMM IPC ROUTER (QRTR) DRIVER
->>  M: Manivannan Sadhasivam <mani@kernel.org>
->>  L: linux-arm-msm@vger.kernel.org
->>  S: Maintained
->> +F: include/net/qrtr.h
->>  F: include/trace/events/qrtr.h
->>  F: include/uapi/linux/qrtr.h
->>  F: net/qrtr/
->> diff --git a/include/net/qrtr.h b/include/net/qrtr.h
->> new file mode 100644
->> index 000000000000..745d51b4a6ba
->> --- /dev/null
->> +++ b/include/net/qrtr.h
->> @@ -0,0 +1,21 @@
->> +/* SPDX-License-Identifier: GPL-2.0 */
->> +
->> +#ifndef _NET_QRTR_H
->> +#define _NET_QRTR_H
->> +
->> +#include <linux/types.h>
->> +
->> +/* The offset is chosen carefully to not collide with the node ids =
-allocated by
->> + * the remote nodes. All the remote nodes use node ids in range 0 to =
-0xffff.
->> + */
->> +#define QRTR_NODE_HOST_BASE 0x10000u
->=20
-> Can it be exposed with include/uapi/linux/qrtr.h also. There are user =
-space clients like modem manager
-> which need to calculate modified node id to distinguish same service =
-from multi modem over mhi.
-> This is same as wlan use case.
+This matches what I'd expect from the PHY behaviour - in peripheral
+mode the device disconnects before the glue suspends, so there is no
+link left to park in L2, and the unconditional check is just log noise
+on every suspend. Restricting it to the host-with-wakeup case that
+actually relies on L2 retention looks right.
 
-did anybody actually looked at the proposal that Denis and I came up =
-with. It was exactly addressing this properly.
+The untested host path is low risk in a specific way: for host with
+wakeup the check runs exactly as before, so the patch only silences
+the cases where L2 is not expected. And since the runtime PM paths
+pass wakeup unconditionally, host runtime suspend still gets the
+check, which seems to be the intended behaviour.
 
-It seems you guys came up with some hot fix and want to run with it. =
-After month and month of silence and not bothering to review the =
-proposal, you are trying to push your thing?
+Tested on real hardware in the mode that was noisy - nice.
 
-If you don=E2=80=99t support userspace, your proposal is broken. Plain =
-and simple.
+Reviewed-by: Huang Wei <huangwei@kylinos.cn>
 
-Regards
-
-Marcel
-
+Thanks,
+Huang Wei
