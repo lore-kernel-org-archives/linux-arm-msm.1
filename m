@@ -1,166 +1,187 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f40.google.com (mail-pj2-f40.google.com [74.125.227.168])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A25F526A9C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:03:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FB154E80A9
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:06:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.168
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790686990; cv=none; b=kGd1xOr/9CF+iFlYYKxjQ1Xjtu1RE17hYJUbfrSW8zIHrd/rxoxPePwaxXJ0tRFfa+lFHTh6KG9r7w/Scs6zxHDEUrh1cHkkvaDv89gq6TEwZtemCz9R7oaRXLbcpbsuJtHgCzOOOCEvTrLQMrjXJL2bWdloiD1zFq8Gyo3Itck=
+	t=1790687192; cv=none; b=avHewcOUggZf7rlYy22cEbTeYk1osZ+z82S833eKndehuaplZ7y+HG584KEgn12ZJTxUDULkADFcPHpCPUoSVeRP+cd22onalsMCql9/vq4RqPryLoNea0cWfG/Yye2FDfPrfyb1q3mg8okDrYwa1Qu5MNU9zCMXd6UkEBPV3KI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790686990; c=relaxed/simple;
-	bh=Cz6yzoqzZZKggbHRYEUoEWMBF2GsBR1cUX34xnIoG/k=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hoCOERBJupolJGjrWW+zC5AK2SSspdwuSXdVXfK7jdSpFwcXU2aGtVG4MPeMBNYZZUcSpO9KLnIyXYPdbib0HUvvjlRUMhQvhJLq0aPYPza3BH1y6jfvEzaC0Q9FrztNOU8p4lQ0xQPdoe6UEhW+RpokzgbdWXpJscEOJ+soWBU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xioas2p8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790687192; c=relaxed/simple;
+	bh=v/r/9WpqeziGia67i7jHFrfYe6j8QVnAAEzTUyaYUzs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rLMcMZQSplqWtLSNbdo9vYiQ84G4ek8HwzoICl6STgpqeENAtBo9iFWdY6TWfRuajbABhFESX3WmFZGlKA4NHFbyMghFNOYHjkH8NH4aO1XUv95fVRFTmL0vmXWZTferlH9ppK9896DbZNe0TDDU8kXSB6ePJtrCYQ1Tc64dtmw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nD3y1Rn3; arc=none smtp.client-ip=74.125.227.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xioas2p8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7A051F008A2
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 13:03:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790686988;
-	bh=37EPhNuTofFwtN/QAT2xqnB++jVEO++YPBVY4Xssh88=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Xioas2p8H4G3BPXKSBoQm8qv5Y0qkNH/Dh4bXBx8BgT8RZSoSTRy/pUE5Hb1MgrdE
-	 XFAjYhgcYYXgnvDw9mHm4SnAI/b1blzYSpVOXw775h+kKrblbro+VeawpEmPXlUyCd
-	 /zL9g8dEaP5BiGApY3VpCqFxo1OozVLKqOi+5SYuFGeW8VW6B0130uEl+iy5oq56jG
-	 o/zHv+BRjMY/88QbYr+TPU7544cDmhD9bKQhvvwEihnC+k4wrtSoaun2SLQAEYq7pz
-	 tdW99p/akMYBiTbuWo7Cuh9wys1BSJ23qVCMvkkdwkouYWlyVHZbtvcl+TIrJPGxZS
-	 6OxtZzojNk4Jw==
-Received: by mail-oa2-f26.google.com with SMTP id 586e51a60fabf-466cc88a9b9so2706294fac.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:03:08 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwk6pPOl+8L6x9UR0IdFTWCegc8HZ581oY/gFerxO/4z/FYlzjftBkMmn7cjqVDHZDz0SDa29Fff+AF8Aqe@vger.kernel.org
-X-Gm-Message-State: AFuF++kQjXMdZJ8k7Lk4+6k1nsxVSS62t2D8AWHvNr1HS0YD5bRy4aiv
-	bLleDoyjeAhrrJPBsPaMWMWKFzLlCR8Hnt75J3vKdW8N2W+wloSNbwkmf6GNeDTT+oAkJgIiEA/
-	OuNetIpIUjz44mBsxUnwLgWGBTxdghQg=
-X-Received: by 2002:a05:6870:d404:b0:499:f197:d79 with SMTP id
- 586e51a60fabf-499f197114emr1076008fac.17.1790686988186; Tue, 29 Sep 2026
- 06:03:08 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nD3y1Rn3"
+Received: by mail-pj2-f40.google.com with SMTP id 98e67ed59e1d1-3a2adb9bc3cso1323324a91.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 06:06:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790687185; x=1791291985; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8jE/aJ2E98iI2S/CWQodcOrB8SsgSTcF+14ugT3aOH8=;
+        b=nD3y1Rn3Gbmj5a0MY6ZSHrTnorLshm+tql1EbWEDRPVFQdVy0WUbcI69RJRKsCbtlx
+         DImlNRjcu77QiP5bCFDLFn61L81RfRF77GQlxCsOfCISLRSQxH4BWUXPUXLo+CLfdRJS
+         oGtR4u8xZYb13HWK2lxGKHVFiC5OfiuJ0sLlSQYBnmBKXpNF2ccRtQrPqpTDQdfenmre
+         BZ3LKTvZK+YIBJ1OApDgCII4nGqKDWGzC3cohZIkK8d5SnJZ12Ll+pVQI3r6I6tCY7lL
+         ZYvVQK42EvrHYzXufzJ+gGmDxqLhOiAeiPF6H1oqBN2pcv7eoQmGjdRpS8K3Ypjfef9X
+         +nUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790687185; x=1791291985;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8jE/aJ2E98iI2S/CWQodcOrB8SsgSTcF+14ugT3aOH8=;
+        b=FidV5bYJ/iUEvEajykYSpMGYbka4+somfTMaIsHL0vFd4D+0/XipF1Z1ASYjF8Zbd4
+         sU0wFy53CZitLYKrifKpSjO79nfeg/RLry9/00vvZEGAR5DHtnmfmXFWjE6ExK7uXBT1
+         CDj++VNdG8w6uSDagvHBfoF8oU+ZqvUgUhr1F0QD9BTzK9i/B07RWLN95ITZlfZDbKTc
+         Th+kHhJc0OumTzrmpENNNkVH2yL/Gx/2sB93TY/I2K2a1rSeuObn/1E4BPadx9cR8Fn/
+         InFfCO64EzuFBLhNoDYifhwcIyeO6ObsSgCAfJlxbX6/HxPaUGDVZkMmxAI21bO4lyax
+         r+Ig==
+X-Forwarded-Encrypted: i=1; AKwUvBx/DH0uqLwBLGFki+ELRHRq1VOK14CqzxblEjNEE+qWFTw/rc18GKzZo6lSKWCMWmU21s49x55vzczynYn3@vger.kernel.org
+X-Gm-Message-State: AFq9FYIzFh/T8HlAC/UeCpuxCenvoywJfwqlTU6BBrQXk6VowM4jVmgU
+	UudLfE9aSArsjToN8WIFc7+SZPKwLUtVwpNPW/HyX0+GpTAlGUztQ+ce
+X-Gm-Gg: AYBFou1SUDHvqaEKpf6kF+Y4pSSJTiHzDIP8OIb65s6EPgP9S6bL+UWZumKD8dAE4OL
+	xi/PsXWMj9E9DM/j7zPV6zU1Qb1hcpxCfQIrAtzzjwwN76mmJO0/gCunGJMbunuWmmkMuYarBGL
+	RJLMj3SQZ7wA75Wz7JbpoN88rYznymms3c8M5t4Yt5tqbOMuBAFlLZT6ftmapQ+bpUZE5eiRNSe
+	vcJehdAAkrX2QsVNBBC7T0SN4WcQsA45zPP5rrYky2YvOv6IulfGLrXaymoXl/nXUiKo+84Qi1y
+	8zUUnnRVFpqRKEOfBUGEnRNhGLTrMW7Vl+IqhqG2oXywfUQLZJcdIhDkZSrq0An2H5G4qtLmvoh
+	QUKr/ekiYW+nLrWoPUDVu6ZFYYxYBDwbWkdcdihtURGecju7qDnvikPV+iyTMnTaXUwtUU8iHgb
+	MFjseN0DA7Xab9i2q2oKS+jMnHLUGt2x4fY52I922Zam0SCCsmRSRXaUN2OuZ/vXRo8+OKp1gK8
+	Xxjewxukkpil3Q=
+X-Received: by 2002:a17:90a:d883:b0:3a0:4146:295b with SMTP id 98e67ed59e1d1-3a0987255a0mr10559170a91.17.1790687185233;
+        Tue, 29 Sep 2026 06:06:25 -0700 (PDT)
+Received: from DESKTOP-NM9EKIA ([125.134.240.130])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a49858555csm6107928a91.5.2026.09.29.06.06.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Sep 2026 06:06:24 -0700 (PDT)
+From: Joonhoe Kim <26rote@gmail.com>
+To: robin.clark@oss.qualcomm.com,
+	lumag@kernel.org
+Cc: abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	sean@poorly.run,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Joonhoe Kim <26rote@gmail.com>
+Subject: [PATCH] drm/msm/dpu: stop all video interfaces before cleaning up a split encoder
+Date: Tue, 29 Sep 2026 22:06:21 +0900
+Message-ID: <20260929130621.943-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org> <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
-In-Reply-To: <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 29 Sep 2026 15:02:54 +0200
-X-Gmail-Original-Message-ID: <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com>
-X-Gm-Features: AclHuK-Qd0URk-jzkKvP69eKU__69SXNOlyvT8nHCDMV5m7lT3rRWZmfmDiZ-Kw
-Message-ID: <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] drm/panel: Add driver for Synaptics R63455 DSI panel
-To: Jun Nie <jun.nie@linaro.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Jun,
+dpu_encoder_virt_atomic_disable() disables the physical encoders one by
+one. For a video-mode master, dpu_encoder_phys_vid_disable() stops its
+timing engine, waits for the frame to finish and then runs
+dpu_encoder_helper_phys_cleanup(), which resets the CTL. With a split
+display (two interfaces driven from one CTL, e.g. bonded DSI) that CTL
+is shared with the slave, whose timing engine is still running at that
+point: the source pipe starts fetching the slave's next frame and is
+left stalled half-way through it (on SM8850, SSPP_CMN_STATUS 0x10030
+with the fetch and unpack counters frozen, where an idle pipe shows
+0x10003).
 
-thanks for your patch!
+The stall is cleared by a power collapse of the MDSS core GDSC, which
+normally happens between a disable and the next enable, so it goes
+unnoticed. When MDSS stays powered across the disable -- a full modeset
+within one commit, or another runtime-active user of MDSS such as the
+DP controller -- the next enable of the bonded DSI panel scans out
+nothing: the DPU keeps committing frames, the layer mixers produce no
+output (CRC 0), and the panel shows black with the backlight on. A CTL
+reset at enable does not clear it.
 
-On Mon, Jul 27, 2026 at 10:09=E2=80=AFAM Jun Nie <jun.nie@linaro.org> wrote=
-:
+Stop the timing engine of every video interface of the encoder before
+any of them is cleaned up. The master's existing wait for the frame to
+complete then covers both halves.
 
-> +#define R63455_MF_CMD_ACCESS_PROTECT   0xb0
-> +#define R63455_SEQ_CTL                 0xd6
-> +#define R63455_DSI_CTL                 0xb6
-> +#define R63455_DISP_MODE               0xb7
-> +#define R63455_GEN_OUTPIN_SET          0xb9
-> +#define R63455_DISP_SET1               0xc0
-> +#define R63455_DISP_SET2               0xf1
-> +#define R63455_DISP_SET3               0xc6
-> +#define R63455_DISP_SET3_2             0xcd
-> +#define R63455_DISP_SET4               0xcf
-> +#define R63455_DISP_SET5               0xec
-> +#define R63455_DISP_SET6               0xef
-> +#define R63455_TE_GPIO_CTL             0xbe
-> +#define R63455_PPS_SET                 0xe6
+Seen on a Lenovo Legion Tab Y700 gen 5 (TB323FU, SM8850) with a bonded
+DSI video-mode panel (CSOT PP8807HB1-1). It reproduces without any
+external display by keeping MDSS runtime-active:
 
-This is more details than we usually get, which is nice.
+  echo on > /sys/bus/platform/devices/9800000.display-subsystem/power/control
 
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_MF_CMD_ACCESS_PROTECT, =
-0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_SEQ_CTL, 0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx,
-> +                            R63455_DSI_CTL,
-> +                            0x20, 0x6b, 0x80, 0x06, 0x33, 0x9a, 0x00, 0x=
-1a,
-> +                            0x7a);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_MODE,
-> +                            0x54, 0x00, 0x00, 0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_GEN_OUTPIN_SET,
-> +                            0xf, 0xe4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
-0,
-> +                            0xf, 0xb2, 0x00, 0x64);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET3,
-> +                            0x08, 0x70, 0x28, 0x48, 0x00, 0x00, 0x13, 0x=
-21,
-> +                            0xff, 0x00, 0x0f, 0x01, 0x14, 0x17, 0x00, 0x=
-00,
-> +                            0x00, 0x02, 0x40, 0x0C, 0x00, 0x00, 0x00, 0x=
-20,
-> +                            0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x70, 0x=
-08,
-> +                            0xD0, 0x02, 0x21, 0x6F, 0x08, 0x5A, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET1,
-> +                            RTN, 0x86, LE16_BYTE0(VBP), LE16_BYTE1(VBP),=
- 0x08,
-> +                            0x70, BE16_BYTE0(VFP), BE16_BYTE1(VFP), 0x00=
-,
-> +                            0x00, 0x08, 0x3B, 0x00, 0x00, 0x19, 0x01, 0x=
-22);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET3_2, 0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET4,
-> +                            0x8b, 0x00, 0x80, 0x46, 0x61, 0x00, 0x8b);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET5,
-> +                            BE16_BYTE0(VID_VS_DELAY),
-> +                            BE16_BYTE1(VID_VS_DELAY),
-> +                            0x00, 0x00, 0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_DISP_SET6,
-> +                            0x00, 0x24, 0x00, 0x00, 0x1f, 0x00, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
-00,
-> +                            0x03, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x0A, 0x0A, 0x00, 0x00, 0x00, 0x=
-03,
-> +                            0x1D, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x=
-00,
-> +                            0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x=
-00,
-> +                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x=
-00,
-> +                            0x00);
-> +       r63455_dsi_write_seq(ctx, dsi_ctx, R63455_TE_GPIO_CTL,
-> +                            0x00, 0x6A, 0x02);
+then DPMS off and on from the compositor: black 3/3 before this change.
+Every full modeset (e.g. a refresh rate change) went black the same way.
+With this change: DPMS off/on 13/13 and full modesets 4/4 show the
+picture, and an attached DP display is unaffected. Only tested on this
+device.
 
-So for the commands above we have a little more knowledge than just
-opaque numbers about what the display controller is doing.
+Fixes: 22cb02bc96ff ("drm/msm/disp/dpu: reset the datapath after timing engine disable")
+Assisted-by: LLM
+Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+---
+Saim Shujah's "drm/msm/dpu: clear pending flush state before physical cleanup"
+(https://lore.kernel.org/all/20260826182459.1506522-1-saimzst@gmail.com/)
+alone does not help here: still black 3/3 with only that change.
 
-If you have a datasheet for this display controller, then please add some
-one-line comments before each command to explain what is being set
-up.
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 32 +++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-It still bugs me that we accept this much magic numbers in panel
-drivers but I guess I just take a deep breath and live with it.
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+index 1f20695f81e3..a14156408126 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+@@ -1380,6 +1380,35 @@ static void dpu_encoder_virt_atomic_enable(struct drm_encoder *drm_enc,
+ 	mutex_unlock(&dpu_enc->enc_lock);
+ }
+ 
++/*
++ * Stop the timing engine of every video-mode interface of the encoder before
++ * any of them is cleaned up. With a split display (two interfaces on one CTL,
++ * e.g. bonded DSI) the master's cleanup resets the shared CTL while the
++ * slave's timing engine would still be running; the source pipes then start
++ * fetching the slave's next frame and stall half-way through it. The stall
++ * survives until the MDSS core GDSC is power-collapsed, so when something else
++ * keeps MDSS powered (an active DP controller) the next enable scans out
++ * nothing.
++ */
++static void dpu_encoder_stop_video_timing(struct dpu_encoder_virt *dpu_enc)
++{
++	unsigned long lock_flags;
++	int i;
++
++	for (i = 0; i < dpu_enc->num_phys_encs; i++) {
++		struct dpu_encoder_phys *phys = dpu_enc->phys_encs[i];
++
++		if (phys->intf_mode != INTF_MODE_VIDEO || !phys->hw_intf ||
++		    !phys->hw_intf->ops.enable_timing ||
++		    phys->enable_state == DPU_ENC_DISABLED)
++			continue;
++
++		spin_lock_irqsave(phys->enc_spinlock, lock_flags);
++		phys->hw_intf->ops.enable_timing(phys->hw_intf, 0);
++		spin_unlock_irqrestore(phys->enc_spinlock, lock_flags);
++	}
++}
++
+ static void dpu_encoder_virt_atomic_disable(struct drm_encoder *drm_enc,
+ 					struct drm_atomic_commit *state)
+ {
+@@ -1412,6 +1441,9 @@ static void dpu_encoder_virt_atomic_disable(struct drm_encoder *drm_enc,
+ 
+ 	dpu_encoder_resource_control(drm_enc, DPU_ENC_RC_EVENT_PRE_STOP);
+ 
++	if (dpu_enc->num_phys_encs > 1)
++		dpu_encoder_stop_video_timing(dpu_enc);
++
+ 	for (i = 0; i < dpu_enc->num_phys_encs; i++) {
+ 		struct dpu_encoder_phys *phys = dpu_enc->phys_encs[i];
+ 
 
-Yours,
-Linus Walleij
+base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
+-- 
+2.43.0
+
