@@ -1,232 +1,137 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mail.holtmann.org (mail.holtmann.org [81.169.141.235])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6CFA3DE43D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 16:46:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 820EF51815B;
+	Tue, 29 Sep 2026 17:14:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.169.141.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790700376; cv=none; b=Qb/FxlQOYnQf4KDKKl0IUDUkcwzJUfyMRg7XuoAifeFuwlX7aBX2Qemh8JxF+jqAsIlKOmGu/1fGFynrUpDhyRGxmdm6VU9Emm9cx9lKN9InyCwxjdAeaoIdxyS208dK8cJnubGRs+JTNryuUay0jVOyKU7X9N/SbywegFtX1U0=
+	t=1790702078; cv=none; b=uQOF2U8RPdB5SJUFTxgYmkywecfFfI7XYjMypWFV9KpfIgWFJ58+62TfZrvif3lmCYsBaE35FNKKWZ5ZFCxrjxuBKsSOV2Z/u4L6O8PXRfPfyEL99srYIQvOnyVkK2EgomOaD//AGSWYx4Ioe5WUFR/ZD8e+g5er0x31deKBe8Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790700376; c=relaxed/simple;
-	bh=LiAihPoxkqZdV81WngRsOiNeAPyzqkFVESOlCfUvRLE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Th+GC1GMqx6tu/VLzqGf4mx75yoQETxl5xY4xfNTQF/2oQCC+l6uMYgE+ZcOpL2+EUSFnLEhhPPkm2YfmncwzQtBhhr99/kReysRUi2wCmWHsbSYfwsvfh3Ilx5ZhHxoyt0lcNymRknyR3y3P0cc8hjuXLYSX1UfLSObZu8cU74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dEBN0i2t; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Bl2pSz6y; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dEBN0i2t";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Bl2pSz6y"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68TCqeIU1016876
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 16:46:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	0skssNQvXHTm92GRJQRQsimYFU/uUs18xsPOZJ94ZoU=; b=dEBN0i2tek0zDky6
-	2xI8SRkTy6muUz4dBIrz5fe7jg4NsDeBcPu1fmFwmFPism/3Mve1tUgchm9vVWiy
-	rbGvcFEEKFcZj7H+hBGqfrNwUVs0WLk17xz4pfc/afWR25wAD6QjogN1PTTGx4zw
-	qeD7XSMnBp328oah9kwACp33yA6E075kQbHQPfJlHPBLA5JD9V2yTLZ/+QlDGCCv
-	g1GygBe2FclhSsPSm7KcP6DP/Yy584l0vcAVGOXzvdreTAF7Eado4xpA9w+2QJXH
-	/m8beGrThSCMXvlWsajxYKXc2ig1azBaBspMBFo7EgC+CbiLC61r5+ZhMM1aQtjs
-	yc1JSw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h05yxk6a6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 16:46:13 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3968bb86fb7so4334563a91.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 09:46:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790700372; x=1791305172; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0skssNQvXHTm92GRJQRQsimYFU/uUs18xsPOZJ94ZoU=;
-        b=Bl2pSz6ya2GNjjjeXJTauTZP1ZdPbAZSLWkEX08hFUEg/y2o/TuIQUuz1yl2sfabJo
-         ZagApknKBgb5oT05FOIagGA8+8oCJGOq571RwryE4ft5wV80aJlZBv8Aiz84U+BoPklb
-         uLPv2FWE9QImk7BU5DwCDcxwjxpscRHzUbgh/tx9mwsrJulykuxhCTjdQtmoa9wgfzze
-         ZlzxHQJHRZudYC24Y8pg2ySXSiyGUI23bpEjko7KIvGf3OEtSSvxPGIEyeXT1i8HrkuI
-         rWObMcJF0p4TRb4ui2lCP1+vaMCFO4nXc92Is1vcGDokeBQmaMPRWGR2tEyL7oYavOoj
-         xSRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790700372; x=1791305172;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0skssNQvXHTm92GRJQRQsimYFU/uUs18xsPOZJ94ZoU=;
-        b=O5t5BZuO0ebmsrAJMarAs5ieiUo9A4MMYuauA9/CNh2SStLpkpztxJwamLwagkl91M
-         rue840htDlAIm8GSFplsIxxjEfm9WE8f+zCAjal6ssSQoKl0obknrv2MQ9ErvGTiUwcw
-         bTSM+NibFzwx4iHPcCXdJipnOZ0BrTjzciBBzH5PD51+5Jk4NY76CGXeuSlCxyNol4Il
-         3FgJEuYl6z3lhN4WjY5q/83wKjnvRWuZTY/ZtZ82s8ZUeKCXIvlEoJRalRxCgVMwCDJ3
-         GJCFwdJEy5RmF8ScdvROKquZCpWIlsiFI9r8X+U6KpuemW/d8kUo1qHkEYr9jGsRdKaB
-         AFHA==
-X-Gm-Message-State: AFq9FYLpsC0iIBOtj3XncrxDDgKI+WOacLRYMYw1IXqVHGb/JRPMp1/L
-	SjN4g4wvweCuAzR/wsTrUE8keDf49UdZufPMuqluHUcDD+HAqHAY6DWwpuZEq+z/M4JxZTerPa9
-	t/UdeJpn6HkP6AJHHrgLOM/3WN9B0A20qV8BTaCmi78b5Vz7w/Q5EIqWLzbVEwEM1vWpJ
-X-Gm-Gg: AYBFou2FDrvlDXtNkj0302HbCivtcMhNW159WwnVWwKcaBqkv6hLoxzl3AMFpqWQX3Q
-	owTPaX0K+Dp1nIGlkqwKrLi87aau4yqxVu60uwei8m4CPajDXWj4HZGf/AJ06VI2/RF5JRk8xTH
-	y9liUxPix3j0TsfyGndDc79krk5xnFHdEZt8Rd4k897abazjuw3BUi9KDpw+fIP8Uma3OlgcV8/
-	nbxENjHtGQHI+8+PANK6YqkYcGPQpV8aVA2WQ/iFMUV4GrlfBz6k3IBUeO0UGGkir008IJgVxT0
-	o1/TCsiBbHA3oYAhNUbdBT11M/zEZT2LaG22C0OJuQz6eAQAa+TOAIT+CghYTcxpEyXZ4hlFZqv
-	/71UEhEK8vsiPVewn
-X-Received: by 2002:a17:90b:384d:b0:39d:fcbe:fe04 with SMTP id 98e67ed59e1d1-3a0986eb55amr14369950a91.2.1790700372268;
-        Tue, 29 Sep 2026 09:46:12 -0700 (PDT)
-X-Received: by 2002:a17:90b:384d:b0:39d:fcbe:fe04 with SMTP id 98e67ed59e1d1-3a0986eb55amr14369900a91.2.1790700371572;
-        Tue, 29 Sep 2026 09:46:11 -0700 (PDT)
-Received: from [10.216.29.115] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a49858bf27sm6367683a91.4.2026.09.29.09.46.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 29 Sep 2026 09:46:10 -0700 (PDT)
-Message-ID: <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
-Date: Tue, 29 Sep 2026 22:15:52 +0530
+	s=arc-20240116; t=1790702078; c=relaxed/simple;
+	bh=kmQ1hbQPD5iWUSj9w4INyopw+EVylQeht+K3g4IU9JM=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=qKllbXwfRAiwxvGIAnWGtdClGFyJxCdEAHEmGNCDnzm0lVK26xxM1HTuJvvgaQaGrq+KJ73jZqW+kdW6YxjtOUKQ1/tWA9bsCJB6uUOAr8rVodabYCFHsHq3nJJC8eg198AY4+GDTvnj0ULn9QDju/HReT2wZ86ubRhXrbBuoQ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org; spf=pass smtp.mailfrom=holtmann.org; arc=none smtp.client-ip=81.169.141.235
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtmann.org
+Received: from smtpclient.apple (p5b0a9ac0.dip0.t-ipconnect.de [91.10.154.192])
+	by mail.holtmann.org (Postfix) with ESMTPSA id 0F38CFF100;
+	Tue, 29 Sep 2026 19:05:42 +0200 (CEST)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3901.100.1.1.12\))
 Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
-To: manivannan.sadhasivam@oss.qualcomm.com,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-        Jeff Johnson <jjohnson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
-        ath11k@lists.infradead.org, ath12k@lists.infradead.org,
-        Bjorn Andersson <andersson@kernel.org>,
-        Chris Lew <christopher.lew@oss.qualcomm.com>,
-        Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
-        Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
-        Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+From: Marcel Holtmann <marcel@holtmann.org>
+In-Reply-To: <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+Date: Tue, 29 Sep 2026 19:05:31 +0200
+Cc: manivannan.sadhasivam@oss.qualcomm.com,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>,
+ Jeff Johnson <jjohnson@kernel.org>,
+ linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org,
+ ath12k@lists.infradead.org,
+ Bjorn Andersson <andersson@kernel.org>,
+ Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+ Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
 References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
  <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
-Content-Language: en-US
-From: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-In-Reply-To: <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA2NiBTYWx0ZWRfX0+1WWS8NnZRA
- VNKgR13UJC38QdVzPJArJORXncLOdQHxE3U/njCXX6GpteAuhb+J0JTiW+PqVnZdJiNcF0i8Mo6
- PQ53M3Cwl0Saf/6YDoUQWlY6RnJutGU=
-X-Proofpoint-GUID: z9pueI9rH4yEkoaWVZbBid9-FCylDAIp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA2NiBTYWx0ZWRfX9wUIWba0q5lH
- gVE/SuKYA2/4TN0cPPlu4ajXlXuJcbXd48xoEckwDb8CXJpq2h4rzerfiVtsGyuXGcYuxZC1//4
- xIFXBHHQZ/QaBeMQ45jbX+QXSb8f+vgsTJeOl5fXOCtybbied6Cr1169tzbxzE89tlJ6o1dvKFv
- U+hPFZR7E3p9SLUVAfxEOgsLowHtNTHQXYSeSBG6LMILKuiyzScW18QRGA39TC3uAjVaEBo9jNE
- uNUTuhARGVec8dDRgPfFQEPg6L/N7w3HOxhEj3lAlI9n9Z08FDZNG04OXJwIecY/XvjYdiJqBXR
- RtNLPbp1QPxT+hfnW0vIbM/S6hxA3OT4hoxnRyyXK2hFOWQYm2RZa5Uk+lU4ZhugjcVuZjE5EYT
- w9msnFqKlI9YCnMD02/3WxrfIQSaG6+16RcsK2CpewHHrE5J0wRMmv8M/VIw/myY5B/9aX+8lE8
- VGEKlywSWA12zq5n+LQ==
-X-Proofpoint-ORIG-GUID: z9pueI9rH4yEkoaWVZbBid9-FCylDAIp
-X-Authority-Analysis: v=2.4 cv=SaFi5fRu c=1 sm=1 tr=0 ts=6abbeb55 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=4CdhTua64AM6UaT4niYA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-29_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
- bulkscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609290066
+ <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+To: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+X-Mailer: Apple Mail (2.3901.100.1.1.12)
 
+Hi Deepak,
 
-On 9/22/2026 7:11 PM, Manivannan Sadhasivam via B4 Relay wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
->
-> Now that the QRTR driver allows using the unique node id for each device,
-> which is different from the node id received from the remote node, compute
-> a unique node id using a new API, qrtr_host_node_id().
->
-> This API takes the 'index' parameter and adds it to QRTR_NODE_HOST_BASE,
-> whose value is outside of the node id range used by the remote nodes (0 to
-> 0xffff).
->
-> Finally, call the new API from MHI endpoint driver by passing the MHI
-> controller index as the parameter. The MHI controller index is unique for
-> each controller, thereby for each MHI endpoint device.
->
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> ---
->   MAINTAINERS        |  1 +
->   include/net/qrtr.h | 21 +++++++++++++++++++++
->   net/qrtr/mhi.c     |  4 +++-
->   3 files changed, 25 insertions(+), 1 deletion(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index df8ab9b82402..9c8bb086be28 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -22511,6 +22511,7 @@ QUALCOMM IPC ROUTER (QRTR) DRIVER
->   M:	Manivannan Sadhasivam <mani@kernel.org>
->   L:	linux-arm-msm@vger.kernel.org
->   S:	Maintained
-> +F:	include/net/qrtr.h
->   F:	include/trace/events/qrtr.h
->   F:	include/uapi/linux/qrtr.h
->   F:	net/qrtr/
-> diff --git a/include/net/qrtr.h b/include/net/qrtr.h
-> new file mode 100644
-> index 000000000000..745d51b4a6ba
-> --- /dev/null
-> +++ b/include/net/qrtr.h
-> @@ -0,0 +1,21 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +
-> +#ifndef _NET_QRTR_H
-> +#define _NET_QRTR_H
-> +
-> +#include <linux/types.h>
-> +
-> +/* The offset is chosen carefully to not collide with the node ids allocated by
-> + * the remote nodes. All the remote nodes use node ids in range 0 to 0xffff.
-> + */
-> +#define QRTR_NODE_HOST_BASE 0x10000u
+>> Now that the QRTR driver allows using the unique node id for each =
+device,
+>> which is different from the node id received from the remote node, =
+compute
+>> a unique node id using a new API, qrtr_host_node_id().
+>>=20
+>> This API takes the 'index' parameter and adds it to =
+QRTR_NODE_HOST_BASE,
+>> whose value is outside of the node id range used by the remote nodes =
+(0 to
+>> 0xffff).
+>>=20
+>> Finally, call the new API from MHI endpoint driver by passing the MHI
+>> controller index as the parameter. The MHI controller index is unique =
+for
+>> each controller, thereby for each MHI endpoint device.
+>>=20
+>> Signed-off-by: Manivannan Sadhasivam =
+<manivannan.sadhasivam@oss.qualcomm.com>
+>> ---
+>>  MAINTAINERS        |  1 +
+>>  include/net/qrtr.h | 21 +++++++++++++++++++++
+>>  net/qrtr/mhi.c     |  4 +++-
+>>  3 files changed, 25 insertions(+), 1 deletion(-)
+>>=20
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index df8ab9b82402..9c8bb086be28 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -22511,6 +22511,7 @@ QUALCOMM IPC ROUTER (QRTR) DRIVER
+>>  M: Manivannan Sadhasivam <mani@kernel.org>
+>>  L: linux-arm-msm@vger.kernel.org
+>>  S: Maintained
+>> +F: include/net/qrtr.h
+>>  F: include/trace/events/qrtr.h
+>>  F: include/uapi/linux/qrtr.h
+>>  F: net/qrtr/
+>> diff --git a/include/net/qrtr.h b/include/net/qrtr.h
+>> new file mode 100644
+>> index 000000000000..745d51b4a6ba
+>> --- /dev/null
+>> +++ b/include/net/qrtr.h
+>> @@ -0,0 +1,21 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +
+>> +#ifndef _NET_QRTR_H
+>> +#define _NET_QRTR_H
+>> +
+>> +#include <linux/types.h>
+>> +
+>> +/* The offset is chosen carefully to not collide with the node ids =
+allocated by
+>> + * the remote nodes. All the remote nodes use node ids in range 0 to =
+0xffff.
+>> + */
+>> +#define QRTR_NODE_HOST_BASE 0x10000u
+>=20
+> Can it be exposed with include/uapi/linux/qrtr.h also. There are user =
+space clients like modem manager
+> which need to calculate modified node id to distinguish same service =
+from multi modem over mhi.
+> This is same as wlan use case.
 
-Can it be exposed with include/uapi/linux/qrtr.h also. There are user space clients like modem manager
-which need to calculate modified node id to distinguish same service from multi modem over mhi.
-This is same as wlan use case.
+did anybody actually looked at the proposal that Denis and I came up =
+with. It was exactly addressing this properly.
 
-- Deepak
+It seems you guys came up with some hot fix and want to run with it. =
+After month and month of silence and not bothering to review the =
+proposal, you are trying to push your thing?
 
-> +
-> +/* Compute host node id from a per-device index. The index must be unique
-> + * among the host assigned endpoints and smaller than QRTR_NODE_HOST_BASE.
-> + */
-> +static inline unsigned int qrtr_host_node_id(unsigned int index)
-> +{
-> +	return QRTR_NODE_HOST_BASE + index;
-> +}
-> +
-> +#endif /* _NET_QRTR_H */
-> diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
-> index 3990da1a65dc..c920ab61f848 100644
-> --- a/net/qrtr/mhi.c
-> +++ b/net/qrtr/mhi.c
-> @@ -6,6 +6,7 @@
->   #include <linux/mhi.h>
->   #include <linux/module.h>
->   #include <linux/skbuff.h>
-> +#include <net/qrtr.h>
->   #include <net/sock.h>
->   
->   #include "qrtr.h"
-> @@ -127,7 +128,8 @@ static int qcom_mhi_qrtr_probe(struct mhi_device *mhi_dev,
->   	if (rc)
->   		return rc;
->   
-> -	rc = qrtr_endpoint_register(&qdev->ep, QRTR_EP_NID_AUTO);
-> +	rc = qrtr_endpoint_register(&qdev->ep,
-> +				    qrtr_host_node_id(mhi_dev->mhi_cntrl->index));
->   	if (rc)
->   		goto err_unprepare;
->   
->
+If you don=E2=80=99t support userspace, your proposal is broken. Plain =
+and simple.
+
+Regards
+
+Marcel
+
