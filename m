@@ -1,47 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2CDB3A3E67;
-	Tue, 29 Sep 2026 08:14:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA9C73CBE8F;
+	Tue, 29 Sep 2026 08:22:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790669685; cv=none; b=C1dHLSYXWTLTa1V/VhX/76JgR03JU4wpvwxb9xvBzjEm0UdaNJ1GBydOv7VgVu0TXC2Na0+6JlbzrqVjV2XiGHCW1YEzy3KVJ1PuXrp0hBXWiugjmNi2PsqWKqXaJkO0t+DzgCz/PhM0DRFBS2pmtu52axm6UNr3zxnRQ0MF3r4=
+	t=1790670165; cv=none; b=RPq4zYwRGjA8pL5LnQOKQkKXgXrfKFABMHFgeUZbGuBJUfShbXGljfDD0LFKvq8/fmy0qtoKYPazoWunBz3LoqXI9tmwXq0s8IQ7lslHBrjShQrsw6DlCiq5QDp6dFKXkHq+aVQVMCVxf+/mDTyy/01m3BpPjmomdg3VAVMi+qo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790669685; c=relaxed/simple;
-	bh=S/BLnJC4zG1prZb2sW1iulsEd17k5Du8f0opRtXOHU8=;
+	s=arc-20240116; t=1790670165; c=relaxed/simple;
+	bh=aKkdIvXeQZSBOa+VMzf2qsBs8GaO3qiegT97yYIzU2Y=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=t18XVS8C0s9CNaBQBcqR0sXbFwPHZEDuQMTQlZOKIe7wA8z+WS8SqgLYffTZrncP7rGogpJ80Ca/qQsuuqHI/oyT1aNQujrbcEPZ+VpoWEP4BO7Xy/ZdrB7f9AhA06T3OnmA6efhki4AgkXUWHpfH9lFd7rCxT0Q5AnAvjsQODU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eKMItGvc; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=EM+AbtP8E1OzCzA+96rx4iUrH6nkqRPLQ78+66LGzPa9LzUPOXnOMQcr/8AI0mpMi8gEGQYmvdCEQEd2bKSSjj8NejJCU0qp7UEi1fJaLqtBAV5fpPZ73IS7Hnr4a6nEZYn3vqTqhLu3UU1QsLeJOrjwik7vEVHME9m9dVTBFXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KPuBDUrS; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eKMItGvc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 744811F000FF;
-	Tue, 29 Sep 2026 08:14:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KPuBDUrS"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DD331F000FF;
+	Tue, 29 Sep 2026 08:22:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790669684;
-	bh=W0YuZxNNaXvKtFw9LoESqvCuluRkE/s0gJlxTCFjWfg=;
+	s=k20260515; t=1790670163;
+	bh=PsmqZe3TQMU5cZKZNwXvle0dprdwWkVMawn+HbAw/aw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=eKMItGvcWxI8fwb0eLu8L3uskG4kuDnMRkRT57BQB3GyxO3qrZn3xyHswq9LVrMwM
-	 rK+JzjYsq6iLfqqaz1qF4/CmWPN2di+9hN0AoWr4iS4dqshDu2l2YYQhFlEs3OpMuH
-	 fJe2bHaQK+WmmMMEbpyy40wgLdXbRRNTL9v0HiMhpY8uz6tvApn0GjotCOMtfCtRI7
-	 k0/WQc4Dh0j2eglgoQk2tcWE5ZLz9qGJ9QwkMIyIaked7o9950Jqw6n/1GPhU3ZTeX
-	 wTNckWVNh03PIiIqxUqnWIDhQYN7P+pc0SFL1BO3gb1QvfdGaixrPv8y0T4PPA3vys
-	 3lvw8V0aKqBOA==
-Date: Tue, 29 Sep 2026 10:14:40 +0200
+	b=KPuBDUrSeiaABXvDW6gpGZ1+q0GhXmn7NeNELj8DnoUF0/hf7YBUkffgOYi8nIPjI
+	 6T9TFZF6CdoBGPc7oerO0e049xWhc2WSZoXK2Q04TmO1KT1S9kmq2v3YniSQjVRubb
+	 4b+SmOjO37k4lgFvQUEWPGtrZsACxf5kw2Db9ze7XKad6GhBscQPTJlfQPndZEs+9n
+	 VdUsw0IFz5hhMdvsrocP+S91pC5DcrV9XSNGvabpoRLXVAqhEQuh49dIevMl9Xwfc6
+	 jJ2SPN4vthXZ/rP+OHOSIGVEuid0v29Lk1wJsOEv6EpYyHDW5YR1l1zeRekEmIjDBm
+	 Y5N1DZxhCiaxg==
+Date: Tue, 29 Sep 2026 10:22:39 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, linux-media@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Subject: Re: [PATCH v10 3/9] dt-bindings: media: qcom,qcm2290-camss-ope:
- Document shikra compatible
-Message-ID: <20260929-overjoyed-boar-of-success-6df19f@quoll>
-References: <20260925-camss-isp-ope-v10-0-2622411034cb@oss.qualcomm.com>
- <20260925-camss-isp-ope-v10-3-2622411034cb@oss.qualcomm.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bard Liao <yung-chuan.liao@linux.intel.com>, Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Liam Girdwood <lgirdwood@gmail.com>, 
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+	Maciej Strozek <mstrozek@opensource.cirrus.com>, linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, patches@opensource.cirrus.com
+Subject: Re: [PATCH v5 6/7] ASoC: dt-bindings: qcom: add Tambora WCD9378 SDCA
+ codec
+Message-ID: <20260929-eccentric-green-caribou-dfeb4b@quoll>
+References: <20260925161049.758913-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260925161049.758913-7-srinivas.kandagatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,22 +49,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260925-camss-isp-ope-v10-3-2622411034cb@oss.qualcomm.com>
+In-Reply-To: <20260925161049.758913-7-srinivas.kandagatla@oss.qualcomm.com>
 
-On Fri, Sep 25, 2026 at 11:09:50AM +0200, Loic Poulain wrote:
-> From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+On Fri, Sep 25, 2026 at 05:10:47PM +0100, Srinivas Kandagatla wrote:
+> Describe the WCD9378 SoundWire peripheral which is SDCA compatible
+> soundwire device. It provides SDCA SimpleJack for headphone playback
+> headset mic capture and MBHC jack detection.
 > 
-> Shikra uses the same Offline Processing Engine hardware as QCM2290,
-> add qcom,shikra-camss-ope compatible string with qcom,qcm2290-camss-ope
-> as the fallback.
+> The same silicon is integrated in two ways and enumerates with the
+> same SoundWire class ID:
 > 
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+>   mobile mode: two slaves (tx, rx) on separate SoundWire masters.
+> 
+>   SDCA / compute mode: one aggregated slave on a multi-lane
+>   master.
+> 
+> Note: both of them have different bus toplogies 1 device vs 2 devices.
+> 
+> Currently only compute mode is supported by this bindings, mobile mode
+> will extend this binding as required.
+> 
+> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/media/qcom,qcm2290-camss-ope.yaml | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  .../bindings/sound/qcom,wcd9378-sdw.yaml      | 105 ++++++++++++++++++
+>  1 file changed, 105 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
