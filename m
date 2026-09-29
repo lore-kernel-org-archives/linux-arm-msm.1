@@ -1,81 +1,82 @@
-Received: from mail-pz2-f42.google.com (mail-pz2-f42.google.com [74.125.228.42])
+Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12F293DAADE
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:27:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F6903290B9
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 03:28:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790652477; cv=none; b=bSntAKWr8zv3WKCYavjwBPGDnF4yYaNvxP0JoTBWLvon0ELxZ8pzS76fKBhjjPbsVpmo3GWCmkD1WA/p/RqhQ8fUUVXYcEjWhuClHSIZht0Gf1shCSaf2O4JkYCLrRxnS/mViqL0+ShbNeB4RyOoM1g6x3J39FfFRIHy/X6+QsI=
+	t=1790652525; cv=none; b=l+QPA5XNfwWaDIukGnMuOLIl68jbMERIft1zeyq/4n68APMuwAdlJzqKdV5oxI2zFnI6hJMoOeXUYpsHu95Pq5A1bYfSoYJs2eRymwJOS/qTeOSQKw6wdVqsEEpNk3J/ASTAy4Aww8JYEj2C2DZRcAV+XUBFzy4HZtI07EYg3pY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790652477; c=relaxed/simple;
-	bh=6QSUtlX44JIgP+u3oKbQIiZVdGF4goIexVu+fwaljK4=;
+	s=arc-20240116; t=1790652525; c=relaxed/simple;
+	bh=Ppa/5bvyDHu70Z7WWJJ5TYTAyJSoEiJO45Y9vEXZ7Jg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=J2nyef6cdsfXf3f+erZH8D2SkhEjgLR2+asR9TqdEN9PstODFPwhQxgOIpmClNtJKMVWX59Lo0NRgd9WsxKU6kBX9m0ZaZvtDikdt0VwhivuNp60EZIdBKRWFHnmBItUZxUv0fEjdlvEj2YS4BGADcafZecw969XqnVcH/uuXE0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dJQMQGRg; arc=none smtp.client-ip=74.125.228.42
+	 Content-Type:MIME-Version; b=X9EUpMunfkjs65HwK7Iz0tG82UOQHMF7BCZs38i4fMy98WD2pJxxU7I7wMYAmhNmhTRecDeHnTWK+KO+/T/R186WtcS3exPdRwQsguNHiY6shELKHfo9aRJW+UVmvzK3wJt97nqLZFV0aZI8kEuOnqrezVJQQ1bm8FYwez2scY0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qhNNCmXl; arc=none smtp.client-ip=74.125.227.171
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dJQMQGRg"
-Received: by mail-pz2-f42.google.com with SMTP id 41be03b00d2f7-cc796f8c309so251106a12.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:27:55 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qhNNCmXl"
+Received: by mail-pj2-f43.google.com with SMTP id 98e67ed59e1d1-3a496aea5dcso86085a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 28 Sep 2026 20:28:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790652475; x=1791257275; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790652524; x=1791257324; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:content-type:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=CZw5mMt24fjggJ7CV/G4ShOOKQS8QFK14O73CG5mjTo=;
-        b=dJQMQGRgPwya9C7Hk23Gp7GWdweQlKLCgub/Ph1A9Xv5PT2sOhfOjkW0XBhbSpb27N
-         L3oyFnaq2Z4lXIb926BCMAPoJF/UIV4Xmuc4fmqm6MlmWrm87BVg8rfoV6uo+IFmxaHr
-         vlLLld9wF+PNSEqmBlIle4NmzS8noA72OIpY9LjPjiufLYVbicrPlMjiFmdNhNedfU1X
-         JaCFgQ5oEhibAf/OIIq1lX3xrd0rVfN5ZRf8ksHRZkTsCVUiB2UrGOefV9ABZFjQ5V01
-         /6VUwz15tUEMOrXBxP2CP/K7Uzd3O7P/KObOfWLdplxfKg3q5NkoTRy+n6FZqFVCsoUb
-         gsdA==
+        bh=Ppa/5bvyDHu70Z7WWJJ5TYTAyJSoEiJO45Y9vEXZ7Jg=;
+        b=qhNNCmXlqQmL5zuuX0SACJUz/rgCDcvpOpVhm45QmziTU6MuSIgDB5m2T+RMNcgHKy
+         VQzZkqFg6CmkKWbYJ9iOjURAk1l8rE+mCsklsiGRRbl0WDbHaghw5dYe+YPsxZRCbr4A
+         MwLOKKAad1BPCY+o5jwKBXqIFCg61chija4eqUagyCX2TDE04CnbqSgR07qqeLasFz71
+         iw+qBoBtzFWJDra+dYQMfpZP0vzgstv7SkvXUAvjfIPJOAoer3V5k4fWl4RJEJcWXNhu
+         5s1Yc9Vb82IL7y0QRMy/FTapUIoYTD3Ai1LKDmh8AUfJ9kQ3CU17m0P9cx8K+5JTZBSe
+         jG/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790652475; x=1791257275;
+        d=1e100.net; s=20260707; t=1790652524; x=1791257324;
         h=content-transfer-encoding:mime-version:content-type:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=CZw5mMt24fjggJ7CV/G4ShOOKQS8QFK14O73CG5mjTo=;
-        b=qiSeimm0es7y7vtLNsKbIvtyuT41niEpqjLRDwFxndpQznpLRP1WHlPgdhsQotjkfh
-         /a7j8k3W7sTl3bAgqEwZvaI1dcvmItjN3Z+zbrcM5aYO1gJHZZ6lrdqFDsxFOtsYHZL1
-         O1oljGzN8wXXVRo+pnz3vUb5bsQUZjvjiODBlx4oo88PzWAySV9EjKe3OaugwJ2lSTqH
-         Wg1DJkcA1db0ZZq1MiT3hll+ZkWtCC7L3GJnXBFZ+Wxroh5LT0gNQzEYvs8mBLRQXGvg
-         W/RStp8PY4YNmVgO6gAz0ApDeSZmUt0h2t0rckR33p9LPivpZA+AXBvBmdijI2US3YRs
-         ENlQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx7KQIlRHxOEUGCQZIVW5u99aaKsfp3Tu9r3fqTB+jrdgEhq/6NuBG8dIiO6leAtEZ7T2l41gOFER1fomSp@vger.kernel.org
-X-Gm-Message-State: AFuF++n2kMiHSL/YtzeFbxvG8uVocin2GpG1TWQC+dx/BTK9x4S7GZ4g
-	ZS5e1FbGVpV2vMKAMgINfMO6rZYQC8xFz2LHSx+dO8B6RZ90JVTnOpEwiGDe9oHW
-X-Gm-Gg: AYBFou2QaKMIwRrG44KV3Dxjs9ysSR/K7NlO16luAJPM0HB6t8FGrejg023efp77KoG
-	O+Myfk9FR6YM7Fs1dMTmi7aaw/LKiME2YJdvH8u+TqyDVcfopnCxI8AUTmzapdN8O6oGjAjyIrS
-	4o25pNBnvGvU/TKKgH/xNDHzeeWyNoa6uddb8DSeZ27vO9QHaGMNSsGUdMaPOgkofY94d/a48Gr
-	68OF8BiW1MQceI6BK3fvS3C2nANTCkTaYliPmmcxddE7J5I3eM4cvyqXs2GQDd5XANoTBp2Uke5
-	ltrZbiYV80wbPlRdtrxkFZePdsEqmpYEfyhpzD7X1gXT7wtG5ktVfwcFAKFN+T2k6XDo841hFwj
-	khbzvdZRXRDj11wH29l8sbmPtoqym27sYa3XTauEvEx5zj5ttVI0qA+xtjjYzt1SbgUVro4UpcQ
-	GS14C1bEwHP7fyt5N98QiHQ2bmE0ki4SF0a+w5B8ljOAJ1kalpfcRewML8lLe3fsRqTX/pt/J+R
-	sP9fUu6hudVqw==
-X-Received: by 2002:a05:6a00:7106:b0:881:4a2d:5c3c with SMTP id d2e1a72fcca58-8814a2d614emr7689172b3a.2.1790652475306;
-        Mon, 28 Sep 2026 20:27:55 -0700 (PDT)
+        bh=Ppa/5bvyDHu70Z7WWJJ5TYTAyJSoEiJO45Y9vEXZ7Jg=;
+        b=PY2FqQX9sG4PIucq+GAzJSyMff2apx8pYC3Z3Ep4cMTrEIzWIMiZRD0UtlyDVYE0RG
+         f1Zr0eL7D4CANNukEejTzvGaRCcM+1Z+vOlTRNZVQQ6mXflECbO9kUh9SSjc0p0fW1F4
+         EHztcQqEblGqgllLeR8LF/dCw9p+lR8u5CY3w+MgC5V/vG+PIvQ3VOY+JCyuRGSiAxGV
+         yiC5JO8m/XGyaiQj+U0RdVhtMqzvPZKVOgFcIHi+Qy9VXvmJUTPhoW7H+pIfN53Kj4iU
+         gL3Lbqb1X/P2EtTyZJJ+7yle1W92Q6SAKv9vn4aXpA84pyWhuoCCWu0ErHZWcAwDYktB
+         IWLg==
+X-Forwarded-Encrypted: i=1; AKwUvBwbYctphf3mK3Ox95A5W31rME9qQneD6FepkPaT00zL+ezYMzbw0mACH4ZXFGBZvySMYWhHc18NIalcQYOy@vger.kernel.org
+X-Gm-Message-State: AFq9FYJizqh5/KXvE3OJ4kOdtyUPnhJqJnLLvkdYrOJR4XRUblihVSxM
+	dstS03KtbdKyToc5KSEBeC/3FxTfTZg8t/vkUQHfqRalmfy5Fg7W9nJG
+X-Gm-Gg: AYBFou0CpbYRzLQDZFF9zE8ml9Zl6DuPHA0u+bok3qyKTSryv57Or+s9WGajrujwRR2
+	133vks5gywgjkJOG7UJI53gQYi6mL0FA+cP7RVg/P2Mik2LvseUUdp32AmTB3ha/KHMtJgK8r+Q
+	qJEuQT7zgkKmXsSLB6hEg3I9P2sZRutvy7ynTk8CAP/ZXNGgsiv0Vsz7rwl/dy4iSIW6yZ6YWzP
+	gxTa/hmzx8eeBf3ZE1OW6GplJhoC/O2BTOhKt+gg+MDOg7uvP7e8YaSWqnYg+cp5SD2hCJVMq/0
+	8lDTZi+6gOM55/otFjMbh0GLXm0HKuA7gfOMkUpMIcCJUJPm9Gzn1PffAVvClXCUQfPhEMe8WmS
+	9DHs2PqNW3YrmvS23tSR1MKs0BvlGOE5XZeZxbCA7IZyz2x/kdlDfC388P/SZwxYarpcSmoAHVc
+	lrLxvcGn6MecV5kdL02jD04FeMBjnHX/+hbLlXpY+xetsKn/Os5MWhMRDe0/AfjVPck8+I/82ok
+	xdu0IjBlPducyU=
+X-Received: by 2002:a17:90b:3c4e:b0:3a4:88c2:32b8 with SMTP id 98e67ed59e1d1-3a488c245e0mr4141496a91.1.1790652523654;
+        Mon, 28 Sep 2026 20:28:43 -0700 (PDT)
 Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-885e1066926sm48883b3a.19.2026.09.28.20.27.52
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a4986e9656sm934089a91.0.2026.09.28.20.28.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2026 20:27:54 -0700 (PDT)
+        Mon, 28 Sep 2026 20:28:42 -0700 (PDT)
 From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: Robin Murphy <robin.murphy@arm.com>
 Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
 	Rob Clark <rob.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Bryan O'Donoghue <bod.linux@nxsw.ie>,
-	Robin Murphy <robin.murphy@arm.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	iommu@lists.linux.dev,
 	dri-devel@lists.freedesktop.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 2/2] drm/msm: map page-less imported sg_tables from their DMA addresses
-Date: Tue, 29 Sep 2026 11:27:35 +0800
-Message-ID: <20260929032744.37269-1-liujianfeng1994@gmail.com>
+Subject: Re: [PATCH v1 1/2] iommu: export iommu_get_dma_domain()
+Date: Tue, 29 Sep 2026 11:28:35 +0800
+Message-ID: <20260929032836.37312-1-liujianfeng1994@gmail.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <bd4e5ece-1358-4e0b-bb04-ba9de62d26f6@amd.com>
-References: <20260928053901.7270-1-liujianfeng1994@gmail.com> <20260928053901.7270-3-liujianfeng1994@gmail.com> <bd4e5ece-1358-4e0b-bb04-ba9de62d26f6@amd.com>
+In-Reply-To: <47bf9a4c-2a47-4e93-bcdf-8d953c9a5ab8@arm.com>
+References: <20260928053901.7270-1-liujianfeng1994@gmail.com> <20260928053901.7270-2-liujianfeng1994@gmail.com> <47bf9a4c-2a47-4e93-bcdf-8d953c9a5ab8@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -85,29 +86,25 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi Christian,
+Hi Robin,
 
-On Mon, Sep 28, 2026 at 12:09 PM Christian König wrote:
-> That is not in any way better than illegally using struct page. The
-> point is we need to get away from using phys_addr at all here.
+On Mon, Sep 28, 2026 at 12:26 PM Robin Murphy wrote:
+> NAK. Read the comment - this is an internal helper for iommu-dma
+> (currently the only IOMMU_DOMAIN_DMA implementation) and is definitely
+> not for random drivers to abuse. In fact it should really move to
+> iommu-priv.h now that we have that.
+>
+> If you want to do sketchy things with your device's DMA domain then use
+> the public iommu_get_domain_for_dev() interface like everyone else.
 
-Agreed, I won't push this further.  With your "import a shmemfd, not
-a DMA-buf" remark in mind, the direction that makes sense to me is
-the allocation model one: userspace allocates the decoder capture
-buffers from msm GEM and the V4L2 device imports them, so msm stays
-the exporter and never has to interpret memory it did not allocate.
-Rob's series (drop the page array, mmap via the exporter) is the
-prep work for that and is already in good shape.  It is also how
-panfrost/panthor already work - they program their own pagetables
-from the sg_table's DMA addresses and never look at pages for
-mapping.
+Fair enough - I'll drop the export.
 
-I'll withdraw this series and come back once Rob has had time to
-look at the msm side.  Patch 1 is withdrawn too - Robin NAKed the
-iommu_get_dma_domain() export, which is moot now anyway.
+For the record, if the msm side of the series goes anywhere, the plan
+is to capture iommu_get_domain_for_dev(drm->dev) before msm takes the
+device over with iommu_attach_device() - at that point the device's
+current domain is still the DMA domain, so no new export is needed.
+(Christian is pushing back on the msm patch itself, so that may end up
+moot either way.)
 
-Thanks for the review, and for the earlier pointer to what msm is
-doing wrong here.
-
-Regards,
+Thanks for the pointer,
 Jianfeng
