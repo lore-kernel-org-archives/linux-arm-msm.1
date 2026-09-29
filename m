@@ -1,43 +1,48 @@
-Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 451C9569F03;
-	Tue, 29 Sep 2026 19:29:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EADF320A34;
+	Tue, 29 Sep 2026 19:32:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790710207; cv=none; b=McIHorIvSQbdH+RLEeZAjue1gnk2g+YQ9Ro/DttcAvfyY7CEQxy64OymJf8jVEA/USRzYWCHoHv1ft06K9AZt+cLzXZZ2SuLVlYG09E6q1HY9U1z0jKq2hWrbCXbjK3gFITVdLXtlUzEUOuHfmTxaga8EtreK0wMhHodXRL7PUs=
+	t=1790710357; cv=none; b=hg3Aq2lcr8M/WIr0iZHfzfYx3VGkbQzkRWJPEXaG9UWIp8g141Al2RL3Ld+5EWjKHqqxbA50rVkHwPQ4qvY+4uBhuLQ1fyC/wtlMCThf8qMReOrZ9fcwwezSO4MBXMa4wcaCCpSFXdneEkFSIag0UjXJmHS/lRFg29Nk91qagms=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790710207; c=relaxed/simple;
-	bh=UZHazEcVXVJS7l6C2Rm3n3+jkb4pWcZQZp3cmWOcWrU=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=NculPldMxzssv5CcnIVtCHhpgAwizj8MTN1bJmLXEidMrB45P75M6ZXXrVmyeMGL/lDra90PWya4qsVThkDBoZWliQoFGRCEE3Ri1bbblG+/PJkYnwjrN8nYAr5OpIFvwJ8M338LDRANap5OpAArw0EaTe1ifsh8TuVbZ8XHpd0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=qvnHIg0P; arc=none smtp.client-ip=185.70.43.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
+	s=arc-20240116; t=1790710357; c=relaxed/simple;
+	bh=fOBN9zdig8J1ANNWazAidsCd07YBfhIBgNCVQwwkK0M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HvR/yxX3sTLl1r3EjAsWuy2eH9wnNuVBzkM7v+IKgu+qYKlMx9mFJxZUdd0For0tp8K6slZq9DGqJ5YztGJfnxK+NH6y3N4kNFplF7HnFSQzedi5RgGgKCUpQHny6iXegqd/Ya7n13Xt0wdQ88+wj4j5unCRBHQniYRTW/m218c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dliHjACD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="qvnHIg0P"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
-	s=protonmail3; t=1790710195; x=1790969395;
-	bh=UZHazEcVXVJS7l6C2Rm3n3+jkb4pWcZQZp3cmWOcWrU=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=qvnHIg0Pcxwg5hw3Km0vLT5wxj/oEz19mM2HZWCZCu7IFk07XDbabmPxGEne+TnyG
-	 q+60SNCBkBoK8FmOVD7cf0xmIQODfgdzbD6S8fuJnxlJy6Y44rJwEUZ8TgS7aTr82o
-	 /kWNOAkT97lJXYBDgevLsKNMBIUT7VmWabpZ9YnJqnrlBYHi7EQLisJe+yg1tH2kpR
-	 33qE5lxJN4fs8Fp7/fNS2SdNepXINWRaFRjyEKhPWdKCoVWK5gyvLfkszAMV4OmhED
-	 LhHaAgGi4A/nh2YXuChSgWU+T7QTngeKJ/570CSK4ndNpDjfvTh7j9ID+uFmuiLcK7
-	 w0nKZcd92vv0Q==
-Date: Tue, 29 Sep 2026 19:29:50 +0000
-To: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-From: Alex Robinson <alex@ironrobin.net>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 3/3] arm64: dts: qcom: sc8280xp-x13s: Add embedded controller
-Message-ID: <20260929192908.16507-4-alex@ironrobin.net>
-In-Reply-To: <20260929192908.16507-1-alex@ironrobin.net>
-References: <20260929192908.16507-1-alex@ironrobin.net>
-Feedback-ID: 54785507:user:proton
-X-Pm-Message-ID: 28a40f096bffcfa3e46b21560eee73fc5561a9e9
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dliHjACD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFCF61F000FF;
+	Tue, 29 Sep 2026 19:32:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790710356;
+	bh=DYT1pzhI3fvjvNKGoV0gv49pvi/bcg98Rzpa+iMF22U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dliHjACD6G8cM6hYVY4XjJBOleZdtkVYSGu1FX1+CxqinZZxM0wele4GyNm/fiiuN
+	 LVNGN+oMVkKa9DJ4wbQGjrtKwaKPpmuPJ/+dKknRavmrMDXFM6K+moRrhCpnj80ojC
+	 9/aGRsjL/3ybLo6/PBiAiVGK8gSM7Aa58ftoQwaumcUIkSdNuMz0PHH8sBktzfwe/D
+	 ZESGCpQ1Q+2xq1xWukZ+P0uGJGBWs1Y3vJ9ivqeTPR+fc6oJzBenWHAmVVxN4wS/qw
+	 sdpfczACclbENStrycVY5MgbtCRZCuiEbWcd3CIbkD65UUC+khs49257qzI+kDuRb+
+	 ehY6BsRSmlMdw==
+Date: Tue, 29 Sep 2026 21:32:27 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Marcel Holtmann <marcel@holtmann.org>
+Cc: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
+	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
+	Chris Lew <christopher.lew@oss.qualcomm.com>, Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
+	Juha-Matti Tilli <juha-matti.tilli@iki.fi>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
+Message-ID: <erwghnlgy7bv7bjiut6f3cidzm4gpblevrfvxfe7yllwf6aqaw@d6w5d4jp5kr5>
+References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+ <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
+ <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+ <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -45,87 +50,87 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
 
-Enable the ThinkPad X13s embedded controller so its driver can provide
-keyboard backlight support when booting with Device Tree.
+On Tue, Sep 29, 2026 at 07:05:31PM +0200, Marcel Holtmann wrote:
+> Hi Deepak,
+> 
+> >> Now that the QRTR driver allows using the unique node id for each device,
+> >> which is different from the node id received from the remote node, compute
+> >> a unique node id using a new API, qrtr_host_node_id().
+> >> 
+> >> This API takes the 'index' parameter and adds it to QRTR_NODE_HOST_BASE,
+> >> whose value is outside of the node id range used by the remote nodes (0 to
+> >> 0xffff).
+> >> 
+> >> Finally, call the new API from MHI endpoint driver by passing the MHI
+> >> controller index as the parameter. The MHI controller index is unique for
+> >> each controller, thereby for each MHI endpoint device.
+> >> 
+> >> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> >> ---
+> >>  MAINTAINERS        |  1 +
+> >>  include/net/qrtr.h | 21 +++++++++++++++++++++
+> >>  net/qrtr/mhi.c     |  4 +++-
+> >>  3 files changed, 25 insertions(+), 1 deletion(-)
+> >> 
+> >> diff --git a/MAINTAINERS b/MAINTAINERS
+> >> index df8ab9b82402..9c8bb086be28 100644
+> >> --- a/MAINTAINERS
+> >> +++ b/MAINTAINERS
+> >> @@ -22511,6 +22511,7 @@ QUALCOMM IPC ROUTER (QRTR) DRIVER
+> >>  M: Manivannan Sadhasivam <mani@kernel.org>
+> >>  L: linux-arm-msm@vger.kernel.org
+> >>  S: Maintained
+> >> +F: include/net/qrtr.h
+> >>  F: include/trace/events/qrtr.h
+> >>  F: include/uapi/linux/qrtr.h
+> >>  F: net/qrtr/
+> >> diff --git a/include/net/qrtr.h b/include/net/qrtr.h
+> >> new file mode 100644
+> >> index 000000000000..745d51b4a6ba
+> >> --- /dev/null
+> >> +++ b/include/net/qrtr.h
+> >> @@ -0,0 +1,21 @@
+> >> +/* SPDX-License-Identifier: GPL-2.0 */
+> >> +
+> >> +#ifndef _NET_QRTR_H
+> >> +#define _NET_QRTR_H
+> >> +
+> >> +#include <linux/types.h>
+> >> +
+> >> +/* The offset is chosen carefully to not collide with the node ids allocated by
+> >> + * the remote nodes. All the remote nodes use node ids in range 0 to 0xffff.
+> >> + */
+> >> +#define QRTR_NODE_HOST_BASE 0x10000u
+> > 
+> > Can it be exposed with include/uapi/linux/qrtr.h also. There are user space clients like modem manager
+> > which need to calculate modified node id to distinguish same service from multi modem over mhi.
+> > This is same as wlan use case.
+> 
+> did anybody actually looked at the proposal that Denis and I came up with. It was exactly addressing this properly.
+> 
 
-Use a pull-up on the EC interrupt line to match the firmware-inherited
-configuration measured before Linux configured the pin.
+I did review the proposal from Juha and shared my review feedback.
 
-Assisted-by: LLM
-Signed-off-by: Alex Robinson <alex@ironrobin.net>
+> It seems you guys came up with some hot fix and want to run with it. After month and month of silence and not bothering to review the proposal, you are trying to push your thing?
+> 
 
----
-Review note: GPIO103 was measured at pinctrl probe before Linux
-claimed/configured the pin. TLMM CTL offset 0x67000 read 0x00000003;
-the pull field value of 3 decodes to pull-up on SC8280XP.
+I aplologized for the very late review. But the series I shared was not just
+some hot fix, but a proper solution (without userspace ABI though as I didn't
+forsee the requirement) that works for the multi-WLAN setups.
 
-diff --git a/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts b/a=
-rch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-index 218573a97785b04528854b03a99c837558a33c1e..1e29bab37de6d192ec49dc407e2=
-4e1a3bc9496bd 100644
---- a/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-+++ b/arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts
-@@ -806,6 +806,25 @@ &i2c4 {
- =09};
- };
-=20
-+&i2c8 {
-+=09clock-frequency =3D <400000>;
-+
-+=09pinctrl-0 =3D <&i2c8_default>;
-+=09pinctrl-names =3D "default";
-+
-+=09status =3D "okay";
-+
-+=09embedded-controller@28 {
-+=09=09compatible =3D "lenovo,thinkpad-x13s-ec";
-+=09=09reg =3D <0x28>;
-+=09=09interrupts-extended =3D <&tlmm 103 IRQ_TYPE_EDGE_FALLING>;
-+=09=09power-state-gpios =3D <&tlmm 176 GPIO_ACTIVE_HIGH>;
-+=09=09pinctrl-0 =3D <&ec_int_n>, <&ec_power_state>;
-+=09=09pinctrl-names =3D "default";
-+=09=09wakeup-source;
-+=09};
-+};
-+
- &i2c11 {
- =09clock-frequency =3D <400000>;
-=20
-@@ -1571,6 +1590,20 @@ cam_rgb_default: cam-rgb-default-state {
- =09=09};
- =09};
-=20
-+=09ec_int_n: ec-int-n-state {
-+=09=09pins =3D "gpio103";
-+=09=09function =3D "gpio";
-+=09=09input-enable;
-+=09=09bias-pull-up;
-+=09};
-+
-+=09ec_power_state: ec-power-state {
-+=09=09pins =3D "gpio176";
-+=09=09function =3D "gpio";
-+=09=09drive-strength =3D <2>;
-+=09=09bias-disable;
-+=09};
-+
- =09edp_reg_en: edp-reg-en-state {
- =09=09pins =3D "gpio25";
- =09=09function =3D "gpio";
-@@ -1591,6 +1624,13 @@ i2c4_default: i2c4-default-state {
- =09=09bias-disable;
- =09};
-=20
-+=09i2c8_default: i2c8-default-state {
-+=09=09pins =3D "gpio43", "gpio44";
-+=09=09function =3D "qup8";
-+=09=09drive-strength =3D <2>;
-+=09=09bias-pull-up;
-+=09};
-+
- =09i2c11_default: i2c11-default-state {
- =09=09pins =3D "gpio18", "gpio19";
- =09=09function =3D "qup11";
+> If you don’t support userspace, your proposal is broken. Plain and simple.
+> 
 
+Small correction: broken for some setups, not all. But I do get the point. I'll
+incorporate this ABI in next version.
+
+Thanks for the review!
+
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
