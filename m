@@ -1,97 +1,73 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EFEA2AD1B;
-	Tue, 29 Sep 2026 19:34:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95387358399;
+	Tue, 29 Sep 2026 20:34:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790710484; cv=none; b=gLgPcyxJjlCuRCJAqptdkpVDUQ4wyfOYNXRI88yJ2WA9za3tk/jRQAi1ewNL/2C5tOQRlylftxvV+pt4ERlfAENyVL3w1YsUxYMX/0wuQRrSErpFc0Tra4HRLyg+c5e1C1gW+vNoJbDAZOp90Tpr+txk3u7Grzffc9u87RpRnIs=
+	t=1790714060; cv=none; b=UX2zP639Z3tryC06IVIfby7aYykoMhON7ZzpuGNvky2xBa7pcoS65WU2zoPyUNU0rMlCZYfM+Itrztkdm8yxaHcVjz3NheFuLfp5PDgGnmt7S3gxEeD5QcFIm6FWbsIMuGA6ARps8KZEytVher0cHHUb0ANRfVDQckEjsC2/j6c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790710484; c=relaxed/simple;
-	bh=y7XfGMrBX+DxkMWrLuqn10YVEymOK7yb2ayLRmMp/O8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ih2qkobwOaXlopdyDIhPEaZriONQxpRHJL72GY2Y+HfbXwWbG5gNv6wftnFmj9u51ncXuw5xfE4CZFeCr3F4t35jTSzVpFKh+c9v7+9b73xnYMOI/kgJX7vM6H5+NJff0JkAdqA13wi1YX0q/NZdSEUy3p8nQGjRRhCgqZBs2fc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MSkAu2Sg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790714060; c=relaxed/simple;
+	bh=Qcc3CuiGR8F6BmSpgb/iA2D6hQ3P7hKSHh4btT7sfx4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=gJDaDQcnEb9nJNuCd91XHZ5fbyxfDTp/u8zPhTCssL93MEBLrNxRBf3jzEzSUKP4KGqz3cuCVwbKHhztzkFFxNHrNYeG7u39EJkQSSgDHTGSOVJhF0Cf3Q1TPJr+OYOaPqbRqaaLXKRtFr6VfxC42Cz6USrXLOLMHZiZUmAq4+Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VSrp1J4+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MSkAu2Sg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DDEB1F000FF;
-	Tue, 29 Sep 2026 19:34:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VSrp1J4+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E22821F000FF;
+	Tue, 29 Sep 2026 20:34:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790710483;
-	bh=fG/J3vd/B9A0cwpUSTgiyouooSSQ2j/8aAKitxE1DSk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MSkAu2SgPxb5xXZWx9l7m0CIIvimRdJmk1aorgz+3V5URkU/bootHHdS4ashK/AMC
-	 aES4Z14XCg90aWTZWxF4nTE/QDAzxpXgwKDDD6loS4E4o4JUy76AbiXJ4WxfeOBL7k
-	 +XRocKkHgEH4wpQGohqSZQQx6pC0ElnIjdbSreC7hH8kTGIBC0pLicRRe1D0PIxwnp
-	 nc1KSErgpgcEbf93xW8LWEz/UCDFtaBEtu8kJbjOqANmDJ/6/QYcfT0LnjcVY7tNSF
-	 uZb57CLxJnGaYHrzBevh/YDXD8yBLwK5su/N0sTDw/shkZXR/bQV7DmQKnz4vMeUpC
-	 pmwTK4TPPbUyw==
-Date: Tue, 29 Sep 2026 21:34:34 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-Cc: Marcel Holtmann <marcel@holtmann.org>, 
-	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, "David S . Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
-	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
-Message-ID: <m657dtesuagn7vdajsuzjb4mfysf5xabsu3s6n6lujj7yb3z4p@m2e7e3n4zyev>
-References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
- <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
- <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
- <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
- <05e539f8-bb7c-4038-8a83-8ab0d1a5b917@app.fastmail.com>
+	s=k20260515; t=1790714059;
+	bh=0glIlyA2h3h7vHM0aS45Ph4Kslhdwq+2jFa+9j6F0C4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=VSrp1J4+eEuBOkKZwyL8dxlRgHIaWOVFs9j0Y5+lY2hGp77+Qde85w5OmsREoX2Qs
+	 MbNIUfhOoLdmDiVdCp4CMmtEYf2irhAS55/MPS9Ei9yis8+FEj+uG2/OyZi65taeu6
+	 G3/2xrH8H3rA1p6zpP5EjW9qcQ1P9hVvKKQM5DZ0l6ZfdBedMo53MsANB4prI9DIc3
+	 9xz+dHNy7mIAt/i8J6bvXQUJYaqrRiNf8vYXbL0xZQfGEDuZrTxIPoiuxM5g3WqmnX
+	 FaEsfVIhB4udSP1vbsPA3latEdYQ26bVg+2CKaJfQ7KbodFUbocid0mxr6KGG0xqfv
+	 rzK+2R0lUROYw==
+From: Bjorn Andersson <andersson@kernel.org>
+To: linux-arm-msm@vger.kernel.org,
+	Stephen Boyd <sboyd@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+	Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	kernel@oss.qualcomm.com,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Yijie Yang <yijie.yang@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v2] dt-bindings: spmi: glymur-spmi-pmic-arb: Add compatible for Qualcomm Maili SoC
+Date: Tue, 29 Sep 2026 15:34:12 -0500
+Message-ID: <179071404932.2903617.5656557809470041633.b4-ty@b4>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260831-maili-spmi-binding-v2-1-37a25ef3921c@oss.qualcomm.com>
+References: <20260831-maili-spmi-binding-v2-1-37a25ef3921c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <05e539f8-bb7c-4038-8a83-8ab0d1a5b917@app.fastmail.com>
 
-On Tue, Sep 29, 2026 at 08:16:50PM +0300, Juha-Matti Tilli wrote:
-> On Tue, Sep 29, 2026, at 20:05, Marcel Holtmann wrote:
-> > >> +#define QRTR_NODE_HOST_BASE 0x10000u
-> > > 
-> > > Can it be exposed with include/uapi/linux/qrtr.h also. There are user space clients like modem manager
-> > > which need to calculate modified node id to distinguish same service from multi modem over mhi.
-> > > This is same as wlan use case.
-> > 
-> > did anybody actually looked at the proposal that Denis and I came up with. It was exactly addressing this properly.
-> > 
-> > It seems you guys came up with some hot fix and want to run with it. After month and month of silence and not bothering to review the proposal, you are trying to push your thing?
-> > 
-> > If you don’t support userspace, your proposal is broken. Plain and simple.
-> 
-> I'm still willing to submit a new version of that patchset originally by
-> Denis, if the kernel devs so decide that it's the way. For example, the
-> "radix tree of radix trees" approach could be replaced with a hash
-> table.
-> 
-> There was also some criticism about a layering violation in storing the
-> endpoint id to mhi controller. However, maybe that could be reduced by
-> providing a correct abstraction around it, so that other code doesn't
-> touch the mhi controller structure directly.
-> 
-> Other criticism for that patchset by Denis was its overt complexity.
-> Yes, it has more lines of code changed.
-> 
-> This dual-card setup needs to be handled somehow, either by Denis's
-> patchset or by Manivannan's patchset.
-> 
 
-I wish to go ahead with my series as it is simple and tested across the
-multi-WLAN setups. For concern around exposing the nid to userspace, I'll
-implement it in next version, thanks!
+On Mon, 31 Aug 2026 20:53:44 -0700, Fenglin Wu wrote:
+> The PMIC arbiter in the Qualcomm Maili SoC is version v8.5, which
+> is the same with Hawi and compatible with Glymur. Hence, add a string
+> for "qcom,maili-spmi-pmic-arb" as a compatible entry for
+> "qcom,glymur-spmi-pmic-arb".
 
-- Mani
+Applied, thanks!
 
+[1/1] dt-bindings: spmi: glymur-spmi-pmic-arb: Add compatible for Qualcomm Maili SoC
+      commit: 769ff2033eb181cd87564aa41d3a3979e9e55377
+
+Best regards,
 -- 
-மணிவண்ணன் சதாசிவம்
+Bjorn Andersson <andersson@kernel.org>
