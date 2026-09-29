@@ -1,160 +1,105 @@
-Received: from mail-qk2-f39.google.com (mail-qk2-f39.google.com [74.125.230.231])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10CA751A136
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 11:59:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.231
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D54B350E5AA;
+	Tue, 29 Sep 2026 12:10:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790683160; cv=none; b=A2ARv7GdVONTMThXHiC/K54KvRegyc+YyCR1UJKD/Ew2ApgYD7Uuow9QjC2JTkjdCMqya/2DQgH95pvkehFc2fK0NAa3SIpvkby8DIdBdeKUs8ToKLFJ9yxyM8PUU2c+5YBKSxxjq0RTP27QyWXbpEaNCOLlqcqOu9PBrtR05Ow=
+	t=1790683806; cv=none; b=hEgd749UHhcJAkBVagpqEEplcvObgDn0jDa/Ddn7r3bmH/ORF23KlC0B5BvFVy+8L0gvc2tem3fgQqdNW3qdPRDrAuP3xZfxokEUFQT5AWpLsRXMtUB5GH0S+cHbAJsM/3gIk5wDoq2N8KePJiqkVdNm3sl9Hl2UIeSaxPtHtN4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790683160; c=relaxed/simple;
-	bh=vVvDrY//xdBNbp6iPJngokdTuFS+NhXaql31Vv+iJbc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rgh8D9CGkCUpB2xSzlDBngz4gUPoHEmCsRGmCtgdjDswiRg7LbRv6dHe0FGDy28xZxvixC3cfygeNlVutjmjSzE3xWEDH2XkxS5y7NcdPmIvnYs0nr4PIlnpSGuwiepGPAsq/fH0vgLSxPZ5rIa2o9SV1VmUXuHe+o3iZwPI49E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=NTTemChe; arc=none smtp.client-ip=74.125.230.231
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="NTTemChe"
-Received: by mail-qk2-f39.google.com with SMTP id d75a77b69052e-5332bdd8296so51881431cf.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 04:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1790683157; x=1791287957; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DlgScPHdiLebmGaCvP48bU4gXKNbLya/+el4EaXYdkE=;
-        b=NTTemChe7dfixuN74dxTKB7C8sNyxI9FeiN4dmeX7yCelWMUCBnUXZsYugKVVqI3Y3
-         iEbDYAUv/zaedKY1NP7/LqRq7ZGgL1Xx3gSjHRpLtJpLu6tklL199d2NpJs9WUY8zH7y
-         i/sMcoWAd6YmZFgN+dGNhZjO88/fFCbfOcglRLF75QK7njpqt78m8Gc6RtLewLTI5Y/G
-         Y9pqSIMliKGpuxEzTlHnCci50tE+tIA1Jw+LRJDEisuJJzAMCFlhzH9KiZLS6hWOfibd
-         i1X4PBYO7v0EOfKOYWaPV3EBqCIKwvb4CjCM2MZhZTvEe4iSLzKu9sgs8uyYW5dHjwUq
-         nRZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790683157; x=1791287957;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DlgScPHdiLebmGaCvP48bU4gXKNbLya/+el4EaXYdkE=;
-        b=dWDM8Glk6HJpOElHIt4VfUI3i2UUngiD2BiQISfIMHjPz+GxFJqur3CQJgIde3Xd6Q
-         G8UB/H8zDEnqLRPWack5tiSmbXPNBJk4C5Keh4eqPWvaesiRzViz7TpUQLJuizNBL3K1
-         vHmMZ7sYtcpBNQbggbsti5JYIrK37k+7GRkhDW42a/KbX15Gdfxvq6//v3P3Rpp14mrN
-         t4+kblr1IsWhbloflGyr0Aa/Y/ZJRrR6JqrnLV1UuQyERg8HJ6wWlClLMUw/xLSOMtPe
-         AR237XR93XDxTt9WnHiHA7s/uWYipujDdP0bVJlqUIpvyPbxi5NsEfc3+5FomhAGFWPa
-         VCsQ==
-X-Forwarded-Encrypted: i=1; AKwUvByLe2Kis5/+WqWMA7p3J+f7rpne7jeBkDdKKRdhU7pJTJeV3YpnmFobTiqaUoICS2iYuV//XjTOGFhwFNEW@vger.kernel.org
-X-Gm-Message-State: AFuF++nxAkF3OICkMwCjWpCxVgZuSWqSjeBHhBgR6xZ1zEcls4IhUA93
-	dzNz9fgA/v6H0tNLy2WcLJWYudsVUkMPk1QHgCW53hSgaLnqBtdgrBG4HIXryareOOg=
-X-Gm-Gg: AYBFou3JPXGQc8GoAl34Ludg9D7gaKJRbPRUaJmaH7ZoP5Puf4qM1BuRY/s8J8GqOnl
-	3NBGdtfLOnYQUVqumgjqVwi3D4XjW16RnHXZ4PsVOyFvaI4eQbYqQbuOV0M9Z2PzMBZKv2ruBxW
-	iuob8JHeWAulqZdygSaoXgxAUD59bVB6K2YWDFuHCkBktYDc0Cr3kaxbUub0kB/6neWGMyHKwMG
-	yjnrvbvGYSarWCSWWlx9oPa890V60CfZk2IC5PlkbxV0nusfbULiJX9mb/rEJHlKAWR2aM8nB7A
-	ePieSMcl60C/AP99FpVJCAJW6tjTkzC5MYOe4pbIGpNMTCENyJYRcVyUlKlfM7LGpImTmzzYIqR
-	ZyyiojHRsPDzCALKQwFlC/uUZVYJiGlPKiZx/tz4JqrKahOvOG99MKEoritLqJ4nIprAH+J9Fpc
-	NA8SDzWZb45meBsyfFVysEcoPDqt7hvkiDZ5N9dAUUDmOyTr4=
-X-Received: by 2002:a05:622a:130a:b0:533:4b39:4e28 with SMTP id d75a77b69052e-5334b395abcmr86308001cf.33.1790683156815;
-        Tue, 29 Sep 2026 04:59:16 -0700 (PDT)
-Received: from armok ([2605:a601:a61d:7a00::2])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5332225a696sm84460381cf.14.2026.09.29.04.59.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 04:59:16 -0700 (PDT)
-From: Liviu Nicoara <lnicoara@thinkoid.org>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>
-Cc: Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Jonathan Marek <jonathan@marek.ca>,
-	Johan Hovold <johan@kernel.org>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Liviu Nicoara <lnicoara@thinkoid.org>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] ASoC: codecs: lpass-wsa-macro: rewrite the interpolator volume after enabling clocks
-Date: Tue, 29 Sep 2026 07:57:55 -0400
-Message-ID: <20260929115755.6096-1-lnicoara@thinkoid.org>
-X-Mailer: git-send-email 2.55.0
+	s=arc-20240116; t=1790683806; c=relaxed/simple;
+	bh=0TQIG6b0QhiYyhhVsn09ZaXE0tRmvWDczzbfnRItPCs=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=iYH6/Lc8nmgvf/dFl5/YsQXRM71QXh8ZP6Exwm5OSzufUiKLjBG3GKMA+JpahV6nyEqmA+ffoKO8VdAY3uujf297UAv7V91w1JJX572vKNFwJ52fQX/tK+IeYwvwRb2+gH0wdANp35GRlevuv2tgiPam02HkSZ0cPrmfnkEp+fo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.helo=mail.mainlining.org; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.helo=mail.mainlining.org
+Message-ID: <d3b99da7-bc64-4df8-94ab-25080474ee35@mainlining.org>
+Date: Tue, 29 Sep 2026 15:09:27 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Subject: Re: [PATCH v3 16/19] thermal: qcom: tsens: Add support for MSM8952
+ tsens
+To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
+ Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
+ Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
+ <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
+ linux-input@vger.kernel.org
+References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
+ <20260921-msm8952-initial-support-v3-16-b96fd3fe298b@mainlining.org>
+ <4de27200-3598-47b7-b0af-8f7acd037618@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <4de27200-3598-47b7-b0af-8f7acd037618@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Commit 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless
-gain read/write sequence") removed the read and write of the digital
-volume register in wsa_macro_enable_interpolator(), on the grounds that
-writing back the value just read does nothing. The comment above it,
-"apply gain after int clk is enabled", was left in place.
+Hi Daniel,
 
-On the Dell XPS 13 9345 (X1E80100, four WSA8845 amplifiers on two WSA
-macros) the write does something: a volume change made while the path
-is idle does not take effect when playback starts. Lowering the digital
-volume from 81 to 63 with nothing playing, then playing a test tone,
-gave about the same level as before the change. With the rewrite
-restored, lowering it from 81 to 69 while idle played audibly quieter,
-and restoring 81 while idle brought the level back. Changes made during
-playback take effect with or without the rewrite.
+On Tue, 29 Sep 2026 09:11:28 +0200, Daniel Lezcano wrote:
+> On 9/21/26 20:19, Muzaffer Kadir via B4 Relay wrote:
+>> From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+>>
+>> Add MSM8952 support for tsens.
+>>
+>> Downstream does a lot of advanced things with calculations.
+>> But seems like using tsens-v1 directly works too.
+> 
+> Can you elaborate a bit the changelog please ?
+> 
+> Thanks
+> 
 
-The register already holds the new value when this happens. Without the
-rewrite, after an idle change from 69 to 81, playback stayed at the old
-level while the register, read from the hardware through /dev/mem, held
-the new one (0xfd). Writing that same value back through /dev/mem
-brought the level up at once.
+MSM8952 has 11 sensors
+and 3200 default slope (according to downstream)
 
-This is the behaviour described in commit 46188db080bd ("ASoC: codecs:
-lpass-wsa-macro: fix compander volume hack"): "the volume registers
-still need to be written after enabling clocks in order for any prior
-updates to take effect." The value read comes from the register cache,
-so the write pushes the last requested volume to the hardware once its
-clock runs.
+For tests, this is the table for readings:
+tsens sensor 0  1  2  3  4  5  6  7  8  9  10
+TWRP         32 31 29 28 28 31 30 30 30 32 30
+this patch   31 29 31 29 29 31 30 31 31 30 30
 
-Restore the rewrite in the interpolator's POST_PMU event only. The mix
-path event removed later in the same series is not brought back.
+Both are read from same device, one after the other,
+First upstream then TWRP.
+2 degree difference seems reasonable in my idea,
+as there is a reboot process happens in between reads and
+downstream has more power saving features than this port.
 
-Fixes: 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless gain read/write sequence")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
----
+I don't know any way to independently measure temperature.
 
-Notes:
-    Changes in v2:
-    - Cc stable (Johan Hovold).
-    - Add the /dev/mem read and rewrite from the v1 review.
-    - Link to v1: https://lore.kernel.org/all/20260924125940.22665-1-lnicoara@thinkoid.org/
-    
-    Tested on v7.2.6 on the machine above, by listening. This function is
-    unchanged between v7.2 and for-next; the driver's clocks moved to the
-    PM clock framework in cd054a6e272c after v7.2, which was not tested
-    here. Build-tested on broonie/for-next (arm64 defconfig).
+I reused offsets and slope from downstream.
 
- sound/soc/codecs/lpass-wsa-macro.c | 3 +++
- 1 file changed, 3 insertions(+)
+My commit message wasn't good, I will expand the
+commit message by v4.
 
-diff --git a/sound/soc/codecs/lpass-wsa-macro.c b/sound/soc/codecs/lpass-wsa-macro.c
-index 4242366601a5..899c8bee4645 100644
---- a/sound/soc/codecs/lpass-wsa-macro.c
-+++ b/sound/soc/codecs/lpass-wsa-macro.c
-@@ -1849,6 +1849,7 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
- 					 int event)
- {
- 	struct snd_soc_component *component = snd_soc_dapm_to_component(w->dapm);
-+	unsigned int gain;
- 	u16 gain_reg;
- 	u16 reg;
- 	struct wsa_macro *wsa = snd_soc_component_get_drvdata(component);
-@@ -1890,6 +1891,8 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
- 					CDC_WSA_RX_PGA_HALF_DB_MASK,
- 					CDC_WSA_RX_PGA_HALF_DB_ENABLE);
- 		}
-+		gain = snd_soc_component_read(component, gain_reg);
-+		snd_soc_component_write(component, gain_reg, gain);
- 		wsa_macro_config_ear_spkr_gain(component, wsa,
- 						event, gain_reg);
- 		break;
-
-base-commit: 1f9b1774f65c6670a37000390e6c43309248a345
--- 
-2.55.0
-
+Best regards,
+Muzaffer Kadir
