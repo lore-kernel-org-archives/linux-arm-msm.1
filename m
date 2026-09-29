@@ -1,49 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 282813AB277;
-	Tue, 29 Sep 2026 07:46:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E86C3AB5DA;
+	Tue, 29 Sep 2026 07:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790667972; cv=none; b=FGx5VlWSczCpZGot//TxnJTOyvY/4NYKsp1UUfzVj2qWgESaO246kL/BL7UquQAvHXFCrznvtpl5swR879okkjw7c7bz/VIMJCj91SrwYLNfCogBQ3i+IFS/RX6nTqAIyw7EA5t3Wp3yiJKYrk9PJxeO+4MJdfL00CCqA75ShtY=
+	t=1790668666; cv=none; b=kAou4B3qLbGeypww0r75zmy+uaCyciWHhYs4J6cvUsXQ7EjDcaPxKLRmWNZBQ4MsiPfjQqECmq7AkP59aC2VV3qZIOrPVSiiVxwSDd6bEOWZ02dFugTLQEYIg4X290OcYMhvbhDzIN5UGe3xHo39shUA28tWJAmQ2pxoN9PZgEk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790667972; c=relaxed/simple;
-	bh=YEQSBFPF+jkSL86FhqCVUNWjwTjEpeE/2q0fxSefwNo=;
+	s=arc-20240116; t=1790668666; c=relaxed/simple;
+	bh=QcPHyvyl0XUUm6Ls3Oq2BIfKzTujWlTq74iC2AjlEsg=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uXKnbKcXsBe7NTy+5bUbgf9Te5FDdeGyd9IhMM+RHI/gsnevQFdNORif69Zg23afCekLILBtm0PHTq3x5ljI2MFhvMK4v75fHe+MbOO99KZyEg0ypLrE/k9IUve9RbX7EQXED8ujPFWuvc5Cf+9gkSXSJEye//73jy5LPlrEYvc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hPB/y1lW; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=F+hM9TYT4pPmlVhNURXggan5NIg7VQvWh8dDh6q+jWpvyiszj3hXABABWe43fdI4QqEOpq34R8kVwy4s+0giWNLTCTjpmS+ZJzV0KjZ7UthDOkKLb2CC7UxAWOVEOtdgH97Zj/ba/XFf8M5SdC3ZDwSGG4XuAwnvMuVEOMDN7hQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nbMFx7nE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hPB/y1lW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBA6A1F00898;
-	Tue, 29 Sep 2026 07:46:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nbMFx7nE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91F321F000FF;
+	Tue, 29 Sep 2026 07:57:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790667970;
-	bh=EIHkUIYifOHwbWldjH0tGVUqDKZQiGqLC0z1iDVXIxU=;
+	s=k20260515; t=1790668665;
+	bh=SnGwR+r1QeQuK+Ch67nV604+73TG6+orIYTqiQSom5c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=hPB/y1lW95b+WWL0a1F2vXtqQY+zkP0BP1jQQMSWPftm6hFxBFi4y23QPhjIioMWm
-	 iGmtj8IPPnbtkTHsPdkR3kWUYftxGO3tfuelZQ94v6IIppKvUnCNfokbVb7/VfFosT
-	 o3GydFgsN/fV4rmqP/db3QvFVa2q4tfBao2KrrB+mYhktQ3zBvdb6gAn6Ipkl6ytXN
-	 BAx40hZn8Xaqtsibldcn4kFWkMXKtEdVtvbX6uI8XN+I1LKIJF28ot1GG3+bbFFS5V
-	 bL8BLgRp8St005piiHIeibktVtPaKQVOJ7uO0UOK4r1YiWgohS+PmGepWYBCoJRVMM
-	 QDQikM+dT862w==
-Date: Tue, 29 Sep 2026 09:46:06 +0200
+	b=nbMFx7nEaHWt4A0cPwyJNtklYq6Ytw6ERbFlvhIJfufr3/YDSXrWbfYsLVUrY1h7X
+	 W1njtykkwtrg3ms57VMmsCe7weAjGoWhBZzVyx3SAzPdX5znrG6UWp3Edlm/8xy3oy
+	 xRpMomVDRidzg+Y9ZOXWvbUmF90muA7m8B7h4KCi5wxViR0gxZ5GjlbirFMVCmdUrW
+	 mlgwzJjPm19moCmEcSJ84eeVsrKKYVoV6qS/wO0ha5S1ui50/Cw9vP4/gkyWsOlu8s
+	 JgX3f0POAHbOb3fs6Sfvudga6RLVfhBjAJVDrYahbBhDGzjk1B0BcKLsKhX5CN1jM4
+	 zt2vl2cEqvbjQ==
+Date: Tue, 29 Sep 2026 09:57:40 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: David Heidelberg <david@ixit.cz>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Petr Vorel <petr.vorel@gmail.com>, 
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v2 09/11] arm64: dts: qcom: sdm845-samsung-starqltechn:
- Update panel compatible
-Message-ID: <20260929-spirited-umber-hedgehog-300ebd@quoll>
-References: <20260924-crosshatch-panel-v2-0-08d5c7bf72fc@ixit.cz>
- <20260924-crosshatch-panel-v2-9-08d5c7bf72fc@ixit.cz>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Taniya Das <taniya.das@oss.qualcomm.com>, Jagadeesh Kona <quic_jkona@quicinc.com>, 
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/3] dt-bindings: clock: qcom,sm8450-videocc: Fix clock
+ inputs for Glymur
+Message-ID: <20260929-visionary-hospitable-beaver-e2c1a5@quoll>
+References: <20260924161152.1162301-1-shengchao.guo@oss.qualcomm.com>
+ <20260924161152.1162301-2-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,26 +50,38 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260924-crosshatch-panel-v2-9-08d5c7bf72fc@ixit.cz>
+In-Reply-To: <20260924161152.1162301-2-shengchao.guo@oss.qualcomm.com>
 
-On Thu, Sep 24, 2026 at 04:01:37PM +0200, David Heidelberg wrote:
-> Original compatible describing only the DDIC used, but omit describing
-> the panel used (Samsung AMB577PX01), which we have no way to detect.
+On Fri, Sep 25, 2026 at 12:11:50AM +0800, Shawn Guo wrote:
+> The schema describes exactly two clock inputs for every compatible it
+> covers, a board XO and a video AHB clock from GCC. That is only true
+> for part of the drivers bound to these compatibles. videocc-glymur.c,
+> which handles qcom,glymur-videocc and qcom,nord-videocc, and
+> videocc-sm8750.c both declare their DT inputs as DT_BI_TCXO,
+> DT_BI_TCXO_AO and DT_SLEEP_CLK, and parent video_cc_sleep_clk_src on
+> DT_SLEEP_CLK.
+
+I don't understand what you are saying here. You are mixing drivers and
+compatibles.
+
 > 
-> New compatible allows without breaking ABI fixing the inverted reset.
-
-No, this is wrong. You just broke all the users of this DTS.
-
+> Because the schema stops at two items, no device tree can supply the
+> third input, so video_cc_sleep_clk_src can never resolve its parent
+> and registers as an orphan clock. It also documents the second input
+> as an AHB clock, which no device tree using these two drivers passes,
+> and which those drivers would interpret as the always-on XO.
 > 
-> Assisted-by: LLM
-> Reviewed-by: Petr Vorel <petr.vorel@gmail.com>
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
->  arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> Describe three inputs for the Glymur, Nord and SM8750 compatibles,
+> keeping the existing two-input description for the rest. The sibling
+> qcom,glymur-evacc.yaml, whose driver has the same shape, already
+> documents a sleep clock this way.
 > 
+> Fixes: ed9ca8296147 ("dt-bindings: clock: qcom: Add video clock controller on Glymur SoC")
+> Fixes: b190eaea5780 ("dt-bindings: clock: qcom: Add SM8750 video clock controller")
 
-NAK
+Are you sure that you are not reverting review like it happened this
+week in IPQ? You know, the trick with reverting maintainer's review I
+mentioned on DT IRC?
 
 Best regards,
 Krzysztof
