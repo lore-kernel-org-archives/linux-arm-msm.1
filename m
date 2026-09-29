@@ -1,296 +1,179 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F6984FD298
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 21:35:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 733143D9020
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 21:51:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790717739; cv=none; b=Lkm5ysRITIlEUTY/GIBRJSiiSBVl8BGBpYjREXsFzltMFyFpa+evhO9j1Dut+xHElHCFs53vX+UQ0REcCWDBrb4x6XUum30dXyQXNnERth/HUwDtlRwOolGyCF/0GNgwhm5KIHJ8rRaPDlB7d4oK901hgKdhgM3LARB5aUGdrbU=
+	t=1790718678; cv=none; b=R8ZYbvyC92adgRp5gRI6coVIEHmUfgWbd5WYZjf5VWOt43HVfuEqi46PcxDrNrs5FhcMZgksIU/Z/QsW8609YE07muq6IOhQJOmwgY4IzOOA9Fl8bQTL0QVi5s7VO+GFbNDBfoGV8ZA3fmO7ursJSsgLW+kqXlYyT3iihzuTcZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790717739; c=relaxed/simple;
-	bh=N4mHNfsnlyveA0/4qNZh7sd+pIptRFkHByxL8A5CUFI=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=f5Xa+1/Z38GHXC4A5tMrvivk5fBBBp7i3B/bLPeCAsx8pCfX9Veb4Cmic2VCWcEygDP2aYZbEupCNiqw9y1FkU/t5Bf7dYBDYeH82O+cNxuYNrr+50t7CbpF26rbK9IAJYT1HOMFxcElSy91ElowxCSSe1YPASyGbfegs73kNiQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=E5qihwiz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bH+fH+vG; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790718678; c=relaxed/simple;
+	bh=XM9rGzNoCBdREsU29jIvR3Na2mO8nAmnHTqmpY9TioY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QsJScqElzKNi87DbvWBXVAMdFvJHiuPJJgPas/nuuLGhtgig+eb7gkoLTuoJdTL6krJGK/SNQrVFZBjuLRBxwHnu2wdGgqquQwn+Ocwxitv4yVH2/Migo+VnMzotMo6ApV7oTlztYyuIifvAuVwrIEsh7gwCaInTtOkjo+aJqQs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O7rcrbvX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="E5qihwiz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bH+fH+vG"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68TI3Wtm1723976
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 21:35:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=Y5woa8COobc
-	bxZAHY254heLz5elKvaTjIHSo9KyCdzM=; b=E5qihwizlF09QVi1hoGCSitpd2J
-	IGCDxP0EN+XkkWIkW/xb2PV8S1a1P1XmAP7GqEbza3tN/KzpuxP71qW+BH0Uf467
-	nQJ5/Ui6mc3eiNCYPzTvUDa5+w/3T6FQhgd7FCwBkpYqHKAKH+T6+vFafTrkGGKn
-	VNz7lcG437XwOPvl5Eg39wqC7TtvLsRd9yR89oZTA4SoIkqymUId8m6T/Ag9MZh3
-	XJACjiWk0qemyCT6ji+PphJRo1Sr5AXZ9imInQjonOmeDEs83fKVqeBc7G1eM3Wo
-	HTDAVSQ/HDNJtQ0dmQlmB8yOKh15Kj/kM2cRfspz0yEdCW9m+JjynvnuwIA==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j97rstd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 21:35:27 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-34318e88ba2so3599447eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:35:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790717724; x=1791322524; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Y5woa8COobcbxZAHY254heLz5elKvaTjIHSo9KyCdzM=;
-        b=bH+fH+vGZtwWJ8MJ7xGBbPrmDJ/cMBwLrgF0Ou8IRr0rwPjkVcztxeTQijnF7iUplQ
-         +13n9P5kHRpDTx6TCfzeplmxcepqpc0jtbCFK5lMX3g+qR6OuiNbqHhwZinSJ/BowLY6
-         E/X+ZaEFEVyVn/oNDqSA9XvHWBzWjRMvXdcejEOLxDWJZ6GnymznyhJXI4Qk1IwIYEPT
-         7BmqzbSKP0gJlP2M+i/y9xAAl0J82LjrafiM6imWDWY4xM37Akdjdg2Nl2kGezenuxtB
-         u+W5HLbQoWzEnL7/Sbu5volo3smXhcKqYuLqUcVPCyAysUosMhNwtbkKpBnxAUjK2fbp
-         SFTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790717724; x=1791322524;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y5woa8COobcbxZAHY254heLz5elKvaTjIHSo9KyCdzM=;
-        b=Vhmsjokb0aINYv7+nKCo3cupEXjEK3jK5zZb8WWFDQi1SRxOXH0XeUReKm3bcBQfgh
-         EJjjXVOMjrVoZIWKYpYCyKSgUcaoFWrBrWuTwJKoAT8UaGcJPhYIXY1Vt+etfG5P1+v6
-         XRfi539HlUpfoyXcxVjKCMBAqHMF5GWTjjBSzK7NKu69ehb6FWvcCT2gCLM50CAliOoD
-         ntvrviNJfnXZzNk/t/b1zfwAl/TZBr/9P8NrfNTuXDJZ2L8pAruu6eWb+jfMU8VzMC2C
-         qmqVisddfBMbA2e1JlbHYgX2AFoBsdm8w1jDI0YNBZW0NlUzLFUJ1TduVVzxit2I36Jw
-         aXnQ==
-X-Gm-Message-State: AFq9FYLXdVm1zY0EqC+5QxZ9CphMbiRYOb2wZDBX796UfKAnvdWXQA5u
-	f/+BHljHbtH14wrFmiUFt8yctlL9ZuIUs9uis2fPr5LsK6qFgMyEtWOViKqdbd97bjniG1R2+S9
-	WmyKyf9JNXy+RkqbePlTQvH4aEmN99kpwAKPiDRDTFGVluiQgq4YEEQHZ9bx0aXXuvg7J
-X-Gm-Gg: AYBFou3ZUQAS4P6d1B/dv+Sve/0YBPj+xiVo2An+uMpq1DBHkdk8Ovq71P82q7TRkyH
-	TTBKAdfODzJ+mrvMIzZBTI1VmwJLBLc9AzTbwSCRQXWCUIzqnGVch8OuzaSi4cdMlQ3ZUbqnFkR
-	K/p+3vgBXUS1JQ/ZNJpXsdeqi8boqNbgjkm6JtFLJbl2asGIfB2B3pQizm0kIiwVHShUm3o29r6
-	6OpIHdMn1G8YWViPuvhwikaW5ojJJCFZ54wq1EuNq/edNa47mOAHukyPpDgFkSeRzic5/YnPvRA
-	JxNuWPp822RyH1RW2sAlsi2GEOhjWfRGuUpe+Nn9ifzp0mIay+4jpRoAeicoZHeAK4reOes175c
-	QKDDVkBSF0TE5DoCEXy+en4wcZkPs0ub1iLtJ+3hbE573sxtKffRs
-X-Received: by 2002:a05:7300:b08a:b0:328:3944:ee53 with SMTP id 5a478bee46e88-34c63321e69mr739474eec.2.1790717724081;
-        Tue, 29 Sep 2026 14:35:24 -0700 (PDT)
-X-Received: by 2002:a05:7300:b08a:b0:328:3944:ee53 with SMTP id 5a478bee46e88-34c63321e69mr739409eec.2.1790717723065;
-        Tue, 29 Sep 2026 14:35:23 -0700 (PDT)
-Received: from hu-eserrao-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c391e25e1sm1512570eec.30.2026.09.29.14.35.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 14:35:22 -0700 (PDT)
-From: Elson Serrao <elson.serrao@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Rob Herring <robh@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Peter Chen <peter.chen@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v9 6/8] usb: misc: qcom_eud: add role-based EUD control
-Date: Tue, 29 Sep 2026 14:35:11 -0700
-Message-Id: <20260929213513.2401005-7-elson.serrao@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260929213513.2401005-1-elson.serrao@oss.qualcomm.com>
-References: <20260929213513.2401005-1-elson.serrao@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O7rcrbvX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B8661F000FF
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 21:51:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790718668;
+	bh=5Iupqrg/01ZoNIsoDGHtCKOU2uzLk5OtqsS6nGUitSA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=O7rcrbvXEip6B2x8VoLW+A4PuxBkziIu6Kug7gPUFE2wnwgwQQOGzFPY4N4oUYKyt
+	 Z0f3yoZaUs/Px/mddyd5xDTR3xlJg2MeTPBIWIom99GH3hkInK818HFxioyUkHPCdi
+	 w048//2OaxyYivVGkoCA1BdGRLH1nOjNFX4TttCLRtHR68hGiV9Ykr69Ujw61XM7E0
+	 /a3Kzy14FBbMA+oAjs+vOsJsmXpc1OOOLHS6+bALV2bhAySkaOMzOjNwKEWCmf4KJy
+	 FlSiRy4/+iEnoX25fmml/3yPCJUgdP40UbJ93hdx5n/4ZT9HQsOd/460NyMEgVRQau
+	 LGFfVu5thi6eg==
+Received: by mail-ej2-f41.google.com with SMTP id a640c23a62f3a-c2e0b486d91so70105366b.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 14:51:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvByaS/syegezNPQqH+6NsziO3mzjFZ4418alKcPsTz3Ob2FLi3rHBwF+gtFxPrirHjndU9B7/+4+UNlzs1qM@vger.kernel.org
+X-Gm-Message-State: AFuF++ljZWO4MMZgzYvEuQCpzkN6MSmfTFitBcvuU+hWtoAKy7BFmTY2
+	/7VUsIdsxCh4hWSMa/Cs4b2RCcZuYRgg335Gwoc7sN7GbTEmyQsv7zEXI4usX9bacMboMVUm/OQ
+	391rdQciTUyxRUFmkpLe4eKKgrLePuQ==
+X-Received: by 2002:a17:907:7a8e:b0:c2e:a9:57f4 with SMTP id
+ a640c23a62f3a-c2e15f16185mr56093866b.22.1790718666771; Tue, 29 Sep 2026
+ 14:51:06 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: Aa6Ibrc2yWxwMILydbocY116RpBzlJrF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA4NiBTYWx0ZWRfXzg2IRLxp/Evo
- 821lNo0kuIwmbfbM7lurR1Qe9f0Du1M7E8KDm3JvD+averjZ2SN1bY2RsFrxBXeV1ag/f0KXIxD
- WcIPuxs8ySoq4eQEe6WJLPMYcD6ZFbhbBqqKPfMzCfNo3mjbxi+77m/r6cTE04y7vaUAuyfMAe2
- +HznRP7e4G15Vn1FunjtE9bpzHHom8JuHuUWFbOzWgNwhIBhJHrolcLFvZGK48FivQbka5zebjr
- 0T/15LBimFNurgPSvILPRQsHDRmQqG839vnbVUsCd9cmm8u8NN7Zwv4SoD8kABAZisgHZY1vL4p
- c89fKQNNs6/OZhngPGoJNXeSv/rqXgPlfx1+BwsTE5ZuEFxhzM8KASL3l1Os7q0tVKr4/B7aqqB
- 4lAkrOI1fKRIAvX8rbw9SfxX8CZy2B6GB1WTtly/MSMZps2uooqhHqF25mw5IFr322sOykm8sLH
- ojBTKmJ1d2ODIchStXg==
-X-Proofpoint-ORIG-GUID: Aa6Ibrc2yWxwMILydbocY116RpBzlJrF
-X-Authority-Analysis: v=2.4 cv=BPImP1QG c=1 sm=1 tr=0 ts=6abc2f1f cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=YKK-c5bBAu3nLoGgrlsA:9 a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA4NiBTYWx0ZWRfX4Ar/PPMPKb2g
- /98bZitzL5ljAdy4aPqbV8Sn1u4EkOPLmczmuYt5cNuiEQ+iGHAUrYznaM/7e3F6i7rkVyjLJNO
- l1ZsD1U47jFojOct3azU+BTCSmRPW+c=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-29_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609290086
+References: <20260924-qcom-tie-cx-to-gcc-v5-0-38732033e5b5@oss.qualcomm.com> <179035461215.1296652.13047689320991053383.b4-ty@b4>
+In-Reply-To: <179035461215.1296652.13047689320991053383.b4-ty@b4>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 29 Sep 2026 16:50:53 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqKVYyMR=_+eJ3YO-7yj_sFKx3hknNxdm3_5yYJmGMwbyA@mail.gmail.com>
+X-Gm-Features: AclHuK_NUh5MmUZYyt_XLf8kLJkdNAYvwUgsnoxUHkC0_09qg1ziCwxURAz8hL8
+Message-ID: <CAL_JsqKVYyMR=_+eJ3YO-7yj_sFKx3hknNxdm3_5yYJmGMwbyA@mail.gmail.com>
+Subject: Re: (subset) [PATCH v5 00/42] clk: qcom: Tie CX power domains to GCCs
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Taniya Das <taniya.das@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>, Ajit Pandey <quic_ajipan@quicinc.com>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Imran Shaik <quic_imrashai@quicinc.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Tengfei Fan <tengfei.fan@oss.qualcomm.com>, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzk@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-EUD functions by presenting itself as a USB device to the host PC and is
-therefore only applicable when the port operates in device role. Keeping
-EUD enabled in other roles provides no benefit and unnecessarily keeps
-the associated PHY resources enabled. Furthermore, enabling EUD in host
-role can cause the USB controller to misbehave because the EUD hub
-supports only a single upstream-facing port.
+On Fri, Sep 25, 2026 at 11:43=E2=80=AFAM Bjorn Andersson <andersson@kernel.=
+org> wrote:
+>
+>
+> On Thu, 24 Sep 2026 13:39:16 +0300, Abel Vesa wrote:
+> > Tie the CX power domain to GCC clock controllers for SDM670,
+> > SM8150, SM8250, SM8350, SM8450, SM8550, SM8650, SM8750, SM6350,
+> > SM4450, QCS8300, SDX75, SAR2130P, SC7180, SC7280, SA8775P,
+> > X1E80100, Eliza, Kaanapali, and QCS615.
+> >
+> > Enable runtime PM for GCC providers without critical clocks, allowing C=
+X to
+> > power down when their consumers release clocks and GDSCs.
+> >
+> > [...]
+>
+> Applied, thanks!
+>
+> [01/42] dt-bindings: clock: qcom: gcc-sdm845: Require CX power domain
+>         commit: 55388f587b3301dffdb30074d00f069d80d29341
+> [02/42] dt-bindings: clock: qcom: gcc-sm8150: Add CX power domain
+>         commit: 80d35f528a46b5f1e9777ce83de48fd9efa7c422
+> [03/42] dt-bindings: clock: qcom: gcc-sm8250: Add CX power domain
+>         commit: 98e936c9d46a25b4eceacf907fe5d87b3999040e
+> [04/42] dt-bindings: clock: qcom: gcc-sm8350: Add CX power domain
+>         commit: 534af057998b59a4813fd2eba524f2f523f356d6
+> [05/42] dt-bindings: clock: qcom: gcc-sm8450: Add CX power domain
+>         commit: 4de0860a340888fd2582681facbceda71b375617
+> [06/42] dt-bindings: clock: qcom: qcs615-gcc: Add CX power domain
+>         commit: 779dd957c4c8a7d7d0fd8ac03caa27fe6db23514
+> [07/42] dt-bindings: clock: qcom: sm8550-gcc: Add CX power domain
+>         commit: 5a577a480dd3d764cc2f55a112efc92d59ad59ec
+> [08/42] dt-bindings: clock: qcom: sm8650-gcc: Add CX power domain
+>         commit: 76615e10462c425f926e50dce52e9d23bb2f9428
+> [09/42] dt-bindings: clock: qcom: sm8750-gcc: Add CX power domain
+>         commit: f9c74b6ed57922b1fdb1ed6835665e06b5ba01a5
+> [10/42] dt-bindings: clock: qcom: sm4450-gcc: Add CX power domain
+>         commit: df3faa0e74e433304f9a6f33d3ac4d3376fcdc06
+> [11/42] dt-bindings: clock: qcom: gcc-sm6350: Add CX power domain
+>         commit: 3d4f3414300bba79d517585ac10181e285ca6be3
+> [12/42] dt-bindings: clock: qcom: qcs8300-gcc: Add CX power domain
+>         commit: fcf1810fede27777f9b708a9cef431bcac1d8e38
+> [13/42] dt-bindings: clock: qcom: sdx75-gcc: Add CX power domain
+>         commit: 6df1fd0bfa649c0f13abd026a01dbed5f1727fea
+> [14/42] clk: qcom: gcc-eliza: Tie the CX power domain to controller
+>         commit: 4eb8f2ad36888e5b29aa0a5e7e0bc60e382312ea
+> [15/42] clk: qcom: gcc-kaanapali: Tie the CX power domain to controller
+>         commit: 18c75784e4a9db5ed8cf6818a29ec0ac15ea2c8b
+> [16/42] clk: qcom: gcc-qcs8300: Tie the CX power domain to controller
+>         commit: 2d948e428c77b8764fe96537c70e5500b29f9c4e
+> [17/42] clk: qcom: gcc-sa8775p: Tie the CX power domain to controller
+>         commit: eed0a644a28a39d9da91a10d51b8f3247302a533
+> [18/42] clk: qcom: gcc-sar2130p: Tie the CX power domain to controller
+>         commit: 40537977a0ff9a6a1bcc489863e5656914b1ac53
+> [19/42] clk: qcom: gcc-sc7280: Tie the CX power domain to controller
+>         commit: 503de100eb2823519b82d759ead69ee377289a9e
+> [20/42] clk: qcom: gcc-sdx75: Tie the CX power domain to controller
+>         commit: 563b9aceb53ea15f2ada9417809d1d9e9a2c1fd1
+> [21/42] clk: qcom: gcc-sm4450: Tie the CX power domain to controller
+>         commit: 9965e30e827665e2fc9f0b3271733feaee809d48
+> [22/42] clk: qcom: gcc-sm8350: Tie the CX power domain to controller
+>         commit: 4572e9c0c4d48447d22a25037cbd2fbfda74a8c2
+> [23/42] clk: qcom: gcc-sm8450: Tie the CX power domain to controller
+>         commit: 6742c3ce04e5d52f718e4b562d0a1d817e1d76db
+> [24/42] clk: qcom: gcc-sm8550: Tie the CX power domain to controller
+>         commit: fe2a50974f4a0c78a68931f156d99e0479a4f00a
+> [25/42] clk: qcom: gcc-sm8650: Tie the CX power domain to controller
+>         commit: e4e6177235c6e0342357c48497d6b1a546c0ae57
+> [26/42] clk: qcom: gcc-sm8750: Tie the CX power domain to controller
+>         commit: f593d28a9193f1b5a96eb69bc5eb4dda2eaebebf
+> [27/42] clk: qcom: gcc-x1e80100: Tie the CX power domain to controller
+>         commit: 965dd2be7d35b2474251ee60d44addb257c9c85f
 
-Address this by treating EUD as usable only in device role. The
-role-switch callback enables or disables EUD as the port enters or
-leaves device role. A sysfs enable request made outside device role is
-recorded and honored when the port subsequently switches to device role.
-Additionally, synchronize EUD state management across different paths to
-avoid races and maintain consistent hardware state.
+Pretty sure this has introduced a bunch of warnings for qcom. Where's
+the .dts changes?
 
-Reviewed-by: Peter Chen <peter.chen@kernel.org>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Elson Serrao <elson.serrao@oss.qualcomm.com>
----
- drivers/usb/misc/qcom_eud.c | 70 ++++++++++++++++++++++++++++++++-----
- 1 file changed, 62 insertions(+), 8 deletions(-)
+We've really got to stop merging binding changes that introduce
+warnings to existing .dts files.
 
-diff --git a/drivers/usb/misc/qcom_eud.c b/drivers/usb/misc/qcom_eud.c
-index e227d05cfecd..5a21a2dd0b0c 100644
---- a/drivers/usb/misc/qcom_eud.c
-+++ b/drivers/usb/misc/qcom_eud.c
-@@ -15,6 +15,7 @@
- #include <linux/phy/phy.h>
- #include <linux/platform_device.h>
- #include <linux/slab.h>
-+#include <linux/string_choices.h>
- #include <linux/sysfs.h>
- #include <linux/usb/role.h>
- #include <linux/firmware/qcom/qcom_scm.h>
-@@ -57,6 +58,8 @@ struct eud_chip {
- 	struct device			*dev;
- 	void __iomem			*base;
- 	struct eud_path			*paths[EUD_MAX_PORTS];
-+	/* serializes EUD control operations */
-+	struct mutex			state_lock;
- 	phys_addr_t			mode_mgr;
- 	unsigned int			int_status;
- 	int				irq;
-@@ -158,17 +161,33 @@ static ssize_t enable_store(struct device *dev,
- 		const char *buf, size_t count)
- {
- 	struct eud_chip *chip = dev_get_drvdata(dev);
-+	struct eud_path *path;
- 	bool enable;
- 	int ret;
- 
- 	if (kstrtobool(buf, &enable))
- 		return -EINVAL;
- 
-+	guard(mutex)(&chip->state_lock);
-+
- 	/* Skip operation if already in desired state */
- 	if (chip->enabled == enable)
- 		return count;
- 
- 	if (enable) {
-+		path = chip->paths[chip->port_idx];
-+
-+		/*
-+		 * If not yet in device role, honor the userspace request and defer
-+		 * EUD enablement until the port transitions to device role in the
-+		 * set_role callback.
-+		 */
-+		if (path->curr_role != USB_ROLE_DEVICE) {
-+			dev_info(chip->dev, "Deferring EUD enable until port enters device mode\n");
-+			chip->enabled = enable;
-+			return count;
-+		}
-+
- 		ret = enable_eud(chip);
- 		if (ret) {
- 			dev_err(chip->dev, "failed to enable eud\n");
-@@ -206,6 +225,8 @@ static ssize_t port_store(struct device *dev, struct device_attribute *attr,
- 	if (port < 0)
- 		return port;
- 
-+	guard(mutex)(&chip->state_lock);
-+
- 	/* Check if the corresponding path is available */
- 	if (!chip->paths[port])
- 		return -EOPNOTSUPP;
-@@ -287,14 +308,18 @@ static irqreturn_t handle_eud_irq_thread(int irq, void *data)
- 	struct eud_path *path;
- 	int ret;
- 
-+	guard(mutex)(&chip->state_lock);
-+
- 	path = chip->paths[chip->port_idx];
- 
--	if (chip->usb_attached)
--		ret = usb_role_switch_set_role(path->controller_sw, USB_ROLE_DEVICE);
--	else
--		ret = usb_role_switch_set_role(path->controller_sw, USB_ROLE_HOST);
--	if (ret)
--		dev_err(chip->dev, "failed to set role switch\n");
-+	if (chip->enabled && path->curr_role == USB_ROLE_DEVICE) {
-+		if (chip->usb_attached)
-+			ret = usb_role_switch_set_role(path->controller_sw, USB_ROLE_DEVICE);
-+		else
-+			ret = usb_role_switch_set_role(path->controller_sw, USB_ROLE_HOST);
-+		if (ret)
-+			dev_err(chip->dev, "failed to set role switch\n");
-+	}
- 
- 	/* set and clear vbus_int_clr[0] to clear interrupt */
- 	writel(BIT(0), chip->base + EUD_REG_VBUS_INT_CLR);
-@@ -306,7 +331,30 @@ static irqreturn_t handle_eud_irq_thread(int irq, void *data)
- static int eud_role_switch_set(struct usb_role_switch *sw, enum usb_role role)
- {
- 	struct eud_path *path = usb_role_switch_get_drvdata(sw);
--	int ret;
-+	struct eud_chip *chip = path->chip;
-+	int ret = 0;
-+
-+	guard(mutex)(&chip->state_lock);
-+
-+	/*
-+	 * EUD is usable only in device role. Power it down for every other
-+	 * role to avoid keeping an unusable module 'ON'. chip->enabled
-+	 * preserves user's sysfs configuration and is not modified across
-+	 * role transitions.
-+	 */
-+	if (chip->enabled && path->num == chip->port_idx && role != path->curr_role) {
-+		if (role == USB_ROLE_DEVICE)
-+			ret = enable_eud(chip);
-+		else if (path->curr_role == USB_ROLE_DEVICE)
-+			ret = disable_eud(chip);
-+
-+		if (ret) {
-+			dev_err(chip->dev, "failed to %s EUD for role %s: %d\n",
-+				str_enable_disable(role == USB_ROLE_DEVICE),
-+				usb_role_string(role), ret);
-+			return ret;
-+		}
-+	}
- 
- 	/* curr_role tracks the role from EUD's point of view */
- 	path->curr_role = role;
-@@ -439,6 +487,8 @@ static int eud_probe(struct platform_device *pdev)
- 
- 	chip->dev = &pdev->dev;
- 
-+	mutex_init(&chip->state_lock);
-+
- 	chip->base = devm_platform_ioremap_resource(pdev, 0);
- 	if (IS_ERR(chip->base))
- 		return PTR_ERR(chip->base);
-@@ -485,8 +535,12 @@ static void eud_remove(struct platform_device *pdev)
- {
- 	struct eud_chip *chip = platform_get_drvdata(pdev);
- 
--	if (chip->enabled)
-+	mutex_lock(&chip->state_lock);
-+	if (chip->enabled) {
- 		disable_eud(chip);
-+		chip->enabled = false;
-+	}
-+	mutex_unlock(&chip->state_lock);
- 
- 	device_init_wakeup(&pdev->dev, false);
- 	disable_irq_wake(chip->irq);
--- 
-2.34.1
+     14 clock-controller@100000 (qcom,sm8550-gcc): 'power-domains' is
+a required property
+     12 syscon@9a10000 (syscon): compatible: ['syscon'] is too short
+     11 clock-controller@100000 (qcom,gcc-sm8250): 'power-domains' is
+a required property
+      9 clock-controller@100000 (qcom,qcs8300-gcc): 'power-domains' is
+a required property
+      8 clock-controller@100000 (qcom,sm8650-gcc): 'power-domains' is
+a required property
+      8 clock-controller@100000 (qcom,qcs615-gcc): 'power-domains' is
+a required property
+      6 clock-controller@100000 (qcom,gcc-sm8150): 'power-domains' is
+a required property
+      5 clock-controller@100000 (qcom,gcc-sm8450): 'power-domains' is
+a required property
+      5 clock-controller@100000 (qcom,gcc-sm8350): 'power-domains' is
+a required property
+      2 clock-controller@100000 (qcom,sm8750-gcc): 'power-domains' is
+a required property
+      2 clock-controller@100000 (qcom,kaanapali-gcc): 'power-domains'
+is a required property
+      2 clock-controller@100000 (qcom,gcc-sm6350): 'power-domains' is
+a required property
+      2 clock-controller@100000 (qcom,gcc-sdm670): 'power-domains' is
+a required property
+      1 clock-controller@80000 (qcom,sdx75-gcc): 'power-domains' is a
+required property
+      1 clock-controller@100000 (qcom,sm4450-gcc): 'power-domains' is
+a required property
 
+
+Rob
