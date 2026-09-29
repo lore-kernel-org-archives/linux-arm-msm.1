@@ -1,109 +1,231 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1791D5221E0;
-	Tue, 29 Sep 2026 12:25:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D03B051A14C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 12:25:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790684712; cv=none; b=ZhSjlbeYsi9n33db7L3USPP94CjmTTofVWmk+MJ2HvifvNtfTRGn6HDubPs7nROqVcozRCHuQlUbsujJRc548RR0b9s8bbRDBzjjL5gIu0Gz1DJBLbY1WqfZ2qhD9C0/aV7F4E9MyZEJIBMPcZASRbMQBImVO6hZti/el4U/jVA=
+	t=1790684756; cv=none; b=BYS/yzK7gNJrO8lcLuZG/ZT3cCshgdbgT/QJ0qf1ckQb3aKHhInNINL/gTWwZoxP0Ahuzhe/FRXI8aXKodufmKFmqH511m2aGPTNwRSZ2GHFmt6iSIP/eT6YZIxvHkugG8hm8OvydDJXWg2Q003NEy/g6Y2slBlLGevLADEd84s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790684712; c=relaxed/simple;
-	bh=95+J11Z1DOc+XACtc20K9QsddW/UgdODPyGGv0UDEas=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=s7n1wJi7y5sWbe6S6NixunmXi6wTaCeSqOZVDsSfG4dGy80dIzhqRK8Ikw4PkkzudADPIPBcykjuEHh30LmlQ5jvU/pyc4+qAQZV91O4KwVrIR49JnXHqnjHFoGVY6jfs+eKLVwTt9i4vhb7MeTf5acW+uEHROLTgMa63aLWUCY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QaKRjqTP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790684756; c=relaxed/simple;
+	bh=LlWU3yBVXRRJfr+LivnTiGZtuaci3yz8ELmy/Q9s3bI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=cDpmL8EwKxiHu++cOGXsC7pYgghHUfQLnoJQxzD14TjKFwl+IEzeHtEFOu48IVvdoDwhQpfOcEqm1oU8v1pr5mfeUFDAgUwggS7Avl5EeijlbELlhBks35E+PxE1wrN/jyorfERcnMpC//yvM61s6+Yw6Ud744RzYV4rySAbMOw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ug3b2INA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JQZvACYN; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QaKRjqTP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 814801F000FF;
-	Tue, 29 Sep 2026 12:25:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790684705;
-	bh=pFzLhkHFFB73b2wvbO900QMj34HswOaXL4pqgH8gQtA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=QaKRjqTPFu7B3gp/zMWuiiPSzIciO6Cbe0lW/sxHDAAWh8+z4bVL2ubG0GUNN5aFL
-	 nmY4WbqY3tNf3mDI0LabX5FgKeWB1oZa3VP4QSCJdaj+jh9AgV3IRvKbHNIRU4ejng
-	 +Ik8BYF+V5AhgDa185xKI2awIE8OmrM/95kzzZOX/oqN9HRTrx3Ot83GFPi05gtqA5
-	 yfNQN+xU1CGoF/Qv0cpaGfyrvTI1n4wIhS8JZuHnYLqfRgAJ80afTmuQovGEEVubX7
-	 l81RVh9GSWVf2x7t2bs4zgPrMrm/BqVsm8QHJXBUsRoeyb6VG/1wDQY6S0m+h58BGR
-	 ws2PZ1GLu7Mnw==
-Received: from johan by xi.lan with local (Exim 4.99.5)
-	(envelope-from <johan@kernel.org>)
-	id 1xBWtL-00000006yNc-0MCV;
-	Tue, 29 Sep 2026 14:25:03 +0200
-Date: Tue, 29 Sep 2026 14:25:03 +0200
-From: Johan Hovold <johan@kernel.org>
-To: Liviu Nicoara <lnicoara@thinkoid.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Jonathan Marek <jonathan@marek.ca>, linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH v2] ASoC: codecs: lpass-wsa-macro: rewrite the
- interpolator volume after enabling clocks
-Message-ID: <aruuH-uNfWYxBp7b@hovoldconsulting.com>
-References: <20260929115755.6096-1-lnicoara@thinkoid.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ug3b2INA";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JQZvACYN"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68TCE7ok528979
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 12:25:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=l+1/gp30Pqhkzp+lEQxy2S
+	DB3xgsxUhnhSlDGzy4Fbg=; b=Ug3b2INArsuIsQlsI9grN5HafqFBq0+w+ZRsf0
+	FuZx5dxI6t8ODWG54sWEMjRxN7DkR6qWgERVYIqst2dPg8cwiIaW2xGaWcgZoqjB
+	2OCBZxtquP/zOwG7icOi6y1W454Qe+c/9g7+jkdSA9b0t9ICkTXpFwxzkmRVuqrq
+	vKIgxS8SXFm7N5i7BgIP9UgaAY0U0TLMcQv+peVa298GJLE5TJroWkvnODsaXq0a
+	kJ+0m95cceq5GRh6ZJ+qrcKYw/oEi1ogzLBro92zw+5u30mLeQRpRbtLiFYF053M
+	ur7YYAwFGod40yjJ56Xarv5OjU1TJCJmX0KihjfWTyAHH2kQ==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h03ew2d8f-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 12:25:53 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-9179524bf03so423756d6.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 05:25:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790684753; x=1791289553; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=l+1/gp30Pqhkzp+lEQxy2SDB3xgsxUhnhSlDGzy4Fbg=;
+        b=JQZvACYN8nowSeKolZYQUqwHntQDaMR8REQXjuGb24PeFa5Bmuhc5oGO4BXtVSRVj6
+         JUkWf1k0w7mHkmSAkoEv0dIx6EfwWcPzf62vW+0kFNO8XHrvDZXwfqKkJIJa7Fj6P6x5
+         QxyZcRe4Bqq95TBJIzE3e1lrvlPnGA83hG2Z3X/nDWox+OD1ECDX4PKi6j7AbkjawNBJ
+         eh2Xwpan0Hqv9XWjZzp+2BTES/VkHGb5sBcCETSVvN8mQMgSr/cbKNMXeGOJkdqvpIiS
+         1U+bPKG2MDDiFj78AJgJDo+m4ywWCFO0B5KXNKzA0SjfAQe8shhQe3wEucXtnH3eyoKJ
+         svog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790684753; x=1791289553;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=l+1/gp30Pqhkzp+lEQxy2SDB3xgsxUhnhSlDGzy4Fbg=;
+        b=PCIrwVSV9Jj1L2lriNSPHdlkvDqmL3yPJpEzhZC4rf7DE50jyhWdUoLASJD6aR4K6l
+         SyJrdNyOklg4Mw5jkIjIQoUOhMqcIEr+s/WzeHPvjNUSzXs87lki6mDeGx3HqH8i85cp
+         /yMsFI4dy7Ajn7yDUyDOi5OZ1pp6XEPYFgSOAIE5SPzJPZKcc0qx4vk/QBmk7/U5hCrx
+         ZfWRQCENJUVo3kgEwHTsd8SL+pXY3BVNWxwwKVn9ggE+1Xj8sCU/77csXEH1yqq17dxF
+         dUoiwVVppH2VuiESlMqvYTpUDX4hnXxnPew44TiEu9W0Mv0MIEK1po09MDs1SJ5wpEfL
+         HXpg==
+X-Forwarded-Encrypted: i=1; AKwUvBwuNmL+PBpUl9UbqLc75uurZYIoInqQVrw9OP/TzlKtoMv5ZBZLvk4Ozcm1uTuQODuMHEA6MQpZUy+9n8Wa@vger.kernel.org
+X-Gm-Message-State: AFuF++lxTAPaZZf+WZAM3UktZZOsvOVAhXgII2qhfYRU0+S3ym0/msWA
+	tGtMOuFjJvs/X8ApNCkMHA1XJiwtpptqv7zaITAneMvRq8KHyEJPpqv4qwuYRgVV10uCaL3dgUS
+	PCAqcx5zs4lH6aSvq5QTfcLVsH2N3+vpF/80Qo+Nc58J3V9eS0MzyVIRus7dqb0e7a6cAOrbj7F
+	wzq9apfQ==
+X-Gm-Gg: AYBFou2/06/u0E50AvClHboUByFuyo+U1O2bmOJowL5l3PrZgXMaFh6/t/OY4U/OGSc
+	VAv9ooPZQfxIGj3qx6S2FREGQ5yCe+yxHgKBS1vOqKCqcAPpSXPZaYvYBYVh2AOc4Ol1GuGAG/0
+	oaZwcblP28rkrnr6mxinKesVP1V0J5FLtEH6t23YVabL9pBhUWkeCBkcUqYHGAnKs8eH5+8O9rB
+	Loce4IJCT6qw9rnFRAhfWcc3P2heULwS7fO7L6mD+UVoe84vb/T7GqHJGIdttHncEvxWIShvE2L
+	nr6+wIurmSbwL3qJQNGsuoE/vNovA88rsqkLf8y2Ve/iunMv3ASdwLak2kmPz6ZEiyoKGcNRB4O
+	GiOq6m6762JU5kpBCOqyz7J04HdOuRwFPYyv3FS2ASUYWr8Bqt9GZeh/9GqD1LgJD6L2g7Lpzwk
+	wHomSjZA9QuMZGvXeSm+0R+mzL0i6mT6HytXGl2s+PuDaiO+Hdptk=
+X-Received: by 2002:a05:6214:5f09:b0:914:4e89:132e with SMTP id 6a1803df08f44-9144e8917cfmr188842826d6.26.1790684752575;
+        Tue, 29 Sep 2026 05:25:52 -0700 (PDT)
+X-Received: by 2002:a05:6214:5f09:b0:914:4e89:132e with SMTP id 6a1803df08f44-9144e8917cfmr188842066d6.26.1790684751847;
+        Tue, 29 Sep 2026 05:25:51 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:5c1f:3897:a4a1:99e1])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-9178d302482sm9103956d6.12.2026.09.29.05.25.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Sep 2026 05:25:51 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Subject: [PATCH v6 0/5] i2c: qcom-cci: Enforce the required CCI clock rate
+Date: Tue, 29 Sep 2026 14:25:44 +0200
+Message-Id: <20260929-cci-clk-fix-v6-0-62a268cccb0f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260929115755.6096-1-lnicoara@thinkoid.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEiuu2oC/3XPSWoDMRAF0KsYrS2jqVpSVrlHyEIulWzhoZNW0
+ iSYvrvL3njAvSn4H+rBP4lGQ6Um3hYnMdBYW+2PHLrlQuA2HTcka+YsjDKd8kZLxCpxv5Ol/sl
+ C2sHaJCzJC/74Gojrq/bxyXlb208//F/xUV/a186opZJAiXzwSuUU3vvWVt+/aY/94bDiIy7ca
+ O4J/0gYJtBGCMWEtXIwQ9h7Ij4Sloli0VudNcSOZgh3I4J6GuKYIJ0DjwBHSs8QcCPi8xBgwmF
+ 2MQDERK+GTNN0BncaLyi5AQAA
+X-Change-ID: 20260721-cci-clk-fix-fe145b2acfa7
+To: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+        Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Luca Weiss <luca@lucaweiss.eu>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, vladimir.zapolskiy@linaro.org,
+        konradybcio@kernel.org, stephan.gerhold@linaro.org,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA0OSBTYWx0ZWRfX9IQFKu6SGcID
+ AjsCTv2c9ahlfyWb+cFvYdFRWWGdfCSb85DOuU7vmdsQtqaCt2QR/BY/T02lMBH/eYpBgDuD+A0
+ tJUIU+sKE47o2SaPRiFy2LNCFVct0WQ=
+X-Authority-Analysis: v=2.4 cv=IIOXmQvG c=1 sm=1 tr=0 ts=6abbae51 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=CakdkRaH-b5KpuXxX4YA:9 a=QEXdDO2ut3YA:10
+ a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA0OSBTYWx0ZWRfX9vhCQZPmDgVY
+ zJYF2rrmiQtIA76mH5z2MRcYwtL4bjGKemxLQuIoo4ZwgBqRHFd4lMuRLuVPB6X3l1l5PJG4gQM
+ 5pUAa4DrgCxT0cmCvq+8FIMXvzV2JW+XSLZ8ZDe8y6WAVCLBVAtrzwtId9j8vapR4IQIicGbjk2
+ t6It4e5xsle43vYVHLtjHjgyD1ExCfJIhN9G+BaUJGi93obmrzYON8X7KpKZ9wqTtC4jetyKUUF
+ vD8R4bh2+mqMj5woyz9pVLL8Fd+aXUCHDJExpCZTpPQ7l6s5j6X8ZS8WvUOD0F8YSWhqDDzDXeV
+ z3OgQ/I/IsgOIXhiSiG9eYUT+rofwMUAZNWvcykOjT9x9d5AIA+QkPlSyXU6NAxynNQnu+5PBHC
+ gBo+FSi1FIMLxhwwJv9HGu9xLLZKFb//7zVzraCxKetgt5CK/CeyzOlI7hA6K9hUe04ejQ5UDV1
+ z3pDyG4j9gR3EZl7heg==
+X-Proofpoint-GUID: gR5_xK6zk4fF5fmPgweHdP9h4sCM7Rdb
+X-Proofpoint-ORIG-GUID: gR5_xK6zk4fF5fmPgweHdP9h4sCM7Rdb
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-29_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 lowpriorityscore=0 clxscore=1015
+ impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609290049
 
-On Tue, Sep 29, 2026 at 07:57:55AM -0400, Liviu Nicoara wrote:
-> Commit 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless
-> gain read/write sequence") removed the read and write of the digital
-> volume register in wsa_macro_enable_interpolator(), on the grounds that
-> writing back the value just read does nothing. The comment above it,
-> "apply gain after int clk is enabled", was left in place.
-> 
-> On the Dell XPS 13 9345 (X1E80100, four WSA8845 amplifiers on two WSA
-> macros) the write does something: a volume change made while the path
-> is idle does not take effect when playback starts. Lowering the digital
-> volume from 81 to 63 with nothing playing, then playing a test tone,
-> gave about the same level as before the change. With the rewrite
-> restored, lowering it from 81 to 69 while idle played audibly quieter,
-> and restoring 81 while idle brought the level back. Changes made during
-> playback take effect with or without the rewrite.
-> 
-> The register already holds the new value when this happens. Without the
-> rewrite, after an idle change from 69 to 81, playback stayed at the old
-> level while the register, read from the hardware through /dev/mem, held
-> the new one (0xfd). Writing that same value back through /dev/mem
-> brought the level up at once.
-> 
-> This is the behaviour described in commit 46188db080bd ("ASoC: codecs:
-> lpass-wsa-macro: fix compander volume hack"): "the volume registers
-> still need to be written after enabling clocks in order for any prior
-> updates to take effect." The value read comes from the register cache,
-> so the write pushes the last requested volume to the hardware once its
-> clock runs.
-> 
-> Restore the rewrite in the interpolator's POST_PMU event only. The mix
-> path event removed later in the same series is not brought back.
-> 
-> Fixes: 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless gain read/write sequence")
-> Cc: stable@vger.kernel.org
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
-> ---
-> 
-> Notes:
->     Changes in v2:
->     - Cc stable (Johan Hovold).
->     - Add the /dev/mem read and rewrite from the v1 review.
->     - Link to v1: https://lore.kernel.org/all/20260924125940.22665-1-lnicoara@thinkoid.org/
->     
->     Tested on v7.2.6 on the machine above, by listening. This function is
->     unchanged between v7.2 and for-next; the driver's clocks moved to the
->     PM clock framework in cd054a6e272c after v7.2, which was not tested
->     here. Build-tested on broonie/for-next (arm64 defconfig).
+The CCI hw_params timing values (thigh, tlow, etc.) are expressed in
+clock ticks and are only valid at the specific CCI clock rate they were
+calibrated for. Running at the wrong rate causes incorrect I2C timings
+that may violate the I2C specification. Today the rate is left to the DT
+(assigned-clock-rates) or the bootloader, which is fragile: the driver
+owns the hw_params and should own the clock rate too.
 
-Thanks for the v2.
+- Move the msm8953 to reusing the common v2 config.
+- Turn the timing table into a two-dimensional [mode][rate]
+- Add the 19.2 MHz Standard/Fast timing sets for the v2 CCI
+- Promote v2 to the generic common table for all revisions
+- Actively enforce the required rate.
 
-Reviewed-by: Johan Hovold <johan@kernel.org>
+This ordering also addresses Vladimir's point that the clock rate is a
+property of the mode/timing settings rather than of the CCI revision.
+the per-mode [mode][rate] table lands first, and rate enforcement is
+built on top of it.
 
-Johan
+Patches 2/5 and 4/5 are the result of discussions with Vladimir and
+some code sharing. I would expect him to add a Co-developed-by and
+corresponding Signed-off-by tag if he agrees that the submitted
+implementation still matches his original intent.
+
+Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+---
+Changes in v6:
+- Fix error reporting in cci_set_core_rate, and prevent double
+  reporting. (Andi)
+- Link to v5: https://lore.kernel.org/r/20260927-cci-clk-fix-v5-0-4cd498559ae5@oss.qualcomm.com
+
+Changes in v5:
+- Check the rate returned by cci_get_required_rate() and pass it
+  out via a pointer. Never call dev_pm_opp_set_rate(0) anymore,
+  error out (-EOPNOTSUPP) when no rate fits all masters.
+  (Konrad)
+- Set the CCI rate once at probe, drop the set_rate from
+  cci_resume_runtime() and the set_rate(0) from
+  cci_suspend_runtime(). (Konrad)
+- Declare the loop iterators in the for() headers. (Konrad)
+- Drop the now-redundant hw_params[].thigh check in cci_get_hw_params(),
+  cci_get_required_rate() already rejects rates lacking a valid timing
+  set for an active master's mode. (Vladimir)
+- 'v2' is an arbitrary name, not realy hw revision, mention it. (Konrad)
+- Collect Reviewed-by tags on patches 1-4. (Konrad, Vladimir)
+- Link to v4: https://lore.kernel.org/r/20260801-cci-clk-fix-v4-0-e1d80da54e01@oss.qualcomm.com
+
+Changes in v4:
+- Rebase on andy/i2c/i2-next (527dd7fb6209) (Andy)
+- Add 'select PM_OPP' to i2c qcom cci Kconfig (Andy)
+- Link to v3: https://lore.kernel.org/r/20260729-cci-clk-fix-v3-0-f3c731d1596e@oss.qualcomm.com
+
+Changes in v3:
+- Reorder the series so per-mode clock support comes before rate
+  enforcement. Introduce a [rate][mode] timing table and select the row
+  matching the running clock rate. (Vladimir)
+- The per-mode patch only validates the running rate (error out on a
+  missing entry), the following patches enforce it.
+- Split the addition of the v2 19.2 MHz Standard/Fast timings into its
+  own patch, keeping the [rate][mode] conversion a pure refactor.
+- Drop the "Revert ... Remove unused struct member cci_clk_rate" patch:
+  the per-mode [mode][rate] table replaces cci_clk_rate entirely.
+- Introduce a common params table (revision agnostic) (Vladimir)
+- Link to v2: https://lore.kernel.org/r/20260727-cci-clk-fix-v2-0-c3958f28b045@oss.qualcomm.com
+
+Changes in v2:
+- Instead of adding a 19.2 MHz cci_clk_rate for msm8953, switch it to
+  the v2 config (37.5 MHz). The msm8953 table was internally
+  inconsistent (Standard/Fast for 19.2 MHz, Fast+ for 37.5 MHz), so a
+  single rate could not satisfy all modes. msm8953 is the same HW
+  version as msm8996/sdm630, which already use v2. (Vladimir)
+- Remove the msm8953 fix tag (Vladimir)
+- Apply the rate via the OPP framework instead of a bare clk_set_rate(),
+  managing the vote across runtime PM. (Konrad)
+- Link to v1: https://lore.kernel.org/r/20260721-cci-clk-fix-v1-0-5eae78700da8@oss.qualcomm.com
+
+---
+Loic Poulain (5):
+      i2c: qcom-cci: Switch msm8953 to the CCI v2 timing/rate config
+      i2c: qcom-cci: Support per-mode CCI clock rates
+      i2c: qcom-cci: Add 19.2 MHz timings for the v2 CCI
+      i2c: qcom-cci: Share the timing table across CCI revisions
+      i2c: qcom-cci: Enforce the required CCI clock rate
+
+ drivers/i2c/busses/Kconfig        |   1 +
+ drivers/i2c/busses/i2c-qcom-cci.c | 332 ++++++++++++++++++++++----------------
+ 2 files changed, 195 insertions(+), 138 deletions(-)
+---
+base-commit: 527dd7fb6209857f8ff4426055b3a418e60faa8b
+change-id: 20260721-cci-clk-fix-fe145b2acfa7
+
+Best regards,
+-- 
+Loic Poulain <loic.poulain@oss.qualcomm.com>
+
