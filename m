@@ -1,47 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CC103C9896;
-	Tue, 29 Sep 2026 03:05:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 876823C342B;
+	Tue, 29 Sep 2026 03:14:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651136; cv=none; b=X2rmtvS8SZeoEctjOn50Vqp2nDCbB7+OOW1ebl5lIl70+LtzGOQ2c49z/BjuZ6uZUknS+hwJRmCO5a3RCU5uhx4tX9FZ5ITUynwmw0U5BHcLhStO06+4tdQZUe44ETAWEE+HKeNL0SCtkWFfNgTz5XEWGliWkfikKQ29aQKpoas=
+	t=1790651645; cv=none; b=JnvU9iVziqCNOHgU2vru7khKaCNAuLSTpUcUWhiMDtv5tHg1NJmI4cyzBw1vLJHQ4ANUQZcdjT6kSZ9nVvWLv9qpXQ5JZp/8DDl7Fcfb4eU+IoMJeSY9UqzJ9kgnNCwpe/BgNUBimdnTVZQbizMrR4AUnktw7b7dBXoaz2gz5D8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651136; c=relaxed/simple;
-	bh=UTyaWHrrtgUu29EL2bxdQPs3r+p8tFUZWrk6ieq8R+A=;
+	s=arc-20240116; t=1790651645; c=relaxed/simple;
+	bh=b2OfSb2+SciWkRMpuXJSyGid0M8VY1bTxEUNQw1US6c=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Be29gxXD4oDyApWRL2Mr29L63gRH/Cog54ioPMFZxWaFEdcm6eRXzvfq7rfJxveZ4Nt+AfQb8fKJHIB4Si7WXVC/zAZBaUdtzn4ul+RtZM4JwHaGn//AIp2NkKYBgfX8dnI9wbumvQunjulcwIAqTubqyO10v/Ahxaqpv8J/3Y4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jst1H8Fl; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=PIkZ4G2SwkjW0WWnR2vUdurbcj/q53eybeZgGdeuoER5juZgGCyQLu2BrZfdxqDqmzbyx1d4eyJORU5tvbvN5m/wr6a7/JVuO230XRR6defNZpEltGlnjr9uOiIqAFU6Os0j2lvHUGlNiTudCpZyG0ll1Rarg6ME5dGXiPsfdWc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nUu8MX2W; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jst1H8Fl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F02801F000FF;
-	Tue, 29 Sep 2026 03:05:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nUu8MX2W"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E83041F000FF;
+	Tue, 29 Sep 2026 03:13:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790651124;
-	bh=wN+dPoLvjUdzOubg5yOWipnDclWmGuYXl68rAIhKrs4=;
+	s=k20260515; t=1790651639;
+	bh=f+/2mu3Kkhj/XCxEL4wgAbPmQ6fjcskhKTYYG5//9qU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jst1H8Flgrq1+3nX9cUs/Aj2g5l1buTMNHfcFzX475/4uSQnhnpl8JYBuVziWVXE2
-	 THMV0ldE2MRJM/kyCwxqk+V/YJTo8ezuL2Rh9tmTwE1e49+r+/8ufM5VC2ZNhBxLEG
-	 Iev6mnmci3c4XW0dcsJLjkcPWRChoKLM4NO0Lo/ixQaGBHsro9ias5+eqTmHd4FlqF
-	 ejV0c5IJ4WMae+jxu/Z7leYRqEmNA0ewtlXfux6XcwX1Rou6PPhdvx+ilXmjXYK2o+
-	 4QEDHHScBOP0F94JGS5Tcnyb3TqhTRSTLgAGHWhCoMDwEDbHwby3oKnO/tkKI8GyR+
-	 rJ8zuNiPgPSDg==
-Date: Mon, 28 Sep 2026 22:05:20 -0500
+	b=nUu8MX2Wiieaf7rfl4Y1Mvf1kGn1hZkY0W+2rILeSupK33V4YwL0jwsHW5tR3Cm/J
+	 dbsM3hZV5/MiP9zh2oeDrZ+YuZo4oaIOipoO5JxMbyvmLRjbL2RqSbS+n9CzqANilz
+	 veQNUbrbxD67iKRh4u9br1vlAPd1TQh4agbi9SrA1dqxfsHTZvDon3+TqQp7RaU9xh
+	 wLTFDVJ5v96oZ42pW3YqYjOQAkO1Aq/Q55A5HqlGt3yyhz0qY2/feuttXOz5t6P6ej
+	 y+ges4gzYCTuvsBPIwc+fnXkJ5dF4r3bFF2QKymEyPC9ZoAZ+c8IE3Zhy+ONq61CB5
+	 01EI0crIMzIXA==
+Date: Mon, 28 Sep 2026 22:13:56 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+To: jens.glathe@oldschoolsolutions.biz
 Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org, 
-	linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com, 
-	Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: Add RPi 7-inch DSI panel
- overlays for Monaco/Lemans EVK
-Message-ID: <arsp-8KPqD_skD5D@zenbook>
-References: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
- <aqLGFfQ20mCGFkfl@baldur>
- <aqt72zoSNVGrcY9t@hu-ssmaurya-hyd.qualcomm.com>
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	=?utf-8?B?SsOpcsO0bWU=?= de Bretagne <jerome.debretagne@gmail.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] arm64: dts: qcom: sc8280xp-microsoft-blackrock:
+ Replace old sound nodes, enable DisplayPort audio
+Message-ID: <arssv5dH5ywjQWUw@zenbook>
+References: <20260825-blackrock-audio-v2-0-659cc4724d57@oldschoolsolutions.biz>
+ <20260825-blackrock-audio-v2-1-659cc4724d57@oldschoolsolutions.biz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,92 +47,290 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <aqt72zoSNVGrcY9t@hu-ssmaurya-hyd.qualcomm.com>
+In-Reply-To: <20260825-blackrock-audio-v2-1-659cc4724d57@oldschoolsolutions.biz>
 
-On Thu, Sep 17, 2026 at 11:04:19AM +0530, Shashank Maurya wrote:
-> On Thu, Sep 10, 2026 at 02:35:41PM -0500, Bjorn Andersson wrote:
-> > On Mon, Sep 07, 2026 at 12:03:52PM +0530, Shashank Maurya wrote:
-> > > Add device tree overlays to enable support for the Raspberry Pi 7-inch
-> > > DSI touchscreen panel on Qualcomm Monaco and Lemans EVK platforms.
-> > > 
-> > > The overlays configure the panel on the primary DSI interface using
-> > > a 2-lane DSI connection and instantiate the panel MCU on the
-> > > corresponding touchscreen I2C bus for each platform. The changes
-> > > allow the Raspberry Pi 7-inch display to be used as an external
-> > > display option on both EVKs without affecting the default platform
-> > > configuration.
-> > > 
-> > > ---
-> > > To: Bjorn Andersson <andersson@kernel.org>
-> > > To: Konrad Dybcio <konradybcio@kernel.org>
-> > > To: Rob Herring <robh@kernel.org>
-> > > To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-> > > To: Conor Dooley <conor+dt@kernel.org>
-> > > To: Florian Fainelli <florian.fainelli@broadcom.com>
-> > > To: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-> > > Cc: linux-arm-msm@vger.kernel.org
-> > > Cc: devicetree@vger.kernel.org
-> > > Cc: linux-kernel@vger.kernel.org
-> > > Cc: linux-rpi-kernel@lists.infradead.org
-> > > Cc: linux-arm-kernel@lists.infradead.org
-> > > 
-> > > ---
-> > > Shashank Maurya (2):
-> > >       arm64: dts: qcom: monaco-evk: Add Raspberry Pi 7-inch DSI panel overlay
-> > >       arm64: dts: qcom: lemans-evk: Add Raspberry Pi 7-inch DSI panel overlay
-> > > 
-> > >  arch/arm64/boot/dts/qcom/Makefile                  |  4 ++
-> > >  .../dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso | 83 ++++++++++++++++++++++
-> > >  .../dts/qcom/monaco-evk-raspberrypi-dsi-7inch.dtso | 82 +++++++++++++++++++++
-> > >  3 files changed, 169 insertions(+)
-> > > ---
-> > > base-commit: ed2647532a225739e86c7f236a2ce82764ec2772
-> > > change-id: 20260907-rpi_dts_overlay-58088ffce047
-> > > prerequisite-message-id: <20260907-rpi_reg-v2-0-0c59aa60d31f@oss.qualcomm.com>
-> > 
-> > The two dts patches in this series clearly relates to those two
-> > regulator patches, which has received change requests.
-> > 
-> > I would have sent the 4 patches together in a series, but as you didn't
-> > you sent this series with unmet dependencies.
-> > 
-> > All I can do now is reject this series as well. Please send v2 once the
-> > driver changes has been merged and you have validated this again.
-> > 
-> > Regards,
-> > Bjorn
-> > 
-> > > prerequisite-patch-id: 5212bf185b35c36ed8857a67f29e60386d59ac60
-> > > prerequisite-patch-id: 056a90b913170106a6f8c1feb2366ee83c4375b9
-> > > 
-> > > Best regards,
-> > > --  
-> > > Shashank Maurya <shashank.maurya@oss.qualcomm.com>
-> > > 
+On Tue, Aug 25, 2026 at 04:07:45PM +0200, Jens Glathe via B4 Relay wrote:
+> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
 > 
-> Hi Bjorn,
+> The Windows Dev Kit 2023 has no built-in speakers, microphones or
+> headphone jack. Likewise the device with the same mainboard, Surface
+> Pro 9 5G [1]. The previous WCD938x / WSA / VA sound card definition
+> was therefore non-functional.
 > 
-> Thanks for the review.
+> Replace the unused codec nodes, SoundWire controllers, LPASS macros
+> and related pinctrl with DisplayPort DAI links (DP0/DP1/DP2) so that
+> audio is available over the DP connectors. Add the required
+> sound-name-prefix properties and update the card model name to the
+> conventional SC8280XP-MICROSOFT-BLACKROCK form.
 > 
-> The regulator patches and DTS patches are targeting different maintainer trees 
-> and therefore were developed and submitted from separate workspaces. While the
-> DTS changes depend on the regulator updates, the two sets of patches cannot 
-> realistically be carried in a single series because they are reviewed and 
-> merged through different paths.
-> 
+> [1]: https://support.microsoft.com/en-us/surface/models/surface-pro-9-features-and-specs
 
-In reality, Mark has shown many times that he's able to pick individual
-patches from a series and the 4 patches are better reviewed together.
+Computer says:
 
-> I submitted the DTS series separately to start the review process in parallel,
-> but I understand your concern about the unresolved dependency.
-> 
+arch/arm64/boot/dts/qcom/sc8280xp-crd-el2.dtb: displayport-controller@aea0000 (qcom,sc8280xp-edp): Unevaluated properties are not allowed ('sound-name-prefix' was unexpected)
+    from schema $id: http://devicetree.org/schemas/display/msm/dp-controller.yaml
++ 5 more times...
 
-Please send patches that are ready to be merged, and when you do make
-sure you send them in a way and at a time where they can be merged.
+What am I doing wrong?
 
-Thanks,
+Regards,
 Bjorn
 
-> Regards,
-> Shashank
+> 
+> Fixes: 16a7fed11714 ("arm64: dts: qcom: sc8280xp-blackrock: dt definition for WDK2023")
+> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+> ---
+>  .../boot/dts/qcom/sc8280xp-microsoft-blackrock.dts | 135 +++------------------
+>  arch/arm64/boot/dts/qcom/sc8280xp.dtsi             |   4 +
+>  2 files changed, 21 insertions(+), 118 deletions(-)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
+> index 4f4b5f4285ec2..ac22f44020a64 100644
+> --- a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
+> +++ b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
+> @@ -28,32 +28,6 @@ aliases {
+>  		serial1 = &uart2;
+>  	};
+>  
+> -	wcd938x: audio-codec {
+> -		compatible = "qcom,wcd9380-codec";
+> -
+> -		pinctrl-0 = <&wcd_default>;
+> -		pinctrl-names = "default";
+> -
+> -		reset-gpios = <&tlmm 106 GPIO_ACTIVE_LOW>;
+> -
+> -		vdd-buck-supply = <&vreg_s10b>;
+> -		vdd-rxtx-supply = <&vreg_s10b>;
+> -		vdd-io-supply = <&vreg_s10b>;
+> -		vdd-mic-bias-supply = <&vreg_bob>;
+> -
+> -		qcom,micbias1-microvolt = <1800000>;
+> -		qcom,micbias2-microvolt = <1800000>;
+> -		qcom,micbias3-microvolt = <1800000>;
+> -		qcom,micbias4-microvolt = <1800000>;
+> -		qcom,mbhc-buttons-vthreshold-microvolt = <75000 150000 237000 500000 500000 500000 500000 500000>;
+> -		qcom,mbhc-headset-vthreshold-microvolt = <1700000>;
+> -		qcom,mbhc-headphone-vthreshold-microvolt = <50000>;
+> -		qcom,rx-device = <&wcd_rx>;
+> -		qcom,tx-device = <&wcd_tx>;
+> -
+> -		#sound-dai-cells = <1>;
+> -	};
+> -
+>  	dp3_connector: connector {
+>  		compatible = "dp-connector";
+>  		label = "DP-3";
+> @@ -852,23 +826,19 @@ &remoteproc_nsp0 {
+>  	status = "okay";
+>  };
+>  
+> -&rxmacro {
+> -	status = "okay";
+> -};
+> -
+>  &sound {
+>  	compatible = "qcom,sc8280xp-sndcard";
+> -	model = "microsoft/blackrock";
+> +	model = "SC8280XP-MICROSOFT-BLACKROCK";
+>  
+> -	wcd-playback-dai-link {
+> -		link-name = "WCD Playback";
+> +	dp0-dai-link {
+> +		link-name = "DP0 Playback";
+>  
+> -		cpu {
+> -			sound-dai = <&q6apmbedai RX_CODEC_DMA_RX_0>;
+> +		codec {
+> +			sound-dai = <&mdss0_dp0>;
+>  		};
+>  
+> -		codec {
+> -			sound-dai = <&wcd938x 0>, <&swr1 0>, <&rxmacro 0>;
+> +		cpu {
+> +			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
+>  		};
+>  
+>  		platform {
+> @@ -876,15 +846,15 @@ platform {
+>  		};
+>  	};
+>  
+> -	wcd-capture-dai-link {
+> -		link-name = "WCD Capture";
+> +	dp1-dai-link {
+> +		link-name = "DP1 Playback";
+>  
+> -		cpu {
+> -			sound-dai = <&q6apmbedai TX_CODEC_DMA_TX_3>;
+> +		codec {
+> +			sound-dai = <&mdss0_dp1>;
+>  		};
+>  
+> -		codec {
+> -			sound-dai = <&wcd938x 1>, <&swr2 0>, <&txmacro 0>;
+> +		cpu {
+> +			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_1>;
+>  		};
+>  
+>  		platform {
+> @@ -892,67 +862,23 @@ platform {
+>  		};
+>  	};
+>  
+> -	wsa-dai-link {
+> -		link-name = "WSA Playback";
+> -
+> -		cpu {
+> -			sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
+> -		};
+> +	dp2-dai-link {
+> +		link-name = "DP2 Playback";
+>  
+>  		codec {
+> -			sound-dai = <&swr0 0>, <&wsamacro 0>;
+> -		};
+> -
+> -		platform {
+> -			sound-dai = <&q6apm>;
+> +			sound-dai = <&mdss0_dp2>;
+>  		};
+> -	};
+> -
+> -	va-dai-link {
+> -		link-name = "VA Capture";
+>  
+>  		cpu {
+> -			sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
+> +			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_2>;
+>  		};
+>  
+>  		platform {
+>  			sound-dai = <&q6apm>;
+>  		};
+> -
+> -		codec {
+> -			sound-dai = <&vamacro 0>;
+> -		};
+>  	};
+>  };
+>  
+> -&swr0 {
+> -	status = "okay";
+> -};
+> -
+> -&swr1 {
+> -	status = "okay";
+> -
+> -	wcd_rx: wcd9380-rx@0,4 {
+> -		compatible = "sdw20217010d00";
+> -		reg = <0 4>;
+> -		qcom,rx-port-mapping = <1 2 3 4 5>;
+> -	};
+> -};
+> -
+> -&swr2 {
+> -	status = "okay";
+> -
+> -	wcd_tx: wcd9380-tx@0,3 {
+> -		compatible = "sdw20217010d00";
+> -		reg = <0 3>;
+> -		qcom,tx-port-mapping = <1 1 2 3>;
+> -	};
+> -};
+> -
+> -&txmacro {
+> -	status = "okay";
+> -};
+> -
+>  &uart2 {
+>  	pinctrl-0 = <&uart2_default>;
+>  	pinctrl-names = "default";
+> @@ -1076,31 +1002,12 @@ &usb_2_qmpphy0 {
+>  	status = "okay";
+>  };
+>  
+> -&vamacro {
+> -	pinctrl-0 = <&dmic01_default>, <&dmic23_default>;
+> -	pinctrl-names = "default";
+> -
+> -	vdd-micb-supply = <&vreg_s10b>;
+> -
+> -	qcom,dmic-sample-rate = <4800000>;
+> -
+> -	status = "okay";
+> -};
+> -
+> -&wsamacro {
+> -	status = "okay";
+> -};
+> -
+>  &xo_board_clk {
+>  	clock-frequency = <38400000>;
+>  };
+>  
+>  /* PINCTRL */
+>  
+> -&lpass_tlmm {
+> -	status = "okay";
+> -};
+> -
+>  &pmc8280_1_gpios {
+>  	misc_3p3_reg_en: misc-3p3-reg-en-state {
+>  		pins = "gpio1";
+> @@ -1302,14 +1209,6 @@ usb2_en_state: usb2-en-state {
+>  		output-low;
+>  	};
+>  
+> -	wcd_default: wcd-default-state {
+> -		reset-pins {
+> -			pins = "gpio106";
+> -			function = "gpio";
+> -			bias-disable;
+> -		};
+> -	};
+> -
+>  	wlan_en: wlan-en-state {
+>  		pins = "gpio134";
+>  		function = "gpio";
+> diff --git a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
+> index fbcfd3883bbb4..baca36b151853 100644
+> --- a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
+> @@ -4903,6 +4903,7 @@ mdss0_dp0: displayport-controller@ae90000 {
+>  				phy-names = "dp";
+>  
+>  				#sound-dai-cells = <0>;
+> +				sound-name-prefix = "DisplayPort0";
+>  
+>  				operating-points-v2 = <&mdss0_dp0_opp_table>;
+>  				power-domains = <&rpmhpd SC8280XP_MMCX>;
+> @@ -5168,6 +5169,7 @@ mdss0_dp1: displayport-controller@ae98000 {
+>  				phy-names = "dp";
+>  
+>  				#sound-dai-cells = <0>;
+> +				sound-name-prefix = "DisplayPort1";
+>  
+>  				operating-points-v2 = <&mdss0_dp1_opp_table>;
+>  				power-domains = <&rpmhpd SC8280XP_MMCX>;
+> @@ -5252,6 +5254,7 @@ mdss0_dp2: displayport-controller@ae9a000 {
+>  				operating-points-v2 = <&mdss0_dp2_opp_table>;
+>  
+>  				#sound-dai-cells = <0>;
+> +				sound-name-prefix = "DisplayPort2";
+>  
+>  				status = "disabled";
+>  
+> @@ -5327,6 +5330,7 @@ mdss0_dp3: displayport-controller@aea0000 {
+>  				operating-points-v2 = <&mdss0_dp3_opp_table>;
+>  
+>  				#sound-dai-cells = <0>;
+> +				sound-name-prefix = "DisplayPort3";
+>  
+>  				status = "disabled";
+>  
+> 
+> -- 
+> 2.53.0
+> 
+> 
