@@ -1,47 +1,39 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-24420.protonmail.ch (mail-24420.protonmail.ch [109.224.244.20])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1AD74483B4;
-	Tue, 29 Sep 2026 19:28:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A312452ED50
+	for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 19:29:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.20
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790710102; cv=none; b=MHrPtgr1NOApB+Zshl4YP1uhCtxXo4Y/gmb8LZi/RfdunwSOupjapitccNRcP42Dbo/3BXCLvYghKQ3LomaAae8WXPR9NPZBkWHiJw1E3mt/pWtPXYELAUeLwpSML4YZVReKgC25KVmn9plIpbKoJ+4IIVZlpqRe3hdjjfp6ABA=
+	t=1790710189; cv=none; b=CBZmTrlT+05c7wQ1RHqDKU3jmSeZjaXOdKTEOmMt63nWzFbS+vyU9MTQVdG+3/4QMDo/RX2y6ZBXJ2qGqTMTEEpDZxGX+o7VnNVO+PRL4AAHvbxbPPdd6TpMRlkzH5+zG27BcGljI1xkGUH5w0KAdjVH/cvPYMiB5cXp7sah3nM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790710102; c=relaxed/simple;
-	bh=O0Omiyq/KcRHNIGn7ewYt7swzYz69/cx2EweUWG4Vkw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GwF7GHvzAH77XntEWTCrpN3Sd83H3L0t4OsufXUPA4fh+gxH2LjQSgnLE4Jb72m9XD0L9XFf46yLsMqwcpPhCSmmyGlxBFOjYIXpLQnd80yY+fAFm36XkDBMPBKstIYsnvZ9l94AK1RNckal+Z5+cTJ+v7ItrUF5Oq/IVetNQmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NuegzX1U; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790710189; c=relaxed/simple;
+	bh=3z78U6ewUrt+RGwoXgbE78coGKF5z18YOLvbHXnXIUg=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=bfZmdxHXfwIaa4lIMp/VIHfff3awsqBgX3lGjr3xAr6RegM0o3QNHaWVN40lNlubmC86N+8TtEV19gJZ0UpZ54anP57K/+eEExMHEgSrFbLo2ZuOijLy6voq8HY6U5Twyw64RCyhzF0f7+ugE6DL1n8FumLSEtRyIgLztgviA7g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net; spf=pass smtp.mailfrom=ironrobin.net; dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b=BolzSXhn; arc=none smtp.client-ip=109.224.244.20
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ironrobin.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ironrobin.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NuegzX1U"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C2AA1F000FF;
-	Tue, 29 Sep 2026 19:28:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790710100;
-	bh=WPq1lDMEISVN+4Wuw6T9MQdT1Hadq3U5RnwOvLWqtiI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=NuegzX1UKYqn/UPWpQSpkyHmTr3d3g03TW7g+C5olyCVAouYMAlk6oBFelgupSEYt
-	 8VH+lhlaHXzsRENC+xixzvC9g3gG1JhjwQbpK1+PPlyLDOkVoDZwMw54PdnOTqHnq9
-	 23BqfIn1ooJac4iV67+OB+G++SPLudSAyWBQjfLTJto0vIz1jeglLhKYZIb2gJyYYD
-	 rCpDS1itH8K8mtMEfHh90+S1AxiFcCCGE1T1I5gfiawCG/Brf2LpyLUEoDvE/5lwTw
-	 mlyRMAtmt8JrRhyjPUQl6Wc3IdFvauM9SLa6oJlXsruUTfGpJ3LHiZFDp63CpPWnIq
-	 /EcVbqkJAeV3g==
-Date: Tue, 29 Sep 2026 21:28:11 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Cc: "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
-	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
-	Juha-Matti Tilli <juha-matti.tilli@iki.fi>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
-Message-ID: <4dt7cguc4trc5i55ot3numuzz3nolbcpgtl4iztxw4a7b46v23@relb42cpotlz>
-References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
- <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
- <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=ironrobin.net header.i=@ironrobin.net header.b="BolzSXhn"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ironrobin.net;
+	s=protonmail3; t=1790710178; x=1790969378;
+	bh=z33BuqQYyeNmXMvblMjr2WqewbZtIRphsrRoxB31ueY=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=BolzSXhnKIF5z1zkiiYykw5YuJOsZgYk4VjfTEWI9X36hT5xXHID4X7imFfU4vFM1
+	 fa86JeN+BhYBXsOQZlIr1g9QHm3UMmJgRnIHVasCRCwYUdQB+MasNkc/Ayf1nZfIZ0
+	 2nf+9wqNh1rHGFZfkgJ9d9TSdzm7bZU7ZH604Wfpyq4QrLVei3J++CjpwaZBuGE2bJ
+	 2JHWA8qvFHO1/UXN+/ZL9Ud39hFJNwlpSXAmfVw6fsrFuriP5mNQUQLLzwkPhorr/I
+	 Nq2+UcgotYe0AG5ftMkTYS0Wqp3468hMw4kY1TBBQss9ZMZJdmtqBGaUyoHCuGz315
+	 pXXe88c2F/dbg==
+Date: Tue, 29 Sep 2026 19:29:32 +0000
+To: Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+From: Alex Robinson <alex@ironrobin.net>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Steev Klimaszewski <threeway@gmail.com>, platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v4 0/3] Lenovo ThinkPad X13s embedded controller support
+Message-ID: <20260929192908.16507-1-alex@ironrobin.net>
+Feedback-ID: 54785507:user:proton
+X-Pm-Message-ID: f570a8012b5df92eb02247b46633b3ea7669892c
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,75 +41,66 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 29, 2026 at 10:15:52PM +0530, Deepak Kumar Singh wrote:
-> 
-> On 9/22/2026 7:11 PM, Manivannan Sadhasivam via B4 Relay wrote:
-> > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> > 
-> > Now that the QRTR driver allows using the unique node id for each device,
-> > which is different from the node id received from the remote node, compute
-> > a unique node id using a new API, qrtr_host_node_id().
-> > 
-> > This API takes the 'index' parameter and adds it to QRTR_NODE_HOST_BASE,
-> > whose value is outside of the node id range used by the remote nodes (0 to
-> > 0xffff).
-> > 
-> > Finally, call the new API from MHI endpoint driver by passing the MHI
-> > controller index as the parameter. The MHI controller index is unique for
-> > each controller, thereby for each MHI endpoint device.
-> > 
-> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> > ---
-> >   MAINTAINERS        |  1 +
-> >   include/net/qrtr.h | 21 +++++++++++++++++++++
-> >   net/qrtr/mhi.c     |  4 +++-
-> >   3 files changed, 25 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index df8ab9b82402..9c8bb086be28 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -22511,6 +22511,7 @@ QUALCOMM IPC ROUTER (QRTR) DRIVER
-> >   M:	Manivannan Sadhasivam <mani@kernel.org>
-> >   L:	linux-arm-msm@vger.kernel.org
-> >   S:	Maintained
-> > +F:	include/net/qrtr.h
-> >   F:	include/trace/events/qrtr.h
-> >   F:	include/uapi/linux/qrtr.h
-> >   F:	net/qrtr/
-> > diff --git a/include/net/qrtr.h b/include/net/qrtr.h
-> > new file mode 100644
-> > index 000000000000..745d51b4a6ba
-> > --- /dev/null
-> > +++ b/include/net/qrtr.h
-> > @@ -0,0 +1,21 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 */
-> > +
-> > +#ifndef _NET_QRTR_H
-> > +#define _NET_QRTR_H
-> > +
-> > +#include <linux/types.h>
-> > +
-> > +/* The offset is chosen carefully to not collide with the node ids allocated by
-> > + * the remote nodes. All the remote nodes use node ids in range 0 to 0xffff.
-> > + */
-> > +#define QRTR_NODE_HOST_BASE 0x10000u
-> 
-> Can it be exposed with include/uapi/linux/qrtr.h also. There are user space clients like modem manager
-> which need to calculate modified node id to distinguish same service from multi modem over mhi.
-> This is same as wlan use case.
-> 
+Add Device Tree support for the ThinkPad X13s embedded controller,
+providing keyboard-backlight control and firmware-driven brightness
+notifications. Its event, backlight and power-management interfaces
+differ from the T14s EC and require a separate driver.
 
-I'm OK with exposing the final nid to the userspace, but not just the offset and
-asking client to calculate the nid on its own.
+EC wakeup remains disabled by default because lid closure can trigger
+an unwanted wakeup and no selective event mask is known. Userspace can
+enable wakeup when desired. Other EC event mappings remain outside the
+scope of this series.
 
-Will implement this final nid ABI in next version.
+This follows earlier X13s EC work by Konrad Dybcio and Steev Klimaszewski.
+Development was assisted by an LLM, including analysis of the X13s ACPI
+DSDT and review of the implementation.
 
-- Mani
+Changes in v4:
+- Set GPIO103 bias-pull-up explicitly, based on its firmware-inherited
+  configuration measured at pinctrl probe before Linux claimed or
+  configured the pin. CTL offset 0x67000 read 0x00000003 (pull field 3).
+  The temporary measurement instrumentation is not included.
+- Remove output-high from the GPIO176 pinctrl state. The driver already
+  requests GPIOD_OUT_HIGH at probe and controls the line during sleep.
+- Restore the suspend brightness snapshot only if it was successfully
+  captured during that suspend, avoiding restoration of a stale value.
+- Use FIELD_MODIFY(), validate brightness against the LED maximum, and
+  simplify transfer error handling and selected mutex-protected paths.
+- Include linux/ratelimit.h explicitly and adjust conditional formatting.
+- Shorten commit messages to focus on rationale rather than the diff.
 
--- 
-மணிவண்ணன் சதாசிவம்
+Changes in v3:
+- Disable EC wakeup by default without disabling runtime IRQ handling.
+- Retain wakeup-source as a description of hardware capability.
+- Remove the Kconfig help text's claim of wake support.
+
+Changes in v2:
+- Make backlight snapshots and EC power-management operations best-effort.
+- Save firmware- and software-selected brightness in the EC and restore
+  the EC-saved brightness on lid open.
+- Process deferred events after the normal resume brightness restore.
+- Add QUP8 pin configuration verified on hardware and fix DT node ordering.
+
+Testing:
+- Confirmed GPIO103's firmware-inherited pull-up on a ThinkPad X13s using
+  a vanilla kernel with temporary probe-time instrumentation.
+- Verified that all three v4 patches apply in order to Linux v7.3-rc4
+  without the separate PCI workaround.
+- Earlier v2 hardware testing covered keyboard-backlight control,
+  firmware brightness changes, s2idle, lid-close/open brightness
+  restoration, and EC wake events. Those results are historical and do
+  not establish validation of the complete v4 series or default-off
+  wakeup policy. Full v4 build and runtime validation remain outstanding.
+
+Earlier series:
+https://lore.kernel.org/all/20260925215358.33417-1-alex@ironrobin.net/
+
+Alex Robinson (3):
+  dt-bindings: embedded-controller: Add Lenovo ThinkPad X13s EC
+  platform: arm64: Add Lenovo ThinkPad X13s EC driver
+  arm64: dts: qcom: sc8280xp-x13s: Add embedded controller
+
+base-commit: 93f51579e7df248780214094418f205253383cc5
+
