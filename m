@@ -1,49 +1,55 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB6ED3F20E8;
-	Tue, 29 Sep 2026 03:15:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5488E3DAAAA;
+	Tue, 29 Sep 2026 03:15:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790651751; cv=none; b=Q62BJDqK9sFdSYx2gHAg7aoXXDEk+KgPxR813pfma73drnvHgufvobdKKLIVp2ywdObPQTB8QBpuvC7/cP3TJlO+wkt4nU2PsZcKAcdBtnfTNyD7lWQdrLvEPwueqih9IiAt9zpgYn5DmXKPsoqKIk5+mj3vIWTNIa21Ya7ZUP8=
+	t=1790651752; cv=none; b=tkytvnW0LNuzTrBcFYa5huGyISrleqVAr4BABel0EAaxGGhBe/1TX+gFU9UVhN97cSGgKTuA0i/5svFevekftQDonZgtsDR4z7lZe9JgiRIuGvo/bPp8RncLB0Kn93j1QiwG7ekDt6Cp4c+Q4aiFThlU/TDZvCxGOI2/zuZPeTI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790651751; c=relaxed/simple;
-	bh=72/F2aNhuSnc3MEbfVSyM1BAb/Te5/TQjhwJ3SAy6lc=;
+	s=arc-20240116; t=1790651752; c=relaxed/simple;
+	bh=CbVjQfizRLDfmRdI7gcmB1od3YMdoLKlV25JJrzM9Hs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GpErRRDE7aaGOgT/6MV96UbLtynTjUtJvAZx+S4rN4JLi3QbVGhBXf59N3ta878kBOv/dcDzTYZykvNxW8ntqvZbMaOOjf13GD6qDvRzhboWUErKR6UtMNJ0kGnankJsCwg/DwdRNx/I5Mptt+ebE9OK5DBZP2u7LfR6nQbEZdo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eJ3s4y4D; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=XauB6OOi6BmbmYngc9xc61dJkFyYSMYDOo6GDGmf5ValVs/tHFmNOfAeMK26cijH7TCaYlsa5umcmeukglQMIfhpe5aTiN9ACacRxpAfoSvKj5vyV5UrEDEX3ukpTk2gBBmqaVBBwi4BCVhGiU25Vl+u6j25RnanY/CuXcSIEfw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kudCjqJP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eJ3s4y4D"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 811DC1F000FF;
-	Tue, 29 Sep 2026 03:15:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kudCjqJP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD3D61F0089A;
+	Tue, 29 Sep 2026 03:15:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790651748;
-	bh=AI6UoST/jDauPauCWqJFOm84ifgr+WJw7qrObpigugU=;
+	s=k20260515; t=1790651750;
+	bh=hA8LUWW3PtjcaCrXtbh0vfqqPBEJbVf3BoVC5KmmLFM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=eJ3s4y4DIZuySQhubqf0ybFkP43sBEi6mZpWSl11tJsxWhTcbKN391HD25JT2gXmg
-	 /+APYMvsQ5vMyJuo5sX/XGHIhzvLPk6TnZlfz5opjHwQJZtJRZNP9+/aAcPhFjkGi8
-	 +WNyHp3L9w73942RNGb+xonPXz47goRIN6XflaZ/oy3UORiXmJ8zY1fiN0EsncuoUs
-	 wXw3bzBJ1DvMzmlMv9dQvq7EIA3NEhafhw3qL9zs51aN87riQG5ZZMlyM2xkBwoMKv
-	 O9qQMRekvkQPgzpNvesZ2ktTpxShYasPJOMXGOps4HtzhlkJnLGlqkjdNpfL3gaV76
-	 WJG0qIszmu/gQ==
+	b=kudCjqJPceZR1C78VsRk7LleDgpsvmIV24SIVD3dZ+wRgnFekpOwTu3Ur6hD3TZUd
+	 RiAxVuFsCVuuG19DT6Q/cSbsVBP3BP9gA3NyEk+b2/gOl2/FkUPg6Vgc/CoiML7v8o
+	 U/7wJWokF6KAHW/eKkthRCq1CD6g5tMcoVQhAZTHet3B6qTuK9BCQQhI0vMpFzTvWG
+	 3RSwc29tGg3KSVPJV+lyWFRg01s6iJerS4gBll85LACInhk62twOkIa9tlQRY6RoKJ
+	 VSaDNXjJaWz7CFyG7PCEqpFVxa23LFPNdqWqXeKOzVcrsix5gBWJsi0LXPu/Rn7Y1D
+	 YjG/clYMbBOVw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Hongcheng Zhang <hongcheng.zhang@oss.qualcomm.com>
-Cc: hangtian.zhu@oss.qualcomm.com,
-	miaoqing.pan@oss.qualcomm.com
-Subject: Re: [PATCH v1] arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: Add PCIe wake GPIO
-Date: Mon, 28 Sep 2026 22:14:46 -0500
-Message-ID: <179065171033.2673486.15991071931097951658.b4-ty@b4>
+To: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney@redhat.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: Fix camera rivian PLL configuration settings
+Date: Mon, 28 Sep 2026 22:14:47 -0500
+Message-ID: <179065170918.2673486.12337942031233081331.b4-ty@b4>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260915012020.2667577-1-hongcheng.zhang@oss.qualcomm.com>
-References: <20260915012020.2667577-1-hongcheng.zhang@oss.qualcomm.com>
+In-Reply-To: <20260801-cam-rivian-pll-config-fix-v1-1-6918d58cd823@oss.qualcomm.com>
+References: <20260801-cam-rivian-pll-config-fix-v1-1-6918d58cd823@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,20 +60,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 15 Sep 2026 06:50:20 +0530, Hongcheng Zhang wrote:
-> The QCS6490-based RB3 Gen 2 Industrial Kit cannot wake from suspend via
-> PCIe Wake-on-WLAN.
+On Sat, 01 Aug 2026 01:15:07 +0530, Jagadeesh Kona wrote:
+> clk_alpha_pll_write_config() in the PLL configure function skips writes
+> to PLL registers when the configured value is 0. However, hardware
+> requires USER_CTL_U and CONFIG_CTL_U2 to be explicitly programmed to 0
+> for a few rivian PLLs.
 > 
-> Add the wake-gpios property to the PCIe port so the WLAN wake signal is
-> propagated as a system wakeup source.
-> 
+> Add a clk_regs_configure() callback to ensure these rivian PLL registers
+> are correctly initialized on Glymur, SM8750, and Kaanapali platforms.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: Add PCIe wake GPIO
-      commit: 9910a98c1341dfec409b4a1f7ce57ced7c143b5e
+[1/1] clk: qcom: Fix camera rivian PLL configuration settings
+      commit: 3b651d946ebb756f922bed8a213919af17f58f43
 
 Best regards,
 -- 
