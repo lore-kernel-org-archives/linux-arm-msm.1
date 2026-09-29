@@ -1,41 +1,48 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1F01470429;
-	Mon, 28 Sep 2026 23:37:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AA8132B13E;
+	Tue, 29 Sep 2026 00:27:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790638653; cv=none; b=mIApFWEogLRBmfpVXTRrZjLKuZaB/4mWg/mNlIT8G1V95w+vD74q9/a7+ADM2xRsXRYht0H/3pVStU3VNt95CbkTCz4/NkfV0MyF2iHCS0qRzEb63HY5V6wCOZWLusOHihXW9yPpHf+JZxkXbAJEpZWsc0YnWXxKzv+AKS6ILt4=
+	t=1790641626; cv=none; b=cKMEcorhWLI9oXPJKgjDblk/P22Vn3tAyZjFHy4FIE1yW7JYI3JJVLh6vtjkrh2oQlEAsU6wwbrrvDeK5EqPoB/J+aj1ZtAnqArHHpZHwEZjoY354lW6tQtkDadzNS2zhxoCvI1WyUhNsS9p8d/DOZ+n5+bZ19K/mZIRFr6chIM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790638653; c=relaxed/simple;
-	bh=pejY82Fj5/wTqOvIWfFOhZ4TJVh03Rj1g01ke4ofWDk=;
+	s=arc-20240116; t=1790641626; c=relaxed/simple;
+	bh=TzCfhL3JGHc+iVOkoS2oZ9emmFsXD8BxHA0KGNXawes=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=i3iw/kJVZoI3toaXntDqrl+yVLsJcAJe/Cd+v8aHN/HY813dROD1IqXnviYZbwRio34ZfKcGZ9HtwL657gbSc8O9SYVvw/+fCtmNU0sgqMGqh7H2Ry5ncP/aj5eHlE3yI1ipnp1sqRRlG7AEG8zo/Zwh0ur3ccxhKv2/vYqTlNw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TTrpDj5W; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=ki1jHtQSXJeUEYxZLNGgKjw3lvIHDpT0/Gcu7KavBdMBQWZKr/9w7KirK3ClVNN61Co1a/0WAPlYoyd54o+UtXA99qqakFYG9tfhouyfy/xS9WFK732CvkDuTcfWmKGDVKZh1+8c7neaxALsp1vxfpUoTBBu1/Ez9vygYQAb8aI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=NDjf4paR; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TTrpDj5W"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC4731F000FF;
-	Mon, 28 Sep 2026 23:37:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790638651;
-	bh=oHyZ/liGhiGDNksFA1WpL4KIfqZ+EOX2YGgMK/FxXsQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=TTrpDj5WgkflohaT4j1bn6pOQbi4V4CNmGGbW9nceGe/Ku8cAvKNAmn0JhvZtowIV
-	 0CZddJS1AHwin/qrIGKuWucF/PLYfmQhJr167NTTiHUAo6CxmKhWvTECB6r6dK2tWp
-	 KQXnVyy4YIdi11BQ1g2LkM6Fhx6L0VWIq67byaZ73cgr9kxR17JYHB2/69S1wiECpB
-	 M407Wht3udQ0YYsvmXMzSGcohgy/DYsID03eaWJ1AQua5b1IqjKgEzhm2SQpH2Lcw8
-	 DsO+bf7w0VPNWNqQmC4ZQ334ytuTEAPj2dy8evvF31jJM6SAdxhDvX5VafauNc/Q6c
-	 xjKnu3ZQMGT8A==
-Date: Tue, 29 Sep 2026 01:37:28 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Hitesh Patel <hitesh@ebytelogic.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss <rfoss@kernel.org>, linux-i2c@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, ravi@ebytelogic.com
-Subject: Re: [PATCH v2] i2c: qcom-cci: always enable SCL clock stretching
-Message-ID: <arr57tHBYx1MowW7@zenone.zhora.eu>
-References: <20260914132328.976902-1-hitesh@ebytelogic.com>
- <20260921131954.1690578-1-hitesh@ebytelogic.com>
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="NDjf4paR"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=RhbH7v8YXxkNfYLoWgUSB3jLYRqHg4/xEj0uHEulYlw=; b=NDjf4paRDQiGiHI9OHEAdQ89mo
+	wc7J0xhw60Hcl49tlXxzRNftCsytCyq8e4fJzwfyEAocb5YXBV+1GbnXZqlEQtuGPMZj8PlGq96qV
+	GSmlp4SM+b4vfwwuf32tINUYd8l2FMCJ0ERVLyDtlb7CVr+wgIGgkM1qS9joiE0Fp548=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1xBLgN-007pPX-BB; Tue, 29 Sep 2026 02:26:55 +0200
+Date: Tue, 29 Sep 2026 02:26:55 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Yongzhao Chen <yongzhao.derek@gmail.com>
+Cc: Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>, netdev@vger.kernel.org,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	George Moussalem <george.moussalem@outlook.com>,
+	Ziyang Huang <hzyitc@outlook.com>, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net v2 2/2] net: phy: qcom: at803x: Apply IPQ5018 analog
+ settings at probe
+Message-ID: <f8e1f642-8250-4c1f-be1c-713a0026282e@lunn.ch>
+References: <20260928220717.939-1-yongzhao.derek@gmail.com>
+ <20260928220717.939-3-yongzhao.derek@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -44,36 +51,69 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260921131954.1690578-1-hitesh@ebytelogic.com>
+In-Reply-To: <20260928220717.939-3-yongzhao.derek@gmail.com>
 
-Hi Hitesh,
-
-Please don't send next versions as --in-reply-to, it makes life
-difficult.
-
-On Mon, Sep 21, 2026 at 06:49:54PM +0530, Hitesh Patel wrote:
-> Every CCI timing table except the msm8953 fast-plus one leaves SCL
-> clock stretching disabled in MISC_CTL. A slave that holds SCL low is
-> then not waited for: the master keeps its own clock timing and the
-> transfer fails with a NACK or returns corrupt data.
+On Tue, Sep 29, 2026 at 12:07:17AM +0200, Yongzhao Chen wrote:
+> ipq5018_probe() pulses the PHY reset, and the IPQ5018 internal GE PHY
+> then starts autonegotiation on its own with its reset-default analog
+> settings. The LDO, EEE timer, MSE threshold and optional short-cable
+> DAC values are only written by ipq5018_config_init(), which runs when
+> the MAC attaches the PHY, usually when the interface is opened.
 > 
-> This is hit with a camera reached through a GMSL serializer/
-> deserializer I2C tunnel (MAX9296A/MAX96717 on the RB3 Gen2 vision
-> mezzanine, SC7280 CCI v2 at 100 kHz). The deserializer acknowledges
-> the address locally, forwards the transaction over the coax link and
-> stretches SCL until the remote side has completed it, which takes well
-> over one clock period. Without stretching the register reads of the
-> sensor behind the link intermittently return garbage and writes are
-> dropped, which shows up as random sensor init failures.
+> On a Redmi AX5400 board, the IPQ5018 PHY is connected without a cable
+> to PHY4 of a QCA8337 switch, and "qcom,dac-preset-short-cable" is set.
+> Between probe and attach, about 39 s in these boots, both PHYs
+> resolved 1000BASE-T every 2.5 to 3 s, but the link did not come up.
+> After about five attempts, SmartSpeed downshifted on both sides at the
+> same time: the IPQ5018 PHY stopped advertising 1000BASE-T (CTRL1000
+> 0x0200 -> 0x0000), and so did the QCA8337 PHY (0x0600 -> 0x0400). The
+> soft reset at attach restores the IPQ5018 advertisement, but nothing
+> restores the QCA8337 side, and the link stayed down, also after
+> taking the interface down and up again.
 > 
-> Clock stretching is part of the I2C specification for every speed
-> mode and a device that does not stretch is unaffected by it, so there
-> is no reason to make it a per-table parameter. Set the bit
-> unconditionally and drop the scl_stretch_en field.
+> Apply the analog settings in probe right after the reset and restart
+> autonegotiation, so that negotiation runs with them from the start.
+> Factor the settings into a helper that is also used by
+> ipq5018_config_init(), and return MDIO errors from it instead of
+> ignoring them. Probe fails with the error; config_init() returns it.
 > 
-> Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
+> genphy_restart_aneg() sets ANENABLE and ANRESTART and clears ISOLATE.
+> With the reset-default BMCR value of 0x1140 read on this board, this
+> is the same write that was tested (BMCR | BMCR_ANRESTART).
+> 
+> The same values are written on every board with this PHY; only the
+> time of the write changes. On boards without the DAC property, no
+> DAC register is written.
+> 
+> The same writes and the autonegotiation restart were tested in probe
+> on that board, in OpenWrt's Linux 6.18.52 kernel, over 3 warm boots
+> with and 3 without them. Without them, the link did not come up in
+> any boot, with both sides downshifted as described above. With them,
+> 1000BASE-T came up in every boot less than 3 s after the QCA8337 PHY
+> was reset, before the interface was opened, and the QCA8337 PHY kept
+> advertising 1000BASE-T with SmartSpeed enabled. The DAC values written
+> in probe were still in place after the BMCR soft reset at attach.
+> 
+> This patch, backported to the same kernel without the downstream
+> SmartSpeed workaround, then kept the link at 1000BASE-T with SmartSpeed
+> enabled on that board over a first boot, a power cycle, three reboots,
+> three interface down/up cycles, three autonegotiation restarts, a
+> network restart and 10 minutes of operation.
 
-I'll wait for an ack from Konrad here.
+The usual problem with AI generated commit messages. They are too
+verbose. 
 
-Thanks,
-Andi
+  ipq5018_probe() pulses the PHY reset, and the IPQ5018 internal GE
+  PHY then starts autonegotiation on its own with its reset-default
+  analog settings. Refactor the config_init the pull the setting of
+  the analogue front into a helper, and call it at probe, so the
+  updated values are used, not the reset values.
+
+Patch 0/X should contain the big picture, and there is no need to
+repeat it in the individual patches. It will get included in the text
+of the merge commit.
+
+    Andrew
+
+---
+pw-bot: cr
