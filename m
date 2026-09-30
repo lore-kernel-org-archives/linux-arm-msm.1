@@ -1,114 +1,145 @@
-Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
+Received: from mail-oa2-f12.google.com (mail-oa2-f12.google.com [74.125.231.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73E641D5CFE
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 15:10:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8923C36495D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 15:12:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790781031; cv=none; b=d1KG2pwTYpV7uhSmPtA2I+70HTVA81c8m06pX/gerJwbYCFlfbrulfw9YRijLTvwh+4W1ArUnvlCM2v0A+Rolw5pfGvpyoNVU9UihjOQNQ9zAYGF/IWFQQnrWm18nQOmOJG0tg12upAi9bH8Ii7Hl6OlHEfYWgQEw1rR585eMJc=
+	t=1790781163; cv=none; b=lsVb/APU3pYFwam4/wfFaPiiWbw7UYr+i28WSexIS21sDqgbEl4uhHzTHooUgDI7y/LGwCMtas1X9Y2vzErLxC/8DJtASrVdB/AISeDFXkGSbrM6KaBsmvSN07PHPbLOotzvHqoiOF+N+RQurt69CS1FuXAlUxW0VK8p3qKHTy4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790781031; c=relaxed/simple;
-	bh=0OxRhuVbi3oxUlatW0tIcyIVYkE96Nbu7bqC/b0fLyE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=p0x2j6wJfUUkhte8eXrvNNWvubNABqbzmi8D7hmlTzbwUrXIoFLWFCH5aPgh3rJQbM9IhKzyfE0emWDrS+uxpUVQOzZwfWzkPBWhm1xF+aIZWDVfTevhzpS+TGi1imWOpm2PjdTSLZxbJi1EB4X3KJ2yHEtY7o0oWTXN15JUCpg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=he0CNuvm; arc=none smtp.client-ip=74.125.229.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790781163; c=relaxed/simple;
+	bh=N5TwGmCOg73FQhkQUlqK26vGWZ+6twK0jOc1jidbG9w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=se5A/DY+TNusn38aZU+Srm0i8oupD7AJvmtcQ5ULQkS3MW0s5Trq5Wib7tjVPPBUlR1HVJT3GYDW+j41Xv7O7GdrL45KZqxOKX5xMLrpwSY/CPk1LOr5/djIhCxLeoUAug+YjOAlXW4AJRWUFTMejYs/YumR0KkH6Wp7Iy38mC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=F2LynHut; arc=none smtp.client-ip=74.125.231.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="he0CNuvm"
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b8ea203e5bso4678611e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 08:10:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="F2LynHut"
+Received: by mail-oa2-f12.google.com with SMTP id 586e51a60fabf-47b8afe046dso2914202fac.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 08:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790781010; x=1791385810; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=fPmto+vUBoK3BPeCZ82QESLiZxY5p21rVFK/tfyP4vM=;
-        b=he0CNuvmm7mjhNkF4WGGazuow9mh5t+GmnSTZSQy5jsvCel0poBTrP51IwdlwBLnJz
-         SOl/VdtAqwaENxDFiRJhFspv8fOnReUXgu1QoU3fPJpQUvQltdg9KSBwHLnw1jXWmApV
-         xOcG8/PIYF7JINRm9JaI9wkkjoCI0VMKH+45R1UwoUUR76LiJBm9fC4BxYPIGyIwrZLE
-         MsRxtkJjNgUG89WHmbwNtXugRbmNbzJSRU+Xf8opZxMshnembivB8FS79EJpauf4cx7c
-         kLRSSR1LMpWgkQ54bUUXCf7KtLFC+X4LNwv1jPXXkjnpT1nEANYfQTKJtPM9HdCn7d3J
-         f2qw==
+        d=ziepe.ca; s=google; t=1790781152; x=1791385952; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=i3zztcZwHv33xTSBhcuuRwUuO/mC2YE/oPR+7vCHXWU=;
+        b=F2LynHutv0ZOmuF8vmFQU0cyqiI4GB5kyNhWNIcFmTm03ZYDlIdoeMvOS1ol6pHe7P
+         1opniFMp9w/1hoNxwBw1abApRh1Po/j0x2ZuaQZgt0r7WvI/GTEHkvv7KKThQRNgUeDk
+         U3vhG4nOcBSBbCwSBzxPAF2/N9kbmWUuQeOCbbHXQ+GZ3OEDXh8iCi7m7OhysGURcFuR
+         MYdYJN3ZhgKPd9PQq1QsBlgi+KBVppXhOjswSN+K42z+R3efFI3SH3JDdd9Kub164vap
+         FKr2jNuW6GBhqs4aVFIb+0YT7DujIACVvy1vKyp41BAFenyWoJ63gl+3RGCO5hghcRCU
+         QQ9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790781010; x=1791385810;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fPmto+vUBoK3BPeCZ82QESLiZxY5p21rVFK/tfyP4vM=;
-        b=1vScaWHOfBxrNwIRvr8wbU/Y1oA81Iajv0ZqCJA02sh9Shlsn1PODxuHxYrXUE7qqX
-         XPsnJRIFm8fA9/t29go40vZYuB0TABb4RkVrpHeMfuYD4QZzartWkRU+riMB/s/Sa5Gy
-         2aw3bCrQczBzHkTWKMWnFac4GMjDssGqC23DzJDuRrK502hkbVh8wUIDWTSFvDIwcnx4
-         Zto6lfGDQnN8fojAK0W5q6eNyqdp1jywo/Wx7v5IZXgXBe09BukDj7iZzXb1575IhZJs
-         VGENnwkkBIFNwaUJzh4/nhdoYWblip64hEr/s2hrA9ZJjwg7tjx/kGQOvu05/VsirLgr
-         pzwA==
-X-Gm-Message-State: AFq9FYKLYdOFBLq5SP9bm0R48x6JkZ6C37MYQy1tF7sor1glbYeJyrGC
-	cnmb4couJFm/UIYRGZcKeYIjd93h97F6ogNf5NPSfzEFDS7VIkwtYI1A
-X-Gm-Gg: AYBFou2frx/e3vgobuAtarzgw6C0FtPThVkhWQK7jyD0K2odpwhK8tdH2L2zuSfNRF5
-	7VIM50ajl8wLmwZIFIR+8s1oXIpX568BMtgjhS41hSisaXotiASyeNXZFe2x8vIEVAK6/8dT+dz
-	tuytwFyShnyU8RLfFRvdDNsS1u1UyV+o75enDWA0Xk2x1Gq6lq+VH9pI8UgOSxvv7talwbocrr0
-	QiSIS+VdIDowp4SnQUZv/7UuZ/ISC1ZScMhTvn/3X8SLfQ4CBI7VpPVFRYpX9cqYhXJicf8Y/XF
-	sHBEpI1rB7a1F5fHTJocAzJvqhYkayAiUBAh5sdw5Z8vKDevHTXVshrTZFmTnMqL+slGiPPGilu
-	bsNIwmT8IlgwNgn4JNvamcyERYIMsKsgNbVupCJBRW85aOW7lKA0fcnARiE6WwZvwWlkowtPW8G
-	nGK2AL0ZKzWYMaaCKaFTOOxBAAkoDs4My2ziu4ropVNqeMfw34qydkETnjsdnmXEHLqIxwvLe6Q
-	fRkA6Qm19oQ+oCcm51qAfcTdjXrNls=
-X-Received: by 2002:a05:6512:3ba3:b0:5b8:f955:29e7 with SMTP id 2adb3069b0e04-5ba402c323emr870452e87.6.1790781009538;
-        Wed, 30 Sep 2026 08:10:09 -0700 (PDT)
-Received: from [10.249.180.52] (m-37-0-171-147.cust.tele2.lt. [37.0.171.147])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5ba42faaa70sm29075e87.27.2026.09.30.08.10.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2026 08:10:09 -0700 (PDT)
-Message-ID: <82fded25-6338-4aa1-8bb1-a49834cca8ba@gmail.com>
-Date: Wed, 30 Sep 2026 18:10:03 +0300
+        d=1e100.net; s=20260707; t=1790781152; x=1791385952;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=i3zztcZwHv33xTSBhcuuRwUuO/mC2YE/oPR+7vCHXWU=;
+        b=pXzmW7Vru8b0VpBIspbGOJJvVQLQO3mSVywAQGzXYXlN2tAiJG0d6qm9k02pFCKmaL
+         JQCBNniC8dJ9i/KP+wwCa9Gtfn9WJ1colExjGCVR0qkc/w6woqjnOUUQopCQLunbuBqF
+         2B4psqqvFvdlh/H2U7rw1ilZ0OVNH3dD/A911rlAwzZhK1MGGnapIUXHbJojlmpKcyUi
+         V2WEA3XHLv7jMaorCrBkjjEIC8L98MYOLceIJdyN9KnIpLld6kZJd3ZaGv0QOhpCcdyc
+         c39tfz7kNZOUmsSCwoi4VH4RtbGPeHkKQ43sgpKwVXgGMq8ekhdXFT1qGzL1QZN1HQhg
+         Vh9g==
+X-Forwarded-Encrypted: i=1; AKwUvBxCN1CWvR3EJTYtkE1B+QMQesalXqy/rZBuGWVe1UqDXQlyJx4eHlb5F325vki9Rnzyx27TurjS0y5zBbg2@vger.kernel.org
+X-Gm-Message-State: AFuF++nEV2pRkL/vwnayrq4u9SYmDgPlm/t2zepDF4RQapai9ySHggOb
+	YyZ8Ro3u7BotpnoOBore/WsAJZrKa8IUuxPzyTEJL7OHhXIcts8wkKp09JHWoD4afYQ=
+X-Gm-Gg: AYBFou2ssmv4pvZlZyPNAcHnC7xJD6qnwuQLkWR5OHpGdK8KCwI6+QlJ+rkX0pxefJr
+	2poNcH/0IW1Pi15di7Jzq1EEGJueB74yUhaWZhkcBG+3ACLQUIRyQpgp/JpkbvSM0xq+JGfzQjY
+	NqRDGbS1OY0k2TKEzz4xB0a8jNIAO2A5jKPE6LmB0AFlN1CrrVIpYkrllxg8JQAYu0y8+JH7cGf
+	J88zDRnswXu5jWK1C6L7A1l5gMKB908FMLIZgiY9T2lyDtoSYF1NAWRhAWprIFrNUBew0cGioOX
+	JkKM6LQNZi4j+urvjl75tndX+VMBfzKda19JMyg1/rUojy1beb0CUnm4jF1LHg3eA+cRtS5GLNR
+	2v5Cq16jExzYZA6+oXwZNpSrodsKqp3Apds1xnzX/Gil3TtzljWosnhQMOKxU/LO4HXMkwRd1fq
+	pQ9KPg7qf6ReWopT0YGrG43fLlVYGGaMGFIjGIfspfMz66
+X-Received: by 2002:a05:6808:23cd:b0:4d6:90d3:e187 with SMTP id 5614622812f47-4f1b9a4dd1fmr1463609b6e.48.1790781151901;
+        Wed, 30 Sep 2026 08:12:31 -0700 (PDT)
+Received: from ziepe.ca ([130.41.10.202])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-4f1b61be7d8sm1076055b6e.17.2026.09.30.08.12.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 08:12:31 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1xBvyv-0000000BwZW-3H3V;
+	Wed, 30 Sep 2026 12:12:29 -0300
+Date: Wed, 30 Sep 2026 12:12:29 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
+Cc: bhelgaas@google.com, alex@shazbot.org, jjohnson@kernel.org,
+	johannes@sipsolutions.net, mani@kernel.org, yishaih@nvidia.com,
+	skolothumtho@nvidia.com, kevin.tian@intel.com,
+	linux-pci@vger.kernel.org, kvm@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/7] vfio/pci: Add qcom-vfio-pci variant driver
+Message-ID: <20260930151229.GR163130@ziepe.ca>
+References: <20260930140833.576941-1-jtornosm@redhat.com>
+ <20260930140833.576941-4-jtornosm@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: (subset) [PATCH RESEND v3 0/3] arm64: dts: qcom: sm7125-samsung:
- add initial device tree for SM7125 Samsung platform
-To: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
- Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Stefan Hansson <newbyte@postmarketos.org>,
- ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
- David Heidelberg <david@ixit.cz>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- Vitalii Skorkin <nikroksm@mail.ru>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-References: <20260910-sm7125-samsung-v3-0-c467bea0fb9c@gmail.com>
- <179065170983.2673486.1587443995547415765.b4-ty@b4>
-Content-Language: en-US
-From: Erikas Bitovtas <xerikasxx@gmail.com>
-In-Reply-To: <179065170983.2673486.1587443995547415765.b4-ty@b4>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260930140833.576941-4-jtornosm@redhat.com>
 
-
+On Wed, Sep 30, 2026 at 04:08:29PM +0200, Jose Ignacio Tornos Martinez wrote:
+> Add VFIO variant driver for Qualcomm PCIe devices that require
+> MSI address passthrough for VM operation.
 > 
-> Applied, thanks!
+> Qualcomm ath11k and ath12k WiFi devices have embedded interrupt
+> controllers that require physical host MSI addresses programmed to
+> device registers. In VMs, the driver only sees virtualized guest
+> addresses, causing firmware initialization to fail.
 > 
-> [1/3] dt-bindings: arm: qcom: Document Samsung Galaxy A52/A72
->       commit: 0f14172198733b780f22d546516ccf8a7ed77733
-> [2/3] firmware: qcom: tzmem: disable SHM bridge for SM7125 platform
->       commit: 6320b4c31b70a39a06de27a8019a45632beef32a
-> 
-> Best regards,
-Hello Bjorn,
+> This variant driver:
+> 1. Caches physical host MSI values after allocation
+> 2. Writes them to extended config space with magic signature "QMSI"
+> 3. VM drivers discover and use these values automatically
 
-I noticed that the patch for device tree compatible documentation was
-picked up, but the patch for device trees themselves was not. Is there
-any issue with it I should resolve?
+You should probably explain a little be more here
 
-Respectfully,
-Erikas
+1) Linux VM driver fills up the normal MSI-X table
+2) HW has some non-MSI-X table registers
+3) Linux VM driver pokes into the interrupt layer and extracts
+   one of the MSX-X table entries addr/data pair
+4) Linux VM driver now programs that copied addr/data pair into #2
+
+This is, of course, all wrong. These days it should be using one of
+our mechanisms to allow devices to have their own private MSI
+registers.
+
+I forget if this is the right way for PCI, but the driver can call
+
+  platform_device_msi_init_and_alloc_irqs()
+
+And directly program the MSI registers with their own special
+interrupts vectors, no copying from MSI-X.
+
+If the driver is fixed to work like this, as it should be, then it
+fully breaks the scheme you propose here. That's not good.
+
+The problem here is not really a qcom problem, and treating it as a
+qcom quirk is why it keeps being stuck, IMHO.
+
+The real issue is that this device MSI scheme does not work in VMs at
+all. It does not work because the VM IRQ design requires the VM to
+trap and modify all the MSI addr/data pairs at the register write.
+
+The technically clean solution is to redo the VMMs so they don't
+require that, ie use interrupt remapping so the VM's view of the
+addr/data pair matches physical. That's super hard and will probably
+never happen.
+
+But! Now that we have these device MSI domains I wonder if there is
+some half option to provide a hypercall so the device MSI domains can
+call out to the hypervisor to get the true physical addr/data pair to
+program?
+
+This is fundamentally an irq layer issue in Linux, not a qcom one.
+
+Jason
