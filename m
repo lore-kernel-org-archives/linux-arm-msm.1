@@ -1,47 +1,47 @@
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 653F4513546
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:09:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E295C4FDA67
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:09:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790777390; cv=none; b=T2aeSZ8oE7BKIfAtZwGm13v5v7+fZlK+n/JWkJ+d9SzeEjXizMctDzsmzPxdvaEOXaP8S5+cR95ZXdv0cfwgZvEbS678bTGN+6YCMsBHu/TtImnQWS+qWjN5IqdmXkq5hT1gZkdBoS6vxzWaxd0Rm9p6x5k/iNS8I+ybPy+G6JE=
+	t=1790777402; cv=none; b=uuN2W8XQBrmEQQe1UQrn/CqR8gWHjMb/zS51cI7rZvb/wuxmfdQ5k26weepLFiqw5IzYMny6kgkBtABDjTdrHk4wuL9rd4iR7qEWHkR8bjEUgKl4Vi77T1baHYBBQasdmcOYqIzCB8mblWjaFcUvcS2VEEy7EiMvyR8jIhRxvXI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790777390; c=relaxed/simple;
-	bh=VXYSIpNBzjljxOOTtdon4+ERsroM+GnS8vRAxuANfWs=;
+	s=arc-20240116; t=1790777402; c=relaxed/simple;
+	bh=ChDbrJBtKwVpjhyNqwXNVijk17LuvlzsmCBx2JvRS48=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=fRQ9c5cBn5llXhptz6izqvFs1U0euHSpzgXS/DUh/mCk3y5x04qlGhqy1GNa9Fhx0W1Sz7uk/qoH0FO1vCEkAv/l9r1kjHzO/giv7/h1vLKNuOduNqmuQi0L+q9rp+xiJRk2EpbkSitx9Jd0OBd9fqxkADrIRahmZVPxxxATNAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UO9k3RCN; arc=none smtp.client-ip=170.10.129.124
+	 MIME-Version; b=oQqG4L6mDouixCb7Mu+1Qa7e1Q19tQonDJkTeHSj2bWV2J+C8nN5rqXV10aLN1OLKPeA1GkI2F/53dDIbkh9n7eaETKgE5Y2AZwdiewxkvLrSomPu3NeBiQm/UTJxeJ01djjXsEiTonMboCJ+VocjHpPAN0eXdKVOQEW4P55GyI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=h+6MEcMr; arc=none smtp.client-ip=170.10.129.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UO9k3RCN"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="h+6MEcMr"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790777354;
+	s=mimecast20190719; t=1790777390;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=p3xqmKVAFV4WbQWRk7ZQhQ7LMEFnygykagJl6VwnyQI=;
-	b=UO9k3RCN5WMT0N1dqd0XUxvEHuECzVYmftS+qvQuLb0/JA99Pre8UnuB7l3YBB3Hb2MGIL
-	mHDxh8q8dsw35kA10bRA1bBI65OSukcDTpz7VkzInRo2HxtJTvdFYYTpwYSdkpIVFVNGdc
-	wo+7ISbgkZSLp5yjUgs/Cuc/64eohec=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+	bh=L1hpiA9PSrEgTziY9kUXLTeM8Im79Dj/E5wLN7KEwBw=;
+	b=h+6MEcMrzcHsETN7t+H7efO4rWLv/nFvnJVALWMr9UvhXFLR98fDHfZh0pi62X1B+sCL9u
+	iBlijxS1MZgnGQ+Rd3fp4I7oux+AsFM5DkundCHWs9YBpOg2yi7eiq4tQoSO5F6APT3XBt
+	ADJ8yl6gfzD4LZGCijxZFXabbylEN7U=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-307-SOCXgrpmO5qWs48VnazhLw-1; Wed,
- 30 Sep 2026 10:09:09 -0400
-X-MC-Unique: SOCXgrpmO5qWs48VnazhLw-1
-X-Mimecast-MFC-AGG-ID: SOCXgrpmO5qWs48VnazhLw_1790777347
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-649-vG0PtuP-M6KWTOdKg7iCaw-1; Wed,
+ 30 Sep 2026 10:09:46 -0400
+X-MC-Unique: vG0PtuP-M6KWTOdKg7iCaw-1
+X-Mimecast-MFC-AGG-ID: vG0PtuP-M6KWTOdKg7iCaw_1790777384
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 098451954B1D;
-	Wed, 30 Sep 2026 14:09:07 +0000 (UTC)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 50ECE180214B;
+	Wed, 30 Sep 2026 14:09:44 +0000 (UTC)
 Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 717C31956044;
-	Wed, 30 Sep 2026 14:09:02 +0000 (UTC)
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 86EC51956044;
+	Wed, 30 Sep 2026 14:09:40 +0000 (UTC)
 From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
 To: bhelgaas@google.com,
 	alex@shazbot.org,
@@ -60,9 +60,9 @@ Cc: johannes@sipsolutions.net,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-Subject: [PATCH 1/7] PCI: Add pci_find_free_ext_cap_offset() helper
-Date: Wed, 30 Sep 2026 16:08:27 +0200
-Message-ID: <20260930140833.576941-2-jtornosm@redhat.com>
+Subject: [PATCH 5/7] ath11k: Use VFIO MSI cache when available
+Date: Wed, 30 Sep 2026 16:08:31 +0200
+Message-ID: <20260930140833.576941-6-jtornosm@redhat.com>
 In-Reply-To: <20260930140833.576941-1-jtornosm@redhat.com>
 References: <20260930140833.576941-1-jtornosm@redhat.com>
 Precedence: bulk
@@ -74,111 +74,93 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-Add helper function to find free space in PCI extended configuration
-space. This is needed by VFIO variant drivers that need to use unused
-extended config space for device-specific purposes, such as passing
-metadata to VMs.
+The Qualcomm ath11k firmware requires physical host MSI addresses for
+interrupt configuration but cannot handle IOVA-based MSI addressing in
+virtualized environments.
 
-The function scans the extended capability chain and returns an offset
-to a gap of at least the requested size. This allows drivers to safely
-use extended config space without conflicting with existing capabilities.
+When the device is passed through to a VM via VFIO:
+- The guest kernel allocates MSI vectors and sees IOVA addresses
+- The ath11k firmware expects physical host MSI addresses
+- Providing IOVA to the firmware causes interrupt delivery to fail
+- Result: device is non-functional in VMs
 
-Use case: The qcom-vfio-pci variant driver uses this to find space for
-caching host MSI addresses that need to be passed to Qualcomm device
-firmware in VMs.
+The qcom-vfio-pci variant driver (introduced in earlier patches) solves
+this by caching the physical host MSI values and exposing them through
+PCI extended config space with a "QMSI" magic signature for discovery.
+
+Search for the QMSI magic signature in extended config space. If found,
+the device is running on a VM and we can read the cached host MSI values
+from that location. If the VFIO cache is not present (i.e. on baremetal),
+fall back to standard PCI MSI configuration.
+
+This change is transparent, arch independent and requires no user
+configuration when used with the qcom-vfio-pci driver.
 
 Signed-off-by: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
 ---
- drivers/pci/pci.c   | 54 +++++++++++++++++++++++++++++++++++++++++++++
- include/linux/pci.h |  3 +++
- 2 files changed, 57 insertions(+)
+ drivers/net/wireless/ath/ath11k/pci.c | 33 +++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-index 8f7cfcc00090..7fa261140457 100644
---- a/drivers/pci/pci.c
-+++ b/drivers/pci/pci.c
-@@ -552,6 +552,60 @@ u16 pci_find_ext_capability(struct pci_dev *dev, int cap)
- }
- EXPORT_SYMBOL_GPL(pci_find_ext_capability);
+diff --git a/drivers/net/wireless/ath/ath11k/pci.c b/drivers/net/wireless/ath/ath11k/pci.c
+index c372676b097f..99a3a709831c 100644
+--- a/drivers/net/wireless/ath/ath11k/pci.c
++++ b/drivers/net/wireless/ath/ath11k/pci.c
+@@ -10,6 +10,7 @@
+ #include <linux/of.h>
+ #include <linux/time.h>
+ #include <linux/vmalloc.h>
++#include <linux/qcom_vfio.h>
  
-+/**
-+ * pci_find_free_ext_cap_offset - Find free space in extended config
-+ * @dev: PCI device to query
-+ * @size: Minimum size needed (in bytes)
-+ *
-+ * Scans the extended capability chain to find a gap of at least @size bytes
-+ * in the extended configuration space (0x100-0xFFF). This can be used by
-+ * drivers that need to use unused extended config space for device-specific
-+ * purposes (e.g., VFIO quirks for VM passthrough).
-+ *
-+ * Returns the offset to free space, or 0 if no suitable gap found.
-+ */
-+int pci_find_free_ext_cap_offset(struct pci_dev *dev, size_t size)
-+{
-+	int pos = PCI_CFG_SPACE_SIZE;
-+	int last_cap_start = 0;
-+	int free_offset;
-+	u32 header;
-+	int next;
-+
-+	if (!pci_is_pcie(dev))
-+		return 0;
-+
-+	while (pos >= PCI_CFG_SPACE_SIZE) {
-+		if (pci_read_config_dword(dev, pos, &header))
-+			break;
-+
-+		if (header == 0 || header == 0xffffffff)
-+			break;
-+
-+		last_cap_start = pos;
-+		next = PCI_EXT_CAP_NEXT(header);
-+		if (!next)
-+			break;
-+		pos = next;
-+	}
-+
+ #include "pci.h"
+ #include "core.h"
+@@ -463,8 +464,11 @@ static int ath11k_pci_alloc_msi(struct ath11k_pci *ab_pci)
+ 	struct ath11k_base *ab = ab_pci->ab;
+ 	const struct ath11k_msi_config *msi_config = ab->pci.msi.config;
+ 	struct pci_dev *pci_dev = ab_pci->pdev;
++	u32 msi_addr_lo = 0, msi_addr_hi = 0;
+ 	struct msi_desc *msi_desc;
++	u16 msi_data = 0;
+ 	int num_vectors;
++	int msi_offset;
+ 	int ret;
+ 
+ 	num_vectors = pci_alloc_irq_vectors(pci_dev,
+@@ -488,6 +492,35 @@ static int ath11k_pci_alloc_msi(struct ath11k_pci *ab_pci)
+ 	}
+ 	ath11k_info(ab, "MSI vectors: %d\n", num_vectors);
+ 
 +	/*
-+	 * Use space after the last capability. We align to the next capability
-+	 * boundary (typically 4-byte aligned). Start at a safe offset past the
-+	 * last capability - capabilities vary in size, so use a conservative
-+	 * offset. Most extended capabilities are <= 64 bytes.
++	 * Try to get host MSI address from VFIO cache.
++	 * When running on a VM, the ath11k firmware requires physical host
++	 * MSI addresses and cannot handle guest IOVA addresses.
++	 * qcom-vfio-pci writes host MSI values to extended config space with
++	 * a magic signature "QMSI" for discovery. Search for it.
 +	 */
-+	if (last_cap_start) {
-+		free_offset = last_cap_start + 64;
-+		free_offset = ALIGN(free_offset, 4);
-+		if (PCI_CFG_SPACE_EXP_SIZE - free_offset >= size)
-+			return free_offset;
++	msi_offset = qcom_vfio_find_msi_cache(pci_dev);
++	if (msi_offset) {
++		pci_read_config_dword(pci_dev,
++				      msi_offset + QCOM_VFIO_MSI_ADDR_LO_OFFSET,
++				      &msi_addr_lo);
++		pci_read_config_dword(pci_dev,
++				      msi_offset + QCOM_VFIO_MSI_ADDR_HI_OFFSET,
++				      &msi_addr_hi);
++		pci_read_config_word(pci_dev,
++				     msi_offset + QCOM_VFIO_MSI_DATA_OFFSET,
++				     &msi_data);
++
++		if (msi_addr_lo && msi_addr_lo != 0xFFFFFFFF) {
++			ab->pci.msi.addr_lo = msi_addr_lo;
++			ab->pci.msi.addr_hi = msi_addr_hi;
++			ab->pci.msi.ep_base_data = msi_data;
++			ath11k_info(ab, "VFIO MSI cache at offset 0x%x: addr_lo=0x%x addr_hi=0x%x data=%d\n",
++				    msi_offset, msi_addr_lo, msi_addr_hi, msi_data);
++			return 0;
++		}
 +	}
 +
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(pci_find_free_ext_cap_offset);
-+
- /**
-  * pci_get_dsn - Read and return the 8-byte Device Serial Number
-  * @dev: PCI device to query
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 2c4454583c11..5d1ccbb2ed29 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1287,6 +1287,7 @@ u8 pci_find_ht_capability(struct pci_dev *dev, int ht_cap);
- u8 pci_find_next_ht_capability(struct pci_dev *dev, u8 pos, int ht_cap);
- u16 pci_find_ext_capability(struct pci_dev *dev, int cap);
- u16 pci_find_next_ext_capability(struct pci_dev *dev, u16 pos, int cap);
-+int pci_find_free_ext_cap_offset(struct pci_dev *dev, size_t size);
- struct pci_bus *pci_find_next_bus(const struct pci_bus *from);
- u16 pci_find_vsec_capability(struct pci_dev *dev, u16 vendor, int cap);
- u16 pci_find_dvsec_capability(struct pci_dev *dev, u16 vendor, u16 dvsec);
-@@ -2160,6 +2161,8 @@ static inline u8 pci_find_next_capability(struct pci_dev *dev, u8 post, int cap)
- { return 0; }
- static inline u16 pci_find_ext_capability(struct pci_dev *dev, int cap)
- { return 0; }
-+static inline int pci_find_free_ext_cap_offset(struct pci_dev *dev, size_t size)
-+{ return 0; }
+ 	ath11k_pci_msi_disable(ab_pci);
  
- static inline u64 pci_get_dsn(struct pci_dev *dev)
- { return 0; }
+ 	msi_desc = irq_get_msi_desc(ab_pci->pdev->irq);
 -- 
-2.53.0
+2.55.0
 
