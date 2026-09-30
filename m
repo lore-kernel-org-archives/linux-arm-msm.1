@@ -1,329 +1,192 @@
-Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D7B14E4C50;
-	Wed, 30 Sep 2026 12:44:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.22.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 524D34D954D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:46:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790772285; cv=none; b=AsS1lUE6y6dA7oo1e1i9wzAfwz8mKkE4GSNDTjwHDQ7AirhuM7rDEKjsSG+GmalSwW5tzdi6KFBQp27CkFCv2BaoLBxDrIrBKrQaAyL/dbJEbpoTfMN5gu859vETpFBwnFljxJ08hrjJct9U4AZ9df5YoCED14KHq8Xr+UCrMks=
+	t=1790772382; cv=none; b=RGA8oU9R0bRON7kau++sd1ML/f2DCfwsuiPRsPueR5OHpsb8iTQmh3EgQIE87En0Qn/7WQylWgSXniC+DvFMIvIY9rWKyfmH0RA7ZaP92DaM/4Yq8oN2rW7T1WZgZGjPcVMnwsm2CNulX/SAUY4M16uJSYOoycaPk898aw8bPBc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790772285; c=relaxed/simple;
-	bh=e4hz6d7zJa4YX8tzhNQaTqN1PBFr7mjK8xvaDaSt5y0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Z15e+doX0wHCPRu/S/EG7sQ3wwogkio4twhM6Bry+uVeE4nLe0sWr7Q9H/NDu4q5Ma91c/W8AUzPwtTnun6tgpb15vLCAZhR06wROxNrNFw9qNHtk8hQmvrf0Gu1Mjwg4Wj6YibVPJL1aaJS7Ywvoq6Mi4EKXpwmUiD1pMZhC8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.207.22.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip3t1790772171t3f14f698
-X-QQ-Originating-IP: kJrvdrvSrDyx+pNNfkFw4vp+d6T7Q/uT5yBR5r5hmcM=
-Received: from [192.168.30.32] ( [localhost])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Wed, 30 Sep 2026 20:42:50 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 3594575140432455932
-EX-QQ-RecipientCnt: 16
-From: Xilin Wu <sophon@radxa.com>
-Date: Wed, 30 Sep 2026 20:41:56 +0800
-Subject: [PATCH 12/13] drm/msm/dp: Serialize video test state changes
+	s=arc-20240116; t=1790772382; c=relaxed/simple;
+	bh=aTL4lw39PtnnQyOMulEmRhSSF0Yf6RJS/a2j4gCoSSE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=iwUqa7JVav0+vNADilEcV0L/f15uB0mZLRQOD8969skWWUsxaFA7ZIzlLSA/jr//YFpnxHLhnAehB86RnkhGgHMIOq487FAfgouUhpK20sFTZpNM0hN58tcEQxHm2a9bPahUE4LR8TwXnq7BYtQ7T+fbO1O2OYfVxeHzXzgCP+w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ljaE3gmy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ji1U/keT; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ljaE3gmy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ji1U/keT"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UB8Js62898180
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:46:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=fidXHPHvwOp5wic/6WE7FT
+	nm3CRScksILO2dTzE8xLw=; b=ljaE3gmyCtsc5PlvfQ7o8AU0kGlJR7QhNpvN0B
+	0TlS2HTIVtev723ZN5SgUIRuQhVwc3RXscPUg8XCazhwBHt6Bt6iolh3gbhqzL0c
+	diPTFiSAsIiHbgBKxEI5tCxN2Ppj5Cqp6jFxSBwTI4icbvvT0RyCNSQk2uxXmHTu
+	hZgUADJ3ecjlQFFvIP8+huzbSweLiQWWQAMA7CdQgEzi0JJeg6jnvHNefHvBpc6g
+	L6XdceIgSlGUSYp2TE2ZV3GZPOWo/tYIf9m4SkPAYca6WI28jHhQXihltFPX//1s
+	Y2R/NWdcpT9H6jTykGEWGrkTfQ1Y/lLIQlyY/NLHiDzObIkg==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0tkn298b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:46:19 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7bf257e7b5eso136733137.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 05:46:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790772378; x=1791377178; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fidXHPHvwOp5wic/6WE7FTnm3CRScksILO2dTzE8xLw=;
+        b=ji1U/keTePS1gH3O9qd+Y38IYm3eXUIidhIhDb5lV10MD6zpURY7fzO0f6KyluqRN1
+         LX0tnTbskC7AhzwZ29NyS4cTOMM/NC9Mc1luHlKnDqvx0nMcAh1kPu7TTiUaZsBFFKyt
+         iTMdooON71JjFVZAmVMzuH8e0qV4yp8dK9Z5c4D6Q3u8/Xhddc1BEvAUQSFKB0E0oMFm
+         tAfdmJfVGvDuLBIoR5ldGiu4w/7P8B4ULs7ex0SNAoTIEtBUOtNl+b66DvkGkbhiTehh
+         ZKwiKOX/Zyg0F3OVAj0+Bfu6i4w0kcgO6/1trAGhmF//Png53oN5zWl74mxvKR+xfRfI
+         aILA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790772378; x=1791377178;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=fidXHPHvwOp5wic/6WE7FTnm3CRScksILO2dTzE8xLw=;
+        b=Ex2+YbROfsBsdFLt3wKldvpOrPRvRKZOWJ1EETLXFCqMBEqVYCV7I9QcOkYaQEPBG1
+         P5NBlBvgkXv1de1maZaIoBuBhJCyeAH6mhy/C0QeYh4z4CMOhznjScEMBitsIZ9KYyue
+         EHmJlULoSl3KYsVe1qzD55L9i3GqGjcsWdkBm8B7ZqJQQKmivWfPj5oX4QQjiroPuJ+8
+         vharmxMGQTlmKI/dBNTJCasSsRTLIKvM7slx9/ONnKa6txmhA4brCSDpOwTL35Zc22EK
+         mcM891Z+R6mApJOtOL0vUGvSgX83f/XxLDmD0rNb+7h81XBf/TxmIw1xqqD0VEMLIGmc
+         8PnQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxBLxfDN865a79SvWBTZoRSznNya/bFhozvtJ5ah9wBZenBLmNKnyGFIDSw1kn3cntNohFAGAo+69FS7T1c@vger.kernel.org
+X-Gm-Message-State: AFq9FYIezAVJg0SHelHJb5AKgSnqmbethKEY+zc6RwBERqa9W2haaUsN
+	TDOLyINXTj8MW6MWGV7J0RYIpPh11dZ3IqkvSrsR9pp/AYY5E7U9JNOYG3Jm0/sN261Y8UPWHXq
+	sRLwNVklYQxv0zIltKr8aF95HVUlo7cRL2QVqcjPCXslopWKeKUYqTjJ1fv3WDHEIXtJC
+X-Gm-Gg: AYBFou0T4PNAKnPqKC2LrgKWjAzpuTquO9y2rrPN7kGOLcakHr7BM30j+/+u0pLd9j7
+	sAvRuxawM0XbPa1rcou0h0xpIDbqm8cxfdhtFWBNRODFqj+gr/r0oAp4wUjleSCB4RbFSfmW2mu
+	/vjm0/XKnXER7eHSruwavU+ciZ9neyrTKojr1D1+zYo14+FTLuPN1YPAuMKcPUeMCjx9fpd5fV9
+	jg8xMpqyZH+9CrlgpWG0CVr6wQQ5bxTKrGXjrw2PdUeiU4JBYse8HCXk97nBn5O+qTTiFeleCop
+	hqUgdy41ODtYa6SEPDubbf4DeDLmG9Co7/rO4YeKocYuU7Lu8ubIu5TomHtJE2CQNqIvYoedLEk
+	7Uq1obeJ4b7zl
+X-Received: by 2002:a05:6102:38cd:b0:7a7:198b:674b with SMTP id ada2fe7eead31-7be7457f41dmr297908137.32.1790772377943;
+        Wed, 30 Sep 2026 05:46:17 -0700 (PDT)
+X-Received: by 2002:a05:6102:38cd:b0:7a7:198b:674b with SMTP id ada2fe7eead31-7be7457f41dmr297889137.32.1790772377494;
+        Wed, 30 Sep 2026 05:46:17 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a01b1e7a46sm32549195e9.0.2026.09.30.05.46.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 05:46:16 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: Alexey Klimov <alexey.klimov@linaro.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v4 0/4] arm64: dts: arduino-imola: add support for sound
+Date: Wed, 30 Sep 2026 13:46:02 +0100
+Message-ID: <20260930124607.1109167-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260930-msm-dp-hdr10-v1-12-dbbf8b2b42bc@radxa.com>
-References: <20260930-msm-dp-hdr10-v1-0-dbbf8b2b42bc@radxa.com>
-In-Reply-To: <20260930-msm-dp-hdr10-v1-0-dbbf8b2b42bc@radxa.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- Xilin Wu <sophon@radxa.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9106; i=sophon@radxa.com;
- h=from:subject:message-id; bh=e4hz6d7zJa4YX8tzhNQaTqN1PBFr7mjK8xvaDaSt5y0=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFl7mZf/1X5fda5w6oa0Kx/PKkdXLGGNz3FYE1eR/NXf2
- eSLbbxpRykLgxgXg6yYIotCPMNc9srca0/FSvVg5rAygQxh4OIUgInszGBkWFJ/auXNd6YJfXJL
- ozI7PbMfpddWFcryuTfP7Vo5n/XcNkaGZymKJwocBeac2Rmatb7ip1iA5cWYF+cvHFt/RKlf6fV
- tFgA=
-X-Developer-Key: i=sophon@radxa.com; a=openpgp;
- fpr=205F009D07796DD6E516752E32C31567AD9E324E
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: MxZCU/CcMqmTrnzirSVABKB8y/6jEilsfmpOdOvc24qRTdP8iUbBE9Ew
-	j6FBncFjPDuNOWHD3j/dUqhefIy+zlMKveD/UkonSJHmz20xDlko05b+OMRVo9vB8QSEquw
-	GWvB/rXDVrB9MIX3LYTjCUNgS3Iws9/gZtJDkdIOregjjcyOBp7AyBSqswmwfKyv6Fw4oqV
-	GkLUz/94JYDzIksdsc3rv520I73iaOEnbyI2zyoIwIgmkN3GY5SeXy0AHCf/jDdoe6897t3
-	NTYYxsTGS19il6kYOJMOlTIV4t10RSgJC6M20FGRto5V5Omus/GzJPEoHnxGxBGYd8xeDOY
-	mMkViy6l0YA6HD53nbsZWa4viielcvnDJuEDuoeSHZdmePhrGp6oFRXjBoV79SzQ9KHNhvs
-	df5HP6X20MLw7Vg2aZ4O/UBRl7c9sklnRLQcpuuYuTbU/EnxgD6YKrzT8MgWmhDdKHp36VG
-	GTTFTuyXOffk+1/xyW47QLdP8i2CazoMNlb7Wtw+8xlCfz/RYBiPw0JkjLIAYQuQPUeJ4H+
-	Vp94chyYC08X4oFH3t9eXrRQu1bsvft8SntgkIs39g7M1d0apebnP/7NaGBG/+/EH/XhmcV
-	fgsdkCzA6A3xhIY35/rsiYLsqVvnve+VGrbsBvAVxP9n2FQMIwPE6j5b+ELT2hroHo7Bso/
-	neLOOTZ/dqd3eNC7Ll/v+YU9lyJ8ZABEjIDos7z1eFGc+BEJkpG0HJML+3M14ushFmPLKjz
-	IROCu1oecW3fC+PBxr56O96Hx9hKWU79SAJIt5SI8ZhuSf+wLGwtd+mzk/4PXR8AUTAibWT
-	f0yjW5dAMP2QtUAehdGgIOkZdYCDPxSD3xBmxpL947I+u1102O29Q+ydp2Z710fv8rAdDxq
-	vXhPEPr5XXB/WkEX0PQDcTKIKbKuZZdgB+PYANqmKokYlgIoPpn4hoS/WHJIyYqLW1cR28a
-	FnpqzKtMXHul6prN174nQvHBHktJpJQYAk5lJZ/W/6UGJ7Noa8BCwJL+y9p1htbfy6mTR59
-	r4fJCSqEmIhjKTpLWIlxmJ19IM3zA0vPs1Eml6TzEjrW5mLTr8ArgF6fzm5qVWVoj2mBBHf
-	g==
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=CKy/zhrD c=1 sm=1 tr=0 ts=6abd049b cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=qC_FGOx9AAAA:8 a=QeQcAra5hdC8VfecJqYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22 a=fsdK_YakeE02zTmptMdW:22
+X-Proofpoint-ORIG-GUID: O-Gt4Y5ta4nsaHmNApZ6TsIOp7UxY6R_
+X-Proofpoint-GUID: O-Gt4Y5ta4nsaHmNApZ6TsIOp7UxY6R_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfX3DrYJeu/KMNl
+ pv0KEdlyjn+cZaEKzeFFdwmnyUP9v1XIB1qPRVTrMaxlqXqKMZ8yhM0RJwG88xvHi636VRspO/1
+ AHTZLQ6Db4LxWLwifEcF+WZ2kjxsyudlGIkUUzTZIIwzePd4SodHQDqR3OCQUJSqp40HZh/aZdF
+ /kUlm6DYpyHNdb9nlUNF1iMpivviLPuiWhAJ3oyeRLUO/MTNiwcq08vXw6/dzN046TYVt0fK+ht
+ a44FtW/rWgEs1z2s/zMyqSWNg/ewRnYQBkR9VqbFBOnSnRg7nuOcwYDs6wA7k13syH5sx2h8dv6
+ R1yf6EMyaGnAN+ogVp6cyK1tGYxjnH50qnt6fDJxTM6GPhnh8KOej7rGXR8OaCFgSxeWkZD8q8N
+ 8YJ9lxZc9WFnWJ0rDjQRA4XdedLV6mFgAhQORH326NUiZhm/I8jKGYtXKAA1ORxoAy0VPmMmcto
+ YmHuB4kKE59DTICm4Ww==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfX/B54RMjWcHCH
+ lcpHjfRP3Zaa66SBLkHbnwieIgYFcwKMg6vuEbxHzULuDtepHN89NUJ8rlEPWDNHLHIN3psjHIq
+ b2uXO6cP6itXtgoFDYcFKTMmXJFSI+c=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
+ phishscore=0 spamscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300050
 
-The debugfs test control writes video_test directly, racing HPD handling
-and mode programming. Reading the test flag and its requested depth in
-separate calls also allows those values to change between the reads.
+This patchset adds support for audio on Arduino-Imola platform which is
+based on Agatti SoC. Some of Alexey's patches are reworked and sent
+here as per previous review comments, mainly on the dt-bindings part.
 
-Route test state access through the display and use plugged_lock for both
-HPD and debugfs updates. Hold the same lock while selecting the test depth
-and installing the mode. Pass the display instance to debugfs for access
-to its connector and the serialized test controls.
+Base SoC-level dtsi bits are picked up from
+https://git.codelinaro.org/alexey.klimov/linux_next_tracking/-/commits/rb1_audio_wip_v3?ref_type=HEADS
 
-Preserve the existing SDR test behavior. The shared setter provides the
-entry point for rejecting incompatible tests when HDR is added.
+Along with these changes, add sound nodes for Imola and a defconfig
+change.
 
-Assisted-by: LLM
-Signed-off-by: Xilin Wu <sophon@radxa.com>
----
- drivers/gpu/drm/msm/dp/dp_debug.c   | 27 ++++++++++++++-------------
- drivers/gpu/drm/msm/dp/dp_debug.h   |  8 +++++---
- drivers/gpu/drm/msm/dp/dp_display.c | 34 ++++++++++++++++++++++------------
- drivers/gpu/drm/msm/dp/dp_display.h |  2 +-
- 4 files changed, 42 insertions(+), 29 deletions(-)
+thanks,
+Srini
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_debug.c b/drivers/gpu/drm/msm/dp/dp_debug.c
-index 00fb1a7ba40e..c26b356f998a 100644
---- a/drivers/gpu/drm/msm/dp/dp_debug.c
-+++ b/drivers/gpu/drm/msm/dp/dp_debug.c
-@@ -21,7 +21,7 @@
- struct msm_dp_debug_private {
- 	struct msm_dp_link *link;
- 	struct msm_dp_panel *panel;
--	struct drm_connector *connector;
-+	struct msm_dp *dp;
- };
- 
- static int msm_dp_debug_show(struct seq_file *seq, void *p)
-@@ -89,7 +89,7 @@ DEFINE_SHOW_ATTRIBUTE(msm_dp_debug);
- static int msm_dp_test_data_show(struct seq_file *m, void *data)
- {
- 	const struct msm_dp_debug_private *debug = m->private;
--	const struct drm_connector *connector = debug->connector;
-+	const struct drm_connector *connector = debug->dp->connector;
- 	u32 bpc;
- 
- 	if (connector->status == connector_status_connected) {
-@@ -111,7 +111,7 @@ DEFINE_SHOW_ATTRIBUTE(msm_dp_test_data);
- static int msm_dp_test_type_show(struct seq_file *m, void *data)
- {
- 	const struct msm_dp_debug_private *debug = m->private;
--	const struct drm_connector *connector = debug->connector;
-+	const struct drm_connector *connector = debug->dp->connector;
- 
- 	if (connector->status == connector_status_connected)
- 		seq_printf(m, "%02x", DP_TEST_LINK_VIDEO_PATTERN);
-@@ -133,7 +133,7 @@ static ssize_t msm_dp_test_active_write(struct file *file,
- 	int val = 0;
- 
- 	debug = ((struct seq_file *)file->private_data)->private;
--	connector = debug->connector;
-+	connector = debug->dp->connector;
- 
- 	if (len == 0)
- 		return 0;
-@@ -154,10 +154,11 @@ static ssize_t msm_dp_test_active_write(struct file *file,
- 		/* To prevent erroneous activation of the compliance
- 		 * testing code, only accept an actual value of 1 here
- 		 */
--		if (val == 1)
--			debug->panel->video_test = true;
--		else
--			debug->panel->video_test = false;
-+		status = msm_dp_display_set_video_test(debug->dp, val == 1);
-+		if (status) {
-+			kfree(input_buffer);
-+			return status;
-+		}
- 	}
- 	kfree(input_buffer);
- 
-@@ -168,10 +169,10 @@ static ssize_t msm_dp_test_active_write(struct file *file,
- static int msm_dp_test_active_show(struct seq_file *m, void *data)
- {
- 	struct msm_dp_debug_private *debug = m->private;
--	struct drm_connector *connector = debug->connector;
-+	struct drm_connector *connector = debug->dp->connector;
- 
- 	if (connector->status == connector_status_connected) {
--		if (debug->panel->video_test)
-+		if (msm_dp_display_check_video_test(debug->dp))
- 			seq_puts(m, "1");
- 		else
- 			seq_puts(m, "0");
-@@ -200,12 +201,12 @@ static const struct file_operations test_active_fops = {
- 
- int msm_dp_debug_init(struct device *dev, struct msm_dp_panel *panel,
- 		  struct msm_dp_link *link,
--		  struct drm_connector *connector,
-+		  struct msm_dp *dp,
- 		  struct dentry *root, bool is_edp)
- {
- 	struct msm_dp_debug_private *debug;
- 
--	if (!dev || !panel || !link) {
-+	if (!dev || !panel || !link || !dp || !dp->connector) {
- 		DRM_ERROR("invalid input\n");
- 		return -EINVAL;
- 	}
-@@ -216,7 +217,7 @@ int msm_dp_debug_init(struct device *dev, struct msm_dp_panel *panel,
- 
- 	debug->link = link;
- 	debug->panel = panel;
--	debug->connector = connector;
-+	debug->dp = dp;
- 
- 	debugfs_create_file("dp_debug", 0444, root,
- 			debug, &msm_dp_debug_fops);
-diff --git a/drivers/gpu/drm/msm/dp/dp_debug.h b/drivers/gpu/drm/msm/dp/dp_debug.h
-index a90083fec856..430891e110fb 100644
---- a/drivers/gpu/drm/msm/dp/dp_debug.h
-+++ b/drivers/gpu/drm/msm/dp/dp_debug.h
-@@ -9,6 +9,8 @@
- #include "dp_panel.h"
- #include "dp_link.h"
- 
-+struct msm_dp;
-+
- #if defined(CONFIG_DEBUG_FS)
- 
- /**
-@@ -17,7 +19,7 @@
-  * @dev: device instance of the caller
-  * @panel: instance of panel module
-  * @link: instance of link module
-- * @connector: double pointer to display connector
-+ * @dp: display instance owning the connector and video test state
-  * @root: connector's debugfs root
-  * @is_edp: set for eDP connectors / panels
-  * return: pointer to allocated debug module data
-@@ -27,7 +29,7 @@
-  */
- int msm_dp_debug_init(struct device *dev, struct msm_dp_panel *panel,
- 		  struct msm_dp_link *link,
--		  struct drm_connector *connector,
-+		  struct msm_dp *dp,
- 		  struct dentry *root,
- 		  bool is_edp);
- 
-@@ -36,7 +38,7 @@ int msm_dp_debug_init(struct device *dev, struct msm_dp_panel *panel,
- static inline
- int msm_dp_debug_init(struct device *dev, struct msm_dp_panel *panel,
- 		  struct msm_dp_link *link,
--		  struct drm_connector *connector,
-+		  struct msm_dp *dp,
- 		  struct dentry *root,
- 		  bool is_edp)
- {
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index 65ac35e41ed8..ec65800f629a 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -426,10 +426,20 @@ static void msm_dp_display_host_deinit(struct msm_dp_display_private *dp)
- 	dp->core_initialized = false;
- }
- 
-+static int msm_dp_display_set_video_test_locked(struct msm_dp_display_private *dp,
-+						bool enable)
-+{
-+	lockdep_assert_held(&dp->plugged_lock);
-+
-+	dp->panel->video_test = enable;
-+	return 0;
-+}
-+
- static void msm_dp_display_handle_video_request(struct msm_dp_display_private *dp)
- {
- 	if (dp->link->sink_request & DP_TEST_LINK_VIDEO_PATTERN) {
--		dp->panel->video_test = true;
-+		if (msm_dp_display_set_video_test_locked(dp, true))
-+			dp->link->test_response = DP_TEST_NAK;
- 		msm_dp_link_send_test_response(dp->link);
- 	}
- }
-@@ -671,8 +681,10 @@ static int msm_dp_display_set_mode(struct msm_dp *msm_dp_display,
- 
- 	dp = container_of(msm_dp_display, struct msm_dp_display_private, msm_dp_display);
- 
--	if (msm_dp_display_check_video_test(msm_dp_display))
--		bpp = msm_dp_display_get_test_bpp(msm_dp_display);
-+	guard(mutex)(&dp->plugged_lock);
-+
-+	if (dp->panel->video_test)
-+		bpp = msm_dp_link_bit_depth_to_bpp(dp->link->test_video.test_bit_depth);
- 	else
- 		bpp = state->bpp;
- 
-@@ -940,22 +952,20 @@ bool msm_dp_display_check_video_test(struct msm_dp *dp)
- 
- 	msm_dp_display = container_of(dp, struct msm_dp_display_private, msm_dp_display);
- 
-+	guard(mutex)(&msm_dp_display->plugged_lock);
-+
- 	return msm_dp_display->panel->video_test;
- }
- 
--int msm_dp_display_get_test_bpp(struct msm_dp *dp)
-+int msm_dp_display_set_video_test(struct msm_dp *dp, bool enable)
- {
- 	struct msm_dp_display_private *msm_dp_display;
- 
--	if (!dp) {
--		DRM_ERROR("invalid params\n");
--		return 0;
--	}
--
- 	msm_dp_display = container_of(dp, struct msm_dp_display_private, msm_dp_display);
- 
--	return msm_dp_link_bit_depth_to_bpp(
--		msm_dp_display->link->test_video.test_bit_depth);
-+	guard(mutex)(&msm_dp_display->plugged_lock);
-+
-+	return msm_dp_display_set_video_test_locked(msm_dp_display, enable);
- }
- 
- void msm_dp_snapshot(struct msm_disp_state *disp_state, struct msm_dp *dp)
-@@ -1505,7 +1515,7 @@ void msm_dp_display_debugfs_init(struct msm_dp *msm_dp_display, struct dentry *r
- 	dp = container_of(msm_dp_display, struct msm_dp_display_private, msm_dp_display);
- 	dev = &dp->msm_dp_display.pdev->dev;
- 
--	rc = msm_dp_debug_init(dev, dp->panel, dp->link, dp->msm_dp_display.connector, root, is_edp);
-+	rc = msm_dp_debug_init(dev, dp->panel, dp->link, msm_dp_display, root, is_edp);
- 	if (rc)
- 		DRM_ERROR("failed to initialize debug, rc = %d\n", rc);
- }
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.h b/drivers/gpu/drm/msm/dp/dp_display.h
-index 6a77e5952530..ac64c1d3227a 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.h
-+++ b/drivers/gpu/drm/msm/dp/dp_display.h
-@@ -30,7 +30,7 @@ struct msm_dp {
- 
- int msm_dp_display_get_modes(struct msm_dp *msm_dp_display);
- bool msm_dp_display_check_video_test(struct msm_dp *msm_dp_display);
--int msm_dp_display_get_test_bpp(struct msm_dp *msm_dp_display);
-+int msm_dp_display_set_video_test(struct msm_dp *dp, bool enable);
- void msm_dp_display_signal_audio_start(struct msm_dp *msm_dp_display);
- void msm_dp_display_signal_audio_complete(struct msm_dp *msm_dp_display);
- void msm_dp_display_set_psr(struct msm_dp *dp, bool enter);
+Changes since v3:
+    - rebased on next-20260929.
+    - dropped "clk: qcom: fix SM6115 lpasscc register offset" — now
+      upstream (689364ac19e4).
+    - dt-bindings/mfd: rework the audio-codec pattern to use oneOf
+      with the pm4125-codec and pm8916-wcd-analog-codec $refs,
+    - dt-bindings/mfd: fix "pm4124" typo in subject; the compatible
+      is qcom,pm4125-codec.
+    - agatti.dtsi: fix lpasscc node unit-address to match reg
+      (@a7ec000 -> @a7e0000) after the driver register-offset fix.
+    - arduino-imola sound dts: mention "Ear Out" in commit log, per
+      Alexey.
+    - arduino-imola sound dts: carry Reviewed-by from Alexey.
 
+Changes since v2:
+    - dt-bindings/mfd: switch to properties.compatible.contains.enum
+      with required: compatible, per Rob.
+    - agatti.dtsi: collapse each <&q6afecc ...> clock cell onto a
+      single line, per Dmitry.
+    - keep qcom,sm6115-lpassaudiocc / qcom,sm6115-lpasscc compatibles;
+      Konrad Acked staying with the established practice.
+    - defconfig: carry Reviewed-by from Dmitry.
+    - rebase on next-20260917.
+
+Changes since v1:
+    - updated various register ranges as per documentation.
+    - added a fix for sm6115 lpasscc driver.
+    - updated commit log
+    - fixed various style issues in dt nodes.
+
+Alexey Klimov (1):
+  arm64: dts: qcom: agatti: add LPASS devices
+
+Srinivas Kandagatla (3):
+  dt-bindings: mfd: qcom,spmi-pmic: add compatibles for pm4125-codec
+  arm64: dts: arduino-imola: add support for sound
+  arm64: defconfig: Enable pm4125 audio codec driver
+
+ .../bindings/mfd/qcom,spmi-pmic.yaml          |   4 +-
+ arch/arm64/boot/dts/qcom/agatti.dtsi          | 157 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/pm4125.dtsi          |   7 +
+ .../boot/dts/qcom/qrb2210-arduino-imola.dts   | 134 +++++++++++++++
+ arch/arm64/configs/defconfig                  |   1 +
+ 5 files changed, 302 insertions(+), 1 deletion(-)
+
+
+base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
 -- 
-2.55.0
+2.53.0
 
