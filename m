@@ -1,151 +1,120 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mail.holtmann.org (mail.holtmann.org [81.169.141.235])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4397050E587
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:23:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3AE2503BC8;
+	Wed, 30 Sep 2026 14:33:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.169.141.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790778234; cv=none; b=tA/CoAr0mTO3bTrEB1xXdvipqlehL0UoGgjknduU/kVAmUL1gHLIJW5Kb+kdrV7UF3JCLgjRiWT7liMar2/CIwhquOBZg79BvbxyyAS5eec/HTRf+N6ju4BIbz2Rd02bCbFTUZtQQo7lnBumTnaobmtrLEuicg8oQYHLzBWvLjY=
+	t=1790778828; cv=none; b=i2/vWr8v0bVvA7AL3Q3d5ni/74bPK/0IUsKnI8N6Y9A03EX31JhPq96g+Vcm48CYfbVD7bC5lXrT3kGaa5YvN50ZbOUxqaq6p2lKghm+bUPM43Mtw9nODrHv7mXaAJxnPT8RjjMzwKZp0HzzOGCO1/P2lh9yZdb/7TjmFcLhTh8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790778234; c=relaxed/simple;
-	bh=ljNGBp4IFC5/vH2B1soisqS2RsIGB88Aj7oUyA6gHH0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DFUiry++6VitPzfaNJxjG/siDcpdXcPdeQwe3XDKPk2MLAXXmUfzuxUSycltVSb3YYhLWJ1uaWDP0kRoepYRqCBrJZ7wijewj50akpCsCHYtqmI6RJbZt2NkqRu5SYQMYNBs1OgtQuU/z02Bd84WuqsN3xz+JF26N3Sir9LsK+o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c7tTdA3m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ksQhpyC1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c7tTdA3m";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ksQhpyC1"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UDxpZo704409
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:23:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=It/I7bqJvS/GZFBfLizAbt75
-	7ur5ymNP07ts+oGXT5M=; b=c7tTdA3mD/CnWZ9IGSeWLodmuO3veRo1jHRv4RSk
-	sOllNiw3AkPJMayA+GVn6H2QbYnv4wxklLiu3HSxFe/EK4KbsmEh0ODO+w43h7Hy
-	kj8jRXgu4of2rqHzs8gy7d/JT61Oj0vkwO/9G2PDdY5vrIbSzZqpYqYatX27r7LS
-	qy7tlrOhYfnosxRtqK37axr21WoK0O/+y6rK8ykIvS5i4A6FSU3V90EausW9R96N
-	wB+XPmYcGHahP7ss1E7z9z4OB0Nx2S129ttNQ43j67atedhWVShVQBG9hZmpwHLW
-	WX8h/TkSk6DTF8wwLTirNgK+tSJug6JRmg2ce6r4p54dSw==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h136tg8nh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:23:33 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7b43c5f2b6fso544549137.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:23:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790778212; x=1791383012; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=It/I7bqJvS/GZFBfLizAbt757ur5ymNP07ts+oGXT5M=;
-        b=ksQhpyC1ZD2uW6u4FL8ws/28WG1n0DGOqrlrlD7yfI0XCQbwPI3FC17ybH1mgaOwXT
-         /EKjQbh5nbFuUEQ9FZR2RG9aHoHmAUSQomf7zdlaIUR5AsqzkafOpkHLehww1PHK5bEB
-         0eSW3MGzN/6gnBGrh1v8SIkETR0yQ/TyJ3kYQOkj5eNZkAVnwydZg5KDCQVl7VRGCx+O
-         1upRlpWvcr3l81hRJQK/uF0lOISWB2fdeueihahD8ZhTmIIMwrp+9zn+sErLR//p6TO8
-         itPKYqsKOVMP2Ar20BYpehwxNwy8fHwcfFUxMKSDltoytGQsK4URWCqIR9cXkkER0gWt
-         bSyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790778212; x=1791383012;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=It/I7bqJvS/GZFBfLizAbt757ur5ymNP07ts+oGXT5M=;
-        b=e4jijviAu3f2J5yNpvPowqvmn+gtFgMU+xDyMHAxWKQFnCAvO8vAW24RFGXYqzaL7H
-         76Ej7fosBeMtfVXPSFvPh5FY4ZAgG6NVquu5UUIfR2aK1rP9YxGKBrumWR+kj4Q2QL69
-         G5H/5gd3DiSIXI0anDdRIM1TduL7PmFX879eBf0nLeO63ogWD06tEXsNjKgnBjRG1Drx
-         vuWaYxCOvYvfHuK54FoglMSiH9JescloIt7d/eLgFmlnjzywoTgWbGCKuiEuRsIFKDQu
-         slWFduj05N711r3XOnTHo3XfkzK0VYSfYNL5pjbhAGjFeb/TEOdZynQJaPGg5IEoD4jg
-         +fJA==
-X-Forwarded-Encrypted: i=1; AKwUvBzZLQ0ywL/D+nJKlNqVtUlDwA1bXiwbkhf33WQZCglSvTJ1SjQc/At1TdsBb0+y/UVme6fK6IOmPuqMHe6S@vger.kernel.org
-X-Gm-Message-State: AFq9FYLPcSHHQ87z7qND1ePrAdPTWzaZdniUvWxXYhH3IVuYhfP8zZAz
-	Ysg12KD0dj50AUBJeB6Yh59Sw6l+Hg3RzVPJOh47okJggeouggAmouIIVUCh/si+LFUfJsTp21b
-	fkdR+oh9s9rLFc29Ufp2JkmMjHgcnwTSR7Sx6apdY/m21TsJ7rO1oBXJWiI6uLieDiAbq
-X-Gm-Gg: AYBFou0bJ6jnA242m3h6qJCDPyAgw9J2R2FxeOVm9iuj0fhwcRJwKh8jYPow2431Zgc
-	68EQnRB7OMKc7W3gkArxTycCw/bcJ7thTQth/AAm5yduTFPWghziTdts4rgPd3isT73W119wSHS
-	2knBh0L0QnlgaRU7NYxrJanUFgjGf+9WKWXWkc2VWalrZQ62G53Vdxwo9xYP7/na5ymEar7fFNu
-	AgQlvuILunNamyi1tatdmxyArp5gzJe8GNc4sdVsuzLEjWmmMkz46pLlizhz92Yp0i6mE0FCUjU
-	Q/c9qieVoOU+Ltt4vllWkeMg01bzegPyrcwUAtR47EFwY2Z9adioMm2WGtcKtsSAFcMJJPGQO2o
-	S78h864VUv3BOpIU=
-X-Received: by 2002:a05:6102:942:b0:7a8:1817:278e with SMTP id ada2fe7eead31-7be72cb250cmr274250137.20.1790778212415;
-        Wed, 30 Sep 2026 07:23:32 -0700 (PDT)
-X-Received: by 2002:a05:6102:942:b0:7a8:1817:278e with SMTP id ada2fe7eead31-7be72cb250cmr274233137.20.1790778211869;
-        Wed, 30 Sep 2026 07:23:31 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.193])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a01e657287sm3171965e9.7.2026.09.30.07.23.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 07:23:31 -0700 (PDT)
-Date: Wed, 30 Sep 2026 17:23:29 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Hans de Goede <hansg@kernel.org>,
-        Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Maya Matuszczyk <maccraft123mc@gmail.com>, linux-arm-msm@vger.kernel.org,
-        platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] platform/arm64: qcom-hamoa-ec: Disable the SCI IRQ
- during suspend
-Message-ID: <p4dagzkkmltv2e3uckgndnxmbp6tq4twt6vb6akd4dumyuhusp@kukxl673zmjp>
-References: <20260930-qcom-hamoa-ec-suspend-irq-v1-1-ad82713c8d11@oss.qualcomm.com>
+	s=arc-20240116; t=1790778828; c=relaxed/simple;
+	bh=1iIJSTnMOWRTOmbXm6u7wig5eFrazUxV6Fl/xrS/ZMY=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=nPyHLvzVNETq4ecvX3g5Pym3p7QG2LHy08EqgJV1jTT9/32zZl8sq5haU/Mox3AF4rwclfFl5ZxedBSlnarUH5CInXG6s5eR61LV0xqgvcT3QS0BvlXf+9Py4mzsdODM6ObX4x8+xcpBDNGbY5Q+na04g8PnfE1eM/CzEKPiEE4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org; spf=pass smtp.mailfrom=holtmann.org; arc=none smtp.client-ip=81.169.141.235
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=holtmann.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtmann.org
+Received: from smtpclient.apple (p5b0a9ac0.dip0.t-ipconnect.de [91.10.154.192])
+	by mail.holtmann.org (Postfix) with ESMTPSA id 85DF3FF100;
+	Wed, 30 Sep 2026 16:33:33 +0200 (CEST)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260930-qcom-hamoa-ec-suspend-irq-v1-1-ad82713c8d11@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1NyBTYWx0ZWRfXyT6r6XIG2Rmx
- VtMyPArI1nGe7CO3HdGWmo0vDjQdVlA1tJfcj7bqUyYVDLTRqs51dtolO0auVDxTDeGCGAzBL2a
- IzWb+q5IbTj1jX/vlaw0Fb2WlV4GOdw=
-X-Authority-Analysis: v=2.4 cv=aPFlOr9m c=1 sm=1 tr=0 ts=6abd1b65 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=EiYrS7xXfcF7w+nkr41hpQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=Ga34Rj3xoGKA-2XpnBgA:9 a=CjuIK1q_8ugA:10
- a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-ORIG-GUID: 4vmT6YVzp3hxEbrcoxRk4F24uPdFgc_x
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1NyBTYWx0ZWRfX7BLw/Ch/ZQpL
- zcwxXy2x57fCOLnEm82iCsf6JAFsnjY5+zav3OLhOtun5O/oN6lINGptGHYgXRkpAZXfzr9oPIn
- cou1yKKzGNZDtBVz4+RDR2PIXdGJRvXAnibUxaoLVvBhmsuiEanqe75zyCyguOMEWzY/wueWtvU
- IlVXcnN7L/EAd8+VwgxRS/h3M7yFJ5J3siN/V0hBqnmoTfoertSXx5eLr0geGFiUb9pb0DNImJj
- 3Ad3YZ4f0I9yxnkgfRDv4YI/T4hQkwKXxGnCUkshnzeiqMcNVVV7Oqub2nHzhWh/PX6wTvZUWPb
- ljxTDXvpLg0gMUFWV+WHs7CtXpm8eTo73KbchSRLjsFI1kCmhNOtfV8H7ueq6NyAtKNuixqnUwu
- 6JQfFa0pHO9f2Z4f3Wch9J8bqk9O8SGIlMocoH6m9C4LtyYX/uOPsWwwRUurhVPsMC49ZfTTiW2
- kXROx4YO+FAVnP81JMw==
-X-Proofpoint-GUID: 4vmT6YVzp3hxEbrcoxRk4F24uPdFgc_x
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300057
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3901.100.1.1.12\))
+Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
+From: Marcel Holtmann <marcel@holtmann.org>
+In-Reply-To: <6e0ed085-07d0-46f0-97dd-b8d942842e1f@app.fastmail.com>
+Date: Wed, 30 Sep 2026 16:33:22 +0200
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+ "David S . Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>,
+ Jeff Johnson <jjohnson@kernel.org>,
+ linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org,
+ ath12k@lists.infradead.org,
+ Bjorn Andersson <andersson@kernel.org>,
+ Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <0A4EB216-06E0-4A7D-A0FD-821DD371773B@holtmann.org>
+References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+ <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
+ <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
+ <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
+ <05e539f8-bb7c-4038-8a83-8ab0d1a5b917@app.fastmail.com>
+ <m657dtesuagn7vdajsuzjb4mfysf5xabsu3s6n6lujj7yb3z4p@m2e7e3n4zyev>
+ <10091679-7567-42C2-B77E-EFD95CEDD649@holtmann.org>
+ <6e0ed085-07d0-46f0-97dd-b8d942842e1f@app.fastmail.com>
+To: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+X-Mailer: Apple Mail (2.3901.100.1.1.12)
 
-On 26-09-30 17:18:36, Abel Vesa wrote:
-> EC SCI events require I2C transfers to retrieve the event information.
-> During system resume, an SCI interrupt can be delivered before the I2C
-> controller is ready to handle transfers, resulting in failed event reads:
-> 
->   geni_i2c a84000.i2c: error turning SE resources:-13
->   qcom-hamoa-ec 3-0076: Failed to read EC SCI Event: -13
-> 
-> Keep SCI interrupt handling disabled across system sleep so that EC
-> events are processed only while the I2C controller is available. This
-> prevents event reads from racing with the controller's suspend and
-> resume transitions.
-> 
-> Fixes: 5c44f48e91de ("platform: arm64: Add driver for EC found on Qualcomm reference devices")
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Hi Juha-Matti,
 
-Urgh, messed up the Subject line.
+>>>> I'm still willing to submit a new version of that patchset =
+originally by
+>>>> Denis, if the kernel devs so decide that it's the way. For example, =
+the
+>>>> "radix tree of radix trees" approach could be replaced with a hash
+>>>> table.
+>>>>=20
+>>>> There was also some criticism about a layering violation in storing =
+the
+>>>> endpoint id to mhi controller. However, maybe that could be reduced =
+by
+>>>> providing a correct abstraction around it, so that other code =
+doesn't
+>>>> touch the mhi controller structure directly.
+>>>>=20
+>>>> Other criticism for that patchset by Denis was its overt =
+complexity.
+>>>> Yes, it has more lines of code changed.
+>>>>=20
+>>>> This dual-card setup needs to be handled somehow, either by Denis's
+>>>> patchset or by Manivannan's patchset.
+>>>>=20
+>>>=20
+>>> I wish to go ahead with my series as it is simple and tested across =
+the
+>>> multi-WLAN setups. For concern around exposing the nid to userspace, =
+I'll
+>>> implement it in next version, thanks!
+>>=20
+>> actually no. Seems you have no plan on how to address the userspace =
+problem.
+>>=20
+>> It would be useful to actually review the endpoint_id concept =
+introduced by Denis since it has a userspace facing API. What is your =
+plan? Are you planning to break all existing userspace code?
+>=20
+> Well, in defense of Manivannan's patchset it currently works for =
+PCI+AHB
+> setups better than the last version of that by Denis/Mihai/me =
+(although=20
+> I could easily fix that), and it may be simpler for userspace to
+> continue using nid than having to bind to an endpoint, which requires
+> more changes in userspace code.
+>=20
+> The userspace just needs to know the nid.
 
-Will fix it in v2.
+and existing userspace? You can _NOT_ break existing userspace.
+
+Don=E2=80=99t you need to re-write all existing QRTRIPC packets to =
+actually even make this work?
+
+Regards
+
+Marcel
+
+
