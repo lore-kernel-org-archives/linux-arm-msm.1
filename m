@@ -1,162 +1,139 @@
-Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F31E34746CC
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:29:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.12
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790760553; cv=none; b=pPHWRIwNjSOoKO7ITc+vfDGT8iOF5/vpW1uKBrqqpepOx8A2bBPHbNIzyoP+cKREi6M845PDB4xXVKCePJgMPtaoPhQ0R1TZbsmBwmZhVr/FAVlcMfneq8QbeH2DwQXKYbyfFcKQi3fDdzKKmJd1zI/St5H8aAlVOIbGGrzzt6Q=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790760553; c=relaxed/simple;
-	bh=mknuXwZ95tcNOhem/WwO440N8fKuQ6mt+WRrlOPB8Xc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=aQIZM8zPr+Lc2ceSyhezWoSogde0vhVg0EcaHpOT755q3a6kxKeuAcX++5Wz9xmvWmFqRPmYy4YJMtMFaz5gfCiSCbO3YmSY7OjVyPABbkz8Poj/S/MU4hVpt9uDd3tItCsJgMAPd2Z9b1/ZtsXSyIGTamL2SdHG/4gaYBnK+Tc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Yjp39Ie8; arc=none smtp.client-ip=74.125.228.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86E83348C5D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:31:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.41
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790760699; cv=pass; b=lhugGPG+YBZOkA/5FbDLLW0cA0eNdx1YDjcSncDw3BLfDXHIjSbyYBu++VLYIvCpjrqXTr3ZHzwNsYiLLAdBdEB1gK900fdSfmGHS+uzpWxY01QDtgfv8w7EhT/yXOih29CUlxG1gtEGLxkLcsMq4eMtFFR7yomsUSpbjnEWabg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790760699; c=relaxed/simple;
+	bh=sSCgviBed8zHf2g3xfsl2lv3eFzl+hoXf/vZ34TkSWM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=RzJU0A+FsceY5HLMnBohsk2P/YluizZ1D4h2uSowl+Ozokk/w2IC0PJhPhGhSdXa7XEs8Qu6x8KVscUEZhejhZI3pwR1hCV8M2geh4G69ZYfn+tGBwS2toSxv5lsuRfTTeRGpISoIj2iNXmFx5nMQYm9DBhr9iHTBdLXLj5m52A=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=b2d8MHbI; arc=pass smtp.client-ip=74.125.228.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Yjp39Ie8"
-Received: by mail-pz2-f12.google.com with SMTP id d2e1a72fcca58-8620ffc9ec7so200770b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 02:29:11 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="b2d8MHbI"
+Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-85469e25400so2062327b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 02:31:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790760697; cv=none;
+        d=google.com; s=arc-20260327;
+        b=cgVB8zdlrZ/MEd0Sm34fgbEdkIlbAJdH/ezjKsMWUct/TUNu9ANwsd1x+bLvNpsM6S
+         lMEcnyXr+eOGHaq3/rqsxzRWDolkYyhjQyOHqvnNxChWEoUstbjtcNgEJ4qj+/6+9576
+         c4/ty97dwRtiEoFwWmrqeMKT8ULbfRVwrPkRYvUD04N2lRFVmVC0jFd+dJwqXbz1ZrZe
+         K28P/gM/fR4jcV+ZBCQTFCPHQoDBvOaApqfxRp1HFfto3EWpsW95fhh6Tox92HBIPaS9
+         Sr8roYeZt5BPwDoZzNDiKbuzCFq+mTAsTKvmy7vgKYZJ6CHP1SUwBPx07L/hOuqq0KnU
+         JSXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=gmqdU3mh7HkwuHdawcYTNlsooyWkbGnJjJwr+HnDbhM=;
+        fh=TMtHyKYzs0sgWPL545xN6RMQ2jVg65H17gs6NgrZ6jM=;
+        b=QTe0RISdUlF8UIabagDUMe8CL/NNb4nl2Qxd32FiGK+iwMdSn6GOJwEr8FpXOW7cZ1
+         JMMsq/eWSqkBcjGiAYzX4t14ahtND5wIrbzVV1RVX49kSaGGs/nq8VH7oqO5qVl9plBK
+         Vph/uKmlS2PbtLLsExkHiTD0ejYAkFk0JzWT+X/qkO6Eb2zZqraI26MDNRqHQkNVanoL
+         kO79fuZpbrfuxwzAlYPTDI2Nc0yCXXQKiFGF939pwYtxwjoYRFL73JVlLMibxojXT0st
+         EViU9tRTJZkzbs3yQix9PZFmNjK0dF6YPKgFi3LWPbnylufthjaCjyP+C6dvEDcfqQfE
+         hRxw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790760551; x=1791365351; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dCuOczbTp0o8M/OdE7sBIXiBo8j5afblsAbUmAPXWJ0=;
-        b=Yjp39Ie8iKUrFARXoyxkWhn0v7rlvOANVnCPkSCYTCpV3wwuQPnDc3lfCzjhgusk23
-         HHlmLKzWgP4sz09IK+Aa48Z7Tr6CXvjmYBTlHWbZjwcVod3PoRLus4xMwuHIMm0GrBS5
-         uaGLgmiMfI2Y/PVAiCaRvChuDQEuiU6cRd6Xm+X6Fgvf4eHgj27kL3Bj8Yaq5z4o3R2j
-         hkFMNGp05A+pwJXecWfgO69GdP7Ahm+E0SN9loPwn9uvkAAHEKGETjB4uswlj6s0p0Om
-         WdRpU3c5qFU9psPTG6YK79Vp/9cFUgvFUz2MsTvNS++1DPO8jPWHL/62gmKZyHdJmYVB
-         FcGA==
+        d=quora.org; s=google; t=1790760697; x=1791365497; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=gmqdU3mh7HkwuHdawcYTNlsooyWkbGnJjJwr+HnDbhM=;
+        b=b2d8MHbI/K2msxANIAUSGWXRSD3g+5IUfmA27J8SV/04s9iV0+KsuZX5Li5UiXboef
+         Wdff3WdMdsHQUQDCTaVv5ggfVJK8iCIjpiXJ+OYjGYWv11Psi2r9KQeBS7qIhvGCu6nx
+         jb64DZXN9rdOnehgUbQngI5VT46cKm1HcrgCY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790760551; x=1791365351;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dCuOczbTp0o8M/OdE7sBIXiBo8j5afblsAbUmAPXWJ0=;
-        b=Mu07i9wQ/ln0MNmqsgZLQ8C8CXZOAE5u9tqqo/kNYIctPiA1bLDAwMBBF2iDi/YgMt
-         PwpV6N6uqpMQ802hV02sCiv+srtLqck3rssDXJvIs5VOQ+DUqFE87vTyWlzcQKvZoLuc
-         B7l+3RLnyy9HtFr9MIf8eKsDjWhmL0xcZqOjXXEmz/g+ePbCg6lL2p/20k7KH+OQmjRy
-         a0qGY8Wh9LfVOq7Ag6XvUPsDf6DYl1ZIZNpXhSpHTwhpLdpWL+PXmgD4hX6sx+is6ZHD
-         zDYDS/YSc2UqXcgWp+TsKvUPcDvyeq7pX0Z3nFd8JB7aDigbyBJo+lshk14N/iUKdI2j
-         eBPQ==
-X-Gm-Message-State: AFuF++ncphKZOdmm+6GgRcLGt7jhK4ZfvycgK4xuTyCvIgRnFemwTUW8
-	W60frBxy8c//S7AITAT3j0fhQXlhYaeWVaITg/I9Y8jIxwWyrPGJjgsO
-X-Gm-Gg: AYBFou1mlmQc4GWfeWvqqM7WzZmwed3CNPqYsUVTtZYfODjx5/eEY7yDnNGs3xnLRK1
-	o+Jdi4AwqZqh2CIXAt0oulIrdNLSRmUR18clqMsG3jEYVaXrBenrRyqTiaE8m/xjuGCGoCOymuM
-	h5IXnmR8jhWn+ieE9r+arRo+UOyPQ8fJnH8uHh12KZAghFmvlLR6BBlas1QyYwqfBpm+sKLDF0R
-	LXzSacyZyq+aDoMuieEzct6XHLP5jrOVoSBhAuW+DCz6DkX5la4aLB2FzaKtXSxAxcN+dlmGmxC
-	lisOL4fpS2q6xL84oLMWEU6F5XOM8gp0hdECet5xGbOZh47GCVzptF39nQZp4kRrz0tPvoJHVUh
-	Sl8fr71lC5z0qFmY5i7xpa3uzeUgtQgciH3en/5PY38zubvk5u7+BqEEFvxVOX5y92JAoZIyY59
-	k1YfvvKHvJM8ew5hj0oe3men8j2zUsBv3YAAW9vFxoRIvTwvwqYW0PJ4x9J5N+mDvBYEwy6NFrz
-	5Gm0k4ewkT38K4=
-X-Received: by 2002:a05:6a00:4787:b0:882:b2a:4840 with SMTP id d2e1a72fcca58-88749bed3e0mr770897b3a.2.1790760551234;
-        Wed, 30 Sep 2026 02:29:11 -0700 (PDT)
-Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8872624c5b5sm493474b3a.43.2026.09.30.02.29.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 02:29:10 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: linux-clk@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	Bjorn Andersson <andersson@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Rajendra Nayak <quic_rjendra@quicinc.com>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Jianfeng Liu <liujianfeng1994@gmail.com>
-Subject: [PATCH] clk: qcom: dispcc-x1e80100: don't disable display PLLs in the unused-clock sweep
-Date: Wed, 30 Sep 2026 17:28:55 +0800
-Message-ID: <20260930092904.5222-1-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.47.3
+        d=1e100.net; s=20260707; t=1790760697; x=1791365497;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=gmqdU3mh7HkwuHdawcYTNlsooyWkbGnJjJwr+HnDbhM=;
+        b=KmjLSS4Dw/sTSEoiyeFls2kz0k5zDLUorccMFH53Pt3crkLaRq+GMj+oCp6EacMisE
+         5FrHYqNEWDUa2Hk84m+XV7v1dQRiryTKycz4j7kg9IM285S+o9uIF1tZOrfh4jxxHR/5
+         SJuBE0xY1yKjV2JTRtMpCZ2V7Y/Unf7DucyheYwSfKSe0/fu45kalNWoNRDXZDL/+TRn
+         vClt3ygRMARSfDY/6AahcocSjHzVbl+66Vnxia5B5OOPxs4MVm4c1yPwSg1jxLk48Az7
+         pyNc+aESJJNBRJaj5mZlkDpbeRjSfx7o5QgBYyF3lOGWtEwoei1R7JzGh8aXPohXSHin
+         0RWg==
+X-Forwarded-Encrypted: i=1; AKwUvBwdQ4yYe8bYP5Kp+kxQlyLfyvs2/tzv+mmfsIw8DTcv61HaWn5oFIjCS2YPww5f6sYoSW32TZCI/euVDAh9@vger.kernel.org
+X-Gm-Message-State: AFuF++naIgAgXR5JMO5PeQJSqzoWkrNxOiQsAQv6ljVnSWUnpIr0yOft
+	LYj2EWSZ+KhZ9b+5taKOr8ZaYW7YMJ12D1q2vLYnFesao+PGX+aN/DG9Wc4LsUSMVrLIj/YoNXq
+	N+7x/ILvSSAwgsjk0ypnTZHgZ/6+ZlsJfhGylbFOuOgZTrNyyWqbePM8=
+X-Gm-Gg: AYBFou0M319H7gq1phmFquZoDM6s5Rp9sJuUr3OZCEzLIUW+Ho0/tBHt89MJk4FE1q3
+	qslzWFPQb6ozXGxTy5XLYRfkxeVwGrFCJLKlob+bIzICxCm7CHfrchnkUaIPjLU6BmC1ry7v8e9
+	JAhP7ZP9mN2+NAkD3T9J0ubgjxk3Twja1X+vAi/PSEP+1QFCRXstX5cdtTKxzM5gD8mZzmd3mpy
+	96/3aBlGiLuPIOhvdkyCPFvd6zXfBHOOkSOfH+tvS4n1vpfWoSyG8uykbviFZGmAIUngaqJp753
+	kE7qGsx+b6miWJZi8Trv6OJyYMdxSpb4YMvkSxKyzS9NIWS10NOrSEj/riDSsCrCEUOAf1JVoNZ
+	dxX/xxD8Z/QdJmJKV8kVTVrQl5AeSzhG4Gl2hYR28O1POYcUg1POlM03W/V8PIvCTUYTp4Invcq
+	G4Hisrlw51C9h6UWr8dHVLz7xn2k0mxSZw/LPtjMoT8sIXdtc++G6zmipYwI9VSlIvolH/MX0Fk
+	uuW13C4DdXhu3moI4Tdl4NRYVWbG+geEcs=
+X-Received: by 2002:a05:6a00:1d93:b0:86a:c062:8af2 with SMTP id
+ d2e1a72fcca58-887475beb20mr572280b3a.3.1790760696692; Wed, 30 Sep 2026
+ 02:31:36 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260929041444.9837-1-daniel@quora.org> <1ca16602-fb66-4706-8e86-3b35372324b9@oss.qualcomm.com>
+In-Reply-To: <1ca16602-fb66-4706-8e86-3b35372324b9@oss.qualcomm.com>
+From: Daniel J Blueman <daniel@quora.org>
+Date: Wed, 30 Sep 2026 17:31:25 +0800
+X-Gm-Features: AclHuK8EAJhwPODS-uwXrHzCTd7v9hqYYiYnc0-_fOmkD3ZLxi8pO4B443j8vUk
+Message-ID: <CAMVG2svsfP+6cpRq=kBCZFva_r8jXSm+-pp+qC9D372S10z12g@mail.gmail.com>
+Subject: Re: [PATCH] i2c: qcom-geni: restore tSCL with 32MHz I2C fast-mode
+To: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, Andi Shyti <andi.shyti@kernel.org>, 
+	Manikanta Mylavarapu <quic_mmanikan@quicinc.com>, Bjorn Andersson <andersson@kernel.org>, 
+	linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-UEFI leaves disp_cc_pll0 locked and running for the handover
-framebuffer.  clk_disable_unused() runs before any
-display driver probes, finds it unused (no consumers, no
-CLK_IGNORE_UNUSED) and powers it down through
-alpha_pll_reset_lucid_evo_disable().  When the DPU driver later
-enables mdp_clk, alpha_pll_reset_lucid_evo_prepare() performs a
-full PLL reset and relock.
+On Wed, 30 Sept 2026 at 15:19, Mukesh Savaliya
+<mukesh.savaliya@oss.qualcomm.com> wrote:
+>
+> Thanks Daniel !
+>
+> On 9/29/2026 9:44 AM, Daniel J Blueman wrote:
+> > Commit cb97bf3d4f91 ("i2c: qcom-geni: Fix hardcoded clock index in
+> > SE_GENI_CLK_SEL") allowed GENI to use 32MHz clock. This changed I2C
+> > timing, making the Yoga Slim 7x keyboard (ITE 048D:8987) unusable
+> > on all boots, and touchpad unusable on some boots, resulting in:
+> >
+> >    i2c_hid_of 1-003a: unexpected HID descriptor bcdVersion (0x0000)
+> >    i2c_hid_of 1-002c: failed to fetch HID descriptor: -110
+> >
+> > With this change, t_high_cnt 3 and clk_div 4 gave a tSCL of 375ns
+> > versus the previous default of 521ns, however the I2C spec has a
+> > minimum tSCL of 600ns.
+> >
+> > Restore tSCL to the spec with t_high_cnt 5 giving a 625ns tSCL,
+> > verified on Lenovo Yoga Slim 7x X1E-80100.
+> >
+>
+> There might be a final count which i should get and update back.
+> Since this fix is working though not suggested per hardware guidance,
+> should we consider as temporary fix and move ahead to prevent failing
+> usecase ?
 
-On X1E80100 that relock can end up marginal, and whether it does is
-a per-boot analog lottery.  A marginal PLL degrades the DPU core
-timing just enough that the DisplayPort controller drops every
-other MTP (micro transfer packet) of the pixel stream fed by the
-DPU.  The result is static black vertical bands on the eDP panel:
-at 2560x1600, 24bpp, 4 lanes, one MTP is 4 * 64 symbols / 3 bytes
-per pixel = 85.33 pixels, so the screen splits into exactly 30
-bands of which every second one is black (20 bands at 16bpp).
-This reproduces on roughly half of all boots and persists for the
-whole boot.
+If you can get the final values into a patch for the next -rc instead
+of my fix here, that would be the minimal path for everyone. You or
+the hardware team can cross-check against the I2C standard as I did
+[1, p44].
 
-The corruption is invisible to every register or clock-state dump:
-the PLL locks either way, only the lock quality differs, and all
-programmed values (DPU, DP controller MSA/TU, PHY, dispcc) are
-byte-identical between good and bad boots.  The controller's
-internal BIST pattern stays clean on a corrupted boot, pinning the
-failure to the pixel ingest timing fed by the DPU.
+I would revert the original patch if there is hardware that uses the
+I2C 1MHz fast-mode, since the current timings aren't to spec, but also
+weren't before.
 
-Verified on an Acer Swift SFA14-11 (X1E78100):
-  - clk_ignore_unused on the cmdline:                7/7 boots clean
-  - keeping only disp_cc_pll0 from the sweep:       10/10 boots clean
-  - keeping any other clock from the sweep:        still corrupts
-  - with this patch:                                10/10 boots clean
+Thanks,
+  Dan
 
-Keep the firmware-provided PLL state by marking disp_cc_pll0
-CLK_IGNORE_UNUSED, the same way gcc drivers protect CPU hfplls
-(cf. gcc-msm8960).  Other drivers using
-clk_alpha_pll_reset_lucid_ole_ops for their display PLLs (sm8550,
-sm8650) may carry the same latent issue.
-
-Fixes: ee3f0739035f5 ("clk: qcom: Add dispcc clock driver for x1e80100")
-Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
-Assisted-by: LLM
-
----
-
- drivers/clk/qcom/dispcc-x1e80100.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/drivers/clk/qcom/dispcc-x1e80100.c b/drivers/clk/qcom/dispcc-x1e80100.c
-index aed06203a886a..5613f1fdb2e4a 100644
---- a/drivers/clk/qcom/dispcc-x1e80100.c
-+++ b/drivers/clk/qcom/dispcc-x1e80100.c
-@@ -94,6 +94,21 @@ static struct clk_alpha_pll disp_cc_pll0 = {
- 	.clkr = {
- 		.hw.init = &(const struct clk_init_data) {
- 			.name = "disp_cc_pll0",
-+			/*
-+			 * The boot firmware (UEFI) leaves disp_cc_pll0 locked
-+			 * and running for the handover framebuffer.
-+			 * clk_disable_unused() runs before any display driver
-+			 * probes, finds the PLL unused (no consumers, no
-+			 * CLK_IGNORE_UNUSED) and powers it down.  The DPU
-+			 * driver then has to relock it via the reset-prepare
-+			 * sequence.  On X1E80100 that relock can end up
-+			 * marginal (per-boot analog lottery), degrading the
-+			 * DPU core timing enough to corrupt eDP output at
-+			 * MTP granularity (every other micro transfer packet
-+			 * delivered blank, on ~50% of boots).  Keeping the
-+			 * firmware PLL state avoids the relock entirely.
-+			 */
-+			.flags = CLK_IGNORE_UNUSED,
- 			.parent_data = &(const struct clk_parent_data) {
- 				.index = DT_BI_TCXO,
- 			},
----
-base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
-branch: dispcc-x1e80100-keep-disp-plls
-
+-- [1] https://www.nxp.com/docs/en/user-guide/UM10204.pdf
 -- 
-2.47.3
-
+Daniel J Blueman
