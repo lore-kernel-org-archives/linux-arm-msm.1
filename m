@@ -1,265 +1,249 @@
-Received: from mail-yx2-f40.google.com (mail-yx2-f40.google.com [74.125.224.168])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB0C3519DE8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 16:10:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790784632; cv=pass; b=G2dUjlL/JX18UaEFyyLng5gxWuiGVNoxjCi8AhD3RQHTGNf64L+4CtsXps2JpDjyHjzURp/pzfExo4wxJG2J6fsUBOEtyXUjAhkzvz1RqHGQ0yfe8zYnwYwe9B5H84B2X9exHRuh0rbgadeYv6hZ0FEGNAygY9muBF1L7pnh2LQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790784632; c=relaxed/simple;
-	bh=qbmBOUyTIkFn97xlWxW8cCn16CXOpuvU6kguW+yai08=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=J1EJnsHbtqF+skTTqvGp3qkpqsXXBcAilon7iHnaP0aYq8cHP7HofFw7b2NDgffx3FpbvjaryqyPLhmHW2OPTpprTxcCjivTjKzjcxeNNCXe/JDwF47JcPgKiX4Qxpraqec1hm+PvMEYgy8t1ZK1ShnN/TA9CDL7ZTCOp/4hW98=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=VT2+JgWL; arc=pass smtp.client-ip=74.125.224.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5023951D51C
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 16:11:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790784718; cv=none; b=ERc5ArFIwSZyg63KEA9GI6kKicOssMzNdO24Z1zfDoIxvg9N1T3yU6nPGorAGvx2IGOxBRr//FPX48gE6Lv/hIoo5flXchlp313mB4tVNzVVEHTFc510P9dP0YLN4EJU44ZKxzseTtxadfIKFk5ouj336es6bHprtSU54dUXDSk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790784718; c=relaxed/simple;
+	bh=MMzkoIa5W4W7WaLxk/iae6bHnZBmmK28HNb+6svHQBw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=c6MzZQL/8f1/eupb0TWaLnYXxzxYW4SNllpZ7/z16iVTMBMNvbcXzD0TiOB9ibr9G3EjHDp1ehHHnT4BXWOufUgOy7ahfZlWrHJwg4Jb7CPBb8PKeeTXPInRKD38EEXzkqbAzXE8468Hkb4uYwmkB/AOLvym7ylabUUGyzhTH90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jpmokK9M; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=B93LJjl4; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="VT2+JgWL"
-Received: by mail-yx2-f40.google.com with SMTP id 00721157ae682-8ab42612328so23317417b3.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:10:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790784626; cv=none;
-        d=google.com; s=arc-20260327;
-        b=fwr4EzgQvkRRNBCK/PF9EJ3TRx0kO2c0Gt20YWjdIMuFayoazeLGm1EbHleqpWmoVw
-         TB4aXkYJRdFQzqdbWOtKEBp83RcR0SKRfPg7g4D+Zqsr9qFKtCxihi0bdxO7irZZtjIy
-         onU5xNrA/+b9JQZrfHH9AIlPGTYK8YdtntXCeSNRBKgYgNPUtiU7+S8AnsfKwJF28li3
-         H4cUactN9wJcy1h9V1s3n6mUv/+74jp7Gc6oSAjgo0DZK7VXK/qMeESXltKm/qDiLtou
-         iwUcM522SbQh1CRqZTZrG6ujUZ1SAOdb4ES3lRjmM1YzpOP1iaGawpjHIz3iygvhnlOt
-         SWrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=iRehZjrfjWyoiGL/7MRfV3/j/MJLZDIiqHOFJW1M59A=;
-        fh=m6xEDvG64bs+T/3mEWGBhkA9TJUWG+7e2pbb1f/Yz3g=;
-        b=KlwhRjlZqHyDnPLCK3ECo6JEN54fLU5bZTu0ujqX450tnEHGNuVde26VRq1OXGBDN/
-         4Q/m4UNLnil824OK/MOrC7tyFcGbHaPRNg+Ew7ZRVjmEmqnCysZW69a6gfkT1Gh21OJ6
-         aQJtfbK+CIBejeb9UIOA+x2USM0L4nxciYdilV/d2GhXpw6dlC9QIQ5KqA2DokeTYy2B
-         r1YViFLDeAV5WsLDI52Y6ndxNJtSICc74RpCh5SHGjTCNBtvU2nXZREls5p6WeCfIb+G
-         wrtDsc7Rdv6nu9Z8fM7D/lA8p0Du8BZ/fB2YXvHNMA/Itpg0CYR+s9YXjwQMXiHw2kx7
-         VROw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jpmokK9M";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="B93LJjl4"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UFXPlJ195126
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 16:11:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=CE5fzGfnss3B8b8Hj0+v+nIZ
+	el8CUQA7gROgRFIbLNA=; b=jpmokK9M6UYnEBW+0hyeywfzDVRkd1A9uF73yj87
+	QBytSWW/5Hd3L9R8ZoNKImoC7umHy6JYiRdOk0hDfQ0+BD4KpuYQ7CH0O04yFhpS
+	UqvQHnEFpqwct+GJxZy7YiEow+cOS+IMu9jzlCDUad0lCNXazMNbknFIQo0WfpuG
+	8FHe0yXOpM+aDdNl2iYDIQkGU4f6HfyTPvh+AZSH/qnnLiPlFVBbl3G3XIweZB20
+	eSr+7SbRWP4mFvKWWcpJjL6WauKZ6KBYNP6p6WviS59ZB1IRvdpkaWB2EriL285p
+	WwQdF/bSDXBVRdn7do9O8aH8rjVNnRdlDXGQscONvIdF/A==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h155vr55m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 16:11:51 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-7bca0b14d03so269671137.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:11:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790784626; x=1791389426; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1790784711; x=1791389511; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=iRehZjrfjWyoiGL/7MRfV3/j/MJLZDIiqHOFJW1M59A=;
-        b=VT2+JgWLgimcuMJsTbAcqj0ioTRNLareIGmaozCqNVC/jj+Sm8DfX2W/RuBeE22Ki8
-         TpsiXYdbPC8i3C8muD0LMynycVRlY8NElDv8GidVCJM4tWeqoU5QEMP/nNbyzb8iK4SS
-         c0FJnZjUMjPcuX+FenQIiZhGmEZXy066wd20ml4jLzqe+kkBVUbZeniAl9FArxGO81j/
-         Uz2aedKkz9NFm/dXamRQ61+M5a2MY43CeexQIDONT5br9STXSicPMSOMBUyhXE2KzgzT
-         2Llyi2PWaJKL3c+oCseUh8VCscSD238SM/eAMxtWS9oLqZ8iikAK3q6KkEMSi6nqdXoP
-         QfbA==
+        bh=CE5fzGfnss3B8b8Hj0+v+nIZel8CUQA7gROgRFIbLNA=;
+        b=B93LJjl4cPWZeYMBzhHhgxiKpXs7yXD0ny3YyKWphV74amsZAc0O/d17+abmSckKyi
+         sfFK3i51DlZufXA2LhEKPNyYMn4OE4m6fHl0XFMXfi3AaU2NQGhQmaYJMsYshf3FkKbJ
+         AqW3NrtlTRt60oXw22NlN3+ax/7tOEneTboKI1Lg+aPYpDJzsC6g0FzE9jXHVIuD85eL
+         vEJusJIcDEtSEaQAXEet1Hivk2XW6SxIXDq9AVoIfQ0KKGZ/mpKUlvbT7D1+i/HadKQj
+         iCCbyiIp+jV11ru/cT+g9Y4bw18y+igbi3P+Z+aa2J9E+v2aAfhGmROsCDold4Vfk2lh
+         Pqjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790784626; x=1791389426;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20260707; t=1790784711; x=1791389511;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=iRehZjrfjWyoiGL/7MRfV3/j/MJLZDIiqHOFJW1M59A=;
-        b=uHN14ISrDnVLeQDhnYldVfOuB98Jfk4vY/A9ue0siVrLVfzv0afysimRmWOxQjMRvr
-         h4s+0ByQa6Fxmj4GOf7etVEYvvKZk45FmHxP1ZRJD0hvhBTDhNbXG8M36qc7Q/EdPXPU
-         Ueq5Oy+GV/f0JAyhjhcNmbBAAaYDZCBN7GfU1ca6wnlvlu5nPsN3Z+m8pH4PQ/Y0lETW
-         w+GgazfeoYEXs5vdP+cO5mM4xU/b6rOrOl3HxPgzAHP3ypEQI+NK4Y1j29logcf2vtMu
-         WaGQ7ofYOBdX7/SIAHfBkfLg3Nr/MVZHWPbtJS7XxnT02Xcn2gbiIs+PGUErRhAvNAbl
-         eUbA==
-X-Forwarded-Encrypted: i=1; AKwUvBxac6f+HHyPoLSML0AQrhpyfjTPyShOHwD3Pk5mUiCfnR/U180/x45f2aCrl4Q8Q08MTswaKS7q7PsG29en@vger.kernel.org
-X-Gm-Message-State: AFq9FYKamzq6Ihh1D724sB7CuQt0F8SewV0iwX301FugN7JcL2qjKkAA
-	vdmCcbGLsr9mRx+n+t1vqQQQ8eDQX2Iw7M3eGtMb8eJKhMSwJwnfWXVpExQbklaMEGbo3leKlUo
-	p9hmGuVRBAESdt29blpDEsSlCgDQw/QDlHr7NJoZgRA==
-X-Gm-Gg: AYBFou0aIS0ZP6r/GXPkI3HC9cGHqTtwB6SrPRSw+3RyTu2b4rSS5g0+VQdm1cfq5WZ
-	3DzqzAl2BImF+Z2v5UuRpI39dBJms5KyNs6HUZ3zutazTdiNeKtdJD1ivJUS4Ug3F7ILqMtb2+e
-	Sb43uWCWOjfB8Lit+Uj/qJj9F1qMcx1nWyhEziRfpPAughctgFSLl6w7xgzSE6YJhV7YzRQCQ8i
-	LGgXLFGcS1d+N8XOf7PwIudtZcmn/hSotfoBgKAXDRn4+JYUo6Z1t/aBHHT/8S2sVaXmYDR0lO7
-	p/TNUfnOMNOVqcO8AJ/7paqFrWwERnpRS8BkZeYAen0mPzcuIJxtAZfeH6BXNDyL
-X-Received: by 2002:a05:690c:89:b0:8a9:e801:231c with SMTP id
- 00721157ae682-8ac9331841amr6405827b3.20.1790784625575; Wed, 30 Sep 2026
- 09:10:25 -0700 (PDT)
+        bh=CE5fzGfnss3B8b8Hj0+v+nIZel8CUQA7gROgRFIbLNA=;
+        b=vq2ng2DYyzE2wq2zGlOIbD+Fxs1ehvSn4+/K+OOkPKPJ/6t+QJDr8SJgrCTw008qRU
+         u+/0kq8ic+12erJ+TatrLDWz7ZsEKL5z/9BSk0G/pT4UbCZ4P4shMqRe+a8sbOLW0xk+
+         H4aHftCHOSgD0263Xt+MlE8MD0UMS/YMRn1lVkxCC0sVIQj9Mfang9xCcnzlaD0UIIDM
+         CTGHH6h/dMa5PMBG1snCdRGRVzKygHQe649FwiQOwBJoo7NfFCQkWO/jqseDTGVsHFVX
+         s6S6Zp5HuiEZT7jEULc5Stf29Us/5PMgGjCuwj/oJBhGn7/KsfEPybKcjhQh3uIViGRQ
+         zWoA==
+X-Forwarded-Encrypted: i=1; AKwUvBzBYOFoUV6jlsUOubBusFUbWpCqNyf5Y1uDeSqt4TMBHJYIr5bHHOk1BQKlgs+ooORX3mqN6bagH+zTk6CB@vger.kernel.org
+X-Gm-Message-State: AFq9FYLoI+IL4LV6hldsEPnXothcdctJo6wKe34LLBoeyRyUTrXEwIkQ
+	v/haBFW6tb1SnY+DAV8o0+3HkWb1cTlagw5a0Ye1rjNXKf58Q12hNuZl1tptGOPmd3mt/l5Logq
+	rmJfUBumz1Zu1pJnUMyAfKBhf/UWudCY3Tkkn2AJcJQX0+GdZIYP1QMU/31ZTV2oNY8OB
+X-Gm-Gg: AYBFou1IvKtyoAL+40T6K33eiHYrlhrNLnAzFgTprt/ev/hb7uNSwMtinE7oyRmeCea
+	RKB8ZzBsTWs8qUtE5sYz+GQhHm4noVgca+SpA6ThGDSCFDIAkJ37B6vzGoTeu91mbp6C69fZVbL
+	srTO5gpshf/3plk5khYszCTCq+j/OlnCVyeMpwMI3Y8W8GBuJeDCmyPTTEhBF6Kxp1m15vB136s
+	dvGVnnTV8EtXG7h1Zs7Sc7a3Q6/1VyvZIh7X8zMHaLD1AGUSbzRoRzBPgWnMlbuXdGTTKR44eKh
+	QEtbyqggpkeWVWdAHeIJcRIv/o2LknxtHyZy42BKKu2ZzAmAE+vsw1k9Ek0jHfc0hFueRAh6KSt
+	1WC56wT3MqW9gg8vELVRJD1+3QK9ZozmmEc1jsEyql6MIN3bq06vIhUKLSvacBvXuhAolPLLfdM
+	MV+J+KNsFlbC62
+X-Received: by 2002:a05:6102:50a9:b0:7a5:7282:1994 with SMTP id ada2fe7eead31-7be72ca9a6bmr436068137.7.1790784710658;
+        Wed, 30 Sep 2026 09:11:50 -0700 (PDT)
+X-Received: by 2002:a05:6102:50a9:b0:7a5:7282:1994 with SMTP id ada2fe7eead31-7be72ca9a6bmr436052137.7.1790784710056;
+        Wed, 30 Sep 2026 09:11:50 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5ba42fc4e9asm84041e87.79.2026.09.30.09.11.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 09:11:48 -0700 (PDT)
+Date: Wed, 30 Sep 2026 19:11:47 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Xilin Wu <sophon@radxa.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
+Subject: Re: [PATCH 06/13] drm/msm/dp: Report stream enable failures through
+ link status
+Message-ID: <mhmfvshq3dy6pwyvtuplakqqiu3ybg44xd4aazuhex7fl7b4uk@33fky22t27r5>
+References: <20260930-msm-dp-hdr10-v1-0-dbbf8b2b42bc@radxa.com>
+ <20260930-msm-dp-hdr10-v1-6-dbbf8b2b42bc@radxa.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-4-c042266b9eeb@linaro.org> <jwlmzhhgpvbi47lt4biwn4razrvbf2rfi5uyyvfhjomzo7uqyh@ahf4ubqvegst>
-In-Reply-To: <jwlmzhhgpvbi47lt4biwn4razrvbf2rfi5uyyvfhjomzo7uqyh@ahf4ubqvegst>
-From: Jun Nie <jun.nie@linaro.org>
-Date: Thu, 1 Oct 2026 00:10:13 +0800
-X-Gm-Features: AclHuK-jey2UN0A8sWN4rkcybsqPqgekH6oh4yBkzdH-hTkcWanw8jO2ZFUX2MU
-Message-ID: <CABymUCP7DMOqN9j2ZWEtDxWpZSbNWbrYzdJ57crsR03hys67mg@mail.gmail.com>
-Subject: Re: [PATCH v5 4/6] drm/msm/dsi: Support dual panel use case with
- single CRTC
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260930-msm-dp-hdr10-v1-6-dbbf8b2b42bc@radxa.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA2NCBTYWx0ZWRfX30dWO26lHrXM
+ s4/+Qb0f7fC1ep04BS8mIs4hkTGAOgQxvhrlQAFnVHLfIfG5ObQoNSsxkuO7xJ2foUVIW/C80dB
+ nipRPYNa3sRGwFLHkXU77YxnOYvPPZY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA2NCBTYWx0ZWRfX3s+JKdcOEl5v
+ 09CPPMu62O141Tz6JI8UI6bXzA09thobZeJIuFGvleg6TM/ah5zK9dx71TSGBeevytVQolQTK5X
+ 2k2Ix4Kc54gbAvrnR+D/YNBmltZ45vdbWXvCi6Y8II9+kLBUYrTvfLKOSBrUMoJvRzfaCUYRfRm
+ XmrSqg72L7z7iPCq2WxytDB0LYsQdyaPIBGRwD+KWBj2Mi0VPM95Is1S6pmd4VVaJg4hQBqY4Ps
+ c//+wdiiKuJidijuoZwhcuAb3w4t66GJHQxrJ/aq/EgchpgpF/FCgcK8RTQ9Lrh+6Bho078cRiz
+ eodbspsSqgOSdggW+S4Fri9ryQnx0y+Tojl/o9NHzkqdbm6Vjcr9W5NQMMR30ReFtV8UMd+jusi
+ tM8Acdkm/6TXny02R3xi0NUQjH4trsfnFtcbjWqPtiBx+QcXs43Dbmu1gSaitx00dy/QD0mQvED
+ 3hZXsolaE0X2vc0C55A==
+X-Proofpoint-ORIG-GUID: gP5x_OzgQ9h-gDr_IIcHCoCeYcdwP6hP
+X-Proofpoint-GUID: gP5x_OzgQ9h-gDr_IIcHCoCeYcdwP6hP
+X-Authority-Analysis: v=2.4 cv=ZYOIpcVA c=1 sm=1 tr=0 ts=6abd34c7 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=ksxQWNrZAAAA:8
+ a=7z2oCe98pf8tU8XqQ0sA:9 a=CjuIK1q_8ugA:10 a=gYDTvv6II1OnSo0itH1n:22
+ a=l7WU34MJF0Z5EO9KEJC3:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-30_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 suspectscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300064
 
-Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> =E4=BA=8E2026=E5=B9=B4=
-9=E6=9C=8830=E6=97=A5=E5=91=A8=E4=B8=89 00:20=E5=86=99=E9=81=93=EF=BC=9A
->
-> On Mon, Jul 27, 2026 at 04:08:43PM +0800, Jun Nie wrote:
-> > Support a hardware configuration where two independent DSI panels are
-> > driven by a single, synchronous CRTC. This configuration uses a bonded
-> > DSI link to provide a unified vblank for both displays.
-> >
-> > This allows application software to treat the two displays as a single,
-> > wide framebuffer with a synchronized refresh cycle, simplifying renderi=
-ng
-> > logic for side-by-side panel arrangements.
-> >
-> > At the DSI host level, the frame width for each link must be that of an
-> > individual panel. The driver therefore halves the CRTC's horizontal
-> > resolution before configuring the DSI host and any DSC encoders, ensuri=
-ng
-> > each panel receives the correct half of the framebuffer.
->
-> I guess, the flag from the previous patch should be coming from the DT
-> node of the DSI host. The DSI should then get the mode from a single
-> panel and then set the adjusted_mode for the CRTC (note sure how this
-> will work for the compositors though).
+On Wed, Sep 30, 2026 at 08:41:50PM +0800, Xilin Wu wrote:
+> Atomic bridge enable callbacks cannot return an error to userspace.
+> After a failed enable, leaving link-status unchanged gives userspace
+> no indication that it needs to retry the configuration.
+> 
+> Mark the connector link status bad from a work item after unwinding
+> the failed enable. Send one connector hotplug notification per failure
+> episode: fbdev can synchronously retry the modeset from the
+> notification, so notifying on every failure would create an unbounded
+> retry loop. Subsequent failures still restore BAD after a retry has
+> set the property to GOOD.
+> 
+> Allow notifications again after a successful enable or an external
+> sink connection change. Do not reset the notification latch during
+> eDP's internal plug and unplug handling, which runs on every retry.
+> Ignore queued work superseded by recovery or an external unplug.
+> Serialize the failure state with plugged_lock and update link-status
+> under the connection mutex before notifying clients with both locks
+> released.
+> 
+> Initialize the work at probe and cancel it before unbinding the
+> display.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Xilin Wu <sophon@radxa.com>
+> ---
+>  drivers/gpu/drm/msm/dp/dp_display.c | 63 +++++++++++++++++++++++++++++++++++--
+>  1 file changed, 61 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+> index ae967ca652c9..1bfa6696d904 100644
+> --- a/drivers/gpu/drm/msm/dp/dp_display.c
+> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
+> @@ -12,9 +12,12 @@
+>  #include <linux/phy/phy.h>
+>  #include <linux/delay.h>
+>  #include <linux/string_choices.h>
+> +#include <linux/workqueue.h>
+>  #include <drm/display/drm_dp_aux_bus.h>
+>  #include <drm/display/drm_hdmi_audio_helper.h>
+>  #include <drm/drm_edid.h>
+> +#include <drm/drm_modeset_lock.h>
+> +#include <drm/drm_probe_helper.h>
+>  
+>  #include "msm_drv.h"
+>  #include "msm_kms.h"
+> @@ -54,9 +57,13 @@ struct msm_dp_display_private {
+>  	bool audio_supported;
+>  	bool stream_pm_active;
+>  	bool stream_link_attempted;
+> +	struct work_struct link_status_work;
+>  
+>  	struct mutex plugged_lock;
+>  	bool plugged;
+> +	/* Protected by plugged_lock, including accesses from link_status_work. */
+> +	bool link_failed;
+> +	bool link_status_notified;
 
-The original information comes from the panel. Panel driver exposes
-the flag to dsi host. Because the panel driver hides all dual physical
-panels stuff and exposes a single panel to DRM framework, so it exposes
-the doubled mode to DRM framework level too. This simplifies the
-handling of 2 physical panels in DRM level and compositors level.
->
->
-> Also please note that the are other possible configurations. For
-> example, for some time I've had a setup using two Raspberry panels
-> attached to two DSI hosts for exactly the same purpose (please check, I
-> think Neil might still have it, or maybe somebody else from the team).
-> Each channel is an I2C-controlled DSI-to-DPI bridge + a DPI panel. I
-> understand that it's not your target, but it's something to keep in
-> mind. I'd say, the bare minimum would be to resolve a second bridge (be
-> it a full bridge or a panel bridge), possibly create a second bridge
-> chain (remember, bridges don't support branching, so you are a bit on
-> your own here) and at least manually call the callbacks. This would
-> ensure that the second panel (or a second bridge) is properly controlled
-> (and thus would get rid of the second reset GPIO from your patches).
+Do we need it? I think, it's easier to send several notifications.
 
-I asked Neil but he has no idea on this. Per your description, you have 2
-DRM connectors/bridges for 2 physical panels. I guess you have topology:
-1 CRTC + 2*(encoder / connector / bridge). The handling of 2 physical
-panels falls into DRM level, not inside panel driver as this patch set.
-This 2 methodology does not conflict in theory. Do you see and conflict in
-implementation?
->
-> > The pic_width is used to calculated DSC parameter for DPU DSC controlle=
-r
-> >  together with panel's parameter. While panel driver that support dual
-> > panel shall provide slice_width parameter of single panel. This patch
-> > only impact DSC configuration, so crtc is not aware of it and not impac=
-ted
-> > by it.
-> >
-> > While the DSI panel driver should manage two panels togehter.
-> > 1. During probe, the driver finds the sibling dsi host via device tree
-> > phandle and register the 2nd panel to get another mipi_dsi_device.
-> > 2. Set dual_panel flag on both mipi_dsi_device.
-> > 3. Prepare DSC data per requirement from single panel.
-> > 4. All DSI commands should be send on every DSI link.
->
-> broadcasting of DSI commands is controlled by the DT flag.
+>  
+>  	struct drm_device *drm_dev;
+>  
+> @@ -204,6 +211,39 @@ void msm_dp_display_signal_audio_complete(struct msm_dp *msm_dp_display)
+>  	complete_all(&dp->audio_comp);
+>  }
+>  
+> +static void msm_dp_display_reset_link_status(struct msm_dp_display_private *dp)
+> +{
+> +	lockdep_assert_held(&dp->plugged_lock);
+> +
+> +	dp->link_failed = false;
+> +	dp->link_status_notified = false;
+> +}
+> +
+> +static void msm_dp_display_link_status_work(struct work_struct *work)
+> +{
+> +	struct msm_dp_display_private *dp = container_of(work,
+> +			struct msm_dp_display_private, link_status_work);
+> +	struct drm_connector *connector = dp->msm_dp_display.connector;
+> +	struct drm_device *dev = connector->dev;
+> +	bool notify = false;
+> +
+> +	/* Match atomic check's connection_mutex -> plugged_lock ordering. */
+> +	drm_modeset_lock(&dev->mode_config.connection_mutex, NULL);
+> +	scoped_guard(mutex, &dp->plugged_lock) {
 
-Do you mean the property, qcom,sync-dual-dsi? It is QCOM specific
-feature to send DSI commands twice in host driver. It can be done
-in panel side as well. The bonus to do in panel side is that the
-panel driver is more generic and can work with other SoC in theory.
-And the DSI commands can be handled together with regulators
-etc for 2 physical panels in a centric way. The panel driver is
-more self-contained, minimizing dependency on the dsi host.
+Please use drm_connector_set_link_status_property() here. See
+intel_connector_modeset_retry_work_fn(). I think, there is a TODO in the
+driver code, you can drop it too with this patch.
 
->
-> > 5. Handle power supply for 2 panels in one shot, the same is true to
-> >    brightness.
-> > 6. From the CRTC's perspective, the two panels appear as one wide displ=
-ay.
-> >    The driver exposes a DRM mode where the horizontal timings (hdisplay=
-,
-> >    hsync_start, etc.) are doubled, while the vertical timings remain th=
-ose
-> >    of a single panel. Because 2 panels are expected to be mounted in
-> >    left/right position.
-> >
-> > To maintain synchronization, both DSI links are configured to share a
-> > single clock source, with the DSI1 controller using the clock provided
-> > to DSI0 as below.
-> >
-> > &mdss_dsi1 {
-> >    assigned-clocks =3D <&dispcc DISP_CC_MDSS_BYTE1_CLK_SRC>,
-> >                    <&dispcc DISP_CC_MDSS_PCLK1_CLK_SRC>;
-> >    assigned-clock-parents =3D <&mdss_dsi0_phy 0>, <&mdss_dsi0_phy 1>;
-> > }
-> >
-> > Signed-off-by: Jun Nie <jun.nie@linaro.org>
-> > ---
-> >  drivers/gpu/drm/msm/dsi/dsi_host.c | 10 +++++++++-
-> >  1 file changed, 9 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/d=
-si/dsi_host.c
-> > index e39938fb0f502..a3c56c3dc7904 100644
-> > --- a/drivers/gpu/drm/msm/dsi/dsi_host.c
-> > +++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
-> > @@ -186,6 +186,7 @@ struct msm_dsi_host {
-> >       bool registered;
-> >       bool power_on;
-> >       bool enabled;
-> > +     bool is_dual_panel;
-> >       int irq;
-> >  };
-> >
-> > @@ -1024,7 +1025,10 @@ static void dsi_timing_setup(struct msm_dsi_host=
- *msm_host, bool is_bonded_dsi)
-> >                       return;
-> >               }
-> >
-> > -             dsc->pic_width =3D mode->hdisplay;
-> > +             if (msm_host->is_dual_panel)
-> > +                     dsc->pic_width =3D hdisplay;
-> > +             else
-> > +                     dsc->pic_width =3D mode->hdisplay;
-> >               dsc->pic_height =3D mode->vdisplay;
-> >               DBG("Mode %dx%d\n", dsc->pic_width, dsc->pic_height);
-> >
-> > @@ -1705,6 +1709,7 @@ static int dsi_host_attach(struct mipi_dsi_host *=
-host,
-> >       if (dsi->lanes > msm_host->num_data_lanes)
-> >               return -EINVAL;
-> >
-> > +     msm_host->is_dual_panel =3D dsi->dual_panel;
-> >       msm_host->channel =3D dsi->channel;
-> >       msm_host->lanes =3D dsi->lanes;
-> >       msm_host->format =3D dsi->format;
-> > @@ -2600,6 +2605,9 @@ enum drm_mode_status msm_dsi_host_check_dsc(struc=
-t mipi_dsi_host *host,
-> >       if (!msm_host->dsc)
-> >               return MODE_OK;
-> >
-> > +     if (msm_host->is_dual_panel)
-> > +             pic_width =3D mode->hdisplay / 2;
-> > +
-> >       if (pic_width % dsc->slice_width) {
-> >               pr_err("DSI: pic_width %d has to be multiple of slice %d\=
-n",
-> >                      pic_width, dsc->slice_width);
-> >
-> > --
-> > 2.43.0
-> >
->
-> --
-> With best wishes
-> Dmitry
+> +		/* A successful enable or unplug may have superseded this work. */
+> +		if (dp->link_failed) {
+> +			connector->state->link_status = DRM_MODE_LINK_STATUS_BAD;
+> +			notify = !dp->link_status_notified;
+> +			dp->link_status_notified = true;
+> +		}
+> +	}
+> +	drm_modeset_unlock(&dev->mode_config.connection_mutex);
+> +
+> +	/* fbdev can retry the modeset synchronously from this notification. */
+> +	if (notify)
+> +		drm_kms_helper_connector_hotplug_event(connector);
+> +}
+> +
+>  static int msm_dp_display_bind(struct device *dev, struct device *master,
+>  			   void *data)
+>  {
+
+-- 
+With best wishes
+Dmitry
