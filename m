@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF8CA3A6417
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 05:03:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B6BB27703;
+	Wed, 30 Sep 2026 05:16:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790744584; cv=none; b=VeFxKa8f0yFW6DDjsW7T9MfGqvDgBxj7SjFiWEBwGONr/8qmwLx2sP7NHhdiDkS/v1nTRrRjImZZ979HS4jsqQbcgHfT/wlW0EqDwOYD+s5GHJYFdwnIC+zh3rbKJ/FaRcK6h+o/OwPTZCaUqeFgg1IqW0c8t+E0ZBbiMoEVY5k=
+	t=1790745384; cv=none; b=f/Kp94eyQcI2wpN68ij3ZPTAiXb1+kMjWlCUxXXhugKNMujKR0enyL7qG690PxrxhHqunnWOaKnbOY1RitwtlvLIB4BDrBQCdEapmFKNG9DaNdDqI+xRDnFIXofmhbqlS4vq9wh1zPCA4n48C/hT+0pKU6rhhtXFzUjSSy98oIg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790744584; c=relaxed/simple;
-	bh=aa5m/7BK7/DbTvlCizArErjlcAXnc5ec7jWXk2pJ/iU=;
+	s=arc-20240116; t=1790745384; c=relaxed/simple;
+	bh=hK6mNxHdXq0DC8dDjQn8mHm021jJUPpmmg0SceYXu9E=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FwCgetJP10DuQUPsvw+SwzW1fWyKrM2b/5Cx6IZUDprou2VIGLioBM3wnVs6dYkgJ0SiWTgGrr6gQOq4EwNK1hO/gMHglyBqofdmI6nPy9FOnrQcQnzBiNC76zk5IbSDuR1qY448znFg+61iHR6Jq+zw65c1VviF4NfMGGQdHpM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XXHPYJ6F; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=G++BKdZk; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=IBTw4sKKbbAZ1J5TjiuU0iQQuyBNl3/sP31va4shyfNrHH73wEnpMe57r/b664qZ3cFzJvJ0/88Yparqh04qikj09MeXGNad73fnBQgYZwWUYumTZfiYseaZ/sotJVG7v5JaX1w1C7vk8uh1XHK4lwUcZGvoC/n07H6OthSKYp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BA22HlaA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XXHPYJ6F";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G++BKdZk"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68TNQHVv2010184
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 05:03:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	qkg6ZsioMZw6EFu9fkXHTIgiUwtXNeSZKmXw0kdl0wo=; b=XXHPYJ6FeDHCsKs/
-	gTUZP0A8B7VEKvxP3/ZQGrMcRXiqJma6U6+0a/4UEXZA0tZePMhR+iRHKNDFiyVg
-	n6qigTH4VHX6L7APsHkzod0dTpR3Yu0H+of2UFG2Djj0yoazkdJY8U4deJT8Q4hP
-	LIvrlHDOwI/8brieRCU0HU01XTWNdak+F11htJRuWD9wzXbkvKTZDzEKTLPMv1jh
-	lP8KCFVTsOcy90kUEEbEwhNFRXwUqB6UyTLj6x7DZuzn6aBxoisjefLP5ej15iiK
-	8bXA/T6czpOtTnNCeNO8VoVmCkSzHlgFLnK0xPiR0vLX3Q2p75L2vlUK1iZmqyz+
-	OA5Hmg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0ftuk5w2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 05:03:02 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2db87f759c5so49591385ad.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 29 Sep 2026 22:03:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790744581; x=1791349381; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qkg6ZsioMZw6EFu9fkXHTIgiUwtXNeSZKmXw0kdl0wo=;
-        b=G++BKdZk352LLZJyzrjYG+s47bN60IEZrkGf/XGZfSWKeCHBglq2zGvk3yLEFbh7tQ
-         A2sAz+SdokTsVZJdtBiOjJ+iXtg7PTzwL13VmKQcbhRkK+6PrEbrppKKAmVd3MZjpdT2
-         KAdAgGwLp0vxVuI+MhP+YolvXooRPoTyviE17Vmoqqhx1+ijPX3lWQkpwsds7VDI5mTb
-         G9Jj2IE7YHyXHDu6SakSiC+a+csDXH7l3z4jVxSrWYS8+J7GqHaKzR+qle5Z5W8D0jGb
-         /E3mFPiwkCdZNn3XEbCufjfCrMSygt0aSPnK0/NMb3/6IeWjdHeSClYw7HzJTYKulcfg
-         /EQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790744581; x=1791349381;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qkg6ZsioMZw6EFu9fkXHTIgiUwtXNeSZKmXw0kdl0wo=;
-        b=naiRFTsTLLjqxVpUReJor/FieGOm8QNItcyZN+0gOEnnxzMEwafp0Or6a8cC6XKv2A
-         0UJA2k2zK5tYE3KgxLYUGy/oy4S5siSJID18tIVdZulUdUFlVjBlwogdcd9pDELFKhhl
-         Njp2txJc+oKIyuQoj/GtgLBdhi/+37cUcVJDQQHj/eOx99mV6F7mk5dD513FzVJ/LnFY
-         ie5EPz5LHYJz35Vey9gmIEVasQPFxRNo4EgkNYawPNlKQfYVr2x1eI1M8yNXVes2E+8F
-         IoF5OxtBRrkxqfKXzXQZ5SmuB4z/71HgLH5tlCb0wJKaMeM8PCrlOllSkl/OpnUsUgX2
-         mDHw==
-X-Forwarded-Encrypted: i=1; AKwUvBw/+Uulg1ZfAkJB9HEa9N2AITsXR41TIIUvImAN0VJduu6XvRKFhWPCqn+kPmUEHShEtqMbRYJ8SDb0EpVj@vger.kernel.org
-X-Gm-Message-State: AFq9FYLXCx8aslE8M6sLl1Vp4HkWAB/vs/+VXTskTaxboDMs+Pn27n6P
-	2sgagalWXMkF8a4Ldmn6RvGp0vSTg/R+n66sFRFY40Mc/8t9Z9U4b7ribIBNGenpqFwkILPE8nt
-	x50uGBUzME875jivc210Zm6lCadCmjiofZhrxSrFR4VMT5cAUBZizmLmiUAZ9djn8EoBP
-X-Gm-Gg: AYBFou0il3IV1fl/lXVIImb3oDubxeKDzEJMIak6r6ZXRg/h7/SurYKcWyAqlWCmBcm
-	D3uqzfjTDKKb7U4weRBE5BTBa05PxuVs+W+UDLRAeH36wGzTSlhrJADJOVcBvtpCNBHjF/tpo+Y
-	PKDqjR9kPgb84Fdr1UdYabBVrOkFV2mPZwaQoEOfoApBL6uw/OXWqxVE83Jdcj7y1alXr6Tr1vO
-	E+NH+c2FpcPzrqCkxmOURqbZJgx3zWrHpi5jruR1ZTZ/oXXNyavOjyJ1tZw5GSQvm9o+RqADa/K
-	5ajqWV28E40r5ESJqla4YXlZd2iBBGOZtb7wgTLgBQ/jnzw2O9v3SPEz3+XzyE7lVXlKm+wgHYN
-	e3hRg30LZ8s45POZxU47R0g8Xhbu6
-X-Received: by 2002:a17:903:22c5:b0:2e2:bf06:25f3 with SMTP id d9443c01a7336-2e2e4b4b833mr2230185ad.38.1790744581362;
-        Tue, 29 Sep 2026 22:03:01 -0700 (PDT)
-X-Received: by 2002:a17:903:22c5:b0:2e2:bf06:25f3 with SMTP id d9443c01a7336-2e2e4b4b833mr2228205ad.38.1790744576104;
-        Tue, 29 Sep 2026 22:02:56 -0700 (PDT)
-Received: from [192.168.31.121] ([152.57.6.139])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e2e5bd5c67sm758105ad.48.2026.09.29.22.02.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 29 Sep 2026 22:02:54 -0700 (PDT)
-Message-ID: <362c6465-66ac-4ed7-9e7e-f75f31b32dd8@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 10:32:47 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BA22HlaA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C68821F000FF;
+	Wed, 30 Sep 2026 05:16:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790745382;
+	bh=eQleIxJOBPv1KRFntodHoZ79/WxPDKFPhFZNfK7ap0o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=BA22HlaA5E3F7+u4XMqXTPdWQH0WWR+QICpy7gO+ug23l98iIzIbURSbMIcF7itwc
+	 ackm2dnn0Mci2l8Q6i51HM/fc6BE6gbK95z+bwtmWoaUUc+mVzqwc0iKcQSInz1vWq
+	 opl50ikHBVAwSmIeY5NSOlYdN0qlOn+HVMy8O97Ihz2T3g7Cv4rTs2t1x8kNudWY6o
+	 cU1gzIuy5As8hHXxV4Xiw0iLbbsYnXk6aLDjqMG7M7QiX51JmOPTMNTSjJ/O1DoGjE
+	 RlX02A2YhKV2UJNSged+SRrPA+9Ja0fDNuRVo+GTfolHieJ1672L+0ZNOdqe21ij+8
+	 dVzUe/i4bUayw==
+Message-ID: <e4a07d79-199b-4998-ae2d-a9e8b91a228c@kernel.org>
+Date: Wed, 30 Sep 2026 07:16:15 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,221 +35,149 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] platform: arm64: qcom-hamoa-ec: Add thermistor
- sensors
-To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Rob Herring
- <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        platform-driver-x86@vger.kernel.org
-References: <20260928-ec_thermistor_support-v1-0-d9c1bae4cd0d@oss.qualcomm.com>
- <20260928-ec_thermistor_support-v1-2-d9c1bae4cd0d@oss.qualcomm.com>
- <c15405f3-db75-410d-045b-996db4f83110@linux.intel.com>
+Subject: Re: [PATCH 0/3] phy: qcom: sgmii-eth: add Nord USXGMII support
+To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
+ Shawn Guo <shengchao.guo@oss.qualcomm.com>
+References: <20260923-nord_ethernet_serdes-v1-0-f8ac1c487882@oss.qualcomm.com>
+ <CAFkd8hvoUi3dyff8w72pmRHce0XDNUepCsR=1gtimFMgA6gmBQ@mail.gmail.com>
+ <20260928-steel-hornet-of-kindness-aa5e2f@quoll>
+ <CAFkd8hs6H-WT6C2Nzns2jB1yHq1CfODijAX1VbMxUUAe7zH6Rg@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
-In-Reply-To: <c15405f3-db75-410d-045b-996db4f83110@linux.intel.com>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <CAFkd8hs6H-WT6C2Nzns2jB1yHq1CfODijAX1VbMxUUAe7zH6Rg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDAxOSBTYWx0ZWRfX/l2X4Dm+165D
- Mi2PqRYlVH1CnCzBO/Sue9onlkcoNs+yMDjYhqY6LKmv4LqZisqv/Y8mgp8OqVRR1rDb8PcQ7KC
- 2BKNg1jq5vYmlSS5HTFGGPPH8woBOuktBTvg4klovTzHAeIjEZY9nLJ6OKmnL7hqg2yFgpdnHv8
- STj5fWsZalLDU2k+UlBpGBZuADRHSDZJKKJR+h4Bgid9o4g3oh1V3bcy1vwWJTe/wmz43+OQZtn
- xuX41KMN7CUWLTDE7R4jvYm+fNIHZVsgsph/QFsAyg4dvbK0kfU7Idbmwru59lEPnrmtmJxZNwX
- ZhLmSFMzVHyk3rWAZ3WaMjezUyns09DlEz9Xf+9qC30BBc1Ak7acMocjoKvArxloey9RWbzbEAF
- UDADGa3IaqgL1UZYKCQ3bAC8hZIDjY8MfZCJ4c8cSRzmfNu7Tf3TOWUTdjGNc3oeqJJ5Bsl1EtV
- m/RbDZRGokeoU2ArC/g==
-X-Authority-Analysis: v=2.4 cv=AoB7T+9P c=1 sm=1 tr=0 ts=6abc9806 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZE6J5AxZF9eTCMsEPEnAuA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=qvRe1xnp1C8EnQCzoIkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDAxOSBTYWx0ZWRfX9xZ70ZBS9IUi
- eIxYbHgorET8pfeqpQ3ajedBItxUJ3Kq1hU9W/g+G8VplUAKBP1eT2XiBLXcBtoPPlhetJLDMaQ
- xtJUR1FdVS3i4FekfsDTCtxfSf05U8I=
-X-Proofpoint-GUID: gzsr6TChLoSUDdhgmHSWdP6scY5vAOh7
-X-Proofpoint-ORIG-GUID: gzsr6TChLoSUDdhgmHSWdP6scY5vAOh7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-29_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 impostorscore=0 clxscore=1015 phishscore=0
- lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300019
 
-
-
-On 9/29/2026 1:05 PM, Ilpo Järvinen wrote:
-> On Mon, 28 Sep 2026, Anvesh Jain P wrote:
+On 29/09/2026 12:49, Zhangfei Gao wrote:
+> Hi, Krzysztof
 > 
->> The Qualcomm embedded controller has exclusive access to multiple onboard
->> thermistors programmatically discoverable through the
->> EC_THERMAL_CAPABILITIES command. The temperature values are reported in
->> degree Celsius through the EC_THERMISTOR_TEMP_CMD.
+> On Mon, Sep 28, 2026 at 6:19 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
 >>
->> Register these thermistors with the thermal framework by adding support to
->> the EC_THERMISTOR_TEMP_CMD and convert it to millidegree units as required
->> by the thermal framework.
+>> On Wed, Sep 23, 2026 at 04:58:03PM +0800, Zhangfei Gao wrote:
+>>> On Wed, Sep 23, 2026 at 8:04 AM Mohd Ayaan Anwar
+>>> <mohd.anwar@oss.qualcomm.com> wrote:
+>>>>
+>>>> This series adds support for the Ethernet SerDes found on the Qualcomm
+>>>> Nord SoC.
+>>>>
+>>>> Nord uses a QMP v7 SerDes block, which is an updated version of the
+>>>> SGMII SerDes PHY IP already handled by phy-qcom-sgmii-eth. The driver
+>>>> currently supports the 1.25 Gbaud and 3.125 Gbaud configurations used by
+>>>> SGMII, 1000BASE-X and 2500BASE-X. Nord additionally requires the SerDes
+>>>> to operate at 10.3125 Gbaud for its 10 Gigabit Ethernet interfaces.
+>>>>
+>>>> The series can be broadly divided into three parts:
+>>>>
+>>>>   1. Add the qcom,nord-dwmac-sgmii-phy compatible to the binding.
+>>>>   2. Prepare the driver for PHY modes which require different SerDes
+>>>>      programming and readiness checks. Existing SA8775P behaviour is
+>>>>      unchanged.
+>>>>   3. Add the QMP v7 register definitions, 10.3125 Gbaud programming
+>>>>      sequence and readiness checks required for USXGMII and 10GBASE-R.
+>>>>
+>>>> The changes have been tested on the Nord Ride SX platform, which has a
+>>>> MV-Q6223 switch, running in fixed link USXGMII 10G mode.
+>>>>
+>>>> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+>>>> ---
+>>>> Mohd Ayaan Anwar (3):
+>>>>       dt-bindings: phy: qcom,sa8775p-dwmac-sgmii-phy: add Nord compatible
+>>>>       phy: qcom: sgmii-eth: prepare for additional PHY modes
+>>>>       phy: qcom: sgmii-eth: add Nord USXGMII support
+>>>>
+>>>>  .../bindings/phy/qcom,sa8775p-dwmac-sgmii-phy.yaml |   1 +
+>>>>  drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h      |   5 +
+>>>>  drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h |   2 +
+>>>>  .../phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h    |   9 +
+>>>>  drivers/phy/qualcomm/phy-qcom-sgmii-eth.c          | 226 ++++++++++++++++++---
+>>>>  5 files changed, 219 insertions(+), 24 deletions(-)
+>>>> ---
+>>>> base-commit: a8c591ed6b672915e0be57843f943a2a723aff40
+>>>> change-id: 20260923-nord_ethernet_serdes-c486f715f383
+>>>>
+>>>> Best regards,
+>>>> --
+>>>> Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+>>>>
+>>>
+>>> Good Job，
+>>>
+>>> Tested-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
 >>
->> Signed-off-by: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
->> ---
->>  drivers/platform/arm64/qcom-hamoa-ec.c | 74 ++++++++++++++++++++++++++++++++++
->>  1 file changed, 74 insertions(+)
+>> This has to stop.
 >>
->> diff --git a/drivers/platform/arm64/qcom-hamoa-ec.c b/drivers/platform/arm64/qcom-hamoa-ec.c
->> index 4d2ad042a7f8..acf3d7f53026 100644
->> --- a/drivers/platform/arm64/qcom-hamoa-ec.c
->> +++ b/drivers/platform/arm64/qcom-hamoa-ec.c
->> @@ -16,16 +16,19 @@
->>  #include <linux/pm.h>
->>  #include <linux/slab.h>
->>  #include <linux/thermal.h>
->> +#include <linux/unaligned.h>
->>  
->>  #define EC_SCI_EVT_READ_CMD	0x05
->>  #define EC_FW_VERSION_CMD	0x0e
->>  #define EC_MODERN_STANDBY_CMD	0x23
->> +#define EC_THERMISTOR_TEMP_CMD	0x29	/* + thermistor_id (0-6) selects thermistor 1-7 */
->>  #define EC_FAN_DBG_CONTROL_CMD	0x30
->>  #define EC_SCI_EVT_CONTROL_CMD	0x35
->>  #define EC_THERMAL_CAP_CMD	0x42
->>  
->>  #define EC_FW_VERSION_RESP_LEN	4
->>  #define EC_THERMAL_CAP_RESP_LEN	3
->> +#define EC_THERMISTOR_TEMP_RESP_LEN	3
->>  #define EC_FAN_DEBUG_CMD_LEN	6
->>  #define EC_FAN_SPEED_DATA_SIZE	4
->>  
->> @@ -39,6 +42,7 @@
->>  #define EC_MAX_FAN_CNT		2
->>  #define EC_FAN_NAME_SIZE	20
->>  #define EC_FAN_MAX_PWM		255
->> +#define EC_MAX_THERMISTOR_CNT	7
->>  
->>  enum qcom_ec_sci_events {
->>  	EC_FAN1_STATUS_CHANGE_EVT = 0x30,
->> @@ -64,6 +68,7 @@ struct qcom_ec_thermal_cap {
->>  #define EC_THERMAL_FAN_CNT(x)		(FIELD_GET(GENMASK(1, 0), (x)))
->>  #define EC_THERMAL_FAN_TYPE(x)		(FIELD_GET(GENMASK(4, 2), (x)))
->>  #define EC_THERMAL_THERMISTOR_MASK(x)	(FIELD_GET(GENMASK(7, 0), (x)))
->> +#define EC_THERMISTOR_PRESENT(mask, id)	((mask) & BIT(id))
->>  	u8 fan_cnt;
->>  	u8 fan_type;
->>  	u8 thermistor_mask;
->> @@ -81,6 +86,12 @@ struct qcom_ec {
->>  	struct qcom_ec_thermal_cap thermal_cap;
->>  	struct qcom_ec_version version;
->>  	struct i2c_client *client;
->> +	struct qcom_ec_thermal_zone *ec_tz;
->> +};
->> +
->> +struct qcom_ec_thermal_zone {
->> +	struct qcom_ec *ec;
->> +	u8 thermistor_id;
->>  };
->>  
->>  static int qcom_ec_read(struct qcom_ec *ec, u8 cmd, u8 resp_len, u8 *resp)
->> @@ -183,6 +194,43 @@ static int qcom_ec_thermal_capabilities(struct device *dev)
->>  	return 0;
->>  }
->>  
->> +/*
->> + * EC Thermistor Temperature (cmd 0x29 + thermistor_id, id 0-6 selects
->> + * thermistor 1-7):
->> + *
->> + * Read Response:
->> + * ----------------------------------------------------------------------
->> + * | Offset	| Name		| Description				|
->> + * ----------------------------------------------------------------------
->> + * | 0x00	| Byte count	| Number of bytes in response (=2)	|
->> + * ----------------------------------------------------------------------
->> + * | 0x01 (LSB)| Temperature	| Signed 16-bit, unit of 0.1 degC,	|
->> + * | 0x02 (MSB)|		| range -40..+125 degC			|
->> + * ----------------------------------------------------------------------
->> + */
->> +static int qcom_ec_thermistor_get_temp(struct thermal_zone_device *tz, int *temp)
->> +{
->> +	struct qcom_ec_thermal_zone *ec_tz = thermal_zone_device_priv(tz);
->> +	struct qcom_ec *ec = ec_tz->ec;
->> +	u8 resp[EC_THERMISTOR_TEMP_RESP_LEN];
->> +	s16 raw;
->> +	int ret;
->> +
->> +	ret = qcom_ec_read(ec, EC_THERMISTOR_TEMP_CMD + ec_tz->thermistor_id,
->> +			   EC_THERMISTOR_TEMP_RESP_LEN, resp);
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	raw = (s16)get_unaligned_le16(&resp[1]);
->> +	*temp = raw * 100;
-> 
-> MILLIDEGREE_PER_DECIDEGREE?
-> 
-> Make sure you have the include for it if changing to it.
-> 
->> +
->> +	return 0;
->> +}
->> +
->> +static const struct thermal_zone_device_ops qcom_ec_thermistor_ops = {
->> +	.get_temp = qcom_ec_thermistor_get_temp,
->> +};
->> +
->>  static irqreturn_t qcom_ec_irq(int irq, void *data)
->>  {
->>  	struct qcom_ec *ec = data;
->> @@ -376,6 +424,32 @@ static int qcom_ec_probe(struct i2c_client *client)
->>  	if (ret < 0)
->>  		return dev_err_probe(dev, ret, "Failed to read thermal capabilities\n");
->>  
->> +	if (ec->thermal_cap.thermistor_mask) {
->> +		ec->ec_tz = devm_kcalloc(dev, EC_MAX_THERMISTOR_CNT, sizeof(*ec->ec_tz),
->> +					 GFP_KERNEL);
->> +		if (!ec->ec_tz)
->> +			return -ENOMEM;
->> +
->> +		for (i = 0; i < EC_MAX_THERMISTOR_CNT; i++) {
->> +			struct qcom_ec_thermal_zone *ec_tz = &ec->ec_tz[i];
->> +			struct thermal_zone_device *tzd;
->> +
->> +			if (!EC_THERMISTOR_PRESENT(ec->thermal_cap.thermistor_mask, i))
->> +				continue;
->> +
->> +			ec_tz->ec = ec;
->> +			ec_tz->thermistor_id = i;
->> +
->> +			tzd = devm_thermal_of_zone_register(dev, i, ec_tz, &qcom_ec_thermistor_ops);
->> +			if (IS_ERR(tzd)) {
->> +				ret = PTR_ERR(tzd);
->> +				if (ret != -ENODEV)
-> 
-> I'd prefer ret == -ENODEV check + continue.
-> 
->> +					dev_warn(dev, "Failed to register thermistor%u zone: %d\n",
->> +						 i, ret);
->> +			}
->> +		}
->> +	}
->> +
->>  	if (ec->thermal_cap.fan_cnt == 0) {
->>  		dev_warn(dev, FW_BUG "Failed to get fan count, firmware update required\n");
->>  		return 0;
->>
->>
->
+>> Why again adding fake testing to the bindings? You cannot reply twice?
+> Reply twice since I thought they are two different patch set, one is phy,
 
-Thanks for the review. I will use MILLIDEGREE_PER_DECIDEGREE from
-<linux/units.h> for the temperature conversion. I will also change the
-thermal-zone registration handling to continue explicitly on -ENODEV and
-warn about other errors.
+You don't even try to understand the problem.
 
--- 
-Best Regards,
-Anvesh
+> the other is net, while net maintainer said that is too ealry for rfc.
+> 
+> The tested branch is
+> https://github.com/zhangfei-gao/kernel-topics/tree/next-9.23 ( and
+> 9.24-eth), and may keep testing for each cycle.
+> contianing dts, phy, net and all required patchset, assuming one
+> integrated branch will be easier for interal track.
+> The dts will be send later.
+> Testing hardware is ride and rrd.
+> 
 
+Explain HOW did you test the bindings in terms of Linux kernel testing.
+
+Then explain WHY you cannot give the tag only to appropriate places,
+instead of blanket one.
+
+
+Best regards,
+Krzysztof
