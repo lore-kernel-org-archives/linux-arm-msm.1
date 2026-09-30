@@ -1,47 +1,47 @@
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50FBC51EE12
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:10:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCF3B5187EF
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:09:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790777432; cv=none; b=b5gHWhy4RIbt7jZoBtRYGKv7wOuLQ9YDJP/AP4fK5CCoIWXY19vb9uqet1pVgquARJwU1B76E36MdwxgN2mVSHC+9+gRHvlDQQbyeaRuxoG9C2zz7pbzHvgUTw3i+Vj0Zb0wiiCGLPgVnTQLkpNoxff/8MF4d009c1kskCKvMdo=
+	t=1790777433; cv=none; b=kiDz0nW+fM5K1vVAzzp/Se4C5NveCiyleR+J9HcUMCn19tRt5nuEoyJl3zIKcoXElpMrHamWPDqgirinI477dgWH05QAJjEqcgbzGXpNkwaWri1YjSbuB8PJQgHOP3XgUFTPb7AfAbfYrQ3QdObY3vgaZOJd2v/0kNChkKZkMqs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790777432; c=relaxed/simple;
-	bh=Jx2dPRIHA4h4yESf8m5wxC6nG+dWMUEuY6w/WT6qrdU=;
+	s=arc-20240116; t=1790777433; c=relaxed/simple;
+	bh=sLDljgy2iUfR4ux4LRoswkUrAQGhocHxixSmputVTh8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Mh6VFDmi3EMT6THZnJ8/qCLkQO/xokqqk3sqOZAqajYvvkUvZGL0nJUVn8mkm3A+jClu7Ie0cVBGdlTNM5ORbfwHby1MUo7A9Hqh/foijWofk3Wn/CrJjUsCSZHOMAGVj7QF3jI0/+BF4w2FnGPjF1t9guW/RHVk4KsNUNTu9M8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=g4H82C5o; arc=none smtp.client-ip=170.10.133.124
+	 MIME-Version; b=X/V06nRcWhJj2lkH/RL4TX1dkqPVli20U4p+Vb49UcHb7l7pmUOrn22jCamDfgsNfZUfHxAc8mns75YnJeuO66Y4MCcxR/lJ76xo86+9eor0fQvQNFR8yvy9jkyi+m7CXHSFi7Pr4owyBih74uTsprVenl1DWZ3wlY3XMIBpriY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=X1k56ayN; arc=none smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="g4H82C5o"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="X1k56ayN"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790777405;
+	s=mimecast20190719; t=1790777376;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=9lKY5zSooUG9J2WAMt80T6mv1JymFjL65pHqXNpRbZ0=;
-	b=g4H82C5o7GEcScHmdL7HMEGJJheCZIgsfZ8VZ6MkAxa1BuFqsq7RMnBYE28j4+AFsU0Ofb
-	2adnYBiMjOKIZBRX+s7IalH2YKySMjmejKJR+mmBFbgf/Xd65WwWRx9Igw96yA4t8ppLBT
-	nYYBgv0WBP40DQvhmkEDgOl8CPAuEM0=
+	bh=0YVhvO5SMCN7TMiG9ZoSdhyJXNnNMq+CHd4JeeSj0hY=;
+	b=X1k56ayN5q1gfV0Hw/9f5EH9CKbhwmm1qGsSECejFzsZXc8XhxVTnXa5HTBM/mJdGHU1sG
+	ry2T0JGDS9wMS9sYPSOatN22LUg5X1p4LimYOJ4EY5Q0qVoIUufYC3uReec7Akghqn2Rdd
+	adpONIX01YVHNIR2bvTIcQuAxXZ1CmI=
 Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-684-1gEACnZ4PZGdvatH_SoJfQ-1; Wed,
- 30 Sep 2026 10:10:01 -0400
-X-MC-Unique: 1gEACnZ4PZGdvatH_SoJfQ-1
-X-Mimecast-MFC-AGG-ID: 1gEACnZ4PZGdvatH_SoJfQ_1790777399
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-610-S2DnP1ZkNd6ZrH8EgANtGw-1; Wed,
+ 30 Sep 2026 10:09:32 -0400
+X-MC-Unique: S2DnP1ZkNd6ZrH8EgANtGw-1
+X-Mimecast-MFC-AGG-ID: S2DnP1ZkNd6ZrH8EgANtGw_1790777369
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 2B9DD18001F7;
-	Wed, 30 Sep 2026 14:09:59 +0000 (UTC)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 50813180899A;
+	Wed, 30 Sep 2026 14:09:29 +0000 (UTC)
 Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 10BCD1956044;
-	Wed, 30 Sep 2026 14:09:54 +0000 (UTC)
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 125A61956044;
+	Wed, 30 Sep 2026 14:09:24 +0000 (UTC)
 From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
 To: bhelgaas@google.com,
 	alex@shazbot.org,
@@ -60,9 +60,9 @@ Cc: johannes@sipsolutions.net,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-Subject: [PATCH 7/7] ath12k: Use VFIO MSI cache when available
-Date: Wed, 30 Sep 2026 16:08:33 +0200
-Message-ID: <20260930140833.576941-8-jtornosm@redhat.com>
+Subject: [PATCH 4/7] ath11k: add PCIe link recovery retry
+Date: Wed, 30 Sep 2026 16:08:30 +0200
+Message-ID: <20260930140833.576941-5-jtornosm@redhat.com>
 In-Reply-To: <20260930140833.576941-1-jtornosm@redhat.com>
 References: <20260930140833.576941-1-jtornosm@redhat.com>
 Precedence: bulk
@@ -74,128 +74,114 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-The Qualcomm ath12k firmware requires physical host MSI addresses for
-interrupt configuration but cannot handle IOVA-based MSI addressing in
-virtualized environments.
+When ath11k devices are passed through to VMs via PCIe passthrough,
+the PCIe link may not stabilize immediately after global reset due to
+virtualization layer timing variations. This causes MHI initialization
+to fail with "BHI offset: 0xffffffff is out of range" errors because
+the device is read before it's ready.
 
-When the device is passed through to a VM via VFIO:
-- The guest kernel allocates MSI vectors and sees IOVA addresses
-- The ath12k firmware expects physical host MSI addresses
-- Providing IOVA to the firmware causes interrupt delivery to fail
-- Result: device is non-functional in VMs
+Currently, ath11k_pci_soc_global_reset() just warns if the link is
+down but continues anyway, leading to inevitable MHI failures.
 
-The qcom-vfio-pci variant driver (introduced in earlier patches) solves
-this by caching the physical host MSI values and exposing them through
-PCI extended config space with a "QMSI" magic signature for discovery.
+This patch adds:
+1. A retry loop (up to 5000ms) to wait for the PCIe link to recover
+   after global reset (similar to the existing ath12k LTSSM retry logic)
+2. Proper error propagation to prevent continuing with a dead link
 
-Search for the QMSI magic signature in extended config space. If found,
-the device is running on a VM and we can read the cached host MSI values
-from that location. If the VFIO cache is not present (i.e. on baremetal),
-fall back to standard PCI MSI configuration.
-
-This change is transparent, arch independent and requires no user
-configuration when used with the qcom-vfio-pci driver.
+This is especially important for VM environments where timing can vary
+significantly from bare metal.
 
 Signed-off-by: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
 ---
- drivers/net/wireless/ath/ath12k/pci.c | 43 +++++++++++++++++++++++++++
- drivers/net/wireless/ath/ath12k/pci.h |  6 ++++
- 2 files changed, 49 insertions(+)
+ drivers/net/wireless/ath/ath11k/pci.c | 39 ++++++++++++++++++++++-----
+ 1 file changed, 32 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/net/wireless/ath/ath12k/pci.c b/drivers/net/wireless/ath/ath12k/pci.c
-index 65712486d312..832d3cf652d9 100644
---- a/drivers/net/wireless/ath/ath12k/pci.c
-+++ b/drivers/net/wireless/ath/ath12k/pci.c
-@@ -8,6 +8,7 @@
- #include <linux/interrupt.h>
- #include <linux/msi.h>
- #include <linux/pci.h>
-+#include <linux/qcom_vfio.h>
- #include <linux/time.h>
- #include <linux/vmalloc.h>
+diff --git a/drivers/net/wireless/ath/ath11k/pci.c b/drivers/net/wireless/ath/ath11k/pci.c
+index 7114eca8810d..4fc6aaf036c1 100644
+--- a/drivers/net/wireless/ath/ath11k/pci.c
++++ b/drivers/net/wireless/ath/ath11k/pci.c
+@@ -190,8 +190,10 @@ static void ath11k_pci_restore_window(struct ath11k_base *ab)
+ 	spin_unlock_bh(&ab_pci->window_lock);
+ }
  
-@@ -783,8 +784,11 @@ static int ath12k_pci_msi_alloc(struct ath12k_pci *ab_pci)
+-static void ath11k_pci_soc_global_reset(struct ath11k_base *ab)
++static int ath11k_pci_soc_global_reset(struct ath11k_base *ab)
  {
- 	struct ath12k_base *ab = ab_pci->ab;
- 	const struct ath12k_msi_config *msi_config = ab_pci->msi_config;
-+	u32 msi_addr_lo = 0, msi_addr_hi = 0;
- 	struct msi_desc *msi_desc;
-+	u16 msi_data = 0;
- 	int num_vectors;
-+	int msi_offset;
- 	int ret;
++	unsigned long timeout;
++	bool link_recovered = false;
+ 	u32 val, delay;
  
- 	num_vectors = pci_alloc_irq_vectors(ab_pci->pdev,
-@@ -812,6 +816,39 @@ static int ath12k_pci_msi_alloc(struct ath12k_pci *ab_pci)
+ 	val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
+@@ -211,14 +213,29 @@ static void ath11k_pci_soc_global_reset(struct ath11k_base *ab)
  
- 	ath12k_info(ab, "MSI vectors: %d\n", num_vectors);
+ 	mdelay(delay);
  
-+	/*
-+	 * Try to get host MSI address from VFIO cache.
-+	 * When running on a VM, the ath12k firmware requires physical host
-+	 * MSI addresses and cannot handle guest IOVA addresses.
-+	 * qcom-vfio-pci writes host MSI values to extended config space with
-+	 * a magic signature "QMSI" for discovery. Search for it.
+-	val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
+-	if (val == 0xffffffff)
+-		ath11k_warn(ab, "link down error during global reset\n");
++	/* Wait for PCIe link to recover, especially important in VM environments
++	 * where timing can vary significantly from bare metal.
 +	 */
-+	msi_offset = qcom_vfio_find_msi_cache(ab_pci->pdev);
-+	if (msi_offset) {
-+		pci_read_config_dword(ab_pci->pdev,
-+				      msi_offset + QCOM_VFIO_MSI_ADDR_LO_OFFSET,
-+				      &msi_addr_lo);
-+		pci_read_config_dword(ab_pci->pdev,
-+				      msi_offset + QCOM_VFIO_MSI_ADDR_HI_OFFSET,
-+				      &msi_addr_hi);
-+		pci_read_config_word(ab_pci->pdev,
-+				     msi_offset + QCOM_VFIO_MSI_DATA_OFFSET,
-+				     &msi_data);
-+
-+		if (msi_addr_lo && msi_addr_lo != 0xFFFFFFFF) {
-+			ab_pci->msi_addr_hi = msi_addr_hi;
-+			ab_pci->msi_addr_lo = msi_addr_lo;
-+			ab_pci->msi_ep_base_data = msi_data;
-+			ab_pci->msi_addr_cached = true;
-+
-+			ath12k_info(ab,
-+				    "using host MSI from VFIO at offset 0x%x: addr_lo=0x%x addr_hi=0x%x data=%d\n",
-+				    msi_offset, msi_addr_lo, msi_addr_hi, msi_data);
-+			return 0;
++	timeout = jiffies + msecs_to_jiffies(5000);
++	while (time_before(jiffies, timeout)) {
++		val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
++		if (val != 0xffffffff) {
++			link_recovered = true;
++			break;
 +		}
++		mdelay(20);
 +	}
-+	ab_pci->msi_addr_cached = false;
-+
- 	ath12k_pci_msi_disable(ab_pci);
- 
- 	msi_desc = irq_get_msi_desc(ab_pci->pdev->irq);
-@@ -1083,6 +1120,12 @@ void ath12k_pci_get_msi_address(struct ath12k_base *ab, u32 *msi_addr_lo,
- 	struct ath12k_pci *ab_pci = ath12k_pci_priv(ab);
- 	struct pci_dev *pci_dev = to_pci_dev(ab->dev);
- 
-+	if (ab_pci->msi_addr_cached) {
-+		*msi_addr_hi = ab_pci->msi_addr_hi;
-+		*msi_addr_lo = ab_pci->msi_addr_lo;
-+		return;
++	if (!link_recovered) {
++		ath11k_err(ab, "PCIe link failed to recover - device may need power cycle\n");
++		return -ETIMEDOUT;
 +	}
-+
- 	pci_read_config_dword(pci_dev, pci_dev->msi_cap + PCI_MSI_ADDRESS_LO,
- 			      msi_addr_lo);
  
-diff --git a/drivers/net/wireless/ath/ath12k/pci.h b/drivers/net/wireless/ath/ath12k/pci.h
-index 0e0e2020c6ae..ee3696d40dfb 100644
---- a/drivers/net/wireless/ath/ath12k/pci.h
-+++ b/drivers/net/wireless/ath/ath12k/pci.h
-@@ -129,6 +129,12 @@ struct ath12k_pci {
- 	/* enum ath12k_pci_flags */
- 	unsigned long flags;
- 	u16 link_ctl;
+ 	/* Restore window register as its content is cleared during
+ 	 * hardware global reset, such that it aligns with host cache.
+ 	 */
+ 	ath11k_pci_restore_window(ab);
 +
-+	/* Cached host MSI address for firmware configuration in VMs */
-+	u32 msi_addr_hi;
-+	u32 msi_addr_lo;
-+	bool msi_addr_cached;
++	return 0;
+ }
+ 
+ static void ath11k_pci_clear_dbg_registers(struct ath11k_base *ab)
+@@ -373,8 +390,10 @@ static void ath11k_pci_force_wake(struct ath11k_base *ab)
+ 	mdelay(5);
+ }
+ 
+-static void ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
++static int ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
+ {
++	int ret;
 +
- 	unsigned long irq_flags;
- 	const struct ath12k_pci_ops *pci_ops;
- 	u32 qmi_instance;
+ 	mdelay(100);
+ 
+ 	if (power_on) {
+@@ -387,8 +406,12 @@ static void ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
+ 
+ 	ath11k_mhi_clear_vector(ab);
+ 	ath11k_pci_clear_dbg_registers(ab);
+-	ath11k_pci_soc_global_reset(ab);
++	ret = ath11k_pci_soc_global_reset(ab);
++	if (ret)
++		return ret;
+ 	ath11k_mhi_set_mhictrl_reset(ab);
++
++	return 0;
+ }
+ 
+ static void ath11k_pci_init_qmi_ce_config(struct ath11k_base *ab)
+@@ -818,7 +841,9 @@ static int ath11k_pci_power_up(struct ath11k_base *ab)
+ 
+ 	ab_pci->register_window = 0;
+ 	clear_bit(ATH11K_FLAG_DEVICE_INIT_DONE, &ab->dev_flags);
+-	ath11k_pci_sw_reset(ab_pci->ab, true);
++	ret = ath11k_pci_sw_reset(ab_pci->ab, true);
++	if (ret)
++		return ret;
+ 
+ 	/* Disable ASPM during firmware download due to problems switching
+ 	 * to AMSS state.
 -- 
-2.55.0
+2.53.0
 
