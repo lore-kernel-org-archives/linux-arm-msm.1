@@ -1,16 +1,16 @@
-Received: from canpmsgout06.his.huawei.com (canpmsgout06.his.huawei.com [113.46.200.221])
+Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E115A36F415;
-	Wed, 30 Sep 2026 02:54:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.221
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A94637755C;
+	Wed, 30 Sep 2026 03:39:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.226
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790736898; cv=none; b=uHCOY5TJWoEJWGqy5k7tkvAPiu5cizK22xlI4FJpcLBps9doEJzr4/YV7nXkiWw3G8cvTrf50K1XpE5HKrQ/pqN4hHt5wW5/dgUFm8Bk1eCL1dKKj5zhghJHpHwlhsyKw/rweuK/Md6RgfRspbpBagN0Q5NDzY4vja8esWwhpro=
+	t=1790739564; cv=none; b=DRAlI8W9VzxoIzZIEg/1H+QO/TK61HU/XQ2BhizmX85SZRmcksFZFcsK4Dt/6ndBUgLsygn6DlXdarOLGH0oERyq6nabPtanELGZbnsoNqiMISU6XMWFVOcqc0RukImYA82DvZi4qZB6lSG5s1W2s+r/iTTOI+YHApCa4r3LnYs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790736898; c=relaxed/simple;
+	s=arc-20240116; t=1790739564; c=relaxed/simple;
 	bh=NcV/PCYHQQ52eenZNEWwM67Cm7ohHgM2YVmMYxH91JU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=llTCuwFI1fuoLkopcKCIR/nov48xhVC1iwPJ0UnCTrBWZH4lPytmFOyWBnUY+4x8ogKuuz8dvnZEZ8iJAXsh/a4dNO5wCB/5e5Xj2C6sHfmCavCMtv1lL5hP3SZjnUk1IpUJF7kSYN8bHvipJr4kmGb8OrrCqfZVMbhsRQ/GWc8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=P0H08ec0; arc=none smtp.client-ip=113.46.200.221
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Tgi4ZBgIy/bruh99s6u7utmKZi53d5/Ar6Xfgcc14wnl328RfiM5u0Fn3JLZsZfFVD3PlcxNv9TFWEkWNaM5adTTh5eaeOdWOih4b/Adz7DnhSzyLr+aDrcT4RifNIncC7pnyUjCROuU1em8skgU6gKXCjcOW8e0QqnIlP4/utY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=P0H08ec0; arc=none smtp.client-ip=113.46.200.226
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 Authentication-Results: smtp.subspace.kernel.org;
@@ -22,23 +22,25 @@ dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	b=P0H08ec0XYwH2E8bKrGzERzeS8i/YFQa0lBQ/QLRfwL1A8EmHEDms0Wpim1IBxsSpzwNOBdng
 	jM2KoKyBF642eiOts7rC8GPPK6W7sR/XzAGg2pUVIFWMFIOk/dYJ0nwsm5gFy3ZVouXz5zIUKD6
 	Lx8ehgTtC4dHvEOt4yCOiVU=
-Received: from mail.maildlp.com (unknown [172.19.162.140])
-	by canpmsgout06.his.huawei.com (SkyGuard) with ESMTPS id 4hvfTx4pvHzRhXP;
-	Wed, 30 Sep 2026 10:42:45 +0800 (CST)
+Received: from mail.maildlp.com (unknown [172.19.163.163])
+	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4hvgT06CLgzKm8V;
+	Wed, 30 Sep 2026 11:27:00 +0800 (CST)
 Received: from whupemp100012.china.huawei.com (unknown [7.152.185.135])
-	by mail.maildlp.com (Postfix) with ESMTPS id 96EFB203C1;
-	Wed, 30 Sep 2026 10:54:51 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id BC78A4048B;
+	Wed, 30 Sep 2026 11:39:13 +0800 (CST)
 Received: from huawei.com (10.67.174.121) by whupemp100012.china.huawei.com
  (7.152.185.135) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
- 2026 10:54:50 +0800
+ 2026 11:39:12 +0800
 From: Yao Yiqi <yaoyiqi3@huawei.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Srinivas Kandagatla
-	<srinivas.kandagatla@linaro.org>
-CC: <linux-arm-msm@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>
+CC: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+	<linux-arm-msm@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+	<linux-kernel@vger.kernel.org>
 Subject: [PATCH] misc: fastrpc: Fix double free in fastrpc_req_mmap() error path
-Date: Wed, 30 Sep 2026 02:36:00 +0000
-Message-ID: <20260930023600.2952441-1-yaoyiqi3@huawei.com>
+Date: Wed, 30 Sep 2026 03:20:22 +0000
+Message-ID: <20260930032022.2957082-1-yaoyiqi3@huawei.com>
 X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -48,7 +50,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
+X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
  whupemp100012.china.huawei.com (7.152.185.135)
 
 fastrpc_req_mmap() adds the newly allocated buffer to fl->mmaps before
