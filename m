@@ -1,187 +1,97 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E2B83DFC8F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:43:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AB9C4446F5
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:49:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790797402; cv=none; b=kf5LjBoF+ZrWdV/0wCbnjiuncApZBWf8okPqUsHnD75dpvjnWYpUVL3t5LQtGNPI3Z3GB/uEzKhVcfFUYyW1Iw6JmEOQR/S1mkIgbxREyUA/YfnEHdvT+lIfNbsjwSj8gBp/gJm7g25hZFdwRU0dwqaOMfzIunbUDXCi/9Csx1g=
+	t=1790797749; cv=none; b=rcUh6+tXPR5AE1qHIeXqD4xpEoTGYfz/DrjRVHPVk23G5tGG2aUU+JMSTuFtcFEqk6kHR21WQK0yHbXU0mpaB9h+jNo+zaocJJ8YySnZwpWnvZKyRogemN7tAPdK5rCAjM6rSyx5w9R2J08dzMxqyr3ye5UEEvV99hTLgCmXRGw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790797402; c=relaxed/simple;
-	bh=2dC9A9LB/DC0XhjvaBbr6vG0m60dUwffQrb9zaIDjwE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=q/TJMMV2JmfMJCLHHxMZajtuWu1KBtKEZK3hPBo9N84RI6cLQV1PRD9qbKCvy7XIe1sC2JdJGx8ccRz2VGm3s6jpRIJ7Ls+2AuyVvQxXQhE0IIfgBysWGMSBy51ERQcwFx9cqJczilNuPBYwi9Sncaf7/R+FXyH71n3ydKQAuU0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MHZLvR+l; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qktn4+59; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790797749; c=relaxed/simple;
+	bh=KBjoGURW6Lp0xuEIrYUnIleO+gefEsMNlz5gVLaCbrA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=bHKTyAQjVlUhI9anDkx1bXUyuFmWc7jqDajWHxuiiu1eVMXh7U6ocBQYC0BtaEwjc17KQ/FtvbnlMbfgI1JyXkhOiaOjZWjR5ETOJPTNdcbNx2pMLmYAL15AkEkBp3PcZtJ84uOGnA25DT38xbtC4sZqHl1OcSAm86JKtwaadio=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dxagNlyy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MHZLvR+l";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qktn4+59"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UHeeia1198586
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:43:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	007PSKl5xLWMYdPRP2bDBtZ6gH/PmdJJeMhutR+eJOA=; b=MHZLvR+lJBkqEsIZ
-	Zs/mnDoPFEP6EiqWdJtGzMF52HeZLRW2KXrPLQciTRjzKqomyUnMry4XKgbuVqWX
-	eMK6bPuEYd+NOqe0CYLjR7rokFmy5StvslTdRKpoU0Bgs+2R+P1k+nKbuFkYbrxM
-	bl9YZ3PIOZYVmFHOFvE0lAF75gqDOTh/mxpNb/lyf1KvtqT0F2UkTYUfC+cGaW0x
-	Sau5pNyCk7VuPEJ4rZode64wBcZg8mNu96+Z+JHAKXM3/a0Tu3jDKf+02a01avL3
-	J6Ab2+O/9cwgCe4/i8TURpLAtFv82pCcmSedUAZxrcdTsxUmBVQrUhfvQHTIwp+B
-	ILN4nQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h136thq1y-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:43:20 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93a1e564fd5so1047064385a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:43:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790797399; x=1791402199; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=007PSKl5xLWMYdPRP2bDBtZ6gH/PmdJJeMhutR+eJOA=;
-        b=Qktn4+59NHf2UdFRg6VmXBwxaoywB8zKKcBC6bVUp8hB3LPHQwCuBY/fmtRkIiuaK9
-         qsRO6MoY5LIBlI/NAV9D83HfQ1+eE5NYfaMPDB/hScBfitlXBjV5J4SmEoNn13OutZOy
-         0X4TG+Agg26bWAQSLsgKtMFng21h7+R5jNZl0n/sH92pBMW9PR6Ny9vBVeyO5Squ5Upn
-         ZrkSDJqWOZQM1CR51RZouFEdZWiS33Q72fxKVf1JdFj/Wt/BIRZjhLG6tC7eayoTFr0S
-         XUuHko4g1QstcbQV9RKgQglmVd+A1eebXdF0tlTE0P5QJN0LUNNCcAHc562Hs4G0bbZh
-         haew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790797399; x=1791402199;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=007PSKl5xLWMYdPRP2bDBtZ6gH/PmdJJeMhutR+eJOA=;
-        b=IAoYQcakTlO/Hx4we7TGUpsnWG0DcfA7ihRU7i12RN9RAkC/tgIpvTsLoYDP+WbwrM
-         OXxai1Vl4U+daU1/PXA46pJAyDvdRe3yw0G49jwIQ9PFyIzLhYP6CvM8TRJzRlkrSaf0
-         ZZL5EfcL+R59ChHgz9mt4n/eyXmgMsbKdButNr6SCZB5eJ+SfdRyldqjAXoypEfB+/+u
-         svsUmh97EG351qV+NGO/NoK1mLu4SHrEXOw4nqN3VBINfz/4KpZAF2V5/QcCq/TigOG8
-         NSyL+dOATEnbeuqyk3p+Az3ejV/ZmBRCLRvOIx003gOFRWgNpHcD5rbCohm8QJ5/TG23
-         Qu7w==
-X-Forwarded-Encrypted: i=1; AKwUvBw/b8anIYunRNpU4740E7vvgLDTmApwV7TGY6T5HgxQnAYf5NwsA6vwEVbygnkj7LnMPn8iidJzrLm8ytIo@vger.kernel.org
-X-Gm-Message-State: AFuF++lWNqAbfS1yOJd37OeArJXQVKULwXfPkUqO9YdFIGXFZv4swGAJ
-	3yODRzvNVOseuF6itGS/9y5wNRJCUsJvgb5uHF6CEgkYx34jflNThirI7f1IPOtlDf08AQCncz7
-	XAFsmpmGuZ3ZbQUxhrG+bjlDgYVhFSgUmpJ8AobkbvfGnZ5M5SV5nPjQOUq7kkm0/iAkl00mBaB
-	z0
-X-Gm-Gg: AYBFou3o63O7crPLMETLP3Z9LBxhdxJdkwy0NGvU/Dv0SBukFTsRVwGLF5ePURsTUIL
-	iKNKZFj3l7ZhLhPJgiShj70zdBJ5xPLZeD7fRMcaTcuOkhLdWKp1wC5LwoKiMrXUfVV2jQ92FlB
-	n8ew42EPeLksuI/UatZ5MNH+Zv6j8/P1WzNQg+YFpEPLEe27cjiK3GLhNAAYcDokRWu/SMX+SAi
-	AqXouDg6rNuM6DYJa45kCUpyeZ7EYWq+QAIjHln73Qx2ZlPjda+DFFoonqudirUX5GRoh//FnDe
-	czafv3kix8aJR2HP92JZHLDJOCcLHfC17K8qpzW5ZUDgOuT/pTYKQof74wpIuFVkSGkEQ78bu9z
-	Q6LD1I5go/1VdemUrhyaM8PlKcx4/b5EYdLPalImtRPthQQ1+KUmq3d5sTBl1l+BebU9e151mGE
-	TjS4AQGHMGdtrg
-X-Received: by 2002:a05:620a:880a:b0:93b:d7a2:83d1 with SMTP id af79cd13be357-93ca98aec8fmr429663785a.64.1790797399124;
-        Wed, 30 Sep 2026 12:43:19 -0700 (PDT)
-X-Received: by 2002:a05:620a:880a:b0:93b:d7a2:83d1 with SMTP id af79cd13be357-93ca98aec8fmr429658785a.64.1790797398603;
-        Wed, 30 Sep 2026 12:43:18 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5ba44059773sm18477e87.11.2026.09.30.12.43.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 12:43:17 -0700 (PDT)
-Date: Wed, 30 Sep 2026 22:43:15 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Jun Nie <jun.nie@linaro.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v5 3/6] drm/mipi-dsi: Add flag to support dual-panel
- configurations
-Message-ID: <kgnrsnko7u4g6bpxudfo6yqubhd5gcyrdyovjfkohlgo63yrwn@xbgp7jgv6ns3>
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-3-c042266b9eeb@linaro.org>
- <gu22hz3dnttzyu2eewpalgzxtocmlbfvnpwore36ufmyr3xtag@r5bbhafsn562>
- <CABymUCNtcgbcRNXdMUjVdnH_ybOxjFB31gd6AW-0HCFDSn9w4g@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dxagNlyy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81DD41F00899
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:49:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790797745;
+	bh=KBjoGURW6Lp0xuEIrYUnIleO+gefEsMNlz5gVLaCbrA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=dxagNlyy5eOr8Y1m7m/XmQK9pXVnqB8ZIFTzMKunnFGyyZYj4FL+8eSCkFyFXHQuN
+	 QENr9Q1J+n3MUzDaTqJm7qjNeOHORQ/stL8Vz//Rg8n16W9BuFOPMg0wuRV+RLiAN9
+	 mn7SO9OHYIFNbVBIhv/niKGcaa9ZRB8+iuX2cOQSCamPudNHID/gfZJ02O6MfdAVAA
+	 w3sYXzHfPj6gEwS6d3wrcPifWe4i7BUfI4IPXuSBemTYWnzjLBiHvcMymOn3zL4ldO
+	 XfTwobEYq7WqTIN1SKivo2X/kAs4L6+MZcZ8/XcCok4Ue2QFjuEbb/qQFT04NoEKR3
+	 ZEWW6CPaHEDAA==
+Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5ba41be3417so704338e87.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:49:05 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvByidctLgtQFOCSknHu1huXoOhkRgxGVzWgErFBSiXAmrt7mdj1/ROAxco3cFxIfGvl4PWgmeN2AP+TSiCeI@vger.kernel.org
+X-Gm-Message-State: AFq9FYIWab11kmgMHd56Uq3dxDBkJmY0eBNr8LYXN3Q5WlJxabgCu8Xw
+	1G4t/gHq+P7hzt26UkNTKA628Gq7jo7oTgBfg0NDs3rv8yKMXS3Kj4EOoxvHyLMn/oV3d8RpJJt
+	5OOBT7mnazag6X2hgvagX+OVWUD0163Q=
+X-Received: by 2002:a05:6512:33d3:b0:5b8:d8ec:bee5 with SMTP id
+ 2adb3069b0e04-5ba405ea03emr1058463e87.24.1790797744086; Wed, 30 Sep 2026
+ 12:49:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CABymUCNtcgbcRNXdMUjVdnH_ybOxjFB31gd6AW-0HCFDSn9w4g@mail.gmail.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA4MCBTYWx0ZWRfX6NxpVES18M/5
- T7y2I3afFHF7AeOQuxoEwTyVG30m0xtzNYq0wUuQbyqxwN415Yo2/Tpc8XNYHF0JGwMggpDtHl9
- Zw93w5vE5JMxWM6mZUgnIGSGU7ocnwY=
-X-Authority-Analysis: v=2.4 cv=aPFlOr9m c=1 sm=1 tr=0 ts=6abd6658 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=KKAkSRfTAAAA:8 a=gnaAZu_HdrVRTMOkdIcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: rnvHp9FzcmmIV0Lybm1uUHbg5Legz2s6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA4MCBTYWx0ZWRfX3VNCVzGFOiL7
- H1so2/Dx4FWTXKuc/RI6bon+nwzkx6XYXNnJryN9clFx9YM3csb/vMWwou7UCPXCtQbHATvUyhJ
- 4ZLYQm8KXXT+ex34nEkEKxDYSuimom6EJwMT4m81R9snXOiZa2f1z5XBNCHa2QiEkhkwjyRILuc
- Q3vn2shbAeUX8b7dwN3NqQ+lrtDjMc75WfNcqqrBlU9kSyRBmri30vFglG0R1DT1PrHy0tFUotQ
- nIkx0IyY0j9b7Bh3oQNnWarPdb0jGhgm45ukTZKWWsIizvCq/amHT7tKRB5Dmo4ocDXl4Djp+Oj
- 62JVxnlN5u4noFAXis8HsfWzpfroEVWqllC4B+LDrN6KnptYPYHw5PWWzRunQqCnx2FJRFPs2C0
- Q3rej2dLyG/wq+a4wU75pfHFsLoDsxlQcVhOab1GV+qSYaAOCpFAcog0AZa0C/lmqCXbQJHT4EB
- bosSMiG12dAZrDNFYXQ==
-X-Proofpoint-GUID: rnvHp9FzcmmIV0Lybm1uUHbg5Legz2s6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300080
+References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
+ <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
+ <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com> <CABymUCN1oxuqPi=s1cpBHvMJorHN62uieD8Pf=Y--WBPp-=NHA@mail.gmail.com>
+In-Reply-To: <CABymUCN1oxuqPi=s1cpBHvMJorHN62uieD8Pf=Y--WBPp-=NHA@mail.gmail.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 30 Sep 2026 21:48:51 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnkr+M9Tn_zAL8+owO7H706XYSMosSz-1D20rwbUukQ3A@mail.gmail.com>
+X-Gm-Features: AclHuK8lnxj_P_eEplQvchjcjf4j1lYtGX2m3t6HeEPZ8smFgSi0dE0qiPGPASE
+Message-ID: <CAD++jLnkr+M9Tn_zAL8+owO7H706XYSMosSz-1D20rwbUukQ3A@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] drm/panel: Add driver for Synaptics R63455 DSI panel
+To: Jun Nie <jun.nie@linaro.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 30, 2026 at 09:52:48PM +0800, Jun Nie wrote:
-> Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> 于2026年9月30日周三 00:05写道：
-> >
-> > On Mon, Jul 27, 2026 at 04:08:42PM +0800, Jun Nie wrote:
-> > > Some devices treat two independent physical DSI panels as a single
-> > > logical panel from the CRTC's perspective. However, two separate DSI
-> > > hosts are still required to drive the panels individually.
-> > >
-> > > Introduce a `dual_panel` flag to the `mipi_dsi_device` struct. This
-> > > allows a panel driver to inform the DSI host that it is part of a
-> > > dual-panel setup, enabling the host to coordinate both physical
-> > > displays as one.
-> > >
-> > > This change does not force individual panel driver to manage
-> > > system-level display topology if the driver does not intended to
-> > > support dual panel topology. Only the driver that set the flag to
-> > > true need to take care of panel topology.
-> > >
-> > > Signed-off-by: Jun Nie <jun.nie@linaro.org>
-> > > ---
-> > >  include/drm/drm_mipi_dsi.h | 2 ++
-> > >  1 file changed, 2 insertions(+)
-> >
-> > Do you have a single MIPI DSI device, or are there two independent MIPI
-> > DSI devices? In the latter case, the flag is wrongly placed.
-> 
-> Yes, there are 2 mipi devices, and 2 mipi hosts. This flag is used for
-> mipi device
-> to notify host they are one of dual panels, so that horizontal
-> configuration(width)
-> in mipi host can be handled correctly. Where do you suggest to put this flag?
-> Thanks!
+On Wed, Sep 30, 2026 at 6:31=E2=80=AFPM Jun Nie <jun.nie@linaro.org> wrote:
+> > On Mon, Jul 27, 2026 at 10:09=E2=80=AFAM Jun Nie <jun.nie@linaro.org> w=
+rote:
 
-Into the msm DSI structures. We already have several Qualcomm-specific
-flags. I'm thinking from the 'generic device' point of view. The
-'dual_panel' doesn't mean anything if the device has more than two DSI
-hosts. You need to specify which hosts are mapped to L or R channels, etc.
+> > If you have a datasheet for this display controller, then please add so=
+me
+> > one-line comments before each command to explain what is being set
+> > up.
+>
+> I hope I had datasheet, but the answer is no. All I have is an init seque=
+nce
+> with the information in the above macro definition. Let just live with it=
+ @_@
 
--- 
-With best wishes
-Dmitry
+I would send the message "upward" that you need a proper datasheet
+for this, from whoever wants this to happen.
+
+I have seen from the presentation that you will be working on
+compensation for chromatic aberration for this device, and that is only
+going to have a point if the color representation on the display can be
+trusted to begin with. Which means
+gamma correction. (Which we don't yet support in the panels,
+but hey, another opportunity to be first!)
+
+Gamma is invariably going to be one of these
+"magic commands", at that point of depth you really need the manual
+to see what is going on.
+
+Yours,
+Linus Walleij
