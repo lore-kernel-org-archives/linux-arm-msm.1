@@ -1,316 +1,173 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB6C036B933
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:53:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 373973AD507
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:55:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790761998; cv=none; b=Iv6cvnv9iciwBKa2CkdXBwKjR9UXuTGTe3LFaA4uTG0j1Y3aCsaKA+FxxdCpxBdxmXtvUWuStNZnzMet7Q1YD4wVuxvqMMIA3L9Gx/7c0NYblm3GeDrEROE7C4fw4u8JyFBOQJnijOxbO+2gxTkdI24uBEG8uoN87nnj133LuIE=
+	t=1790762150; cv=none; b=MfJwB2LxL85BP74argTCf1yVwGdP2qt+OpLWo531AF24L03WvuKG63uDagBZN4zDvISy5930AgL55zarusTrejWN6HB+2W1Xf0P9iSmLGw6OKxDz/co9OqF0E2z/ODy0+OiGt3IYOvDXUvPkNGwt4/5RyTvfjM06Ln4VnoaiMBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790761998; c=relaxed/simple;
-	bh=+mv1KAcFZbwD3cm08xkzGGBTGLGR/Dc8WFkhyvwduXs=;
+	s=arc-20240116; t=1790762150; c=relaxed/simple;
+	bh=jrBevaeHBPratLs/gGnIcwLwfSVAIVm3pFEdnDTe5po=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dSgMsJ+81F3/XdoUwl+M5mbLHLrIFN7BinbTBn71FXr0hVMqeW1IMsyHBFkQ8I2Qf+/+PXRDWJKzI9q0ds92YjQWumbNnI7TrNPu335NQgdJWMu5P1dQ3x8+4E+GHvyGkCkKiQT4twdmdDFhNWS1DIV8Ex0bXmez/bcNqiIbsK8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bc2b/ArL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Kblj13Ut; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=qTdM9oRqdBk9r74fEp/4B+MyL9JxE6hIKcncyK0zwRMVjL0yMohj48XRmEWnjegqr0j6ZB53Q6MQymjg7UTgZNFVk7c//TrSBsnQ14nnkG2TNvrpYTWLUt/KCTlzQeQK0s90FeV+k5ACiIwm2BiGX2kN4k/XxXn+rL8FHIaPSsA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ENWMyR1V; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MSwrFvSz; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bc2b/ArL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Kblj13Ut"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68U7ddPk3091435
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:53:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ENWMyR1V";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MSwrFvSz"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68U7dZt63489221
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:55:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	KoIZwhTJhIZAlpg3uBh0jGdeS9VkhuQy/HxfJPsZvvI=; b=bc2b/ArL73mD5+9e
-	AAyWLY4Bu6JvyaKvf6hX2jHCu+MhEwIs8oVrA+PKWx1n8oPEGCsqFN7SorWyE3qP
-	38s/Q4dQGnnjmJjHE10hphjvv+s24vQrE6MlHcKMowoLrCQgS5w54i1pzAQbrLe/
-	jsLPoZckkwGl/Bpe3Y43gbRSbAA8FyypodBvAA835HTwicg+x7pU/+uwm8e4P7Kx
-	KYtLsnfU1/tQQi63gX2SMkRnZQ4X+WPceytIoyk2tQYEELMjZ0YYh6I1dN0pdoOb
-	yD3iXX8dA3rqM/AmSW3bGAfBTj5a8vKtxnqrWK7tnI9q12pouoRKfaWRcdYjkkmq
-	i6Ndlg==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j0ekqnc-1
+	J/UovM8U61lixyz44kABwbvznPPj9gWwm6N7SWf/v6A=; b=ENWMyR1V0wYRBha3
+	7Q3z9aGULf56S+9ecMkNDU7bo1PKu/giAtNrfmWvaZrmquEppl/E2TnKWtD4kvfo
+	gUsm8BQaTQ7Ex/OFegpV/b6EeY0qBnFGX/vwzIQlFedRoXOI75AKJN65WuWiVcMI
+	dX1+usVGfHmAZdd34tH8NV4Xfiu0KVkRa0AfRgRKecPFdpQ3QUtVIrAQ+No4xbjM
+	ShpIMV9iCOunS3I3gjMi5abzyjK40qAmi8l93FYb5ZLr64g3fbgVlsk5Ze999F7Y
+	XhZs15joj5oB3J9yPD7gE9/LvO4Xe8LkIQ9tJKQpx1AlSog2ELkUbVmNSYvEZXi5
+	NLLelQ==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j97um8m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:53:15 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-34318e88ba2so4327056eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 02:53:15 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:55:47 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-9178ba8eb30so2732726d6.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 02:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790761995; x=1791366795; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KoIZwhTJhIZAlpg3uBh0jGdeS9VkhuQy/HxfJPsZvvI=;
-        b=Kblj13UtJghTi/v6pkS51RTz2P45j56P4eqOrlV7Amt4sXiMWvUMgbr/XX8WZsah8h
-         g8+E2BuHSNdaLtxpchQ8mDspEmQ1zsmcjbVjddwrTYTJVcaePoq/ZSAHSPu9RxufbKLu
-         2jiCa20rc8Jn2z6UW/SyzHTb7+eqIwr4JtxtDlMZSXqGDoqLQWUcTAtC79qgF3bPZQ9z
-         lrAvbbx1sBPnRSVV++Hbj3XqDEFVe30wAFeD0nIx5/1uwirxIAudfwpGLFMDrVJMRSdm
-         tG/us4rZke7YwYImrMASNdK1z2P6CtBmRWieJST2ueLJF//aQyCYkf5x4Jf1OqKTerEs
-         r5kg==
+        d=oss.qualcomm.com; s=google; t=1790762146; x=1791366946; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=J/UovM8U61lixyz44kABwbvznPPj9gWwm6N7SWf/v6A=;
+        b=MSwrFvSztLTfsY4DvOCmeRN6+ouN4gFl9tCaMePOWru7lJGTlyxF8EzS8pQhWWBB5J
+         sGbYKw6JQzo+lzAsmUAehIfyVYhHWlk+wBcVPuwT2KRvXB+fl2Wz2mTk6L+lF1XTL9qu
+         8fmhbnrxqETk+jn0D2axYYn5X2D4DOWFLmCuuOlOjjZd8RYo6SeteFd7H/Ad/bARrVa2
+         YYVrSjKSWqDp/5q8noAb02wkCfVF73JwbuK94dgES1licJp2XyUrKxWmOtpWiqF8DQ+G
+         RqQdocg0EXz2YGAm/rESSUTwjbUvV4NhaQNz5LhL4pdOSYbSPRj7cqsUEIUSSF4WTb9g
+         /wtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790761995; x=1791366795;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790762146; x=1791366946;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=KoIZwhTJhIZAlpg3uBh0jGdeS9VkhuQy/HxfJPsZvvI=;
-        b=ZgL8d0Q2yjf9vtpVRzvlATxSo+IyCFy/JKydwuT3nkYNgqNaLS7KPZ7cj06NLnaEr6
-         jLWpWIvutZ5iehbkG5LJrjIce9MsUPhbAS8Ga+wzFx3B2K2g9dIcogI2TAokzK9NYr3Q
-         7yXwML8tTuM6iHl0iE205cHh8sgBznYBXrafVUDoH0A/6jgeyasE6+ao+75o/8wFeLgX
-         3/1/3jeyO8EW5WVKkctKSd/QQzWyn8PzzX5+3v+WBDUBxnqOzICfEGlMhxzDUqvNorxX
-         s1WnYvFzxXtCjvNl1jBRiDuiNGm7iSxxEMWxBpI8BzF5158Bdmh4L937+8Able/ZL8OZ
-         S49A==
-X-Forwarded-Encrypted: i=1; AKwUvBwphHUxKU1CE0S5Wk4zc8suaMgxzAy/FOl1NyeT/mMCH+XKgdm92rhercbYdEPXlztZxP9lMsb8t5Orfq/C@vger.kernel.org
-X-Gm-Message-State: AFq9FYIaCrmTqnwOgKezcnUuHklr50YsPzHN/btWxVvO/7qt7vywwXP6
-	UVsLaiiEKewjB5GkmDaiz7p2/YFtVYtf9SfJ95K/lWPZ3uiy/GnadwxvjUZt+pMNNudsK+TMi+x
-	XkvVqbC4kpwTp7b5u64BmiYveiJtgvK6I5tIMdiPMuuY6LRfMv8zqyGIL3tQHxMSbALp5
-X-Gm-Gg: AYBFou3IEW/fbHhO7V2qdc5h3nFf2toDSVw5aaZEBJHyGKx+eUbfdn2Oqr15jG5NtfY
-	j4pnKUf8SkpzIC/1Lgo877ac3jaNN5RP0B90XiklKUbhPICfk2m+fd4haJi6vsFqHeNpepp7Jh0
-	JynS3mWZ9VAEETs3J6UZlDu+5p96Vd0JJbiVkH9xdcBJ5FkKHV1/wY46ztprNYZWimZpYkarBjd
-	fld9Y/47FbC6z3S/Oyi/4ifuZt6IqJDknBpxyMdUIOosiQpfrI0tUxgmHA83jwVqHmP/YcIMn2H
-	WA2Mc5nk1FvVv9ZL4PseR4s3zW43aKT+M/yVNgQT+sm2CUPRQyvrMnKxRM0MzDxQWbT0cd+OgBF
-	kXoqHy3nud6F8MQYwJ/F06EH2wxcbzlI=
-X-Received: by 2002:a05:7301:46a6:b0:33c:3f3:cb9e with SMTP id 5a478bee46e88-34cdbed5aafmr1297315eec.16.1790761994506;
-        Wed, 30 Sep 2026 02:53:14 -0700 (PDT)
-X-Received: by 2002:a05:7301:46a6:b0:33c:3f3:cb9e with SMTP id 5a478bee46e88-34cdbed5aafmr1297269eec.16.1790761993819;
-        Wed, 30 Sep 2026 02:53:13 -0700 (PDT)
-Received: from [10.206.101.140] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34cf4a63ac9sm3256973eec.10.2026.09.30.02.53.09
+        bh=J/UovM8U61lixyz44kABwbvznPPj9gWwm6N7SWf/v6A=;
+        b=qc31f/XvElozkT37n2zxMWKzn45Aq6+mnN1VmNnopsoozxBX/i31E6Z0zNOIouzNZz
+         G0A62v7NUW7+9UyYMNHnYdXuD019jVo1NalX8Pke/UHYYDOkBdHYQCvWgcqn823R+GGQ
+         ybzthS7GpqWj24LtbDOhk6N1fVMs+afmsYptE3xLZPmBgDh8s2tUNETdqhBHvWEGTlzs
+         tbWZqyRTrztrrjDa2+qCtbIglI3B2jMjkCOkp5A6nxixN+fmZ0vzXY/IC+z9eoBimtbs
+         S4+91NkLqsl6ZaB8cQF5QEA87/rgLuPVMlxU7h5z0RBtQbcNfzPK4PRwenw9l6U4nQbT
+         9MQQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxTUE+Zy/KDhW6lbEgN8oCljzTaEa1B5vYUjY3qTCrQODca3hZ6YHtf9dEfBm2kit/PDDaNLRbWiVlAhdTI@vger.kernel.org
+X-Gm-Message-State: AFuF++lxQroCn6+Nr7VGEj2u3LV7MAIdpZ+unh6Y2gr8FjEGk33mvrOE
+	S5y8fP4YrPhjspUzntpeSsj2j5KNqUObEiaLFRYmhF0tPC7ZMM0vE4ZuNrtHsZvDCy2ZCLC9TW5
+	HIoKIoF9WDaItyVJoi2/kytPlnsKlLQGVj377O2rFxBhN/CAkr2gYlXEW6oTik0RsH7xx
+X-Gm-Gg: AYBFou1W8d0SawQo0U86vCyO2SK2wFkyq9PYA9oSUulE53EIdebTszC1YZpRgakYlXK
+	jOWoMgS446onLmlJIHtByk/xH7pUL47gHzLHG19USePvSgI/BEPAu32CsLcttvMIgTDPjBzjlLl
+	mgYj84TAQAQnqtJy+OsG1BHLvimwIBWX20n/JfKupjVPHlhTrX5FY+fQMuzZ8c44KdcxdisDDKZ
+	N0IehkYXM4wjtyjYqxwCJiBCC1aiKVNu4w0voGf0cZv/PwmYBKDYrE8AwfONZUmbK4u+zkdFRv9
+	EwnNEQOJtnl3XxlurkhS2oVO/+/KJ/wHP80eWFOS5z1oqqyZd73OfO7UL876HEBf2nfV+u6tOCZ
+	Z6t01f87bs89WweP21stBQw==
+X-Received: by 2002:a05:620a:4116:b0:939:5924:e319 with SMTP id af79cd13be357-93ca934902fmr115958785a.0.1790762146250;
+        Wed, 30 Sep 2026 02:55:46 -0700 (PDT)
+X-Received: by 2002:a05:620a:4116:b0:939:5924:e319 with SMTP id af79cd13be357-93ca934902fmr115957185a.0.1790762145806;
+        Wed, 30 Sep 2026 02:55:45 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2e22f61b18sm40618066b.35.2026.09.30.02.55.44
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2026 02:53:12 -0700 (PDT)
-Message-ID: <5448c02a-3238-f658-43c6-397db2878519@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 15:23:07 +0530
+        Wed, 30 Sep 2026 02:55:45 -0700 (PDT)
+Message-ID: <989045f1-c4c3-4871-92b5-dc9f2a18f801@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 11:55:43 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v7 1/5] media: v4l2-core: add new control type
- V4L2_CTRL_TYPE_S8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mailbox: qcom-cpucp: read mbox hardware register using
+ readq()
+To: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Cc: Jassi Brar <jassisinghbrar@gmail.com>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260928052940.688105-1-sivansh.gupta@oss.qualcomm.com>
 Content-Language: en-US
-To: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, kernel test robot <lkp@intel.com>
-References: <20260924-enc_roi_enable-v7-0-6fa7413af23c@oss.qualcomm.com>
- <20260924-enc_roi_enable-v7-1-6fa7413af23c@oss.qualcomm.com>
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260924-enc_roi_enable-v7-1-6fa7413af23c@oss.qualcomm.com>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260928052940.688105-1-sivansh.gupta@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=cqgOAF4i c=1 sm=1 tr=0 ts=6abcdc0b cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: BdCSWUXb-bG0fsNveTh2gWxAzZJaqsCR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfX45sHsZMtwWO4
+ wmaAx/wt/4GhfemjqbSFSu7zbEb2q2WrFwh+1h/U7HFeW9QBnZlFZPZICw1Rcn5Lrl10Cni2occ
+ ZGajoK1EeFY1BZDNpuv5AHHVjbrvhogKtmRwuDrJC0VWAhjUeO2WVpw25IFxCcm/3Q5cLhEr9gB
+ oOXGRNqHtS+XWdhEURvJ7JVoebPHO2guNEPhJj8PmN6I7UYbBTYkaXOnFlLUZ1tZ75wWUoC0oID
+ kMxXavCbB1hRXNasZyAfGr18wiOM4S66V7POagpYfCFBxGbHM5mrQeoQUUTtMzWTkMZ2gZ56n59
+ oAcBtTR/LPHMNbGq6Q4+q1x+ldBjA5L4J49kVxPdOnNuAkgJnVGdVvH7AGpDyDyImze/TQofby2
+ KRhxWZMIc3MSuZ6w02TW7w5Etug+ZTuFtbL5aE4VlHyAdNcw29EpyQgEq0Agy8x59cWgf6JyPai
+ 9pI+1aO24RZQL3nlHOg==
+X-Proofpoint-ORIG-GUID: BdCSWUXb-bG0fsNveTh2gWxAzZJaqsCR
+X-Authority-Analysis: v=2.4 cv=BPImP1QG c=1 sm=1 tr=0 ts=6abcdca3 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zKU2OUPzHw6Z5M7UqCoA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: 3b01kHSCbsl13_uUHKRnWrkQzHiwphTO
-X-Proofpoint-ORIG-GUID: 3b01kHSCbsl13_uUHKRnWrkQzHiwphTO
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfX0kLbwanCz4iO
- 9G0kHwL8tLCVXQJ36bYXNWCKdnSfQh9akcbAce4+FPXNPLAwDz3nIhMTwWWBUZHhK/BlEzKNhkq
- MpqAT6Wj9j23I9V6ceicUzGh9zr+suc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfX15ezjyNmrQPN
- m9mz240Ud55zxlWI3PRm95OvG+cJp+W6x/n3K6S91EkcVXy15yMCp3c6vhl+7bya0bFxrLmBxNm
- gM+zgmjXGsBzUuD4UVWfNGo8Vnao9fGk5Bm87E33KN7XeLc32P6nGB1zMS2EY5jAyYFITp2ZAqA
- bd1DC7cXL97mMZG/oiiiqSACKeTG/iXszkmT7apMBQuszO11N8QU3KmF1Cz/lPZy6Tj6EyPifOg
- wBeGVWSMO/sHC/QNvyMURMppN9u7RhBuy3QktJ+2M8uumDKRhYzxlsrK9bXVrOZb1dJHgecjXrI
- hKxbqNYXx/+I+b8v0ZUJgZii0cgxxa+FQV/qHBQij6twGYFBDsf9/j7ruVjLCIV0/aPc473Dla2
- nyCtDGUUn6PAr+5dSwRbrwt4wf2Br4WLLjkZrLBZp/TP9yIXsM4XinvFVFUfo+deWrhYXz4ZNOl
- wzizmDp/hu+7R25cWEA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=OKysoguTPNU6ormpymcA:9 a=QEXdDO2ut3YA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfXwbH9ry7oO3F8
+ HSpMekxXKRinwM7tAbMH1N4Ht8NdKIj0wscaaBYIrocCdUuK6/JC3qvv2lQREN0Kc2G+17RMaDM
+ vcRkwRH9KC1DD55TmDfZdk+7JbfTa0w=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-30_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 clxscore=1015 adultscore=0 bulkscore=0
- impostorscore=0 spamscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
+ clxscore=1015 adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300039
 
-
-On 9/25/2026 5:58 AM, Deepa Guthyappa Madivalara wrote:
-> Introduce V4L2_CTRL_TYPE_S8 (enum value 0x0103) as a new
-> control type for signed 8-bit values. Add necessary support in
-> v4l2_ext_control, v4l2_ctrl_ptr and handling in v4l2-ctrls-core,
-> v4l2-ctrls-api.
->
-> Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+On 9/28/26 7:29 AM, Sivansh Gupta wrote:
+> Mailbox hardware registers are 64 bit wide, but the interrupt handler
+> currently reads only 32 bits with readl() at offset 0x4 (upper 32
+> bits). This returns an incorrect value, while reading using readq()
+> returns the expected value.
+> 
+> Use readq() to access the 64 bit register and pass the expected value
+> to the mailbox client.
+> 
+> Fixes: 0e2a9a03106c ("mailbox: Add support for QTI CPUCP mailbox controller")
+> Signed-off-by: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
 > ---
->  .../userspace-api/media/v4l/videodev2.h.rst.exceptions   |  1 +
->  .../userspace-api/media/v4l/vidioc-g-ext-ctrls.rst       |  4 ++++
->  .../userspace-api/media/v4l/vidioc-queryctrl.rst         |  6 ++++++
->  drivers/media/v4l2-core/v4l2-ctrls-api.c                 |  1 +
->  drivers/media/v4l2-core/v4l2-ctrls-core.c                | 16 ++++++++++++++++
->  include/media/v4l2-ctrls.h                               |  2 ++
->  include/uapi/linux/videodev2.h                           |  2 ++
->  7 files changed, 32 insertions(+)
->
-> diff --git a/Documentation/userspace-api/media/v4l/videodev2.h.rst.exceptions b/Documentation/userspace-api/media/v4l/videodev2.h.rst.exceptions
-> index 6182b4e2d2ee002c0d3562e1cc3bc2fd9c4286d6..b036ed3ec2f0744175cad1cbc4e73fe828e0c955 100644
-> --- a/Documentation/userspace-api/media/v4l/videodev2.h.rst.exceptions
-> +++ b/Documentation/userspace-api/media/v4l/videodev2.h.rst.exceptions
-> @@ -141,6 +141,7 @@ replace symbol V4L2_CTRL_TYPE_STRING :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_U16 :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_U32 :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_U8 :c:type:`V4L.v4l2_ctrl_type`
-> +replace symbol V4L2_CTRL_TYPE_S8 :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_MPEG2_SEQUENCE :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_MPEG2_PICTURE :c:type:`V4L.v4l2_ctrl_type`
->  replace symbol V4L2_CTRL_TYPE_MPEG2_QUANTISATION :c:type:`V4L.v4l2_ctrl_type`
-> diff --git a/Documentation/userspace-api/media/v4l/vidioc-g-ext-ctrls.rst b/Documentation/userspace-api/media/v4l/vidioc-g-ext-ctrls.rst
-> index d78328152b7552f8f0d30a9e2f7c104bfd4b70d3..fe5f8992389c32d8f35f432229ef2f734002644e 100644
-> --- a/Documentation/userspace-api/media/v4l/vidioc-g-ext-ctrls.rst
-> +++ b/Documentation/userspace-api/media/v4l/vidioc-g-ext-ctrls.rst
-> @@ -188,6 +188,10 @@ still cause this situation.
->        - ``p_u32``
->        - A pointer to a matrix control of unsigned 32-bit values. Valid if
->  	this control is of type ``V4L2_CTRL_TYPE_U32``.
-> +    * - __s8 *
-> +      - ``p_s8``
-> +      - A pointer to a matrix control of signed 8-bit values. Valid if
-> +	this control is of type ``V4L2_CTRL_TYPE_S8``.
->      * - __s32 *
->        - ``p_s32``
->        - A pointer to a matrix control of signed 32-bit values. Valid if
-> diff --git a/Documentation/userspace-api/media/v4l/vidioc-queryctrl.rst b/Documentation/userspace-api/media/v4l/vidioc-queryctrl.rst
-> index 82c8b52e771ce9301491b3f752e501a8fe7e2434..57e1652ae72e0324742142446acf32a16b94941c 100644
-> --- a/Documentation/userspace-api/media/v4l/vidioc-queryctrl.rst
-> +++ b/Documentation/userspace-api/media/v4l/vidioc-queryctrl.rst
-> @@ -425,6 +425,12 @@ See also the examples in :ref:`control`.
->        - any
->        - An unsigned 32-bit valued control ranging from minimum to maximum
->  	inclusive. The step value indicates the increment between values.
-> +    * - ``V4L2_CTRL_TYPE_S8``
-> +      - any
-> +      - any
-> +      - any
-> +      - A signed 8-bit valued control ranging from minimum to maximum
-> +	inclusive. The step value indicates the increment between values.
->      * - ``V4L2_CTRL_TYPE_MPEG2_QUANTISATION``
->        - n/a
->        - n/a
-> diff --git a/drivers/media/v4l2-core/v4l2-ctrls-api.c b/drivers/media/v4l2-core/v4l2-ctrls-api.c
-> index 93d8d4012d0f4fef004e417d0aee2ae44b1b30bd..7d41cfd7378baaa929d4da0266c45f731bb54285 100644
-> --- a/drivers/media/v4l2-core/v4l2-ctrls-api.c
-> +++ b/drivers/media/v4l2-core/v4l2-ctrls-api.c
-> @@ -980,6 +980,7 @@ int __v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
->  	case V4L2_CTRL_TYPE_U8:
->  	case V4L2_CTRL_TYPE_U16:
->  	case V4L2_CTRL_TYPE_U32:
-> +	case V4L2_CTRL_TYPE_S8:
->  		if (ctrl->is_array)
->  			return -EINVAL;
->  		ret = check_range(ctrl->type, min, max, step, def);
-> diff --git a/drivers/media/v4l2-core/v4l2-ctrls-core.c b/drivers/media/v4l2-core/v4l2-ctrls-core.c
-> index 661a3a25da5220d2e824f71e68871181533e6cd8..c5df0e0a54f81c73975f427957b7c99fd421d5ad 100644
-> --- a/drivers/media/v4l2-core/v4l2-ctrls-core.c
-> +++ b/drivers/media/v4l2-core/v4l2-ctrls-core.c
-> @@ -297,6 +297,9 @@ static void __v4l2_ctrl_type_op_init(const struct v4l2_ctrl *ctrl, u32 from_idx,
->  			memset(ptr.p_u32 + from_idx, 0, elems * sizeof(u32));
->  		}
->  		break;
-> +	case V4L2_CTRL_TYPE_S8:
-> +		memset(ptr.p_s8 + from_idx, (u8)value, elems);
-> +		break;
->  	default:
->  		for (i = from_idx; i < tot_elems; i++) {
->  			switch (which) {
-> @@ -377,6 +380,9 @@ void v4l2_ctrl_type_op_log(const struct v4l2_ctrl *ctrl)
->  	case V4L2_CTRL_TYPE_U32:
->  		pr_cont("%u", (unsigned)*ptr.p_u32);
->  		break;
-> +	case V4L2_CTRL_TYPE_S8:
-> +		pr_cont("%d", *ptr.p_s8);
-> +		break;
->  	case V4L2_CTRL_TYPE_AREA:
->  		pr_cont("%ux%u", ptr.p_area->width, ptr.p_area->height);
->  		break;
-> @@ -1442,6 +1448,8 @@ static int std_validate_elem(const struct v4l2_ctrl *ctrl, u32 idx,
->  		return ROUND_TO_RANGE(ptr.p_u16[idx], u16, ctrl);
->  	case V4L2_CTRL_TYPE_U32:
->  		return ROUND_TO_RANGE(ptr.p_u32[idx], u32, ctrl);
-> +	case V4L2_CTRL_TYPE_S8:
-> +		return ROUND_TO_RANGE(ptr.p_s8[idx], u8, ctrl);
+> v3:
+> - Removed references to an out of tree driver to focus on the incorrect
+>   value returned by readl()
+>   https://lore.kernel.org/all/93ce8588-7500-45da-9b9a-424c202590cf@oss.qualcomm.com/#t
+> 
+> v2:
+> - Expanded the commit message to explain why this change is required.
+> 
+>  drivers/mailbox/qcom-cpucp-mbox.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mailbox/qcom-cpucp-mbox.c b/drivers/mailbox/qcom-cpucp-mbox.c
+> index 862e45e8fbd5..0b584d9aad6c 100644
+> --- a/drivers/mailbox/qcom-cpucp-mbox.c
+> +++ b/drivers/mailbox/qcom-cpucp-mbox.c
+> @@ -61,7 +61,7 @@ static irqreturn_t qcom_cpucp_mbox_irq_fn(int irq, void *data)
+>  	status = readq(cpucp->rx_base + APSS_CPUCP_RX_MBOX_STAT);
+>  
+>  	for_each_set_bit(i, (unsigned long *)&status, cpucp->mbox.num_chans) {
+> -		u32 val = readl(cpucp->rx_base + APSS_CPUCP_RX_MBOX_CMD(i) + APSS_CPUCP_MBOX_CMD_OFF);
 
-Should ROUND_TO_RANGE() use s8 here instead of u8, since ptr.p_s8[idx] is an s8?
+This still retains the writel() later on
 
->  
->  	case V4L2_CTRL_TYPE_BOOLEAN:
->  		ptr.p_s32[idx] = !!ptr.p_s32[idx];
-> @@ -1501,6 +1509,10 @@ int v4l2_ctrl_type_op_validate(const struct v4l2_ctrl *ctrl,
->  		if (ctrl->maximum == 0xffffffff && ctrl->minimum == 0 && ctrl->step == 1)
->  			return 0;
->  		break;
-> +	case V4L2_CTRL_TYPE_S8:
-> +		if (ctrl->maximum == S8_MAX && ctrl->minimum == S8_MIN && ctrl->step == 1)
-> +			return 0;
-> +		break;
->  
->  	case V4L2_CTRL_TYPE_BUTTON:
->  	case V4L2_CTRL_TYPE_CTRL_CLASS:
-> @@ -1732,6 +1744,7 @@ int check_range(enum v4l2_ctrl_type type,
->  	case V4L2_CTRL_TYPE_U32:
->  	case V4L2_CTRL_TYPE_INTEGER:
->  	case V4L2_CTRL_TYPE_INTEGER64:
-> +	case V4L2_CTRL_TYPE_S8:
->  		if (step == 0 || min > max || def < min || def > max)
->  			return -ERANGE;
->  		return 0;
-> @@ -2037,6 +2050,9 @@ static struct v4l2_ctrl *v4l2_ctrl_new(struct v4l2_ctrl_handler *hdl,
->  	case V4L2_CTRL_TYPE_U32:
->  		elem_size = sizeof(u32);
->  		break;
-> +	case V4L2_CTRL_TYPE_S8:
-> +		elem_size = sizeof(s8);
-> +		break;
->  	case V4L2_CTRL_TYPE_MPEG2_SEQUENCE:
->  		elem_size = sizeof(struct v4l2_ctrl_mpeg2_sequence);
->  		break;
-> diff --git a/include/media/v4l2-ctrls.h b/include/media/v4l2-ctrls.h
-> index cec9217d97ac698cd447574f5d079dd913a9ef6f..6a181a6c6b43beae87310cacb044a0cc7ad2c063 100644
-> --- a/include/media/v4l2-ctrls.h
-> +++ b/include/media/v4l2-ctrls.h
-> @@ -27,6 +27,7 @@ struct video_device;
->  
->  /**
->   * union v4l2_ctrl_ptr - A pointer to a control value.
-> + * @p_s8:			Pointer to a 8-bit signed value.
->   * @p_s32:			Pointer to a 32-bit signed value.
->   * @p_s64:			Pointer to a 64-bit signed value.
->   * @p_u8:			Pointer to a 8-bit unsigned value.
-> @@ -61,6 +62,7 @@ struct video_device;
->   * @p_const:			Pointer to a constant compound value.
->   */
->  union v4l2_ctrl_ptr {
-> +	s8 *p_s8;
->  	s32 *p_s32;
->  	s64 *p_s64;
->  	u8 *p_u8;
-> diff --git a/include/uapi/linux/videodev2.h b/include/uapi/linux/videodev2.h
-> index 5373dba640fae3d19247ab1c74ba336e05dc0fe0..ac588d0093df9cc35c11d0b9d41d052d5e800925 100644
-> --- a/include/uapi/linux/videodev2.h
-> +++ b/include/uapi/linux/videodev2.h
-> @@ -1884,6 +1884,7 @@ struct v4l2_ext_control {
->  		__s64 value64;
->  		char __user *string;
->  		__u8 __user *p_u8;
-> +		__s8 __user *p_s8;
->  		__u16 __user *p_u16;
->  		__u32 __user *p_u32;
->  		__s32 __user *p_s32;
-> @@ -1961,6 +1962,7 @@ enum v4l2_ctrl_type {
->  	V4L2_CTRL_TYPE_U8	     = 0x0100,
->  	V4L2_CTRL_TYPE_U16	     = 0x0101,
->  	V4L2_CTRL_TYPE_U32	     = 0x0102,
-> +	V4L2_CTRL_TYPE_S8	     = 0x0103,
->  	V4L2_CTRL_TYPE_AREA          = 0x0106,
->  	V4L2_CTRL_TYPE_RECT	     = 0x0107,
->  
->
+> +		u64 val = readq(cpucp->rx_base + APSS_CPUCP_RX_MBOX_CMD(i));
+
+This will alter the indices of the mailbox channels, but it's ""fine""
+because it's always zero for the existing platforms..
+
+Konrad
