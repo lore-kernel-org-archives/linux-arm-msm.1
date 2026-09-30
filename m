@@ -1,65 +1,103 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 999E43BFE2A;
-	Wed, 30 Sep 2026 09:17:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9DD647127C;
+	Wed, 30 Sep 2026 09:21:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.216
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790759864; cv=none; b=PONHkD56tzP9+8V4OaN7hIiKG7IoEr82QM18QCsx6DE9TKVwt8BhHBpQVnNp6v71rrc1EQSHtFAQOJ+2lDD0cDrUrIuviIEd6gbeG21z1zQtu0DpNsYI0mayDx0aTGQLgIuliDzUh5fTttqJs4rzZw1IK0OVCDriQkXgV5Flh6Q=
+	t=1790760069; cv=none; b=VNVDhOl40mJAivJ1fzZ0Us46dplO0O3vt6aWGabXJBT/maIRsCJVgsYwdaIAWvBtJFNEf9Ju5lOuQirrfBitlPhHY7fRINNQWzWZsKjCmC7qhE2pL3eWZ3m09dDOLxvVru5Nx6gLMlZ4yR7XgNsyPfSbciYki41ls/R8sklTTR0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790759864; c=relaxed/simple;
-	bh=LypZ0rpous39/W2s6BbuOoEX9oM/CmhwwJRxJ2cM/Ww=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eJIN669wUqYOEbYI0LbX0o0TULFCF5SrAjYBLrt+QTzBtqlYLp9njvdPRIXdgtz2/W7g9XKOxb+/9EAWZW5sCyRowSl8jZTq62rJjIsdqjsyuexAhWpxyI7De5Xs2voiIlGepKwn8/KHEB6ptYmG9whMiJmDR3EVZSvUNnb/Kbc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gHVQTSXz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790760069; c=relaxed/simple;
+	bh=yT4qWVZ+9JPB7qcHY/op2BpeKH24p/wlR6ETHPZOnPw=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=trC9/qTc1TWZYcKnOx0DZ5o9ndt4YdBuH8vT0eCYkffB9q7dDFg2CnxDtM+Dt/WIL588roYWsGAm89YeZEQN0oMt8/drDNZxpp5tz0qfDdNPf7HgHPZ4ywLP5Ax575Xb7AT3s+6lYk4ce/PJFooX7Iabe3mdzItwehfCWlVJR/Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=tY4ep7e8; arc=none smtp.client-ip=113.46.200.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gHVQTSXz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 935AB1F000FF;
-	Wed, 30 Sep 2026 09:17:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790759863;
-	bh=NUVdIRXP0NOXY1Z8WgjO8JkBw+8YotZza239nN6U6sk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=gHVQTSXz6RHHJ2rqZ1eiN30JNm0jhwVlS+M7Wj+m4kG6cN2GbmTloEwW2kdj9wYMv
-	 jAnBOUK8yIJVt5zaRwegUPdXgLQ3Sb0Ra0/Pf7w7kkBmrvK5fT31B53EGNMdnyE/xz
-	 u4S9ZYrC31XtsISC9annf5lPRKjqoNb5ovSrOjd1jLq80gEg5GrBV5r3qkhwEvtw+M
-	 ZQFU6/NefiVRk7zCpvwrjxVareuqsVNQj/yBHK38ebw/eOOy78cxYdm8CJj45AEf6/
-	 oxm8JIP1chcuwiUeIsYvS2IRfWgxVGcDJgcYH6doCOwyERSWyy9coztK/VHd1god+3
-	 Ea0hYCKKdOKxw==
-Date: Wed, 30 Sep 2026 11:17:37 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
-	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] dt-bindings: usb: qcom,snps-dwc3: Add IPQ9650
- compatible
-Message-ID: <20260930-striped-copper-cat-7c4fff@quoll>
-References: <20260924-ctrl-v2-1-fbedbe760375@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="tY4ep7e8"
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=9I1J5/irPWPpC3onuKiGy23moCl8MOWObpAWFnLI0KQ=;
+	b=tY4ep7e8mWxoajgF2Au3TYM4VsY+ch7ReHXbr/CGAH/ICmaqLROzmZ4mExrl1tc+8IDWZHZGq
+	c/iI6da3KgfKB165vi6qlENXld8OMBg9gxSi79fLSfyksTi7mJYqZT01HSAOrINZyN3eYLOh4V2
+	nakGiIkiZ3Kdo7rIi2mCWaY=
+Received: from mail.maildlp.com (unknown [172.19.162.223])
+	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4hvq3c3jGYz1T4Fq;
+	Wed, 30 Sep 2026 17:09:00 +0800 (CST)
+Received: from whupemp100012.china.huawei.com (unknown [7.152.185.135])
+	by mail.maildlp.com (Postfix) with ESMTPS id E3CAA40561;
+	Wed, 30 Sep 2026 17:21:01 +0800 (CST)
+Received: from huawei.com (10.67.174.121) by whupemp100012.china.huawei.com
+ (7.152.185.135) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
+ 2026 17:21:00 +0800
+From: Yao Yiqi <yaoyiqi3@huawei.com>
+To: <sashiko-bot@kernel.org>
+CC: Srinivas Kandagatla <srini@kernel.org>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+	Arnd Bergmann <arnd@arndb.de>, <linux-arm-msm@vger.kernel.org>,
+	<dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v3] misc: fastrpc: Fix double free and races in fastrpc_req_mmap() error path
+Date: Wed, 30 Sep 2026 09:02:07 +0000
+Message-ID: <20260930090207.2975609-1-yaoyiqi3@huawei.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260930074609.1C0CC1F000FF@smtp.kernel.org>
+References: <20260930074609.1C0CC1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260924-ctrl-v2-1-fbedbe760375@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+ whupemp100012.china.huawei.com (7.152.185.135)
 
-On Thu, Sep 24, 2026 at 01:19:05PM +0530, Varadarajan Narayanan wrote:
-> Add the qcom,ipq9650-dwc3 compatible for the two DWC3 USB controllers found
-> on IPQ9650, using qcom,snps-dwc3 as the fallback compatible.
-> 
-> One controller is connected to a High-Speed PHY, while the other is
-> connected to both High-Speed and SuperSpeed PHYs.
-> 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
+On Sep 30th, Sashiko AI wrote:
+> [Severity: Critical]
+> Is there a risk of a DMA use-after-free if the unmap operation is
+> interrupted by a signal?
+> ...
+> If fastrpc_req_munmap_impl() returns -ERESTARTSYS, this err_assign path
+> then manually adds the buffer back to fl->mmaps. When the process later
+> exits, fastrpc_user_free() will reclaim this buffer while the DSP may
+> still be using it, which could corrupt newly allocated kernel memory.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Thanks for the review.  This path is not reachable.
+
+fastrpc_req_munmap_impl() issues the unmap RPC with kernel = true:
+
+	err = fastrpc_internal_invoke(fl, true, FASTRPC_INIT_HANDLE, sc,
+				      &args[0]);
+
+and fastrpc_internal_invoke() waits differently depending on that flag
+(fastrpc_wait_for_response(), drivers/misc/fastrpc.c:1320):
+
+	if (kernel) {
+		if (!wait_for_completion_timeout(&ctx->work, 10 * HZ))
+			err = -ETIMEDOUT;
+	} else {
+		err = wait_for_completion_interruptible(&ctx->work);
+	}
+
+wait_for_completion_timeout() is uninterruptible, so the kernel invoke can
+only return 0 or -ETIMEDOUT, never -ERESTARTSYS.  The interruptible wait
+above is the only source of -ERESTARTSYS in this driver, and it is only
+used for user invokes (FASTRPC_IOCTL_INVOKE).  Therefore the
+interrupted-invoke cleanup you quoted (fastrpc.c:1418) never runs for the
+unmap RPC, no matter whether the buffer is linked into fl->mmaps at that
+point, and fastrpc_req_munmap_impl() cannot return -ERESTARTSYS from the
+err_assign path.
+
+For the failure that the unmap RPC can actually return (-ETIMEDOUT or a
+DSP error), re-adding the buffer to fl->mmaps keeps it tracked so that
+fastrpc_user_free() reclaims it on release.  That is exactly what
+fastrpc_req_munmap() has done since 6102ceb4eab8 ("misc: fastrpc: Remove
+buffer from list prior to unmap operation") for a failed unmap, and this
+patch deliberately preserves that existing behaviour.
 
 Best regards,
-Krzysztof
-
+Yiqi
