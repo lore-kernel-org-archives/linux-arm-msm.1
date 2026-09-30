@@ -1,277 +1,131 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABFE14E4C44
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABE47519900
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:08:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790776460; cv=none; b=OjOzZgxv/3jqyDipwSe/KhSS8d7BUMz9vbnljd2p14ll610so1gG/ZtA+6Uk7+vCAR0EGnaqBi/pODetw1707uMA22Hkn+j6usQbGuPeJfgCDnx4RxWq4Hit6RKFVqiHu0zWnx7n1g/oYzDVm1VtKgHMcHW3KCoBN7spWz0rANY=
+	t=1790777337; cv=none; b=WnnoeVBYA05Y0L0jINTCgqoD51JyPO4fVDsOmxgY6Mt/PkOAZ5jVkTTKCPfZxX9sgrrIlb+IeNhE+uR0VZpHx7Sm8Z72Fh10mhicjHf5P1/buYD0EipHnKtLPjYh8B5m/4x8s+wdyjj2eiYKcrFqMaRwI8miX48BXVqyjXbrZFE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790776460; c=relaxed/simple;
-	bh=C5kS0UFiBQBxbAO7J0O+tt8viTIzi/t8PoyC1nzYDCs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=mGNTXkrPJzheU8RN9i5U3+gapn8cS4JmPBewmnrNHiDKw/S6TDw7O9GwXskfbKoS7zSKD0BM1quRx5eM4f5B/mkGqZPOdmnFDM/7VQfg7Fihzig7T5Wf/HDvWlYZZ1CJbfx96l2uhaW6JpJqXoQNQ8QG98v/lHaKz347hcuv0SI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Z2P1OAEq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CFCpnlpE; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790777337; c=relaxed/simple;
+	bh=u/sYFJ0IFoVAn4mTeL9RLHFvHzVSFq6mlMEPEuqFX/c=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Lkir1zZXIttc/XyNhDh6n6eirxznKG/VHSMoKobC/7y7iTXdt62QyM0yPD1AWpawv2Ss+vRPPmlNi8KQYjop+v0OO4fdvWfbRVgNtL0Q89dgjMcbS3gNEJnR2wjY7l5ngP4Xnloe3KvG4tm5nLoe/9n1Xx9gmXDrXghifpYPqIk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=bNi0/Fjk; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z2P1OAEq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CFCpnlpE"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UDs9uP3271352
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=1QVm3uVGzAUWdDjTOzFAit
-	RtIDZRQBtfGneOG45+140=; b=Z2P1OAEqGqOxmq0eP1Jk4XhfkEigaTtTC39ZCz
-	7BDSJd8tPGBMSSOEpkRDBXyy9/IsM+6gMVcrMNTCj1qn4DY1xQP6vJsmQR5g6FBk
-	nUdiOc15vzqWv4Q8QeijR8cJDxnmZl2d6GtfWFrEZ6s7yI3tHrwdGF2rHVfyjQpa
-	S0ZcMPonEDVZfGrlzu3IQ9w7baqWcdluNxpY+i2L1vTi/OvXEwTD9Urqi5RMiU4o
-	xFyCNHzi2KbGwX3z8YdBJH99hFjptf7nTfaWiktwk71JoyF7cehgernAA+s4RzEH
-	ftaLNdYjlyDbmgIm60fJpPvGmBxBfvV3tb2i0e8kAc69KKWQ==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0tkn2jak-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:08 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-791463ed29dso4509386137.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 06:54:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790776430; x=1791381230; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=1QVm3uVGzAUWdDjTOzFAitRtIDZRQBtfGneOG45+140=;
-        b=CFCpnlpEYpcBS58b1bV5z6kevj9CHkBq1WzT84yGh3TxDxPhEYor44aIMfDbJE1yFo
-         OcpcCNvWodlOMbd9QY7QdQBEHIh41GVkBU7tFtvHtJwzRVz1UpLRQqB/g7n+RvMYz5ak
-         t4Xxb7mbDHUBx3VkD4IensbIA5LZVGo47QQmoAhKHJOgamu4WpDfDv6ZLMzTUpmt5WQv
-         9Hk88n8wgKgjwptQNd4a8mUIRw+Pz4L5gc06s0Q/pgVvNgf9iBsSBiAGz60o5xIOL2V6
-         32MAJVpgffEG6zX1bnGPDrs5wDu6n9yjKEv1uM4hU8/D+KcvdLuVwb1wdIEh40ujCeai
-         E2yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790776430; x=1791381230;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=1QVm3uVGzAUWdDjTOzFAitRtIDZRQBtfGneOG45+140=;
-        b=eGrtyLMOMklJs4L5kX3ZmSdH7HRD8PSk48C5/AZDGICiJyRNwTA3ZlUZunRmXKHstH
-         mNYHJJyn7Pz4C6h6lL3+S79P6bUmsnGs6Bd2zJhlrmpX3px+DR0O09PyxrdGePT5tIz9
-         0z+Bb8fXXpN9a5ixL4ESvy4R7EGuWzx05FNT2/sGDQx8qtiuFlWRENKMl7S+GI6lWhHU
-         mbgiMYsOjB3hnl6OOTEKny/COEdilhd8cYDRSbv1VMuOJWo2/WEebu+XNX8LG7G7/sx1
-         N4+FKGozHjuH+/z9H+PX1gizCkjYua82FfyXn3y6kmRQRKV+KEJrBEme2QW2B+vu/cxP
-         7KBw==
-X-Gm-Message-State: AFq9FYLy8JpWez1CfGjwqPZH/udCwl145CHydpxH68xpO6zu+RGdGWcm
-	hmLfCILEZSu+eNaWblmxhh80kuMw4K2+P5uX9hbX2fXt6fVrj0AEp4nem23D9Ujdjwv5NkYLBs7
-	p9+s6LTHhMfq3Zp3xui0g/JRu3p/u/iVjifbBX/GjQ0+k0llDmRDQA/4R9BTMP9B9o8ZN
-X-Gm-Gg: AYBFou3+M5gBPCBsVHipgMpzJeje5sqpYtst1h0VCnVgQl72B5XX1XE+plqVPd6SkEG
-	HI2KMlRNKHwDkCkGWU+g+o0k9gzfOxjFNnMkxF4TannxygSFtxNYKcetIn4T5rvi7NU+20SYsEh
-	qEr5tszMAYgQniXUE4JpCZytKn8phuA9X7wNOgWqlyBIFDMHZTRqWCs/MVFk9aTdDfq1DolH6yV
-	34UKUCWtaPwY3wiFqWuci3UJA7EdSpRWB00yP80w2Mjr8cFSuQ+GriM0c49di8ZBfmXfnO/q/m+
-	QxoPuLaBhw4Aw3KKwCD0m2VjWhenV5VZocA1LEb4CIqKI6OC0mK0mO4VD+AWIFcQf7xr4nKcuOe
-	lvNodHrje
-X-Received: by 2002:a05:6102:418b:b0:7a5:391c:37ac with SMTP id ada2fe7eead31-7be728b59d4mr412293137.10.1790776429774;
-        Wed, 30 Sep 2026 06:53:49 -0700 (PDT)
-X-Received: by 2002:a05:6102:418b:b0:7a5:391c:37ac with SMTP id ada2fe7eead31-7be728b59d4mr412277137.10.1790776429213;
-        Wed, 30 Sep 2026 06:53:49 -0700 (PDT)
-Received: from [127.0.1.1] ([188.27.161.193])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a01e66b10esm837845e9.14.2026.09.30.06.53.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 06:53:48 -0700 (PDT)
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 16:53:44 +0300
-Subject: [PATCH v2] clk: qcom: gcc-sm6375: Use common clock controller
- probe data
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="bNi0/Fjk"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790777328;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=kog7asmMh6wog1adNQUGIn243OW/BEgANRMVLg38o7k=;
+	b=bNi0/FjkqUktJSiyrqDa8uJSOyrJAanve00go2hRbjbUZpqFP1/TpUPCK4wBBpgvyHVYdg
+	BX7VyCJTDJ0XUeI0u/YXiobjlSZ1EYGQSKydwdQvtNjmI4phoclX5I0F9VppUZtWSSgS9O
+	f/Wg20qwku5xVbxhfb+6VZleZ7uN74M=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-195-ukPi9VarMwyl1rb-JwJdFw-1; Wed,
+ 30 Sep 2026 10:08:44 -0400
+X-MC-Unique: ukPi9VarMwyl1rb-JwJdFw-1
+X-Mimecast-MFC-AGG-ID: ukPi9VarMwyl1rb-JwJdFw_1790777321
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id BB63A1955F19;
+	Wed, 30 Sep 2026 14:08:39 +0000 (UTC)
+Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id B95001956044;
+	Wed, 30 Sep 2026 14:08:34 +0000 (UTC)
+From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
+To: bhelgaas@google.com,
+	alex@shazbot.org,
+	jjohnson@kernel.org
+Cc: johannes@sipsolutions.net,
+	mani@kernel.org,
+	jgg@ziepe.ca,
+	yishaih@nvidia.com,
+	skolothumtho@nvidia.com,
+	kevin.tian@intel.com,
+	linux-pci@vger.kernel.org,
+	kvm@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
+	ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
+Date: Wed, 30 Sep 2026 16:08:26 +0200
+Message-ID: <20260930140833.576941-1-jtornosm@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260930-clk-qcom-gcc-sm6375-rework-always-on-clocks-v2-1-eaa893a6103e@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAGcUvWoC/52OTQ6DIBBGr9Kw7hjBINpV79G4AIpK/aEy/tQY7
- 160N+hmkpe8fG82gsZbg+R22Yg3s0Xr+gDseiG6ln1lwD4DExazNM5ZCrptYNCug0prwC5NBAd
- vFucbkO0iVwTXB8npBkFxoaVIjOBKkbD49qa0n7P2KH6Mk3oZPR6Jw6gtjs6v5zszPbz/yjMFC
- iwreUalilmW3x1iNEyyDQNdFA4p9n3/Avt4/s3/AAAA
-X-Change-ID: 20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-b57ca73e75bb
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.16-dev-0e65f
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4521;
- i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=C5kS0UFiBQBxbAO7J0O+tt8viTIzi/t8PoyC1nzYDCs=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqvRRq3xLVfKelYT2ztn7DqdXrd7mYNB6kqT/dH
- QmpY+dGFX6JAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCar0UagAKCRAbX0TJAJUV
- VpDuEADA65QqWu78HRNXJ1a8/8Y3iSvJ+zD9JeiNmGpx2/9ENV6Qcox2Dqzz4qWJlukF/J2L/QE
- WxItPOj3mM1cE4Fa+tyyt+OT5mbQ/oFE7Xq7/vI8Xj4TUu0t4g6iExaAxn483YDt6ZZTM047Kq+
- ECo3NYyeRmqSP0dX92W2eBbjkRS/+qU3Z5UssRD4CP+sJvF03cjZgZLhIoB0emgP7pLPDTdVHnN
- ry/ppVUkqdDF0NhNyefy9SHsCcswLNpVepOa55Uq6oiucetI2Cj68jKzdPZETagwihgRaSxQUbh
- AS8ZxVkZJ779yxZE1GLgLJ3kmpaX5huUNx9LGgDRhQi5JywAN4inUs0VBIEX4MZcOprsml7PyvK
- xdOTCNzYtk7Pi5qUCJ3E4bXMRHZQxr+fQ4kqK/H2mZP8Z8zHWx3Rh6HG8NIcbjVHvza3B9yqLOr
- xDZpDL0mtG42nVbgLiqGrjnC2Ad2nAumP4CauHFOiu6YnS6Tu8tdZ2Jbe8IzFyCQWJAYLQlOnDd
- wqLnV+KDFWP2IJlWVj2X5FJe0Hzo+6c2DA9vAVOBEWe1zAxo7PZ3hP57G4ubtmVqYyRJ/8kL+R5
- XBqmMsLjsFrCq/JZ6ZUxTCaUgnQEhBViX94/mIlZUI8Gq+3mWINpRpABbwZ8OSoSgccodDsjRG2
- xENGkmAoSTSRD7g==
-X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Authority-Analysis: v=2.4 cv=CKy/zhrD c=1 sm=1 tr=0 ts=6abd1480 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=EiYrS7xXfcF7w+nkr41hpQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=pmZXttZGwwey1UF-Os8A:9 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-ORIG-GUID: Os2wRUztiFYwFbcnvkDIoskbaYAlY490
-X-Proofpoint-GUID: Os2wRUztiFYwFbcnvkDIoskbaYAlY490
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1NSBTYWx0ZWRfX9hoF1bgYydKe
- yCUyGkgFiVVV7bGYDCtajyn0Ec140JmrYndsjSNVlZbpYxMm49u6IzVgjkYqibR3wnxtbybTgsm
- LsbUweDV68J7FMryeF9LiL6i8rgWL3EE6h9OlRBDhKRmZDbBkGsCMZArh05bWr1W+113IBAoaW2
- DVOEdIWTRQVpXaOLm/gKzZcRKu3/tL5xSoAN9GOwL2hhgemLrbRL6SWQ9IH9lDhLLbwEkWXpxnl
- WjnZMoK5l9y1187tz0aNz2e7RJ+GfZq/f5vRqHWr1Mo6QcW4Lwu/f3ECnqD+IwoT69dEN5+h2Rj
- yhwKtphQJWMKSaLf5kTwYAiiH0rSPTVw1ykncdXeut0w183yXuNlFl+FyLDtV1V8c4l4qZuyfo3
- NKkppVjA98B/6OWgi1X1Dzaq1IGDSGrSeL+HL82o6gG9hbIWaYV1reuizL05gq/Rq7NoMRMhY7d
- L/3GAbt/AzaS/EFXD5w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1NSBTYWx0ZWRfX2KwQ+79pJ2p2
- mnqFp2rF64t6RQsjyILfhHLwkmNXKtXD06jR96eolEOz3QZgKHgXhrXWHY84SQol4rkyolZAJh5
- ppGIYtPCQdJU1dvKlemB9o2/LtE0JZ8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
- phishscore=0 spamscore=0 malwarescore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300055
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-Move the always-on branch register offsets into a critical_cbcrs array
-and describe the DFS RCGs through qcom_cc_driver_data.
+This series enables Qualcomm ath11k/ath12k WiFi devices to work in VM
+passthrough scenarios, addressing a long-standing issue where these
+devices fail to initialize when passed through to VMs via VFIO.
 
-Associate GPLL10, GPLL11, GPLL8 and GPLL9 with their existing configuration
-data and list them in alpha_plls. The common PLL helper selects the Lucid
-and Zonda configuration routines from their register layouts. This uses
-the common initialization order, configuring the PLLs before enabling
-the always-on branches, instead of the previous CBCR-before-PLL order.
+Qualcomm ath11k/ath12k WiFi devices have been broken in VM passthrough
+since they were introduced. The devices use an embedded interrupt
+controller that requires physical host MSI addresses programmed to
+device registers, but in VMs the driver only sees virtualized guest
+addresses. This causes firmware initialization to fail with errors like
+"BHI offset: 0xffffffff is out of range".
 
-Use qcom_cc_probe() to perform the common initialization instead of
-open-coding it in the driver's probe.
+Multiple attempts have been made to solve this over the past 2 years:
 
-Assisted-by: LLM
-Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
-Changes in v2:
-- Rebase on next-20260929.
-- Configure GPLL10, GPLL11, GPLL8 and GPLL9 through alpha_plls.
-- Drop the clk_regs_configure callback.
-- Document the common PLL-before-CBCR initialization order.
-- Link to v1: https://patch.msgid.link/20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-v1-1-28f581ab0289@oss.qualcomm.com
----
- drivers/clk/qcom/gcc-sm6375.c | 50 ++++++++++++++++++++++++-------------------
- 1 file changed, 28 insertions(+), 22 deletions(-)
+March 2024: Workaround using module parameters [1]
+  - Required manually copying MSI values from host to VM
+  - Rejected by Johannes Berg as too manual, suggested VMM solution
 
-diff --git a/drivers/clk/qcom/gcc-sm6375.c b/drivers/clk/qcom/gcc-sm6375.c
-index 9c2acf8dc4b7..2c7a6a4e2a2d 100644
---- a/drivers/clk/qcom/gcc-sm6375.c
-+++ b/drivers/clk/qcom/gcc-sm6375.c
-@@ -149,6 +149,7 @@ static const struct alpha_pll_config gpll10_config = {
- };
- 
- static struct clk_alpha_pll gpll10 = {
-+	.config = &gpll10_config,
- 	.offset = 0xa000,
- 	.vco_table = lucid_vco,
- 	.num_vco = ARRAY_SIZE(lucid_vco),
-@@ -181,6 +182,7 @@ static const struct alpha_pll_config gpll11_config = {
- };
- 
- static struct clk_alpha_pll gpll11 = {
-+	.config = &gpll11_config,
- 	.offset = 0xb000,
- 	.vco_table = lucid_vco,
- 	.num_vco = ARRAY_SIZE(lucid_vco),
-@@ -342,6 +344,7 @@ static const struct alpha_pll_config gpll8_config = {
- };
- 
- static struct clk_alpha_pll gpll8 = {
-+	.config = &gpll8_config,
- 	.offset = 0x8000,
- 	.vco_table = lucid_vco,
- 	.num_vco = ARRAY_SIZE(lucid_vco),
-@@ -395,6 +398,7 @@ static const struct alpha_pll_config gpll9_config = {
- };
- 
- static struct clk_alpha_pll gpll9 = {
-+	.config = &gpll9_config,
- 	.offset = 0x9000,
- 	.vco_table = zonda_vco,
- 	.num_vco = ARRAY_SIZE(zonda_vco),
-@@ -3853,7 +3857,30 @@ static const struct regmap_config gcc_sm6375_regmap_config = {
- 	.fast_io = true,
- };
- 
-+static const u32 gcc_sm6375_critical_cbcrs[] = {
-+	0x17028, /* GCC_CAMERA_XO_CLK */
-+	0x2b004, /* GCC_CPUSS_GNOC_CLK */
-+	0x1702c, /* GCC_DISP_XO_CLK */
-+};
-+
-+static struct clk_alpha_pll *gcc_sm6375_plls[] = {
-+	&gpll10,
-+	&gpll11,
-+	&gpll8,
-+	&gpll9,
-+};
-+
-+static const struct qcom_cc_driver_data gcc_sm6375_driver_data = {
-+	.alpha_plls = gcc_sm6375_plls,
-+	.num_alpha_plls = ARRAY_SIZE(gcc_sm6375_plls),
-+	.clk_cbcrs = gcc_sm6375_critical_cbcrs,
-+	.num_clk_cbcrs = ARRAY_SIZE(gcc_sm6375_critical_cbcrs),
-+	.dfs_rcgs = gcc_dfs_clocks,
-+	.num_dfs_rcgs = ARRAY_SIZE(gcc_dfs_clocks),
-+};
-+
- static const struct qcom_cc_desc gcc_sm6375_desc = {
-+	.driver_data = &gcc_sm6375_driver_data,
- 	.config = &gcc_sm6375_regmap_config,
- 	.clks = gcc_sm6375_clocks,
- 	.num_clks = ARRAY_SIZE(gcc_sm6375_clocks),
-@@ -3871,28 +3898,7 @@ MODULE_DEVICE_TABLE(of, gcc_sm6375_match_table);
- 
- static int gcc_sm6375_probe(struct platform_device *pdev)
- {
--	struct regmap *regmap;
--	int ret;
--
--	regmap = qcom_cc_map(pdev, &gcc_sm6375_desc);
--	if (IS_ERR(regmap))
--		return PTR_ERR(regmap);
--
--	ret = qcom_cc_register_rcg_dfs(regmap, gcc_dfs_clocks, ARRAY_SIZE(gcc_dfs_clocks));
--	if (ret)
--		return ret;
--
--	/* Keep some clocks always-on */
--	qcom_branch_set_clk_en(regmap, 0x17028); /* GCC_CAMERA_XO_CLK */
--	qcom_branch_set_clk_en(regmap, 0x2b004); /* GCC_CPUSS_GNOC_CLK */
--	qcom_branch_set_clk_en(regmap, 0x1702c); /* GCC_DISP_XO_CLK */
--
--	clk_lucid_pll_configure(&gpll10, regmap, &gpll10_config);
--	clk_lucid_pll_configure(&gpll11, regmap, &gpll11_config);
--	clk_lucid_pll_configure(&gpll8, regmap, &gpll8_config);
--	clk_zonda_pll_configure(&gpll9, regmap, &gpll9_config);
--
--	return qcom_cc_really_probe(&pdev->dev, &gcc_sm6375_desc, regmap);
-+	return qcom_cc_probe(pdev, &gcc_sm6375_desc);
- }
- 
- static struct platform_driver gcc_sm6375_driver = {
+August 2024: QEMU + kernel solution by Alex Williamson [2]
+  - Kernel disables MSI virtualization, QEMU intercepts config writes
+  - Uses brute force pattern matching to infer MSI data writes
+  - Stuck as RFC - no progress in 8+ months
 
----
-base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
-change-id: 20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-b57ca73e75bb
+No action from Qualcomm: Despite multiple reports, no vendor solution
 
-Best regards,
---  
-Abel Vesa <abel.vesa@oss.qualcomm.com>
+The solution in this series provides a clean, kernel-only solution that
+addresses the previous concerns.
+
+Architecture:
+1. qcom-vfio-pci variant driver caches physical host MSI values and
+   exposes them via extended config space with magic signature "QMSI"
+   In this way, device-specific hardware quirks belong only in kernel
+   drivers, not userspace, independent of the tools used.
+   This follows the established VFIO variant driver pattern used by
+   other drivers like mlx5-vfio-pci (netdev tree) and nvgrace-gpu (platform
+   tree).
+2. VM drivers (ath11k/ath12k) automatically discover and use cached values
+3. PCIe link recovery handles VM timing variations
+
+Thoroughly tested: 3 VMs across 2 WiFi generations, all devices successfully
+initialized and are ready for use.
+- VM1: ath11k (WCN6855)
+- VM2: ath11k (WCN6855)
+- VM3: ath12k (WCN7850)
+
+[1] https://lore.kernel.org/all/20240322104912.94811-1-jtornosm@redhat.com/
+[2] https://lore.kernel.org/kvm/20240812170014.1583783-1-alex.williamson@redhat.com/
+[3] Original problem report:
+    https://lore.kernel.org/all/fc6bd06f-d52b-4dee-ab1b-4bb845cc0b95@quicinc.com/
+
+Jose Ignacio Tornos Martinez (7):
+  PCI: Add pci_find_free_ext_cap_offset() helper
+  vfio: Add qcom_vfio.h header for MSI cache protocol
+  vfio/pci: Add qcom-vfio-pci variant driver
+  ath11k: Add PCIe link recovery retry for VMs
+  ath11k: Use VFIO MSI cache when available
+  ath12k: Add PCIe link recovery retry for VMs
+  ath12k: Use VFIO MSI cache when available
+--
+2.53.0
 
