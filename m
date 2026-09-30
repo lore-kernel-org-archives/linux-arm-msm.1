@@ -1,131 +1,128 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1E0F51599B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:11:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768344F93C1;
+	Wed, 30 Sep 2026 14:17:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.19.206
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790777473; cv=none; b=mV5UWYqYA54fwGnaBUh0Scb8HALnk7yFzC7S8k2hQ/qRMYzv0Rp0PeO0xdaGH+jPDKov3N2Nk1x+rng8Zq5yx8c8YSpTy2117e+DI8mW5ESm2sC/M5K+zMOOW2X4QOGsbro0KmvTnLfIGx1TVBgJYOmMUmDraKTTwVGHJLI5BpY=
+	t=1790777866; cv=none; b=uxj/EyC/AHWLs4/45+F9TlTCVPh1fs6tOyJMmjz8opVJCSwHIVmSCPSi462Oi/1OHMD5gigyHrTWuVPtNzWWViGBhE4mXrky+Yb+y0IVJq6LvSBm4l8PWqAkRcETl5gSa8s36vVyRxF0HPWhj6rl8ingRJHTtakuct+eDtQuyCQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790777473; c=relaxed/simple;
-	bh=u/sYFJ0IFoVAn4mTeL9RLHFvHzVSFq6mlMEPEuqFX/c=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iJgfFsKQIosICJCNDr2f8PGqwAPfzC2vMq0YhWf1w1PcFFpmW9rqTu9zh4LOGeOPdj2Wm85+qNtepsGkyDNGHqfTo8a05V3F0+31T3DC83dLD8RbD39E2sy2qaIjMkXs/hfj4A1xWDHXdFJqGouU9Jd95nIYrjeAUur7osub+iI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=aFppREF5; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="aFppREF5"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790777456;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=kog7asmMh6wog1adNQUGIn243OW/BEgANRMVLg38o7k=;
-	b=aFppREF54KingHqSYMXXK8CqSuRg3vGmH8wVsDgVbIz1h/i4v/xZpcylOCBxMH2PdnDLZe
-	UYu6g4CRlHYcZuPCD14f3S4V/Gtsq0gPdEshxkxXNbI5kZE6Q7Wx6lQVo3/SvRO62niZ8Z
-	H2gmWyydK5HnudFD/e8p1k3ctflteGE=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-543-DJl6E92WOv2gFGzQ13y3SA-1; Wed,
- 30 Sep 2026 10:10:53 -0400
-X-MC-Unique: DJl6E92WOv2gFGzQ13y3SA-1
-X-Mimecast-MFC-AGG-ID: DJl6E92WOv2gFGzQ13y3SA_1790777451
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id EF668197700A;
-	Wed, 30 Sep 2026 14:10:50 +0000 (UTC)
-Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 18C2C1956044;
-	Wed, 30 Sep 2026 14:10:46 +0000 (UTC)
-From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-To: bhelgaas@google.com,
-	alex@shazbot.org,
-	jjohnson@kernel.org
-Cc: johannes@sipsolutions.net,
-	mani@kernel.org,
-	jgg@ziepe.ca,
-	yishaih@nvidia.com,
-	skolothumtho@nvidia.com,
-	kevin.tian@intel.com,
-	linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	ath11k@lists.infradead.org,
-	ath12k@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
-Date: Wed, 30 Sep 2026 16:10:45 +0200
-Message-ID: <20260930141045.577212-1-jtornosm@redhat.com>
+	s=arc-20240116; t=1790777866; c=relaxed/simple;
+	bh=I/Qn4U5o4bUA70NOy4F3KfOnQn+3e/G7xznvMcQz/b0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=PhCDywVNz4urkSvKHzogJ864gl7J4rDlO6ZAnD3PuI4ynT7YbjXSzwZtdEcxbnebTAxYceYaJJd7fsW4ZfuirCertVAe8dATG97v6V/nbtAbK50uMnCuU39zQw+8lf/QWayNpqlCUZpnD9MDZeFwil3FMdXqkl2sVF7i868dtI4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.207.19.206
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: esmtpsz17t1790777801t7e15313e
+X-QQ-Originating-IP: TTVepZbroz9T+Fe2nw0Bi2zy63iXi7HxHGfbTrCgrqE=
+Received: from [127.0.0.1] ( [180.159.160.209])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Wed, 30 Sep 2026 22:16:38 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 11752197069327383604
+Message-ID: <660A9181C8AC6F3C+a6eb53f2-fe2e-4bc8-8fd6-282a212cb670@radxa.com>
+Date: Wed, 30 Sep 2026 22:16:37 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+User-Agent: Mozilla Thunderbird
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH 01/13] drm/atomic: Handle max bpc properties before
+ connector state allocation
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
+References: <20260930-msm-dp-hdr10-v1-0-dbbf8b2b42bc@radxa.com>
+ <20260930-msm-dp-hdr10-v1-1-dbbf8b2b42bc@radxa.com>
+ <quiwrspvimu5piokdswwqmaovv7arkr5swndnwjxhsgmipp6zc@itciwqnrilc4>
+Content-Language: en-US
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <quiwrspvimu5piokdswwqmaovv7arkr5swndnwjxhsgmipp6zc@itciwqnrilc4>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: Mx/B3tE24dqu/242nbOXaippOeAz5fcCyapgxin0wEB6B5IZxdo1rquB
+	qhD1Ziu8zURAAGP0uyN4KHrTvQpDNTnxunfVtkadxw7VZuX+mvIu7a/PY1wOfNwmEfVe09T
+	CLv2jWQHGny7OjfsJcWgGegGSTNz5s0PoD42TwQ8/8VAl1A5EJz1k3IT2/pRHDwqpk6X/ze
+	4xp2SofFqxwOAzwVtBUhji01Z/LnfXclWPxv83r1N1BtVAeXSTgSWXhS/hHD6Md6/XYS7Mn
+	dBVaDadJjuwy2bJ1PJ/Yx0M0841KOfwo9w1znEBBnTUqYJiZH7+2/lb1Y+ESUWFmlAYd1j/
+	NU53r/YAOxSoVVr+nYpmLhvJjGjytYdhUK5yi61+XUR6c9fgm29FKBhj153owgTJ8mea16N
+	3yIdfFoEUPXR7GFK0Ucuzm/U2byWBuiwngNaeDP8N/z2GUG3/mox3oJXh+5RW0bViJMtjmL
+	XO+JkKg8s1dUqj7rL3WnrpDmIeI5TdxJovTvpG854jN/hon87ksNzI1wo+BHsxWFlzJrpOl
+	sB+f0MX82mGXBxo2uFs129j5cnH8tAq4Kp4STF2YMAdRPcFnoV1eRHRBc/6+Da+MB6YVej/
+	7ht1hhXI6yCG8VjS2CJ/EPBvt7DI7VsYhIwxU5bEcIgEng6d4EVHRJ/AZBBMVk7gwxhMbqU
+	755ZbigneCDRtntz/sTibjl7QwbyyRGvalcbAnwnkfOv/GIP7cnKu43Hp5RLasf+yUqz9jP
+	dE+MFYR3Of1japeGC1fsKv8lyvpvG8EUuFLqztm8VqpzmkbGNZ4Z40hphLhhne1Iu5ZqLN5
+	fG1dRmNnKkDdz9pUm2qP3LHEa4Sg9rAoLkrd8zx3ULzds8jzoRhWlApW51Iq/Djvs20jBSG
+	F3y0HjwRTvP/3Jf6o6MQ9/8jtJe0KNKVUPdVmyHKU4YWvNl00EYaLP6V4LfoBJPZelj1mtv
+	uCw6Lz0E4heQPOn/Ct+JES09GlqRc3zSDgVguAMaSKxubwtfKZRLELJRXJZ2ADrnkrPXjH8
+	c4mZfKWirs+QPAuD/VJmFQHWxapVyqEwDtbJqH+aoV4dkjV4ZzRTJigzdDEEk=
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
+X-QQ-RECHKSPAM: 0
 
-This series enables Qualcomm ath11k/ath12k WiFi devices to work in VM
-passthrough scenarios, addressing a long-standing issue where these
-devices fail to initialize when passed through to VMs via VFIO.
+On 9/30/2026 9:26 PM, Dmitry Baryshkov wrote:
+> On Wed, Sep 30, 2026 at 08:41:45PM +0800, Xilin Wu wrote:
+>> Bridge connectors can attach the max bpc property before their atomic
+>> state is allocated by drm_mode_config_reset(). Unconditionally updating
+>> connector->state in drm_connector_attach_max_bpc_property() dereferences
+>> a NULL pointer in this case. Adding max bpc support to MSM DP and eDP
+>> exposes this during display initialization, before a framebuffer console
+>> is available.
+>>
+>> Only update an existing state when attaching the property. Initialize
+>> max_requested_bpc and max_bpc from the property range when creating a
+>> connector state so that deferred allocation and subsequent resets both
+>> restore the default. Avoid leaving the bit depth at zero after reset,
+>> which would otherwise cause valid display configurations to be rejected.
+>>
+>> With MSM DP max bpc support applied, this also restores boot on the Lenovo
+>> Yoga Slim 7x.
+> 
+> Hmm?
 
-Qualcomm ath11k/ath12k WiFi devices have been broken in VM passthrough
-since they were introduced. The devices use an embedded interrupt
-controller that requires physical host MSI addresses programmed to
-device registers, but in VMs the driver only sees virtualized guest
-addresses. This causes firmware initialization to fail with errors like
-"BHI offset: 0xffffffff is out of range".
+The boot failure occurred with the later max bpc patch in this series 
+applied. I'll drop the "restores boot" sentence and describe this as 
+preparatory support instead.
 
-Multiple attempts have been made to solve this over the past 2 years:
+> 
+>>
+>> Assisted-by: LLM
+>> Signed-off-by: Xilin Wu <sophon@radxa.com>
+> 
+> Can we rather update drm_bridge_connector_init() to register this
+> property in non-HDMI cases if max_bpc is more than 8?
+> 
 
-March 2024: Workaround using module parameters [1]
-  - Required manually copying MSI values from host to VM
-  - Rejected by Johannes Berg as too manual, suggested VMM solution
+Yes, that makes sense. I'll advertise the MSM DP/eDP capability through 
+bridge->max_bpc and let drm_bridge_connector_init() attach the property 
+for non-HDMI bridges with max_bpc > 8. I'll also handle state creation 
+and bpc defaults there, following the HDMI path.
 
-August 2024: QEMU + kernel solution by Alex Williamson [2]
-  - Kernel disables MSI virtualization, QEMU intercepts config writes
-  - Uses brute force pattern matching to infer MSI data writes
-  - Stuck as RFC - no progress in 8+ months
+Thanks for the suggestion.
 
-No action from Qualcomm: Despite multiple reports, no vendor solution
 
-The solution in this series provides a clean, kernel-only solution that
-addresses the previous concerns.
+>> ---
+>>   drivers/gpu/drm/drm_atomic_state_helper.c | 5 +++++
+>>   drivers/gpu/drm/drm_connector.c           | 6 ++++--
+>>   2 files changed, 9 insertions(+), 2 deletions(-)
+>>
+> 
 
-Architecture:
-1. qcom-vfio-pci variant driver caches physical host MSI values and
-   exposes them via extended config space with magic signature "QMSI"
-   In this way, device-specific hardware quirks belong only in kernel
-   drivers, not userspace, independent of the tools used.
-   This follows the established VFIO variant driver pattern used by
-   other drivers like mlx5-vfio-pci (netdev tree) and nvgrace-gpu (platform
-   tree).
-2. VM drivers (ath11k/ath12k) automatically discover and use cached values
-3. PCIe link recovery handles VM timing variations
 
-Thoroughly tested: 3 VMs across 2 WiFi generations, all devices successfully
-initialized and are ready for use.
-- VM1: ath11k (WCN6855)
-- VM2: ath11k (WCN6855)
-- VM3: ath12k (WCN7850)
-
-[1] https://lore.kernel.org/all/20240322104912.94811-1-jtornosm@redhat.com/
-[2] https://lore.kernel.org/kvm/20240812170014.1583783-1-alex.williamson@redhat.com/
-[3] Original problem report:
-    https://lore.kernel.org/all/fc6bd06f-d52b-4dee-ab1b-4bb845cc0b95@quicinc.com/
-
-Jose Ignacio Tornos Martinez (7):
-  PCI: Add pci_find_free_ext_cap_offset() helper
-  vfio: Add qcom_vfio.h header for MSI cache protocol
-  vfio/pci: Add qcom-vfio-pci variant driver
-  ath11k: Add PCIe link recovery retry for VMs
-  ath11k: Use VFIO MSI cache when available
-  ath12k: Add PCIe link recovery retry for VMs
-  ath12k: Use VFIO MSI cache when available
---
-2.53.0
-
+-- 
+Best regards,
+Xilin Wu <sophon@radxa.com>
