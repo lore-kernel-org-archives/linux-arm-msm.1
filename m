@@ -1,70 +1,75 @@
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
+Received: from mail-pj2-f39.google.com (mail-pj2-f39.google.com [74.125.227.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4A903AFD06
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 11:16:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 899424C8FFE
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 11:16:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790766998; cv=none; b=jd1Z1Fv7keg115wbxu0XfDOkFjzZ1dmN9G9zhCiwYzpXtmNIVmjKNIvjYSe8pTm6aVGgx74vTDsAFK6ogkkEjdxHtSNr33rvevg6YDDCA2jdWxLwNXeyfWPm8SJb4cnP2C0O9qE4TUdAuLNvEMCn2Mb32x4anf00ugmYiFBIlGY=
+	t=1790767015; cv=none; b=grKhlD4HlDxOZaBhdqNOxLMXHaUSgjHfH2MDY5XxbEDe30JceQmcdNYqYW47FSROaDtpS+orjc45Zf27MHdD3iowH73jihHnsxw8aZkYsv3jI1NfLOME8LOnT0YLzk3FnPR3OvLdPeXEaENsdTtEtcnw9PMj+GuezIFqhpA6ywY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790766998; c=relaxed/simple;
-	bh=jyUD4aMy6hVbWC+FaesKvRIuJb1CpPKN4jivhsYe5zc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=l+m7n5mIFqorVKt84LP4HAGHOxz998m3/xeQ3O2SKCOgvs8/Di8DfyCGZUzhq9Nc3slnCKdNzc5PZnRnD2d5ZosuqB8zKoU/4zhMiIWNodn/7orb3H8KDXZ/FfiZp4nkm+mmAp6ATr1wNxrG2EpvV6WpUEx4i/tfeJU+XEswczo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G1y1f4hz; arc=none smtp.client-ip=74.125.227.141
+	s=arc-20240116; t=1790767015; c=relaxed/simple;
+	bh=PTm7KfAf22Pq8oTJK9JiCTt7+1syK75vpiOwmFtY9J0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=J72IkJgW8o/2iITK7ZtL9b9lDoHqNBWezU4sIUNZv9BW70Z8qe0LigSt7BSV+EqOLroznidCyJOmuJlT4T+mgnqQ2ZEHEp41Vs3liVvjH1Pmnkq/Wp5xPJHRDGwKOfmq2UVbTLAwa9/VlkL6+TgcSgayejyoXCSUc6FlnsHSK/k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FUvQzYJe; arc=none smtp.client-ip=74.125.227.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G1y1f4hz"
-Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-39dacf053eeso2650391a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 04:16:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FUvQzYJe"
+Received: by mail-pj2-f39.google.com with SMTP id 98e67ed59e1d1-3a498cb99b3so972113a91.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 04:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790766997; x=1791371797; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790767012; x=1791371812; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SD1WRmI1pUkxY4BFxQyfL12jOZ1sUPFD5IX10ds1u8o=;
-        b=G1y1f4hzpZa8PtIBSBBu6/kMxjhYYGcYdLAmWkU7Ghc7zkXnZKmqjCz0jMnL5rnsa4
-         mHGJ4Ohi7sYR+HO9y4aT2aNWrvizlzw32vohnOncSVekdK0xx4ShAY/VMCC8bZx/5S+P
-         AyyRzWpGOcR6vzHPECkK8RPvq/dnbAlAuKItaSbdHKQzSNbu0oMumwLOO/0w8uiQmKXY
-         dZYQkQAXZycRT6eeCK7UgQ65sUt0yJ6/akZKBbpUE3GuE2DrWSi4PF69jZUtIhIEXw40
-         y4S54rCv813k9Xi9aiqrSJctZe8Wyi+63ZGV+nYm9V4/I+A7ABBmrzI3PKQaBtFKURoK
-         QpGQ==
+        bh=wY93XBZD56JE3eyu1OkHEle/LlbtoW01BFCKk6aYmNc=;
+        b=FUvQzYJewIwlr6o5zL/7Vg5RevxVcyF8QJ3I+yogBzB1R/B4ZN1xDLpG0gKYTmvwUj
+         YfPtQ310owCh1dWR6H+YvKehCnuPF0VthJ3IWL+vr3ubtkW+wWV8m9n0tk97MIH++6RR
+         JmrOWoPwfikZa8JAd1fmznCHBol9FBxsOY7QFA7UdUY19u46i/6QoyQrJpys0hsonB/F
+         uCG9RMMcPyUbPLTmWMCKyJONY3dyWFY0sH061xGl28Nn69iPJLLYMQKxce8gCbw8o9ie
+         7bOrbW0MfWCQxuucAbqdY2S3ClqR4zIb666W40k4MUwc9kIp5NiX3kaZjTQMch/ltGmv
+         bsJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790766997; x=1791371797;
+        d=1e100.net; s=20260707; t=1790767012; x=1791371812;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SD1WRmI1pUkxY4BFxQyfL12jOZ1sUPFD5IX10ds1u8o=;
-        b=Kut7sFP8uCN0TwEB+bUixQlPLzP+z1acKuMKAmPQQ2mm/BMxArkYwEUrwarVADQQK0
-         zpj1Heir2Nw5/O9s18QmUuNQDiQu1PGMVy9/0YccAQ7ysx5RhCGBUd9F4vUz81Pg0m5Z
-         /cwBCpZSU8fNbAT83LQmd7jr9Sr5P/eH96tJqzBn59NaejVWIu0Nfgopy0yw61bQAyQR
-         vOzw32PHAesrijiIE/OALnAc0Sfxbkpc9xYBiPE/AaNgO2ufFT2ykNM3+M+o2GEHG6wv
-         v3f6XIbEaicc3gu/c2mSa4dhAmW+x7n2Ve1HFnzi3qFknVsJVw0+kD9puk/ammBpUc9W
-         x6Kw==
-X-Gm-Message-State: AFq9FYI5uKBcLP4Lbl42NCyL27556lBkhKxVYGF1uq8OkSgFR+qK6afA
-	7gc593PMumZRHtewjNyoBRXrtLpw89g1i4tf08afW0Ea/kXlAfYyCFy4PgaOhgyO
-X-Gm-Gg: AYBFou3WOqE+SLRQ7cS0hj6HUnXiZab3zVVky7W0qaaujKJMYP9apWoH3CzG3uytF7y
-	j3TyC/McexB4iTOEqUwgqpxIbsWWqKP+rbayz/eB2Ogd+5wZR5R2E8QE+i2FbBCEUR0DF9kk0BK
-	O1anAmX85BM8awq6ZNeN/n+4jMEuuO2sc372owaUJL/KVJQ5yoCc7T376sztrJs3ZUHaBSfcCxW
-	xKJ9einkXdOwSDRJP2T16z2NjlDPBzou0URKqfa/c+CqzG/Sl/crq97vzGsUBQVYieBaFF846W3
-	qBtXrqHVaycdZGiYBqAF89xj/QKlBSo4/V9uaVWr+Zhjf/Ke3mK8alLVfeCvNAZv/HsisqGFqeo
-	72baJD6klVhyHTD2zBJHlSsEOaAKbw92ESd0Qa06NINQ8BHA3qmULhMaNH+P8Ge5GsChz0IZC+F
-	jEJDk1UqBOsVn4PxmDXROAYT1uc7YZAEELJAjDT+7IaCR8xFU9Ja6SmrP4lZBp/NFQ/9UVG8SlP
-	h1G/Mh3AYdS89b9eehw94etHCl7nV9w2GN6OHFU96ch+BaV22dG2Vj5Kn9q96yumbV2H22pcFQm
-	1HV0qX8p4aMDdDHo3iJWyndG2f+yqW7624M=
-X-Received: by 2002:a17:90b:1c85:b0:3a0:ab20:9e97 with SMTP id 98e67ed59e1d1-3a4d197a3f7mr925070a91.15.1790766996084;
-        Wed, 30 Sep 2026 04:16:36 -0700 (PDT)
+        bh=wY93XBZD56JE3eyu1OkHEle/LlbtoW01BFCKk6aYmNc=;
+        b=IayYlIq5wnCZZys1GP8bT6NuIgpFKkpvoq4PibVoELK5MwJHBhy3tcwdWAkhHpVlO1
+         yOHOuOg67r48Nfal1OooaGTr0TkVDiXUGv8+YFVkQllIKdLbPwR+SLzp/voKqhwCA29x
+         HAzDip/27duJNTPSc0NvZ7b3c4MnXGsflp4Zd3iFd0HnChyJJbWqwaAXm0ZmrY95ABra
+         5Yf1kbZWjolMvWxGVE9X5fWdVEJtvc1vFixKAUlrLdp5bLXQ2dRn+O+LmFUzU3bTCZnd
+         qvt8XHEXQgfDzFYVPGm3otmBiDqQbGQ4rV4KiWiUcP2aK0os+N4Bi919wsT4yAfaJ5bF
+         FOKg==
+X-Forwarded-Encrypted: i=1; AKwUvBy28etvDsJ2PIFyrnxTdR+RrSvg4zNUfCNHD9TgbjJpfV8ChGg562g7jSdIDAEIlOm9E/Eun4wELl07LCkU@vger.kernel.org
+X-Gm-Message-State: AFq9FYIPlA26+uY001THH6KzcPaV2ImTDhT0I8MzLzy3+QWdNkelRN5r
+	CEzxW5SvWNYitos0xbOROCUcdU35bsnimeNxX8c3goT5uLrnLDtN0120
+X-Gm-Gg: AYBFou1AP71ECARCsnPqqPEYAZsaKNBg2pTzzyDXycPhRCdel6WUfhc3v5io72akc7a
+	rzrpR2by3KJlJSfxTUM5VhdXOK1aXAZlW/qdRY4vTtXE33Gybi1DGR9j+GsR/skJOCevOSYRoug
+	R2US+cgn1o4gK7C+guv5LCaD4Vg86SXFNjPK4pGki1FNSKSlcrdJJ3R/TrToPR0R1jEBbbh4Oe+
+	cBd0gtwa5Iqi7kT8sbX2LgcfI8yXSj/F8zazI3RqIS2hUd/pkLL4gp1WKKMqJCWnVCjGvBreDif
+	qsZx29UO49N8YTsGBohnldBU3VIc930RZgblpf7tishbtciZ9x0JdhUInzEBAZullKg9LX4iLWs
+	tF2AJFMgO79bMghx0Xz49D2OpbehJGqhmihIc48jWGMuH6M0p7YNrcqWxwK1DOo3P+I4PlqGacw
+	VlvP8lQt7lqzu2IfOwDI0sBCwWMiMv3em/LBZ9jDo4zbJ+AkTkocfMztRGP1YMn2SItc72/SCn+
+	X3sqMDxhhpmv9G0sltypJTzuZY5588tP108EEoiGkvXeb37JSJYnnCnnZDs4laDr7efe9kKWcGi
+	HjPEO4dT3WNvWJWrcsrFJs5IAbVZTSPKFdxn2uzyX91R0A8=
+X-Received: by 2002:a17:90b:5830:b0:3a4:a045:27cb with SMTP id 98e67ed59e1d1-3a4d193d3a7mr590091a91.46.1790767011654;
+        Wed, 30 Sep 2026 04:16:51 -0700 (PDT)
 Received: from rahuls-x2elite ([110.226.112.135])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a4ca9c6453sm3180524a91.7.2026.09.30.04.16.32
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a4ce40a6d5sm2873273a91.15.2026.09.30.04.16.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 04:16:35 -0700 (PDT)
+        Wed, 30 Sep 2026 04:16:51 -0700 (PDT)
 From: Rahul Pon <theflyingrahul@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+	Praveen Talari <praveen.talari@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-i2c@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] soc: qcom: geni-se: don't fail ACPI probe on a missing SE clock
-Date: Wed, 30 Sep 2026 16:46:27 +0530
-Message-ID: <20260930111627.1121-1-theflyingrahul@gmail.com>
+Subject: [PATCH] i2c: qcom-geni: release runtime PM reference when set_rate fails
+Date: Wed, 30 Sep 2026 16:46:41 +0530
+Message-ID: <20260930111641.1134-1-theflyingrahul@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -74,62 +79,42 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-geni_se_resources_init() tolerates a missing "se" clock for devices with an
-ACPI companion, whose firmware manages the serial-engine clocks, but then
-calls devm_pm_opp_set_clkname() for that same clock unconditionally. It
-fails, so ACPI GENI controllers such as the I2C IDs QCOM0220 and QCOM0411
-no longer probe. Before the OPP call, the error pointer left in se->clk
-would also have reached clk_get_rate().
+geni_i2c_xfer() takes a runtime-PM reference with pm_runtime_get_sync()
+and then returns directly if the set_rate() callback fails, leaking the
+reference and keeping the controller resumed for good. Route that error
+through the existing cleanup path, which drops the reference and resets
+the transfer state.
 
-Treat an absent ACPI SE clock as firmware-owned: store NULL, which the
-clock API accepts as a no-op (clk_get_rate() returns 0, so the I2C driver
-selects its 19.2 MHz timing table), and skip the OPP clock name. DT
-behaviour is unchanged.
+Found by code review; compile-tested with arm64 defconfig plus ACPI and
+W=1.
 
-Found by code review while bringing up an ACPI-booted Snapdragon X2
-laptop; compile-tested with arm64 defconfig plus ACPI and W=1.
-
-Fixes: 5b8a39dcf909 ("soc: qcom: geni-se: Introduce helper API for resource initialization")
+Fixes: 10e74f4c5046 ("i2c: qcom-geni: Enable I2C on SA8255p Qualcomm platforms")
 Assisted-by: LLM
 Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
- drivers/soc/qcom/qcom-geni-se.c | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+ drivers/i2c/busses/i2c-qcom-geni.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
-index 873bfbd6b2..5d4b26e95e 100644
---- a/drivers/soc/qcom/qcom-geni-se.c
-+++ b/drivers/soc/qcom/qcom-geni-se.c
-@@ -1203,13 +1203,23 @@ int geni_se_resources_init(struct geni_se *se)
- 				     "Failed to get optional core clk\n");
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index 6a39e21d5e..ed6495ef81 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -1003,13 +1003,14 @@ static int geni_i2c_xfer(struct i2c_adapter *adap,
  
- 	se->clk = devm_clk_get(se->dev, "se");
--	if (IS_ERR(se->clk) && !has_acpi_companion(se->dev))
--		return dev_err_probe(se->dev, PTR_ERR(se->clk),
--				     "Failed to get SE clk\n");
-+	if (IS_ERR(se->clk)) {
-+		if (!has_acpi_companion(se->dev))
-+			return dev_err_probe(se->dev, PTR_ERR(se->clk),
-+					     "Failed to get SE clk\n");
-+		/*
-+		 * ACPI firmware owns the SE clock and its rate. The clock API
-+		 * treats NULL as a no-op, whereas an error pointer must not
-+		 * reach clk_get_rate() or the OPP core.
-+		 */
-+		se->clk = NULL;
-+	}
- 
--	ret = devm_pm_opp_set_clkname(se->dev, "se");
--	if (ret)
+ 	ret = gi2c->dev_data->set_rate(&gi2c->se, gi2c->clk_freq_out);
+ 	if (ret)
 -		return ret;
-+	if (se->clk) {
-+		ret = devm_pm_opp_set_clkname(se->dev, "se");
-+		if (ret)
-+			return ret;
-+	}
++		goto out_pm;
  
- 	ret = devm_pm_opp_of_add_table(se->dev);
- 	if (ret && ret != -ENODEV)
+ 	if (gi2c->gpi_mode)
+ 		ret = geni_i2c_gpi_xfer(gi2c, msgs, num);
+ 	else
+ 		ret = geni_i2c_fifo_xfer(gi2c, msgs, num);
+ 
++out_pm:
+ 	pm_runtime_put_autosuspend(gi2c->se.dev);
+ 	gi2c->cur = NULL;
+ 	gi2c->err = 0;
 
 base-commit: 551c722f40809618230001baccf219193e22fc5a
 -- 
