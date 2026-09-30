@@ -1,47 +1,51 @@
-Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A94637755C;
-	Wed, 30 Sep 2026 03:39:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.226
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 183E43655CE;
+	Wed, 30 Sep 2026 04:24:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=124.126.103.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790739564; cv=none; b=DRAlI8W9VzxoIzZIEg/1H+QO/TK61HU/XQ2BhizmX85SZRmcksFZFcsK4Dt/6ndBUgLsygn6DlXdarOLGH0oERyq6nabPtanELGZbnsoNqiMISU6XMWFVOcqc0RukImYA82DvZi4qZB6lSG5s1W2s+r/iTTOI+YHApCa4r3LnYs=
+	t=1790742274; cv=none; b=EUHVUt6IXsFA3WCG8DLGQvVe25Itrw0SPer1RjMVrXVAIsOJRdsNeMIYjK6+JtmyAbpEychrqo0ZnFp8dfRrAzjwAomBuXKi90tlAPGUv6AsTMsiRVRtvTiFGXzLaE9F9LK1wYe5ETCgpWMzt0pC77sc7UZrRBgNW8TEZB+Nswg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790739564; c=relaxed/simple;
-	bh=NcV/PCYHQQ52eenZNEWwM67Cm7ohHgM2YVmMYxH91JU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Tgi4ZBgIy/bruh99s6u7utmKZi53d5/Ar6Xfgcc14wnl328RfiM5u0Fn3JLZsZfFVD3PlcxNv9TFWEkWNaM5adTTh5eaeOdWOih4b/Adz7DnhSzyLr+aDrcT4RifNIncC7pnyUjCROuU1em8skgU6gKXCjcOW8e0QqnIlP4/utY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=P0H08ec0; arc=none smtp.client-ip=113.46.200.226
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="P0H08ec0"
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=SLIutbINyUxfzgpbpK82+SP/EDyFgkRQjDSgLC3GrNY=;
-	b=P0H08ec0XYwH2E8bKrGzERzeS8i/YFQa0lBQ/QLRfwL1A8EmHEDms0Wpim1IBxsSpzwNOBdng
-	jM2KoKyBF642eiOts7rC8GPPK6W7sR/XzAGg2pUVIFWMFIOk/dYJ0nwsm5gFy3ZVouXz5zIUKD6
-	Lx8ehgTtC4dHvEOt4yCOiVU=
-Received: from mail.maildlp.com (unknown [172.19.163.163])
-	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4hvgT06CLgzKm8V;
-	Wed, 30 Sep 2026 11:27:00 +0800 (CST)
-Received: from whupemp100012.china.huawei.com (unknown [7.152.185.135])
-	by mail.maildlp.com (Postfix) with ESMTPS id BC78A4048B;
-	Wed, 30 Sep 2026 11:39:13 +0800 (CST)
-Received: from huawei.com (10.67.174.121) by whupemp100012.china.huawei.com
- (7.152.185.135) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
- 2026 11:39:12 +0800
-From: Yao Yiqi <yaoyiqi3@huawei.com>
-To: Srinivas Kandagatla <srini@kernel.org>, Greg Kroah-Hartman
-	<gregkh@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>
-CC: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	<linux-arm-msm@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-	<linux-kernel@vger.kernel.org>
-Subject: [PATCH] misc: fastrpc: Fix double free in fastrpc_req_mmap() error path
-Date: Wed, 30 Sep 2026 03:20:22 +0000
-Message-ID: <20260930032022.2957082-1-yaoyiqi3@huawei.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1790742274; c=relaxed/simple;
+	bh=KR0/nM7LaLz/NqsHot+0o4kSpKKt0bQVhOnDcP6AcIo=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=H4VNa7FI+Ghr+Q2frLiHjTyseQKDldAqudTmWeQ5/JiVBXjdkLlRQ5pL57OntGQwQZtlOdnzydEaEPP/01UNtjUQptZdlCuQsWLrRkFfMGsmGgQ2R//DjdmJPf4QEmRZG23Jm37H82LnzbiOHqLvQ9DdKdVBmer3c2esFbH0iYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kylinos.cn
+X-UUID: d06aa3eabc8611f19a56ed5b684f684d-20260930
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.19,REQID:68fac968-8661-42c1-bda2-4a029c0e5f17,IP:0,U
+	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:-25
+X-CID-META: VersionHash:7db8b62,CLOUDID:ec27ba03910cf2d188a2a8dced6161bb,BulkI
+	D:nil,BulkQuantity:0,SF:102|123|136|850|865|898,TC:nil,Content:0|15|50|99,
+	EDM:-3|-100,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI
+	:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: d06aa3eabc8611f19a56ed5b684f684d-20260930
+X-User: fengchenguang@kylinos.cn
+Received: from localhost.localdomain [(10.44.16.150)] by mailgw.kylinos.cn
+	(envelope-from <fengchenguang@kylinos.cn>)
+	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
+	with ESMTP id 387389142; Wed, 30 Sep 2026 12:24:23 +0800
+From: fengchenguang@kylinos.cn
+To: vikash.garodia@oss.qualcomm.com,
+	dikshita.agarwal@oss.qualcomm.com,
+	bod@kernel.org,
+	mchehab@kernel.org
+Cc: linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Chenguang Feng <fengchenguang@kylinos.cn>,
+	stable@vger.kernel.org
+Subject: [PATCH] media: venus: vdec: Clear streamon flags on streaming errors
+Date: Wed, 30 Sep 2026 12:24:17 +0800
+Message-Id: <20260930042417.191675-1-fengchenguang@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,60 +53,67 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
- whupemp100012.china.huawei.com (7.152.185.135)
 
-fastrpc_req_mmap() adds the newly allocated buffer to fl->mmaps before
-copying the response back to userspace. If copy_to_user() fails, the
-err_assign path calls fastrpc_req_munmap_impl() to unmap the buffer from
-the DSP and, on success, to free it.
+From: Chenguang Feng <fengchenguang@kylinos.cn>
 
-Since commit 6102ceb4eab8 ("misc: fastrpc: Remove buffer from list prior
-to unmap operation"), fastrpc_req_munmap_impl() no longer removes the
-buffer from fl->mmaps, as that is now the responsibility of the caller.
-fastrpc_req_mmap() was not updated accordingly, so the buffer is freed
-while still linked in the list. The fl->mmaps cleanup in
-fastrpc_user_free() then calls list_del() and fastrpc_buf_free() on the
-already freed buffer, resulting in a use-after-free and a double free.
+The decoder only clears inst->streamon_out and inst->streamon_cap on
+the success path.  When vdec_start_output() runs with the decoder in
+the INIT or CAPTURE_SETUP state, it still sets streamon_out at its
+done: label even if venus_helper_process_initial_out_bufs() failed,
+and the error path of vdec_start_streaming() does not reset the
+flags.  vdec_stop_streaming() skips the clearing as well whenever
+the hfi flush fails.
 
-Remove the buffer from fl->mmaps before unmapping it and re-add it if the
-unmap fails, matching the pattern now used in fastrpc_req_munmap().
+In both cases the driver and vb2 disagree about the streaming state:
+vdec_decoder_cmd() and delayed_process_buf_func() keep going as if
+the queue were still streaming, and a later capture streamon assumes
+the output queue is streaming too.
 
-Fixes: 6102ceb4eab8 ("misc: fastrpc: Remove buffer from list prior to unmap operation")
+The encoder clears both flags unconditionally in the same
+situations, so make the decoder do the same and print an error when
+the flush fails.
+
+Fixes: beac82904a87 ("media: venus: make decoder compliant with stateful codec API")
 Cc: stable@vger.kernel.org
-Signed-off-by: Yao Yiqi <yaoyiqi3@huawei.com>
+Signed-off-by: Chenguang Feng <fengchenguang@kylinos.cn>
 ---
- drivers/misc/fastrpc.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ drivers/media/platform/qcom/venus/vdec.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-index d4fac2caca86..bc78ec07ab9b 100644
---- a/drivers/misc/fastrpc.c
-+++ b/drivers/misc/fastrpc.c
-@@ -2159,6 +2159,9 @@ static int fastrpc_req_mmap(struct fastrpc_user *fl, char __user *argp)
- 
- 	if (copy_to_user((void __user *)argp, &req, sizeof(req))) {
- 		err = -EFAULT;
-+		spin_lock(&fl->lock);
-+		list_del(&buf->node);
-+		spin_unlock(&fl->lock);
- 		goto err_assign;
- 	}
- 
-@@ -2168,7 +2171,11 @@ static int fastrpc_req_mmap(struct fastrpc_user *fl, char __user *argp)
- 	return 0;
- 
- err_assign:
--	fastrpc_req_munmap_impl(fl, buf);
-+	if (fastrpc_req_munmap_impl(fl, buf)) {
-+		spin_lock(&fl->lock);
-+		list_add_tail(&buf->node, &fl->mmaps);
-+		spin_unlock(&fl->lock);
-+	}
- 
- 	return err;
+diff --git a/drivers/media/platform/qcom/venus/vdec.c b/drivers/media/platform/qcom/venus/vdec.c
+index 6a43ea191da1..b25d9299f4d2 100644
+--- a/drivers/media/platform/qcom/venus/vdec.c
++++ b/drivers/media/platform/qcom/venus/vdec.c
+@@ -1217,6 +1217,10 @@ static int vdec_start_streaming(struct vb2_queue *q, unsigned int count)
+ 	vdec_pm_put(inst, false);
+ error:
+ 	venus_helper_buffers_done(inst, q->type, VB2_BUF_STATE_QUEUED);
++	if (q->type == V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE)
++		inst->streamon_out = 0;
++	else
++		inst->streamon_cap = 0;
+ 	mutex_unlock(&inst->lock);
+ 	return ret;
  }
+@@ -1297,15 +1301,14 @@ static void vdec_stop_streaming(struct vb2_queue *q)
+ 
+ 	inst->session_error = 0;
+ 
+-	if (ret)
+-		goto unlock;
+-
+ 	if (q->type == V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE)
+ 		inst->streamon_out = 0;
+ 	else
+ 		inst->streamon_cap = 0;
+ 
+-unlock:
++	if (ret)
++		dev_err(inst->core->dev_dec, "dec: failed to stop streaming: %d\n", ret);
++
+ 	mutex_unlock(&inst->lock);
+ }
+ 
 -- 
-2.34.1
+2.25.1
 
