@@ -1,149 +1,149 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8BBB4D17A6
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:38:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F4644D797C;
+	Wed, 30 Sep 2026 12:42:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.16.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790771882; cv=none; b=tvFkUsON/HL3o4bc0bGyJuOSMhJm0KBvLI6rFefRd1uJnyIV1noRxucxHsP7muN6MdD7oF5t/SQubKyKFVXOF6NYb9HHKPapwzAb0J5/jWoLxg5SfwEII0Qzx8DWypzkYM4dfTbgReJxeFNizG4qEnV5GONMsA1BA+xxiR5eLGg=
+	t=1790772188; cv=none; b=Rsb+wbw3UQJ39c0iY9YTPaG8mjqMsU9qsXnu3WvmNRJ6jZ6KgCGtnAivHr0mnj7VHT7r6QWNf6OFS57jL/SsS8hFqKN3n6FENE/PYNUJaxDLWgs8MVYAbziQhUqTpcolgO3WcjD4QMpxivAUdoL4cB8ZHLssfWZQrN9vLzG2AMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790771882; c=relaxed/simple;
-	bh=kg66g+UvDwg168UNQb/RRHCbGtBGxTEKpUOmJIOl5PE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Vq5OktZiLiBdkOGts+u5R+l/ChKVaEQJa+irJaklYWYfXvA0xbuxQE2obiZmfjRxhj2oX7h0X6iLrJux+oRbB60zbSMDER9xr/qPS5f59UQyVPaaRDqWb/cuqyod0fjNGkzaVyea9p7R29HbJy7N2sYWQBXokFLFH9N4r/rLau0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=p4DzFyl3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cjk4gBUk; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="p4DzFyl3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cjk4gBUk"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UB7pmS3955056
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:37:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	b/FBIdQAFOtpRV9SArhXKK7VUOg8kAx8+Nvg1pgL1fk=; b=p4DzFyl3A3itTisH
-	sBSnqoHs2b+hFtnMnFEtpqnY04hp43l7EIBRFWOJAwO2kfGMkJ61wKZqZZrB8sy8
-	tP2w9NITF1QRZxxuaZKfLRY39Eoc0crEK55cZ1d+8Qs9gkiSmxripQLYQxDqSQse
-	o35g6SpMXVyt5xeemne98rToC3o4ByvveF072y9NgbNfXX+/yDmmE7SbNuEol4nN
-	v8utUMf/ymBEu5rjc2t3HaFFnNLk5fKGn5DJuZq1oZIOeGHikRhx5Xii16FUQs2J
-	mE1vfYtc2BWeCUZCsnK3PSy7roXAeFB6i4Waq8qt/7EZOzG7XTckKszr6+sT6/Gb
-	NTqlNA==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j97vaug-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:37:59 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-9106bb33cdfso9876656d6.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 05:37:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790771879; x=1791376679; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=b/FBIdQAFOtpRV9SArhXKK7VUOg8kAx8+Nvg1pgL1fk=;
-        b=cjk4gBUkIj5Ne1MdnQz6+7xl9UGfPPC2cc1bvihzHT4gZin/BlT4Y4BE3O4JcE1mv0
-         hlitvf0Le4wpKHW9znp2/gTHeRzmhJZAX852fSalAHW4DBuMk/CdjV4eIxz6fTmF4aw2
-         4x+Ij7h7BVOZ2+5fcscWFiWKNHzgtKy1cmERkUaxnBl+DvK4ma3Tlsm+h9SKI0I4YTHI
-         hl6KoLaBPQSe/bi8X1v6iVKmJuGT04kotwcDH82ocgRJq/8klNcA3VBkksQenEhQz50G
-         aVrL35rrdNDguFd4BpCGJ6F5MUP3Az9WG1NwEkLXdi1Gf9m2Ly6cQni0gBDkvxGQdzax
-         xesg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790771879; x=1791376679;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=b/FBIdQAFOtpRV9SArhXKK7VUOg8kAx8+Nvg1pgL1fk=;
-        b=rFIbJsWUfvwhom/rvz9TYg24ERpfl5FE9SHbhh/7uIEhkVe4xAw/Nga5nBB6Y3p2kb
-         xkPzqW2CTerGgBAUZCozlFtlvmis2hj0DkG5klte4GveclFmeRXPEu+KzAXMOvmssmVD
-         SFr+tvEZ7tb0MBVzl+Id0ROuGpuTx9dzD6ON0qQv1kCYKLfPkwI8ENUyZJL6jbxdahWu
-         8aMohjPpDYlAISHDCorXWlrKT3QaYDGmeDrS5b9AXSTe+54V7QcVq2G0ZfbZP6jyIHZu
-         cEXJb+dXZiR48XYfM/CaeTxODs6DSj4vzKl0ThIXNFNVQdnMn4DfnEW77hEFQdUyUcHb
-         WRSA==
-X-Forwarded-Encrypted: i=1; AKwUvBwA3uwtKmU2Lb6F2RcO5i33XmooAQL2TMW52btYvBTnb5vjVJDUkPzUta85qbRE5WqDRebtXSHSKsd+lvhI@vger.kernel.org
-X-Gm-Message-State: AFuF++nXbXlMi538FxrtiHucYsetxxMyNJb64Kmbn1smSudQctc+tNFn
-	F90N/fNb4G7snR/px7OhyeghZ7U0UU4u/3mIoM4d+lL+S57aMQ+Zws87aaVs8PjrWvRMSksgEjg
-	i+B6HMWPpM9CC6lOGqFpHmPTrWFKMOKQCstXMPq/oYDw4Raq+1UTCk2iF+CubqGYOCdp7
-X-Gm-Gg: AYBFou1ogEc9Nl6J3CNAeCrctsyIo4bXcQ1pNO7YK2mA+68KDHv0t7tj57t1BAYyDQA
-	7m/Cam5ebR67TZYX8PYP3OH4Ru2EmqnX93XaDU/YUaPyQ1LCm9dJMHXAjyIhdrolUB6BG4vmcjm
-	cVZaeTBEgsC8kTh24bYWREdT8v7PvtWRlzPMjG7eDN+dKfsXKqS8PEcsOsgXB0N7idg/vfreFLp
-	kWmv3uUJITWea7VEqg4+L0hgLGsLWPQaMorXAs3RqoJqkpTtbuR49Re1xWfLoONvT0MB6/sIMBg
-	uQjSebLMf3ZcYVBnCJ+fGumr8YrVt+d9VebdKQXKz9z8cPJEUPezAjkKT4iK7z1jTyY1fYLnGaJ
-	6+xB+u7W/oqVlMGcAWc+2Pg==
-X-Received: by 2002:a05:620a:4541:b0:939:eb09:4458 with SMTP id af79cd13be357-93ca96cd5bdmr170703285a.3.1790771878836;
-        Wed, 30 Sep 2026 05:37:58 -0700 (PDT)
-X-Received: by 2002:a05:620a:4541:b0:939:eb09:4458 with SMTP id af79cd13be357-93ca96cd5bdmr170699185a.3.1790771878365;
-        Wed, 30 Sep 2026 05:37:58 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ae047e9b38sm783768a12.3.2026.09.30.05.37.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2026 05:37:57 -0700 (PDT)
-Message-ID: <a25bf79f-efb0-450d-bdab-6cdd857f2328@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 14:37:55 +0200
+	s=arc-20240116; t=1790772188; c=relaxed/simple;
+	bh=B+91dZfpNQgBpc8obPUqZz2vS/XeV4198Uu6VYr4rlc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=S5O9tHXHGeDw9J2ZxiWl9nnE2kFaxdLiK7x+/RHlGLkLfKNEPQ4Y9Uerky1j+XbscGUsbQRHgYJKel+jMNNuTorH+zdev3R80bzibuu9WCTLDj6gmsDZ82BKQGgtKZTU64sFfS09nfzoy7Hl254pcgt6M4EUvTVli1FDJ9JDQ84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.206.16.166
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpip3t1790772137t8b4fd8d6
+X-QQ-Originating-IP: fnE+b+i/ohPAIiUkRgiQdMNu/77rhCqcRG5r0WQ/Qj4=
+Received: from [192.168.30.32] ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Wed, 30 Sep 2026 20:42:08 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 14742789130746556607
+EX-QQ-RecipientCnt: 16
+From: Xilin Wu <sophon@radxa.com>
+Subject: [PATCH 00/13] drm/msm/dp: Add static HDR support for DP and eDP
+Date: Wed, 30 Sep 2026 20:41:44 +0800
+Message-Id: <20260930-msm-dp-hdr10-v1-0-dbbf8b2b42bc@radxa.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: dts: qcom: sdm845-lg: Enable NFC
-To: Paul Sajna <sajattack@postmarketos.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: David Heidelberg <david@ixit.cz>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
-References: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: ls-0rXBBqlhIoobRwqNBmfDY2iDtSaNS
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfX7wlnB3VN/Rh4
- z+nshc4DuICmaZoRu4Yi91V7Ddjjlsq7IuPHGmhnkVjVgcHJ56Q2RfZpRryrzH1bgFmw+q9eXb8
- IAG/ZKucFcV/F54DA40lNpTXjlaAYjbSmBpgJ1ViXbVd5OXoO4BLL4cOEeptUa9UIwEwKW6cAuW
- UEuhqPzDZ2YN5yC33RC24s1ACqHhDXE3PLzg/YaOEp7y1lSuHD3ck0LWGUg08yHUQlxqwWntMgz
- 5//x8JIgH3957Cg9DrdyDWLmZE1qXgFy25oG0XfMJC6VupLhDGyiy3HxMlpvx4C6vo1tQrKV/Xr
- L1PDBsJdlQBscfJ2MpbPVDMlAUrAdKGlz46B1IU8yiJpWXQVkiggQNNfXuNUPmeKJZzbbGIdVqb
- 9dBdxvDy4sYbLH5nTkmyjLyHKwXXO8MUCjClsGNeHIKHq1lpmaquOQBtcohbh8l+GWnDR7DkBaR
- V77stOcwcq32tRTW8xA==
-X-Proofpoint-ORIG-GUID: ls-0rXBBqlhIoobRwqNBmfDY2iDtSaNS
-X-Authority-Analysis: v=2.4 cv=BPImP1QG c=1 sm=1 tr=0 ts=6abd02a7 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=OQN141zOAAAA:20 a=Gbw9aFdXAAAA:8 a=EUspDBNiAAAA:8 a=GcxSr_ZgTee_yd3lG38A:9
- a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22 a=9vIz8raoGPyDa4jBFAYH:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfX59+vOM2pZ5so
- OCGJ5cB/3Q3VYejAT2VSClgngWSHgeHeuNeJsXz8tnLN9h5v2asP91YmMB4dlNJ7hD7wjlVLuX/
- e8t/TVVt3/MD9ByLttXavvU3dnwockQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300050
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDS2MD3dziXN2UAt2MlCJDA90UC5NUQ0MjCyNjQ0sloJaCotS0zAqwcdG
+ xEH5xaVJWanIJyAyl2loAaLeMbnAAAAA=
+X-Change-ID: 20260930-msm-dp-hdr10-d84e11282319
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ Xilin Wu <sophon@radxa.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3484; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=B+91dZfpNQgBpc8obPUqZz2vS/XeV4198Uu6VYr4rlc=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFl7mRfkqJ/eZdqRefLh82MztReE/mYXUzWK5RDcsTH47
+ e+8p5zBHaUsDGJcDLJiiiwK8Qxz2Stzrz0VK9WDmcPKBDKEgYtTACaywYXhfz6bxykmu/V6mtd1
+ 3K5ODLD/abbl9rN85W3iKX0OG0w2FjP803A6JZUpe3U102+rH7NkqrasrW7wyjbeYVqd1Z965Cs
+ HEwA=
+X-Developer-Key: i=sophon@radxa.com; a=openpgp;
+ fpr=205F009D07796DD6E516752E32C31567AD9E324E
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: MPI5HzS7e4/K/y5BeTlTROmqcP6JyVor3d6EWJKNdBiShFW4ut/akEqM
+	EH6KTkQVSiHKG9vS0+r/0gd/dAtkxOr/PGKecyf8yd6LjaQJZ0sSuaw/B/f9IsgiTcIqLjm
+	T/ssVeBV1h4JuLNLlXaHeWXoCuXQKqdRdd1MWT+o/3kV6ulkqlhnDeoonzCkw8yS9WJsagu
+	g7h+gD/6nmBeDOP3lbOA1tKuc5hvOFnKuRCgtIR49PfZ6mET996c8EVdGWesZD0xBHMbAT3
+	q121PnOOu/HPSbxM0EcdFipYHBdCEhBwtBknqdUrs9tvnbEQ4BpsKoArPkSpEVym2sMm5k4
+	OMbp7K15jZUBnMfbIOqissYJV6/LSzHhhmOnV7x15maFU8ljBNc0uWHps7YtRJI7UTa/dbe
+	3zXbi6d9N3JG8Z28ccmNGJWX31wPq2hIpNjrApn4kxp98CAiTeEMymSqMxDIQLfml8Ig5zZ
+	XEVGWFIuoAJoh7mtKFYPAoKVbKRzceUVaQNxA/ijKXVBuKGlZjWdlVipChbhOFByFNwsdpO
+	hzKozhJzv2pVCWr50f/jQ1BTiVns9Wb5fGsA9e7FPPinODisn6O+dvk/08fgvZmgwv4184I
+	EUOVC1J4lnmDFBrdSqY4cgTs+v/cjZ1gaL5EjXiPgcEXvJO8b6XJ7KbtIerSiqbUeIElta/
+	RHEK655EGPVpjbrrkd1DBrGZZbPDrdiVyoec5VzAN3Dk/r5aOP1Cz3GTG2NMFrsHEdq+s5O
+	bCuAUlGbWn++sJLyiRdQa8Ja7aw8gKG4nH23/uKc0TRsUfuuXCYUELsfhnFAwCteW2Nd2VS
+	MamebdC+OE4jqN8t5XfoH65ufZGxTXYSdvjHtfYtc4x79ezHrmpbt+kVCLkXGLy7adkC9OZ
+	BxY9+BPIurav7zgWd5Ewy1dmhB89PAIuxqGo411KIKpCMGadb105CzmqRwC8rZ5qFF/e1sK
+	SL4Ohs4hJ1XWFbD+igfjv1qw/X8IDue5jKfeWAWjyg9gMz+712jyfBnBFzRmbiMw6P4VtUv
+	a9/MVYnNZTzCy9bUXBiJA78+SL7Qc=
+X-QQ-XMRINFO: NyFYKkN4Ny6FuXrnB5Ye7Aabb3ujjtK+gg==
+X-QQ-RECHKSPAM: 0
 
-On 9/6/26 11:11 PM, Paul Sajna wrote:
-> Add the i2c and tlmm nodes to support the NXP PN547 NFC chip
-> 
-> Downstream dtsi for reference:
-> https://github.com/LineageOS/android_kernel_lge_sdm845/blob/lineage-22.2/arch/arm64/boot/dts/lge/sdm845-judy/sdm845-judyln_lao_com/sdm845-judyln_lao_com-nfc.dtsi
-> 
-> Signed-off-by: Paul Sajna <sajattack@postmarketos.org>
-> ---
+This series adds standard KMS static HDR metadata and BT.2020 RGB
+signalling to MSM DP and eDP, with HDR10 as the intended use case. It uses
+HDR_OUTPUT_METADATA, Colorspace and max bpc. Userspace supplies the HDR
+pixel content; DSC, dynamic HDR and tone mapping are outside this series.
 
-with David's suggestion applied or not
+Patch 1 allows max bpc registration before connector state allocation and
+initializes the corresponding state defaults. Patch 2 prepares generic
+SDP slots. Patches 3-5 establish PHY power ownership, serialize HPD state
+updates and add complete stream enable rollback, including AUX recovery
+for a connected external peer. New error returns are introduced together
+with their cleanup paths.
 
-Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Patches 6-8 add deferred link-status notification, capability cache
+validity and stream reconstruction for modesets leaving eDP self refresh.
+Patches 9-10 add atomic output depth selection and BT.2020 RGB signalling.
+The BT.2020 patch includes its own PSR disable/restore handling.
 
-Konrad
+Patch 11 independently fixes the uninitialized debugfs connector pointer.
+Patch 12 serializes SDR video-test state changes with mode programming.
+Patch 13 adds complete static HDR support: metadata validation and packing,
+10 bpc enforcement, Generic2 programming and teardown, stream restoration,
+PSR exclusion and arbitration with video-pattern tests. A test request
+arriving after atomic check cannot replace the checked HDR output depth.
+
+This series is tested on a Lenovo Yoga Slim 7x using x1e80100.
+
+Signed-off-by: Xilin Wu <sophon@radxa.com>
+---
+Xilin Wu (13):
+      drm/atomic: Handle max bpc properties before connector state allocation
+      drm/msm/dp: Support multiple generic SDP slots
+      drm/msm/dp: Track PHY power ownership
+      drm/msm/dp: Serialize HPD state updates
+      drm/msm/dp: Unwind resources when enabling a stream fails
+      drm/msm/dp: Report stream enable failures through link status
+      drm/msm/dp: Track validity of cached sink link capabilities
+      drm/msm/dp: Rebuild the eDP stream on modesets leaving self refresh
+      drm/msm/dp: Track output bit depth in bridge atomic state
+      drm/msm/dp: Signal BT.2020 RGB on DP and eDP
+      drm/msm/dp: Initialize the debugfs connector pointer
+      drm/msm/dp: Serialize video test state changes
+      drm/msm/dp: Add static HDR metadata support for DP and eDP
+
+ drivers/gpu/drm/drm_atomic_state_helper.c |   5 +
+ drivers/gpu/drm/drm_connector.c           |   6 +-
+ drivers/gpu/drm/msm/Kconfig               |   1 +
+ drivers/gpu/drm/msm/dp/dp_ctrl.c          | 127 +++++++++---
+ drivers/gpu/drm/msm/dp/dp_ctrl.h          |   4 +-
+ drivers/gpu/drm/msm/dp/dp_debug.c         |  26 +--
+ drivers/gpu/drm/msm/dp/dp_debug.h         |   8 +-
+ drivers/gpu/drm/msm/dp/dp_display.c       | 319 ++++++++++++++++++++++++++----
+ drivers/gpu/drm/msm/dp/dp_display.h       |   8 +-
+ drivers/gpu/drm/msm/dp/dp_drm.c           | 118 ++++++++++-
+ drivers/gpu/drm/msm/dp/dp_drm.h           |  12 ++
+ drivers/gpu/drm/msm/dp/dp_panel.c         | 103 +++++-----
+ drivers/gpu/drm/msm/dp/dp_panel.h         |   8 +
+ drivers/gpu/drm/msm/dp/dp_reg.h           |   4 +
+ drivers/gpu/drm/msm/dp/dp_utils.c         | 121 +++++++++++-
+ drivers/gpu/drm/msm/dp/dp_utils.h         |  21 +-
+ 16 files changed, 738 insertions(+), 153 deletions(-)
+---
+base-commit: 72d3fcf802c45d00b300f25b848a93c3a2bd7c7e
+change-id: 20260930-msm-dp-hdr10-d84e11282319
+
+Best regards,
+--  
+Xilin Wu <sophon@radxa.com>
+
