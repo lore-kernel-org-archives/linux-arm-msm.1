@@ -1,171 +1,277 @@
-Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCF524E0B98
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:53:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.141
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790776392; cv=pass; b=RRuBvCvKGWMxkVEBk1We083kw7fxo9jlEgKDdrYA0lQsxQdreK6o9jnjjPG7Polu3FnWBuL6L/thY62mc21B2vwd9y6nj1Fjwbn+UwtCB1xPeHcu2WLEwGcMW2fhyNh//P6eW3K/S+5RRyIJiquW9bWxb6NzG4m1QfCF/NVKd9Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790776392; c=relaxed/simple;
-	bh=7tXfNmQFPthqRgnD+N2jwL6JcbsMYPl/OeD0b/XvCME=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Ga8mXzt7x72XE+X07ILMHs8TBD4TbS4yMzQGFXnDuh818JhTX/27yh8wECVUoyRoXJOKJXO8SqjyYiH3VwQhN6mdIMkcuQ3C2h2Zo2rvzcuOcsgRRn5Zi9OqxJD/C8UbuHbYrxGk7E+cV7vGc82qmskw70tWpOE+m7P4wADqEqo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ZsBKmqyR; arc=pass smtp.client-ip=74.125.224.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABFE14E4C44
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790776460; cv=none; b=OjOzZgxv/3jqyDipwSe/KhSS8d7BUMz9vbnljd2p14ll610so1gG/ZtA+6Uk7+vCAR0EGnaqBi/pODetw1707uMA22Hkn+j6usQbGuPeJfgCDnx4RxWq4Hit6RKFVqiHu0zWnx7n1g/oYzDVm1VtKgHMcHW3KCoBN7spWz0rANY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790776460; c=relaxed/simple;
+	bh=C5kS0UFiBQBxbAO7J0O+tt8viTIzi/t8PoyC1nzYDCs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=mGNTXkrPJzheU8RN9i5U3+gapn8cS4JmPBewmnrNHiDKw/S6TDw7O9GwXskfbKoS7zSKD0BM1quRx5eM4f5B/mkGqZPOdmnFDM/7VQfg7Fihzig7T5Wf/HDvWlYZZ1CJbfx96l2uhaW6JpJqXoQNQ8QG98v/lHaKz347hcuv0SI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Z2P1OAEq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CFCpnlpE; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ZsBKmqyR"
-Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66e50968489so4684082d50.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 06:53:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790776379; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GkHZ5EklLfKcai5noxunniyD7E0/e8xezw/yXcfqm3N+G6VqdCQmfi1pi6au+M+DCo
-         SxXE8QFQdLoRGfenqmN3ER2A9sbnyeRvHMlk7VrVGk0plUge/JcVqUg++gitNggMb6dB
-         dMSF6zBzdOi9+vtXnkBRxs5f75K7DaDfKT1XfS6DVhQxLJc2WrShEbSu0NEm4NZc9TQa
-         0uxKwp4O5PWTFbXsorZt7z7hWN7tXpM+9jJyUBG5j5t+8E3G7LK9kSBUG7fMbg6mvBjq
-         vstkTHH5ubSBQ/oC663j6naasNI+bJjV2R36kYWIS8Rzb7RG+nPYuURgH2faOCYk2kdc
-         VoSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=RpNeLRajldsJyb03io5TqUKkBsu82dkOKDvxIHvX4/4=;
-        fh=658MVHbgyn46gQX51zPQJM6LXV7Q6cYNU+E+WGsy8e0=;
-        b=VLCjqQ52jJVEco/pQLUoIpSMEe0AcNyBB/6buJ9VPnpUcb7PK9Ff1BCy8N9vkzhwzJ
-         fii4Mumz3UVzngFYDYXE/sjcFPaxI4AZHcZkrj3pRfjzWBcQPaGiF2j302OIFIyHZunL
-         ep8iy73UoND9VscNXqsmR0YPDqfvaTXZU0sqBrPhBna1MgB68suFEXwPjNqQ453dKbEm
-         8fLgfLrXW0jUraRJA97yvs9Q4nzsWIqVxsoLkqbNq6H0km780bFKUk4lZjYy9bDb1aOg
-         CZFPBjrzCl+6/5CTDRAsWT0Goj3tmGWzZPjXu5xNuqbS/0a2hfN8Y4TltdGqIQXDapcY
-         /NWw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z2P1OAEq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CFCpnlpE"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UDs9uP3271352
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=1QVm3uVGzAUWdDjTOzFAit
+	RtIDZRQBtfGneOG45+140=; b=Z2P1OAEqGqOxmq0eP1Jk4XhfkEigaTtTC39ZCz
+	7BDSJd8tPGBMSSOEpkRDBXyy9/IsM+6gMVcrMNTCj1qn4DY1xQP6vJsmQR5g6FBk
+	nUdiOc15vzqWv4Q8QeijR8cJDxnmZl2d6GtfWFrEZ6s7yI3tHrwdGF2rHVfyjQpa
+	S0ZcMPonEDVZfGrlzu3IQ9w7baqWcdluNxpY+i2L1vTi/OvXEwTD9Urqi5RMiU4o
+	xFyCNHzi2KbGwX3z8YdBJH99hFjptf7nTfaWiktwk71JoyF7cehgernAA+s4RzEH
+	ftaLNdYjlyDbmgIm60fJpPvGmBxBfvV3tb2i0e8kAc69KKWQ==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0tkn2jak-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 13:54:08 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-791463ed29dso4509386137.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 06:54:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790776379; x=1791381179; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=RpNeLRajldsJyb03io5TqUKkBsu82dkOKDvxIHvX4/4=;
-        b=ZsBKmqyRZ6rJ942Mdt4RDpu8ZY8T6cScQSRSFJjTOrrywHu7nAnAYLEe2mzTzFTlHM
-         Z61ZlhY/Tz8Yv+w0h2HhaFmPnOxWBLZYXLhCrMwxdJsrVAoCIlLuedrXcqH+B0LrhJgq
-         O7kXEordVRtnlc5hsNHT5BIWQokOsmymI4M5RCab07maYZ+65l7T3b7DDsz6mCkuU76s
-         o5CcfvouevvKQcIGUQlSpBDP5a3PKJwe5aJT+V25PtCGZXI5fEx7btFyD26NNLx7idir
-         dMv1+aqzU51eBhEeydcVbFgaFMYqXRhP6TxaX8qADSWrX+D1L2OA42VOJCE7FDEJeeZ6
-         akgw==
+        d=oss.qualcomm.com; s=google; t=1790776430; x=1791381230; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=1QVm3uVGzAUWdDjTOzFAitRtIDZRQBtfGneOG45+140=;
+        b=CFCpnlpEYpcBS58b1bV5z6kevj9CHkBq1WzT84yGh3TxDxPhEYor44aIMfDbJE1yFo
+         OcpcCNvWodlOMbd9QY7QdQBEHIh41GVkBU7tFtvHtJwzRVz1UpLRQqB/g7n+RvMYz5ak
+         t4Xxb7mbDHUBx3VkD4IensbIA5LZVGo47QQmoAhKHJOgamu4WpDfDv6ZLMzTUpmt5WQv
+         9Hk88n8wgKgjwptQNd4a8mUIRw+Pz4L5gc06s0Q/pgVvNgf9iBsSBiAGz60o5xIOL2V6
+         32MAJVpgffEG6zX1bnGPDrs5wDu6n9yjKEv1uM4hU8/D+KcvdLuVwb1wdIEh40ujCeai
+         E2yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790776379; x=1791381179;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RpNeLRajldsJyb03io5TqUKkBsu82dkOKDvxIHvX4/4=;
-        b=Fwyma0cPck7/AD+9Ylg218nsyUB0R33HxJRHrI4GLyiMEyv1lYSWU+87SmtowqnDJq
-         gzxT9cZtkXSKk9gb81m009SxnKmafzn/DxY/tEGKG60zXDWeZHD9ZOL5zvYofPRHhzSk
-         laAOES28DyKIUUIn/GE8sE7U2329M0Uzbq8qQBbDymcBlYGyGtLtpTHcj7A80CA9vjfN
-         97tGYt7KrnIsZ09dsttlTOir+a/IxcJCtuP8dJYjZ+QtEYM14mEfRgaW1RVVq/KmpjgK
-         jKOIpshG1dq/cZG1bjHZvf4+b3G3K2uKs1OlrrXwEJU+tJsJKaF5aII+9A6+cFi0/JLl
-         RJug==
-X-Forwarded-Encrypted: i=1; AKwUvBzykdU868Lwyx9iezeXWwNda4rMftMyFXC2DOPj5Mnwx2xRtbNVpULrhuijd52kPVESF37qhW/YPmLkvUMT@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ2jGz6YoTmxQuFKPAwdZB6XSpCk8UTjfaCqfbuIbEK256NkoHa
-	YItx0qE1y1Xufzs6w3BYC+QaoMT6L6oXQ3I1nn7h0XxOEDnVMxXIpT2Sw+FWP7ab4OjgMC11FUM
-	S08/7SZFtGem+xu4u37MznIQ87f7eYvM3A2+CJEj8eQ==
-X-Gm-Gg: AYBFou06XUHFtmoaCxnfmbicMk9pJWQV5S67o/4mlGfkZxRAPcKBcO05jNawk9dckTO
-	XexqadmJIrcWbNh/ZmM8FyPRsVbHZcHKDl+7JuVtwx8ufyG2E4D88cq54fS0k+YZ5Le8qQ9DW53
-	wNQkngeFj/Tb0cOVbTaX/DGrpc/MoFjmVI4iSqDXaNoFyT8sON2PKpHpsAMKKT4f3o1QaIgB1oJ
-	MJK9k/g3rBzld3uNg0YylvWDoJFpYGZkkynceaXWwB2fjLvObjzwcbIIJyB3ZQDnYmUYmAhwsu7
-	3lk/xc3jE8oY2Rv1S0dH8nZNu59rBP/kqULYzFkY8/8wqCDuMrWRTpLud0WdMJSI
-X-Received: by 2002:a53:bc0b:0:b0:676:24e2:c67e with SMTP id
- 956f58d0204a3-6768351ba5fmr612451d50.89.1790776379376; Wed, 30 Sep 2026
- 06:52:59 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790776430; x=1791381230;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=1QVm3uVGzAUWdDjTOzFAitRtIDZRQBtfGneOG45+140=;
+        b=eGrtyLMOMklJs4L5kX3ZmSdH7HRD8PSk48C5/AZDGICiJyRNwTA3ZlUZunRmXKHstH
+         mNYHJJyn7Pz4C6h6lL3+S79P6bUmsnGs6Bd2zJhlrmpX3px+DR0O09PyxrdGePT5tIz9
+         0z+Bb8fXXpN9a5ixL4ESvy4R7EGuWzx05FNT2/sGDQx8qtiuFlWRENKMl7S+GI6lWhHU
+         mbgiMYsOjB3hnl6OOTEKny/COEdilhd8cYDRSbv1VMuOJWo2/WEebu+XNX8LG7G7/sx1
+         N4+FKGozHjuH+/z9H+PX1gizCkjYua82FfyXn3y6kmRQRKV+KEJrBEme2QW2B+vu/cxP
+         7KBw==
+X-Gm-Message-State: AFq9FYLy8JpWez1CfGjwqPZH/udCwl145CHydpxH68xpO6zu+RGdGWcm
+	hmLfCILEZSu+eNaWblmxhh80kuMw4K2+P5uX9hbX2fXt6fVrj0AEp4nem23D9Ujdjwv5NkYLBs7
+	p9+s6LTHhMfq3Zp3xui0g/JRu3p/u/iVjifbBX/GjQ0+k0llDmRDQA/4R9BTMP9B9o8ZN
+X-Gm-Gg: AYBFou3+M5gBPCBsVHipgMpzJeje5sqpYtst1h0VCnVgQl72B5XX1XE+plqVPd6SkEG
+	HI2KMlRNKHwDkCkGWU+g+o0k9gzfOxjFNnMkxF4TannxygSFtxNYKcetIn4T5rvi7NU+20SYsEh
+	qEr5tszMAYgQniXUE4JpCZytKn8phuA9X7wNOgWqlyBIFDMHZTRqWCs/MVFk9aTdDfq1DolH6yV
+	34UKUCWtaPwY3wiFqWuci3UJA7EdSpRWB00yP80w2Mjr8cFSuQ+GriM0c49di8ZBfmXfnO/q/m+
+	QxoPuLaBhw4Aw3KKwCD0m2VjWhenV5VZocA1LEb4CIqKI6OC0mK0mO4VD+AWIFcQf7xr4nKcuOe
+	lvNodHrje
+X-Received: by 2002:a05:6102:418b:b0:7a5:391c:37ac with SMTP id ada2fe7eead31-7be728b59d4mr412293137.10.1790776429774;
+        Wed, 30 Sep 2026 06:53:49 -0700 (PDT)
+X-Received: by 2002:a05:6102:418b:b0:7a5:391c:37ac with SMTP id ada2fe7eead31-7be728b59d4mr412277137.10.1790776429213;
+        Wed, 30 Sep 2026 06:53:49 -0700 (PDT)
+Received: from [127.0.1.1] ([188.27.161.193])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a01e66b10esm837845e9.14.2026.09.30.06.53.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 06:53:48 -0700 (PDT)
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 16:53:44 +0300
+Subject: [PATCH v2] clk: qcom: gcc-sm6375: Use common clock controller
+ probe data
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-3-c042266b9eeb@linaro.org> <gu22hz3dnttzyu2eewpalgzxtocmlbfvnpwore36ufmyr3xtag@r5bbhafsn562>
-In-Reply-To: <gu22hz3dnttzyu2eewpalgzxtocmlbfvnpwore36ufmyr3xtag@r5bbhafsn562>
-From: Jun Nie <jun.nie@linaro.org>
-Date: Wed, 30 Sep 2026 21:52:48 +0800
-X-Gm-Features: AclHuK_VxnR8JOsc80IMzuEQ7RuAU15Ps6hnH2uLVe_uy8XWpyeHRK9yzrHieFo
-Message-ID: <CABymUCNtcgbcRNXdMUjVdnH_ybOxjFB31gd6AW-0HCFDSn9w4g@mail.gmail.com>
-Subject: Re: [PATCH v5 3/6] drm/mipi-dsi: Add flag to support dual-panel configurations
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260930-clk-qcom-gcc-sm6375-rework-always-on-clocks-v2-1-eaa893a6103e@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAGcUvWoC/52OTQ6DIBBGr9Kw7hjBINpV79G4AIpK/aEy/tQY7
+ 160N+hmkpe8fG82gsZbg+R22Yg3s0Xr+gDseiG6ln1lwD4DExazNM5ZCrptYNCug0prwC5NBAd
+ vFucbkO0iVwTXB8npBkFxoaVIjOBKkbD49qa0n7P2KH6Mk3oZPR6Jw6gtjs6v5zszPbz/yjMFC
+ iwreUalilmW3x1iNEyyDQNdFA4p9n3/Avt4/s3/AAAA
+X-Change-ID: 20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-b57ca73e75bb
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev-0e65f
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4521;
+ i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
+ bh=C5kS0UFiBQBxbAO7J0O+tt8viTIzi/t8PoyC1nzYDCs=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqvRRq3xLVfKelYT2ztn7DqdXrd7mYNB6kqT/dH
+ QmpY+dGFX6JAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCar0UagAKCRAbX0TJAJUV
+ VpDuEADA65QqWu78HRNXJ1a8/8Y3iSvJ+zD9JeiNmGpx2/9ENV6Qcox2Dqzz4qWJlukF/J2L/QE
+ WxItPOj3mM1cE4Fa+tyyt+OT5mbQ/oFE7Xq7/vI8Xj4TUu0t4g6iExaAxn483YDt6ZZTM047Kq+
+ ECo3NYyeRmqSP0dX92W2eBbjkRS/+qU3Z5UssRD4CP+sJvF03cjZgZLhIoB0emgP7pLPDTdVHnN
+ ry/ppVUkqdDF0NhNyefy9SHsCcswLNpVepOa55Uq6oiucetI2Cj68jKzdPZETagwihgRaSxQUbh
+ AS8ZxVkZJ779yxZE1GLgLJ3kmpaX5huUNx9LGgDRhQi5JywAN4inUs0VBIEX4MZcOprsml7PyvK
+ xdOTCNzYtk7Pi5qUCJ3E4bXMRHZQxr+fQ4kqK/H2mZP8Z8zHWx3Rh6HG8NIcbjVHvza3B9yqLOr
+ xDZpDL0mtG42nVbgLiqGrjnC2Ad2nAumP4CauHFOiu6YnS6Tu8tdZ2Jbe8IzFyCQWJAYLQlOnDd
+ wqLnV+KDFWP2IJlWVj2X5FJe0Hzo+6c2DA9vAVOBEWe1zAxo7PZ3hP57G4ubtmVqYyRJ/8kL+R5
+ XBqmMsLjsFrCq/JZ6ZUxTCaUgnQEhBViX94/mIlZUI8Gq+3mWINpRpABbwZ8OSoSgccodDsjRG2
+ xENGkmAoSTSRD7g==
+X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+X-Authority-Analysis: v=2.4 cv=CKy/zhrD c=1 sm=1 tr=0 ts=6abd1480 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=EiYrS7xXfcF7w+nkr41hpQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=pmZXttZGwwey1UF-Os8A:9 a=QEXdDO2ut3YA:10
+ a=gYDTvv6II1OnSo0itH1n:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: Os2wRUztiFYwFbcnvkDIoskbaYAlY490
+X-Proofpoint-GUID: Os2wRUztiFYwFbcnvkDIoskbaYAlY490
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1NSBTYWx0ZWRfX9hoF1bgYydKe
+ yCUyGkgFiVVV7bGYDCtajyn0Ec140JmrYndsjSNVlZbpYxMm49u6IzVgjkYqibR3wnxtbybTgsm
+ LsbUweDV68J7FMryeF9LiL6i8rgWL3EE6h9OlRBDhKRmZDbBkGsCMZArh05bWr1W+113IBAoaW2
+ DVOEdIWTRQVpXaOLm/gKzZcRKu3/tL5xSoAN9GOwL2hhgemLrbRL6SWQ9IH9lDhLLbwEkWXpxnl
+ WjnZMoK5l9y1187tz0aNz2e7RJ+GfZq/f5vRqHWr1Mo6QcW4Lwu/f3ECnqD+IwoT69dEN5+h2Rj
+ yhwKtphQJWMKSaLf5kTwYAiiH0rSPTVw1ykncdXeut0w183yXuNlFl+FyLDtV1V8c4l4qZuyfo3
+ NKkppVjA98B/6OWgi1X1Dzaq1IGDSGrSeL+HL82o6gG9hbIWaYV1reuizL05gq/Rq7NoMRMhY7d
+ L/3GAbt/AzaS/EFXD5w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1NSBTYWx0ZWRfX2KwQ+79pJ2p2
+ mnqFp2rF64t6RQsjyILfhHLwkmNXKtXD06jR96eolEOz3QZgKHgXhrXWHY84SQol4rkyolZAJh5
+ ppGIYtPCQdJU1dvKlemB9o2/LtE0JZ8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
+ phishscore=0 spamscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300055
 
-Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> =E4=BA=8E2026=E5=B9=B4=
-9=E6=9C=8830=E6=97=A5=E5=91=A8=E4=B8=89 00:05=E5=86=99=E9=81=93=EF=BC=9A
->
-> On Mon, Jul 27, 2026 at 04:08:42PM +0800, Jun Nie wrote:
-> > Some devices treat two independent physical DSI panels as a single
-> > logical panel from the CRTC's perspective. However, two separate DSI
-> > hosts are still required to drive the panels individually.
-> >
-> > Introduce a `dual_panel` flag to the `mipi_dsi_device` struct. This
-> > allows a panel driver to inform the DSI host that it is part of a
-> > dual-panel setup, enabling the host to coordinate both physical
-> > displays as one.
-> >
-> > This change does not force individual panel driver to manage
-> > system-level display topology if the driver does not intended to
-> > support dual panel topology. Only the driver that set the flag to
-> > true need to take care of panel topology.
-> >
-> > Signed-off-by: Jun Nie <jun.nie@linaro.org>
-> > ---
-> >  include/drm/drm_mipi_dsi.h | 2 ++
-> >  1 file changed, 2 insertions(+)
->
-> Do you have a single MIPI DSI device, or are there two independent MIPI
-> DSI devices? In the latter case, the flag is wrongly placed.
+Move the always-on branch register offsets into a critical_cbcrs array
+and describe the DFS RCGs through qcom_cc_driver_data.
 
-Yes, there are 2 mipi devices, and 2 mipi hosts. This flag is used for
-mipi device
-to notify host they are one of dual panels, so that horizontal
-configuration(width)
-in mipi host can be handled correctly. Where do you suggest to put this fla=
-g?
-Thanks!
+Associate GPLL10, GPLL11, GPLL8 and GPLL9 with their existing configuration
+data and list them in alpha_plls. The common PLL helper selects the Lucid
+and Zonda configuration routines from their register layouts. This uses
+the common initialization order, configuring the PLLs before enabling
+the always-on branches, instead of the previous CBCR-before-PLL order.
 
-Jun
->
-> >
-> > diff --git a/include/drm/drm_mipi_dsi.h b/include/drm/drm_mipi_dsi.h
-> > index 2ab651a36115d..889ef1421207a 100644
-> > --- a/include/drm/drm_mipi_dsi.h
-> > +++ b/include/drm/drm_mipi_dsi.h
-> > @@ -169,6 +169,7 @@ struct mipi_dsi_device_info {
-> >   * @host: DSI host for this peripheral
-> >   * @dev: driver model device node for this peripheral
-> >   * @attached: the DSI device has been successfully attached
-> > + * @dual_panel: the DSI device is one instance of dual panel
-> >   * @name: DSI peripheral chip type
-> >   * @channel: virtual channel assigned to the peripheral
-> >   * @format: pixel format for video mode
-> > @@ -186,6 +187,7 @@ struct mipi_dsi_device {
-> >       struct mipi_dsi_host *host;
-> >       struct device dev;
-> >       bool attached;
-> > +     bool dual_panel;
-> >
-> >       char name[DSI_DEV_NAME_SIZE];
-> >       unsigned int channel;
-> >
-> > --
-> > 2.43.0
-> >
->
-> --
-> With best wishes
-> Dmitry
+Use qcom_cc_probe() to perform the common initialization instead of
+open-coding it in the driver's probe.
+
+Assisted-by: LLM
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+Changes in v2:
+- Rebase on next-20260929.
+- Configure GPLL10, GPLL11, GPLL8 and GPLL9 through alpha_plls.
+- Drop the clk_regs_configure callback.
+- Document the common PLL-before-CBCR initialization order.
+- Link to v1: https://patch.msgid.link/20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-v1-1-28f581ab0289@oss.qualcomm.com
+---
+ drivers/clk/qcom/gcc-sm6375.c | 50 ++++++++++++++++++++++++-------------------
+ 1 file changed, 28 insertions(+), 22 deletions(-)
+
+diff --git a/drivers/clk/qcom/gcc-sm6375.c b/drivers/clk/qcom/gcc-sm6375.c
+index 9c2acf8dc4b7..2c7a6a4e2a2d 100644
+--- a/drivers/clk/qcom/gcc-sm6375.c
++++ b/drivers/clk/qcom/gcc-sm6375.c
+@@ -149,6 +149,7 @@ static const struct alpha_pll_config gpll10_config = {
+ };
+ 
+ static struct clk_alpha_pll gpll10 = {
++	.config = &gpll10_config,
+ 	.offset = 0xa000,
+ 	.vco_table = lucid_vco,
+ 	.num_vco = ARRAY_SIZE(lucid_vco),
+@@ -181,6 +182,7 @@ static const struct alpha_pll_config gpll11_config = {
+ };
+ 
+ static struct clk_alpha_pll gpll11 = {
++	.config = &gpll11_config,
+ 	.offset = 0xb000,
+ 	.vco_table = lucid_vco,
+ 	.num_vco = ARRAY_SIZE(lucid_vco),
+@@ -342,6 +344,7 @@ static const struct alpha_pll_config gpll8_config = {
+ };
+ 
+ static struct clk_alpha_pll gpll8 = {
++	.config = &gpll8_config,
+ 	.offset = 0x8000,
+ 	.vco_table = lucid_vco,
+ 	.num_vco = ARRAY_SIZE(lucid_vco),
+@@ -395,6 +398,7 @@ static const struct alpha_pll_config gpll9_config = {
+ };
+ 
+ static struct clk_alpha_pll gpll9 = {
++	.config = &gpll9_config,
+ 	.offset = 0x9000,
+ 	.vco_table = zonda_vco,
+ 	.num_vco = ARRAY_SIZE(zonda_vco),
+@@ -3853,7 +3857,30 @@ static const struct regmap_config gcc_sm6375_regmap_config = {
+ 	.fast_io = true,
+ };
+ 
++static const u32 gcc_sm6375_critical_cbcrs[] = {
++	0x17028, /* GCC_CAMERA_XO_CLK */
++	0x2b004, /* GCC_CPUSS_GNOC_CLK */
++	0x1702c, /* GCC_DISP_XO_CLK */
++};
++
++static struct clk_alpha_pll *gcc_sm6375_plls[] = {
++	&gpll10,
++	&gpll11,
++	&gpll8,
++	&gpll9,
++};
++
++static const struct qcom_cc_driver_data gcc_sm6375_driver_data = {
++	.alpha_plls = gcc_sm6375_plls,
++	.num_alpha_plls = ARRAY_SIZE(gcc_sm6375_plls),
++	.clk_cbcrs = gcc_sm6375_critical_cbcrs,
++	.num_clk_cbcrs = ARRAY_SIZE(gcc_sm6375_critical_cbcrs),
++	.dfs_rcgs = gcc_dfs_clocks,
++	.num_dfs_rcgs = ARRAY_SIZE(gcc_dfs_clocks),
++};
++
+ static const struct qcom_cc_desc gcc_sm6375_desc = {
++	.driver_data = &gcc_sm6375_driver_data,
+ 	.config = &gcc_sm6375_regmap_config,
+ 	.clks = gcc_sm6375_clocks,
+ 	.num_clks = ARRAY_SIZE(gcc_sm6375_clocks),
+@@ -3871,28 +3898,7 @@ MODULE_DEVICE_TABLE(of, gcc_sm6375_match_table);
+ 
+ static int gcc_sm6375_probe(struct platform_device *pdev)
+ {
+-	struct regmap *regmap;
+-	int ret;
+-
+-	regmap = qcom_cc_map(pdev, &gcc_sm6375_desc);
+-	if (IS_ERR(regmap))
+-		return PTR_ERR(regmap);
+-
+-	ret = qcom_cc_register_rcg_dfs(regmap, gcc_dfs_clocks, ARRAY_SIZE(gcc_dfs_clocks));
+-	if (ret)
+-		return ret;
+-
+-	/* Keep some clocks always-on */
+-	qcom_branch_set_clk_en(regmap, 0x17028); /* GCC_CAMERA_XO_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x2b004); /* GCC_CPUSS_GNOC_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x1702c); /* GCC_DISP_XO_CLK */
+-
+-	clk_lucid_pll_configure(&gpll10, regmap, &gpll10_config);
+-	clk_lucid_pll_configure(&gpll11, regmap, &gpll11_config);
+-	clk_lucid_pll_configure(&gpll8, regmap, &gpll8_config);
+-	clk_zonda_pll_configure(&gpll9, regmap, &gpll9_config);
+-
+-	return qcom_cc_really_probe(&pdev->dev, &gcc_sm6375_desc, regmap);
++	return qcom_cc_probe(pdev, &gcc_sm6375_desc);
+ }
+ 
+ static struct platform_driver gcc_sm6375_driver = {
+
+---
+base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+change-id: 20260926-clk-qcom-gcc-sm6375-rework-always-on-clocks-b57ca73e75bb
+
+Best regards,
+--  
+Abel Vesa <abel.vesa@oss.qualcomm.com>
+
