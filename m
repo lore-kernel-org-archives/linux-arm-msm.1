@@ -1,40 +1,40 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AB9C4446F5
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:49:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB37046D092
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:59:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790797749; cv=none; b=rcUh6+tXPR5AE1qHIeXqD4xpEoTGYfz/DrjRVHPVk23G5tGG2aUU+JMSTuFtcFEqk6kHR21WQK0yHbXU0mpaB9h+jNo+zaocJJ8YySnZwpWnvZKyRogemN7tAPdK5rCAjM6rSyx5w9R2J08dzMxqyr3ye5UEEvV99hTLgCmXRGw=
+	t=1790798347; cv=none; b=g0wOuT1c88jZRgOV2KqiRs6lXagLGQTMoZ1IzbkmipHpnpPZBmVzwWRLPU+Z2BOXUfsXuFHtK74sUeJMiRCO7cA+CXu5vKNC6aWfjpqMyvt9KMLlE1pkgx37VaiWMtJomxEPZuidBmfTVs2NMWMGg7CwrIXLEatlMinwKhuyhiY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790797749; c=relaxed/simple;
-	bh=KBjoGURW6Lp0xuEIrYUnIleO+gefEsMNlz5gVLaCbrA=;
+	s=arc-20240116; t=1790798347; c=relaxed/simple;
+	bh=D/tJ8XO5I/d4e+Rte4uhp801DYYIQLeDeH32x1bw40c=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=bHKTyAQjVlUhI9anDkx1bXUyuFmWc7jqDajWHxuiiu1eVMXh7U6ocBQYC0BtaEwjc17KQ/FtvbnlMbfgI1JyXkhOiaOjZWjR5ETOJPTNdcbNx2pMLmYAL15AkEkBp3PcZtJ84uOGnA25DT38xbtC4sZqHl1OcSAm86JKtwaadio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dxagNlyy; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=fyf/TVRHIM7QaKYPHaaG/7X+EoVnO1Me2AA+bjN/M/sauahrCyte2xKyULAxvGqfi0jZNNSd1BSLiC2y0Xd1z65v2cpRMVGYSPvM2ln65gdejFgJiX6dIcSzUjxsoK1I4HvGVLvZHP2rIMwGCgvVCO1LTfdH0fXEbqa81ndWL3g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n470vNXa; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dxagNlyy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81DD41F00899
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:49:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="n470vNXa"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9725C1F00899
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:59:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790797745;
-	bh=KBjoGURW6Lp0xuEIrYUnIleO+gefEsMNlz5gVLaCbrA=;
+	s=k20260515; t=1790798345;
+	bh=D/tJ8XO5I/d4e+Rte4uhp801DYYIQLeDeH32x1bw40c=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=dxagNlyy5eOr8Y1m7m/XmQK9pXVnqB8ZIFTzMKunnFGyyZYj4FL+8eSCkFyFXHQuN
-	 QENr9Q1J+n3MUzDaTqJm7qjNeOHORQ/stL8Vz//Rg8n16W9BuFOPMg0wuRV+RLiAN9
-	 mn7SO9OHYIFNbVBIhv/niKGcaa9ZRB8+iuX2cOQSCamPudNHID/gfZJ02O6MfdAVAA
-	 w3sYXzHfPj6gEwS6d3wrcPifWe4i7BUfI4IPXuSBemTYWnzjLBiHvcMymOn3zL4ldO
-	 XfTwobEYq7WqTIN1SKivo2X/kAs4L6+MZcZ8/XcCok4Ue2QFjuEbb/qQFT04NoEKR3
-	 ZEWW6CPaHEDAA==
-Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5ba41be3417so704338e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:49:05 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByidctLgtQFOCSknHu1huXoOhkRgxGVzWgErFBSiXAmrt7mdj1/ROAxco3cFxIfGvl4PWgmeN2AP+TSiCeI@vger.kernel.org
-X-Gm-Message-State: AFq9FYIWab11kmgMHd56Uq3dxDBkJmY0eBNr8LYXN3Q5WlJxabgCu8Xw
-	1G4t/gHq+P7hzt26UkNTKA628Gq7jo7oTgBfg0NDs3rv8yKMXS3Kj4EOoxvHyLMn/oV3d8RpJJt
-	5OOBT7mnazag6X2hgvagX+OVWUD0163Q=
-X-Received: by 2002:a05:6512:33d3:b0:5b8:d8ec:bee5 with SMTP id
- 2adb3069b0e04-5ba405ea03emr1058463e87.24.1790797744086; Wed, 30 Sep 2026
- 12:49:04 -0700 (PDT)
+	b=n470vNXaLCPDVYGZ/r3nlV6tajokuBHd+PHbSK0cEQ+vv2GulqzwQiy66EZ4VBmjT
+	 69NLtDKBO86cNARwGsnk+cRv+A5DyBlFf9vpdDurovVZsaw0DdczKUbMZuq6rewqkH
+	 PiEyze6nTwpI/c223FfDLgyeJYdNjW28PcWxK0XTTsRlRNlSgsVyApfojdQD+QFsu/
+	 87OHFEi8nbeiHUG0DXEd7/4Kqyv+7nxGOda9dvd7YSPTrbso+XKqepnLjJTLUjnBAY
+	 jOzdTna7aVE0e3RJ33nvCEiST8pBalurkjU8EHpBy7/aGuCl6klNJJXd4wv6pV+n8/
+	 oszjDqjdABKxg==
+Received: by mail-lr2-f35.google.com with SMTP id 38308e7fff4ca-3a777067a73so8087851fa.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:59:05 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxNHnhuEHjtk9aa865k7i3wXDygCpfNwYjZ/2qp33taRgZC8WVx33JW4BC6hopvGevVAY3Ot9EL/HQ4aOc4@vger.kernel.org
+X-Gm-Message-State: AFq9FYKOmVJ8fhepEKEm2So+N+Qjad24ixpNhOGt5PhMi5kPJxQjJ4xS
+	uIPlWTedOhWN8BaH3UMT9gJioRBb+WimONgcwjRwZTVl0eYiRPHjL46ojqRzF4TEmuOXPBp+8NM
+	2atbY6DQsLql4XTLeAu/ExQRtT3HkDYM=
+X-Received: by 2002:a05:651c:2107:b0:3a6:70bf:622e with SMTP id
+ 38308e7fff4ca-3a7791d1688mr7596131fa.4.1790798344186; Wed, 30 Sep 2026
+ 12:59:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -42,56 +42,64 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-6-c042266b9eeb@linaro.org>
- <CAD++jLm2dVVKM075MDoStTudO+2hdECS-XucFiMGnM1H-Xk=TA@mail.gmail.com> <CABymUCN1oxuqPi=s1cpBHvMJorHN62uieD8Pf=Y--WBPp-=NHA@mail.gmail.com>
-In-Reply-To: <CABymUCN1oxuqPi=s1cpBHvMJorHN62uieD8Pf=Y--WBPp-=NHA@mail.gmail.com>
+ <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
+ <20260727-spotted-winged-mantis-7aa1ce@quoll> <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
+ <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org> <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
+ <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
+In-Reply-To: <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
 From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 30 Sep 2026 21:48:51 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnkr+M9Tn_zAL8+owO7H706XYSMosSz-1D20rwbUukQ3A@mail.gmail.com>
-X-Gm-Features: AclHuK8lnxj_P_eEplQvchjcjf4j1lYtGX2m3t6HeEPZ8smFgSi0dE0qiPGPASE
-Message-ID: <CAD++jLnkr+M9Tn_zAL8+owO7H706XYSMosSz-1D20rwbUukQ3A@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] drm/panel: Add driver for Synaptics R63455 DSI panel
-To: Jun Nie <jun.nie@linaro.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+Date: Wed, 30 Sep 2026 21:58:51 +0200
+X-Gmail-Original-Message-ID: <CAD++jL=EZ5o=tAQZCTp9N7fKLJcxs7d0mg02dK04y_TNYtCZHQ@mail.gmail.com>
+X-Gm-Features: AclHuK9gg0cHcaEM-2OSIkVk8KJVeFTXpszMdFCa2oeVci2UZbbhBGtCUcsPNPs
+Message-ID: <CAD++jL=EZ5o=tAQZCTp9N7fKLJcxs7d0mg02dK04y_TNYtCZHQ@mail.gmail.com>
+Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics R63455 panel support
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Jun Nie <jun.nie@linaro.org>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
 	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
 	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
 	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
 	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
 	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
 	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 30, 2026 at 6:31=E2=80=AFPM Jun Nie <jun.nie@linaro.org> wrote:
-> > On Mon, Jul 27, 2026 at 10:09=E2=80=AFAM Jun Nie <jun.nie@linaro.org> w=
-rote:
+On Wed, Sep 30, 2026 at 6:43=E2=80=AFPM Neil Armstrong
+<neil.armstrong@linaro.org> wrote:
+> On 9/30/26 09:44, Linus Walleij wrote:
+> > On Tue, Sep 29, 2026 at 3:35=E2=80=AFPM Krzysztof Kozlowski <krzk@kerne=
+l.org> wrote:
 
-> > If you have a datasheet for this display controller, then please add so=
-me
-> > one-line comments before each command to explain what is being set
-> > up.
+> > The current binding does not reflect the physical topology of the
+> > actual device, and the bindings need improvements. I have a feeling
+> > there is one display controller with two physical panels.
 >
-> I hope I had datasheet, but the answer is no. All I have is an init seque=
-nce
-> with the information in the above macro definition. Let just live with it=
- @_@
+> No there's really 2 controller and 2 separate panels, but they are not
+> classic panel, they are a pair of panels+lens which are in front of
+> the eyes which forms a single "image" for the brain, so they are
+> technically a single display and requires to be hard synchronized.
 
-I would send the message "upward" that you need a proper datasheet
-for this, from whoever wants this to happen.
+OK
 
-I have seen from the presentation that you will be working on
-compensation for chromatic aberration for this device, and that is only
-going to have a point if the color representation on the display can be
-trusted to begin with. Which means
-gamma correction. (Which we don't yet support in the panels,
-but hey, another opportunity to be first!)
+> See it like a single physical panel with 2 controllers which
+> shouldn't be used separately.
 
-Gamma is invariably going to be one of these
-"magic commands", at that point of depth you really need the manual
-to see what is going on.
+If you have one reset line to them each, and as proven
+by the driver in this series also grab and assert both, they
+are by definition *already* used separately.
+
+DT needs to describe the hardware.
+
+Defining two nodes below the main node for the two
+controllers and adding a reset line to each describes the
+hardware perfectly fine?
+
+It's not like I don't understand that this will complicate things
+on the drivers side, of course it does. But a binding is a binding
+is a binding. It needs to describe the hardware.
 
 Yours,
 Linus Walleij
