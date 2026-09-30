@@ -1,82 +1,82 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE1CB4F405B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 061DC4562B0
 	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:52:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790779959; cv=none; b=t99LgvY1KIPblyDHwXCc1yV3ESmZdWFc6UF4r7cV+LMapvU1iyteoi/E/Cz0pPkuq52urO2bHVE2CSNFiOu3QYXCTOCP+PBMFej2Z0iD8RGZW8sUgATTOH6U2na+g60idToZsItUnRqJniCFbjFQ5pN1F0TJk9yiL9pV6yw99SQ=
+	t=1790779960; cv=none; b=lVOZwaQjSLJydrNZikAwx+nh839VMh4V6o7wZE0gIyudX8XuQeXnm/ef78k3RWu7m3UauToLU6x+Pat63qeg4BmCMB96cO+h1glpNCTKLH7TLe5z9vePhMFp8E4bcURsVvFDHpW6cLFQlw8RHT5dbyE3QFu9IpPdV4B2MBfzvTE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790779959; c=relaxed/simple;
-	bh=XjmZ7HCZSIfcoUltaCRGXefZ8w1zKPfi3DotR5M/Yrg=;
+	s=arc-20240116; t=1790779960; c=relaxed/simple;
+	bh=dogAdoQ/QCkQb5GhDzIyOp6UYu9xwRLxOLzN5HnPoIw=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=dvi9P6DGx6UYMjVadF5b6NnMvJDLwdXbxbK0e6VLUXB81D1uhpKujRGB6EKYGknrpl4qLyFCDBPNZD1kK9LG8SWZLsnu/K4YKbBBaeeeDiVCmbsAkd6Suf491OkTMWBJPamK1aKoJ4RgjPbOBzJkRv66QSo3Z5CXbTuLUgoUqgY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Dl7B4U6L; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=G4q0MenF; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=PJlS7bhhffaklxd5B82hYDTJmJ99B3a7YcOS+sMy3meJQZL6KOn9sLYlocfash2x6yswKjhsaHu+07hf60b1B7vBu9iWgAERY1zmroWyv7L4hj69y8U+OCt2RTtdO1Tuq4hAw6FwsJPr1nIwwIlUdjAGi4LQQn56nFefIsw6BoQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gfCCPMna; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JU6uTaDN; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Dl7B4U6L";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G4q0MenF"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UE02qX2970502
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:52:26 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gfCCPMna";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JU6uTaDN"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UE07Jc4178834
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:52:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=zkTo8nTIePk
-	l65P8PXm0LiFZiH9dHt4Vj2fwdowNXuE=; b=Dl7B4U6L/OfBcrryy6otn6p04/i
-	UjB8WKsFOwxAf5UChh5PAuojTBPMJvIOqmSrzVZfvpEVeWZ0kgar2B6FFNe6n2pT
-	lAF77UeP7IJkBQSKk4X1jAYplq9Bgds1lBvdZ+3bdv7/lZvdm1D6B7V5JGr/+oy2
-	H9TsfhHhdhaNdgYHhT/Oy6miYUrYS+i0xN1DIcxEJEPjb31/pRZchhw72pxVWnpA
-	k0fhvN9QuGFJhTAMFNpbpbYk+eL0zNvdn3WCV/B7dtooRqU4VrekXYajq7y9qGdl
-	o2Ne9GkuLd9CGWqdtg528Qtcx2z+kWYCssOJlxVx1bbLZHZoAHApmxDkoqw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0rhekctn-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=pujGoTye8c8
+	YObD45SWJzA4GPFiLYw7N42q3MidIndo=; b=gfCCPMnaNXdaKUY2Kf3BnL6i30m
+	hPMuG2IFctl2aGrE80RioybPYMSgnsdUZnN/Bo0nqfkQ5PlufDHalBSJTUDkgJOQ
+	UA+poj+spUeZh02UNH5cUN9/acH6AIyPtPrhjbWzYEbU9l8uF6dUrv9afOCZxYsT
+	lXjPzyGe5RBe2lgquOgw3IuzlaOc3QdSnVJYQNh2TrD09u0Kqs4uv6TIPAonKBOb
+	uQnm3qF3hw8jRxJVpe+OP0dgP1Asp9JDrc8OpPWDA/Ox9B+7/NXrV4AAOQtipfDu
+	1VGipdvDlaJFqED8Ng19sJuw95FnwgwO2Baz//12Bn7DigzynoeWehTP+XQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0nm3m02n-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:52:26 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30c0d568830so10662555eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:52:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 14:52:24 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-34ceac22194so1093492eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790779945; x=1791384745; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790779944; x=1791384744; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zkTo8nTIePkl65P8PXm0LiFZiH9dHt4Vj2fwdowNXuE=;
-        b=G4q0MenF7Ilz8g+4/LiwZpxxN/ieS+AS6Sdp50F+4DY4vJKthEy4nL8Xn90aeSqjFX
-         y+oEkYliDg47OznETfdswlzfyCYBb7qqdX9gDdCSOWpvCib4Lm2Tg3XJc2mnBb9Yby+n
-         +wAYo8rEpePyeyhMrWz6G/XB0aSoHVR5Yfc5aeB6BLhufpHrbnoJDixdIX8NNug8wGWX
-         hFmQk1x2YohoSKfhcuGvY5eKfmYL7zHieYDTW+qrRf1foxVfOfIjvrmZg7doQ8KXMg78
-         SAGeif/pMeEpI46Jp++lB8pXm99QMjc0Y28yO6mQLV8Q1ewmmvt3ylwFMyEUe+VNmBWG
-         aLwQ==
+        bh=pujGoTye8c8YObD45SWJzA4GPFiLYw7N42q3MidIndo=;
+        b=JU6uTaDN2AcdXl38uB0FpK7436H7tJTapsGfmPpyMcgZ3zGGSoB1a9SzfecMLU1Bvt
+         T10Dl9qWBTrjLg0AEFgfJndTi2DHwts3cHY8VGsxOspxcHlpdLdqFdQOJd3mVGiJF+Is
+         gd3Brh2GJakZQjToqtBhNimFp6F/sQKZGfov1niVkuoAbE3IDe/hgik9m42y7bCBP+1j
+         MH/nOQNEwQK5cct8mC0vdTYrW9CO8dLAiWFOVI8yINb0nTbU0DuBzPbMQNBzd34MIzkY
+         E9eGnzw09yX+wXUtP8qZxzxx1dLr5McLLdECh6zde+xHaDqGmP9ZiJM0bswwnY31LB0m
+         txIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790779945; x=1791384745;
+        d=1e100.net; s=20260707; t=1790779944; x=1791384744;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zkTo8nTIePkl65P8PXm0LiFZiH9dHt4Vj2fwdowNXuE=;
-        b=OzT4U7nco34uJXHPzkjXfTY07TJ08O43Mg4OefszOdmq785ZBsjP/xmyMwhiqTPJ1I
-         m4Dpe89bmXWrV5A7flvbOkhJm8zJFbgFLYqeFrZAaWGXDz1QzDgRn7cOZFTHEZbiXk5Y
-         vPxzVkv9LBC/s85/poXW0T6oJB0Ngg1y/RT46GzV+Ap+Hq8HipNlpu5+T4PHhUFXy5gY
-         CQQ+vRw17F//L2+a5dTrpgxODumvCwsyp6C6fqpiTCbNAQYOKQEv34h3QSnhp8U8S/Q+
-         EVOii9PmCy9qNtRvrnQEibgQuUiBvDsJO2cvV4qX6DEpYvDnzdRJcmeUa0AtK7uFEa35
-         xisA==
-X-Forwarded-Encrypted: i=1; AKwUvBw6doMHM1vITJ7gxlIugrYJK4xaPf2PpCrZDLrjaD8tpqA6DZglUVYdDEKNF3uNWoeNS05TEQri6/fgpmex@vger.kernel.org
-X-Gm-Message-State: AFq9FYJBpYo4k23qNhVNVXOljT17lwYs/Shmel99gWuLDR5grBZh0eCc
-	aRknysAnU/FZeVBQpo9Zn/gbrjVhCJKRZRjDV8Bq4TjZT6XWfsnqSZY5ScmvHOJ30E/xQ0pcjLG
-	zOXG2L7tnUPwvq26snLOiT/ysRZNLrYk8JxpsAgvyXfk6qSQDwOUVTLHb1gKTY2uXZO/q
-X-Gm-Gg: AYBFou2Xb4OVGHU0Qf9OfxIcL3jW7F8hJfyoMQ7Oug7EpZA+3aKuXcqtBhK+Z5uKNOM
-	OwxJOj+5YhhKzjSZ0oXgViAOMaPcmDQXyFVCYY3hhnHmkc0Y5HcOZz8VP7N+QMheA1j1PHqZr07
-	89qRMTlcu3H5ozoP3VQutesCTIhhAN7wfSn8CuIMoD+4bOoO7qinlnXgLlLlpVvLbwewNWpKAo/
-	luNgmNZk14hMC6AL7YIXldb8xhmZ+7Qfk1h9FiceIOl4dUQzXfyC0Z4qJKBNy+1Cup+6XcCtQyT
-	3Pmn1mX5tbwBBpdnJcPmCSfWhaO1woQ0d4zCgL2RYc4Uc40lvpoa97ccpMqS7TL/59t+kHanzsg
-	L0hqdBF4nYgOSxYboe7g8g8jUdYxy/8mtKxQlMPPq/C9SGG4XNX+A1r4=
-X-Received: by 2002:a05:693c:894c:10b0:343:fdea:998 with SMTP id 5a478bee46e88-34cdc0cf62bmr1907085eec.19.1790779944712;
-        Wed, 30 Sep 2026 07:52:24 -0700 (PDT)
-X-Received: by 2002:a05:693c:894c:10b0:343:fdea:998 with SMTP id 5a478bee46e88-34cdc0cf62bmr1907034eec.19.1790779943788;
+        bh=pujGoTye8c8YObD45SWJzA4GPFiLYw7N42q3MidIndo=;
+        b=SRznzKcbG6Gw8bkOHpXYZmxQm8Ji99Oac5jlWmnIx2r4VrXX34Q8LSi9mDw7pljAbr
+         +SbWiWcZEj3DzHUKCnr6BuPUPwhN6loL30nbpqi4uWPP78cInMi5U003vfXsClAZr0mw
+         LQg2VelQMfsPKC1un7qcRhrMNi4octZEPp8bTMvwyHF+oiGT7fYyoSQWjSP87e8GyYxZ
+         /TCYGGREuboNx4pvpbbo6dh3D3D/qB6p/JhP3ac0mlg6G8PvNYoV6UtuNNfNK7+izk3d
+         SLNRNoCqrSH9XEFPsXwz8HIguxmtZQOSJX3OSi6O4zcWOLlkjUK/RQ1YNq0jnCIyPj4b
+         iImA==
+X-Forwarded-Encrypted: i=1; AKwUvBxtDpN4OtZf/tzb+ga9Ao9pHbqmtCC3IycWGymxIXnuscDaSUILMjqc+/X08iAOtv7bPJQFi84sSELqAhDg@vger.kernel.org
+X-Gm-Message-State: AFq9FYLMkeJ8Ei55ed5BR1Lvzwja/pB3HlRrkc/XQRiPYTOHC970xmm1
+	GRlLXbkEemQmiIzlXXE64LF368jWWo38HRhvnEaWvI/evBqd674JOwJxvI0NjYV1R/LCvZfTlZa
+	0+rg1nQYycAs3s8FdKGIJopE/xvu7L6lsLOz/LNXszL4jAcCzR3Lw/+vB5WSulZa/+ADB
+X-Gm-Gg: AYBFou0VE6TFXO/8e9atBwFsJI+nDjij08mUQJ+wuuP1Mf8an7V+q55THQ9TWlaIb5h
+	rUk1WJV9YsYJcTl+7TbPgZAqlAEl66AQok557olFArfmBhkFhQWI5epNhYFOQdKP1J+sNwKfF6r
+	9hPGB5JaRUpGQrZGx7+Zp7V3uy7watAqI8Xf33wuEUswodTGvTUEDTJFEWiMHEneAD8CoMFI8ue
+	HPrp4P4EXh17vlAqtHZsLawaL/pPsBiV+YhnOgmHCjAjPK4lN8WhVZ22E7Boc9u8BmR+dtPR3xp
+	dDdSxKHIux7KyW8gha4iLCRtxj3+xv2nImxF2pcqjyeDa5H7wO08hPDYU9bGyKCcFw19lpq0f2q
+	gaOGdVJBqhYLvvvu+AfSR3wC6D23/t/n0uogLFJOxNI5szirhzp4jlQk=
+X-Received: by 2002:a05:7301:6192:10b0:34b:2362:90a8 with SMTP id 5a478bee46e88-34cdc4c0558mr2042938eec.19.1790779943581;
         Wed, 30 Sep 2026 07:52:23 -0700 (PDT)
+X-Received: by 2002:a05:7301:6192:10b0:34b:2362:90a8 with SMTP id 5a478bee46e88-34cdc4c0558mr2042887eec.19.1790779942856;
+        Wed, 30 Sep 2026 07:52:22 -0700 (PDT)
 Received: from hu-c-gdjako-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34cf5639339sm4524609eec.18.2026.09.30.07.52.23
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34cf5639339sm4524609eec.18.2026.09.30.07.52.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 07:52:23 -0700 (PDT)
+        Wed, 30 Sep 2026 07:52:22 -0700 (PDT)
 From: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
 To: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
         robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
@@ -86,9 +86,9 @@ Cc: axboe@kernel.dk, rostedt@goodmis.org, mhiramat@kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-block@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
         djakov@kernel.org
-Subject: [PATCH 4/6] zram: Add QPaCE zcomp backend
-Date: Wed, 30 Sep 2026 07:52:13 -0700
-Message-Id: <20260930145215.3380977-5-georgi.djakov@oss.qualcomm.com>
+Subject: [PATCH 3/6] trace: qpace: Add tracepoints for QPaCE operations
+Date: Wed, 30 Sep 2026 07:52:12 -0700
+Message-Id: <20260930145215.3380977-4-georgi.djakov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260930145215.3380977-1-georgi.djakov@oss.qualcomm.com>
 References: <20260930145215.3380977-1-georgi.djakov@oss.qualcomm.com>
@@ -99,279 +99,197 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: IGI3XJEBVrs4RMrHpXR-Lo8EtLH9hES5
-X-Proofpoint-ORIG-GUID: IGI3XJEBVrs4RMrHpXR-Lo8EtLH9hES5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1OSBTYWx0ZWRfXz6tyrX11ln9W
- axa6e64HcQhwEXZ7ZC4t07NlGUnZfF/y0UwFQ2nGuROAq1j5CI8SUlfEgGSfRpv1tbdQ7SqIeaq
- rtsywktgtmK/tDrytkjnBS1lv3sKcwWhCUfTNw7I6knl9os6U1mO/rF9JcZ2KOh/bdenBknhSG8
- RoaGPjBOJ1NK+na/Jtlq6UTqjwzRQhp3V10vSe6uHVqECxDOV2iLKyKboX3l/gqhufgnZGyFg1n
- PMHRwnFB/kdCSlBR61Pm8uKB5Knb6GA1YJiRJMVWRlr8nOz+aA5h2VCXYmnDM9iinNuQ5gzvQxq
- XVxPqboN/FTo90rIvePXEviaqcnlIwApH+q2jeZHRYI/yLBkvhzTc19tpZ5Madc/prmhrWSgF52
- jFNG1JANLP3CXvPWjlmJz7vE9kJh5fRCJ0AVwi9mYrP82tAIkKc+j1pc/+9fu2ODfRMiRufG6lM
- NfsijqABSvRhtZ+ZwNQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1OSBTYWx0ZWRfX93Zhwi3AMNaE
- 4gLeBDaFsse4xZJDoq7FKyPubROC2m/KS5qR8dJ5DhvGlLH96CrZ8q+tDi2P0CkZmPQRrbBmabU
- 6A9DDOukHkyTtuz+eN3cSCrsAz8EdJY=
-X-Authority-Analysis: v=2.4 cv=Tu1zFzXh c=1 sm=1 tr=0 ts=6abd222a cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-ORIG-GUID: Fslgx0eApBIJQIcXIx33miC3feOfoBoN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1OSBTYWx0ZWRfX9X0UQjPfTorM
+ jvCVbQhy5yRWWQuQoGG9yLVywiQbuz1TcSu4Qn7FnTmspS05dFsHY4JVqqG3JBKtHkXmtnx1zuh
+ IHGuwCi9PwskTeNSFoTRO7FKgqgbKpwG5G4S3AlNUvk181lN3OpZiwct7VPyvdDchhS3oaR+166
+ 5KHRkGcR1Ysgypbtf89r73vklj5t0bw9GJNR/pnzq0nTV7niPEVjxR4Mqh2ed4SFg9B/bBlb8iz
+ S7XDSzrNBUJlj817h0RSVneN85sFjBijGwr5mDSu+2oxEMUG89hI0YQJ78ryq0nuSGvU/VmUhlf
+ iSmfL8FxrkbCN33QcwiNw31Hubj0q0K/snbBnZLESa9/uqGpMYz02BbkX76lqKAVMbQZ0GdovqV
+ zAN4B8eiUXen0qAzZ1Ds2xhYfMRgpVmH92kaV30YZXRREzoUC3KT21h2cLmK9Zc67a0WompVZp/
+ 4yadEvv+FXgCRj47pUQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1OSBTYWx0ZWRfXwF45mKkOk445
+ GDo66KmpNDq5gpC80ZB3puPuOtmARIBlWFZY5scaAUMY94ml9J0T/a65uArGzga6fhqmotuGD+y
+ NqfOLaQsYzf4z1dtjSFZAJTorfKbqZo=
+X-Proofpoint-GUID: Fslgx0eApBIJQIcXIx33miC3feOfoBoN
+X-Authority-Analysis: v=2.4 cv=fqxJ914f c=1 sm=1 tr=0 ts=6abd2228 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=S8Xc0r_aw9f0a4gVDKgA:9 a=PxkB5W3o20Ba91AHUih5:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
+ a=TOX0-C0EfqkpjbOQ6sUA:9 a=scEy_gLbYbu1JhEsrz4S:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-30_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0 phishscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 priorityscore=1501
+ adultscore=0 clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0
+ spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300059
 
-Add a zcomp backend for the Qualcomm Page Compression Engine (QPaCE) so
-zram can expose qpace-lz4 as a selectable compression algorithm when the
-QPaCE driver is available.
-
-Compress and decompress operations are handled via the QPaCE urgent
-synchronous path: each request DMA-maps the source and destination
-buffers, issues a blocking hardware command, and returns the result size.
+Add ftrace tracepoints for the Qualcomm Page Compression Engine
+to allow performance analysis and debugging of QPaCE hardware
+operations.
 
 Signed-off-by: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
 ---
- drivers/block/zram/Kconfig         |  11 +++
- drivers/block/zram/Makefile        |   1 +
- drivers/block/zram/backend_qpace.c | 134 +++++++++++++++++++++++++++++
- drivers/block/zram/backend_qpace.h |  13 +++
- drivers/block/zram/zcomp.c         |  11 ++-
- 5 files changed, 168 insertions(+), 2 deletions(-)
- create mode 100644 drivers/block/zram/backend_qpace.c
- create mode 100644 drivers/block/zram/backend_qpace.h
+ drivers/soc/qcom/qpace.c     | 12 +++++
+ include/trace/events/qpace.h | 99 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 111 insertions(+)
+ create mode 100644 include/trace/events/qpace.h
 
-diff --git a/drivers/block/zram/Kconfig b/drivers/block/zram/Kconfig
-index 402b7b175863..eece67e7ea83 100644
---- a/drivers/block/zram/Kconfig
-+++ b/drivers/block/zram/Kconfig
-@@ -44,6 +44,17 @@ config ZRAM_BACKEND_842
- 	select 842_COMPRESS
- 	select 842_DECOMPRESS
+diff --git a/drivers/soc/qcom/qpace.c b/drivers/soc/qcom/qpace.c
+index 69aa14b7c477..f5b21ffbcbff 100644
+--- a/drivers/soc/qcom/qpace.c
++++ b/drivers/soc/qcom/qpace.c
+@@ -23,6 +23,9 @@
  
-+config ZRAM_BACKEND_QPACE
-+	bool "QPaCE compression support"
-+	depends on ZRAM
-+	depends on QCOM_PAGE_COMPRESSION_ENGINE = y || \
-+		(ZRAM = m && QCOM_PAGE_COMPRESSION_ENGINE = m)
-+	help
-+	  Enable Qualcomm Page Compression Engine (QPaCE) hardware
-+	  acceleration as a zram backend. When selected, zram offloads
-+	  synchronous compress and decompress operations to the QPaCE
-+	  urgent command path, reducing CPU overhead.
-+
- config ZRAM_BACKEND_FORCE_LZO
- 	depends on ZRAM
- 	def_bool !ZRAM_BACKEND_LZ4 && !ZRAM_BACKEND_LZ4HC && \
-diff --git a/drivers/block/zram/Makefile b/drivers/block/zram/Makefile
-index 0fdefd576691..9e1c35f942e0 100644
---- a/drivers/block/zram/Makefile
-+++ b/drivers/block/zram/Makefile
-@@ -8,5 +8,6 @@ zram-$(CONFIG_ZRAM_BACKEND_LZ4HC)	+= backend_lz4hc.o
- zram-$(CONFIG_ZRAM_BACKEND_ZSTD)	+= backend_zstd.o
- zram-$(CONFIG_ZRAM_BACKEND_DEFLATE)	+= backend_deflate.o
- zram-$(CONFIG_ZRAM_BACKEND_842)		+= backend_842.o
-+zram-$(CONFIG_ZRAM_BACKEND_QPACE)	+= backend_qpace.o
+ #include "qpace_internal.h"
  
- obj-$(CONFIG_ZRAM)	+=	zram.o
-diff --git a/drivers/block/zram/backend_qpace.c b/drivers/block/zram/backend_qpace.c
++#define CREATE_TRACE_POINTS
++#include <trace/events/qpace.h>
++
+ #define QPACE_REG_PAGE_SIZE 4096
+ #define QPACE_CORE_CACHEINDEX_SIZE 4
+ 
+@@ -310,6 +313,8 @@ int qpace_urgent_compress(dma_addr_t input_addr,
+ 	if (ret)
+ 		return ret;
+ 
++	trace_start_qpace_urgent_compress((u64)input_addr, (u64)output_addr);
++
+ 	urg_reg_num = get_cpu() % NUM_TRS_ERS_URG_CMD_REGS;
+ 	stat_reg = qpace_urgent_command_trigger(input_addr, output_addr, urg_reg_num,
+ 						algo->urg_comp_cntxt);
+@@ -338,6 +343,7 @@ int qpace_urgent_compress(dma_addr_t input_addr,
+ 
+ 	ret = FIELD_GET(URG_CMD_0_ED_STAT_SIZE, stat_reg);
+ out:
++	trace_end_qpace_urgent_compress((u64)input_addr, (u64)output_addr, ret);
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(qpace_urgent_compress);
+@@ -356,6 +362,9 @@ int qpace_urgent_decompress(dma_addr_t input_addr,
+ 	if (ret)
+ 		goto out;
+ 
++	trace_start_qpace_urgent_decompress((u64)input_addr,
++					    (u64)output_addr, input_size);
++
+ 	urg_reg_num = get_cpu() % NUM_TRS_ERS_URG_CMD_REGS;
+ 	qpace_write_urg_cmd_ctx(qpace_priv, QPACE_URG_CMD_0_CFG_CNTXT_SIZE_n_OFFSET,
+ 				urg_reg_num, algo->urg_decomp_cntxt,
+@@ -381,6 +390,9 @@ int qpace_urgent_decompress(dma_addr_t input_addr,
+ 
+ 	ret = FIELD_GET(URG_CMD_0_ED_STAT_SIZE, stat_reg);
+ out:
++	trace_end_qpace_urgent_decompress((u64)input_addr,
++					  (u64)output_addr,
++					  input_size, ret);
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(qpace_urgent_decompress);
+diff --git a/include/trace/events/qpace.h b/include/trace/events/qpace.h
 new file mode 100644
-index 000000000000..3af13727adef
+index 000000000000..3f0ccdb8f206
 --- /dev/null
-+++ b/drivers/block/zram/backend_qpace.c
-@@ -0,0 +1,134 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include <linux/dma-mapping.h>
-+#include <linux/slab.h>
-+#include <linux/soc/qcom/qpace.h>
-+
-+#include "backend_qpace.h"
-+
-+struct qpace_ctx {
-+	struct device *dev;
-+	void *in_buf;
-+	dma_addr_t in_dma;
-+	void *out_buf;
-+	dma_addr_t out_dma;
-+};
-+
-+static int qpace_setup_lz4_params(struct zcomp_params *params)
-+{
-+	params->drv_data = (void *)&qpace_lz4_algorithm;
-+	return 0;
-+}
-+
-+static void qpace_release_params(struct zcomp_params *params)
-+{
-+}
-+
-+static int qpace_create_ctx(struct zcomp_params *params, struct zcomp_ctx *ctx)
-+{
-+	struct device *dev = qpace_get_dma_dev();
-+	struct qpace_ctx *cc;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	cc = kzalloc_obj(*cc, GFP_KERNEL);
-+	if (!cc)
-+		return -ENOMEM;
-+
-+	cc->dev = dev;
-+	cc->in_buf = dma_alloc_coherent(dev, PAGE_SIZE, &cc->in_dma, GFP_KERNEL);
-+	if (!cc->in_buf)
-+		goto err_free;
-+
-+	cc->out_buf = dma_alloc_coherent(dev, PAGE_SIZE, &cc->out_dma, GFP_KERNEL);
-+	if (!cc->out_buf)
-+		goto err_free_in;
-+
-+	ctx->context = cc;
-+	return 0;
-+
-+err_free_in:
-+	dma_free_coherent(dev, PAGE_SIZE, cc->in_buf, cc->in_dma);
-+err_free:
-+	kfree(cc);
-+	return -ENOMEM;
-+}
-+
-+static void qpace_destroy_ctx(struct zcomp_ctx *ctx)
-+{
-+	struct qpace_ctx *cc = ctx->context;
-+
-+	if (!cc)
-+		return;
-+
-+	dma_free_coherent(cc->dev, PAGE_SIZE, cc->out_buf, cc->out_dma);
-+	dma_free_coherent(cc->dev, PAGE_SIZE, cc->in_buf, cc->in_dma);
-+	kfree(cc);
-+	ctx->context = NULL;
-+}
-+
-+static int qpace_compress(struct zcomp_params *params, struct zcomp_ctx *ctx,
-+			  struct zcomp_req *req)
-+{
-+	struct qpace_algorithm *algo = params->drv_data;
-+	struct qpace_ctx *cc = ctx->context;
-+	int ret;
-+
-+	memcpy(cc->in_buf, req->src, req->src_len);
-+
-+	ret = qpace_urgent_compress(cc->in_dma, cc->out_dma, algo);
-+
-+	if (ret == -E2BIG || ret >= PAGE_SIZE) {
-+		req->dst_len = PAGE_SIZE;
-+		return 0;
-+	}
-+	if (ret <= 0)
-+		return ret < 0 ? ret : -EIO;
-+
-+	if (ret > req->dst_len)
-+		return -EIO;
-+
-+	memcpy(req->dst, cc->out_buf, ret);
-+	req->dst_len = ret;
-+
-+	return 0;
-+}
-+
-+static int qpace_decompress(struct zcomp_params *params, struct zcomp_ctx *ctx,
-+			    struct zcomp_req *req)
-+{
-+	struct qpace_algorithm *algo = params->drv_data;
-+	struct qpace_ctx *cc = ctx->context;
-+	int ret;
-+
-+	if (req->src_len > PAGE_SIZE)
-+		return -EINVAL;
-+
-+	memcpy(cc->in_buf, req->src, req->src_len);
-+
-+	ret = qpace_urgent_decompress(cc->in_dma, cc->out_dma, req->src_len, algo);
-+	if (ret <= 0)
-+		return ret < 0 ? ret : -EIO;
-+
-+	if (ret > req->dst_len)
-+		return -EIO;
-+
-+	memcpy(req->dst, cc->out_buf, ret);
-+	req->dst_len = ret;
-+
-+	return 0;
-+}
-+
-+const struct zcomp_ops backend_qpace_lz4 = {
-+	.name			= "qpace-lz4",
-+	.setup_params		= qpace_setup_lz4_params,
-+	.release_params		= qpace_release_params,
-+	.create_ctx		= qpace_create_ctx,
-+	.destroy_ctx		= qpace_destroy_ctx,
-+	.compress		= qpace_compress,
-+	.decompress		= qpace_decompress,
-+};
-diff --git a/drivers/block/zram/backend_qpace.h b/drivers/block/zram/backend_qpace.h
-new file mode 100644
-index 000000000000..03747405edcf
---- /dev/null
-+++ b/drivers/block/zram/backend_qpace.h
-@@ -0,0 +1,13 @@
++++ b/include/trace/events/qpace.h
+@@ -0,0 +1,99 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + */
 +
-+#ifndef __BACKEND_QPACE_H__
-+#define __BACKEND_QPACE_H__
++#undef TRACE_SYSTEM
++#define TRACE_SYSTEM qpace
 +
-+#include "zcomp.h"
++#if !defined(_TRACE_QPACE_H) || defined(TRACE_HEADER_MULTI_READ)
++#define _TRACE_QPACE_H
++#include <linux/tracepoint.h>
 +
-+extern const struct zcomp_ops backend_qpace_lz4;
++TRACE_EVENT(start_qpace_urgent_decompress,
 +
-+#endif /* __BACKEND_QPACE_H__ */
-diff --git a/drivers/block/zram/zcomp.c b/drivers/block/zram/zcomp.c
-index 028e2f0f587e..b5bd0b11a975 100644
---- a/drivers/block/zram/zcomp.c
-+++ b/drivers/block/zram/zcomp.c
-@@ -22,6 +22,10 @@
- #include "backend_deflate.h"
- #include "backend_842.h"
- 
-+#if IS_ENABLED(CONFIG_ZRAM_BACKEND_QPACE)
-+#include "backend_qpace.h"
-+#endif
++	TP_PROTO(u64 src, u64 dst, unsigned int size),
++	TP_ARGS(src, dst, size),
 +
- static const struct zcomp_ops *backends[] = {
- #if IS_ENABLED(CONFIG_ZRAM_BACKEND_LZO)
- 	&backend_lzorle,
-@@ -41,6 +45,9 @@ static const struct zcomp_ops *backends[] = {
- #endif
- #if IS_ENABLED(CONFIG_ZRAM_BACKEND_842)
- 	&backend_842,
-+#endif
-+#if IS_ENABLED(CONFIG_ZRAM_BACKEND_QPACE)
-+	&backend_qpace_lz4,
- #endif
- 	NULL
- };
-@@ -80,10 +87,10 @@ static const struct zcomp_ops *lookup_backend_ops(const char *comp)
- 
- 	while (backends[i]) {
- 		if (sysfs_streq(comp, backends[i]->name))
--			break;
-+			return backends[i];
- 		i++;
- 	}
--	return backends[i];
-+	return NULL;
- }
- 
- const char *zcomp_lookup_backend_name(const char *comp)
++	 TP_STRUCT__entry(
++		 __field(u64, src)
++		 __field(u64, dst)
++		 __field(unsigned int, size)
++	 ),
++
++	 TP_fast_assign(
++		 __entry->src = src;
++		 __entry->dst = dst;
++		 __entry->size = size;
++	 ),
++
++	 TP_printk("src=0x%llx dst=0x%llx size=%u",
++		   __entry->src, __entry->dst, __entry->size)
++);
++
++TRACE_EVENT(end_qpace_urgent_decompress,
++
++	 TP_PROTO(u64 src, u64 dst, unsigned int size, int ret),
++	 TP_ARGS(src, dst, size, ret),
++
++	 TP_STRUCT__entry(
++		 __field(u64, src)
++		 __field(u64, dst)
++		 __field(unsigned int, size)
++		 __field(int, ret)
++	 ),
++
++	 TP_fast_assign(
++		 __entry->src = src;
++		 __entry->dst = dst;
++		 __entry->size = size;
++		 __entry->ret = ret;
++	 ),
++
++	 TP_printk("src=0x%llx dst=0x%llx size=%u ret=%d",
++		   __entry->src, __entry->dst, __entry->size, __entry->ret)
++);
++
++TRACE_EVENT(start_qpace_urgent_compress,
++
++	 TP_PROTO(u64 src, u64 dst),
++	 TP_ARGS(src, dst),
++
++	 TP_STRUCT__entry(
++		 __field(u64, src)
++		 __field(u64, dst)
++	 ),
++
++	 TP_fast_assign(
++		 __entry->src = src;
++		 __entry->dst = dst;
++	 ),
++
++	 TP_printk("src=0x%llx dst=0x%llx",
++		   __entry->src, __entry->dst)
++);
++
++TRACE_EVENT(end_qpace_urgent_compress,
++
++	 TP_PROTO(u64 src, u64 dst, int ret),
++	 TP_ARGS(src, dst, ret),
++
++	 TP_STRUCT__entry(
++		 __field(u64, src)
++		 __field(u64, dst)
++		 __field(int, ret)
++	 ),
++
++	 TP_fast_assign(
++		 __entry->src = src;
++		 __entry->dst = dst;
++		 __entry->ret = ret;
++	 ),
++
++	 TP_printk("src=0x%llx dst=0x%llx ret=%d",
++		   __entry->src, __entry->dst, __entry->ret)
++);
++
++#endif /* _TRACE_QPACE_H */
++
++#include <trace/define_trace.h>
