@@ -1,50 +1,77 @@
-Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pz2-f12.google.com (mail-pz2-f12.google.com [74.125.228.12])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9DD647127C;
-	Wed, 30 Sep 2026 09:21:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.216
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F31E34746CC
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 09:29:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790760069; cv=none; b=VNVDhOl40mJAivJ1fzZ0Us46dplO0O3vt6aWGabXJBT/maIRsCJVgsYwdaIAWvBtJFNEf9Ju5lOuQirrfBitlPhHY7fRINNQWzWZsKjCmC7qhE2pL3eWZ3m09dDOLxvVru5Nx6gLMlZ4yR7XgNsyPfSbciYki41ls/R8sklTTR0=
+	t=1790760553; cv=none; b=pPHWRIwNjSOoKO7ITc+vfDGT8iOF5/vpW1uKBrqqpepOx8A2bBPHbNIzyoP+cKREi6M845PDB4xXVKCePJgMPtaoPhQ0R1TZbsmBwmZhVr/FAVlcMfneq8QbeH2DwQXKYbyfFcKQi3fDdzKKmJd1zI/St5H8aAlVOIbGGrzzt6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790760069; c=relaxed/simple;
-	bh=yT4qWVZ+9JPB7qcHY/op2BpeKH24p/wlR6ETHPZOnPw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=trC9/qTc1TWZYcKnOx0DZ5o9ndt4YdBuH8vT0eCYkffB9q7dDFg2CnxDtM+Dt/WIL588roYWsGAm89YeZEQN0oMt8/drDNZxpp5tz0qfDdNPf7HgHPZ4ywLP5Ax575Xb7AT3s+6lYk4ce/PJFooX7Iabe3mdzItwehfCWlVJR/Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=tY4ep7e8; arc=none smtp.client-ip=113.46.200.216
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	s=arc-20240116; t=1790760553; c=relaxed/simple;
+	bh=mknuXwZ95tcNOhem/WwO440N8fKuQ6mt+WRrlOPB8Xc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=aQIZM8zPr+Lc2ceSyhezWoSogde0vhVg0EcaHpOT755q3a6kxKeuAcX++5Wz9xmvWmFqRPmYy4YJMtMFaz5gfCiSCbO3YmSY7OjVyPABbkz8Poj/S/MU4hVpt9uDd3tItCsJgMAPd2Z9b1/ZtsXSyIGTamL2SdHG/4gaYBnK+Tc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Yjp39Ie8; arc=none smtp.client-ip=74.125.228.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="tY4ep7e8"
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=9I1J5/irPWPpC3onuKiGy23moCl8MOWObpAWFnLI0KQ=;
-	b=tY4ep7e8mWxoajgF2Au3TYM4VsY+ch7ReHXbr/CGAH/ICmaqLROzmZ4mExrl1tc+8IDWZHZGq
-	c/iI6da3KgfKB165vi6qlENXld8OMBg9gxSi79fLSfyksTi7mJYqZT01HSAOrINZyN3eYLOh4V2
-	nakGiIkiZ3Kdo7rIi2mCWaY=
-Received: from mail.maildlp.com (unknown [172.19.162.223])
-	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4hvq3c3jGYz1T4Fq;
-	Wed, 30 Sep 2026 17:09:00 +0800 (CST)
-Received: from whupemp100012.china.huawei.com (unknown [7.152.185.135])
-	by mail.maildlp.com (Postfix) with ESMTPS id E3CAA40561;
-	Wed, 30 Sep 2026 17:21:01 +0800 (CST)
-Received: from huawei.com (10.67.174.121) by whupemp100012.china.huawei.com
- (7.152.185.135) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
- 2026 17:21:00 +0800
-From: Yao Yiqi <yaoyiqi3@huawei.com>
-To: <sashiko-bot@kernel.org>
-CC: Srinivas Kandagatla <srini@kernel.org>, Greg Kroah-Hartman
-	<gregkh@linuxfoundation.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	Arnd Bergmann <arnd@arndb.de>, <linux-arm-msm@vger.kernel.org>,
-	<dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v3] misc: fastrpc: Fix double free and races in fastrpc_req_mmap() error path
-Date: Wed, 30 Sep 2026 09:02:07 +0000
-Message-ID: <20260930090207.2975609-1-yaoyiqi3@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260930074609.1C0CC1F000FF@smtp.kernel.org>
-References: <20260930074609.1C0CC1F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Yjp39Ie8"
+Received: by mail-pz2-f12.google.com with SMTP id d2e1a72fcca58-8620ffc9ec7so200770b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 02:29:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790760551; x=1791365351; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=dCuOczbTp0o8M/OdE7sBIXiBo8j5afblsAbUmAPXWJ0=;
+        b=Yjp39Ie8iKUrFARXoyxkWhn0v7rlvOANVnCPkSCYTCpV3wwuQPnDc3lfCzjhgusk23
+         HHlmLKzWgP4sz09IK+Aa48Z7Tr6CXvjmYBTlHWbZjwcVod3PoRLus4xMwuHIMm0GrBS5
+         uaGLgmiMfI2Y/PVAiCaRvChuDQEuiU6cRd6Xm+X6Fgvf4eHgj27kL3Bj8Yaq5z4o3R2j
+         hkFMNGp05A+pwJXecWfgO69GdP7Ahm+E0SN9loPwn9uvkAAHEKGETjB4uswlj6s0p0Om
+         WdRpU3c5qFU9psPTG6YK79Vp/9cFUgvFUz2MsTvNS++1DPO8jPWHL/62gmKZyHdJmYVB
+         FcGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790760551; x=1791365351;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dCuOczbTp0o8M/OdE7sBIXiBo8j5afblsAbUmAPXWJ0=;
+        b=Mu07i9wQ/ln0MNmqsgZLQ8C8CXZOAE5u9tqqo/kNYIctPiA1bLDAwMBBF2iDi/YgMt
+         PwpV6N6uqpMQ802hV02sCiv+srtLqck3rssDXJvIs5VOQ+DUqFE87vTyWlzcQKvZoLuc
+         B7l+3RLnyy9HtFr9MIf8eKsDjWhmL0xcZqOjXXEmz/g+ePbCg6lL2p/20k7KH+OQmjRy
+         a0qGY8Wh9LfVOq7Ag6XvUPsDf6DYl1ZIZNpXhSpHTwhpLdpWL+PXmgD4hX6sx+is6ZHD
+         zDYDS/YSc2UqXcgWp+TsKvUPcDvyeq7pX0Z3nFd8JB7aDigbyBJo+lshk14N/iUKdI2j
+         eBPQ==
+X-Gm-Message-State: AFuF++ncphKZOdmm+6GgRcLGt7jhK4ZfvycgK4xuTyCvIgRnFemwTUW8
+	W60frBxy8c//S7AITAT3j0fhQXlhYaeWVaITg/I9Y8jIxwWyrPGJjgsO
+X-Gm-Gg: AYBFou1mlmQc4GWfeWvqqM7WzZmwed3CNPqYsUVTtZYfODjx5/eEY7yDnNGs3xnLRK1
+	o+Jdi4AwqZqh2CIXAt0oulIrdNLSRmUR18clqMsG3jEYVaXrBenrRyqTiaE8m/xjuGCGoCOymuM
+	h5IXnmR8jhWn+ieE9r+arRo+UOyPQ8fJnH8uHh12KZAghFmvlLR6BBlas1QyYwqfBpm+sKLDF0R
+	LXzSacyZyq+aDoMuieEzct6XHLP5jrOVoSBhAuW+DCz6DkX5la4aLB2FzaKtXSxAxcN+dlmGmxC
+	lisOL4fpS2q6xL84oLMWEU6F5XOM8gp0hdECet5xGbOZh47GCVzptF39nQZp4kRrz0tPvoJHVUh
+	Sl8fr71lC5z0qFmY5i7xpa3uzeUgtQgciH3en/5PY38zubvk5u7+BqEEFvxVOX5y92JAoZIyY59
+	k1YfvvKHvJM8ew5hj0oe3men8j2zUsBv3YAAW9vFxoRIvTwvwqYW0PJ4x9J5N+mDvBYEwy6NFrz
+	5Gm0k4ewkT38K4=
+X-Received: by 2002:a05:6a00:4787:b0:882:b2a:4840 with SMTP id d2e1a72fcca58-88749bed3e0mr770897b3a.2.1790760551234;
+        Wed, 30 Sep 2026 02:29:11 -0700 (PDT)
+Received: from jfliu-sfa1411.. ([129.227.183.200])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8872624c5b5sm493474b3a.43.2026.09.30.02.29.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 02:29:10 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: linux-clk@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	Bjorn Andersson <andersson@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Rajendra Nayak <quic_rjendra@quicinc.com>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Jianfeng Liu <liujianfeng1994@gmail.com>
+Subject: [PATCH] clk: qcom: dispcc-x1e80100: don't disable display PLLs in the unused-clock sweep
+Date: Wed, 30 Sep 2026 17:28:55 +0800
+Message-ID: <20260930092904.5222-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,52 +79,84 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
- whupemp100012.china.huawei.com (7.152.185.135)
 
-On Sep 30th, Sashiko AI wrote:
-> [Severity: Critical]
-> Is there a risk of a DMA use-after-free if the unmap operation is
-> interrupted by a signal?
-> ...
-> If fastrpc_req_munmap_impl() returns -ERESTARTSYS, this err_assign path
-> then manually adds the buffer back to fl->mmaps. When the process later
-> exits, fastrpc_user_free() will reclaim this buffer while the DSP may
-> still be using it, which could corrupt newly allocated kernel memory.
+UEFI leaves disp_cc_pll0 locked and running for the handover
+framebuffer.  clk_disable_unused() runs before any
+display driver probes, finds it unused (no consumers, no
+CLK_IGNORE_UNUSED) and powers it down through
+alpha_pll_reset_lucid_evo_disable().  When the DPU driver later
+enables mdp_clk, alpha_pll_reset_lucid_evo_prepare() performs a
+full PLL reset and relock.
 
-Thanks for the review.  This path is not reachable.
+On X1E80100 that relock can end up marginal, and whether it does is
+a per-boot analog lottery.  A marginal PLL degrades the DPU core
+timing just enough that the DisplayPort controller drops every
+other MTP (micro transfer packet) of the pixel stream fed by the
+DPU.  The result is static black vertical bands on the eDP panel:
+at 2560x1600, 24bpp, 4 lanes, one MTP is 4 * 64 symbols / 3 bytes
+per pixel = 85.33 pixels, so the screen splits into exactly 30
+bands of which every second one is black (20 bands at 16bpp).
+This reproduces on roughly half of all boots and persists for the
+whole boot.
 
-fastrpc_req_munmap_impl() issues the unmap RPC with kernel = true:
+The corruption is invisible to every register or clock-state dump:
+the PLL locks either way, only the lock quality differs, and all
+programmed values (DPU, DP controller MSA/TU, PHY, dispcc) are
+byte-identical between good and bad boots.  The controller's
+internal BIST pattern stays clean on a corrupted boot, pinning the
+failure to the pixel ingest timing fed by the DPU.
 
-	err = fastrpc_internal_invoke(fl, true, FASTRPC_INIT_HANDLE, sc,
-				      &args[0]);
+Verified on an Acer Swift SFA14-11 (X1E78100):
+  - clk_ignore_unused on the cmdline:                7/7 boots clean
+  - keeping only disp_cc_pll0 from the sweep:       10/10 boots clean
+  - keeping any other clock from the sweep:        still corrupts
+  - with this patch:                                10/10 boots clean
 
-and fastrpc_internal_invoke() waits differently depending on that flag
-(fastrpc_wait_for_response(), drivers/misc/fastrpc.c:1320):
+Keep the firmware-provided PLL state by marking disp_cc_pll0
+CLK_IGNORE_UNUSED, the same way gcc drivers protect CPU hfplls
+(cf. gcc-msm8960).  Other drivers using
+clk_alpha_pll_reset_lucid_ole_ops for their display PLLs (sm8550,
+sm8650) may carry the same latent issue.
 
-	if (kernel) {
-		if (!wait_for_completion_timeout(&ctx->work, 10 * HZ))
-			err = -ETIMEDOUT;
-	} else {
-		err = wait_for_completion_interruptible(&ctx->work);
-	}
+Fixes: ee3f0739035f5 ("clk: qcom: Add dispcc clock driver for x1e80100")
+Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
+Assisted-by: LLM
 
-wait_for_completion_timeout() is uninterruptible, so the kernel invoke can
-only return 0 or -ETIMEDOUT, never -ERESTARTSYS.  The interruptible wait
-above is the only source of -ERESTARTSYS in this driver, and it is only
-used for user invokes (FASTRPC_IOCTL_INVOKE).  Therefore the
-interrupted-invoke cleanup you quoted (fastrpc.c:1418) never runs for the
-unmap RPC, no matter whether the buffer is linked into fl->mmaps at that
-point, and fastrpc_req_munmap_impl() cannot return -ERESTARTSYS from the
-err_assign path.
+---
 
-For the failure that the unmap RPC can actually return (-ETIMEDOUT or a
-DSP error), re-adding the buffer to fl->mmaps keeps it tracked so that
-fastrpc_user_free() reclaims it on release.  That is exactly what
-fastrpc_req_munmap() has done since 6102ceb4eab8 ("misc: fastrpc: Remove
-buffer from list prior to unmap operation") for a failed unmap, and this
-patch deliberately preserves that existing behaviour.
+ drivers/clk/qcom/dispcc-x1e80100.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Best regards,
-Yiqi
+diff --git a/drivers/clk/qcom/dispcc-x1e80100.c b/drivers/clk/qcom/dispcc-x1e80100.c
+index aed06203a886a..5613f1fdb2e4a 100644
+--- a/drivers/clk/qcom/dispcc-x1e80100.c
++++ b/drivers/clk/qcom/dispcc-x1e80100.c
+@@ -94,6 +94,21 @@ static struct clk_alpha_pll disp_cc_pll0 = {
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "disp_cc_pll0",
++			/*
++			 * The boot firmware (UEFI) leaves disp_cc_pll0 locked
++			 * and running for the handover framebuffer.
++			 * clk_disable_unused() runs before any display driver
++			 * probes, finds the PLL unused (no consumers, no
++			 * CLK_IGNORE_UNUSED) and powers it down.  The DPU
++			 * driver then has to relock it via the reset-prepare
++			 * sequence.  On X1E80100 that relock can end up
++			 * marginal (per-boot analog lottery), degrading the
++			 * DPU core timing enough to corrupt eDP output at
++			 * MTP granularity (every other micro transfer packet
++			 * delivered blank, on ~50% of boots).  Keeping the
++			 * firmware PLL state avoids the relock entirely.
++			 */
++			.flags = CLK_IGNORE_UNUSED,
+ 			.parent_data = &(const struct clk_parent_data) {
+ 				.index = DT_BI_TCXO,
+ 			},
+---
+base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+branch: dispcc-x1e80100-keep-disp-plls
+
+-- 
+2.47.3
+
