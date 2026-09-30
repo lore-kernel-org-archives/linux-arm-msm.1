@@ -1,112 +1,78 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0732C3F9A13
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:44:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7404843DEB1
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:53:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790754261; cv=none; b=CxequefQwuyS5bSDGvB9deI7hcV5iZrlHoMLwZ0sCiOg92uCNLw/ddHjiO3jXZ1PnLJ+TFizluWkVdp6PO2Sti0ruVmLcsrm+Mng4CpbeXeln50fl4wT4nqtFVHJ7ml5CLQkDdD+K13EDr98utEVfVfBdL55pwjeehZf8Os0XQo=
+	t=1790754840; cv=none; b=UfKfBts/4rFyvWeH/cAOqYocG7NIZm5sq3XJxFB+hbzkBzBhmZ8kRuhlDNr9vda4i3gnVC/Fuz88XXvkZiJIRuoYwQi5lYTZIPY/uLg6NCuNA+0JzypahNVR4qicYCOX/uhvpMJ766r7ahPVsoL07hMr6XjsI8Lv14xWzBp2GJA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790754261; c=relaxed/simple;
-	bh=BE5W/gmeR39ImSP58bZnM4rhTtFjmqqxKhOhX7QM2+Q=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=sq81OKou12XohCnORWCLzONc+lOFCvaoWNjU+r3TGqNhcpz6gR4g0GwzVr8BGU5eu/jbrcJhdGIfEFh4bPU4NXCQglFO+EpGIeHtnjVoJBOvi1k+ECeKykvMQz4zO7S08bjU9Sp2ZcQ0ObU+R9wizQfD/+eKmaLqIkiIQGjD9wI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QqijGpMZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790754840; c=relaxed/simple;
+	bh=kme3tdZ1U+Tgn9vwCyFoV3w7eCQqGn1Lw+epSPi0aO8=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=BpY8StREFh2AH2CUCJSIAMk09BogjMWGCb7xsZVhXm77oJc2CGDpUnRzbWLosjDrydjPKmb30wF/CWZm0ex6Z2Iz3vwwn1v10/e+FRCW6EesNpifT6MvZ4n+0O4QjtjUBDfPlWhlTw+Ou2c+nV0AOX6NcbypQtQfP1usfwMs3XY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZUUxkOtg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QqijGpMZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E74D1F000FF
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:44:19 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZUUxkOtg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1080D1F00898
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 07:53:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790754259;
-	bh=FtLOcaaScRzLoTwiQLz6MZYTj7kinYwBxEJCUpaO0oc=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=QqijGpMZuiw88teEb5g++MFkOcXc14m0SFfKeu2eH5Sfl49kEEcnwbqrf8v9FipWi
-	 X+l0v14h3whYKb5O8HGh0TKYQlNo7wuaF6i6jIrWtRI9+/hD5ar3seKJfRQHHzMWBd
-	 bSMtr3WRUGbq5GyparrcSbbggvDs5UgjO3n4H6r7+3lsxbqwr8wt0FtRkIc+73+adf
-	 It+OLyUiactbFJUATBtvkXFH98pLvGh5rZVFl2HFFSvKz/foivBWNMAmVVFZHoNq4n
-	 23IYvrcxkga/LNozwcE9K9EGYKXeVqCnxCz3DwnKNU/YYE9wKsF3sM95MZVhpIj4uH
-	 oBXKHnAK1bBFw==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3b8a5187so667639e87.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 00:44:19 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBx4f7UFY/vepVkgezP0ZbV284dx5O31Ezs2qiLW2GHIIcNcQsJ0r/TKCaPbwZd20Q6ULBj/X2ZNRYegFB6L@vger.kernel.org
-X-Gm-Message-State: AFq9FYJb54KYwP3QO5EMbhMVDEBdDTUZcs4dqWdRv582Y3/ei5aOVl7U
-	8gmRdYNqEcowJoRMeC/F1G3znb/UmErxbRaBtwxF1y3rGCsBlQYqif5b3HIZi99P3MK/ER84LLZ
-	QiJJ3KJQoWQ+tXCCkhMxJD74MfIHPP+4=
-X-Received: by 2002:a05:6512:3592:b0:5ba:3b1c:2f5f with SMTP id
- 2adb3069b0e04-5ba406088a3mr140468e87.60.1790754258346; Wed, 30 Sep 2026
- 00:44:18 -0700 (PDT)
+	s=k20260515; t=1790754839;
+	bh=kme3tdZ1U+Tgn9vwCyFoV3w7eCQqGn1Lw+epSPi0aO8=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=ZUUxkOtgzhi1Q9N62ORXiHk/J3rf2zvdX2UOKTcMkQYhx9W0FZVO7uiIwJSBMjUCS
+	 ttu09aKi/NMV640uKB02QdKg0C5urdSYtQXCkA7zxmsDhg0aa5qj8g7Uap/+2QeAYb
+	 LIpk5dhMZjxezm6f3lq0m3eqskHddWL0BdYa5AiPBy8LoCk2Sg+bVBc8qLnk2HwgTF
+	 3xGltqxpEDpwVtQsn5d6qzH/QIaHR+L3pMRKiTiRkI7/X2DWE07zwtc+oUl21UYMEj
+	 rcERDx0VjDTXdcHUUT9jLDrlv1b4CLQa+ItiSiv5Bp+ZAlbB6FeKo7wq8V3C5cEbSN
+	 LAV2PqPbYF6kQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b8e986b8b1so5104811e87.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 00:53:58 -0700 (PDT)
+X-Gm-Message-State: AFq9FYI2R9y72C6/pMhbBZ0+TpHywaIZB5xIN27S0U5LvNjMFR67Z1JD
+	/Nno+uz/J5vLMIdQCAYZEp1wWv/JNQ7A0TXEmxgSJJvu1aDgIoalvTwKFh1UWf1SFQ67y/gnXej
+	w+MNKyfZ/XmJvtSk79e755nTGvxd/QWk8CguZ2uysQA==
+X-Received: by 2002:a05:6512:31cf:b0:5ba:3c49:6ccf with SMTP id
+ 2adb3069b0e04-5ba402b853bmr239606e87.1.1790754837737; Wed, 30 Sep 2026
+ 00:53:57 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 30 Sep 2026 00:53:55 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 30 Sep 2026 00:53:55 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260929-gpio-shared-fwnode-lookup-v1-0-57d54811de1a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
- <20260727-spotted-winged-mantis-7aa1ce@quoll> <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
- <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
-In-Reply-To: <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 30 Sep 2026 09:44:06 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
-X-Gm-Features: AclHuK9JQOplVIXeKlWlmUy3qK_WlTaornnEdXd3kmRQorHCOhHPlOKdxs8zWKE
-Message-ID: <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
-Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics R63455 panel support
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Jun Nie <jun.nie@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org
+References: <20260929-gpio-shared-fwnode-lookup-v1-0-57d54811de1a@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 00:53:55 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Mdrd+=5x7OBAK=EtjwtGH+rvJQk_GnzRXNnmzoDnUXBTw@mail.gmail.com>
+X-Gm-Features: AclHuK-bKs-DiLDJzi14gqE5ctPrjcYpWHqNaXVB07vwyWRRN1rks3MP-AEwIX0
+Message-ID: <CAMRc=Mdrd+=5x7OBAK=EtjwtGH+rvJQk_GnzRXNnmzoDnUXBTw@mail.gmail.com>
+Subject: Re: [PATCH 0/2] gpio: shared: fix no-device, fwnode-based lookup
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Abel Vesa <abelvesa@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 29, 2026 at 3:35=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.or=
-g> wrote:
+On Tue, 29 Sep 2026 14:32:02 +0200, Bartosz Golaszewski
+<bartosz.golaszewski@oss.qualcomm.com> said:
+> Abel reported to me a crash on Eliza linked to fwnode GPIO lookup for
+> shared GPIOs. The second patch fixes the issue, the first fixes another
+> problem the clanker found during review.
+>
+> Tested that the issue no longer happens and that sharing of GPIOs still
+> works on Qualcomm Eliza.
+>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-> This entire binding seems like stitching two devices together, which
-> might be fine (I don't even remember this stuff... two months old) or
-> might be artificial grouping of separate devices.
+Please disregard this version. I need to account for multiple fwnode requests
+for the same con_id which currently fails.
 
-I think that's a good point and fair pushback.
+I'll send a v2.
 
-Neil and Jun talk about it yesterday at XDC (1:15 into the stream):
-https://www.youtube.com/watch?v=3D6tNGW8PoSzw
-
-The current binding does not reflect the physical topology of the
-actual device, and the bindings need improvements. I have a feeling
-there is one display controller with two physical panels.
-
-In that case I think it's better if we do:
-
-panel: panel@0 {
-    /* This is the two-panel package with one display controller */
-    compatible =3D "sharp,ls026b3sa06", "synaptics,r63455";
-    reg =3D <0>;
-    #address-cells =3D <1>;
-    #size-cells =3D <0>;
-
-    panel@0 {
-        reset-gpios =3D <&pm8550_gpios 3 GPIO_ACTIVE_HIGH>;
-        reg =3D <0>;
-         ....
-    };
-
-    panel@1 {
-        reset-gpios =3D <&pm8550_gpios 11 GPIO_ACTIVE_HIGH>;
-        reg =3D <1>;
-        ....
-    };
-
-...
-};
-
-
-Yours,
-Linus Walleij
+Bart
