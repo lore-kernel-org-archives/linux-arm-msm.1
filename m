@@ -1,212 +1,185 @@
-Received: from mail-vs2-f39.google.com (mail-vs2-f39.google.com [74.125.227.39])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH1PR05CU001.outbound.protection.outlook.com (mail-northcentralusazon11010042.outbound.protection.outlook.com [52.101.193.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF58D3DBD51
-	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:18:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.39
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790795941; cv=none; b=cCmpRrJU3fLUxx8RDggiobGIMohGu5XumlCtKf+HoU0lspNGgw+U2XX9CFZ/zHHsJuj1sC8hy4VEOGshS2N6Pym56iaYOuzirVSY+5urVBKx7UsVk+i3xJ2r99JCkAFESc09bdEkLn97NHv5j7ZFfxsxkX1eNEcAGBoFvewoqIg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790795941; c=relaxed/simple;
-	bh=2PSiMnbjqOI1HWeoxVXaHOVt+8gykEe0sZuMk2HC+yI=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=gZWjOIrAAS0Gr3kVrPh1+n6fB3s75vo0wJ23w1lFKKALPpYMr6b6GAhJygFlm//Po9OWqEW6NeWSdV2r850LF4z2krUifSH+Hum8Y+HLEjz2jBkyygirYt644DvrCUmLE5jdkxKWq4V9b+IoLNGkckAmo3jrRZ+Ku58JqalUcng=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=kL4zPvdk; arc=none smtp.client-ip=74.125.227.39
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 396A23806B0
+	for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:20:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.193.42
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790796025; cv=fail; b=uZib62PCCODqoA7ttbBzmSgvyJNEb0emrsMlLI1C1mF57QUDkTYeIEWiJRmwhLY1Y6dBoeWTuEqaVxAXCVKPqfXYIUCgJkNhXLE838ClpNW5Eeu/XEnU0nNPGWqWYAj0bPapccCH3MOPrSu16SkUVW+vQ9Jw74ABRX5rHk1ju+g=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790796025; c=relaxed/simple;
+	bh=5212pxCpoBru7yF5g2SRuJm6UDtNEdUCSmhvXoC/cT8=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=KqTgoFcrdKGWN3jjCKU5ZDVZe5m6S/cG4ADLMJurUB2FU/prF8EtLQ/XpHWetVmkUFt4H7jI3QtfJbmNkG0B2lYhG/W6Zd+G2yG09vEv0bpfcFYovTOtOJoNYENurf/T5lDiN63Cm8McRvhmZ7HBtEBiVb+oiCMq25XJ18OWm0U=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=W03PUm6v; arc=fail smtp.client-ip=52.101.193.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="kL4zPvdk"
-Received: by mail-vs2-f39.google.com with SMTP id ada2fe7eead31-7bdf5a43fa8so342118137.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 12:18:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790795939; x=1791400739; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ewIF0riMHpbsIkdRakHTnfj8HYILpZHHiLSDM7xGPeE=;
-        b=kL4zPvdk67AhDPt8LvzxNcstuUOF5gUia7fyoEQQo57HiVy9JGJoakqfvEyUjvjV9i
-         DAjwTD7zsSzdWztzqIckN8n2i2sNj5bmnw6Ha4YWUj6TgpiszpS9IXAOhVINLIkHVoiK
-         pzfbPBnbL+srlc+g4Igm/f6zaR++oXaVoMm0XhmHE85hzpkeFm17hL5dCpStZZqfz7ml
-         /2jQD8OdRCBBZkn1P7dYq0bQGfZvIqLE9raN+7D4tBEC8gLWF11Nx0IOB6epmiemKri8
-         2xvfcFvVkk1U8dHs3zHqFzn83CM/YN5Ri3wqEYzWfSGttYjBnYC0wP/cl4nJRtrWkjoz
-         VlJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790795939; x=1791400739;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ewIF0riMHpbsIkdRakHTnfj8HYILpZHHiLSDM7xGPeE=;
-        b=X3qWW348pvNzY+vQvshuq3xe3A2nHt13EoZmIY38ojYPpO9tyaQUMo5O3jzZCfO3iA
-         7xrdqvZogOsCi8J5O6HX7L0a8s5GJQXtO0X7Kef4P4rnnk2GuxVpl9eryUH9wyWU8FYR
-         XJuXw9NsdnECZj3QpZ5KogbWe0wwyZQLatuMr+HVVvh4Xu+D6lswTPTaivJqE7HcpWCO
-         I9CMS228/srDPnKL3EXkBTw19pT+upJwiaf97S1BLWxchqEYwyNjkAa6cRBqAj17bmNG
-         VfB7O0pVw6ngD+S4s0Xp+WqGf+yqwgyq0PbZncpDg52INAFYcCipppVc9pQAeRnuSzBp
-         GCqg==
-X-Forwarded-Encrypted: i=1; AKwUvBw9/NbSiezV6y1W92MbtuzoTRm4kWMW65ZIsJYHyjFjwJD9SVWnAN3Cq5gXlOsvqdpOjbAJco828cRbHXok@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ7RYuMb+pR3AyjER0qoNRhplLY4mAg432KHS/dy/JPmHrFOTYY
-	IER2GgCFEguLhr2tZKQ4u2xLTlcxrW9j9rTQvTaMX2fBWHkxKJAAJ+7UuxzWstzonXo=
-X-Gm-Gg: AYBFou0nAfhNoJCAm3m59TuHB0CuuOJ5rZ3hvk54XirZdmM6na8JN7BftWuic568wIX
-	TTTeLmMtavRrEKLSzxQGl2hkAOhdZW1O2cUKKE49idDeFHUEp465qLKXBhvzhXYDlgjz1HoTXHK
-	j34bodsjWajjjWksUmrg+wNhcX6BPVSYx6RflzvfPGmfvq/CWcmZ30xIgb9fIYOJ/QW/xNtSupa
-	eH0cU5Xg5lYzRizB5XQyDWSLih310dBdEHgh6rac/x/NeiUVbm0sCcjWypcp9Ut4FyFHE93dV42
-	DITu1AnGddMBOg7IR7UWt2peGhEh8GEYO8N/CZT+m70ImDi+GXJEmRvzeMFcxZDxvXoZGBNl3Uo
-	bScnFlou4GH1Rru4wgfNjmrEvd3g6M8QDfrQuiLKNsq0J3eSh7kvG9iwvESebQaMXGDycCG/A+l
-	yejiWBB6t1APTzMDcKi50FDikX35QVGHapQ7sXwiOY5hrSH1a/6Z0SVuJsNobS2+B7tP7eTrZaa
-	rqxUTVy9jgRAC1JYo9/1v+ttSawezwqTCTDYg7Z7cD0K1XHIzLWZScVGOufekv7VUc6/Ror/Rur
-	nHK5OSE=
-X-Received: by 2002:a05:6102:9d8:b0:7a8:15ba:c509 with SMTP id ada2fe7eead31-7be622a2858mr567244137.1.1790795938407;
-        Wed, 30 Sep 2026 12:18:58 -0700 (PDT)
-Received: from [10.21.51.184] (ipagstaticip-88fc351e-cb28-db3e-3f52-ad13c70f08da.sdsl.bell.ca. [142.127.77.63])
-        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-98a870e08d7sm819586241.9.2026.09.30.12.18.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2026 12:18:57 -0700 (PDT)
-Message-ID: <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org>
-Date: Wed, 30 Sep 2026 21:18:55 +0200
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="W03PUm6v"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TXae2BxC4APIVeEm4+p8xMVCzXQCZ8qRBVCP2/SHfpKNsqfeZe4MiJf3d/k6apprXn2+0qDxIlqeUgcJLo/KxP4HB0saij4cUa6RbGSx4gzqHRA/bR/D95tU1MMTC/P0CF6t3ovnEZe6k+X3cFX9ETYDiXaP+ImwuPtKXUJdvwqzuormUAuxCIrw+QQJaAIQxS6qB7q25WoEfXg5vgZz3mucZtyIVMPVzHMcqLkyeeiF+9uC2XnBCfpkUvHu/sWu4tRUcxgAa36lK80m7l98zE/YfSL0Bek5n3Wh215ov5wIJMF2LxA4/Xf0clj7lG4+mwd3T7jO28inVjHSSgCs7Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eyv1GdO86GPvc8orRqvzcLNz83XqvebYYKMbqcVS8zQ=;
+ b=Qu1xOIzZNMUZRH4/KaN8l87jbcHBf1K390zOb7u0AFXMqndJymiipMCvbcBFC5OyQKfj/5AYDJdoGy/gfpo+iEcQ5bn9A/evUQwZdIYmOiuyuwRBNUizCDr8Vj/ZjmqHHXLC4LJjagyjgKOW7W+ZVQNTzJyxuyR+Ie7gH1Z2/WdsqZyTNGno587CnEIXZ7DN4aE4wWZ0qoGQ+9Hql/TJouPqsbCEOwudn2mRCRrrX2PtDgO9Dr4itnArHtWdmY5M2QI9dxqGW33fUZY0WR6lD8XheyiGLQilinwvIjpfFEvVG6LyLbPzQlOoRAw9YBbv6ZYvSD2EFEenuIyznvMZXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eyv1GdO86GPvc8orRqvzcLNz83XqvebYYKMbqcVS8zQ=;
+ b=W03PUm6vrcIQ+Gn/l+whHrKYlBdx0RrDQPyAOeWVJy2XzdNNQEAefG8DewCbhzvsZ04VCwdrYFph6HqJq2nITtp/VUvALejAk5G7LZpwcy73fv/9Ts6VSJIRpQb0XoNcrYgsgXMvXQLqF5g1C3SX1fL0cHEMk9X5mGdagXgkQRc=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ0PR12MB7007.namprd12.prod.outlook.com (2603:10b6:a03:486::8)
+ by LV3PR12MB9260.namprd12.prod.outlook.com (2603:10b6:408:1b4::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Wed, 30 Sep
+ 2026 19:20:21 +0000
+Received: from SJ0PR12MB7007.namprd12.prod.outlook.com
+ ([fe80::6f95:c4a2:894d:9e8a]) by SJ0PR12MB7007.namprd12.prod.outlook.com
+ ([fe80::6f95:c4a2:894d:9e8a%3]) with mapi id 15.21.0451.022; Wed, 30 Sep 2026
+ 19:20:20 +0000
+Message-ID: <4b923f65-139b-4a29-a7ec-babd0f662317@amd.com>
+Date: Wed, 30 Sep 2026 15:20:07 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 03/11] drm/atomic: duplicate state of all colorops
+To: Melissa Wen <mwen@igalia.com>, airlied@gmail.com,
+ alexander.deucher@amd.com, alex.hung@amd.com, aurabindo.pillai@amd.com,
+ christian.koenig@amd.com, contact@emersion.fr, daniels@collabora.com,
+ louis.chauvet@bootlin.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, sebastian.wick@redhat.com, simona@ffwll.ch,
+ siqueira@igalia.com, sunpeng.li@amd.com, tzimmermann@suse.de
+Cc: Uma Shankar <uma.shankar@intel.com>,
+ Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
+ Xaver Hugl <xaver.hugl@kde.org>,
+ Pekka Paalanen <pekka.paalanen@collabora.com>,
+ Matthew Schwartz <matthew.schwartz@linux.dev>,
+ amd-gfx@lists.freedesktop.org, kernel-dev@igalia.com,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+References: <20260811171011.184964-1-mwen@igalia.com>
+ <20260811171011.184964-4-mwen@igalia.com>
+Content-Language: en-US
+From: Harry Wentland <harry.wentland@amd.com>
+In-Reply-To: <20260811171011.184964-4-mwen@igalia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: YT4PR01CA0393.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:108::26) To SJ0PR12MB7007.namprd12.prod.outlook.com
+ (2603:10b6:a03:486::8)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics R63455 panel
- support
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Linus Walleij <linusw@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
- Jun Nie <jun.nie@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
- <20260727-spotted-winged-mantis-7aa1ce@quoll>
- <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
- <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
- <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
- <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
- <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR12MB7007:EE_|LV3PR12MB9260:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6054124c-9774-4641-451f-08df1f27de27
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|7416014|18002099003|22082099003|921020|4143699003|11063799006|10067099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	gJGY40rteuenFcDZ1EnGN8psqJPQq6YKhXmbXKrxI7+fm+iwO7VNdQDD5zjCMjG/C8Hwg3Y/ZO+Xh2vxzmEQQIgiuXd3cFxqdigK8iOHkeXNXsYeFcqLj3GDnNPivyx6QjBB8vjZVcrxFbEy78GaL/zJy9F4fCvvn2guOfq6cv9eWM+4FqywdWR/bEKk32rf3jV4QvMoVIHgbqormMWmAjlk4x+M80myAOpVDPzgKeg5OVKzfIIadjbfBEgIgbGHPEhUnbIcY+fP5MqFI23jJy5vtlHTb/hKMmGGJeyUrhJQHQzgoSpaf58dazijIPnmqVhdoLet7SVGXtEqA5kj2mO3jXj61cEQN6er9oF9Rt7XOGA6c09Zeuc1q3Fp752ub0n+TqBEzdf5VENezGD6VM0jBm95UKs3CuV8JddgJZz3t4rtQOrntydgkL9tZ8t1osL1NvdVppPRJ6PSN2iEesPxxOsaze+ynGceaUV2vQoLl121HN45N5MvUAQYVdIc3Ro0MslIecRfosibaRPbWpUikIQtZfFeSfP4+w03h0otwCvMCBuPH1ObU04hqUfcD1fODjkwUPTgFBX3dLQp23h/JRmR2gv4aL7zWEnWZFLGUWc64mVvZjMSm+9TGu3Ut6361kCJvxqkMy98BRQgiN1gkNDv3EG3VNVLR9ZEHC79+o1/OfDWOd/nkER5xmL0I7mLkQab9OSqVt34dpbU3Q==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR12MB7007.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(7416014)(18002099003)(22082099003)(921020)(4143699003)(11063799006)(10067099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?b2hLcXZTRGltcXAwR2tWUkk3em5Nd2hoejlyZkk2aFdjZUpkY242TGxIUC9L?=
+ =?utf-8?B?ZXk2c0JjUGtDN0ZZU0c4alg1eElVbk5sRVlZKzNtdCtyWlBwNDdIa2VPQlJa?=
+ =?utf-8?B?VW1VcjVsQitlS3hZT29RQWRvZ201NU00VTJCazdiTDJHVlZaa05Gd1R4OG1L?=
+ =?utf-8?B?V0hjR28yTkc1UmF2TjBkOG5PR0d0SFpKNC9JL002NTBVSFNiZDZjaVlZaVI5?=
+ =?utf-8?B?eWxMUzd5NVplbWU1b3prUml4bU40OWRMQ1RkR0ppZ1FqTzMrQXpzb2M1bWxs?=
+ =?utf-8?B?RWRmUGt5Q25MbVkwbWl5bkd0UEZHWTE3UUdCNitiZWZ3ZUZGKzh3eFFOdXI3?=
+ =?utf-8?B?T1p5MEQ3VGhoTFA4VUdXdmd3ejNiWWJMY3daZklSenN3QnZLbG9Rc1YrNzRy?=
+ =?utf-8?B?TEpZSVBaZ2JXd3kyU3ZReDFaNzY4NWlSU1k0UnVWcFljN2dhbDU1Zkt1WmVn?=
+ =?utf-8?B?d2VFbGJGRVVIU3g2OENVVS9TK2hrUnJPWnlEYktkQTBuTkxIeVpQTWJKdXFu?=
+ =?utf-8?B?Nmk3aHFhUnRMMzRXMWlneXlWZTZ3dDNkd3ZobGdWZUQ5dXh1bUZNaVFFVkgw?=
+ =?utf-8?B?WEJXdFdnNTVmTEVvQlllQ3hnYnEvTHRoNHNhWDZSeXJORWVIdm5YRXl4QTYv?=
+ =?utf-8?B?bFFneVNLald6NzBGdU00SG91eVhKaDRJNkw5QVdqelQxUHlSQkpuKzlIUE02?=
+ =?utf-8?B?bmVscm50TlhQdzYvZ1VKd3J6eTVjR2c1NVlqb25NWmQrdk5KQUZzL2RvRTNN?=
+ =?utf-8?B?R3pBaWp4dkdUOFZmRGd3cjBRNHd2cURSMkNidWtuY09WaUhkQU8rbmlFQnpW?=
+ =?utf-8?B?UUJXTy9MSTFGSEc5TER6MUtrYTR3Q1B6NUp6amNva2UyT0xaNzNzV0FhS0NG?=
+ =?utf-8?B?QlhOc1FwWnV3RURoZ0JJL1dFeXRKcHVFMXBhRCt5ZWlFa3oyZXZsWk8rSkNm?=
+ =?utf-8?B?cFlQN2h2dTVETkppZ2ZESndEQ3RQVE1DNnNwQTBNaHAwUTVNS01XdkJhME5J?=
+ =?utf-8?B?TUJrVnI3OWFUaGJiVkl3cUV5UlBHNmxYT3FxSXFFSEhWdFhlME9EcXF1THdZ?=
+ =?utf-8?B?QU5IYVdMSE91cE1kenE5T0JhSTNqdlBpRTdQQk9saklQQkl0SDVZRStPSWp6?=
+ =?utf-8?B?SFRDRzQyTjR4RjNxbmlYS215ZkhSWnB6S2Y2SG50MkE2MVRiOGczb2ZDVW9G?=
+ =?utf-8?B?OHB5WFBITW1jMVZQZXV4ZGZzQ1pSS3B1aWRFb1FNM3JNOWJITHEzaGRFSms5?=
+ =?utf-8?B?S29QYVd4eVdwa0l4Y0RReXhrQmc2Z29TeU5EMVRaRFZKL25NWUxRNGZucnZV?=
+ =?utf-8?B?cWRkT0M2VUNQSGRVNXREYzhSS0VpRG54MjE1amNneXovTXVyZDZZRnRqazdG?=
+ =?utf-8?B?Slg4R2UvbEt2YStXQ0FRaVgrOFUwandEa1JscTBjWWNQS2NXSXg0QlFsdy92?=
+ =?utf-8?B?eEVSVkZiUm5XZFh4b0c4YnlNQVJWdDNSVWlGTVVJVjUyQ29Tc2hJWURUd0xV?=
+ =?utf-8?B?dUcrZi9jeGk1aGpjVFNjZ3hEZGFsTHpsM0lNbkN4UUxXbnhTQnRKTHFNNDVT?=
+ =?utf-8?B?MFVHNXdVcmFsM2U4b0MyYjZDQ1NPeXB1LzNjYWJyaDVjeDRJalMrOWlvWDc0?=
+ =?utf-8?B?UzdJejRoa2ZmL2V3M254dW1vWVdOSGxnN2FqSGxkR3ZmN0p0WFc1M1haR3BU?=
+ =?utf-8?B?VW5EdE5aY2RZWUFzTGR0L0Roa3MrYzR3K1ZKcWtFY0l0SkRGRWpwcVp0R2x3?=
+ =?utf-8?B?T0FJeHhwdE51WHdKdnFlSGYvVlFKS0hOK0lEYXBRcXF4U0U4VjNzQVpJQ1g0?=
+ =?utf-8?B?WnRMNGR6Y1ZwbzcrNUJ6ZlJuamROTkJhbzc3VXYxbnNCQ0o4aUhjV2x5OThk?=
+ =?utf-8?B?b0kxdmJjZEp0WE1YemhzdUtSN0ZjMmVaUWpLUWJ2eTY0WWFoL0Rucy93UG1L?=
+ =?utf-8?B?NDRNckNuVkNGUDNJNWV4bmh1VGI2YXI1QkgzdzdGOTBqeVFyazBmR1NIcVNC?=
+ =?utf-8?B?VXRrMFlIV2sxTDU1cGJDWG5QR2NHUDByVlRMeXYxUk1MT3pLQktFdWNURmNt?=
+ =?utf-8?B?MElkRUdkSUtYYm9oUU9iQnFaY0NyN0IrTlVBMjZNREd1VzA0dVdTWmVMOEd0?=
+ =?utf-8?B?YXh6SXIyN21XRk9URCtobk9SM2NaNzJUSGh0Sm1LSDY2bUJJWVpFMDNheGp6?=
+ =?utf-8?B?bjFIcWptb0pEVXdZcFRRaXY1a1hCMFlyUHNpcjBvN2dPeCtaSnFMR083YkF0?=
+ =?utf-8?B?ZUgxUFdJeDJCZmVUb0pUR1ppYTRkN1dXdFpzOWpCbkhrN1QwR3crTG9KemlH?=
+ =?utf-8?B?bkxERWJjTDFBbjdDZytEeUZBZTJXR1dROS9tSU9sQ3pScDUvRWhhZz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6054124c-9774-4641-451f-08df1f27de27
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR12MB7007.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2026 19:20:20.4143
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: a91UbFUny2RYrEAsAivRsLGgUUszoRHs/YwgGgLEg3fAAPJguy7A0zziOXuX3qUyQYEwp6sgh9VZSC+KH44B0w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9260
 
-On 9/30/26 21:04, Dmitry Baryshkov wrote:
-> On Wed, Sep 30, 2026 at 06:43:47PM +0200, Neil Armstrong wrote:
->> On 9/30/26 09:44, Linus Walleij wrote:
->>> On Tue, Sep 29, 2026 at 3:35 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->>>
->>>> This entire binding seems like stitching two devices together, which
->>>> might be fine (I don't even remember this stuff... two months old) or
->>>> might be artificial grouping of separate devices.
->>>
->>> I think that's a good point and fair pushback.
->>>
->>> Neil and Jun talk about it yesterday at XDC (1:15 into the stream):
->>> https://www.youtube.com/watch?v=6tNGW8PoSzw
->>>
->>> The current binding does not reflect the physical topology of the
->>> actual device, and the bindings need improvements. I have a feeling
->>> there is one display controller with two physical panels.
->>
->> No there's really 2 controller and 2 separate panels, but they are not
->> classic panel, they are a pair of panels+lens which are in front of
->> the eyes which forms a single "image" for the brain, so they are
->> technically a single display and requires to be hard synchronized.
+On 2026-08-11 12:45, Melissa Wen wrote:
+> Userspace expects that colorop settings of an inactive color pipeline
+> persist, so that, when the color pipeline is activated again, preserves
+> the values they had when it was deactivated. Colorop setup is expected
+> to persist even during a suspend/resume. To snapshot colorop settings
+> correctly, duplicate state of all colorops in a given plane, regardless
+> of whether color pipeline is active. Depends on skipping
+> drm_atomic_colorop_check() for duplicated state done in previous commit.
 > 
-> Yes. However this approach makes it impossible to share the code between
-> the double-panel drivers and single-panel drivers. I think, that the
-> panel driver should still reference a single glass+DDIC, while letting
-> the DSI host driver to handle the bifurcation.
+> Signed-off-by: Melissa Wen <mwen@igalia.com>
 
-Yes, and no, it must really be considered as a "single panel driven by 2 identical controllers",
-and even this is really purely software implementation issue.
+Reviewed-by: Harry Wentland <harry.wentland@amd.com>
 
+Harry
+
+> ---
+>   drivers/gpu/drm/drm_atomic_helper.c | 9 +++------
+>   1 file changed, 3 insertions(+), 6 deletions(-)
 > 
->> The R63455 is designed for this exact use case and are only supposed
->> to be use in XR application in pair.
-> 
-> yes, but no, but yes, but no. I mean, nothing prevents one from using
-> this DDIC in some other usecase.
+> diff --git a/drivers/gpu/drm/drm_atomic_helper.c b/drivers/gpu/drm/drm_atomic_helper.c
+> index 917fd0594259..11c67bb808f9 100644
+> --- a/drivers/gpu/drm/drm_atomic_helper.c
+> +++ b/drivers/gpu/drm/drm_atomic_helper.c
+> @@ -3801,12 +3801,9 @@ drm_atomic_helper_duplicate_state(struct drm_device *dev,
+>   			goto free;
+>   		}
+>   
+> -		if (plane_state->color_pipeline) {
+> -			err = drm_atomic_add_affected_colorops(state, plane);
+> -			if (err)
+> -				goto free;
+> -		}
+> -
+> +		err = drm_atomic_add_affected_colorops(state, plane);
+> +		if (err)
+> +			goto free;
+>   	}
+>   
+>   	drm_connector_list_iter_begin(dev, &conn_iter);
 
-Seriously, no, it's a likely very very improbable situation and
-we need to accept to ignore things that will never happen.
-
-> 
->> See it like a single physical panel with 2 controllers which
->> shouldn't be used separately. While technically a controller could
->> be used to driver single panel, it's likely impossible Synaptics
->> would sell this IC for non XR applications.
-> 
-> I think, this was causing an issue with the DSC too. A normal
-> bonded-DSI-panel-with-DSC and this-double-panel require different widths
-> to be programmed. Having a panel report real resolution would drop that
-> quirk from the DSI host driver.
-
-This is purely software implementation.
-
-> 
->> We want the both panels to be seen at a single big panel because
->> physically the human eye will see it as a single display.
-> 
-> That's the CRTC side.
-
-This is purely software implementation.
-
-> 
->> Describing both panels into separate nodes would only be possible
->> if we described a "VR display complex" nodes linked to both panels
->> but this would probably be solved by actually describing the "display"
->> linked to a DDIC controller and is out of subject for this serie,
->> and can be added later when we properly define things.
-> 
-> I like the VR complex idea. In the end, you have two modes which you
-> most likely might want to support:
-> - L+R, having double-width CRTC scanning over a double-width framebuffer
-> - Mx2, having a single-width CRTC and a single-width framebuffer
->    displaying the same picture to both eyes. I can imaging that knowing
->    about L+R might be an explicit opt-in feature of the DRM interface.
-> 
-
-This makes no sense to support both modes, and this will never be used,
-and anyway this is purely software implementation.
-
-We're defining bindings here, describing the real reality, not hypothetical
-situation that will never happen.
-
-Neil
