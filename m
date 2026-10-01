@@ -1,244 +1,225 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy2-f8.google.com (mail-dy2-f8.google.com [74.125.229.8])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEAFA5304C8
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 15:41:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E0C73C1986
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 15:45:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790869297; cv=none; b=buF7Depse2wo22T+XopRtx/1CIsB2Q5L2u60efSiLccYrBdIUtML266EJwcZiz2Iozt4n4CyEqdgpAIPpnQEHvBujqolA7JTJ/mT3lIRQ56Tlj8AUX7bWQckoVIL0duvAw3D/bQx3pTdb6RBcNSfq8EPZ+TQ/J/3EGnHUcjXbV4=
+	t=1790869536; cv=none; b=k3wkYcRQoNAXGfSP6IbG0J9nMYYaqeTYICXKEwfmW3VwDPwqOnl+peoPeA2ehgEG+OKsxK6IDD1BVe6ynDvuEZ+W9uC1h2lUgQByhBnGvthkjZNAvLH/MtV6nwNSV9VTnEZzUqpBzOPQrTqzPPe+DBrdQtUl56oPxUjrU3gHhjg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790869297; c=relaxed/simple;
-	bh=1T8xmr4MRs1K3j3y5oIphPuEh0OlFxvQsp6Pm3flkh8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ls0CcG+TuxK7XoABzUy3jWC4IAm4f/WoU/Q3YdXIypSjEeTpxalh3kJcKGq2criyC8sehblBpm6hdZ8bs+9G0eHeuYSatwtXb66TfOP7pwvVyl9CaoaQPwRdaLllu07vJ1VI+f3uhZZY/UaMS0CtLcoSglPHNXQtTSdJWHEb9yg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JqvrWO88; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=haztn2Bx; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790869536; c=relaxed/simple;
+	bh=Ghe6fEUCCenF+Ta7gb+uXMeiwYxD1Md/lBsKHp67rtc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SnGghTGC8t6qoxqGu0nDqCAyA6t0Cy8rIxY6ha9CTOKeWdPA21zJSlYMC08OYg8ZSc8wS7wx077TFt3OWSMbaGE/Zj2g0+NqlwuZwG61tDVO5MuuRp+hwawCIUbninMcl5ihcnwK670amTsw2JpMD8uES47S81CORMRku+pgsJM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SKIvmZ+R; arc=none smtp.client-ip=74.125.229.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JqvrWO88";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="haztn2Bx"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691DwsC12008504
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 15:41:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	qdipUe3szRwP8xuz1ENYjFx/VNsMoOJDQRWi0Y0Wyzs=; b=JqvrWO88VHVsMk9U
-	J/h+jWsXTyObVyTC7PAe1QXm7rIsT4mUYUm8B3i8CeNEvMwzJJ2LSK0R3nafhQtd
-	uQV3tQ8n5TJsXoUkxuM1CPz+G8vI1qwR/rsI7jy+fodoxkp+Znn2F9eO+GrapoL6
-	IhjYFgmtwdRHmQCcxjcjKn8qCCQj6VB12UBsmpee4Rfo1Cy+6YFyQNrcGe/JIKUQ
-	bUuBzdIy5dfkjGnOJbq+I76/53aQgls1LtGnyokh1dFYFEhVJQQIPOUpGd1fqGjU
-	Rqm3K1rtL4uSQtvvLhESajSHVtbE/MUF8Jhg3yFZM+Co5InKiJ1By03g80sTGiIw
-	41kAxA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1rvq8gbm-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 15:41:33 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2df8484f12cso64045655ad.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 08:41:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SKIvmZ+R"
+Received: by mail-dy2-f8.google.com with SMTP id 5a478bee46e88-333c363917bso2672302eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 08:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790869293; x=1791474093; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qdipUe3szRwP8xuz1ENYjFx/VNsMoOJDQRWi0Y0Wyzs=;
-        b=haztn2Bx66oIF5vSPDELb/tzltx8BDbd/gPzo34A9oP+RqqiO9sB5Mw9uoFIsNA9Qz
-         1tmVlzfp09MHnRHUV9BxbG9C8+AEvvInpQD7Om31AffQCVdUS/3Gajv02HBIQhMDvSew
-         r2Yivfcqa29opM/ziWXgB8XhB2CcvrSknruDxolmP5QMEbwr2WuTkq7mMxGAOn9qDGp7
-         1MSZHa45mCvs9EXPXP6ZnBCk0mkHf1mcYI7v2pyCUm2RJS7ixlLrr9+TvU3XByrwBjJ5
-         VkBBI3p6PxL4nCmAAYRCtCJJpy4rK022F1iLeL6H7eb42OPgv5tmnTfgu0u5cZbSZJoB
-         bmYA==
+        d=gmail.com; s=20251104; t=1790869533; x=1791474333; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=iGU1hp8RKvrBj9z5Cp9aU6FTf9xO9MFvbkhy3G4ASLY=;
+        b=SKIvmZ+RFVxiynCPXi6gwt7jeqNhggt4krtKVg2uSfKGLOSjpYshafvJxCxWBxgqbE
+         hbrDDM2cGj36Lqy83uwuSPx40avCZD8H8t7CI+Ft2smgEIV4Rl8aqQz8+u7fwnBhJdbm
+         35scURKxejUjiN5ee+zJTm/QqoVec+/IrMgI4oGjqu7LiE02n4VhaqCL6RWnQ7wsUb7I
+         hGoN5WTFN9kOEwFNnMFyPf/r2z+PRREXMNyTMiRQgF0cDVGul9oTk/4FiB4L1O/e4xVg
+         fvvZq+R2jn9UDPdHIzcjCcSkbXR241vllDFQVcjjbiEjq53cgyPg88Ndu3vY3PSVlFwp
+         hhZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790869293; x=1791474093;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790869533; x=1791474333;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qdipUe3szRwP8xuz1ENYjFx/VNsMoOJDQRWi0Y0Wyzs=;
-        b=Te8uSz10hZy4PUGBZEz/VDpDJNpeyEba6KVtLaesq0OU65tVwEqZD7+hTq8m8E6PxK
-         HSlP8JmCQP8BzxRA/F5ID0yYQEoSti4PD4bnZfXdNUJqL0byW+8pku8mh7TXamNZJjJt
-         VOq2CjSW3QePytohRbRLK8h19fRwLtJP3sJ/Uf6GdEL9EWm024PaMOF4H5XJj79C0lmj
-         AWyzwvUBvr1iZP8l3S1QcBYiAMBNv1e6ZmwxDzM3/F/IZ8LTxRLamiYYO9IBYtVHYomE
-         LUI3p7pwWLW1fjK6AWd2BgTKCPvSHwBJ8CHxGoVlae5Vp/H0687mjROCb2iOZR3e+GSz
-         IeFg==
-X-Forwarded-Encrypted: i=1; AKwUvBzTlfqXKAjhJdr4o/NSwu1zN4cYY2pi9kpAetS4i6qtuxf6S1SK+EEe2DS8qxtv9LrPHOfHDVHfPx2F9Qmr@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ1AUx3etNB7EMUiMCZGinTVuy8vGGcyS1gIZ15nD05o2M47Tlz
-	lZUc9smPWWo48EPQHBqemeEF3UsQbuLVBcxYneUR7a+YkoJwkTkHkV3kc7n3aGZZA6UMAP8ftEn
-	LOnia9L8tcT4eaGxmz4pPYdGSnIoBWtyr+x+pR4et9AsRhwFH2o1QfxE8Rr0JkHZOaUPj
-X-Gm-Gg: AYBFou2SQCayZCRfYEpZf4uhErQeOQhfMC6ZCoov9WtJ6F4IVpwc3jCn6WINISboCxa
-	cl2tzkaOsrr7XQHdrOAY3JdQ0ERuMZi16Vzgc4HDwIZrqR/+VIXHde9SsDbNIAXrdSHeJj2YYOk
-	rwP45Zze0T5fPS5YEKfCRChXRbOJbGSD3PDyb7z0od5DJJGn3p12Z+XF8TxNAWQaEkDf+fnJS4Z
-	MHOq0+X9K1icnvUI3b7mxRLJ6Ql6U2K5fBPaSpQIY85P53XZhTAEkPGT2KO80f60AeMfABSILRD
-	E83rIrylhiq9H/CIlBcw3gqGrnC1oEV0ACQxhVXWeFp+S5DIcOiViGV5m5YyfWpBHbIc5dpmOdW
-	MWmcTdWiGncKNT07jEWJxWtXyuUD+zd77qGRJ
-X-Received: by 2002:a17:903:2f90:b0:2dd:ad73:c98d with SMTP id d9443c01a7336-2e2e4b4c6b6mr40600385ad.37.1790869291533;
-        Thu, 01 Oct 2026 08:41:31 -0700 (PDT)
-X-Received: by 2002:a17:903:2f90:b0:2dd:ad73:c98d with SMTP id d9443c01a7336-2e2e4b4c6b6mr40600035ad.37.1790869290901;
-        Thu, 01 Oct 2026 08:41:30 -0700 (PDT)
-Received: from [192.168.0.116] ([124.123.146.251])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e300b0834esm12975265ad.51.2026.10.01.08.41.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 01 Oct 2026 08:41:30 -0700 (PDT)
-Message-ID: <47a155fc-9cde-48fd-bb02-31a7d3d9e8dd@oss.qualcomm.com>
-Date: Thu, 1 Oct 2026 21:11:22 +0530
+        bh=iGU1hp8RKvrBj9z5Cp9aU6FTf9xO9MFvbkhy3G4ASLY=;
+        b=IIOcfq+YuL3Dbz0O+b0B7fCvitbCX/jbMBfbF2Q9EfbFgslAYlQwPGoj7KV8gS/xJk
+         DiFllGZVePjFv5qK9ghhvWHv4B/tHMuWQu6lEeSAJQeUdHu1XBUTL79w/7KHd3ARk6gd
+         IkYmVBHwjoDzsUiH3q5MAw37kOukY227wQSNpkGLxIuw09g/rbGcqmALzGRLr/9c7uXb
+         nH128kRqWtzKiahaF1mwgFtkaBW9spK4p/urM4WwECHsgX2BFGV0d8tYaEmtaY3qFqXb
+         +t3yL05BsL+Kns79xkcXH2+o0753GgRIvDhp/bTZt60GAxWme5S2slMpKi9woIqKGU2q
+         EoSg==
+X-Forwarded-Encrypted: i=1; AKwUvBxOlnssTAM3gGgGq034qyJ7UdGBSJot1YUF0FdPkcXdPtA5izAo1IL7nVeg3imINMD2RXGeQxkf0Ltmo9Ai@vger.kernel.org
+X-Gm-Message-State: AFuF++kGaC+rSDw1sXAvErKrVHe2kDbr7jTNpAli06lmN2hfD1K1tgRj
+	6Pws/84CE0SBuoTJJeHuBtRnY2dxWZo1fjh2bf4+U9XYO6zr8ChLxen1
+X-Gm-Gg: AYBFou0PPYnioHjOG76MFtszaTteDZYrg2XSWv0GJk+UNOQuCjbm4s4tzdVvvb+qG9a
+	TBTnv+UGOcngjytsf6nJt+KPSE/i1WWYkp1ZPbQeG1pzeRo7BpbYixKqAE7aEvqyha0wvqD04uI
+	f+/9BdI3TuLAPYZO/r6qumuNRfEjvgWR2ygJgmzy92ESSXifXleLi9n8xQYK0OlOqPyIQ4iO5Dl
+	gQA9oNt9GdEK+04kqZIaId+y4p+sBEM3GHl1RT52qnFmG51p2asQFZRgX2iwwkCS5g6lANx3FLJ
+	/9qgbrGYNwx/YScVrqwY/jiCfOGmftPUBRObs5w9EOG7zxOtAXrPGzHBzLiC4FZOzLSp0NSUVYJ
+	orRJrK2l/EDhq0C+0TcD++ETvzpk8fM4H4ZXN7RE7XSnBD/3t5KY7AsgO9qJcRlgA+wTz7xVghU
+	ajF+t4lu8zR+Nj1168aO7XhnapUAWAmYd/Z0NYPHumwXRMMgOFZqE1ijVpH3x9Z+BV8EKZQV4aJ
+	vVFfJ04nr6eWRiFjHJBMDIl3nQ=
+X-Received: by 2002:a05:693c:6392:10b0:342:39f5:f9c5 with SMTP id 5a478bee46e88-34cdc0d3cd5mr5212034eec.18.1790869495059;
+        Thu, 01 Oct 2026 08:44:55 -0700 (PDT)
+Received: from localhost.localdomain ([98.148.34.5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34edab4beb8sm1869648eec.14.2026.10.01.08.44.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2026 08:44:54 -0700 (PDT)
+From: Hungyu Lin <dennylin0707@gmail.com>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Hungyu Lin <dennylin0707@gmail.com>
+Subject: [PATCH v8] media: qcom: iris: release OPP constraints on VPU power-on failure
+Date: Thu,  1 Oct 2026 15:44:36 +0000
+Message-ID: <20261001154436.20798-1-dennylin0707@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v2 1/2] dt-bindings: net: qcom,bam-dmux: Add
- memory-region and qcom,vmid properties
-To: netdev-bot+sashiko@kernel.org
-Cc: stephan@gerhold.net, andrew+netdev@lunn.ch, davem@davemloft.net,
-        edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
-        johannes@sipsolutions.net, linux-arm-msm@vger.kernel.org,
-        netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, deepak.singh@oss.qualcomm.com
-References: <20260920-qcom-bam-dmux-vmid-ext-v2-1-ef5ca2178378@oss.qualcomm.com>
- <178996250211.2160803.6013516663876593386@kernel.org>
-Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <178996250211.2160803.6013516663876593386@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA2MiBTYWx0ZWRfX4TGbDhPyoNnR
- wRmB3BlG2jrRxgd0zbe1ORjCI+HeBYgHAMcQSDTcTKs+JIGyKTTCirOQqSFZeN4fVcaDbfwPbUC
- cYgLs8d64iUCJ6jjyxFLTjFkbirgRVQtJwsGgiX4112fdRmRELNZSwliPW/9UNB8pG6BJnU5n+e
- hr0hzUmm0XI7N/NX3wCFMGFFkTZCTAINcf6vpeW49UWag3tFoArSK9FUa6/mAzdT1Duzbvq8Sl1
- wf+yUWsdYLHy1yU6xDGLUhXQiCvdjc6JjdK9eCUPp0B6+2uaMAR8iArYx03e6Tr0oVFQggI0yAw
- zKjzWxcOrd9ffm6gX+TQs1+UHbBYYadquPzF/zG6FRGF+Wx+3lDsgPXTiUocTqjU7rp/k0nbyf8
- nVonLVJynTcCUDxLosLYvT6VE7lEYYtXgXXHiUnHoFtgjpxKc/brMaTXAiYJyEuEe0q5WN9PdaG
- PAJSy/RjvtfamoL9dWA==
-X-Authority-Analysis: v=2.4 cv=JIauIMKb c=1 sm=1 tr=0 ts=6abe7f2d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=K/78aEDNEn2Q/Yuv7mVN5Q==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=Xq0XWdt-4rZHMzWQs8gA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: 7Tnm9cNPeXFNBdam2bk80p7aW1GtbjHY
-X-Proofpoint-ORIG-GUID: 7Tnm9cNPeXFNBdam2bk80p7aW1GtbjHY
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA2MiBTYWx0ZWRfX3mOCkD1udXwJ
- 9Om/YjG5OsEJ+ALJzIvDbFlOfaAFrFY6rSequqsR4lRdXL3E6p7FpDhh+fmod0re4siWt+at22+
- 4iWfyL1bGmQj0Dz+LI5ZwRpVvAGyJpg=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-01_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 phishscore=0 impostorscore=0 bulkscore=0
- spamscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610010062
 
+The power-domain helpers update the OPP for core->dev while enabling
+or disabling individual functional domains. The zero-rate request
+used during cleanup selects the minimum OPP rather than disabling
+the OPP constraints, so a failed VPU power-on can leave required-OPP
+performance-state requests installed. Supplier reference cleanup
+after a failed runtime resume does not itself request supplier
+suspension.
 
-On 21-09-2026 09:18 am, netdev-bot+sashiko@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found more severe
-> issue(s) in other patches of this series. This mail is only an FYI, in case
-> you want to address the nit picks below when you respin.
->
-> Low priority / nit picks for your consideration:
->
-> - [Low] SERIES-RESOLVED (retained for policy combination only): the
->    concern that the newly documented `qcom,vmid`/`memory-region`…
-> - [Low] The `qcom,vmid` schema contradicts its own description: the
->    description states "The local execution environment is retained…
->
-> --
->
-> dt-bindings: net: qcom,bam-dmux: Add memory-region and qcom,vmid properties
->
-> This adds an optional memory-region property pointing at a
-> restricted-dma-pool reserved-memory node for BAM-DMUX DMA mappings, plus a
-> qcom,vmid property naming the remote execution environment that is granted
-> access to that pool via SCM. A dependency entry makes memory-region
-> mandatory whenever qcom,vmid is present.
->
->> diff --git a/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml b/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
->> index 33746c238513..5351269b0ab7 100644
->> --- a/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
->> +++ b/Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
->> @@ -72,6 +72,24 @@ properties:
->>         - const: tx
->>         - const: rx
->>   
->> +  memory-region:
->> +    maxItems: 1
->> +    description:
->> +      Phandle to a reserved-memory node compatible with restricted-dma-pool.
->> +      The BAM-DMUX device uses the pool for DMA mappings.
->> +
-> [Severity: Low]
-> This isn't a bug, just a note for the record on an earlier concern that
-> these two properties have no in-tree consumer.
->
-> The companion patch in this series, "net: wwan: qcom_bam_dmux: Assign
-> restricted DMA pool to remote processor", adds bam_dmux_assign_dma_pool()
-> in drivers/net/wwan/qcom_bam_dmux.c, which reads qcom,vmid, resolves
-> memory-region through of_parse_phandle() and of_reserved_mem_lookup(), and
-> then performs the grant:
->
->      ret = qcom_scm_assign_mem(rmem->base, rmem->size, &src, dst,
->                                ARRAY_SIZE(dst));
->
-> The pool attachment itself is handled generically by
-> of_dma_set_restricted_buffer() from of_dma_configure_id(), so the
-> "uses the pool for DMA mappings" wording is backed by existing code too.
-> Nothing further appears to be needed here.
->
->> +  qcom,vmid:
->> +    $ref: /schemas/types.yaml#/definitions/uint32-array
->> +    minItems: 1
->> +    maxItems: 1
->> +    items:
->> +      minimum: 1
->> +      maximum: 63
->> +    description:
->> +      VMID of the remote execution environment that is granted access to the
->> +      restricted DMA pool through SCM. The local execution environment is
->> +      retained automatically and must not be specified.
->> +
-> [Severity: Low]
-> Does the numeric constraint on qcom,vmid contradict its own description?
->
-> The description says the local execution environment "must not be
-> specified", but the only constraints are minimum 1 and maximum 63, and
-> include/dt-bindings/firmware/qcom,scm.h has:
->
->      #define QCOM_SCM_VMID_HLOS          0x3
->
-> So qcom,vmid = <QCOM_SCM_VMID_HLOS> passes dt_binding_check even though the
-> binding text declares it invalid. The 1..63 range looks like it encodes the
-> width of the SCM VMID bitmask used for BIT_ULL(vmid) in a u64, not the set
-> of values meaningful for this device.
->
-> The driver side in this series does enforce the rule, in
-> bam_dmux_assign_dma_pool():
->
->      if (vmid == QCOM_SCM_VMID_HLOS || vmid >= BITS_PER_TYPE(u64))
->              return dev_err_probe(dev, -EINVAL, "Invalid qcom,vmid %u\n", vmid);
->
-> so the outcome of a bad value is a probe failure rather than anything worse.
-> Would it make sense to encode the same restriction in the schema, for
-> example with a not/const 3 clause or an enum of the supported remote
-> execution environments, or otherwise drop the "must not be specified"
-> sentence so the prose and the schema agree?
+Move the maximum OPP request to iris_vpu_power_on(), leaving the
+power-domain helpers responsible for runtime PM operations.
 
-I plan to drop the "must not be specified" sentence in the next
-revision, so the prose and the schema agree.
+When controller or hardware power-on fails after the OPP request
+succeeds, run the existing resource cleanup, then disable the OPP
+constraints with dev_pm_opp_set_opp(dev, NULL).
 
-Thanks,
-Vishnu
+Report an OPP-disable failure without replacing the original error,
+and continue ICC cleanup. Keep failures of the maximum OPP request on
+the ICC-only cleanup path. Recovery from partial failures in the OPP
+transition itself and the existing normal-power-off behavior are
+outside this change.
 
->
-> For context, neither qcom,rmtfs-mem.yaml nor qcom,fastrpc.yaml places value
-> constraints on their qcom,vmid / qcom,vmids properties, so an enum here
-> would be a new convention rather than an existing one; the narrow point is
-> just the internal inconsistency in this file.
->
-> [ ... ]
->
+Fixes: f6940b79fcb6 ("media: iris: Fix opp scaling of power domains")
+Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+---
+Changes in v8:
+- Rebase onto media-committers.git next.
+- Adapt the OPP ownership change to the Media tree's separate
+  power-domain helpers, preserving their runtime-PM return values.
+- Update the commit message to describe the Media helper layout.
+
+Changes in v7:
+- Rebase the fix onto the updated power-domain and clock helpers.
+- Remove OPP handling from the per-block power-domain and clock helpers.
+- Keep the maximum OPP request in iris_vpu_power_on().
+- Use the NULL-OPP disable path for failures after a successful maximum
+  OPP request.
+- Keep a separate ICC-only cleanup path when the maximum OPP request
+  itself fails.
+- Preserve the original power-on error if OPP disable fails.
+- Update the Fixes tag to the commit that enabled required-OPP scaling
+  for the supplier domains.
+
+Changes in v6:
+- Move OPP handling from the power-domain helpers to
+  iris_vpu_power_on().
+- Request the maximum OPP before powering on the controller and
+  hardware.
+- Add a zero-rate OPP request to the VPU power-on error path.
+- Keep the power-domain helpers limited to runtime PM operations.
+- Replace pm_runtime_get_sync() with pm_runtime_resume_and_get().
+- Rename the patch to reflect the new approach.
+
+Changes in v5:
+- Return pm_runtime_resume_and_get() directly.
+- Handle pm_runtime_put_sync() failures while preserving an earlier
+  OPP-update error.
+- Add a blank line before the rollback return.
+
+Changes in v4:
+- Convert the OPP rollback to a goto-based cleanup path.
+
+ .../media/platform/qcom/iris/iris_resources.c   | 17 +----------------
+ .../media/platform/qcom/iris/iris_vpu_common.c  | 12 ++++++++++--
+ 2 files changed, 11 insertions(+), 18 deletions(-)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
+index 883ef7e75291..752b1e81b110 100644
+--- a/drivers/media/platform/qcom/iris/iris_resources.c
++++ b/drivers/media/platform/qcom/iris/iris_resources.c
+@@ -74,27 +74,12 @@ int iris_opp_set_rate(struct device *dev, unsigned long freq)
+ 
+ int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev)
+ {
+-	int ret;
+-
+-	ret = iris_opp_set_rate(core->dev, ULONG_MAX);
+-	if (ret)
+-		return ret;
+-
+ 	return pm_runtime_resume_and_get(pd_dev);
+ }
+ 
+ int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev)
+ {
+-	int ret;
+-	int pm_ret;
+-
+-	ret = iris_opp_set_rate(core->dev, 0);
+-
+-	pm_ret = pm_runtime_put_sync(pd_dev);
+-	if (!ret)
+-		ret = pm_ret;
+-
+-	return ret;
++	return pm_runtime_put_sync(pd_dev);
+ }
+ 
+ static struct clk *iris_get_clk_by_type(struct iris_core *core, enum platform_clk_type clk_type)
+diff --git a/drivers/media/platform/qcom/iris/iris_vpu_common.c b/drivers/media/platform/qcom/iris/iris_vpu_common.c
+index 243bd845349f..f277120e80ab 100644
+--- a/drivers/media/platform/qcom/iris/iris_vpu_common.c
++++ b/drivers/media/platform/qcom/iris/iris_vpu_common.c
+@@ -498,16 +498,20 @@ u64 iris_vpu3x_vpu4x_calculate_frequency(struct iris_inst *inst, size_t data_siz
+ int iris_vpu_power_on(struct iris_core *core)
+ {
+ 	u32 freq;
+-	int ret;
++	int ret, opp_ret;
+ 
+ 	ret = iris_set_icc_bw(core, INT_MAX);
+ 	if (ret)
+ 		goto err;
+ 
+-	ret = core->iris_platform_data->vpu_ops->power_on_controller(core);
++	ret = iris_opp_set_rate(core->dev, ULONG_MAX);
+ 	if (ret)
+ 		goto err_unvote_icc;
+ 
++	ret = core->iris_platform_data->vpu_ops->power_on_controller(core);
++	if (ret)
++		goto err_opp;
++
+ 	ret = core->iris_platform_data->vpu_ops->power_on_hw(core);
+ 	if (ret)
+ 		goto err_power_off_ctrl;
+@@ -527,6 +531,10 @@ int iris_vpu_power_on(struct iris_core *core)
+ 
+ err_power_off_ctrl:
+ 	core->iris_platform_data->vpu_ops->power_off_controller(core);
++err_opp:
++	opp_ret = dev_pm_opp_set_opp(core->dev, NULL);
++	if (opp_ret)
++		dev_warn(core->dev, "failed to disable OPP: %d\n", opp_ret);
+ err_unvote_icc:
+ 	iris_unset_icc_bw(core);
+ err:
+
+base-commit: c6fb304dc0253584cfcb93b6b97970c36850910a
+-- 
+2.43.0
+
