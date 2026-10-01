@@ -1,99 +1,93 @@
-Received: from mail-43100.protonmail.ch (mail-43100.protonmail.ch [185.70.43.100])
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A825343DEB8
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 05:50:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B250243DEDD;
+	Thu,  1 Oct 2026 05:51:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790833848; cv=none; b=jmSv1eZY5W8NaxnVOx+EQFnFvNCuBG4AUnF/wI9K1bRubr9+tUjEfjDNnc8Bs7D6NpolqCtRKbRFnmPdyWbMRhqFiq1gCBRPnVYc27tdhoV9GJFsyrjcMNKOn4wegpX+1JDbaQ6f0f4D6urtSDLZ+KJJmX4vD6mujaqLVtgtPlQ=
+	t=1790833906; cv=none; b=h/1JitS5c4/NQHPt8PuzYaglsENisPCxYLcW2nhkIxvjTrV3pCr6/3kNcpeCQnDdcFYqSobENXGYb+AY0QaptXuwpcBbOwlzG9umApC7JMoAYg6+JcyygbETzKrroN6qA0RjauWvpZjQl5Zf8T8+WBKt4AF+tg+yc6u2at5Y0S4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790833848; c=relaxed/simple;
-	bh=LHvwzomglSZ+GGcJZchaw/w0UsqiVLKCXgj9Oi0J3zg=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=LhhZJc3im48lo0R7ViW9UnETdIrMY4yo38wKnklvywJHWr4qfz617yhCR41yROWD/q6IdF1qxLK69rr26uUlIox+GpEJjgoRD+auyALtncBWnv7Qr21a0+44FaBw82vi4AXAcCpJiuKLMm399JxCwpNDeRkRloPvuSeMzt7Bht0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com; spf=pass smtp.mailfrom=protonmail.com; dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b=ANBwIvp1; arc=none smtp.client-ip=185.70.43.100
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonmail.com
+	s=arc-20240116; t=1790833906; c=relaxed/simple;
+	bh=ZtQlQY45zN+rVtOPNRS0eX5m2++6ZQ3IL1dSpMjH7y8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=MDOl8MjVZk4eq4IKCMPfne5w7jHFby7zg1VSQ8aAJywT2/4k96be2ZEiaCSHrT06tAuXk9PEtIHNOZAKU/YK7XT5rXAwaaXflW32SwkSLkAvZg2bHQYU9eMxbtNYfHMYss1evyPXLkhS4x19085Bz/2fNWPmouTLN9sDvM4aon8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=cQaiqDPi; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=yhRIj5QY; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="ANBwIvp1"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1790833839; x=1791093039;
-	bh=8ksQy6MeanfkvfpHQut3hQ6xN1hUcsCd/pALFRS+d1A=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=ANBwIvp1/ocowntL22wAN4kLe7moxsFWk60wzZE3feu/nI9zJ9GkL/LVDTmQfALs0
-	 MT0ibl8G+v0sTu+q1a/5/9YbOSL05r7wkKQfsvNCuUT9QI22m6n6V5lS8Y+PVSm1PZ
-	 rc5RG8Auvi6ZxLGOBwnd+TtghDLlK99wxbrybcfNBtefVnB0L/xBVsB2WcEWWo9Z/2
-	 e0OIKnbyv1DbhM3h9st1lSUufUFNAQjAWUkfoXALpfl9UHQTJn29CFSbHiysqNaEMB
-	 mNz+uqjE+XWErGXSN22IQhwduzO7NKdQShrikpq78ljeR8IAJrn4OqjosTBx3B2kse
-	 aWg1T1dLu6yNA==
-Date: Thu, 01 Oct 2026 05:50:34 +0000
-To: kuldeep.singh@oss.qualcomm.com
-From: zeroknots <zeroknots@protonmail.com>
-Cc: amirreza.zarrabi@oss.qualcomm.com, jarkko@kernel.org, jenswi@kernel.org, jgg@ziepe.ca, linux-arm-msm@vger.kernel.org, linux-integrity@vger.kernel.org, linux-kernel@vger.kernel.org, op-tee@lists.trustedfirmware.org, peterhuewe@gmx.de, sumit.garg@kernel.org
-Subject: Re: [PATCH v2 0/3] Add TPM support via Qualcomm TEE TPM TA
-Message-ID: <20261001055029.1960743-1-zeroknots@protonmail.com>
-Feedback-ID: 44664438:user:proton
-X-Pm-Message-ID: 5be19f9a5cd05f46b76827da84152667a78aadda
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="cQaiqDPi";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="yhRIj5QY"
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
+	h=To:Message-Id:Subject:Date:From; t=1790833900; bh=dcznp3hnhyXVSEbGYEza3Et
+	ACiXYGe8WRHcxX1n4C6I=; b=cQaiqDPisWsZG1UyGsWFlPEIq9gnVmwhJ1qPEK6YLXqUrzVZzq
+	RVpglZTm8eQV8wU9KnwCnbABLzmgj7O5X6G84eLdZ1uNaTTHPv5ulVe9HUmV6jPyayztrKZm1VZ
+	k3Zbhg1M17ZtAkiDQ2bIIm1hQ1YGEG2m9R0T8uICBJakJ8ZHPVrlydoErO3asAZeoVHHRBJoMfv
+	3DXPMxovj0yFhKhgBvz8bjHmwi3ZruUup6JDeOxzGG8tOLozLZCIfdXL7647J5Zi82O0kIDrXPR
+	bkKD08Na2e/gxONIB6rPHLoYBKho5p4uprhqoPyeE3ck/+YniT8rVcenMCXIl16HITA==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
+	h=To:Message-Id:Subject:Date:From; t=1790833900; bh=dcznp3hnhyXVSEbGYEza3Et
+	ACiXYGe8WRHcxX1n4C6I=; b=yhRIj5QYIl2Omh6uSQqOwP/QCEQV8rTxGLLIYuZLuBUy3MdM+s
+	lAZZDC0nDPjT7NhSU5ddhvQzt2kNo/c3QIAQ==;
+From: =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
+Date: Thu, 01 Oct 2026 07:51:38 +0200
+Subject: [PATCH 1/3] arm64: dts: qcom: msm8917: change prng compatible
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261001-prng-fix-v1-1-72f924527465@mainlining.org>
+References: <20261001-prng-fix-v1-0-72f924527465@mainlining.org>
+In-Reply-To: <20261001-prng-fix-v1-0-72f924527465@mainlining.org>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>, 
+ =?utf-8?q?Otto_Pfl=C3=BCger?= <otto.pflueger@abscue.de>, 
+ Dang Huynh <danct12@riseup.net>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Luca Weiss <luca@lucaweiss.eu>, Vladimir Lypak <vladimir.lypak@gmail.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790833899; l=910;
+ i=barnabas.czeman@mainlining.org; s=20240730; h=from:subject:message-id;
+ bh=ZtQlQY45zN+rVtOPNRS0eX5m2++6ZQ3IL1dSpMjH7y8=;
+ b=ruFXKfZgc+xFTmJmfIjtBZ6rqfxNozVhBAashhqrCoOsE72ra2IJiquYITv9/txvhRhMA26mG
+ wQUhs45fqo/DK+EMh69y0DsaLFh+gfIfADS5ASIZdi/KJ6NIAewwuBR
+X-Developer-Key: i=barnabas.czeman@mainlining.org; a=ed25519;
+ pk=TWUSIGgwW/Sn4xnX25nw+lszj1AT/A3bzkahn7EhOFc=
 
-Hi Kuldeep,
+On MSM8917 HW QRNG is configured by TZ. qcom-rng driver
+will not have access to the configuration registers.
+Change the compatible to qcom,prng-ee for skip the initialization sequence.
 
-A data point from retail hardware, in case it is useful for this
-series: on an ASUS Zenbook A14 UX3407NA (Glymur, X2E-88-100, BIOS
-UX3407NA.315) the TPM TA is not reachable as QTEE service 81, but it
-is present as the QSEECOM application "qcom.tz.tpm".
+Fixes: 7f18b1ea7987 ("arm64: dts: qcom: Add initial support for MSM8917")
+Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
+---
+ arch/arm64/boot/dts/qcom/msm8917.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-With the qcomtee driver on a 7.3-rc3 based kernel, QTEE reports
-version 5.2.0, and service discovery finds neither 81 (TPM) nor 413
-(UEFI secure app). On the same boot, qseecom (version 0x1402000) works
-and backs efivars through "qcom.tz.uefisecapp" (app id 7). An app-id
-lookup for "qcom.tz.tpm" returns app id 1; a made-up name returns
--ENOENT.
+diff --git a/arch/arm64/boot/dts/qcom/msm8917.dtsi b/arch/arm64/boot/dts/qcom/msm8917.dtsi
+index a2907f8a6376..ca647efc883f 100644
+--- a/arch/arm64/boot/dts/qcom/msm8917.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8917.dtsi
+@@ -610,7 +610,7 @@ tsens_s10_p2: s10-p2@232 {
+ 		};
+ 
+ 		rng@e3000 {
+-			compatible = "qcom,prng";
++			compatible = "qcom,prng-ee";
+ 			reg = <0x000e3000 0x1000>;
+ 			clocks = <&gcc GCC_PRNG_AHB_CLK>;
+ 			clock-names = "core";
 
-The Windows driver for this machine agrees: QcTrEE8480.inf configures
-the TPM service with AppName=3D"qcom.tz.tpm", SecureApp=3D1, LoadApp=3D0
-(preloaded by firmware). The EFI configuration table carries the
-TPMEventLog and TPMFinalLog entries, so the firmware TPM is active.
-
-Through that app, using a QSEECOM transport (based on Xilin Wu's
-out-of-tree SC8280XP driver: QUERY_INFO_2 / SEND_COMMAND with a
-CRB-style control area, here at 0x81d10000), /dev/tpm0 works: TPM 2.0,
-manufacturer QCOM, vendor string "xCG fTPM", firmware 0x40000, real
-PCR 0-7 values, GetRandom, ECC and RSA-2048 primaries, sign and
-verify, and a sealed object that persists across reboots.
-
-So, as far as I can tell, retail Glymur laptops may ship firmware on
-which this driver finds no TPM, while the same TA is available over
-QSEECOM.
-
-The same applies to the prerequisite series that moves uefisecapp to
-QCOMTEE [1]: on this firmware service 413 is absent and EFI variables
-work only through the QSEECOM uefisecapp. If the QSEECOM path were
-dropped for Glymur, efivars would stop working on this machine, so it
-would be good to keep it as a fallback when the QTEE service is not
-found.
-
-Two questions:
-
- - Is service 81 expected to appear on retail firmware through an
-   update, or is it specific to the CRD firmware?
- - Would you consider a QSEECOM-based path for such firmware? I am
-   happy to test this series, or any other service UID you would like
-   checked, on this machine, and to share the transport code.
-
-[1] https://lore.kernel.org/lkml/20260722-qcom_uefisecapp_migrate_qcomtee-v=
-2-0-b8a8fcbe4211@oss.qualcomm.com/
-
-Thanks,
-zeroknots
-
-Assisted-by: LLM (analysis and drafting; the measurements were made on
-the hardware and reviewed by me)
+-- 
+2.56.0
 
