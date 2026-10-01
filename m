@@ -1,162 +1,407 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B45447C10F
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 08:38:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790843937; cv=none; b=DkuLHi7QR+h0Uvag/dVkTRH6+ZyAJSn18DV6o38uYVyVsoQdwoOrvS4c5XsBz7VHVfB+8HdQUxIJWpZq6OqFrAnFyBNWRdpOTbEotOlsUlF8g3QqNxuedW3yd1fsex414E+MFHkgEUak6pWrdcKAWm0Adfb1nyLHdYwCkfwoGaE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790843937; c=relaxed/simple;
-	bh=BIIqgLUhmWpsWY5nKggkmUgfD3kve40HmBqG/K2bve4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=TZdVYg7+thfzV9ZURvr1uNgPPJ/MrXCGYOge+t2+XMlQocIUpZN4YPsuFskEyMuDdziV95HLGiXxsRIJNadjWeRGXHm4YtNOS3SwmvdGrh3usSvSdJJ2brM8RG5cJSmwD9amskx+7bpY2+gZT20ojC7ncfSEgJAVeQqQN0hshmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cc1ZPgTy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dUwLdy+A; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32C443FE359
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 08:39:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.129.124
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790843949; cv=pass; b=WSFVN6UjccRn2KgCWeQ512mfWMG5MKF9IZA5jAMdKLUKDIU/DEuwpdkVIZLkRh29VURLxxhYEBZF9W3P+ZCQzyitlLp0PN7SgxxndGnB3w4XHpCe0NpBlSpoWrQOzYrCgowC6yC7rl8U24wdI0aY5BWZjxjfZwfspfqAcpODFwA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790843949; c=relaxed/simple;
+	bh=6YG9b/mbyvuxfZJR/hYoxQdWj22xbNm9I8WMVofwsR8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=qXQDoyYY7t4uLQ9RQKfPAeRUr2r15NUPhKfq79Ia3fVWJq9NMSilSGJEamfbvOw4gp8bUVzCnTx9ZAieQk2GZFPDlq/is4ndS+0O9ebVjVBS2ECkhF6O3FEu7iOJwyMfYY4fkiY4ACdO577DtCHx9amQ0IpgzQWIJ1DYLoohQY0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=O/Ctwx1P; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=ktikbia5; arc=pass smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cc1ZPgTy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dUwLdy+A"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xM7D1933062
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 08:38:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lFA5T25KDO1NFJggwk8JAg6XIqf3mZLwXS73+Irh4q4=; b=cc1ZPgTysUVQ5497
-	qKkvDUW0qKAd5P7rx+ZZTC53KoxR93l+nFATzZ9n1cY3QaGUkkYgrmwa7Gq8DLqy
-	tFn/DUS6MhFqR6t15Uy1pl301/CYhwMS2tvMO/lW3ELwDFtATVjf/wVN/+A/8cog
-	i5yT/gZnsxEAYFjtXbFjSQ71xBxgphMlW6/iJETbaoOnyPOKAyHWWneRKreVWcYk
-	+6hnR23OEh53nm+hWyZjKjxNghmw8KWMoZUVb3XgZ/r76krjNg31MSpfVbh15GaX
-	or4szjVNFpu9WfIzRz1+lflzmMWprKV+3MVJuv8NpwqwXyOXQwFKSQDLvT2yRGPt
-	gie1og==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1jcfremr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 08:38:53 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93c6abcc2ffso44416985a.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 01:38:53 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="O/Ctwx1P";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="ktikbia5"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790843946;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5QhRQ2U3DMY45aElgUFHYhWE/nkabZyIzB51AujeYOU=;
+	b=O/Ctwx1P50OXgYMUVbTL54Zq2NbNsyysZqdEca0PFB/rc3pSnrMvall+gVmuYFeqXnctC6
+	Lcy0BpSg/v8bVQeHuBLUlawUVLGcMdN8yPCn1CLlwVYEmCJPNtdYY4oYsEDHMmRoC6Sw0b
+	6ArYdQV2Twve+5e+bdgEPRNk6b7j7Xo=
+Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
+ [74.125.224.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-523-GCnf1hZJM0mWcq5UU4o9Lw-1; Thu, 01 Oct 2026 04:39:04 -0400
+X-MC-Unique: GCnf1hZJM0mWcq5UU4o9Lw-1
+X-Mimecast-MFC-AGG-ID: GCnf1hZJM0mWcq5UU4o9Lw_1790843944
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-67533636d38so6330582d50.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 01:39:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790843944; cv=none;
+        d=google.com; s=arc-20260327;
+        b=WbS5lZNiMFhy3Cp/Rn4Xc4R24ioEujDD4djo5xfp9j2cBxF+4+hEtwFqjxoyc203lI
+         4jxrwbqEZ8lvwGuuZXtTu5jI1DIeLwKjT3RYfsP5b9nwlebKN3U2GmnHBsE5d/NfUR2k
+         hpj6kl3ji+Re/ZRcQCy40vInlWZ/Kq4Yu4keWApC9LwQVNXtwgNr0p4e2U95y8RJhBW3
+         aoIpXXyiHJ+bVuyOJjanCYOGcPJi9Me/hHngIQATft6LebYNDAxoTikJIBXymq+/+tHu
+         Zk7BBrAVqooUJ7ybhv3FCxoT4q6KElJvjdmn+whaKOchOQ5ciHDxJEJZMXo0VaV6U862
+         kZKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=5QhRQ2U3DMY45aElgUFHYhWE/nkabZyIzB51AujeYOU=;
+        fh=mKUTwQFfdkRH4niNmGqz+22kWlJZPnrA6Eg90SUE6iM=;
+        b=fgESMSECinHNz9khCTUJyddpgWQnR2uaaN55mPIy3sUKZWd7ytE9RJRz4HC5fo43E0
+         PeZzR9Vehs2KFM63lsXU5PGwi4jk9nkjoeTjPR2xpjCGFmNE8PS+EoNHeQVaS9iTX6T4
+         s18EbDzlYeul2Jgqo7yeJEMCNXpfbFg4hLlHErXLqjt8KYMh4ADHZxuer1j4tVW+lA85
+         1qYaGyVClP+94YqMuzPJjeCCYR9XXOjw7VSRjG24kdWpt47bTaLceUPrLzVG+FYpqvue
+         d6EiKgOycIUDvAef3KZmAPVPuUWdgTUTUkNqT0uVzUQ1vzxXJNrbvDHyGMz+uxaOijyA
+         Nr0g==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790843933; x=1791448733; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=lFA5T25KDO1NFJggwk8JAg6XIqf3mZLwXS73+Irh4q4=;
-        b=dUwLdy+Aui2TmkoL2+4QjdVmlXPlZIzEcmW9b/LMwO7/3ugkfq4bLTMNrcJOilexQM
-         11WPPe2acquH6cRMAygbsgAhIX1S1zqGzDxGtf4TxVwTgJPEV3EaGPZ3uUapQp1Fm9QJ
-         uZaIOgrn4Mb88dWlQ+dx0lBAxoA6JOKWtE8G+mVUgRORMb6lOrUevYPBiQMiONFo7mGk
-         xcr6a3OWhjPUEERP9dUDzSXzA3ZdpaTVlTeC6PUI2ttjG4gBQ+QSqnI3leOR4seEbnxR
-         IzMy0iuwcoMosBnCKgcOOwznuvgJ2tiLUYVxLW/KV6uKDewLtmj/tYPP98fBlteRvMCg
-         afUA==
+        d=redhat.com; s=google; t=1790843944; x=1791448744; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=5QhRQ2U3DMY45aElgUFHYhWE/nkabZyIzB51AujeYOU=;
+        b=ktikbia5sulX5LbjIZknMUBzVYwT3mVYgxnTKQqEHnVNTZ+R3eea04LBylZGeKhpBu
+         av90qquHS7SLnFAmmw7v7uhmdldceXl8wp4wPgMYA66jT7zP2XSspY5WLDLymLv6v55c
+         R3+OJLFhlAIhmyUUmbISgbIOh3cJx7N2Eb1rYmy2l6A16u2qFiD4app10Zj3UxFZPFUh
+         mFvE5q+dproXSqSp/HLDZB7WFuqujP5jeHUQ7aPFDjwm4ybumGRannwxOp4TympbTLQj
+         EFCe5brL7XEI2P2y89UCR75eOladEet+aZ6nZTCLx0h89WKUH/RdfHmzOYnXmS7fF2zq
+         2Ygw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790843933; x=1791448733;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lFA5T25KDO1NFJggwk8JAg6XIqf3mZLwXS73+Irh4q4=;
-        b=BaskqD22UXJuZwIucLeYYDrzIkrn8/crTiskd7rjDD8ibD5pVXnPbFKPt1vmY3PU9Z
-         //nj80TnryaPShkTiC3HHb44tC2tHPb3Cqv+tPeved5hAsiCnHzlHlw3oyecXKx5NUyK
-         aeKHQUwCGOjZdnlMZcluJuc8aYJ7DK0zZs/LkVwJlaidTJ3in70i09q3JCq7b7KidFL6
-         AnKalkz7wpEJ1FhvnNUx+iybfobnwXtZW/s1kmVoc5J6zfVQSGNeDS9E3QXV1vvxkRmz
-         AqSsZ5IFanI2wwJHJNZgEsfCNHmChXOZlIPqIO6n/mSdyyIx3KItLvBNWhfnQ40zdzbO
-         E3aQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx/aavwcd+K8ixBDGfHHj3vJxMdclMvFk7ZfpO96ymvsTE5UrGt++jo4MmdTaSoBnj0kX3wnAozF/JBYw6y@vger.kernel.org
-X-Gm-Message-State: AFuF++kwF0XZdhYUooG+CAdNC5lQRlTPnoNeNerNQIPn1NH+9vFSCEYP
-	LlwWUsmpjQ36uEQuR0zr6g4xQKRnioVSEeCnQPdckJ3qtdMqSwv68Ib3Cmt2CkymelPUUIZK2f+
-	F1n7U3NVU6EaGhiSsbgNbpma/nbP4hMYj3LH+yu9zkvCHVtYNkZbZv1wGDJMSUetTyOqV
-X-Gm-Gg: AYBFou3q7RZ0pV00zqFPEl/dCcETeaZ9SrAUPILL0YNWU6n7avDs3SpjOFRz3vTATz+
-	J3S+xxY32B8RCzCvc9BK+F16UDqrsr3VBoOEOnYTow6etohNifPSd2zpFT1vl404YAvWM+ikQsZ
-	jQYXHAfWfd6LXM3jcfxvm8pCGzI4bEB6kUetRHfK+NifkDVjme1pT/2mREGG+CQRdIheigkkNPa
-	u72xoPk+kVOF67oV0Gw4bGEj06M7+TgKT8OstLGpXVYVYIcF86rwvv2ERi4RI0dhhbx+km3JBiB
-	u0ABnVTrOFjRcbAcPq/l2eEbB3/1wpTG6YxvwC96JCwD6ClHlz8k+6oO1GnlYAt1raO9rAfMyMW
-	h5sOBSLGhmLsE25nqHc1zgg==
-X-Received: by 2002:a05:620a:40d6:b0:939:8bc:8826 with SMTP id af79cd13be357-93ca9683063mr675711585a.2.1790843932859;
-        Thu, 01 Oct 2026 01:38:52 -0700 (PDT)
-X-Received: by 2002:a05:620a:40d6:b0:939:8bc:8826 with SMTP id af79cd13be357-93ca9683063mr675709385a.2.1790843932231;
-        Thu, 01 Oct 2026 01:38:52 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2e31c8efb0sm107009866b.23.2026.10.01.01.38.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 01 Oct 2026 01:38:51 -0700 (PDT)
-Message-ID: <152190f2-5293-4e6c-ae6a-349cba77b6bf@oss.qualcomm.com>
-Date: Thu, 1 Oct 2026 10:38:49 +0200
+        d=1e100.net; s=20260707; t=1790843944; x=1791448744;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=5QhRQ2U3DMY45aElgUFHYhWE/nkabZyIzB51AujeYOU=;
+        b=DcMy+aSHEkDonN8HErqfZcWaByHKlyScvhyPxRsEuNavEC3j1puWMeDMIabWpFZZOm
+         /cLMwGryWIHTI7IbxK9i/Rge4n7zK1Gsaw4j4yJWOecuXzMDkIm8xXVpBMYLrlpiy7LI
+         bzRgUAtPldZNG8uuLsh6KTSGn81t9zd0q3sO4Fg85wcZYWIC7zIXU6rDmto+/wEC2hs5
+         Kj8iLMJPPa94V6J4nddKDpqG4w0/5+AvIdnHZbya+ybD/qdOzSw9K1DdYVFSO57ybzQ+
+         4SgqQ3QV4tPbUsmv1bGp9PknQIy6K5isBY9qTZ/qxrHcWibC4KgKKafY0VNbELY469Xd
+         jLwQ==
+X-Forwarded-Encrypted: i=1; AKwUvBz+kZpTa/2AmQLvwWfgqSlOYZiZdn5Re4hkCDD1LFfTI6ql/2VrNz3Z/qVHmDnn1eu1hfoEnQWBScpc0EL1@vger.kernel.org
+X-Gm-Message-State: AFq9FYIZEQYwrFpCNk6q+wTn447Fsh5xifC7b/hKNNB4WqAo2gPiS9MC
+	alch2OCbiQI+wNJeKeF+Qq7rzFzci1hLyZnXf3rmUI6wzVIKwz4CHiZDW5HwtgsO7wNYUYxL6km
+	rlS+NVLA5vDXpQxOG0IUKeXmtG9W020BAr/aLGlF2Hes253rpGmsnSkq0/V0NunPPOKbP2rNjMu
+	moCu+cHV4b9/0fELCqwFerI+TAOXJ5uqvywbgWcsOyUA==
+X-Gm-Gg: AYBFou0URg4iFEWUYN+96M8tlbLfKWS47G575ICqnnEioHh6sVkV36ktoBmHNEDO8Rp
+	d3kwVh36be7actMOCNWO/+1VyJgefqki2+hTu3k1vYuHQHEjhOWsS1Su+IfKb6p9Jq1+KxKJHT/
+	zyLokJ2ZhufL5f3zZLrcmfsTvZT83/pQAFyb78k1cZOpQJ95HTI/fsJw==
+X-Received: by 2002:a05:690e:11c6:b0:66f:c1be:a647 with SMTP id 956f58d0204a3-676834b3e25mr1875420d50.57.1790843943968;
+        Thu, 01 Oct 2026 01:39:03 -0700 (PDT)
+X-Received: by 2002:a05:690e:11c6:b0:66f:c1be:a647 with SMTP id
+ 956f58d0204a3-676834b3e25mr1875415d50.57.1790843943393; Thu, 01 Oct 2026
+ 01:39:03 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/11] arm64: dts: qcom: sdm670-google: enable adsp
-To: Richard Acayan <mailingradian@gmail.com>,
-        Jassi Brar <jassisinghbrar@gmail.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org
-References: <20260922015801.32373-1-mailingradian@gmail.com>
- <20260922015801.32373-8-mailingradian@gmail.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260922015801.32373-8-mailingradian@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzNCBTYWx0ZWRfX7dqTZ9VUKy1A
- FISxYLRuknf9PzFO0Cd5B63+mPEXa6Tpp9FZ/vtLDr3mMZr7o4BTd2TSpfSjDc9eb8kmVU7uJzu
- lxQR30Z5CdNh59rzmJsc+k0ACDzRIyY=
-X-Proofpoint-GUID: F5oh6F9yJhHgV7Dr4_9_BeRgm90msb_M
-X-Authority-Analysis: v=2.4 cv=b4YncdGx c=1 sm=1 tr=0 ts=6abe1c1d cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=pGLkceISAAAA:8 a=6YNwo6Dc39sHZJQzegsA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-ORIG-GUID: F5oh6F9yJhHgV7Dr4_9_BeRgm90msb_M
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzNCBTYWx0ZWRfX7OuW9XSSeQJ9
- AfLkVCBoNHf2IQQ5ylWcfckpo78iH3uKhDRxBxThPNsLMn5NXZv8Wu3lFepnPJ/oQ6AlMGvE8Z2
- C9+PvIadCakpjSa5BB2ZxMVyJxE+pcyfsV6D3zpvHCCB+BbLQQqQMNH46euCmpJ2aLFNnOY2nee
- 63UVCEKn3GYH2ngS4XR8qTBV4vG9dsNgjuQ8mqumP9U5CcZ1fU+4RSIq0O59FhJ5vdnNRnGyF3q
- pVWiNpvyJFL3tye/trtIYJJj2wMsDSWtcidFyN6PvlOln4sqxxixsrcb5O1wHh1CK1Y1d3oBrls
- VES4CB7gNnS+lKXWpzkgGFeDa58c5cHpN9yyimYp6rBvo/eGM7DpPWkGXpEIVkDN5DvV76lCYyz
- zow0deg5MV5CBqgx5CSapaKiGUAN4Qvbue6GDnzGFqv1epc09J4xEXCdKuKC9anrQSeRBFeYyNy
- 6iD64XuD0HTzTultOQw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 spamscore=0 suspectscore=0 malwarescore=0
- priorityscore=1501 bulkscore=0 impostorscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010034
+References: <20260820-port-smem-v1-0-d19a45f583bf@redhat.com>
+ <20260820-port-smem-v1-1-d19a45f583bf@redhat.com> <apYFPXLD6hLWohz0@baldur>
+ <CADSE00LeKbGsqd_fBnWhAssiu5yFPH2_FuaY0ZamxK1GYHt+Qg@mail.gmail.com> <0d485228-b082-4064-8923-a750db9acf02@oss.qualcomm.com>
+In-Reply-To: <0d485228-b082-4064-8923-a750db9acf02@oss.qualcomm.com>
+From: Albert Esteve <aesteve@redhat.com>
+Date: Thu, 1 Oct 2026 10:38:52 +0200
+X-Gm-Features: AclHuK9cmeLqklK-rsmgXh1IgBeL--dVPuiCIIoSuNUJZ31XEUBL_BTkqysM1Y0
+Message-ID: <CADSE00JQq5En3SfbbTKoCGQAvt6OeBPA4UobRMeb-WrEA2_pOw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] soc: qcom: smem: add boundary checks for partitions
+To: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Sudeepgoud Patil <quic_sudeepgo@quicinc.com>, Sarannya S <quic_sarannya@quicinc.com>, 
+	Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 9/22/26 3:57 AM, Richard Acayan wrote:
-> Enable the ADSP on the Pixel 3a in anticipation of audio support.
-> 
-> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> ---
->  arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-> index b4854801a5f5..70996b94cd33 100644
-> --- a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-> @@ -196,6 +196,11 @@ cam_vio_ldo: cam-vio-ldo-regulator {
->  	};
->  };
->  
-> +&adsp_pas {
-> +	status = "okay";
-> +	firmware-name = "qcom/sdm670/sargo/adsp.mbn";
-> +};
+On Wed, Sep 30, 2026 at 7:11=E2=80=AFPM Deepak Kumar Singh
+<deepak.singh@oss.qualcomm.com> wrote:
+>
+>
+> On 9/1/2026 12:34 PM, Albert Esteve wrote:
+> > On Tue, Sep 1, 2026 at 12:54=E2=80=AFAM Bjorn Andersson <andersson@kern=
+el.org> wrote:
+> >> On Thu, Aug 20, 2026 at 01:34:18PM +0200, Albert Esteve wrote:
+> >>> From: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
+> >>>
+> >>> Add condition check to make sure that the end address
+> >>> of private entry does not go out of partition.
+> >>>
+> >>> Signed-off-by: Sarannya S <quic_sarannya@quicinc.com>
+> >>> Signed-off-by: Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
+> >>> Signed-off-by: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
+> >>> Signed-off-by: Albert Esteve <aesteve@redhat.com>
+> >> I'm sorry, Albert. Sudeepgoud messed up the authorship vs signed-off-b=
+y
+> >> chain here. The author should be "Sarannya", as that's the first
+> >> signed-off-by.
+> >>
+> >> PS. It would also be nice if this was submitted with updated email
+> >> addresses and copyright statement. But I'd not expect you to fix that.
+> > Hi Bjorn,
+> >
+> > I'm happy to address these changes for V2. Do you know where to find
+> > the updated email addresses?
+> >
+> > BR,
+> > Albert.
+>
+> Hi Albert,
+>
+> Sorry for providing this info late. In case you post new series please us=
+e below ids-
+>
+> Sarannya S <sarannya.s@oss.qualcomm.com>
+> Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+> Tony Truong <tony.truong@oss.qualcomm.com>
+> Sudeepgoud Patil <sudeep.patil@oss.qualcomm.com>
 
-Please ensure 'status' is the last property with an \n before it
+Thanks. Series is currently in its v3
+(https://lore.kernel.org/all/20260924-port-smem-v3-0-fbc2ea81a654@redhat.co=
+m/).
+I got the domains correct at least :)
 
-Konrad
+If a v4 is needed, I will use these addresses.
+
+BR,
+Albert.
+
+>
+> Regards,
+> Deepak
+>
+> >
+> >> Regards,
+> >> Bjorn
+> >>
+> >>> ---
+> >>>   drivers/soc/qcom/smem.c | 105 +++++++++++++++++++++++++++++++++----=
+-----------
+> >>>   1 file changed, 72 insertions(+), 33 deletions(-)
+> >>>
+> >>> diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
+> >>> index afb21a778fe7b..194ffb2ac010f 100644
+> >>> --- a/drivers/soc/qcom/smem.c
+> >>> +++ b/drivers/soc/qcom/smem.c
+> >>> @@ -2,6 +2,7 @@
+> >>>   /*
+> >>>    * Copyright (c) 2015, Sony Mobile Communications AB.
+> >>>    * Copyright (c) 2012-2013, The Linux Foundation. All rights reserv=
+ed.
+> >>> + * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All righ=
+ts reserved.
+> >>>    */
+> >>>
+> >>>   #include <linux/hwspinlock.h>
+> >>> @@ -85,6 +86,17 @@
+> >>>   /* Processor/host identifier for the global partition */
+> >>>   #define SMEM_GLOBAL_HOST     0xfffe
+> >>>
+> >>> +/* Entry range check
+> >>> + * ptr >=3D start : Checks if ptr is greater than the start of acces=
+s region
+> >>> + * ptr + size >=3D ptr: Check for integer overflow (On 32bit system =
+where ptr
+> >>> + * and size are 32bits, ptr + size can wrap around to be a small int=
+eger)
+> >>> + * ptr + size <=3D end: Checks if ptr+size is less than the end of a=
+ccess region
+> >>> + */
+> >>> +#define IN_PARTITION_RANGE(ptr, size, start, end)            \
+> >>> +     (((void *)(ptr) >=3D (void *)(start)) &&                  \
+> >>> +      (((void *)(ptr) + (size)) >=3D (void *)(ptr)) && \
+> >>> +      (((void *)(ptr) + (size)) <=3D (void *)(end)))
+> >>> +
+> >>>   /**
+> >>>     * struct smem_proc_comm - proc_comm communication struct (legacy)
+> >>>     * @command:        current command to be executed
+> >>> @@ -403,6 +415,7 @@ static int qcom_smem_alloc_private(struct qcom_sm=
+em *smem,
+> >>>                                   size_t size)
+> >>>   {
+> >>>        struct smem_private_entry *hdr, *end;
+> >>> +     struct smem_private_entry *next_hdr;
+> >>>        struct smem_partition_header *phdr;
+> >>>        size_t alloc_size;
+> >>>        void *cached;
+> >>> @@ -415,19 +428,25 @@ static int qcom_smem_alloc_private(struct qcom_=
+smem *smem,
+> >>>        end =3D phdr_to_last_uncached_entry(phdr);
+> >>>        cached =3D phdr_to_last_cached_entry(phdr);
+> >>>
+> >>> -     if (WARN_ON((void *)end > p_end || cached > p_end))
+> >>> +     if (WARN_ON(!IN_PARTITION_RANGE(end, 0, phdr, cached) ||
+> >>> +                                             cached > p_end))
+> >>>                return -EINVAL;
+> >>>
+> >>> -     while (hdr < end) {
+> >>> +     while ((hdr < end) && ((hdr + 1) < end)) {
+> >>>                if (hdr->canary !=3D SMEM_PRIVATE_CANARY)
+> >>>                        goto bad_canary;
+> >>>                if (le16_to_cpu(hdr->item) =3D=3D item)
+> >>>                        return -EEXIST;
+> >>>
+> >>> -             hdr =3D uncached_entry_next(hdr);
+> >>> +             next_hdr =3D uncached_entry_next(hdr);
+> >>> +
+> >>> +             if (WARN_ON(next_hdr <=3D hdr))
+> >>> +                     return -EINVAL;
+> >>> +
+> >>> +             hdr =3D next_hdr;
+> >>>        }
+> >>>
+> >>> -     if (WARN_ON((void *)hdr > p_end))
+> >>> +     if (WARN_ON((void *)hdr > (void *)end))
+> >>>                return -EINVAL;
+> >>>
+> >>>        /* Check that we don't grow into the cached region */
+> >>> @@ -587,9 +606,11 @@ static void *qcom_smem_get_private(struct qcom_s=
+mem *smem,
+> >>>                                   unsigned item,
+> >>>                                   size_t *size)
+> >>>   {
+> >>> -     struct smem_private_entry *e, *end;
+> >>> +     struct smem_private_entry *e, *uncached_end, *cached_end;
+> >>> +     struct smem_private_entry *next_e;
+> >>>        struct smem_partition_header *phdr;
+> >>>        void *item_ptr, *p_end;
+> >>> +     size_t entry_size =3D 0;
+> >>>        u32 padding_data;
+> >>>        u32 e_size;
+> >>>
+> >>> @@ -597,67 +618,85 @@ static void *qcom_smem_get_private(struct qcom_=
+smem *smem,
+> >>>        p_end =3D (void *)phdr + part->size;
+> >>>
+> >>>        e =3D phdr_to_first_uncached_entry(phdr);
+> >>> -     end =3D phdr_to_last_uncached_entry(phdr);
+> >>> +     uncached_end =3D phdr_to_last_uncached_entry(phdr);
+> >>> +     cached_end =3D phdr_to_last_cached_entry(phdr);
+> >>> +
+> >>> +     if (WARN_ON(!IN_PARTITION_RANGE(uncached_end, 0, phdr, cached_e=
+nd)
+> >>> +                                     || (void *)cached_end > p_end))
+> >>> +             return ERR_PTR(-EINVAL);
+> >>>
+> >>> -     while (e < end) {
+> >>> +     while ((e < uncached_end) && ((e + 1) < uncached_end)) {
+> >>>                if (e->canary !=3D SMEM_PRIVATE_CANARY)
+> >>>                        goto invalid_canary;
+> >>>
+> >>>                if (le16_to_cpu(e->item) =3D=3D item) {
+> >>> -                     if (size !=3D NULL) {
+> >>> -                             e_size =3D le32_to_cpu(e->size);
+> >>> -                             padding_data =3D le16_to_cpu(e->padding=
+_data);
+> >>> +                     e_size =3D le32_to_cpu(e->size);
+> >>> +                     padding_data =3D le16_to_cpu(e->padding_data);
+> >>>
+> >>> -                             if (WARN_ON(e_size > part->size || padd=
+ing_data > e_size))
+> >>> -                                     return ERR_PTR(-EINVAL);
+> >>> +                     if (e_size < part->size && padding_data < e_siz=
+e)
+> >>> +                             entry_size =3D e_size - padding_data;
+> >>> +                     else
+> >>> +                             return ERR_PTR(-EINVAL);
+> >>>
+> >>> -                             *size =3D e_size - padding_data;
+> >>> -                     }
+> >>> +                     item_ptr =3D  uncached_entry_to_item(e);
+> >>>
+> >>> -                     item_ptr =3D uncached_entry_to_item(e);
+> >>> -                     if (WARN_ON(item_ptr > p_end))
+> >>> +                     if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry=
+_size, e, uncached_end)))
+> >>>                                return ERR_PTR(-EINVAL);
+> >>>
+> >>> +                     if (size !=3D NULL)
+> >>> +                             *size =3D entry_size;
+> >>> +
+> >>>                        return item_ptr;
+> >>>                }
+> >>>
+> >>> -             e =3D uncached_entry_next(e);
+> >>> -     }
+> >>> +             next_e =3D uncached_entry_next(e);
+> >>> +             if (WARN_ON(next_e <=3D e))
+> >>> +                     return ERR_PTR(-EINVAL);
+> >>>
+> >>> -     if (WARN_ON((void *)e > p_end))
+> >>> +             e =3D next_e;
+> >>> +     }
+> >>> +     if (WARN_ON((void *)e > (void *)uncached_end))
+> >>>                return ERR_PTR(-EINVAL);
+> >>>
+> >>>        /* Item was not found in the uncached list, search the cached =
+list */
+> >>>
+> >>> +     if (cached_end =3D=3D p_end)
+> >>> +             return ERR_PTR(-ENOENT);
+> >>> +
+> >>>        e =3D phdr_to_first_cached_entry(phdr, part->cacheline);
+> >>> -     end =3D phdr_to_last_cached_entry(phdr);
+> >>>
+> >>> -     if (WARN_ON((void *)e < (void *)phdr || (void *)end > p_end))
+> >>> +     if (WARN_ON(!IN_PARTITION_RANGE(cached_end, 0, uncached_end, p_=
+end) ||
+> >>> +                     !IN_PARTITION_RANGE(e, sizeof(*e), cached_end, =
+p_end)))
+> >>>                return ERR_PTR(-EINVAL);
+> >>>
+> >>> -     while (e > end) {
+> >>> +     while (e > cached_end) {
+> >>>                if (e->canary !=3D SMEM_PRIVATE_CANARY)
+> >>>                        goto invalid_canary;
+> >>>
+> >>>                if (le16_to_cpu(e->item) =3D=3D item) {
+> >>> -                     if (size !=3D NULL) {
+> >>> -                             e_size =3D le32_to_cpu(e->size);
+> >>> -                             padding_data =3D le16_to_cpu(e->padding=
+_data);
+> >>> +                     e_size =3D le32_to_cpu(e->size);
+> >>> +                     padding_data =3D le16_to_cpu(e->padding_data);
+> >>>
+> >>> -                             if (WARN_ON(e_size > part->size || padd=
+ing_data > e_size))
+> >>> -                                     return ERR_PTR(-EINVAL);
+> >>> -
+> >>> -                             *size =3D e_size - padding_data;
+> >>> -                     }
+> >>> +                     if (e_size < part->size && padding_data < e_siz=
+e)
+> >>> +                             entry_size  =3D e_size - padding_data;
+> >>> +                     else
+> >>> +                             return ERR_PTR(-EINVAL);
+> >>>
+> >>> -                     item_ptr =3D cached_entry_to_item(e);
+> >>> -                     if (WARN_ON(item_ptr < (void *)phdr))
+> >>> +                     item_ptr =3D  cached_entry_to_item(e);
+> >>> +                     if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry=
+_size, cached_end, e)))
+> >>>                                return ERR_PTR(-EINVAL);
+> >>>
+> >>> +                     if (size !=3D NULL)
+> >>> +                             *size =3D entry_size;
+> >>> +
+> >>>                        return item_ptr;
+> >>>                }
+> >>>
+> >>> -             e =3D cached_entry_next(e, part->cacheline);
+> >>> +             next_e =3D cached_entry_next(e, part->cacheline);
+> >>> +             if (WARN_ON(next_e >=3D e))
+> >>> +                     return ERR_PTR(-EINVAL);
+> >>> +
+> >>> +             e =3D next_e;
+> >>>        }
+> >>>
+> >>>        if (WARN_ON((void *)e < (void *)phdr))
+> >>>
+> >>> --
+> >>> 2.55.0
+> >>>
+>
+
