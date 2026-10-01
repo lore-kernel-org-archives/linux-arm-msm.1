@@ -1,153 +1,278 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46C5B26656D;
-	Thu,  1 Oct 2026 00:49:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2FEE3093A6
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 01:16:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790815773; cv=none; b=SvsZgbsF1EP3PSzT2ZtqfLOcC+z1w2BoZqfz8ChWAa7lfHnOk8s6+I0+ivjg/lgoVImD5xor88TLhLuDi/N+s5jTm2e9R0BqmwzB5yocXcpJdWRwTfPea8l4TI4l6fUojL3aRcqMYhmznG/x8xvkCUZY8iStzyQNGgnfzSxynqQ=
+	t=1790817401; cv=none; b=BQWvc7DQcozo1+EoWxpQWfPt9XJEfDH8A62m0iD0rnpduoWg2KRpBGqodQtsHK9d5FTOuyYieuJ1YvW5qbigrhtF+pXUTxFRJKjNp4E00IqYCrwNayIaFgnlb0AE2vempcYEYdIcb4ceNEI89vrZWyYcDG0ok59J8Z7E6n9HNX8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790815773; c=relaxed/simple;
-	bh=Tq67/JdvD00RnAGSM6IDPb5xvFelJzEaXMrgy88CzP8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NnH9J8PSuaBr8wzQh2vciI9wPKtlCeCf/wTopeA8yG1+l/2ntGBNdiBxvExevy09vpyfyTwEKjLxbIi13rk3SFzz46SWQuidBnyTXyRntSqf2zRgRgRsxUj3CDeMVlnICG4fa3eYEpq6kRcqhPCcfX4MBkZMHuKq0vUgX3Rr4cI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HEL6AUsA; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790817401; c=relaxed/simple;
+	bh=tjcWt2seiedt957fPkP3qjPCH/MwWJfOxFdhOfaqiNM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=NwF30TITYs9HWjASGXGPDUm0SfwB3eHZX6hh9YEwXEoQOYnyNjG11tNQMYwSUpyoRHgptJxvuaI+n9/hWRE4OQgAfi+z/WI/DhZMV8qYYgBcsVfxEhJABVhPvgorzcqJR3OwXJ10JFKxiYowKKhOyj1cEuGbOKnDrhG7riU3ZS4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c9G1vDL0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gmRZHJOx; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HEL6AUsA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D2EF61F000FF;
-	Thu,  1 Oct 2026 00:49:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790815771;
-	bh=dsmAzYwZWv0KlwVz1Z46WG8v+aQCQZ3x5dgAm2eAzwo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=HEL6AUsAxvDBqPketTl4ohKhQUqlwlxIhRkpQWAW0bp06y2E3sJNg+cxZjRNh0y3Y
-	 zsNTsVNm/Hr+Ss1i/hxeCH78WoKA6mWxLK/Dsw+6kNr14SW2TbrJey3DCNM5mSaIDu
-	 10dXM9lf+5e1NPpNQfFUszBo97/kSZEoLf9RLaRjS0z/2IiTZl6dNxino8O7R9eqLL
-	 SAeTG3F0DVJQ6H8QSXitXNJf1l4+/qTitZvjwkN8RFhu/4amCUgpvO7SiVW3anlsWp
-	 X96c82ashbm9q8ETzu9iCNZgSq7wIUUCREV5HpM+dEboGPJ7yloAQEutsHptCOAQ2p
-	 2alsZ5P4gmXYg==
-Message-ID: <4d594d86-b037-43e4-9c48-de6170d64051@kernel.org>
-Date: Thu, 1 Oct 2026 01:49:27 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c9G1vDL0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gmRZHJOx"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6910jVSh271257
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 01:16:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=8LTwY7IbNj9bE+34TwGiIF
+	xUUUMboXxjX5o58rh98Fg=; b=c9G1vDL003HrgYM8gEmL6SUiRKFm2A714lEBNV
+	OJEDmdFIlPkZL2Zv0JJDX7imO17aDtQexMn2dCSsC8OFpDZ5BRM4tkD0XpGBSReN
+	s/Ba5fu3GV2JQeOazEZUvRvO+nivSgvsbu/Scn478LwbN9q+2ZKzI73JQpgO9GqE
+	NqW5hsyJxKNkbPbBIsK17yBO0yjhWnLoYYKynfe25drtd0oVP1qLhMFg+3l3iGrH
+	zI5mmOKGBt4EYa1ZjsMjIg+OYncJW3Hcr8iWPfUuINlJssA0MFJCEtdqJeZv6Gtg
+	RKJwCefomM2J6CiYq+uA9vKgST+YMkXayORlc5D5BtzVfmjQ==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17mvscq0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 01:16:36 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1384427c3efso9010110c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 18:16:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790817396; x=1791422196; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=8LTwY7IbNj9bE+34TwGiIFxUUUMboXxjX5o58rh98Fg=;
+        b=gmRZHJOxDG3/iPYaddzeyzSpDhYT0RPvsb99Ov507i9xD66YBqRmEC5wOQCxRAiBS2
+         fccLLGP5Y0vFiiqDmMJUJn+vNwyyW1wBGMNfDxkwa7T8BQgaMqi1WHyaksE/W6cmBADM
+         J90Zw8N2SOBhmrFH0mtkcyMYBap2p+ULTZC0zQEv7RR9hnrKixbgkMZLgKpEgqjfKc6x
+         +N9ctJPuIEevarUF125PClJRvzjbHqa16y7g4va767xxFtUZhxfNFiTBnOJb8m0Uc5tx
+         iKgXPMfkPZvTldnXfMY77ADe2dNE85noxs58X9w3oohrCwicrka8A0I9ctQGorXS2ldO
+         WDXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790817396; x=1791422196;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=8LTwY7IbNj9bE+34TwGiIFxUUUMboXxjX5o58rh98Fg=;
+        b=Ql/CZpUBj1uJpYqcMMco2BWC1gvqB+/VRI2d01oaPz53qeTS29wgWrcT75ACtAStNE
+         bQUo7gwiI38YIzoJyX/FrV+IJJxCrvFyGaPZCJafIAEIHIqYrJCRv8uXSTlYPnAmnZ2y
+         63gg3z/CsXT7YgNpdC4qRrHjmpG+GCcIUEWjxg4C4Qw4anT/AXiFvM4+Px6ctu0o3pFD
+         RcRS3VpoIKpCtkTFF3/mwuAMTyooISMVu3hqUAtYCynovBtHg8NIPpdPoDbhlbs/gk3I
+         efFtx6kWxSloEMkS/9QyiOL0xjKPpZlDhULaIQE77fIV+xD9UchIgozNXW9DhKDyTSn7
+         Vpew==
+X-Gm-Message-State: AFuF++mQzCJseLkaZcGfF06GADuEa42qqsdgU1UySpvgDaSRkL1anZtp
+	YS0UqsaXR7F4YiHscko3ZkS6g0IBT/as2mNOLRmbkXZjrJmdjQ9Ae2Jjo/qsezDbQx541P/kXZk
+	DqQ0I41ACmcmqGu9LZad16XQOHer1DV5rF2bQjwn7kZDAqjDwE399Gz6aoqgBQlwN6qfnTi+46Y
+	Yf
+X-Gm-Gg: AYBFou30ThiKLvQoBH2v3m16jEJnLSak0iJlMQGM48cobeKnUczmVChq+RUX20PYCgN
+	jY1AYsdbDf6Gu1/DYGRIJx2Efod4iZ9RO0x1hE5UAL+GzoZlBux00O1f/0kd1mLyEph446a094a
+	zgu3oqz6ji7bQjl29iAe46ar2xgESDPXsogJ/KAoQgwJVeTAofzENLsHNlgggbX1lw2BXeh5xYr
+	0OHg06wNnDo+1q/niSqEW+CYoEGcCRIY3oSBIbevbA17sh+TX6bLo9NfFTujTwG9NFZibePfgDR
+	siSb4/vvKtw09BxzT1pQLpBTSlow88LuieoJfoF/yb5lIgqpXmTGK00YdrgsZ4GKKP/MIv4l3As
+	1WgR9ExXklb/CgByeVdYEhOYtLfKXANjVk8evaQ4uRYFy+JvGbWau
+X-Received: by 2002:a05:7022:3a89:b0:14d:b813:852d with SMTP id a92af1059eb24-14db822c86emr1313980c88.6.1790817395583;
+        Wed, 30 Sep 2026 18:16:35 -0700 (PDT)
+X-Received: by 2002:a05:7022:3a89:b0:14d:b813:852d with SMTP id a92af1059eb24-14db822c86emr1313954c88.6.1790817394799;
+        Wed, 30 Sep 2026 18:16:34 -0700 (PDT)
+Received: from hu-wcheng-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34db3750765sm2190286eec.12.2026.09.30.18.16.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 18:16:34 -0700 (PDT)
+From: Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 18:16:31 -0700
+Subject: [PATCH] phy: qualcomm: qmp-combo: Differentiate clocks related to
+ the USB block
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: fix 64-bit division in
- iris_set_slice_count()
-To: Sasha Levin <sashal@kernel.org>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-Cc: "kernelci.org bot" <bot@kernelci.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <WGjCcYNrTTl1nX0egc4fFtnjES8VeY1nYXm4v7kHVBNOSkChhctiUs2iU0KupHeUVt5uzgS6b3Re1MNJNK9riQ==@protonmail.internalid>
- <20261001004619.2230849-1-sashal@kernel.org>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
- jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
- piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
- YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
- B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
- lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
- 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
- MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
- 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
- JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
- bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
- OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
- BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
- VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
- jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
- mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
- 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
- 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
- 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
- kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
- nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
- g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
- dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
- NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
- VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
- Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
- vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
- 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
- ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
- MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
- VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
- NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
- AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
- JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
- 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
- OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
- xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
- t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
- X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
- LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
- 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
- Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
-In-Reply-To: <20261001004619.2230849-1-sashal@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260930-qmp_phy_usb_clks_v1-v1-1-d4dccc9eb263@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAG60vWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDS2MD3cLcgviCjMr40uKk+OSc7OL4MkNdI9MkS2NzEwMLsyQjJaDOgqL
+ UtMwKsKnRsRB+cWlSVmpyCcgopdpaADC08D53AAAA
+X-Change-ID: 20260930-qmp_phy_usb_clks_v1-25b9374086b2
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-kernel@vger.kernel.org, jason.pettit@oss.qualcomm.com,
+        Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-ORIG-GUID: 4vatC8ODyiJJldeHuP_LyIMh-_IgqWQX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAwNCBTYWx0ZWRfX21JAWhIm//SP
+ jq0wlbmWhZNIZKRfEvYlv6wRxSxVP5M7Fv0ViZBPVkQ4UMiz1rkAs9BQQFmXGwwb4Qpgk3DiKpM
+ 2+4GhbPSB4uCSd9DZpruad7UN7saxmmrFTQKs/IdB56TChKR2dwhLz1pR0Y7kF35Qeb1M5L7jA/
+ q6GjKmxvm0pBGCOlZDijsrNBcxae53KNIVC2oFISi+5A0f4U4FzG2U9TXJHHQrLpmEgqxxk/5l6
+ 76tDB4gxQMgwOYUuvHsjXtFnp5ha5/Ooo7LDQe7rKHRhlK5Fmaro072gybzAF2VMWOecaGFVwG4
+ yODQ5KZclq7E4BPivrYw/plnTYiulNzeh/0eq8ITjNW1h198jI14ZsVJ0eJ/gRXIQGrarzQGDSk
+ s+otpkPe72ZGfilIfL1lsreNRkGiQOOx+TOlOL1P5bO3SFagleGH1BfpVu3+eK/8azx683iw31j
+ jECj43DsInkphtVg3mQ==
+X-Proofpoint-GUID: 4vatC8ODyiJJldeHuP_LyIMh-_IgqWQX
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAwNCBTYWx0ZWRfXw+5O1FIIAz9J
+ rjMVNx58Xwx2+iC6JIifli61kFc9CMI0nAqvwCfqVGgqjCYdCxQE+E5A3SbWG9WfkywtT7zXCwC
+ Zyab+ZdQh4/Z+4VG6rfOSgKPovTeAnc=
+X-Authority-Analysis: v=2.4 cv=KuvYSmWN c=1 sm=1 tr=0 ts=6abdb474 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=KCRQXf5DRPPkNQcuQH4A:9 a=QEXdDO2ut3YA:10
+ a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_01,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
+ adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1011
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610010004
 
-On 01/10/2026 01:46, Sasha Levin wrote:
-> 32-bit ARM builds fail at modpost:
-> 
->    ERROR: modpost: drivers/media/platform/qcom/iris/qcom-iris.ko:
->    symbol '__aeabi_ldivmod' undefined!
-> 
-> The maximum average slice size in MAX_BYTES mode is derived from the
-> BITRATE capability, whose value is an s64, so both the division by
-> the frame rate and the DIV_ROUND_UP() by the number of slices are
-> 64-bit divisions. 32-bit ARM has no instruction for these and the
-> compiler emits calls to __aeabi_ldivmod(), which the kernel does not
-> provide.
-> 
-> The bitrate is always positive, so use div_u64() for the division by
-> the frame rate and DIV_ROUND_UP_ULL() for the rounding. Include
-> <linux/math64.h> for div_u64() instead of relying on it being pulled
-> in indirectly.
-> 
-> Reported-by: kernelci.org bot <bot@kernelci.org>
-> Closes: https://d.kernelci.org/i/maestro:4935f1aae20e7f957e60f8fde09c4e6d153c7909
-> Fixes: 5f21cd9a4ae4 ("media: iris: add support for multi_slice in iris encoder")
-> Assisted-by: LLM
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> ---
->   drivers/media/platform/qcom/iris/iris_ctrls.c | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> index 8c4c47944f22f..4f2633bbb49f8 100644
-> --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
-> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> @@ -3,6 +3,7 @@
->    * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
->    */
-> 
-> +#include <linux/math64.h>
->   #include <linux/types.h>
->   #include <media/v4l2-mem2mem.h>
-> 
-> @@ -1588,8 +1589,9 @@ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type
->   	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
->   		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
->   		if (rc_type != HFI_RC_OFF) {
-> -			max_avg_slicesize = DIV_ROUND_UP((inst->fw_caps[BITRATE].value / fps) / 8,
-> -							 slice_caps->max_slices_per_frame);
-> +			max_avg_slicesize =
-> +				DIV_ROUND_UP_ULL(div_u64(inst->fw_caps[BITRATE].value, fps) / 8,
-> +						 slice_caps->max_slices_per_frame);
->   		} else {
->   			/*
->   			 * No bitrate target exists under RC_OFF, so approximate a
-> --
-> 2.53.0
-> 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+The Qualcomm QMP combo PHY has a USB and Displayport block that is
+sourced with different clocks.  In situations where the USB path is not
+utilized, and only Displayport is active, unnecessary clocks are enabled
+and not used.  Split the current clock list into USB specific clocks,
+which will be enabled whenever the USB initialization routine is
+executed.
+
+In addition, move autonomous mode control specifically when USB is
+active, as its primary purpose is to detect RX detection and LFPS
+signals, which occurs only when USB is active.
+
+Signed-off-by: Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+---
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 56 ++++++++++++++++++++++++++-----
+ 1 file changed, 47 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+index a4f130fc33e3..f14fb8ef9028 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+@@ -2607,6 +2607,8 @@ struct qmp_combo {
+ 	struct clk_bulk_data *clks;
+ 	struct clk *p2rr2p_pipe_clk;
+ 	int num_clks;
++	struct clk_bulk_data *usb_clks;
++	int num_usb_clks;
+ 	struct reset_control_bulk_data *resets;
+ 	struct regulator_bulk_data *vregs;
+ 
+@@ -2678,7 +2680,11 @@ static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+ 
+ /* list of clocks required by phy */
+ static const char * const qmp_combo_phy_clk_l[] = {
+-	"aux", "cfg_ahb", "ref", "com_aux",
++	"cfg_ahb", "ref",
++};
++
++static const char * const qmp_combo_usb_phy_clk_l[] = {
++	"aux", "com_aux",
+ };
+ 
+ /* list of resets */
+@@ -4403,13 +4409,20 @@ static int qmp_combo_usb_init(struct phy *phy)
+ 		return 0;
+ 	}
+ 
+-	ret = qmp_combo_com_init(qmp, false);
++	ret = clk_bulk_prepare_enable(qmp->num_usb_clks, qmp->usb_clks);
+ 	if (ret)
+ 		return ret;
+ 
++	ret = qmp_combo_com_init(qmp, false);
++	if (ret) {
++		clk_bulk_disable_unprepare(qmp->num_usb_clks, qmp->usb_clks);
++		return ret;
++	}
++
+ 	ret = qmp_combo_usb_power_on(phy);
+ 	if (ret) {
+ 		qmp_combo_com_exit(qmp, false);
++		clk_bulk_disable_unprepare(qmp->num_usb_clks, qmp->usb_clks);
+ 		return ret;
+ 	}
+ 
+@@ -4440,6 +4453,8 @@ static int qmp_combo_usb_exit(struct phy *phy)
+ 	if (ret)
+ 		return ret;
+ 
++	clk_bulk_disable_unprepare(qmp->num_usb_clks, qmp->usb_clks);
++
+ 	qmp->usb_init_count--;
+ 
+ 	return 0;
+@@ -4670,7 +4685,10 @@ static int __maybe_unused qmp_combo_runtime_suspend(struct device *dev)
+ 		return 0;
+ 	}
+ 
+-	qmp_combo_enable_autonomous_mode(qmp);
++	if (qmp->usb_init_count) {
++		qmp_combo_enable_autonomous_mode(qmp);
++		clk_bulk_disable_unprepare(qmp->num_usb_clks, qmp->usb_clks);
++	}
+ 
+ 	clk_disable_unprepare(qmp->pipe_clk);
+ 	clk_bulk_disable_unprepare(qmp->num_clks, qmp->clks);
+@@ -4701,7 +4719,12 @@ static int __maybe_unused qmp_combo_runtime_resume(struct device *dev)
+ 		return ret;
+ 	}
+ 
+-	qmp_combo_disable_autonomous_mode(qmp);
++	if (qmp->usb_init_count) {
++		ret = clk_bulk_prepare_enable(qmp->num_usb_clks, qmp->usb_clks);
++		if (ret)
++			return ret;
++		qmp_combo_disable_autonomous_mode(qmp);
++	}
+ 
+ 	return 0;
+ }
+@@ -4736,19 +4759,34 @@ static int qmp_combo_reset_init(struct qmp_combo *qmp)
+ static int qmp_combo_clk_init(struct qmp_combo *qmp)
+ {
+ 	struct device *dev = qmp->dev;
+-	int num = ARRAY_SIZE(qmp_combo_phy_clk_l);
++	int num_clks = ARRAY_SIZE(qmp_combo_phy_clk_l);
++	int num_usb_clks = ARRAY_SIZE(qmp_combo_usb_phy_clk_l);
+ 	int i;
++	int ret;
+ 
+-	qmp->clks = devm_kcalloc(dev, num, sizeof(*qmp->clks), GFP_KERNEL);
++	qmp->clks = devm_kcalloc(dev, num_clks, sizeof(*qmp->clks), GFP_KERNEL);
+ 	if (!qmp->clks)
+ 		return -ENOMEM;
+ 
+-	for (i = 0; i < num; i++)
++	for (i = 0; i < num_clks; i++)
+ 		qmp->clks[i].id = qmp_combo_phy_clk_l[i];
+ 
+-	qmp->num_clks = num;
++	qmp->num_clks = num_clks;
++
++	qmp->usb_clks = devm_kcalloc(dev, num_usb_clks, sizeof(*qmp->usb_clks), GFP_KERNEL);
++	if (!qmp->usb_clks)
++		return -ENOMEM;
++
++	for (i = 0; i < num_usb_clks; i++)
++		qmp->usb_clks[i].id = qmp_combo_usb_phy_clk_l[i];
++
++	qmp->num_usb_clks = num_usb_clks;
++
++	ret = devm_clk_bulk_get_optional(dev, num_clks, qmp->clks);
++	if (ret)
++		return ret;
+ 
+-	return devm_clk_bulk_get_optional(dev, num, qmp->clks);
++	return devm_clk_bulk_get_optional(dev, num_usb_clks, qmp->usb_clks);
+ }
+ 
+ static void phy_clk_release_provider(void *res)
+
+---
+base-commit: c7f2322431cb6d108b18fb4154606b49e2bc50f7
+change-id: 20260930-qmp_phy_usb_clks_v1-25b9374086b2
+
+Best regards,
+--  
+Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+
