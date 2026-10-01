@@ -1,114 +1,93 @@
-Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 638034848AE
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:22:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98B453E8354
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790835730; cv=none; b=j0t3J6UO7Jh/QN2K99eNW7cJH9u4Bjy9ECuY3cwvqoA8rsew/Lo5dLnvYoAxHvz8d5OdI/HRVLuJPrwGRBUvSEPKeJB/V5Pt2IpX5vFNz0DmCk03wO3ribTqEwV0Sh33eQREsKRuw/c4a1pK2zo6/9H4iPhvL2maZqdyrvLU5JQ=
+	t=1790837967; cv=none; b=r5/yjB9dJBPxtuDX1azwlkqn6Stbdp/ewXUrDkwaHfHlmdNyGLtLANLH5g//F3ktTLbkT3WvvQjaP9LorhnMr8ow/Dae3uEAyXhIjS/Yw6dfYpooyuA4HDIQd+IgWoVsV0uAGGKoR4aqHDc9+Z8Lw1/y1txRplPPdzInjiZ3smE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790835730; c=relaxed/simple;
-	bh=jK8YcmgULqcX6JVEZ4kRXjt5tovYz/f4IYFMschjLGo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JCQy8r/AiuI/FabuBMyzVqQlQ1udQ3DTh0jpRxAl5UttIFTZcKQKbmVgXa5b/nU4X7Q9TjUKE9zprRyPkTN4iWK2JmQtQ0O7bVTVqikJPUfClrjE8loYaafqWTsmDKP9MMKAwNgX9liXIjJNvajPPlqIN11eg+arAKSLCCg5hZ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=K2iA6g8w; arc=none smtp.client-ip=74.125.229.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790837967; c=relaxed/simple;
+	bh=adKEV0wp8fnkm3B2gVtkxUbYQ0N4xZbbOvQZcLnu0xk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=OGztpxiHKGE4bSB7gP9B4EodQ4Plg1ScTDSdhcDqUMPMoQJf19NbvMqtrIO/q8Z4nza2O/26naoiU6J7J4K/otfVB/wqLofscGm/0aqXv+r0Y4lJ7bt/hvDUklVpgcSnHhvEQ6vMe4YaSYoWo/gY8EmYz4NrXAmAr/zrFMrZXxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZTEqIekg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="K2iA6g8w"
-Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33e630052ebso7040211eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:22:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790835727; x=1791440527; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=y7zcw/ukAiD8lLlXAKYppSFNCW4crk+K0J8KwggLYx4=;
-        b=K2iA6g8wbvHkPECXpwO+9T5iw0NOSqhMYLQOuAHXigUm862xvqbeGZu4i8dLYBUpcG
-         BREAAMQlLV6Fzr65uxxxGpJW7MZO6bePGyhaWcdliPm4F8hwSIjjnEj+cUK6t1jtjFEL
-         3fkKekmeRDumBmBjlWm7erxBFqMpkt6iT1XX/8bd/v+RWZ1/HLwbnkESlHDRSHN+pgf1
-         4TUZ/AiXPw5ngly4xlsylLo4F6IjfDE+g0IZEXKgpWjj3xLf7aZmsOMnLO7ySiLTvicy
-         PwfL+AUsncVtgJz0Zrb/5zvqVdcfpxUFhyIslxTJIdYaJ4iikwZLNcJc9DP66CcMFwHT
-         +pkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790835727; x=1791440527;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=y7zcw/ukAiD8lLlXAKYppSFNCW4crk+K0J8KwggLYx4=;
-        b=RYqqrE9JI50kPtdgE19gPDBQhWhydSA7Dr/ivp60CKmoJtc2CmlGVj0sqhNBFKhv3O
-         5dvUaicuW0rE23z6Ufnx2j1PSIUeY/S121cVR1SH+ha/hMf/CLAqneQf3XaPvH1usRiJ
-         A4Dq8YuW69nbDdKhKox1M3NCqQRLGgpsEo8um1pg7nzwZK/p5tzzwFxQczJ7fGj6VnIb
-         NR9Rod5JEaev1kCs+rdcEnKnNrQt/yMKHOu48nm1yFLD+1WQEMRfhj6XH8FIeLl0PQEN
-         IHZEc85srySHWgE3piD19s9QFNQgadmGnDdhcNAsPewQo2V1671h6a+hXEzkt3t4i0j9
-         5Ejg==
-X-Forwarded-Encrypted: i=1; AKwUvBxHo5Ee1MQ+ns4ofic81y+/dxUa53tRnKs2O65xTru9bqbO/aPH5B5lNdM/VNYw8uDLakormNQ8NgJBqHog@vger.kernel.org
-X-Gm-Message-State: AFq9FYJokvBqvVw+A/1+qUbeFx9iCmz2DQ1kzbXwtaA11OUw5STtvetz
-	1xrvxtIEzps3gUwp+cosdlZkasZ6S1yANorselvlgun12nNfTeIskGdL0SJduGXnApg=
-X-Gm-Gg: AYBFou0KCNBlZJfLTwlQay3VNrkxhM1sYDhnzSTmEtZ+YaYKnlrMJYfCVVsJSCedTB3
-	0TCunYNamIJ/be4K59Z83xYAHcY1+WuI7vgwggEyzJm1+o/ezSxSEAQOTP1aMCTC8g0H8CysdGy
-	K6n1ZZ1ycVbGTAO7VBHR4/s7BiM7oAjhsnGH7hNVQeYiocbZsaIbSSFFJy9NEtv0X/KtAHwjuqe
-	EBpGxNqjpxIw7E2VaW9RPg8Tt3SpsBlRuJv4AVY950KCVyewt08/PTOG69VDSlT5u7VO+knn1yn
-	4G4q/O7YB6bGXgF8komp5oDUSO7l71ohTK4F5s81oaaHN1TRZO+AVapv4tGz4AsMS27akbO5moZ
-	a9asmfDIl/hcy3Ucv2mvYtHs4U5vmk+GEqeGVxtgfOfz5l8y6AINXqVHxSwaomzfqIsg9tqhqgg
-	nHF0CDyZtcEVzvf4o3JqIe0glxTpIz6jDgdLpAD/bhmNuehUuZjvIS8cYBEhKs8oUmZDMwkykY
-X-Received: by 2002:a05:7300:d947:b0:34b:101f:cda2 with SMTP id 5a478bee46e88-34cdc1ce13amr3929856eec.27.1790835727212;
-        Wed, 30 Sep 2026 23:22:07 -0700 (PDT)
-Received: from localhost ([122.172.87.224])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34db3750765sm4040631eec.12.2026.09.30.23.22.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 23:22:06 -0700 (PDT)
-Date: Thu, 1 Oct 2026 11:52:03 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Ilia Lin <ilia.lin@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org
-Subject: Re: [PATCH v2 3/3] cpufreq: qcom-nvmem: add support for QCF3211 &
- IPQ5211
-Message-ID: <ar38C5omDdaXQAID@vireshk-B250M-D3H>
-References: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
- <20260922-ipq52xx_new_ids-v2-3-4b1a0f3d04b2@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZTEqIekg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6919B1F0089F
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790837966;
+	bh=adKEV0wp8fnkm3B2gVtkxUbYQ0N4xZbbOvQZcLnu0xk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=ZTEqIekgpZghTg8Qn8vwEmbcMeMYl2MORgJxn3aIHii9lmlTTHXZULIZaVG6qSbBU
+	 P1GpvEyVhrBhMi/mxpGoxmyOhDj0twY5/81waMYx34MNJYpyJW/LGUPeAxIk4Gb3tS
+	 291yIQxl1AzJd+hKdqlRFd6inzcyYydgb3tNfWPDRy9FVVDUzeGQbpXp2S02THGyJO
+	 cBNMWgzFXyDjGvG+KjD2jVAWTdEuZ5SPtgBv4hf/VJBW5T/eR3p7ntSCwVWjJbxHS/
+	 EtdsuoEljzPiJkqs+B/W+oywc3R6jty9xcO198geJNwEC8Z9ZM5JTuumBUxhIb+jXo
+	 21JWDU1ZRilHQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3e27d525so1237880e87.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:59:26 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvByGgyjmX5abum335N75lrh8yTQgwuBKCy9mQBD6q3oSTJ1J4gleqHiOZPF7RWG4gUBnc01UJEFUN2O6oE6K@vger.kernel.org
+X-Gm-Message-State: AFq9FYK1FCc6zzdXGhnxxYndzuAYY+DXodeGFJwmH/VufNvZHfvD18vF
+	QJzb0ELg4EQo9CNaRtY1O5vIXIFf+hI+dkOC5JNbpZL43Cgd8AREfYAKtZX3Z8Bv31+E42xzNB1
+	OynoJ5nIyvHH16LnBHq9/dSABMVcxOzQ=
+X-Received: by 2002:a05:6512:3ba0:b0:5ba:3b01:36a5 with SMTP id
+ 2adb3069b0e04-5ba405ee75amr1389712e87.14.1790837964923; Wed, 30 Sep 2026
+ 23:59:24 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260922-ipq52xx_new_ids-v2-3-4b1a0f3d04b2@oss.qualcomm.com>
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-7-83afb4f1a707@bootlin.com>
+In-Reply-To: <20260916-drm-bridge-every-panel-v3-7-83afb4f1a707@bootlin.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 1 Oct 2026 08:59:09 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkhYNZ4R4Z60zTzNoZwCtk4rcL-pCbgdHpNEzV-4oO_Wg@mail.gmail.com>
+X-Gm-Features: AclHuK8feDgrhg1tWHz9y2oJ4IDmaC5Th2MaGXRPg_l1XDpQ6IeWaj3r9RadEo0
+Message-ID: <CAD++jLkhYNZ4R4Z60zTzNoZwCtk4rcL-pCbgdHpNEzV-4oO_Wg@mail.gmail.com>
+Subject: Re: [PATCH v3 07/19] drm/panel: deprecate panel-bridge APIs
+To: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Cc: Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, 
+	Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>, 
+	Paul Kocialkowski <paulk@sys-base.io>, Inki Dae <inki.dae@samsung.com>, 
+	Jagan Teki <jagan@amarulasolutions.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
+	Sean Paul <sean@poorly.run>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Randy Dunlap <rdunlap@infradead.org>, Albert Esteve <aesteve@redhat.com>, 
+	Anusha Srivatsa <asrivats@redhat.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Hui Pu <Hui.Pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>, 
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>, dri-devel@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, 
+	asahi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-samsung-soc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 22-09-26, 10:03, Kathiravan Thirumoorthy wrote:
-> Like all other SoCs in IPQ5210 family, cpufreq for QCF3211 & IPQ5211 is
-> also determined by the eFuse. Add support for the same.
-> 
-> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-> ---
->  drivers/cpufreq/qcom-cpufreq-nvmem.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/cpufreq/qcom-cpufreq-nvmem.c b/drivers/cpufreq/qcom-cpufreq-nvmem.c
-> index efa766e98d86..9f2e6e6c0905 100644
-> --- a/drivers/cpufreq/qcom-cpufreq-nvmem.c
-> +++ b/drivers/cpufreq/qcom-cpufreq-nvmem.c
-> @@ -205,6 +205,8 @@ static int qcom_cpufreq_kryo_name_version(struct device *cpu_dev,
->  	case QCOM_ID_QCF2200:
->  	case QCOM_ID_QCF3200:
->  	case QCOM_ID_QCF3210:
-> +	case QCOM_ID_QCF3211:
-> +	case QCOM_ID_IPQ5211:
->  		drv->versions = (*speedbin == 0xcd) ? BIT(1) : BIT(0);
->  		break;
->  	case QCOM_ID_IPQ5424:
+On Wed, Sep 16, 2026 at 3:46=E2=80=AFPM Luca Ceresoli <luca.ceresoli@bootli=
+n.com> wrote:
 
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+> Now that a drm_bridge is embedded into every drm_panel, the panel_bridge =
+is
+> not needed anymore. Its APIs are just accessing the embedded drm_bridge
+> transparently.
+>
+> Deprecate them all, encouraging to use the drm_bridge API.
+>
+> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
--- 
-viresh
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+
+Yours,
+Linus Walleij
