@@ -1,438 +1,423 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E06C3522EFF
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 14:52:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B5B1526AB3
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 15:01:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790866366; cv=none; b=Cnk/RZHUQd1Tx/Or6qmcoOo8rJJIaj269ym8brPTistCPDg3Uov+O8MQs15iXhBiRy0i/F1szEtS8WKy24b8YNM9s79KtjIOPahVWJleHSWhQQx3DXCN0s4vzP4uICtIoSTE3FBalsh6B3YBcgoKRUF/dq2v34h1yI10PtT6Rt8=
+	t=1790866865; cv=none; b=bAISgtY4PNPMPP0F4tkI5HEJxF2SQIfXEA1l47lAgNNOYUOWQ1MqQxknedLBKGWsCr5j3bUg/J3KkpX2f6a3nPE4ragQBTYkweZTybiBRhWDWNnTQbdic8gAeXHhwVKExYepbWv9Am+UuUosAFuYwBFYVp3qzkuSQaEXK8NvLB0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790866366; c=relaxed/simple;
-	bh=xcDk1V0EXoztnDbk11NuZIokSUf38007T8sICTWeLIE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ettEHqxBgSC3tr0pdV/EEmCrZIIjdNOsfEG5QI/24TI2Y1A0uNfiQo+KQLUrsppeGZiOZvxuf1lCRahozI9SVizlz3BzDuc/hjU35gHUJTxMHdqH/aloZVKvA/ZTqYDyArGxqWfnI1ogIUPQiiqNh9j3WMK/o96uO+osjtFZCGQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Q9t7s0gk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XgmU+ePz; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1790866865; c=relaxed/simple;
+	bh=sXpuH20fyOsY4luYBrH4B4yDXtYJ0SXMp/0xlGA88MA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Mmm8Vyfb5LDI7cbY4KItjrVAZvel0e9OeHU5lwzHFEvlSwlV0Y/97qxp0k8iXGhxH3ZssB8yK8q9xPqon6D7CIzCTHeWHvtwTjgrpyka2Y/viblRbdm9CDKP5krNaAL3r/7lViRlVDxv/Z5sYwfuNFR+i18guVPl3HHhg0+LRcE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Kf6rJcWY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f6VmYKwH; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Q9t7s0gk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XgmU+ePz"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691Dj3I73229337
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 14:52:42 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Kf6rJcWY";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f6VmYKwH"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691DjJrR2403922
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 15:01:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=+iF3uPEmgMCgIUnS2IvHI32Q
-	7kQFVUfGG8r74lHA8/8=; b=Q9t7s0gkGeDDuh/txskwTFX3eCOS59ef4lHXrzDD
-	glvj/rT9sCmgTh9kQO3wTvexY9SlTYWtlMp9sBcNAsbduoEr9PfiYbwoI83W+aiR
-	q3idWncivINgzAQQUMJMonCYM1utjKzv5Ni6fKlV94v3txUIJ0m0+yUWzQNCoTib
-	RUHBrB7KENnfZtisxxs9CE4a5He5XTKd7KXgGt414o4jT7Dje1P3BBDNUGbwECtX
-	R3AwZIeGAzuGZoppztDC7NaZASJDjyI4/ISH2Tjqvq+oPaB4L/FD6AJ/N5cZ+sYy
-	G/sczsoSjPmQ4Sd4jFRJvnkmsYlwbtEDBV6bz3xXfoR7Gw==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1quk8hq8-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=5bAcYGIy8jeI69YAlNTN0l
+	uYORkRy+CXm8QV/D8mVoQ=; b=Kf6rJcWYegaDp3jf1LFrlEekIm8E3HGo4HFZD9
+	rFDaOuewIJHuP0ht4l3tOWqs60ZsMZIrKD9pKJNymlvt4OT46mWm5YwYObpL5qyS
+	ODOTUoRxfZurjBvRUa8gZ84R9pEsqJX21/XvdKD9qN9/+jlK4Zr5kE0pTjt4mfX5
+	NXLaAI+DAlGxbpwPmu55xILYVcNQo1gSZV+QMyasWMFS2lymZXZktyXkmtqvCnmz
+	a74ZZHVBkG1lVkUKfXFC1btAXPHrtsTMlX0sDsRUvPzIp1yMIxGyU1CKN/Sg+bLM
+	3pDs81pC7AjbfxzzHU1hhh/FbrGET9Gc6XM9Id1kmf+kB1IA==
+Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h188svb24-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 14:52:42 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-78d25a8ff32so1542755137.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 07:52:42 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 15:01:01 +0000 (GMT)
+Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-45e83fd0663so7647465fac.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 08:01:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790866362; x=1791471162; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=+iF3uPEmgMCgIUnS2IvHI32Q7kQFVUfGG8r74lHA8/8=;
-        b=XgmU+ePz2CRuFVSq0GEpnIjV6eeuCiHRf1yubhfyPncvWpRB/IjFTDgzw3nj2K9505
-         qVEMAn8hxe8F79Y0mVWgNx52riZoi0kohUcKboCS6MobX8BgzgFnQ2wtwz21xpz7ckUT
-         g9g70mMsNQWogHdgS/B1SniTSPoNJKUqHof48iVrXFWEWjRo1fzNa4iQ91p2Rb8KVEXH
-         v03vK9952cSj20WEFq7sjIuw9fosB8cIt17GWkdNQM2JLsd67fdt7qfWsO2UqxPYqu9r
-         4RAnN7rTZgjTkcHaZsGeQRPWvWwUZhfuhTQ2m2BFwQQ+RiKLGaSBLsMyFpt2rBqKZOsb
-         pTqQ==
+        d=oss.qualcomm.com; s=google; t=1790866861; x=1791471661; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=5bAcYGIy8jeI69YAlNTN0luYORkRy+CXm8QV/D8mVoQ=;
+        b=f6VmYKwHwVFHmm1LNTqkNMBc3K6JiOO1Z6hmm9tfKUi/3zVJCNJLijvE8HEyCA1lIm
+         r0bxiMEES4z5Rl4emuqtVn+MKrE3xD+TDx6PvUWCzpeBtlIcVWYfsTPACNQxaJi4NN4o
+         WdCIPZpbMphszwqtvihAftsDMHpyeMvAxyHaigsThhEQEZsP9M5dUNjqddTubpv2jxwP
+         scFCfMdnjS+6d32jibFvzJ1baErZVAKVcE2ZSss4GqEsm7ZJkGCo5EEz4rMNY5DAxmh2
+         IdkYsWt9mi1hCBqTRAjymjvcUM2GO+2VuPWTyPB0G6zUvIDKvbG4D91H5cSWnNz2BQ1z
+         pHRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790866362; x=1791471162;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+iF3uPEmgMCgIUnS2IvHI32Q7kQFVUfGG8r74lHA8/8=;
-        b=YQdbXe8zqw5XdM+vtJyqW1GKwyDT9R27j8c4/gKLCtu3DmG7YLtfcIXiAKD8qb3IPM
-         7KsU1/nQFPbk+031vytG7btfafFwAqHjRb73yIfDWU+WxdCoBzOJuM58kK5Ndv9i3twa
-         tNWSe6zpVClX78tlQvjWP3zxEnhbmA14TnVBjbEh4L4mwjTkrbI3wWR3iI/BzR/Vvkce
-         We/ePZ0w1PN/6765rZaaL2RDZtbmNgscrJM0rLGuzSN3FRkiOEBPQcFoPlV/sGJWQUdD
-         ysymZVwMJEQyjFwB9wffsALjFLP8lklabBHlMy5NPyDYm+upzqOkan2XcPLtEFBpVC6V
-         Bf2A==
-X-Forwarded-Encrypted: i=1; AKwUvBxNhJk25GqDugW4Wd1+Z/cutdsafNYTnZ2oleQON3OlYsslYDC21dhYenpwiGYksTQ9R1yTQFLdWM1Up5vB@vger.kernel.org
-X-Gm-Message-State: AFq9FYK+KSuSZSYgS79bduk0I2StZrtyiL4c+EPuxlP1WBLaTyLzuwkW
-	zIIEciLWkkhO103B2rA7ttDvy6ted+BBjYSV14uMngcA0E3PidJaW3uDtRXZdHVuB1kbN7s8AwI
-	1T2WCnM9C85loG9NEG/V2jl/zjiXRWsDnYNYBCLWaXfnUAMgvapYkH5kBOQDlafQihWdI
-X-Gm-Gg: AYBFou1XovHOyj/wdwcGCuZl41CHxAQa1rZT1q4f4PloL/Eu2xyPB2f2qJtPHqtRfzp
-	/3SmYgSjshm8Ndv2IYekOAZKJcKjgIxrYfdfN3c9YmQnZtkXO8NTOYsghdM0vjlSUarPpaciwD1
-	jTFXEvqPlyOEhRk1+svAsdHTQW6r6KjgUNsNcvcYDwvGrHjYhXe5XopTRjO3mv7bZyWDGwrPEO+
-	0ZBu7nwXH3oRQlzo6xbZI0WYpUXMs0G/oZoOe1oqOyhNffvcwHC+g3++PPN/v90NLwUb9b4zYwz
-	syJw2513F3fxtVceJmXvsXJU4fvxM55Q/3fPaPgiEBoIJrc6xFAIw9VlJ3sBkYx5JoGZaoORQdA
-	LQTMd5aWyVUdVfuQ3nYxs+qt23EHmFMNVg66oZHeDj9utBqzl1ztm4mb13ycZqYS6TCQfT78ub8
-	XPhw8Ry0/JbGhW
-X-Received: by 2002:a05:6102:148e:b0:7a7:196a:84ea with SMTP id ada2fe7eead31-7be7428e894mr1337137137.34.1790866361611;
-        Thu, 01 Oct 2026 07:52:41 -0700 (PDT)
-X-Received: by 2002:a05:6102:148e:b0:7a7:196a:84ea with SMTP id ada2fe7eead31-7be7428e894mr1337122137.34.1790866360841;
-        Thu, 01 Oct 2026 07:52:40 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7bf038b1sm10900e87.47.2026.10.01.07.52.39
+        d=1e100.net; s=20260707; t=1790866861; x=1791471661;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=5bAcYGIy8jeI69YAlNTN0luYORkRy+CXm8QV/D8mVoQ=;
+        b=bKFuN3vsg+gwx8VTx50FYna+Z90CsusSLj+OSPHrfNfshfAOehHzpcgdRsrexzKtIK
+         dbQTOjseS5GWyp5QNAcAzDNmFLNPMEQNoNmGR78595gn+fL1tkCyiQKxikrqPOs1rZFu
+         NtIplkEoGZNFg3QrRYwe28BxZ/KCpCUjrt2CUzgUMaZmJfcNS4d8Y6d9JzzAelH/mGtx
+         S2exgFOz0OwR1GtuAQ8Z7nwt/0BkZvLzgSBSbCEchZhG6JklNa/X2eEYOy5IoFANHKHa
+         AWKWyVw8zc0HYyVHGOg2kSwDt6pqEVwu0NJDQrqqIAfnfDC1bNFwxMmhwnBrqv8BFlFI
+         DmKA==
+X-Gm-Message-State: AFuF++mBfS+DsswXzqKz00Bh1le4aui8rooXnenDDxCJSW2eKNqCesG9
+	9n7QRwHYMFe0KCudAHcZoq7GK0axseFVs4Y8T4GkdXFrUGZ8A6FcLwcXKTtHHhYbXcAjwiHO0mq
+	gkrFZtvSenX6ZI742jeIu5FUqD8CZDyBOpeKpND2udN5q4V+WJ8t1bfnYxap7R895NxOj
+X-Gm-Gg: AYBFou0Vmzax8wIyOsLPqUWOlk2k8ctkDrwSImI24ziTs2h4Co8B5yCA3+sVFNoqIIg
+	X67nvdkoc+NFQu2NeNlEghgLo3YpP+N0+5DLcC7QIGOPre9WrmDvY3nepquiFIi4Bfu+GZ45c3v
+	KLoHDQs23jYArNDz+7YLHDyv+7nC/Ry0oJyg6JOtigsFuQKqg/EbnCWKrg8azVEmOJI+NXNO7nB
+	CSmCK9IUMnRQxtHN23cceE3a4NrZ9Aeo90blBgC7RQ1w1gv2n+nia8gZR+EqZDBmHL5eqwRff6K
+	c9ypjUbJA4zhI2jqHkouEIGn71xzT6JEdYiv6u5zuC22HlppszSWhWl2TChmg4Xa18SMiZdN5gU
+	eongJOXMM3w==
+X-Received: by 2002:a05:6820:1501:b0:6d7:a325:35f7 with SMTP id 006d021491bc7-6dcf68163a3mr5166244eaf.81.1790866860336;
+        Thu, 01 Oct 2026 08:01:00 -0700 (PDT)
+X-Received: by 2002:a05:6820:1501:b0:6d7:a325:35f7 with SMTP id 006d021491bc7-6dcf68163a3mr5166181eaf.81.1790866859513;
+        Thu, 01 Oct 2026 08:00:59 -0700 (PDT)
+Received: from [10.213.99.236] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6dd982ed764sm2590712eaf.11.2026.10.01.08.00.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 07:52:39 -0700 (PDT)
-Date: Thu, 1 Oct 2026 17:52:37 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Jun Nie <jun.nie@linaro.org>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Dmitry Baryshkov <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v21] drm/msm/dpu: Enable quad-pipe for DSC and dual-DSI
- case
-Message-ID: <zgig74ptxcqnyzl7pvlecnnf6j2br6uz72ywcjbvhj2ccsljgr@n7rqpxpvwiu3>
-References: <20260727-msm-next-quad-pipe-split-v21-1-965dfa5b669e@linaro.org>
+        Thu, 01 Oct 2026 08:00:59 -0700 (PDT)
+From: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+Date: Thu, 01 Oct 2026 20:30:49 +0530
+Subject: [PATCH v2] misc: fastrpc: map ADSP remote heap into remoteproc
+ IOMMU domain
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260727-msm-next-quad-pipe-split-v21-1-965dfa5b669e@linaro.org>
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA1OSBTYWx0ZWRfXy2AnTOyvU1Ei
- VuywQ9KScxcI9pYWJ56G9qVsdJXnPu0B/milBM6KR1ZHVtmBfpf4UhJmUv415oOTLYRU8C8cZUW
- 9TS4Q+34tiAbcATv+9YlHVnpqhBwjyM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA1OSBTYWx0ZWRfX9w6Pd7Yrn4QF
- vUHoD1kEiepeonb/4n0FZHjmuHcYt2ANxGWULYDC+3TIIMgRIKzKoHs0FmPrmA42CI8g0EM/w06
- 9vQFwTjZ0VoO3Q5H6/5KmiLKiWsy9w41XGkyemJOm9Or49DjZtzTCxF8vdSDLx19iw8NyFnAo7k
- e73NdH/VMy9uQ3xwKV0hRNOPZ0I0VtufJUXLUiViJ1O+hkuCTctFsu8vubz7alop0FrSnMxAawS
- 1X0uj/gDIoS8lsg72wLLeAXEc3XOj4BjMZFiF/baeDZPTdhnvetPnT4Q0lQjDMf9E0ndi46PkP/
- PIM3aQLf9Q6t2tsKY+Cg+VKHIIOphI8ngQ/WYgx7y6YrdQKC7ipT3DfnO1PWz+/u38OR9nzanDq
- HZagAEi4qzl6++Z0Untj1OrW1UF+X//jcrJguT8oeqhORJMMIq/yCgy4B9fcepiJTDTmND3yQlC
- VZ2LQz9wciZmu+t+DJQ==
-X-Proofpoint-GUID: -mk6-8vgF9G8sczH8dyt2lltzgQwu4Sd
-X-Authority-Analysis: v=2.4 cv=TdADJhQh c=1 sm=1 tr=0 ts=6abe73ba cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=e5mUnYsNAAAA:8
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8
- a=T8Yxk-s-iGYFq7mrDv8A:9 a=CjuIK1q_8ugA:10 a=gYDTvv6II1OnSo0itH1n:22
- a=Vxmtnl_E_bksehYqCbjh:22 a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: -mk6-8vgF9G8sczH8dyt2lltzgQwu4Sd
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261001-fastrpc-kvm-iommu-v2-v2-1-6c32ad6f662f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAKF1vmoC/yXMQQ6CMBBA0auQWTtJnRpEr2Jc1HaQ0RRIBxoTw
+ t2psHyL/xdQTsIK92qBxFlUhr6AThX4zvVvRgnFQIZqc7MGW6dTGj1+c0QZYpwxE57dNdiL5dA
+ YgpKOiVv57dvH87DOrw/76f+Cdd0A9/+rPXgAAAA=
+X-Change-ID: 20260930-fastrpc-kvm-iommu-v2-1a7d343ed802
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org,
+        Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
+        Amol Maheshwari <amahesh@qti.qualcomm.com>, quic_bkumar@quicinc.com,
+        quic_chennak@quicinc.com
+X-Mailer: b4 0.15.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA1OSBTYWx0ZWRfX52slvQpnkt2J
+ yzRDLgIjk/htUhoNFGLsOZygHos3/an5o2x59X4imXamvQGd1T6+J9AGiNWNobQHnFxZrVaKUBe
+ jExrREDb8Ukj4PKFRzez6D8obb111qA=
+X-Authority-Analysis: v=2.4 cv=OozaWC/t c=1 sm=1 tr=0 ts=6abe75ad cx=c_pps
+ a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ag1SF4gXAAAA:8 a=e5mUnYsNAAAA:8
+ a=COk6AnOGAAAA:8 a=Mo4pmYlT2hf4TzH739EA:9 a=QEXdDO2ut3YA:10
+ a=1zu1i0D7hVQfj8NKfPKu:22 a=Yupwre4RP9_Eg_Bd0iYG:22 a=Vxmtnl_E_bksehYqCbjh:22
+ a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-ORIG-GUID: CtUEZwscbqeBVcZcmM6Bo7L72DB0OVt7
+X-Proofpoint-GUID: CtUEZwscbqeBVcZcmM6Bo7L72DB0OVt7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA1OSBTYWx0ZWRfXwxUP2SewSDQT
+ 6BOuGyZ4GeUCV8pgbbh86RlV9IJBvG8kuZJAFSks+Ey1xszrAJSFu5ownwbdpUbesoRJZpxgJjT
+ wf6Nqei3lZNmPbVX2GMtQIRabHH3tBJaf1H2ZAJkymzsBS+J97kvunr9OTyBzJHaXudV4T3mdXW
+ yt+XwXaXegrSmIbOfQ332ImO6do0beUfmssMcNN6ju6yjIoh/sZc7OyCqgdmm+AkfO7FvR8H2DZ
+ +lSyxnJhGtdcgZXEqrc6ACzIZ5QQ2jzK1Ig/mU6vOzFOhjNwRxsyL8qJOS7JuSGpQNAgcJnU9O1
+ /v8ESzyyLwwasg6MKijEyPrQ/hrh0zagtWv7Wa0QLvZc7WjYbZZdysauF/Bwx4O7rfa/L3g5ftZ
+ U+U66ZUUbV2yQdW1krfjEcCkHLjOip++WcjEN2CD1J+ga2kupC/wn8upYZ5+Dzt1OZ0nqQBhqPp
+ LebIVijTLhlAh/OwhJA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-01_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 suspectscore=0 malwarescore=0 adultscore=0
- lowpriorityscore=0 priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010059
+ clxscore=1015 malwarescore=0 lowpriorityscore=0 impostorscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 phishscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610010059
 
-On Mon, Jul 27, 2026 at 05:33:26PM +0800, Jun Nie wrote:
-> To support high-resolution cases that exceed the width constrain
-> or scenarios that surpass the maximum MDP clock rate, additional
-> pipes are necessary to enable parallel data processing within
-> the width constraints and MDP clock rate.
-> 
-> Expand pipe array size to 4. Request 4 mixers and 4 DSCs for
-> high-resolution cases where dual interfaces are enabled for virtual
-> plane case. More use cases can be incorporated later if quad-pipe
-> capabilities are required.
-> 
-> Signed-off-by: Jun Nie <jun.nie@linaro.org>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Reviewed-by: Jessica Zhang <quic_jesszhan@quicinc.com>
-> Patchwork: https://patchwork.freedesktop.org/patch/675418/
-> Link: https://lore.kernel.org/r/20250918-v6-16-rc2-quad-pipe-upstream-4-v16-10-ff6232e3472f@linaro.org
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
-> 2 or more SSPPs and dual-DSI interface are need for super wide panel.
-> And 4 DSC are preferred for power optimal in this case due to width
-> limitation of SSPP and MDP clock rate constrain. This patch set
-> extends number of pipes to 4 and revise related mixer blending logic
-> to support quad pipe. All these changes depends on the virtual plane
-> feature to split a super wide drm plane horizontally into 2 or more sub
-> clip. Thus DMA of multiple SSPPs can share the effort of fetching the
-> whole drm plane.
-> 
-> The first pipe pair co-work with the first mixer pair to cover the left
-> half of screen and 2nd pair of pipes and mixers are for the right half
-> of screen. If a plane is only for the right half of screen, only one
-> or two of pipes in the 2nd pipe pair are valid, and no SSPP or mixer is
-> assinged for invalid pipe.
-> 
-> For those panel that does not require quad-pipe, only 1 or 2 pipes in
-> the 1st pipe pair will be used. There is no concept of right half of
-> screen.
-> 
-> For legacy non virtual plane mode, the first 1 or 2 pipes are used for
-> the single SSPP and its multi-rect mode.
-> 
-> This patch set drop the merged heading 8 patches of v16, only the last
-> 2 are revised and split into 4 patches here.
-> 
->     Changes in v21:
->     - Add active-CTL constrain to quad-pipe case.
+On KVM-based targets the kernel runs at EL2 without a separate
+hypervisor to manage inter-VM memory access control.  In this
+configuration the remoteproc is assigned its own IOMMU domain, and
+any memory carveout the DSP must access requires an explicit mapping
+into that domain before the DSP can reach it.
 
-I'm going to post a patch to drop this condition, but anyway.
+The existing code calls qcom_scm_assign_mem() to transfer ownership
+of the ADSP remote heap carveout from HLOS to the DSP VM.  This SCM
+call is only meaningful when a separate hypervisor (e.g. Gunyah) is
+present to enforce inter-VM memory access control.  On KVM-based
+targets no such hypervisor exists, so the carveout must instead be
+mapped into the remoteproc's IOMMU domain via an identity mapping
+(IOVA == PA) using iommu_map().  Without this mapping the DSP
+triggers an SMMU translation fault when accessing the remote heap
+during audio PD static process creation.
 
->     - adjust high clock rate constrain to quad-pipe case so that 4K@30Hz
->       still use 2 LMs.
+Detect whether the remoteproc has an IOMMU by checking for the
+"iommus" property on the remoteproc DT node and store the result in
+a new use_iommu_map flag in fastrpc_channel_ctx.  When the flag is
+set, map the carveout into the remoteproc's IOMMU domain instead of
+calling qcom_scm_assign_mem().  Introduce fastrpc_remote_heap_map()
+and fastrpc_remote_heap_unmap() helpers to encapsulate the IOMMU
+domain lookup and map/unmap operations.
 
-Why is it only 4k@30? 4k@60 also can and should use 2LMs.
+Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>
+To: Amol Maheshwari <amahesh@qti.qualcomm.com>
+To: Arnd Bergmann <arnd@arndb.de>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Cc: ekansh.gupta@oss.qualcomm.com
+Cc: quic_bkumar@quicinc.com
+Cc: quic_chennak@quicinc.com
+---
+Changes in v2:
+- Rebase onto the fastrpc-for-next tree, which now has the remote
+  heap allocation and reserved-memory handling changes.
+- Rename has_iommu to use_iommu_map for clarity.
+- In fastrpc_rpmsg_remove(), the IOMMU unmap path now mirrors the
+  qcom_scm_assign_mem() path exactly, so the two are handled
+  consistently instead of leaving the IOMMU case with different
+  cleanup semantics.
+- Add fastrpc_get_rproc_node() to fix a device_node refcount leak:
+  the previous of_get_parent(of_get_parent(node)) pattern never put
+  the intermediate parent node.
+- Unmap the remote heap from the remoteproc's IOMMU domain if probe
+  fails after the mapping succeeds, instead of leaking the mapping
+  and causing -EEXIST on every subsequent probe attempt.
+- Log a warning in fastrpc_remote_heap_unmap() on each failure path
+  (remoteproc node/platform device/IOMMU domain not found, or a
+  partial iommu_unmap()), instead of silently leaving the mapping in
+  place with no diagnostic.
 
-At this point I'd probably prefer 'use 2LMs unless you have to use
-4LMs'.
+Link to v1: https://lore.kernel.org/r/20260618-audio_fix_clean_v3-v1-1-ec1ee66fe455@oss.qualcomm.com
+---
+ drivers/misc/fastrpc.c | 149 ++++++++++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 128 insertions(+), 21 deletions(-)
 
-For example, there is one more fix for dpu_crtc_assign_resources():
-    int ctl_idx = i * num_ctl / num_lm
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index 5ac7b3e78ba7..89f4a80ad9be 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -21,6 +21,7 @@
+ #include <linux/slab.h>
+ #include <linux/firmware/qcom/qcom_scm.h>
+ #include <uapi/misc/fastrpc.h>
++#include <linux/iommu.h>
+ #include <linux/of_reserved_mem.h>
+ #include <linux/bitfield.h>
+ #include <linux/bits.h>
+@@ -317,6 +318,8 @@ struct fastrpc_channel_ctx {
+ 	/* Audio PD reserved remote heap region */
+ 	phys_addr_t remote_heap_addr;
+ 	u64 remote_heap_size;
++	/* set when remoteproc has an IOMMU; use iommu_map instead of hyp_assign */
++	bool use_iommu_map;
+ 	u32 dsp_attributes[FASTRPC_MAX_DSP_ATTRIBUTES];
+ 	struct fastrpc_device *secure_fdevice;
+ 	struct fastrpc_device *fdevice;
+@@ -2507,9 +2510,90 @@ static const struct of_device_id fastrpc_poll_supported_machines[] __maybe_unuse
+ 	{},
+ };
+ 
++static struct device_node *fastrpc_get_rproc_node(struct device_node *node)
++{
++	struct device_node *parent, *rproc_node;
++
++	parent = of_get_parent(node);
++	if (!parent)
++		return NULL;
++
++	rproc_node = of_get_parent(parent);
++	of_node_put(parent);
++
++	return rproc_node;
++}
++
++static int fastrpc_remote_heap_map(struct device *rdev,
++				   struct device_node *rproc_node,
++				   phys_addr_t addr, u64 size)
++{
++	struct platform_device *rproc_pdev;
++	struct iommu_domain *domain;
++	int ret;
++
++	rproc_pdev = of_find_device_by_node(rproc_node);
++	if (!rproc_pdev) {
++		dev_err(rdev, "failed to find remoteproc platform device\n");
++		return -ENODEV;
++	}
++
++	domain = iommu_get_domain_for_dev(&rproc_pdev->dev);
++	if (!domain) {
++		put_device(&rproc_pdev->dev);
++		dev_err(rdev, "no IOMMU domain for remoteproc\n");
++		return -ENODEV;
++	}
++
++	ret = iommu_map(domain, addr, addr, size, IOMMU_READ | IOMMU_WRITE, GFP_KERNEL);
++	if (ret)
++		dev_err(rdev, "failed to map remote heap phys=0x%llx size=0x%llx err=%d\n",
++			(u64)addr, size, ret);
++
++	put_device(&rproc_pdev->dev);
++	return ret;
++}
++
++static void fastrpc_remote_heap_unmap(struct rpmsg_device *rpdev,
++				      phys_addr_t addr, u64 size)
++{
++	struct device_node *rproc_node;
++	struct platform_device *rproc_pdev;
++	struct iommu_domain *domain;
++	size_t unmapped;
++
++	rproc_node = fastrpc_get_rproc_node(rpdev->dev.of_node);
++	if (!rproc_node) {
++		dev_warn(&rpdev->dev, "failed to find remoteproc node for heap unmap\n");
++		return;
++	}
++
++	rproc_pdev = of_find_device_by_node(rproc_node);
++	of_node_put(rproc_node);
++	if (!rproc_pdev) {
++		dev_warn(&rpdev->dev, "failed to find remoteproc platform device for heap unmap\n");
++		return;
++	}
++
++	domain = iommu_get_domain_for_dev(&rproc_pdev->dev);
++	if (!domain) {
++		dev_warn(&rpdev->dev, "no IOMMU domain for remoteproc during heap unmap\n");
++		put_device(&rproc_pdev->dev);
++		return;
++	}
++
++	unmapped = iommu_unmap(domain, addr, size);
++	if (unmapped != size)
++		dev_warn(&rpdev->dev, "partial/failed heap unmap: requested=0x%llx unmapped=0x%zx\n",
++			 size, unmapped);
++
++	put_device(&rproc_pdev->dev);
++}
++
+ static int fastrpc_init_reserved_mem(struct fastrpc_channel_ctx *cctx,
+ 				     struct device *rdev, u32 domain_id)
+ {
++	struct device_node *rproc_node;
+ 	struct resource res;
+ 	u64 src_perms;
+ 	int err;
+@@ -2536,6 +2620,19 @@ static int fastrpc_init_reserved_mem(struct fastrpc_channel_ctx *cctx,
+ 	if (domain_id == ADSP_DOMAIN_ID) {
+ 		cctx->remote_heap_addr = res.start;
+ 		cctx->remote_heap_size = resource_size(&res);
++
++		rproc_node = fastrpc_get_rproc_node(rdev->of_node);
++		if (rproc_node)
++			cctx->use_iommu_map = of_property_present(rproc_node, "iommus");
++
++		if (cctx->use_iommu_map) {
++			err = fastrpc_remote_heap_map(rdev, rproc_node, res.start,
++						      resource_size(&res));
++			of_node_put(rproc_node);
++			return err;
++		}
++
++		of_node_put(rproc_node);
+ 	}
+ 
+ 	if (!cctx->vmcount)
+@@ -2611,7 +2708,7 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 		data->unsigned_support = false;
+ 		err = fastrpc_device_register(rdev, data, secure_dsp, domain);
+ 		if (err)
+-			goto err_free_data;
++			goto err_unmap_heap;
+ 		break;
+ 	case CDSP_DOMAIN_ID:
+ 	case GDSP_DOMAIN_ID:
+@@ -2619,7 +2716,7 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 		/* Create both device nodes so that we can allow both Signed and Unsigned PD */
+ 		err = fastrpc_device_register(rdev, data, true, domain);
+ 		if (err)
+-			goto err_free_data;
++			goto err_unmap_heap;
+ 
+ 		err = fastrpc_device_register(rdev, data, false, domain);
+ 		if (err)
+@@ -2627,7 +2724,7 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 		break;
+ 	default:
+ 		err = -EINVAL;
+-		goto err_free_data;
++		goto err_unmap_heap;
+ 	}
+ 
+ 	kref_init(&data->refcount);
+@@ -2655,6 +2752,11 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 	if (data->secure_fdevice)
+ 		misc_deregister(&data->secure_fdevice->miscdev);
+ 
++err_unmap_heap:
++	if (data->use_iommu_map && data->remote_heap_size)
++		fastrpc_remote_heap_unmap(rpdev, data->remote_heap_addr,
++					  data->remote_heap_size);
++
+ err_free_data:
+ 	kfree(data);
+ 	return err;
+@@ -2695,24 +2797,29 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
+ 	list_for_each_entry_safe(buf, b, &cctx->invoke_interrupted_mmaps, node)
+ 		list_del(&buf->node);
+ 
+-	if (cctx->remote_heap_size && cctx->vmcount) {
+-		u64 src_perms = 0;
+-		int err, i;
+-		struct qcom_scm_vmperm dst_perms;
+-
+-		for (i = 0; i < cctx->vmcount; i++)
+-			src_perms |= BIT(cctx->vmperms[i].vmid);
+-
+-		dst_perms.vmid = QCOM_SCM_VMID_HLOS;
+-		dst_perms.perm = QCOM_SCM_PERM_RWX;
+-
+-		err = qcom_scm_assign_mem(cctx->remote_heap_addr,
+-					  cctx->remote_heap_size, &src_perms,
+-					  &dst_perms, 1);
+-		if (err)
+-			dev_err(&rpdev->dev,
+-				"Failed to assign memory back to HLOS: addr %pa size %#llx err %d\n",
+-				&cctx->remote_heap_addr, cctx->remote_heap_size, err);
++	if (cctx->remote_heap_size) {
++		if (cctx->use_iommu_map) {
++			fastrpc_remote_heap_unmap(rpdev, cctx->remote_heap_addr,
++						  cctx->remote_heap_size);
++		} else if (cctx->vmcount) {
++			u64 src_perms = 0;
++			int err, i;
++			struct qcom_scm_vmperm dst_perms;
++
++			for (i = 0; i < cctx->vmcount; i++)
++				src_perms |= BIT(cctx->vmperms[i].vmid);
++
++			dst_perms.vmid = QCOM_SCM_VMID_HLOS;
++			dst_perms.perm = QCOM_SCM_PERM_RWX;
++
++			err = qcom_scm_assign_mem(cctx->remote_heap_addr,
++						  cctx->remote_heap_size, &src_perms,
++						  &dst_perms, 1);
++			if (err)
++				dev_err(&rpdev->dev,
++					"Failed to assign memory back to HLOS: addr %pa size %#llx err %d\n",
++					&cctx->remote_heap_addr, cctx->remote_heap_size, err);
++		}
+ 	}
+ 
+ 	of_platform_depopulate(&rpdev->dev);
 
->     - Link to v20: https://lore.kernel.org/all/20260415-msm-next-quad-pipe-split-v20-1-bc1fdf140b81@linaro.org/
-> 
-> 
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> index bd0e720b484fd..d586825015906 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> @@ -200,7 +200,7 @@ static int dpu_crtc_get_lm_crc(struct drm_crtc *crtc,
->  		struct dpu_crtc_state *crtc_state)
->  {
->  	struct dpu_crtc_mixer *m;
-> -	u32 crcs[CRTC_DUAL_MIXERS];
-> +	u32 crcs[CRTC_QUAD_MIXERS];
->  
->  	int rc = 0;
->  	int i;
-> @@ -1384,6 +1384,9 @@ static struct msm_display_topology dpu_crtc_get_topology(
->  	struct drm_display_mode *mode = &crtc_state->adjusted_mode;
->  	struct msm_display_topology topology = {0};
->  	struct drm_encoder *drm_enc;
-> +	struct msm_drm_private *priv = crtc->dev->dev_private;
-> +	struct dpu_kms *kms = to_dpu_kms(priv->kms);
+---
+base-commit: ef071c4906eb45d16b60f09154cf0bc6ec8f5435
+change-id: 20260930-fastrpc-kvm-iommu-v2-1a7d343ed802
 
-There is already a dpu_kms being passed to this function. Please drop.
+Best regards,
+--  
+Anandu Krishnan E <anandu.e@oss.qualcomm.com>
 
-> +	u32 num_rt_intf;
->  
->  	drm_for_each_encoder_mask(drm_enc, crtc->dev, crtc_state->encoder_mask)
->  		dpu_encoder_update_topology(drm_enc, &topology, crtc_state->state,
-> @@ -1396,32 +1399,48 @@ static struct msm_display_topology dpu_crtc_get_topology(
->  	 *
->  	 * Dual display
->  	 * 2 LM, 2 INTF ( Split display using 2 interfaces)
-> +	 * 4 LM, 2 INTF ( Split display using 2 interfaces and stream merge
-> +			  to support high resolution interfaces if virtual
-> +			  plane is enabled)
-> +	 * If DSC is enabled, use 2:2:2 for 2 LMs case, and 4:4:2 for 4 LMs
-> +	 * case.
->  	 *
->  	 * Single display
->  	 * 1 LM, 1 INTF
->  	 * 2 LM, 1 INTF (stream merge to support high resolution interfaces)
->  	 *
-> -	 * If DSC is enabled, use 2 LMs for 2:2:1 topology
-> +	 * If DSC is enabled, use 2 LMs for 2:2:1 topology for single display
-> +	 * to support legacy devices that use this topology. Use 1:1:1 topology
-> +	 * if there is only one DSC engine in SoC.
->  	 *
->  	 * Add dspps to the reservation requirements if ctm or gamma_lut are requested
-> -	 *
-> -	 * Only hardcode num_lm to 2 for cases where num_intf == 2 and CWB is not
-> -	 * enabled. This is because in cases where CWB is enabled, num_intf will
-> -	 * count both the WB and real-time phys encoders.
-> -	 *
-> -	 * For non-DSC CWB usecases, have the num_lm be decided by the
-> -	 * (mode->hdisplay > MAX_HDISPLAY_SPLIT) check.
->  	 */
->  
-> -	if (topology.num_intf == 2 && !topology.cwb_enabled)
-> -		topology.num_lm = 2;
-> -	else if (topology.num_dsc == 2)
-> -		topology.num_lm = 2;
-> -	else if (dpu_kms->catalog->caps->has_3d_merge &&
-> -		 topology.num_dsc == 0)
-> -		topology.num_lm = (mode->hdisplay > MAX_HDISPLAY_SPLIT) ? 2 : 1;
-> -	else
-> -		topology.num_lm = 1;
-> +	num_rt_intf = topology.num_intf;
-> +	if (topology.cwb_enabled)
-> +		num_rt_intf--;
-> +
-> +	if ((mode->hdisplay > (dpu_kms->catalog->caps->max_mixer_width * num_rt_intf)) ||
-> +	    ((u64)mode->hdisplay * mode->vtotal * drm_mode_vrefresh(mode) >
-> +	     kms->perf.max_core_clk_rate))
-> +		topology.num_lm = num_rt_intf * 2;
-> +	else {
-> +		topology.num_lm = (mode->hdisplay > MAX_HDISPLAY_SPLIT) ?
-> +				  2 : num_rt_intf;
-
-This becomes unreadable. Replace ternary with the if, make it a chain of
-if-else.
-
-> +	}
-> +
-> +	if (!dpu_use_virtual_planes ||
-> +	    dpu_kms->catalog->mdss_ver->core_major_ver < 5)
-> +		topology.num_lm = min(2, topology.num_lm);
-> +
-> +	if (!dpu_kms->catalog->caps->has_3d_merge)
-> +		topology.num_lm = min(num_rt_intf, topology.num_lm);
-> +
-> +	if (topology.num_dsc) {
-> +		if (num_rt_intf == 1)
-> +			topology.num_lm = min(2, dpu_kms->catalog->dsc_count);
-> +		topology.num_dsc = topology.num_lm;
-> +	}
->  
->  	if (crtc_state->ctm || crtc_state->gamma_lut)
->  		topology.num_dspp = topology.num_lm;
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.h
-> index 6eaba5696e8e6..455073c7025b0 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.h
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.h
-> @@ -210,7 +210,7 @@ struct dpu_crtc_state {
->  
->  	bool bw_control;
->  	bool bw_split_vote;
-> -	struct drm_rect lm_bounds[CRTC_DUAL_MIXERS];
-> +	struct drm_rect lm_bounds[CRTC_QUAD_MIXERS];
->  
->  	uint64_t input_fence_timeout_ns;
->  
-> @@ -218,10 +218,10 @@ struct dpu_crtc_state {
->  
->  	/* HW Resources reserved for the crtc */
->  	u32 num_mixers;
-> -	struct dpu_crtc_mixer mixers[CRTC_DUAL_MIXERS];
-> +	struct dpu_crtc_mixer mixers[CRTC_QUAD_MIXERS];
->  
->  	u32 num_ctls;
-> -	struct dpu_hw_ctl *hw_ctls[CRTC_DUAL_MIXERS];
-> +	struct dpu_hw_ctl *hw_ctls[CRTC_QUAD_MIXERS];
->  
->  	enum dpu_crtc_crc_source crc_source;
->  	int crc_frame_skip_count;
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-> index eba1d52211f68..058a7c8727f7c 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
-> @@ -55,7 +55,7 @@
->  #define MAX_PHYS_ENCODERS_PER_VIRTUAL \
->  	(MAX_H_TILES_PER_DISPLAY * NUM_PHYS_ENCODER_TYPES)
->  
-> -#define MAX_CHANNELS_PER_ENC 2
-> +#define MAX_CHANNELS_PER_ENC 4
->  #define MAX_CWB_PER_ENC 2
->  
->  #define IDLE_SHORT_TIMEOUT	1
-> @@ -661,7 +661,6 @@ void dpu_encoder_update_topology(struct drm_encoder *drm_enc,
->  	struct dpu_encoder_virt *dpu_enc = to_dpu_encoder_virt(drm_enc);
->  	struct msm_drm_private *priv = dpu_enc->base.dev->dev_private;
-
-Unused (and triggers a warning).
-
->  	struct msm_display_info *disp_info = &dpu_enc->disp_info;
-> -	struct dpu_kms *dpu_kms = to_dpu_kms(priv->kms);
->  	struct drm_connector *connector;
->  	struct drm_connector_state *conn_state;
->  	struct drm_framebuffer *fb;
-> @@ -675,22 +674,12 @@ void dpu_encoder_update_topology(struct drm_encoder *drm_enc,
->  
->  	dsc = dpu_encoder_get_dsc_config(drm_enc);
->  
-> -	/* We only support 2 DSC mode (with 2 LM and 1 INTF) */
-> -	if (dsc) {
-> -		/*
-> -		 * Use 2 DSC encoders, 2 layer mixers and 1 or 2 interfaces
-> -		 * when Display Stream Compression (DSC) is enabled,
-> -		 * and when enough DSC blocks are available.
-> -		 * This is power-optimal and can drive up to (including) 4k
-> -		 * screens.
-> -		 */
-> -		WARN(topology->num_intf > 2,
-> -		     "DSC topology cannot support more than 2 interfaces\n");
-> -		if (topology->num_intf >= 2 || dpu_kms->catalog->dsc_count >= 2)
-> -			topology->num_dsc = 2;
-> -		else
-> -			topology->num_dsc = 1;
-> -	}
-> +	/*
-> +	 * Set DSC number as 1 to mark the enabled status, will be adjusted
-> +	 * in dpu_crtc_get_topology()
-> +	 */
-> +	if (dsc)
-> +		topology->num_dsc = 1;
->  
->  	connector = drm_atomic_get_new_connector_for_encoder(state, drm_enc);
->  	if (!connector)
-> @@ -2180,8 +2169,8 @@ static void dpu_encoder_helper_reset_mixers(struct dpu_encoder_phys *phys_enc)
->  {
->  	int i, num_lm;
->  	struct dpu_global_state *global_state;
-> -	struct dpu_hw_blk *hw_lm[2];
-> -	struct dpu_hw_mixer *hw_mixer[2];
-> +	struct dpu_hw_blk *hw_lm[MAX_CHANNELS_PER_ENC];
-> +	struct dpu_hw_mixer *hw_mixer[MAX_CHANNELS_PER_ENC];
->  	struct dpu_hw_ctl *ctl = phys_enc->hw_ctl;
->  
->  	/* reset all mixers for this encoder */
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys.h
-> index 61b22d9494546..09395d7910ac8 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys.h
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys.h
-> @@ -302,7 +302,7 @@ static inline enum dpu_3d_blend_mode dpu_encoder_helper_get_3d_blend_mode(
->  
->  	/* Use merge_3d unless DSC MERGE topology is used */
->  	if (phys_enc->split_role == ENC_ROLE_SOLO &&
-> -	    dpu_cstate->num_mixers == CRTC_DUAL_MIXERS &&
-> +	    (dpu_cstate->num_mixers != 1) &&
-
-I think here you should be comparing to 'phys_enc->split_role ==
-ENC_ROLE_SOLO ? 1 : 2'. Add separate variable for it.
-
->  	    !dpu_encoder_use_dsc_merge(phys_enc->parent))
->  		return BLEND_3D_H_ROW_INT;
->  
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-> index ba04ac24d5a9e..b1ac84c0b52db 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
-> @@ -24,7 +24,7 @@
->  #define DPU_MAX_IMG_WIDTH 0x3fff
->  #define DPU_MAX_IMG_HEIGHT 0x3fff
->  
-> -#define CRTC_DUAL_MIXERS	2
-> +#define CRTC_QUAD_MIXERS	4
->  
->  #define MAX_XIN_COUNT 16
->  
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-> index 0e65bf5ddc4a6..fd1f3e7982062 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-> @@ -34,7 +34,7 @@
->  #define DPU_MAX_PLANES			4
->  #endif
->  
-> -#define STAGES_PER_PLANE		1
-> +#define STAGES_PER_PLANE		2
->  #define PIPES_PER_STAGE			2
->  #define PIPES_PER_PLANE			(PIPES_PER_STAGE * STAGES_PER_PLANE)
->  #ifndef DPU_MAX_DE_CURVES
-> 
-> ---
-> base-commit: a913d08e5ea9a491b806e64a24410f6722ddc9b3
-> change-id: 20260121-msm-next-quad-pipe-split-ab95b6e3ffd3
-> 
-> Best regards,
-> -- 
-> Jun Nie <jun.nie@linaro.org>
-> 
-
--- 
-With best wishes
-Dmitry
