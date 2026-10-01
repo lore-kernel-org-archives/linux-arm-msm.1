@@ -1,46 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87E603E2AD7
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:32:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8991726656D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:33:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790839933; cv=none; b=Er9IFYQ/fgAKd5j7K6jT2gE6BGIF0TcgFbLHUmk8aS55dORc9hl2no9st0QU4hBSmhTrpwHoZjl3rLP5AVWpl4sOFO/C9DXSWHUHad5RYNPC5rXEKiGpmGCFYh8sBbWT2Y0t0ww7f9oBVuoyz+Rp6MRMUYTZPmknBiZqGrqcGTA=
+	t=1790840017; cv=none; b=iv2msBl7nTssR0nH/H1WbsmKvpM7IlAcCJcYUgfbRJC4XP/Jduhr1Z58A/qEFA+W03Zw+UGDX601fgDwHmcj+heA6cHIsQv8c9vRe73PId8eSnYG7ZYCd8JJgcHEcOkqOTI48EbZmD8eNH46FI3NlvYr3wUEDfmRq+5W8aZwex0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790839933; c=relaxed/simple;
-	bh=ELdBCMU5f7/O4ZMIta9o4UVKjIIZnw/X5SSJeT3GM90=;
+	s=arc-20240116; t=1790840017; c=relaxed/simple;
+	bh=prgThMa3RDaqzpouVznTJCw2SnOG3567R/8UJXmM108=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=h5SUp0WZcd3v4o0+U/VSTiyCCun2xyq/nSiqoik6rOgfAgporEU46k3d9pBB9WY5CGUJ2skupQmOIX+YO4IlT7EFGURDVqFGPPuxqNTkrlQuW9XDp7cRLeEEbcssutpmzqySObfWPAl0H5a8ElVibm2aHbJ2Vu3jTgFyNtkrIig=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m9ED6Xoy; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=qgLsk2BjXeFBV1R1Bhxmfr2SG+vUS7m05rwD58PbjjBz4NQ4EutsqWyuAGqGbyKM4ItfX6Y0mp84Z64U2JL+E8bePS2SPEzVvne9Q6OewGKJ1YweREV1YILo5s0Mzpxgi0m0WvRBiqVkp29Cok22Bvc8RaVYx7vd5bUR8iVLpM0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QTZR654g; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m9ED6Xoy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C92631F00A0B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:32:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QTZR654g"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 516A71F0089D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:33:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790839930;
-	bh=ELdBCMU5f7/O4ZMIta9o4UVKjIIZnw/X5SSJeT3GM90=;
+	s=k20260515; t=1790840014;
+	bh=6/ClGyojAdsXGc/BQReGBNWEln4ElamcBkeTBZDQp5g=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=m9ED6XoyFU6f6NSxPdVX7ZgGtbARjsD/CvfZD8tuhOkiZ6dKnPRKSRSktb3gLidmc
-	 VPbCeYi2IKHwWOv9a94mqT6hb1QyGGIuQBER4nXjiOTZRozsX037c2spwbLmYAMdft
-	 hSocy81uy0QFI/ZtDOvX28+07QuujnXHssLX3bpIUqE7ULrFoS3pV03E333y7RCNzK
-	 HsH5YwqLVDE8Ag8eULAvrQkln7YBVbnRdOZn5XnVa80W1ViRxENJZnXfTYVrjFagcy
-	 G3vUUO2AFJbwfAf2/N1XRAUG8lpRgJF09f4ryfCh5u+wg5DjSHuu95Tq7PJHOpKRZi
-	 qrKAsvE+hguKQ==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3d90ac37so1785370e87.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 00:32:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBw5kIEsyZmAoyULAgY5Bq6C0lk+XgMvh0R+7H2TfmBU7WvdRfpnr7psvs0QbxlxLOLLZnure56nLu0G3oqo@vger.kernel.org
-X-Gm-Message-State: AFq9FYJw+UIoy6jCc3lIuq+gtL6nGFI0TkwNLl8/84y+oM1Gh0bgf6nc
-	6rct1tSnbNtFhx0LwLyEmCHlA+Fe7UqtysJmAcUBvyyxWgF4k0y8lYZJII2JqWTu6QVYaU2KyCj
-	5LLsNjLLd+x/CB1FtB0DZn43xQeHXA59SFevyvkoNcQ==
-X-Received: by 2002:ac2:42d0:0:b0:5b8:f97f:7a22 with SMTP id
- 2adb3069b0e04-5ba405ec7a1mr1161789e87.54.1790839929167; Thu, 01 Oct 2026
- 00:32:09 -0700 (PDT)
+	b=QTZR654gJuawsV8WQZ4S2cC9ejU9u172RDHPIMUmSJPwuBAhJguLbYrAKBO3SfVlZ
+	 sm74izZzPBFgtQhlIPjpVxWhVJCKuN/R2lfulXvfbJl2xU1LNeBY0FjcBWTs1WZQ1J
+	 rj4XeWHTMG6PM1/8VznK7/Hi2znJdpa43ADDo1Jps9FRbWuOwp8HjUXVk+e4pHkduJ
+	 17TI3DWeiSk4R1y6gYZMjzCpZWeuGhKEQz5rWDvEc0OytmT3RN5urWPWZhdiqgwHH+
+	 BRfQQkN6gNDz35un6zsZd4eKnJZbsNV4ZM0dRbKTIYEufYBw4TgZbNBrbgSisY6ywf
+	 3hO6xBRepmygQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3e27d525so1263143e87.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 00:33:34 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBza9UKMUC7ZlkgrZVDq3+4wBS7Mh7ssuosOmIn8twUUJPARlMG6Hl8P+UbncYIfEVA/cZylYJ75dJiJ8mPz@vger.kernel.org
+X-Gm-Message-State: AFq9FYJbNyYnUOXo5GR+Wqn+ffFodvt/SBnCw44tS5CIAldgTQ0EsPyh
+	a57z++qhUyxaJ23cfaJKzjdS2Ueg6chWa9yJciNnL/V1NPddOCaX1DmGWRVp2FphfJ5uMgwBkAD
+	JSq9xtHEnM9Z9ltkQS1nV3+bnwFY3qhwbpdw5I+BCjw==
+X-Received: by 2002:a05:6512:2115:b0:5b8:f4ad:6e49 with SMTP id
+ 2adb3069b0e04-5ba402b86b1mr998420e87.8.1790840013059; Thu, 01 Oct 2026
+ 00:33:33 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 Oct 2026 10:32:07 +0300
+ HTTPREST; Thu, 1 Oct 2026 10:33:32 +0300
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 Oct 2026 10:32:07 +0300
+ HTTPREST; Thu, 1 Oct 2026 10:33:32 +0300
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260930163334.60b4a88c@kernel.org>
+In-Reply-To: <20260930163217.4003d232@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,13 +48,13 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260923-qcom-sa8255p-emac-v15-0-e82f33720737@oss.qualcomm.com>
- <20260923-qcom-sa8255p-emac-v15-1-e82f33720737@oss.qualcomm.com> <20260930163334.60b4a88c@kernel.org>
-Date: Thu, 1 Oct 2026 10:32:07 +0300
-X-Gmail-Original-Message-ID: <CAMRc=MeUx2iHf8-d9yjZZ=n7VaG_GROvO2dW-bxavAS+XbGMFg@mail.gmail.com>
-X-Gm-Features: AclHuK8P_ZwjJ__3SNp9LNTCdpGSDaQAP4RQWoM4JsBj1lq1vbQDeX8sSTrNEMU
-Message-ID: <CAMRc=MeUx2iHf8-d9yjZZ=n7VaG_GROvO2dW-bxavAS+XbGMFg@mail.gmail.com>
-Subject: Re: [PATCH net-next v15 1/9] net: phy: aquantia: fix system interface
- type not updated in forced mode
+ <20260923-qcom-sa8255p-emac-v15-3-e82f33720737@oss.qualcomm.com> <20260930163217.4003d232@kernel.org>
+Date: Thu, 1 Oct 2026 10:33:32 +0300
+X-Gmail-Original-Message-ID: <CAMRc=MfEHHny4x8pi-M-WqvcTxFY+98TvRa1jFTKQBjYCzy8FQ@mail.gmail.com>
+X-Gm-Features: AclHuK_lOavdmNlSvx0sNUPmny1qPtgCYs4QE7hryCERWbwB8_l7zIoUuzlYZiM
+Message-ID: <CAMRc=MfEHHny4x8pi-M-WqvcTxFY+98TvRa1jFTKQBjYCzy8FQ@mail.gmail.com>
+Subject: Re: [PATCH net-next v15 3/9] phy: qcom: add the SGMII SerDes PHY
+ driver for SCMI systems
 To: Jakub Kicinski <kuba@kernel.org>
 Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
 	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
@@ -77,38 +77,33 @@ Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.or
 	linux-mips@vger.kernel.org, imx@lists.linux.dev, 
 	linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
 	sophgo@lists.linux.dev, linux-riscv@lists.infradead.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, stable@vger.kernel.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
 	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, 1 Oct 2026 01:33:34 +0200, Jakub Kicinski <kuba@kernel.org> said:
-> On Wed, 23 Sep 2026 17:14:35 +0200 Bartosz Golaszewski wrote:
->> aqr_gen1_read_status() decodes the MDIO_PHYXS_VEND_IF_STATUS register
->> to determine which SerDes interface the PHY is currently using on its
->> system side and stores the result in phydev->interface. phylink relies
->> on this value to configure the MAC.
+On Thu, 1 Oct 2026 01:32:17 +0200, Jakub Kicinski <kuba@kernel.org> said:
+> On Wed, 23 Sep 2026 17:14:37 +0200 Bartosz Golaszewski wrote:
+>> Implement support for the firmware-managed SGMII/SerDes PHY present on
+>> Qualcomm platforms. Do this as a separate driver from the HLOS-managed
+>> variant as they don't share almost any code.
 >>
->> The autoneg == AUTONEG_DISABLE check is not correct:
->> MDIO_PHYXS_VEND_IF_STATUS is set by the PHY firmware based on the
->> negotiated link speed, not based on whether autoneg was used to reach
->> it. When the link comes up at 1G in forced mode, the register correctly
->> reads SGMII, but the early return prevents phydev->interface from being
->> updated. It stays at whatever value it held before (typically 2500BASE-X
->> from the initial autoneg run), so phylink configures the MAC for the
->> wrong interface and the link cannot come up.
->>
->> Remove the autoneg guard so that the system interface type is always
->> decoded when the link is up.
->>
->> Cc: stable@vger.kernel.org
->> Fixes: 110a2432c520 ("net: phy: aquantia: add downshift support")
 >> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> ---
+>>  drivers/phy/qualcomm/Kconfig                   |  10 +++
+>>  drivers/phy/qualcomm/Makefile                  |   1 +
+>>  drivers/phy/qualcomm/phy-qcom-sgmii-eth-scmi.c | 117 +++++++++++++++++++++++++
+>>  3 files changed, 128 insertions(+)
 >
-> Sounds like a real regression, is it? Should we ship it to Linus
-> tomorrow so that it makes 7.3? stable + next does not compute for me
+> Hmm, why is this here? is there a hard dependency?
+> Otherwise it'd be better to send it separately out to Vinod,
+> this is drivers/phy after all.
 >
 
-Yes, this is independent from the rest of the series and a small fix. It sounds
-good to send it upstream ASAP.
+Heh, it's always the same question of whether to split larger series into
+per-subsystem threads or keep them together in order to provide the full
+picture and let maintainers pick up subsets of patches. I've been yelled at
+for doing both in the past. :)
+
+Ok, I'll split the next iteration into smaller chunks.
 
 Bart
