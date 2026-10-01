@@ -1,249 +1,143 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D37FF331209;
-	Thu,  1 Oct 2026 12:47:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 359694A7CAC
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 12:50:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790858875; cv=none; b=d+3xdIr7u37Iub5rCpq5ddVcCyuy32WgYJlClNWjKJcAzMO6qm4j+2ouyjolM6RNiVCarWHil5/ROBUZA1xfUQVxFX2vz5vUBZhPhh+1EmDdbv0V6elWmDCQk+5g+eNBWIGpigGHTNOKIveMujySsIW8USfRmYbJ4BP2bRiiPas=
+	t=1790859055; cv=none; b=a9RZo/nwWoc+IjkLYb89tthzPlqCWeuHC/omZrSiqvJ/QxAeRqbf7HejzrIenFhkUG8pBNi58C9Kyd1GKFueCJPUyM8QMDwQqq+uBbJ8UfuzKQzhBNjtmjl5RyXKQt597oCjhANknR4x0jpjN+6LW+l+EhiX520+5bWlqqyRnl0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790858875; c=relaxed/simple;
-	bh=C/a+BCNKjiJqGxIvspHg8Oa9sIw0CltanatdAqCPbuo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fx/uKiix+wCyFsmNWvWrkCWEUTGn8BiztLF5Yz2Lzxy2KQgD0Lw38gOSjEYklGwnL+Tk7ZZcbRooRRnbXI6G0pbq1j3vDuuRYU58ECMlHfdwfwykWpn6ErcWFJ06Vg8DwI5r08oP2Wf30WrOvSy1QGGGRen+OcOx+uNIiIYO7+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yfqn/mBu; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790859055; c=relaxed/simple;
+	bh=qsNumoTBSrwUbU7OFJ613pVZJ7eY+2K0f3zdIYvMA/g=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uq/kx/XQvb/ZvxdF9k+kOnENyP8leHlTZK9UOoxC1ubKP8HOk3QOSR1mZfzQQffQ8laDTcECsPl7eHokDxLRL281NKFGDYXP0CmHpujC+wOP7VTaQ+aiwKBIYNEBhw7UckubVn3ZR401KnQ8UX7jTQPB46iuinIO2tK+k5pEqzw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JUTKbEZT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ttke/296; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yfqn/mBu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 031961F000FF;
-	Thu,  1 Oct 2026 12:47:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790858873;
-	bh=HM9xaKm75iHB1jueHcwqdbWn6Lp/O/gNvxajH9JPnTs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Yfqn/mBuWdeWEsetuiGqwLPvVWz//IiDPGDY3lR30HJk86SG//Zq56vprY9rv5PiA
-	 CUeFTPzjwQqQl4yp7apsr72dK3a2C4jdPpFQeOTW7MWxp7z3XMP+DDK7v6y+oR2HjN
-	 NmdR1LN6b7m8Cf1mr7LVjsUw7m9Ok0Opfv6RN2yK3MZoGbTOMGE1gld85gJbW5yPsE
-	 MoSqGS06yKOl2743R/CDYQEki8DTdHmIhQlLd3/as/ABRb1RejWA6SGVUx/DZInJyt
-	 tX2YNw9NrRANrw9V2LsqVxxKG4xm2nwTupAstRwflxJ1agEl/soQZRb1r1a7ecbrod
-	 NSSrraJqfesCA==
-Date: Thu, 1 Oct 2026 18:17:46 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Basant Kumar <basantk@qti.qualcomm.com>,
-	Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-	Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 3/6] tee: qcomtee: Allow object invokes from kernel
- clients
-Message-ID: <ar5Wcpom0Ex29Sl5@sumit-xelite>
-Mail-Followup-To: Harshal Dev <harshal.dev@oss.qualcomm.com>,
-	Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Basant Kumar <basantk@qti.qualcomm.com>,
-	Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-	Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-References: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-0-13df5c20c2e3@oss.qualcomm.com>
- <20261001-qcom_uefisecapp_migrate_qcomtee-v3-3-13df5c20c2e3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JUTKbEZT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ttke/296"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xSbn1289152
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 12:50:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	GVRR6552Q7i6toyIteovKxKFPdp0Ro8m7DKjvVzJGL8=; b=JUTKbEZTXKMh5x3v
+	VcOxq+OX0snveClbfS8PvAGvErOeT3BQHd5pgUONLYyycNhzpGxkuouNV9W6xzrq
+	USF5+RCJwCcnv6BAgJQ4pJZtsIPR87M72cUQPvx3viLPnOTGlS40pZZNcl9IFa9F
+	uaw5pjE5wHHx+7fP7Lyzv8Wup5qjbm1GsRj31a9vHj2IBEiXaoIsyeyGcAHai3ad
+	0dEPM/hgMCwgDiSZkx3sY1WYDtMCFko9J5lMVzxl3AdKo2NwAhGqIF5lbsUvoCDv
+	jNJ6yuYZL4za2zOmMozq5QCVq5c9C5658t2+JuOm0GqVN8ICH11KYdueKfHhndHH
+	usIV/Q==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17pjc0es-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 12:50:53 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cc19d8e59so3965685a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 05:50:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790859052; x=1791463852; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GVRR6552Q7i6toyIteovKxKFPdp0Ro8m7DKjvVzJGL8=;
+        b=Ttke/2963NoQMVMmxF+umV0oyGF7XgvktodBhviBNl2pO0UnufonHE8QWovuG9K3pI
+         UQ9ThdSSw4zdXIPrYXBsFSupF0wjMWK1ohe0bV9P3R2qNA3erkq2UQXeBj6li076w9DP
+         R7rLM0gICiS4Sa059UL8wR331f3cfU6ZflrdxhpLJVWVfDITIxzhAvydRRFa6FNsusVy
+         8zB91ZCBq33EN8O+8GWM0H3CV4A0DWSLIpJEAFRuUTHHm3GE/8AjPP+o+MJM5UVgnwHO
+         0ZFCdInd8+SH3muP2fylf/ceGY+5XIW3PBhIV9nHmCqXvargC0YwmMstrr3GyCRow5vP
+         o+SQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790859052; x=1791463852;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GVRR6552Q7i6toyIteovKxKFPdp0Ro8m7DKjvVzJGL8=;
+        b=T8B/xscg+DaxtkiktZTk3DIFZzcj5pMWuFyu6A5OrW6PPPxsxVM9v+W3VnMZ0k+S4J
+         Qjo6VkjEJ1EM/Vvyz1PibEul8Fyf2F40aZRChEyijFdlVTz1Fysw0ncccYrsZqvmlSjA
+         ODefInSy7NaeRSp26elDb4B/IkHZ1N2rKyj2010WU6bdgyB5SjXaxsAKeQ3MJpNOWlki
+         vuOdXabSasQcVBFj7b9hCk7RWoeEgmRASL+3yxfPzX8dSx4nHmyGAbhgZu1n9u8y/+RT
+         ptKLWxwotgsWI0JXq/cIkYkXUMNlwnIs4C5EVammnSX4se8Xy6Gjg7c9okbelSbmBZRz
+         JAWA==
+X-Forwarded-Encrypted: i=1; AKwUvBx89Hi/fNOrxq2yRVHReoUo1jOelL6YnWjH0Q8Vo3R/ThYzB8DUgN7O4mqegfgw/W1rRbgThaS6HXJANxTB@vger.kernel.org
+X-Gm-Message-State: AFuF++lZrLGS1lQ8FQ/gJl6hN/wCLiru22r1NVR/j1jdd8SttQy5IZBj
+	GS4iWN0mf9+dTVyumC4w8blPWMmZJlNLRV7dRuAVTbz74wEqwxnEOWTtrSDzEmsHYMD+MHsoioq
+	aLGVmxT/IqpQ5YjmFpRHXDPACyNBBahbWUtaQ/Ekdmo/zEd1if8x69esuDGbo5Fy+R/9Q
+X-Gm-Gg: AYBFou1O4NRJ0FppqxjM3w3wGRY3aEl3nB/FA5H0JyWAJbF5Y15NePyomuwF5reQJQT
+	L1hgXqwycjDWjf8kj8SCpQ5xdA9MLf3ECNGwrWUYau+S5NtZgIs8JA4FEIQFwRoeDGleC3UFUSu
+	0oKW+o/vEElRL30i/L/8n+Gtw34lefXX7jBTVquN+yvAx6BLZ93EGbtCQyBuU5lTcwXmeCqMUhs
+	muJBbAbK8qztNQVaa4ZXyknb8U0HZ6C832Zqfumk1zMCzpz6T1jGusvZEb6WAXeRIunV1kQDpjk
+	ImbS8YtZAK4SLyX5SAhInNNFIAp0NCJyaygddJBpKMN8Pibs16EcxkXJfsUd4hDOnqIaFv0gUwY
+	BXZzEWtHYksGuljLhQzef8Q==
+X-Received: by 2002:a05:620a:4714:b0:93c:6c6e:1770 with SMTP id af79cd13be357-93ca95164f2mr826925285a.1.1790859052094;
+        Thu, 01 Oct 2026 05:50:52 -0700 (PDT)
+X-Received: by 2002:a05:620a:4714:b0:93c:6c6e:1770 with SMTP id af79cd13be357-93ca95164f2mr826917785a.1.1790859051341;
+        Thu, 01 Oct 2026 05:50:51 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2e333b8bb1sm139289066b.21.2026.10.01.05.50.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Oct 2026 05:50:50 -0700 (PDT)
+Message-ID: <e3e8b0b5-3da8-47bc-80d6-c47edf153d32@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 14:50:49 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-3-13df5c20c2e3@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] MAINTAINERS: add git tree for the Qualcomm pin control
+ entry
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Linus Walleij <linusw@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, brgl@kernel.org
+References: <20261001123730.12157-1-bartosz.golaszewski@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261001123730.12157-1-bartosz.golaszewski@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=eqpKXYpX c=1 sm=1 tr=0 ts=6abe572d cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=kjj55Q4xDMlVXKy7ifgA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: Z575L8oaOCO3Gr41x9Z7iSlo6q3NfmaS
+X-Proofpoint-ORIG-GUID: Z575L8oaOCO3Gr41x9Z7iSlo6q3NfmaS
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA1MSBTYWx0ZWRfX1MHSQmpqfN0N
+ D700D4SZrvUsoQts4mpVfXm7EDokeeYfEOal971IDUWjispyHIcuPkQZ7++Jw3q3IEhdUMer4Hl
+ yXY4kx+7ddg+MbHaUcsnn823bfSLTeM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA1MSBTYWx0ZWRfX2PLiKaNrvKIU
+ 7HSxshYpW/0X6UBBijNadVSfZGIrhgC+IS0JTl+ECd9FF3d/fPh0Pf7zONBkL/1Y8TWI+Du7Bt7
+ me0QKnPPT7oZtR7WpslE+0XWakc83rgDfGOV36NpMxr7JRAUeLKVYxBZdZ07NcqpOuRkrzzUR6V
+ tZog2JKpT3OBlx0kGh3IP9VMKF+7xNJH5jy7u+IrlPB4Sj424q0/nlX9RdjylkwA90njDDOd5wi
+ Ho9WQbKRba2cw6leDOSa8qyqVupb07Mm0yPqNMuwd3d/cJp25pIH3GOV/VJyEPbcPgbNlKN1ylb
+ hXJUfNWWZ5oK84wD9+HIbK794RcPcjFXxqLax/2mJo8AClRwntm+0Zg0ElswMD6M/CVc2s1jruy
+ UtTiYhVFpt1DppuxQ/odKvCZYaMBGBc+PSHFEJSuqoj5/jWKMjO91OYtZhCt5nwMco/ZMpCA/PA
+ TcA6ztEZTO/+7GHU4Uw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 clxscore=1015 malwarescore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010051
 
-On Thu, 01 Oct 2026 at 16:32:35 +0530, Harshal Dev wrote:
->From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->
->QCOMTEE currently treats UBUF parameters as userspace addresses and
->applies userspace restrictions when invoking the root object. This is
->not suitable for object invocation requests issued by kernel clients.
->
->Use the kernel_ctx flag to distinguish kernel client requests from
->userspace requests. For kernel contexts, do not mark UBUF parameters as
->user addresses, and allow permitted root-object operations to proceed
->without applying the userspace-only checks.
->
->This allows in-kernel users of tee_client_object_invoke_func() to issue
->object invocation requests through the qcomtee backend.
->
->Co-developed-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->---
-> drivers/tee/qcomtee/call.c           | 34 +++++++++++++++++++++++-----------
-> drivers/tee/qcomtee/qcomtee_object.h |  5 +++--
-> include/linux/tee_drv.h              |  5 ++++-
-> 3 files changed, 30 insertions(+), 14 deletions(-)
+On 10/1/26 2:37 PM, Bartosz Golaszewski wrote:
+> I stage Qualcomm pin control changes in my own tree before sending them
+> upstream to Linus Walleij. Add a git URL to the MAINTAINERS entry.
+> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
--Sumit
-
->
->diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
->index a0f2992c0611..b361d9c04de0 100644
->--- a/drivers/tee/qcomtee/call.c
->+++ b/drivers/tee/qcomtee/call.c
->@@ -202,7 +202,7 @@ int qcomtee_objref_from_arg(struct tee_param *param, struct qcomtee_arg *arg,
->  */
-> static int qcomtee_params_to_args(struct qcomtee_arg *u,
-> 				  struct tee_param *params, int num_params,
->-				  struct tee_context *ctx)
->+				  struct qcomtee_object_invoke_ctx *oic)
-> {
-> 	int i;
->
->@@ -210,8 +210,14 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
-> 		switch (params[i].attr) {
-> 		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
-> 		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
->-			u[i].flags = QCOMTEE_ARG_FLAGS_UADDR;
->-			u[i].b.uaddr = params[i].u.ubuf.uaddr;
->+			if (oic->kernel_ctx) {
->+				u[i].flags = 0;
->+				u[i].b.addr = params[i].u.ubuf.addr;
->+			} else {
->+				u[i].flags = QCOMTEE_ARG_FLAGS_UADDR;
->+				u[i].b.uaddr = params[i].u.ubuf.uaddr;
->+			}
->+
-> 			u[i].b.size = params[i].u.ubuf.size;
->
-> 			if (params[i].attr ==
->@@ -223,7 +229,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
-> 			break;
-> 		case TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT:
-> 			u[i].type = QCOMTEE_ARG_TYPE_IO;
->-			if (qcomtee_objref_to_arg(&u[i], &params[i], ctx))
->+			if (qcomtee_objref_to_arg(&u[i], &params[i], oic->ctx))
-> 				goto out_failed;
->
-> 			break;
->@@ -270,7 +276,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
->  */
-> static int qcomtee_params_from_args(struct tee_param *params,
-> 				    struct qcomtee_arg *u, int num_params,
->-				    struct tee_context *ctx)
->+				    struct qcomtee_object_invoke_ctx *oic)
-> {
-> 	int i, np;
->
->@@ -288,7 +294,8 @@ static int qcomtee_params_from_args(struct tee_param *params,
-> 			break;
-> 		case QCOMTEE_ARG_TYPE_OO:
-> 			/* TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT */
->-			if (qcomtee_objref_from_arg(&params[np], &u[np], ctx))
->+			if (qcomtee_objref_from_arg(&params[np], &u[np],
->+						    oic->ctx))
-> 				goto out_failed;
->
-> 			break;
->@@ -304,7 +311,7 @@ static int qcomtee_params_from_args(struct tee_param *params,
-> 	/* Undo qcomtee_objref_from_arg(). */
-> 	for (i = 0; i < np; i++) {
-> 		if (params[i].attr == TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT)
->-			qcomtee_context_del_qtee_object(&params[i], ctx);
->+			qcomtee_context_del_qtee_object(&params[i], oic->ctx);
-> 	}
->
-> 	/* Release any IO and OO objects not processed. */
->@@ -357,7 +364,8 @@ static int qcomtee_params_check(struct tee_param *params, int num_params)
-> }
->
-> /* Check if an operation on ROOT_QCOMTEE_OBJECT from userspace is permitted. */
->-static int qcomtee_root_object_check(u32 op, struct tee_param *params,
->+static int qcomtee_root_object_check(struct qcomtee_object_invoke_ctx *oic,
->+				     u32 op, struct tee_param *params,
-> 				     int num_params)
-> {
-> 	/* Some privileged operations recognized by QTEE. */
->@@ -366,6 +374,9 @@ static int qcomtee_root_object_check(u32 op, struct tee_param *params,
-> 	    op == QCOMTEE_ROOT_OP_ADCI_SHUTDOWN)
-> 		return -EINVAL;
->
->+	if (oic->kernel_ctx)
->+		return 0;
->+
-> 	/*
-> 	 * QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS is to register with QTEE
-> 	 * by passing a credential object as input OBJREF. TEE_OBJREF_NULL as a
->@@ -429,7 +440,8 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
-> 	/* Get an object to invoke. */
-> 	if (arg->id == TEE_OBJREF_NULL) {
-> 		/* Use ROOT if TEE_OBJREF_NULL is invoked. */
->-		if (qcomtee_root_object_check(arg->op, params, arg->num_params))
->+		if (qcomtee_root_object_check(oic, arg->op, params,
->+					      arg->num_params))
-> 			return -EINVAL;
->
-> 		object = ROOT_QCOMTEE_OBJECT;
->@@ -437,7 +449,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
-> 		return -EINVAL;
-> 	}
->
->-	ret = qcomtee_params_to_args(u, params, arg->num_params, ctx);
->+	ret = qcomtee_params_to_args(u, params, arg->num_params, oic);
-> 	if (ret)
-> 		goto out;
->
->@@ -455,7 +467,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
->
-> 	if (!result) {
-> 		/* Assume service is UNAVAIL if unable to process the result. */
->-		if (qcomtee_params_from_args(params, u, arg->num_params, ctx))
->+		if (qcomtee_params_from_args(params, u, arg->num_params, oic))
-> 			result = QCOMTEE_MSG_ERROR_UNAVAIL;
-> 	} else {
-> 		/*
->diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomtee/qcomtee_object.h
->index 5f40617361fc..d3740099fae0 100644
->--- a/drivers/tee/qcomtee/qcomtee_object.h
->+++ b/drivers/tee/qcomtee/qcomtee_object.h
->@@ -113,8 +113,9 @@ struct qcomtee_buffer {
->  * @b: address and size if the type of argument is a buffer.
->  * @o: object instance if the type of argument is an object.
->  *
->- * &qcomtee_arg.flags only accepts %QCOMTEE_ARG_FLAGS_UADDR for now, which
->- * states that &qcomtee_arg.b contains a userspace address in uaddr.
->++ * If %QCOMTEE_ARG_FLAGS_UADDR is set in &qcomtee_arg.flags then it implies
->++ * that &qcomtee_arg.b contains a userspace address in uaddr.
->++ * Otherwise, &qcomtee_arg.b contains a kernel address in addr.
->  */
-> struct qcomtee_arg {
-> 	enum qcomtee_arg_type type;
->diff --git a/include/linux/tee_drv.h b/include/linux/tee_drv.h
->index 369c87ad0205..367208210a32 100644
->--- a/include/linux/tee_drv.h
->+++ b/include/linux/tee_drv.h
->@@ -83,7 +83,10 @@ struct tee_param_memref {
-> };
->
-> struct tee_param_ubuf {
->-	void __user *uaddr;
->+	union {
->+		void *addr;
->+		void __user *uaddr;
->+	};
-> 	size_t size;
-> };
->
->
->-- 
->2.34.1
->
+Konrad
