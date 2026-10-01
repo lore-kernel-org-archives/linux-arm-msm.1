@@ -1,82 +1,82 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E2044AA1EC
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 09:38:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FCFB4CE695
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 09:38:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790847512; cv=none; b=XMq7T3/1co5h8bSlXU8HqSY6YN+pBUBMhClS2UVjZc9JVOS4ZVTSwSl+upk/CdswBSVGZ/qiU/+TaHJv96eAjSmmxIp0PqadVyp9l/eqbOD4CPD8XrUiFrCVIT2JOhG5m4jPWMWcX99lZeKUPM8C+ENuafpg/nOnBmQeIN6hox0=
+	t=1790847513; cv=none; b=kSmt6Q/aIXoPkh9EJhuoIp7LnaIC+eLbAMAHtMQ6X5SZFbEzAI4bulroGODQzimPYVcI3l+G2zTIKN8G+G1Q2HMEOqrHp3ran2FgwXyj5hT6A4zWTFQq3mhlA0tCzF/vfsPYqyVVJu1EGfmBt7OoiSqauJa//ILyMsqoCHLynwo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790847512; c=relaxed/simple;
-	bh=t/In2PBTjIhY7f/B+q+KrPX2DEtGQH6x/iWTsJuuW+k=;
+	s=arc-20240116; t=1790847513; c=relaxed/simple;
+	bh=k4/Vn2BuzlSbPoooATz7z8CrUYuOoU9Vb51MVMBg0qA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XFp7rGt0mJeexc6WDfT7UXpXd/Ym9ouytQeIv+WBkcPJTQ8kMxqSYs8W/ngqZ9ZeyKLj8mlzdGlstOeMK+dCMf1gEEL8P86E7dittgCGhZGYy04RpHbHbL076fnTa1vguQyNsq5nQr5xPytG2Mnok/FjUdlQzjOeAuHZRLXSxys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N/cw2CCU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KcEc3wqR; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=SaOPdlUOkQivB/OuGZHLlZ9h+lqnJIOD2ba9ZwbdMC45Z7Zhu7MzaWQesrj/OWMpoBtH2p5R9CF2CkhheHMEfghPVMNcUJILVQvIhP3OngPdsx+GsSKf0vzi+mtEb0YlZQAWx3ilecPf0zmuSKrRzLF2P7Iu44BApdq0wR2mMfs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=A/Wz2F5x; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Th7K214D; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N/cw2CCU";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KcEc3wqR"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xNv31062190
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 09:38:28 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="A/Wz2F5x";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Th7K214D"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xRfq1289112
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 09:38:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=z1gy5tLVZAy
-	1AGTzP/YU/Ct9SipMfQIsWe9hXeKMtgQ=; b=N/cw2CCU7qU2J0knfW9nQFScwWJ
-	Ln/kXopQpF7JfGbXQ2cOl26SUaDzY4HevP2sY/JlhMLuETuxptnOxuBe/P8dWYYf
-	oYoW7I9gvT49aGeUrQsoBSAegk342ULbNKCpRj3i0ZStj9+VYdlnN4P9M40UCWyw
-	E+kWUiWvRdmkmONkwpVIXl/LCEdWZb7YYjP2nMo/2Hid2MHvZ7BCeDCvJGY2Lwg1
-	WWTtn73VU2cj6i1lLTdyGoUBbNJBze/ssddxMDuoUwqa9Gc0X44hA9Gj36+KvHt/
-	Sp3MEwy7mKehGd+FzW1MXseoCMT+nFtcxZ1zfLiuMnxc9Xs6i36tLxArMDg==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=fdMiLJvgMjs
+	cRhmymC+b5RykLbqp06ugDaQHifg2Sj4=; b=A/Wz2F5xADgLQYfhmS1XErftVI1
+	42vLhj6+rX8CNopdn11S2BQpYHZtQbjCeJUU1W2ir2H/BIVr+YHI/+LWYrMio41N
+	3qeacqTpADP1P8y9TGX9YtvtowDj/B8ZqzNv1q5iYxNtSV02GMaYL2Q3eRgJX+eQ
+	MKrf3DdlST63fTcykZ2atMhf8yAf2Ia46UHYz9f18CrBIpXDWat1fuwa/Exz8AaJ
+	jVWtr0kLLgs4X+QOilI2rAK8LLY0eNOItRrO9vum9mqWMxnc4i159OY7VkUb0Dp6
+	QzgqVjwxZ3EXl0kRG3y8Dd3maYjeiKDwLf5KBB8n4QMKaE05m97M0lxAmbw==
 Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17mvu34c-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17pjb521-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 09:38:28 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-934963b2bc0so1615528485a.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:38:28 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 09:38:29 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93c5ab5c136so867856285a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790847507; x=1791452307; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790847509; x=1791452309; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=z1gy5tLVZAy1AGTzP/YU/Ct9SipMfQIsWe9hXeKMtgQ=;
-        b=KcEc3wqRK8TzOxdHyNYAm5+yVi6Nlz5Z8e+Cuu7IvRLY3pcc2gKEkQwzhTEedxuHHl
-         PHT4aYQLIpv5BMIAF9gWDDO+DaNQcNIFL1PAsJtXQLL0ZS62X2GOg8L7DXOqSjknGed4
-         UDwjrLRZsui5WFTsZArmoNZCMZVJUdwO0UZqK4/74+Ouzs3NtWvrvs0zDqGSJQeu7CrI
-         I5nxjV+9BfSpPtMd7thqSizlhhFzxLnlfB3jzK2G/QTIchFpJ9+m3UsEBnB8wkRP2IVX
-         mEoO8YxvA9HlmXULdNtKF2a0j6DQhuzZotTRY3IgB70oXYjn0Yv1OVrnEHvct7cbj+O4
-         zlJg==
+        bh=fdMiLJvgMjscRhmymC+b5RykLbqp06ugDaQHifg2Sj4=;
+        b=Th7K214DRvNr47Ec03n3H0VyViuuQXMZpW3UGreUNaGyEWA/tCbuN5WjmKxP++LTMi
+         KfrFgyuH8flBxpSu2tCW7f7Va5wihyaPFJr3VZzy+MWibNeDAPmKozRnh6Jgk/u95uFh
+         xmSTRMj92yvzSoj8SpDIvvDu+6IZIreqxeoKxzt0Qt2ytIqXkZbUOHi1/UQ7WWeN87QE
+         sN/WX4OMBOzHUHKKyRL06tSw9Zeidcc2CFpf4UvWnVs3T7Il4zI30j3L2bF+/lQ3GjlK
+         3COzEUfBWttGpqeSyvY1g7q4r+n/lozNSlTCt7fWvzjLAGTyBvgLBPCjZ4eLGB1/7E0E
+         qiXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790847507; x=1791452307;
+        d=1e100.net; s=20260707; t=1790847509; x=1791452309;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=z1gy5tLVZAy1AGTzP/YU/Ct9SipMfQIsWe9hXeKMtgQ=;
-        b=SU2gZ3Osz4AN6xux3Tb8XNbFDSgn6d3asB/AzDOYIOE0Pu0BRQaIJSvOohOCKKMqAY
-         sHLnPJwgnGXJHvu8eB2GqZiFblbaCCL4ifzEfwvQyFXKKD82vmRx5DmMgtwpDUsmNrnU
-         thigVF3EF3rB1tj1T05ebuT4jw0zRSOI5ObWj6+Bi/hj6pXhpAVwkSU2dIKcMrF29Tqj
-         FpFclLPcEKB29FYgpOMcXCOBT/t6hTtKEfRA2CP8aZ1i1d2ULEWxterKkiQDL161JUlI
-         PgEdWcFntvTeqcEpBWvq0J7CjR7KVBmZRycAeu8nlfPOKT9Txl7o1zpIFb3VkzXR812N
-         1qYA==
-X-Forwarded-Encrypted: i=1; AKwUvBwfT6p5Q1PJmI2bE7BiKopaauoo3h2U4m84y5snGC2Fo8NeKG/tMgvNyWfI/oqtn2FlVCMNZjFB1KU9bbXo@vger.kernel.org
-X-Gm-Message-State: AFuF++kz/leI7zsMBrDhjlEb5tZvIxsCJSwhWuVgxg86pB3NZwGUsXZV
-	G1+JvI1SzYjIo5n8jbLBnaI5LrFT1lhXz2lYD4LABH/rjLTARsMrVzq9VTSTGNsHSlnbp/RXljA
-	Kdne7g7DLEU3J9WavZxdHx0T5PAE20lQ7CwXLNyNPOBK271/Gl3F9o7/JI7FwtuYxFh3Z
-X-Gm-Gg: AYBFou204N9Yq/70P1rPCffh2lDnSv0al+7y/NbPpVQpA9NKoGESx96AMvQAcsyUNDh
-	S7ui2m0CatLZTEdEahO3LMZ2JfeAz1B1BVfqb+OQKqF9eEi6aeduJ0yU5mMlro+KdVFrCtp1G2w
-	PGEEthQybMcar7wwzlhSfZNOu3XGrh2qP5dcejzdM0kL1o50KoAbI+p2sS0J9rx6IX7fdQw3uVp
-	kVsK4bg8KMYtKegIB06aivdMjizYzJ71vP07btQ+Vw19U8DSJSTyfcwNtTF82WLqmudcfoiI/2U
-	Erm80mQ5PxS6+rG38+qr+SHTwkoErUyDrVgxNmshgDnA1v95xEtJgsN10sdf/LwIc3uG13HWHrz
-	cZ6n8LR0oZVaZ
-X-Received: by 2002:a05:620a:470a:b0:93c:5f3c:f482 with SMTP id af79cd13be357-93cac15025emr726743785a.33.1790847507478;
-        Thu, 01 Oct 2026 02:38:27 -0700 (PDT)
-X-Received: by 2002:a05:620a:470a:b0:93c:5f3c:f482 with SMTP id af79cd13be357-93cac15025emr726739185a.33.1790847506919;
-        Thu, 01 Oct 2026 02:38:26 -0700 (PDT)
+        bh=fdMiLJvgMjscRhmymC+b5RykLbqp06ugDaQHifg2Sj4=;
+        b=SeMNZkk+kCBSCABVUArLCjjHfO9qTSwb/pH6ofXheiiGbjNe5zwO7BK8ofZ4eeNqoD
+         qPvDZpZg6mhEumhDUloKiUnmLOgAZlB7AoqWMnxUkq3pWR2keTHM3AVlMfV3dqZM2m4j
+         VtCzdXGMvX6pQPJ17n/MbIIxAgjcJ4iCBgIhdiurmtEk2SWKxwcmc2FyuuK+Vqalqo1K
+         3uHr4r3KxaTc2ijV7EkCzheYHAC4EJqQv6x7x/imadtH410KK1FkKi1WqCCcukM2K3AZ
+         g4C/q2JozvC6ZicNRVC7ff+CBPCTGzKVUJU90N8MlDiQlh+B9QAzjGlC24z19rp3JuDQ
+         s0Bg==
+X-Forwarded-Encrypted: i=1; AKwUvBwxCdy0yZyhNMHnM2vekEMat3f8cmxKH0Uv2sygbPRgxr8Sx0vd+fzIVzMTZBhIF7yj253i5DK0+maV2m6d@vger.kernel.org
+X-Gm-Message-State: AFuF++kfl4G3n6eynG06+Yptlu6x3+BQVYk9MYGh9aFsehdzc88HW7BI
+	77fPbdEejKP8btX88JK7ngC5P79T8jMeU+umYmGdT9dybNOTVthMJBiUmtarOK59sbZjWF3hCKd
+	RalqvCfNxF5Uf3z/FPDFHMj8W8g2frf/kXHf7muMrNS0QCzrrDAuAm8cJ9l04Z+L0b2Td
+X-Gm-Gg: AYBFou1wwUUke24gA2K2Fj9y+JpSoEhqd8yLVEsu3uF979APqoTiykYxnO42XEhcj4f
+	ldBrEZLBBTr/aqKI9H/AALGTISR8XWHDusgKPKMP4n3djRlESlBTMxPC+B0awc8fClsLNDa8eJV
+	/7EWF4ICTDwG/4xabE2y7H5T/c7tJaFdpHUMr9gF+H7cpLxLVOTzgo9iTW/4cmiK1R1nz/2OhgT
+	P6pa8mL1qsZAxnWkDQXSZUzzfwL75ph81mRIMHKCkTb5Pa02p9wcqyFBdwQoDH6nLOtfRWqFNK5
+	NIP5Cj3ouvnZ2wI2TxEWRgZlXDN4N6lyVDOOBe7GNW3eeKbsxBQXnGydCqKoOQC3pwHPn+YGxrk
+	bhFhCU2AywFe6
+X-Received: by 2002:a05:620a:72c4:10b0:93c:b23a:f976 with SMTP id af79cd13be357-93cb23b07d0mr436957985a.13.1790847508853;
+        Thu, 01 Oct 2026 02:38:28 -0700 (PDT)
+X-Received: by 2002:a05:620a:72c4:10b0:93c:b23a:f976 with SMTP id af79cd13be357-93cb23b07d0mr436955585a.13.1790847508384;
+        Thu, 01 Oct 2026 02:38:28 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b0692b5d7sm5231750f8f.28.2026.10.01.02.38.25
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b0692b5d7sm5231750f8f.28.2026.10.01.02.38.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 02:38:26 -0700 (PDT)
+        Thu, 01 Oct 2026 02:38:27 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: robh@kernel.org, vkoul@kernel.org
 Cc: krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
@@ -86,9 +86,9 @@ Cc: krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH v2 2/3] soundwire: qcom: add multi-master support
-Date: Thu,  1 Oct 2026 10:38:04 +0100
-Message-ID: <20261001093806.634862-3-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 3/3] soundwire: qcom: program MM_SYNC for multi-master
+Date: Thu,  1 Oct 2026 10:38:05 +0100
+Message-ID: <20261001093806.634862-4-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261001093806.634862-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20261001093806.634862-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -99,429 +99,131 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: CUS5I5w2aQ0Mh78ZhZqzazDbNlSuiE4p
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX+eqU6mITu5i0
- Rk8i5VBn0erswch+Iq4OAUBFs1UeeuldCvOyn7UQC24JER0+cv2XBaY4z2D085KQUX+SytToLdU
- ZYVnZfSQDEZIqbEJ3LnR2H6SXXlrIfBswI7EwFg/++x8TfSk4iPmW4S20qFTFYuzs6rIKt6rEva
- /9p4oRt4DWgBNx2lDd8WZg0p4oQR8u7Lkd5PE2cOIAbH3qJSfCOZxNs4H3EKf4mvZOvbGwcuvFV
- BsSWIbOfEvl21nHdN4Q9jNdrKkY+/fmN9Hij6mdeOHjmbi/Gqv9TIpQX0/bPKeg51yFC2ubTmcO
- jZBqv91lpYGQQF0fW7cF1/QECcp/bA4Y8P/RA7F/9g5jp4GPilsbxvK1JM/39g+iIPfxWDdw0qp
- VUbscXub1FMJerXGMnx6GJ2A6pAYUv9eD4CAr1am514gthmBnwkq8WGncmZILCEL4ci9EY8dldQ
- cc4vDh7lwy7QKuq/vQQ==
-X-Proofpoint-GUID: CUS5I5w2aQ0Mh78ZhZqzazDbNlSuiE4p
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfXz0cfVjRH1XR3
- QNrVJMdMrvwFisG2ULkrSDGmy353MwbDVWnfNLWKs1LgCJDGpNFRsAq6y5wTMfTPD57u4xo7lhY
- 9GLrINJHbktuyKYvDpT6QlWqCBBZjiY=
-X-Authority-Analysis: v=2.4 cv=KuvYSmWN c=1 sm=1 tr=0 ts=6abe2a14 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=eqpKXYpX c=1 sm=1 tr=0 ts=6abe2a15 cx=c_pps
  a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=ohygZrl5ZXs3QqmOdF4A:9 a=PEH46H7Ffwr30OY-TuGO:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=c7LmfZLfTtV-q45nPo4A:9 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-GUID: 0dVGKy2pRJukEOfjtRPiuWC1tICUG01J
+X-Proofpoint-ORIG-GUID: 0dVGKy2pRJukEOfjtRPiuWC1tICUG01J
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX0Dwc0ZreJz5g
+ xvVmiEL0wAzb7tNXO2rF/g44ekt7YMWqQkWeWaa7s5CKJjnkLV+GP9lPFeUBlLE3GfytxBbEIYe
+ z9N9wB4Un2fhzHiMTKDh6fRG+mfyI64=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX+yy1bxSO6Wg1
+ NxgavfCfzruRjx++NgvK146oPgU/iOMDEPDRke0N9jrCeMmI+hX43ILoBEyzkLl1dfUrSaRBFmB
+ kUI3jIM5FcRNsA4nS6QUuuTK6m96uTG60W4vDnF2s5Vv1vbiX5qu9++hLgZXp6o5oy7W2iVwnRZ
+ jD8bhhSWCwxQNbZXirRgYs40JXG312CtDznSPXliWaHxF28EHbMF9CVCexMv/c4FErc8TJm5b3n
+ SB0qh6M4Z/EBIdCMSC0Dl4J44OKcSNCKTxHQWKhgznHiHZBgXBo/cxnVVPwueEv7iN/t+fLC4eC
+ hprXVEcGYXzyCHDtJgKHYdBfWUZY/Oq1WJA3qOcMm2u7XQ52ut1X1pPn7raGUvjmIsdNWVjX9Me
+ mzmXoBsTgY7hu+NrYPG5aM/ao293sFTbrgg+IT4ydyOI2b2WEilSs/EKinlY15cbWoDKxmU/P1M
+ sh7DWdI+hPO+xs1kt/g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610010038
+ impostorscore=0 spamscore=0 clxscore=1015 malwarescore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010038
 
-v3.1.0+ Qualcomm SoundWire IPs can be paired to expose one logical
-bus with more than two DATA lanes. One IP owns SWR_CLK and drives
-the bus; the other contributes DATA lanes only.
-
-Only the primary IP handles the SoundWire command protocol on
-Column 0 (PING / READ / WRITE and all slave register access); the
-dependent IP is data-only and never issues commands. From the
-peripherals' perspective a single logical bus is presented.
-
-Support this pairing on the driver side. A device link between the
-two IPs enforces correct unbind ordering and keeps the peer resumed
-while the primary is active.
-
-Single-master deployments (no qcom,multi-master-mode in DT) are
-unaffected.
+The primary and dependent frame generators must lock to a single
+SWR_CLK for the shared bus to run. Program SWRM_V3_MM_SYNC_CONFIG
+on both sides at init, and re-apply on resume as the register does
+not survive a clock stop.
 
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- drivers/soundwire/qcom.c | 205 +++++++++++++++++++++++++++++++++++----
- 1 file changed, 186 insertions(+), 19 deletions(-)
+ drivers/soundwire/qcom.c | 56 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
 
 diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 35ffffd541bd..767147a6635d 100644
+index 767147a6635d..92e1644623c5 100644
 --- a/drivers/soundwire/qcom.c
 +++ b/drivers/soundwire/qcom.c
-@@ -10,6 +10,7 @@
- #include <linux/debugfs.h>
- #include <linux/of.h>
- #include <linux/of_irq.h>
-+#include <linux/of_platform.h>
- #include <linux/pm_runtime.h>
- #include <linux/regmap.h>
- #include <linux/reset.h>
-@@ -111,6 +112,7 @@
- #define SWRM_DPn_PORT_HCTRL_BANK(offset,  n, m)	(offset + 0x100 * (n - 1) + 0x40 * m)
- #define SWRM_DPn_BLOCK_CTRL3_BANK(offset, n, m)	(offset + 0x100 * (n - 1) + 0x40 * m)
- #define SWRM_DPn_SAMPLECTRL2_BANK(offset, n, m)	(offset + 0x100 * (n - 1) + 0x40 * m)
-+#define SWRM_DPn_SLOT_STRIDE			0x100
+@@ -46,6 +46,18 @@
+ #define SWRM_V3_COMP_PARAMS_RD_FIFO_DEPTH			GENMASK(23, 18)
  
- #define SWR_V1_3_MSTR_MAX_REG_ADDR				0x1740
- #define SWR_V2_0_MSTR_MAX_REG_ADDR				0x50ac
-@@ -192,6 +194,13 @@ struct qcom_swrm_ctrl {
- 	const unsigned int *reg_layout;
- 	void __iomem *mmio;
- 	struct reset_control *audio_cgcr;
-+	u8 num_lanes;
-+	bool is_dependent;
-+	struct qcom_swrm_ctrl *peer_ctrl;
-+	u8 peer_first_lane;
-+	u8 num_peer_lanes;
-+	bool is_primary;
-+	u32 peer_dpn_offset;
- #ifdef CONFIG_DEBUG_FS
- 	struct dentry *debugfs;
- #endif
-@@ -898,7 +907,9 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 	/* Enable Auto enumeration */
- 	ctrl->reg_write(ctrl, SWRM_ENUMERATOR_CFG_ADDR, 1);
- 
--	ctrl->intr_mask = SWRM_INTERRUPT_STATUS_RMSK;
-+	/* dependent has no sdw_bus; keep IRQ dispatch masked */
-+	if (!ctrl->is_dependent)
-+		ctrl->intr_mask = SWRM_INTERRUPT_STATUS_RMSK;
- 	/* Mask soundwire interrupts */
- 	if (ctrl->version < SWRM_VERSION_2_0_0)
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_MASK_ADDR],
-@@ -941,8 +952,8 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 	ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
- 			0xFFFFFFFF);
- 
--	/* enable CPU IRQs */
--	if (ctrl->mmio) {
-+	/* dependent has no sdw_bus; leave its CPU IRQs masked */
-+	if (ctrl->mmio && !ctrl->is_dependent) {
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
- 				SWRM_INTERRUPT_STATUS_RMSK);
- 	}
-@@ -1040,9 +1051,41 @@ static int qcom_swrm_pre_bank_switch(struct sdw_bus *bus)
- 	u32p_replace_bits(&val, ctrl->cols_index, SWRM_MCP_FRAME_CTRL_BANK_COL_CTRL_BMSK);
- 	u32p_replace_bits(&val, ctrl->rows_index, SWRM_MCP_FRAME_CTRL_BANK_ROW_CTRL_BMSK);
- 
-+	if (ctrl->peer_ctrl)
-+		ctrl->peer_ctrl->reg_write(ctrl->peer_ctrl, reg, val);
+ #define SWRM_COMP_MASTER_ID					0x104
 +
- 	return ctrl->reg_write(ctrl, reg, val);
++#define SWRM_V3_MM_SYNC_CONFIG					0x108
++#define SWRM_V3_MM_SYNC_CONNECTED_MASTER_MASK			GENMASK(15, 0)
++#define SWRM_V3_MM_SYNC_IS_DEPENDENT_MASTER			BIT(16)
++#define SWRM_V3_MM_SYNC_MASK_CONTROL_BITS			BIT(17)
++
++#define SWRM_V3_COMP_FEATURE_CFG				0x10
++#define  SWRM_V3_COMP_FEATURE_CFG_BASE				0x00E
++#define  SWRM_V3_COMP_FEATURE_CFG_FORCE_MODE_EN			BIT(9)
++#define  SWRM_V3_COMP_FEATURE_CFG_CLK_PIN_AVAIL			BIT(10)
++#define  SWRM_V3_COMP_FEATURE_CFG_CLK_STOP_EXEC_ON_CMD_IGNORE	BIT(12)
++
+ #define SWRM_V1_3_INTERRUPT_STATUS				0x200
+ #define SWRM_V2_0_INTERRUPT_STATUS				0x5000
+ #define SWRM_INTERRUPT_STATUS_RMSK				GENMASK(16, 0)
+@@ -892,6 +904,43 @@ static bool swrm_wait_for_frame_gen_enabled(struct qcom_swrm_ctrl *ctrl)
+ 	return false;
  }
  
-+static struct qcom_swrm_ctrl *
-+qcom_swrm_port_target(struct qcom_swrm_ctrl *ctrl, u8 port_num, u32 *reg)
++static void qcom_swrm_program_mm_sync(struct qcom_swrm_ctrl *ctrl)
 +{
-+	u8 lane = ctrl->pconfig[port_num].lane_control;
++	struct qcom_swrm_ctrl *peer = ctrl->peer_ctrl;
++	u32 conn_mask;
 +
-+	if (ctrl->peer_ctrl && lane >= ctrl->peer_first_lane &&
-+	    lane < ctrl->peer_first_lane + ctrl->num_peer_lanes) {
-+		*reg -= ctrl->peer_dpn_offset;
-+		return ctrl->peer_ctrl;
++	/*
++	 * peer_ctrl is only ever set on qcom,soundwire-v3.1.0 IPs (the
++	 * multi-master binding requires that compatible), so the V3-only
++	 * MM_SYNC / COMP_FEATURE_CFG registers written below are safe to
++	 * touch here.
++	 */
++	if (!peer || peer->bus.controller_id < 1)
++		return;
++
++	conn_mask = BIT(peer->bus.controller_id - 1) &
++		    SWRM_V3_MM_SYNC_CONNECTED_MASTER_MASK;
++
++	if (ctrl->is_primary) {
++		ctrl->reg_write(ctrl, SWRM_V3_MM_SYNC_CONFIG, conn_mask);
++		ctrl->reg_write(ctrl, SWRM_V3_COMP_FEATURE_CFG,
++				SWRM_V3_COMP_FEATURE_CFG_BASE |
++				SWRM_V3_COMP_FEATURE_CFG_FORCE_MODE_EN |
++				SWRM_V3_COMP_FEATURE_CFG_CLK_PIN_AVAIL |
++				SWRM_V3_COMP_FEATURE_CFG_CLK_STOP_EXEC_ON_CMD_IGNORE);
++		return;
 +	}
-+	return ctrl;
++
++	ctrl->reg_write(ctrl, SWRM_V3_MM_SYNC_CONFIG,
++			SWRM_V3_MM_SYNC_IS_DEPENDENT_MASTER |
++			SWRM_V3_MM_SYNC_MASK_CONTROL_BITS | conn_mask);
++
++	ctrl->reg_write(ctrl, SWRM_V3_COMP_FEATURE_CFG,
++			SWRM_V3_COMP_FEATURE_CFG_BASE |
++			SWRM_V3_COMP_FEATURE_CFG_FORCE_MODE_EN |
++			SWRM_V3_COMP_FEATURE_CFG_CLK_STOP_EXEC_ON_CMD_IGNORE);
 +}
 +
-+static int qcom_swrm_port_reg_write(struct qcom_swrm_ctrl *ctrl, u8 port_num,
-+				    u32 reg, u32 val)
-+{
-+	struct qcom_swrm_ctrl *tgt = qcom_swrm_port_target(ctrl, port_num, &reg);
+ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
+ {
+ 	u32 val;
+@@ -920,6 +969,8 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
+ 	u32p_replace_bits(&val, SWRM_DEF_CMD_NO_PINGS, SWRM_MCP_CFG_MAX_NUM_OF_CMD_NO_PINGS_BMSK);
+ 	ctrl->reg_write(ctrl, SWRM_MCP_CFG_ADDR, val);
+ 
++	qcom_swrm_program_mm_sync(ctrl);
 +
-+	return tgt->reg_write(tgt, reg, val);
-+}
-+
-+static int qcom_swrm_port_reg_read(struct qcom_swrm_ctrl *ctrl, u8 port_num,
-+				   u32 reg, u32 *val)
-+{
-+	struct qcom_swrm_ctrl *tgt = qcom_swrm_port_target(ctrl, port_num, &reg);
-+
-+	return tgt->reg_read(tgt, reg, val);
-+}
-+
- static int qcom_swrm_port_params(struct sdw_bus *bus,
- 				 struct sdw_port_params *p_params,
- 				 unsigned int bank)
-@@ -1050,8 +1093,9 @@ static int qcom_swrm_port_params(struct sdw_bus *bus,
- 	struct qcom_swrm_ctrl *ctrl = to_qcom_sdw(bus);
- 	u32 offset = ctrl->reg_layout[SWRM_OFFSET_DP_BLOCK_CTRL_1];
- 
--	return ctrl->reg_write(ctrl, SWRM_DPn_BLOCK_CTRL_1(offset, p_params->num),
--				p_params->bps - 1);
-+	return qcom_swrm_port_reg_write(ctrl, p_params->num,
-+					SWRM_DPn_BLOCK_CTRL_1(offset, p_params->num),
-+					p_params->bps - 1);
- }
- 
- static int qcom_swrm_transport_params(struct sdw_bus *bus,
-@@ -1072,7 +1116,7 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 	value |= pcfg->off2 << SWRM_DP_PORT_CTRL_OFFSET2_SHFT;
- 	value |= pcfg->si & 0xff;
- 
--	ret = ctrl->reg_write(ctrl, reg, value);
-+	ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
- 	if (ret)
- 		goto err;
- 
-@@ -1081,7 +1125,7 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 		value = (pcfg->si >> 8) & 0xff;
- 		reg = SWRM_DPn_SAMPLECTRL2_BANK(offset, params->port_num, bank);
- 
--		ret = ctrl->reg_write(ctrl, reg, value);
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
- 		if (ret)
- 			goto err;
- 	}
-@@ -1091,7 +1135,10 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 		reg = SWRM_DPn_PORT_CTRL_2_BANK(offset, params->port_num, bank);
- 
- 		value = pcfg->lane_control;
--		ret = ctrl->reg_write(ctrl, reg, value);
-+		if (ctrl->peer_ctrl && value >= ctrl->peer_first_lane &&
-+		    value < ctrl->peer_first_lane + ctrl->num_peer_lanes)
-+			value -= ctrl->peer_first_lane;
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
- 		if (ret)
- 			goto err;
- 	}
-@@ -1102,7 +1149,7 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 		reg = SWRM_DPn_BLOCK_CTRL2_BANK(offset, params->port_num, bank);
- 
- 		value = pcfg->blk_group_count;
--		ret = ctrl->reg_write(ctrl, reg, value);
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
- 		if (ret)
- 			goto err;
- 	}
-@@ -1112,10 +1159,10 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 
- 	if (pcfg->hstart != SWR_INVALID_PARAM && pcfg->hstop != SWR_INVALID_PARAM) {
- 		value = (pcfg->hstop << 4) | pcfg->hstart;
--		ret = ctrl->reg_write(ctrl, reg, value);
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
+ 	if (ctrl->version == SWRM_VERSION_1_7_0) {
+ 		ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
+ 		ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL,
+@@ -1935,6 +1986,11 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
  	} else {
- 		value = (SWR_HSTOP_MAX_VAL << 4) | SWR_HSTART_MIN_VAL;
--		ret = ctrl->reg_write(ctrl, reg, value);
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg, value);
- 	}
+ 		reset_control_reset(ctrl->audio_cgcr);
  
- 	if (ret)
-@@ -1124,7 +1171,8 @@ static int qcom_swrm_transport_params(struct sdw_bus *bus,
- 	if (pcfg->bp_mode != SWR_INVALID_PARAM) {
- 		offset = ctrl->reg_layout[SWRM_OFFSET_DP_BLOCK_CTRL3_BANK];
- 		reg = SWRM_DPn_BLOCK_CTRL3_BANK(offset, params->port_num, bank);
--		ret = ctrl->reg_write(ctrl, reg, pcfg->bp_mode);
-+		ret = qcom_swrm_port_reg_write(ctrl, params->port_num, reg,
-+					       pcfg->bp_mode);
- 	}
- 
- err:
-@@ -1142,14 +1190,14 @@ static int qcom_swrm_port_enable(struct sdw_bus *bus,
- 
- 	reg = SWRM_DPn_PORT_CTRL_BANK(offset, enable_ch->port_num, bank);
- 
--	ctrl->reg_read(ctrl, reg, &val);
-+	qcom_swrm_port_reg_read(ctrl, enable_ch->port_num, reg, &val);
- 
- 	if (enable_ch->enable)
- 		val |= (enable_ch->ch_mask << SWRM_DP_PORT_CTRL_EN_CHAN_SHFT);
- 	else
- 		val &= ~(0xff << SWRM_DP_PORT_CTRL_EN_CHAN_SHFT);
- 
--	return ctrl->reg_write(ctrl, reg, val);
-+	return qcom_swrm_port_reg_write(ctrl, enable_ch->port_num, reg, val);
- }
- 
- static const struct sdw_master_port_ops qcom_swrm_port_ops = {
-@@ -1562,6 +1610,73 @@ static int swrm_reg_show(struct seq_file *s_file, void *data)
- DEFINE_SHOW_ATTRIBUTE(swrm_reg);
- #endif
- 
-+static int qcom_swrm_multi_master_setup(struct qcom_swrm_ctrl *ctrl)
-+{
-+	struct of_phandle_args args;
-+	struct qcom_swrm_ctrl *peer;
-+	struct platform_device *pdev;
-+	u32 offset;
-+	int ret;
++		qcom_swrm_program_mm_sync(ctrl);
++		/* dependent has no PM-runtime of its own */
++		if (ctrl->is_primary && ctrl->peer_ctrl)
++			qcom_swrm_program_mm_sync(ctrl->peer_ctrl);
 +
-+	ret = of_parse_phandle_with_fixed_args(ctrl->dev->of_node,
-+					       "qcom,multi-master-peer",
-+					       1, 0, &args);
-+	if (ret)
-+		return -EINVAL;
-+
-+	pdev = of_find_device_by_node(args.np);
-+	of_node_put(args.np);
-+	if (!pdev)
-+		return -EPROBE_DEFER;
-+
-+	if (!pdev->dev.driver) {
-+		ret = -EPROBE_DEFER;
-+		goto out;
-+	}
-+
-+	if (pdev->dev.driver != ctrl->dev->driver) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	peer = platform_get_drvdata(pdev);
-+	if (!peer || !peer->is_dependent) {
-+		ret = -EPROBE_DEFER;
-+		goto out;
-+	}
-+
-+	if (!ctrl->num_lanes || !peer->num_lanes ||
-+	    ctrl->num_lanes + peer->num_lanes > SDW_MAX_LANES) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	offset = args.args[0];
-+	if (offset < ctrl->num_lanes) {
-+		dev_err(ctrl->dev, "qcom,multi-master-peer: offset %u < num-lanes %u\n",
-+			offset, ctrl->num_lanes);
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	if (!device_link_add(ctrl->dev, &pdev->dev,
-+			     DL_FLAG_AUTOREMOVE_CONSUMER | DL_FLAG_PM_RUNTIME)) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	ctrl->peer_ctrl = peer;
-+	peer->peer_ctrl = ctrl;
-+	ctrl->peer_first_lane = ctrl->num_lanes;
-+	ctrl->num_peer_lanes = peer->num_lanes;
-+	ctrl->peer_dpn_offset = offset * SWRM_DPn_SLOT_STRIDE;
-+
-+	ret = 0;
-+out:
-+	put_device(&pdev->dev);
-+	return ret;
-+}
-+
- static int qcom_swrm_probe(struct platform_device *pdev)
- {
- 	struct device *dev = &pdev->dev;
-@@ -1576,6 +1691,9 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	if (!ctrl)
- 		return -ENOMEM;
- 
-+	if (!of_property_read_u32(dev->of_node, "num-lanes", &val))
-+		ctrl->num_lanes = val;
-+
- 	memset(ctrl->page1_cache, 0xff, sizeof(ctrl->page1_cache));
- 	memset(ctrl->page2_cache, 0xff, sizeof(ctrl->page2_cache));
- 
-@@ -1636,9 +1754,19 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	ctrl->bus.compute_params = &qcom_swrm_compute_params;
- 	ctrl->bus.clk_stop_timeout = 300;
- 
--	ret = qcom_swrm_get_port_config(ctrl);
--	if (ret)
--		goto err_clk;
-+	if (of_property_match_string(dev->of_node, "qcom,multi-master-mode",
-+				     "dependent") < 0) {
-+		ret = qcom_swrm_get_port_config(ctrl);
-+		if (ret)
-+			goto err_clk;
-+	}
-+
-+	if (of_property_match_string(dev->of_node, "qcom,multi-master-mode", "primary") >= 0) {
-+		ret = qcom_swrm_multi_master_setup(ctrl);
-+		if (ret)
-+			goto err_clk;
-+		ctrl->is_primary = true;
-+	}
- 
- 	params = &ctrl->bus.params;
- 	params->max_dr_freq = DEFAULT_CLK_FREQ;
-@@ -1678,7 +1806,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 						"swr_wake_irq", ctrl);
- 		if (ret) {
- 			dev_err(dev, "Failed to request soundwire wake irq\n");
--			goto err_init;
-+			goto err_clk;
- 		}
- 	}
- 
-@@ -1689,6 +1817,16 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 		ctrl->bus.controller_id = val;
- 	}
- 
-+	if (of_property_match_string(dev->of_node, "qcom,multi-master-mode", "dependent") >= 0) {
-+		ctrl->is_dependent = true;
-+		dev_dbg(dev,
-+			"Qualcomm SoundWire multi-master dependent v%x.%x.%x registered (%u lanes)\n",
-+			(ctrl->version >> 24) & 0xff,
-+			(ctrl->version >> 16) & 0xff,
-+			ctrl->version & 0xffff, ctrl->num_lanes);
-+		return 0;
-+	}
-+
- 	ret = sdw_bus_master_add(&ctrl->bus, dev, dev->fwnode);
- 	if (ret) {
- 		dev_err(dev, "Failed to register Soundwire controller (%d)\n",
-@@ -1697,6 +1835,10 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	}
- 
- 	qcom_swrm_init(ctrl);
-+
-+	if (ctrl->is_primary && ctrl->peer_ctrl)
-+		qcom_swrm_init(ctrl->peer_ctrl);
-+
- 	wait_for_completion_timeout(&ctrl->enumeration,
- 				    msecs_to_jiffies(TIMEOUT_MS));
- 	ret = qcom_swrm_register_dais(ctrl);
-@@ -1724,6 +1866,17 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- err_master_add:
- 	sdw_bus_master_delete(&ctrl->bus);
- err_clk:
-+	/* tear down cross-link + mask peer IRQs before devres frees us */
-+	if (ctrl->is_primary && ctrl->peer_ctrl) {
-+		struct qcom_swrm_ctrl *peer = ctrl->peer_ctrl;
-+
-+		peer->reg_write(peer,
-+				peer->reg_layout[SWRM_REG_INTERRUPT_CPU_EN], 0);
-+		/* disable peer SWRM; releases shared SWR_CLK */
-+		peer->reg_write(peer, SWRM_COMP_CFG_ADDR, 0);
-+		peer->peer_ctrl = NULL;
-+		ctrl->peer_ctrl = NULL;
-+	}
- 	clk_disable_unprepare(ctrl->hclk);
- err_init:
- 	return ret;
-@@ -1733,7 +1886,21 @@ static void qcom_swrm_remove(struct platform_device *pdev)
- {
- 	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(&pdev->dev);
- 
--	sdw_bus_master_delete(&ctrl->bus);
-+	/* delete bus before dropping peer_ctrl; in-flight ops deref it */
-+	if (!ctrl->is_dependent)
-+		sdw_bus_master_delete(&ctrl->bus);
-+
-+	if (ctrl->is_primary && ctrl->peer_ctrl) {
-+		struct qcom_swrm_ctrl *peer = ctrl->peer_ctrl;
-+
-+		peer->reg_write(peer,
-+				peer->reg_layout[SWRM_REG_INTERRUPT_CPU_EN], 0);
-+		/* disable peer SWRM; releases shared SWR_CLK */
-+		peer->reg_write(peer, SWRM_COMP_CFG_ADDR, 0);
-+		peer->peer_ctrl = NULL;
-+		ctrl->peer_ctrl = NULL;
-+	}
-+
- 	clk_disable_unprepare(ctrl->hclk);
- }
- 
+ 		if (ctrl->version == SWRM_VERSION_1_7_0) {
+ 			ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
+ 			ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL,
 -- 
 2.53.0
 
