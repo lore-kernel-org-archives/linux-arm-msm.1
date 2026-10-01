@@ -1,109 +1,88 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8991726656D
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:33:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DB993C76AD
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:34:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790840017; cv=none; b=iv2msBl7nTssR0nH/H1WbsmKvpM7IlAcCJcYUgfbRJC4XP/Jduhr1Z58A/qEFA+W03Zw+UGDX601fgDwHmcj+heA6cHIsQv8c9vRe73PId8eSnYG7ZYCd8JJgcHEcOkqOTI48EbZmD8eNH46FI3NlvYr3wUEDfmRq+5W8aZwex0=
+	t=1790840084; cv=none; b=d63uNlgXW72ZbWItt0U/UlIv/R9G/U5xMRRDSHJ+tdTTlLeVgTGM0yaermXyWdFSJynJSTlmZBBt/FYAJ0xIuaROFNmgyBPxlMWZ2qdjQCFah/bilO1+uZmKh4Mo1FY98YhttdJtKP9f6IL2EeLX85JE7zsacIEjvvsY2wU7C1I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790840017; c=relaxed/simple;
-	bh=prgThMa3RDaqzpouVznTJCw2SnOG3567R/8UJXmM108=;
+	s=arc-20240116; t=1790840084; c=relaxed/simple;
+	bh=kuV33l73kgCfxMXZpX+G6jMpAhtpEBO72ZuYilyuWkY=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=qgLsk2BjXeFBV1R1Bhxmfr2SG+vUS7m05rwD58PbjjBz4NQ4EutsqWyuAGqGbyKM4ItfX6Y0mp84Z64U2JL+E8bePS2SPEzVvne9Q6OewGKJ1YweREV1YILo5s0Mzpxgi0m0WvRBiqVkp29Cok22Bvc8RaVYx7vd5bUR8iVLpM0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QTZR654g; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=j+CfD/ih4z2WKtbfNhx84fa45Y1AjbXLbxOGYxgolX9XKSRogp6hZ9wKHrgOEBVE92t3vPKxKIACixsW9sJM8uKn0u1Lc6NLfZfsxOL4MbIq6X/YpWHZl8D9lRCmphl0RMB3H1aEvJiAmkUaLpivYPrPWN0YKzQgJkxyguqkYJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QfyM4xSR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QTZR654g"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 516A71F0089D
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:33:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QfyM4xSR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 511121F008A7
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 07:34:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790840014;
-	bh=6/ClGyojAdsXGc/BQReGBNWEln4ElamcBkeTBZDQp5g=;
+	s=k20260515; t=1790840082;
+	bh=kuV33l73kgCfxMXZpX+G6jMpAhtpEBO72ZuYilyuWkY=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=QTZR654gJuawsV8WQZ4S2cC9ejU9u172RDHPIMUmSJPwuBAhJguLbYrAKBO3SfVlZ
-	 sm74izZzPBFgtQhlIPjpVxWhVJCKuN/R2lfulXvfbJl2xU1LNeBY0FjcBWTs1WZQ1J
-	 rj4XeWHTMG6PM1/8VznK7/Hi2znJdpa43ADDo1Jps9FRbWuOwp8HjUXVk+e4pHkduJ
-	 17TI3DWeiSk4R1y6gYZMjzCpZWeuGhKEQz5rWDvEc0OytmT3RN5urWPWZhdiqgwHH+
-	 BRfQQkN6gNDz35un6zsZd4eKnJZbsNV4ZM0dRbKTIYEufYBw4TgZbNBrbgSisY6ywf
-	 3hO6xBRepmygQ==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3e27d525so1263143e87.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 00:33:34 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBza9UKMUC7ZlkgrZVDq3+4wBS7Mh7ssuosOmIn8twUUJPARlMG6Hl8P+UbncYIfEVA/cZylYJ75dJiJ8mPz@vger.kernel.org
-X-Gm-Message-State: AFq9FYJbNyYnUOXo5GR+Wqn+ffFodvt/SBnCw44tS5CIAldgTQ0EsPyh
-	a57z++qhUyxaJ23cfaJKzjdS2Ueg6chWa9yJciNnL/V1NPddOCaX1DmGWRVp2FphfJ5uMgwBkAD
-	JSq9xtHEnM9Z9ltkQS1nV3+bnwFY3qhwbpdw5I+BCjw==
-X-Received: by 2002:a05:6512:2115:b0:5b8:f4ad:6e49 with SMTP id
- 2adb3069b0e04-5ba402b86b1mr998420e87.8.1790840013059; Thu, 01 Oct 2026
- 00:33:33 -0700 (PDT)
+	b=QfyM4xSRlKStaeo/bShD69v/jI3OoLIt9RIlKAxFj08Dl+wLGEQBSqAvQhCoRjKGk
+	 LoKxGHq+CxrS9V2uPd4C5LVxuMTeyD/4DL9PTaaXXBcaF2qhNh1u33Mb0Tmft89/y4
+	 JK540dc3kMHcoBdpmpzys4aF4Nkaa0kf2vhA6a8+g5l0P2qVUnQsbNT5YoHFfupbRo
+	 3LUkl77zt0THmf0rxul77MMD9Mzv5USAhLR7J4SHkujvTjrVFs1pOrtS9bS9hk3jHW
+	 gyZ/cyJI1HqruFwWPwC6FAOzyMxVeGrl5UkQeiFG5RTWufhU4paN7KN7JEuBJimpfG
+	 4GtqckmA4KRMQ==
+Received: by mail-lr2-f37.google.com with SMTP id 38308e7fff4ca-3a64d20990fso59830391fa.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 00:34:42 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxTnBhcE93js4gd8SdojxItED4EpxjG6rkXiEZAHSJCbs2CXU61sR7J+F84OuD3Gh9a6+bLTSKAJSDt3CQ+@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKXZKe5nWMJ/yDBDDJFvxhNUuBvnsVHd7v7SNmmL9NLVNnuX1Q
+	K2sRzv+rZYlbjnzfXukMv8EEjudyOfh5aAOH+F6ukrTFwpBbAEPqHZkyh0QljgTZe1SbdB0WPCc
+	iNdz7p5rz0ywIW71VhtXsjmeAkQBQrE04HzaVZRIeiw==
+X-Received: by 2002:a2e:b8ce:0:b0:3a6:6aad:be45 with SMTP id
+ 38308e7fff4ca-3a779206b12mr11576161fa.10.1790840081040; Thu, 01 Oct 2026
+ 00:34:41 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 Oct 2026 10:33:32 +0300
+ HTTPREST; Thu, 1 Oct 2026 10:34:39 +0300
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 Oct 2026 10:33:32 +0300
+ HTTPREST; Thu, 1 Oct 2026 10:34:39 +0300
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260930163217.4003d232@kernel.org>
+In-Reply-To: <20260723-qcom-qce-cmd-descr-v24-1-4f87bb4d9938@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260923-qcom-sa8255p-emac-v15-0-e82f33720737@oss.qualcomm.com>
- <20260923-qcom-sa8255p-emac-v15-3-e82f33720737@oss.qualcomm.com> <20260930163217.4003d232@kernel.org>
-Date: Thu, 1 Oct 2026 10:33:32 +0300
-X-Gmail-Original-Message-ID: <CAMRc=MfEHHny4x8pi-M-WqvcTxFY+98TvRa1jFTKQBjYCzy8FQ@mail.gmail.com>
-X-Gm-Features: AclHuK_lOavdmNlSvx0sNUPmny1qPtgCYs4QE7hryCERWbwB8_l7zIoUuzlYZiM
-Message-ID: <CAMRc=MfEHHny4x8pi-M-WqvcTxFY+98TvRa1jFTKQBjYCzy8FQ@mail.gmail.com>
-Subject: Re: [PATCH net-next v15 3/9] phy: qcom: add the SGMII SerDes PHY
- driver for SCMI systems
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Vinod Koul <vkoul@kernel.org>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
-	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Kevin Hilman <khilman@baylibre.com>, 
-	Jerome Brunet <jbrunet@baylibre.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Fabio Estevam <festevam@gmail.com>, Jan Petrous <jan.petrous@oss.nxp.com>, s32@nxp.com, 
-	Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>, Romain Gantois <romain.gantois@bootlin.com>, 
-	Geert Uytterhoeven <geert+renesas@glider.be>, Magnus Damm <magnus.damm@gmail.com>, 
-	Maxime Ripard <mripard@kernel.org>, Christophe Roullier <christophe.roullier@foss.st.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Radu Rendec <radu@rendec.net>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-arm-kernel@lists.infradead.org, Drew Fustini <dfustini@tenstorrent.com>, 
-	linux-sunxi@lists.linux.dev, linux-amlogic@lists.infradead.org, 
-	linux-mips@vger.kernel.org, imx@lists.linux.dev, 
-	linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
-	sophgo@lists.linux.dev, linux-riscv@lists.infradead.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+References: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com> <20260723-qcom-qce-cmd-descr-v24-1-4f87bb4d9938@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 10:34:39 +0300
+X-Gmail-Original-Message-ID: <CAMRc=Mc9O-wgeWGNgEW45p5YumdkBwKf7_Zkrgw1=r3Pn8QTPQ@mail.gmail.com>
+X-Gm-Features: AclHuK9Cfoeox9K-SbC3OnT5eZecFWUtZX-vzEsZcBWrrPHwk34664gyCfLJNQY
+Message-ID: <CAMRc=Mc9O-wgeWGNgEW45p5YumdkBwKf7_Zkrgw1=r3Pn8QTPQ@mail.gmail.com>
+Subject: Re: [PATCH v24 01/14] dmaengine: constify struct dma_descriptor_metadata_ops
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	brgl@kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
+	Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>, Vinod Koul <vkoul@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Thara Gopinath <thara.gopinath@gmail.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Udit Tiwari <quic_utiwari@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Stephan Gerhold <stephan.gerhold@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+	Frank Li <Frank.Li@kernel.org>, Andy Gross <agross@codeaurora.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Vignesh Raghavendra <vigneshr@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, 1 Oct 2026 01:32:17 +0200, Jakub Kicinski <kuba@kernel.org> said:
-> On Wed, 23 Sep 2026 17:14:37 +0200 Bartosz Golaszewski wrote:
->> Implement support for the firmware-managed SGMII/SerDes PHY present on
->> Qualcomm platforms. Do this as a separate driver from the HLOS-managed
->> variant as they don't share almost any code.
->>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> ---
->>  drivers/phy/qualcomm/Kconfig                   |  10 +++
->>  drivers/phy/qualcomm/Makefile                  |   1 +
->>  drivers/phy/qualcomm/phy-qcom-sgmii-eth-scmi.c | 117 +++++++++++++++++++++++++
->>  3 files changed, 128 insertions(+)
+On Thu, 23 Jul 2026 19:09:07 +0200, Bartosz Golaszewski
+<bartosz.golaszewski@oss.qualcomm.com> said:
+> There's no reason for the instances of this struct to be modifiable.
+> Constify the pointer in struct dma_async_tx_descriptor and all drivers
+> currently using it.
 >
-> Hmm, why is this here? is there a hard dependency?
-> Otherwise it'd be better to send it separately out to Vinod,
-> this is drivers/phy after all.
->
+> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
+> Reviewed-by: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-Heh, it's always the same question of whether to split larger series into
-per-subsystem threads or keep them together in order to provide the full
-picture and let maintainers pick up subsets of patches. I've been yelled at
-for doing both in the past. :)
-
-Ok, I'll split the next iteration into smaller chunks.
+Vinod: this patch is independent from the rest of the series and the BAM DMA
+rework. Could youtake it for v7.4 as I won't respin the rest of the series
+before we get the QCE fixes in anyway?
 
 Bart
