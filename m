@@ -1,145 +1,219 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC9B95187D9;
-	Thu,  1 Oct 2026 12:44:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FC5951993C
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 12:44:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790858644; cv=none; b=kXMjI0FYIKG/nXHhlDuLbI6RXyfdcvce7p+kFty1++azdwuC7qc8g2VxmMSBKGAwC+VXFtiEeQdF9hUb9Jt7lL54aiNK9Cs6qhASmPsh1P/0nm8aMYWTpSD2O+MFrG1iv1gyHirFOBndH4EWbdm4YbbnIx9NsizZOdavT1sfnJg=
+	t=1790858691; cv=none; b=Z0pRmYMnMQYQxHGPQom7akBAiZ+C+6hd36ALkIHpyGjUE+RDSgiIXuF61Kzuc4BFEe2aKzeEZzeaSHBc21uSgffkJkP9KttOIH9AuTc8CJnsI9Dc+vy35SOTpbEbDtgyfkE0+iAEKrz9PrcMSgWyuvOhPQ5gbrlynZKRvb9ZDPs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790858644; c=relaxed/simple;
-	bh=t+0B/sAQ3S+l9NYVbZtcH2UUvZ95WL4OO/xfo3lJYEY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mcsZSW4U7kOtwlTNbCxehsuTRzmqpj0bWh6p9SHUnrH19wqrnLwjoGdF+jO1Qicqifh7L0x8DZ0U98VOLL34sgHvNUwFj/Ae1eXTBgr0gVGP69sGRk4P+Kf4dsZf0QY+Voya2JgDUTIk5fI0efErhaljLW8NsCw1ll7Wy+dDCJc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lw3yNYuW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790858691; c=relaxed/simple;
+	bh=BTtd272bU17jdABMUVjppAK5baR+BMfWUD/+b95sdFM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=l7QLVPszDDKzQP+bYoD57loEzjXEv5sjKdqEyr7YvaJYn64+zbgwabZob/p8h/GkT9BUnZTt+DRyn+3BkQGOlTXVcAlDZxeSPzv4x3ZliKh9saF/1HiiKmEjx70XOlm9nZ7X82k3B6Y2yQenY2KNr4gxkQysCLRPEQZeWBVGyVg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CKHiBqo+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Mmpa+sht; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lw3yNYuW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27DDA1F00899;
-	Thu,  1 Oct 2026 12:43:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790858642;
-	bh=rXN5Orvh6wcqwDgLUoyOl8q44kbcCZ04cp0WYtrNd28=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=lw3yNYuWneYsXq36Dz0QRT4eJVGomNCaXLPibAKzTAn2zplZLxvZhtownDL11Arzq
-	 YJ2bV3rgHjWp0l25u9LdG5xUHC1ZihTOylnvjhNXwZm0OOETpCnislnIaF/aEksuKu
-	 9K8dO+LztHyXmnyYyeqLJXDTYvR4ZhtTp9Gjin5SJR0e3oZhnG5BL46U2b3VriEsxr
-	 msd8lUUmlIvGcLXQqFIetvfqRUvSHiFnvXtsjfN1GKz95wNgOqNz9Wsexl3ViGlX/r
-	 9odGos4HXVs5aMy4692DLEdP3acrLIs9GHpZedmF+WA5LWpsTM/mRsQJ/Iham3wXY8
-	 gx47hXTX8hnGQ==
-Date: Thu, 1 Oct 2026 18:13:55 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Basant Kumar <basantk@qti.qualcomm.com>,
-	Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-	Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 2/6] tee: Add kernel client object invoke helper
-Message-ID: <ar5Vi8ccysSh4fQ1@sumit-xelite>
-Mail-Followup-To: Harshal Dev <harshal.dev@oss.qualcomm.com>,
-	Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Basant Kumar <basantk@qti.qualcomm.com>,
-	Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-	Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-References: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-0-13df5c20c2e3@oss.qualcomm.com>
- <20261001-qcom_uefisecapp_migrate_qcomtee-v3-2-13df5c20c2e3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CKHiBqo+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mmpa+sht"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691CdZAe1062211
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 12:44:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	GlitKy/nrCvAze1hM+Q/FIajbaUAfbBwxqbmkKAKWNM=; b=CKHiBqo+E42rOQ/m
+	/VM5GEDEeJ/paIrpQQM/G85RB5CfV9mDCG9lKmef4gseR8XD56PB9fszQnngHkEM
+	evYlLXNulycUSOkJNDht/5MLF7v/4fkMEibe2i5pWvp8NvSz2bvM0245fknJaKeF
+	FEayiVKTT78pEB6i38DNtzqtTTllcSfBktfLsnwxGk8UgH8d1vTSoYJfG5AQhgXQ
+	o/xK1K0zFE81N9EHh/K0pHFZPrJHd76NzfxE7ErKoKAYuJhQ+Vojp5V7vgyDgAV2
+	oXTHGyLL726H7+Ifr9W7vVed8myA0ZiUnoJmRg780rYuANoeQy577QvHaMRrinB6
+	S+DJpg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17mvuv6a-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 12:44:47 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3968bb86fb7so6499598a91.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 05:44:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790858687; x=1791463487; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GlitKy/nrCvAze1hM+Q/FIajbaUAfbBwxqbmkKAKWNM=;
+        b=Mmpa+shtoNRzgPvzPAtR3tBbjjrL+/AxZ1C5H1HQ77RpkGK2Ti7bHY20YO4Gu/ZpOj
+         FBNDPhcjmEGt7jbtcPayR1ek6VMHVagzMgBqslN+JZCMoeJxNZi0awiYTsvYrgYejLlw
+         jshsL+0idLwq3MP8nl07wlkn6voL4tJ5yIkShjWpAXTkYx976YRdsFPsI8ExBvmWbOjr
+         rbd5cW0LFhoQK92o6kwy6wFk6tVlCEE7e9UwOOogXgBcEB2Rskq/LxapMSKGLVBmECCX
+         4CAZ1EQywavvAYfA45N59yprzKS0TDxdcjBx7tv6WwAWxZE5Wx+FEUC93SdEHhNs0kZv
+         QTew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790858687; x=1791463487;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GlitKy/nrCvAze1hM+Q/FIajbaUAfbBwxqbmkKAKWNM=;
+        b=k3mjkdt+tLn9j6JCHoU7gqCG9fL19z9kZb+8Bd71lwZp17NLEgZdFpWIWqnBbaAzhv
+         r6zhRYSRE5wqspsDWAz6igS5AYXtHTCeMqTk+VolEPX2rKR89eG9uD/behPlYUwEujbY
+         1pJyJlDaI/ToFhNCaKIXF+cn1020JIDrtLs8rQMlv0McIeVZ2g9RDav7k6ZnzAYY23ip
+         WHSjR51h2Z3A7uGtOb8cuMK+Y0rpB0+2WgBbL+cQP76vs3Yi8mjN04f4V6PGWjsqkPMS
+         A2yLXpqUI9cXWATJihe5IP86ybPkXAZB7hfsYv3lKs8taaZijpLw2/XLw4v8damNMIDI
+         RNQg==
+X-Forwarded-Encrypted: i=1; AKwUvBy/HrWXXWW3ry4MlVcjkOVsd5zLIfGVYJ23ID1Qdz0L8l0qRELoxUguHHDVeLMKLP8bkWKoT+UPHiPmicM5@vger.kernel.org
+X-Gm-Message-State: AFq9FYIhX5uMX/vbh9TlvWAtgsXDIO4pSM25ThDXHtPBnkHEWv2TQz5U
+	6wRi0pu6r+kskcOrRMXZFns3qDoR7/vA3kZQLdPw0ViprommiUPNCiG2VD6j4PhD1TeBzGMOWn4
+	+XQAJo6Wo7U70f2t1L476441LK5BxgRUFj1zLjSO5/wGxnobsLQvtuCUasdsnBslKeO9g
+X-Gm-Gg: AYBFou0H4Z/10OyhQarOntqdIrDM49zHhR84v8bbtXjrUYm4/Sv/3l+tWUTAsEZnU3E
+	V11gB6MyWrOD9mCQvIVYJ26A86PU0LrkVjxEAjH70e1V4RvoHkETHMmdaXBrCJ20H1IF1CbP4j8
+	+tWkiBd6mhZjkxvNK3I+B83w6FAz15DWVDE/QNztGDVWh1o5a7VOlDKDlOVtALZaNN6d8fmIlas
+	vB9Fvypl2DSqSdyD+TgGNUN9LR/JyUMs9MC1jFBYa5IS5OtT7kgj6keXzI9vf1/Piu51Fk6GJL1
+	ZYWWSvZTYQypBiL1qG+MXPJaNIFq/cO5lQhX6AZaXSKizLiTyXRgVmaZZbVqtwmv6/FnZACY7As
+	ZDngDEj2Pek0AZGEfCZImsUF2q3KJAXJ/
+X-Received: by 2002:a17:90b:4b0e:b0:3a0:d75c:239f with SMTP id 98e67ed59e1d1-3a4d1505448mr4083698a91.11.1790858686803;
+        Thu, 01 Oct 2026 05:44:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b0e:b0:3a0:d75c:239f with SMTP id 98e67ed59e1d1-3a4d1505448mr4083680a91.11.1790858686237;
+        Thu, 01 Oct 2026 05:44:46 -0700 (PDT)
+Received: from [10.219.49.187] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a50f01421asm2055122a91.3.2026.10.01.05.44.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Oct 2026 05:44:45 -0700 (PDT)
+Message-ID: <2bf53c39-dc58-422d-b472-a7c95f445076@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 18:14:40 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-2-13df5c20c2e3@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 8/8] ASoC: qcom: lpass: Add support for LPASS codec
+ v4.0
+To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260922-add_shikra_support-v1-0-6c6cb6444caf@oss.qualcomm.com>
+ <20260922-add_shikra_support-v1-8-6c6cb6444caf@oss.qualcomm.com>
+ <6f2afa91-6355-45f8-b6be-6b556c679813@oss.qualcomm.com>
+Content-Language: en-US
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <6f2afa91-6355-45f8-b6be-6b556c679813@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: ljbazmUkpVvyB37te5FYTaZ2wsktEgNQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA1MCBTYWx0ZWRfXwWgpyZOhgmJR
+ LpwdLYEffFX//JECgjTw2809oCKw9eUxIAO6U0iL3tRODNx9k5z3WC56NuYC8gjgnNpxaB0R3/d
+ GBZudxBhRSZqhiSpRZQLPkwLXHbf6D75uSLmyx9C/XTeRSFenIT9UYmlKKclE3klu45jKWGI5Hl
+ ugZ38pFcp1ay5W+XPiR6/tCtky2B1I9FQXkAqjc3b47W/rAJviKKisTyNaQasrgtURngpL4RHQC
+ zNoYqAx7tC93TofPDkAf5JaDHS1MUYeqT2Uw8b+5/qf4F5wOdXgw/y/LtiY+WRwgllqcY5kEINB
+ jRrLgoInq1thmXO3LfiPEHrLSXs7OPXkaHeYv7TNfscKPqHwFScIfhnPMIFPz3oDbzSj3HAv8KL
+ 5V5dTTRZN2pSSvY+gm+LKwbt0Lmahj1z4pubfXQ0tvaHs9wxueDMugl/mht6tuO5h/XwS0AKg6S
+ Cfjn8draEs+LNd1JOAg==
+X-Proofpoint-GUID: ljbazmUkpVvyB37te5FYTaZ2wsktEgNQ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA1MCBTYWx0ZWRfX2ExTDATDNtQJ
+ K+T6eE6AP84NXxAHl0minBBQWY0YPXKQqFUAju70AFmR2NPdiEPcrpiGF3vr22wPKpfUo+2zMNh
+ C6z5CULyEPMMliYkvMKOHb8U2PXrsf8=
+X-Authority-Analysis: v=2.4 cv=KuvYSmWN c=1 sm=1 tr=0 ts=6abe55bf cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=dVCGMdOWq-ePsS7X_OMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
+ adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610010050
 
-On Thu, 01 Oct 2026 at 16:32:34 +0530, Harshal Dev wrote:
->From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->
->Kernel clients can open a TEE context and invoke regular TA commands
->through tee_client_invoke_func(). However, there is currently no
->equivalent helper for invoking TEE objects.
->
->Add tee_client_object_invoke_func() as a kernel client API for issuing
->object invocation requests. The helper checks that the backend provides
->object_invoke_func() before forwarding the request by setting the origin
->as TEE_OBJECT_INVOKE_KERNEL. This allows TEE backends to support
->privileged object-based calls from the kernel-space.
->
->Co-developed-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->---
-> drivers/tee/tee_core.c  | 12 ++++++++++++
-> include/linux/tee_drv.h | 13 +++++++++++++
-> 2 files changed, 25 insertions(+)
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On 9/25/2026 4:32 PM, Ajay Kumar Nandam wrote:
+>
+>>           rx->rxn_reg_stride = 0xc0;
+>>           rx->rxn_reg_stride2 = 0x0;
+>> @@ -3959,6 +3962,8 @@ static const struct of_device_id 
+>> rx_macro_dt_match[] = {
+>>           .data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
+>>       }, {
+>>           .compatible = "qcom,sm8550-lpass-rx-macro",
+>> +    }, {
+>> +        .compatible = "qcom,hawi-lpass-rx-macro",
+>>       }, {
+>
+> Patch 6 documents qcom,hawi-lpass-rx-macro with `clock-names` 
+> containing `lpr` instead of `macro`:
+>
+>     clock-names = "mclk", "lpr", "dcodec", "fsgen"
+>
+> https://lore.kernel.org/all/20260922095522.193FC1F00893@smtp.kernel.org/
+>
+> However, this patch only adds the compatible string and reuses the 
+> existing RX probe path, which still requests the clock as `macro`:
+>
+>     rx->macro = devm_clk_get_optional(dev, "macro");
+>
+> I do not see any Hawi-specific handling which requests or enables `lpr`.
+> Should the driver be updated to request `lpr` for the Hawi compatible, 
+> or should the binding continue to use `macro` if this is the same 
+> clock from the driver's point of view?
 
--Sumit
+Hi Ajay, Thanks for the review.
 
+The Hawi LPR vote is already handled by the PM clock framework. 
+of_pm_clk_add_clks() adds every clock from the DT clocks property by index,
+and pm_clk_resume()/pm_clk_suspend() vote and unvote all of them. 
+Therefore the LPASS_HW_LPR_VOTE entry does not require a separate
+devm_clk_get_optional("lpr"); that call alone would not enable the clock 
+anyway.
+
+Thanks,
+Prasad
 >
->diff --git a/drivers/tee/tee_core.c b/drivers/tee/tee_core.c
->index 30901390149c..a03a3d645dd1 100644
->--- a/drivers/tee/tee_core.c
->+++ b/drivers/tee/tee_core.c
->@@ -1404,6 +1404,18 @@ int tee_client_invoke_func(struct tee_context *ctx,
-> }
-> EXPORT_SYMBOL_GPL(tee_client_invoke_func);
->
->+int tee_client_object_invoke_func(struct tee_context *ctx,
->+				  struct tee_ioctl_object_invoke_arg *arg,
->+				  struct tee_param *param)
->+{
->+	if (!ctx->teedev->desc->ops->object_invoke_func)
->+		return -EINVAL;
->+
->+	return ctx->teedev->desc->ops->object_invoke_func(ctx, arg, param,
->+							  TEE_OBJECT_INVOKE_KERNEL);
->+}
->+EXPORT_SYMBOL_GPL(tee_client_object_invoke_func);
->+
-> int tee_client_cancel_req(struct tee_context *ctx,
-> 			  struct tee_ioctl_cancel_arg *arg)
-> {
->diff --git a/include/linux/tee_drv.h b/include/linux/tee_drv.h
->index f3c5e106d853..369c87ad0205 100644
->--- a/include/linux/tee_drv.h
->+++ b/include/linux/tee_drv.h
->@@ -283,6 +283,19 @@ int tee_client_invoke_func(struct tee_context *ctx,
-> 			   struct tee_ioctl_invoke_arg *arg,
-> 			   struct tee_param *param);
->
->+/**
->+ * tee_client_object_invoke_func() - Invoke a TEE object from kernel space
->+ * @ctx:    TEE Context
->+ * @arg:    Invoke arguments, see description of
->+ *          struct tee_ioctl_object_invoke_arg
->+ * @param:  Parameters for the object invocation
->+ *
->+ * Return: On success, returns 0; on failure, returns < 0.
->+ */
->+int tee_client_object_invoke_func(struct tee_context *ctx,
->+				  struct tee_ioctl_object_invoke_arg *arg,
->+				  struct tee_param *param);
->+
-> /**
->  * tee_client_cancel_req() - Request cancellation of the previous open-session
->  * or invoke-command operations in a Trusted Application
->
->-- 
->2.34.1
+>>           .compatible = "qcom,sc8280xp-lpass-rx-macro",
+>>           .data = (void *)LPASS_MACRO_FLAG_HAS_NPL_CLOCK,
+>> diff --git a/sound/soc/codecs/lpass-va-macro.c 
+>> b/sound/soc/codecs/lpass-va-macro.c
+>> index 79abbdd158b7..46ae627ca594 100644
+>> --- a/sound/soc/codecs/lpass-va-macro.c
+>> +++ b/sound/soc/codecs/lpass-va-macro.c
+>> @@ -1896,6 +1896,9 @@ static int 
+>> va_macro_set_lpass_codec_version(struct va_macro *va)
+>>           }
+>>       } else if (maj == 4) {
+>>           switch (min) {
+>> +        case 0:
+>> +            version = LPASS_CODEC_VERSION_4_0;
+>> +            break;
+>>           case 1:
+>>               version = LPASS_CODEC_VERSION_4_1;
+>>               break;
+>> @@ -2166,6 +2169,7 @@ static const struct of_device_id 
+>> va_macro_dt_match[] = {
+>>       { .compatible = "qcom,sm8250-lpass-va-macro", .data = 
+>> &sm8250_va_data },
+>>       { .compatible = "qcom,sm8450-lpass-va-macro", .data = 
+>> &sm8450_va_data },
+>>       { .compatible = "qcom,sm8550-lpass-va-macro", .data = 
+>> &sm8550_va_data },
+>> +    { .compatible = "qcom,hawi-lpass-va-macro", .data = 
+>> &sm8550_va_data },
+>>       { .compatible = "qcom,sc8280xp-lpass-va-macro", .data = 
+>> &sm8450_va_data },
+>>       { .compatible = "qcom,shikra-lpass-va-macro", .data = 
+>> &shikra_va_data },
+>>       {}
+>>
 >
