@@ -1,196 +1,218 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA6A0475339
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 09:35:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFDAF3EC82E
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 09:38:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790847354; cv=none; b=cosqxWbRR+jORNxDxWaAZ6llbL3mhF+dwh8i6kM1ikgcUomlIcVzR14CkRRuxGzzZ+DAPxFRqGJSq+CO+/7I0mZs76BybpxJmqaMba4GG0SOscGfPEOa2LkUdblnRmYHHVIvVbXDAwJ0+PkLZTFxl5kCueN1M3gnftsqc1eShls=
+	t=1790847506; cv=none; b=cKJsJVJ7xA33wzMFd/fuOZ5J0rrCXJFREzUDiru4qceDi3ZHP6xNmRSdzZu9Egnmq9hH6woM3B5SePST3HKkWCjDwkRq2Qb+jEqhE2rFvBGuM5ctQYUHkQcRck4o4WGlsK1vTB3PBDKsinRPo+gpfvn4B9uVWJt7IHjaQHXvfJM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790847354; c=relaxed/simple;
-	bh=2x5l8hdDQlwJXCS/Eggz+xDDnpbTH4eIJ5E+6/vN3gM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=O/AEutmwPlFz6++vsFHEKDGDshRxm72l4hax3kVashZJAzHa3N0Q8rS2PVRW6WDRVMx6PG8GCR8XMwah1tUwJs12K0qfe3brjwj4r5QRLNSqCrCXqiJvpNAFvR7FUkXI2SygcaaKlPFXO7MjzuROU0GyYXFLJai4wvWZ7v4b90U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TXkhuXOi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=e2J8kLRM; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790847506; c=relaxed/simple;
+	bh=DWooC2VkfML8g4xa8rXJoaau/r5oJ8SbUeOK0UZy3kY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=eA3rzEpte/F0yFOOCbaQVVSuUM+cKpgaHPqMODItL1RfqgZM5ygWdmfzgxG0Bqg3d7XyjVAohWCJLLt4dMgQ89gyRc51Zo/V4ZWwt2zfEBgZPTQy6WoVUn9nUIJNXrq6umr5d2FErYQfMKEFN0bBly2cq9ZTEAKhVrUNkGzTb0U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HGROtd8G; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IXHvr3ZG; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TXkhuXOi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="e2J8kLRM"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xPDQ2887770
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 09:35:50 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HGROtd8G";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IXHvr3ZG"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6916xMCh1062146
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 09:38:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ITC2AOyoiZTQDo8TbhKy42Jf/j6c3ShiqBjBF20yDLA=; b=TXkhuXOioTnrE2vU
-	zSkIhqYru766pZoTlf7D8UFEfXWrRwf3nN3q770LpArGpmfyeG6LiXGkR9g1nRq1
-	KEK1RYL7f2mpXnQbJSUt06kGLuktEf4BoBp5s2C0tkpljXgP6XlBytlAW917h7y6
-	E0Ysfv3rCRgwrwEC0fyFHfzK797Pb5VeS2T/F5FAodgZS2AzWmCtoDgyrYt4Tg+o
-	Tr7RKuyMsKxpFpQ7bGJO+A0w178O+/Uu4tij9Dal0Ya+yj6nHhRjHtOItPlqumxJ
-	DaiXLFzgHNcoTJLgxrhseTo8Ysz704pjhMpzvY1KGCnOJSqU0xbNY3rt8LP/12nB
-	XYqvMA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h136tmfyc-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=EvKMpWanvpqCgtKVhF42kRfvWBmd+tcqJ8h
+	5PSGSviU=; b=HGROtd8Ggx13AFN2h+NozbAX5FHkzOwO8bADKuZ/4Po9GS9wp3o
+	E4PsdniWPSr6lacy9Zw4wE0RtovN9e5w+Umm94IJX81bE+cqaiO/DeCh9KpQErQ9
+	vUD2UHVwnaBz0zbDJGMLvJlxhrZDbcx7nECJzA7V1TPM/zuULk0D1O9WCKebd2is
+	+/wP7Ebnit8YxPbFw+8GP0AgnqdrQ+Q+nvL53m31dQj+4MEEDGJHSlDZ8SrpSmv8
+	kyTePAcF0ikt0f3zum/s3XZraRWz+EKF/qZbu89b6r+Yv8p6NuDIHk7USeg3mQ51
+	q8ZLua2SdrKE53aRwnm60eRWC2IwX4WSngg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17mvu343-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 09:35:50 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39de4e72b33so11304079a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:35:50 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 09:38:24 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-936aa34873bso1154305185a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:38:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790847350; x=1791452150; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ITC2AOyoiZTQDo8TbhKy42Jf/j6c3ShiqBjBF20yDLA=;
-        b=e2J8kLRMNthGsjhLW/KPUDXXryrKC5rHUXTBR+bCkLuZjrsHrvwpt/nHA9JLGXWZ2X
-         ClzIw4A2Uip8lGauLHI+O5fYOllzB4F1P3bQO9pvr/IortmSnPl/ETh/u4rpAzUEpMzE
-         Vypp7gx0h+sOEwpdN7hDQl2WMLp+M0DJERhNN/Pr7+uzHYvnzJdtEiTZs4Pt38MnWGit
-         yfJEK1C5wyVFVVU6fx1mNjnHdFeYpgpnw2b8YteSZ3X1QEgspELC8KB+qjo75Tsov6pM
-         edMwYYQ08a1PLbup2uk18yTj0TT1vlrvNKyvlpa4/29QkKpne11XnBZjrILwsY6UEp2L
-         ckVA==
+        d=oss.qualcomm.com; s=google; t=1790847503; x=1791452303; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=EvKMpWanvpqCgtKVhF42kRfvWBmd+tcqJ8h5PSGSviU=;
+        b=IXHvr3ZGFRJXa4SUzHfszxQHQy6bCdFV4lULoFErtmkUpySwpsqOkpp0L3pomNmSgs
+         nAXPbByhhBE8eqnHHFsNdlkIYq8UTYOZqMHVk9S0pDDKDQSPvWTAwnnnWDRQVU1q/nH+
+         9C8fqrbWupciEMw45z7nzsEB3jr24OITjq385mdbGoeyqnqyVVIozjdsMyI84wQILCxq
+         GJA2B/1XzmgLi+/1jNrX/A13wlB+2d5cHwHsIr2Yb4SOGFu+FqssHLyd6uruTKLjA3BB
+         xZuYzGeo5VItoGcsd+Rn4TVJAbtButAQsaa2A6Oco1XQEStmByIJsXbteurTsIxu2TWW
+         Vl+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790847350; x=1791452150;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ITC2AOyoiZTQDo8TbhKy42Jf/j6c3ShiqBjBF20yDLA=;
-        b=1u7j03ydUhw1WgSp+bEhXtkH3iAURBFcnNuWLHocvSnf16jOPCvVgtPE/ckgYergfR
-         hkilETm9/0AOmHvv7QC7C/H76VXY9qtRJ+NgxbbPMZTzG2Lwcruw+fgVc2N3zsfbbsd1
-         KPw4xayyQeUkz6HfM14rG84jIFxpB+vrVGa4LEaMh07xYHHo/fzyCU16GcF1wnk7WEqu
-         9Fi9Gc37Kb4yKH0bY3BkSSM56+We3NJ3uxSI3ihqSkVd4snA5pFOgijy5muj0Tznhxbk
-         NIk9IoNRux+M449RwQHU7JaJP+TUzTwpxLoqRkgJP+ThJ7HI6XUftFla3hwuN89Hs/Po
-         QVUA==
-X-Gm-Message-State: AFq9FYJc4sbU8X0hysZd7b2WTY97usJM1wSpCwZHQ/c9KD3jSelQoC4e
-	koUlFDHmmgTOFyCAsrInyt+NsyajwMetfDXxxcaNHd8sjoS5wDvLcGqPMsSkwnOfsqP5TcaUhAs
-	SvytPKn2u45MYghFnVJBySpUfgHeLt+y6Pul6WWnAIZ8xQ/h34Of9d8/nMxwjAQ7q8jZo
-X-Gm-Gg: AYBFou3ZqBggcecEQmZ4TRgyWy7gv9wXJKFkjEqu4ygOP2eBsh0JG4sJ1j5DUeYsxjK
-	QRp+Q7hjUX9PDCIqJVeyD5BP8yy8r76S798LS4LmYag9iE4Vr342QhLk3VI93zQvjW41anjHV0Q
-	ZQExhs2VEiy6z9//dToGN8WV7Bnq6uSTjf2Aq8o001dyQ8+j0uJpQcRVr+gNM0XuH5CeYPoHpnf
-	ptIpKOexk0vk+MI64L+xmwdacuzoPT7wkWXiWmd173g1mnuWv2WFfubRPabLWUKLIm1Us+NaYPP
-	6iAN50avXkfpzbF7vb1JDkXXMju1/wQHtFgeJbbbTIgsz/uwDDVeXm/jK/QDuaEbEf66pC+/Nq6
-	U2k6auy02rWhdLgVAG3U/xfFInD8=
-X-Received: by 2002:a17:90b:37cb:b0:3a4:c18c:b893 with SMTP id 98e67ed59e1d1-3a4d1964c71mr3348488a91.61.1790847349912;
-        Thu, 01 Oct 2026 02:35:49 -0700 (PDT)
-X-Received: by 2002:a17:90b:37cb:b0:3a4:c18c:b893 with SMTP id 98e67ed59e1d1-3a4d1964c71mr3348457a91.61.1790847349382;
-        Thu, 01 Oct 2026 02:35:49 -0700 (PDT)
-Received: from hu-naala-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc7e54bf4c4sm1152944a12.29.2026.10.01.02.35.44
+        d=1e100.net; s=20260707; t=1790847503; x=1791452303;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EvKMpWanvpqCgtKVhF42kRfvWBmd+tcqJ8h5PSGSviU=;
+        b=M8xrGeDn8XsgZXiFZmyxxtjh+F6CeCJ6nyaY8ljm7bCLWzJu6RgtQHrAgawTXZmAJf
+         nVjEcVLeUTz044FYRNGxvJH8C695Xt+R/BFphSOUVcNx5GRjpsFxR/l9FFOwQnPJJbvz
+         e0obAlyoO7ll7h/G3ajFzIBoPO9xZ76g9Pc7qEcpvq/OBCUMyPvFxnlZDnXlMgYabyz2
+         z2KhXRlVQn8BLT/cOykFNLICum3nz3rdnFNRoflDd50mu2FRrDmTPoL0dnKqLhRsYqHp
+         D0F/CHT8uV8TeyHD5oE68AQjEfw1emTzeoWnWhkOZw3nsJ+P+hcuxPBE17jQWZeHLnaH
+         yF1Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxee9BY2DF+VQNNeDVZ7rI74iIpWJ0T2bDlJHazX8QcWNe5mgsB4CTi1HNB/jB1OjFv2I+P9CX4NgfRC82T@vger.kernel.org
+X-Gm-Message-State: AFuF++m8HdzkKN5rubFQR32GaXcLecPdrJrt5Rg0EE13wfOhiklbQFT6
+	c3z3Xpr91lV7Jj8JHcymDrwgYbNjGcjT7wdXSN7d/Sg4roIld5NKVohV6I1PNlloJVb3HABjXf1
+	xcX9jaeBM2YgczHqnrVgPpQp/Wrs2RVdJRM/NRG0bs80CP2mUx2kEZb6BA3IeisMMUXX7
+X-Gm-Gg: AYBFou2lMPcqFC5aTU/6Xzm6/R/4k00XyO6CFKzjbDQdJMsH5Ba768UxNPcIdwmB986
+	Eb2pFSAieNtfcvFwABcfE7DCWL615nwUi4YNVueHFbyL9eYU3Ewo5cT6tPYgdQut1cw0Gmt2sfF
+	MwGtkuTwbvJmNPqeiq/Q/DDDI97vLdMhRc5BpheOexxzTCco0u/ubI0V4eI5j5YSyxOAIPuw4EJ
+	h0NmQI7YDhxsa0Hqw4oRcS36peDA6L3v6PlD/V2FNLa6l13Mz3v33mYn5R5UG7scGTv2Cq0LSoS
+	hDSki8Zg9X+MtlVzUZaTe3SJV4/8MS2PTxvViyDCixQrAzaHjUKzIqfD+YXmcPuG17toWUVWkkD
+	F9DM9VTYCi/Mo
+X-Received: by 2002:a05:620a:46a1:b0:93b:eb3b:dac1 with SMTP id af79cd13be357-93ca9743652mr730818485a.18.1790847502973;
+        Thu, 01 Oct 2026 02:38:22 -0700 (PDT)
+X-Received: by 2002:a05:620a:46a1:b0:93b:eb3b:dac1 with SMTP id af79cd13be357-93ca9743652mr730813785a.18.1790847502273;
+        Thu, 01 Oct 2026 02:38:22 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b0692b5d7sm5231750f8f.28.2026.10.01.02.38.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 02:35:49 -0700 (PDT)
-From: Nabige Aala <nabige.aala@oss.qualcomm.com>
-Date: Thu, 01 Oct 2026 15:04:28 +0530
-Subject: [PATCH v5 11/11] phy: qualcomm: qmp-combo: Fix error propagation
- in qmp_combo_dp_power_on()
+        Thu, 01 Oct 2026 02:38:21 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: robh@kernel.org, vkoul@kernel.org
+Cc: krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
+        yung-chuan.liao@linux.intel.com, pierre-louis.bossart@linux.dev,
+        prasad.kumpatla@oss.qualcomm.com, jingyi.wang@oss.qualcomm.com,
+        sibi.sankar@oss.qualcomm.com, quic_srivasam@quicinc.com,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 0/3] soundwire: qcom: add multi-master support
+Date: Thu,  1 Oct 2026 10:38:02 +0100
+Message-ID: <20261001093806.634862-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261001-glymur-phy-v3-v5-11-3848c2615d5a@oss.qualcomm.com>
-References: <20261001-glymur-phy-v3-v5-0-3848c2615d5a@oss.qualcomm.com>
-In-Reply-To: <20261001-glymur-phy-v3-v5-0-3848c2615d5a@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Johan Hovold <johan+linaro@kernel.org>,
-        Bjorn Andersson <quic_bjorande@quicinc.com>,
-        Dmitry Baryshkov <lumag@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-kernel@vger.kernel.org,
-        Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>,
-        Nabige Aala <nabige.aala@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790847286; l=1638;
- i=nabige.aala@oss.qualcomm.com; s=20260520; h=from:subject:message-id;
- bh=2x5l8hdDQlwJXCS/Eggz+xDDnpbTH4eIJ5E+6/vN3gM=;
- b=UwWoXymJqRAn9a1nbY9YGmP7UrYi5z8V4UMyZzEqZghFGJ6xzMCIQho/tRyr25PK+jXxtu/ZU
- PrNvsGqJsZbAamqXS9j2qzWuKPgmroIiUA1B6lk55/BglUgkWjT5VSe
-X-Developer-Key: i=nabige.aala@oss.qualcomm.com; a=ed25519;
- pk=PYHJom8sPos1IGkrbCCsWiE7XTBQrQZd9jzAo051tgw=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX7C4tUIPvhRDZ
- HG6hS32mQ7MVN+XE3rMiYk8NcfCGSKaic9jxEaPyGVGWSfKyUOcnxCgl40NMd9GDs2pC/UYMVoJ
- 1y7eftkzrrZs+E0ph4vWO0f1YIEMgK0=
-X-Authority-Analysis: v=2.4 cv=aPFlOr9m c=1 sm=1 tr=0 ts=6abe2976 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=X8Wa9jmQWlBxTcu95m0A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: ihcurQPtE3uF7V0M2-bfEfvKuBeKJOan
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX5ZQ5xCt77iP8
- Kn8tei6ODILTKKcfe270jYyNKYfEEyXqtt0kZzQWU3eI093UlaOvAI75SVXxlEZmdnbxhE0vq5F
- UhsUAcaVwd6qSOTcWPeJFP3Z9KTMqpSsUoGGrm0Fri99zIDPonAC4c6B17+y4v20FbJTL+WGET8
- c25LXqjNwomuUbzwzKvgmDSgsIsw8QrTTyl/HCVgG5VUsgZ8doRwjaR0k2diyTfgKvNyHID3h0A
- MZBQ4MG9rqgc/CJRBXfmIedXFK/9gd9BXF7UT4h6LdwR8o4mGQ6f/TtJCOQejOMuYYMM4SXpjCS
- 8YElSmNtMZkS6SzSuLUjDzxNChEnsQlzkEpK+U1zy1tY18FiGXDADaaT7M0FH3UJZt9xkz9rWz2
- kx6XJeljMo/hm4g7jfPKCfKtqCy50e6C0YB14MiNcgZjxIczt1W4TUbKcWSM8gA5rXJfQRuHQEN
- I+yLowTFJSbWEVI85sg==
-X-Proofpoint-GUID: ihcurQPtE3uF7V0M2-bfEfvKuBeKJOan
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: t_iJ3P8tKgMk7Ptyw1mycbowZpsUE9HR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX7S4uqS0+3/vY
+ wdpVMWa8Nt2fgpozPWm0UHHAew6q9IXDTlgMoM5IJvzjshqtgB1JVdHby+ZAaL6XNQm9Y7JWZ+s
+ KkqH2/vMfdfpBSJepOwcK8Nh08RWyi9UpabjsTFxYROBhvqa9KGzToSh+lBIcBKlMapInMmtX3I
+ zOiTImc33Zhjt1/NIzj/8JzuI7bRIlK3bTcunKVIe6imnbK/dBNN7Xw54N7CkRr4It01nIecXkB
+ epWZfyBMYPhTcwOaT+DQnSN18+Z5WDYuOJpzUDnjyy+3XIxPdP62Q90Yg4QmV5tvG8aeMWOC7rM
+ yUQrbD+W8JcdJdv1QxSYHkvGptsGO+XT0tCDkL2c1bVk7Vz4YtbNtPsRQZvXlbDbaWng796i2zc
+ TccHsqfT16tL+IIw3i6ebZeV5p4JMXbXC5LgRqWTOHxPN2i6munHyJdy41Y2XIOo7X1QpqRqsI9
+ iGlpLdTHFo0hBpsyOkQ==
+X-Proofpoint-GUID: t_iJ3P8tKgMk7Ptyw1mycbowZpsUE9HR
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzOCBTYWx0ZWRfX3kDH8LCVSh/z
+ opum9Wv+VA1pU+kATGfJxpCuDmuxwG5QRnTL/6hi3tJeQm9CnYaYVo8v90H7EngAhTqHfwp534E
+ vF24mcnI0k+uWDbsBxVC7tdu6ctLK+0=
+X-Authority-Analysis: v=2.4 cv=KuvYSmWN c=1 sm=1 tr=0 ts=6abe2a10 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=owqDj3WxTxIMLBZ9Q5AA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010038
+ bulkscore=0 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
+ adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610010038
 
-The configure_dp_phy() callback can return an error (e.g. -ETIMEDOUT on
-PLL lock failure), but qmp_combo_dp_power_on() was ignoring the return
-value and always returning 0.
+This patch series adds support to the multi-master in existing soundwire
+controller driver.
 
-Capture the return value, skip setting dp_powered_on on failure, and
-propagate the error to the caller.
+On Qualcomm Glymur SoC, both TX and RX soundwire controllers are wired
+up in multi master mode connecting to an SDCA compliant Tambora codec.
 
-Fixes: dd1153651b038 ("phy: qcom-qmp-combo: merge driver data")
-Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
-Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
----
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+One of the two controllers (tx,rx) act as primary controller in this
+instance its tx which provides clock and control and some data lines and
+other controller instance in this case rx act as dependent controller
+providing extra data lanes to primary controller. This is called multi
+master mode in Qualcomm Soundwire controller.
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index 5bbb2b5f8c74..13d5586b981c 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -4376,6 +4376,7 @@ static int qmp_combo_dp_power_on(struct phy *phy)
- 	const struct qmp_phy_cfg *cfg = qmp->cfg;
- 	void __iomem *tx = qmp->dp_tx;
- 	void __iomem *tx2 = qmp->dp_tx2;
-+	int ret;
- 
- 	mutex_lock(&qmp->phy_mutex);
- 
-@@ -4388,13 +4389,17 @@ static int qmp_combo_dp_power_on(struct phy *phy)
- 	cfg->configure_dp_tx(qmp);
- 
- 	/* Configure link rate, swing, etc. */
--	cfg->configure_dp_phy(qmp);
-+	ret = cfg->configure_dp_phy(qmp);
-+	if (ret) {
-+		dev_err(qmp->dev, "DP PHY configuration failed: %d\n", ret);
-+		goto out_unlock;
-+	}
- 
- 	qmp->dp_powered_on = true;
- 
-+out_unlock:
- 	mutex_unlock(&qmp->phy_mutex);
--
--	return 0;
-+	return ret;
- }
- 
- static int qmp_combo_dp_power_off(struct phy *phy)
+Multi Master mode allows synchronous transport across two independent
+soundwire masters. This includes synchronized clock-stop, clock-resume,
+clock scaling and bank switch between both masters, the Primary master
+will ensure that.
+
+From the slave's point of view there is still one SoundWire bus with
+one clock and one control lane; the extra DATA lanes just come from
+a different pad on the SoC.
+
+Currently the bindings are added in a way that its possible to add more
+than one dependent, however to keep things simple the driver only
+supports single dependent for now.
+
+Topology (2+2 lane example):
+
+     Primary IP                          Dependent IP
+     +-----------------+                 +-----------------+
+     |  MM_SYNC  <=====+=================+=====>  MM_SYNC  |
+     |                 |                 |                 |
+     |  SWR_CLK  ---+  |                 |                 |
+     |  CTRL     ---+  |                 |                 |
+     |  DATA0    ---+  |                 |  DATA0  ---+    |
+     |  DATA1    ---+  |                 |  DATA1  ---+    |
+     +--------------|--+                 +------------|----+
+                    |                                 |
+                    v                                 v
+        +-----------+-----------+           +---------+---------+
+        |  SWR_CLK, CTRL,       |           |  bus DATA2,       |
+        |  bus DATA0, DATA1     |           |      DATA3        |
+        +-----------+-----------+           +---------+---------+
+                    |                                 |
+                    +----------------+----------------+
+                                     |
+                                     v
+                              +--------------+
+                              |    Slave     |
+                              +--------------+
+
+Patch 1 adds two new DT properties qcom,multi-master-mode and
+qcom,multi-master-peer for describing the pair.
+
+Patch 2 wires up the primary and dependent roles in the driver.
+
+Patch 3 programs SWRM_V3_MM_SYNC_CONFIG on both sides so their frame
+generators lock to a single SWR_CLK.
+
+Tested on Glymur (SC8480XP) CRD with WCD9378 in compute mode. HPH
+playback and mic capture both work.
+
+Changes in v2:
+  - Dependent-side safety: skip ctrl->intr_mask and CPU_EN writes on
+    the dependent
+  - Probe init order: run qcom_swrm_init() on the primary first, then
+    on the peer. The dependent's frame-gen poll cannot complete until
+    the primary (sole SWR_CLK provider in MM mode) has started the
+    clock.
+  - Peer teardown on probe failure and remove: disable peer SWRM
+    COMP_CFG + mask peer CPU IRQs so the peer releases the shared
+    SWR_CLK and devres can free the primary without a dangling
+    back-pointer.
+  - wake_irq request failure now routes to err_clk (was err_init,
+    which skipped the peer cross-link teardown and leaked hclk).
+  - qcom_swrm_remove deletes the sdw bus before clearing peer_ctrl;
+    in-flight bus ops dereference it.
+  - Re-program the dependent's MM_SYNC from the primary's
+    runtime_resume (dependent has no PM-runtime of its own).
+
+v1: https://lore.kernel.org/all/cover.1789114385.git.srinivas.kandagatla@oss.qualcomm.com
+
+Srinivas Kandagatla (3):
+  dt-bindings: soundwire: qcom: describe multi-master
+  soundwire: qcom: add multi-master support
+  soundwire: qcom: program MM_SYNC for multi-master
+
+ .../bindings/soundwire/qcom,soundwire.yaml    | 108 +++++++-
+ drivers/soundwire/qcom.c                      | 261 ++++++++++++++++--
+ 2 files changed, 341 insertions(+), 28 deletions(-)
 
 -- 
-2.34.1
+2.53.0
 
