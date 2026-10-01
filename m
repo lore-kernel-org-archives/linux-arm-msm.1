@@ -1,225 +1,348 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F02C374A1E
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 02:41:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E1C29CB52
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 02:49:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790822473; cv=none; b=gSsueWH9c+BHkRJLeRf39A5o7H6NsL0bRCLNsCObdlJnuS0J+eGLJqJY+JhN9hep7TWoTFozLzBrUA5yS7SQC3JIoB9Fnwd1vPnrwP5RsiMqJvS8lv6vnW08rtilQsrYdYwG2mM1p3gBJnQPuqGxiwBqIS5kuWw13gm14NLqeak=
+	t=1790822971; cv=none; b=V+oXhOyPezCNJHyNbCwhmforBnQTqDPmdDzRakVlzhehUzLjqUKkSH6wGCpt9YhSNsOwEDjH7fD+Fy4PE4nzfHXw+i6Yqx4VfLMjluWKl/E/OVpAS6BNHoQEyQxB/0kHj03k4GfORVYe7AaWSd5R9jByWNtL34Ecp/jvm/S6X0M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790822473; c=relaxed/simple;
-	bh=N1mv8KavMEDnX/BXxl0wV5Vb5d7h32365RgbMswEy/0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=geAfbkGEfEaOKAsJFFPpk2Jv1Aw4EW2NZK7o1WH1hMpV/wN5VCNW5RlEnnI+jsng58cHU3RWhZmjs5xhC2T8KUX4PpU+qlktf3be2uXHFWFBhUN9mJhh/lfKuarhDGlTcTEc3vOzQKyIxdJymaYWKXM+W39+ayg/hogfdq6om0o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PvRKvfY/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NIQSzfRp; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790822971; c=relaxed/simple;
+	bh=H0vTFFzW39bczpINGfcjUjFpQAVtYUbVDSPTk5bLgW0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=bXVSxhrDQRMnTLYcnGWZfwE3Js8GQVY6Sn6y3XraZdKU/Lc4ynMIYuOjwk5LLfUWDLnH7dY691mM/EVYWkzDygGps8j1y9LnHtLYjREMsxrgTaAgpvsvavaDL5E92JDkEMnmkOpsH+WD6WKQTPiArr1TsfzbLIVLfVwmCw0o76E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=D6IiySGm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NAShoreF; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PvRKvfY/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NIQSzfRp"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6910jWqH271262
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 02:41:11 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="D6IiySGm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NAShoreF"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6910jbdH1141511
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 02:49:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Ghkjprac1hGwE2HrmUj6yg2z
-	I5ZEjbwo3mW27+l4U7w=; b=PvRKvfY/1bUonhpvDd9QQ/hrqKiYaxUFb8gHFmFB
-	ThPOeFz4qpeTor4WGlUrdwmr9QzJ5IREGcnVnbWL3Z9lX2mthrLxN/4uGIPXvoUI
-	mxMYUWday3aUaOW3YCjSK97Hdy1f86elKjKfp+Rvr7vWEh8x5Ny3udRHseCPPT+j
-	/0qiB/uAqWkWD4jSngjM4gLEyLrGzjpUUhoojPNTgFtYWHod44GH9d69yD463h4p
-	FOKcTsDthSi5UH+6R1PnULwBYldXQdqnd5gc4OPEgfk0havfZi08GyG7C3IDvsZM
-	PmZztik015SRYUNkW/6kYIeiC1TmBgTDhA6eBnoyPj5Hng==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17mvsk8j-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Eqi1lToXLrNFs6d5WQVIm9fr1NE0oqHF1TCkIlVqtvM=; b=D6IiySGmZlkQwq/U
+	6kOK5Ibe/znMucq82Nc7l0vK8wftsUOa4HLZR29RnYZuxSxCghAbojOoaX2ND8v4
+	zmw9pbDH1iSQe34sq3dpT63XRTkIxjHFNTYQ5ssGVUjT45QOsvcD0YgclsFMxKed
+	0A2JKON5tzfq4mkrx6OpMxmg+E/RKKYSrZVZ6/PNTKSxSudX6EhSl4CQeNbNVE32
+	9wauTc9nkzVeNHBApqNrGjI8uw1jKLLKWET2gzq5h2kgSyLt/FMUQ6EBhcX/YoFz
+	EVkxyPg14CDbJyvDWVepmyu5FhgKACRCsbnJY8qrrn3nuNzE+i48kcDC0Oj/+qXL
+	2PGmWA==
+Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1bh58qag-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:41:11 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-939f248907fso585387385a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:41:11 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 02:49:29 +0000 (GMT)
+Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-1383723dfddso6025614c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 19:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790822470; x=1791427270; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Ghkjprac1hGwE2HrmUj6yg2zI5ZEjbwo3mW27+l4U7w=;
-        b=NIQSzfRp2zHWeg8jg8MEIYEsmT5aRuk2EGexoMdHVXhkicZeWhGEBhfC65PMbs+p7L
-         7AL+6yMai5u/BKdVxv4U5BC23nYNs7jVHKKG2SBXiZnPWq38mQbrPEfzpY+JAk+tgMA3
-         n3cDUDaMBywJ0PXRihi3H3UO5dvkEuDQjAZ75widFXQ2SYZsAc8e15V+3WeTkovJyuQh
-         jCHgZK35ffdw4QhLnYj72HCIY3xdsdspmNZGrLcBwgZqg8yqjCOiU/8sj0DflKS4VaAV
-         d0uLZmHZJOUfz++FHzaOKhg34C8JMnCfVAqoBo4GDdYcUv9cpVyD/ehbjlslBhHYnnHN
-         t2pg==
+        d=oss.qualcomm.com; s=google; t=1790822968; x=1791427768; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Eqi1lToXLrNFs6d5WQVIm9fr1NE0oqHF1TCkIlVqtvM=;
+        b=NAShoreFIR5uFtjPN1PiTmrisVzu23ilEJkzP0/62xeFtkDWbZweD4OMDVaApro51G
+         5DbVRaI8S8J0nmgTbRBOjLEEO0h1M9ScHYmOvY1ncBdjXFLBErnx96cpNWeAyiLxKq8a
+         ABIxmH4WX2g4ilsBJn88vxsemfrWdFza4pVaY89np3AIWB4twL4A7bR4wS4lgPGv9PAc
+         5ZBiQWrndSDQUHsBcwuRNSq9bF85XhUWpHfa3rcfpjvYroZXvTWr4waIDvohSu1grxtX
+         QtwPGf5AvW4032KoqhLelm3jjY+YyhIIzl3145FcrK8brzV86a21ubbVYMom4bMpfTrs
+         +xMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790822470; x=1791427270;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ghkjprac1hGwE2HrmUj6yg2zI5ZEjbwo3mW27+l4U7w=;
-        b=GOH6fWpCPAdMAtK//JwcL+V+jNsTOP9PvCOGg+uXKJUX0yQBd1aK+E2B7ASBnHnYew
-         GCkxup822cIHhkv0tFCOurA9sodOPO/nBZlGBBhdmpDm7CguX/Y4ejlaPZ9+/84n4Xpg
-         z5GBuR+Ru5qsqf0IDsTfe/I4VxTqd2cg8EW8aVEG5/YNjkasm8YVgN8OthQ7HKwGDA1/
-         1/lFPn9TWe57UjwyHnDJO1UmeCCIaiULx6AbXdg+xmDKcX8WeaJvEjuHeudXqcKPqoyL
-         6T2ALgF+ouJvayAXJIFXhC3zvKanqb082Fqzux/Px14JLvAK5fh2oDa5BvDvPGT1cR9+
-         DJYw==
-X-Forwarded-Encrypted: i=1; AKwUvBxt0VspVHzE4uqE5/PFOUT5Jro+hyB24iYlxmz4Ydpsm/yidIvnmXWPHCSnIlajXgwp7aygJPd0TQO0GKvx@vger.kernel.org
-X-Gm-Message-State: AFuF++nBwQZV83wuU1/ALOclAQn0yqSKrwh5oWoZZo5yXo8zkPSC4BUs
-	HgIt3Oba5c28aXgDjWB6SxG0u/VtNLCB4dzBrk/nEHyDBi8Mao8eVSjncpzLFpFwtTHpmhWo3I8
-	OJH9bEi7nQruJnDtCrdpPHRXPoPufG74AILdIz+Y405AzttqeLPEOE0FwqtHDpBtKqcE0
-X-Gm-Gg: AYBFou2fA3Mg1MfVznPouAFisPgQifJQ//f0Ka4bxQKc0qsaWUhAKst0jyygvXXGtI6
-	/+bZ2gfOJWtiK4Se8JHWZ9Py2TdZb7hsVEA/SBY7nah3+cCIsy9/f0y2SjctYbFqE+yD2M4omX6
-	4+sYdb9s8iJCziZqILCumz1802XWd/o+VdHkoLu6eZNeHD0xhtxR539rx3nhYHffnejJgcj+w5j
-	kIYGyZW8yE3wz6eGoPYW05us4UB9b5X02jaD+kSypqGy+vMg+uBfEi/NB8zW2ONl5iHROptJXx2
-	eV/z90pnxwYXb9sH0r2/vmml744SsOFPPCh28U1chyCQqL5jCAWB9OBAxe8XvWPVrwzqNaAFBDx
-	eD/Skn6veNzHluyoNeacIgClpqfrW6Hc9dZ40fdF/MdqrJt2PT/vgjN/ySUEDdxKaLjObk1IAVl
-	B7h1TYyEW99nbT
-X-Received: by 2002:a05:620a:4448:b0:93a:824:ac8d with SMTP id af79cd13be357-93ca96d83a2mr651723585a.27.1790822470141;
-        Wed, 30 Sep 2026 19:41:10 -0700 (PDT)
-X-Received: by 2002:a05:620a:4448:b0:93a:824:ac8d with SMTP id af79cd13be357-93ca96d83a2mr651720685a.27.1790822469619;
-        Wed, 30 Sep 2026 19:41:09 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a77192c19csm12699581fa.29.2026.09.30.19.41.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 19:41:07 -0700 (PDT)
-Date: Thu, 1 Oct 2026 05:41:06 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Joonhoe Kim <26rote@gmail.com>
-Cc: robin.clark@oss.qualcomm.com, lumag@kernel.org, abhinav.kumar@linux.dev,
-        jesszhan0024@gmail.com, sean@poorly.run, marijn.suijten@somainline.org,
-        airlied@gmail.com, simona@ffwll.ch, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/dpu: compute the CRTC bandwidth from the state
- being checked
-Message-ID: <5rpjfokvikv2m2bayq72ar4z2i72esaarwzsui3yrceh3urvil@fuopy4uqypyv>
-References: <20260929130633.977-1-26rote@gmail.com>
+        d=1e100.net; s=20260707; t=1790822968; x=1791427768;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Eqi1lToXLrNFs6d5WQVIm9fr1NE0oqHF1TCkIlVqtvM=;
+        b=hh20a7X5FQs0M0MLfLeOET/ObYry2tb8bRUMWeji+XQmMqFUAjQJ53EPdzcn2YuDMj
+         aw2v3Ehp4zSZuKbirPZvLdSSGBAXCxkkbIepe4QUqrn7VxpTABeBBGivBUvSrXN7m5PB
+         JvpcmreMBt3e05yG5AaLTLgstNqfeIAKneZ5XA7weqec0TxL37TAof7uhtGnR49vK4cr
+         4mXMBnP5XZZ9Jz8TDYMwUxyxwrAPD5lV1cczQDkxTBeudqiXDqnKUsdAH4v4BjtzeLnI
+         xBSOwV5hGRP3JC44Z3i1dejzyS12/iWHd6OdxfQQn3DgwsozPLpsticQz+pH+mJmSLGE
+         uMew==
+X-Forwarded-Encrypted: i=1; AKwUvBwk+YyyORuY6kRmbWaoIWflxkXnEJ+xeoHMSj3fQvvYF+bslQ+WTSYzR9WLwQ4svbS8cbDfWNkIcJsF3EVY@vger.kernel.org
+X-Gm-Message-State: AFuF++mfz0p1ZxTULeQcZkOTkhmmXu8vE7WareUSJAe+zmJ5pplbz4Jf
+	3XHZRmHzNpmL3jom43+QWcwUNnO0rtyFuDGNaQ3rJLU9hzFTkabz6BRwwQ7pAq9/rNjKa2M4bB/
+	xwPKcnKcMfYCUegEFs/WQ5c1RNs49+Ywiay5BiyqQhQNbSsC/ShexlxIjpY88/TRgsbsK
+X-Gm-Gg: AYBFou2GmsvHBlADKgvcxnbeoTqphKZwPLw6kNAzQNvHM7DhnZGjTyB82jaJ3v7jr3l
+	2J4q/qlBOYEjVaKzcqYTihwlphixIJikNGhQVs3gNWfEKiDjvcFtJv8wDRyzIxEA6vHXPV/2k0f
+	4gnh/VMsRYIGSKeMGOPMlWnq+S4JQv0tj5R6moTfv0am+PtGp95/eGIvKO2SSFQr9nzSPASwgJY
+	nxYE7vuNT0S1nyzmwR/7aFEku2t1R54kvpdLMJOj9IpdHJ/Beiw2SRGjL1FOqCI2GJ/hPjvOb1J
+	mDFZqsAgEG01hH4C43BqYssO0wFxGawy1qv44G+ycgWYlR+QrAV0SEauM4f37Of3dedmyiIxy4G
+	dxvflrc+rNeu/aDAYDExQwNftHnhO6aE=
+X-Received: by 2002:a05:7022:ea8b:b0:14b:588b:c80f with SMTP id a92af1059eb24-14d31a8191fmr2935636c88.10.1790822968318;
+        Wed, 30 Sep 2026 19:49:28 -0700 (PDT)
+X-Received: by 2002:a05:7022:ea8b:b0:14b:588b:c80f with SMTP id a92af1059eb24-14d31a8191fmr2935611c88.10.1790822967664;
+        Wed, 30 Sep 2026 19:49:27 -0700 (PDT)
+Received: from [192.168.0.12] ([183.83.137.244])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34db3758da2sm2892431eec.15.2026.09.30.19.49.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 30 Sep 2026 19:49:27 -0700 (PDT)
+Message-ID: <6846a877-5698-e38d-41fd-95cb8c0986c1@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 08:19:20 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260929130633.977-1-26rote@gmail.com>
-X-Proofpoint-ORIG-GUID: a28jVJbn01zodUeBVLBNGsnf1JYXcpII
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAxMCBTYWx0ZWRfX3saJwM6dHnBj
- rAEekUsrOak+H9eIaGmPVhM9KCkXvT5ZAyLvdG9pfdy5UoY3SlI8P2tkVEODpLHoEyVqSeSPYL+
- eb4TTw7HawcgVJhMNX3tw7r0KRy9Y4V0MubxDeb9AStFvL5fYFaoWrxecvZuHOxiy0Cp+eIiKL5
- Foj0jM3cKjYtF560w0NNj2FlOTYPYutmYnEH8CHAg/5aojMYXaTq4RJ0saf7ITLRty9ilTca4MG
- d3Doi+ONB0mEJqQ7JnZwSSk3GVPdWYWnS51Ud5PhrnVxZFYjP2A5CLxFK2a8/awcQCx6z9aR/3l
- t9TvERqDMjEqUVTK0RjW8bMGPmFAOavxaoCBWiZKDmA+cp5KEhyOUOraADchZqwOBXTDH8ryFHk
- bmEHpj480ubQvSqXkrhtKgMqFIt1XvrX1SEH0T0Qhuz6ZpvIuta7kY0fONGZ5Gy1cYZHGy+5Y6a
- zDEEwKaPhx+6Vsu1l4A==
-X-Proofpoint-GUID: a28jVJbn01zodUeBVLBNGsnf1JYXcpII
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAxMCBTYWx0ZWRfX9T0Y//3ooIpJ
- pqGSf8ZYfpa2XIAl5lEwPHLLpwc6ZJz8Su8nRHzHiEOoZC343vmt9lAmYa0mz7MTOfSE7aXGbDE
- cTUdcpueJIedtIeNb+p8iEVD0exxsbE=
-X-Authority-Analysis: v=2.4 cv=KuvYSmWN c=1 sm=1 tr=0 ts=6abdc847 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=pGLkceISAAAA:8
- a=9aN-E-HqI_eRP4b4jg4A:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v8 3/5] media: iris: Add ROI delta QP control support for
+ HFI Gen2 encoders
+Content-Language: en-US
+To: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, kernel test robot <lkp@intel.com>
+References: <20260930-enc_roi_enable-v8-0-2c908f30e963@oss.qualcomm.com>
+ <20260930-enc_roi_enable-v8-3-2c908f30e963@oss.qualcomm.com>
+From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+In-Reply-To: <20260930-enc_roi_enable-v8-3-2c908f30e963@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: si1OMMJ5dfeNWY3KCLlGEIjFIQ25YwVm
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAxMSBTYWx0ZWRfXxAQ+8cmTHgze
+ /Y0j7VoNTmvvu8t7XmWF7x3wKySJGhSwKm9ozJwY7mTCFh7CvBYqLzj0opb9YnMP12UpwL4zBv6
+ kJnpg1br6f7TIO3DDVLBswDsYz3X8EU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAxMSBTYWx0ZWRfXwrNugrfLxBj8
+ uXAjNZrOlAXkbFLgMm1fL/sqBeHcLhzpkUIVjG+Fala0bb0vpIm+qNAvL1VSHqZRH1JVWJCMsJq
+ A+15unVKXjBUpgMfbqAr9M5xZFJWEiSehhG+YCxDi1/hnyEW39UuKu4XA4UINI15z2m1YWEBjRc
+ yMzelEJmbMahpXtKCSNzQ0tc3XOldMf3/cbPj2y9lp/ZAy0cIF9ot56afYWWT31ngFF4ETtmJ+q
+ srqUoIOgsZEYbgWFrhDBvnYC5Mh8AcBU2enWAZh1+JQvoEdRUM8aTnf/WKC9Oiyn67ARtl41vRB
+ wm4V4S8wuyiEoKOBUYCP27jzUlLVHfUXvGIvOlOANC3yWmvbd1IvQlb+l9fAWZzXYnL1xERkFK+
+ E3Tx5BGVFuO0vvJNW3AcJYAYbA9CN81oKJiQuRb+UVfGF6LpLtKQ1FrDv3Sz/wXjoPqrL4Nil4N
+ gB8tZoXJSE64Tpcftiw==
+X-Authority-Analysis: v=2.4 cv=NuxE4MdJ c=1 sm=1 tr=0 ts=6abdca39 cx=c_pps
+ a=SvEPeNj+VMjHSW//kvnxuw==:117 a=gJrurTm18R8X9NiJySVakQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=BQAKiL45JnMOSjkhOBIA:9 a=QEXdDO2ut3YA:10
+ a=Kq8ClHjjuc5pcCNDwlU0:22
+X-Proofpoint-ORIG-GUID: si1OMMJ5dfeNWY3KCLlGEIjFIQ25YwVm
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-01_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ clxscore=1015 spamscore=0 phishscore=0 bulkscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 priorityscore=1501 adultscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610010010
+ definitions=main-2610010011
 
-On Tue, Sep 29, 2026 at 10:06:33PM +0900, Joonhoe Kim wrote:
-> _dpu_core_perf_calc_bw() is called with the new CRTC state but sums
-> plane_fetch_bw over drm_atomic_crtc_for_each_plane(), i.e. the planes
-> of the committed state. When the CRTC is re-enabled (DPMS on, system
-> resume) the committed state has no planes attached, so the check
-> computes bw_ctl = 0 and the display runs without an average bandwidth
-> vote on the MDP path until some later commit changes a plane -- which
-> may not happen for a long time on a static screen such as a lock
-> screen.
+
+
+On 10/1/2026 12:00 AM, Deepa Guthyappa Madivalara wrote:
+> Add ROI support to the Iris encoder driver for HFI Gen2 based targets.
 > 
-> Seen on a Lenovo TB323FU (SM8850) through the interconnect and DPU
-> tracepoints: after DPMS off/on or s2idle, dpu_perf_crtc_update reported
-> bw_ctl=0 and qnm_mdp was left at avg_bw=0 (peak 800000) instead of the
-> 3728793 kBps voted before, until the next mode change.
+> - Add control infrastructure, ROI_PARAMS and MB_SIZE capability IDs to
+>   platform_inst_fw_cap_type. Extend struct platform_inst_fw_cap with
+>   p_array and elems fields to hold a pointer to the per-frame
+>   delta QP array and its element count, set during s_ctrl.
+> - Register V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP as a dynamic S8
+>   array control (max dims = 139264 entries, supporting resolution of
+>   8192x4352 at 16x16 MB granularity).
+>   Register V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE as a read-only U8
+>   control; g_volatile_ctrl returns 32 for HEVC and 16 for H.264.
+> - Define HFI_PROP_ROI_INFO and hook ROI_PARAMS to iris_set_roi_params().
 > 
-> Iterate the plane states of the CRTC state being checked instead.
-> drm_atomic_crtc_state_for_each_plane_state() falls back to the current
-> plane state for planes that are not part of the commit, so the result
-> is unchanged for commits that do touch the planes.
-> 
-> With this, bw_ctl is 3728793600 right after DPMS on and after resume.
-> Only tested on this device.
-> 
-> Fixes: c33b7c0389e1 ("drm/msm/dpu: add support for clk and bw scaling for display")
-> Assisted-by: LLM
-> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
 > ---
-> _dpu_core_perf_calc_clk() walks the planes the same way; it is not
-> touched here since I have not seen a wrong clock vote from it.
+>  drivers/media/platform/qcom/iris/iris_ctrls.c      | 70 +++++++++++++++++++++-
+>  drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 13 ++++
+>  .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  1 +
+>  .../platform/qcom/iris/iris_platform_common.h      |  5 ++
+>  4 files changed, 88 insertions(+), 1 deletion(-)
 > 
->  drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c | 24 ++++++++++---------
->  1 file changed, 13 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-> index fea173e37464..343c41550637 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-> @@ -54,24 +54,26 @@ u64 dpu_core_perf_adjusted_mode_clk(u64 mode_clk_rate,
->  /**
->   * _dpu_core_perf_calc_bw() - to calculate BW per crtc
->   * @perf_cfg: performance configuration
-> - * @crtc: pointer to a crtc
-> + * @state: the CRTC state
->   * Return: returns aggregated BW for all planes in crtc.
->   */
->  static u64 _dpu_core_perf_calc_bw(const struct dpu_perf_cfg *perf_cfg,
-> -		struct drm_crtc *crtc)
-> +		struct drm_crtc_state *state)
->  {
->  	struct drm_plane *plane;
-> -	struct dpu_plane_state *pstate;
-> +	const struct drm_plane_state *plane_state;
->  	u64 crtc_plane_bw = 0;
->  	u32 bw_factor;
->  
-> -	drm_atomic_crtc_for_each_plane(plane, crtc) {
-> -		pstate = to_dpu_plane_state(plane->state);
-> -		if (!pstate)
-> -			continue;
-> -
-> -		crtc_plane_bw += pstate->plane_fetch_bw;
-> -	}
-> +	/*
-> +	 * The planes of the CRTC state being checked: iterating the committed
-> +	 * state (drm_atomic_crtc_for_each_plane()) summed nothing when the CRTC
-> +	 * was being re-enabled (DPMS on, resume), whose old state has no
-> +	 * planes, and the display ran without a bandwidth vote until the next
-> +	 * plane update.
-> +	 */
-
-This again duplicates commit message. Please drop it. The patch LGTM.
-
-> +	drm_atomic_crtc_state_for_each_plane_state(plane, plane_state, state)
-> +		crtc_plane_bw += to_dpu_plane_state(plane_state)->plane_fetch_bw;
->  
->  	bw_factor = perf_cfg->bw_inefficiency_factor;
->  	if (bw_factor) {
-> @@ -131,7 +133,7 @@ static void _dpu_core_perf_calc_crtc(const struct dpu_core_perf *core_perf,
->  		return;
+> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+> index bf17d310eac081ffd3a4ad4842c2255ad798d4d8..9f84d28d00ab25555f1d2259f7ef0ed0786a0271 100644
+> --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
+> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+> @@ -156,6 +156,10 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
+>  		return LAYER5_BITRATE_HEVC;
+>  	case V4L2_CID_MPEG_VIDEO_FORCE_KEY_FRAME:
+>  		return REQUEST_SYNC_FRAME;
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP:
+> +		return ROI_PARAMS;
+> +	case V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE:
+> +		return MB_SIZE;
+>  	default:
+>  		return INST_FW_CAP_MAX;
 >  	}
+> @@ -301,6 +305,10 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
+>  		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR;
+>  	case REQUEST_SYNC_FRAME:
+>  		return V4L2_CID_MPEG_VIDEO_FORCE_KEY_FRAME;
+> +	case ROI_PARAMS:
+> +		return V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP;
+> +	case MB_SIZE:
+> +		return V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE;
+>  	default:
+>  		return 0;
+>  	}
+> @@ -327,6 +335,14 @@ static int iris_op_s_ctrl(struct v4l2_ctrl *ctrl)
 >  
-> -	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, crtc);
-> +	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, state);
->  	perf->max_per_pipe_ib = perf_cfg->min_dram_ib;
->  	perf->core_clk_rate = _dpu_core_perf_calc_clk(perf_cfg, crtc, state);
->  	DRM_DEBUG_ATOMIC(
-> 
-> base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
-> -- 
-> 2.43.0
+>  	inst->fw_caps[cap_id].value = ctrl->val;
+>  
+> +	if (inst->fw_caps[cap_id].flags & CAP_FLAG_CUSTOM) {
+> +		if (cap_id == ROI_PARAMS) {
+> +			inst->fw_caps[cap_id].p_array =
+> +				(const void *)ctrl->p_new.p;
+> +			inst->fw_caps[cap_id].elems = ctrl->new_elems;
+> +		}
+> +	}
+> +
+>  	if (vb2_is_streaming(q)) {
+>  		if (cap[cap_id].set)
+>  			cap[cap_id].set(inst, cap_id);
+> @@ -335,8 +351,53 @@ static int iris_op_s_ctrl(struct v4l2_ctrl *ctrl)
+>  	return 0;
+>  }
+>  
+> +static int iris_get_roi_mb_size(struct iris_inst *inst)
+> +{
+> +	return inst->codec == V4L2_PIX_FMT_HEVC ? 32 : 16;
+> +}
+> +
+> +static int iris_op_g_ctrl(struct v4l2_ctrl *ctrl)
+> +{
+> +	struct iris_inst *inst = container_of(ctrl->handler, struct iris_inst, ctrl_handler);
+> +	enum platform_inst_fw_cap_type cap_id;
+> +
+> +	cap_id = iris_get_cap_id(ctrl->id);
+> +	if (!iris_valid_cap_id(cap_id))
+> +		return -EINVAL;
+> +
+> +	if (cap_id == MB_SIZE)
+> +		ctrl->val = iris_get_roi_mb_size(inst);
+> +
+> +	return 0;
+> +}
+> +
+>  static const struct v4l2_ctrl_ops iris_ctrl_ops = {
+>  	.s_ctrl = iris_op_s_ctrl,
+> +	.g_volatile_ctrl = iris_op_g_ctrl,
+> +};
+> +
+> +static const struct v4l2_ctrl_config roi_mbqp_cfg = {
+> +	.ops = &iris_ctrl_ops,
+> +	.id = V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP,
+> +	.name = "Enc Mb ROI Delta QP",
+> +	.type = V4L2_CTRL_TYPE_S8,
+> +	.dims = {139264}, /* Max MBPF = 8192 * 4352 / 256 */
+> +	.min = -31,
+> +	.max = 30,
+> +	.def = 0,
+> +	.step = 1,
+> +	.flags = V4L2_CTRL_FLAG_DYNAMIC_ARRAY,
+> +};
+> +
+> +static const struct v4l2_ctrl_config roi_mbqp_size = {
+> +	.ops = &iris_ctrl_ops,
+> +	.id = V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE,
+> +	.name = "ROI Mb size",
+> +	.type = V4L2_CTRL_TYPE_U8,
+> +	.min = 16,
+> +	.max = 32,
+> +	.def = 16,
+> +	.step = 1,
+>  };
+>  
+>  int iris_ctrls_init(struct iris_inst *inst)
+> @@ -361,7 +422,7 @@ int iris_ctrls_init(struct iris_inst *inst)
+>  		return ret;
+>  
+>  	for (idx = 1; idx < INST_FW_CAP_MAX; idx++) {
+> -		struct v4l2_ctrl *ctrl;
+> +		struct v4l2_ctrl *ctrl = NULL;
+>  
+>  		v4l2_id = iris_get_v4l2_id(cap[idx].cap_id);
+>  		if (!v4l2_id)
+> @@ -379,6 +440,13 @@ int iris_ctrls_init(struct iris_inst *inst)
+>  						      cap[idx].max,
+>  						      ~(cap[idx].step_or_mask),
+>  						      cap[idx].value);
+> +		} else if (cap[idx].flags & CAP_FLAG_CUSTOM) {
+> +			if (cap[idx].cap_id == ROI_PARAMS)
+> +				ctrl = v4l2_ctrl_new_custom(&inst->ctrl_handler,
+> +							    &roi_mbqp_cfg, NULL);
+> +			if (cap[idx].cap_id == MB_SIZE)
+> +				ctrl = v4l2_ctrl_new_custom(&inst->ctrl_handler,
+> +							    &roi_mbqp_size, NULL);
+>  		} else {
+>  			ctrl = v4l2_ctrl_new_std(&inst->ctrl_handler,
+>  						 &iris_ctrl_ops,
+> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> index 3b8fbefb8b93576962abd3850215f7b7fb364930..d628bc6748438b19dac01cd11cb9f8da0b8500af 100644
+> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> @@ -1782,6 +1782,19 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
+>  		.flags = CAP_FLAG_INPUT_PORT | CAP_FLAG_DYNAMIC_ALLOWED,
+>  		.set = iris_set_req_sync_frame,
+>  	},
+> +	{
+> +		.cap_id = ROI_PARAMS,
+> +		.step_or_mask = 1,
+> +		.p_array = NULL,
+> +		.hfi_id = HFI_PROP_ROI_INFO,
+> +		.flags = CAP_FLAG_INPUT_PORT | CAP_FLAG_CUSTOM |
+> +			 CAP_FLAG_DYNAMIC_ALLOWED,
+> +	},
+> +	{
+> +		.cap_id = MB_SIZE,
+> +		.step_or_mask = 1,
+> +		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_CUSTOM,
+> +	},
+>  };
+>  
+>  static const u32 sm8550_vdec_input_config_params_default[] = {
+> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> index f43aea10090d8f1d6ae5c20547e5f6321b2ca203..08fc1036013de29e51747a6425ae7bb805ca3e0f 100644
+> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> @@ -133,6 +133,7 @@ enum hfi_flip {
+>  #define HFI_PROP_DEC_START_FROM_RAP_FRAME	0x03000169
+>  #define HFI_PROP_NO_OUTPUT			0x0300016a
+>  #define HFI_PROP_BUFFER_MARK			0x0300016c
+> +#define HFI_PROP_ROI_INFO			0x03000173
+>  #define HFI_PROP_WORST_COMPRESSION_RATIO	0x03000174
+>  #define HFI_PROP_WORST_COMPLEXITY_FACTOR	0x03000175
+>  #define HFI_PROP_RAW_RESOLUTION		0x03000178
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> index 9748095091461ba13443c63955a42906fa4f050c..9910eb5514b3ae0a6b5349adb071d0a56375102c 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> @@ -186,6 +186,8 @@ enum platform_inst_fw_cap_type {
+>  	LAYER5_BITRATE_HEVC,
+>  	REQUEST_SYNC_FRAME,
+>  	TIME_DELTA_BASED_RC,
+> +	ROI_PARAMS,
+> +	MB_SIZE,
+>  	INST_FW_CAP_MAX,
+>  };
+>  
+> @@ -197,6 +199,7 @@ enum platform_inst_fw_cap_flags {
+>  	CAP_FLAG_CLIENT_SET		= BIT(4),
+>  	CAP_FLAG_BITMASK		= BIT(5),
+>  	CAP_FLAG_VOLATILE		= BIT(6),
+> +	CAP_FLAG_CUSTOM			= BIT(7),
+>  };
+>  
+>  struct platform_inst_fw_cap {
+> @@ -206,6 +209,8 @@ struct platform_inst_fw_cap {
+>  	s64 step_or_mask;
+>  	s64 value;
+>  	u32 hfi_id;
+> +	const void *p_array;
+> +	u32 elems;
+>  	enum platform_inst_fw_cap_flags flags;
+>  	int (*set)(struct iris_inst *inst,
+>  		   enum platform_inst_fw_cap_type cap_id);
 > 
 
--- 
-With best wishes
-Dmitry
+Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
