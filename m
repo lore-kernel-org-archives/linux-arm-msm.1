@@ -1,90 +1,114 @@
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D5A841443E
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:12:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 638034848AE
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:22:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790835134; cv=none; b=hwOa6uiwOcqPaanoAZ7rREtrm9jE1f7BxU8CEAP1sz8/5vqhY2VtwLWj1EUQA89CY6/fTiW4olD6530s19Gw2sWemCifmg/+OtjUoHHLdkNRPwvipxTQqM363wrHj4SdJ9E5j7bVLGLBn+8XRcINoRLDeIpjn/NpnrkiIyGtsmg=
+	t=1790835730; cv=none; b=j0t3J6UO7Jh/QN2K99eNW7cJH9u4Bjy9ECuY3cwvqoA8rsew/Lo5dLnvYoAxHvz8d5OdI/HRVLuJPrwGRBUvSEPKeJB/V5Pt2IpX5vFNz0DmCk03wO3ribTqEwV0Sh33eQREsKRuw/c4a1pK2zo6/9H4iPhvL2maZqdyrvLU5JQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790835134; c=relaxed/simple;
-	bh=OgzBsM1JA4iQunu+Kx2XkRq0fCFr3hYwq5VUH7QKHsM=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Nj/zLKnSj87k/NofvTvbYGff8AGklQJiEle8+OelzmdHca0ydYrO05ghmooWKlgdc25ma+I4g7LKCFQfnPPXsIdFleGyA3CSAwz9OplLI6yOq1PeBqtl4EO7aDbBLVsALqCm15E+O5sxWYi85Cep1jAvyaQlfjQZSegWT7IXB4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--stanleyjhu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=F88PohOu; arc=none smtp.client-ip=209.85.214.198
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--stanleyjhu.bounces.google.com
+	s=arc-20240116; t=1790835730; c=relaxed/simple;
+	bh=jK8YcmgULqcX6JVEZ4kRXjt5tovYz/f4IYFMschjLGo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JCQy8r/AiuI/FabuBMyzVqQlQ1udQ3DTh0jpRxAl5UttIFTZcKQKbmVgXa5b/nU4X7Q9TjUKE9zprRyPkTN4iWK2JmQtQ0O7bVTVqikJPUfClrjE8loYaafqWTsmDKP9MMKAwNgX9liXIjJNvajPPlqIN11eg+arAKSLCCg5hZ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=K2iA6g8w; arc=none smtp.client-ip=74.125.229.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="F88PohOu"
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2df8484f12cso59680525ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:12:13 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="K2iA6g8w"
+Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-33e630052ebso7040211eec.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1790835133; x=1791439933; darn=vger.kernel.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=OgzBsM1JA4iQunu+Kx2XkRq0fCFr3hYwq5VUH7QKHsM=;
-        b=F88PohOuSLflNqgiDJ0r5rx0Y6H3ckZZH0hbjrRMoS3nh9/a++qwpRc1kUcu4Pb56Q
-         xx8gXpNjHgcHoCpcq/UalorW5D/S2hVsj8HODObscFrWlIMcZ6N9oYZXigYH6gsGSRJk
-         CI1dbXdzDi+ihqDZlE3LEPY5KU93p5F8eikyYAjU7F6vOx7ITEnNsKy5O+7RnwIoUDV+
-         aQ5IjwUS0OyO4Riji4aerILOcxxymGBhpThn+2b0xZqos8FVny6UzbrLzAxM40STloGC
-         RAytSX+uqOa/St+NTyoaLv/E8gYxvCV/gajmj5KjVoB5d1F9GDrNXnlOgwLaHr+1gjr/
-         7SsA==
+        d=linaro.org; s=google; t=1790835727; x=1791440527; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=y7zcw/ukAiD8lLlXAKYppSFNCW4crk+K0J8KwggLYx4=;
+        b=K2iA6g8wbvHkPECXpwO+9T5iw0NOSqhMYLQOuAHXigUm862xvqbeGZu4i8dLYBUpcG
+         BREAAMQlLV6Fzr65uxxxGpJW7MZO6bePGyhaWcdliPm4F8hwSIjjnEj+cUK6t1jtjFEL
+         3fkKekmeRDumBmBjlWm7erxBFqMpkt6iT1XX/8bd/v+RWZ1/HLwbnkESlHDRSHN+pgf1
+         4TUZ/AiXPw5ngly4xlsylLo4F6IjfDE+g0IZEXKgpWjj3xLf7aZmsOMnLO7ySiLTvicy
+         PwfL+AUsncVtgJz0Zrb/5zvqVdcfpxUFhyIslxTJIdYaJ4iikwZLNcJc9DP66CcMFwHT
+         +pkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790835133; x=1791439933;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OgzBsM1JA4iQunu+Kx2XkRq0fCFr3hYwq5VUH7QKHsM=;
-        b=0al6qlwfCqVCIiqWqYaFRpp1rX9nb9+Na2DOel4gbbsVFxfC33Qph8/SWpGK9YAU/P
-         gSVEOxWV5Qwz78M2MVV0dQsjYqLqoWMQVG/fIFfdcYSdB6pUIgKEoN5OzKa6hoMWxuI/
-         YnRnGenz0pdCUPmAaD3/ur0A5k5rv4KclFINfxdXq4uwj2cxHMPfsU7R1nk1jPElK5Rc
-         VuEJY5W6/r8qGyuruO5baysZ3JTP8m8Ba9JeVMlWwErSOWdEbiazypEKsuhNPD/y1k/y
-         Y6qXuJSiY1p5Fl/7dY38xOw1bABVzpExNTIh9bqjtjfDhA1CNwg1r0iTlLJRPVO0Iyfq
-         NntQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzANo1cEIf4vpwyJdv3hToECLeUTCYbocqQNAeGPMCQcPgMjmyNTB0W1pAn1gzfhqF2snO/dIo0PMD1uPnO@vger.kernel.org
-X-Gm-Message-State: AFq9FYLQNcz9cp9YxGqVQXVVi9MKS8HaxE94VBr9fGV90Qvvfx7LjHm+
-	2o2y5k4gUjFAM3ASrLcqfmw/+XQfJ2YCrNEBPMqjZpaUdWR//yDDLh2bCwC5dmfL7u7H6kfnSf6
-	JDdmF7SS3NYOCNI0X3WBWzw==
-X-Received: from pgbfq9.prod.google.com ([2002:a05:6a02:2989:b0:cc7:a60d:9a9b])
- (user=stanleyjhu job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:903:2c10:b0:2df:ab36:f145 with SMTP id d9443c01a7336-2e2e4bd212cmr32095185ad.68.1790835132740;
- Wed, 30 Sep 2026 23:12:12 -0700 (PDT)
-Date: Thu,  1 Oct 2026 14:12:10 +0800
-In-Reply-To: <20260929100946.693962-5-larisa.grigore@oss.nxp.com>
+        d=1e100.net; s=20260707; t=1790835727; x=1791440527;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=y7zcw/ukAiD8lLlXAKYppSFNCW4crk+K0J8KwggLYx4=;
+        b=RYqqrE9JI50kPtdgE19gPDBQhWhydSA7Dr/ivp60CKmoJtc2CmlGVj0sqhNBFKhv3O
+         5dvUaicuW0rE23z6Ufnx2j1PSIUeY/S121cVR1SH+ha/hMf/CLAqneQf3XaPvH1usRiJ
+         A4Dq8YuW69nbDdKhKox1M3NCqQRLGgpsEo8um1pg7nzwZK/p5tzzwFxQczJ7fGj6VnIb
+         NR9Rod5JEaev1kCs+rdcEnKnNrQt/yMKHOu48nm1yFLD+1WQEMRfhj6XH8FIeLl0PQEN
+         IHZEc85srySHWgE3piD19s9QFNQgadmGnDdhcNAsPewQo2V1671h6a+hXEzkt3t4i0j9
+         5Ejg==
+X-Forwarded-Encrypted: i=1; AKwUvBxHo5Ee1MQ+ns4ofic81y+/dxUa53tRnKs2O65xTru9bqbO/aPH5B5lNdM/VNYw8uDLakormNQ8NgJBqHog@vger.kernel.org
+X-Gm-Message-State: AFq9FYJokvBqvVw+A/1+qUbeFx9iCmz2DQ1kzbXwtaA11OUw5STtvetz
+	1xrvxtIEzps3gUwp+cosdlZkasZ6S1yANorselvlgun12nNfTeIskGdL0SJduGXnApg=
+X-Gm-Gg: AYBFou0KCNBlZJfLTwlQay3VNrkxhM1sYDhnzSTmEtZ+YaYKnlrMJYfCVVsJSCedTB3
+	0TCunYNamIJ/be4K59Z83xYAHcY1+WuI7vgwggEyzJm1+o/ezSxSEAQOTP1aMCTC8g0H8CysdGy
+	K6n1ZZ1ycVbGTAO7VBHR4/s7BiM7oAjhsnGH7hNVQeYiocbZsaIbSSFFJy9NEtv0X/KtAHwjuqe
+	EBpGxNqjpxIw7E2VaW9RPg8Tt3SpsBlRuJv4AVY950KCVyewt08/PTOG69VDSlT5u7VO+knn1yn
+	4G4q/O7YB6bGXgF8komp5oDUSO7l71ohTK4F5s81oaaHN1TRZO+AVapv4tGz4AsMS27akbO5moZ
+	a9asmfDIl/hcy3Ucv2mvYtHs4U5vmk+GEqeGVxtgfOfz5l8y6AINXqVHxSwaomzfqIsg9tqhqgg
+	nHF0CDyZtcEVzvf4o3JqIe0glxTpIz6jDgdLpAD/bhmNuehUuZjvIS8cYBEhKs8oUmZDMwkykY
+X-Received: by 2002:a05:7300:d947:b0:34b:101f:cda2 with SMTP id 5a478bee46e88-34cdc1ce13amr3929856eec.27.1790835727212;
+        Wed, 30 Sep 2026 23:22:07 -0700 (PDT)
+Received: from localhost ([122.172.87.224])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34db3750765sm4040631eec.12.2026.09.30.23.22.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 23:22:06 -0700 (PDT)
+Date: Thu, 1 Oct 2026 11:52:03 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Ilia Lin <ilia.lin@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH v2 3/3] cpufreq: qcom-nvmem: add support for QCF3211 &
+ IPQ5211
+Message-ID: <ar38C5omDdaXQAID@vireshk-B250M-D3H>
+References: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
+ <20260922-ipq52xx_new_ids-v2-3-4b1a0f3d04b2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260929100946.693962-1-larisa.grigore@oss.nxp.com> <20260929100946.693962-5-larisa.grigore@oss.nxp.com>
-X-Mailer: git-send-email 2.56.0.rc1.315.gc6ed9934b7-goog
-Message-ID: <20261001061211.4142384-1-stanleyjhu@google.com>
-Subject: Re: [PATCH v7 04/12] ufs: host: Add common Hibern8 TX FSM polling helper
-From: Stanley Jhu <stanleyjhu@google.com>
-To: Larisa Grigore <larisa.grigore@oss.nxp.com>, NXP S32 Linux Team <s32@nxp.com>, 
-	Alim Akhtar <alim.akhtar@samsung.com>, Avri Altman <avri.altman@sandisk.com>, 
-	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, 
-	"James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>, 
-	"Martin K . Petersen" <mkp@kernel.org>, Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>, 
-	Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Pedro Sousa <pedrom.sousa@synopsys.com>, Hannes Reinicke <hare@suse.de>, 
-	Joao Pinto <Joao.Pinto@synopsys.com>
-Cc: linux-scsi@vger.kernel.org, devicetree@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, clizzi@redhat.com, aruizrui@redhat.com, 
-	eballetb@redhat.com, echanude@redhat.com, Stanley Jhu <stanleyjhu@google.com>
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260922-ipq52xx_new_ids-v2-3-4b1a0f3d04b2@oss.qualcomm.com>
 
-On Tue, Sep 29, 2026 at 12:09:38PM +0200, Larisa Grigore wrote:
-> Factor out the common logic used to poll TX_FSM_STATE until the TX lanes
-> enter Hibern8 into ufshcd_check_hibern8().
-[...]
-> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
-> Reviewed-by: Frank Li <Frank.Li@nxp.com>
+On 22-09-26, 10:03, Kathiravan Thirumoorthy wrote:
+> Like all other SoCs in IPQ5210 family, cpufreq for QCF3211 & IPQ5211 is
+> also determined by the eFuse. Add support for the same.
+> 
+> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+> ---
+>  drivers/cpufreq/qcom-cpufreq-nvmem.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/cpufreq/qcom-cpufreq-nvmem.c b/drivers/cpufreq/qcom-cpufreq-nvmem.c
+> index efa766e98d86..9f2e6e6c0905 100644
+> --- a/drivers/cpufreq/qcom-cpufreq-nvmem.c
+> +++ b/drivers/cpufreq/qcom-cpufreq-nvmem.c
+> @@ -205,6 +205,8 @@ static int qcom_cpufreq_kryo_name_version(struct device *cpu_dev,
+>  	case QCOM_ID_QCF2200:
+>  	case QCOM_ID_QCF3200:
+>  	case QCOM_ID_QCF3210:
+> +	case QCOM_ID_QCF3211:
+> +	case QCOM_ID_IPQ5211:
+>  		drv->versions = (*speedbin == 0xcd) ? BIT(1) : BIT(0);
+>  		break;
+>  	case QCOM_ID_IPQ5424:
 
-Reviewed-by: Stanley Jhu <stanleyjhu@google.com>
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+
+-- 
+viresh
