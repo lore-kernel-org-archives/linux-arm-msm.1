@@ -1,79 +1,75 @@
-Received: from mail-dy2-f9.google.com (mail-dy2-f9.google.com [74.125.229.9])
+Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A67B4305680
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 14:50:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D811531610
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 14:52:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790866251; cv=none; b=oY+1w5N3s8AU1zWtWS6zBbrDg6+purmcImILLEhFpvyrpe7lbj3Gs/pC/VqttVXnTv85txmgO5RjRSAnTuQ0gRhezdyHV8m7lC+zfemB2B+a1rp6f5J3GrN5MA1a2ee4naR9TWIA4B2/CcqWrzMk5+yGXps9skTZi4qXr1ZwZUQ=
+	t=1790866343; cv=none; b=FDyeDC73vG4iQQT/h52TUFlqBYp1Dg+dntNTAv6o5+HyYk2qSxdu92KyagzJ5VB6Rt3XXFIScZnPFOYku1jKS/Sqz1KuV2V8go1uV+Qd8tQMmGniwdfGHHviK2+BXZRZVXprOrXM9dYFAwjMJTA2o9NMukOV6VqQHqE4lgYsPFA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790866251; c=relaxed/simple;
-	bh=dDIRB5Oi9FoUSrNMqIkdMDYOwZXhk13+e4IgFEYdx7s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ewcLh1Kvice21ipyVU57cAUV5Sj4GqR4wl2uQS08l5bg72bD3z+YtfSpeoqDJUAliFJaipAvNNsEJVVd6VkxgLKfhOwB4oPMsaXz2oCh1GNajIuKEDl0+uxE6GefvkwKzM5M0fRxDQJPb1tTLwK5LGLjlQNRCg9WX36VzDHYeq4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=I3PwQCu5; arc=none smtp.client-ip=74.125.229.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790866343; c=relaxed/simple;
+	bh=ESgsFLbZFCngXPnPQ9A3da33dc+1DUeB4zAsWCYNKNw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ugjVH+DWI1LEerTcuVryMtQ/XJY4VDr9yTaqY3kPbYHG8oxiD//TrgMXam6vu99UUYLO1zDuzJb/J+/EGM7dq8g1/CX16gLF3/KFaeE3VHrYAkw6ePEIvcNY+YqgNoz4aF6k5s0hO0nRPjTSR39kjcfLwz/wo/P3JGHJQSQXoSw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=zatw/jEl; arc=none smtp.client-ip=74.125.229.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="I3PwQCu5"
-Received: by mail-dy2-f9.google.com with SMTP id 5a478bee46e88-343990e8ee2so72624eec.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 07:50:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="zatw/jEl"
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5bb7ae3bdfaso38725e87.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 07:52:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790866249; x=1791471049; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1790866337; x=1791471137; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MawLjsR6a0c8Iz3+/frylZDgFlv1Xa4BhzLG/vLSrIU=;
-        b=I3PwQCu53fz6FY7V6VAX+1t1OXe5L4DlKKEo23M5BX6WreIRIYi4Lq5W00BtLUTeN6
-         PfFfFC+7nJY3Bv6gzAN+gMoMQKDHm3IFd4+QjIYb100jiZw8sdQO9Segon+YW0C2OGJz
-         LR+qsfWZ5OLMvKVoSgRNHIDH/4PCkbFvmgHa7DnVnAeidvHnCDAGYLrcb0h1ecBTqPmc
-         JfxuX7tMu3tab5PsmPvwT1XN8V7bOxCs/5CZuRqc1DmGzutsElIacoGZvAfQayPx0c1s
-         5eHiUUNXm/qsWeMbtChn3nEvgyQvE48bJfy7bfTtvWrGA2FfwcnCdSRf7Px796W7JTpg
-         0jYg==
+        bh=TibT46ElKEehSA4Hf9Ywkj/kE0y7Gum3tdai3aG95FE=;
+        b=zatw/jElET02YulDtQXJj3VBiwjZ3voEQOVusD7Ga+gwiQRZeF502OeUsGof836RRn
+         F7VxVGp5gVy16S18MVK90M+8CMDNa4h3zkzuoi2p7PsTFbCgape9c9TqWWIqT5CpDJ98
+         wsmxe698Fu6vHviAsFtvvIj+pF5ZGyvJQNbBBzpCZ50JJGAnjsDm1nuP/zoluf5A9Iwr
+         nIdpV6KjaN7J4rqV1fRCeUN8R9ksHqM45KR5aszdAEqmfwPl0j1JlsrUD3JpSpHjAQ2+
+         WhNrToP8AoCFf8KY4PEzrDSe4XggD1DYBa2opyS3dhnEiwOpLSexNLZwKqH7wMmGtUhO
+         eHuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790866249; x=1791471049;
+        d=1e100.net; s=20260707; t=1790866337; x=1791471137;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MawLjsR6a0c8Iz3+/frylZDgFlv1Xa4BhzLG/vLSrIU=;
-        b=sWhQPSTcY4ToXGKcpKuccWOtiYUKWyXFT4tstwiHXCC+eoK9Y6f8s3raU7Dk/xUH0g
-         a3v2vUEmHMkQWXP6AwV3h8Hbzvqfxx+dWvB6Tea/IbpddLOchTWXyevKMA8Bk6TkZuDu
-         1AfNU5l0lMUDkct9mBNXAJjLVXWG39mW5+20ZsYU79L2jE6iXc1ToxkVYzKv0cvcp/9F
-         kt3AevSQSfpIEW1U2jlLPcVIzkPzsOGCbD9+VKceMs2JIRY2hiRtbZtxV8b9wsKcvgRi
-         gipapWTPmR6JtCvmDjyzcnQUCP3nGSHbLnBcfD2KXHKHa3gIJf3bcDs3y//2JlW27oAf
-         Pdhg==
-X-Forwarded-Encrypted: i=1; AKwUvBxSuJDpcbDBFiB6L6/t9h9QgfM9EFZ7kYgsjIRVgJqs30P9djEqcBYyFrFQg5ZPWwne/fwn6oQ8syTFjwak@vger.kernel.org
-X-Gm-Message-State: AFuF++nEdxkbhUAOfQ6uTqE77BMx8PipqlGVW3br9uKhyij0/r6wOcBa
-	6lMi/GNwFKFFFV6c0T2hcB624w5gqDNeguo7MSmTh+XK4ZnPsL4sRaXH
-X-Gm-Gg: AYBFou0Qq5aVXftgwNeTbnLeSsP+eiJD0CMpnPsIBrmgRvO5v/SBRrNC/nOw4rnz1bp
-	Z4fckv8pldK+SYbh90LWb2HVGFNpdF89pBtSgxVeCgUIU7KYrIMeEjtcR6peD2hV9Z50i5w2Cji
-	qPi8EjW4yDDv3dCFk3617mJPP2v2bSbNkfX3UR28yAtC1HP/eR2piUIvoG2asoq4f+U72tXKm4S
-	CDcxY0kdT7OD6CEPJLmgyhRxCrgXwDZ4iTtnOTfboZty7hC+T4ChQL6J/gegDJtjgi14lzysp3R
-	OxP7k6kgOsEjNJ3vW3nTQCqG3tTjea5OylUNPLjy5AASkrKfF+a2snPqqczllloYivoGQJCd5K+
-	q4Lnq51WCd8Q294JRv6eyFrui9uCAYSj4G9T+mZCcFfkuuQTD2JtK1tGre70qrO598DPbNn5oqx
-	9jr5aidaV68Ht8fR/YxGNCq0kU1/MbBzRnN3/+hV3+5t+sh1SkPTfTUjWn/3d2M82G3F4cQl/9E
-	iP8ZJuwRoY5HlLzL1j3tRNEfPk=
-X-Received: by 2002:a05:7300:8aaa:b0:34b:e21e:5e2c with SMTP id 5a478bee46e88-34cdb1feb63mr5732460eec.12.1790866248511;
-        Thu, 01 Oct 2026 07:50:48 -0700 (PDT)
-Received: from localhost.localdomain ([98.148.34.5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34e7ff86d5csm5048122eec.5.2026.10.01.07.50.47
+        bh=TibT46ElKEehSA4Hf9Ywkj/kE0y7Gum3tdai3aG95FE=;
+        b=odoH2TPuqvPKyQB/o1tDbkD2/0h/tELz0acqh59pIJA+272UyuMFNIuEuw+WZVzjwk
+         sNUhOCuq3unGUtwmpRK+4s5gGW4z/ckaHXuR94rQEM9eSYAzUKVtcadnMR7UNNWODIQ2
+         Koa5u2Z2IU+KIJ5FyGz99dUvb+KHGE97XI3PKqZCVZQUUjU2F/Rety+pipttvL5TlMto
+         e3cVSuyp+WOSJbw66E/jqQG7gr/YNhChkDKgqueqmXWloc/T31zgvnKALWi6Nhb1TOB6
+         9CSgD4yCHTqrHvPiEnq0uhp1uCt8kbJvrPA+IrlZ8sqcyqkbpgwKk+t+dLFIhNOkyYxS
+         +bPg==
+X-Forwarded-Encrypted: i=1; AKwUvBx/JUhLDr5N/TAMMOgRZnN3oQRq1NUoA0vwcat2/dyPS+5Vj0dPlm0p6aow0XbSLUDAtxmR7rGiPuQ4ncJF@vger.kernel.org
+X-Gm-Message-State: AFq9FYJo0TJ8T2CPKOqfkSooZYEstOZ4Mwcc5QfcwbXpZFr0TCB4yvsj
+	hMUKIzcJ0xzlv0oKwpDTkvV6ilTAz/PCqkWCFTDE7otrNjWaGxXEAd6hrxEUNyyc3zQ=
+X-Gm-Gg: AYBFou0glkG/vo4TipEt7yYqrVIixtuNtwvygA+PfDOqY24m306kGr0Ehzd1/B1OQ/W
+	CVLXUWCsx4vwkeIBKkIBFEQl0ohKm7ERzCBdFpf4K2xpnW27odvIj1MBa6PX6pk8kwqd37acjHo
+	h6FjRXIUGV3RhYM1DT6zxde67coKG8EtSJC+m9xMA5mEPuH2/UvzYu1PD+5m3bb47dTWRVKpXLa
+	cCXhD+6z8ZkYfXqNElcsbr/0af+0uBjzMa1D8HXGMW65k7FXWRYAlUYQHVFrFU/dBPeo2LTwxdp
+	OQj6zfzCEeQz3Nhtb35s4DQHPtYfQgf43YbSy3ykyDJai9ROa6OsYYTlvq9v3t6UKOHaifcbzwJ
+	ivfEc9rvo5V25038J3blBhaKHjQmBcNWnOVqzdPvvG+ngFKa0IPjNl2idId+xNJP5E0wnczK3xD
+	Ako/893VP64PU0jg2VzTiaZOQ94yqlBrX6osYgrquf5hfS7gxptK8ppCU+fovUDl4rGKtSzmgoz
+	piJk1dIdQ9h6n81Q/vPsWXXsPz0TgS40ol2asU=
+X-Received: by 2002:a05:6512:3182:b0:5b8:f5e2:cd78 with SMTP id 2adb3069b0e04-5ba405fdda9mr2402132e87.5.1790866337079;
+        Thu, 01 Oct 2026 07:52:17 -0700 (PDT)
+Received: from thyme (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7bf18a67sm8957e87.79.2026.10.01.07.52.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 07:50:47 -0700 (PDT)
-From: Hungyu Lin <dennylin0707@gmail.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	linux-media@vger.kernel.org,
+        Thu, 01 Oct 2026 07:52:16 -0700 (PDT)
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Hungyu Lin <dennylin0707@gmail.com>
-Subject: [PATCH v7] media: qcom: iris: release OPP constraints on VPU power-on failure
-Date: Thu,  1 Oct 2026 14:50:33 +0000
-Message-ID: <20261001145033.17652-1-dennylin0707@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	devicetree@vger.kernel.org
+Subject: [PATCH] arm64: dts: qcom: sm8650-valve-deckard: Add initial support of camera sensors
+Date: Thu,  1 Oct 2026 17:52:06 +0300
+Message-ID: <20261001145206.2442665-1-vladimir.zapolskiy@linaro.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -82,134 +78,242 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The per-block cleanup paths request a zero rate through
-iris_opp_set_rate(). This selects the minimum OPP rather than
-disabling the OPP constraints, so a failed VPU power-on can leave
-required-OPP performance-state requests installed. Supplier reference
-cleanup after a failed runtime resume does not itself request supplier
-suspension.
+Add initial support of camera sensors on Valve "Steam Frame" device.
 
-Move the maximum OPP request to iris_vpu_power_on(), leaving the
-per-block helpers responsible for their power domains and clocks.
+The change enables CAMSS and adds description of
+- a pair of OmniVision OV6211 monochrome eyetracking camera sensors,
+- a pair of OmniVision OG01A1B monochrome front camera sensors.
 
-When controller or hardware power-on fails after the OPP request
-succeeds, unwind the acquired clocks and functional domains, then
-disable the OPP constraints with dev_pm_opp_set_opp(dev, NULL).
+There is another pair of OmniVision OG0VE10 camera sensors found on
+the device, its description requires a combo mode feature support in
+the SM8650 CAMSS CSIPHY driver.
 
-Report an OPP-disable failure without replacing the original error,
-and continue ICC cleanup. Keep failures of the maximum OPP request on
-the ICC-only cleanup path. Recovery from partial failures in the OPP
-transition itself and the existing normal-power-off behavior are
-outside this change.
-
-Fixes: f6940b79fcb6 ("media: iris: Fix opp scaling of power domains")
-Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 ---
-Changes in v7:
-- Rebase the fix onto the updated power-domain and clock helpers.
-- Remove OPP handling from the per-block power-domain and clock helpers.
-- Keep the maximum OPP request in iris_vpu_power_on().
-- Use the NULL-OPP disable path for failures after a successful maximum
-  OPP request.
-- Keep a separate ICC-only cleanup path when the maximum OPP request
-  itself fails.
-- Preserve the original power-on error if OPP disable fails.
+ .../boot/dts/qcom/sm8650-valve-deckard.dts    | 203 ++++++++++++++++++
+ 1 file changed, 203 insertions(+)
 
-Changes in v6:
-- Move OPP handling from the power-domain helpers to
-  iris_vpu_power_on().
-- Request the maximum OPP before powering on the controller and
-  hardware.
-- Add a zero-rate OPP request to the VPU power-on error path.
-- Keep the power-domain helpers limited to runtime PM operations.
-- Replace pm_runtime_get_sync() with pm_runtime_resume_and_get().
-- Rename the patch to reflect the new approach.
-- Update the Fixes tag to the commit that introduced required-OPP
-  performance states.
-
-Changes in v5:
-- Return pm_runtime_resume_and_get() directly.
-- Handle pm_runtime_put_sync() failures while preserving an earlier
-  OPP-update error.
-- Add a blank line before the rollback return.
-
-Changes in v4:
-- Convert the OPP rollback to a goto-based cleanup path.
-
- drivers/media/platform/qcom/iris/iris_resources.c  |  7 -------
- drivers/media/platform/qcom/iris/iris_vpu_common.c | 12 ++++++++++--
- 2 files changed, 10 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
-index 7149a5bf4e7f..b1734e5ecf60 100644
---- a/drivers/media/platform/qcom/iris/iris_resources.c
-+++ b/drivers/media/platform/qcom/iris/iris_resources.c
-@@ -77,10 +77,6 @@ int iris_enable_power_domain_and_clocks(struct iris_core *core, struct iris_powe
- {
- 	int ret, i;
+diff --git a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
+index d25a09e162dd..3b2503c3c541 100644
+--- a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
++++ b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
+@@ -95,6 +95,66 @@ vph_pwr: regulator-vph-pwr {
+ 		regulator-boot-on;
+ 	};
  
--	ret = iris_opp_set_rate(core->dev, ULONG_MAX);
--	if (ret)
--		return ret;
--
- 	for (i = 0; i < pd->pd_cnt; i++) {
- 		ret = pm_runtime_resume_and_get(pd->dev[i]);
- 		if (ret < 0)
-@@ -94,8 +90,6 @@ int iris_enable_power_domain_and_clocks(struct iris_core *core, struct iris_powe
- 	return 0;
- 
- error:
--	iris_opp_set_rate(core->dev, 0);
--
- 	while (--i >= 0)
- 		pm_runtime_put_sync(pd->dev[i]);
- 
-@@ -107,7 +101,6 @@ void iris_disable_power_domain_and_clocks(struct iris_core *core, struct iris_po
- 	int i;
- 
- 	clk_bulk_disable_unprepare(pd->clk_cnt, pd->clocks);
--	iris_opp_set_rate(core->dev, 0);
- 
- 	for (i = 0; i < pd->pd_cnt; i++)
- 		pm_runtime_put_sync(pd->dev[i]);
-diff --git a/drivers/media/platform/qcom/iris/iris_vpu_common.c b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-index 22d394851ef1..9bd59bbfc109 100644
---- a/drivers/media/platform/qcom/iris/iris_vpu_common.c
-+++ b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-@@ -413,16 +413,20 @@ u64 iris_vpu3x_vpu4x_calculate_frequency(struct iris_inst *inst, size_t data_siz
- int iris_vpu_power_on(struct iris_core *core)
- {
- 	u32 freq;
--	int ret;
-+	int ret, opp_ret;
- 
- 	ret = iris_set_icc_bw(core, INT_MAX);
- 	if (ret)
- 		goto err;
- 
--	ret = core->iris_platform_data->vpu_ops->power_on_controller(core);
-+	ret = iris_opp_set_rate(core->dev, ULONG_MAX);
- 	if (ret)
- 		goto err_unvote_icc;
- 
-+	ret = core->iris_platform_data->vpu_ops->power_on_controller(core);
-+	if (ret)
-+		goto err_opp;
++	vreg_cam_eyetracking_1p8: regulator-cam-eyetracking {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_eyetracking_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
 +
- 	ret = core->iris_platform_data->vpu_ops->power_on_hw(core);
- 	if (ret)
- 		goto err_power_off_ctrl;
-@@ -442,6 +446,10 @@ int iris_vpu_power_on(struct iris_core *core)
++		gpio = <&tlmm 74 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5m_1p8>;
++	};
++
++	vreg_cam_front_left_1p2: regulator-cam-front-left-1p2 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_left_1p2";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++
++		gpio = <&tlmm 37 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l2n_1p2>;
++	};
++
++	vreg_cam_front_left_1p8: regulator-cam-front-left-1p8 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_left_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 36 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5n_1p8>;
++	};
++
++	vreg_cam_front_right_1p2: regulator-cam-front-right-1p2 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_right_1p2";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++
++		gpio = <&tlmm 37 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l2m_1p2>;
++	};
++
++	vreg_cam_front_right_1p8: regulator-cam-front-right-1p8 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_right_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 36 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5m_1p8>;
++	};
++
+ 	reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+@@ -675,6 +735,149 @@ vreg_l6n_2p8: ldo6 {
+ 	};
+ };
  
- err_power_off_ctrl:
- 	core->iris_platform_data->vpu_ops->power_off_controller(core);
-+err_opp:
-+	opp_ret = dev_pm_opp_set_opp(core->dev, NULL);
-+	if (opp_ret)
-+		dev_warn(core->dev, "failed to disable OPP: %d\n", opp_ret);
- err_unvote_icc:
- 	iris_unset_icc_bw(core);
- err:
++&camss {
++	vdd-csiphy01-0p9-supply = <&vreg_l2i_0p88>;
++	vdd-csiphy01-1p2-supply = <&vreg_l3i_1p2>;
++	vdd-csiphy24-0p9-supply = <&vreg_l2i_0p88>;
++	vdd-csiphy24-1p2-supply = <&vreg_l3i_1p2>;
++
++	status = "okay";
++
++	ports {
++		port@0 {
++			csiphy0_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam_front_left>;
++			};
++		};
++
++		port@1 {
++			csiphy1_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam_front_right>;
++			};
++		};
++
++		port@2 {
++			csiphy2_ep: endpoint {
++				data-lanes = <0>;
++				remote-endpoint = <&cam_eyetracking_left>;
++			};
++		};
++
++		port@4 {
++			csiphy4_ep: endpoint {
++				data-lanes = <0>;
++				remote-endpoint = <&cam_eyetracking_right>;
++			};
++		};
++	};
++};
++
++&cci0 {
++	status = "okay";
++};
++
++&cci0_i2c1 {
++	sensor@60 {
++		compatible = "ovti,ov6211";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clock-rates = <24000000>;
++		pinctrl-0 = <&cam4_default>, <&cam4_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&tlmm 195 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l6n_2p8>;
++		dovdd-supply = <&vreg_cam_eyetracking_1p8>;
++		dvdd-supply = <&vreg_l1n_1p1>;
++
++		port {
++			cam_eyetracking_left: endpoint {
++				link-frequencies = /bits/ 64 <480000000>;
++				remote-endpoint = <&csiphy2_ep>;
++			};
++		};
++	};
++};
++
++&cci1 {
++	status = "okay";
++};
++
++&cci1_i2c0 {
++	sensor@60 {
++		compatible = "ovti,ov6211";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++		pinctrl-0 = <&cam2_default>, <&cam2_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&tlmm 3 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l6m_2p8>;
++		dovdd-supply = <&vreg_cam_eyetracking_1p8>;
++		dvdd-supply = <&vreg_l1m_1p1>;
++
++		port {
++			cam_eyetracking_right: endpoint {
++				link-frequencies = /bits/ 64 <480000000>;
++				remote-endpoint = <&csiphy4_ep>;
++			};
++		};
++	};
++};
++
++&cci2 {
++	status = "okay";
++};
++
++&cci2_i2c0 {
++	sensor@36 {
++		compatible = "ovti,og01a1b";
++		reg = <0x36>;
++		clocks = <&camcc CAM_CC_MCLK0_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK0_CLK>;
++		assigned-clock-rates = <19200000>;
++		reset-gpios = <&pm8550vs_e_gpios 4 GPIO_ACTIVE_LOW>;
++		pinctrl-0 = <&cam0_default>, <&cam0_sleep>;
++		pinctrl-names = "default", "sleep";
++		avdd-supply = <&vreg_l3m_2p8>;
++		dovdd-supply = <&vreg_cam_front_right_1p8>;
++		dvdd-supply = <&vreg_cam_front_right_1p2>;
++
++		port {
++			cam_front_right: endpoint {
++				data-lanes = <0 1>;
++				link-frequencies = /bits/ 64 <500000000>;
++				remote-endpoint = <&csiphy1_ep>;
++			};
++		};
++	};
++
++	sensor@60 {
++		compatible = "ovti,og01a1b";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK1_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK1_CLK>;
++		assigned-clock-rates = <19200000>;
++		reset-gpios = <&pm8550vs_e_gpios 6 GPIO_ACTIVE_LOW>;
++		pinctrl-0 = <&cam1_default>, <&cam1_sleep>;
++		pinctrl-names = "default", "sleep";
++		avdd-supply = <&vreg_l3n_2p8>;
++		dovdd-supply = <&vreg_cam_front_left_1p8>;
++		dvdd-supply = <&vreg_cam_front_left_1p2>;
++
++		port {
++			cam_front_left: endpoint {
++				data-lanes = <0 1>;
++				link-frequencies = /bits/ 64 <500000000>;
++				remote-endpoint = <&csiphy0_ep>;
++			};
++		};
++	};
++};
++
+ &dispcc {
+ 	status = "disabled";
+ };
 -- 
-2.43.0
+2.53.0
 
