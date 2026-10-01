@@ -1,160 +1,212 @@
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013016.outbound.protection.outlook.com [40.107.162.16])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 456C0531637;
-	Thu,  1 Oct 2026 21:01:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.162.16
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790888521; cv=fail; b=Q5CGyuZnJYt8gllbRu8Q5IE5J7wmsJ+5Nr0ZjkEg89V4PSFKlcrwf1g2Pr1CZcwfWEnflWJP4Q3sws2tPC/LCcT3BLgfCSKYiiNyFtnzPHpXjsQaCmHWnGilplqWQgUuI6PxqhuADik/AkB899fmJfSdxQDvAUtKDngFjfY+eyI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790888521; c=relaxed/simple;
-	bh=9DcP5lnl3dz6CsBjLLBo+Qro/Bi557f+Wl5nrxh7iSU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=SOdcnFdshnKiU/zVzoWsgkh8Mfq98Bq6on/TaJCi9tTgYyxTvHW/En03ppbXIQuNRVKb6RbBDm24Zvuo8icLicrqMaCUEevKID0XlkcSFYvEByTUDUd+n6DxewF23cUV9aSednTW9O74/MMb+By4y8nczcKlnPR5sYc5QERPilg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=bV2vuDXq; arc=fail smtp.client-ip=40.107.162.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB5102DF156
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 22:06:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790892401; cv=none; b=diM4EW4PlstAqL8VnP0ftPjcvudQCDia7nH5URYKbGGEw29vlEJvSSZ2By512AsDHoMIW9NYeSDvWgluur2VwSp0eRBKXIXclZhOtyz3kFfT7/aKsshlJl6S12SBN7EXQuatlJIVKiLcttgasIdgHigoEmitna/Dr3ZaljeVQGw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790892401; c=relaxed/simple;
+	bh=b028Sla/ILrQ+qBhjCupRSKf07oWLAqEX/nGYHy17R4=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=YUBfvpFxXYbpbmunrMl1susAywSTlfc/EisJKXiCdKNopKlXDpgXZ4uDlXzNhS2NvH3w+MyDJsIgHrVEoXGryO+1FrTCNRCf5oZcy3KsPWfDatdB2NVGGIiJVhexRoB3zNu96M4tkG39PJyNwrDCpQ4MriTOIaWbi0Z6iu7crcI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=b8+mBsti; arc=none smtp.client-ip=192.198.163.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="bV2vuDXq"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tGM36nHrKUtI8DPsBX8A3mtBETcADOYMf4WbMxKVR92dO1bj40Vmq5sXLZJrHFyikfq03vXIqNox5ykqT7aWkWX4qXsG+EVSvpQW4ROJ9oZ6wiGVfwjfvDhj16oojrEqyOKG242zwiilJz6VsBONoVQTZXOMQ0SQ3exxVaEINSwVfsEExX9t0SKfiPT2rDJFJIm7dmpzW4K1W2sIDpY5n+3MsfE7RZBgmjAo+ov1Dgh6pNbkVdn1oK6rKKnfIMNYcYUz6lyAmBXWY7A7UQfzO9CObdpgRMLW+W6JvKqT3pqpavHvL1lOS5Rx0WGMKrrO0jXS8BxmrxlzHIGzePMp7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jw7U0NEsQNflPs5VGDCQrj/UKUlD082vwhlg1lOzQKg=;
- b=RftLXevPa8mkWAnl5ICKM5PmwN2qyRYlIj8c3vBTgvwphndASrvH1xyy3nD5uwhk3NVQjTQ/gFApMpNQKTgnrj1deHq/A2LiQhHiOWFlvi7J84DnHhDSDg3q5ZIYPJkcO3P9C0Hg2dEy6F76W1FLphDfoOng5qXlgejNDJZU/9pjLbvcc2y7A9p3/157TWuEIYJwNVWUzT5WlRat4x+1NAYpXk10l0rtQMODgp3ok7aFsBUCiAPHD1GGkT5yNLtbfU4p5/qgoGqYRcWKEBXjraBNLRpGZb7MIjFnfdwvIXLFW9inaOr95TgysuOkFLXJG6yLyDSo+CtosOYLLb3s0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Jw7U0NEsQNflPs5VGDCQrj/UKUlD082vwhlg1lOzQKg=;
- b=bV2vuDXqnMRDQfRFU7zisCRw7tAJ8GTrFmzbEzChzoc+x7iTRU9l5HX+vLlQw/EQCx90ZHf+M4VD7y7dekqgkBF+Oshy+q6DLZIuJQm9GKkFNeKRI15hHhX1MIDakP9Wh5kSRAkf7+mCJDGBCD19rUlshzOyvmKh5bG7zsZ4Vqw4OZJmFWh1rV2iP08Vg9oVi4W/ejgLwp2dEQyl22SNxIDZJ/bfLn+YmzUFXRGaMLM0AsQZarGN5RQZ5bC9GzLV83bYcKEm7burfl/dw70/ZGxXBmRPHOPDUbJ7pdYZLhBpthG2IdA2xygqCJ3cILWCONRtV5JGZmM4SGfa74nTeg==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by PAXPR04MB8333.eurprd04.prod.outlook.com (2603:10a6:102:1c0::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Thu, 1 Oct
- 2026 21:01:53 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0451.022; Thu, 1 Oct 2026
- 21:01:53 +0000
-Date: Thu, 1 Oct 2026 17:01:44 -0400
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-	dmaengine@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v2] dt-bindings: dma: qcom,gpi: Document GPI DMA engine
- for Maili
-Message-ID: <ar7KOF18A0Ijg24y@lizhi-Precision-Tower-5810>
-References: <20260901-maili_gpi_binding-v2-1-c10dd2324a09@oss.qualcomm.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260901-maili_gpi_binding-v2-1-c10dd2324a09@oss.qualcomm.com>
-X-ClientProxiedBy: PH0P220CA0018.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:d3::33) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="b8+mBsti"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790892399; x=1822428399;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=b028Sla/ILrQ+qBhjCupRSKf07oWLAqEX/nGYHy17R4=;
+  b=b8+mBstiQ2LzSm3TyH7G5Rk05qHcPxWyAwDMyuDHK8MIMUy/1DWh3x8n
+   Ea8rg3V0twFNQ/IOyero0XSO7+WQm3gNYSUvGSpngvSqZLdKVoAO0Efdk
+   vuNOQFsZqgHrsTW3GF06WFLpCdXDT1fjc+Vu94OLcJs8kz3CSBSw7VpOC
+   48k7Qq4Tm//nc4SMl5FURdZLfhFDzFwKEnuvZIZrgapgYFn40WuOwLjP9
+   IXBxsgnmtM82f+OEpM0k0KqTEUEZhrfU5Oc3yfTuMmsdsuOjR6DZvHi+3
+   nRUFAmUPdHop0GLbUrC7DlrwN0SlEw8m+oVuozloNtZgyhmR4tIDBxj6h
+   A==;
+X-CSE-ConnectionGUID: a5f881sWSM2NfvtJSyMa0A==
+X-CSE-MsgGUID: 9C9JnhVoSuuVKPI2vGBWRA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="91526750"
+X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
+   d="scan'208";a="91526750"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 15:06:37 -0700
+X-CSE-ConnectionGUID: O6YWZVGITlW5BX0sPv0DRQ==
+X-CSE-MsgGUID: TaYFCr/ISZSPVtVVRhwSdQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
+   d="scan'208";a="274190009"
+Received: from gsse-cloud1.jf.intel.com ([10.54.39.91])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 15:06:38 -0700
+From: Matthew Brost <matthew.brost@intel.com>
+To: intel-xe@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Anna Maniscalco <anna.maniscalco2000@gmail.com>,
+	Antonino Maniscalco <antomani103@gmail.com>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	David Airlie <airlied@gmail.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Lyude Paul <lyude@redhat.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Maxime Ripard <mripard@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Sean Paul <sean@poorly.run>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Simona Vetter <simona@ffwll.ch>,
+	Steven Price <steven.price@arm.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v3 0/8] drm/gpuvm: two pass locking for exec
+Date: Thu,  1 Oct 2026 15:06:24 -0700
+Message-Id: <20261001220632.3190896-1-matthew.brost@intel.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|PAXPR04MB8333:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b72f2b5-863f-4af6-863b-08df1fff3838
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|19092799006|1800799024|366016|23010399003|22082099003|18002099003|10067099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	WNiKicj/eQZGpQC7ujFmDod7kBaLhaBzW6UlYEn406OVF5gHFZL5fN+MXjNohKINM/rOt19WgP+ilPTU3jJV0dJc7I6qBJZNjtNM9i5MHkt/WZXC2sUb+Ey+X4LGuqdyu1RCa/4uiDGZb4wdJiaEq8rrMpTTMDh3/CgwXVnrmtSc7huZStwQEDF4hnvM36qxbSey/F3V5Q/h/QXfkbiew/jUJAsCOumL4tFx9VfP++ZxMQf/+yXrwMVv9iO7niPsKcXIRAS1m1TiZumYmt5HBgKEEbM8qLc3xM+wPbmtTiPQjEd3mB+r+rY9r7ioAgeDug+z+5DRBv+3ru+xs+JdINQSBILCDv/e7Yw+bU40eAvOr2rfkEKY7NfrdRoT7ObPUBlNAFbwJdu6OAeoARDAtJn9JbkQ34W6HLx38umrHs5KT8VmdXMxdRa/poHPAMnvS0Jam0Z/u8fzyTgtfXDS+MWN3ntLxof7LsfFTKkgazfovkGbIeG36intVM3Rn5SxFVcziRVQ5+QDDA7QHwZjZELrb9qd7JH7rD6cMApk2hdTJSc9S8VM0+LtNfmZKaIgh69QIIOZkVEe+juvjni95/rGsXIjSvk+ly6dHVqyk/q+S7Xydt9mrt0j7dbG3Vn7upOczwBmb1GCr6HlqiaP/J1TpQORpXLcHcCBjWd2pRo=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(19092799006)(1800799024)(366016)(23010399003)(22082099003)(18002099003)(10067099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?lFqhThAU8oIrlR5DbAYaOC9ZZxMtAORl3iUm4l9ddZpPb3DW3FiYX3p+069B?=
- =?us-ascii?Q?mHrllvs3dfoCIQI0k8M494T+Bxk0VM41NxLjvAvWf0buaaGbpJQ216KbMLvF?=
- =?us-ascii?Q?cnR1mzWTsTA7CUVaw53/QiZnY3VrD1qMTRXmhPw7f2Ar3Uc53VSAdmu3pbAu?=
- =?us-ascii?Q?wb6ZXqYZXI0VBN6CT+uqHrBb4tMndy1gxXLY+vXwViTndK3DNnGmHBZiMIsx?=
- =?us-ascii?Q?gsAsWYIP5GQDnLuNBCPbkx67GrQS/YAHYqP6G9gi0YIhv4s8V8AFYQrS8Ov/?=
- =?us-ascii?Q?0B9Qmbm1ikq/jWWXidiHtQH1Ehhi1fT6b8J9qXq8Mwagq36g4sTvXCywZalJ?=
- =?us-ascii?Q?dL++fAh93m1cefbbVy6Y1CyDIWbB4jVYN5MJ1TI9/aW1skbE8PZ1mFsBCE8k?=
- =?us-ascii?Q?IaEX9bBch9dz5vh3na7VU5iNBNJbYQjmUF/3qIZkLajfl3BlPFnA2OgLaCo2?=
- =?us-ascii?Q?cX/VGMysWggN1Sj1+P9iyC6rzUa6MjIrsPYLzfZBkzOPdMrhHZooyl1aAqM7?=
- =?us-ascii?Q?/kmYAoGqueTvq1cn9SVDeahCO5mffYLi0X0pq6Sex+Yl+2DrKF6dDwi9IALQ?=
- =?us-ascii?Q?ievJkBq4N8znUcrm2oteqiN9FyEfT77aj6yE37PyGTnWqzMfoBR8Rgf47pWk?=
- =?us-ascii?Q?ZkSYjmeDRHYytyvrNSITmA3CpLL5x3vdLLbBLO05kyVFHZMQWgGLVfzsUOXX?=
- =?us-ascii?Q?9wcZLooFof+5+zTMlm26BQZ0z9blv0J4eTALqR+019G64xPC8Z8XGRzk7TQD?=
- =?us-ascii?Q?kjsPEhZ5JrKnVC7VqhcEzZVJO5XsNruOYtp8Pt5lw29Zl63zgvL7QPDPJrMC?=
- =?us-ascii?Q?CYz94DT0P/y8v0wqqEUeuDpiMjnbQoQVsNBsk+mjWkSc29jjhQ4AkSkPX/Qt?=
- =?us-ascii?Q?kXKgNSuhM42O+wS50qrATryMghUGVXpanMeySMdHorEq3R4T4lO014hvZgxE?=
- =?us-ascii?Q?QJAV5YHAfp2hreYvsiqYw3JPHvbTcGsNK7Bes/W6PoGKrDgHj/SiEfXLa5QP?=
- =?us-ascii?Q?+SFfsR4rttrDTMUUAIqMfloBfTHc10QVoow3bqoOSC7ef7ar6zWpd1RfWvop?=
- =?us-ascii?Q?mjeOo7+YPPSUnuqWCD3M1rIP/q2ggneCCwKl2MG6PrbJ8qYnC/r38M5TJ7Fe?=
- =?us-ascii?Q?1CDnr3nNshRjeGpFn6vZBZuuB2lt3jKF9Yf0VX713fzdrTW1qksARHUczO2B?=
- =?us-ascii?Q?1il1X+4Od03F4SwuFjUllHgQWZnQLJqT3VSOWWaWn+c8XUjfZJtlDDhIEbSZ?=
- =?us-ascii?Q?4hFQzPzg+SxuROlPr+F8ppC5RPL4FYWjFm/gqIFQ6ApVX3BP3qRzecDBnpIs?=
- =?us-ascii?Q?J9xsGI0sQ9AqbW4CWB8biJbmff4Cnn0qGdlERRRcUzDGExZXN+Ue3JrgJwce?=
- =?us-ascii?Q?U8QdJ5rDGHvPb8xnYvdm2MOkwfnyZrr62nA/0l5aaVar75hcqz28KQAOWEMz?=
- =?us-ascii?Q?PsM6eRkxO18KW1kX4mPt5TWqGQr4lcu3Ad322bHVFHU85i7g5efH/v1OHJJe?=
- =?us-ascii?Q?1CkLoVgI1YTU80hX/ca+4cYS7pT9+yJEIcUlsivdagpN+UM7mo26UNxK/p2n?=
- =?us-ascii?Q?HwJ9hYezDWrbJC+0FjGbkE/DKLVovrOY7/E8BPUTFVJNvUUR0vLXxr3wfr9D?=
- =?us-ascii?Q?cvOloAWz4fHmD5i4IBztGx4ePa6VOHyZeC0Z7y+SddW/AxU5MDwDVIeobmis?=
- =?us-ascii?Q?JrMEn9OjUShhAK/286NVvqq5GnOR7yjigkW5xs0dbJ+ryQiBEGb1xEfDB1CN?=
- =?us-ascii?Q?ybUhDL5K9ikrP0Quao2XFnP5Aq28tBG3cD+Wy2vLNwplVlP4hzos?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b72f2b5-863f-4af6-863b-08df1fff3838
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2026 21:01:53.3142
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2UKQOHKH/N0Dd3EMIc24ZIMgACt3mNIo6J2YRM9uE7sIzK2gnWUX3qdfQWC836M7qjTCg9yF3M38Ozbkx6n975rsGgrN6tprx/ww0tNlZc8b/Env6M+dFSDt7Wr22Idz
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8333
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 01, 2026 at 01:10:59PM +0530, Jyothi Kumar Seerapu wrote:
-> Document the GPI DMA engine on the Maili platform.
->
-> Signed-off-by: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
-> Acked-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
-> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> ---
+Two processes share a set of buffers, and each has buffers of its own
+which the other never sees. Say process A has mapped
 
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
+  S        the shared buffers, also mapped by B
+  P        buffers private to A
 
->  Documentation/devicetree/bindings/dma/qcom,gpi.yaml | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/Documentation/devicetree/bindings/dma/qcom,gpi.yaml b/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> index 54dca623223d..dfc4a3054b5d 100644
-> --- a/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> +++ b/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> @@ -28,6 +28,7 @@ properties:
->                - qcom,glymur-gpi-dma
->                - qcom,hawi-gpi-dma
->                - qcom,kaanapali-gpi-dma
-> +              - qcom,maili-gpi-dma
->                - qcom,milos-gpi-dma
->                - qcom,qcm2290-gpi-dma
->                - qcom,qcs8300-gpi-dma
->
-> ---
-> base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
-> change-id: 20260901-maili_gpi_binding-37b12bf9e5c4
->
-> Best regards,
-> --
-> Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
->
+and B has mapped S plus private buffers of its own. The overlap is
+exactly S, and the work each process wants to do on its own buffers is
+independent of the other.
+
+A submits. Its exec locks the dma-resv of everything it has mapped, S
+and P both, then finds something in P has been evicted and migrates it
+back in. B submits, and blocks on S for as long as that migration takes,
+even though the migration is of a buffer belonging to A which B has
+never seen.
+
+So the stall does not come from the overlapping set. The buffers in S
+are resident, and neither exec has anything to do to them beyond
+attaching a fence. They are held only because an exec locks everything
+it has mapped in one go, and they stay held until the slowest unrelated
+thing in that transaction is done.
+
+Which buffers get evicted is a separate matter, and one which already
+has answers: eviction heuristics which leave shared buffers alone, or
+one process' allocations outranking another's. This is what is left once
+those work.
+
+Where this tends to show up is compositors and presentation, which is
+also where userspace has worked hardest to avoid it. Wayland explicit
+sync exists so that a compositor is not latched onto its clients'
+rendering, waiting on fences it never asked for. The locking above
+reintroduces that coupling anyway, in the kernel, and does it under
+memory pressure, which is where a missed frame is least welcome and the
+cause is hardest to see.
+
+The fix is to stop coupling "lock the VM" to "validate it". Instead of
+locking everything and then validating, lock the private buffers and the
+evicted external ones, validate those, and only then lock the rest, all
+within the same drm_exec transaction.
+
+Patch 1 lets a driver split the locking of an exec that way, patches 2
+and 3 use it in Xe and Panthor, whose panthor_vm_bo_validate() swaps
+pages back in under those same shared locks. It is opt-in, and drivers
+which do not ask for it are unaffected.
+
+Patches 5 and 6 do the same for MSM. Its VM_BIND submit path locks every
+BO mapped in the VM and then validates the evicted ones, which means
+getting their pages and mapping them again, with the shared BOs locked
+throughout. Patch 4 switches VM_BIND VMs to DRM_GPUVM_RESV_PROTECTED,
+which two pass locking requires, and patch 5 splits the submit's locking
+into the two passes. Kernel managed VMs and the legacy submit path are
+left alone.
+
+The MSM part should resolve exactly the problem Anna Maniscalco
+presented at XDC, render jobs stalling the compositor on shared buffers,
+which is currently worked around with a downstream hack in MSM for
+SteamOS [1][2] (the talk starts at 5:30).
+
+Nouveau support for DRM_GPUVM_RESV_PROTECTED and two pass locking added
+in patches 7 and 8.
+
+All driver updated side from Xe untested.
+
+[1] https://indico.freedesktop.org/event/12/contributions/627/
+[2] https://www.youtube.com/watch?v=j5W5ErEMnvM&t=330s
+
+Matt
+
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
+Cc: Alice Ryhl <aliceryhl@google.com>
+Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+Cc: Antonino Maniscalco <antomani103@gmail.com>
+Cc: Boris Brezillon <boris.brezillon@collabora.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Dmitry Baryshkov <lumag@kernel.org>
+Cc: Jessica Zhang <jesszhan0024@gmail.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Liviu Dudau <liviu.dudau@arm.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Marijn Suijten <marijn.suijten@somainline.org>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>
+Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+Cc: Sean Paul <sean@poorly.run>
+Cc: Shuah Khan <skhan@linuxfoundation.org>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: Steven Price <steven.price@arm.com>
+Cc: Thomas Hellström <thomas.hellstrom@linux.intel.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Assisted-by: LLM
+
+---
+v3:
+ - Address Danilo's comments of GPUVM patch
+ - Update MSM to reject submit_bo on VM_BIND context (Sashiko)
+ - Also update Nouevau
+
+Matthew Brost (8):
+  drm/gpuvm: allow locking external objects in two passes
+  drm/xe: lock the resident BOs of an exec last
+  drm/panthor: lock the resident BOs of a submit last
+  drm/msm: reject a submit_bo table on VM_BIND contexts
+  drm/msm: use DRM_GPUVM_RESV_PROTECTED for VM_BIND VMs
+  drm/msm: lock the resident BOs of a VM_BIND submit last
+  drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
+  drm/nouveau: lock the resident BOs of an exec last
+
+ Documentation/gpu/drm-mm.rst           |   6 +
+ drivers/gpu/drm/drm_gpuvm.c            | 505 ++++++++++++++++++++++++-
+ drivers/gpu/drm/msm/msm_gem_submit.c   |  90 ++++-
+ drivers/gpu/drm/msm/msm_gem_vma.c      |  16 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c |  27 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c |  49 ++-
+ drivers/gpu/drm/panthor/panthor_mmu.c  |  55 ++-
+ drivers/gpu/drm/xe/xe_exec.c           |  23 +-
+ drivers/gpu/drm/xe/xe_vm.c             |  43 ++-
+ drivers/gpu/drm/xe/xe_vm.h             |   3 +-
+ include/drm/drm_gpuvm.h                | 139 ++++++-
+ 11 files changed, 882 insertions(+), 74 deletions(-)
+
+-- 
+2.34.1
+
