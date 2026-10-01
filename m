@@ -1,133 +1,306 @@
-Received: from mail-qv2-f41.google.com (mail-qv2-f41.google.com [74.125.230.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FE8D4A0F10
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 17:55:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F05F33382E5
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 18:11:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790877328; cv=none; b=XtkRNfZtUids2DBbvU9kZp9d09u9kzogvN+V2yZk3rBs8V1qQOQWEgBjUYwszHsWQnhHgSB5qtH3TWMTKhtQKWPj7g0bYCp5+WSyMsW+HYeE/JCmXZehD0pCOkNAI3DGbvl8sEo48RNLY/AzckN1z9aEYDs9WE2U96qGvTE8MMM=
+	t=1790878265; cv=none; b=En8mm+onXKOb0ONkTU99rLIuhJR4XKtZTVRthm0D0nnux4cc3nLckhSABx3XjogmY8F+rapAGUZDup9G6DpXPTN40dJJd/HGv/NNgW8wm+8k82RDX4+Hx9lKHfpRhBBtvb1SeFGLw3mck3VZ95ZfkK9+EtDUQUGhOtYfqpTZUxc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790877328; c=relaxed/simple;
-	bh=j5qbuXrDX2plwlT/z3lSzoNInbPkdLmaRYkhQoo2lGM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Cg74G/Wes17v3i6kIh1bp0XaN+AKxMm0p/rTvrCRhYADxEkyOokwTvSB6kyopqBmaLyvFr8k3WCfuAilIAyHlOr+s2pRf81krrP+TiY0/gWHzUvNArWFIa7C3wHjkvF3moKOmvjSrwsszA/LYpjhUIuWfSVPsXEKtrvq6s0P92k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qIPTZDM0; arc=none smtp.client-ip=74.125.230.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790878265; c=relaxed/simple;
+	bh=hkNmOuZzb13leDsaWOy4t6aUZY65s6W0QPUaxHNPTnI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=EdiXN76FyLMCt/AsFnT+e1vbiCg0QjlvVR+xVvrGshbkZCTLTAg1BekaQOweyrCGOq8E27HhghI+kKJhfeUKJvFlUKi2xA6WohA4m3A1EXTlUCCQfmZwlgpqVtpM5p5LuAOWWhCkqP0dAYVnHWFCsPSOe/Dz+ASBtGQEic5YBGg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lk7kqZKF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RYdjrnkN; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qIPTZDM0"
-Received: by mail-qv2-f41.google.com with SMTP id 6a1803df08f44-9179c1f49d4so19614376d6.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 10:55:13 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lk7kqZKF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RYdjrnkN"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691Fsawg2475377
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 18:11:00 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=uhlpT6ARTg4Rsq8DjNmYNu
+	AhQGWMOdkdMkXTMpfJzPs=; b=lk7kqZKFM/p9vIvMM37bSV+X8lwvx5PT1FWqDZ
+	Wf0+NS6YranP1FtLP4LRiSlmRJvN78tTKOz9R+Z0QKXOGbZe4gURUiDsv4IK6B41
+	2BdY6ttvdwZGFrjiWmmReqN9EsRVZ5g/v/xmMUc3fJhK6Lj/21oYKZxywotI8d4y
+	yfCZ7GPMlgeWIcFoCA+QNRjrWZ25GUK77UCRkxRafYvVb0ND+4rFkjuSYRL0IkBn
+	oHnBG0Qwn5Vbwaz6SFDrH2SApR/Zo2MeiiJEBKsO2+gBaZU6syt/VORKxUs3Z1Rz
+	70DuFhQoE9bDaonpsEJAbdIIBuCa5GnXhP3yptFP1k1ADHGQ==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1tbg8qp2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 18:11:00 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7bf67e46ae0so354719137.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 11:11:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790877308; x=1791482108; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Lfjo9pAawGhp175tsWiMgt+u8R0WsNzuMBsHkL3MrJQ=;
-        b=qIPTZDM0c/Gj6EXjjDOZV3mYA0aDWCjPwJar//JToJ1LZ5D11gltJ9OJJetbSryOu0
-         AejFTNqt2ER9Pd3f2mQFUCAFqlTBqNoP5uqhx+gfkW1DXrY/ayQRZwuV4tpPa4mSp/Ij
-         fElMqfqDoksjJ+unPLXT4o3XNxDpEcw8Hokq8MOTaV/FOexBlLPyayEyfcrpVSC2tgBl
-         is+A0BmfBhGSQfcEU8RudiDd/OktcUniDscZJEiSV8yzEEXuRRfrWJJn+anMl3jkfsuI
-         auNZmBFHn689J2FcTXmqHLIvNRb/KPRfqJiz13oyTcr7D6RcMk3QZz78ePjXzSn3W74r
-         DcXA==
+        d=oss.qualcomm.com; s=google; t=1790878259; x=1791483059; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=uhlpT6ARTg4Rsq8DjNmYNuAhQGWMOdkdMkXTMpfJzPs=;
+        b=RYdjrnkNZYjvbQqdqQDBYvepcnTdkxTCA8k0qX3NvTCgfMrP8qoeWHHpSpRVnlkL5/
+         5ZelbmEZ6RCR5p4dMTRYmlUeSWhwHSylKsbEije2ctteXYS8M9QeWVth7KQwygoWtMAm
+         DPbH4F+44zfzBFSI0VjeoZFsDYrE0fCB5rOl7JIOmKKzffGaZ8ObMYfY3YtVkAm1Lgva
+         LJBW5drXvkCYLIaLZBtcK0AaNtpTbnIqB7l+2REE9HqJrsr6WSzQWisTFtf9mpizdqvT
+         iuXLw04zb8bcIimdK3RR8BirXMZFzhYMil1ASqbBrPj8M7OSI9vNHN3e7p8Bwikfi239
+         VfSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790877308; x=1791482108;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Lfjo9pAawGhp175tsWiMgt+u8R0WsNzuMBsHkL3MrJQ=;
-        b=y8D5KiUepPgDCBZ42BoSOIXOwpU0k5dg7lZL4BlaDsuXJN9iWy3zENtIwQaq6mlAbW
-         PcHGsqi3sBoeVuKjZ5lzgM/qwFncJYu3y/8qkERWXfz3ZQglKejf0f06UwoCe3kumy5c
-         ftaaiZYlLkg1bOkySOoND4VkTtjeFY9A6P9o+7u2yGnnCMe1cNqWSwC4CZgBcA1kpslR
-         nQhFCjUyogbyLBS1rbS9RTytOZQwPkXBch32BsNZ71ggnEgxwk9kt6YrtHmvtLiogrcy
-         XsxeclMh/l0FclACporZdiSxfH7MlgX0Z9hnT+q/HOv9A7nx+vK/Ce2rb88JlFU1diAl
-         SSMA==
-X-Forwarded-Encrypted: i=1; AKwUvBxH4A5kzV2uuBPVaG/FznB1x/jqa6TIjpE95VLy46YrNBrjtkYdBUbg8+UT7bTa8BemN0D48Dh0oKsGYfG3@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ/Y/AYxgLLQP8yxjjkvNHOcTexze8NjeZHXBBhVe0yM8NY6drq
-	eVuzTCZQ+vInlyuciB8zoVJjDaFEg7e+oSCZoxOyz0kOaYaQaWeCk90=
-X-Gm-Gg: AYBFou3vGHD4dxGigstOsd/DUvn0I1g2PlG89XiPw5+FC002Vmyn9cWjbCyyIjI+9Vx
-	OqRH27/NtmEk3F4YbVJSwqHP3vGkFemcRPxZ5P6z7J2mG7sAnRjIqMvgbKYN/C/3bdBoN9IZTTY
-	Bv//ebJFMTxi+zjJgt17xJd3rtidb4jHnJN8mghwoFQe15GMkHgdzN+BditdZDn24oWeM5F2y7H
-	WqgnvEPw2vKO4JN7ETuTNYJnrdyNpcp6qSI3XgTWFr2Okl+ZSDt/LJmO0Dinys3051coiRgubHC
-	sfjjyhsNxnHm5dIt58OvaLICxuNqCg/cTvRFT7CLzKSZzDqsqhRfNImhhrd0ylv1ktkviKVXBOC
-	2cROW0AYei7Ay5E4aU4AFFTgr1DydT9t+XNSgbmXJP3uep+22KSKOXzDT4ucupzPy+ohtybmOin
-	4tiviLFT1KVGOgV+V5t2UScP9gm2nXyb4JWk2Jootqi3cQYQhU5HCDtXpDJE68NpB7xO8x3zSs3
-	/bDm6WwxpWHU3v7BBwssnah1a7NSn0U+17oUHQegmV5Ty1tTMWktzWBXgjZAKweQOo92YgxnF/Y
-	teCAQiYQkQYfuJX+aLiYunUZlTLZHTe3BheJR5I=
-X-Received: by 2002:ad4:5fc7:0:b0:917:8aaf:bb9a with SMTP id 6a1803df08f44-917c0087891mr4797716d6.22.1790877308033;
-        Thu, 01 Oct 2026 10:55:08 -0700 (PDT)
-Received: from i4-gl-tmk5904-1.ad.psu.edu ([130.203.156.90])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-917a8a22f96sm32077796d6.32.2026.10.01.10.55.06
+        d=1e100.net; s=20260707; t=1790878259; x=1791483059;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=uhlpT6ARTg4Rsq8DjNmYNuAhQGWMOdkdMkXTMpfJzPs=;
+        b=a7ENNTAujQsfp/mMIC6QFTbVpW+h9HCDVRbBjQj/1V+dtRaBHZmhoSbXs+FXSD4tEu
+         LsZDuHopgSl7KhiiBVpbD+0W0nj9mKF+FPWVWwgycskHLPO5g0m9ZP10NT0E0FFGYln+
+         gAnvrJaf/mE4uGQXg/7W1SPAozh6l+P6l5XpbUCo74DthcyStiDtMA3Vp8cg0Wnj+ReM
+         fFL3Fm93mctSxJMwLgQM/YlyYgcfwUMHDkKbjJLV1uz2N6yJuJsiMkjhdNjz/5iRTFkp
+         nryEu9HAt4nxqGLWfCu3Osh7qNiaDELD60A5zC1mbQ6dDy3RaQFiJgdZWtttNFBYu2xm
+         JLkg==
+X-Forwarded-Encrypted: i=1; AKwUvBxNpJD/g0dBt+LoW2jhT2TNONcli47AnshAwUW1AqrRc5osaNDYpY42+kTAy2VS/qlGxsxc96bDf+Q04RaG@vger.kernel.org
+X-Gm-Message-State: AFq9FYLw6yCw98WYmi7yIz9vjIkYlYin32nLiO213z5Aqq+a2qcSR9Ft
+	tuPzdh3o4qPk/fZhr1C0pvnY+fFOjDhCb5Und2E4xGrzmOpxQxr3J+NIr9g5ibQlE0Jc58f6RcY
+	Ma7z58Le4O2haddifrePgHHmj+zeT1fjFL/Bz2FLrzgXkc9YjcCGrimHbjEEegSbFlhrv
+X-Gm-Gg: AYBFou0SyAq2rqhM/FrfqZmPH8oflu5ulB7LGZCalOexzOYGjUWmyDpCR7TK8HLBpUl
+	iXH3lnY+JEjdx93U/Ap2NKMlnHOQv8W56JrVoVQmqwEVQ5FN2m/OxmngWWOiMWV+4n7wcrnsIZF
+	aYj9ZPkMd4gdwuGnnZxaczXl6O+56+IP7tg2PDHuz+unhHF47Xp3qjHk5u35UJATIfIp/jCrwdm
+	SisZOHUvLJOBTcwiIEiiT+r42rOiAFRBaJTN/QobHO7d1ia3Kcm9PJxokfrp1gXhDFFBmQ7fDXO
+	vmmtqtUkSTx9F7QDyKVH2UTeIr/jcppR97kHoewp0LvLoW4JB3cvhSxr2my36GJ1/z2oq4hN30T
+	WAge6h11J1jbwnf5aGRD3lReVbqMlWuTWqw==
+X-Received: by 2002:a05:6102:290d:b0:7bd:619c:4a8c with SMTP id ada2fe7eead31-7c0f54a550emr50892137.19.1790878259329;
+        Thu, 01 Oct 2026 11:10:59 -0700 (PDT)
+X-Received: by 2002:a05:6102:290d:b0:7bd:619c:4a8c with SMTP id ada2fe7eead31-7c0f54a550emr50872137.19.1790878258766;
+        Thu, 01 Oct 2026 11:10:58 -0700 (PDT)
+Received: from juillet.box.freepro.com ([2a05:6e02:1041:c10:f181:ebcf:f9bc:fbcf])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a027f2a4cfsm3208445e9.1.2026.10.01.11.10.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 10:55:07 -0700 (PDT)
-From: Myeonghun Pak <mhun512@gmail.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-Cc: mhun512@gmail.com,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sashiko <sashiko-bot@kernel.org>,
-	stable@vger.kernel.org,
-	Ijae Kim <ae878000@gmail.com>
-Subject: [PATCH v4 1/2] media: venus: hfi: disable IRQ before freeing HFI device
-Date: Thu,  1 Oct 2026 13:55:01 -0400
-Message-ID: <20261001175502.4045853-2-mhun512@gmail.com>
+        Thu, 01 Oct 2026 11:10:58 -0700 (PDT)
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, johannes.goede@oss.qualcomm.com,
+        stephan.gerhold@linaro.org
+Subject: [PATCH v2] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal zones for PMICs
+Date: Thu,  1 Oct 2026 20:10:55 +0200
+Message-ID: <20261001181055.9149-1-daniel.lezcano@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261001175502.4045853-1-mhun512@gmail.com>
-References: <20260925191653.3144006-1-mhun512@gmail.com>
- <20261001175502.4045853-1-mhun512@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA3MiBTYWx0ZWRfXz5BjG2CLohCh
+ 14wF6eYNKQuijxgjPr28yqh/l7pQJxk0Pj1XyrDf92NbcSWn4EXVcqlCgyqiYV3XHf9z5hauJFY
+ TwbuIkTck5d0xtUzGZxLRslLhBuw1u8=
+X-Authority-Analysis: v=2.4 cv=QY7zLcbv c=1 sm=1 tr=0 ts=6abea234 cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=GDTQnYEY10f_UI-1qQQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA3MiBTYWx0ZWRfXw/lx7R1JbGkq
+ F1xgiNkf6+vYbZ16PA4jGZKtDIt8138pEqWeGgO3shLUo85EPcxD2XXRQ23T9bHCTx4E+v0uUFb
+ TZC4iD8mKhlnOnUzgekXf9h+nr+sgAj2L8QavSdFEol7jetomPGhnwGFr3lTkh2hC58iJwetFeW
+ FfKuwhqhYKbiPPiMEYFuK8kNbaNAQtdm9+ZWO9wqaPmmK4o55SIY3vJRM/bnvtjt7zU0BpmfcN6
+ XryxBOQ7Fx8uKPMzhVbfNfZ5ZgPnKkg3vAiHCqTjCiagVLascleEClX+wHK87Rm3Z8kHnqH5Edn
+ 4O7wApzj3JJmZxpwLsn3OAJcFJP4B3tRrlVuDMQH8sD55u82JgKo/XIRzl7b/4b2AKxZYzGLnnS
+ coJyBn8P4JPfw4kkFcQO9tfK1lWqL/oDBTdD43QxuRc4s0Z8ey/WVDjXKKDHLfM0cnEiW+E9Gxy
+ V8DQJAmu9HK7OiaOEDw==
+X-Proofpoint-ORIG-GUID: jm-6GeeyRJPy7tWfj4Qou2mXgENBbYgc
+X-Proofpoint-GUID: jm-6GeeyRJPy7tWfj4Qou2mXgENBbYgc
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_04,2026-10-01_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ bulkscore=0 spamscore=0 suspectscore=0 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010072
 
-venus_hfi_destroy() releases the interface queues and frees hdev before
-calling disable_irq(). An IRQ handler that has already read core->priv
-can continue to access hdev and its queues after they are freed. Clearing
-core->priv does not revoke the handler's local pointer.
+Add thermal zones for the ThinkPad T14s and describe the board
+temperature sensors exposed through the PMK8550 VADC.
 
-Commit 640803003cd9 ("media: venus: hfi: explicitly release IRQ during
-teardown") added disable_irq(), but placed it after kfree(hdev), too late
-to protect a handler already using hdev.
+Add a passive thermal zone for the keyboard area, which is the main
+thermal constraint under sustained load. The EC reports a thermal alert
+at 57.85°C, so use this value as the passive trip point and allow the
+thermal framework to throttle all CPUs and the GPU when the threshold is
+reached. Use a 1000 m°C hysteresis and a 500 ms passive polling interval.
 
-Disable the IRQ first so that both the hard IRQ and threaded handler have
-completed before clearing core->priv or releasing hdev.
+An earlier approach used staged CPU cluster throttling in an attempt to
+start thermal mitigation before reaching the target temperature. Testing
+did not show a significant improvement compared to throttling all CPUs at
+the EC thermal alert threshold. It also introduced a latency imbalance
+between the different CPU clusters, which could negatively affect
+workloads depending on where tasks are scheduled.
 
-Fixes: d96d3f30c0f2 ("[media] media: venus: hfi: add Venus HFI files")
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://lore.kernel.org/all/20260612103333.5585D1F000E9@smtp.kernel.org/
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Co-developed-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
+A more optimal solution would require a significantly more complex,
+system-wide approach, accounting for the workload distribution and the
+available power and thermal headroom across the CPU clusters and other
+devices. Such an approach would also require kernel mechanisms which are
+not currently available. Keep the thermal policy simple here and use a
+single passive trip, which at least ensures that the system is actively
+mitigated before reaching temperatures that could ultimately lead to a
+thermal shutdown.
+
+The mitigation temperature is derived from the platform behaviour when
+using the balanced power profile available under Windows. A separate
+change will adjust this trip point dynamically according to events
+reported by the embedded controller. Name the trip
+"keyboard-ec-alert" so that the EC driver can identify the corresponding
+trip point in the device tree.
+
+Also add a 73°C critical trip to shut the system down if the keyboard
+temperature reaches an unsafe level.
+
+Add a thermal zone for the back cover with a 73°C critical shutdown
+trip.
+
+Describe the SoC, SMB, SDX, east and west board temperature sensors as
+monitoring-only thermal zones.
+
+Thermal camera measurements were also used to compare the reported
+temperatures with the physical temperature of the chassis. The measured
+values appear to primarily represent temperatures inside the enclosure
+rather than the user-contact surface temperature. No unsafe external
+surface temperature was observed during these tests, although this should
+not be considered a substitute for formal platform thermal qualification.
+
+Finally, enable ADC thermal monitoring on the corresponding PMK8550 VADC
+channels used by these thermal zones.
+
+Signed-off-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/venus/hfi_venus.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   | 105 ++++++++++++++++++
+ 1 file changed, 105 insertions(+)
 
-diff --git a/drivers/media/platform/qcom/venus/hfi_venus.c b/drivers/media/platform/qcom/venus/hfi_venus.c
-index bd82066bb6e7..e7e4e78a186a 100644
---- a/drivers/media/platform/qcom/venus/hfi_venus.c
-+++ b/drivers/media/platform/qcom/venus/hfi_venus.c
-@@ -1689,11 +1689,11 @@ void venus_hfi_destroy(struct venus_core *core)
- {
- 	struct venus_hfi_device *hdev = to_hfi_priv(core);
+diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+index 75ad74bcb042..5d3a0a5ead68 100644
+--- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
+@@ -20,6 +20,81 @@ / {
+ 	compatible = "lenovo,thinkpad-t14s", "qcom,x1e78100", "qcom,x1e80100";
+ 	chassis-type = "laptop";
  
-+	disable_irq(core->irq);
- 	core->priv = NULL;
- 	venus_interface_queues_release(hdev);
- 	mutex_destroy(&hdev->lock);
- 	kfree(hdev);
--	disable_irq(core->irq);
- 	core->ops = NULL;
- }
++	thermal-zones {
++		soc-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
++		};
++
++		keyboard-thermal {
++			critical-action = "shutdown";
++			polling-delay-passive = <500>;
++
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
++
++			trips {
++				keyboard_ec_alert: keyboard-ec-alert {
++					temperature = <57850>;
++					hysteresis = <1000>;
++					type = "passive";
++				};
++
++				keyboard-critical {
++					temperature = <73000>;
++					hysteresis = <1000>;
++					type = "critical";
++				};
++			};
++
++			cooling-maps {
++				map0 {
++					trip = <&keyboard_ec_alert>;
++					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++				};
++			};
++		};
++
++		backcover-thermal {
++			critical-action = "shutdown";
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
++
++			trips {
++				backcover-critical {
++					temperature = <73000>;
++					hysteresis = <1000>;
++					type = "critical";
++				};
++			};
++		};
++
++		smb-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
++		};
++
++		sdx-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
++		};
++
++		east-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
++		};
++
++		west-thermal {
++			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
++		};
++	};
++
+ 	wcd938x: audio-codec {
+ 		compatible = "qcom,wcd9385-codec";
  
+@@ -1612,6 +1687,36 @@ wwan_sw_en: wwan-sw-en-state {
+ 	};
+ };
+ 
++&pmk8550_vadc {
++	channel@144 {
++		qcom,adc-tm;
++	};
++
++	channel@145 {
++		qcom,adc-tm;
++	};
++
++	channel@146 {
++		qcom,adc-tm;
++	};
++
++	channel@147 {
++		qcom,adc-tm;
++	};
++
++	channel@148 {
++		qcom,adc-tm;
++	};
++
++	channel@14a {
++		qcom,adc-tm;
++	};
++
++	channel@14b {
++		qcom,adc-tm;
++	};
++};
++
+ &usb_1_ss0_hsphy {
+ 	vdd-supply = <&vreg_l3j_0p8>;
+ 	vdda12-supply = <&vreg_l2j_1p2>;
 -- 
 2.53.0
 
