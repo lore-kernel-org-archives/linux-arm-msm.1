@@ -1,92 +1,79 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54640376A00;
-	Thu,  1 Oct 2026 18:47:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1B33310645;
+	Thu,  1 Oct 2026 18:50:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790880435; cv=none; b=f5GRtmtjLf9G2ECfsldmmUa35ByuF6f8ogxywyZmRhD2r59OzoiR/an1aPAIANR2eEU7M7XuWld9UkXrCfw6Vthe/xekDbMqEUXqRYqXOZskksUZCyrfvdLhPIKHPhwa+/cpuuQOFIHHb+uXakKxG2XovQ1ukV0jkF774WkkgwQ=
+	t=1790880628; cv=none; b=O82gJ5ed5zsU81aFEVaN+LnFSvOaO6oV9j2E7IATWl64bpbvjruR7zYCfQWsLE1EruyACf55KP6gL4egKvhBQotpMYstg3A48Mpy8LHbZz03fwNgHel9tHV8y4no+y3wvpe9OX21DtMi4f058BxDtbATQVZobGy/Af6Yf693KFc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790880435; c=relaxed/simple;
-	bh=Bb/hRJrBVDzdeBE8y6UEDigIIWGfH1lOT/PhCya8zRM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=I8uNUTYX9GZFKIhb06ai58xc+t5cBP1LqItn52JuQqXsxkkOIrk6P3WgXIs1k6sud+ZY80jgQF16MdjZvuzFV6uF+cEXm4SZ7/dv2YEoje1AKg3c+jmiGppA8xD5HJxWOgraJCySMqsgyC2KPOvE+jFcPj2NdbFQ45WrMP9jVAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=onVPciYp; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1790880628; c=relaxed/simple;
+	bh=mZRjcadC4nR/ZatJwWUNXv5Fgr5vMB+vEWcJxnB7Dys=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=pFGNxiEfG4AEZIKCDEaa/URpv+KcituXGFazUhhtsUGoMebL32774u+OMv2ha/k8zjjA7ay7i+Dhz5jgp7EOQEQf/eUXEWp9/SH4HuoOMxpdikuZ26DvBYAclbME94ii6pJ+f4N8R4pFn+FExqnV3hWy96aljnLiuCGidtRVnwk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GlmJaiYd; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="onVPciYp"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=FjP2eJrgBez3sre/vPENwEYU3qn89WadUYvbfIb/XK0=; b=onVPciYpIYETTkDhkP2EQbX9xR
-	Kr6WQlauFGffWoTlcxKkG+Bt57bHK5Xact/hmLX40rI1rvILerkd15l9pL0yAMC0l/dqao35TWHNV
-	wA4SlSKh0SfzNjZaHbODRo3pemXD8y38O37a5ApCLa2PyoWx+cym/+/pK40esBRbj/pc=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1xCLnn-008Rw2-Tr; Thu, 01 Oct 2026 20:46:43 +0200
-Date: Thu, 1 Oct 2026 20:46:43 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Yongzhao Chen <yongzhao.derek@gmail.com>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, netdev@vger.kernel.org,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next] net: phy: qca83xx: read resolved QCA8337 link
- status
-Message-ID: <7eed302b-d455-447f-9ce9-f15468b9792b@lunn.ch>
-References: <20260928220749.857-1-yongzhao.derek@gmail.com>
- <01a62e77-6c4e-4665-ba46-26d12b1c77b4@lunn.ch>
- <20260930212348.1919-1-yongzhao.derek@gmail.com>
- <2ea832eb-33f4-4bf3-bdba-5d983038d012@lunn.ch>
- <20261001181634.1508-1-yongzhao.derek@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GlmJaiYd"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C2421F000FF;
+	Thu,  1 Oct 2026 18:50:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790880626;
+	bh=FsBIYxY4xAm8A715N3pPJbTF5MXYNmvykMIWcfCsZx8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=GlmJaiYdePeqnwwBhQorPA+xGslNQLuKkRzCXs4oGFVAVmscYjMj00p53OMTQ1tl0
+	 KHaXL5R3vaLZ4PqfvWgHLY9SxDCZZOSkwD/jyZ6zI8VHX4Bly56pUKGlNKS2L5OY9x
+	 LS/DMHIvERfXL0ZUKDBltZ2XuQ3G8zm95bCR9Kc2RCBPSKn/Kri4CIEK2eUZQkUUeX
+	 YIP5GjvcgAwlUOYHpXHvpM5z5TnnMUMQzDfLbPQZdy4Gn0GlYts2PHSveyAhXZKHaX
+	 xD5p/1RWz78SCuLlhCL125YXuhuikjn7TcekB6LsLLl/LHOSXOAzXxkkjjukDKaLIq
+	 r71ADviR5l19g==
+From: Thomas Gleixner <tglx@kernel.org>
+To: Doug Anderson <dianders@chromium.org>
+Cc: Marc Zyngier <maz@kernel.org>, Mayank Rungta <mrungta@google.com>, Wim
+ Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>,
+ Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, "Kirill A.
+ Shutemov" <kas@kernel.org>
+Subject: Re: [PATCH v3 1/5] genirq: Synchronize in-flight handlers during
+ NMI teardown
+In-Reply-To: <CAD=FV=VuSEzHw8JJsTXuGEEe-w_T=_w6ycsqpzpNWDHxMqyJdQ@mail.gmail.com>
+References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
+ <20260902-qcom-wdt-nmi-series-v3-1-f3999362a9ea@google.com>
+ <87fqzp8jex.ffs@fw13> <87wlt13zj1.wl-maz@kernel.org> <87v78l6oha.ffs@fw13>
+ <CAD=FV=Wdqn7UiuRy1VY-qH+JYChLTEQgmj2q6Q=FBjCZ+5eo1A@mail.gmail.com>
+ <CAD=FV=WE-Wn60zTn=nsq4qLis_zjncrS37fND6ehtpuvxYp+DA@mail.gmail.com>
+ <87o6deh0pm.ffs@fw13>
+ <CAD=FV=VuSEzHw8JJsTXuGEEe-w_T=_w6ycsqpzpNWDHxMqyJdQ@mail.gmail.com>
+Date: Thu, 01 Oct 2026 20:50:22 +0200
+Message-ID: <874if5gsr5.ffs@fw13>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261001181634.1508-1-yongzhao.derek@gmail.com>
+Content-Type: text/plain
 
-> This covers the resolved downshift case only.
+On Wed, Sep 30 2026 at 16:17, Doug Anderson wrote:
+> I guess I'm still unclear on one key question: if we post up clean
+> patches that allow promoting global interrupts to NMI (or pseudo-NMI)
+> level, would you be willing to review and eventually land? I got a bit
+> of a vibe that you just didn't like the idea in general, but maybe I
+> misunderstood. I just want to make sure Mayank doesn't spend a bunch
+> of time trying to solve this problem if it has zero chance of actually
+> landing.
 
-It is good testing, thanks.
+I'm pretty reluctant to export a general "promote me to NMI" interface
+to drivers because that's just a recipe for disaster. Watching driver
+writers creativity for several decades tought me some lessons.
 
-> It does not show whether
-> BMSR can report link up while register 0x11 is still unresolved, and
-> it does not change the SPEED_UNKNOWN limitation from my previous reply.
+Though I understand and agree that in particular cases like a watchdog
+this is useful and should not require to have the watchdog built in.
 
-Greed.
+One clean solution to that is to provide a function which is exported
+via EXPORT_SYMBOL_FOR_MODULES(). Then driver writers who want to use it
+must add their module to the export list, which provides at least some
+means to catch abuse early.
 
-> Given the traffic failure, I would like to target net for v2. Three
-> questions:
-> 
-> 1. Is net appropriate, or should this stay in net-next?
+Thanks,
 
-The traffic failure was however because of the error with setting the
-DACs?
-
-> 2. Is 272833b9b3b3 ("net: phy: add support for qca8k switch internal
->    PHY in at803x") the right Fixes target? It added the QCA8337 entry
->    without .read_status; I have not checked whether the problem
->    predates it. Christian, as its author, is now on Cc.
-
-Reporting the correct downshift has nothing to do with that, as far as
-i understand. Correctly reporting downshift i would put to net-next.
-
-> 3. Compared with genphy_read_status(), the helper takes the forced-mode
->    speed from register 0x11 rather than BMCR and adds MDI-X reporting,
->    and the added genphy_read_master_slave() call runs on every poll. Is
->    that scope acceptable for net, or would you prefer a narrower fix?
-
-net is fixing broken things, especially regressions. net-next is new
-features.
-
-	Andrew
+        tglx
