@@ -1,46 +1,46 @@
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7885417BFE
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 22:06:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C15D49553A
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 22:06:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790892408; cv=none; b=eL8u5zO2vrEMdayIUI4zsaMhL1kIAJr8aPRpFHlRjcQUPjxA9hRx/4OzxcaLt3EwEcc1B++X4ZobN8Rk0vKMIio8Crus9c3Z7/68PJKgYJkh7+nOJU0zSCSdCpAZJMKMtY3f4o52EoJSEC2otJzJ62rZC/hGKH18CjRzyN0fdVo=
+	t=1790892409; cv=none; b=GlnJT0ZWbOD+BKiJjQKzkkwbJvDG0/Hls6ricHKlUIfYVONtiAGxAhHDCoT1sxzqaRyVQPcWFf7V+YkxLQIr1Up3gRZ8WwHgn+pCQ8HOSuIg2nbX0HvkQe0rY3YzwEcP5v9Rx69grG5339lP3KZ6JRkOoX9U01hM2WJrVsjeoOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790892408; c=relaxed/simple;
-	bh=OpH3i+Gjd6BBt1sMh2n0pi0yrFnmvh4x9FZcNUbQIb4=;
+	s=arc-20240116; t=1790892409; c=relaxed/simple;
+	bh=nShlwXN3ugnLH6PEjrBBAK63VVeVaCaBg/2DmPXujvY=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=VJSCcoeg8qb980sIjNGSaBN4pDvkZtP1Ev0mu4CFfBpA6IXmXGiKp3kbob8JOHEXqGosTeHaY2siHL4TXYYMtwYoXPfN37jak9okwHa0PqNNLFFVZACMNpYjwlaRJECBR8pHrPY9UWAEBjod2lAkZf1zjSWIylZkYSwaPzdUxBA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=n9TfAldR; arc=none smtp.client-ip=192.198.163.17
+	 MIME-Version:Content-Type; b=cuqwzs08Q7wOhB5o451gz7S9JXxCmR5WlTHvBcWpOkK/9Pb1AEeknD9zNsZJ0UdSxjMpKBbJJpCk0tLDLpDyKQESt93p0g2hAeIPqjY3jq9+pF+F+3Cl2ITG8a8dinUW9NvOSoRjsRAFqfSQpDwPmS9rArma8kY2Dnoq42uft0E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ipwF/o48; arc=none smtp.client-ip=192.198.163.17
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="n9TfAldR"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ipwF/o48"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
   t=1790892406; x=1822428406;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=OpH3i+Gjd6BBt1sMh2n0pi0yrFnmvh4x9FZcNUbQIb4=;
-  b=n9TfAldRYmd2fhC92JmECGhcdUSrTm7bMMaT2Ek1Gp6u1v1Ugg/bop2x
-   V6GnS/E5LuTz5Yk6xDE6TiOVAaG49+Yi9zoa4DUzFi/ALOd5ff7O4N09M
-   LsGyJt9aovPyH9NiLzcssotXoISyE4rievYfHkgwESptfPU9fACii/NxT
-   RtkZCmQ6wHeroI7hvzaQACzIF70a5DkbxERAPRybARwUqTB4rhqVInE17
-   nfx7Fc8hoq3kP69AkYIdSkoHekdRC/zbOnvOIGxstNdF/RDtPHSO4kAQO
-   sWJnUWt6Jt0QrDJ9QXi0ayDVVRf0arUcATDLaZN6+hXB21MjGFza42+zE
+  bh=nShlwXN3ugnLH6PEjrBBAK63VVeVaCaBg/2DmPXujvY=;
+  b=ipwF/o48kJ9gjwsqsaQzMp7gdgV0r1PAuWFvAHRWktE0wOF2Kn16Yzq9
+   7Vu5VY7yXN22uaojYYjIbpfUOG/k0dd48WUhn6+c6YoJx8dfDhLAAhSGn
+   yijvzDVwVQ94c6SWJpUQQTDbKW4XHsHCVgeFA5taZMNxz/vgxu4XEMu6/
+   KkKTqzJLNylEr6MdrIe25sfajiHIrFRKrgV8CiulIeEwXFQ5dIM++hlxC
+   PkH1N2zO5sYQ5eWEXJkoXTCzoA5t/kMaSnfSkawP782lJBiWyntyF5FC7
+   UbBIDW1aGKMTvWR/Z4nQ57IMMTT+nxsQegBiiqjZQlAeo6dUTSQbmerwj
    A==;
-X-CSE-ConnectionGUID: pDMh9wikTfCihsE/CJTmqw==
-X-CSE-MsgGUID: fukqFKHVQomrmqhRGjJvcw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="91526860"
+X-CSE-ConnectionGUID: lHB9Kcq8RdCrXEH73FtIJQ==
+X-CSE-MsgGUID: 3yxi41m4TuSbKdpT2V5dPw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="91526880"
 X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
-   d="scan'208";a="91526860"
+   d="scan'208";a="91526880"
 Received: from orviesa010.jf.intel.com ([10.64.159.150])
   by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 15:06:39 -0700
-X-CSE-ConnectionGUID: peudnzZvQ36P8ynbm2UP8g==
-X-CSE-MsgGUID: Spj6LWbuQtSXtS0UmsQOKw==
+X-CSE-ConnectionGUID: EVoH8hZLQmOkrzcczCffOQ==
+X-CSE-MsgGUID: CZ7be2fDROOrygK9oWL/zw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
-   d="scan'208";a="274190033"
+   d="scan'208";a="274190036"
 Received: from gsse-cloud1.jf.intel.com ([10.54.39.91])
   by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 15:06:39 -0700
 From: Matthew Brost <matthew.brost@intel.com>
@@ -72,9 +72,9 @@ Cc: freedreno@lists.freedesktop.org,
 	Steven Price <steven.price@arm.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v3 7/8] drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
-Date: Thu,  1 Oct 2026 15:06:31 -0700
-Message-Id: <20261001220632.3190896-8-matthew.brost@intel.com>
+Subject: [PATCH v3 8/8] drm/nouveau: lock the resident BOs of an exec last
+Date: Thu,  1 Oct 2026 15:06:32 -0700
+Message-Id: <20261001220632.3190896-9-matthew.brost@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261001220632.3190896-1-matthew.brost@intel.com>
 References: <20261001220632.3190896-1-matthew.brost@intel.com>
@@ -87,31 +87,21 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-nouveau creates its drm_gpuvm without DRM_GPUVM_RESV_PROTECTED, so the
-extobj and evicted lists are protected by internal spinlocks. Every
-nouveau path but three already touches them with the VM's resv held:
-drm_gpuvm_exec_lock() and drm_gpuvm_validate() on exec, and TTM moves of
-private BOs, which share the VM's resv. The remaining three are:
+nouveau_exec_job_submit() locks every BO mapped in the VM, then
+validates the evicted ones while holding all of those locks. A client
+paging a large working set back in therefore keeps the dma-resv of every
+BO it shares, e.g. with the compositor it presents to, locked for as
+long as that takes, stalling the other side for no reason.
 
- - nouveau_uvmm_bind_job_submit() adds the vm_bo of a MAP op to the
-   extobj list holding no resv at all. Move that into
-   bind_lock_validate(), which now locks the VM's resv as well.
+Use the two-pass locking drm_gpuvm now provides. Validation moves from
+after drm_gpuvm_exec_lock() into its per-pass extra.fn callback, so the
+early pass validates the evicted BOs while the resident external ones
+are still unlocked, and the late pass locks those and validates
+anything that was evicted in the meantime. drm_gpuvm_exec_lock() falls
+back to a single pass when nothing is evicted.
 
- - bind_link_gpuvas() unlinks the GPUVAs of UNMAP and REMAP ops, which
-   can drop the last reference of their vm_bo. It runs within the bind
-   job's drm_exec transaction, which the above makes hold the VM's resv.
-
- - nouveau_uvmm_bind_job_cleanup() and nouveau_uvmm_fini() can drop the
-   last reference of a vm_bo holding only the object's resv. Lock the
-   VM's resv along with it, through a new
-   nouveau_uvmm_lock_vm_and_obj().
-
-The bind job's fence now always lands in the VM's resv, as BOOKKEEP.
-This already happened whenever a bind job mapped a private BO.
-
-With that the internal spinlocks buy nothing, so set
-DRM_GPUVM_RESV_PROTECTED. This is also what two-pass locking in
-drm_gpuvm requires, which a following patch makes use of.
+Validation now runs under the uvmm mutex, like it already does for bind
+jobs in bind_lock_validate().
 
 Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
 Cc: Alice Ryhl <aliceryhl@google.com>
@@ -143,119 +133,58 @@ Assisted-by: LLM
 v3:
  - New patch (Danilo)
 ---
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 49 ++++++++++++++++++++++----
- 1 file changed, 42 insertions(+), 7 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_exec.c | 27 +++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 2026fe6b48c6..dae612e56d91 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1187,6 +1187,27 @@ bind_validate_region(struct nouveau_job *job)
- 	return 0;
- }
+diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+index eea6619cffaa..b9ab7da125b1 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_exec.c
++++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+@@ -85,6 +85,18 @@
+  * the corresponding VM_BIND jobs they depend on - attached to them.
+  */
  
 +/*
-+ * Lock the VM's common dma-resv together with the one of @obj, as needed to
-+ * drop what may be the last reference of a &drm_gpuvm_bo.
++ * Called once per pass of drm_gpuvm_exec_lock(), validating whatever that pass
++ * locked. The early pass validates the evicted BOs before the resident ones
++ * are locked, so that a BO shared with another client, e.g. a compositor, is
++ * not held locked while this job's evicted BOs are moved back in.
 + */
-+static void
-+nouveau_uvmm_lock_vm_and_obj(struct nouveau_uvmm *uvmm, struct drm_exec *exec,
-+			     struct drm_gem_object *obj)
++static int
++nouveau_exec_job_validate(struct drm_gpuvm_exec *vme)
 +{
-+	int ret;
-+
-+	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES, 2);
-+	drm_exec_until_all_locked(exec) {
-+		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(&uvmm->base));
-+		if (!ret)
-+			ret = drm_exec_lock_obj(exec, obj);
-+		drm_exec_retry_on_contention(exec);
-+		if (drm_WARN_ON(uvmm->base.drm, ret))
-+			break;
-+	}
++	return drm_gpuvm_exec_validate(vme);
 +}
 +
- static void
- bind_link_gpuvas(struct bind_job_op *bop)
- {
-@@ -1224,12 +1245,24 @@ bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
- 		   unsigned int num_fences)
- {
- 	struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
-+	struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
- 	struct bind_job_op *op;
- 	int ret;
+ static int
+ nouveau_exec_job_submit(struct nouveau_job *job,
+ 			struct drm_gpuvm_exec *vme)
+@@ -99,21 +111,14 @@ nouveau_exec_job_submit(struct nouveau_job *job,
+ 	if (ret)
+ 		return ret;
  
-+	/* The VM's dma-resv protects its extobj and evicted lists, and must be
-+	 * held by bind_link_gpuvas() in case it drops the last reference of a
-+	 * &drm_gpuvm_bo.
-+	 */
-+	ret = drm_gpuvm_prepare_vm(&uvmm->base, exec, num_fences);
-+	if (ret)
-+		return ret;
++	vme->two_pass = true;
++	vme->extra.fn = nouveau_exec_job_validate;
 +
- 	list_for_each_op(op, &bind_job->ops) {
- 		struct drm_gpuva_op *va_op;
- 
-+		if (op->op == OP_MAP)
-+			drm_gpuvm_bo_extobj_add(op->vm_bo);
-+
- 		if (!op->ops)
- 			continue;
- 
-@@ -1288,8 +1321,6 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
- 			dma_resv_unlock(obj->resv);
- 			if (IS_ERR(op->vm_bo))
- 				return PTR_ERR(op->vm_bo);
--
--			drm_gpuvm_bo_extobj_add(op->vm_bo);
- 		}
- 
- 		ret = bind_validate_op(job, op);
-@@ -1603,9 +1634,11 @@ nouveau_uvmm_bind_job_cleanup(struct nouveau_job *job)
- 			drm_gpuva_ops_free(&uvmm->base, op->ops);
- 
- 		if (!IS_ERR_OR_NULL(op->vm_bo)) {
--			dma_resv_lock(obj->resv, NULL);
-+			struct drm_exec exec;
-+
-+			nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
- 			drm_gpuvm_bo_put(op->vm_bo);
--			dma_resv_unlock(obj->resv);
-+			drm_exec_fini(&exec);
- 		}
- 
- 		if (obj)
-@@ -1941,7 +1974,8 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
- 	mt_init_flags(&uvmm->region_mt, MT_FLAGS_LOCK_EXTERN);
- 	mt_set_external_lock(&uvmm->region_mt, &uvmm->mutex);
- 
--	drm_gpuvm_init(&uvmm->base, cli->name, 0, drm, r_obj,
-+	drm_gpuvm_init(&uvmm->base, cli->name, DRM_GPUVM_RESV_PROTECTED,
-+		       drm, r_obj,
- 		       NOUVEAU_VA_SPACE_START,
- 		       NOUVEAU_VA_SPACE_END,
- 		       init->kernel_managed_addr,
-@@ -1978,6 +2012,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
- 	struct nouveau_uvma_region *reg;
- 	struct nouveau_cli *cli = uvmm->vmm.cli;
- 	struct drm_gpuva *va, *next;
-+	struct drm_exec exec;
- 
  	nouveau_uvmm_lock(uvmm);
- 	drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
-@@ -1989,9 +2024,9 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+ 	ret = drm_gpuvm_exec_lock(vme);
+-	if (ret) {
+-		nouveau_uvmm_unlock(uvmm);
+-		return ret;
+-	}
+ 	nouveau_uvmm_unlock(uvmm);
  
- 		drm_gpuva_remove(va);
+-	ret = drm_gpuvm_exec_validate(vme);
+-	if (ret) {
+-		drm_gpuvm_exec_unlock(vme);
+-		return ret;
+-	}
+-
+-	return 0;
++	return ret;
+ }
  
--		dma_resv_lock(obj->resv, NULL);
-+		nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
- 		drm_gpuva_unlink(va);
--		dma_resv_unlock(obj->resv);
-+		drm_exec_fini(&exec);
- 
- 		nouveau_uvma_unmap(uvma);
- 		nouveau_uvma_vmm_put(uvma);
+ static void
 -- 
 2.34.1
 
