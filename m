@@ -1,54 +1,55 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98B453E8354
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AA5E48B39D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790837967; cv=none; b=r5/yjB9dJBPxtuDX1azwlkqn6Stbdp/ewXUrDkwaHfHlmdNyGLtLANLH5g//F3ktTLbkT3WvvQjaP9LorhnMr8ow/Dae3uEAyXhIjS/Yw6dfYpooyuA4HDIQd+IgWoVsV0uAGGKoR4aqHDc9+Z8Lw1/y1txRplPPdzInjiZ3smE=
+	t=1790837982; cv=none; b=FbE9M/Mn+7p2S7EE9tMhl9AuQs0Sya2OgTQr0qJQFB863qTqFMFEvX8yCrq05BkARUp+oS/QpvjDpXt49BBqrHcbaVjwgOgbYcIhzYbdVMReZHhFgP/p763TstbvrCLqonZc79mMLRsM9s0/0x5TsQY4aISjjAkJyYXszX0du1w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790837967; c=relaxed/simple;
-	bh=adKEV0wp8fnkm3B2gVtkxUbYQ0N4xZbbOvQZcLnu0xk=;
+	s=arc-20240116; t=1790837982; c=relaxed/simple;
+	bh=QJwfbKCyn/gh6UMXa/B9wDnCdxqQxEqYbYvEbOHcRzo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=OGztpxiHKGE4bSB7gP9B4EodQ4Plg1ScTDSdhcDqUMPMoQJf19NbvMqtrIO/q8Z4nza2O/26naoiU6J7J4K/otfVB/wqLofscGm/0aqXv+r0Y4lJ7bt/hvDUklVpgcSnHhvEQ6vMe4YaSYoWo/gY8EmYz4NrXAmAr/zrFMrZXxM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZTEqIekg; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=cf7hpzUxh2+BminlR8tbhLsVlAPkk+rQwYNsaFLLQoFMETjAZNVILxUKFxdXbqeI/mgPsdeAiLy2MFzX/7BNEWuL42mmfKe6PsF922K91wCvr+40IMqel3i5KZbcguU5iGWJStqMdOG8oB5+h+DkRlm6aGhfvLamMf20AbgVQhI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Eb7QsxdV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZTEqIekg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6919B1F0089F
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Eb7QsxdV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D2C2A1F00921
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 06:59:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790837966;
-	bh=adKEV0wp8fnkm3B2gVtkxUbYQ0N4xZbbOvQZcLnu0xk=;
+	s=k20260515; t=1790837979;
+	bh=QJwfbKCyn/gh6UMXa/B9wDnCdxqQxEqYbYvEbOHcRzo=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=ZTEqIekgpZghTg8Qn8vwEmbcMeMYl2MORgJxn3aIHii9lmlTTHXZULIZaVG6qSbBU
-	 P1GpvEyVhrBhMi/mxpGoxmyOhDj0twY5/81waMYx34MNJYpyJW/LGUPeAxIk4Gb3tS
-	 291yIQxl1AzJd+hKdqlRFd6inzcyYydgb3tNfWPDRy9FVVDUzeGQbpXp2S02THGyJO
-	 cBNMWgzFXyDjGvG+KjD2jVAWTdEuZ5SPtgBv4hf/VJBW5T/eR3p7ntSCwVWjJbxHS/
-	 EtdsuoEljzPiJkqs+B/W+oywc3R6jty9xcO198geJNwEC8Z9ZM5JTuumBUxhIb+jXo
-	 21JWDU1ZRilHQ==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3e27d525so1237880e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:59:26 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByGgyjmX5abum335N75lrh8yTQgwuBKCy9mQBD6q3oSTJ1J4gleqHiOZPF7RWG4gUBnc01UJEFUN2O6oE6K@vger.kernel.org
-X-Gm-Message-State: AFq9FYK1FCc6zzdXGhnxxYndzuAYY+DXodeGFJwmH/VufNvZHfvD18vF
-	QJzb0ELg4EQo9CNaRtY1O5vIXIFf+hI+dkOC5JNbpZL43Cgd8AREfYAKtZX3Z8Bv31+E42xzNB1
-	OynoJ5nIyvHH16LnBHq9/dSABMVcxOzQ=
-X-Received: by 2002:a05:6512:3ba0:b0:5ba:3b01:36a5 with SMTP id
- 2adb3069b0e04-5ba405ee75amr1389712e87.14.1790837964923; Wed, 30 Sep 2026
- 23:59:24 -0700 (PDT)
+	b=Eb7QsxdVvwC6Q6ASOE6RHWopINjqmVsM+asCISC8KzX4TbbjLlLnsFGewjxLBiuAL
+	 USpbOV25b9ZmxZxGODhRZ/pIOUEV4j/7ISqQiq/4Q3iBTdt2DVLljYevQD1l6XoyiL
+	 /6myJolVu0oJo4EALqct9L6A2ND53yX9mOAI/X1jCNzZ1CH/ZbM+48f/OViR41yaiE
+	 YSWVB+jXEhQSQQdD456ShpIZi68mzYXHl+aRD0Dw6RexksYrZgHbY19oPl/9V4B29b
+	 xtsP823iFmnkNIANNLcxBYI21WhoxAkFuarvbrBPjvq3midaRtXgYMBNaY+ttNwSXN
+	 HLUC7j9fQRUAA==
+Received: by mail-lr2-f16.google.com with SMTP id 38308e7fff4ca-3a66f8bc23bso43067981fa.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 23:59:39 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBw75+VlTSu5KeyAXxCFRNDl5V7otVUVEMXCT4RPQIxhDY6y9kmFCiJ0tV68GEoPgXRsy9V9+tkXzqdO6JNJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKfk0mDYaeJ4+7qK2I/iL43lXhaQKTiGgS7UTaBv//u0nXJHar
+	I0cxg49TX7lPyA+KkLFHwI7D6bsNCP6sT+3HrJBGgQkyg6lV2Zt1xag4nJZN56KnvAyADgf42sd
+	LwA49HFWoIatRmHxP9cFQVoMaKXWeZWE=
+X-Received: by 2002:a2e:a99a:0:b0:3a7:812b:d0b with SMTP id
+ 38308e7fff4ca-3a7812b1f22mr7437971fa.11.1790837978465; Wed, 30 Sep 2026
+ 23:59:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-7-83afb4f1a707@bootlin.com>
-In-Reply-To: <20260916-drm-bridge-every-panel-v3-7-83afb4f1a707@bootlin.com>
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-8-83afb4f1a707@bootlin.com>
+In-Reply-To: <20260916-drm-bridge-every-panel-v3-8-83afb4f1a707@bootlin.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 1 Oct 2026 08:59:09 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkhYNZ4R4Z60zTzNoZwCtk4rcL-pCbgdHpNEzV-4oO_Wg@mail.gmail.com>
-X-Gm-Features: AclHuK8feDgrhg1tWHz9y2oJ4IDmaC5Th2MaGXRPg_l1XDpQ6IeWaj3r9RadEo0
-Message-ID: <CAD++jLkhYNZ4R4Z60zTzNoZwCtk4rcL-pCbgdHpNEzV-4oO_Wg@mail.gmail.com>
-Subject: Re: [PATCH v3 07/19] drm/panel: deprecate panel-bridge APIs
+Date: Thu, 1 Oct 2026 08:59:25 +0200
+X-Gmail-Original-Message-ID: <CAD++jL=G5ObsdvbhHFsEOeGYQFSd8Ggo7jaEupRTEdPmQD1e1A@mail.gmail.com>
+X-Gm-Features: AclHuK_sHPl7UkC73IJwZdQ3ifWpNCzHWYkFbMbP-K9-g_pDmrUnJv1iVcxQNBo
+Message-ID: <CAD++jL=G5ObsdvbhHFsEOeGYQFSd8Ggo7jaEupRTEdPmQD1e1A@mail.gmail.com>
+Subject: Re: [PATCH v3 08/19] drm/todo: add entry for removing the
+ panel_bridge API
 To: Luca Ceresoli <luca.ceresoli@bootlin.com>
 Cc: Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
 	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
@@ -78,12 +79,10 @@ Content-Transfer-Encoding: quoted-printable
 On Wed, Sep 16, 2026 at 3:46=E2=80=AFPM Luca Ceresoli <luca.ceresoli@bootli=
 n.com> wrote:
 
-> Now that a drm_bridge is embedded into every drm_panel, the panel_bridge =
-is
-> not needed anymore. Its APIs are just accessing the embedded drm_bridge
-> transparently.
->
-> Deprecate them all, encouraging to use the drm_bridge API.
+> Now that a drm-bridge is embedded into every drm_panel during the panel
+> creation, the panel_bridge does not really exist anymore. Its API has bee=
+n
+> deprecated and kept until drivers convert to the bridge API.
 >
 > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
