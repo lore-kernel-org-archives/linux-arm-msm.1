@@ -1,168 +1,140 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C44F35CB7B;
-	Thu,  1 Oct 2026 15:02:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 109225208B0
+	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 15:11:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790866970; cv=none; b=uB2tuF0dRv841cIXiWe/hTlmUl5t6dM3/32hiu4BmwknZbyZkfuCE8X0HpGt7FLtoGNouwdEomfqaATaiIXOFguFd63JsPmn0fe24WjnNsRfu2J/v2Z6pSZ+mrCVcy4e0na9DfwaD/Henbl2AnNckP2DMhxBtmWgXM6XM3EBrOI=
+	t=1790867485; cv=none; b=SM6VH6LCg0VAXFnrX9FpanniFZEZtVtKS1+O5uESHgeI2dIlHsuK68ik2Gc61+raLUuob9uAf1HUCikUhCvNSK6BmSVTkU4HAcWgJluhdyjbF5pc6VgGZPEWY8sv2+0n3ciq+IFDHJcCcTdhA9yH89idUpAfapkAoZtxGD9zYj8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790866970; c=relaxed/simple;
-	bh=/kwgN+PuBVbO8westGewDMOdp19vmIkC/fjU+0PDaNs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=agFEjoDbg8tfxSDh+XXsiX3lpqISz6wGH5QmP/MMdYqUa1xJFwnAgxzAFY2yf6+cXuk1berGaRdw4kmR9ec0xa8gw68+F+sSB4GwGsVQcNRhDEdttBa9sVymRqmDSinBe4fAsvG3Wu/Jl16RKGMyKDqI+pV9kHXZ+rNTFiAyZrw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SpCWa4Sy; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790867485; c=relaxed/simple;
+	bh=iYBzGParazZeDHgmm6OmKxdz2ZT6O24nTmp5HoaQ7xc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=nzvuGe4Y844eMufzpa2t/o1zIsP2shwgcbnUhFxpRItkVTOzSdjIKlxV8Ic7TYbjf793kihQWrE6YG59VKAGIFCZcsrRNhxy6QQrCTg41z8VSVGTfVjCLvTLbSLYRi/zwg5fHiUo+affLbySVKB852buC69l6wVOVRv7GYku+JI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Uk2LgLKX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TuhOBZLY; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SpCWa4Sy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D668A1F000FF;
-	Thu,  1 Oct 2026 15:02:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790866968;
-	bh=JWj0IzRMkYtiHqUCqAGBiBrEoLLPy1dCDBwjIuD2i78=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SpCWa4SyhglpuwNqaNss/dJs0mjZIrUnZk/P5u7rlaTNPDWyDiDi+h+HpTb1IuqEN
-	 nPLZatdVCr04QS+bB1SWEbrpug8cPqV46WzThUPJW9oogapgwQXKAdBVeqzBIFPc1F
-	 acThuOPa0xzqqdFNprFqBnjXtMAN+KNCiPrAQ6fa0SEobNRZmayJXXll6/Q/dRGsk1
-	 /gNrD1vcA4m1nzwlhnk6bzZ/J4acb1vMEHg/ZBWQoYI0NA92XgP3qZIFZMdQqfYxs0
-	 Ut0Gs+P/30MPrdnKFHjKags6HUjWs7gKegqlA9bhM2ClvWV4+y3Y6LXlIARM6xqQ1B
-	 9G7SsgHyBEW8w==
-Date: Thu, 1 Oct 2026 10:02:45 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Abel Vesa <abel.vesa@oss.qualcomm.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
-	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>, Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-Subject: Re: [PATCH v9 0/3] Add DT Support for USB on Shikra
-Message-ID: <ar50erRON6cMF9Oz@zenbook>
-References: <20260912-usb-shikra-v7-v9-0-c7b507a0ec27@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Uk2LgLKX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TuhOBZLY"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691Dk6m01856999
+	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 15:11:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	iYBzGParazZeDHgmm6OmKxdz2ZT6O24nTmp5HoaQ7xc=; b=Uk2LgLKXwlosQNrL
+	lM/U1nQlnjCv68l4yxb7IIXVi+aCxd94Hedfj1kJCkEm3sEeJMdW6hAOTNDntS2T
+	HyF65uzhOjFf3/ZeZN3vD2DltxF0a9h6EWOjXVAloPl0DkKi0F6ch6u7T9zH2HId
+	7JrEBWlKC4r/zZ5hALYb4wnIvCzsB1Pa10kzvEEpPsTlxgJMXI1qiAPgpnllDG6D
+	g1919t7U7hCj2xftOqOnf33sPsnBQ9PLoIINTMY0LUariHvvhzBb5xaImxsb8+z/
+	WaEk5JeVzpdun1n/FwfvIZENjTwmQOZD5VSWtVeGheI1/RK3ep/GHSr8BD5CI7sb
+	pkzn/A==
+Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h16wcvw8g-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 15:11:22 +0000 (GMT)
+Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5d873da8093so26938e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 08:11:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790867482; x=1791472282; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=iYBzGParazZeDHgmm6OmKxdz2ZT6O24nTmp5HoaQ7xc=;
+        b=TuhOBZLY7zUVs40nxdQIjT5+gglmCCFeHVn6Gxsx04NIDiHY6HeTazkGXDxNvOqPy0
+         4isOv5j5IlTpbR1jhKRDot+31/t4jVx6JezRB91uEB1irEs2t3vEPn7CAzjQOvCzJxwG
+         9z/c++T61znPjnOK75mOaM/qxQZfpNZ1bO8jmLdwzccfNXJyud/upUl7xDdeavkonVen
+         wBOC80Jfsz0zY8d4gFf7wHfRrUtr+7J+lPooqkoJ0GLkRTBVnXkE+je0nAuqetuZubyG
+         Zaf0zuOGEgNAFPC+5T4pbKfyTyDG8Z6pqRAcEsE42wdXWeCkujKUXuvYOI30LCMIeTXF
+         caQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790867482; x=1791472282;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iYBzGParazZeDHgmm6OmKxdz2ZT6O24nTmp5HoaQ7xc=;
+        b=dhd3YDl2s30MNXps8yqOhfkffF7C0MQC79IVjUJi5IvEB0MFCybg6wBNJcoms10hx6
+         nwVPHYCvqqPnkjUkzQ3Tw2P6md2z/PDjWarYdyyGLE3u5j+SSdEvFzoqb8ge3kHTTLqR
+         tpuOVU+n0leMouXnz7QJJiZn+kgLPz9rSufSYd4IATyEbqVgB1NXu2BUliv5UVoCuX6x
+         D9JZiA+FE66GQT5osdN4NDEUsAso4j6B7UvISr6pcylvtv2XxaXJAfd+/m4etH20Vs8Z
+         euZQU/GrEzbyqfxnQmPaishmDEmUyVcv3f3hCa2eZr7xgiYlJxere28pdKm6lZ5h4+xa
+         Hzuw==
+X-Gm-Message-State: AFq9FYJ/P9zxoW9ajvtUAv9+uDnadMrqfS2KljW1q8Cw945CZV6aEMJ4
+	IFw5jKwgu/45FisRNaLTErGGMqsZ7YyXdWTpFEqcf1Z+LpNy5u1/0cwfnuwzkBLqUL/lk+boeeA
+	71ziwJbnVhM+Dxq9gk28I8w46eHkCo8u5vSWlygijbMDTt22thVmLhju9tAca3uPtHA4O
+X-Gm-Gg: AYBFou0HuU8cwNvIvgfx5gHiBRkHoHgqiXqLn4kOaBNsmR73yPVnntPtCpvRUrpBLO/
+	Mr5EmXXpBaw5CWBzuJYWBeewSLVOWfmDr7IehV1/eK8fExkQDZCKF0hybuZQBBsT1m2OUv86Y2u
+	djkGuMl/bNWbeMwCCGTcIhym8hSEXJnjbyye3qnE5h3lKRBAsOHL1EPghjEPBpjYER4+aYt40Ed
+	D09JOIgubCPf4V+v/KrMRHR1yhi01yU282GfWfpnBLQ2XVUgACyQ3KdzGj/M6FI4VJlM8CtNMw+
+	qNp7GgTBkyTvlxPLsWcCl3jqCljiwlsNKYksFX/QHtFI1nh7GPWBPYgrUpvNrBHsi57Bu+/GoR5
+	syoURb6gISiDmB97HOmPksw==
+X-Received: by 2002:a05:6102:6a8b:b0:7ae:544d:b50b with SMTP id ada2fe7eead31-7be72cb1e6emr1260221137.3.1790867482243;
+        Thu, 01 Oct 2026 08:11:22 -0700 (PDT)
+X-Received: by 2002:a05:6102:6a8b:b0:7ae:544d:b50b with SMTP id ada2fe7eead31-7be72cb1e6emr1260203137.3.1790867481730;
+        Thu, 01 Oct 2026 08:11:21 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2e31ce3ea9sm187363566b.32.2026.10.01.08.11.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Oct 2026 08:11:21 -0700 (PDT)
+Message-ID: <20cfacef-2238-4967-a7f6-eff0e883df00@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 17:11:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260912-usb-shikra-v7-v9-0-c7b507a0ec27@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] misc: fastrpc: map ADSP remote heap into remoteproc
+ IOMMU domain
+To: Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org,
+        Amol Maheshwari <amahesh@qti.qualcomm.com>, quic_bkumar@quicinc.com,
+        quic_chennak@quicinc.com
+References: <20261001-fastrpc-kvm-iommu-v2-v2-1-6c32ad6f662f@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261001-fastrpc-kvm-iommu-v2-v2-1-6c32ad6f662f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA2MCBTYWx0ZWRfX7/1GzxF08xlB
+ 4ud4eUPQeFswo8kGFxNtKVu5BFvjaFGnck+/y6Yvf2xWH2xa6TSbCL+hNbzCMLblF1kcDHT63bP
+ J4NQI5EnWq4GiJHypp2oSjnf7sLET9DPVMFv/sFXoqygRktDMTpexpwR7cwaf8AYsXVqFeeqjpK
+ jnEsqwRt+SuGb01Lig2msXhiHBrlDEu50KJsH7n0rKk0tPWRGIPaip8XQbAxPFyHokdU0HqFeEc
+ IWQHz8NvsSMkk4IQPc0hoVfqsvZ+0YmUp08QIlO0l8SQ/zqXS1mfTFxI/Y4EZIBriI+DuuqMKjt
+ 7EHdGSv1H4BwO/vcKUUvJQkpLsa78tjrzTAUVn9wLf5xuUV7GWX2w/JQYCiSDp5M4Qp2n2EmC6Q
+ y35oMCsvPZRr5XcPi2ZEIqOtsu8NVHAUGJaimZqBaIOAa8DP1l7Sm+P/gvELygvpUFRos60/Ges
+ E2MItypiTAofgEhovUQ==
+X-Proofpoint-GUID: Pmpo9dEmbakfc-7482FTTE17udwQ75Yj
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA2MCBTYWx0ZWRfX0h4SMWeIs6ab
+ JamZeYfXILgNJVv9Ik0y0DBLmMMQzmOWlwOvCGZhPjk2A/puBIGDs2+ljIq+M4Cl64VscYivU0E
+ Hj0fl30djy6pIlz2ScR6gFCNI6pY76w=
+X-Authority-Analysis: v=2.4 cv=S51MU4sP c=1 sm=1 tr=0 ts=6abe781a cx=c_pps
+ a=wuOIiItHwq1biOnFUQQHKA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=JJHmHs2BdlmLsZ1y3_4A:9 a=QEXdDO2ut3YA:10 a=XD7yVLdPMpWraOa8Un9W:22
+X-Proofpoint-ORIG-GUID: Pmpo9dEmbakfc-7482FTTE17udwQ75Yj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010060
 
-On Sat, Sep 12, 2026 at 08:17:00PM +0530, Komal Bajaj wrote:
-> Shikra has two USB controllers. Adding both USB controllers support
-> in device mode in this series. Also squashing Type-C enablement on
-> CQS/CQM platforms [1] into base USB enablement changes on these
-> platforms [2] based on feedback to squash related subsystem changes.
-> 
-> While at it, also sorting subnodes under soc@0 for consistency.
-> 
+On 10/1/26 5:00 PM, Anandu Krishnan E wrote:
+> On KVM-based targets the kernel runs at EL2 without a separate
 
-When you repackage scattered patches like this into new series patchwork
-is often unable to determine that these patches supersed the previous
-version.
+"On Qualcomm platforms without Gunyah/QHEE"
 
-The result is that for each patch I now have (at least) 2 similar and
-conflicting patches in my queue. As the patches was altered to the point
-that patchwork doesn't detect it and nobody told me that the previous
-versions are no longer to be considered, we now manually have to spend
-time to detangle this.
-
-In other words, this series doesn't apply - please determine if there
-are any remaining parts of these changes that isn't accounted for in
-linux-next and resubmit those.
-
-Regards,
-Bjorn
-
-> [1]: https://lore.kernel.org/all/20260818-pm4125_typec_changes-v1-1-6e6ede93db19@oss.qualcomm.com/
-> [2]: https://lore.kernel.org/all/20260811-usb-shikra-v7-v7-2-753e928f37ae@oss.qualcomm.com/
-> 
-> Changes in v9:
-> - Move usb_2_hsphy above usb_qmpphy to maintain alphabetical ordering
-> 
-> Link to v8:
-> https://lore.kernel.org/r/20260911-usb-shikra-v7-v8-0-851ee4bc0eec@oss.qualcomm.com
-> 
-> Changes in v8:
->  - Rebase on top of latest linux-next branch
->  - Sort /soc@0 subnodes in ascending order of unit address 
->  - Squashed with Type-C support change
->  - Individual patches were previously reviewed by Abel, Dmitry, Konrad and
->    Mani; however, those reviews do not apply to the squashed commit and
->    are therefore being dropped
-> 
->  Link to v7:
->  https://lore.kernel.org/all/20260811-usb-shikra-v7-v7-0-753e928f37ae@oss.qualcomm.com/
-> 
-> Changes in v7:
-> - Rebased on top of latest for-next branch
-> - Added Mani's tag from cover letter to both the induvidual patches.
-> 
-> Link to v6:
-> https://lore.kernel.org/all/20260729-shikra-usb-v6-dt-v6-0-72ffb4796a08@oss.qualcomm.com/
-> 
-> Changes in v6:
-> - Moved dr_mode property to shikra-evk.dtsi
-> - Merged platform specific changes into one patch
-> 
-> Link to v5:
-> https://lore.kernel.org/all/20260723-usb-shikra-dt-v4-v5-0-5b69d9eb0888@oss.qualcomm.com/
-> 
-> Changes in v5:
-> - Added interconnects and sorted nodes alphanumerically - Dmitry
-> - Updated commit text mentioning that device mode is being enabled
->   since role switching changes are not yet present.
-> 
-> Link to v4:
-> https://patch.msgid.link/20260721-usb-shikra-dt-v4-v4-0-2e7a092d7f27@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Enable both controllers in CQS/CQM platform
-> - Fixed iface clock in usb_2 node
-> - Skipped adding RB tags obtained from Konrad since on CQM/CQS, second
->   controller also is enabled in v4. Also specified dr_mode as peripheral
->   for first controller.
-> 
-> Link to v3:
-> https://lore.kernel.org/all/20260716-shikra-usb-dt-v3-v3-0-13f73a0571bb@oss.qualcomm.com/
-> 
-> Changes in v3:
-> - USB changes were sent as part of consolidated submission in v2, but
->   they were later dropped since bindings had to be updated.
-> - Remove double vote on USB3_PRIM_CLKREF and also removed xo clock.
-> - Uses &mpm as interrupt reference (sashiko bot)
-> 
-> Link to v2:
-> https://lore.kernel.org/all/20260519-shikra-dt-v2-0-c01b90fb4395@oss.qualcomm.com/
-> 
-> Changes in v2:
-> - Moved to using mpm interrupt handler for ss phy irq (sashiko bot)
-> 
-> Link to v1:
-> https://lore.kernel.org/all/20260512-shikra-dt-v1-0-716438330dd0@oss.qualcomm.com/
-> 
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-> Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-> ---
-> Komal Bajaj (1):
->       arm64: dts: qcom: shikra: sort /soc@0 nodes by unit address
-> 
-> Krishna Kurapati (2):
->       arm64: dts: qcom: Add support for usb nodes on Shikra
->       arm64: dts: qcom: shikra: Enable USB controllers and primary Type-C support
-> 
->  arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts  |  43 +++
->  arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi |  41 +++
->  arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts  |  43 +++
->  arch/arm64/boot/dts/qcom/shikra-evk.dtsi     |  12 +
->  arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts  |  23 ++
->  arch/arm64/boot/dts/qcom/shikra.dtsi         | 515 +++++++++++++++++++--------
->  6 files changed, 536 insertions(+), 141 deletions(-)
-> ---
-> base-commit: f2bfbc3554ca6919484030729424b9dee2942d24
-> change-id: 20260811-usb-shikra-v7-2dc0d3afc3d4
-> 
-> Best regards,
-> -- 
-> Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-> 
+Konrad
