@@ -1,212 +1,104 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 070ED369D6A
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 00:43:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCA7B31280D;
+	Thu,  1 Oct 2026 00:46:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790815418; cv=none; b=V6N6+nO0Im5nOG1qtw7v+jrvLxgUJE7gotNjyLP3H4xeqVP0nvPNcoyOr1SoujCOLhw0xKxvmUSnM5tRg+XnlxyTVuRH9ZDNStPlZrLnrRfbFb/dBUEXyzyY/T232Xj+FZmY1GfgVsuIWCPOupkWxUv6tT3TgOtN6OEJYalWm1w=
+	t=1790815588; cv=none; b=KCvyMvtyB5k2OFwlmTtBxNN7TVy5NqZ3GaDNOYbY+3e+PUkw/0tAedB4eBWDrKKrdtiGlV4grwCTGaU7pZJ2IIOwYf0nuVSgw34Nhnsbq4NdMfgjyEIQoyLEMOsSiPISi9WSGtaM0HTPxSTz55oK3NtlQk1xGyL47wSxcqICTAI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790815418; c=relaxed/simple;
-	bh=cyLUkHDw0rOteiZ0d9G56/3XyJ40Ceebpxn64MLmNd4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FJQkTZ4pjJ7QhVuBhyHuW/vQ/+mkVZBWdTlmE6Cia4ecpTNgvH49u3U7vqLW+gXuOoFKDTlt/qGgyjb3IiCZ/A9oMdkQMRgOj+/ewYkCA+c4Yjk4G4aiX1Xcj317UEPKhsDBTr1CCVLHDGH7+LC/IrSgaQ2X+31nifMULsPP+mc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZtKAsRXL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CetEcrZI; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790815588; c=relaxed/simple;
+	bh=UkmVbkQERU56oU3uOeniS6e1LqsnVJGtykuPyHWVboY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=nr1AXwIUnMry/wJtol2YSdrn+Gvgu2wU+bf+mG5ZCXJEN8bFQGa1daJRzIKm4YJjTsD5N2eGARPfZNgKoP7onXWX7zrCrQqPggENMuRmiKvlH6mIF2xEIP25uBHTZeWxQqb8pnvIfsOedasVg82iPWBEVNM9q6az7DiFxBjayGM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YroZubdL; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZtKAsRXL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CetEcrZI"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UMkmxu892609
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 00:43:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6/YjcEN7BDbe1iCeqE6MfpaqcpTrbhOInw48Y0omQ9g=; b=ZtKAsRXLvhfaowk1
-	fl3P+MjUdwjsYT4zBYuV/SxekN9B1MluKLMDWrvZ+r6vzuC+1orOZyObIK1CDr5d
-	AyKdwi8vMclA+1J50tXc6w/Oo1g2Cu1xwmLQ5RoF9pi/7br20bv4EpOPykSmK61n
-	cC8JXgZtEY9W0oEcbLPq040v2kCM0YtrTl6K9ImJFAWa+xj2Ug/7cWg/fbAHYNAx
-	50WjiyR/6tDT9Ee9W9HjbYiRCIDeAtu+ZrdGNh2oiTq19hjtdzqGfkHws2dSeCaK
-	wtD2xrCDPHI399ocLKuBqimXyqsoLJBys3EOBM3tFlR0itWO9w3xp2o8eWf3cPFr
-	IgrBRg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1bh58cqu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 00:43:32 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-934956beec8so1227396885a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 30 Sep 2026 17:43:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790815411; x=1791420211; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6/YjcEN7BDbe1iCeqE6MfpaqcpTrbhOInw48Y0omQ9g=;
-        b=CetEcrZIh12oqxTt/xl0L7ealXCsLYWIbBsO2m5kzBTSED2jMBnrrfGPxAPWbshN7x
-         SJaC9cybuvPF51Dd6nxABpyJ65NkDsep/LxgGwTp0yIFKkJSRNCgZN7zDm+c4yPrfwcP
-         Dp1yYRe9EeYxDYa1XMrIkyStQeeg4rEOd6XjzW5/Jt2O7IMcc4KtYSslRw4O1Dan0UVo
-         XKwYctlOMvoW+6tMz9QaThKrGmPHIcf7LF0q8o+sgViT1qFepB9aIV+H2AHbXDOuONq1
-         7c334XvaysKI++hPsofDniVnYiYHLD7LxIoaO5nqnH4ExSpRvdSnPwMsDfpTh9CjCqu8
-         tozA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790815411; x=1791420211;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=6/YjcEN7BDbe1iCeqE6MfpaqcpTrbhOInw48Y0omQ9g=;
-        b=M6qz/sZdaF+axNWHfcmyisOwVARPn5Ihy3H9ypksvKfQMIDE1Gs49C2hSADqkW5rkn
-         AHvsQLSlp1zQGgtvdNcDnVMw4gT+IwkxSUyLB16fxZmC8aKmPG5VaObiPTIqA1ffv4Q/
-         sjMJK3mzqA7KU+W2WZSZE52HuXE5xRZ1S66BrkQd6oq1VM9oSQitr/G6LPoWWGqsAdDs
-         RPGl6nh3kEMPMHOlrTSWjdXK99vMeVkStnShiMt7EfRgQTY7oJqrNPXuMXqn+VqodWpL
-         ZtAJ26XAod23tth98G8hYc7pUa5jVFH53JMuOB6YLtGERpKHG8QRlk5ntTAcH4eOyx7b
-         BDPg==
-X-Forwarded-Encrypted: i=1; AKwUvBwymIg67Hdrz8srgT4/7y011J67AOFRFOMLkBimbmaD2ogyLtLEDLqUrUAjD8ICC2oRS8A8qfWMFftPiwZW@vger.kernel.org
-X-Gm-Message-State: AFuF++mTasht279ofn4mqiKlMB3GQyQxKPNu6ZCx33/zPNZVCTXTzksU
-	UEM9AKvgAWcU+JmhYSh9VidrFFyLhOR8k0TkuOGAEbdBn7/k1+vmPGioNk6dOx5QECyVVWqatnl
-	IVcRGeu2q12qjkS9EsM0m988Le/32FQP+Tu/3iKMp9xjdawFjb1X5yeKF17OZoegO7krY
-X-Gm-Gg: AYBFou06SrIyXBbWuknCUSNMpefqdHNOVa4qbyfBRQmoVBv6rox0xCIjShrQb7F2FXH
-	3mjDqfLfQJk/K/lsDw/Nf+a9FmhmqTgBlB+4y2/RTHwBY1sEjN//kcKdWsWfGAzJjLggZWM6ho4
-	5HW7KD0ijM1Gl5chTl9g6WgTxY4Kn8A+6NY9VroQOCbO92jLb9xg/5vVL8bf/g9bysDffj1cES6
-	7AaN3JAw2ZzbZb5NeqRzVr026CFIDLeD4K2y3OxXEyB8bOisZ8JXbJVfH9NCZjiZjCPjDCZs+Sj
-	HMJc7xqEOXfFg6tBYP5VeelGQgeb3lR8RXd/ocYTM97Fx0kbs/2y1OZvZ0eNwmhdEpgyta2iHyR
-	+s1x1XNjgbMiBICH6+wSZ0VSfugCIwq3Mg3IbHQJkeQHSWxRzFlu+xQS0hZeRTevCENd5FjWWAu
-	1D7SfPMHKNWHFY
-X-Received: by 2002:a05:620a:8906:b0:939:de6c:cb45 with SMTP id af79cd13be357-93ca980e5ccmr626386885a.47.1790815411445;
-        Wed, 30 Sep 2026 17:43:31 -0700 (PDT)
-X-Received: by 2002:a05:620a:8906:b0:939:de6c:cb45 with SMTP id af79cd13be357-93ca980e5ccmr626381885a.47.1790815410920;
-        Wed, 30 Sep 2026 17:43:30 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5ba42fbf047sm332884e87.76.2026.09.30.17.43.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 17:43:29 -0700 (PDT)
-Date: Thu, 1 Oct 2026 03:43:28 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Linus Walleij <linusw@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-        Jun Nie <jun.nie@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics R63455 panel
- support
-Message-ID: <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
- <20260727-spotted-winged-mantis-7aa1ce@quoll>
- <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
- <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
- <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
- <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
- <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
- <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YroZubdL"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A73A1F000FF;
+	Thu,  1 Oct 2026 00:46:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790815586;
+	bh=+R+5td0uBnZOXenj6T+11HpyCjqpHRZMaeS3A2qHMnU=;
+	h=From:To:Cc:Subject:Date;
+	b=YroZubdLhKwT6IPaRA3dd8oPGYJMhAsOL8Nw6uCnuvSdvhpgL+4EjRg6/k/7dV6+N
+	 q6tLUrz3YhUPeK+Uu/MCggfWdY5a7OwrialumJzs2NX/uHI92J2jPJg4Dh6evy9+Hx
+	 pCYjO/vF7MwuY6VBwxuQGCkLmCuj5RFVpxNQF/jBFZBlVkwWiUTg/9U1zElk0Os1PM
+	 S/Y6K/JdtqPwaU1FroIMaP8UKpusz+ssfbyJgJwTbOOs3x51gG7V0sZGx3Vexjc2S9
+	 kdP8tKAtWb+TdPm3hqpyUtTaY1qWaplYm4JYmEJoOz/uV8PvucYfJqUpUAQbxhp8Eg
+	 DQpBPuLtnv82w==
+From: Sasha Levin <sashal@kernel.org>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	"Bryan O'Donoghue" <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Cc: Sasha Levin <sashal@kernel.org>,
+	"kernelci.org bot" <bot@kernelci.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] media: iris: fix 64-bit division in iris_set_slice_count()
+Date: Wed, 30 Sep 2026 20:46:17 -0400
+Message-ID: <20261001004619.2230849-1-sashal@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org>
-X-Proofpoint-GUID: JfP26dXUyeqalJxg2lMRQDzw1BDs7KEF
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAwMSBTYWx0ZWRfX765pAoxbDaU+
- c7I50cqY+gmlnaeeEcN8Si4jEHpeNw+6cqQEg8fjNqxvvjULsUDFzGBNVB3VeniPH5lfqO3MQev
- f63UPAqFrILR7zgM4e1VetVV44GH99Q=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAwMSBTYWx0ZWRfXxGwoRY0wq40A
- kSO3OdpdZ3UbAcxTnJDAba7gWFs9WcNunjQMokEfE3rTbK1AgAfd4ixRwz/WoVohTr6l1NeJCbr
- hF21dGlWS1OjDcpmHEobHyF/qHdeTcO2WK/hkASi+yRiGAJhU786HmsG5ldHdgdmgf0idQiEOsL
- p5XdwEzY06qDzwnG7sb/LTFjwMLB6uaxyG1cjEB5BM3c5bBdvFaQttqQGuamIYbFD5KDiyOnzWw
- LWPIpC/gpgxOOjFBfZBBcrM+GvVW+L2wVrpD9s3P+W3IU2IuzJXseWeBXBbJS48JwcJ0Jeng+Mc
- gU+XjWTWGphob2SHpfeQCdlpi1HrxCEDA4x7YymFezra7wIwbJDwRV6dIdiAPZTyyhZvHsVMKeC
- 1M9KGgC3lo4kjS0F4DPjnm5+TCnzgem5zGEMJrKbNDS0JGRPP+r+l5hgcgnOy7roCzGmoIxclXI
- JoUhn66glw7jqtbi1Jg==
-X-Authority-Analysis: v=2.4 cv=NuxE4MdJ c=1 sm=1 tr=0 ts=6abdacb4 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=vnREMb7VAAAA:8
- a=VwQbUJbxAAAA:8 a=T0OYp5YwtksmxRz7AhAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: JfP26dXUyeqalJxg2lMRQDzw1BDs7KEF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 bulkscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 priorityscore=1501 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610010001
 
-On Wed, Sep 30, 2026 at 09:18:55PM +0200, Neil Armstrong wrote:
-> On 9/30/26 21:04, Dmitry Baryshkov wrote:
-> > On Wed, Sep 30, 2026 at 06:43:47PM +0200, Neil Armstrong wrote:
-> > > On 9/30/26 09:44, Linus Walleij wrote:
-> > > > On Tue, Sep 29, 2026 at 3:35 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> > > > 
-> > > > > This entire binding seems like stitching two devices together, which
-> > > > > might be fine (I don't even remember this stuff... two months old) or
-> > > > > might be artificial grouping of separate devices.
-> > > > 
-> > > > I think that's a good point and fair pushback.
-> > > > 
-> > > > Neil and Jun talk about it yesterday at XDC (1:15 into the stream):
-> > > > https://www.youtube.com/watch?v=6tNGW8PoSzw
-> > > > 
-> > > > The current binding does not reflect the physical topology of the
-> > > > actual device, and the bindings need improvements. I have a feeling
-> > > > there is one display controller with two physical panels.
-> > > 
-> > > No there's really 2 controller and 2 separate panels, but they are not
-> > > classic panel, they are a pair of panels+lens which are in front of
-> > > the eyes which forms a single "image" for the brain, so they are
-> > > technically a single display and requires to be hard synchronized.
-> > 
-> > Yes. However this approach makes it impossible to share the code between
-> > the double-panel drivers and single-panel drivers. I think, that the
-> > panel driver should still reference a single glass+DDIC, while letting
-> > the DSI host driver to handle the bifurcation.
-> 
-> Yes, and no, it must really be considered as a "single panel driven by 2 identical controllers",
-> and even this is really purely software implementation issue.
+32-bit ARM builds fail at modpost:
 
-[...]
+  ERROR: modpost: drivers/media/platform/qcom/iris/qcom-iris.ko:
+  symbol '__aeabi_ldivmod' undefined!
 
+The maximum average slice size in MAX_BYTES mode is derived from the
+BITRATE capability, whose value is an s64, so both the division by
+the frame rate and the DIV_ROUND_UP() by the number of slices are
+64-bit divisions. 32-bit ARM has no instruction for these and the
+compiler emits calls to __aeabi_ldivmod(), which the kernel does not
+provide.
 
-> > > Describing both panels into separate nodes would only be possible
-> > > if we described a "VR display complex" nodes linked to both panels
-> > > but this would probably be solved by actually describing the "display"
-> > > linked to a DDIC controller and is out of subject for this serie,
-> > > and can be added later when we properly define things.
-> > 
-> > I like the VR complex idea. In the end, you have two modes which you
-> > most likely might want to support:
-> > - L+R, having double-width CRTC scanning over a double-width framebuffer
-> > - Mx2, having a single-width CRTC and a single-width framebuffer
-> >    displaying the same picture to both eyes. I can imaging that knowing
-> >    about L+R might be an explicit opt-in feature of the DRM interface.
-> > 
-> 
-> This makes no sense to support both modes, and this will never be used,
-> and anyway this is purely software implementation.
-> 
-> We're defining bindings here, describing the real reality, not hypothetical
-> situation that will never happen.
+The bitrate is always positive, so use div_u64() for the division by
+the frame rate and DIV_ROUND_UP_ULL() for the rounding. Include
+<linux/math64.h> for div_u64() instead of relying on it being pulled
+in indirectly.
 
-Let's ignore software issues. On the hardware side, you have two
-distinct DSI panels, each having its own set of controls, own DSI link
-and own backlight control. 
+Reported-by: kernelci.org bot <bot@kernelci.org>
+Closes: https://d.kernelci.org/i/maestro:4935f1aae20e7f957e60f8fde09c4e6d153c7909
+Fixes: 5f21cd9a4ae4 ("media: iris: add support for multi_slice in iris encoder")
+Assisted-by: LLM
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/media/platform/qcom/iris/iris_ctrls.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+index 8c4c47944f22f..4f2633bbb49f8 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.c
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+  */
+ 
++#include <linux/math64.h>
+ #include <linux/types.h>
+ #include <media/v4l2-mem2mem.h>
+ 
+@@ -1588,8 +1589,9 @@ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type
+ 	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
+ 		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
+ 		if (rc_type != HFI_RC_OFF) {
+-			max_avg_slicesize = DIV_ROUND_UP((inst->fw_caps[BITRATE].value / fps) / 8,
+-							 slice_caps->max_slices_per_frame);
++			max_avg_slicesize =
++				DIV_ROUND_UP_ULL(div_u64(inst->fw_caps[BITRATE].value, fps) / 8,
++						 slice_caps->max_slices_per_frame);
+ 		} else {
+ 			/*
+ 			 * No bitrate target exists under RC_OFF, so approximate a
 -- 
-With best wishes
-Dmitry
+2.53.0
+
