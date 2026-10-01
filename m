@@ -1,121 +1,209 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 642D749893F;
-	Thu,  1 Oct 2026 20:05:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E500547074;
+	Thu,  1 Oct 2026 20:10:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790885127; cv=none; b=WwJwEJEgpaJ0NnkS3wU0+IsgLTXvLX3bWRh/7Lb9dHCGStg0oBrHhbRGYBjhkQoaQSIsc48iGeyjy+FdejR6KlvbUzvzk4KfqoCh0RybgLc4mYTXNfeEJSIHXtUaPGFHf+FCXtVP3yXwbvKF7c9BDgXPDKtftlZrPSQo5v3PEdg=
+	t=1790885456; cv=none; b=A8edQCEaOr3LP1J+80ZsY7q6AV7Cn/iwfcTxphbmIe7YmeABQpNuNDbBFHNrIERLChvFvdUQ39I7KeKiY8Kpa+dqnUWI+AlWb3sNuwKKajzBWophIZfP3cltDgJPHbavTqdmGJ0NtOVjLu+mVn42ymrS4qD/NHLi5M2ZgCQ25Q0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790885127; c=relaxed/simple;
-	bh=DbgtQTxtoi4dbtoGQjZXokyB0YP78CbS6kNqpYZ50L4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TLjPdyhn3ybRqa6TfTkao67LQb7Wh+3xBrdY4PZ+y4j+OMH0eWQVH/Y0grWQl/YSHzIIgpDbTFxlOrICukhj9H5WJ94rWu2l2yUDzq8B49CsVSN3tv7jqacB2wRpqxcYv2OY6UjZ87e1B60KtyCZVnOzZmE8IBh7h4mJmN9llVA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oFkvLWac; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790885456; c=relaxed/simple;
+	bh=eqlalWEACgHVJxaJJINEXXgUmnExZVGD96ZPJQYAGoM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HhSc1cIqvJLCYEw/0d9xMUcHAoGgWjE1ErYp7poIYmVA4tj6mMsJM4NwaObTSrx87bg4JVc6thyCr7OOJ9CiNZW3wQ7suRwOLj3+v5Z70AOb3TZNxAbYKfCezQhuU+AWp9PU+2ow7ASvvZ4h6YJnP89TgMeTp/UWNT0lkqCv5/8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RiljaSLz; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oFkvLWac"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D974B1F00893;
-	Thu,  1 Oct 2026 20:05:19 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RiljaSLz"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC80C1F00893;
+	Thu,  1 Oct 2026 20:10:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790885123;
-	bh=gFa6HvAarHDlIrjmTAUOJ7RLBY11icZwWxARmx5iXy8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oFkvLWac2KsZh3NfUjCP/h7/HaiDSvHH7LZO0D+Iifpk/isoYSSxhI2v3BWzn3FE3
-	 ezPWKN5dBMirfln9QwBABBts0lU4yCJGluJ9V/VhUTd+ZBBRDwsyzZLXDcKCmbvuHn
-	 weSfehPmwqdfc0w/3m30Pxs66Mivq+g5gBaMq+pOoNTzFy0lYhkbSwj3FX6Qk5MyiN
-	 SQLtwwBKnaT1X8J1Z1sMhAHSdQsrac6gpvJIlWjBeFXj4V7HwE7EL6+tumL9iaeWb/
-	 cViDa1SdbWNXvATKsmMJmiE7FSMKp018IxkjR135SkAFeLIVLA08eFdCVezKskDigm
-	 WfgD1TkfwukMw==
-Date: Thu, 1 Oct 2026 22:05:15 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Marcel Holtmann <marcel@holtmann.org>
-Cc: Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
-	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, "David S . Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
-	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/4] net: qrtr: Assign unique node id for MHI endpoints
-Message-ID: <6isrx67suid5qcha47ihlphxmmeiiapdl57h57hejkwchwtfdb@i3g2cwz6oavn>
-References: <20260922-qrtr-multi-ep-v3-2-c00831e88957@oss.qualcomm.com>
- <7aed969d-0868-4c9c-967e-7766dbba427e@oss.qualcomm.com>
- <13BFC5B0-77E6-48F2-B857-37686EA1DB2C@holtmann.org>
- <05e539f8-bb7c-4038-8a83-8ab0d1a5b917@app.fastmail.com>
- <m657dtesuagn7vdajsuzjb4mfysf5xabsu3s6n6lujj7yb3z4p@m2e7e3n4zyev>
- <10091679-7567-42C2-B77E-EFD95CEDD649@holtmann.org>
- <6e0ed085-07d0-46f0-97dd-b8d942842e1f@app.fastmail.com>
- <0A4EB216-06E0-4A7D-A0FD-821DD371773B@holtmann.org>
- <19433f85-4cf1-4ec1-a26f-0eab7df062df@app.fastmail.com>
- <A709172A-40F7-4986-B7D3-02A422F6584A@holtmann.org>
+	s=k20260515; t=1790885454;
+	bh=Emgg1hEsTegrNFwf0i6etQNx21yoM37aHkx9/z0TU/4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=RiljaSLzEKKK1iEQRgaD2Fo2dglKP531VxzLAsUCwsQStAN3k/HIV6t9iwxZn/83/
+	 0kB+HM0mjBZ0tDc85eKU+LClNqWPODUs+Bgc5a0zH/2COGIRm85Rfs81wfDilzqMRc
+	 U+kYzgePDFfIWtFZIUKzkOfDVbCrrJ1lEqGwVOnaY3T7yF24kzCjmyMeAXe3L6AOaU
+	 6vIUxIT93w5V7c3jWl0ZTB5LY6Q28MoCZOEOhBvNpjG5DFpOEJiXt16GPYaNw0KnU7
+	 LAgAXJptB73isAB84zsuarhmHKrt11GD4YCAdu4qa9SR+OthcxJYbVvVmGaetK+Tox
+	 aMOhMfqWeBcxw==
+Message-ID: <74c10fee-bfb1-4225-af5b-fc2b3ce664a9@kernel.org>
+Date: Thu, 1 Oct 2026 21:10:51 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <A709172A-40F7-4986-B7D3-02A422F6584A@holtmann.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] media: venus: disable recovery work before HFI
+ teardown
+To: Myeonghun Pak <mhun512@gmail.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Sashiko <sashiko-bot@kernel.org>, stable@vger.kernel.org,
+ Ijae Kim <ae878000@gmail.com>
+References: <20260925191653.3144006-1-mhun512@gmail.com>
+ <20261001175502.4045853-1-mhun512@gmail.com>
+ <IUKxO70u7tuzfobwy7veeNHbvyK5WtlYFOliAToGsdPncgmwXfbd95-SoyBBUj0AUENfcYLnsh4qaFj4AEkeKA==@protonmail.internalid>
+ <20261001175502.4045853-3-mhun512@gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261001175502.4045853-3-mhun512@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 01, 2026 at 05:39:47PM +0200, Marcel Holtmann wrote:
-> Hi Juha-Matti,
+On 01/10/2026 18:55, Myeonghun Pak wrote:
+> venus_remove() cancels core->work before the IRQ is disabled. An IRQ
+> thread can queue the work again after cancellation. The work can then
+> access HFI state after venus_hfi_destroy() frees it. The work also
+> requeues itself when recovery fails, so cancelling an already running
+> instance alone does not close the race.
 > 
-> >>> Well, in defense of Manivannan's patchset it currently works for PCI+AHB
-> >>> setups better than the last version of that by Denis/Mihai/me (although 
-> >>> I could easily fix that), and it may be simpler for userspace to
-> >>> continue using nid than having to bind to an endpoint, which requires
-> >>> more changes in userspace code.
-> >>> 
-> >>> The userspace just needs to know the nid.
-> >> 
-> >> and existing userspace? You can _NOT_ break existing userspace.
-> >> 
-> >> Don’t you need to re-write all existing QRTRIPC packets to actually even make this work?
-> > 
-> > Well, from what I understand this rewriting is the plan.
-> > 
-> > It is true that if someone has a single card, the nid changes, thus
-> > maybe breaking userspace if the userspace has hardcoded nid.
-> > 
-> > But if someone has multiple cards, the breakage to userspace is less
-> > with this patch, since userspace can keep on using the same code and
-> > just change the nid, whereas with the endpoint_id patch, the userspace
-> > needs code changes to bind to an endpoint.
+> Disable and drain the work at the start of remove, before other resources
+> are dismantled. Do the same in venus_hfi_destroy() for paths that bypass
+> remove, including probe unwind. Disabling the work prevents both IRQ
+> handlers and the work itself from requeuing it. Drain the work before
+> disabling the IRQ so an active recovery can finish any IRQ based
+> completion waits. Then synchronize the IRQ before freeing HFI state.
 > 
-> the general rule for Linux is to _not_ break existing userspace.
+> Fixes: af2c3834c8ca ("[media] media: venus: adding core part and helper functions")
+> Reported-by: Sashiko <sashiko-bot@kernel.org>
+> Link: https://lore.kernel.org/all/20260730153912.BAC5E1F00A3D@smtp.kernel.org/
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM
+> Co-developed-by: Ijae Kim <ae878000@gmail.com>
+> Signed-off-by: Ijae Kim <ae878000@gmail.com>
+> Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
+> ---
+>   drivers/media/platform/qcom/venus/core.c      | 2 +-
+>   drivers/media/platform/qcom/venus/hfi_venus.c | 1 +
+>   2 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/venus/core.c b/drivers/media/platform/qcom/venus/core.c
+> index 7087af32060f..6e495bc04691 100644
+> --- a/drivers/media/platform/qcom/venus/core.c
+> +++ b/drivers/media/platform/qcom/venus/core.c
+> @@ -596,7 +596,7 @@ static void venus_remove(struct platform_device *pdev)
+>   	struct device *dev = core->dev;
+>   	int ret;
+> 
+> -	cancel_delayed_work_sync(&core->work);
+> +	disable_delayed_work_sync(&core->work);
+>   	ret = pm_runtime_get_sync(dev);
+>   	WARN_ON(ret < 0);
+> 
+> diff --git a/drivers/media/platform/qcom/venus/hfi_venus.c b/drivers/media/platform/qcom/venus/hfi_venus.c
+> index e7e4e78a186a..20b8ba1e62f1 100644
+> --- a/drivers/media/platform/qcom/venus/hfi_venus.c
+> +++ b/drivers/media/platform/qcom/venus/hfi_venus.c
+> @@ -1689,6 +1689,7 @@ void venus_hfi_destroy(struct venus_core *core)
+>   {
+>   	struct venus_hfi_device *hdev = to_hfi_priv(core);
+> 
+> +	disable_delayed_work_sync(&core->work);
+>   	disable_irq(core->irq);
+>   	core->priv = NULL;
+>   	venus_interface_queues_release(hdev);
+> --
+> 2.53.0
 > 
 
-The rule is that the kernel must not break ABI and the node id is not ABI.
+You shouldn't have to disable the work queue twice.
 
-Node ids are assigned dynamically and discovered at runtime through qrtr lookup.
-They are not a fixed property of a device. For an AUTO endpoint, the id is
-simply whatever the firmware advertised and nothing guarantees it stays
-constant.
+Does a path actually exist where hfi_destroy() runs but venus_remove() 
+does not ?
 
-I internally checked with the other uses of QRTR, ModemManager and QAIC teams:
+The commit text is vague about that - sure hfi_destroy() may be callable 
+from the error path of probe() but is any work scheduled in that case ?
 
-- ModemManager never computes or hardcodes node ids. It discovers them live over
-AF_QIPCRTR (via libqrtr-glib) and groups ports into modems by physdev_uid, not
-by node id. It is not affected by this series.
+I mean lets just look at venus_hfi_destroy()
 
-- The QAIC userspace queries the device's serial number over its own control
-channel and then assumes that BHI serial number is same as node id. That
-assumption is what breaks. The kernel never guaranteed it. QAIC devices just
-happened to advertise the serial as the node id, so only QAIC userspace had this
-assumption.
 
-So I don't agree this is an ABI break.
+static void venus_remove(struct platform_device *pdev)
+{
+         struct venus_core *core = platform_get_drvdata(pdev);
+         const struct venus_pm_ops *pm_ops = core->pm_ops;
+         struct device *dev = core->dev;
+         int ret;
 
-To give QAIC a proper interface to migrate to, I will expose the assigned node
-id via sysfs entry in next version, and the QAIC team has agreed to update their
-userspace to read it from there. That sysfs attribute will become the documented
-stable ABI, the specific node id value never was.
+         cancel_delayed_work_sync(&core->work);
+         ret = pm_runtime_get_sync(dev);
+         WARN_ON(ret < 0);
 
-- Mani
+         ret = hfi_core_deinit(core, true);
+         WARN_ON(ret);
 
--- 
-மணிவண்ணன் சதாசிவம்
+         venus_shutdown(core);
+         of_platform_depopulate(dev);
+
+         venus_firmware_deinit(core);
+
+         venus_remove_dynamic_nodes(core);
+
+         pm_runtime_put_sync(dev);
+         pm_runtime_disable(dev);
+
+         if (pm_ops->core_put)
+                 pm_ops->core_put(core);
+
+         v4l2_device_unregister(&core->v4l2_dev);
+
+         hfi_destroy(core);
+
+         mutex_destroy(&core->pm_lock);
+         mutex_destroy(&core->lock);
+         venus_dbgfs_deinit(core);
+}
+
+Your patch will call disable_delayed_work_sync() twice on this path once 
+in venus_remove() per your patch and then again in hfi_destroy()...
+
+NAK - can't be right.
+
+---
+bod
