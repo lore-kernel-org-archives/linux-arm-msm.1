@@ -1,219 +1,127 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B43C4498902
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 15:57:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CD814D0CD4
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 15:59:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790956647; cv=none; b=lf4kX9CfrYBJc67xQqhDVjDx4BYlezn4OHieeBs4ASDcz2FXWxkaqY4d5raEkwdYKjcP3ZFlKrOQyiQGcEnFRqugNrfixGkYoe4ycjpJ6Z1LXTQdLV8AJjdpJiCinIcXY2gqGBNono2P4uuXPNOADkCtw3zTmGYbAfbTPut4/+g=
+	t=1790956747; cv=none; b=an0Xh8eWWAwKCVwS91pShpmlt0S/L0pVAMov/yx3et+eFJINIEQTgCWJdheOR+OQsMtQdqSL+Y5h7z6/2Drc8+HSdWuLZMfvE0RE/1WgLJkQUuKG0ldohfevD546pyc5mjDxiw3d6IOXpzDu/oi8I76Rg8l0GZsitd9fwvWZQnM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790956647; c=relaxed/simple;
-	bh=pffDxeTqTUR6LQjSZCkYskAt9StsM/o4yFboMujZs9E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZoPL00ruVlTeB+tQzAJM1qRa6zM10yhYRVGcjyk4VC3idq1tlgkXm6y24018od6sqxVHMH7N90DZT3gI/vzT4noLoSXUk8pyBa1wb3b/Lb0WADlgSFWVb+ZAoCSgw4cmUU1XmyZM7rHhy+KgYWdtlzK9lHjAj1T+sLJeppvzPMQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FtqAUbXX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fDEmL0LJ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790956747; c=relaxed/simple;
+	bh=1DNPJeRt0J3xR44Je1fYvtsAtSeKrCZ5Wu++tyEkRVc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=jwVq3M2lMIuwlBC/4sQ0a37iPIoIunrEGUA+xy+nJZSLxJO6BmEVcsPuCJV5Zljj1RrC4giMz6IYxOeisIKGe3XFglveHA5eOJyxdcYw0EB+RjAe4VQoJ38guQB7E0fOeoHnDmk6N3+CoN4tu6wx2aaUPKHAtbsHTOvxNI3XhAw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=BGKZKZME; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FtqAUbXX";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fDEmL0LJ"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692FH4eI435502
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 15:57:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	STbt/EQ5IYGf9hd0cIP+poyGBZ+Wud5KuSCXYG9Stw8=; b=FtqAUbXXrEynI2sH
-	U5Py6Di06ElBCw/2qYdT+TROS5RUYyxFYCDp4gehd/VIJ57MthOzRS8Iqo4wquyN
-	CuaeIVFSfvY3pzslvIvFsUl0rsADCooK/hx2lwUH6elqFyxT7m4lwhDzcfR2YUaK
-	ZP4SIHHqMHTYt5f/CRx4Wy3co0hk9XipUdR2vmoetdQqJrW1pZs1Sk4XNOE7oTpo
-	ytdSQYQUKXZoyPzLgB6iaw4qDWQaeRcInwPlDzOqIzxpMix59sfXTzeeSQnkikIR
-	b+CZTtq833n88kJP+k/j7fhauCPj5hvIpFWGEvacrU7nnO3akIbCnW+rGn7FROd6
-	Yh45sQ==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1vxebw9w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 15:57:24 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3a470ead068so31377a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 08:57:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="BGKZKZME"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e69b9e16aso498985e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 08:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790956644; x=1791561444; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=STbt/EQ5IYGf9hd0cIP+poyGBZ+Wud5KuSCXYG9Stw8=;
-        b=fDEmL0LJeO9hg7lr+T8qIaOx3NjJEzKz8p1UgOvn9he8Y/o0RWS7zmZIwOPI5PchbT
-         gzqfoq7m+i8Q1dx4SXEn6vsZL1qWnKhrPUUxEM1dCh75PvvFYkdpNmJi3yN5RIe6EvR9
-         05xJcHTfeKTgqgfzyoTCRWwFw/kLgfWsnLgYvgON9efTySHfq8JQ2xf5B5v0NCJoFml4
-         5R5YGxBEDir3qjssTCTz8PDIYosvb8fmgiWY/ZE7W9k+YPwMQBv4jgeCqps6INLclkB1
-         UZGc6Dz0N6XhWlLw6H/YFp9yXAE/Y6AuS/iL44CA9ER4+3jRfcMMPCa7M4e9uqvByGAt
-         ADZg==
+        d=linaro.org; s=google; t=1790956744; x=1791561544; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Pb1uCq7f8fsDePcoF2HdzhViGioHtCHyGF6zTpmPj1M=;
+        b=BGKZKZMEo/oJnMTL6K+KFW+XdwFh+eoXiztNZc6fTwTtYnj+tzLA3LI6XO/b7WBTbm
+         JOmz6UvKzljI79hxaK7UWhLr4yx1C1CXk9Xu38JRvrjUa3SYErX31McPFnGEcao7c0eL
+         R9yR6KRNeOrBLsOI5l31gZve2p2U9LlCbQ5Lbx59GZ/pCzf41rE17312H51Yo5Fzp+KM
+         DTqGw9N/nWIiIoImENdg3aN+FPUNXfc+W00LmdyKoLUrpCON9De4UyD2+IG3p7Msc5dX
+         98GRdxvYu3HFJFS47BWyRIm2SqvO8++WkO5naCa9h1NKw4k7Kw4Mhk5bCVrxApvS44xx
+         MJTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790956644; x=1791561444;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=STbt/EQ5IYGf9hd0cIP+poyGBZ+Wud5KuSCXYG9Stw8=;
-        b=tMXF/kyHe67veFEMREe48ntzJ56kAzz+/JBAJ+MhMkY7bLRi7yeIZuXwyi0ZAOeokv
-         QxMEoIY5/arhk2liizC/1PDssYDPGGAw18ePfxXRF/E1wEZ8BpT/3qSKmj/bO021ONva
-         nxW4TlGoplp2OxgQhjqQ9GEzN0mfEdTvp0mM47y6v2vwf+qFZ939Owj7IvLaEtbudXKm
-         57/EN1Yd5Ine7yx877pDZaks6li6VIwcNaVcBFqc4RMoQUiVVCEhWS/yCyVYo9djokaI
-         5v9gJ2Ros+y9u0AX93CQYFfmLuSSwV2MRGa6euvqSXLhMjLOMipv776H7r0h4Jn3KXcC
-         hmkg==
-X-Forwarded-Encrypted: i=1; AKwUvBwpmssmvpfuZg7FmQT660IppaaBYdOiPpfHV55MfrOGR2XWUlWsryRdDuI8ut1UA7jvL4eJSyQj1/bWcVSQ@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ6RkuMLjDuB2VgiaouwMYsw//iOnthTF+aTNO63plJv1mTSkjH
-	E8a4M/lY4UZL7qYcDL2lLaUkP8NDSTsl5VtQMcvV8gssHlC1/YgfOrsR3kwxINXHzDBU3cenxb/
-	VWm0p9SyXL2fWwKzVF3Z8Wb+yn7pw/+bTKIjMPvgNZJcmz6tuVlTJc5LOBFnPt9Xnm2/6
-X-Gm-Gg: AYBFou347PlvzsW9FvAgfs9KXsKLPeLYMeBK1Q70C0bjJZX+H8sJdhKI6OGqyevpACM
-	DGrC1zQVfADcwP3p6evzzaTvVE+fw3Qu+pN3r8TFmiw6YRENoDpaaeH6lkOWaPGnMLCuc+I22gE
-	tl/Dh+mWDVv1xX5rixD5XKPGqMyBBkpgKXLZYaEnLb19euoriqv7QL28MQYVIPvWi8SH/lPobA9
-	fP4XY7H3Po2xYKbq3NSU3Xbpjl4VW7jp6UiSRnc6pICwlpO9JiKguhaLdHxruXs4TDTAagPMpk8
-	9v7Uv7A5SzzO+95i6UVqf3bN0JzrpyjCzUX1ZcW7oQvBU3/oJHeaM+/ipUpl3VYU12senk8Q+t/
-	Bk5UMroHnWIkFZpeF9qagllodC95BRZKfdsNYmlQO7bCUBhscug==
-X-Received: by 2002:a17:90b:5805:b0:3a2:b04e:8086 with SMTP id 98e67ed59e1d1-3a6ceca1622mr1531885a91.44.1790956643919;
-        Fri, 02 Oct 2026 08:57:23 -0700 (PDT)
-X-Received: by 2002:a17:90b:5805:b0:3a2:b04e:8086 with SMTP id 98e67ed59e1d1-3a6ceca1622mr1531876a91.44.1790956643331;
-        Fri, 02 Oct 2026 08:57:23 -0700 (PDT)
-Received: from [10.226.59.182] (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a6dd0cd76bsm1943615a91.2.2026.10.02.08.57.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Oct 2026 08:57:22 -0700 (PDT)
-Message-ID: <2cc22f12-25c2-4e01-9375-653b39d8b62d@oss.qualcomm.com>
-Date: Fri, 2 Oct 2026 09:57:21 -0600
+        d=1e100.net; s=20260707; t=1790956744; x=1791561544;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Pb1uCq7f8fsDePcoF2HdzhViGioHtCHyGF6zTpmPj1M=;
+        b=F2aCjraeTiawRE/8ACdJMdHhMw35dziqOSovdp4opJw51w5LWIwFlM9LPTMyvPniod
+         G3HTcMKf5xZNMWPMcnBmFuzu6uWMwZacnvQft2COiJfZbE2n3dPjJO3kQkCRLNtcusAh
+         ZcpFWx/5az0A+f4fMTtO0EfQ/594xTQ+B15K/qxywF3N/UjNJiywdjawIfbn0bPtW8+B
+         t9ZELTB6ihIo8MUTeebrbMYnrSyqZPRjys+JUekm3fgbbI5UU5KgnqF6HrH5I8fZWAJN
+         tRYSmzpHGRfN5U8WVTbd5e+1j6LWxUU9n8eyacl0hCo5t0nnN7W+6IcMyQP9oOUvacaK
+         A+Dw==
+X-Forwarded-Encrypted: i=1; AKwUvBwV9zLqpol7dSClAenvhISGHwhV7NcghP9EntH5oTg+BMJTTlNd2GI1q+PC0cWyhAGMLphtd5Ef8FOmZK+x@vger.kernel.org
+X-Gm-Message-State: AFuF++nFf6aemIHCX3k0kB7g45LY7J0AoH0MsGl9jiSg9V51WG0YeHDw
+	utD6FTOBCe/9xGmo801lWQjhwJS1nPH33MiGhHARIin+ggnTfjy4Tv+hfaJa/PmBpiY=
+X-Gm-Gg: AYBFou3LVXs8LnjmWv3dI0z+NzxMeYULHG65YLQyPPrFiqutG2YQWHllatWRBv3hCVc
+	OTOOK0OtdF2krQrKec0yQKkqEMaVZr3pVz2puqxgGtDr8hTSwK2kb0OVblENf0aAsQ2bEdT0S7G
+	0OyatrqKKaobFCD8V/CkBnwOx9k3dgu0m+DsYMVt9klsT/kVMh2F1Rw4kFXUwI0fYm0Gl56ZDoD
+	RMto0suAOP0hLlGsrQI6GkyZlEP/7O5jCGUdmVwFK3HAcrgrDrLInW4/JTRu8AuYQAYdoScLmFT
+	k7QHUHC4H0c/BtD1hOyu7bHgnds/74aj/JY8/n6LZneKagctgxRrBMpJt09tE1GxzRQ3qcc0Hkv
+	e+JhidJ+CcE0JjPVNJvzojB4AO3wr8AUJHmxdABvs9ghaAefW+htnTijRtiAB3LUtZFRKFdB04o
+	d9ZCI9LlRKoXP3kRDtmY8KdKtYJtZVPP9RI88J+XTYVBL60AoMy7dHrOGySbVxhiQ=
+X-Received: by 2002:a05:600d:6445:10b0:4a0:1b14:d00e with SMTP id 5b1f17b1804b1-4a027519330mr44985025e9.1.1790956743728;
+        Fri, 02 Oct 2026 08:59:03 -0700 (PDT)
+Received: from [127.0.0.1] ([109.76.210.127])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a02770fe4csm97162395e9.7.2026.10.02.08.59.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2026 08:59:01 -0700 (PDT)
+From: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
+X-Google-Original-From: Bryan O'Donoghue <bod@kernel.org>
+Subject: [PATCH 0/2] media: qcom: camss: Split VFE 690 and VFE 780/880
+Date: Fri, 02 Oct 2026 16:58:58 +0100
+Message-Id: <20261002-vfe690-780-split-v1-0-40e15aa8716c@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/3] bus: mhi: host: clients: Add loopback driver with
- sysfs interface
-To: Sumit Kumar <sumit.kumar@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-References: <20260908-lb-v6-0-66755ceb16cc@oss.qualcomm.com>
- <20260908-lb-v6-1-66755ceb16cc@oss.qualcomm.com>
- <xji3thurj6lnez56opmh5xoxzjiwtlh4o5qd6iqokbqkcb4rxu@mblahsfmtioz>
- <d05a60d1-3787-4318-b28d-9901d7fd7a00@oss.qualcomm.com>
-Content-Language: en-US
-From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-In-Reply-To: <d05a60d1-3787-4318-b28d-9901d7fd7a00@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=fdc4WEQF c=1 sm=1 tr=0 ts=6abfd464 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=5RwuaTuKtwK3GDd0iDsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: x-JJ4lg4R8iVKCRrqQSQ6PU-WxeDalIa
-X-Proofpoint-ORIG-GUID: x-JJ4lg4R8iVKCRrqQSQ6PU-WxeDalIa
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA2MyBTYWx0ZWRfX2jokDsFhlAKA
- iZIGDqf6EWCgXufBKZmSs6GuBP6BaggFnGadPKguPLe43xmb4r1F3Msb/UxgAjBux4scXWJtxbz
- iwbWvTKToEVMG8R5r6mtCsjMQsUpZDJwK25wmmo9U2rVrsUut4jlu1X4gjRluMIuRBAqdEXHj4Q
- 5bD6gtbwhDvyn+xiK+ua5bLSs/cNE7iLzCwNYYGvC07yXou58txVxqD1kepYg5P2ECuX674X+ls
- jK8CjUfUIvAcXsuVkz4LEGqkNYxhUSoDCVSWxlbW86poFIN5aLhlGPsZnZNjV2OMOD4dnpWuKrP
- CSV1baSGyfGqtx5vKgQzOijYRbbD4BKQQE13s6f9u9+vASNzPBIh8elI7qkfnQwdkjb1agZv8wO
- +t+qVObOjRJJk2Crutto5Ss2uzFjm9n9APNJAxKPe0fFTJpMW9e0X02sKqM3tTlD+Vq6JaVXNIu
- WpJUJ5w3oP6TVCLqGgA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA2MyBTYWx0ZWRfX6sRs5JNGNKHx
- N4E0cL7opI076EMu/dn/JGpKzTe+cifP82GcFdnB1WaAZu4raENOROFAJlnBkH7gHc4bTv25Jl2
- yFzOQfCUwcJG9R64jeFWs22Jirec+M8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_04,2026-10-02_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020063
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDQAxA4atI1g3EYP27SuliHKOmFJWJFUG8e
+ 0ddfov3djAJKgZ1skOQVU2nMSJ9JOAHN/aC2kYDE+cpEePaSV4RFiWhzV9d0Gfkyqppmd0TYjY
+ H6XS7lq/3bfs1H/HL+YHj+AOcyLpSdAAAAA==
+X-Change-ID: 20261002-vfe690-780-split-c40a89bd22a5
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1111; i=bod@kernel.org;
+ h=from:subject:message-id; bh=1DNPJeRt0J3xR44Je1fYvtsAtSeKrCZ5Wu++tyEkRVc=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqv9TEIkJfCMPpxAOyNKR9cxp0hnmCAh8GZzNoj
+ w/viVmUyPuJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCar/UxAAKCRAicTuzoY3I
+ OqbJD/4ySr8lxhq11p8yYTPL0WKSaBav06hhCa2VH6IdtPQTVJb9D/t/SAaMiqYzADu++GN9eA5
+ qFeUhg6NhnzYVtjghJX6VzD34csQ1AVsNSo/Lfrn+8FrgNP1aOIomMT3qnhGmgLFzCmpahSuek0
+ M8KdHSZcYJp+nxu5kP+p5AKwBrWMQwkLqRIPqn8dyzh51F/U9gL7ru5ENi5oWokzNdBQYUAF5y0
+ JgIGvWiKC4cKiXNC3QKT2c+bx2AYxIld9n+g0yGiNxvXGll91o5YnhaGeYrNFu1+RSOxWyxgTC+
+ ywG8yPWgTdY6pgNwwAgkL0o74jr/QuH0YUb7bbjeZoeNDxckpCqojchu9zTonecX5KWrh9AYCXy
+ mB7eKHPwovtNBrPk7qBjRlt+bplnIoEA9Y0Us2GgoG6ykMlNkEDrdTxvTO6+MDw117IO+uTeila
+ Yp9oGNyYmm85SWhOdbi66r7CovVzGpuMNHmlQG5V9lNqx5LmI3aWwFt7/8DOWZAPoFGExvJhGug
+ 4hO8YZkzDfRnEP8EGWXJoe9PL/vnm7shFSPUuGOXDpGMLJz/ChtCvJssUtvD7AGV67KUs/gmjmA
+ MFwIPGBiEjVwnIEUKGCkfJUev5pNTmQz0D8buYOqqPXBxoZuQ8L7akNLsQKNUMzc8q9VT9Dq2Kj
+ xYJW688un8+i5SQ==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-On 9/29/2026 11:56 PM, Sumit Kumar wrote:
-> 
-> 
-> On 9/26/2026 4:36 PM, Manivannan Sadhasivam wrote:
->> On Tue, Sep 08, 2026 at 02:57:22PM +0530, Sumit Kumar wrote:
->>> The MHI specification defines a LOOPBACK channel. The endpoint firmware
->>> echoes back whatever the host sends on this channel. Without a host-side
->>> driver, there is no way to exercise this channel to validate MHI data 
->>> path
->>> integrity between host and endpoint.
->>>
->>> Add a host-side loopback driver that binds to the LOOPBACK channel and
->>> expose a sysfs interface for data path testing. The sysfs interface 
->>> allows
->>> users to configure TRE buffer size and count, trigger a loopback 
->>> test, and
->>> read the result.
->>>
->>> The new sysfs ABI is documented under Documentation/ABI/testing/, not
->>> stable/, since this is a new interface without established API
->>> guarantees yet. It is unrelated to the existing stable MHI sysfs ABI
->>> documented in Documentation/ABI/stable/sysfs-bus-mhi, despite both
->>> being covered by the same MAINTAINERS entry.
->>>
->>> Co-developed-by: Krishna Chaitanya Chundru 
->>> <krishna.chundru@oss.qualcomm.com>
->>> Signed-off-by: Krishna Chaitanya Chundru 
->>> <krishna.chundru@oss.qualcomm.com>
->>> Signed-off-by: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
->>> ---
->>>   .../ABI/testing/sysfs-bus-mhi-devices-loopback     |  40 +++
->>>   MAINTAINERS                                        |   1 +
->>>   drivers/bus/mhi/host/Kconfig                       |   1 +
->>>   drivers/bus/mhi/host/Makefile                      |   1 +
->>>   drivers/bus/mhi/host/clients/Kconfig               |  17 ++
->>>   drivers/bus/mhi/host/clients/Makefile              |   2 +
->>>   drivers/bus/mhi/host/clients/loopback.c            | 287 ++++++++++ 
->>> +++++++++++
->>>   7 files changed, 349 insertions(+)
->>>
->>> diff --git a/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback 
->>> b/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback
->>> new file mode 100644
->>> index 
->>> 0000000000000000000000000000000000000000..9e47e8443f309199691a50d70adadf84f3237037
->>> --- /dev/null
->>> +++ b/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback
->>> @@ -0,0 +1,40 @@
->>> +What:        /sys/bus/mhi/devices/mhi<N>_LOOPBACK/tre_size
->>> +Date:        August 2026
->>> +KernelVersion:    7.4
->>> +Contact:    mhi@lists.linux.dev
->>> +Description:
->>> +        (RW) Size of each Transfer Ring Element (TRE) buffer in bytes
->>> +        used for the loopback test. Valid range is 1 to the value
->>> +        reported by max_tre_size. Default value is 32 bytes.
->>> +
->>> +What:        /sys/bus/mhi/devices/mhi<N>_LOOPBACK/max_tre_size
->>> +Date:        August 2026
->>> +KernelVersion:    7.4
->>> +Contact:    mhi@lists.linux.dev
->>> +Description:
->>> +        (RO) Maximum allowed Transfer Ring Element (TRE) size in bytes.
->>> +        Reading this file returns the upper bound for the tre_size
->>> +        attribute.
->>> +
->>> +What:        /sys/bus/mhi/devices/mhi<N>_LOOPBACK/num_tre
->>> +Date:        August 2026
->>> +KernelVersion:    7.4
->>> +Contact:    mhi@lists.linux.dev
->>> +Description:
->>> +        (RW) Number of Transfer Ring Elements (TREs) to use per
->>> +        loopback test. Must be greater than zero and must not exceed
->>> +        the channel ring capacity. Default value is 1.
->> How does the user know 'channel ring capacity'?
-> If the user enters a number greater than the ring capacity the error 
-> will log the max num_tre value.
-> Would you prefer having a new sysfs entry similar to 'max_tre_size'? 
-> something like 'max_num_tre'.
+Looking at the write-master indexes for VFE690 and VFE780/880 its clear 780
+and 880 share the same indexes but 690 is significantly different.
 
-Yes, a new sysfs entry sounds like a reasonable idea.  Having the user 
-guess, and then try to read an error log which they may or may not have 
-sounds like a way to cause frustration in users, particularly for any 
-kind of scripted use.
+That's enough of a difference to separate out the logic of both. Two
+patches in this series do that. One patch to reverse the rename another
+patch to disjunct the logic into two separate files.
+
+Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
+---
+Bryan O'Donoghue (2):
+      media: qcom: camss: vfe: Rename gen3 back to vfe780
+      media: qcom: camss: vfe: Separate VFE 690 from VFE 780/880
+
+ drivers/media/platform/qcom/camss/Makefile         |   3 +-
+ .../camss/{camss-vfe-gen3.c => camss-vfe-690.c}    |  49 ++-----
+ drivers/media/platform/qcom/camss/camss-vfe-780.c  | 160 +++++++++++++++++++++
+ drivers/media/platform/qcom/camss/camss-vfe.h      |   3 +-
+ drivers/media/platform/qcom/camss/camss.c          |  34 ++---
+ 5 files changed, 193 insertions(+), 56 deletions(-)
+---
+base-commit: 89a3d2a2237e017cdbefcb036db71ce74e67faf5
+change-id: 20261002-vfe690-780-split-c40a89bd22a5
+
+Best regards,
+--  
+Bryan O'Donoghue <bod@kernel.org>
+
