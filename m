@@ -1,165 +1,141 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B04604EDCAD;
-	Fri,  2 Oct 2026 16:43:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95DB24FB9D7;
+	Fri,  2 Oct 2026 16:46:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790959428; cv=none; b=ewBsG7NgMIbeG22CfTIarKYqddEP8GZQwVT7AVN9KmJ0BXiKKspN3Zekk6WBPbWcGkd+OaOwg0Bo/OZEPrMExaECay30hJvqvMkscTI+LSpUaE8FBVkj9J35Y9hfeh0XAVK7AaQSYUcsZlrEQksyV7V4k0ztt6vnZLZln8SgFC0=
+	t=1790959584; cv=none; b=og8ZnvEzm/NjujcLA4LzJ3wbTWd4OSKl9inwA72EftGTBOYKcnekQKGoX3OlbQaEiXYEf/zGYZZpD7z5RpV9GB4YF49mtr/PVRfkoCWpG3/ZzB6wNFPijyZFV3R8vARDjFn0muZzMOfcAY+ThdrBhKxY9bllMyApSbbRM8IEY7c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790959428; c=relaxed/simple;
-	bh=ANnzqIE88PpAbXvMgNi1vRap06Y/mTqIF6czgADO0g4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Vrla6UOYBCJ8ahG2b4qjxjj8bIy8o5IH9YlreIID6ixNrdNumRNEX9djaQgQ/OZXzOzKabFmrVOYbRnD7Afm5m4PaHRvrPtZjXa8kCivZCmfV1Q9XsICKhzIeRhpA/logKNX/hUNR3oqt0+8v2T4d5qWOJ4reOpmIaPsclzRQ78=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QVkvXH4M; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790959584; c=relaxed/simple;
+	bh=LG4B8H/JFW3y8OuWMRXnR/43MF87vZwCsTEpawcR5GQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=meE60PqHEKADdCTRnCyW4biZrSCDz9bzhsEmTBeFMjKjvoP5lLfTu/WqrRFM+htv8Sjn0GYeSW+AIIYzXU0ipnoQG/Z7yaVRYFGsv38DxddPF6Z8XLl6Xkd+YcPbAhJkwX7pJ0sBYsnu7s35WHwi9AQKSXCZkcVB7A4PT819OBc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Kor04R/6; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QVkvXH4M"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE9D71F000FF;
-	Fri,  2 Oct 2026 16:43:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790959427;
-	bh=y9MRhlz4pzaoGqz6XBjvYnXMN79/O0P66ZDWtWt6Lv4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=QVkvXH4MIkXiJq0i0bW6Gqqdu15m800MonrF8VWPSFxRDFxCfnKP9lVLCvJHIlwDF
-	 DuUH5d68DiioC64U3/jjVHOkJyKYeMLCRpsowq7friAXvljxxrtfWWhjSHP84YnWoB
-	 LD4qMtBBoJ+UWRUhpZssXzxjN2AhJ5QxKPUxF0AhDaplBSpuy/fYSIyGrW7BXGRyaj
-	 5erZhJi3pLpFiENetIzPd/QJOvb5fNVhWkMBsRJLtrcEKxIhvG2Cyl+4ercWd1CieS
-	 uV/oEuGTs+oBCAgQMruT/CBXs+6Bn7Rj5cJwF4dJ+VWLIsbfue0LQ0+c+Qe7Bfp990
-	 eRlT/l+AABUeA==
-Date: Fri, 2 Oct 2026 17:43:42 +0100
-From: Will Deacon <will@kernel.org>
-To: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-Cc: Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Connor Abbott <cwabbott0@gmail.com>, linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Pranjal Shrivastava <praan@google.com>,
-	Pratyush Brahma <pratyush.brahma@oss.qualcomm.com>
-Subject: Re: [PATCH v4] iommu/arm-smmu: Use pm_runtime in fault handlers
-Message-ID: <ar_fPnbFMJQK69pZ@willie-the-truck>
-References: <20260806-smmu-rpm-v4-1-8183d007331c@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kor04R/6"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 13286C4AF0B;
+	Fri,  2 Oct 2026 16:46:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790959584;
+	bh=LG4B8H/JFW3y8OuWMRXnR/43MF87vZwCsTEpawcR5GQ=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=Kor04R/69JCAaSdag/7+Xqj9d8R49g1Jorvc2QTXswpxccNNGwgalj36S26El7+N1
+	 gujNwzwzBTC3eozKfHnQpiiaGOEWk9YLWfVAvJYkXL00FEGsJ5e0X8m+qFFIiSSNuU
+	 ENjO4Yd6CLiJvpmHmHmK9lT7g6MrIyVxhWtriH99td3SYIl7Ibe7D9ncNmBWX+Nozq
+	 6cRzdsWW2PuFYxw88OZvYhXdSSk9dRCyt2UCy0zKDalN+PETMWK3n+YajWJ8JpKCCV
+	 HgpBz7uWQwJZDlHJkCWnljqqGbXZ3YYpMH8NK9Ir7RT5Qn+QS/Yj0mKBh3EET/rAwf
+	 iuT/3lBxQXUHw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00805CA5FD4;
+	Fri,  2 Oct 2026 16:46:24 +0000 (UTC)
+From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
+Date: Fri, 02 Oct 2026 13:46:24 -0300
+Subject: [PATCH v2] clk: qcom: mmcc-sdm660: enable the parents of the pixel
+ clock sources
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260806-smmu-rpm-v4-1-8183d007331c@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261002-sdm660-pclk0-parent-enable-v2-1-b07f6c33e96f@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQ6CMBBFr0K6dkxbSS2uuIdhUdoBRqGQFomGc
+ HcLXsDNT17y897KIgbCyG7ZygIuFGn0CeQpY7YzvkUgl5hJLpXgXEJ0g1IcJts/05qAfgb0pu4
+ RtJAXWxh7FU6zJJgCNvQ+5Pfqx/FVP9DOu3F/dBTnMXyO+iL231+hRYAAp5pG60LkOeZlOxjqz
+ 3YcWLVt2xcB8Ktl1gAAAA==
+X-Change-ID: 20261002-sdm660-pclk0-parent-enable-8123c9ac71d8
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>, 
+ Martin Botka <martin.botka@somainline.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Fabricio Akio <fabricioakio@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790959583; l=2766;
+ i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
+ bh=kzflGE+GMBXQHBY1TxBvdSXGEj0HNva0A5hK970gsxc=;
+ b=ECK3P/V4x7sPrl9k06Vf1H+RcCFyHC7n6CRe9OlexbcWZOBxAMKBQW6jtvmStk7uOi43lfn2i
+ aabiJIUzT12CSU0CUeLW4/0ogpT+kyqFrQ25qt6zr3IztmDPudDAT/D
+X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
+ pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
+X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
+ auth_id=1076
+X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
+Reply-To: fabricioakio@gmail.com
 
-On Thu, Aug 06, 2026 at 03:52:41PM +0530, Prakash Gupta wrote:
-> Commit d4a44f0750bb ("iommu/arm-smmu: Invoke pm_runtime across the driver")
-> enabled pm_runtime for the arm-smmu device. On systems where the SMMU
-> sits in a power domain, all register accesses must be done while the
-> device is runtime active to avoid unclocked register reads and
-> potential NoC errors.
-> 
-> So far, this has not been an issue for most SMMU clients because
-> stall-on-fault is enabled by default. While a translation fault is
-> being handled, the SMMU stalls further translations for that context
-> bank, so the fault handler would not race with a powered-down SMMU.
-> 
-> Adreno SMMU now disables stall-on-fault in the presence of fault
-> storms to avoid saturating SMMU resources and hanging the GMU. With
-> stall-on-fault disabled, the SMMU can generate faults while its power
-> domain may no longer be enabled, which makes unclocked accesses to
-> fault-status registers in the SMMU fault handlers possible.
-> 
-> Guard the context and global fault handlers with
-> arm_smmu_rpm_get_if_active() and arm_smmu_rpm_put() so that all SMMU
-> fault register accesses are done with the SMMU powered. If the SMMU is
-> not runtime active, the fault can be safely ignored as
-> arm_smmu_device_reset() clears fault registers on resume.
-> 
-> Additionally, disable fault reporting in arm_smmu_runtime_suspend()
-> before powering down. pm_runtime_get_if_active() returns 0 during
-> RPM_SUSPENDING, so without this, level-triggered fault interrupts would
-> cause an interrupt storm while the device is being suspended.
-> arm_smmu_device_reset() re-enables fault reporting on resume.
+From: Fabricio Akio <fabricioakio@gmail.com>
 
-Separate patch?
+pclk0_clk_src and pclk1_clk_src are fed by the DSI PHY PLLs, which
+dsi_pll_14nm_vco_set_rate() resets and only clk_prepare() restarts. The
+DSI host sets the link rates before it prepares the PLL, so the RCG is
+updated against a stopped source, and if it is enabled at that point
+the update times out:
 
-> Also call synchronize_irq() for each context IRQ after masking fault
-> reporting but before clk_bulk_disable(). This closes a race where a
-> fault handler that passed arm_smmu_rpm_get_if_active() before the IRQ
-> was masked could still be executing MMIO accesses after the clocks are
-> cut.
+  pclk0_clk_src: rcg didn't update its configuration.
 
-Separate patch?
+Seen on a board whose simple-framebuffer node lists the pixel clock:
+the RCG then reads enabled at msm's first modeset.
 
-> Fixes: b13044092c1e ("drm/msm: Temporarily disable stall-on-fault after a page fault")
-> Co-developed-by: Pratyush Brahma <pratyush.brahma@oss.qualcomm.com>
-> Signed-off-by: Pratyush Brahma <pratyush.brahma@oss.qualcomm.com>
-> Signed-off-by: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-> Reviewed-by: Pranjal Shrivastava <praan@google.com>
-> ---
-> Changes in v4:
-> - Add synchronize_irq() loop in arm_smmu_runtime_suspend() after masking
->   fault reporting but before clk_bulk_disable(), closing a race where an
->   in-flight fault handler could access MMIO registers after clocks are cut
-> - Link to v3: https://patch.msgid.link/20260630-smmu-rpm-v3-1-f69874a580fa@oss.qualcomm.com
-> 
-> Changes in v3:
-> - Add arm_smmu_rpm_get_if_active() wrapper that returns 1 when pm_runtime
->   is disabled, ensuring fault handlers work on non-pm_runtime systems
-> - Disable fault reporting in arm_smmu_runtime_suspend() before powering
->   down to prevent interrupt storms during RPM_SUSPENDING state
-> - Use pm_runtime_put_autosuspend() in arm_smmu_rpm_put() instead of
->   private __pm_runtime_put_autosuspend()
-> - Link to v2: https://patch.msgid.link/20260313-smmu-rpm-v2-1-8c2236b402b0@oss.qualcomm.com
-> 
-> Changes in v2:
-> - Switched from arm_smmu_rpm_get()/arm_smmu_rpm_put() wrappers to
->   pm_runtime_get_if_active()/pm_runtime_put_autosuspend() APIs
-> - Added support for smmu->impl->global_fault callback in global fault handler
-> - Remove threaded irq context fault restriction to allow modifying stall
->   mode for adreno smmu
-> - Link to v1: https://patch.msgid.link/20260127-smmu-rpm-v1-1-2ef2f4c85305@oss.qualcomm.com
-> ---
->  drivers/iommu/arm/arm-smmu/arm-smmu.c | 101 +++++++++++++++++++++++++---------
->  1 file changed, 76 insertions(+), 25 deletions(-)
-> 
-> diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu.c b/drivers/iommu/arm/arm-smmu/arm-smmu.c
-> index 0bd21d206eb3..2b692a5293a2 100644
-> --- a/drivers/iommu/arm/arm-smmu/arm-smmu.c
-> +++ b/drivers/iommu/arm/arm-smmu/arm-smmu.c
-> @@ -79,11 +79,16 @@ static inline int arm_smmu_rpm_get(struct arm_smmu_device *smmu)
->  
->  static inline void arm_smmu_rpm_put(struct arm_smmu_device *smmu)
->  {
-> -	if (pm_runtime_enabled(smmu->dev)) {
-> -		pm_runtime_mark_last_busy(smmu->dev);
-> -		__pm_runtime_put_autosuspend(smmu->dev);
-> +	if (pm_runtime_enabled(smmu->dev))
-> +		pm_runtime_put_autosuspend(smmu->dev);
-> +}
->  
-> -	}
-> +static inline int arm_smmu_rpm_get_if_active(struct arm_smmu_device *smmu)
-> +{
-> +	if (!pm_runtime_enabled(smmu->dev))
-> +		return 1;
-> +
-> +	return pm_runtime_get_if_active(smmu->dev);
->  }
+Set CLK_OPS_PARENT_ENABLE on both so the core prepares the PLL around
+the rate change, as dispcc-sm8250 does for its pixel clock sources since
+commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel
+clocks").
 
-Can this race with pm_runtime_disable(), perhaps via
-arm_smmu_device_shutdown()? If so, then we could return -EINVAL, which
-doesn't look like it's handled correctly by the caller here:
+Fixes: 5db3ae8b33de ("clk: qcom: Add SDM660 Multimedia Clock Controller (MMCC) driver")
+Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
+---
+Tested on the Motorola Moto X4 (SDM630, payton) with the sdm660-mainline
+7.2.y tree, sdm660_defconfig, DRM_MSM=m: without the flag the
+pclk0_clk_src warning fires in most boots, with it never. At the stall
+the RCG reads root-on and the PLL stopped. pclk1_clk_src is not
+exercised here, nothing on this board drives DSI1. With the display
+built in, clk_disable_unused() also prepares the PLL under this flag,
+and some boots then log "DSI PLL lock failed".
+---
+Changes in v2:
+- Set the flag on pclk1_clk_src as well, as Dmitry asked. v1 left it
+  out because this board has nothing on DSI1 to test it with.
+- Link to v1: https://patch.msgid.link/20261002-sdm660-pclk0-parent-enable-v1-1-d6ff889144e4@gmail.com
+---
+ drivers/clk/qcom/mmcc-sdm660.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
->  static void arm_smmu_rpm_use_autosuspend(struct arm_smmu_device *smmu)
-> @@ -462,10 +467,20 @@ static irqreturn_t arm_smmu_context_fault(int irq, void *dev)
->  	int idx = smmu_domain->cfg.cbndx;
->  	int ret;
->  
-> +	if (!arm_smmu_rpm_get_if_active(smmu))
-> +		return IRQ_NONE;
+diff --git a/drivers/clk/qcom/mmcc-sdm660.c b/drivers/clk/qcom/mmcc-sdm660.c
+index 9f8b8e29fa0f..827741229dd7 100644
+--- a/drivers/clk/qcom/mmcc-sdm660.c
++++ b/drivers/clk/qcom/mmcc-sdm660.c
+@@ -984,7 +984,8 @@ static struct clk_rcg2 pclk0_clk_src = {
+ 		.parent_data = mmcc_xo_dsi0pll_dsi1pll,
+ 		.num_parents = ARRAY_SIZE(mmcc_xo_dsi0pll_dsi1pll),
+ 		.ops = &clk_pixel_ops,
+-		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE,
++		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE |
++			 CLK_OPS_PARENT_ENABLE,
+ 	},
+ };
+ 
+@@ -998,7 +999,8 @@ static struct clk_rcg2 pclk1_clk_src = {
+ 		.parent_data = mmcc_xo_dsi0pll_dsi1pll,
+ 		.num_parents = ARRAY_SIZE(mmcc_xo_dsi0pll_dsi1pll),
+ 		.ops = &clk_pixel_ops,
+-		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE,
++		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE |
++			 CLK_OPS_PARENT_ENABLE,
+ 	},
+ };
+ 
 
-^^^
+---
+base-commit: 9f24d789f03b22941b905ded43cb5ff8eea9ce62
+change-id: 20261002-sdm660-pclk0-parent-enable-8123c9ac71d8
 
-Is this assuming that the irq is edge-triggered? Is that guaranteed?
+Best regards,
+--  
+Fabricio Akio <fabricioakio@gmail.com>
 
-Will
+
