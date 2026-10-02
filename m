@@ -1,167 +1,120 @@
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+Received: from mail-wr2-f34.google.com (mail-wr2-f34.google.com [74.125.225.98])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A66413A2544
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 18:18:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9978D3AC0C6
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 18:29:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790965138; cv=none; b=kGNtmuT0syfgSTUoby1AdqMUIM5xmKoaPCkyaeMWOt5hNjCoXecUMVmjQg8dCU30MO2Xm4+OXEFzzVnzoN9AWQMNyv4rbv+Jm3OVITeZo3zMpuUjpXVD7Xm7Ca96mR48tbFN+8kjeSk+5qfucPQ44sy6LhNblVB3xSvKly6lIcc=
+	t=1790965773; cv=none; b=pxir7k5/iVuVU53QFzyHcr5y4dcno2esPrvoDc7L8sxDhnKAhLe/T2TTDqb+tPT6z47t5HIWFXu4byDfF5zSyylGs6kLknMdb21x6tDEms9c3ukiGFJ/09OBVH7Gmgyam40GlpvoqNV3awNkZ5lC/GGaEf0ADx5crKdJZlBEd4w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790965138; c=relaxed/simple;
-	bh=xxjspIqmx+CpULEpM4hqjXrOZ9/SSoODxlcNQ+6Tp2s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ov9+9KWBGvHn+ukNV8CPEVdXYXJlWqmSdspOkRRlYqKdBYi2zYOzUVHs0UC3zGaSgowdSkEZF2Bd2OgRGyd0U2ccJsyg/aHobLnHBuUwidCCDavHvqKFuXAVl1Pb5cFIfKbBzK4b+0+lk9pYqMqRHzUi3o5OF6KN9wfsyNrJlRE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=Xc4eG+pT; arc=none smtp.client-ip=209.85.222.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1790965773; c=relaxed/simple;
+	bh=Bz7Rk/lH17pY7d2mlfdx6a9jInPz+be05f+OXOKbwMQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=aoXGe2EXx39IGoGgjAGp4UslavqMqXCr5/NjZMUwhkfeLjZbty1wQW7ivkd7chon/ZMpLqoReRh047g+uX9x5E1Gpw0rjKjFflDnB4976D+nLTWqZSyUj3v+mK0pTE0hoGYEyHdSN2UETPVpHSgfhBdjZxDX42FZTI9zGMtKes0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LtUoSA51; arc=none smtp.client-ip=74.125.225.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Xc4eG+pT"
-Received: by mail-qk1-f182.google.com with SMTP id af79cd13be357-93cb71532bcso14854785a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 11:18:54 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LtUoSA51"
+Received: by mail-wr2-f34.google.com with SMTP id ffacd0b85a97d-48aff58e6abso99418f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 11:29:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790965133; x=1791569933; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SdYgs3CqbUtHm8RpvjRA9eQJchSjfk11RvrZH/hrmmc=;
-        b=Xc4eG+pTRyNj0/77dvvO7G1GRgOtknJxhKpk0H1k7A6hIkji8ss6fvCbiv1/aujwK6
-         ae6oAt5XgNfu5zugRJB8vLqzZ046/LDjGCGWWuwaHAAqtlowvs2qk8YUvUTMmtQ/RbuA
-         GVy/WIKn7ykh35Wv/7zj77BtWKbLgOonbDkd/JmfzQkpgjK04tPZjLqimYNtUg/Jqq0S
-         MjTMV0eJLPBFTXCtKdKVFR9l4xmzBHqM7b2v3MCULgIi5P0TEPrmo+/dThdFKmPGDVOM
-         dVceqPkeFRMsP+6sRACTM+6Q8y/tEt5T1boUJcown3P2ixhPrTBi6FaUAASBZofcTpsE
-         QUzg==
+        d=gmail.com; s=20251104; t=1790965768; x=1791570568; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=+rrH8jPIjco9vZfHT3xe2ptHn3BuOpvxKbC3e4I9zuk=;
+        b=LtUoSA51/Tk/Zy69EwLZOtx7fgDLk1iq6VfKi06BMkbJgo6wJlSd/QsjUo/JJZRQbl
+         2AsH9QdS9UJ20K3yRL0pt0TXUY+jFLOhjQ8Nqt/Lew9h1B4asmb/MzID25mt5H5pY56c
+         PVQjKTgiIJmjAoBkTR/tW+oBSFVns/wUdJT709oFUfZ58bh/SFNksTtpV7TQYMb/KINE
+         AxtEhvK49lM4PgPDFRnn8+fGic8wkgfnNPUbOH4KN8DPX/CEKQL4cNYkA1kJ7MSHp4uJ
+         wGnHdDl/qOFkzqI+uQuTmHi10OsbRgutO8TAgPC3XXQXFdEqGaMgqBe/AvEVjhRNPA4W
+         Ldcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790965133; x=1791569933;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=SdYgs3CqbUtHm8RpvjRA9eQJchSjfk11RvrZH/hrmmc=;
-        b=zY0F9NRw/spYBxKU3/Tn1dF1ylKCfxH+yCCAByj2Wnd6HBAIulnCq6HTQC1hFZUsaL
-         ctZVJMXfR+wtHe7ITz8jt3SrfP1f8J5YwMO9vCIbe2i2IfKiaM+9ZmJ/9Bhjts1pgmFv
-         qQxQgkbYgktWusNn2rBEyDQm3msJLwwwvw1a2EaFQJjYYyuIjoLbTPxi7enVjPAqgvYh
-         7GXmKGk6vS430is/CG40zQkNi8Z3Q/4TBDR35ZbY+XsPDieC7/eyE7r6WvS/wzBqmW6d
-         jJIlg3t9qLXTZevFGMbWKDfKgZ4PMP2iJSbYs0iuP38G5wdbp80IXCImJfkpsd6u3GEZ
-         b7Hg==
-X-Forwarded-Encrypted: i=1; AKwUvBz0F/Qp8E8OIFxw6krtTdott0QCryvVclLJrzOQ0idXwa2An/QmiEq7hOxiiqAeLR0ERijifndd/W9X1lrp@vger.kernel.org
-X-Gm-Message-State: AFuF++mvxI2aenHenXsUN++4ZGFCFY4vXl802NeOfiuSMuXBzruAZw1P
-	u1Y+9xOjJK3Nb2Pfjgs8ICEDI1iVj66uFP3eAmAVhDcU3a/5FK+OW+lw/ERgPUAm8ho=
-X-Gm-Gg: AYBFou0law/laUTB5Efhqe49BEF7U55QPkER5Fb3AFqK/6Zy2cG8YO5vduQ/I+2YnkU
-	ndGOl4QxVoygRtOn7j3Kq4IlktCUn8M3K8xw2mv4zKAlWfno9l01BgxVkZ+Ow9wXn4sgzb/SAx3
-	Yl6/gwromxS89vUnZuLiFyjtPW8/JmUlaysLx86RPMc1CYSdEThjWl/TDGTGQWzX8nyZub5m481
-	hOHVmG2jtYgjrFr9b+DfKPVfvmBZLIMY2T13OWSviydWxc+S7FeyD1jIfYk8jzpCj8lMQA2oEJd
-	NJdJfFAD6UFKwUWLGLpza2OlPVlT/jLa2CBnVPypW9euuM7NjG4VzQXXikvP92blhmKOvDErnxF
-	AL7vPSTZ1qPV58yHKdI/xYMiqoiFJ2fpBMs+8a/sWL95Ki67rmUrFGjfhMhGxOE2A8mtDuJrTpl
-	Tt/GIfjybKZEkjC0Sxk/iQ1hmMjHlCxcznUuiVOAZHTtOU4vuIi1H6tksxcLUBG/6CP5wm8e4nd
-	CkA
-X-Received: by 2002:a05:620a:290a:b0:93a:2e8:5aff with SMTP id af79cd13be357-93e50f8199dmr34926885a.21.1790965133295;
-        Fri, 02 Oct 2026 11:18:53 -0700 (PDT)
-Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93cca280e59sm286107585a.35.2026.10.02.11.18.51
+        d=1e100.net; s=20260707; t=1790965768; x=1791570568;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+rrH8jPIjco9vZfHT3xe2ptHn3BuOpvxKbC3e4I9zuk=;
+        b=HFh4HATFSziCTgZyXqjJkTNPHRr5awMHzOVppdiHJxL+3ArSOGYD1tsx0bRmetLGrD
+         y0aesUuVDgbJ5YVrd+36nnTrCN1ziYIeTGTESAg9U8ofF5G9bzic5DEgr/LKB5ObHGn3
+         ikE2SEQg1k6i0lKbOcHNDFPgfV/224Ni4Zh2MQJ8HTLGsOLf0OkfFi1fkbZoNEOr1NjD
+         3brh5mknT3vbwSK+LS4lWY3W/VhLq15zBIMpkdU02N6k8p8Ray8zLIa4GOP7cTPpxm5O
+         Pi88QIaWc0xIPWieqOYpTXKyW7PxOugBwxwGdJ1sTmLxkJeNjy1T4jlV62cv3qDHvRjX
+         S+Nw==
+X-Forwarded-Encrypted: i=1; AKwUvBzhlh9MBbZnsVf9FPad68cuIMbdKhgZ956v08W/GPuEwMNcFt/NR52/Fuq910k4Sbi+uvZo/bMr6zOkOpxq@vger.kernel.org
+X-Gm-Message-State: AFq9FYKwgeLD39eORW2c3IGrd15QGnlR7ERE27FMrvu3U+s+WsrUjtq3
+	RorPs3cVk4gnew143qrswjQs4hC+1C5WzzyFWePG7K03ZHU9Gpx1ceDw
+X-Gm-Gg: AYBFou1Gt3JR1YNq47RjaOTlVemZBECVzCwcfy/WMQv9Uoby8OSaQMJNWVuLLMPOS10
+	vLGd9hHDkIbus7j6DjUhR53mFtAWw0ApMrub7gLet5YM4rqugJz2ArtyuR/yvs6wUaurezy9Y10
+	o6iO7k6VzIC0t/RymI+ZkeNi1J1WjEYci8DWI6MLR3FRTLJEWEqg26TQgZg4SBb3OBNl125QhBQ
+	WpQDNYmNpR/Np8e42GgvcfV+8cBKcep1QIRcRWKhbX+b7KdMrTOk21DKUAHsN5mMbhmXKNHevOv
+	/zZ91n+NRiM6GciQ6l9nKxoHGYEEWZEIBURiPxKUvKI7agmNiV7yRsliPUXdg59FEhRS95Jo2Da
+	l2yM9QX9ofcyGP7qf6aelFcFPMkHRJZm4qtF4CWUStnmnP+wYbEE1x2HBMAa5Jp16TID9D8S0ts
+	P8l0uyou/EdPe124SeEKz7XSpHaZ6bMhqHOaMREAHGkC9O0y5M60rikLU0ZQWINfjPYPdUlNoo7
+	eat+g==
+X-Received: by 2002:a5d:64e2:0:b0:48b:508:1cb9 with SMTP id ffacd0b85a97d-48b126f1568mr6613899f8f.4.1790965768312;
+        Fri, 02 Oct 2026 11:29:28 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.11])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-48b380faaf9sm7429656f8f.22.2026.10.02.11.29.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 11:18:52 -0700 (PDT)
-From: Alex Elder <elder@riscstar.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org
-Cc: robh@kernel.org,
-	krzk+dt@kernel.org,
-	abelvesa@kernel.org,
-	conor+dt@kernel.org,
+        Fri, 02 Oct 2026 11:29:27 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Rob Clark <rob.clark@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	Daniel Thompson <daniel@riscstar.com>
-Subject: [PATCH] arm64: dts: qcom: qcs6490-rb3gen2: add endpoint buses
-Date: Fri,  2 Oct 2026 13:18:48 -0500
-Message-ID: <20261002181849.790275-1-elder@riscstar.com>
-X-Mailer: git-send-email 2.53.0
+	regressions@lists.linux.dev
+Subject: Re: [PATCH 3/3] drm/msm/a8xx: Enable CLX feature on Adreno X2-85
+Date: Fri,  2 Oct 2026 20:29:18 +0200
+Message-ID: <179096555582.4050.16689195326008531646@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <CACSVV00GwWvMFDR5QC7h8gonC-9qYbaG958nZHSxtUdWXGG_sg@mail.gmail.com>
+References: <CACSVV00GwWvMFDR5QC7h8gonC-9qYbaG958nZHSxtUdWXGG_sg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The TC9564 SoC incorporates a PCIe switch, which is connected via
-the second PCI segment (0001) on the RB3gen2 platform.  The third
-downstream port of that switch (pcie@3,0) has an embedded PCIe
-endpoint that implements two PCIe functions.  The SoC implements
-other peripherals, and they will be accessed via PCI endpoint bus.
+On Fri, Oct 02, 2026, Rob Clark wrote:
+> Can you share `dmesg | grep drm`?  In my case the initrd is missing fw
+> so gpu is initialized later, I guess when the compositor starts.
 
-Record the PCI VID/PID compatible string for the embedded PCI functions
-attached to the third downstream switch port.  Define the pci-ep-bus
-sub-nodes for each, along with the #address-cells, #size-cells, and
-ranges properties for both the endpoint and its pci-ep-bus node.
+Here it is. The kernel is built without modules and with the firmware
+built in, so the GPU is brought up right at boot. The GMU firmware is
+gen80100_gmu.bin from linux-firmware (v5.2.38).
 
-For PCI endpoint bus, a PCI function's ranges property will be updated
-dynamically to incorporate the address ranges assigned to each BAR
-during PCI enumeration.
+[    0.620358] msm_dpu ae01000.display-controller: [drm] Using Transparent Hugepage
+[    0.621120] [drm:dpu_kms_hw_init:1168] dpu hardware revision:0xc0020000
+[    0.625910] [drm] Initialized msm 1.13.0 for ae01000.display-controller on minor 0
+[    0.626015] msm_dpu ae01000.display-controller: [drm:adreno_request_fw] loaded qcom/gen80100_sqe.fw from new location
+[    0.626115] msm_dpu ae01000.display-controller: [drm:adreno_request_fw] loaded qcom/gen80100_gmu.bin from new location
+[    0.626994] [drm] Loaded GMU firmware v5.2.38
+[    1.632277] platform 3d6c000.gmu: [drm:a6xx_hfi_wait_for_msg_interrupt] *ERROR* Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 11 timed out waiting for response
+[    1.642345] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob] *ERROR* Timeout waiting for GMU OOB set GPU_SET: 0x4
+[    1.642360] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* gpu hw init failed: -110
+[    1.652389] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob] *ERROR* Timeout waiting for GMU OOB set GPU_SET: 0x4
+[    1.652401] platform 3d6c000.gmu: [drm:a6xx_hfi_stop] *ERROR* HFI queue 2 is not empty
+[    1.858322] msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+[    8.053367] platform 3d6c000.gmu: [drm:a6xx_gmu_resume] *ERROR* GMU firmware initialization timed out
+[    8.053584] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* Couldn't power up the GPU: -110
+[    8.187443] platform 3d6c000.gmu: [drm:a6xx_gmu_resume] *ERROR* GMU firmware initialization timed out
+[    8.187650] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* Couldn't power up the GPU: -110
 
-Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-Signed-off-by: Alex Elder <elder@riscstar.com>
----
-
-			===== PLEASE NOTE =====
-
-A version of this patch was previously included in this series:
-  https://lore.kernel.org/lkml/20260918152659.413268-1-elder@riscstar.com/
-The first two patches in that series are now in char-misc-next
-
-This patch must go through the Qualcomm tree.  However for this to
-function correctly, it depends on this code getting merged:
-  https://lore.kernel.org/lkml/20260924222444.1351466-1-elder@riscstar.com/
-
-I sent this message today to clear up any ambiguity about whether/when
-this patch should be merged (probably not yet).
-
-					-Alex
-
-			=======================
-
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 24 ++++++++++++++++++++
- 1 file changed, 24 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-index 909039816a216..0e3bbdaf4661f 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-@@ -955,11 +955,35 @@ pcie@3,0 {
- 			bus-range = <0x5 0xff>;
- 
- 			dev@0,0 {
-+				compatible = "pci1179,0220";
- 				reg = <0x50000 0x0 0x0 0x0 0x0>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges;	/* This will be updated dynamically */
-+
-+				pci-ep-bus@4 {
-+					compatible = "simple-bus";
-+					#address-cells = <1>;
-+					#size-cells = <1>;
-+					/* Map 0x0-0x1fffff to BAR 4 */
-+					ranges = <0x0  0x4 0x0 0x0  0x200000>;
-+				};
- 			};
- 
- 			dev@0,1 {
-+				compatible = "pci1179,0220";
- 				reg = <0x50100 0x0 0x0 0x0 0x0>;
-+				#address-cells = <3>;
-+				#size-cells = <2>;
-+				ranges;	/* This will be updated dynamically */
-+
-+				pci-ep-bus@4 {
-+					compatible = "simple-bus";
-+					#address-cells = <1>;
-+					#size-cells = <1>;
-+					/* Map 0x0-0x1fffff to BAR 4 */
-+					ranges = <0x0  0x4 0x0 0x0  0x200000>;
-+				};
- 			};
- 		};
- 	};
-
-base-commit: 705529dab1fa872d8b53b09c95e1b03a95573376
--- 
-2.53.0
-
+Oleg
