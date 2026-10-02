@@ -1,163 +1,190 @@
-Received: from mail-ed2-f34.google.com (mail-ed2-f34.google.com [74.125.228.98])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 925383FA5FE
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 14:35:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6038F2BEFEE;
+	Fri,  2 Oct 2026 14:38:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790951753; cv=none; b=g6xRJB45cWCnG7qur4Q9BtovfMoSNRfj1dfcVrMTzTQLqKqv154BnuXxLmrHNKuoR3F44UVQuuXOCYX25G9Z8YtrLdb/0qAW4S8vOrvgqTHyhdOk+LohPBT+UnHNAY9nPfsmJfn+vgbkuWBHvji8x/7MZtg6EbvcEv65hTtgq58=
+	t=1790951903; cv=none; b=W8PQaa4A35CBln8ZPquerRvCucKO4ZKpdw0KT/FyZroKQaDZHaigf3yOamM4SuCxD49U6w9Ah6scPLV3LL6Y3pWEvm3U36+trzOyEe9uowm8xWqgJ53JZDxBOi7e4HjLMRvRWeQPONBFF4XnDSaVTNVZovtEU6zMsu0sH1scr6E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790951753; c=relaxed/simple;
-	bh=sEskR/3ExQTLHI71NqLlpzs/JE6M5OOwwHG9YZNTZAY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Qrfr+VR0VnSLU7V3JwgrRgSnkNwU3uTEgIJ3jIVlVIg5oNe81LINw7OoiHWMveObhrDnnQaa3nGafHFzhjsUFLiXG7S0AYmSVTLnOwa+gd7Sb7+SGRHpElEZw2qjS8K77+77ZCtDx32NX+MmLJ2zKQw2gzRdHR5qOqxEaadeeBs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=OM7fjLjt; arc=none smtp.client-ip=74.125.228.98
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790951903; c=relaxed/simple;
+	bh=NacoyfBztGyQI9/DAOlGr2UXcxJyKtJDFP+rA/lunGY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IvFywFhxoodo2OVysMRWpVXh2zJn2Xc/GdD7Ypqrv0x32cykDfmc7GfmePC8WpHzo1PbWv4Qj0i2KEDv4rkdtbkGl2tw1IZA6iFHE101tfdaihsEC1RmWX2xQge2MLztS8Q8ph/hmx8qVLqcXb88avAyyxTE30Ar0NMul8JO61g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ESPwCmmb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="OM7fjLjt"
-Received: by mail-ed2-f34.google.com with SMTP id 4fb4d7f45d1cf-6aaf8415866so1918875a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 07:35:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790951750; x=1791556550; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tnnaK1bgjoHXdx4TLwgBNAZANL+ZBN5rHCxr30tdrTw=;
-        b=OM7fjLjthjUwEd0GpjeI8BQRE7H8dKViyY9tMVjlOk3mh4SRm1wpryj8WyanqV+qeX
-         bc2PbvW09240D6r9g+3PRl3XtqISSfiCWEhTZ9Xdk5NU2C4KPil/aUP/NgzIypJw0eSt
-         ybZsGUurjdNY6uXbz/+sU2EJVKu8Aci92SWB0+XKUZh+yw9fh0hsFi76LsyoJEY0QmOp
-         gYANqf/kmpL6bpm22VIKnMFmlfk8vYTjYwaXjSEydMEzH6ows7TgL1yzGo7ZijNPSxzQ
-         06PQxgreAxbPjVa80MvNyldbr+hB9vG5sjTifjO5fFiHF74F3BJvnejqLnEGYdz8XNGq
-         BtuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790951750; x=1791556550;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tnnaK1bgjoHXdx4TLwgBNAZANL+ZBN5rHCxr30tdrTw=;
-        b=xSL4PdfAp6IEUU2JkET+FIr4qDmioL19Krq5smPwK6w5O3ULlrWbbSG7XA38Cs9aQI
-         G/wUN7I6cfcm8+tzHCSgUyrO1krFmoLi3B8k9FtJQEztiBSKIgrmCQg4+l5DCw1MkX0k
-         YZtYxOR1I99QfkarUbQAwk29thIcJjrAnTDs26ftr3JtemJX1sHzqJPlA6YfLEQhdpGb
-         PloxcXaxn67PlfXRBl9Udal4VBvtZkUDn/jiiQ46AwL4EflKEmNdT0PObVzqHypejcjq
-         WKbuq+M+MmDd7AeNKSChaV0VpYqgCdq4Me6/Yvf311aox2LgliVi0FvvpOWscBVpPHQJ
-         2Wqw==
-X-Gm-Message-State: AFq9FYKgpl8fxbLktEu6hJ+v3kxTY1gpbB2ySUkXZrO0dLHWiFq+2Nvx
-	Q9baPwVreoOOuU/g02atb1jNAciCFztqf6VXiYG1+9kpAyCmjd9afhQm6nLAKPN+cy+DFSe0IBP
-	hAesrUkA=
-X-Gm-Gg: AYBFou2JtktzRmXYCyNDsdp8QNVFpQcU1vAlT0X46lGwvXsRC36a0vCslHuKRkV+R1c
-	i2xtOibYUGBkvyV0XK6mkmc2yj0uy6eOn+hBL2u6G3DBHNyypNco30bik2FVb542rBKU94vjnq/
-	06kjo3evjPCaYlb02qwH10Cl18HBOJA4n7SObKFl3/ETfoA5pRpBkRGnj+Tj+ZXsoyO+IK/z9oR
-	TEB5iTm7ZmFGM6VLwwRzVmI8j+dT3jFCIustTWFy5HcjWNICuvrAHtUhuLpIqHOfLFhkCNfZ2s1
-	i+gdiPsz5caqd1AjeG+aXmoXz0jSm+xoBWCXG9hY60HOaqDYX3NBQALXV/BMO6LD5SuIGQPzxjr
-	xJITR3VuWMZsyA+R47mGA9tOjWdjdeYPoxjM8oZly616e7yhJOu0AxqrSVgmWsBHKxAlmdwFHL/
-	HoQ5HC0YFKz3M7bg/HrtnJEIBZM7Lxiw+4FYc4h659kTiMVpkCMoa0sQ0kRjA3rU3m/WjaHnxfC
-	IGHuepgIOlW
-X-Received: by 2002:a05:6402:254b:b0:6aa:fac1:3bff with SMTP id 4fb4d7f45d1cf-6af9e357989mr2066365a12.32.1790951749730;
-        Fri, 02 Oct 2026 07:35:49 -0700 (PDT)
-Received: from [192.168.0.167] ([109.76.210.127])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6af9d873682sm929326a12.10.2026.10.02.07.35.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Oct 2026 07:35:49 -0700 (PDT)
-Message-ID: <45d79c84-cc76-4bee-835d-ed11ce07bf2f@linaro.org>
-Date: Fri, 2 Oct 2026 15:35:48 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ESPwCmmb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAA141F000FF;
+	Fri,  2 Oct 2026 14:38:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790951901;
+	bh=vr/kXgpSdbluBG408YmUZzV6TEB4wE4HF3eq4todiMw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ESPwCmmbvS4roqugTIjMlpxH6T7COA9RFBZ5x5GlWxxrYfETOQs+QuLGJTMILlBcq
+	 XNbEM2umzd5MAT3Ct/QxjCLZDAtkj6A0GW3e3syo4KV4YpNWJEvE2midCyrfSAhDSy
+	 YR3PzUERnsH/x9+7ZWoRKdgRw+oeWyfB/RQurPIW+WEvwW+kS5tUyMkHsX1xj6A1P5
+	 HpzBKAEfw3hdg/nUsNNyaT5csu1xQjmHGzS6GgNYCBXw8JPOXk3bPddtNl45109dnK
+	 C3o8fumCA6enXzeiyzkpCoVIuAqNAvGqzLEL9KR1ADhuUbgIgy0mwIZJhvoNANzxUD
+	 gdgK/Uqe4DoJw==
+Date: Fri, 2 Oct 2026 09:38:18 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, regressions@lists.linux.dev
+Subject: Re: [PATCH 3/3] drm/msm/a8xx: Enable CLX feature on Adreno X2-85
+Message-ID: <ar_AuRr1eaZzOfw9@baldur>
+References: <20260516-a8xx-clx-support-v1-0-62508bf651ac@oss.qualcomm.com>
+ <20260516-a8xx-clx-support-v1-3-62508bf651ac@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 06/15] media: qcom: camss: vfe: Add support for VFE
- 1190
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, Suresh Vankadara <svankada@qti.qualcomm.com>,
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-References: <20260923-hawi-maili-camss-v1-0-cbbb42e534ef@oss.qualcomm.com>
- <20260923-hawi-maili-camss-v1-6-cbbb42e534ef@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260923-hawi-maili-camss-v1-6-cbbb42e534ef@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260516-a8xx-clx-support-v1-3-62508bf651ac@oss.qualcomm.com>
 
-On 23/09/2026 12:02, Nihal Kumar Gupta wrote:
-> drivers/media/platform/qcom/camss/camss-vfe-gen4.c
+On Sat, May 16, 2026 at 01:37:51AM +0530, Akhil P Oommen wrote:
+> Add the CLX domain table and the IFF/PCLX limits tables to the catalog to
+> enable CLX feature support on Adreno X2-85 GPU present in the Glymur
+> chipset.
+> 
 
-So I'd like to completely drop the genX.c stuff it is not descriptive.
+This patch landed in next-20261001 and while it works on my Glymur CRD
+(COB), on the Asus Zenbook A14 I see the following failure during boot:
 
-For example:
+[    4.843643] platform 3d6c000.gmu: [drm:a6xx_hfi_wait_for_msg_interrupt [msm]] *ERROR* Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 11 timed out waiting for response
+[    4.853804] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob [msm]] *ERROR* Timeout waiting for GMU OOB set GPU_SET: 0x4
+[    4.853878] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu [msm]] *ERROR* gpu hw init failed: -110
+[    4.863980] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob [msm]] *ERROR* Timeout waiting for GMU OOB set GPU_SET: 0x4
+[    4.864038] platform 3d6c000.gmu: [drm:a6xx_hfi_stop [msm]] *ERROR* HFI queue 2 is not empty
+[    5.128548] ------------[ cut here ]------------
 
+And then as one can expect there's no more GPU.
 
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe-gen3.c 
-b/drivers/media/platform/qcom/camss/camss-vfe-gen3.c
-index 93d16b0951e99..f2001140ead12 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe-gen3.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe-gen3.c
-@@ -12,13 +12,43 @@
-  #include "camss.h"
-  #include "camss-vfe.h"
+Reverting this single patch makes next-20261001 work again.
 
--#define BUS_REG_BASE                   (vfe_is_lite(vfe) ? 0x200 : 0xC00)
-+#define IS_VFE_690(vfe) \
-+           (vfe->camss->res->version == CAMSS_8775P)
-+
-+#define BUS_REG_BASE_690 \
-+           (vfe_is_lite(vfe) ? 0x480 : 0x400)
-+#define BUS_REG_BASE_780 \
-+           (vfe_is_lite(vfe) ? 0x200 : 0xC00)
-+#define BUS_REG_BASE \
-+           (IS_VFE_690(vfe) ? BUS_REG_BASE_690 : BUS_REG_BASE_780)
-+
-+#define VFE_TOP_CORE_CFG (0x24)
-+#define VFE_DISABLE_DSCALING_DS4  BIT(21)
-+#define VFE_DISABLE_DSCALING_DS16 BIT(22)
-+
-+#define VFE_BUS_WM_TEST_BUS_CTRL_690 (BUS_REG_BASE + 0xFC)
-+#define VFE_BUS_WM_TEST_BUS_CTRL_780 (BUS_REG_BASE + 0xDC)
-+#define VFE_BUS_WM_TEST_BUS_CTRL \
-+           (IS_VFE_690(vfe) ? VFE_BUS_WM_TEST_BUS_CTRL_690 \
-+            : VFE_BUS_WM_TEST_BUS_CTRL_780)
-+/*
-+ * Bus client mapping:
-+ *
-+ * Full VFE:
-+ * VFE_690: 16 = RDI0, 17 = RDI1, 18 = RDI2
-+ * VFE_780: 23 = RDI0, 24 = RDI1, 25 = RDI2
-+ *
-+ * VFE LITE:
-+ * VFE_690 : 0 = RDI0, 1 = RDI1, 2 = RDI2, 3 = RDI3, 4 = RDI4, 5 = RDI5
-+ * VFE_780 : 0 = RDI0, 1 = RDI1, 2 = RDI2, 3 = RDI3, 4 = RDI4
-+ */
-+#define RDI_WM_690(n)  ((vfe_is_lite(vfe) ? 0x0 : 0x10) + (n))
-+#define RDI_WM_780(n)  ((vfe_is_lite(vfe) ? 0x0 : 0x17) + (n))
-+#define RDI_WM(n)      (IS_VFE_690(vfe) ? RDI_WM_690(n) : RDI_WM_780(n))
+#regzb introduced: 93b6c8d10fad ("drm/msm/a8xx: Enable CLX feature on Adreno X2-85")
 
-In other words VFE 690 and VFE 780/880 don't share the same write-master 
-index.
+Regards,
+Bjorn
 
-So they aren't the same silicon.
-
-I'll go and find the Kaanapali thread but the feedback here will apply 
-there.
-
-Name the files per their silicon version not some genX.c moniker, please.
-
-It _looks_ like 690 and 780 will need to be separated so, I'd like to 
-move away from this misleading genX notation - it may mean things to 
-qcom but I feel we are burying inappropriate hacks inside of convenient 
-gen files.
-
----
-bod
+> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+> ---
+>  drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 86 +++++++++++++++++++++++++++++++
+>  1 file changed, 86 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> index c503912a61c7..9ad13eb173de 100644
+> --- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> +++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> @@ -1799,6 +1799,90 @@ static const struct adreno_reglist_pipe x285_dyn_pwrup_reglist_regs[] = {
+>  };
+>  DECLARE_ADRENO_REGLIST_PIPE_LIST(x285_dyn_pwrup_reglist);
+>  
+> +static const struct a6xx_hfi_clx_table_v2_cmd x285_clx_tbl = {
+> +	.version = (2 << 16) | 1,
+> +	.domain = {
+> +		/* GX DOMAIN */
+> +		{
+> +			.data = CLX_DATA(60, 11, 0, 1),
+> +			.clxt = 0,
+> +			.clxh = 0,
+> +			.urg_mode = 1,
+> +			.lkg_en = 0,
+> +			.curr_budget = 100,
+> +		},
+> +		/* MXG DOMAIN */
+> +		{
+> +			.data = CLX_DATA(60, 3, 1, 1),
+> +			.clxt = 0,
+> +			.clxh = 0,
+> +			.urg_mode = 1,
+> +			.lkg_en = 0,
+> +			.curr_budget = 100,
+> +		},
+> +	},
+> +};
+> +
+> +struct a6xx_hfi_limits_tbl x285_limits_tbl[] = {
+> +	{
+> +		.feature_id = GMU_MIT_IFF,
+> +		.domain = GMU_GX_DOMAIN,
+> +		.feature_rev = 0,
+> +		.cfg = {
+> +			.enable = 1,
+> +			.msg_path = 0,
+> +			.lkg_en = 0,
+> +			.mode = 0,
+> +			.sid = 12,
+> +			.mit_time = 5,
+> +			.curr_limit = 18000,
+> +		},
+> +	},
+> +	{
+> +		.feature_id = GMU_MIT_IFF,
+> +		.domain = GMU_MX_DOMAIN,
+> +		.feature_rev = 0,
+> +		.cfg = {
+> +			.enable = 1,
+> +			.msg_path = 0,
+> +			.lkg_en = 0,
+> +			.mode = 0,
+> +			.sid = 18,
+> +			.mit_time = 2000,
+> +			.curr_limit = 6000,
+> +		},
+> +	},
+> +	{
+> +		.feature_id = GMU_MIT_PCLX,
+> +		.domain = GMU_GX_DOMAIN,
+> +		.feature_rev = 0,
+> +		.cfg = {
+> +			.enable = 1,
+> +			.msg_path = 0,
+> +			.lkg_en = 0,
+> +			.mode = 0,
+> +			.sid = 6,
+> +			.mit_time = 3,
+> +			.curr_limit = 66000,
+> +		},
+> +	},
+> +	{
+> +		.feature_id = GMU_MIT_PCLX,
+> +		.domain = GMU_MX_DOMAIN,
+> +		.feature_rev = 0,
+> +		.cfg = {
+> +			.enable = 0,
+> +			.msg_path = 0,
+> +			.lkg_en = 0,
+> +			.mode = 0,
+> +			.sid = 6,
+> +			.mit_time = 3,
+> +			.curr_limit = 18000,
+> +		},
+> +	},
+> +};
+> +DECLARE_ADRENO_LIMITS_TABLE(x285_limits);
+> +
+>  static const struct adreno_reglist_pipe a840_nonctxt_regs[] = {
+>  	{ REG_A8XX_CP_SMMU_STREAM_ID_LPAC, 0x00000101, BIT(PIPE_NONE) },
+>  	{ REG_A8XX_GRAS_DBG_ECO_CNTL, 0x00000800, BIT(PIPE_BV) | BIT(PIPE_BR) },
+> @@ -2227,6 +2311,8 @@ static const struct adreno_info a8xx_gpus[] = {
+>  				},
+>  				{ /* sentinel */ },
+>  			},
+> +			.clx_tbl = &x285_clx_tbl,
+> +			.limits_tbl = &x285_limits,
+>  		},
+>  		.speedbins = ADRENO_SPEEDBINS(
+>  			{ 0,   0 },
+> 
+> -- 
+> 2.51.0
+> 
+> 
