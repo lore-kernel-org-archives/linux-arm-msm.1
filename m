@@ -1,202 +1,169 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1A114BC01A
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 18:44:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790966651; cv=pass; b=rerR6SiptmxFnG58O70J3vLs4Zr1PLFwGJ76sbRgrCWURvXtctnXS4GuYYhYNocw6lPCU4Q/dxpMqiF4nRbm3xbMHKrUcLJaAfVETgUSXBgzs2SSm5xBiZ+0R1/TLbWOzM04VhiytbM1T1PXYHe1I9R5GepAps8kGALG+7TUtHE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790966651; c=relaxed/simple;
-	bh=uZkHDYTWWzJ9X5F+4Um7wb6CzaA/5jQIh7w7jPBSWI0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZZEAhRiE5xMFf55KuRWh700ApDyxSqHiL4N/30aVcE0XW0GggljQvb2vt+J7aCgs8Bw68uv0JeAAx4j9gCcomZej8fzfEv2NhjXbWf4wNFcW+W53rPB4gYpvn+AI+uHWjEnWO1ydy8pa29nW8/iAoBery916YwVtVwLOVOe6DqA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LtSL754p; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L6sIfZv3; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D19B3C2BB4
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 19:18:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.48
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790968720; cv=none; b=baSs9esEMOekHzV7VnwET9FHYDG/U2QJ01jIO6Vej50PsZOJW4WVB1CAEtdt9FD+xSmx6feMIUtuFk8cbNRO2kb45lvvn3g3vKm5JXCq2IIkMJrtBAxVfWb6RagD3qAy9sGCUhR/bfrRko+/Fbzl0Zh0dsj7cjYtFM3GTfNu7Qk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790968720; c=relaxed/simple;
+	bh=jsedZLxYBjeRK5DRFBlUwUDOw3C1t+5s3b7lh0/hqDA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kxnYa05nyDB0xzaSdvrYM4XTt6M2vrX7UGqmZ+xFwqfQWYcs83dK2WWyaqli5mPOe89GWMKWRmYamc1sczgOFwbr2uCJDOxXv5zvk1cwOq0sPpFuScReCLfXWRsvVuZT070R+6bRDuKRFAoewjUKQFNmwE6iYmMFVgV6lB6XN0c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=eghDmcSR; arc=none smtp.client-ip=209.85.219.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LtSL754p";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L6sIfZv3"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692HYBZL2174686
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 18:44:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=FQ08Xw8wztndrxT1uOejbuk9Ev7qAfsJYKeKbB6oswc=; b=Lt
-	SL754pESNV29m2MosTwDEM4lQEE7sfWr0ssqW+SEAz3hgIRe9p1nG88sPKmvXw2K
-	SQkyWumfGRpafbwwxqCDMst3fSlZG1kpHelJujTJIidpHpOt5149w12mUYO9hRz/
-	FWJzrxsPSqyJQg+dvzhCI4IY3tz6nd0YmOYNUsEb1fP2Si80692TsxBREVPIznH7
-	lWTyV+Kyc7q0kcV6wztMhspOFwEJsIG64asbozq+Wb5ye0+s+4d9lwTpqBbUt4oX
-	wBjc77tIsTvMp5ny49II/EZwUKh6NH6xVc7j8Ot/1RGmNaivNrhossfeHGHaLCQw
-	1RT6ynU7DMGBhgZSRTXA==
-Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com [209.85.210.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2h4kr9t0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 18:44:08 +0000 (GMT)
-Received: by mail-ot1-f69.google.com with SMTP id 46e09a7af769-806004ec379so381611a34.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 11:44:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790966648; cv=none;
-        d=google.com; s=arc-20260327;
-        b=O1/wglzhC+QJlOLjvZIRVr1SRt2oAjV23zsDNWStNHjAFTDV/pKYjKqS0/MafGlwwf
-         vrXuSXgutt3nOCvx503FTOrWAF6dNbOuEUHq/pgj3FTk/MupzQoce0y811Wya+pVomoU
-         B7MYdT4e9DmUl1gV6kMe0SHJF1/2LQyPuvUmq7q5KrwsUZgf9f7XHY3NKNkQZm8hn0GZ
-         gKZbdk8T+eRX+WGKyJaQ8sbQOUOHNjUB8mogKiImy9+qZdYjyszdSvYnsWJ+AYDK+pJD
-         D1r5E/LhW47EY7QwrTNwRtloCWSmO1/zaOPUMLjs62LKCGO7cgQxILod/URCwyMcKz9a
-         kFZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=FQ08Xw8wztndrxT1uOejbuk9Ev7qAfsJYKeKbB6oswc=;
-        fh=MxoLtxOP29Rs4yx6Zol6MMvFDxZy0VzYGmcuyY9FDr4=;
-        b=dx5eNnN7OnGXrKz0qz3YshjvFQL3uDyzQ+4/U0c9V/knDV1R1AIFoKi/l8cxzFwh9y
-         A+HtyRjJsse5dHx8I8VT3EmjzIBw1m/K5bVAb4dTMnOguUsAunH1KP45AMhoq6mNGQUw
-         c20VfYaWa3L/dJopOmCHuNkQU3GEj6PWTkZrdIKKs5g0qG0sdKTZQsrIBwMTIx9mY35j
-         /qnESd0weUbgPv6VQ6XHxnv7x86Wb5ud0rpMd6v6S8obhKTyT91Ag2hq2/aoYYpNBhbn
-         uUvpexTCIUisKfSkjSWWMHL4QdS+84HNhbkcN0BSpMTlXFtDAJ1AAbZ7yypdvIA0BqKy
-         X0jw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="eghDmcSR"
+Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-917d595138fso576826d6.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 12:18:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790966648; x=1791571448; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=FQ08Xw8wztndrxT1uOejbuk9Ev7qAfsJYKeKbB6oswc=;
-        b=L6sIfZv3LUqqgBfd0ywiSmGJp1S8fmCyocp14Q4rKxKTcfxP/I+QiYTyHrGTsznhgr
-         djiqgvzXPDzdWCTts6gHExZ/2Q4OzN+3eYtSDMRDsZI0od0e8M8GDFmgyamlYA5L24AL
-         CVakFnlNSqAYPA8tZr/Fz+nQk3qCUaBw1Z7NsUR2IQ4F6JBfOGkP1ycBvuj0/kqKteuX
-         k7jUsRAnQGYmE+eKCT9KeWtV9dsUBVeXICp0Cj7NpcmNFRo9X8LpYGBzoB+ISTzKXGnw
-         HWMt0bY2VLX9SxY85K7ufds6urNUzoJeozswZ5UDpQj3G2JtAk5MrnEZJ82oab8195bc
-         RvrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790966648; x=1791571448;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790968717; x=1791573517; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FQ08Xw8wztndrxT1uOejbuk9Ev7qAfsJYKeKbB6oswc=;
-        b=NWIKfcjP4H7I81A49khyqeZRwigcho9CyCAGIu9GzkRsqqLCwM2vb2GaUzENhSx1aI
-         sjk7MPDZi1T/0PHeutRAP8eu/qi2S3HHzjtYmUKZos3h7wuWh4CrTZ3jfDvvGx8u2C+x
-         5VNISHX7skLkDFJm2F7gnOWLLt/Ia3UUT3F/MxQjfCtfxmJk51jXKLSuszOMoCZwz9ne
-         M7KF8wlmQDI7wDomsVboVAigjfvpaOI/APWhrQDOEPz6Fs9TpnYs3ooNnFfJKaOIMRB2
-         Gjdyye5v1RGvmJENE5Dh2rv786p+jwFYWIpb5viEFmfItnqlxYit+82sSHpip1vO3rU8
-         13xg==
-X-Forwarded-Encrypted: i=1; AKwUvBwvN07NsVjjC/khxNfoTxRoI3fdcW9PoqtqJbAkrgqtJfCW9rqPhpj+IiYbrMjX3tUgMS+vd50HkcDqweDP@vger.kernel.org
-X-Gm-Message-State: AFuF++kmT3n1KldDJVlhwNpllbnp/wtJuD6iYS5jNzORyzJrCnu+iNBi
-	RYwETK9FHEnHqJMvjTnPPh+5SOHkONf7hpyMTezTg5oB8cfm7ryXuIzUd0XpExXNm6R8uFydxYP
-	Kokldy5AAw6syOSOHDV12r/TgYEHX7yMPDBB3FQOKeBRPS6MsfcwoN6Tx09aq2B25PPF5/P6hh4
-	oJT5L7BNWM2Nb9WUPhELujCE3fDacPOuuWbzz8ly1U1oo=
-X-Gm-Gg: AYBFou3w9UOTxbllLoRuWWHzv4cgNC97MkM4UsuAR2xSnj1wAvLJ31rm2GsN6OtaSiy
-	pzi136wJsgEWZSiN3AelCQx3iIHwsK152mpQFKzCebnD3d+Ettp4xvNEyAIOoGp0+HF5ARLIJtg
-	Vib7qIitw5MetererzlAUdrkF6+r4XJd/6EbSMuqgivx6TXF0A/MYFiThC
-X-Received: by 2002:a05:6820:207:b0:6d8:d3d:de6a with SMTP id 006d021491bc7-6df35c3999dmr2503460eaf.73.1790966647911;
-        Fri, 02 Oct 2026 11:44:07 -0700 (PDT)
-X-Received: by 2002:a05:6820:207:b0:6d8:d3d:de6a with SMTP id
- 006d021491bc7-6df35c3999dmr2503443eaf.73.1790966647508; Fri, 02 Oct 2026
- 11:44:07 -0700 (PDT)
+        bh=K2WGxmgiqbuVWGrMMN7M+HLRy0CqkeslBWbdjt3ajek=;
+        b=eghDmcSRsR6MOItEQd6AKVUmnUtisYNWkhZU9z5cL/DTj8jualhQcRwk33Y9a6UdOp
+         tvXhwTjgyzCx0fzgVXbzdFi5tecJ4g8j+Ch603SxboaDbbIBjWtQ94+hOLawY0Oepn6M
+         gE0DHnHjVDcGbpp1TuPQ32XLwMZKMlVEoFpPMmU3jr2BN3Cj5zSXZLeDt8BGe5XqD3ch
+         Eoeo//GZIU3j9xx4jYjKhOYCPnzOaXAPM+mHc+fWtMxgQkQiHOG/i5By/Xl4OSS8EZhJ
+         FnvaUi62c8p7ZGrWmAb5hpds+Zmkg+wkBfOHxZy/EtLcFLEvNCGBtGIUDAGso76DNv6w
+         gPIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790968717; x=1791573517;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=K2WGxmgiqbuVWGrMMN7M+HLRy0CqkeslBWbdjt3ajek=;
+        b=fOwBtQqxo/C1t/zrwRAn0isFvVku4vqnHJHepHVZufg5UDwbEYElgOvNhdlTgYWDGJ
+         oaY8i8ABHykS1UkAjr/NFBBGb05bUQNOn4NFeu03upr8HcihMn2MMGDay2HmtHy5L5Fy
+         OpIPhKhbl2kFygF67pwD4/g98BR6wf7o1PsnpM9NMdGcLA/AHNVPBpxWvjGuXkdyOwvy
+         HGFI3XdoorcdlY72RJPHMnxA4oXb6jh8e3DBYlpotlqRDK+duliKQdbVNdUPbFGszB2l
+         BidDdnJ/L+HQoMEDw/Kbarq8ixo2KpYAWa/hfXmiJ8PBxJKUi8yF+0OQqDb5z7tbSHdp
+         thuQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxbJDht2uRZf4VUfQIthMO4EAxQCN/obnqVW754QrRWmzawU0q9VfoTp+uWbrF9WJBQSpzjBv3NesTBMCP2@vger.kernel.org
+X-Gm-Message-State: AFq9FYJGhJCS+YSU0JjjogcSora01jKFVcQ1Z9zd9xriVOj9z3Fs53Fr
+	Mn/UGRg5VVBr4OwX174joK0PmjBtFBLR+bICIwa7FolVzH75FTJ1X4/sAYdWxxCls2I=
+X-Gm-Gg: AYBFou2rIdvjm2IAzvLyTPvQ9ol9E+p24lD+NKLKm28EuadWAxekXk4yWeib8fxsRMB
+	y/0auiRFqpYL4eowjgCP9f0PhG8wF/RstNAw0ZRNFj5r6q7DTA1QqSDceeivJCAv7P3AL2SaRWX
+	pEm6Bp9GrJ2OBu3r+YZn6dQIQ+LSkxxxs/Vqw7e+v2vRJUvIMKMVv5XuJMLC5yCxuWmropEa+xd
+	Ajo2NalKA0hZt1Pt+S2bPl7jFEuThpX3NfhBliNAw1H4Apoj3KscnLiFIKlJWKYc1Vqgi509GHp
+	pZn2K3Q7K5340pX3k117Z65edF3HgsUqndBSavS3IZoW0yP7qtVHI+rT7F84L98MgaHlwpI7h3g
+	5bdN6JKDuwOSPEj8r04kDuDtH95tcx6zvCMUoszWBfEqERv5Uv2ZiEOndyS6aaG/wKGe0bdsbQT
+	doJ1cnMDz0XAKvP2cpRRttYH62iDqfdF2f8FvJHrwVHhRlGZT3Tpdjdfqkox/KCLiqhNz2kCXp3
+	pztfVcvFFM=
+X-Received: by 2002:a05:6214:3019:b0:917:a92a:fd59 with SMTP id 6a1803df08f44-9195d1da497mr5054326d6.37.1790968717042;
+        Fri, 02 Oct 2026 12:18:37 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-917e0b67167sm27020566d6.21.2026.10.02.12.18.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 02 Oct 2026 12:18:36 -0700 (PDT)
+Message-ID: <6cad75b3-c4fb-486f-82a2-6613c4dffe32@riscstar.com>
+Date: Fri, 2 Oct 2026 14:18:34 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <CACSVV00GwWvMFDR5QC7h8gonC-9qYbaG958nZHSxtUdWXGG_sg@mail.gmail.com>
- <179096555582.4050.16689195326008531646@gmail.com>
-In-Reply-To: <179096555582.4050.16689195326008531646@gmail.com>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Fri, 2 Oct 2026 11:43:56 -0700
-X-Gm-Features: AclHuK_1A84ea1UaaxIckCd9ugOaiHEjc7V1vuwTcIvjWzRFw0FRu-Vm12FS3cA
-Message-ID: <CACSVV01iV3g4uZ9WnVFuOMEiqdQcOudXXr39+5m8yE0XqC7X1A@mail.gmail.com>
-Subject: Re: [PATCH 3/3] drm/msm/a8xx: Enable CLX feature on Adreno X2-85
-To: Oleg Keri <okerixx@gmail.com>, Bjorn Andersson <andersson@kernel.org>
-Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        regressions@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=G46JgNk5 c=1 sm=1 tr=0 ts=6abffb78 cx=c_pps
- a=z9lCQkyTxNhZyzAvolXo/A==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=pGLkceISAAAA:8 a=j9aERBNnXM6nCbgg6pwA:9
- a=QEXdDO2ut3YA:10 a=EyFUmsFV_t8cxB2kMr4A:22
-X-Proofpoint-ORIG-GUID: V4-aaMCPqTyYsVIV2A0hUY0nbEd-Jt77
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA3NCBTYWx0ZWRfX79peHeFShZts
- HIpFP6vhDyOv256Lsz/NBabyxI1mkTY3XT7FJs1oJ3a6ErfNiN0Xqo5nxtquxF83+jw0pEajo4c
- hGm3zH12EFAoJJeQM+8Gow8n+rHyRoNz19FSSP788qdcB7nmVKXqVyqEOdlja+KqRYhVdx/gY4+
- WIURLdI7XzitG41ihhInY0EKAf4j5fRWQFmyi5rlC2PTUOo/cZJZN+8mWlU3hxw9rOcmEASG47N
- Arch7NYUmzCBk10GDIyfy4eBvM3/jjCyPcDERXgHGq8IGjDK2OA6wgc4vEmvKd8NCJKVbvCu+TX
- XZjXEMxcEYvzvpjA9DzYRqI33jWaurdwJ0krnNCqsytvRPNxXvThnkearsiBL3LEUlAYSH/SU89
- BoS6fZHoaGIhe3640Y9FRjGvnYGsvmgvAIZTwj8Sarxd8ViFvTfThnMTR+B2/qq/TF8csxaX2NM
- A1bTMxvkkyISB5B9TaQ==
-X-Proofpoint-GUID: V4-aaMCPqTyYsVIV2A0hUY0nbEd-Jt77
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA3NCBTYWx0ZWRfX7MmYhQMaEnDn
- Ov0mq0dRBgB4uxJ1ckbaDF2nSyFpTD68rQiXgMIgILiq1SliYcy/pxk0jgLbwXii+1ku32bfqnS
- 1LdYDByVS5N9xJRMZkcqRblctgdQPIo=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_05,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- impostorscore=0 adultscore=0 malwarescore=0 clxscore=1015 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020074
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 0/5] PCI/pwrctrl: tc9563: Introduce support for
+ embedded GPIO controller
+To: Bjorn Helgaas <helgaas@kernel.org>,
+ Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ Linus Walleij <linusw@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+ Bartosz Golaszewski <brgl@kernel.org>, Konrad Dybcio
+ <konradybcio@kernel.org>, Michael Walle <mwalle@kernel.org>,
+ Daniel Thompson <daniel@riscstar.com>,
+ Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>,
+ linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20261002175405.GA189401@bhelgaas>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <20261002175405.GA189401@bhelgaas>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 2, 2026 at 11:29=E2=80=AFAM Oleg Keri <okerixx@gmail.com> wrote=
-:
->
-> On Fri, Oct 02, 2026, Rob Clark wrote:
-> > Can you share `dmesg | grep drm`?  In my case the initrd is missing fw
-> > so gpu is initialized later, I guess when the compositor starts.
->
-> Here it is. The kernel is built without modules and with the firmware
-> built in, so the GPU is brought up right at boot. The GMU firmware is
-> gen80100_gmu.bin from linux-firmware (v5.2.38).
->
-> [    0.620358] msm_dpu ae01000.display-controller: [drm] Using Transparen=
-t Hugepage
-> [    0.621120] [drm:dpu_kms_hw_init:1168] dpu hardware revision:0xc002000=
-0
-> [    0.625910] [drm] Initialized msm 1.13.0 for ae01000.display-controlle=
-r on minor 0
-> [    0.626015] msm_dpu ae01000.display-controller: [drm:adreno_request_fw=
-] loaded qcom/gen80100_sqe.fw from new location
-> [    0.626115] msm_dpu ae01000.display-controller: [drm:adreno_request_fw=
-] loaded qcom/gen80100_gmu.bin from new location
-> [    0.626994] [drm] Loaded GMU firmware v5.2.38
-> [    1.632277] platform 3d6c000.gmu: [drm:a6xx_hfi_wait_for_msg_interrupt=
-] *ERROR* Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 11 timed out waiting for r=
-esponse
-> [    1.642345] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob] *ERROR* Timeo=
-ut waiting for GMU OOB set GPU_SET: 0x4
-> [    1.642360] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] =
-*ERROR* gpu hw init failed: -110
-> [    1.652389] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob] *ERROR* Timeo=
-ut waiting for GMU OOB set GPU_SET: 0x4
-> [    1.652401] platform 3d6c000.gmu: [drm:a6xx_hfi_stop] *ERROR* HFI queu=
-e 2 is not empty
-> [    1.858322] msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb fr=
-ame buffer device
-> [    8.053367] platform 3d6c000.gmu: [drm:a6xx_gmu_resume] *ERROR* GMU fi=
-rmware initialization timed out
-> [    8.053584] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] =
-*ERROR* Couldn't power up the GPU: -110
-> [    8.187443] platform 3d6c000.gmu: [drm:a6xx_gmu_resume] *ERROR* GMU fi=
-rmware initialization timed out
-> [    8.187650] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] =
-*ERROR* Couldn't power up the GPU: -110
->
+On 10/2/26 12:54 PM, Bjorn Helgaas wrote:
+> [cc->to: Bjorn A for arm64 DTS, Linus, Bart for immutable branch question]
+> 
+> On Wed, Sep 23, 2026 at 03:43:50PM -0500, Bjorn Helgaas wrote:
+>> On Wed, Sep 09, 2026 at 04:55:52PM +0200, Lorenzo Bianconi wrote:
+>>> The TC9563 embeds a GPIO controller currently used for per-port reset
+>>> signals.
+>>> Add a driver for the GPIO controller embedded in the Toshiba TC9563 PCIe
+>>> switch providing 37 GPIO lines. The controller is registered as an auxiliary
+>>> device by the TC9563 power controller driver and accessed through the same
+>>> i2c device.
+>>> Please note this series is based on pwrctrl upstream branch.
+>> ...
+> 
+>>> ---
+>>> Alex Elder (1):
+>>>        gpio: tc9563: Add support for the embedded GPIO controller
+>>>
+>>> Lorenzo Bianconi (4):
+>>>        dt-bindings: PCI: toshiba,tc9563: Document embedded GPIO controller
+>>>        PCI/pwrctrl: tc9563: Add GPIO auxiliary device support
+>>>        PCI/pwrctrl: tc9563: Switch per-port reset to GPIO descriptor API
+>>>        arm64: dts: qcom: qcs6490-rb3gen2: Enable TC9563 embedded GPIO controller
+>>>
+>>>   .../devicetree/bindings/pci/toshiba,tc9563.yaml    |  14 +-
+>>>   arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts       |   7 +-
+>>>   drivers/gpio/Kconfig                               |  11 ++
+>>>   drivers/gpio/Makefile                              |   1 +
+>>>   drivers/gpio/gpio-tc9563.c                         |  99 +++++++++++++
+>>>   drivers/pci/pwrctrl/Kconfig                        |   1 +
+>>>   drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c           | 165 +++++++++++++++++++--
+>>>   include/linux/soc/qcom/tc9563.h                    |  19 +++
+>>>   8 files changed, 300 insertions(+), 17 deletions(-)
+>>> ---
+>>> base-commit: 028f86457e822ab9de5b0d6d23efddc1b8b54ae1
+>>> change-id: 20260731-pci-tc9563-aux-66a29d438f60
+>>
+>> Applied on pci/pwrctrl for v7.4, thank you!
+> 
+> I had applied the arch/arm64 DTS change:
+> 
+>    arm64: dts: qcom: qcs6490-rb3gen2: Enable TC9563 embedded GPIO controller
+> 
+> on pci/pwrctrl, but I think that was a mistake because that should be
+> handled by Bjorn Andersson instead.
 
-Ok, now it would be interesting to compare the same from Bjorn's CRD
-vs zenbook..
+I'm only responding to this to provide slightly more explanation
+about what you want to do.  Resetting pci/pwrctrl has no effect
+on me.
+> What I would *like* to do is rework the pci/pwrctrl branch to drop
+> patch 5/5 (the arch/arm64 DTS change) and reorder the Alex's new gpio
+> driver first so it's not in the middle of the tc9563 DT and driver
+> updates:
 
-BR,
--R
+Currently, the dt-bindings commit is before the gpio commit (and
+followed by the two pwrctrl commits).  You want to reorder the
+first two, as below.
+
+					-Alex
+
+>    gpio: tc9563: Add support for the embedded GPIO controller
+>    dt-bindings: PCI: toshiba,tc9563: Document embedded GPIO controller
+>    PCI/pwrctrl: tc9563: Add GPIO auxiliary device support
+>    PCI/pwrctrl: tc9563: Switch per-port reset to GPIO descriptor API
+> 
+> But I don't want to break anybody who assumed pci/pwrctrl was
+> immutable and pulled it in already, e.g., to the GPIO tree.  Would
+> this rework break anybody?
