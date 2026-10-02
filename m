@@ -1,177 +1,169 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f38.google.com (mail-pj2-f38.google.com [74.125.227.166])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AD594611E5
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 13:03:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53EFD496D32
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 13:07:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790946220; cv=none; b=UILZRV51Dyiv6YId+ehcdiniBCzCLcSW+cGJyP12oGJa8zpSq4Xz3jdqV0ngwLwyVnrKsuGjCFMZCzOf38VwKkqx8RUg+CZxlnNRtyyFCTVZWy2xS60dchco5CJ99u5MEUcvMe6Pko7Plh4qgWLVa0And5FWsoJkqYfLzeMvmo4=
+	t=1790946425; cv=none; b=BMRewsu3iGTlKJiegzxzDLexVwBok8H6MafPMjA5F/zRE+3cIJlejqnmf9C/y6pQMek8+iR+YOEcGGe1wJF9nJuq2qYPNFu3wvfqSIDR81skfLjsK2eSNhDrJwxns6KyapR2SmxTTIpzrluclCTLdhUnJRizXiLC+xp87MFEjCk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790946220; c=relaxed/simple;
-	bh=GdZV1LuiuON7wDYiD4V7gQ5eXzvmuO/PlhMtlKThPH0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=avu+7cTtIUG+Uq9QVej0qv2NokIcq+NKBM11ZsdiBdLKOgOTmJVinoPnsHpcDmUbv6LlbD1XJecqSS+To5Xl17M5DMoBCW7+gUBnVVPT+n8yPbuU49FYK90WyM9QVJReOyUyNXTVRsCi5RjMzEaN9JY4JSONjBY7UNI7dzsMUZw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PMr3a9R2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LNBWZq+L; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790946425; c=relaxed/simple;
+	bh=+5GIIt20Q3aLB8bSV44atJq4TQmo8GHA24TKF7BxpuU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sixOVrq2gIukieOv3OGhdHV0bRiLxRE29qn020F5DxVRu+jgY/YI3WXi33Y9s0YOhK/aD9d+KE3B9tYDDbvf55DGujg9vkhpQztXvCFoElIKpTeP/UmCLBrnueTDbUdo3zyLXm/uLRNpuD7xBnLbAd8JUV9WE+l691Yar1zMd7E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=l7nsCaO4; arc=none smtp.client-ip=74.125.227.166
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PMr3a9R2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LNBWZq+L"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6929niVB755026
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 13:03:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Obxc3C1Z/hYxlx7zqZoAvkxQarjrDFjcRi8kNm2R3LU=; b=PMr3a9R2/jC0I8Ne
-	RkA4UERnEleF+snIjoIJu/Yfd/Cr2KRoiIFCWWDtNgo3tpk3rdWY+yrlZ8XfDin0
-	bm+aT1vhRvTeFi635/ZGVa7LIWFcznYFj/0GX6iENVgi7t65kaptsksx2YqTy+q3
-	M86mQ/FLBYco1OZISP6wS13MGW+vKA83WUqsqmNVKSZ+vBel15mpp7llqds5P5/o
-	r9emLq+arSbX/SwKXRsqziK1d6oklAGElILTpBBYvGEFu8alhbLbh/kQMSZs/D/J
-	3t8sXaY5JICo4whxpHAfsGbKgQ6uOOyqcFXvPDhARiBNzTO/ZL17SZRcZ64ipm1V
-	1bwFYw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1t9ac4ev-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 13:03:32 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-33baaba6371so10066331eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 06:03:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="l7nsCaO4"
+Received: by mail-pj2-f38.google.com with SMTP id 98e67ed59e1d1-3a4bd597d68so1814436a91.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 06:07:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790946211; x=1791551011; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Obxc3C1Z/hYxlx7zqZoAvkxQarjrDFjcRi8kNm2R3LU=;
-        b=LNBWZq+La+oKvmwm16yzwsLHrYLkZxpxFmnWSLrRWFduQg8Nsmu27WyqNWNvBjkpX+
-         r0Gtd/hSPpwe7ePbQ9mPcTOqp4uh5CwPrdUv6vOsoNTR0IWHfJ2TJm4wUW+cbP8DXX07
-         K24WRFvNJqv4R8fjvaHQex9fo5YJk3pIkGh5b97NALOUhv6Eq/oCjx8lFkd1IrDl+2ts
-         WggYLJtXOoLNcn++caHHvHFP2wFXi2vX4MDGJpQjNKXgyj8JQeqeJFOMv2Z+twjcBk+e
-         QtPIaQpj89nk9bTGFXa3kyzp7eEYswqFqpkbTGLsnaI678JIOE5sJl+w/IggjZlSFiwD
-         bghg==
+        d=gmail.com; s=20251104; t=1790946422; x=1791551222; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=DY2cwQpDJccuyfdSvxswtfH2eyWbZEDW7sPjJNa4T3k=;
+        b=l7nsCaO4mF9NI93mpB2LEp6EM/NsUOnMJxU/XpB+BhoBKZc9IGPvK2lsISZm0xW3Yy
+         UaZs3nYcpLsrscfoHIpvZ865oNfu/g14f7MiYGjuqG6oT01zh+bPlBdUd9C8Wiiq5/Ff
+         c5eIK3lkDQxVUzY/Z2jlgS3nbw8kRruqEJIMEcQJjqauVMuLbMxhZFYDuEy4OwYMJyUG
+         lyk7401OmanKoGC7ecFvyJc1HyBVxleMKw0lmyUs/N6fGPAoPGCCB3NhPPDLm0q/roxl
+         9NAezPow5TTxLtM1Tcb/XIUgdB8/AK6nLX+V77U6qRKclbg83Qard2SxAsu9enUuv5ZZ
+         m9+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790946211; x=1791551011;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Obxc3C1Z/hYxlx7zqZoAvkxQarjrDFjcRi8kNm2R3LU=;
-        b=dv49pZNcUr/IaYP1vFwO7giN/6UMbOG819SmKinLYrqhiT8rqXYr/qxv05cDm0pq5d
-         fZFfuMa9FH+T0i6cLhx+2/jsypI107w+jClnDokNfTjFTBZVPQVZWTm2GWIkxbmtazSs
-         X9PShvQBPr1o3SznQNp6sV70BbLat54QRzw4SSbT4Eo7m818xFDLsLAcN3oxGYMhb6Sy
-         UL1xgq/82vtNSbyjP3dK6OMPHdUEZp1uZKX/pdUtPdO9qepA2n1khwUf17r4WufDjOaS
-         eevXwhMuphM2VZT1lvJv6q+5+U+Fwhu1gMWtiPU7KQvtbrDFzGkjjaFJ4SdBryUT0mii
-         NC3w==
-X-Forwarded-Encrypted: i=1; AKwUvByodJvzEhB7pI3LiZSTDVpjBxpbWFCs0wJDY65q/gxm433Vq00+vhD3DhhA+NS+IbiUr9fzzgBlowe28d5d@vger.kernel.org
-X-Gm-Message-State: AFq9FYJU0Ac5+ZN32NQv/ueU7Mwm4ohQA9li67gjuXJh3AOxcbzytJ8u
-	n/ZnRPH9cfPs0xGzlTKyNbmSPmSqa4HbUJqiFVR3XkVBW1XjEbYiTy1WqIo/sKEn7+aAEwy3QGb
-	wGsnsM6smpJS2rXX7zw6xvmSDD9qXW2tfIJ94LPnlFNIG/WiRCfTUalDjBZtubIvogUVK
-X-Gm-Gg: AYBFou013WmHPBNYT6Un8G8ZQVNIAOmqQbhVsxlpK41xmhlUO1h+tJObmZZP+kl/Fq0
-	XUSEkfC87FzF0BXXFmLNmuZETGdyPY1Iy8hQB6/2H3gpbFjHOTKrBloAVTyj7xhkiRbdQHUPm+T
-	ckfiyvVkqFX3oCNtE5k3mCvycP+yA5U5SJUuiDYdBU7TU9qn49obZ8KdYsk3KJXcsmeoLQidtZ1
-	EnXMMPt+T705wPNnilTsJyqo/+JovMNvTEGiznF+u9kHXLOLDULhHoeVYoZuIEcs9hwu6LfYJrF
-	F61wx4pEF+NFjmTHq4aXDPcuFWh6+b7Nr0RyN+WR9HT2n5LrnTppOtsEjGNErka/096XgeIWjca
-	C0obx0HScXlcCdMcJsbFs6erjH/LawQd494M8ZEyJcUJQul7ZbP7xt0geI8+c5fmFrAZcZhweZa
-	js2D1/bgrrl9RKDbMfCFc48If9ItWVu80nFQ==
-X-Received: by 2002:a05:7301:3f0a:b0:34e:9147:b862 with SMTP id 5a478bee46e88-34f21994f0emr4212180eec.34.1790946211126;
-        Fri, 02 Oct 2026 06:03:31 -0700 (PDT)
-X-Received: by 2002:a05:7301:3f0a:b0:34e:9147:b862 with SMTP id 5a478bee46e88-34f21994f0emr4212140eec.34.1790946210483;
-        Fri, 02 Oct 2026 06:03:30 -0700 (PDT)
-Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3510752b575sm4217543eec.6.2026.10.02.06.03.26
+        d=1e100.net; s=20260707; t=1790946422; x=1791551222;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DY2cwQpDJccuyfdSvxswtfH2eyWbZEDW7sPjJNa4T3k=;
+        b=fU6ln1yF42Jl60yuyj+iK1T1CsDmC6qmi6W0AwXPT/+vcTh4LXnmS4fL3+PvZy+SoU
+         LbGRk2ZJAnsix49OVCkNxROvqBng470jwtZ2vkIRtEkUPzE3Fmr8sWLZH6rhY0T67qH1
+         GjN6BgQE9Ah7gE3kUIHEroyzEfT+SGW2CA7fzGtYOUvshaIQ1bukJrq9Sy2/vC2JwrY1
+         oGSqCJ5pwIkqkcCHcXOnmInDhFGA7VXVgfLBbIK0Nwl0m24PelCxr3PUUEzeB4soGdY1
+         ztKXiNWMHNUY4240fA6AI6BICvLZGVYLsd6E0C0cmHRUpbAl9bnYLQOKpsdNay/YeB2m
+         QPRw==
+X-Forwarded-Encrypted: i=1; AKwUvBxFHrfe/OhojgqqqVzTzG9uAS+v6zxpeoVfAdX3sFPYy62Y4karR0/Nws83u/QSjLX28OtUzzYQYitk0HnK@vger.kernel.org
+X-Gm-Message-State: AFq9FYKp/6iY/fXEQivXCSdXdi6edGb4EdtUOX+BiuFJcOecrk4I0T8m
+	OsujYYyrx0WuR3+qU/0yu8D6vceIoMspaRggIqHZgFWEo44ljvh22lxn
+X-Gm-Gg: AYBFou1ptfStJRxsIwDA8G7fitk62yNguxKS3z9lY3qzF5NNpkG7NwDALsTiOBg9/9B
+	4HaT59iKH6M0Jm+CeTm0pEWGbY7VdMRPI9dNputdWoXTPVKnqHrF/SUb+gkFHZb8KOGPQLmBsri
+	uArdOegwfGEMELe6YyldB6QPf1bL4MoCFmZZ6VUKVsU4BOswZIXo/57CLX/zDnHFBYyFjjbcyRk
+	qeRM5hsPKYRaSIMM33+1GvWdSR2h4+1icRs2sR17Qcxq0orIQiJD570ATPbzpFt2/khf5t1vhgk
+	vvApZxeTdiYrm3OY9zFXO2UZRoOi6QvEojuxJk8GV8jYjapKoXIJwl7CS49rFTDvATfmusTrC5k
+	E/U96KbaqYDeGdYca1iBpEselEmatPT4LqCb8DuD6K3Zu/KMbz5CEJuZwTEtAXjmcs82zoXewFw
+	N4DUQQx4TLLKKqDDHpSpSJhxNsaEBdAekgE6FN7M/2sfo3soO3GEsvQjw0QLeGSucyrPnmF4DTl
+	j9YVcznzoMDRA==
+X-Received: by 2002:a17:90b:4acb:b0:39e:4c81:6c5f with SMTP id 98e67ed59e1d1-3a6ce95932bmr2677617a91.26.1790946421716;
+        Fri, 02 Oct 2026 06:07:01 -0700 (PDT)
+Received: from DESKTOP-NM9EKIA ([125.134.240.130])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a6cd5d88e4sm4474906a91.13.2026.10.02.06.06.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 06:03:29 -0700 (PDT)
-From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-Date: Fri, 02 Oct 2026 18:33:06 +0530
-Subject: [PATCH v2 5/5] arm64: dts: qcom: ipq5332: add support to get
- watchdog bootstatus from IMEM
+        Fri, 02 Oct 2026 06:07:00 -0700 (PDT)
+From: Joonhoe Kim <26rote@gmail.com>
+To: robin.clark@oss.qualcomm.com,
+	lumag@kernel.org
+Cc: abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	sean@poorly.run,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Joonhoe Kim <26rote@gmail.com>
+Subject: [PATCH v2] drm/msm/dpu: compute the CRTC bandwidth from the state being checked
+Date: Fri,  2 Oct 2026 22:06:56 +0900
+Message-ID: <20261002130656.50577-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261002-imem_restart_reason-v2-5-61703c6362e3@oss.qualcomm.com>
-References: <20261002-imem_restart_reason-v2-0-61703c6362e3@oss.qualcomm.com>
-In-Reply-To: <20261002-imem_restart_reason-v2-0-61703c6362e3@oss.qualcomm.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA1MSBTYWx0ZWRfX5Ux5wqvve2Iu
- 3458qnGA4kLF1XNL7iQCtXnW2fGBGfKfy8vR6luUUpmSKxIQFsEt7cZs+RXGBYQkNvKpxNWkphY
- +hHA6DQKUp6O+A/1Ed4tR065fX2mSBk=
-X-Authority-Analysis: v=2.4 cv=N++8hG9B c=1 sm=1 tr=0 ts=6abfaba4 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=WbeaI0-OC7IQdSlKmUMA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-ORIG-GUID: S9zwqRCLwzvKOv16HScXDUiKtzapaZuP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA1MSBTYWx0ZWRfXzHKpDHfQk18L
- Nn5pPsCIFCJ4nsSyfKAgiXFi2mZkqX8vOyMSosE1cpMuAuqEHa3SsSTN9XKqY6fbXDLz3HjyEMC
- WVEasXBzDmLzPzwBfMIEFYCizSxAbM/e24Wn6+UIrmwWjWITSaThrlt7HQXx+WeHMgcOa8iMTGv
- Q7EBEjUYWw5pajdgwxsEQkaF28Y2abMEQv1nL+hYEiVSxcxCgvWtO32a6O06OB+KvmJ1f+j7Zvy
- FiUxtiArzI2cG8yINeYpi51eESkK8L6FBSceSiaBPSXkPwoxJgi5zagEKmtreZhTcdhvJtVsuIU
- OAfJiAOhO41zLOeAw5TgLRomoH/hUnUEdnwwdhY4xDnOJdqz49DG/zdn97ufFHvhEnlhrqK3d68
- pK+RsP3eVITSFEcv8li1ohkPMzurJxo9p4mJxJksXfYLyusbUXQ7HuYl//Wdhe8heVB9S2lpwox
- yW5Wt5p3IuHERxpcePA==
-X-Proofpoint-GUID: S9zwqRCLwzvKOv16HScXDUiKtzapaZuP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_03,2026-10-01_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 adultscore=0 suspectscore=0 lowpriorityscore=0
- impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020051
+Content-Transfer-Encoding: 8bit
 
-Add the "sram" property to the watchdog device node to enable
-retrieval of the system restart reason from IMEM, populated by XBL.
-Parse this information in the watchdog driver and update the bootstatus
-sysFS if the restart was triggered by a watchdog timeout.
+_dpu_core_perf_calc_bw() is called with the new CRTC state but sums
+plane_fetch_bw over drm_atomic_crtc_for_each_plane(), i.e. the planes
+of the committed state. When the CRTC is re-enabled (DPMS on, system
+resume) the committed state has no planes attached, so the check
+computes bw_ctl = 0 and the display runs without an average bandwidth
+vote on the MDP path until some later commit changes a plane -- which
+may not happen for a long time on a static screen such as a lock
+screen.
 
-Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Seen on a Lenovo TB323FU (SM8850) through the interconnect and DPU
+tracepoints: after DPMS off/on or s2idle, dpu_perf_crtc_update reported
+bw_ctl=0 and qnm_mdp was left at avg_bw=0 (peak 800000) instead of the
+3728793 kBps voted before, until the next mode change.
+
+Iterate the plane states of the CRTC state being checked instead.
+drm_atomic_crtc_state_for_each_plane_state() falls back to the current
+plane state for planes that are not part of the commit, so the result
+is unchanged for commits that do touch the planes.
+
+With this, bw_ctl is 3728793600 right after DPMS on and after resume.
+Only tested on this device.
+
+Fixes: c33b7c0389e1 ("drm/msm/dpu: add support for clk and bw scaling for display")
+Assisted-by: LLM
+Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/ipq5332.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Changes in v2:
+- Drop the code comment that repeated the commit message. [Dmitry]
+- Link to v1: https://lore.kernel.org/all/20260929130633.977-1-26rote@gmail.com/
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq5332.dtsi b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-index 3e10f45e182e..c1b083624696 100644
---- a/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-@@ -496,8 +496,16 @@ qpic_nand: spi@79b0000 {
- 		sram@8600000 {
- 			compatible = "qcom,ipq5332-imem", "mmio-sram";
- 			reg = <0x08600000 0x14000>;
-+			ranges = <0 0x08600000 0x14000>;
- 
- 			no-memory-wc;
-+
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			restart_reason: restartreason-sram@7a4 {
-+				reg = <0x7a4 0x4>;
-+			};
- 		};
- 
- 		usb: usb@8af8800 {
-@@ -585,6 +593,7 @@ watchdog: watchdog@b017000 {
- 			interrupts = <GIC_SPI 3 IRQ_TYPE_EDGE_RISING>;
- 			clocks = <&sleep_clk>;
- 			timeout-sec = <30>;
-+			sram = <&restart_reason>;
- 		};
- 
- 		apcs_glb: mailbox@b111000 {
+_dpu_core_perf_calc_clk() walks the planes the same way; it is not
+touched here since I have not seen a wrong clock vote from it.
 
+ drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c | 17 ++++++-----------
+ 1 file changed, 6 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
+index fea173e37464..9fa55904dba1 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
+@@ -54,24 +54,19 @@ u64 dpu_core_perf_adjusted_mode_clk(u64 mode_clk_rate,
+ /**
+  * _dpu_core_perf_calc_bw() - to calculate BW per crtc
+  * @perf_cfg: performance configuration
+- * @crtc: pointer to a crtc
++ * @state: the CRTC state
+  * Return: returns aggregated BW for all planes in crtc.
+  */
+ static u64 _dpu_core_perf_calc_bw(const struct dpu_perf_cfg *perf_cfg,
+-		struct drm_crtc *crtc)
++		struct drm_crtc_state *state)
+ {
+ 	struct drm_plane *plane;
+-	struct dpu_plane_state *pstate;
++	const struct drm_plane_state *plane_state;
+ 	u64 crtc_plane_bw = 0;
+ 	u32 bw_factor;
+ 
+-	drm_atomic_crtc_for_each_plane(plane, crtc) {
+-		pstate = to_dpu_plane_state(plane->state);
+-		if (!pstate)
+-			continue;
+-
+-		crtc_plane_bw += pstate->plane_fetch_bw;
+-	}
++	drm_atomic_crtc_state_for_each_plane_state(plane, plane_state, state)
++		crtc_plane_bw += to_dpu_plane_state(plane_state)->plane_fetch_bw;
+ 
+ 	bw_factor = perf_cfg->bw_inefficiency_factor;
+ 	if (bw_factor) {
+@@ -131,7 +126,7 @@ static void _dpu_core_perf_calc_crtc(const struct dpu_core_perf *core_perf,
+ 		return;
+ 	}
+ 
+-	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, crtc);
++	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, state);
+ 	perf->max_per_pipe_ib = perf_cfg->min_dram_ib;
+ 	perf->core_clk_rate = _dpu_core_perf_calc_clk(perf_cfg, crtc, state);
+ 	DRM_DEBUG_ATOMIC(
+
+base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
 -- 
-2.34.1
+2.43.0
 
