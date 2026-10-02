@@ -1,123 +1,216 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f12.google.com (mail-ed2-f12.google.com [74.125.228.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E30A4AB1D0;
-	Fri,  2 Oct 2026 13:55:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 475CF4746A4
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 14:00:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790949336; cv=none; b=I0lRDAim1vPNzmtKHLKuPDpZy3lgazKbYpIVLLbWclmmjZ16XpeeMsLZXtKaY0mP7E0tjLy+l9W9f4U/s/LqydoT1ILxTM6SLeML/ax89UeLiS+blAtidAxltsoVYd1dqNx+t2isMmt7Vq+t6rPjydM8AY0QdwJAqlTYAiCpag8=
+	t=1790949658; cv=none; b=SRLoVgNnrWC+tZg38ljxWNEcgEpAdNzB0WJDKWWwxME38dTCb2jBNV7QyRZlr+1osDyctSTaDEx4Y/ivmUlHqYlN9NFM4FI6z3eqlqUjT6saL2gGdhqUPQDnNVqJf312Ni49Kh1tQlP7PTC0U0Zc1dOwzRp/pcoF9PM5/ngPIWM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790949336; c=relaxed/simple;
-	bh=2kzDVsObb9Ct7NqxEGSKl9YO7zCZZOw64eoh61FFWFE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fMO94VCZuuUi96fIzz6KlAW/5Qve/9BSRgQB/I7ZKdVCuqe/q+pr4i7qTKzZi8SCUtUDyaklgjbqwowsxEhnsXZPQs6YgxDnFQg+Uq4CykegZRJ/pjFPU8BTiOQBpPe2iw6GHa7GbGy6/IXu47k0G8Ly2/tLJEKu5vAevq6MdhI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pW6YdM+W; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1790949658; c=relaxed/simple;
+	bh=DRAvvI0YSWAV4/cc0GFAC87VP0z9Cqrr3WrGE8zAh7U=;
+	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Cc:Subject:
+	 References:In-Reply-To; b=eblyZ133PwLESNVqjXu/NLre6HiSxMcZJXrVPTR+dgWNoFbqR7fFN+dgIrARWwdb6d3DXqJo60hEBClbzBNeDzwAf3gd1BrYZ1a5e2IYp1u2dxse5lJqU/0ncxtBtuVmHu4yS8pIztg24cYdtwfnj7K0cm4y4GdNd1dXE7p9zM4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=HP1HFJ28; arc=none smtp.client-ip=74.125.228.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pW6YdM+W"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AE8A8C2BCF4;
-	Fri,  2 Oct 2026 13:55:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1790949335;
-	bh=2kzDVsObb9Ct7NqxEGSKl9YO7zCZZOw64eoh61FFWFE=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=pW6YdM+WvVGykGKjKzhZolfJ54Qxctosma1cJ9ajYvWBVQv9QpZF3dEzMR5tC4DAn
-	 y0QT4fF3PmovpcqTlriTD9U6K8W7fpUHVm/FMl3u7+P1qGjKsKQ7PNHZ6wofo21Wzl
-	 6DYvY8e8TwSJ3TCbYdzVKAfO8u+IxKY3zBtaQ8hlfcseXbZvZqGuQMXpuS4jxZT3Wr
-	 IZmS9tzWQz7VwgJToRTWKGfSnh2kIinfZtKMHLlMugBrgQkvUK60KjTxuq99L8tB5i
-	 9G33drQ9Lt+OX7BfEirt0ir9Hz4rhaQGqWsJVp2G3VKquoJKwbo795jkW8DYICoGJi
-	 9mkfcjesF0oeA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D1C9CA5FC4;
-	Fri,  2 Oct 2026 13:55:35 +0000 (UTC)
-From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Fri, 02 Oct 2026 10:55:35 -0300
-Subject: [PATCH] clk: qcom: mmcc-sdm660: enable the parent when
- pclk0_clk_src changes rate
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="HP1HFJ28"
+Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a996c8adf3so12297231a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 07:00:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fairphone.com; s=fair; t=1790949652; x=1791554452; darn=vger.kernel.org;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=FhuCqWE46Oix2LB6rL8UWqZIc/9YnixRqUY7dkp01xw=;
+        b=HP1HFJ286+rFhqKsPXbzEjuG2iTGCEU7Pc8pl0wGKIMPlnHPOKKZdt/ZyMrybieTql
+         r3Of7ozbjk1msl8k4BX+kLQRdbIz7MX6Yg6BPs9z+czkTNwn/G8wgiQy9zE9RpnevYqB
+         h/EcBngPFSQqzDU2J2XRx9LVVwdqRMqtNknaMZ7zFhBu8e1W3qXNxSP2A3Yio1SSnh9F
+         i9PGlj+Vga4n/fDU2yGUkyfP2MpWcZwnA0gWOpWLtSbodM2E8XpYAzy4GXhsBPQETnKe
+         Hd1VdPShdQKbCOngVDI36FS14nxUpt4M+hSkx8ImxGtxZPANj/yxURLh2IDP48mF0CRU
+         9Vfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790949652; x=1791554452;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FhuCqWE46Oix2LB6rL8UWqZIc/9YnixRqUY7dkp01xw=;
+        b=MJnYACMiYiEc7fIXDSIl9wIHIUc6+XNpWJxHXQrdz3tEt4Oo262lBkDWYpL5//kiuX
+         0Qh3CiohWg+lL/td0lnpcOUEs0tl+QFlxagIDNc+MMfdOOx7dxWEMcMwFqNQVYq+suwY
+         xaoZgzP02qFUuYPoQZS7gcHk3sNCJkGB+3qGElTh6aebiyOyB9PsPq/Ty078sz/HB6mI
+         VUKvmvyd6r2etk/EXyEET1ILzaNGGsPp4tmfCAlq718jD7PnzDIYFPOIXCiysla2oPYw
+         QOS1ediMnuuzx6NvHUOTTiFR1SmhaBfJRZjJUQkxZ5OTcauPjFFwFTLhXen2+0iVAKeP
+         NsuQ==
+X-Forwarded-Encrypted: i=1; AKwUvByd/n5sug2INGIWFq3We04fWasEbAqEHOExVW0t8FZOceBtoROY5ohCFGqb5zt11DUd/XQ7HSR7nSF9Uj1N@vger.kernel.org
+X-Gm-Message-State: AFq9FYJOM5of5EvoSlFsAr+EfWgzMWOlU9MQNg2Xl7qToBuFkTo5S3xE
+	ucIAq9H7+dmj64DTHrQrJSjNPgW4dX7yhujH2SIkZePI1FAyRLL0s1Prtjy0A7nv+Rc=
+X-Gm-Gg: AYBFou3LoH1hizvxSy/O8cxHtPBqX30e/ToMtlL3C85HfUyIJM7zARL/2p62g7oB0ON
+	gJEOj5zaT+hgzeDpPYP0ORaZ0uPSMw0YGNoSBtW7ZBg6kD+EG1QxrBAKq93OCPAxMWtHB37OIaX
+	jBVCk6Ro2tnV7asUEis0b7rciHisyZ+MNQ5/7vwtbDCsLBlpDEpW7+jV47+tVanBVIAw/1P1CAW
+	m2FPVgZlJ9VotD8kobN3q91KusO8V5ZMnwRz0LOwwxG9j7YuxMgeVvw0E1dHlctWtUcMbT8YTFh
+	NLS7/x3PPcnTCiIlbOY63b5y8H3Hh9BM3xgmCk9IEFturpnu4GjUVdcowfdHfycicbakFdEULo0
+	0SHjh8wnUXutLpRixfY5AbSyYI/ljBnMIb2WV41BmDDrCuTqWWCUmS9JQvKSVpLDPMyKI4hLzUe
+	0W+B1g8ApiS64CpiVF5sJt8u2CkmT4QUbT+bFGSQkXNRWoGGA2eZaLz4LEBgoX6V+wOEVCJ0p74
+	5wp6iB0CAz+zLnFo5QU4MTCAVncXZylQV58oZCJAHw=
+X-Received: by 2002:a05:6402:3228:b0:6ac:7d0c:2cb8 with SMTP id 4fb4d7f45d1cf-6af9e342728mr1802843a12.30.1790949651896;
+        Fri, 02 Oct 2026 07:00:51 -0700 (PDT)
+Received: from localhost (144-178-202-142.static.ef-service.nl. [144.178.202.142])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6af9d8a5361sm944608a12.21.2026.10.02.07.00.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 02 Oct 2026 07:00:50 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261002-sdm660-pclk0-parent-enable-v1-1-d6ff889144e4@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CMBBA0auQWTtJW5MCXsW4KNNBR7CQDhgTw
- t2tuPnJ2/wNlLOwwqXaIPNbVKZUYE8V0COkO6PEYnDGeWuMQ40v7w3ONA6lIXNakFPoRsbGujO
- 1gWobGyiDOXMvn2N+vf2ta/dkWn5H2PcvDq8Y634AAAA=
-X-Change-ID: 20261002-sdm660-pclk0-parent-enable-8123c9ac71d8
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>, 
- Martin Botka <martin.botka@somainline.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Fabricio Akio <fabricioakio@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790949334; l=2042;
- i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=UJ72pjAY0/NNTs1ZuCPwUI9TXq4wpNAkoyf3mD77/xY=;
- b=q2cfb5tDrUIFY55Z+7QVGgYP4ymbCdvNt/yDM1AvYKXiImd30fBS1SfmZrBLMZyH6mVSYOmVz
- jTqdTQ9cP7QB6CEHYpRhwCdDPyOpOji7iXh75dE1bDQt8n7omv5DrEI
-X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
- pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
-X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
- auth_id=1076
-X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
-Reply-To: fabricioakio@gmail.com
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 02 Oct 2026 16:00:49 +0200
+Message-Id: <DLUENYYQNULZ.BMYEQYCFZ258@fairphone.com>
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Rob Herring" <robh@kernel.org>, "Luca Weiss" <luca.weiss@fairphone.com>
+Cc: "Neil Armstrong" <neil.armstrong@linaro.org>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Bjorn Andersson" <andersson@kernel.org>, "Konrad Dybcio"
+ <konradybcio@kernel.org>, <~postmarketos/upstreaming@lists.sr.ht>,
+ <phone-devel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-arm-msm@vger.kernel.org>, "Krzysztof Kozlowski"
+ <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/4] dt-bindings: display: panel: Add Novatek NT37705
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
+References: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
+ <20260918-fp6-panel-v2-1-6695c4008920@fairphone.com>
+ <20260918213518.GA2337779-robh@kernel.org>
+In-Reply-To: <20260918213518.GA2337779-robh@kernel.org>
 
-From: Fabricio Akio <fabricioakio@gmail.com>
+Hi Rob,
 
-pclk0_clk_src is fed by the DSI PHY PLL, which
-dsi_pll_14nm_vco_set_rate() resets and only clk_prepare() restarts. The
-DSI host sets the link rates before it prepares the PLL, so the RCG is
-updated against a stopped source, and if it is enabled at that point
-the update times out:
+On Fri Sep 18, 2026 at 11:35 PM CEST, Rob Herring wrote:
+> On Fri, Sep 18, 2026 at 04:40:04PM +0200, Luca Weiss wrote:
+>> Novatek NT37705 is a display driver IC used to drive AMOLED DSI panels.
+>>=20
+>> Describe it and the panel in the Fairphone (Gen. 6) (BJ631JHM-T71-D900
+>> from BOE) using it.
+>>=20
+>> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>> Link: https://lore.kernel.org/r/81a3c207-4d8f-490f-8e2a-6f3f4c2acd35@ker=
+nel.org/
+>> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+>> ---
+>>  .../bindings/display/panel/novatek,nt37705.yaml    | 72 +++++++++++++++=
++++++++
+>>  1 file changed, 72 insertions(+)
+>>=20
+>> diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt3=
+7705.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt37705=
+.yaml
+>> new file mode 100644
+>> index 000000000000..1c796599f6fc
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.ya=
+ml
+>
+> Did novatek,nt37705 get dropped as a compatible, but the filename=20
+> remains?
 
-  pclk0_clk_src: rcg didn't update its configuration.
+That's how himax,hx83112a.yaml and himax,hx83112b.yaml are as well,
+which I have upstreamed before. I *really* don't have strong opinions
+either way, but as in the email referred to in "Link:" the versions I
+have upstreamed before have been accepted without issue, and even
+discussion pointing in the way I have done things here.
 
-Seen on a board whose simple-framebuffer node lists the pixel clock:
-the RCG then reads enabled at msm's first modeset.
+>
+>> @@ -0,0 +1,72 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/display/panel/novatek,nt37705.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: Novatek NT37705-based DSI display panels
+>> +
+>> +maintainers:
+>> +  - Luca Weiss <luca.weiss@fairphone.com>
+>> +
+>> +description:
+>> +  The Novatek NT37705 is a generic DSI Panel IC used to control AMOLED =
+panels.
+>> +
+>> +allOf:
+>> +  - $ref: panel-common.yaml#
+>> +
+>> +properties:
+>> +  compatible:
+>> +    contains:
+>
+> As sashiko reports, "contains" is too loose.
 
-Set CLK_OPS_PARENT_ENABLE so the core prepares the PLL around the rate
-change, as dispcc-sm8250 does for its pixel clock sources since
-commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel
-clocks").
+Will fix, seems to also be an issue in the hx83112a/b yamls.
 
-Fixes: 5db3ae8b33de ("clk: qcom: Add SDM660 Multimedia Clock Controller (MMCC) driver")
-Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
----
-Tested on the Motorola Moto X4 (SDM630, payton) with the sdm660-mainline
-7.2.y tree, sdm660_defconfig, DRM_MSM=m: without the flag the warning
-fires in most boots, with it never. At the stall the RCG reads root-on
-and the PLL stopped. With the display built in, clk_disable_unused()
-also prepares the PLL under this flag, and some boots then log "DSI PLL
-lock failed".
----
- drivers/clk/qcom/mmcc-sdm660.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/clk/qcom/mmcc-sdm660.c b/drivers/clk/qcom/mmcc-sdm660.c
-index 9f8b8e29fa0f..bc95d0de75a3 100644
---- a/drivers/clk/qcom/mmcc-sdm660.c
-+++ b/drivers/clk/qcom/mmcc-sdm660.c
-@@ -984,7 +984,8 @@ static struct clk_rcg2 pclk0_clk_src = {
- 		.parent_data = mmcc_xo_dsi0pll_dsi1pll,
- 		.num_parents = ARRAY_SIZE(mmcc_xo_dsi0pll_dsi1pll),
- 		.ops = &clk_pixel_ops,
--		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE,
-+		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE |
-+			 CLK_OPS_PARENT_ENABLE,
- 	},
- };
- 
-
----
-base-commit: 9f24d789f03b22941b905ded43cb5ff8eea9ce62
-change-id: 20261002-sdm660-pclk0-parent-enable-8123c9ac71d8
-
-Best regards,
---  
-Fabricio Akio <fabricioakio@gmail.com>
+>
+>> +      const: boe,bj631jhm-t71-d900
+>> +
+>> +  reg:
+>> +    maxItems: 1
+>> +
+>> +  vddio-supply:
+>> +    description: I/O voltage rail
+>> +
+>> +  dvdd-supply:
+>> +    description: Digital voltage rail
+>> +
+>> +  vci-supply:
+>> +    description: Analog voltage rail
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reg
+>> +  - reset-gpios
+>> +  - vddio-supply
+>> +  - dvdd-supply
+>> +  - vci-supply
+>> +  - port
+>> +
+>> +unevaluatedProperties: false
+>> +
+>> +examples:
+>> +  - |
+>> +    #include <dt-bindings/gpio/gpio.h>
+>> +
+>> +    dsi {
+>> +        #address-cells =3D <1>;
+>> +        #size-cells =3D <0>;
+>> +
+>> +        panel@0 {
+>> +            compatible =3D "boe,bj631jhm-t71-d900";
+>> +            reg =3D <0>;
+>> +
+>> +            reset-gpios =3D <&tlmm 12 GPIO_ACTIVE_LOW>;
+>> +
+>> +            vci-supply =3D <&vreg_l19b>;
+>> +            vddio-supply =3D <&vreg_l9b>;
+>> +            dvdd-supply =3D <&vreg_oled_dvdd_1p2>;
+>> +
+>> +            port {
+>> +                panel_in_0: endpoint {
+>> +                    remote-endpoint =3D <&dsi0_out>;
+>> +                };
+>> +            };
+>> +        };
+>> +    };
+>> +
+>> +...
+>>=20
+>> --=20
+>> 2.55.0
+>>=20
 
 
