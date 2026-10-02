@@ -1,350 +1,317 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+Received: from mail-43102.protonmail.ch (mail-43102.protonmail.ch [185.70.43.102])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D3AC2773D
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 00:06:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.8
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790899598; cv=fail; b=tQNprlnXezrJ/0l8/wn5a3vmAeT0G0uhH6r5U6RWJd7ewpEy/dS7vFHDnjZk8sx2sAz1w7kuB71JWpUWD+D9voLud9R4I5Xy8mFz3vpVD4M3WGbrhJMEVFrhm4sEA2fuFuW0wtlounjm560Q7z27Jk67ByAslXVbq1aCUGe3B9A=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790899598; c=relaxed/simple;
-	bh=TFelHBoKKh2vNTUz3VKyjLgCoaofX7iMZBKrWPfNab0=;
-	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=lmSxmJ2v183lmpiWHt5qQ+IobBq9vAmiMjrFW/DdDdDy4lRl01PZ8PB6q6FX8KifGpcVYQ/f+qcRiWL3LfLLAcCjmx22+VjNySsmrPsRdKwaNHVDx8kNku9ZFEX0zgji1KUtt5xZv+rgDhL95SeQQ7zpKeu5KbZG3Fi86LUCzO4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lT10I5zs; arc=fail smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D92C23B634;
+	Fri,  2 Oct 2026 01:33:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.102
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790904829; cv=none; b=piSJQEngpGKNw/DkFUNaBhezRsjBC3RVAqL6h0FF5rHJQRkBebHaxHabehDDwJTD/HtsAtw1KQDBfzPrK5rTRhYlrd+USMIbahw0RDnJmuvwqiNJjnuCBR3NGBPheTeLeFjRDXV7XGVOEQYE5S/jbYs3wUGFe12d3H88cGfqQzI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790904829; c=relaxed/simple;
+	bh=4sDWAtJ/L/pjnkSRoFWyDQbVhQFjhk/mY25VGJ7UyJE=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=jCCFAfn9YP5ziEfm6l0yrpLzbJQQNDSvMK5tdrsOnGm5cPJGpK4DSNWHSSmSNwBAJwGD+10TYKSXX+j5zkMlFEswsA8LUN9sDcAeLR9yX6MybhFiNSchi8Vl/zJUPQt6qrRMORCCbeE73Zvqcn37QIWS3Oemx3a4xQ8BXrhWcxw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=Nx7e/tt8; arc=none smtp.client-ip=185.70.43.102
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lT10I5zs"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790899596; x=1822435596;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=TFelHBoKKh2vNTUz3VKyjLgCoaofX7iMZBKrWPfNab0=;
-  b=lT10I5zsVMwhQWWUUvGlXREnNznQ/VEYezp3gdoelFeaiBbG7+YtEbAK
-   8ElP45jjVB3+R2O7znJDjIs86+CX7KzGdaGhfC5srhQQUIEGyoGJvDV41
-   8b8c3FmQEajwfhhivO4HEnCpZxDml71QJh3pawcwhZ3BYB6rqsBWT6r32
-   soslLYm5Z3dp6HG9JIJeCft5D3rMi4TVq6cSkM2FHA4IGBgp1oHE73qxA
-   e6xCJW75sn/9fkhI9h4KSiv/YORjk7IlrTLGFX8fjpzD+X3yBLX33DPV1
-   mrwTkvduV/T+5ubfZjakK4ae4kYwFDvMDdIU1HYSMXI4F7WqgyFZYgI9N
-   w==;
-X-CSE-ConnectionGUID: ma3chmbCS3y4IfPMjkEUPA==
-X-CSE-MsgGUID: 0Z5bVMOcTiincEAKqE1q5Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="109155790"
-X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
-   d="scan'208";a="109155790"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 17:06:36 -0700
-X-CSE-ConnectionGUID: CoiVXfoyQ3qRQYfU/uG1DQ==
-X-CSE-MsgGUID: cPceU5+ETq2VV49hBfm6EQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
-   d="scan'208";a="279885119"
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 17:06:35 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Thu, 1 Oct 2026 17:06:34 -0700
-Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49 via Frontend Transport; Thu, 1 Oct 2026 17:06:34 -0700
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (40.93.195.71)
- by edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Thu, 1 Oct 2026 17:06:35 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EU7GxtQhbsVY5v0t62s9LVzMrlC/imqEmNBZgOFhma7Id+pGWfiLrTUUE+Fd4PT52as+J8/mR1xwPcl2LLeaHYNF1AfkJ6oLI06aQ+Vbsmd2Z/COn8gZPDmBIyeGUgREyFWFZLO+0GQ8qHsCFhz4Nnn2lu0TorkpNFSiTN4ZtDNQ2yC8rLcvsl93GCK/X8nqywv54fmasPFOE8RWc4/diHUqmn8N5/ZHkDqOmpG3l0zO0J/h18vOl/aYzC68MzOqgC+3vTZo68H4QT2QMjKorW9KNLYIoCOa99Zz0d227mRdH38Jmmcxwh8aNesSkKW3xtffHuOR+PN6Ye+uI2i6Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EfrkflQhPViZU1sdP4rlBNcQb/W+bw8zBV42dfRRCQk=;
- b=Ui+D0u93EomqwnO5y+kMp9U5TFg8WY+wmwR5HoVQTduY2DX17whp+TQ/dZALE/7gq1VSuDN+wz5RtLlbVjxdGCRsscauMjTlMMp8sd8/OlOPIQu/3nijOYnpTu3MTladhoaYKcTH3za9oByCeljf9eXqrc0Ol8Svws+IcB9BfSQJpbBqI3yRdg1rt64E6IKmY/T/Nunzu5//HgMx7y85SPTeaphHYFX9UlF5ok9AGi/kCTJYm9AzfqO9p/LuPNmWAK5j/3wCUogvtVmaVIcI67TU7ANlZQXMzpG2BHZNKrqe0BLFS19brl9NN0GQQqXoC1oGRrPZdgskLotRbD3OHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from CO1PR11MB4787.namprd11.prod.outlook.com (2603:10b6:303:95::23)
- by SJ0PR11MB4942.namprd11.prod.outlook.com (2603:10b6:a03:2ac::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.18; Fri, 2 Oct
- 2026 00:06:32 +0000
-Received: from CO1PR11MB4787.namprd11.prod.outlook.com
- ([fe80::e7eb:a872:53d1:21fd]) by CO1PR11MB4787.namprd11.prod.outlook.com
- ([fe80::e7eb:a872:53d1:21fd%4]) with mapi id 15.21.0472.016; Fri, 2 Oct 2026
- 00:06:32 +0000
-Date: Thu, 1 Oct 2026 17:06:30 -0700
-From: Matthew Brost <matthew.brost@intel.com>
-To: <intel-xe@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-CC: <freedreno@lists.freedesktop.org>, <linux-arm-msm@vger.kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Alice Ryhl <aliceryhl@google.com>,
-	Anna Maniscalco <anna.maniscalco2000@gmail.com>, Antonino Maniscalco
-	<antomani103@gmail.com>, Boris Brezillon <boris.brezillon@collabora.com>,
-	Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, "Dmitry
- Baryshkov" <lumag@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>, Liviu Dudau <liviu.dudau@arm.com>, "Lyude
- Paul" <lyude@redhat.com>, Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>, Marijn Suijten
-	<marijn.suijten@somainline.org>, Maxime Ripard <mripard@kernel.org>, "Randy
- Dunlap" <rdunlap@infradead.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>, "Shuah
- Khan" <skhan@linuxfoundation.org>, Simona Vetter <simona@ffwll.ch>, "Steven
- Price" <steven.price@arm.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?=
-	<thomas.hellstrom@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v3 7/8] drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
-Message-ID: <ar71hn8WpDHD8cHH@gsse-cloud1.jf.intel.com>
-References: <20261001220632.3190896-1-matthew.brost@intel.com>
- <20261001220632.3190896-8-matthew.brost@intel.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261001220632.3190896-8-matthew.brost@intel.com>
-X-ClientProxiedBy: MW4PR03CA0275.namprd03.prod.outlook.com
- (2603:10b6:303:b5::10) To CO1PR11MB4787.namprd11.prod.outlook.com
- (2603:10b6:303:95::23)
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="Nx7e/tt8"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1790904824; x=1791164024;
+	bh=bwdVoO/JaZaKb2gaBUMBal3GCHRytO4hTX9JqR1OPg8=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=Nx7e/tt8xl+Ddl+z5G5uvFt0xEI8PcFtLg8jyzVOVyYXh5z+ecJdys0R88CkfmH0O
+	 u1RQ0p7EItVYfvTEm22NDaNHEcLJM2gpCTAN/Asq1npTND/Ue/p7Jkba4i5Gfidlz9
+	 PVjznWoNsI/08eGF41o1DJqEXw3ruR8FGFR4EGhUlYv3rF6Gr5/yhOQDTYwrd1K9kQ
+	 Jt+sGAn18Cx/0eIZIhN4M5Nb6BQ6/8GwldGND9Y3nrsQNNTHAzeSgb3StovbvyPOQt
+	 sPtvOTx+4ky9m5KA2FQXIBXQTiqQ+txc8q39v99L4n5G9EG09vzdG3YjBfk+W7avPS
+	 0forwlxX7cb9g==
+Date: Fri, 02 Oct 2026 01:33:39 +0000
+To: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Luca Weiss <luca.weiss@fairphone.com>
+From: Alexander Koskovich <akoskovich@pm.me>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Akhil P Oommen <akhilpo@oss.qualcomm.com>, Alexander Koskovich <akoskovich@pm.me>
+Subject: [PATCH v8] arm64: dts: qcom: milos: Add Adreno 810 GPU and GMU nodes
+Message-ID: <20261001-milos-gpu-dts-v8-1-98b14721b7e4@pm.me>
+Feedback-ID: 37836894:user:proton
+X-Pm-Message-ID: 23906068809144bad6617780e907df8be1132271
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4787:EE_|SJ0PR11MB4942:EE_
-X-MS-Office365-Filtering-Correlation-Id: 279f415b-5f2d-41d1-dda0-08df201903cd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016|23010399003|10067099003|56012099006|4143699003|5023799004|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: Rsomq6O7qoMf8aaDAM/BupeT7STp9IcT8xaHJePBDmxR09SCiN+7KQ/tL67WtAtKMy/pmxoWpgbd8sO7mbH2C/HAgyBhWZb21lK4muMX2m3HccdaX7pAj/hVxHrvcKbnPJNRO/31cAnsHuiMorajaHKUsfIXU0tV3/avA+xu8sXBgBWDf2GsojA348JwNKUCckl2BgZ6vsWrOokOQxIIab/J76pKOVxELhEgHK8nvzSFeIcLndZptwZS3y/osQAUJBe1TOxJEvo8hdk5vJTLPwwdPerqj+l3qf0V3IOwjo/X/jUzjAaw9/awU/y739v4cshjY8zn8XuPsfMHd+2MHiGKJ9xu6QforexiG3ipHQ3miEmvgBquloAWIDTJSICpqHFSXSeWBynFVk8E4qlVcYShQd1rSRSax83AsX5JBUGmeTVQb3Gob/hSOR95b16ufV4ySig1kioScM6UJhpuLV8PWIlzFR3qoF8Xv/7Ip6TguGzNCzwVW/Fgpbf3/8A3UZykY0iArxd/HEu2VC83uCFIHUM7Eo2mEaGouVaVr2TiyBJfH1Nsq6HSNpqr4vFHXjaGbIQuAIsT0vcolB1VAjb0PjMFl987ez39vIHqlNRSfe2nje81hqgZoH0LuN9HXGpfc3rX5WRVQtM2PlhUwQ5FWffUbjnhVnGJDyXlqe0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4787.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(23010399003)(10067099003)(56012099006)(4143699003)(5023799004)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?IMI7RTmhaU9HHvXpeVwsZ9341SeiT5J0ONFg3BCnVwH0LEXBX6UxTe3iyi?=
- =?iso-8859-1?Q?ZF0B8hS+9uTJoW6XU2v1uX2cUIfWjABQLIEUS/bJJ2rY508worbYnFuvps?=
- =?iso-8859-1?Q?qLyJEkY0JD7AX012gHFLt8Vg9uJoiVYmkREc6n6/dxXhYz1iHgVdF2slgv?=
- =?iso-8859-1?Q?LHwmbc/H8Q24ke4Bjm6Wnf3UQu88GuQQosTAeZKrJn+SaGE0tQuMksMGmb?=
- =?iso-8859-1?Q?3uPIt10ZfTeoLvJSX2GFGqpUQWtytyu5HcyNFjxI0rwGzB4Z35RXLH7945?=
- =?iso-8859-1?Q?My2nCmKAT76GKoDflLKBoON7tQ9l9zQmKIAHJP6nLvfKua64LEJDeu093m?=
- =?iso-8859-1?Q?AtLYbL29HFcZd5RYV3bACCFjaLfkFC5ER+kvE+G1MrkWOXJWAk5U7EjGkH?=
- =?iso-8859-1?Q?YGkgiOAvrJzaRgBIQLb1RbDgFdRkXXl4Hiw4k1uOnzhb9qLtO9lgf70DRQ?=
- =?iso-8859-1?Q?F64+ih1kqVXOVcyuLM/KxNAnXZvLJBqjHk964osW+No/75FnC+usBqb+oB?=
- =?iso-8859-1?Q?k7WRbJQOV9gIH32pqwymLJaUeN5sYH3upS9qF3YVE3R/bPYG7vRWLfiOxR?=
- =?iso-8859-1?Q?tWhZsfxnqzHmIQC6M9dnH0dskKbBQ0Ok9i9O4X5voB0Hs8Hmq9F87kAswv?=
- =?iso-8859-1?Q?cod4VX70lV3lgYK8llJFsTBe56NBbEgZ5FfERMt1sMI0B8g7lFlnCQlRHb?=
- =?iso-8859-1?Q?4XA8xy2rN4PJgaX9l68f80zoC4XhTvk4QnRgqKxysNGFMaWUb2B7N6MJXa?=
- =?iso-8859-1?Q?VC1leEvZW/Uqz9Ej8clRvMt9lfWi7Ctv69firGLztCELi5srbDOAkg+u1H?=
- =?iso-8859-1?Q?ioDYKan0jIPNLh0Y1fQ9fc0MnvGzTO0SEZkIpJ5mG02vXI6ad1ovCsaOyP?=
- =?iso-8859-1?Q?dLnKRzraSz+HPrD/Y7YIxCTtSUciL0+DGMqPENJCjvUMfPKkr5SDIdLgud?=
- =?iso-8859-1?Q?ribUE/Tc8G95IqB1uwJJmUJ1nysY0p0zg/UG+13aQvw8L41aaOl2X+f9RF?=
- =?iso-8859-1?Q?zqhXeiCT0kc39ZW4PUt/j1IoZpdeX1UASktRLbddGK7gcv5k9uUd5LbRKi?=
- =?iso-8859-1?Q?qR/WnWOh0GhsMEK9lv8zpQCMVrMmExkdyZh9UuZcN7eUVo1dHRQ4vqldv1?=
- =?iso-8859-1?Q?SmSuWWMNuiVTuUD+Y4BsrLd7iwSBsJi6XBzPi9iQmLDL7JjPP6aNLc0e/g?=
- =?iso-8859-1?Q?YwITCnSfFCj08pKIXNDp6OCu40SJN8bzetWa5J938UPr/prH4o8dIa4OKi?=
- =?iso-8859-1?Q?dAGYusCE6yz6ac/udYUsrtVMkm7YXQAx01+CxMSqbNcfqLSulkMXDBYG51?=
- =?iso-8859-1?Q?atmmEq3gGIRlzU2gLTup3+0trpuXZj/IQ08oeC1vZmBYQTbEdEWvJXE/Tf?=
- =?iso-8859-1?Q?7SZ6tgNNy1rHR99FGTlR8HkYC7X1guHKpJEtY1qp9A6bLK2XxvQoyQ7ngd?=
- =?iso-8859-1?Q?fqU/3Bq9bi7lzcteD3MqItuwBMpH19AARSTWX3ue3MhbKTOjm18lp1qZbL?=
- =?iso-8859-1?Q?nL+Egbg9jHPFqehLts1pPvs3whpnC9/Xl9yt4kXIDonSC7nUxB6qB/YAAb?=
- =?iso-8859-1?Q?t6YyLV91tKMqPqAUkIgQjdS8ymV/FaretUbO5bS//naS2w1XjCmj2ZyFqR?=
- =?iso-8859-1?Q?R+Y/E3ycHdCFK7ZamviJr+jOBlecQZvUn11SLl37+t2vVjLdVhlXtRGuei?=
- =?iso-8859-1?Q?UzHBFnCYzFhje7NemrThR7aQb3xTexfPtvqFbDtOH6E+E/H2Or7O69RY9G?=
- =?iso-8859-1?Q?xyqlraTxbn6e+BpdDjnFrcylQDtaABBdSZuXGklFs3ka4soo5HYv7LOAuu?=
- =?iso-8859-1?Q?APPxWJ0WEyVk5r1LQbT4I9SNfQ6hZnI=3D?=
-X-Exchange-RoutingPolicyChecked: BigDPcSB2YDRVsOE2wnK92EiNcnk07Y8pJ4TVDyM039UaXgcacJJXIwQvm9dUTJtbulb5iUDuOgeeDWOWwWijx/JTjq+sZIR3f2vRET7iO8Shz++Q1lzMfMzxiu4TKD7yViX7wJ+8854zCQjiyI45g2YQbOIp5tlav6hyhAidzp+sNaFIoJftn48Bi7CqriM5pnxvqPvaWjQ9DLgumc3FWMgw0w710gT1UTDuFKOW6SBr0Hto0ej/bY7UBtUPlpbW5CPQcGeXhWKGgPnMProEm4eaht2khUdS1DoL+b7TXli4wy6ARnqKLDEwLnAgM2C36DipS1394puY5UHZ6LpHA==
-X-MS-Exchange-CrossTenant-Network-Message-Id: 279f415b-5f2d-41d1-dda0-08df201903cd
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4787.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2026 00:06:32.2274
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s2rPLqn+yZbUNArxXQBe9EdkiUGI1ETPdeouc0U8Io7pAbPgo73gHrWOyjAvu26uaFw9w66BgQ4k0+yp2X/g+Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4942
-X-OriginatorOrg: intel.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 01, 2026 at 03:06:31PM -0700, Matthew Brost wrote:
-> nouveau creates its drm_gpuvm without DRM_GPUVM_RESV_PROTECTED, so the
-> extobj and evicted lists are protected by internal spinlocks. Every
-> nouveau path but three already touches them with the VM's resv held:
-> drm_gpuvm_exec_lock() and drm_gpuvm_validate() on exec, and TTM moves of
-> private BOs, which share the VM's resv. The remaining three are:
-> 
->  - nouveau_uvmm_bind_job_submit() adds the vm_bo of a MAP op to the
->    extobj list holding no resv at all. Move that into
->    bind_lock_validate(), which now locks the VM's resv as well.
-> 
->  - bind_link_gpuvas() unlinks the GPUVAs of UNMAP and REMAP ops, which
->    can drop the last reference of their vm_bo. It runs within the bind
->    job's drm_exec transaction, which the above makes hold the VM's resv.
-> 
->  - nouveau_uvmm_bind_job_cleanup() and nouveau_uvmm_fini() can drop the
->    last reference of a vm_bo holding only the object's resv. Lock the
->    VM's resv along with it, through a new
->    nouveau_uvmm_lock_vm_and_obj().
-> 
-> The bind job's fence now always lands in the VM's resv, as BOOKKEEP.
-> This already happened whenever a bind job mapped a private BO.
-> 
-> With that the internal spinlocks buy nothing, so set
-> DRM_GPUVM_RESV_PROTECTED. This is also what two-pass locking in
-> drm_gpuvm requires, which a following patch makes use of.
-> 
-> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
-> Cc: Alice Ryhl <aliceryhl@google.com>
-> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-> Cc: Antonino Maniscalco <antomani103@gmail.com>
-> Cc: Boris Brezillon <boris.brezillon@collabora.com>
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Dmitry Baryshkov <lumag@kernel.org>
-> Cc: Jessica Zhang <jesszhan0024@gmail.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Liviu Dudau <liviu.dudau@arm.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: Steven Price <steven.price@arm.com>
-> Cc: Thomas Hellström <thomas.hellstrom@linux.intel.com>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
-> Assisted-by: LLM
-> ---
-> v3:
->  - New patch (Danilo)
-> ---
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c | 49 ++++++++++++++++++++++----
->  1 file changed, 42 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> index 2026fe6b48c6..dae612e56d91 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> @@ -1187,6 +1187,27 @@ bind_validate_region(struct nouveau_job *job)
->  	return 0;
->  }
->  
-> +/*
-> + * Lock the VM's common dma-resv together with the one of @obj, as needed to
-> + * drop what may be the last reference of a &drm_gpuvm_bo.
-> + */
-> +static void
-> +nouveau_uvmm_lock_vm_and_obj(struct nouveau_uvmm *uvmm, struct drm_exec *exec,
-> +			     struct drm_gem_object *obj)
-> +{
-> +	int ret;
-> +
-> +	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES, 2);
-> +	drm_exec_until_all_locked(exec) {
-> +		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(&uvmm->base));
-> +		if (!ret)
-> +			ret = drm_exec_lock_obj(exec, obj);
-> +		drm_exec_retry_on_contention(exec);
-> +		if (drm_WARN_ON(uvmm->base.drm, ret))
+Add GPU and GMU devicetree nodes for the Adreno 810 GPU found on
+Qualcomm SM7635 (Milos) based devices.
 
-Sashiko flagged that -ENOMEM is a possible return from drm_exec_lock_obj
-if a kmalloc fails and that is correct.
+The qcom,kaanapali-gxclkctl.h header can be reused here because
+Milos uses the same driver and the GX_CLKCTL_GX_GDSC definition
+is identical.
 
-My plan is to change this and open coded WW transaction which can't
-fail.
+Reviewed-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Signed-off-by: Alexander Koskovich <akoskovich@pm.me>
+---
+Changes in v8:
+- Rebased on next-20261001
+- Split out DTS patch, now that deps are merged
+- Link to v7: https://lore.kernel.org/r/20260528-adreno-810-v7-0-7fe7fdd97f=
+c2@pm.me
 
-Not going to post now as I don't want to spam the list.
+Changes in v7:
+- Rebased on msm-next-robclark@d0f39fc
+- Drop dependency on GPU GX GDSC refactor
+- Drop DTS nodes (will submit in a seperate change later)
+- Drop RFC prefix
+- Add reviews
+- Link to v6: https://lore.kernel.org/r/20260515-adreno-810-v6-0-fbe04c7203=
+e1@pm.me
 
-Matt
+Changes in v6:
+- Re-jigged the register ranges for GPU/GMU to match Glymur
+- Depend on RSCC offset fix
+- Fix bindings to add constraints for reg list
+- Link to v5: https://lore.kernel.org/r/20260502-adreno-810-v5-0-bc9fd2bb78=
+8d@pm.me
 
-> +			break;
-> +	}
-> +}
-> +
->  static void
->  bind_link_gpuvas(struct bind_job_op *bop)
->  {
-> @@ -1224,12 +1245,24 @@ bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
->  		   unsigned int num_fences)
->  {
->  	struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
-> +	struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
->  	struct bind_job_op *op;
->  	int ret;
->  
-> +	/* The VM's dma-resv protects its extobj and evicted lists, and must be
-> +	 * held by bind_link_gpuvas() in case it drops the last reference of a
-> +	 * &drm_gpuvm_bo.
-> +	 */
-> +	ret = drm_gpuvm_prepare_vm(&uvmm->base, exec, num_fences);
-> +	if (ret)
-> +		return ret;
-> +
->  	list_for_each_op(op, &bind_job->ops) {
->  		struct drm_gpuva_op *va_op;
->  
-> +		if (op->op == OP_MAP)
-> +			drm_gpuvm_bo_extobj_add(op->vm_bo);
-> +
->  		if (!op->ops)
->  			continue;
->  
-> @@ -1288,8 +1321,6 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
->  			dma_resv_unlock(obj->resv);
->  			if (IS_ERR(op->vm_bo))
->  				return PTR_ERR(op->vm_bo);
-> -
-> -			drm_gpuvm_bo_extobj_add(op->vm_bo);
->  		}
->  
->  		ret = bind_validate_op(job, op);
-> @@ -1603,9 +1634,11 @@ nouveau_uvmm_bind_job_cleanup(struct nouveau_job *job)
->  			drm_gpuva_ops_free(&uvmm->base, op->ops);
->  
->  		if (!IS_ERR_OR_NULL(op->vm_bo)) {
-> -			dma_resv_lock(obj->resv, NULL);
-> +			struct drm_exec exec;
-> +
-> +			nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
->  			drm_gpuvm_bo_put(op->vm_bo);
-> -			dma_resv_unlock(obj->resv);
-> +			drm_exec_fini(&exec);
->  		}
->  
->  		if (obj)
-> @@ -1941,7 +1974,8 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
->  	mt_init_flags(&uvmm->region_mt, MT_FLAGS_LOCK_EXTERN);
->  	mt_set_external_lock(&uvmm->region_mt, &uvmm->mutex);
->  
-> -	drm_gpuvm_init(&uvmm->base, cli->name, 0, drm, r_obj,
-> +	drm_gpuvm_init(&uvmm->base, cli->name, DRM_GPUVM_RESV_PROTECTED,
-> +		       drm, r_obj,
->  		       NOUVEAU_VA_SPACE_START,
->  		       NOUVEAU_VA_SPACE_END,
->  		       init->kernel_managed_addr,
-> @@ -1978,6 +2012,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->  	struct nouveau_uvma_region *reg;
->  	struct nouveau_cli *cli = uvmm->vmm.cli;
->  	struct drm_gpuva *va, *next;
-> +	struct drm_exec exec;
->  
->  	nouveau_uvmm_lock(uvmm);
->  	drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
-> @@ -1989,9 +2024,9 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->  
->  		drm_gpuva_remove(va);
->  
-> -		dma_resv_lock(obj->resv, NULL);
-> +		nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
->  		drm_gpuva_unlink(va);
-> -		dma_resv_unlock(obj->resv);
-> +		drm_exec_fini(&exec);
->  
->  		nouveau_uvma_unmap(uvma);
->  		nouveau_uvma_vmm_put(uvma);
-> -- 
-> 2.34.1
-> 
+Changes in v5:
+- Sync with latest kgsl
+- Link to v4: https://lore.kernel.org/r/20260416-adreno-810-v4-0-61676e073f=
+8a@pm.me
+
+Changes in v4:
+- Add 1150MHz speedbin
+- Rebase on next-20260415
+- Add dep on efuse patchset
+- Link to v3: https://lore.kernel.org/r/20260407-adreno-810-v3-0-30cb7f196e=
+d4@pm.me
+
+Changes in v3:
+- Drop DEMET from GMU clocks (not required on A810)
+- Document qcom,adreno-44010000 compatible (regex is gone in 7.0+)
+- Drop zeroed out CP_PROTECT_REG[46, 62] range, not required
+- Add a810_protect to __build_asserts
+- Add UCHE_CCHE_TRAP_BASE_[LO|HI] and UCHE_CCHE_WRITE_THRU_BASE_[LO|HI] to =
+a810_pwrup_reglist_regs
+- Move TPL1 registers to a810_pwrup_reglist_regs
+- Include all protect registers in a810_ifpc_reglist_regs
+- Revert pipe reg comment, just copied it from downstream but original also=
+ works
+- Link to v2: https://lore.kernel.org/r/20260402-adreno-810-v2-0-ce337ca87a=
+9e@pm.me
+
+Changes in v2:
+- Mark as RFC due to dependency on in-review changes
+- Explain in DTS commit why qcom,kaanapali-gxclkctl.h and not qcom,milos-gx=
+clkctl.h
+- cx_mmio -> cx_misc_mmio
+- Sync a810_nonctxt_regs with GRAPHICS.LA.14.0.r5-03100-lanai.0
+- Link to v1: https://lore.kernel.org/r/20260331-adreno-810-v1-0-725801dbb1=
+2b@pm.me
+---
+ arch/arm64/boot/dts/qcom/milos.dtsi | 165 ++++++++++++++++++++++++++++++++=
+++++
+ 1 file changed, 165 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/milos.dtsi b/arch/arm64/boot/dts/qcom=
+/milos.dtsi
+index ed994c2170af..13167d1f226e 100644
+--- a/arch/arm64/boot/dts/qcom/milos.dtsi
++++ b/arch/arm64/boot/dts/qcom/milos.dtsi
+@@ -4,6 +4,7 @@
+  */
+=20
+ #include <dt-bindings/clock/qcom,dsi-phy-28nm.h>
++#include <dt-bindings/clock/qcom,kaanapali-gxclkctl.h>
+ #include <dt-bindings/clock/qcom,milos-camcc.h>
+ #include <dt-bindings/clock/qcom,milos-dispcc.h>
+ #include <dt-bindings/clock/qcom,milos-gcc.h>
+@@ -1922,6 +1923,121 @@ lpass_ag_noc: interconnect@3c40000 {
+ =09=09=09qcom,bcm-voters =3D <&apps_bcm_voter>;
+ =09=09};
+=20
++=09=09gpu: gpu@3d00000 {
++=09=09=09compatible =3D "qcom,adreno-44010000", "qcom,adreno";
++=09=09=09reg =3D <0x0 0x03d00000 0x0 0x6c000>,
++=09=09=09      <0x0 0x03d9e000 0x0 0x2000>;
++=09=09=09reg-names =3D "kgsl_3d0_reg_memory",
++=09=09=09=09    "cx_mem";
++
++=09=09=09interrupts =3D <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH 0>;
++
++=09=09=09iommus =3D <&adreno_smmu 0 0x0>;
++
++=09=09=09operating-points-v2 =3D <&gpu_opp_table>;
++
++=09=09=09nvmem-cells =3D <&gpu_speed_bin>;
++=09=09=09nvmem-cell-names =3D "speed_bin";
++
++=09=09=09qcom,gmu =3D <&gmu>;
++=09=09=09#cooling-cells =3D <2>;
++
++=09=09=09interconnects =3D <&gem_noc MASTER_GFX3D QCOM_ICC_TAG_ALWAYS
++=09=09=09=09=09 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
++=09=09=09interconnect-names =3D "gfx-mem";
++
++=09=09=09status =3D "disabled";
++
++=09=09=09gpu_zap_shader: zap-shader {
++=09=09=09=09memory-region =3D <&gpu_microcode_mem>;
++=09=09=09};
++
++=09=09=09gpu_opp_table: opp-table {
++=09=09=09=09compatible =3D "operating-points-v2-adreno",
++=09=09=09=09=09     "operating-points-v2";
++
++=09=09=09=09opp-264000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <264000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_LOW_SVS_D1>;
++=09=09=09=09=09opp-peak-kBps =3D <2136718>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0xc8295ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-362000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <362000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_LOW_SVS>;
++=09=09=09=09=09opp-peak-kBps =3D <2136718>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0xc02c5ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-510000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <510000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_SVS>;
++=09=09=09=09=09opp-peak-kBps =3D <3972656>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0x882b5ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-644000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <644000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_SVS_L1>;
++=09=09=09=09=09opp-peak-kBps =3D <5285156>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0x882a5ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-688000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <688000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_SVS_L2>;
++=09=09=09=09=09opp-peak-kBps =3D <6074218>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0x882a5ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-763000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <763000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_NOM>;
++=09=09=09=09=09opp-peak-kBps =3D <6671875>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0xa8295ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-895000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <895000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_NOM_L1>;
++=09=09=09=09=09opp-peak-kBps =3D <8171875>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0x88295ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-960000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <960000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_TURBO>;
++=09=09=09=09=09opp-peak-kBps =3D <8171875>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0xa8285ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-1050000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <1050000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_TURBO_L1>;
++=09=09=09=09=09opp-peak-kBps =3D <18597656>;
++=09=09=09=09=09opp-supported-hw =3D <0x7>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0x88285ffd>;
++=09=09=09=09};
++
++=09=09=09=09opp-1150000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <1150000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_TURBO_L2>;
++=09=09=09=09=09opp-peak-kBps =3D <18597656>;
++=09=09=09=09=09opp-supported-hw =3D <0x3>;
++=09=09=09=09=09qcom,opp-acd-level =3D <0xa02f5ffd>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
+ =09=09gxclkctl: clock-controller@3d64000 {
+ =09=09=09compatible =3D "qcom,milos-gxclkctl";
+ =09=09=09reg =3D <0x0 0x03d64000 0x0 0x6000>;
+@@ -1932,6 +2048,55 @@ gxclkctl: clock-controller@3d64000 {
+ =09=09=09#power-domain-cells =3D <1>;
+ =09=09};
+=20
++=09=09gmu: gmu@3d6c000 {
++=09=09=09compatible =3D "qcom,adreno-gmu-810.0", "qcom,adreno-gmu";
++=09=09=09reg =3D <0x0 0x03d6c000 0x0 0x32000>;
++=09=09=09reg-names =3D "gmu";
++
++=09=09=09interrupts =3D <GIC_SPI 304 IRQ_TYPE_LEVEL_HIGH 0>,
++=09=09=09=09     <GIC_SPI 305 IRQ_TYPE_LEVEL_HIGH 0>;
++=09=09=09interrupt-names =3D "hfi",
++=09=09=09=09=09  "gmu";
++
++=09=09=09clocks =3D <&gpucc GPU_CC_AHB_CLK>,
++=09=09=09=09 <&gpucc GPU_CC_CX_GMU_CLK>,
++=09=09=09=09 <&gpucc GPU_CC_CXO_CLK>,
++=09=09=09=09 <&gcc GCC_DDRSS_GPU_AXI_CLK>,
++=09=09=09=09 <&gcc GCC_GPU_MEMNOC_GFX_CLK>,
++=09=09=09=09 <&gpucc GPU_CC_HUB_CX_INT_CLK>;
++=09=09=09clock-names =3D "ahb",
++=09=09=09=09      "gmu",
++=09=09=09=09      "cxo",
++=09=09=09=09      "axi",
++=09=09=09=09      "memnoc",
++=09=09=09=09      "hub";
++
++=09=09=09power-domains =3D <&gpucc GPU_CC_CX_GDSC>,
++=09=09=09=09=09<&gxclkctl GX_CLKCTL_GX_GDSC>;
++=09=09=09power-domain-names =3D "cx",
++=09=09=09=09=09     "gx";
++
++=09=09=09iommus =3D <&adreno_smmu 5 0x0>;
++
++=09=09=09qcom,qmp =3D <&aoss_qmp>;
++
++=09=09=09operating-points-v2 =3D <&gmu_opp_table>;
++
++=09=09=09gmu_opp_table: opp-table {
++=09=09=09=09compatible =3D "operating-points-v2";
++
++=09=09=09=09opp-350000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <350000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_LOW_SVS>;
++=09=09=09=09};
++
++=09=09=09=09opp-650000000 {
++=09=09=09=09=09opp-hz =3D /bits/ 64 <650000000>;
++=09=09=09=09=09opp-level =3D <RPMH_REGULATOR_LEVEL_SVS>;
++=09=09=09=09};
++=09=09=09};
++=09=09};
++
+ =09=09gpucc: clock-controller@3d90000 {
+ =09=09=09compatible =3D "qcom,milos-gpucc";
+ =09=09=09reg =3D <0x0 0x03d90000 0x0 0x9800>;
+
+---
+base-commit: 9f24d789f03b22941b905ded43cb5ff8eea9ce62
+change-id: 20261001-milos-gpu-dts-944a21ea94cf
+
+Best regards,
+--=20
+Alexander Koskovich <akoskovich@pm.me>
+
+
