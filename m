@@ -1,86 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69C6634D382
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 07:07:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5651643CEE3
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 07:32:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790924848; cv=none; b=CGxGEn4/hAdn8cOUL5vGcI71vCVX8lsQ+6vgNPGeMu6EHh0NuJlPNSdeE0df52joTGSRT2ax5Knp8qOeuIExi7icAUpyVfxT6JyIUoiiKkeM9Kq4ROiPAU7iqym/+7UupN2ZW8SFeZTHkP2xoE5LfOjAcf//IFFEeMVl8bgT8+M=
+	t=1790926354; cv=none; b=SkapzKUuDnkQkD3rUEjTdlhKgiSmsokxI4YqL/WvmZ9srFdYM4WKQILgvfqhYmhT4lWzzLzVdfVquIBgaydd1z0ZCfZtUNq/ONUTD2NMcKkpR95T5uBYzV+SwqpfPBv9ahY24CVvg08vwDfg0LW7TdjU+vTG+mWk/n7znGEd1Pk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790924848; c=relaxed/simple;
-	bh=p86aoLipPnmeBSCQWRntvEIsHN7hwNunducQ3JxHt+k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BmdzMEtexv3tdR5bLuKWGltR3vN7htcBQAi19Bw0wAvoOCzaT4RcmwHbBUiaL0rdTVRrXkv/jgMWRBt+45diCKWCMTWBrD3Z+tanI7hpFlroJ/RcadKgEgay9GTP5EjWerfUZ98VT2Y1xhwW495N1RgNHzFpT5wBOcr8AfLHhGg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BpO/XKKZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TkCRuFIh; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790926354; c=relaxed/simple;
+	bh=SHxFqh3KKGoWhw+nZUAOqRVbbm4gWkR3/f9tFNiz5P0=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=M7Yr8Ppt5TuqeYJFVxlhdJvmRC5LHJMxLezTKOgrhF33nsLFkAZlG5esKOmSMFIUUBAH9ou92sFREh0RVCY0kMU+Lf6gcJUGpRn20gL0Zz4YKv6XNLFAwiTo9LRvklPWpXB2XR6plAfiQCRGZmQ0lnrPJMXBQRJ75I9DkOcFs3g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fP7okPJJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BZ9bYRTe; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BpO/XKKZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TkCRuFIh"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6925il681542458
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 07:07:26 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fP7okPJJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BZ9bYRTe"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6925jkeu438919
+	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 07:32:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9I+i3UIX4gVXyxWiJ+Cg4JTVO0MXqaK0GV0dmAfVfSk=; b=BpO/XKKZUeyr+8US
-	UjRKKSbDUo5AyXUeAqtVBZWAez2jKfY098dA/oY8kM0mG1v2uYNLcqj2/oYm8j7Z
-	cabMaUqTC35a/WYTOrIizr+j1qoN/8fNKF4Vp4x0FKv7jQ2cskH2eB5u6Ru9yoHJ
-	+ZEXyfjHGy7/6iLmZG1kQl+Vb0quGzMgoaZIH0EXOsopGaGEOm9THHHRNVz7PJSe
-	MVX1kbW7AhQrFt4m1qAouwkQ0lUHO1JSl0LaoOGpTr2tqZgYnxdxZkCFdGAckJiD
-	My3gOcv8g7RnApdNoD903atljeoz47BrKIxQDJH4tykr/xw2I6JxsuOclkBUlKDx
-	LrYstA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h256mrfep-1
+	IWtuB6bAcJMUnuKNd0QkWFAs6+jCv3PnTXcHMb6ywZ4=; b=fP7okPJJVBcQ4mF1
+	3eeM/ewB9X79lsunlyHvPn8QuHvzrEiYdPCXqUdVxXCSB9yy4i3VeIXkI+wDzKnS
+	ajNWwQu9RF1JZFCks7NebQpAkvEFNCT7B2J8WR1UQNK2V9X5G0j92IxAoT44kaOz
+	iZbbzD3yJKj4UaH+Q4nLVQ+qi5V6Rd5iLMFxXLEnCOGBcFH4PeC9oa8AD/JFWlJM
+	BySHyLKz1Bzj2m7mem8n5PE/yKGXbnLBqWo3JNBP+DNKVpCQf5SSJorax0VTVZef
+	K94YhD9/m3k9pS8jctGFkh3Lczf4p70o2R/2qCb3mwtRNV03S/CiDkpQqGIMU+FG
+	B+QxZA==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1sdckf3j-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 07:07:26 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93bfb2da664so1942250185a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 00:07:26 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 07:32:27 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-34d49d8dee1so3002537eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 00:32:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790924845; x=1791529645; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9I+i3UIX4gVXyxWiJ+Cg4JTVO0MXqaK0GV0dmAfVfSk=;
-        b=TkCRuFIhJBtydq+DiMm+eE5NZCcOpyOWWBnQoIn+yM4vsysQVJKp7WNUEs82HCKfKT
-         tLkNbYf4EoBnQ6QB2EECpTVVKs0HN1ifuSf2QZc+JLQPkdhY0J6NAJkjgEKPhRgpRQI5
-         N/i9YnVr+KPD1wwT8q2Xl+9o4mcPWcfSeJeeo7rzX5/sVQAWMf3lgNv851GUyzbPFh+p
-         nF6Gnqn9hkNW9O1n7ALsR5gnidH5txiBOpQSCbYZxzTMoKvEjkWEc3iny4br6/8gdics
-         oTDq8DggKQfUMyjlZg5S4mVn/cWXM9XnRLV5RAlsFqR6QkPdovCLVfKyD/EakEvLhGeX
-         CGGg==
+        d=oss.qualcomm.com; s=google; t=1790926347; x=1791531147; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IWtuB6bAcJMUnuKNd0QkWFAs6+jCv3PnTXcHMb6ywZ4=;
+        b=BZ9bYRTeoqZrM/BjeIOkDOu/G97mk2jaW58ERCxr58TBGwuqLexj6/ISdetw6eWxr1
+         8ZhcH9XnE5zQxAZ1TPaUceeX7DH2OTHqq1Ft5Pp0X6zDvzhMB0v2XfUWCZn8Yc/j/W2B
+         cAFvz0zWODdWnf1EeHoGXa9T4Y+KYeChE20HhWQQi7wafiCUivz/OWEZBMjiQwckfOwb
+         R4KK+2Jjoa1LK6Df+g/xteSn8TyZ8tyzejrlKspI26i+CgiUbyKmn3J1TgfDQ64vzWgE
+         YkfgoG8PDNk1Us+ngHGiq5/FPrDQpXBvBhjelOt8eAGm4lhpedXeMZQfzxSJKf4bcWSL
+         A6nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790924845; x=1791529645;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790926347; x=1791531147;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9I+i3UIX4gVXyxWiJ+Cg4JTVO0MXqaK0GV0dmAfVfSk=;
-        b=YwVs048RBq1yimXWbN+W9fogVoLO1OSFXzkzx2+vCXzQCUfVQtxdBUJNBorpKqNrWZ
-         c++BIJg3BNTmQmWy7sRoK3IpbzyH2I9xQVZNWbQPMZqmbf3fJ503g/1en+vACmq1bpuH
-         TVMYHIPC3eEIMP6a3JQMixZ9tNY3CKOGVrbTqm4HNO5lwd9kLsqbyGJeMkIrT0Ick7GK
-         aFo08foyraJemL/cbw2jprkifPBM/EK3zi4EqpmSPLm3yTBrUOiMqYxpv++JTbZqURMR
-         PI8Ey0zDjEJSOUarqaSDT2YuzmyBdHuxeZdD1d2rEaV3V65vIR0CcOJWD9PTxa3OiCOj
-         NMPQ==
-X-Gm-Message-State: AFuF++nZwokL/wLwJXS9QhDru43tzRJ7DFQljzQzKfoboDg1910+eaBD
-	NXVAQeZr39QxeClly3Na9aAM+ncv90ubGA2/ABOk6BRiUTO6R8WBpR20efiTlLRHCq9N3rJSHB+
-	Z3g0+c2Pj3gbzPMuNrFS5PEdwZZAMLzUYcfn8tsMdkzdYSVTw3lJ696u4OOmZSlIlokoU
-X-Gm-Gg: AYBFou0nYcTOAsZcmrqy+7mIEMSbwRi8BRF7KKgfqcUCSYmnmPLLX9xpRbT0V8qJUKN
-	gC43aFFfHLcAIWG/wz1hdcIVc+qD05OaJo44EXzbOPNyeoTnpCOJJz8pHMjLRBxVB+YUBSsB/XN
-	wlUWCLCUmBa+nBy3PVdlcpt8z0ilAADNdZ9m1ShhOhdsUUfkfgPV+xgtpHD0DnNYfw3xJ4vouPl
-	0NduV/MStxhhaH2kWMxc9eCFAhWrtNQACFHJSACO0/jy8o/59hhemdQG16zGzjRakLFtXqpHuT4
-	0tyb5aLFyJbiVsuaY+6aYb1pLiANc7T8vpu2ebloObkv7GGGI3mKrGA3hzQ3Pv4/hLK091IpQlq
-	kQY+AIKgywZ9mdCHVrfvLt03AypXZ1pdJ8bR1GfTWXAb5HY7Z0VSj6PYdXXGzEQ==
-X-Received: by 2002:a05:620a:1992:b0:937:1097:feb8 with SMTP id af79cd13be357-93cf16d9c55mr286861085a.24.1790924845381;
-        Fri, 02 Oct 2026 00:07:25 -0700 (PDT)
-X-Received: by 2002:a05:620a:1992:b0:937:1097:feb8 with SMTP id af79cd13be357-93cf16d9c55mr286856885a.24.1790924844881;
-        Fri, 02 Oct 2026 00:07:24 -0700 (PDT)
-Received: from ?IPV6:2a05:6e02:1041:c10:f14c:b716:c104:4712? ([2a05:6e02:1041:c10:f14c:b716:c104:4712])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0280bcf0fsm61000175e9.6.2026.10.02.00.07.22
+        bh=IWtuB6bAcJMUnuKNd0QkWFAs6+jCv3PnTXcHMb6ywZ4=;
+        b=U9Q4g12OTAqI0f6KllmsIvr+P5Wp6Vqe/55OgeJ/JL74rfshUwwwlPoeXgi7aYmMen
+         rRww0wjqB00DXGzifJrfcrW23NUCUBJFa7MG/wcQ3Nireb8hiEAkvG2UlBZopAX48dgs
+         sB26LVwMb4hJpbzolFBiE6r/na3IqS5wkgw8ycVUk3XuTnPsFOb5bgrcFJLi2NWeYM5M
+         OlGua9XWhQJK7BmjSakl6inrJ/HR1EBrmkB/Bb/CIO4+cG0pyaHgwhj/hEuyCTkXaeX3
+         5pkA3uj8w7Y8z7xTLhFn1zCi7OPDifOARJexZQKo5MeLZTtytdaSmjyoQYB4w0w/5eOR
+         8rDw==
+X-Forwarded-Encrypted: i=1; AKwUvByZZGtU+DOAxZJXolavANFlLGjHW9WFR4h/RMsx+Nw6xVxLWjJAY7EHkNPtAFViB9BEKsZ87UGgOAIhl36P@vger.kernel.org
+X-Gm-Message-State: AFq9FYJmDuvQleXBuvlqHDAHveW+s+f2qm9c2kTmf/PIUoibo/wtDSSy
+	cu6W/Y0lwS+G9cdniQtjlbGC2a+Xzum+ris165b53LQbJNNJgBA/AlWRZ8Nhf9pDNyubzpU33nC
+	ljqf1FIEp2xTzvZo3QRX8Rt8jMomWMvjyYfRxn6lNx62AKSl9kuNUmWRO6IP0ErFq+JkK
+X-Gm-Gg: AYBFou15p2vMZyZb66M1RBg6F0IJVltoWMZeZle3Iid+DN1vr8z96i7ZpqtCwENJDet
+	WMNSK3602f+g3q/0ueh+DxdXdfzbRC679rjvmO5prMqJWdSLfy7oIeYAgODDYVijx/3WEQzGSEt
+	CwQn3HJza0p0qH7NurPhb2wN46CsgGydbKlsrD/bDMSU0ao1YG4hx/1TBIsDYMeZnEGvFUujcjt
+	WucF88S0MkV4JSWVC82sG5fJJlM8sTYTualSKpcRizB1RNae7BpISJZqCsVKysLGkRI5Eafk/Db
+	j7BqnjkDENSaAQoMkuveJYV4YfSs8xsn0FDunbnRBTF6qI6DNB5nxx283bY+CiMkmbY9PAu1k+a
+	6UQ9W0s5krocxVQ5sHVW75kk/RL5G3Uc=
+X-Received: by 2002:a05:7300:f3c5:b0:341:2466:2d68 with SMTP id 5a478bee46e88-34f219a4eb6mr1916565eec.38.1790926346709;
+        Fri, 02 Oct 2026 00:32:26 -0700 (PDT)
+X-Received: by 2002:a05:7300:f3c5:b0:341:2466:2d68 with SMTP id 5a478bee46e88-34f219a4eb6mr1916497eec.38.1790926345054;
+        Fri, 02 Oct 2026 00:32:25 -0700 (PDT)
+Received: from [192.168.1.8] ([122.177.246.70])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3510850f86bsm950862eec.11.2026.10.02.00.32.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Oct 2026 00:07:23 -0700 (PDT)
-Message-ID: <415c5fa8-d5b2-4030-9618-07cf828c8d01@oss.qualcomm.com>
-Date: Fri, 2 Oct 2026 09:07:21 +0200
+        Fri, 02 Oct 2026 00:32:24 -0700 (PDT)
+Message-ID: <004c0fef-d5fd-42a6-b2e4-bcd62b8260fa@oss.qualcomm.com>
+Date: Fri, 2 Oct 2026 13:02:18 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,72 +88,178 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v15 1/6] power: Extend power_on_reason.h for upcoming
- PSCRR framework
-To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-        Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
-        Tzung-Bi Shih <tzungbi@kernel.org>,
-        Guenter Roeck <groeck@chromium.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Matti Vaittinen <mazziesaccount@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Oleksij Rempel <o.rempel@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
-        avaneesh.dwivedi@oss.qualcomm.com,
-        Umang Chheda <umang.chheda@oss.qualcomm.com>,
-        Sebastian Reichel <sebastian.reichel@collabora.com>
-References: <20260924-pscrr-framework-v15-0-7af87107e0d3@oss.qualcomm.com>
- <20260924-pscrr-framework-v15-1-7af87107e0d3@oss.qualcomm.com>
+Subject: Re: [PATCH] PCI: qcom: Prevent GDSC power down on suspend
+From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+To: Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>
+Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+        Stanimir Varbanov <svarbanov@mm-sol.com>,
+        linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+        Taniya Das <taniya.das@oss.qualcomm.com>
+References: <20260128-genpd_fix-v1-1-cd45a249d12f@oss.qualcomm.com>
+ <zfs6krk2whthgdjl2s2w4o5pjwimzw37afoiyrqllykrk6jugt@4ijk5iqplohr>
+ <6osboej6luxekrw4okhlbf3irednx7gduhmqbzqkkgd3ldm2cn@esalet4ruwcb>
+ <fd578600-d9a7-44a5-9131-8771262f82dc@oss.qualcomm.com>
 Content-Language: en-US
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-In-Reply-To: <20260924-pscrr-framework-v15-1-7af87107e0d3@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <fd578600-d9a7-44a5-9131-8771262f82dc@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDAyOCBTYWx0ZWRfXyjYtv3Sxo0/T
- UUX/LkOi727PrXnPPllSgJsdwTbc34dzGbl9cA8rOiazdpK0kqOO0P4Zl0vrNS6UqS1mSSze+Te
- DGxqPDDC9RVWB2LF9iZmQf+05OoJlYs=
-X-Proofpoint-ORIG-GUID: KONyjOYY-O-r5Gt8S_0n89cOMKTswJSB
-X-Authority-Analysis: v=2.4 cv=b80ncdGx c=1 sm=1 tr=0 ts=6abf582e cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=QX4gbG5DAAAA:8
- a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=FITrd37hvkKM1ztSptAA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22 a=AbAUZ8qAyYyZVLSsDulk:22
-X-Proofpoint-GUID: KONyjOYY-O-r5Gt8S_0n89cOMKTswJSB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDAyOCBTYWx0ZWRfX9+ueszJ7/UuQ
- R/BOCjb010nhSJfPvRJjkvFUmOOHmtGA7RLtZFnVzOgQ7IlEMwRz9aB1OHLJHirkZRVP769/q0J
- qu4rNhEveyde9KRrzK8WXEqq02DhikLE9EDm5w1f8HhiWD1AcTf+aFWLVEusC9vCn9SZJ/HKNcw
- hOlOlivZG6WRMAd1XzEAs4YMS+aGT+DMttwV9z4AcjeRcoiZfupYJ2L6CLRcALyp7pdLJ7gSTIF
- QMTFSY9FugJxNN6m8hUyavAkQs/+EaW6swayXrWqvVRsqUZshh48g0nuIvW+tZTS3CPs5gQMro7
- 2VksQf5u7mtJZV6jzBmugNdWIdH9fIskZybpbofakowl5CcodPBw3I/2vMF9HZXfYRSxPuuFiLL
- UDmXiNkf4wrttCfwRUtO47yu9wCsvnjl42sdwdKTu8vsJzlLMHRbtr/TWz+JrgZ3yjB4ydQ0a0u
- IFt2l49qPzUGerFUGJQ==
+X-Proofpoint-ORIG-GUID: SQga5r98oYuAdLpkGL0fjp_MiH16s8U_
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDAyOSBTYWx0ZWRfXxirhqC/oWBDT
+ +LIwMwv4JxpKgMrg+XOenBeURZGX9tD0nuhS9JQ6J3SW53FQ6Rs2qx6rW/cBm4aAExh4B8ynKaz
+ OE32lUlMSXblOe55gC0eAEWDiaNkZT0=
+X-Proofpoint-GUID: SQga5r98oYuAdLpkGL0fjp_MiH16s8U_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDAyOSBTYWx0ZWRfX14WahCFDWcXc
+ WN0yj+srhwykHx2v59nO+SuinkHCZ+q8wwft3xOmucqhbiRktl092Tr20UHC1Nc+QK15Jbu+y8G
+ 7EguL/6D3CXCW2hTqzkMk6RYSmipMzbqriuLwf4D+tVIPK2Rpm00IrczK7SCScc8Pf6uhcs2bfe
+ Zj9Mjco5oYobxEfREZv1tURs0s3FThwjloDPEtNKJwqslvt32GLVMfVTXnwRhT4c6Nk7U2yjHvV
+ 1v5gCzybylzuKQpNkLT9TCvU4obsJC54k5HwuhLEp2gnkpqI/HXS5SSxKrMpi53mj9IO/jLUSbg
+ DcianziE5YbWSdtjBuVN1faiWjBOWeb97So2QohBaSrq/j9kPyvyfUqhffLJvsjR2nt2oTICDhS
+ KUuIvi/Op0YE/VZGJUKGJL7aYYRROIJJXn0KwlmhK+3zIznurRm2a46hdEkdDPeB9bl+YLPZ/vs
+ dhiD3MF9G8RfBB+QfUA==
+X-Authority-Analysis: v=2.4 cv=D87SufRj c=1 sm=1 tr=0 ts=6abf5e0b cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=XPAAo6YaPT+rQjuZRm73pw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=0KhZnx37WpUrVoX56sMA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-02_02,2026-10-01_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 adultscore=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020028
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 malwarescore=0
+ adultscore=0 impostorscore=0 bulkscore=0 spamscore=0 phishscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610020029
 
-On 9/24/26 09:08, Faruque Ansari wrote:
-> Prepare for the introduction of the Power State Change Reason Recorder
-> (PSCRR) framework by expanding the power_on_reason.h header. This
-> extension includes new power-on reasons:
-> - POWER_ON_REASON_OVER_CURRENT for over-current conditions.
-> - POWER_ON_REASON_REGULATOR_FAILURE for regulator failures.
-> - POWER_ON_REASON_OVER_TEMPERATURE for over temperature situations.
-> - POWER_ON_REASON_EC_PANIC for EC panics.
-> - POWER_ON_REASON_EXTERNAL for an external reset source.
+
+
+On 9/25/2026 10:29 AM, Jagadeesh Kona wrote:
 > 
-> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
-> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
-> Reviewed-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
-Reviewed-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+> 
+> On 2/18/2026 6:03 PM, Manivannan Sadhasivam wrote:
+>> On Wed, Jan 28, 2026 at 08:13:48AM -0600, Bjorn Andersson wrote:
+>>> On Wed, Jan 28, 2026 at 05:52:42PM +0530, Krishna Chaitanya Chundru wrote:
+>>>> Currently, the driver expects the devices to remain in D0 across system
+>>>> suspend, but the genpd framework may still power down the associated
+>>>> GDSC during suspend. When that happens, the PCIe link goes down and
+>>>> cannot be recovered on resume.
+>>>>
+>>>
+>>> The GDSC is a child of CX, so by keeping it always-on, you effectively
+>>> put an always-on vote on CX, forever preventing CXPC.
+>>>
+>>> In fact, this is one of the reasons why the PCIe GDSCs on most targets
+>>> is marked PWRSTS_RET_ON (in the clock driver) so that the "off state"
+>>> doesn't actually turn off the GDSC, but it relinquishes the inherited
+>>> vote on CX.
+>>>
+>>
+> 
+> Hi Bjorn,
+> 
+> USB host-mode and PCIe non-D3cold use cases require their respective GDSCs
+> to remain enabled during system suspend. This requirement exists on multiple
+> targets and is expected to apply to additional targets as well.
+> 
+> The affected GDSCs currently use PWRSTS_RET_ON flag. However, this prevents
+> the GDSC driver from disabling the GDSC hardware after the first enable, even
+> when all consumers have become inactive. As a result, the GDSC remains powered
+> ON unnecessarily.
+> 
+> We propose using the GenPD synced_poweroff flag instead. When synced_poweroff
+> is set, the GDSC can be disabled during suspend. When it is not set, the GDSC
+> remains enabled to support consumers that require it across suspend. Consumer
+> drivers can set this flag using dev_pm_genpd_synced_poweroff() based on their
+> usecase.
+> 
+> For the affected USB and PCIe GDSCs, this could be implemented using a poweroff
+> callback as below in gdsc driver:
+> 
+> int gdsc_synced_poweroff_disable(struct generic_pm_domain *domain)
+>  {
+>          struct gdsc *sc = domain_to_gdsc(domain);
+> 
+>          /* Disable GDSC when synced_poweroff is set */
+>          if (domain->synced_poweroff)
+>                  return gdsc_toggle_logic(sc, GDSC_OFF, false);
+> 
+>          /* Dont disable GDSC in HW when synced_poweroff is not set */
+>          if (sc->rsupply)
+>                  return regulator_disable(sc->rsupply);
+> 
+>          return 0;
+>  }
+> 
+> This would allow the GDSC to remain enabled only when required, while permitting
+> it to be powered down for other use cases.
+> 
+> Please let us know your comments and suggestions on this approach.
+> 
+
+Adding some more details on the GenPD synced_poweroff flag and the corresponding consumer
+driver changes with this approach.
+
+The GenPD framework automatically clears GenPD's synced_poweroff flag on every GenPD
+power-on operation [1].
+
+Consumer drivers (e.g. PCIe/USB) can invoke dev_pm_genpd_synced_poweroff(dev) in their
+suspend path when the GDSC needs to be turned off in hardware. In that case, the GDSC
+driver will proceed with disabling the GDSC.
+
+If a consumer driver requires the GDSC to remain on across suspend, it can simply avoid
+calling dev_pm_genpd_synced_poweroff() in its suspend path. The GDSC driver will then
+keep the GDSC enabled in hardware while still allowing the parent CX rail to enter CXPC.
+
+This approach provides more flexibility to consumer drivers, allowing them to keep the
+GDSC enabled only when required and power it off when it is not needed.
+
+Please find the example code in PCIE consumer driver below with this new approach:
+
+diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
+index ee63a6ec99de..25ff8651fe91 100644
+--- a/drivers/pci/controller/dwc/pcie-qcom.c
++++ b/drivers/pci/controller/dwc/pcie-qcom.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci-ecam.h>
+ #include <linux/pci-pwrctrl.h>
+ #include <linux/pm_opp.h>
++#include <linux/pm_domain.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/platform_device.h>
+ #include <linux/phy/pcie.h>
+@@ -2436,6 +2437,8 @@ static int qcom_pcie_suspend_noirq(struct device *dev)
+
+
+         if (pcie->pci->suspended) {
+                 ret = icc_disable(pcie->icc_mem);
+                 if (ret)
+                         dev_err(dev, "Failed to disable PCIe-MEM interconnect path: %d\n", ret);
+
+                 ret = icc_disable(pcie->icc_cpu);
+                 if (ret)
+                         dev_err(dev, "Failed to disable CPU-PCIe interconnect path: %d\n", ret);
+                 
+                 if (pcie->use_pm_opp)
+                        dev_pm_opp_set_opp(pcie->pci->dev, NULL);
++
++               dev_pm_genpd_synced_poweroff(dev); /* Invoke GenPD synced poweroff to disable GDSC in HW */
+        } else {
+
+Please let us know your feedback or require any additional information.
+
+[1]: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/drivers/pmdomain/core.c#n919
+
+Thanks,
+Jagadeesh                                             
+
+
+
+
+
+
