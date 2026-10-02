@@ -1,68 +1,67 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77FCD476079
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 09:45:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83890477E22
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 09:45:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790934339; cv=none; b=EBiBZb5c6lMsITt7hp632ato64sCKT8lxeDxC3It+BBQOfHxwjD46+O6RgL/jD5CZhCg7D/GTFteYHwsu9YyCo4enqoL0mLVRMUr5PQCy6VS4eqAPX6f1KZfOevZtgcOI8tez1u5gZSE21jIET6KaM5jaKjcNx4mqCqwaw/rkS4=
+	t=1790934341; cv=none; b=qE38Hmr+ESC05CTrotrN4ydkes3/OzbEejrnxrbX1xxSH1aiCFUQmtArrN6P9tjVr9LZkrs2J4yGsymmOSsKBUtvycXnBgnHdcEPXKpeOvPpCBU1t0bK5W4iA2cVW4B6De7/igfgobVjzWK8543A15HhFERSvmju7G8qusQGhl4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790934339; c=relaxed/simple;
-	bh=k0vf9IJe5mr2xZ4za2J/iwlEqUm4UT3e4X4gEPnokc4=;
+	s=arc-20240116; t=1790934341; c=relaxed/simple;
+	bh=/e4orqd9ooo38fMCjozQMvU6+3FatBrm2ieDXdrYcoY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Qocgsz9vZd30pw5vSr9HtzYPuo9AJ4w3jhlav/u4XO2AOPANRoJyxDREPVU5G5Y3hThBMCBnIC8pviF4YYr8jt5MlCDFkCqV+mBJqf4KBd5d2kt1N7yyamgBOOJQxQrJNkotep78inVTstagDfcboKCpg+Vln9gwlEQ9ARkXFo8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=TCFjZQmv; arc=none smtp.client-ip=74.125.225.140
+	 In-Reply-To:To:Cc; b=U7/HFvN2d0G9qcXvvLRoj5ke85BJn0wrWe53uAs1h+z7c8L/aEzt80b3667FbvxIMtoaysMGbRstANlw6gHR3bzCA9pt+cKj/OIQh1mGJvENI8CGky/WLYKJK2uNZivMwDYBCNRkxSksY3toiiivjj+P50eQ+TILw6NKS38PBh0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=FEsD6mN6; arc=none smtp.client-ip=74.125.225.141
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="TCFjZQmv"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912df756so56099615e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 02:45:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="FEsD6mN6"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49d1fb0cf5eso67229145e9.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 02:45:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790934335; x=1791539135; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1790934337; x=1791539137; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Whs608MpQHn0fcanZf9ChaNVLNdoG4FAnM1K+j26AR8=;
-        b=TCFjZQmvRCZ0Ac3ECygeznRIGOnnIp7bn2P/4uVqZEKe9K+atDHW9uRtG+oKvEed78
-         jzVsiyObjXzmZpBox2DvTqEEvphnqOGm7fdo2BWWwbIzTToAeHV3Xk2LbR+XGXj6nrrl
-         uUs/jY/UmENn7JVFZi3bIZm18V0iiKcFWZh8XVFwi0Nt+trAhY7yPD71QoFwu7fw2HPj
-         f5/GAq6A9s2Ji43qQLVFGcxCkTITfm4SI5gVzQD4w8RsdtTkQIpKM6PgRj2v33/ZKitZ
-         frgUD1MVoHxQNyPshcc0ou/jVebRJiLWf9PL5nwaH2rJydQ+fqACKJ+JzJatHRTjGiHT
-         HTyg==
+        bh=pXyCopQF/wJtpOFJwcicNfvyz+Xom9etFu/usBJbflc=;
+        b=FEsD6mN6b4hoOsXKlWQWyKHoR5wT/Shlga4jqeACmIJlhlYFxlqH8/uQkF3MJwrNDH
+         HdEKS3EOQx/2hdlIZKFMlkW1Mdeigtlu2EU7Hp4Xt2pCbHXzUts1oWATM3sIOS6fILf9
+         6IWg2GTH1zBUeyqk88pAojmEd22p3k2b/c8Cyho0wQqHeM/WF9i0LWosU6rG7bAzSqGx
+         qBWGhCdvGZNlvFJ8tVajq1fezwme00Rtdon1/JJ2m7sHmte2Ymp0KIQSmnsu5OeKhElV
+         CQFaakzgWPYXIR+hyYzM77xpBMek6ikA0y1KYACk5qYh6O4w7XDqdwuH/Nudecqzxr6E
+         oFqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790934335; x=1791539135;
+        d=1e100.net; s=20260707; t=1790934337; x=1791539137;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Whs608MpQHn0fcanZf9ChaNVLNdoG4FAnM1K+j26AR8=;
-        b=V2v5Dlu3W6SuTLxcavXDAACU9axp4uiQ/Vth6Dz+LGDzujwPckZxoZnlg7HwhJvXhN
-         oy7QXj2yq9alHGoKHtr1eU1DsLc4tfXslqywkTJHGK6HILAN2uVQj2/VOl9hhXgwQkWR
-         zD3MXhlpc4VGCsAtAGtNY1sdbtPNCPgt74xcoVyqUwe0qyOoPAi7z0Oc7/ryyNTQBu6y
-         Rzyo6ZMLfIMZ24T6jgryZZwGT1kmeUrXarqYZVl52PNi+tPbDNSihi+OrKpaP3SGGjV9
-         UCbHGx/CtsuFs9Llu64hejDL9C5Fri9WSIqqX0hRqticfd7CyVxiEY36h24cQYKUjMsZ
-         dIRA==
-X-Gm-Message-State: AFuF++lUl+ZUUThUEW1ynx4DJgobz3Qz90BBO5/7xFFp1YAWt++dxuMg
-	5dRWEXdgC94j0q/zNn+7VCG0y4mSkPoyHHUMltKPupXbkJ5NTyx4TxRBI+/C7IsHfN4=
-X-Gm-Gg: AYBFou2qS1WlI1uKENXSn56p17AQ9dXfmVEHG3FnnPrl4yQ9s14Ir4EL5CFBuE0yTAs
-	TctJyrv0jX3hb/Vd7DrWYCY8GdY9xYRKqpaeyK8Y9ikZRgtfK+qSXiExdRSxj7190J8wzOLQPIS
-	8gko+Nat6ZIOn76i+aeqC7BjziqY3wkbivhBR9qjPsY9OV7nhHqj5bXvHrE8FvJmHHOduBxGtyV
-	9R1H85/qwOZlH0yH0GiB4GZim7MYLY1x32rekJIp0lfhI5OL/eWAXIDHaZbuselAmmjJqNy/vGo
-	GuPAnfIycCxbUR5systgrVaDI7LvAZOm07Ho9pvvRc+Ma91SUjOUV9/GDeV76DLRvLPz2L4io6X
-	DIl7sLuB8cccqdBlxqPsvlcF4ipk4b2QJZy0JIBUyn6QZ04N1i7hnF40qjDxbieiwwpOmtcCkuW
-	U5grqK1V3XQEd9yUN8EQC2ZzZ0v3DwpOhPGLET66Yd3C/h2RmBS2uIp1dOacQEqaikZX4w+pW8+
-	jVKw5nt3K6HnimXqqg=
-X-Received: by 2002:a05:600c:a10b:b0:4a0:1c94:7042 with SMTP id 5b1f17b1804b1-4a027542267mr31818345e9.8.1790934335444;
-        Fri, 02 Oct 2026 02:45:35 -0700 (PDT)
+        bh=pXyCopQF/wJtpOFJwcicNfvyz+Xom9etFu/usBJbflc=;
+        b=ZUhw1NI7ug8Di//q7j3I8RqUVC3dJxT2Jimg3+/PinqZAjKqVZN+sqmGejp4cmjEYY
+         TC86bTLXRiQFYqXOXoT7QebHU44iO0pbNKaBfaL9KlgG+htBBtg5rOIMjtto0X7JBes5
+         8E04ba5pWUsP/o6r1qRXyG4yyaJC6Q2Fv9K9LB+pY1Jg3rBxDOTWnkCbvpONoVn6SRx1
+         2Muak12OhnzG5F1s7EDMpS/Nfl7LZXzNmyy5sDrc2pIz/Rw0rIP1vEs3DSo/9qjof4Ns
+         LwCOdw3gLJDV5xYX8CEAETSSlapfdY73djyWNOjpofO01WdOwkBQ5ChoKUcpl6ZLZ1ei
+         lIqQ==
+X-Gm-Message-State: AFuF++lEd4EtrYBup2V1bcxsMjablDQJbKxBnVv0aA/JbE22mt/nmauG
+	1bJsSFJqN0dNRCXazkqMx5bdnTZkX4YrYYMsfkaY5VjO7MXwBkq2AnVHVG0wfEe4bEw=
+X-Gm-Gg: AYBFou3CyF/jlxz1/rMNTMpHAho1wp9YQd8gIFvOHP0GDduNrs/eeg7Q+ZXCgp6iMWI
+	GwRmh7leRRXUz2/oo8/oLOAG25+jmmhz/5rURixzulpsW4d2biKwpHGcaulsUlCJa/iQXORhcKj
+	e2eKKtVR+J/vbbHGuhRqh4YFw6jzHGPetxzSDG8rd96aoarbraIIsc/k9q/426K0Tb/rdD03YYe
+	rC7imJbrtv2EqWgRtwhuNThb2+AOa8if101YBkIOPwTUxotwq9ZKEP3vdcr3NT6LV+qQ/FtsQp7
+	E6qXO9lCDc5IVD45dVyhPMj33773RYWH9gMdpPAhRBXR0neABbdz83nrFxNu1nSdg6MntUmkFn6
+	71T+qoLKOy3Iax3PuX1QYKgQnOF98/jhN4lp/RHLPoFqPjtFlMBlT3ViobUr4WXf9YZ5SjGtPC1
+	a4mFo4VlZXKQiJskxAnidVE8I+QMGV6TgTMrTLkqAiD1p+2HNROf+FSaUkJJZDQncj3wxcjQ9GT
+	dHY35HjxtD9ssJl2cQ=
+X-Received: by 2002:a05:600c:1911:b0:499:b65e:49c9 with SMTP id 5b1f17b1804b1-4a02756643dmr36113665e9.10.1790934336410;
+        Fri, 02 Oct 2026 02:45:36 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0280c8bb0sm72705635e9.11.2026.10.02.02.45.34
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0280c8bb0sm72705635e9.11.2026.10.02.02.45.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 02:45:34 -0700 (PDT)
+        Fri, 02 Oct 2026 02:45:36 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 02 Oct 2026 11:45:28 +0200
-Subject: [PATCH 1/3] dt-bindings: watchdog: qcom-wdt: Document SM8650
- watchdog
+Date: Fri, 02 Oct 2026 11:45:29 +0200
+Subject: [PATCH 2/3] arm64: dts: qcom: sm8650: Add watchdog node
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,7 +70,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261002-topic-sm8650-deckard-watchdog-v1-1-7d7f7d71d88a@linaro.org>
+Message-Id: <20261002-topic-sm8650-deckard-watchdog-v1-2-7d7f7d71d88a@linaro.org>
 References: <20261002-topic-sm8650-deckard-watchdog-v1-0-7d7f7d71d88a@linaro.org>
 In-Reply-To: <20261002-topic-sm8650-deckard-watchdog-v1-0-7d7f7d71d88a@linaro.org>
 To: Wim Van Sebroeck <wim@linux-watchdog.org>, 
@@ -85,42 +84,51 @@ Cc: linux-arm-msm@vger.kernel.org, linux-watchdog@vger.kernel.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=838;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=989;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=k0vf9IJe5mr2xZ4za2J/iwlEqUm4UT3e4X4gEPnokc4=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqv307o/zudbjHuKF52tsKRiGR41jSsZ9EofxSYEwF
- u/xRq/SJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCar99OwAKCRB33NvayMhJ0RGTEA
- CSXVLhNJEeYoozS8xgfYmrDj3hHsVBLpx4GKI5vRjOQ9brQbqDsuGZFB0I5ZmzGnSTD2igOgP/UYAL
- WWfZbaHz1ZEqsJtAwkybzyZ5FVU6+KHdMjigaScGB7Pn4PwGsfe8ZVIiHO1OA/1CutAxdwxkz7C0z2
- QMt/zlnNVSHzb6H9Okg0BPOAaPM5ZjwzBkliVk2E/n2WB/VNVNkuY/0Pw0k3YbiACwiRfjayKy+9Ug
- OkeYhdi/OkLSsTx0kItUuMbB6v0yH1vwKBeS/Fol4kd9I0cq8EOX4ezKuIBT8H2v5rKyJbgvrisD2G
- Y7sFhEXb2f37kfoQZEIDqYi4sK3LtDPdeAg6Qx04lTPnEuUnPAXYNrhuLoMUX/OwggRo8WxTDbu89W
- MmAC2WGh2M1eG8cTTS6VImknxL0+AcgiTaBJRpj+WDMUpMmH7pF2yY3Twqjc90jVgKExJfPdBAYx1m
- Fk8P4DVcy7i1ZMehyFwZ7++3ajmuOGuZLSxI4TGranCJDCDLyJ1zp6PhAzmlZSBSlXUNVss0h4u03l
- B9hBdn9rvRzMFHqSVlozPelFM9dQgXbNitIKBhLrrOH/novqCMWWOCVy/rG+0Ktk2nB+tuPAGQ5g8b
- srnX3VvChZH02a+1glJ+98c3rmKIUywD2R2SnCbv4fo3WwEZV931zBs+m5LA==
+ bh=/e4orqd9ooo38fMCjozQMvU6+3FatBrm2ieDXdrYcoY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqv308OwQAnZXSbRNTMIeapM4c7xy5yMn/SJ1QPHKS
+ 9tqeGFyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCar99PAAKCRB33NvayMhJ0afWD/
+ 49+j359tBNoaoTP2dpGyr7V2h1+V7ETZt/I9IbCy7h+K1zMBL2VEZcSzn+7AfuqRsBUMgbNq7qoNKa
+ oUwM+iO1qsvnFXsJ9es56nD3FrjJs8TnQiFsflT70lje53mcuAjb5ZKuSyAHlLm/3y6Knyw4NG5+lE
+ Z8jDNqxBhXi3Cre8TfyaA9eE1BE6FmuKLfW722xI475w+VldEx9KQYWcnLh454z4PKud3AzYoRO0TR
+ 7iRG3ela28g/qbAvCaASvv2KWDipb4fzlR52KAtIuIZx1kA6FxtC2zXfob2kMKaAISRDCtB3BYHOOv
+ 9TYQ6gHcrOInvr2HJJIBYKUBYDmMqSkVdHECnMYMpALqhwC+TE9PkAvhE/PT+uD6b5eSWv33XdosIx
+ 40oSkIrWxjTHW8ky3ByVIlHkG4MMOAau5jfje7ut/IUAEw5Adi2nAD9St3LYVHn30rSwvjfUEkUMXb
+ /cJ7A6wMeH8jCckpLBpGlTx1BuuNN2FuWEGw8Pro+atfQ4k/kOYg5gr334hs0J00MX9F5YDgbhE72t
+ b/UXew1dMOZBYl1WvjTl5LQr8zFQy+qUGvCP1qss7YpR0EqF2NPkbzeg7+pCpnANthYt6iA4gowY+4
+ KEX2O+M5PgSqYzk8rmZwcMpvSaYTgMEpWblIrGTm4Di+dnVPffxyHKEBdD6A==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Add the SM8650 compatible string to Qualcomm watchdog binding.
+Add a node for the watchdog on the SM8650 SoC, the node
+is marked as reserved since on most platforms the Watchdog
+is owned by the Gunyah Hypervisor.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm64/boot/dts/qcom/sm8650.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml b/Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml
-index 4ff61102e407..31f9dd24c29f 100644
---- a/Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml
-+++ b/Documentation/devicetree/bindings/watchdog/qcom-wdt.yaml
-@@ -50,6 +50,7 @@ properties:
-               - qcom,apss-wdt-sm6350
-               - qcom,apss-wdt-sm8150
-               - qcom,apss-wdt-sm8250
-+              - qcom,apss-wdt-sm8650
-               - qcom,apss-wdt-x1e80100
-           - const: qcom,kpss-wdt
-       - const: qcom,kpss-wdt
+diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
+index 86fbb0fd6472..f33ed7909a8e 100644
+--- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
+@@ -7311,6 +7311,14 @@ gic_its: msi-controller@17140000 {
+ 			};
+ 		};
+ 
++		watchdog: watchdog@17411000 {
++			compatible = "qcom,apss-wdt-sm8650", "qcom,kpss-wdt";
++			reg = <0 0x17411000 0 0x1000>;
++			clocks = <&sleep_clk>;
++			interrupts = <GIC_SPI 0 IRQ_TYPE_EDGE_RISING 0>;
++			status = "reserved"; /* Owned by hypervisor */
++		};
++
+ 		timer@17420000 {
+ 			compatible = "arm,armv7-timer-mem";
+ 			reg = <0 0x17420000 0 0x1000>;
 
 -- 
 2.34.1
