@@ -1,177 +1,350 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 626034052B3
-	for <linux-arm-msm@vger.kernel.org>; Thu,  1 Oct 2026 23:30:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790897440; cv=none; b=RsOvJjbtVzGzWlk+fTucV8prG5cynZGnKxqWIf+yJpNmU8wsiFAicvQBRfT12Cu/doVsKcA3Kwbslpv22ttfdzyAx0Dj6s3wjFOq/9OJtE09qQYhN6EtbLVp7LM8wNLlNwTywlUoYO/kp4cvliZXET3Tsj4iCUdVQxeKUzh1Ww8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790897440; c=relaxed/simple;
-	bh=D97DedcSn+Zwer4yckX0JWjfX+0T9Kq8fzLFq/N9bJo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DrQGhdE58qtUEsjfPbeM6ikTTklDYHpG+lJYPTj4D8/6iMVVZx6108YVMOSvwnCgER/CW2nszW/pnzGKSLZ/mKsvE6p5J1PBfr1PBlCB3p6bg3708sa7iUbPtwaWc/IYdaXRb/ENvhv1T4uLu0LtLO6+gcN6E5GuuxBgTblAxkg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dDDE+JBP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PGiPiAwb; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D3AC2773D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 00:06:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.8
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790899598; cv=fail; b=tQNprlnXezrJ/0l8/wn5a3vmAeT0G0uhH6r5U6RWJd7ewpEy/dS7vFHDnjZk8sx2sAz1w7kuB71JWpUWD+D9voLud9R4I5Xy8mFz3vpVD4M3WGbrhJMEVFrhm4sEA2fuFuW0wtlounjm560Q7z27Jk67ByAslXVbq1aCUGe3B9A=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790899598; c=relaxed/simple;
+	bh=TFelHBoKKh2vNTUz3VKyjLgCoaofX7iMZBKrWPfNab0=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=lmSxmJ2v183lmpiWHt5qQ+IobBq9vAmiMjrFW/DdDdDy4lRl01PZ8PB6q6FX8KifGpcVYQ/f+qcRiWL3LfLLAcCjmx22+VjNySsmrPsRdKwaNHVDx8kNku9ZFEX0zgji1KUtt5xZv+rgDhL95SeQQ7zpKeu5KbZG3Fi86LUCzO4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lT10I5zs; arc=fail smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dDDE+JBP";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PGiPiAwb"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 691NEtZW3077370
-	for <linux-arm-msm@vger.kernel.org>; Thu, 1 Oct 2026 23:30:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=4AbQ8DsiqRNyKzuYux5OlMD/
-	rfuVBocWRxUHqNysAxE=; b=dDDE+JBPep5SyEc8jlf1fw7rJFKRDS/np2bW2+Z+
-	pGEZxB35h0PtXlY59A8Negt0Zdpqr4V2g7rW5isDPxzY7g39Z+t0KTIjhaGIfY/z
-	uShHC7pKtX0bLvZK5948jIsB55+n7INtJwZuaiYZw3F2werpTUQl7oxl2j1OR/yY
-	tsXLIxYd//LhsQc1eXzSE7bkrNc5ruL+qluMcvti+/dMwmNOg1bQlocY0vdxPVp1
-	wIZMtrMIfzohSQJdhJlVeyxmL/T2jhOlOddCp9KXBWlwbz49tMekLe/E6r1ezrcl
-	g8q4IS3XzfNddY63Ntvf1sJS2x5N+lpvohK5szrSeJu0OQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1v031a6c-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 23:30:36 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-934956beec8so1435279585a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 01 Oct 2026 16:30:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790897435; x=1791502235; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=4AbQ8DsiqRNyKzuYux5OlMD/rfuVBocWRxUHqNysAxE=;
-        b=PGiPiAwbMC6Vxm4sp1gwlg0Mdxzz4Jo/2lgtQZgy6WRJTr8kmCrBiaaYJA8OqyNOwf
-         p8KiffA80OrhFtnMlqyYWZ1ze9WgMj8fyngFKFeR+9Kvyn79tGaI86TqD/LI9VJk+tv/
-         K3QMNoG/DexSLYKG3v8El4wV5KjWSqmUuuipZz8jas894M9UnYzPDzPjA3+UVpusIZe0
-         7L3ttAYTYNv/ESQSkqsIut6mvIXBBIAj3eWzjK42NwyYMuAf+owlM/Q4sQ9ZEapnXYIx
-         A2IUSVWkYAEmZ+fmEM+LuSpucICvT9lIbd5YUGCV2FoJ0kH1HbfxQREiJtlvR76yGaPe
-         RSDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790897435; x=1791502235;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=4AbQ8DsiqRNyKzuYux5OlMD/rfuVBocWRxUHqNysAxE=;
-        b=Be4zqRnjlmZJDnq0jVWEOGNlSC07BsqAgoRus1OPivQf1K2mvdkaQ5v1ygjaxYsPzA
-         vmdPQPNR3LiG7YVgLRa5t7QfSsgtWrS7AR1RLQwlHHwX67+JP6GqGRUOH9e+R+pyWyjp
-         lDp4ovGYADgqne9L3ANADF5WoLkct7yP/GVmgmP/7EPlMuXtUDGA7h1U7frsri1qbfAg
-         BHtG4mE98JnS8yepkwQGB1EBGhQjiUZKjSXjMtw/+o71mJ5pwiyQzZZ2l5455+48ny8C
-         p+iWGxRyBIxwVh/wx7rrd0WJ+42RLCWGy/OBbqQDZH59t//qxRhDtlzNyrFNEfK+B5EW
-         L93g==
-X-Gm-Message-State: AFuF++kz1YXnN7Uv5NofRpjBZTKAE2n+gtOaCa8Ye60syCxH547BVMUa
-	9yplN4cHjgByAyhoO40iJJZFvUSjris6yaGhkaYiHY+ExYWQ/dGFY5M6mTjffmdd1YeQFEXhbB2
-	zSyWlUWKFL3wvUz7gsrWaGQejnb7uK/6pFxK5vVY2Nkr+LmkZtDJ5bcRV6TWOQFL3r4gH
-X-Gm-Gg: AYBFou1WqbIVxsJsXwyf4xWVC5VWR9nIJVoXntqAiOM+/OSNADAN7ipQedd8OwjFJR/
-	auY0mrnwagXqchpBQnoSedj3nUqJU4Vfgs44DnE939rlGIBL4Fa/AITBbMFfq2O6pSGe82Zc+57
-	fVJe8e36LSH7QBi0BNcWK+r5TQkkpQGb3uzGJTOUBZFNLzN+9AOgD57Ehgh4C6RWco/ItoUrhZD
-	StLoAM6YAEzzdFiXmZIt3fCPBL5/gIkSrLg5zuidmiWNY9BZ9SwDxqz31QcZ2uyXJniIvoCZ1H3
-	dYu/qAuBddtplBQyDOULKMjIIu/cBm4kNXs2odwrhA6UqgP2dei7Z+j8D7IywX7o2hddyHoI3rH
-	6wglXVErSTh+6DMu2QicIdOMvD9BxfOP49b9RRPigyLxSqBXn7F6yECtoAe4uz3Nb3WYgLmZLOX
-	593I+7uFklz81g
-X-Received: by 2002:a05:620a:444f:b0:93c:6450:9cf2 with SMTP id af79cd13be357-93cf16e70f1mr157179585a.28.1790897435299;
-        Thu, 01 Oct 2026 16:30:35 -0700 (PDT)
-X-Received: by 2002:a05:620a:444f:b0:93c:6450:9cf2 with SMTP id af79cd13be357-93cf16e70f1mr157164785a.28.1790897434369;
-        Thu, 01 Oct 2026 16:30:34 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7c78bec9sm224988e87.27.2026.10.01.16.30.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2026 16:30:33 -0700 (PDT)
-Date: Fri, 2 Oct 2026 02:30:31 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Jonathan Marek <jonathan@marek.ca>, Val Packett <val@packett.cool>,
-        Bjorn Andersson <andersson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/dsi/phy: power up the digital top before
- starting the 7nm PLL
-Message-ID: <f6w6anqecd27vgvu74ykjnd3smwhiji6uzejtj4geoe2kupiyh@v7spur2rtwqi>
-References: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lT10I5zs"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790899596; x=1822435596;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=TFelHBoKKh2vNTUz3VKyjLgCoaofX7iMZBKrWPfNab0=;
+  b=lT10I5zsVMwhQWWUUvGlXREnNznQ/VEYezp3gdoelFeaiBbG7+YtEbAK
+   8ElP45jjVB3+R2O7znJDjIs86+CX7KzGdaGhfC5srhQQUIEGyoGJvDV41
+   8b8c3FmQEajwfhhivO4HEnCpZxDml71QJh3pawcwhZ3BYB6rqsBWT6r32
+   soslLYm5Z3dp6HG9JIJeCft5D3rMi4TVq6cSkM2FHA4IGBgp1oHE73qxA
+   e6xCJW75sn/9fkhI9h4KSiv/YORjk7IlrTLGFX8fjpzD+X3yBLX33DPV1
+   mrwTkvduV/T+5ubfZjakK4ae4kYwFDvMDdIU1HYSMXI4F7WqgyFZYgI9N
+   w==;
+X-CSE-ConnectionGUID: ma3chmbCS3y4IfPMjkEUPA==
+X-CSE-MsgGUID: 0Z5bVMOcTiincEAKqE1q5Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="109155790"
+X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
+   d="scan'208";a="109155790"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 17:06:36 -0700
+X-CSE-ConnectionGUID: CoiVXfoyQ3qRQYfU/uG1DQ==
+X-CSE-MsgGUID: cPceU5+ETq2VV49hBfm6EQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,135,1787036400"; 
+   d="scan'208";a="279885119"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2026 17:06:35 -0700
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Thu, 1 Oct 2026 17:06:34 -0700
+Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49 via Frontend Transport; Thu, 1 Oct 2026 17:06:34 -0700
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (40.93.195.71)
+ by edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Thu, 1 Oct 2026 17:06:35 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EU7GxtQhbsVY5v0t62s9LVzMrlC/imqEmNBZgOFhma7Id+pGWfiLrTUUE+Fd4PT52as+J8/mR1xwPcl2LLeaHYNF1AfkJ6oLI06aQ+Vbsmd2Z/COn8gZPDmBIyeGUgREyFWFZLO+0GQ8qHsCFhz4Nnn2lu0TorkpNFSiTN4ZtDNQ2yC8rLcvsl93GCK/X8nqywv54fmasPFOE8RWc4/diHUqmn8N5/ZHkDqOmpG3l0zO0J/h18vOl/aYzC68MzOqgC+3vTZo68H4QT2QMjKorW9KNLYIoCOa99Zz0d227mRdH38Jmmcxwh8aNesSkKW3xtffHuOR+PN6Ye+uI2i6Ew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EfrkflQhPViZU1sdP4rlBNcQb/W+bw8zBV42dfRRCQk=;
+ b=Ui+D0u93EomqwnO5y+kMp9U5TFg8WY+wmwR5HoVQTduY2DX17whp+TQ/dZALE/7gq1VSuDN+wz5RtLlbVjxdGCRsscauMjTlMMp8sd8/OlOPIQu/3nijOYnpTu3MTladhoaYKcTH3za9oByCeljf9eXqrc0Ol8Svws+IcB9BfSQJpbBqI3yRdg1rt64E6IKmY/T/Nunzu5//HgMx7y85SPTeaphHYFX9UlF5ok9AGi/kCTJYm9AzfqO9p/LuPNmWAK5j/3wCUogvtVmaVIcI67TU7ANlZQXMzpG2BHZNKrqe0BLFS19brl9NN0GQQqXoC1oGRrPZdgskLotRbD3OHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from CO1PR11MB4787.namprd11.prod.outlook.com (2603:10b6:303:95::23)
+ by SJ0PR11MB4942.namprd11.prod.outlook.com (2603:10b6:a03:2ac::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.18; Fri, 2 Oct
+ 2026 00:06:32 +0000
+Received: from CO1PR11MB4787.namprd11.prod.outlook.com
+ ([fe80::e7eb:a872:53d1:21fd]) by CO1PR11MB4787.namprd11.prod.outlook.com
+ ([fe80::e7eb:a872:53d1:21fd%4]) with mapi id 15.21.0472.016; Fri, 2 Oct 2026
+ 00:06:32 +0000
+Date: Thu, 1 Oct 2026 17:06:30 -0700
+From: Matthew Brost <matthew.brost@intel.com>
+To: <intel-xe@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
+CC: <freedreno@lists.freedesktop.org>, <linux-arm-msm@vger.kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Alice Ryhl <aliceryhl@google.com>,
+	Anna Maniscalco <anna.maniscalco2000@gmail.com>, Antonino Maniscalco
+	<antomani103@gmail.com>, Boris Brezillon <boris.brezillon@collabora.com>,
+	Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, "Dmitry
+ Baryshkov" <lumag@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>, Liviu Dudau <liviu.dudau@arm.com>, "Lyude
+ Paul" <lyude@redhat.com>, Maarten Lankhorst
+	<maarten.lankhorst@linux.intel.com>, Marijn Suijten
+	<marijn.suijten@somainline.org>, Maxime Ripard <mripard@kernel.org>, "Randy
+ Dunlap" <rdunlap@infradead.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>, "Shuah
+ Khan" <skhan@linuxfoundation.org>, Simona Vetter <simona@ffwll.ch>, "Steven
+ Price" <steven.price@arm.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?=
+	<thomas.hellstrom@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH v3 7/8] drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
+Message-ID: <ar71hn8WpDHD8cHH@gsse-cloud1.jf.intel.com>
+References: <20261001220632.3190896-1-matthew.brost@intel.com>
+ <20261001220632.3190896-8-matthew.brost@intel.com>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261001220632.3190896-8-matthew.brost@intel.com>
+X-ClientProxiedBy: MW4PR03CA0275.namprd03.prod.outlook.com
+ (2603:10b6:303:b5::10) To CO1PR11MB4787.namprd11.prod.outlook.com
+ (2603:10b6:303:95::23)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA5MyBTYWx0ZWRfX1wg+PYJI4NtB
- HfI/1ahvPeguiq1QGbs5nB1syBOPIvQj9V2ohgU5pe4uZ/EtB2AanmguJ8OcXYqZ98GVwoDyfmX
- reth58PWU+3Mwl7UZ4L7Bx4WbPNnBt0=
-X-Authority-Analysis: v=2.4 cv=GqfXaU1C c=1 sm=1 tr=0 ts=6abeed1c cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=GMMiCQSux9nJ0xNYgbgA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: 4PtT6Jidjz-cg4jFHIS8bye4gjFJoyEP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA5MyBTYWx0ZWRfXx/Tb+IyiZ5j4
- 2vijCrnecEBCe25hh/2HxwF6rE6Suh69BYoODdMI84rHi1+VzE9VAxxRs4p2L/jvdq1dr0UzO0s
- m/BCqBG5ISj5LsIwiGnabweLPNoUhWiMtV4GKigFD8u9la70vW72psocybrMQfwCPXPt/pqo+4g
- U13s+8cU92mAM6hLBCZGvcwh4XuCJuGb+i+sEqo1S8IkidRgdmCbwkbQKvB62WiLgxR+S1Vocq+
- CBkAr2bZIKV1mdrEx6Gs/bBrQeigwtmj3dkaTUATwlpVtBrUuH8CZRLrnpixlHfTwfVlFTBGxMd
- aKrNYEM3grXZJhgcYClHe4iWUWC8TmzlMWJks+Ofs4++WX4cgbosq/Z01lCGvT0DfHx0xJNnD/f
- AI2V57juYvN0Q0hb8J18bIUbKMsk1x7lANQdtdLlcIfW5Hr5OS38VCBNBJGol8tMwRMSWUGzhrM
- MX55fsMyytTp3Q6+GPw==
-X-Proofpoint-ORIG-GUID: 4PtT6Jidjz-cg4jFHIS8bye4gjFJoyEP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-01_05,2026-10-01_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 malwarescore=0
- phishscore=0 impostorscore=0 adultscore=0 bulkscore=0 suspectscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610010093
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4787:EE_|SJ0PR11MB4942:EE_
+X-MS-Office365-Filtering-Correlation-Id: 279f415b-5f2d-41d1-dda0-08df201903cd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016|23010399003|10067099003|56012099006|4143699003|5023799004|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: Rsomq6O7qoMf8aaDAM/BupeT7STp9IcT8xaHJePBDmxR09SCiN+7KQ/tL67WtAtKMy/pmxoWpgbd8sO7mbH2C/HAgyBhWZb21lK4muMX2m3HccdaX7pAj/hVxHrvcKbnPJNRO/31cAnsHuiMorajaHKUsfIXU0tV3/avA+xu8sXBgBWDf2GsojA348JwNKUCckl2BgZ6vsWrOokOQxIIab/J76pKOVxELhEgHK8nvzSFeIcLndZptwZS3y/osQAUJBe1TOxJEvo8hdk5vJTLPwwdPerqj+l3qf0V3IOwjo/X/jUzjAaw9/awU/y739v4cshjY8zn8XuPsfMHd+2MHiGKJ9xu6QforexiG3ipHQ3miEmvgBquloAWIDTJSICpqHFSXSeWBynFVk8E4qlVcYShQd1rSRSax83AsX5JBUGmeTVQb3Gob/hSOR95b16ufV4ySig1kioScM6UJhpuLV8PWIlzFR3qoF8Xv/7Ip6TguGzNCzwVW/Fgpbf3/8A3UZykY0iArxd/HEu2VC83uCFIHUM7Eo2mEaGouVaVr2TiyBJfH1Nsq6HSNpqr4vFHXjaGbIQuAIsT0vcolB1VAjb0PjMFl987ez39vIHqlNRSfe2nje81hqgZoH0LuN9HXGpfc3rX5WRVQtM2PlhUwQ5FWffUbjnhVnGJDyXlqe0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4787.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(23010399003)(10067099003)(56012099006)(4143699003)(5023799004)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?IMI7RTmhaU9HHvXpeVwsZ9341SeiT5J0ONFg3BCnVwH0LEXBX6UxTe3iyi?=
+ =?iso-8859-1?Q?ZF0B8hS+9uTJoW6XU2v1uX2cUIfWjABQLIEUS/bJJ2rY508worbYnFuvps?=
+ =?iso-8859-1?Q?qLyJEkY0JD7AX012gHFLt8Vg9uJoiVYmkREc6n6/dxXhYz1iHgVdF2slgv?=
+ =?iso-8859-1?Q?LHwmbc/H8Q24ke4Bjm6Wnf3UQu88GuQQosTAeZKrJn+SaGE0tQuMksMGmb?=
+ =?iso-8859-1?Q?3uPIt10ZfTeoLvJSX2GFGqpUQWtytyu5HcyNFjxI0rwGzB4Z35RXLH7945?=
+ =?iso-8859-1?Q?My2nCmKAT76GKoDflLKBoON7tQ9l9zQmKIAHJP6nLvfKua64LEJDeu093m?=
+ =?iso-8859-1?Q?AtLYbL29HFcZd5RYV3bACCFjaLfkFC5ER+kvE+G1MrkWOXJWAk5U7EjGkH?=
+ =?iso-8859-1?Q?YGkgiOAvrJzaRgBIQLb1RbDgFdRkXXl4Hiw4k1uOnzhb9qLtO9lgf70DRQ?=
+ =?iso-8859-1?Q?F64+ih1kqVXOVcyuLM/KxNAnXZvLJBqjHk964osW+No/75FnC+usBqb+oB?=
+ =?iso-8859-1?Q?k7WRbJQOV9gIH32pqwymLJaUeN5sYH3upS9qF3YVE3R/bPYG7vRWLfiOxR?=
+ =?iso-8859-1?Q?tWhZsfxnqzHmIQC6M9dnH0dskKbBQ0Ok9i9O4X5voB0Hs8Hmq9F87kAswv?=
+ =?iso-8859-1?Q?cod4VX70lV3lgYK8llJFsTBe56NBbEgZ5FfERMt1sMI0B8g7lFlnCQlRHb?=
+ =?iso-8859-1?Q?4XA8xy2rN4PJgaX9l68f80zoC4XhTvk4QnRgqKxysNGFMaWUb2B7N6MJXa?=
+ =?iso-8859-1?Q?VC1leEvZW/Uqz9Ej8clRvMt9lfWi7Ctv69firGLztCELi5srbDOAkg+u1H?=
+ =?iso-8859-1?Q?ioDYKan0jIPNLh0Y1fQ9fc0MnvGzTO0SEZkIpJ5mG02vXI6ad1ovCsaOyP?=
+ =?iso-8859-1?Q?dLnKRzraSz+HPrD/Y7YIxCTtSUciL0+DGMqPENJCjvUMfPKkr5SDIdLgud?=
+ =?iso-8859-1?Q?ribUE/Tc8G95IqB1uwJJmUJ1nysY0p0zg/UG+13aQvw8L41aaOl2X+f9RF?=
+ =?iso-8859-1?Q?zqhXeiCT0kc39ZW4PUt/j1IoZpdeX1UASktRLbddGK7gcv5k9uUd5LbRKi?=
+ =?iso-8859-1?Q?qR/WnWOh0GhsMEK9lv8zpQCMVrMmExkdyZh9UuZcN7eUVo1dHRQ4vqldv1?=
+ =?iso-8859-1?Q?SmSuWWMNuiVTuUD+Y4BsrLd7iwSBsJi6XBzPi9iQmLDL7JjPP6aNLc0e/g?=
+ =?iso-8859-1?Q?YwITCnSfFCj08pKIXNDp6OCu40SJN8bzetWa5J938UPr/prH4o8dIa4OKi?=
+ =?iso-8859-1?Q?dAGYusCE6yz6ac/udYUsrtVMkm7YXQAx01+CxMSqbNcfqLSulkMXDBYG51?=
+ =?iso-8859-1?Q?atmmEq3gGIRlzU2gLTup3+0trpuXZj/IQ08oeC1vZmBYQTbEdEWvJXE/Tf?=
+ =?iso-8859-1?Q?7SZ6tgNNy1rHR99FGTlR8HkYC7X1guHKpJEtY1qp9A6bLK2XxvQoyQ7ngd?=
+ =?iso-8859-1?Q?fqU/3Bq9bi7lzcteD3MqItuwBMpH19AARSTWX3ue3MhbKTOjm18lp1qZbL?=
+ =?iso-8859-1?Q?nL+Egbg9jHPFqehLts1pPvs3whpnC9/Xl9yt4kXIDonSC7nUxB6qB/YAAb?=
+ =?iso-8859-1?Q?t6YyLV91tKMqPqAUkIgQjdS8ymV/FaretUbO5bS//naS2w1XjCmj2ZyFqR?=
+ =?iso-8859-1?Q?R+Y/E3ycHdCFK7ZamviJr+jOBlecQZvUn11SLl37+t2vVjLdVhlXtRGuei?=
+ =?iso-8859-1?Q?UzHBFnCYzFhje7NemrThR7aQb3xTexfPtvqFbDtOH6E+E/H2Or7O69RY9G?=
+ =?iso-8859-1?Q?xyqlraTxbn6e+BpdDjnFrcylQDtaABBdSZuXGklFs3ka4soo5HYv7LOAuu?=
+ =?iso-8859-1?Q?APPxWJ0WEyVk5r1LQbT4I9SNfQ6hZnI=3D?=
+X-Exchange-RoutingPolicyChecked: BigDPcSB2YDRVsOE2wnK92EiNcnk07Y8pJ4TVDyM039UaXgcacJJXIwQvm9dUTJtbulb5iUDuOgeeDWOWwWijx/JTjq+sZIR3f2vRET7iO8Shz++Q1lzMfMzxiu4TKD7yViX7wJ+8854zCQjiyI45g2YQbOIp5tlav6hyhAidzp+sNaFIoJftn48Bi7CqriM5pnxvqPvaWjQ9DLgumc3FWMgw0w710gT1UTDuFKOW6SBr0Hto0ej/bY7UBtUPlpbW5CPQcGeXhWKGgPnMProEm4eaht2khUdS1DoL+b7TXli4wy6ARnqKLDEwLnAgM2C36DipS1394puY5UHZ6LpHA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 279f415b-5f2d-41d1-dda0-08df201903cd
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4787.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2026 00:06:32.2274
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: s2rPLqn+yZbUNArxXQBe9EdkiUGI1ETPdeouc0U8Io7pAbPgo73gHrWOyjAvu26uaFw9w66BgQ4k0+yp2X/g+Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4942
+X-OriginatorOrg: intel.com
 
-On Thu, Sep 24, 2026 at 03:51:03AM +0300, Dmitry Baryshkov wrote:
-> dsi_pll_7nm_vco_prepare() de-asserts PLL_SHUTDOWNB and starts the PLL,
-> but leaves the PHY digital top powered down; only dsi_7nm_phy_enable()
-> sets DIGTOP_PWRDN_B.  The PLL cannot lock in that state.  This went
-> unnoticed for as long as the PLL was only ever prepared from the DSI
-> host's enable path, after the PHY had been enabled.
+On Thu, Oct 01, 2026 at 03:06:31PM -0700, Matthew Brost wrote:
+> nouveau creates its drm_gpuvm without DRM_GPUVM_RESV_PROTECTED, so the
+> extobj and evicted lists are protected by internal spinlocks. Every
+> nouveau path but three already touches them with the VM's resv held:
+> drm_gpuvm_exec_lock() and drm_gpuvm_validate() on exec, and TTM moves of
+> private BOs, which share the VM's resv. The remaining three are:
 > 
-> Since commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for
-> pixel clocks") the clock framework enables the PHY PLL on its own while
-> applying the DT's assigned-clock-parents from of_clk_set_defaults(), at
-> probe time, before the PHY has been touched.  The lock fails, the failed
-> enable leaves the pixel clock with an unbalanced enable count, and the
-> retries on every probe attempt stall the boot for tens of seconds:
+>  - nouveau_uvmm_bind_job_submit() adds the vm_bo of a MAP op to the
+>    extobj list holding no resv at all. Move that into
+>    bind_lock_validate(), which now locks the VM's resv as well.
 > 
->   DSI PLL(0) lock failed, status=0x00000000
->   PLL(0) lock failed
->   dsi0_phy_pll_out_dsiclk already disabled
->   WARNING: drivers/clk/clk.c:1188 at clk_core_disable+0x244/0x24c
->    clk_core_disable
->    __clk_set_parent_after
->    clk_core_set_parent_nolock
->    clk_set_parent
->    of_clk_set_defaults
->    platform_probe
+>  - bind_link_gpuvas() unlinks the GPUVAs of UNMAP and REMAP ops, which
+>    can drop the last reference of their vm_bo. It runs within the bind
+>    job's drm_exec transaction, which the above makes hold the VM's resv.
 > 
-> CMN_CTRL_0 reads 0x20 at the failing attempt: PLL_SHUTDOWNB set,
-> DIGTOP_PWRDN_B clear.  Setting DIGTOP_PWRDN_B alone makes the same PLL
-> lock, with no rate change and no other register touched.
+>  - nouveau_uvmm_bind_job_cleanup() and nouveau_uvmm_fini() can drop the
+>    last reference of a vm_bo holding only the object's resv. Lock the
+>    VM's resv along with it, through a new
+>    nouveau_uvmm_lock_vm_and_obj().
 > 
-> Power up the digital top together with the PLL bias, and power it down
-> again with it.  The normal enable path is unaffected: dsi_7nm_phy_enable()
-> holds the bias reference and writes CMN_CTRL_0 in full anyway.
+> The bind job's fence now always lands in the VM's resv, as BOOKKEEP.
+> This already happened whenever a bind job mapped a private BO.
 > 
-> Fixes: 1ef7c99d145c ("drm/msm/dsi: add support for 7nm DSI PHY/PLL")
-> Fixes: acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel clocks")
+> With that the internal spinlocks buy nothing, so set
+> DRM_GPUVM_RESV_PROTECTED. This is also what two-pass locking in
+> drm_gpuvm requires, which a following patch makes use of.
+> 
+> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
+> Cc: Alice Ryhl <aliceryhl@google.com>
+> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+> Cc: Antonino Maniscalco <antomani103@gmail.com>
+> Cc: Boris Brezillon <boris.brezillon@collabora.com>
+> Cc: Danilo Krummrich <dakr@kernel.org>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Dmitry Baryshkov <lumag@kernel.org>
+> Cc: Jessica Zhang <jesszhan0024@gmail.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Liviu Dudau <liviu.dudau@arm.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> Cc: Marijn Suijten <marijn.suijten@somainline.org>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> Cc: Sean Paul <sean@poorly.run>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
+> Cc: Simona Vetter <simona@ffwll.ch>
+> Cc: Steven Price <steven.price@arm.com>
+> Cc: Thomas Hellström <thomas.hellstrom@linux.intel.com>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
 > Assisted-by: LLM
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+> v3:
+>  - New patch (Danilo)
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c | 49 ++++++++++++++++++++++----
+>  1 file changed, 42 insertions(+), 7 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index 2026fe6b48c6..dae612e56d91 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -1187,6 +1187,27 @@ bind_validate_region(struct nouveau_job *job)
+>  	return 0;
+>  }
+>  
+> +/*
+> + * Lock the VM's common dma-resv together with the one of @obj, as needed to
+> + * drop what may be the last reference of a &drm_gpuvm_bo.
+> + */
+> +static void
+> +nouveau_uvmm_lock_vm_and_obj(struct nouveau_uvmm *uvmm, struct drm_exec *exec,
+> +			     struct drm_gem_object *obj)
+> +{
+> +	int ret;
+> +
+> +	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES, 2);
+> +	drm_exec_until_all_locked(exec) {
+> +		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(&uvmm->base));
+> +		if (!ret)
+> +			ret = drm_exec_lock_obj(exec, obj);
+> +		drm_exec_retry_on_contention(exec);
+> +		if (drm_WARN_ON(uvmm->base.drm, ret))
 
-For the reference, picking up this patch breaks the boot on SM8350 HDK
-with the disconnected HDMI display output. I'll try debugging it later.
+Sashiko flagged that -ENOMEM is a possible return from drm_exec_lock_obj
+if a kmalloc fails and that is correct.
 
--- 
-With best wishes
-Dmitry
+My plan is to change this and open coded WW transaction which can't
+fail.
+
+Not going to post now as I don't want to spam the list.
+
+Matt
+
+> +			break;
+> +	}
+> +}
+> +
+>  static void
+>  bind_link_gpuvas(struct bind_job_op *bop)
+>  {
+> @@ -1224,12 +1245,24 @@ bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
+>  		   unsigned int num_fences)
+>  {
+>  	struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
+> +	struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
+>  	struct bind_job_op *op;
+>  	int ret;
+>  
+> +	/* The VM's dma-resv protects its extobj and evicted lists, and must be
+> +	 * held by bind_link_gpuvas() in case it drops the last reference of a
+> +	 * &drm_gpuvm_bo.
+> +	 */
+> +	ret = drm_gpuvm_prepare_vm(&uvmm->base, exec, num_fences);
+> +	if (ret)
+> +		return ret;
+> +
+>  	list_for_each_op(op, &bind_job->ops) {
+>  		struct drm_gpuva_op *va_op;
+>  
+> +		if (op->op == OP_MAP)
+> +			drm_gpuvm_bo_extobj_add(op->vm_bo);
+> +
+>  		if (!op->ops)
+>  			continue;
+>  
+> @@ -1288,8 +1321,6 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
+>  			dma_resv_unlock(obj->resv);
+>  			if (IS_ERR(op->vm_bo))
+>  				return PTR_ERR(op->vm_bo);
+> -
+> -			drm_gpuvm_bo_extobj_add(op->vm_bo);
+>  		}
+>  
+>  		ret = bind_validate_op(job, op);
+> @@ -1603,9 +1634,11 @@ nouveau_uvmm_bind_job_cleanup(struct nouveau_job *job)
+>  			drm_gpuva_ops_free(&uvmm->base, op->ops);
+>  
+>  		if (!IS_ERR_OR_NULL(op->vm_bo)) {
+> -			dma_resv_lock(obj->resv, NULL);
+> +			struct drm_exec exec;
+> +
+> +			nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
+>  			drm_gpuvm_bo_put(op->vm_bo);
+> -			dma_resv_unlock(obj->resv);
+> +			drm_exec_fini(&exec);
+>  		}
+>  
+>  		if (obj)
+> @@ -1941,7 +1974,8 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
+>  	mt_init_flags(&uvmm->region_mt, MT_FLAGS_LOCK_EXTERN);
+>  	mt_set_external_lock(&uvmm->region_mt, &uvmm->mutex);
+>  
+> -	drm_gpuvm_init(&uvmm->base, cli->name, 0, drm, r_obj,
+> +	drm_gpuvm_init(&uvmm->base, cli->name, DRM_GPUVM_RESV_PROTECTED,
+> +		       drm, r_obj,
+>  		       NOUVEAU_VA_SPACE_START,
+>  		       NOUVEAU_VA_SPACE_END,
+>  		       init->kernel_managed_addr,
+> @@ -1978,6 +2012,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+>  	struct nouveau_uvma_region *reg;
+>  	struct nouveau_cli *cli = uvmm->vmm.cli;
+>  	struct drm_gpuva *va, *next;
+> +	struct drm_exec exec;
+>  
+>  	nouveau_uvmm_lock(uvmm);
+>  	drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
+> @@ -1989,9 +2024,9 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+>  
+>  		drm_gpuva_remove(va);
+>  
+> -		dma_resv_lock(obj->resv, NULL);
+> +		nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
+>  		drm_gpuva_unlink(va);
+> -		dma_resv_unlock(obj->resv);
+> +		drm_exec_fini(&exec);
+>  
+>  		nouveau_uvma_unmap(uvma);
+>  		nouveau_uvma_vmm_put(uvma);
+> -- 
+> 2.34.1
+> 
