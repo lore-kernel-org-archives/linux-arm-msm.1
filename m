@@ -1,155 +1,213 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B58F405F7;
-	Fri,  2 Oct 2026 08:52:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9885B46D579
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 09:06:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790931150; cv=none; b=QQdlW8kJbjN+nMDyg9OgdtkL0ME+oNifr8kSPaM8a9y/0tPi6LrpuKmbZ/wmmmGf+/aZGZoN9zDh0j2zN3W2zzllFQsc15QeWqZp+4FNUWK/bnCDNnoXhTkhzLb4hkCx6iSe+WZk1MurtDOGn62bttCtcekN9Ln7Mbk03ueTL6I=
+	t=1790932006; cv=none; b=BNDh8nSnlBl1lMBflPhbNEJlPjnj1jIn3/Z1hsXX6Jo/FaV1VM7XiFhpEPUvZrh8YuhNfoezyKklfdCrgatVvzmeP+VNEEFgEksSJPuuqJZuEr/YslIvoSgcVdz8uFmdVq3EJYPHc8tOBQpW86ANdeTxtLd1wNbswLwRb87WUr0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790931150; c=relaxed/simple;
-	bh=SqHlElyVodRO1yNJr7r/TWEQrzWl+RMdAYs5HfP78kM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FGywFHMK7OnIZ5mdaGdf2swC9w7LS5PRFwFzV1bHpYjSCOjP43wvpbUrizrE1gDFjL0Yif9DiXS3a2cUVSdNkjv6VwjT6s9ziNhLW/9hUb87kgefchmCPMIilZDoP+cuMMPkHY/dZGpMgugHZ59+M2rpS7H2mCrDWY7uy+sQD6s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JZHHCSdK; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790932006; c=relaxed/simple;
+	bh=kDMZJFIYNLpENyTsWhs6Qg3bWlNKfFJpixhYOyF9GVI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ee5YLiQqcNXix0SK24SO7e6o+uQaFrPA8JJ0yFwNZRkKpI2fdWgmYZjKESarEsXDDQGUaVyJ1g7+ouIIfV14f+gy0DSao17oXslSlbm7M23NwLUT+odPkWgRp4VJCvRzCcnp+uyOdNNlFAOp9RAViPpOBPU1LaOfA68zPwi9Rw0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rn+ZlQ8Q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AYcT9DUI; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JZHHCSdK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F8BA1F000FF;
-	Fri,  2 Oct 2026 08:52:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790931149;
-	bh=U0WCfxPcUdYZFOPrQcWDaJAzR9K8was1K1PhmxwGAAM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=JZHHCSdKGBEGh4A/7PARPnCUI2DqXgPVSBaBEJjVno7ZlwDZ5SnL2l3OWsQoMVDCO
-	 jYufIc8MqCZb3H7hAjVwGpujyQM96DvG7e37BsuiqpyGHlxvmuWX3iNTCqBdBi+KkX
-	 5N0S/5n8soiVXwmgx7nTRNGqCjBdrilFikB9xqcb9apcapvS0GUkD+GQx5DZjoYPXm
-	 yL1dU/DmfAYT7hGRjnJNDM6eF7B8ZDgZ0nx9LmHknBYrY5G37MPXNQISKZRXsmCZv6
-	 uPUvlEru2foFk5jMu6mx86CKwh4vmyVqwgNeAxOkOD487h1+RM4pvdnnXB/tCgzWuy
-	 23HF9CwCsAi6g==
-Message-ID: <43dd9c03-39df-4807-922e-41ca9a492f16@kernel.org>
-Date: Fri, 2 Oct 2026 09:52:25 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rn+ZlQ8Q";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AYcT9DUI"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6925itKT4019605
+	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 09:06:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=m3e22T5Ei+HeBmJThbj0uNqY
+	cEf7ihFqents8vMEUus=; b=Rn+ZlQ8QldP1jrxGM5PRYz24yepuy89350RsrrWc
+	Q+aRe0f+9wBE9wOepUkA/3d5FOWJpLF7XFVuRlh5bv3ob2BtYM0DjaqNjRYH3lVt
+	puvCftbFgiokSzf8xvTx+7nCsxR2VpnwE8d7NAbCyrLRlAAITRBtSIe2EVEaJFuD
+	c95xQ38c+5Hpnt2a0koWxSUeJLPd/ipguvFm+7i7KswIQD9q6AC9gOsQbPyrnf6Z
+	zZJzgMDC6H3siJKLnHh+keIliYFyhGUsIEI+DZ1ofEAceIxtPfeWztOrI6xECqNM
+	JKkhdsbnxx6ZFN05jkR3zw5uuSCdxVMmN0bypEw+aeOurw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1rvqbwm1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 09:06:44 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93c5ab5c136so1038630585a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 02:06:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790932004; x=1791536804; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=m3e22T5Ei+HeBmJThbj0uNqYcEf7ihFqents8vMEUus=;
+        b=AYcT9DUIkJJKBhP2sTTJ6pD3S2g61RG7kAuHEwUnOkykqyzKSTIEunSf8Q4UrppVNn
+         qTWIDdZu+DYO8gojszn959gLmqsbbnOUrRxoVbjrKLMWeqd8FGEn5lGJ/TdkOgbBZbeQ
+         TPYQo7cRkx+6qddZ1Ok99soYzHuw2qnaHdB67/PwLl7152JIEjUodI/yUkVogAn+eE6D
+         caMXARs+7eu6FjiH0a2KOiq327TJ/onui+cftRp7FMKehBRO0OUNa6C10XI66aeqgrX4
+         guO7YSpFcmpxISsnzQ49HtLVETCOyNIfiFqNxCP/6YO1sEVUg2uXU/1sZBjjlrxgAAge
+         NRUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790932004; x=1791536804;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=m3e22T5Ei+HeBmJThbj0uNqYcEf7ihFqents8vMEUus=;
+        b=oYsI/K9xQ8l6yJ2JsBXfhnBOW6HKXCWoPmz3EwsAyZKRy8GOc5EqKFJRc7v5ILY9sm
+         hBh3NanheDUOwKPAPZQn1rKiUypAn+2th/Y2DcumvnooDidHkwvwhZ19fQK+ggw1+Nrj
+         syRPEjHAK8CedQF3DrNQIb/jG2w766TthOMSC3hDhCMh7HBPbk99zaHab7x0Qwf/wOBF
+         l+DkoD4+SxyFUfQ3iv3cu1jsFa3vaWJ+/yOZlO/h1XiOwH88SjomZPToxB73qKpQEHYf
+         qp8Q+5jD+SRLqCyPkV7wD1cu1fJdGJGnc/TW8NqxnSi682CBcczcB0080gAw1dpekSN5
+         RIOA==
+X-Forwarded-Encrypted: i=1; AKwUvBx21c9ysivxMuDImJmcJnz/Y9CrtP1JTQHgMhw+H7sn4nMZ4yDWN3tootZf1qjslK5++EXl+dnUSyW485Cx@vger.kernel.org
+X-Gm-Message-State: AFuF++lsMjCrZu+0SwRfNhFe7pE1HzTxUA44cn1eDhMgofinV5iAPazn
+	6JlwfuxORCSmqI/lFLOvUucAEt1ggcZ2r+9K3azXKnAiMis0/lcWscEc3QK4OA4kabSJUmWwiiE
+	1LF/NM1xFnWhcs/H22EFurPrnBp240QBsOufjvNVufwzdgjES7LPay8TXv9/hler76wSq
+X-Gm-Gg: AYBFou3lePBHCIZJ0EaoWZa2eF9l0/RLKpVdUN5z76ZCJXuHb78CD/amcLPEzcLv4lW
+	rpGsEIXsforv/nQLLC5bbdBwkno/KwPWxIo4NZfFAUY9hBtqdC4g6wWCtrUSqtoTmQLI31NXH6P
+	f7p+YomXfjV5zzg74Cx2nul2A4Cmnan4g+MdhgICD6BYtgAciBHU0vuO4rfVbDhfn7+FrP/MU0T
+	W9NSUiAcnxTatBH0YRpzPPvluI+N+IjeMQszt0oPMDMHhU4dIuhdO1qwtdVfsu1KOKYY6jPlfxe
+	ONroMqja5y3hT1f/CpkWBYpsU3sbNk2TLW4kNlvuBsSEzR9M5vmu3nwSsxSMRBgzEdenUTbZSba
+	HcCh238ZxYMkmi3LLOrUl
+X-Received: by 2002:a05:620a:8804:b0:93c:612e:9b51 with SMTP id af79cd13be357-93cf18a7807mr337166185a.55.1790932003766;
+        Fri, 02 Oct 2026 02:06:43 -0700 (PDT)
+X-Received: by 2002:a05:620a:8804:b0:93c:612e:9b51 with SMTP id af79cd13be357-93cf18a7807mr337153385a.55.1790932002076;
+        Fri, 02 Oct 2026 02:06:42 -0700 (PDT)
+Received: from mai.linaro.org ([2a05:6e02:1041:c10:f14c:b716:c104:4712])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a03950375dsm22387125e9.1.2026.10.02.02.06.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2026 02:06:41 -0700 (PDT)
+Date: Fri, 2 Oct 2026 11:06:34 +0200
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Cc: Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Guenter Roeck <groeck@chromium.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Matti Vaittinen <mazziesaccount@gmail.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>,
+        Francesco Valla <francesco@valla.it>
+Subject: Re: [PATCH v15 5/6] power: reset: Introduce PSCR Recording Framework
+ for Non-Volatile Storage
+Message-ID: <ar90GoaxTV8pjonY@mai.linaro.org>
+References: <20260924-pscrr-framework-v15-0-7af87107e0d3@oss.qualcomm.com>
+ <20260924-pscrr-framework-v15-5-7af87107e0d3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: fix 64-bit division in
- iris_set_slice_count()
-To: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, kernel test robot <lkp@intel.com>
-References: <AgJq_ESuBnuRTD-nBYJ68Y7_6aBNuPB2wIzsm4CsQ7fkkkz1ZwjSkUsF8qior3pVbYSS26UV9MGkVBy0Nfu0cA==@protonmail.internalid>
- <20261002-iris-fix-divdi3-v1-1-b2284d7fd77b@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20261002-iris-fix-divdi3-v1-1-b2284d7fd77b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260924-pscrr-framework-v15-5-7af87107e0d3@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDAzNiBTYWx0ZWRfX+pFV7nXpqvX1
+ TAOsbPNBS6DJ538/qRgxyb0PW3e/CJYXm83jTpPiOoEcReJKFAHWH3sTEhXCpYOjX0pZW0PYfVP
+ +xTM4myz/0gjhIIxX3+2YaGngdioC9BUeqc9Iw0E3btOGO97Ms/GEYSDWyn+gaNFqWApDPRU8XW
+ ZRwaNQ1Xzh1oOrVsr+pOleNrYipY6jUGXh33DQf8+mOBG0ZBAfIZqjeL+nZOkPJ9GZUafwSGxos
+ heNUXBPvAc8BPiP6Zmcw63kY2f09tr8cMBHXNBjWkoe+bPtlBHyL4G+oQIOzlLBMjkWQXOQDPbY
+ g2drfie8bRelaQsEbcx2fL1msF3wfczOF6l9yN+Wtnb4IcKV3bJzatUMs4Q1TgWQUdyTT3irAb8
+ q6dXKD6pXphR4cQKAD2DnqiDi51mNs08z46mHU+cwSOp2pFxWI6VWD0kze+nf+5YIeBSCpJMUyS
+ NGY2k5fBCMR4CFVWlIw==
+X-Authority-Analysis: v=2.4 cv=JIauIMKb c=1 sm=1 tr=0 ts=6abf7424 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=wJk3McD_gWb6CrzzaM8A:9
+ a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: HLcgyw_n5zVVjtAR6HN9qVPgziRL_Q1g
+X-Proofpoint-ORIG-GUID: HLcgyw_n5zVVjtAR6HN9qVPgziRL_Q1g
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDAzNiBTYWx0ZWRfXxRbKwQaCb5xd
+ v5JHig1ojmlCFfCLCff+TUI28EgWjZCwRSktCH2Tqh48j8qb+dEkixIsrTtLN9IMZTxyrjdMuZp
+ HELp0nB2OVbzseyxYL5qyX0a7W6SZh0=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-02_02,2026-10-01_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 adultscore=0 phishscore=0 impostorscore=0 bulkscore=0
+ spamscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610020036
 
-On 02/10/2026 08:44, Sachin Kumar Garg wrote:
-> inst->fw_caps[BITRATE].value is an s64, so dividing it by the frame
-> rate is a 64-bit division. On 32-bit architectures the compiler turns
-> this into a call to the libgcc helper __divdi3, which the kernel does
-> not provide, so the module fails to link.
+On Thu, Sep 24, 2026 at 12:38:46PM +0530, Faruque Ansari wrote:
+> Introduce the Power State Change Reasons Recording (PSCRR) framework: a
+> generic mechanism to record why the last power state change (shutdown or
+> reboot) happened - under-voltage, thermal, watchdog, software-triggered,
+> etc. - so a postmortem reason survives a reboot or an abrupt power loss.
 > 
-> The bitrate always fits in a u32, so copy it into a u32 local before
-> dividing, as iris_set_peak_bitrate() already does.
+> PSCRR is built around providers. A provider is either a hardware reason
+> source (a PMIC, SoC reset controller or watchdog exposing a reset cause)
+> or a recorder that persists the reason across a power cycle (an NVMEM or
+> RTC scratch cell). Each provider gets a directory under
+> /sys/kernel/pscrr/providerN/ exposing its name, backing device, the set
+> of observed reasons (as tokens), its capabilities, the reasons it
+> supports and - for recorders - a record policy. The reason set is
+> deliberately not collapsed to a single winning cause, since resets are
+> often multi-causal.
 > 
-> Fixes: 9abcab03dbf8 ("media: iris: add support for multi_slice in iris encoder")
-> Reported-by: kernel test robot <lkp@intel.com>
-> Closes: https://lore.kernel.org/oe-kbuild-all/202610020426.oUzBZ3mH-lkp@intel.com/
-> 
-> Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-> ---
-> The original commit is 5f21cd9a4ae4 in next-20261001 and is
-> 9abcab03dbf8 in the current venus-iris-next branch.
-> ---
->   drivers/media/platform/qcom/iris/iris_ctrls.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> index 8c4c47944f22..06d99b18310b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
-> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> @@ -1548,6 +1548,7 @@ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type
->   	u32 mbpf = NUM_MBS_PER_FRAME(output_height, output_width);
->   	u32 max_width, max_height, min_width, min_height;
->   	u32 slice_mode = inst->fw_caps[cap_id].value;
-> +	u32 bitrate = inst->fw_caps[BITRATE].value;
->   	u32 max_avg_slicesize, hfi_value, hfi_id;
->   	u32 rc_type = inst->hfi_rc_type;
->   	u32 fps = inst->frame_rate;
-> @@ -1588,7 +1589,7 @@ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type
->   	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
->   		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
->   		if (rc_type != HFI_RC_OFF) {
-> -			max_avg_slicesize = DIV_ROUND_UP((inst->fw_caps[BITRATE].value / fps) / 8,
-> +			max_avg_slicesize = DIV_ROUND_UP((bitrate / fps) / 8,
->   							 slice_caps->max_slices_per_frame);
->   		} else {
->   			/*
-> 
-> ---
-> base-commit: 9abcab03dbf81439e18d09f1f3869bc39290ce4d
-> change-id: 20261002-iris-fix-divdi3-44b1974118d8
-> 
-> Best regards,
-> --
-> Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-> 
+> Reasons are the numeric enum psc_reason values from reboot.h, shared with
+> the POWER_ON_REASON_* vocabulary, so they store compactly in small
+> battery-backed cells. The current reason (get/set_psc_reason(), set by
+> the thermal/regulator/hw_protection paths) is written to every recorder
+> from the reboot notifier.
 
-20261001004619.2230849-1-sashal@kernel.org
+[ ... ]
 
-Already queued.
+> +menuconfig PSCRR
+> +	bool "Power State Change Reasons Recording (PSCRR) Framework"
+> +	depends on POWER_RESET
+> +	help
+> +	  Enables the Power State Change Reasons Recording (PSCRR) framework.
+> +
+> +	  PSCRR records why the system last shut down or rebooted into
+> +	  non-volatile storage, so the reason survives the reset and can be
+> +	  read by the bootloader or early user space on the next boot. Reasons
+> +	  come from software (thermal or regulator hardware-protection events,
+> +	  a watchdog pretimeout, a kernel panic, a controlled reboot) or from
+> +	  hardware reset-cause registers (PMIC, SoC reset controller, watchdog).
 
----
-bod
+[ ... ]
+
+> +static int pscrr_reboot_notifier(struct notifier_block *nb,
+> +				 unsigned long action, void *unused)
+> +{
+> +	guard(mutex)(&pscrr_lock);
+> +
+> +	/*
+> +	 * A reboot, halt or power-off that reaches here with no more specific
+> +	 * reason is software-initiated by definition. Record it as such rather
+> +	 * than leaving it unattributed; a real cause set earlier (thermal,
+> +	 * under-voltage, ...) is already latched and left untouched.
+> +	 */
+> +	if (get_psc_reason() == PSCR_UNKNOWN)
+> +		set_psc_reason(PSCR_SOFTWARE);
+> +
+> +	pscrr_record_current();
+> +
+> +	return NOTIFY_DONE;
+> +}
+> +
+> +static struct notifier_block pscrr_reboot_nb = {
+> +	.notifier_call = pscrr_reboot_notifier,
+> +};
+
+I'm worried about the mechanism. The call to set_psc_reason() sets a
+global variable and pscrr_record_current() write its value to the
+NVMEM backend.
+
+That is done from the reboot notifier.
+
+Is this notifier called in all cases, eg. watchdog reset or emergency
+reboot ? It sounds possible the reason is set but then the notifier is
+not called thus not written in the non-volatile medium, no ?
+
+[ ... ]
