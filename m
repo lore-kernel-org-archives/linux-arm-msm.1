@@ -1,99 +1,84 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBDFF3FE34D
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 08:47:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A50194028E2
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 08:47:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790930838; cv=none; b=FJOF/jQq3zLfFuGITjZhZ3SvIoe9yz65J4BPtOE0CrUFbeBXYZTjkhh/f+s5todJ+qmN0z3rys5Vg/Wo+XYuzVlmIElEAy0cEVGr3XWPV+GKzKYHZNtNQUszHC1dtg+0OndZdPQ8k9HRXw4yrqxJdMYU7xFdRgAbN8NMbioe+EM=
+	t=1790930859; cv=none; b=rGNWDOof8WXD9FS8U9oogWcjKLCvppSMhCOcIuUp6BEjS99nKDZu/TMrMbvqvwAnuldRmrwfCroNPGNpIp/NsmOhO4ii3BVc0L0FzzrMEL9EjrRoqj/TxKqnMc8bNEe4OC4LV4WVRSI7xeLdQbt0Ip+ss4Jk9EQOIrpMGFMB55I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790930838; c=relaxed/simple;
-	bh=52GfUpvw9geyTFomKSZOrfOFdkx/TMpIeaEl96ywf3E=;
+	s=arc-20240116; t=1790930859; c=relaxed/simple;
+	bh=CfVVsEKQiKUKIdQcsrMCIp1srl6qWTN/O3a/DTTNycc=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=RSDGKVWp0pSCreuM1cZH1VCEcQjL12S0hvuERTpQ7TMSkbIbrtN6IM+H6SgoR/u4Gd+MkwbRqkxJPoJzXTr/OUISD8U0vPJQmOZR/m2oTKAQJbCouS72rFqN7U2e/Qq2XW4NRza9L75nn/ln4ofuMVGifwTwrU/5d+Y6V3NBNIY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oBqS/x5I; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=tB8qRjus6Il3cSPTYCUOGLEAjCvoBmTSqQ79NIjMDw9VE/529vGNRqbfN25dmfRgyVjfznMaivgm58bPBVBiTzkiUrhbInq4DsSdiLRz/UamdN7fLiPkXw1T4l0zJY6cv+02Z+tPp/yWOAhErScQji0lb5D5/0lIdZAvn4/JZRo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iKQZ18ZI; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oBqS/x5I"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62D5B1F008A3
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 08:47:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iKQZ18ZI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFCBF1F0089F
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 08:47:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790930821;
-	bh=xN1LMsVBme82xNY8iTaBouPAjacIAn8MmiSFm7uDo7k=;
+	s=k20260515; t=1790930850;
+	bh=CfVVsEKQiKUKIdQcsrMCIp1srl6qWTN/O3a/DTTNycc=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=oBqS/x5I2Z5zDO8N/s/vma4IEcYHMQbf55Zt+/w3klPbdCm+68a7g6/Ti56f++u4J
-	 H+VmgWLf8U4ikeHcfKPxMxoa/d9235sTHDmix4i4rbBCeISHpE6KpBfekY6+UwSDMx
-	 mKJyxWQ/J3HPKQ2xb5xCFCu3MWxAoutAaHVUby5sz0Wk8DVzb6sRCz5lH4o1+YOvXG
-	 OcdlYpXBvLixnGJe+fE94q1SZCJv5L89aob5rNzDwbMm9XZglZzUdAKvV2FvOugKSB
-	 mXKJF46q6azaRqYe40evPXRJgvP4WAzXFw/G5L9vPgbuj9px8VHkPdsI93K/JkaPnT
-	 v7IFDNwYgesHA==
-Received: by mail-lr2-f32.google.com with SMTP id 38308e7fff4ca-3a96c77840eso1866661fa.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 01:47:01 -0700 (PDT)
-X-Gm-Message-State: AFq9FYIuGpGMHXVIAgSwokMaPx0f3dgjOE76B63w8t+06wAxiWhL+VdG
-	mnkyarqA3xGbnSYG6zhuudNVafC+ARHOFZ1EfjBCpuRCk5v9Og8L4oZg0bqhZSW8Sj8P3Lbyz4z
-	E9UbVfwAGslnlFlXHRleEAWCQ7IJUKsoTP9BAx1nOZw==
-X-Received: by 2002:a2e:be9d:0:b0:3a6:6bef:943f with SMTP id
- 38308e7fff4ca-3a887800e68mr4674821fa.18.1790930820042; Fri, 02 Oct 2026
- 01:47:00 -0700 (PDT)
+	b=iKQZ18ZIyT/fVEtc72YDH/BHrYxahKwYj5Nv/ogMFYNMWwydRxf+bEJo0eAIlouLz
+	 vv+AHCWcroFzoGrDwNdvmcrbzBWRYlZ4O1J+kEPxlwMaLW7hrKauTn6H+FNkhPaPcq
+	 pj6Fpgk1IjY5UggfTXjvLK4vVpZFXoi8NerZU45PA4CbQlnM/gWkdqwxi/NIL0ZH4v
+	 BJlZLYmsxbHML7QZHOHXEmjHrx7hcEpauRz6gvNKTXuXRYTgLM2n558pL5NA+QkQ5Z
+	 na1N5MhNIhvEdUO0OQNlP8WVKGR5BBdiPVNf6Szl0sdoJ1HIPTxvcJDYR3oPDMYD/x
+	 35SAKJDoNsszA==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5bb79ea1170so1154372e87.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 01:47:29 -0700 (PDT)
+X-Gm-Message-State: AFq9FYLewmE1YXzVzBFUhjrMpFMAqtvUTYgC4y1UJj2p/W0+HGDgu4n8
+	LO9T/HTKXwrr7YSo0i3GSCYxYfbFIBidDUUnVR0YX66MsjAHeYCAF9b/a5cwfHoKI+ljo7zB7Ne
+	Lfpyf/VUVRI+sBcvbciKy731+4z9pKX42YFE5oYq9ZA==
+X-Received: by 2002:ac2:4301:0:b0:5b8:ea1f:1212 with SMTP id
+ 2adb3069b0e04-5bb9bb034cdmr497464e87.29.1790930848716; Fri, 02 Oct 2026
+ 01:47:28 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 2 Oct 2026 11:46:57 +0300
+ HTTPREST; Fri, 2 Oct 2026 11:47:26 +0300
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 2 Oct 2026 11:46:57 +0300
+ HTTPREST; Fri, 2 Oct 2026 11:47:26 +0300
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260916-nord-gpi-dt-bindings-v1-1-857bf9e84999@oss.qualcomm.com>
+In-Reply-To: <20260917-nord-usb-dwc3-dt-v2-1-8f88aa30c434@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260916-nord-gpi-dt-bindings-v1-1-857bf9e84999@oss.qualcomm.com>
-Date: Fri, 2 Oct 2026 11:46:57 +0300
-X-Gmail-Original-Message-ID: <CAMRc=MdVQ4xUFPtcytXt5Tqor5-fUjHiRvnpmxBsJpJbd1rHLw@mail.gmail.com>
-X-Gm-Features: AclHuK9m0Na3k7ACxnGI4xSNeT3xuFUjWyBVgSYP6SCQBDAg7rQT8-H09G1SvQI
-Message-ID: <CAMRc=MdVQ4xUFPtcytXt5Tqor5-fUjHiRvnpmxBsJpJbd1rHLw@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: dma: qcom,gpi: Document the Nord GPI DMA engine
+References: <20260917-nord-usb-dwc3-dt-v2-1-8f88aa30c434@oss.qualcomm.com>
+Date: Fri, 2 Oct 2026 11:47:26 +0300
+X-Gmail-Original-Message-ID: <CAMRc=Mf=Uw549oV0sAdkEKn0YWGbGs3WJDvwT9QT68Wof_M1jw@mail.gmail.com>
+X-Gm-Features: AclHuK9ZnIv7V1GnuyGLwFWZPuYOe9gSpC1LVPzxGkpqRg2LumFl06AulgiqkeU
+Message-ID: <CAMRc=Mf=Uw549oV0sAdkEKn0YWGbGs3WJDvwT9QT68Wof_M1jw@mail.gmail.com>
+Subject: Re: [PATCH v2] dt-bindings: usb: qcom,snps-dwc3: Document the Nord
+ DWC3 controller
 To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
+Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
 	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Shawn Guo <shawnguo@kernel.org>, Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Wesley Cheng <quic_wcheng@quicinc.com>, Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
 	brgl@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, 16 Sep 2026 17:21:29 +0200, Bartosz Golaszewski
+On Thu, 17 Sep 2026 19:07:00 +0200, Bartosz Golaszewski
 <bartosz.golaszewski@oss.qualcomm.com> said:
-> Add the compatible string for the GPI DMA engine found on the Nord
-> family of SoCs.
+> Add a compatible for the DWC3 USB controller found on the Qualcomm Nord
+> SoC.
 >
 > Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Link: https://lore.kernel.org/r/20260901103300.60803-1-shengchao.guo@oss.qualcomm.com
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/dma/qcom,gpi.yaml | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/Documentation/devicetree/bindings/dma/qcom,gpi.yaml b/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> index 54dca623223d51373a4d54591f3ebbf5e31fca17..ad70717b5b86e600e74d6cfe42015dc03db25ba9 100644
-> --- a/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> +++ b/Documentation/devicetree/bindings/dma/qcom,gpi.yaml
-> @@ -29,6 +29,7 @@ properties:
->                - qcom,hawi-gpi-dma
->                - qcom,kaanapali-gpi-dma
->                - qcom,milos-gpi-dma
-> +              - qcom,nord-gpi-dma
->                - qcom,qcm2290-gpi-dma
->                - qcom,qcs8300-gpi-dma
->                - qcom,qdu1000-gpi-dma
->
+> Changes in v2:
+> - Fix the interrupt constraints for Nord: we also require hs_phy_irq
+> - Link to v1: https://lore.kernel.org/all/20260901103300.60803-1-shengchao.guo@oss.qualcomm.com/
 > ---
-> base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
-> change-id: 20260916-nord-gpi-dt-bindings-f4b10102d22b
->
-> Best regards,
-> --
-> Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->
->
 
-Vinod: gentle ping, can this make v7.4, please? Otherwise, can you Ack it
-and let Bjorn pick it up?
+Greg: could you please queue this for v7.4?
 
-Bart
+Thanks,
+Bartosz
