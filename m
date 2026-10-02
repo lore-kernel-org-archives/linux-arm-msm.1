@@ -1,127 +1,172 @@
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5F6181334;
-	Fri,  2 Oct 2026 04:22:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.203.200.13
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790914968; cv=pass; b=LERohNUh71WzlXcCUw06zJ+81beT0nU4tjJTtbDII2JGIPOZGfZz0HCCaDzFjH/Oef7/PlDbossb5rpQyWzKo3iYhv6cscvus/C6QL5eiloLKlNo1OnoLj69WDc7qqYIJewhKWi7+vu53PPasjp9WELlZNLVtnR1R5C0LDancEI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790914968; c=relaxed/simple;
-	bh=e88pRB7MkAyUq2c2V8R7ncpEngY3XcHMxiFUuNJtX1o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=gsVWIs229dKQj11tZRA6v8D0Lt3AKAqAmJkiZ3FyDnkDof1Vi9aMWODTqWeMhK4p0McoUQhgv0diV7xs0VNilze2vCc0ktj5Xn2D+WAZ6m9N1ESsHksXaHFXKILzG8qj9+ElpWremVRvNCydBe5l0Zislqy5uk4I+slZdwkL2UY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; dkim=pass (2048-bit key) header.d=pengutronix.de header.i=@pengutronix.de header.b=OURzAOxs; arc=pass smtp.client-ip=185.203.200.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5A7E2BE035;
+	Fri,  2 Oct 2026 05:46:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790920017; cv=none; b=LMuOyXvEXyp5sXrrrB8XIMt4boU4asgwBpbSXP3GH9GBZFT4OyCLajAps2Kgi4rf9BIgSK33VxFrVGo/knb2ErkqE+mMH6eKKJUBmO79xdywVMfet1ljkI1bQyiNSJXduJh1mn0CJwFVCncXparwvtbDgD8SOZYZR+085Til3Rc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790920017; c=relaxed/simple;
+	bh=vDVWd7bUUp0fp3rbv49nOQMjeep8XZe6WI6j3JYM4xA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Cw3OTx/cnqI7/YxgZnOYxlrRyMClTKpnIPMqsPsOtAIIArkPh935CfAd3KsWOsiIFfA7Ze9VpQa6nq7tVIZUWkRalytKuiA8pcJ0AK2Gm8dw5aYF6vVgg3Eb5YbyTpltdY230fANHQG45Be+QTIVumwHRJK0UwaHERMdzuRXWO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cc6PWe0G; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pengutronix.de header.i=@pengutronix.de header.b="OURzAOxs"
-Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
-	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 2C97D20058C;
-	Fri, 02 Oct 2026 06:22:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1790914963;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=eiR1ExEbLsg+Md8FDZk2s7GKs0WpAoHQuPsCgDjYGn8=;
-	b=OURzAOxsvpnyOUa3rnjuCf1lV3jTBoFx+9pLFuN5iyWyQe6BOzyfSrAqHcidglfCep8Tna
-	1tHOaP/vupf7Mh7D9ZxMlRHHSUHQE3IB8lDfydrKkINsxw9F4zVBI/HSG0w6sRnzbR/djJ
-	8KLuQMHJ+aklwyPwhETMxhI9Vi2C2qFUiI+Y2wCN8VIn/qJJQWw2PzPvUT8w9KVFg3peRo
-	1XRfF/8/zxtclLa0y/JY84iZCRXgLts6nKhCUy5Ph2tg4v5H2Sx8UN6ea/+N8Rv7G6YYPr
-	j0gGZ0hYmHw98f2IbzlRRvFZL4lzpocwuoFgu1hj1gZb12zjx+NFI5P8Bbuqqw==
-ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1790914963; a=rsa-sha256;
-	cv=none;
-	b=PJtACP0DrMwPGLway2lHmDd9bO+31qgYdl2xUJiav8YguWCAUmZBR5FTSKTHdEHpUCFgwe
-	oabKJgCcdfMECb12qtWo6A8qq09+nTPyrOXUPzmJ7mFvsKdmK4LvbQphzO8gf4dJbVilhm
-	LNKfH+aLPAoc4p6o78Mee/UUE9GRiwzmaLrbOX4WfY2+mZR5SxoUzC1LWVRZJdBKQaGKPA
-	P72fCi+O8vadUrnv5p4CZ2QWPyDc7/KctEQl9G1k+0Bl6LQjv22Ojl5mv3SU+QXo0WUVUM
-	G5S7Ofq2Lwkn3M1BQkCVyMxG2gN9KWv0TeJJCOKDSqmJv6+bS4RIabBTXGSVZg==
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=relay-from-drehscheibe.grey.stw.pengutronix.de smtp.mailfrom=ore@pengutronix.de
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1790914963;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=eiR1ExEbLsg+Md8FDZk2s7GKs0WpAoHQuPsCgDjYGn8=;
-	b=HSsf44kvHuV4qV7gy/WfqnayANRPA13ronMMC0Rdh1gFVFmVvJ727W3q81Fr8y4pC13O8s
-	K3i9uehkcruQin3j22ZP6eXWnWs0TqivRese8XcatZbziyP8OJVHSG4pY+T009dLTiCfO0
-	zcc+PU2IYC5zlyuQLw/F048O82BRHQyICaIFQjI8Rba9NkfXvAwqdx3OqAG0Go0VVTq8pt
-	gtu75MtPSQF01Iijdy72XyB0Sld597EegsIXiGHiTaADLHknjf2ZZOTtqmrjV8FIRaoJs8
-	7zV0y8c3pmA1Zo1p3+TW3kgPpt5v59p8bGp+oMtC4bi++x0f5rDZor0KE2EAaQ==
-Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1xCUnD-003pmF-0J;
-	Fri, 02 Oct 2026 06:22:43 +0200
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.98.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1xCUnC-000000078BQ-43aD;
-	Fri, 02 Oct 2026 06:22:42 +0200
-Date: Fri, 2 Oct 2026 06:22:42 +0200
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-Cc: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-	Sebastian Reichel <sre@kernel.org>,
-	Benson Leung <bleung@chromium.org>,
-	Tzung-Bi Shih <tzungbi@kernel.org>,
-	Guenter Roeck <groeck@chromium.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	chrome-platform@lists.linux.dev,
-	Umang Chheda <umang.chheda@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sebastian Reichel <sebastian.reichel@collabora.com>,
-	avaneesh.dwivedi@oss.qualcomm.com
-Subject: Re: [PATCH v15 1/6] power: Extend power_on_reason.h for upcoming
- PSCRR framework
-Message-ID: <ar8xkv8h4x2NJTKl@pengutronix.de>
-References: <20260924-pscrr-framework-v15-0-7af87107e0d3@oss.qualcomm.com>
- <20260924-pscrr-framework-v15-1-7af87107e0d3@oss.qualcomm.com>
- <e34e6661-3ecf-42f6-96f2-5136afe7ab65@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cc6PWe0G"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0D921F000FF;
+	Fri,  2 Oct 2026 05:46:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790920015;
+	bh=BUM0jmk5ROcF9aF+uPw3K8HUOCn6qfcZXTKXnwJVx+c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Cc6PWe0GsMhqxXDv03deTBfCGuixJ7J08WmAuz7zhgNEmtZHErGN3y93JgkQqe8X7
+	 FH/vUin/L/di1XjDhpjjLwuyLxIftyENGuBFymWwzXhYV+Bt8U5Tk1crqWT7fpEIkA
+	 1Mbm1YXeRf2ubC+XVB1OqjwQCtmrVqkN1i0ydcMGVRYjbHWxa1woKJXiw7SL9ZKkBI
+	 lpAbTnNyjnoyUHCxPY0RBeRXaVeGwTD35EYU0ie7ZUtRV15acqGWo3fkBIhtSXQ/qE
+	 e7F4oS6bac6EWCUzPhnUjw8GobNNKMzsI3lH89U6qFsktUZm5WwohQ56vbqFjCuEmW
+	 6kyRhTSEa2qDw==
+Message-ID: <6aa0c698-509e-49d5-a229-7f756355b748@kernel.org>
+Date: Fri, 2 Oct 2026 07:46:47 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <e34e6661-3ecf-42f6-96f2-5136afe7ab65@oss.qualcomm.com>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 6/6] firmware: qcom: Add support for TEE based EFI-var
+ client driver
+To: Harshal Dev <harshal.dev@oss.qualcomm.com>,
+ Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Basant Kumar <basantk@qti.qualcomm.com>,
+ Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+ Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+ op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-0-13df5c20c2e3@oss.qualcomm.com>
+ <20261001-qcom_uefisecapp_migrate_qcomtee-v3-6-13df5c20c2e3@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261001-qcom_uefisecapp_migrate_qcomtee-v3-6-13df5c20c2e3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 01, 2026 at 10:22:44PM +0200, Daniel Lezcano wrote:
-> On 9/24/26 09:08, Faruque Ansari wrote:
-> > Prepare for the introduction of the Power State Change Reason Recorder
-> > (PSCRR) framework by expanding the power_on_reason.h header. This
-> > extension includes new power-on reasons:
-> > - POWER_ON_REASON_OVER_CURRENT for over-current conditions.
-> > - POWER_ON_REASON_REGULATOR_FAILURE for regulator failures.
-> > - POWER_ON_REASON_OVER_TEMPERATURE for over temperature situations.
-> > - POWER_ON_REASON_EC_PANIC for EC panics.
+On 01/10/2026 13:02, Harshal Dev wrote:
+> On Qualcomm SoC based platforms, UEFI stores EFI variables within the
+> Replay Protected Memory Block (RPMB) located within either the UFS,
+> eMMC or SPI-NOR storage. The RPMB key which is one-time programmed into
+> the storage controller to allow authentication of the RPMB frames is
+> generated by and only available to the Qualcomm Trusted Execution
+> Environment (QTEE).
 > 
-> How the system knows an EC panic happened?
+> The legacy QSEECOM protocol used for communicating with the QTEE is
+> deprecated and replaced with the use-case agnostic SMCInvoke protocol
+> starting with the Qualcomm SM8x50 series. On platforms where the QSEECOM
+> still driver probes, it does not support a listener interface with QTEE
+> to enable writing of non-volatile EFI variables to the RPMB for UFS and
+> eMMC storage.
+> Therefore on such platforms, a TEE client driver which communicates with
+> QTEE via the SMCInvoke protocol implemented by the QCOMTEE driver (and
+> registered with the TEE subsystem) must be used to update such EFI
+> variables.
+> 
+> Add support for a TEE based uefisecapp client driver which installs efivar
+> operations after obtaining an object reference to the uefisecapp service.
+> This enables the kernel/user-space to access or modify both volatile EFI
+> variables stored by the Secure Application (in-memory) and non-volatile
+> ones stored within RPMB.
+> 
+> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+> ---
+>  MAINTAINERS                                 |   6 +
+>  arch/arm64/configs/defconfig                |   1 +
+>  drivers/firmware/qcom/Kconfig               |  31 ++
+>  drivers/firmware/qcom/Makefile              |   1 +
+>  drivers/firmware/qcom/qcom_tee_uefisecapp.c | 636 ++++++++++++++++++++++++++++
+>  5 files changed, 675 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 30c1cdd0fb38..7ccedad8d388 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -22981,6 +22981,12 @@ L:	linux-arm-msm@vger.kernel.org
+>  S:	Maintained
+>  F:	drivers/firmware/qcom/qcom_qseecom_uefisecapp.c
+>  
+> +QUALCOMM TEE UEFISECAPP DRIVER
+> +M:	Harshal Dev <harshal.dev@oss.qualcomm.com>
+> +L:	linux-arm-msm@vger.kernel.org
+> +S:	Maintained
+> +F:	drivers/firmware/qcom/qcom_tee_uefisecapp.c
+> +
+>  QUALCOMM PINCTRL DRIVERS
+>  M:	Bartosz Golaszewski <brgl@kernel.org>
+>  L:	linux-arm-msm@vger.kernel.org
+> diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+> index fce418fe6ff6..a8525878c679 100644
+> --- a/arch/arm64/configs/defconfig
+> +++ b/arch/arm64/configs/defconfig
+> @@ -277,6 +277,7 @@ CONFIG_IMX_SCU=y
+>  CONFIG_QCOM_TZMEM_MODE_SHMBRIDGE=y
+>  CONFIG_QCOM_QSEECOM=y
+>  CONFIG_QCOM_QSEECOM_UEFISECAPP=y
+> +CONFIG_QCOM_TEE_UEFISECAPP=m
 
-Hm... looks like I lost this change on the way. I added it for this
-case:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/platform/chrome/cros_ec_lpc.c?h=v7.3-rc5#n458
+I do not see how this change is relevant here. Adding a driver has
+nothing to do with defconfig. Drop or split.
+
+Not mentioning that nowhere is explained why you actually need it.
 
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+Best regards,
+Krzysztof
