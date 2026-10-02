@@ -1,83 +1,83 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A66654EA39A
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 15:30:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C359C4ED1AE
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 15:30:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790955003; cv=none; b=JxGGcWoy0EtK6IARydp3KzTZsQX/48cxwx/QeiznLTO5lnOQ2+8vmeM/Al3Ho1aYekRtNmJzqCoUbD/aLnCLNMb0X7Kw5z/F+cM4v/3eLPDx/I9WAPTiVVGZ8bQ3eaEzPBfkcVufiZ1GXApHm8wm5qz+8+3QsHVjjjuifI5NfD0=
+	t=1790955005; cv=none; b=inIdoysDe5tZn9QSHFiRsdK4AikfYOrDLRGEMPz19CvNIAByUuOB3jR3ImbGYK0EKz7k0DzvoDfyXbQIB3fSjBItMcYZxf/AmUiQCGQAXHZoO8dR8ahUmsDQD+LBa+wX4YrEf8udKffWDOLal+0wCUCUUFie5QTUQ1wsHbuoxsw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790955003; c=relaxed/simple;
-	bh=Ne/oH4viOImWVtT82Pw0n8SI1E/7ica0ue/WZsT0THM=;
+	s=arc-20240116; t=1790955005; c=relaxed/simple;
+	bh=BRTFGnRCiK4ZFScjYYLcMsd0f5n6Kl1CKn5U9teS8ak=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pOYsC2sU7EgpzitRxC/kV3yyBu2fNCfnbWHgQRkxrP7dV0D9g+0uVafp0GSASPXnF5+DAxvp6McFWcfdaFqLIBxwGDlnQurcDsGZiXashShNl5Msh2dkEgFeMK/Rs+I4AiiJN7fi9N/ncrys3ZsYh34JrqlVSVLpoJJjaG7zDR0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PfHYpj5x; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JVZVofu9; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version:Content-Type; b=OLrKhB/B8o3FRbcmOXiO3idwSA5A6HOyLuO0cbZ7Aw54TNMBxJWNICIX4miUGCm8HOZtLXTiCKU5N7wRfyf90CPewWXBNN0bsrRBSmXjmXZftc1ga6ug7fElWfwvOlJig7vzXhljhfy54fBJqvYCe6fwB45QZRxMNYfxDZ9m4TE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P8R59dN2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V1GD+VWj; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PfHYpj5x";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JVZVofu9"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692FGtNJ1865566
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 15:30:00 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P8R59dN2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V1GD+VWj"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692FGjxA434998
+	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 15:30:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	sxS6ymcMwZy2UdPPmtMKkF3MthxRKVgfdvqIkGpimqc=; b=PfHYpj5xtGXQeRNg
-	GvBf0nFZD3cbJySKkPmMctNw2PXXMBNyZDKxuvzxxWM2ruzgidSsMd7Vn6PcFzIs
-	GU2OU1s6D/a0YV809fUkQpGCUULf4K7+gmIj0Jz1/UHyg0+eJyLacMQYgtcxAcAg
-	TNsvh5sELPcq8uk9ayYCHG06B3YcVjGRM0q3qnvHniqzdezgkkhiMXZoewFhiKeW
-	TojB3jgTfmIOh9Ihj3A7OYnck3AvXclkWhd7mYU1k7jilLKQ7HIqXY3V+O4ZhOIo
-	Kn4v0S7F9r+EBKcBm3Cic7QceiPLm0da0hDEbHcrjoZbZkxi1MhvwfNWrY9kfWfV
-	Q1oaBg==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h20nftwcp-1
+	NTICCgegx83CMaefd/EXj8tYtmfzsjfJOJdBMrgs7UA=; b=P8R59dN24VRLzKXT
+	C1IN982brIZqOzMsrWlAQLa+E8n0vS0+ikZDzBYc/VarhRVAnxcXYasL3dWipcJ/
+	NEBINX+4l1IjpUIc1oRsl8h/XFVFfYubHBjshOEw2Ot3pjYZoqKXC14nhNiL8ZYX
+	ZQ9QnBUlcE92eg9rJhksv/iUgEV2RN2GbcKuQk/FAu7WBAbJRr/UmfIVeRBO81/z
+	1XFhyti+nYvDdPyhihoR5wcpZ4AK2m2CaHN+Rw88BPCvrqL5OLgY6fxntQkwuNSb
+	b4nj37zANQPImZbQY9NIdmicCcc5jPTGwO9y/VExqJwEf6rVzpCy+d+saGkRWmmz
+	a0nvbg==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1vxebrvt-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 15:30:00 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cc1cade6b71so1621225a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 08:30:00 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 15:30:02 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e8fee6af3so7793554a91.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 08:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790955000; x=1791559800; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790955002; x=1791559802; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=sxS6ymcMwZy2UdPPmtMKkF3MthxRKVgfdvqIkGpimqc=;
-        b=JVZVofu9Q5RpuY5qgLadimBpLvoMdTwPBb7QG1EIkMiKnw22Z7ZOPqHPhTWNxiglmp
-         2cRFmpw264oo0h0cWb3aHD5o0AXE4X32G3R84xPMqRN8jlQkNMzSEqDN+uDtsDcz/kHB
-         wv+brDBDzXF76zpT+X3KALZUehHglnWPTKS3d5sXAY7vopuQ1lwPMqtN/hq/j0r4V4L/
-         28PSgrXgsHT5ypq+3yoW+j0V1/NcgEQKISMoscD5c0F/c3+2e4I+SO8snvubFn/sqnRg
-         ys603l7X5+KhBFUzIHblOszIxA0QMvqGIebREIoDr15g3B/TQ8fcibrtdJgw75Fcb3dW
-         b1sQ==
+        bh=NTICCgegx83CMaefd/EXj8tYtmfzsjfJOJdBMrgs7UA=;
+        b=V1GD+VWjAXsV6gVk7LuO6h3RpA3liMnaYc2FctINq59L8bdVhLdbZrzENiHSAfcRku
+         Q8n6Fb//p78b08nzwGJP66xn7fzlwbsmnPz2iicI+KhplmuuAU/6634jc3PrsUVMsTW7
+         KLpkSUNF8f4lsbdXv3eMrVM31SZZNweNBPWCO9M/6CiS50bp0wCZFTYQs2CGHMRiJ7iQ
+         EJV8C0+m+NNMb2IpI3pNVLj29x3gOFzlflZieLyF2fJxdtNJG8/Tpw9RTNCz9vahbSOA
+         +ncoUsXjNSc1Zju0cdim31aIDSLQfTZHiHW5G9PNIp5Qe51q+xYIRBrLXWyCAMQ2tUOO
+         Jynw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790955000; x=1791559800;
+        d=1e100.net; s=20260707; t=1790955002; x=1791559802;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=sxS6ymcMwZy2UdPPmtMKkF3MthxRKVgfdvqIkGpimqc=;
-        b=daamn/unx1jGCkZyvSpQIrVrxZN+GJJgEvlPX/HYaqQfGXXtTAuWvpvDWFyHmXjtl2
-         UIO1tkrgVU1QGzSchguLRR8KzzpED0izzXWGmD7NV2qsg5BVYTruL78i9kvRes1szjxt
-         A9XKBZ+mwk9Ntn6cttQmzPic0H/ndHy5KD8vt/0pnpdeoHmmRi2mOY4Ytb18gK+m5G/D
-         W5RgA5vdsd+tIC18M/dD8JPZ0Gh33bJnFKQtAIH+lIsl3xz75L1fD9DI9FEOBI7Qa+Ni
-         UzabnVYI20BTI53+zsd43Ono4oAHSkGvpRdk0ckar4v/i8mCY8i6xwySrCcpVeloNP1w
-         hJiw==
-X-Gm-Message-State: AFuF++m+u7z3Ijfn8PDCbCC1MlfB6eU3/zjktMXPzJ8c091HbMWSbdU0
-	SP+ZZ+sVLmaVk142aZAZbaLKrTP49oRJMHubNhkie9tPDLBjAcHKdbKTdpxSAIrEsHc7o+pejl1
-	4KhP7bLuR2M4RiYQEGNTMBkKrHS9svE7ZQg4Xxk4+07bPUzLPvzqC5gS5TDfY6NK71QEV
-X-Gm-Gg: AYBFou1Rpsx9DwcWnIJ+ucUbyj8edpGFeNxFIolU2usOjInyFQo4Xuh6bTFt4R8fceD
-	DY3rZ8056vD7Ce34d55DCEvTCaRG6uuRer/Xbt0+7Bh9wWudjjZcSMC3ry84fQHj16V/2TndSH0
-	5kCL70eg0EE6gen8ZY/Cpqpn5/0YFnWqA3sLGY8KeMQXIYgC/H+WJvQmwWaefKHeF8BltPxrdjk
-	yQDfhLqklN/Z1wwQ8QWXTKT4BrXTKLaCfoItuoS2Tfq+6kcGSqpuM2bD2lRSfXfjL74GnpJI2k3
-	X1IVnyVgPjumEm8KKNYQl0z+q6sILSb1zIBlf91mZGTqeNQS/HqcYuzWi8uf3ktqaA8Xe1weOnS
-	3llmj5LtEE1pn/u+T0P3I/6O4pJsV+0BRRDqqPnMXiUtBJw==
-X-Received: by 2002:a05:6a21:e10a:b0:3d3:ad6e:9ce1 with SMTP id adf61e73a8af0-3e0bcfe91camr2445763637.15.1790954999445;
-        Fri, 02 Oct 2026 08:29:59 -0700 (PDT)
-X-Received: by 2002:a05:6a21:e10a:b0:3d3:ad6e:9ce1 with SMTP id adf61e73a8af0-3e0bcfe91camr2445744637.15.1790954999001;
-        Fri, 02 Oct 2026 08:29:59 -0700 (PDT)
+        bh=NTICCgegx83CMaefd/EXj8tYtmfzsjfJOJdBMrgs7UA=;
+        b=Z8myzbpSDXS3FYWaZuQcn/7OQO9p1kSCk4ZJzxeuqjmH5XDNm8FEf6yQqytkpm4pXt
+         2/DfRSs9RL95yy/XzByTI3lZ5igJQ1tnwtCY9zRdefgrpcw0w6bwQEZvDKAIanAfKhYu
+         GBssOG0OHUoanrFVOmNqiTYwqSlKTb/taHGDV0nigbW4F+jfbOdLnHY8oZ+1oGYN1xaH
+         Z+aGm2B6cQoOyLajIbhVTI+oIQ938/og3gxBULnyoZ8DZ6pjM63qFwtf+E0ixpFKDUmg
+         EDSf6triudWNQG6dQtPOGIeDhVymTqJTf3l+h/p1hF6ceWIw+E+axH03rNekV3Z9No7+
+         Ttgw==
+X-Gm-Message-State: AFq9FYKh23Prx80tXPaIwBM9NqV5xq2ZdHGubKvSi1ezlDtfZ2yybE5H
+	q18vL8Po2ic0NKBqQ16sAbgjHLMjpLHsGj9DLZAlGhJPQ8SZ24VY2MQymcCcxdeKORlDsK9dDkq
+	BqUp6hP/dXKhelMq1tccSfZ7Qn2L12UZOVFZ3vahPZvMl8F4wuFr+Wuk4dbOBaBu18Q8U
+X-Gm-Gg: AYBFou0nQVt4WsKAvIVQqWi2298BgZUxUrxCRIQIH2Qc82L5qwuCeIGQwl4U6j7QKxn
+	5r/KPwEIKZfsVY2G196xyMdsE6OGkpQC1AHeHLg5kPMywytrn6y8GRif7Ec2mz+XDbNEl5FXoEM
+	gFGQvnIdRR1sediAlUEOLJdrvxzFV9K6tHTxOmq3Ou9b928/wA4U9WV+jTlIAxGCVy7f9lnTEla
+	VZXFJZ7+QAgU+0uFHuLtAw9gYp/7iWd39pTzNHOHIPKrRwh76BCb0WJJEHrGP6vKftizdY0j+zF
+	u9MhbvjztGjd8Qhu3EmXN1K6t/Hg+hYqrO7rvsqTN6koEXoSINkRuw+Xha+VT6JWyut/84van8q
+	oqq5kkLVVZ3ZLYMuQdjVQqeIJO8+JfFRJOJwajn9gOx4YFvc=
+X-Received: by 2002:a17:90b:3844:b0:39e:6c69:f472 with SMTP id 98e67ed59e1d1-3a6cec1c749mr3289862a91.49.1790955001824;
+        Fri, 02 Oct 2026 08:30:01 -0700 (PDT)
+X-Received: by 2002:a17:90b:3844:b0:39e:6c69:f472 with SMTP id 98e67ed59e1d1-3a6cec1c749mr3289830a91.49.1790955001162;
+        Fri, 02 Oct 2026 08:30:01 -0700 (PDT)
 Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc9f737a231sm1186860a12.18.2026.10.02.08.29.58
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a6dcbdd97fsm1643414a91.0.2026.10.02.08.29.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 08:29:58 -0700 (PDT)
+        Fri, 02 Oct 2026 08:30:00 -0700 (PDT)
 From: Rob Clark <robin.clark@oss.qualcomm.com>
 To: dri-devel@lists.freedesktop.org
 Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
@@ -90,9 +90,9 @@ Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
         Marijn Suijten <marijn.suijten@somainline.org>,
         David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
         linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v2 4/6] drm/msm/gem: Stop exposing a page array
-Date: Fri,  2 Oct 2026 08:29:41 -0700
-Message-ID: <20261002152948.85308-5-robin.clark@oss.qualcomm.com>
+Subject: [PATCH v2 5/6] drm/msm/gem: Stop calling get_pages() for imported dma-bufs
+Date: Fri,  2 Oct 2026 08:29:42 -0700
+Message-ID: <20261002152948.85308-6-robin.clark@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261002152948.85308-1-robin.clark@oss.qualcomm.com>
 References: <20261002152948.85308-1-robin.clark@oss.qualcomm.com>
@@ -104,178 +104,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: CojcUR8tcm3eI_6gWXtaebMoKVH6jEnp
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA2MSBTYWx0ZWRfX5qV2jWd2Jgue
- xZ0xFZzgk036i4eKoW/RWYkFT8zscxlM9DubidECJjnZ8WJ5pgyOb9l4+p/1fCTnKgkja03GhlQ
- a59XcIIC507DbTn7aESmAzI7jQR93G0=
-X-Proofpoint-ORIG-GUID: CojcUR8tcm3eI_6gWXtaebMoKVH6jEnp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA2MSBTYWx0ZWRfX0qAW3XaAPkp6
- PNSV7JiCYIDoWZ3gIAFk+tN7ouChLQxzzoM4DiiYcxJ2sn9irkreG0ibh63rmo3bOfVwKjtZK9+
- TK8ny6IHoIjaSgHAZRrLGdtRCmVb9zYWlyllNKDLN+7PvAxBGnQFH5/gTuxBway4SLZLEGm66EV
- z5CVkotc8RM0jsIz4u1k/4XELKMEZpTR4QaSb9cRZJqwfC+dD4jW6jUt6h8KMLZNxTFKRYvJdl2
- v+MPHhG/q3ne77LFaFVnqLBMJO4PGKRhk/rxwiGE8bBIma3rVqZQrMt88tAv4nmtYkpW3grlqcM
- 4opRwLLytpm7g0TsaA4K1x0uVOQ9YFVoI7sEr3mRE/FM1hPkRrWy1tWhA1Tarl+Yf/Wre+IJOud
- UQdw8yXI7yCnZTeEdmEx4SUEZKzI082Vuy3nMvFkOQ9gYN/ABPnIgb2+O5z0tGtqq0o/lFe/lO6
- anzwb5txEkCFcXQkFdA==
-X-Authority-Analysis: v=2.4 cv=f+jdl+yM c=1 sm=1 tr=0 ts=6abfcdf8 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
+X-Authority-Analysis: v=2.4 cv=fdc4WEQF c=1 sm=1 tr=0 ts=6abfcdfb cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zd2uoN0lAAAA:8 a=qy49VNyTqSxgYBYDrycA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=zd2uoN0lAAAA:8 a=n7WAr1GF7x8bO2YR65YA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-GUID: SPZhdOJF77sbMA5rsvoA2o4VWfpvltx2
+X-Proofpoint-ORIG-GUID: SPZhdOJF77sbMA5rsvoA2o4VWfpvltx2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA2MSBTYWx0ZWRfX6UajsJCcHfye
+ VhaQ84i+T8uxEeI0PhYsuItKBIOLN93/jdUyyFJIqg5Y/WR3XFOtirPqATZSBEVRm1t7mW9Rywe
+ sowHSjvHMP5xdYFg5EIVu+1rSQTbPfGZuoMF0qzYxWdpam2uc0e2iOl25fJYBbQXzFyHhMtOGE8
+ ioSomCeG2emK9/NAykQglQp6c0xiVSbjqy8jir0rFFc9tmQgYM4LHvtYnyGcsp3TgI2QfBkXeeP
+ i8f7IXflyccNufYRAqnMjSIy7lHdqUBQ90SRpdkj8Z3Az3q5bX5DtZveW1/x5KdtAypCWlGXasW
+ VGpUDdF+OjiQJK8QABhNXgSJx2JNgf6DV/SBTvAH1OCUUBf2xFiEoTxHVglPfbd0qyDJ5DCE0/m
+ ZbMrQm9l6j1p2llvfbWQV3kUPwuMbkt/VXBpB/0YVyVmKCDZwWobIOFLfD2TBQqxWx03tA5P5kz
+ 2KMiBmcHOBOk41sBROQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA2MSBTYWx0ZWRfX1UjWzSPTcoQs
+ P6SBbwmWlreJ85qlAeEFi5iW4AzLxqoGk17ouK+8LSGmROvNRLSe95k0mxmyuaNoSCi8tsj2Snn
+ n4imCI+gqSqPCmnIAj+ZI2jL18CQb2U=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-02_04,2026-10-02_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
- clxscore=1015 malwarescore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
+ malwarescore=0 phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020061
 
-The remaining callers of msm_gem_pin_pages_locked() and
-msm_gem_get_pages_locked() don't actually care about pages, other
-than as a conduit for returning an error.  So convert them to
-just directly return an int instead.
-
-And rename _get_pages_locked() to _make_resident_locked() to
-better reflect it's purpose.
+Use msm_obj->sgt rather than msm_obj->pages to determine that a obj is
+resident.  The sgt is populated up-front for imported dma-bufs, so we
+will never go down the get_pages() path for imported objects.
 
 Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
 Acked-by: Christian König <christian.koenig@amd.com>
 ---
- drivers/gpu/drm/msm/msm_gem.c       | 28 ++++++++++++++++------------
- drivers/gpu/drm/msm/msm_gem.h       |  4 ++--
- drivers/gpu/drm/msm/msm_gem_prime.c |  9 +--------
- drivers/gpu/drm/msm/msm_gem_vma.c   |  8 ++++----
- 4 files changed, 23 insertions(+), 26 deletions(-)
+ drivers/gpu/drm/msm/msm_gem.c | 6 ++++++
+ drivers/gpu/drm/msm/msm_gem.h | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index bf6a8939af7c..2341f209adf5 100644
+index 2341f209adf5..3111d7389572 100644
 --- a/drivers/gpu/drm/msm/msm_gem.c
 +++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -280,12 +280,16 @@ static int check_madv_locked(struct drm_gem_object *obj, unsigned madv)
- 	return 0;
- }
+@@ -193,6 +193,9 @@ static struct page **get_pages(struct drm_gem_object *obj)
  
--struct page **msm_gem_get_pages_locked(struct drm_gem_object *obj, unsigned madv)
-+int msm_gem_make_resident_locked(struct drm_gem_object *obj, unsigned madv)
- {
- 	int err = check_madv_locked(obj, madv);
- 	if (err)
--		return ERR_PTR(err);
--	return get_pages(obj);
-+		return err;
+ 	msm_gem_assert_locked(obj);
+ 
++	if (drm_WARN_ON_ONCE(obj->dev, drm_gem_is_imported(obj)))
++		return ERR_PTR(-EINVAL);
 +
-+	struct page **pages = get_pages(obj);
-+	if (IS_ERR(pages))
-+		return PTR_ERR(pages);
-+	return 0;
- }
+ 	if (!msm_obj->pages) {
+ 		struct drm_device *dev = obj->dev;
+ 		struct page **p;
+@@ -286,6 +289,9 @@ int msm_gem_make_resident_locked(struct drm_gem_object *obj, unsigned madv)
+ 	if (err)
+ 		return err;
  
- /*
-@@ -310,17 +314,17 @@ static void pin_obj_locked(struct drm_gem_object *obj)
- 	mutex_unlock(&dev->gem_lru_mutex);
- }
- 
--struct page **msm_gem_pin_pages_locked(struct drm_gem_object *obj)
-+int msm_gem_pin_pages_locked(struct drm_gem_object *obj)
- {
--	struct page **p;
-+	int ret;
- 
- 	msm_gem_assert_locked(obj);
- 
--	p = msm_gem_get_pages_locked(obj, MSM_MADV_WILLNEED);
--	if (!IS_ERR(p))
-+	ret = msm_gem_make_resident_locked(obj, MSM_MADV_WILLNEED);
-+	if (!ret)
- 		pin_obj_locked(obj);
- 
--	return p;
-+	return ret;
- }
- 
- void msm_gem_unpin_pages_locked(struct drm_gem_object *obj)
-@@ -487,14 +491,14 @@ int msm_gem_prot(struct drm_gem_object *obj)
- int msm_gem_pin_vma_locked(struct drm_gem_object *obj, struct drm_gpuva *vma)
- {
- 	struct msm_gem_object *msm_obj = to_msm_bo(obj);
--	struct page **pages;
- 	int prot = msm_gem_prot(obj);
-+	int ret;
- 
- 	msm_gem_assert_locked(obj);
- 
--	pages = msm_gem_get_pages_locked(obj, MSM_MADV_WILLNEED);
--	if (IS_ERR(pages))
--		return PTR_ERR(pages);
-+	ret = msm_gem_make_resident_locked(obj, MSM_MADV_WILLNEED);
-+	if (ret)
-+		return ret;
- 
- 	return msm_gem_vma_map(vma, prot, msm_obj->sgt);
- }
++	if (is_resident(to_msm_bo(obj)))
++		return 0;
++
+ 	struct page **pages = get_pages(obj);
+ 	if (IS_ERR(pages))
+ 		return PTR_ERR(pages);
 diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
-index 73dafe080bfd..4f681100ecb0 100644
+index 4f681100ecb0..e92c6723d352 100644
 --- a/drivers/gpu/drm/msm/msm_gem.h
 +++ b/drivers/gpu/drm/msm/msm_gem.h
-@@ -279,8 +279,8 @@ int msm_gem_get_and_pin_iova(struct drm_gem_object *obj, struct drm_gpuvm *vm,
- 			     uint64_t *iova);
- void msm_gem_unpin_iova(struct drm_gem_object *obj, struct drm_gpuvm *vm);
- void msm_gem_pin_obj_locked(struct drm_gem_object *obj);
--struct page **msm_gem_get_pages_locked(struct drm_gem_object *obj, unsigned madv);
--struct page **msm_gem_pin_pages_locked(struct drm_gem_object *obj);
-+int msm_gem_make_resident_locked(struct drm_gem_object *obj, unsigned madv);
-+int msm_gem_pin_pages_locked(struct drm_gem_object *obj);
- void msm_gem_unpin_pages_locked(struct drm_gem_object *obj);
- int msm_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
- 		struct drm_mode_create_dumb *args);
-diff --git a/drivers/gpu/drm/msm/msm_gem_prime.c b/drivers/gpu/drm/msm/msm_gem_prime.c
-index beb7f22fd694..e1e74e9b7e6a 100644
---- a/drivers/gpu/drm/msm/msm_gem_prime.c
-+++ b/drivers/gpu/drm/msm/msm_gem_prime.c
-@@ -109,20 +109,13 @@ struct dma_buf *msm_gem_prime_export(struct drm_gem_object *obj, int flags)
- 
- int msm_gem_prime_pin(struct drm_gem_object *obj)
+@@ -422,7 +422,7 @@ static inline bool is_unevictable(struct msm_gem_object *msm_obj)
+ /* Are backing pages/sgt allocated? */
+ static inline bool is_resident(struct msm_gem_object *msm_obj)
  {
--	struct page **pages;
--	int ret = 0;
--
- 	if (drm_gem_is_imported(obj))
- 		return 0;
- 
- 	if (to_msm_bo(obj)->flags & MSM_BO_NO_SHARE)
- 		return -EINVAL;
- 
--	pages = msm_gem_pin_pages_locked(obj);
--	if (IS_ERR(pages))
--		ret = PTR_ERR(pages);
--
--	return ret;
-+	return msm_gem_pin_pages_locked(obj);
+-	return !!msm_obj->pages;
++	return !!msm_obj->sgt;
  }
  
- void msm_gem_prime_unpin(struct drm_gem_object *obj)
-diff --git a/drivers/gpu/drm/msm/msm_gem_vma.c b/drivers/gpu/drm/msm/msm_gem_vma.c
-index c11d021581e0..311205c7f1ba 100644
---- a/drivers/gpu/drm/msm/msm_gem_vma.c
-+++ b/drivers/gpu/drm/msm/msm_gem_vma.c
-@@ -1300,11 +1300,11 @@ vm_bind_job_pin_objects(struct msm_vm_bind_job *job)
- 	 * trigger get_pages())
- 	 */
- 	job_foreach_bo (obj, job) {
--		struct page **pages;
-+		int ret;
- 
--		pages = msm_gem_get_pages_locked(obj, MSM_MADV_WILLNEED);
--		if (IS_ERR(pages))
--			return PTR_ERR(pages);
-+		ret = msm_gem_make_resident_locked(obj, MSM_MADV_WILLNEED);
-+		if (ret)
-+			return ret;
- 	}
- 
- 	struct drm_device *dev = job->vm->drm;
+ void msm_gem_purge(struct drm_gem_object *obj);
 -- 
 2.55.0
 
