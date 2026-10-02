@@ -1,62 +1,62 @@
-Received: from mail-pj2-f38.google.com (mail-pj2-f38.google.com [74.125.227.166])
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53EFD496D32
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 13:07:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.166
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9559F3905F8
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 13:07:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790946425; cv=none; b=BMRewsu3iGTlKJiegzxzDLexVwBok8H6MafPMjA5F/zRE+3cIJlejqnmf9C/y6pQMek8+iR+YOEcGGe1wJF9nJuq2qYPNFu3wvfqSIDR81skfLjsK2eSNhDrJwxns6KyapR2SmxTTIpzrluclCTLdhUnJRizXiLC+xp87MFEjCk=
+	t=1790946445; cv=none; b=Nmr3tMUFRPE7KEvTwvLQs1C+2AFm4Em/jq4LOKYXts37S3S3BAdpieBRlfEk/AkdjZ25+2wHW59PEe2lnouF0MYYY4VKnSjqgoVfDKqu9A/CzEd8kPI3CWVFDtbLuKaT5kQi5esnDfcGnPtg/gcv3YxZofTXJw+7KxT9IR3y9yQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790946425; c=relaxed/simple;
-	bh=+5GIIt20Q3aLB8bSV44atJq4TQmo8GHA24TKF7BxpuU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sixOVrq2gIukieOv3OGhdHV0bRiLxRE29qn020F5DxVRu+jgY/YI3WXi33Y9s0YOhK/aD9d+KE3B9tYDDbvf55DGujg9vkhpQztXvCFoElIKpTeP/UmCLBrnueTDbUdo3zyLXm/uLRNpuD7xBnLbAd8JUV9WE+l691Yar1zMd7E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=l7nsCaO4; arc=none smtp.client-ip=74.125.227.166
+	s=arc-20240116; t=1790946445; c=relaxed/simple;
+	bh=SpKFHk+D0BgRJfODuxvSj94MeZt7ZsF6tl3nf4TKAmo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ilFe7q969vXwxAbck2cyDiw/Z8TwdAaR2tI0us0/vkZYQV/qJtoYegMgeksMKaAsrIDM5uNCQovzV05xi1X4YZ3NY0bKfJUfZ85kZBR1CG4JfZyUDvLh35FyqFh1KgK5Nd7RES54EZZOgk05h/rbtpni0mEqhSQjtA3PKOiMd+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iXgMb8hl; arc=none smtp.client-ip=74.125.227.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="l7nsCaO4"
-Received: by mail-pj2-f38.google.com with SMTP id 98e67ed59e1d1-3a4bd597d68so1814436a91.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 06:07:02 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iXgMb8hl"
+Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d90ba1d807so60375725ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 06:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790946422; x=1791551222; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790946437; x=1791551237; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DY2cwQpDJccuyfdSvxswtfH2eyWbZEDW7sPjJNa4T3k=;
-        b=l7nsCaO4mF9NI93mpB2LEp6EM/NsUOnMJxU/XpB+BhoBKZc9IGPvK2lsISZm0xW3Yy
-         UaZs3nYcpLsrscfoHIpvZ865oNfu/g14f7MiYGjuqG6oT01zh+bPlBdUd9C8Wiiq5/Ff
-         c5eIK3lkDQxVUzY/Z2jlgS3nbw8kRruqEJIMEcQJjqauVMuLbMxhZFYDuEy4OwYMJyUG
-         lyk7401OmanKoGC7ecFvyJc1HyBVxleMKw0lmyUs/N6fGPAoPGCCB3NhPPDLm0q/roxl
-         9NAezPow5TTxLtM1Tcb/XIUgdB8/AK6nLX+V77U6qRKclbg83Qard2SxAsu9enUuv5ZZ
-         m9+w==
+        bh=UZx5nLRdpWK5z7yKqeHvCYGSh31itlWKNzYPXNN5hIA=;
+        b=iXgMb8hlWJ62vMzAo4a5ZlrQ/CYLnp+/LSFqaYapswzmVfe1pKZVaJTTMJEE/THb+w
+         w4nFNuOa0fWHtuNbGehGxjW7ci53lgpOD8kbSKWaIRP1Gof0etHPklPTyiSX7Q25av26
+         3SuV1ZdS1+QysMxvOhLhM86oYsjrBeOCgJefm5y5LHYQscO0v0MeDWNPqTw6IAO9VrnZ
+         /3RUkL38uLgvOX0s/LHdeWbsKG/mv4nCYbUX/loHDODSP3Z47f8jzJJRNYd4dYlNQTvi
+         Nhe4/M4XlRjMUaLVnObt3HPPO9JqGFACeUWbnxQYcTz6/oeIqfsPML0s0W/GYAlpw9gr
+         /D9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790946422; x=1791551222;
+        d=1e100.net; s=20260707; t=1790946437; x=1791551237;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DY2cwQpDJccuyfdSvxswtfH2eyWbZEDW7sPjJNa4T3k=;
-        b=fU6ln1yF42Jl60yuyj+iK1T1CsDmC6qmi6W0AwXPT/+vcTh4LXnmS4fL3+PvZy+SoU
-         LbGRk2ZJAnsix49OVCkNxROvqBng470jwtZ2vkIRtEkUPzE3Fmr8sWLZH6rhY0T67qH1
-         GjN6BgQE9Ah7gE3kUIHEroyzEfT+SGW2CA7fzGtYOUvshaIQ1bukJrq9Sy2/vC2JwrY1
-         oGSqCJ5pwIkqkcCHcXOnmInDhFGA7VXVgfLBbIK0Nwl0m24PelCxr3PUUEzeB4soGdY1
-         ztKXiNWMHNUY4240fA6AI6BICvLZGVYLsd6E0C0cmHRUpbAl9bnYLQOKpsdNay/YeB2m
-         QPRw==
-X-Forwarded-Encrypted: i=1; AKwUvBxFHrfe/OhojgqqqVzTzG9uAS+v6zxpeoVfAdX3sFPYy62Y4karR0/Nws83u/QSjLX28OtUzzYQYitk0HnK@vger.kernel.org
-X-Gm-Message-State: AFq9FYKp/6iY/fXEQivXCSdXdi6edGb4EdtUOX+BiuFJcOecrk4I0T8m
-	OsujYYyrx0WuR3+qU/0yu8D6vceIoMspaRggIqHZgFWEo44ljvh22lxn
-X-Gm-Gg: AYBFou1ptfStJRxsIwDA8G7fitk62yNguxKS3z9lY3qzF5NNpkG7NwDALsTiOBg9/9B
-	4HaT59iKH6M0Jm+CeTm0pEWGbY7VdMRPI9dNputdWoXTPVKnqHrF/SUb+gkFHZb8KOGPQLmBsri
-	uArdOegwfGEMELe6YyldB6QPf1bL4MoCFmZZ6VUKVsU4BOswZIXo/57CLX/zDnHFBYyFjjbcyRk
-	qeRM5hsPKYRaSIMM33+1GvWdSR2h4+1icRs2sR17Qcxq0orIQiJD570ATPbzpFt2/khf5t1vhgk
-	vvApZxeTdiYrm3OY9zFXO2UZRoOi6QvEojuxJk8GV8jYjapKoXIJwl7CS49rFTDvATfmusTrC5k
-	E/U96KbaqYDeGdYca1iBpEselEmatPT4LqCb8DuD6K3Zu/KMbz5CEJuZwTEtAXjmcs82zoXewFw
-	N4DUQQx4TLLKKqDDHpSpSJhxNsaEBdAekgE6FN7M/2sfo3soO3GEsvQjw0QLeGSucyrPnmF4DTl
-	j9YVcznzoMDRA==
-X-Received: by 2002:a17:90b:4acb:b0:39e:4c81:6c5f with SMTP id 98e67ed59e1d1-3a6ce95932bmr2677617a91.26.1790946421716;
-        Fri, 02 Oct 2026 06:07:01 -0700 (PDT)
+        bh=UZx5nLRdpWK5z7yKqeHvCYGSh31itlWKNzYPXNN5hIA=;
+        b=TF63KcUnWphvUVPgFCuCT338xHBnf8HyMMZxjhTLSRXH8dFVfH/tFpVvFbgoz2Sb7E
+         GbJFKFCrMuiTo7EnBl06zeRl5tqtu2xg+t7i21UBY2opt1ySJXJS3WM/mYEJp1PxhiIh
+         hOxnieOi92r5wHM5D4W6+MYd9hY92YjepTDP6Rceo1tXXf1TxtfHNR9HP+Yq3PsxfiWB
+         h2QFnnXCiEoIRantrzXykQ7DxKYQsKhQNi5Nyc9xkZvXlzFhf2nfPt1Ds0jXl9F+Z675
+         AHKql3vGXS3aueYAU9KVe70+5YpNX3mVn3S8YyxX867uWaTuT1WcYbfGzq9JEPBCgY0s
+         g40A==
+X-Forwarded-Encrypted: i=1; AKwUvBxLraYcYIVMm7peW4H0wpN/T98BTIcGOP8SBdkWtvGM0VQPOKDLcs4SRWdMRlEFW+2yqU/Vo46yeArkb/GW@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKJpDq2UvkES1BorWu81S7uQ1LUoErLPJYyuTMDzI04MUUeZMX
+	yMiolUtAZM4czlDmoYjrxL9ZUaGZD9XsoZLsIX8J6AdNMLOrXfoGoEeE7qbuXvlR5wc=
+X-Gm-Gg: AYBFou0czyx0owsDWrKdhyEPP7ADHK1YVL5jeePycAAAiaB0+IUQbtgZskVmSmAj0IZ
+	DIvYUo8RcOGJvgKKuggwvFDiYpfvzyFMbQ6HulpcHA98aNbKay3jXWsbqbvjnamq5Mg489kxR7i
+	DO9IRGMiXE4ieoSE1pJvacM+D9ZLLrt0gKahcORI6RBiZMYCBb7VEgkhCAkPbaFdu7C2cRaxGa4
+	FHA9HPpNFtu2qU35NPAns5lMOZk6FgaTStCPQnssF2q5RM6FhCtkcnNgAGdlCb4ePEMSkchLYvV
+	YL4f0VBwUI6i7AZ3Brijzd00/Lc0XjOiqE4frNx/x2ek1J7L5+BeX0XgdzBbm0GjOuCACpTlLl8
+	rfE063IIB5hRZwdLfgruAOigqWYPMpAtlSxa8XFd4e+feUa/TcJ9ooqmjNM+39DossnsKzasLFH
+	Q6+g1wSNC1dDIrf+XsEGnheU/4b5WvG+L8YPXSJrROdmgqy51O03Uq98MEj0thBAmqnpBBeuw3C
+	yIQvxhu/0Bo9w==
+X-Received: by 2002:a17:903:230a:b0:2dd:c100:a5d7 with SMTP id d9443c01a7336-2e49b655fdemr22787685ad.43.1790946436498;
+        Fri, 02 Oct 2026 06:07:16 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a6cd5d88e4sm4474906a91.13.2026.10.02.06.06.57
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e49f6f650fsm7481065ad.58.2026.10.02.06.07.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 06:07:00 -0700 (PDT)
+        Fri, 02 Oct 2026 06:07:15 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
 To: robin.clark@oss.qualcomm.com,
 	lumag@kernel.org
@@ -70,10 +70,11 @@ Cc: abhinav.kumar@linux.dev,
 	dri-devel@lists.freedesktop.org,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	Joonhoe Kim <26rote@gmail.com>
-Subject: [PATCH v2] drm/msm/dpu: compute the CRTC bandwidth from the state being checked
-Date: Fri,  2 Oct 2026 22:06:56 +0900
-Message-ID: <20261002130656.50577-1-26rote@gmail.com>
+	Joonhoe Kim <26rote@gmail.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: [PATCH v3] drm/msm/dpu: disable the slave encoder before the master
+Date: Fri,  2 Oct 2026 22:07:12 +0900
+Message-ID: <20261002130712.50612-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -83,85 +84,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-_dpu_core_perf_calc_bw() is called with the new CRTC state but sums
-plane_fetch_bw over drm_atomic_crtc_for_each_plane(), i.e. the planes
-of the committed state. When the CRTC is re-enabled (DPMS on, system
-resume) the committed state has no planes attached, so the check
-computes bw_ctl = 0 and the display runs without an average bandwidth
-vote on the MDP path until some later commit changes a plane -- which
-may not happen for a long time on a static screen such as a lock
-screen.
+dpu_encoder_virt_atomic_disable() disables the physical encoders in
+phys_encs[] order, i.e. the master first. With a split display (two
+interfaces on one CTL, e.g. bonded DSI) the master's
+dpu_encoder_helper_phys_cleanup() then resets the shared CTL while the
+slave's timing engine is still running, and the source pipe is left
+stalled half-way through the slave's next frame.
 
-Seen on a Lenovo TB323FU (SM8850) through the interconnect and DPU
-tracepoints: after DPMS off/on or s2idle, dpu_perf_crtc_update reported
-bw_ctl=0 and qnm_mdp was left at avg_bw=0 (peak 800000) instead of the
-3728793 kBps voted before, until the next mode change.
+A power collapse of the MDSS core GDSC clears the stall, so it normally
+goes unnoticed. When MDSS stays powered across the disable (a full
+modeset, or an active DP controller), the next enable scans out
+nothing: black screen with the backlight on.
 
-Iterate the plane states of the CRTC state being checked instead.
-drm_atomic_crtc_state_for_each_plane_state() falls back to the current
-plane state for planes that are not part of the commit, so the result
-is unchanged for commits that do touch the planes.
+Disable the slave before the master, as atomic_enable() enables them in
+that order. The slave's cleanup still resets the CTL while the master is
+running, but the last reset, from the master's cleanup, now happens with
+both timing engines stopped.
 
-With this, bw_ctl is 3728793600 right after DPMS on and after resume.
-Only tested on this device.
+Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850, bonded DSI video-mode
+panel) with MDSS kept active:
 
-Fixes: c33b7c0389e1 ("drm/msm/dpu: add support for clk and bw scaling for display")
+  echo on > /sys/bus/platform/devices/9800000.display-subsystem/power/control
+
+DPMS off/on: black 10/10 before, picture 10/10 after. Full modesets were
+not retested with this version. Only tested on this device.
+
+Suggested-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Fixes: 22cb02bc96ff ("drm/msm/disp/dpu: reset the datapath after timing engine disable")
 Assisted-by: LLM
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
+Changes in v3:
+- Disable the slave before the master instead of stopping the slave
+  timing engines in a helper; drop the comment. Subject updated. [Dmitry]
+- Link to v2: https://lore.kernel.org/all/20260929174819.3855-1-26rote@gmail.com/
+
 Changes in v2:
-- Drop the code comment that repeated the commit message. [Dmitry]
-- Link to v1: https://lore.kernel.org/all/20260929130633.977-1-26rote@gmail.com/
+- Stop only the slave interfaces up front. Subject updated. [sashiko-bot]
+- Link to v1: https://lore.kernel.org/all/20260929130621.943-1-26rote@gmail.com/
 
-_dpu_core_perf_calc_clk() walks the planes the same way; it is not
-touched here since I have not seen a wrong clock vote from it.
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
- drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c | 17 ++++++-----------
- 1 file changed, 6 insertions(+), 11 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-index fea173e37464..9fa55904dba1 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c
-@@ -54,24 +54,19 @@ u64 dpu_core_perf_adjusted_mode_clk(u64 mode_clk_rate,
- /**
-  * _dpu_core_perf_calc_bw() - to calculate BW per crtc
-  * @perf_cfg: performance configuration
-- * @crtc: pointer to a crtc
-+ * @state: the CRTC state
-  * Return: returns aggregated BW for all planes in crtc.
-  */
- static u64 _dpu_core_perf_calc_bw(const struct dpu_perf_cfg *perf_cfg,
--		struct drm_crtc *crtc)
-+		struct drm_crtc_state *state)
- {
- 	struct drm_plane *plane;
--	struct dpu_plane_state *pstate;
-+	const struct drm_plane_state *plane_state;
- 	u64 crtc_plane_bw = 0;
- 	u32 bw_factor;
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+index 1f20695f81e3..0a6be69a3e83 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c
+@@ -1386,7 +1386,6 @@ static void dpu_encoder_virt_atomic_disable(struct drm_encoder *drm_enc,
+ 	struct dpu_encoder_virt *dpu_enc = NULL;
+ 	struct drm_crtc *crtc;
+ 	struct drm_crtc_state *old_state = NULL;
+-	int i = 0;
  
--	drm_atomic_crtc_for_each_plane(plane, crtc) {
--		pstate = to_dpu_plane_state(plane->state);
--		if (!pstate)
--			continue;
--
--		crtc_plane_bw += pstate->plane_fetch_bw;
+ 	dpu_enc = to_dpu_encoder_virt(drm_enc);
+ 	DPU_DEBUG_ENC(dpu_enc, "\n");
+@@ -1412,12 +1411,11 @@ static void dpu_encoder_virt_atomic_disable(struct drm_encoder *drm_enc,
+ 
+ 	dpu_encoder_resource_control(drm_enc, DPU_ENC_RC_EVENT_PRE_STOP);
+ 
+-	for (i = 0; i < dpu_enc->num_phys_encs; i++) {
+-		struct dpu_encoder_phys *phys = dpu_enc->phys_encs[i];
++	if (dpu_enc->cur_slave && dpu_enc->cur_slave->ops.disable)
++		dpu_enc->cur_slave->ops.disable(dpu_enc->cur_slave);
+ 
+-		if (phys->ops.disable)
+-			phys->ops.disable(phys);
 -	}
-+	drm_atomic_crtc_state_for_each_plane_state(plane, plane_state, state)
-+		crtc_plane_bw += to_dpu_plane_state(plane_state)->plane_fetch_bw;
++	if (dpu_enc->cur_master && dpu_enc->cur_master->ops.disable)
++		dpu_enc->cur_master->ops.disable(dpu_enc->cur_master);
  
- 	bw_factor = perf_cfg->bw_inefficiency_factor;
- 	if (bw_factor) {
-@@ -131,7 +126,7 @@ static void _dpu_core_perf_calc_crtc(const struct dpu_core_perf *core_perf,
- 		return;
- 	}
  
--	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, crtc);
-+	perf->bw_ctl = _dpu_core_perf_calc_bw(perf_cfg, state);
- 	perf->max_per_pipe_ib = perf_cfg->min_dram_ib;
- 	perf->core_clk_rate = _dpu_core_perf_calc_clk(perf_cfg, crtc, state);
- 	DRM_DEBUG_ATOMIC(
+ 	/* after phys waits for frame-done, should be no more frames pending */
 
 base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
 -- 
