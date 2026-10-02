@@ -1,213 +1,154 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9885B46D579
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 09:06:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39D043112BD;
+	Fri,  2 Oct 2026 09:08:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790932006; cv=none; b=BNDh8nSnlBl1lMBflPhbNEJlPjnj1jIn3/Z1hsXX6Jo/FaV1VM7XiFhpEPUvZrh8YuhNfoezyKklfdCrgatVvzmeP+VNEEFgEksSJPuuqJZuEr/YslIvoSgcVdz8uFmdVq3EJYPHc8tOBQpW86ANdeTxtLd1wNbswLwRb87WUr0=
+	t=1790932096; cv=none; b=SHQ3533s2zevUnhPcP9FZME1CllHr44oQZM7RdR5e//pP24vEhQjWWyP4e7p6J1mITXzGxSD3ZBNvtUMFEQs1BCiMldAj69G62V2icNBkHqlysZIR8+JJoe/irE2eBrc3HNKM66DWDxdrSg4QK6gHRRNGb/8TdSxTaHehlfMuRQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790932006; c=relaxed/simple;
-	bh=kDMZJFIYNLpENyTsWhs6Qg3bWlNKfFJpixhYOyF9GVI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ee5YLiQqcNXix0SK24SO7e6o+uQaFrPA8JJ0yFwNZRkKpI2fdWgmYZjKESarEsXDDQGUaVyJ1g7+ouIIfV14f+gy0DSao17oXslSlbm7M23NwLUT+odPkWgRp4VJCvRzCcnp+uyOdNNlFAOp9RAViPpOBPU1LaOfA68zPwi9Rw0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rn+ZlQ8Q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AYcT9DUI; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790932096; c=relaxed/simple;
+	bh=tXMfc1n+5iPcVl/5WaHRbFYbN4YDZ+VOl0gnQomBwiI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RPIkyX/nWfn9ebd9H3BAWwVdjUvZ6ZRjyICh3YBU9i1YAapWBaGapdhKmR/e1EyMNt3EuCZ9XST4cDo3VZky3gErfzTlqat74xJeK8+O+qNDveFDoCajU84xcz4kuG6vBSzl962OyXLFYHEc71bohNUuN4OrhoFY4kuV1iqWPi4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c6Kcvms/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rn+ZlQ8Q";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AYcT9DUI"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6925itKT4019605
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 09:06:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=m3e22T5Ei+HeBmJThbj0uNqY
-	cEf7ihFqents8vMEUus=; b=Rn+ZlQ8QldP1jrxGM5PRYz24yepuy89350RsrrWc
-	Q+aRe0f+9wBE9wOepUkA/3d5FOWJpLF7XFVuRlh5bv3ob2BtYM0DjaqNjRYH3lVt
-	puvCftbFgiokSzf8xvTx+7nCsxR2VpnwE8d7NAbCyrLRlAAITRBtSIe2EVEaJFuD
-	c95xQ38c+5Hpnt2a0koWxSUeJLPd/ipguvFm+7i7KswIQD9q6AC9gOsQbPyrnf6Z
-	zZJzgMDC6H3siJKLnHh+keIliYFyhGUsIEI+DZ1ofEAceIxtPfeWztOrI6xECqNM
-	JKkhdsbnxx6ZFN05jkR3zw5uuSCdxVMmN0bypEw+aeOurw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1rvqbwm1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 09:06:44 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93c5ab5c136so1038630585a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 02:06:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790932004; x=1791536804; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=m3e22T5Ei+HeBmJThbj0uNqYcEf7ihFqents8vMEUus=;
-        b=AYcT9DUIkJJKBhP2sTTJ6pD3S2g61RG7kAuHEwUnOkykqyzKSTIEunSf8Q4UrppVNn
-         qTWIDdZu+DYO8gojszn959gLmqsbbnOUrRxoVbjrKLMWeqd8FGEn5lGJ/TdkOgbBZbeQ
-         TPYQo7cRkx+6qddZ1Ok99soYzHuw2qnaHdB67/PwLl7152JIEjUodI/yUkVogAn+eE6D
-         caMXARs+7eu6FjiH0a2KOiq327TJ/onui+cftRp7FMKehBRO0OUNa6C10XI66aeqgrX4
-         guO7YSpFcmpxISsnzQ49HtLVETCOyNIfiFqNxCP/6YO1sEVUg2uXU/1sZBjjlrxgAAge
-         NRUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790932004; x=1791536804;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=m3e22T5Ei+HeBmJThbj0uNqYcEf7ihFqents8vMEUus=;
-        b=oYsI/K9xQ8l6yJ2JsBXfhnBOW6HKXCWoPmz3EwsAyZKRy8GOc5EqKFJRc7v5ILY9sm
-         hBh3NanheDUOwKPAPZQn1rKiUypAn+2th/Y2DcumvnooDidHkwvwhZ19fQK+ggw1+Nrj
-         syRPEjHAK8CedQF3DrNQIb/jG2w766TthOMSC3hDhCMh7HBPbk99zaHab7x0Qwf/wOBF
-         l+DkoD4+SxyFUfQ3iv3cu1jsFa3vaWJ+/yOZlO/h1XiOwH88SjomZPToxB73qKpQEHYf
-         qp8Q+5jD+SRLqCyPkV7wD1cu1fJdGJGnc/TW8NqxnSi682CBcczcB0080gAw1dpekSN5
-         RIOA==
-X-Forwarded-Encrypted: i=1; AKwUvBx21c9ysivxMuDImJmcJnz/Y9CrtP1JTQHgMhw+H7sn4nMZ4yDWN3tootZf1qjslK5++EXl+dnUSyW485Cx@vger.kernel.org
-X-Gm-Message-State: AFuF++lsMjCrZu+0SwRfNhFe7pE1HzTxUA44cn1eDhMgofinV5iAPazn
-	6JlwfuxORCSmqI/lFLOvUucAEt1ggcZ2r+9K3azXKnAiMis0/lcWscEc3QK4OA4kabSJUmWwiiE
-	1LF/NM1xFnWhcs/H22EFurPrnBp240QBsOufjvNVufwzdgjES7LPay8TXv9/hler76wSq
-X-Gm-Gg: AYBFou3lePBHCIZJ0EaoWZa2eF9l0/RLKpVdUN5z76ZCJXuHb78CD/amcLPEzcLv4lW
-	rpGsEIXsforv/nQLLC5bbdBwkno/KwPWxIo4NZfFAUY9hBtqdC4g6wWCtrUSqtoTmQLI31NXH6P
-	f7p+YomXfjV5zzg74Cx2nul2A4Cmnan4g+MdhgICD6BYtgAciBHU0vuO4rfVbDhfn7+FrP/MU0T
-	W9NSUiAcnxTatBH0YRpzPPvluI+N+IjeMQszt0oPMDMHhU4dIuhdO1qwtdVfsu1KOKYY6jPlfxe
-	ONroMqja5y3hT1f/CpkWBYpsU3sbNk2TLW4kNlvuBsSEzR9M5vmu3nwSsxSMRBgzEdenUTbZSba
-	HcCh238ZxYMkmi3LLOrUl
-X-Received: by 2002:a05:620a:8804:b0:93c:612e:9b51 with SMTP id af79cd13be357-93cf18a7807mr337166185a.55.1790932003766;
-        Fri, 02 Oct 2026 02:06:43 -0700 (PDT)
-X-Received: by 2002:a05:620a:8804:b0:93c:612e:9b51 with SMTP id af79cd13be357-93cf18a7807mr337153385a.55.1790932002076;
-        Fri, 02 Oct 2026 02:06:42 -0700 (PDT)
-Received: from mai.linaro.org ([2a05:6e02:1041:c10:f14c:b716:c104:4712])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a03950375dsm22387125e9.1.2026.10.02.02.06.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 02:06:41 -0700 (PDT)
-Date: Fri, 2 Oct 2026 11:06:34 +0200
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-Cc: Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
-        Tzung-Bi Shih <tzungbi@kernel.org>,
-        Guenter Roeck <groeck@chromium.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Matti Vaittinen <mazziesaccount@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Oleksij Rempel <o.rempel@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
-        avaneesh.dwivedi@oss.qualcomm.com,
-        Umang Chheda <umang.chheda@oss.qualcomm.com>,
-        Francesco Valla <francesco@valla.it>
-Subject: Re: [PATCH v15 5/6] power: reset: Introduce PSCR Recording Framework
- for Non-Volatile Storage
-Message-ID: <ar90GoaxTV8pjonY@mai.linaro.org>
-References: <20260924-pscrr-framework-v15-0-7af87107e0d3@oss.qualcomm.com>
- <20260924-pscrr-framework-v15-5-7af87107e0d3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c6Kcvms/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 789D81F000FF;
+	Fri,  2 Oct 2026 09:08:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790932094;
+	bh=qYND9I0bLkoV1OIOcHctWDuYZniuT1XFMISc8X1RTAk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=c6Kcvms/zBEDquaJ9aYbjQKOrSRY+a9W/CiTq3XW0ZL8dwXyChYUTb7vZQJc8wIDg
+	 uR98qdUBCwKUFXTlRDk/Z0R6FAv87jKt3emcG5kQAj1u0WQE5Y1CCkDY8uxo6JwzK/
+	 GkaFfas904rt+JR8GfDctVKu0YV1Hi3KZBozvzMi8oAy2tgM797zV36Nf6xcsU+tNA
+	 b5EWDfnFR/99C+5A/unLr+2T3FujwljHiCBpy283Bk9CqIeAPYEyk2J1xqVDCR2HGs
+	 7+3pZY1aNZBWIGEdVPlR8jnSiIUCKDvJA1/WkBzByGyAeGlYtSpckimsXzy4bBrIuF
+	 +6MF0xsLL7txQ==
+Message-ID: <aeed36b9-2609-4312-86d3-b4ddca9148ee@kernel.org>
+Date: Fri, 2 Oct 2026 11:08:06 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260924-pscrr-framework-v15-5-7af87107e0d3@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDAzNiBTYWx0ZWRfX+pFV7nXpqvX1
- TAOsbPNBS6DJ538/qRgxyb0PW3e/CJYXm83jTpPiOoEcReJKFAHWH3sTEhXCpYOjX0pZW0PYfVP
- +xTM4myz/0gjhIIxX3+2YaGngdioC9BUeqc9Iw0E3btOGO97Ms/GEYSDWyn+gaNFqWApDPRU8XW
- ZRwaNQ1Xzh1oOrVsr+pOleNrYipY6jUGXh33DQf8+mOBG0ZBAfIZqjeL+nZOkPJ9GZUafwSGxos
- heNUXBPvAc8BPiP6Zmcw63kY2f09tr8cMBHXNBjWkoe+bPtlBHyL4G+oQIOzlLBMjkWQXOQDPbY
- g2drfie8bRelaQsEbcx2fL1msF3wfczOF6l9yN+Wtnb4IcKV3bJzatUMs4Q1TgWQUdyTT3irAb8
- q6dXKD6pXphR4cQKAD2DnqiDi51mNs08z46mHU+cwSOp2pFxWI6VWD0kze+nf+5YIeBSCpJMUyS
- NGY2k5fBCMR4CFVWlIw==
-X-Authority-Analysis: v=2.4 cv=JIauIMKb c=1 sm=1 tr=0 ts=6abf7424 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=wJk3McD_gWb6CrzzaM8A:9
- a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-GUID: HLcgyw_n5zVVjtAR6HN9qVPgziRL_Q1g
-X-Proofpoint-ORIG-GUID: HLcgyw_n5zVVjtAR6HN9qVPgziRL_Q1g
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDAzNiBTYWx0ZWRfXxRbKwQaCb5xd
- v5JHig1ojmlCFfCLCff+TUI28EgWjZCwRSktCH2Tqh48j8qb+dEkixIsrTtLN9IMZTxyrjdMuZp
- HELp0nB2OVbzseyxYL5qyX0a7W6SZh0=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_02,2026-10-01_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 phishscore=0 impostorscore=0 bulkscore=0
- spamscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610020036
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] dt-bindings: media: i2c: dw9800: Redocument
+ DW9800K
+To: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?=
+ <git@apitzsch.eu>, Luca Weiss <luca.weiss@fairphone.com>,
+ Daniel Scally <dan.scally@ideasonboard.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20260914-b4-dw9800k_cleanup-v2-0-6553273aaa33@fairphone.com>
+ <20260914-b4-dw9800k_cleanup-v2-1-6553273aaa33@fairphone.com>
+ <20260916-meek-qualified-penguin-fd8cea@quoll>
+ <16efc0e1-8986-418c-87ba-9bf1ca4e4088@fairphone.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <16efc0e1-8986-418c-87ba-9bf1ca4e4088@fairphone.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 24, 2026 at 12:38:46PM +0530, Faruque Ansari wrote:
-> Introduce the Power State Change Reasons Recording (PSCRR) framework: a
-> generic mechanism to record why the last power state change (shutdown or
-> reboot) happened - under-voltage, thermal, watchdog, software-triggered,
-> etc. - so a postmortem reason survives a reboot or an abrupt power loss.
+On 01/10/2026 15:17, Griffin Kroah-Hartman wrote:
+> On 9/16/26 11:06, Krzysztof Kozlowski wrote:
+>> On Mon, Sep 14, 2026 at 12:25:56PM +0200, Griffin Kroah-Hartman wrote:
+>>> The DW9800K's properties are too different to justify sharing the same
+>>> bindings file as the dw9719, Create a separate bindings documentation
+>>> for the Dongwoon Anatech DW9800K with it's updated properties.
+>>>
+>>> More specifically:
+>>>
+>>> The DW9800K did not share the SAC1 and SAC6 modes
+>>> that the DW9719 used.
+>>>
+>>> The DW9800K does not actually have a register that matches the property
+>>> description of vcm-prescale, instead the description of the clock-presc
+>>> in the DW9768 is much more applicable to the functionality required
+>>> according to the DW9800K datasheet.
+>>
+>> I don't get why it does not match. You have exactly the same first part
+>> of the description, look:
+>>
+> There is no inherent difference between the two property names, the 
+> values that the previous binding was using was completely incorrect with 
+> the hardware.
 > 
-> PSCRR is built around providers. A provider is either a hardware reason
-> source (a PMIC, SoC reset controller or watchdog exposing a reset cause)
-> or a recorder that persists the reason across a power cycle (an NVMEM or
-> RTC scratch cell). Each provider gets a directory under
-> /sys/kernel/pscrr/providerN/ exposing its name, backing device, the set
-> of observed reasons (as tokens), its capabilities, the reasons it
-> supports and - for recorders - a record policy. The reason set is
-> deliberately not collapsed to a single winning cause, since resets are
-> often multi-causal.
+> The reason for this discrepancy in the first place was us guessing which 
+> properties that this driver would need based on the datasheets we had 
+> for older dongwoon devices.
 > 
-> Reasons are the numeric enum psc_reason values from reboot.h, shared with
-> the POWER_ON_REASON_* vocabulary, so they store compactly in small
-> battery-backed cells. The current reason (get/set_psc_reason(), set by
-> the thermal/regulator/hw_protection paths) is written to every recorder
-> from the reboot notifier.
+>> dw9719:
+>>    Indication of VCM switching frequency dividing rate select
+>>
+>> Your code:
+>>    Indication of VCM internal clock dividing rate select,
+>>
+>> Both are dividing the VCM clock rate, no?
+>>
+> clock-presc is used in a different dongwoon binding (dw9768) which more 
+> accurately matches the function of the hardware, So we concluded that it 
+> was a more appropriate name.
+> either way, the values we were using with this property was completely 
+> incorrect, so it had to be changed either way.
+> 
+> If you'd really prefer us use the older property name we can change it.
+> 
 
-[ ... ]
+So the property describes the same thing? Then use the same property
+name and type. Otherwise I really do not get how two same descriptions
+can be different and one "is much more applicable".
 
-> +menuconfig PSCRR
-> +	bool "Power State Change Reasons Recording (PSCRR) Framework"
-> +	depends on POWER_RESET
-> +	help
-> +	  Enables the Power State Change Reasons Recording (PSCRR) framework.
-> +
-> +	  PSCRR records why the system last shut down or rebooted into
-> +	  non-volatile storage, so the reason survives the reset and can be
-> +	  read by the bootloader or early user space on the next boot. Reasons
-> +	  come from software (thermal or regulator hardware-protection events,
-> +	  a watchdog pretimeout, a kernel panic, a controlled reboot) or from
-> +	  hardware reset-cause registers (PMIC, SoC reset controller, watchdog).
-
-[ ... ]
-
-> +static int pscrr_reboot_notifier(struct notifier_block *nb,
-> +				 unsigned long action, void *unused)
-> +{
-> +	guard(mutex)(&pscrr_lock);
-> +
-> +	/*
-> +	 * A reboot, halt or power-off that reaches here with no more specific
-> +	 * reason is software-initiated by definition. Record it as such rather
-> +	 * than leaving it unattributed; a real cause set earlier (thermal,
-> +	 * under-voltage, ...) is already latched and left untouched.
-> +	 */
-> +	if (get_psc_reason() == PSCR_UNKNOWN)
-> +		set_psc_reason(PSCR_SOFTWARE);
-> +
-> +	pscrr_record_current();
-> +
-> +	return NOTIFY_DONE;
-> +}
-> +
-> +static struct notifier_block pscrr_reboot_nb = {
-> +	.notifier_call = pscrr_reboot_notifier,
-> +};
-
-I'm worried about the mechanism. The call to set_psc_reason() sets a
-global variable and pscrr_record_current() write its value to the
-NVMEM backend.
-
-That is done from the reboot notifier.
-
-Is this notifier called in all cases, eg. watchdog reset or emergency
-reboot ? It sounds possible the reason is set but then the notifier is
-not called thus not written in the non-volatile medium, no ?
-
-[ ... ]
+Best regards,
+Krzysztof
