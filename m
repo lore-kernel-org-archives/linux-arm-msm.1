@@ -1,90 +1,172 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DA2E37DE83
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 19:31:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F18C9403EB3
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 19:44:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790969507; cv=none; b=FLJFMAMsskea95C2ijDsCXytN/KeiiwPEYuMYvzyXO/xDHlWW0BUZbeMDBLNqs6tDsXHOc2GPaxNS9pgsgbnuAKeIeHTYcUHtWTJMzXcKz0kA/1y6og8ZJxI8noR3wS9VpCIErp/Hlp8wlOeYlx2AhyvQwCtTWqB2thEYTzp7jg=
+	t=1790970291; cv=none; b=aNRYVaIevJ8zUgBGrCzzOtE9+BtkXCwgBAKGgx1dEHX7eAaeI81HXe9PmFAgfJLC7CPpug+BaJLiE6Ach/UU9mTvfpIQhOyiyozeP6q57qETdwbMI/mpTJ1311ZsS4/U0VFZX6hg5et/tPNupiHWvZY2zaL3NqGfmhRUq9WEH4U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790969507; c=relaxed/simple;
-	bh=Gj+PEAhdIV/uFJgJbAghSUHPHdZ/2r0J4sOrBe2CBfI=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=aVclU4+CFoHwaPyRcg1ynPSjFo93jeLWRYjPPr+3GFMdtoq+GlU5EnNxpnu7DApjigYgSy/fe6UJbzEqg479krbTit2vY0HMINWDVfPrkokIK68WgYV0mKLuB3TJ6Dbk3jttP1bLCLyoGwTU5LO5IeRnx/LWdk/4eF5KGQaRxAk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bhm/5Qa4; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790970291; c=relaxed/simple;
+	bh=zz+RclWqsBHriP60gs2OKPtSQkQLmQXJLfyVb5BowtQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=D5bit/rEM10weTT9oTt8nuoeTJ9BFh06MM7fpti1xNfQLyBQOl+7jBXGOxZ1Bn0AG4HkyUhVq9NuKA6Hx9HXgDt5ILzfKEbMTJoepFT4DQ5vbN/2WADzBQji3hSRY9FAbe9wOVkA/KvMT6IEcBcXMdBQl9FKqdRCT1qDaORTwAk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QTGuX8L0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E1w38gLZ; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bhm/5Qa4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D7C41F008A2
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 19:31:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790969506;
-	bh=Gj+PEAhdIV/uFJgJbAghSUHPHdZ/2r0J4sOrBe2CBfI=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=bhm/5Qa4cTFpoOUZToPyaA2zcXGy8AWO9//uXK8N66BKJB6fkMlnXXhM1A2GKrLse
-	 19q1LCRQS7vli9R6KczLoKxfE91sHVLylsCrzFs9tSz2OoC9c7fSS2AXXjARr0iIjE
-	 rlCB3kqTOhdYyAzoJkn0JBV9vc/TRNZrlUTgGoBcpYcyPWCucWhouQXMhH6VWZECFC
-	 rkr21IrQYNFOJO0msvnADlZNfKFKdkoOK732cVXS2c7OgssBo0ZyqpKfja181yAYX1
-	 9hKFLymMbtJHo+K5dFZZgb4auPGDiEqKBDmxn56UxJqFsWSPRvqqlfyKF3NlP4BDlO
-	 lBDNcDIPpsAFA==
-Received: by mail-lr2-f32.google.com with SMTP id 38308e7fff4ca-3a973a4670eso2265981fa.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 12:31:46 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByJao5jTNTztE4/SO6jBbeGKBAc08EeCnhX6XVA2nwXuCyAm4EGT6FBT509gXxWkvCmLJig/jBA0o0PI3i+@vger.kernel.org
-X-Gm-Message-State: AFq9FYJcIlFbuPOXNJPkp12NwJLqb1AraU/nA0LfUa3hNazy35wIg2lS
-	RBMUeIFBKJTuhWi7zTAt0ssJ6xBk9q8JMZkO18jRyDKfK7H4hA2ZNZ6El+aWymlz50jE28c5Q54
-	dYdy9TiH5QX165I/N0B/MIJT5vOU2+IO7aPUsRCYc+w==
-X-Received: by 2002:a05:651c:2121:b0:3a8:7b84:be9b with SMTP id
- 38308e7fff4ca-3a8877b73a8mr9365471fa.5.1790969503992; Fri, 02 Oct 2026
- 12:31:43 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 2 Oct 2026 22:31:41 +0300
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 2 Oct 2026 22:31:41 +0300
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <ar9qNirrzOTDLipN@gondor.apana.org.au>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QTGuX8L0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E1w38gLZ"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692H6KUL2100156
+	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 19:44:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=sVFnUaPuNHjd50COa3GrnnxVhvIYQTPbzvF
+	59R3fnTM=; b=QTGuX8L0weP3R+aTs1uRkInD6b3CE/DvlY6sjv5rI7iT8ZUZD4J
+	vU5YOEPHWFo7SxMcq+ZpRESotH+ilzfuHcKiMoVZh6EMmyfmm7vvH8cuDJ9TfVyJ
+	fBjkAOxonakARLpDFG+3tw1N5maDNKA8IN+0hlYxV89vFdTrGl+A85r1m405uxHa
+	jvfE6Bu7JcikNyiBPLHQEUGio48fSjDJNMmuFNxasBUTeeD9IJ7DdADaWnnRrUS0
+	ltDHb2I8nU9D9SZLUT/Pb0wpCrMrqw3QjO2fXRhDKCnMW5tyMiT4LAewwsvy7Z93
+	j8v64i26E6/QgfqKPFKLXi6/ri3Za0Vaw7w==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h20nfuxy3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 19:44:48 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93c58ee2116so1505251385a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 12:44:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790970288; x=1791575088; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=sVFnUaPuNHjd50COa3GrnnxVhvIYQTPbzvF59R3fnTM=;
+        b=E1w38gLZQJVpRhJmflzUeCNqxV+aX7aDAoibxLq7ICzD8P8MKAvRlfLMV7Rl86lbfH
+         v4p7+VIgpy3THXm6qlwnSlX66KQofVAK99aj+8IfiloO3RoZ2TId6RY0pfAbeBdkr3D3
+         SqWfGeBSC+8mC3G9RF/gqFMXmmviBXq7S3lmI4C+M5VbXJPxilGaU6gCf8BGprm7cfTU
+         rxiazKBvcZjaQ3lCq/hL1lcoeKtHpPM5Rn5wQTdgVe39wZFkkvCK3KozoVNoJnsCGC1Q
+         nCjmBhqsApPEaasIkFbfHV4tfSann8yVlNlX0m35awy6tPO38b5u/f8JGQ+uND/X6t4t
+         j3mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790970288; x=1791575088;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=sVFnUaPuNHjd50COa3GrnnxVhvIYQTPbzvF59R3fnTM=;
+        b=JUW8+ohmP6XGJ6uRzFTJ8ucLHWkMbuUZuCTQTVoW7EPFzFq27tUkFzQeQ1RklU2hGR
+         QB90xlYIaTtAySlzBIexd0n3DsopLdvfrFcsA96h2eIYem+FydhPHrMDvJopLMhVY2/u
+         IP3jpwzc8n65+xcgaDWrLegOGs3Gu2ZFjDLlUCElwFrViCHe5asLqQwc7pt6VaT3fN7+
+         AB+1A+hNTdkovJNPZ4gdoIwYtmbc/lAi8Xck47yzQMqduuWV2gSz3HyGMAkNzu4ekAj8
+         ovmBsrIazTc/Rz1vC0T6joaY/kv0rd8nyMu5trDzF2WaEQ5WYd2j2FF0nTEUEvg9vNcM
+         cPrQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwkOQc7hV12vWGDfYLeJgwaVRvSMvKoeWu6gi9m4vU+SKsGYnLoVZfpbi6V8JJ7Z/OJTAahCx6KS8am0D8k@vger.kernel.org
+X-Gm-Message-State: AFuF++mjX8V5vj5M6ri5JkFPuPbOOPMTsZQcPowHspIf7KyDyQCKvFBa
+	B5ghaMTayk827QcmsJMxLjDoHsup8Tmd+IBzrvJHE+StQboPL5m9lYbdHWluAJl7zW9H5XghC2w
+	K/AwP6QXtq/EnOXXs6atU6QVZtB6bTbgdOQt07x067lESEoF7agUkE9m6I1RmKDgS9kQ1
+X-Gm-Gg: AYBFou25N8IU1h5sq1N46Lxx/s87nLD387AaS1Yi1rswz9TTWfNA8SU8XZ9/VL1fT5N
+	c1QJZIxZAEJsto6Hpm49VLb16mpZ0MIQvQfhQvJETyjjrGm2KOhxRqaDdu76A1BbxT784q2RJab
+	ZdK39JV4byt25ag1TwjGQSwYPw7JLKgZ4uf1OpFLEIx831nab3zaCQVd2/WbtUXFL0K5+x3bqnn
+	PPip/LUfm5UpnuBRToCB2oG9idpdebj7iAFjtddMDryQr9WaMWBaTcM/XOyyd23KaPYYS+9fwbo
+	mnpnFSQ6q79jtJtFSQt+JrhvUVl7xyU2x4KE8u74lBc30iosylCPcvAi+kI3QLhk8MtWr1kVMEp
+	f85cly93SStCh
+X-Received: by 2002:a05:620a:6f04:b0:93c:c96c:a592 with SMTP id af79cd13be357-93cf17329a8mr663085585a.36.1790970288051;
+        Fri, 02 Oct 2026 12:44:48 -0700 (PDT)
+X-Received: by 2002:a05:620a:6f04:b0:93c:c96c:a592 with SMTP id af79cd13be357-93cf17329a8mr663077985a.36.1790970287421;
+        Fri, 02 Oct 2026 12:44:47 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a03ff3cab2sm37791495e9.2.2026.10.02.12.44.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2026 12:44:46 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: andersson@kernel.org, sboyd@kernel.org, bmasney+clk@redhat.com,
+        jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org,
+        conor+dt@kernel.org
+Cc: abel.vesa@oss.qualcomm.com, abelvesa@kernel.org,
+        taniya.das@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v3 0/4] clk: qcom: Add LPASS clock controllers for Glymur
+Date: Fri,  2 Oct 2026 20:44:31 +0100
+Message-ID: <20261002194436.1275056-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com> <ar9qNirrzOTDLipN@gondor.apana.org.au>
-Date: Fri, 2 Oct 2026 22:31:41 +0300
-X-Gmail-Original-Message-ID: <CAMRc=MdRBu5gg7Q3pz8Wn9Da4RpmmiKLP2-LwiszKCd3o8jQdQ@mail.gmail.com>
-X-Gm-Features: AclHuK8wQ6TwGfqRhG76u8I4Ivw1PHBRVeaKEhxJd2tlBCqG9_-Cl1JOHG4NPMU
-Message-ID: <CAMRc=MdRBu5gg7Q3pz8Wn9Da4RpmmiKLP2-LwiszKCd3o8jQdQ@mail.gmail.com>
-Subject: Re: [PATCH v9 00/14] crypto: qce - Fix crypto self-test failures
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: Thara Gopinath <thara.gopinath@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
-	Stanimir Varbanov <svarbanov@mm-sol.com>, Eneas U de Queiroz <cotequeiroz@gmail.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, 
-	Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Russell King <linux@armlinux.org.uk>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, brgl@kernel.org, 
-	linux-arm-kernel@lists.infradead.org, stable@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: xST88wbW8p3ulZ2SN4ncYacyyNriZlkl
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA3OCBTYWx0ZWRfX1YkUUFDTS3HH
+ Bzzq8pmrwL3/1DnyhY+Zp3P9eSwuXnT5WU37jHRLT5nhcXgi9a18n6Elr6h1dMJbfyQbxeW0ptm
+ bS8jCbe83LQpyXkqdoVJf6gdD8Gz5pI=
+X-Proofpoint-ORIG-GUID: xST88wbW8p3ulZ2SN4ncYacyyNriZlkl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA3OCBTYWx0ZWRfX/jTQPJ2Z0gbK
+ b/vmMBtUUysUVVuC6ncZEG9XVzQfUhSZeFb290t3UcFGru7sF8XltiBScsMygFXBc8R8UfKSasp
+ O97Z4ynwccRzGyVzBMsnKSUt4nvwDy8mBOq/STfsS5ZCOze69puYauQizK1mGs6jKQouJu0gXsB
+ M2J3qL4CYl2w1Ecz/sR5A/WwG0rpCfGWu+ZGx8J8eSrSUtD+tL820by+heen+ZSrIVAvvk4FP6n
+ O859Vkx5qFzun7+cvwKJ7BFCJ6QF3vzIoXFMtFDVTUFwVweRSuFcsDPToJ1QhoAqv3jy78g02jc
+ 8/rQ1HBfnFLxxCF4+rgvs+TgSzZwvrUrsgFhLTw2zBQKgPyCkxVIo7fiIScsRaCDdWPAzNIgi6B
+ NcgPuIpEJu1kiOZ1GkaeK8S9J6pqTDkOfFzdZ/Ugx1SVoBRkVu1f9QJnJN+up8xNGXEe5QmzHaA
+ 2HZBT/ACDp+DzVh4WFg==
+X-Authority-Analysis: v=2.4 cv=f+jdl+yM c=1 sm=1 tr=0 ts=6ac009b0 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=tj6v_WFbzlxhzRuvkX0A:9 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-02_05,2026-10-02_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
+ clxscore=1015 malwarescore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020078
 
-On Fri, 2 Oct 2026 10:24:22 +0200, Herbert Xu
-<herbert@gondor.apana.org.au> said:
-> On Tue, Sep 22, 2026 at 02:57:15PM +0200, Bartosz Golaszewski wrote:
->> This iteration - in addition to the previous fixes - proposes to split
->> the QCE driver into a core part necessary to bind to the QCE DT node and
->> enable runtime power management in order to allow to drop the
->> interconnect votes, and the crypto part registering the crypto
->> algorithms. The core module is then enabled in arm64 defconfig while the
->> crypto part stays disabled by default. In addition: the actual
->> registration of crypto algos is gated with a module parameter that
->> default to false.
->
-> Please check the Sashiko comments:
->
-> https://sashiko.dev/#/patchset/20260922-qce-fix-self-tests-v9-0-b1aa742e79af%40oss.qualcomm.com
->
+This series adds the two LPASS clock controllers found on Glymur:
+LPASS AUDIOCC (SoundWire RX and WSA1..4 resets) and LPASSCC (the TX
+SoundWire reset). Q6DSP owns most LPASS clocks via Q6PRM, so only
+resets are exposed here -- enough for the LPASS audio macros and the
+SoundWire compute-mode controller to leave reset.
 
-I've gone through them. None of the issues were introduced by this series, all
-are pre-existing. I've added them to my list and will fix them. Can we not
-delay this series any longer and instead work in smaller steps since the crypto
-algos will be disabled by default anyway?
+The programming model is a near-exact match for the existing SC8280XP
+controllers, so patches 1 and 2 extend qcom,sc8280xp-lpasscc.yaml with
+the two Glymur compatibles instead of creating a new YAML file (per
+Krzysztof's v1 review).
 
-Bartosz
+Changes in v3:
+- 1/4, 2/4: extend the existing qcom,sc8280xp-lpasscc.yaml with the
+            Glymur compatibles rather than adding a new YAML file;
+            drop qcom,glymur-lpasscc.yaml; update title / description
+            / See-also (Krzysztof, v1).
+- 3/4: bump max_register to 0x3020 to cover the WSA3 / WSA4 reset
+       offsets at 0x300c / 0x301c (Konrad, sashiko-bot).
+- 3/4, 4/4: pick up Reviewed-by from Taniya and Konrad.
+
+Changes in v2:
+- 3/4: drop <linux/mod_devicetable.h> and <linux/of.h>, switch probe
+       to device_get_match_data(), lower-case reset offsets (Taniya).
+- 3/4, 4/4: pick up Reviewed-by from Abel.
+
+v2: https://lore.kernel.org/all/20260925084635.112399-1-srinivas.kandagatla@oss.qualcomm.com
+v1: https://lore.kernel.org/all/20260922184425.56114-1-srinivas.kandagatla@oss.qualcomm.com
+
+Srinivas Kandagatla (4):
+  dt-bindings: clock: Add LPASS AUDIOCC reset controller for Glymur
+  dt-bindings: clock: Add LPASSCC reset controller for Glymur
+  clk: qcom: Add lpass audio clock controller driver for Glymur
+  clk: qcom: Add lpass clock controller driver for Glymur
+
+ .../bindings/clock/qcom,sc8280xp-lpasscc.yaml |  7 +-
+ drivers/clk/qcom/Kconfig                      | 11 +++
+ drivers/clk/qcom/Makefile                     |  1 +
+ drivers/clk/qcom/lpasscc-glymur.c             | 89 +++++++++++++++++++
+ .../dt-bindings/clock/qcom,glymur-lpasscc.h   | 19 ++++
+ 5 files changed, 125 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/clk/qcom/lpasscc-glymur.c
+ create mode 100644 include/dt-bindings/clock/qcom,glymur-lpasscc.h
+
+
+base-commit: 9f24d789f03b22941b905ded43cb5ff8eea9ce62
+-- 
+2.53.0
+
