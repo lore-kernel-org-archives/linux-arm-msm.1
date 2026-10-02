@@ -1,368 +1,338 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9926148C3F2
-	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 10:14:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790936066; cv=pass; b=IQ4kZuIqSw9heGuXYu7GQo45tPViK3O9VGYjy5T9VoMwl1xkOnQLCyhDhlR2AdfrA9RoASmgch6zoKWNnIbzUcIuW7foc0dQDj9KjCW3I5+/PPIa4nh/DBB/f20Rq8XfClNGEuWU8xcLPjW2HjpUT0xKenmBO51N8D/HsguQ4X0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790936066; c=relaxed/simple;
-	bh=pIfrqYOsttuk4BcoBkatYHzhO60Yrc+sR942QLyGfbo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SoWeN6gVsogHxD0iLTq3evzsaubTo52YOZEdwrm8x6DYbzvl0t6RSkJBaDf3diPEajP9bdrZc0TS+rVCc6R2wdk/eOPjmO4DP8SrgE1mkc50HVyd/vTw/zS8MN5j+AmMybK2tKBC7dZZATD1KFg6p7sDkVSQ9sujOUPxM9ZthsU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gTt39BcF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iG4GoTEi; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B248547DF94
+	for <linux-arm-msm@vger.kernel.org>; Fri,  2 Oct 2026 10:18:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790936282; cv=none; b=g/pHVp1rbrvPmZTCfzHaOJdA0xNwdLcuQVBM80GyQmXJMl78XiKs/+un7Msxkmf0MGby93Z+wbdStqN35giOjW4LqX5cejBs7iBD9v7z2VHCq8dldEFqHjJab8XPwJJryqq3WotUvYVfyU/elnhE/YVJkU93HdoTM9atzzjvgaA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790936282; c=relaxed/simple;
+	bh=Ei67Qo4DiNjBwrbkavt7XyuJmYSPj7Zjtor+5aQhLYw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lxESAJQnoL82YjU3eV30DXZv6x6z4aZDVV59EBlZ9JrxWeVcOr0VeM3Q/7Fjv2hA9rJ9grZdEUXGWDex/hff59zruKdpFWy+HlTFV48fiKu9iMd0S51yXp9zUn7a0eY5GQv60g6y7MWrMg9i+OgMXnqS42XceORCZrDSDvjr66o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=YV7uSNhQ; arc=none smtp.client-ip=74.125.229.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gTt39BcF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iG4GoTEi"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6929nRV22061982
-	for <linux-arm-msm@vger.kernel.org>; Fri, 2 Oct 2026 10:14:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	97tQrA8V1fotLtgnaG3+4FcLpgXpr+0ISXkTd+sa8kE=; b=gTt39BcFNLX7ML3w
-	MHVGUYozgYrp53m+cIkXudyla3DkkhIDcBC5GOxak74EnUyfrwqDkygihs5f+2rT
-	7KksnIswlaRwt4vRFRsaAoIAsT4YQPGzMrQy/3LodEYu3YQmmImVPySOBUSchLRO
-	g9PdBZ56v8vt/cBrrRgiPQEzZI22e079byf8h76+Avp9zkKIs1cwe4xhMoZi8XAI
-	u/dTdXbFbypyDnL2+8BAz1jxPdLdPokklz1UrkcjiTycrDbOLWQSdBMJ24tdO0JS
-	AP7sAlHjKLTp2YLmuJ6SxnySObd1bvrP9HsOYobtQWnNgjb972bA+Mvyo1j3YR7L
-	palIzg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h256ms2cy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 10:14:22 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-398dc3d8f0fso1488894a91.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 03:14:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790936062; cv=none;
-        d=google.com; s=arc-20260327;
-        b=SyBF4nvGxP/O8h5aI55uccMszSexhl5inj+tk5ecTvdX1pEeEdZ2OMx8hzntoODdFq
-         cA18fVE64qT7Et0uNfQ41h/BMYCpgHhtaXpUpbOIHRIQ2I9lq7P3gy9prxoDEhkW5Ae3
-         gRfhitkiCahG8y8fTdiZD9TBsah0PcAzkxqGZIQ8YI1P5gBB1A4AGlLIEnHMOs1WVWbn
-         dnAvKdCtVPFt4T3P+Ej1SQT6rJ1dPWHSaxzz54/Al7ZyDjPeoEVtk70xQJ41ZNIbPBCJ
-         L9QsynUILg6eJxyiTOvTFhYu0N2Cyw+A3oyimCYnHwMzQruULjekqPYjpqts0lWzhlgq
-         T6rw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=97tQrA8V1fotLtgnaG3+4FcLpgXpr+0ISXkTd+sa8kE=;
-        fh=iwucbkULQBmWnCNsJS6AmN2xvdaAC4KZE33u5dr7qI8=;
-        b=IJ7bByCNf9KWzZwk/iw4Nqdly+GjmMvAJUAEttQdmoTt2CIG++SCvXYcfOW+5sph+C
-         dwYX7gVqF8sDs/F/Oz1upqMuM0+B+yyzIedGpyTITimWpSnM6K8p+vP3UR59CdiSgMVE
-         t3E9ZbiCfwV/kIv1YeV7SuouZYXHQEKREMvEvdKzCJe0z+grTHTDH5m3ZjIfYZHjJOMi
-         tFZBNpH8r2aeyR7/eanQFxp3EWhehJwVjEb1QAtEiAzmU8JOOloq6rJTcXefM+EiGhDa
-         IY3pqDL8SdOM+CUhksIy9nVJjd6oPMxgiyL9/wU8CF5UjrxZrwRNH2nJAQ3EXlED/yhM
-         OkxA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="YV7uSNhQ"
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5bb7ae3bdfaso71696e87.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 03:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790936062; x=1791540862; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=97tQrA8V1fotLtgnaG3+4FcLpgXpr+0ISXkTd+sa8kE=;
-        b=iG4GoTEif4YYbjzxjF4a3F6+l5x07jnfKkHWsv5rMrSaiNFY/fETqaSNIXuG058R4u
-         SuXCq/zkuLBE01P3xfuWBqCfWfUVcLv3TJpV4eTRpuGOCc7VdCXvZAH5BwabiAcu+DHc
-         sq4MIE5v84aAp6EicOoxU+6+uNg6McLLk+6IPjlST+DYc2g14ZCzdmUOaes/E0DVSXEo
-         BlYYETPaQWo8v+U2xh/AicHOg6NBwuViGpFfJ/vDrOVrxcTlq+dXv6TsZhsYZTvNO9hL
-         5GK6xpYV5TzbanjCwKHsibicYWnbLSPGvxztvnEeWMoOgOgCjLVtDbFO4yAvBtH3w56t
-         Absw==
+        d=linaro.org; s=google; t=1790936279; x=1791541079; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zwHVlb6qd1MABiGpHpCoz4HeQSYbdEf5B7Ks+6PxqvM=;
+        b=YV7uSNhQkFJ3zt5jZTHum571ob5eLw55dAWBU7Bp5qzq7jr0MhuihF1t+CqTQy5N37
+         hwPv4YP8vRsxRJWQXhbyiOPsiMd/rF0PsHUntlLskD/TYJvXOMqABHQFeGOG8YXgKMqS
+         QJKeduhL0juPC4yfk1LJpbHFSvSRUeapVUrRhWkP9L1ZfXDFG2hqTIQ0wyCw9zbydjHR
+         Ivopv5Q1ilspEgWfsq+InbDY379Isb2fOY8EgE7ZnuAd4GSnt/z0vHvR8i8PgIW4swZo
+         6IJgzJYSfXHPP17Wj5NaHr2gZH5JAFP2iglPymFjRRiGNTjaGQt9YdCmU4R9UQkHi/vR
+         TwgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790936062; x=1791540862;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=97tQrA8V1fotLtgnaG3+4FcLpgXpr+0ISXkTd+sa8kE=;
-        b=1ec265eE94woGaGl6ivPrS1AnJ7Y7d3yJwFTxX0L8AHSnWVgayPsV0PAoQr6UU6UuP
-         UGxCKtICnFQ+jNdqfpldoA4U9RLA6VAkLJq9PthI1XHqMGv8jhllKwu2Yz9CYxlTFaNJ
-         542EUh41Wxz4mD1HBlPVXcnUfKUbIqHX3Uu68YwVVuSehr+GQW3z84vrHcFcpuwfnh5a
-         eol5hoTepS9Jr0gxKxocetWmubvM1axQgsSgKKz4ejwFCs1noAUci8pHk9poOql6Aq2u
-         fwQUyCkkHW4twWCUX5/lH/N0JpbxJpGu1CZZh3jrCdyoI4IyUBg/qsKTTeaSrMDlJyHr
-         AfGw==
-X-Forwarded-Encrypted: i=1; AKwUvBwtptwH6JpS0dSdO0nzKXmXGJhgR/OpILXNDpnWP7UjCyUv+3vKGV4T323stuuWuIouHCeI6b195GtR4qCq@vger.kernel.org
-X-Gm-Message-State: AFq9FYLEqCOZLUQ9s5ra/Hpb7T6+lSqaaBODf11XMiSY+151OODbHkpW
-	eKHI6dNvJmaCMeXB05ddGs91lzFZPTf+OsYF4oYNjSHoVRPgVsY0TYXoDhtXM6M1mZcTxyAW8Lw
-	oISRiL4gSQJSt7bb9ljk7ZJ6DbDOS4jKHcjodpa2UvkSNKlJBQWd3+36+ugfOCyJVOyWz+rfUkF
-	XbCswxCHPbTvXHqgYXX9e1FTbYdpo0PtHtHj4QShT1qxQ=
-X-Gm-Gg: AYBFou06BAn4E6MHzTiuIps9MT9E3e0BkUyPC0wP6ZnoteoM4u11PCCMi54QYeVX2sO
-	hnsUuppSxIDd8iZ756KppWjlY33tgSm8Usdn89RWvd3R56aXGRUdaZCvyMfKoKpi0vUeT0TaGOp
-	Fyrd2Cn/1Ed79dEktmhDK/t5YdA/fTr1HZtYlyqnOiVXPBy4Zg0SEyrTceyQ==
-X-Received: by 2002:a17:90a:fc50:b0:3a0:25f0:d8a0 with SMTP id 98e67ed59e1d1-3a4f3d3b4e0mr3834212a91.55.1790936061789;
-        Fri, 02 Oct 2026 03:14:21 -0700 (PDT)
-X-Received: by 2002:a17:90a:fc50:b0:3a0:25f0:d8a0 with SMTP id
- 98e67ed59e1d1-3a4f3d3b4e0mr3834178a91.55.1790936061253; Fri, 02 Oct 2026
- 03:14:21 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790936279; x=1791541079;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zwHVlb6qd1MABiGpHpCoz4HeQSYbdEf5B7Ks+6PxqvM=;
+        b=t6pgv0PAVqRcpx3EcmmztzkUoR6mQHorB4QB2GDVyNxf2yEP+/hNuTXEPsq2d74CYV
+         +GPxQatJiDgmtgKk8OdMcDpXI1Fsc6ri96JVYl9dlIayQlMLcIgRqJDY/5dP5T/1wNq+
+         y8uC4u1LFFWxxJ9+2Vd5oRYqWkfjMkXA4nvTv19Vl8OvAYJ+6UeNXFkvP4XCOHpPOHkx
+         P20CEQpuOP7ISEIqzsJyDTzLx/KASHtID5/baVpn6DHgASlJuCsbcQTx2V51fgILdtBr
+         ost3OaVRSi2Pso0gBvgGxpdcNKk+d/JAMnQmy4zyoGyjjObirb7A9l7YbuW9ywI0Y4fY
+         0U1A==
+X-Forwarded-Encrypted: i=1; AKwUvByxTos3L/RNO3KaTrObZnof5JFCu68Lcqd/qvpv1K8EawQQBHrZIXRPeT0bTh6WA9yW0UZ9yJadKur+inFz@vger.kernel.org
+X-Gm-Message-State: AFq9FYI0quf2l2HeA4UhCSdIlUvryrgA0WLbhsugXeVLqIpT4+aAQCXr
+	dDjZngFMKXMVy4qtHFN8b/kqUXsgwLd/5sWh/2S3OjJBirTIDmX3J4r3CvSrKZoYGOKC+nNo+BT
+	o35pHuKA=
+X-Gm-Gg: AYBFou05FcQfKW540Ix4GvtqZLwjzX/JwN+APX/Y6Qmo+jgVkGKUkp63ae9jwfnEgJQ
+	dwITsI0eO4XwMm4v8KlVBkU8XMiWNO//wAqNku1oX76+kDihHBR4spSbLSPAbEkX5edTWV59JSg
+	rnaYTkDJctSaZ1GcmMIQz2tBdLgd1o2ERoyl6tmsYfIWhDHSWy8oS3CGgodszsG6sy4tNxla2it
+	RIF9NER5oTqWFuTnXho8af2CHCYuTRxPqL5gaOHiZuSJC2cc+COINzEVNRNzH4ln+D8Drylsd5n
+	CIMYk6yCafOESl2h/V9zp7mizLNM2QgRsjmvmoY9oXczkEUG8SCOh+SSckZHJGce9LeSaMlSG+K
+	9+G7BWypEvPvmOV/skIepdqbXnByp8kemLAPFXFxMd90zZM5GUGNP9M98FEoaoof33NeJPbsJ+A
+	xB6Le8L6HhtdzQsMU9m2Wpmt8vLTMlcnakzk2vxiJvJihHxLfOOOiTvK1nVkIWDuDNMoSgrhUwc
+	8QfTQqLJoPpFUocpo+8KlZgdu4lG6pULa6+qKY=
+X-Received: by 2002:a05:6512:3c85:b0:5b8:ea1f:1217 with SMTP id 2adb3069b0e04-5bb9380daffmr814343e87.1.1790936278468;
+        Fri, 02 Oct 2026 03:17:58 -0700 (PDT)
+Received: from thyme (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7c795b22sm583861e87.36.2026.10.02.03.17.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2026 03:17:58 -0700 (PDT)
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org
+Subject: [PATCH v2] arm64: dts: qcom: sm8650-valve-deckard: Add initial support of camera sensors
+Date: Fri,  2 Oct 2026 13:17:48 +0300
+Message-ID: <20261002101748.2454305-1-vladimir.zapolskiy@linaro.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260626-clk-sync-state-v1-0-4156d8196dc8@redhat.com>
- <20260626-clk-sync-state-v1-1-4156d8196dc8@redhat.com> <CACRMN=dAxriWU7Age3g9o_d6zyz8hj2p76vHXJSs7sCFxSwuWw@mail.gmail.com>
-In-Reply-To: <CACRMN=dAxriWU7Age3g9o_d6zyz8hj2p76vHXJSs7sCFxSwuWw@mail.gmail.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Fri, 2 Oct 2026 12:14:09 +0200
-X-Gm-Features: AclHuK-oEMz6OlcHzwlSg3p_f2RJdDM8dmJ8MqNGv6f5-pC6qfJBs-GdohGXbU8
-Message-ID: <CAPx+jO_byttA+b-Z+zNyPa0-zXvjCU8hv_AsSjCmBDWEEkSE0A@mail.gmail.com>
-Subject: Re: [PATCH 1/4] driver: core: introduce dev_add_sync_state()
-To: Saravana Kannan <saravanak@kernel.org>
-Cc: Brian Masney <bmasney@redhat.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Russell King <linux@armlinux.org.uk>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Xuyang Dong <dongxuyang@eswincomputing.com>,
-        Jens Glathe <jens.glathe@oldschoolsolutions.biz>,
-        Hans de Goede <johannes.goede@oss.qualcomm.com>,
-        Maxime Ripard <mripard@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        driver-core@lists.linux.dev, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAyMDA0MCBTYWx0ZWRfX2PZFOsHClo13
- oQcj6lOMo6LBTGjey3wGl0rQxFpMdjKxYlH8WxobENBwIQZd1URRITzgprkVqTGZDKc250OyyXo
- q24i2t40edIBP0OPUrwqiujPM0eQPg8=
-X-Proofpoint-ORIG-GUID: CfOdfwOLoUCMeVcuQXTTzH2IophuyoDk
-X-Authority-Analysis: v=2.4 cv=b80ncdGx c=1 sm=1 tr=0 ts=6abf83fe cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=20KFwNOVAAAA:8
- a=aupEIk04F7la7JYrT74A:9 a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: CfOdfwOLoUCMeVcuQXTTzH2IophuyoDk
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAyMDA0MCBTYWx0ZWRfX/9e2r+qOU2c4
- LGVJEl+Rr6hYbb6aC7uSJbMpWjSl5/jqgGqG30lTaTwZzPHjzmBi+iamEWa3zuyhtGQXtjoH0ZT
- GD/h9rhHDKFg1vce0q4PXfvAuAlHI57bLlHAou5tMkqvVEBLrmgiZRK+0KLb5PeDh81vxWkRYZC
- wlsi5xN8RQjMDLtjykmISr4nTSRTiM0SKk0mq5mEwlE/aOj/rr1aJK/vAgescHhxeDq9MTeVtNI
- Bs/PNHuSQwaJDGkkkU+dfWsMMuf1TaCq+CaeCV1evlErkOX+FbKnYn4WpDMlljjSzMq2xdkO2p1
- 6CAamB0zxS0V+lszT60gGdkzMcIEnF4za95W8p+SN6LBvtPFxjiBCxazjTYPnkqYkyOSUx2FEGh
- Q8G8hM+hbKCMb6pPLoUhEEL8/27PtYnx8XCKeJcqJk8q+weaRzU9ETtspbhq+VslOgVaHWSgh86
- OeDQmOcEQFvIKKY4cCw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_03,2026-10-01_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 adultscore=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610020040
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 24, 2026 at 9:30=E2=80=AFAM Saravana Kannan <saravanak@kernel.o=
-rg> wrote:
->
-> On Fri, Jun 26, 2026 at 9:33=E2=80=AFAM Brian Masney <bmasney@redhat.com>=
- wrote:
-> >
-> > We have cases where a device node represents a provider for multiple
-> > types of resources, like clocks, power-domains, resets, etc. We
-> > currently have dev_set_drv_sync_state() where a framework or driver
-> > can set the sync_state callback for a device node, however it currently
-> > only supports a single sync_state callback.
-> >
-> > The pmdomain subsystem currently sets up a sync_state callback in the
-> > core framework, and the clk subsystem will setup it's own separate
-> > sync_state callback in the core framework. These can collide with each
-> > other on some types of devices that have multiple types of resources.
-> > Additionally, some clk drivers already have their own separate
-> > sync_state callback already defined.
-> >
-> > Let's introduce support for allowing drivers and frameworks to add thei=
-r
-> > own sync_state callback via a new function dev_add_sync_state() so that
-> > multiple sync_state callbacks can coexist.
->
-> I had already thought about this scenario when I implemented the
-> framework. Your driver should just set its sync_state() callback and
-> that my_drv_sync_state() will simply call the sync state helper
-> functions provided by the relevant frameworks.
+Add initial support of camera sensors on Valve "Steam Frame" device.
 
-That would work, but would require all drivers to assign the
-->sync_state() callbacks themselves. The core of each subsystem will
-therefore not be able to help much, except for providing the helper
-functions.
+The change enables CAMSS and adds description of
+- a pair of OmniVision OV6211 monochrome eyetracking camera sensors,
+- a pair of OmniVision OG01A1B monochrome front camera sensors.
 
-I can imagine a lot of boilerplate code, but perhaps the flexibility
-is worth it.
+There is another pair of OmniVision OG0VE10 camera sensors found on
+the device, its description requires a combo mode feature support in
+the SM8650 CAMSS CSIPHY driver.
 
-Also note that, we need to address the situation where a child node
-acts as the provider, but doesn't have a populated device for it.
+Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+Changes from v1 to v2:
+* added Abel's Reviewed-by tag, thanks for review of the change,
+* split default/sleep pinctl controls (reported by Sashiko bot),
+* fixed data-lanes value of OG01A1B endpoints (reported by Sashiko bot),
 
->
-> This link list is adding a lot of code without any clear benefit. And
-> it also doesn't work for drivers that might care for a particular
-> sequence of framework sync_state() callbacks. Instead your are forced
-> to follow whatever order in which the frameworks are adding the sync
-> state callbacks to your device.
+OTOH the reported out-of-range '<&pm8550vs_e_gpios 6 ...>' value is
+a false positive error by the bot, the controller gets GPIO numbers
+from 1 to 6 range.
 
-Right, if the order is important, the "parent" driver would need to
-control the order for how providers are registered. Yet, I think they
-already need to do that (if it's important), although for other
-reasons.
+Link to v1 of the change:
+* https://lore.kernel.org/all/20261001145206.2442665-1-vladimir.zapolskiy@linaro.org/
 
->
-> I don't think this patch is a good idea.
+ .../boot/dts/qcom/sm8650-valve-deckard.dts    | 207 ++++++++++++++++++
+ 1 file changed, 207 insertions(+)
 
-You may very well be right, but I think we need to discuss it a bit
-more. Let's chat at LPC next week.
+diff --git a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
+index d25a09e162dd..4120e9d676c1 100644
+--- a/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
++++ b/arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts
+@@ -95,6 +95,66 @@ vph_pwr: regulator-vph-pwr {
+ 		regulator-boot-on;
+ 	};
+ 
++	vreg_cam_eyetracking_1p8: regulator-cam-eyetracking {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_eyetracking_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 74 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5m_1p8>;
++	};
++
++	vreg_cam_front_left_1p2: regulator-cam-front-left-1p2 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_left_1p2";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++
++		gpio = <&tlmm 37 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l2n_1p2>;
++	};
++
++	vreg_cam_front_left_1p8: regulator-cam-front-left-1p8 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_left_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 36 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5n_1p8>;
++	};
++
++	vreg_cam_front_right_1p2: regulator-cam-front-right-1p2 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_right_1p2";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++
++		gpio = <&tlmm 37 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l2m_1p2>;
++	};
++
++	vreg_cam_front_right_1p8: regulator-cam-front-right-1p8 {
++		compatible = "regulator-fixed";
++		regulator-name = "cam_front_right_1p8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 36 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		vin-supply = <&vreg_l5m_1p8>;
++	};
++
+ 	reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+@@ -675,6 +735,153 @@ vreg_l6n_2p8: ldo6 {
+ 	};
+ };
+ 
++&camss {
++	vdd-csiphy01-0p9-supply = <&vreg_l2i_0p88>;
++	vdd-csiphy01-1p2-supply = <&vreg_l3i_1p2>;
++	vdd-csiphy24-0p9-supply = <&vreg_l2i_0p88>;
++	vdd-csiphy24-1p2-supply = <&vreg_l3i_1p2>;
++
++	status = "okay";
++
++	ports {
++		port@0 {
++			csiphy0_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam_front_left>;
++			};
++		};
++
++		port@1 {
++			csiphy1_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam_front_right>;
++			};
++		};
++
++		port@2 {
++			csiphy2_ep: endpoint {
++				data-lanes = <0>;
++				remote-endpoint = <&cam_eyetracking_left>;
++			};
++		};
++
++		port@4 {
++			csiphy4_ep: endpoint {
++				data-lanes = <0>;
++				remote-endpoint = <&cam_eyetracking_right>;
++			};
++		};
++	};
++};
++
++&cci0 {
++	status = "okay";
++};
++
++&cci0_i2c1 {
++	sensor@60 {
++		compatible = "ovti,ov6211";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clock-rates = <24000000>;
++		pinctrl-0 = <&cam4_default>;
++		pinctrl-1 = <&cam4_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&tlmm 195 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l6n_2p8>;
++		dovdd-supply = <&vreg_cam_eyetracking_1p8>;
++		dvdd-supply = <&vreg_l1n_1p1>;
++
++		port {
++			cam_eyetracking_left: endpoint {
++				link-frequencies = /bits/ 64 <480000000>;
++				remote-endpoint = <&csiphy2_ep>;
++			};
++		};
++	};
++};
++
++&cci1 {
++	status = "okay";
++};
++
++&cci1_i2c0 {
++	sensor@60 {
++		compatible = "ovti,ov6211";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++		pinctrl-0 = <&cam2_default>;
++		pinctrl-1 = <&cam2_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&tlmm 3 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l6m_2p8>;
++		dovdd-supply = <&vreg_cam_eyetracking_1p8>;
++		dvdd-supply = <&vreg_l1m_1p1>;
++
++		port {
++			cam_eyetracking_right: endpoint {
++				link-frequencies = /bits/ 64 <480000000>;
++				remote-endpoint = <&csiphy4_ep>;
++			};
++		};
++	};
++};
++
++&cci2 {
++	status = "okay";
++};
++
++&cci2_i2c0 {
++	sensor@36 {
++		compatible = "ovti,og01a1b";
++		reg = <0x36>;
++		clocks = <&camcc CAM_CC_MCLK0_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK0_CLK>;
++		assigned-clock-rates = <19200000>;
++		pinctrl-0 = <&cam0_default>;
++		pinctrl-1 = <&cam0_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&pm8550vs_e_gpios 4 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l3m_2p8>;
++		dovdd-supply = <&vreg_cam_front_right_1p8>;
++		dvdd-supply = <&vreg_cam_front_right_1p2>;
++
++		port {
++			cam_front_right: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <500000000>;
++				remote-endpoint = <&csiphy1_ep>;
++			};
++		};
++	};
++
++	sensor@60 {
++		compatible = "ovti,og01a1b";
++		reg = <0x60>;
++		clocks = <&camcc CAM_CC_MCLK1_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK1_CLK>;
++		assigned-clock-rates = <19200000>;
++		pinctrl-0 = <&cam1_default>;
++		pinctrl-1 = <&cam1_sleep>;
++		pinctrl-names = "default", "sleep";
++		reset-gpios = <&pm8550vs_e_gpios 6 GPIO_ACTIVE_LOW>;
++		avdd-supply = <&vreg_l3n_2p8>;
++		dovdd-supply = <&vreg_cam_front_left_1p8>;
++		dvdd-supply = <&vreg_cam_front_left_1p2>;
++
++		port {
++			cam_front_left: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <500000000>;
++				remote-endpoint = <&csiphy0_ep>;
++			};
++		};
++	};
++};
++
+ &dispcc {
+ 	status = "disabled";
+ };
+-- 
+2.53.0
 
->
-> -Saravana
-
-Kind regards
-Uffe
-
->
-> >
-> > Link: https://lore.kernel.org/linux-clk/CAPx+jO9JiV16ePLk59hTQzEMnA96Va=
-6Ns4jqJbwyZ6oTT0AjXA@mail.gmail.com/
-> > Signed-off-by: Brian Masney <bmasney@redhat.com>
-> > Assisted-by: Claude:claude-opus-4-6
-> > ---
-> >  drivers/base/base.h    |  7 +++++++
-> >  drivers/base/core.c    | 29 +++++++++++++++++++++++++++++
-> >  include/linux/device.h | 11 +++++++++++
-> >  3 files changed, 47 insertions(+)
-> >
-> > diff --git a/drivers/base/base.h b/drivers/base/base.h
-> > index a5b7abc10ff0..339db4afbeb4 100644
-> > --- a/drivers/base/base.h
-> > +++ b/drivers/base/base.h
-> > @@ -178,6 +178,8 @@ static inline bool dev_has_sync_state(struct device=
- *dev)
-> >
-> >         if (!dev)
-> >                 return false;
-> > +       if (!list_empty(&dev->sync_state_list))
-> > +               return true;
-> >         drv =3D READ_ONCE(dev->driver);
-> >         if (drv && drv->sync_state)
-> >                 return true;
-> > @@ -188,10 +190,15 @@ static inline bool dev_has_sync_state(struct devi=
-ce *dev)
-> >
-> >  static inline void dev_sync_state(struct device *dev)
-> >  {
-> > +       struct sync_state_entry *entry;
-> > +
-> >         if (dev->bus->sync_state)
-> >                 dev->bus->sync_state(dev);
-> >         else if (dev->driver && dev->driver->sync_state)
-> >                 dev->driver->sync_state(dev);
-> > +
-> > +       list_for_each_entry(entry, &dev->sync_state_list, node)
-> > +               entry->fn(dev);
-> >  }
-> >
-> >  int driver_add_groups(const struct device_driver *drv,
-> > diff --git a/drivers/base/core.c b/drivers/base/core.c
-> > index 4d026682944f..acc12f402dd3 100644
-> > --- a/drivers/base/core.c
-> > +++ b/drivers/base/core.c
-> > @@ -2612,6 +2612,7 @@ EXPORT_SYMBOL_GPL(device_show_string);
-> >  static void device_release(struct kobject *kobj)
-> >  {
-> >         struct device *dev =3D kobj_to_dev(kobj);
-> > +       struct sync_state_entry *entry, *tmp;
-> >         struct device_private *p =3D dev->p;
-> >
-> >         /*
-> > @@ -2625,6 +2626,11 @@ static void device_release(struct kobject *kobj)
-> >          */
-> >         devres_release_all(dev);
-> >
-> > +       list_for_each_entry_safe(entry, tmp, &dev->sync_state_list, nod=
-e) {
-> > +               list_del(&entry->node);
-> > +               kfree(entry);
-> > +       }
-> > +
-> >         kfree(dev->dma_range_map);
-> >         kfree(dev->driver_override.name);
-> >
-> > @@ -3239,12 +3245,35 @@ void device_initialize(struct device *dev)
-> >         INIT_LIST_HEAD(&dev->links.consumers);
-> >         INIT_LIST_HEAD(&dev->links.suppliers);
-> >         INIT_LIST_HEAD(&dev->links.defer_sync);
-> > +       INIT_LIST_HEAD(&dev->sync_state_list);
-> >         dev->links.status =3D DL_DEV_NO_DRIVER;
-> >         dev_assign_dma_coherent(dev, dma_default_coherent);
-> >         swiotlb_dev_init(dev);
-> >  }
-> >  EXPORT_SYMBOL_GPL(device_initialize);
-> >
-> > +int dev_add_sync_state(struct device *dev,
-> > +                          void (*fn)(struct device *dev))
-> > +{
-> > +       struct sync_state_entry *entry;
-> > +
-> > +       if (!dev || !dev->driver)
-> > +               return 0;
-> > +
-> > +       list_for_each_entry(entry, &dev->sync_state_list, node)
-> > +               if (entry->fn =3D=3D fn)
-> > +                       return 0;
-> > +
-> > +       entry =3D kmalloc_obj(*entry);
-> > +       if (!entry)
-> > +               return -ENOMEM;
-> > +
-> > +       entry->fn =3D fn;
-> > +       list_add_tail(&entry->node, &dev->sync_state_list);
-> > +       return 0;
-> > +}
-> > +EXPORT_SYMBOL_GPL(dev_add_sync_state);
-> > +
-> >  struct kobject *virtual_device_parent(void)
-> >  {
-> >         static struct kobject *virtual_dir =3D NULL;
-> > diff --git a/include/linux/device.h b/include/linux/device.h
-> > index 7b2baffdd2f5..b7a3dd4b56ed 100644
-> > --- a/include/linux/device.h
-> > +++ b/include/linux/device.h
-> > @@ -642,6 +642,8 @@ enum struct_device_flags {
-> >   * @driver_override: Driver name to force a match.  Do not touch direc=
-tly; use
-> >   *                  device_set_driver_override() instead.
-> >   * @links:     Links to suppliers and consumers of this device.
-> > + * @sync_state_list: List of sync_state callbacks added by subsystem
-> > + *             frameworks (e.g. clk, genpd) via dev_add_sync_state().
-> >   * @power:     For device power management.
-> >   *             See Documentation/driver-api/pm/devices.rst for details=
-.
-> >   * @pm_domain: Provide callbacks that are executed during system suspe=
-nd,
-> > @@ -723,6 +725,7 @@ struct device {
-> >                                          */
-> >
-> >         struct dev_links_info   links;
-> > +       struct list_head        sync_state_list;
-> >         struct dev_pm_info      power;
-> >         struct dev_pm_domain    *pm_domain;
-> >
-> > @@ -1137,6 +1140,14 @@ static inline int dev_set_drv_sync_state(struct =
-device *dev,
-> >         return 0;
-> >  }
-> >
-> > +struct sync_state_entry {
-> > +       struct list_head        node;
-> > +       void                    (*fn)(struct device *dev);
-> > +};
-> > +
-> > +int dev_add_sync_state(struct device *dev,
-> > +                          void (*fn)(struct device *dev));
-> > +
-> >  static inline void dev_set_removable(struct device *dev,
-> >                                      enum device_removable removable)
-> >  {
-> >
-> > --
-> > 2.54.0
-> >
