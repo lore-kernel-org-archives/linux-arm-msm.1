@@ -1,142 +1,117 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE47C395DA9
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 20:22:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC71B424655;
+	Sat,  3 Oct 2026 21:02:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791058923; cv=none; b=gzWRytYkCyvkVJZ2Lh6Cj5t7ivFYgtMVDr59VKfrT3AYN+mswABAZ49KaXhfsYlNc2mp03vI+M99KLtERqHIAa3DGrDufntWK8M5XAmVDpq1W3H/+3HMx+QZERhmKim097RZDMcGBGAyzTmY6cpqkP34BEoclKKwxw8MLo67VeY=
+	t=1791061370; cv=none; b=dX9/wMLsymM4JiEUEeX/kS7xV7u6ID7sL7rXNUj6GlTI2fltxIwfzslF9q9o6xBsWgw5E3lbVRI2MpSz2AO4cEMtBx91sI5qUCxdb9H94QCVGjQ5jGPXDuIjgnXZx68wSje9U7TYo37L9ciDGvRAi5w+rb879+/c0maKmNHnBk0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791058923; c=relaxed/simple;
-	bh=vHlNApf1n0eU2OktVinpI4zv/MZunnjQ95s6jli1xzM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=t/gHjWn/WEqWhI+QoguTDZJ1jlBwbzc91R1BPXcKhQcyqVz7QvJ8WdlRcLZyjntjFVEjbqy/iZamTK6mmsZ5Hi9zy7eiFuJP6bHGg6rvfNKbRp/jsLjSsQOpqB4QWat/qyQbAg1TKnMLbF5x7ls7kjK8vkJenS2zyL42sjpxsO8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=E9CpxOpQ; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791061370; c=relaxed/simple;
+	bh=MubDMqpVZVxxHvQC9nFxRXWZ706SfPuCgG/aWwhq64k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YSVPy4bluQ3kb/UeJsB9gbJBUjUUEj5DgMNUBAM0iNp7Y7IrbAwrAg7tPm5iSYkDS2T/LeBmYv3bUByW4LwZbh3o81XSxE0uz/UBuu/8MQ8z+WaAd8xtmRwuLEf9huzNb9YPDZqZXy7Vkc+W2fqfihxFbnuXE18m38kULDwGH/I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CguJFy1S; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="E9CpxOpQ"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-4a11603310fso7263525e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 13:22:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791058919; x=1791663719; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jdTRy1oUzdTMPfJnHsa0F48c4vY6O6GHObHAbcTX0Q8=;
-        b=E9CpxOpQvqdDyv5L3mchbAdOH00kUUYB8lcQJjG10gcp6tkpDTJacm0DgQWTRhLV0T
-         tAwTjRZwqcREb4depS7jx7wRB8pupFAd5/eWZlx+d1KO2N1OzFJk7d07pG36kIMRg3cw
-         MWFmEjYqSCc343DZ+IlEeGeifBDF7hKrk+hKO01txOXbMwydszp98Fcm052sbI6I4WXd
-         5UPZpXJRrm3S+XbzfdIGMSBuneyVb+5VXYi3rF+RBqdaRkJoVyEGifmF2Z67N/hq0UbE
-         33V4fUhOJlJAcxcL6qVPi9UUPtZECO/DS03hKW0gfQQrtCzcNfiHnOGjqJNLq5Hy6t5x
-         KvHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791058919; x=1791663719;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jdTRy1oUzdTMPfJnHsa0F48c4vY6O6GHObHAbcTX0Q8=;
-        b=SO1OoWdXvGrZfT8s2QJdtacMKxHplTvY4I0fvhyUmhJgzHfC8v+HuUe8Fdg73901s8
-         Mgl8Rd2xIu8DrJIVdkVPT0DSl87SQcQhypD1XvcEjB5GFNvd4os8opH1S/7nuFDfU6pB
-         EWwLT7dJAjed1odIMj/CEfmIFz8A2MJYOkH/TD1jRG4jmMuKjCenpmti8yQF2mOSWH8B
-         E+bhl/Cy5tUZAJJ7EuVG8EK4UWsPd0zJKGJUsLJwfGB26oM05MulaqwEX+YaeqvOe6qY
-         K+Mj+FVA8V/cXdyObyqXgJqaVuQrs+JQCi3u7z3p6qL6XcnxezhXuIaMIXldDJgYJBN8
-         gq5A==
-X-Gm-Message-State: AFuF++lSj9mvBqIzslPVPFR3hvWp9ZUOMVskBVYGhSorKfdsIjXJCs+6
-	rEGDegynR6sv0WPVslAKteJIVPGGgUKJbtweETFiEkTlMTHcXENmGQIg
-X-Gm-Gg: AYBFou00iaxa9HavVEbAbF2z4RfBj5qwHVDWEkW2ZFS0OILC83eIpPI8oUQyOx952vZ
-	4HAn7AybfoL9j5YDpbvtnwYoLNhdNlDck90h79RBPVv30Rv4/HMTKxfhI3+Uj0UIuK+WBvjBL/W
-	c8yhZno2xHATVfjSoqdAJllKIRxqiI3x+32u2YMqzC9fpNBeW2NuITa1G5SEKItYzmdzUa6tBB2
-	dK/6uKc41dUCU37jPVuUlLxsZz0Anln5YeCQ2dffBGZBX5JxEXTNnpc4OoX/N17Pw4R9HEySpE2
-	obgECufOgvk1mu5Afa56bNX3J6LznltZSiOHCDSf1t7YGrGCw4TJv+DhnguA8wATtrsycfQG3p9
-	qhP2JobI8TSgSCnDW+4CMd2su2U0riE+d48UbBOHgnyWCwlYGvNQvLmT12a426POKiOxpqvKgUM
-	HMcO/JYGkvnRSZ69kJfRE/Wz8tA/8Fv+aHfM1FJ5/x1ujrxeCAc0+MRw6F6fCkKXw/1T5gaaKHq
-	zBPAA==
-X-Received: by 2002:a05:600c:608d:b0:49f:e8bf:8f9b with SMTP id 5b1f17b1804b1-4a02750fa51mr115371465e9.4.1791058918814;
-        Sat, 03 Oct 2026 13:21:58 -0700 (PDT)
-Received: from localhost.localdomain ([94.252.75.11])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-48b380facfesm15083316f8f.23.2026.10.03.13.21.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 13:21:58 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: [PATCH v5 3/3] arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the embedded controller
-Date: Sat,  3 Oct 2026 22:21:43 +0200
-Message-ID: <20261003202143.4697-4-okerixx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261003202143.4697-1-okerixx@gmail.com>
-References: <20261003202143.4697-1-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CguJFy1S"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A1EB1F0089B;
+	Sat,  3 Oct 2026 21:02:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791061366;
+	bh=8cIdndPyOHMf56UK9tLY6SNuenfeu2ZIWB6f+X1P2ks=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=CguJFy1ST3HdW+k9La9ASkiBrEJFGCNeh9+zBskr65UTdcDEXVE4s81iLOtJxVsNF
+	 oUX1UxvMs36qO39J6PfVtZIDJ5I9G/51oUcwa0CmJQHQbJco0ZPe7c7js2ufnl7Nhc
+	 K5aTHV+JWur5iXM8gJeW8uf+b8xLp4W+InPATMtOHL7j9QA/exDIZzLeEhM5y9s06I
+	 WhlrohO0DFxeXWRjL5qh2N3jRkwUaWNKiIVWZcHRGYgkSeZ1ruzbIQtFmLGG1kv+py
+	 el6ymg9lZR3bMUGI6RV0pMyiJDVendAogvKJn9A+fcgD8OxK8C2y5/aUATrHekdz6K
+	 XEUlnLLVLJB9g==
+Message-ID: <70c91780-a18f-487d-8036-92c0e3e68e55@kernel.org>
+Date: Sat, 3 Oct 2026 23:02:41 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] dt-bindings: net: wireless: qcom,ath11k-pci: add
+ QCN9074
+To: Andrei-Alexandru Bleortu <me@andrei-z.com>,
+ Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jeff Johnson <jjohnson@kernel.org>,
+ Johannes Berg <johannes@sipsolutions.net>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob Herring <robh@kernel.org>
+Cc: ath11k@lists.infradead.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org
+References: <20261003083410.3126453-1-me@andrei-z.com>
+ <20261003083410.3126453-2-me@andrei-z.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261003083410.3126453-2-me@andrei-z.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Describe the Compal embedded controller on I2C at address 0x70. It
-provides the board thermistors and the CPU fan speed, and drives the
-keyboard backlight. Its interrupt line is TLMM gpio66, falling edge, for
-which the file already carries a pin state.
+On 03/10/2026 10:34, Andrei-Alexandru Bleortu wrote:
+> QCN9074 is a PCIe 802.11ax radio that boards such as the IPQ5018-based
+> Ubiquiti UniFi U6 Enterprise solder down, two of them on different
+> bands. Like the other ath11k PCIe devices, each needs
+> qcom,calibration-variant to select its board data. Document its PCI ID.
+> 
+> No supplies are added: on these boards the radio's rails are fixed and
+> not under software control.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Andrei-Alexandru Bleortu <me@andrei-z.com>
+> ---
 
-That state leaves the pin without a bias. gpio66 has no external pull
-and floats when the EC is not driving it, which shows up as a steady
-stream of spurious edges; the vendor ACPI tables describe the same pin
-as GpioInt(Edge, ActiveLow, Exclusive, PullUp). Enable the pull-up.
 
-Signed-off-by: Oleg Keri <okerixx@gmail.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
- .../boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts      | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-diff --git a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
-index 769f195c99d9..bc840fd8e458 100644
---- a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
-+++ b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
-@@ -659,7 +659,15 @@ &i2c9 {
- 
- 	status = "okay";
- 
--	/* EC @ 0x70, irq = TLMM 66 */
-+	embedded-controller@70 {
-+		compatible = "lenovo,yoga-slim7x-gen11-ec";
-+		reg = <0x70>;
-+
-+		interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
-+
-+		pinctrl-0 = <&ec_int_n_default>;
-+		pinctrl-names = "default";
-+	};
- };
- 
- &lpass_vamacro {
-@@ -990,7 +998,7 @@ reset-n-pins {
- 	ec_int_n_default: ec-int-n-state {
- 		pins = "gpio66";
- 		function = "gpio";
--		bias-disable;
-+		bias-pull-up;
- 	};
- 
- 	kybd_default: kybd-default-state {
--- 
-2.55.0
-
+Best regards,
+Krzysztof
