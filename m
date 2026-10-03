@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F406D379988;
-	Sat,  3 Oct 2026 19:45:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 389EE495021;
+	Sat,  3 Oct 2026 19:45:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791056723; cv=none; b=ssIlgfVgx28jFVz2ucvYq+pGIcqZoAFhRG9N5PFlIyZZnw6nQEbXAM0AAcZlcxogfQEM0OizEAbPOiAEFXQEoTJinvEfXdDsKljHpe2MQJ4mEmW3ug1+5/eDCCZzZdElxXa4NRE3HZprX+lzy2iEkEn3AKIf6ThiG73HMZ63Gj0=
+	t=1791056723; cv=none; b=j/OmZfdI3TY/jcHfO38MNYi6/oCHVMhXPYMCheVOCGgCYXXPrwFdEwTSjEWY2bD3H49Dmkf+Ix5Czh5bpzgE8ZhQ8fzw+iyviN6duZlLzMzCHDzpgWqsw13ceO2idVuc+xcNkNZiaPOv/yBhZWVGN89M6y5uPcaM7UMPqNaCWyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1791056723; c=relaxed/simple;
-	bh=j0JUPS3NqAgZfamgFMUUx01rdLyiXqWVMETSSNyBdVw=;
+	bh=E+N5FsWVr+3U2IATk4EB4OXYHsVwPtNZfTs1KDEbiEA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=loZgX7dWiAZnkuzAJt7KbxKGJ0x+DKvv19/mLFzEsZhkxxFwCvqqILcGGAw64h1QYkWbKpA7kwzrofC/LAdSG5xcxpnUUI/uiDGs/Enfl7GDjB6Ge4pb67N+62B+pzWXICDWjHaBps2lQy7pg93Ioqsthdc3C6gQGOIbwbqKRvQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LQh78b6h; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=jyf5Euczjvc1WEKY80lADD3A1RSdQ9PjI2rfb9/MTXIOkU7UXDBmRBYi8KyTRdSINY5Hg2nnuM6xBPOd0jL6fm10KxI3eKuu4hb7+tcIzv6n9eSh1j9jtXvZPBgx05keGjMO8BMM3Fi/f/BsxjX5jvEnfUoz7iejbHBBhJYfBWo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uNBhAn/Z; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LQh78b6h"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9FF93C2BCF6;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uNBhAn/Z"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C0A5FC4AF15;
 	Sat,  3 Oct 2026 19:45:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1791056722;
-	bh=j0JUPS3NqAgZfamgFMUUx01rdLyiXqWVMETSSNyBdVw=;
+	bh=E+N5FsWVr+3U2IATk4EB4OXYHsVwPtNZfTs1KDEbiEA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=LQh78b6hbVaoB1ukecG+shpP7eZOcI5y+pJMDlxq4ZrP8BWoTWKfwPvA73vQCi8qX
-	 Q97ESew2uEiajl9Bcqzk43Uy1PyOwSMhsfZnsLvWxmv07rDafy7uZwdrzoe6tKl/QD
-	 3f3Lvbcxj3hYZ774CVOvZQx7hOB4YGvI3Fyj/6dGHUxfYStzj/056IrI/+3kmQYsKv
-	 cPuEjYEwMGGNNU6sldEIhq99c6rMZ9MS4/Y0O69I1yISr1NYH2B3p+yZ5dcyUa4rWS
-	 E06PLAJEH3bxGOY7ViqyI0WrNAQO2X8dKf+coVS3IkpF73m2pT0yB4SnC0d/7+vxa3
-	 pI31mgkIDQHJA==
+	b=uNBhAn/ZzBwNeSHhc/TSYiwRWs6r7aFBcr0JZu0zgWjAfs9QllTgKijcFLVU3Pgu8
+	 TsAtg4y9MYHzu0KopD9xrT29GyzITe/NJIvSqkTqk07hjAUGjyk8ymcNc9o+xZyI4P
+	 K6r5sTWDzL7Jf8V6GtTLtIvS+FZp5Kn88V6sxYP7a5Blcy/tdi307sUolrFnVheR+G
+	 54WXjnmJHZKTn3Fy3RUwOsiz5bakhLaADxFBwonfu5zaGZdeMHhQ+8rFV4r9Hmk4i2
+	 APZncU1ofV/v7oC9cEtnCW/DKpyZs/Vxh8utt6n2r7KEdNbdRYI+R/7emjHrKX3Ycu
+	 V3NR6mtt7lWrg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E8A6CA5FE4;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A13C8CA5FEC;
 	Sat,  3 Oct 2026 19:45:22 +0000 (UTC)
 From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Sat, 03 Oct 2026 16:45:21 -0300
-Subject: [PATCH 1/4] dt-bindings: power: supply: qcom,pmi8998-charger: add
- chg-state-change
+Date: Sat, 03 Oct 2026 16:45:23 -0300
+Subject: [PATCH 3/4] arm64: dts: qcom: pm660: Add the charger state change
+ interrupt
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261003-qcom-smbx-chg-state-change-v1-1-fffaef446932@gmail.com>
+Message-Id: <20261003-qcom-smbx-chg-state-change-v1-3-fffaef446932@gmail.com>
 References: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
 In-Reply-To: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
 To: Casey Connolly <casey.connolly@linaro.org>, 
@@ -56,11 +56,11 @@ Cc: Robin Snyders <robin@snyders.xyz>, David Heidelberg <david@ixit.cz>,
  Sebastian Reichel <sebastian.reichel@collabora.com>, 
  Fabricio Akio <fabricioakio@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791056720; l=1039;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791056720; l=1108;
  i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=ACxRf9zQSp49WZNPI7O//QWImpQWoDmjFCaFFKAHtmI=;
- b=+t0z1QY9OEqXZpMHKaaitOEWXzs7uGy8M364T2NPNEKO6I6HKcQ+nOAjfVVCQUstxzj0OVdv7
- 758Z/kRv9NQCvAzmNIGESkKKVA4OY1mYE2xLXihRjaEwmIDovipNxPh
+ bh=fPok6iXSi+v6rT0DKKTD36U7EXn5qf9X9GpJo6/gwRU=;
+ b=+eylQCsYjVqiQGl2wnWDuJwVDidnVbXqOw/1gBDHEaioEjV92Uhc0C66RtWqbmpoFNW66oIyU
+ GBO0Kc3xk/mA9fkDXQQnz6pD1crX8DYEwHrcHJQ2oF2kPF1615+OauM
 X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
  pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
 X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
@@ -70,37 +70,34 @@ Reply-To: fabricioakio@gmail.com
 
 From: Fabricio Akio <fabricioakio@gmail.com>
 
-The charger raises an interrupt when its charging state changes. Allow
-it as an optional fifth interrupt.
+Describe the charger's chg-state-change interrupt, as the vendor device
+tree does.
 
 Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
 ---
- .../devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml       | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/pm660.dtsi | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml b/Documentation/devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml
-index 70f5cd6eaeab..7dfb0823ccbb 100644
---- a/Documentation/devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml
-+++ b/Documentation/devicetree/bindings/power/supply/qcom,pmi8998-charger.yaml
-@@ -19,14 +19,17 @@ properties:
-     maxItems: 1
+diff --git a/arch/arm64/boot/dts/qcom/pm660.dtsi b/arch/arm64/boot/dts/qcom/pm660.dtsi
+index 156b2ddff0dc..9e84f16f4b06 100644
+--- a/arch/arm64/boot/dts/qcom/pm660.dtsi
++++ b/arch/arm64/boot/dts/qcom/pm660.dtsi
+@@ -80,8 +80,13 @@ pm660_charger: charger@1000 {
+ 			interrupts = <0x0 0x13 0x4 IRQ_TYPE_EDGE_BOTH>,
+ 				     <0x0 0x12 0x2 IRQ_TYPE_EDGE_BOTH>,
+ 				     <0x0 0x16 0x1 IRQ_TYPE_EDGE_RISING>,
+-				     <0x0 0x13 0x6 IRQ_TYPE_EDGE_RISING>;
+-			interrupt-names = "usb-plugin", "bat-ov", "wdog-bark", "usbin-icl-change";
++				     <0x0 0x13 0x6 IRQ_TYPE_EDGE_RISING>,
++				     <0x0 0x10 0x1 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "usb-plugin",
++					  "bat-ov",
++					  "wdog-bark",
++					  "usbin-icl-change",
++					  "chg-state-change";
  
-   interrupts:
--    maxItems: 4
-+    minItems: 4
-+    maxItems: 5
- 
-   interrupt-names:
-+    minItems: 4
-     items:
-       - const: usb-plugin
-       - const: bat-ov
-       - const: wdog-bark
-       - const: usbin-icl-change
-+      - const: chg-state-change
- 
-   io-channels:
-     items:
+ 			io-channels = <&pm660_rradc 3>,
+ 				      <&pm660_rradc 4>;
 
 -- 
 2.55.0
