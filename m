@@ -1,117 +1,120 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48D173A6B89
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 09:15:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5511F331EBC;
+	Sat,  3 Oct 2026 09:27:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791018944; cv=none; b=nsb/XkHflPAJwBqKxb8I9hcmbq/NVN6JGAdHlhRi9sStPYcnHw4lk31oiUfCxxT4Y0ioFtGrsPYjWC4TQHwOsMtRz3g64JCUc/yE6LsCs5EdRMMtoYnIOrsxMT8WZi6nCcCC3BeoBdC0/Fo0WIh2WNnYOfXdw1uUsYM3iimEvj0=
+	t=1791019677; cv=none; b=YiAZwDg8MtS5+e802NrhaBl468W6CZNydH/cAnuUIl6IAUIlfqZb5VA7HcTmiTZKpGjw0LjfZPvFEQA6D78BPFZbSGn0wWalYMWoWpjiwMoFNGIcyUtIQbcC5hx6GhP55SGlavXrXo/FqAZkHeibZDFn8+PkGSg6PmIyY5PZjz0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791018944; c=relaxed/simple;
-	bh=5Amsj13Ypf+VNbZXqe2Aip4i68WKcfoJI3MkINWORYs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=YRjDnZipQo3Ti4PP21Qx+vqOoPiSgmTMbIrYQe7tequ4AbvrOVvhga0pEWRC78P0gTuP8JtztN9Xy4tnNBRKwibk0M1VJmMioAiM5J5+ZGVFxhfC+YKTyAbgYPWHtLWJU2D/N/3vAbhh+RdmDSQH1YVvae3c1hp8O8sFFyG5wEI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KuoQv8oS; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791019677; c=relaxed/simple;
+	bh=owIRH9srE8X6VL0tvcg+0/nk8Ai/rxsAjJWM6OiUj6o=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gsmeXIo1PJ9fdFTanpZ7BV/huZekm63Ri6eDMppYYsF4DUk+ohUikPutkimoINk1TCaxTn+fMWFFe905C03UhCmku2Oj5HNYdKd8gIF89WAVuRVRrQOaxToWxbUonAWcVmL1r4Fdk74rMfubIK5DO3jmRkqX+dHqRiH+SSg5S3Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZfKmHovL; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KuoQv8oS"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f6350f91so79728f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 02:15:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791018941; x=1791623741; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=EL7Wt7gCvxigatArl4vYdYfYVLxu4uqJTJstEATQ4Rk=;
-        b=KuoQv8oSidVn5GsKfTxOq11yuq8ZhuV1nwJ00BuiMrqVHuHD1G4mWS6cvwiPJZptEO
-         qzQTTAd5cFrF9MAjvoKNOZgS/K7TmSUfDhVbHrUnstp6T/Igou1ATf/lwUaEo+3SDbHa
-         xcO1wuUr8NvjE/9MubWS0sVij+uXZMQt/WJW0IBfvJjgGZVSJYs2C90rnyGDA9GnDLU6
-         o6aQKSZukNOsEP4cMqNUN3NSeu2+blA76zvg1NVhAnIadlgmgEiB3j+D5vDDX4VcdBYX
-         5TmZC69xKbWzQlxIpHWhzn2cjifKY3oN1yXXaM23Iy/EOa0ii+XZ58duPNkfFCshk5r+
-         sdpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791018941; x=1791623741;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EL7Wt7gCvxigatArl4vYdYfYVLxu4uqJTJstEATQ4Rk=;
-        b=ldVd01pcbgcypEXAHjRGWNksfM2hgGJu0DdoWD9iKVMBcZZOkmy4doh2B9yvATbNWY
-         MQxAOeWEA/GQBAC5HC7y/p04lmlXX6wQIwuybTz+P/3wg5oEZFVndhrtqkCkcZpfEzbZ
-         t4CNHP9aZO+EVj50LOoAqqkBE008vXxmbOVz7yikgvyWribhblBHn94tPr1vdydp5lCy
-         MNZm25hlBq51jdCVWih7U1GabthUFfsGy7Bz5Nw1xostjgKUSQVDog91HRmjhBKP/DgU
-         jiLvTp+tMBwcJ2bSaD/SrYMTmmR0YL8IAPz/9Q8E/GFn/SLOnGBJTMcKqNQ/sDcLSC7H
-         A8Gw==
-X-Forwarded-Encrypted: i=1; AKwUvBwiZZ3+BR6HYexyMpZRTWKzxNb42tB9+WhUmWoepdnmDrwa04Dp9J3QUFWrSEjDiqek3Xwmj1RU/7lGqQJY@vger.kernel.org
-X-Gm-Message-State: AFq9FYLKf5cZqMsOGA+dBlCnM8A2+Hj7y1WjxV1+slfgniWMSdwjwb15
-	dh/gUzKezx1exf9WsNvpbguNF7+onYtJBo+1vIDZ/lw8TjyKX7slpMhC
-X-Gm-Gg: AYBFou1ns/Dj/wzrTC9xUwg/8cp47P/v6VWDFNwJLKN9Wes+R1DEeMvq3gA41ko2qMC
-	evTfTXjocxM5gexHfZzBetZ/GoZw6va9JXTj4ix9MXrAKqyCgFsj7OdTX3AoLPqlsPHIG2MSTbR
-	/zJn+S5Nc+Jj4WkrtH3Y892Tg3T8tuGqjpB4JZIsimQQkBP12km4DAzY99LAcE7YEdf+rKBD7t7
-	vQN78uPSScjsJWFKv+3lvbblZEfWKqoFB0sOSzDXFrrB4aJ5noviFGlmCa72bUYV9VREvUcarbI
-	K2Trae5eqYNFHOROzyl0yGG/IRT+Z6qy/faEHQ15e2vKf+YIPx70cc3uALL2XqYNu+LD8avzX9V
-	dtIW4gVUvqFAj0ihAUmUkuNT9nHKZJWydt0v/pLwpCsBwO+5Qw1YABDJUDuRBMcV6wxdvZd6Dfw
-	GHXXpmGPu2V45Pxyrel8Jy20q/PuTII2B1AchEmI6auEJwwomhK8OyuESVTYvbbxwFMjfOAB2Tn
-	5S27DZcUyQ=
-X-Received: by 2002:a05:6000:2c0a:b0:48b:7179:59da with SMTP id ffacd0b85a97d-48b71795ad8mr8328190f8f.1.1791018941391;
-        Sat, 03 Oct 2026 02:15:41 -0700 (PDT)
-Received: from FranzSP11.fritz.box ([31.31.60.25])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b82253dc9sm11336161f8f.3.2026.10.03.02.15.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 02:15:40 -0700 (PDT)
-From: Franz <franzelfranzel@gmail.com>
-To: Jeff Johnson <jjohnson@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Johannes Berg <johannes@sipsolutions.net>,
-	Abel Vesa <abelvesa@kernel.org>,
-	ath12k@lists.infradead.org,
-	linux-wireless@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH RFC 3/3] arm64: dts: qcom: x1-microsoft-denali: disable WCN7850 hardware rfkill
-Date: Sat,  3 Oct 2026 11:15:09 +0200
-Message-ID: <20261003091509.4822-4-franzelfranzel@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261003091509.4822-1-franzelfranzel@gmail.com>
-References: <20261003091509.4822-1-franzelfranzel@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZfKmHovL"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E72671F0089B;
+	Sat,  3 Oct 2026 09:27:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791019676;
+	bh=PK5mgDi/hmv0hoOXsSnxdZfMOPmMynYPkaSJh/0UNCY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ZfKmHovL8scKJJa/IBh6zaaajAJBvAihck0ZLkiakQ3Q5FoZ+ub2gIggTgta2ZUJM
+	 Rvf5OdQysvOToDC9tvTxD1o3NQKoW/pSdHJKYJltx3ALSjL+7RP+sGhm18wQgwxoVj
+	 RciyCsWAy94Gsy2Yeyg8bLzRMhcMiabU3yvk8HLwvDcXo26dNgROL7Z285d/4jTzd+
+	 g+sjwQ4ewaJNgPAQNuJafQWnLw7iW+0CNSWVk4+xoLMmoneX1TUT2WL1JrfYZ3h1Nl
+	 puh+yplAZxCGQbj4xbA4mNlOjn3xvsZBD96dn7lE/YbxGJbn5NQ5VaoYGhl9vQjTx7
+	 oTrcxj9VFaSLA==
+Message-ID: <608f9f6c-a405-4903-a1bb-86ca8a0999f3@kernel.org>
+Date: Sat, 3 Oct 2026 11:27:47 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 1/3] dt-bindings: net: wireless: qcom,ath12k: add
+ disable-rfkill
+To: Franz <franzelfranzel@gmail.com>, Jeff Johnson <jjohnson@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Johannes Berg <johannes@sipsolutions.net>, Abel Vesa
+ <abelvesa@kernel.org>, ath12k@lists.infradead.org,
+ linux-wireless@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261003091509.4822-1-franzelfranzel@gmail.com>
+ <20261003091509.4822-2-franzelfranzel@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261003091509.4822-2-franzelfranzel@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The WCN7850 hardware rfkill input reads as "radio off" on the Surface
-Pro 11, which keeps Wi-Fi hard-blocked. Mark it as unusable.
+On 03/10/2026 11:15, Franz wrote:
+> Some boards do not wire the WCN7850 hardware rfkill input, or wire it so
+> that it always reads as "radio off". On the Microsoft Surface Pro 11
+> (X1E80100), ath12k enables hardware rfkill handling and the interface
+> ends up hard-blocked for good.
+> 
+> ACPI platforms can already turn this off through a firmware setting
+> that ath12k reads (ath12k_acpi_get_disable_rfkill()). Add a boolean
+> property so that DT-based boards can describe the same thing.
+> 
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Franz <franzelfranzel@gmail.com>
 
-Tested by adding the property to the installed DTB with fdtput, on
-next-20260929 with the matching ath12k change.
+Please do not duplicate work but build on top or reference previous
+discussions.
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Franz <franzelfranzel@gmail.com>
----
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 2 ++
- 1 file changed, 2 insertions(+)
+https://lore.kernel.org/all/20251220-surface-sp11-for-next-v5-3-16065bef8ef3@gmail.com/
+https://lore.kernel.org/all/20251201011457.17422-7-daleyo@gmail.com/
+and some more
 
-diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index a71c29762..36592b8ed 100644
---- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -1009,6 +1009,8 @@ wifi@0 {
- 		vddrfa1p8-supply = <&vreg_pmu_rfa_1p8>;
- 		vddpcie0p9-supply = <&vreg_pmu_pcie_0p9>;
- 		vddpcie1p8-supply = <&vreg_pmu_pcie_1p8>;
-+
-+		disable-rfkill;
- 	};
- };
- 
--- 
-2.56.0
-
+Best regards,
+Krzysztof
