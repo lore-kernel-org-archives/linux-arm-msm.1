@@ -1,48 +1,50 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5991388879;
-	Sat,  3 Oct 2026 08:10:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 712F039524B;
+	Sat,  3 Oct 2026 08:12:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791015044; cv=none; b=WN1cyrkdjCc/1pq7zEKyF4QPE0PIv92LW2GaanLIUFMdSg1d18Ei/qx8mq6w9UU1BUeoBzXHHzrs8xCa2EK68HY7lu8EunxvT9kn1ceEjw1d1RVbuUxF6sBhG7RUALwXmJBtAON4TiorglZlNF5jC/1WiJ0NJpQvzgAlgww7TA8=
+	t=1791015158; cv=none; b=FLUiSDYGsb63rxEJmfKv+tl5xcMXODUy08z5r8ythkIwbj5dA6omZktKcvDui09bw8RVfoT6Eons70cF2i3tbKAE6YI7IOAymj/25PJhOdQZUN+ZQXmr7rvGEVCv8vj3xLgg3viVwaB3lJQQwRKk1godm25KP/gzXPo/jnaRuaU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791015044; c=relaxed/simple;
-	bh=bHYsIw/dFMZd67xDXednIJJk/jJrG1YKUdKOH+xHTrQ=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=dNNOqdTUmIPwYZDShMRCaXjznIe7yFwTaypWM/XYU6xGQ/PDJdmyBaeLDuR08mn4dCC5JxNFjOeHv1miR45NSKyIfwSSPa2GKYzz+ztMmKwH4O9m8qloiTNiMzhnLpPiD9pft8wBYAsj+ohwPby3I1a7sw20qImsM/HOMm8L+5M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=e3zwIBPd; arc=none smtp.client-ip=220.197.31.4
+	s=arc-20240116; t=1791015158; c=relaxed/simple;
+	bh=iGa02tqk4ue4xUw/jme9qpVIWtqMaoy2fS1PW8GKLdA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=MmGTyXLm929X9olxC9UtZKngtQBQ/De7iNwoyX/SeXgFPZJrdgP82MYoFNQj1m0VNZtINiP9qJEW19c1INKce6PlFRz/Hfu6PEGLLuHu5Fnu6Xkvq05fgOFv0qWhyssgnliy5rReUu0mXLirZcWgsuOjSbbhgGkp3OhaO/pxxhw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=aU4SRVYt; arc=none smtp.client-ip=117.135.210.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="e3zwIBPd"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="aU4SRVYt"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=Fz
-	qlwKVaG5F2Cl/Blfh3aivHLdgARdebIfadlDcrE98=; b=e3zwIBPd9Z/fHXL28y
-	RQCsxrifvMrkOOeSKsZ52Okx7FIKv6yzDUlQ48I6OHD83emduTJG6O+fbJDRt7Cx
-	CnZ0wiOMhn/5KZM0ralQnMawbWNDsiqlaU+FT+lNN4opT6FZV68QdFiv1WM5AiHn
-	uxVOw4rWFBYnx3NBfxJSi6800=
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=zB
+	p34BSzNZJG9C0k9dpuokC4arHuG3WIpAi9HRZC8pc=; b=aU4SRVYtu9Gy7KTu5U
+	lOfAXmNYUPrf3T2CWfG1cJnaWKYpsNzpgRKHekBfGi645RuuIEreZagGubfP0Gub
+	DWIcOURjMNmIxGsEgNpwS4WpYKttBjofPKYrRuo4F7kQIW8b7NmMUEk4wzdlsbHo
+	cz7TJJhE788yS/cle+DtOW680=
 Received: from pc.localdomain (unknown [])
-	by gzsmtp5 (Coremail) with SMTP id QCgvCgD3qHRLuMBqTxqBCg--.60808S2;
-	Sat, 03 Oct 2026 16:09:48 +0800 (CST)
+	by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id _____wD3P1yfuMBqYnCaCQ--.60360S2;
+	Sat, 03 Oct 2026 16:11:12 +0800 (CST)
 From: Jiale Yao <yaojiale02@163.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sean Paul <sean@poorly.run>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
 	Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
 	Marijn Suijten <marijn.suijten@somainline.org>,
 	David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>,
+	Maxime Ripard <mripard@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	linux-arm-msm@vger.kernel.org,
 	dri-devel@lists.freedesktop.org,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
 Cc: Jiale Yao <yaojiale02@163.com>
-Subject: [PATCH] drm/msm/a6xx: handle runtime resume failures
-Date: Sat,  3 Oct 2026 16:09:45 +0800
-Message-Id: <20261003080945.431091-1-yaojiale02@163.com>
+Subject: [PATCH] drm/msm/hdmi: handle runtime resume failure during power on
+Date: Sat,  3 Oct 2026 16:11:03 +0800
+Message-Id: <20261003081109.432470-1-yaojiale02@163.com>
 X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -51,70 +53,100 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:QCgvCgD3qHRLuMBqTxqBCg--.60808S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7tF15KFW3Ww43Gw4DGw45ZFb_yoW8ZF1Upr
-	Z5Xa1ftr48Cw1agws5AF48ZFy3C3yrWay7Z3sFg3s5ZF15AF1UtF1FyryaqF95ZFZ7AF13
-	tF4UJ3y7Cr1Ykw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pi3fQiUUUUU=
-X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbC7wwMRmrAuExQFAAA3z
+X-CM-TRANSID:_____wD3P1yfuMBqYnCaCQ--.60360S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxuF4Dtw4xWryrKw4rtF4rAFb_yoW5WF4xpr
+	ZFg3s09r4kZF47G39rAr4kZFnIk3929ay5J34xKw1Fv3WIvFn0qFn5Ar10qF1rAFyDXF13
+	tF18JF15Ga47AFUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zi5CzXUUUUU=
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbC8AAhW2rAuKBSngAA30
 
-a6xx_pm_resume() ignores failures while resuming the GMU device and GX
-power domain, then continues enabling clocks and initializing hardware.
-The common error path also drops both runtime PM references even when
-either acquisition failed.
+msm_hdmi_power_on() ignores runtime resume failures, and
+atomic_pre_enable then records the bridge as powered and accesses HDMI
+registers. The later disable path also drops a runtime PM reference
+that was not acquired.
 
-Check each resume operation and unwind only the references acquired
-before the failure.
+Return the resume error to atomic_pre_enable, unwind the PHY resources,
+and stop the enable sequence without setting power_on. Also honor
+errors from the preceding PHY resource enable operation so the unwind
+is only used after successful acquisition.
 
-Fixes: 5a903a44a984 ("drm/msm/a6xx: Introduce GMU wrapper support")
+Fixes: 81aa83419706 ("drm/msm/hdmi: switch to pm_runtime_resume_and_get()")
 Signed-off-by: Jiale Yao <yaojiale02@163.com>
 ---
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c | 23 +++++++++++++++--------
- 1 file changed, 15 insertions(+), 8 deletions(-)
+ drivers/gpu/drm/msm/hdmi/hdmi_bridge.c | 26 ++++++++++++++++++++++----
+ 1 file changed, 22 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-index 081e79ea4652..aa785f197aa0 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-@@ -2188,8 +2188,13 @@ static int a6xx_pm_resume(struct msm_gpu *gpu)
- 	/* Set the core clock and bus bw, having VDD scaling in mind */
- 	dev_pm_opp_set_opp(&gpu->pdev->dev, opp);
+diff --git a/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c b/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
+index 157f19bd90b4..7d88657be047 100644
+--- a/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
++++ b/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
+@@ -13,14 +13,16 @@
+ #include "msm_kms.h"
+ #include "hdmi.h"
  
--	pm_runtime_resume_and_get(gmu->dev);
--	pm_runtime_resume_and_get(gmu->gxpd);
-+	ret = pm_runtime_resume_and_get(gmu->dev);
+-static void msm_hdmi_power_on(struct drm_bridge *bridge)
++static int msm_hdmi_power_on(struct drm_bridge *bridge)
+ {
+ 	struct drm_device *dev = bridge->dev;
+ 	struct hdmi_bridge *hdmi_bridge = to_hdmi_bridge(bridge);
+ 	struct hdmi *hdmi = hdmi_bridge->hdmi;
+ 	int ret;
+ 
+-	pm_runtime_resume_and_get(&hdmi->pdev->dev);
++	ret = pm_runtime_resume_and_get(&hdmi->pdev->dev);
 +	if (ret < 0)
-+		goto err_clear_opp;
++		return ret;
+ 
+ 	if (hdmi->extp_clk) {
+ 		DBG("pixclock: %lu", hdmi->pixclock);
+@@ -32,6 +34,8 @@ static void msm_hdmi_power_on(struct drm_bridge *bridge)
+ 		if (ret)
+ 			DRM_DEV_ERROR(dev->dev, "failed to enable extp clk: %d\n", ret);
+ 	}
 +
-+	ret = pm_runtime_resume_and_get(gmu->gxpd);
-+	if (ret < 0)
-+		goto err_put_gmu;
++	return 0;
+ }
  
- 	ret = clk_bulk_prepare_enable(gpu->nr_clocks, gpu->grp_clks);
- 	if (ret)
-@@ -2204,14 +2209,16 @@ static int a6xx_pm_resume(struct msm_gpu *gpu)
- 	if (adreno_is_a619_holi(adreno_gpu))
- 		a6xx_sptprac_enable(gmu);
+ static void power_off(struct drm_bridge *bridge)
+@@ -276,6 +280,7 @@ static void msm_hdmi_bridge_atomic_pre_enable(struct drm_bridge *bridge,
+ 	struct drm_connector *connector;
+ 	struct drm_connector_state *conn_state;
+ 	struct drm_crtc_state *crtc_state;
++	int ret;
  
--	/* If anything goes south, tear the GPU down piece by piece.. */
--	if (ret) {
-+	goto out_unlock;
+ 	DBG("power up");
+ 
+@@ -289,8 +294,16 @@ static void msm_hdmi_bridge_atomic_pre_enable(struct drm_bridge *bridge,
+ 
+ 	mutex_lock(&hdmi->state_mutex);
+ 	if (!hdmi->power_on) {
+-		msm_hdmi_phy_resource_enable(phy);
+-		msm_hdmi_power_on(bridge);
++		ret = msm_hdmi_phy_resource_enable(phy);
++		if (ret)
++			goto unlock;
 +
- err_bulk_clk:
--		pm_runtime_put(gmu->gxpd);
--		pm_runtime_put(gmu->dev);
--		dev_pm_opp_set_opp(&gpu->pdev->dev, NULL);
--	}
-+	pm_runtime_put(gmu->gxpd);
-+err_put_gmu:
-+	pm_runtime_put(gmu->dev);
-+err_clear_opp:
-+	dev_pm_opp_set_opp(&gpu->pdev->dev, NULL);
- err_set_opp:
-+out_unlock:
- 	mutex_unlock(&a6xx_gpu->gmu.lock);
++		ret = msm_hdmi_power_on(bridge);
++		if (ret) {
++			msm_hdmi_phy_resource_disable(phy);
++			goto unlock;
++		}
++
+ 		hdmi->power_on = true;
+ 	}
+ 	mutex_unlock(&hdmi->state_mutex);
+@@ -306,6 +319,11 @@ static void msm_hdmi_bridge_atomic_pre_enable(struct drm_bridge *bridge,
  
- 	if (!ret) {
+ 	if (hdmi->hdcp_ctrl)
+ 		msm_hdmi_hdcp_on(hdmi->hdcp_ctrl);
++
++	return;
++
++unlock:
++	mutex_unlock(&hdmi->state_mutex);
+ }
+ 
+ static void msm_hdmi_bridge_atomic_post_disable(struct drm_bridge *bridge,
 -- 
 2.34.1
 
