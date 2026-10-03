@@ -1,296 +1,110 @@
-Received: from mail-qk2-f37.google.com (mail-qk2-f37.google.com [74.125.230.229])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE3DB4AC15A
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FE5748EC72
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 19:14:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791050248; cv=none; b=VaA318UEkJvVGYg5vvtNk+jOG5SAsEHtz6bV274Kldyr8K65RnLoxbHFP45k+aunE4zFgBJhq/dZ8Qf4cpDYFjIEOBwbK6W40ZkxGIsrMr3ZH0tbWpm9pcz2Uj1R6tgNTaoGp7dcz3AsO6GBTnCVBjkKnE6Y9pYq0T/8fPLmgJc=
+	t=1791054852; cv=none; b=IKKb3t2dDH+NsTAOeoP5pCMduWNGwmlnBlAEBO8KiRsKQ6E2Mn4kiinP8LVeUbdBuROaSVp3MJFF4ssvSvuYiSVL4cFaePUnWBBp9BJmLncIti5dYr8Hkaa4nPN2fggYOGk0xHCQ5RuDcLs/ANnJKw30qA22Hia1Lq4wxRcRgoQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791050248; c=relaxed/simple;
-	bh=ToMS9HHuwvLSNSi4KSK2Vt1m/tyIosTZ2XS2ynYNyxg=;
+	s=arc-20240116; t=1791054852; c=relaxed/simple;
+	bh=o2SsJ/QcIsSEwjwMTmQkK/81ZAEDrnlVJnW+TJO5BtY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Nve+x7ifDYduJtpdkL5+e2mRYtjqr8PlRnWyN5728h5r0W9DqGAruTdPynoOkUTOPlU4Aw22hL7lH2vJNWWR2JTZjwHRL6H3e013IhX5k2/KAXKNr/zOgT112AoQWpWIds/Zu1vKeoB1k1re1LIr6NMhPyeaQHNG8AjK9mP3nok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k8le4LeF; arc=none smtp.client-ip=74.125.230.229
+	 MIME-Version:Content-Type; b=tm0FnA0dmF08zR/N8uL18ZfWQ1hrTUjTOsUkXa9MUlqXvPmMVxp9TbBpIc4HQSIXBgt6uuWctmj8Ocn0XmTJCwJtjq8vEFH/CIEzIcXWisDfEmSyFccw834rCyL8N0Rwbva1vXtcckN+r8ak6U13HRHtOi6syns2BvEP6HyqZXc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M/3mKkJK; arc=none smtp.client-ip=74.125.225.141
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="k8le4LeF"
-Received: by mail-qk2-f37.google.com with SMTP id af79cd13be357-93e587358e0so69755985a.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="M/3mKkJK"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e66390995so4521245e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 12:14:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791050246; x=1791655046; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qvJU5Ed+jK8i3uf0ZW+GRwIBpnEL5KvvTjwamF/Blro=;
-        b=k8le4LeFCSB6/OGbOCjOHlcu0joVjlh3yBjF1DVvcN6NXan8+ATH1W61yQJTsydZ8e
-         u7SpqDx2vC8LaZ725DXgaa8Q3ntjtK1LZhKGUCoSXfsTEU2QQJX2rbaKEuW9BBbQ006t
-         Jdh0f5xxUgmyz+O+s8tPvGFgtAPoaZ/3iRE0LPBuZxtBJBAfYtDKUtKO5SwVVyU8G9hY
-         v+DnD1Ek0gA+Bt36s1Ddb5s7nH+GeQJqGaUYqxX2v5Lkd/J+ZOv91klsSpyaYWJZiMDU
-         7KKXW9Yod6IZC3JBWmiSSFXrJGKS0IqkfEzlU6GofBlhcplgkVvcHGH7oryHcu6J8j5L
-         lomA==
+        d=gmail.com; s=20251104; t=1791054849; x=1791659649; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=o2SsJ/QcIsSEwjwMTmQkK/81ZAEDrnlVJnW+TJO5BtY=;
+        b=M/3mKkJK50e2/8NW/XYMHONps8inh/PJfkYn6hJa5sWJqPq5aj8esx42XrE5K7QiMa
+         P7XzyEbpNwkN26+lGtteVNGzjfYftP/uhckPdQh/Nva/ZW2KdtRA0nVn0gMnQxQDOnA3
+         xFayrRIBiOi/v5+4HfOGESGjfrl/GCmvjFyC2EiipBRl0Pq6avhOViBoxZw/VQBunvEQ
+         jogzEz07GV8TnlcyRUlLFaVaE7yFJXvMGOBAAJdYPhn07miykzHrpFrtzIkyf9e4WyLY
+         CePaWef+7iYrJptO3diOn6NJmn5f4knTRVaoD2TMfUEGg0mLxaQdVD9wP2guWrC6TpbT
+         9JRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791050246; x=1791655046;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qvJU5Ed+jK8i3uf0ZW+GRwIBpnEL5KvvTjwamF/Blro=;
-        b=R9C+k3RCcfgao587bKRmJJA7GW/yEpFYdoBc8aBdRh4D1dmkvYXAqz+zgGacNtAzfy
-         pwKEbHhC+hfkgzth2uo2fMRaMDdDzzbk1QcrTF6x3A0uoMc30hzw/E8sKuWpGzLejUcn
-         roDQOxzjPeDpRJQhuQaHzGbbkuEVykCXnJLBxgowTHH2dFxTYRFRQLko7+r2lCCQv1Fg
-         TL/gF8dy1Ay0uMEziMRvOpheUwQjESFTHdxDmf/95iZGe8OWUtVwimu7aRBEqGSdV8iC
-         r2CvgBDG3PNKpLvL3vzTkh/nmFqosIzaDPW1/sbLXY472aB48sTlQrLisRhqpiBjUEG/
-         aBjw==
-X-Forwarded-Encrypted: i=1; AKwUvBwMgQqDrpRYPuz3F8F9Qa5gALHi3LApaBgOWD2EoKCC6a6G5a1FK7u9pQwbbzrxU8W0BFRKSFrtloSp6uwi@vger.kernel.org
-X-Gm-Message-State: AFuF++n72i1kNnuOo/RW98uRhtjhIXezFen6c/aJg1FSoJZ6/aFvi+ZO
-	xjOyefTyC3m78XhMgjdS9pgPJ6q32L3KJgZ+0/XLJdBWankdJWorWK3z
-X-Gm-Gg: AYBFou3QaQKabntmVQa+h4MZLC/IhqzwQWQQPDlcZWKAt1rGwB0zxPslkHXezJdZJ6A
-	EHMayJ0XB6IbZhVSTPXXBudgIsex4ezfwOCir/VKCWtpmWZ8NG+FDT2m2BwaYK5KMEgKKBVlwkB
-	s1D6PlTt/KMhvjUt/e1xGBm9/UYwnPzt/E+UJbDe569LYCSBMin6eW/04mCKCpPr/S9NdvhFJvQ
-	cv7AR986/c0rqGnd4K4k5Tk2SVW2Q2dHM0yDvi3nNz/cT3yXQQD580o/OTtqgESsI4yaNcY4jCj
-	f5WwnrJUevsVBVjfxTsIcL3sHZprMx8osS0PuoOXKuotH7Q+Fkpl/pXeVMFf8rNlT29w4jmCiRr
-	Tu1gFSPeTcc8Ta70sxgZ1wbtC3wraIt0Hn3imDMDbwJGj0tPF6GnDV7MFlJBhFq5W+XednaFm6U
-	enWPVRXTwIZjKwDG/pXJtqhHPBVwuZ/bOYk1U7RUd/8RQo9zXMAN6e7oLQJejCrYjktkDG8B/X9
-	Q==
-X-Received: by 2002:a05:620a:7087:b0:93a:2e8:5af5 with SMTP id af79cd13be357-93ce7a80f36mr1200797985a.6.1791050245725;
-        Sat, 03 Oct 2026 10:57:25 -0700 (PDT)
-Received: from localhost ([142.181.121.230])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93cca2b4bb2sm507369685a.42.2026.10.03.10.57.23
+        d=1e100.net; s=20260707; t=1791054849; x=1791659649;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=o2SsJ/QcIsSEwjwMTmQkK/81ZAEDrnlVJnW+TJO5BtY=;
+        b=zVYrXQNh9TiRWYVE6GxdR/Zj3knwVjXF4o9QG17XPhTDS3XZHprJl2S5UfmPyexq4U
+         7CkPYS1IQfkx+m/ekZVU8czS+15YDZAGsvFcTOBqwZIueNuVwVoA2PblrGS8eQ+ygvkg
+         Tf37TtcBZz6Wrq9M8P9f0CLVM/lkirG2cj6zUpgAnzKg/nVqrmctdtciPlbMtORVYYis
+         HarGb6ZKwr0On7FcPreQTbIzZzvQfMM70RvLpdo84Hh3E4i9YCDkIHGdnxGIl5qVkQec
+         3SPAVTnOy76ktO11Vy3Ta27jlQJirObIhORsWAvBnpehh6Zkel1ZaAlPfr3GeJUwRGY2
+         zxQA==
+X-Forwarded-Encrypted: i=1; AKwUvBwqOkz9blQ1E50keBlqiGBFsOhOTqLyukqsir2pG6nbEeCKeakS1zKZ4BS/wISu2w7Ay8QHVVQlededcnn4@vger.kernel.org
+X-Gm-Message-State: AFuF++m7JH41ryI1HBw62cmqAL8NqftmE2E0Ha7yiR1hg5iUy+sdS778
+	JG2oFOpbrInQdncGd6rvBtvbUVrPGQ6XBNPzQWSwqY4ZRi/Ec//emaDY
+X-Gm-Gg: AYBFou3M4SShfF2mkRgIo17W+55ZJj7kEyjkTlODQ0NTnC67c3NZauBe4VCrVD3vwsa
+	M+TCFqbHseYn84uVs7zAzXN8OBs7Hl0QaHrVyExloTUQuGn9c3UxiGcTB0fCxWe6EsEXhGF+3l3
+	ou4rd8NbYWwfMPmbaRjA0XS0aEPPASUsEFZloxDz02wRg5n28a8aPKXZd3dHfJ1lrNdIw2EDhby
+	aLxCSFY5CA95hnZm2VOk3dWbaiz5uXbD8amb5gvJ6oIbE2IOi6sOON2tAGUX0Q00jDLSVtAw+Vn
+	yifFZxJyuXvvnkJZrImZTdpOEhmE6o4BOosjsL6ydBjkRvAsYEwVbPvqPnO3cVmYspy8RMvDy26
+	Q/SGZMNg0BDrQvtDFJk+vawHRkNKR0WLs0/c9RGCExnWWgTH5GtmGN1CmG889fs86Yd0BqFy/us
+	BxwJ3PWBE0ts81rFBLreLWGBFCcphi/SC0I7Ou0spNlQbguWhb98gVcmiSt++FmnIK5YRJALvUz
+	yvLncKsFawOK0ZX
+X-Received: by 2002:a05:600c:6995:b0:4a0:1e53:e51f with SMTP id 5b1f17b1804b1-4a02758572amr109139105e9.14.1791054849210;
+        Sat, 03 Oct 2026 12:14:09 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.11])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4a0280dc6e7sm258672005e9.15.2026.10.03.12.14.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:57:24 -0700 (PDT)
-From: Richard Acayan <mailingradian@gmail.com>
-To: Jassi Brar <jassisinghbrar@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Sat, 03 Oct 2026 12:14:08 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Andy Gross <agross@kernel.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
-	linux-sound@vger.kernel.org
-Cc: Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v2 11/11] arm64: dts: qcom: sdm670-google: add sound card
-Date: Sat,  3 Oct 2026 13:56:59 -0400
-Message-ID: <20261003175659.23536-12-mailingradian@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261003175659.23536-1-mailingradian@gmail.com>
-References: <20261003175659.23536-1-mailingradian@gmail.com>
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	regressions@lists.linux.dev,
+	Rob Clark <rob.clark@oss.qualcomm.com>
+Subject: Re: [PATCH 3/3] drm/msm/a8xx: Enable CLX feature on Adreno X2-85
+Date: Sat,  3 Oct 2026 21:13:59 +0200
+Message-ID: <179105480736.32023.13572677576800176858@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <9355acaf-60a1-4fc0-a27e-8195eda3aac4@oss.qualcomm.com>
+References: <9355acaf-60a1-4fc0-a27e-8195eda3aac4@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The Pixel 3a has a sound card for built-in audio (RT5514 and CS35L36
-codecs) and for the headphone jack (WCD codec). Add the sound card,
-q6asm frontends, and WCD codec for headset audio.
+On Sat, Oct 03, 2026, Akhil P Oommen wrote:
+> Could you please try this fix?
 
-Signed-off-by: Richard Acayan <mailingradian@gmail.com>
----
- .../boot/dts/qcom/sdm670-google-common.dtsi   | 144 ++++++++++++++++++
- 1 file changed, 144 insertions(+)
+I tried it on the Lenovo Yoga Slim 7x Gen 11 (next-20261001, built-in
+firmware): no change, the first GPU init still times out on
+HFI_H2F_MSG_GX_BW_PERF_VOTE.
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-index 73639b0271e9..fadd3b5eca42 100644
---- a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
-@@ -11,6 +11,7 @@
- #include <dt-bindings/leds/common.h>
- #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- #include <dt-bindings/power/qcom-rpmpd.h>
-+#include <dt-bindings/sound/qcom,q6asm.h>
- #include "sdm670.dtsi"
- #include "pm660.dtsi"
- #include "pm660l.dtsi"
-@@ -52,6 +53,14 @@ framebuffer: framebuffer@9c000000 {
- 		};
- 	};
- 
-+	clocks {
-+		int_cdc_bclk: int-cdc-bclk {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <1536000>;
-+		};
-+	};
-+
- 	gpio-keys {
- 		compatible = "gpio-keys";
- 		autorepeat;
-@@ -127,6 +136,87 @@ debug_info_mem: debug-info@a1800000 {
- 		};
- 	};
- 
-+	sound {
-+		compatible = "qcom,sdm660-sndcard";
-+		model = "Google Pixel 3a";
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&cdc_pdm_default>,
-+			    <&cdc_dmic_default>;
-+
-+		audio-routing = "Analog PDM_RX1", "Digital PDM_RX1",
-+				"Analog PDM_RX2", "Digital PDM_RX2",
-+				"Analog PDM_RX3", "Digital PDM_RX3",
-+				"Digital LPASS_PDM_TX", "Analog PDM_TX",
-+				"Analog AMIC2", "Analog MIC BIAS External2";
-+
-+		mm1-dai-link {
-+			link-name = "MultiMedia1";
-+
-+			cpu {
-+				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
-+			};
-+		};
-+
-+		mm2-dai-link {
-+			link-name = "MultiMedia2";
-+
-+			cpu {
-+				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA2>;
-+			};
-+		};
-+
-+		mm3-dai-link {
-+			link-name = "MultiMedia3";
-+
-+			cpu {
-+				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA3>;
-+			};
-+		};
-+
-+		mm4-dai-link {
-+			link-name = "MultiMedia4";
-+
-+			cpu {
-+				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA4>;
-+			};
-+		};
-+
-+		lpi-mi2s-rx-dai-link {
-+			link-name = "LPI MI2S Playback";
-+
-+			codec {
-+				sound-dai = <&pm660l_codec 0>,
-+					    <&lpass_codec 0>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6afedai LPI_MI2S_RX_0>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6routing>;
-+			};
-+		};
-+
-+		lpi-mi2s-tx-dai-link {
-+			link-name = "LPI MI2S Capture";
-+
-+			codec {
-+				sound-dai = <&pm660l_codec 1>,
-+					    <&lpass_codec 1>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6afedai LPI_MI2S_TX_3>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6routing>;
-+			};
-+		};
-+	};
-+
- 	/*
- 	 * The touchscreen regulator seems to be controlled somehow by a gpio.
- 	 * Model it as a fixed regulator and keep it on. Without schematics we
-@@ -528,6 +618,17 @@ rmi4_f12: rmi4-f12@12 {
- 	};
- };
- 
-+&lpass_codec {
-+	clocks = <&int_cdc_bclk>,
-+		 <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+	clock-names = "ahbix-clk", "mclk";
-+
-+	assigned-clocks = <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+	assigned-clock-rates = <9600000>;
-+
-+	status = "okay";
-+};
-+
- &lpi_tlmm {
- 	/* sensor gpios are protected */
- 	gpio-reserved-ranges = <0 8>, <12 6>;
-@@ -591,6 +692,19 @@ &pm660_rradc {
- 	status = "okay";
- };
- 
-+&pm660l_codec {
-+	vdd-cdc-io-supply = <&vreg_l10a_1p8>;
-+	vdd-cdc-tx-rx-cx-supply = <&vreg_l1b_0p925>;
-+	vdd-micbias-supply = <&vreg_l7b_3p125>;
-+
-+	qcom,mbhc-vthreshold-low = <75 150 237 437 437>;
-+	qcom,mbhc-vthreshold-high = <75 150 237 437 437>;
-+
-+	qcom,micbias-lvl = <2500>;
-+
-+	status = "okay";
-+};
-+
- &pm660l_flash {
- 	status = "okay";
- 
-@@ -633,6 +747,36 @@ &qupv3_id_1 {
- 	status = "okay";
- };
- 
-+&q6afedai {
-+	dai@89 {
-+		reg = <LPI_MI2S_RX_0>;
-+		qcom,sd-lines = <0 1>;
-+	};
-+
-+	dai@90 {
-+		reg = <LPI_MI2S_TX_3>;
-+		qcom,sd-lines = <0 1>;
-+	};
-+};
-+
-+&q6asmdai {
-+	dai@0 {
-+		reg = <MSM_FRONTEND_DAI_MULTIMEDIA1>;
-+	};
-+
-+	dai@1 {
-+		reg = <MSM_FRONTEND_DAI_MULTIMEDIA2>;
-+	};
-+
-+	dai@2 {
-+		reg = <MSM_FRONTEND_DAI_MULTIMEDIA3>;
-+	};
-+
-+	dai@3 {
-+		reg = <MSM_FRONTEND_DAI_MULTIMEDIA4>;
-+	};
-+};
-+
- &sdhc_1 {
- 	supports-cqe;
- 	mmc-hs200-1_8v;
--- 
-2.56.0
+What I noticed: the first init at probe always fails, and every retry
+fails as well until gpucc's sync_state is forced by the fw_devlink
+timeout about 12 s into boot. The GMU node never binds a driver, so
+gpucc gets no earlier sync_state, and until then genpd keeps
+gpu_cc_cx_gdsc on. With GENPD_FLAG_NO_STAY_ON on gpu_cc_cx_gdsc the
+retry when the compositor starts succeeds.
 
+Oleg
