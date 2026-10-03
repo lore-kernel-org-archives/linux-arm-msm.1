@@ -1,62 +1,64 @@
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9727549C4B1
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D0649DBB7
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791050225; cv=none; b=CjSdZ+yPy0DHaAnho1NGwrg82K0yO20BPNWG74N7q4OyY7G0alsDxrQUaJ6036pyYwSOIYhT402bdSIou6FhcRpclfPHXYCTYKCis4Zak47zQz+i+n2JyWSu+NYwxISXB+bL/vFV2iI5FNybJQaVLZsSGDjS0jVxwKs/q/t4D8M=
+	t=1791050228; cv=none; b=lsj/3ybjXpzXHxl6IMd8dz5MPvEiXJTAGizgdDbH0LYugroC8NFXLlUfe34R6lZCmSvy1sB8Vtyo7+g9eVtHPvJup+RT9Ssi0xpohuL4DNyqRfhiomL98DMVo/DEmlG60qpZRa5c9mh5aO5XUWVBCQDDdi2BulFDc83vzlk9sFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791050225; c=relaxed/simple;
-	bh=LOhl3Aekc4RKo7oAx+FKR3eE5zK1tDJ8SzPFFk/DLWw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ru00ZUE/khAs/fT0HODkeFEFoWQmhJpc3+if3JGW1LVZnfi8uUweTo2YyuJM86Gsp4NnL+pGsadDMfhx7YAKDSQFTr3kO/ZtP+CTiy48a/Ewj5hA5DSjCtZQyffyasKeopf4OlnK2FFs4aw+3jdiF5uLT3J2uKx5op70XA29zvQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CgNmc5KV; arc=none smtp.client-ip=209.85.160.173
+	s=arc-20240116; t=1791050228; c=relaxed/simple;
+	bh=oAVOptHgaHYJzEuPIUaZrEgs391cInOfG4C/drncIwc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=JqlfBM1h/S1lZ81myTtuBS1KoozpqmOPsAhxmH80VApQUfJ0pgUNOIoiCxqfkpfyawfnPXdVCSDGIQVHyK5vJhHcKbFrRrWbyUV6j2pM7kWJBmqNMU1YTutesc2dypjkBOSdvhdQA1Fa6jRt6ohkNgW3gOJx4jIEX32vCc0YQZk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mKtpTJik; arc=none smtp.client-ip=209.85.160.171
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CgNmc5KV"
-Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-53440816851so6989441cf.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mKtpTJik"
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-53397325663so5478141cf.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791050222; x=1791655022; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bsXt4MoLEnClFiQiLZ/irOmeq+7VrIzcy4lTR5NyCaA=;
-        b=CgNmc5KVxHcqI5p+cT7DPLeAQOJlNlq67j5LX+48L/9JLzAmKq7PJHMFkPo3q/DCE+
-         vUZkVeG1LiSVHplH2VaIFQDa4+FYJcSOKKwWrGos/cuUsaTQfPyR6t41CFv57vTpGuRt
-         tSr+bEyvLvHAKkYOP1g3FYuHjI784WIBTEo1glLi0crP5x7hR66VOUetZrnp1f6Vb3vS
-         Ol3cj0OmjzVfKQf5fRa0HGfGSgHxgV/aKOwzDeOEGw2xsu6ApyfdDVvilE93xyS7O+78
-         4XNfAMNTyFyRxpa5Mjq1BGxgPhRRqv2liJc9x8YzO1X7WbvXfdjqayWwwDVdPtL83Bx2
-         XIhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791050222; x=1791655022;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791050224; x=1791655024; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bsXt4MoLEnClFiQiLZ/irOmeq+7VrIzcy4lTR5NyCaA=;
-        b=d33WJnxMNSofpMfQ+DtepsSEt1+2R7wrbMQnkS2otw8jf70zrVCFuAjiPp0129kJKX
-         K7pt2x2m7QpPx42uUONAHEPgRNro16yYdyehtQBokwokhzpCNv6MFxPV1bJfsvNaYSak
-         AvuCGBQjYJnSLYR7OSlhRLgWpWjzO5rSeG8FkMZSpA2rISVknzYfIBe2lJIW70NqP6dK
-         6HFM5Cjn3WLUCVIDWRZ8pQO33/xeV8sYcVj7/FjX4+adX8IqPSwmEBMSuu0iXymoW990
-         SV1QFv9OGhrvv/jYkaW2+ZaSUhvuVO3fiFjmy1xGlE5dA4xXHpV1aSXHj5C70fgqnWZt
-         loRA==
-X-Forwarded-Encrypted: i=1; AKwUvBxCQpLVihSy/Qc0bVE7luZ2SxfpV6KEeIga4O2qrDd/Kg5ke3kBK68Ie/F3pamwzpKPlki1zzC8xFQ193ph@vger.kernel.org
-X-Gm-Message-State: AFuF++mqXOyAN8caIug5zR3d7LU48Jeam/G3FwYM9zNVkibglHqfeHE5
-	A00jvSsa/5bCmGrPZNEFX5Bd3RU3WC+gBy6my08tBNq6F8reMZgsaUpx
-X-Gm-Gg: AYBFou0DbYA+TBVFXSPnoo0jNyVtuBcllKUVhrA8s9DaqpgXV4NQ7j0Fbh8mbuamU7r
-	FhX8wCJRdbTALYojWD+aZlBc4EsEDjjjvMxKOKCOQ0zLICwxuRWX1z7RZi1IVrJx2cKSheWsAN+
-	NB69DLiqGaLW9y/oH9BMU1HxuXIKhys7CpGz92lKrQ+JBisdtGKL03YqNyEWn7zbcq8wKYXOtj+
-	YpSwgUCXNCx9Xzvxc5+WwWBLaBRhbiLragO+RQplPESoO5GEwC2uJZF++0sw/9PJo4A6iIBU0od
-	WlYOBA3hBPmO6PMZFurxNlFCbg6ZcjCUvo4UDgjRq1BkKKfH8x8h7tZzywXZqyMkSYKv4z3s1GK
-	St3lcgRVLm/tbT/CTMxWPQbwCI5TcKsN2tp72Il35phJ2Hm1CuEIHyFy4L6t3Nf5BL/m2n1LRvn
-	EoUkNwErmosKLxLlRI6wUSZAUYBJu19KqbTFxiAxTec2yz3aU18OaYTRBd4bTF5GEI1gUY/2F54
-	M4=
-X-Received: by 2002:a05:622a:260f:b0:530:ea8c:1b6b with SMTP id d75a77b69052e-53511b4fed6mr52480151cf.3.1791050222471;
-        Sat, 03 Oct 2026 10:57:02 -0700 (PDT)
+        bh=6go1USvOBSIXKpmuAnNG1AZzXz6zYvVdjETf+wNZy/I=;
+        b=mKtpTJiktUBc0mx5QzWhphZ+vVetoYebj7DoWo/I6rEEY522kwGxP7mSjmII+flx5F
+         WyYSNF+Y5VNYU7YNVSjUsraNGEP06vP87xQreacrEUcJaD/+P6y2oC6TrF41d0q7ug5b
+         iJW+CM13321Sehhc1N0oYthJG5TygZ2yyIxSQMLNFdcAriLHhwTeUX58ubxb+bR5gqPK
+         wvUc3HFGHJo5/hT9lgbCSq9+mCb2kZFh41Th35Xx3olq3uNjp7KIgE8HrHbaSgwedct/
+         Zu7YJisSuD4A3UlM66fz04ruAYzDmXKVwL6oGHCtjucjS1dKtTztvuQ2CgHLvkz+V8KB
+         wnvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791050224; x=1791655024;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=6go1USvOBSIXKpmuAnNG1AZzXz6zYvVdjETf+wNZy/I=;
+        b=YAbOVSAr7wN00BFf6uY/zM+YVoanzuB64bapWoa7yXk6vJIRC17JIORV4IIpr44CnY
+         EE7IebSoIoRypukbQydQJxl8g9zYBltxgs/nVLJlJ4TcZHcKMDOJYC6Fleckr24wJXpl
+         GpqJ/bgfoWa1XHprAQZ58cEX3h7+j3bRiwmnOdOoSebJltFj08aJGUpRo/BNgZfAC9cQ
+         QG9X6mkjTLGvEqcHtsBG7o8DWCgdlQqRvwacDQ/6uw7ARLeJJMh04bcGXHbRz9BT5LT3
+         DKA4fgMTnKtlJqjl/WiGYGqwFxqSp0wQ6yBDEWCyuLCZuOoLm3a7q1xe8qY7CtPeD5tb
+         Xbzg==
+X-Forwarded-Encrypted: i=1; AKwUvBzlFu9lEHDvR8EgHNbboW4fYWd4seZ88CKE2QSchoipGhlV52QOQmQAItdX63+oOq9R2iYfRc90a42XdHI5@vger.kernel.org
+X-Gm-Message-State: AFuF++nity7EGZkH5olqKQlfpBNo5Xaf2PS57FPKxDtnoQqnMFc5JTfE
+	DH5X909ZsoPwDRsx+zpESbzpqCzmLaCBHSM2tGSYXIpsqqNdsH2azI75
+X-Gm-Gg: AYBFou3bkYLKaiWE7D50GAJFSTJMHxfwKtqS5WeqvPGDC8kCKJkw72o9YFj1Qcz1knG
+	45UeVZz4IEvmqaCeveKfrHSbhOuaw0LynoWfEhCIvwErrcdXoe5o8XHdsMGfRO/96lYpODZ/5Pg
+	PQLPOr/miXksgRfzAQ7bK/iPfF1CqcS4sBjU+FTwGhSfUssq1CXQq456QjkqkPM5jz1SMBTXTIX
+	D5xy1qPk02S7Z4iNjhHDSZAS65I8zQNTYFcIPIUxYd1IQM3DcuEupEw41rena5Wzhtk760GZIjP
+	fdIoQx2mp54XfMgZDhevv8uvfPj4i5xhuGG1Qcv65ixpWs5yuKmREF80hHunIQUnorAbrUrzGML
+	leKppQHkTNUDmQy7ARLH73ly9juuvz73aYCx5aWpdQNMuLtW0ABdTP2gO025zhHTpDsuuj/a0NB
+	6FEr3OCTKaHPUgCOkaVDzULSwBIYlK2pDnf3rdcMQ57iP4G5ehD7NFiCACPCguNJG1GnRmQtUSD
+	gtpXF+wECcEAw==
+X-Received: by 2002:ac8:5cc1:0:b0:533:3d83:c20c with SMTP id d75a77b69052e-53511e44037mr55541301cf.23.1791050224165;
+        Sat, 03 Oct 2026 10:57:04 -0700 (PDT)
 Received: from localhost ([142.181.121.230])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53398bf8196sm57217881cf.22.2026.10.03.10.57.00
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53398d59747sm57605361cf.31.2026.10.03.10.57.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:57:00 -0700 (PDT)
+        Sat, 03 Oct 2026 10:57:03 -0700 (PDT)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>,
 	Rob Herring <robh@kernel.org>,
@@ -76,10 +78,12 @@ To: Jassi Brar <jassisinghbrar@gmail.com>,
 	linux-remoteproc@vger.kernel.org,
 	linux-sound@vger.kernel.org
 Cc: Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v2 00/11] ADSP for SDM670 and sound on Google Pixel 3a
-Date: Sat,  3 Oct 2026 13:56:48 -0400
-Message-ID: <20261003175659.23536-1-mailingradian@gmail.com>
+Subject: [PATCH v2 01/11] dt-bindings: soc: qcom,smp2p: add sleepstate support
+Date: Sat,  3 Oct 2026 13:56:49 -0400
+Message-ID: <20261003175659.23536-2-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261003175659.23536-1-mailingradian@gmail.com>
+References: <20261003175659.23536-1-mailingradian@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,43 +92,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series adds a user for the SDM660 sound support code [1]. It also
-adds the ADSP remoteproc for SDM670.
+The sleepstate entry is used by Qualcomm sensor DSPs to control
+suspend/resume operations. Even though there is no full support for
+sleep states, initialization of the entry is still necessary for some
+DSPs, notably the sensors-bearing ADSP on the Pixel 3a (SDM670 SoC).
+Allow sleepstates to be declared in the device tree so they can be
+initialized.
 
-[1] https://lore.kernel.org/r/20260730174353.108023-1-mailingradian@gmail.com
+Link: https://android.googlesource.com/kernel/msm/+/91edfe5385f2640a338e2ad230d0fc03c73b77f8/drivers/soc/qcom/smp2p_sleepstate.c
+Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/soc/qcom/qcom,smp2p.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes since v1 (https://lore.kernel.org/r/20260922015801.32373-1-mailingradian@gmail.com):
-- squashed sound card and device-specific codec config (11/11)
-- converted to fallback compatible (4/11)
-- added compatible for WCD digital codec (5/11, 10/11)
-- removed sleepstate comment (7/11)
-- sorted subnodes of dai link (11/11)
-- add review tags (1-3/11)
-
-Richard Acayan (11):
-  dt-bindings: soc: qcom,smp2p: add sleepstate support
-  dt-bindings: mailbox: qcom: Add SDM670 APCS compatible
-  dt-bindings: soc: qcom: aoss: Add compatible for SDM670
-  dt-bindings: remoteproc: qcom: adsp: Add SDM670 ADSP compatible
-  ASoC: dt-bindings: msm8916-digital-codec: Add SDM670 compatible
-  remoteproc: qcom: pas: Add SDM670 ADSP support
-  arm64: dts: qcom: sdm670: add adsp
-  arm64: dts: qcom: sdm670-google: enable adsp
-  arm64: dts: qcom: pm660l: add analog audio codec
-  arm64: dts: qcom: sdm670: add digital audio codec
-  arm64: dts: qcom: sdm670-google: add sound card
-
- .../mailbox/qcom,apcs-kpss-global.yaml        |   1 +
- .../bindings/remoteproc/qcom,adsp.yaml        |  33 ++--
- .../bindings/soc/qcom/qcom,aoss-qmp.yaml      |   1 +
- .../bindings/soc/qcom/qcom,smp2p.yaml         |   2 +-
- .../sound/qcom,msm8916-wcd-digital-codec.yaml |   1 +
- arch/arm64/boot/dts/qcom/pm660l.dtsi          |  40 ++++
- .../boot/dts/qcom/sdm670-google-common.dtsi   | 150 ++++++++++++++
- arch/arm64/boot/dts/qcom/sdm670.dtsi          | 183 ++++++++++++++++++
- drivers/remoteproc/qcom_q6v5_pas.c            |   1 +
- 9 files changed, 398 insertions(+), 14 deletions(-)
-
+diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,smp2p.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,smp2p.yaml
+index f91276822858..7862d68c9678 100644
+--- a/Documentation/devicetree/bindings/soc/qcom/qcom,smp2p.yaml
++++ b/Documentation/devicetree/bindings/soc/qcom/qcom,smp2p.yaml
+@@ -60,7 +60,7 @@ properties:
+       Two identifiers of the inbound and outbound smem items used for this edge.
+ 
+ patternProperties:
+-  "^master-kernel|slave-kernel|ipa-ap-to-modem|ipa-modem-to-ap|wlan-ap-to-wpss|wlan-wpss-to-ap$":
++  "^master-kernel|slave-kernel|ipa-ap-to-modem|ipa-modem-to-ap|sleepstate|wlan-ap-to-wpss|wlan-wpss-to-ap$":
+     type: object
+     description:
+       Each SMP2P pair contain a set of inbound and outbound entries, these are
 -- 
 2.56.0
 
