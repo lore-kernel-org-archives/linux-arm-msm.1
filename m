@@ -1,64 +1,64 @@
-Received: from mail-qv2-f12.google.com (mail-qv2-f12.google.com [74.125.230.140])
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4335D4A1399
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 009E94A3D5E
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791050236; cv=none; b=Ol29NlJ0IJlSSZXyC34jT9fzA+7ujNoavszVQLfjruK7cddNkJlRoEwgzCauEu2ivNS+hC7PG/TftMMDSoz5ugmk8V/WYZzn7OaYGn+ulMgP+PphxAJLJSudtBKvf332z0i34Rx0FgjcLY77S4MeZcWXdxnXAI5bUcDaCWlQLZY=
+	t=1791050239; cv=none; b=ktOo9bSVMqMTH1CX60G3NII4SA4zQFefU7EYZytUA6yNPy1cXBa+047xw/MDjJnm8epAtCWNkrQxzRbBpvKdBwXU119e/b9RztZwDuLeEwKhfSwBM90PQUqeO6PBlImt6+Jomai5z6DD8AsKef49mAGIc0y67xQpbgYyXChYhVk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791050236; c=relaxed/simple;
-	bh=luUnD3l+m2wgA6kRS365Flg21Wuxh5YBD2vT8dfL+C4=;
+	s=arc-20240116; t=1791050239; c=relaxed/simple;
+	bh=XYPrp03YsPRFnVbkOpI7YXJXRlmJBGJydjAXHlnkr5A=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=MHhFjt7m03lU6sLkLXYCDEhNfAx1YrWhZd7or7jWE+PcnyXHEcnLlZvVVusKcEw3ZBPbq3Tm1CLZxVMPvOeJ4Ey5lcUaHeeCfAx2CzYPhFv9rC0E9eNMYC0IxlYgMTp6CFlh9twtzKU0VHVhg2vC01vQf61AZXxlXQ50sdj+UIA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZDNHWmoM; arc=none smtp.client-ip=74.125.230.140
+	 MIME-Version; b=kyjOqxVUpmp+q1eB73L5mB6zczLADDXp5TvMViPV5QKSBX9D977f9i1SVUY7XNB1bEkHTn0GOAe3WeeJP0c2bMcSHI3YgAQWRWp64Ebadso6T0vZrfZkSe4jccf402+w07WXkNGWIIlNqyjTUq/S3cDVhrAVdNnZstmJcwBrQN0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JSqqYDSb; arc=none smtp.client-ip=209.85.222.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZDNHWmoM"
-Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-91058dd77a2so10588246d6.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:15 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JSqqYDSb"
+Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-93e5f819884so14253585a.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791050234; x=1791655034; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791050236; x=1791655036; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ftY4s8ms9BPT/X/v3xKK/RfT0MsqyQeCqU3eZn1XFPk=;
-        b=ZDNHWmoMYSRKmH15uf/0Z8BK4nwDqqDpk/yshCf25Ga2MpR9RUAKQt8mUoN1AgT4Mo
-         YpAignPv0zzkTLkBvosCfChNGvR5TGX57A5T/y08rhi2rweaH+4699/GZ4bhW5zbfuVJ
-         DeC03pfe3VdctE+9DFxOs6J++uVhseiUbAn8BBxPXpMvzJ3V8AW8I/u+eImQvKlVsLhi
-         KUUltvau8d1I/mxgB5hAJD+tZ0gXfR1gzWAHaRr2SH2uonKwyKRWsMak8wjLWFDvsYZB
-         BNdgtHI7EdvtaMz2D91qWiwyk+Vwja+1Po/+YTd/3/0vQeHvLuTwYsUp2htSOhkNEoe1
-         a1Aw==
+        bh=cVq6rfkxtcjpdXbuZ6PheQgKb1xnBkiyc9S5i2pZu10=;
+        b=JSqqYDSbVGZbYNSwhLNum0lHALSJW8H0z0yJcJPDpvrkhKrQm2Hf2kNi8Bj4bFijZT
+         slVjiLjsp4oNZtrZRicTDI49Y+xRLCzQFAhtbuAPtMN2bIU/x2TX6D1sFTyLjbqtTLDa
+         TzPfSA0Z6rPLkvEt3MlKj/PH3lyA1cRCOE3akFSyKqa8mhWMT2rzlqHaJnVEn4+/U4W6
+         h21D2QhRq/bTRanZE6FxWL3U1F3bwIAa7x0nEBbl49BtgzI0i0WvnQO3cVkGHaWr70iG
+         h+MqNyAhDgo0EtSpBWdVlM8ZN1h3AgbjJ2VJcKwuI7V9naQgkorSMaqPv759svz0bPWa
+         TE9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791050234; x=1791655034;
+        d=1e100.net; s=20260707; t=1791050236; x=1791655036;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ftY4s8ms9BPT/X/v3xKK/RfT0MsqyQeCqU3eZn1XFPk=;
-        b=ceXOpzC6DvOWo8GyQZwUO8q6mwypzo4c9EDeiwFJHjDoHKVpoU2WqvS43Zn9ZoXH3y
-         iCvc6ICI9zsOScnYfrMZoNwNsN5Gr/iuQSFsmIWrC3v08fWtj7Y1TNImTBrOJpaRtOoI
-         jD3V9UleF/cagQ+Nig//BvgRh7pZu67nt8qdm7TTKqugyrT9Xnjp/i/axgC+6X6IgSnK
-         KmiNPtQodqD5AWLaZqEYYfY29UvxmPV36jo4LB9S6jPsshKmDijI/P8tuGM3YcmMxbRe
-         nNveAW1mOSl/YiEPwwMl/cInwHucbbTaGliz+E6MvNYsDALr5fzJfO93kqoyAu1Fn916
-         4BhA==
-X-Forwarded-Encrypted: i=1; AKwUvBwxdomouqwbQi7tskKfdGjSuqY6V1TBW0u5ewpW4nm4XNVszgwouCd+9a9vpNZbEAQud1MPDDCbKhUjTUqY@vger.kernel.org
-X-Gm-Message-State: AFuF++lbkOT4rfbkUwdIkE4xIN7+1F8kbqEpxoKtGfQA+oeMifgxaT+I
-	GfLaI3nwEoDbf8Q3oocpKZgJzfe/ChbDlm4e2JkKavKtLZHiuPePXiTn
-X-Gm-Gg: AYBFou2zr/g66ZsShEu4qcN9c/PYGK0cILq7agoEynKOJDtX4122vTs5JsCbrSROWzV
-	RzyZbe1gp2No6CRnD7C/dkPO9LTUt9Z9WaB44vOwDIC8H5LcjlmK+idlyYsXhUVJ0WO7bChaZXO
-	DeuUmfYmVj4QOt++49sURwKY8sZGrlcIZQv3uf6fuYbPv9sob76cbFEVvfk9m0Ti6fTcY6BOXW8
-	0yOAmCXwwT2MqE0RRYAC3/ZBTxRQZT1l4pue34nd8u48Qv08GjL54EF6Q0/GbRzMTRdbN6c8AcW
-	V09XkXmdMXG418HdoGhUMYokTxxQJOZDbKFbt1bngO7R4r0sXMOnydtH1FU70Rj+x7iRRxC4wVF
-	w0VRLiZRXLmAF9OMN8DkpQhfRN2crV0PcTQcv8Zs3864i9i8mkpvL8g1zaeQchL7I6TOmz5xo+a
-	TNNLLpyZstWGbQIYw6enl8kcA9kXlWv2b1TkKoXo33tW7TXQCGsyUjT2z6RFPI1yKKGL69DMyNl
-	A==
-X-Received: by 2002:a05:620a:6601:b0:93a:1264:7f46 with SMTP id af79cd13be357-93cf189ed93mr1216539985a.46.1791050234126;
-        Sat, 03 Oct 2026 10:57:14 -0700 (PDT)
+        bh=cVq6rfkxtcjpdXbuZ6PheQgKb1xnBkiyc9S5i2pZu10=;
+        b=t6KJN/etzQ8uDFd1ExX3FPJWkgjy8JK/B09Uf7cUNQPjzMqQbsidi4Zg51Xpg6gi9R
+         4mxLEgnK1agh4wvn7Zu2ZBS1M6MrnjErTxf21Q3mqiHCVo2l0R0lgixeLNn9UaYMT/yp
+         LgPaJS+xuJfIwslwv6S/1oEkC+7PY52IOgCCh/7xyWwr+29piJpJp5xY+3T5+yCsVs1j
+         noW5tvy7LNVacKU2bmQk7hLz9upmGQoXzKuy0NRCFCwp4jFyZ3OyPuMn6dFkJth9mj6t
+         N+WL8t4WxdDpPEDcUzNYChttR8Ecg02FyCnwRjAjfKg62mvFAjudgXu6RuoDVG9TRWmj
+         g3Qw==
+X-Forwarded-Encrypted: i=1; AKwUvBxDDv1u97o0fMsjzQPKup1D7ebi78Cyt8G33zoyifEbNm8M0WBLMXjpaJBqQlvBwBiVIluRQcwvRU9xd8U5@vger.kernel.org
+X-Gm-Message-State: AFuF++kRzS12SxhDWE0qvhiZM0qKp4QX0Fr/MAU2/rm4oL2Qy86gWv4V
+	LkBHIZ6ne6DjxIKCz3ngmMOXC/Nxzxn0gJII5nSEWxjgXKjO4w/n6RS9
+X-Gm-Gg: AYBFou0Btl197w/Z4iY22usyrH3FOqdl1LuqSBTvmEFpr+65aDOno+Kd8Rhl60jBGWV
+	YuMc5Hirqwp9raTZD/GXh44oT55qAoqE0bAno/qRgG2uNOl8b26LXy9KJ3vyLgWH4kpiXKHPGP+
+	ACIcPQVQWR/czGp/pLZgba21esPOeTHfSjMVbMW19hkvVypsdKmgRGoAYV2Ec9ZlzNKgm1BtHdH
+	JfxEV63bd5UozdqrCCqTcx+HFWcp7xKriBOa8sZv+XXLlkm+XFX4jQlRQv5i2HDRgAIzyNwuoz5
+	nyzOExuU39Ly2Eq1963k6gdFqtQCez3mtNl3S9eTqmo/4jwwWLn7U7qMKfdvc3NOAN8VeHg03U1
+	B+VFKAnYr0dYXqhLKyk9PRlOMoh7et1WYXwxAtmrzBhV8TfPe8oAATdiImPEQSh8l8zF0qj2bgL
+	mIM4Wst4C9ZCjUmXENGiMC2vKcrwcNWOkGm1MSYnbaLNXhI8n+21F1m6qNki1ZsCNXGPBVW541D
+	w==
+X-Received: by 2002:a05:620a:4555:b0:93a:1ca:f14a with SMTP id af79cd13be357-93e50f8120amr504480885a.17.1791050235920;
+        Sat, 03 Oct 2026 10:57:15 -0700 (PDT)
 Received: from localhost ([142.181.121.230])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93cca2d361bsm507217685a.45.2026.10.03.10.57.12
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-917e0b1a108sm48714906d6.13.2026.10.03.10.57.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:57:12 -0700 (PDT)
+        Sat, 03 Oct 2026 10:57:15 -0700 (PDT)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>,
 	Rob Herring <robh@kernel.org>,
@@ -78,9 +78,9 @@ To: Jassi Brar <jassisinghbrar@gmail.com>,
 	linux-remoteproc@vger.kernel.org,
 	linux-sound@vger.kernel.org
 Cc: Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v2 06/11] remoteproc: qcom: pas: Add SDM670 ADSP support
-Date: Sat,  3 Oct 2026 13:56:54 -0400
-Message-ID: <20261003175659.23536-7-mailingradian@gmail.com>
+Subject: [PATCH v2 07/11] arm64: dts: qcom: sdm670: add adsp
+Date: Sat,  3 Oct 2026 13:56:55 -0400
+Message-ID: <20261003175659.23536-8-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261003175659.23536-1-mailingradian@gmail.com>
 References: <20261003175659.23536-1-mailingradian@gmail.com>
@@ -92,27 +92,228 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The ADSP is used to control audio and sensors on the SDM670 SoC. Add the
-compatible for it, with the same data as SDM845 since the driver
-requires the load_state.
+The Audio DSP (Digital Signal Processor) is responsible for audio and
+sensors on SDM670. Add this, along with the SMP2P nodes used to
+communicate with it.
+
+The sleep state is included to prevent the following crash:
+
+    qcom_q6v5_pas remoteproc-adsp: fatal error received: err_qdi.c:450:EF:sensor_process:1:sar.cc:27:chre_utils fatal
+
+Otherwise, it is unused.
 
 Signed-off-by: Richard Acayan <mailingradian@gmail.com>
 ---
- drivers/remoteproc/qcom_q6v5_pas.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm64/boot/dts/qcom/sdm670.dtsi | 168 +++++++++++++++++++++++++++
+ 1 file changed, 168 insertions(+)
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index ca8e61254c44..5272a462fc49 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -1865,6 +1865,7 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,sc8280xp-nsp1-pas", .data = &sc8280xp_nsp1_resource },
- 	{ .compatible = "qcom,sdm660-adsp-pas", .data = &adsp_resource_init },
- 	{ .compatible = "qcom,sdm660-cdsp-pas", .data = &cdsp_resource_init },
-+	{ .compatible = "qcom,sdm670-adsp-pas", .data = &sdm845_adsp_resource_init },
- 	{ .compatible = "qcom,sdm845-adsp-pas", .data = &sdm845_adsp_resource_init },
- 	{ .compatible = "qcom,sdm845-cdsp-pas", .data = &sdm845_cdsp_resource_init },
- 	{ .compatible = "qcom,sdm845-slpi-pas", .data = &sdm845_slpi_resource_init },
+diff --git a/arch/arm64/boot/dts/qcom/sdm670.dtsi b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+index 5c60ea36f04a..038ef0f73ea9 100644
+--- a/arch/arm64/boot/dts/qcom/sdm670.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+@@ -19,6 +19,7 @@
+ #include <dt-bindings/interrupt-controller/arm-gic.h>
+ #include <dt-bindings/phy/phy-qcom-qusb2.h>
+ #include <dt-bindings/power/qcom-rpmpd.h>
++#include <dt-bindings/soc/qcom,apr.h>
+ #include <dt-bindings/soc/qcom,rpmh-rsc.h>
+ 
+ / {
+@@ -500,6 +501,34 @@ cluster_pd: power-domain-cluster {
+ 		};
+ 	};
+ 
++	smp2p-lpass {
++		compatible = "qcom,smp2p";
++		qcom,smem = <443>, <429>;
++
++		interrupts = <GIC_SPI 172 IRQ_TYPE_EDGE_RISING>;
++
++		mboxes = <&apss_shared 26>;
++
++		qcom,local-pid = <0>;
++		qcom,remote-pid = <2>;
++
++		adsp_smp2p_out: master-kernel {
++			qcom,entry-name = "master-kernel";
++			#qcom,smem-state-cells = <1>;
++		};
++
++		adsp_smp2p_in: slave-kernel {
++			qcom,entry-name = "slave-kernel";
++			interrupt-controller;
++			#interrupt-cells = <2>;
++		};
++
++		adsp_smp2p_sleepstate: sleepstate {
++			qcom,entry-name = "sleepstate";
++			#qcom,smem-state-cells = <1>;
++		};
++	};
++
+ 	reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+@@ -2111,6 +2140,19 @@ dispcc: clock-controller@af00000 {
+ 			#power-domain-cells = <1>;
+ 		};
+ 
++		aoss_qmp: power-management@c300000 {
++			compatible = "qcom,sdm670-aoss-qmp", "qcom,aoss-qmp";
++			reg = <0 0x0c300000 0 0x100000>;
++			interrupts = <GIC_SPI 389 IRQ_TYPE_EDGE_RISING>;
++			mboxes = <&apss_shared 0>;
++
++			#clock-cells = <0>;
++
++			cx_cdev: cx {
++				#cooling-cells = <2>;
++			};
++		};
++
+ 		apps_smmu: iommu@15000000 {
+ 			compatible = "qcom,sdm670-smmu-500", "qcom,smmu-500", "arm,mmu-500";
+ 			reg = <0 0x15000000 0 0x80000>;
+@@ -2191,6 +2233,12 @@ gladiator_noc: interconnect@17900000 {
+ 			qcom,bcm-voters = <&apps_bcm_voter>;
+ 		};
+ 
++		apss_shared: mailbox@17990000 {
++			compatible = "qcom,sdm670-apss-shared", "qcom,sdm845-apss-shared";
++			reg = <0 0x17990000 0 0x1000>;
++			#mbox-cells = <1>;
++		};
++
+ 		apps_rsc: rsc@179c0000 {
+ 			compatible = "qcom,rpmh-rsc";
+ 			reg = <0 0x179c0000 0 0x10000>,
+@@ -2301,6 +2349,126 @@ cpufreq_hw: cpufreq@17d43000 {
+ 			#freq-domain-cells = <1>;
+ 		};
+ 
++		adsp_pas: remoteproc@62400000 {
++			compatible = "qcom,sdm670-adsp-pas";
++			reg = <0 0x62400000 0 0x4040>;
++
++			interrupts-extended = <&intc GIC_SPI 162 IRQ_TYPE_EDGE_RISING>,
++					      <&adsp_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
++					      <&adsp_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
++					      <&adsp_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
++					      <&adsp_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "wdog", "fatal", "ready",
++					  "handover", "stop-ack";
++
++			clocks = <&rpmhcc RPMH_CXO_CLK>;
++			clock-names = "xo";
++
++			memory-region = <&adsp_mem>;
++
++			qcom,qmp = <&aoss_qmp>;
++
++			qcom,smem-states = <&adsp_smp2p_out 0>;
++			qcom,smem-state-names = "stop";
++
++			status = "disabled";
++
++			glink-edge {
++				interrupts = <GIC_SPI 170 IRQ_TYPE_EDGE_RISING>;
++				label = "lpass";
++				qcom,remote-pid = <2>;
++				mboxes = <&apss_shared 24>;
++
++				apr {
++					compatible = "qcom,apr-v2";
++					qcom,glink-channels = "apr_audio_svc";
++					qcom,domain = <APR_DOMAIN_ADSP>;
++					#address-cells = <1>;
++					#size-cells = <0>;
++					qcom,intents = <512 20>;
++
++					q6core: service@3 {
++						reg = <APR_SVC_ADSP_CORE>;
++						compatible = "qcom,q6core";
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
++					};
++
++					q6afe: service@4 {
++						compatible = "qcom,q6afe";
++						reg = <APR_SVC_AFE>;
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
++
++						q6afecc: clock-controller {
++							compatible = "qcom,q6afe-clocks";
++							#clock-cells = <2>;
++						};
++
++						q6afedai: dais {
++							compatible = "qcom,q6afe-dais";
++							#address-cells = <1>;
++							#size-cells = <0>;
++							#sound-dai-cells = <1>;
++						};
++					};
++
++					q6asm: service@7 {
++						compatible = "qcom,q6asm";
++						reg = <APR_SVC_ASM>;
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
++						q6asmdai: dais {
++							compatible = "qcom,q6asm-dais";
++							#address-cells = <1>;
++							#size-cells = <0>;
++							#sound-dai-cells = <1>;
++							iommus = <&apps_smmu 0x1801 0x0>;
++						};
++					};
++
++					q6adm: service@8 {
++						compatible = "qcom,q6adm";
++						reg = <APR_SVC_ADM>;
++						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
++						q6routing: routing {
++							compatible = "qcom,q6adm-routing";
++							#sound-dai-cells = <0>;
++						};
++					};
++				};
++
++				fastrpc {
++					compatible = "qcom,fastrpc";
++					qcom,glink-channels = "fastrpcglink-apps-dsp";
++					label = "adsp";
++					#address-cells = <1>;
++					#size-cells = <0>;
++
++					compute-cb@3 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <3>;
++						iommus = <&apps_smmu 0x1803 0x0>;
++					};
++
++					compute-cb@4 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <4>;
++						iommus = <&apps_smmu 0x1804 0x0>;
++					};
++
++					compute-cb@5 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <5>;
++						iommus = <&apps_smmu 0x1805 0x0>;
++					};
++
++					compute-cb@6 {
++						compatible = "qcom,fastrpc-compute-cb";
++						reg = <6>;
++						iommus = <&apps_smmu 0x1806 0x0>;
++					};
++				};
++			};
++		};
++
+ 		lpi_tlmm: pinctrl@62b40000 {
+ 			compatible = "qcom,sdm670-lpass-lpi-pinctrl";
+ 			reg = <0 0x62b40000 0 0x20000>;
 -- 
 2.56.0
 
