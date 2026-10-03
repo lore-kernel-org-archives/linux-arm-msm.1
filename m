@@ -1,64 +1,64 @@
-Received: from mail-qk2-f41.google.com (mail-qk2-f41.google.com [74.125.230.233])
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E42BF3BB9FD
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.233
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D520C49E154
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791050228; cv=none; b=QU0S1Tz27BpIbBYIyJpWj3QEeodxg1YPNMhmHarEqFvQtTJlu1yxsgH2MfpfS4TTX3Jewu+i1l1ds5wXBZNpjR42tn9EPPDiqDxv1P5zS3ZjyhRASPnKjn341Yd2dWvGbAoBwbOR3gDFVy4e2DwBN5eaW6GLau5ouF25ges0s18=
+	t=1791050230; cv=none; b=qwpC15w6d9T/+myH1m3hkelzmNcZ7eneYEGi6ZEanrY/m8Kqb9+Qfq2QIZuUKrFmDrFLivtg9yMU1f9YGfhi49w2b+o312p1P2CWOXtAtD/pjJ9IZdRJyu2n68qhVoquzNpjwwaGIaq1pRJKL1LhQ/zbaMoc6HmVwRNOj/MtFp8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791050228; c=relaxed/simple;
-	bh=szPuGGTtfUj84/35ZxpkmuH0DFT+TU6Kk8qqWgkV31w=;
+	s=arc-20240116; t=1791050230; c=relaxed/simple;
+	bh=E3tyehOB9W9Nl5Yzv6CfUNAfqt/mgkcRmqeKsC2PjQo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=O5kMMMZO2ZFk7GeynBprc6vHYQNf+5P2alcBh3VayWyNs1iUdFbYUsfdWb8RUwDdOnnTVz1UKzMIyv8JClKUMgEwHlkQOO6IKa5+edLOh3B2hHtvLSh1SpuVpDpPwr1oFpxRji6y1fMQjyt6vF/l5u7G08LU1nLecw2R4gjbCj4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=McQ5dTlF; arc=none smtp.client-ip=74.125.230.233
+	 MIME-Version; b=Y46gYDRpkWjlpJMXBR92sVODCYxQxfBaav1qGoUDI9NS269iqLdaNeX3qUbSTWdOkgzAoVt4dGBkrI6ijk1jey3GUsr1tMZoeyN7VJqgIT7wwORemKV/Qxv8r4zQzAMOxykCqH8FMhlgWmUwUwJCj907A+aVa/5rECmLagHE91M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kEZGQzCT; arc=none smtp.client-ip=209.85.222.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="McQ5dTlF"
-Received: by mail-qk2-f41.google.com with SMTP id d75a77b69052e-535092f91ecso4355441cf.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:06 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kEZGQzCT"
+Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-93e5f819884so14247385a.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791050226; x=1791655026; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791050227; x=1791655027; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wfFIZHmAXUfUmZxw3uiwbv0WXisyRuRAzyViuEdezC8=;
-        b=McQ5dTlF/jo7QBq369fX4mVlvuzNdQmwhcNH375qu5Qz196zGNfMBvYNVJ9KSFnfWW
-         n1TzjupnRUu4lxb4gQqigEVR/9DHM6HJMkR0ogU+EX31kw1IS98LLOOqSPSkcww44SHB
-         lg6OiuIpB+QX/zxumUGrTwSjcSCCcx0Z6hpRGtlQYo3kQE132A03T4hDZNKJ9eP37q/o
-         FViVfwVVUVJeb58JKtlqyFZ0w+tqA584mlRkjB5c7NFL7FRNjnkakHmsZ49LEFgoBoa6
-         Slu6uJAv+xBiL4hlFcW+hBjFIJ31rApUnpA2Pvn/IvG0gGIm5A6uOJdKWwkb0hcTcBU4
-         0XNQ==
+        bh=vL3sTY3IXitdlnsmUfvR9Xp3a/Fbw5FtYRtALDNoULo=;
+        b=kEZGQzCTESpYFJNvGfSXIZ/wqWtxmC/VgLMeAN4s9F2TQIEacrwlkc1rxANW3aU7W7
+         bcO5wEz74ImnfjtCOhlElEy9QDyATLOP0H4YR3cUSz1zaCx3nnEcT9WALApMfvE2XevM
+         6Zqe3bX1ogA0ppM1s0FkpwT7R4KHoTN1zCSewGrtGBuPK/1OCl13zgus3brDiiY7Duct
+         koNLDlmbk6idk2lGnXol8gIKuDxdbb9347pQx3KWowt3WmKtOUVhUCn5WHnIisp3z5th
+         L9CTKhvliu4CF3FY8XFnDX+PNkWA/eQJ/I73RZgQ+u144RiVa150qjrtV8Sv1Tt0TZ1m
+         q7PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791050226; x=1791655026;
+        d=1e100.net; s=20260707; t=1791050227; x=1791655027;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wfFIZHmAXUfUmZxw3uiwbv0WXisyRuRAzyViuEdezC8=;
-        b=DpirH+0YQXgtSHa57pr0mxiMFLiZUI5G0TGAzOpfJxKPp0qgxuKzQ4KCaWXFKs8c5G
-         ybraRjKfIRav8FbIMo7G2P0ixdeFf+PzPr0aG1ZO5x/rWJ/uwCe0l8C1WjyZOVtKU7bm
-         +AvwPbKZOucQq4M5kaZ1nGRtTNpQYqwDPbpJax9jc8mLibhG6RVNEIGHdsdUtztehNqT
-         XPfgC8MenWdMqn4bU6QOpaSRDwO8jNJqyekEKd3FBH/OuHqbODbfItLP2NC2bTjn18MP
-         +gIgs3RAKSqjDS0eg9tjc9OSfk4j6YULxYUVDJlpFHkh0c5/eWO1ahpc3riUAwYQTzFd
-         nkvw==
-X-Forwarded-Encrypted: i=1; AKwUvByrjMAnkIdBtRzsExrSXgHnvmiP8Zj/SjBUwdHw4RMVkPuwXZk3dkLiCOtkN4oxIBbPDJq9fOlYtzgAj0Ii@vger.kernel.org
-X-Gm-Message-State: AFuF++luZlke+nqJAsZbCWb6x5JO/GUZF9V4yRcsYqRi3r5l993NibUF
-	dxYQHBYSuKuAfleW9vZWdqml6faFbOhrNmaI1WP+sX2KkCFklTZd+fXP
-X-Gm-Gg: AYBFou3HaMCeUam6S/1ZMP0KwzY83/ZAvcsfLbMnp0sFozB8tQjZmJF9+5rqNGrHde/
-	gNTcnZoWkjWNoLPqz2k4rVxN2xyPAxl3fAzRTdtrKk+izv7+WPVFBjRJSP1QZin0dYfU6L9KqLN
-	zRpM8f1COY09iQENzVDaAWyAxY7uFUKG1mLvyUfYTwfO4y5rZOSCdUj/6qjf4fgZ8bCD19xF8NN
-	KWCQ8sI4R1w2YX7NnMKhgJX/YacpXTp8WSLxVM+NrFLEXO4e3GxHQD+KFsJURMD0d1azfaezCbQ
-	qcPv7dcPgUhaAj3PaGssBczNJpSfyh6u/PHHry+rRW9LcNp8xeFicg3FoGEETRD2Iw1ek+wrKz8
-	hNQeoae4kW1z8jyBaRjxlvSmVykNgykOyMSuCfVQKtKPZB1WlhveU+qDx2nj1SQp3qqjBUeZgpM
-	GOuAuw5kVYlcwbO6Nz1oPc2/NiXuIgGpRivv57hpLoufYmmiarRFZUOeozEh6fly3I6nX7aEv7z
-	aE=
-X-Received: by 2002:a05:622a:4016:b0:535:15a9:2516 with SMTP id d75a77b69052e-53515a929f7mr42274571cf.53.1791050225789;
-        Sat, 03 Oct 2026 10:57:05 -0700 (PDT)
+        bh=vL3sTY3IXitdlnsmUfvR9Xp3a/Fbw5FtYRtALDNoULo=;
+        b=AvZCoVVJdZRakiTGUD7U2lanaQLqmMNwwTdEWFdLVxORpyw6fEhoFHmMcA6boUPl/3
+         JT/YY3OucKSk4bAOnjSRpHPEteO9xMLshRY7j5GkCHmw+8BxmJSdL4wHjq/ULbHDybGm
+         86zc+xBFDpEoQgKy0HA5iWAp7VIIGg+bL/qPKipF39z4PLMZhOAIXOIx0Wbiog+O4E9V
+         KXAr6QbeMWVIeom5d29Hxptuoe3pH1invDV3pAuVq01Zkg7Ptbr1TYzvOr3mnFiSUdlw
+         CkRSX9Nr3iSH+oJKdMeqlcNmzSeVybCgqHtyHIUAXJGYsUc13hjC3GismEGIIgIhfBe2
+         qQMQ==
+X-Forwarded-Encrypted: i=1; AKwUvBylmct29OeVLCe2BPzDx8joqX7EBYqhsIkJ2gTnl5BMtoL+1Xb5BIYvD5Nl3tXbz8rwTBCvWso7e7WE4+Hw@vger.kernel.org
+X-Gm-Message-State: AFuF++k8m7OySZ2q4zediqFM5Srdg7M9xJSoXkz0HkLZL86vEvw5/oHU
+	h2aPPFKOBZx0Be1i9AfbtG8exWnvkSY9pLPI9uchDk4jawrr5HrVaf1dHVEbRw==
+X-Gm-Gg: AYBFou1OyU6QufZxJndZW6xSvTL5hnafUIIu/7hjPtLYoqKmz5Mt0DtP1Lt+EJD4XrV
+	uE64aK4ixSYbZGhrACfs0+sLhnBnXx1oPOq6J96+AYR7OEGbbwxzGUcF7m9eJCby0fTTxLfCv4y
+	7wwAHdmkqtJT/cXfHjH5ZAGs/sSlPZ5+1v5FnYQYw/65+XNhA+BGZXd6C/9GojJMlUvJVZDOG/7
+	HOQeizKuG846rfnllsSTqkXpaQwodYV/zxb/6Cx3BQNUVPLOSVrphv4eqRZboJGDYQiG9+SAtRJ
+	Bjb3InF+xjFxZuXxZ+flRyVxWp4Ik+clC3KSEbLybceSg+ln+kp9G09LKHm6yk07EWjWEUh/rlY
+	cpzya2Y0189PFfVpwGoXHSPkK5yLL+iURQ53uKPFFSdZuYg5nXPMysNyFCQFx3NxUCfgFpBP0Ly
+	NpIb56PP8R7UDNWxe3SNHKzmaxQUvtceJYWAJBDLZXiltKvrd45JEsJcHIWjSyS3WH52aApMyF3
+	Q==
+X-Received: by 2002:a05:620a:28c6:b0:939:13a7:70f0 with SMTP id af79cd13be357-93e50e08351mr557059385a.5.1791050227622;
+        Sat, 03 Oct 2026 10:57:07 -0700 (PDT)
 Received: from localhost ([142.181.121.230])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-917e0b685basm49294306d6.22.2026.10.03.10.57.05
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93e4e5b8c55sm283382485a.16.2026.10.03.10.57.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:57:05 -0700 (PDT)
+        Sat, 03 Oct 2026 10:57:07 -0700 (PDT)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>,
 	Rob Herring <robh@kernel.org>,
@@ -78,9 +78,9 @@ To: Jassi Brar <jassisinghbrar@gmail.com>,
 	linux-remoteproc@vger.kernel.org,
 	linux-sound@vger.kernel.org
 Cc: Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v2 02/11] dt-bindings: mailbox: qcom: Add SDM670 APCS compatible
-Date: Sat,  3 Oct 2026 13:56:50 -0400
-Message-ID: <20261003175659.23536-3-mailingradian@gmail.com>
+Subject: [PATCH v2 03/11] dt-bindings: soc: qcom: aoss: Add compatible for SDM670
+Date: Sat,  3 Oct 2026 13:56:51 -0400
+Message-ID: <20261003175659.23536-4-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261003175659.23536-1-mailingradian@gmail.com>
 References: <20261003175659.23536-1-mailingradian@gmail.com>
@@ -92,26 +92,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the compatible for the APCS in the SDM670 SoC.
+Document the compatible for SDM670.
 
 Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
- .../devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml       | 1 +
+ Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
-index 39bc374300c3..74f24e07abc3 100644
---- a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
-+++ b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
-@@ -50,6 +50,7 @@ properties:
-               - qcom,qcs615-apss-shared
-               - qcom,sc7180-apss-shared
-               - qcom,sc8180x-apss-shared
-+              - qcom,sdm670-apss-shared
-               - qcom,shikra-apss-shared
-               - qcom,sm7150-apss-shared
-               - qcom,sm8150-apss-shared
+diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
+index d2ae2ae87a95..6672f441c20a 100644
+--- a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
++++ b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
+@@ -43,6 +43,7 @@ properties:
+           - qcom,sc8180x-aoss-qmp
+           - qcom,sc8280xp-aoss-qmp
+           - qcom,sdx75-aoss-qmp
++          - qcom,sdm670-aoss-qmp
+           - qcom,sdm845-aoss-qmp
+           - qcom,sm6350-aoss-qmp
+           - qcom,sm7150-aoss-qmp
 -- 
 2.56.0
 
