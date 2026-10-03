@@ -1,88 +1,85 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57DA02D8370
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 00:27:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D43322BD033
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 00:30:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790987257; cv=none; b=A2MiY7jAl5NWQJyxlcq0xJE2gquSQNlbgcUKZ7sBsOpuFkTzjwewawbt9b+sAWtknZo1lI5RiYF8NrSfB6OMy3ZLI7hNYEZ/bL6TdOOKEXE1Bt7Drey6ToZSZOKxCkTwZM8HOA/82qVFV68FRg2IRfq+32TnSBuAzuUWut8eJds=
+	t=1790987432; cv=none; b=MHLs5N6Tv2YOJD3eoBKFtaCZTLWzkCz/wv1HX/bAbdAGlLI7ZZg9TniFY31xtzXMHA81vLm8FUIXHywZiXjqfeTl/yNOo8Rlrs5ZDkRVx26X9vcvuUIWB4LKZ/5dcNQQmD5y+ZvwmlV1ypTtSfgIUKUWB9vHoayeuMLr9KJgGrE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790987257; c=relaxed/simple;
-	bh=mXKVBYToJoPrLb4p3hSAaFS5AuCcufjkDa6V35Zg0sM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=XCgsizuEim8i/RQ+DqvJbzMY8GrzyHKUd7crujFIdD+jDuUwluoez2/N1RdFqRG6UI9KFBbmC+bqN1rJ52K5BOiAKcEWGjK2x8nu+mxAw1W0+rSmV7A6Buc5aAe9JTNua0LPvY4fxSF75uZuisxg4sjPWW+7fCy0MI4kLDRZWcg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TePXfy04; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iYgwFfs6; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790987432; c=relaxed/simple;
+	bh=cMN16U7SznlJjoAgsnRNq7Q7EqhdgohODEvwHj9Ai6A=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ok9bmUArfkEqtC35dI6lpMfd+1pWIKcYcCVK41ReGpuSrrYe3tem8DX2dGOqWvG23juJvnbfM5N9yFsBJeTXNrPzoc/5tnCXr1XnrUnGVUUmTJ8/78c1q1PmuYtFvPxW/GAsoyyB3PesYGD0quimuo6DcfkgbBQl8DYLw8mZWog=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=csbJrZS0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WAFvMQzZ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TePXfy04";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iYgwFfs6"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692Ne2Ae1503824
-	for <linux-arm-msm@vger.kernel.org>; Sat, 3 Oct 2026 00:27:34 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="csbJrZS0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WAFvMQzZ"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 692Ne0FU3883846
+	for <linux-arm-msm@vger.kernel.org>; Sat, 3 Oct 2026 00:30:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gyqt5AdRUlY/YQ93y0b7WfmjMyO1z9nII1C2dDiQyp8=; b=TePXfy04IN2rXJ78
-	jwPq8z8aU3zLkuLCYwDx/0bf/QVwkE6MZBweJFrAOvZF6Ry7G/zTF0qJ+RIFR1Ff
-	zLancNdSjspo76HNJb3jqd+keaAi93mLfRETDUMlghFI2nUbsoIpE7vgvNi/7+D7
-	CJhy1LB8EfQWL4ZXsaKYDG6unCt8kViXvrKWXeSkgsi97kxAETmq/6RINEbVXiek
-	yYT1AY1L+59256g/kzRummgsSyStAAjXSIaJgSugimF6ptzaF6AYeF6SL2KaPdR/
-	VNQdV765aRb/e8rEGbWJEjHaH2RqAVi+PX75nOofAe1gQ5cfjbOzvenW0wmJSeUp
-	/04C9w==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2n2rrct0-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=SpgXp2JKlU4Qn4voExCirU
+	Ei8LPVYYwXD78MA7iOrB8=; b=csbJrZS0oS6LjVraCzzQvj4eWKUNA/O4rV0pWb
+	yiZq8TasRkKNmYIFeeGDn3Mu1yPgWpQK41SHEuVy/+No4BwluJq0YV2SDt8qRyc6
+	Jds2TWwBdG900CJYaEdoW1KeY36ov0VSpWKdUe2xF6G9y6UUVyi9Eqdd5AjG7diC
+	jtoqmnv8ZYQ+pHWogKBL1HZug6m+oJy5jlqjHTiw4sRGgItnuunWZKZblRkkyxHM
+	MUIySvMaMcponX5w0DkmvWCzcBmC0i0UV/pfUHrdhINJFWjmQ8mFC0eJuRTkIK/y
+	+KcDCZ/Y2RF1WNahjnYkWOFhOnBRGGXrpApM4i7sOq3892MQ==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h26bp40vr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 00:27:34 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-9104eedb5b0so10021886d6.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 17:27:34 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 00:30:26 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93ca4a2b9c4so27013085a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 02 Oct 2026 17:30:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790987253; x=1791592053; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gyqt5AdRUlY/YQ93y0b7WfmjMyO1z9nII1C2dDiQyp8=;
-        b=iYgwFfs6tQP5vBVKnJ4QK6Q9UtdWIijhzl+rECQskHlQCBez14c3c5yg5+4mttuqva
-         B/val+Wmf0BMN87FI/i2VFBgyNmw5sUFamZfPMAl8Cuzz0tdpWkt1mT5AkGwzDzg5uNo
-         qM/zu2qQGzrL0bsQz2m5p6v1ml4vDmZymIp/zrh7i+/I0WPkoWObc4Dlybx7JLyDoaJ2
-         Piur3I4Hdhtcex/Y59DopXQoaoWVLbaJk/+BHuM307udCpEjklaWswu4DvP3yUOQ80Nr
-         DFEXD/SGSgc9yYTXdGVDio3Qx7K8W4/5DEdIYnbqI1lW/R1+SX49Jn4Ly0O5eaBYib2r
-         eT5Q==
+        d=oss.qualcomm.com; s=google; t=1790987425; x=1791592225; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=SpgXp2JKlU4Qn4voExCirUEi8LPVYYwXD78MA7iOrB8=;
+        b=WAFvMQzZ/r/M+uIFxbFZX0/TUMsB4QCS2Htr3UZsmL/ZvmeGiJKDOldrbMl5fW/H30
+         GtTH9aDDKDi8/Kme8OTBc1DBxved11CUiTpeHTjme6ENGe1hDL+SvkpEHPAmRCtUzGtl
+         Dj4mkiXAzPGpoC84RLTG+8cnnadHtxmYeHn9ZlTAc3cCTgRvAmitQuEjlq+ddyxLlfJK
+         zl9c45HOwt3HiJ5zDBm6JSE+mzKIAxbWXP8iT+C8a2sknTsJKXxL7ujkO6BbsFzWSWHH
+         KAgMkeprSwk4TKVS/SAW0BHUrTX3J3zilEQu/LmJxqA08mjUBc+LxZaHGu97zJ2gGIcL
+         4npg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790987253; x=1791592053;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gyqt5AdRUlY/YQ93y0b7WfmjMyO1z9nII1C2dDiQyp8=;
-        b=HvVZVc99lMJmWZR2CIEJXX2hiFlDbnmzumVYZaSio+80ENqA3wSp965SsRbhRUaUBM
-         TN1bMC48Ew0PMofL4qmp3mAnP36U/XHPI83M2cG3sLiCnzg750Jl6nunnMOAkygSb4H0
-         gSZtEk9K2UPkdxrJyI5/6jMGtMl9rhU4L4hH9ublAqNqDc2fc3Ku/ncjRgQqRQm0huiU
-         /dXWN09r6qwqvYn47IjvC9x078Gp2PHR+6mnwsuT1FbBdl+bhuhUD90+4xIX9Pa0wbVs
-         1T0VLrJUSkH8BKAJzlifsS4uTKLoCzfijvd9IUVXToRv841CprDD3eFaw7rFGUephdoc
-         4XmA==
-X-Gm-Message-State: AFuF++mwYyhNrkb1kzJ5By7+XG2+6C/PjbdtXpIBiSWnLVGnUGODu+1l
-	p25DYUsuPiEUWXGDDVhFCzp/kLtbrXuxLPHx0Im9uvcCwsHVZZa9ClzQTy+eav50MpnDfR+ExtH
-	Ppc/poXbrT/kIvOZp+NN0fIEO1A8hvWVW+rUbg1XcbYBXKm0foVcee2EgBwXRAdMMyvpf
-X-Gm-Gg: AYBFou2NsNbBqFTzEdeA0Jzh6WXJ1R1rAMVv28vown15eiIk3hp0xRnnCQOpvJWxFcS
-	ccEsqSNaDJP+o+bpwrodN0/wcIRmHXA/o/JpbkePJRg+BEZjUrNor7teOX/56xueNuUG9PBDL08
-	9iRRnfnAyu9Y9rFR8ZJLQVK27eovlfEnnX2D0lx7dtCE4kgKNo0B/sklRNKA+cp/R8o9/zQ3oCn
-	CxqFmWJX05e5dXutViCT9kD0v4EXKl5+xWDaq3PyiK1Ur/+ryLw33opsMYf9ihZxKNS1asY/v3j
-	68rWaO3v08wIjn00i4iFb19cJp5TBVdb0K4JK6PtbMKF7kVtjlFkUkwpV7lWeu03CYydrhSR4DX
-	HOz/LYzjakx14Ro3zqiI4zuzLnoBdudZzsesRW//j5Nk8CtR5TknylXjfPknlEV8u/ED4oFqamD
-	IIyzco+yMHe8ta
-X-Received: by 2002:a05:620a:460b:b0:93c:69ac:bbec with SMTP id af79cd13be357-93e510389b6mr220242385a.38.1790987253061;
-        Fri, 02 Oct 2026 17:27:33 -0700 (PDT)
-X-Received: by 2002:a05:620a:460b:b0:93c:69ac:bbec with SMTP id af79cd13be357-93e510389b6mr220238585a.38.1790987252574;
-        Fri, 02 Oct 2026 17:27:32 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790987425; x=1791592225;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=SpgXp2JKlU4Qn4voExCirUEi8LPVYYwXD78MA7iOrB8=;
+        b=Kg8d+sw1IEpp35rF63PWCbUnZ/4x6S90Z1vmrtTsgGi1NEom7BbfTMFXMI3GCyejmq
+         J6aQJ+Qv5E1YdHW8N/OEdZ5vVtOJ5GRh54VG+DHs4lhkkOOL/5jt3kJlxiTDDrhTqwly
+         bpxlsVuXl/oLy1X1CTzeMWANaKaiao+wBAn/RoYznLsp1dgqz2MommsRZ63vw+TT33u3
+         HMRrZ6cTgka4O+lvKz+gM+L5cAOFTUETjivaozg5IDrJ57lbwjyahkI2z1ZKpVAM0BPO
+         H1zywdZu/kW8nFn0FS/ZPwvuMQWW0mHJ6MX9xhQlRd3TbW3ZDcZNFUVp3VRs/77HBGNN
+         gT4g==
+X-Gm-Message-State: AFuF++mGchYHb+ng3A3NhsmFku+NOZgwtpRbmGO1sa+ytDvYJPMkSLia
+	c1Q0iGVb7rp9WDrFBJhsX+9fhzV1Lx+t7iqGwGJKa3FtEhTn56Euuo6BDRGAWseUEvrgVn+gcf6
+	M7iM31Zne3qfP6AuSp8c0blpPYMEaw8gRxzxQ7S0YRbT8Hs8A9yOJoG5hkKr3eLHWoZk8
+X-Gm-Gg: AYBFou0hr4UYbMDq943IG/itjZfvGc9IzELEFPi+B77nW2tV1i+cplziVrWxVImLyB3
+	g0ZLZJdx0NHjKYhy873WVvzoNgamOAUCcPOKEvxPZnWUpsB+cyWOdFnUV5MJB56yiRZEjKIrD3D
+	YkhmcWvjgSGRFkLQn+RCE7mKmA1/QPO47n2+Yv0rLEtZux62lzM+a2qwsqLgR0waKOp5NwBfw+J
+	fBGLhMHnQ43vql8wHfu+4yrQkb6P86853WQMY9BXqJTEZl3TxQ4KW0AaUqLykIquOAm+YExphTl
+	1mEhbQGl5yjkGkIK/iWJmegL/DPPCX2BAMm/ltEksbOu6605DZFP1gJ8ElHlzHSs3g5/aHwolRB
+	EUapES9ABlT3AItziMVWhRUh5Hju6IakV0bzoi+fO67LK7D/gbXP2KN6bq3iQef6wuhiXxyqCho
+	J1YiGRYafeHj3u
+X-Received: by 2002:a05:620a:4385:b0:939:9f51:29a0 with SMTP id af79cd13be357-93e510819e4mr206416285a.50.1790987424945;
+        Fri, 02 Oct 2026 17:30:24 -0700 (PDT)
+X-Received: by 2002:a05:620a:4385:b0:939:9f51:29a0 with SMTP id af79cd13be357-93e510819e4mr206409785a.50.1790987424390;
+        Fri, 02 Oct 2026 17:30:24 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb86e68806sm1120705e87.4.2026.10.02.17.27.31
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7c7957d0sm1133979e87.31.2026.10.02.17.30.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 17:27:31 -0700 (PDT)
+        Fri, 02 Oct 2026 17:30:23 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Sat, 03 Oct 2026 03:27:19 +0300
-Subject: [PATCH 11/11] drm/msm: drop the runtime PM flags from the KMS
- teardown
+Subject: [PATCH v4 00/10] drm/msm: fix SMMU fault dumps
+Date: Sat, 03 Oct 2026 03:30:15 +0300
+Message-Id: <20261003-fd-kms-fix-smmu-v4-0-2a44d4d8ac77@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,189 +88,199 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261003-msm-kms-destroy-fixes-v1-11-e062b7dae77f@oss.qualcomm.com>
-References: <20261003-msm-kms-destroy-fixes-v1-0-e062b7dae77f@oss.qualcomm.com>
-In-Reply-To: <20261003-msm-kms-destroy-fixes-v1-0-e062b7dae77f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAJhMwGoC/3XQzW7DIAwH8FeJOI/OfIwmOe09ph0gkJWtJCsmU
+ asq7z5IKq1StwuShf37y74SdNE7JG11JdHNHv045EI+VaQ76OHDUW9zTThwBQ1w2lv6FZD2/kw
+ xhIlyK43WvVRggOSp7+jy3yq+vW81TubTdakwt47oTlOOSlvbb1JbbTkCaMCwBlmHKY4XuqIUe
+ pCGWdGYWrQzK5zR6Gg3huBTW+Wp5zI5uHMiJf7gMY3xsu6X+0vabRXxsMrMKFAFtQUuG6aUeh0
+ Rd6dJHwu/y89KzvyeqR8ZnplGNKxmL3vJdf0PI+4Y9njYWWRG763tVO84CP4HsyzLDw+yspPCA
+ QAA
+X-Change-ID: 20260902-fd-kms-fix-smmu-2d4baaf460b0
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
         Dmitry Baryshkov <lumag@kernel.org>,
         Abhinav Kumar <abhinav.kumar@linux.dev>,
         Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
         Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Antonino Maniscalco <antomani103@gmail.com>,
+        Kalyan Thota <quic_kalyant@quicinc.com>,
+        Federico Amedeo Izzo <federico@izzo.pro>,
+        Helen Koike <helen.fornazier@gmail.com>,
+        Vignesh Raman <vignesh.raman@collabora.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>
 Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4721;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6804;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=mXKVBYToJoPrLb4p3hSAaFS5AuCcufjkDa6V35Zg0sM=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqwEvh672QUDihEaHzfnfmjxcZOhm+wbZYSBezg
- 1Y8NXqsifSJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCasBL4QAKCRCLPIo+Aiko
- 1U4KB/9PP/hgZRnuOBFK1jSfU+2usiu9jSM4/egWc3tPXf1VS+9SCUM/LWdxTf+lw+mlFrZcbTR
- YWAwwdXWcJGcXex4284vU9V7li/rAd7zp3D7SP+4ENvjPSaf0dT74oxqGjuTr0gg2vBVRt3wo5S
- 7jCyRUk0GbzRm68W+ZSt26UZIv3IelXIEvEsBTa/KNU8r/E4oBhGosdINTLfjpW0rEoiNGnfIyS
- QgdEgDKdin3kw9K7PEnQ6Xk9dphM2p7FExQIcFA9eP0WpDV1jnChHXykgVi79t0usVfzXuW+g7D
- 8LEEs8z40ItTnWaeaRoK7yDbC49H4hKcMpR1Qhf0M+pJY9pm
+ bh=cMN16U7SznlJjoAgsnRNq7Q7EqhdgohODEvwHj9Ai6A=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqwEydELt9W1KZWb5N4SxhgX8cKatEzXA0F3TOU
+ WAchP5celaJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCasBMnQAKCRCLPIo+Aiko
+ 1aiUB/9t5BUdVbeXJv1x8aYQaxBGPsFdXeOpUlWJPsyJHqrZBqRju7MP3FLhpu4yQccebbMeXxQ
+ 7uip2bYAQGaQfegZL0WiuGdn1Gf+pgv/83pnAzzJZirWWv83Y+AXyGt2JsVo+100Jl9WSPX30xS
+ sFepFBKQsgs9fCgLONNUcTVw8IDZoW9OEft/oIq5I9iLJkojkIAFSL2Y2S7zLbV5gK7T8RwqF57
+ Oa7UpTYy0htw+AOY8EdZG94x03Q7Rje29GoUersdI4j2f9wPYGfxlyEsu4+XAaRJWNvo9sNc+Vh
+ udOErtzlYEFjX10HZwdcNOIPrW1Tt8uwWMz5TfVSgLsipeSj
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Authority-Analysis: v=2.4 cv=d/VgWhjE c=1 sm=1 tr=0 ts=6ac04bf6 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Authority-Analysis: v=2.4 cv=OMqyTiaB c=1 sm=1 tr=0 ts=6ac04ca2 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=Yohvr2p7PhcuVfY586MA:9 a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-ORIG-GUID: 9C9GIWfqmdLrFEjbbWAHwVqWz9giWa52
-X-Proofpoint-GUID: 9C9GIWfqmdLrFEjbbWAHwVqWz9giWa52
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDAwMSBTYWx0ZWRfX1/eM1NwYypHd
- 94fAC2LzKZdvGCwYAtq3vc9X5daOdBL3ZnhIFZziQMgUVRyPBq3pO07pB9qhxeoUGoun0kniPNC
- 4A40cv8GnzK5a1tdagPxfr2/rL8emj0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDAwMSBTYWx0ZWRfXxBE9dvSPDy24
- 0K2RAgtrF48wINxzkx+jOVc91UTPXRwnzBW9GOP8cPYh8r9f+Kzbr1OBTlEQFhYN0xjpWVq6n0G
- fy46nVXN1XMrDT9gE0JImIz/QWfoeKNiqzWYWHX1ADF+pfi/XkiWgwvfClFjA5TLdVGcYjLRKtH
- zdH/vxil535SzyCfLoWVexN3P+k6UBqVe/WlaB37pOULIOWp2MeBXypuQw0XawuyLELrdxfgzPu
- GdadfMZoLPc1kyLq7iRSD6kA29zaQHrvko+mZfJYhv0txE+Y4Gp1fTuZYV9NSodIzDvaZ9+iT+H
- yUDs58JVRUTR2tX79JuFICMrjgboNX5cpHgqvYpbYNtLwU0jEVEt4Bk2KfvAHUE9IaOYo0kLwxM
- Kv6q3RgKphEh9s/WrjvVVY6Uw/i8h1RYzweYp4/lVymKQkrdOToA7p2A2Gf52ZlitzQ+E15Vk+B
- r3x0270BuSYccs9e5/A==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=tVI0ZWmoAAAA:8
+ a=COk6AnOGAAAA:8 a=QX4gbG5DAAAA:8 a=QyXUC8HyAAAA:8 a=e5mUnYsNAAAA:8
+ a=4sOadE_VeMAIZtfLjVIA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
+ a=FO4_E8m0qiDe52t0p3_H:22 a=-BPWgnxRz2uhmvdm1NTO:22 a=TjNXssC_j7lpFel5tvFf:22
+ a=AbAUZ8qAyYyZVLSsDulk:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-GUID: 4nWPuEaAmpPP0w1j0m3hg295dRSGTq4J
+X-Proofpoint-ORIG-GUID: 4nWPuEaAmpPP0w1j0m3hg295dRSGTq4J
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDAwMSBTYWx0ZWRfX8Gg3Cj3mHAYc
+ KO2SYiNgyt++7kyK0iu/yJZQUNn8poGdpyKxG0x7dWvDUIsx8LxfReD8CjVXYRFL4ef/HWosWSe
+ 6PGSvN8qVENBrQYOz5y0x/DallSWnWw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDAwMSBTYWx0ZWRfX4UgT7/sSoSAa
+ xdMUAZPLv63vAYOE9PQb6FzGGqwc1msfuz8B7U97eIHWFzBqval56p9BkwLtQmQOkw+dYIhpCXq
+ hTG+xrNY3CUfq1i3+my+CF7OyeVDCWix75x+r9SST/DJDBTJ7aj0+kRjBBMVSfvkD3F7Uuz+/OV
+ yPv2pvJ+pnju+9NDTis1+/LcNAZVdHsuVF/6/rIIbsbZD1dKCD7EmPXZipv9wVDnnwKQazTc0Rr
+ yz7Q3HC2Ve5+OB7UtUwjviFVIymhnSwgHDFJowHMSGV11jcxKu27snBn35zUWKxL32McFBZKE6T
+ SMRe0KMFF9/RyppE92n6spFSwTr5BxWqQsqKWLOBhOFfeL4zxLnzBvEe/cZV+DOLQpwLRdO7Lix
+ GZPbXZGZLksLXiSb9M1sn8RrTZUSnHUL2vNwXknm4b0rjMSM5syPuHvpH4olmanWfow72y7Groe
+ e4y91sdgA9meXeHh9nw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-02_07,2026-10-02_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 adultscore=0 bulkscore=0
- priorityscore=1501 phishscore=0 spamscore=0 clxscore=1015 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610030001
+ malwarescore=0 adultscore=0 suspectscore=0 impostorscore=0 phishscore=0
+ bulkscore=0 clxscore=1015 priorityscore=1501 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610030001
 
-The DPU, MDP4 and MDP5 drivers track whether they have enabled runtime PM,
-and MDP4 whether it has pinned its blank cursor, so that ->destroy() can
-tear down a KMS whose init failed half way. ->destroy() now only runs for
-a KMS which was initialised successfully, where both are always true.
+In several cases the drm/msm can cause an SMMU fault on modesetting (due
+to the display controller still scanning the BO which is being
+unmapped). Fix the cases which I stumbled upon, together with the issues
+found while chasing them: hardware block pointers surviving the
+reservation which handed them out.
 
-Drop the flags and the checks.
-
-Assisted-by: LLM
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c  | 4 +---
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.h  | 1 -
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c | 7 ++-----
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h | 2 --
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c | 5 +----
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h | 2 --
- 6 files changed, 4 insertions(+), 17 deletions(-)
+Changes in v4:
+- Take the framebuffer pin lock with guard() instead of unwinding through
+  labels (Rob)
+- Move the fixes of the KMS init error handling, including the unwind of
+  msm_drm_kms_init() from v3, to a separate series, which this one now
+  depends on
+- Add a retired framebuffer to the pending list and schedule its release
+  under the same lock, so that msm_crtc_vblank_off() cannot free it in
+  between, and track whether the vblank is off next to the list rather
+  than reading crtc->state, which a later commit may have swapped (Sashiko)
+- New patches, ahead of the DSPP and DSC ones: clear the CWB and CDM
+  pointers left by a previous reservation (Sashiko)
+- New patch: flush the MDP5 interface before starting the timing engine,
+  otherwise the first frame after a re-enable is fetched from the
+  framebuffer scanned out before the disable (db820c)
+- Link to v3: https://patch.msgid.link/20260912-fd-kms-fix-smmu-v3-0-a7ddc6fe2032@oss.qualcomm.com
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-index 2de4d881d13d..9756ebcce1b1 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-@@ -916,8 +916,7 @@ static void dpu_kms_destroy(struct msm_kms *kms)
- 
- 	msm_kms_destroy(&dpu_kms->base);
- 
--	if (dpu_kms->rpm_enabled)
--		pm_runtime_disable(&dpu_kms->pdev->dev);
-+	pm_runtime_disable(&dpu_kms->pdev->dev);
- }
- 
- static int dpu_irq_postinstall(struct msm_kms *kms)
-@@ -1306,7 +1305,6 @@ static int dpu_kms_init(struct drm_device *ddev)
- 	dpu_kms->dev = ddev;
- 
- 	pm_runtime_enable(&pdev->dev);
--	dpu_kms->rpm_enabled = true;
- 
- 	ret = dpu_kms_hw_init(dpu_kms);
- 	if (ret)
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.h
-index e39831a397b1..769b8ce6332f 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.h
-@@ -87,7 +87,6 @@ struct dpu_kms {
- 	bool has_danger_ctrl;
- 
- 	struct platform_device *pdev;
--	bool rpm_enabled;
- 
- 	struct clk_bulk_data *clocks;
- 	size_t num_clocks;
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-index 8529e7b2008d..daca49641811 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-@@ -128,14 +128,12 @@ static void mdp4_destroy(struct msm_kms *kms)
- 	struct mdp4_kms *mdp4_kms = to_mdp4_kms(to_mdp_kms(kms));
- 	struct device *dev = mdp4_kms->dev->dev;
- 
--	if (mdp4_kms->blank_cursor_iova)
--		msm_gem_unpin_iova(mdp4_kms->blank_cursor_bo, kms->vm);
-+	msm_gem_unpin_iova(mdp4_kms->blank_cursor_bo, kms->vm);
- 	drm_gem_object_put(mdp4_kms->blank_cursor_bo);
- 
- 	mdp4_destroy_vm(kms);
- 
--	if (mdp4_kms->rpm_enabled)
--		pm_runtime_disable(dev);
-+	pm_runtime_disable(dev);
- 
- 	if (mdp4_kms->vdd)
- 		regulator_disable(mdp4_kms->vdd);
-@@ -438,7 +436,6 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	}
- 
- 	pm_runtime_enable(dev->dev);
--	mdp4_kms->rpm_enabled = true;
- 
- 	/* make sure things are off before attaching iommu (bootloader could
- 	 * have left things on, in which case we'll start getting faults if
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
-index 06458d4ee48c..9dd829ec9401 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.h
-@@ -34,8 +34,6 @@ struct mdp4_kms {
- 
- 	struct mdp_irq error_handler;
- 
--	bool rpm_enabled;
--
- 	/* empty/blank cursor bo to use when cursor is "disabled" */
- 	struct drm_gem_object *blank_cursor_bo;
- 	uint64_t blank_cursor_iova;
-diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-index 80bb6ac56618..af9ac108c06c 100644
---- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-@@ -574,9 +574,7 @@ static int mdp5_kms_init(struct drm_device *dev)
- 
- static void mdp5_destroy(struct mdp5_kms *mdp5_kms)
- {
--	if (mdp5_kms->rpm_enabled)
--		pm_runtime_disable(&mdp5_kms->pdev->dev);
--
-+	pm_runtime_disable(&mdp5_kms->pdev->dev);
- 	drm_atomic_private_obj_fini(&mdp5_kms->glob_state);
- }
- 
-@@ -729,7 +727,6 @@ static int mdp5_init(struct platform_device *pdev, struct drm_device *dev)
- 	clk_set_rate(mdp5_kms->core_clk, 200000000);
- 
- 	pm_runtime_enable(&pdev->dev);
--	mdp5_kms->rpm_enabled = true;
- 
- 	read_mdp_hw_revision(mdp5_kms, &major, &minor);
- 
-diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
-index 7bf2172fce0b..c0b163c4baa3 100644
---- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
-+++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.h
-@@ -62,8 +62,6 @@ struct mdp5_kms {
- 	 */
- 	spinlock_t resource_lock;
- 
--	bool rpm_enabled;
--
- 	struct mdp_irq error_handler;
- 
- 	int enable_count;
+Changes in v3:
+- Initialise the framebuffer's lock and dirtyfb count before
+  drm_framebuffer_init() publishes the framebuffer (Sashiko)
+- New patch: unwind msm_drm_kms_init() on failure rather than handing a
+  half-initialised kms to msm_drm_kms_uninit() (prompted by Sashiko)
+- Drop the pin count from the deferred unpin work rather than from
+  ->cleanup_fb(), so a framebuffer scanned out by several crtcs stays
+  pinned until the last of them has passed a vblank (Sashiko)
+- Defer each retired framebuffer with its own drm_vblank_work, as i915
+  does for cursor framebuffers, instead of a per-crtc drm_flip_work: the
+  release no longer takes a detour through kms->wq, and nothing needs
+  setting up or tearing down in the kms init path
+- Release the framebuffers still pending on a crtc by hand when its vblank
+  is switched off; its interface is already disabled by then, so no
+  further vblank arrives to run the work
+- New patch: clear the DSC blocks left by a previous reservation, the same
+  bug as the DSPP one (Sashiko)
+- Link to v2: https://patch.msgid.link/20260908-fd-kms-fix-smmu-v2-0-9391815742a8@oss.qualcomm.com
 
--- 
-2.47.3
+Changes in v2:
+- New patch: lock the framebuffer pin state, it was updated locklessly
+  (Sashiko)
+- Do not defer the release on an inactive crtc, it was leaked there
+  (Sashiko)
+- Flush retired framebuffers from msm_drm_kms_uninit(), before kms->vm is
+  dropped, and only for crtcs which have a vblank work (Sashiko)
+- Clean the flip works up after destroy_workqueue() (Sashiko)
+- Fixed the long-standing issue of the msm driver roguely setting
+  allow_modeset, which started to manifest in timeouts and SMMU errors.
+- Link to v1: https://patch.msgid.link/20260903-fd-kms-fix-smmu-v1-0-608d02491666@oss.qualcomm.com
+
+To: Rob Clark <robin.clark@oss.qualcomm.com>
+To: Dmitry Baryshkov <lumag@kernel.org>
+To: Abhinav Kumar <abhinav.kumar@linux.dev>
+To: Jessica Zhang <jesszhan0024@gmail.com>
+To: Sean Paul <sean@poorly.run>
+To: Marijn Suijten <marijn.suijten@somainline.org>
+To: David Airlie <airlied@gmail.com>
+To: Simona Vetter <simona@ffwll.ch>
+To: Antonino Maniscalco <antomani103@gmail.com>
+To: Kalyan Thota <quic_kalyant@quicinc.com>
+To: Federico Amedeo Izzo <federico@izzo.pro>
+To: Helen Koike <helen.fornazier@gmail.com>
+To: Vignesh Raman <vignesh.raman@collabora.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+To: Maxime Ripard <mripard@kernel.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
+---
+Dmitry Baryshkov (10):
+      drm/msm: serialise framebuffer pin state
+      drm/msm: fix framebuffer pin refcount leak on prepare failure
+      drm/msm: release scanout framebuffers only after a vblank
+      drm/msm/mdp5: flush the interface before starting the timing engine
+      drm/msm/dpu: clear the CWB blocks left by a previous reservation
+      drm/msm/dpu: clear the CDM block left by a previous reservation
+      drm/msm/dpu: clear the DSPP pointer when no DSPP is assigned
+      drm/msm/dpu: clear the DSC blocks left by a previous reservation
+      drm/msm/dpu: only reassign resources when the encoder is reprogrammed
+      drm/ci: mark pixel-format tests as passing on SC7180
+
+ .../xfails/msm-sc7180-trogdor-kingoftown-fails.txt |   2 -
+ .../msm-sc7180-trogdor-lazor-limozeen-fails.txt    |   2 -
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c           |  36 +++++-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c        |  23 ++--
+ .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_wb.c    |   2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c          |   3 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c          |   4 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c         |   2 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c          |   4 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_encoder.c       |   3 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c         |   2 +-
+ drivers/gpu/drm/msm/msm_atomic.c                   |  17 +--
+ drivers/gpu/drm/msm/msm_drv.h                      |   4 +-
+ drivers/gpu/drm/msm/msm_fb.c                       |  75 ++++++++---
+ drivers/gpu/drm/msm/msm_kms.c                      | 142 +++++++++++++++++++++
+ drivers/gpu/drm/msm/msm_kms.h                      |  19 +++
+ 16 files changed, 276 insertions(+), 64 deletions(-)
+---
+base-commit: 5e4a3f7b262060d70cfdc7889cfe0f4aba9ea3fc
+change-id: 20260902-fd-kms-fix-smmu-2d4baaf460b0
+prerequisite-change-id: 20260930-msm-kms-destroy-fixes-0f04b1d39b83:v1
+prerequisite-patch-id: d7439e7df4daac116217eb0fbbc277974d8dc1c9
+prerequisite-patch-id: 6944647055d76b00b161e6a5a30a7f31a80c7256
+prerequisite-patch-id: 5519e2e012b2065c08849502118233ccfd61e9d3
+prerequisite-patch-id: 09f7ca53872a2ab17488f2bb94a1c2cd4c396781
+prerequisite-patch-id: 4872ed1786ce7088e399b89fc8c5ac660dd20426
+prerequisite-patch-id: ddd786dced962858ee89ce947eee4cbdbd88fe2e
+prerequisite-patch-id: 11dc97f7f4980bdad49123271651749d0a8f8d23
+prerequisite-patch-id: 427335a4d98e23f6df1c6d1109c6315a44bf1bc4
+prerequisite-patch-id: d994bb94c13b7c8d5da5872844c5a79fa9988de4
+prerequisite-patch-id: aa59ee029b6f5b24d6870208ebe8a5464204cad1
+prerequisite-patch-id: 259f1da5d7d3146592277db856c44d863d7be84b
+
+Best regards,
+--  
+With best wishes
+Dmitry
 
