@@ -1,64 +1,64 @@
-Received: from mail-wr2-f34.google.com (mail-wr2-f34.google.com [74.125.225.98])
+Received: from mail-wr2-f29.google.com (mail-wr2-f29.google.com [74.125.225.93])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDFDF2E040D
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 09:15:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E255B3A783F
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 09:15:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.93
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791018926; cv=none; b=ZXGvyruoHrfGN7CRgKsEuRzpbh+O2Wi5FwYn+D87ifbyeiIjhGZupCNR0DxmeFSnyni+GcR4ZwSVzE1nVWBhea/eVUN4QY0spM1RhdhtEkhScQfBK6PueP4XglsvkmEYk63CQj3fxPL8nNbMp24GQm30mCXLx70P6/+2a0CdACg=
+	t=1791018931; cv=none; b=jZqtPIV/8k3XXqILEYgttELsDwvdzhqNPP92BHZxadod47VAwvLXUbsT1vVxQowtcbYmCwavryrUMwIeLHpeYfb6eeimHNTcWIBfT27Zir/CnfE/vLYvr5M1Lpn2LkaMOXLdP7bYdnAquWwqmFeghlpgNJngmYpf+hTFQ3B7XGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791018926; c=relaxed/simple;
-	bh=EdzahQprnb0c9a6ntcCV4R7dCiXc6EsdaJ6ixRzGubk=;
+	s=arc-20240116; t=1791018931; c=relaxed/simple;
+	bh=1VdfXtjk1IWiBRIjglsN7Ax9puUJ4ykuJi0WIKUi3zU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=BB/r760B2iNm95wl7CW/sNMfHxEqgX1bqkSqCIkz7IXkUMs6JXm1dZJRExDTAzyg9iSvUDcz9555n1/rQOVcF4tLM1d7KLYEkst1J0p0cRUfjTfTEoqaJ949zL2xL2KvhbEfnwzhBpsN7Kt8c+5BGBKKgNnaYRUyPsSNVrNyVFM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=I1K5sVQV; arc=none smtp.client-ip=74.125.225.98
+	 MIME-Version; b=lS253bjpXJpYzc/NfCEtCfqHDct2xwbC00AuLvGvRGNdZdUwZLx5ezbMLz9XLdOAOMuX24g9gOkMeeJAQ+8TgVf9WOj7A5zXd0TudrvFIZ+Fibb25GaMkmuDageCxZaxsBbLwgO4wXqZnqu7qP5SgzFgoC0vV6IYzPbkzOAyEFo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=s6yDFug9; arc=none smtp.client-ip=74.125.225.93
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="I1K5sVQV"
-Received: by mail-wr2-f34.google.com with SMTP id ffacd0b85a97d-48afd5b1678so106672f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 02:15:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="s6yDFug9"
+Received: by mail-wr2-f29.google.com with SMTP id ffacd0b85a97d-48aef5d66c1so85956f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 02:15:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791018923; x=1791623723; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791018928; x=1791623728; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1xzpCaloDfGqbRqjVRILlsh6zNRsWeHOx+x+KXRywfI=;
-        b=I1K5sVQVe7dUSDOh3v68UpFmLQQfOq10zg4yffaBKhU7cxCP0H0wspx3kY+GUxLsHY
-         nB/ujfB8XTjP1LkwbIj01t59e0JEnpvwhiNhs4wfzuzOsu4xg4lkoE0so1tPyCC85lQP
-         xXgLnpfRc81OwIR7cpOrLpp3UfClVq5AwcTzQp9CewK3ZtLxE2EERo8asz2Jdf6kbKv2
-         Ro/ef5hxnXLkQAF1tyPYDjO8Wl8RVQ6KMmoBD7OjDcWFzeV8xBsZRR7oAvxPoqePMd6B
-         vILoIbJ5encDzN7VZXZCLLKlJ+j0p+OySeP9ceSaOfhlA05Q153cehF6hdi+/ncmfE7f
-         QATg==
+        bh=KGUcNzjtQXTGJm0X6jZGQPUmM1QBqOgA+Fbqqq48w68=;
+        b=s6yDFug9JfWs/ngyyVwN6Z/ta4WVIvORd04zR8EKAguNpB2LlktDF7ZRPGc81ZbgN8
+         dcJgLXw+mrpET46eFVIAcp2FlazD5ZO5edmub2mwmu5mdjSWYc2Mhe3DoCaOXMLUdH0w
+         eKpXAWk7Tbb3VA92ULOM1ZIPtcTAk5UOWsF98ZUpBT4Nczsubp7QD9uBuKdD1rho5ZdM
+         8+Iz8Ej70md1mqN9vU3Eov3At+JmXssNLBvj2cFZ57GSdJRoP5nLjaTNJgYuL8vP6nvN
+         VInPE56aZLGkensHPWctVEvK0Xbv/rsswQia44risgjAe3YyVCsqX1/u/Vzhckdi5aEd
+         XBPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791018923; x=1791623723;
+        d=1e100.net; s=20260707; t=1791018928; x=1791623728;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1xzpCaloDfGqbRqjVRILlsh6zNRsWeHOx+x+KXRywfI=;
-        b=lgk1o/FBqefnks8d+yh577SxCEU+WjEjS8D7Ze0M5N/74KgSBvJKTVNqDmBXhs/r9j
-         T4HGgqqU+CxB0SkiWvjqcJksg64hIYdlE6b4o5lBe6Jr/w3rmqK35UiUmChNNLKfY6t4
-         rI5XO6dY4QyU8fPH0qKNqqgcexyX2TrWF7y75krWN74mesQ/gmjb+WagWzTemMMhYXCs
-         8by94kAz+l8w6ysdRDw9njlmQIgg6kyOZJ7IuwgluXt6Q+dXdbW5af+Ye8SL3GH177Dj
-         mE80lhHYkX+ov7IFD/X84mN2A1QchBWuMxWW3NbwN0JwiHld6f4Lz/etQS+fHiCRIXNj
-         aWDQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzG93TUTV0m9nYyePvkgogVDGxjLK8mT7LrhftXzgTlJ2zgdglHxX+wNxzyhQ4MYNeoLEv0hQm30fBDCRj1@vger.kernel.org
-X-Gm-Message-State: AFq9FYKlPXLGD/cNzgzGQEY3fzfeTQqmpEiFNq+8ST5ifkU0MGeqoouE
-	S36NWPFIne3BWmkXwtYhEPMCB1s+pRhllvZ+m962d5Kfk7A2S/ujjjyn
-X-Gm-Gg: AYBFou1ZojlIHnuR5DpVzIoozTeyvknM9sU8yi2WcXDxoa8o6TyCmifckWRWsyvsvuP
-	FworoCr2ymLJ3AkjFwpj18W8k5cul/xVmaYLxbmCZHmUN8rZdVaZ6K30qrx1LkId4Xs0z3SsYfH
-	h7628f5xIEX3P7n7fIbWrgrD8iYbABWD/0kBkCMjiel/scvvlXiwo8KOhasTkog5o7eUZTpqv6B
-	W+HSj44iSwWv0LG96lZdwAp+spayb6DEIghM44qH2dC/fvQI7KqipOmZm3LfKQ+SqhEkg0EButz
-	PZRneIdreuuKHGLDzifIaIv6MwXkvQtRbI9YErucCwiOHTsxwA4qE9dKWFdfZztVAtXkj7gOvOU
-	NHcFqnP/dZ2Jkdc7iogrD3k42WhXvzCdlNf/YYc2AwMGr16Lw2DxfEHEt6V/HmnhtcnEuW7t9QN
-	bQeH3CYmfKH/7tFfGUOjVR+C7jFttoqpeU5W3AC20XlOwIyULUa5jOpYLSyXJq6kN4CpQOCFaxY
-	Nm4XLmC+OU=
-X-Received: by 2002:adf:e19d:0:b0:48b:11ee:de66 with SMTP id ffacd0b85a97d-48b1274c63amr9409397f8f.34.1791018922988;
-        Sat, 03 Oct 2026 02:15:22 -0700 (PDT)
+        bh=KGUcNzjtQXTGJm0X6jZGQPUmM1QBqOgA+Fbqqq48w68=;
+        b=aoJzI3XIe4k3Ko5HGMHCympgsXQupz545ZtVjBQOJVSrkAjjZn8ZXmWs1kN9N4WLtj
+         4/6JS1yJ7TxgNHaNbuB1d3AppMm+aaGhyrEmCnSAt+EzAbYu0OWS/WACh2RlxA963ua4
+         te0qa75n1vKzRrtDa7lLXZVUEB+1K7v6Dg6fE+7jaJf7ozMHETI2keLg2uNNed5BQRHo
+         N2fVxWsuqysezsbLF8CrobjaDBruxBzsjzjvlUnQQxmUwRFKDCV63fBXKJHXrYy3kNZg
+         0PRRLIva5qG8PyKHc1sDfOQfRWo5cQcZEB8yWuH5kj0meUf4JWuX6qOwJZpalgSondl+
+         VxKg==
+X-Forwarded-Encrypted: i=1; AKwUvBz3Uj/FXA4rTgtAARrW6Jm5XNPWTJTsns3ncwkFwr93WZOe/uSPAZG7/KStysg0+V54sGjiDgnhJvCQlnzN@vger.kernel.org
+X-Gm-Message-State: AFq9FYJB+pKcIaVqcfo/g3/Br1RQ9CEIc9OT3wXOQzjLzPVs6Cv66iNs
+	GMbluzvBLx48TSs3mchypB0lCEqIt43yfqCA5N1tdsRNPR6aGbYTUdDY
+X-Gm-Gg: AYBFou1Fi6FCb+VmGRo+RAlIF3o4m/lLfQUnHMlbuCAIbVdrmGF/5JpwSSJP2ztDEE3
+	cZRBgQOoPnWFQYtJ+r+KEYLTi0ftgQdG0xxVUJoM16g7bgOnInUMH4HGuQwWhvHvuxlHdquYneJ
+	bDwXqT7kowmv4ZSWbx1+2P4iMQab5nHHq9u8FOe3LkFRpgsHecnu7tzlufMBx2tJ95hoxFK1qCZ
+	2zt+pzLPV153OeH+9fSjAvBSNgPnscbWuGrBSF85OQEi4LuTkYNsldzDyvpEjWqAC5yzCIYhv1l
+	M0xh/pfm6VrLu6qGHTybL6tY6DjqQSkYfTUybQv3PIHXTnfv8OOeFpJ8GdkJEpdM4vB218oG2Y/
+	GIpRsfS5uiqpVNxDM+VtZNNwMM1x80WSZNBRHkdUa3cvQde8j6+/hprEthnDNa83l7JrzRlDQvh
+	6ux6szz/rc/zSdnuksJbqg5XgSji888z8LIZd33vVIgnnTlRLDQ4x4ez5alSxYM18tlcKOvZ0Kl
+	mczYdJvQTI=
+X-Received: by 2002:a05:6000:26c8:b0:487:35c:6513 with SMTP id ffacd0b85a97d-48b12720148mr9951532f8f.42.1791018928132;
+        Sat, 03 Oct 2026 02:15:28 -0700 (PDT)
 Received: from FranzSP11.fritz.box ([31.31.60.25])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b82253dc9sm11336161f8f.3.2026.10.03.02.15.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b82253dc9sm11336161f8f.3.2026.10.03.02.15.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 02:15:22 -0700 (PDT)
+        Sat, 03 Oct 2026 02:15:27 -0700 (PDT)
 From: Franz <franzelfranzel@gmail.com>
 To: Jeff Johnson <jjohnson@kernel.org>,
 	Rob Herring <robh@kernel.org>,
@@ -73,9 +73,9 @@ Cc: Johannes Berg <johannes@sipsolutions.net>,
 	devicetree@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH RFC 1/3] dt-bindings: net: wireless: qcom,ath12k: add disable-rfkill
-Date: Sat,  3 Oct 2026 11:15:07 +0200
-Message-ID: <20261003091509.4822-2-franzelfranzel@gmail.com>
+Subject: [PATCH RFC 2/3] wifi: ath12k: honour disable-rfkill from the device tree
+Date: Sat,  3 Oct 2026 11:15:08 +0200
+Message-ID: <20261003091509.4822-3-franzelfranzel@gmail.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261003091509.4822-1-franzelfranzel@gmail.com>
 References: <20261003091509.4822-1-franzelfranzel@gmail.com>
@@ -87,38 +87,38 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some boards do not wire the WCN7850 hardware rfkill input, or wire it so
-that it always reads as "radio off". On the Microsoft Surface Pro 11
-(X1E80100), ath12k enables hardware rfkill handling and the interface
-ends up hard-blocked for good.
+ath12k_core_rfkill_config() skips the hardware rfkill setup only when
+ACPI says so. DT-based boards have no equivalent. On the Microsoft
+Surface Pro 11 (X1E80100), the WCN7850 rfkill input reads as "radio
+off", so the interface is hard-blocked:
 
-ACPI platforms can already turn this off through a firmware setting
-that ath12k reads (ath12k_acpi_get_disable_rfkill()). Add a boolean
-property so that DT-based boards can describe the same thing.
+  iwd: Error bringing interface 4 up: Operation not possible due to RF-kill
+
+Also skip the setup when the device's DT node has "disable-rfkill". The
+PCI core attaches the node to the pci_dev, so ab->dev->of_node sees it.
+
+Tested on a Surface Pro 11 with next-20260929 and the matching DT
+change: the interface comes up and connects (5 GHz, 160 MHz).
 
 Assisted-by: Claude:claude-opus-5-5
 Signed-off-by: Franz <franzelfranzel@gmail.com>
 ---
- .../devicetree/bindings/net/wireless/qcom,ath12k.yaml      | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/net/wireless/ath/ath12k/core.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/net/wireless/qcom,ath12k.yaml b/Documentation/devicetree/bindings/net/wireless/qcom,ath12k.yaml
-index dc68dd599..d56050e77 100644
---- a/Documentation/devicetree/bindings/net/wireless/qcom,ath12k.yaml
-+++ b/Documentation/devicetree/bindings/net/wireless/qcom,ath12k.yaml
-@@ -27,6 +27,13 @@ properties:
-       If present, a board or platform specific string used to lookup
-       usecase-specific firmware files for the device.
+diff --git a/drivers/net/wireless/ath/ath12k/core.c b/drivers/net/wireless/ath/ath12k/core.c
+index 0c72948f3..8cac84917 100644
+--- a/drivers/net/wireless/ath/ath12k/core.c
++++ b/drivers/net/wireless/ath/ath12k/core.c
+@@ -83,6 +83,9 @@ static int ath12k_core_rfkill_config(struct ath12k_base *ab)
+ 	if (ath12k_acpi_get_disable_rfkill(ab))
+ 		return 0;
  
-+  disable-rfkill:
-+    type: boolean
-+    description:
-+      The device's hardware rfkill input is not usable on this board (for
-+      example, it is not wired and reads as "radio off"). The driver must
-+      not enable hardware rfkill handling.
++	if (of_property_read_bool(ab->dev->of_node, "disable-rfkill"))
++		return 0;
 +
-   vddaon-supply:
-     description: VDD_AON supply regulator handle
+ 	for (i = 0; i < ab->num_radios; i++) {
+ 		ar = ab->pdevs[i].ar;
  
 -- 
 2.56.0
