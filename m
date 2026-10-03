@@ -1,71 +1,74 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8D52340286;
-	Sat,  3 Oct 2026 15:17:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C29D43E4BA;
+	Sat,  3 Oct 2026 15:25:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791040658; cv=none; b=uVQd/fdNMmdv2NXf+4P1dmdL2Ur50j2Di1qfaQfVteLW4cKXTPAPrjwV74eadtzNeou7dBHUMS6l1jPyIxRyNqT/RobU0oVFtDOT1ZDl/MGrb9gVyQzQEovpZpZR8FQelQ6tesuU75UNr5IrctR1nomCExffI/qWecB2iulmK34=
+	t=1791041134; cv=none; b=SNhb3JqIyBOxsC7/t+zBDaibiaHVxRzhIooa4GS+jZTePjIkGRZmAHWgaRbwQEtd+GvsCY5E5FSxyVG6n/9u7am4GNGNPwN4VG1lIiiYhSZsCATn5Xsi2EYODWrCvgmeOJhLWjyxpxBC4M2e1OD8FKdw/CxWueHESUkZif6P9HA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791040658; c=relaxed/simple;
-	bh=rgldtZpLkFqEpbVJLYzKfsnWlNWW1DWwOHtsyc7DBS8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hjTFzt1ma43rTYckIysOS/sf61bauG1Wzi9AaNYrl+uExT4AlXhrfUCPxdxE99FJazgc4UU1KFodn7bmBe2TTTUYWKcIeNp1gy0IGCWi1e1VA5LGTK8aPpIUw6JZHbQ96JRLeOM7VzkV6BXMpVcFmHcQjzDlpd4vpTgH7cUCw4w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=YvZuJbTd; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=exVuABOx; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1791041134; c=relaxed/simple;
+	bh=r4HivBlm+xzm9Uix2a63PHDX85EH1fdhkqT5qYKJApk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=ZjkeI7GBnYllqQFem0212YpT3AXK/oAWvrSb8uCOFUIgb6mkl4ZCmkFR8YbXFGWp0yA+Hyd4vKjkoJSmRMOU3lf7C1fEN4aUH0BaeJGNni4UZdPYcsBhiea1GwZFEO58gRJfdeoIe/NrenJARXdWAx0OL7PuPUoDt9TpbXj3mDs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nVtyIJM8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="YvZuJbTd";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="exVuABOx"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1791040645; bh=LK7rDovFbgbMJXcaZMQcEJY
-	o+GPJqqDJCmRHc5uCgNM=; b=YvZuJbTdBq2t80dEaM4De9J/jB/ocCKSGG6Vgv6Lg2IVlgThd2
-	oDFc6tqJgfQLBZ1SWHbQMkV5POdTODHqGyML5OJ3qHXaHSyKOthQT7xz3uoXRIOlegjQmMMLGdW
-	hU9d6eiEU/Ey3GQD0P2J+Hphfm567M2MM91R6CW9kYvSFavbca63NcShrwDWhNufl5MyvjDqDIv
-	c/EEHUpVl0i/R1e4kWTT7S00pkVkzx/+xcUd4FBRD3dVbAMNLk232NgSd6XAvcYfJGu9KbmwPn3
-	3vPFPzAr+s1hd6r3NqrDCjHIdtNw5Q1C40RvL4dmYIfh2IXihJZMMBzGAm6aXI8XiuA==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1791040645; bh=LK7rDovFbgbMJXcaZMQcEJY
-	o+GPJqqDJCmRHc5uCgNM=; b=exVuABOxbGFRcZ2zIobC2lqos+Hprh3xccJ1Zc1Vqe8RQJ5x+3
-	yToMdsW7Ivz4id0iMh6EfEP1CoetIakoMFBA==;
-Message-ID: <756945c1-e46c-42e4-a442-bf8ca5411e66@mainlining.org>
-Date: Sat, 3 Oct 2026 20:47:18 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nVtyIJM8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F8C41F0089D;
+	Sat,  3 Oct 2026 15:25:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791041133;
+	bh=049uPGtYxN8IGOPOlZbVCBT70USK+uuKiYpF8itJ5Fc=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=nVtyIJM8IjKyr3dA2F2MEBbVGv03WpB3+Lfv1JfvrIoWwpsExT9nicFOr7lyRzwn1
+	 N0kvYK0xtgdNMQuctFS8S6lEn6oUBQRXlCM7w4mmYnyq2Fc8s9pYs9DiiH7LiFkMC8
+	 aLjHG8ng+CveIfWp3Dh10Pk7xRm87SsdlolIKO3LB22uSn6RGxalbxck/FR+QxNqni
+	 PVev6S9Hfco5Lzh+WCRskUBLPSVoK1LlzJ2P2gQOnFdB/QVUL2VqQoLNjLM+9MvtBa
+	 HZyTSDXYY8aVLXZcTIlSV/LKMOvhfMAAt2LqDNFO9FzSN0XUGlGIj33QdyMgIefQH/
+	 OSXvdRZgXCcSg==
+From: Vinod Koul <vkoul@kernel.org>
+To: David Carlier <devnexen@gmail.com>
+Cc: neil.armstrong@linaro.org, qiang.yu@oss.qualcomm.com, mani@kernel.org, 
+ konrad.dybcio@oss.qualcomm.com, krishna.chundru@oss.qualcomm.com, 
+ linux-phy@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260825225729.230493-1-devnexen@gmail.com>
+References: <20260825225729.230493-1-devnexen@gmail.com>
+Subject: Re: [PATCH 1/2] phy: qcom: qmp-pcie: Select MFD_SYSCON for the
+ multi-PHY driver
+Message-Id: <179104113076.223537.8163260919027364085.b4-ty@kernel.org>
+Date: Sat, 03 Oct 2026 17:25:30 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] misc: fastrpc: Allocate message buffer from remote heap
- for sensors PD
-To: robin <robin@snyders.xyz>, Srinivas Kandagatla <srini@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <4hxf4z2g3kz87m@smtp-3-0000.mail.infomaniak.ch>
-Content-Language: en-US
-From: Piyush Raj Chouhan <pc1598@mainlining.org>
-In-Reply-To: <4hxf4z2g3kz87m@smtp-3-0000.mail.infomaniak.ch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-Hi Robin,
 
-   I am really sorry about the attribution mix-up. Using Suggested-by 
-was an honest mistake on my end while preparing the submission, and I 
-apologize for that.
+On Tue, 25 Aug 2026 23:57:28 +0100, David Carlier wrote:
+> The driver reads the active link mode through
+> syscon_regmap_lookup_by_phandle_args(). Without CONFIG_MFD_SYSCON the
+> stub returning -ENOTSUPP is compiled in instead, so probe fails for
+> every device and no PHY is ever registered.
+> 
+> Nothing in the build catches this: the driver still compiles, and arm64
+> defconfig happens to enable MFD_SYSCON through an unrelated select.
+> 
+> [...]
 
-   I've fixed this in v2: you are set as the patch author with your 
-original Signed-off-by retained, followed by my sign-off for testing and 
-submitting. (Because git send-email dispatches through my server, the 
-outer email envelope will show my address, but the mbox body preserves 
-From: Robin Snyders <robin@snyders.xyz> so git am records you as author).
+Applied, thanks!
 
-   Thanks for pointing this out and for authoring the fix!
+[1/2] phy: qcom: qmp-pcie: Select MFD_SYSCON for the multi-PHY driver
+      commit: 77a0e6ae5dec54fb6049e3ab88288bc40c81f9fd
+[2/2] phy: qcom: qmp-pcie: Check clock-output-names count in the multi-PHY driver
+      commit: fb0f0e0e9e5dace7a6d9cde289537980ad35db3d
 
-   Best regards,
-   Piyush
+Best regards,
+-- 
+~Vinod
 
-On 03/10/26 14:01, robin wrote:
-> Robin Snyders <robin@snyders.xyz>
+
