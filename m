@@ -1,62 +1,161 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A20104315F;
-	Sat,  3 Oct 2026 21:15:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30E022882AB;
+	Sat,  3 Oct 2026 21:21:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791062154; cv=none; b=ZnhuwoLpQ3gZgIv4NqmLOM880NXiMM01/sKkO3atJN35YOQbwC2v1+48TNn9IZl44oAoXZ2Z9BmFQJ/lifhKCpxr6FvAOMe6FsZeQ1954xoTkZJztZZOwMXc9PMkZz+833sIJ4L1cqHNZo/2Y53wNvnJ1jUxerRMLu4uWC+IlVM=
+	t=1791062471; cv=none; b=BPoxBc7tFV07pWQGpaI0Z2id35pGSyLMEJJw0DDvU0MRnUexa4gmpZQjb32T3PucVq3X42IV74MSauJsGcfxm16Py1UEMgAglm/gcUlO/osoEzHi8WzuovAxG2Nh9DuSvitVLlgKQXj5lbWGuC012rEFN5s8HLnaQ9ECnNndah8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791062154; c=relaxed/simple;
-	bh=pTkyuzqio1151I71iILVWP9h9GGZH4ymZ3T6UyNWxtY=;
-	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
-	 In-Reply-To:Content-Type; b=bymA9STwwIJkJS+1P/2X2niSIifzPNeijjgEqMd1dm2WXdhfYx4i009t+9DCk9C7PeXghmrmfWE/EZoatq8ua992fkfSVtaccbDJi4dA9ke4XPLLA85CldelrFImJRQn5MW7OYuj/Km3Txwtlfje/lpMlczLLrzxToNwzlstyUc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=P97MzwFF; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=JrKOrzF+; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1791062471; c=relaxed/simple;
+	bh=4oY/ipzEWPb9kxkqSvfCZ8BeCfwEdNXPdM8jqm29JRg=;
+	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=VvOqbMYqN9D9R1mA8TWhxd99Q6xl7apj7dhF3FGmaVBRYk7lu9LsEp6XPTTJJDCpmsGDfTMCZ7hZA7PSvQPkQOceCIUdlwGVfvjFX+Bs0ty8h93EWIQh89gR3tde7smOQPzHWi2VM84u9Y5VhApxjCopJrB984s06ZCV+lRIBSg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XlPYTYkK; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="P97MzwFF";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="JrKOrzF+"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=From:Subject:To:Date:Message-ID; t=1791062143; bh=FF4oZWwaBDvF6ia2clmt7GG
-	vOqNBKfDHEHU8QFdNVec=; b=P97MzwFFtnLgzqwWCxXel/El2WRWnahp0oxDFuEmERR2xcCVsp
-	sGGmwEE2OdTOb+rUAZSaF+/rpLoXdDLIlpwhe9KHRTz9vXcOhhm1KXmWgNkHSDDZYLtigjX5csy
-	AOt+Nh5aUSkG0lRBDMog9Sar4v0U6w6qT3U+Ul0f7XeJ2W92JfOTIZVliLszJw/4L+uUOirKKAm
-	beINKorlbNATYaWUiJz/pD08u3jLbHSjb+2Hnp84FBgajBQ76Nm9ggKLDyg+r+8aXaLKQZRG2qe
-	0NY5yyFuVJZBBNY0Bps0aRLE2U9kh8uIXaHh00NugHIQZtZ5CmAZ+BZ8z8WnciR5pEg==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=From:Subject:To:Date:Message-ID; t=1791062143; bh=FF4oZWwaBDvF6ia2clmt7GG
-	vOqNBKfDHEHU8QFdNVec=; b=JrKOrzF+QOWi7PyLVamFZCIkXYgfpbxURx0Iy0Jo9CDF1hbype
-	1f8YTQ3dKPhuZmxiBxd4Hx/fVmKPZ7kWZYBA==;
-Message-ID: <41bbbfda-de3c-4ecd-87f5-cc784fd6483a@mainlining.org>
-Date: Sun, 4 Oct 2026 00:15:42 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XlPYTYkK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 651F21F0089B;
+	Sat,  3 Oct 2026 21:21:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791062470;
+	bh=siJn7d87j+EL2TuyYsogClY+jOSJ9pZF1HmE5ZN+loU=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=XlPYTYkKpePrAZ1FsmcLp+MWdxhkb/esUprCzEHZ/EXwuWen12+dDB4/fBBMcYYeX
+	 o47ctuQgCfEIbvZwsWCIsK1OM0emM8YcWMD54hPUrRXrgGca51Up0Obzq95WLQZbjo
+	 YFy4nDVoUlscVm91IaMeTFJoVzoYNRPK3Ljcnbi+YI6pJA7HGdmZXn08SIRZixnXYR
+	 FzY4VXmM/X+VBsb/Lo+Nh8cCEiOt6POPLyUcdphLKWZW8311Zm0BEQxpdg1Zehmb8V
+	 fVaxdKYwyaqg3RxrAd5XFmQfJx0Ppa69+Ck+KdydbjqkLXP8CZZav8ReDfRDiFJLEG
+	 LWHv21DhLIgvg==
+Subject: Re: [PATCH net v3] net: phy: qcom: at803x: Apply IPQ5018 analog
+ settings at probe
+From: netdev-bot+sashiko@kernel.org
+To: yongzhao.derek@gmail.com
+Cc: andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk,
+ netdev@vger.kernel.org, davem@davemloft.net, edumazet@kernel.org,
+ kuba@kernel.org, pabeni@redhat.com, george.moussalem@outlook.com,
+ hzyitc@outlook.com, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Date: Sat, 03 Oct 2026 21:21:08 +0000
+Message-ID: <179106246893.434549.12601361985639254046@kernel.org>
+In-Reply-To: <20261002210408.730-1-yongzhao.derek@gmail.com>
+References: <20261002210408.730-1-yongzhao.derek@gmail.com>
+X-sashiko-severity: Medium
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: dmitry.baryshkov@oss.qualcomm.com
-Cc: abhinav.kumar@linux.dev, airlied@gmail.com, akhilpo@oss.qualcomm.com,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- jesszhan0024@gmail.com, konradybcio@kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- lumag@kernel.org, marijn.suijten@somainline.org,
- robin.clark@oss.qualcomm.com, sean@poorly.run, simona@ffwll.ch
-References: <20260930-adreno-progress-v2-3-3882f0fcd7b4@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/3] drm/msm/a5xx: Add hangcheck progress detection
-Content-Language: ru-RU, en-US
-From: Nickolay Goppen <setotau@mainlining.org>
-In-Reply-To: <20260930-adreno-progress-v2-3-3882f0fcd7b4@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
-Didn't solved hangs on sdm660, but I think that it isn't related to 
-this. However I've managed to get a command stream from hang_rd. How can 
-I share it?
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue(s) to consider.
+
+Critical: 0 · High: 0 · Medium: 1 · Low: 0
+
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
+
+- [Medium] ipq5018_probe() (drivers/net/phy/qcom/at803x.c) calls
+  reset_control_reset(priv->rst) at line 1135.
+
+--
+
+net: phy: qcom: at803x: Apply IPQ5018 analog settings at probe
+
+This commit moves the IPQ5018 internal GE PHY analog settings into a
+helper, ipq5018_analog_init(), that both config_init() and probe call.
+Probe now applies the settings right after it pulses the PHY reset, then
+restarts autonegotiation, so the PHY no longer negotiates with the
+reset-default analog settings until the MAC attaches. The helper also
+returns MDIO errors now instead of ignoring them.
+
+> diff --git a/drivers/net/phy/qcom/at803x.c b/drivers/net/phy/qcom/at803x.c
+> index cacbadf1f4841..09105f1e37379 100644
+> --- a/drivers/net/phy/qcom/at803x.c
+> +++ b/drivers/net/phy/qcom/at803x.c
+
+[ ... ]
+
+> @@ -1111,6 +1138,21 @@ static int ipq5018_probe(struct phy_device *phydev)
+>  
+>  	phydev->priv = priv;
+>  
+> +	/*
+> +	 * The PHY starts autonegotiation as soon as it leaves reset. Apply the
+> +	 * analog settings now instead of waiting for config_init() at attach
+> +	 * time, and restart autonegotiation so that it uses them.
+> +	 */
+> +	ret = ipq5018_analog_init(phydev);
+
+[Severity: Medium]
+
+Is the GE PHY ready for these debug and MMD register accesses this soon
+after the reset?
+
+Earlier in ipq5018_probe(), reset_control_reset(priv->rst) pulses the
+reset. That call ends up in qcom_reset():
+
+drivers/clk/qcom/reset.c:qcom_reset() {
+	rcdev->ops->assert(rcdev, id);
+	fsleep(rst->reset_map[id].udelay ?: 1); /* use 1 us as default */
+
+	rcdev->ops->deassert(rcdev, id);
+	return 0;
+}
+
+The GCC entry sets no udelay. It covers several GE PHY sub-block resets
+at once, including the DSP reset:
+
+drivers/clk/qcom/gcc-ipq5018.c:
+	[GCC_GEPHY_MISC_ARES] = { 0x56004, .bitmask = GENMASK(3, 0) },
+
+So nothing waits after deassert before ipq5018_analog_init() runs.
+Before this patch, the first analog access happened in config_init().
+On the tested board that was about 39 s after the reset.
+
+The patch notes say the vendor SDK waits 200 ms after every Ethernet
+reset. If the PHY needs that kind of settle time after ARES deassert,
+could the PHY's own init lose or overwrite the probe-time LDO_EFUSE,
+DAC_FILTER, EEE, MSE, MDAC and EDAC writes? The PHY would then still
+negotiate with reset defaults, which is the failure this patch is meant
+to fix.
+
+ipq5018_analog_init() also reads ANA_DAC_FILTER and writes the value
+back:
+
+	val = at803x_debug_reg_read(phydev, IPQ5018_PHY_DEBUG_ANA_DAC_FILTER);
+	...
+	ret = at803x_debug_reg_write(phydev, IPQ5018_PHY_DEBUG_ANA_DAC_FILTER,
+				     val);
+
+If the read returns a transient value this early, that value gets
+written back. Wouldn't config_init() later re-read the wrong value and
+keep it when it rewrites LDO_EFUSE, instead of correcting it?
+
+MDIO transactions don't fail while the target block is busy, so the new
+error checks would not catch either case.
+
+The patch notes already ask whether a minimum delay or a readiness check
+is needed after ARES is deasserted. Would it make sense to add one after
+reset_control_reset() and before ipq5018_analog_init()?
+
+> +	if (ret)
+> +		return dev_err_probe(dev, ret,
+> +				     "failed to apply analog settings\n");
+> +
+> +	ret = genphy_restart_aneg(phydev);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret,
+> +				     "failed to restart autonegotiation\n");
+> +
+>  	return 0;
+>  }
+>
 
 -- 
-Best regards,
-Nickolay
-
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261002210408.730-1-yongzhao.derek%40gmail.com
