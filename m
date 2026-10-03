@@ -1,224 +1,193 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3CDB49BD84
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 19:51:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68708223328
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 20:21:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791057067; cv=none; b=EKxczNCaw79Ef5xRjiJBpZtuaEe3xscjm5zlpY9JO9XThokvfDaT2KfKQ4N5YesXWr/LqcZ8ETbf+5ecQitDizbTzCrLgmuk6qHqyHWlu7Y2kfza7GUb39U2wRk1MltqrNkezLX1v1EGti04nQabGaRvwcAAhBxZOko3hIxdhCE=
+	t=1791058917; cv=none; b=ZEYeDvZWtge9k+TIJC5ut918WIdx7WLQW0gKgBU4pQij6YVBR8BzYpzFwaep56zD4iBTxhGMzYks/DG17UKw31NI49e6Zq64bAI39I65lY6F/yahpBWiCQVRlP191FFNQLUr+t4Xfc902mNIvJPe01Xt61KejgdXKLsWxq+KGkU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791057067; c=relaxed/simple;
-	bh=7pBfjveomDnmzdvLDU2dmhnc89A87sIYXO91YioPoWQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RX/lT+e53dF8O06rIPu4qh8IB7dZRoQ0fkd9Sd6eM4JQGD5W04Nkm6jbF7yeEZZFkXsmd2XA1YqRk36D9bbzYKF0MZ1nxApHAvhTpEEvb0mypb2FTQzQ6hVeoUbl+7P5ENC8AuChtgigOmVMdaHKgYGOyoELrZQ3r7Y+4UXBjK8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r7TsFJis; arc=none smtp.client-ip=74.125.225.141
+	s=arc-20240116; t=1791058917; c=relaxed/simple;
+	bh=2u34eksTJWhirfi4M5VyDEfsUceCwd7uw1Xs3JVyAls=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KCQcQ1uq4AwEJbw3d9DGpFK161SUyJIxO3H+3A16odpDubShNgoHwORcEqLjmxVlV++FEBYYQiw+lpdRcUPAbyzlDWBBHDUw+dCZMVlBmC/Cl4MeIhSR5WFL9Lp8kWyIXoapY7Us+7qwG3NRK5L2q9bT+kBFUjc2IE/UIpbyg4Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mKfEU408; arc=none smtp.client-ip=74.125.225.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r7TsFJis"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-4a11603310fso7188405e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 12:51:05 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mKfEU408"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f6350f89so243451f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 13:21:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791057064; x=1791661864; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GthwDRkP6iGq1qpE9Gwptow6c+M7A3HXNDwh7Y2Glb0=;
-        b=r7TsFJisSQnFR036Lx7A3Ji+tzCpGYhe36jSD/1CrNjzKkkUnhOFutTi0oZ8QDVvQA
-         SpENr3VGQuDmepT7B+/+FDgtGuckXgd57laUnrWsHoJKpieDiZwRUj8Ls5fJ4aLEcKGW
-         YzIUHlHQX1wR4R/TXUA1u7UYoK4QqnnJF6p2lKaoCJSr6wXJDL5GB+Dt3LcN6T/ZMYW7
-         s5HCD8nUFNxMb/bWeQsFcuvPLZDIHs0RA1PeeM26EaDI0TRsqaRxZtZoAys9h4AkLfas
-         Xr7fw01ohlN/mlEkPd8dRv47KHJy6ek2PwQCZLBLL775D6mYjpZd2vA9/Qh9QPi7KszP
-         RhCA==
+        d=gmail.com; s=20251104; t=1791058914; x=1791663714; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=C75l2wsXWFqHqj6w9JaZEjjSQbkyybpKUQfglyD3Zx0=;
+        b=mKfEU408/R4DQSr3VCjM6QQXSSJwVHffiYXis2+lY/1tniotMiUiAmH14YG4yJRfqR
+         yC8OCyWxQprr2RlXdyhOdF6Q2A/qWXnjZQXQOOOdWbzjtPQGaji5fW2ZQXzglCrMibig
+         b1rQEIxHVLdxLllUGECEbObYSKuF3qXHSH64JFNWr0N6yhSp8GtbP0T4NgBMkjryxH3/
+         ncqBznGkC7vR2wcN/0xIs6cPF4s7NmvbKtad+XFJhP2GNlDn7JDpaucf1gec1BrIho1m
+         1k21WqO7ta7ECKB+ukoq5YPcDrNW6yEZ6JuUb9lf4desHXdbndYlwcgxLIWgbeFSp6aN
+         SmYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791057064; x=1791661864;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1791058914; x=1791663714;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GthwDRkP6iGq1qpE9Gwptow6c+M7A3HXNDwh7Y2Glb0=;
-        b=rLonYNOVwq08ucQCnJZeKEJpj6vDG4odtRbnBTyEEQejfZNVnsZB6vobfSWs3JDfrh
-         FfBcGHUVQfhgChEe09YVGpiPzu6+GPi8AUHicaY0NvNY4Jt0TWCRZOll9pR6chN7mDz4
-         kiQjvjN/M6CrebsWoVULRJJufHTt7ZKMdRi6WNinxqL9uMa9FU4ig9H/yQJcJNQ2cjMC
-         vmZqdK0gdZHmLscEFD/cUxsdWGLgTguz+QTRVcMqfA55uJ9vETWDsE9jlKGKFLWG3KlI
-         /t2w9mSzrq6i03TtvkRAWAGlkYNda2MmTbv6UfmuAvcNccFdsrvOKtQA+MAH95WJVWZq
-         KUdA==
-X-Forwarded-Encrypted: i=1; AKwUvBxhOkEr7HXTrNlSpQl+09C9G9dnF6SPQhLT2dc3UkKwUkSFioCBcMJIr4G9WfPiYiQKrjIr70CYFg91iiH8@vger.kernel.org
-X-Gm-Message-State: AFuF++m7mNpkRH2jeSOjgS+0GX8Nl0/FLfE0klEpz5PEcFfaEAaOrB6p
-	/S/0kdRGmZgh07p7qeREzKH4bHGPHgWxxKIl4u34p6BMctZwKQIuQ9St
-X-Gm-Gg: AYBFou2zzCzphIv1jp9J1sqlSXadxXQdaM+ORVdP/pYggbwp3eO4WvMFffxomeslLCM
-	8Ge1PeMvbCk/Ck8i0hwqQCZfesKGF+Fonrq3oL006l9upDjxmjYDhYiEUyS0l6aSPFqFIMGNVpF
-	z9A8MQAGxlj96jvSD1SGvThetytfJCecBz3ohnJclvVc+9MoNaNNJwVdXDxNZ1t+lDpaFRdqEvo
-	U2CHJDUA6kNbqyYQT99Xy440Kd8DWbJaYBXZp1MQ+rUvgBrL86g4m5SbRK8z3vdGa2oz0eERsPB
-	4Kea4lVIxFUQdO4Ah19azuFt7p514g2qUYtYgCbl5hU6cUscN1g9MPiP4OhVRK5T9RPjtN55Am2
-	+wgJMUmDsPyZ2p1xA0BjHLTiasPjWdvrQZvR4PDQrIrqlx5sYjbQEmkqS/Czbv7KP+JKobq14Ng
-	HldffDkd1bxMavdNdSIP26jmJNjCjPqHxOmjmEpt+4EGYL7AczKPatpM1f0t9Tm1rAQZvfs94wK
-	jQPLON9zOillTpayzIQ7Lcin+iMs3GXOW/KTw==
-X-Received: by 2002:a7b:cd8e:0:b0:49f:bd3c:bc18 with SMTP id 5b1f17b1804b1-4a02758ff89mr75811725e9.19.1791057063698;
-        Sat, 03 Oct 2026 12:51:03 -0700 (PDT)
-Received: from [192.168.20.170] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0280b2e3csm233621055e9.5.2026.10.03.12.50.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 03 Oct 2026 12:51:03 -0700 (PDT)
-Message-ID: <4ae83db6-768d-447e-b177-3ef5206267f9@gmail.com>
-Date: Sat, 3 Oct 2026 21:50:57 +0200
+        bh=C75l2wsXWFqHqj6w9JaZEjjSQbkyybpKUQfglyD3Zx0=;
+        b=pUDizAl6YWsWN+/k0zx8ge5ZVDM4x0nCqVlNjI80XBNt/oo878PmKeW7/N/JKtIE7g
+         XCamoY7NHMCiA3WdB92+UkzfctZpM8SmgE6sSluAnItOSDPM9jx8e6qGA1r9n+vcwnrd
+         V6xLQYbU3joV2+aBYqOwUpPrALa/cYHXt26VPTR4wX6irLJpCaW7NdkySntQhh9f3+X2
+         WYlGRbsUj/nya29xQIB8cWpjY7YidOJHeDy2dPGd9B2XjrbP+4X16rca3SLHEIZrnPiZ
+         CKee0meS8xbfS15ftvlMVAR0kl2ifxlhcY+3phyC0nkwtHJZZiUimoCVN8wpNLlZLcIB
+         tTmg==
+X-Gm-Message-State: AFq9FYJIUzK0QAeEbVE6ge+GYYajeCttNcQ9wJhLQsPFHG0mxwjtA39J
+	wPqHIW+4S8TKkQZ4pKrBRTY5Nm3v6hlfuTjT3HCCLrmGbuaTUWHy+TP0s9o62a/Z
+X-Gm-Gg: AYBFou0I01llyhQ+qtsyqnRrO6a+xeBJg+W1JVNgGpYG1EQhq2gB17EhSFox660Z0yC
+	SGuO/9kVtfeVab7Pr+68Dlpg1IGB0LGpH1Eu5n/Oy6pWffs8tAjVS+8YNCBaiQcbOTc32vYZVgt
+	54AFfIEC2wO99QH3NUKqwYQ99d3uZQoRJi8ovzTInC4gesJhoqcircWuOOWI1YAKqC2Zc/Baf/x
+	BvTmF//KucJE9kZMlUW6ptUyQmHQ1pQmLYPoVvVhuC0sl0OyaBmZneqiRqomVeFJQBTDg1SKt4m
+	lCQ3inOQnAZxU0NQNIR7uKzF0dqA86webOZqK6ucGd+g2ZKBZ8fuocqFk52n2FqV8pUQfl/fMv5
+	Fg4msDePtoMJ19KTglwI8BCvEyfuNCq1TQ5xIRqLJlMiH1XSeweyv8Tsvh49aVYLC/8VTH5Buxc
+	RECR8kH1K8oF9DqaQmEqH4aUQ1NfHsv3z1nkttq9wfqwd8qBaBj/vC/kKqXvlW+skxGffO69y6j
+	G0yuVDMqPjfb8ds
+X-Received: by 2002:a05:6000:4905:b0:48c:50db:30bb with SMTP id ffacd0b85a97d-48c50db37b2mr1760785f8f.26.1791058913464;
+        Sat, 03 Oct 2026 13:21:53 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.11])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-48b380facfesm15083316f8f.23.2026.10.03.13.21.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 03 Oct 2026 13:21:52 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org,
+	linux-hwmon@vger.kernel.org
+Subject: [PATCH v5 0/3] platform/arm64: Lenovo Yoga Slim 7x Gen 11 embedded controller
+Date: Sat,  3 Oct 2026 22:21:40 +0200
+Message-ID: <20261003202143.4697-1-okerixx@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as
- critical
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
- Sricharan Ramabadhran <quic_srichara@quicinc.com>
-Cc: Stanislaw Pal <kuncy7@gmail.com>, Mieczyslaw Nalewaj <namiltd@yahoo.com>,
- Jie Luo <jie.luo@oss.qualcomm.com>, Georg Seema <georgseema@gmail.com>,
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20260918-ipq5018-mark-gpll0_main-critical-v1-1-fbe8f27a0106@gmail.com>
- <e16cf23c-82aa-465b-81b2-6240f4a0f4d9@oss.qualcomm.com>
- <f2ccd6b6-e5a2-4d36-a12c-124638c31280@gmail.com>
- <66d48e1f-7bab-42f3-84db-ce794f2a2a89@oss.qualcomm.com>
-Content-Language: hu
-From: Gabor Juhos <j4g8y7@gmail.com>
-In-Reply-To: <66d48e1f-7bab-42f3-84db-ce794f2a2a89@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-2026. 10. 01. 18:15 keltezéssel, Konrad Dybcio írta:
-> On 9/24/26 1:33 PM, Gabor Juhos wrote:
->> Hi Konrad,
->>
->> 2026. 09. 23. 15:32 keltezéssel, Konrad Dybcio írta:
->>> On 9/18/26 11:27 AM, Gabor Juhos wrote:
->>>> On IPQ5018, the APCS core clock feeds the CPUs. It can use
->>>> different clocks as its parent, but during system boot it
->>>> utilizes GPLL0.
-> 
-> [...]
-> 
->>> At a glance, we have the CPUs consuming
->>> &apcs_glb APCS_ALIAS0_CORE_CLK
->>>
->>> which takes XO/GPLL0/A53PLL as parents.
->>>
->>> GPLL0 is a child of GPLL0_MAIN, so this should never be gated in
->>> practice. devlink and probe deferrals should make sure you always
->>> get a valid clock handle for the cpufreq driver..
->>
->> Yes, the cpufreq driver gets a valid clock handle. However the hang happens
->> early, when the 'apcs_alias0_core' clock is not registered yet. So CCF does not
->> know that the clock (hence the CPU) is a consumer of GPLL0.
-> 
-> So is that the late_initcall kicking in early, disabling unused
-> clocks,
+The Lenovo Yoga Slim 7x Gen 11 is a Qualcomm Snapdragon X2 Elite (glymur)
+laptop. It carries a Compal EF06 embedded controller on I2C at address
+0x70, which is the only source on this machine for the board thermistors,
+the fan tachometer, the keyboard backlight, Fn-lock, and the mic-mute
+and airplane-mode keys.
 
-No, disabling unused clocks happens much later.
+Patch 1 documents the binding, patch 2 adds the driver, patch 3 adds the
+node to the board.
 
-> or is there some other logic that ends up disabling the
-> GPLL?
+Why one driver
+--------------
 
-In the actual case, it is being disabled by runtime PM, which happens due to the
-pm_runtime_put() call in the 'ipq_cmn_pll' driver's probe function.
+The automated review of v2 asked for the hwmon part to become an
+auxiliary driver under drivers/hwmon/. The hwmon channels, the LED and
+the input device all sit behind one command mailbox and one interrupt,
+so the driver stays in one file, like huawei-gaokun-ec,
+lenovo-thinkpad-t14s and qcom-hamoa-ec next to it. It is documented
+under Documentation/ABI only.
 
-Adding a WARN() into the clk_alpha_pll_disable() function results in this message:
+Notes
+-----
 
-  WARNING: disabling 'gpll0_main', expect a system hang!!!
-  WARNING: at clk_alpha_pll_disable+0xd8/0x108, CPU#0: kworker/u8:0/11
-  Modules linked in:
-  CPU: 0 UID: 0 PID: 11 Comm: kworker/u8:0 Not tainted 7.3.0-rc1 #0 PREEMPT
-  Hardware name: TP-Link Archer AX55 v1 (DT)
-  Workqueue: pm pm_runtime_work
-  ...
-  Call trace:
-   clk_alpha_pll_disable+0xd8/0x108 (P)
-   clk_core_disable+0xec/0x278                 # gpll0_main
-   clk_core_disable+0x110/0x278                # gpll0
-   clk_core_disable+0x110/0x278                # pcnoc_bfdcd_clk_src
-   clk_core_disable+0x110/0x278                # pcnoc_clk_src
-   clk_core_disable+0x110/0x278                # gcc_cmn_blk_ahb_clk
-   clk_disable+0x38/0x60
-   pm_clk_suspend+0x120/0x170
-   pm_generic_runtime_suspend+0x34/0x58
-   __rpm_callback+0x50/0x200
-   rpm_callback+0x60/0x78
-   rpm_suspend+0xf4/0x5e8
-   pm_runtime_work+0xd4/0xe0
-   process_one_work+0x258/0x860
-   worker_thread+0x1c8/0x378
-   kthread+0x140/0x158
-   ret_from_fork+0x10/0x20
+Fan speed is reported but not controlled, deliberately - the EC enforces no
+thermal floor over a manual setpoint. Patch 2 has the measurement.
 
-However the problem is not specific to the ipq_cmn_pll driver. It is a race
-between probing different devices.
+Tested on a Lenovo Yoga Slim 7x Gen 11 (DMI 83QR, "Yoga Slim 7 14Q8Y11").
 
-For example, consider a simplified probe function of a driver:
+Changes in v5:
+- Patch 2: drop the battery cell voltages. They live in an EC bank shared
+  with other EC activity, and 43-79% of reads failed the signature check
+  across runs; retries, a cache and a stale window only hid that.
+- Patch 2: fn_lock had the polarity inverted: 1 left the multimedia keys
+  primary and the Fn-lock LED off. SCUK bit 7 selects the multimedia keys
+  and bit 5 turns the LED off, as the vendor ACPI FNUS method reports it;
+  1 now means F1..F12, as documented and as in ideapad-laptop.
+- Patch 2: FIELD_MODIFY() for the backlight level; notify fn_lock when
+  the EC toggles it on Fn+Esc; Kconfig help updated; the ABI entry dated
+  October 2026 for 7.5.
+- Patch 3: pick up Reviewed-by from Konrad and Abel.
+- Link to v4: https://lore.kernel.org/all/20260922165737.260443-1-okerixx@gmail.com/
 
-  static int ipq5018_gpll0_consumer_probe(struct platform_device *pdev)
-  {
-          struct clk *clk;
+Changes in v4:
+- Patch 2, after Ilpo's review: the missing includes added where the
+  symbols are used; the cache and stale periods defined in milliseconds
+  with the unit in the name and converted to jiffies at the call;
+  lockdep_assert_held() in the command path every EC access goes
+  through; each EC read checked right after the call; ARRAY_SIZE() for
+  the cell loop; MILLIDEGREE_PER_DEGREE from units.h; braces on the
+  multi-line returns; the ABI entry dated September 2026 for 7.4.
+- Patch 2: the i2c id was 20 characters, the size of i2c_device_id.name,
+  leaving no room for the terminator; now "slim7x-gen11-ec".
+- Patch 2: symbol prefix renamed from yoga_ec to slim7x11_ec, naming the
+  machine like the driver does. No user-visible name changes.
+- Link to v3: https://lore.kernel.org/all/20260921144953.15113-1-okerixx@gmail.com/
 
-          clk = devm_clk_get_enabled(&pdev->dev, "foo");
-          if (IS_ERR(clk))
-                  return PTR_ERR(clk);
+Changes in v3:
+- Add the board DT node as patch 3. It was posted on its own [1], and a
+  node cannot be merged before its binding (Konrad).
+- Add the "Why one driver" section above.
+- Patch 2: name the driver after the module, and the i2c id after the
+  compatible.
+- Patch 2: spell out both SCUK bits the Fn-lock toggle moves instead of
+  the 0xa0/0x5f masks.
+- Patch 2: return -ENODATA for a thermistor reading of 0, as probe already
+  treats 0 as "not fitted".
+- Patch 2: ten tries for a cell-voltage sample instead of thirty.
+- Patch 2: include what is used directly, devm_mutex_init(), comment the
+  mutex, fix the address in MODULE_AUTHOR, say in the commit message that
+  results cannot be matched to commands.
+- Link to v2: https://lore.kernel.org/all/20260908183403.2107-1-okerixx@gmail.com/
 
-          return some_function();
-  }
+Changes in v2:
+- Patch 2: drop #include <linux/mod_devicetable.h>; <linux/i2c.h> already
+  provides both of_device_id (via linux/of.h) and i2c_device_id (via
+  linux/device-id/i2c.h), and the header is on its way out.
+  Reported-by: Uwe Kleine-Koenig <u.kleine-koenig@baylibre.com>
+- Patch 2: add "depends on INPUT" to EC_LENOVO_YOGA_SLIM7X_GEN11; the driver
+  registers an input device unconditionally, so a config with INPUT=n did
+  not link.
+- Patch 1: pick up Conor Dooley's Acked-by.
+- Link to v1: https://lore.kernel.org/all/20260908091752.5508-1-okerixx@gmail.com/
 
-Then assume the followings:
-  - "foo" is a descendant clock of GPLL0
-  - the probe function runs before probing other devices, so the probed device
-    will be the first consumer of GPLL0
-  - some_function() returns with an error code
+[1] https://lore.kernel.org/all/20260914082950.9393-1-okerixx@gmail.com/
 
-The result will be the same hang. Due to the probe failure, devres disables the
-clock, but since the the device is the only consumer of GPLL0, it is getting
-disabled as well.
+Oleg Keri (3):
+  dt-bindings: embedded-controller: add Lenovo Yoga Slim 7x Gen 11 EC
+  platform/arm64: add Lenovo Yoga Slim 7x Gen 11 EC driver
+  arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the embedded
+    controller
 
-Here is the repective WARN result:
+ .../sysfs-driver-lenovo-yoga-slim7x-gen11-ec  |  22 +
+ .../lenovo,yoga-slim7x-gen11-ec.yaml          |  56 ++
+ MAINTAINERS                                   |   8 +
+ .../dts/qcom/glymur-lenovo-yoga-slim7x.dts    |  12 +-
+ drivers/platform/arm64/Kconfig                |  23 +
+ drivers/platform/arm64/Makefile               |   1 +
+ .../arm64/lenovo-yoga-slim7x-gen11-ec.c       | 547 ++++++++++++++++++
+ 7 files changed, 667 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
+ create mode 100644 Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
+ create mode 100644 drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
 
-  WARNING: disabling 'gpll0_main', expect a system hang!!!
-  WARNING: at clk_alpha_pll_disable+0xd8/0xf8, CPU#1: swapper/0/1
-  Modules linked in:
-  CPU: 1 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.3.0-rc1 #0 PREEMPT
-  Hardware name: TP-Link Archer AX55 v1 (DT)
-  ..
-  Call trace:
-   clk_alpha_pll_disable+0xd8/0xf8 (P)
-   clk_core_disable+0xdc/0x268
-   clk_disable+0x38/0x60
-   clk_disable_unprepare+0x18/0x38
-   devm_clk_release+0x2c/0x50
-   dr_node_release+0x24/0x38
-   release_nodes+0x78/0x118
-   devres_release_all+0x84/0xf0
-   device_unbind_cleanup+0x34/0x98
-   really_probe+0x190/0x3f0
-   __driver_probe_device+0x174/0x1e0
-   driver_probe_device+0xc4/0x130
-   __driver_attach+0x108/0x258
-   bus_for_each_dev+0x6c/0xb8
-   driver_attach+0x2c/0x40
-   bus_add_driver+0x128/0x258
-   driver_register+0x68/0x138
-   __platform_driver_register+0x30/0x48
-   ipq5018_gpll0_consumer_driver_init+0x2c/0x40
-   do_one_initcall+0x6c/0x548
-   kernel_init_freeable+0x264/0x388
-   kernel_init+0x34/0x1f0
-   ret_from_fork+0x10/0x20
 
-Maybe this helps to understand the problem.
+base-commit: f0406245cb9855e6318335a8a223551354291a46
+-- 
+2.55.0
 
-Regards,
-Gabor
