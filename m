@@ -1,64 +1,64 @@
-Received: from mail-qk2-f40.google.com (mail-qk2-f40.google.com [74.125.230.232])
+Received: from mail-qk2-f37.google.com (mail-qk2-f37.google.com [74.125.230.229])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65EFD480327
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.232
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE3DB4AC15A
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791050245; cv=none; b=n6iFk7UBpCqzoZwIT164V764xwiOEcy8nFWcNhNVG2WtNG0R/v8Jd/WydhaRKHZOHH9ulMkT5PlAiYeGNTXpiuj2iBdbCLF3Oq5UOZX/EEnezCG2iE5Ul/jTG04hmUS8+89REpj21tL1m3OF5a8NIeGKMpyvpKnyFr5G6T4Y+H8=
+	t=1791050248; cv=none; b=VaA318UEkJvVGYg5vvtNk+jOG5SAsEHtz6bV274Kldyr8K65RnLoxbHFP45k+aunE4zFgBJhq/dZ8Qf4cpDYFjIEOBwbK6W40ZkxGIsrMr3ZH0tbWpm9pcz2Uj1R6tgNTaoGp7dcz3AsO6GBTnCVBjkKnE6Y9pYq0T/8fPLmgJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791050245; c=relaxed/simple;
-	bh=xHotjqAGKY0BfEaoc5/VHSKIpt7goITnesNH+tjV+xM=;
+	s=arc-20240116; t=1791050248; c=relaxed/simple;
+	bh=ToMS9HHuwvLSNSi4KSK2Vt1m/tyIosTZ2XS2ynYNyxg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=efR32AmobtJEqLPgP9YfoZB8W4WDi/5Mw5lQZrDH3sfEoSuU6DQ1w9722YgRz6nDbRZv97NNE+EaX/tKXp/wEhZbxBcM3QK5FaqTxBpQTn3Gd3iUzM3Tr9BXFmLFhaG1g8syYYdLTalQFn+I6camQwttU/akul/Pf+bC/IZpuE4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hj2u4bxw; arc=none smtp.client-ip=74.125.230.232
+	 MIME-Version; b=Nve+x7ifDYduJtpdkL5+e2mRYtjqr8PlRnWyN5728h5r0W9DqGAruTdPynoOkUTOPlU4Aw22hL7lH2vJNWWR2JTZjwHRL6H3e013IhX5k2/KAXKNr/zOgT112AoQWpWIds/Zu1vKeoB1k1re1LIr6NMhPyeaQHNG8AjK9mP3nok=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k8le4LeF; arc=none smtp.client-ip=74.125.230.229
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hj2u4bxw"
-Received: by mail-qk2-f40.google.com with SMTP id af79cd13be357-93cc48a2aeaso40364685a.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="k8le4LeF"
+Received: by mail-qk2-f37.google.com with SMTP id af79cd13be357-93e587358e0so69755985a.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791050242; x=1791655042; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791050246; x=1791655046; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=p6QjYAswNnM/54XR4wboKDCX2rmH70bPtkOCGiylTQc=;
-        b=hj2u4bxwbyxdqlWjlhh+nPwS6Et2Ih7tsJA5B7OuwKzP6Z4M0ydBJx5X9YFHiB+HT2
-         p1A4wCN5+UfMYUt56n5DrWMSeAqvd3BzNP4dSOwekYcr4kRwiuz32H2hjxTSp+hVD+0H
-         6hH1zDtnvTbwCCbMZglIot/nsawXNrESh+gDPo7ybl4cNpLzgrgQYr4dEhaVIPiLj6Mk
-         1Q8KBielWVn6WvtD4Wn45AyiL8I6nU8ZcHuCqeqhJ2dIKB/ntaXLITaeJAkHpKyX5A2z
-         C0aUZYMKOO25GW6C7iqhUWE4lnH6GZExCAof1wbPAj0M9j3Hgosn+ZcCsebO1c793bM5
-         hJdQ==
+        bh=qvJU5Ed+jK8i3uf0ZW+GRwIBpnEL5KvvTjwamF/Blro=;
+        b=k8le4LeFCSB6/OGbOCjOHlcu0joVjlh3yBjF1DVvcN6NXan8+ATH1W61yQJTsydZ8e
+         u7SpqDx2vC8LaZ725DXgaa8Q3ntjtK1LZhKGUCoSXfsTEU2QQJX2rbaKEuW9BBbQ006t
+         Jdh0f5xxUgmyz+O+s8tPvGFgtAPoaZ/3iRE0LPBuZxtBJBAfYtDKUtKO5SwVVyU8G9hY
+         v+DnD1Ek0gA+Bt36s1Ddb5s7nH+GeQJqGaUYqxX2v5Lkd/J+ZOv91klsSpyaYWJZiMDU
+         7KKXW9Yod6IZC3JBWmiSSFXrJGKS0IqkfEzlU6GofBlhcplgkVvcHGH7oryHcu6J8j5L
+         lomA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791050242; x=1791655042;
+        d=1e100.net; s=20260707; t=1791050246; x=1791655046;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p6QjYAswNnM/54XR4wboKDCX2rmH70bPtkOCGiylTQc=;
-        b=dsb7Cvv8ZW8eJtFXBYL4hk0DPICU6kkMaVPpLvMm3pfEXdhe9iW6IFK6wu1Ztisemt
-         2k7zN+jCsA6+v8L27u/KQY1v6zQUm5oBq/On4t97HbFkK3ijKtAp375+Wzvfn//MWBX9
-         29MsbUCzCt5C5Hefkt+JJcmr7Dz2Ue+ndxHi9Yrffj6zguBMjEgAzjXmhu5eQikgpcyE
-         s/0GDBxGCb2tQs7pX7jpj16nMWiAfakJZeaCA/64mQ44RMAXLG8FbcElEVMYIiJbHpFh
-         x4F1IkJZywhZOosWT8iuWlgJ9Sv97W4ZfzG7dWSc/pHthVGrZaF6sav6HKlJSq+Etnzn
-         W1tg==
-X-Forwarded-Encrypted: i=1; AKwUvBwZvlw1W7ZTWc/+Tsu+OzzF+dF00ly7YRyNB9stpR12Lx6IfQju7OJ5YPZkCwbcgumwdf2CcCRQWVwQRgRT@vger.kernel.org
-X-Gm-Message-State: AFuF++kL2tN+ab6hITXOCtFT6LNydCAt7CGe8wyQi2dlBFIwcFlhZlmz
-	C1znCtW275f9g/TqinpeZ5YWGCjebWCFv+hSK4MPC9yD17gN8UzJaDs+
-X-Gm-Gg: AYBFou10dWYyqXs81E2YkpyjmOn50KS5Zx0SEJ9Fsv/BNY3vMEy++Ym41FCHpc+7z0O
-	xIwfoKVOBIqF+6Xr75pQtilZpySOEYFANvIMMw98q4ujOXNnDFpMMRPPIzWRXn9i3WYzF95TPIW
-	hLiSFo1VaCRb/iw6qaRDfwP5cwzP4IeCWHFsbfUQ3WoUb4ZD2aDYfoNpTm8Hwdjxn8uana/X8Xc
-	fA1zYYhqzwjNLp29EvrD99zFDGjOSF1W8ReF3PV3TIYIjGQIsF0gg8Kdd+6z65+ApkEv9ofy3qn
-	VTbczvqlpZl0nilsyCZa2kVwt8KdC9hu7qFzQiDhayFa90R5dOlo7Cba84yPtGy9HzZTfmrGMEb
-	ST6gQW1c5pHXF5NVNxbqOdo3aBEi4aQLF5ANJ2hf7oXDeqgwL8XW+7z1xcXyVbLjzGDo2q3wL7k
-	z+9lbdI5BW6df43EYK6aNDC89H1nbdIFfTu+6eFEbdP+U9aidG0/sqg2VfMvp9W837NexOp0BRf
+        bh=qvJU5Ed+jK8i3uf0ZW+GRwIBpnEL5KvvTjwamF/Blro=;
+        b=R9C+k3RCcfgao587bKRmJJA7GW/yEpFYdoBc8aBdRh4D1dmkvYXAqz+zgGacNtAzfy
+         pwKEbHhC+hfkgzth2uo2fMRaMDdDzzbk1QcrTF6x3A0uoMc30hzw/E8sKuWpGzLejUcn
+         roDQOxzjPeDpRJQhuQaHzGbbkuEVykCXnJLBxgowTHH2dFxTYRFRQLko7+r2lCCQv1Fg
+         TL/gF8dy1Ay0uMEziMRvOpheUwQjESFTHdxDmf/95iZGe8OWUtVwimu7aRBEqGSdV8iC
+         r2CvgBDG3PNKpLvL3vzTkh/nmFqosIzaDPW1/sbLXY472aB48sTlQrLisRhqpiBjUEG/
+         aBjw==
+X-Forwarded-Encrypted: i=1; AKwUvBwMgQqDrpRYPuz3F8F9Qa5gALHi3LApaBgOWD2EoKCC6a6G5a1FK7u9pQwbbzrxU8W0BFRKSFrtloSp6uwi@vger.kernel.org
+X-Gm-Message-State: AFuF++n72i1kNnuOo/RW98uRhtjhIXezFen6c/aJg1FSoJZ6/aFvi+ZO
+	xjOyefTyC3m78XhMgjdS9pgPJ6q32L3KJgZ+0/XLJdBWankdJWorWK3z
+X-Gm-Gg: AYBFou3QaQKabntmVQa+h4MZLC/IhqzwQWQQPDlcZWKAt1rGwB0zxPslkHXezJdZJ6A
+	EHMayJ0XB6IbZhVSTPXXBudgIsex4ezfwOCir/VKCWtpmWZ8NG+FDT2m2BwaYK5KMEgKKBVlwkB
+	s1D6PlTt/KMhvjUt/e1xGBm9/UYwnPzt/E+UJbDe569LYCSBMin6eW/04mCKCpPr/S9NdvhFJvQ
+	cv7AR986/c0rqGnd4K4k5Tk2SVW2Q2dHM0yDvi3nNz/cT3yXQQD580o/OTtqgESsI4yaNcY4jCj
+	f5WwnrJUevsVBVjfxTsIcL3sHZprMx8osS0PuoOXKuotH7Q+Fkpl/pXeVMFf8rNlT29w4jmCiRr
+	Tu1gFSPeTcc8Ta70sxgZ1wbtC3wraIt0Hn3imDMDbwJGj0tPF6GnDV7MFlJBhFq5W+XednaFm6U
+	enWPVRXTwIZjKwDG/pXJtqhHPBVwuZ/bOYk1U7RUd/8RQo9zXMAN6e7oLQJejCrYjktkDG8B/X9
 	Q==
-X-Received: by 2002:a05:620a:a0db:20b0:93c:c90d:a116 with SMTP id af79cd13be357-93cf174b109mr820351485a.37.1791050241827;
-        Sat, 03 Oct 2026 10:57:21 -0700 (PDT)
+X-Received: by 2002:a05:620a:7087:b0:93a:2e8:5af5 with SMTP id af79cd13be357-93ce7a80f36mr1200797985a.6.1791050245725;
+        Sat, 03 Oct 2026 10:57:25 -0700 (PDT)
 Received: from localhost ([142.181.121.230])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93e4e54eb2asm283924085a.28.2026.10.03.10.57.21
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93cca2b4bb2sm507369685a.42.2026.10.03.10.57.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:57:21 -0700 (PDT)
+        Sat, 03 Oct 2026 10:57:24 -0700 (PDT)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Jassi Brar <jassisinghbrar@gmail.com>,
 	Rob Herring <robh@kernel.org>,
@@ -78,9 +78,9 @@ To: Jassi Brar <jassisinghbrar@gmail.com>,
 	linux-remoteproc@vger.kernel.org,
 	linux-sound@vger.kernel.org
 Cc: Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v2 10/11] arm64: dts: qcom: sdm670: add digital audio codec
-Date: Sat,  3 Oct 2026 13:56:58 -0400
-Message-ID: <20261003175659.23536-11-mailingradian@gmail.com>
+Subject: [PATCH v2 11/11] arm64: dts: qcom: sdm670-google: add sound card
+Date: Sat,  3 Oct 2026 13:56:59 -0400
+Message-ID: <20261003175659.23536-12-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261003175659.23536-1-mailingradian@gmail.com>
 References: <20261003175659.23536-1-mailingradian@gmail.com>
@@ -92,45 +92,205 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the digital WCD audio codec to the SDM670 device tree.
+The Pixel 3a has a sound card for built-in audio (RT5514 and CS35L36
+codecs) and for the headphone jack (WCD codec). Add the sound card,
+q6asm frontends, and WCD codec for headset audio.
 
 Signed-off-by: Richard Acayan <mailingradian@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/sdm670.dtsi | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ .../boot/dts/qcom/sdm670-google-common.dtsi   | 144 ++++++++++++++++++
+ 1 file changed, 144 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm670.dtsi b/arch/arm64/boot/dts/qcom/sdm670.dtsi
-index 038ef0f73ea9..91188acd16b1 100644
---- a/arch/arm64/boot/dts/qcom/sdm670.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm670.dtsi
-@@ -21,6 +21,7 @@
+diff --git a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
+index 73639b0271e9..fadd3b5eca42 100644
+--- a/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
+@@ -11,6 +11,7 @@
+ #include <dt-bindings/leds/common.h>
+ #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
  #include <dt-bindings/power/qcom-rpmpd.h>
- #include <dt-bindings/soc/qcom,apr.h>
- #include <dt-bindings/soc/qcom,rpmh-rsc.h>
-+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
- 
- / {
- 	interrupt-parent = <&intc>;
-@@ -2541,5 +2542,19 @@ data2-pins {
- 				};
- 			};
++#include <dt-bindings/sound/qcom,q6asm.h>
+ #include "sdm670.dtsi"
+ #include "pm660.dtsi"
+ #include "pm660l.dtsi"
+@@ -52,6 +53,14 @@ framebuffer: framebuffer@9c000000 {
  		};
-+
-+		lpass_codec: audio-codec@62ec0000 {
-+			compatible = "qcom,sdm670-wcd-digital-codec",
-+				     "qcom,msm8916-wcd-digital-codec";
-+			reg = <0 0x62ec0000 0 0x400>;
-+
-+			clocks = <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+			clock-names = "mclk";
-+
-+			sound-name-prefix = "Digital";
-+			#sound-dai-cells = <1>;
-+
-+			status = "disabled";
+ 	};
+ 
++	clocks {
++		int_cdc_bclk: int-cdc-bclk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <1536000>;
 +		};
++	};
++
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 		autorepeat;
+@@ -127,6 +136,87 @@ debug_info_mem: debug-info@a1800000 {
+ 		};
+ 	};
+ 
++	sound {
++		compatible = "qcom,sdm660-sndcard";
++		model = "Google Pixel 3a";
++
++		pinctrl-names = "default";
++		pinctrl-0 = <&cdc_pdm_default>,
++			    <&cdc_dmic_default>;
++
++		audio-routing = "Analog PDM_RX1", "Digital PDM_RX1",
++				"Analog PDM_RX2", "Digital PDM_RX2",
++				"Analog PDM_RX3", "Digital PDM_RX3",
++				"Digital LPASS_PDM_TX", "Analog PDM_TX",
++				"Analog AMIC2", "Analog MIC BIAS External2";
++
++		mm1-dai-link {
++			link-name = "MultiMedia1";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
++			};
++		};
++
++		mm2-dai-link {
++			link-name = "MultiMedia2";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA2>;
++			};
++		};
++
++		mm3-dai-link {
++			link-name = "MultiMedia3";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA3>;
++			};
++		};
++
++		mm4-dai-link {
++			link-name = "MultiMedia4";
++
++			cpu {
++				sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA4>;
++			};
++		};
++
++		lpi-mi2s-rx-dai-link {
++			link-name = "LPI MI2S Playback";
++
++			codec {
++				sound-dai = <&pm660l_codec 0>,
++					    <&lpass_codec 0>;
++			};
++
++			cpu {
++				sound-dai = <&q6afedai LPI_MI2S_RX_0>;
++			};
++
++			platform {
++				sound-dai = <&q6routing>;
++			};
++		};
++
++		lpi-mi2s-tx-dai-link {
++			link-name = "LPI MI2S Capture";
++
++			codec {
++				sound-dai = <&pm660l_codec 1>,
++					    <&lpass_codec 1>;
++			};
++
++			cpu {
++				sound-dai = <&q6afedai LPI_MI2S_TX_3>;
++			};
++
++			platform {
++				sound-dai = <&q6routing>;
++			};
++		};
++	};
++
+ 	/*
+ 	 * The touchscreen regulator seems to be controlled somehow by a gpio.
+ 	 * Model it as a fixed regulator and keep it on. Without schematics we
+@@ -528,6 +618,17 @@ rmi4_f12: rmi4-f12@12 {
  	};
  };
+ 
++&lpass_codec {
++	clocks = <&int_cdc_bclk>,
++		 <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++	clock-names = "ahbix-clk", "mclk";
++
++	assigned-clocks = <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++	assigned-clock-rates = <9600000>;
++
++	status = "okay";
++};
++
+ &lpi_tlmm {
+ 	/* sensor gpios are protected */
+ 	gpio-reserved-ranges = <0 8>, <12 6>;
+@@ -591,6 +692,19 @@ &pm660_rradc {
+ 	status = "okay";
+ };
+ 
++&pm660l_codec {
++	vdd-cdc-io-supply = <&vreg_l10a_1p8>;
++	vdd-cdc-tx-rx-cx-supply = <&vreg_l1b_0p925>;
++	vdd-micbias-supply = <&vreg_l7b_3p125>;
++
++	qcom,mbhc-vthreshold-low = <75 150 237 437 437>;
++	qcom,mbhc-vthreshold-high = <75 150 237 437 437>;
++
++	qcom,micbias-lvl = <2500>;
++
++	status = "okay";
++};
++
+ &pm660l_flash {
+ 	status = "okay";
+ 
+@@ -633,6 +747,36 @@ &qupv3_id_1 {
+ 	status = "okay";
+ };
+ 
++&q6afedai {
++	dai@89 {
++		reg = <LPI_MI2S_RX_0>;
++		qcom,sd-lines = <0 1>;
++	};
++
++	dai@90 {
++		reg = <LPI_MI2S_TX_3>;
++		qcom,sd-lines = <0 1>;
++	};
++};
++
++&q6asmdai {
++	dai@0 {
++		reg = <MSM_FRONTEND_DAI_MULTIMEDIA1>;
++	};
++
++	dai@1 {
++		reg = <MSM_FRONTEND_DAI_MULTIMEDIA2>;
++	};
++
++	dai@2 {
++		reg = <MSM_FRONTEND_DAI_MULTIMEDIA3>;
++	};
++
++	dai@3 {
++		reg = <MSM_FRONTEND_DAI_MULTIMEDIA4>;
++	};
++};
++
+ &sdhc_1 {
+ 	supports-cqe;
+ 	mmc-hs200-1_8v;
 -- 
 2.56.0
 
