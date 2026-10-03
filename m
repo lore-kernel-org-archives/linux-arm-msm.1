@@ -1,149 +1,130 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11FA9384CDD
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:37:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9727549C4B1
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 17:57:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791049075; cv=none; b=bEsVWBxvVeMeaXLFuGsZJLi1Vn1wWWX9OoFf9k9+HIgt+fLNBqMhnkRomegvijrQ+nRB3IFrNRdZdIGTCojyNhKRx6qeycPVnOtEKeGs48Zx7Da05wn9EeNME1rvKWngioTJnT0klXk1d0IE8q9ImN45EAUqP51O4G34PnwfBv0=
+	t=1791050225; cv=none; b=CjSdZ+yPy0DHaAnho1NGwrg82K0yO20BPNWG74N7q4OyY7G0alsDxrQUaJ6036pyYwSOIYhT402bdSIou6FhcRpclfPHXYCTYKCis4Zak47zQz+i+n2JyWSu+NYwxISXB+bL/vFV2iI5FNybJQaVLZsSGDjS0jVxwKs/q/t4D8M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791049075; c=relaxed/simple;
-	bh=ffsJ105eYLUOuLk7JN/4EgkWfpmmINiOvVNT5OhL4Jk=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=d7loQJ10yCZY8AnP9HGyDhyJ1qoB/UfVbzAa05aoBWQq1fqc9ycX8zxwePfJrvUDsx8MvAVxMeRR4UtlY0HuzMO6pv6vkddoHSRWgAHuZXpZYt+M3EeixWMnfVxF3WcHVuL7c34tBMWQrwcn5WCF79N95wF8GISrlHg9/0EAKZA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VsaZhMEG; arc=none smtp.client-ip=74.125.225.141
+	s=arc-20240116; t=1791050225; c=relaxed/simple;
+	bh=LOhl3Aekc4RKo7oAx+FKR3eE5zK1tDJ8SzPFFk/DLWw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ru00ZUE/khAs/fT0HODkeFEFoWQmhJpc3+if3JGW1LVZnfi8uUweTo2YyuJM86Gsp4NnL+pGsadDMfhx7YAKDSQFTr3kO/ZtP+CTiy48a/Ewj5hA5DSjCtZQyffyasKeopf4OlnK2FFs4aw+3jdiF5uLT3J2uKx5op70XA29zvQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CgNmc5KV; arc=none smtp.client-ip=209.85.160.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VsaZhMEG"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-4a11603310fso6810545e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:37:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CgNmc5KV"
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-53440816851so6989441cf.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 10:57:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791049071; x=1791653871; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=I2lRWsP1FfRJ0fI6QeP0o6eYlL3R/tQRBoVsnT5hF6o=;
-        b=VsaZhMEGaTNKa9BsUOdA9s3PPKEfhCmv1EmN9RCz33admRwT8Ms/Wy6G2grwFhrJtf
-         /PATnI8ft0htPhiYIXQdIVZi++AjnJn6wVMtw+h8Aai/XczE6rqa5UGxl3R3iea7wEgk
-         5eNRBxpFSOy8SpcSFQjeHG5YlfYeLvMSruP7pktiwIZUp2Vtp85xKhEqClrmJxvyTnWv
-         6QDtMt1jNKOsEIcwQM7WgYEQO+jgdW8J63et0+Dv6lqe9ayWz6rNbQVpNGafvyrnX25y
-         2BYe/hyPSng4uGsgKJsYh7psGkfPdA8SZrxLLTjuwYILBCk0TrKer6+wGkxYUN4Qx5/Y
-         K2Rw==
+        d=gmail.com; s=20251104; t=1791050222; x=1791655022; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=bsXt4MoLEnClFiQiLZ/irOmeq+7VrIzcy4lTR5NyCaA=;
+        b=CgNmc5KVxHcqI5p+cT7DPLeAQOJlNlq67j5LX+48L/9JLzAmKq7PJHMFkPo3q/DCE+
+         vUZkVeG1LiSVHplH2VaIFQDa4+FYJcSOKKwWrGos/cuUsaTQfPyR6t41CFv57vTpGuRt
+         tSr+bEyvLvHAKkYOP1g3FYuHjI784WIBTEo1glLi0crP5x7hR66VOUetZrnp1f6Vb3vS
+         Ol3cj0OmjzVfKQf5fRa0HGfGSgHxgV/aKOwzDeOEGw2xsu6ApyfdDVvilE93xyS7O+78
+         4XNfAMNTyFyRxpa5Mjq1BGxgPhRRqv2liJc9x8YzO1X7WbvXfdjqayWwwDVdPtL83Bx2
+         XIhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791049071; x=1791653871;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=I2lRWsP1FfRJ0fI6QeP0o6eYlL3R/tQRBoVsnT5hF6o=;
-        b=XKwWOFyd8nY0SSnBkg5MJ7p2LyzaRy/0ceVm3bYGcpTa1CmM95mWTWFxg/gsr6K6Lo
-         Gm312VwyNGsBsTLt+L/pAibSuIZEHTNOMWBQ2pgfb8jKqGeTcLcCfTzkB7JSbGV+64VR
-         qETZ1q9bwdq/sS8h467nKhmlXRpVWgHZg2GYxDhlpjB/W2sR/BgDXRSI/8x5XmZk4HEy
-         xa2TXOjuRqTPXZLP2Ykw3O5xCfAIRA5NNyVm4Xa93zulXrdx6WEXQFdgZBlBfPcDMAJU
-         zINaF6oKROzNqwSv0wcgOO7E5gC5SPSNUX5EQjEOy1AcyKvFXtSOP3mEST+RdagaJlVV
-         G6nw==
-X-Forwarded-Encrypted: i=1; AKwUvBxQr1P4EnaeNnCuy+87B6o3czOvHnEgZWoPt7xPz03GZu/pzMYguEI4q0ALvhACxhCev+lh6/cXVjqyitwo@vger.kernel.org
-X-Gm-Message-State: AFuF++lk5CZcKLj9Hnjty7+tI5SCz88YF327CWW4CCN52R5z3LMEGsqe
-	jEuysT9P8zh7hbBFV9mugrkMycYme5EiFzW4r1Se5O24BOahCGnUNi+3
-X-Gm-Gg: AYBFou3EyCGYvKqHTxO4VyLC24UOs2ZiiQ382StyNyhn8oZHN+FB5qqWa2R+2w3PN3Y
-	CTXz1hD1qEfygpBIYbRqbAvmBVs0+RJ7ammjYID51uf6or0yadKUak96eGqVjdo+eEPQu79Sthb
-	QI3k4NSLW4aVqbaKNgoV3IBXW2w1ZOyAexXoOXRNF6FeAYxe2W4u9dxmyzYiZcRIvup37LQxP9w
-	iMPr9+AYoqgpi1oABbKpZ0WajYxHDtQvxmnIiUi0RpvndENBEf4JukY9e6Z1yVIQBmOK9WGJt+z
-	IJHxJW5CclFwXa76g0b9br22CofZa4NG6k6rtfixjOt+WtGH3d99SVseW87FBH0X+xIpgng2+e+
-	7UhomYvUOhHtrZ5ErpygHYhr9b2eisifnUYFlz4ZHRMIkdJraOmFakLDriwS/j+KQUHr0YfK/w0
-	XRzjYd9B21rwHi4f3ouzyPpI6kr5UsS+Woh3E6LsB1mu6Qpu0PJL4DBsaPpygfZ9ygsnroCdQty
-	lPoXQAPIp8Wtym2zPS3z/cZHEGs3XG0iYjZt/P9E29kDVE=
-X-Received: by 2002:a05:600c:2049:b0:4a0:35c:8953 with SMTP id 5b1f17b1804b1-4a027566371mr66713875e9.7.1791049071004;
-        Sat, 03 Oct 2026 10:37:51 -0700 (PDT)
-Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a03feed16bsm152460585e9.4.2026.10.03.10.37.50
+        d=1e100.net; s=20260707; t=1791050222; x=1791655022;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=bsXt4MoLEnClFiQiLZ/irOmeq+7VrIzcy4lTR5NyCaA=;
+        b=d33WJnxMNSofpMfQ+DtepsSEt1+2R7wrbMQnkS2otw8jf70zrVCFuAjiPp0129kJKX
+         K7pt2x2m7QpPx42uUONAHEPgRNro16yYdyehtQBokwokhzpCNv6MFxPV1bJfsvNaYSak
+         AvuCGBQjYJnSLYR7OSlhRLgWpWjzO5rSeG8FkMZSpA2rISVknzYfIBe2lJIW70NqP6dK
+         6HFM5Cjn3WLUCVIDWRZ8pQO33/xeV8sYcVj7/FjX4+adX8IqPSwmEBMSuu0iXymoW990
+         SV1QFv9OGhrvv/jYkaW2+ZaSUhvuVO3fiFjmy1xGlE5dA4xXHpV1aSXHj5C70fgqnWZt
+         loRA==
+X-Forwarded-Encrypted: i=1; AKwUvBxCQpLVihSy/Qc0bVE7luZ2SxfpV6KEeIga4O2qrDd/Kg5ke3kBK68Ie/F3pamwzpKPlki1zzC8xFQ193ph@vger.kernel.org
+X-Gm-Message-State: AFuF++mqXOyAN8caIug5zR3d7LU48Jeam/G3FwYM9zNVkibglHqfeHE5
+	A00jvSsa/5bCmGrPZNEFX5Bd3RU3WC+gBy6my08tBNq6F8reMZgsaUpx
+X-Gm-Gg: AYBFou0DbYA+TBVFXSPnoo0jNyVtuBcllKUVhrA8s9DaqpgXV4NQ7j0Fbh8mbuamU7r
+	FhX8wCJRdbTALYojWD+aZlBc4EsEDjjjvMxKOKCOQ0zLICwxuRWX1z7RZi1IVrJx2cKSheWsAN+
+	NB69DLiqGaLW9y/oH9BMU1HxuXIKhys7CpGz92lKrQ+JBisdtGKL03YqNyEWn7zbcq8wKYXOtj+
+	YpSwgUCXNCx9Xzvxc5+WwWBLaBRhbiLragO+RQplPESoO5GEwC2uJZF++0sw/9PJo4A6iIBU0od
+	WlYOBA3hBPmO6PMZFurxNlFCbg6ZcjCUvo4UDgjRq1BkKKfH8x8h7tZzywXZqyMkSYKv4z3s1GK
+	St3lcgRVLm/tbT/CTMxWPQbwCI5TcKsN2tp72Il35phJ2Hm1CuEIHyFy4L6t3Nf5BL/m2n1LRvn
+	EoUkNwErmosKLxLlRI6wUSZAUYBJu19KqbTFxiAxTec2yz3aU18OaYTRBd4bTF5GEI1gUY/2F54
+	M4=
+X-Received: by 2002:a05:622a:260f:b0:530:ea8c:1b6b with SMTP id d75a77b69052e-53511b4fed6mr52480151cf.3.1791050222471;
+        Sat, 03 Oct 2026 10:57:02 -0700 (PDT)
+Received: from localhost ([142.181.121.230])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53398bf8196sm57217881cf.22.2026.10.03.10.57.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 10:37:50 -0700 (PDT)
-Date: Sat, 3 Oct 2026 18:37:49 +0100
-From: David Laight <david.laight.linux@gmail.com>
-To: Arnd Bergmann <arnd@kernel.org>
-Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal
- <dikshita.agarwal@oss.qualcomm.com>, "Bryan O'Donoghue" <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Sachin Kumar Garg
- <sachin.garg@oss.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>, Abhinav
- Kumar <abhinav.kumar@linux.dev>, Wangao Wang
- <wangao.wang@oss.qualcomm.com>, Dmitry Baryshkov
- <dmitry.baryshkov@oss.qualcomm.com>, Deepa Guthyappa Madivalara
- <deepa.madivalara@oss.qualcomm.com>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] media: iris: avoid plain 64-bit division
-Message-ID: <20261003183749.4f113fcd@pumpkin>
-In-Reply-To: <20261002124435.3435628-1-arnd@kernel.org>
-References: <20261002124435.3435628-1-arnd@kernel.org>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
+        Sat, 03 Oct 2026 10:57:00 -0700 (PDT)
+From: Richard Acayan <mailingradian@gmail.com>
+To: Jassi Brar <jassisinghbrar@gmail.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Andy Gross <agross@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	linux-sound@vger.kernel.org
+Cc: Richard Acayan <mailingradian@gmail.com>
+Subject: [PATCH v2 00/11] ADSP for SDM670 and sound on Google Pixel 3a
+Date: Sat,  3 Oct 2026 13:56:48 -0400
+Message-ID: <20261003175659.23536-1-mailingradian@gmail.com>
+X-Mailer: git-send-email 2.56.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Fri,  2 Oct 2026 14:44:22 +0200
-Arnd Bergmann <arnd@kernel.org> wrote:
+This series adds a user for the SDM660 sound support code [1]. It also
+adds the ADSP remoteproc for SDM670.
 
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> inst->fw_caps[BITRATE].value is a 64-bit integer, which on 32-bit
-> architectures cannot be divided:
-> 
-> ERROR: modpost: drivers/media/platform/qcom/iris/qcom-iris.ko: symbol '__divdi3' undefined!
-> 
-> In particular, doing three divisions in a row is particularly slow,
-> even on 64-bit CPUs.
-> 
-> Rework the calculation to replace it with a single division, thus
-> avoiding the build failure.
-> 
-> Fixes: 5f21cd9a4ae4 ("media: iris: add support for multi_slice in iris encoder")
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
-> Please check the math, as I'm not sure if this is the intended
-> amount of rounding. Previously it was rounding down twice and up
-> once, now it just rounds up during the combined division.
+[1] https://lore.kernel.org/r/20260730174353.108023-1-mailingradian@gmail.com
 
-Can definitely change the result:
-	DIV_ROUND_UP(7 / 3, 2) is 1
-but
-	DIV_ROUND_UP(7, 2 * 3) is 2
-who knows what the value is supposed to be.
+Changes since v1 (https://lore.kernel.org/r/20260922015801.32373-1-mailingradian@gmail.com):
+- squashed sound card and device-specific codec config (11/11)
+- converted to fallback compatible (4/11)
+- added compatible for WCD digital codec (5/11, 10/11)
+- removed sleepstate comment (7/11)
+- sorted subnodes of dai link (11/11)
+- add review tags (1-3/11)
 
-> 
-> Ideally this would be replaced with a cast of the incoming value
-> to u32, but doing this requires to prove that this does not overflow.
+Richard Acayan (11):
+  dt-bindings: soc: qcom,smp2p: add sleepstate support
+  dt-bindings: mailbox: qcom: Add SDM670 APCS compatible
+  dt-bindings: soc: qcom: aoss: Add compatible for SDM670
+  dt-bindings: remoteproc: qcom: adsp: Add SDM670 ADSP compatible
+  ASoC: dt-bindings: msm8916-digital-codec: Add SDM670 compatible
+  remoteproc: qcom: pas: Add SDM670 ADSP support
+  arm64: dts: qcom: sdm670: add adsp
+  arm64: dts: qcom: sdm670-google: enable adsp
+  arm64: dts: qcom: pm660l: add analog audio codec
+  arm64: dts: qcom: sdm670: add digital audio codec
+  arm64: dts: qcom: sdm670-google: add sound card
 
-You only need to prove that in incoming value is less than 32G (Hz).
-The '/ 8' is cheap(ish) and can be done first.
+ .../mailbox/qcom,apcs-kpss-global.yaml        |   1 +
+ .../bindings/remoteproc/qcom,adsp.yaml        |  33 ++--
+ .../bindings/soc/qcom/qcom,aoss-qmp.yaml      |   1 +
+ .../bindings/soc/qcom/qcom,smp2p.yaml         |   2 +-
+ .../sound/qcom,msm8916-wcd-digital-codec.yaml |   1 +
+ arch/arm64/boot/dts/qcom/pm660l.dtsi          |  40 ++++
+ .../boot/dts/qcom/sdm670-google-common.dtsi   | 150 ++++++++++++++
+ arch/arm64/boot/dts/qcom/sdm670.dtsi          | 183 ++++++++++++++++++
+ drivers/remoteproc/qcom_q6v5_pas.c            |   1 +
+ 9 files changed, 398 insertions(+), 14 deletions(-)
 
-David
-
-> 
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
->  drivers/media/platform/qcom/iris/iris_ctrls.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> index 8c4c47944f22..5294999fdf7b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
-> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> @@ -1588,8 +1588,9 @@ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type
->  	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
->  		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
->  		if (rc_type != HFI_RC_OFF) {
-> -			max_avg_slicesize = DIV_ROUND_UP((inst->fw_caps[BITRATE].value / fps) / 8,
-> -							 slice_caps->max_slices_per_frame);
-> +			max_avg_slicesize = DIV_U64_ROUND_UP(inst->fw_caps[BITRATE].value,
-> +							     fps * 8 *
-> +							     slice_caps->max_slices_per_frame);
->  		} else {
->  			/*
->  			 * No bitrate target exists under RC_OFF, so approximate a
+-- 
+2.56.0
 
