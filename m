@@ -1,211 +1,610 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D42E30E0F2
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 22:28:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 296A43806B6
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 22:37:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791066499; cv=none; b=o/GVDXMA2Es8K3fsc6YZ82taMrg4eWmn/AMMVyi0ouRaJo9zn3XFp9PMqyem/KanNh7wZ4IVwW6mU5rdhccLhMiQLwMgZusFUrR5KxBAg10XGoeFSZM68p+YZPGVXKkx68Nf4YpJBedA5Y8XqhrH/ZzMhg+K/a94dhsrJIpkH98=
+	t=1791067058; cv=none; b=TAPtzsINp5I4GOVwRJFJ5JQkAYRCBR7/lpcTfq9Z94ZVpSxckm0ZAg7Uvslz7U03751selo9leIcU4bSQDd7bjwKTBj64p/fCMdqa5V6SbCJZlzzIMrTNDPPFNG96iQAH5zqvZjcMDOHXfoAhQln4yLR4M50SoMExU1zWSi45fQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791066499; c=relaxed/simple;
-	bh=k3pu6UlAByUAsZ1COmnVfKb/1csTnqbAuf3uXtysK5o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oiSE9rHGO9gwTRQMhdKdYUkQuanAwcVN/i3h6WHJlQKbuSN2oNGagT7qbZr2lDv1Y8XJkaUMHf1h2MqevYfEzn7PhlsDMEgsE8QZ9ZaPHOCXN9tbICulWuQngL9ewmfgz4dq1KMrDFRRempDZQnWTwFWPN3kaYRzRgWiaHeUvVg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X9jv6JFa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZdpuPUVd; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1791067058; c=relaxed/simple;
+	bh=hLkypq9fL/PGuQIzD987cxVCx0WleT2+L7/jCQBqQfA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gsFaak1Q5VZdBOsSOTbWq9AIPQMUskE+NADyyYkJYQ8ojLunktY/X+j6WI3yzPyCX7BWUfuzg8/u4EWLK2KKWQ9yF5bWeOE4+EcSb+us3QHKKBeDINDAQ/Qe8XKtD8XkHixDAitJTH9am57RZkLK9roj2xFYKFeiJnvS4kBqIZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VSQoI0v5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PB3dOQlC; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X9jv6JFa";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZdpuPUVd"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 693KpFdQ1082833
-	for <linux-arm-msm@vger.kernel.org>; Sat, 3 Oct 2026 22:28:17 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VSQoI0v5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PB3dOQlC"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 693Kodtn4061342
+	for <linux-arm-msm@vger.kernel.org>; Sat, 3 Oct 2026 22:37:35 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	BOffTPIXfRD8qfa88meVOZsKWaJiiHdOJxpXHsrvcO0=; b=X9jv6JFagqgG8Tcm
-	cDdbDven0/uCifZa8j7QD1JtjMcJYKAzhsxd58xn38MCtnLMh8NLXuC+7G7khy1A
-	dDNoJjCdifUhuBxBPpWYaBPqkYMSW8Y6ARMxV3vrWsPbOiiUNqxYPE5+QIItnE9m
-	LwtjbgBHqt0pfVovtQTytiDTJ32ub8ahfd5eRij5iFdDo7KWTgtfE36M7U55FCn0
-	d5eMda3pudCqbFHS7goAIC9oD3v6MH+hXg0cKzz6n0iz+xCoEoa2EmDijpxkB5lL
-	Ru8mxmacAaQnO8P0qwavAWCbHzj8MAgyX8b4bIFjsgnG8F20v5uT2KnTbE7epFcN
-	nPMBTg==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2t06sxu1-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVU
+	ntFzEfDk=; b=VSQoI0v5PDAVLttORLLqTpRNTnPcQWYNuFGM1/N3YLSOdVqLpbv
+	DvpbQKXz0upZ1wpfmqClEuTEdqXwUOJ3G9keydaKuipG5CrAaUeoleqYBenKyYSM
+	zC7NqlszxCJVC56gyjnX+/QioY27S+rUn27rBhSpPFYsPaco+n08LpGiJdrREhpP
+	BvADdiZ/Blms/H3l+8Y6c1LrbA+SQ+AlGSf9TJqlHpb0g5gFEdOeEHK+S17C6wLK
+	FZQaljNQYbuRcWN/U2iYALL/+ADy19ktHVGthv57fYgP25OhET6d6UVxzU+IFYbG
+	E41UMpLiIzrU/TgL86oiu17YsqBOPjY9B1A==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2tvestcs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 22:28:16 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7bf71bbf197so575127137.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 15:28:16 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 22:37:35 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e2e064b7a6so5715055ad.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 15:37:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791066496; x=1791671296; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BOffTPIXfRD8qfa88meVOZsKWaJiiHdOJxpXHsrvcO0=;
-        b=ZdpuPUVdDtYWnsOvvQ4H29agyUBkOMijobo1zxxYdBqlDBxrMLLQOCaoK4tBgbp2rd
-         OGGAghkiuIgc3iYUDbztf1dtG9/8o4YcSQ3er15DPi1hrou2XyJysk3QrnKy8iKMbIqX
-         gn5UYJbGFJknzSLoT6vS1NkUtag2M65oUIj513fKDae54IDxI5HBUflHLeNddHBMoQAB
-         YxXyWyjJfXybdTXezLpJVpYVnuIrOZxyyAqicNKxRLalxAbP3apbo8fZWPn1ORRLWa+C
-         YfgHBdDoHT0f+d/cajWh0HCykjoKXRc3Vm86yoAldRvdIjE2fl2BQfr9QUfhDmP2fP1c
-         nDcQ==
+        d=oss.qualcomm.com; s=google; t=1791067054; x=1791671854; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVUntFzEfDk=;
+        b=PB3dOQlCxTu+aOXoa6WikRXT7WGbL2HUfWXrlu4AHPaGBBmbIUX5QWx63EGCtc6rED
+         2RNWMROCi2sPkyU3wDzXcxDlS4KbDaAhmjua7uwoeYUcyYZlk3NnqFwCINFOP0wOk0ki
+         knmOYSRpWsBZkMZVK50sfwGBOVDcI33+hV8Qp+HbFhDzrV2gOHLFEbkONeNhrnQdYRou
+         dcQLcOunJe6Lf55j88hfcil0jeuS84103Lk44gFaNVo3tby3DEqXDrSs5yExFzKRtlyZ
+         thmQZCJJkqYSxXAxuNcEJ5n2lf0Zv09dl5P4aWu3wqJJ322z1940L8J+7/Cuk+ASlIFf
+         jclg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791066496; x=1791671296;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=BOffTPIXfRD8qfa88meVOZsKWaJiiHdOJxpXHsrvcO0=;
-        b=PLiELpnB6HXI/y5LRpqfg5KGr1ViBzGcyFDeUJ77zJC6M4FmwJq+zWf7a5KRv3cKUx
-         Zw7v0pYNPE0c5Ztr0t+dGEFuHKhg0vDBLqQfLk0Lafb69RqtHEB9EDtpqnrE+bQ958zI
-         qRQ6zvXsb9NyJn+40WYqNwqccDcfBijiBI8FISUmKORWTsU+COcODQReXIHDdfuK7Kd0
-         InN+JvgcVUh1nLZnw9z9oWdOccJhJpSgJQgXDqxByOtllTGYxcF/d/fcYaRr5UB1An5h
-         yfjSl3xnLuCeJbPfzFajuSH2ubT58Tc2z8KwqQ3ZQSx6KrgJQ6Snv01hmCLk13oUIpk1
-         TErA==
-X-Forwarded-Encrypted: i=1; AKwUvBwjDRwMY+K1Wqj0wD7jn6SB7LUSVg0x2z+E/CE1NXhQxOWZSv0kfJKMhTBQAF1CmW7MhBVhKegpG0qsK+Us@vger.kernel.org
-X-Gm-Message-State: AFq9FYLHAeqBXYemcrBZqwR+sN//C76tLKe4I5YKzTiM4QN5BIDgObxK
-	yMTRtO3hEVwdqTfURLFVk5RQr0UEh/cI9cae4nFxhiLiO7p/EgOYV2auB35xH7JrgsQtkAFAw9d
-	fWgCvuB5/VyHDbl/gbQ6DhrrC/m9IrZHGVd+9MnVfwEOiBQHRrHkdMksOko5nfXhpQ5Uby04T4D
-	zC
-X-Gm-Gg: AYBFou1O3GZPLMfyAzyA1rKuB0BZ6D46uh3QrGYKh8YtbrWRrY9epPbhc67NRhEypCa
-	wEYcsKh03OdYPrailt1FgoGxFS2YOBsSL/IYHjvjFm1dTCXvRRcboeIBvWPNw32KZL9rJa34lbS
-	LfuliXX1aJc5RL/TM5nFnVUMFAJjtsx6obYlw25cH2uh544PHO06ogdT8ib943HwXDq3QWsfmil
-	7uiwNAryJ1v/jFvj71MiLWzY8AIfMFInAuVEVQU/vAojuQrAK9SrohIgcxAQ52lNErs7EvsEk+2
-	PaJj0+3kOg4UW75EqBza+akeP5PrMuKJo5P2IcdQDnKOCbd1rETQ+CaDfV2bZ9t4nRMzyweM+i/
-	SoyRte2Rj5Ps8ZlsB6QDRxaVbfX6Um8OATTWQB55ar/9CVR/CM8B+0nSBWPSQxcl8aEC2ph+sZS
-	vDNT7u4LlczrTE
-X-Received: by 2002:a05:6102:148c:b0:7b5:8fd9:27e2 with SMTP id ada2fe7eead31-7c0f3d4ba11mr2024899137.12.1791066496067;
-        Sat, 03 Oct 2026 15:28:16 -0700 (PDT)
-X-Received: by 2002:a05:6102:148c:b0:7b5:8fd9:27e2 with SMTP id ada2fe7eead31-7c0f3d4ba11mr2024897137.12.1791066495559;
-        Sat, 03 Oct 2026 15:28:15 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a966c4d821sm20369441fa.17.2026.10.03.15.28.13
+        d=1e100.net; s=20260707; t=1791067054; x=1791671854;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVUntFzEfDk=;
+        b=0SQYG58QnKbd3cBVKZ7qm/PfJglt8rJM+ESyFqqIeAakIARXpYVEoaq0dUDswBo8rG
+         tqs4Xr7zWGCe2o6yZM/TeFvhUWO7rapWZ8VikOR4HSD2AcyoS+eWpnENHMxavcsVztzF
+         jpkAbRU4/9KxcK6Dyo2tViq4A7ct07AHoUQ08tih7f2Kluyuit1t54e/1s2E7fV9BVTu
+         /WkR6k2luBBHfcQAdtXbYFh3kQHVJ0cGyeV4YacbJ+L/9wNgTTeR8kAgl1YRtBQ4Sbjc
+         PaO2IDjNb+AAM64qJ8/O8AritvdXfYHlO3LwvaaSMvBe/Gm5ipve4xbuyuY46Oavhc2I
+         u+RA==
+X-Forwarded-Encrypted: i=1; AKwUvBwaWlM00fsRK2d2j7IGwkvb3k7J6Slbu0Sfp1Eb2p2UryFk8opI6wEVrLbILA+Zg/WUS3p799uaZsCYcwym@vger.kernel.org
+X-Gm-Message-State: AFq9FYK+Ee+Gh6UE7tFrK3yVQEfXDR14UWmc76sc8JfWJghMzDtFcaqu
+	xcBkdc9YcfLHVYAafjuS7WREexuFhurPqYRBhXZQu7JoscfCjOxb/NB26SYSotiUFggKlcpEvKX
+	/lEObG21md0M2FO2uDTLTernFngBVP1WUTS74B1WIL0h7D7nnn2XPF+Hjm+6z926VF35OIfI90D
+	B1
+X-Gm-Gg: AYBFou0A+BLoSdkIrb93EtUGLHkJDZ94f4/j4DvvqHf40zkut68UcQiYyzmk2/OBk0y
+	9kIEqf9bgwB89vfP27RTQYfsPq2nYhKACQENY699dRY47TpFD6sjMyBmYlswLeoEAjt2BNrHe2G
+	TAQSyc1NhIqAObE+Hitv5VbobrjTH0eP644884W0PtNGWc+/NQod5KiN0SES2qPc1BJWXccVte7
+	L8icE+MEIMVn8a1SuMI0TrM+b0WbSI+rMH2H98QrXffQLbl1udzjobJ99z/7Bae5Hw8hGiSiRzR
+	z7skw7Z9+Qaq0u9M6686YN6fuq9lOSNh0L4MSUi+7MxZXGWnZxgbHJ8xD4VKXxpqxXmLISDXuvn
+	mYVe0k1SdxBOtNsVf4SuYD1PFMQOOqc2kqsTOgriJAwI8ndI=
+X-Received: by 2002:a17:90a:6097:b0:3a6:f1d2:57f8 with SMTP id 98e67ed59e1d1-3a6f1d269b3mr2445184a91.2.1791067054165;
+        Sat, 03 Oct 2026 15:37:34 -0700 (PDT)
+X-Received: by 2002:a17:90a:6097:b0:3a6:f1d2:57f8 with SMTP id 98e67ed59e1d1-3a6f1d269b3mr2445174a91.2.1791067053583;
+        Sat, 03 Oct 2026 15:37:33 -0700 (PDT)
+Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78e4664ebsm4499215a91.7.2026.10.03.15.37.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 15:28:13 -0700 (PDT)
-Date: Sun, 4 Oct 2026 01:28:11 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Sat, 03 Oct 2026 15:37:33 -0700 (PDT)
+From: Rob Clark <robin.clark@oss.qualcomm.com>
+To: dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
         Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/2] media: iris: add support for vbv delay
-Message-ID: <zttltt3f5zmajyy2fbhod5vc7x4l7l6htcalu5hpbrpmd2kgze@p675hgd5pwko>
-References: <20260927-iris_vbv_delay-v4-0-8ee2b7462e68@oss.qualcomm.com>
- <20260927-iris_vbv_delay-v4-2-8ee2b7462e68@oss.qualcomm.com>
- <jc4vctqyyrh7gvoxv7h7ioqnrv72t73trgesscx3xpd4xwpj2m@m6no5tnmet5s>
- <828e8a38-4d11-4126-8f77-04e05e1a94b9@oss.qualcomm.com>
- <CAO9ioeW_EabUpjDZa6w-60=CbDXVgGw0-N2t4Z5SpJPrrhcrtw@mail.gmail.com>
- <1eeccb79-540f-4a84-987c-77dc2b05fd18@oss.qualcomm.com>
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH] drm/msm: Sync registers from mesa
+Date: Sat,  3 Oct 2026 15:37:22 -0700
+Message-ID: <20261003223723.400020-1-robin.clark@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <1eeccb79-540f-4a84-987c-77dc2b05fd18@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=cf5HPXDM c=1 sm=1 tr=0 ts=6ac18180 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-ORIG-GUID: r4tmD6a89ulISXFASIkxZSoEob8Xbueu
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDA5MCBTYWx0ZWRfX9jhyBcf6FCV9
+ chBYbuwf/h8gqACrAlpUt0/9dkJMD58/+hXezGKzsJt+2ualtA1rtC2VhX8oDFaC2O1OczLIhpD
+ urJlkTtol6+dJ03zgTNXVvqoT2ITud8=
+X-Authority-Analysis: v=2.4 cv=YoGa1IYX c=1 sm=1 tr=0 ts=6ac183af cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=aLSecQpocWsgUSzuDAoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-ORIG-GUID: Mbq2I7ly5nct_TfU5jBzrd6HJvckNXLK
-X-Proofpoint-GUID: Mbq2I7ly5nct_TfU5jBzrd6HJvckNXLK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDA4OSBTYWx0ZWRfX3rX3/VA8VHeP
- 2gFfXOjkSSJAD07gzdE16pHmEq/io0DQg3+YfbNGGZk6YgNwv0pau+mHpK6eQRixrBwJRW9RuE6
- XhVKUMVqjkskH4Gw47uqB93/raJtl/scgz37PF0jPyn0IqzJtJOV/qrO/2agPFp+JRjqMD/tQDq
- VCAqIglNLK7WepK0Uz7OmkBq1GbjhsEcrd7hN9zs9KERzKMl82om1zAWLRbhEO4KNVoeY4ARu6F
- N/FFApggwUpCfFdd44WrGd9uD3pgmqHbkEr5YWR9m3c8GtedKJVyTZABehbSNzVlSKmc+NfLpU9
- o9duxvc0LoPogUQIZcbZBVNfmF4c4TbvFo+vcHPEu093Umt7J+nVMXlsW8U2ZllX/fNpm1HZplp
- bZXtdTyklWHy/cMhRY09E/NyIpka/1nQTKSTl4vqBiIDaH9o7HmrKjQOmVqLCxFe+uFX4xD4l8M
- gny6+9z/Ci7aQxxYDUA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDA4OSBTYWx0ZWRfX9bKPWPn27OeX
- 0wZXnVBFJyfMns2fzAJNSlnRzg8KzAeJSLpg+ay+Ukf9evcoRMACPCTleVGkiQchMPW/JcuB9bj
- jW2XH3lMCTOG4b/zOIrGSeGI3zcE/yg=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=e5mUnYsNAAAA:8
+ a=EUspDBNiAAAA:8 a=0vnX1LisTAiW6trkSK4A:9 a=GvdueXVYPmCkWapjIL-Q:22
+ a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDA5MCBTYWx0ZWRfXyWWvPHPxNZds
+ cZcOWH4lsmv3ebXBAEXCNjIznuVqMZwelJiMNGsxyfYYnV8DqXghFg9gO8C/kjJ7idtXngzF3VE
+ ofF24VhevpyQd0fMbz8J/j2S2/j4PZ8l7uZ/QkUiw4LjHMLfBd7tM7fTkz6vM10awP97qfiGACJ
+ 3RfvwGMJ5F3DJ1w+8prn5ivX5YaxDM4vHHqEeW8tC2b4mIJ/q6pIuaas3KoXNQhybE89/mOhRtD
+ JF9ql3FjB3Voh8to3QM9w7d9uxi2rJO75NjsHujjQvkTKOWf5zQ8opYCWkCeRBgXBrHrHugxzSF
+ a8Hh5ZxzimP8yL1jL4JlpbC5kf9xRLDeCfV+Y17mENrhslV/pP/M3qbkanLkCnYIEHhJHGE/TFt
+ OheCgu+rQE7BtHb90gWfGNJhGHvCXSZkdVQjjT+ntHCiIQFxM0D55VlKhYy52RuvOvKMtLTawu7
+ tCGkapU8IojT7WDPchg==
+X-Proofpoint-GUID: r4tmD6a89ulISXFASIkxZSoEob8Xbueu
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-03_04,2026-10-02_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 spamscore=0 suspectscore=0 bulkscore=0
- priorityscore=1501 clxscore=1015 adultscore=0 impostorscore=0 phishscore=0
+ priorityscore=1501 spamscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ phishscore=0 suspectscore=0 clxscore=1015 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610030089
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610030090
 
-On Tue, Sep 29, 2026 at 09:37:38PM +0530, Sachin Kumar Garg wrote:
-> 
-> 
-> On 9/29/2026 8:35 PM, Dmitry Baryshkov wrote:
-> > On Tue, 29 Sept 2026 at 14:54, Sachin Kumar Garg
-> > <sachin.garg@oss.qualcomm.com> wrote:
-> > > 
-> > > 
-> > > 
-> > > On 9/27/2026 11:55 PM, Dmitry Baryshkov wrote:
-> > > > On Sun, Sep 27, 2026 at 09:27:46AM +0530, Sachin Kumar Garg wrote:
-> > > > > Add the VBV_DELAY instance capability for the HFI Gen2 encoder,
-> > > > > exposed to userspace via V4L2_CID_MPEG_VIDEO_VBV_DELAY and mapped to
-> > > > > HFI_PROP_VBV_DELAY through a new iris_set_vbv_delay(). The property
-> > > > > is only meaningful for CBR rate-control modes.
-> > > > > 
-> > > > > Low VBV delay values (34-100 ms) require the encoder to run
-> > > > > with a single video pipe, so extend iris_set_pipe() to force
-> > > > > work_route to 1 whenever the configured VBV_DELAY falls in that
-> > > > > range.
-> > > > > 
-> > > > > Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-> > > > > Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-> > > > > ---
-> > > > >    drivers/media/platform/qcom/iris/iris_ctrls.c      | 37 +++++++++++++++++++++-
-> > > > >    drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
-> > > > >    drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 12 ++++++-
-> > > > >    .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  1 +
-> > > > >    .../platform/qcom/iris/iris_platform_common.h      |  1 +
-> > > > >    5 files changed, 50 insertions(+), 2 deletions(-)
-> > > > > 
-> > > > > @@ -541,8 +545,19 @@ int iris_set_stage(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id
-> > > > >    int iris_set_pipe(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
-> > > > >    {
-> > > > >       const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
-> > > > > -    u32 work_route = inst->fw_caps[PIPE].value;
-> > > > > +    u32 work_route = inst->fw_caps[PIPE].max;
-> > > > 
-> > > > Why is being set to the max value instead of using the .value?
-> > > > 
-> > > 
-> > > fw_caps[PIPE].min/.max/.value are all seeded from the same platform
-> > > constant (num_vpp_pipe) at init, so .max and .value were interchangeable
-> > > before this patch. This patch now writes the applied pipe count back
-> > > into .value (used elsewhere for power/cycle estimation), which makes
-> > > .value stateful. Since iris_set_pipe() is re-invoked on every resolution
-> > > change while streaming, seeding work_route from .value would let a
-> > > previous single-pipe override persist as the new baseline on the next
-> > > call, even after the VBV-delay/CBR condition no longer applies. Reading
-> > > from .max instead keeps the default pipe count stable and re-evaluates
-> > > the workaround fresh on every call.
-> > 
-> > With the .value being written, does it need a lock protection?
-> > 
-> No — inst->lock already serializes this. iris_set_pipe()'s write to
-> fw_caps[PIPE].value only happens inside start_streaming
-> (iris_venc/vdec_streamon_output(), both the iris_set_properties() cap loop
-> and the DRC re-apply path), and start_streaming takes inst->lock before
-> reaching either. The only reader outside that same call chain is the
-> power/clock-scaling code (iris_vpu3x_vpu4x_calculate_frequency()), which is
-> only invoked via iris_scale_power(), itself called from start_streaming and
-> buf_queue — both of which also hold inst->lock. So writer and readers
-> already can't run concurrently; adding a lock here would just be redundant
-> with the existing vb2-op locking, and no other .set() callback in this file
-> takes one either.
+Sync changes from mesa commit 81fae85847d2 ("freedreno/registers: Sync
+xml changes back from kernel").
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+---
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |  2 +-
+ drivers/gpu/drm/msm/registers/adreno/a2xx.xml | 25 +++---
+ drivers/gpu/drm/msm/registers/adreno/a5xx.xml | 17 ++++
+ drivers/gpu/drm/msm/registers/adreno/a6xx.xml | 81 +++++++++++++------
+ .../drm/msm/registers/adreno/adreno_pm4.xml   | 41 ++++++----
+ 5 files changed, 116 insertions(+), 50 deletions(-)
 
-
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+index 081e79ea4652..c8381ac238ce 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+@@ -225,7 +225,7 @@ static void get_stats_counter(struct msm_ringbuffer *ring, u32 counter,
+ 	OUT_PKT7(ring, CP_REG_TO_MEM, 3);
+ 	OUT_RING(ring, CP_REG_TO_MEM_0_REG(counter) |
+ 		CP_REG_TO_MEM_0_CNT(2) |
+-		CP_REG_TO_MEM_0_64B);
++		CP_REG_TO_MEM_0_IS_64B);
+ 	OUT_RING(ring, lower_32_bits(iova));
+ 	OUT_RING(ring, upper_32_bits(iova));
+ }
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a2xx.xml b/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
+index 22caddaa0db9..66a9ad75131c 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
+@@ -1228,10 +1228,15 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	<reg32 offset="0x0c86" name="PA_SU_FACE_DATA">
+ 		<bitfield name="BASE_ADDR" low="5" high="31" type="uint"/>
+ 	</reg32>
++	<reg32 offset="0x0d03" name="SQ_RESOURCE_MANAGMENT">
++		<bitfield name="VTX_THREAD_BUF_ENTRIES" low="0" high="7" type="uint"/>
++		<bitfield name="PIX_THREAD_BUF_ENTRIES" low="8" high="15" type="uint"/>
++		<bitfield name="EXPORT_BUF_ENTRIES" low="16" high="24" type="uint"/>
++	</reg32>
+ 	<reg32 offset="0x0d00" name="SQ_GPR_MANAGEMENT">
+ 		<bitfield name="REG_DYNAMIC" pos="0" type="boolean"/>
+-		<bitfield name="REG_SIZE_PIX" low="4" high="11" type="uint"/>
+-		<bitfield name="REG_SIZE_VTX" low="12" high="19" type="uint"/>
++		<bitfield name="REG_SIZE_PIX" low="4" high="10" type="uint"/>
++		<bitfield name="REG_SIZE_VTX" low="12" high="18" type="uint"/>
+ 	</reg32>
+ 	<reg32 offset="0x0d01" name="SQ_FLOW_CONTROL"/>
+ 	<reg32 offset="0x0d02" name="SQ_INST_STORE_MANAGMENT">
+@@ -1527,12 +1532,12 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	</reg32>
+ 	<reg32 offset="0x2293" name="PA_SC_VIZ_QUERY">
+ 		<bitfield name="VIZ_QUERY_ENA" pos="0" type="boolean"/>
+-		<bitfield name="VIZ_QUERY_ID" low="1" high="6" type="uint"/>
+-		<bitfield name="KILL_PIX_POST_EARLY_Z" pos="8" type="boolean"/>
++		<bitfield name="VIZ_QUERY_ID" low="1" high="5" type="uint"/>
++		<bitfield name="KILL_PIX_POST_EARLY_Z" pos="7" type="boolean"/>
+ 	</reg32>
+ 	<reg32 offset="0x2294" name="VGT_ENHANCE"/>
+ 	<reg32 offset="0x2300" name="PA_SC_LINE_CNTL">
+-		<bitfield name="BRES_CNTL" low="0" high="15" type="uint"/>
++		<bitfield name="BRES_CNTL" low="0" high="7" type="uint"/>
+ 		<bitfield name="USE_BRES_CNTL" pos="8" type="boolean"/>
+ 		<bitfield name="EXPAND_LINE_WIDTH" pos="9" type="boolean"/>
+ 		<bitfield name="LAST_PIXEL" pos="10" type="boolean"/>
+@@ -1544,7 +1549,7 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	<reg32 offset="0x2302" name="PA_SU_VTX_CNTL">
+ 		<bitfield name="PIX_CENTER" pos="0" type="a2xx_pa_pixcenter"/>
+ 		<bitfield name="ROUND_MODE" low="1" high="2" type="a2xx_pa_roundmode"/>
+-		<bitfield name="QUANT_MODE" low="7" high="9" type="a2xx_pa_quantmode"/>
++		<bitfield name="QUANT_MODE" low="3" high="5" type="a2xx_pa_quantmode"/>
+ 	</reg32>
+ 	<reg32 offset="0x2303" name="PA_CL_GB_VERT_CLIP_ADJ" type="float"/>
+ 	<reg32 offset="0x2304" name="PA_CL_GB_VERT_DISC_ADJ" type="float"/>
+@@ -1796,10 +1801,10 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 		<value name="SQ_TEX_NUM_FORMAT_INT" value="1"/>
+ 	</enum>
+ 	<enum name="sq_tex_type">
+-		<value name="SQ_TEX_TYPE_0" value="0"/>
+-		<value name="SQ_TEX_TYPE_1" value="1"/>
+-		<value name="SQ_TEX_TYPE_2" value="2"/>
+-		<value name="SQ_TEX_TYPE_3" value="3"/>
++		<value name="SQ_TEX_TYPE_INVALID_TEXTURE" value="0"/>
++		<value name="SQ_TEX_TYPE_INVALID_BUFFER" value="1"/>
++		<value name="SQ_TEX_TYPE_VALID_TEXTURE" value="2"/>
++		<value name="SQ_TEX_TYPE_VALID_BUFFER" value="3"/>
+ 	</enum>
+ 	<reg32 offset="0" name="0">
+ 		<bitfield name="TYPE" low="0" high="1" type="sq_tex_type"/>
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a5xx.xml b/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
+index 4af76b3750f7..e928ad4e518c 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
+@@ -1804,6 +1804,9 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 
+ 
+ 	<reg32 offset="0xe000" name="GRAS_CL_CNTL">
++		<bitfield name="ZNEAR_CLIP_DISABLE" pos="1" type="boolean"/>
++		<bitfield name="ZFAR_CLIP_DISABLE" pos="2" type="boolean"/>
++		<bitfield name="Z_CLAMP_ENABLE" pos="5" type="boolean"/>
+ 		<bitfield name="ZERO_GB_SCALE_Z" pos="6" type="boolean"/>
+ 	</reg32>
+ 	<bitset name="a5xx_gras_xs_cl_cntl" inline="yes">
+@@ -1832,6 +1835,13 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	<reg32 offset="0xe013" name="GRAS_CL_VPORT_YSCALE_0" type="float"/>
+ 	<reg32 offset="0xe014" name="GRAS_CL_VPORT_ZOFFSET_0" type="float"/>
+ 	<reg32 offset="0xe015" name="GRAS_CL_VPORT_ZSCALE_0" type="float"/>
++	<doc>
++		The range GRAS_CL_CNTL.Z_CLAMP_ENABLE clamps to.  Near and far, not
++		sorted as the a6xx equivalents are: a reversed depth range is written
++		reversed.
++	</doc>
++	<reg32 offset="0xe070" name="GRAS_CL_VIEWPORT_ZCLAMP_NEAR_0" type="float"/>
++	<reg32 offset="0xe071" name="GRAS_CL_VIEWPORT_ZCLAMP_FAR_0" type="float"/>
+ 	<reg32 offset="0xe090" name="GRAS_SU_CNTL">
+ 		<bitfield name="CULL_FRONT" pos="0" type="boolean"/>
+ 		<bitfield name="CULL_BACK" pos="1" type="boolean"/>
+@@ -1976,6 +1986,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
+ 	<reg32 offset="0xe146" name="RB_FS_OUTPUT_CNTL">
+ 		<!-- bit0 set except for binning pass.. -->
+ 		<bitfield name="MRT" low="0" high="3" type="uint"/>
++		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="4" type="boolean"/>
+ 		<bitfield name="FRAG_WRITES_Z" pos="5" type="boolean"/>
+ 	</reg32>
+ 	<reg32 offset="0xe147" name="RB_RENDER_COMPONENTS">
+@@ -2058,6 +2069,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
+ 		<!-- per-mrt enable bit -->
+ 		<bitfield name="ENABLE_BLEND" low="0" high="7"/>
+ 		<bitfield name="INDEPENDENT_BLEND" pos="8" type="boolean"/>
++		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="9" type="boolean"/>
+ 		<bitfield name="ALPHA_TO_COVERAGE" pos="10" type="boolean"/>
+ 		<!-- a guess? -->
+ 		<bitfield name="SAMPLE_MASK" low="16" high="31"/>
+@@ -2070,6 +2082,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
+ 		<bitfield name="Z_TEST_ENABLE" pos="0" type="boolean"/>
+ 		<bitfield name="Z_WRITE_ENABLE" pos="1" type="boolean"/>
+ 		<bitfield name="ZFUNC" low="2" high="4" type="adreno_compare_func"/>
++		<bitfield name="Z_CLAMP_ENABLE" pos="5" type="boolean"/>
+ 		<doc>Z_READ_ENABLE bit is set for zfunc other than GL_ALWAYS or GL_NEVER</doc>
+ 		<bitfield name="Z_READ_ENABLE" pos="6" type="boolean"/>
+ 	</reg32>
+@@ -2114,6 +2127,8 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
+ 	<reg32 offset="0xe1d1" name="RB_SAMPLE_COUNT_CONTROL">
+ 		<bitfield name="COPY" pos="1" type="boolean"/>
+ 	</reg32>
++	<reg32 offset="0xe200" name="RB_VIEWPORT_ZCLAMP_NEAR" type="float"/>
++	<reg32 offset="0xe201" name="RB_VIEWPORT_ZCLAMP_FAR" type="float"/>
+ 
+ 	<doc>
+ 		Blits:
+@@ -2523,10 +2538,12 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
+ 		<!-- per-mrt enable bit -->
+ 		<bitfield name="ENABLE_BLEND" low="0" high="7"/>
+ 		<bitfield name="UNK8" pos="8" type="boolean"/>
++		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="9" type="boolean"/>
+ 		<bitfield name="ALPHA_TO_COVERAGE" pos="10" type="boolean"/>
+ 	</reg32>
+ 	<reg32 offset="0xe5ca" name="SP_FS_OUTPUT_CNTL">
+ 		<bitfield name="MRT" low="0" high="3" type="uint"/>
++		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="4" type="boolean"/>
+ 		<bitfield name="DEPTH_REGID" low="5" high="12" type="a3xx_regid"/>
+ 		<bitfield name="SAMPLEMASK_REGID" low="13" high="20" type="a3xx_regid"/>
+ 	</reg32>
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+index e6e56969a9b8..cf2fb20203b7 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+@@ -1388,7 +1388,7 @@ by a particular renderpass/blit.
+ 		<reg32 offset="0x0" name="REG"/>
+ 	</array>
+ 
+-	<array offset="0x0c58" name="VSC_PIPE_DATA_PRIM_SIZE" stride="1" length="32" variants="A6XX" usage="cmd">
++	<array offset="0x0c58" name="VSC_PIPE_DATA_PRIM_SIZE" stride="1" length="32" usage="cmd">
+ 		<doc>
+ 			Has the size of data written to corresponding VSC_PRIM_STRM
+ 			buffer.
+@@ -1396,7 +1396,7 @@ by a particular renderpass/blit.
+ 		<reg32 offset="0x0" name="REG"/>
+ 	</array>
+ 
+-	<array offset="0x0c78" name="VSC_PIPE_DATA_DRAW_SIZE" stride="1" length="32" variants="A6XX" usage="cmd">
++	<array offset="0x0c78" name="VSC_PIPE_DATA_DRAW_SIZE" stride="1" length="32" usage="cmd">
+ 		<doc>
+ 			Has the size of data written to corresponding VSC pipe, ie.
+ 			same thing that is written out to VSC_SIZE_BASE
+@@ -1461,8 +1461,10 @@ by a particular renderpass/blit.
+ 		<bitfield name="IJ_LINEAR_CENTROID" pos="4" type="boolean"/>
+ 		<bitfield name="IJ_LINEAR_SAMPLE" pos="5" type="boolean"/>
+ 		<bitfield name="COORD_MASK" low="6" high="9" type="hex"/>
+-		<bitfield name="UNK10" pos="10" type="boolean" variants="A7XX-"/>
+-		<bitfield name="UNK11" pos="11" type="boolean" variants="A7XX-"/>
++		<!-- A740+ field, Must match RB_PS_INPUT_CNTL -->
++		<bitfield name="FACENESS" pos="10" type="boolean" variants="A7XX-"/>
++		<!-- A740+ field, Must match RB_PS_INPUT_CNTL -->
++		<bitfield name="CENTERRHW" pos="11" type="boolean" variants="A7XX-"/>
+ 	</bitset>
+ 
+ 	<reg32 offset="0x8005" name="GRAS_CL_INTERP_CNTL" type="a6xx_gras_cl_interp_cntl" variants="A6XX-A7XX" usage="draw"/>
+@@ -2170,12 +2172,12 @@ by a particular renderpass/blit.
+ 		<bitfield name="SCISSOR" pos="16" type="boolean"/>
+ 		<bitfield name="UNK17" low="17" high="18"/>
+ 		<!-- required when blitting D24S8/D24X8 -->
+-		<bitfield name="D24S8" pos="19" type="boolean"/>
++		<bitfield name="IS_SRC_YUV" pos="19" type="boolean"/>
+ 		<!-- some sort of channel mask, disabled channels are set to zero ? -->
+ 		<bitfield name="MASK" low="20" high="23"/>
+ 		<bitfield name="IFMT" low="24" high="26" type="a6xx_2d_ifmt"/>
+-		<bitfield name="UNK27" pos="27" type="boolean"/>
+-		<bitfield name="UNK28" pos="28" type="boolean"/>
++		<bitfield name="FULL_RANGE_YUV" pos="27" type="boolean"/>
++		<bitfield name="LINEAR_YUV" pos="28" type="boolean"/>
+ 		<bitfield name="RASTER_MODE" pos="29" type="a6xx_raster_mode"/>
+ 		<bitfield name="COPY" pos="30" type="boolean" variants="A7XX-"/>
+ 	</bitset>
+@@ -2561,10 +2563,8 @@ by a particular renderpass/blit.
+ 		<reg32 offset="0" name="REG" type="float"/>
+ 	</array>
+ 
+-	<!-- 0x88c2-0x88cf invalid-->
+ 	<reg32 offset="0x88d0" name="RB_RESOLVE_CNTL_0" usage="resolve">
+-		<bitfield name="UNK0" low="0" high="12"/>
+-		<bitfield name="UNK16" low="16" high="26"/>
++		<bitfield name="YUV_PLANE_ID" low="0" high="1"/>
+ 	</reg32>
+ 	<reg32 offset="0x88d1" name="RB_RESOLVE_CNTL_1" type="a6xx_reg_xy" usage="resolve"/>
+ 	<reg32 offset="0x88d2" name="RB_RESOLVE_CNTL_2" type="a6xx_reg_xy" usage="resolve"/>
+@@ -2761,7 +2761,22 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x8a30" name="RB_UNKNOWN_8A30" variants="A6XX" usage="draw"/>
+ 
+ 	<reg32 offset="0x8c00" name="RB_A2D_BLT_CNTL" type="a6xx_a2d_blt_cntl" usage="blit"/>
+-	<reg32 offset="0x8c01" name="RB_A2D_PIXEL_CNTL" low="0" high="31" usage="blit"/>
++
++	<enum name="a6xx_a2d_pixel_op">
++		<value value="0" name="PIXEL_OP_DISABLED"/>
++		<value value="1" name="PIXEL_OP_BLENDING"/>
++		<value value="3" name="PIXEL_OP_ROP"/>
++	</enum>
++
++	<reg32 offset="0x8c01" name="RB_A2D_PIXEL_CNTL" low="0" high="31" usage="blit">
++		<bitfield name="PIXEL_OP" low="0" high="1" type="a6xx_a2d_pixel_op"/>
++		<bitfield name="COLOR_SRC_FACTOR" low="6" high="10" type="adreno_rb_blend_factor"/>
++		<bitfield name="COLOR_BLEND_OP" low="11" high="13" type="a3xx_rb_blend_opcode"/>
++		<bitfield name="COLOR_DST_FACTOR" low="14" high="18" type="adreno_rb_blend_factor"/>
++		<bitfield name="ALPHA_SRC_FACTOR" low="19" high="23" type="adreno_rb_blend_factor"/>
++		<bitfield name="ALPHA_BLEND_OP" low="24" high="26" type="a3xx_rb_blend_opcode"/>
++		<bitfield name="ALPHA_DST_FACTOR" low="27" high="31" type="adreno_rb_blend_factor"/>
++	</reg32>
+ 
+ 	<bitset name="a6xx_a2d_src_texture_info" inline="yes">
+ 		<bitfield name="COLOR_FORMAT" low="0" high="7" type="a6xx_format"/>
+@@ -2814,7 +2829,7 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x8c2e" name="RB_A2D_CLEAR_COLOR_DW2" usage="blit"/>
+ 	<reg32 offset="0x8c2f" name="RB_A2D_CLEAR_COLOR_DW3" usage="blit"/>
+ 
+-	<reg32 offset="0x8c34" name="RB_A2D_UNKNOWN_8C34" variants="A7XX-" usage="blit"/>
++	<reg32 offset="0x8c34" name="RB_A2D_DEST_BUFFER_ARRAY_PITCH" variants="A7XX-" usage="blit"/>
+ 
+ 	<!-- 0x8c35-0x8dff invalid -->
+ 
+@@ -2959,17 +2974,10 @@ by a particular renderpass/blit.
+ 		<bitfield name="DISCARD" pos="2" type="boolean"/>
+ 	</bitset>
+ 
+-	<reg32 offset="0x9980" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX" usage="draw"/>
+-	<reg32 offset="0x9107" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A7XX" usage="draw"/>
++	<reg32 offset="0x9107" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX-A7XX" usage="draw"/>
+ 	<reg32 offset="0x930d" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A8XX-" usage="draw"/>
+ 	<reg32 offset="0x9317" name="VPC_RAST_STREAM_CNTL_V2" type="a6xx_vpc_rast_stream_cntl" variants="A7XX" usage="draw"/>
+ 
+-	<reg32 offset="0x9107" name="VPC_UNKNOWN_9107" variants="A6XX" usage="draw">
+-		<!-- this mirrors VPC_RAST_STREAM_CNTL::DISCARD, although it seems it's unused -->
+-		<bitfield name="RASTER_DISCARD" pos="0" type="boolean"/>
+-		<bitfield name="UNK2" pos="2" type="boolean"/>
+-	</reg32>
+-
+ 	<reg32 offset="0x9108" name="VPC_RAST_CNTL" type="a6xx_rast_cntl" variants="A6XX-A7XX" usage="draw"/>
+ 	<reg32 offset="0x930e" name="VPC_RAST_CNTL" type="a6xx_rast_cntl" variants="A8XX-" usage="draw"/>
+ 	<bitset name="a6xx_pc_cntl" inline="yes">
+@@ -3288,7 +3296,29 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x9803" name="PC_RESTART_INDEX" low="0" high="31" type="uint" variants="A6XX-A7XX" usage="draw"/>
+ 	<reg32 offset="0x9b15" name="PC_RESTART_INDEX" low="0" high="31" type="uint" variants="A8XX-" usage="draw"/>
+ 
+-	<reg32 offset="0x9804" name="PC_MODE_CNTL" low="0" high="7" variants="A6XX-A7XX" usage="draw"/>
++	<reg32 offset="0x9804" name="PC_MODE_CNTL" low="0" high="7" variants="A6XX-A7XX" usage="draw">
++		<!-- 
++			The higher this is set, the faster primitive processing performance
++			ends up being. It is likely the amount of entries to process/fetch.
++		-->
++		<bitfield name="COUNT1" low="0" high="4" type="uint"/>
++		<!--
++			Setting this slows down primitive processing substantially, but it
++			was noted to fix some vertex corruption issues in the past. Likely
++			serves as a workaround to serialize the primitive pipeline?
++		-->
++		<bitfield name="UNK5" pos="5" type="boolean"/>
++		<!-- Never set by the blob, removed in A7XX. Unclear impact. -->
++		<bitfield name="UNK6" pos="6" type="boolean" variants="A6XX"/>
++		<!-- Never set by the blob. Unclear impact. -->
++		<bitfield name="UNK7" pos="7" type="boolean"/>
++		<!--
++			Same as COUNT1 but one bit larger, this replaces COUNT1 mid-A7XX but
++			the proprietary driver tends to set it to the same or larger value
++			(by using the extra bit) as COUNT1.
++		-->
++		<bitfield name="COUNT2" low="8" high="13" type="uint" variants="A7XX-"/>
++	</reg32>
+ 	<reg32 offset="0x9b00" name="PC_MODE_CNTL" low="0" high="14" variants="A8XX" usage="draw"/>
+ 
+ 	<reg32 offset="0x9805" name="PC_POWER_CNTL" low="0" high="2" variants="A6XX" usage="draw"/>
+@@ -3367,6 +3397,8 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x9886" name="PC_TF_BUFFER_SIZE" variants="A7XX" usage="cmd"/>
+ 	<reg32 offset="0x9815" name="PC_TF_BUFFER_SIZE" variants="A8XX-" usage="cmd"/>
+ 
++	<reg32 offset="0x9980" name="PC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX" usage="draw"/>
++
+ 	<!-- 0x9982-0x9aff invalid -->
+ 
+ 	<reg32 offset="0x9b00" name="PC_CNTL" type="a6xx_pc_cntl" variants="A6XX-A7XX" usage="draw"/>
+@@ -3466,7 +3498,7 @@ by a particular renderpass/blit.
+ 	<reg64 offset="0x9e12" name="PC_PVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A6XX-A7XX"/>
+ 	<reg64 offset="0x9e14" name="PC_DVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A6XX-A7XX"/>
+ 
+-	<reg32 offset="0x9e0a" name="PC_AUTO_VERTEX_STRIDE"/>
++	<reg32 offset="0x9e0a" name="PC_AUTO_VERTEX_STRIDE" low="0" high="9" type="uint"/>
+ 	<reg32 offset="0x9e0d" name="PC_VIS_STREAM_CNTL" type="a6xx_pc_vis_stream_cntl" variants="A8XX-"/>
+ 	<reg64 offset="0x9e0e" name="PC_PVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A8XX-"/>
+ 	<reg64 offset="0x9e10" name="PC_DVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A8XX-"/>
+@@ -4077,8 +4109,8 @@ by a particular renderpass/blit.
+ 		<bitfield name="THREADSIZE" pos="20" type="a6xx_threadsize"/>
+ 		<!-- seems to make SP use less concurrent threads when possible? -->
+ 		<bitfield name="UNK21" pos="21" type="boolean"/>
+-		<!-- has a small impact on performance, not clear what it does -->
+-		<bitfield name="UNK22" pos="22" type="boolean"/>
++		<!-- Enables round-robin mode, which guarantees fair scheduling -->
++		<bitfield name="COMPUTERRMODEEN" pos="22" type="boolean"/>
+ 		<bitfield name="EARLYPREAMBLE" pos="23" type="boolean"/>
+ 		<bitfield name="MERGEDREGS" pos="31" type="boolean"/>
+ 	</reg32>
+@@ -4342,6 +4374,7 @@ by a particular renderpass/blit.
+ 		</doc>
+ 		<bitfield name="EOLM_ENABLE" pos="1" type="boolean"/>
+ 	</reg32>
++	<reg32 offset="0xaf81" name="SP_LPAC_CHICKEN_BITS" variants="A7XX" usage="init"/>
+ 	<reg32 offset="0xae04" name="SP_NC_MODE_CNTL_2" usage="init">
+ 		<bitfield name="F16_NO_INF" pos="3" type="boolean"/>
+ 	</reg32>
+diff --git a/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml b/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
+index f185b541aa70..2723da19cf5b 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
+@@ -646,10 +646,10 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
+ 	<value name="CP_NON_CONTEXT_REG_BUNCH" value="0x5d" variants="A7XX-"/>
+ 	<doc>
+ 		Write to a scratch memory that is read by CP_REG_TEST with
+-		SOURCE_SCRATCH_MEM set. It's not the same scratch as scratch registers.
++		SOURCE_OC_MEM set. It's not the same scratch as scratch registers.
+ 		However it uses the same memory space.
+ 	</doc>
+-	<value name="CP_MEM_TO_SCRATCH_MEM" value="0x49" variants="A7XX-"/>
++	<value name="CP_MEM_TO_OC_MEM" value="0x49" variants="A7XX-"/>
+ 
+ 	<doc>
+ 		Executes an array of fixed-size command buffers where each
+@@ -1039,6 +1039,11 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ </domain>
+ 
+ <domain name="CP_DRAW_AUTO" width="32">
++	<doc>
++		Draws (counter - NUM_VERTICES_OFFSET / 4) / STRIDE vertices, counter
++		read from NUM_VERTICES_BASE.  a7xx divides the counter by four too,
++		earlier gens use it as-is.
++	</doc>
+ 	<reg32 offset="0" name="0" type="vgt_draw_initiator_a4xx"/>
+ 	<reg32 offset="1" name="1">
+ 		<bitfield name="NUM_INSTANCES" low="0" high="31" type="uint"/>
+@@ -1048,7 +1053,8 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 		<bitfield name="NUM_VERTICES_OFFSET" low="0" high="31" type="uint"/>
+ 	</reg32>
+ 	<reg32 offset="5" name="5">
+-		<bitfield name="STRIDE" low="0" high="31" type="uint"/>
++		<!-- the CP masks the stride to 11 bits before forwarding it -->
++		<bitfield name="STRIDE" low="0" high="10" type="uint"/>
+ 	</reg32>
+ </domain>
+ 
+@@ -1255,6 +1261,11 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 			$dst = (($dst &amp; $src0) rot $rotate) | $src1
+ 
+ 		Here "rot" means rotate left.
++		If SRCn_IS_REG, the corresponding src is a register offset,
++		otherwise it is an immediate.
++
++		If DST_SCRATCH is set then the value modified is a scratch
++		ram address, instead of a register.
+ 	</doc>
+ 	<reg32 offset="0" name="0">
+ 		<bitfield name="DST_REG" low="0" high="17" type="hex"/>
+@@ -1286,7 +1297,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 			Treat things as 64B, allowing for a 64B atomic read of
+ 			registers.
+ 		-->
+-		<bitfield name="64B" pos="30" type="boolean"/>
++		<bitfield name="IS_64B" pos="30" type="boolean"/>
+ 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
+ 	</reg32>
+ 	<stripe varset="chip" variants="A2XX-A4XX">
+@@ -1307,7 +1318,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 		<bitfield name="REG" low="0" high="17" type="hex"/>
+ 		<!-- number of registers/dwords copied is max(CNT, 1). -->
+ 		<bitfield name="CNT" low="18" high="29" type="uint"/>
+-		<bitfield name="64B" pos="30" type="boolean"/>
++		<bitfield name="IS_64B" pos="30" type="boolean"/>
+ 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
+ 	</reg32>
+ 	<reg64 offset="1" name="DEST" type="waddress"/>
+@@ -1327,7 +1338,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 		<bitfield name="REG" low="0" high="17" type="hex"/>
+ 		<!-- number of registers/dwords copied is max(CNT, 1). -->
+ 		<bitfield name="CNT" low="18" high="29" type="uint"/>
+-		<bitfield name="64B" pos="30" type="boolean"/>
++		<bitfield name="IS_64B" pos="30" type="boolean"/>
+ 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
+ 	</reg32>
+ 	<reg64 offset="1" name="DEST" type="waddress"/>
+@@ -1337,12 +1348,13 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ <domain name="CP_MEM_TO_REG" width="32">
+ 	<reg32 offset="0" name="0">
+ 		<bitfield name="REG" low="0" high="17" type="hex"/>
++		<!-- if set, all writes are to the same reg -->
++		<bitfield name="ONE_REG_WR" pos="18" type="boolean"/>
+ 		<!-- number of registers/dwords copied is max(CNT, 1). -->
+ 		<bitfield name="CNT" low="19" high="29" type="uint"/>
+ 		<!-- shift each DWORD left by 2 while copying -->
+ 		<bitfield name="SHIFT_BY_2" pos="30" type="boolean"/>
+-		<!-- does the same thing as CP_MEM_TO_MEM::UNK31 -->
+-		<bitfield name="UNK31" pos="31" type="boolean"/>
++		<bitfield name="WAIT_CACHE_FLUSH" pos="31" type="boolean"/>
+ 	</reg32>
+ 	<stripe varset="chip" variants="A2XX-A4XX">
+ 		<reg32 offset="1" name="SRC" type="address"/>
+@@ -1366,8 +1378,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 		<bitfield name="DOUBLE" pos="29" type="boolean"/>
+ 		<!-- execute CP_WAIT_FOR_MEM_WRITES beforehand -->
+ 		<bitfield name="WAIT_FOR_MEM_WRITES" pos="30" type="boolean"/>
+-		<!-- some other kind of wait -->
+-		<bitfield name="UNK31" pos="31" type="boolean"/>
++		<bitfield name="WAIT_CACHE_FLUSH" pos="31" type="boolean"/>
+ 	</reg32>
+ 	<reg64 offset="1" name="DST" type="waddress"/>
+ 	<reg64 offset="3" name="SRC_A" type="address"/>
+@@ -1954,13 +1965,13 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 	<enum name="source_type">
+ 		<value value="0" name="SOURCE_REG"/>
+ 		<!-- Don't confuse with scratch registers, this is a separate memory
+-			 written into by CP_MEM_TO_SCRATCH_MEM. -->
+-		<value value="1" name="SOURCE_SCRATCH_MEM" varset="chip" variants="A7XX-"/>
++			 written into by CP_MEM_TO_OC_MEM. -->
++		<value value="1" name="SOURCE_OC_MEM" varset="chip" variants="A7XX-"/>
+ 	</enum>
+ 	<reg32 offset="0" name="0">
+ 		<!-- the register to test -->
+ 		<bitfield name="REG" low="0" high="17" varset="source_type" variants="SOURCE_REG"/>
+-		<bitfield name="SCRATCH_MEM_OFFSET" low="0" high="17" varset="source_type" variants="SOURCE_SCRATCH_MEM"/>
++		<bitfield name="OC_MEM_OFFSET" low="0" high="17" varset="source_type" variants="SOURCE_OC_MEM"/>
+ 		<bitfield name="SOURCE" pos="18" type="source_type" addvariant="yes"/>
+ 		<!-- the bit to test -->
+ 		<bitfield name="BIT" low="20" high="24" type="uint"/>
+@@ -2277,10 +2288,10 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
+ 	</reg32>
+ </domain>
+ 
+-<domain name="CP_MEM_TO_SCRATCH_MEM" width="32">
++<domain name="CP_MEM_TO_OC_MEM" width="32">
+ 	<doc>
+ 		Best guess is that it is a faster way to fetch all the VSC_CHANNEL_VISIBILITY registers
+-		and keep them in a local scratch memory instead of fetching every time
++		and keep them in a local on-chip memory instead of fetching every time
+ 		when skipping IBs.
+ 	</doc>
+ 	<reg32 offset="0" name="0">
 -- 
-With best wishes
-Dmitry
+2.55.0
+
