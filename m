@@ -1,105 +1,224 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38C54495037;
-	Sat,  3 Oct 2026 19:45:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3CDB49BD84
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 19:51:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791056723; cv=none; b=F2LB6fLaBsEz4ofrKAxqMmdbS+pArFvk3ewfuD+N0Iv/B0dPz50Ud5I15cpYsTZv35uZAgUHN1jkvbdwIvPCMzUPGsOpG8rE5SwM92UvtZu5cxGFvByNW04jnSd5hjZgtU6DomUDuCZwFuJ06+Id7KFfrgGFNdsTFKOMVFvKRBw=
+	t=1791057067; cv=none; b=EKxczNCaw79Ef5xRjiJBpZtuaEe3xscjm5zlpY9JO9XThokvfDaT2KfKQ4N5YesXWr/LqcZ8ETbf+5ecQitDizbTzCrLgmuk6qHqyHWlu7Y2kfza7GUb39U2wRk1MltqrNkezLX1v1EGti04nQabGaRvwcAAhBxZOko3hIxdhCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791056723; c=relaxed/simple;
-	bh=e4d3YIbpCboRqV6LBtpZBs+N7k1vOBHFMF9qD/0dOGo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=KXqPH7dHr091Bmgas6ZRcTiu0498yxu3FKQJ1mwSHsn13NQCAh+Ej9GTqDDYH13ll2bL0vTvLqdBi9WRkM5j2YaJCRSt8CNSCOpyuh85PItEyHW3CthxujkFeJC4Dkg3W9Rh1EzlN9mlZ8La5xZ6uknYT5aMscKvZpSrMgToqxU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NofembfH; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1791057067; c=relaxed/simple;
+	bh=7pBfjveomDnmzdvLDU2dmhnc89A87sIYXO91YioPoWQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RX/lT+e53dF8O06rIPu4qh8IB7dZRoQ0fkd9Sd6eM4JQGD5W04Nkm6jbF7yeEZZFkXsmd2XA1YqRk36D9bbzYKF0MZ1nxApHAvhTpEEvb0mypb2FTQzQ6hVeoUbl+7P5ENC8AuChtgigOmVMdaHKgYGOyoELrZQ3r7Y+4UXBjK8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r7TsFJis; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NofembfH"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CB3B8C4AF4D;
-	Sat,  3 Oct 2026 19:45:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1791056722;
-	bh=e4d3YIbpCboRqV6LBtpZBs+N7k1vOBHFMF9qD/0dOGo=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=NofembfH42nqRmx/+f4kDQVOrB1yvfh7O2dC301v1D9n9hAdq2FRC5FO4/KhwyGyZ
-	 jnSu7TeH3/KSXYcvpHO2cA6JFji0C3280gGsGmvpvAYUKFpTnsJHNDuYPnVA4kZ0vi
-	 YL+GmRhfNo4oLvdpaqdK+M5tX7/FjmHFlUqKz7y1XruJc5pn0AAzNqOHCN9Z8UAcL/
-	 zMdEqiB+wwT2zmVFAMukm0oZUOwfIMJ620YAeAEziEPlwASaSkzito1pDt8my+Z8XV
-	 c/NwLULVB995ly576s3dNGt2uaC4dKQY+/R4XwvA2uBET9l5bnZ7IFwHSdKtZuEk/X
-	 rd4eMa0Dao+Sw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B23A9CA5FF2;
-	Sat,  3 Oct 2026 19:45:22 +0000 (UTC)
-From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Sat, 03 Oct 2026 16:45:24 -0300
-Subject: [PATCH 4/4] arm64: dts: qcom: pmi8998: Add the charger state
- change interrupt
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r7TsFJis"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-4a11603310fso7188405e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 12:51:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791057064; x=1791661864; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GthwDRkP6iGq1qpE9Gwptow6c+M7A3HXNDwh7Y2Glb0=;
+        b=r7TsFJisSQnFR036Lx7A3Ji+tzCpGYhe36jSD/1CrNjzKkkUnhOFutTi0oZ8QDVvQA
+         SpENr3VGQuDmepT7B+/+FDgtGuckXgd57laUnrWsHoJKpieDiZwRUj8Ls5fJ4aLEcKGW
+         YzIUHlHQX1wR4R/TXUA1u7UYoK4QqnnJF6p2lKaoCJSr6wXJDL5GB+Dt3LcN6T/ZMYW7
+         s5HCD8nUFNxMb/bWeQsFcuvPLZDIHs0RA1PeeM26EaDI0TRsqaRxZtZoAys9h4AkLfas
+         Xr7fw01ohlN/mlEkPd8dRv47KHJy6ek2PwQCZLBLL775D6mYjpZd2vA9/Qh9QPi7KszP
+         RhCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791057064; x=1791661864;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GthwDRkP6iGq1qpE9Gwptow6c+M7A3HXNDwh7Y2Glb0=;
+        b=rLonYNOVwq08ucQCnJZeKEJpj6vDG4odtRbnBTyEEQejfZNVnsZB6vobfSWs3JDfrh
+         FfBcGHUVQfhgChEe09YVGpiPzu6+GPi8AUHicaY0NvNY4Jt0TWCRZOll9pR6chN7mDz4
+         kiQjvjN/M6CrebsWoVULRJJufHTt7ZKMdRi6WNinxqL9uMa9FU4ig9H/yQJcJNQ2cjMC
+         vmZqdK0gdZHmLscEFD/cUxsdWGLgTguz+QTRVcMqfA55uJ9vETWDsE9jlKGKFLWG3KlI
+         /t2w9mSzrq6i03TtvkRAWAGlkYNda2MmTbv6UfmuAvcNccFdsrvOKtQA+MAH95WJVWZq
+         KUdA==
+X-Forwarded-Encrypted: i=1; AKwUvBxhOkEr7HXTrNlSpQl+09C9G9dnF6SPQhLT2dc3UkKwUkSFioCBcMJIr4G9WfPiYiQKrjIr70CYFg91iiH8@vger.kernel.org
+X-Gm-Message-State: AFuF++m7mNpkRH2jeSOjgS+0GX8Nl0/FLfE0klEpz5PEcFfaEAaOrB6p
+	/S/0kdRGmZgh07p7qeREzKH4bHGPHgWxxKIl4u34p6BMctZwKQIuQ9St
+X-Gm-Gg: AYBFou2zzCzphIv1jp9J1sqlSXadxXQdaM+ORVdP/pYggbwp3eO4WvMFffxomeslLCM
+	8Ge1PeMvbCk/Ck8i0hwqQCZfesKGF+Fonrq3oL006l9upDjxmjYDhYiEUyS0l6aSPFqFIMGNVpF
+	z9A8MQAGxlj96jvSD1SGvThetytfJCecBz3ohnJclvVc+9MoNaNNJwVdXDxNZ1t+lDpaFRdqEvo
+	U2CHJDUA6kNbqyYQT99Xy440Kd8DWbJaYBXZp1MQ+rUvgBrL86g4m5SbRK8z3vdGa2oz0eERsPB
+	4Kea4lVIxFUQdO4Ah19azuFt7p514g2qUYtYgCbl5hU6cUscN1g9MPiP4OhVRK5T9RPjtN55Am2
+	+wgJMUmDsPyZ2p1xA0BjHLTiasPjWdvrQZvR4PDQrIrqlx5sYjbQEmkqS/Czbv7KP+JKobq14Ng
+	HldffDkd1bxMavdNdSIP26jmJNjCjPqHxOmjmEpt+4EGYL7AczKPatpM1f0t9Tm1rAQZvfs94wK
+	jQPLON9zOillTpayzIQ7Lcin+iMs3GXOW/KTw==
+X-Received: by 2002:a7b:cd8e:0:b0:49f:bd3c:bc18 with SMTP id 5b1f17b1804b1-4a02758ff89mr75811725e9.19.1791057063698;
+        Sat, 03 Oct 2026 12:51:03 -0700 (PDT)
+Received: from [192.168.20.170] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0280b2e3csm233621055e9.5.2026.10.03.12.50.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 03 Oct 2026 12:51:03 -0700 (PDT)
+Message-ID: <4ae83db6-768d-447e-b177-3ef5206267f9@gmail.com>
+Date: Sat, 3 Oct 2026 21:50:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261003-qcom-smbx-chg-state-change-v1-4-fffaef446932@gmail.com>
-References: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
-In-Reply-To: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
-To: Casey Connolly <casey.connolly@linaro.org>, 
- Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Robin Snyders <robin@snyders.xyz>, David Heidelberg <david@ixit.cz>, 
- phone-devel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>, 
- linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Fabricio Akio <fabricioakio@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791056720; l=1071;
- i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=7C77VJn5h1hHh/I/VZZaiNv4WEPYvSZpJOqhhjqRqHc=;
- b=0exrXWpGGiWrGFNj6VZv5rb5FFi3oEO9R9FhA38JvxlNknm4uAx73x2StdvgjRHBaFwqQcy2U
- E5Yh9gFzZNMCxsvBiC7f1jgm+L6wIE/O/8hD7zkoPbE4Sa9XwkoY0hB
-X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
- pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
-X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
- auth_id=1076
-X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
-Reply-To: fabricioakio@gmail.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as
+ critical
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
+ Sricharan Ramabadhran <quic_srichara@quicinc.com>
+Cc: Stanislaw Pal <kuncy7@gmail.com>, Mieczyslaw Nalewaj <namiltd@yahoo.com>,
+ Jie Luo <jie.luo@oss.qualcomm.com>, Georg Seema <georgseema@gmail.com>,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20260918-ipq5018-mark-gpll0_main-critical-v1-1-fbe8f27a0106@gmail.com>
+ <e16cf23c-82aa-465b-81b2-6240f4a0f4d9@oss.qualcomm.com>
+ <f2ccd6b6-e5a2-4d36-a12c-124638c31280@gmail.com>
+ <66d48e1f-7bab-42f3-84db-ce794f2a2a89@oss.qualcomm.com>
+Content-Language: hu
+From: Gabor Juhos <j4g8y7@gmail.com>
+In-Reply-To: <66d48e1f-7bab-42f3-84db-ce794f2a2a89@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Fabricio Akio <fabricioakio@gmail.com>
+2026. 10. 01. 18:15 keltezéssel, Konrad Dybcio írta:
+> On 9/24/26 1:33 PM, Gabor Juhos wrote:
+>> Hi Konrad,
+>>
+>> 2026. 09. 23. 15:32 keltezéssel, Konrad Dybcio írta:
+>>> On 9/18/26 11:27 AM, Gabor Juhos wrote:
+>>>> On IPQ5018, the APCS core clock feeds the CPUs. It can use
+>>>> different clocks as its parent, but during system boot it
+>>>> utilizes GPLL0.
+> 
+> [...]
+> 
+>>> At a glance, we have the CPUs consuming
+>>> &apcs_glb APCS_ALIAS0_CORE_CLK
+>>>
+>>> which takes XO/GPLL0/A53PLL as parents.
+>>>
+>>> GPLL0 is a child of GPLL0_MAIN, so this should never be gated in
+>>> practice. devlink and probe deferrals should make sure you always
+>>> get a valid clock handle for the cpufreq driver..
+>>
+>> Yes, the cpufreq driver gets a valid clock handle. However the hang happens
+>> early, when the 'apcs_alias0_core' clock is not registered yet. So CCF does not
+>> know that the clock (hence the CPU) is a consumer of GPLL0.
+> 
+> So is that the late_initcall kicking in early, disabling unused
+> clocks,
 
-Describe the charger's chg-state-change interrupt, as the vendor device
-tree does.
+No, disabling unused clocks happens much later.
 
-Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
----
- arch/arm64/boot/dts/qcom/pmi8998.dtsi | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+> or is there some other logic that ends up disabling the
+> GPLL?
 
-diff --git a/arch/arm64/boot/dts/qcom/pmi8998.dtsi b/arch/arm64/boot/dts/qcom/pmi8998.dtsi
-index cd3f0790fd42..bd07ff137947 100644
---- a/arch/arm64/boot/dts/qcom/pmi8998.dtsi
-+++ b/arch/arm64/boot/dts/qcom/pmi8998.dtsi
-@@ -16,11 +16,13 @@ pmi8998_charger: charger@1000 {
- 			interrupts = <0x2 0x13 0x4 IRQ_TYPE_EDGE_BOTH>,
- 				     <0x2 0x12 0x2 IRQ_TYPE_EDGE_BOTH>,
- 				     <0x2 0x16 0x1 IRQ_TYPE_EDGE_RISING>,
--				     <0x2 0x13 0x6 IRQ_TYPE_EDGE_RISING>;
-+				     <0x2 0x13 0x6 IRQ_TYPE_EDGE_RISING>,
-+				     <0x2 0x10 0x1 IRQ_TYPE_EDGE_RISING>;
- 			interrupt-names = "usb-plugin",
- 					  "bat-ov",
- 					  "wdog-bark",
--					  "usbin-icl-change";
-+					  "usbin-icl-change",
-+					  "chg-state-change";
- 
- 			io-channels = <&pmi8998_rradc 3>,
- 				      <&pmi8998_rradc 4>;
+In the actual case, it is being disabled by runtime PM, which happens due to the
+pm_runtime_put() call in the 'ipq_cmn_pll' driver's probe function.
 
--- 
-2.55.0
+Adding a WARN() into the clk_alpha_pll_disable() function results in this message:
 
+  WARNING: disabling 'gpll0_main', expect a system hang!!!
+  WARNING: at clk_alpha_pll_disable+0xd8/0x108, CPU#0: kworker/u8:0/11
+  Modules linked in:
+  CPU: 0 UID: 0 PID: 11 Comm: kworker/u8:0 Not tainted 7.3.0-rc1 #0 PREEMPT
+  Hardware name: TP-Link Archer AX55 v1 (DT)
+  Workqueue: pm pm_runtime_work
+  ...
+  Call trace:
+   clk_alpha_pll_disable+0xd8/0x108 (P)
+   clk_core_disable+0xec/0x278                 # gpll0_main
+   clk_core_disable+0x110/0x278                # gpll0
+   clk_core_disable+0x110/0x278                # pcnoc_bfdcd_clk_src
+   clk_core_disable+0x110/0x278                # pcnoc_clk_src
+   clk_core_disable+0x110/0x278                # gcc_cmn_blk_ahb_clk
+   clk_disable+0x38/0x60
+   pm_clk_suspend+0x120/0x170
+   pm_generic_runtime_suspend+0x34/0x58
+   __rpm_callback+0x50/0x200
+   rpm_callback+0x60/0x78
+   rpm_suspend+0xf4/0x5e8
+   pm_runtime_work+0xd4/0xe0
+   process_one_work+0x258/0x860
+   worker_thread+0x1c8/0x378
+   kthread+0x140/0x158
+   ret_from_fork+0x10/0x20
 
+However the problem is not specific to the ipq_cmn_pll driver. It is a race
+between probing different devices.
+
+For example, consider a simplified probe function of a driver:
+
+  static int ipq5018_gpll0_consumer_probe(struct platform_device *pdev)
+  {
+          struct clk *clk;
+
+          clk = devm_clk_get_enabled(&pdev->dev, "foo");
+          if (IS_ERR(clk))
+                  return PTR_ERR(clk);
+
+          return some_function();
+  }
+
+Then assume the followings:
+  - "foo" is a descendant clock of GPLL0
+  - the probe function runs before probing other devices, so the probed device
+    will be the first consumer of GPLL0
+  - some_function() returns with an error code
+
+The result will be the same hang. Due to the probe failure, devres disables the
+clock, but since the the device is the only consumer of GPLL0, it is getting
+disabled as well.
+
+Here is the repective WARN result:
+
+  WARNING: disabling 'gpll0_main', expect a system hang!!!
+  WARNING: at clk_alpha_pll_disable+0xd8/0xf8, CPU#1: swapper/0/1
+  Modules linked in:
+  CPU: 1 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.3.0-rc1 #0 PREEMPT
+  Hardware name: TP-Link Archer AX55 v1 (DT)
+  ..
+  Call trace:
+   clk_alpha_pll_disable+0xd8/0xf8 (P)
+   clk_core_disable+0xdc/0x268
+   clk_disable+0x38/0x60
+   clk_disable_unprepare+0x18/0x38
+   devm_clk_release+0x2c/0x50
+   dr_node_release+0x24/0x38
+   release_nodes+0x78/0x118
+   devres_release_all+0x84/0xf0
+   device_unbind_cleanup+0x34/0x98
+   really_probe+0x190/0x3f0
+   __driver_probe_device+0x174/0x1e0
+   driver_probe_device+0xc4/0x130
+   __driver_attach+0x108/0x258
+   bus_for_each_dev+0x6c/0xb8
+   driver_attach+0x2c/0x40
+   bus_add_driver+0x128/0x258
+   driver_register+0x68/0x138
+   __platform_driver_register+0x30/0x48
+   ipq5018_gpll0_consumer_driver_init+0x2c/0x40
+   do_one_initcall+0x6c/0x548
+   kernel_init_freeable+0x264/0x388
+   kernel_init+0x34/0x1f0
+   ret_from_fork+0x10/0x20
+
+Maybe this helps to understand the problem.
+
+Regards,
+Gabor
