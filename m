@@ -1,91 +1,120 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2516E1E8826;
-	Sat,  3 Oct 2026 07:41:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5991388879;
+	Sat,  3 Oct 2026 08:10:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791013287; cv=none; b=Ueo6mccl+ksd2y7pnN9opU9t92A1ciSnv8jMQKb8aUsIUnjoZuTDZ6rjqioZiFwGd5ox8tl8RjG2FAcgUMNSv1X20U2ppPDhY9zB6SFzIoY+bY9sZzfEPPjHdr0Vxa7sZ3GWPnS1ohVASpGCD+wX1kbVDGPGNk0R/7nTqyDOc1Y=
+	t=1791015044; cv=none; b=WN1cyrkdjCc/1pq7zEKyF4QPE0PIv92LW2GaanLIUFMdSg1d18Ei/qx8mq6w9UU1BUeoBzXHHzrs8xCa2EK68HY7lu8EunxvT9kn1ceEjw1d1RVbuUxF6sBhG7RUALwXmJBtAON4TiorglZlNF5jC/1WiJ0NJpQvzgAlgww7TA8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791013287; c=relaxed/simple;
-	bh=r6gxLeWnq/J1Isax9qv6UAFtpr2Wk73y3KuTJXA9umI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jqJje/pm8HliVap/8yrmSGwkaKyyIeOrsoLeem+RKi3ouXdhMcAR35DwA2/SQCHilJOFQpGXkd33fEvxTTn/dZ2o59u9loZMXTRPi8GYsQnyyuHv5JEbV06hMy1ezpY8vGuBFpSSZH90syW6fyqOTF2Q9Z53nTV2nCi7bY2wmvE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G61T9tvg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791015044; c=relaxed/simple;
+	bh=bHYsIw/dFMZd67xDXednIJJk/jJrG1YKUdKOH+xHTrQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=dNNOqdTUmIPwYZDShMRCaXjznIe7yFwTaypWM/XYU6xGQ/PDJdmyBaeLDuR08mn4dCC5JxNFjOeHv1miR45NSKyIfwSSPa2GKYzz+ztMmKwH4O9m8qloiTNiMzhnLpPiD9pft8wBYAsj+ohwPby3I1a7sw20qImsM/HOMm8L+5M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=e3zwIBPd; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G61T9tvg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D75841F0089B;
-	Sat,  3 Oct 2026 07:41:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791013285;
-	bh=9bCKHbiVXllMPKt+oTVJ2iKD2nFCzwNeIZOHpdGsxu8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=G61T9tvgbkdaFLG/FWAQtNLnocL0UlVS2TqokT3spijDWrOUM7jp0B3ShiIVDbu0m
-	 Iu5fhaGKVRxz5AF6+sD68ATNHhAdoL62AdMcoAuxcQiFzItDAbUza49kOgjWv2LRoI
-	 EO5fMa7YqlJMHAQYyRSNwdjtEZQucZmI0svhhnZjY5K8n2D/I5RplMUZXmi/xDQeeY
-	 0bahMHt6UVqhl9PMfaSpOutwUkJMOFzXcatZi+nC7L5UJETfCfV8usMZNV55+OxUqP
-	 8S2SjFNCmJI2t5Pkf7i8Wz3tS8oagC0hSFL9VQlON+24LZ3Tl7QIjF8t15m0DjyPWH
-	 Kf6OCcaHOejuA==
-Date: Sat, 3 Oct 2026 09:41:20 +0200
-From: Vinod Koul <vkoul@kernel.org>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
-	yung-chuan.liao@linux.intel.com, prasad.kumpatla@oss.qualcomm.com,
-	jingyi.wang@oss.qualcomm.com, sibi.sankar@oss.qualcomm.com,
-	quic_srivasam@quicinc.com, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org
-Subject: Re: [PATCH v2 2/3] soundwire: qcom: add multi-master support
-Message-ID: <asCxoMbtsSfVcX_9@parshuram>
-References: <20261001093806.634862-1-srinivas.kandagatla@oss.qualcomm.com>
- <20261001093806.634862-3-srinivas.kandagatla@oss.qualcomm.com>
- <0ca6ee6a-020a-4705-8323-d524a813d3b5@linux.dev>
- <586046f1-8439-4353-b60d-dab6356de3ba@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="e3zwIBPd"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=Fz
+	qlwKVaG5F2Cl/Blfh3aivHLdgARdebIfadlDcrE98=; b=e3zwIBPd9Z/fHXL28y
+	RQCsxrifvMrkOOeSKsZ52Okx7FIKv6yzDUlQ48I6OHD83emduTJG6O+fbJDRt7Cx
+	CnZ0wiOMhn/5KZM0ralQnMawbWNDsiqlaU+FT+lNN4opT6FZV68QdFiv1WM5AiHn
+	uxVOw4rWFBYnx3NBfxJSi6800=
+Received: from pc.localdomain (unknown [])
+	by gzsmtp5 (Coremail) with SMTP id QCgvCgD3qHRLuMBqTxqBCg--.60808S2;
+	Sat, 03 Oct 2026 16:09:48 +0800 (CST)
+From: Jiale Yao <yaojiale02@163.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Cc: Jiale Yao <yaojiale02@163.com>
+Subject: [PATCH] drm/msm/a6xx: handle runtime resume failures
+Date: Sat,  3 Oct 2026 16:09:45 +0800
+Message-Id: <20261003080945.431091-1-yaojiale02@163.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <586046f1-8439-4353-b60d-dab6356de3ba@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:QCgvCgD3qHRLuMBqTxqBCg--.60808S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7tF15KFW3Ww43Gw4DGw45ZFb_yoW8ZF1Upr
+	Z5Xa1ftr48Cw1agws5AF48ZFy3C3yrWay7Z3sFg3s5ZF15AF1UtF1FyryaqF95ZFZ7AF13
+	tF4UJ3y7Cr1Ykw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pi3fQiUUUUU=
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbC7wwMRmrAuExQFAAA3z
 
-On 01-10-26, 12:06, Srinivas Kandagatla wrote:
-> 
-> 
-> On 10/1/26 11:53 AM, Pierre-Louis Bossart wrote:
-> > 
-> >> @@ -192,6 +194,13 @@ struct qcom_swrm_ctrl {
-> >>  	const unsigned int *reg_layout;
-> >>  	void __iomem *mmio;
-> >>  	struct reset_control *audio_cgcr;
-> >> +	u8 num_lanes;
-> >> +	bool is_dependent;
-> >> +	struct qcom_swrm_ctrl *peer_ctrl;
-> >> +	u8 peer_first_lane;
-> >> +	u8 num_peer_lanes;
-> >> +	bool is_primary;
-> >> +	u32 peer_dpn_offset;
-> > 
-> > nit-pick: do you need both is_dependent and is_primary? One would think
-> > that a single variable would be enough, no?
-> I did try to do that which made the code bit confusing to read.
+a6xx_pm_resume() ignores failures while resuming the GMU device and GX
+power domain, then continues enabling clocks and initializing hardware.
+The common error path also drops both runtime PM references even when
+either acquisition failed.
 
-I am viewing it that both should be set always for this mode. Do you
-have a case where it wont be the case..?
+Check each resume operation and unwind only the references acquired
+before the failure.
 
-> > also without context it's hard to understand if lanes are independent in
-> > terms of transport or not, not sure what 'peer' means in a multi-master
-> > setup with a primary controller and N dependent ones? Code like this
-> For now its one, but Yes, technically we could have more dependent ones,
-> I wanted to keep the patchset simple and right now the only have one
-> peer and i dont know if we have other setups with more dependent
-> controrllers.
+Fixes: 5a903a44a984 ("drm/msm/a6xx: Introduce GMU wrapper support")
+Signed-off-by: Jiale Yao <yaojiale02@163.com>
+---
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
-Lets add the logic when we have such scenarios and keep now for one peer.
-Does Qualcomm roadmap envision more controllers?
-
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+index 081e79ea4652..aa785f197aa0 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
+@@ -2188,8 +2188,13 @@ static int a6xx_pm_resume(struct msm_gpu *gpu)
+ 	/* Set the core clock and bus bw, having VDD scaling in mind */
+ 	dev_pm_opp_set_opp(&gpu->pdev->dev, opp);
+ 
+-	pm_runtime_resume_and_get(gmu->dev);
+-	pm_runtime_resume_and_get(gmu->gxpd);
++	ret = pm_runtime_resume_and_get(gmu->dev);
++	if (ret < 0)
++		goto err_clear_opp;
++
++	ret = pm_runtime_resume_and_get(gmu->gxpd);
++	if (ret < 0)
++		goto err_put_gmu;
+ 
+ 	ret = clk_bulk_prepare_enable(gpu->nr_clocks, gpu->grp_clks);
+ 	if (ret)
+@@ -2204,14 +2209,16 @@ static int a6xx_pm_resume(struct msm_gpu *gpu)
+ 	if (adreno_is_a619_holi(adreno_gpu))
+ 		a6xx_sptprac_enable(gmu);
+ 
+-	/* If anything goes south, tear the GPU down piece by piece.. */
+-	if (ret) {
++	goto out_unlock;
++
+ err_bulk_clk:
+-		pm_runtime_put(gmu->gxpd);
+-		pm_runtime_put(gmu->dev);
+-		dev_pm_opp_set_opp(&gpu->pdev->dev, NULL);
+-	}
++	pm_runtime_put(gmu->gxpd);
++err_put_gmu:
++	pm_runtime_put(gmu->dev);
++err_clear_opp:
++	dev_pm_opp_set_opp(&gpu->pdev->dev, NULL);
+ err_set_opp:
++out_unlock:
+ 	mutex_unlock(&a6xx_gpu->gmu.lock);
+ 
+ 	if (!ret) {
 -- 
-~Vinod
+2.34.1
+
