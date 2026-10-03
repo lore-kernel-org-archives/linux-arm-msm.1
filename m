@@ -1,102 +1,175 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F71C78F26
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 09:09:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E7A437F333
+	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 09:15:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791018554; cv=none; b=KlcSONSx8UGaDpchiKJ0Swol2NKwf+TJxZIknMSP2nrh6j12ffKGKxWaMYNTcznreDozdHgJv2OdynlFZwZBwwNXBjPOX0t9C1pyiWWrwrUE3+XBL2kcVj3BW8O8EMcJz4IwjRa8slrgdn0h+/cLQnN9yaawsmk6FY5XECuhWtk=
+	t=1791018905; cv=none; b=moyoHJfdTH35V2xfwHpT7qMeMuaWaPKs+l1TkWE/yYi9fCd+EkiqA/dDDSKR3rECgrRv8XZ4gWKnPqxtwzoSp1ve+I7VtafISGhMvPemxaRcYa14vBaBcvtOpxCeplO8VEU3X4yoaXmlBl9G71WqHO1HbzuHNflgadMbPWLZE5Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791018554; c=relaxed/simple;
-	bh=kYIfDI3QBE3ClSciA+/48Hptd209qBRxGk3JWEtzUGI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ga4ZKzR6WgYkvNhg++ulavE6XHNVPLVb2BscEm1yPyIzoOIKPOYnOSybsa63lj3rU/YJzCjnJun8vsewxbgbwz2KMV3VhP1NryiOXDXp0CyLCFWkID0C2DeBIb5gCHmkqJTVNQxVCpRp3QZn+1pnhAbpl+ChsglTuE7lcoF/pjo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=DIS+y5K7; arc=none smtp.client-ip=209.85.218.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791018905; c=relaxed/simple;
+	bh=rP9RNg9VVmVKDqjlIhXyymS0DyeJ4N2kWy3XBRaq6DI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=My1gjTnSDU/P4U5h+D4q4goWdFLbF0vHuj3goWSceePAlJZ9Szm+IY494pSZv3BEcVYaLMw3Pp/5s8tBszVRiVVxcUhpoSndBu4hQeHEBclxetXTuzLjrd7i4M1eeVC/R6Ml4/KrXA10SJyBHQdDRkTUJSfUtbA7Vhy+3rpDDj4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Bstz7Dpo; arc=none smtp.client-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="DIS+y5K7"
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c2a25dfbf5fso79014166b.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 02:09:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Bstz7Dpo"
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-486e70f2457so91745f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 02:15:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791018551; x=1791623351; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aD42U9G+t3AA3eGszJykKagIq3I33nrg5HXNEK2wHFE=;
-        b=DIS+y5K7aJB/YHs2o2NskzaCYs/OLfQL6i2dF72DW5eMpR2rcWe6kJaoo1n0zmFIUw
-         NvIJo5m0f0L1fJ1V+2EysiRQ59m79UF3hrKQZ6bbpP0phZDu6nRIbB8++P1KGP6Lu624
-         Kagj4dVL6rSoRK4BWlaw4yRIfckJVQQE4Zb6lYdPD0/x7yct57ap9fGuJYp8+fxM3PUZ
-         8ZjscNDf8lOSgYVQozQTzzBzcQBg//fjT4/gSVwy8m2M70xm/LWUSoC1eRqiuyM0+Q/S
-         2whApDjisXCfawzqInsvCzyRTtw3Zlpjm1VYtzwGq1rgmr9PYFZ2YSq1IXPXzsXRA6lE
-         wWGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791018551; x=1791623351;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791018902; x=1791623702; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aD42U9G+t3AA3eGszJykKagIq3I33nrg5HXNEK2wHFE=;
-        b=y48FUa/bpqy6rxxECHV+M53OaxZQ/1OA0mcPtMCL1MQVWWrB4X4uLrxQ/AxF82EcFU
-         CcHRN6SynxOrkXzg+5BCzHne1agGjBmNlvWmo1WhFfV/7w1HVUM1ip0Elwkpu+2b8LzO
-         xZNOLkRG6WZf6rgN+MWDTiu4PnPBL2/6oe0DZKPk37FfE9oyCPs2w0s50kJQtl7OqK9D
-         P5ejvDWwwJzyHTJtk9a6gbaG/o7RHEfy/nTmD9U2A/qeoTxl7zGJB/srj/NI4PKnSBi/
-         smH4N8C0oGXkTMUMPtnhQ1dmWB7RvmjK0sImKwFjhasS0lYuL4UtgdSiqEux1CTGfNZY
-         H3Hg==
-X-Forwarded-Encrypted: i=1; AKwUvBziB4i0c69VqOUacxdLz4uRaLmYi0Tsa/NVWl7fimCCFp8BLhONidYv81w5PPA0/WrvF7mcGzF3gczxzlhn@vger.kernel.org
-X-Gm-Message-State: AFuF++nP0TmGqB6JY9muXy9u7qXhIMQsHg3FciskWjTdQlVOVU2QIIoz
-	TZdGE7uxYYlYTqpV2AfWai8rsCBSiV5WjkC+7Tx8SRU1DNBJWtpkmqimHsS7GBNEMy0=
-X-Gm-Gg: AYBFou3O8lmurH1zskpsPTGaNKVo0RKNAfjA/4jY/i2leZcuotXrs9tYafOqs5UO3n7
-	gFlGXsOcV4GoNic2glcmq+dZebdsNKbLeqJYXx8NpXwK30zQOGNEw00QDtG3KvoMIK4dXxIMSS3
-	ll1m7g44+q192xIDKnb/j3NUpZuzSIim2CW9XLxfQlsa3af5w9qjU0aoQ8MvpQKtVNYWoudJyTQ
-	wF4mI3eWMRDxYK/aO6SRN5HmdtZhLVnqstAdwi8ZC/tAqYzNRCNHIsx+iH/ur0QHO6qI0JcMPpO
-	qWdsygq2IxbsxW/LKTVGhpIRr5/alKyDVHNYGf3yvqAfZEclawGy/kzaiLpOl8o5x8W64vODChy
-	Sc5vAAipKol0/xCCrio/X1qGRUZFFf45oc55uOVyiTumiNx17FIClQifn7G+h6t18otZuh6assj
-	hA5gY05FxhHDt4mjKR6PRKC710UXgbDAzx9XO1WENu/OlLabeG/7HR890JBJ6Gw/IR5W3fhijFS
-	cNTlKxQuetF
-X-Received: by 2002:a17:907:e155:b0:c2e:4d39:b5a1 with SMTP id a640c23a62f3a-c2e6ece5605mr88982166b.17.1791018551275;
-        Sat, 03 Oct 2026 02:09:11 -0700 (PDT)
-Received: from [192.168.0.167] ([109.77.86.130])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2e4cd05446sm174814366b.19.2026.10.03.02.09.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 03 Oct 2026 02:09:10 -0700 (PDT)
-Message-ID: <fbc988c9-d701-4479-96d0-f18d92063f31@linaro.org>
-Date: Sat, 3 Oct 2026 10:09:09 +0100
+        bh=IWrQtgnBBrtxYpdGid+lEFP8Z5fa4mnFJvTHl2+VUDc=;
+        b=Bstz7DpooO5uerNBptHAf7KqjxxySQWjVxB8WCxnEr1YSZ1S4MqIhtJiHrCLocv7td
+         fRXJLAR4wWTVF27Hnip/1NM//SFQoQKbs+xiNDtgxolVkIcw1mEkMLA5ISLkfATAruQa
+         BSGiJqbX66d9v8Ar5tTqq+dans4J3OOepBvkn+RfJ1S+pwupunlPcdCFBHR+QvMXdv5K
+         bzkBTF6egtNZQ45bc8Nqylr1UPyzeYaO7vMywaxpedswydnzpMCgd1yyczgECmkt2XUs
+         KRyKfZp0rP0YNBgEpjqydFtNBs7C/WvwJMwKCNpJdse68gc9TyUkzT26uyzth9dh3ep6
+         5SfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791018902; x=1791623702;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IWrQtgnBBrtxYpdGid+lEFP8Z5fa4mnFJvTHl2+VUDc=;
+        b=mSM07n7iKUx1wgcrx4W1RJgsqOJNYQMMQZI6hWmjfP17xy20YJtXeLoNHJG7CDdZDF
+         nmiAiNrzjMohhzCo9ri4+bfLTZq2+P3ys+Sde4dX2bXbjZc8ytP2RapWLRvg1vQCfXwq
+         y9ejkBj6GW+BaK7jM/4GBvsgd1TomF1m2nL8N6Y+aJQe8mtWRXP9zYvFILAmV8MMv8g6
+         pwPOn9efwk/PdkI/7vtDTnSvhvjDCizCVq14RjG4m4Zw+dRhBCBL5UoNcAMDSireN6Xi
+         Thw3owx/9qeQWa5hC8i9MQnqRWgNFdZig2oyBHxPRK/lTlxUQBOhjsT+WVS3hVbHsEC7
+         L5tg==
+X-Forwarded-Encrypted: i=1; AKwUvByqNEpvpNo2WSo5DzzU3KN4XRgf3905wrfd2MwQ5gxUjuoiZAgdK0C91ZOhi0GsIqUFXNPEfPGYSYEiePoY@vger.kernel.org
+X-Gm-Message-State: AFq9FYLSrZlFste7X2BRIwlfmeaUEWPpJgmqtzJBzY0hsP30Qm4z+J8s
+	UDm93TUz7YBBOaBvodX5nGZrtxBh/i/4phC6Q7MLJA5X5OhFmtKtfieN
+X-Gm-Gg: AYBFou1U4yP6WSEp5HrizBZ7ODV7329/V8zoS2pYLoiAEfzJvjOzMt0CJhCq9kn8731
+	rNUSlInmxmeo2AstB8URDm7vA6TAaemC5LDTz1sa1PFkDjhEOK72YrCffoi4/tteFpuQ4LCJiXn
+	m/BY+57aLJ8naQYSMrJj4/mqnGbgfgIOJEZ3iby9IEHG0zW3hPSkhWtYcOUl3PEglF0ehpzHE7L
+	nX6TjjlKs5SrXWSY3S7dsb3QcyVjuuc4Hm/E52+MJJsN7uW6leueflWW4nHDAm71wd+QhqPyDVE
+	CwlSXl3JU1NzGTHzOjzFqVPAbE1ilDtN7Jq2BSAxUp+D2kRxYpWLp1pJHzRzl7wQsNa8IHp9r2R
+	S8YQtSI1b8+//s7xLaLyOCACEm9mu386gDqgpHMRVOe/ro5+Wn63BhIo4G2LDHee6p71uQ0UEcc
+	XKohUGeEXE29I3K5sIAhQ/RO05BGNlC6lmu6ZtfRNIlIV/dTcXRJZ19Rgs1OJM8I1NkszxZnBnS
+	DYnYwN5p6w=
+X-Received: by 2002:a05:6000:230c:b0:488:7f1d:2728 with SMTP id ffacd0b85a97d-48c47fe497fmr3047875f8f.30.1791018901393;
+        Sat, 03 Oct 2026 02:15:01 -0700 (PDT)
+Received: from FranzSP11.fritz.box ([31.31.60.25])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b382f8ab4sm10549817f8f.35.2026.10.03.02.14.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 03 Oct 2026 02:15:00 -0700 (PDT)
+From: Franz <franzelfranzel@gmail.com>
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	regressions@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH] power: sequencing: qcom-wcn: power off WLAN at probe
+Date: Sat,  3 Oct 2026 11:14:51 +0200
+Message-ID: <20261003091451.4727-1-franzelfranzel@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw5cQt8HiV3sUtxA@mail.gmail.com>
+References: <CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw5cQt8HiV3sUtxA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v18 05/11] media: qcom: camss: csiphy: Add support for
- v2.4.0 two-phase CSIPHY
-To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, jeyaprakash.soundrapandian@oss.qualcomm.com,
- Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>
-References: <20261003-kaanapali-camss-v18-0-87ba4ebe0db1@oss.qualcomm.com>
- <20261003-kaanapali-camss-v18-5-87ba4ebe0db1@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261003-kaanapali-camss-v18-5-87ba4ebe0db1@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 03/10/2026 10:02, Hangxiang Ma wrote:
-> +			.hw_ops = &csiphy_ops_3ph_1_0,
+The WLAN enable GPIO is requested with GPIOD_ASIS and then kept at its
+current level, so that a WLAN module left powered on by the firmware is
+not switched off. The FIXME explains why: toggling it would take the
+PCIe link down, and the controller driver could not recover from that.
 
-There's no reason to continue to use the internal CSIPHY hack.
+That reasoning held while the PCIe link was trained before the
+sequencer probed. Since commit b921aa3f8dec ("PCI/pwrctrl: Switch to
+pwrctrl create, power on/off, destroy APIs"), qcom_pcie_host_init()
+powers the endpoint through pwrctrl before it starts link training, and
+defers until the pwrctrl driver is bound. That driver cannot bind
+before this sequencer has probed. Power-on therefore always comes
+before link training, and keeping the firmware state is now harmful.
 
+On the Microsoft Surface Pro 11 (X1E80100), the WCN7850 sits on a
+PCIe port without a PERST# GPIO. While pci-pwrctrl-pwrseq is not yet
+bound, the host init is deferred about ten times, and each attempt
+powers the PHY and controller back down. The later power-on only sets
+a GPIO that is already high, so the chip is never reset and the link
+never comes up:
+
+  qcom-pcie 1c08000.pcie: Device found, but not active
+
+The endpoint is not enumerated and ath12k never probes. Bluetooth on
+the same chip fails too ("QCA Failed to send TLV segment (-110)").
+
+Request the GPIO as GPIOD_OUT_LOW. The chip is then off when the
+sequencer probes, and pwrctrl powers it up cleanly right before link
+training. Drop the FIXME and the code that preserved the firmware
+state.
+
+Tested on a Surface Pro 11:
+ - b921aa3f8dec plus a one-line version of this change: endpoint
+   enumerated at 2.4 s, ath12k and Bluetooth working.
+ - next-20260929 plus this patch: "PCIe Gen.3 x2 link up" at 3.4 s,
+   ath12k and Bluetooth working, Wi-Fi connected.
+Without the change, neither kernel enumerates the endpoint.
+
+The culprit was found by bisecting v6.17..v7.1, with the DTB and
+.config held constant.
+
+Fixes: b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power on/off, destroy APIs")
+Cc: stable@vger.kernel.org
+Assisted-by: Claude:claude-opus-5-5
+Closes: https://lore.kernel.org/all/CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw5cQt8HiV3sUtxA@mail.gmail.com/
+Signed-off-by: Franz <franzelfranzel@gmail.com>
 ---
-bod
+ drivers/power/sequencing/pwrseq-qcom-wcn.c | 16 +---------------
+ 1 file changed, 1 insertion(+), 15 deletions(-)
+
+diff --git a/drivers/power/sequencing/pwrseq-qcom-wcn.c b/drivers/power/sequencing/pwrseq-qcom-wcn.c
+index 7f88a29b2..636dd7e63 100644
+--- a/drivers/power/sequencing/pwrseq-qcom-wcn.c
++++ b/drivers/power/sequencing/pwrseq-qcom-wcn.c
+@@ -526,15 +526,8 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
+ 		return dev_err_probe(dev, PTR_ERR(ctx->bt_gpio),
+ 				     "Failed to get the Bluetooth enable GPIO\n");
+ 
+-	/*
+-	 * FIXME: This should actually be GPIOD_OUT_LOW, but doing so would
+-	 * cause the WLAN power to be toggled, resulting in PCIe link down.
+-	 * Since the PCIe controller driver is not handling link down currently,
+-	 * the device becomes unusable. So we need to keep this workaround until
+-	 * the link down handling is implemented in the controller driver.
+-	 */
+ 	ctx->wlan_gpio = devm_gpiod_get_optional(dev, "wlan-enable",
+-						 GPIOD_ASIS);
++						 GPIOD_OUT_LOW);
+ 	if (IS_ERR(ctx->wlan_gpio))
+ 		return dev_err_probe(dev, PTR_ERR(ctx->wlan_gpio),
+ 				     "Failed to get the WLAN enable GPIO\n");
+@@ -545,13 +538,6 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
+ 		return dev_err_probe(dev, PTR_ERR(ctx->xo_clk_gpio),
+ 				     "Failed to get the XO_CLK GPIO\n");
+ 
+-	/*
+-	 * Set direction to output but keep the current value in order to not
+-	 * disable the WLAN module accidentally if it's already powered on.
+-	 */
+-	gpiod_direction_output(ctx->wlan_gpio,
+-			       gpiod_get_value_cansleep(ctx->wlan_gpio));
+-
+ 	ctx->clk = devm_clk_get_optional(dev, NULL);
+ 	if (IS_ERR(ctx->clk))
+ 		return dev_err_probe(dev, PTR_ERR(ctx->clk),
+
+base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+-- 
+2.56.0
+
