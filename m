@@ -1,192 +1,307 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f34.google.com (mail-wr2-f34.google.com [74.125.225.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96BBB3B3C12
-	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 15:26:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A004282F15
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 15:51:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791127600; cv=none; b=A45oo5le/y95yyV0GwTVFNT0AFYcEAG2aM+ztROgW6XVfN0wIcol3Aqq23gWFut8O1p2jO6J/APNaqAdRWXdZO8FI1ZKk5M++bw9iJBP7t5Clhq3z6ZRTniAAYhlHmeeLtneExLRu4ZuHwy4LOJfqZSZAAoHWHI72Mawat/2E+I=
+	t=1791129111; cv=none; b=FLSbquSxmZxX2NopnT0ZBbErPk5rz7gVe3o9HH0TUEOhyYSAs2ElntvW/bkLql6poZG4nKyYA/YlsEsGxCaUMb06m7/cnm4dnW5/Fx6vfEXHPwHNye0eql3u8IPVjiYKuZHTrWHnVjmQvMafQ3ZYMCZDFafG4jqAnD9KDKlUCBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791127600; c=relaxed/simple;
-	bh=2ch5mNrtmdxQSOSuWG7L73peId4LUbCNr87Fa7anJjI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cOIVv7edQNEgV440TlRQTZrv+x7OEc1St+uAuqd2WAiFgs1ByTQX5WJTpGl1u3Pk/CaBU3i+0X7Sx5S5DuYZ3unkPW/QmXsyLilZbKNdt3uDbfXuIaxhs0VQyoyE9pa4RXSFwys3NhxQGMH7LpQJUNBBhozFQ1kTRhfcevkDjp4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=n9J14xJJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eQ+QWdGS; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791129111; c=relaxed/simple;
+	bh=Is/vmCTEVS8LhULx4GLf0QLWowK1BBWeGlcSwDzadno=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=TjJ0G5Y0tQVu5VhTMEEHOcrRwqsRGoOvnznaNB1gBJgrKvtqEmRocUnbuwjxrJYw8E+jsMAiEuMI/b6Z/MUwFbZoNwBXuSB++ZEVkGwGBc7mylrOYRrGkoqf07v69eaPevywIr83ubkw6llORi5Dwm0fJulQgI03V0a3ipsa6qo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PSkq/tme; arc=none smtp.client-ip=74.125.225.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="n9J14xJJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eQ+QWdGS"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 694EdrFX3439111
-	for <linux-arm-msm@vger.kernel.org>; Sun, 4 Oct 2026 15:26:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=At3ebrOXbtof0F5P/wwaDdSx
-	0o6qxJSpe5weBws8clA=; b=n9J14xJJN1lWY7nq48Qr6iqgFLhmCX0YPV32RQii
-	eWSplHy/WAEVZLxezJ5V5sIob28dYHxEyb9EHDSzB/fmXetCV6wRc68ROQkqDVo1
-	md6g7n8mvu+/GyfN2iz52C0o7IiuWYCXWJJEoAbLRyhHZlj1qyXFr+KxTsvoPOM6
-	Nei2sgYnKkVolyOapJKnya6W9uLEus9iCq6rfTHh4iAXXKwvXC2Zj37cNHALWh48
-	eYMnOwtCPSPxRfdhngAdaNyKSfs4A0I4Qtd3kBvNfUlXH1fXnKbej2+aQGpo5YRH
-	kI/lS0e+AhsZTgX52U3jhOsNdk/XAxhXJMenL8nM1lnanw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2sx3384v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 15:26:38 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-34ef5fd7934so3018917eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 08:26:38 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PSkq/tme"
+Received: by mail-wr2-f34.google.com with SMTP id ffacd0b85a97d-48afd5b1678so511829f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 08:51:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791127598; x=1791732398; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=At3ebrOXbtof0F5P/wwaDdSx0o6qxJSpe5weBws8clA=;
-        b=eQ+QWdGS2VxDTgJrtGzzWacfkZZ7PPnZPXew0OkSXmj/5p1tThwxSKbd87R6XnA+Nu
-         J7eq7M2H0CLuaJQ9jH6BOwdjizfCySmaSeXJLqVmKSULwlW4LA0WUBfjNmlT3XYaN3qy
-         clOiB4ZVS+I+37XGBDhxduTnuhHRIouCPVLzIbiZ1h352Ixtn1ylZNni4SYZCYi45X52
-         sjc4QM3rCqBN0iYmmLaSBi7RyDeW7CBc1I2/sxS1N+fYFJEW1hRKdbEamGuOEU9rIKq8
-         3vj2n1LGUyJvrjL0JyeHtXO/q3nXjQdMJ1alb+jgtHUeLNjD85vPAHHngXl/8Ud833Am
-         b8bA==
+        d=linaro.org; s=google; t=1791129108; x=1791733908; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NM5YFNeJZiuDBiTJqEC+MHW61fR6/JMTqJRMvt7EHp0=;
+        b=PSkq/tme5g+tZuDguKPAFtaaGw2XL71KaQutVmKq5LxMaYXBWIsAkAw2VYPFuxvn4N
+         GKYlT73Ywy/eTQMra/6p5qjsflmaQyhYw3xYnjN/OQJcuUOGwejOWqVtF3u058145/sr
+         wA8Ngry4ngZ6xiWm14QEUNXOfwUT7pR21FWzV9YZFZwUDPHl5+lWf5Rt5meFLnKqJPVs
+         1JUV6JxqAkBpWb+6haEk+SVQReIydbL+Oc65Mfv/yJm8W+cps4iDDnX0z0ZMLVS0/XxS
+         jmeA7JhtjhBjO9TJ4ei2sbypj3gYrQitdfx8//UgU6kedfrDg4ijN1NnS9mt7iLzhR6m
+         SHeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791127598; x=1791732398;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=At3ebrOXbtof0F5P/wwaDdSx0o6qxJSpe5weBws8clA=;
-        b=tZyVnuM9MxSPb2S8esKnLiFD1bIDjgftHHD73riIZbatOXNpwN1FGtIeSaAzm21KRm
-         yG/Q2cgR9fI0WgzlyODBPsH4DbnahxEx6V9LgLKYTyyYWMu4tHsah8D0xufVcJhNyIJ3
-         GapOBPot+R13k/Sz54p6B6ocHi8MCBJMMN1kPAvDOzdMtuc+Eny0vw4TjKmR9el6bJD/
-         97fmgXRnG1j0n4cFzkg14y6g0X7VoOQTuNOfq5WF6Jr9LZf6/Y7A2eAGfbDfrBGReMUg
-         ytf42RVPJ3HrRPnjW2xoMaeKrbRbaxHEHrsATGlf+77iA1JpW22VyGEQORB4CN5i0Wn1
-         EOgA==
-X-Forwarded-Encrypted: i=1; AKwUvBxhUglw6a6VErp9bfQtdreAbLHhdZIzaYvhd1bY7JSa+RLO3xX9d8lJC9BFZdcPcfsdwxvkbE38imilNIqS@vger.kernel.org
-X-Gm-Message-State: AFq9FYLpjPq3540kYUJqg8onXGsme4KdXGO8vjuMerXtgBpgDRrUSqzT
-	o7SB+PipkTL9b6Uswhp5zjno+0G+b6jVjbnjZ1rQRcLyg/TclCTT9qagpcolxXpYNcfu+9T1g6t
-	CBrZt4LQf8KyUfbnRKP79TCUWMjoIdJCVOLT61rqjSO/WiXqWzNC9hm6WIX8ZB3J0yiya
-X-Gm-Gg: AYBFou1VMh9ljYwnUja38gU4hQjSuP8yMjOGYlOp5bVy0kA7CMvbO/QQ9jujEuyfo+9
-	h8EoV5RkV6TwJoE+8HshG27MXEG3IpMuKyqeXLmdzomA2drNVruIH3YQgIYbEiA81GC6GEDLVC4
-	tbJTbav47H12N/HqcCraJ4aZf8DO7vfXNBXXr3IESaXs4fgTOW9NPrqmxf2tg1R9G1kX/Z7sac8
-	vvyWMl6JRB9ZPAz9AyRRmoBeIXFwzVIX8pxYhakVFfXWvV12cmt+sIgT1mF6hblEVJ6tyBcXSVR
-	A3IlhtpOGgelVRK0z/VqffRhmzWAU45Bo+tg/uia6qfNCbqx//K/jAr21Or8XRy8A8ejoZSwYFu
-	Wb7oayRJWs0h/StLDp5KCesaudznyk5d+4xZVk9LNNA==
-X-Received: by 2002:a05:693c:88dc:20b0:351:985:e729 with SMTP id 5a478bee46e88-35109953237mr8368019eec.12.1791127597003;
-        Sun, 04 Oct 2026 08:26:37 -0700 (PDT)
-X-Received: by 2002:a05:693c:88dc:20b0:351:985:e729 with SMTP id 5a478bee46e88-35109953237mr8367993eec.12.1791127596447;
-        Sun, 04 Oct 2026 08:26:36 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3512713c9a6sm5600553eec.5.2026.10.04.08.26.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 08:26:35 -0700 (PDT)
-Date: Sun, 4 Oct 2026 23:26:31 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] remoteproc: qcom_q6v5_pas: Drop early_boot flag for Nord
- ADSP
-Message-ID: <asJwJ6cq8FcA0IID@QCOM-aGQu4IUr3Y>
-References: <20260930020745.1940933-1-shengchao.guo@oss.qualcomm.com>
- <58c1c4a9-afad-4059-ba81-cdcc92d0c5dd@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1791129108; x=1791733908;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=NM5YFNeJZiuDBiTJqEC+MHW61fR6/JMTqJRMvt7EHp0=;
+        b=qFVUm+5RVPyriNPjKclHDJCDQdEqptZMOOgi+Oe5Kh6WHK8H95cKvSy80FdNJsKBO8
+         wW7ecw7w/ojz2vGXSwHpvHc+TovBzMY0kMa4lqIVY6DnCqDNh8BIw4ISAAXKAbhoCVxm
+         ZR8wpn4BavdiGhGsQ+yz8jWN4hyoR6UInuV4zPgNtvM6BU3ZqnOnln/vDfZ+3UW905M1
+         TNbZupAM3PhmpdZaGjhwTUt/GdrGDNyzkh9N8cbTviZy2DE2AcYQ9ucMosACRWniFs6W
+         rpCDKY5DIqD0TMexxizQkAmSw846bkgg0/VOwLqtuQVgbcz6j/NWVwTYTNbd7D7RLRYO
+         ZK6w==
+X-Forwarded-Encrypted: i=1; AKwUvBzkemOpJbqZtYV/e4DBhRl1yPoqh1cHVwiAdbJcqvYk5P+HyjNFqjSE4LVFg5lGoB/m2Rl8/hSJsflrqTJl@vger.kernel.org
+X-Gm-Message-State: AFq9FYKLe9mReV8r87YqWrpG5Jm619+FAcVSYPDlWbH52wQPNCkLA5Fq
+	ZJwJJAL4hnnXalDNOy+EXSzuZo434ovAqraHT+flPBwF/uYBlgVZi9FsAvfNX8RdVjA=
+X-Gm-Gg: AYBFou0BuoH7kqvOO85ujflwae4YtDOFjMyJhFjoDHaStDDprtqCEzLknKC0Jfkr3dF
+	iZpFSWDzUS84BEZx/4u0ljYpPi5Y/wem/JAqeNXufpoweTbcQU4XzyF8Oy6Se6GEw3uC9DWLjkz
+	dltCHCHF4oGg0HWvPh6xxIfMob/yWQcLdF6vHhAQ+UXM2I1JDwT4DIFHp6WF4Ns3wYosw8SVedY
+	wGvgGG2/11aLWqrX7wA2JlNkQtOYy6AZ+Bj2MYUDg4Dd8c3w2sypq24Xhacz172kwo+tV1N8CJx
+	Y5pxmNCEdYrzQFhUlCB7bmUvxdesbqE8gkV9VJztjR5uC7xEjEy/t9ZYO97He/X5s/ksERsLHi9
+	2BB/EIG7a1OTcxOOYus9GUv7iD0sjiplR0jOk/+iugedLTMc+BzrAiNxSVXFGYLOOaa6l16Shns
+	kGnjBCN78KlSnTp0ZvhDVFhjlR3MYQM0HFm60XFtNvCmA2brZzOnYH41ie0zxiPTnsMFnYR/1ek
+	rXmIKCV
+X-Received: by 2002:a5d:59c3:0:b0:48c:5785:9b5f with SMTP id ffacd0b85a97d-48c5785a189mr3692503f8f.38.1791129107541;
+        Sun, 04 Oct 2026 08:51:47 -0700 (PDT)
+Received: from [172.20.10.3] ([37.169.53.153])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b380f0613sm21532685f8f.13.2026.10.04.08.51.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 04 Oct 2026 08:51:47 -0700 (PDT)
+Message-ID: <8cf6ec52-fb36-44e7-831c-2bb24214f591@linaro.org>
+Date: Sun, 4 Oct 2026 17:51:44 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <58c1c4a9-afad-4059-ba81-cdcc92d0c5dd@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=JY0pPkKV c=1 sm=1 tr=0 ts=6ac2702e cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=NTnRRJcS9uFvT1zYgXQA:9
- a=CjuIK1q_8ugA:10 a=PxkB5W3o20Ba91AHUih5:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: KPU1vGxN2OFqZ3fg_RrzFZloHSmfPrxR
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA0MDA2MSBTYWx0ZWRfXyhSN+EsZARLi
- 3lP6G+gMK69ZXfhjzPOIILof/YuVfOmwT3oaXk497z2CwKtMAiH4mGnEEPrZS6pu/x9VV/WFOeq
- F8guRBL5xbNLfqPyOU0oVBXVtnguwWo=
-X-Proofpoint-GUID: KPU1vGxN2OFqZ3fg_RrzFZloHSmfPrxR
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA0MDA2MSBTYWx0ZWRfX0Jw3ORPOJZBm
- unp8aZQvzGSE4jsuqilCm+8mgdO87ErT4RdoxYv8NrH9z/zb8d/NEOSgQHPGkfT3Spf0w8klF4m
- CsrGhi+wFaDlN/4bzDt/wAok2N7KznfmGh8jIKlyjc+doA25w7t6GqrUAgUzkBZbE1BWusthDqI
- XhD5jGf6IQxtLc+SbNzBe9AjUN8mi76Y4BRDpqMIBtXUD/8KGs+lZo0dewwb5Xqrhf8bxk2Rc7B
- 72ka/TvI+J3Otfw948fOZq5jFL4DUkicGIVZRnDOQbNmZaGD6jv3e3aR4CW3ezVqEytH9UvTZpL
- hmApLgFGSRp1d0ZkdLzpw1guZ4nN2VaESv/Hri63R6fOkXXL0VeJ61XKdAPEFp6E/uMauG0BOc2
- bDnwmu+5A1y3eWuAm/yGcnrYa85bricvOd+fBQ7G/8kAJi3b5X/6xiANJomFpJ0epx7Uhlu3+pj
- ZqsRl7oAb3V5pMTYcMQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-04_04,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0 suspectscore=0
- priorityscore=1501 lowpriorityscore=0 malwarescore=0 phishscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610040061
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics panel support
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Linus Walleij <linusw@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+ Jun Nie <jun.nie@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
+ <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
+ <20260727-spotted-winged-mantis-7aa1ce@quoll>
+ <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
+ <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
+ <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
+ <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
+ <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
+ <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org>
+ <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 01, 2026 at 10:42:39AM +0200, Konrad Dybcio wrote:
-> On 9/30/26 4:07 AM, Shawn Guo wrote:
-> > Qualcomm NHLOS team changes XBL for Nord IOT/Embedded variant, leaving
-> > ADSP to be powered up by Linux remoteproc, so that Nord IQ10 Qualcomm
-> > Linux (QLI) behavior gets aligned with IQ8/9. Drop early_boot flag from
-> > Nord ADSP for that purpose.
-> > 
-> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > ---
+On 10/1/26 02:43, Dmitry Baryshkov wrote:
+> On Wed, Sep 30, 2026 at 09:18:55PM +0200, Neil Armstrong wrote:
+>> On 9/30/26 21:04, Dmitry Baryshkov wrote:
+>>> On Wed, Sep 30, 2026 at 06:43:47PM +0200, Neil Armstrong wrote:
+>>>> On 9/30/26 09:44, Linus Walleij wrote:
+>>>>> On Tue, Sep 29, 2026 at 3:35 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>>>>>
+>>>>>> This entire binding seems like stitching two devices together, which
+>>>>>> might be fine (I don't even remember this stuff... two months old) or
+>>>>>> might be artificial grouping of separate devices.
+>>>>>
+>>>>> I think that's a good point and fair pushback.
+>>>>>
+>>>>> Neil and Jun talk about it yesterday at XDC (1:15 into the stream):
+>>>>> https://www.youtube.com/watch?v=6tNGW8PoSzw
+>>>>>
+>>>>> The current binding does not reflect the physical topology of the
+>>>>> actual device, and the bindings need improvements. I have a feeling
+>>>>> there is one display controller with two physical panels.
+>>>>
+>>>> No there's really 2 controller and 2 separate panels, but they are not
+>>>> classic panel, they are a pair of panels+lens which are in front of
+>>>> the eyes which forms a single "image" for the brain, so they are
+>>>> technically a single display and requires to be hard synchronized.
+>>>
+>>> Yes. However this approach makes it impossible to share the code between
+>>> the double-panel drivers and single-panel drivers. I think, that the
+>>> panel driver should still reference a single glass+DDIC, while letting
+>>> the DSI host driver to handle the bifurcation.
+>>
+>> Yes, and no, it must really be considered as a "single panel driven by 2 identical controllers",
+>> and even this is really purely software implementation issue.
 > 
-> What happens if this patch is absent?
-
-ADSP never comes up:
-
-  remoteproc remoteproc0: attaching to adsp
-  remoteproc remoteproc0: can't attach to rproc adsp: -19
-
-Since XBL no longer boots ADSP, the remote never publishes its SMP2P
-inbound item. The smp2p entry stays unmapped, and irq_get_irqchip_state()
-on fatal_irq returns -ENODEV. qcom_pas_attach() treats that as a hard
-error rather than falling back to a firmware boot.
-
-Even the existing fallback (ready bit clear -> RPROC_OFFLINE) doesn't
-work: rproc_boot() takes the attach branch, sees the error and returns
-without loading firmware.
-
+> [...]
 > 
-> When the early_boot path was first introduced I was really hoping
-> that this behavior could be made unconditional and Linux would
-> figure out if the rproc may be active by virtue of it sending
-> back signals or not, unfortunately that hasn't made it into the
-> tree..
+> 
+>>>> Describing both panels into separate nodes would only be possible
+>>>> if we described a "VR display complex" nodes linked to both panels
+>>>> but this would probably be solved by actually describing the "display"
+>>>> linked to a DDIC controller and is out of subject for this serie,
+>>>> and can be added later when we properly define things.
+>>>
+>>> I like the VR complex idea. In the end, you have two modes which you
+>>> most likely might want to support:
+>>> - L+R, having double-width CRTC scanning over a double-width framebuffer
+>>> - Mx2, having a single-width CRTC and a single-width framebuffer
+>>>     displaying the same picture to both eyes. I can imaging that knowing
+>>>     about L+R might be an explicit opt-in feature of the DRM interface.
+>>>
+>>
+>> This makes no sense to support both modes, and this will never be used,
+>> and anyway this is purely software implementation.
+>>
+>> We're defining bindings here, describing the real reality, not hypothetical
+>> situation that will never happen.
+> 
+> Let's ignore software issues. On the hardware side, you have two
+> distinct DSI panels, each having its own set of controls, own DSI link
+> and own backlight control.
+> 
 
-The difficulty is with the positive signal. As Stephan pointed out [1],
-the ready bit is not cleared when the remote is stopped or force-shutdown,
-so a stop followed by rmmod/modprobe of qcom_q6v5_pas makes the driver
-attach to a remote that is not running. Without ping-pong or a PAS query
-for the remote state, I don't think we can reliably say that a remote
-*is* running.
+OK so let's see the problem in another angle, if we had 2 DS links 2 physical
+controllers, 2 physically distinct panels but forms an unique display.
 
-The negative signal is reliable though. The -ENODEV from
-irq_get_irqchip_state() means the remote has never populated its SMP2P
-entry since cold boot, so it cannot be running. We can fall back to a
-firmware boot in that case. early_boot then becomes a hint that the
-bootloader *may* have started the remote, which matches Nord ADSP:
-it is started by XBL on the Auto variant and by Linux remoteproc on
-the IoT variant.
+Describing it in separate distincts nodes is wrong since it doesn't reflect
+that it's an unified display, so either we define :
+- a "combined-display" bridge defined as:
+   - a separate top node in / like connectors with a graph from the DSI links to each panel
+   - a DSI subnode with 2 panels as subnode, port graph from both dsi to both sub-panels
+- a "R63455" panel bindings with 2 subpanels as Linus shared in https://lore.kernel.org/all/CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com/
 
-I'll drop this patch and send two patches instead:
+I think it would be interesting to have the "combined-display", with a connector-like node,
+which will do all the split-dsi dual-panel logic for us and leave use implementing simple panel
+drivers.
 
-- remoteproc: core: continue to the firmware boot path when .attach()
-  leaves the rproc in RPROC_OFFLINE
-- remoteproc: qcom: pas: treat -ENODEV from the SMP2P state read as
-  "not running" and fall back to start
+The outline would be:
 
-With those, Nord ADSP keeps early_boot and I've tested it with both XBL
-variants. With the old XBL it attaches as before; with the new one
-it falls back to loading firmware.
+=====><=======================================
+/ {
 
-Shawn
+	xr-display {
+		compatible = "combined-display";
 
-[1] https://lore.kernel.org/all/ahBG6jKYdSAboWjs@linaro.org/
+		ports {
+			port@0 {
+				combined_dsi0: endpoint {
+					remote-endpoint = <&dsi0_out>;
+				};
+			};
+			port@1 {
+				combined_dsi1: endpoint {
+					remote-endpoint = <&dsi1_out>;
+				};
+			};
+			port@2 {
+				combined_panel0: endpoint {
+					remote-endpoint = <&r63455_right_in>;
+				};
+			};
+			port@3 {
+				combined_panel1: endpoint {
+					remote-endpoint = <&r63455_left_in>;
+				};
+			};
+		};
+	};
+};
+
+&mdss_dsi0 {
+         vdda-supply = <&vreg_l3i_1p2>;
+         status = "okay";
+
+         qcom,dual-dsi-mode;
+         qcom,master-dsi;
+
+         panel_right: panel@0 {
+             compatible = "sharp,ls026b3sa06", "synaptic
+
+	     	reset-gpios = <&pm8550_gpios 3 GPIO_ACTIVE_HIGH>>;
+
+             	pos-supply = <&vpos_right>;
+             	neg-supply = <&vneg_right>;
+            	backlight-supply = <&backlight_right>;
+
+             	vdda-supply = <&vreg_l12b_1p8>;
+
+		port {
+			r63455_right_in: endpoint {
+                         	remote-endpoint = <&combined_panel0>;
+                     	};
+		};
+	};
+};
+
+&mdss_dsi0_out {
+	remote-endpoint = <&combined_dsi0>;
+
+	data-lanes = <0 1 2 3>;
+};
+
+
+&mdss_dsi1 {
+         vdda-supply = <&vreg_l3i_1p2>;
+         status = "okay";
+
+         qcom,dual-dsi-mode;
+
+         panel_left: panel@0 {
+             compatible = "sharp,ls026b3sa06", "synaptic
+
+	     	reset-gpios = <&pm8550_gpios 19 GPIO_ACTIVE_HIGH>>;
+
+             	pos-supply = <&vpos_left>;
+             	neg-supply = <&vneg_left>;
+            	backlight-supply = <&backlight_left>;
+
+             	vdda-supply = <&vreg_l12b_1p8>;
+
+		port {
+			r63455_left_in: endpoint {
+                         	remote-endpoint = <&combined_panel1>;
+                     	};
+		};
+	};
+};
+
+&mdss_dsi1_out {
+	remote-endpoint = <&combined_dsi1>;
+
+	data-lanes = <0 1 2 3>;
+};
+=====><=======================================
+
+So this would solve all the similar use-cases.
+
+We can even add the "xr-display" compatible with "combined-fallback" plus some
+properties to define how the panels are physically placed.
+
+Neil
