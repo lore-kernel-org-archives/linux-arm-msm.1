@@ -1,307 +1,94 @@
-Received: from mail-wr2-f34.google.com (mail-wr2-f34.google.com [74.125.225.98])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A004282F15
-	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 15:51:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C66C83C3C09;
+	Sun,  4 Oct 2026 16:47:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791129111; cv=none; b=FLSbquSxmZxX2NopnT0ZBbErPk5rz7gVe3o9HH0TUEOhyYSAs2ElntvW/bkLql6poZG4nKyYA/YlsEsGxCaUMb06m7/cnm4dnW5/Fx6vfEXHPwHNye0eql3u8IPVjiYKuZHTrWHnVjmQvMafQ3ZYMCZDFafG4jqAnD9KDKlUCBM=
+	t=1791132458; cv=none; b=GSdJOzeYj8QSRfzjYNZNNlz4eWpxlB7uy1J9AExPwOj877HV882dsllLV3+7LLdwVuqguF2BuOLkImFg50X+gIMN9crKQ5Q91fI3/FJqJrL3n8tlhFxJ1w0m1Dg5k4ly1faReoWCbBLctpZ96343ekrKnWGadXsV/ofgswGSDLg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791129111; c=relaxed/simple;
-	bh=Is/vmCTEVS8LhULx4GLf0QLWowK1BBWeGlcSwDzadno=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=TjJ0G5Y0tQVu5VhTMEEHOcrRwqsRGoOvnznaNB1gBJgrKvtqEmRocUnbuwjxrJYw8E+jsMAiEuMI/b6Z/MUwFbZoNwBXuSB++ZEVkGwGBc7mylrOYRrGkoqf07v69eaPevywIr83ubkw6llORi5Dwm0fJulQgI03V0a3ipsa6qo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PSkq/tme; arc=none smtp.client-ip=74.125.225.98
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791132458; c=relaxed/simple;
+	bh=OZb/BIdFTJQ+thizs1gxgZ+eSTU59sR2Lu9JcP3xA7g=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=p6sYOzIxTYrl3vEndlKhh7pb+W+v4Qad1sHdqAuAxGV+/1I+3amEu2bUtN+NivQH7SqNG7xqLkYdOhJaS3hGQvMbKDaLkDcBy2oyn/M/ACVVUHwz0ZRnweaZQ8OFw+u2njFGe0F/l6cwV+ujml+NALu/RzWIPWipeEXeYN6Ligs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=luNyvRBH; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PSkq/tme"
-Received: by mail-wr2-f34.google.com with SMTP id ffacd0b85a97d-48afd5b1678so511829f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 08:51:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791129108; x=1791733908; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NM5YFNeJZiuDBiTJqEC+MHW61fR6/JMTqJRMvt7EHp0=;
-        b=PSkq/tme5g+tZuDguKPAFtaaGw2XL71KaQutVmKq5LxMaYXBWIsAkAw2VYPFuxvn4N
-         GKYlT73Ywy/eTQMra/6p5qjsflmaQyhYw3xYnjN/OQJcuUOGwejOWqVtF3u058145/sr
-         wA8Ngry4ngZ6xiWm14QEUNXOfwUT7pR21FWzV9YZFZwUDPHl5+lWf5Rt5meFLnKqJPVs
-         1JUV6JxqAkBpWb+6haEk+SVQReIydbL+Oc65Mfv/yJm8W+cps4iDDnX0z0ZMLVS0/XxS
-         jmeA7JhtjhBjO9TJ4ei2sbypj3gYrQitdfx8//UgU6kedfrDg4ijN1NnS9mt7iLzhR6m
-         SHeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791129108; x=1791733908;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NM5YFNeJZiuDBiTJqEC+MHW61fR6/JMTqJRMvt7EHp0=;
-        b=qFVUm+5RVPyriNPjKclHDJCDQdEqptZMOOgi+Oe5Kh6WHK8H95cKvSy80FdNJsKBO8
-         wW7ecw7w/ojz2vGXSwHpvHc+TovBzMY0kMa4lqIVY6DnCqDNh8BIw4ISAAXKAbhoCVxm
-         ZR8wpn4BavdiGhGsQ+yz8jWN4hyoR6UInuV4zPgNtvM6BU3ZqnOnln/vDfZ+3UW905M1
-         TNbZupAM3PhmpdZaGjhwTUt/GdrGDNyzkh9N8cbTviZy2DE2AcYQ9ucMosACRWniFs6W
-         rpCDKY5DIqD0TMexxizQkAmSw846bkgg0/VOwLqtuQVgbcz6j/NWVwTYTNbd7D7RLRYO
-         ZK6w==
-X-Forwarded-Encrypted: i=1; AKwUvBzkemOpJbqZtYV/e4DBhRl1yPoqh1cHVwiAdbJcqvYk5P+HyjNFqjSE4LVFg5lGoB/m2Rl8/hSJsflrqTJl@vger.kernel.org
-X-Gm-Message-State: AFq9FYKLe9mReV8r87YqWrpG5Jm619+FAcVSYPDlWbH52wQPNCkLA5Fq
-	ZJwJJAL4hnnXalDNOy+EXSzuZo434ovAqraHT+flPBwF/uYBlgVZi9FsAvfNX8RdVjA=
-X-Gm-Gg: AYBFou0BuoH7kqvOO85ujflwae4YtDOFjMyJhFjoDHaStDDprtqCEzLknKC0Jfkr3dF
-	iZpFSWDzUS84BEZx/4u0ljYpPi5Y/wem/JAqeNXufpoweTbcQU4XzyF8Oy6Se6GEw3uC9DWLjkz
-	dltCHCHF4oGg0HWvPh6xxIfMob/yWQcLdF6vHhAQ+UXM2I1JDwT4DIFHp6WF4Ns3wYosw8SVedY
-	wGvgGG2/11aLWqrX7wA2JlNkQtOYy6AZ+Bj2MYUDg4Dd8c3w2sypq24Xhacz172kwo+tV1N8CJx
-	Y5pxmNCEdYrzQFhUlCB7bmUvxdesbqE8gkV9VJztjR5uC7xEjEy/t9ZYO97He/X5s/ksERsLHi9
-	2BB/EIG7a1OTcxOOYus9GUv7iD0sjiplR0jOk/+iugedLTMc+BzrAiNxSVXFGYLOOaa6l16Shns
-	kGnjBCN78KlSnTp0ZvhDVFhjlR3MYQM0HFm60XFtNvCmA2brZzOnYH41ie0zxiPTnsMFnYR/1ek
-	rXmIKCV
-X-Received: by 2002:a5d:59c3:0:b0:48c:5785:9b5f with SMTP id ffacd0b85a97d-48c5785a189mr3692503f8f.38.1791129107541;
-        Sun, 04 Oct 2026 08:51:47 -0700 (PDT)
-Received: from [172.20.10.3] ([37.169.53.153])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b380f0613sm21532685f8f.13.2026.10.04.08.51.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 04 Oct 2026 08:51:47 -0700 (PDT)
-Message-ID: <8cf6ec52-fb36-44e7-831c-2bb24214f591@linaro.org>
-Date: Sun, 4 Oct 2026 17:51:44 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="luNyvRBH"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5A8F2C4AF61;
+	Sun,  4 Oct 2026 16:47:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1791132458;
+	bh=OZb/BIdFTJQ+thizs1gxgZ+eSTU59sR2Lu9JcP3xA7g=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=luNyvRBHSXKef22yrDHoPdo3o6ccT2VXpdnMnCHm7j75kUA2fL+QYMeyy4FMacUf9
+	 ZJ2M6fyny5oxV8qr/UzsEI0rMb8SWqqM3V011w68j16Q6b5HWDJUpGt2rJRq5CexeG
+	 6RDfszrHsUPWiOu2440pCR4aOp3TIiWnemCvKnsSWAcBKorsGksOEJB9DOqo0WNq93
+	 jsynIQ8CEwyv/7GA16PkFBiugTyLD7mcyTomadmjlo2x/YVfWKFdSALmuqI/+nux3q
+	 A4Dq1x6c8fo+d3F9IVHwaAz1fNH7Z0ZnSHsgvwhQHKLLf1iU+Q1bAzRbMhgKjwPl52
+	 q8Sir2QqGPKdQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39379CA5FF0;
+	Sun,  4 Oct 2026 16:47:38 +0000 (UTC)
+From: nacht20-de via B4 Relay <devnull+nacht.dxdmail.cc@kernel.org>
+Date: Sun, 04 Oct 2026 18:47:21 +0200
+Subject: [PATCH 1/2] dt-bindings: arm: qcom: Add Samsung Galaxy Tab S9
+ Wi-Fi
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics panel support
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Linus Walleij <linusw@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
- Jun Nie <jun.nie@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
- <20260727-spotted-winged-mantis-7aa1ce@quoll>
- <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
- <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org>
- <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
- <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org>
- <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
- <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org>
- <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261004-gts9wifi-dts-v1-1-1f0d7dd47e4a@dxdmail.cc>
+References: <20261004-gts9wifi-dts-v1-0-1f0d7dd47e4a@dxdmail.cc>
+In-Reply-To: <20261004-gts9wifi-dts-v1-0-1f0d7dd47e4a@dxdmail.cc>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ nacht20-de <nacht@dxdmail.cc>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791132457; l=793;
+ i=nacht@dxdmail.cc; s=20261004; h=from:subject:message-id;
+ bh=dhb9/CYWJRP1ErIsELAmuFRlF70WvgeelXRbRrXljkU=;
+ b=RBruufLvwrH74bfWhOgOf+gIJvxy87vGe1TbY8g9xOxe1Xj8XfeJMy5+CBA7mbtOdMWVTrf5k
+ mZo5UoHXZSpBHYn1K/F3Sm5nB901ufJxHD5uoeHoCOe5zJt5Vl0Q3RO
+X-Developer-Key: i=nacht@dxdmail.cc; a=ed25519;
+ pk=Kay3P3pOJq5klUD+0/I8QX8JGOh0CeQXEwRVv7CMm4k=
+X-Endpoint-Received: by B4 Relay for nacht@dxdmail.cc/20261004 with
+ auth_id=1111
+X-Original-From: nacht20-de <nacht@dxdmail.cc>
+Reply-To: nacht@dxdmail.cc
 
-On 10/1/26 02:43, Dmitry Baryshkov wrote:
-> On Wed, Sep 30, 2026 at 09:18:55PM +0200, Neil Armstrong wrote:
->> On 9/30/26 21:04, Dmitry Baryshkov wrote:
->>> On Wed, Sep 30, 2026 at 06:43:47PM +0200, Neil Armstrong wrote:
->>>> On 9/30/26 09:44, Linus Walleij wrote:
->>>>> On Tue, Sep 29, 2026 at 3:35 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->>>>>
->>>>>> This entire binding seems like stitching two devices together, which
->>>>>> might be fine (I don't even remember this stuff... two months old) or
->>>>>> might be artificial grouping of separate devices.
->>>>>
->>>>> I think that's a good point and fair pushback.
->>>>>
->>>>> Neil and Jun talk about it yesterday at XDC (1:15 into the stream):
->>>>> https://www.youtube.com/watch?v=6tNGW8PoSzw
->>>>>
->>>>> The current binding does not reflect the physical topology of the
->>>>> actual device, and the bindings need improvements. I have a feeling
->>>>> there is one display controller with two physical panels.
->>>>
->>>> No there's really 2 controller and 2 separate panels, but they are not
->>>> classic panel, they are a pair of panels+lens which are in front of
->>>> the eyes which forms a single "image" for the brain, so they are
->>>> technically a single display and requires to be hard synchronized.
->>>
->>> Yes. However this approach makes it impossible to share the code between
->>> the double-panel drivers and single-panel drivers. I think, that the
->>> panel driver should still reference a single glass+DDIC, while letting
->>> the DSI host driver to handle the bifurcation.
->>
->> Yes, and no, it must really be considered as a "single panel driven by 2 identical controllers",
->> and even this is really purely software implementation issue.
-> 
-> [...]
-> 
-> 
->>>> Describing both panels into separate nodes would only be possible
->>>> if we described a "VR display complex" nodes linked to both panels
->>>> but this would probably be solved by actually describing the "display"
->>>> linked to a DDIC controller and is out of subject for this serie,
->>>> and can be added later when we properly define things.
->>>
->>> I like the VR complex idea. In the end, you have two modes which you
->>> most likely might want to support:
->>> - L+R, having double-width CRTC scanning over a double-width framebuffer
->>> - Mx2, having a single-width CRTC and a single-width framebuffer
->>>     displaying the same picture to both eyes. I can imaging that knowing
->>>     about L+R might be an explicit opt-in feature of the DRM interface.
->>>
->>
->> This makes no sense to support both modes, and this will never be used,
->> and anyway this is purely software implementation.
->>
->> We're defining bindings here, describing the real reality, not hypothetical
->> situation that will never happen.
-> 
-> Let's ignore software issues. On the hardware side, you have two
-> distinct DSI panels, each having its own set of controls, own DSI link
-> and own backlight control.
-> 
+From: nacht20-de <nacht@dxdmail.cc>
 
-OK so let's see the problem in another angle, if we had 2 DS links 2 physical
-controllers, 2 physically distinct panels but forms an unique display.
+Document the Samsung Galaxy Tab S9 Wi-Fi (SM-X710), a tablet based on
+the SM8550 SoC.
 
-Describing it in separate distincts nodes is wrong since it doesn't reflect
-that it's an unified display, so either we define :
-- a "combined-display" bridge defined as:
-   - a separate top node in / like connectors with a graph from the DSI links to each panel
-   - a DSI subnode with 2 panels as subnode, port graph from both dsi to both sub-panels
-- a "R63455" panel bindings with 2 subpanels as Linus shared in https://lore.kernel.org/all/CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com/
+Assisted-by: LLM
+Signed-off-by: nacht20-de <nacht@dxdmail.cc>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-I think it would be interesting to have the "combined-display", with a connector-like node,
-which will do all the split-dsi dual-panel logic for us and leave use implementing simple panel
-drivers.
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 121ca557ce1e..5e560f523d32 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1173,6 +1173,7 @@ properties:
+               - qcom,sm8550-hdk
+               - qcom,sm8550-mtp
+               - qcom,sm8550-qrd
++              - samsung,gts9wifi
+               - samsung,q5q
+               - sony,pdx234
+           - const: qcom,sm8550
 
-The outline would be:
-
-=====><=======================================
-/ {
-
-	xr-display {
-		compatible = "combined-display";
-
-		ports {
-			port@0 {
-				combined_dsi0: endpoint {
-					remote-endpoint = <&dsi0_out>;
-				};
-			};
-			port@1 {
-				combined_dsi1: endpoint {
-					remote-endpoint = <&dsi1_out>;
-				};
-			};
-			port@2 {
-				combined_panel0: endpoint {
-					remote-endpoint = <&r63455_right_in>;
-				};
-			};
-			port@3 {
-				combined_panel1: endpoint {
-					remote-endpoint = <&r63455_left_in>;
-				};
-			};
-		};
-	};
-};
-
-&mdss_dsi0 {
-         vdda-supply = <&vreg_l3i_1p2>;
-         status = "okay";
-
-         qcom,dual-dsi-mode;
-         qcom,master-dsi;
-
-         panel_right: panel@0 {
-             compatible = "sharp,ls026b3sa06", "synaptic
-
-	     	reset-gpios = <&pm8550_gpios 3 GPIO_ACTIVE_HIGH>>;
-
-             	pos-supply = <&vpos_right>;
-             	neg-supply = <&vneg_right>;
-            	backlight-supply = <&backlight_right>;
-
-             	vdda-supply = <&vreg_l12b_1p8>;
-
-		port {
-			r63455_right_in: endpoint {
-                         	remote-endpoint = <&combined_panel0>;
-                     	};
-		};
-	};
-};
-
-&mdss_dsi0_out {
-	remote-endpoint = <&combined_dsi0>;
-
-	data-lanes = <0 1 2 3>;
-};
+-- 
+2.55.0
 
 
-&mdss_dsi1 {
-         vdda-supply = <&vreg_l3i_1p2>;
-         status = "okay";
-
-         qcom,dual-dsi-mode;
-
-         panel_left: panel@0 {
-             compatible = "sharp,ls026b3sa06", "synaptic
-
-	     	reset-gpios = <&pm8550_gpios 19 GPIO_ACTIVE_HIGH>>;
-
-             	pos-supply = <&vpos_left>;
-             	neg-supply = <&vneg_left>;
-            	backlight-supply = <&backlight_left>;
-
-             	vdda-supply = <&vreg_l12b_1p8>;
-
-		port {
-			r63455_left_in: endpoint {
-                         	remote-endpoint = <&combined_panel1>;
-                     	};
-		};
-	};
-};
-
-&mdss_dsi1_out {
-	remote-endpoint = <&combined_dsi1>;
-
-	data-lanes = <0 1 2 3>;
-};
-=====><=======================================
-
-So this would solve all the similar use-cases.
-
-We can even add the "xr-display" compatible with "combined-fallback" plus some
-properties to define how the panels are physically placed.
-
-Neil
