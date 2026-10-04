@@ -1,610 +1,272 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from AM0PR02CU008.outbound.protection.outlook.com (mail-westeuropeazon11013011.outbound.protection.outlook.com [52.101.72.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 296A43806B6
-	for <linux-arm-msm@vger.kernel.org>; Sat,  3 Oct 2026 22:37:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791067058; cv=none; b=TAPtzsINp5I4GOVwRJFJ5JQkAYRCBR7/lpcTfq9Z94ZVpSxckm0ZAg7Uvslz7U03751selo9leIcU4bSQDd7bjwKTBj64p/fCMdqa5V6SbCJZlzzIMrTNDPPFNG96iQAH5zqvZjcMDOHXfoAhQln4yLR4M50SoMExU1zWSi45fQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791067058; c=relaxed/simple;
-	bh=hLkypq9fL/PGuQIzD987cxVCx0WleT2+L7/jCQBqQfA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gsFaak1Q5VZdBOsSOTbWq9AIPQMUskE+NADyyYkJYQ8ojLunktY/X+j6WI3yzPyCX7BWUfuzg8/u4EWLK2KKWQ9yF5bWeOE4+EcSb+us3QHKKBeDINDAQ/Qe8XKtD8XkHixDAitJTH9am57RZkLK9roj2xFYKFeiJnvS4kBqIZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VSQoI0v5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PB3dOQlC; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81E601922FD;
+	Sun,  4 Oct 2026 00:59:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.72.11
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791075570; cv=fail; b=HRi/PXQunV4uYK2/UgOU2Ak8Q0uAeJBWBJy8l9QMcUMnhgO+hUS8412QDoKn03S35b7D2E4Az0dDNXMrqs+VzCjUTLMAxZmKs79FDSTJmMhAe8hFeAFGSpw6UOaXzQa6cki9bO9kx1zYR5nhgEEb+I1akDvWx3CKsGVxQUEQaLc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791075570; c=relaxed/simple;
+	bh=gxUdWvEobBaCH9LJHM/0E4HnKZRoagG4pxREcMdhwu8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=DkREyQU36eWaojl2cyafXxDT1KvS0pDr+QNpcGdILNZ6cergaCYupuL8j9pugjj44ozDxQIc+xvwitLQOt7F+Ni/zMglr3FbaapJYZsTygiyGRKkM50TQiO0IfTCMrVafcccogAblPLHZH+hBZHbEC8zl3/3s19WMxsoJnhWL8w=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=fail (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=PNaPW3E/ reason="signature verification failed"; arc=fail smtp.client-ip=52.101.72.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VSQoI0v5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PB3dOQlC"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 693Kodtn4061342
-	for <linux-arm-msm@vger.kernel.org>; Sat, 3 Oct 2026 22:37:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVU
-	ntFzEfDk=; b=VSQoI0v5PDAVLttORLLqTpRNTnPcQWYNuFGM1/N3YLSOdVqLpbv
-	DvpbQKXz0upZ1wpfmqClEuTEdqXwUOJ3G9keydaKuipG5CrAaUeoleqYBenKyYSM
-	zC7NqlszxCJVC56gyjnX+/QioY27S+rUn27rBhSpPFYsPaco+n08LpGiJdrREhpP
-	BvADdiZ/Blms/H3l+8Y6c1LrbA+SQ+AlGSf9TJqlHpb0g5gFEdOeEHK+S17C6wLK
-	FZQaljNQYbuRcWN/U2iYALL/+ADy19ktHVGthv57fYgP25OhET6d6UVxzU+IFYbG
-	E41UMpLiIzrU/TgL86oiu17YsqBOPjY9B1A==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2tvestcs-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 22:37:35 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e2e064b7a6so5715055ad.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 03 Oct 2026 15:37:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791067054; x=1791671854; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVUntFzEfDk=;
-        b=PB3dOQlCxTu+aOXoa6WikRXT7WGbL2HUfWXrlu4AHPaGBBmbIUX5QWx63EGCtc6rED
-         2RNWMROCi2sPkyU3wDzXcxDlS4KbDaAhmjua7uwoeYUcyYZlk3NnqFwCINFOP0wOk0ki
-         knmOYSRpWsBZkMZVK50sfwGBOVDcI33+hV8Qp+HbFhDzrV2gOHLFEbkONeNhrnQdYRou
-         dcQLcOunJe6Lf55j88hfcil0jeuS84103Lk44gFaNVo3tby3DEqXDrSs5yExFzKRtlyZ
-         thmQZCJJkqYSxXAxuNcEJ5n2lf0Zv09dl5P4aWu3wqJJ322z1940L8J+7/Cuk+ASlIFf
-         jclg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791067054; x=1791671854;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eAem2X14ObZm+rpDIaIE6FmNboclOYWffVUntFzEfDk=;
-        b=0SQYG58QnKbd3cBVKZ7qm/PfJglt8rJM+ESyFqqIeAakIARXpYVEoaq0dUDswBo8rG
-         tqs4Xr7zWGCe2o6yZM/TeFvhUWO7rapWZ8VikOR4HSD2AcyoS+eWpnENHMxavcsVztzF
-         jpkAbRU4/9KxcK6Dyo2tViq4A7ct07AHoUQ08tih7f2Kluyuit1t54e/1s2E7fV9BVTu
-         /WkR6k2luBBHfcQAdtXbYFh3kQHVJ0cGyeV4YacbJ+L/9wNgTTeR8kAgl1YRtBQ4Sbjc
-         PaO2IDjNb+AAM64qJ8/O8AritvdXfYHlO3LwvaaSMvBe/Gm5ipve4xbuyuY46Oavhc2I
-         u+RA==
-X-Forwarded-Encrypted: i=1; AKwUvBwaWlM00fsRK2d2j7IGwkvb3k7J6Slbu0Sfp1Eb2p2UryFk8opI6wEVrLbILA+Zg/WUS3p799uaZsCYcwym@vger.kernel.org
-X-Gm-Message-State: AFq9FYK+Ee+Gh6UE7tFrK3yVQEfXDR14UWmc76sc8JfWJghMzDtFcaqu
-	xcBkdc9YcfLHVYAafjuS7WREexuFhurPqYRBhXZQu7JoscfCjOxb/NB26SYSotiUFggKlcpEvKX
-	/lEObG21md0M2FO2uDTLTernFngBVP1WUTS74B1WIL0h7D7nnn2XPF+Hjm+6z926VF35OIfI90D
-	B1
-X-Gm-Gg: AYBFou0A+BLoSdkIrb93EtUGLHkJDZ94f4/j4DvvqHf40zkut68UcQiYyzmk2/OBk0y
-	9kIEqf9bgwB89vfP27RTQYfsPq2nYhKACQENY699dRY47TpFD6sjMyBmYlswLeoEAjt2BNrHe2G
-	TAQSyc1NhIqAObE+Hitv5VbobrjTH0eP644884W0PtNGWc+/NQod5KiN0SES2qPc1BJWXccVte7
-	L8icE+MEIMVn8a1SuMI0TrM+b0WbSI+rMH2H98QrXffQLbl1udzjobJ99z/7Bae5Hw8hGiSiRzR
-	z7skw7Z9+Qaq0u9M6686YN6fuq9lOSNh0L4MSUi+7MxZXGWnZxgbHJ8xD4VKXxpqxXmLISDXuvn
-	mYVe0k1SdxBOtNsVf4SuYD1PFMQOOqc2kqsTOgriJAwI8ndI=
-X-Received: by 2002:a17:90a:6097:b0:3a6:f1d2:57f8 with SMTP id 98e67ed59e1d1-3a6f1d269b3mr2445184a91.2.1791067054165;
-        Sat, 03 Oct 2026 15:37:34 -0700 (PDT)
-X-Received: by 2002:a17:90a:6097:b0:3a6:f1d2:57f8 with SMTP id 98e67ed59e1d1-3a6f1d269b3mr2445174a91.2.1791067053583;
-        Sat, 03 Oct 2026 15:37:33 -0700 (PDT)
-Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78e4664ebsm4499215a91.7.2026.10.03.15.37.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Oct 2026 15:37:33 -0700 (PDT)
-From: Rob Clark <robin.clark@oss.qualcomm.com>
-To: dri-devel@lists.freedesktop.org
-Cc: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH] drm/msm: Sync registers from mesa
-Date: Sat,  3 Oct 2026 15:37:22 -0700
-Message-ID: <20261003223723.400020-1-robin.clark@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="PNaPW3E/"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=d62zmW4RobrHsVpe3cG7L7IoZeaftdQwxfIBtOsnewOVlh1iLounIQcBmD0ukj8n29r1v1Go3Fkv8JUOR/m0zbjlNHG91rUVmrM2ra7efcHuQQD7iHipGVgDs5FO3/GWZmrka5z1vc7AZdEN4PcLNTsAXqqVx3N84tdgdwXsi3csNbIr0EM6SpKKpHGB37uS9DrBHsVwEZQJWZx0DcpV57djQH1yrJ2q9RRePpi0EK3OGD1eeVBf41Axej44YuNCav+k6phae9gZD2LTKUgJnNL9HyIsSx47bTTFzSTAlkp9yn0Senjf1EdclmXyiU+sVPqVaeuuidBXEJT6LcRZRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Icl2wYAb1h4y/FTIRrKJRtDo7nD5+O20nuzr9ef3Wyg=;
+ b=KAETRnGmyIv8ezWLOjZ5xcZwhVSoA7o4QRRJTseKTzL+/936jODYSJiJiHKaaMBxChBbYPrHuf7Cmi09VvTHNkvID8TB6mLx6qk0i3n/4IxCKYrcBde/hDen1SQkvwxWYum44zw+cCLfG3REgNcJ9ISeFvu2DiXe4PnUv/hq5mfz0RJwONFO28tmwXb0V+Z0pRpiPAvDk8rl6KgyWFCUH/h+Y0y88RVz9NVQXeBmpDAI4dykkttVcpALL59SZEgmxfCMMXxJgqWR/qDxF3o7h1bg5K9WsSU+7veryo+fpIPt5a33vL8e82ciOCgyi//ZC8CY665aixgt1WJOh4ugOA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Icl2wYAb1h4y/FTIRrKJRtDo7nD5+O20nuzr9ef3Wyg=;
+ b=PNaPW3E/MU9tGWcFV52VdH61RC/BHx5YKdtqZtIA/1GX78X/WUdtrqoo8GWOSIb7sh6+jeI00CFh6GjqQeBad6b7xpsSu9ZZT+9Ta0SiPbL+kevsFE84wMis8/CaV9tpi1YHPgxwuhPwj1PvI95ooZAr7R9AJWjOhtgoKQiiE0eM1mNdH4MVMUvwqqRNxwJgh0M6a2XxTb4yUvb6l/yL/MlwThrRLHbEqagodM5kaXE4d35M3I6jx6flbsuhpnR3KeSiEcpnux477WOk4uLS9fxtAcgxzIUHUuk3orpOd7eXZB97quqA4/YOsmfNWB3Ia4fj822K4EaUHYC9kRolgw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
+ by MI7PR04MB118002.eurprd04.prod.outlook.com (2603:10a6:290:108::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Sun, 4 Oct
+ 2026 00:59:25 +0000
+Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
+ ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
+ ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0472.016; Sun, 4 Oct 2026
+ 00:59:25 +0000
+Date: Sat, 3 Oct 2026 19:59:13 -0500
+From: Frank Li <Frank.li@oss.nxp.com>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Vinod Koul <vkoul@kernel.org>, linux-kernel@vger.kernel.org,
+	dmaengine@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+	Frank Li <Frank.Li@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
+ new header
+Message-ID: <asGk4fj_HQ5HupB4@SMW015318>
+References: <aqlwRkNcs_UqKjWs@parshuram>
+ <aql6u3T0nnSVr-FC@SMW015318>
+ <aqws8pN2rfS9-dCC@parshuram>
+ <aqz1-OzFobOROuBw@nsa>
+ <aq18_TMNs4EJzgZO@parshuram>
+ <arDtEB0na9DxDWAS@nsa>
+ <arFXc0LqEpgWSS6m@SMW015318>
+ <ar-Il2qP_Qms3Qw1@nsa>
+ <ar-13p3a7ENGfMOF@SMW015318>
+ <asEWwIfO0LB27wj9@ashevche-desk.local>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <asEWwIfO0LB27wj9@ashevche-desk.local>
+X-ClientProxiedBy: CY5PR22CA0010.namprd22.prod.outlook.com
+ (2603:10b6:930:16::25) To GV2PR04MB11799.eurprd04.prod.outlook.com
+ (2603:10a6:150:2cf::9)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: r4tmD6a89ulISXFASIkxZSoEob8Xbueu
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDA5MCBTYWx0ZWRfX9jhyBcf6FCV9
- chBYbuwf/h8gqACrAlpUt0/9dkJMD58/+hXezGKzsJt+2ualtA1rtC2VhX8oDFaC2O1OczLIhpD
- urJlkTtol6+dJ03zgTNXVvqoT2ITud8=
-X-Authority-Analysis: v=2.4 cv=YoGa1IYX c=1 sm=1 tr=0 ts=6ac183af cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=e5mUnYsNAAAA:8
- a=EUspDBNiAAAA:8 a=0vnX1LisTAiW6trkSK4A:9 a=GvdueXVYPmCkWapjIL-Q:22
- a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDA5MCBTYWx0ZWRfXyWWvPHPxNZds
- cZcOWH4lsmv3ebXBAEXCNjIznuVqMZwelJiMNGsxyfYYnV8DqXghFg9gO8C/kjJ7idtXngzF3VE
- ofF24VhevpyQd0fMbz8J/j2S2/j4PZ8l7uZ/QkUiw4LjHMLfBd7tM7fTkz6vM10awP97qfiGACJ
- 3RfvwGMJ5F3DJ1w+8prn5ivX5YaxDM4vHHqEeW8tC2b4mIJ/q6pIuaas3KoXNQhybE89/mOhRtD
- JF9ql3FjB3Voh8to3QM9w7d9uxi2rJO75NjsHujjQvkTKOWf5zQ8opYCWkCeRBgXBrHrHugxzSF
- a8Hh5ZxzimP8yL1jL4JlpbC5kf9xRLDeCfV+Y17mENrhslV/pP/M3qbkanLkCnYIEHhJHGE/TFt
- OheCgu+rQE7BtHb90gWfGNJhGHvCXSZkdVQjjT+ntHCiIQFxM0D55VlKhYy52RuvOvKMtLTawu7
- tCGkapU8IojT7WDPchg==
-X-Proofpoint-GUID: r4tmD6a89ulISXFASIkxZSoEob8Xbueu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-03_04,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
- phishscore=0 suspectscore=0 clxscore=1015 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610030090
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|MI7PR04MB118002:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3d1018aa-a804-4469-1f22-08df21b2bbc4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|19092799006|366016|376014|7416014|23010399003|10067099003|56012099006|11063799006|4143699003|5023799004|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	npmlbMe4gB8nBBs0aZ7eDBP3xBBktt7p+Ar0FIgqAbH3AkxqULXaL57SWm0kK9jRmhF3Jg2rE1FhEhN0uZrpowvbYv5X9WumzN+ahU3hkRq0X3yh9YizTjRflfph1ghXms3cCTH0jxQmuyKHVnunKFI5FNlLSvVbhaHtKSq1UfQzlHX+AsFlNrxrTV59PAVXyKbW/cxOb9AJXlu/uC9SrxmFr1hehyqZiGf27ydSrxFZEVVO8pv8wEM9u7rP/8U29k5pVvADzQ6dNqYC35h5We5hKHO9hlqado/TzUUWoDwxjTQfjHygHlL2LFNxs4oKSkO1CdwvjmfLtuhyuuLXlCwzRaP9x5jS5zWerLfvurvKGKQuBqI+C2W/G7bI1ubUJaVMiS/c2SXrXZai3Jo+roKWHxL0ovqgwxxOskzx5F2CDkq6IbOJmFjyAKjiC2B2ESGHY3FU3ez2TTJ1abnD/JnW2PZjm7P1vmRtCP1aYdna9qgwvql52EGJrYSkv2zaGgd27idtMOPjZ1PpLu5fd22mhyb3pFZaOw6uj4k8FBUSIdHK7l/bcetL320XI+zZ1en45JEyhS1APD6sZ7Etp7/m8MnYNjFwbIyuf9R/04Amt3u0SQ8aNHPo42WyfG7cgPahBoFewlGZTec3JKD6x5/0gukI7/sGDnm8U8YJSjg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(19092799006)(366016)(376014)(7416014)(23010399003)(10067099003)(56012099006)(11063799006)(4143699003)(5023799004)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?iso-8859-1?Q?wew4rF8Za7hToSXBLFWyyGA9/ScFw3twyIEYODStxxbWgcOPZoytQONLAE?=
+ =?iso-8859-1?Q?prEmJmAzrCuJdDHRtuS27sVcIcKsEHrp6U71412N1DSAS8PTcEfhkGhbUz?=
+ =?iso-8859-1?Q?fieJj6MQYzotk0SfffAyZVOxBbPLSAmJVFPPhrgU0z7THmYJCt5Z0hm4pb?=
+ =?iso-8859-1?Q?pUmKvJole49bqj1YAvKMMp84TSPf1oS/TEXrQ4U1VmftLyfPfnlwh3RIzM?=
+ =?iso-8859-1?Q?KmvknfMQ0mCRjQwPsWsQqqfyJfOpR+p9RK0roW71rSfe6zvH+GWHTnR0Fm?=
+ =?iso-8859-1?Q?EXeDuBjFD9xYOFnh0JlwuAWg8cBGjG0FUXh/fCVGZxIQoaqHFgeTRsQlMk?=
+ =?iso-8859-1?Q?j+8Gapl3LBwr/iUrpC611apO9kuK78yzBwaBzAj3w0vajgCdy2cDQv8pqG?=
+ =?iso-8859-1?Q?oZHIbEd/3SjKTUNKDVi0BrPwpv2+0QCaNo26OmCn9jQPSoBkWyGrG4E5y+?=
+ =?iso-8859-1?Q?fb9LznrHTuV4LDQ+Sf5vIvbvMUo252PcD4ao+RW9ZeeDH5d5hvBGG86KJT?=
+ =?iso-8859-1?Q?uiBF3K6fNkDpLIDeuKdbtfSAIuhNzGH0CtY+9DalTxMGhHnnWgsunjP+4X?=
+ =?iso-8859-1?Q?B2fkukp90MWPBtJ1/niQHfrG/fTIOVHxnV9makOdMxn3AUBlN3rngQ1Cxx?=
+ =?iso-8859-1?Q?M5zl1c0tdL3YcbG95lZwH43VvAUqY4szx2eaRkdYqUf/EZnBX9vYiPMfR4?=
+ =?iso-8859-1?Q?4NTjXXYSygfQGqYJpVAcrlpqycYVLJi6xDZGvPkKg78A4glr16dAhDOZoW?=
+ =?iso-8859-1?Q?/w1Su5z+yFhfjvoy9rzeP/BIwGfWV+elcf61bisuL1h/UD5j+t9FFL7nz2?=
+ =?iso-8859-1?Q?/h/J6pFy8sLHUm23LPH92HWkBadsCV+O0qRFAXqkXnhKljmouhtNHkfNRP?=
+ =?iso-8859-1?Q?ad6ZsX6gev73gtJPTE9CXt1BGsVGPmfmXv23DMfzKCHq7NzrT/BwoceA9b?=
+ =?iso-8859-1?Q?SLEGXd3ew0YpnK6KPuq3Tld2vt+cSLXPJffzAowsD6GP6EajFItls+dFu6?=
+ =?iso-8859-1?Q?nsc2oufZJJE1gj1vPVoEqs13C1vZeRjOL0R9LQnXFJ9pzD8tJ/w4vk7iHq?=
+ =?iso-8859-1?Q?/3W3x0rn+Q56lL4w7GRsI0xgqIl/4SlDe2c27vh5djP3akqnqjXAm17NTA?=
+ =?iso-8859-1?Q?ACDY8/NHG/gvO+RC781ga6zl1QKtJJIpQ+3uitODOVvX0RjLL0DzjCNHQf?=
+ =?iso-8859-1?Q?xuheJP+Xxq8js4sCp93wYxgZ8Vwwi/9smzYRcttzkYLP5AQUULPpfDa8Xo?=
+ =?iso-8859-1?Q?ZgMoR+fZAp3d7j6UHTswhiXZEy4TMRS0MiNRiJfDlvh7s3xlPxNegqymmH?=
+ =?iso-8859-1?Q?NzJG5R/vCnozea89gACJufmfMXfZTAqupa25IJa9w0nJwzbjpvUQpTjUSQ?=
+ =?iso-8859-1?Q?qvYIdNbVlOvtXxr5SfBNXf+aiGjw9jZSyLHPkhcKue/XbdguLC3pa2KBox?=
+ =?iso-8859-1?Q?++cXPNuN3uDxjEoo+zcmoKZzyo86wUzn7x4A2kFiGreLp92grarJJNvJJj?=
+ =?iso-8859-1?Q?D2Djk/C7jvT10MQxzqajtDMA9SSfZZ8MjKn9PwqTn4NNYREHbOg3DitrWt?=
+ =?iso-8859-1?Q?zcAcnTcpbe8B8ohdoMDtDRtbJ9fpGHo92vYCMGh+E0pbSNn6IE8FMaBeHK?=
+ =?iso-8859-1?Q?ly+nYJGBeTAIUL3X4aHQds05uNY3OI25qfZ4SOpOVlieqsVL8O6CxVSzRR?=
+ =?iso-8859-1?Q?scwFdq8YmOUTtCkSAdAapQXkTaX1xx9Qz8fRmQ8bfsKdyfYNsjSQlbh8yX?=
+ =?iso-8859-1?Q?mYwWSAxvNwaLyM+8F3oXGGJqoc6EW75m9oEOA/4oXpZUa7SLwOahxkY+Zd?=
+ =?iso-8859-1?Q?qzYCXZ8hUNXx8yg+C350rlMs9TkKbD5cQrMTP7JYssEY25PAcbPG?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d1018aa-a804-4469-1f22-08df21b2bbc4
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Oct 2026 00:59:25.1242
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aS0LbejlVEi5ONiDtxkw9vNNXum/0pZ+l/AOPJ+lkYO3bJne+tDQshpakN4r+IWKc9ROFc0TO4n+Yc+ITZcbx9eTbTzmV/YCWXVIurd0DKyy4hZkE0Fi+z3S9zATuAvU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MI7PR04MB118002
 
-Sync changes from mesa commit 81fae85847d2 ("freedreno/registers: Sync
-xml changes back from kernel").
+On Sat, Oct 03, 2026 at 05:52:48PM +0300, Andy Shevchenko wrote:
+> On Fri, Oct 02, 2026 at 08:47:10AM -0500, Frank Li wrote:
+> > On Fri, Oct 02, 2026 at 11:43:17AM +0100, Nuno Sá wrote:
+> > > On Mon, Sep 21, 2026 at 11:12:35AM -0500, Frank Li wrote:
+> > > > On Mon, Sep 21, 2026 at 09:53:49AM +0100, Nuno Sá wrote:
+> > > > > On Fri, Sep 18, 2026 at 11:33:41PM +0530, Vinod Koul wrote:
+> > > > > > On 18-09-26, 09:39, Nuno Sá wrote:
+> > > > > > > On Thu, Sep 17, 2026 at 11:39:54PM +0530, Vinod Koul wrote:
+> > > > > > > > On 15-09-26, 12:04, Frank Li wrote:
+> > > > > > > > > On Tue, Sep 15, 2026 at 09:50:22PM +0530, Vinod Koul wrote:
+> > > > > > > > > > On 15-09-26, 21:22, Vinod Koul wrote:
+>
+> ...
+>
+> > > > > > > > > > > > Traditional naming would be
+> > > > > > > > > > > > dma/engine/provider.h
+> > > > > > > > > > > > dma/engine/consumer.h
+> > > > > > > > > > >
+> > > > > > > > > > > consumer and provider and good names.. I would retain the full dmaengine
+> > > > > > > > > > > everywhere please. dma causes confusion already!
+> > > > > > > > > >
+> > > > > > > > > > Thinking about it again, drivers/dma/dmaengine.h should be the provider
+> > > > > > > > >
+> > > > > > > > > There some dmaengine code outside drivers/dma directory, like
+> > > > > > > > > drivers/crypto/ccp/ccp-dmaengine.c
+> > > > > > > >
+> > > > > > > > They chose to be outside, their choice... They need to be updated as
+> > > > > > > > well to point to ../../dma/dmaengine.h :-)
+> > > > > > >
+> > > > > > > I tend to agree with Andy but anyways. I feel this is going a bit out of
+> > > > > > > scope now. So what we have now in the series is:
+> > > > > > >
+> > > > > > >
+> > > > > > > - include/linux/dmaengine.h (without enum dma_slave_buswidth)
+> > > > > > > - include/linux/dma/types.h (with enum dma_slave_buswidth and new
+> > > > > > >   dma_buswidth_t type) - A future one would be dma_cap_mask_t and we could
+> > > > > > >   drop bitmap.h from dmaengine.h
+> > > > > > > - include/linux/dma/widthmask.h - The new bitmap based API for bus_width
+> > > > > > >
+> > > > > > > I kind like the separation (and the whole point was to avoid bitmap.h in
+> > > > > > > the main dmaengine.h API) but tbh I'm not sure if a consumer driver
+> > > > > > > will ever use dma/widthmask.h without needing the consumer API. But
+> > > > > > > to sum things up, what do you suggest for vÛE?
+> > > > > > >
+> > > > > > > * include/linux/dmaengine.h as the consumer API and includes the new
+> > > > > > > the widthmask API
+> > > > > > > * provider/private goes to drivers/dma/dmaengine.h and just includes
+> > > > > > > include/linux/dmaengine.h as the starting point?
+> > > > > > >
+> > > > > > > Let me know how do you want things for v5
+> > > > > >
+> > > > > > Yes lets talk about dma_slave_buswidth, it is client type. This is
+> > > > > > configured by users to set the width of peripheral.
+> > > > > > So this needs to be in the include/linux/dmaengine.h
+> > > > > >
+> > > > >
+> > > > > Agreed! But providers also need to set the allowed bus mask. And I'm
+> > > > > just not sure they need to include/consume all of the consumer API.
+> > > > > Also, it's common to allow the provider API to be widely used throughout
+> > > > > the kernel (but I agree that could be even harder to get done - if we
+> > > > > want to make some stuff really private - but I guess that could be done
+> > > > > in a second step or more incrementally). We do also have some subfolders
+> > > > > in `drivers/dma` which means we'll need the odd "../dmaengine.h" relative
+> > > > > include which I do not love tbh (on top of the crypto stuff).
+> > > > >
+> > > > > I really think something like the below would be more appropriate (if we
+> > > > > just want the provider/consumer API without further splitting like the
+> > > > > types.h and widthmak.h in this version):
+> > > > >
+> > > > > include/linux/dmaengine.h - provider API (as of today)
+> > > > > include/linux/dmaengine-consumer.h
+> > > > >
+> > > > > But anyways, if you or Frank do not object in the next few days, I'll
+> > > > > take the above approach suggested by Vinod:
+> > > > >
+> > > > > drivers/dma/dmaengine.h - provider
+> > > > > include/linux/dmaengine.h - consumer
+> > > >
+> > > > It think it is fine.
+> > >
+> > > So I was aboutto start on this again and I just realized
+> > > drivers/dma/dmaengine.h already exists today so nothing to do on this
+> > > series.
+> >
+> > I just find it and start some cleanup/move work.
+> >
+> > > I mean I could remove the consumer include on the dmaengine
+> > > drivers that I'm touching but not really on scope and super important
+> > > IMO. So, for the consumer side, should I just go to the first approach
+> > > where all the bus_width API goes into include/linux/dmaengine.h or
+> > > should I keep:
+> > >
+> > > include/linux/engine/types.h
+> > > include/linux/engine/widthmask.h
+> > >
+> > > And have a better separation on the consumer side? Or maybe changing
+> > > s/engine/consumer/ on the above paths?
+> >
+> > I go through v3 thread, Andy just said split to new type.h, but not have
+> > provided reason.
+> >
+> > I am planning move provide API and data structure to driver/dma/dmaengine.h
+> >
+> > include/linux/dmaengine.h will keep consume only defination and API.
+> >
+> > why still need types.h?
+>
+> The idea was to rectify the messed up dependencies. Without split of types we
+> will need to have bitmap.h (IIRC the initial idea of the split was that) only
 
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
----
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |  2 +-
- drivers/gpu/drm/msm/registers/adreno/a2xx.xml | 25 +++---
- drivers/gpu/drm/msm/registers/adreno/a5xx.xml | 17 ++++
- drivers/gpu/drm/msm/registers/adreno/a6xx.xml | 81 +++++++++++++------
- .../drm/msm/registers/adreno/adreno_pm4.xml   | 41 ++++++----
- 5 files changed, 116 insertions(+), 50 deletions(-)
+There are already include bitmap.h, and use
 
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-index 081e79ea4652..c8381ac238ce 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.c
-@@ -225,7 +225,7 @@ static void get_stats_counter(struct msm_ringbuffer *ring, u32 counter,
- 	OUT_PKT7(ring, CP_REG_TO_MEM, 3);
- 	OUT_RING(ring, CP_REG_TO_MEM_0_REG(counter) |
- 		CP_REG_TO_MEM_0_CNT(2) |
--		CP_REG_TO_MEM_0_64B);
-+		CP_REG_TO_MEM_0_IS_64B);
- 	OUT_RING(ring, lower_32_bits(iova));
- 	OUT_RING(ring, upper_32_bits(iova));
- }
-diff --git a/drivers/gpu/drm/msm/registers/adreno/a2xx.xml b/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
-index 22caddaa0db9..66a9ad75131c 100644
---- a/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
-+++ b/drivers/gpu/drm/msm/registers/adreno/a2xx.xml
-@@ -1228,10 +1228,15 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	<reg32 offset="0x0c86" name="PA_SU_FACE_DATA">
- 		<bitfield name="BASE_ADDR" low="5" high="31" type="uint"/>
- 	</reg32>
-+	<reg32 offset="0x0d03" name="SQ_RESOURCE_MANAGMENT">
-+		<bitfield name="VTX_THREAD_BUF_ENTRIES" low="0" high="7" type="uint"/>
-+		<bitfield name="PIX_THREAD_BUF_ENTRIES" low="8" high="15" type="uint"/>
-+		<bitfield name="EXPORT_BUF_ENTRIES" low="16" high="24" type="uint"/>
-+	</reg32>
- 	<reg32 offset="0x0d00" name="SQ_GPR_MANAGEMENT">
- 		<bitfield name="REG_DYNAMIC" pos="0" type="boolean"/>
--		<bitfield name="REG_SIZE_PIX" low="4" high="11" type="uint"/>
--		<bitfield name="REG_SIZE_VTX" low="12" high="19" type="uint"/>
-+		<bitfield name="REG_SIZE_PIX" low="4" high="10" type="uint"/>
-+		<bitfield name="REG_SIZE_VTX" low="12" high="18" type="uint"/>
- 	</reg32>
- 	<reg32 offset="0x0d01" name="SQ_FLOW_CONTROL"/>
- 	<reg32 offset="0x0d02" name="SQ_INST_STORE_MANAGMENT">
-@@ -1527,12 +1532,12 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	</reg32>
- 	<reg32 offset="0x2293" name="PA_SC_VIZ_QUERY">
- 		<bitfield name="VIZ_QUERY_ENA" pos="0" type="boolean"/>
--		<bitfield name="VIZ_QUERY_ID" low="1" high="6" type="uint"/>
--		<bitfield name="KILL_PIX_POST_EARLY_Z" pos="8" type="boolean"/>
-+		<bitfield name="VIZ_QUERY_ID" low="1" high="5" type="uint"/>
-+		<bitfield name="KILL_PIX_POST_EARLY_Z" pos="7" type="boolean"/>
- 	</reg32>
- 	<reg32 offset="0x2294" name="VGT_ENHANCE"/>
- 	<reg32 offset="0x2300" name="PA_SC_LINE_CNTL">
--		<bitfield name="BRES_CNTL" low="0" high="15" type="uint"/>
-+		<bitfield name="BRES_CNTL" low="0" high="7" type="uint"/>
- 		<bitfield name="USE_BRES_CNTL" pos="8" type="boolean"/>
- 		<bitfield name="EXPAND_LINE_WIDTH" pos="9" type="boolean"/>
- 		<bitfield name="LAST_PIXEL" pos="10" type="boolean"/>
-@@ -1544,7 +1549,7 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	<reg32 offset="0x2302" name="PA_SU_VTX_CNTL">
- 		<bitfield name="PIX_CENTER" pos="0" type="a2xx_pa_pixcenter"/>
- 		<bitfield name="ROUND_MODE" low="1" high="2" type="a2xx_pa_roundmode"/>
--		<bitfield name="QUANT_MODE" low="7" high="9" type="a2xx_pa_quantmode"/>
-+		<bitfield name="QUANT_MODE" low="3" high="5" type="a2xx_pa_quantmode"/>
- 	</reg32>
- 	<reg32 offset="0x2303" name="PA_CL_GB_VERT_CLIP_ADJ" type="float"/>
- 	<reg32 offset="0x2304" name="PA_CL_GB_VERT_DISC_ADJ" type="float"/>
-@@ -1796,10 +1801,10 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 		<value name="SQ_TEX_NUM_FORMAT_INT" value="1"/>
- 	</enum>
- 	<enum name="sq_tex_type">
--		<value name="SQ_TEX_TYPE_0" value="0"/>
--		<value name="SQ_TEX_TYPE_1" value="1"/>
--		<value name="SQ_TEX_TYPE_2" value="2"/>
--		<value name="SQ_TEX_TYPE_3" value="3"/>
-+		<value name="SQ_TEX_TYPE_INVALID_TEXTURE" value="0"/>
-+		<value name="SQ_TEX_TYPE_INVALID_BUFFER" value="1"/>
-+		<value name="SQ_TEX_TYPE_VALID_TEXTURE" value="2"/>
-+		<value name="SQ_TEX_TYPE_VALID_BUFFER" value="3"/>
- 	</enum>
- 	<reg32 offset="0" name="0">
- 		<bitfield name="TYPE" low="0" high="1" type="sq_tex_type"/>
-diff --git a/drivers/gpu/drm/msm/registers/adreno/a5xx.xml b/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
-index 4af76b3750f7..e928ad4e518c 100644
---- a/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
-+++ b/drivers/gpu/drm/msm/registers/adreno/a5xx.xml
-@@ -1804,6 +1804,9 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 
- 
- 	<reg32 offset="0xe000" name="GRAS_CL_CNTL">
-+		<bitfield name="ZNEAR_CLIP_DISABLE" pos="1" type="boolean"/>
-+		<bitfield name="ZFAR_CLIP_DISABLE" pos="2" type="boolean"/>
-+		<bitfield name="Z_CLAMP_ENABLE" pos="5" type="boolean"/>
- 		<bitfield name="ZERO_GB_SCALE_Z" pos="6" type="boolean"/>
- 	</reg32>
- 	<bitset name="a5xx_gras_xs_cl_cntl" inline="yes">
-@@ -1832,6 +1835,13 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	<reg32 offset="0xe013" name="GRAS_CL_VPORT_YSCALE_0" type="float"/>
- 	<reg32 offset="0xe014" name="GRAS_CL_VPORT_ZOFFSET_0" type="float"/>
- 	<reg32 offset="0xe015" name="GRAS_CL_VPORT_ZSCALE_0" type="float"/>
-+	<doc>
-+		The range GRAS_CL_CNTL.Z_CLAMP_ENABLE clamps to.  Near and far, not
-+		sorted as the a6xx equivalents are: a reversed depth range is written
-+		reversed.
-+	</doc>
-+	<reg32 offset="0xe070" name="GRAS_CL_VIEWPORT_ZCLAMP_NEAR_0" type="float"/>
-+	<reg32 offset="0xe071" name="GRAS_CL_VIEWPORT_ZCLAMP_FAR_0" type="float"/>
- 	<reg32 offset="0xe090" name="GRAS_SU_CNTL">
- 		<bitfield name="CULL_FRONT" pos="0" type="boolean"/>
- 		<bitfield name="CULL_BACK" pos="1" type="boolean"/>
-@@ -1976,6 +1986,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
- 	<reg32 offset="0xe146" name="RB_FS_OUTPUT_CNTL">
- 		<!-- bit0 set except for binning pass.. -->
- 		<bitfield name="MRT" low="0" high="3" type="uint"/>
-+		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="4" type="boolean"/>
- 		<bitfield name="FRAG_WRITES_Z" pos="5" type="boolean"/>
- 	</reg32>
- 	<reg32 offset="0xe147" name="RB_RENDER_COMPONENTS">
-@@ -2058,6 +2069,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
- 		<!-- per-mrt enable bit -->
- 		<bitfield name="ENABLE_BLEND" low="0" high="7"/>
- 		<bitfield name="INDEPENDENT_BLEND" pos="8" type="boolean"/>
-+		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="9" type="boolean"/>
- 		<bitfield name="ALPHA_TO_COVERAGE" pos="10" type="boolean"/>
- 		<!-- a guess? -->
- 		<bitfield name="SAMPLE_MASK" low="16" high="31"/>
-@@ -2070,6 +2082,7 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
- 		<bitfield name="Z_TEST_ENABLE" pos="0" type="boolean"/>
- 		<bitfield name="Z_WRITE_ENABLE" pos="1" type="boolean"/>
- 		<bitfield name="ZFUNC" low="2" high="4" type="adreno_compare_func"/>
-+		<bitfield name="Z_CLAMP_ENABLE" pos="5" type="boolean"/>
- 		<doc>Z_READ_ENABLE bit is set for zfunc other than GL_ALWAYS or GL_NEVER</doc>
- 		<bitfield name="Z_READ_ENABLE" pos="6" type="boolean"/>
- 	</reg32>
-@@ -2114,6 +2127,8 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
- 	<reg32 offset="0xe1d1" name="RB_SAMPLE_COUNT_CONTROL">
- 		<bitfield name="COPY" pos="1" type="boolean"/>
- 	</reg32>
-+	<reg32 offset="0xe200" name="RB_VIEWPORT_ZCLAMP_NEAR" type="float"/>
-+	<reg32 offset="0xe201" name="RB_VIEWPORT_ZCLAMP_FAR" type="float"/>
- 
- 	<doc>
- 		Blits:
-@@ -2523,10 +2538,12 @@ bit 7 for RECTLIST (clear) when z32s8 (used for clear of depth32?  not set
- 		<!-- per-mrt enable bit -->
- 		<bitfield name="ENABLE_BLEND" low="0" high="7"/>
- 		<bitfield name="UNK8" pos="8" type="boolean"/>
-+		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="9" type="boolean"/>
- 		<bitfield name="ALPHA_TO_COVERAGE" pos="10" type="boolean"/>
- 	</reg32>
- 	<reg32 offset="0xe5ca" name="SP_FS_OUTPUT_CNTL">
- 		<bitfield name="MRT" low="0" high="3" type="uint"/>
-+		<bitfield name="DUAL_COLOR_IN_ENABLE" pos="4" type="boolean"/>
- 		<bitfield name="DEPTH_REGID" low="5" high="12" type="a3xx_regid"/>
- 		<bitfield name="SAMPLEMASK_REGID" low="13" high="20" type="a3xx_regid"/>
- 	</reg32>
-diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
-index e6e56969a9b8..cf2fb20203b7 100644
---- a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
-+++ b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
-@@ -1388,7 +1388,7 @@ by a particular renderpass/blit.
- 		<reg32 offset="0x0" name="REG"/>
- 	</array>
- 
--	<array offset="0x0c58" name="VSC_PIPE_DATA_PRIM_SIZE" stride="1" length="32" variants="A6XX" usage="cmd">
-+	<array offset="0x0c58" name="VSC_PIPE_DATA_PRIM_SIZE" stride="1" length="32" usage="cmd">
- 		<doc>
- 			Has the size of data written to corresponding VSC_PRIM_STRM
- 			buffer.
-@@ -1396,7 +1396,7 @@ by a particular renderpass/blit.
- 		<reg32 offset="0x0" name="REG"/>
- 	</array>
- 
--	<array offset="0x0c78" name="VSC_PIPE_DATA_DRAW_SIZE" stride="1" length="32" variants="A6XX" usage="cmd">
-+	<array offset="0x0c78" name="VSC_PIPE_DATA_DRAW_SIZE" stride="1" length="32" usage="cmd">
- 		<doc>
- 			Has the size of data written to corresponding VSC pipe, ie.
- 			same thing that is written out to VSC_SIZE_BASE
-@@ -1461,8 +1461,10 @@ by a particular renderpass/blit.
- 		<bitfield name="IJ_LINEAR_CENTROID" pos="4" type="boolean"/>
- 		<bitfield name="IJ_LINEAR_SAMPLE" pos="5" type="boolean"/>
- 		<bitfield name="COORD_MASK" low="6" high="9" type="hex"/>
--		<bitfield name="UNK10" pos="10" type="boolean" variants="A7XX-"/>
--		<bitfield name="UNK11" pos="11" type="boolean" variants="A7XX-"/>
-+		<!-- A740+ field, Must match RB_PS_INPUT_CNTL -->
-+		<bitfield name="FACENESS" pos="10" type="boolean" variants="A7XX-"/>
-+		<!-- A740+ field, Must match RB_PS_INPUT_CNTL -->
-+		<bitfield name="CENTERRHW" pos="11" type="boolean" variants="A7XX-"/>
- 	</bitset>
- 
- 	<reg32 offset="0x8005" name="GRAS_CL_INTERP_CNTL" type="a6xx_gras_cl_interp_cntl" variants="A6XX-A7XX" usage="draw"/>
-@@ -2170,12 +2172,12 @@ by a particular renderpass/blit.
- 		<bitfield name="SCISSOR" pos="16" type="boolean"/>
- 		<bitfield name="UNK17" low="17" high="18"/>
- 		<!-- required when blitting D24S8/D24X8 -->
--		<bitfield name="D24S8" pos="19" type="boolean"/>
-+		<bitfield name="IS_SRC_YUV" pos="19" type="boolean"/>
- 		<!-- some sort of channel mask, disabled channels are set to zero ? -->
- 		<bitfield name="MASK" low="20" high="23"/>
- 		<bitfield name="IFMT" low="24" high="26" type="a6xx_2d_ifmt"/>
--		<bitfield name="UNK27" pos="27" type="boolean"/>
--		<bitfield name="UNK28" pos="28" type="boolean"/>
-+		<bitfield name="FULL_RANGE_YUV" pos="27" type="boolean"/>
-+		<bitfield name="LINEAR_YUV" pos="28" type="boolean"/>
- 		<bitfield name="RASTER_MODE" pos="29" type="a6xx_raster_mode"/>
- 		<bitfield name="COPY" pos="30" type="boolean" variants="A7XX-"/>
- 	</bitset>
-@@ -2561,10 +2563,8 @@ by a particular renderpass/blit.
- 		<reg32 offset="0" name="REG" type="float"/>
- 	</array>
- 
--	<!-- 0x88c2-0x88cf invalid-->
- 	<reg32 offset="0x88d0" name="RB_RESOLVE_CNTL_0" usage="resolve">
--		<bitfield name="UNK0" low="0" high="12"/>
--		<bitfield name="UNK16" low="16" high="26"/>
-+		<bitfield name="YUV_PLANE_ID" low="0" high="1"/>
- 	</reg32>
- 	<reg32 offset="0x88d1" name="RB_RESOLVE_CNTL_1" type="a6xx_reg_xy" usage="resolve"/>
- 	<reg32 offset="0x88d2" name="RB_RESOLVE_CNTL_2" type="a6xx_reg_xy" usage="resolve"/>
-@@ -2761,7 +2761,22 @@ by a particular renderpass/blit.
- 	<reg32 offset="0x8a30" name="RB_UNKNOWN_8A30" variants="A6XX" usage="draw"/>
- 
- 	<reg32 offset="0x8c00" name="RB_A2D_BLT_CNTL" type="a6xx_a2d_blt_cntl" usage="blit"/>
--	<reg32 offset="0x8c01" name="RB_A2D_PIXEL_CNTL" low="0" high="31" usage="blit"/>
-+
-+	<enum name="a6xx_a2d_pixel_op">
-+		<value value="0" name="PIXEL_OP_DISABLED"/>
-+		<value value="1" name="PIXEL_OP_BLENDING"/>
-+		<value value="3" name="PIXEL_OP_ROP"/>
-+	</enum>
-+
-+	<reg32 offset="0x8c01" name="RB_A2D_PIXEL_CNTL" low="0" high="31" usage="blit">
-+		<bitfield name="PIXEL_OP" low="0" high="1" type="a6xx_a2d_pixel_op"/>
-+		<bitfield name="COLOR_SRC_FACTOR" low="6" high="10" type="adreno_rb_blend_factor"/>
-+		<bitfield name="COLOR_BLEND_OP" low="11" high="13" type="a3xx_rb_blend_opcode"/>
-+		<bitfield name="COLOR_DST_FACTOR" low="14" high="18" type="adreno_rb_blend_factor"/>
-+		<bitfield name="ALPHA_SRC_FACTOR" low="19" high="23" type="adreno_rb_blend_factor"/>
-+		<bitfield name="ALPHA_BLEND_OP" low="24" high="26" type="a3xx_rb_blend_opcode"/>
-+		<bitfield name="ALPHA_DST_FACTOR" low="27" high="31" type="adreno_rb_blend_factor"/>
-+	</reg32>
- 
- 	<bitset name="a6xx_a2d_src_texture_info" inline="yes">
- 		<bitfield name="COLOR_FORMAT" low="0" high="7" type="a6xx_format"/>
-@@ -2814,7 +2829,7 @@ by a particular renderpass/blit.
- 	<reg32 offset="0x8c2e" name="RB_A2D_CLEAR_COLOR_DW2" usage="blit"/>
- 	<reg32 offset="0x8c2f" name="RB_A2D_CLEAR_COLOR_DW3" usage="blit"/>
- 
--	<reg32 offset="0x8c34" name="RB_A2D_UNKNOWN_8C34" variants="A7XX-" usage="blit"/>
-+	<reg32 offset="0x8c34" name="RB_A2D_DEST_BUFFER_ARRAY_PITCH" variants="A7XX-" usage="blit"/>
- 
- 	<!-- 0x8c35-0x8dff invalid -->
- 
-@@ -2959,17 +2974,10 @@ by a particular renderpass/blit.
- 		<bitfield name="DISCARD" pos="2" type="boolean"/>
- 	</bitset>
- 
--	<reg32 offset="0x9980" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX" usage="draw"/>
--	<reg32 offset="0x9107" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A7XX" usage="draw"/>
-+	<reg32 offset="0x9107" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX-A7XX" usage="draw"/>
- 	<reg32 offset="0x930d" name="VPC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A8XX-" usage="draw"/>
- 	<reg32 offset="0x9317" name="VPC_RAST_STREAM_CNTL_V2" type="a6xx_vpc_rast_stream_cntl" variants="A7XX" usage="draw"/>
- 
--	<reg32 offset="0x9107" name="VPC_UNKNOWN_9107" variants="A6XX" usage="draw">
--		<!-- this mirrors VPC_RAST_STREAM_CNTL::DISCARD, although it seems it's unused -->
--		<bitfield name="RASTER_DISCARD" pos="0" type="boolean"/>
--		<bitfield name="UNK2" pos="2" type="boolean"/>
--	</reg32>
--
- 	<reg32 offset="0x9108" name="VPC_RAST_CNTL" type="a6xx_rast_cntl" variants="A6XX-A7XX" usage="draw"/>
- 	<reg32 offset="0x930e" name="VPC_RAST_CNTL" type="a6xx_rast_cntl" variants="A8XX-" usage="draw"/>
- 	<bitset name="a6xx_pc_cntl" inline="yes">
-@@ -3288,7 +3296,29 @@ by a particular renderpass/blit.
- 	<reg32 offset="0x9803" name="PC_RESTART_INDEX" low="0" high="31" type="uint" variants="A6XX-A7XX" usage="draw"/>
- 	<reg32 offset="0x9b15" name="PC_RESTART_INDEX" low="0" high="31" type="uint" variants="A8XX-" usage="draw"/>
- 
--	<reg32 offset="0x9804" name="PC_MODE_CNTL" low="0" high="7" variants="A6XX-A7XX" usage="draw"/>
-+	<reg32 offset="0x9804" name="PC_MODE_CNTL" low="0" high="7" variants="A6XX-A7XX" usage="draw">
-+		<!-- 
-+			The higher this is set, the faster primitive processing performance
-+			ends up being. It is likely the amount of entries to process/fetch.
-+		-->
-+		<bitfield name="COUNT1" low="0" high="4" type="uint"/>
-+		<!--
-+			Setting this slows down primitive processing substantially, but it
-+			was noted to fix some vertex corruption issues in the past. Likely
-+			serves as a workaround to serialize the primitive pipeline?
-+		-->
-+		<bitfield name="UNK5" pos="5" type="boolean"/>
-+		<!-- Never set by the blob, removed in A7XX. Unclear impact. -->
-+		<bitfield name="UNK6" pos="6" type="boolean" variants="A6XX"/>
-+		<!-- Never set by the blob. Unclear impact. -->
-+		<bitfield name="UNK7" pos="7" type="boolean"/>
-+		<!--
-+			Same as COUNT1 but one bit larger, this replaces COUNT1 mid-A7XX but
-+			the proprietary driver tends to set it to the same or larger value
-+			(by using the extra bit) as COUNT1.
-+		-->
-+		<bitfield name="COUNT2" low="8" high="13" type="uint" variants="A7XX-"/>
-+	</reg32>
- 	<reg32 offset="0x9b00" name="PC_MODE_CNTL" low="0" high="14" variants="A8XX" usage="draw"/>
- 
- 	<reg32 offset="0x9805" name="PC_POWER_CNTL" low="0" high="2" variants="A6XX" usage="draw"/>
-@@ -3367,6 +3397,8 @@ by a particular renderpass/blit.
- 	<reg32 offset="0x9886" name="PC_TF_BUFFER_SIZE" variants="A7XX" usage="cmd"/>
- 	<reg32 offset="0x9815" name="PC_TF_BUFFER_SIZE" variants="A8XX-" usage="cmd"/>
- 
-+	<reg32 offset="0x9980" name="PC_RAST_STREAM_CNTL" type="a6xx_vpc_rast_stream_cntl" variants="A6XX" usage="draw"/>
-+
- 	<!-- 0x9982-0x9aff invalid -->
- 
- 	<reg32 offset="0x9b00" name="PC_CNTL" type="a6xx_pc_cntl" variants="A6XX-A7XX" usage="draw"/>
-@@ -3466,7 +3498,7 @@ by a particular renderpass/blit.
- 	<reg64 offset="0x9e12" name="PC_PVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A6XX-A7XX"/>
- 	<reg64 offset="0x9e14" name="PC_DVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A6XX-A7XX"/>
- 
--	<reg32 offset="0x9e0a" name="PC_AUTO_VERTEX_STRIDE"/>
-+	<reg32 offset="0x9e0a" name="PC_AUTO_VERTEX_STRIDE" low="0" high="9" type="uint"/>
- 	<reg32 offset="0x9e0d" name="PC_VIS_STREAM_CNTL" type="a6xx_pc_vis_stream_cntl" variants="A8XX-"/>
- 	<reg64 offset="0x9e0e" name="PC_PVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A8XX-"/>
- 	<reg64 offset="0x9e10" name="PC_DVIS_STREAM_BIN_BASE" type="waddress" align="32" variants="A8XX-"/>
-@@ -4077,8 +4109,8 @@ by a particular renderpass/blit.
- 		<bitfield name="THREADSIZE" pos="20" type="a6xx_threadsize"/>
- 		<!-- seems to make SP use less concurrent threads when possible? -->
- 		<bitfield name="UNK21" pos="21" type="boolean"/>
--		<!-- has a small impact on performance, not clear what it does -->
--		<bitfield name="UNK22" pos="22" type="boolean"/>
-+		<!-- Enables round-robin mode, which guarantees fair scheduling -->
-+		<bitfield name="COMPUTERRMODEEN" pos="22" type="boolean"/>
- 		<bitfield name="EARLYPREAMBLE" pos="23" type="boolean"/>
- 		<bitfield name="MERGEDREGS" pos="31" type="boolean"/>
- 	</reg32>
-@@ -4342,6 +4374,7 @@ by a particular renderpass/blit.
- 		</doc>
- 		<bitfield name="EOLM_ENABLE" pos="1" type="boolean"/>
- 	</reg32>
-+	<reg32 offset="0xaf81" name="SP_LPAC_CHICKEN_BITS" variants="A7XX" usage="init"/>
- 	<reg32 offset="0xae04" name="SP_NC_MODE_CNTL_2" usage="init">
- 		<bitfield name="F16_NO_INF" pos="3" type="boolean"/>
- 	</reg32>
-diff --git a/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml b/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
-index f185b541aa70..2723da19cf5b 100644
---- a/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
-+++ b/drivers/gpu/drm/msm/registers/adreno/adreno_pm4.xml
-@@ -646,10 +646,10 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	<value name="CP_NON_CONTEXT_REG_BUNCH" value="0x5d" variants="A7XX-"/>
- 	<doc>
- 		Write to a scratch memory that is read by CP_REG_TEST with
--		SOURCE_SCRATCH_MEM set. It's not the same scratch as scratch registers.
-+		SOURCE_OC_MEM set. It's not the same scratch as scratch registers.
- 		However it uses the same memory space.
- 	</doc>
--	<value name="CP_MEM_TO_SCRATCH_MEM" value="0x49" variants="A7XX-"/>
-+	<value name="CP_MEM_TO_OC_MEM" value="0x49" variants="A7XX-"/>
- 
- 	<doc>
- 		Executes an array of fixed-size command buffers where each
-@@ -1039,6 +1039,11 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- </domain>
- 
- <domain name="CP_DRAW_AUTO" width="32">
-+	<doc>
-+		Draws (counter - NUM_VERTICES_OFFSET / 4) / STRIDE vertices, counter
-+		read from NUM_VERTICES_BASE.  a7xx divides the counter by four too,
-+		earlier gens use it as-is.
-+	</doc>
- 	<reg32 offset="0" name="0" type="vgt_draw_initiator_a4xx"/>
- 	<reg32 offset="1" name="1">
- 		<bitfield name="NUM_INSTANCES" low="0" high="31" type="uint"/>
-@@ -1048,7 +1053,8 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 		<bitfield name="NUM_VERTICES_OFFSET" low="0" high="31" type="uint"/>
- 	</reg32>
- 	<reg32 offset="5" name="5">
--		<bitfield name="STRIDE" low="0" high="31" type="uint"/>
-+		<!-- the CP masks the stride to 11 bits before forwarding it -->
-+		<bitfield name="STRIDE" low="0" high="10" type="uint"/>
- 	</reg32>
- </domain>
- 
-@@ -1255,6 +1261,11 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 			$dst = (($dst &amp; $src0) rot $rotate) | $src1
- 
- 		Here "rot" means rotate left.
-+		If SRCn_IS_REG, the corresponding src is a register offset,
-+		otherwise it is an immediate.
-+
-+		If DST_SCRATCH is set then the value modified is a scratch
-+		ram address, instead of a register.
- 	</doc>
- 	<reg32 offset="0" name="0">
- 		<bitfield name="DST_REG" low="0" high="17" type="hex"/>
-@@ -1286,7 +1297,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 			Treat things as 64B, allowing for a 64B atomic read of
- 			registers.
- 		-->
--		<bitfield name="64B" pos="30" type="boolean"/>
-+		<bitfield name="IS_64B" pos="30" type="boolean"/>
- 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
- 	</reg32>
- 	<stripe varset="chip" variants="A2XX-A4XX">
-@@ -1307,7 +1318,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 		<bitfield name="REG" low="0" high="17" type="hex"/>
- 		<!-- number of registers/dwords copied is max(CNT, 1). -->
- 		<bitfield name="CNT" low="18" high="29" type="uint"/>
--		<bitfield name="64B" pos="30" type="boolean"/>
-+		<bitfield name="IS_64B" pos="30" type="boolean"/>
- 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
- 	</reg32>
- 	<reg64 offset="1" name="DEST" type="waddress"/>
-@@ -1327,7 +1338,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 		<bitfield name="REG" low="0" high="17" type="hex"/>
- 		<!-- number of registers/dwords copied is max(CNT, 1). -->
- 		<bitfield name="CNT" low="18" high="29" type="uint"/>
--		<bitfield name="64B" pos="30" type="boolean"/>
-+		<bitfield name="IS_64B" pos="30" type="boolean"/>
- 		<bitfield name="ACCUMULATE" pos="31" type="boolean"/>
- 	</reg32>
- 	<reg64 offset="1" name="DEST" type="waddress"/>
-@@ -1337,12 +1348,13 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- <domain name="CP_MEM_TO_REG" width="32">
- 	<reg32 offset="0" name="0">
- 		<bitfield name="REG" low="0" high="17" type="hex"/>
-+		<!-- if set, all writes are to the same reg -->
-+		<bitfield name="ONE_REG_WR" pos="18" type="boolean"/>
- 		<!-- number of registers/dwords copied is max(CNT, 1). -->
- 		<bitfield name="CNT" low="19" high="29" type="uint"/>
- 		<!-- shift each DWORD left by 2 while copying -->
- 		<bitfield name="SHIFT_BY_2" pos="30" type="boolean"/>
--		<!-- does the same thing as CP_MEM_TO_MEM::UNK31 -->
--		<bitfield name="UNK31" pos="31" type="boolean"/>
-+		<bitfield name="WAIT_CACHE_FLUSH" pos="31" type="boolean"/>
- 	</reg32>
- 	<stripe varset="chip" variants="A2XX-A4XX">
- 		<reg32 offset="1" name="SRC" type="address"/>
-@@ -1366,8 +1378,7 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 		<bitfield name="DOUBLE" pos="29" type="boolean"/>
- 		<!-- execute CP_WAIT_FOR_MEM_WRITES beforehand -->
- 		<bitfield name="WAIT_FOR_MEM_WRITES" pos="30" type="boolean"/>
--		<!-- some other kind of wait -->
--		<bitfield name="UNK31" pos="31" type="boolean"/>
-+		<bitfield name="WAIT_CACHE_FLUSH" pos="31" type="boolean"/>
- 	</reg32>
- 	<reg64 offset="1" name="DST" type="waddress"/>
- 	<reg64 offset="3" name="SRC_A" type="address"/>
-@@ -1954,13 +1965,13 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 	<enum name="source_type">
- 		<value value="0" name="SOURCE_REG"/>
- 		<!-- Don't confuse with scratch registers, this is a separate memory
--			 written into by CP_MEM_TO_SCRATCH_MEM. -->
--		<value value="1" name="SOURCE_SCRATCH_MEM" varset="chip" variants="A7XX-"/>
-+			 written into by CP_MEM_TO_OC_MEM. -->
-+		<value value="1" name="SOURCE_OC_MEM" varset="chip" variants="A7XX-"/>
- 	</enum>
- 	<reg32 offset="0" name="0">
- 		<!-- the register to test -->
- 		<bitfield name="REG" low="0" high="17" varset="source_type" variants="SOURCE_REG"/>
--		<bitfield name="SCRATCH_MEM_OFFSET" low="0" high="17" varset="source_type" variants="SOURCE_SCRATCH_MEM"/>
-+		<bitfield name="OC_MEM_OFFSET" low="0" high="17" varset="source_type" variants="SOURCE_OC_MEM"/>
- 		<bitfield name="SOURCE" pos="18" type="source_type" addvariant="yes"/>
- 		<!-- the bit to test -->
- 		<bitfield name="BIT" low="20" high="24" type="uint"/>
-@@ -2277,10 +2288,10 @@ opcode: CP_LOAD_STATE4 (30) (4 dwords)
- 	</reg32>
- </domain>
- 
--<domain name="CP_MEM_TO_SCRATCH_MEM" width="32">
-+<domain name="CP_MEM_TO_OC_MEM" width="32">
- 	<doc>
- 		Best guess is that it is a faster way to fetch all the VSC_CHANNEL_VISIBILITY registers
--		and keep them in a local scratch memory instead of fetching every time
-+		and keep them in a local on-chip memory instead of fetching every time
- 		when skipping IBs.
- 	</doc>
- 	<reg32 offset="0" name="0">
--- 
-2.55.0
+typedef struct { DECLARE_BITMAP(bits, DMA_TX_TYPE_END); } dma_cap_mask_t;
 
+Suppose all DMA Engine consumer will use it to do some check. So I think
+needn't split it as indivial version.
+
+Frank
+
+> where it's indeed required. Besides bitmap.h there are might be more headers
+> that "include half of the world" which should be avoided in every header file.
+>
+> --
+> With Best Regards,
+> Andy Shevchenko
+>
+>
