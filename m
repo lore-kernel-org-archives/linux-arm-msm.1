@@ -1,64 +1,139 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CFE63AA9F8;
-	Sun,  4 Oct 2026 20:02:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E2E2478859
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 20:22:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791144150; cv=none; b=sbdtM4FfqZ6v1DYUuxRb7shGLuBZG/UbZmAu33k6IHtltWJtcSEHgg6Z1RU8xiv6o89SAdopmPWFx+YdnQZsl3qikV9MSdfXPY7GVdJBv/oHb4rdO/2NgxLpajLul9sbiRV7WLO/bwwXzXIwB9AfuXnnq6GWjNrwstvWnuUYiWI=
+	t=1791145375; cv=none; b=Hmk5tTdt3BYyNxVKQpo0pctFsrAtZ2SH8YdgspYoeJszuA1cdwpxx/U/1qKvByjZ+MdKR8/GZd3csVaKYEgg8d8NkDnWF4Tr/YkRlr/MXIrG+P2AA4ZCNfhjtlA/b34ClZR9a2x3gIcXGrz0EQAOeTOdg9cIQteKVSRe1uJYMJ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791144150; c=relaxed/simple;
-	bh=DxpxFvysCDaBNq253YTTsWZ9LKYuKqp8urM1Cobx51A=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=Hh1Lihxin+TvLYQvi3xHx/RHyaqwZezzXz7p5cUOShZfKikMXk77xI/1HWJc1D5jcVrFWd7i16dR5bjALkk7iaEBerQDjysrJJwNDIZQeWxWPVTI3FAYPkQXB7SPLV2WUpDq02/VeoiSL12ofV9a5oU69J1Guqujn0Hazqray3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1CD41F000FF;
-	Sun,  4 Oct 2026 20:02:28 +0000 (UTC)
-Received: by venus (Postfix, from userid 1000)
-	id 3C20D180A51; Sun, 04 Oct 2026 22:02:27 +0200 (CEST)
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Sebastian Reichel <sre@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Reza Kurniawan <imkyufie@gmail.com>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
-References: <20260912-riva-usb-v2-0-997fe0171ee5@gmail.com>
-Subject: Re: (subset) [PATCH v2 0/2] Enable USB support (peripheral mode)
- for Xiaomi Redmi 5A (riva)
-Message-Id: <179114414722.223371.6181817407774225572.b4-ty@b4>
-Date: Sun, 04 Oct 2026 22:02:27 +0200
+	s=arc-20240116; t=1791145375; c=relaxed/simple;
+	bh=ztYL1LS2bhu36whhqBvW6em0XbL9fUZOVHbC7HjvK9Q=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=fkaq8BSJW+tNT09QG82dUqpSqn1QLEC+MDgACteo4IfvMBTBDfVp+P0A3AFlEwSQoSUFjUnMkhIKcJ1RjJyrMyTUk0O3XC/C0rb5AaSEa7aYbUE/jXUCVoVSwF+vEJOr5Ao8tLwys3h3zjJM2augSUze7+yEZL7CxePXI6O8rEA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PKfY1Cth; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PKfY1Cth"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40F0A1F00898
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 20:22:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791145374;
+	bh=kafHJjiytSen4oG++rJSyyLmUK64zKjrIV7lk+5gzN8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=PKfY1CthtYS0jlEI2BO7t8HL1LTRXF3zNFmUwHHVOKfq5IMvmBmzImxGEyCwjtxj2
+	 H/nycB4/n0cBCCzadXhNKeioHqcUowk6gzmdVevcTosf6LnLrTEKe2c4qvTseuEe3S
+	 GQ6ZjgGu2dEVJ2iXIYDIdxq85iIiq6ymmnLsMifiBuz1OewQ2Ooz5Wcmlsk/9g3lz6
+	 XHKsgFJTWckvbviwmWVhIS16paVhL9I28W5laqO0g/pgkJwxfKm3myXko71DL7ZAka
+	 YpSzJOonp2qRxW//U37OpOi4dobEGGvRpJzFpysgO9dSn20qk/89YIz4I0cRtthNHy
+	 Q/sqqHNVyBPEg==
+Received: by mail-lr2-f33.google.com with SMTP id 38308e7fff4ca-3a894300b40so4103241fa.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 13:22:54 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvByjYLJZ4OItaVArFe56DWDyXiMlZ/ahNK3zqBee9cqkwS4KBnRphvalr3AXRxCy+BaHKogVThKmM7fgUHZJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYIKAfFf17D54b1ytNsYXQ6pRPJGGFk4PKfunK0Job0eCCtb6XtA
+	EIkaAnmmhqukYLdXa0KvPDApdUa/6AMPvEQj8DeH6tjlvPw014KAJy4LKykwTO8DeJxrzQCG2rR
+	ET2RQXCF2pHd78mclD9mIiDPG+ELk8Q0=
+X-Received: by 2002:a05:651c:2123:b0:3a7:8372:61ae with SMTP id
+ 38308e7fff4ca-3a8875478d4mr19348371fa.4.1791145372879; Sun, 04 Oct 2026
+ 13:22:52 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16.0
+References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
+ <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
+ <20260727-spotted-winged-mantis-7aa1ce@quoll> <CAD++jLkX0m6_GJd4Pd1Ko4tghta4AXQ5ALZpLe_x-3xxqu1Cvw@mail.gmail.com>
+ <668e83d0-a017-4f59-bc76-bf6c9a80b5ba@kernel.org> <CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=TTBknQMeFctw@mail.gmail.com>
+ <bc3e618f-2e7a-4439-9466-8cd9695242e5@linaro.org> <2lcpzwh7fxecpffnakpnp5lecrm3e6u64ztat7cd75nuxofxa2@clj27bzgjy3r>
+ <4d053234-06d8-4268-b60a-2fccc78da654@linaro.org> <d3xs3kzc2wg5lkouaemdicrbtsoquff6bvmnlmuxwh4kspfs2d@b77l43axr6a4>
+ <8cf6ec52-fb36-44e7-831c-2bb24214f591@linaro.org>
+In-Reply-To: <8cf6ec52-fb36-44e7-831c-2bb24214f591@linaro.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Sun, 4 Oct 2026 22:22:41 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkHk-2MK4vUAz3q4q6v6jHhBkt33eJL297axbRqLn6w3w@mail.gmail.com>
+X-Gm-Features: AclHuK8ujdY6mGbLMOyGi9ex9pbymEK6SXgRbW0wNs9wcCn6KDJLJ0Dey6NKZlE
+Message-ID: <CAD++jLkHk-2MK4vUAz3q4q6v6jHhBkt33eJL297axbRqLn6w3w@mail.gmail.com>
+Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics panel support
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Jun Nie <jun.nie@linaro.org>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Hi Neil,
 
-On Sat, 12 Sep 2026 22:18:10 +0700, Reza Kurniawan wrote:
-> The purpose of this series is to enable the device to act as a USB peripheral.
-> It enables USB-related DT nodes (controller and PHY) and modifies the
-> charger driver (BQ256XX) to expose its VBUS state through extcon.
-> 
-> Driver change is required since the device has its VBUS connected to the
-> charger IC, which means cable connection/disconnection events must be fed
-> from the charger IC, to the controller driver to dynamically enable/disable
-> the USB gadget functionality.
-> 
-> [...]
+On Sun, Oct 4, 2026 at 5:51=E2=80=AFPM Neil Armstrong <neil.armstrong@linar=
+o.org> wrote:
 
-Applied, thanks!
+> Describing it in separate distincts nodes is wrong since it doesn't refle=
+ct
+> that it's an unified display, so either we define :
+> - a "combined-display" bridge defined as:
+>    - a separate top node in / like connectors with a graph from the DSI l=
+inks to each panel
+>    - a DSI subnode with 2 panels as subnode, port graph from both dsi to =
+both sub-panels
+> - a "R63455" panel bindings with 2 subpanels as Linus shared in https://l=
+ore.kernel.org/all/CAD++jLkyEPY5cFg_pHb71yG52iLwS9tQDpcHu=3DTTBknQMeFctw@ma=
+il.gmail.com/
+>
+> I think it would be interesting to have the "combined-display", with a co=
+nnector-like node,
+> which will do all the split-dsi dual-panel logic for us and leave use imp=
+lementing simple panel
+> drivers.
+>
+> The outline would be:
 
-[1/2] power: supply: bq256xx: Expose VBUS state through extcon
-      commit: b33596a615d163372f5e7519338d860cbfc37217
+Overall I really like the looks of this!
 
-Best regards,
--- 
-Sebastian Reichel <sebastian.reichel@collabora.com>
+>         xr-display {
+>                 compatible =3D "combined-display";
+>
+>                 ports {
+>                         port@0 {
+>                                 combined_dsi0: endpoint {
+>                                         remote-endpoint =3D <&dsi0_out>;
+>                                 };
+>                         };
+>                         port@1 {
+>                                 combined_dsi1: endpoint {
+>                                         remote-endpoint =3D <&dsi1_out>;
+>                                 };
+>                         };
+>                         port@2 {
+>                                 combined_panel0: endpoint {
+>                                         remote-endpoint =3D <&r63455_righ=
+t_in>;
+>                                 };
+>                         };
+>                         port@3 {
+>                                 combined_panel1: endpoint {
+>                                         remote-endpoint =3D <&r63455_left=
+_in>;
+>                                 };
+>                         };
+>                 };
+>         };
 
+The core of the crux is to make the argument that this node represents
+the hardware and isn't just something put in there to make it easier
+to implement a driver.
+
+If I break open the headset, will I find something like this, some wires
+going around in there or so.
+
+If yes, this is a go.
+
+Yours,
+Linus Walleij
