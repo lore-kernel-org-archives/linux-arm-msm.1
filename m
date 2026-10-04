@@ -1,364 +1,186 @@
-Received: from vtj.irix.systems (vtj.irix.systems [82.76.27.144])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A6E842050;
-	Sun,  4 Oct 2026 11:13:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.76.27.144
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791112433; cv=none; b=pJdhQFseFJ7mGZrOlKHP51l5yQoTJq+SwLitWbbEvm4uOcGupj/gOpKQIX2vDITRsQa+VWN4EVfRkYBrxn7AHgjhYplOx2T9Ddafd+0AwvUERrLz9o3NfMxIhTZt7oElhE+A/Q7YKJG+Dlr88Zvppm83k139aK8SBvwoYB03yUg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791112433; c=relaxed/simple;
-	bh=aBgCcmxqTChYLYMa+Z4f5mYGc7pS0NfBh7jiYJmN2o4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YbF+1LAAa9q7c+gdBxjF7OyC1hoIUqOzApS7XZH0f46BdHS+FWzcGDTajeNKTl3UoBl0cZ5LHM4nX9i/gWsC7zn3eVK1WxAH/wpyxoOhk3iERZom56qzoGTZcrRF92419RO+ZeSwZlJ4L000O58iOvYbhbkykUG95h32Uj6lL1g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com; spf=pass smtp.mailfrom=andrei-z.com; dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b=QwE0q5bM; arc=none smtp.client-ip=82.76.27.144
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=andrei-z.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E404441A54B
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 11:47:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.51
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791114424; cv=pass; b=XMb1l4uZI3wmFt2muNfxsxgSWRpWYuCumuAF2Ph8DShc1Xwq7kdDRruNqFEA9xjSKVtZCBmyQQgneWqh1noK2Tz3V/deB88coP62iH+4aaegTXEyhqD5894hrUvEoOu9X5W5B+zZ4lCGH873SR3bnRfbFuBKFx7CgznffNxQWrE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791114424; c=relaxed/simple;
+	bh=4tIdOJ4E73NzfC8+HZPUUjeQno126FKXlIlP4skhobc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=N5mGsxqzxR1cad2a0Y/maPq5fHTjBfPrm+sk7WtSoxnu1FxJghaS2s0GtDaMvIp0jTnCW0XuIgRuJz9CeRbTLNZLbInDeAWJx6PezIpepojv3khbYL6cE3Th+nZtlRJI/9FeoCcRUe0i3/p1qoOMJviSISqS0SmWDA2JCpv04Ek=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rEMsbJBz; arc=pass smtp.client-ip=209.85.208.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b="QwE0q5bM"
-Received: from MAILGW-HP.hp.vtj.corp.irix.systems (localhost [127.0.0.1])
-	by vtj.irix.systems (Proxmox) with ESMTP id 54A0F1BB2A;
-	Sun, 04 Oct 2026 14:13:50 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andrei-z.com; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:from:from:in-reply-to:message-id:mime-version:references
-	:reply-to:subject:subject:to:to; s=sig1; bh=y4fzGtATBGOFN1Ct1sYm
-	gkbem1Kx3IntSRgBB5imcys=; b=QwE0q5bM/XEFvOy8HRNhoGxKjzN87iRbi5bB
-	6IJd968chcheRuOK6nMYL9J6wBkp942nDypYGp8NoV+RJuf6NCptwGac1lAtnVXG
-	LixnLUx0tLVieOUgoSlhJAtW6lSIFvQHlKoB0gbd0ms1mBPRNshDmhHBqG3Ri+7R
-	E47i1laGE6xKuV98W5fwQPViRBztAdlEzM/vs5xSxG2j3rRWuhOQVTl8QhPHg9f7
-	uZbLnDxxdpwWRkW0f1rqCyDic/CDcDGCoeY/oFThhy8SFB+39LQ1hw+eRqwJQ/2z
-	lNzsLS+gZUJV0pGRaZ7kntPFds/ppoTeQoqPb2+qW7mxXmnLBg==
-Received: from VTJ-MX.corp.irix.systems (unknown [IPv6:2a02:2f04:1:9c24::6])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by vtj.irix.systems (Proxmox) with ESMTPS id 95C951BB29;
-	Sun, 04 Oct 2026 14:13:49 +0300 (EEST)
-Received: from workspace.corp.irix.systems (2a02:2f04:1:9c23::c) by
- VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Sun, 4 Oct 2026 14:13:49 +0300
-From: Andrei-Alexandru Bleortu <me@andrei-z.com>
-To: Bjorn Andersson <andersson@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Jeff Johnson <jjohnson@kernel.org>, Johannes Berg
-	<johannes@sipsolutions.net>, Konrad Dybcio <konradybcio@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob Herring <robh@kernel.org>
-CC: <ath11k@lists.infradead.org>, <devicetree@vger.kernel.org>,
-	<linux-arm-msm@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-wireless@vger.kernel.org>
-Subject: [PATCH v2 3/3] arm64: dts: qcom: ipq5018: add Ubiquiti UniFi U6 Enterprise
-Date: Sun, 4 Oct 2026 14:10:28 +0300
-Message-ID: <ddbc631bb95ae5fcc6498e083b280ba2b736181f.1791110510.git.me@andrei-z.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <cover.1791110510.git.me@andrei-z.com>
-References: <cover.1791110510.git.me@andrei-z.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rEMsbJBz"
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6acb57c2b88so1271654a12.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 04:47:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791114421; cv=none;
+        d=google.com; s=arc-20260327;
+        b=OOTJFTHXDudkNvRlKXkJmFiz3DhudW93GbBQhimaQP72Wb3xvswMkBEFxlvod+c1v6
+         TaU3ii8bxgTopMRkns6Muq2E/AWVBdXMAoD9F+Rg3oU6s0e5stJdAAPqBz32+C1kbP6q
+         7to86zcgBpPAhOhEsFWoOW/OXTlvSCOea7eVZzPbMgOur7sicDwfnYnNpiaBAEwYGHJo
+         ME0U01+5Yc89CSRziplKLIwxvOKJgHDRJUsr4K/LQ2N+9eSko/sAg4g2VpiG1xhzfL/d
+         W1Y/kc9Q8deQdBqYD/u98W3e6eL2yMl3wrwnadvLHyJYKrq+zGahpfQwLc+Gf0L/FdrZ
+         4tPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
+        fh=FSY3g7Y/hP+Uu7NyRuMgHSI/aQDv4/ZHFNEFx+Yib3I=;
+        b=osAjFA/0+6Ec+SXZbzmjnXfH2KnjqZI+yTrIkorA91/mBd8w/eDCXrEvKh7oNcZlZS
+         Afm/sMcmrKLpOilteRpBOxsPJKOaqvTc25McoV3KAvIQ818MXq3PS39HiSoQnARX6xyl
+         kvUzPfg1Cb+sGCev+AjDxBCYXkmDLWMrNKfZXhPq6Yusc8FQfgcTgjE6Sy0ZzZ/4ugMy
+         56bpVtynBtd6Ta0QgjFt3mZ5MgUJGzwRZYqz8pGQWU1AvBNyx2iwTLZP5/vnsbY2i3nN
+         ssUVQktm/zLEfssofIVLu12B6QWODKfuebzLOwQ1sN5gyIZ5zQQipjbdC6x4hxGRVpKg
+         qtpA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791114421; x=1791719221; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
+        b=rEMsbJBzmtc/NtRtwPDO10uJTmu5iJKC0DP9/tguAEuQrhQU3rka9wVCPgJErPGfUA
+         G93LjUcaKJ07uCpkKDqgZtyP8nL39+PMQbq/H6w+EoBeWnxKN7JsL+xZBTdMvWBzgDOW
+         k6aQhjumH4eEynNaOgkwL7toiVyfceg1rlPrv330ZYZGi1wtX6Z9vr/PkFvctjZe/ldi
+         ghAdAtelL/sQwYfXCpdLFGgBKzCJ/bSH0haE818sEJObMPLdF0qF/Roi1SeEJa3JcDYS
+         EZGM2+buXVFQJKixvO86KHfdzwGUCGZ8nvuP+S0+qxI66HYOhkXBTp1MDV66mkvVKWLn
+         BYoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791114421; x=1791719221;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
+        b=QVzspkNWwiApsdkgj20C7RFytOuT6v61syAumSf/r7109BR2MpG5AmvHvk9FKOaaLi
+         lIqbYnoY2AFN2a+07Yah455smiwTsHS+49okdanCUo27A+0xQVzrqvfXmoFKQ1onoAj0
+         85LB6npxmuleKCsBIDHOSm1bjsMY0dG1eCPTj2bqk1kMnMgyd8xrr9I0FnI99xUfekz9
+         V3OHaPaZs+ei6RTXOhlfz+RIUItTcLE9hDbiNIKujYBY/VtSqWIidm2l/hPbNzFQS78V
+         Ac0gATIvLQ+JHpkk40B0+Y/ePFfKDvJvaN0wCv5lz8CVXtKH84TsMkLsJNZ9Lcc1Ui/E
+         ip0Q==
+X-Forwarded-Encrypted: i=1; AKwUvBymkQT82wutBFk4PZrSKBu1CNTO87iiziPi/+n+J2Y6q+dPdmlgWkwcfnPfhbc9EjU2h4kZnAWEkjrZcxp4@vger.kernel.org
+X-Gm-Message-State: AFq9FYJaxQRE6sawmWNypSA1Fra2rqkcuAkkNpqvuM4oYMXkQU2ekV7G
+	ErNkcmovRalIR2cj1TP68GRxf6TB4UJjmI4D0+PtmwI2ALQXRYyVVmRg9TP2gwF0JVmBuneL1tu
+	ZXHxHlGdsnnLONtKTCGnh1v3yuRvEEEM=
+X-Gm-Gg: AYBFou2ho7R+7P/uWgzVZSGLwB5aG8Ao0hja4htLyYhmI10xHZhznw+aoQNlVgj/AjE
+	T2Vokuu876pZot7s+FOBbeLCRc6pWbJuv2WJNlZXIxTIzqnG0E5PbaWJUBske4+0fVrZ2tZLEZD
+	Deh1p2d3zddDfQHEuvbdhYXqEw8prDQ2FhM8eMudpHBoNeQSv8Sk6uqHzNKIIAsD0870NGbEm9d
+	3e97POar2fX4zSsThwhufP0GWuBOer10/W9J6S6TSc9swSqH0QPSlAnXg7w84sI2PW5IukofWR/
+	kVTQOIKJZbupe9v7l/o4KigXMHAUY1JGprV7PysqZWI21odUhvNdN7gIT4v6MEc4t3LlucjhXw/
+	0AHOdSSiqNw==
+X-Received: by 2002:a05:6402:4021:b0:6ac:aec6:a3b9 with SMTP id
+ 4fb4d7f45d1cf-6afad90627bmr3827480a12.24.1791114420829; Sun, 04 Oct 2026
+ 04:47:00 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) To
- VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6)
+References: <20261004102758.84436-1-26rote@gmail.com>
+In-Reply-To: <20261004102758.84436-1-26rote@gmail.com>
+From: Pengyu Luo <mitltlatltl@gmail.com>
+Date: Sun, 4 Oct 2026 19:46:49 +0800
+X-Gm-Features: AclHuK9M0MD-4wDlLCu7PKAzHiucnOaIPii0zTGjuitof7jNo1-BtNJqT62chRk
+Message-ID: <CAH2e8h6RPMF+Tod==XKjAbjmnzUKs1skCpvN7_YuGyao9m2baA@mail.gmail.com>
+Subject: Re: [PATCH] drm/msm/dpu: round up the compressed INTF width
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Jun Nie <jun.nie@linaro.org>, 
+	Jonathan Marek <jonathan@marek.ca>, Alexander Koskovich <akoskovich@pm.me>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, "P. Lewis" <liu224806@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The Ubiquiti UniFi U6 Enterprise is a ceiling-mount Wi-Fi 6E access point:
+On Sun, Oct 4, 2026 at 6:28=E2=80=AFPM Joonhoe Kim <26rote@gmail.com> wrote=
+:
+>
+> For DSI with DSC, drm_mode_to_intf_timing_params() scales the INTF
+> active width by bpp / (3 * bits_per_component) and rounds down. The DSI
+> host computes the same width with DIV_ROUND_UP, both for the pixel clock
+> (dsi_adjust_pclk_for_compression()) and for the active width it programs
+> (dsi_timing_setup(), from bytes per line). When the division is not
+> exact the INTF line is one pclk shorter than the DSI line, and the DSI
+> FIFO overflows.
+>
+> Example: a bonded DSI video-mode panel, 952 pixels per link, DSC 8 bpp at
+> 10 bpc: 952 * 8 / 30 =3D 253.87, so the INTF uses 253 and the DSI 254.
+>
+> Round up, as the DSI host does. Qualcomm's downstream SDE driver also
+> rounds this width up, and Pengyu Luo needed the same rounding on the
+> Legion Y700 gen 4 [1].
+>
+> Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850) with that panel, with a
+> module parameter selecting the rounding: rounding down, DPMS off/on gives
+> no vblank and 14000-17000 DSI FIFO error interrupts per second
+> (dsi_err_worker: status=3D4); rounding up, the picture comes back and the=
+re
+> are no errors. Only tested on this device.
+>
+> Link: https://lore.kernel.org/all/CAH2e8h6oinKxN1ndcvHCSc+=3DbFLXVVDZVAVF=
+0cQHoiaMvEwhPQ@mail.gmail.com/ [1]
+> Fixes: f9ce482d7dc0 ("drm/msm/dpu: fix video mode DSC for DSI")
+> Assisted-by: LLM
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> ---
 
-- SoC: Qualcomm IPQ5018
-- RAM: 1 GiB
-- Flash: SPI NOR (boot chain) and eMMC
-- 5 GHz: QCN9074 on PCIe0
-- 6 GHz: QCN9074 on PCIe1
-- Ethernet: one 2.5GbE PoE port, a QCA8081 PHY behind GMAC1
-- Accelerometer: ST LIS2DH12
-- Button: reset
+Thank you, Joonhoe.
 
-Describe what mainline supports today. The Ethernet port and the
-IPQ5018's own 2.4 GHz radio are left out until the GMAC and the WCSS
-remoteproc have bindings; the LED controller and the board MCU on the
-I2C bus have none. The QCN9074s carry the calibration variants their
-board data is looked up by. The SoC dtsi gains the pcie1_port0 label, as
-pcie0 has, for the 6 GHz radio below that root port. The vendor QSEE
-reserves 4 MiB, twice the SoC default.
+I am glad to see someone is raising this. For most tablets, the
+horizontal pixel count is not divisible by 3, so rounding up is
+necessary for them. Besides lenovo Y700 gen4, rounding up also helps
+dsc display on gaokun([1], patch initially provided by White Lewis)
+whose horizontal pixel is 800 * 2.
 
-Assisted-by: LLM
-Signed-off-by: Andrei-Alexandru Bleortu <me@andrei-z.com>
----
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../dts/qcom/ipq5018-ubnt-u6-enterprise.dts   | 236 ++++++++++++++++++
- arch/arm64/boot/dts/qcom/ipq5018.dtsi         |   2 +-
- 3 files changed, 238 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
+[1]: https://github.com/whitelewi1-ctrl/matebook-e-go-linux/blob/master/ker=
+nel-patches/0003-drm-msm-dpu-encoder-fix-DSC-width-truncation.patch
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 88230c4e0..aca7d8e41 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -32,6 +32,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-lenovo-ideacentre-mini-01q8x10.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= hawi-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-rdp432-c2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-tplink-archer-ax55-v1.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-ubnt-u6-enterprise.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5210-rdp504.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5332-rdp441.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5332-rdp442.dtb
-diff --git a/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts b/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
-new file mode 100644
-index 000000000..6462f99df
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
-@@ -0,0 +1,236 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+
-+#include "ipq5018.dtsi"
-+
-+/ {
-+	model = "Ubiquiti UniFi U6 Enterprise";
-+	compatible = "ubnt,u6-enterprise", "qcom,ipq5018";
-+
-+	aliases {
-+		serial0 = &blsp1_uart1;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	keys {
-+		compatible = "gpio-keys";
-+		pinctrl-0 = <&button_pins>;
-+		pinctrl-names = "default";
-+
-+		button-reset {
-+			label = "reset";
-+			gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_RESTART>;
-+		};
-+	};
-+};
-+
-+&blsp1_i2c3 {
-+	pinctrl-0 = <&i2c_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	accelerometer@18 {
-+		compatible = "st,lis2dh12-accel";
-+		reg = <0x18>;
-+	};
-+};
-+
-+&blsp1_spi1 {
-+	pinctrl-0 = <&spi_0_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <50000000>;
-+
-+		partitions {
-+			compatible = "fixed-partitions";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			partition@0 {
-+				label = "0:sbl1";
-+				reg = <0x000000 0x030000>;
-+				read-only;
-+			};
-+
-+			partition@30000 {
-+				label = "0:mibib";
-+				reg = <0x030000 0x010000>;
-+				read-only;
-+			};
-+
-+			partition@40000 {
-+				label = "0:bootconfig";
-+				reg = <0x040000 0x010000>;
-+				read-only;
-+			};
-+
-+			partition@50000 {
-+				label = "0:qsee";
-+				reg = <0x050000 0x0a0000>;
-+				read-only;
-+			};
-+
-+			partition@f0000 {
-+				label = "0:devcfg";
-+				reg = <0x0f0000 0x010000>;
-+				read-only;
-+			};
-+
-+			partition@100000 {
-+				label = "0:cdt";
-+				reg = <0x100000 0x010000>;
-+				read-only;
-+			};
-+
-+			partition@110000 {
-+				label = "0:appsblenv";
-+				reg = <0x110000 0x010000>;
-+			};
-+
-+			partition@120000 {
-+				label = "0:appsbl";
-+				reg = <0x120000 0x0a0000>;
-+				read-only;
-+			};
-+
-+			partition@1c0000 {
-+				label = "0:art";
-+				reg = <0x1c0000 0x070000>;
-+				read-only;
-+			};
-+
-+			partition@230000 {
-+				label = "eeprom";
-+				reg = <0x230000 0x010000>;
-+				read-only;
-+			};
-+		};
-+	};
-+};
-+
-+/* The bootloader muxes the console pins; GPIO33/34 are I2C on this board. */
-+&blsp1_uart1 {
-+	status = "okay";
-+};
-+
-+&pcie0 {
-+	status = "okay";
-+};
-+
-+&pcie0_phy {
-+	status = "okay";
-+};
-+
-+&pcie0_port0 {
-+	reset-gpios = <&tlmm 15 GPIO_ACTIVE_LOW>;
-+
-+	wifi@0,0 {
-+		compatible = "pci17cb,1104";
-+		reg = <0x10000 0x0 0x0 0x0 0x0>;
-+		qcom,calibration-variant = "Ubiquiti-U6-Enterprise-5G";
-+	};
-+};
-+
-+&pcie1 {
-+	status = "okay";
-+};
-+
-+&pcie1_phy {
-+	status = "okay";
-+};
-+
-+&pcie1_port0 {
-+	reset-gpios = <&tlmm 18 GPIO_ACTIVE_LOW>;
-+
-+	wifi@0,0 {
-+		compatible = "pci17cb,1104";
-+		reg = <0x10000 0x0 0x0 0x0 0x0>;
-+		qcom,calibration-variant = "Ubiquiti-U6-Enterprise-6G";
-+	};
-+};
-+
-+&prng {
-+	status = "okay";
-+};
-+
-+&sdhc_1 {
-+	pinctrl-0 = <&emmc_pins>;
-+	pinctrl-names = "default";
-+	bus-width = <4>;
-+	non-removable;
-+	no-sd;
-+	no-sdio;
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32000>;
-+};
-+
-+&tlmm {
-+	button_pins: button-state {
-+		pins = "gpio24";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
-+
-+	emmc_pins: emmc-state {
-+		clk-pins {
-+			pins = "gpio9";
-+			function = "sdc1_clk";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
-+
-+		cmd-pins {
-+			pins = "gpio8";
-+			function = "sdc1_cmd";
-+			drive-strength = <8>;
-+			bias-pull-up;
-+		};
-+
-+		data-pins {
-+			pins = "gpio4", "gpio5", "gpio6", "gpio7";
-+			function = "sdc1_data";
-+			drive-strength = <8>;
-+			bias-disable;
-+		};
-+	};
-+
-+	i2c_pins: i2c-state {
-+		pins = "gpio33", "gpio34";
-+		function = "blsp2_i2c0";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	spi_0_pins: spi-0-state {
-+		pins = "gpio10", "gpio11", "gpio12", "gpio13";
-+		function = "blsp0_spi";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+};
-+
-+/* The vendor QSEE uses 4 MiB, twice the SoC default. */
-+&tz_region {
-+	reg = <0x0 0x4ac00000 0x0 0x400000>;
-+};
-+
-+&xo_board_clk {
-+	clock-div = <4>;
-+	clock-mult = <1>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/ipq5018.dtsi b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-index fe1ed240d..2f3bcfa88 100644
---- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-@@ -838,7 +838,7 @@ pcie1: pcie@80000000 {
- 
- 			status = "disabled";
- 
--			pcie@0 {
-+			pcie1_port0: pcie@0 {
- 				device_type = "pci";
- 				reg = <0x0 0x0 0x0 0x0 0x0>;
- 				bus-range = <0x01 0xff>;
--- 
-2.47.3
+Reviewed-by: Pengyu Luo <mitltlatltl@gmail.com>
 
+Best wishes,
+Pengyu
 
+> This does not touch the divisor discussed in the RGB101010 thread
+> (bits_per_component * 3 vs 24, with and without widebus); that patch
+> was dropped from the series pending that discussion [2]. This one only
+> makes the rounding match the DSI host. The panel here uses widebus.
+>
+> [2] https://lore.kernel.org/all/20260321-dsi-rgb101010-support-v4-0-eb28e=
+cebbfe8@pm.me/
+>
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c b/drive=
+rs/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
+> index ba810f26ea30..2ac517db50fc 100644
+> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
+> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
+> @@ -134,8 +134,8 @@ static void drm_mode_to_intf_timing_params(
+>                  * TODO: replace drm_dsc_get_bpp_int with logic to handle
+>                  * fractional part if there is fraction
+>                  */
+> -               timing->width =3D timing->width * drm_dsc_get_bpp_int(dsc=
+) /
+> -                               (dsc->bits_per_component * 3);
+> +               timing->width =3D DIV_ROUND_UP(timing->width * drm_dsc_ge=
+t_bpp_int(dsc),
+> +                                            dsc->bits_per_component * 3)=
+;
+>                 timing->xres =3D timing->width;
+>                 timing->dce_bytes_per_line =3D msm_dsc_get_bytes_per_line=
+(dsc);
+>         }
+> --
+> 2.43.0
+>
