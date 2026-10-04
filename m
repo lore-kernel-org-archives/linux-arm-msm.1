@@ -1,90 +1,97 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B4703F0AAF;
-	Sun,  4 Oct 2026 08:43:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 205A431A55B
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 09:31:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791103386; cv=none; b=Ye1VlTrouUKZZJXcqVb3I33RqBHP2uX0UX5UC6X22ZwxVTz8rGP2PnjIM+x5UBdnEpIGlsQMlFhlrhM2QSvM9SjX+Bsnw7PXkI/l06gwWBI6xudgvIi4X1O7piaE76bWmmtBQWYjUxlyV42YDsnY4V2gY0hAXBJ5O49Ees0zb/I=
+	t=1791106296; cv=none; b=oFAVFiSlgq4KmbKneyiNMIE4o5IUnoa9xukudMtmF9kIvqOdUlVTNYWSa1ewNIWzvWB4nw64XMgBCxNQZV2BR4Q8byDYZ+Sm0HrcgEJ1FPE5rJh9R4tN7Sw6Hv12h/myys2+Sqa5UGKJkySaSyHS2YjNidLCevQTUFrlUPCuMSc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791103386; c=relaxed/simple;
-	bh=2vGAu/0YxMMlosDI7FUBatoN/q3StUPF3WWTMNiH7hk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sGtZHdmrfp2vq9yP7EfCgr1EEMgMlH97AIJm+o3zTZS9Nj75bBjuAU37gyv54CDnVW4tgplY6JY7DEpjUKtC6J+37AfgrlJYG554cmyUzA6C3TLFG2PtL8mLk+3RoMQld9zmhwxlYbe2o5JpNfj8gB4kpjSs/4rKSwU5rRoHXqA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iroGfBfA; arc=none smtp.client-ip=198.175.65.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1791106296; c=relaxed/simple;
+	bh=b4ATKoJIx0zDFM+Q2MfhNTQ29nzp8qB2UeEM5HCTfP0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=TCtmckCWL5tHPgxoGHBtpsvN5BHpHj5LDOQa9fnSYY/l2EyMYUj8ZKvoP3Ugtclg5/8sQPTnwaVjKDlNxLZjTFTC9WUVacfUbvMW4TZie1qsWgvb/JzxTo8pnLUHIJAlza18m4D99Hk9K3+e5Lo5VJ0y4j1s8XN4keZHrWkA+nM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UUuYRfBN; arc=none smtp.client-ip=209.85.215.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iroGfBfA"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791103382; x=1822639382;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=2vGAu/0YxMMlosDI7FUBatoN/q3StUPF3WWTMNiH7hk=;
-  b=iroGfBfAcQ0v5B0AUrDKucjJVqXVplzixYLIUfrn1nhkBt69l7Q2pmbi
-   snT+rPeeqerfY2Z6Z73iwcw2z0jNEnLWdsF6/447/lVAmqljg30a5/0PZ
-   77hmbBOO9dTqynsemTh64Ps0qT4Y+QwkY4M55sdP1Msx2iXdpY6bUB+Q5
-   B8K5tFm3MyCjGajKVUQ/o5LPZ7QUKU9JdRBwZEWf2uxzPtoxGB4pyyb1U
-   YRaC07Yj+AV5xAZ+iD04dVqryDYUwSFM3pbg72zQHxj2l1dEZ3h1UNrDF
-   RFS3xFb97A2Rz2wAFL7UuYf2N9BDf1bEoxBmf8UC3bG0UXkp4pX5GfcqZ
-   w==;
-X-CSE-ConnectionGUID: DryS0mB4RXyk3IrZlA3/Jw==
-X-CSE-MsgGUID: dZ1qAzKZRNqWvJAf8/vYYQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11924"; a="102320740"
-X-IronPort-AV: E=Sophos;i="6.27,139,1787036400"; 
-   d="scan'208";a="102320740"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Oct 2026 01:43:01 -0700
-X-CSE-ConnectionGUID: GldCbnOhRHGw1VeubeHqHw==
-X-CSE-MsgGUID: dm6UexKKRbyxv78kTMUKyw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,139,1787036400"; 
-   d="scan'208";a="276095244"
-Received: from mkosciow-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.100])
-  by fmviesa007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Oct 2026 01:42:58 -0700
-Date: Sun, 4 Oct 2026 11:42:56 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Rupesh Majhi <zoone.rupert@gmail.com>
-Cc: Andy Shevchenko <andy@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on
- mutex helpers
-Message-ID: <asIRkK-uUz4FKQBN@ashevche-desk.local>
-References: <20261003214516.128573-1-zoone.rupert@gmail.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UUuYRfBN"
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cc4aa18f9afso278821a12.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 02:31:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791106294; x=1791711094; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=V/KrJhVqT2lKVywgTy6x2VTximTEnfp3La/wIY4/WjE=;
+        b=UUuYRfBN0gzIEAZJayiWhdApmPzGtB+g6TMQmhdoHFTkgzgFOBkIOOQnQWDQuZJpFW
+         w2voewsFt0kW8lH+hVTRqbkjj+E0LxwvXFxOBkXY8PQ9duhIj/HbXSTkCW8G2lXqLfBN
+         fbLBUqaIU7M8ElgR70L84u/hnr5cOIHB/KXGrAaH7+gWY8EZl+4zdlPCcGZf+ULHztHu
+         mMUc2vHwIXgNf7nV3Dp8sPuH4NGDb8oIa5jOel0o28Hnej8J5Gy5c9uA1EetrerWys+v
+         nGjlFiLUNybRltilOBkvZZ2jo3+FjG7fOttp2X8Dk1R7FFT+ndrgOob7HCVX64NxYmxU
+         lOig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791106294; x=1791711094;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=V/KrJhVqT2lKVywgTy6x2VTximTEnfp3La/wIY4/WjE=;
+        b=M6l43BDxdEoJb0mR135IuGjpSClaLlr2jGkPR1+2iE/Yr4qUI1O/XhnbuyDa209GMX
+         tp4BY/VYxLhx1c7YeEGWYNZGkPZUruJ16lp0Jd/7XUD6X70NWlbeq9Lj0H93ex2fDhAi
+         ra06Bq1eBxc1dfoA3S1AlLV4ga7qzuoSvvVfA7Dp4/5ouXk+HLPN4FMU5jdET8XuhSGU
+         L/jaHusaVu0NtQR3pEQlBY3cgWA8IQPgkujEa+Jbh/ubGOPnMModezNsrFmUD8LE1L8r
+         wlj74JCQklzk8mO7Bc+TuI5sWjwmGI+AsuWw/akkIDJsBy85nO+cJVoHO48geZegGmo7
+         ntWw==
+X-Forwarded-Encrypted: i=1; AKwUvBwsgTexu6PwGmkWI0GNo59O5naYvwMN5qt82o9ubKZWciucnEU7KHJuUbagEETVrXF0mPS9qIJ2kB/RVx7j@vger.kernel.org
+X-Gm-Message-State: AFuF++kKue+ty1hNqJ+ITvVF2ni18Vuo1riZtaE+1KMs1PTF6vhl9ltI
+	F2hsAxkQW6odtoDoMZTaTVMPeCRt5I5qEtLJZoERZX3rxYPh+FINWilvZDIDq3kanFE=
+X-Gm-Gg: AYBFou0ww5+ebTwdYY5pNZ/Pgd5rxWIFgGlNb41Pf2JovbxxWY2pXDGaLYDNHE2pWXs
+	vrWJpF1+BiFZMJbu69ljrgvLuU/n//aMaOo7o1D1Fp22JyJtzQYl/uGqNISIDiFSd/d420woFJN
+	sAP59QAGMxHG6YPNJjIGwsvyDk+JtccR3tH5X2/2DmI+UI4HUCv0b3YrwSvVnZTPIBnYKMPQG8c
+	TsMKTbuXbXv02RmbSXYYrKKMME0+k/PFXgmLtwqcMXXvZb3Ti42ZqD45UwqP/PvOOdxgS6FRZDy
+	NxyhnXNIV/D8lxvXgMTCZhZDepUFEY00ODFFBXCI7WlAaH6LlQdXOm01VJmj4moTHgYyjuX5mfE
+	SMcd3o4uxPhTPfgi0sb/n8rbiNGLcqomMlpqVBFZ9iOb3wQWhCdVLVth1lW01R8o2TAgxWLwD2C
+	6u1VRYz2rhALp3GdDcyR1FFGttTb2O4l9MzrW0EDMjWx7oEbKNTqTOeaKxpbk/UA6Vw2dMiS9r8
+	3hzwYBTAPTWeY07XgEOL1Aj
+X-Received: by 2002:a05:6a20:9c15:b0:3dd:a009:3186 with SMTP id adf61e73a8af0-3e0d6cddee7mr3901067637.46.1791106294105;
+        Sun, 04 Oct 2026 02:31:34 -0700 (PDT)
+Received: from DESKTOP-NM9EKIA ([125.134.240.130])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc9f737a231sm2758121a12.18.2026.10.04.02.31.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 04 Oct 2026 02:31:32 -0700 (PDT)
+From: Joonhoe Kim <26rote@gmail.com>
+To: Fabricio Akio <fabricioakio@gmail.com>
+Cc: Joonhoe Kim <26rote@gmail.com>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH] usb: dwc3: qcom: Check for L2 only when suspending a host with wakeup
+Date: Sun,  4 Oct 2026 18:31:32 +0900
+Message-ID: <20261004093132.74059-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
+In-Reply-To: <20260928-dwc3-qcom-l2-check-v1-1-43c5c6e97922@gmail.com>
+References: <20260928-dwc3-qcom-l2-check-v1-1-43c5c6e97922@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261003214516.128573-1-zoone.rupert@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Transfer-Encoding: 8bit
 
-On Sun, Oct 04, 2026 at 12:45:16AM +0300, Rupesh Majhi wrote:
-> The __acquires() and __releases() on adc5_gen3_mutex_lock() and
-> adc5_gen3_mutex_unlock() name adc, a local declared in the body. With
-> context analysis enabled for this file, the build fails:
-> 
->   error: use of undeclared identifier 'adc'
-> 
-> The lock and unlock are split across these two helpers for the ADC_TM
-> driver, so mark them __context_unsafe() instead.
+On Mon, Sep 28, 2026 at 03:16:28PM -0300, Fabricio Akio wrote:
+> Host mode is untested, since this board runs the controller in
+> peripheral mode.
 
-Doesn't sound right to me. The __acquires() and __releases() IIRC are sparse
-annotations. If clang has something special, it needs to be addressed in
-the compiler-clang.h, no?
+I tried the host side on a Lenovo Legion Tab Y700 Gen 5 (SM8850,
+dwc3-qcom), v7.3-rc4 plus board patches, s2idle with an RTC wakeup:
 
--- 
-With Best Regards,
-Andy Shevchenko
+ - host with wakeup disabled (USB 2.0 hub, USB 3 flash drive behind
+   it): "HS-PHY not in L2" on every suspend before, none with the
+   patch; the devices are still there after resume
+ - host with wakeup enabled: no message, the port does reach L2
+ - peripheral (connected to a PC): no message
 
-
+Tested-by: Joonhoe Kim <26rote@gmail.com>
