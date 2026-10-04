@@ -1,77 +1,78 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92FE13D0C09
-	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 16:51:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED0013CFF7F
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 16:51:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791132697; cv=none; b=Af4oIzvO3gA7WlIAG6wCQzDxx94XwTh8Kw9ChL85kR67vjTKkmw9jWmmr1uZHTu3o0SGlRfTJhDI2IZhgVwiOnydoBdT5wTffBzA81rwB5vvO5lxfY/nfLVUNaS8Y8vmpMxvg6r3np1QA08ls811JVmpOgldns70N+X1j/CksbU=
+	t=1791132701; cv=none; b=I89gD0JA6D/V9ywuOpVF2rH5lHw18bh2IwbRtBvxne7aaSGogPXiF07bnQRNbS4znfHs4Z+Ti7TiJ3oob29r//Jbh+CApcGjZ1NEG42uc/l5WZi2EhwIQASQ7iezm/KzMVy4DSSelB8n0BYRlyQiBFf6sDQLMf33kPFkSkFIxFo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791132697; c=relaxed/simple;
-	bh=7wG9Ljo/wLQuUSFyuvqM5SlTjkxmEhtxmQbgpLCzXuA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=YwgWUGMm/zEy3y4wcmd1cnN/ywj7AJbISZhEAfzqor+5fLbRWQR7vPYR4enin1elRggnT+9JUmjJ1tVcRcOlCWKthnRRLuhZ6+k6D86szSuqjGrRO1g+RPxEeX56GLlXRZmNw+44JFvcgfhLPmgIZ/AN42BhurLmqUw8pSaS+UQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PV525KoU; arc=none smtp.client-ip=209.85.128.52
+	s=arc-20240116; t=1791132701; c=relaxed/simple;
+	bh=cfsNm7503j44sOYlP5f+jD1LcOO+2TqY7kSRBWzmdDQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Nez+bwHAzPbETvTXskDhJkYMeLULbI+Kh3UcVyT/6KJKotRJKGtwnAaMvLLPuvg5MW64GDf1Ox3ikXFf/0Tfny0ftl4Kn59XmGk7vm84N2obJ6GoxDoMKDmoY/09uHFXwEShwKPnV4bjjaTmFi/5wt8+sav+qwUDMksJ/nHMgN4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CpBn55z3; arc=none smtp.client-ip=74.125.225.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PV525KoU"
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a16aaf2067so9838745e9.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 09:51:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CpBn55z3"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f6350f91so415486f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 09:51:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791132692; x=1791737492; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791132698; x=1791737498; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:mime-version:message-id:date
          :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NP4InVw4ZvTsXvnaGIApv16AhZMv/UaEABA2B83Ciew=;
-        b=PV525KoUXzx0DE1Myx3pRxTRSvnUKDVXmrKbiBb4tSdxBVHOMS1Kstx30He8HkruKy
-         UNB3or6NsDHzpRVLekX316sW4RtsDIRlJvVh6hVLm/Dofm1Yj1qcXYgYUEp+bY7piWOM
-         ryuwflz0/CfryUbTVTTgBQaru5mAoaHPplMT4EihXPRgq0iKXaP30eyKmpRLByLr7oZG
-         5b3SzvmseEJ+RBbkmIuohSIhx+E7BVEv5L8fJOLGT+nVoaXlP4zCp10U8VX/Tmb76Odc
-         25Qs5dbYncwzqS6Nc9BF0LZi3zhHKSvFlWe17+lSt6XNaggK29I/xFTj5pjKkhd3AATS
-         v3QQ==
+        bh=5kZgL2+cYaxBr/D7kAopy+ikvsQSWrTTQUGKjBNRtaQ=;
+        b=CpBn55z3SHSdMsixLhW1sMmWFUXoihP2CetQQJt7dFV89Szsrt3fXgXzKMA5+VpHKz
+         brFIN5MiDW3xUm1Z9rLIe7FSTOcfRRsIN5F0JzLM/xaCzsroGSpBuwjuQNBwRTZEkBZu
+         9V97RXlhw96Z8W7Czo3XStbe7m5SwcjNPgURwge0BWc0Gayk51c9M+NBUX0ttFVwshyd
+         uRN6zAckn6fGKdzrZgmvDGdLc8fph4qV6bS1jEaDMdhQNBmbFYzfcXcbPgprETNsoyQ9
+         E8SfO4fpqPN70IFwe9cAtpkCuEZkGn4tCEMAAfYvBaXuNVeVa0W+fhG5oLzo/2NfLYkk
+         yTVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791132692; x=1791737492;
+        d=1e100.net; s=20260707; t=1791132698; x=1791737498;
         h=content-transfer-encoding:content-type:mime-version:message-id:date
          :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=NP4InVw4ZvTsXvnaGIApv16AhZMv/UaEABA2B83Ciew=;
-        b=fL4FfS/S8ypliKAtDKT3wKAuRTNeIiURh0KfeSXuNZcdRSjmkb97Zr8ckPXm5sjwfJ
-         uJfdOiaTS39gmp+VKQWXA21L4rDzWxW1sWsk981DIJK1OrG1mJsJa0ivaUY9PZ0Qhht7
-         Kf/NefxrnS2lRdJeuTb3IcZhXbN6us1K2Jad3OifYoI0mEjABL/TQc4M8snD6k2n7Psv
-         IQNdOru3hRUR/RcAALO43kRjGb8CuHTuETdJbkB4yYVBk1XW4yv7zl76370jKc/rKIaH
-         voca6CfxoK16DsgcqaX2YBDPL5IbD3E4dIodQufkRf6jFLWbOYM1EVvoY1tMkSHvvaql
-         CBCg==
-X-Forwarded-Encrypted: i=1; AKwUvBw+LLZUcwPM2ZWtXk8+27kSG0ZhIyNzdR0mjQppasV8aU2SoOLE/XZ7tT82p2Qur7onm4qXvmvLaT/k9XMt@vger.kernel.org
-X-Gm-Message-State: AFuF++moyhUi93WuRmmceRZnOMnDy6gKnF4mtFn+R70Pa3WuZhPjaewR
-	YMNyyilJE95VVT39B/WBD3WtleVucyqz0IvbB6KncotGx34t6rIoe+uS
-X-Gm-Gg: AYBFou1Cpxpetbj0Cza+pGdkkklLX6ufDUlzMfZBLljrmIzW0PzYNStXuJMST285NPA
-	W0eEww17LgUSyHebxbAaNMRtVeOKXhgceIIyHf4FlDcPGMUgn/7HkZsfkGrjTKXIbp4dkVOo0N3
-	4g861Zaw7uvbxxSt5+BpWsTNecBZBiYFTEjF9hl+zk/BzcqDl5HAmeBnTjJCgDrvp4ymlitkZPQ
-	HO2JwnEsLh/BV+/zivc45Ybrt+KAf2fO5PXx3VwWz4nHNLZMQy4jnGt3udtVLZESlEwpLVgJOOp
-	sEIcMTlVKuTgjU71j6dMISwLGZDq5BnFKqPl8rMZ0DOlUTOMrR3TotXTD1SPCEb5IXcE6GgAF+K
-	gum+C8FKIgyC39hnMbLa7VaAUXPKhnFeDgX6hTuAVhYFhuO3MjxhjG09lxh9XnVJQ6fRNuXp+xn
-	xZWEtCMz3xSdG73EKvzFevAWqhFEDcCPBUBOIzBBrYDOVgWr6vxi2gYfBVyKyQS8ZoMt81bcF7/
-	AlCKzpn0pI=
-X-Received: by 2002:a05:600c:698d:b0:49d:1842:f001 with SMTP id 5b1f17b1804b1-4a1680e5865mr77354445e9.14.1791132692261;
-        Sun, 04 Oct 2026 09:51:32 -0700 (PDT)
+        bh=5kZgL2+cYaxBr/D7kAopy+ikvsQSWrTTQUGKjBNRtaQ=;
+        b=CbVvHkCRjc7LGny49eiWI9QSDUdogtPH1iavd6wNZ9Jg8zf6OGjrNLAmHIi8zIjG+s
+         NmpZ/UZLK9qTb4fwtl/A+4XkyE7zQH8O5Z/HqZ0mI6r8usLil5SGcNGMoZ7TIBaGhibT
+         EPY8oodwhT7RsxuwUk3IGX3j+kgboTx2gyufd0xgN2bc4A2sUtUatMbSvL0oJLgdfZSj
+         Om6J33qDIgM+RoVkfrk+0LyD+roB+jy6mg/rwOiP2QzBPD+sx11U87Rt3XZQZMeQXDdK
+         qznuBAhDwzuCK3+K9itFYAZqSlcABPN2iFfsgz90AbSJVnPGEKZnwUFckfXPjnkBRKRS
+         TgsA==
+X-Forwarded-Encrypted: i=1; AKwUvBzFyn69iixFe7X5+1HENP1IxsVOxUO7iguyg9FLhB4bTzbXxAljeRCNJIxcNGRjbnbAULUi12ZKlerJXe/f@vger.kernel.org
+X-Gm-Message-State: AFq9FYL+9M7n/oOktiItG5pasPR2CVbl+6MJPXBxwcu7/xH6OxV/tkV1
+	/yrVTpe/emo0R8Mj/CQ1I+g3RGYOjFPQZiCX4y3k/tMRfOiuLmC095mw
+X-Gm-Gg: AYBFou2odg3t14AwKiiTA4hXQwYssIroCuHe0t5jksKQRHqpfkT2sEMJNYO7RlMvWBZ
+	9qkc7cOcWQOMeSgyjKe2Mcf4KZW69/SZMYRRgsrU5fquBbfysukujDYPM49v33RO7h1Odh77Y0b
+	CNgsCgRCLl49I7tGyzlxX1L51CodskXN0oV4Q5TwnTFgOT/oVLIeTErlxpwdIQ6cfIbIHfZq+Hl
+	sm00u5K2pS9lmOZ0oFItAcD4BS7y1LMQW1OsPRlIzYkjCKkIHioICqW75JerU1bI/tP5AIuoX+3
+	JE+XBPR09S2+IQv5XcKwX08Y/nks0agRoo8MZWrtQ4Ff93aIAk6juH9ZeBtaiijNdo9ypZsuB4X
+	JwCT/KN4OzfvyL8ekAWSB7gugZYcvlvBJBe6AOF3PmoM03enuOpb3NtuLKoL37jfNfLON3THYtV
+	bnAPgU3eZz5Ls5oofeW7hO7NHQ1RaZfeOk7uppw1wdvQ04YZyiba6+C+rFTaypkv7EnH9OMIPtV
+	rXrufg37nZn
+X-Received: by 2002:a5d:5d13:0:b0:487:8b9:526a with SMTP id ffacd0b85a97d-48b12763357mr18047204f8f.36.1791132698112;
+        Sun, 04 Oct 2026 09:51:38 -0700 (PDT)
 Received: from FranzSP11.fritz.box ([31.31.60.25])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a027725c6asm311375035e9.8.2026.10.04.09.51.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b383065a4sm18144545f8f.44.2026.10.04.09.51.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 09:51:31 -0700 (PDT)
+        Sun, 04 Oct 2026 09:51:37 -0700 (PDT)
 From: =?UTF-8?q?Fran=C3=A7ois=20Roux?= <franzelfranzel@gmail.com>
-To: Bartosz Golaszewski <brgl@kernel.org>
+To: Jeff Johnson <jjohnson@kernel.org>
 Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	linux-pm@vger.kernel.org,
-	linux-pci@vger.kernel.org,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	=?UTF-8?q?J=C3=A9r=C3=B4me=20de=20Bretagne?= <jerome.debretagne@gmail.com>,
+	Dale Whinham <daleyo@gmail.com>,
+	ath12k@lists.infradead.org,
+	linux-wireless@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	regressions@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH v2] power: sequencing: qcom-wcn: power off WLAN at probe
-Date: Sun,  4 Oct 2026 18:51:24 +0200
-Message-ID: <20261004165124.4277-1-franzelfranzel@gmail.com>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] wifi: ath12k: skip hardware rfkill setup on Microsoft Surface Pro 11
+Date: Sun,  4 Oct 2026 18:51:32 +0200
+Message-ID: <20261004165132.4313-1-franzelfranzel@gmail.com>
 X-Mailer: git-send-email 2.56.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -82,100 +83,67 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The WLAN enable GPIO is requested with GPIOD_ASIS and then kept at its
-current level, so that a WLAN module left powered on by the firmware is
-not switched off. The FIXME explains why: toggling it would take the
-PCIe link down, and the controller driver could not recover from that.
+On the Microsoft Surface Pro 11 (X1E80100, "microsoft,denali"), the
+WCN7850 hardware rfkill input reads as "radio off" and the OS has no
+way to control it. ath12k enables hardware rfkill handling, so Wi-Fi
+stays hard-blocked:
 
-That reasoning held while the PCIe link was trained before the
-sequencer probed. Since commit b921aa3f8dec ("PCI/pwrctrl: Switch to
-pwrctrl create, power on/off, destroy APIs"), qcom_pcie_host_init()
-powers the endpoint through pwrctrl before it starts link training, and
-defers until the pwrctrl driver is bound. That driver cannot bind
-before this sequencer has probed. Power-on therefore always comes
-before link training, and keeping the firmware state is now harmful.
+  iwd: Error bringing interface 4 up: Operation not possible due to RF-kill
 
-On the Microsoft Surface Pro 11 (X1E80100), the WCN7850 sits on a
-PCIe port without a PERST# GPIO. While pci-pwrctrl-pwrseq is not yet
-bound, the host init is deferred about ten times, and each attempt
-powers the PHY and controller back down. The later power-on only sets
-a GPIO that is already high, so the chip is never reset and the link
-never comes up:
+ACPI platforms can opt out through ath12k_acpi_get_disable_rfkill(),
+but DT platforms cannot. A DT property was proposed for this and
+rejected, because it describes what the OS should do rather than the
+hardware. The suggested alternative was to handle this machine in the
+driver, keyed on the board compatible and the device ID, until a
+connector binding can describe a broken rfkill line. Do that.
 
-  qcom-pcie 1c08000.pcie: Device found, but not active
+Tested on a Surface Pro 11 with next-20260929, booted with the
+unmodified mainline DTB: the interface is no longer blocked and
+connects.
 
-The endpoint is not enumerated and ath12k never probes. Bluetooth on
-the same chip fails too ("QCA Failed to send TLV segment (-110)").
-
-Request the GPIO as GPIOD_OUT_LOW. The chip is then off when the
-sequencer probes, and pwrctrl powers it up cleanly right before link
-training. Drop the FIXME and the code that preserved the firmware
-state.
-
-Tested on a Surface Pro 11:
- - b921aa3f8dec plus a one-line version of this change: endpoint
-   enumerated at 2.4 s, ath12k and Bluetooth working.
- - next-20260929 plus this patch: "PCIe Gen.3 x2 link up" at 3.4 s,
-   ath12k and Bluetooth working, Wi-Fi connected.
-Without the change, neither kernel enumerates the endpoint.
-
-The culprit was found by bisecting v6.17..v7.1, with the DTB and
-.config held constant.
-
-Fixes: b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power on/off, destroy APIs")
-Closes: https://lore.kernel.org/all/CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw5cQt8HiV3sUtxA@mail.gmail.com/
-Cc: stable@vger.kernel.org
+Link: https://lore.kernel.org/all/2ixwny6hzumlqmok5cjwutvtk7nzmx4t3dhxc44ao4l2u755pj@n6m7jyxf2o62/
+Suggested-by: Manivannan Sadhasivam <mani@kernel.org>
 Assisted-by: LLM
 Signed-off-by: François Roux <franzelfranzel@gmail.com>
 ---
-Changes in v2:
-- Sign off with my full name.
-- Use the Assisted-by format from Documentation/process/coding-assistants.rst.
-- Add a Closes: tag pointing to the regression report.
-No code change.
+This replaces my RFC series "Allow DT boards to disable WCN7850 hardware
+rfkill", which duplicated the disable-rfkill DT property already proposed
+and rejected in the Surface Pro 11 series:
 
-v1: https://lore.kernel.org/all/20261003091451.4727-1-franzelfranzel@gmail.com/
+https://lore.kernel.org/all/20261003091509.4822-1-franzelfranzel@gmail.com/
+https://lore.kernel.org/all/20251220-surface-sp11-for-next-v5-2-16065bef8ef3@gmail.com/
 
- drivers/power/sequencing/pwrseq-qcom-wcn.c | 16 +---------------
- 1 file changed, 1 insertion(+), 15 deletions(-)
+The code is Manivannan's suggestion from that thread. Jérôme reported
+there that the Surface Laptop 7 (microsoft,romulus13/15) has the same
+problem. I left it out because I cannot test it.
 
-diff --git a/drivers/power/sequencing/pwrseq-qcom-wcn.c b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-index 7f88a29b2..636dd7e63 100644
---- a/drivers/power/sequencing/pwrseq-qcom-wcn.c
-+++ b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-@@ -526,15 +526,8 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
- 		return dev_err_probe(dev, PTR_ERR(ctx->bt_gpio),
- 				     "Failed to get the Bluetooth enable GPIO\n");
+ drivers/net/wireless/ath/ath12k/core.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/drivers/net/wireless/ath/ath12k/core.c b/drivers/net/wireless/ath/ath12k/core.c
+index 0c72948f3..dc41a2a7d 100644
+--- a/drivers/net/wireless/ath/ath12k/core.c
++++ b/drivers/net/wireless/ath/ath12k/core.c
+@@ -83,6 +83,16 @@ static int ath12k_core_rfkill_config(struct ath12k_base *ab)
+ 	if (ath12k_acpi_get_disable_rfkill(ab))
+ 		return 0;
  
--	/*
--	 * FIXME: This should actually be GPIOD_OUT_LOW, but doing so would
--	 * cause the WLAN power to be toggled, resulting in PCIe link down.
--	 * Since the PCIe controller driver is not handling link down currently,
--	 * the device becomes unusable. So we need to keep this workaround until
--	 * the link down handling is implemented in the controller driver.
--	 */
- 	ctx->wlan_gpio = devm_gpiod_get_optional(dev, "wlan-enable",
--						 GPIOD_ASIS);
-+						 GPIOD_OUT_LOW);
- 	if (IS_ERR(ctx->wlan_gpio))
- 		return dev_err_probe(dev, PTR_ERR(ctx->wlan_gpio),
- 				     "Failed to get the WLAN enable GPIO\n");
-@@ -545,13 +538,6 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
- 		return dev_err_probe(dev, PTR_ERR(ctx->xo_clk_gpio),
- 				     "Failed to get the XO_CLK GPIO\n");
++	/*
++	 * TODO: On the Microsoft Surface Pro 11, the OS cannot control the
++	 * WCN7850 hardware rfkill input, which reads as "radio off". Keep
++	 * hardware rfkill disabled there. Ideally this would come from the
++	 * connector node of the board DT, but that binding does not exist
++	 * yet, so handle it in the driver for now.
++	 */
++	if (of_machine_is_compatible("microsoft,denali") && ab->id.device == 0x1107)
++		return 0;
++
+ 	for (i = 0; i < ab->num_radios; i++) {
+ 		ar = ab->pdevs[i].ar;
  
--	/*
--	 * Set direction to output but keep the current value in order to not
--	 * disable the WLAN module accidentally if it's already powered on.
--	 */
--	gpiod_direction_output(ctx->wlan_gpio,
--			       gpiod_get_value_cansleep(ctx->wlan_gpio));
--
- 	ctx->clk = devm_clk_get_optional(dev, NULL);
- 	if (IS_ERR(ctx->clk))
- 		return dev_err_probe(dev, PTR_ERR(ctx->clk),
 
 base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+prerequisite-patch-id: aafe3fac38f4020441979665509928f8cc832095
 -- 
 2.56.0
 
