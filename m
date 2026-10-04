@@ -1,186 +1,112 @@
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E404441A54B
-	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 11:47:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23B6F43BDC8
+	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 11:59:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.229.204
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791114424; cv=pass; b=XMb1l4uZI3wmFt2muNfxsxgSWRpWYuCumuAF2Ph8DShc1Xwq7kdDRruNqFEA9xjSKVtZCBmyQQgneWqh1noK2Tz3V/deB88coP62iH+4aaegTXEyhqD5894hrUvEoOu9X5W5B+zZ4lCGH873SR3bnRfbFuBKFx7CgznffNxQWrE=
+	t=1791115152; cv=pass; b=dnHkFPxfuDMyey/U7WJ4Kw6bqzIr3QducAE17xUdx2dXU7pk31dRZ/oA8b9NyElN30/V7RVHi6XDO76UDCLu1Z0weFZ1SUlWneB/j0L2VoOpd8GfoA4MaX178qOWvn04G6y6C/KrReaIvZhMvaEK0pl6fA55ZtqrpQLERrhEJ1w=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791114424; c=relaxed/simple;
-	bh=4tIdOJ4E73NzfC8+HZPUUjeQno126FKXlIlP4skhobc=;
+	s=arc-20240116; t=1791115152; c=relaxed/simple;
+	bh=YvGJiLLSGEag8VAXDiCkjwNnc51Pcejq5U71ONdSTxw=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=N5mGsxqzxR1cad2a0Y/maPq5fHTjBfPrm+sk7WtSoxnu1FxJghaS2s0GtDaMvIp0jTnCW0XuIgRuJz9CeRbTLNZLbInDeAWJx6PezIpepojv3khbYL6cE3Th+nZtlRJI/9FeoCcRUe0i3/p1qoOMJviSISqS0SmWDA2JCpv04Ek=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rEMsbJBz; arc=pass smtp.client-ip=209.85.208.51
+	 To:Cc:Content-Type; b=iLfbbR5R5WN0LKD7xSJE7PWPy0WkU9t/+lZ4eqmQF4Dz+j5E+4QrLqKfFIlbCpsLy2CALmJwYS1p53Uw8BS+vfXAvK6hQ1otC39t86r1YxZt6dHjfg2b+kqBYp7R3m9NoRiewU99uDrG6PfWl6DyNdbXCHN6EZw1u+6iY5AqPGg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VqMLGH3p; arc=pass smtp.client-ip=74.125.229.204
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rEMsbJBz"
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6acb57c2b88so1271654a12.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 04:47:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791114421; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VqMLGH3p"
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3d90ac37so692439e87.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 04:59:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791115149; cv=none;
         d=google.com; s=arc-20260327;
-        b=OOTJFTHXDudkNvRlKXkJmFiz3DhudW93GbBQhimaQP72Wb3xvswMkBEFxlvod+c1v6
-         TaU3ii8bxgTopMRkns6Muq2E/AWVBdXMAoD9F+Rg3oU6s0e5stJdAAPqBz32+C1kbP6q
-         7to86zcgBpPAhOhEsFWoOW/OXTlvSCOea7eVZzPbMgOur7sicDwfnYnNpiaBAEwYGHJo
-         ME0U01+5Yc89CSRziplKLIwxvOKJgHDRJUsr4K/LQ2N+9eSko/sAg4g2VpiG1xhzfL/d
-         W1Y/kc9Q8deQdBqYD/u98W3e6eL2yMl3wrwnadvLHyJYKrq+zGahpfQwLc+Gf0L/FdrZ
-         4tPg==
+        b=VTRFeDDIlRFqufODsnjUGh/krccfg1GJeMG+8e+sZnv8SGvKyq6WHSi42UKF1wImUL
+         26OS3nf80fm33qmzpuy3XyaoKJwxcRA8HQuPALoaB+v07oZF44pWWqkPK0/rX3cPxI7O
+         22/q9pS6oRhnROlhAcD77BBN9ZRI2sQ44bxHWjomMtZuciqnOEG3rLfEUkVKtCMMhIBE
+         vV+BA/+Kd7CODx9c8cZY921WTD6FWAbZOwWnNOHRq8gV/E5uSBZyxt5d7M4ENCUmM1m2
+         rgbKagJp6090yuhTr++2feUr4zX8wA/xIWhtkBxI7z3bMv6NNtIRCcTwFuq02LM+hNEl
+         ZeHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
-        fh=FSY3g7Y/hP+Uu7NyRuMgHSI/aQDv4/ZHFNEFx+Yib3I=;
-        b=osAjFA/0+6Ec+SXZbzmjnXfH2KnjqZI+yTrIkorA91/mBd8w/eDCXrEvKh7oNcZlZS
-         Afm/sMcmrKLpOilteRpBOxsPJKOaqvTc25McoV3KAvIQ818MXq3PS39HiSoQnARX6xyl
-         kvUzPfg1Cb+sGCev+AjDxBCYXkmDLWMrNKfZXhPq6Yusc8FQfgcTgjE6Sy0ZzZ/4ugMy
-         56bpVtynBtd6Ta0QgjFt3mZ5MgUJGzwRZYqz8pGQWU1AvBNyx2iwTLZP5/vnsbY2i3nN
-         ssUVQktm/zLEfssofIVLu12B6QWODKfuebzLOwQ1sN5gyIZ5zQQipjbdC6x4hxGRVpKg
-         qtpA==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=YvGJiLLSGEag8VAXDiCkjwNnc51Pcejq5U71ONdSTxw=;
+        fh=Mdh5qRi7XoNcNnbjtTSXENdTK1AFFVtHIGDUtAZNIBY=;
+        b=Qr5bhcchmBfMkwe1Fa8jMCF+eBzldyrmJ3hdEJ9EePJF+J/s9qprhK1tv8nLfQG5vg
+         YQW9mgYZdsDERkdjZmVlUrHjFCCeNE8Bfs/4j3we+Ql2p2+XLGcDib03avTHF/lZIkPP
+         b1Gmg2Krnd8T2FjAb+XpxXYQGRceUqpglkcTSFICx2ZQdUCI7Qq8WySbCpFd3u/KIgS4
+         PddAPB4Bi9uhYOPQPtsHRtrAfWZV3Asl9bK4GbsckY+JzxJ6h3w89iIJC98+Dwi9Iwjx
+         O/lU86a8dArusOqTaVnNd+iqkjF8Wn4S1eUTAn7r1ia2PrK+WRdqG73Mxwh/L46tlVev
+         V+eA==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791114421; x=1791719221; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
-        b=rEMsbJBzmtc/NtRtwPDO10uJTmu5iJKC0DP9/tguAEuQrhQU3rka9wVCPgJErPGfUA
-         G93LjUcaKJ07uCpkKDqgZtyP8nL39+PMQbq/H6w+EoBeWnxKN7JsL+xZBTdMvWBzgDOW
-         k6aQhjumH4eEynNaOgkwL7toiVyfceg1rlPrv330ZYZGi1wtX6Z9vr/PkFvctjZe/ldi
-         ghAdAtelL/sQwYfXCpdLFGgBKzCJ/bSH0haE818sEJObMPLdF0qF/Roi1SeEJa3JcDYS
-         EZGM2+buXVFQJKixvO86KHfdzwGUCGZ8nvuP+S0+qxI66HYOhkXBTp1MDV66mkvVKWLn
-         BYoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791114421; x=1791719221;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1791115149; x=1791719949; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZRz7JbcncLnLcW42dvDfeGGoX+dHR78wDKr4f8pv6C8=;
-        b=QVzspkNWwiApsdkgj20C7RFytOuT6v61syAumSf/r7109BR2MpG5AmvHvk9FKOaaLi
-         lIqbYnoY2AFN2a+07Yah455smiwTsHS+49okdanCUo27A+0xQVzrqvfXmoFKQ1onoAj0
-         85LB6npxmuleKCsBIDHOSm1bjsMY0dG1eCPTj2bqk1kMnMgyd8xrr9I0FnI99xUfekz9
-         V3OHaPaZs+ei6RTXOhlfz+RIUItTcLE9hDbiNIKujYBY/VtSqWIidm2l/hPbNzFQS78V
-         Ac0gATIvLQ+JHpkk40B0+Y/ePFfKDvJvaN0wCv5lz8CVXtKH84TsMkLsJNZ9Lcc1Ui/E
-         ip0Q==
-X-Forwarded-Encrypted: i=1; AKwUvBymkQT82wutBFk4PZrSKBu1CNTO87iiziPi/+n+J2Y6q+dPdmlgWkwcfnPfhbc9EjU2h4kZnAWEkjrZcxp4@vger.kernel.org
-X-Gm-Message-State: AFq9FYJaxQRE6sawmWNypSA1Fra2rqkcuAkkNpqvuM4oYMXkQU2ekV7G
-	ErNkcmovRalIR2cj1TP68GRxf6TB4UJjmI4D0+PtmwI2ALQXRYyVVmRg9TP2gwF0JVmBuneL1tu
-	ZXHxHlGdsnnLONtKTCGnh1v3yuRvEEEM=
-X-Gm-Gg: AYBFou2ho7R+7P/uWgzVZSGLwB5aG8Ao0hja4htLyYhmI10xHZhznw+aoQNlVgj/AjE
-	T2Vokuu876pZot7s+FOBbeLCRc6pWbJuv2WJNlZXIxTIzqnG0E5PbaWJUBske4+0fVrZ2tZLEZD
-	Deh1p2d3zddDfQHEuvbdhYXqEw8prDQ2FhM8eMudpHBoNeQSv8Sk6uqHzNKIIAsD0870NGbEm9d
-	3e97POar2fX4zSsThwhufP0GWuBOer10/W9J6S6TSc9swSqH0QPSlAnXg7w84sI2PW5IukofWR/
-	kVTQOIKJZbupe9v7l/o4KigXMHAUY1JGprV7PysqZWI21odUhvNdN7gIT4v6MEc4t3LlucjhXw/
-	0AHOdSSiqNw==
-X-Received: by 2002:a05:6402:4021:b0:6ac:aec6:a3b9 with SMTP id
- 4fb4d7f45d1cf-6afad90627bmr3827480a12.24.1791114420829; Sun, 04 Oct 2026
- 04:47:00 -0700 (PDT)
+        bh=YvGJiLLSGEag8VAXDiCkjwNnc51Pcejq5U71ONdSTxw=;
+        b=VqMLGH3pwV5hY7J2/iWBbwzoGS6jiCnk7KAk6ke0Y5Pbrt6TuydcD9N4g2hrXLiZeH
+         nfqcTfyvgbmZBqPRYMm1CrrLcaIfG7CkPST1xEi4FPj1oeTPUkYeJu/O5Zgm6sw7oHXO
+         KF3o+/3OSdPKbPOmCaRirw+/mfU4t87U+nIUcSGRHpM/cToqQHKsl7Dkh6MsqYt89gEj
+         RBMvD9gosXW83TSojA1gmJ+AUPGq2lQ4g+HWct0/fzC0fm9DXy7lE/t+n+Mq1xnDFZjr
+         E0pWQZzloJ5S74WqosP0opk/LVMUy6mA9UQlPVnIIuZfghh0N4ByKelCKkoYTomRoR4/
+         /ygg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791115149; x=1791719949;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=YvGJiLLSGEag8VAXDiCkjwNnc51Pcejq5U71ONdSTxw=;
+        b=titnEhmQwHQUyHjyk/2crChxehsCjf/3t9gxjifIWPIWZLOV1yQ0PS/tK6BrLIMx+1
+         C/zY/t6sXYWWeD2+HORNDfkoTrk3JEoiMO3TxTcOt8UyCsdhvUSTEcYj43nMeDYsA1li
+         yJBn6zEM2v7SmJJ0wiS6I7JgyzD5Ah78StrOUAu31qYeGA82d8r9MV965ajxJHm9N09D
+         2lsJxFDJQX4xK76Ks+rp1e95hRMqwCaHhtZHZbY2uxiST5qjTibIYXu9oZT1Y+DIEWhD
+         Nu8Lyhd3kMpIZm1vGSZbbfqQ77AhQXb3n1hKm4aETJHG7VrGprVgaW3rZiM7uSHCiYAT
+         ML6A==
+X-Forwarded-Encrypted: i=1; AKwUvBzMaFlZ9dJG/iuYREcU84a6NYGvG0WYvYsc7UYBCXKbxqYDQRoFeHb8fNsfLL2YzxU27mh4Lm565czDKtsL@vger.kernel.org
+X-Gm-Message-State: AFq9FYL3XvNGZ8wBjY8px60nd8I3fNob6DB0PGGMghfZWYG8Mgo873cB
+	ik9TiCXqhenngkdE/+HQ/EnPWW6V8gu3l9QiyLrED6j1xqZjhKUUaBtmqjlUFRVoRfAQ4TyFHFC
+	mIRO1R/HjFz8UfVlKNafme0pyq3aWUrQ=
+X-Gm-Gg: AYBFou2Qvg/T+GJfkZvx6495MxxVdi6IjpwR7qz3xyqjL4aJSOaUhs51pt/tyTJjagY
+	5x94nPvK3nIYMpIPAwR1xO1GrowTrq+XlkwiYZiqX8IngYBNFKUZmXFT/Iz42vEVDUqfsNid5Y6
+	MvXdEMQyabxPIiMw9AsdV04xwyXqdSdMHtMvhwIx0nFST24Gt7O9AWzl1grQJheIVJ/1eYJ2W/9
+	e03XloUHEwsK5/A6ZuCLVG9QZRy42/F3OpwIkF37RWa/VuuPi3PByjcd2EvBFEMZKwT6LU8uXXj
+	u2zKL36CrLalbFCBKNOpc3StNjXWSW6yy9y3hlHh7Oz+w9V1WkFKl2w0OA==
+X-Received: by 2002:a05:6512:3c84:b0:5bc:b8d8:d766 with SMTP id
+ 2adb3069b0e04-5bcb8d8d985mr953656e87.16.1791115148823; Sun, 04 Oct 2026
+ 04:59:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261004102758.84436-1-26rote@gmail.com>
-In-Reply-To: <20261004102758.84436-1-26rote@gmail.com>
-From: Pengyu Luo <mitltlatltl@gmail.com>
-Date: Sun, 4 Oct 2026 19:46:49 +0800
-X-Gm-Features: AclHuK9M0MD-4wDlLCu7PKAzHiucnOaIPii0zTGjuitof7jNo1-BtNJqT62chRk
-Message-ID: <CAH2e8h6RPMF+Tod==XKjAbjmnzUKs1skCpvN7_YuGyao9m2baA@mail.gmail.com>
-Subject: Re: [PATCH] drm/msm/dpu: round up the compressed INTF width
-To: Joonhoe Kim <26rote@gmail.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Jun Nie <jun.nie@linaro.org>, 
-	Jonathan Marek <jonathan@marek.ca>, Alexander Koskovich <akoskovich@pm.me>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, "P. Lewis" <liu224806@gmail.com>
+References: <20261003-qcom-smbx-chg-state-change-v1-0-fffaef446932@gmail.com>
+ <20261003-qcom-smbx-chg-state-change-v1-1-fffaef446932@gmail.com> <20261004-jovial-fancy-ammonite-f9fd1d@quoll>
+In-Reply-To: <20261004-jovial-fancy-ammonite-f9fd1d@quoll>
+From: Fabricio Akio <fabricioakio@gmail.com>
+Date: Sun, 4 Oct 2026 08:58:31 -0300
+X-Gm-Features: AclHuK8XfUMsTrUjezp37dJXnfrGVlkqDXrTvYsOblQTNjNZvnfYIKp_Sma2dwU
+Message-ID: <CANxzQdE8tmPLweN+gfs4DdpFJXpL7ruiyk1cwNA41TL8NbefCQ@mail.gmail.com>
+Subject: Re: [PATCH 1/4] dt-bindings: power: supply: qcom,pmi8998-charger: add chg-state-change
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>, Sebastian Reichel <sre@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Robin Snyders <robin@snyders.xyz>, 
+	David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, 
+	Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
+	linux-pm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, 
+	Sebastian Reichel <sebastian.reichel@collabora.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 4, 2026 at 6:28=E2=80=AFPM Joonhoe Kim <26rote@gmail.com> wrote=
-:
+On Sun, Oct 04, 2026 at 10:06:52AM +0200, Krzysztof Kozlowski wrote:
+> On Sat, Oct 03, 2026 at 04:45:21PM -0300, Fabricio Akio wrote:
+> > The charger raises an interrupt when its charging state changes. Allow
 >
-> For DSI with DSC, drm_mode_to_intf_timing_params() scales the INTF
-> active width by bpp / (3 * bits_per_component) and rounds down. The DSI
-> host computes the same width with DIV_ROUND_UP, both for the pixel clock
-> (dsi_adjust_pclk_for_compression()) and for the active width it programs
-> (dsi_timing_setup(), from bytes per line). When the division is not
-> exact the INTF line is one pclk shorter than the DSI line, and the DSI
-> FIFO overflows.
->
-> Example: a bonded DSI video-mode panel, 952 pixels per link, DSC 8 bpp at
-> 10 bpc: 952 * 8 / 30 =3D 253.87, so the INTF uses 253 and the DSI 254.
->
-> Round up, as the DSI host does. Qualcomm's downstream SDE driver also
-> rounds this width up, and Pengyu Luo needed the same rounding on the
-> Legion Y700 gen 4 [1].
->
-> Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850) with that panel, with a
-> module parameter selecting the rounding: rounding down, DPMS off/on gives
-> no vblank and 14000-17000 DSI FIFO error interrupts per second
-> (dsi_err_worker: status=3D4); rounding up, the picture comes back and the=
-re
-> are no errors. Only tested on this device.
->
-> Link: https://lore.kernel.org/all/CAH2e8h6oinKxN1ndcvHCSc+=3DbFLXVVDZVAVF=
-0cQHoiaMvEwhPQ@mail.gmail.com/ [1]
-> Fixes: f9ce482d7dc0 ("drm/msm/dpu: fix video mode DSC for DSI")
-> Assisted-by: LLM
-> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
-> ---
+> Each of the ones mentioned in the binding?
 
-Thank you, Joonhoe.
-
-I am glad to see someone is raising this. For most tablets, the
-horizontal pixel count is not divisible by 3, so rounding up is
-necessary for them. Besides lenovo Y700 gen4, rounding up also helps
-dsc display on gaokun([1], patch initially provided by White Lewis)
-whose horizontal pixel is 800 * 2.
-
-[1]: https://github.com/whitelewi1-ctrl/matebook-e-go-linux/blob/master/ker=
-nel-patches/0003-drm-msm-dpu-encoder-fix-DSC-width-truncation.patch
-
-Reviewed-by: Pengyu Luo <mitltlatltl@gmail.com>
-
-Best wishes,
-Pengyu
-
-> This does not touch the divisor discussed in the RGB101010 thread
-> (bits_per_component * 3 vs 24, with and without widebus); that patch
-> was dropped from the series pending that discussion [2]. This one only
-> makes the rounding match the DSI host. The panel here uses widebus.
->
-> [2] https://lore.kernel.org/all/20260321-dsi-rgb101010-support-v4-0-eb28e=
-cebbfe8@pm.me/
->
->  drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c b/drive=
-rs/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-> index ba810f26ea30..2ac517db50fc 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-> @@ -134,8 +134,8 @@ static void drm_mode_to_intf_timing_params(
->                  * TODO: replace drm_dsc_get_bpp_int with logic to handle
->                  * fractional part if there is fraction
->                  */
-> -               timing->width =3D timing->width * drm_dsc_get_bpp_int(dsc=
-) /
-> -                               (dsc->bits_per_component * 3);
-> +               timing->width =3D DIV_ROUND_UP(timing->width * drm_dsc_ge=
-t_bpp_int(dsc),
-> +                                            dsc->bits_per_component * 3)=
-;
->                 timing->xres =3D timing->width;
->                 timing->dce_bytes_per_line =3D msm_dsc_get_bytes_per_line=
-(dsc);
->         }
-> --
-> 2.43.0
->
+Yes, both. PMI8998 and PM660 have it as interrupt 1 of the charger
+peripheral at 0x1000, as the downstream msm-pmi8998.dtsi and
+msm-pm660.dtsi describe.
