@@ -1,84 +1,54 @@
-Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from vtj.irix.systems (vtj.irix.systems [82.76.27.144])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35188419FCC
-	for <linux-arm-msm@vger.kernel.org>; Sun,  4 Oct 2026 10:28:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C15542050;
+	Sun,  4 Oct 2026 11:10:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.76.27.144
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791109682; cv=none; b=rflpIRKxdRSQhd42+MzigaVHHHd4e04CxzaYDay84OP1vj22G6aswokDA07WOz1VyBDRHDkWp1BeXWOsmQC5UHywKsHhTDX9ubZvncuyHFiGcZDTnfuY4M4vCcF1WHFawFKPj22KXM2pipy/8kVPnLVjgPXmSvbWYQlmiiMCnkk=
+	t=1791112239; cv=none; b=kq3ibFXL8GPtttkg1NMcm15/RVDM1GOw3C0zzyJPdufzqisRLblE3zD/So9FvAsdCtJOGp9t/XaRL3bPyqW9EhkG08KC73KXw8Aa9cD2OLMNGi2x9QqWGyGjzP/RrV8DMnI7YKwiwOJG2s2B3qQG/3QwPcmo/LISpOHuFoe2xU0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791109682; c=relaxed/simple;
-	bh=vWVgNkZiX8R3FefvvDRzUfTtoyujwvKaxxxwA4Shnvk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=opPooSKgPP5fdRLZjDsiy3vlUUcb6PywwsYkFb+opRZrl290bFFfQCQO7eExkUszxW900e35Eg4yE6QV1PV/0YmO9thE2Rl1KmWB7pXHYzZ4yYfTz9ih5oKxrFmgpQSJx/MC+einSZxQtTulQQRZBhcVOCBCGOdn+l2YjiPfiu8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QlcV9qDp; arc=none smtp.client-ip=74.125.227.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791112239; c=relaxed/simple;
+	bh=3vIFmGrXaGE0g6dRKtNgfftMUM92UGtys/54Q9Xt7/I=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=il8tnJgVCa8d0wLbRCRbkC7wIy+IWkf1v0eITruxr92HCVcVckzPYFtbYyPxkhkEVsGU578pLR82kTSvM7tn4IUKfUMhhY9pJFhpyPwyPR3kP2nS1/GzFkU+yB+HYFWeO6XZqdRqHauLAjaISr1GgWjTmMYG3cMwoamNB6EPNAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com; spf=pass smtp.mailfrom=andrei-z.com; dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b=U81sRnJt; arc=none smtp.client-ip=82.76.27.144
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=andrei-z.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QlcV9qDp"
-Received: by mail-pj2-f43.google.com with SMTP id 98e67ed59e1d1-3a4c8262465so664987a91.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 03:28:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791109680; x=1791714480; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aOHR60kWFiiTF2Paz1Sgg2dVxODMmAsE+5qedw3hT08=;
-        b=QlcV9qDp+8LdYEgGU9MU5RWK0ZX2EKHWj0lR782gRzKamMotWAC1Kpar5FxSDPELDQ
-         us8uIb6ft6CdpEaN3r8XmeNRoLLK5VUp5o3s/wg6bfB6UWKitIr+YNFmfec2Gt4y+4qe
-         ATf6D84e254bs0oEKhBbhskCJidv7G5N4wON1rEG1ubCiH8eP4fLLp4MNc7UuWaBA951
-         FudWiDSb5lfYrqfgBlw0iEUW9Mp6f++7s4BlxeLUpsdgpi2G4SVOlk2XsQTjT65u8zRk
-         UMM64jyl+vIjtXPKimIBWS5HHC2X6cmuB6QFP8COd7BNxZiF3aZg0y99VAeoxebl9EN8
-         pyRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791109680; x=1791714480;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aOHR60kWFiiTF2Paz1Sgg2dVxODMmAsE+5qedw3hT08=;
-        b=lOfHABOKSrx8wd6k8816ph3rAAkfyCWVlJQPbChuNvb29S5TlZ+Qtvy6gg4xtBMPBQ
-         Ys7dXdQYtAZAqMHJipYzOSPWBx40ztsS2K9tA+kf8AY1OzVmo5URvjtgUVOevMifqrMH
-         kRze8Pl50nUJX9cMQiVipLGOrCNZfAHB26S9cNXeBmigbYuQ08n7BmMie1MvaWgTLGyy
-         RqUFKQRkQbH+0l7yyHuZggNIvkU27zMHRrfoD7oNwtjH3o0uhtXU1iSznW+wQgRdqlTQ
-         0cbnTBnA6vZy4ZOjmyxMEZChL62pqsLQKzOUegP/3w083WUQC8aEwCGT2zpZ+k4Znb8n
-         HZRw==
-X-Forwarded-Encrypted: i=1; AKwUvBwRLQ9a6Xu4G8F4i+6xFtEvkX3IExMHtZaEVL/WRLe1Ati+e0RQkqBBSmhmZ4Z/sdNUEj0oXHgbWI3lH0lV@vger.kernel.org
-X-Gm-Message-State: AFq9FYL/3WMmAkljxb4CuTXm2/G3LNJJP9IwM/9DknKkton++r+9XNak
-	yXutK88D2h01tU4FboyHLA1HziTV7uVuRbZdeyemW8s963+mUOCb/+f/
-X-Gm-Gg: AYBFou3knreAgIHNICgDAD68nYHEEGI3VXUF/OT0+mTI14NGB+Jhj64WXZfPUxqVqHT
-	xrk/BQtYNFNy8ORnXKKLms0Q1KLybyJko7otgobeKK/Ee9QIU+q2SDFjbFxACRxZSrpLKax7i38
-	HuZvsrtTUENAYpoRPBRHGTsEedYQtZmEbwJ0geUiP0mHX7NNrY8Oj+xezXJmqHoZIjxmcbOaGax
-	8DVqlNXeWtHM7dvoAaO8CqJGdHGnQobNnaaieX9aHKqBqcPCwDSzs43wmErgMGZOfhLixAQ6OtI
-	eN+xBaOEPoXPsIKVNpEqNGATy7bVOcKECFhCPFllVJg1ajRvZoa3Rv+epzjh1E2jJLNM26LWLlC
-	TZTymeNeG4M0CNymuYrI71ncGBc1/dIb3Kf8bRwi35xBwovFSG71RlCphURaFSTIEV2Mm+Yf+Vv
-	ywViCPydX+NwmHQ03FSaEPx20tslIexL+en+E8NEy+2c4SptSObrZ/w1vmTZZZcxqKhGpg714s5
-	cq6U8memPwbow==
-X-Received: by 2002:a17:90b:4a4a:b0:3a6:f90b:20cd with SMTP id 98e67ed59e1d1-3a6f90b2630mr5714179a91.6.1791109680484;
-        Sun, 04 Oct 2026 03:28:00 -0700 (PDT)
-Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78e4262cfsm6192927a91.6.2026.10.04.03.27.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 03:27:59 -0700 (PDT)
-From: Joonhoe Kim <26rote@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jun Nie <jun.nie@linaro.org>,
-	Jonathan Marek <jonathan@marek.ca>,
-	Pengyu Luo <mitltlatltl@gmail.com>,
-	Alexander Koskovich <akoskovich@pm.me>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] drm/msm/dpu: round up the compressed INTF width
-Date: Sun,  4 Oct 2026 19:27:58 +0900
-Message-ID: <20261004102758.84436-1-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
+	dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b="U81sRnJt"
+Received: from MAILGW-HP.hp.vtj.corp.irix.systems (localhost [127.0.0.1])
+	by vtj.irix.systems (Proxmox) with ESMTP id 05F731BA2D;
+	Sun, 04 Oct 2026 14:10:35 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andrei-z.com; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:from:from:message-id:mime-version:reply-to:subject:subject:to
+	:to; s=sig1; bh=WGQ81jU+l2MkFM+CIYGORGxoh8ZVvXmfJ0xa0fOYQCo=; b=
+	U81sRnJtx6voqjqKtnEnugJlf/Ni7CstbzpKIy5TU347RIngiT/SBsR9ndFLRbZG
+	LHHHEcwIVRSw3oPsRxLFDU+tKw2oOOUL6KL4IN13k2ya5huTFi5y3YH6HFfZE24a
+	h9zDamG0nWwP2UjzMJRqJVRxgH9kcm6JuTBVJ5qhBYPtpBe324f0cIOfbYKxh0mI
+	DOe2FgqId+mF75AnVF6ovp3HTmEguaVsWutGjanS/QJLJrEm8JlibSQ/nirgzY3x
+	Dl5TnnjbO4Elm0SsxWPU/Ap9N19XiW20ryUwAFADVmFbo4xd3eCEAopUj55k9t94
+	C+QlTCoD2Gy5ryuX2GzMuQ==
+Received: from VTJ-MX.corp.irix.systems (unknown [10.57.36.6])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by vtj.irix.systems (Proxmox) with ESMTPS id DA8D61BB28;
+	Sun, 04 Oct 2026 14:10:33 +0300 (EEST)
+Received: from workspace.corp.irix.systems (2a02:2f04:1:9c23::c) by
+ VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Sun, 4 Oct 2026 14:10:33 +0300
+From: Andrei-Alexandru Bleortu <me@andrei-z.com>
+To: Bjorn Andersson <andersson@kernel.org>, Conor Dooley
+	<conor+dt@kernel.org>, Jeff Johnson <jjohnson@kernel.org>, Johannes Berg
+	<johannes@sipsolutions.net>, Konrad Dybcio <konradybcio@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob Herring <robh@kernel.org>
+CC: <ath11k@lists.infradead.org>, <devicetree@vger.kernel.org>,
+	<linux-arm-msm@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-wireless@vger.kernel.org>
+Subject: [PATCH v2 0/3] arm64: dts: qcom: ipq5018: add Ubiquiti UniFi U6 Enterprise
+Date: Sun, 4 Oct 2026 14:10:25 +0300
+Message-ID: <cover.1791110510.git.me@andrei-z.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -86,58 +56,55 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) To
+ VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6)
 
-For DSI with DSC, drm_mode_to_intf_timing_params() scales the INTF
-active width by bpp / (3 * bits_per_component) and rounds down. The DSI
-host computes the same width with DIV_ROUND_UP, both for the pixel clock
-(dsi_adjust_pclk_for_compression()) and for the active width it programs
-(dsi_timing_setup(), from bytes per line). When the division is not
-exact the INTF line is one pclk shorter than the DSI line, and the DSI
-FIFO overflows.
+Add the Ubiquiti UniFi U6 Enterprise, an IPQ5018 access point with two
+QCN9074 radios on PCIe (5 GHz and 6 GHz). The first patch documents the
+QCN9074's PCI ID in the ath11k PCI binding, so the radios' nodes can
+carry the calibration variants their board data is looked up by.
 
-Example: a bonded DSI video-mode panel, 952 pixels per link, DSC 8 bpp at
-10 bpc: 952 * 8 / 30 = 253.87, so the INTF uses 253 and the DSI 254.
+The Ethernet port (GMAC1 with a QCA8081 PHY) and the IPQ5018's own
+2.4 GHz radio are left out until the GMAC and the WCSS remoteproc have
+bindings.
 
-Round up, as the DSI host does. Qualcomm's downstream SDE driver also
-rounds this width up, and Pengyu Luo needed the same rounding on the
-Legion Y700 gen 4 [1].
+The vendor U-Boot only boots Ubiquiti-signed images, so the boards were
+booted by chainloading from it. Tested on two units with Linux 7.2 and
+the out-of-tree board description these nodes come from: both QCN9074
+radios come up with ath11k and their board data selected by these
+variants, and the eMMC and the SPI NOR (including U-Boot environment
+writes) are in use. The reset button and the accelerometer are described
+as in the vendor device tree and were not exercised.
 
-Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850) with that panel, with a
-module parameter selecting the rounding: rounding down, DPMS off/on gives
-no vblank and 14000-17000 DSI FIFO error interrupts per second
-(dsi_err_worker: status=4); rounding up, the picture comes back and there
-are no errors. Only tested on this device.
+Patch 1 is for the ath11k binding; the rest go through the qcom tree.
 
-Link: https://lore.kernel.org/all/CAH2e8h6oinKxN1ndcvHCSc+=bFLXVVDZVAVF0cQHoiaMvEwhPQ@mail.gmail.com/ [1]
-Fixes: f9ce482d7dc0 ("drm/msm/dpu: fix video mode DSC for DSI")
-Assisted-by: LLM
-Signed-off-by: Joonhoe Kim <26rote@gmail.com>
----
-This does not touch the divisor discussed in the RGB101010 thread
-(bits_per_component * 3 vs 24, with and without widebus); that patch
-was dropped from the series pending that discussion [2]. This one only
-makes the rounding match the DSI host. The panel here uses widebus.
+The patches were written with an AI coding assistant (Claude Code),
+which also drafted the changelogs; the testing above was done on the
+devices.
 
-[2] https://lore.kernel.org/all/20260321-dsi-rgb101010-support-v4-0-eb28ecebbfe8@pm.me/
+Changes in v2:
+- Collected Krzysztof's Acked-by on the two binding patches.
+- Squashed "label the PCIe1 root port" into the board patch, its only
+  user (Krzysztof).
+- No code changes otherwise.
 
- drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+v1: https://lore.kernel.org/all/20261003083410.3126453-1-me@andrei-z.com/
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-index ba810f26ea30..2ac517db50fc 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
-@@ -134,8 +134,8 @@ static void drm_mode_to_intf_timing_params(
- 		 * TODO: replace drm_dsc_get_bpp_int with logic to handle
- 		 * fractional part if there is fraction
- 		 */
--		timing->width = timing->width * drm_dsc_get_bpp_int(dsc) /
--				(dsc->bits_per_component * 3);
-+		timing->width = DIV_ROUND_UP(timing->width * drm_dsc_get_bpp_int(dsc),
-+					     dsc->bits_per_component * 3);
- 		timing->xres = timing->width;
- 		timing->dce_bytes_per_line = msm_dsc_get_bytes_per_line(dsc);
- 	}
+Andrei-Alexandru Bleortu (3):
+  dt-bindings: net: wireless: qcom,ath11k-pci: add QCN9074
+  dt-bindings: arm: qcom: add Ubiquiti UniFi U6 Enterprise
+  arm64: dts: qcom: ipq5018: add Ubiquiti UniFi U6 Enterprise
+
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ .../net/wireless/qcom,ath11k-pci.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../dts/qcom/ipq5018-ubnt-u6-enterprise.dts   | 236 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/ipq5018.dtsi         |   2 +-
+ 5 files changed, 240 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm64/boot/dts/qcom/ipq5018-ubnt-u6-enterprise.dts
+
 -- 
-2.43.0
+2.47.3
+
 
