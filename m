@@ -1,27 +1,28 @@
-Received: from smtp-outgoing-1603.laposte.net (smtp-outgoing-1603.laposte.net [160.92.124.98])
+Received: from smtp-outgoing-1802.laposte.net (smtp-outgoing-1802.laposte.net [160.92.124.103])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D9CE4AD4C8
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 15:14:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.98
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 838534C151E
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 15:15:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.103
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791213302; cv=none; b=T82Knf3nkTqftB8xm23VXMDySY39VyNj56yMDr9/GFYyE/Wl/0FwNdqgHb2XBocIyVFzrrIsxPyJlIbrM5I4x9nPKJHp6psxy+CPx2AbF9xQITD7pU3TMC2W5kze9aVttlOgodQQXsJBZnObbQz8xu+HzFviSnxetfKnOX4KXzI=
+	t=1791213321; cv=none; b=DOPdwDY9zLwpUQq1NnB6JsW3qEdYOUPEC6On5BIVVz4IEfIc/l506x6XAoI6CED0Lk03GCjpwe+39q9CaXfnjumBQE1mXt0Y1hFYJlKL00Z1K2nknQ8VtuKxrCn2CP3lEXXVil/dsJSE71/wYVuznGIeftXc/Nu5SM91tiC46Vw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791213302; c=relaxed/simple;
-	bh=w0JzGI4+Rj0ukqWNo8ylMXQXgrJmTHm7pEq5lr59G9w=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=or/dsc6Ha+5uiKQamIBWCnefib32Bkff0yA0W+0QezBdGJYP+ZMwcW3SOXHceUV9k2TDj+ZSTVFy0QTsr6PQ4iexZFKw1CcwXP6V/nrhO1hvZlOX3uDWnIy+0NT+L7a/dMzbqOcRM6IwWn4spOIVgnciZzRgmswylc83ejsx77o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=TGt1G7dV; arc=none smtp.client-ip=160.92.124.98
+	s=arc-20240116; t=1791213321; c=relaxed/simple;
+	bh=Wy6Pwvx+2GcjwjAr6PbOh13jEziZTD8nOUStgJm2acI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Ky2R9OvjpW1HfCVwoPrnL7ppsXXUuMRBbC+zZ/4z94OaRBjOqCng9SiMPXoQTOzBw819SKw9eZsV6zObqunT0Jt6UPCyA1pNbxwSq5VUHYtQ9Pq/jgFqhQpxu1nJOulv7DSB3WPZsgT9Hq2/eVZztz0iBKis0h5expNe6uZZ/I4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=eoPGvHZ4; arc=none smtp.client-ip=160.92.124.103
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=laposte.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="TGt1G7dV"
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gr36CGz10MQ4","contextId":
- "7682ca06-10ef-447b-8fae-32f653cfad5e"}
+	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="eoPGvHZ4"
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gw3wsSz10MQN","contextId":
+ "58004f09-b087-40cd-8ed9-1a0dd6434d7b"}
 Received: from outgoing-mail.laposte.net (localhost.localdomain [127.0.0.1])
-	by mlpnf0120.laposte.net (SMTP Server) with ESMTP id 4hz0Gr36CGz10MQ4;
-	Mon,  5 Oct 2026 15:14:44 +0200 (CEST)
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gq2zdcz10MQQ","contextId":
- "6d16b087-e524-40b2-9d69-a2b67756ca2c"}
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTP id 4hz0Gw3wsSz10MQN;
+	Mon,  5 Oct 2026 15:14:48 +0200 (CEST)
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gw00kMz10MQ4","contextId":
+ "83529e5d-be3a-4842-bd6e-95de7938f786"}
 X-lpn-mailing: LEGIT
 X-lpn-spamrating: 36
 X-lpn-spamlevel: not-spam
@@ -29,8 +30,8 @@ Received: from PAR-95296130.bcg.com (unknown [147.161.232.172])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mlpnf0120.laposte.net (SMTP Server) with ESMTPSA id 4hz0Gq2zdcz10MQQ;
-	Mon,  5 Oct 2026 15:14:43 +0200 (CEST)
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTPSA id 4hz0Gw00kMz10MQ4;
+	Mon,  5 Oct 2026 15:14:47 +0200 (CEST)
 From: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
 To: linux-arm-msm@vger.kernel.org
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -54,10 +55,12 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Jean-Francois Bobier <jean-francois.bobier@laposte.net>
-Subject: [PATCH 0/3] drm/msm/dp: fix dead link-training fallback on Type-C boards
-Date: Mon,  5 Oct 2026 15:14:29 +0200
-Message-ID: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
+Subject: [PATCH 3/3] drm/msm/dp: validate modes against the trained link, not the sink's claim
+Date: Mon,  5 Oct 2026 15:14:32 +0200
+Message-ID: <20261005131432.22840-4-jean-francois.bobier@laposte.net>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
+References: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -65,57 +68,113 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791213296; bh=w0JzGI4+Rj0ukqWNo8ylMXQXgrJmTHm7pEq5lr59G9w=; h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Transfer-Encoding; b=TGt1G7dVJoOkqhwIWEGL3pGQYZPhoUrreHZUZWPdDyNrOtS6vzd/mxmZJGdns55NMjd59npS15e5cifO7tE67iuczbnqxnpN+rOFZ956/GDiNO+kEnF62cuIyUepfbSUqRezH5w5SsqWPKT/e01vBivC/Ok0ukeOZ12LkMzAD6b8BYrr8dElOLOOlaKyERuoP173Oo/nK6GXqbhlnkuXIgFk5uXTNiiUhepou2Td0sE+u52PRZEY/+8Eb38Qfk3nn+oeW0i3idziJ79QwCaQKme5hEoXILdVolZsAJiEVtCUpelefQTWohatjDtDJXhO2CrSLVeygyl1Rj59Pe0zQA==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791213317; bh=Wy6Pwvx+2GcjwjAr6PbOh13jEziZTD8nOUStgJm2acI=; h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding; b=eoPGvHZ4jUc8Bs6NYn5YMUwzAKuX0uJUvEay2XCETXuZFL/yP8nsspEMCo8zCx159E78YswmQTAFzAPuPAroPBJ40AqGN0ZFtPsMmrhAdFd22RGicZgv+5IsQHfkx/68eZEI7RD56npiWW2zMmrNg0dzYDP4M1tUieqd9KQR3CxTZmwegCyDXjoqLWYUAPyzauVRfwsNx90SUPHUDA8kdcdt+fUC59D6XoAbiZWSMASh0h0MlPbKsy3pdSM4joxcvOhjVKvtSgtFpkKCCkuixHfGuCDsLI9cYsl5mJ6MROyApB643HZVOh5IY1T0aKz9IgwpWNG2lvb1wrZFwNYoPQ==;
 
-These three patches come out of bringing up external DisplayPort over
-USB-C on a OnePlus 8T (SM8250, msm DP driver). They are not
-device-specific: all three are bugs in code paths that run on every
-Type-C DP board using this driver, which today includes the Snapdragon
-X Elite (x1e80100) laptops as well as phones.
+msm_dp_display_mode_valid() sizes every mode against
+panel->link_info, which is what the sink advertises in DPCD. That is not
+necessarily what the link carries. msm_dp_ctrl_on_link() walks the rate
+down HBR3 -> HBR2 -> HBR -> RBR and then reduces the lane count until
+training succeeds, so a cable with two unusable lanes trains at half the
+bandwidth the sink claims.
 
-Patch 1 matters most. The link-training rate/lane fallback in
-msm_dp_ctrl_setup_main_link() is dead code on every Type-C board, because
-its liveness check reads the DP controller's own HPD register, which
-never reflects a real signal when HPD arrives out of band through a
-drm_dp_hpd_bridge -- which is how every Type-C port gets its HPD. It is
-latent: fallback only runs when training fails at full rate, so a good
-cable never exercises it. Found with a cable whose lanes 2 and 3 never
-achieve clock recovery at any rate.
+The validator does not know that, so it keeps advertising modes sized for
+the sink's maximum. Userspace picks one, training "succeeds" at the
+reduced parameters, the mode does not fit in them, and the sink shows a
+black screen -- with nothing in the log to explain it, because from the
+driver's point of view everything worked.
 
-Patch 2 demotes the per-attempt log lines in that same fallback loop
-(plus one unrelated AUX interrupt message) from error to debug level.
-Without it, a monitor that settles on two lanes after three attempts
-prints nine error lines on a completely healthy attach.
+Observed on an sm8250 phone with a 4K monitor whose cable only carries
+two lanes: the connector offers 3840x2160, the link trains at 2 lanes
+HBR2 (8.6 Gbps after 8b/10b against the 12.5 Gbps the mode needs at 24
+bpp, more at 30), and the screen stays black until the user picks
+2560x1440 by hand.
 
-Patch 3 sizes modes in msm_dp_display_mode_valid() against the link's
-trained rate/lane count instead of the sink's advertised maximum, so a
-fallback doesn't leave the mode list advertising bandwidth the link no
-longer carries. It is a partial fix -- making userspace re-probe after a
-fallback needs the DRM link-status property, which is the existing
-// TODO in msm_dp_bridge_atomic_enable() and is not done here. Happy to
-pick that up too if review wants the complete fix before this lands.
+link->link_params holds the trained values and is reset to the sink's
+maximum at the top of every msm_dp_ctrl_on_link(), so taking the lower of
+the two is accurate after a fallback and a no-op before the first
+training. The change can only ever remove modes from the list, never add
+one, so it cannot cause the link to attempt anything it was not already
+attempting.
 
-All three were found and verified on hardware with a cable that
-reliably forces the fallback path (lanes 2 and 3 never complete clock
-recovery). DPCD captures and the full fallback sequence are available on
-request.
+This does not by itself make userspace re-probe after a fallback -- that
+needs the link-status property, which cannot be set from
+msm_dp_bridge_atomic_enable() because the modeset locks are held, and is
+the deferred work the existing TODO there refers to. What it does ensure
+is that any probe after a fallback offers only modes the link can
+actually drive.
 
-Verified against msm-next as of 5e4a3f7b2 ("drm/msm/dp: add
-stream-aware link register accessors"), individually and applied
-together in sequence.
+Also log the rejection at debug level; a mode silently disappearing from
+the list is otherwise hard to account for.
 
-Jean-Francois Bobier (3):
-  drm/msm/dp: don't gate link-training fallback on the controller's HPD
-    block
-  drm/msm/dp: don't log an expected link-training fallback as errors
-  drm/msm/dp: validate modes against the trained link, not the sink's
-    claim
+Signed-off-by: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
+---
+ drivers/gpu/drm/msm/dp/dp_display.c | 38 +++++++++++++++++++++++++++--
+ 1 file changed, 36 insertions(+), 2 deletions(-)
 
- drivers/gpu/drm/msm/dp/dp_aux.c     |  9 ++++++-
- drivers/gpu/drm/msm/dp/dp_ctrl.c    | 39 +++++++++++++++++++----------
- drivers/gpu/drm/msm/dp/dp_display.c | 38 ++++++++++++++++++++++++++--
- 3 files changed, 70 insertions(+), 16 deletions(-)
-
+diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp=
+/dp_display.c
+index bce641d7d..634d825aa 100644
+--- a/drivers/gpu/drm/msm/dp/dp_display.c
++++ b/drivers/gpu/drm/msm/dp/dp_display.c
+@@ -750,8 +750,10 @@ enum drm_mode_status msm_dp_display_mode_valid(struc=
+t msm_dp *dp,
+ {
+ 	const u32 num_components =3D 3, default_bpp =3D 24;
+ 	struct msm_dp_display_private *msm_dp_display;
++	const struct msm_dp_link_info *trained;
+ 	struct msm_dp_link_info *link_info;
+ 	u32 mode_rate_khz =3D 0, supported_rate_khz =3D 0, mode_bpp =3D 0;
++	unsigned int num_lanes, rate;
+ 	int mode_pclk_khz =3D mode->clock;
+ 	int link_pclk_khz;
+ 	bool is_yuv_420;
+@@ -789,10 +791,42 @@ enum drm_mode_status msm_dp_display_mode_valid(stru=
+ct msm_dp *dp,
+ 			mode_bpp, link_pclk_khz);
+=20
+ 	mode_rate_khz =3D link_pclk_khz * mode_bpp;
+-	supported_rate_khz =3D link_info->num_lanes * link_info->rate * 8;
+=20
+-	if (mode_rate_khz > supported_rate_khz)
++	/*
++	 * link_info is what the sink advertises in DPCD, which is not
++	 * necessarily what we managed to train. msm_dp_ctrl_on_link() walks
++	 * the rate down HBR3 -> HBR2 -> HBR -> RBR and then halves the lane
++	 * count until training succeeds, so a cable with two unusable lanes
++	 * ends up carrying half the bandwidth the sink claims.
++	 *
++	 * Sizing modes against the sink's maximum then advertises modes the
++	 * link cannot carry: training "succeeds" at the reduced parameters,
++	 * the mode does not fit in them, and the sink shows a black screen
++	 * with nothing in the log to say why.
++	 *
++	 * link->link_params holds the trained values, and is reset to the
++	 * sink's maximum at the top of every msm_dp_ctrl_on_link(), so taking
++	 * the lower of the two is accurate after a fallback and a no-op
++	 * before the first training.
++	 */
++	num_lanes =3D link_info->num_lanes;
++	rate =3D link_info->rate;
++
++	trained =3D &msm_dp_display->link->link_params;
++	if (trained->num_lanes && trained->num_lanes < num_lanes)
++		num_lanes =3D trained->num_lanes;
++	if (trained->rate && trained->rate < rate)
++		rate =3D trained->rate;
++
++	supported_rate_khz =3D num_lanes * rate * 8;
++
++	if (mode_rate_khz > supported_rate_khz) {
++		drm_dbg_dp(dp->drm_dev,
++			   "mode %s rejected: needs %u kHz, link carries %u kHz (%u lanes @ %=
+u)\n",
++			   mode->name, mode_rate_khz, supported_rate_khz,
++			   num_lanes, rate);
+ 		return MODE_BAD;
++	}
+=20
+ 	return MODE_OK;
+ }
 --=20
 2.55.0
 
