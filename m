@@ -1,407 +1,252 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F30B5443AAF
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 09:11:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A29D4570E2
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 09:39:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791191511; cv=none; b=El80uD+6KAeOD0KodHhX5GK2Cl9NFZ/aKCMyRVx8S/nEL0VeZQKhr6NdDiEtxgCU8KJVA4f4RR/Z9hzccFfxhs72v0ZWqY10RHdmqMbQoIPk7Hbup1PcRTHPqyAyG5raDe1MWNj3vOO/0GMmyVuwZkRF0mnPnDxi+yXUNqbjl9k=
+	t=1791193187; cv=none; b=MDabkJO0fTJGpSP3SqNId53Kb4QPbLi3eIoloDLN2G/4N6rIEeQtG0m5sx1pNsuZsZnFUOeUzFGDBdAGkVAEZ2ZlzatZTmu5n1e/4e2pKPQu99YUSANnL1q4LISSDaCKuWIpisWtYPUJXdBuf2JHnPaOe38zjeiYub+RC2Dq3lo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791191511; c=relaxed/simple;
-	bh=Xq53i4DvREansymo8LhN7blZ3Irmefaf3T+L4KAoc20=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rfrbOc+JmpCk0RFuJVT3zZoi87g+CxvWRkysWId12ezJer43MKryPnjH80bbbbQwXxAY9TUeko4rmcft9yIik1GbiHCQTnXoQM10JtThJna47CLKr6540Lm/M15VqdZRnvUvNdqUyJ1Kdc+Ezlm9ThV2u7SlYJbFvmpECemBwIw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZH+r4pgt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LJXAZ+3D; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791193187; c=relaxed/simple;
+	bh=O6YBEBOgxU2xPbzAN0XEomFzmcuWs7cjwFLomcSls14=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=ixZB10co6yFte3qdHMtQ9v3QdBV/bfvsS79qjt5TQBmJ/Sf+1O8V8q9cjXoXKBdKcN51eTuXTAb2Pd8JoozHOP/ylcI2bPxrs4KqaQnvikd7RyMAkw3GZiHjxFpM/jp7yitL89+vpgrB9zx8zm2b4bjUrmqmpELi36qTmqlaTAA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=eOmETh0u; arc=none smtp.client-ip=148.251.105.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZH+r4pgt";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LJXAZ+3D"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6958xPaF1470442
-	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 09:11:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ss19VBcc+YgAI+y0F6urtLQpxiZ41oXUqnmy+BcLHWE=; b=ZH+r4pgt4OFf/VOb
-	coBnoqQUPLv2SE3H+o0T+poamtwppGCwIUK4l81sfHz/f752/QHw6A0N6+7iDbQn
-	gYQZ8DUyhNoy+eQCfkGyHbBoMhyaLXO7cmNEsteYeoZV90EWLEcjhwODZtqWFJO5
-	j3ltQQZb2dZxl8slso9am9LjEBjLE9HJI27OascWLD/XpxMiW6aqas/V+bOTjc9X
-	ipARsJavHWH20jh1fOHUVQbK8qkxW3qH7BV7l2yz1YKs/jLKluvs5b5AbRta+bYY
-	5QFb3CDUEp2vszqZ+vuGodEKhrc1MyTI40eoQ8FLmxkef3MnD9h0WjVKwbtNka5Z
-	Zot2IQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2ssud78d-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 09:11:48 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e2c785aa62so24895385ad.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 02:11:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791191507; x=1791796307; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ss19VBcc+YgAI+y0F6urtLQpxiZ41oXUqnmy+BcLHWE=;
-        b=LJXAZ+3DPBqMe3oCf5hebgoIhd6oKlheuQPybSsbbxW4nO9ROXZ+3U2nDo8dwjQSFS
-         6e4yit2A8yINfTOZvx9M4ekb1Vihi07aVlrf0gdYDYJkgo+esyiwDM47/nHxXQdlUv4+
-         wkmnz+4h530QUi4Xzeix9q9zqOvxav58TCDVKJsIiZ62HrkvyVAWF78wFTF2xu8OP1n2
-         oPXYYhwCeHUmaGaO4pvA9qSpxIXvO+yncvxAIH58wybix5KK/bWYULnE7mpepiiC08Pt
-         2Iw6u+daNUIQ6e+y86XN+ZvuEA4VhoEo1Pz2rVKN16he4Y+Rcfs8xs+Z4oAsBBYfZLsZ
-         xiOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791191507; x=1791796307;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ss19VBcc+YgAI+y0F6urtLQpxiZ41oXUqnmy+BcLHWE=;
-        b=LKqJBk+6d3XLNYAD2b0jFScEi2JnhM2Qoxq54KX77uQL3t+5ir/VmnzCaSktx1KWUb
-         YQpqHqquGYarceS82Iv00QR7kyobaiEAj7GTUsCJ1TCh2A0BNBlxrmxwj/XZBBwhuNsb
-         yOtihW1RxgElUvoQo1GG4nqnfnQEku3VUoRHoTMKEw6hfBcgUpQF/bFIZY/bQsgysemI
-         dT9fpJlPjtKRiusqAY9JWgmEJQQdMuZJ4nHuYEII3POKbXeyV6TWfkjol4LJxTh/nvlV
-         QLoCSNxKo2w9JMBH7ns6GlOjgE0SWcmKAAtUsJK+k78yg2facoOjjwoXbQ1HaRIbbktp
-         tpSA==
-X-Gm-Message-State: AFuF++mj63b0Mdc0A87nWbnFqUln6dZeDbmWzr1tfAwpRRRivBcHuFHI
-	oi7kai4laq5GPBJ1dhQ1vHtoTUBoXcW9vurvMPYre4yAFYGpy+JuPnt2xQsXxKFmWx0TEp8IAG3
-	s4vCvk5ZVpKb4CMZ040QxYRgPoTQtr0j9PH/KfBWGuWPpDThrwBx4/dc9mjHv98/bRHNF
-X-Gm-Gg: AYBFou0TK8hM218SdVBzr752mvdpxXS6O95fmqulBffF/aEDB5MWLB3WbJdI0Vg9eOq
-	RNpHt98CpQEVzHmWh41XFbWRPAPyqCHqgXX1a9tez3al1XNfZkewUbJOZ8XVoZHwYTWduxMU8Az
-	dfdUoZlqqkM5Z45XBsUjMrLnziGE/GcMmAS22Bf90lymURuSoEYR7YBbxGrllcjQjADP3BLf0LV
-	bknDPdoE3Klv7406yWGmaqxU7J5EnaP7uDgSsLGOqfxa+RHqhIK4AEvKm6peFLrTXqZ8BExcwcJ
-	nnV6Wt+O/QhiMBh40112luPnk2UW1T2/nq+SSV9K6EM8FhSy951J7v3x+CTb2GiUiVzE3MgKnlt
-	o5Avj/Y7dwNyXK/xf8SExJsJ1Y69i
-X-Received: by 2002:a05:6300:2189:b0:3de:4f56:cf03 with SMTP id adf61e73a8af0-3e0bd21770dmr9322456637.69.1791191507338;
-        Mon, 05 Oct 2026 02:11:47 -0700 (PDT)
-X-Received: by 2002:a05:6300:2189:b0:3de:4f56:cf03 with SMTP id adf61e73a8af0-3e0bd21770dmr9322435637.69.1791191506894;
-        Mon, 05 Oct 2026 02:11:46 -0700 (PDT)
-Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cce6d8ffc38sm497262a12.15.2026.10.05.02.11.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 02:11:46 -0700 (PDT)
-From: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Date: Mon, 05 Oct 2026 14:41:28 +0530
-Subject: [PATCH v5 3/3] soc: qcom: rpmh-rsc: Output debug information from
- RSC
+	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="eOmETh0u"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1791193168;
+	bh=O6YBEBOgxU2xPbzAN0XEomFzmcuWs7cjwFLomcSls14=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=eOmETh0ucLVcoEAOdMbhTfYydfCSTpA69TNPABDhvieR8E7Wm1iMZe1f3mDefxmsY
+	 Ao+GvEIAXv3HwwwmbA8fKhFC/WWlTwq4GBTNTIbI4fPAzcWQKRl6FnXyyAkfIKrBNl
+	 syv9jHwAEw0zfNM6kqfSDODm/gdXLV9ZvFJX/LLZQyh20vGyZiAaccT9ZAyEX2P/nl
+	 RYhL4nBdmyaEMB8Gtqlr+g3KfAtOYRoA+RpM7OmSbgWtb+UbfIUkqAz2yVcIAank19
+	 y6iFyldyp+H0IGtl6Cd8yaxv/cs8zwp+Zej9gvNlO7e5vnk8kZ4uQOfm3cWFf7ajs4
+	 QPlMUjELoNfEA==
+Received: from fedora-61.home (unknown [100.64.0.11])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bbrezillon)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id B374D17E01C2;
+	Mon, 05 Oct 2026 11:39:27 +0200 (CEST)
+Date: Mon, 5 Oct 2026 11:39:24 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Matthew Brost <matthew.brost@intel.com>
+Cc: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Abhinav
+ Kumar <abhinav.kumar@linux.dev>, Alice Ryhl <aliceryhl@google.com>, Anna
+ Maniscalco <anna.maniscalco2000@gmail.com>, Antonino Maniscalco
+ <antomani103@gmail.com>, Danilo Krummrich <dakr@kernel.org>, David Airlie
+ <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>, Jessica Zhang
+ <jesszhan0024@gmail.com>, Jonathan Corbet <corbet@lwn.net>, Liviu Dudau
+ <liviu.dudau@arm.com>, Lyude Paul <lyude@redhat.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Marijn Suijten
+ <marijn.suijten@somainline.org>, Maxime Ripard <mripard@kernel.org>, Randy
+ Dunlap <rdunlap@infradead.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>, Shuah
+ Khan <skhan@linuxfoundation.org>, Simona Vetter <simona@ffwll.ch>, Steven
+ Price <steven.price@arm.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=
+ <thomas.hellstrom@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH v3 3/8] drm/panthor: lock the resident BOs of a submit
+ last
+Message-ID: <20261005113924.37276be0@fedora-61.home>
+In-Reply-To: <20261001220632.3190896-4-matthew.brost@intel.com>
+References: <20261001220632.3190896-1-matthew.brost@intel.com>
+	<20261001220632.3190896-4-matthew.brost@intel.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261005-rpmh-timeout-debug-v1-v5-3-7b9c457a191c@oss.qualcomm.com>
-References: <20261005-rpmh-timeout-debug-v1-v5-0-7b9c457a191c@oss.qualcomm.com>
-In-Reply-To: <20261005-rpmh-timeout-debug-v1-v5-0-7b9c457a191c@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Maulik Shah <maulik.shah@oss.qualcomm.com>,
-        "Raju P.L.S.S.S.N" <quic_rplsssn@quicinc.com>,
-        "Raju P.L.S.S.S.N" <quic_rplsssn@quicinc.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791191492; l=9923;
- i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
- bh=cGGI6rhEOR5PhXGMHtL1aBSKa+tLjTZuprToKLdnc/Q=;
- b=WPlt2t9C0kwL/tsaM/A+L0V1jLOpwuOr1sCG1Z7Rpv2lbUzzTdeZme6if2my/NSmnGFhkaaON
- nwRuTS55uGYDF8oaeW0XCZO0osU2L6sUeWwDC7vVqYjjXMYBgGZdrJW
-X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
- pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDAzNiBTYWx0ZWRfX5MHv2MkXLklp
- Zbq4YKFCWHvFryB0wkn+mLCBdpXD226ph/H5tAnQfmNV7pknXYpMU/UDfDMgfMyki/ydhFLSdcv
- EWOhUbbORin8HkV5ZrXOoEyVLRvx86c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDAzNiBTYWx0ZWRfX9j1+hCMNPilI
- Hh6T+sluqzQNmJCMaOed04CoPeW1DBXhHfl8Fyd66lFkEte0DUrIaMYz3gSp1ydGplYnOg5awho
- bOBlx/NyZu8GqRigJjGK7h4VV/DY7VDFSPsxW5yVij8JDqTO7+1FKM5Yvvt+6cehq/cf1jEqhfu
- oUhhrLHxKL05pjn1vuoE1Jzudmt2gctR69S4hTHbdX5wwM0VgiEvjg0id5hBvqYfNCHqM5w/DMR
- pNFT+RFW8arxNuRlqWQ57LH9PVz/NmdDMbMJDfoF6rI22Bo5wH3uEK+zN+FnZNsICSY/L4lhEow
- qhtQyr358dN5HrS479wSikdOVBxrMl3QD6tb9gGHVtOVmGdK53dpcqNyxpDwubTvYjTElsJLMkv
- VIBPLv540mmIrdyeUZNi0Wb/9aqwFnTUGJR9JkgaafYOuMEVd30jtyaKTf27S4PigcFqOY0BqYn
- +4u79fiMdsmc3qQbUPA==
-X-Proofpoint-GUID: -dUMF75D0qv_gE1Htqx_Fj483ArEOk-f
-X-Proofpoint-ORIG-GUID: -dUMF75D0qv_gE1Htqx_Fj483ArEOk-f
-X-Authority-Analysis: v=2.4 cv=FryQbGrq c=1 sm=1 tr=0 ts=6ac369d4 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=LpQP-O61AAAA:8 a=EUspDBNiAAAA:8 a=dJJuL2mqxW2t2NE-lFUA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22 a=pioyyrs4ZptJ924tMmac:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-05_01,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501
- malwarescore=0 impostorscore=0 suspectscore=0 adultscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050036
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: "Raju P.L.S.S.S.N" <rplsssn@codeaurora.org>
+On Thu,  1 Oct 2026 15:06:27 -0700
+Matthew Brost <matthew.brost@intel.com> wrote:
 
-When an RPMh transfer times out there is no visibility into which
-TCS was stuck, what commands it was carrying, or whether the
-completion IRQ was pending at the GIC. Add rpmh_rsc_debug() to
-capture this state at timeout:
+> panthor_vm_prepare_mapped_bos_resvs() locks every external object mapped
+> in the VM and then validates the evicted ones. Validation here means
+> panthor_vm_bo_validate(), which swaps the BO's pages back in and restores
+> its VMAs. That is slow, and an external object is one which can be shared
+> with another process, so the whole of it happens while holding dma-resv
+> locks other processes may be waiting on.
+>=20
+> Nothing is gained by holding those. A resident object needs no swapping
+> in; only the evicted ones do. Split the locking into the two passes
+> gpuvm now understands: the early pass takes just the evicted external
+> objects and swaps them in, and the late pass takes the ones which were
+> resident and are therefore normally ready to use as they are. Private
+> objects are covered by the VM resv, which is held from the start, so
+> evicted ones are still validated in the early pass.
+>=20
+> The split is only worth it when there is something to validate, so
+> drm_gpuvm_exec_pass_needs_split() decides, and a submit with nothing
+> evicted keeps doing exactly what it does today in a single pass.
+>=20
+> Both passes run in the same drm_exec transaction, so nothing is unlocked
+> in between and the late pass only ever adds locks. They take disjoint
+> sets of objects, so passing slot_count to both still reserves it exactly
+> once per object.
+>=20
+> The early pass reads the evicted state without the object's dma-resv,
+> that being the lock it is trying not to take. The race is benign: an
+> object evicted right after the early pass skipped it is picked up by the
+> late pass instead, which is why that pass still validates.
+>=20
+> Validation here allocates pages, which can recurse into panthor's own
+> shrinker, so it is worth being explicit about what the early pass can
+> evict. There is no deadlock: drm_gem_lru_scan() acquires the resv with
+> ww_mutex_trylock() and skips what it cannot get. VM-exclusive BOs share
+> the VM resv, which is held across both passes, so those are always
+> skipped. External objects are not held by the early pass, though, so
+> reclaim can evict one while the early pass validates something else.
+>=20
+> That is handled, and is why the late pass validates rather than only
+> locking: it picks up anything evicted after the early pass looked at it.
+> The cost is that the swapin for such a BO happens under the full set of
+> locks, i.e. it degrades to the current behaviour for that one object.
+>=20
+> Xe avoids this by refusing to evict BOs bound to a VM the current task is
+> validating (xe_bo_eviction_valuable() and xe_vm_is_validating()). Panthor
+> has no equivalent guard. Adding one would make the split more effective
+> under memory pressure, but it is not needed for correctness, so it is left
+> as a follow up.
+>=20
+> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
+> Cc: Alice Ryhl <aliceryhl@google.com>
+> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+> Cc: Antonino Maniscalco <antomani103@gmail.com>
+> Cc: Boris Brezillon <boris.brezillon@collabora.com>
 
-- Iterates all in-use TCSes and dumps per-TCS control register
-  state (controller status, AMC mode, IRQ status) and per-command
-  register state (address, data, message ID, completion status).
-  The accelerator type (ARC/VRM/BCM) is decoded from the address
-  using cmd_db_hw_type_str().
+Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
 
-- Queries the GIC pending state for the RSC IRQ via
-  irq_get_irqchip_state() to distinguish two failure modes:
-  * AOSS firmware did not respond (IRQ never fired)
-  * Linux lockup (IRQ pending at GIC but handler never ran)
-
-- Reports the completion object state to cross-check with the
-  IRQ status.
-
-Store the IRQ number in struct rsc_drv to enable the GIC query.
-
-Wire rpmh_rsc_debug() into the rpmh_write(), rpmh_write_batch(), and
-rpmh_read() timeout paths so that all three blocking RPMh callers
-produce the same structured TCS/GIC diagnostic output on timeout.
-
-Signed-off-by: Raju P.L.S.S.S.N <rplsssn@codeaurora.org>
-Co-developed-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
----
- drivers/soc/qcom/rpmh-internal.h |   5 ++
- drivers/soc/qcom/rpmh-rsc.c      | 100 +++++++++++++++++++++++++++++++++++++++
- drivers/soc/qcom/rpmh.c          |  14 +++++-
- 3 files changed, 117 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/soc/qcom/rpmh-internal.h b/drivers/soc/qcom/rpmh-internal.h
-index 39441a25af9b..4e465bdb5a27 100644
---- a/drivers/soc/qcom/rpmh-internal.h
-+++ b/drivers/soc/qcom/rpmh-internal.h
-@@ -104,6 +104,9 @@ struct rsc_ver {
-  * @tcs_base:           Start address of the TCS registers in this controller.
-  * @id:                 Instance id in the controller (Direct Resource Voter).
-  * @num_tcs:            Number of TCSes in this DRV.
-+ * @irq:                IRQ number used by the TCS completion interrupt;
-+ *                      stored to allow querying GIC pending state for
-+ *                      timeout diagnostics.
-  * @rsc_pm:             CPU PM notifier for controller.
-  *                      Used when solver mode is not present.
-  * @cpus_in_pm:         Number of CPUs not in idle power collapse.
-@@ -131,6 +134,7 @@ struct rsc_drv {
- 	void __iomem *tcs_base;
- 	int id;
- 	int num_tcs;
-+	int irq;
- 	struct notifier_block rsc_pm;
- 	struct notifier_block genpd_nb;
- 	atomic_t cpus_in_pm;
-@@ -149,6 +153,7 @@ int rpmh_rsc_write_ctrl_data(struct rsc_drv *drv,
- 			     const struct tcs_request *msg);
- void rpmh_rsc_invalidate(struct rsc_drv *drv);
- void rpmh_rsc_write_next_wakeup(struct rsc_drv *drv);
-+void rpmh_rsc_debug(struct rsc_drv *drv, struct completion *compl);
- 
- void rpmh_tx_done(const struct tcs_request *msg);
- int rpmh_flush(struct rpmh_ctrlr *ctrlr);
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index c4542318eac4..04016439644d 100644
---- a/drivers/soc/qcom/rpmh-rsc.c
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -10,6 +10,7 @@
- #include <linux/cpu_pm.h>
- #include <linux/delay.h>
- #include <linux/interrupt.h>
-+#include <linux/irq.h>
- #include <linux/io.h>
- #include <linux/iopoll.h>
- #include <linux/kernel.h>
-@@ -25,6 +26,7 @@
- #include <linux/pm_runtime.h>
- #include <linux/slab.h>
- #include <linux/spinlock.h>
-+#include <linux/string_choices.h>
- #include <linux/wait.h>
- 
- #include <clocksource/arm_arch_timer.h>
-@@ -89,6 +91,7 @@ enum {
- #define CMD_MSGID_LEN			8
- #define CMD_MSGID_RESP_REQ		BIT(8)
- #define CMD_MSGID_WRITE			BIT(16)
-+#define CMD_STATUS_TRIGGERED		BIT(0)
- #define CMD_STATUS_ISSUED		BIT(8)
- #define CMD_STATUS_COMPL		BIT(16)
- 
-@@ -693,6 +696,101 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
- 	return 0;
- }
- 
-+static void print_tcs_info(struct rsc_drv *drv, int tcs_id,
-+			   bool *aoss_irq_sts)
-+{
-+	const struct tcs_request *req = get_req_from_tcs(drv, tcs_id);
-+	unsigned long cmds_enabled;
-+	char rname[CMD_DB_ID_SIZE + 1];
-+	u32 addr, data, msgid, sts, irq_sts;
-+	bool in_use = test_bit(tcs_id, drv->tcs_in_use);
-+	int i;
-+
-+	sts = read_tcs_reg(drv, drv->regs[RSC_DRV_STATUS], tcs_id);
-+	cmds_enabled = read_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id);
-+	if (!cmds_enabled)
-+		return;
-+
-+	if (!req)
-+		goto print_tcs_data;
-+
-+	data = read_tcs_reg(drv, drv->regs[RSC_DRV_CONTROL], tcs_id);
-+	irq_sts = readl_relaxed(drv->tcs_base + drv->regs[RSC_DRV_IRQ_STATUS]);
-+	dev_warn(drv->dev, "Request: tcs-in-use:%s state=%d wait_for_compl=%u\n",
-+		 str_yes_no(in_use), req->state, req->wait_for_compl);
-+	dev_warn(drv->dev, "TCS=%d [ctrlr-sts:%s amc-mode:0x%x irq-sts:%s]\n",
-+		 tcs_id, sts ? "IDLE" : "BUSY", data,
-+		 (irq_sts & BIT(tcs_id)) ? "DONE" : "WAITING");
-+
-+	*aoss_irq_sts |= !!(irq_sts & BIT(tcs_id));
-+
-+print_tcs_data:
-+	/* All TCSes on a given RSC have the same number of commands per TCS. */
-+	for_each_set_bit(i, &cmds_enabled, drv->tcs[0].ncpt) {
-+		addr = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, i);
-+		data = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, i);
-+		msgid = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, i);
-+		sts = read_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_STATUS], tcs_id, i);
-+		if (cmd_db_read_name(addr, rname, sizeof(rname)))
-+			strscpy(rname, "unknown", sizeof(rname));
-+		dev_warn(drv->dev,
-+			 "\tCMD=%d [addr=0x%x(%s/%s) data=0x%x %s sts=%s%s%s]\n",
-+			 i, addr, cmd_db_hw_type_str(addr), rname, data,
-+			 (msgid & CMD_MSGID_RESP_REQ) ? "resp-required" :
-+							 "fire-n-forget",
-+			 (sts & CMD_STATUS_TRIGGERED) ? "triggered" : "-",
-+			 (sts & CMD_STATUS_ISSUED) ? "+sent-to-aoss" : "",
-+			 (sts & CMD_STATUS_COMPL) ? "+resp-received" : "");
-+	}
-+}
-+
-+/**
-+ * rpmh_rsc_debug() - Dump debug information on a transfer timeout.
-+ * @drv:   The RSC controller.
-+ * @compl: The completion object that timed out.
-+ *
-+ * Dumps TCS state for all in-use TCSes and reports which accelerators
-+ * did not respond, to aid in diagnosing RPMH timeout failures.
-+ */
-+void rpmh_rsc_debug(struct rsc_drv *drv, struct completion *compl)
-+{
-+	struct irq_data *rsc_irq_data = irq_get_irq_data(drv->irq);
-+	bool gic_irq_sts, aoss_irq_sts = false;
-+	int i, ret, busy = 0;
-+
-+	dev_err(drv->dev, "Timeout on RSC %s\n", drv->name);
-+
-+	for (i = 0; i < drv->num_tcs; i++) {
-+		if (!test_bit(i, drv->tcs_in_use))
-+			continue;
-+		busy++;
-+		print_tcs_info(drv, i, &aoss_irq_sts);
-+	}
-+
-+	if (!rsc_irq_data) {
-+		dev_err(drv->dev, "No IRQ data for RSC:%s\n", drv->name);
-+		return;
-+	}
-+
-+	ret = irq_get_irqchip_state(drv->irq, IRQCHIP_STATE_PENDING,
-+				    &gic_irq_sts);
-+	dev_warn(drv->dev, "HW IRQ %lu is %s at GIC\n", rsc_irq_data->hwirq,
-+		 ret ? "UNKNOWN" : (gic_irq_sts ? "PENDING" : "NOT PENDING"));
-+	dev_warn(drv->dev, "Completion is %s\n",
-+		 completion_done(compl) ? "done" : "not done");
-+
-+	if (ret)
-+		dev_err(drv->dev,
-+			"Failed to read IRQ pending state (%d); cannot determine timeout cause\n",
-+			ret);
-+	else if ((busy && !gic_irq_sts) || !aoss_irq_sts)
-+		dev_err(drv->dev,
-+			"Accelerator(s) at AOSS did not respond\n");
-+	else if (gic_irq_sts)
-+		dev_err(drv->dev,
-+			"IRQ pending at GIC but not handled within timeout\n");
-+}
-+
- /**
-  * find_slots() - Find a place to write the given message.
-  * @tcs:    The tcs group to search.
-@@ -1114,6 +1212,8 @@ static int rpmh_rsc_probe(struct platform_device *pdev)
- 	if (ret)
- 		return ret;
- 
-+	drv->irq = irq;
-+
- 	/*
- 	 * CPU PM/genpd notification are not required for controllers that support
- 	 * 'HW solver' mode where they can be in autonomous mode executing low
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index 360242a315e3..1f10b85514f1 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -224,7 +224,7 @@ static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
- }
- 
- /**
-- * rpmh_read: Read a resource value
-+ * rpmh_read() - Read a resource value
-  *
-  * @dev: The device making the request
-  * @cmd: The payload having address of resource to read
-@@ -240,6 +240,7 @@ int rpmh_read(const struct device *dev, struct tcs_cmd *cmd)
- {
- 	DECLARE_COMPLETION_ONSTACK(compl);
- 	DEFINE_RPMH_MSG_ONSTACK(dev, RPMH_ACTIVE_ONLY_STATE, &compl, rpm_msg);
-+	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
- 	int ret;
- 
- 	ret = __fill_rpmh_msg(&rpm_msg, RPMH_ACTIVE_ONLY_STATE, cmd, 1, true);
-@@ -251,6 +252,10 @@ int rpmh_read(const struct device *dev, struct tcs_cmd *cmd)
- 		return ret;
- 
- 	ret = wait_for_completion_timeout(&compl, RPMH_TIMEOUT_MS);
-+	if (!ret) {
-+		rpmh_rsc_debug(ctrlr_to_drv(ctrlr), &compl);
-+		WARN_ON(1);
-+	}
- 	cmd[0].data = rpm_msg.cmd[0].data;
- 
- 	return (ret > 0) ? 0 : -ETIMEDOUT;
-@@ -308,6 +313,7 @@ int rpmh_write(const struct device *dev, enum rpmh_state state,
- {
- 	DECLARE_COMPLETION_ONSTACK(compl);
- 	DEFINE_RPMH_MSG_ONSTACK(dev, state, &compl, rpm_msg);
-+	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
- 	int ret;
- 
- 	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n, false);
-@@ -319,7 +325,10 @@ int rpmh_write(const struct device *dev, enum rpmh_state state,
- 		return ret;
- 
- 	ret = wait_for_completion_timeout(&compl, RPMH_TIMEOUT_MS);
--	WARN_ON(!ret);
-+	if (!ret) {
-+		rpmh_rsc_debug(ctrlr_to_drv(ctrlr), &compl);
-+		WARN_ON(1);
-+	}
- 	return (ret > 0) ? 0 : -ETIMEDOUT;
- }
- EXPORT_SYMBOL_GPL(rpmh_write);
-@@ -438,6 +447,7 @@ int rpmh_write_batch(const struct device *dev, enum rpmh_state state,
- 			 * the completion that we're going to free once
- 			 * we've returned from this function.
- 			 */
-+			rpmh_rsc_debug(ctrlr_to_drv(ctrlr), &compls[i]);
- 			WARN_ON(1);
- 			ret = -ETIMEDOUT;
- 			goto exit;
-
--- 
-2.43.0
+> Cc: Danilo Krummrich <dakr@kernel.org>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Dmitry Baryshkov <lumag@kernel.org>
+> Cc: Jessica Zhang <jesszhan0024@gmail.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Liviu Dudau <liviu.dudau@arm.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> Cc: Marijn Suijten <marijn.suijten@somainline.org>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> Cc: Sean Paul <sean@poorly.run>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
+> Cc: Simona Vetter <simona@ffwll.ch>
+> Cc: Steven Price <steven.price@arm.com>
+> Cc: Thomas Hellstr=C3=B6m <thomas.hellstrom@linux.intel.com>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
+> Assisted-by: LLM
+> Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
+> ---
+> v3:
+>  - Follow the drm_gpuvm_exec_pass_ function renames (Danilo)
+> ---
+>  drivers/gpu/drm/panthor/panthor_mmu.c | 55 ++++++++++++++++++++++++++-
+>  1 file changed, 53 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/pant=
+hor/panthor_mmu.c
+> index d75d575473da..d4b968ab094e 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
+> @@ -3258,6 +3258,26 @@ int panthor_vm_unmap_range(struct panthor_vm *vm, =
+u64 va, u64 size)
+>   * need to reserve a slot on all BOs mapped to a VM and update this slot=
+ with
+>   * the job fence after its submission.
+>   *
+> + * When something is evicted the locks are taken in two passes; when not=
+hing
+> + * is, a single pass is used, as before. The early pass only takes the e=
+xternal
+> + * objects which actually need validating, i.e. the evicted ones, and sw=
+aps
+> + * them back in. Private objects are covered by the VM resv, which is he=
+ld
+> + * from the start, so they are validated here too. The late pass then ta=
+kes
+> + * the external objects the early pass left out, which were resident and=
+ so
+> + * normally need no swapping in; it still validates, since one of them m=
+ay
+> + * have been evicted in the meantime.
+> + *
+> + * The point is that panthor_vm_bo_validate() swaps pages back in, which=
+ is
+> + * slow, and an external object is one which can be shared with another
+> + * process. Doing that while holding the resv of a resident shared BO wo=
+uld
+> + * stall whoever else needs it, for no benefit, since a resident object =
+is
+> + * ready to use as it is.
+> + *
+> + * Both passes run in the same drm_exec transaction: nothing is unlocked=
+ in
+> + * between and the late pass only ever adds locks. The passes take disjo=
+int
+> + * sets of objects, so reserving @slot_count in each still reserves it
+> + * exactly once per object.
+> + *
+>   * Return: 0 on success, a negative error code otherwise.
+>   */
+>  int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct pa=
+nthor_vm *vm,
+> @@ -3270,11 +3290,42 @@ int panthor_vm_prepare_mapped_bos_resvs(struct dr=
+m_exec *exec, struct panthor_vm
+>  	if (ret)
+>  		return ret;
+> =20
+> -	ret =3D drm_gpuvm_prepare_objects(&vm->base, exec, slot_count);
+> +	/*
+> +	 * With nothing evicted there is no validation to keep the resident
+> +	 * objects unlocked for, so do not pay for the second walk.
+> +	 */
+> +	if (!drm_gpuvm_exec_pass_needs_split(&vm->base)) {
+> +		ret =3D drm_gpuvm_prepare_objects(&vm->base, exec, slot_count);
+> +		if (ret)
+> +			return ret;
+> +
+> +		return drm_gpuvm_validate(&vm->base, exec);
+> +	}
+> +
+> +	ret =3D drm_gpuvm_exec_pass_prepare_objects(&vm->base, exec,
+> +						  slot_count,
+> +						  DRM_GPUVM_EXEC_PASS_EARLY);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D drm_gpuvm_exec_pass_validate(&vm->base, exec,
+> +					   DRM_GPUVM_EXEC_PASS_EARLY);
+>  	if (ret)
+>  		return ret;
+> =20
+> -	return drm_gpuvm_validate(&vm->base, exec);
+> +	ret =3D drm_gpuvm_exec_pass_prepare_objects(&vm->base, exec,
+> +						  slot_count,
+> +						  DRM_GPUVM_EXEC_PASS_LATE);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/*
+> +	 * Objects the early pass skipped were resident then, but another
+> +	 * process may have evicted one since. Now that everything is locked,
+> +	 * pick up whatever is left.
+> +	 */
+> +	return drm_gpuvm_exec_pass_validate(&vm->base, exec,
+> +					    DRM_GPUVM_EXEC_PASS_LATE);
+>  }
+> =20
+>  unsigned long
 
