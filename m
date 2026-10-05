@@ -1,330 +1,131 @@
-Received: from smtp-outgoing-1801.laposte.net (smtp-outgoing-1801.laposte.net [160.92.124.102])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f34.google.com (mail-ed2-f34.google.com [74.125.228.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A968B4BE443
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 16:19:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF39C4908C4
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 16:43:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791217150; cv=none; b=VcNFMXQe64QuKZGQAPV45lBxcNfVB7pEXWn1h3W8hhtBZ0qo5fhPD8c02YsoU740iWmHtHcd8lqsUw76/N5OQ2wSv8iqrSegD/Nfxv+OiyTiDM3GVshQZ0Zqg13GcwiJSju1n70XMn7w9NaIhLimthZvm9fvw0Rlkc52bMn/ipM=
+	t=1791218591; cv=none; b=BxBAfrw+nFX4UYvwsQPue1zfe5dGemHOfQmszOXUkq6AegDmROeJ0ynHgtxEnXMQF9d8zlIOCNWYuVcQVGGqMDFBmkCglBu9+d02EfKoSMHOBM1vMJORenAE8rE4eF8HTPFNUCsJA+O7h+3mOBbWHjPzxxA6uUai55sznL/x0ew=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791217150; c=relaxed/simple;
-	bh=v6DPDNRrDaVyxb0qN7svQjoUCTm07TUbnxtS/LM6MVg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qjNuikDWO23Ar88dwLZCaOt3ussLsIkyUi0r+u7ZPnECBoujiqHN47NLFIpmu/tOdVztHe3DWV5Qq0vAaO199OAnOs0w5RpdbGWXDPmQiWnlEOXebiPin+WU6+SBsuzPG79cp1FC4u4TEIspG1A/rnKO08uSzFPY6M0Rpf+hM5w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=sax4tHbz; arc=none smtp.client-ip=160.92.124.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=laposte.net
+	s=arc-20240116; t=1791218591; c=relaxed/simple;
+	bh=InZ5RYagRV1LLDs2R4y2SbFxXZgYthEw5PQqVjO3KWM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qLJ1HwzI0GyW5or93pAqeiMpZSUm3Cv6S4U91UTPotztp9x0ZIWcsS69fmpEinc3kle7TfSRQyEE7ksoZr2D0kd+Y+Qbf40AUBbvLk/lnPqhys63YMw34RmaWKUuT5m+8IZzAE6iTBY6D4QwM8fzNp/b1xGkmyJMzQisTuEzAuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ggGUmTPT; arc=none smtp.client-ip=74.125.228.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="sax4tHbz"
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz4M14fDqznTV1","contextId":
- "2fe663a4-245c-43dc-8998-0ecf64d7475b"}
-Received: from outgoing-mail.laposte.net (localhost.localdomain [127.0.0.1])
-	by mlpnf0113.laposte.net (SMTP Server) with ESMTP id 4hz4M14fDqznTV1;
-	Mon,  5 Oct 2026 18:18:37 +0200 (CEST)
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz4Lz1wxMznTTg","contextId":
- "e075e3b8-9eb9-402a-8009-8a753cf064c2"}
-X-lpn-mailing: LEGIT
-X-lpn-spamrating: 36
-X-lpn-spamlevel: not-spam
-Received: from PAR-95296130.bcg.com (unknown [147.161.232.172])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mlpnf0113.laposte.net (SMTP Server) with ESMTPSA id 4hz4Lz1wxMznTTg;
-	Mon,  5 Oct 2026 18:18:35 +0200 (CEST)
-From: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
-To: dri-devel@lists.freedesktop.org
-Cc: Andrzej Hajda <andrzej.hajda@intel.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Robert Foss <rfoss@kernel.org>,
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jonas Karlman <jonas@kwiboo.se>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Sumit Garg <sumit.garg@oss.qualcomm.com>,
-	Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Saim Shujah <saimzst@gmail.com>,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ggGUmTPT"
+Received: by mail-ed2-f34.google.com with SMTP id 4fb4d7f45d1cf-6aaf8415866so2802249a12.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 09:43:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791218588; x=1791823388; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/u1zvTg+FDBSornCk/zN7IM9H8d2POoh7CUYlVwxFqk=;
+        b=ggGUmTPTw2gp6/Ik0mK8kBkvHn9f4N5cz7fEX2YM80lmSCkoN2kJvloRuSZi8RXSNY
+         pFvvsMu4b5ThNtX3NV8gFbqKshRxpRCCXN1XPZjlhhU9la7PxLeordYxU+V8Vt72C4Wl
+         kYi4ZEPBn34UFe0631IWzHiLTrp4oCJGugXTecdmB5k9iBk3Yh44yL+OpvpWoWgRQfTl
+         e/97wcVG0kH10eEzA+Cm/AQCaVU6+LSLpeSnmJFq9+2g8lBrPZkSN2jdUOvmKII0WtZt
+         PaZTjusW9RNKoxeiCluYOv1LhoM9gp83K9RGR8wYFRUDWLJC9o0ut1XLJORZKSHtFk6r
+         fuMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791218588; x=1791823388;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/u1zvTg+FDBSornCk/zN7IM9H8d2POoh7CUYlVwxFqk=;
+        b=IPKiTpcTAYusroxnEFVWt4iSFsBTrvgCSupcu5metNJiuWf+tIMWNohSW4AF6p3WsY
+         WCHBDrHAE3MupwhhFk2JpgnkjbOxb/4XiAhq26UhN7RRZs6bgmdk8pnnHyQKPmNLhhX6
+         x+OQCuxI68b4KJzXbQrEsairmILYgtVw8h6Ut7UTiKqry6Wcws5lcIN6HWqLwmYC8mRm
+         mjgRbw9bshxU0XVXVifZX+iwlM43/Ijg902M8CYNOzUYtGu2ixhWJR4rLwLMwt5gqDGz
+         7L+lIzWpHBynRiXH31/UM13dkX5jEQqr5+asnVxuZYJkzSMqxjpwLPLNypHX+wotS45F
+         bi3Q==
+X-Gm-Message-State: AFq9FYLWcPhc4w+UkNMrdfQX59ShkbmGA79ycsp5bhC3mipJY/cqkAHC
+	R7en3SgGg1kJy33nqOE4PwGhqrT4mRta1VJPHf88Aqpn4p6cj0pKJPVU
+X-Gm-Gg: AYBFou11gHx0OY5Bly8U+vY7bLKjsKUFspPzE1fqLnAqeCXYrtCOy7NRCf2rHA3dXxM
+	o/07mjxW1B83GPGWLDvu7F4BBq99aE5SWoAkhgiBNN1lGuKADCVdnJwW8FWMHn4rDPIrGJJZXcy
+	BHDVXUsIcAFI9SFFQWOnOwjbnLTCSSpSNgculT4AJiTIakbDOL+Z86lfWp+LG/Suim5iYCUeZDA
+	6YnDeeXaGlNjtz5y4CQlbnPmDXGrn/6krIcsH9Vxc+PpaGaE91XV/iCOgdgGAW7BCJHOZ0OE6KR
+	I6vcy+hg7YqnXdVliUswPmXqKyNZxPg9btKIw3rPGuIufdRHycKsUNDTp9jvzszvLECMTof1MIH
+	3UpznxM4MOUpcBJo9gnqshGtssos9ZJe6QnpsXWtf0YFJDR4oTjuqBt9xmTXFtODqlDSCNJDlvj
+	cNUFOJrJ0HFliZZs1keFspwRLHO26JY5rqc/E/p9cGQWAwm6nubbqRNz9ZDOiG7zN1R20g8W/uM
+	CSFcV0lvUoGKjvbF0IJnQ2hGAvCPGWmuxO5/g==
+X-Received: by 2002:a05:6402:46c1:b0:6aa:1c24:8f7d with SMTP id 4fb4d7f45d1cf-6af9e301528mr9516864a12.21.1791218587878;
+        Mon, 05 Oct 2026 09:43:07 -0700 (PDT)
+Received: from workstation.home (161-53-210-87.ftth.glasoperator.nl. [87.210.53.161])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6afb021af56sm3485851a12.31.2026.10.05.09.43.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2026 09:43:06 -0700 (PDT)
+From: Stanislav Zaikin <zstaseg@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Jean-Francois Bobier <jean-francois.bobier@laposte.net>
-Subject: [PATCH v2] drm/display: let a bridge configure sink audio from hw_params
-Date: Mon,  5 Oct 2026 18:18:24 +0200
-Message-ID: <20261005161824.36445-1-jean-francois.bobier@laposte.net>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261005131545.23219-1-jean-francois.bobier@laposte.net>
-References: <20261005131545.23219-1-jean-francois.bobier@laposte.net>
+	linux-pm@vger.kernel.org,
+	Stanislav Zaikin <zstaseg@gmail.com>
+Subject: [PATCH v5 0/3] Add Xiaomi 12 Lite 5G (taoyao) battery support
+Date: Mon,  5 Oct 2026 18:43:00 +0200
+Message-ID: <20261005164303.1208127-1-zstaseg@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791217144; bh=v6DPDNRrDaVyxb0qN7svQjoUCTm07TUbnxtS/LM6MVg=; h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding; b=sax4tHbzSwQK/2XKFQviYJ4ybpXg3FXssmyOpCZDu//LETxhSX0S9N73/8wZ3Rf0t4HqH6mdZREJIwyONfaYL225AfinxPpO6OQAlUcfrVBwbJ4M1/mHSdAOPRLk/kX06E++ywamYcgsmco6L+NEbSZrosZGvOcGWTj7jdoR/+Fw7zaUR/tZFaNSeADj3iVxtnl3qE4j7b6hlZkZjc0DDnKLD/8BhFKCGWd6SK1SEV7IJhiUbMdxEZjh6eSSqRb0TSMYqNGwEACer6z7t+oUp43VUNG8ZGIwEkNo++W0hkrtnpPJ2neFeEMK8BexzI2QUHqxpUIJioGuM3Plowxjgg==;
+Content-Transfer-Encoding: 8bit
 
-drm_connector_hdmi_audio_ops implements .prepare and not .hw_params, so
-every bridge using the HDMI audio helper configures its sink's audio path
-from the codec DAI's prepare callback.
+Xiaomi 12 Lite 5G (taoyao) has an additional property with ID 12 that
+breaks the parsing in qcom_battmgr. Fix that by introducing separate
+maps for lookups properties in both directions.
 
-That is too late when the CPU side of the DAI link cannot start until the
-sink's audio clock is already running. ASoC's snd_soc_pcm_dai_prepare()
-walks CPU DAIs before codec DAIs and returns on the first error, so such
-a CPU DAI fails and aborts the loop before the bridge's prepare is
-reached -- the clock it was waiting for is enabled by a callback that the
-failure prevents from running.
+The other approach that I tried is manual shifting properties:
 
-Qualcomm's LPASS is one such CPU side. On an sm8250 board with the
-DisplayPort controller bound to the DISPLAY_PORT_RX AFE port, starting
-playback gives:
++	if (battmgr->variant == QCOM_BATTMGR_TAOYAO && prop > BATT_CHG_CTRL_LIM_MAX)
++		prop++;
+...
++		if (battmgr->variant == QCOM_BATTMGR_TAOYAO && property > BATT_CHG_CTRL_LIM_MAX + 1)
++			property--;
 
-  qcom-q6afe: AFE enable for port 0x6020 failed -110
-  q6afe-dai: ASoC error (-110): at snd_soc_dai_prepare() on DISPLAY_PORT_=
-RX_0
+But I found that more obscure.
 
-and an ftrace of the attempt shows msm_dp_audio_prepare() is never
-called at all -- only msm_dp_audio_shutdown(), from the teardown path.
+Will be happy to switch if the maintainers prefer this one.
 
-Add a .hw_params to the helper that runs the same configuration, and a
-drm_bridge flag to select it. hw_params runs for every DAI in the link
-before any of them is prepared, so the clock is up by the time the CPU
-DAI starts its port. Both callbacks receive identical parameters, so the
-configuration itself is unchanged.
+Changed in v5:
+- Fixed the commit message (patch #1)
 
-The flag defaults to off: a bridge that does not set it keeps being
-configured from prepare exactly as before. For one that does, prepare
-skips calling the sink's configuration again only for the specific call
-hw_params already did it for -- tracked per-connector, consumed on use --
-because ASoC reaches .prepare with no .hw_params ahead of it on XRUN
-recovery and on resume from suspend, and the sink still needs configuring
-then. Skipping unconditionally would have left it silently unconfigured
-after either.
+Changes in v4:
+- Added Konrad's r-b (patch #2)
+- Dropped RFC tag
 
-Note that providing .hw_params at all means hdmi_codec_hw_params() no
-longer returns early for these connectors, so it now runs
-hdmi_codec_fill_codec_params() and the IEC958 channel status fill before
-the (inert, when nothing needs doing) callback. Both are computed into an
-on-stack hdmi_codec_params that is then discarded, and the one shared
-value written, daifmt->bit_fmt, is set by hdmi_codec_prepare() to the
-same value immediately afterwards.
+Changes in v3:
+- Fix QCOM_BATTMGR_TAOYAO enum ordering (patch #2)
+- Order in qcom_battmgr_of_variants[] is already right (no change)
+- Revert the qcom,sm7325-pmic-glink SoC fallback (patch #1 and #3)
+- Rephrased commit message (patch #3)
+- Design question from v1/v2 still open: lookup tables vs. inline shift
 
-One more side effect worth disclosing: hdmi_codec_fill_codec_params()
-also writes hcp->chmap_idx, which is not on-stack -- it persists on the
-hdmi-codec device and is reused by the next call to
-hdmi_codec_get_ch_alloc_table_idx(). hdmi_codec_prepare() recomputes it
-immediately afterwards from the same channel count, so the value itself
-does not go stale. But hdmi_codec_hw_params() now reaching this code at
-all means that a channel count the sink's ELD does not advertise is
-reported from hw_params() instead of prepare(), for every bridge sharing
-drm_connector_hdmi_audio_ops, not only the ones that set
-hdmi_audio_prepare_early. That changes when a bad channel count is
-reported, not whether it is, but it is a change to seven bridges this
-patch has no other reason to touch, and worth a maintainer's opinion.
-
-Signed-off-by: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
----
 Changes in v2:
-- v1 skipped prepare() unconditionally whenever prepare_early was set.
-  Checked against ALSA core (sound/core/pcm_native.c): .prepare is
-  reachable from SNDRV_PCM_STATE_XRUN and SNDRV_PCM_STATE_SUSPENDED with
-  no .hw_params call in between -- snd_pcm_pre_prepare() explicitly
-  allows both, and neither XRUN recovery nor resume renegotiates hw
-  params. v1's unconditional skip meant the sink's audio path was never
-  reconfigured after either, which a full suspend in particular needs
-  since the DP controller's power domain drops and the configuration
-  .prepare would have applied is gone. Fixed by tracking, per connector,
-  whether hw_params already did the work for the specific prepare call
-  immediately ahead of it, consumed on use -- any prepare that isn't
-  immediately preceded by a matching hw_params now runs the real
-  configuration, same as every bridge not using this flag at all.
-- Caught by this list's automated review on v1, not by hand.
+- Keep the qcom,sm7325-pmic-glink SoC fallback in the compatible chain
+  of the taoyao pmic-glink node (review feedback, patch #1 and #3)
 
- .../gpu/drm/display/drm_bridge_connector.c    |  3 ++
- .../gpu/drm/display/drm_hdmi_audio_helper.c   | 39 +++++++++++++++++++
- drivers/gpu/drm/msm/dp/dp_drm.c               |  8 ++++
- include/drm/drm_bridge.h                      | 17 ++++++++
- include/drm/drm_connector.h                   | 20 ++++++++++
- 5 files changed, 87 insertions(+)
+Stanislav Zaikin (3):
+  dt-bindings: soc: qcom: qcom,pmic-glink: Document Xiaomi taoyao
+    compatible
+  power: supply: qcom_battmgr: add Xiaomi taoyao support
+  arm64: dts: qcom: sm7325-xiaomi-taoyao: switch to device-specific
+    pmic-glink compatible
 
-diff --git a/drivers/gpu/drm/display/drm_bridge_connector.c b/drivers/gpu=
-/drm/display/drm_bridge_connector.c
-index 81f3e26f6..731ba4b2a 100644
---- a/drivers/gpu/drm/display/drm_bridge_connector.c
-+++ b/drivers/gpu/drm/display/drm_bridge_connector.c
-@@ -1107,6 +1107,9 @@ struct drm_connector *drm_bridge_connector_init(str=
-uct drm_device *drm,
- 						    bridge->hdmi_audio_dai_port);
- 		if (ret)
- 			return ERR_PTR(ret);
-+
-+		connector->hdmi_audio.prepare_early =3D
-+			bridge->hdmi_audio_prepare_early;
- 	}
-=20
- 	if (bridge_connector->bridge_hdmi_cec &&
-diff --git a/drivers/gpu/drm/display/drm_hdmi_audio_helper.c b/drivers/gp=
-u/drm/display/drm_hdmi_audio_helper.c
-index 7d78b02c1..d4281cee7 100644
---- a/drivers/gpu/drm/display/drm_hdmi_audio_helper.c
-+++ b/drivers/gpu/drm/display/drm_hdmi_audio_helper.c
-@@ -34,9 +34,47 @@ static int drm_connector_hdmi_audio_prepare(struct dev=
-ice *dev, void *data,
- 	const struct drm_connector_hdmi_audio_funcs *funcs =3D
- 		connector->hdmi_audio.funcs;
-=20
-+	/*
-+	 * Only skip the specific prepare that hw_params already did the work
-+	 * for. ASoC also reaches .prepare with no .hw_params call ahead of it
-+	 * on XRUN recovery and on resume from suspend; prepare_done_in_hw_para=
-ms
-+	 * is clear in both cases, so the call below still runs and configures
-+	 * the sink here instead of leaving it unconfigured.
-+	 */
-+	if (connector->hdmi_audio.prepare_early &&
-+	    connector->hdmi_audio.prepare_done_in_hw_params) {
-+		connector->hdmi_audio.prepare_done_in_hw_params =3D false;
-+		return 0;
-+	}
-+
- 	return funcs->prepare(connector, fmt, hparms);
- }
-=20
-+/*
-+ * Only used by connectors that asked for it; everyone else keeps being
-+ * configured from prepare() and this returns without doing anything. Se=
-e
-+ * &drm_bridge.hdmi_audio_prepare_early for why a connector would want i=
-t.
-+ */
-+static int drm_connector_hdmi_audio_hw_params(struct device *dev, void *=
-data,
-+					      struct hdmi_codec_daifmt *fmt,
-+					      struct hdmi_codec_params *hparms)
-+{
-+	struct drm_connector *connector =3D data;
-+	const struct drm_connector_hdmi_audio_funcs *funcs =3D
-+		connector->hdmi_audio.funcs;
-+	int ret;
-+
-+	if (!connector->hdmi_audio.prepare_early)
-+		return 0;
-+
-+	ret =3D funcs->prepare(connector, fmt, hparms);
-+	if (ret)
-+		return ret;
-+
-+	connector->hdmi_audio.prepare_done_in_hw_params =3D true;
-+	return 0;
-+}
-+
- static void drm_connector_hdmi_audio_shutdown(struct device *dev, void *=
-data)
- {
- 	struct drm_connector *connector =3D data;
-@@ -130,6 +168,7 @@ EXPORT_SYMBOL(drm_connector_hdmi_audio_plugged_notify=
-);
-=20
- static const struct hdmi_codec_ops drm_connector_hdmi_audio_ops =3D {
- 	.audio_startup =3D drm_connector_hdmi_audio_startup,
-+	.hw_params =3D drm_connector_hdmi_audio_hw_params,
- 	.prepare =3D drm_connector_hdmi_audio_prepare,
- 	.audio_shutdown =3D drm_connector_hdmi_audio_shutdown,
- 	.mute_stream =3D drm_connector_hdmi_audio_mute_stream,
-diff --git a/drivers/gpu/drm/msm/dp/dp_drm.c b/drivers/gpu/drm/msm/dp/dp_=
-drm.c
-index c1e4147bf..52c90937f 100644
---- a/drivers/gpu/drm/msm/dp/dp_drm.c
-+++ b/drivers/gpu/drm/msm/dp/dp_drm.c
-@@ -327,6 +327,14 @@ int msm_dp_bridge_init(struct msm_dp *msm_dp_display=
-, struct drm_device *dev,
- 		bridge->hdmi_audio_dev =3D &msm_dp_display->pdev->dev;
- 		bridge->hdmi_audio_max_i2s_playback_channels =3D 8;
- 		bridge->hdmi_audio_dai_port =3D -1;
-+		/*
-+		 * The LPASS/ADSP side of the DAI link will not start its AFE
-+		 * port until this controller's audio clock is running, and
-+		 * ASoC prepares CPU DAIs before codec DAIs, so configuring
-+		 * from prepare() is too late -- the CPU DAI times out and
-+		 * aborts the link before we are called at all.
-+		 */
-+		bridge->hdmi_audio_prepare_early =3D 1;
- 	}
-=20
- 	rc =3D devm_drm_bridge_add(dev->dev, bridge);
-diff --git a/include/drm/drm_bridge.h b/include/drm/drm_bridge.h
-index 1981d24a7..d208ba114 100644
---- a/include/drm/drm_bridge.h
-+++ b/include/drm/drm_bridge.h
-@@ -1177,6 +1177,23 @@ struct drm_bridge {
- 	 */
- 	unsigned int hdmi_audio_spdif_playback : 1;
-=20
-+	/**
-+	 * @hdmi_audio_prepare_early: configure the sink's audio path from the
-+	 * ASoC hw_params callback rather than from prepare.
-+	 *
-+	 * Both callbacks receive identical parameters, so for most bridges it
-+	 * makes no difference and the default (prepare) is right. It matters
-+	 * when the CPU side of the DAI link cannot start until the sink's
-+	 * audio clock is already running: ASoC walks CPU DAIs before codec
-+	 * DAIs and stops at the first error, so a CPU DAI that fails waiting
-+	 * for that clock aborts the loop before this bridge's prepare is ever
-+	 * reached. Qualcomm's LPASS/ADSP is one such CPU side.
-+	 *
-+	 * Setting this moves the configuration to hw_params, which runs for
-+	 * every DAI in the link before any of them is prepared.
-+	 */
-+	unsigned int hdmi_audio_prepare_early : 1;
-+
- 	/**
- 	 * @hdmi_audio_dai_port: sound DAI port for either of
- 	 * @DRM_BRIDGE_OP_HDMI_AUDIO and @DRM_BRIDGE_OP_DP_AUDIO, -1 if it is
-diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
-index 2ee7c5932..749eab1f9 100644
---- a/include/drm/drm_connector.h
-+++ b/include/drm/drm_connector.h
-@@ -2184,6 +2184,26 @@ struct drm_connector_hdmi_audio {
- 	 * The port in DT that is used for the Codec DAI.
- 	 */
- 	int dai_port;
-+
-+	/**
-+	 * @prepare_early:
-+	 *
-+	 * Call @funcs->prepare from the ASoC hw_params callback instead of
-+	 * from prepare. See &drm_bridge.hdmi_audio_prepare_early.
-+	 */
-+	bool prepare_early;
-+
-+	/**
-+	 * @prepare_done_in_hw_params:
-+	 *
-+	 * Private state for the @prepare_early helper implementation. Not to
-+	 * be set by drivers. Tracks whether hw_params already ran
-+	 * @funcs->prepare for the prepare call immediately ahead, so that
-+	 * call can be skipped without skipping any other prepare -- ASoC
-+	 * calls .prepare without a preceding .hw_params on XRUN recovery and
-+	 * on resume from suspend, and @funcs->prepare must still run then.
-+	 */
-+	bool prepare_done_in_hw_params;
- };
-=20
- /*
---=20
-2.56.0
+ .../bindings/soc/qcom/qcom,pmic-glink.yaml    |  1 +
+ .../boot/dts/qcom/sm7325-xiaomi-taoyao.dts    |  2 +-
+ drivers/power/supply/qcom_battmgr.c           | 86 ++++++++++++++++++-
+ 3 files changed, 84 insertions(+), 5 deletions(-)
+
+-- 
+2.55.0
 
