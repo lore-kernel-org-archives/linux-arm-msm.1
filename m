@@ -1,35 +1,66 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6750C52F276;
-	Mon,  5 Oct 2026 17:19:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1844B52FE29
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 17:19:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791220752; cv=none; b=qZp7KazZBE6Q16dDazX9hMFjqGAmi8c/4xDNWJ2+etDius9h6/6xyW+RIYfkW4wsle2rLlRsSN1zES6HtAi6ehVqYua6eWMECXIIVU6r4Nife3maiVlvWC33g10C8mupTlJUos6Ju0Ok3lFNcitu5GbZ/nBt9zWAQVtehjDI4pY=
+	t=1791220756; cv=none; b=LFGNUFsEqF1cv5tPNR4by51jcCSibnkFyABRdwjPQ/azeD2V99eZbu2XB2WYWi7naAKS+VUoy/mgdelI0QGo1Niu43nqVkBe9bBthhKSDHNPAz2vEuN9+NSb+gmDgzuR2PZoaNbT7VSqC5bCh4mqwnBXXKGKjOKfA5Kvh/qi81I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791220752; c=relaxed/simple;
-	bh=5e+q4TCXQGoXItJZIg01pjZhKGXCsA1kAZgp8jkqTME=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ZXrbRIlx78HLReE9Wainz8CvZVYE5NAY5h1x33tChYScE/CFfBQ3y/pD0+3D4bA8vgQdawi15G0EN0sVe8tLcDdc8GsQ10HY2bkMWiYGHuJ8FC9DR7hVdaZR+6g0mmi6DsfcpTwnsGJme8gNpc4ogO3dcnfXkdUz5OnW2et0VF4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ax/1dOU4; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791220756; c=relaxed/simple;
+	bh=XMSRAA6Z6xxlL9jvU9waE1kdtHmvEad1lopoNsRdKSY=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=OZ+QMDWsJ3MdwOigxPbuxaaNazONRwuDOf5WAc8eX0ZsNzcF80R45+giMGaxBgPZQeuWDDrkCsCELunw6iKC2k7uJmklnwgMy8xJp7nqqFS6QUqTAHKaD7VihKhySTqIzrHOWJtzgub16yFqOGhqrzOOpPu/uLxVJlOiht3H/mw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YTAdJ9Su; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ax/1dOU4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4796E1F000FF;
-	Mon,  5 Oct 2026 17:19:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791220751;
-	bh=eM2eSoBfK7UQlxslfOLMAUF8tLhozKrVeJnSTAKakz4=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=Ax/1dOU4GKGU82UeWrh1Hmf224urdOHAUckJ7Zln7gDDiJDBjoXbAp0wyvijE8YtD
-	 1XJql7qOh8C6ToXRAnR6bj51cb+GqgzLPAKaiAabvjMLUYfGloEo+TpQ7dauXEfedy
-	 jAlaHDY/07P4M9sJUCvrqGnlCkuUhEqEaCpgTKa3ly/IWHuutG2/+HubsmGengxgna
-	 /s5iRVbRm/C9j6npzhNrVBWycjSu+P7A8Vnn4NSNmylv62sX0uom2M8si8PxdNI4im
-	 aR6MiK1H4Jk4nWKsI3L5QyNJQOKYL5Q/N0KxBM3FarqFoS6UqeAbWggexuPiFU1asx
-	 BJMHmm4P7RWMQ==
-From: bod@kernel.org
-Date: Mon, 05 Oct 2026 19:14:29 +0200
-Subject: [PATCH 59/74] media: Documentation: uapi: Add qcom-camss ISP
- statistics
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YTAdJ9Su"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a1682bff3cso10798045e9.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 10:19:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791220752; x=1791825552; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=KhIVGVi7iDg6wZeRjmVwM4ZVMIecRYFD2p/QE27Jwwc=;
+        b=YTAdJ9SuBIyS16sriJYaRGRvdQA+MSTKXNbPY8UWR3LgL4X2v5cOzSPbOhhSCZs1Zb
+         0nsljNKVu0SADniuFpFcVmKI/P3ISOz/72KanmBx8WW0IfmuD72nFr+hysiEt8KBXAst
+         x77SwhNeBiKQiIaMcNMt+Y6zHU6kd6DZXcwaGzLkGoQy1Cefitk1ol1rxbvclZH7rt42
+         EwbsSMt9HKzpRLprdPpEh2YIzb6Tw20OI7cv7ifr/GTgRHKc3g1ZCKIeSXhMAt8Xah8l
+         EhWBzLOb78jxUjdXgq6BDh7TKHL7cuqHYQIBppmluvBIaAh1wY5V7sVP65Brl6gZUH33
+         wuyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791220752; x=1791825552;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=KhIVGVi7iDg6wZeRjmVwM4ZVMIecRYFD2p/QE27Jwwc=;
+        b=IDpeXGOFFZWPbMlhC0ZFEu2s0phsEpSVLYV2IXl/Mne0Hny4GZK635IK8Rk3f33b0I
+         f5ZrrwYetCsTHvGkDGYDtcaqeXq1b61JVGrAH2+VXzX/OYSLbkwDoXQEnyZ9fWEe0pf7
+         G+pc9/THsntmdyqHrsoKBBek7KRsoaKzaTCUzEqWOIPt80KNZexqzTKowoZKGMGxuNF9
+         SG4HQZcWoxMaNgYtAWjVO5ONjBdgNGPxHD0AVosfID1cgnP5cOpxUZQt0KsmdvbU1Vkk
+         TgDOWTmGsIo7h7OXQRr2mpkEFLhK2DXwE+JJzxW54JnM9pJfqH/5vCf4CXOuJfzbPlTR
+         e70w==
+X-Forwarded-Encrypted: i=1; AKwUvBwZSnA1d0Ce9n0UbZr4eQg3N8Fxyru053ysLwhAe0h8EqWg0hrnCbhyfELBXS9x6l8Fuk2KbAU8nMXOakRj@vger.kernel.org
+X-Gm-Message-State: AFuF++m1rj6H1WaOoRZhC1Ldbnv6JCx+28ZTI0zev6EEa498CbOwAx2e
+	tRiVZvljbbmnuEBZliFoIQdSJ8ipeEwkJptgFdTLIcihNPCTje1zFfJd
+X-Gm-Gg: AYBFou31DZD0LI1C2gExcIJWwTqd8cfi3ksObVJGtJeODsRLKrztDLqro8XXHfaUlaU
+	tAgGxlClMKz0Zl+xFGGiLylJE/KgTvoCesBT86hrL3I/vYJ5GxRPO2eZxS4zME0rsBlDBYs/wng
+	OmCuURV7oZbB0VzlsGwlXuLD3Hj9D0FQhQYvWDFrjRFO7CIUlh3rTCgeSUpCvfxPuuYJzJeaIcN
+	4/PGdESGlQuV2hUmKeDwCx9cPSvRBHIAu07IRowZp+3WUwe5VzbCb+1ypkTD8X6bvCDsz2T+fYk
+	bYecnl6wtK1eQKpACqDm36nrLSTh6IjKerD827T48uLPceYqUkJzBiPpNKxoaukBNIb/BM6elJC
+	jD9z+vzudiFJ+4xlVR/DjOAev98XyqnmUTzvoddACz6WY8Lm1NGDxKe1uOz3Q3cnEiPV9atjzoq
+	R7oL1+lsX1/cFGwGp4vGrbX4cJpdUVq7M02N5910hKqe1NnVjtFW1xX+8M0odTqdcsnvbpsjZah
+	HSO+uFj8WZtOYmsuvLIjY/5AKw=
+X-Received: by 2002:a05:600c:4f06:b0:49e:7a00:b9a5 with SMTP id 5b1f17b1804b1-4a1680b469dmr168127675e9.4.1791220751970;
+        Mon, 05 Oct 2026 10:19:11 -0700 (PDT)
+Received: from [192.168.0.253] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4a178a17ac9sm5787465e9.1.2026.10.05.10.19.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2026 10:19:11 -0700 (PDT)
+From: Gabor Juhos <j4g8y7@gmail.com>
+Date: Mon, 05 Oct 2026 19:18:50 +0200
+Subject: [PATCH] spi: spi-qpic-snand: skip BBM copy on regular raw reads
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -38,113 +69,84 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-59-ed985aefd611@kernel.org>
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
-In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
- Daniel Scally <dan.scally@ideasonboard.com>, Keke Li <keke.li@amlogic.com>, 
- Richard Acayan <mailingradian@gmail.com>, 
- Hans Verkuil <hverkuil@kernel.org>, 
- Gjorgji Rosikopulos <quic_grosikop@quicinc.com>, 
- Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>, 
- Robert Foss <rfoss@kernel.org>, Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2863; i=bod@kernel.org;
- h=from:subject:message-id; bh=g1c9IKan9MOjGAcLlQSt2+4Sn8dFibLAGkmvn6iMdNU=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqw9srKc1qM5VVsH6RzQk7aIUmBdQrVEO3U3/HD
- voHQzRh8qeJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCasPbKwAKCRAicTuzoY3I
- OjWpEACintDPXqIEcnMv/mKxNDCzLiJkb0eJWsGHWSoqmIZ2JROU3Vbr0lo+han4CwCe92c2l/W
- 2Vi50hczZHyfhOdVczR7qRrR2h/5GdFoyyvCZwGAJCDjc1TmdTprLrI/rNfL+kIkWNUrOGBK9xb
- hvFMPhfFrXluFIVh1Rm3HCZFMNH7gOY+yV8os1HkCbV7F8Gs5uWavVArLoH5A8ELNk8ebfmZJ2/
- gE4QQKMKfCDl4qjxBQe/Ttt97izzHmYT1LV7DOR6YdouLRO8iytZ8ishvHwrWRyifXBPVp7nGAn
- NkfRsFOLoZlt4sursQPHv0T0MRcGMUJDrkHdJQVxoxY7Szobp3XqZnI8M1YNPv9YIoi+tG5GxBD
- eMcZghD+Vw3jbtkOtVqGokef2UmrmHWJR7DGo5QyxAFxYsMgW9ml+GP2HndgaBTKlqyqwXlUUiQ
- nH5hbuVi9dPRZi/y2PEcrC+bzYaDT/6MO0kWKvdtAqICnsgAC1PjQ0ZBkWYBLrOwChhB9ijLlf5
- 6YH7PNvxlDB8bZTy325nq/AeyR4KOM2gXMf7bLMkOlz5TzJDa+4HyAkw9d9D5sAXmgUY/Z97JpE
- Xxs7DafPzAxkq5WZFWtaPZo97nWGT0rNo1aqdGLWIBQ46qRs5HP4Weidp8BcJZ/uTW95qE7wWZr
- +WmB1Ktlj7xGXFA==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Message-Id: <20261005-qpic-snand-skip-bbm-copy-v1-1-04f6aeda4044@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBtQoaKuEi1SpxoiMweiiO6et
+ HyL/x8QSkwCXfFAopOF95ChywLcMoaZkH02GGVqrVSFR2SHEsbgUVaOaO2Gbo83TsZXThndUkO
+ Q85ho4utf98P7frm+BPhqAAAA
+X-Change-ID: 20261005-qpic-snand-skip-bbm-copy-f2d5c0219e7e
+To: Mark Brown <broonie@kernel.org>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sricharan Ramabadhran <quic_srichara@quicinc.com>, 
+ Md Sadre Alam <md.alam@oss.qualcomm.com>
+Cc: linux-spi@vger.kernel.org, linux-mtd@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Gabor Juhos <j4g8y7@gmail.com>
+X-Mailer: b4 0.14.3
 
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Trying to read the raw flash contents with nanddump, the second byte
+of the OOB area contains 0xff instead of the real data in the flash.
+This happens because the qcom_spi_read_last_cw() function unconditionally
+copies the bad block marker into the second byte of the output buffer.
 
-Document V4L2_META_FMT_QCOM_ISP_STATS: the v4l2-isp extensible statistics
-container, the block types, and the AEC Bayer histogram produced by the
-SM8650 IFE pixel path, with an example of walking the blocks.
+Add a new flag to the controller's private data structure, and set it
+when only the first two bytes of the OOB area being read in raw mode.
+Also change the bad block copying code to run only when the flag is set.
 
-Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+This ensures that the SPI NAND framework still can read the BBM bytes,
+but on regular raw read, the output does not contain the duplicated
+marker byte.
+
+Fixes: 7304d1909080 ("spi: spi-qpic: add driver for QCOM SPI NAND flash Interface")
+Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
 ---
- .../userspace-api/media/v4l/metafmt-qcom-isp.rst   | 50 ++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+ drivers/spi/spi-qpic-snand.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-index 2f3654a9ba897..77372b3a32d7d 100644
---- a/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-+++ b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-@@ -141,6 +141,56 @@ and a gamma correction block:
- 	for (unsigned int i = 0; i < CAMSS_GAMMA_LUT_SIZE; i++)
- 		gamma->glut[i] = gamma->blut[i] = gamma->rlut[i] = i;
+diff --git a/drivers/spi/spi-qpic-snand.c b/drivers/spi/spi-qpic-snand.c
+index 001e4bd8bb4b..c90c2001ee8d 100644
+--- a/drivers/spi/spi-qpic-snand.c
++++ b/drivers/spi/spi-qpic-snand.c
+@@ -115,6 +115,7 @@ struct qpic_spi_nand {
+ 	__le32 addr2;
+ 	__le32 cmd;
+ 	u32 num_cw;
++	bool bbm_read;
+ 	bool oob_rw;
+ 	bool page_rw;
+ 	bool raw_rw;
+@@ -457,6 +458,16 @@ static int qcom_spi_ecc_prepare_io_req_pipelined(struct nand_device *nand,
+ 	if (req->mode == MTD_OPS_RAW)
+ 		snandc->qspi->raw_rw = true;
  
-+.. _v4l2-meta-fmt-qcom-isp-stats:
++	/*
++	 * Try to detect when the SPI NAND framework reads the first
++	 * two bytes of the OOB area searching for bad block marker
++	 * bytes.
++	 */
++	snandc->qspi->bbm_read = req->mode == MTD_OPS_RAW &&
++				 req->type == NAND_PAGE_READ &&
++				 req->dataoffs == 0 && req->datalen == 0 &&
++				 req->ooboffs == 0 && req->ooblen == 2;
 +
-+*************************************
-+V4L2_META_FMT_QCOM_ISP_STATS ('QCIS')
-+*************************************
-+
-+Statistics
-+==========
-+
-+The ``V4L2_META_FMT_QCOM_ISP_STATS`` format carries the statistics an ISP
-+engine of the Qualcomm Camera Subsystem (CAMSS) gathers from a frame. It is
-+captured from a metadata capture video node using the
-+:c:type:`v4l2_meta_format` interface.
-+
-+Statistics use the :ref:`v4l2-isp` extensible format. The driver serialises one
-+block per statistics engine into the data member of :c:type:`v4l2_isp_buffer`.
-+Each block embeds :c:type:`v4l2_isp_block_header` as its first member, with the
-+type member set to a value from :c:type:`camss_stats_block_type`. Blocks are
-+placed consecutively, and their combined size is reported in the data_size
-+member of :c:type:`v4l2_isp_buffer`.
-+
-+Which blocks a buffer holds depends on the engine producing it and on the
-+statistics enabled for the stream. Their order is not defined: userspace walks
-+the blocks by the size member of each header and skips types it does not know.
-+
-+The SM8650 IFE pixel path produces the AEC Bayer histogram,
-+:c:type:`camss_stats_bhist`, on its ``msm_vfeN_stats`` metadata capture node.
-+
-+The following example reads the AEC Bayer histogram from a statistics buffer:
-+
-+.. code-block:: c
-+
-+	const struct v4l2_isp_buffer *stats =
-+		(const struct v4l2_isp_buffer *)buffer;
-+	size_t offset = 0;
-+
-+	while (offset < stats->data_size) {
-+		const struct v4l2_isp_block_header *header =
-+			(const struct v4l2_isp_block_header *)&stats->data[offset];
-+
-+		if (header->type == CAMSS_STATS_AEC_BHIST) {
-+			const struct camss_stats_bhist *bhist =
-+				(const struct camss_stats_bhist *)header;
-+
-+			use_histogram(bhist->bins, CAMSS_STATS_BHIST_BINS);
-+		}
-+
-+		offset += header->size;
-+	}
-+
- Qualcomm CAMSS ISP uAPI data types
- ==================================
+ 	return 0;
+ }
+ 
+@@ -666,7 +677,8 @@ static int qcom_spi_read_last_cw(struct qcom_nand_controller *snandc,
+ 	 * This can be removed once single-byte bad block marker support
+ 	 * gets implemented in the SPINAND code.
+ 	 */
+-	snandc->data_buffer[bbpos + 1] = snandc->data_buffer[bbpos];
++	if (snandc->qspi->bbm_read)
++		snandc->data_buffer[bbpos + 1] = snandc->data_buffer[bbpos];
+ 
+ 	memcpy(op->data.buf.in, snandc->data_buffer + bbpos, op->data.nbytes);
  
 
+---
+base-commit: 65766f75dce38103e5cbfa40eefffdc285645084
+change-id: 20261005-qpic-snand-skip-bbm-copy-f2d5c0219e7e
+
+Best regards,
 -- 
-2.55.0
+Gabor Juhos <j4g8y7@gmail.com>
 
