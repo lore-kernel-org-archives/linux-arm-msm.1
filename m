@@ -1,67 +1,66 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11E4037F334
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 08:03:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A96120B80B
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 08:09:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791187408; cv=none; b=SSHkpxgJHZUfTue+eoh/Kwt3c1uETZ486pXg5XmYTPeVjG+wwWPeplDMIcAYcGt5VcarGGTYIny0p7mlYbeHhaiqQwK4aW+xXv0orsQWT7ib+zFe2exXGMyAr8D/j5Zo29bcUetwvXyVPjgEAAJeF3XMUBvrN/ScRQBAcTC3L3w=
+	t=1791187780; cv=none; b=pnJazczrIuSpxyIPcJGo2yXhGZQ0jOq74zs2Ro4l7wulTA/bgqwsigC2Iu2KEJX5fQXkrs0aErop0EBGoU7jBP7/HEMG/IH6I9ek5yWCjOCqZGJvIrUJLnMMa4NcL/AGhytdistDqJXKnHenDYyVkwkDMhLVVzNaDYdB9ClzuhE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791187408; c=relaxed/simple;
-	bh=cDK7eaO9TIqc7eENuFf4Hja36hKlXoeZzxw2D5zgDH4=;
+	s=arc-20240116; t=1791187780; c=relaxed/simple;
+	bh=sp7moOFoU87sCpnpLRLXygO7kV5Zv5K8JRGo+3bzcNY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=R4+dOtTV+tPc13gsr95JuLQRltEvJ6wrN6r2PVKxC3kQT8JjWkAE3ENHYTC7rjp3cELaYg1xC2pZTKDoWviYOhSYL3+YUj4gWHl5+rS6m0eYPGtZYBVJ48GCcaVgFh070+NAtGV3ZVfAu9pnYJRGTwbFTRUU6ejyEHB1auu2S1M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=QcNUl4KX; arc=none smtp.client-ip=209.85.221.52
+	 Content-Type:Content-Disposition:In-Reply-To; b=fr7eMWrV62Dr49qsNWD95IpFH9couDmRYxyZDkWgTgvyXDdSwo/iZevEzbSTnMo/cyIkzs9KMEE3G7wgb1Q9YozcSDPf8mxnps0inzZj6PMvay4aw3rNvYZFnC7pYzvVkXgmBgCXSQlAsk0s+jyqZdWoLzcsZJ30OifJXmJOl9s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=WNwRMr65; arc=none smtp.client-ip=209.85.128.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="QcNUl4KX"
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48b06bb6e40so1060677f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 01:03:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="WNwRMr65"
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4998b5a63e2so14038555e9.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 01:09:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791187404; x=1791792204; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1791187777; x=1791792577; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=Zf8a4U/eZRmPAL9EPlXZ+IeLso4MWrV1ScfZ6D1RB+E=;
-        b=QcNUl4KXWUMWOPlX2JdPbW7vrjg8HEt6moTmN+Abn/lb28UhxO7wWMx4vSPCSmLuYz
-         MflAQCZ/LM8U/92fL/eUqfMMH5+riskkvsbWrXXupvUTiQ+UrCf51jHLZIaxDmCeku6Y
-         /mFT0GC7CakRRASWuEtYe+PcYE2w/rnECInNg/QajKVWyjKsPVCw2JzeyjztyzDGhdhH
-         tGeXeSWoOkVw/P6gVeqym6g2brjQsGOp7xc/hw+jdPogwzw++VQcNreNPxVrZalEHtSC
-         MBKQNOf/b0AEEjVvDFdkDRktXkyCMG/dzCgHs9SNFOOfWJTa1akQdjG/Id5wgJn8eS3B
-         ZMUg==
+        bh=F0RLBXv8GCFvA3UGkYd6Vj6CuQ4sgMyjZDG6+lIJvG0=;
+        b=WNwRMr65sSzCDbOqcWkfdFXNmq+KAQaiurLJU8dCNJJW7ct55202RdvRyzhpPKJig0
+         JP/F6nzmlZF3HH38xvyF5YiCShvaqET4UqDTT77b0Zwd8MeMtkc9xvTgE83WQCKX7VVy
+         NRlDK/CJsRnBqNyAKtXDTM7ExU56FFUvOQ2lw8C8k7FyiX5etn2v/hWfHBaPnM5sOyAy
+         PBp+435F2cZqkTpOh2wGz1PabasnOUbblXGrp911qgsx06QSgIWgeyQX8dFLFG/paBQN
+         cNgHCZ3KdnZ3yfRvWCqTJiBisa55/LQwD/TdDdsBQXfVHM/xe8nNOa3jTBoYP3oudA1J
+         h4hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791187404; x=1791792204;
+        d=1e100.net; s=20260707; t=1791187777; x=1791792577;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Zf8a4U/eZRmPAL9EPlXZ+IeLso4MWrV1ScfZ6D1RB+E=;
-        b=OlVb/Y0jeQIwQfc7j3Qsfob9ePJxwZ4SaSboVGd6n8hiUDbCIYEnDPWOJamDmk8P0F
-         bFzIEaGOg6Ipn55IcpacLWhq2JuQBjFR9/wVgd1sVrFMxHwEgCf5+1HKVaOxmBpdAl63
-         PjNu4UdofUEp+LqMkE3Tki8yzmbyOVi8/V/s1RXPmcXAFAcjEVvyGjDV/IK9MsJP/n2T
-         dxRva7naYh9d60xkDLGg1trOdVVojqhjIC1xr0Eqqg3RjVJKf3E2KoD147+FjWwEk9Hk
-         XvY5ZACYa3lX/Y9NpvF3WujCkZIQYU6uZQh6q/jfKNVJXeP956hXicS5xPO/ONgyhdlA
-         Qozg==
-X-Forwarded-Encrypted: i=1; AKwUvBzPTXrs73TlveDMO3vpbOp1JHWcg072j9bXGsbJdVsV/cpxYqPNEAEACgC3GuZipIha/pmoWJYGApSCnksH@vger.kernel.org
-X-Gm-Message-State: AFq9FYK14zFRIPkBX2qpXltr9NF5Gb5wTV5O9pP/kA/5o54LQKwlUVS7
-	z1GAZrHQD5nfFqpzmgwpv85Vr0hHHmd+imIIrIxb6h2JP3YT8xaEHSJ/ipncafCrV04ysqa1SQE
-	O357U/94=
-X-Gm-Gg: AYBFou1qC4U/U4HCr97wV0KVgwxJzEmHkEp+PShDwzaJ3gIMwerGC1r8G1k9m+Q2tMQ
-	LvKx7yev00B9d7eAsxXxXe4imjV7RSuMQ7ANBxcMTI2gJpVamor2GZRrtbo1/f0szH7+GB+vlAU
-	pGTkddV+ZlrjxD6iUVuGRASfB8uSqsY2hYoJd/2Ybm8RJ+w90w8TR4W9b2Xt0TPFyIzyWBsrB2o
-	nRtJqpLY99bkZUjmcfMRS9KgYig/RStbnKrPEqg2I9CkxhPj6drVTw1h8r1ESo8//eEZQTVaPqm
-	JSrIoyDNWxlbtotOcwVlSf1X+iGvKjoR+bX71T1aqXQxUSv8blj3rayklq/xsMnzGJGvIBDRXne
-	4+xPmbLi5b2JFfzFA6QYug22b+jWVcmAdcb5IcO506mm4QseSYm97l3RFsV+ttbg5N/uvVOqWbM
-	emBP/vHwXm2B4wllcUc+LO8CDwkFkm5tRB6C/AQE5MPzGSfJkGq0zfEcLTw/bg8487ftGS71bVa
-	svhRp+NXQc=
-X-Received: by 2002:a5d:5f51:0:b0:48b:f92:1f67 with SMTP id ffacd0b85a97d-48c47fd0cf8mr11000087f8f.21.1791187402499;
-        Mon, 05 Oct 2026 01:03:22 -0700 (PDT)
+        bh=F0RLBXv8GCFvA3UGkYd6Vj6CuQ4sgMyjZDG6+lIJvG0=;
+        b=XLSEcmdmecRjWvo+jlIFld3NdQNaH0Dlcly/jG3zEs79LJODr+1Dr5Apw8msY/8YWQ
+         nziCGK0/0P1sPQUuIvtzPsIvYHrZ2OEEpxb8cK5U51gaaf9r79iK8xtppOxE60F/k2Zk
+         hJtmYHLEmMRVkqHuUBPfLmjCmB5rJ0F8+h2NYpOoy5w22WLP711DEE2zHBrY21WlMqc7
+         xK3VSJMz4uLepLGj/Oru1OssRZw0IvbPqGQUeyp8WSlhtlxeKpCyYWchMgjGKcLppnIi
+         tygVH1eZj2WMhtUc+0bg/z01lCsJ9XD2TUVfzcBHmWO4WZQUn2w3IaK8jvcD8GzWY6Vd
+         070w==
+X-Forwarded-Encrypted: i=1; AKwUvBxHmnCwWm4aWrwXq3sdjA5DAcfnPobRizRV+47QJwhPvsVBdaQsBHm+tELUBjr6MWDhfDky/nYF21AOmMkd@vger.kernel.org
+X-Gm-Message-State: AFuF++njqp4+Tdzx0KVSfkn8JqbjPB69hxEI25z8DAjhXfxAqIhAxASV
+	GIsziHPvSaX8cTKpuCMavJBCXhYbPbg1AXVMeJAHQ6zZb7CwS6hYkJyR52ruWCTw+A0=
+X-Gm-Gg: AYBFou0dy2D+ZxiVMpnRj7OmMlfhd92RewczZET75ElclTDEX+Nzva/hTvMuCiN/OI2
+	KZPs7+uBX0K8fmy4oVxwKW8+BQonG0K/Gkl3XdK3kRzNbgjnwIaVmTt+hp0VcyqZPl+QHrJ1KoG
+	9OrqE6YvvCwya9JDpML/2XDCXd43AvvS9Q9FXexwONom+nCy82RXkUmO0oCr75pqfiwkFGlkGuA
+	AJ+zW3iVF7R39fxdtFNkhUPF0Jt/BdEbn9evZg0FMwSTMHPUcQIH+EqWgbP0H7AgYLUpSJuAs8x
+	2863EzyMX1Yqlt5kYxUpdJ4N86V86ne4ko164T+0VBeWBBlUtSaPgvQJqvzOz5CniDU1azaoCGu
+	NScVOE7yY/FdvYiYR8ksoha4kHAYarBEAznXr75cM29juvS4b2PWTGZsGsJdzQ2+6Q4HjbcMR9S
+	CnTly+zVlKkrhiNnUAU36TuE8S3AGu+WgsZnUbN4elSSDF9+Fyo1T7XPjB5RRia1jyjn1m2ju3b
+	gsw9KkDkk3g
+X-Received: by 2002:a05:600c:4594:b0:4a0:22d5:908c with SMTP id 5b1f17b1804b1-4a1680eee54mr83735285e9.12.1791187777343;
+        Mon, 05 Oct 2026 01:09:37 -0700 (PDT)
 Received: from linaro.org ([2a02:2454:ff25:4f41:ec49:36a8:7075:6d05])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c622ab326sm1821127f8f.35.2026.10.05.01.03.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c622ab326sm1850803f8f.35.2026.10.05.01.09.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 01:03:22 -0700 (PDT)
-Date: Mon, 5 Oct 2026 10:03:15 +0200
+        Mon, 05 Oct 2026 01:09:36 -0700 (PDT)
+Date: Mon, 5 Oct 2026 10:09:34 +0200
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
 To: Alex Robinson <alex@ironrobin.net>
 Cc: Hans de Goede <hansg@kernel.org>,
@@ -75,11 +74,9 @@ Cc: Hans de Goede <hansg@kernel.org>,
 	Steev Klimaszewski <threeway@gmail.com>,
 	platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 2/3] platform: arm64: Add Lenovo ThinkPad X13s EC
- driver
-Message-ID: <asNZw4mFy_xOmCVD@linaro.org>
+Subject: Re: [PATCH v5 0/3] Lenovo ThinkPad X13s embedded controller support
+Message-ID: <asNbPjMB_Jf9PL5C@linaro.org>
 References: <20261002154231.31376-1-alex@ironrobin.net>
- <20261002154231.31376-3-alex@ironrobin.net>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,101 +85,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261002154231.31376-3-alex@ironrobin.net>
+In-Reply-To: <20261002154231.31376-1-alex@ironrobin.net>
 
-On Fri, Oct 02, 2026 at 03:43:07PM +0000, Alex Robinson wrote:
-> Add support for the ThinkPad X13s embedded controller to expose keyboard
-> backlight control and firmware-driven brightness changes when booting
-> with Device Tree. Its backlight, event and power-management interfaces
-> differ from the T14s EC and require separate handling.
+On Fri, Oct 02, 2026 at 03:42:48PM +0000, Alex Robinson wrote:
+> Add Device Tree support for the ThinkPad X13s embedded controller,
+> providing keyboard-backlight control and firmware-driven brightness
+> notifications. Its event, backlight and power-management interfaces
+> differ from the T14s EC and require a separate driver.
 > 
-> Preserve brightness across lid and system-sleep transitions using the
-> sequences described by the X13s ACPI firmware. Keep temporary suspend
-> blanking from overwriting the EC's saved lid-restore brightness.
-> 
-> Report firmware-driven brightness changes such as Fn+Space, but do not
-> report lid-open restoration as a new brightness change, avoiding a
-> spurious keyboard-backlight on-screen display.
-> 
-> Leave EC wakeup disabled by default because the shared interrupt can
-> wake the system on lid closure and no selective event mask is known.
+> EC wakeup remains disabled by default because lid closure can trigger
+> an unwanted wakeup and no selective event mask is known. Other EC event
+> mappings remain outside the scope of this series.
 > 
 > This follows earlier X13s EC work by Konrad Dybcio and Steev Klimaszewski.
+> Development was assisted by an LLM, including analysis of the X13s ACPI
+> DSDT and review of the implementation.
 > 
-> Assisted-by: LLM
-> Signed-off-by: Alex Robinson <alex@ironrobin.net>
+> [...]
+> Testing:
+> - Confirmed GPIO103's firmware-inherited pull-up on a ThinkPad X13s using
+>   a vanilla kernel with temporary probe-time instrumentation.
+> - Verified that all three v5 patches apply in order to Linux v7.3-rc4
+>   without the separate PCI workaround and reproduce the current EC
+>   source files byte-for-byte.
+> - Earlier v2 hardware testing covered keyboard-backlight control,
+>   firmware brightness changes, s2idle, lid-close/open brightness
+>   restoration, and EC wake events. Those results are historical and do
+>   not establish validation of the complete v5 series or its revised PM
+>   handling. No v5 build or runtime validation was performed while
+>   preparing this submission directory.
 > 
 
-I'm mostly just curious, is the input/hotkey functionality in the T14s
-EC driver not relevant for the X13s or did you omit it because you don't
-need it and/or to keep the initial driver more simple? It seems to be
-present in the X13s ACPI similar to the T14s.
-
-> [...]
-> diff --git a/drivers/platform/arm64/lenovo-thinkpad-x13s.c b/drivers/platform/arm64/lenovo-thinkpad-x13s.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..f1ae4c8e67159ebe04ec7aa6521b0ac9ad07a97c
-> --- /dev/null
-> +++ b/drivers/platform/arm64/lenovo-thinkpad-x13s.c
-> @@ -0,0 +1,408 @@
-> [...]
-> +static int x13s_power_gpio(struct x13s_ec *ec, int value)
-> +{
-> +	int ret;
-> +
-> +	lockdep_assert_held(&ec->lock);
-> +	ret = gpiod_set_value_cansleep(ec->power_state, value);
-> +	if (ret) {
-> +		dev_err(&ec->client->dev, "Failed to set power-state GPIO to %d: %d\n",
-> +			value, ret);
-> +	}
-> +	return ret;
-> +}
-> +
-> +static void x13s_exit_low_power(struct x13s_ec *ec)
-> +{
-> +	int ret;
-> +
-> +	lockdep_assert_held(&ec->lock);
-> +	x13s_power_gpio(ec, 1);
-> +	/* DSDT: GPIO176 high, Sleep(10), then register 0x80 <- 0xaa. */
-> +	fsleep(10000);
-> +	ret = x13s_write(ec, X13S_EC_REG_POWER_STATE, X13S_EC_POWER_STATE_EXIT);
-> +	if (ret)
-> +		dev_err(&ec->client->dev, "Failed to exit low power: %d\n", ret);
-
-AFAICT the ACPI implementation has a retry loop here with 3 retries,
-similar to t14s_ec_write_sequence() in the T14s EC driver
-(\_SB.I2C9.ECWS). Did you omit that on purpose?
-
-> +}
-> +
-> +static int x13s_suspend(struct device *dev)
-> +{
-> +	struct x13s_ec *ec = dev_get_drvdata(dev);
-> +	int ret;
-> +
-> +	/* The IRQ handler takes lock, so disable it before taking the mutex. */
-> +	disable_irq(ec->client->irq);
-> +
-> +	/* Capture hardware brightness after completing queued LED updates. */
-> +	flush_work(&ec->led.set_brightness_work);
-> +	ret = led_update_brightness(&ec->led);
-> +	if (ret)
-> +		dev_err(dev, "Failed to save backlight brightness: %d\n", ret);
-> +
-> +	mutex_lock(&ec->lock);
-> +	ec->preserve_saved_brightness = true;
-> +	mutex_unlock(&ec->lock);
-> +
-> +	/* This flushes brightness work, which also takes lock. */
-> +	led_classdev_suspend(&ec->led);
-> +
-> +	guard(mutex)(&ec->lock);
-> +	/* DSDT: register 0x80 <- 0x55, then GPIO176 low. */
-> +	ret = x13s_write(ec, X13S_EC_REG_POWER_STATE, X13S_EC_POWER_STATE_ENTER);
-
-Same here.
+Nitpick: I assume your LLM added this bullet point(?), but for
+submitting a series upstream this is kind of like "shooting yourself in
+the foot". You haven't tested this series for 3 revisions and your LLM
+hasn't even build-tested it? Please make sure you test your submissions. :-)
 
 Thanks,
 Stephan
