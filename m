@@ -1,103 +1,132 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91E6747D460;
-	Mon,  5 Oct 2026 13:04:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57742494805;
+	Mon,  5 Oct 2026 14:00:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791205483; cv=none; b=ICFNrQRHtA8fNjaZXlErhsjl9cZGVTyliQkVrEaVSRi1OAd6Cfh/eqtsIS6mQaaRr9SL9D1cGW5CJfVttIR7aFAoccqBP1fmptpEEwvViRJGaJWnRGnwGubQ2wBq9TdZergTJgrzO4vlUNpENKkBENEArPRMNdqNlgBsErGa5/c=
+	t=1791208828; cv=none; b=Fq59kSst0yL2hGcavFgC8DFuEuzp4d40yYhJksR9PyIdbnYtlZhXQyYR5AUpaOklDH9dpIP9MKQoGbHdqs5Qwbad5kihU5mXFEyq/nQtrwasVgvpAFWURKIfe3gWwdDPbYO/L6/KTpcmbomwaJccRwJb6/9rgKHqM6U4IxJnksM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791205483; c=relaxed/simple;
-	bh=yWUXsgCjz+XF2N2qt5x2pO41EUFImv3SDJpW7U+9ZkE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Os049W/NZxZ6ErEbaIQR6Xh0ijGp2AUIhg5K4sx4gNlACHmyZGW3luhpY28hjBnyB6O2tzlVq4wi4Iu0bxxiXoFfIaY7X4emdZqq4Ldd93gqrwPTtrSAKuxIfCOGjLYhlIMZOyaCipEKxh8dKbPIYNwe54QFfCCI8XpTCCbh32M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LJCvdyCU; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LJCvdyCU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8827F1F000FF;
-	Mon,  5 Oct 2026 13:04:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791205482;
-	bh=SvZ50MTxf86/y2/B3yqMvVurhcL2GyUlrbK2UslfeeM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=LJCvdyCUPjlrmlwV0tjAkLQ5qLBUHdhaSyfE0ePObjEFGIDCzqWttFxs1AwA9jnsP
-	 aHPe3nss8BfwJOmE2xIgnrtGjO5bYPE1ioqPA2ad8IGsbJVpKKByfRtW2kkrpp/tyw
-	 21qWP7C6H4sfLeNa9VTTXjhfqbQubT7y8uz/JETMXgcldRgiyNwRji7X5EpqteVW5q
-	 nETriVMheB9tLBUMqhtq+PWzaLB6Aq7uHxUzHmYhg2UGNtdxvTxxwV0EBqXJJc4HpY
-	 EOp4Y2Xyfe/7FgLfnSug7TYOxlC8+NUTZmOBSySRtwwg9G8DlyAweR0vEkJAl40H3Z
-	 bVYeRdVdd9mJg==
-Date: Mon, 5 Oct 2026 15:04:38 +0200
-From: Vinod Koul <vkoul@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Wesley Cheng <quic_wcheng@quicinc.com>,
-	Manu Gautam <mgautam@codeaurora.org>,
-	Stephen Boyd <sboyd@kernel.org>, Philipp Zabel <pza@pengutronix.de>,
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 6/6] phy: qcom: snps-femto-v2: Add IPQ9650 support
-Message-ID: <asOgZrVX7ANq2h3W@parshuram>
-References: <20261005-phy-v4-0-b04c4123ecb3@oss.qualcomm.com>
- <20261005-phy-v4-6-b04c4123ecb3@oss.qualcomm.com>
- <ck5st7q7rbnzfp26kbwzixorxlikq6hpmso5fzz33dlsqsrnrm@g3aey2pabkzb>
- <asN/uLBfYARYXlhb@hu-varada-blr.qualcomm.com>
- <lfs76pvsdpkkle3b75m2ez75x25xjqjkgbw6kkaf7rxqrc2plz@7sekrxlnqcus>
- <asONJKiT8pbIulWj@hu-varada-blr.qualcomm.com>
+	s=arc-20240116; t=1791208828; c=relaxed/simple;
+	bh=ZX5xUToHuWaNOd+bCaQzYXpRy+E8h/GxkuOaBVGHj2A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uzp3QYWlQ+RQTv1PfIEDNvVXtUo6z7q6zfPuxCwM5re+hkCyCA5zx5GKUETs3mQPs7L9J0w9prxDk0CQrscUR/XxwRZ5LRlb453tMtDTUDYTcW++hHm0iHPlgVgGIAkXZlmf77PD8UpBhix7z3Yk2YmxjscXQvPxU/SoEzQzQmI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.helo=mail.mainlining.org; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.helo=mail.mainlining.org
+Message-ID: <e590764c-1ef7-4166-9c2d-a96a89029736@mainlining.org>
+Date: Mon, 5 Oct 2026 17:00:05 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <asONJKiT8pbIulWj@hu-varada-blr.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/19] Add Initial Support For MSM8952, Add General
+ Mobile Shamrock
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
+ Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
+ Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
+ <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
+ linux-input@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
+ <179098834078.3641559.798772743228949994.b4-ty@b4>
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Content-Language: en-US
+In-Reply-To: <179098834078.3641559.798772743228949994.b4-ty@b4>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 05-10-26, 17:12, Varadarajan Narayanan wrote:
-> On Mon, Oct 05, 2026 at 02:01:48PM +0300, Dmitry Baryshkov wrote:
-> > On Mon, Oct 05, 2026 at 04:15:12PM +0530, Varadarajan Narayanan wrote:
-> > > On Mon, Oct 05, 2026 at 10:17:32AM +0300, Dmitry Baryshkov wrote:
-> > > > On Mon, Oct 05, 2026 at 12:06:31PM +0530, Varadarajan Narayanan wrote:
-> > > > > Add the 6 nm SNPS femto USB2 PHY configuration needed by IPQ9650. The PHYs
-> > > > > on this SoC require a dedicated init sequence and override parameters
-> > > > > before they can be enabled.
-> > > > >
-> > > > > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> > > > > ---
-> > > > >  drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 62 +++++++++++++++++++++++++++
-> > > > >  1 file changed, 62 insertions(+)
-> > > > >
-> > > > > diff --git a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > > > > index b6bbf2b570c7..8957f208bc51 100644
-> > > > > --- a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > > > > +++ b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > > > > @@ -29,12 +29,15 @@
-> > > > >
-> > > > >  #define USB2_PHY_USB_PHY_UTMI_CTRL5		(0x50)
-> > > > >  #define POR					BIT(1)
-> > > > > +#define ATERESET				BIT(0)
-> > > > >
-> > > > >  #define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0	(0x54)
-> > > > >  #define SIDDQ					BIT(2)
-> > > > >  #define RETENABLEN				BIT(3)
-> > > > >  #define FSEL_MASK				GENMASK(6, 4)
-> > > > >  #define FSEL_DEFAULT				(0x3 << 4)
-> > > > > +#define FSEL_24MHZ				(0x2 << 4)
-> > > >
-> > > > Use FIELD_PREP, please.
-> > >
-> > > Not able to use FIELD_PREP, getting this compilation error.
-> >
-> > Sorry. Does FIELD_PREP_CONST work?
+On Sat,  3 Oct 2026 03:46:52 +0300, Dmitry Baryshkov wrote:
+> On Mon, 21 Sep 2026 21:18:51 +0300, Muzaffer Kadir wrote:
+>> MSM8952 is a SoC with 8 core cpu and Adreno 405 gpu.
+>>
+>> Ported without uart connection. ramoops and usb
+>> mainly used to debug.
+>> USB is not enabled in this series because it
+>> depends on the not yet upstreamed (and not developed by me)
+>> pmi8950_smbcharger.
+>>
+>> [...]
 > 
-> Yes. Will post a new version...
+> Applied to ttt, thanks!
+> 
+> [01/19] dt-bindings: clock: qcom: Add MSM8952 global clock controller
+>         (no commit info)
+> [02/19] clk: qcom: Add global clock controller driver for MSM8952
+>         (no commit info)
+> [03/19] dt-bindings: nvmem: Add compatible for MSM8952
+>         (no commit info)
+> [04/19] dt-bindings: power: rpmpd: Add MSM8952 power domains
+>         (no commit info)
+> [05/19] dt-bindings: mmc: sdhci-msm: Add MSM8952 compatible
+>         (no commit info)
+> [06/19] dt-bindings: vendor-prefixes: Add General Mobile
+>         (no commit info)
+> [07/19] dt-bindings: arm: qcom: Document MSM8952 SoC binding
+>         (no commit info)
+> [08/19] dt-bindings: iommu: qcom,iommu: Add MSM8952 IOMMU to SMMUv2 compatibles
+>         (no commit info)
+> [09/19] dt-bindings: mfd: qcom,tcsr: Add compatible for MSM8952
+>         (no commit info)
+> [10/19] dt-bindings: display/msm: qcom, mdp5: Add MSM8952 compatible
+>         https://gitlab.freedesktop.org/lumag/msm/-/commit/df6ce9e6447e
+> [11/19] dt-bindings: firmware: qcom,scm: Document MSM8952 SCM
+>         (no commit info)
+> [12/19] dt-bindings: clock: qcom,rpmcc: Add MSM8952 compatible
+>         (no commit info)
+> [13/19] drm: msm: mdp5: Add MDP5 configuration for MSM8952
+>         https://gitlab.freedesktop.org/lumag/msm/-/commit/7af226f9aa59
+> [14/19] soc: qcom: ubwc: Add UBWC config for MSM8952
+>         (no commit info)
+> [15/19] dt-bindings: thermal: tsens: Add MSM8952
+>         (no commit info)
+> [16/19] thermal: qcom: tsens: Add support for MSM8952 tsens
+>         (no commit info)
+> [17/19] arm64: dts: qcom: Add initial support for MSM8952
+>         (no commit info)
+> [18/19] dt-bindings: input: touchscreen: goodix: Add binding for GT970
+>         (no commit info)
+> [19/19] arm64: dts: qcom: generalmobile-shamrock: new device
+>         (no commit info)
 
-Yes we have const version, there is also GENMASK and friends..
+Hi Dmitry,
 
--- 
-~Vinod
+Thanks for accepting MDP5 patches.
+
+The message lists all 19 patches, but only 10 and 13 have commit
+links, the rest say "(no commit info)". Does this mean the whole
+series was applied, or only the MDP5 ones?
+
+Best regards,
+Muzaffer Kadir
+
