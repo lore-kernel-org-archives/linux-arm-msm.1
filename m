@@ -1,192 +1,287 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CBB43DB630;
-	Mon,  5 Oct 2026 21:03:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6068D3876CC
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 21:38:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791234201; cv=none; b=jaCgVyxjQP3cvp8OOirSnKzR3H/ukGITnF9+eBKuYeBMDOor6lvlYIEnjGaHaUi/zHyoxg7grrd+cp95nk2JAR3pJqxe54vkl33rF6ZepEruW/m6ZYgtm2pJT+tNsHknIC0NPRtyPhjdy+ojhYzP0+HlMcpU9oFg1r/0s2/i0cI=
+	t=1791236293; cv=none; b=DgHVZjT8g34VRktv5WQFba9tys0ZkQtAdl0aGbzBUTYIwiVUb0WRJX0URvxU9hY1Jj6ifWMiwj4cQ1wjy9sS2PGY9+xvu6wcfHd8PhT3h/K035/rpVOUfDPNuggNKT7FdQHQnBDOPf5MJGA3bAGTUFWYoTFQj6x5v58fwfSdCtc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791234201; c=relaxed/simple;
-	bh=xvu8kyZrzlSTqrj4+ycNVZuOYL908bkbpNaU8CDijhE=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=PZQFyLJhy+3dNoz7aHkQJmHwp5fzDRUSUBbMhBHerB8C5k7v0726V+Mf+Q1yxUUzPTMDoYiU97QoN0TNuJOBdz5JNjeW2iwdmMle7s5HT7odJAcz7VIzRRoSsazby13JOmvJiH3IILffMyvsO0TqJJBr3BOyeYAKv+QP3N4VkA0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c3MOmJ7B; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791236293; c=relaxed/simple;
+	bh=GbkLAgUUmDwSS1vg+XH6mSzqBdhVNeWKPGXj86+FiB4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=svufES7IJfXcMXPqSYwXk9ykMMXxAnAm3wOKJvK54gyq74Bb2RjFjYdINmzMJUnqL7Uwm6pkmR/r6aUP79pPjFZ6mXa7fnll6EzyfublDuJvbzHxHxRYkiv6hEok/5T7peuNh2rEbuc83GRva1qsM04hRYGgxBuo4TGyTlQuwy8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mXZXRAyp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SeUJnJa+; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c3MOmJ7B"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48D981F00893;
-	Mon,  5 Oct 2026 21:03:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791234200;
-	bh=ylSXs10EeRHJrN+BIry7xJNcdvoeVjEUBv+yqgEVv1g=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=c3MOmJ7BsVLxJ25JZF2LXYkNPcL1/8XQeUbH97tmUNrXpl7NytsN94w7zYUj144iy
-	 Yt9GcH5jXse9P0ZxuW41MEEclGgcCb+I1TpUA/ApigTfYkRvmGKupHs3mF6F2pbA+w
-	 KDltIyhtPqfaf5ynO1KUWtwN/buncDMQf1+8ZWqSghpJ3h32zoBnsP6PvUW6kD4UJB
-	 T1l40VsQemAKN1Hqje1nKtkWz6qk0tPfri5RNGNAuU4k/3zTegKkt3aBOK797JWxIR
-	 iUlpipU78iF20MzRnB0SWEgko9lgUzk3oAja1JubVBBRwff/JAlisOfiq1IuOR98pv
-	 KrB04fZktVuXw==
-Subject: Re: [PATCH net-next v6 2/2] net: wwan: mhi_wwan_ctrl: drive DTR/RTS
- via the IP_CTRL channel
-From: netdev-bot+sashiko@kernel.org
-To: peter.hunt@opengear.com
-Cc: loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
- johannes@sipsolutions.net, mani@kernel.org, andrew+netdev@lunn.ch,
- davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- netdev@vger.kernel.org, mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Mon, 05 Oct 2026 21:03:18 +0000
-Message-ID: <179123419887.434549.1077103528647935423@kernel.org>
-In-Reply-To: <20261001204614.3481089-3-peter.hunt@opengear.com>
-References: <20261001204614.3481089-3-peter.hunt@opengear.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mXZXRAyp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SeUJnJa+"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 695KMjTc1535296
+	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 21:38:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=XtJhnIzcE7QOY0iThbQFPE
+	LcxRJJ39HnVVt8JMIZXf0=; b=mXZXRAypPAO+VoOY1gidXYGU8jS7fnxJyN9Etc
+	gLlnPcli+mFZxCaMT8i+xlhEbOhTFoxhsoahcvbguv84fh2xhg61hFM5Gk1yJzkp
+	l94TP34FsCW4YxFs8PEd5YZ64lzmGZZnjnNy1uKYmbT09i2VsCqnhTx4rZ3oFJHa
+	PejOoEOL6/so2Y5URl0N8IFF/kEoogDT70kWdNtRWmsLEbnXIfwaRPtTrPJTK2lF
+	YquLTNPk4KoMnfo84yZySwKEq5L13c8xp+Edl9nIbMGxRj6As0yV9UMyafSTKVpG
+	Em7MzW0OKkw9WRXwr+v/qSO6q+DByo1dKkICWrotylxK+taw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4dnchm42-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 21:38:11 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-313b1501a0aso315422eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 14:38:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791236291; x=1791841091; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=XtJhnIzcE7QOY0iThbQFPELcxRJJ39HnVVt8JMIZXf0=;
+        b=SeUJnJa+sILgU3OTxoO3PEQATy7vyrN6NjoZ6GfUvGPj0uevqvan0V+IwZPy2Zzzfa
+         v9yLePdOlYQt0I9BZ3RGs9M/HwL8G5faAVcBaOZ0yh1MQxuNTf74d0JT2zY+NMO1id+g
+         u328Ln1TLzxUEJqGzsNOhuk/qyX6BNGxMVKqjuo4ykI6axhnyvt2meSG8JyMOKcBOwTA
+         ZjLiKQLVb34mE3E168V1yvSZS3mnOWg0SQD1+k5xJ62NuRTAdcsmwTPx3qSZ2tqnXLzH
+         2iuF4Cby7320noRlneeS1wRkB9Argq8pf5DCYZiY9fWjUfT4rrkCOfZy5v4DtpqhVqRh
+         RUXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791236291; x=1791841091;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=XtJhnIzcE7QOY0iThbQFPELcxRJJ39HnVVt8JMIZXf0=;
+        b=BsoyM4IU4B2eT6H9AJfPNu94AoQCFnMM/f/EMrrlhY06O6/I/DerH3EOeuU2ktKZeK
+         5bnVv40w1f84NOszlHmGIWfuemIMK9vsgaVNcXdscBLn8Y7s+mvx5CIxyLwUar+jtgqc
+         3tC2VVlS5GUt0hQ91sXiOVdiXX7SRf62hjW+ECiT9RPrRyzptkSRMigTw+NBszMYgG9Z
+         SF2gPBi/xR96WjfAASVCzvswzlaXl9l+IJlNvGmbos6aIBkY1dHVl65mAPyV0vYRZfn1
+         2Jn5Q/25CzjRvhZKTht0BdRtmqh5mBM8WaCM9/IHSQhgo/erySVO+7rd1RQOw2NslTgZ
+         m78A==
+X-Forwarded-Encrypted: i=1; AKwUvBxavknPQCI7nD6eQNo+WUAS7Iaj7a8MoQyyFlbACGWkhYn2p9Gc1CJjUz9yB8YHfkfo7By2xt35KNGnQPKu@vger.kernel.org
+X-Gm-Message-State: AFq9FYL4izqrUWgb8DAJl+zs71gH+GuZimuslbJ+2ofr4npbqBN9LLkG
+	Au7jysu4+VHlyriNdx9uBHKeZPVsY8fQnHV1tAdy7gBPNF15QJjCkH2fd72HQxO3pPgySzb3nuY
+	NmbH2SatPp48AU6li0jafm8mojWohaWAayVLZiKn6Fj+EG/vWLKltom0kHk3qBPFpKim3
+X-Gm-Gg: AYBFou0X+0tJ9ydir//P/6DfDQvNSdoGD0cK3FZJTVyzBeEzrnIheorJjeW/Ql8O3p2
+	jEnbFQZu9R6BdPvRJNWBLu5TAVT3CJVbU+D80XCW5+nMaTpXYIKVG5bj22s6dxPoHYSMSH3jxoG
+	sGi5uthxj2TTrcr8UMW08VTiqjw0kjEWgOM1ADg+i95cHrWcc6rw6RQATsEj2qONm17JCh4X/qI
+	RV+z8FkjdvxgIhBenpJ1ZCw26P9S27/Mh1L1+ednAbqhaIGFdNBhBVP2A/EVu9GQ4WNKWuPWvD0
+	PBGyxl76+ROBgrkjrzvnK+eTPYK1ZlP20yq8OLvAn3iMsulTypNANYyrrW794SzIn7VJ2eAIfti
+	ROYqWsBlL0fWwyIsLt8dtD7FLEb6m63JKktTR4flSGhiLo3cpc9VX88E0EDkG
+X-Received: by 2002:a05:7301:18ac:b0:34b:7c9c:9a69 with SMTP id 5a478bee46e88-34f06678c69mr21552017eec.0.1791236290633;
+        Mon, 05 Oct 2026 14:38:10 -0700 (PDT)
+X-Received: by 2002:a05:7301:18ac:b0:34b:7c9c:9a69 with SMTP id 5a478bee46e88-34f06678c69mr21551948eec.0.1791236289808;
+        Mon, 05 Oct 2026 14:38:09 -0700 (PDT)
+Received: from gu-dmadival-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-35146a2c991sm1064954eec.14.2026.10.05.14.38.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2026 14:38:09 -0700 (PDT)
+From: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+Subject: [PATCH v9 0/5] Implement Region of Interest(ROI) support
+Date: Mon, 05 Oct 2026 14:38:05 -0700
+Message-Id: <20261005-enc_roi_enable-v9-0-831c24135cb1@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAL0YxGoC/3XRS2rDMBAG4KsEresgaWQ9suo9SgnyaNQIEru1W
+ tMSfPfK2djgaCP4BfMxjzvLNCbK7HS4s5GmlNPQl+BeDgwvvv+gJoWSmeRScy10Qz2exyGdqff
+ dlRoVwLaojAVPrBR9jhTT7wN8ey/5kvL3MP49/Eksv1VqEg1vIkVERUZHgNch5+PXj7/icLsdy
+ 8MWcZKrYoTaKbIoGrSF6EKHFCsKrIrlewWKQhw6LaWXQdmKojaKEDtFFUWgIy8Vb7uuprRbpd0
+ pbVECBadU5BFNbSK9Ku6JoosiXQgKbYcYa4rZKHK/F7NsN3qjBPgoASuK3SjAd4pdekHHbQROT
+ j+79DzP/0Un/PidAgAA
+X-Change-ID: 20260616-enc_roi_enable-4d385c4783ae
+To: Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
+        kernel test robot <lkp@intel.com>,
+        Hans Verkuil <hverkuil+cisco@kernel.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791236289; l=6901;
+ i=deepa.madivalara@oss.qualcomm.com; s=20250814; h=from:subject:message-id;
+ bh=GbkLAgUUmDwSS1vg+XH6mSzqBdhVNeWKPGXj86+FiB4=;
+ b=5/s8JEp5sAsEVM5GB8kFuTYgjYh+tfwB2Lyu7fhV9gYTFYDVWHg3L78EHNHnj9N3ylb6w3DMq
+ bOB1FIhK1+iBHY70RqyoS/FMmMfun2wBUSiE77ywX80jMXcfWdS35lv
+X-Developer-Key: i=deepa.madivalara@oss.qualcomm.com; a=ed25519;
+ pk=MOEXgyokievn+bgpHdS6Ixh/KQYyS90z2mqIbQ822FQ=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDA4NSBTYWx0ZWRfX1yTMDbtemoor
+ b4868ZhtC5PBJljZH/Cn1YZAkJqrkhNb02miUcl8T1UR2jua5x2q+VuXFDX56PiMRWkMAsoqTQY
+ V5foPiLOi+hede4SKmxjlbFR+kDzgE8=
+X-Authority-Analysis: v=2.4 cv=Vdxir1p9 c=1 sm=1 tr=0 ts=6ac418c3 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=QyXUC8HyAAAA:8 a=DKkvS2Dz--9TOQqJK7AA:9
+ a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-GUID: K9YXzPgx9ruKFmr5EFd3bbBS91R6XygA
+X-Proofpoint-ORIG-GUID: K9YXzPgx9ruKFmr5EFd3bbBS91R6XygA
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDA4NSBTYWx0ZWRfX6N3MecxDW9gm
+ +N9vY3xHKEfjmlhJi2efIgvbL+CDYl0lIM5FcrzqeQRFBs1OjD8Ro0rMbOjjCToo/za7yA4bGJH
+ jZD/QHMEqlm1nQaBuWe9ypoFHNIk+/TzF33zdRapOlJQgeTCEDg3O5Y3fhDTQBrSx0SgebXGnSh
+ bCA7qHsLFzMJVh/3KsOO/CHCphkod8myRuMogH9I0rYaQIzpXlVmCvwG6hMjM7BhXHH79MgRYOt
+ zEVNoo1fr9h69SQPoz0JoL8P4/SUt/t7XlwDWHP39t4J9hG+odu9JI0eAyFWeYe0bR8E1VXi+PZ
+ kJJIrpbkI+OMavU9HU2PvuBMUFoUI+pDpprXMUeUGlCCvVnUslsNpEodvFCDNCRrIYutpV2I/BZ
+ k+c+CTR8Q6nGDtxUuTzxdgV0ClU+KqE2/OK35bGW+5SJbGM9BvtSleQWypVBTsl46MDhPpTkkVt
+ b9jy9aSwXwgX5X4QNGA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-05_05,2026-10-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 suspectscore=0 malwarescore=0 clxscore=1015
+ impostorscore=0 phishscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050085
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider.
+Hi all,
 
-Critical: 0 · High: 1 · Medium: 1 · Low: 0
+This patch set implements region of interest(ROI) support for
+video encoder to be configured as a MB based delta_qp for
+the whole frame. Custom controls V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP
+and V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE are implemented to achieve this. 
+Corresponding support is added in iris encoder to implement this
+feature.
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+This submission and design is based on the feedback received
+from community for the RFC[1] series posted earlier. 
+Initial testing is done by adding support to v4l2-ctl[2] to test this
+control setting and its functionality.
 
-- [High] The patch does not reach its stated goal on any in-tree
-  hardware.
-- [Medium] mhi_wwan_dtr_dl_xfer_cb()
-  (drivers/net/wwan/mhi_wwan_ctrl.c:351-364) discards the return value…
+[1]https://lore.kernel.org/linux-media/20260113-iris_enc_roi-v1-0-6c86eba38587@oss.qualcomm.com
+[2]https://lore.kernel.org/linux-media/20260616-enc_roi_enable-v1-1-252792d27894@oss.qualcomm.com
 
---
+Results:
 
-net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
+v4l2-ctl -d /dev/video1 --list-ctrls
+...
+enc_mb_roi_delta_qp 0x00990b92 (s8)     : min=-31 max=30 step=1 default=0 dims=[139264] flags=has-payload
+        roi_mb_size 0x00990b93 (u8)     : min=16 max=32 step=1 default=16 value=16 flags=has-payload
 
-This patch adds a second mhi_driver to mhi_wwan_ctrl. The new driver
-binds the IP_CTRL MHI channel and records it per controller in a small
-registry. AT ports implement ->dtr_rts by sending a host serial state
-message over their own controller's IP_CTRL channel. A single recycled
-DL sink buffer stays queued on IP_CTRL so the modem's transmit path does
-not stall.
+v4l2-compliance -d /dev/video1
+...
+Buffer ioctls:
+        test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: OK
+        test CREATE_BUFS maximum buffers: OK
+        test VIDIOC_REMOVE_BUFS: OK
+        test VIDIOC_EXPBUF: OK
+        test Requests: OK (Not Supported)
+        test blocking wait: OK
 
-> diff --git a/drivers/net/wwan/mhi_wwan_ctrl.c b/drivers/net/wwan/mhi_wwan_ctrl.c
-> index a31d8540fbb85..b94484a1657d7 100644
-> --- a/drivers/net/wwan/mhi_wwan_ctrl.c
-> +++ b/drivers/net/wwan/mhi_wwan_ctrl.c
+Total for iris_driver device /dev/video1: 48, Succeeded: 48, Failed: 0, Warnings: 0
 
-[ ... ]
+./v4l2-ctl --verbose -d /dev/video1 --set-fmt-video-out=width=176,height=144,pixelformat=NV12 --set-fmt-video=pixelformat=H264 --set-ctrl=enc_mb_roi_delta_qp=-20,-2,-22,9,-16,-2,14,-9,-19,3,-26,19,-23,30,1,0,-6,-7,7,2,-2,15,-15,-24,-24,-26,-26,5,-1,-1,9,-11,15,-25,-11,26,-11,7,-26,-27,-8,-18,7,-4,-12,-23,-11,22,-7,7,-14,24,6,-8,-7,2,7,-26,2,-25,-1,-3,-4,-6,-26,-11,7,16,-30,-22,-15,30,-14,-29,-11,-8,8,6,19,15,-17,21,-27,30,-17,-28,-10,-20,1,22,29,-19,-2,28,10,12,-10,7,-4 --stream-mmap --stream-out-mmap --stream-from=/media/foreman_qcif_nv12.yuv --stream-to=roi_try.h264 --stream-count=10
 
-> @@ -255,6 +340,86 @@ static void mhi_wwan_ctrl_remove(struct mhi_device *mhi_dev)
+Validated on SM8550 MTP.
 
-[ ... ]
+Thanks,
+Deepa
 
-> +static void mhi_wwan_dtr_dl_xfer_cb(struct mhi_device *mhi_dev,
-> +				    struct mhi_result *mhi_result)
-> +{
-> +	struct mhi_wwan_dtr *dtr = dev_get_drvdata(&mhi_dev->dev);
-> +
-> +	/* Channel is being torn down (e.g. -ENOTCONN), do not requeue */
-> +	if (mhi_result->transaction_status &&
-> +	    mhi_result->transaction_status != -EOVERFLOW)
-> +		return;
-> +
-> +	/* Modem serial state not needed, requeue the sink buffer to keep DL ring live */
-> +	mhi_queue_buf(mhi_dev, DMA_FROM_DEVICE, dtr->rx_buf,
-> +		      sizeof(*dtr->rx_buf), MHI_EOT);
+Signed-off-by: Deepa Guthyappa Madivalara
+<deepa.madivalara@oss.qualcomm.com>
 
-[Severity: Medium]
-What happens if this mhi_queue_buf() fails? The return value is ignored,
-and dtr->rx_buf is the only DL buffer. It is queued once in
-mhi_wwan_dtr_probe() and requeued only from here.
+Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+---
+Changes in v9:
+- Fix Media CI error.
+- Rebase onto media-committers next
+- Reported-by: kernel test robot <lkp@intel.com>
+  Closes: https://lore.kernel.org/oe-kbuild-all/202610051710.bnOqLkUl-lkp@intel.com/
+- Link to v8:
+  https://lore.kernel.org/r/20260930-enc_roi_enable-v8-0-2c908f30e963@oss.qualcomm.com
 
-parse_xfer_event() has already consumed the ring element before this
-callback runs. A failed requeue therefore leaves the IP_CTRL DL ring
-empty, and nothing retries until the device is unbound and probed again.
+Changes in v8:
+- Moved p_s8 below p_u8 (Hans)
+- Update Documentation for V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP (Nicolas)
+- Update returns to a sngle line (Vishnu)
+- Update n_shift calculation logic to ilog2 (Vishnu)
+- Link to v7: https://lore.kernel.org/r/20260924-enc_roi_enable-v7-0-6fa7413af23c@oss.qualcomm.com
 
-mhi_queue() can fail here in three ways:
+Changes in v7:
+- Add V4L2_CTRL_TYPE_S8 to v4l2_ctrl_type_op_validate and check_range (Hans)
+- Rebased onto media-committers next.
+- Link to v6: https://lore.kernel.org/r/20260915-enc_roi_enable-v6-0-29dd4c8bccff@oss.qualcomm.com
 
-- -EIO in an MHI PM error state
-- -ENODEV from mhi_gen_tre() when the channel is not enabled
-- -ENOMEM from map_single
+Changes in v6:
+- Update documentation from custom to array, __s8 to __s8 array (Hans)
+- Update documentation and handling for non MB Size aligned frame resolution (Hans)
+- Rework patch 1 and 2 to add V4L2_CTRL_TYPE_S8 type first followed by ROI control (Hans)
+- Simplify handling for V4L2_CTRL_TYPE_S8 in v4l2-ctrls-core.c (Hans)  
+- Link to v5: https://lore.kernel.org/r/20260815-enc_roi_enable-v5-0-ded944f0fc7f@oss.qualcomm.com
 
-The map_single call in mhi_gen_tre() looks like this:
+Changes in v5:
+- Fix Media CI errors.
+- Rebase onto media-committers next.
+- Link to v4: https://lore.kernel.org/r/20260811-enc_roi_enable-v4-0-1c9ea2405bb8@oss.qualcomm.com
 
-mhi_gen_tre()
-    if (!info->pre_mapped) {
-        ret = mhi_cntrl->map_single(mhi_cntrl, buf_info);
-        if (ret)
-            goto out;
-    }
+Changes in v4:
 
-mhi_map_single_no_bb() returns -ENOMEM on dma_mapping_error().
-mhi_map_single_use_bb() calls dma_alloc_coherent(..., GFP_ATOMIC) from
-this completion path.
+- Updated Documentaion, clean stray lines (Bryan)
+- Use BIT(16) for header version (Bryan)
+- Split patch3 in the series to reflect enumeration of
+  the platform and adding metadata support and implementation (Bryan)
+- Link to v3: https://lore.kernel.org/r/20260804-enc_roi_enable-v3-0-e03b622a2d48@oss.qualcomm.com
 
-Couldn't one transient mapping or allocation failure here cause the
-IP_CTRL transmit stall that the sink buffer is meant to prevent? Should
-the error at least be logged, and the refill retried later, for example
-from a work item?
+Changes in v3:
+- Updated Documentation (Hans) 
+- Reuse ROUND_TO_RANGE_RANGE for p_s8 (Hans)
+- Rebase onto media-committers next.
+- Link to v2: https://lore.kernel.org/r/20260714-enc_roi_enable-v2-0-63683f9dbcef@oss.qualcomm.com
 
-> +}
+Changes in v2:
+- Fix issues detected by Media CI robot and kernel test robot.
+  Reported-by: kernel test robot <lkp@intel.com>
+  Closes: https://lore.kernel.org/oe-kbuild-all/202606171554.03yt9utn-lkp@intel.com/
+- Rebase onto media-committers next.
+- Update to handle p_s8 in std_validate_elem correctly. 
+- Link to v1: https://lore.kernel.org/r/20260616-enc_roi_enable-v1-0-fefcc4e76f33@oss.qualcomm.com
 
-[ ... ]
+---
+Deepa Guthyappa Madivalara (5):
+      media: v4l2-core: add new control type V4L2_CTRL_TYPE_S8
+      media: uapi: Introduce new control for video encoder ROI
+      media: iris: Add ROI delta QP control support for HFI Gen2 encoders
+      media: iris: Add HFI metadata buffer delivery support for Gen2 encoders
+      media: iris: Add BUF_ROIMB_DELTAQP metadata buffer for ROI delta QP
 
-> @@ -278,7 +443,45 @@ static struct mhi_driver mhi_wwan_ctrl_driver = {
->  	},
->  };
->  
-> -module_mhi_driver(mhi_wwan_ctrl_driver);
-> +static const struct mhi_device_id mhi_wwan_dtr_match_table[] = {
-> +	{ .chan = "IP_CTRL" },
-> +	{},
-> +};
+ .../userspace-api/media/v4l/ext-ctrls-codec.rst    |  27 +++++
+ .../media/v4l/videodev2.h.rst.exceptions           |   1 +
+ .../userspace-api/media/v4l/vidioc-g-ext-ctrls.rst |   4 +
+ .../userspace-api/media/v4l/vidioc-queryctrl.rst   |   6 ++
+ drivers/media/platform/qcom/iris/iris_buffer.c     | 114 +++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_buffer.h     |  22 ++++
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 110 +++++++++++++++++++-
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |   2 +
+ drivers/media/platform/qcom/iris/iris_hfi_common.h |   1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   |  14 +++
+ .../platform/qcom/iris/iris_hfi_gen2_command.c     |  63 ++++++++++++
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |   3 +
+ .../platform/qcom/iris/iris_hfi_gen2_packet.c      |   6 +-
+ .../platform/qcom/iris/iris_hfi_gen2_packet.h      |   3 +
+ .../platform/qcom/iris/iris_hfi_gen2_response.c    |  29 ++++++
+ .../platform/qcom/iris/iris_platform_common.h      |   5 +
+ drivers/media/platform/qcom/iris/iris_venc.c       |   4 +
+ drivers/media/platform/qcom/iris/iris_vidc.c       |   2 +
+ drivers/media/v4l2-core/v4l2-ctrls-api.c           |   1 +
+ drivers/media/v4l2-core/v4l2-ctrls-core.c          |  19 ++++
+ drivers/media/v4l2-core/v4l2-ctrls-defs.c          |  10 ++
+ include/media/v4l2-ctrls.h                         |   2 +
+ include/uapi/linux/v4l2-controls.h                 |   2 +
+ include/uapi/linux/videodev2.h                     |   2 +
+ 24 files changed, 448 insertions(+), 4 deletions(-)
+---
+base-commit: 64f76d5d9fd17a5661d7e5eab2aa99218db60d0b
+change-id: 20260616-enc_roi_enable-4d385c4783ae
 
-[Severity: High]
-Does any in-tree MHI controller declare an "IP_CTRL" channel? This match
-table is the only place the name appears as a channel.
-
-MHI client devices are only created for channels in the controller's
-static config, because mhi_create_devices() walks mhi_cntrl->mhi_chan.
-The SDX55/SDX65 tables in drivers/bus/mhi/host/pci_generic.c don't list
-IP_CTRL. For example:
-
-drivers/bus/mhi/host/pci_generic.c:
-static const struct mhi_channel_config mhi_sierra_em919x_channels[] = {
-	...
-	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 512, 1),
-	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 512, 2),
-};
-
-The same is true of modem_qcom_v1 and the Foxconn, Quectel and Telit
-tables.
-
-If so, mhi_wwan_dtr_probe() never runs and mhi_wwan_dtr_list stays empty.
-Every ->dtr_rts call then ends up in this branch of
-mhi_wwan_ctrl_send_dtr(), whether it comes from wwan core open, close,
-remove or TIOCMSET/TIOCMBIS/TIOCMBIC:
-
-	if (!ctrl_dev) {
-		dev_dbg(&mhiwwan->mhi_dev->dev,
-			"IP_CTRL not enumerated; DTR/RTS not signalled to modem\n");
-		return 0;
-	}
-
-TIOCMGET would then report DTR as asserted, but the modem never receives
-it. The URCs described in the commit message would still be withheld.
-
-Neither this patch nor "net: wwan: core: propagate modem control signals
-to port drivers" adds IP_CTRL UL/DL entries to pci_generic.c. Is a
-controller-side change needed with this patch? If not, could the commit
-message at least note that dependency?
-
+Best regards,
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261001204614.3481089-1-peter.hunt%40opengear.com
+Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+
