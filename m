@@ -1,184 +1,190 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 713A2374E55
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 07:25:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 154672D0605
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 07:34:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791185121; cv=none; b=pZMObTqkknZgBIAcy9Y4whgYu/ENz1Lp9Q1SwMN77McuLxSJnjjKUbuYldVrGHABGn3MLBSiqSj9Iq4EFDdy0VgnIAntrNIEv7271XiTRWo2wuL61cUdqAF1bQzFkG6MZfIA3tAnPQeG9SiawVrz5aIVHDYy/TAtsgSCQLGbl3g=
+	t=1791185660; cv=none; b=o24HJkWUlq4qmox5FEphUO92qJjF1MLmeEEpLajnMGAE+Q/Xj+qGUvEy7UZsyD1XKk/sSwt/yA+66I13Jb15srkDjg7/hfKovsZDmt6z/11bNYRhSwKfggR+yJw82oTZnX8sZv8LIJYbs30dyrnmoAtredGXM9DVrROxiQyGxAA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791185121; c=relaxed/simple;
-	bh=H/ngu2NtKM0XR9OEviez25RT11Pu6dH3Orddp07YVTY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Wm/pNVYZVHYjCyM5bqvsc9pXLoLDuOwdAv8PICjkWqjhI5fzyrHy7sJhfnDhgrlW9BSuStSkH8DUj9rNUNpEdN+QPujrjs+NF8dni6BerIDCkoAnGatclF0R6dWaEVSUSlp8Y18dnvBwHNfYtnsxJLLxZX/j0dYx9V79wV4PR+s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=V5CGdhm8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XRc+x8Uc; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791185660; c=relaxed/simple;
+	bh=ZNgYGUcB/WZ0qm6F4VxoIqTVSqOFyDmEGL1toDXatEI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=A52kg3giJzVhk5UPRX5CWrYxl6f6i1reNVU0hJ/+XeG9RjR/JXH8+HBN21cNuKExZGQegIgpeaxBQ7lOSaGHIxzhksEEvjkONOlbypWLEjBSVG2gDE8OSD3q/b9q4iox5UgS36dW2VrrolUdQdeThnG9vujBLCScYyVfUxbMAkA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Qe9tTkSY; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="V5CGdhm8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XRc+x8Uc"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6950xtHa291091
-	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 07:25:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	+0ADLN4tmjKk8N9WUyV0L4KRQPHIhMO2nAEzDRj/GbM=; b=V5CGdhm8k58mrLcI
-	Wo24SlRivtai3j96ezyMNQl2BSjodo1XjTa+B5w3X74frlm/Yyb5vgPfOpq7OYs+
-	2rfFfGVgQ3ofPpg7K1L2iXGVncBwyoFCDLorDtktYN8ZRdLzyXvlwTsqdDu2gKTe
-	m6Tt5+2z8pGZZiCZ8HB7XuksZ8WtQqhP7fdb2uKWNV4bazEpJmg4NJW/HyPCWMFa
-	hci3quG3pcw2Xa7DLotfrl6i90t+g8XhbUImiOuLAM2PxVuYXHVXvDsuEVQ3Pkba
-	56MX4wFL9vog4bwGSATidxRMpsi+JXl10RqbByQi/zEkuLTwVHQHguXC8nyZ5VEz
-	jQEIWA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h3xhs13hd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 07:25:18 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-395543dc382so1359793a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 00:25:18 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Qe9tTkSY"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b912d37b6so8408195e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 00:34:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791185117; x=1791789917; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+0ADLN4tmjKk8N9WUyV0L4KRQPHIhMO2nAEzDRj/GbM=;
-        b=XRc+x8UcWCZXS/ZYaJrc5YFuOhzC3OErF0cs1lr3xWlrvI6TT9+fH001JmgCVUb9sc
-         fj/M1fMuD7wCxWO48aQ37DNySPE87IVAjupxEcwQo/1J8Ia9bu9IHCCiF2US+M45qgWw
-         XF5D+F7ry4SeWIVWR4nzCztsifmV5qYtpbiRH9SDpEDov5lWRTQdqCS0LEyvrC5QQDHt
-         vNZv/L6ij2LuzOP5Mx1sf+7h4ZdgZhX9choz7RRQyQWNADpjL50xg0G6Z4Gae4uki7F1
-         th+LRLuPA/zQKy6Nyc/8EdXh6WnHa8uZ1BFnI1yawhLnmMdSBR1U4r2aG/mLf4ETzwp9
-         fqBA==
+        d=linaro.org; s=google; t=1791185657; x=1791790457; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=S9lWxLMnIqjYARzXXq5EeOUaizRhex7B8BKafzyau2c=;
+        b=Qe9tTkSYXfEFUt0uHr59cGcSJbL/mmffwRViOE8b7sG4ILD9I8IiRyrtw5WakWOl9W
+         /SXONiACqf0cC9COPQUd6+Rl2gTSqEEXDJIB7zizeIzr0Yl+nVcDORwyohwCqRkWAtNA
+         XefBPjp2ljA8/LeeTIzvSe/+u7OOHfuZ0q1YUI0Fap6/FxBxSle6qBMniZ3VSJBMypO9
+         Thbi/fP+2QRx6kW+mNBOUZE3Orjy4GZkolnXFAcp7e2LMEvKwKBwlUBKg9kiAwmaRJGm
+         WpVLIkVBLmIaZwVaV7y8bFCcJqucI9qtmA1gUBbeq5YiDT1LTSIAj+KzDhALrQHONdj6
+         1jmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791185117; x=1791789917;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1791185657; x=1791790457;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=+0ADLN4tmjKk8N9WUyV0L4KRQPHIhMO2nAEzDRj/GbM=;
-        b=joRDltpSNChJniG2C4lf0dle/BGOSGhYUQeTux5i3bSeFTMesdqQOUj1Q5XOAfsiiD
-         pQ79wFzXyLg1mCa7MSsSsjb66tFUSntpciTgZP9E4hz4BLVRitVg6L8qREU9EZkSpuS1
-         cZRzb1T5WSGH3m1uuwkyPzNxUE6jXrjU8xubSMWJoIO3SLeww46D+4OJIWW+J4PPuZal
-         6v/phcfz2JadMwwJSTDPA7Y9WdCO/pjwevk61U2tbYGQReSXJUOIG3nzIwMBWgduXRfk
-         IeFFXJ/YHeakz++fW0Y+kQyuW2R0s25MqYf8UqRe4UUH9LynH41T1pcTztyJagdw+iNm
-         Unrg==
-X-Gm-Message-State: AFq9FYKZ5Kt7a9VFQiq1qV7RTlVEvaMtv3RuzVg5GnGQq2FLutRnNJL6
-	yQfaK7M8A6dAiEKHFqCM48a5a5a7mLNIju+sp0ZQBPH4dfjg0Nq6ejmxfIT2oDHkbybIRZnkTzq
-	B1hE0IUz/nedCPRWjykEDBD+OlfUMEetaSlzLX/HxJeBrj7TAZdAtmwaBjDFnngeWMvHt
-X-Gm-Gg: AYBFou3EOHViYOXMUNzg9VgXaU1shT1GAuroA7sOllhTRGos/EgwWH7MJCb6SzSltrc
-	GafyDhtamXD1rLi1144WhQPiOoyHQoR0qMNLvdTaWLv7XMknZvmNR46atHI36lCa2PP4upQ5bTA
-	SWIh+x1iOfYhknmz7h9+ax+JF9T0J1N68SuCzDDlvurjVA00WmacQR4cWb/lr7Kr6jjuFESR2fX
-	AGRDawfMOXq8JvQVWa7BejL4wEEd9YhUj5n1WAlPaWf603NyjcrVfcVOt5Aub2j7jOWby5d4geW
-	/pHKuUq68QSJtEE++yIe1Shy8kAq3dnRxABc+ao9gg5HqlHy19J8ZvwlFmVnB07N0G3+13ctsLx
-	xzuhoPQQm/cI3Dae5vpkf/hJF22VoZJa5SM4=
-X-Received: by 2002:a17:90b:4d0c:b0:3a7:a463:54bf with SMTP id 98e67ed59e1d1-3a7a463570emr1941165a91.33.1791185117358;
-        Mon, 05 Oct 2026 00:25:17 -0700 (PDT)
-X-Received: by 2002:a17:90b:4d0c:b0:3a7:a463:54bf with SMTP id 98e67ed59e1d1-3a7a463570emr1941150a91.33.1791185116922;
-        Mon, 05 Oct 2026 00:25:16 -0700 (PDT)
-Received: from hu-bkalkond-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78e4f3911sm9901421a91.15.2026.10.05.00.25.09
+        bh=S9lWxLMnIqjYARzXXq5EeOUaizRhex7B8BKafzyau2c=;
+        b=RU/ynUImGfwxt/zTa97lMvuIz8+fkOVRT1bRdgzJPv7j70cAY6d61ZQtKHnPatjdep
+         ncI+4gSILjjC8clUW9uU694JfQ3+56j6Lh97HqDQ9K4pViu6lcFiqJXV2LLAI67HZzzA
+         BtBWJTvM8Phyq/g8fukBny2Y1xw+EZ2pg94PndmUGZcOCYX71i3ZIeRvjjAR4BFTvd1B
+         MBe8NLWPhslAHo23a5e0afsvFYCxiLYAdSmhpHzJzBq3hNCmpDyESbdTPD9T4MD3nPIj
+         vYq0rWozIr+6/WRFz1gyL068350DTMlfRFAnZ5AIkD1KxCLvAcs/H1FLBzyzjzYhT23/
+         JEjg==
+X-Forwarded-Encrypted: i=1; AKwUvBzXpmT35fDuMQoMphrXK6UdSIeWRwcjtz8cQEPY7RpOnp2DICwDhG7fjqR6Oq1+D7HWqFQD10HvKu9UtIMZ@vger.kernel.org
+X-Gm-Message-State: AFuF++nSEQmoZWeWfn7xgV/z02gqWatfp8dBD0UCJN9keZm1Zj0C+o2/
+	cSG8qP/Ucs/0lpkQ59b+sMwrnbapPwWMg7L6JGFfcM0BPrcPx5doymKOGCMvRYD2mCD0VQa6w99
+	UzTruOq0=
+X-Gm-Gg: AYBFou2cA/Mrs+8xZLAqDtdOFIRxuncEAdY1EiSCXx7y3KpMO0FP7qEvTaQqKLCHAP9
+	adYYRAReIP42FH+w/0oTOzYWpzz1uiHwBtJqL8nCT4mjGJdxWP2hjx4WeGc11rWKUCP+88UljSY
+	+ToEqCe9Je7fnt2UmjCvgAy1hJiOG+f+Ohwe9NL6aoTwjdZ8DjMzzqdgFQBcojnveuhWqSyoqOb
+	ZldEPqg9OVFmpw3FYWZpjOILsoHtgYuI5kTN/wZ+nq4fuMVKggZ4xZTjfdPQfxoRp1B6kyJyOY2
+	keWQ6n2wpBxcjABDEOTdaHbPFV5I9MeVehhdWWrpubOJqTdBHbDGKLOzWAsFXdq+l53tOIrMrIU
+	xbJFsid8doSzI2mNm2iamWyh0Uw8jzft42Sez8srXPxfo1pudOHKVBVyO7x8Ja6Zj4etqZ5Tn70
+	XCbNsbnxeac/1LfxOgLx6kCg9NwsvnC3vcwaAwYBPL3LrgLnVejRpPTNZBbRvCVnyYYcvqxEZn4
+	eCJWaNGmgM=
+X-Received: by 2002:a05:600c:3b01:b0:49f:fe7e:dc61 with SMTP id 5b1f17b1804b1-4a02745924bmr160084705e9.0.1791185657092;
+        Mon, 05 Oct 2026 00:34:17 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff25:4f41:ec49:36a8:7075:6d05])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c6229e0f5sm2052164f8f.30.2026.10.05.00.34.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 00:25:16 -0700 (PDT)
-From: Balaji Kalkonda <balaji.kalkonda@oss.qualcomm.com>
-Date: Mon, 05 Oct 2026 12:54:30 +0530
-Subject: [PATCH 5/5] arm64: dts: qcom: kaanapali-mtp: Enable DisplayPort
- over USB
+        Mon, 05 Oct 2026 00:34:16 -0700 (PDT)
+Date: Mon, 5 Oct 2026 09:34:03 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	"Aiqun(Maria) Yu" <aiqun.yu@oss.qualcomm.com>
+Subject: Re: [PATCH] remoteproc: qcom_q6v5_pas: Drop early_boot flag for Nord
+ ADSP
+Message-ID: <asNS2MeAkLDKM0Lz@linaro.org>
+References: <20260930020745.1940933-1-shengchao.guo@oss.qualcomm.com>
+ <58c1c4a9-afad-4059-ba81-cdcc92d0c5dd@oss.qualcomm.com>
+ <asJwJ6cq8FcA0IID@QCOM-aGQu4IUr3Y>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261005-kaanapali_dp-v1-5-6faeac3a6d59@oss.qualcomm.com>
-References: <20261005-kaanapali_dp-v1-0-6faeac3a6d59@oss.qualcomm.com>
-In-Reply-To: <20261005-kaanapali_dp-v1-0-6faeac3a6d59@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Kuogee Hsieh <quic_khsieh@quicinc.com>,
-        Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
-        Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Balaji Kalkonda <balaji.kalkonda@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791185070; l=773;
- i=balaji.kalkonda@oss.qualcomm.com; s=20261001; h=from:subject:message-id;
- bh=H/ngu2NtKM0XR9OEviez25RT11Pu6dH3Orddp07YVTY=;
- b=D+xf16u7uxuQGu/DAQZ8gv6a68ZQIUfSSSOn6ayBSuo43khwowC8y4fM1svWyJdiebAe5xzBG
- yUJfp/uy3LCDY6ghTGnBTNWaIER8u4JC3fwO8PU4lULQmrIgUNGl4JA
-X-Developer-Key: i=balaji.kalkonda@oss.qualcomm.com; a=ed25519;
- pk=U+unGox551qPLS2mzIlN+b5cHksxTMGPnDwePd6KEnI=
-X-Proofpoint-ORIG-GUID: 2IZEbroKHHkIvMRBnwqkONjMJllpN0KV
-X-Proofpoint-GUID: 2IZEbroKHHkIvMRBnwqkONjMJllpN0KV
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDAyOCBTYWx0ZWRfX7lwLHHar+fRs
- tWJgKHdegGF1TvR5g5NnjatTcUJVY/JyMNZJMRcROyW1CltCI41Hibh+NubEVQNevxrKupZ+ujU
- LBJE4jEpYd1Kj+YcqnjQnfg1wQQ8W4E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDAyOCBTYWx0ZWRfXyOIbdODiQiCC
- ZfOgEXVF47J+tNhvtZ/IcGBNlrcdwmX0ZqXzT1VCZIaVH5FFf12+NF3vLBLiOi9JOfmXClzmtnE
- oNNuXNlVA5nYpPLlZBoh+KOUZ+x5wsXADpGLLE8WDgAVCqT6oPqmwUbTuzEfXGQEFBS+iG9Zbnf
- 8V4vWvztwSizKZm7YVHR/xD+4VAsCe++803Wfc05UpCuSKtsIKfJFIPpGHwYqv9z6coe+1gG9+W
- Jr1MBzbAVMbxEAB+TCSxjbZhCJ0aasCGF0Uut+SWr8iTQb0qio/5fQwD0+yhBnxkEwjJ1yFGRD6
- suIAONhJZ/EHmR43DoMPLPO5G2CMUc5dgyk/CSDF9DQN7E4P37NkyDDGgqAaV1CV/oZX4TO9iU8
- GA0LlFCwuLpqvXWRl0AqekxyMRTBQEsg+cEB6vxKLp2bjr2xHIR68KLjVZTsOGXflSXIIVaHxRx
- p0WLG2PNwrhnzN8yTlg==
-X-Authority-Analysis: v=2.4 cv=Q6tHcI2a c=1 sm=1 tr=0 ts=6ac350de cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=5UEAqLcyi3SyoXtcnFMA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-05_01,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 lowpriorityscore=0
- malwarescore=0 impostorscore=0 suspectscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050028
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <asJwJ6cq8FcA0IID@QCOM-aGQu4IUr3Y>
 
-Hook up DisplayPort parts over Type-C USB on MTP.
+On Sun, Oct 04, 2026 at 11:26:31PM +0800, Shawn Guo wrote:
+> On Thu, Oct 01, 2026 at 10:42:39AM +0200, Konrad Dybcio wrote:
+> > On 9/30/26 4:07 AM, Shawn Guo wrote:
+> > > Qualcomm NHLOS team changes XBL for Nord IOT/Embedded variant, leaving
+> > > ADSP to be powered up by Linux remoteproc, so that Nord IQ10 Qualcomm
+> > > Linux (QLI) behavior gets aligned with IQ8/9. Drop early_boot flag from
+> > > Nord ADSP for that purpose.
+> > > 
+> > > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> > > ---
+> > 
+> > What happens if this patch is absent?
+> 
+> ADSP never comes up:
+> 
+>   remoteproc remoteproc0: attaching to adsp
+>   remoteproc remoteproc0: can't attach to rproc adsp: -19
+> 
+> Since XBL no longer boots ADSP, the remote never publishes its SMP2P
+> inbound item. The smp2p entry stays unmapped, and irq_get_irqchip_state()
+> on fatal_irq returns -ENODEV. qcom_pas_attach() treats that as a hard
+> error rather than falling back to a firmware boot.
+> 
+> Even the existing fallback (ready bit clear -> RPROC_OFFLINE) doesn't
+> work: rproc_boot() takes the attach branch, sees the error and returns
+> without loading firmware.
+> 
+> > 
+> > When the early_boot path was first introduced I was really hoping
+> > that this behavior could be made unconditional and Linux would
+> > figure out if the rproc may be active by virtue of it sending
+> > back signals or not, unfortunately that hasn't made it into the
+> > tree..
+> 
+> The difficulty is with the positive signal. As Stephan pointed out [1],
+> the ready bit is not cleared when the remote is stopped or force-shutdown,
+> so a stop followed by rmmod/modprobe of qcom_q6v5_pas makes the driver
+> attach to a remote that is not running. Without ping-pong or a PAS query
+> for the remote state, I don't think we can reliably say that a remote
+> *is* running.
+> 
+> The negative signal is reliable though. The -ENODEV from
+> irq_get_irqchip_state() means the remote has never populated its SMP2P
+> entry since cold boot, so it cannot be running. We can fall back to a
+> firmware boot in that case. early_boot then becomes a hint that the
+> bootloader *may* have started the remote, which matches Nord ADSP:
+> it is started by XBL on the Auto variant and by Linux remoteproc on
+> the IoT variant.
+> 
+> I'll drop this patch and send two patches instead:
+> 
+> - remoteproc: core: continue to the firmware boot path when .attach()
+>   leaves the rproc in RPROC_OFFLINE
 
-Signed-off-by: Balaji Kalkonda <balaji.kalkonda@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/kaanapali-mtp.dts | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I don't think you need this change in the remoteproc core. In the
+current upstream state - without the ping-pong implementation - the
+stop/shutdown/ready detection should remain static during the
+initialization of qcom_q6v5_pas. The boot firmware has either started
+it, stopped it, or never started it at all. Those signals should not
+change state until we take some action.
 
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali-mtp.dts b/arch/arm64/boot/dts/qcom/kaanapali-mtp.dts
-index 16f4dd041649..ff5d5c2fafba 100644
---- a/arch/arm64/boot/dts/qcom/kaanapali-mtp.dts
-+++ b/arch/arm64/boot/dts/qcom/kaanapali-mtp.dts
-@@ -1015,6 +1015,14 @@ &mdss_dsi0_phy {
- 	status = "okay";
- };
- 
-+&mdss_dp0 {
-+	status = "okay";
-+};
-+
-+&mdss_dp0_out {
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+};
-+
- &pcie0 {
- 	pinctrl-0 = <&pcie0_default_state>;
- 	pinctrl-names = "default";
+IMO the proper solution is to move the checks inside qcom_pas_attach()
+to the probe function and never mark the remoteproc as RPROC_DETACHED in
+the first place if we already know it was not started.
 
--- 
-2.34.1
+The fatal/crash IRQ checks can probably remain inside qcom_pas_attach(),
+I would assume the remoteproc core does not handle the case where a
+remoteproc appears immediately in RPROC_CRASHED state.
 
+BTW the issue you are running into was pointed out by Sashiko during the
+review of the original patch, see the second comment here:
+https://sashiko.dev/#/patchset/20260623-knp-soccp-v7-5-1ec7bb5c9fec%40oss.qualcomm.com?part=5
+
+The first comment from Sashiko about the broken crash handling during
+attach could also still be valid. I pointed out the same problem
+multiple times during the review process [1]. Unfortunately, Jingyi
+never fully addressed it. Eventually, the fixes were moved out into a
+separate series [2] and AFAICT abandoned as soon as the main series was
+merged with all the open problems. I'm quite frustrated about how the
+review process went for this change. :(
+
+The crash handling may have improved a bit with the fixes Bjorn did
+recently [3], but someone with access to the hardware for testing should
+really go complete the work that should have been done before merging
+the original series and test that *all* the error cases are handled
+correctly (remoteproc running, not running, crashed).
+
+In other words, if you could also do some more testing for the "crashed"
+case while fixing the "not running" case that would be much appreciated!
+
+With the state of LLMs today, all the discussions and my lengthy
+comments on the original series are probably perfect as verbatim input
+context for an LLM to make it do the dirty work... :-)
+
+Thanks,
+Stephan
+
+[1]: https://lore.kernel.org/r/aUsUhX8Km275qonq@linaro.org/
+[2]: https://lore.kernel.org/r/20260409-rproc-attach-issue-v1-0-088a1c348e7a@oss.qualcomm.com/
+[3]: https://lore.kernel.org/r/20260723-rproc-rmmod-not-crashing-v1-0-546dfd5de0e6@oss.qualcomm.com/
