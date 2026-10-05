@@ -1,475 +1,197 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp-outgoing-1601.laposte.net (smtp-outgoing-1601.laposte.net [160.92.124.96])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DA484CE699;
-	Mon,  5 Oct 2026 17:15:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCB3F4D0CDF
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 17:15:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.96
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791220548; cv=none; b=O508vEBPZTCI1/jnrrRf/v6xrpmaE6WgAZF3V1Vjc1MZX8cOLNoyiYjG8faHjlVisoGZQgRFBMtamvqU4Vi4Hj+VnBaEkh5qe/GuZrb/zJaOvO851FwbLMuSsVxcRGV61j/1E8ZFc0dPYTbH5uQ2O4hNITDuYwA6xKIA5jLj0ig=
+	t=1791220550; cv=none; b=J9bceWhMM3oory9AjBO+L58KwGJPDwRdYBWoleHx4SjUVbvPBvMBGsmOObBieTLhVeJCG/pN9SQoC5t9Sl16icurJA3Sv2yKH1EHSRmEE8oR8WlIuKXoO20efJpVF6gGr0v1F4ITBlX7rpDTohUvG9fn23kVhXX3lQl7ZzA7gKg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791220548; c=relaxed/simple;
-	bh=3KI+WRfOWe1BqN3B0+hvh29upFHskMPI5atz6YE3l8M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Dpe4oqIHXaogIQq8KIGVBl1ZkBj75zGH4uY4yRy/hNwZHBPsue5tJf7YYwmyq9UwRP8Ip9zOHou+S9Ryx+st0LMHvGb17hIhoKB7TPZ2oMsGrznS8yGjlYGZNHCdXKfcKHLws4CLZ8u0luHvlF74fyOfCDZPkq2WuIS7htjuL3w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CBM/ckDs; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791220550; c=relaxed/simple;
+	bh=vQgNfaifqJBfWvhAJLZYmdCmSToBEbMrsQb5xsLkevc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=XmMIuQNGE2Pk8GedMg4RzzdWa44GCSTsSow+XAwcPqbOUUcvZOXM70Zwk9inveHZ93itZb3iPmt/JR2h8w6VwdPLWp4kq//E7BtVX3y6pIXSmMBVQsgPs4VjV11xYYZzWy0tozVdyKemDxvksOw4ApI+t0gjyWaq4CVzR+54HZU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=iUi1Vnmw; arc=none smtp.client-ip=160.92.124.96
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=laposte.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CBM/ckDs"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A97E51F000FF;
-	Mon,  5 Oct 2026 17:15:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791220546;
-	bh=PNhVxcjyDyVesjAh/2LTUKSGS0WDwiR2Mj+OOwzsm24=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=CBM/ckDsP7vHKN0RNptkRC8dmot7Z6sHbbnL+Gsq1KaXWfbIfGfnTYV7RMJKTBIjG
-	 2GVaL1DgkxhbOuJrwiKLcIRfDD9xGvArUsWhBdvchLzhw0Yw6OppXyhw8/7GpTsYVB
-	 94rqqrpIB6jJ3SvKwWWHqZD3n+vCzj7hAli4HfqKI51aNp5fUw5itHnXq70X7E41V1
-	 8VXKyxyzIuEXbRL/EqNhnUBnzjkItnoq3I1xdnQDFfy4cb6W/dKU8UYoxjEXlwK+mC
-	 tXPlQIJHHsmQYv6bkD2Uz9G06IT86yD47ugSqqprcE2e/oiG6wsCxkxaePoPaYpvww
-	 WIdPM3RtMsDwg==
-From: Bryan O'Donoghue <bod@kernel.org>
-Date: Mon, 05 Oct 2026 19:13:32 +0200
-Subject: [PATCH 02/74] media: qcom: camss: vfe: Separate VFE 690 from VFE
- 780/880
+	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="iUi1Vnmw"
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gv1kZfz10MQR","contextId":
+ "775944a0-e23f-4087-bb77-5e4c87d0348a"}
+Received: from outgoing-mail.laposte.net (localhost.localdomain [127.0.0.1])
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTP id 4hz0Gv1kZfz10MQR;
+	Mon,  5 Oct 2026 15:14:47 +0200 (CEST)
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gt4y5Cz10MQN","contextId":
+ "407ccb37-f746-4378-8a4c-0d794e65b55c"}
+X-lpn-mailing: LEGIT
+X-lpn-spamrating: 36
+X-lpn-spamlevel: not-spam
+Received: from PAR-95296130.bcg.com (unknown [147.161.232.172])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTPSA id 4hz0Gt4y5Cz10MQN;
+	Mon,  5 Oct 2026 15:14:46 +0200 (CEST)
+From: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
+To: linux-arm-msm@vger.kernel.org
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Xilin Wu <sophon@radxa.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Saim Shujah <saimzst@gmail.com>,
+	Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Jean-Francois Bobier <jean-francois.bobier@laposte.net>
+Subject: [PATCH 2/3] drm/msm/dp: don't log an expected link-training fallback as errors
+Date: Mon,  5 Oct 2026 15:14:31 +0200
+Message-ID: <20261005131432.22840-3-jean-francois.bobier@laposte.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
+References: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-2-ed985aefd611@kernel.org>
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
-In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
- Daniel Scally <dan.scally@ideasonboard.com>, Keke Li <keke.li@amlogic.com>, 
- Richard Acayan <mailingradian@gmail.com>, 
- Hans Verkuil <hverkuil@kernel.org>, 
- Gjorgji Rosikopulos <quic_grosikop@quicinc.com>, 
- Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>, 
- Robert Foss <rfoss@kernel.org>, Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13999; i=bod@kernel.org;
- h=from:subject:message-id; bh=3KI+WRfOWe1BqN3B0+hvh29upFHskMPI5atz6YE3l8M=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqw9sBu+cQpMvdZLtBKPiVWly1ROJUtNl1p192F
- bSJkw155myJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCasPbAQAKCRAicTuzoY3I
- Oi36EACTwJj8Ha8fyEmzl2LpHYktFHYfXNSdhg+0lf5Bm4NNpe6TupWqEHrobvwdB0k66g93huh
- KSFKiwPGHGLXMinkOEuWqxfEOAs/EXPDzY/3pGRb2BME6ZWYffvHz5ue5UK+oi0eCK3XIVyJmZO
- NXXkRhkddF8o9otil0A8Rvf0KvfwmU7mPAZ7SQ2z0fwjXJ4FMsKSXHC2d4bpqzO9B5eI4xlHWOM
- Fb422Ys+Vdu8KqhHoePOFyecZKKHLiY/Xsljhn4sRzkPW24sIqRO0IOCdNoJQWAks5v9pl+A0Yk
- dh0+ER8y7lwgjYaMx8fW7esDaII+SNOYky4TmR1PjRi0fBVfvYgKQ/yXnrZhuVaqMgIdJL3SaJA
- 6eVOXO1hj5TgBoC9AI/qUn4qHdjmR4/s1diYDzqMoqoGtOskZ/zF9ShGtSBFKzhcB2tULYVUcig
- /XUMznIYneoy9TwuK5u9E3yGTjY3tEeb0eurpgkHOz9zqW2NoUAd8zAdjiYcPKWGArmL+c5NmOd
- UdbO4iwICM/0M7itrg+HmOgsUPVB9IYC4b4pu1FVdI7iyVs7xCH7lX2h8+ADDqU6Tg6sJYSLsFK
- edEdhNMrsCcIArtdbU/TKSW5Rp85l/Sc0l6+YbvZ18S2IorQbp0WHrvktvFw3TRobLdOHK56nr1
- GJmU36DlrV6C/tQ==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791220545; bh=vQgNfaifqJBfWvhAJLZYmdCmSToBEbMrsQb5xsLkevc=; h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding; b=iUi1VnmwgicuI10FWSNkz2tLDvVkpGyDowy9P7mCNdU7Onnw0kMAn/CnkPSbyQQS/bX/SlNqxzdk/7hw8xnhg9UhINGvd6YOorx2qeHz9u1wuP72dqqZmofLC8Yb2inhfe7eykE8TitV6+3RZnmRrbJ09ro8dcUNb6Bq7YI+J7C6UmTRSFkRs7bRO/etCEJ7Gj450sPJUVVpaIrVeay7ZKeGCzKybA6X8FWx1MjOZybdz4Dze8i3xr0p5Ry9/LMJnWvGA/7oXJNgRf2kDvNsKWfsJuPZYB/8x4uOi6iY5Vfs1r8QNNSUA2sLLBYnU04ubuuBRC2vWXiqEyont4otYQ==;
 
-Looking at the write-master index for VFE 690 and VFE 780/880 we can see a
-discontinuity between 690 and 780/880. Extending out the functionality in
-these files will result in spaghettification of the code for no good
-purpose.
+msm_dp_ctrl_on_link() implements DP link fallback: it retries
+msm_dp_ctrl_setup_main_link() up to five times, stepping the link rate
+down HBR3 -> HBR2 -> HBR -> RBR and then reducing the lane count, and
+breaks as soon as training succeeds. Every step of that search is
+therefore expected to fail before the one that works.
 
-The WM index difference is indication enough that the silicon should live
-in separate files.
+Each failed attempt currently logs at error level, from four places:
 
-Disjoin now.
+  max v_level reached
+  link training #1 on phy %d failed. ret=3D%d
+  link training #2 on phy %d failed. ret=3D%d
+  link training on sink failed. ret=3D%d
 
-Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
+A monitor that settles on two lanes after three attempts prints nine
+error lines on a completely successful attach -- which is how a cable
+that merely has two bad lanes looks identical in the log to a sink that
+never trains at all.
+
+Nothing is lost by demoting them. When the retry loop really does
+exhaust itself, msm_dp_ctrl_on_link() returns the error and
+msm_dp_display_process_hpd_high() already reports it once, at error
+level, as "Failed link training (rc=3D%d)" -- which is the correct place,
+because it is the only one that knows the search is over.
+
+Demote the per-attempt messages to drm_dbg_dp() so they remain available
+with drm.debug, and keep the final verdict where it is.
+
+Also demote the unsolicited AUX interrupt message. msm_dp_aux_isr()
+returns IRQ_NONE when no AUX transaction is outstanding, which is the
+whole of the correct response for an interrupt that is not ours -- the
+AUX block shares its interrupt and sinks raise AUX status asynchronously
+around hotplug, so this fires twice on a normal DisplayPort attach.
+
+Signed-off-by: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
 ---
- drivers/media/platform/qcom/camss/Makefile        |   1 +
- drivers/media/platform/qcom/camss/camss-vfe-690.c | 168 ++++++++++++++++++++++
- drivers/media/platform/qcom/camss/camss-vfe-780.c |  53 ++-----
- drivers/media/platform/qcom/camss/camss-vfe.h     |   1 +
- drivers/media/platform/qcom/camss/camss.c         |  14 +-
- 5 files changed, 187 insertions(+), 50 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_aux.c  |  9 ++++++++-
+ drivers/gpu/drm/msm/dp/dp_ctrl.c | 15 ++++++++++-----
+ 2 files changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/Makefile b/drivers/media/platform/qcom/camss/Makefile
-index e82bc8141c241..4dcb08a0e25aa 100644
---- a/drivers/media/platform/qcom/camss/Makefile
-+++ b/drivers/media/platform/qcom/camss/Makefile
-@@ -25,6 +25,7 @@ qcom-camss-objs += \
- 		camss-vfe-340.o \
- 		camss-vfe-480.o \
- 		camss-vfe-680.o \
-+		camss-vfe-690.o \
- 		camss-vfe-780.o \
- 		camss-vfe-gen1.o \
- 		camss-vfe-vbif.o \
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe-690.c b/drivers/media/platform/qcom/camss/camss-vfe-690.c
-new file mode 100644
-index 0000000000000..6f90134d5ed64
---- /dev/null
-+++ b/drivers/media/platform/qcom/camss/camss-vfe-690.c
-@@ -0,0 +1,168 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Qualcomm MSM Camera Subsystem - VFE (Video Front End) Module 690
-+ *
-+ * Copyright (c) 2024 Qualcomm Technologies, Inc.
-+ */
-+
-+#include <linux/interrupt.h>
-+#include <linux/io.h>
-+#include <linux/iopoll.h>
-+
-+#include "camss.h"
-+#include "camss-vfe.h"
-+
-+#define BUS_REG_BASE (vfe_is_lite(vfe) ? 0x480 : 0x400)
-+
-+#define VFE_TOP_CORE_CFG (0x24)
-+#define VFE_DISABLE_DSCALING_DS4  BIT(21)
-+#define VFE_DISABLE_DSCALING_DS16 BIT(22)
-+
-+#define VFE_BUS_WM_TEST_BUS_CTRL (BUS_REG_BASE + 0xFC)
-+/*
-+ * Bus client mapping:
-+ *
-+ * Full VFE:
-+ * VFE_690: 16 = RDI0, 17 = RDI1, 18 = RDI2
-+ *
-+ * VFE LITE:
-+ * VFE_690 : 0 = RDI0, 1 = RDI1, 2 = RDI2, 3 = RDI3, 4 = RDI4, 5 = RDI5
-+ */
-+#define RDI_WM(n)	((vfe_is_lite(vfe) ? 0x0 : 0x10) + (n))
-+
-+#define VFE_BUS_WM_CGC_OVERRIDE		(BUS_REG_BASE + 0x08)
-+#define		WM_CGC_OVERRIDE_ALL		(0x7FFFFFF)
-+
-+#define VFE_BUS_WM_CFG(n)		(BUS_REG_BASE + 0x200 + (n) * 0x100)
-+#define		WM_CFG_EN			BIT(0)
-+#define		WM_VIR_FRM_EN			BIT(1)
-+#define		WM_CFG_MODE			BIT(16)
-+#define VFE_BUS_WM_IMAGE_ADDR(n)	(BUS_REG_BASE + 0x204 + (n) * 0x100)
-+#define VFE_BUS_WM_FRAME_INCR(n)	(BUS_REG_BASE + 0x208 + (n) * 0x100)
-+#define VFE_BUS_WM_IMAGE_CFG_0(n)	(BUS_REG_BASE + 0x20c + (n) * 0x100)
-+#define		WM_IMAGE_CFG_0_DEFAULT_WIDTH	(0xFFFF)
-+#define VFE_BUS_WM_IMAGE_CFG_2(n)	(BUS_REG_BASE + 0x214 + (n) * 0x100)
-+#define		WM_IMAGE_CFG_2_DEFAULT_STRIDE	(0xFFFF)
-+#define VFE_BUS_WM_PACKER_CFG(n)	(BUS_REG_BASE + 0x218 + (n) * 0x100)
-+
-+#define VFE_BUS_WM_IRQ_SUBSAMPLE_PERIOD(n)	(BUS_REG_BASE + 0x230 + (n) * 0x100)
-+#define VFE_BUS_WM_IRQ_SUBSAMPLE_PATTERN(n)	(BUS_REG_BASE + 0x234 + (n) * 0x100)
-+#define VFE_BUS_WM_FRAMEDROP_PERIOD(n)		(BUS_REG_BASE + 0x238 + (n) * 0x100)
-+#define VFE_BUS_WM_FRAMEDROP_PATTERN(n)		(BUS_REG_BASE + 0x23c + (n) * 0x100)
-+
-+#define VFE_BUS_WM_MMU_PREFETCH_CFG(n)		(BUS_REG_BASE + 0x260 + (n) * 0x100)
-+#define VFE_BUS_WM_MMU_PREFETCH_MAX_OFFSET(n)	(BUS_REG_BASE + 0x264 + (n) * 0x100)
-+
-+static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
-+{
-+	struct v4l2_pix_format_mplane *pix =
-+		&line->video_out.active_fmt.fmt.pix_mp;
-+
-+	wm = RDI_WM(wm);
-+
-+	/* no clock gating at bus input */
-+	writel(WM_CGC_OVERRIDE_ALL, vfe->base + VFE_BUS_WM_CGC_OVERRIDE);
-+
-+	writel(0x0, vfe->base + VFE_BUS_WM_TEST_BUS_CTRL);
-+
-+	writel(ALIGN(pix->plane_fmt[0].bytesperline, 16) * pix->height,
-+	       vfe->base + VFE_BUS_WM_FRAME_INCR(wm));
-+
-+	writel((WM_IMAGE_CFG_0_DEFAULT_WIDTH & 0xFFFF),
-+	       vfe->base + VFE_BUS_WM_IMAGE_CFG_0(wm));
-+	writel(WM_IMAGE_CFG_2_DEFAULT_STRIDE,
-+	       vfe->base + VFE_BUS_WM_IMAGE_CFG_2(wm));
-+	writel(0, vfe->base + VFE_BUS_WM_PACKER_CFG(wm));
-+
-+	/* TOP CORE CFG */
-+	writel(VFE_DISABLE_DSCALING_DS4 | VFE_DISABLE_DSCALING_DS16,
-+		vfe->base + VFE_TOP_CORE_CFG);
-+
-+	/* no dropped frames, one irq per frame */
-+	writel(0, vfe->base + VFE_BUS_WM_FRAMEDROP_PERIOD(wm));
-+	writel(1, vfe->base + VFE_BUS_WM_FRAMEDROP_PATTERN(wm));
-+	writel(0, vfe->base + VFE_BUS_WM_IRQ_SUBSAMPLE_PERIOD(wm));
-+	writel(1, vfe->base + VFE_BUS_WM_IRQ_SUBSAMPLE_PATTERN(wm));
-+
-+	writel(1, vfe->base + VFE_BUS_WM_MMU_PREFETCH_CFG(wm));
-+	writel(0xFFFFFFFF, vfe->base + VFE_BUS_WM_MMU_PREFETCH_MAX_OFFSET(wm));
-+
-+	writel(WM_CFG_EN | WM_CFG_MODE, vfe->base + VFE_BUS_WM_CFG(wm));
-+}
-+
-+static void vfe_wm_stop(struct vfe_device *vfe, u8 wm)
-+{
-+	wm = RDI_WM(wm);
-+	writel(0, vfe->base + VFE_BUS_WM_CFG(wm));
-+}
-+
-+static void vfe_wm_update(struct vfe_device *vfe, u8 wm, u32 addr,
-+			  struct vfe_line *line)
-+{
-+	wm = RDI_WM(wm);
-+
-+	writel(addr, vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
-+
-+	dev_dbg(vfe->camss->dev, "wm:%d, image buf addr:0x%x\n",
-+		wm, addr);
-+}
-+
-+static void vfe_reg_update(struct vfe_device *vfe, enum vfe_line_id line_id)
-+{
-+	int port_id = line_id;
-+
-+	camss_reg_update(vfe->camss, vfe->id, port_id, false);
-+}
-+
-+static inline void vfe_reg_update_clear(struct vfe_device *vfe,
-+					enum vfe_line_id line_id)
-+{
-+	int port_id = line_id;
-+
-+	camss_reg_update(vfe->camss, vfe->id, port_id, true);
-+}
-+
-+static const struct camss_video_ops vfe_video_ops_690 = {
-+	.queue_buffer = vfe_queue_buffer_v2,
-+	.flush_buffers = vfe_flush_buffers,
-+};
-+
-+static void vfe_subdev_init(struct device *dev, struct vfe_device *vfe)
-+{
-+	vfe->video_ops = vfe_video_ops_690;
-+}
-+
-+static void vfe_global_reset(struct vfe_device *vfe)
-+{
-+	vfe_isr_reset_ack(vfe);
-+}
-+
-+static irqreturn_t vfe_isr(int irq, void *dev)
-+{
-+	/* nop */
-+	return IRQ_HANDLED;
-+}
-+
-+static int vfe_halt(struct vfe_device *vfe)
-+{
-+	/* rely on vfe_disable_output() to stop the VFE */
-+	return 0;
-+}
-+
-+const struct vfe_hw_ops vfe_ops_690 = {
-+	.global_reset = vfe_global_reset,
-+	.hw_version = vfe_hw_version,
-+	.isr = vfe_isr,
-+	.pm_domain_off = vfe_pm_domain_off,
-+	.pm_domain_on = vfe_pm_domain_on,
-+	.reg_update = vfe_reg_update,
-+	.reg_update_clear = vfe_reg_update_clear,
-+	.subdev_init = vfe_subdev_init,
-+	.vfe_disable = vfe_disable,
-+	.vfe_enable = vfe_enable_v2,
-+	.vfe_halt = vfe_halt,
-+	.vfe_wm_start = vfe_wm_start,
-+	.vfe_wm_stop = vfe_wm_stop,
-+	.vfe_buf_done = vfe_buf_done,
-+	.vfe_wm_update = vfe_wm_update,
-+};
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe-780.c b/drivers/media/platform/qcom/camss/camss-vfe-780.c
-index 6c04e3c64b841..4adbd0680898f 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe-780.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe-780.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * Qualcomm MSM Camera Subsystem - VFE (Video Front End) Module gen3
-+ * Qualcomm MSM Camera Subsystem - VFE (Video Front End) Module 780
-  *
-  * Copyright (c) 2024 Qualcomm Technologies, Inc.
-  */
-@@ -12,40 +12,19 @@
- #include "camss.h"
- #include "camss-vfe.h"
- 
--#define IS_VFE_690(vfe) \
--	    ((vfe->camss->res->version == CAMSS_8775P) \
--	    || (vfe->camss->res->version == CAMSS_8300))
--
--#define BUS_REG_BASE_690 \
--	    (vfe_is_lite(vfe) ? 0x480 : 0x400)
--#define BUS_REG_BASE_780 \
--	    (vfe_is_lite(vfe) ? 0x200 : 0xC00)
--#define BUS_REG_BASE \
--	    (IS_VFE_690(vfe) ? BUS_REG_BASE_690 : BUS_REG_BASE_780)
--
--#define VFE_TOP_CORE_CFG (0x24)
--#define VFE_DISABLE_DSCALING_DS4  BIT(21)
--#define VFE_DISABLE_DSCALING_DS16 BIT(22)
--
--#define VFE_BUS_WM_TEST_BUS_CTRL_690 (BUS_REG_BASE + 0xFC)
--#define VFE_BUS_WM_TEST_BUS_CTRL_780 (BUS_REG_BASE + 0xDC)
--#define VFE_BUS_WM_TEST_BUS_CTRL \
--	    (IS_VFE_690(vfe) ? VFE_BUS_WM_TEST_BUS_CTRL_690 \
--	     : VFE_BUS_WM_TEST_BUS_CTRL_780)
-+#define BUS_REG_BASE (vfe_is_lite(vfe) ? 0x200 : 0xC00)
-+
-+#define VFE_BUS_WM_TEST_BUS_CTRL (BUS_REG_BASE + 0xDC)
- /*
-  * Bus client mapping:
-  *
-  * Full VFE:
-- * VFE_690: 16 = RDI0, 17 = RDI1, 18 = RDI2
-  * VFE_780: 23 = RDI0, 24 = RDI1, 25 = RDI2
-  *
-  * VFE LITE:
-- * VFE_690 : 0 = RDI0, 1 = RDI1, 2 = RDI2, 3 = RDI3, 4 = RDI4, 5 = RDI5
-  * VFE_780 : 0 = RDI0, 1 = RDI1, 2 = RDI2, 3 = RDI3, 4 = RDI4
-  */
--#define RDI_WM_690(n)	((vfe_is_lite(vfe) ? 0x0 : 0x10) + (n))
--#define RDI_WM_780(n)	((vfe_is_lite(vfe) ? 0x0 : 0x17) + (n))
--#define RDI_WM(n)	(IS_VFE_690(vfe) ? RDI_WM_690(n) : RDI_WM_780(n))
-+#define RDI_WM(n)	((vfe_is_lite(vfe) ? 0x0 : 0x17) + (n))
- 
- #define VFE_BUS_WM_CGC_OVERRIDE		(BUS_REG_BASE + 0x08)
- #define		WM_CGC_OVERRIDE_ALL		(0x7FFFFFF)
-@@ -82,12 +61,8 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
- 
- 	writel(0x0, vfe->base + VFE_BUS_WM_TEST_BUS_CTRL);
- 
--	if (IS_VFE_690(vfe))
--		writel(ALIGN(pix->plane_fmt[0].bytesperline, 16) * pix->height,
--		       vfe->base + VFE_BUS_WM_FRAME_INCR(wm));
--	else
--		writel(ALIGN(pix->plane_fmt[0].bytesperline, 16) * pix->height >> 8,
--		       vfe->base + VFE_BUS_WM_FRAME_INCR(wm));
-+	writel(ALIGN(pix->plane_fmt[0].bytesperline, 16) * pix->height >> 8,
-+	       vfe->base + VFE_BUS_WM_FRAME_INCR(wm));
- 
- 	writel((WM_IMAGE_CFG_0_DEFAULT_WIDTH & 0xFFFF),
- 	       vfe->base + VFE_BUS_WM_IMAGE_CFG_0(wm));
-@@ -95,11 +70,6 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
- 	       vfe->base + VFE_BUS_WM_IMAGE_CFG_2(wm));
- 	writel(0, vfe->base + VFE_BUS_WM_PACKER_CFG(wm));
- 
--	/* TOP CORE CFG */
--	if (IS_VFE_690(vfe))
--		writel(VFE_DISABLE_DSCALING_DS4 | VFE_DISABLE_DSCALING_DS16,
--			vfe->base + VFE_TOP_CORE_CFG);
--
- 	/* no dropped frames, one irq per frame */
- 	writel(0, vfe->base + VFE_BUS_WM_FRAMEDROP_PERIOD(wm));
- 	writel(1, vfe->base + VFE_BUS_WM_FRAMEDROP_PATTERN(wm));
-@@ -123,10 +93,7 @@ static void vfe_wm_update(struct vfe_device *vfe, u8 wm, u32 addr,
- {
- 	wm = RDI_WM(wm);
- 
--	if (IS_VFE_690(vfe))
--		writel(addr, vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
--	else
--		writel((addr >> 8), vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
-+	writel((addr >> 8), vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
- 
- 	dev_dbg(vfe->camss->dev, "wm:%d, image buf addr:0x%x\n",
- 		wm, addr);
-@@ -147,14 +114,14 @@ static inline void vfe_reg_update_clear(struct vfe_device *vfe,
- 	camss_reg_update(vfe->camss, vfe->id, port_id, true);
- }
- 
--static const struct camss_video_ops vfe_video_ops_gen3 = {
-+static const struct camss_video_ops vfe_video_ops_780 = {
- 	.queue_buffer = vfe_queue_buffer_v2,
- 	.flush_buffers = vfe_flush_buffers,
- };
- 
- static void vfe_subdev_init(struct device *dev, struct vfe_device *vfe)
- {
--	vfe->video_ops = vfe_video_ops_gen3;
-+	vfe->video_ops = vfe_video_ops_780;
- }
- 
- static void vfe_global_reset(struct vfe_device *vfe)
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/media/platform/qcom/camss/camss-vfe.h
-index 68cd05331ffe7..089f525b98cf5 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe.h
-+++ b/drivers/media/platform/qcom/camss/camss-vfe.h
-@@ -248,6 +248,7 @@ extern const struct vfe_hw_ops vfe_ops_170;
- extern const struct vfe_hw_ops vfe_ops_340;
- extern const struct vfe_hw_ops vfe_ops_480;
- extern const struct vfe_hw_ops vfe_ops_680;
-+extern const struct vfe_hw_ops vfe_ops_690;
- extern const struct vfe_hw_ops vfe_ops_780;
- 
- int vfe_get(struct vfe_device *vfe);
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 80697d0ab701b..40a993ade5f6d 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -4001,7 +4001,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 			.is_lite = false,
- 			.has_pd = false,
- 			.pd_name = NULL,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
+diff --git a/drivers/gpu/drm/msm/dp/dp_aux.c b/drivers/gpu/drm/msm/dp/dp_=
+aux.c
+index 3825a2fb4..2c0bc719a 100644
+--- a/drivers/gpu/drm/msm/dp/dp_aux.c
++++ b/drivers/gpu/drm/msm/dp/dp_aux.c
+@@ -458,7 +458,14 @@ irqreturn_t msm_dp_aux_isr(struct drm_dp_aux *msm_dp=
+_aux, u32 isr)
+ 	aux =3D container_of(msm_dp_aux, struct msm_dp_aux_private, msm_dp_aux)=
+;
+=20
+ 	if (!aux->cmd_busy) {
+-		DRM_ERROR("Unexpected DP AUX IRQ %#010x when not busy\n", isr);
++		/*
++		 * Not ours: the AUX block shares its interrupt, and sinks
++		 * raise AUX status asynchronously around hotplug. Returning
++		 * IRQ_NONE is the whole of the correct response, so this is
++		 * a trace point and not a fault.
++		 */
++		drm_dbg_dp(msm_dp_aux->drm_dev,
++			   "Unexpected DP AUX IRQ %#010x when not busy\n", isr);
+ 		return IRQ_NONE;
+ 	}
+=20
+diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp=
+_ctrl.c
+index d6219d87d..ccc6cf63d 100644
+--- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
++++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+@@ -1534,7 +1534,8 @@ static int msm_dp_ctrl_link_train_1(struct msm_dp_c=
+trl_private *ctrl,
+=20
+ 		if (ctrl->link->phy_params.v_level >=3D
+ 			DP_TRAIN_LEVEL_MAX) {
+-			DRM_ERROR_RATELIMITED("max v_level reached\n");
++			drm_dbg_dp(ctrl->drm_dev,
++				   "max v_level reached, retrying at a lower rate or lane count\n");
+ 			return -EAGAIN;
  		}
-@@ -4029,7 +4029,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 			.is_lite = false,
- 			.has_pd = false,
- 			.pd_name = NULL,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-@@ -4054,7 +4054,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 		.vfe = {
- 			.line_num = 4,
- 			.is_lite = true,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-@@ -4079,7 +4079,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 		.vfe = {
- 			.line_num = 4,
- 			.is_lite = true,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-@@ -4104,7 +4104,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 		.vfe = {
- 			.line_num = 4,
- 			.is_lite = true,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-@@ -4129,7 +4129,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 		.vfe = {
- 			.line_num = 4,
- 			.is_lite = true,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-@@ -4154,7 +4154,7 @@ static const struct camss_subdev_resources vfe_res_8775p[] = {
- 		.vfe = {
- 			.line_num = 4,
- 			.is_lite = true,
--			.hw_ops = &vfe_ops_780,
-+			.hw_ops = &vfe_ops_690,
- 			.formats_rdi = &vfe_formats_rdi_845,
- 			.formats_pix = &vfe_formats_pix_845
- 		}
-
--- 
+=20
+@@ -1681,14 +1682,16 @@ static int msm_dp_ctrl_link_train_1_2(struct msm_=
+dp_ctrl_private *ctrl,
+=20
+ 	ret =3D msm_dp_ctrl_link_train_1(ctrl, panel, training_step, dp_phy);
+ 	if (ret) {
+-		DRM_ERROR("link training #1 on phy %d failed. ret=3D%d\n", dp_phy, ret=
+);
++		drm_dbg_dp(ctrl->drm_dev,
++			   "link training #1 on phy %d failed. ret=3D%d\n", dp_phy, ret);
+ 		return ret;
+ 	}
+ 	drm_dbg_dp(ctrl->drm_dev, "link training #1 on phy %d successful\n", dp=
+_phy);
+=20
+ 	ret =3D msm_dp_ctrl_link_train_2(ctrl, panel, training_step, dp_phy);
+ 	if (ret) {
+-		DRM_ERROR("link training #2 on phy %d failed. ret=3D%d\n", dp_phy, ret=
+);
++		drm_dbg_dp(ctrl->drm_dev,
++			   "link training #2 on phy %d failed. ret=3D%d\n", dp_phy, ret);
+ 		return ret;
+ 	}
+ 	drm_dbg_dp(ctrl->drm_dev, "link training #2 on phy %d successful\n", dp=
+_phy);
+@@ -1739,13 +1742,15 @@ static int msm_dp_ctrl_link_train(struct msm_dp_c=
+trl_private *ctrl,
+ 	}
+=20
+ 	if (ret) {
+-		DRM_ERROR("link training of LTTPR(s) failed. ret=3D%d\n", ret);
++		drm_dbg_dp(ctrl->drm_dev,
++			   "link training of LTTPR(s) failed. ret=3D%d\n", ret);
+ 		goto end;
+ 	}
+=20
+ 	ret =3D msm_dp_ctrl_link_train_1_2(ctrl, panel, training_step, DP_PHY_D=
+PRX);
+ 	if (ret) {
+-		DRM_ERROR("link training on sink failed. ret=3D%d\n", ret);
++		drm_dbg_dp(ctrl->drm_dev,
++			   "link training on sink failed. ret=3D%d\n", ret);
+ 		goto end;
+ 	}
+=20
+--=20
 2.55.0
 
