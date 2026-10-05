@@ -1,252 +1,207 @@
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A29D4570E2
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 09:39:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CFD746DFE3
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 09:48:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791193187; cv=none; b=MDabkJO0fTJGpSP3SqNId53Kb4QPbLi3eIoloDLN2G/4N6rIEeQtG0m5sx1pNsuZsZnFUOeUzFGDBdAGkVAEZ2ZlzatZTmu5n1e/4e2pKPQu99YUSANnL1q4LISSDaCKuWIpisWtYPUJXdBuf2JHnPaOe38zjeiYub+RC2Dq3lo=
+	t=1791193714; cv=none; b=NgYKpHLRS/DcRDNYE7BRhnnMALYWkfpVQTK+jrWsG9pqBxTYu5K6uQjwSKSRa3n6qiz8J78tMLA9ucOqBdzLHo4k4mHlk5lHJlscqvYvayHHMkrtWbWONvFtnHRrNPnVXPym5Bfo8CdO/n9EI6YodcbLO+NS57dOEVPi7kNqrcA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791193187; c=relaxed/simple;
-	bh=O6YBEBOgxU2xPbzAN0XEomFzmcuWs7cjwFLomcSls14=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ixZB10co6yFte3qdHMtQ9v3QdBV/bfvsS79qjt5TQBmJ/Sf+1O8V8q9cjXoXKBdKcN51eTuXTAb2Pd8JoozHOP/ylcI2bPxrs4KqaQnvikd7RyMAkw3GZiHjxFpM/jp7yitL89+vpgrB9zx8zm2b4bjUrmqmpELi36qTmqlaTAA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=eOmETh0u; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	s=arc-20240116; t=1791193714; c=relaxed/simple;
+	bh=z9ZKfJBnvHjkl0/CtSeNAQyka9+jUFUILVKgLbgudgQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=n2tJgbLMV31E+Q5rbGxXzdi8t+jkb6t3OZyVov4yMkMVr1CNMLlAeJBnSQkbZdShzbqGC0S93X892wESTuXWzoAmergmpiIbNqg9pK8+Ephboi7Y8ervYPNsHcdi6dZG5/m4YoyfFVIOGvJMy3Ckzdbi7haVhYxhnptzhgAd34A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iPmdwh1s; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=K6n3OFuY; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="eOmETh0u"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1791193168;
-	bh=O6YBEBOgxU2xPbzAN0XEomFzmcuWs7cjwFLomcSls14=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=eOmETh0ucLVcoEAOdMbhTfYydfCSTpA69TNPABDhvieR8E7Wm1iMZe1f3mDefxmsY
-	 Ao+GvEIAXv3HwwwmbA8fKhFC/WWlTwq4GBTNTIbI4fPAzcWQKRl6FnXyyAkfIKrBNl
-	 syv9jHwAEw0zfNM6kqfSDODm/gdXLV9ZvFJX/LLZQyh20vGyZiAaccT9ZAyEX2P/nl
-	 RYhL4nBdmyaEMB8Gtqlr+g3KfAtOYRoA+RpM7OmSbgWtb+UbfIUkqAz2yVcIAank19
-	 y6iFyldyp+H0IGtl6Cd8yaxv/cs8zwp+Zej9gvNlO7e5vnk8kZ4uQOfm3cWFf7ajs4
-	 QPlMUjELoNfEA==
-Received: from fedora-61.home (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange secp256r1 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id B374D17E01C2;
-	Mon, 05 Oct 2026 11:39:27 +0200 (CEST)
-Date: Mon, 5 Oct 2026 11:39:24 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Matthew Brost <matthew.brost@intel.com>
-Cc: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Abhinav
- Kumar <abhinav.kumar@linux.dev>, Alice Ryhl <aliceryhl@google.com>, Anna
- Maniscalco <anna.maniscalco2000@gmail.com>, Antonino Maniscalco
- <antomani103@gmail.com>, Danilo Krummrich <dakr@kernel.org>, David Airlie
- <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>, Jessica Zhang
- <jesszhan0024@gmail.com>, Jonathan Corbet <corbet@lwn.net>, Liviu Dudau
- <liviu.dudau@arm.com>, Lyude Paul <lyude@redhat.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Marijn Suijten
- <marijn.suijten@somainline.org>, Maxime Ripard <mripard@kernel.org>, Randy
- Dunlap <rdunlap@infradead.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>, Shuah
- Khan <skhan@linuxfoundation.org>, Simona Vetter <simona@ffwll.ch>, Steven
- Price <steven.price@arm.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=
- <thomas.hellstrom@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v3 3/8] drm/panthor: lock the resident BOs of a submit
- last
-Message-ID: <20261005113924.37276be0@fedora-61.home>
-In-Reply-To: <20261001220632.3190896-4-matthew.brost@intel.com>
-References: <20261001220632.3190896-1-matthew.brost@intel.com>
-	<20261001220632.3190896-4-matthew.brost@intel.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iPmdwh1s";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K6n3OFuY"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6958xSrp872482
+	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 09:48:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=AT0s8lSVdlJqvZFz1ZDNTq
+	fDoFU3JFa5rAxP6+Em7Jo=; b=iPmdwh1s3f/KG9XykpJH+iUaEJwmFTMJJ78aAg
+	DNmLKn1fIWJLZzPhGWNXXiXZY+MKOrdbS7/zsnSXdfMA53O33+xXPZR14cn4LyTw
+	5jcnTPSNKTw5MPOhOc7P17kexD2aFdegzSrPOmTBI6w+juNEHNnVPSyuoqPc/vPf
+	PFt8Z3oWqFDBxmcjK2G6m3NPLuv8cfDg8QidwOxWM/HF/24f5weK/0J3Y7xbgQX+
+	3N0N7vGcLLqD7QStd/WWvjWBr303B6rEoDQdfsLI+RhUrBjobZQVeKILosaZ34kF
+	nY6q2ue9m0oBWyxYgGan6OJr7pKO5zJI6cChNnT4Vyi0LyHw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h41gn9956-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 09:48:26 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ccb687f82eso10456215ad.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 02:48:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791193706; x=1791798506; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=AT0s8lSVdlJqvZFz1ZDNTqfDoFU3JFa5rAxP6+Em7Jo=;
+        b=K6n3OFuY+iUUGYrO1Zxb1U1tSpBwrKs8tfbGb9R/Lea2G3U8C8Ks3DbKfCUbpH1oDY
+         WpSSFChbQdwQdv5HLNiEQ5TawkJ/rRpz5yUEc8kunMfj6yHx62gZPyl3DJwQeaGvpZEW
+         MHro+pUGD1p/WUzInN2Bd57Ikc1TAOyLuS4HPDkl6UFUonqxmOaHlSZc8mssL7uuSU8i
+         pCzcUy09e6PhqbLxurjJCfMdbytwDkful2y9Ipn65HaLyHJLli2wuwFxMScQ0szZ+mPS
+         u++x/okKGMiuCWxy7Wywbm9AF7+mYLHmVPsQ3agX4fklQ81qVxrIHJUcTRhIOpB014Qj
+         oTrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791193706; x=1791798506;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=AT0s8lSVdlJqvZFz1ZDNTqfDoFU3JFa5rAxP6+Em7Jo=;
+        b=k7bc+LqH0rSU/iAWctI+ahkTsZuGZXkWnYUr0VytdSiF36rwg3OtJbyWrmpgOqLV1E
+         +o+IePihXZ0aFSXMHSttaaJ4JggJMOwo7FTg06aNhZ1io52Ir4pIdPK7Wb4B0X5VuAKd
+         jY2jAkbEdVtRpuUsTXxDg/7wEWzrGwhk4pWS5YsJJz00Rre298QM9QhT4uK9URSdIItd
+         YcDy3ulhK8VA1Nswwn6EhplfYbVt6CqOFOCYmyh1dms7CLiKmseKVLTe9679XSMnICgx
+         MocipwMMR7oQigjcyEYgRWnARW0ydtrbU9fIW+/I77Ll2ub5Nc9D2fjks1BOACwFxjRN
+         8Thg==
+X-Forwarded-Encrypted: i=1; AKwUvBw6b3ToLk8bjzS4V3UgGZIthUNWug1vCY2gjqv11ha1w9+5EYUO2MuKOsx8p6BJ1ATD23HPiI/sU4h1BX/J@vger.kernel.org
+X-Gm-Message-State: AFq9FYIiWUjpnKjDe9HIpSBz+E4fZdX9rIslsMj95wKGo5vG3xCynF9q
+	kT7lWn/nOGL4HEKGsbHiUBlCpykugPJbMFQi47t53lcRaHA6UGRRD5I7dNkU5nKc/GY77P4ax15
+	LP3lKDK9N+9OCx4hXw9njKvWp5CDKk1yrdS0GYW878be81vm0N1bTOr11Z6B3o0bbqudm
+X-Gm-Gg: AYBFou1gr/dq+RK09HbZCaBCzKszSA11+H47Zy+YS3NSzZbrTjFjHtp6r3J4YwcZ+bp
+	nvN+ZTdKBkgW0sh0s/7o5Mp/IlS3iOqGVC2UyWhijwMzc6B69jVfT1aAnssvu8dplSJai/grN4Z
+	Zev+YHdtecnMafm2qoo5FEL8+iUYbmBKin0KEbBnDLV80WZf+WeAWKybCle8/er5rmeVxYJwRN6
+	wArpoggWzsyKAbExAJiJe5pyHLdo4frZmzt2s5P7TuHwGIEzms+GSuNI+3oIXEM1woSDCSy3ACf
+	p5sdlGZ9nCR8DuAfkCSHR2mUfgY7H5vD9/u9hXHAojwCAIa7fH2zvHpVnmXvI9PzbjfAOI5GKYM
+	yeLcyQ3M2hjtR3a1K2z6exH80p8y+GA==
+X-Received: by 2002:a17:903:986:b0:2e3:39e:188a with SMTP id d9443c01a7336-2e49b81f81cmr86730635ad.60.1791193706217;
+        Mon, 05 Oct 2026 02:48:26 -0700 (PDT)
+X-Received: by 2002:a17:903:986:b0:2e3:39e:188a with SMTP id d9443c01a7336-2e49b81f81cmr86730475ad.60.1791193705714;
+        Mon, 05 Oct 2026 02:48:25 -0700 (PDT)
+Received: from hu-ysiddu-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e5a5ecbed5sm4751605ad.47.2026.10.05.02.48.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2026 02:48:25 -0700 (PDT)
+From: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+Date: Mon, 05 Oct 2026 15:18:09 +0530
+Subject: [PATCH v4] arm64: dts: qcom: shikra: Add WCN clock to wcn3988-pmu
+ node
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261005-bt-wcn-clk-enable-v4-1-efc9f9be9119@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAFhyw2oC/33NTQ6CMBAF4KuYrh0zbQGpK+9hXLRl0Co/SgE1h
+ LtbNDEu0M0kL3nzvYF5ahx5tlkMrKHeeVdXIUTLBbNHXR0IXBYyEygSVCIG08LNVmCLM1ClTUG
+ gMsIklTLSmrPwd2kod/eXudu/s+/MiWw7QVPj6HxbN4/XaM+n3j+/54Ag0RClqY0yira196trp
+ wtbl+UqHDbN9OIbUnOQAA5rrVChyGWWxz8g+YE4Ip+DZIB4GOFxIo0S6xloHMcnROLVcF0BAAA
+ =
+X-Change-ID: 20260925-bt-wcn-clk-enable-9de068334aa1
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Imran Shaik <imran.shaik@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>,
+        quic_mohamull@quicinc.com, quic_hbandi@quicinc.com
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791193701; l=2644;
+ i=yepuri.siddu@oss.qualcomm.com; s=20260603; h=from:subject:message-id;
+ bh=z9ZKfJBnvHjkl0/CtSeNAQyka9+jUFUILVKgLbgudgQ=;
+ b=YHlbBXsSKKZFtPOEVYK/CN9/MWG9yZm8hYxXZUKRDRs1dad3ZxH5w11dNfSYCaGZak5vX1CBL
+ VNH7OLYny81Cw2+xy3jkx27QRkemwQaxQuMRmruaYhKGmSGldjTHgqT
+X-Developer-Key: i=yepuri.siddu@oss.qualcomm.com; a=ed25519;
+ pk=ldEQwkUmctxwDtIVURg3xvXfzZavX8decqpk/pVLQZg=
+X-Proofpoint-ORIG-GUID: ev6WIKoaVEQNDPgpm6Qzk8RVhhDlbBNc
+X-Proofpoint-GUID: ev6WIKoaVEQNDPgpm6Qzk8RVhhDlbBNc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDAzOCBTYWx0ZWRfX4z+NyWB35wUT
+ RJxXedHRa1OGrpOR2cRSMdg1iBioius1uihgoZh1p54ilFQbeSyteEPSzdATQu65OhY+rvLIAqf
+ WyG9Nqi5tsJS0v2bSglMlRFajBMbCuo56Ja1VqzleMRDMpfCr85a64msygJ757fRqSuP/b5Ve+S
+ aPEqll+C/XBPdtn2drWoOvm0P8aWQju5NhuaYAVcn63WmtseDWL98JARIlBd3azvNesa30qetJW
+ xrhCZdG4MlcN+zvzmQsepiH/9++HPto67IU6BSUE9ifbMg8tVd2jtweNcX2dMklTGfqeh0C82OS
+ DP+qCc1kXvWeP1OVK9jclkAHsa7LPLtVl7uBh3dS8owBO4/HaKcAjeIYkLdw5ec0G4R/0C6VNGt
+ FV4UbQNQnXsUkxN9ITIf3XEu/EtiCPh9VDjVX2WFjmKM1oxhyJMMX6k6YN1V5YRTIkwpJpQlB8N
+ tlVSkOD39Y8KYFwJecA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDAzOCBTYWx0ZWRfX5kUQSyp+NFQV
+ C8pqm/NjtrqC8yLvpU5MmDs5cr1Eq+4JJEke0lLdl+GdLmJRaVh89vZBwzasqfdVjhoG5tEBzQl
+ ysYe22X5NRPXIFn43Eh2gihW5hwwVlU=
+X-Authority-Analysis: v=2.4 cv=P9WvFSAu c=1 sm=1 tr=0 ts=6ac3726a cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=AAjP_CEppu18DpECG8EA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-05_01,2026-10-02_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 suspectscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050038
 
-On Thu,  1 Oct 2026 15:06:27 -0700
-Matthew Brost <matthew.brost@intel.com> wrote:
+clk_smd_rpm_handoff() votes both active and sleep RPM resource states
+for every clock, keeping them non-zero until a consumer takes over. On
+Shikra, the BT WCN clock was surviving on these proxy votes. With proxy
+vote removal on QCM2290, the sleep vote is no longer held, which means
+the WCN clock must be explicitly declared in DTS so the wcn3988-pmu
+driver can manage it during power sequencing.
 
-> panthor_vm_prepare_mapped_bos_resvs() locks every external object mapped
-> in the VM and then validates the evicted ones. Validation here means
-> panthor_vm_bo_validate(), which swaps the BO's pages back in and restores
-> its VMAs. That is slow, and an external object is one which can be shared
-> with another process, so the whole of it happens while holding dma-resv
-> locks other processes may be waiting on.
->=20
-> Nothing is gained by holding those. A resident object needs no swapping
-> in; only the evicted ones do. Split the locking into the two passes
-> gpuvm now understands: the early pass takes just the evicted external
-> objects and swaps them in, and the late pass takes the ones which were
-> resident and are therefore normally ready to use as they are. Private
-> objects are covered by the VM resv, which is held from the start, so
-> evicted ones are still validated in the early pass.
->=20
-> The split is only worth it when there is something to validate, so
-> drm_gpuvm_exec_pass_needs_split() decides, and a submit with nothing
-> evicted keeps doing exactly what it does today in a single pass.
->=20
-> Both passes run in the same drm_exec transaction, so nothing is unlocked
-> in between and the late pass only ever adds locks. They take disjoint
-> sets of objects, so passing slot_count to both still reserves it exactly
-> once per object.
->=20
-> The early pass reads the evicted state without the object's dma-resv,
-> that being the lock it is trying not to take. The race is benign: an
-> object evicted right after the early pass skipped it is picked up by the
-> late pass instead, which is why that pass still validates.
->=20
-> Validation here allocates pages, which can recurse into panthor's own
-> shrinker, so it is worth being explicit about what the early pass can
-> evict. There is no deadlock: drm_gem_lru_scan() acquires the resv with
-> ww_mutex_trylock() and skips what it cannot get. VM-exclusive BOs share
-> the VM resv, which is held across both passes, so those are always
-> skipped. External objects are not held by the early pass, though, so
-> reclaim can evict one while the early pass validates something else.
->=20
-> That is handled, and is why the late pass validates rather than only
-> locking: it picks up anything evicted after the early pass looked at it.
-> The cost is that the swapin for such a BO happens under the full set of
-> locks, i.e. it degrades to the current behaviour for that one object.
->=20
-> Xe avoids this by refusing to evict BOs bound to a VM the current task is
-> validating (xe_bo_eviction_valuable() and xe_vm_is_validating()). Panthor
-> has no equivalent guard. Adding one would make the split more effective
-> under memory pressure, but it is not needed for correctness, so it is left
-> as a follow up.
->=20
-> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
-> Cc: Alice Ryhl <aliceryhl@google.com>
-> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-> Cc: Antonino Maniscalco <antomani103@gmail.com>
-> Cc: Boris Brezillon <boris.brezillon@collabora.com>
+Place the clock in the wcn3988-pmu node since the PMU driver owns the
+WCN power sequencing. CQM SOM uses RPM_SMD_RF_CLK2 while IQS SOM uses
+RPM_SMD_RF_CLK1, reflecting the WCN clock assignments on each board
+variant.
 
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+Signed-off-by: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+---
+Changes in v4:
+- Drop cover letter description for single-patch series per Konrad's review.
+- Link to v3: https://patch.msgid.link/20261001-bt-wcn-clk-enable-v3-1-19291563b927@oss.qualcomm.com
 
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Dmitry Baryshkov <lumag@kernel.org>
-> Cc: Jessica Zhang <jesszhan0024@gmail.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Liviu Dudau <liviu.dudau@arm.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: Steven Price <steven.price@arm.com>
-> Cc: Thomas Hellstr=C3=B6m <thomas.hellstrom@linux.intel.com>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
-> Assisted-by: LLM
-> Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
-> ---
-> v3:
->  - Follow the drm_gpuvm_exec_pass_ function renames (Danilo)
-> ---
->  drivers/gpu/drm/panthor/panthor_mmu.c | 55 ++++++++++++++++++++++++++-
->  1 file changed, 53 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/pant=
-hor/panthor_mmu.c
-> index d75d575473da..d4b968ab094e 100644
-> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
-> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-> @@ -3258,6 +3258,26 @@ int panthor_vm_unmap_range(struct panthor_vm *vm, =
-u64 va, u64 size)
->   * need to reserve a slot on all BOs mapped to a VM and update this slot=
- with
->   * the job fence after its submission.
->   *
-> + * When something is evicted the locks are taken in two passes; when not=
-hing
-> + * is, a single pass is used, as before. The early pass only takes the e=
-xternal
-> + * objects which actually need validating, i.e. the evicted ones, and sw=
-aps
-> + * them back in. Private objects are covered by the VM resv, which is he=
-ld
-> + * from the start, so they are validated here too. The late pass then ta=
-kes
-> + * the external objects the early pass left out, which were resident and=
- so
-> + * normally need no swapping in; it still validates, since one of them m=
-ay
-> + * have been evicted in the meantime.
-> + *
-> + * The point is that panthor_vm_bo_validate() swaps pages back in, which=
- is
-> + * slow, and an external object is one which can be shared with another
-> + * process. Doing that while holding the resv of a resident shared BO wo=
-uld
-> + * stall whoever else needs it, for no benefit, since a resident object =
-is
-> + * ready to use as it is.
-> + *
-> + * Both passes run in the same drm_exec transaction: nothing is unlocked=
- in
-> + * between and the late pass only ever adds locks. The passes take disjo=
-int
-> + * sets of objects, so reserving @slot_count in each still reserves it
-> + * exactly once per object.
-> + *
->   * Return: 0 on success, a negative error code otherwise.
->   */
->  int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct pa=
-nthor_vm *vm,
-> @@ -3270,11 +3290,42 @@ int panthor_vm_prepare_mapped_bos_resvs(struct dr=
-m_exec *exec, struct panthor_vm
->  	if (ret)
->  		return ret;
-> =20
-> -	ret =3D drm_gpuvm_prepare_objects(&vm->base, exec, slot_count);
-> +	/*
-> +	 * With nothing evicted there is no validation to keep the resident
-> +	 * objects unlocked for, so do not pay for the second walk.
-> +	 */
-> +	if (!drm_gpuvm_exec_pass_needs_split(&vm->base)) {
-> +		ret =3D drm_gpuvm_prepare_objects(&vm->base, exec, slot_count);
-> +		if (ret)
-> +			return ret;
-> +
-> +		return drm_gpuvm_validate(&vm->base, exec);
-> +	}
-> +
-> +	ret =3D drm_gpuvm_exec_pass_prepare_objects(&vm->base, exec,
-> +						  slot_count,
-> +						  DRM_GPUVM_EXEC_PASS_EARLY);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D drm_gpuvm_exec_pass_validate(&vm->base, exec,
-> +					   DRM_GPUVM_EXEC_PASS_EARLY);
->  	if (ret)
->  		return ret;
-> =20
-> -	return drm_gpuvm_validate(&vm->base, exec);
-> +	ret =3D drm_gpuvm_exec_pass_prepare_objects(&vm->base, exec,
-> +						  slot_count,
-> +						  DRM_GPUVM_EXEC_PASS_LATE);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/*
-> +	 * Objects the early pass skipped were resident then, but another
-> +	 * process may have evicted one since. Now that everything is locked,
-> +	 * pick up whatever is left.
-> +	 */
-> +	return drm_gpuvm_exec_pass_validate(&vm->base, exec,
-> +					    DRM_GPUVM_EXEC_PASS_LATE);
->  }
-> =20
->  unsigned long
+Changes in v3:
+- Merge technical details from cover letter into commit message per Bjorn's review.
+- Link to v2: https://patch.msgid.link/20260929-bt-wcn-clk-enable-v2-1-7a90902f3df5@oss.qualcomm.com
+
+Changes in v2:
+- Move clock property to wcn3988-pmu node instead of bluetooth node.
+- Drop hci_qca driver changes; clock is managed by the PMU driver.
+- Link to v1: https://patch.msgid.link/20260925-bt-wcn-clk-enable-v1-0-30bee88c4de4@oss.qualcomm.com
+---
+ arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi | 2 ++
+ arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
+index 8ac42ff625a0..48af2bb87cf3 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
++++ b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
+@@ -45,6 +45,8 @@ wcn3988-pmu {
+ 		vddrf-supply = <&pm4125_l10>;
+ 		vddch0-supply = <&pm4125_l22>;
+ 
++		clocks = <&rpmcc RPM_SMD_RF_CLK2>;
++
+ 		regulators {
+ 			vreg_pmu_io: ldo0 {
+ 				regulator-name = "vreg_pmu_io";
+diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
+index 4ff97945274d..90aceaa6e1e3 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
++++ b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
+@@ -52,6 +52,8 @@ wcn3988-pmu {
+ 		vddrf-supply = <&pm8150_l8>;
+ 		vddch0-supply = <&vreg_wcn_3p3>;
+ 
++		clocks = <&rpmcc RPM_SMD_RF_CLK1>;
++
+ 		regulators {
+ 			vreg_pmu_io: ldo0 {
+ 				regulator-name = "vreg_pmu_io";
+
+---
+base-commit: 165768bb70265b5c38cf0b73fafd75be235f8b14
+change-id: 20260925-bt-wcn-clk-enable-9de068334aa1
+
+Best regards,
+--  
+Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
 
