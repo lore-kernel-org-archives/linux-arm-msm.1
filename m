@@ -1,28 +1,28 @@
-Received: from smtp-outgoing-1601.laposte.net (smtp-outgoing-1601.laposte.net [160.92.124.96])
+Received: from smtp-outgoing-1701.laposte.net (smtp-outgoing-1701.laposte.net [160.92.124.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCB3F4D0CDF
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACBB4CE66B
 	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 17:15:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.96
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=160.92.124.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791220550; cv=none; b=J9bceWhMM3oory9AjBO+L58KwGJPDwRdYBWoleHx4SjUVbvPBvMBGsmOObBieTLhVeJCG/pN9SQoC5t9Sl16icurJA3Sv2yKH1EHSRmEE8oR8WlIuKXoO20efJpVF6gGr0v1F4ITBlX7rpDTohUvG9fn23kVhXX3lQl7ZzA7gKg=
+	t=1791220551; cv=none; b=Rl4sW9m2PhIed7eQQaMa4LE8R68nnO5CupNDEhTbLCaPzKmyNTa0c0jm8I68TzpWSBXr/wN6oKDlfH8a1TVMmxvj7yG9FzSW5+smxqFtcIyhk5js4xaVfYBFq+sUQoCrmejRUEwf4Ln0lrZe9Z1QRtnX0hACJQt/eUrLsOLit8k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791220550; c=relaxed/simple;
-	bh=vQgNfaifqJBfWvhAJLZYmdCmSToBEbMrsQb5xsLkevc=;
+	s=arc-20240116; t=1791220551; c=relaxed/simple;
+	bh=hxdoK/QE60X045d9V3Aagp/V0lSogdtRHJj5+cb5NH8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XmMIuQNGE2Pk8GedMg4RzzdWa44GCSTsSow+XAwcPqbOUUcvZOXM70Zwk9inveHZ93itZb3iPmt/JR2h8w6VwdPLWp4kq//E7BtVX3y6pIXSmMBVQsgPs4VjV11xYYZzWy0tozVdyKemDxvksOw4ApI+t0gjyWaq4CVzR+54HZU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=iUi1Vnmw; arc=none smtp.client-ip=160.92.124.96
+	 MIME-Version; b=tSq6OR6d63BneCOqZDjpQrkkbGVH68BN7/bLASisjgwDeOFlUbEJVPgpys3MUsxzT5jUTxc3OfMU8r6ArW17s8ZUYSrc4swLkNz3Hp1/y9VYYSZMF9O+1a/YCnq7LulRsEGc0s1uDXi61mZBdzXUrXsstznxyL5Wt6m2NN82ea4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net; spf=pass smtp.mailfrom=laposte.net; dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b=ohF5Y+dp; arc=none smtp.client-ip=160.92.124.99
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=laposte.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=laposte.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="iUi1Vnmw"
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gv1kZfz10MQR","contextId":
- "775944a0-e23f-4087-bb77-5e4c87d0348a"}
+	dkim=pass (2048-bit key) header.d=laposte.net header.i=@laposte.net header.b="ohF5Y+dp"
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gs5yTCz10MQR","contextId":
+ "27044b9d-1598-4d46-a58a-ba86be668f3a"}
 Received: from outgoing-mail.laposte.net (localhost.localdomain [127.0.0.1])
-	by mlpnf0120.laposte.net (SMTP Server) with ESMTP id 4hz0Gv1kZfz10MQR;
-	Mon,  5 Oct 2026 15:14:47 +0200 (CEST)
-X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gt4y5Cz10MQN","contextId":
- "407ccb37-f746-4378-8a4c-0d794e65b55c"}
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTP id 4hz0Gs5yTCz10MQR;
+	Mon,  5 Oct 2026 15:14:45 +0200 (CEST)
+X-mail-filterd: {"version":"1.9.7","queueID":"4hz0Gs2Jckz10MQ4","contextId":
+ "26652990-d7c9-4d0e-87f3-0447723efaab"}
 X-lpn-mailing: LEGIT
 X-lpn-spamrating: 36
 X-lpn-spamlevel: not-spam
@@ -30,8 +30,8 @@ Received: from PAR-95296130.bcg.com (unknown [147.161.232.172])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mlpnf0120.laposte.net (SMTP Server) with ESMTPSA id 4hz0Gt4y5Cz10MQN;
-	Mon,  5 Oct 2026 15:14:46 +0200 (CEST)
+	by mlpnf0120.laposte.net (SMTP Server) with ESMTPSA id 4hz0Gs2Jckz10MQ4;
+	Mon,  5 Oct 2026 15:14:45 +0200 (CEST)
 From: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
 To: linux-arm-msm@vger.kernel.org
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -55,9 +55,9 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Jean-Francois Bobier <jean-francois.bobier@laposte.net>
-Subject: [PATCH 2/3] drm/msm/dp: don't log an expected link-training fallback as errors
-Date: Mon,  5 Oct 2026 15:14:31 +0200
-Message-ID: <20261005131432.22840-3-jean-francois.bobier@laposte.net>
+Subject: [PATCH 1/3] drm/msm/dp: don't gate link-training fallback on the controller's HPD block
+Date: Mon,  5 Oct 2026 15:14:30 +0200
+Message-ID: <20261005131432.22840-2-jean-francois.bobier@laposte.net>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
 References: <20261005131432.22840-1-jean-francois.bobier@laposte.net>
@@ -68,130 +68,110 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791220545; bh=vQgNfaifqJBfWvhAJLZYmdCmSToBEbMrsQb5xsLkevc=; h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding; b=iUi1VnmwgicuI10FWSNkz2tLDvVkpGyDowy9P7mCNdU7Onnw0kMAn/CnkPSbyQQS/bX/SlNqxzdk/7hw8xnhg9UhINGvd6YOorx2qeHz9u1wuP72dqqZmofLC8Yb2inhfe7eykE8TitV6+3RZnmRrbJ09ro8dcUNb6Bq7YI+J7C6UmTRSFkRs7bRO/etCEJ7Gj450sPJUVVpaIrVeay7ZKeGCzKybA6X8FWx1MjOZybdz4Dze8i3xr0p5Ry9/LMJnWvGA/7oXJNgRf2kDvNsKWfsJuPZYB/8x4uOi6iY5Vfs1r8QNNSUA2sLLBYnU04ubuuBRC2vWXiqEyont4otYQ==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=laposte.net; s=lpn-wlmd; t=1791220545; bh=hxdoK/QE60X045d9V3Aagp/V0lSogdtRHJj5+cb5NH8=; h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding; b=ohF5Y+dpGFy9v28WPDpdA8WILhcztcnI0LB6bP4JtAiSdYvjGdKIZBoD03Y7ZJrcncdSKYamQdWcdiMHOrXjcUMN0LtZt8YIShicpIPjxjIUgMYJpPT9CgVUYGRX8qZ87hfsGhj50l1M15CrFfnHZi9eBVY/uLu+vJvq7zdy0VkhP5J42VY813levXDJ5W4Y0qvoNFmqnVjEjDvhdHicf6V4Tzqi2Rgb8R8/XNsGNCUR0Th1BF85bqBPU7zIWkmkrCiVn4YB8ObLsbxW/hbeITRO5mp1BVMHuYmEIfO8Myii3p98isKD8OROVYPY3d83UMew6FHyi+YjFN9ifiHjjQ==;
 
-msm_dp_ctrl_on_link() implements DP link fallback: it retries
-msm_dp_ctrl_setup_main_link() up to five times, stepping the link rate
-down HBR3 -> HBR2 -> HBR -> RBR and then reducing the lane count, and
-breaks as soon as training succeeds. Every step of that search is
-therefore expected to fail before the one that works.
+msm_dp_ctrl_setup_main_link()'s retry loop is what implements DP link
+fallback: on a training failure it shifts the link rate down HBR3 -> HBR2
+-> HBR -> RBR and then, if clock recovery succeeded on at least half the
+lanes, reduces the lane count. Both failure branches guard that with
 
-Each failed attempt currently logs at error level, from four places:
+	if (!msm_dp_aux_is_link_connected(ctrl->aux))
+		break;
 
-  max v_level reached
-  link training #1 on phy %d failed. ret=3D%d
-  link training #2 on phy %d failed. ret=3D%d
-  link training on sink failed. ret=3D%d
+which reads REG_DP_DP_HPD_INT_STATUS, i.e. the DP controller's own HPD
+block. That is only meaningful when the block is wired to a real HPD
+signal.
 
-A monitor that settles on two lanes after three attempts prints nine
-error lines on a completely successful attach -- which is how a cable
-that merely has two bad lanes looks identical in the log to a sink that
-never trains at all.
+On a USB-C port it is not. HPD arrives out of band: the Type-C port
+driver owns it and hands it over through a drm_dp_hpd_bridge, and the
+controller's HPD register reads DISCONNECTED for the entire time a sink
+is attached. msm_dp_bridge_hpd_notify() already shows this, logging the
+register beside the bridge's own verdict -- on sm8250 (OnePlus 8T) every
+attach reports
 
-Nothing is lost by demoting them. When the retry loop really does
-exhaust itself, msm_dp_ctrl_on_link() returns the error and
-msm_dp_display_process_hpd_high() already reports it once, at error
-level, as "Failed link training (rc=3D%d)" -- which is the correct place,
-because it is the only one that knows the search is over.
+	msm_dp_bridge_hpd_notify: type=3D10 link hpd_link_status=3D0x0, status=3D=
+1
 
-Demote the per-attempt messages to drm_dbg_dp() so they remain available
-with drm.debug, and keep the final verdict where it is.
+So the guard is always true, the loop always breaks on the first failed
+attempt, and the rate/lane fallback is dead on every Type-C DP board.
+msm_dp_ctrl_setup_main_link() then returns -ECONNRESET and the mode set
+fails outright.
 
-Also demote the unsolicited AUX interrupt message. msm_dp_aux_isr()
-returns IRQ_NONE when no AUX transaction is outstanding, which is the
-whole of the correct response for an interrupt that is not ours -- the
-AUX block shares its interrupt and sinks raise AUX status asynchronously
-around hotplug, so this fires twice on a normal DisplayPort attach.
+The cost is real. With a 4K sink attached directly (4 DP lanes, no USB3),
+a board that can only carry two DP lanes to the connector trains lanes 0
+and 1 and never lanes 2 and 3:
+
+	v_level 3: DPCD 0x202 =3D 0x11 (lanes 0,1 CR_DONE)
+	           DPCD 0x203 =3D 0x00 (lanes 2,3 nothing)
+	link training #1 on phy 0 failed. ret=3D-11
+	Failed link training (rc=3D-104)
+
+A fallback to two lanes would have trained -- clock recovery was already
+good on exactly the lanes that remain, so
+msm_dp_ctrl_clock_recovery_any_ok() would have passed -- but it is never
+reached. The same sink works through a dock, because the Type-C alternate
+mode negotiates two DP lanes up front and the first attempt succeeds.
+
+Use the DPCD read the loop already performs as the liveness test instead.
+It expresses the intent directly -- a sink that has gone away cannot
+answer AUX -- and it carries no assumption about where HPD comes from.
+drm_dp_dpcd_read_link_status() returns 0 on success and a negative errno
+on failure.
 
 Signed-off-by: Jean-Francois Bobier <jean-francois.bobier@laposte.net>
 ---
- drivers/gpu/drm/msm/dp/dp_aux.c  |  9 ++++++++-
- drivers/gpu/drm/msm/dp/dp_ctrl.c | 15 ++++++++++-----
- 2 files changed, 18 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_ctrl.c | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_aux.c b/drivers/gpu/drm/msm/dp/dp_=
-aux.c
-index 3825a2fb4..2c0bc719a 100644
---- a/drivers/gpu/drm/msm/dp/dp_aux.c
-+++ b/drivers/gpu/drm/msm/dp/dp_aux.c
-@@ -458,7 +458,14 @@ irqreturn_t msm_dp_aux_isr(struct drm_dp_aux *msm_dp=
-_aux, u32 isr)
- 	aux =3D container_of(msm_dp_aux, struct msm_dp_aux_private, msm_dp_aux)=
-;
-=20
- 	if (!aux->cmd_busy) {
--		DRM_ERROR("Unexpected DP AUX IRQ %#010x when not busy\n", isr);
-+		/*
-+		 * Not ours: the AUX block shares its interrupt, and sinks
-+		 * raise AUX status asynchronously around hotplug. Returning
-+		 * IRQ_NONE is the whole of the correct response, so this is
-+		 * a trace point and not a fault.
-+		 */
-+		drm_dbg_dp(msm_dp_aux->drm_dev,
-+			   "Unexpected DP AUX IRQ %#010x when not busy\n", isr);
- 		return IRQ_NONE;
- 	}
-=20
 diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp=
 _ctrl.c
-index d6219d87d..ccc6cf63d 100644
+index e1614bc49..d6219d87d 100644
 --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
 +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -1534,7 +1534,8 @@ static int msm_dp_ctrl_link_train_1(struct msm_dp_c=
-trl_private *ctrl,
+@@ -2426,12 +2426,22 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_d=
+p_ctrl,
+ 			/* training completed successfully */
+ 			break;
+ 		} else if (training_step =3D=3D DP_TRAINING_1) {
+-			/* link train_1 failed */
+-			if (!msm_dp_aux_is_link_connected(ctrl->aux))
++			/*
++			 * link train_1 failed
++			 *
++			 * Use the DPCD read itself to decide whether the sink
++			 * is still there. msm_dp_aux_is_link_connected() reads
++			 * the DP controller's own HPD block, which is only
++			 * meaningful when that block sees a real HPD signal --
++			 * on a Type-C port HPD arrives out of band through a
++			 * drm_dp_hpd_bridge and the register reads
++			 * DISCONNECTED the whole time the sink is attached.
++			 * Gating the retry on it therefore skipped the entire
++			 * rate/lane fallback on those boards.
++			 */
++			if (drm_dp_dpcd_read_link_status(ctrl->aux, link_status) < 0)
+ 				break;
 =20
- 		if (ctrl->link->phy_params.v_level >=3D
- 			DP_TRAIN_LEVEL_MAX) {
--			DRM_ERROR_RATELIMITED("max v_level reached\n");
-+			drm_dbg_dp(ctrl->drm_dev,
-+				   "max v_level reached, retrying at a lower rate or lane count\n");
- 			return -EAGAIN;
- 		}
+-			drm_dp_dpcd_read_link_status(ctrl->aux, link_status);
+-
+ 			rc =3D msm_dp_ctrl_link_rate_down_shift(ctrl);
+ 			if (rc < 0) { /* already in RBR =3D 1.6G */
+ 				if (msm_dp_ctrl_clock_recovery_any_ok(link_status,
+@@ -2451,12 +2461,10 @@ int msm_dp_ctrl_on_link(struct msm_dp_ctrl *msm_d=
+p_ctrl,
+ 				}
+ 			}
+ 		} else if (training_step =3D=3D DP_TRAINING_2) {
+-			/* link train_2 failed */
+-			if (!msm_dp_aux_is_link_connected(ctrl->aux))
++			/* link train_2 failed; same reasoning as above */
++			if (drm_dp_dpcd_read_link_status(ctrl->aux, link_status) < 0)
+ 				break;
 =20
-@@ -1681,14 +1682,16 @@ static int msm_dp_ctrl_link_train_1_2(struct msm_=
-dp_ctrl_private *ctrl,
-=20
- 	ret =3D msm_dp_ctrl_link_train_1(ctrl, panel, training_step, dp_phy);
- 	if (ret) {
--		DRM_ERROR("link training #1 on phy %d failed. ret=3D%d\n", dp_phy, ret=
-);
-+		drm_dbg_dp(ctrl->drm_dev,
-+			   "link training #1 on phy %d failed. ret=3D%d\n", dp_phy, ret);
- 		return ret;
- 	}
- 	drm_dbg_dp(ctrl->drm_dev, "link training #1 on phy %d successful\n", dp=
-_phy);
-=20
- 	ret =3D msm_dp_ctrl_link_train_2(ctrl, panel, training_step, dp_phy);
- 	if (ret) {
--		DRM_ERROR("link training #2 on phy %d failed. ret=3D%d\n", dp_phy, ret=
-);
-+		drm_dbg_dp(ctrl->drm_dev,
-+			   "link training #2 on phy %d failed. ret=3D%d\n", dp_phy, ret);
- 		return ret;
- 	}
- 	drm_dbg_dp(ctrl->drm_dev, "link training #2 on phy %d successful\n", dp=
-_phy);
-@@ -1739,13 +1742,15 @@ static int msm_dp_ctrl_link_train(struct msm_dp_c=
-trl_private *ctrl,
- 	}
-=20
- 	if (ret) {
--		DRM_ERROR("link training of LTTPR(s) failed. ret=3D%d\n", ret);
-+		drm_dbg_dp(ctrl->drm_dev,
-+			   "link training of LTTPR(s) failed. ret=3D%d\n", ret);
- 		goto end;
- 	}
-=20
- 	ret =3D msm_dp_ctrl_link_train_1_2(ctrl, panel, training_step, DP_PHY_D=
-PRX);
- 	if (ret) {
--		DRM_ERROR("link training on sink failed. ret=3D%d\n", ret);
-+		drm_dbg_dp(ctrl->drm_dev,
-+			   "link training on sink failed. ret=3D%d\n", ret);
- 		goto end;
- 	}
-=20
+-			drm_dp_dpcd_read_link_status(ctrl->aux, link_status);
+-
+ 			if (!drm_dp_clock_recovery_ok(link_status,
+ 					ctrl->link->link_params.num_lanes))
+ 				rc =3D msm_dp_ctrl_link_rate_down_shift(ctrl);
 --=20
 2.55.0
 
