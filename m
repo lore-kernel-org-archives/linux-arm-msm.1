@@ -1,181 +1,136 @@
-Received: from mail-dy2-f43.google.com (mail-dy2-f43.google.com [74.125.229.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from PNYPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11020079.outbound.protection.outlook.com [52.101.225.79])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 444482E5429
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 04:08:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.43
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791173285; cv=none; b=D4WPwLf0EcYyQ6npo05jEPQKeiyMxq12lkEmLkfjL0puNB3UQ6M/wJ2/BfjTS4f/oF6Q9XMxWHIA3rlTbsYpDxAmvwLF0CqDTQQOjMEYvzJbH2q2HmSy024RuFJVkCbQzql4Q+CJRummvQWSY+volVOG7Ig1qvP3vYgTiuZxaAc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791173285; c=relaxed/simple;
-	bh=LMDE8Z0gPoVrNprdeBHN/Jw/1zoG7YryqwLWnWMRDUM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BhQuVqxeZXksH5mM+6fcICo0dzG9VjZk9PKcuTd1KuygR5wEEDIaBds4nHj1zHpqTysdkUWemmDP72C55kt6GZ/2Om4xvTh2tAOHcsLcawlJXOzeGTbEh/0ema48PQlaHUx7yD3TKVyWxreZ6+Me9/xtNVNrp4K65lNNLAVvTEs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=FZCLOl72; arc=none smtp.client-ip=74.125.229.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="FZCLOl72"
-Received: by mail-dy2-f43.google.com with SMTP id 5a478bee46e88-34b48100af4so1461996eec.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 04 Oct 2026 21:08:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791173281; x=1791778081; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=LoOBU3dKUoijTmAk3p1LupdivqwWNOCTytdFGuDGRd8=;
-        b=FZCLOl725yvAXJfQ9eLu9am/rf6zMLVircXZ/8pNIq+jG4ik8ukMAi41yWoO2vtoDN
-         Rhrnb6pt3+RhBcUkGKdk7pYhXvZRWrp4/wovL+wrbwzWmW7LEYLr9vulpPE+sAwH4woP
-         4NW2BxGeyXZuhhB1tQUJS8y8EeCtpox86/GQvTA74MDuZLWm6X/brdF0kff7PvNNSaok
-         ME5mU3LOqPfd8dAJY7lr1umCNgel727B4sTzxDmIa2M+MuoQRnSznCrUpYg+2PlV2opo
-         fQsen6Pp+xkA/qPhMqjMO6/QCar9Gops9KQcglpmRC7ZG1fsrlfNYk5iuzF/pdmVH0nD
-         jzAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791173281; x=1791778081;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LoOBU3dKUoijTmAk3p1LupdivqwWNOCTytdFGuDGRd8=;
-        b=zcnmtrwFM9GnymOyFzbrA4NpMndEvhhZh2x4wRpgJkquiAdf5/AZkYWIa+LcQ5EUGH
-         Ui2ceuR0Kize5J3FoWsTPAIJaCYGb2VvZfIaz/F5QfM6dLIgaHVjxrUkS9wTFkkiXzNB
-         NiPDjFho4wIcSWPm+MCRvHix+e4mkBscfCLqDngwzlgvONp7YspHIPBLUcQ+Lb9O4UVe
-         fXtayvQhPWZhhHyOUlVg63jAh69T0JUwVBLXhezlt5t+ElE2f2zaCtSHIkrgPLJ7uY0G
-         4gaGOXfDgC3MGSGPMeG09ACb3iEj0uXmJzG5hYhO4XjtKA59SdISgIDQzK0LMeUJSUg7
-         BzdQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxCdiPT4mTdCAnzvp0Q2rXd8iJyahad/dY8oI5yCoIpZkh0OirkB8c9Tr4o+CdlK90pLX4JxGX/70o5PNjd@vger.kernel.org
-X-Gm-Message-State: AFuF++mMjCO6K95OdvfHsqeudEBKAzM/y7mLWtTfB8iPy7vXs06JKCTA
-	NSJaMxZThXV2h03e7ha/Dd2ZOS/KWhhwELHGoe27mNkBOmr6pNRh6eWb3p4Z523C8qE=
-X-Gm-Gg: AYBFou30S9KJzUZWZhhqOGYV2Y4aSJW0N7pBFgjT8/HGTqZFavgV8f1TgRJE7rSDiHX
-	Y2O7QnA7Vju9tmhNfD0mIWiMB2hbwkMNWjNUQHvE6etDZoFagFSIWNP3nfCulrBxsiFtKHyPORc
-	QLHsE9u+AQdF9KeG7axH46S6RSO0IzZYUNtcCKUG9RBsOPZpKHSxZfD5ouuKZ9YfXtJOlH+xpHe
-	VE9gh6R7M9QMDn4/f5FFmw4dQLLTAw/E1IglQEg42Z0MDSYu3lwy+o+qLa6Acgz5cGiQtuoj5t5
-	dHHt60ZAMs1X2OxeoeDNbSce3M0eVz5jomc8Bo6NlHHUijCyU1VdHM9jmnufGcu13BpF1sA+zGV
-	75hegMNpNeQ9/u8ayTEanD46YcaLVqR2sd3PyRUvaNmGVLqp0IbCmkIcLj52gal2tUQSBMxMjKi
-	p12CN9iPc7pECq0H5NI2JnnK0xREInZC3FFEUwrNJ9k6XVyIMxjtStekfF/bfpuEaNT1/8NFbB
-X-Received: by 2002:a05:701b:2810:b0:149:cfa4:9b3b with SMTP id a92af1059eb24-14f58de5451mr12982932c88.3.1791173281135;
-        Sun, 04 Oct 2026 21:08:01 -0700 (PDT)
-Received: from localhost ([122.172.87.224])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-151fcec9a95sm18805270c88.15.2026.10.04.21.07.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 21:08:00 -0700 (PDT)
-Date: Mon, 5 Oct 2026 09:37:57 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Sumeet Pawnikar <sumeet4linux@gmail.com>
-Cc: rafael@kernel.org, krzk@kernel.org, amit.kachhap@gmail.com,
-	daniel.lezcano@kernel.org, thara.gopinath@gmail.com,
-	talel@amazon.com, hayashi.kunihiko@socionext.com,
-	mhiramat@kernel.org, mmayer@broadcom.com, sumitg@nvidia.com,
-	peter.griffin@linaro.org, myungjoo.ham@samsung.com,
-	kyungmin.park@samsung.com, cw00.choi@samsung.com, Frank.Li@nxp.com,
-	s.hauer@pengutronix.de, matthias.bgg@gmail.com,
-	angelogioacchino.delregno@collabora.com, sven@kernel.org,
-	j@jannau.net, marcan@marcan.st, casey.connolly@linaro.org,
-	sre@kernel.org, wens@kernel.org, t.schramm@manjaro.org,
-	bcm-kernel-feedback-list@broadcom.com,
-	linux-samsung-soc@vger.kernel.org, kernel@pengutronix.de,
-	imx@lists.linux.dev, linux-mediatek@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 3/5] cpufreq: Use %pe to print error pointers
- symbolically
-Message-ID: <asMinVwyd7gcvRlo@vireshk-B250M-D3H>
-References: <20260912191156.185448-1-sumeet4linux@gmail.com>
- <20260912191156.185448-4-sumeet4linux@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D07382F8EA3;
+	Mon,  5 Oct 2026 04:27:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.225.79
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791174456; cv=fail; b=lL/nNnfkMysGIOMmiRFl5oxeat08wI3qHHbecyvmz6juo8oUVPCfXVHkRr3Wby6JU2/w/vrDRY96ivUwIGuBn+I+eYG0YHEmXnqcVzaaC5QlyxuwMgGgpDnCD1O6yQaamCzqjdghCuE5fVYIGS0ziXGM8b0krk+6EzUMp+X1XqE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791174456; c=relaxed/simple;
+	bh=4byU3bVZZcPGpfvlhtmgxxJsP0tvIcx48SPzHy8nqAA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=RJeaEsnMeUUxxTjHKG9699VrPY7Fc+9JRibxEKWKtCB4VChxw6/SlViPjwgxU4GGplxBkksEGJxnCw6x+PBytPMStp3a/Z8wjd7DioN429nU3RJEmLHkhY8ITr9pI9gJtO/pyvv7Nztk4YVIFPVJQ4kWAZMJrN6P+XMw/jYx7oc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=52.101.225.79
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=P91IOzT4i5oF+44FFsD88mBSvTF9p4Hc+9u83456SntZOJueHS++nGimVMFPLhfL8FaxtStmZxtFmJibNAEOQfrc7fl+GgRtgPHGvgfOZ0XYhN5j7cqBcmOkbwiTPaxapVMAlhr9oxBd+7kgmyIRhMlemziIQAC/uFT4e+arjh7LyJTUFStFem3A+iUHs8qhQORV6jwZ4f3iAl2pKBhS21N/zJMEnj5brcXj6AyHs6RTWvlKu2433222ms1T5qs5//vnuOnzBk2B0MS8GPavqLP0IhPf7pLVo2eHI2KsMTYl95S/l7vMefVJZ1Uf9A13FTLuBKu39Huv5hvLbN2+OA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jktB4HdeCh7V6tCxsuMKL5Evo5Fd4zXMyp59O1tnkvQ=;
+ b=eHv5BriGGGjQ55IGDE0sYt71kLdOv8e6VJFl7PqT+HcNxQ2kxCMMjAGAp84USr+xTwqFvnA59wz/z09vONee31+nz5oIiWudykf2UVHJ0uDI+uedXNrUTuBPsjesW7g/s/rBsqDHJlxdmdsqcrErppFHouKiW4T9jzZE6/2FBn6lq04L0k9Hh2ebilyURf7NS5pPngNSVJZr03JHx9KH9xYBxHiVlXM/sZFwZ3y0WMIZdMV07g4Q8aIhVHiyLloNcFvHsR02yYUmnrOcip6hKfINt3E3ugGhf91SoDaOj/lg2Lx7Xru46ZhE6MajrqBJap0DMsIObbz+F37GfU+SeQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by PN1P287MB3789.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:256::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Mon, 5 Oct
+ 2026 04:27:30 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0472.016; Mon, 5 Oct 2026
+ 04:27:29 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Hitesh Patel <hitesh@ebytelogic.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Robert Foss <rfoss@kernel.org>,
+	linux-i2c@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	ravi@ebytelogic.com
+Subject: Re: [PATCH v2] i2c: qcom-cci: always enable SCL clock stretching
+Date: Mon,  5 Oct 2026 09:57:20 +0530
+Message-ID: <20261005042721.162972-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <arr57tHBYx1MowW7@zenone.zhora.eu>
+References: <20260921131954.1690578-1-hitesh@ebytelogic.com> <arr57tHBYx1MowW7@zenone.zhora.eu>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN4P287CA0083.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:26b::11) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260912191156.185448-4-sumeet4linux@gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PN1P287MB3789:EE_
+X-MS-Office365-Filtering-Correlation-Id: fc7d2b15-499d-424c-9d37-08df2298f770
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|10070799003|52116014|376014|23010399003|1800799024|18002099003|22082099003|4143699003|10067099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	dFGD6qrtoAS6cJpNdGomD3/Vr2uAFCHvLNguOb6E5UMNCZ5inwQvGpQTRInTDPcjpB+bvcwl7D4JCYLaZLmO2Q3cGF0Jn8Z3szlnoFcSPfaEvd1cYy5djOZdMdURLaIyBXFcwUvioNUyM1+5HlfUtcu1Ii0fkiGxcq6p2iv4wkHIvQkAqkyMhEmUgFHSnPHeb8a3nPa+l8OtQiyvanG5reBqIR8Ix/pSPmwkXea1SH31Uu1uiEjw9+bMUU/Il7sScZUE7DFspppoimOd+Y8f+jMkA5XVUMHYqgLAuv0pMhbsxD12gFafZU8OAhXC2LWmlhV1sR4fE/ftn4EN/k7iDiNkThfTV3KnbMy0PTSQO24pR4CThcw3+Qd/cYktc+UuIrz49Kyt6+R3raM9AP9IDjk1T2t8QN1Ot5DUjwr8f/G+AeGApApJnfrr4VZDIQQM4ng+0kFhUe5Xemi8q3yNn16ZNp8CKkRaXE9MXEKnw8BwHImvngQ/mUHKqxLRsR6QsSzb4kEqQ+Gh3itqaTcBqeQwkvzTi3YyYoL0b+8lpSM0iUHF9gfsjNEa4BkMNsUlF4U/OUpoHfZ1hxDXgRtoEsfQlnwFNxqZ9402umBEp8DbRd41SmRIGU+t5nhIz7Hs
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(10070799003)(52116014)(376014)(23010399003)(1800799024)(18002099003)(22082099003)(4143699003)(10067099003)(56012099006);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?qTE+3Nvn1OBGWNNrlikPN2lV41Y/8/QVzhAGPb1Ppb4Go90u74Au/eHJhgt/?=
+ =?us-ascii?Q?w+NC/Mt8Q/Klr5NMkcXwivNpQ8lUxrdM3+iny9feYvULjfaVC9a6ZA6MwC1t?=
+ =?us-ascii?Q?nq0GRV8I1a2CCcRFnJT4FHNHfiCx0ssosQ7dWdc4SUA3xAZQpS7Nmv14TDVK?=
+ =?us-ascii?Q?d7xzpwe1KO2CEfcXEHb+eprV/LmfOa9Bo0EOP2HPnDNdSA6aDdsoBboFAw8i?=
+ =?us-ascii?Q?qYKvPbxWa5v0RAXTQYsS/uGi6ktCvzPjo2sb/gh4mMplcHbH2FQVK0h8UByv?=
+ =?us-ascii?Q?qw3Hb5hXuUrSrJDaFWDceAGfNrs60TfVD3bEd6U6rcI1rUs8xXh++AS5JJWp?=
+ =?us-ascii?Q?zZ/jSeBnF5Kzpztny0b8Zg+kC5P45YPS8O2SZWJwaGFdxI9pneI46jvCT3ns?=
+ =?us-ascii?Q?CRu2pNSqtl8p5IvAmMdYdUR9ic1XFJuAwhRCcp2HdAaDOMItQY0293VTrSBl?=
+ =?us-ascii?Q?y/Hk+9py4fsveGiliYTUyUN0a4eA4m2S6IURMdccO3Zzw2ORyLh1RoSYAjbl?=
+ =?us-ascii?Q?APusrB6hlwsjry7LNUrSCAv4QoBXdtFczAcPwKoRKiJODVYifea6rtPDtQcq?=
+ =?us-ascii?Q?RVllb+esHGqjVKG4oqzksTsYSmi//y4WxSOuCgKeJfWd90mG/0US+gAt8CRH?=
+ =?us-ascii?Q?rmpCcjIDwImw0mFt8+JJl1tl7T4LFUtXvZjxb3/YPeFMmbFC3ru2MkozCCxd?=
+ =?us-ascii?Q?WEzf7BmyetFplqGQLm3iOoPs8kK4nBcRmrGA5thfJ/5aBHYJJ6PGQxprbHza?=
+ =?us-ascii?Q?evrBnMJUV5tDz8Lkl8cYUa3LutSlOz83Ij/C2UKengM8GIYuyeDFaD9i/Jwm?=
+ =?us-ascii?Q?u5U6h3uvD8FIhA3whNz2/NlwZabS0liY4fAjf0WwWcxr5Esn9vZVioGUcCm1?=
+ =?us-ascii?Q?so0rv6v5Y1Myjkb2fiHp7SvMrSEE3oCKXD0CrsOxmc2C9UIjoqpaK/8Kk7CG?=
+ =?us-ascii?Q?8ja9F50M41VLgnzUBzD6OWdC80R+d0cvTVu/7rz4RcTJxqsWBL7h+Lztt/Ht?=
+ =?us-ascii?Q?USf2SWCHTS0oP6GQfUnBvWorM5t8q10W1R+62LTy38wkzF/U21Ki6qjZ+dsC?=
+ =?us-ascii?Q?UzAFiddfYbA+5J/Af7Sw2eznbWc2W1+/+5Wxpv6IZwktDDSh2St6yvTOjtHl?=
+ =?us-ascii?Q?qidQiIRKrVpKBjBOvjOoXHXQCfQXqFC5bUWZJGGFU8sjufZ2TfC7zP1J889E?=
+ =?us-ascii?Q?1ZJCsszsUCcNn/mlDfGAk1NlYzovl6NNwTGqY6mDSukaiYPSy0w+GBo6SgTp?=
+ =?us-ascii?Q?7nUSqlDOHi2Cok/U/WUpVuM49puqcRegsQsFWCYklvfZcUQPHcTNPcwBtnER?=
+ =?us-ascii?Q?jeHVPG1vsgOC9L3IgNMUkRwV93CvyMbSlOYYskXNRkkaXs0JziGOAAj7J3rV?=
+ =?us-ascii?Q?O7/pKKceWKQ98V6iQviigDhmg0ZFugScUhOUAIX2bZwMWz2dCM7DgOyLWxL9?=
+ =?us-ascii?Q?l1ZpsbFFY3GbPZbVcB6JPteQ4oTNxnd4f7ppZg9ZHqbDPlexSiDTfyhV/fWR?=
+ =?us-ascii?Q?vOf5DtNoptv5c5/L270O2VrLNZl3nrbU0Iokd2LB+lWpFGDZArViFmgNDHSt?=
+ =?us-ascii?Q?KHwoSK3j0UCUhVXmza0Sp3uXcMSIc/1+gOJt878FMOLgL52H0H2PZoNCiQvR?=
+ =?us-ascii?Q?yYyeJoj1IRhJAsxHi/5qr9zKclkGkagzaLvaiD8pybBC4Wnv97rsUPdjD6GJ?=
+ =?us-ascii?Q?6bE4vYJFikUUmotmfkAnz1u3ilPXZ4tOoffIJLhB+VLGKd29Sa94gNl+naod?=
+ =?us-ascii?Q?QhrQ8EmvZKXN0UultPsO6WQ+DsKqhkqI9fMzO0m+KHU9CosQiW6xSZPoGxYl?=
+X-MS-Exchange-AntiSpam-MessageData-1: x426S5KQFqY7bg==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc7d2b15-499d-424c-9d37-08df2298f770
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2026 04:27:29.4741
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: htZKgkQ4k5LYegHIGXieEQmm2q1Gk8z8BOYJYcgxmEXavqfXYr/tDwYxUf3ycWrqfKDCWfxY238XS40Y7p6guA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN1P287MB3789
 
-On 13-09-26, 00:41, Sumeet Pawnikar wrote:
-> Replace PTR_ERR() and %ld with %pe and pass the original pointer directly
-> to pr_err() and pr_warn(). The %pe format specifier prints a symbolic error
-> name (e.g. -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it
-> falls back gracefully and prints the raw integer value. This makes messages
-> more readable without any functional change.
-> 
-> Signed-off-by: Sumeet Pawnikar <sumeet4linux@gmail.com>
-> ---
->  drivers/cpufreq/bmips-cpufreq.c   | 4 ++--
->  drivers/cpufreq/cppc_cpufreq.c    | 4 ++--
->  drivers/cpufreq/qoriq-cpufreq.c   | 4 ++--
->  drivers/cpufreq/s3c64xx-cpufreq.c | 5 ++---
->  4 files changed, 8 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/cpufreq/bmips-cpufreq.c b/drivers/cpufreq/bmips-cpufreq.c
-> index a8e35bc75fb2..389fff5e6f65 100644
-> --- a/drivers/cpufreq/bmips-cpufreq.c
-> +++ b/drivers/cpufreq/bmips-cpufreq.c
-> @@ -132,8 +132,8 @@ static int bmips_cpufreq_init(struct cpufreq_policy *policy)
->  
->  	freq_table = bmips_cpufreq_get_freq_table(policy);
->  	if (IS_ERR(freq_table)) {
-> -		pr_err("%s: couldn't determine frequency table (%ld).\n",
-> -			BMIPS_CPUFREQ_NAME, PTR_ERR(freq_table));
-> +		pr_err("%s: couldn't determine frequency table (%pe).\n",
-> +			BMIPS_CPUFREQ_NAME, freq_table);
->  		return PTR_ERR(freq_table);
->  	}
->  
-> diff --git a/drivers/cpufreq/cppc_cpufreq.c b/drivers/cpufreq/cppc_cpufreq.c
-> index 80893844353c..f767898ebfb5 100644
-> --- a/drivers/cpufreq/cppc_cpufreq.c
-> +++ b/drivers/cpufreq/cppc_cpufreq.c
-> @@ -230,8 +230,8 @@ static void cppc_fie_kworker_init(void)
->  
->  	kworker_fie = kthread_run_worker(0, "cppc_fie");
->  	if (IS_ERR(kworker_fie)) {
-> -		pr_warn("%s: failed to create kworker_fie: %ld\n", __func__,
-> -			PTR_ERR(kworker_fie));
-> +		pr_warn("%s: failed to create kworker_fie: %pe\n", __func__,
-> +			kworker_fie);
->  		fie_disabled = FIE_DISABLED;
->  		kworker_fie = NULL;
->  		return;
-> diff --git a/drivers/cpufreq/qoriq-cpufreq.c b/drivers/cpufreq/qoriq-cpufreq.c
-> index 42edb41ad459..0652e5df0278 100644
-> --- a/drivers/cpufreq/qoriq-cpufreq.c
-> +++ b/drivers/cpufreq/qoriq-cpufreq.c
-> @@ -57,8 +57,8 @@ static u32 get_bus_freq(void)
->  	/* get platform freq by its clock name */
->  	pltclk = clk_get(NULL, "cg-pll0-div1");
->  	if (IS_ERR(pltclk)) {
-> -		pr_err("%s: can't get bus frequency %ld\n",
-> -		       __func__, PTR_ERR(pltclk));
-> +		pr_err("%s: can't get bus frequency %pe\n",
-> +		       __func__, pltclk);
->  		return PTR_ERR(pltclk);
->  	}
->  
-> diff --git a/drivers/cpufreq/s3c64xx-cpufreq.c b/drivers/cpufreq/s3c64xx-cpufreq.c
-> index 9cef71528076..9a01592425ee 100644
-> --- a/drivers/cpufreq/s3c64xx-cpufreq.c
-> +++ b/drivers/cpufreq/s3c64xx-cpufreq.c
-> @@ -152,15 +152,14 @@ static int s3c64xx_cpufreq_driver_init(struct cpufreq_policy *policy)
->  
->  	policy->clk = clk_get(NULL, "armclk");
->  	if (IS_ERR(policy->clk)) {
-> -		pr_err("Unable to obtain ARMCLK: %ld\n",
-> -		       PTR_ERR(policy->clk));
-> +		pr_err("Unable to obtain ARMCLK: %pe\n", policy->clk);
->  		return PTR_ERR(policy->clk);
->  	}
->  
->  #ifdef CONFIG_REGULATOR
->  	vddarm = regulator_get(NULL, "vddarm");
->  	if (IS_ERR(vddarm)) {
-> -		pr_err("Failed to obtain VDDARM: %ld\n", PTR_ERR(vddarm));
-> +		pr_err("Failed to obtain VDDARM: %pe\n", vddarm);
->  		pr_err("Only frequency scaling available\n");
->  		vddarm = NULL;
->  	} else {
+Hi Konrad,
 
-Applied. Thanks.
+A gentle ping on this one - Andi is holding it for your ack.
 
--- 
-viresh
+The v2 is what you suggested: it drops the per-table scl_stretch_en
+field and sets CCI_I2C_MISC_CTL_SCL_STRETCH_EN unconditionally in
+cci_init(), so every speed mode on every CCI version gets it.
+
+Tested on SC7280 (CCI v2) at 100 kHz through a GMSL I2C tunnel and at
+1 MHz for the on-board devices. The other tables are untested, but the
+change is identical for all of them.
+
+  https://lore.kernel.org/linux-i2c/20260921131954.1690578-1-hitesh@ebytelogic.com/
+
+Thanks,
+Hitesh
