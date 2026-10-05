@@ -1,191 +1,152 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A26F476686
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 10:45:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8352847CA6A
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 11:01:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791197125; cv=none; b=hUopmUNpUotudc4BF7HU6Piheskqz1ZH0sjZDrwQkvMrytKkKy3onnVLBB2rsf/V7B8A1G41vSABcUpt/9WbLAeZaKb+Hx+GKSa4wmmGj6qxVLkpQfQ8kYPSrkEK7Bjix20bDPs1BgZHt/0c3k9Kb7VEmTcAhPcSBnqunsO5VNo=
+	t=1791198105; cv=none; b=s5xzdN2opuOmvJAjBE01IgASOkmDTfToQuZdsknjYxSVPKKSSEfinCHBGy2slZFWbdmwvBc3G+q/x4XTzbVoV2/v86glFElr9/S4d6jAmQTWn8SF1WHkU9vyLqG8cieProSf/LNjRDOtfLIQ9qn9dWVCEFwCqk/+UoNng2wXW8s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791197125; c=relaxed/simple;
-	bh=Oi22PG/2WusMu/4lVK2j2cf/IGBMHwO0Bsn1RuvnEt4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=STe61TY9Ia9ZHuX2LZunTnWAWPsDH+y3gUeD/P5HA1pIpIhxZq+krIVRMSE01LESjq8mLYGYp0nQSL6kjjdnOz9KEx5oYvwjxgg3IoTSLRx/rfJo8xc11AyB5eZuZJYC4SsQSwO7RnZh1UagaCW2g4NOvMrOutySKPeSfOZAfsA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jJR9AuEv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CZlx5fVZ; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791198105; c=relaxed/simple;
+	bh=VAKmTovVzb87d5A8hUeHQhkh9HG4yeL7dyz+l+PJrmo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=CuDTRwhmeK27RsHG6OepKxEDSbKL0ezqRWagwaDZG/x1zTz4QKJE4iVOxe2XnLLZ+kiXu7LJudrziaYcKYyY5rW05taSaKrKqaboBaMN2fyP3eEu8vMMBz4w1cAcBo+bbVbTTym4JAA16Bhs7EasPxBfO4kIadBKcjq3Kcj64NY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=gCt6UKg4; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jJR9AuEv";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CZlx5fVZ"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6958xnGL1802866
-	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 10:45:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=pQeClRWL5fMnV+jW+MgQGB0s
-	7nSB8YFmEBzlXVtXF7g=; b=jJR9AuEvbL0VK2nl5a38FNlDKkChzxp1nZsKcG/7
-	qXezKMQxYRBlj9igqMX7mlEvTWA5ESLdkAAkBHthWwd2LPNlrmg7ODkkcXtQ/nnw
-	AI2zPgwsm5L/O7LE1Eu7y2U8N6alJ/OX21qZWSle0BLV1fGACI6NOLABApPUNZCK
-	4cExS5J9BVz5O0ri3GAoORoEytWMUHBXNgmJgoWIRhkjpszBftt/tQAKQrl33z0j
-	hMDBuz9iXAjHEGPjx/2hNwhqArsjLovpSPFteMfjBmGYhKv2YnLiGfNlg8aH6a/z
-	m4tuD4QCeeKOhhT7s88IazqzvDW1RyHF/ZS/XkborU+3qg==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2spa5j0f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 10:45:22 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-139b62317d0so5762776c88.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 03:45:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791197121; x=1791801921; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=pQeClRWL5fMnV+jW+MgQGB0s7nSB8YFmEBzlXVtXF7g=;
-        b=CZlx5fVZQOb8klRHJpYygdeOtfJOKx0ERSWeJYcVq7mazinsfn4aUusLTjlZrz720d
-         w5mLSyN7RhEzMxXmT6IV19brnqUlQD235p5d/lX7vNwelZ/uSOax7Q3CsZwEhhaZRIHS
-         mGEafWqaygMrpPD+953jSZJD63893pj/cPlDs+ZsEkuzWAUZ/4kZwM6LsxQo9QXJ7ZMy
-         oN0YGuBLuz1z8o8Gm1LY2w0ehl3bEWIZ/kIj0aMBc5ahyyBWLEXRgVp/pGuSabNfEqiJ
-         fyWGWqWE4wjrHq6O3tEWiy8OlAoFDi0og3eLCc0J7Fzmqk05d786xCFoolYG2PTGCzvJ
-         D0YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791197121; x=1791801921;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pQeClRWL5fMnV+jW+MgQGB0s7nSB8YFmEBzlXVtXF7g=;
-        b=wi/g9G6x7xsVgwU4gWmGrrUzk8nmlEEsDMWvuELxohpColKjmnGB2WUu6ZJJuGFpr4
-         GnSqekVe3apzYvMrDh0yIiBmsOoLgcUQnK9TAe+BGozJw2L5mKoqz53p/XrePoJqaxyE
-         DD8WEjcahMlKHWhLps49yDmeVmvkDzjs/S6E4laXUCXZK67wY5NyDZ9TY7nqIjGVGT+o
-         zDb2uMBvj5YZZqpXRC5SOY6ZrJzotzpS8G1Fb7G1d/EAevHlZ/hp2U4s5QC+IMg/BXXg
-         V7388ZbHylEeAhddgxIKAEuspemqA+Cl3TrhSYNmpEtBZIb9/DTiFoA6oR9UROlfBHog
-         jLIQ==
-X-Forwarded-Encrypted: i=1; AKwUvByW9bxx5aZWfAR845XnnpE2qYifVah16wp27IY5Zd1hqLTwnzPF5tNuYt+ijLlKY2XtTWud+lgcON+NN+1H@vger.kernel.org
-X-Gm-Message-State: AFuF++mUCYacmWV9Vr/HMLLN17rpepT57p6g/yhEhrmoRx04XUbXe7pl
-	PsInn4RDiu1diE70R8pGL5sL1pu80CmFmaQ6Ys85Q1DSmyM+b01fILwmR0erUas+EzpQLH/rLoQ
-	Xsz4UoGTDni2kE5ZwHO8QMCO13lKu1dPeLOCyuCabHsBuKvOHWwEjtcSn7jLHGbzFh3op
-X-Gm-Gg: AYBFou34utaC9H7iNoMBQpiPjmWm/zCohNNY2jnu4N2lhiyh1ORJOO2k9+7Y+D9tj8g
-	4TY72bo9E5XqTFCVep8z/UtpDXN6Xjy4Ikh06YHEm4WmoLKgy/0fG2N5qg+1w0g9OuCGnG80/IT
-	IhQmOAIuZ4GHpNFKqsYsJMm2yc/IgpByU7CDYy3aD3tAqRpJvPbp8OQfvSYieu1XDTPHJ5TPDNy
-	9uI4vn3Der1BqurJJ875t5faoCH9AO43kGP9nOqY5e2BNiA3/nCtp83/DTofYtgoCaHaAfND6SS
-	p6+M0DS5O9ZU9AOzYqU85iQ7k7hMtxvMVYFIRkKWKOuO1zsu1vzf/KVr3noMKFoQQR1zWxi6pn5
-	atEa/aq3e3Hz2dAOL6DzcrcLjrFCm2Q35qBo3ISEEXnbg/i2MfvjgbI1KZli+Ojzh6G/tHNtvnx
-	su3R2EdhXY+OwX/bdNdqkZ52O5c8PrSQ==
-X-Received: by 2002:a05:7022:b057:20b0:152:3812:496a with SMTP id a92af1059eb24-15238124bacmr9694227c88.43.1791197121016;
-        Mon, 05 Oct 2026 03:45:21 -0700 (PDT)
-X-Received: by 2002:a05:7022:b057:20b0:152:3812:496a with SMTP id a92af1059eb24-15238124bacmr9694186c88.43.1791197120458;
-        Mon, 05 Oct 2026 03:45:20 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-151fc3992b6sm24328004c88.6.2026.10.05.03.45.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 03:45:19 -0700 (PDT)
-Date: Mon, 5 Oct 2026 16:15:12 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Wesley Cheng <quic_wcheng@quicinc.com>,
-        Manu Gautam <mgautam@codeaurora.org>, Stephen Boyd <sboyd@kernel.org>,
-        Philipp Zabel <pza@pengutronix.de>, linux-arm-msm@vger.kernel.org,
-        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 6/6] phy: qcom: snps-femto-v2: Add IPQ9650 support
-Message-ID: <asN/uLBfYARYXlhb@hu-varada-blr.qualcomm.com>
-References: <20261005-phy-v4-0-b04c4123ecb3@oss.qualcomm.com>
- <20261005-phy-v4-6-b04c4123ecb3@oss.qualcomm.com>
- <ck5st7q7rbnzfp26kbwzixorxlikq6hpmso5fzz33dlsqsrnrm@g3aey2pabkzb>
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="gCt6UKg4"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1791198102;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VAKmTovVzb87d5A8hUeHQhkh9HG4yeL7dyz+l+PJrmo=;
+	b=gCt6UKg4MyEPKLtVb4PMp0Q2tPtr7DnlwBbdCy/nScQEuDDHE8Bm/fyYJJBlLLUS4aXaPm
+	5x0CE9G65U4Noqi6JLaszqyF8fTFlidLRYzdXLjeVZmXJRdlt8++uyyonFkwuJCKBC/W77
+	OeD33uC7TxqSyFFyxdUj2YavmOdnP4c=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-76-uq9_KcWuNnGBqTT2Pu5KUw-1; Mon,
+ 05 Oct 2026 07:01:39 -0400
+X-MC-Unique: uq9_KcWuNnGBqTT2Pu5KUw-1
+X-Mimecast-MFC-AGG-ID: uq9_KcWuNnGBqTT2Pu5KUw_1791198096
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 8B6521801220;
+	Mon,  5 Oct 2026 11:01:36 +0000 (UTC)
+Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet03.pony-001.prod.iad2.dc.redhat.com [10.2.32.114])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id A51F23001D2A;
+	Mon,  5 Oct 2026 11:01:32 +0000 (UTC)
+From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
+To: jgg@ziepe.ca
+Cc: alex@shazbot.org,
+	ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org,
+	bhelgaas@google.com,
+	jjohnson@kernel.org,
+	johannes@sipsolutions.net,
+	jtornosm@redhat.com,
+	kevin.tian@intel.com,
+	kvm@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
+	mani@kernel.org,
+	skolothumtho@nvidia.com,
+	yishaih@nvidia.com
+Subject: Re: [PATCH 3/7] vfio/pci: Add qcom-vfio-pci variant driver
+Date: Mon,  5 Oct 2026 13:01:31 +0200
+Message-ID: <20261005110131.84545-1-jtornosm@redhat.com>
+In-Reply-To: <20261002171046.GA32083@ziepe.ca>
+References: <20261002171046.GA32083@ziepe.ca>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ck5st7q7rbnzfp26kbwzixorxlikq6hpmso5fzz33dlsqsrnrm@g3aey2pabkzb>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDA0MSBTYWx0ZWRfX2yhTbXfCVFk8
- Or4hJWNJskOSc3vl/kjoRBbOWs4EvT8uEloB76WhGgfMeyH4KR92D/PytWeRCuoVbyrqD0RnAJA
- LnR3MhkSH11nonvayvWpHr/7kqLTu9mhs3L6mSqfAr4dxkI8EfWQL/TQAm4OoPB30RAjrFOpn6R
- RMsXbhmzQse6T8hi6HgS4yz5LZ/uPtqQWojjrhMcRLrudaw7FOQo4KjBiN+vCDi59vAscFJdsI3
- fYibb5Ym/UXtmMAmzDzMdhx5yiI/m+wYVhJ995bMnlz2HEnt6YPF6ynNEXrEgWOShyqAMV59jvw
- YnaQ6MmkIu0BmQU3kX2i/vxl5uwB2EbYNO2G8HnUywOyb2SSARIUPPjU+OO7c0dUoL6SOvXB+Bv
- IYgpq4LCHR3/FE0Co7QsyAjrD+5P4rUbRtjjmL1C0xInIQwfVCALguqRkyKhDeiRHenL1cfHixN
- rfyAaWrcZ/Ee81ITNaQ==
-X-Authority-Analysis: v=2.4 cv=b7MncdGx c=1 sm=1 tr=0 ts=6ac37fc2 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=3-y4kEJGFriZeApEiEQA:9 a=CjuIK1q_8ugA:10
- a=Fk4IpSoW4aLDllm1B1p-:22
-X-Proofpoint-ORIG-GUID: OXJDLEKf77JGNE6XVez23WgIcp692DSX
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDA0MSBTYWx0ZWRfX6+nvNzvqYGSm
- ANUG/6tmgWjAxontqHdbhSCMd6eMUghWiAHot6NOtOB8etEEqIsg6VQPpHnXSfa3zp49WgOHmnP
- XYysl8sQugdM6XJx+6Wv49v7FvRNE08=
-X-Proofpoint-GUID: OXJDLEKf77JGNE6XVez23WgIcp692DSX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-05_01,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 adultscore=0 clxscore=1015 phishscore=0
- bulkscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610050041
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 
-On Mon, Oct 05, 2026 at 10:17:32AM +0300, Dmitry Baryshkov wrote:
-> On Mon, Oct 05, 2026 at 12:06:31PM +0530, Varadarajan Narayanan wrote:
-> > Add the 6 nm SNPS femto USB2 PHY configuration needed by IPQ9650. The PHYs
-> > on this SoC require a dedicated init sequence and override parameters
-> > before they can be enabled.
-> >
-> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> > ---
-> >  drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 62 +++++++++++++++++++++++++++
-> >  1 file changed, 62 insertions(+)
-> >
-> > diff --git a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > index b6bbf2b570c7..8957f208bc51 100644
-> > --- a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > +++ b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
-> > @@ -29,12 +29,15 @@
-> >
-> >  #define USB2_PHY_USB_PHY_UTMI_CTRL5		(0x50)
-> >  #define POR					BIT(1)
-> > +#define ATERESET				BIT(0)
-> >
-> >  #define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0	(0x54)
-> >  #define SIDDQ					BIT(2)
-> >  #define RETENABLEN				BIT(3)
-> >  #define FSEL_MASK				GENMASK(6, 4)
-> >  #define FSEL_DEFAULT				(0x3 << 4)
-> > +#define FSEL_24MHZ				(0x2 << 4)
+Hi Jason,
+
+Thanks for the follow-up.
+
+> It breaks because VFIO will only cache *actual* MSI-X table entries,
+> it does not have visibility into anything that
+> platform_device_msi_init_and_alloc_irqs()
+
+You're right, the current hook is on SET_IRQS which is tied to standard
+PCI MSI allocation. If the driver moved to device MSI domains, this specific
+hook would stop working.
+
+However, and I was referring to this, the variant driver is a
+self-contained module, it doesn't prevent anyone from moving
+ath11k/ath12k to device MSI domains. If that work happens, the
+variant driver can be adapted to hook the new allocation path, or
+replaced entirely.
+
+> The only reason this works for you at all is because the driver
+> hackily copies the vectors from the real MSI-X table so it can look in
+> the "cache" to find their true physical versions.
 >
-> Use FIELD_PREP, please.
+> Which is my general objection, I would like to see the driver to use
+> platform_device_msi_init_and_alloc_irqs() and don't want to get stuck
+> unable to do that because it would break this.
 
-Not able to use FIELD_PREP, getting this compilation error.
+I understand the concern, but I haven't seen any active work on
+moving ath11k/ath12k to device MSI domains, and the VM problem would
+remain exactly the same after that move (as you acknowledged). It would
+mean waiting for a refactoring that has no active work or timeline yet,
+while users remain without a working solution.
 
-  CC      drivers/phy/qualcomm/phy-qcom-snps-femto-v2.o
-drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:449:53: error: statement expression not allowed at file scope
-  449 |         { USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, FSEL_24MHZ },
-      |                                                            ^
-drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:39:23: note: expanded from macro 'FSEL_24MHZ'
-   39 | #define FSEL_24MHZ                              FIELD_PREP(FSEL_MASK, 2)
-      |                                                 ^
-./include/linux/bitfield.h:136:2: note: expanded from macro 'FIELD_PREP'
-  136 |         ({                                                              \
-      |         ^
+> Yes, but it does actually solve the problem in all its forms..
+
+From my research, there is currently no existing work on device
+MSI domain virtualization in KVM. Building it would require
+coordinated changes across multiple subsystems (KVM, QEMU, VFIO,
+IRQ core, guest drivers, arch code) and several maintainer trees,
+and there is no KVM hypercall that bridges to VFIO, so the
+architecture would need to be designed from scratch.
+
+In the meantime, the variant driver provides an immediate solution
+using an established kernel pattern, for users with deployed hardware.
+It can coexist and be replaced when a generic mechanism arrives.
+
+That said, I'm open to restructuring the current approach as a more
+generic VFIO mechanism for exposing host-side device metadata to VM
+guests, where MSI address caching would be one quirk type rather than
+a Qualcomm-specific driver. This way the framework would be reusable
+for any device with similar needs. Would that direction be more
+acceptable as an intermediate step?
+
+> Everyone else seems to know this stuff doesn't work for
+> virtualization and doesn't try to do something like that.
+
+The firmware is what it is, and the hardware is deployed. The kernel
+regularly supports devices with non-ideal firmware designs through
+quirks and device-specific drivers, and this is what I am trying to
+do with the VFIO variant driver pattern (as it was previously done
+for other drivers).
+
+> Why do people care so much about this? I always thought it was a bit
+> odd?
+
+WiFi passthrough to VMs is useful for network function virtualization,
+security isolation (running the wireless stack in a separate VM),
+edge computing, and development/testing environments. These are real
+use cases with real users who have this hardware deployed today.
+Qualcomm wireless cards are widely deployed, perform well, and could be
+actively used in these scenarios.
 
 Thanks
-Varada
 
->
-> > +#define VATESTENB_MASK				GENMASK(1, 0)
-> >
-> >  #define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1	(0x58)
-> >  #define VBUSVLDEXTSEL0				BIT(4)
->
-> --
-> With best wishes
-> Dmitry
+Best regards
+Jose Ignacio
+
