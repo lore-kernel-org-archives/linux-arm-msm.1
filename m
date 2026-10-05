@@ -1,190 +1,177 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 154672D0605
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 07:34:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4722236B930
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 07:36:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791185660; cv=none; b=o24HJkWUlq4qmox5FEphUO92qJjF1MLmeEEpLajnMGAE+Q/Xj+qGUvEy7UZsyD1XKk/sSwt/yA+66I13Jb15srkDjg7/hfKovsZDmt6z/11bNYRhSwKfggR+yJw82oTZnX8sZv8LIJYbs30dyrnmoAtredGXM9DVrROxiQyGxAA=
+	t=1791185792; cv=none; b=RgU2sl0IgmFz5LK4mFkNmjJW+A0ZSoWgSVg6ZSXs3H/irJ8suA/QI2p6oofctqDjd/A/pUluUDc9BWet+vZa++TiJhB5Uh1e7PJXE6+yaNjDJQXv2aNNYztcJjNkijejYzVqIj6CYLLTcA1TVVcoTrvcLo3mgEjXwCdvckLDU+s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791185660; c=relaxed/simple;
-	bh=ZNgYGUcB/WZ0qm6F4VxoIqTVSqOFyDmEGL1toDXatEI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=A52kg3giJzVhk5UPRX5CWrYxl6f6i1reNVU0hJ/+XeG9RjR/JXH8+HBN21cNuKExZGQegIgpeaxBQ7lOSaGHIxzhksEEvjkONOlbypWLEjBSVG2gDE8OSD3q/b9q4iox5UgS36dW2VrrolUdQdeThnG9vujBLCScYyVfUxbMAkA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Qe9tTkSY; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791185792; c=relaxed/simple;
+	bh=3rr4LwQX+nXpLvqjzfnjc0qC2ZiHpp/e3plWdkVTZCY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gK7rcN3XWJzfEvZ2jMHf5MbBPW0o/+5ohWOHgB7RMev7whr8a/VnlB6fUlDT1aU3suroYgHG8GyCJuBey3AMgyEensHSDtXsOdeppd9vZfxyzv79RNo///546XQhHkbb9X2AfWftipZNgu3w6jBBWBtEl7tGpX60IdE/ySjlCa8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=J6ZyBoBd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YXtUCStG; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Qe9tTkSY"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b912d37b6so8408195e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 00:34:18 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="J6ZyBoBd";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YXtUCStG"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 695102En291275
+	for <linux-arm-msm@vger.kernel.org>; Mon, 5 Oct 2026 07:36:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	OvE90PLb4SD4ZAizJF3vBu6QMBqFDMhNe9329Pa7vgc=; b=J6ZyBoBdS4qG/SG3
+	fLrM9aS1HOXqeVEVUw7J0btHNRL8pQ6PKQ6oneRYPeht8aw29WH8TGBXk7kUaE1p
+	oGa9isbudNyrLgvub19f7juWnYFyXX2ZlukGZmD2VNvbqiLC/urxxfMUZdzmjW1Y
+	wk8tK5coPRYXmzPDmojyPdhwEf1W0d5i+GRnv7qgwfzS1hOEHB3SrSVodT1lwBbw
+	Iz0WCAPUtyvzTsFb16XsZMvGN/mURd07G4NfdAbpxWBeyxUYlL1D6Jpqhg1yeOW0
+	O7cEH9yNuIrFU1hT0L89HWACH9wmPM/k6ApIhE7BK7sjcY5kV1bv9F7USnlXdcZk
+	0ma1tQ==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h3xhs14mv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 07:36:30 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-887faaedb46so2346881b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 00:36:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791185657; x=1791790457; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=S9lWxLMnIqjYARzXXq5EeOUaizRhex7B8BKafzyau2c=;
-        b=Qe9tTkSYXfEFUt0uHr59cGcSJbL/mmffwRViOE8b7sG4ILD9I8IiRyrtw5WakWOl9W
-         /SXONiACqf0cC9COPQUd6+Rl2gTSqEEXDJIB7zizeIzr0Yl+nVcDORwyohwCqRkWAtNA
-         XefBPjp2ljA8/LeeTIzvSe/+u7OOHfuZ0q1YUI0Fap6/FxBxSle6qBMniZ3VSJBMypO9
-         Thbi/fP+2QRx6kW+mNBOUZE3Orjy4GZkolnXFAcp7e2LMEvKwKBwlUBKg9kiAwmaRJGm
-         WpVLIkVBLmIaZwVaV7y8bFCcJqucI9qtmA1gUBbeq5YiDT1LTSIAj+KzDhALrQHONdj6
-         1jmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791185657; x=1791790457;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1791185789; x=1791790589; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=S9lWxLMnIqjYARzXXq5EeOUaizRhex7B8BKafzyau2c=;
-        b=RU/ynUImGfwxt/zTa97lMvuIz8+fkOVRT1bRdgzJPv7j70cAY6d61ZQtKHnPatjdep
-         ncI+4gSILjjC8clUW9uU694JfQ3+56j6Lh97HqDQ9K4pViu6lcFiqJXV2LLAI67HZzzA
-         BtBWJTvM8Phyq/g8fukBny2Y1xw+EZ2pg94PndmUGZcOCYX71i3ZIeRvjjAR4BFTvd1B
-         MBe8NLWPhslAHo23a5e0afsvFYCxiLYAdSmhpHzJzBq3hNCmpDyESbdTPD9T4MD3nPIj
-         vYq0rWozIr+6/WRFz1gyL068350DTMlfRFAnZ5AIkD1KxCLvAcs/H1FLBzyzjzYhT23/
-         JEjg==
-X-Forwarded-Encrypted: i=1; AKwUvBzXpmT35fDuMQoMphrXK6UdSIeWRwcjtz8cQEPY7RpOnp2DICwDhG7fjqR6Oq1+D7HWqFQD10HvKu9UtIMZ@vger.kernel.org
-X-Gm-Message-State: AFuF++nSEQmoZWeWfn7xgV/z02gqWatfp8dBD0UCJN9keZm1Zj0C+o2/
-	cSG8qP/Ucs/0lpkQ59b+sMwrnbapPwWMg7L6JGFfcM0BPrcPx5doymKOGCMvRYD2mCD0VQa6w99
-	UzTruOq0=
-X-Gm-Gg: AYBFou2cA/Mrs+8xZLAqDtdOFIRxuncEAdY1EiSCXx7y3KpMO0FP7qEvTaQqKLCHAP9
-	adYYRAReIP42FH+w/0oTOzYWpzz1uiHwBtJqL8nCT4mjGJdxWP2hjx4WeGc11rWKUCP+88UljSY
-	+ToEqCe9Je7fnt2UmjCvgAy1hJiOG+f+Ohwe9NL6aoTwjdZ8DjMzzqdgFQBcojnveuhWqSyoqOb
-	ZldEPqg9OVFmpw3FYWZpjOILsoHtgYuI5kTN/wZ+nq4fuMVKggZ4xZTjfdPQfxoRp1B6kyJyOY2
-	keWQ6n2wpBxcjABDEOTdaHbPFV5I9MeVehhdWWrpubOJqTdBHbDGKLOzWAsFXdq+l53tOIrMrIU
-	xbJFsid8doSzI2mNm2iamWyh0Uw8jzft42Sez8srXPxfo1pudOHKVBVyO7x8Ja6Zj4etqZ5Tn70
-	XCbNsbnxeac/1LfxOgLx6kCg9NwsvnC3vcwaAwYBPL3LrgLnVejRpPTNZBbRvCVnyYYcvqxEZn4
-	eCJWaNGmgM=
-X-Received: by 2002:a05:600c:3b01:b0:49f:fe7e:dc61 with SMTP id 5b1f17b1804b1-4a02745924bmr160084705e9.0.1791185657092;
-        Mon, 05 Oct 2026 00:34:17 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff25:4f41:ec49:36a8:7075:6d05])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c6229e0f5sm2052164f8f.30.2026.10.05.00.34.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 00:34:16 -0700 (PDT)
-Date: Mon, 5 Oct 2026 09:34:03 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-	"Aiqun(Maria) Yu" <aiqun.yu@oss.qualcomm.com>
-Subject: Re: [PATCH] remoteproc: qcom_q6v5_pas: Drop early_boot flag for Nord
- ADSP
-Message-ID: <asNS2MeAkLDKM0Lz@linaro.org>
-References: <20260930020745.1940933-1-shengchao.guo@oss.qualcomm.com>
- <58c1c4a9-afad-4059-ba81-cdcc92d0c5dd@oss.qualcomm.com>
- <asJwJ6cq8FcA0IID@QCOM-aGQu4IUr3Y>
+        bh=OvE90PLb4SD4ZAizJF3vBu6QMBqFDMhNe9329Pa7vgc=;
+        b=YXtUCStGoIFiuzDmiGh7ive+saqpGEjKCzftzyJ6URolC6RTpxJ7UnSfPp6gNPNle/
+         kcjNaPB9nkCy02Ku9uuzVflNgPG90+LcTpTOVt7DPHXjfXOZ+r1EsxJpBRdC2Un3m72R
+         5RI+/4MQZQGxfmbxUNflDh7L87Pk035la7dljHsVce4Ww4zeC05rfbFzShKnRzQFghgo
+         KxjvMrefsN7yTtBW72FT0Z43XyINJnGACcvWb62rGHh8A+YuubVRUdGJppvPFPdCj1GB
+         ExP7qNizVkAGiKZGoUcpaEkYAIc5tIj/cQNCgn3hFUS9dV2PcjFoXM7oldyaqcYfcq0x
+         WgHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791185789; x=1791790589;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=OvE90PLb4SD4ZAizJF3vBu6QMBqFDMhNe9329Pa7vgc=;
+        b=n5l/2mvUCn8fVWy46cUO8v+p3WNLtYd62W/npiV5QI4B5ZwnGnPqMBpOk4asZTfCxL
+         Bl5zfN09pIs1OyQQpbWjR/ZiCjqQRI8BAruESw9X5m25MKAfzMzX3zp22ZBqCWFgUqHh
+         nz2ZR8PGWM55ZOMT4neJ+tHbAAOM7THK7u5efRIupJaGmgtgs7xKDiQD8+vR1e5Vcac+
+         2kn9t73XOTc1hFcOIiVQAKmV9YwZ3k0veCgJX6rweerLXuBSTI66nesO/kONOhgyTAde
+         bL4nG0uStxiBFwLGMUterajrhXif4YltGt2BT54ADkYNyiakQwmrXj3Bjwwthbdu81fG
+         XDtw==
+X-Forwarded-Encrypted: i=1; AKwUvBzyJjXzsZhDcB/DLNyZ7vMciITv9y3ecW4Jn4Ozv0tRjTfu5/lJcrMVJTdAem1aPMP/s0sAvk3/xRpCgfE5@vger.kernel.org
+X-Gm-Message-State: AFuF++nC8q3zZWyHah9flhvtw1UqYww+G+r4092bxd91xJVRQF3YFUMC
+	YjV4deI28PbLUCkAiKjtetBaKdMVHc7EmgiWrdJI9myeqaFFEG3vUuZU86pUFV1GSCNk76dXecD
+	BikV3VezHszalMxgYu7kV2apfcCzwXUkp64RGH5KZaaGCU1o4gQxVcg/gZQY9RQWt5MFN
+X-Gm-Gg: AYBFou14+rStxI9XGmNlvSWNCJAYDpxVthZ+d/Ep/f4Q7X9XpjpWTfK7cNFcf5N6VIa
+	My65lV3ZAh4614aVXqNrhr++6MOrQSxBkkqg4xfQIiQ2KIV1xTXG81+sBrLa2tM5TUTalt8AN4M
+	b63XNoesWDYW6sXXNGBMeif3VyEXIeQvznTZeTtlDtnt48UuN/UQSThxvjowdxSexhiMUI+42BH
+	TL+8tU6S15mQNizpYmW/MpvILtt+v6osEmJECNXvEuNv+DmMzeaEXZFgPNgSLVS9OPXhqBxmXEx
+	5qyA+C+ojiJSGQ9oJpyJL33GqO+Kc6Vh+BrFUFOvCzXXrIULS/ha4yiJbzYpnVWFmRgJG9Ql0b+
+	3hjUzN+Zup4ms4L1VvZtWfre6EJQ=
+X-Received: by 2002:a05:6a00:1251:b0:880:8fe8:a3ea with SMTP id d2e1a72fcca58-88c6492f52emr5380498b3a.45.1791185789189;
+        Mon, 05 Oct 2026 00:36:29 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1251:b0:880:8fe8:a3ea with SMTP id d2e1a72fcca58-88c6492f52emr5380480b3a.45.1791185788717;
+        Mon, 05 Oct 2026 00:36:28 -0700 (PDT)
+Received: from [10.92.214.69] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-88cb27d93bdsm1759232b3a.30.2026.10.05.00.36.24
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 05 Oct 2026 00:36:28 -0700 (PDT)
+Message-ID: <53724835-33ff-4746-81a5-7017b84453a1@oss.qualcomm.com>
+Date: Mon, 5 Oct 2026 13:05:58 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <asJwJ6cq8FcA0IID@QCOM-aGQu4IUr3Y>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm64: dts: qcom: shikra: Add WCN clock to wcn3988-pmu
+ node
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, quic_mohamull@quicinc.com,
+        quic_hbandi@quicinc.com
+References: <20260929-bt-wcn-clk-enable-v2-1-7a90902f3df5@oss.qualcomm.com>
+ <ar3LTBFtF_qqw7U2@zenbook>
+ <0eef230f-1db5-4419-91f3-ba220891e577@oss.qualcomm.com>
+ <284d1013-5bc7-4732-91c0-87a6c870a349@oss.qualcomm.com>
+Content-Language: en-US
+From: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+In-Reply-To: <284d1013-5bc7-4732-91c0-87a6c870a349@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: aGtY6Ansnq81mFmHPHw3c-791ug_b8ee
+X-Proofpoint-GUID: aGtY6Ansnq81mFmHPHw3c-791ug_b8ee
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDAzMCBTYWx0ZWRfX1LF9h/F3Sfnx
+ 8hgX4DHHSvyz7MxLqkLZeHuikEHFEB88qw4CCrxWcLbyhJQnW1dy745BRnFGm0SoM5LTp4d0Xqj
+ HHlnm1/E0d1LcIsvq2V5DGqRS6t5Z/U=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDAzMCBTYWx0ZWRfX33ju4t/FpIAq
+ LoMOtW4Bna6I6IFTaJDXHu2Jgo/SPCndAkNj2i6KXkjlkMZAQKMGA0NV++bfQ90yZlWVo82dxG+
+ uQfIpX2UhLETYzCj5RyDeZrwDbjFMV0W2TII2cVwqVY0P/LrlTa/Npr6GohXiTNQ3uJSNVRZpc0
+ tJ2RbBAGkU8tXFcgfKHWAgUl5Gdyp9YdNg+nOopZ4z3EvMObepOuPDiT4UKxiWg3j4/5nzxO1oh
+ Z8biXFBBPJWnV1hwx7Z47eVuUiueoZfPxIku/PsL5mMuoFCW6bNpaM7mIcBWYfzg0wvLTnratuS
+ ue/FgHkQ4C8aISDnWAUElKp7haKUXECADWArYL9HGNnQI0DTz1QqX0nnzZTm9NbfNnYBgYHedlM
+ C2vIo2RKbsHzIQMpFpl35/65KzDgGwmYU8kFVYV/Umb28u4ZZ+ajLGPXCGlY/iqvAq3xpnR7doA
+ on52HYFV9IwcRF4UpEA==
+X-Authority-Analysis: v=2.4 cv=Q6tHcI2a c=1 sm=1 tr=0 ts=6ac3537e cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=J9omWgiKjRi8sk1810UA:9 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-05_01,2026-10-02_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ malwarescore=0 impostorscore=0 suspectscore=0 phishscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050030
 
-On Sun, Oct 04, 2026 at 11:26:31PM +0800, Shawn Guo wrote:
-> On Thu, Oct 01, 2026 at 10:42:39AM +0200, Konrad Dybcio wrote:
-> > On 9/30/26 4:07 AM, Shawn Guo wrote:
-> > > Qualcomm NHLOS team changes XBL for Nord IOT/Embedded variant, leaving
-> > > ADSP to be powered up by Linux remoteproc, so that Nord IQ10 Qualcomm
-> > > Linux (QLI) behavior gets aligned with IQ8/9. Drop early_boot flag from
-> > > Nord ADSP for that purpose.
-> > > 
-> > > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > > ---
-> > 
-> > What happens if this patch is absent?
-> 
-> ADSP never comes up:
-> 
->   remoteproc remoteproc0: attaching to adsp
->   remoteproc remoteproc0: can't attach to rproc adsp: -19
-> 
-> Since XBL no longer boots ADSP, the remote never publishes its SMP2P
-> inbound item. The smp2p entry stays unmapped, and irq_get_irqchip_state()
-> on fatal_irq returns -ENODEV. qcom_pas_attach() treats that as a hard
-> error rather than falling back to a firmware boot.
-> 
-> Even the existing fallback (ready bit clear -> RPROC_OFFLINE) doesn't
-> work: rproc_boot() takes the attach branch, sees the error and returns
-> without loading firmware.
-> 
-> > 
-> > When the early_boot path was first introduced I was really hoping
-> > that this behavior could be made unconditional and Linux would
-> > figure out if the rproc may be active by virtue of it sending
-> > back signals or not, unfortunately that hasn't made it into the
-> > tree..
-> 
-> The difficulty is with the positive signal. As Stephan pointed out [1],
-> the ready bit is not cleared when the remote is stopped or force-shutdown,
-> so a stop followed by rmmod/modprobe of qcom_q6v5_pas makes the driver
-> attach to a remote that is not running. Without ping-pong or a PAS query
-> for the remote state, I don't think we can reliably say that a remote
-> *is* running.
-> 
-> The negative signal is reliable though. The -ENODEV from
-> irq_get_irqchip_state() means the remote has never populated its SMP2P
-> entry since cold boot, so it cannot be running. We can fall back to a
-> firmware boot in that case. early_boot then becomes a hint that the
-> bootloader *may* have started the remote, which matches Nord ADSP:
-> it is started by XBL on the Auto variant and by Linux remoteproc on
-> the IoT variant.
-> 
-> I'll drop this patch and send two patches instead:
-> 
-> - remoteproc: core: continue to the firmware boot path when .attach()
->   leaves the rproc in RPROC_OFFLINE
 
-I don't think you need this change in the remoteproc core. In the
-current upstream state - without the ping-pong implementation - the
-stop/shutdown/ready detection should remain static during the
-initialization of qcom_q6v5_pas. The boot firmware has either started
-it, stopped it, or never started it at all. Those signals should not
-change state until we take some action.
 
-IMO the proper solution is to move the checks inside qcom_pas_attach()
-to the probe function and never mark the remoteproc as RPROC_DETACHED in
-the first place if we already know it was not started.
-
-The fatal/crash IRQ checks can probably remain inside qcom_pas_attach(),
-I would assume the remoteproc core does not handle the case where a
-remoteproc appears immediately in RPROC_CRASHED state.
-
-BTW the issue you are running into was pointed out by Sashiko during the
-review of the original patch, see the second comment here:
-https://sashiko.dev/#/patchset/20260623-knp-soccp-v7-5-1ec7bb5c9fec%40oss.qualcomm.com?part=5
-
-The first comment from Sashiko about the broken crash handling during
-attach could also still be valid. I pointed out the same problem
-multiple times during the review process [1]. Unfortunately, Jingyi
-never fully addressed it. Eventually, the fixes were moved out into a
-separate series [2] and AFAICT abandoned as soon as the main series was
-merged with all the open problems. I'm quite frustrated about how the
-review process went for this change. :(
-
-The crash handling may have improved a bit with the fixes Bjorn did
-recently [3], but someone with access to the hardware for testing should
-really go complete the work that should have been done before merging
-the original series and test that *all* the error cases are handled
-correctly (remoteproc running, not running, crashed).
-
-In other words, if you could also do some more testing for the "crashed"
-case while fixing the "not running" case that would be much appreciated!
-
-With the state of LLMs today, all the discussions and my lengthy
-comments on the original series are probably perfect as verbatim input
-context for an LLM to make it do the dirty work... :-)
+On 10/1/2026 12:59 PM, Konrad Dybcio wrote:
+> On 10/1/26 7:12 AM, Yepuri Siddu wrote:
+>>
+>>
+>> On 10/1/2026 8:28 AM, Bjorn Andersson wrote:
+>>> On Tue, Sep 29, 2026 at 03:31:29PM +0530, Yepuri Siddu wrote:
+>>>> With RPMCC proxy vote removal, the WCN clock must be explicitly declared
+>>>> so the wcn3988-pmu driver can vote for it during WCN power on/off.
+>>>>
+>>>> Place the clock in the wcn3988-pmu node since the PMU driver owns the
+>>>> WCN power sequencing. CQM SOM uses RPM_SMD_RF_CLK2 while IQS SOM uses
+>>>> RPM_SMD_RF_CLK1, reflecting the WCN clock assignments on each board
+>>>> variant.
+>>>>
+>>>> Signed-off-by: Yepuri Siddu <yepuri.siddu@oss.qualcomm.com>
+>>>> ---
+>>>
+>>> Why do you have one problem description above and a different one below?
+>>>
+>>> The information after "---" is not merged so the git history only
+>>> contains the one above - and there's some interesting details in the
+>>> description below. Perhaps this is the b4 "cover letter"?
+>>
+>> Yes, the detailed description was in the b4 cover letter body which
+>> gets placed below "---" in the email automatically and does not make
+>> it into git history.
+> 
+> FWIW you can simply ignore the "cover letter" for single-patch series
+> and leave it empty (minus of course, the changelog)
+> 
+Thanks for the tip. Will drop the cover letter description in v4.
 
 Thanks,
-Stephan
+Siddu.
 
-[1]: https://lore.kernel.org/r/aUsUhX8Km275qonq@linaro.org/
-[2]: https://lore.kernel.org/r/20260409-rproc-attach-issue-v1-0-088a1c348e7a@oss.qualcomm.com/
-[3]: https://lore.kernel.org/r/20260723-rproc-rmmod-not-crashing-v1-0-546dfd5de0e6@oss.qualcomm.com/
