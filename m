@@ -1,110 +1,102 @@
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F4F94C33D8
-	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 16:50:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.210.46
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791219050; cv=pass; b=cDJo+iSbMCilig1hDSQLrYtGiX8e4Rm41q2a3nQFsObAWG+QWQpn+KopmA/EbYS+1gj13H5DA/m5J7v02z93285HAe31/U8PkqRnsP1BD2W/ToD0Dp9/twrltn+UK4Dxt7qr4M+bVIRX3dnf0BSBmDL6lb6RtRzB0v5D1SfKuAs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791219050; c=relaxed/simple;
-	bh=Q5bEQNNXDkZhEHk+o9hidTvXzFCLdcCycoDgksfDDBQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=lA8+wdObDUHP8GhskKoajgLf3huq3nPdqMckrtRHSr53G/PHBAbvB8gNLuDIGUSh0/k2njz7Dp6cLwoM192fxEzb+Hqf/KwZTOdK38JsZnyjmi5oD2PWrCDr5WjWGtuzGuKyH+FhobYHf+dSXxn/4rJzZFCf6QXd3GizmYnUnP0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SWvsjAzk; arc=pass smtp.client-ip=209.85.210.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8A8830B529
+	for <linux-arm-msm@vger.kernel.org>; Mon,  5 Oct 2026 17:02:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.16
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791219741; cv=none; b=kZHwwmywIiA77LPh4/oJ17hPvyqx4O2j0BG7drjZUkqf+xj9y222Q58SGnUddh06SmJm88jOjzjPdT+F1xf+fGwFjgo+C1GwzSgBiszNe7TVGUar/Wh3OzdxBe2n10b0jkrUXQVCX64NzfTHxyUvpun9kEgl5uPeitn1777ivNA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791219741; c=relaxed/simple;
+	bh=t/yEb69NqJwxXnY2yzDPMyvnZIr+lmNinV/kM6eADoc=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=HXzURK/dFq/wWgs+Cq0aoLZlg7jJr4RJy2IfBj0O4jShcl5UX6FBgeNM8lDuyUeCO1eFecsHhIz5CBjoYJm5LdEEiatSTMfu4AdQ06nfiIy3Nhhbs8de6riO2A+nlI6l4neIPBwMxtXzALEsx9D/RXICz7QJJ+o9yP5JAtGLIRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=iHpcz3Jd; arc=none smtp.client-ip=109.224.244.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SWvsjAzk"
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-824e6e6ed71so1454435a34.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 09:50:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791219048; cv=none;
-        d=google.com; s=arc-20260327;
-        b=PVPK0Wb3rbkQmOwTNQa5tKFo+FxIoZgZfRjqh3Ig6JvzBPeF3a2skRG+RgQJFmcYeI
-         WG3CFKKsVozgcnzvX5pLsy6BW1a8K1XJu7sC8uNbFPAZvFX/8JttTVZwF7rg7hpr3Nb3
-         cuzvfQamw2ZOzJdSRRsuUynidzgr2uHQUuTgBnDRdoVYOTcBMbmPXyp2U7GgLX8rX4Ay
-         Rerous9GawTvF5cadoyttBfAZQ731KRvM2APBH+vrOWtAUlfmvWF9jNzne7gAaiALv5X
-         cSyFgohHS7J9UCPX49tK62Gekduvat+IEXatjp/7e88Keb52o7QFCSn2lweujSQFsZt3
-         DFhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=Q5bEQNNXDkZhEHk+o9hidTvXzFCLdcCycoDgksfDDBQ=;
-        fh=LxbR6DXA7u99ORLRJWtrDT/WJXgGBw2FGhIMXwOfq0A=;
-        b=SnekrfVNai0pl9F/wlWKfkICV9UHf8YAi6kAF7g4kyF8zsxP5R2C+6AgDh2nE+xm5f
-         KX/u1/+t+dNI6V9YUXzDmrHQx26v+/nQLnIdQELvxhCAZ28twbmZet55R0atGh11f5yX
-         6qfZTa5fcTmN+K52EvaoRUqxu49LCPTlhBfQGuKtdQaipwCP8u7wZMZba0etKpDQe9BP
-         GSiyLC+OhmU+TC1YNHI1O3xpDhfpAMKEcTprbJ3wFo3Z+mnrVm8DsxZLLOx0FMk4SIq2
-         IYaMUu60qjTQxfgir+MOyiAoHhLJwhKimFXqgwgY0q6VM7JbsZtJD0RYG/JAQBSnSkrv
-         8M1w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791219048; x=1791823848; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Q5bEQNNXDkZhEHk+o9hidTvXzFCLdcCycoDgksfDDBQ=;
-        b=SWvsjAzkyHzUhTPj4aMhCk7arhV/KxwFnHhNlgosAH9UXEazEnXp8HGRuduScSm+Xx
-         FNSz63r0/H35/QH/SUUk+y7IO6sQk3arjidg5DBRH6gmN7a+uQcsn218CX+Zvw5GX2yY
-         BGmY6JtchlTSTise7rnucEdbAkqLy5UqWYQiBrzYZsyb/TFoTj5dJXY4k0K+fWEbHXIw
-         QF7VBe55y7WRpB2oS3A208b2ALJ4/MB2PwAgHv/pQdVsE07nNd+xoC1EM9e3UVjygNAM
-         I5XeO5teEYgGEbY8EjMR0kd4B6Yo3udi2gzcP8HWcTCkQoCS21/ENGYC5Z4i1aDA+kws
-         GPkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791219048; x=1791823848;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Q5bEQNNXDkZhEHk+o9hidTvXzFCLdcCycoDgksfDDBQ=;
-        b=rmtlYFKgyXHYGVBgF+jEwCYGr+0pcrkx81ZBg6esSSRPlLp+Fl/nPaJX3klw93BtHA
-         ELoOwjhZS1fArYZQk4yol3pHuN7FP6JtCLSTmDZa3DOX7eTnJNcDOjACQpqtNY53CATQ
-         lMQc56i6ZXOvEFrLa4aBvsh87pxh2sO1HoWZhVHPnynn2BA1W3UQpRrlV29Ey5Wd8zA4
-         23YvnKdyDAXirBdjHLnWL1c0Dlbdjyj6M/L5ityFmRXfNRMmnb7m67b/5uc6hNbCeZbx
-         LhgTc8oWxvTg2QnKEgF9sXnX6FPypAfGC2rMgwVeBvtcLLK3PedJcd0v0AZSWq3onKPy
-         mymg==
-X-Forwarded-Encrypted: i=1; AKwUvBx9Q5J/VgWoPSfK4J1Wa3D7ekUyhO3T6Em8HsGAE3ktxtbmNgGMoHlk46DUzm5k0BdpT9duwcZ5iBXvett5@vger.kernel.org
-X-Gm-Message-State: AFuF++mkLiT8eiUFPJIHBLRpxwc/9gYvhhp/fOcQbsAN5LgmTcalON5h
-	OWofAlLR6W5tqDDLJqbjtPWs7zEbPy/ftl4OSWCSXAsslY53DUX96LV0QMXDYNRAb4fwPKB5KWM
-	7BMKnSX0QWyvFx68c0q4oGbbnu0ibabCTVHtM4tE=
-X-Gm-Gg: AYBFou2i+dBcYzVslle9UhTZFarsbquri9twMb8jvJP2OvZuSHx+plvUyUDSGdLtO2X
-	ZJGrNeOuZPvsHxxMIy0sg72SQBZL0mq+VfrJSvmKRuTYzSU6EKXTpMYRRqZibES/sZneb05opD2
-	oUgPsAX6nT7wfFeU9DV1e7EVH3KNujTfAXcwrEwzL5QB8NkczjbK0aiywNt+KdmIMpXVk3D7iJD
-	ievS/RQpJa1H07xhdKndSu2/pZRWaF0AWzR+dVzzIpvR29b4tpie0LQeXs2d8bXltNgN88ohi4A
-	fpie7VgvFwOqtgs0orm+n8rOx0HdYBX8B98dUOCrJPtaViQI2QL6Ejjfd2ycFalLZUaBwe7fkON
-	oI4uSCPQOLrJp
-X-Received: by 2002:a05:6808:1795:b0:4e8:2150:299 with SMTP id
- 5614622812f47-4f679fe2a10mr7854866b6e.23.1791219047967; Mon, 05 Oct 2026
- 09:50:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="iHpcz3Jd"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1791219731; x=1791478931;
+	bh=t/yEb69NqJwxXnY2yzDPMyvnZIr+lmNinV/kM6eADoc=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=iHpcz3Jd7cuaTlXtlgEFIdxXp75oLf09jOLK+Z5B9oJEcnkip6yFmjCqzU3spAh+s
+	 isNGiJKpK7FMEkqV9L6lxvJyEarjcB3Qwpx9TDU/L6gSO4yWwSn5TdJD43LNL24Xhj
+	 ELFRiT+i7Oh/AYhwMUwd/79XPqXIhZkxI/geG7Oz3+FX5xnotAMqtfuyIgnnyMlE9q
+	 COPg5vlL43jE6hmU0FBIgx3J5Sr6iWLXszcgdxv7yGxWtoWgDFTJ+c1B8ezvvMFjVN
+	 MKqzs5C6wuWPsu2JNkxYrPkdcpvVNkgJ6gxeB6CAOH5hxSPn2paNbu1dU3yNB2XQGn
+	 55smCSXyd70lg==
+Date: Mon, 05 Oct 2026 17:02:06 +0000
+To: Manivannan Sadhasivam <mani@kernel.org>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <mkp@kernel.org>, Abel Vesa <abel.vesa@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Luca Weiss <luca.weiss@fairphone.com>, Bjorn Andersson <andersson@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+From: Alexander Koskovich <akoskovich@pm.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-scsi@vger.kernel.org, linux-kernel@vger.kernel.org, Alexander Koskovich <akoskovich@pm.me>
+Subject: [PATCH] scsi: ufs: qcom: Power down UFS during system suspend on Milos
+Message-ID: <20261005-milos-ufs-suspend-v1-1-a6f8b89d5b63@pm.me>
+Feedback-ID: 37836894:user:proton
+X-Pm-Message-ID: ce9a58eb4e9744b4aff0606b7f060f3d44db0ca5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261004165132.4313-1-franzelfranzel@gmail.com> <d791e70f-9c3f-4916-94de-8d76517339bf@oss.qualcomm.com>
-In-Reply-To: <d791e70f-9c3f-4916-94de-8d76517339bf@oss.qualcomm.com>
-From: Dale Whinham <daleyo@gmail.com>
-Date: Mon, 5 Oct 2026 16:50:16 +0000
-X-Gm-Features: AclHuK86rNmj1WNp2rnEYWCTMSv7GKXC5kLWAnqBi1EywA_4Cfr2oGHSi5bAdpE
-Message-ID: <CAFcmK8haaN=O+aqvcRr4t6jc6dr4Bf2QDDPso-aT_frqEfSPWA@mail.gmail.com>
-Subject: Re: [PATCH] wifi: ath12k: skip hardware rfkill setup on Microsoft
- Surface Pro 11
-To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Cc: =?UTF-8?Q?Fran=C3=A7ois_Roux?= <franzelfranzel@gmail.com>, 
-	Jeff Johnson <jjohnson@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, =?UTF-8?B?SsOpcsO0bWUgZGUgQnJldGFnbmU=?= <jerome.debretagne@gmail.com>, 
-	ath12k@lists.infradead.org, linux-wireless@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 5 Oct 2026 at 14:37, Jeff Johnson <jeff.johnson@oss.qualcomm.com> wrote:
-> my preference would to to break this out into a separate table-driven function
-> so that if other devices have this issue they would just need to add to the table.
+On Milos the UFS PHY GDSC is turned off on every system suspend and the
+PHY loses its register state, so exiting hibern8 on resume fails:
 
-Indeed, as far as I know Microsoft Surface Laptop 7 (aka. Romulus) is
-also affected by this issue.
+ufshcd-qcom 1d84000.ufshc: pwr ctrl cmd 0x18 with (MIBattribute 0x0, mode 0=
+x0) failed, host upmcrs:0x5
+ufshcd-qcom 1d84000.ufshc: ufshcd_uic_hibern8_exit: hibern8 exit failed. re=
+t =3D 5
+ufshcd-qcom 1d84000.ufshc: __ufshcd_wl_resume: hibern8 exit failed 5
+
+Set no_phy_retention so the controller and device are powered down
+during system suspend and the link is brought up again on resume.
+
+Fixes: 04bb37433330 ("arm64: dts: qcom: milos: Add UFS nodes")
+Signed-off-by: Alexander Koskovich <akoskovich@pm.me>
+---
+ drivers/ufs/host/ufs-qcom.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 7e6cb6dc42d1..e979850c05cb 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -3033,6 +3033,10 @@ static void ufs_qcom_remove(struct platform_device *=
+pdev)
+ =09=09platform_device_msi_free_irqs_all(hba->dev);
+ }
+=20
++static const struct ufs_qcom_drvdata ufs_qcom_milos_drvdata =3D {
++=09.no_phy_retention =3D true,
++};
++
+ static const struct ufs_qcom_drvdata ufs_qcom_sm8550_drvdata =3D {
+ =09.quirks =3D UFSHCD_QUIRK_BROKEN_LSDBS_CAP,
+ =09.no_phy_retention =3D true,
+@@ -3044,6 +3048,7 @@ static const struct ufs_qcom_drvdata ufs_qcom_sa8255p=
+_drvdata =3D {
+=20
+ static const struct of_device_id ufs_qcom_of_match[] __maybe_unused =3D {
+ =09{ .compatible =3D "qcom,ufshc" },
++=09{ .compatible =3D "qcom,milos-ufshc", .data =3D &ufs_qcom_milos_drvdata=
+ },
+ =09{ .compatible =3D "qcom,sm8550-ufshc", .data =3D &ufs_qcom_sm8550_drvda=
+ta },
+ =09{ .compatible =3D "qcom,sm8650-ufshc", .data =3D &ufs_qcom_sm8550_drvda=
+ta },
+ =09{ .compatible =3D "qcom,sa8255p-ufshc", .data =3D &ufs_qcom_sa8255p_drv=
+data },
+
+---
+base-commit: bf1ee2bd5c2da8992f33c8950ef194aaff74ed6c
+change-id: 20261005-milos-ufs-suspend-7dd7439543a6
 
 Best regards,
-Dale
+-- =20
+Alexander Koskovich <akoskovich@pm.me>
+
+
