@@ -1,183 +1,300 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9641F2C15BB
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 06:27:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B73B37E5D0
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 06:34:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791268059; cv=none; b=QQuzbusREi9kSOHhp/wF41DHgkWB3h/+41Xn9KlQpk/IaqmuJkJwIw4JCCXSXfSMujINf9A1c2Oe5x3BTV3JgSchiaBQR36z/44PUYNrZVAzvar5aHv0j+kP8Kt2Wqui7T8E/jNdlVnX0BaNXkn5K+hW6f+CE+Pwy5yrqWr2aK4=
+	t=1791268486; cv=none; b=YD98SvFhu4jWHBx/GaLCjar+f06TFY5BHZaEOzr0wFh705zsBoRygcDK5RpKfkcqfTTuVE3SGIPuooooE9m67seEjMDX3CN4spdQr/C2tgReUzOJrARj9N+7SX7e2J1WSJVQp0jdBrztDKN01CPWR+yVh2zokX2AM74lDzzNh58=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791268059; c=relaxed/simple;
-	bh=xSxuORG1HORqXwgd1D2Pao2qpG0YgIMnbGQKbAk7T80=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=p/ndlMD9nDKRVItgE+tQtLnMA/lzpF59k9Gq/al4zjWLN6pURQVlOTX2Ty+boC6SQAo3HucwLGwr1jkzQVd3M+840lYLW2BAXXYmpWcY0t2nWrBx6X8y2esowBfScuf0Lot60kkJAtEvf8BZ33XnQL93HK/YYQWn0os3y//z9AU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KD4fTVmZ; arc=none smtp.client-ip=209.85.128.53
+	s=arc-20240116; t=1791268486; c=relaxed/simple;
+	bh=UaY9A50IkfjZSwbaSW9VeHjuhU6oNjPjtrqhFeQJ4Wo=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=rojJ4Y3pxe6+rarMzN6GAo1XCYjiQoXp8GF5Upq9H2UKkI4ZbIZBY9H05h+ue+8Od+DYy3Vnt4ui6WyQDTfsIPNIKVeKtkxjDTdx5V+HqelajleQqHn+Eadvr1qYagsyBbQi4p1Hp2+2Wc7+Z+S69s08ueuWL3LWKaDbURJXe54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qfX858IR; arc=none smtp.client-ip=209.85.221.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KD4fTVmZ"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49d05d51553so17534505e9.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 23:27:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qfX858IR"
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48c6955a7c3so26824f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 23:34:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791268056; x=1791872856; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NN3uyFX5MgblzC6BFihyJF+3HDagHt+ljw1Qjp2+odc=;
-        b=KD4fTVmZhMWIN6QD7EbNVAY8jwriCyCyTKoOMC4FiroHax3lFWiEHMVoA6U3zeH4IB
-         1xsCzLY6CLaV5pgHxG5rp2HTzMP4r3MAeTu3NEyMl9/xV9/ryidXhwCI3VjFRiVLmEdb
-         OluD1Y1H6NpDklfIEllnGWc6lgZJ0XpjwML+eYaQLQN3IusZTaGupJgyYCypd733pfqJ
-         gX8tM3pBnUi1fearbeyTvhIqyMBOTTZOFqStBlQEJQg7b8nK2KuLKRr3QOhxwPtVAwS7
-         1NCnXOswd3HHyRFBufb4PW3hHLwcvwkJvWZ/MIv2WEWDVq5bnjtYTdf+Zi61/iXLqF5l
-         ft5A==
+        d=gmail.com; s=20251104; t=1791268478; x=1791873278; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=UaY9A50IkfjZSwbaSW9VeHjuhU6oNjPjtrqhFeQJ4Wo=;
+        b=qfX858IRfuhYNb5MBJaec9403LcW/EZi4CHSbVkzvk7JRIQGxbiaaZ+EqIzM8Plciu
+         JQcu4NALC8uoFSRMLHWVoGlJNa/t9Zb2JZaDlJqsz/n15kJnXNgr3xfolToZ2K80MkhA
+         4fbO15JFIBSWTXBRHAVMjnb8fTZLB4BRURlOOOMDd6eUQUtynGfdhjdE6lHv6RCGtocb
+         sVmgfcbtDs7e6rs05Xhk/Tbt/Unh6xofNTXsYGp7OoGtNZ+pUoLHdOtEhfzZBXSuG8pY
+         a/Y00o3noUa9bjV3wcy6ni8hsW9WJQWHBnxrz+Q4fVt1djcqNoXO/z+pBbVgFajoxNQl
+         OWlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791268056; x=1791872856;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=NN3uyFX5MgblzC6BFihyJF+3HDagHt+ljw1Qjp2+odc=;
-        b=I5Iia0ldoMdV1YqJ74wi7mAj2BkfJGX0Qka9r+80Bk1Hf27rtCLJk47afnutjiFnNO
-         y3Bi5/nh6+sWw/9AhEPM/ebwBgtsD/qNmINFr0fy9tfnMni1DyuRJS+q8g3O9SMuQ8ed
-         FBavIG6CcVguLsd2Hn5O/n56rHRLJ+D7Iz6Xsx7TQAMmvKI06flNIJPStgp+YoHBkVoJ
-         us/ZKTHqfCRPP5F+pHceU1BSZQFa8L+FR42DSDu4Eueubr3k8ICphKi5NUHgE8zoaMAT
-         c3I3inYx9AWaryWDeKItjFL0/7a5j0M2XWyzmtJMeY7Y76hhQ4PU4948+ZNXFmqstrP9
-         mv9A==
-X-Forwarded-Encrypted: i=1; AKwUvByWim1Vm3LIsouIoKYKyD1tZ8XtRL0fdNmMSKFnrkar4E1K9n1wtGwWs6bw39s0RVo57BW3BCOC2NXZB7aQ@vger.kernel.org
-X-Gm-Message-State: AFuF++nq4qDg+lGXjLDdoGRUbAhuOFyZ9gPdDL5JBAGg1blaAFsy4DKU
-	B0mwTHX8m5VYbzk/rJYDFY3QANwAjrgWkTYys7VeIXxtu1jR5YzQ24fu
-X-Gm-Gg: AYBFou2Dt0sKFNg2kk6tTWenRDZnYpNrtL3DIuwffLv0m3+IFwLAiQypxym9o4/mUe5
-	8tzwf86kDTcKfIIqa5m/jqrwVBESE2I4gzaXAsW//NzcQ+lbUa2jFvhZEuFjOKvoajc7U+EFS+0
-	V9yY0Zmvu8cysixvm2/sH+vJHp8U1bzNQ2I4YD0W2o4QASnEdaTHz/3vbKwSBOP2DuHrwWfaYZ2
-	6lPhEAgVbWgP0wOVuwRit0bldZL611CEux8kDkXMc68vuSxsHjvjK/fhkeowGN+RlqjaCmPfwDs
-	YhJYU2tb7+1oDBb7cVQRikAP+3Zo5JIHd8XCsAEeeaAGTC1g1uNWP6uRgdHik88EjOyrBAzhbah
-	nfwpMfsRcWydNv22enGvOMFQ1nJIdlIWjLRrUIqEaxg5TukkWbJFUnlkDeTWdMfWW+GJ6rbz7yL
-	cIF9RpGXGBi93VQF5W6Hliq/OlvjLg0ktSEPq8bxck5DGNPynq6kxY2is0eVPf29ybeyyh3c+ii
-	aY+GL6lbL5MVFlAkXN1pg==
-X-Received: by 2002:a05:600c:a116:b0:4a0:1a7f:2abb with SMTP id 5b1f17b1804b1-4a1680e94e3mr115543345e9.11.1791268055657;
-        Mon, 05 Oct 2026 23:27:35 -0700 (PDT)
-Received: from FranzSP11.tail2d6612.ts.net ([31.31.60.25])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0394e6c5asm311830615e9.2.2026.10.05.23.27.34
+        d=1e100.net; s=20260707; t=1791268478; x=1791873278;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UaY9A50IkfjZSwbaSW9VeHjuhU6oNjPjtrqhFeQJ4Wo=;
+        b=mWphFWuv3o67gTNnPM2UmePOLCZXZWOX5Wat3h176dqZbe15SU4FiwugECr6KI+IQ9
+         sm5GmAGK9oRb0yM9+eeST1QOYNThfb3YpQgLRYVg3DPxM6ckBiOFlbV4Ht1j6YSdLGLR
+         JbVTqsy3TlRql7TXDXEbYxIMFCYy7EGWljldhs+NCNuyPNQVudX7TWJUJ2B/rY2qCWoN
+         i9S64ux7Iy5+54+7fUD45FD4/313LZa7Z0mT6ijZjT+G0iEzobJdg6hUO+/EyypIDq6N
+         x78QqWcyiVLoq617TpuI5dMK4Wes6KJSheZwECRa34pQnWmHJIP5A60osJD9JqjCCyqp
+         2vMw==
+X-Forwarded-Encrypted: i=1; AKwUvBxU3WluXWQRtQiDzxLiz2eAgPKLiAr7j8M8AqtnsH5s9gpmtuXL1x189oSdrN2D75Ik7WPYb2yngheLwYUG@vger.kernel.org
+X-Gm-Message-State: AFq9FYJvPgJEUuq6Kd+qL1b0eDmIYw4idkDqiQeuvAf2Ufz22dnln2id
+	rGYFLaaOdzeVajRNVKIh6PjxfsFgVbQzsPOp1rar8f81wCbfl8GpIIXX
+X-Gm-Gg: AYBFou19xUzqLQKFzYdcy2tTb6eMV70rCqeFpuRsYjWl80pyHDSXwlf4Ivca38rk4yh
+	iTbeyVfVEZuiB6Fyqsz6EzUKRnx7WFfgjmMSNlForEUuzSKqKW4YDgWoy/1/YF8uqnj8lVHrrbz
+	A5jpzFbfWDUWHHJvIB3Szab57h4rsIajT34vuiZpDxUptlonMP3rKx0w8f03ILxdvkoXqrk/IcX
+	Z1Dks+6R+GwIzM+qYsf3O8bR+21TJUwQZVG5bRtcfDyUfiFAeEl6vjtY9DpGNf6q05HyLjlg42h
+	wkFgIRSRZLI+7rNJDGlS0hx7rBCcEQMn+SZ3NIQWT4SjkMtrFGAhcQf/v6vxA6npjkEKVzTkI4U
+	GfGOBHvr4aqRpL6w4//VoIxc4uxQd4vpHdlVw+7/zS2UNadeWK3q5sOqbKvRAnnwymBS0QnPTxh
+	WBwd/gxEzCzW0gKF83jhDEeSZcObd75ZualbCN4DY1zl85Ai0z6ME7bCT6BgCNVtQX2hNgInbhk
+	WF807VvHHkLkr/7XaKS+ClhjmjD3hFkKaxxbIYOV+PNB0zaqEUXVmBb9z4mxQCkwiYe7DgsL/nO
+	ZHz9n6Sg+iDtXVHC
+X-Received: by 2002:a5d:6f0a:0:b0:48c:4ca2:6218 with SMTP id ffacd0b85a97d-48c6d177135mr652013f8f.27.1791268477778;
+        Mon, 05 Oct 2026 23:34:37 -0700 (PDT)
+Received: from ?IPv6:2001:818:ea56:d000:56e0:ceba:7da4:6673? ([2001:818:ea56:d000:56e0:ceba:7da4:6673])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c69be6b12sm2901829f8f.45.2026.10.05.23.34.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 23:27:34 -0700 (PDT)
-From: =?UTF-8?q?Fran=C3=A7ois=20Roux?= <franzelfranzel@gmail.com>
-To: Jeff Johnson <jjohnson@kernel.org>
-Cc: Jeff Johnson <jeff.johnson@oss.qualcomm.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	=?UTF-8?q?J=C3=A9r=C3=B4me=20de=20Bretagne?= <jerome.debretagne@gmail.com>,
-	Dale Whinham <daleyo@gmail.com>,
-	ath12k@lists.infradead.org,
-	linux-wireless@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] wifi: ath12k: skip hardware rfkill setup on Microsoft Surface devices
-Date: Tue,  6 Oct 2026 08:27:28 +0200
-Message-ID: <20261006062728.45007-1-franzelfranzel@gmail.com>
-X-Mailer: git-send-email 2.56.0
+        Mon, 05 Oct 2026 23:34:37 -0700 (PDT)
+Message-ID: <6f5dd1c1622adbaf0174a949ca91cb11872087ff.camel@gmail.com>
+Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
+ new header
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: Frank Li <Frank.li@oss.nxp.com>, Andy Shevchenko
+	 <andriy.shevchenko@intel.com>
+Cc: Nuno =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>, Vinod Koul	
+ <vkoul@kernel.org>, linux-kernel@vger.kernel.org,
+ dmaengine@vger.kernel.org, 	linux-arm-msm@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com, 
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org, 
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org, Frank Li	
+ <Frank.Li@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Eugeniy
+ Paltsev	 <Eugeniy.Paltsev@synopsys.com>, =?ISO-8859-1?Q?Am=E9lie?= Delaunay
+	 <amelie.delaunay@foss.st.com>, Maxime Coquelin
+ <mcoquelin.stm32@gmail.com>,  Alexandre Torgue
+ <alexandre.torgue@foss.st.com>, Jonathan Cameron <jic23@kernel.org>, David
+ Lechner	 <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>,
+ Jaroslav Kysela	 <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Mark
+ Brown <broonie@kernel.org>
+Date: Tue, 06 Oct 2026 07:36:06 +0100
+In-Reply-To: <asGk4fj_HQ5HupB4@SMW015318>
+References: <aqlwRkNcs_UqKjWs@parshuram> <aql6u3T0nnSVr-FC@SMW015318>
+	 <aqws8pN2rfS9-dCC@parshuram> <aqz1-OzFobOROuBw@nsa>
+	 <aq18_TMNs4EJzgZO@parshuram> <arDtEB0na9DxDWAS@nsa>
+	 <arFXc0LqEpgWSS6m@SMW015318> <ar-Il2qP_Qms3Qw1@nsa>
+	 <ar-13p3a7ENGfMOF@SMW015318> <asEWwIfO0LB27wj9@ashevche-desk.local>
+	 <asGk4fj_HQ5HupB4@SMW015318>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (3.60.2-1.fc44) 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-On the Microsoft Surface Pro 11 and Surface Laptop 7 (X1E80100), the
-WCN7850 hardware rfkill input reads as "radio off" and the OS has no
-way to control it. ath12k enables hardware rfkill handling, so Wi-Fi
-stays hard-blocked:
+On Sat, 2026-10-03 at 19:59 -0500, Frank Li wrote:
+> On Sat, Oct 03, 2026 at 05:52:48PM +0300, Andy Shevchenko wrote:
+> > On Fri, Oct 02, 2026 at 08:47:10AM -0500, Frank Li wrote:
+> > > On Fri, Oct 02, 2026 at 11:43:17AM +0100, Nuno S=C3=A1 wrote:
+> > > > On Mon, Sep 21, 2026 at 11:12:35AM -0500, Frank Li wrote:
+> > > > > On Mon, Sep 21, 2026 at 09:53:49AM +0100, Nuno S=C3=A1 wrote:
+> > > > > > On Fri, Sep 18, 2026 at 11:33:41PM +0530, Vinod Koul wrote:
+> > > > > > > On 18-09-26, 09:39, Nuno S=C3=A1 wrote:
+> > > > > > > > On Thu, Sep 17, 2026 at 11:39:54PM +0530, Vinod Koul wrote:
+> > > > > > > > > On 15-09-26, 12:04, Frank Li wrote:
+> > > > > > > > > > On Tue, Sep 15, 2026 at 09:50:22PM +0530, Vinod Koul wr=
+ote:
+> > > > > > > > > > > On 15-09-26, 21:22, Vinod Koul wrote:
+> >=20
+> > ...
+> >=20
+> > > > > > > > > > > > > Traditional naming would be
+> > > > > > > > > > > > > dma/engine/provider.h
+> > > > > > > > > > > > > dma/engine/consumer.h
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > consumer and provider and good names.. I would reta=
+in the
+> > > > > > > > > > > > full dmaengine
+> > > > > > > > > > > > everywhere please. dma causes confusion already!
+> > > > > > > > > > >=20
+> > > > > > > > > > > Thinking about it again, drivers/dma/dmaengine.h shou=
+ld be the
+> > > > > > > > > > > provider
+> > > > > > > > > >=20
+> > > > > > > > > > There some dmaengine code outside drivers/dma directory=
+, like
+> > > > > > > > > > drivers/crypto/ccp/ccp-dmaengine.c
+> > > > > > > > >=20
+> > > > > > > > > They chose to be outside, their choice... They need to be=
+ updated
+> > > > > > > > > as
+> > > > > > > > > well to point to ../../dma/dmaengine.h :-)
+> > > > > > > >=20
+> > > > > > > > I tend to agree with Andy but anyways. I feel this is going=
+ a bit out
+> > > > > > > > of
+> > > > > > > > scope now. So what we have now in the series is:
+> > > > > > > >=20
+> > > > > > > >=20
+> > > > > > > > - include/linux/dmaengine.h (without enum dma_slave_buswidt=
+h)
+> > > > > > > > - include/linux/dma/types.h (with enum dma_slave_buswidth a=
+nd new
+> > > > > > > > =C2=A0 dma_buswidth_t type) - A future one would be dma_cap=
+_mask_t and we
+> > > > > > > > could
+> > > > > > > > =C2=A0 drop bitmap.h from dmaengine.h
+> > > > > > > > - include/linux/dma/widthmask.h - The new bitmap based API =
+for
+> > > > > > > > bus_width
+> > > > > > > >=20
+> > > > > > > > I kind like the separation (and the whole point was to avoi=
+d bitmap.h
+> > > > > > > > in
+> > > > > > > > the main dmaengine.h API) but tbh I'm not sure if a consume=
+r driver
+> > > > > > > > will ever use dma/widthmask.h without needing the consumer =
+API. But
+> > > > > > > > to sum things up, what do you suggest for v=C3=9BE?
+> > > > > > > >=20
+> > > > > > > > * include/linux/dmaengine.h as the consumer API and include=
+s the new
+> > > > > > > > the widthmask API
+> > > > > > > > * provider/private goes to drivers/dma/dmaengine.h and just=
+ includes
+> > > > > > > > include/linux/dmaengine.h as the starting point?
+> > > > > > > >=20
+> > > > > > > > Let me know how do you want things for v5
+> > > > > > >=20
+> > > > > > > Yes lets talk about dma_slave_buswidth, it is client type. Th=
+is is
+> > > > > > > configured by users to set the width of peripheral.
+> > > > > > > So this needs to be in the include/linux/dmaengine.h
+> > > > > > >=20
+> > > > > >=20
+> > > > > > Agreed! But providers also need to set the allowed bus mask. An=
+d I'm
+> > > > > > just not sure they need to include/consume all of the consumer =
+API.
+> > > > > > Also, it's common to allow the provider API to be widely used t=
+hroughout
+> > > > > > the kernel (but I agree that could be even harder to get done -=
+ if we
+> > > > > > want to make some stuff really private - but I guess that could=
+ be done
+> > > > > > in a second step or more incrementally). We do also have some s=
+ubfolders
+> > > > > > in `drivers/dma` which means we'll need the odd "../dmaengine.h=
+" relative
+> > > > > > include which I do not love tbh (on top of the crypto stuff).
+> > > > > >=20
+> > > > > > I really think something like the below would be more appropria=
+te (if we
+> > > > > > just want the provider/consumer API without further splitting l=
+ike the
+> > > > > > types.h and widthmak.h in this version):
+> > > > > >=20
+> > > > > > include/linux/dmaengine.h - provider API (as of today)
+> > > > > > include/linux/dmaengine-consumer.h
+> > > > > >=20
+> > > > > > But anyways, if you or Frank do not object in the next few days=
+, I'll
+> > > > > > take the above approach suggested by Vinod:
+> > > > > >=20
+> > > > > > drivers/dma/dmaengine.h - provider
+> > > > > > include/linux/dmaengine.h - consumer
+> > > > >=20
+> > > > > It think it is fine.
+> > > >=20
+> > > > So I was aboutto start on this again and I just realized
+> > > > drivers/dma/dmaengine.h already exists today so nothing to do on th=
+is
+> > > > series.
+> > >=20
+> > > I just find it and start some cleanup/move work.
+> > >=20
+> > > > I mean I could remove the consumer include on the dmaengine
+> > > > drivers that I'm touching but not really on scope and super importa=
+nt
+> > > > IMO. So, for the consumer side, should I just go to the first appro=
+ach
+> > > > where all the bus_width API goes into include/linux/dmaengine.h or
+> > > > should I keep:
+> > > >=20
+> > > > include/linux/engine/types.h
+> > > > include/linux/engine/widthmask.h
+> > > >=20
+> > > > And have a better separation on the consumer side? Or maybe changin=
+g
+> > > > s/engine/consumer/ on the above paths?
+> > >=20
+> > > I go through v3 thread, Andy just said split to new type.h, but not h=
+ave
+> > > provided reason.
+> > >=20
+> > > I am planning move provide API and data structure to driver/dma/dmaen=
+gine.h
+> > >=20
+> > > include/linux/dmaengine.h will keep consume only defination and API.
+> > >=20
+> > > why still need types.h?
+> >=20
+> > The idea was to rectify the messed up dependencies. Without split of ty=
+pes we
+> > will need to have bitmap.h (IIRC the initial idea of the split was that=
+) only
+>=20
+> There are already include bitmap.h, and use
+>=20
+> typedef struct { DECLARE_BITMAP(bits, DMA_TX_TYPE_END); } dma_cap_mask_t;
+>=20
+> Suppose all DMA Engine consumer will use it to do some check. So I think
+> needn't split it as indivial version.
 
-  iwd: Error bringing interface 4 up: Operation not possible due to RF-kill
+Are we sure all consumers are making use of dma_cap_mask? In fact the only =
+function
+depending on bitmap.h is the one clearing the cap_mask. But stepping a bit =
+back,
+bitmap.h was the original proposal from Andy so the idea was to have the ne=
+w
+widthmask (this one indeed heavily uses bitmaps) already as a split. And wi=
+th it,
+came types.h given that the DMA enum needs to be used from both consumers a=
+nd
+providers. And note that consumers might want the header without actually n=
+eeding the
+bus width API so the separation kind of made sense to me.
+Then, as a follow up the idea was to also split the cap_mask API into it's =
+own header
+with a backing include in the main consumer header.
 
-ACPI platforms can opt out through ath12k_acpi_get_disable_rfkill(),
-but DT platforms cannot. A DT property was proposed for this and
-rejected, because it describes what the OS should do rather than the
-hardware. The suggested alternative was to handle these machines in
-the driver until a connector binding can describe a broken rfkill line.
+So if we all agree with the above, I guess the current series does not real=
+ly has to
+change. I see 3 ways:
 
-Add a table of board compatibles and hardware revisions on which
-hardware rfkill is known to be unusable, and skip the rfkill setup
-there. Other affected machines then only need a new table entry.
+* Just go back some versions before and have all of it in dmaengine.h
+* The current form
+* s/engine/consumer on the current proposal include/linux/dma/engine/*
 
-Tested on a Surface Pro 11 (microsoft,denali) with next-20260929,
-booted with the unmodified mainline DTB: the interface is no longer
-blocked and connects. The Surface Laptop 7 entries (microsoft,romulus13
-and microsoft,romulus15) are based on reports from Jérôme de Bretagne
-and Dale Whinham. I have not tested them.
+- Nuno S=C3=A1
 
-Link: https://lore.kernel.org/all/2ixwny6hzumlqmok5cjwutvtk7nzmx4t3dhxc44ao4l2u755pj@n6m7jyxf2o62/
-Suggested-by: Manivannan Sadhasivam <mani@kernel.org>
-Assisted-by: LLM
-Signed-off-by: François Roux <franzelfranzel@gmail.com>
----
-Changes in v2:
-- Use a table of board compatibles and hardware revisions, as suggested
-  by Jeff, so that other affected machines only need a new entry.
-- Add the Surface Laptop 7 (microsoft,romulus13/15), which Dale and
-  Jérôme report as affected too. These entries are untested by me;
-  a Tested-by from someone with that machine would be welcome.
-- Retested on the Surface Pro 11.
-
-v1: https://lore.kernel.org/all/20261004165132.4313-1-franzelfranzel@gmail.com/
-
- drivers/net/wireless/ath/ath12k/core.c | 32 ++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
-
-diff --git a/drivers/net/wireless/ath/ath12k/core.c b/drivers/net/wireless/ath/ath12k/core.c
-index 0c72948f3..67d4c98fb 100644
---- a/drivers/net/wireless/ath/ath12k/core.c
-+++ b/drivers/net/wireless/ath/ath12k/core.c
-@@ -72,6 +72,35 @@ ath12k_mem_profile_based_param ath12k_mem_profile_based_param[] = {
- 	},
- };
- 
-+/*
-+ * On these machines the OS cannot control the WCN7850 hardware rfkill
-+ * input, which reads as "radio off", so hardware rfkill must stay
-+ * disabled. Ideally this would come from the connector node of the board
-+ * DT, but that binding does not exist yet.
-+ */
-+static const struct ath12k_core_broken_rfkill_table {
-+	enum ath12k_hw_rev hw_rev;
-+	const char *compatible;
-+} ath12k_core_broken_rfkill_table[] = {
-+	{ ATH12K_HW_WCN7850_HW20, "microsoft,denali" },
-+	{ ATH12K_HW_WCN7850_HW20, "microsoft,romulus13" },
-+	{ ATH12K_HW_WCN7850_HW20, "microsoft,romulus15" },
-+	{ /* Sentinel */ }
-+};
-+
-+static bool ath12k_core_rfkill_is_broken(struct ath12k_base *ab)
-+{
-+	const struct ath12k_core_broken_rfkill_table *entry;
-+
-+	for (entry = ath12k_core_broken_rfkill_table; entry->compatible; entry++) {
-+		if (ab->hw_rev == entry->hw_rev &&
-+		    of_machine_is_compatible(entry->compatible))
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- static int ath12k_core_rfkill_config(struct ath12k_base *ab)
- {
- 	struct ath12k *ar;
-@@ -83,6 +112,9 @@ static int ath12k_core_rfkill_config(struct ath12k_base *ab)
- 	if (ath12k_acpi_get_disable_rfkill(ab))
- 		return 0;
- 
-+	if (ath12k_core_rfkill_is_broken(ab))
-+		return 0;
-+
- 	for (i = 0; i < ab->num_radios; i++) {
- 		ar = ab->pdevs[i].ar;
- 
-
-base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
-prerequisite-patch-id: aafe3fac38f4020441979665509928f8cc832095
--- 
-2.56.0
-
+>=20
+> Frank
+>=20
+> > where it's indeed required. Besides bitmap.h there are might be more he=
+aders
+> > that "include half of the world" which should be avoided in every heade=
+r file.
+> >=20
+> > --
+> > With Best Regards,
+> > Andy Shevchenko
+> >=20
+> >=20
