@@ -1,68 +1,68 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BA9B39D6DA
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:41:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FBD93D3CF4
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:42:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791326566; cv=none; b=Bw4QVMAi4oohr54mJ067g5a6Q7/plJFBbYxZdcjhiUO7zK2b0t95MXpbqEqpipO6nDbefD0wGM7AqgOGlGCXck/NHfnzwJ8AmfLE/d+ROdgVrCFvKKQTcfL/Y5Y1MHzeNmPCdxNiHHAPHYhHAU9NanDd557VU2PFNrsEUvhueYs=
+	t=1791326578; cv=none; b=QfciVAUCsKOF/Uw308uKjmt0anvz35xPZLzw1frbXnkuClzteKTU1SnhQ3Lal6hQd8lpmU+W3xyD+bU5jilZzG0tzns6xVd1xzdVZJuY/x37+dekLK+lfL/YemyBY4rY4sIywlulM/zLlXV/EBJ/62EbRkPyyOwnnSfOyHGJ9v4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791326566; c=relaxed/simple;
-	bh=Pmsmy2qqiP5xodTQBFlseJBs12bs8MwUvw4gFMv27cw=;
+	s=arc-20240116; t=1791326578; c=relaxed/simple;
+	bh=IaV+7Nqe72WztSaW3MG9b28k36h8V9JiDqMww/MfWcc=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=MfImQQdoUxt0W1qcNSakIsSRBEFSmLe0yovG6FJAsOVmCk95UW5kiUKUfjitgbT8Ar/P6B5mLgsoN+jABMsB01ikSQhRjG3Y6Cm7ACf7zTxf8L/LCwUXXkBBcIALOerp1N6ptU9agoBHu9A5JDayt8rH94eJYtbU51vtsRG5rNw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=o/soTDBK reason="signature verification failed"; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=VpoQkbmgbrAtV5Cwnjtsz64oi9QD8SQrp6dXFEG9lGd8CsKmiHYmEUk+ROlbtUIAcY4hDppVxwuTtZB2AjLbfOEsuA6dF/6fkn02CX6ZQZr86vTiAszXGtR9cNI0Io1TaQjvNI6qDmWV0RvDbm+Cbnz1s9fd1Ild/lNQIuYhi0o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G3ZamGyq reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="o/soTDBK"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696Leekc2049956
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:41:45 GMT
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="G3ZamGyq"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696LeH7c1029163
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:41:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=GF5lTBFJaVZ
-	Rwfu404c6fB819j+awfZq7TKaG1+0FDU=; b=o/soTDBKz0G1PuYPKRSzTYXGQrx
-	lDJH6djpYIVXAcppIcZYp7umWuDjES66P1EbvkTLXwv+z7K5HKgHUtEDUs6jVL78
-	v/9Js40ZUpCvCcARGpKQFDkAPgNOKOfyVbDB0Vcc7NpfqSpMYf0EN6Tw62NDSGD3
-	GpZReeSj+Ow66YwF9dW95b40yEVl6xvMBQTugqEqE7p5tk9/5mnVx+b3EXuBE/2G
-	41O2I/SretAngDJkCFGnFFaBTia89HrEVYEepb0DQER8YVy2bg12FHq9d0bAtgJh
-	slKogi+Ybum24xa1YZB09GOR2qUNzDcKqGq8axJ9PSxF+QUHGYskVo0XQrQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h54621h3w-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=MAZtRLhJFy1
+	2wPFtuyHCnVC/9JQ12Jj7CEMPhc1gOoU=; b=G3ZamGyqebVX5YIEpmKYT7Imklm
+	DZChHQ+Qsqbscd3JLJsjn50TwHAs3LhSaKQ6OkLPrTLu1u2sNU8/0KHRtjeucXby
+	Ujxm9V4xkJEQab8S5zNV7gwm3iMPNI5TJUVwAjHyxCN9nVraqosddwC0/l7YXi3w
+	DeGitE+NM9qkZG7lScH4KE+psRpyNquHEoZpZlX9THTxss5YYfi690FjLg5Dn3eo
+	tgJPeJCVsUbdqFMQU9nxdq3XkcSONOlm1cFCyfIoIuDC+DpSm2kkbPli+S1jyK19
+	GmTQT0ObwIdFnoF/ITubbeKPTkDpDI/NpKEVtm8a81hHW2rJJqCWYXU7gwg==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h53ashu74-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:41:45 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cbf2fd504so641745785a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:41:45 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:41:54 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-9104eedb5b0so100924416d6.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:41:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791326505; x=1791931305;
+        d=1e100.net; s=20260707; t=1791326513; x=1791931313;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GF5lTBFJaVZRwfu404c6fB819j+awfZq7TKaG1+0FDU=;
-        b=JSrdTNUgFDnCx6WvFtAiXE59s2LN/n9ZHWQyd1HwSVU7t2/yBW3yIYmhqTQhvnCTXg
-         /Ocop0guLeIzwuXkwH8f+OlVChcRliaJBX8VY+QrHggId43mLBFR0BBhbHteKX+cldgD
-         QzLn8mwuWZwS37GlnyK50Kb3tJpUWADL7Ln0RNIdeLhFb3Q5rga5ObYAwsqWSbjytm80
-         benggHHlx7pbJX1wDqmTEt8FjEYDcbifQAg0SUrdZYyfHQAY7913Dq5B/K4FnVwm4n0Q
-         g3wEwlPjs7dr7/8V+dJFSHHzpXluj04WT9Zj0yPvTZCA14GH5qJzVzMsApK7t3igMdVp
-         1/gQ==
-X-Forwarded-Encrypted: i=1; AKwUvByQblidRa6VfBpf5/ZPap9ElX9CJGRIpNFaIdL/+MuaXXAoeElQeTu6mAcRsuQpYsyT2UZ2O4Jfn4kI+lfV@vger.kernel.org
-X-Gm-Message-State: AFuF++l5ym9DrsZJ/+pAFYA0NkQwDIFffHfuV+GDrSX1PSrcY0eCd/aH
-	jqrCRnppwrvhwzD9/QxVbb4ujqd6Meih8uO6STi9Eqbpz8YGQQPGL1ck/x9aztekV7qF2vB7qYe
-	KrBRJ4SD/hPsfL0aOJyOOHu9DmjTtt1Qy41pJzRyQtBTTd/CBxt4AEmqJeoqLQHntKYXu
-X-Gm-Gg: AYBFou2PVexfTHbA2bNggLP7A8yghZVkENFdsk4nNF1lWcHLnNXue2zAtHmZQskXT5G
-	1Jh3A4mwwboEMuzfbk5R+2dFDdUMBYs7lqoQ8yMOuulomax9Rrs1V8HBAD3bBQbvp7ulvFZYRXk
-	NMvML6A8OzULOm6s5FrZK9EyPfYOG/od7vwMDFOUxqbU9PN6JgRbbnic623gDBFzpU/ACfxiz9Y
-	qcuZqGb92VrdpoCoIV/6OlxpRgES59OcpSP8XSOF3MpuLl11/heG4XZh6pSEFqCvHKVAcYOr8R1
-	3eDyJ5RhgH4PciX+NSg5CVhjfheF1w2nMPvu4kivXga8gmt18A5H+pASwQw=
-X-Received: by 2002:a05:620a:2a08:b0:93e:980a:88b9 with SMTP id af79cd13be357-93e9b895493mr76888985a.72.1791326504657;
-        Tue, 06 Oct 2026 15:41:44 -0700 (PDT)
-X-Received: by 2002:a05:620a:2a08:b0:93e:980a:88b9 with SMTP id af79cd13be357-93e9b895493mr76885285a.72.1791326504231;
-        Tue, 06 Oct 2026 15:41:44 -0700 (PDT)
+        bh=MAZtRLhJFy12wPFtuyHCnVC/9JQ12Jj7CEMPhc1gOoU=;
+        b=yu9qwt/bSPC/+/YPOzg5Ej3Vwh5xe872l4oCVGvS1Hppv6ZnVcdiC/cqJIVcSBHeyS
+         USfDyGiXl5zw/u7rWJe12EgHR8EXNaGdf7xhZyI3MqgwTq5K26Wg9yV68jvydHpnBPl6
+         aYvjaxRQdxwfJ4i7wstceyFQqzAEJInpwOUkkJlxcbeejUWr9V8RZAAbWqB6ldB3SQ3J
+         Nn0KzGWnvfFThFs4L4PzV5byVTpXVJ/k8Mg3UfrKi7jGVHKsP3uf/vT540eulTUCz3wh
+         PmaTcHuIxWL0kVM+EfuWABvTWIMcQVR7vnVJXuMkWvhfx6KV88Ad9pmHEmaMvxOAmPko
+         TRaA==
+X-Forwarded-Encrypted: i=1; AKwUvBxTvVHJJCVQYY1jAJzSIrl7t3cQ/869tY5vQIL0P3x8lGeI+6Bu6Git8vikeOo1+c5m5gwecXHkHVKvoCH7@vger.kernel.org
+X-Gm-Message-State: AFuF++nnpKKz6yiA7e/GEiovD5dAXA5i9hnSbZN4FeqVGp3cwlsD+1T8
+	dbt9V+6p4lS1QM3YjB2DwkHviB7V1z0edx8tH5qCCZRqCfblsTkkzn8INnYpsPjHxQvycgZ2qwo
+	rPVfIhT5SqaTVeYh/fFWtKQ70n2Idt7szh6BVCKchv7AkGusu+hvs5/31XtY+hdOlkbo1
+X-Gm-Gg: AYBFou1eHdUxnuIomTvpK7ZDNKBB+1Pp9yRQ/XQwIXPabGS/V6TYJOFncNUqNtsvPhC
+	12jK9fl99A7q66wkv2bKJbSnq/RO3va0zaLmZX5kdj5VJtH5YgjjHOg9cKt2FqoUR33z9PISLY5
+	Coxgt/5fArUeOjImNWRzneUzszzxZJoK0vdOYiYT9SHrZsbaGs9BdT+x+j92bkrsvouIoicpuYF
+	XWHS+W69/VXAbKxbCEG8CMF2BYyjJUIKjjaTI28blr0Nx+1BjhfUDjYaVdYkDbQ+imnZVbha5nJ
+	F6IQmiW7MHKy4En+hPSPFbz8dPsM2FMil4Sk6brPuiR98gquyEyd4MLAK7g=
+X-Received: by 2002:a05:620a:4011:b0:93e:980a:88c4 with SMTP id af79cd13be357-93e9b8d9b1bmr73208485a.83.1791326513488;
+        Tue, 06 Oct 2026 15:41:53 -0700 (PDT)
+X-Received: by 2002:a05:620a:4011:b0:93e:980a:88c4 with SMTP id af79cd13be357-93e9b8d9b1bmr73203685a.83.1791326513025;
+        Tue, 06 Oct 2026 15:41:53 -0700 (PDT)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.41.42
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.41.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 15:41:43 -0700 (PDT)
+        Tue, 06 Oct 2026 15:41:52 -0700 (PDT)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -80,9 +80,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         hariram.purushothaman@oss.qualcomm.com, pshrotri@qti.qualcomm.com,
         Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
         johannes.goede@oss.qualcomm.com, konradybcio@kernel.org
-Subject: [PATCH 39/45] media: qcom: camss: sa8775p: add white balance parameters
-Date: Wed,  7 Oct 2026 01:39:47 +0300
-Message-Id: <20261006223953.3382273-40-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH 43/45] media: qcom: camss: ife: queue params buffers in FIFO order
+Date: Wed,  7 Oct 2026 01:39:51 +0300
+Message-Id: <20261006223953.3382273-44-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -93,117 +93,136 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: HPUHAoM31pOv95smXGelNvbAjSDWpmCB
-X-Authority-Analysis: v=2.4 cv=ZZiIpcVA c=1 sm=1 tr=0 ts=6ac57929 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Proofpoint-ORIG-GUID: YQFxdPxBlztRyJCE_lvUdJT-UbOImao8
+X-Proofpoint-GUID: YQFxdPxBlztRyJCE_lvUdJT-UbOImao8
+X-Authority-Analysis: v=2.4 cv=Xt5vqlF9 c=1 sm=1 tr=0 ts=6ac57932 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=rrQ0n_boRlREehwvzwcA:9
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX8uPufOts3tQH
- oDO++SYbChF/wroRvHj8GfbhbIF5EbURWEm5FfBoDyPyXKxsNAQp3pdHVcwrQokRtCkqUtTvjyB
- 8y01J5/7UfXfPMIMDDX7OoqHGsnlJeQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX1s207GgwZY+r
- gHC0Rxgdf4+dv9gYxo8Jk6D83Z9dR7UWkJdC6pX/kR7QClGdIQLWjc7m5qM8ugSvXOcybYLuEBP
- u4hcmhCmVxWmba3GknEaa7nZ1/sfZOZem4Yq4s/T4csW0oJ+MrCO/PoWGJ3x/2JeUdLBF72qj/v
- nN2QuEAaWB81OcF/QTrSU4WPHDSeE00da+F/2IacBuFSEDpC3GiO7FN/gsYIWdcEzSLHtJrUcoP
- mSBMgY1uRsYwABUs0uc3WWPDNIbHH/wBXFxJUU7QUYg2dtgcwG+plLNAF13rZkEp3nkaZwScQ7f
- 7dSgMJ9k7Rt086t41uF7w+BxduvpsV03xMnX3jx7IvwWCrKHh/6L3f0ZCGcuCe6RG5wSBBakMy8
- bM3JunUWQE7t0drFe8URCA/JT5FHstQlfurAFF7gL9HL8rRRHNTd0uQV10g17Zacf/mM7ouoAaC
- sSr6G3pDN5lI3to39Mg==
-X-Proofpoint-ORIG-GUID: HPUHAoM31pOv95smXGelNvbAjSDWpmCB
+ a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=Esc8-VpS8LW7SIx68BoA:9
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfXxsdQMaKqSVyw
+ QCEJg0uTtzOmRKkt8ylDmG3xGNsN5Z9Y6Yp90euJL6LeTuuHO2exLwPjN7JJVEINdeTGd93PnpB
+ G4Go9i1DncVUdjm6heS2PFwnDczp3ifIZ0FujzaKvKkQxPwBw1zPdkXzyzQu+3rKIJlxQK/Frdu
+ YQc6ejiySSy78buyPWo4cqG+CuSNBwFpub+5QZD2sg+7H3RDOdQJ98t7XEVRKk4ZEZdP+08Auct
+ Uv3uS5c6deQgPk6Oa7tpHMfMYA7cHNVFTACvbkOsmSgN9eVmPArsAKLo0TktPB1gXbCZCyYKjkU
+ IqDNAWovHLKuTobPlEr3tLkAPFIUukGlA6ONDPjPrmBatZ8/SEZdRXvVwCqdIss4Rnz9G8mRBpg
+ USiuMjmGa5sxf119QV7g2ApLozMSh38URXLTFesGyWWv/+hSiawdFg/c4ZWsVB4Ww/IlZEvmAfD
+ GzCkK/2ecSpGe+K2uAg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX6AQKK+fKb29A
+ 9fgHE71A+2UIZYqeCbSkFsTzYd+u4KLXJil7Rzhsb7k1b39jfv+MGqYZRGXRUdrDyQ53w7uNlRg
+ EVTbYkGi4ez5g3QVljpi0SBwa92Yjbk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-06_05,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- phishscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 adultscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ impostorscore=0 suspectscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060090
 
 From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 
-Program the red, green, and blue white balance gains from IFE parameter
-buffers. Enable or disable the gain block as requested.
+ife->pending_params was a single-slot pointer: queuing a second PARAMS
+buffer before the next PP epoch0 IRQ consumed it would silently
+displace the first one, completing it with VB2_BUF_STATE_ERROR. This
+means a userspace client that queues several params buffers ahead of
+time (mirroring how image buffers are queued) loses all but the most
+recently queued one instead of having them applied one per frame in
+order.
+
+Turn pending_params into a struct list_head FIFO, following the same
+pending_bufs/bufs_lock pattern already used for image buffers. Buffers
+are now enqueued at the tail in camss_ife_queue_buffer() and dequeued
+from the head once per PP epoch0 IRQ, applying at most one params
+buffer per frame without dropping queued-ahead buffers. Flushing on
+stream-off now completes every buffer left in the list rather than
+just one.
 
 Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 ---
- .../platform/qcom/camss/camss-ife-mod-v41x.c  | 42 +++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ drivers/media/platform/qcom/camss/camss-ife.c | 25 +++++++++----------
+ drivers/media/platform/qcom/camss/camss-ife.h |  2 +-
+ 2 files changed, 13 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-ife-mod-v41x.c b/drivers/media/platform/qcom/camss/camss-ife-mod-v41x.c
-index 77d33c05cc6e..3c53f585133c 100644
---- a/drivers/media/platform/qcom/camss/camss-ife-mod-v41x.c
-+++ b/drivers/media/platform/qcom/camss/camss-ife-mod-v41x.c
-@@ -179,6 +179,36 @@ static void mod_v41x_wb_gain_config(struct ife_pp_ctx *ctx)
- 	writel_relaxed(value, base + IFE_MOD_V41X_WB_GAIN_CFG_2);
- }
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.c b/drivers/media/platform/qcom/camss/camss-ife.c
+index ab6102fd1126..57fab10a87f5 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.c
++++ b/drivers/media/platform/qcom/camss/camss-ife.c
+@@ -293,8 +293,10 @@ static void ife_hw_isr_pp_epoch0(struct ife_device *ife)
  
-+static void mod_v41x_wb_gain_set(struct ife_pp_ctx *ctx,
-+				 const struct camss_ife_params_wb_gain *cfg)
-+{
-+	void __iomem *base = ctx->base + IFE_MOD_V41X_WB_GAIN_OFFSET;
-+
-+	writel_relaxed(FIELD_PREP(IFE_MOD_V41X_WB_GAIN_VALUE, cfg->g),
-+		       base + IFE_MOD_V41X_WB_GAIN_CFG_0);
-+	writel_relaxed(FIELD_PREP(IFE_MOD_V41X_WB_GAIN_VALUE, cfg->b),
-+		       base + IFE_MOD_V41X_WB_GAIN_CFG_1);
-+	writel_relaxed(FIELD_PREP(IFE_MOD_V41X_WB_GAIN_VALUE, cfg->r),
-+		       base + IFE_MOD_V41X_WB_GAIN_CFG_2);
-+}
-+
-+static void mod_v41x_wb_gain_apply(struct ife_pp_ctx *ctx,
-+				   const struct camss_ife_params_wb_gain *cfg,
-+				   bool enable)
-+{
-+	void __iomem *base = ctx->base + IFE_MOD_V41X_WB_GAIN_OFFSET;
-+	u32 value;
-+
-+	value = readl_relaxed(base + IFE_MOD_V41X_WB_GAIN_MODULE_CFG);
-+	if (enable) {
-+		mod_v41x_wb_gain_set(ctx, cfg);
-+		value |= IFE_MOD_V41X_WB_GAIN_CFG_EN;
-+	} else {
-+		value &= ~IFE_MOD_V41X_WB_GAIN_CFG_EN;
-+	}
-+	writel_relaxed(value, base + IFE_MOD_V41X_WB_GAIN_MODULE_CFG);
-+}
-+
- static void mod_v41x_demosaic_config(struct ife_pp_ctx *ctx)
- {
- 	void __iomem *base = ctx->base + IFE_MOD_V41X_DEMOSAIC_OFFSET;
-@@ -632,6 +662,14 @@ static void mod_v41x_params_apply_lsc(void *priv, const union camss_ife_params_b
- 	mod_v41x_lsc_apply(ctx, &block->lsc, enable);
- }
+ 	spin_lock_irqsave(&ife->bufs_lock, flags);
  
-+static void mod_v41x_params_apply_wb(void *priv, const union camss_ife_params_block *block)
-+{
-+	struct ife_pp_ctx *ctx = priv;
-+	bool enable = block->header.flags & V4L2_ISP_PARAMS_FL_BLOCK_ENABLE;
-+
-+	mod_v41x_wb_gain_apply(ctx, &block->wb_gain, enable);
-+}
-+
- static void mod_v41x_params_apply_gamma(void *priv, const union camss_ife_params_block *block)
- {
- 	struct ife_pp_ctx *ctx = priv;
-@@ -650,12 +688,16 @@ static const struct v4l2_isp_params_block_type_info mod_v41x_params_type_info[]
- 	[CAMSS_IFE_PARAMS_GAMMA_256] = {
- 		.size = sizeof(struct camss_ife_params_gamma_256),
- 	},
-+	[CAMSS_IFE_PARAMS_WB_GAIN] = {
-+		.size = sizeof(struct camss_ife_params_wb_gain),
-+	},
- };
+-	params_buf = ife->pending_params;
+-	ife->pending_params = NULL;
++	params_buf = list_first_entry_or_null(&ife->pending_params,
++					      struct camss_buffer, queue);
++	if (params_buf)
++		list_del(&params_buf->queue);
  
- static const camss_ife_params_handler_fn mod_v41x_params_handlers[] = {
- 	[CAMSS_IFE_PARAMS_COLOR_CORRECT] = mod_v41x_params_apply_ccm,
- 	[CAMSS_IFE_PARAMS_LSC] = mod_v41x_params_apply_lsc,
- 	[CAMSS_IFE_PARAMS_GAMMA_256] = mod_v41x_params_apply_gamma,
-+	[CAMSS_IFE_PARAMS_WB_GAIN] = mod_v41x_params_apply_wb,
- };
+ 	for (i = 0; i < ife->npads; i++) {
+ 		struct ife_video_pad *vid_pad = ife->pads[i].vid_pad;
+@@ -1360,17 +1362,13 @@ static int ife_queue_buffer(struct camss_video *vid, struct camss_buffer *buf)
+ 	struct ife_device *ife = vid_pad->ife;
  
- static_assert(ARRAY_SIZE(mod_v41x_params_handlers) ==
+ 	if (is_ife_video_params(vid)) {
+-		struct camss_buffer *old_buf;
+ 		unsigned long flags;
+ 
+ 		spin_lock_irqsave(&ife->bufs_lock, flags);
+-		old_buf = ife->pending_params;
+-		ife->pending_params = buf;
++		INIT_LIST_HEAD(&buf->queue);
++		list_add_tail(&buf->queue, &ife->pending_params);
+ 		spin_unlock_irqrestore(&ife->bufs_lock, flags);
+ 
+-		if (old_buf)
+-			vb2_buffer_done(&old_buf->vb.vb2_buf, VB2_BUF_STATE_ERROR);
+-
+ 		return 0;
+ 	}
+ 
+@@ -1387,15 +1385,15 @@ static int ife_flush_buffers(struct camss_video *vid, enum vb2_buffer_state stat
+ 	if (is_ife_video_params(vid)) {
+ 		struct ife_device *ife = vid_pad->ife;
+ 		struct camss_buffer *buf;
++		struct camss_buffer *tmp;
+ 		unsigned long flags;
+ 
+ 		spin_lock_irqsave(&ife->bufs_lock, flags);
+-		buf = ife->pending_params;
+-		ife->pending_params = NULL;
+-		spin_unlock_irqrestore(&ife->bufs_lock, flags);
+-
+-		if (buf)
++		list_for_each_entry_safe(buf, tmp, &ife->pending_params, queue) {
++			list_del(&buf->queue);
+ 			vb2_buffer_done(&buf->vb.vb2_buf, state);
++		}
++		spin_unlock_irqrestore(&ife->bufs_lock, flags);
+ 
+ 		return 0;
+ 	}
+@@ -1499,6 +1497,7 @@ int camss_ife_subdev_init(struct camss *camss, struct ife_device *ife,
+ 	init_completion(&ife->reset_complete);
+ 	mutex_init(&ife->state_mutex);
+ 	spin_lock_init(&ife->bufs_lock);
++	INIT_LIST_HEAD(&ife->pending_params);
+ 
+ 	/* Memory */
+ 	base = devm_platform_ioremap_resource_byname(pdev, res->reg[0]);
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.h b/drivers/media/platform/qcom/camss/camss-ife.h
+index c38b96076a1f..9656d29717d1 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.h
++++ b/drivers/media/platform/qcom/camss/camss-ife.h
+@@ -367,7 +367,7 @@ struct ife_device {
+ 
+ 	struct camss_ife_pipeline_cfg pipeline_cfg[IFE_CAMIF_HW_PIPES_MAX];
+ 
+-	struct camss_buffer *pending_params;
++	struct list_head pending_params;
+ 
+ 	struct v4l2_subdev sd;
+ 	struct device *genpd;
 -- 
 2.34.1
 
