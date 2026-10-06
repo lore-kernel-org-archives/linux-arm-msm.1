@@ -1,208 +1,234 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F89D4AA56C
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 23:19:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5C724FB9DD
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 23:19:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791328783; cv=none; b=R7d48vqYEL4Zz5R7BRN7KFr4m43l1+RtXtBK2Rs0jLXTTm+5uFZcpfhCOK24XnBmNPkXO78gdTqxDwNJ8XvkFeM8j+oUFuXbFc6ui89qHSoKqBAYxDhwoBJrTQ7HWxKeMKM9NgDWsFxqUv/ie9tl29JKe/QzjYnD7c86KK08rOw=
+	t=1791328800; cv=none; b=PtfodNEyV/AQ57QW7Jkb42r6wLG6oHHp1N0dPSuaeNmAaqBLCww99euJ95YsZg+QOhnkg7OcauiCc9noWKqfsEV1opYTURzRDUby9MvaNueI9hb5+P+07qc/9Wui8WHhUKwqOT9oB8nuAwuAxyihKhZfFl0GzseC+FUSFiITMps=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791328783; c=relaxed/simple;
-	bh=QxLWhFgeUQLusf+StqHwrn5nVK8eAENGfOvehaREHa8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=PoW6wbyx3JLsHSDEuFcPPcW1g+Vtjb5QodVaJ+oWhU2LWbSVxuMhEspP78scLppNC2nGZhabMkbXB8PZy5lb0HTp6+PiB5HtID1ipWRAOqkiEqHbRUTTheCeNbbhkuH78HJtNkefz/o5hEC21w2NiGOtnOiFR7iQxTJx02f92tw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=guCpAyWe reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791328800; c=relaxed/simple;
+	bh=P7oecALR/wCKBNyKL3ajEPimn0nV+l81GMYEnAFRGkM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FPFw8PpkSM/sWIoSjSz36D44k1Hb2+NVy9OFckMzFbTNux30MEf5fAJ3Z9EwEnGnok8XJPSAinzfRy2h7KwpyUeCZ3CxLbz3Aa0Wn1DxeDbcu0S2fG+nOUhTNHSWF62LsNFgZquNIii7KrYLC3fFNrf6Pv1nv5fenUtv03oQygo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Qu9oONBi; arc=none smtp.client-ip=74.125.82.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="guCpAyWe"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696Leabr2514102
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:41:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=F2EQswXZEUy
-	FaiUxDqBndfVdwYFpc99v5q33IpvjJPk=; b=guCpAyWecCwCH2FQIkzbUw8JRPj
-	nk2Sd5cHI1aHOp+kLOEZeW+VJ1z6GhPlOJSnTAxxG3O+LY0GQnfjnCa//SZm1l7v
-	/A2zX3WV6r7zTfV6xxoEmDY2Q+WcH3jewvm9Gz0kG06WN8iGXr3wzaEMHP7jgplR
-	dCSbO3/7GQpaAEuao7ctWc9n1A5rWuAxtlmrM7woLBLjIQcGh+rOupxKa3b0QqjG
-	bUsl8drjU4kSJarS4Yk1qBop1p4Mn4Mm4raWTagnoOlYYyxg8qYP1uPJHkDEnxoE
-	Q1E7RJWyI+glc508LNgMK3j1kdZCYv2x9O/FGORPILcOp0zDn/iS4WiQgMA==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xwwtwdh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:41:29 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93dd3c3badbso650940285a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:41:29 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Qu9oONBi"
+Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-150f88d22aeso2234762c88.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 16:19:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1791328786; x=1791933586; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=L71GPMsk4GSIdxEygBnLFVf0LVf2CMTomc/BzDysxCo=;
+        b=Qu9oONBiAHrYHtYN59RK9IbVZz92On8/5XjZdNEzonq5e1IqjPuwZEdtTmph05NdrQ
+         5g94TMWmD8iMlaMNgcRDdfgiVz+Y17r6mMsFj5fydMDQjuaUQcDIPEiv7EWrgOUVrtRZ
+         WzAFxBPuNT41Z9M7b4SaudPb3WlMfkyeQadlg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791326489; x=1791931289;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=F2EQswXZEUyFaiUxDqBndfVdwYFpc99v5q33IpvjJPk=;
-        b=h8EWAYSUTYqOEJqiMuCl3Okfea5IkD0EjRqgSkKd80KJ0zDnZtoCjglrPdngIl19cs
-         a7ryM2loFOhHPqvbFBc5ENYGJUTQ+tnlM+dWadlsJx8nSw/jZ03/YdM73x4cj312alYj
-         GZWBsD7N+IOX92T8OrK7HVVzfjwfVZyurIUEAZq/foP0sMFpUefEVSSknQzpaPug0zso
-         uIimz2GX7XUBvFc3u6qNam39uUHsn9VMDZm3WpjhMwrIU0CaibOAwBWB3oa6jdIWAGJE
-         SexFZwd3a7PyQA5kle0D3o/EJw0mRiwFfsNkvkTK+ksuy77Zc93yyJa3T3mOmbWvrsgw
-         hMHQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwvbFooqjVWAwRiSPV7q/fZLDGId7nVDKfKt1kqWwsgkyBNgi6nkYaQFJ7RKk2uilFPER+V3Ry3tf+QFXU7@vger.kernel.org
-X-Gm-Message-State: AFuF++knTN5BP947mII75HHWwI4A14J972kbRLySIvm0wdNjstIyZ0oe
-	QVNv4MQfT+d9x5JqNqDIil4JXuILPfPjogwGxzhY/VyGBwQlo8wBl7DLxbyDt8BjJo6wOk7Bx1w
-	zITsUe9H3KIRa2nKSLYQspUkAtcFyFaAaU36eCvhQwoVvDNUVAK4iGeLHRsX2LSKSTDZs
-X-Gm-Gg: AYBFou2i+mhEx7pl9+QpVNGTT3rwf4olcC8wNUqKwgfTl8QT0U7JJ4DtdZyyuxTF0mW
-	xxO/HAf/nKDWIeqjy9N8BjccGg1Zn7eVIGmJu3MnhTqkobcde52FMv7Z/O6U8sl0PDqhZUoWhpL
-	KHKwydCFtvYrAKfo9Q4ohAR6rp1W4MZ5bodnXfKt0Wd6Ax6WIJEHbZ3ErswH0kZC+bzJwefQpyY
-	Nto9eHt/Lk1HAdtuIXWwBZwka22rHBldAFPnK9arVEhxqADKtbJdnj1BPALHWwMt1OcAw3XbNvL
-	/t7aFfbYYlQcj6HLDQaA/gYP+A8J35dtRoCTriWwmqdkL0f5QAjGO3zG9PA=
-X-Received: by 2002:a05:620a:1b99:b0:93c:c2c2:40eb with SMTP id af79cd13be357-93e9b874754mr72790685a.66.1791326488581;
-        Tue, 06 Oct 2026 15:41:28 -0700 (PDT)
-X-Received: by 2002:a05:620a:1b99:b0:93c:c2c2:40eb with SMTP id af79cd13be357-93e9b874754mr72785885a.66.1791326488123;
-        Tue, 06 Oct 2026 15:41:28 -0700 (PDT)
-Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.41.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 15:41:27 -0700 (PDT)
-From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        hariram.purushothaman@oss.qualcomm.com, pshrotri@qti.qualcomm.com,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        johannes.goede@oss.qualcomm.com, konradybcio@kernel.org
-Subject: [PATCH 32/45] media: qcom: camss: sa8775p: add IFE completion groups
-Date: Wed,  7 Oct 2026 01:39:40 +0300
-Message-Id: <20261006223953.3382273-33-gjorgji.rosikopulos@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
-References: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1791328786; x=1791933586;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=L71GPMsk4GSIdxEygBnLFVf0LVf2CMTomc/BzDysxCo=;
+        b=qLFP8zDxq6V9EIrqm6Os+tQEYMxRRU+Y/KN9XMf0HcW4/pgmTBa4tY3nlcBGz7Fkw2
+         +sKBAh3nvEspW+1wdEb/1bs75hkN1UGgGwwzNYzbm2m1AqidCilhdFArRYrUp9IpWCsS
+         VHdBc+TXMcedfmO2sFLa6tJpuWtv7zfnJ2e+hWltQ1mrXhcv3Z6SBTv18Mi0WbTpt6E6
+         8kFf8RwwiIrlx7NR1eLdqg1lbwCGSrcfpiQEfRuz0KTDPcTBI7u76k5W+quzAbaLrgB5
+         ptlF+FAsMSaSZCY/C4X0jnbasuxlkwQ/pa4RkfqkeYMENBhH/a1agJPQOvpdeQJ3HnD0
+         s5hg==
+X-Forwarded-Encrypted: i=1; AKwUvBwNPs8Q59STdKNb/fPKbGIlgTYt89oyaVMpKzVC3TbjityU83+vIYZwcfmAn7kBQc5oyafXhg2B1z1Qv0yJ@vger.kernel.org
+X-Gm-Message-State: AFuF++lLjYryhqsfvc6Yhgj5Eez5pdroV+RJy+yDagiOEGvQSdS/t+ur
+	s3sHCnO9b+mI78fRsiNVFu/i3jc+5JXK1rZiuH0qSsD15+YsIkP6mjSNxRytf1QSGw==
+X-Gm-Gg: AYBFou3B4H5foAIPFt1snCfePTY4iAgfpi4VLljantpSqTyUxnKniRDN+jnRVxPd4y9
+	nZh5mZhhjyi+NysJiQvz5NieZN5wdSr9KGrdKsdXw0jiHVhIoDmvNnmjQxLbDjZftHrxmfXTKGu
+	7uwAPWQDY/WBwWxWxHWJE3cQ1YBRTAZeAq+lEPsLNbwaITE1WnmPDq9Cjiaqbl9qbsx6eRovpnI
+	761sxMDBsWGc4sxPzcsJ+/WVmZXVAEDmvrSftKs1C6e7lKJ11hfS/4TOTUSjGpIA2fLf2o7vVBy
+	CVZ+1MHOlYNt8TFv9sd39Xd+qu8xCnGzWXyUyOrp5sTmrEsLSEJbE7DOG+Rjt3H0UpvKmcLfavY
+	75PoAFDnVsMLGjK5lnUqBFh3aE57LekwQz2xU9jc58sdt/pEVMva48+3j22V1LbzMLHwOzFSh38
+	BZo8Us5MTh0sl6VHRSMRqAAKUFuizxDaNUca2D/KkA5JZVboCfyR61ZIAiF6z4r3cvPrAGR0umP
+	9vosdxdki5IPIR0LRF+43o7P+JoNnClGlHkqw==
+X-Received: by 2002:a05:701b:4553:10b0:151:7831:e401 with SMTP id a92af1059eb24-162045b8dcfmr323314c88.15.1791328785498;
+        Tue, 06 Oct 2026 16:19:45 -0700 (PDT)
+Received: from localhost ([2a00:79e0:2e7c:8:63eb:e7f9:1d47:7d47])
+        by smtp.gmail.com with UTF8SMTPSA id a92af1059eb24-161680e191esm1583634c88.11.2026.10.06.16.19.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 06 Oct 2026 16:19:44 -0700 (PDT)
+From: Brian Norris <briannorris@chromium.org>
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: linux-pm@vger.kernel.org,
+	Ulf Hansson <ulfh@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Brian Norris <briannorris@chromium.org>,
+	"Bryan O'Donoghue" <bod@kernel.org>,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Alex Elder <elder@kernel.org>,
+	Andy Shevchenko <andy@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Cezary Rojewski <cezary.rojewski@intel.com>,
+	Daniel Baluta <daniel.baluta@nxp.com>,
+	David Lechner <dlechner@baylibre.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Hadar Gat <hadar.gat@arm.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Johan Hovold <johan@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Jyri Sarha <jyri.sarha@iki.fi>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Liam Girdwood <liam.r.girdwood@linux.intel.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Marek Vasut <marek.vasut+renesas@mailbox.org>,
+	Mark Brown <broonie@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Maxime Ripard <mripard@kernel.org>,
+	Melissa Wen <mwen@igalia.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Olivia Mackall <olivia@selenic.com>,
+	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Rui Miguel Silva <rmfrfs@gmail.com>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Takashi Iwai <tiwai@suse.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Vijendar Mukunda <Vijendar.Mukunda@amd.com>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	dri-devel@lists.freedesktop.org,
+	greybus-dev@lists.linaro.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-renesas-soc@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	linux-spi@vger.kernel.org,
+	linux-staging@lists.linux.dev,
+	sound-open-firmware@alsa-project.org
+Subject: [PATCH 00/13] PM: runtime: Convert pm_runtime_put_autosuspend() and friends to a void function
+Date: Tue,  6 Oct 2026 16:13:28 -0700
+Message-ID: <20261006231900.3230373-1-briannorris@chromium.org>
+X-Mailer: git-send-email 2.56.0.360.g66cac248cb-goog
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX7Ncpz0GBYfB2
- 6ejUg+3dGYXs+t1q8Pgn2u7n9GL1A0J6PSugtasgu/3segQApEF4/tIV8QuX/WnztKas2k2yf02
- /AvyG7L79+F6zrowwwQFGZ4p7kkV2Y8Gdygf5M6I9qCYKhkuMqkNhgwN/3xEBGZaObN61ApueWL
- /kiP54RAhbvoaxABYRGHD6fMnwZLAv8yB4oC4EgwfJJIO7AlV1qTq7U+vI/90Tu82JlYTn09T2D
- yynuG65B1QXDUxchykg9BWGQp/43Xaj1T/eDmNDAx3V0nIFmukhSeBfDCTZj4BoKULrGIHdQAe2
- lER9AWi1bGDcnWXyrhBnduYneBqXwNdI6/XnDstXAIo1yIPkF+XdbJ6dDMDYFUDQj5eCgPj5UlX
- tL98ZfYyE8Otg/XzQPaM0Co6f2LcB67n49KdlsXP8wAjY8bXQ9/ZdeBKYBYEF/F/lfsFxXd9pBD
- fOx1rjsZ+qluIQoIgQA==
-X-Proofpoint-ORIG-GUID: _3SQw_PGTgk7LNy6PGwquje--2IF519b
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX2bZVNS0fhixR
- R7bTezcMaqi7QkA5id5iQhg1CfYTW4zscFvYXCNFKERML9uaukVhex4lMHsWLp0JQv8nc8p/1JH
- af2gdypjcbdT03OF19exyUlvz6PcTbs=
-X-Proofpoint-GUID: _3SQw_PGTgk7LNy6PGwquje--2IF519b
-X-Authority-Analysis: v=2.4 cv=SJXXx+vH c=1 sm=1 tr=0 ts=6ac57919 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=ObJCtLpMSD8GDJ5Gr7cA:9
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-06_05,2026-10-06_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- malwarescore=0 spamscore=0 phishscore=0 adultscore=0 clxscore=1015
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610060090
 
-From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+Similar to this effort:
 
-Describe the SA8775P completion groups and statistics output.
+  Subject: [PATCH v1 00/23] PM: runtime: Convert pm_runtime_put() to a void function
+  https://lore.kernel.org/all/6245770.lOV4Wx5bFT@rafael.j.wysocki/
 
-Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
----
- .../platform/qcom/camss/camss-ife-pads.c      | 31 +++++++++++++++++++
- 1 file changed, 31 insertions(+)
+i.e., commit 3afd8df02433 ("PM: runtime: Change pm_runtime_put() return
+type to void") and friends.
 
-diff --git a/drivers/media/platform/qcom/camss/camss-ife-pads.c b/drivers/media/platform/qcom/camss/camss-ife-pads.c
-index b1e6204ceb21..38e87a1b3826 100644
---- a/drivers/media/platform/qcom/camss/camss-ife-pads.c
-+++ b/drivers/media/platform/qcom/camss/camss-ife-pads.c
-@@ -484,6 +484,8 @@ static const struct ife_pad_desc ife_pad_desc_v41x[] = {
- 		.hw_pipe = CAMSS_IFE_HW_PIPE_PP,
- 		.packing_fmt = 0x1,
- 		.mode_config = BUSWR_CLIENT_CFG_MODE_LINE_BASED,
-+		.rup_group_mask = BIT(0),
-+		.comp_group_mask = BIT(0),
- 		.num_wms = 2,
- 		.wm = { 0, 1 },
- 	},
-@@ -501,6 +503,8 @@ static const struct ife_pad_desc ife_pad_desc_v41x[] = {
- 		.hw_pipe = CAMSS_IFE_HW_PIPE_PP,
- 		.packing_fmt = 0x1,
- 		.mode_config = BUSWR_CLIENT_CFG_MODE_LINE_BASED,
-+		.rup_group_mask = BIT(0),
-+		.comp_group_mask = BIT(3),
- 		.num_wms = 2,
- 		.wm = { 3, 4 },
- 	},
-@@ -518,6 +522,8 @@ static const struct ife_pad_desc ife_pad_desc_v41x[] = {
- 		.hw_pipe = CAMSS_IFE_HW_PIPE_RDI0,
- 		.packing_fmt = 0x0,
- 		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
-+		.rup_group_mask = BIT(1),
-+		.comp_group_mask = BIT(11),
- 		.num_wms = 1,
- 		.wm = { 16 },
- 	},
-@@ -535,6 +541,8 @@ static const struct ife_pad_desc ife_pad_desc_v41x[] = {
- 		.hw_pipe = CAMSS_IFE_HW_PIPE_RDI1,
- 		.packing_fmt = 0x0,
- 		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
-+		.rup_group_mask = BIT(2),
-+		.comp_group_mask = BIT(12),
- 		.num_wms = 1,
- 		.wm = { 17 },
- 	},
-@@ -552,9 +560,32 @@ static const struct ife_pad_desc ife_pad_desc_v41x[] = {
- 		.hw_pipe = CAMSS_IFE_HW_PIPE_RDI2,
- 		.packing_fmt = 0x0,
- 		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
-+		.rup_group_mask = BIT(3),
-+		.comp_group_mask = BIT(13),
- 		.num_wms = 1,
- 		.wm = { 18 },
- 	},
-+	{
-+		.pad_flags = MEDIA_PAD_FL_SOURCE,
-+		.sup_fmts = {
-+			.nformats = ARRAY_SIZE(ife_stats_fmts_v20x),
-+			.formats = ife_stats_fmts_v20x,
-+		},
-+		.limits = &ife_meta_limits_v20x,
-+		.video_name = "stats",
-+		.link_flags = MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED,
-+		.buf_type = V4L2_BUF_TYPE_META_CAPTURE,
-+		.meta_dataformat = V4L2_META_FMT_QC_IFE_STAT_3A,
-+		.meta_buffersize = PAGE_ALIGN(sizeof(struct camss_ife_stats)),
-+		.output = CAMSS_IFE_OUTPUT_STATS,
-+		.hw_pipe = CAMSS_IFE_HW_PIPE_PP,
-+		.packing_fmt = 0xa,
-+		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
-+		.rup_group_mask = BIT(0),
-+		.comp_group_mask = BIT(5),
-+		.num_wms = 1,
-+		.wm = { 12 },
-+	},
- 	{
- 		.pad_flags = MEDIA_PAD_FL_SINK,
- 		.sup_fmts = {
+As with pm_runtime_put(), there is very little value in return-code
+checking for any of the other async __pm_runtime_suspend() and
+__pm_runtime_idle() APIs:
+
+  pm_runtime_put_autosuspend()
+  pm_request_idle()
+  pm_request_autosuspend()
+
+Checking the return code is more likely to
+produce a race condition (fighting with user space writing "on" to the
+"control" attribute) than to tell a consumer useful info.
+
+Nobody outside KUnit tests checks pm_request_idle() or
+pm_request_autosuspend() return codes, but there are a number of
+pm_runtime_put_autosuspend() callers that check its return code. Thus,
+this series largely deals with pm_runtime_put_autosuspend().
+
+Patches 1-11 are independent of each other, and similarly to the last
+series, I expect the respective maintainers can pick them up. We can
+apply patch 12 later. Patch 13 is also independent, but included in this
+topic for completeness. It can be applied any time.
+
+This touches a lot of trees/maintainers, so I tried to keep CC's only
+for the relevant patch(es), plus the cover letter. I hope that's not too
+noisy.
+
+- Brian
+
+
+Brian Norris (13):
+  hwrng: cctrng: Discard pm_runtime_put_autosuspend() return value
+  drm: Discard pm_runtime_put_autosuspend() return values
+  iio: Discard pm_runtime_put_autosuspend() return values
+  media: venus: Discard pm_runtime_put_autosuspend() return values
+  pinctrl: qcom: lpass-lpi: Discard pm_runtime_put_autosuspend() return
+    values
+  spi: ti-qspi: Discard pm_runtime_put_autosuspend() return value
+  greybus: Discard pm_runtime_put_autosuspend() return value
+  ALSA: hda: Discard pm_runtime_put_autosuspend() return value
+  ASoC: codecs: lpass: Discard pm_runtime_put_autosuspend() return
+    values
+  ASoC: intel: atom: Discard pm_runtime_put_autosuspend() return value
+  ASoC: SOF: Discard pm_runtime_put_autosuspend() return values
+  PM: runtime: Drop pm_runtime_put_autosuspend() return code
+  PM: runtime: Drop pm_request_{idle,autosuspend}() return codes
+
+ drivers/base/power/runtime-test.c             |  8 ---
+ drivers/char/hw_random/cctrng.c               |  6 +-
+ drivers/gpu/drm/panel/panel-simple.c          |  8 +--
+ drivers/gpu/drm/tidss/tidss_drv.c             |  7 +--
+ drivers/gpu/drm/v3d/v3d_drv.h                 |  4 +-
+ drivers/iio/accel/bmc150-accel-core.c         | 14 ++---
+ drivers/iio/accel/fxls8962af-core.c           | 11 +---
+ drivers/iio/accel/kxcjk-1013.c                | 15 ++---
+ drivers/iio/accel/mma8452.c                   | 15 +++--
+ drivers/iio/accel/mma9551_core.c              | 15 +++--
+ drivers/iio/adc/rcar-gyroadc.c                |  4 +-
+ drivers/iio/adc/ti-ads1015.c                  |  8 +--
+ drivers/iio/chemical/atlas-sensor.c           |  4 +-
+ .../common/hid-sensors/hid-sensor-trigger.c   | 14 ++---
+ drivers/iio/gyro/bmg160_core.c                | 17 +++--
+ drivers/iio/gyro/fxas21002c_core.c            | 12 ++--
+ drivers/iio/imu/kmx61.c                       | 17 +++--
+ drivers/iio/light/apds9960.c                  |  2 +-
+ drivers/iio/light/isl29028.c                  | 15 +----
+ drivers/iio/light/pa12203001.c                |  3 +-
+ drivers/iio/light/rpr0521.c                   | 15 +++--
+ drivers/iio/light/tsl2583.c                   | 27 ++------
+ drivers/iio/light/us5182d.c                   |  3 +-
+ drivers/media/platform/qcom/venus/vdec.c      | 10 ++-
+ drivers/media/platform/qcom/venus/venc.c      | 10 ++-
+ drivers/pinctrl/qcom/pinctrl-lpass-lpi.c      | 16 +++--
+ drivers/spi/spi-ti-qspi.c                     |  6 +-
+ drivers/staging/greybus/power_supply.c        |  8 +--
+ include/linux/greybus/bundle.h                | 12 +---
+ include/linux/pm_runtime.h                    | 63 +++----------------
+ include/sound/hdaudio.h                       |  8 +--
+ sound/hda/core/device.c                       | 13 ++--
+ sound/soc/codecs/lpass-rx-macro.c             |  4 +-
+ sound/soc/codecs/lpass-tx-macro.c             |  4 +-
+ sound/soc/codecs/lpass-va-macro.c             | 17 ++---
+ sound/soc/codecs/lpass-wsa-macro.c            |  8 +--
+ sound/soc/intel/atom/sst/sst.h                |  2 +-
+ sound/soc/intel/atom/sst/sst_drv_interface.c  |  4 +-
+ sound/soc/intel/atom/sst/sst_pvt.c            |  9 +--
+ sound/soc/sof/control.c                       |  6 +-
+ sound/soc/sof/sof-client-ipc-flood-test.c     |  5 +-
+ .../soc/sof/sof-client-ipc-kernel-injector.c  |  4 +-
+ sound/soc/sof/sof-client-ipc-msg-injector.c   |  6 +-
+ sound/soc/sof/sof-client-probes.c             | 18 ++----
+ 44 files changed, 152 insertions(+), 325 deletions(-)
+
 -- 
-2.34.1
+2.56.0.360.g66cac248cb-goog
 
