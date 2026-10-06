@@ -1,102 +1,138 @@
-Received: from smtp-relay-internal-1.canonical.com (smtp-relay-internal-1.canonical.com [185.125.188.123])
+Received: from sm24.hosting.reg.ru (sm24.hosting.reg.ru [31.31.198.150])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 906C731716D
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 21:49:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.125.188.123
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D4E438B131;
+	Tue,  6 Oct 2026 22:00:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=31.31.198.150
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791323357; cv=none; b=I5JyvyWFJ9mkNrdt4oWtch9RGEe2GYIuz+nqeZSiWvC52THtomCSZBas8DIfPb/H3bhQURxKq5ZXWyTsOOJt1utDdOQvaCFJ9k9GbmgM2mtDc526X9AfudsOV5x+4en+/X/ZVFjBDHb3yA6MZTRWEJcswRBNMzAVwQugYVUhvEg=
+	t=1791324018; cv=none; b=TcTuHreRu0uG0zwWm5dM7uH2CiRGiyhKvyb+nOvqdBUkjv61FFp5/sJoX+HCtLAnxq9X897hYhasvfSTcBfOgZC91hYHI4qhZju8x8n+pwBkOsn/Uslag11l1F99bC2Bel11aEb1QQIS5RMCgkNiWw/I4Hl0edy8fYCIRoYcgL4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791323357; c=relaxed/simple;
-	bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=urm8Pn3HB3PlMwoZN66BRqxlcUKPiYSJp+ASxrcXCkvrljtEAOCT/VGJE7HmpKTHhZbouWW8XKV0HjR45Zxd8Kf+pPsg9y6e7No9UjAhf7nxkV8xRuWR3IetJzZDIz1A8Hs4MAxqnL1o4NxBXnya4QJfDogs7/ISfczkx7/FLqw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com; spf=pass smtp.mailfrom=canonical.com; dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b=e/gWFdwp; arc=none smtp.client-ip=185.125.188.123
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=canonical.com
+	s=arc-20240116; t=1791324018; c=relaxed/simple;
+	bh=o45QKyA7wp46WIeYrWSgR+1Uye74TRLCFeWZcUyDtKg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=cVXjH/TjnxiiXc+KxJY5enlQszdg/0hxfYWD92g2iFeIAV68hd8EXzHu7HMLtM59NQApcAty3Z6ECOHw1uMJfUMTbAalA1KluuDeLArEZYLLkj25lOQaOOpS29f+XqGSXaVculINOA1momlAJlJs7s22uM7KpfDwmGaytv6LRWQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=minlexx.ru; spf=none smtp.mailfrom=minlexx.ru; dkim=pass (1024-bit key) header.d=minlexx.ru header.i=@minlexx.ru header.b=CU06wOUZ; arc=none smtp.client-ip=31.31.198.150
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=minlexx.ru
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=minlexx.ru
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b="e/gWFdwp"
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AFFA13F4CA
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 21:49:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-	s=20251003; t=1791323352;
-	bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version;
-	b=e/gWFdwp2u3bkjtUfUJu30eth+tyUKW78DbJ6X17S4/giEoVaBAhAZVKX45kxTeo2
-	 +d36kJ4AybcRy2wnd4zVlT/5a5vvse/7+DGtNnWwoDGduqjgQoavrAzeLQWN1oTP4M
-	 IOxwSWRFI2pIjXLdoVS6YAVp8izIYKktMUB4NgwB5bOcXLuA/bwxCbXxpLJ9Exfyqb
-	 vwt3Txr3uwj8gDx4uos4UMlHhh0gOa18iKssQavSDdUxoQDFkwU/NXSfPuiz/iZ3+U
-	 Bw2eRxrbmdXjb03e5U3gFCr4C9bVOq9/Cxnu+aXZyh49XbX1tcp2nX5k8jfPzHD6Qu
-	 2lui6CXNoTdEMLP2h4rvfWDkETa7Xk4FOgrP3ELJO2CJ0dzObLl7mNmEQY7FgWEU+j
-	 buAVuTYiswjs8WI+Ni/eqpW5drJ1Pdrusx01GNdI5gDPACgDFGYqjshC9zlR8kOb2R
-	 BZDM8UnkjWEd58vzclI39+sJEbmyXlv1WrVNG5oCiYTjMFF+O4xzfr2+15WoR/o5cH
-	 R2YUXx0la18ZUrJ06GMlovVBjUuMqWYb8BZMHNXBQYnc2kwiSIKHDmR7AMAZp6VdtW
-	 QU0WkWXwkVooiknFypSKQBgQequCQi0dVOiKrVAej6gBLDWDv0pzzJfpo6qCvPtofj
-	 5Yoo88kaofsYyeEhyySzRYJU=
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30c0d568830so7403359eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 14:49:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791323351; x=1791928151;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
-        b=G8ffuFFMC6nlf1wQkdLWFATA3tO2WX7br8VBIgJ9s/gGbv3QIMjaJpq8PDmlgMjDY9
-         gfjdcHuSxHPmAy/ykeL/ZGjpUj66cdsECEjf6v3X/CcjIFEHI1l+g14MszNalK7+aRiY
-         8hklYwDyC0DfXxnz5v7XOw3p1Stob5ybJ9MlC5NvlmHuKsqpgX2pUthp+c6+nXNcGV1C
-         SFvDC2z4Jk92yUMAmDjyZDMEnAbBznywZzrgYbmottOew8+N2CBhH5GeK7m7FqS/kxfg
-         SaE5GOmBwZQ2Q4uA6Nj/vJ4ixeKU5Ea/lsuETppaT2+oKtpc083OOuvfw7lsvi/Fw0iV
-         zJxg==
-X-Forwarded-Encrypted: i=1; AKwUvBwGNlDBvFnya10GlsI2tJ41c6j/hCKes9fvmWyZMHwwdlY3mw+OFmHXmk1bUHgwlSzk5Zh0hXMj4EQiWV5p@vger.kernel.org
-X-Gm-Message-State: AFq9FYK8lzMPeSX4OG1MnDxiedFIJ1E8Vpx0T4VUd4/AfPO1xyuAMdqD
-	56Eei+/SaOet14XEdGRJ8jkJpB5QHmOQKIu9uIAIgkn2DqsVrdrroOpHKdXTofbqLWJvimMfILw
-	a5tT/wu5xiggS3evTMdmvS11M6d5owGDkKVJEsk6vwVf+33TQTSP8s7YM4tJ8UvhM1G3GztYSWN
-	co+g++LrE=
-X-Gm-Gg: AYBFou1QsZdLafNmDZg1ZBN35sA7QkSn5apNAIO5BQ3q/KIT1xbH7uG5Sl2Ea5r+eTb
-	d7vgFi0zP5nUB1LaIITL89ZB4a8Ah/p8k2HRWivoV8CHu8+QRimV2NrVG32bh1y3qOMzTDlrjFa
-	RcdGnOP6vOWzCdl0JwqlEFGL77SM34lErp5a463L/S3QaA1GzUuFtXfVFPe05z2wjEIBqRhjsU/
-	1dk6y2+w6e5WSk8pUdUsbF0vL1M6vhsgPScZuoLnhFC8PPqQ+pNGW+7Smj9EXOZQ82iPSZVPRJr
-	Xf0MwDUOmvXgv607mE4I5mR5bxK6gygGIuVNtQSJmbpQZ2JQvmXjwx0u0u14orrMwJv5DVrx9hr
-	jy4fPl8QRn7T77pvi1g==
-X-Received: by 2002:a05:7301:db0f:b0:33c:e74:4625 with SMTP id 5a478bee46e88-3515de89918mr138826eec.28.1791323351069;
-        Tue, 06 Oct 2026 14:49:11 -0700 (PDT)
-X-Received: by 2002:a05:7301:db0f:b0:33c:e74:4625 with SMTP id 5a478bee46e88-3515de89918mr138771eec.28.1791323349201;
-        Tue, 06 Oct 2026 14:49:09 -0700 (PDT)
-Received: from localhost ([2600:6c40:657f:4180:3a1e:4952:21ef:b8ec])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3515afd00e0sm1271255eec.23.2026.10.06.14.49.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 14:49:08 -0700 (PDT)
-From: mitchell.augustin@canonical.com
-To: abel.vesa@oss.qualcomm.com
-Cc: andi.shyti@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-i2c@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mukesh.savaliya@oss.qualcomm.com,
-	viken.dadhaniya@oss.qualcomm.com,
-	mitchell.augustin@canonical.com
-Subject: Re: [PATCH] i2c: qcom-geni: Restore the source-clock selection policy
-Date: Tue,  6 Oct 2026 16:48:41 -0500
-Message-ID: <20261006214841.202946-1-mitchell.augustin@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
-References: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=minlexx.ru header.i=@minlexx.ru header.b="CU06wOUZ"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=minlexx.ru;
+	s=dkim; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:
+	Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=iVaFj6YS6P/7eWvHwtc8XiBJqROatZlHWcZMW/PW5fs=; b=CU06wOUZk0w6YB58F06Pt6dgl3
+	EQ1EJfOY3ff/IzyYLU/LQj4Qnvh+fCsYjWmqmR0wfBhjxaWC4PZNIq+LyxA+cthVvXlQKSJky/+AH
+	eFMUwVc3IEeac6XpIW9L4zg1mZyUwSjm2DbcTHhwKpqgSo57dY8Tqc/KbGjyynj34P20=;
+Received: 
+	by sm24.hosting.reg.ru with esmtpsa (TLS1.3) tls TLS_AES_128_GCM_SHA256
+	(envelope-from <alexeymin@minlexx.ru>)
+	id 1xECug-0000000Gnjh-3E4S;
+	Wed, 07 Oct 2026 00:41:31 +0300
+Message-ID: <0a3ad36c-c82a-4324-b4ea-905ec3b52c41@minlexx.ru>
+Date: Wed, 7 Oct 2026 00:41:30 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] clk: qcom: mmcc-sdm660: enable the parents of the
+ pixel clock sources
+To: fabricioakio@gmail.com, Bjorn Andersson <andersson@kernel.org>,
+ Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
+ Martin Botka <martin.botka@somainline.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261002-sdm660-pclk0-parent-enable-v2-1-b07f6c33e96f@gmail.com>
+Content-Language: en-US
+From: Alexey Minnekhanov <alexeymin@minlexx.ru>
+In-Reply-To: <20261002-sdm660-pclk0-parent-enable-v2-1-b07f6c33e96f@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Mitchell Augustin <mitchell.augustin@canonical.com>
+On 02.10.2026 19:46, Fabricio Akio via B4 Relay wrote:
+> From: Fabricio Akio <fabricioakio@gmail.com>
+> 
+> pclk0_clk_src and pclk1_clk_src are fed by the DSI PHY PLLs, which
+> dsi_pll_14nm_vco_set_rate() resets and only clk_prepare() restarts. The
+> DSI host sets the link rates before it prepares the PLL, so the RCG is
+> updated against a stopped source, and if it is enabled at that point
+> the update times out:
+> 
+>    pclk0_clk_src: rcg didn't update its configuration.
+> 
+> Seen on a board whose simple-framebuffer node lists the pixel clock:
+> the RCG then reads enabled at msm's first modeset.
+> 
+> Set CLK_OPS_PARENT_ENABLE on both so the core prepares the PLL around
+> the rate change, as dispcc-sm8250 does for its pixel clock sources since
+> commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel
+> clocks").
+> 
+> Fixes: 5db3ae8b33de ("clk: qcom: Add SDM660 Multimedia Clock Controller (MMCC) driver")
+> Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
+> ---
+> Changes in v2:
+> - Set the flag on pclk1_clk_src as well, as Dmitry asked. v1 left it
+>    out because this board has nothing on DSI1 to test it with.
+> - Link to v1: https://patch.msgid.link/20261002-sdm660-pclk0-parent-enable-v1-1-d6ff889144e4@gmail.com
+> ---
+>   drivers/clk/qcom/mmcc-sdm660.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/clk/qcom/mmcc-sdm660.c b/drivers/clk/qcom/mmcc-sdm660.c
+> index 9f8b8e29fa0f..827741229dd7 100644
+> --- a/drivers/clk/qcom/mmcc-sdm660.c
+> +++ b/drivers/clk/qcom/mmcc-sdm660.c
+> @@ -984,7 +984,8 @@ static struct clk_rcg2 pclk0_clk_src = {
+>   		.parent_data = mmcc_xo_dsi0pll_dsi1pll,
+>   		.num_parents = ARRAY_SIZE(mmcc_xo_dsi0pll_dsi1pll),
+>   		.ops = &clk_pixel_ops,
+> -		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE,
+> +		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE |
+> +			 CLK_OPS_PARENT_ENABLE,
+>   	},
+>   };
+>   
+> @@ -998,7 +999,8 @@ static struct clk_rcg2 pclk1_clk_src = {
+>   		.parent_data = mmcc_xo_dsi0pll_dsi1pll,
+>   		.num_parents = ARRAY_SIZE(mmcc_xo_dsi0pll_dsi1pll),
+>   		.ops = &clk_pixel_ops,
+> -		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE,
+> +		.flags = CLK_SET_RATE_PARENT | CLK_GET_RATE_NOCACHE |
+> +			 CLK_OPS_PARENT_ENABLE,
+>   	},
+>   };
+>   
+> 
+> ---
+> 
+> Best regards,
+> 
+> Fabricio Akio <fabricioakio@gmail.com>
 
-Same issue on my machine. This patch fixes it for me as well. Thanks!
+I've verified that it at least doesn't break booting on 3 different
+devices based on 3 different related SoCs:
 
-Tested-by: Mitchell Augustin <mitchell.augustin@canonical.com>
-Reviewed-by: Mitchell Augustin <mitchell.augustin@canonical.com>
+  * sdm630-sony-pioneer (Xperia XA2)
+  * sdm636-xiaomi-whyred (Redmi Note 5/Pro)
+  * sdm660-xiaomi-lavender (Redmi Note 7)
+
+I've also never seen before the warning about pclk0_clk_src not
+updating its configuration. MMCC seemed to always work fine, but
+given some recent fixes to clock drivers I'd be not surprised if
+something was missed in initial porting..
+
+Tested-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+
+--
+Regards,
+Alexey Minnekhanov
