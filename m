@@ -1,77 +1,75 @@
 Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D84CC4FB9A5
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 23:19:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32E5A4FC8C1
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 23:19:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791328815; cv=none; b=I0dfaRlIAJZApLnV2PATaM3k2z936NtQnknZ7Tzj/hnQ+T4j/6v9Dl6GZRUNH3Nf5NH6tmCOxenae1TJqXo4pCtvxBp8s0WekL/3egKN6r/3t7ZWQXSn76nxNnnRZ5RDNWtUDpYYfBoeXAM7YSLPzDByb3qCLbJu3QMg8tmcA3s=
+	t=1791328817; cv=none; b=O5UyXIN0T7dP5IpLZxA7wkmxJcJunSRPGwbB/eGIfmF3OElxGgdZOnCLgzyRiXfH57KI08dugnlKD1cmEJSCrEQjH74sY/XsQEBt0tyudfcdd2/2D2IFI93/KySp9QUnhlZT0qFZ+SH9+LCiUhCQ+yJCsEXlsuSiDmto9Eu+mCo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791328815; c=relaxed/simple;
-	bh=+r6PH4HB+WQWJr62dZukEIypy3+RL/XccpRzbSn9Log=;
+	s=arc-20240116; t=1791328817; c=relaxed/simple;
+	bh=yUdy2A8nvym2Ev4BV4bNz7ogIY937aa1By8o58LvKFE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GJbvXSH1x6btGm+hPXtzwdS+KE9ux+gUqaw2yy0ol2cHji3C+8ykxuEJ3yTGKpwAmUuOmGVGMOlwKv8hSy7+mlxcIvBD2BtJEDvHHIYqbSjseoNR3uJmBHS3tQUaxb8Gul0CKbNfXuTMI0iTucsBUW9QT/ynfKP4tyf5TflBru8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=nU6vSTfz; arc=none smtp.client-ip=74.125.82.172
+	 MIME-Version; b=QvsA4qmnbVawr99Qr8X/ZBPHkVReym6CeiIS5amCAqJ0rfn8sbiZeQla5r+UhL3dSfyRSjtBdZkZcyS+/Qwz9Fq7qFntxvaczi/+Ng4/7NjRQ54wIpqyP0deKTcpjy0cc5PYZ5smgOEVbgHrfuOhA3WC0ccJ3LIhABegXh1bc2s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Rg7fwMvY; arc=none smtp.client-ip=74.125.82.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="nU6vSTfz"
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-35115b52125so1367987eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 16:19:55 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Rg7fwMvY"
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-34c89609923so254027eec.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 16:19:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1791328795; x=1791933595; darn=vger.kernel.org;
+        d=chromium.org; s=google; t=1791328797; x=1791933597; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vAcYfvRf3dP6Vfas4zYsUbJKP9wdfOC0aJvUADv+txA=;
-        b=nU6vSTfzUBeQmsLTx0KlZ/8QFQdCaRqwt2umTY6pj2MbAbpe+HKVV9ISz762r/Lnwn
-         Ltq1ECfFyoB4wg7MAthtZ1x1rUxt8xRADnsQ6ZIwIj47RO3w5r3ykBLGRGxQgr2gzJIC
-         HcNp410VUf0Itvsx88OuefYmqk6wliEWdWcU4=
+        bh=KMr+syj9Sj6lk34GvK8oCOH9vKPvZo7PZuO82URtmYE=;
+        b=Rg7fwMvYmwqE4+cnCE+MfRqoIyU2KTlqSSmF0xLWdVUh1J3WKK8UTvtgVY3D1icaTX
+         LnBowlAGo+oPHrlP/d1tn1OBNyakOl/0jlNqtD9cTe40C2t0WHbwrXrTqHxLhP9SAQXf
+         KMSUZ+Zum7zUuYDH0/P2XogLAESFqAY+Vjxss=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791328795; x=1791933595;
+        d=1e100.net; s=20260707; t=1791328797; x=1791933597;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vAcYfvRf3dP6Vfas4zYsUbJKP9wdfOC0aJvUADv+txA=;
-        b=c8VAA9+ca7QTI1U0qzXoINNtXUb8akJbXvDswfGkIllSl/aqT18hm431BwR0c+oMYN
-         Fei01iRkImxg6af54DMFEEsaUif/uAcRzV0mNUlNDQ1r3MpM28MYnEhVfxASZWyZkePK
-         m/GiUT+w+bauuU0NUbd1mM++KXNypdwdiH+Xs3JIDr8VPqUaC1bB2ji8BPywFH58AMYe
-         j9rnL0D35Mup7TOYp8dSdrsxids4DVC9hEvx5XZMsccQb20/M+rMj1tEBxAt05WJwapU
-         cTSb/ZlQ58iXqdshMYM1nNctegoWtU/bCTuVS3l6nGmTwo0zE79jChOoAbmDMZopYREG
-         nbNw==
-X-Forwarded-Encrypted: i=1; AKwUvBxihzQYOGYCQcxHtm4PtvuCRkLvkalHTIojfmAUuURYY1aeLYw0Z6z3l/woBEHRjQ3BZ5WzRV9tmyUoswm1@vger.kernel.org
-X-Gm-Message-State: AFq9FYK8qo6QX6QDqg/kHIJbcmvic+oY7tF+gCsTbTidRVCIOPKjokWn
-	qJcIypHuCQ1W/Pqf2/FpljltnpT3v/Xna9kFa9Hu6CFu28NQWMGbq2YdelbKcPXDs00bs9qxGMh
-	3L0Q=
-X-Gm-Gg: AYBFou1fGFU5a4UDVE2MG8+NVop6KNR/a2nSxybZtjx3ngEFDZD9Rdgztgwa2DES2fi
-	WX2f/guQt9dWKMnHlxfeJ54zfc292HmR3TRROindNmdMuljdcaSwYBJC8xPurvoh6vln8NTJC6u
-	SIFjHepekaI8EXpyrjX7/RqYT4pEhb+X5EFYfP9cto4xc8v4ZlK8QVEznk200sbIXeCcOdXdur7
-	HSLSSADgw8pSL3xXZtsdMkSWP1cRs3oLM0x39rRSo01mG70DwezpiTWW315Mr37F/3Anf1SGW3f
-	9a+Sro2sj1pofuw7ztuykztFxVqeXEOmK6fa5z2yZb4gdD1wPcSxSIeW1O4odKlksZeMZjE7lNQ
-	dlkmyUTtxOqEzlY1qsn/ZjpSIJ5PG0pi1F4mXIBx8gZEZ3K430hvsUz3RwM9nbfsElDt3snQta1
-	mopLPJHFqAwQz1jLoDAbCye73V0ueibFPCwXzhVeKQTHyQ9LlIahsYom6CImMXv1HgNrQVJ+i9L
-	qbmdWLHtO4Wp2yuQEEJTKwMfHp+L8Gj3dFeQe0=
-X-Received: by 2002:a05:693c:65d7:b0:351:202c:c7a5 with SMTP id 5a478bee46e88-3515d7183femr385288eec.0.1791328794653;
-        Tue, 06 Oct 2026 16:19:54 -0700 (PDT)
+        bh=KMr+syj9Sj6lk34GvK8oCOH9vKPvZo7PZuO82URtmYE=;
+        b=RGA+S6RMuU1r6F0vrTvrKJDj5+wSwDwwUi63vy11PK8twUcP7hkEDVhWgRWwr5aTl4
+         0zw4E41zsoqlCxhXmzszPjdtjjTH1sXI+NYWJ5FRWOyyGL3mkRTAy6KhJbsXq+HKK0/8
+         qjH1ylY2N2J4Gdbry+sLCjRe6El9sWFPCJV90lvzpHL5y4bqnJPqX8d9HvUskSlMNtFT
+         2VNdYSmxtUxOgagJj/wM2dqMt+hetH0sPiuqPlg3CAuNxr3O1l78veI5Cw2IU0dvAZIw
+         W24NkeJp9TQ+thBPkz4qIX3bVxksf1JLUV7EvmmHHvfwOiUXxngSQx3G8aTG2XTknR9L
+         JZuA==
+X-Forwarded-Encrypted: i=1; AKwUvBxsGp4jycvnkgHC/rZvO6XsvnnmEbdGfFMdynexBaJ3HiYPXtTB7GQwRn0uq6+5k6f2pa39VTJn6g0K6xNV@vger.kernel.org
+X-Gm-Message-State: AFuF++njEeyiRQkaIoB0N7G7EiExEnuCed+O0DrbDag9Iix3gvGhcJ7n
+	vAm5aelv2+ZC3GIpDDZDglay0ohdTRACl/eQUGPB1ruRB4HlE1EXGVdrJqQAAfNfSQ==
+X-Gm-Gg: AYBFou0OeCLrpoECktGkAkTCFUuHLUXJ65q+M6dIMoovPZL678xkrN/uMXTQS3WkNXQ
+	njRaen3OvC8QGMXBO3jvnJSSws9HNnVM0CVBPpwvoMvrubEBlQ/0u/wPsCsuCvKxqeo9/zL4KfQ
+	v6yTRFtz8rido+05dZivxteq3dXp4Tcd2gErULH2MCri2MDsncYHzUVm13kVeBrxcAf7wJbYUg/
+	ASws3DBWVPK4yuj6jLQ06pJMy6VMmFvvViy1wb4lvVbzGgza1WEbFJD5gVp30AGGK86Qj4IE3cr
+	dhb7dV0ZEM6NX4kc7crLLKLxoyF1sPBn8at+UtYfBzYUNDsRvv/M0YuMgMSN3dqJ69qO6EJf+QZ
+	aWHclRn8dFR23qAGeY7gYQXSF6GoudKn+ioKEvwh6+/qsm6qw1LDsR1jLNzvPlBlO9FO1HuolgM
+	H0IAFqWf+dhsVGpUMGHltQcVfpAO6ILovROvGwQQy1JuJVmCJDoLXfCXAMygz/bcfPk06QOM+wi
+	qtTdWupxojOrWUIjY47gsg6R5FMRcc+D+37Gw==
+X-Received: by 2002:a05:7022:69a5:b0:151:2e62:fe5b with SMTP id a92af1059eb24-16206e105f1mr405998c88.22.1791328796966;
+        Tue, 06 Oct 2026 16:19:56 -0700 (PDT)
 Received: from localhost ([2a00:79e0:2e7c:8:63eb:e7f9:1d47:7d47])
-        by smtp.gmail.com with UTF8SMTPSA id 5a478bee46e88-3515a8b7c5dsm1985276eec.0.2026.10.06.16.19.53
+        by smtp.gmail.com with UTF8SMTPSA id a92af1059eb24-16166121f2asm1806889c88.4.2026.10.06.16.19.55
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Oct 2026 16:19:54 -0700 (PDT)
+        Tue, 06 Oct 2026 16:19:56 -0700 (PDT)
 From: Brian Norris <briannorris@chromium.org>
 To: "Rafael J. Wysocki" <rafael@kernel.org>
 Cc: linux-pm@vger.kernel.org,
 	Ulf Hansson <ulfh@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Brian Norris <briannorris@chromium.org>,
-	"Bryan O'Donoghue" <bod@kernel.org>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-media@vger.kernel.org
-Subject: [PATCH 04/13] media: venus: Discard pm_runtime_put_autosuspend() return values
-Date: Tue,  6 Oct 2026 16:13:32 -0700
-Message-ID: <20261006161337.4.I574fc3def9965f603755a968ae88309aafdfa285@changeid>
+	linux-gpio@vger.kernel.org
+Subject: [PATCH 05/13] pinctrl: qcom: lpass-lpi: Discard pm_runtime_put_autosuspend() return values
+Date: Tue,  6 Oct 2026 16:13:33 -0700
+Message-ID: <20261006161337.5.Ica4bfaf179a86c8d77f8f845826602914b81181b@changeid>
 X-Mailer: git-send-email 2.56.0.360.g66cac248cb-goog
 In-Reply-To: <20261006231900.3230373-1-briannorris@chromium.org>
 References: <20261006231900.3230373-1-briannorris@chromium.org>
@@ -83,8 +81,8 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Propagating the pm_runtime_put_autosuspend() return value to callers is
-not particularly useful.
+Passing the pm_runtime_put_autosuspend() return value to callers is not
+particularly useful.
 
 Returning an error code from pm_runtime_put_autosuspend() merely means
 that it has not queued up a timer or work item to check whether or not
@@ -92,8 +90,9 @@ the device can be suspended and there are many perfectly valid
 situations in which that can happen, like after writing "on" to the
 device's runtime PM "control" attribute in sysfs for one example.
 
-Accordingly, update the Venus vdec and venc drivers to simply discard
-the return value of pm_runtime_put_autosuspend().
+Accordingly, update the LPASS LPI pinctrl driver to simply discard the
+return value of pm_runtime_put_autosuspend() and return 0 to the
+callers.
 
 This will facilitate a planned change of the
 pm_runtime_put_autosuspend() return type to void in the future, similar
@@ -106,88 +105,57 @@ This patch is independent of the rest of the series, except for the end
 (changing the return type). I expect it can be applied by individual
 maintainers, and we pick up the end once the dust is settled.
 
- drivers/media/platform/qcom/venus/vdec.c | 10 ++++------
- drivers/media/platform/qcom/venus/venc.c | 10 ++++------
- 2 files changed, 8 insertions(+), 12 deletions(-)
+ drivers/pinctrl/qcom/pinctrl-lpass-lpi.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/venus/vdec.c b/drivers/media/platform/qcom/venus/vdec.c
-index 6a43ea191da1..35c1b6ec1f9f 100644
---- a/drivers/media/platform/qcom/venus/vdec.c
-+++ b/drivers/media/platform/qcom/venus/vdec.c
-@@ -644,12 +644,12 @@ static int vdec_pm_put(struct venus_inst *inst, bool autosuspend)
- {
- 	struct venus_core *core = inst->core;
- 	struct device *dev = core->dev_dec;
--	int ret;
-+	int ret = 0;
+diff --git a/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c b/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
+index 5fd4a4eba654..b93f661c36e5 100644
+--- a/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
++++ b/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
+@@ -76,7 +76,9 @@ static int lpi_gpio_read(struct lpi_pinctrl *state, unsigned int pin,
  
- 	mutex_lock(&core->pm_lock);
+ 	lpi_gpio_read_reg(state, pin, addr, val);
  
- 	if (autosuspend)
--		ret = pm_runtime_put_autosuspend(dev);
-+		pm_runtime_put_autosuspend(dev);
- 	else
- 		ret = pm_runtime_put_sync(dev);
+-	return pm_runtime_put_autosuspend(state->dev);
++	pm_runtime_put_autosuspend(state->dev);
++
++	return 0;
+ }
  
-@@ -671,7 +671,7 @@ static int vdec_pm_get_put(struct venus_inst *inst)
- 		if (ret < 0)
- 			goto error;
+ static const struct pinctrl_ops lpi_gpio_pinctrl_ops = {
+@@ -164,7 +166,9 @@ static int lpi_gpio_set_mux(struct pinctrl_dev *pctldev, unsigned int function,
+ 	u32p_replace_bits(&val, i, LPI_GPIO_FUNCTION_MASK);
+ 	lpi_gpio_write_reg(pctrl, pin, LPI_GPIO_CFG_REG, val);
  
--		ret = pm_runtime_put_autosuspend(dev);
-+		pm_runtime_put_autosuspend(dev);
- 	}
+-	return pm_runtime_put_autosuspend(pctrl->dev);
++	pm_runtime_put_autosuspend(pctrl->dev);
++
++	return 0;
+ }
  
- error:
-@@ -1200,9 +1200,7 @@ static int vdec_start_streaming(struct vb2_queue *q, unsigned int count)
- 		if (ret)
- 			goto put_power;
+ static const struct pinmux_ops lpi_gpio_pinmux_ops = {
+@@ -261,7 +265,9 @@ static int lpi_config_set_slew_rate(struct lpi_pinctrl *pctrl,
  
--		ret = vdec_pm_put(inst, true);
--		if (ret)
--			goto error;
-+		vdec_pm_put(inst, true);
+ 	mutex_unlock(&pctrl->lock);
  
- 		ret = vdec_start_output(inst);
- 	}
-diff --git a/drivers/media/platform/qcom/venus/venc.c b/drivers/media/platform/qcom/venus/venc.c
-index 79acf7c1ec9a..3c7c24dd7159 100644
---- a/drivers/media/platform/qcom/venus/venc.c
-+++ b/drivers/media/platform/qcom/venus/venc.c
-@@ -617,12 +617,12 @@ static int venc_pm_put(struct venus_inst *inst, bool autosuspend)
- {
- 	struct venus_core *core = inst->core;
- 	struct device *dev = core->dev_enc;
--	int ret;
-+	int ret = 0;
+-	return pm_runtime_put_autosuspend(pctrl->dev);
++	pm_runtime_put_autosuspend(pctrl->dev);
++
++	return 0;
+ }
  
- 	mutex_lock(&core->pm_lock);
+ static int lpi_config_set(struct pinctrl_dev *pctldev, unsigned int group,
+@@ -335,7 +341,9 @@ static int lpi_config_set(struct pinctrl_dev *pctldev, unsigned int group,
  
- 	if (autosuspend)
--		ret = pm_runtime_put_autosuspend(dev);
-+		pm_runtime_put_autosuspend(dev);
- 	else
- 		ret = pm_runtime_put_sync(dev);
+ 	lpi_gpio_write_reg(pctrl, group, LPI_GPIO_CFG_REG, val);
  
-@@ -644,7 +644,7 @@ static int venc_pm_get_put(struct venus_inst *inst)
- 		if (ret < 0)
- 			goto error;
+-	return pm_runtime_put_autosuspend(pctrl->dev);
++	pm_runtime_put_autosuspend(pctrl->dev);
++
++	return 0;
+ }
  
--		ret = pm_runtime_put_autosuspend(dev);
-+		pm_runtime_put_autosuspend(dev);
- 	}
- 
- error:
-@@ -1275,9 +1275,7 @@ static int venc_start_streaming(struct vb2_queue *q, unsigned int count)
- 	if (ret)
- 		goto put_power;
- 
--	ret = venc_pm_put(inst, true);
--	if (ret)
--		goto error;
-+	venc_pm_put(inst, true);
- 
- 	ret = venc_set_properties(inst);
- 	if (ret)
+ static const struct pinconf_ops lpi_gpio_pinconf_ops = {
 -- 
 2.56.0.360.g66cac248cb-goog
 
