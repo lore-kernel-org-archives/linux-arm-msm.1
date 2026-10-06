@@ -1,117 +1,102 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp-relay-internal-1.canonical.com (smtp-relay-internal-1.canonical.com [185.125.188.123])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5424437FF67
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 20:00:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 906C731716D
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 21:49:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.125.188.123
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791316849; cv=none; b=GlidsM2Jh6a9i4D/Ux+8ZUcfMTY1D78M1b6rs/2HQBWCmxNbBofwcfKrhZLnceBMOGlYhsldA+S66xLU/6WNYZ1QH1sXWABdCsOoRcyoQHzhHm6PpvRuoNw5EYCd7s9cHhQGB7WreUZuMawwH114BGCebJAVxhoAPfi5tERZLkM=
+	t=1791323357; cv=none; b=I5JyvyWFJ9mkNrdt4oWtch9RGEe2GYIuz+nqeZSiWvC52THtomCSZBas8DIfPb/H3bhQURxKq5ZXWyTsOOJt1utDdOQvaCFJ9k9GbmgM2mtDc526X9AfudsOV5x+4en+/X/ZVFjBDHb3yA6MZTRWEJcswRBNMzAVwQugYVUhvEg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791316849; c=relaxed/simple;
-	bh=IOTVLEFCya+bwAvPF8aWNmU1ouHNoQKiZ6FbT18pmDQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=FnwwIfS5+MVcTdG/KHfeEiWSbcKRY74ocaUdjN0SuXDHDQeOCq8PpT9PPRmiv7DmQVhdyWM0MZQ0f4Llvh6g5+oZR52zag8xDnXGDD6SFeLGwb5SyBg0vXWh3epnbqUEsvU1wjziNGbJ+uuTJZ1xzr1JznsKCg7IXVtDgVqcyOs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a1suUD4r; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791323357; c=relaxed/simple;
+	bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=urm8Pn3HB3PlMwoZN66BRqxlcUKPiYSJp+ASxrcXCkvrljtEAOCT/VGJE7HmpKTHhZbouWW8XKV0HjR45Zxd8Kf+pPsg9y6e7No9UjAhf7nxkV8xRuWR3IetJzZDIz1A8Hs4MAxqnL1o4NxBXnya4QJfDogs7/ISfczkx7/FLqw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com; spf=pass smtp.mailfrom=canonical.com; dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b=e/gWFdwp; arc=none smtp.client-ip=185.125.188.123
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=canonical.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a1suUD4r"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a018792ab3so11184215e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 13:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791316846; x=1791921646; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=o3DAyDVHNrcV6GLzUE6mqYOVGNLRQA+er+Rt7Tx0w2s=;
-        b=a1suUD4rAF76viJJmvrblT+5oP5If4OkUCOfgS8TB5Yq1eUM/fxq9gjDg4cy2WT4c1
-         j+JTa2r61dIFGae3AKf+oW8oYJkDCuEq0vF/Yq3kzBUXU7KGuKdoipeMSkJecyJaBXVa
-         5cvVI5xvF/l1/Zv6Ctz/DLA/ewzuCavxrdNDuEjbkyB2U3GoKBcV6K6Y+2VxaWaWP6f8
-         nR9QtpNQQ8uAtg4HbybAZoPnFOWmNkweFKRyGlLGqclRngXOEi4T68QeFFf6/6a4RBce
-         hrY8SH4mX98hIbw1Km+Oac/N1YYim5PoaewvSjhXqVjzobIzxRAo56RQTa1+KU3yqTpP
-         n2Hg==
+	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b="e/gWFdwp"
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AFFA13F4CA
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 21:49:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+	s=20251003; t=1791323352;
+	bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version;
+	b=e/gWFdwp2u3bkjtUfUJu30eth+tyUKW78DbJ6X17S4/giEoVaBAhAZVKX45kxTeo2
+	 +d36kJ4AybcRy2wnd4zVlT/5a5vvse/7+DGtNnWwoDGduqjgQoavrAzeLQWN1oTP4M
+	 IOxwSWRFI2pIjXLdoVS6YAVp8izIYKktMUB4NgwB5bOcXLuA/bwxCbXxpLJ9Exfyqb
+	 vwt3Txr3uwj8gDx4uos4UMlHhh0gOa18iKssQavSDdUxoQDFkwU/NXSfPuiz/iZ3+U
+	 Bw2eRxrbmdXjb03e5U3gFCr4C9bVOq9/Cxnu+aXZyh49XbX1tcp2nX5k8jfPzHD6Qu
+	 2lui6CXNoTdEMLP2h4rvfWDkETa7Xk4FOgrP3ELJO2CJ0dzObLl7mNmEQY7FgWEU+j
+	 buAVuTYiswjs8WI+Ni/eqpW5drJ1Pdrusx01GNdI5gDPACgDFGYqjshC9zlR8kOb2R
+	 BZDM8UnkjWEd58vzclI39+sJEbmyXlv1WrVNG5oCiYTjMFF+O4xzfr2+15WoR/o5cH
+	 R2YUXx0la18ZUrJ06GMlovVBjUuMqWYb8BZMHNXBQYnc2kwiSIKHDmR7AMAZp6VdtW
+	 QU0WkWXwkVooiknFypSKQBgQequCQi0dVOiKrVAej6gBLDWDv0pzzJfpo6qCvPtofj
+	 5Yoo88kaofsYyeEhyySzRYJU=
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30c0d568830so7403359eec.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 14:49:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791316846; x=1791921646;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=o3DAyDVHNrcV6GLzUE6mqYOVGNLRQA+er+Rt7Tx0w2s=;
-        b=EVxkTRvLyShAV0rB3+1EuENiIep+BzKfC2FCwG9vb73ycDrsWouOfPCktfTqbkruO7
-         8yRC8UAPOkKe1diNDaNuhrRYBT7bKZvAZnkUSn/kPhyBnQic9+0vZ3bNy0eFiM1mbEoG
-         T+/3SPH9QU/25my6hkz5Y95tuUlA80hsKLVOiPR1bn16X4Bn7zBgW8zsSuxZCYFJJRZz
-         WJn0Mm5gBieZlbFm38wWV3Pb3oWEaLyY6bVR3Gv7V8Yex6MNX5d7/4cVIM+Cxs5ttbPw
-         kuAnHLhI6IiZ/EKO6y5wbA9wd/pEA59Fk0RGsJuIlM2iuH9G9WLfo9MT1hUPwUP20az/
-         WGeA==
-X-Gm-Message-State: AFuF++n92QC35VfoFZdvtu1/NF5cr05/I/BXF8lwaAAyB9JyAyC9G9vp
-	Zp+hSQaakhjhW7vWO1z/QfQft1glk+oNDK4xz64SeLwIk1+OlMqfWp7vN4K7gw==
-X-Gm-Gg: AYBFou37/18oqJD8fVg6+po26oRF+Ya65L043FFalzn4Rt+MSjv3eYGgw/pixGfb+8H
-	Cnlneq80WM2SpMrgfkPV2TahFUGzLQJVyVkr8NImEm37P5TMLArId1y0psczy/uYpmDJBMXBBos
-	XetA6DXxFQu4zST7/tWonUCU31CsqHCAUp+zqqhV9m6ROx5VETN6nLa1CLAwiJAkDvLYn7tqnLz
-	6IHtZ9iTzbUV7xkbXe/YVxN4TryYlvFjbvDOa5oKMy8rdpFYBNjPELNcLxKBwWuy+ZcXm0ToNBJ
-	PXyPkCnp6Hiqj9QHa1hfSd6R1NgcCPMrzk6hoeJcbVrPitpnpTYn9+fxjZZpyrWJI0CcJf+SSRg
-	wVm3Z7/5gTjrRZXJcj0cNA2nsnMoQQVVxKgxTCbHL09mzGmyJcM2f21piROCiHKXa4oNZSrVd6n
-	Mnc/sVSPnUbAvJPszGGCLtJhHCJLdZPfJplgasOxU/z9oml20KDrnGL1wEBhZZPsUmRFxv33QVy
-	V+U0205NGTQYElEEfR/usrcHgU=
-X-Received: by 2002:a05:600c:840e:b0:49e:645e:2616 with SMTP id 5b1f17b1804b1-4a17b5365d6mr54722065e9.5.1791316846361;
-        Tue, 06 Oct 2026 13:00:46 -0700 (PDT)
-Received: from [192.168.0.253] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4a17f692cf4sm16366515e9.3.2026.10.06.13.00.45
+        d=1e100.net; s=20260707; t=1791323351; x=1791928151;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=poluRrFSmDIlB+/zIiUoVzpJ86A8vkad5nYfGvBnzmA=;
+        b=G8ffuFFMC6nlf1wQkdLWFATA3tO2WX7br8VBIgJ9s/gGbv3QIMjaJpq8PDmlgMjDY9
+         gfjdcHuSxHPmAy/ykeL/ZGjpUj66cdsECEjf6v3X/CcjIFEHI1l+g14MszNalK7+aRiY
+         8hklYwDyC0DfXxnz5v7XOw3p1Stob5ybJ9MlC5NvlmHuKsqpgX2pUthp+c6+nXNcGV1C
+         SFvDC2z4Jk92yUMAmDjyZDMEnAbBznywZzrgYbmottOew8+N2CBhH5GeK7m7FqS/kxfg
+         SaE5GOmBwZQ2Q4uA6Nj/vJ4ixeKU5Ea/lsuETppaT2+oKtpc083OOuvfw7lsvi/Fw0iV
+         zJxg==
+X-Forwarded-Encrypted: i=1; AKwUvBwGNlDBvFnya10GlsI2tJ41c6j/hCKes9fvmWyZMHwwdlY3mw+OFmHXmk1bUHgwlSzk5Zh0hXMj4EQiWV5p@vger.kernel.org
+X-Gm-Message-State: AFq9FYK8lzMPeSX4OG1MnDxiedFIJ1E8Vpx0T4VUd4/AfPO1xyuAMdqD
+	56Eei+/SaOet14XEdGRJ8jkJpB5QHmOQKIu9uIAIgkn2DqsVrdrroOpHKdXTofbqLWJvimMfILw
+	a5tT/wu5xiggS3evTMdmvS11M6d5owGDkKVJEsk6vwVf+33TQTSP8s7YM4tJ8UvhM1G3GztYSWN
+	co+g++LrE=
+X-Gm-Gg: AYBFou1QsZdLafNmDZg1ZBN35sA7QkSn5apNAIO5BQ3q/KIT1xbH7uG5Sl2Ea5r+eTb
+	d7vgFi0zP5nUB1LaIITL89ZB4a8Ah/p8k2HRWivoV8CHu8+QRimV2NrVG32bh1y3qOMzTDlrjFa
+	RcdGnOP6vOWzCdl0JwqlEFGL77SM34lErp5a463L/S3QaA1GzUuFtXfVFPe05z2wjEIBqRhjsU/
+	1dk6y2+w6e5WSk8pUdUsbF0vL1M6vhsgPScZuoLnhFC8PPqQ+pNGW+7Smj9EXOZQ82iPSZVPRJr
+	Xf0MwDUOmvXgv607mE4I5mR5bxK6gygGIuVNtQSJmbpQZ2JQvmXjwx0u0u14orrMwJv5DVrx9hr
+	jy4fPl8QRn7T77pvi1g==
+X-Received: by 2002:a05:7301:db0f:b0:33c:e74:4625 with SMTP id 5a478bee46e88-3515de89918mr138826eec.28.1791323351069;
+        Tue, 06 Oct 2026 14:49:11 -0700 (PDT)
+X-Received: by 2002:a05:7301:db0f:b0:33c:e74:4625 with SMTP id 5a478bee46e88-3515de89918mr138771eec.28.1791323349201;
+        Tue, 06 Oct 2026 14:49:09 -0700 (PDT)
+Received: from localhost ([2600:6c40:657f:4180:3a1e:4952:21ef:b8ec])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3515afd00e0sm1271255eec.23.2026.10.06.14.49.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 13:00:45 -0700 (PDT)
-From: Gabor Juhos <j4g8y7@gmail.com>
-Date: Tue, 06 Oct 2026 22:00:41 +0200
-Subject: [PATCH] mtd: parsers: qcom: drop setting of partition's mask_flags
+        Tue, 06 Oct 2026 14:49:08 -0700 (PDT)
+From: mitchell.augustin@canonical.com
+To: abel.vesa@oss.qualcomm.com
+Cc: andi.shyti@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-i2c@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mukesh.savaliya@oss.qualcomm.com,
+	viken.dadhaniya@oss.qualcomm.com,
+	mitchell.augustin@canonical.com
+Subject: Re: [PATCH] i2c: qcom-geni: Restore the source-clock selection policy
+Date: Tue,  6 Oct 2026 16:48:41 -0500
+Message-ID: <20261006214841.202946-1-mitchell.augustin@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
+References: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261006-qcom-smempart-ignore-mask_flags-v1-1-a48d9395b21b@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3N3QrCMAxA4VcZuTaQFZ0/ryIioctq0LZbIiKMv
- bvFy+/mnBVcTMXh0q1g8lHXWhr6XQfxwSUJ6tgMgcLQEw24xJrRs+SZ7Y2aSjXBzP68Ty9Ojqc
- jxXjgcN6PBK0ym0z6/R+ut237AW0ir+1xAAAA
-X-Change-ID: 20261006-qcom-smempart-ignore-mask_flags-870cc5a294d0
-To: Miquel Raynal <miquel.raynal@bootlin.com>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-mtd@lists.infradead.org, 
- linux-kernel@vger.kernel.org, Gabor Juhos <j4g8y7@gmail.com>
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 
-The 'attr' member of struct 'smem_flash_pentry' is 8 bits wide,
-so it is only usable to mask the lower 8 bits in the MTD flags.
-However the MTD layer does not define any maskable flags in
-these bits at all. Additionally, the meaning of the bits in the
-'attr' field is not documented, so it is not even possible to map
-those to the defined MTD flags.
+From: Mitchell Augustin <mitchell.augustin@canonical.com>
 
-Due to the reasons above, remove the 'mask_flags' assignment code
-since it has no effect anyway.
+Same issue on my machine. This patch fixes it for me as well. Thanks!
 
-Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
----
- drivers/mtd/parsers/qcomsmempart.c | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/drivers/mtd/parsers/qcomsmempart.c b/drivers/mtd/parsers/qcomsmempart.c
-index d4fdc46a0073..cd562514f88d 100644
---- a/drivers/mtd/parsers/qcomsmempart.c
-+++ b/drivers/mtd/parsers/qcomsmempart.c
-@@ -144,7 +144,6 @@ static int parse_qcomsmem_part(struct mtd_info *mtd,
- 
- 		parts[j].name = name;
- 		parts[j].offset = le32_to_cpu(pentry->offset) * mtd->erasesize;
--		parts[j].mask_flags = pentry->attr;
- 		parts[j].size = le32_to_cpu(pentry->length) * mtd->erasesize;
- 		pr_debug("%d: %s offs=0x%08x size=0x%08x attr:0x%08x\n",
- 			 i, pentry->name, le32_to_cpu(pentry->offset),
-
----
-base-commit: 55c5b6d5f59f59a8c98a7effc3195226cc20175c
-change-id: 20261006-qcom-smempart-ignore-mask_flags-870cc5a294d0
-
-Best regards,
--- 
-Gabor Juhos <j4g8y7@gmail.com>
-
+Tested-by: Mitchell Augustin <mitchell.augustin@canonical.com>
+Reviewed-by: Mitchell Augustin <mitchell.augustin@canonical.com>
