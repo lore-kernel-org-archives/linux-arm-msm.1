@@ -1,118 +1,158 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1EF83CB8E3
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 08:03:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E74801C28E
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 08:05:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791273806; cv=none; b=u6xQ4dz2Ei+dEjcO+ASpqhWjm7i9xO+3jSkEo22vBU+oLMfdHaclRujyMy76nVQIIP80C0btW0FBlQvi3lDYYQkBI+W/doM45M6evTmukbisC/nRecd1cEkV6WjUYVuMUIqOhj98iYq61LU/c+XIYvymgCVcpwjglF58q/6ON/g=
+	t=1791273928; cv=none; b=gs3iDygkvHD7EU3BjpZ7AyvjuPBzaBwUSDWAaI7lg82EJK64IkXnwxZaHcjFmFMmQW5xaCds8ndsG3nR5kL1y9vGlZ2XmfbpVvqCdelzT8YeiXtu+TDerENeNZsP8vZ4vtghRBFVlaw1nqTrSNNLs2OSLDylbpPHpSMgcEzEyeM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791273806; c=relaxed/simple;
-	bh=nPvPw7A9YAIxMjZ4/b6RvdHVeDmDsPUX45cjSQ90p/0=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZG1JPQIMW4NkWxV5wpHecLxUE1YFwO6Hg840rs3gfpAbY3iza5a8KphXZUk7rybWQxrMgWoKHqId0KeATSgqZ65ihOe8N6oLbWHNKuwwlne9YL/Z46RVO1JrOY//j1d34E1Myx/qcwX406qAgAl5ygx/6FtU6j/9Z43uH6uge9c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CaNa3tt4; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791273928; c=relaxed/simple;
+	bh=an7AD84YEqSWy0+GaKfNOntzEi/eymuo4+6S8jm/oYI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=DTayqJRhAiJt9ivUT0Ko6dWZnhdScleyFoagW9w1xZZAsVUX1qmVX9H8LN9B/5vw98P5k6tMEWWP+VJaNHos2LC+5CIaeaTlhKy85IdFnDfEl6XnmVL+uUUqc+AiBrEfeXal2sAHXwoFjJsgyBHjcCUE7/qG2TqFXCMIppboxLE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cBhM/mnK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zts8dxmy; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CaNa3tt4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C08EE1F00899
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 08:03:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791273800;
-	bh=r+KgD9DoUrWu5arzVLlDs3fSXX52ocXw8x+r8c9Z1cw=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=CaNa3tt4uTwfPlcLhPdln6QJYXq+DP9tyPKPke9OHd/6cACMGxqPmf28yD9Hdupgg
-	 MfloJhes60g10D4cKYMXig6Llvow7IQBSVlg0Ng9S4ESqVnANgTwhUWFedjRzGdy1A
-	 yQjini86leUZHV3bHOjvrVtwVX74DMIS/UqSbCkPDdFg1CZsN+1L7w6lhkK3QwRe1t
-	 q82nXvzKMwgZajTmrtvhGR+vGSA8/URn6WxKXigKDM0xUTXRCRDh2DssmEu7HNLV1X
-	 iRQdEtgPlbszuE59FOYYJat3v4+3RHRBSxw0A7vqomOc4bceJtLwr/DDCIs+p4/V+C
-	 x8JQptANGSq5g==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b8f5e2ce5eso312918e87.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 01:03:20 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBx+5NjzF2d4PpuadsxVnDvjs01L0at2sPJLi6MUnxlWI55mQw4+Regn0dHQX8IC3ociw0jh/xEU2YsmbxKR@vger.kernel.org
-X-Gm-Message-State: AFq9FYKObO2C2YXgSZU1l/L06M2aDWYaI/KdT8JpVwVIffPZ32cBnqBl
-	6GJd0e3djt1wXPPQ7HJdxuS3YeLLfb4Ksk0CpBU9tOI0Xn/LCXEJu1YDDLa9x1iVoGnGgPmM3RL
-	ZeWzDrygMejkxC5IMrnfbxF1Cm+0biXCsEcKtedA5gA==
-X-Received: by 2002:a05:6512:683:b0:5bb:a4ba:8ded with SMTP id
- 2adb3069b0e04-5bccc718dd2mr276015e87.44.1791273799477; Tue, 06 Oct 2026
- 01:03:19 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 6 Oct 2026 11:03:17 +0300
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 6 Oct 2026 11:03:17 +0300
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20261004165124.4277-1-franzelfranzel@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cBhM/mnK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zts8dxmy"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6966eARC3269398
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 08:05:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	niUOktxfv6lCEuldcUQGp27a7uDOXnZEa5jZNiVgcHc=; b=cBhM/mnKr7Jl1cfn
+	SEoU1cpHwy9i97HxZoDoyVjH2fFvFoaOFkXOU+QhOCo6MrbKOU20YhaxTAlxjbZc
+	9xWxfyIvRiLhqKAEZc/CVH3gCVEs7ltDzzTe+Ek/Eha1EdnKdNwcNn7TdsGqtSoo
+	oyD7tWvsiU7TupXFpS7KNYomMsNKTRDyLfodz068IYRH7vaXdE8WlKqtpB+AQPfr
+	ehHhCqEGK9LpVaFAo96GcEP39MH7PkAnMqZ/xkP+r+o/3AJoAcZPMZM/+YoRVjFq
+	1oMiYN3gfQAOjAGcirOToxzuTvraoXmtDx8m2S2hLHZ50i69YcrdCCQv4R/CyhrO
+	7tgGkg==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4fkujydr-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 08:05:25 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-917a2de2cc1so36025376d6.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 01:05:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791273925; x=1791878725; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=niUOktxfv6lCEuldcUQGp27a7uDOXnZEa5jZNiVgcHc=;
+        b=Zts8dxmyC49ZJinwP/BSsLYCSd1qO9OmnvBU4QGsqUXSWrIorCFSIYmPl5lDWgfqoz
+         Va0zaPHq2UP7eY+aEVZAaYeaWxCTCili7Di4BWtLKyb4MeC3WH093moCa15mr49650Xy
+         2Lsb8sWbc2OJsHqwynsI1HuNHbKKKJZsqvstj/RnwfPXVpuWZsB9n1Cvr4PD+2j6bRlD
+         7Lvy8mZyqc6GGEj1c5JW+YU0sBF+6izdTiuz6EbpzX0hly9FPIOMjwlYundXBFjq4xK3
+         A+ObqGGcj4jtfrOpn73JujGni4UDlWd/bPU9a24k4oKezdZpW8WZqgZDSOGjzhfnq0a1
+         VIFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791273925; x=1791878725;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=niUOktxfv6lCEuldcUQGp27a7uDOXnZEa5jZNiVgcHc=;
+        b=jqUmdYy85zm4E2zJJw/eQi13mampcrq9pvP9qQb+qjY7cZVK3G73HyvPbuyiamhi53
+         nppTvg5AVJtfQzuPaqVnzugIL6Yx6jwnCaXzKkFoq6rcLKfeTIxYS6XjSnERcrGrEdCc
+         4fp4kJ0cVfOf9eDnBGgevvXnl65aMDB3DOsyz59Y0nuN6gM0VU7LS9lANPrr14+gdKbt
+         3mCOB0JvLZaOf7CXN3TOE7hdDErSCpyZV6ex7icfGvROqUVjCPMtLGLT0RgftgrDj4EY
+         CSG87y9NUDy+fk4lO1SD18WV9EKbbkcn2wRTh/ssll6MFVMXVeUSqEqJ+5SQaBTwtGfk
+         tYrw==
+X-Forwarded-Encrypted: i=1; AKwUvByyNPiyYGVqXCb35XGKiNsK7TaLem/3FAefzkJZyxYz3+iXf3oL+00ceze/hVvQ4i8G9vcVOp2m2NenCxCB@vger.kernel.org
+X-Gm-Message-State: AFuF++kAmsScBggLzn+6H0Fco2XGFw0v2c+fkAWW8oXSJw981AXH84jh
+	FquvbpX/Asv/D6kezJEw86gpZZEuRcfE8T1R5Fj6DdL2aeMYN3TWR8ZMoxlfj3PRcilH8VHzuq1
+	rYB7JI0ZviQawZAQsMTPr2AigUyZN4YnHfgDOq+/asAFwCiCRVXNVwY3rkwvQcRr7rjFe
+X-Gm-Gg: AYBFou1A+Y5TCoYb7v1W5SPqMRePkc7VIBwi20sT8JwUlV9rSXfDyR7lc2pCuXY6SeT
+	eo2IIjx9DmyrQ86k6fWMkrIa83LMP+W93yd2BMelRXuZQwaBHhPhl14P/Dr16bCFTeIbliiM9jX
+	CnjR6/5QgmH8GGZxRARudxkdBd1nstrC1J3c9S9FjboWLne5k6OJsh4G6r+vigOSb4I6Yv4ncaA
+	btcQxmaWv8bM/QweikA6nU50aCyKYWHb9+GrgIQbEpC2qUAP+8et7X3Dui9CFobiY7dNEsP13Gu
+	Ct2P8Z0PHX43f0f03rFcqjJ19FISCSuTz1tNstHs9mLc9u+9L/Vu0OTXC+SQRT7d16hb3T+aHAU
+	Pk8vBfG0RTsI8D2uW/R8tfHXfw39Wc0s6UQeUyKPwhVib2A==
+X-Received: by 2002:a05:620a:1722:b0:93c:7211:beee with SMTP id af79cd13be357-93e51024db5mr1593407085a.28.1791273924856;
+        Tue, 06 Oct 2026 01:05:24 -0700 (PDT)
+X-Received: by 2002:a05:620a:1722:b0:93c:7211:beee with SMTP id af79cd13be357-93e51024db5mr1593404485a.28.1791273924346;
+        Tue, 06 Oct 2026 01:05:24 -0700 (PDT)
+Received: from brgl-qcom.local (90-182-211-1.rcp.o2.cz. [90.182.211.1])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c6cd717ebsm1644791f8f.49.2026.10.06.01.05.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Oct 2026 01:05:23 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Adriel Santos <adriel@adriel.eu>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Sricharan Ramabadhran <quic_srichara@quicinc.com>,
+        Nitheesh Sekar <quic_nsekar@quicinc.com>,
+        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Gilberto Conde <gilbertorconde@gmail.com>,
+        George Moussalem <george.moussalem@outlook.com>,
+        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] pinctrl: qcom: ipq5018: replace gcc_plltest with pwm2 on gpio12
+Date: Tue,  6 Oct 2026 10:05:21 +0200
+Message-ID: <179127391265.4024.2812187587879993938.b4-ty@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261002160958.908424-1-adriel@adriel.eu>
+References: <20261002160958.908424-1-adriel@adriel.eu>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261004165124.4277-1-franzelfranzel@gmail.com>
-Date: Tue, 6 Oct 2026 11:03:17 +0300
-X-Gmail-Original-Message-ID: <CAMRc=Mf_szZhsZEB8pmZkGh5pB6AEims68rc1tXE=XGAcMuEvg@mail.gmail.com>
-X-Gm-Features: AclHuK9nmK19llwqJ_oPdR-YeWv5o1OfhU6oMZraAD3H4lY4H8sCG9gdf0YepLk
-Message-ID: <CAMRc=Mf_szZhsZEB8pmZkGh5pB6AEims68rc1tXE=XGAcMuEvg@mail.gmail.com>
-Subject: Re: [PATCH v2] power: sequencing: qcom-wcn: power off WLAN at probe
-To: Manivannan Sadhasivam <mani@kernel.org>, =?UTF-8?Q?Fran=C3=A7ois_Roux?= <franzelfranzel@gmail.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, 
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
-	linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	regressions@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	stable@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=HtPjiETS c=1 sm=1 tr=0 ts=6ac4abc5 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=zRh97aRZNhiOMYVz81Er1w==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=4QlCE6GJoO_CLA5tWxQA:9 a=QEXdDO2ut3YA:10
+ a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-GUID: QoZiBPTfcAXk9Ms3CjoQ1dudRHmEP9he
+X-Proofpoint-ORIG-GUID: QoZiBPTfcAXk9Ms3CjoQ1dudRHmEP9he
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDAzMiBTYWx0ZWRfXz4gV1H02k4I1
+ Xm2j4p5h6Y+EGFWiYH+FQYM4wgZHlGouC2B81MdU3itc9D2nPqZLQY7GnCUyaqOzy6yHtMGX1SV
+ yUQ/UN5a31NVyZXtRdZVx1vt5A3ajRc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDAzMiBTYWx0ZWRfXzirMQhsAD8Zl
+ zf5rp2tl2fU6x5XjPeah/cK9Q/v2Ozdc/aBVhZ27TIzfAvtnXtx8zggYaKcJYowra8xqQ/+csRu
+ IaCZJSd2pSak2btI1E4U9YpKziM3v8kCW7FJfi+9iZjokee4CyuxhqY7KJCac5jFN8JoIfkIFAd
+ DoJgrCA73LCfx/FTx31t4AnA1WxOj8vKocR69pyfyl18GGyWzJom8uYreQYY8ChYw/ZYKfSVvYt
+ OzZFBfZVxXA73kTW6eAzZdvK0EC6PUT7zPjg8kbF0aooKHfZECOVRu6Dsm7yE/zJW8/SFCT4Pgv
+ nRg8ej56xEnEl3CkiGETVhW8YI4dOFshD6nkYLkfljHHaOhpnU9CAUXqWTYLrXgtTRVYpvmN6Dd
+ TjQv+6CPfkLzx6WZdv63l6gmpn3p6WExMK9+77IELsBMaaKrjtXisjjOnzn3gLDH3jClBjlBDqG
+ QCKP9TW97XtZPHh9syg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-06_02,2026-10-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ spamscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060032
 
-On Sun, 4 Oct 2026 18:51:24 +0200, "Fran=C3=A7ois Roux"
-<franzelfranzel@gmail.com> said:
-> The WLAN enable GPIO is requested with GPIOD_ASIS and then kept at its
-> current level, so that a WLAN module left powered on by the firmware is
-> not switched off. The FIXME explains why: toggling it would take the
-> PCIe link down, and the controller driver could not recover from that.
->
-> That reasoning held while the PCIe link was trained before the
-> sequencer probed. Since commit b921aa3f8dec ("PCI/pwrctrl: Switch to
-> pwrctrl create, power on/off, destroy APIs"), qcom_pcie_host_init()
-> powers the endpoint through pwrctrl before it starts link training, and
-> defers until the pwrctrl driver is bound. That driver cannot bind
-> before this sequencer has probed. Power-on therefore always comes
-> before link training, and keeping the firmware state is now harmful.
->
-> On the Microsoft Surface Pro 11 (X1E80100), the WCN7850 sits on a
-> PCIe port without a PERST# GPIO. While pci-pwrctrl-pwrseq is not yet
-> bound, the host init is deferred about ten times, and each attempt
-> powers the PHY and controller back down. The later power-on only sets
-> a GPIO that is already high, so the chip is never reset and the link
-> never comes up:
->
->   qcom-pcie 1c08000.pcie: Device found, but not active
->
-> The endpoint is not enumerated and ath12k never probes. Bluetooth on
-> the same chip fails too ("QCA Failed to send TLV segment (-110)").
->
-> Request the GPIO as GPIOD_OUT_LOW. The chip is then off when the
-> sequencer probes, and pwrctrl powers it up cleanly right before link
-> training. Drop the FIXME and the code that preserved the firmware
-> state.
->
-> Tested on a Surface Pro 11:
->  - b921aa3f8dec plus a one-line version of this change: endpoint
->    enumerated at 2.4 s, ath12k and Bluetooth working.
->  - next-20260929 plus this patch: "PCIe Gen.3 x2 link up" at 3.4 s,
->    ath12k and Bluetooth working, Wi-Fi connected.
-> Without the change, neither kernel enumerates the endpoint.
->
-> The culprit was found by bisecting v6.17..v7.1, with the DTB and
-> .config held constant.
->
-> Fixes: b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power on/off=
-, destroy APIs")
-> Closes: https://lore.kernel.org/all/CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw=
-5cQt8HiV3sUtxA@mail.gmail.com/
-> Cc: stable@vger.kernel.org
-> Assisted-by: LLM
-> Signed-off-by: Fran=C3=A7ois Roux <franzelfranzel@gmail.com>
-> ---
 
-Mani: this looks good to me, any objections to me queuing it for v7.3?
+On Fri, 02 Oct 2026 13:09:58 -0300, Adriel Santos wrote:
+> The pingroup table has gcc_plltest at function 5 of gpio12 and does not
+> offer pwm2 on that pin, so the pinmux core rejects a request for pwm2 on
+> gpio12 as an invalid group. On the hardware, function 5 of gpio12
+> carries the PWM2 output: the Xiaomi AX3000T v2 drives its blue status
+> LED from PWM2 on gpio12.
+> 
+> The vendor kernel shipped on that router (Linux 4.4, stock firmware
+> 2.0.28) has pwm2 in this slot. Its pingroup table, as read from the
+> firmware image, lists these functions for gpio12:
+> 
+> [...]
 
-Bart
+Applied, thanks!
+
+[1/1] pinctrl: qcom: ipq5018: replace gcc_plltest with pwm2 on gpio12
+      https://git.kernel.org/brgl/c/709ba1c547eaf37da36ded2ecf3ea4e304cdfa9a
+
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
