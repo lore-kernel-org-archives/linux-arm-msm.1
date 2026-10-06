@@ -1,193 +1,171 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from outbound-ip199a.ess.barracuda.com (outbound-ip199a.ess.barracuda.com [209.222.82.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3593B340D90
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 03:36:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791257800; cv=none; b=hSVnOjfqqW6Ll6JqEh1h5NTSMaXmabpIPPb4hSWKPDP/xCkvwb1JbiG6OYJyGYl/VAQyGEGLL0BA9xcy3jllA0Wii3f4ZzjTZokPtiN95AIfkbVotWhoSty3OX1HbR8g594mMPrqcdGd5pEXGjTlIzfFVJF7kAUtjCpeGsY2X38=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791257800; c=relaxed/simple;
-	bh=h0nWXhKY9t2Fj7gupgLtNSERpFTp6IVroebKjR1xLnQ=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B4813264D8;
+	Tue,  6 Oct 2026 04:01:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=209.222.82.65
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791259314; cv=fail; b=tP46l90qn4K131wJhGgH1Tj3evEZfRX3k7j4RviMHPbYTPdZJp0HHhlufc/nbjIZSD14DNt3/OyLgleas6J6/Fg37lnmRUtOYUcLKmQoFWzTuLrkDM2EIS0IQVKxBQhGhd+4FaXsC9OB+/VdsEHHzoS+uq39qYyQAclLuK3BDQ8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791259314; c=relaxed/simple;
+	bh=+WOXmi5BG3G4iGK1CGuLQt2+Xz0g0U9G8KkiIyjMWAk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IKlbBLQwRfw3b+wcJ4aYUj4pcqFNvDoTURJde4GLszEvTJGoeWq2p70BzDIe8QJshHZn3xPRr/JSp9IbFosKN5MW3KNjRMswM8uuZ2VUMMK76pjKO6bwaEJs953vhln6UGdssUgf/ev+Ef3A0JoJWqj8GHKlStgC66W79ERMQaU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=F0c6KxEX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=c1rZQXCU; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:MIME-Version; b=XFPZVgJaCHZTgabqgExeBug5AfdttjXYn3Om1Q+D6KvevWlhbJKQI4KLLP8HDtfgkyXO6z68g8c1et5tZdXotZIOdd5X8REyHu/tGckmdy53atFPu/SeovYG22ERk5Afx07lS/kNCZsJ9JzY1qpdrkSlNVDS13fcekV3/7UIj20=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com; spf=pass smtp.mailfrom=digi.com; dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b=dOjFfZel; arc=fail smtp.client-ip=209.222.82.65
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digi.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="F0c6KxEX";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="c1rZQXCU"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6963AGdC585480
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 03:36:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=o+HNJj3V/gQ
-	7ZI+UzIbijjdSZZ3RGHDWXuoW7x3+Cis=; b=F0c6KxEXQDXXfZmoVO9I//bWdmI
-	NlRWQXG3QyT94sKRprpbbjI5WcZIk1fds4jnmfI7xU5QRHfPLaCwJ6Zu+yq9WZSz
-	xMx0nypq9nbKZFk2KPkpjJhX0FugLzT2YksqGSH/fgw9iH3nVsKHVUsnHIiX8hZF
-	AgrEXqchw08m1MDL7810OcODk2qHZ6W2nN8zhEuGPGk7AYoNYXReQsZCKuYdDhS7
-	eqjXgaB6co1UEQBaqOdaE5Aqn2YIwhBtuMWPtT1mjwtQZ9VwSqg/Z1wyQOFcBZMG
-	Yuf84qSIwRCDIWX+6rWRBYxCjJYgg5sQK7zVPsJ7WxWmgcvsf2PfStmUohA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h49u43hr0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 03:36:38 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3510a481ae9so4405009eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 05 Oct 2026 20:36:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791257798; x=1791862598; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=o+HNJj3V/gQ7ZI+UzIbijjdSZZ3RGHDWXuoW7x3+Cis=;
-        b=c1rZQXCUMI2gvgoxlBokcCOLfVbimQISozSYPJ8VYmDWljb8i1td3p8spfWMjBd4ph
-         osxhsYEuzHqlq0G7k6otSm/V91LBz7VWBx99ZcjQ6eLTnj0mNpqYvxhr2LJv1FSlEDt8
-         WipkAxKCZ70jAfzew2plFAj2rKxjnhYZg8EtwNruhKjDAYnOuOfQFrANmSRFcNab4CB/
-         xzaCl/WVzzkX1ArI/ICuDVsU9/xpB7JMWrRb/0xAUjdLDkXG8JLtMnIdFBrxcLONOp9H
-         Cjuay0Zt2SYvepmnyCaBKw7JyVKmDuSI/4AanXVqFHA6Xp5bJn8Ye1MZXMDMVrZu0Y7v
-         v5rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791257798; x=1791862598;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=o+HNJj3V/gQ7ZI+UzIbijjdSZZ3RGHDWXuoW7x3+Cis=;
-        b=R2ZoLVGL2o0CzPpwT0lCcJYugeTJH6tPIipx2hGB3VhXv3qZyG1mmMLc276hjMcDSK
-         cPSMZInLOd9aZqAKDbm1PtkytJNZea2gaB79zHe/3V3O46P0qyKBY/7NbvA+/+m2JEDf
-         N/j6ztCEXEeGMpGaqg/E8adhYdWMURiIKQTD5foSYpqMEiHvl+3fGTWVamBnFzdtVWnj
-         XY6jieHqkj8JxuODPGbRs/4j1NUdGnINWqWdx6zLmzLaP+uk4WeZxUiSCdQeLaHvsVYJ
-         pEgxkqXtJC2zb/+m9OTtJd5xfLB/MeOrvIX0pv280wBJAXJODRkKOB9PGi4JpyWDhmGX
-         ejIg==
-X-Forwarded-Encrypted: i=1; AKwUvByAgAo6aieV5UPsodV/74CtZ6CWSXMX0hziWbvF0VZCXdX/m58XoEvdkXadVjxjJdCSa8Tuyb+92ZwIW7z9@vger.kernel.org
-X-Gm-Message-State: AFq9FYKQcYhIeEaOmasJza77oXeVO1ddlZOdCttdVjqjP8pVyIu1/yxe
-	vw0s0RboyXCEsgLKaqaRFm+tGryDFDuswNitajCKiR/yK6aTh1JPRsznih4va/Ec0oMDjaETwVb
-	rhEr2JXMrTyz959RlBpPB2LmO9W4wg0Oj2smEUSGKQRQp01EnP0TeYAOBnJ4Ls9oaZafztNqzJK
-	X/jWo=
-X-Gm-Gg: AYBFou1Ek84bq5bqzhiE8AsViy4SKIWphE5QM7QxABLK1UGcIUMYbaifhofiZPFgcc8
-	kYKOZMeYOaCH64DRRWKtUjggydA29srStPcQpRIrM5Ae4kHGG55uC6rtvA5VwWFdsnNrwfX9mqx
-	IfHwr+ZgndhCufb9nTfDXU7zbO2DX1nJS8TwuJARg8ZnNBI/qmz3vG+F1EYimG0sseZO8CQChJb
-	U4u/TOnbHIbb6jDK9UbEQ41qJJ356BwfQJWZM6uhZY4t9Ixj55KRnpfCpiK3kbTKlsVioHv8EXI
-	rS0h+8GPT/MuLqhGTM643RaZKG+OSjfnaiX/AGaKoV4jvP6WuQhaJ1zGASE0g+LLKnQRGTmKrxI
-	kl9aRXBFV2csXOmqlC2X2SlqBfkPXWPhrZGVB5e/1e9u1x36F7tjPF+rk6CQ=
-X-Received: by 2002:a05:7300:1c13:b0:351:672:6803 with SMTP id 5a478bee46e88-3514e2a84abmr2955eec.22.1791257797653;
-        Mon, 05 Oct 2026 20:36:37 -0700 (PDT)
-X-Received: by 2002:a05:7300:1c13:b0:351:672:6803 with SMTP id 5a478bee46e88-3514e2a84abmr2905eec.22.1791257796801;
-        Mon, 05 Oct 2026 20:36:36 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-351469fa189sm3279736eec.6.2026.10.05.20.36.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2026 20:36:36 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH 2/2] remoteproc: qcom: pas: Don't fail attach if the remote has crashed
-Date: Tue,  6 Oct 2026 11:35:50 +0800
-Message-ID: <20261006033550.2726451-3-shengchao.guo@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b="dOjFfZel"
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11022141.outbound.protection.outlook.com [40.107.209.141]) by mx-outbound44-182.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Tue, 06 Oct 2026 04:01:07 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=moaTdwDfKNdNeFIoAhXp/a1CqpfQNqx0xDLNB5EwLLX2h74QMncCshWw+D7Ue/OLi7sdsyJ5WXFsTqM+iY9cp6c2RAGJmoD8E1fEz/hjFQbndKJ/ojBj1KmpuCVEuuTNpS8MmsWum9cKkJXyWSHDHaTYj/un8bGUuDgSYny1xuUopvphIgZ06x+bXSpAmbC/O44oX1s9KXLP38U6suxAKQEF8qP1hi33idCjx0sBaETN3riTBufo6BR7C0iJ5q6tJwNmie8QkBBgbndLr1FcPiJqjafkJ/nzpKRieCsaZYtMP+3Z2b9vaHsh+KoupSa1ubz7yfiB6l1wMh1Hy3T1YQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+WOXmi5BG3G4iGK1CGuLQt2+Xz0g0U9G8KkiIyjMWAk=;
+ b=Wf6n66g8Xwux4DdOH03mKuIwYhzd79vhYni+FmqpsaGiEDbxFogqZs2Qo7peAu9VL1PbfFUyAdiwobmrWvnsuhrGuoeBIJmjNnIECK2CXR+r+Iiw3OLE/y1lD3A0QaMasQwppcyTyqIdVAS/3J0f0e1sy2G9wYMMQCULHzuSgN9TeiQsZzJJElsmrKm8SqYpZ2SziZlB+fU5vW0fz07q5KPNdEGbl3K06x+o8hqRUD3mElZ/tWg7MaEPe0gnKLaeu6GQGrvtuFz+Tp6f+XA2c3Zmb48FkE7gjQEetjIrT5ctxuWXZt1O/7wQbH3DbVpRoU+E9q/VoXthXldfY0oVxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=opengear.com;
+ dkim=pass header.d=opengear.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+WOXmi5BG3G4iGK1CGuLQt2+Xz0g0U9G8KkiIyjMWAk=;
+ b=dOjFfZelZcPSPIXouT5LchZgFoDSngMea5kRwneHAuTOD/xDbzHlsewYeNjqtpl4cbSJnREZC8LuUYcpdetvvEqnFhyXKgdX7bMtKwZeYrq9SoXMKCOPo0kMEcJhxIMqxF+8GpWdtsNbT3oz6hWRPLE8g0SzvEQknUYq557ITlmvIJrnNv4T8sx5yFxjaK8idct3HjnNsmPtcorxteUciza68xetGomqAnBGL3Kj3tDpCTIgNFc/gMty5eHv4HCqzM6j2IV25aQf0TjzLnPfPLhpPNRSrOpsSlh29kGOqUa+IA8WZIqXvMMX1XPQrV82eZnNi0ACOYe0gfqTNWbzlw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=opengear.com;
+Received: from MWHPR1001MB2095.namprd10.prod.outlook.com
+ (2603:10b6:301:32::34) by SJ5PPF1849371D1.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::78e) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.14; Tue, 6 Oct
+ 2026 03:59:02 +0000
+Received: from MWHPR1001MB2095.namprd10.prod.outlook.com
+ ([fe80::3933:62ac:2729:f017]) by MWHPR1001MB2095.namprd10.prod.outlook.com
+ ([fe80::3933:62ac:2729:f017%7]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
+ 03:59:02 +0000
+From: Peter Hunt <peter.hunt@opengear.com>
+To: netdev-bot+sashiko@kernel.org
+Cc: loic.poulain@oss.qualcomm.com,
+	ryazanov.s.a@gmail.com,
+	johannes@sipsolutions.net,
+	mani@kernel.org,
+	andrew+netdev@lunn.ch,
+	davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	netdev@vger.kernel.org,
+	mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v6 2/2] net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
+Date: Mon,  5 Oct 2026 21:58:59 -0600
+Message-ID: <20261006035859.3207852-1-peter.hunt@opengear.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261006033550.2726451-1-shengchao.guo@oss.qualcomm.com>
-References: <20261006033550.2726451-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <179123419887.434549.1077103528647935423@kernel.org>
+References: <20261001204614.3481089-3-peter.hunt@opengear.com> <179123419887.434549.1077103528647935423@kernel.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BYAPR21CA0006.namprd21.prod.outlook.com
+ (2603:10b6:a03:114::16) To MWHPR1001MB2095.namprd10.prod.outlook.com
+ (2603:10b6:301:32::34)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: xxJt7AQFQjz5Xhat_s9vBD43mRsKCXWi
-X-Proofpoint-GUID: xxJt7AQFQjz5Xhat_s9vBD43mRsKCXWi
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDAxNCBTYWx0ZWRfX6ZRXNKeSsCDa
- XwhGVTLtHtcBe8G9WPUhX18u6+9FvX8AH7fZKe6GrszIQDXTPI80SNrGmFOXNJcfj0jK3Qbdg/r
- xmsmdejk8xjGdZbDLoiJmD7YwkkV0Xk=
-X-Authority-Analysis: v=2.4 cv=LuEHWXdc c=1 sm=1 tr=0 ts=6ac46cc6 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=UG7d_Sik5HcDt_3cTb0A:9 a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDAxNCBTYWx0ZWRfX5XwBqQS8leUR
- +fSJpD5Y+UoPnJyphomHJ8RnWxhq9PHTUZEyLSAj0o5syz/zi+IOBgKPGfjGFMuXACP7bQ3lwL0
- +QBcPMubDQGjEdy4Xp/EkNt/hSGw/Rf17X5KngMpuh3rMlvH2w+N/0wr0HYuioTwZqpoisj+4JS
- WotegdLCuZn9DWUwHT5s0qZe240gy9EqBaUqcPp4CinG5l3apGQkwpTkd64G1C4dcgA5AIDa/1B
- qarkueE3HVpHE7zn2HpKxM4ToWzfNWZRYLJ6VjBk1X38SE4vvd7jibas1diSpAYdbcXwTeV5ID4
- 5CIafhSE95z2O+GlNub7y9CPY71KIiCnhVADrbq+JOZqGUQlZ0goWoQH1YhydQVZ3lNYdFnN57r
- njZkuRoatXVifawmKoWwAI310wEKapsNxddzSPk0Sh/nxm99nvvNC0rTgGRc66DdadmPJIfKeFu
- tJFkMOnzwv+1bqKkvlw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-06_01,2026-10-05_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 malwarescore=0 clxscore=1015 spamscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060014
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWHPR1001MB2095:EE_|SJ5PPF1849371D1:EE_
+X-MS-Office365-Filtering-Correlation-Id: b6975540-e844-4137-9227-08df235e2892
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|7416014|18002099003|22082099003|4143699003|11063799006|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	kgYHQOUZNsvWgsMfbpFBYD2z+Fm4zscSG+lliQ5Hym91QFdYYWdYFJKZcBa9U0NipooCxD1H5439/w9nG0IIsRW7rUNM118gkUDoKoYsEDqngZGSkPxaE2MY8fQAC+EeSk8BWvhX7xUfUp/kLP8KPj/W0WyOZpTw8/9JLHCUSXGjE3lPhSOfhkwny6bVF4RnPMW/b5ir9f0V0CtyHm2ken5qkv7izIpfprcx3h46PHbCTNEMrdJng6bFoGzXHATGbHmMtLGnNAaNMRDd9onVPt6CASERYW2lwGcpdIqIqhMKNDDYtEmFe4wruzlRCbx0fyBbfwDoFep7jdNlCJ+jAovMM1I8x+2cAXFo5BeW+uYnyCYSRfrRaN403sfcrKkJDtIOd6PvOvIPmuWurkvv49m/5ylX0D4Z5HGhALY6WZPyErlM4C4dyDwoU6LSPsLDOhPvDtWrztS0qfpEqTEBFk7fPP2Dg8X/zA8W7xSQg6Q8mAMcUCbOxuV+YrAj9HwbE9BoeKYYhXUiTzzhP9adoOFOoGg73Rzc4O6i1BdWMdxalN465eVH0YQ/rTWdfI/KHyeqQVpNIOuWzOJbRgg3jJwLdADIB6ovDkU7tJCDpTjPxMAbKbiEtzX4LyqSuEzkKtWW/GvnpHDYWTAfK6PazE4DOGiF6NItTVrOEESPDHM=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR1001MB2095.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006)(10067099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?iyLnboGPImrCUB9rSaPoy+lZ+UTcKpP0aS76acRgIJYSO/u4r+M4k63JP+ud?=
+ =?us-ascii?Q?HBFqhhHXqU6qr+JPYlCb7MhkeLmrHieJyOVut23KegZiWwVwiVp4Co1qf1xW?=
+ =?us-ascii?Q?9oWe0XplSuWK5iVuuHckpwZkeKU6HS3No/+Jv7mTF0S5zgIYNTD7mcY4uVlc?=
+ =?us-ascii?Q?hqXezOk2DcZQzuObH3I57iwARyzx7WWwPLryAjZ0Gou3s2g41drRPrDLfewY?=
+ =?us-ascii?Q?G8EsgibYBZ/NSgcqsAV+AI7oYfS74WzvVZfkWl0HJHSVM2AEKKt3QpqLpElK?=
+ =?us-ascii?Q?fewGGC54lNB0DqlXqEHN3DomHtGObXVhtmYc3gqRHJQa0IzWgMZzwuOroT1f?=
+ =?us-ascii?Q?4gPQX0nyod3o7hFRuiCK0Oh36WvYGFiziXakQiBYdVIdF4V0fzZmpTVTn1RE?=
+ =?us-ascii?Q?j1tLjEFz1xEl1tyPOUyd1koUuDPHP1pes/B9aOLmgInyMnXpq39VlL46jl04?=
+ =?us-ascii?Q?wqwzz58u7tLoD6TyGax0SZ+q8BuRU0QJc4Jix64yUHBT+7ImiU1VmZBqHq1q?=
+ =?us-ascii?Q?HcwgmjI2d5duFhTIUCWGcZpPg51RgRRjm9+B/AipgZT2NeDK0TTUBhQ/FDRc?=
+ =?us-ascii?Q?1+G54QwyyABJiWHlJCLCv0h3QGUhxOXulEcDxYvQ5+kb4ckz0mU0vVQi96Lh?=
+ =?us-ascii?Q?G5hIuUh71158hd3MFyAFVzaP9e41HFMvt3G495GJQ7w1QyqOKhVQVEbpAF6f?=
+ =?us-ascii?Q?6LQ0weqhYSa5KLnz4D3XHNFrgNQfrKg8Nm8EbCBieq2LyKF1+d2R9KrB5sut?=
+ =?us-ascii?Q?QIJLk9T7+IXSbkJUu0xnY4zJ53+/arnBUFLjJ40zIe83xeWoiL3+eeDm/Ims?=
+ =?us-ascii?Q?6NAatU+RZ41+DbE5elqwdy6RX1uE2KnU26vTLAXkqeqHXVUi3615hewZa2gT?=
+ =?us-ascii?Q?2nVY/mb4olGY68xob5nU33TBUOAQlatHltiSzlXjHQBx2uMh1y6ebNZYiqye?=
+ =?us-ascii?Q?tjZAwtd85facD9aQrrMw146qmhbS6As1my/jChVRWgJIttqxbVgCPtjjvccR?=
+ =?us-ascii?Q?YPdeqdWREluqdi81dgbijRLESLJ3eyytFdls0tzouA8hWVy6eMarGmtGUKmU?=
+ =?us-ascii?Q?OXkq0st7hxbljgK2CwfXNpB61LytOwDxbXNh/GyefaUlvncm2x3+sLLZkZPp?=
+ =?us-ascii?Q?S7idFNtOEKsseHvNfYgbjShk+1fIuPpkqbm/WNsgltZvm/I69XWSshG6EAu7?=
+ =?us-ascii?Q?F/tkKuY/w1p+4stiuBRpHPxPrQ8f6Llj2caI+qv6CuPK6oB+yUANBY+KzD+e?=
+ =?us-ascii?Q?Sfr8TZh0ibVepkm2F8hG2ejLK85YqYJgxZXbbuhtBPhCCktMJpeXm7NTGU6V?=
+ =?us-ascii?Q?kbWx06A5aLdIo8juYEBWfzdl8tRideqwide0cPqqYDBVIQFDGo+NeOutulOt?=
+ =?us-ascii?Q?BtV/hu2aZcVJ63L4mOTeUwxfFWurZOJfSOH4N0C9dkhNew0PzglhoLKzA6MV?=
+ =?us-ascii?Q?plaRBmDWkhf3+Hb4p7vYS+5d16lI6azWcZJtYA67dt/2cl4VNPVV5rWAM/uH?=
+ =?us-ascii?Q?ERHH1hH9XTM78ewyCmgH/Lc/S1iSNgFc/adYB6r7QkTzEtPnF9JmDIe0d8WU?=
+ =?us-ascii?Q?3PdkiX/nsJ8284AVfJ35XEzB1PIaF6W5Cvhw3nMfmyH9tT2f6VT48NynCujc?=
+ =?us-ascii?Q?OMfwAbpZ+q4Wb9Dw+AH5hK+ZKZlv6d0hT7xkChMX/w5Ky1+EE9W6hFUfD3LM?=
+ =?us-ascii?Q?80EafQf0dzf9XaCBs9jndFf7I2Vlm3tGFXa/r2o/Qo4Ket1A?=
+X-Exchange-RoutingPolicyChecked:
+	VeapbbmXaw+BmMoIkYLIZySrql+TN0PYcreQQh4XKk4PnXIM2q0IDF6A0QfWR+dyNmDwUEm+Y0rE6bmU49WUnEwnkhvlZDuDT9SasVU3nrffWroiy1xZBv9HjFhqXCUk0gFBvdqs7oLJay5MQvxw4jcZ0WksYD1uEvkCDrHQKvn90C06B3k97u2MPe0TbzJ9+1p9TsEk2YrYGRB3qA7TvcQpxKVxnK2KKKUa6l8jjAB5YvdxqHR1sZcIctCRhzqrooVTXc2kMrhmyZieV2OcPerTREEplpdUr5nd72x/Y1RDi5wWwFl40OkMOQBhuMJnzMqqrW7mKCMTO0RiMQ+ilA==
+X-OriginatorOrg: opengear.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b6975540-e844-4137-9227-08df235e2892
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2095.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 03:59:02.5993
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 08KZtfqlf9PK7vJkFGtNL8b14frJyWc0/wMqj2/jJVkv6LnnPm9f/5QAe25io4bH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF1849371D1
+X-BESS-ID: 1791259267-111446-28307-34412-1
+X-BESS-VER: 2019.1_20260924.1519
+X-BESS-Apparent-Source-IP: 40.107.209.141
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoaG5gZAVgZQ0Dwx0TTNyDwxyS
+	IlzdLAwNw40TLFMsnUJNksKTU12TxFqTYWADDSWC5BAAAA
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.276636 [from 
+	cloudscan15-97.us-east-2a.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status:1
 
-When qcom_pas_attach() finds the fatal SMP2P bit already set, it reports
-a crash and then fails the attach. The core unwinds the attach while the
-crash work is queued: rproc_boot() drops the power refcount back to 0,
-and __rproc_attach()/rproc_attach() unprepare the subdevices, clean up
-the resource table and disable the IOMMU. Once rproc_boot() releases
-rproc->lock, the crash handler finds the rproc still RPROC_DETACHED,
-marks it RPROC_CRASHED and runs rproc_boot_recovery() on top of that
-torn-down state:
+Thanks for the review. I'll send a v7 addressing these.
 
- - the subdevices are unprepared a second time by rproc_stop(), so SSR
-   and sysmon notifiers see a duplicate shutdown;
- - qcom_pas_stop() and the subsequent rproc_start() operate on resources
-   that rproc_attach() already released, e.g. iommu_unmap() on a
-   disabled domain for rproc->has_iommu;
- - recovery leaves the rproc RPROC_RUNNING with power == 0. A later
-   "stop" via sysfs takes power to -1 and returns success without
-   stopping anything, so the remote stays running. A following "start"
-   then boots the firmware again on the running remote and fails to
-   re-add the still registered subdevices:
+[High] No in-tree controller declares IP_CTRL: the IP_CTRL channel entry
+for the Sierra EM919x/EM929x is commit 83c29a55b89e ("bus: mhi: host:
+pci_generic: Add IP_CTRL channel for Sierra EM919x/EM929x"), applied to
+mhi-next from v5 of this series, so it isn't in net-next yet. The cover
+letter mentions it, but the commit message didn't, so v7 notes the
+dependency in patch 2.
 
-  sysfs: cannot create duplicate filename '.../qcom_common.pd-mapper.0'
-  remoteproc remoteproc0: failed to prepare subdevices for adsp: -17
-  remoteproc remoteproc0: Boot failed: -17
+[Medium] Ignored mhi_queue_buf() failure in mhi_wwan_dtr_dl_xfer_cb():
+agreed. v7 retries a failed requeue from a delayed work item on -ENOMEM
+and logs other failures. -EIO and -ENODEV mean the channel is going away,
+and the next probe queues a fresh buffer.
 
-A crash found at attach time is no different from one reported by the
-fatal interrupt right after attaching. Treat it the same way as
-q6v5_fatal_interrupt() does: clear q6v5.running, report the crash and
-let the attach succeed. The core completes the attach with balanced
-bookkeeping, and the crash handler then recovers the subsystem through
-the regular RPROC_ATTACHED -> RPROC_CRASHED path.  With running cleared,
-qcom_q6v5_request_stop() does not wait for a stop ack the dead remote
-cannot send, and handover_issued already prevents a spurious handover
-on stop.
+[Medium] DTR dropped on last close regardless of HUPCL (patch 1/2):
+agreed. v7 only drops DTR/RTS on last close if HUPCL is set, and defaults
+HUPCL on for AT ports, since port->at_data.termios is otherwise zeroed.
+Close behaviour is unchanged by default, and userspace can clear HUPCL
+with TCSETS to keep DTR asserted, as on a TTY.
 
-Assisted-by: LLM
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+[Low] wwan_remove_port() passing 0 (patch 1/2): agreed, v7 passes the
+masked mdmbits through a helper shared with the close path.
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 8f3d45c604c9..0ecd7688a54d 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -562,10 +562,14 @@ static int qcom_pas_attach(struct rproc *rproc)
- 		goto disable_running;
- 
- 	if (crash_state) {
-+		/*
-+		 * Complete the attach and let the crash handler recover the
-+		 * subsystem from the attached state, as for a crash reported
-+		 * by the fatal interrupt.
-+		 */
- 		dev_err(pas->dev, "Subsystem has crashed before driver probe\n");
-+		pas->q6v5.running = false;
- 		rproc_report_crash(rproc, RPROC_FATAL_ERROR);
--		ret = -EINVAL;
--		goto disable_running;
- 	}
- 
- 	return 0;
--- 
-2.43.0
-
+pw-bot: cr
