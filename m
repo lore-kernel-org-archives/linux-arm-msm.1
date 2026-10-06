@@ -1,68 +1,69 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6BAA3A0E8B
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:40:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E9EB3A75B1
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:40:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791326449; cv=none; b=gqWGzsXqOxDpk3QrnecPWbXEITHu2puyGzuupPkYWanmTXlmyBTX/yXzmWY1SyE7TZ2T+BRW/8t/vgQAuOyIpqp/sH2M/F2rFlpJ+94ASrUg4wR4cFEC+cmHSbk3fIj2m0HoYfs2h/Zyca2OrybVUDbZ6SrK0JMQiq98GxEMvAI=
+	t=1791326456; cv=none; b=rdW7aHM9wex09/zqvEQj+njjq5TFrgZBNbkyPQdajd2ml6DIrFmnKgF5xfJnXzxS8sIS8g8ITYRunnKJIyocTYnKVwM0QpdeShw25PsstBE4FcT8oJ8hrJijw6m1WXTCJ8ZvcSZI0kOBdILL24lRPEy93mWneWxSQiXKOWAbXdE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791326449; c=relaxed/simple;
-	bh=jCHLyjvh3+T9dpBgJBN/rrtKwH/018pWKvdxYxje5wM=;
+	s=arc-20240116; t=1791326456; c=relaxed/simple;
+	bh=WGgtkWXk/4OTyIrCdnNYpcbvJuJSEwslMqxmHE6lnuM=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=t4G8/5tUvP85bmIU4+Hp8s0jC7FBjtp+72cnSWXhUzGeJNig8hMTZ5cULKXOM+irIQ+TUrmnT1dGyTn5Om28q4JgEnv9cENb7g90IbvRN8PigOX41rqAYiTm5QYBQhxvWsuJXKj/xPanVqh1u/g6diJDe5dNCZEdsIsiuntrL14=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hkdrMI4f reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=bUXtnhw6at/Zy24Wev+B7Xol8TG2A08KL7yGT8R2Njj6miM+H+A0+TyEmPIOkX3jAE5VNLSvu6gW1fgWL1tMKxQ5gop7Td9q7mrHe2OXIYfe3GReENjC/yBAKc7KqVB1eJ7E1VTg7Z07ZLUcq81vIH6TKrXV3kz1mfNRjib0FTo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OxWAOxWw reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hkdrMI4f"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696Lf2YQ2390007
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:40:31 GMT
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OxWAOxWw"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696LeU5r1676095
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:40:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=8sfe/XIDFZl
-	aQRDiVJ5wqvQe6ukasnDP7luJc5DwaJ8=; b=hkdrMI4fIse/pLu8hkEU/e+2GeI
-	GXUcjlf6YftvPGRQYo3ONQsGTUa6gVSKoQx9HrFz8vBYwIiC99uAJX8L1Nh30LeM
-	+sZEamthu5+9dZrMPMy1j2J3g7VMI2W+SQXeG26w4lA3cb8l58gn2ELBP05COSJJ
-	1b+k0ukt9adP7orf+kLKCpE3gG4nZQnjePZ0Ff2T0QrJ/y8gZkAywL1MzaJLhdQO
-	GXPanylJVmfZH59ee8pBfQyh7OLEAlgvdyQP9jBCwuP5hSNcfxZjrRhhXh4gWcGq
-	LujAIBG4Htxe8BXud0EZWukaQNiYYhtj7FH5asvE5h85mUSyF/Jvw74UxXg==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=zQtfPnn1PTG
+	pnbnSjBfizU0bftFTFsUaBnQIlBDG8yE=; b=OxWAOxWwxq20Ab4jEJG/Lfe8T+f
+	J/Ppi0tZq5Fs6vXuCbQx2wprC1u6j41LyOQQtW60dk8RnRJ0uw9daluJxzPiXlZ6
+	j2Rpr8+FuVo2/a/VLcpHGetTEbpD9XIfVCzC3+ar+Qv3HWEXKlCF9S9n+NgIKvIW
+	ZjAyTrXKIU9M21j9CyXvaLqN1jSACLpaI6yGGyiSXX0+Sm8oTMKES9aTQoGPGHKz
+	IWgws/quIyacxldYPv0a3dvGobS6zniWkBGH1DiWqTjP6IMQRZDvqlRmyrJs8BI4
+	OMyshi58/eTJ9dFRybWAhtPHlo8J4gpolEjhH720xkNoSATozp5BZSfPqSw==
 Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xfbk0rj-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xdub0y7-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:40:30 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93cb6391e89so600167485a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:40:30 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:40:35 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93c5ab5c136so550418585a.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:40:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791326430; x=1791931230;
+        d=1e100.net; s=20260707; t=1791326435; x=1791931235;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8sfe/XIDFZlaQRDiVJ5wqvQe6ukasnDP7luJc5DwaJ8=;
-        b=A6hY6wu29LKktCTPSt0R1WArks7kbZi1uFwOE04FCmq+/lBtDuse1l9TOwyQ3kIs1D
-         TU9ExadmpqU7RGe6XVUu8DCkGq1KeVisLtrbs+Hka5l2gKAwnWfXixQdgk3ain8H288d
-         XCjfBamlWKcv6ZPrGBHxfZSbcLrbIFJ8CbFR5jxzgBIFOam46Q2uOW56/xNCH6iqNqX7
-         dML9ezdYij9dWMBrKdbfQLc3mi8J9Y+ivxzuEMtkcuMZb374eyVYMMcvI9ncSjW2HI6d
-         XYN7zpTShO0RYpO9DRxricwyspcW8BRtVtLPDNYwS+fzANSZ3bbgJQkKyNNg1ObmgTJA
-         ky+Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxM2ZQNB4iBgy9OYbnREmndG3Bn2xz+BMCUq859uP8rrXbhctKHt1oOAZxNR5oG4BxW8FSvr4s6JjwRzd7H@vger.kernel.org
-X-Gm-Message-State: AFuF++lYILYEq2gCkbpKL9n0RQX6Muey7jmhS1hlmImirfikOzsoybB2
-	ZPTWFBjMbmmP/MZ/oW6r6LhTGSKp8NDGqzGM9mtIc+a/u2Nw2Qfxt/MSwfKijMx5aozglc9wzpZ
-	2Dsf9Muc2qYSqsFFx944oCwg+UT/jzh/y9Os1FcIGwdDbruaYogo2ln6oJyHbXxIABJJE
-X-Gm-Gg: AYBFou28A3pdn4g89qttGFWDj8mGpYZ9irqya7g709HXy7nnHHNpGr2Yrqmi+h8g6oI
-	PbBJ9FS+FmZFvzm5EGsarXiC6r6zjJOQwNqA/58ZCTDWIq9plmtV0FYc35NYOIMOYDpuicQ5ZE0
-	D1RUxnEnSCAutiPyqHeBe1c7WU75D9nR1qp/rElZVvSdNp2qZI/xjk0cIDfBQcodFs7ISA384NU
-	Rt6PJZk1np+VBeMIvAIKuD28inqADroE1pr+Xc9ZzzY/0iYdW6gtUfZ0DDTZbxZlpnv37HfAy1e
-	AuDIkfWXmEuM3J0SiEtbihs9AejZ2Cc23+mGbMYKOsIckuticWMTyAyT+Qg=
-X-Received: by 2002:a05:620a:4110:b0:93c:7a5c:77d8 with SMTP id af79cd13be357-93e9b2e965bmr88086085a.4.1791326429739;
-        Tue, 06 Oct 2026 15:40:29 -0700 (PDT)
-X-Received: by 2002:a05:620a:4110:b0:93c:7a5c:77d8 with SMTP id af79cd13be357-93e9b2e965bmr88079985a.4.1791326429128;
-        Tue, 06 Oct 2026 15:40:29 -0700 (PDT)
+        bh=zQtfPnn1PTGpnbnSjBfizU0bftFTFsUaBnQIlBDG8yE=;
+        b=auC79x5K2vs0Z+fDxBOO+3gXVfYzIOkPr3GWpmJrnl0Gyr1h5Ttp77RfAbfbFnIc9w
+         qF/bIMnTokG4qvVLLFo2kyS4QLQ9EGul52+Wqv724fc4JPKYOWsC08nKokfSPq3DWfsv
+         vqwM1vMyuEboh3RaKao0Tgy7u4ggRM0Sk5iQRmtUl8hKvACSmElU3I3qyl7/EjjXKOQv
+         7jCVbxV0W4mCCtmcdONiZIxAWRmdM3XTV1RAZD6y9MOdg84rC77PacrH2aPYZKlYY2qx
+         MBuivBjGVxrVhbxZ9q3JleH4q/HJ5pDTq4V2RsUc6ywOICk2B6HIpxT0iuz528lCMuo7
+         PP4Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwsXCqGdBGTYFmeazLMsQh7inreMW2pda3Nw3yVfNpGKMGjNlHGXEGeA//hiwoPD1xULSpfIH6K9dM/iUVc@vger.kernel.org
+X-Gm-Message-State: AFuF++kj+Pl8vaeCnLMIhioOU+IhwvmD7wJi9UMPDDaGfFKVixXo5d85
+	oBFwmyFZ40Ep+NQg+yCNzGDk0D/NA5on8LuhnlOyVxM8PHxhIIsgvLOjEUjYhP8tjghkQ/crqhM
+	/QDPPwvXd20IP3h3YrV1MGhQ4PI4JrTXqxpSG3It4YggNwMCBw301hTSozJsfyZL63erFhqHeDx
+	c19Sw=
+X-Gm-Gg: AYBFou2UNWwEQqmD5iShBmt95bCwG9Cr3M3D4zZD7W1er/nC8zDx8baQpJFhTevwUi+
+	z1IYnXgaN8mSxP02zhUx2zBmPg9OhpYDyWYMZBjgapMnCunF2fS9uqJjEPPuElh0mfR+aAJuPfm
+	50BxZ5ia+4q4oNB1Mj+pYau4J30wvzFyqllhdApQ9An9H5ToHdKZ9I8Tslu5WIb672TWxmVtjZE
+	IuBAoDY5jqgI1Cr9tltu4qcnWCVDY4lsZDd7CNbvvotzfZwAeO5WaGYga5rljkfGNma39ne+20q
+	q0Ak/spCoeW56Bre/YaqrKR93dzfM/mC+gSh6T7rbnuf0XkH+jtnuv3o8Ic=
+X-Received: by 2002:a05:620a:3956:b0:93e:920c:bfcd with SMTP id af79cd13be357-93e9b8071afmr76143485a.57.1791326435177;
+        Tue, 06 Oct 2026 15:40:35 -0700 (PDT)
+X-Received: by 2002:a05:620a:3956:b0:93e:920c:bfcd with SMTP id af79cd13be357-93e9b8071afmr76136285a.57.1791326434504;
+        Tue, 06 Oct 2026 15:40:34 -0700 (PDT)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.40.27
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.40.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 15:40:28 -0700 (PDT)
+        Tue, 06 Oct 2026 15:40:31 -0700 (PDT)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -80,9 +81,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         hariram.purushothaman@oss.qualcomm.com, pshrotri@qti.qualcomm.com,
         Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
         johannes.goede@oss.qualcomm.com, konradybcio@kernel.org
-Subject: [PATCH 07/45] media: qcom: camss: sm8250: add IFE BUS v20x
-Date: Wed,  7 Oct 2026 01:39:15 +0300
-Message-Id: <20261006223953.3382273-8-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH 08/45] media: qcom: camss: sm8250: add IFE CamIF v10x
+Date: Wed,  7 Oct 2026 01:39:16 +0300
+Message-Id: <20261006223953.3382273-9-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -93,362 +94,171 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=D8TSufRj c=1 sm=1 tr=0 ts=6ac578de cx=c_pps
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfXzzD1YRZrGisR
+ bH7g+pqft9EZEdFqIMazWAPYfuzyCh652GhA4oVRIBTV999P+wF5LptIR/xCMEC0b240t0d8HZE
+ 5Gfib3hTisjGU+Taq+3MJJ5IAzHnvR0=
+X-Authority-Analysis: v=2.4 cv=NshE4MdJ c=1 sm=1 tr=0 ts=6ac578e3 cx=c_pps
  a=qKBjSQ1v91RyAK45QCPf5w==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8 a=f5t0ODRzorHQIUvYkhMA:9
- a=8DUjIpf0rZZqWCZ8:21 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: cdyQUS-vPMFstDHkIH3hHw1Y67U2uroR
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX8Lxzz8rSEfoh
- FriVFNpsS0UkSW8KDef/3FqHfsB9S8xoIqtdyrzHzy0d7t1OqGy5iizIGbjXIRe6m9iGh3+G33a
- jb4wG6Wj6VwfvqJTaO1sll77YxYDzbo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfXztdJiIXQtX63
- hdhPVunpzqNCrcqJ3pbLgzhVSLnjohJ40Q2C6EBSd9akqAAdXEL4abSEv+LEwQQ7EVQoZ+KcMr5
- IFn3BVWtJvpphykGsTwzzVvetndz8K2h8/huqZMnr+n7ZwRe70sr5462lCjJxX1xbztYdsVCxlE
- oC16yOF4JuGadvX8sD6B5LYWS3AAZMKhvxRRgWGmR9KYufQBmUOYW0j6pq3LEkOFjsBmuRRnra3
- iBcz6ojkwWDAW2EuANAnJ8WvOn0vNYL18HRVrWUqzsRt9cOXJq1Ol+5F0zI5Dxeuv1NyZH63nxk
- v1qc13DxUczCVtmK6NFFR3I2Hlh0czgU5vdAF450kMOX9jFhdCL5K7SmUlmWiEXHN/FE2QtOC1v
- eXbT7DzFFm6Vmkdg17rcRudGQc19wMxDMC530i+JCITHj9q9tjXmetqt3O7d1t7o5SST2vgSYgU
- a6vt4XUbgTpn3+c9Ifg==
-X-Proofpoint-ORIG-GUID: cdyQUS-vPMFstDHkIH3hHw1Y67U2uroR
+ a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=WmRFchFSvUI5OYwuZKUA:9
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-GUID: _xmXBha-ZcNZTZ08tW3rb3ZAhjbG2sNw
+X-Proofpoint-ORIG-GUID: _xmXBha-ZcNZTZ08tW3rb3ZAhjbG2sNw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX/jbVFsbEv8JK
+ zMi4FCM/f+g8nVNiddCAWUpBrdk4N2WF5/rsUyB42KJT4FihI2EfViB9XtUFbu2CwhehrfZRsMz
+ u6iors6BphLBzHLmf5nUGUy64HvxsBNTUG/bwkCLVk/zYfnPAnLhwUTvwcoNVWTrF7jkpcRFkQM
+ Bsa5HdqZgHMUV8Krjej0OEG01qBncCx01O388Borr5HY7bkWRkOethdIqy2fCM33kxX3S8adSQ9
+ 8NhFpVp+izFQQQk6Ot5hUDNYOywpPaU5u4TJ6OIsvDxwNxzO07O/RpXFoDOSiuqh4CL8YJJNTS9
+ olEqVmDZCP/rXbdSRss/t5mWMncja+OkkVWhCrDA/GS0mZ4XFn1Ybwuay1vnVcdsx0shfXxnGzx
+ rz78ySftrJel3OeSIoDY3UYsBVfwy2bvlm+qHXKWObeZPZ8EBGSMmtApb+3BVyKtWMciU9Qc5fa
+ 3+LTFTIb7xpelh3TG3A==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-06_05,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 adultscore=0 suspectscore=0 priorityscore=1501
- bulkscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0 malwarescore=0
+ lowpriorityscore=0 suspectscore=0 malwarescore=0 phishscore=0 impostorscore=0
+ spamscore=0 clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060090
 
 From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 
-Add the IFE BUS write engine used by the SM8250 full and lite pixel
-paths.
+Add the IFE camera input interface used by the SM8250 pixel path.
 
 Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/Makefile    |   1 +
- .../platform/qcom/camss/camss-ife-bus-v20x.c  | 287 ++++++++++++++++++
- drivers/media/platform/qcom/camss/camss-ife.h |   2 +
- 3 files changed, 290 insertions(+)
- create mode 100644 drivers/media/platform/qcom/camss/camss-ife-bus-v20x.c
+ drivers/media/platform/qcom/camss/Makefile    |  1 +
+ .../qcom/camss/camss-ife-camif-v10x.c         | 59 +++++++++++++++++++
+ .../qcom/camss/camss-ife-camif-v10x.h         | 42 +++++++++++++
+ 3 files changed, 102 insertions(+)
+ create mode 100644 drivers/media/platform/qcom/camss/camss-ife-camif-v10x.c
+ create mode 100644 drivers/media/platform/qcom/camss/camss-ife-camif-v10x.h
 
 diff --git a/drivers/media/platform/qcom/camss/Makefile b/drivers/media/platform/qcom/camss/Makefile
-index b79c40626c40..e30fe07b16f4 100644
+index e30fe07b16f4..2da998444554 100644
 --- a/drivers/media/platform/qcom/camss/Makefile
 +++ b/drivers/media/platform/qcom/camss/Makefile
-@@ -14,6 +14,7 @@ qcom-camss-objs += \
- 		camss-csiphy-2ph-1-0.o \
+@@ -15,6 +15,7 @@ qcom-camss-objs += \
  		camss-csiphy-3ph-1-0.o \
  		camss-format.o \
-+		camss-ife-bus-v20x.o \
+ 		camss-ife-bus-v20x.o \
++		camss-ife-camif-v10x.o \
  		camss-ispif.o \
  		camss-tpg.o \
  		camss-tpg-gen1.o \
-diff --git a/drivers/media/platform/qcom/camss/camss-ife-bus-v20x.c b/drivers/media/platform/qcom/camss/camss-ife-bus-v20x.c
+diff --git a/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.c b/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.c
 new file mode 100644
-index 000000000000..3e27494d91da
+index 000000000000..c89caf38fb8c
 --- /dev/null
-+++ b/drivers/media/platform/qcom/camss/camss-ife-bus-v20x.c
-@@ -0,0 +1,287 @@
++++ b/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.c
+@@ -0,0 +1,59 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/* Copyright (c) 2023, The Linux Foundation. All rights reserved.
 + * Copyright (c) 2023 Qualcomm Technologies, Inc.
 + */
 +
-+#include <linux/bitfield.h>
-+#include <linux/device.h>
-+
 +#include "camss.h"
 +#include "camss-ife.h"
++#include "camss-ife-camif-v10x.h"
 +
-+/* Block base offsets */
-+#define BUSWR_V20X_OFFS		0xaa00
-+#define BUSWR_V20X_LITE_OFFS	0x1a00
-+
-+/* Per-client register offset */
-+#define BUSWR_V20X_CLIENT_OFFS(n)	((n) * 0x100)
-+
-+/* Interface interrupt and violation status bits */
-+#define BUSWR_V20X_IIF_IRQ_CMD_CLEAR			BIT(0)
-+#define BUSWR_V20X_OVERFLOW_ERR_MASK			GENMASK(25, 0)
-+#define IS_BUSWR_V20X_OVERFLOW_ERR(s)	\
-+	((s) & BUSWR_V20X_OVERFLOW_ERR_MASK)
-+#define BUSWR_V20X_VIOLATION_ERR_MASK			GENMASK(25, 0)
-+#define IS_BUSWR_V20X_VIOLATION_ERR(s)	\
-+	((s) & BUSWR_V20X_VIOLATION_ERR_MASK)
-+#define BUSWR_V20X_IMG_SIZE_VIOLATION_ERR_MASK		GENMASK(25, 0)
-+#define IS_BUSWR_V20X_IMG_SIZE_VIOLATION_ERR(s)	\
-+	((s) & BUSWR_V20X_IMG_SIZE_VIOLATION_ERR_MASK)
-+#define BUSWR_V20X_IIF_IRQ_S0_IMG_SIZE_VIOLATION	BIT(31)
-+#define IS_BUSWR_V20X_IIF_IRQ_S0_IMG_SIZE_VIOLATION(s)	\
-+	((s) & BUSWR_V20X_IIF_IRQ_S0_IMG_SIZE_VIOLATION)
-+#define BUSWR_V20X_IIF_IRQ_S0_VIOLATION			BIT(30)
-+#define IS_BUSWR_V20X_IIF_IRQ_S0_VIOLATION(s)	\
-+	((s) & BUSWR_V20X_IIF_IRQ_S0_VIOLATION)
-+
-+/* Client configuration field values */
-+#define BUSWR_V20X_IIF_CGC_OVERRIDE			GENMASK(25, 0)
-+#define BUSWR_V20X_CLIENT_CFG_MODE			GENMASK(17, 16)
-+#define BUSWR_V20X_CLIENT_CFG_AUTO_RECOVERY_EN		BIT(4)
-+#define BUSWR_V20X_CLIENT_CFG_EN			BIT(0)
-+#define BUSWR_V20X_CLIENT_IMG_CFG0_HEIGHT		GENMASK_U32(31, 16)
-+#define BUSWR_V20X_CLIENT_IMG_CFG0_WIDTH		GENMASK_U32(15, 0)
-+#define BUSWR_V20X_CLIENT_IMG_CFG2_STRIDE		GENMASK_U32(15, 0)
-+#define BUSWR_V20X_CLIENT_PACKER_CFG_ALIGN		GENMASK(4, 4)
-+#define BUSWR_V20X_CLIENT_PACKER_CFG_FORMAT		GENMASK(3, 0)
-+#define BUSWR_V20X_CLIENT_IRQ_SUBSAMPLE_CFG0_PERIOD	GENMASK(4, 0)
-+#define BUSWR_V20X_CLIENT_IRQ_SUBSAMPLE_CFG1_PATTERN	GENMASK(31, 0)
-+#define BUSWR_V20X_CLIENT_FRAMEDROP_CFG0_PERIOD		GENMASK(4, 0)
-+#define BUSWR_V20X_CLIENT_FRAMEDROP_CFG1_PATTERN	GENMASK(31, 0)
-+
-+/* Burst and FIFO limits */
-+#define BUSWR_V20X_BURST_BEATS8_256			3
-+#define BUSWR_V20X_CLIENT_BURST_LIMIT_CFG_MAX_LENGTH	GENMASK(1, 0)
-+#define BUSWR_V20X_IMG_ADDR_FIFO_MAX_DEPTH		4
-+
-+/* Common BUSWR registers */
-+#define BUSWR_V20X_IIF_CGC_OVERRIDE_REG		0x00000008
-+#define BUSWR_V20X_IIF_IRQ_MASK_S0		0x00000018
-+#define BUSWR_V20X_IIF_IRQ_MASK_S1		0x0000001c
-+#define BUSWR_V20X_IIF_IRQ_CLEAR_S0		0x00000020
-+#define BUSWR_V20X_IIF_IRQ_CLEAR_S1		0x00000024
-+#define BUSWR_V20X_IIF_IRQ_STATUS_S0		0x00000028
-+#define BUSWR_V20X_IIF_IRQ_STATUS_S1		0x0000002c
-+#define BUSWR_V20X_IIF_IRQ_CMD_REG		0x00000030
-+#define BUSWR_V20X_OVERFLOW_CLEAR_REG		0x00000060
-+#define BUSWR_V20X_VIOLATION_STATUS_REG		0x00000064
-+#define BUSWR_V20X_OVERFLOW_STATUS_REG		0x00000068
-+#define BUSWR_V20X_IMG_SIZE_VIOLATION_REG	0x00000070
-+
-+/* Per-client BUSWR registers */
-+#define BUSWR_V20X_CLIENT_CFG_REG		0x00000200
-+#define BUSWR_V20X_CLIENT_ADDR_IMAGE_REG	0x00000204
-+#define BUSWR_V20X_CLIENT_IMG_CFG0_REG		0x0000020c
-+#define BUSWR_V20X_CLIENT_IMG_CFG2_REG		0x00000214
-+#define BUSWR_V20X_CLIENT_PACKER_CFG_REG	0x00000218
-+#define BUSWR_V20X_CLIENT_IRQ_SS_CFG0_REG	0x00000230
-+#define BUSWR_V20X_CLIENT_IRQ_SS_CFG1_REG	0x00000234
-+#define BUSWR_V20X_CLIENT_FRAMEDROP_CFG0_REG	0x00000238
-+#define BUSWR_V20X_CLIENT_FRAMEDROP_CFG1_REG	0x0000023c
-+#define BUSWR_V20X_CLIENT_BURST_LIMIT_REG	0x00000264
-+#define BUSWR_V20X_CLIENT_ADDR_STATUS_0_REG	0x00000268
-+#define BUSWR_V20X_CLIENT_ADDR_STATUS_2_REG	0x00000270
-+
-+static void ife_buswr_20x_acquire(struct ife_device *ife, void __iomem *base)
++static int camif_v10x_config(void __iomem *camif_base, enum camss_ife_hw_pipe hw_pipe,
++			     const struct camss_ife_pipeline_cfg *sink_cfg)
 +{
-+	struct ife_buswr_ctx *ctx = &ife->buswr_ctx;
++	u32 period = 0, pattern = 1, epoch;
 +
-+	if (ife->res->type == CAMSS_IFE_SUBDEV_TYPE_IFE_LITE)
-+		ctx->base = base + BUSWR_V20X_LITE_OFFS;
++	epoch = FIELD_PREP(CAMIF_V10X_CFG_EPOCH0_LINE, sink_cfg->in_height / 3) |
++		FIELD_PREP(CAMIF_V10X_CFG_EPOCH1_LINE, sink_cfg->in_height / 2);
++
++	if (hw_pipe == CAMSS_IFE_HW_PIPE_PP) {
++		writel_relaxed(period, camif_base + CAMIF_V10X_PP_PERIOD_CFG);
++		writel_relaxed(pattern, camif_base + CAMIF_V10X_PP_PATTERN_CFG);
++		writel_relaxed(epoch, camif_base + CAMIF_V10X_PP_EPOCH_IRQ_CFG);
++	} else {
++		writel_relaxed(epoch, camif_base + CAMIF_V10X_RDI_EPOCH_IRQ_CFG);
++		writel_relaxed(period, camif_base + CAMIF_V10X_RDI_PERIOD_CFG);
++		writel_relaxed(pattern, camif_base + CAMIF_V10X_RDI_PATTERN_CFG);
++	}
++
++	return 0;
++}
++
++static void camif_v10x_enable(void __iomem *camif_base, enum camss_ife_hw_pipe hw_pipe)
++{
++	u32 rval = readl_relaxed(camif_base + CAMIF_V10X_MODULE_CFG);
++
++	if (hw_pipe == CAMSS_IFE_HW_PIPE_PP)
++		rval |= CAMIF_V10X_PP_CFG_EN | CAMIF_V10X_PP_CFG_OUTPUT_EN;
 +	else
-+		ctx->base = base + BUSWR_V20X_OFFS;
++		rval |= CAMIF_V10X_RDI_CFG_EN;
 +
-+	ctx->dev = ife->camss->dev;
++	writel_relaxed(rval, camif_base + CAMIF_V10X_MODULE_CFG);
 +}
 +
-+static void ife_buswr_20x_release(struct ife_buswr_ctx *ctx)
++static void camif_v10x_disable(void __iomem *camif_base, enum camss_ife_hw_pipe hw_pipe)
 +{
-+	ctx->base = NULL;
++	u32 rval = readl_relaxed(camif_base + CAMIF_V10X_MODULE_CFG);
++
++	if (hw_pipe == CAMSS_IFE_HW_PIPE_PP)
++		rval &= ~(CAMIF_V10X_PP_CFG_EN | CAMIF_V10X_PP_CFG_OUTPUT_EN);
++	else
++		rval &= ~CAMIF_V10X_RDI_CFG_EN;
++
++	writel_relaxed(rval, camif_base + CAMIF_V10X_MODULE_CFG);
 +}
 +
-+static void ife_buswr_20x_wm_config(struct ife_buswr_ctx *ctx, const u8 wm,
-+				    const struct camss_ife_wm_config *cfg)
-+{
-+	void __iomem *base = ctx->base;
-+	u32 rval, period = 0, pattern = 1;
-+
-+	writel_relaxed(BUSWR_V20X_IIF_CGC_OVERRIDE,
-+		       base + BUSWR_V20X_IIF_CGC_OVERRIDE_REG);
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_CFG_MODE, cfg->mode_config);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_PACKER_CFG_FORMAT, cfg->packing_fmt) |
-+	       FIELD_PREP(BUSWR_V20X_CLIENT_PACKER_CFG_ALIGN, 1);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_PACKER_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_IMG_CFG0_WIDTH, cfg->bytes) |
-+	       FIELD_PREP(BUSWR_V20X_CLIENT_IMG_CFG0_HEIGHT, cfg->lines);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_IMG_CFG0_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_IMG_CFG2_STRIDE, cfg->stride);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_IMG_CFG2_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_IRQ_SUBSAMPLE_CFG0_PERIOD, period);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_IRQ_SS_CFG0_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_IRQ_SUBSAMPLE_CFG1_PATTERN, pattern);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_IRQ_SS_CFG1_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_FRAMEDROP_CFG0_PERIOD, period);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_FRAMEDROP_CFG0_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_FRAMEDROP_CFG1_PATTERN, pattern);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_FRAMEDROP_CFG1_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+	rval = FIELD_PREP(BUSWR_V20X_CLIENT_BURST_LIMIT_CFG_MAX_LENGTH,
-+			  BUSWR_V20X_BURST_BEATS8_256);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_BURST_LIMIT_REG +
-+		       BUSWR_V20X_CLIENT_OFFS(wm));
-+}
-+
-+static void ife_buswr_20x_wm_enable(struct ife_buswr_ctx *ctx, u8 wm)
-+{
-+	void __iomem *base = ctx->base;
-+	u32 rval;
-+
-+	rval = readl_relaxed(base + BUSWR_V20X_CLIENT_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+	rval |= BUSWR_V20X_CLIENT_CFG_EN | BUSWR_V20X_CLIENT_CFG_AUTO_RECOVERY_EN;
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+}
-+
-+static void ife_buswr_20x_wm_disable(struct ife_buswr_ctx *ctx, u8 wm)
-+{
-+	void __iomem *base = ctx->base;
-+	u32 rval;
-+
-+	rval = readl_relaxed(base + BUSWR_V20X_CLIENT_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+	rval &= ~(BUSWR_V20X_CLIENT_CFG_EN | BUSWR_V20X_CLIENT_CFG_AUTO_RECOVERY_EN);
-+	writel_relaxed(rval, base + BUSWR_V20X_CLIENT_CFG_REG + BUSWR_V20X_CLIENT_OFFS(wm));
-+}
-+
-+static bool ife_buswr_20x_is_fifo_full(struct ife_buswr_ctx *ctx, u8 wm)
-+{
-+	u32 rval = readl_relaxed(ctx->base + BUSWR_V20X_CLIENT_OFFS(wm) +
-+				 BUSWR_V20X_CLIENT_ADDR_STATUS_2_REG);
-+
-+	return rval >= BUSWR_V20X_IMG_ADDR_FIFO_MAX_DEPTH;
-+}
-+
-+static void ife_buswr_20x_queue_buf(struct ife_buswr_ctx *ctx, const u8 num_wms, const u8 *wm,
-+				    dma_addr_t *addr)
-+{
-+	int i;
-+
-+	for (i = 0; i < num_wms; i++) {
-+		if (addr[i])
-+			writel_relaxed(addr[i], ctx->base + BUSWR_V20X_CLIENT_ADDR_IMAGE_REG +
-+				       BUSWR_V20X_CLIENT_OFFS(wm[i]));
-+	}
-+}
-+
-+static u32 ife_buswr_20x_consumed_addr(struct ife_buswr_ctx *ctx, u8 wm)
-+{
-+	return readl_relaxed(ctx->base + BUSWR_V20X_CLIENT_ADDR_STATUS_0_REG +
-+			     BUSWR_V20X_CLIENT_OFFS(wm));
-+}
-+
-+static void ife_buswr_20x_log_image_size(struct ife_buswr_ctx *ctx, u32 clients)
-+{
-+	unsigned int wm;
-+	u32 cfg0, cfg2;
-+
-+	dev_dbg(ctx->dev, "BUSWR image size violation clients: %#010x\n", clients);
-+
-+	for (wm = 0; wm < 26; wm++) {
-+		if (!(clients & BIT(wm)))
-+			continue;
-+
-+		cfg0 = readl_relaxed(ctx->base + BUSWR_V20X_CLIENT_IMG_CFG0_REG +
-+				     BUSWR_V20X_CLIENT_OFFS(wm));
-+		cfg2 = readl_relaxed(ctx->base + BUSWR_V20X_CLIENT_IMG_CFG2_REG +
-+				     BUSWR_V20X_CLIENT_OFFS(wm));
-+
-+		dev_dbg(ctx->dev, "BUSWR client %u config: width=%u height=%u stride=%u\n",
-+			wm, FIELD_GET(BUSWR_V20X_CLIENT_IMG_CFG0_WIDTH, cfg0),
-+			FIELD_GET(BUSWR_V20X_CLIENT_IMG_CFG0_HEIGHT, cfg0),
-+			FIELD_GET(BUSWR_V20X_CLIENT_IMG_CFG2_STRIDE, cfg2));
-+	}
-+}
-+
-+static u32 ife_buswr_20x_irq_status(struct ife_buswr_ctx *ctx)
-+{
-+	void __iomem *base = ctx->base;
-+	u32 bus_stat, iif_stat = 0;
-+
-+	bus_stat = readl_relaxed(base + BUSWR_V20X_OVERFLOW_STATUS_REG);
-+	writel_relaxed(BIT(0), base + BUSWR_V20X_OVERFLOW_CLEAR_REG);
-+	if (IS_BUSWR_V20X_OVERFLOW_ERR(bus_stat)) {
-+		writel_relaxed(bus_stat, base + BUSWR_V20X_OVERFLOW_CLEAR_REG);
-+		pr_warn("BUSWR common overflow: 0x%x\n", bus_stat);
-+	}
-+
-+	iif_stat = readl_relaxed(base + BUSWR_V20X_IIF_IRQ_STATUS_S1);
-+	writel_relaxed(iif_stat, base + BUSWR_V20X_IIF_IRQ_CLEAR_S1);
-+
-+	iif_stat = readl_relaxed(base + BUSWR_V20X_IIF_IRQ_STATUS_S0);
-+	writel_relaxed(iif_stat, base + BUSWR_V20X_IIF_IRQ_CLEAR_S0);
-+	if (iif_stat) {
-+		if (IS_BUSWR_V20X_IIF_IRQ_S0_IMG_SIZE_VIOLATION(iif_stat)) {
-+			bus_stat = readl_relaxed(base + BUSWR_V20X_IMG_SIZE_VIOLATION_REG);
-+			if (IS_BUSWR_V20X_IMG_SIZE_VIOLATION_ERR(bus_stat))
-+				pr_warn("BUSWR common image size violation: 0x%x\n", bus_stat);
-+			ife_buswr_20x_log_image_size(ctx, bus_stat);
-+			pr_warn("BUSWR image size violation from CCIF: 0x%x\n", iif_stat);
-+		}
-+		if (IS_BUSWR_V20X_IIF_IRQ_S0_VIOLATION(iif_stat)) {
-+			bus_stat = readl_relaxed(base + BUSWR_V20X_VIOLATION_STATUS_REG);
-+			if (IS_BUSWR_V20X_VIOLATION_ERR(bus_stat))
-+				pr_warn("BUSWR common violation: 0x%x\n", bus_stat);
-+			pr_warn("BUSWR violation from CCIF: 0x%x\n", iif_stat);
-+		}
-+	}
-+
-+	writel_relaxed(BUSWR_V20X_IIF_IRQ_CMD_CLEAR, base + BUSWR_V20X_IIF_IRQ_CMD_REG);
-+
-+	return iif_stat;
-+}
-+
-+static void ife_buswr_20x_irq_enable(struct ife_buswr_ctx *ctx)
-+{
-+	void __iomem *base = ctx->base;
-+
-+	writel_relaxed(~0, base + BUSWR_V20X_IIF_IRQ_MASK_S0);
-+	writel_relaxed(~0, base + BUSWR_V20X_IIF_IRQ_MASK_S1);
-+}
-+
-+static void ife_buswr_20x_irq_disable(struct ife_buswr_ctx *ctx)
-+{
-+	void __iomem *base = ctx->base;
-+
-+	writel_relaxed(0, base + BUSWR_V20X_IIF_IRQ_MASK_S0);
-+	writel_relaxed(~0, base + BUSWR_V20X_IIF_IRQ_CLEAR_S0);
-+	writel_relaxed(0, base + BUSWR_V20X_IIF_IRQ_MASK_S1);
-+	writel_relaxed(~0, base + BUSWR_V20X_IIF_IRQ_CLEAR_S1);
-+
-+	writel_relaxed(BUSWR_V20X_IIF_IRQ_CMD_CLEAR, base + BUSWR_V20X_IIF_IRQ_CMD_REG);
-+}
-+
-+const struct ife_hw_buswr_ops ife_buswr_20x_ops = {
-+	.acquire	= ife_buswr_20x_acquire,
-+	.release	= ife_buswr_20x_release,
-+	.irq_enable	= ife_buswr_20x_irq_enable,
-+	.irq_disable	= ife_buswr_20x_irq_disable,
-+	.wm_config	= ife_buswr_20x_wm_config,
-+	.wm_enable	= ife_buswr_20x_wm_enable,
-+	.wm_disable	= ife_buswr_20x_wm_disable,
-+	.queue_buf	= ife_buswr_20x_queue_buf,
-+	.consumed_addr	= ife_buswr_20x_consumed_addr,
-+	.irq_status	= ife_buswr_20x_irq_status,
-+	.is_fifo_full	= ife_buswr_20x_is_fifo_full,
++const struct ife_hw_camif_ops ife_camif_v10x_ops = {
++	.config  = camif_v10x_config,
++	.enable  = camif_v10x_enable,
++	.disable = camif_v10x_disable,
 +};
-diff --git a/drivers/media/platform/qcom/camss/camss-ife.h b/drivers/media/platform/qcom/camss/camss-ife.h
-index 39e8cfa74909..48701cb67e1e 100644
---- a/drivers/media/platform/qcom/camss/camss-ife.h
-+++ b/drivers/media/platform/qcom/camss/camss-ife.h
-@@ -389,4 +389,6 @@ camss_ife_pipe_for_stream_id(int nstreams,
- 			     const struct camss_ife_stream *streams,
- 			     u32 id);
- 
-+extern const struct ife_hw_buswr_ops ife_buswr_20x_ops;
+diff --git a/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.h b/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.h
+new file mode 100644
+index 000000000000..87faa5776c31
+--- /dev/null
++++ b/drivers/media/platform/qcom/camss/camss-ife-camif-v10x.h
+@@ -0,0 +1,42 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (c) 2023, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2023 Qualcomm Technologies, Inc.
++ */
 +
- #endif /* CAMSS_IFE_SUB_DEV_H */
++#ifndef _CAMSS_IFE_CAMIF_V10X_H_
++#define _CAMSS_IFE_CAMIF_V10X_H_
++
++#include <linux/bits.h>
++
++#include "camss-ife.h"
++
++/* Per-RDI register offset */
++#define IFE_CAMIF_V10X_RDIX_OFFS(n) ((n) * 0x200)
++
++/* PP config bits */
++#define CAMIF_V10X_PP_CFG_EN		BIT(0)
++#define CAMIF_V10X_PP_CFG_OUTPUT_EN	BIT(8)
++
++/* RDI config bit */
++#define CAMIF_V10X_RDI_CFG_EN		BIT(0)
++
++/* EPOCH line fields */
++#define CAMIF_V10X_CFG_EPOCH0_LINE		GENMASK(13, 0)
++#define CAMIF_V10X_CFG_EPOCH1_LINE		GENMASK(29, 16)
++
++/* Module config register offset */
++#define CAMIF_V10X_MODULE_CFG		0x00000060
++
++/* RDI register offsets */
++#define CAMIF_V10X_RDI_PERIOD_CFG	0x00000068
++#define CAMIF_V10X_RDI_PATTERN_CFG	0x0000006c
++#define CAMIF_V10X_RDI_EPOCH_IRQ_CFG	0x00000070
++
++/* PP (pixel path) register offsets */
++#define CAMIF_V10X_PP_PERIOD_CFG	0x00000078
++#define CAMIF_V10X_PP_PATTERN_CFG	0x0000007c
++#define CAMIF_V10X_PP_EPOCH_IRQ_CFG	0x00000080
++
++extern const struct ife_hw_camif_ops ife_camif_v10x_ops;
++
++#endif /* _CAMSS_IFE_CAMIF_V10X_H_ */
 -- 
 2.34.1
 
