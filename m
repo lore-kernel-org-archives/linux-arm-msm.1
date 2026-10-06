@@ -1,258 +1,130 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EECBA3BED46
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 16:50:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EB0C49CF40;
+	Tue,  6 Oct 2026 18:19:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791305458; cv=none; b=fKY0CpSp5vShm+zuevipIgJ3/+6p0OKR4ek0oT21mfS656hEasCo9hccupUZcwAar8Z/57YcdsAVgcdWp2jVxiZAEfnj90AbQHqkMBoM+eAzrLEJePkeGyXEeREG1RjINIYogBiyO0eETpAKQ7vIDEjludsnPAJY6MBQ93/F3ns=
+	t=1791310750; cv=none; b=Xcl2tzXEnbrTnordYsZHdG9Tq0qEBkKJnLB2nOPZXbKPtINzgInLxoKjCdLEBl7YqIDOOkOS+swnsw01Jox3988bVh+SVtIxkrcb0WMPAzGv60XSyikFmPujlusnGlnwgUOxHaRec3gtKXcZo9aTDNetHIq9r8fTtfgXPFmvr64=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791305458; c=relaxed/simple;
-	bh=w6yofi2hb9AiVsVr8lzwC1eqMrd95HITpUYDUSg8J/0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Iv3kEUboz9XKDBkgixXwzqfSvffAAlHDmTr+ePTYkbXBUhujoYKmkH2c0EGjZdtBx5u3krVbvwtIB7nH7CbIw7JguHf8+CaIjIXCJl/wy/snMw+mRRIH3azFW0RfHtD7D79lDMHD05KWtq/03Hfm/JtlpEGW1KPm0e9Gu0YS7Lw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=BVxCu/Nf; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	s=arc-20240116; t=1791310750; c=relaxed/simple;
+	bh=x76PvVJzfUXADtn2/WiHhUwGRC79PKnl4XVrhi+LP4w=;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:Content-Type; b=Rai7glIRmT0AJHkt6Kt3t3wUlSCjM+kOoHbgVkoQgmu0GOFviQmwLpjq0e4+xtXOOGCfWPu/D2v/Ua3HElHGKvFImSR50WAK0YrAl+FLCWGRZgTUrmLALEWRm+kTlibm0b98/VCpyoj6k2lb6uoju8sU2fd5oLcocb63+6emEls=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=UCNmTmEp; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=V3xtN956; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="BVxCu/Nf"
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E45261477
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 09:50:52 -0700 (PDT)
-Received: from [10.2.11.34] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1453F3F66F
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 09:50:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1791305456; bh=w6yofi2hb9AiVsVr8lzwC1eqMrd95HITpUYDUSg8J/0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=BVxCu/NfW0F3Uh401VVh6OdGWb2mcdXeAl45kDBdQjk/bZz7z37IPd0GmKlC3xWDZ
-	 rIUIzYTrKLXP6IgoOwtNGOJ4nMbJod8kR+cv8199r2+ehaKXFNAnJAfouWxpIp/FLl
-	 jUTLXTFzRmoR95uxAZE8v4OuiSM31T7rIXsxboaQ=
-Date: Tue, 6 Oct 2026 17:50:50 +0100
-From: Liviu Dudau <liviu.dudau@arm.com>
-To: Matthew Brost <matthew.brost@intel.com>
-Cc: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Anna Maniscalco <anna.maniscalco2000@gmail.com>,
-	Antonino Maniscalco <antomani103@gmail.com>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Danilo Krummrich <dakr@kernel.org>,
-	David Airlie <airlied@gmail.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>, Lyude Paul <lyude@redhat.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Maxime Ripard <mripard@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Simona Vetter <simona@ffwll.ch>,
-	Steven Price <steven.price@arm.com>,
-	Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH v3 7/8] drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
-Message-ID: <asUm6j1GD6yxeBvy@e142607>
-References: <20261001220632.3190896-1-matthew.brost@intel.com>
- <20261001220632.3190896-8-matthew.brost@intel.com>
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="UCNmTmEp";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="V3xtN956"
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
+	h=Message-ID:Subject:To:From:Date; t=1791310737; bh=CZCUObdnJ57eIky+7KGcAKV
+	PQRaMYagrlpGzJWR6MYg=; b=UCNmTmEp0bba8Tf9ce6AkcBbruE9xvAZaBWzPsAzYk+me7GIek
+	WzoEFy0l6RPGRyQow5kci4vd+IQEagXiYDx3RH/LZDsBaMNr3Zwydpwc7htqclxQqBqIWYI+jeT
+	kbGr0fY5MA+Ewt4/HxslHFvIu+VYJqeN7xqRvA+UhtOrxZ/tqVnbr9jqA1B+5sNNepChEvIEbz8
+	vbBwLce450cfkm6DEKcggWbew3ytMuxcKCHGXdNcLLERbKkOVoA9pIGpZF3QPLCOX3jBfWrY3Ca
+	Rf0dLgClXmNpEK9M1QxjBqG/tsThDV4Ke1gKiDfrh0bu8y2Ydbl/XnXYZ5PbwY38fiQ==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
+	h=Message-ID:Subject:To:From:Date; t=1791310737; bh=CZCUObdnJ57eIky+7KGcAKV
+	PQRaMYagrlpGzJWR6MYg=; b=V3xtN956c1Hk0aHpnqOA0CRPdXdpTBC0Nau9wHAh5qknvK0sCi
+	x+5fSIEmz72ssEH1gcN7xZ0Qv7DpQNzvuLCw==;
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Date: Tue, 06 Oct 2026 20:18:57 +0200
+From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
+ <barnabas.czeman@mainlining.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Konrad Dybcio
+ <konradybcio@kernel.org>, Stephan Gerhold <stephan@gerhold.net>, Ulf Hansson
+ <ulfh@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-remoteproc@vger.kernel.org
+Subject: Re: [PATCH v3 4/7] remoteproc: qcom_q6v5_mss: Use mss as regulator
+ for MSM8953
+In-Reply-To: <7smt722arn43gwpfhbgagevi3ut6gdxalgfre3mzm4rb25fkkq@ftsucipakelm>
+References: <20261002-sdm632-rpmpd-v3-0-95c47d0f26cf@mainlining.org>
+ <20261002-sdm632-rpmpd-v3-4-95c47d0f26cf@mainlining.org>
+ <7smt722arn43gwpfhbgagevi3ut6gdxalgfre3mzm4rb25fkkq@ftsucipakelm>
+Message-ID: <f5af0cf39d3cf20b52e1d268ef418a88@mainlining.org>
+X-Sender: barnabas.czeman@mainlining.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261001220632.3190896-8-matthew.brost@intel.com>
 
-On Thu, Oct 01, 2026 at 03:06:31PM -0700, Matthew Brost wrote:
-> nouveau creates its drm_gpuvm without DRM_GPUVM_RESV_PROTECTED, so the
-> extobj and evicted lists are protected by internal spinlocks. Every
-> nouveau path but three already touches them with the VM's resv held:
-> drm_gpuvm_exec_lock() and drm_gpuvm_validate() on exec, and TTM moves of
-> private BOs, which share the VM's resv. The remaining three are:
+On 2026-10-05 09:06, Dmitry Baryshkov wrote:
+> On Fri, Oct 02, 2026 at 12:38:32AM +0200, Barnabás Czémán wrote:
+>> On MSM8953 MSS regulators is controlled using the voltages rather than
+>> performance levels. Correct DT definition and model the MSS as a
+>> regulator rather than a power domain
+>> 
+>> Signed-off-by: Barnabás Czémán <barnabas.czeman@mainlining.org>
+>> ---
+>>  arch/arm64/boot/dts/qcom/msm8953.dtsi | 5 ++---
+>>  drivers/remoteproc/qcom_q6v5_mss.c    | 9 ++++++++-
 > 
->  - nouveau_uvmm_bind_job_submit() adds the vm_bo of a MAP op to the
->    extobj list holding no resv at all. Move that into
->    bind_lock_validate(), which now locks the VM's resv as well.
+> Two separate patches. Yes, one will be broken without another. Write
+In the first revisions i was asked to squash it.
+> this in the commit message and explain why you can't provide backwards
+> compatibility. Don't forget Fixes tags (or explain the lack of them).
+> But I think it applies to the rest of the series too.
 > 
->  - bind_link_gpuvas() unlinks the GPUVAs of UNMAP and REMAP ops, which
->    can drop the last reference of their vm_bo. It runs within the bind
->    job's drm_exec transaction, which the above makes hold the VM's resv.
-> 
->  - nouveau_uvmm_bind_job_cleanup() and nouveau_uvmm_fini() can drop the
->    last reference of a vm_bo holding only the object's resv. Lock the
->    VM's resv along with it, through a new
->    nouveau_uvmm_lock_vm_and_obj().
-> 
-> The bind job's fence now always lands in the VM's resv, as BOOKKEEP.
-> This already happened whenever a bind job mapped a private BO.
-> 
-> With that the internal spinlocks buy nothing, so set
-> DRM_GPUVM_RESV_PROTECTED. This is also what two-pass locking in
-> drm_gpuvm requires, which a following patch makes use of.
-> 
-> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
-> Cc: Alice Ryhl <aliceryhl@google.com>
-> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-> Cc: Antonino Maniscalco <antomani103@gmail.com>
-> Cc: Boris Brezillon <boris.brezillon@collabora.com>
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Dmitry Baryshkov <lumag@kernel.org>
-> Cc: Jessica Zhang <jesszhan0024@gmail.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Liviu Dudau <liviu.dudau@arm.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: Steven Price <steven.price@arm.com>
-> Cc: Thomas Hellström <thomas.hellstrom@linux.intel.com>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
-> Assisted-by: LLM
-> ---
-> v3:
->  - New patch (Danilo)
-
-Bit confused about this. If Danilo contributed this patch should it not carry his S-o-b as well?
-
-Best regards,
-Liviu
-
-> ---
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c | 49 ++++++++++++++++++++++----
->  1 file changed, 42 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> index 2026fe6b48c6..dae612e56d91 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> @@ -1187,6 +1187,27 @@ bind_validate_region(struct nouveau_job *job)
->  	return 0;
->  }
->  
-> +/*
-> + * Lock the VM's common dma-resv together with the one of @obj, as needed to
-> + * drop what may be the last reference of a &drm_gpuvm_bo.
-> + */
-> +static void
-> +nouveau_uvmm_lock_vm_and_obj(struct nouveau_uvmm *uvmm, struct drm_exec *exec,
-> +			     struct drm_gem_object *obj)
-> +{
-> +	int ret;
-> +
-> +	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES, 2);
-> +	drm_exec_until_all_locked(exec) {
-> +		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(&uvmm->base));
-> +		if (!ret)
-> +			ret = drm_exec_lock_obj(exec, obj);
-> +		drm_exec_retry_on_contention(exec);
-> +		if (drm_WARN_ON(uvmm->base.drm, ret))
-> +			break;
-> +	}
-> +}
-> +
->  static void
->  bind_link_gpuvas(struct bind_job_op *bop)
->  {
-> @@ -1224,12 +1245,24 @@ bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
->  		   unsigned int num_fences)
->  {
->  	struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
-> +	struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
->  	struct bind_job_op *op;
->  	int ret;
->  
-> +	/* The VM's dma-resv protects its extobj and evicted lists, and must be
-> +	 * held by bind_link_gpuvas() in case it drops the last reference of a
-> +	 * &drm_gpuvm_bo.
-> +	 */
-> +	ret = drm_gpuvm_prepare_vm(&uvmm->base, exec, num_fences);
-> +	if (ret)
-> +		return ret;
-> +
->  	list_for_each_op(op, &bind_job->ops) {
->  		struct drm_gpuva_op *va_op;
->  
-> +		if (op->op == OP_MAP)
-> +			drm_gpuvm_bo_extobj_add(op->vm_bo);
-> +
->  		if (!op->ops)
->  			continue;
->  
-> @@ -1288,8 +1321,6 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
->  			dma_resv_unlock(obj->resv);
->  			if (IS_ERR(op->vm_bo))
->  				return PTR_ERR(op->vm_bo);
-> -
-> -			drm_gpuvm_bo_extobj_add(op->vm_bo);
->  		}
->  
->  		ret = bind_validate_op(job, op);
-> @@ -1603,9 +1634,11 @@ nouveau_uvmm_bind_job_cleanup(struct nouveau_job *job)
->  			drm_gpuva_ops_free(&uvmm->base, op->ops);
->  
->  		if (!IS_ERR_OR_NULL(op->vm_bo)) {
-> -			dma_resv_lock(obj->resv, NULL);
-> +			struct drm_exec exec;
-> +
-> +			nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
->  			drm_gpuvm_bo_put(op->vm_bo);
-> -			dma_resv_unlock(obj->resv);
-> +			drm_exec_fini(&exec);
->  		}
->  
->  		if (obj)
-> @@ -1941,7 +1974,8 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
->  	mt_init_flags(&uvmm->region_mt, MT_FLAGS_LOCK_EXTERN);
->  	mt_set_external_lock(&uvmm->region_mt, &uvmm->mutex);
->  
-> -	drm_gpuvm_init(&uvmm->base, cli->name, 0, drm, r_obj,
-> +	drm_gpuvm_init(&uvmm->base, cli->name, DRM_GPUVM_RESV_PROTECTED,
-> +		       drm, r_obj,
->  		       NOUVEAU_VA_SPACE_START,
->  		       NOUVEAU_VA_SPACE_END,
->  		       init->kernel_managed_addr,
-> @@ -1978,6 +2012,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->  	struct nouveau_uvma_region *reg;
->  	struct nouveau_cli *cli = uvmm->vmm.cli;
->  	struct drm_gpuva *va, *next;
-> +	struct drm_exec exec;
->  
->  	nouveau_uvmm_lock(uvmm);
->  	drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
-> @@ -1989,9 +2024,9 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->  
->  		drm_gpuva_remove(va);
->  
-> -		dma_resv_lock(obj->resv, NULL);
-> +		nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
->  		drm_gpuva_unlink(va);
-> -		dma_resv_unlock(obj->resv);
-> +		drm_exec_fini(&exec);
->  
->  		nouveau_uvma_unmap(uvma);
->  		nouveau_uvma_vmm_put(uvma);
-> -- 
-> 2.34.1
-> 
-
--- 
-====================
-| I would like to |
-| fix the world,  |
-| but they're not |
-| giving me the   |
- \ source code!  /
-  ---------------
-    ¯\_(ツ)_/¯
+>>  2 files changed, 10 insertions(+), 4 deletions(-)
+>> 
+>> diff --git a/arch/arm64/boot/dts/qcom/msm8953.dtsi 
+>> b/arch/arm64/boot/dts/qcom/msm8953.dtsi
+>> index 753167c3f861..c7dc08858d54 100644
+>> --- a/arch/arm64/boot/dts/qcom/msm8953.dtsi
+>> +++ b/arch/arm64/boot/dts/qcom/msm8953.dtsi
+>> @@ -1451,9 +1451,8 @@ mpss: remoteproc@4080000 {
+>>  					  "handover", "stop-ack";
+>> 
+>>  			power-domains = <&rpmpd MSM8953_VDDCX>,
+>> -					<&rpmpd MSM8953_VDDMX>,
+>> -					<&rpmpd MSM8953_VDDMD>;
+>> -			power-domain-names = "cx", "mx","mss";
+>> +					<&rpmpd MSM8953_VDDMX>;
+>> +			power-domain-names = "cx", "mx";
+>> 
+>>  			clocks = <&gcc GCC_MSS_CFG_AHB_CLK>,
+>>  				 <&gcc GCC_MSS_Q6_BIMC_AXI_CLK>,
+>> diff --git a/drivers/remoteproc/qcom_q6v5_mss.c 
+>> b/drivers/remoteproc/qcom_q6v5_mss.c
+>> index 2f71ed2feff6..8f6312213e1a 100644
+>> --- a/drivers/remoteproc/qcom_q6v5_mss.c
+>> +++ b/drivers/remoteproc/qcom_q6v5_mss.c
+>> @@ -2728,6 +2728,14 @@ static const struct rproc_hexagon_res 
+>> msm8953_mss = {
+>>  		},
+>>  		{}
+>>  	},
+>> +	.active_supply = (struct qcom_mss_reg_res[]) {
+>> +		{
+>> +			.supply = "mss",
+>> +			.uV = 1050000,
+>> +			.uA = 100000,
+>> +		},
+>> +		{}
+>> +	},
+>>  	.proxy_clk_names = (char*[]){
+>>  		"xo",
+>>  		NULL
+>> @@ -2741,7 +2749,6 @@ static const struct rproc_hexagon_res 
+>> msm8953_mss = {
+>>  	.proxy_pd_names = (char*[]) {
+>>  		"cx",
+>>  		"mx",
+>> -		"mss",
+>>  		NULL
+>>  	},
+>>  	.need_mem_protection = false,
+>> 
+>> --
+>> 2.56.0
+>> 
