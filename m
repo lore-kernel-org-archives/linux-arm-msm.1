@@ -1,101 +1,105 @@
-Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFE3F3E9C11;
-	Tue,  6 Oct 2026 14:44:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59FF245FFDE
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 14:55:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791297858; cv=none; b=br64T+D3DggwrMbXtAVYcPPqxCX7CSbde+X1LnFdPXPBlm3qgw7PfhJglQ9CG0SN1HVWaIUz40+sPwEr7wfj/WXcJiekeHNJVZAoZyFOovBigRSqyZIFrhJcnXiuMYPi19RiXqsBzZg3ZM9xOK4sOZ/TmoKCt3PJFhVBhF1rcWM=
+	t=1791298506; cv=none; b=AzyJbfiolLkBpniRBLPk3AD1GVT/CGKP2v6T+6MbQrZr0J73HnT45EbndS/bkIkjL5ajdoZE6rTmN69WA3Z1gNvtvUCWawfzeiT0/xyIyfAkBZSN/Qa33NlIiiK1Onje1P9DfEgEVj9b2YpSq0zEQ2kN8RFrkeHDFcDVCBCMiVs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791297858; c=relaxed/simple;
-	bh=eSFdXc07YalpKFd82fSJBxmFyhmc9R45sAeTNr4yvs4=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=oA+zk1uXrCmHAQDUIiq9q5z39unZzJ9Lg226wpg4GjsItU3+fISJkdU7ujned2SNxHkjPcbjI/eOUJFDxFGPMQAjPZtG2uIMItrghzjmzX5dAaeA+QNXRvZTU/UdfypevETWG2TX3LlRnlZlt5SQ4k1z5bMwureJp9ZNK+SNrHA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=o1FP8MTU; arc=none smtp.client-ip=109.224.244.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1791298506; c=relaxed/simple;
+	bh=R4KgQ3S4Hw1T8EoPFbH6w2icBtvqBXb5gZZ1wkD2hYs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=rp0huciktIS++5g2UH5t1gJRua+LeiTVMvnO+LhRGWIvI6BlYNLK4MIsnWGFWQ1P+PY9GqVqpdTZj/A2df3N5jvVaq0G87Zl2NsCL0Ad9jHAY3qFJ8elMv7Q242wR8UDCs30kiEHedpiq7lRaInmdE0ISOOivIKebp1HJlMnFwE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DNxW2ePX; arc=none smtp.client-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="o1FP8MTU"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1791297853; x=1791557053;
-	bh=eSFdXc07YalpKFd82fSJBxmFyhmc9R45sAeTNr4yvs4=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=o1FP8MTUJhV0BvBdwixEMNFVYTzmI71gcypWNHvE0uQQAVCbJFkGzh8TsOt7Ez3h7
-	 3pi9H7g6rLy3IL0VahutVWCEyLZ0MifiQ3jF9bO0xYS4lCvBn6UwJY1BfV3+Pfl56s
-	 btoUKayTBOPEcKezCMfm8PHray7EJCTgg5Y2aWm7uoWic9ndigN3zdoUVMy85dL28w
-	 d6RyK8WP0+ANPL672NuS5F6shYvDP2sYC+2OYLgAQ6NRg25P1FDin6Wq0g8VWLS1bC
-	 SW6yI4IosHde7ao1P+L7addw5b74TyNKuGp1uPeqor+lA+aEhO49/lEaj8BJJ5aFac
-	 0nZM/7wQgcxNA==
-Date: Tue, 06 Oct 2026 14:44:07 +0000
-To: Manivannan Sadhasivam <mani@kernel.org>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <mkp@kernel.org>, Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-From: Alexander Koskovich <akoskovich@pm.me>
-Cc: Manish Pandey <manish.pandey@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-scsi@vger.kernel.org, linux-kernel@vger.kernel.org, Alexander Koskovich <akoskovich@pm.me>
-Subject: [PATCH RFC] scsi: ufs: ufs-qcom: Fix ICC bandwidth votes for DDR path
-Message-ID: <20261006-ufs-icc-bw-v1-1-9fbc6fcc6514@pm.me>
-Feedback-ID: 37836894:user:proton
-X-Pm-Message-ID: 3bc06ccafd31d1b0d67a178de3c4d3318d74d6e8
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DNxW2ePX"
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-3282db206d3so8853762eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 07:55:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791298504; x=1791903304; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=R4KgQ3S4Hw1T8EoPFbH6w2icBtvqBXb5gZZ1wkD2hYs=;
+        b=DNxW2ePXDQoOCN5STko2zaq29Q++QxwK4Xfv145SwJCcF06vUIzgSh4rVlyXtr3Zeh
+         /IVzWppqfBAiKolF9tXNgGTOVpyamVdrdcBpYp4JMga6uVmS+vhzyD7eYVbPjj/cuvsy
+         vBpV1op/Gl3P/RpCPRgo8dDr0te1qUNeJ9VCDAKmX46my3vkGdDQRouvoYMOIpykRKEq
+         dO6Xf+bsIIZnvgXA1GgQNIoFwrQUT+ZhXAZ6ksD2KacrM5ykzFmyIVXeOi5sGQDuVZTp
+         JG77q/LhEyajnxg3L45XbL3tlOzvhj1O8nfARhGIwtsJZI2FRKINRO3l8ZPBIVNfoLgN
+         CV5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791298504; x=1791903304;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=R4KgQ3S4Hw1T8EoPFbH6w2icBtvqBXb5gZZ1wkD2hYs=;
+        b=CZWkwg7TYOkwJCTNM018XadsjcvIZzLLPIVcNGbIT18N57riZDSn0+vs6cw+FPRJFk
+         DupBVMOMIOTPEeLoPeVB+pkGL8Yqk9htYIKsfI7CQhSwTkhoxMAsUUd5srv9a6NCoil3
+         Y7B96m4lxWJbb4ZVnUpvVlhnwhxikQ70oyEAULLQJtTjonLoj1R8f6Gdi3AmSV1Wwmbe
+         JAJ5XorTIv+ItZwd5yEktdzMBxyeukTQIvMwlatR662Sxb3YlwBOgtr3Jxeat9qGWqdq
+         IB6WUFSngcriXn803LisY5e2V2r62m/0d0TflP6+VN+g/LJ3u9jl75vn6xoRGmUmWppA
+         9rdg==
+X-Forwarded-Encrypted: i=1; AKwUvByK24ix7lyRs7RKPkctI7Vfd+rjnuQjfBD8zpBnlLNcqUwwIjXk2MSRzbONg+OqvZSIVeM/suWoAl/hm6g/@vger.kernel.org
+X-Gm-Message-State: AFuF++mNwrCYwcmsge8bSGoKnB5szsAhpSrkFMwtCfJWL+dRzNGUk+Zx
+	orsd3BNvCicsXuU3jpQGighbsDOz3o9M04ZNb/2XNDzzhtq2ZFrcRCiK2vFlokmSaOyJ1g==
+X-Gm-Gg: AYBFou1AHHjJhFw24TndN2yerEMyx7nN8djVM3/Txbxw4Hfjb5hHxyhxOBGHHU0JbNP
+	qcB6BL2H9C4zerz2xtK4ixGd3Lym7SMIQl6cIj4leIPhVoCdPzMMXZ3D0s380624gjw5DhBmgRe
+	Fp//PbP3O57P8RcpSlB8FLW+js/xUUTzFULeBTCLXLUZhK1cYzyGWxvsQGWoAJuqLWayQluKIWF
+	xORNwKEC4HmYvjCOjCLRpbff/NCzWAk42RncQ0GX6UTSw7Udlrkz3mzXAQ0spF4UQKV5RJFXvdC
+	xZD09RAi9CFycsn1Yje5raabu7UlpP+qruEZ1FjG9QXyZuov2HyB9hgo9PEfP+Dt1xJICzL0u0c
+	C1BjdxNB/ghs7HAwifKKADjlPBlYuLQBBUpr+Iu2ehzLUqoHyBner25z6nuYHEIv9UdRAKDfDr7
+	CD2n6MJTImYq4nEtorhaUfcmPyLr2XJzlPnUvR2aE5LsxctjwGX8rN0uCOIPmQqKltLaIEgGtKR
+	3sTdruYY2eelrkL9vfVcO4+Bdw590rr2QpqTaMLoO0yQAUgKUovtxs6QizzFrvazavoa0ISNiYo
+	joJEoxw4Bkvp3gmHLZnkhbo/SO9t6inB0iXeFU/DFJcyEN+zRsY/lHZ6awda4X7Ngt8otctiSnI
+	LfMUzpdjmf3hCGAQJzyzz+sPD5cSEA2T5SY5+lEIE/RAdI/iY6BvaRMM=
+X-Received: by 2002:a05:7022:7e8a:b0:143:298f:33b8 with SMTP id a92af1059eb24-151c4c11b5amr21602995c88.44.1791298504055;
+        Tue, 06 Oct 2026 07:55:04 -0700 (PDT)
+Received: from yoda.tailb23519.ts.net (38.70.247.229.sumofiber.net. [38.70.247.229])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-16105519176sm11243c88.13.2026.10.06.07.55.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Oct 2026 07:55:03 -0700 (PDT)
+From: Hasty Heat <hastyheat@gmail.com>
+To: abel.vesa@oss.qualcomm.com
+Cc: linux-i2c@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH] i2c: qcom-geni: Restore the source-clock selection policy
+Date: Tue,  6 Oct 2026 09:55:02 -0500
+Message-ID: <20261006145502.105542-1-hastyheat@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
+References: <20260928-b4-i2c-qcom-geni-preserve-source-clock-v1-1-9aded7552a76@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Manish Pandey <manish.pandey@oss.qualcomm.com>
+On Mon, Sep 28, 2026, Abel Vesa wrote:
+> On X1E80100 CRD, this results in switching the source clock from 19.2 MHz
+> to 32 MHz, which causes intermittent failures when probing the I2C HID
+> keyboard.
 
-The DDR ICC vote was using icc_set_bw(0, mem_bw), which sets only the
-peak bandwidth. On Qualcomm NoC, peak votes alone do not guarantee the
-required aggregate bandwidth. As a result, when other clients (such as
-USB) are removed, the total NoC bandwidth drops and UFS performance
-KPIs degrade.
+Same issue here on a Lenovo Yoga Slim 7x (X1E80100) running v7.2.9, which
+carries cb97bf3d4f91 ("i2c: qcom-geni: Fix hardcoded clock index in
+SE_GENI_CLK_SEL"). The ITE 048D:8987 keyboard on the touchpad's bus
+(b80000) came up as 0018:FFFF:FFFF with a report descriptor of
+0x00 0xff 0xff..., after "did not ack reset within 1000 ms". After a warm
+reboot the same bus also hit "Bus arbitration lost, clock line
+undriveable", and both the keyboard and touchpad failed.
 
-Use mem_bw as the average bandwidth and 0 as the peak value so the DDR
-path gets an effective and sustained bandwidth vote.
+With this patch applied to v7.2.9, the SE clock stays at 19.2 MHz. The
+keyboard (hid-lenovo) and touchpad (hid-multitouch) probe cleanly, with
+no arbitration or reset errors, on a warm reboot, a cold boot, and a
+warm reboot from another kernel.
 
-Signed-off-by: Manish Pandey <manish.pandey@oss.qualcomm.com>
-Signed-off-by: Alexander Koskovich <akoskovich@pm.me>
----
-On a downstream 6.6 kernel on Palima, one UFS part (Samsung KLUFG8RHGB-B0E1=
-)
-fails hibern8 exit with auto hibernate enabled unless this change is applie=
-d,
-the other Sandisk UFS part is fine without it. The downstream 5.10 kernel
-for the same board voted this path as average bandwidth through DT and did
-not have the problem.
+Tested-by: Hasty Heat <hastyheat@gmail.com>
 
-I could not reproduce the performance regression from the commit desc on
-mainline though on the Nothing Phone (3a) (Milos, SK hynix H9QT1GGCN6X147),
-tested without this change applied, dropped USB vote and compared UFS perf,
-could just be something wrong with my test though.
-
-Wanted some opinions if this change was correct for mainline regardless.
----
- drivers/ufs/host/ufs-qcom.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-index 7e6cb6dc42d1..4b23037d571b 100644
---- a/drivers/ufs/host/ufs-qcom.c
-+++ b/drivers/ufs/host/ufs-qcom.c
-@@ -950,7 +950,7 @@ static int ufs_qcom_icc_set_bw(struct ufs_qcom_host *ho=
-st, u32 mem_bw, u32 cfg_b
- =09struct device *dev =3D host->hba->dev;
- =09int ret;
-=20
--=09ret =3D icc_set_bw(host->icc_ddr, 0, mem_bw);
-+=09ret =3D icc_set_bw(host->icc_ddr, mem_bw, 0);
- =09if (ret < 0) {
- =09=09dev_err(dev, "failed to set bandwidth request: %d\n", ret);
- =09=09return ret;
-
----
-base-commit: bf1ee2bd5c2da8992f33c8950ef194aaff74ed6c
-change-id: 20261006-ufs-icc-bw-e2a8bf90118e
-
-Best regards,
--- =20
-Alexander Koskovich <akoskovich@pm.me>
-
-
+It would be good to get this into stable as well, since cb97bf3d4f91 is
+already in 7.2.y.
