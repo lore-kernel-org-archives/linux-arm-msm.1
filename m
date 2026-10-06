@@ -1,364 +1,393 @@
-Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010027.outbound.protection.outlook.com [52.101.69.27])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D304D3DC4D7;
-	Tue,  6 Oct 2026 08:19:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.69.27
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B476D3E3D85
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 08:30:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791274753; cv=fail; b=Pc0Nib0YbgYY6j8by0Tur0tFLEz5sUqi53WR9DNQcUdzkQMl6pi2zgrDW1Sxi9EaiccSbecocAH+SAUm31Vbi9l1hyNa5SuYhfimGwd/jo0MDLvh9/M/lk94zCwt4x55D4ePfsnog2tSK3UIC/VnbOInY418kSjv2YMDRTa52iU=
+	t=1791275449; cv=pass; b=n9SkJBl9rnv70V4C/5HIf3W2XI+8fpVVwlfabJkqeo/vGnQcW6kALg1Kdydg6PyA7Cv+YNyRK1/xbmY07kno9S2EQ7UP6R2wRTV8qEg3teT5kFjVYWvHDBEmPsu/JWXjeQjYye6Ecl3d8wRu90nmBqnjf+AGOrbdeq9TxBjlgrw=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791274753; c=relaxed/simple;
-	bh=So4mg7oVwQx+KJrbOi+HPdHw2KTrV3W76oNFMaSBda4=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=UgQkaJORGUgirCRZFuSbbmTo9CQtYK0jsBOTw1c0nnt0DkcQwntSNnAfyLgErhz5+v/dj7iWCFqny6X43cydwYACcrlcqxWh78YgkoFpdv9qF/3Io8lxX8oFF3qgWbRMDXjCbxM/CcIu/Ms/HwkWzmV3Q+6rO6p7t4T5FR+qREw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=LAxjV/0z; arc=fail smtp.client-ip=52.101.69.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+	s=arc-20240116; t=1791275449; c=relaxed/simple;
+	bh=SZ2Cqouzf2DxnR7lhpDTzXtTUMd+wHcWoo2UCnDoWlA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=SHvc6XuUndICRiDafXsTAgL2WiWmecw6bwdJWbYNCCD5x7ZWe8JVzqH7pWGr2//lfzJW6+Sol//CpnxfC10Wec87UCg0U1+iJdSnwPWIv5uRb0KYjLMJHgjbb6RFjcVz6W3u0GTx1JaNfl6d9ZhuAn7r6GHezPv6MKE/QsZb6/k=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WtZJbPWm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iDwgmie2; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="LAxjV/0z"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ljjVFipCA9Vmsoh3AELrut9Df5WkcB9U6NUbZeJq+uZVx7u21hsyikFF9HYxHgpBSFo+Be0sk9ntC7yui058A/2ZDcK5wL34luEdfGM3t/FxQbqEOofxGDvnikP3UtoDJLnrKXBNnK935zO/0U6/vxO+GUGGBf7CIZzq7DfYuzPjnGaUNn7vldHoP933Ko8zg/eUnUS7Sj1sny5bD7SUKvvbyvpDO4yo0FpfG2c5BjA2PXMeWwwMhTsenfa+a4EmCo2N7Ws1eoWrhLyx3HlIqaN7GC8eaE6Ad8qR/z1O5Lje+HSX1m98CPoJSTHATG8epwXFGOULaA+lN3kfH6W0+w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DRzNkkSp+X4qVCV/3gi28dTbhxG3vpTRtxd7swhK/s0=;
- b=wpwNl8XWnQ31jd8O8/J+erKCguEKpT75/cU+6PL4xSktivkHYOe38zDb7z+H+NemUszpszt5QbnWDUvf9fhs+rPdOkpj9BeNQJaEMbW+vwaLSVUUdJjDEqPyskCKH/P7o4+r4oZuRXPGSlT3wlHwJ0rEmnAoo6wGMLskUagr69lxrDL1Dd5GDuvbIJqNQ1xPJQHhUiNlJ3YRMVDq2F+7qo92SMFox3w3+RgqplvW3Shx8/kD+xsjYGaJocamw9ev8D9y360oApEtCJfrgQCmFPvGPQMvZhiDdC5BmC74LjGyul3bZWR3CeKRCDQ/mfup/+mJK9Zy6pMs7XzpVORPcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DRzNkkSp+X4qVCV/3gi28dTbhxG3vpTRtxd7swhK/s0=;
- b=LAxjV/0zXncXuUPyKlp4W9Lgy416tLVrk81ECSs4iHNgZ6aD2VtkZKfXBj7Z0zhXo6F0dh9ZfMVly5HBBQcC3d3KlaaQRdwXeNgCyC8hT7TSnA1vNLxNobeLdV/06QN9Pe3l7UOAgU9lyR+1qiG9d4uy0wJAPZOhFFtg2UtvEew4sKOSikOxIWBAbHi4idK5cQPE++mTgc+5h/4tmzv+BbWXFL3/+IK9SbFktMqD188uRW75IvLhLsJv9PIEwS+zfRiTiKInXtLbXBxx+JufNxEW5dreBhd+kxQNgOoFsyrVLt+VNVggeR6NMAEXLQnypOMGwBzuIDCXN8u2ggitWQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from PA6PR04MB11910.eurprd04.prod.outlook.com
- (2603:10a6:102:516::16) by GV1PR04MB9198.eurprd04.prod.outlook.com
- (2603:10a6:150:29::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
- 2026 08:19:04 +0000
-Received: from PA6PR04MB11910.eurprd04.prod.outlook.com
- ([fe80::d3f0:3c24:f717:4989]) by PA6PR04MB11910.eurprd04.prod.outlook.com
- ([fe80::d3f0:3c24:f717:4989%6]) with mapi id 15.21.0472.016; Tue, 6 Oct 2026
- 08:19:03 +0000
-Message-ID: <7fde4308-f177-4031-bca0-de576ce69a7e@nxp.com>
-Date: Tue, 6 Oct 2026 10:19:01 +0200
-User-Agent: Mozilla Thunderbird
-Subject: [PATCH v10 5/9] media: Documentation: uapi: Add qcom-camss ISP params
- documentation
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>
-Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-hardening@vger.kernel.org
-References: <20260925-camss-isp-ope-v10-0-2622411034cb@oss.qualcomm.com>
- <20260925-camss-isp-ope-v10-5-2622411034cb@oss.qualcomm.com>
-Content-Language: en-US
-From: Antoine Bouyer <antoine.bouyer@nxp.com>
-In-Reply-To: <20260925-camss-isp-ope-v10-5-2622411034cb@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS8P251CA0026.EURP251.PROD.OUTLOOK.COM
- (2603:10a6:20b:2f2::17) To PA6PR04MB11910.eurprd04.prod.outlook.com
- (2603:10a6:102:516::16)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WtZJbPWm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iDwgmie2"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6966e3cB3902899
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 08:30:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	IhWlzBrodTtXgnRYBtXz3K30QUfYNEEzBTba7ysaKrw=; b=WtZJbPWm6l7NKU7g
+	FJT84V79FBs5oTdx+yM0TDl+LPRCsrNtXXSlKWlyw+GO7+0oB3jcfrmiy9ghVIcb
+	LpxVuV2HKLM/7ydx1e5aHInj+eb7Woi6fYp/B+nxdS0aF9vJWay6cyFlcFmKiGnc
+	L95F0q3gol8M5U/4nRhUQQ0Jmu1dlEqRklYidJC0qAupoAfp6yVosMtWJXE/6L2p
+	IZDfwUnUicdx0B8y+mZ7pw2iRecFP0ROcyyiycIoP4Hqmp4oRL3RnaYraVE46qW2
+	lNLkkoGZdVlmGysgRrFNJvj5aN7xnb1lkHG2DLSCjr53TWzKuQnXtUj7PgA4ch+f
+	/T6lQw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4a7dvd8t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 08:30:16 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cbf2fd504so515199185a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 01:30:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791275416; cv=none;
+        d=google.com; s=arc-20260327;
+        b=l3mv7W55LQ28tnCotzbsdy1XxEno+MWwr595TTOz313MbRRSJJpCZCcfXCpWbxrMu8
+         8TxLKUQjR8Qz0Brq2cog9pQQPPohM9kSzl2vCeIMGdHaeI+n5PIDU1vPPJcOYT+hWRFk
+         o35JuaOOPG92JRYqvMmcSdc1xoobVNw7K/U+yJXKGq2F54k/VKGs5asZyIRyrNHlrcdP
+         daa/wJ/5mgM7pxG7V1YfbJQMWwmOdDfq3kdRt2Zyrn6ZtUCX8YiEmZX1mt5yYjpfNAV2
+         X/GBoBAXxHVfoXqlL5JhdiFn4PXLudXb2mv8fnGka8bNk3FHRFOTYRq8XQgp5cSlwTHG
+         w1Zw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=IhWlzBrodTtXgnRYBtXz3K30QUfYNEEzBTba7ysaKrw=;
+        fh=5MTNbndVhLTVgnCrHc6jTAYtqQt9QmwJGn3KWQCuk2I=;
+        b=CjQTinx9BLA2khhvIvL+9aGjlM1UI+/Mlv2cYvEN3BSWyJugwWzJCL7ubLxhV1dUcq
+         11lSQWfkCvbuswwTIx7ps/Bv4Je81SgDDQ/660Vuq8L0i4DWxyRDBpFy30We2mofqbju
+         k78AmFdigzMIBvq8Gb2eRHjlpy4SwQO+J6g0yxbFGR6DEAeSNrfhdeLtySIU1KXORJlB
+         B8lgqbIX4N5kfonszpJZ+LBJkDzS1fz2ugmaEdgtwUeVG2+guGVSTRq3I6GxzQSu3ZCz
+         LLBLqyyuM+Txq1QoOuR0QxDbzjxFjjpl8bWl4I5sHXvGjevTbU7YBvAkQqL65msHSz1c
+         xuMw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791275416; x=1791880216; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=IhWlzBrodTtXgnRYBtXz3K30QUfYNEEzBTba7ysaKrw=;
+        b=iDwgmie2pLDOUSyvDndzV357y+fYbzeZ3WPgnaoOXGnhbBYJ4hucFpoZDgXiCNMj+1
+         YmVB+Pv3S99HN752Y0bdc6GbvL1/2VTtkE3/HKNqk/GDs0vZ9ZPlbaq6XVpYxcrKy2dw
+         NUkOakaqjU6/4q5fLaCS+DHQogFSRr54Wspac/k96rT00i46vNpqhq65kYHFOTCR9NAq
+         i7U/mvuWDg9P7xh9TTQph+0zTbDH5xN1pWtof9s4bmaAXBKLcolS6LiWC6+8jVTTC+ZT
+         fwVfOmh2VRGo9JzkveW42i6INVsTawoQBOqNKtVFKnjZoa02F2mgJLN1LFgIqVkN+xGu
+         lPpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791275416; x=1791880216;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IhWlzBrodTtXgnRYBtXz3K30QUfYNEEzBTba7ysaKrw=;
+        b=MIHJgfItVaq2fzrqoM0Jr2s7JNHWTT3P/zcEJUudqupgMc61VSQOCHbOUndo6TyNtP
+         TyRTvNSSsjKIrU1VXwG9fJ6NRcwPpBhJuZvvkhh1GM4Mpth/iODnn3ESEjkisTbj2BOM
+         0erVJWTP4Lz+iNzNn0+ug6YgyWUamgy0g4GG2dAK25d88Np/NVb4yioLKUJnu1oOUbE+
+         WJs/9avFB0bZPkoSQU36gHiBj43htOcCuSkTp/6RfYZarIoHRkB5NNaPoXBFYvkQOx/n
+         zz1ndLw5FCzj84c0EavBazZV0tY5LVq9HLFfZsWORIa+7mYfeCwExe+DvF69WzEY3UAD
+         4G6Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwMlg7qJTrO/2Tb1VEH0g/8bVH4rj03n30QRbc3d15TZ47vMbgHfAqeB0QizUp97/70XHOiZblK6JkjQ+wc@vger.kernel.org
+X-Gm-Message-State: AFuF++mBGoI+E3iBBI54pxzuCbLzbzJhbCNlBcRnd4CFYbMSypMAdMQe
+	JjyA95E9dBJcJpZnuTdZctolJBhosUBvvIIDnXEeAmi0Hv45HEsd2lqRXcOeSSzqjMuTCv2SF6S
+	faR6oINsseU75oCxVDpBLQW/4yp3QA/b6E1D6VFZZOPtDcQnTz4oUd4VwRm0NJ/xAtMQdUbAz/u
+	pNFbJLO1aX5Ojd9TPBil8Bg/l0fp7ZSqScnnR+qP0GpZY=
+X-Gm-Gg: AYBFou15E+RYiaWfOykFIjFYtOI4bCS/C9eB57ea4RFGdIOGDFC7+jnYbu0pyABkWB2
+	9iM9Oh1HB8vXLRXDT04IBnCkhzabdr0Y0+m5M7qnYKpBGWKtrExiknpieo5V8N1HyXW2m89Bg86
+	GrJ9MZ4vfXWF/0Uixiww7ZYB/ZgACSqirvNnwYYurVGnOj51Di4PcAbG1GWGc0w9cbzlEZxvty5
+	cYMai+ymnVlFSo6xwixp4fVlRkNuiKgoz2ncdeGfRaGHabp6xjESApsArltaNTRhDm0zeUlX7I=
+X-Received: by 2002:a05:620a:2547:b0:939:de6c:cb45 with SMTP id af79cd13be357-93e8f4e85bcmr105691085a.47.1791275416099;
+        Tue, 06 Oct 2026 01:30:16 -0700 (PDT)
+X-Received: by 2002:a05:620a:2547:b0:939:de6c:cb45 with SMTP id
+ af79cd13be357-93e8f4e85bcmr105684885a.47.1791275415318; Tue, 06 Oct 2026
+ 01:30:15 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA6PR04MB11910:EE_|GV1PR04MB9198:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f054540-2649-4000-c4a6-08df23827ba5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|19092799006|7416014|23010399003|366016|921020|6133799003|18002099003|22082099003|3023799007|4143699003|11063799006|10067099003|56012099006|260925021311599003|260925021911599003|260925022911599003;
-X-Microsoft-Antispam-Message-Info:
-	jiVyHB8jwQYbUnCo8v1RO7vGL7522VhflhtEfqoHWeQq+BDJjYQpQ5Zs/Iqr8shGClVce7Bge33zhWDB1IWbQ7l78QSJkzsnPKAjTe0lx5H5UOksIdeIa4AEaJRFFgJ4H8/5iXyzmr4vXtEGA5uEThMQRLpGBgBfpWxcJc/3SUEOKsez8N6oL63QFC0oPcBG9voGxrdcKSWiWs9a3Qee96iGNCR88wXrRB1BLPzcedkEHTN44TOrcKjJreSdHYwVV9I7FO0KiNsl+72F8r64ua3YfVRgXdDIgwN5xPxNxEv+7wBAA630zM7opIiPCmISLOrEqQDJ+XqtTXVvSyS5hamHimhdVk89ezKB9oXLuSXyvCbRT/g1hQZMVGuBeIsu7SQlCjhvh4L2c7cEOG4cvC2GIRIctCoECCSLrCM/2RoK5/m4QuhJQXsOepeqn2tH3sIqQAf7IxRJkiiZiVDHqPjUgrAtqq8Bql6QNDX/VJdQ/OasFFipph8pV7FKSkfgxcermC3N1ufojU/mzI11Gon9gGRUAeFT1zhamBENr6DuTpSCBrpVTFb64tJTZ9bA5/jm1YsmS4qoldBc346nbbCka5Qk9PSqCsxTEouesDmGH9D/W56BzRjfQ5RHjJ7zdUCH3zZxyGYWZVz/lqhQdZBQQ3662Isp/I12/bTTCjo0JYRv/qe6N2h4zUjcdeG/qn5TbHctrnjrk/xCswWgJA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA6PR04MB11910.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(19092799006)(7416014)(23010399003)(366016)(921020)(6133799003)(18002099003)(22082099003)(3023799007)(4143699003)(11063799006)(10067099003)(56012099006)(260925021311599003)(260925021911599003)(260925022911599003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cTJycTB5NjVaczVmZXNIWUR2Z3dNR2FiZXpvdE1yZGh3MG1TaG9adkozWnAz?=
- =?utf-8?B?VkgzR1lhdXJvczg3Y2N3V2NlVnI4UFZwQmVmWi8yYmFiVUI2ZlF4akIrNTI1?=
- =?utf-8?B?bk5qK0R3TmU4SWtNcjc3cHZkV3pOTFBrTWltOEViMjJObWxVQjBMVHhzQW1F?=
- =?utf-8?B?dk51aEhFVW1jREpjK29ONXVpNXlJMjk3MXhVcmt4ZllXQSt2S1JkSmd1UmxG?=
- =?utf-8?B?TXhhOUV4a3VrUXNLUWJJd00rSTJIYjk4YmM1M3o2U3F1R05yNkdUK1RFWmto?=
- =?utf-8?B?Wnh6ZHU1R2l0TDBCZnlhVFlBVy9zbUx3STlnZ0o1Q3VCYklYeHVud2FzdWxi?=
- =?utf-8?B?UVplejJMSzZMV24rbU9FQXNjaGdzWlhaTUd4bXhqK3E5MzFxM3dBWEdhM1Bk?=
- =?utf-8?B?YjI0R1l1QzAwekhRczNtUFAvYnJXQ0pmQ2VkZHRHZGwzSjRnZVFlMDlQZGhh?=
- =?utf-8?B?VEVjcDJZUzQzR0JmZUdLTDVTdnhIaDM3Wjkvc0Z6QlJzMUYySC9uT3NDSFpH?=
- =?utf-8?B?c0wwcmVCNkY5azJnZXFSdUZramtmaEJFWG4yaFZONFRnUkZYQjZncGxtenVi?=
- =?utf-8?B?b01FSGtKR096bGs0amJSUHpNcjN5RUExRStNU0NtQWY4T3ZScGRiOWFtbjlB?=
- =?utf-8?B?SE9EbEF2OFNBTVM2ejQ3TnVTZ0VZNzh1a01pSmlIeTY4eTdWM0RjejRQSG9v?=
- =?utf-8?B?U1BlTENROEw3eURkNDI2YlduSEZYQU03ZFQ0OTF2TisrVHI3K1BhM3BXTE5P?=
- =?utf-8?B?ZXk3eXM3U3J6cTBMQ09wSTJnKzdwdnVNSUZqV3A4Q3hmYUZQR0xHelVhVEtH?=
- =?utf-8?B?bEFhaWNNWFVJQTRqVjJHZ2hQTGtMczZpWklvWUk0bExGYk9HekYvRnVEZVpL?=
- =?utf-8?B?bnc0cGE0aVQvVkk3Tkt5SXlCeXYzNGZtNDdPa1VhTTJ5NXJlV1l6VWZRRTg5?=
- =?utf-8?B?N2JiVTU5QUlZN3I1cXE2eVVXOTNyZmlYNWp4VXRBdjNLNGVRNmNWTVFUekdK?=
- =?utf-8?B?MjBSdXlkUDl1N2pzMDVUS1BQTkI5WFN2RGlobXlJRm10eUxzZFVycVJHU0FF?=
- =?utf-8?B?ekVqSmd4ZkZWOW9mY0JBTDBjR0JoR1ozalJmWW5La1NoeVBhaHpBT3hodThQ?=
- =?utf-8?B?blFQbnRybUNHRTNsYWRnL0E1SXM0c0VHQllwNjFZd3VTYnNxYVhtRG50a1BT?=
- =?utf-8?B?OXVBMVlBbDBlZlV0MHBBaFFyTWdJL0JTUk9lMXBHUnF1cWRLN29PWTZYYmdK?=
- =?utf-8?B?QTQzMmJuM2xGSnVvbFhnTnpoQnk3enlMdFU0TFFZVUt3anNRV1FMWm10M0lt?=
- =?utf-8?B?a3RYNzZNcy91dzNkenhpUWgwaUY5amlZNTFDbTc2RnlVOVlRdzZLZXB2L1JP?=
- =?utf-8?B?dHlQSUp2UGFBbVZidEQ4d3pFYmpTTldPUVdOcVNSUFFySTBrR3R2SjVlL1k0?=
- =?utf-8?B?ZDBiVkZSaENxV1Q5bDJsWVdTT2Mxb1hIanNaanBJMnRVVDZadDJROHA3MXFY?=
- =?utf-8?B?ZFhpQWdXd09UY0xmUWtqZEg5NFR5a2ZuTFNHR3luS3lHN0paeWd2YzNxS0ZY?=
- =?utf-8?B?ZmN3MHNEcEwrQkJkWGVDMVArK3hFWkZhUXNWcVpUTkhMWDBqakNoQ1FMRC9M?=
- =?utf-8?B?NUJ4UDZidTJreTBOMGZVL3VkeXFGdlg2VDUxL0p1L2p0VGd5MThZOUd4aXdp?=
- =?utf-8?B?a3I2UjEwSFhYSnQ5QktGMVo4NDVlOFJ4MHF1czRPVkliWHBCNUhxZ2hQY0Zh?=
- =?utf-8?B?dnhQK1B2RkU3TUtBZ3dwcXF2SS9NcHBUSEt2OE1PZkJhdlBRWGZUNHN4NXU2?=
- =?utf-8?B?bUdPVURqL09PZVluQXpEekFNUTFReVoxVm93US9tZFFkbHpRbkJ2NlBFQlVx?=
- =?utf-8?B?QndvTE56SFNqWnZUOWFqcFJaOXVwaktFOGZGcjB4bXFZS1FKNVAwMW9DZjNk?=
- =?utf-8?B?SERmN2lsU0hDdUkzZ08zY1NUMGFGbHAxbVRmK1hXOW9HUGFkK05Da29iYXYy?=
- =?utf-8?B?MWFaeUcwR0tjMWpiS0lXcnhZTWV5cit2c0d4aDBaKy95NytmWlVYT0xzbDg4?=
- =?utf-8?B?MUUvdUJMUzVVMzhLeG5pOEtiZjlOY3NBVnlUaGpqdGNKbW5PZzVJcG8ybFVx?=
- =?utf-8?B?dHN0b0MzMW9jZllDN2U5OVF4YjEyZVplVzNPOUFrK0NNYkZQeUo2QXN6WWtZ?=
- =?utf-8?B?enJoNGJHc0RaYjQ4VHBaVXM3U1B5Uno0d3JRRVRiNTNLc0xZTFJPSFlHcWls?=
- =?utf-8?B?VGJHU1dRQUxmWW4yVG81dnRYeDdLb09ZV3psaXMzMWJuNEN3RnE3SkNwcWI5?=
- =?utf-8?B?blRIazBveXNNSWF4Rk1aYWpabVI2K1pBQ3EyNzFCYW1zMldadUNGdz09?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f054540-2649-4000-c4a6-08df23827ba5
-X-MS-Exchange-CrossTenant-AuthSource: PA6PR04MB11910.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 08:19:03.8565
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3vF0lo+gIVWsE+CIIhNPWSjLCfbDedSF28sbktcckrSsn3oM8uWPQQA8tWXk2QrDlfrOFQY9AIHaDcez4qyZog==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9198
+References: <20261006040422.3208888-1-peter.hunt@opengear.com> <20261006040422.3208888-2-peter.hunt@opengear.com>
+In-Reply-To: <20261006040422.3208888-2-peter.hunt@opengear.com>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Tue, 6 Oct 2026 10:30:04 +0200
+X-Gm-Features: AclHuK87YvCOucsoBPBbwhveceYERw5WYT0aIkBl1ttuymaYMtJY8H6CXMeK9NM
+Message-ID: <CAFEp6-16BDkenpJBDsizvb8dGddXU+QzGuTv62v-hy-qtVbxGQ@mail.gmail.com>
+Subject: Re: [PATCH net-next v7 1/2] net: wwan: core: propagate modem control
+ signals to port drivers
+To: Peter Hunt <peter.hunt@opengear.com>
+Cc: ryazanov.s.a@gmail.com, johannes@sipsolutions.net, mani@kernel.org,
+        andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+        kuba@kernel.org, pabeni@redhat.com, netdev@vger.kernel.org,
+        mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDAzMyBTYWx0ZWRfX4x0KQQd5ntpT
+ vH1RwdrLhMjH2DuYMSFegpm+wlXH2xas+pFuLki5+O7bMMxTt/K4PC9QJxciXmGJQDRwWaL3Zcp
+ TGBBgApacscdARBAo8Io4ZsrV46yVaA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDAzMyBTYWx0ZWRfX8RIXNxvuYTkk
+ +SLg/VAhaZd8flUu8DZNe4Zk90pc3kPNHEcTpNtWdj0QzHJeOKC8S1EqCZeXeb2Ai8esHCxFwVf
+ UeYDgtgBW8UkcdBYW2uSSLJF5tUBZxLLZZbunqi2ylU6U6L8fEbbiJc1syJQ38F/mrTxdQkC18E
+ v7zuNQZ1FwKbzUB2VKd3UHSP29mo8DSJ8MOdMwSsYwECg4+0ZzCujKqjH3OOMFE+hg/DaQNkqb3
+ gdnax3+SP3y6HlvX7ZBSkCytOM0NCHv9F2nUDKX70J0YqPNRppkMhjSp4UzjPTMnUko0Cwm7N1P
+ XUtaLPCrM/ndGooV6eNq7Brn/pM2BzAD9OTbJYW823t2UGaDWfUulOvOBd+N5328BmHyY2jyBAj
+ V007IcEyzeBfQ2JqHjeVFRBoDXvEDdh5DmKlXCgFLsdKpJAGFEHLKZDfClkuElBTaEAwCa1T88c
+ Ve4DbmDVL2iHLHeEPqA==
+X-Proofpoint-GUID: QyRvcvNbZd373RP44Kn2xNz6wzqiawha
+X-Authority-Analysis: v=2.4 cv=SvwFe/O0 c=1 sm=1 tr=0 ts=6ac4b198 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=ZpdpYltYx_vBUK5n70dp:22 a=t2vznHeBAAAA:8 a=-ELhO9GzngQEtxseaSAA:9
+ a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=V_BghkRpYkFyHJIZkSH6:22
+X-Proofpoint-ORIG-GUID: QyRvcvNbZd373RP44Kn2xNz6wzqiawha
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-06_02,2026-10-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
+ adultscore=0 malwarescore=0 clxscore=1015 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060033
 
-Hi Loic,
+Hi Peter,
 
-On 9/25/26 11:09 AM, Loic Poulain wrote:
-> 
-> 
-> Add documentation for the Qualcomm CAMSS ISP parameters metadata format
-> (V4L2_META_FMT_QCOM_ISP_PARAMS). The format is built on the V4L2
-> extensible ISP parameters system, with per-block structs defined in the
-> qcom-camss-config.h uAPI header, and is designed to be shared by any
-> CAMSS ISP engine exposing a parameters metadata output video node. The
-> Offline Processing Engine (OPE) ope_params node is the first consumer,
-> with additional engines expected to add their own parameter blocks in
-> the future.
-> 
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+On Tue, Oct 6, 2026 at 6:05=E2=80=AFAM Peter Hunt <peter.hunt@opengear.com>=
+ wrote:
+>
+> The WWAN character device emulates the TTY modem-control ioctls
+> (TIOCMGET/TIOCMSET/TIOCMBIC/TIOCMBIS) for AT and QCDM ports, but the
+> result is only stored in port->at_data.mdmbits and never reaches the port
+> driver. A driver therefore cannot act on the host raising or dropping
+> DTR/RTS, even though some modems depend on it (e.g. they withhold
+> unsolicited AT result codes until the host asserts DTR).
+>
+> Add an optional ->dtr_rts(port, mdmbits) operation to struct wwan_port_op=
+s.
+> Drivers that implement it receive the full TIOCM bitmask so they can asse=
+rt
+> or de-assert DTR and RTS independently. The wwan core tracks the full TIO=
+CM
+> bitmask in port->at_data.mdmbits and calls ->dtr_rts when it changes, gat=
+ed
+> on WWAN_PORT_AT to match the open/close raise/drop behaviour.
+>
+> Also raise DTR/RTS in wwan_port_op_start on first open of an AT port when
+> the driver implements ->dtr_rts, and drop them in wwan_port_op_stop on
+> last close if HUPCL is set in the port's termios. This mirrors TTY
+> semantics and means individual drivers do not need to implement this
+> themselves. As on a TTY, HUPCL defaults to on for AT ports, and userspace
+> can clear it with TCSETS to keep DTR asserted across close, for example s=
+o
+> that closing the port does not end a call on a modem set to AT&D1/AT&D2.
+>
+> at_data.mdmbits is protected by data_lock. In the ioctl path the ->dtr_rt=
+s
+> call is deferred until ops_lock is held, where mdmbits is re-read under
+> data_lock, so the value passed to the driver always reflects the committe=
+d
+> bitmask under ops_lock and is serialised against concurrent ioctls and
+> against port removal (which nulls port->ops under ops_lock).
+>
+> wwan_remove_port() also drops DTR/RTS before ->stop() when a port is
+> removed while still open, regardless of HUPCL since the device is going
+> away. Both drop paths share a helper and pass the driver the resulting
+> bitmask.
+>
+> Signed-off-by: Peter Hunt <peter.hunt@opengear.com>
 > ---
->   .../userspace-api/media/v4l/meta-formats.rst       |   1 +
->   .../userspace-api/media/v4l/metafmt-qcom-isp.rst   | 147 +++++++++++++++++++++
->   MAINTAINERS                                        |   1 +
->   3 files changed, 149 insertions(+)
-> 
-> diff --git a/Documentation/userspace-api/media/v4l/meta-formats.rst b/Documentation/userspace-api/media/v4l/meta-formats.rst
-> index b5455229837e707c24e134438d5e2fd12cb3bf37..25b46af4d9f7faab37000076c530e9aad5b4a076 100644
-> --- a/Documentation/userspace-api/media/v4l/meta-formats.rst
-> +++ b/Documentation/userspace-api/media/v4l/meta-formats.rst
-> @@ -20,6 +20,7 @@ These formats are used for the :ref:`metadata` interface only.
->       metafmt-intel-ipu3
->       metafmt-pisp-be
->       metafmt-pisp-fe
-> +    metafmt-qcom-isp
->       metafmt-rkisp1
->       metafmt-rppx1
->       metafmt-uvc
-> diff --git a/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..2f3654a9ba897d0d1481d38a7117be8e84b1a99e
-> --- /dev/null
-> +++ b/Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
-> @@ -0,0 +1,147 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. c:namespace:: V4L
+> v7: Drop DTR/RTS on last close only if HUPCL is set, and default HUPCL on
+>     for AT ports. Pass the masked mdmbits rather than 0 from
+>     wwan_remove_port(), via a helper shared with the close path. Both
+>     from the Sashiko review of v6
+> v6: Rebase onto net-next. Snapshot mdmbits under data_lock before calling
+>     ->dtr_rts from wwan_port_op_start()/wwan_port_op_stop(), rather than
+>     reading it after data_lock has been released
+> v5: Change ->dtr_rts signature from bool to unsigned int mdmbits so DTR
+>     and RTS can be driven independently; re-read mdmbits inside ops_lock
+>     in the ioctl path to close a concurrent-ioctl ordering race; add
+>     de-assert call to wwan_remove_port() for the hot-unplug case; update
+>     kernel-doc to note the op is AT-only and describe the mdmbits argumen=
+t
+> v4: Protect at_data.mdmbits in wwan_port_op_start/stop under data_lock;
+>     release data_lock and acquire ops_lock with a NULL check before calli=
+ng
+>     ->dtr_rts from the ioctl path; gate ioctl ->dtr_rts on WWAN_PORT_AT t=
+o
+>     match open/close behaviour; reduce boolean to TIOCM_DTR only
+> v3: Replace ->tiocmget/->tiocmset with ->dtr_rts(port, bool on) modelled
+>     on tty_port_operations.dtr_rts; raise/drop DTR/RTS in
+>     wwan_port_op_start/stop rather than in the driver (Loic Poulain)
+> ---
+>  drivers/net/wwan/wwan_core.c | 61 +++++++++++++++++++++++++++++++++++-
+>  include/linux/wwan.h         |  3 ++
+>  2 files changed, 63 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/net/wwan/wwan_core.c b/drivers/net/wwan/wwan_core.c
+> index ffbcf11e4e68..eba4b0582b5a 100644
+> --- a/drivers/net/wwan/wwan_core.c
+> +++ b/drivers/net/wwan/wwan_core.c
+> @@ -655,6 +655,10 @@ struct wwan_port *wwan_create_port(struct device *pa=
+rent,
+>         init_waitqueue_head(&port->waitqueue);
+>         mutex_init(&port->data_lock);
+>
+> +       /* AT ports hang up on last close by default, as a TTY does */
+> +       if (type =3D=3D WWAN_PORT_AT)
+> +               port->at_data.termios.c_cflag =3D HUPCL;
 > +
-> +.. _v4l2-meta-fmt-qcom-isp-params:
+>         port->dev.parent =3D &wwandev->dev;
+>         port->dev.type =3D &wwan_port_dev_type;
+>         dev_set_drvdata(&port->dev, drvdata);
+> @@ -679,12 +683,34 @@ struct wwan_port *wwan_create_port(struct device *p=
+arent,
+>  }
+>  EXPORT_SYMBOL_GPL(wwan_create_port);
+>
+> +/* Drop DTR/RTS on an AT port. Called with ops_lock held. On last close
+> + * the lines are only dropped if HUPCL is set, as for a TTY, on port
+> + * removal they are always dropped.
+> + */
+> +static void wwan_port_drop_dtr_rts(struct wwan_port *port, bool hupcl_on=
+ly)
+> +{
+> +       unsigned int bits;
 > +
-> +**************************************
-> +V4L2_META_FMT_QCOM_ISP_PARAMS ('QCIP')
-> +**************************************
-> +
-> +Configuration Parameters
-> +========================
-> +
-> +The ``V4L2_META_FMT_QCOM_ISP_PARAMS`` format carries image processing
-> +configuration for the ISP engines found in the Qualcomm Camera Subsystem
-> +(CAMSS). It is passed to a metadata output video node using the
-> +:c:type:`v4l2_meta_format` interface.
-> +
-> +Rather than a single struct containing sub-structs for each configurable area
-> +of the ISP, parameters use the :ref:`v4l2-isp` parameters system, through which
-> +groups of parameters are defined as distinct structs or "blocks" which may be
-> +added to the data member of :c:type:`v4l2_isp_params_buffer`. Userspace is
+> +       mutex_lock(&port->data_lock);
+> +       if (hupcl_only && !(port->at_data.termios.c_cflag & HUPCL)) {
+> +               mutex_unlock(&port->data_lock);
 
-`v4l2_isp_buffer` can be used now, which is common for both parameters 
-and statistics buffer types. `v4l2_isp_params_buffer` is kept for 
-compatibility with legacy drivers. But now, common structure should be 
-used instead. CC'ing Jacopo who helped on the common structure introduction.
+Using (scoped) guard version would be simpler:
+scoped_guard(mutex, &port->data_lock) {
 
-> +responsible for populating the data member with the blocks that need to be
-> +configured by the driver. Each block-specific struct embeds
-> +:c:type:`v4l2_isp_params_block_header` as its first member and userspace must
+> +               return;
+> +       }
+> +       port->at_data.mdmbits &=3D ~(TIOCM_DTR | TIOCM_RTS);
+> +       bits =3D port->at_data.mdmbits;
+> +       mutex_unlock(&port->data_lock);
+> +
+> +       port->ops->dtr_rts(port, bits);
+> +}
+> +
+>  void wwan_remove_port(struct wwan_port *port)
+>  {
+>         struct wwan_device *wwandev =3D to_wwan_dev(port->dev.parent);
+>
+>         mutex_lock(&port->ops_lock);
+>         if (port->start_count) {
+> +               if (port->type =3D=3D WWAN_PORT_AT && port->ops->dtr_rts)
 
-This is also valid for header structure. Now you can use common 
-`v4l2_isp_block_header` instead.
+I would recommend checking for the dtr_rts callback in
+wwan_port_drop_dtr_rts() rather than here.
 
-> +populate the type member with a value from :c:type:`camss_params_block_type`.
-> +Populated blocks must be placed consecutively in the data member, and the
-> +combined size of all populated blocks must be set in the data_size member of
-> +:c:type:`v4l2_isp_params_buffer`.
+> +                       wwan_port_drop_dtr_rts(port, false);
+>                 port->ops->stop(port);
+>                 port->start_count =3D 0;
+>         }
+> @@ -759,8 +785,20 @@ static int wwan_port_op_start(struct wwan_port *port=
+)
+>         if (!port->start_count)
+>                 ret =3D port->ops->start(port);
+>
+> -       if (!ret)
+> +       if (!ret) {
+>                 port->start_count++;
+> +               /* Mirror TTY semantics: raise DTR/RTS on first open of a=
+n AT port */
+> +               if (port->start_count =3D=3D 1 && port->type =3D=3D WWAN_=
+PORT_AT &&
+> +                   port->ops->dtr_rts) {
+> +                       unsigned int bits;
 > +
-> +The set of supported blocks depends on the CAMSS engine consuming the buffer.
-> +The block definitions themselves are shared across CAMSS ISPs; currently the
-> +Offline Processing Engine (OPE) is the only engine consuming them, through its
-> +``ope_params`` metadata output video node. Additional engines and blocks may be
-> +added to this format in the future.
-> +
-> +A block carrying ``V4L2_ISP_PARAMS_FL_BLOCK_DISABLE`` bypasses the
-> +corresponding hardware module. Any other block updates the module's
-> +configuration and leaves it enabled. Blocks omitted from a buffer keep their
-> +previously programmed configuration and enable state; until userspace submits
-> +a block for a given module, the driver's default configuration applies.
-> +
-> +OPE processing pipeline
-> +=======================
-> +
-> +The OPE is a memory-to-memory engine that reads a Bayer RAW frame from its
-> +``ope_input`` node and writes a YUV frame to its ``ope_disp_output`` node. The
-> +parameter blocks configure fixed-function hardware modules that the frame data
-> +passes through, in the following order:
-> +
-> +.. code-block:: none
-> +
-> +        Bayer RAW in            RGB domain                      YUV domain      YUV out
-> +        (8/10-bit)   +------+   +------+   +------+   +------+   +------+   +------+   (NV12/NV16/
-> +         ----------> |  WB  |-->| DEMO |-->|  CC  |-->| GLUT |-->|CHROMA|-->| DSC  |----------->
-> +                     +------+   +------+   +------+   +------+   |ENHAN |   +------+    NV24/GREY)
-> +                                                                +------+
-> +
-> +The stages, and the parameter block that configures each one, are:
-> +
-> +.. flat-table:: OPE pipeline stages
-> +    :header-rows: 1
-> +    :stub-columns: 0
-> +
-> +    * - Stage
-> +      - Module
-> +      - Parameter block
-> +      - Function
-> +    * - WB
-> +      - CLC_WB
-> +      - :c:type:`camss_params_wb_gain`
-> +      - Per-channel white balance gains and black-level / pedestal offsets,
-> +        applied to the raw Bayer data.
-> +    * - DEMO
-> +      - CLC_DEMO
-> +      - *(none)*
-> +      - Demosaic: reconstructs a full-resolution RGB image from the Bayer
-> +        mosaic. Always enabled; not configurable through this format.
-> +    * - CC
-> +      - CLC_CC
-> +      - :c:type:`camss_params_color_correct`
-> +      - Color correction matrix applied in the RGB domain.
-> +    * - GLUT
-> +      - CLC_GLUT
-> +      - :c:type:`camss_params_gamma`
-> +      - Per-channel gamma correction curves (256-entry LUTs).
-> +    * - CHROMA_ENHAN
-> +      - CLC_CHROMA_ENHAN
-> +      - :c:type:`camss_params_chroma_enhan`
-> +      - RGB to YUV color transfer matrix.
-> +    * - DSC
-> +      - Downscaler
-> +      - *(none)*
-> +      - Chroma (and, when required, luma) downscaling to produce the requested
-> +        YUV subsampling, e.g. YUV 4:4:4 to 4:2:2 (NV16) or 4:2:0 (NV12).
-> +
-> +The input node accepts 8-bit and 10-bit packed Bayer RAW formats (for example
-> +``V4L2_PIX_FMT_SRGGB8`` and ``V4L2_PIX_FMT_SRGGB10P``). The output node
-> +produces semi-planar YUV (``V4L2_PIX_FMT_NV12`` / ``NV21`` / ``NV16`` /
-> +``NV61`` / ``NV24`` / ``NV42``) or luma-only ``V4L2_PIX_FMT_GREY``. A
-> +configurable stage is bypassed while its block carries
-> +``V4L2_ISP_PARAMS_FL_BLOCK_DISABLE``.
-> +
-> +The following example populates an OPE parameters buffer with a white balance
-> +and a gamma correction block:
-> +
-> +.. code-block:: c
-> +
-> +       struct v4l2_isp_params_buffer *params =
-> +               (struct v4l2_isp_params_buffer *)buffer;
-> +
-> +       params->version = V4L2_ISP_PARAMS_VERSION_V1;
+> +                       mutex_lock(&port->data_lock);
+> +                       port->at_data.mdmbits |=3D TIOCM_DTR | TIOCM_RTS;
+> +                       bits =3D port->at_data.mdmbits;
+> +                       mutex_unlock(&port->data_lock);
+> +                       port->ops->dtr_rts(port, bits);
 
-so as common version: V4L2_ISP_VERSION_V1
+Could we add a wwan_port_raise_dtr_rts() counterpart to
+wwan_port_drop_dtr_rts() and move this AT/TTY-specific handling there?
 
-There are multiple occurrences in your series. But I only highlight some 
-of them.
-
-Best regards
-Antoine
-
-> +       params->data_size = sizeof(struct camss_params_wb_gain) +
-> +                           sizeof(struct camss_params_gamma);
+> +               }
+> +       }
+>
+>  out_unlock:
+>         mutex_unlock(&port->ops_lock);
+> @@ -773,6 +811,11 @@ static void wwan_port_op_stop(struct wwan_port *port=
+)
+>         mutex_lock(&port->ops_lock);
+>         port->start_count--;
+>         if (!port->start_count) {
+> +               /* Mirror TTY semantics: drop DTR/RTS on last close of an=
+ AT
+> +                * port if HUPCL is set
+> +                */
+> +               if (port->ops && port->type =3D=3D WWAN_PORT_AT && port->=
+ops->dtr_rts)
+> +                       wwan_port_drop_dtr_rts(port, true);
+>                 if (port->ops)
+>                         port->ops->stop(port);
+>                 skb_queue_purge(&port->rxq);
+> @@ -980,6 +1023,7 @@ static long wwan_port_fops_at_ioctl(struct wwan_port=
+ *port, unsigned int cmd,
+>                                     unsigned long arg)
+>  {
+>         int ret =3D 0;
+> +       bool call_dtr_rts =3D false;
+>
+>         mutex_lock(&port->data_lock);
+>
+> @@ -1036,6 +1080,8 @@ static long wwan_port_fops_at_ioctl(struct wwan_por=
+t *port, unsigned int cmd,
+>                         port->at_data.mdmbits |=3D mdmbits;
+>                 else
+>                         port->at_data.mdmbits =3D mdmbits;
+> +               if (port->type =3D=3D WWAN_PORT_AT)
+> +                       call_dtr_rts =3D true;
+>                 break;
+>         }
+>
+> @@ -1061,6 +1107,19 @@ static long wwan_port_fops_at_ioctl(struct wwan_po=
+rt *port, unsigned int cmd,
+>
+>         mutex_unlock(&port->data_lock);
+>
+> +       if (call_dtr_rts) {
+> +               unsigned int bits;
 > +
-> +       __u8 *data = params->data;
+> +               mutex_lock(&port->ops_lock);
+> +               if (port->ops && port->ops->dtr_rts) {
+> +                       mutex_lock(&port->data_lock);
+> +                       bits =3D port->at_data.mdmbits;
+> +                       mutex_unlock(&port->data_lock);
+> +                       port->ops->dtr_rts(port, bits);
+> +               }
+> +               mutex_unlock(&port->ops_lock);
+> +       }
 > +
-> +       struct camss_params_wb_gain *wb =
-> +               (struct camss_params_wb_gain *)data;
-> +
-> +       memset(wb, 0, sizeof(*wb));
-> +       wb->header.type = CAMSS_PARAMS_WB_GAIN;
-> +       wb->header.flags = V4L2_ISP_PARAMS_FL_BLOCK_ENABLE;
-> +       wb->header.size = sizeof(struct camss_params_wb_gain);
-> +
-> +       /* Unity gain on all three channels (15uQ10, 1024 = 1.0) */
-> +       wb->g_gain = 1024;
-> +       wb->b_gain = 1024;
-> +       wb->r_gain = 1024;
-> +
-> +       data += sizeof(struct camss_params_wb_gain);
-> +
-> +       struct camss_params_gamma *gamma =
-> +               (struct camss_params_gamma *)data;
-> +
-> +       memset(gamma, 0, sizeof(*gamma));
-> +       gamma->header.type = CAMSS_PARAMS_GAMMA;
-> +       gamma->header.flags = V4L2_ISP_PARAMS_FL_BLOCK_ENABLE;
-> +       gamma->header.size = sizeof(struct camss_params_gamma);
-> +
-> +       /* Identity curve (pass-through, gamma 1.0) */
-> +       for (unsigned int i = 0; i < CAMSS_GAMMA_LUT_SIZE; i++)
-> +               gamma->glut[i] = gamma->blut[i] = gamma->rlut[i] = i;
-> +
-> +Qualcomm CAMSS ISP uAPI data types
-> +==================================
-> +
-> +.. kernel-doc:: include/uapi/linux/qcom-camss-config.h
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 3a19da74d00c9dfb48e900df71a86d4686d3ec2c..b5593f814b60fcbcd88f4b4aad25880d19825dc0 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -22363,6 +22363,7 @@ L:      linux-media@vger.kernel.org
->   S:     Maintained
->   F:     Documentation/admin-guide/media/qcom_camss.rst
->   F:     Documentation/devicetree/bindings/media/qcom,*camss*
-> +F:     Documentation/userspace-api/media/v4l/metafmt-qcom-isp.rst
->   F:     drivers/media/platform/qcom/camss/
-> 
->   QUALCOMM CLOCK DRIVERS
-> 
+>         return ret;
+>  }
+>
+> diff --git a/include/linux/wwan.h b/include/linux/wwan.h
+> index 1e0e2cb53579..57406139304e 100644
+> --- a/include/linux/wwan.h
+> +++ b/include/linux/wwan.h
+> @@ -57,6 +57,8 @@ struct wwan_port;
+>   * @tx_blocking: Optional blocking routine that sends WWAN port protocol=
+ data
+>   *               to the device.
+>   * @tx_poll: Optional routine that sets additional TX poll flags.
+> + * @dtr_rts: Optional routine that updates the modem control lines to ma=
+tch
+> + *           @mdmbits (a TIOCM_* bitmask). Only called for WWAN_PORT_AT =
+ports.
+>   *
+>   * The wwan_port_ops structure contains a list of low-level operations
+>   * that control a WWAN port device. All functions are mandatory unless s=
+pecified.
+> @@ -70,6 +72,7 @@ struct wwan_port_ops {
+>         int (*tx_blocking)(struct wwan_port *port, struct sk_buff *skb);
+>         __poll_t (*tx_poll)(struct wwan_port *port, struct file *filp,
+>                             poll_table *wait);
+> +       void (*dtr_rts)(struct wwan_port *port, unsigned int mdmbits);
+>  };
+>
+>  /** struct wwan_port_caps - The WWAN port capbilities
 > --
-> 2.34.1
-> 
-> 
-
+> 2.43.0
+>
