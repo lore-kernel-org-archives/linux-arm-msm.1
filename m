@@ -1,186 +1,300 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CBE73B3BFE
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 11:33:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C88693D75DE
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 11:34:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791286395; cv=none; b=dHhOQ0eN8x9QBeoPtdlcYQSVSYLK3IyEl8Z9R6Ep6CEtJOUxc1QTyRR4xXUB8ccRzg2sU58c/cuzqGpLmWQjCzOvIltVDvaP2N0GJYys2OXtVOzCjmm6ZmVqBI24IACRc7SZTIB8BtscPdQfH2XjrqtQSoWd/oThAwtok0R6F4g=
+	t=1791286442; cv=none; b=YMNQtsYU/35R+GUYO7EH2EU6bc5lL5W8Sd7xwNn29VixD0tSBj0MZOpPfV3p6q/20icf1aAQAKEfy7o+skLjZgEKYJi3fKyTkNt7mvPMeelPg/7OFN8DyxBxchAgVNSSAIojiwrk4KDpUI2TeCbIrQ7/q8XAuMiL8vb7kPOs9A4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791286395; c=relaxed/simple;
-	bh=NxQRZiY+1Hcu3WiCd9qT3XUs8DuDoZysC2wtJAyYpzk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=STb+0YtcVF9CIthtKNgR6axfoFmvMhQ7fWhU0D27Vvkb4KsmAJeLz9ni+Vk8Mfqcpxw6rUC5qN/Gu0N+Pr6Qc3vXphd0SZUhmsds4IluHvZ+OmAK9MPJxT34/u1fzqZ3oe9rhxhacAAv/6N+14zW1hAyCidVetA5cyqFkuwSYuQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kbgczoBq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VCKmxcH4; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791286442; c=relaxed/simple;
+	bh=QAtghu7R22LAhNOHP8a2/ZQ44ccfDu5h/pKPEgDwi1s=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=SGv+VgSN+J8NH8/MymTe1qzRJa5pLUvl9sXT1A1cxW0MWxWg9P2B7/EF6KxgI6p9DG2qc4rLL5uhyzocTCZvBVZoyMIr9W1G6sRIt7EUz1f5FcR9FAen7+HBwq1/w6tSTN/7DnLsZPHS7/MDKCo5zBqJ4D+KKmyEANYjdggQH5A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KYXfxdLl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SgTBPN8y; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kbgczoBq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VCKmxcH4"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696BPKqm717824
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 11:33:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KYXfxdLl";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SgTBPN8y"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696BPSdQ1172380
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 11:33:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	oJGeYwDt+tbcDelb918UexBGjhd7JLFFcooX7vZX/Mo=; b=kbgczoBqgM2c1xaA
-	5NzId0+jgOHZeE9jYcrLrPj4qV26KqBsmTiEJg9bKmJ71jUu/9YWoDYOpqk3paLN
-	8wHfxOoFQ0kuyJbZg8h/jaPxV04GM1iFhRJmawVzIuS5Za7vYQ3A/QWNtOaJ5Ack
-	YfYZ9bk4aIvCJ72gzVnussBnyQI1KLeZOCjSR5+1ZSC4aZ5oAUtpRhrUqIFmFUIs
-	4600B6r2BQrTzgttNi2SMz37SFghlBBrrsfXDHrNDc0QMRpo4VB9RAHYTUci1LqL
-	lVQh7iTkgpOjxryb6YpeUVdQaopFMhEfDmD5WTRVueX4ZHL2cSd6FBkK9ET4CYl8
-	lPyPnw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4gr3kbpt-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=j9g6/VTZ4DBNCpef5DHals
+	L6MkC4zrpO+tCFXsR/OPc=; b=KYXfxdLl9qvm0N9gfljpSmaFTo/ei8xQkKqc5u
+	rPuGpXBHK2hry6HOBIXuNLI0MFTp2PV2qfkmIK8l2/Df6C2FTsYiTDiYqSRsnS88
+	DbdILgqeWd4oW4f6j2H7/xi85D4eACrNRTf80I3Pf2Wv9+FuussbSkDqZNtUCSKi
+	xJL1TUEOt2zIN2cjhPXURVDLyujZwNCg7GVng5arOjbZ/w56x+rFQVYMjN4IxM+x
+	8AqY2IQ64beMMMfshmUPC3sQ1+2CSQHvTkIMZ8RrsYcdskSU/MZAR7z4hhs1DYGz
+	cyq8843h/qwDRVBil5kFtcg0FsXun9/wA09PLhDny7L1gNHA==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xwwr8dr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 11:33:13 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39512608fb1so5435346a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 04:33:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 11:33:59 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3a85a33333cso674734a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 04:33:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791286393; x=1791891193; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oJGeYwDt+tbcDelb918UexBGjhd7JLFFcooX7vZX/Mo=;
-        b=VCKmxcH4GWZ+7XNiEoM+nhJ8MQMQ9lHzQfKR63GqfBliCbAUk5U2fCPsqyvZhbMczT
-         77SQm5lFEJtGsNCc3ZUNhNNAxJQFJu/as2RrhoCwGV+L3H48uOnm8fn6oOF2Mj+5SkXJ
-         nAuhiUI8iI9DpkJ4W1+dJGQ5/4hNJVvQ5jhl5OkGAmcobBM37EOfhRVARlKokbyB7XWU
-         bVUdxLI8Mr/jJuXxBO+CDIigAGqiDgy33Do7dS3brpeWa96MxSEa0f/xiTmCacQOCQYx
-         /BlGwl/z/7l7y+jCqxt+6p+h4h8OWp/MHVItH27GqTeKMpshwfYUMCYla35jd1oF27EM
-         GS2A==
+        d=oss.qualcomm.com; s=google; t=1791286438; x=1791891238; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=j9g6/VTZ4DBNCpef5DHalsL6MkC4zrpO+tCFXsR/OPc=;
+        b=SgTBPN8yc2UPNHLh52DSuONJflj9MMv3z8QzCOg9BsZl7xpNY6qCGMbqycakoyHl0X
+         eTdGH+Ri7E7pvm7v2BHRAsoVr5rasIzFCecjce4mBkmQ3Zgua/g52IiXwz5aPiVS/JJ/
+         PmGc/gPeoXiUFtVMCtXfeR35xPeGiwEmg+dYXD++md03WWHtbeC1B6/H9l8sn8qSuJPo
+         Eha7OraVi5BTGqTpO3dFk7LHrr0zcxeS3VofryjKS1TFyEEiSbHMGlROGI94x4suP9Vy
+         aEPvVFjHJq7686DnCmACJIEuXUhFA5iUq3iBmN1Xw+krdrRegEtXdr0Bacz6OM1ev82U
+         u2WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791286393; x=1791891193;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oJGeYwDt+tbcDelb918UexBGjhd7JLFFcooX7vZX/Mo=;
-        b=du3yYu5VwQid2IiNA3BGaYz2OJRrIgObuy+TRWNpFHsR6+z/hohB5zrBkbAcLYI0Zo
-         Cbc+6+f2UWFa5/zcuY8DRNJbr8KBqOyUOqNVahgZ1NjuBF6sq1Vl37n9vmXAEzQbafPW
-         eXVZsCuZWGzA31fNkKooQDe5nSSw21tmOdI5FTgIKjYITzZuJ82yBOC5cE3O1mzJ4/6R
-         0m/PRTDPGvNrRuWosHt2fgP2oEKohXdjfXVc0jQkdeFCIMPIFZfm5GtoBSV5+IJLb0hh
-         1fOk1Kt0QMRWjYGwpZN2fCF4lktSKTK1fPHKtL8FvpcN1LFeq3+zLIOJRsDNcRvKoJGw
-         RyIA==
-X-Forwarded-Encrypted: i=1; AKwUvBxzBzoghImFTeB/Huzi+koKmJmA4LIJdWkZO/CF9a/OuXh688vo5QyL+TkcIfWVjzsGrEGiTkj8N6FsE6mh@vger.kernel.org
-X-Gm-Message-State: AFq9FYJzjCqqvfqdU2rPPCIngP1rsQEswkDwu5Rp6PNDo6iS/SpYl4uC
-	LItDcMedlUX9sNATS8XmdSBBTz0V/G2rnjdv4wGQQY+Q3KBXPZfOheFlyTcPXsAzjXB6RtWOirl
-	W8FrmqO3gk0sgXGMUsTstcKcw+aKdMtfL1CgAgW+qcOmwtkS4s9sNyhqD6Yi0WOlnjVHQ
-X-Gm-Gg: AYBFou3nMcnv038vPW5svW2LDCBUZjgJB9SKpJm6qJSXk8WOlS6sBWYK1I4qcQYf44A
-	y36d55fTd1Kmmae0XV6SqUpOD5LKSajG8sdv1qKbISrub2qFy6Ur7//DQ0oyBBL1EPl5/T9tr5j
-	JGgMe7a0LOnC+1jAr3V5dDMsVzLNiGc0QQDk7kYAfmJWAHDuOQ3e7NSA40PTI4UmIifih0wq/L7
-	xZUSkqvd4zfSxXOKRvnrfnom0nzp6UPtXex/YV7ybfaSYscrofY2f/JxOySSwezDJVvaq4X0sAL
-	3lG7RaMOYuM5PjhFu0yd+uGTxfhATKNG5Gk5wU885vvu6AhS04t+bHsiJoyVcKjtGC325JSmWXn
-	5Rdx5QFCp6avgA0Yibt//nUQOxcfwdQ==
-X-Received: by 2002:a17:90a:d650:b0:3a4:e9e4:37f9 with SMTP id 98e67ed59e1d1-3a7873ac0fcmr9545880a91.31.1791286392844;
-        Tue, 06 Oct 2026 04:33:12 -0700 (PDT)
-X-Received: by 2002:a17:90a:d650:b0:3a4:e9e4:37f9 with SMTP id 98e67ed59e1d1-3a7873ac0fcmr9545868a91.31.1791286392430;
-        Tue, 06 Oct 2026 04:33:12 -0700 (PDT)
-Received: from [10.218.5.9] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a6dd1142cdsm11315570a91.2.2026.10.06.04.33.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Oct 2026 04:33:11 -0700 (PDT)
-Message-ID: <4fb39acb-51c8-4abe-ad5f-bb5aeb180c55@oss.qualcomm.com>
-Date: Tue, 6 Oct 2026 17:03:07 +0530
+        d=1e100.net; s=20260707; t=1791286438; x=1791891238;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=j9g6/VTZ4DBNCpef5DHalsL6MkC4zrpO+tCFXsR/OPc=;
+        b=Q4Ae0thzctZhddiX7fNIWeltdjuAdRdxkMLwrqouuKDxlajSOHzo1n+q7dqRpy/ge6
+         P4JOaGKh5LynF3/oNjex/3p3yB7fjmMdtEBEjbCzJMVPlEww9yH9gpueBitjrDMgTFYc
+         AvPdREbd35fVNErYCu3WjECleBRuTiqGvVo6ZrYn9dcKShJPxmj5g9zbUR0qKBYcL8w9
+         BsxAWvYCj64GWjPgBJSQyge+Q1sHe9qjrx9mnHnP9cHRCxR5GhXalJjRs37C4k0P5UR9
+         7sYWLu/NenKxDWEz/6kZ5RpuIGCUi+0+HNoVVvKI53aA7QUq/SSqx7GqjNHEkVaFPHYk
+         y4Lw==
+X-Forwarded-Encrypted: i=1; AKwUvBxDMEghOp91Qyl8AtSQ3iSDhZyni4i9EYExkPn1fO/0E4tbimv74I12N7rNMrJXzY8MfVwgXlJ5waE5SAB3@vger.kernel.org
+X-Gm-Message-State: AFq9FYJJFB078dDjFxzagqdMYQQY4egSN8aOP5iVkjED01pXu5kSnr/a
+	mUXOw5mYXRDwTCdFT15eB8P/tekgVcQPsRgzCz+SdZkGMf/gKvsLf38qMv3skG1nsT/2/KVe8Oy
+	TNGP7HmzL99KJUVg07h75PPviu6wykD4Q7kCsYLTiDf3wbvVzyaQ/y4H6i2iyEE9vkX0m
+X-Gm-Gg: AYBFou0vcI+8qqrXdA1g7mmy+2AwhagK3XdqkkC6NClOJfedPjVRw4JDPFcVWg9t71D
+	bssONmN4aagz0BCcol5Mcib9/FnFif8LfBZmOzbgE9umD2kG50TnXNySU2AI5tJBirfz0YzUcU8
+	M23sKO+lNfinHoTxIXJxMu3u9lO48gKfyWI3s71wSDKTFKAkwzNjqBUASn4T7HyU+qoRTJM+GMj
+	gNdvoYZhjzagpRX2yTHOcNiOhRtxXGd/piuHmgrsyUCyFCOdyNQPFBPB9i3ZN5HcgzNNLSElc0o
+	lGbLrozz+j/gty1yvXJ+03dhklaM/oSbNGjwdmTykAlj1nUTUL9cLpcoi7Aa7io+qSxi/lKZPlu
+	90X3jRYda+JhknK0TvHTbhY6r
+X-Received: by 2002:a17:90b:1d02:b0:3a0:c85a:e602 with SMTP id 98e67ed59e1d1-3a8730ec4b5mr461290a91.9.1791286438099;
+        Tue, 06 Oct 2026 04:33:58 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d02:b0:3a0:c85a:e602 with SMTP id 98e67ed59e1d1-3a8730ec4b5mr461279a91.9.1791286437570;
+        Tue, 06 Oct 2026 04:33:57 -0700 (PDT)
+Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a709a4e80bsm9330092a91.4.2026.10.06.04.33.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Oct 2026 04:33:55 -0700 (PDT)
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Subject: [PATCH v4 0/7] Add TEE based client driver for UEFI Secure
+ Application
+Date: Tue, 06 Oct 2026 17:03:21 +0530
+Message-Id: <20261006-qcom_uefisecapp_migrate_qcomtee-v4-0-bf1c8e2a64ab@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] mailbox: arm_mhu_db: Remove redundant
- mbox_controller_unregister() on probe failure
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-        Jassi Brar <jassisinghbrar@gmail.com>,
-        Huang Yiwei
- <quic_hyiwei@quicinc.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Jassi Brar <jaswinder.singh@linaro.org>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261006-b4-mbox_double_unregister_fix-v1-0-9011ca208d36@oss.qualcomm.com>
- <20261006-b4-mbox_double_unregister_fix-v1-2-9011ca208d36@oss.qualcomm.com>
- <20261006093014.mak7ctqf37c22l4o@hu-mojha-hyd.qualcomm.com>
-Content-Language: en-US
-From: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
-In-Reply-To: <20261006093014.mak7ctqf37c22l4o@hu-mojha-hyd.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: tjhTjhhBP5QuMQOBtTYrxDvVaFW0pEoB
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA0NSBTYWx0ZWRfX1/RTsFSCPyZv
- MBaXXpe7wFW0BFDLM3aIkvA99x3qbLTmxv/YzIgBQfPPRBNurmj4n0XPKi2Lf2PUs0iGvntwLr6
- das2Ek2ElaONvDN/dLwtX2BvS7Ietn8=
-X-Authority-Analysis: v=2.4 cv=PNWaavqC c=1 sm=1 tr=0 ts=6ac4dc79 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-B4-Tracking: v=1; b=H4sIAILcxGoC/4XNQWrDMBAF0KsEraswM5Idp6veoxQjS+NEUMeO5
+ JiW4LtnnEDpIsGbgT983r+qzClyVu+bq0o8xRz7kwT7tlH+6E4H1jFIVgRUgoVKn33f1RduY2b
+ vhqHu4iG5kevlPzJrNFW5D7ZgQKtEGZJ0f+4Ln1+SjzGPffq9D064fB/2Dnar9oQadFsWe9+EI
+ oD1H33O2/PFfUuh28pRy8RE/1iidZaEbSpXtb5hS4gvWPPHIgCus0ZYNKEtPIEnNk/YeZ5vY1U
+ Ix4MBAAA=
+X-Change-ID: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
+To: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@kernel.org>,
+        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Harshal Dev <harshal.dev@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791286430; l=8127;
+ i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
+ bh=QAtghu7R22LAhNOHP8a2/ZQ44ccfDu5h/pKPEgDwi1s=;
+ b=pa/q9Q1vi9QslZnW2QTdImuOlN6BD4aT23nk1Wu15uRVKpvvCxtrsoc0g/71+E0PX8k899bc1
+ +LzuTBJmnmECfGkypJwAomdppNy6Ah83v9guvj7VgUIcxxKGf0HeSyM
+X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
+ pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA0NSBTYWx0ZWRfX6/0WoV0jzC86
+ Fth6iIBvi4zrzWl5AemsKfEGMZ30ZPa5x5zD0PZ+1Mcg+BbtcTuIN/2tsNt2O0k+Pbw7NQpM2Pf
+ WDYpbZxOZqfr55zjQqdXGVj0Q356F3JoLRXs3mBdhyM8O7GI6FGjXw8nmaXN4qb600C2WhC9FQj
+ uqxZTxqLfcpTUYKyfLPlLcY4YM+/vUDUysOx0UY8MNperBEc6etW3kw83Mo5sqkGR0PPqW0Y1vJ
+ gP/+umtiogjaoysvosFvfzyYebbMQoU4UFxG28+EINENp8GgAcLkh0ciXvnHOyPallpxu/iNkdM
+ Jdw+F8/LjBJ0WWrz/BQil029lQyBun4YFg7jQbUgWTwd16aY8nPfJkp4ZnZ1EpdQcuF3R56kw+D
+ NKxMZB6R+b5zERj1aM5KZ0Yj1KpwFKYhcm2jcHVmVDPWmf5UNJbl7AXHeuBb62UWdAwaqTbAnkU
+ f1htIpqLNIzgSJK7eyQ==
+X-Proofpoint-ORIG-GUID: offztbTmx_N0hZS-JPW2bHg8aN2r8DgN
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA0NSBTYWx0ZWRfX4KvikyfEaQyE
+ XUbDFvcT7CMNTp14WfB9I+IlhZnTJ6niU3J7/3bP4G9zHUCzbml/XRwBnvin9M7sioS4wI8OTyY
+ wj/PkZ3wP8uK7pmrWLtP5F/IYoQrl/s=
+X-Proofpoint-GUID: offztbTmx_N0hZS-JPW2bHg8aN2r8DgN
+X-Authority-Analysis: v=2.4 cv=SJXXx+vH c=1 sm=1 tr=0 ts=6ac4dca7 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=_l5KBuIKG0LRRNRTd_MA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA0NSBTYWx0ZWRfX+MRKLczATnEV
- c8iBtsQXCvXBvPXYs6lQLEXdQ5gHFWosTfKiQUIBTEZ22HZoLnE48rpSYEE+vvZegOWUcXN6DeZ
- 8uQByROnch3yBp0SPG5nHpqOgCg+10gSX0CMikSlOozfz5oQMobrn474TCbEApMa8JhXbMQBXJt
- jQ9KTFXmqSTrokP47P4YviXPwKpMgVfaZddl9ekzNY8R8RFKJQAYdPc7rZ4r5I6bxrkQjceAcFS
- UQj1VMUib4Ql2QXtVv8av5DV8LKpoR2nXUzwx80bTGb3evGaaBqQA1/mG5ZsGrG5P2zJDETNMSF
- eZHoc0CCz+bhz7lbmQuaBYoNEXjFq6/qSdRol1JP5gotFQoMt36JKZB4xW+wwBtthEuJLIkylk4
- NN0ZgIeG7t1D8kdbdrIDudVhXHef2M28KSpetyiSYCCGsg2hdHD43WkBnc4EzCFRrD7myjz0vcU
- 88j/p5rDh3l0covGJpQ==
-X-Proofpoint-GUID: tjhTjhhBP5QuMQOBtTYrxDvVaFW0pEoB
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=NEAV23lmAAAA:8 a=EPKcpx9xAAAA:20 a=EUspDBNiAAAA:8 a=P-IC7800AAAA:8
+ a=VwQbUJbxAAAA:8 a=FEm0RaP5oR6l8Mw6-ywA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22 a=d3PnA9EDa4IxuAV0gXij:22 a=ZT_8zCgGubuJgGonBfBE:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-06_03,2026-10-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 phishscore=0 clxscore=1015 adultscore=0
- malwarescore=0 spamscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060045
+ lowpriorityscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
+ malwarescore=0 spamscore=0 phishscore=0 adultscore=0 clxscore=1015
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610060045
 
+On Qualcomm SoC based platforms, UEFI stores EFI variables within the
+Replay Protected Memory Block (RPMB) located within either the UFS,
+eMMC or SPI-NOR storage. The RPMB key which is one-time programmed into
+the storage controller to allow authentication of the RPMB frames is
+generated by and only available to the Qualcomm Trusted Execution
+Environment (QTEE). Thus, only QTEE can prepare the RPMB frames which
+will be accepted by the storage controller.
 
-On 10/6/2026 3:00 PM, Mukesh Ojha wrote:
-> On Tue, Oct 06, 2026 at 02:44:15PM +0530, Anup Vishwakarma wrote:
->> mhu_db_probe() registers the mailbox controller via
->> devm_mbox_controller_register(), which automatically calls
->> mbox_controller_unregister() through devres when the device is removed
->> or probe fails. If devm_request_threaded_irq() subsequently fails in
->> the channel setup loop, the error path also manually calls
->> mbox_controller_unregister(), resulting in a double call that corrupts
->> the global mailbox controller list and causes a kernel panic.
->>
->> Remove the redundant manual call and rely on devres for cleanup.
->>
->> Fixes: 7002ca237b21 ("mailbox: arm_mhu: Add ARM MHU doorbell driver")
->> Signed-off-by: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
->> ---
->>   drivers/mailbox/arm_mhu_db.c | 8 +++-----
->>   1 file changed, 3 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/mailbox/arm_mhu_db.c b/drivers/mailbox/arm_mhu_db.c
->> index a39239e38a47..9668dfdedc78 100644
->> --- a/drivers/mailbox/arm_mhu_db.c
->> +++ b/drivers/mailbox/arm_mhu_db.c
->> @@ -315,12 +315,10 @@ static int mhu_db_probe(struct amba_device *adev, const struct amba_id *id)
->>   		mhu->mlink[i].tx_reg = mhu->mlink[i].rx_reg + TX_REG_OFFSET;
->>   
->>   		err = devm_request_threaded_irq(dev, irq, NULL,
->> -						mhu_db_mbox_rx_handler,
->> -						IRQF_ONESHOT, "mhu_db_link", mhu);
->> -		if (err) {
->> -			mbox_controller_unregister(&mhu->mbox);
->> +					mhu_db_mbox_rx_handler,
->> +					IRQF_ONESHOT, "mhu_db_link", mhu);
-> It looks like alignment/indentation is unnecessary changing.
->
->> +		if (err)
->>   			return err;
->> -		}
->>   	}
-> with the above fix.
->
-> Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+The legacy QSEECOM protocol used for communicating with the QTEE is
+deprecated and replaced with the use-case agnostic SMCInvoke protocol
+starting with the Qualcomm SM8x50 series. On platforms where the QSEECOM
+protocol still works (the QSEECOM driver probes) the driver does not
+support a listener interface with QTEE to enable writing of non-volatile
+EFI variables (via listener requests to Linux from QTEE) to the RPMB
+for UFS and eMMC storage. (Qualcomm Compute platforms with SPI-NOR storage
+are an exception to this and work with QSEECOM, see the NOTE below)
 
-Thanks for the review, Mukesh. Addressed both comments in v2: - Removed 
-the now-empty err_req_irq: label in qcom-ipcc.c - Restored original 
-alignment of devm_request_threaded_irq() arguments in arm_mhu_db.c
+Therefore on such platforms, a TEE client driver (which communicates with
+QTEE via the SMCInvoke protocol implemented by the QCOMTEE driver
+registered with the TEE subsystem) must be used to update such EFI variables
+through the RPMB service hosted in the QTEE supplicant user-space daemon
+[1] which forwards RPMB packets to the RPMB device.
 
-Best Regards, Anup Vishwakarma
+This series introduces such a uefisecapp TEE client driver for the
+aforementioned Qualcomm platforms which installs efi-var operations _if_
+the QCOMTEE driver registers support for an object-IPC based uefisecapp
+service on the TEE bus during its probe. Only new QTEE firmware versions
+available at [2] provide access to the uefisecapp service via the SMCInvoke
+protocol.
+
+Thus, QCOMTEE now maintains a static list of always-available object-IPC
+based secure services exposed by QTEE. These services are implemented either
+within the QTEE kernel or within a pre-loaded Trusted Application (TA)
+usually loaded by the bootloader. The uefisecapp TA is an example of a
+preloaded TA loaded by UEFI. A static list is required since QTEE does not
+yet expose any way to dynamically query and enumerate the services exposed
+by it.
+
+To facilitate object-IPC interactions from the kernel-space, this
+series also introduces a tee_client_object_invoke_func() to allow
+invocation of TEE objects similar to the existing tee_client_invoke_func()
+API exported by the TEE subsystem which allows invocation of TEE functions.
+Some suporting changes are also introduced to track and handle operations
+for TEE contexts opened from the kernel-space in the back-end QCOM-TEE
+driver.
+
+Finally and as previously mentioned, access to the object-IPC based uefisecapp
+service is restricted on older QTEE firmware versions. A new QTEE firmware
+release must be picked up from QArtifactory [2] for all upstream supported
+Qualcomm SoCs to enable access to uefisecapp service via the TEE client
+driver.
+
+This patch series has been validated on Kodiak RB3Gen2 platform with UFS
+storage by attempting to read/write EFI variables via the efivar tool [3]
+after mounting the efivarfs filesystem. See [4] for an example.
+
+NOTE: Since Compute platforms do not have a firmware running on their SPI-NOR
+storage controller which must be programmed with a RPMB key, QTEE has a
+SPI-NOR driver which holds the key, and so the QSEECOM driver can be used
+for updating EFI variables on these platforms because QTEE never makes a
+listener request to Linux (QTEE doesn't need the Linux SPI-NOR driver).
+Such platforms are outlined in the following static list [5].
+
+Merge Strategy:
+
+This patch series could either be taken from the OP-TEE tree or the
+QCOM soc tree. I would prefer it to be picked by the OP-TEE tree since
+all except the uefisecapp TEE client driver patch in this series make
+changes relevant to the TEE subsystem. It would be great if the QCOM soc
+tree maintainers can Ack the uefisecapp driver patch.
+
+[1] https://github.com/qualcomm/minkipc
+[2] https://shorturl.at/zQU07
+[3] https://github.com/rhboot/efivar
+[4] https://docs.qualcomm.com/doc/80-70020-27/topic/manage_uefi_environment_variables_using_efivar_tool.html
+[5] https://elixir.bootlin.com/linux/v7.3-rc5/source/drivers/firmware/qcom/qcom_scm.c#L2302
+
+Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+---
+Changes in v4:
+- Fixed kernel test robot warnings with gcc v16.1.0 [-Wvla-larger-than].
+- Update parameter docs for qcomtee_object_invoke() and param_to/from_args().
+- Split the defconfig change enabling the UefiSecApp TEE driver into a separate
+  commit.
+- Use pr_debug() instead of pr_err() when QTEE says it does not implement a
+  service being enumerated.
+- Re-name qtee_enumerate_service*() functions to qtee_register_service*().
+- Collected Reviewed/Acked-by tags from Sumit.
+- Link to v3: https://lore.kernel.org/r/20261001-qcom_uefisecapp_migrate_qcomtee-v3-0-13df5c20c2e3@oss.qualcomm.com
+
+Changes in v3:
+- Updated the cover letter and commit messages to highlight the following:
+  1. Only QTEE has the ability to prepare RPMB frames since it generates and
+     holds the RPMB key.
+  2. The QSEECOM protocol is deprecated on new platforms and so this series
+     migrates the uefisecapp to SMCInvoke which is a use-case agnostic, transport
+     focused and easier to maintain protocol.
+- Use single if statement to update both flags and addr/uaddr.
+- Remove redundant use of new error variable in qcomtee_get_qtee_feature_list().
+- Minor fixes such as concise error prints and use of better error codes.
+- Fix a double free in qtee_enumerate_service().
+- Re-org the qcomtee_enumerate_services() function to re-use the same oic and
+  client_env object.
+- Remove depends on !QCOM_QSEECOM_UEFISECAPP from Kconfig since both drivers
+  can co-exist even on platforms that support both QSEECOM and SMCInvoke protocols.
+- Update the Kconfig description to better help the user understand when to enable
+  the TEE based uefisecapp driver.
+- Removed qcom_tee_uefisecapp.h file and inline the header in qcom_tee_uefisecapp.c
+- Rebased patch series onto the latest linux next tag: next-20260930.
+- Link to v2: https://lore.kernel.org/r/20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com
+
+Changes in v2:
+- Drop using MSB of the object_id to distingush kernel and user object invoke contexts.
+- Introduce enum tee_object_invoke_origin to check the context of object invocation.
+- Link to v1: https://lore.kernel.org/r/20260707-qcom_uefisecapp_migrate_qcomtee-v1-0-f659cbd5d04c@oss.qualcomm.com
+
+---
+Amirreza Zarrabi (2):
+      tee: Add kernel client object invoke helper
+      tee: qcomtee: Allow object invokes from kernel clients
+
+Harshal Dev (5):
+      tee: qcomtee: Track the object invocation context
+      tee: Export uuidv5 generation for TEE backends
+      tee: qcomtee: Add support for registering QTEE services on TEE bus
+      firmware: qcom: Add support for TEE based EFI-var client driver
+      arm64: defconfig: Enable UefiSecApp TEE client driver for Qualcomm SoCs
+
+ MAINTAINERS                                 |   6 +
+ arch/arm64/configs/defconfig                |   1 +
+ drivers/firmware/qcom/Kconfig               |  31 ++
+ drivers/firmware/qcom/Makefile              |   1 +
+ drivers/firmware/qcom/qcom_tee_uefisecapp.c | 648 ++++++++++++++++++++++++++++
+ drivers/tee/qcomtee/call.c                  | 211 ++++++++-
+ drivers/tee/qcomtee/core.c                  |   9 +-
+ drivers/tee/qcomtee/qcomtee.h               |  12 +
+ drivers/tee/qcomtee/qcomtee_msg.h           |   1 +
+ drivers/tee/qcomtee/qcomtee_object.h        |  16 +-
+ drivers/tee/tee_core.c                      |  24 +-
+ include/linux/tee_core.h                    |  23 +-
+ include/linux/tee_drv.h                     |  18 +-
+ 13 files changed, 967 insertions(+), 34 deletions(-)
+---
+base-commit: 6c2cb8b8b843d216ab549b678a0d8831c43153e0
+change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
+
+Best regards,
+-- 
+Harshal Dev <harshal.dev@oss.qualcomm.com>
 
