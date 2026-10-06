@@ -1,68 +1,68 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1799D3BA232
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:41:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D40A23B5839
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 22:41:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791326503; cv=none; b=Fkn5iobTurjsxP0EISL92xrD2Mzn//dJRZ/adgRGw9xsC/B5QBduqJ2XWVjNca12samUN7X0ZSzkKinUO3jghMZbxm/tWeHWRxTZHQV/Tx5SfJ17UfWCNC/7MIE7NvVyE/dbXdwjBL+lKsA9o2+mZrQXUjvA4CNmhCS4a3IUPdg=
+	t=1791326515; cv=none; b=Nuzxpj6P0mk9M3BrJ4r4b6yKHD9PbaqwR6MzXbRC7oHjPbvwvItSplBeooRjuGob6H6yZKNBY8KZvJ99ommK58W42cawnHFn+U/IhNscqBu7pyBBDlfRq8AKfDGIhXO0c0/D8caoxU05AQ7fd/3Z7bsqnc7QKaiOTAQtcWLiLtM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791326503; c=relaxed/simple;
-	bh=2hKc1ZoGqwUQh1gTMahm7DabCTCAHzhOeNtSIJ0Xy6M=;
+	s=arc-20240116; t=1791326515; c=relaxed/simple;
+	bh=ncztrglIeJ+FBFPARy2OWQPDE/c54qlVIzwutjSZYNU=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=jPNz9zK8TpjWvEFtusD61MbNaedHNt5A9IjY+pQu+2NQHpiKubTDb/2deGwigxAv6voB5dsT1/vTNqZzrT4I3as6zaPAJTr1evAaR7sX8MbsC9s4z/QVjc+4SAp+PJY3tMX1RGk0IFohHgZT3xExdlJrHtZjL6gaKZFRhpUO3lk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H1lyhsRP reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=MzWgMsLfycPuTvotsYLH3LEomAeqprLlle1tKRiX1K0gppFsMzMHHuYOjvCucnWJCOanans4dC3WQVuxIjx4z9zLc0bmad5U5Me3ODkn6C08ZSlAS1nNAoZMYtDNbKaVY9j9CKdkCxPqS1krzygeFiaqnkBlJBJJV+SIOfD/KyQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eHJwpdja reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H1lyhsRP"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696Lebtq2514194
-	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:40:59 GMT
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eHJwpdja"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 696LeH7V1029163
+	for <linux-arm-msm@vger.kernel.org>; Tue, 6 Oct 2026 22:41:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=JYdD8egJwrL
-	g7NcyXfZXtIAdt/Efnj+hzcMMsvzKWN4=; b=H1lyhsRPLW60l0+9q/Z/MIxKJke
-	yqe5oNxiHtGNC3vuLFKx2lfZpCUtR2KRH9MLphlcfAV1m9zJLwsHsDfyNTHFXRkA
-	Mu/dZ4Gi9AW2uvwZQlFzdYl98n4buvLtRV9iLLbGsbETCZtZPjmgFkWFgPDN3Nvi
-	25LSK39ofanak6w3TXdWJw9GAwHFvp8Lc0RAJbQr2H+35gaBpj42flIoMggKpbuH
-	fZnaFN3b4iwNGFJiOyKkgvgKNtgSmRuncG2hE4889/3Ci2MhNUTSmF0RHmY7zo+d
-	+pUfFcj1Z9+h5G7GPkj3NCl8JgLzRU1hlZy6KcuegvFg7uAYmoTdLvJGaoQ==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=VWJeGiUQif6
+	XovHMmELTcKwm1kNiECWlB8wzymJNLJI=; b=eHJwpdjaEjAcdYe3jbvygT8k/G7
+	0ZUToWk//r+ElfJ9Bn3w/fPMwe8VyPrVKQOdBBz9k7LPj/Zohc7k6Lupj0heXP8M
+	KTKV1F2CNpQ32bdHAmJsft3Mk2lhBA+KjTYkrqRYkc55ZOzWhbLGUTNRGPyXlxdC
+	IwEIXmR7+SrpJb+Og7c7xVX1B5GugBLYQQutSfhv1Oggv2b69c7MaYSql7faDL2/
+	gq8nxfZ+M9hoUmfFZ16TivAL3Cs4aLfllVuaJ08nKKptageYiivg9qPK0kjSckKA
+	qpdhI5TbzPSttygd6+QyeMTzeZNhhbZA7C58glzU1mTZ5HJ3ZmEQpFZfIWQ==
 Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xwwtwaa-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h53ashu3c-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:40:59 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb7f9bb86so647574185a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:40:59 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 22:41:08 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb6391e89so600241285a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 15:41:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791326459; x=1791931259;
+        d=1e100.net; s=20260707; t=1791326468; x=1791931268;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JYdD8egJwrLg7NcyXfZXtIAdt/Efnj+hzcMMsvzKWN4=;
-        b=AHDLmCwMVMxB94ZkSggWidhpjWZDr0R5Qw9GrPkTvzAFb9zhlcPobgGQA/XEMJSSb6
-         qeLS70M2Ndvn54qAubb5Q+jgK9TG8GopjNDV2cvUWu6OLIHgBPxyxnWOM/jBewry9TQ5
-         cDCz3Ujt2KFbAYflyEp0ZhWx9YffzLwwUzNTuxSjybFdk5LZPzgOi+clBELQs+wR0k0r
-         vHzQjt9Ah8rrBPUSLGKCphQdRUJBzG8eyCY2bkYcaRctRW2dlgZFG9h6YX5vxnyclXyn
-         phdEF4rvk0w03OYaXGFTqfAANvPcZMeVRNUvIYZWkt8sQRDJgffHcrfZNdpLV2J4lA/1
-         J9aQ==
-X-Forwarded-Encrypted: i=1; AKwUvByBKDz3kqrC0lgGZOvDIkQT26nlzUi86Ab7B8Th/1A4A5xH4zdFqtOpPvACJKaQQMBmHb1h88nuAHG0RFlA@vger.kernel.org
-X-Gm-Message-State: AFuF++mSdiz02Pn2UOLhTYIDQQrFApV8B4PLVISZrcZWmUgsHhBvKHp/
-	N4S0S540N3l9UsBGwGv8ejdQGqK6LNFMpM2N3ruVjfvemCp2QMmHGu1XbFBBuIzU92mlbZiY2jK
-	fssSuAArlyUe3/EPghiOgfTNDwgNPhOLbI+OCGd8vos4mTHxSIkRHdKGL8oxchUyuekoY
-X-Gm-Gg: AYBFou2EGSRbCrZKEdu/4cacILJpbOK3Am/g5GkgDmrEiHLPTvTzKni1j9+eSpu/Gqn
-	4sZBfgCj6S/Iq6QZBapcLshRCTdYAEyjKa6IQN481HHYESujSkxQglxPzzySHlWz75/VeBh77lm
-	+2TPNL2EFME8fXbCtD9OEniPO8Op5tHTq81OfrCiZtNXlNGvKgnXWwAaj86uG2U6+JenIdvZDHz
-	5VEYyzSH60DcgM4cdqz/CEK8LlFvVAymMSLGzDwyRv1KRSfbPjzXQwz5fZ+WG49xc12eDwOHIMA
-	98ZZpTzdLWex78azRywcW8kPSFeannVWvCKRsjs3cQinG+ArPW0nFfQ6GNo=
-X-Received: by 2002:a05:620a:2586:b0:93e:9808:8d6e with SMTP id af79cd13be357-93e9b857d84mr73448685a.72.1791326458237;
-        Tue, 06 Oct 2026 15:40:58 -0700 (PDT)
-X-Received: by 2002:a05:620a:2586:b0:93e:9808:8d6e with SMTP id af79cd13be357-93e9b857d84mr73444785a.72.1791326457711;
-        Tue, 06 Oct 2026 15:40:57 -0700 (PDT)
+        bh=VWJeGiUQif6XovHMmELTcKwm1kNiECWlB8wzymJNLJI=;
+        b=rawId+2nR8hIA0u7oaSGb/tYRbesdrH1Ymdb7giQv1IMEJZ+wFfE0E9nTXl9jwXZaL
+         DN0mfloHDevvkW383Ybn2ToeESsmefdBKOs8fTSYGUddW+T94+Cs38McHswwIHAY3q+C
+         PNJes37QqeBIntkPq5IrYMMBmr38Jyy92opzmoQSryxayjz4HkjcnurPYpMYnFe70V8v
+         tbEMSHjrTvPkD5BJY4xzL66NDYA6G7MetY3PMRVGCXmzHiPH0tdSZjU5p5F08cngfyi7
+         qmz6dU6o3jVM3QlFbsfJLTDlE4qbOElLQhbRV9tz2tdWzA8iglpkHYWr4ztuxO/pB9vx
+         m+QA==
+X-Forwarded-Encrypted: i=1; AKwUvBw7pQXVmLQMNMZ9HFqQQzMTJns+reE9KRz69XiWthYQzl0sCH3IdTvNr2lxdNGZ8uCsiWGahEXb0en4MzJz@vger.kernel.org
+X-Gm-Message-State: AFuF++n3+lEvD8vYtKjuLkjRqFjRQ/22ifqCK2rdq4+gOX37GseqEkz1
+	9p2SoKrkk0SPsZ0gmsGlFrpsVXm2SLlnVHmppnzB+DXOsHXq4njddwtvcV2PD/cP1A/krKe3/5K
+	uVtEvt+eEm/nm0y9IGAIpypXmCtcO5WJSPH3XKQvDWUs5m59fugV9EE3hrZHO7SVtj2OA
+X-Gm-Gg: AYBFou3Ks92I7qyJ13m5E1enyyj2rXytX/A/Gq5XBRocrZwQxAUNqda4zD9krMsIi6U
+	+EeKQ9/jhx3t7dlsZ7dkIzUmY0jN2BZtDxd+Q8ZEuJkxwlYCoVkq3LzMJLZyCwOGPyEQrT51Z5Z
+	B3SMgMi9zLdOKKswV/PYMZjJLdRvKiv9O9TsBmYmPwSTcHi1Flr7j8WcajPN/uKH7bml4Ttl9VK
+	MQETaYyxL4r8WcF+ajhXujQ8jqDO0Uh4W+KbdkFuKckT+iEkONPbBIYrFZLGFpuZqPGDIUxjZVo
+	MWWr077rBv0YNJQegQCnzpX0UKYCD0hWHgJk8UBrkV5IpslwesMPBQ6zuO0=
+X-Received: by 2002:a05:620a:1729:b0:930:f337:ebeb with SMTP id af79cd13be357-93e9b2e9672mr84157885a.12.1791326467373;
+        Tue, 06 Oct 2026 15:41:07 -0700 (PDT)
+X-Received: by 2002:a05:620a:1729:b0:930:f337:ebeb with SMTP id af79cd13be357-93e9b2e9672mr84153885a.12.1791326466916;
+        Tue, 06 Oct 2026 15:41:06 -0700 (PDT)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.40.55
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a178c53299sm167263575e9.11.2026.10.06.15.41.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 15:40:57 -0700 (PDT)
+        Tue, 06 Oct 2026 15:41:06 -0700 (PDT)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -80,9 +80,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         hariram.purushothaman@oss.qualcomm.com, pshrotri@qti.qualcomm.com,
         Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
         johannes.goede@oss.qualcomm.com, konradybcio@kernel.org
-Subject: [PATCH 18/45] media: qcom: camss: integrate IFE devices
-Date: Wed,  7 Oct 2026 01:39:26 +0300
-Message-Id: <20261006223953.3382273-19-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH 22/45] media: qcom: camss: add IFE statistics output
+Date: Wed,  7 Oct 2026 01:39:30 +0300
+Message-Id: <20261006223953.3382273-23-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -93,663 +93,445 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfXyjsIeusvWJyU
- 1dczk/nMfX62fIeilZsy7NUPm7znIIoDNvoEeLwnyAbXP0iBCxN93umdf6ksMqnwD85saZZZ4oS
- 3xzY7DfnZuswpXi0Lkvyf9+ss5sf8N24Y+1iQJqgPbhkz2asG0CT2BRj2fl2orhMNuC7lvkRoGT
- yta+qo+b0nkwD2DjHYmLMntaa6Ji3YYUxuPobkyffpUO9FMg+AI6McZeXlOauUQgXNl96DX+xkl
- 5NQlmTkL/p98vq4EmEyiaK2tOLXXEMq9Qqs7Vjqn1m075lJSPdbnLcyjYmWUA1T3GGamDGAdqNg
- P2g+SW4fE/3VOk3KBCzAKq/0UUe44+VvJd2jSvrPrX9rWGc3gcDIf0hDNnv5TkUCRr9oo6lptaN
- He9l3YLt/Jj7Ytr19DuhpShiNudgrW6XXPqlr2EZtc7+3yFKK9k7Ro626SVzfwMG/4yRf8lYZZl
- 6kVvA/X1QNmNbKpsn/w==
-X-Proofpoint-ORIG-GUID: ZnmK09cX-h8quF4beuNhWajuq1tz9rfD
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX0pMazl67zRM6
- v4jb+5ttVltL2O1+a+XXLmYMhHF8Yqh7Y7SOG9dFGsUKG32CG0YnzdwpojsT7T17+DTjhEb+Ea2
- DyJpmabAZ7SSr2LaloCvyVAaS+z7sBA=
-X-Proofpoint-GUID: ZnmK09cX-h8quF4beuNhWajuq1tz9rfD
-X-Authority-Analysis: v=2.4 cv=SJXXx+vH c=1 sm=1 tr=0 ts=6ac578fb cx=c_pps
+X-Proofpoint-ORIG-GUID: GzYfEGX8rne_OhGevZ0PNggRAdSP-4UQ
+X-Proofpoint-GUID: GzYfEGX8rne_OhGevZ0PNggRAdSP-4UQ
+X-Authority-Analysis: v=2.4 cv=Xt5vqlF9 c=1 sm=1 tr=0 ts=6ac57904 cx=c_pps
  a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=mQKNiLCmDEPOf1wI07oA:9
+ a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=JK_Li5-1ZNDrFKk9jnYA:9
  a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfX9ExJEkWSwL9a
+ N0mEqvtUr7FHZ9seWmj9mGyf1QroXOc8YStHKRv9Dp2vtwg+ae2D6yg3sEv77tEJQP7LLVEH9rI
+ EpNngGLf9OXZ5ZmOeP92wPK/5hb5Fd615yCVGwQBbXK4KS+c+CknHPjwsXUJ8WknnORr8/nZ6BU
+ rgv4i9j+F6TxeTWEWXUeUEIDK0hk23ZM6g6mdCrjugJlFTOZvsgLdMgnhrMAvFZWBeqKVjRJm+5
+ UmS1Iz1hVAgommXuOVmwxEVJQrWc3v90EgPGUw61X5PXPdIwVWukmLYqttrUgZ+oFcgkO25o1mG
+ fJuYfmhx2m2yi3i1eWhSuMKzJjammozGvOOGwhnDZtzfcDb6E1/WDiICRxHT0aqYMZQjsWOp4gF
+ JYLe15ACPtXaAxC3lpJ7hPemCymHpA/J3f1rhuSIKm/8IoUmAC1ZELR/928V5N6OUh1McskdQZh
+ BKpwqf6ZKeXHXos2a/g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDA5MCBTYWx0ZWRfXzO+8BS/jAGHx
+ pGohzF/hJK3Zryy3SwpfyXh7hNrWU3RwNg3vB/7EKz9YBRZSL++UIsU855usyq/b/YZdupZBT+3
+ pKjxtZQA6Eh8nQ82HSm1H2Jc6faCYKE=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-06_05,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- malwarescore=0 spamscore=0 phishscore=0 adultscore=0 clxscore=1015
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610060090
+ priorityscore=1501 adultscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ impostorscore=0 suspectscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060090
 
 From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 
-Integrate IFE devices with CAMSS probe, power management, media entity
-registration, and performance management. Keep the legacy VFE path
-unchanged.
+Add metadata capture support to CAMSS video nodes.
+Expose the SM8250 IFE statistics output through write master 15.
 
 Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/camss.c | 471 +++++++++++++++++++++-
- 1 file changed, 460 insertions(+), 11 deletions(-)
+ .../platform/qcom/camss/camss-ife-pads.c      |  34 +++++
+ drivers/media/platform/qcom/camss/camss-ife.c |  44 ++++++
+ drivers/media/platform/qcom/camss/camss-ife.h |   3 +
+ .../media/platform/qcom/camss/camss-video.c   | 141 ++++++++++++++++++
+ .../media/platform/qcom/camss/camss-video.h   |   2 +
+ 5 files changed, 224 insertions(+)
 
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 1f662b1caf5a..7c355003c957 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -32,6 +32,9 @@
- #define CAMSS_CLOCK_MARGIN_NUMERATOR 105
- #define CAMSS_CLOCK_MARGIN_DENOMINATOR 100
+diff --git a/drivers/media/platform/qcom/camss/camss-ife-pads.c b/drivers/media/platform/qcom/camss/camss-ife-pads.c
+index 926ba96a7603..bd9ac1a91d73 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife-pads.c
++++ b/drivers/media/platform/qcom/camss/camss-ife-pads.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2023 Qualcomm Technologies, Inc.
+  */
  
-+/* Number of pixels fetched per clock cycle */
-+#define CAMSS_NUM_OF_PIXELS_PER_CYCLE	2
-+
- static const struct parent_dev_ops vfe_parent_dev_ops;
++#include <linux/qcom-camss-stats.h>
+ #include <linux/videodev2.h>
+ #include <media/v4l2-mediabus.h>
  
- static const struct camss_subdev_resources csiphy_res_8x16[] = {
-@@ -4653,6 +4656,108 @@ s64 camss_get_link_freq(struct media_entity *entity, unsigned int bpp,
- 	return v4l2_get_link_freq(sensor_pad, bpp, 2 * lanes);
- }
- 
-+static int camss_get_num_lanes(struct media_entity *entity,
-+			       unsigned int *lanes)
-+{
-+	struct media_pad *pad;
-+
-+	while (1) {
-+		struct v4l2_subdev *sd;
-+
-+		pad = &entity->pads[0];
-+		if (!(pad->flags & MEDIA_PAD_FL_SINK))
-+			return -ENODEV;
-+
-+		pad = media_pad_remote_pad_first(pad);
-+		if (!pad || !is_media_entity_v4l2_subdev(pad->entity))
-+			return -ENODEV;
-+
-+		sd = media_entity_to_v4l2_subdev(pad->entity);
-+		if (sd->grp_id == CSIPHY_GRP_ID) {
-+			struct csiphy_lanes_cfg *lane_cfg;
-+			struct csiphy_device *csiphy;
-+
-+			csiphy = v4l2_get_subdevdata(sd);
-+			if (!csiphy->cfg.csi2)
-+				return -ENODEV;
-+
-+			lane_cfg = &csiphy->cfg.csi2->lane_cfg;
-+			if (!lane_cfg->num_data)
-+				return -EINVAL;
-+
-+			*lanes = lane_cfg->num_data;
-+			return 0;
-+		}
-+
-+		entity = pad->entity;
-+	}
-+}
-+
-+static int camss_get_pixel_clock_from_link_freq(struct media_entity *entity,
-+						unsigned int bpp,
-+						u64 *pixel_clock)
-+{
-+	struct media_pad *sensor_pad;
-+	unsigned int lanes;
-+	s64 link_freq;
-+	int ret;
-+
-+	if (!bpp)
-+		return -EINVAL;
-+
-+	sensor_pad = camss_find_sensor_pad(entity);
-+	if (!sensor_pad)
-+		return -ENODEV;
-+
-+	ret = camss_get_num_lanes(entity, &lanes);
-+	if (ret)
-+		return ret;
-+
-+	link_freq = v4l2_get_link_freq(sensor_pad, bpp, 2 * lanes);
-+	if (link_freq < 0)
-+		return link_freq;
-+
-+	*pixel_clock = div_u64(link_freq * 2 * lanes, bpp);
-+
-+	return 0;
-+}
-+
-+/*
-+ * camss_get_pixel_clock - Get pixel clock rate from sensor
-+ * @entity: Media entity in the current pipeline
-+ * @bpp: Number of bits per pixel for the current format
-+ * @pixel_clock: Received pixel clock value
-+ *
-+ * Return 0 on success or a negative error code otherwise
-+ */
-+int camss_get_pixel_clock_bpp(struct media_entity *entity, unsigned int bpp,
-+			      u64 *pixel_clock)
-+{
-+	struct media_pad *sensor_pad;
-+	struct v4l2_subdev *subdev;
-+	struct v4l2_ctrl *ctrl;
-+	int ret;
-+
-+	ret = camss_get_pixel_clock_from_link_freq(entity, bpp, pixel_clock);
-+	if (!ret)
-+		return 0;
-+
-+	sensor_pad = camss_find_sensor_pad(entity);
-+	if (!sensor_pad)
-+		return -ENODEV;
-+
-+	subdev = media_entity_to_v4l2_subdev(sensor_pad->entity);
-+
-+	ctrl = v4l2_ctrl_find(subdev->ctrl_handler, V4L2_CID_PIXEL_RATE);
-+
-+	if (!ctrl)
-+		return -EINVAL;
-+
-+	*pixel_clock = v4l2_ctrl_g_ctrl_int64(ctrl);
-+
-+	return 0;
-+}
-+
- /*
-  * camss_get_pixel_clock - Get pixel clock rate from sensor
-  * @entity: Media entity in the current pipeline
-@@ -4746,6 +4851,156 @@ static const struct parent_dev_ops vfe_parent_dev_ops = {
- 	.get_base_address = vfe_parent_dev_ops_get_base_address
+@@ -63,6 +64,11 @@ static const struct camss_format_info ife_vid_pix_fmts_v20x[] = {
+ 	  { { 1, 1 } }, { { 2, 3 } }, { 8 } },
  };
  
-+static const u32 cam_cc_sbi_clk_rates[] = {
-+	19200000, 350000000, 475000000, 576000000, 680000000,
++static const struct camss_format_info ife_stats_fmts_v20x[] = {
++	{ MEDIA_BUS_FMT_METADATA_FIXED, 8, V4L2_META_FMT_QC_IFE_STAT_3A, 1,
++	  { { 1, 1 } }, { { 1, 1 } }, { 8 } },
 +};
 +
-+static int camss_set_perf_level(struct camss *camss, struct ife_device *ife)
-+{
-+	enum camss_perf_mode perf_max = CAMSS_PERF_MAX_MODES - 1;
-+	u64 freq_min, pixel_clock = 0;
-+	u32 sink_pad = ife->sink_pad;
-+	int pixelformat, fmt_index, i;
-+	u8 bits_per_pixel = 0;
-+	int ret;
-+
-+	fmt_index = camss_get_pixfmt_index(ife->pads[sink_pad].fmt.code,
-+					   ife->pads[sink_pad].desc->sup_fmts.formats,
-+					   ife->pads[sink_pad].desc->sup_fmts.nformats);
-+	if (fmt_index < 0) {
-+		dev_err(camss->dev, "%s Can't find requested format index: 0x%x\n", __func__,
-+			ife->pads[sink_pad].fmt.code);
-+		return fmt_index;
-+	}
-+
-+	pixelformat = ife->pads[sink_pad].desc->sup_fmts.formats[fmt_index].pixelformat;
-+
-+	ret = camss_get_pixfmt_depth(pixelformat, Y_PLANE, &bits_per_pixel);
-+	if (ret) {
-+		dev_err(camss->dev, "%s Unknown pixel format: 0x%x\n", __func__,
-+			pixelformat);
-+		return ret;
-+	}
-+
-+	ret = camss_get_pixel_clock_bpp(&ife->sd.entity, bits_per_pixel,
-+					&pixel_clock);
-+	if (ret) {
-+		camss->perf_mode = CAMSS_PERF_MODE_NOM;
-+		return 0;
-+	}
-+
-+	freq_min = pixel_clock * bits_per_pixel / CAMSS_NUM_OF_PIXELS_PER_CYCLE / BITS_PER_BYTE;
-+	camss->perf_mode = perf_max;
-+
-+	for (i = 0; i < ARRAY_SIZE(cam_cc_sbi_clk_rates); i++) {
-+		if (freq_min <= cam_cc_sbi_clk_rates[i]) {
-+			camss->perf_mode = min_t(u8, i, perf_max);
-+			break;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int camss_core_get(struct camss *camss, u8 entity_id)
-+{
-+	int ret;
-+
-+	if (atomic_inc_return(&camss->perf_ref_count) > 1)
-+		return 0;
-+
-+	ret = camss_set_perf_level(camss, &camss->ife[entity_id]);
-+	if (ret)
-+		dev_warn(camss->dev, "Cannot configure the performance level\n");
-+
-+	ret = pm_runtime_resume_and_get(camss->dev);
-+	if (ret < 0) {
-+		dev_err(camss->dev, "Core domain cannot be acquired\n");
-+		atomic_dec(&camss->perf_ref_count);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int camss_core_put(struct camss *camss)
-+{
-+	int ret;
-+
-+	if (atomic_dec_if_positive(&camss->perf_ref_count))
-+		return 0;
-+
-+	ret = pm_runtime_put_sync(camss->dev);
-+	if (ret < 0) {
-+		dev_err(camss->dev, "Core domain cannot be released\n");
-+		return ret;
-+	}
-+
-+	camss->perf_mode = CAMSS_PERF_MODE_MINSVS;
-+
-+	return 0;
-+}
-+
-+static int ife_parent_dev_ops_get(struct camss *camss, int id)
-+{
-+	int ret = -EINVAL;
-+
-+	if (id < camss->res->ife_num + camss->res->ife_lite_num) {
-+		struct ife_device *ife = &camss->ife[id];
-+
-+		ret = ife_get(ife);
-+	}
-+
-+	return ret;
-+}
-+
-+static int ife_parent_dev_ops_put(struct camss *camss, int id)
-+{
-+	if (id < camss->res->ife_num + camss->res->ife_lite_num) {
-+		struct ife_device *ife = &camss->ife[id];
-+
-+		ife_put(ife);
-+	}
-+
-+	return 0;
-+}
-+
-+static void __iomem
-+*ife_parent_dev_ops_get_base_address(struct camss *camss, int id)
-+{
-+	if (id < camss->res->ife_num + camss->res->ife_lite_num) {
-+		struct ife_device *ife = &camss->ife[id];
-+
-+		return ife->top_ctx.base;
-+	}
-+
-+	return NULL;
-+}
-+
-+static const struct parent_dev_ops ife_parent_dev_ops __maybe_unused = {
-+	.get = ife_parent_dev_ops_get,
-+	.put = ife_parent_dev_ops_put,
-+	.get_base_address = ife_parent_dev_ops_get_base_address
+ static const struct ife_pad_limits ife_vid_limits_v20x = {
+ 	.min_width	= 320,
+ 	.min_height	= 240,
+@@ -72,6 +78,13 @@ static const struct ife_pad_limits ife_vid_limits_v20x = {
+ 	.max_v_ratio	= 16,
+ };
+ 
++static const struct ife_pad_limits ife_meta_limits_v20x = {
++	.min_width	= 16,
++	.min_height	= 16,
++	.max_width	= 16,
++	.max_height	= 16,
 +};
 +
-+int camss_attach_host_data(struct camss *camss, struct v4l2_subdev *sd,
-+			   bool is_sensor, int id)
-+{
-+	struct camss_host_priv_data *host_data;
-+	struct device *dev = camss->dev;
-+
-+	host_data = devm_kzalloc(dev, sizeof(*host_data), GFP_KERNEL);
-+	if (!host_data)
-+		return -ENOMEM;
-+
-+	host_data->is_sensor = is_sensor;
-+	host_data->id = id;
-+
-+	v4l2_set_subdev_hostdata(sd, host_data);
-+
-+	return 0;
-+}
-+
- /*
-  * camss_parse_endpoint_node - Parse port endpoint node
-  * @dev: CAMSS device
-@@ -4833,6 +5088,46 @@ static int camss_parse_ports(struct camss *camss)
- 	return ret;
+ static const struct ife_pad_limits ife_fd_limits = {
+ 	.min_width	= 320,
+ 	.min_height	= 240,
+@@ -293,6 +306,27 @@ static const struct ife_pad_desc ife_pad_desc_v20x[] = {
+ 		.wm[0] = 8,
+ 		.wm[1] = 9,
+ 	},
++	{
++		.pad_flags = MEDIA_PAD_FL_SOURCE,
++		.sup_fmts = {
++			.nformats = ARRAY_SIZE(ife_stats_fmts_v20x),
++			.formats = ife_stats_fmts_v20x,
++		},
++		.limits = &ife_meta_limits_v20x,
++		.video_name = "stats",
++		.link_flags = MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED,
++		.buf_type = V4L2_BUF_TYPE_META_CAPTURE,
++		.meta_dataformat = V4L2_META_FMT_QC_IFE_STAT_3A,
++		.meta_buffersize = PAGE_ALIGN(sizeof(struct camss_ife_stats)),
++		.output = CAMSS_IFE_OUTPUT_STATS,
++		.hw_pipe = CAMSS_IFE_HW_PIPE_PP,
++		.packing_fmt = 0xa,
++		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
++		.rup_group_mask = BIT(6),
++		.comp_group_mask = BIT(12),
++		.num_wms = 1,
++		.wm[0] = 15,
++	},
+ };
+ 
+ const struct ife_pads_descriptors ife_lite_pads_v20x = {
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.c b/drivers/media/platform/qcom/camss/camss-ife.c
+index cf1474e5bce4..f7ec86fb7f02 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.c
++++ b/drivers/media/platform/qcom/camss/camss-ife.c
+@@ -66,6 +66,11 @@ static bool is_stats_type(const struct ife_pad_desc *pad)
+ 	return pad->buf_type == V4L2_BUF_TYPE_META_CAPTURE;
  }
  
-+static int camss_init_csid_subdevices(struct camss *camss)
++static bool is_ife_video_stats(const struct camss_video *video)
 +{
-+	const struct camss_resources *res = camss->res;
-+	unsigned int i;
-+	int ret;
-+
-+	for (i = 0; i < res->csid_num; i++) {
-+		ret = msm_csid_subdev_init(camss, &camss->csid[i],
-+					   &res->csid_res[i], i);
-+		if (ret < 0) {
-+			dev_err(camss->dev, "Failed to init csid%d sub-device: %d\n",
-+				i, ret);
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
++	return video->type == V4L2_BUF_TYPE_META_CAPTURE;
 +}
 +
-+static int camss_init_ife_subdevices(struct camss *camss)
-+{
-+	const struct camss_resources *res = camss->res;
-+	unsigned int i;
-+	int ret;
-+
-+	for (i = 0; i < camss->ife_total_num; i++) {
-+		void __iomem *csid_base = camss->csid[i].base;
-+
-+		ret = camss_ife_subdev_init(camss, &camss->ife[i],
-+					    &res->ife_res[i], i, csid_base);
-+		if (ret < 0) {
-+			dev_err(camss->dev, "Fail to init ife%d sub-device: %d\n",
-+				i, ret);
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- /*
-  * camss_init_subdevices - Initialize subdev structures and resources
-  * @camss: CAMSS device
-@@ -4882,6 +5177,11 @@ static int camss_init_subdevices(struct camss *camss)
- 		}
- 	}
- 
-+	if (camss->ife_total_num > res->csid_num) {
-+		dev_err(camss->dev, "IFE resources require one CSID per IFE\n");
-+		return -EINVAL;
-+	}
-+
- 	/* Get optional CSID wrapper regs shared between CSID devices */
- 	if (res->csid_wrapper_res) {
- 		char *reg = res->csid_wrapper_res->reg;
-@@ -4893,15 +5193,20 @@ static int camss_init_subdevices(struct camss *camss)
- 		camss->csid_wrapper_base = base;
- 	}
- 
--	for (i = 0; i < camss->res->csid_num; i++) {
--		ret = msm_csid_subdev_init(camss, &camss->csid[i],
--					   &res->csid_res[i], i);
--		if (ret < 0) {
--			dev_err(camss->dev,
--				"Failed to init csid%d sub-device: %d\n",
--				i, ret);
-+	if (res->embedded_csid) {
-+		ret = camss_init_ife_subdevices(camss);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = camss_init_csid_subdevices(camss);
-+	if (ret)
-+		return ret;
-+
-+	if (!res->embedded_csid) {
-+		ret = camss_init_ife_subdevices(camss);
-+		if (ret)
- 			return ret;
--		}
- 	}
- 
- 	ret = msm_ispif_subdev_init(camss, res->ispif_res);
-@@ -4942,6 +5247,9 @@ static int camss_link_entities(struct camss *camss)
- 	int i, j, k;
+ static bool is_meta_type(const struct ife_pad_desc *pad)
+ {
+ 	return is_stats_type(pad);
+@@ -467,6 +472,17 @@ static int ife_setup_vid_full(struct ife_video_pad *vid_pad,
+ 	u8 depth = 0;
  	int ret;
  
-+	if (camss->ife_total_num)
-+		return camss->res->link_entities(camss);
-+
- 	for (i = 0; i < camss->res->csiphy_num; i++) {
- 		for (j = 0; j < camss->res->csid_num; j++) {
- 			ret = media_create_pad_link(&camss->csiphy[i].subdev.entity,
-@@ -5126,8 +5434,24 @@ static int camss_register_entities(struct camss *camss)
- 		}
- 	}
- 
-+	for (i = 0; i < camss->ife_total_num; i++) {
-+		ret = ife_register_entities(&camss->ife[i],
-+					    &camss->v4l2_dev);
-+		if (ret < 0) {
-+			dev_err(camss->dev,
-+				"Failed to register ife%d entities: %d\n",
-+				i, ret);
-+			goto err_reg_ife;
-+		}
-+	}
-+
- 	return 0;
- 
-+err_reg_ife:
-+	for (i--; i >= 0; i--)
-+		ife_unregister_entities(&camss->ife[i]);
-+
-+	i = camss->res->vfe_num;
- err_reg_vfe:
- 	for (i--; i >= 0; i--)
- 		msm_vfe_unregister_entities(&camss->vfe[i]);
-@@ -5180,6 +5504,9 @@ static void camss_unregister_entities(struct camss *camss)
- 
- 	for (i = 0; i < camss->res->vfe_num; i++)
- 		msm_vfe_unregister_entities(&camss->vfe[i]);
-+
-+	for (i = 0; i < camss->ife_total_num; i++)
-+		ife_unregister_entities(&camss->ife[i]);
- }
- 
- static int camss_subdev_notifier_bound(struct v4l2_async_notifier *async,
-@@ -5193,6 +5520,20 @@ static int camss_subdev_notifier_bound(struct v4l2_async_notifier *async,
- 	struct csiphy_device *csiphy = &camss->csiphy[id];
- 
- 	csiphy->cfg.csi2 = &csd->interface.csi2;
-+
-+	if (camss->ife_total_num) {
-+		int ret;
-+
-+		ret = camss_attach_host_data(camss, subdev, true, id);
-+		if (ret) {
-+			dev_err(camss->dev,
-+				"Failed to alloc host private data: %d\n", ret);
-+			return ret;
-+		}
++	if (is_ife_video_stats(&vid_pad->video)) {
++		wm_cfg[Y_PLANE].mode_config = dsc->mode_config;
++		wm_cfg[Y_PLANE].packing_fmt = dsc->packing_fmt;
++		wm_cfg[Y_PLANE].width = 0;
++		wm_cfg[Y_PLANE].lines = 0;
++		wm_cfg[Y_PLANE].bytes = 1;
++		wm_cfg[Y_PLANE].stride = 1;
 +
 +		return 0;
 +	}
 +
- 	subdev->host_priv = csiphy;
+ 	wm_cfg[Y_PLANE].mode_config = dsc->mode_config;
+ 	wm_cfg[Y_PLANE].packing_fmt = dsc->packing_fmt;
+ 	wm_cfg[C_PLANE].mode_config = dsc->mode_config;
+@@ -782,6 +798,9 @@ static int ife_pad_try_format(struct ife_device *ife, const struct ife_pad_desc
+ 	u32 in_height;
+ 	u32 in_width;
  
- 	return 0;
-@@ -5210,6 +5551,16 @@ static int camss_subdev_notifier_complete(struct v4l2_async_notifier *async)
- 		unsigned int i;
- 		int ret;
++	if (is_meta_type(desc))
++		return -ENOTTY;
++
+ 	for (i = 0; i < sup_fmts->nformats; i++)
+ 		if (fmt->code == sup_fmts->formats[i].code)
+ 			break;
+@@ -841,6 +860,11 @@ static int ife_pad_get_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_state *sta
  
-+		if (camss->ife_total_num) {
-+			struct camss_host_priv_data *host_data;
-+
-+			host_data = v4l2_get_subdev_hostdata(sd);
-+			if (!host_data || !host_data->is_sensor)
-+				continue;
-+
-+			csiphy = &camss->csiphy[host_data->id];
-+		}
-+
- 		if (!csiphy)
- 			continue;
+ 	pad = &ife->pads[sd_fmt->pad];
  
-@@ -5247,6 +5598,53 @@ static const struct media_device_ops camss_media_ops = {
- 	.link_notify = v4l2_pipeline_link_notify,
++	if (is_meta_type(pad->desc)) {
++		sd_fmt->format = pad->fmt;
++		return 0;
++	}
++
+ 	if (sd_fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
+ 		ife_pad_try_format(ife, pad->desc, &sd_fmt->format);
+ 	} else {
+@@ -884,6 +908,9 @@ static void ife_update_src_pads_fmt(struct ife_device *ife, struct v4l2_mbus_fra
+ 
+ 		fi = ife_pad_try_format(ife, pad->desc, &new_fmt);
+ 
++		if (vpad && is_ife_video_stats(&vpad->video))
++			vpad = NULL;
++
+ 		if (vpad) {
+ 			struct v4l2_pix_format_mplane *pix_mp = &vpad->video.active_fmt.fmt.pix_mp;
+ 			const struct camss_format_info *info = &pad->desc->sup_fmts.formats[fi];
+@@ -913,6 +940,11 @@ static int ife_pad_set_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_state *sta
+ 
+ 	pad = &ife->pads[sd_fmt->pad];
+ 
++	if (is_meta_type(pad->desc)) {
++		sd_fmt->format = pad->fmt;
++		return 0;
++	}
++
+ 	ife_pad_try_format(ife, pad->desc, &sd_fmt->format);
+ 
+ 	if (sd_fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
+@@ -959,6 +991,9 @@ static int ife_pad_mbus_enum_code(struct v4l2_subdev *sd, struct v4l2_subdev_sta
+ 
+ 	pad = &ife->pads[code->pad];
+ 
++	if (is_stats_type(pad->desc))
++		return -ENOTTY;
++
+ 	if (pad->desc->pad_flags == MEDIA_PAD_FL_SINK ||
+ 	    pad->desc->hw_pipe == CAMSS_IFE_HW_PIPE_PP) {
+ 		if (code->index >= pad->desc->sup_fmts.nformats)
+@@ -994,6 +1029,13 @@ static int ife_pad_enum_framesizes(struct v4l2_subdev *sd, struct v4l2_subdev_st
+ 
+ 	pad = &ife->pads[fse->pad];
+ 
++	if (is_meta_type(pad->desc)) {
++		if (is_stats_type(pad->desc))
++			return -ENOTTY;
++
++		return -EINVAL;
++	}
++
+ 	for (i = 0; i < pad->desc->sup_fmts.nformats; i++) {
+ 		if (pad->desc->sup_fmts.formats[i].code == fse->code)
+ 			break;
+@@ -1517,6 +1559,8 @@ int ife_register_entities(struct ife_device *ife, struct v4l2_device *v4l2_dev)
+ 			pad->vid_pad->video.formats	= dsc->sup_fmts.formats;
+ 			pad->vid_pad->video.type	= dsc->buf_type;
+ 			pad->vid_pad->video.ops		= &camss_video_ops;
++			pad->vid_pad->video.meta_dataformat = dsc->meta_dataformat;
++			pad->vid_pad->video.meta_buffersize = dsc->meta_buffersize;
+ 			pad->vid_pad->video.bpl_alignment = 16;
+ 
+ 			if (dsc->mode_config == BUSWR_CLIENT_CFG_MODE_LINE_BASED)
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.h b/drivers/media/platform/qcom/camss/camss-ife.h
+index 45fce7e33c4a..168d26d0664b 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.h
++++ b/drivers/media/platform/qcom/camss/camss-ife.h
+@@ -45,6 +45,7 @@ enum camss_ife_output {
+ 	CAMSS_IFE_OUTPUT_VID_FULL,
+ 	CAMSS_IFE_OUTPUT_DISP_FULL,
+ 	CAMSS_IFE_OUTPUT_FD,
++	CAMSS_IFE_OUTPUT_STATS,
  };
  
-+static int camss_configure_ife_pd(struct camss *camss)
+ enum camss_ife_hw_pipe {
+@@ -275,6 +276,8 @@ struct ife_pad_desc {
+ 	u32 link_flags;
+ 
+ 	enum v4l2_buf_type buf_type;
++	u32 meta_dataformat;
++	u32 meta_buffersize;
+ 	enum camss_ife_output output;
+ 	u32 hw_pipe;
+ 
+diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+index cb9e08e9ff7e..b5d78f84d6a1 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.c
++++ b/drivers/media/platform/qcom/camss/camss-video.c
+@@ -216,6 +216,9 @@ static int video_check_format(struct camss_video *video)
+ 	struct v4l2_pix_format_mplane *sd_pix = &format.fmt.pix_mp;
+ 	int ret;
+ 
++	if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
++		return 0;
++
+ 	sd_pix->pixelformat = pix->pixelformat;
+ 	ret = video_get_subdev_format(video, &format);
+ 	if (ret < 0)
+@@ -421,6 +424,73 @@ static const struct vb2_ops msm_video_vb2_q_ops = {
+ 	.unprepare_streaming = video_unprepare_streaming,
+ };
+ 
++static int meta_queue_setup(struct vb2_queue *q,
++			    unsigned int *num_buffers, unsigned int *num_planes,
++			    unsigned int sizes[], struct device *alloc_devs[])
 +{
-+	struct device *dev = camss->dev;
-+	int i;
-+	int ret;
++	struct camss_video *video = vb2_get_drv_priv(q);
++	u32 buffersize = video->active_fmt.fmt.meta.buffersize;
 +
-+	camss->ife_genpd = devm_kcalloc(dev, camss->genpd_num,
-+					sizeof(*camss->ife_genpd), GFP_KERNEL);
-+	if (!camss->ife_genpd)
-+		return -ENOMEM;
++	if (*num_planes) {
++		if (*num_planes != 1 || sizes[0] < buffersize)
++			return -EINVAL;
 +
-+	camss->ife_genpd_link = devm_kcalloc(dev, camss->genpd_num,
-+					     sizeof(*camss->ife_genpd_link),
-+					     GFP_KERNEL);
-+	if (!camss->ife_genpd_link)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < camss->genpd_num; i++) {
-+		camss->ife_genpd[i] = dev_pm_domain_attach_by_id(dev, i);
-+		if (IS_ERR(camss->ife_genpd[i])) {
-+			ret = PTR_ERR(camss->ife_genpd[i]);
-+			goto fail_pm;
-+		}
++		return 0;
 +	}
 +
-+	if (camss->genpd_num > camss->res->ife_num) {
-+		i = camss->genpd_num - 1;
-+		camss->ife_genpd_link[i] =
-+			device_link_add(dev, camss->ife_genpd[i],
-+					DL_FLAG_STATELESS | DL_FLAG_PM_RUNTIME |
-+					DL_FLAG_RPM_ACTIVE);
-+		if (!camss->ife_genpd_link[i]) {
-+			ret = -EINVAL;
-+			i = camss->genpd_num;
-+			goto fail_pm;
-+		}
-+	}
++	*num_planes		= 1;
++	sizes[0]		= buffersize;
++	q->min_queued_buffers	= 1;
 +
 +	return 0;
-+
-+fail_pm:
-+	while (i--)
-+		dev_pm_domain_detach(camss->ife_genpd[i], true);
-+
-+	return ret;
 +}
 +
- static int camss_configure_pd(struct camss *camss)
- {
- 	const struct camss_resources *res = camss->res;
-@@ -5271,6 +5669,9 @@ static int camss_configure_pd(struct camss *camss)
- 	if (camss->genpd_num == 1)
- 		return 0;
- 
-+	if (camss->ife_total_num)
-+		return camss_configure_ife_pd(camss);
-+
- 	/* count the # of VFEs which have flagged power-domain */
- 	for (vfepd_num = i = 0; i < camss->res->vfe_num; i++) {
- 		if (res->vfe_res[i].vfe.has_pd)
-@@ -5351,6 +5752,20 @@ static void camss_genpd_subdevice_cleanup(struct camss *camss)
- 		msm_vfe_genpd_cleanup(&camss->vfe[i]);
- }
- 
-+static void camss_ife_genpd_cleanup(struct camss *camss)
++static int meta_buf_init(struct vb2_buffer *vb)
 +{
-+	int i;
++	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
++	struct camss_buffer *buffer = container_of(vbuf, struct camss_buffer, vb);
++	struct sg_table *sgt;
 +
-+	if (camss->genpd_num > camss->res->ife_num) {
-+		i = camss->genpd_num - 1;
-+		if (camss->ife_genpd_link[i])
-+			device_link_del(camss->ife_genpd_link[i]);
-+	}
++	sgt = vb2_dma_sg_plane_desc(vb, 0);
++	if (!sgt)
++		return -EFAULT;
 +
-+	for (i = 0; i < camss->genpd_num; i++)
-+		dev_pm_domain_detach(camss->ife_genpd[i], true);
++	buffer->addr[0] = sg_dma_address(sgt->sgl);
++
++	return 0;
 +}
 +
- static void camss_genpd_cleanup(struct camss *camss)
- {
- 	if (camss->genpd_num == 1)
-@@ -5358,6 +5773,11 @@ static void camss_genpd_cleanup(struct camss *camss)
- 
- 	camss_genpd_subdevice_cleanup(camss);
- 
-+	if (camss->ife_total_num) {
-+		camss_ife_genpd_cleanup(camss);
-+		return;
-+	}
++static int meta_buf_prepare(struct vb2_buffer *vb)
++{
++	struct camss_video *video = vb2_get_drv_priv(vb->vb2_queue);
++	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
 +
- 	if (camss->genpd_link)
- 		device_link_del(camss->genpd_link);
- 
-@@ -5382,8 +5802,23 @@ static int camss_probe(struct platform_device *pdev)
- 
- 	camss->res = of_device_get_match_data(dev);
- 
-+	if (camss->res->vfe_num &&
-+	    (camss->res->ife_num || camss->res->ife_lite_num)) {
-+		dev_err(dev, "VFE and IFE resources are mutually exclusive\n");
++	if (vbuf->field == V4L2_FIELD_ANY)
++		vbuf->field = V4L2_FIELD_NONE;
++	if (vbuf->field != V4L2_FIELD_NONE) {
++		dev_err(video->camss->dev, "%s field isn't supported\n", __func__);
 +		return -EINVAL;
 +	}
 +
-+	if ((camss->res->ife_num || camss->res->ife_lite_num) &&
-+	    !camss->res->link_entities) {
-+		dev_err(dev, "IFE resources require entity link operations\n");
++	if (vb2_plane_size(vb, 0) < video->active_fmt.fmt.meta.buffersize)
 +		return -EINVAL;
++
++	vb2_set_plane_payload(vb, 0, video->active_fmt.fmt.meta.buffersize);
++
++	return 0;
++}
++
++static const struct vb2_ops msm_meta_vb2_q_ops = {
++	.queue_setup     = meta_queue_setup,
++	.buf_init        = meta_buf_init,
++	.buf_prepare     = meta_buf_prepare,
++	.buf_queue       = video_buf_queue,
++	.prepare_streaming = video_prepare_streaming,
++	.start_streaming = video_start_streaming,
++	.stop_streaming  = video_stop_streaming,
++	.unprepare_streaming = video_unprepare_streaming,
++};
++
+ /* -----------------------------------------------------------------------------
+  * V4L2 ioctls
+  */
+@@ -693,6 +763,52 @@ static const struct v4l2_ioctl_ops msm_vid_ioctl_ops = {
+ 	.vidioc_s_input			= video_s_input,
+ };
+ 
++static int meta_try_fmt(struct file *file, void *priv, struct v4l2_format *f)
++{
++	struct camss_video *video = video_drvdata(file);
++	struct v4l2_meta_format *meta = &f->fmt.meta;
++
++	if (f->type != video->type)
++		return -EINVAL;
++
++	memset(meta, 0, sizeof(*meta));
++	meta->dataformat = video->active_fmt.fmt.meta.dataformat;
++	meta->buffersize = video->active_fmt.fmt.meta.buffersize;
++
++	return 0;
++}
++
++static int meta_enum_fmt(struct file *file, void *priv, struct v4l2_fmtdesc *f)
++{
++	struct camss_video *video = video_drvdata(file);
++
++	if (f->index)
++		return -EINVAL;
++
++	memset(&f->reserved, 0, sizeof(f->reserved));
++
++	f->pixelformat = video->active_fmt.fmt.meta.dataformat;
++
++	return 0;
++}
++
++static const struct v4l2_ioctl_ops msm_meta_ioctl_ops = {
++	.vidioc_querycap		= video_querycap,
++	.vidioc_enum_fmt_meta_cap	= meta_enum_fmt,
++	.vidioc_g_fmt_meta_cap		= meta_try_fmt,
++	.vidioc_s_fmt_meta_cap		= meta_try_fmt,
++	.vidioc_try_fmt_meta_cap	= meta_try_fmt,
++	.vidioc_reqbufs			= vb2_ioctl_reqbufs,
++	.vidioc_querybuf		= vb2_ioctl_querybuf,
++	.vidioc_qbuf			= vb2_ioctl_qbuf,
++	.vidioc_expbuf			= vb2_ioctl_expbuf,
++	.vidioc_dqbuf			= vb2_ioctl_dqbuf,
++	.vidioc_create_bufs		= vb2_ioctl_create_bufs,
++	.vidioc_prepare_buf		= vb2_ioctl_prepare_buf,
++	.vidioc_streamon		= vb2_ioctl_streamon,
++	.vidioc_streamoff		= vb2_ioctl_streamoff,
++};
++
+ /* -----------------------------------------------------------------------------
+  * V4L2 file operations
+  */
+@@ -744,6 +860,18 @@ static int msm_video_init_format(struct camss_video *video)
+ 		},
+ 	};
+ 
++	if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE) {
++		if (!video->meta_dataformat || !video->meta_buffersize)
++			return -EINVAL;
++
++		format.type = video->type;
++		format.fmt.meta.dataformat = video->meta_dataformat;
++		format.fmt.meta.buffersize = video->meta_buffersize;
++		video->active_fmt = format;
++
++		return 0;
 +	}
 +
- 	atomic_set(&camss->ref_count, 0);
-+	atomic_set(&camss->perf_ref_count, 0);
- 	camss->dev = dev;
-+	camss->core_get = camss_core_get;
-+	camss->core_put = camss_core_put;
- 	platform_set_drvdata(pdev, camss);
- 
- 	camss->csiphy = devm_kcalloc(dev, camss->res->csiphy_num,
-@@ -5417,6 +5852,14 @@ static int camss_probe(struct platform_device *pdev)
- 	if (!camss->vfe)
- 		return -ENOMEM;
- 
-+	camss->ife_total_num = camss->res->ife_num + camss->res->ife_lite_num;
-+	if (camss->ife_total_num) {
-+		camss->ife = devm_kcalloc(dev, camss->ife_total_num,
-+					  sizeof(*camss->ife), GFP_KERNEL);
-+		if (!camss->ife)
-+			return -ENOMEM;
-+	}
+ 	ret = __video_try_fmt(video, &format);
+ 	if (ret < 0)
+ 		return ret;
+@@ -787,6 +915,14 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
+ 	q->buf_struct_size = sizeof(struct camss_buffer);
+ 	q->dev = video->camss->dev;
+ 	q->lock = &video->q_lock;
 +
- 	ret = camss_icc_get(camss);
++	if (video->type == V4L2_BUF_TYPE_META_CAPTURE) {
++		q->ops = &msm_meta_vb2_q_ops;
++		q->io_modes = VB2_DMABUF | VB2_MMAP;
++	} else if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE) {
++		dev_err(v4l2_dev->dev, "Invalid format type\n");
++		goto error_vb2_init;
++	}
+ 	ret = vb2_queue_init(q);
  	if (ret < 0) {
- 		dev_err(dev, "Failed to configure ICC: %d\n", ret);
-@@ -5430,8 +5873,10 @@ static int camss_probe(struct platform_device *pdev)
- 	}
- 
- 	ret = camss_init_subdevices(camss);
--	if (ret < 0)
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to init subdevices: %d\n", ret);
- 		goto err_genpd_cleanup;
+ 		dev_err(v4l2_dev->dev, "Failed to init vb2 queue: %d\n", ret);
+@@ -813,6 +949,11 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
+ 	vdev->device_caps = V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_STREAMING
+ 			  | V4L2_CAP_READWRITE | V4L2_CAP_IO_MC;
+ 	vdev->ioctl_ops = &msm_vid_ioctl_ops;
++	if (video->type == V4L2_BUF_TYPE_META_CAPTURE) {
++		vdev->device_caps = V4L2_CAP_META_CAPTURE | V4L2_CAP_STREAMING |
++				    V4L2_CAP_IO_MC;
++		vdev->ioctl_ops = &msm_meta_ioctl_ops;
 +	}
- 
- 	ret = dma_set_mask_and_coherent(dev, 0xffffffff);
- 	if (ret) {
-@@ -5463,12 +5908,16 @@ static int camss_probe(struct platform_device *pdev)
- 	}
- 
- 	ret = camss_register_entities(camss);
--	if (ret < 0)
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to register entities: %d\n", ret);
- 		goto err_v4l2_device_unregister;
-+	}
- 
- 	ret = camss_link_entities(camss);
--	if (ret < 0)
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to link entities: %d\n", ret);
- 		goto err_register_subdevs;
-+	}
- 
- 	ret = media_device_register(&camss->media_dev);
- 	if (ret < 0) {
+ 	vdev->release = msm_video_release;
+ 	vdev->v4l2_dev = v4l2_dev;
+ 	vdev->vfl_dir = VFL_DIR_RX;
+diff --git a/drivers/media/platform/qcom/camss/camss-video.h b/drivers/media/platform/qcom/camss/camss-video.h
+index f62a72c29a5a..cfee619973ef 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.h
++++ b/drivers/media/platform/qcom/camss/camss-video.h
+@@ -48,6 +48,8 @@ struct camss_video {
+ 	struct mutex q_lock;
+ 	unsigned int bpl_alignment;
+ 	unsigned int line_based;
++	u32 meta_dataformat;
++	u32 meta_buffersize;
+ 	const struct camss_format_info *formats;
+ 	unsigned int nformats;
+ };
 -- 
 2.34.1
 
