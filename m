@@ -1,199 +1,258 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CC9D49F115
-	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 16:03:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EECBA3BED46
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 16:50:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791302614; cv=none; b=CbeaHSOM60jOcogJEGWtN18wd+e3tBsOUcHX7P26AbFEdrh9zIpThOHyvo6D27v4seAmHhopVpTJq8XzegYj8d88p9cyhgqDGDJ2Y4p+KoR2eLeSgHCc3NOGLprrYpbtJDX2rkJ03xX+tewezUjeiR5+iR4Plim012WFHNCuwIo=
+	t=1791305458; cv=none; b=fKY0CpSp5vShm+zuevipIgJ3/+6p0OKR4ek0oT21mfS656hEasCo9hccupUZcwAar8Z/57YcdsAVgcdWp2jVxiZAEfnj90AbQHqkMBoM+eAzrLEJePkeGyXEeREG1RjINIYogBiyO0eETpAKQ7vIDEjludsnPAJY6MBQ93/F3ns=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791302614; c=relaxed/simple;
-	bh=Rau+LzNHWZYAeVn0Lo/gXa5gPyDBw6O3gvc5Y7wY6Gw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PU1Gp+ho/AQ59fP5E89xS4jB8TdJWstcE2l+6gVPrXXWNxQDsGcfyXwggmWxklLzVHDYUbXIsMv6bX0AIAudrs9PTkve1k1iljAgz7iR+3leSNijyO1vxpAvdnaiMFjmMiUp7gPS91kckncTZ9pzcltc9Mvh5T+QTd29tLwjnKI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qwJ63+pY; arc=none smtp.client-ip=209.85.218.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791305458; c=relaxed/simple;
+	bh=w6yofi2hb9AiVsVr8lzwC1eqMrd95HITpUYDUSg8J/0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Iv3kEUboz9XKDBkgixXwzqfSvffAAlHDmTr+ePTYkbXBUhujoYKmkH2c0EGjZdtBx5u3krVbvwtIB7nH7CbIw7JguHf8+CaIjIXCJl/wy/snMw+mRRIH3azFW0RfHtD7D79lDMHD05KWtq/03Hfm/JtlpEGW1KPm0e9Gu0YS7Lw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=BVxCu/Nf; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qwJ63+pY"
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c2e8e738ae0so115567766b.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 09:03:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791302610; x=1791907410; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fI0Qv4IQdM0dKZJYz3zc0bdk7ApqZmNSv8l+M7VdwMQ=;
-        b=qwJ63+pYJx5X86dv0BSRyx17BWUMCmybv4dYhCwG5dln7M1QhRGhJmf6wOQZSEAM2m
-         0TdxhHT6c2Z4XzWiGS90L0ZJaUYI6llIZCeMhZwmyLYOMZIG0RQ24eA2Xy5aESSlbmiT
-         Iujm0uvV6/9X27LswlyEriKT4Zag9bEY9Yu5Tt6V8M47OMQhz7uBcT5sz9EfLZHKQ4uj
-         PRoMzCoxI0Qtpih+gJOYTx0i+RwWVqNQXtr3lCgVRRka+wPB3z/y3PwLOJLcC37OpCVg
-         hm82N7Ymp9QxGQyFkM5mAO/nipunaCAwxmdZz9hI5R57gEqed+s9XT1pbglaNTVt/brp
-         +jCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791302610; x=1791907410;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fI0Qv4IQdM0dKZJYz3zc0bdk7ApqZmNSv8l+M7VdwMQ=;
-        b=ukMOl7kIofpquwep+Fp/4yARXrp6LGvzZOUwMwA/4dAnZylXalFVHlh10xH45Pg2zk
-         hF2JQOHxAK58a2HaUK1C9lC9VJSErJeJUkXyiSQU34loJQrqYVbRGGAdN+WYA5PKCStz
-         wC09zUOhR8jmND4FRLV0fzBb3OLLu9eMk7l0erMHlZQi0i3D6C6BFFuHmQ06+Aarhsq2
-         cb9kCe1Eb4kXYMeO/aCRnRTGowDP8RAH2CBiFIO2aYVMNwrK/3eEiKno9EUBJIyj41UE
-         uQPHZEi/KRfKH0HdLXMIcHfvfwk/bSCV2Op0Lpc8/cDQZlbRytxRoeGDdZmF2Gj+M9Ho
-         oi/Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxsa29iMwnK0q9kHsmvyFfvrXTASmeHzqTYpQXiUq0AOYjDWsaKXG7ouMsY8YdPQ4aZ/aygaJqd5tMWHtcE@vger.kernel.org
-X-Gm-Message-State: AFuF++lHOO1D8vpvZIWfIvhjHCUFH4XvW7TR+z0iRRkW98i9l4Z5b4M1
-	gsSNcRtR0QziNt0r0i9CHsQ+AxOc+aPZs1CxIhrFO0ifjXFR4hT9+6KO
-X-Gm-Gg: AYBFou34mO1LspuWA300puJqEVU5IfA7DeVHY0SNe8jhDzNpjj2zxnQ1Fp7Rl9gSWgu
-	IvB1iiNbZEENhkUOmk0JGLvraF/mQSmhUniRZa10MPqE27SbFTRWCayzjSn80nuvXkQ3D6h8C4x
-	ZjaxSogGgBQCV1SnwclxFEMmT2kLWT+FPRJB7daT9lff+1w/xWbCH7HEpbqMBXNjDk+yNGx6uNI
-	jdXSAWOZ4Kml6pMB/rU7V90IuIeW/LS46SV+beYknpqMVCDVoKDoHkVjRUsqsJrimanYuOQJV3u
-	AQM5y2kKjDc2/B1wZvTQyjFka0oYut9X+5Li1gbeRhvjQSG72ofILXVEpXyFyf2ajkZNQLwNOpS
-	YtdQlSXxLK3PCgk/RCVYyx0l5Bh/WC3VrLv6D2EkKQMzF65DK3VtsQq/+nB1jiGaJKRDdeCh/qh
-	e2HTv/JwcVqE2/Wu+3/6B8H9NvVCsV2MQAPKu1Hlpnl0UAJhRr6tEvh+RghRkyKHUZ9BTR3WRco
-	3ur6YmZjJuuakQX0aFC4dj/T9NsvzWYIFjj4E4oGBINrsC5fCtARpLdYtPkpWyQ1Uk5MpKPTh+7
-	xE0dA6jjvGcZlXLOh/lGoJA=
-X-Received: by 2002:a17:907:2da4:b0:c2e:2fb6:ff37 with SMTP id a640c23a62f3a-c3169fb09ffmr192558266b.21.1791302610242;
-        Tue, 06 Oct 2026 09:03:30 -0700 (PDT)
-Received: from localhost.localdomain (94-255-221-162.cust.bredband2.com. [94.255.221.162])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3169ff5178sm75256866b.79.2026.10.06.09.03.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Oct 2026 09:03:29 -0700 (PDT)
-From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: netdev@vger.kernel.org
-Cc: Andrew Lunn <andrew@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net v3] net: phy: qca83xx: read resolved QCA8337 link status
-Date: Tue,  6 Oct 2026 18:03:16 +0200
-Message-ID: <20261006160316.1356-1-yongzhao.derek@gmail.com>
-X-Mailer: git-send-email 2.45.2.windows.1
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="BVxCu/Nf"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E45261477
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 09:50:52 -0700 (PDT)
+Received: from [10.2.11.34] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1453F3F66F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  6 Oct 2026 09:50:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1791305456; bh=w6yofi2hb9AiVsVr8lzwC1eqMrd95HITpUYDUSg8J/0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=BVxCu/NfW0F3Uh401VVh6OdGWb2mcdXeAl45kDBdQjk/bZz7z37IPd0GmKlC3xWDZ
+	 rIUIzYTrKLXP6IgoOwtNGOJ4nMbJod8kR+cv8199r2+ehaKXFNAnJAfouWxpIp/FLl
+	 jUTLXTFzRmoR95uxAZE8v4OuiSM31T7rIXsxboaQ=
+Date: Tue, 6 Oct 2026 17:50:50 +0100
+From: Liviu Dudau <liviu.dudau@arm.com>
+To: Matthew Brost <matthew.brost@intel.com>
+Cc: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Anna Maniscalco <anna.maniscalco2000@gmail.com>,
+	Antonino Maniscalco <antomani103@gmail.com>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	David Airlie <airlied@gmail.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>, Lyude Paul <lyude@redhat.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Maxime Ripard <mripard@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Simona Vetter <simona@ffwll.ch>,
+	Steven Price <steven.price@arm.com>,
+	Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: [PATCH v3 7/8] drm/nouveau: use DRM_GPUVM_RESV_PROTECTED
+Message-ID: <asUm6j1GD6yxeBvy@e142607>
+References: <20261001220632.3190896-1-matthew.brost@intel.com>
+ <20261001220632.3190896-8-matthew.brost@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261001220632.3190896-8-matthew.brost@intel.com>
 
-After a QCA8337 SmartSpeed downshift, genphy_read_status() can report
-1000 Mbit/s from the advertised modes when the PHY is running at
-100 Mbit/s. On a Redmi AX5400 running downstream OpenWrt Linux 6.18.52,
-this caused qca8k to program the user-port MAC for 1000 Mbit/s and
-traffic failed. An earlier prototype that read the resolved speed
-from the PHY restored traffic.
+On Thu, Oct 01, 2026 at 03:06:31PM -0700, Matthew Brost wrote:
+> nouveau creates its drm_gpuvm without DRM_GPUVM_RESV_PROTECTED, so the
+> extobj and evicted lists are protected by internal spinlocks. Every
+> nouveau path but three already touches them with the VM's resv held:
+> drm_gpuvm_exec_lock() and drm_gpuvm_validate() on exec, and TTM moves of
+> private BOs, which share the VM's resv. The remaining three are:
+> 
+>  - nouveau_uvmm_bind_job_submit() adds the vm_bo of a MAP op to the
+>    extobj list holding no resv at all. Move that into
+>    bind_lock_validate(), which now locks the VM's resv as well.
+> 
+>  - bind_link_gpuvas() unlinks the GPUVAs of UNMAP and REMAP ops, which
+>    can drop the last reference of their vm_bo. It runs within the bind
+>    job's drm_exec transaction, which the above makes hold the VM's resv.
+> 
+>  - nouveau_uvmm_bind_job_cleanup() and nouveau_uvmm_fini() can drop the
+>    last reference of a vm_bo holding only the object's resv. Lock the
+>    VM's resv along with it, through a new
+>    nouveau_uvmm_lock_vm_and_obj().
+> 
+> The bind job's fence now always lands in the VM's resv, as BOOKKEEP.
+> This already happened whenever a bind job mapped a private BO.
+> 
+> With that the internal spinlocks buy nothing, so set
+> DRM_GPUVM_RESV_PROTECTED. This is also what two-pass locking in
+> drm_gpuvm requires, which a following patch makes use of.
+> 
+> Cc: Abhinav Kumar <abhinav.kumar@linux.dev>
+> Cc: Alice Ryhl <aliceryhl@google.com>
+> Cc: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+> Cc: Antonino Maniscalco <antomani103@gmail.com>
+> Cc: Boris Brezillon <boris.brezillon@collabora.com>
+> Cc: Danilo Krummrich <dakr@kernel.org>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Dmitry Baryshkov <lumag@kernel.org>
+> Cc: Jessica Zhang <jesszhan0024@gmail.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Liviu Dudau <liviu.dudau@arm.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> Cc: Marijn Suijten <marijn.suijten@somainline.org>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Rob Clark <robin.clark@oss.qualcomm.com>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> Cc: Sean Paul <sean@poorly.run>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
+> Cc: Simona Vetter <simona@ffwll.ch>
+> Cc: Steven Price <steven.price@arm.com>
+> Cc: Thomas Hellström <thomas.hellstrom@linux.intel.com>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Matthew Brost <matthew.brost@intel.com>
+> Assisted-by: LLM
+> ---
+> v3:
+>  - New patch (Danilo)
 
-Wrap genphy_read_status() and use at803x_read_specific_status() to
-replace its speed and duplex result when autonegotiation is complete
-and the link has not stayed up. Resolve pause for the resulting duplex.
-QCA8337's register layout matches the helper (data sheet 80-Y0619-3
-Rev. D, pages 327-328).
+Bit confused about this. If Danilo contributed this patch should it not carry his S-o-b as well?
 
-Keep the generic master/slave read order and the early return for a
-steady autonegotiated link. This avoids additional reads of the
-clear-on-read idle error count in MII_STAT1000. Forced mode continues
-to use BMCR. Report the MDI-X state, but clear mdix_ctrl because this
-driver does not implement MDI-X configuration.
+Best regards,
+Liviu
 
-Fixes: b3591c2a3661 ("net: dsa: qca8k: Switch to PHYLINK instead of PHYLIB")
-Suggested-by: Andrew Lunn <andrew@lunn.ch>
-Assisted-by: LLM
-Signed-off-by: Yongzhao Chen <yongzhao.derek@gmail.com>
----
-v3:
- - Keep genphy_read_status() instead of calling at803x_read_status()
-   followed by genphy_read_master_slave(). This restores the generic
-   MII_STAT1000 read frequency and master/slave-before-LPA order,
-   addressing the idle-error and latched-fault issues raised by Sashiko.
- - Report mdix_ctrl as ETH_TP_MDI_INVALID, including after a steady
-   poll, since QCA8337 has no MDI-X configuration callback.
- - Keep the generic BMCR result in forced mode. QCA8337's resolved-bit
-   behavior in that mode has not been verified.
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c | 49 ++++++++++++++++++++++----
+>  1 file changed, 42 insertions(+), 7 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index 2026fe6b48c6..dae612e56d91 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -1187,6 +1187,27 @@ bind_validate_region(struct nouveau_job *job)
+>  	return 0;
+>  }
+>  
+> +/*
+> + * Lock the VM's common dma-resv together with the one of @obj, as needed to
+> + * drop what may be the last reference of a &drm_gpuvm_bo.
+> + */
+> +static void
+> +nouveau_uvmm_lock_vm_and_obj(struct nouveau_uvmm *uvmm, struct drm_exec *exec,
+> +			     struct drm_gem_object *obj)
+> +{
+> +	int ret;
+> +
+> +	drm_exec_init(exec, DRM_EXEC_IGNORE_DUPLICATES, 2);
+> +	drm_exec_until_all_locked(exec) {
+> +		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(&uvmm->base));
+> +		if (!ret)
+> +			ret = drm_exec_lock_obj(exec, obj);
+> +		drm_exec_retry_on_contention(exec);
+> +		if (drm_WARN_ON(uvmm->base.drm, ret))
+> +			break;
+> +	}
+> +}
+> +
+>  static void
+>  bind_link_gpuvas(struct bind_job_op *bop)
+>  {
+> @@ -1224,12 +1245,24 @@ bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
+>  		   unsigned int num_fences)
+>  {
+>  	struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
+> +	struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
+>  	struct bind_job_op *op;
+>  	int ret;
+>  
+> +	/* The VM's dma-resv protects its extobj and evicted lists, and must be
+> +	 * held by bind_link_gpuvas() in case it drops the last reference of a
+> +	 * &drm_gpuvm_bo.
+> +	 */
+> +	ret = drm_gpuvm_prepare_vm(&uvmm->base, exec, num_fences);
+> +	if (ret)
+> +		return ret;
+> +
+>  	list_for_each_op(op, &bind_job->ops) {
+>  		struct drm_gpuva_op *va_op;
+>  
+> +		if (op->op == OP_MAP)
+> +			drm_gpuvm_bo_extobj_add(op->vm_bo);
+> +
+>  		if (!op->ops)
+>  			continue;
+>  
+> @@ -1288,8 +1321,6 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
+>  			dma_resv_unlock(obj->resv);
+>  			if (IS_ERR(op->vm_bo))
+>  				return PTR_ERR(op->vm_bo);
+> -
+> -			drm_gpuvm_bo_extobj_add(op->vm_bo);
+>  		}
+>  
+>  		ret = bind_validate_op(job, op);
+> @@ -1603,9 +1634,11 @@ nouveau_uvmm_bind_job_cleanup(struct nouveau_job *job)
+>  			drm_gpuva_ops_free(&uvmm->base, op->ops);
+>  
+>  		if (!IS_ERR_OR_NULL(op->vm_bo)) {
+> -			dma_resv_lock(obj->resv, NULL);
+> +			struct drm_exec exec;
+> +
+> +			nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
+>  			drm_gpuvm_bo_put(op->vm_bo);
+> -			dma_resv_unlock(obj->resv);
+> +			drm_exec_fini(&exec);
+>  		}
+>  
+>  		if (obj)
+> @@ -1941,7 +1974,8 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
+>  	mt_init_flags(&uvmm->region_mt, MT_FLAGS_LOCK_EXTERN);
+>  	mt_set_external_lock(&uvmm->region_mt, &uvmm->mutex);
+>  
+> -	drm_gpuvm_init(&uvmm->base, cli->name, 0, drm, r_obj,
+> +	drm_gpuvm_init(&uvmm->base, cli->name, DRM_GPUVM_RESV_PROTECTED,
+> +		       drm, r_obj,
+>  		       NOUVEAU_VA_SPACE_START,
+>  		       NOUVEAU_VA_SPACE_END,
+>  		       init->kernel_managed_addr,
+> @@ -1978,6 +2012,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+>  	struct nouveau_uvma_region *reg;
+>  	struct nouveau_cli *cli = uvmm->vmm.cli;
+>  	struct drm_gpuva *va, *next;
+> +	struct drm_exec exec;
+>  
+>  	nouveau_uvmm_lock(uvmm);
+>  	drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
+> @@ -1989,9 +2024,9 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+>  
+>  		drm_gpuva_remove(va);
+>  
+> -		dma_resv_lock(obj->resv, NULL);
+> +		nouveau_uvmm_lock_vm_and_obj(uvmm, &exec, obj);
+>  		drm_gpuva_unlink(va);
+> -		dma_resv_unlock(obj->resv);
+> +		drm_exec_fini(&exec);
+>  
+>  		nouveau_uvma_unmap(uvma);
+>  		nouveau_uvma_vmm_put(uvma);
+> -- 
+> 2.34.1
+> 
 
-v2: https://lore.kernel.org/netdev/20261003173210.1235-1-yongzhao.derek@gmail.com/
-v1: https://lore.kernel.org/netdev/20260928220749.857-1-yongzhao.derek@gmail.com/
-
-Testing: the source-extraction model passes 26 checks covering speed
-and duplex at the phylib notification boundary, latch-low transitions,
-pause, forced mode, unresolved/reserved status, MDIO errors and the
-three reported issues. The baseline fails the downshift checks; v2
-reproduces the idle-error loss, one-shot MSFAIL ordering difference and
-valid mdix_ctrl report. The MDIO model follows the read-clear and
-saturating-counter definitions in Table 5-352, pages 324-325. An arm64
-W=1 build of qca83xx.o, at803x.o and qcom-phy-lib.o is clean.
-
-v3 has not been tested on hardware. The hardware result above used
-v2's at803x_read_status() plus genphy_read_master_slave() on one board,
-with an Intel igb peer, a two-pair cable and default autonegotiation.
-Ping changed from 0/20 to 20/20 in each direction at resolved 100 Full.
-No idle errors or MSFAIL were injected on hardware; whether MSFAIL can
-remain latched while AN complete is set is still unknown.
-
- drivers/net/phy/qcom/qca83xx.c | 37 ++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
-
-diff --git a/drivers/net/phy/qcom/qca83xx.c b/drivers/net/phy/qcom/qca83xx.c
-index bc70ed8efd8..e70da092f42 100644
---- a/drivers/net/phy/qcom/qca83xx.c
-+++ b/drivers/net/phy/qcom/qca83xx.c
-@@ -92,6 +92,42 @@ static int qca83xx_probe(struct phy_device *phydev)
- 	return 0;
- }
- 
-+static int qca8337_read_status(struct phy_device *phydev)
-+{
-+	struct at803x_ss_mask ss_mask = {
-+		.speed_mask = AT803X_SS_SPEED_MASK,
-+		.speed_shift = __bf_shf(AT803X_SS_SPEED_MASK),
-+	};
-+	int ret, old_link = phydev->link;
-+
-+	ret = genphy_read_status(phydev);
-+	if (ret)
-+		return ret;
-+
-+	/* genphy_read_status() derives speed and duplex from the
-+	 * advertisements, which is wrong after a SmartSpeed downshift.
-+	 * Whenever it has just done so, use what the PHY resolved instead.
-+	 */
-+	if (phydev->autoneg == AUTONEG_ENABLE && phydev->autoneg_complete &&
-+	    !(old_link && phydev->link)) {
-+		phydev->speed = SPEED_UNKNOWN;
-+		phydev->duplex = DUPLEX_UNKNOWN;
-+		phydev->pause = false;
-+		phydev->asym_pause = false;
-+
-+		ret = at803x_read_specific_status(phydev, ss_mask);
-+		if (ret)
-+			return ret;
-+
-+		phy_resolve_aneg_pause(phydev);
-+	}
-+
-+	/* MDI-X configuration is not implemented */
-+	phydev->mdix_ctrl = ETH_TP_MDI_INVALID;
-+
-+	return 0;
-+}
-+
- static int qca83xx_config_init(struct phy_device *phydev)
- {
- 	u8 switch_revision;
-@@ -220,6 +256,7 @@ static struct phy_driver qca83xx_driver[] = {
- 	.flags			= PHY_IS_INTERNAL,
- 	.config_init		= qca83xx_config_init,
- 	.soft_reset		= genphy_soft_reset,
-+	.read_status		= qca8337_read_status,
- 	.get_sset_count		= qca83xx_get_sset_count,
- 	.get_strings		= qca83xx_get_strings,
- 	.get_stats		= qca83xx_get_stats,
-
-base-commit: 6dc989ea46b96ce170840174b4a38c4a387fb005
 -- 
-2.43.0
-
+====================
+| I would like to |
+| fix the world,  |
+| but they're not |
+| giving me the   |
+ \ source code!  /
+  ---------------
+    ¯\_(ツ)_/¯
