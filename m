@@ -1,68 +1,68 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 871CF4746C8
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 09:02:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 557AF4854EF
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 09:02:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791363754; cv=none; b=MzR0bYZPoYcVMg95zsrGKz3laVR6nRMbTCezLymXznen/sA7KTLID9C1sVKr0z8zY9ypwVFkDYJpjKrzfnv/yDGxzTxqRVaWpelxDc1vE0m5qONhsM3IF+YS2B5s2U/MqtPfeRmBCeiHby/CN2H0bSWokOG7zRg3MIXUzyv2LgM=
+	t=1791363759; cv=none; b=XTtBvAuuzFRN1GOhJ6HTJN4NNQQWWG3PMCp4VwYYcNgHzO78DnCRTwuWUrbYRKevkE+eCjXBjZP3Z5lrucrAI5fPA1Rzu1MhiJieiC2JU3o9t4lP9DltDlUxYzX/0TU0tFumQi0fJ3z73dy/90Js0KTj9SH3xaBzCtJnBlUEC+Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791363754; c=relaxed/simple;
-	bh=6Y6z1JDeisJ2Nl0/RT2ILCUl8kE590RGswDtsPSxnfQ=;
+	s=arc-20240116; t=1791363759; c=relaxed/simple;
+	bh=ncztrglIeJ+FBFPARy2OWQPDE/c54qlVIzwutjSZYNU=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=gqTQAI3zcLlQ9Xs9aB5fCadqQoFXRjTAuAzsSr1uQLHDix8tLmvSgrpbdRfOKuxVYbtKz3hdXXCHNS4dx7+04L4cccXWA6rOJJEffZFa2Y5hQKN0oZ0MM9mX/6Tj15XvNUgpZPUBRCFKAZrRWN/ES74+poijMvcGdEvh03adIjs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Sn0+CLcJ reason="signature verification failed"; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=oYybroi+nD3ejyXuRgrNBUZxi5JYlBcAbxbrOJa4IJz6ebJd3EYaA/nVV1KwjETcZgCB6iaKyg/hjZ5fShuQqsvsYSrCZOV36XHCl6TwsCamVdlxAOpDbEuOVudMpE7HMkJgjLwwRn0k3n71NmZzeAjuhSenGRrxUSJf1Gd1ykQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MPEHWcB+ reason="signature verification failed"; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Sn0+CLcJ"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6977jnEI152120
-	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 09:02:06 GMT
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MPEHWcB+"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6977jefw119490
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 09:01:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=1Wprkf4GoAH
-	etdPZnQoqyiufpWRYQl51t90Ivzv6Nlo=; b=Sn0+CLcJ12M7Ims03pjAQzMxsY/
-	7Xe4uhqTKxDUmYnz6Zu5h8xzk+aSRFbCLeCEFEgEqeuNZiuMy53HiEFmA80ZmOOy
-	UuDL5O3+xElLrTU6CP68TV2cwybIJoHNGCztKMXPhFoSOXVUxbTRN+oiGbcYursI
-	hZWifqjsflYi0RxzzTvFcP9rRBng8VIpemZUlVYodKGHCXCr6mq1/96gj4t7qzUm
-	8rS7z/eZBfIQdXxxw2VG/uTVwfgyv1hn8UeOdDNAw3nrDDl7ZatSzR6UqAnRO23K
-	SJDKj2l0iVF2rRhIF3yLZonEz2I8YoymhRiWzY7VI7/OMI9Jj2zCJEThs2w==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c719bxg-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=VWJeGiUQif6
+	XovHMmELTcKwm1kNiECWlB8wzymJNLJI=; b=MPEHWcB+AXrUrvOgZdCKiTYzjrE
+	OCc5a7FilkA2Yg6dM2CUtY6iNMb4vOvSQgnug2xqmxnlUEj+9YPuh4glkYldLOgC
+	mowSm8R5PniXwTD+4A/2BN2/ND5dcdQZqd746HNoyG+j33Or7aaYvluCJwGT9APX
+	cUTySXknBfXuODu4nhTI4eulGKj105xy+lKS3QtsXwFoy/Uq7dz46sQrbPTw4xzx
+	cMtYuY8bYuormH6/YclZiL3t1T/ukwJErmm5dVyXARpd13KMaTM6L9hzI2FmDiAX
+	UmRXVSAKysWyGn6gDXTYBX4k7/76rUp0XPve7wEkr7VF2VLGw95wx8RGrlg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5fc58r3r-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 09:02:06 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93caf6c528aso610333185a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 02:02:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 09:01:59 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93caf6c528aso610310285a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 02:01:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791363725; x=1791968525;
+        d=1e100.net; s=20260707; t=1791363718; x=1791968518;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1Wprkf4GoAHetdPZnQoqyiufpWRYQl51t90Ivzv6Nlo=;
-        b=LqLnWK9MlcWLqESx0tajLvgR99tCEiQJQqNzffl+O/1LhTNE8QtOKNLIx7B/1G/9Db
-         9Mf8WvwLjB31sRvrK62UhWAymIyfQOm7h0Q8LpX1GggO20nBYRfyuW2WDYkWOGB2tVMo
-         MMTu05wRKqgUhg2fpP5MrgWymb/+oSX5vh1vnBStANGoUC3OdpiERj1Mwu4xRTRzF9xw
-         w4d0fcOgNKPvYRuk+aVTvI6OUhranAVi5ZfQQ/Lnjdqw55GKxdqI2Es/bA+HzwvwWak0
-         TxJwJtdqi0Ymt0VPN9wu7INvYjTkohiErO5N2IyYJ2IGR586X378Riald6Ory7Fs0U//
-         oWXA==
-X-Forwarded-Encrypted: i=1; AKwUvBzbhzPe9rSFm9Vu7AhvGw0pfwFldrQqRGY9l7Pw0IuiYKNeWaQfYUHOUS3MweB13hHqZgm00SjZbSAvdvVw@vger.kernel.org
-X-Gm-Message-State: AFuF++mQeAR12VY2ZKyfzvekjUTbho1/j6d5QGyyVJgYbh/PT/oP6xIo
-	xQ7qdng3vpLgDZ2h2FDzvuZX40mrf8BWeWzJL6tAa53e58kG5GXRQG6mFftCGluxM91F/BNon85
-	q7ws7N5Q831XKqC6SMkSkEqxOoxFzU07WNxxqpHiPBd/dc71FuvB+ZukZT36aVCMpaHOf
-X-Gm-Gg: AYBFou196ZEiITAXmKZy+Z3T4bxnVF51/whUQAbGMuAhgmZLTZcF884SOr6HSLermnm
-	K9qKC3z90Y9yoWSbvlOzgUlcORYj50Q0TOf0DqxgdMvkJrG6DJmvvDbyO4iB4FgLDkJkyBHgetU
-	V72tJYOsYqUw8PzH0ai9diexh/ykOhNSIiInwOUVrhVSL8ETY3kx6ZqxUmmYezNub2vI1menGwG
-	E8yOIJT7nQ/5WWQcC1m9DyZybpawSjsSEnisbwNgCjxkf+j+enCQBFR6pcZSFoQYKIYYJdvKb+1
-	2Z78Lv3rBh3CgeOpuUV78l3G7bc4rWl7KCsAhpBRFRh92FRkW0vqgQel+NI=
-X-Received: by 2002:a05:620a:8807:b0:93e:458b:6f2b with SMTP id af79cd13be357-93e9b6ff7bfmr284556285a.29.1791363725289;
-        Wed, 07 Oct 2026 02:02:05 -0700 (PDT)
-X-Received: by 2002:a05:620a:8807:b0:93e:458b:6f2b with SMTP id af79cd13be357-93e9b6ff7bfmr284548885a.29.1791363724650;
-        Wed, 07 Oct 2026 02:02:04 -0700 (PDT)
+        bh=VWJeGiUQif6XovHMmELTcKwm1kNiECWlB8wzymJNLJI=;
+        b=gyzhVU/3LgIpxoqjozgB8jKfpWQ7TsjOP6htxV5vxG3inU79ki6N+JH4KDaDK7VFPG
+         zV4p3+terJiwYjmf8B372uGhZqSYr9IU9LbaEIesfFZqBaHfANwLvWDmx3oOZU77gh9A
+         +snSQlKUNWVBVWSCC8fexgWgo3V2eMHuMXEk+HFwn48T+pGLUyR2TcNpeQXR+QnsdaYj
+         s6ZFyz65C5Va/UXKZ1ckrgXhJufL20IECjSmHFJ+yIMNqjflDhQMt3oEvxvAEND9jzic
+         f0XNiRndKS5IjmQ6g2O82IuGXhtRw7Ce16noz+g+KIP2v33ki8PpyKn462/ZGYQchtR/
+         vftQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx5ml8KIh4FsR7XN3W8nwRMFzRDhzk4qMsCGTLW8wS2eSWLu1WO29uJ9UKd74zVu2wjs/iEX16Fzb32E6hp@vger.kernel.org
+X-Gm-Message-State: AFuF++l2Y+BYzFJJYF1cx9TD2SC4G+4nrFuu2J2Zc/Gqdy4nbbkvukNS
+	h/Fs5dQ0mK5BmdpEcJjF74HVfOEuZctwXg0f+K2R+Nt4ZA66hGQAanIL5WrONn1S2RsMf9ogIV/
+	Ny5g2Fg7wvyVQrjIFxqFmjlEZ3OkkeAg9Ox/XcRydhoKKUiB2UnLyQjv+x1JCEbrzGUNr
+X-Gm-Gg: AYBFou1U20aF6tl4NBAxbCqai+GXwbzkw1zhe0BuG2qlpmiqZTpu9hhps+betqVIX6/
+	K23ehY/Pp4jS3mUanDmqRvTSlXxWXeQHV/p49gzFuB6fJT34+l0cONh11vY72Bm98osdUsin6cJ
+	MvoN00hszQbDmtBwQYuKgWfo53UXOAm9+9RFi/b6rwjELMBO6OnbstxDolN8ZqIo84qU20sJ3R8
+	qcFHN3EfIjwcov3yGaggeTic++JJQtBa/NcSxLLrWIUYinj3kA9UBvbEEt/MxLoNuYYwAlNPcAe
+	ZH4fVLz0aha3vGls9zqj0hnsK6YeTjRJbKK9wAa0J4/gK3kSvASiZcSD91Y=
+X-Received: by 2002:a05:620a:4723:b0:93c:6f06:8f2 with SMTP id af79cd13be357-93e9b797e94mr300265485a.48.1791363717798;
+        Wed, 07 Oct 2026 02:01:57 -0700 (PDT)
+X-Received: by 2002:a05:620a:4723:b0:93c:6f06:8f2 with SMTP id af79cd13be357-93e9b797e94mr300261185a.48.1791363717199;
+        Wed, 07 Oct 2026 02:01:57 -0700 (PDT)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3188d412besm4197366b.80.2026.10.07.02.02.01
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3188d412besm4197366b.80.2026.10.07.02.01.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 02:02:03 -0700 (PDT)
+        Wed, 07 Oct 2026 02:01:56 -0700 (PDT)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -90,9 +90,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         pshrotri@qti.qualcomm.com, johannes.goede@oss.qualcomm.com,
         linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH RESEND 22/45] media: v4l2: add Qualcomm IFE parameters format
-Date: Wed,  7 Oct 2026 12:00:18 +0300
-Message-Id: <20261007090041.3732717-23-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH RESEND 20/45] media: qcom: camss: add IFE statistics output
+Date: Wed,  7 Oct 2026 12:00:16 +0300
+Message-Id: <20261007090041.3732717-21-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261007090041.3732717-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261007090041.3732717-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -103,70 +103,446 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAzNSBTYWx0ZWRfX1PdFwqdB/l5u
- rClcOjba4fxWgu57G2/kky3VRyheIfIPr7Nsm2LU5v1Bw/K0Vwa88LQPR1rRpW/pwbSWb1LwgLq
- umFESALr2ZKVXH1QUqey1vW9yP1/lLM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAzNSBTYWx0ZWRfXz2dCLB27WWqk
- GDEGUhecC4tSBUKnJwk41WSwmrHbXRo4tXXskt77e/fLoDygRC/y6NjpLCAeWa9P2dbp+dPEV1Y
- LzhA3AjwmOdtzQlMpJcgTF0Es50NF+TUUGkZ0AZEUPjhG9OII9IIx7d3PzODvDOozIsZnKs/RBN
- RoaDPQvjNDT3O9x1FxjEbaupcYeKy3S46NZhPvlY9wN03J7qvWWhj1z8gLIt1e362T20pIjIFfh
- 4x3YUiBD576uPMVdOPOOs/CYoLX0aRBJE5mMSuzY7SUcQevaxmu1KAKBnRCZ5YM0MKaLacIy+SZ
- AroOMDXqnoGp523Qe4Hb3HNTi8ZU8B7J2vYsd51da7kFYtnJWK78fpb/dyIuYbWpO1r0fVoIznG
- UybW+n0lSKc1CcPyGQO32EnVPXMQbNpBa7sKe1CrjGqUHHPvr8JMMHX8/Pn9QQpjW07mtoe1Vli
- P9O7uQSNjo7AzXolDYQ==
-X-Proofpoint-GUID: J-MALJpDqM7PUHQ-IHFutLJb91V_Ty9k
-X-Proofpoint-ORIG-GUID: J-MALJpDqM7PUHQ-IHFutLJb91V_Ty9k
-X-Authority-Analysis: v=2.4 cv=LvYHWXdc c=1 sm=1 tr=0 ts=6ac60a8e cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAzNSBTYWx0ZWRfX+NaBYCpVHGp7
+ cseOVWzOk9oHTFeZME6cMVwOxqc15lPYZngkSw0CNzhTOlWiGElKYKHcopIXj6im2bPEbxQBLcy
+ jFCkFAdiYhtZIUoVTNjxjgEc5uDLiek=
+X-Proofpoint-GUID: x3YqaYMPVYIpCljQuzXDW8qcHCRTC3S4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAzNSBTYWx0ZWRfX9nOSjbgpewkG
+ teTEUc+Tbl3j0VczwSdTmMHiHpLcCtF2NuANbHTgjQ525vKFvOltjdhcYbpCaJENJt5oA25iH9a
+ GycrQ1rEixtxNcU5XaT++6rg9bnmix2SE6TgWYaZvG8i5s7bBPbukJWPnuQC9pxvNKAXUjhnunM
+ HPpk0g9/2+IKJT5VEE31fzSfqojK7mB/Tdskqv7mAHbe4nZVsonmVgM3rHxLBSei4zAD9C7DB1a
+ Iy23ndJyIZQsIqxBWtBm4uASPaF35MxJg3dR7WAYZdOiH7SWq+W+8+hWTDNSyQtKb+1yYAPczOa
+ qOPTvMOlR/ymu1N9YEidi+m6YqDHrhbepDVLggv8743L2hf15FY8LuGiPX03DYBbTFPjj1oM2ED
+ 01zZE34n6EPdULVVqTlWgXOtl5DNR7EiYMEAjwmstHl88OzSZ2h+GQeQCHSzYRq0IR7kYBz8DrZ
+ YdvZBqEVMCZ14i0m9XQ==
+X-Proofpoint-ORIG-GUID: x3YqaYMPVYIpCljQuzXDW8qcHCRTC3S4
+X-Authority-Analysis: v=2.4 cv=a6+lZkSF c=1 sm=1 tr=0 ts=6ac60a87 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=1ys7_V7Nn-5Y8TJEc3AA:9
- a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=JK_Li5-1ZNDrFKk9jnYA:9
+ a=IoWCM6iH3mJn3m4BftBB:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-07_03,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 impostorscore=0 suspectscore=0
- lowpriorityscore=0 clxscore=1015 bulkscore=0 adultscore=0 phishscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ priorityscore=1501 adultscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
  definitions=main-2610070035
 
 From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 
-Describe Qualcomm IFE parameter buffers with the QCF0 metadata format.
+Add metadata capture support to CAMSS video nodes.
+Expose the SM8250 IFE statistics output through write master 15.
 
 Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
 ---
- drivers/media/v4l2-core/v4l2-ioctl.c | 3 +++
- include/uapi/linux/videodev2.h       | 1 +
- 2 files changed, 4 insertions(+)
+ .../platform/qcom/camss/camss-ife-pads.c      |  34 +++++
+ drivers/media/platform/qcom/camss/camss-ife.c |  44 ++++++
+ drivers/media/platform/qcom/camss/camss-ife.h |   3 +
+ .../media/platform/qcom/camss/camss-video.c   | 141 ++++++++++++++++++
+ .../media/platform/qcom/camss/camss-video.h   |   2 +
+ 5 files changed, 224 insertions(+)
 
-diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
-index b7173a258225..581ed9d74b82 100644
---- a/drivers/media/v4l2-core/v4l2-ioctl.c
-+++ b/drivers/media/v4l2-core/v4l2-ioctl.c
-@@ -1470,6 +1470,9 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
- 	case V4L2_META_FMT_QC_IFE_STAT_3A:
- 		descr = "Qualcomm IFE 3A Statistics";
- 		break;
-+	case V4L2_META_FMT_QC_IFE_PARAMS:
-+		descr = "Qualcomm IFE Parameters";
-+		break;
- 	case V4L2_META_FMT_C3ISP_PARAMS:	descr = "Amlogic C3 ISP Parameters"; break;
- 	case V4L2_META_FMT_C3ISP_STATS:		descr = "Amlogic C3 ISP Statistics"; break;
- 	case V4L2_META_FMT_MALI_C55_PARAMS:	descr = "ARM Mali-C55 ISP Parameters"; break;
-diff --git a/include/uapi/linux/videodev2.h b/include/uapi/linux/videodev2.h
-index 4a0748b60a15..52ad260e65c8 100644
---- a/include/uapi/linux/videodev2.h
-+++ b/include/uapi/linux/videodev2.h
-@@ -878,6 +878,7 @@ struct v4l2_pix_format {
+diff --git a/drivers/media/platform/qcom/camss/camss-ife-pads.c b/drivers/media/platform/qcom/camss/camss-ife-pads.c
+index 926ba96a7603..bd9ac1a91d73 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife-pads.c
++++ b/drivers/media/platform/qcom/camss/camss-ife-pads.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2023 Qualcomm Technologies, Inc.
+  */
  
- /* Vendor specific - used for Qualcomm IFE camera sub-system */
- #define V4L2_META_FMT_QC_IFE_STAT_3A	v4l2_fourcc('Q', 'C', 'F', '1') /* IFE 3A Statistics */
-+#define V4L2_META_FMT_QC_IFE_PARAMS	v4l2_fourcc('Q', 'C', 'F', '0') /* IFE 3A Parameters */
++#include <linux/qcom-camss-stats.h>
+ #include <linux/videodev2.h>
+ #include <media/v4l2-mediabus.h>
  
- /* Vendor specific - used for C3_ISP */
- #define V4L2_META_FMT_C3ISP_PARAMS	v4l2_fourcc('C', '3', 'P', 'M') /* Amlogic C3 ISP Parameters */
+@@ -63,6 +64,11 @@ static const struct camss_format_info ife_vid_pix_fmts_v20x[] = {
+ 	  { { 1, 1 } }, { { 2, 3 } }, { 8 } },
+ };
+ 
++static const struct camss_format_info ife_stats_fmts_v20x[] = {
++	{ MEDIA_BUS_FMT_METADATA_FIXED, 8, V4L2_META_FMT_QC_IFE_STAT_3A, 1,
++	  { { 1, 1 } }, { { 1, 1 } }, { 8 } },
++};
++
+ static const struct ife_pad_limits ife_vid_limits_v20x = {
+ 	.min_width	= 320,
+ 	.min_height	= 240,
+@@ -72,6 +78,13 @@ static const struct ife_pad_limits ife_vid_limits_v20x = {
+ 	.max_v_ratio	= 16,
+ };
+ 
++static const struct ife_pad_limits ife_meta_limits_v20x = {
++	.min_width	= 16,
++	.min_height	= 16,
++	.max_width	= 16,
++	.max_height	= 16,
++};
++
+ static const struct ife_pad_limits ife_fd_limits = {
+ 	.min_width	= 320,
+ 	.min_height	= 240,
+@@ -293,6 +306,27 @@ static const struct ife_pad_desc ife_pad_desc_v20x[] = {
+ 		.wm[0] = 8,
+ 		.wm[1] = 9,
+ 	},
++	{
++		.pad_flags = MEDIA_PAD_FL_SOURCE,
++		.sup_fmts = {
++			.nformats = ARRAY_SIZE(ife_stats_fmts_v20x),
++			.formats = ife_stats_fmts_v20x,
++		},
++		.limits = &ife_meta_limits_v20x,
++		.video_name = "stats",
++		.link_flags = MEDIA_LNK_FL_IMMUTABLE | MEDIA_LNK_FL_ENABLED,
++		.buf_type = V4L2_BUF_TYPE_META_CAPTURE,
++		.meta_dataformat = V4L2_META_FMT_QC_IFE_STAT_3A,
++		.meta_buffersize = PAGE_ALIGN(sizeof(struct camss_ife_stats)),
++		.output = CAMSS_IFE_OUTPUT_STATS,
++		.hw_pipe = CAMSS_IFE_HW_PIPE_PP,
++		.packing_fmt = 0xa,
++		.mode_config = BUSWR_CLIENT_CFG_MODE_FRAME_BASED,
++		.rup_group_mask = BIT(6),
++		.comp_group_mask = BIT(12),
++		.num_wms = 1,
++		.wm[0] = 15,
++	},
+ };
+ 
+ const struct ife_pads_descriptors ife_lite_pads_v20x = {
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.c b/drivers/media/platform/qcom/camss/camss-ife.c
+index cf1474e5bce4..f7ec86fb7f02 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.c
++++ b/drivers/media/platform/qcom/camss/camss-ife.c
+@@ -66,6 +66,11 @@ static bool is_stats_type(const struct ife_pad_desc *pad)
+ 	return pad->buf_type == V4L2_BUF_TYPE_META_CAPTURE;
+ }
+ 
++static bool is_ife_video_stats(const struct camss_video *video)
++{
++	return video->type == V4L2_BUF_TYPE_META_CAPTURE;
++}
++
+ static bool is_meta_type(const struct ife_pad_desc *pad)
+ {
+ 	return is_stats_type(pad);
+@@ -467,6 +472,17 @@ static int ife_setup_vid_full(struct ife_video_pad *vid_pad,
+ 	u8 depth = 0;
+ 	int ret;
+ 
++	if (is_ife_video_stats(&vid_pad->video)) {
++		wm_cfg[Y_PLANE].mode_config = dsc->mode_config;
++		wm_cfg[Y_PLANE].packing_fmt = dsc->packing_fmt;
++		wm_cfg[Y_PLANE].width = 0;
++		wm_cfg[Y_PLANE].lines = 0;
++		wm_cfg[Y_PLANE].bytes = 1;
++		wm_cfg[Y_PLANE].stride = 1;
++
++		return 0;
++	}
++
+ 	wm_cfg[Y_PLANE].mode_config = dsc->mode_config;
+ 	wm_cfg[Y_PLANE].packing_fmt = dsc->packing_fmt;
+ 	wm_cfg[C_PLANE].mode_config = dsc->mode_config;
+@@ -782,6 +798,9 @@ static int ife_pad_try_format(struct ife_device *ife, const struct ife_pad_desc
+ 	u32 in_height;
+ 	u32 in_width;
+ 
++	if (is_meta_type(desc))
++		return -ENOTTY;
++
+ 	for (i = 0; i < sup_fmts->nformats; i++)
+ 		if (fmt->code == sup_fmts->formats[i].code)
+ 			break;
+@@ -841,6 +860,11 @@ static int ife_pad_get_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_state *sta
+ 
+ 	pad = &ife->pads[sd_fmt->pad];
+ 
++	if (is_meta_type(pad->desc)) {
++		sd_fmt->format = pad->fmt;
++		return 0;
++	}
++
+ 	if (sd_fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
+ 		ife_pad_try_format(ife, pad->desc, &sd_fmt->format);
+ 	} else {
+@@ -884,6 +908,9 @@ static void ife_update_src_pads_fmt(struct ife_device *ife, struct v4l2_mbus_fra
+ 
+ 		fi = ife_pad_try_format(ife, pad->desc, &new_fmt);
+ 
++		if (vpad && is_ife_video_stats(&vpad->video))
++			vpad = NULL;
++
+ 		if (vpad) {
+ 			struct v4l2_pix_format_mplane *pix_mp = &vpad->video.active_fmt.fmt.pix_mp;
+ 			const struct camss_format_info *info = &pad->desc->sup_fmts.formats[fi];
+@@ -913,6 +940,11 @@ static int ife_pad_set_fmt(struct v4l2_subdev *sd, struct v4l2_subdev_state *sta
+ 
+ 	pad = &ife->pads[sd_fmt->pad];
+ 
++	if (is_meta_type(pad->desc)) {
++		sd_fmt->format = pad->fmt;
++		return 0;
++	}
++
+ 	ife_pad_try_format(ife, pad->desc, &sd_fmt->format);
+ 
+ 	if (sd_fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
+@@ -959,6 +991,9 @@ static int ife_pad_mbus_enum_code(struct v4l2_subdev *sd, struct v4l2_subdev_sta
+ 
+ 	pad = &ife->pads[code->pad];
+ 
++	if (is_stats_type(pad->desc))
++		return -ENOTTY;
++
+ 	if (pad->desc->pad_flags == MEDIA_PAD_FL_SINK ||
+ 	    pad->desc->hw_pipe == CAMSS_IFE_HW_PIPE_PP) {
+ 		if (code->index >= pad->desc->sup_fmts.nformats)
+@@ -994,6 +1029,13 @@ static int ife_pad_enum_framesizes(struct v4l2_subdev *sd, struct v4l2_subdev_st
+ 
+ 	pad = &ife->pads[fse->pad];
+ 
++	if (is_meta_type(pad->desc)) {
++		if (is_stats_type(pad->desc))
++			return -ENOTTY;
++
++		return -EINVAL;
++	}
++
+ 	for (i = 0; i < pad->desc->sup_fmts.nformats; i++) {
+ 		if (pad->desc->sup_fmts.formats[i].code == fse->code)
+ 			break;
+@@ -1517,6 +1559,8 @@ int ife_register_entities(struct ife_device *ife, struct v4l2_device *v4l2_dev)
+ 			pad->vid_pad->video.formats	= dsc->sup_fmts.formats;
+ 			pad->vid_pad->video.type	= dsc->buf_type;
+ 			pad->vid_pad->video.ops		= &camss_video_ops;
++			pad->vid_pad->video.meta_dataformat = dsc->meta_dataformat;
++			pad->vid_pad->video.meta_buffersize = dsc->meta_buffersize;
+ 			pad->vid_pad->video.bpl_alignment = 16;
+ 
+ 			if (dsc->mode_config == BUSWR_CLIENT_CFG_MODE_LINE_BASED)
+diff --git a/drivers/media/platform/qcom/camss/camss-ife.h b/drivers/media/platform/qcom/camss/camss-ife.h
+index 45fce7e33c4a..168d26d0664b 100644
+--- a/drivers/media/platform/qcom/camss/camss-ife.h
++++ b/drivers/media/platform/qcom/camss/camss-ife.h
+@@ -45,6 +45,7 @@ enum camss_ife_output {
+ 	CAMSS_IFE_OUTPUT_VID_FULL,
+ 	CAMSS_IFE_OUTPUT_DISP_FULL,
+ 	CAMSS_IFE_OUTPUT_FD,
++	CAMSS_IFE_OUTPUT_STATS,
+ };
+ 
+ enum camss_ife_hw_pipe {
+@@ -275,6 +276,8 @@ struct ife_pad_desc {
+ 	u32 link_flags;
+ 
+ 	enum v4l2_buf_type buf_type;
++	u32 meta_dataformat;
++	u32 meta_buffersize;
+ 	enum camss_ife_output output;
+ 	u32 hw_pipe;
+ 
+diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+index cb9e08e9ff7e..b5d78f84d6a1 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.c
++++ b/drivers/media/platform/qcom/camss/camss-video.c
+@@ -216,6 +216,9 @@ static int video_check_format(struct camss_video *video)
+ 	struct v4l2_pix_format_mplane *sd_pix = &format.fmt.pix_mp;
+ 	int ret;
+ 
++	if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
++		return 0;
++
+ 	sd_pix->pixelformat = pix->pixelformat;
+ 	ret = video_get_subdev_format(video, &format);
+ 	if (ret < 0)
+@@ -421,6 +424,73 @@ static const struct vb2_ops msm_video_vb2_q_ops = {
+ 	.unprepare_streaming = video_unprepare_streaming,
+ };
+ 
++static int meta_queue_setup(struct vb2_queue *q,
++			    unsigned int *num_buffers, unsigned int *num_planes,
++			    unsigned int sizes[], struct device *alloc_devs[])
++{
++	struct camss_video *video = vb2_get_drv_priv(q);
++	u32 buffersize = video->active_fmt.fmt.meta.buffersize;
++
++	if (*num_planes) {
++		if (*num_planes != 1 || sizes[0] < buffersize)
++			return -EINVAL;
++
++		return 0;
++	}
++
++	*num_planes		= 1;
++	sizes[0]		= buffersize;
++	q->min_queued_buffers	= 1;
++
++	return 0;
++}
++
++static int meta_buf_init(struct vb2_buffer *vb)
++{
++	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
++	struct camss_buffer *buffer = container_of(vbuf, struct camss_buffer, vb);
++	struct sg_table *sgt;
++
++	sgt = vb2_dma_sg_plane_desc(vb, 0);
++	if (!sgt)
++		return -EFAULT;
++
++	buffer->addr[0] = sg_dma_address(sgt->sgl);
++
++	return 0;
++}
++
++static int meta_buf_prepare(struct vb2_buffer *vb)
++{
++	struct camss_video *video = vb2_get_drv_priv(vb->vb2_queue);
++	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
++
++	if (vbuf->field == V4L2_FIELD_ANY)
++		vbuf->field = V4L2_FIELD_NONE;
++	if (vbuf->field != V4L2_FIELD_NONE) {
++		dev_err(video->camss->dev, "%s field isn't supported\n", __func__);
++		return -EINVAL;
++	}
++
++	if (vb2_plane_size(vb, 0) < video->active_fmt.fmt.meta.buffersize)
++		return -EINVAL;
++
++	vb2_set_plane_payload(vb, 0, video->active_fmt.fmt.meta.buffersize);
++
++	return 0;
++}
++
++static const struct vb2_ops msm_meta_vb2_q_ops = {
++	.queue_setup     = meta_queue_setup,
++	.buf_init        = meta_buf_init,
++	.buf_prepare     = meta_buf_prepare,
++	.buf_queue       = video_buf_queue,
++	.prepare_streaming = video_prepare_streaming,
++	.start_streaming = video_start_streaming,
++	.stop_streaming  = video_stop_streaming,
++	.unprepare_streaming = video_unprepare_streaming,
++};
++
+ /* -----------------------------------------------------------------------------
+  * V4L2 ioctls
+  */
+@@ -693,6 +763,52 @@ static const struct v4l2_ioctl_ops msm_vid_ioctl_ops = {
+ 	.vidioc_s_input			= video_s_input,
+ };
+ 
++static int meta_try_fmt(struct file *file, void *priv, struct v4l2_format *f)
++{
++	struct camss_video *video = video_drvdata(file);
++	struct v4l2_meta_format *meta = &f->fmt.meta;
++
++	if (f->type != video->type)
++		return -EINVAL;
++
++	memset(meta, 0, sizeof(*meta));
++	meta->dataformat = video->active_fmt.fmt.meta.dataformat;
++	meta->buffersize = video->active_fmt.fmt.meta.buffersize;
++
++	return 0;
++}
++
++static int meta_enum_fmt(struct file *file, void *priv, struct v4l2_fmtdesc *f)
++{
++	struct camss_video *video = video_drvdata(file);
++
++	if (f->index)
++		return -EINVAL;
++
++	memset(&f->reserved, 0, sizeof(f->reserved));
++
++	f->pixelformat = video->active_fmt.fmt.meta.dataformat;
++
++	return 0;
++}
++
++static const struct v4l2_ioctl_ops msm_meta_ioctl_ops = {
++	.vidioc_querycap		= video_querycap,
++	.vidioc_enum_fmt_meta_cap	= meta_enum_fmt,
++	.vidioc_g_fmt_meta_cap		= meta_try_fmt,
++	.vidioc_s_fmt_meta_cap		= meta_try_fmt,
++	.vidioc_try_fmt_meta_cap	= meta_try_fmt,
++	.vidioc_reqbufs			= vb2_ioctl_reqbufs,
++	.vidioc_querybuf		= vb2_ioctl_querybuf,
++	.vidioc_qbuf			= vb2_ioctl_qbuf,
++	.vidioc_expbuf			= vb2_ioctl_expbuf,
++	.vidioc_dqbuf			= vb2_ioctl_dqbuf,
++	.vidioc_create_bufs		= vb2_ioctl_create_bufs,
++	.vidioc_prepare_buf		= vb2_ioctl_prepare_buf,
++	.vidioc_streamon		= vb2_ioctl_streamon,
++	.vidioc_streamoff		= vb2_ioctl_streamoff,
++};
++
+ /* -----------------------------------------------------------------------------
+  * V4L2 file operations
+  */
+@@ -744,6 +860,18 @@ static int msm_video_init_format(struct camss_video *video)
+ 		},
+ 	};
+ 
++	if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE) {
++		if (!video->meta_dataformat || !video->meta_buffersize)
++			return -EINVAL;
++
++		format.type = video->type;
++		format.fmt.meta.dataformat = video->meta_dataformat;
++		format.fmt.meta.buffersize = video->meta_buffersize;
++		video->active_fmt = format;
++
++		return 0;
++	}
++
+ 	ret = __video_try_fmt(video, &format);
+ 	if (ret < 0)
+ 		return ret;
+@@ -787,6 +915,14 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
+ 	q->buf_struct_size = sizeof(struct camss_buffer);
+ 	q->dev = video->camss->dev;
+ 	q->lock = &video->q_lock;
++
++	if (video->type == V4L2_BUF_TYPE_META_CAPTURE) {
++		q->ops = &msm_meta_vb2_q_ops;
++		q->io_modes = VB2_DMABUF | VB2_MMAP;
++	} else if (video->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE) {
++		dev_err(v4l2_dev->dev, "Invalid format type\n");
++		goto error_vb2_init;
++	}
+ 	ret = vb2_queue_init(q);
+ 	if (ret < 0) {
+ 		dev_err(v4l2_dev->dev, "Failed to init vb2 queue: %d\n", ret);
+@@ -813,6 +949,11 @@ int msm_video_register(struct camss_video *video, struct v4l2_device *v4l2_dev,
+ 	vdev->device_caps = V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_STREAMING
+ 			  | V4L2_CAP_READWRITE | V4L2_CAP_IO_MC;
+ 	vdev->ioctl_ops = &msm_vid_ioctl_ops;
++	if (video->type == V4L2_BUF_TYPE_META_CAPTURE) {
++		vdev->device_caps = V4L2_CAP_META_CAPTURE | V4L2_CAP_STREAMING |
++				    V4L2_CAP_IO_MC;
++		vdev->ioctl_ops = &msm_meta_ioctl_ops;
++	}
+ 	vdev->release = msm_video_release;
+ 	vdev->v4l2_dev = v4l2_dev;
+ 	vdev->vfl_dir = VFL_DIR_RX;
+diff --git a/drivers/media/platform/qcom/camss/camss-video.h b/drivers/media/platform/qcom/camss/camss-video.h
+index f62a72c29a5a..cfee619973ef 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.h
++++ b/drivers/media/platform/qcom/camss/camss-video.h
+@@ -48,6 +48,8 @@ struct camss_video {
+ 	struct mutex q_lock;
+ 	unsigned int bpl_alignment;
+ 	unsigned int line_based;
++	u32 meta_dataformat;
++	u32 meta_buffersize;
+ 	const struct camss_format_info *formats;
+ 	unsigned int nformats;
+ };
 -- 
 2.34.1
 
