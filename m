@@ -1,468 +1,167 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 253CB40A93E
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 06:44:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 250103FFAB0
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 06:50:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791355492; cv=none; b=O8l8jb6JpQJOCWpZdzHc6tyzCZ/vC1AtSQAXDq9cuT7wPfF8B6Sd/bYF1dvZLIEDxzMQC2SDXkmhUY0nsmZk/+AkFyTbXkGLbUgt8RjjrmZmiXmlr54mU7zWm2Q2ESR0ZUEaRJApMVryOHnajW5BG7VW2rW6k1CY/wag06yV47U=
+	t=1791355857; cv=none; b=ulyBP+UfnXNiODgO9fG1iENOAWLoQtHG4YtuwZhmHlJtIpKSw7hVlOE2t4e7/xH1X9jszniC14T45FK1WuJtLPnQmHBYm7C47rgVEMWcmsuWYnAW+lOUoWI0bb5L4YDpXsds5o9CYxulQgq1HLq2ipW+TqehhFx2fYBDao65ynM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791355492; c=relaxed/simple;
-	bh=OHYnhcGNkcXhgKogIXD4dkbJwv1pkohaxyfGxIlcDRw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=upKIxB1qmsds+sh3hCszUDmcl5BKDRZMZq+9mfAVtZjugeJEKK9zoHzYUjGMrwtFin4NcqfEdpdI8wcU7+uhW75L3M8Is/mTAf7Wleup7EfWAWXhKu+0BY1bNlq8hXG5x7C5xJsNboZ6t7eypJrqGhT+ssk7MmMWYXmLwBvTJ18=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FVz/PEgT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AogbUUTw; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791355857; c=relaxed/simple;
+	bh=Ni1lTQeRbFImYjymCCxoP08AlDfxpAcx3Qkva4hCzAs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=oHhqcBlGFZ75P4VGFaPlHwA2lDzuDjzH8Ug4ZO1fkLDIFhc0qjgD5T0ay7GJFXtsu10kYHZfjxFY8TP/jReEilwcOqqCV4TUVyzntlKGvKQtP0+T/Do9mjf2fJhCscXvN2K/uyOUNtGXeGUVGmTmE/LXMljhTaZs5MKl4Z/0Dh0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VtFDngL9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bH80RO2y; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FVz/PEgT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AogbUUTw"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6974UDY02916126
-	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 06:44:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VtFDngL9";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bH80RO2y"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6974U9Qh2295211
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 06:50:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CJFwA61JyA5wdbFs7MVnT+FErhhO9x6O7TkQU80VFYA=; b=FVz/PEgTBEh8obQG
-	a7Kv7BpSsGoGTNPDXBTCym+sTNfFpAzu6doTNrysh61FCK7X9Wb/HueG6xPqLJY6
-	qq/kpGndDL/vN8/uhertq9nar1EcpWVPWYwQRKkH+9qAbLUVBz4ZT2FFPHYYGzCr
-	1qt8spQKMjgxmxrUdCFqSL0tmkNkD3gV1Gfyzwbkr1n0dxvdSg6WCNBdfzr8diHf
-	6qa/Z4Rju1K4eWjXf2mOI/Qwtf4NrpLr5Y+oIVr3iXAMmM0nZN5DRA0hlkvciLDq
-	qsV3hn0UGT0iNwcOREKvY4GYI3Yjwik3K3yCRBX56WibAQBrv+rWEpJzYS9DoOKX
-	bUo73Q==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h54622vhj-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=a11M7BngOPJoTkOyICJz2w
+	OVpKy80IFCeWDMdq/5uas=; b=VtFDngL9Xd28E4NoJrmFjjGzr8Pqu+AS18g+VG
+	pc/DFFYbIeE5u/mrUv+HZbP54JaRm/ov0XbVnhBk+LN5KFugFz009bRIZVH/b+NV
+	vOeR9HzpHfeFxPxkYvSokviYum59woQIRHfF7iLVyi63SYW7dYR0Zu89eJmiww+o
+	K2SwUQrkO6E62J+Nze89Srv+G13AVSBl49gX6uKaOv+ehrZO1wmrJb3krvmb1Zcv
+	P5dW0iPbbX+0zPgf1XzioqKLAWS0LJfuuZgxOA3X7sop/uIpS3AofjTuKwxHTS+G
+	DjL1ekgHlog64q6wJ6LQ9HdalpxhnqXL2QlgdGj+ZVFK4EjQ==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c1s0yqx-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 06:44:48 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-9106fce784dso81438026d6.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 23:44:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 06:50:55 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-147be78cd56so13749908c88.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 23:50:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791355487; x=1791960287; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CJFwA61JyA5wdbFs7MVnT+FErhhO9x6O7TkQU80VFYA=;
-        b=AogbUUTw/huqpYnW9ePakc6C3SNso6heBtjHvMVWJMISzHp+nyGBxSN0CEIukRGnqq
-         A8diKXueBV+BJvBrsq6SpHpY8Ba2TE7Wb4+b50DrwY/dg++YvnpzXpddGhDM2qptkhH2
-         Tob3YInMDzIAQ9YICtyiesLI6s5w0PBOLh5BIgIuhdqf4CUw2I4RlTHkURGcBJTZKdsU
-         SNQ2BCSoJgm29mADQkGZiZx8EDF/BZqxB4RXz9lmDnKRQCKfU+knzsS28E9HJGxX31sJ
-         74ic+QSWalPHOsvVhQ17bmNoiD0TWJTJcOUC0vn8ly6KZjQlwkq3cHgQBnol4KevBhDO
-         v6Hw==
+        d=oss.qualcomm.com; s=google; t=1791355855; x=1791960655; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=a11M7BngOPJoTkOyICJz2wOVpKy80IFCeWDMdq/5uas=;
+        b=bH80RO2yA/QTeEGgMNg/pnv5S0j8VtESFgLkEi/eseUBBsWo4gm0f1SjYdVVRuj/kQ
+         GHLn1KNjhggvoetcIv+8Nzys9dzrCQp8gcERKu4HeFNhR4zRLlM2EN/K+R3YF02x/Nia
+         z/ZZt35mkDT6+MxJxhLlJ1Ish1/GoSllYDjoBhWyc5hLmRU0TcP+pM/813DdCx6jo1lR
+         4flRjj+M0Dywi0TYL6FEKgzbr1QuhoOYdMtXXTZiSrHOljiImwrlJHmyly8cLT9GAWl1
+         h+4a5b/xlT+eXAqhhTWxvR1CxXg4WXZQG9JhIkZdQyfpKzDWWwYuM19Ncve4j8ZNFG60
+         KZmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791355487; x=1791960287;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CJFwA61JyA5wdbFs7MVnT+FErhhO9x6O7TkQU80VFYA=;
-        b=yoGTZkSTwK/kmvFKKQAwRAl9bSD8HnHIiPpPE5ZAIY4lr9b10xxHhQ+H3VOhyqmFan
-         ZjmmEGNAn6E1YwaZsUNxv8AoH3yjKae5C8SWY1YHZMBsyLJcGc6VYOJ/yuuMH5TaQEdW
-         nc5AbhNQDFBgOt7qcjMc9ChtoDPNI0nPIG1Mm2muIWQLTlucMXvnJlupGV4YxzxNy9/z
-         Z/rCauHUkgmmljFfCaKbA5ZXliv3I8VfZNLxBTq48VGUENAGkhRXVjmAJ8oOckmusF2P
-         RgX5uOYxnFMBtkqhpvLFIeRdoqiu36b76LTn3sDAroy6xiOUt88axiV6xUsV8KOgOkXQ
-         eJQQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxEi+MFkFuJarHPte2vKY/ZHYMvzG+kPYUn9nUOTq7JvkJ2btSLNJWp3KbFEWkoJYyK76yRAaV8GaJDNoIe@vger.kernel.org
-X-Gm-Message-State: AFuF++m1gEJ3kRWlLSoleO30ucJ+N21S5iGr91x3oWm5bWsgVpMRjVO9
-	laPHwBlePvISuF9HAT41PuqJGGympBRefuVou6J+j0qO3ef9vn69VaoFFyziGokoQGyxIiEcEja
-	HKeWn9RZQgU/sQliGQ2q7lBizT2zuJp6+B8f3+G8lZZZTQ0aoSqWO/nBF8OaCwFvVjEwm58TKlB
-	ZMO5I=
-X-Gm-Gg: AYBFou3hGryWahOtnUJbWBv2/gtWQwTkq5GuxZUdbgKNdD1hQld557ZBvRGwey31vxn
-	8d9Lu7hFcfA/6utGpee7pCz+PuD0Iev9Ja55H2m6XWbyzDu4VVQJP4hBG6+iHPRak3J0P9KyzDy
-	DPjeZ425REd8QoP+IA9BKzch7Aou2p4Au3hY9XtJlh2h33e3c/pUqPp3ITnEvX1GD9S5MuyauQI
-	uxrWPvDUiI/lqRVbFIIBeqtz0kwr7FAfSkTmQPvXfjlqIzvM3SjaX7qd2PutNJ0T9gal3tc4z33
-	jEqHmxbHNd8byitBNFBT9dMwCyJJCQ8UozPQmPZUMWWxiENyrRKe6SDJkDQBPqt64yDJKtZ+LAQ
-	nSz7zn/JYRK5+cceishOCI1hJq8n4E65+SUzGXYWb
-X-Received: by 2002:a05:620a:19a1:b0:93e:980a:2ff1 with SMTP id af79cd13be357-93e9b802152mr247421585a.69.1791355487055;
-        Tue, 06 Oct 2026 23:44:47 -0700 (PDT)
-X-Received: by 2002:a05:620a:19a1:b0:93e:980a:2ff1 with SMTP id af79cd13be357-93e9b802152mr247417785a.69.1791355486596;
-        Tue, 06 Oct 2026 23:44:46 -0700 (PDT)
-Received: from [192.168.25.64] ([94.155.124.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a17f54a5cesm39549625e9.5.2026.10.06.23.44.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Oct 2026 23:44:45 -0700 (PDT)
-Message-ID: <b9ed7848-36ef-4b70-9d5c-b18af9eee83b@oss.qualcomm.com>
-Date: Wed, 7 Oct 2026 09:44:43 +0300
+        d=1e100.net; s=20260707; t=1791355855; x=1791960655;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=a11M7BngOPJoTkOyICJz2wOVpKy80IFCeWDMdq/5uas=;
+        b=CLAD43RUJ3nlEmc+los/yhggmOyRr4hfdBCLuo+klPA2cFzUHobIGHMhTlB1W+dNo+
+         TfD8bBMSP/x73nHU2LRCYsuNUa/VQ9KBpG0c/+i8X/r+tLSEFac63HGyJNi5NwjxRUlV
+         J3IenAhlM6La4S0/LgiuhPf/O4aW2IsMv/nKhpcnCUGWyPQhpGTixVHupAMQpdv/8luU
+         SRUslEQu3R+vPw2Los+kWAcyzpZQROHhSCzXA771VbkSweL62nDqKLRQHzV2FbwC/BoS
+         izIuy6xZT+AYdfuQZy9VuSXPcafiSmy8i+lFvZXJplS8JfYcyLQNLnyIzV16jrL1lCEi
+         P3GA==
+X-Forwarded-Encrypted: i=1; AKwUvBxoKpxMrt2OeZa7oqY+LYw3Z/6ZD1sOjk5GjhG8lyizz5CVwBjN5rOYw0b0Qi8AyhN4dSdMU1ai/UrCL6fL@vger.kernel.org
+X-Gm-Message-State: AFuF++nnPFL6yo2MjD9xS1r0P/ukYR7utNcwjKIfoZFOuH63zgZLPCH9
+	TkRzkQK/qJNjANLqAlkqFTZ00uFNwfkBIKEPJcd5YSogX0H+uKKmP4Gxp8Hpp7Det4B8wpFcOps
+	oOYyEfPuyiCh+QpuRpyFwIqnSpvAs5byGiLgWjNDfsC1zV+SOd4Tgq1vLjJqY7/RWPvaF
+X-Gm-Gg: AYBFou0TsXWPinGJgGCWQIFW0sqnBLHCCjL9/Y2Mm8qo2MfbeAajTzNDWKSzSZaZCJx
+	FpIMrBj2KJCPg74Vy0QvwSNv3QaExmJ61/toai3RUS173q62cwVU9g0Pmo2mEPzRlirjr0N864A
+	84d33shu0i5VcZbKngPkMesADeIrF7ets11dcNitrXheD3CUwFFJXqOWtMD8I9DijrJHr8y6A9b
+	qHo+BVmiS43f29G1oSIrSphoYqZvxjAPzQAfFhiN+UchPEnKaFhoGuXtC7G/iPSLEN9vukXxEx+
+	GNZwn6yrZCZdKFO3M31wKcH76G+gJCUZyxgpKFcTtO1fbn/ibiEAkkI4cIgjjARf3aFD959gUY8
+	/jq3l95kHFluxiBrXq+XE+2QorQUZLEcTczerrQxKnzHkM2uSIlkz/95oSM+1i8ZK++/AsJbXJi
+	0CQWRHixZrKCd7vsJb8pIDqFta0guXjQki1Pg=
+X-Received: by 2002:a05:7022:3a02:b0:143:26f9:33d4 with SMTP id a92af1059eb24-162079a5f27mr1774327c88.34.1791355854452;
+        Tue, 06 Oct 2026 23:50:54 -0700 (PDT)
+X-Received: by 2002:a05:7022:3a02:b0:143:26f9:33d4 with SMTP id a92af1059eb24-162079a5f27mr1774273c88.34.1791355853728;
+        Tue, 06 Oct 2026 23:50:53 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1615f1ac8c5sm7374730c88.2.2026.10.06.23.50.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Oct 2026 23:50:53 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Subject: [PATCH 0/4] Add Qualcomm's IPQ9650 APSS Clock Driver Support
+Date: Wed, 07 Oct 2026 12:20:43 +0530
+Message-Id: <20261007-ipq9650_apss_clk-v1-0-fd4c2b3cbdea@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 27/45] media: qcom: camss: sa8775p: add IFE BUS v3.1x
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        hariram.purushothaman@oss.qualcomm.com, pshrotri@qti.qualcomm.com,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        johannes.goede@oss.qualcomm.com, konradybcio@kernel.org
-References: <20261006223953.3382273-1-gjorgji.rosikopulos@oss.qualcomm.com>
- <20261006223953.3382273-28-gjorgji.rosikopulos@oss.qualcomm.com>
-Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <20261006223953.3382273-28-gjorgji.rosikopulos@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: lllGltlLQV6FdxBcKyN1hFHRVJOrKr-e
-X-Authority-Analysis: v=2.4 cv=ZZiIpcVA c=1 sm=1 tr=0 ts=6ac5ea60 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
+X-B4-Tracking: v=1; b=H4sIAMPrxWoC/yXMQQqDMBBA0avIrBtIItHaq5QiGic6VWyaURHEu
+ xt1+Rb/b8AYCBleyQYBF2L6jRHqkYDtqrFFQU00aKkzWWgjyP+LzMiy8sylHXrh3FMbTNO8UQp
+ i5gM6Wq/l+3Ob5/qLdjo/sO8HEqeygnQAAAA=
+X-Change-ID: 20260925-ipq9650_apss_clk-ff825e337d11
+To: Georgi Djakov <djakov@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-ORIG-GUID: zEMjGUUD4TV5VngWaHp5TCmu7r5Dv3SY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAyNyBTYWx0ZWRfX265ZHfAPaSXg
+ DhDzvAuQNKyFSshsjCNPhJN1dy4+L82EXCAlHFIR4QFGdfc6aEc+Eg9u146FTA4o7BlJtCeteMP
+ oAz46fzAG6/q4XYq6c5aiwRmNCYT/3J8DZJbaipP8UNpo5F0HY48MFh+gK8x2GOvbWQgYxuvSyn
+ LMju2e/GJldzU1rCrslvXQ6vdEbWNFs67DNVxWayGPHojzuQM/peJ4+MNPrbdGT0oJ6xRM2wHiG
+ oonNvnzJhuBeCIOC/Wh0I9EuD/HeLS6Hh9ur8dR31xn9A+Ew3a0kDf5kG7dftZ5hB3LfXcnCj8B
+ ZY7pK3FieJ48SY1+h6X3iMytanTkVWuNZcZhBkiJaufqo6b7WgnnU0CYVk13V4/rQ8BIjVKsADV
+ 2u+ztb55uTt8cE/7SajvJw3sErWAQ2Uyo8bhNrapEb6AIsSj7yx+VVy6rO4MCRxvqctYje5uQDK
+ wjwuTP1ZwujD1OdoYqA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAyNyBTYWx0ZWRfX3VmKWpRoj6of
+ 4kJFYKrIXKLpIA2vvLcP/vUb8bHUGeU/HPCuhn9CDRiOXE8Zjs3blWA3nz6093tFKYgAIN2ZnPG
+ e+j6I4bqkjmyG8gsob3zfiH+EDzrNz0=
+X-Proofpoint-GUID: zEMjGUUD4TV5VngWaHp5TCmu7r5Dv3SY
+X-Authority-Analysis: v=2.4 cv=NatzRGD4 c=1 sm=1 tr=0 ts=6ac5ebcf cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=Y4P9ch1KcTPFiUn8tYgA:9 a=UPhfUc_oUKe9iv7q:21
- a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAyNiBTYWx0ZWRfX9n7le4Bk1DUd
- avTsxcpq315gMoccjic6Il87CWwt7x9lxOXqZXqoM++yn7/qPm3K4/wsEBTFOVf0KuM6ZCmKzIf
- L86SJPmFHYqbh65cX1j+TgtRscTfZds=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAyNiBTYWx0ZWRfX3lXxDRbyF37i
- FEaPSoFtaykP8EvJT2rCN/cDk2VzDzANdIIRrTahzvEJGrG5D2tTTSux/dFfb+Ga7Zk5Siwp6zY
- 94xhxMxF/QLHNrSZ43qHIy+NaoqIqjhw3VVoz0+S6TOtg409r3Ngt3dxbwRMYsd5nGiUglqvi3z
- gIE1bKhzOpw7EZkZQayhr5R6qcEe/fZluZJW+G1G1rZ6gjZC3nOkjr9g/R64JdibFQcwus8TiZp
- 6pf2PsGVlz5rhOhOgFVUlsMxAsq3+K627bY3PrgLx34JspE7ix0AlEDUAbvMQqaM6u6w4BQ9f6q
- ZXEUkmsVHNz1nhlhdH6ml/Gjl0n9EYGE0sNKmJ3YrLb8r8pzqYBI5NCo4JHaMovzwr7octV0PTX
- F06mFGAe49Qvy7dcLVZ+S1ZQHpr2R/x95j+OI3xZgziW7+eFw88VDsKF8AF8HSU4/aGBJfl9C9M
- QZGHoAjbn3uugNlMU/A==
-X-Proofpoint-ORIG-GUID: lllGltlLQV6FdxBcKyN1hFHRVJOrKr-e
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=mshoYkgwlum6hxNOkgkA:9 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-07_02,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- phishscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015 adultscore=0
+ bulkscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070026
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070027
 
-Hello,
+The APSS clock controller on IPQ9650 provides the CPU and L3 clocks. The
+four Cortex-A55 cores (silver), the Cortex-A78 core (gold) and the L3
+are each clocked by their own Zonda PLL, selected through a glitch-free mux
+whose parents are XO, GPLL0 and the corresponding PLL. Since the L3 has
+to scale along with the CPUs, the controller also registers an icc-clk
+provider in which both CPU clusters vote on the L3 clock.
 
-Appoagies somehow after my last rebase the co-develped by was removed. For all the changes
-of SA8775P credits to Vikram and Prashant. This will be fixed in the next series.
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+---
+Kathiravan Thirumoorthy (4):
+      interconnect: icc-clk: support N:1 master-to-slave topology
+      clk: qcom: clk-alpha-pll: Skip Zonda PLL configuration if already enabled
+      dt-bindings: clock: ipq9650-apss-clk: Add IPQ9650 apss clock controller
+      clk: qcom: apss-ipq9650: Add IPQ9650 APSS clock controller driver
 
-Co-developed-by: Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-Signed-off-by: Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-Co-developed-by: Prashant Shrotriya <prashant.shrotriya@oss.qualcomm.com>
-Signed-off-by: Prashant Shrotriya <prashant.shrotriya@oss.qualcomm.com>
+ .../bindings/clock/qcom,ipq9650-apss-clk.yaml      |  58 ++++
+ drivers/clk/qcom/Kconfig                           |   9 +
+ drivers/clk/qcom/Makefile                          |   1 +
+ drivers/clk/qcom/apss-ipq9650.c                    | 385 +++++++++++++++++++++
+ drivers/clk/qcom/clk-alpha-pll.c                   |   4 +
+ drivers/interconnect/icc-clk.c                     |  45 ++-
+ include/dt-bindings/clock/qcom,apss-ipq.h          |   5 +
+ include/dt-bindings/interconnect/qcom,ipq9650.h    |   4 +
+ 8 files changed, 504 insertions(+), 7 deletions(-)
+---
+base-commit: eea3fef32a9cf36abcb5975a5a594e4135a6b026
+change-id: 20260925-ipq9650_apss_clk-ff825e337d11
 
-~Gjorgji
-
-On 10/7/2026 1:39 AM, "Gjorgji Rosikopulos gjorgji.rosikopulos"@oss.qualcomm.com wrote:
-> From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-> 
-> Add the IFE BUS v3.1x write engine used by the SA8775P full and lite
-> pixel paths.
-> 
-> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-> ---
->  drivers/media/platform/qcom/camss/Makefile    |   1 +
->  .../platform/qcom/camss/camss-ife-bus-v31x.c  | 267 ++++++++++++++++++
->  drivers/media/platform/qcom/camss/camss-ife.h |   1 +
->  3 files changed, 269 insertions(+)
->  create mode 100644 drivers/media/platform/qcom/camss/camss-ife-bus-v31x.c
-> 
-> diff --git a/drivers/media/platform/qcom/camss/Makefile b/drivers/media/platform/qcom/camss/Makefile
-> index 500b056a906c..2251b57ba38b 100644
-> --- a/drivers/media/platform/qcom/camss/Makefile
-> +++ b/drivers/media/platform/qcom/camss/Makefile
-> @@ -16,6 +16,7 @@ qcom-camss-objs += \
->  		camss-format.o \
->  		camss-ife.o \
->  		camss-ife-bus-v20x.o \
-> +		camss-ife-bus-v31x.o \
->  		camss-ife-camif-v10x.o \
->  		camss-ife-lite-top-v10x.o \
->  		camss-ife-mod-v10x.o \
-> diff --git a/drivers/media/platform/qcom/camss/camss-ife-bus-v31x.c b/drivers/media/platform/qcom/camss/camss-ife-bus-v31x.c
-> new file mode 100644
-> index 000000000000..c3a99bd0f75e
-> --- /dev/null
-> +++ b/drivers/media/platform/qcom/camss/camss-ife-bus-v31x.c
-> @@ -0,0 +1,267 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/* Copyright (c) 2023, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2023 Qualcomm Technologies, Inc.
-> + */
-> +
-> +#include <linux/bitfield.h>
-> +
-> +#include "camss.h"
-> +#include "camss-ife.h"
-> +
-> +/* Block base offsets */
-> +#define BUSWR_V31X_OFFS		0x400
-> +#define BUSWR_V31X_LITE_OFFS	0x480
-> +
-> +/* Per-client register offset */
-> +#define BUSWR_V31X_CLIENT_OFFS(n)	((n) * 0x100)
-> +
-> +/* Interface interrupt and violation status bits */
-> +#define BUSWR_V31X_IIF_IRQ_CMD_CLEAR			BIT(0)
-> +#define BUSWR_V31X_OVERFLOW_ERR_MASK			GENMASK(25, 0)
-> +#define IS_BUSWR_V31X_OVERFLOW_ERR(s)	\
-> +	((s) & BUSWR_V31X_OVERFLOW_ERR_MASK)
-> +#define BUSWR_V31X_VIOLATION_ERR_MASK			GENMASK(25, 0)
-> +#define IS_BUSWR_V31X_VIOLATION_ERR(s)	\
-> +	((s) & BUSWR_V31X_VIOLATION_ERR_MASK)
-> +#define BUSWR_V31X_IMG_SIZE_VIOLATION_ERR_MASK		GENMASK(25, 0)
-> +#define IS_BUSWR_V31X_IMG_SIZE_VIOLATION_ERR(s)	\
-> +	((s) & BUSWR_V31X_IMG_SIZE_VIOLATION_ERR_MASK)
-> +#define BUSWR_V31X_IIF_IRQ_S0_IMG_SIZE_VIOLATION	BIT(31)
-> +#define IS_BUSWR_V31X_IIF_IRQ_S0_IMG_SIZE_VIOLATION(s)	\
-> +	((s) & BUSWR_V31X_IIF_IRQ_S0_IMG_SIZE_VIOLATION)
-> +#define BUSWR_V31X_IIF_IRQ_S0_VIOLATION			BIT(30)
-> +#define IS_BUSWR_V31X_IIF_IRQ_S0_VIOLATION(s)	\
-> +	((s) & BUSWR_V31X_IIF_IRQ_S0_VIOLATION)
-> +
-> +/* Client configuration field values */
-> +#define BUSWR_V31X_IIF_CGC_OVERRIDE			GENMASK(26, 0)
-> +#define BUSWR_V31X_CLIENT_CFG_MODE			GENMASK(17, 16)
-> +#define BUSWR_V31X_CLIENT_CFG_AUTO_RECOVERY_EN		BIT(4)
-> +#define BUSWR_V31X_CLIENT_CFG_EN			BIT(0)
-> +#define BUSWR_V31X_CLIENT_IMG_CFG0_HEIGHT		GENMASK(31, 16)
-> +#define BUSWR_V31X_CLIENT_IMG_CFG0_WIDTH		GENMASK(15, 0)
-> +#define BUSWR_V31X_CLIENT_IMG_CFG2_STRIDE		GENMASK(23, 0)
-> +#define BUSWR_V31X_CLIENT_PACKER_CFG_ALIGN		BIT(5)
-> +#define BUSWR_V31X_CLIENT_PACKER_CFG_FORMAT		GENMASK(4, 0)
-> +#define BUSWR_V31X_PACKER_FMT_PLAIN16_10_BPP		0x5
-> +#define BUSWR_V31X_PACKER_FMT_PLAIN16_16_BPP		0x8
-> +#define BUSWR_V31X_CLIENT_IRQ_SUBSAMPLE_CFG0_PERIOD	GENMASK(4, 0)
-> +#define BUSWR_V31X_CLIENT_IRQ_SUBSAMPLE_CFG1_PATTERN	GENMASK(31, 0)
-> +#define BUSWR_V31X_CLIENT_FRAMEDROP_CFG0_PERIOD		GENMASK(4, 0)
-> +#define BUSWR_V31X_CLIENT_FRAMEDROP_CFG1_PATTERN	GENMASK(31, 0)
-> +
-> +/* FIFO limit and frame-based RDI defaults */
-> +#define BUSWR_V31X_IMG_ADDR_FIFO_MAX_DEPTH		2
-> +#define BUSWR_V31X_RDI_DEFAULT_WIDTH			0xffff
-> +#define BUSWR_V31X_RDI_DEFAULT_STRIDE			0xffff
-> +#define BUSWR_V31X_CLIENT_ADDR_STATUS_2_IMAGE_ADDR_FIFO_WORD_CNT	GENMASK(2, 0)
-> +
-> +/* Common registers */
-> +#define BUSWR_V31X_IIF_CGC_OVERRIDE_REG		0x00000008
-> +#define BUSWR_V31X_WM_TEST_BUS_CTRL_REG		0x000000fc
-> +#define BUSWR_V31X_IIF_IRQ_MASK_S0		0x00000018
-> +#define BUSWR_V31X_IIF_IRQ_CLEAR_S0		0x00000020
-> +#define BUSWR_V31X_IIF_IRQ_STATUS_S0		0x00000028
-> +#define BUSWR_V31X_IIF_IRQ_CMD_REG		0x00000030
-> +#define BUSWR_V31X_STATUS_CLEAR_REG		0x00000060
-> +#define BUSWR_V31X_VIOLATION_STATUS_REG		0x00000064
-> +#define BUSWR_V31X_OVERFLOW_STATUS_REG		0x00000068
-> +#define BUSWR_V31X_IMG_SIZE_VIOLATION_REG	0x00000070
-> +
-> +/* Per-client registers (relative to client base = module_base + CLIENT_OFFS(n)) */
-> +#define BUSWR_V31X_CLIENT_CFG_REG		0x00000200
-> +#define BUSWR_V31X_CLIENT_ADDR_IMAGE_REG	0x00000204
-> +#define BUSWR_V31X_CLIENT_IMG_CFG0_REG		0x0000020c
-> +#define BUSWR_V31X_CLIENT_IMG_CFG2_REG		0x00000214
-> +#define BUSWR_V31X_CLIENT_PACKER_CFG_REG	0x00000218
-> +#define BUSWR_V31X_CLIENT_IRQ_SS_CFG0_REG	0x00000230
-> +#define BUSWR_V31X_CLIENT_IRQ_SS_CFG1_REG	0x00000234
-> +#define BUSWR_V31X_CLIENT_FRAMEDROP_CFG0_REG	0x00000238
-> +#define BUSWR_V31X_CLIENT_FRAMEDROP_CFG1_REG	0x0000023c
-> +#define BUSWR_V31X_CLIENT_ADDR_STATUS_0_REG	0x00000270
-> +#define BUSWR_V31X_CLIENT_ADDR_STATUS_2_REG	0x00000278
-> +
-> +static void ife_buswr_31x_acquire(struct ife_device *ife, void __iomem *base)
-> +{
-> +	struct ife_buswr_ctx *ctx = &ife->buswr_ctx;
-> +
-> +	if (ife->res->type == CAMSS_IFE_SUBDEV_TYPE_IFE_LITE)
-> +		ctx->base = base + BUSWR_V31X_LITE_OFFS;
-> +	else
-> +		ctx->base = base + BUSWR_V31X_OFFS;
-> +
-> +	ctx->dev = ife->camss->dev;
-> +}
-> +
-> +static void ife_buswr_31x_release(struct ife_buswr_ctx *ctx)
-> +{
-> +	ctx->base = NULL;
-> +}
-> +
-> +static void ife_buswr_31x_wm_config(struct ife_buswr_ctx *ctx, const u8 wm,
-> +				    const struct camss_ife_wm_config *cfg)
-> +{
-> +	void __iomem *base = ctx->base;
-> +	bool align = cfg->packing_fmt >= BUSWR_V31X_PACKER_FMT_PLAIN16_10_BPP &&
-> +		     cfg->packing_fmt <= BUSWR_V31X_PACKER_FMT_PLAIN16_16_BPP;
-> +	u32 pattern = 1;
-> +	u32 period = 0;
-> +	u32 bytes = cfg->bytes;
-> +	u32 stride = cfg->stride;
-> +	u32 lines = cfg->lines;
-> +	u32 rval;
-> +
-> +	if (cfg->mode_config == BUSWR_CLIENT_CFG_MODE_FRAME_BASED) {
-> +		bytes = BUSWR_V31X_RDI_DEFAULT_WIDTH;
-> +		lines = 0;
-> +		stride = BUSWR_V31X_RDI_DEFAULT_STRIDE;
-> +	}
-> +
-> +	writel_relaxed(BUSWR_V31X_IIF_CGC_OVERRIDE,
-> +		       base + BUSWR_V31X_IIF_CGC_OVERRIDE_REG);
-> +	writel_relaxed(0, base + BUSWR_V31X_WM_TEST_BUS_CTRL_REG);
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_CFG_MODE, cfg->mode_config);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_CFG_REG + BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_PACKER_CFG_FORMAT, cfg->packing_fmt) |
-> +	       FIELD_PREP(BUSWR_V31X_CLIENT_PACKER_CFG_ALIGN, align);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_PACKER_CFG_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_IMG_CFG0_WIDTH, bytes) |
-> +	       FIELD_PREP(BUSWR_V31X_CLIENT_IMG_CFG0_HEIGHT, lines);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_IMG_CFG0_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_IMG_CFG2_STRIDE, stride);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_IMG_CFG2_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_IRQ_SUBSAMPLE_CFG0_PERIOD, period);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_IRQ_SS_CFG0_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_IRQ_SUBSAMPLE_CFG1_PATTERN, pattern);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_IRQ_SS_CFG1_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_FRAMEDROP_CFG0_PERIOD, period);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_FRAMEDROP_CFG0_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +
-> +	rval = FIELD_PREP(BUSWR_V31X_CLIENT_FRAMEDROP_CFG1_PATTERN, pattern);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_FRAMEDROP_CFG1_REG +
-> +		       BUSWR_V31X_CLIENT_OFFS(wm));
-> +}
-> +
-> +static void ife_buswr_31x_wm_enable(struct ife_buswr_ctx *ctx, u8 wm)
-> +{
-> +	void __iomem *base = ctx->base;
-> +	u32 rval;
-> +
-> +	rval = readl_relaxed(base + BUSWR_V31X_CLIENT_CFG_REG + BUSWR_V31X_CLIENT_OFFS(wm));
-> +	rval |= BUSWR_V31X_CLIENT_CFG_EN | BUSWR_V31X_CLIENT_CFG_AUTO_RECOVERY_EN;
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_CFG_REG + BUSWR_V31X_CLIENT_OFFS(wm));
-> +}
-> +
-> +static void ife_buswr_31x_wm_disable(struct ife_buswr_ctx *ctx, u8 wm)
-> +{
-> +	void __iomem *base = ctx->base;
-> +	u32 rval;
-> +
-> +	rval = readl_relaxed(base + BUSWR_V31X_CLIENT_CFG_REG + BUSWR_V31X_CLIENT_OFFS(wm));
-> +	rval &= ~(BUSWR_V31X_CLIENT_CFG_EN | BUSWR_V31X_CLIENT_CFG_AUTO_RECOVERY_EN);
-> +	writel_relaxed(rval, base + BUSWR_V31X_CLIENT_CFG_REG + BUSWR_V31X_CLIENT_OFFS(wm));
-> +}
-> +
-> +static bool ife_buswr_31x_is_fifo_full(struct ife_buswr_ctx *ctx, u8 wm)
-> +{
-> +	u32 rval = readl_relaxed(ctx->base + BUSWR_V31X_CLIENT_OFFS(wm) +
-> +				 BUSWR_V31X_CLIENT_ADDR_STATUS_2_REG);
-> +
-> +	rval = FIELD_GET(BUSWR_V31X_CLIENT_ADDR_STATUS_2_IMAGE_ADDR_FIFO_WORD_CNT, rval);
-> +
-> +	return rval >= BUSWR_V31X_IMG_ADDR_FIFO_MAX_DEPTH;
-> +}
-> +
-> +static void ife_buswr_31x_queue_buf(struct ife_buswr_ctx *ctx, const u8 num_wms, const u8 *wm,
-> +				    dma_addr_t *addr)
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < num_wms; i++) {
-> +		if (addr[i])
-> +			writel_relaxed(addr[i], ctx->base + BUSWR_V31X_CLIENT_ADDR_IMAGE_REG +
-> +				       BUSWR_V31X_CLIENT_OFFS(wm[i]));
-> +	}
-> +}
-> +
-> +static u32 ife_buswr_31x_consumed_addr(struct ife_buswr_ctx *ctx, u8 wm)
-> +{
-> +	return readl_relaxed(ctx->base + BUSWR_V31X_CLIENT_ADDR_STATUS_0_REG +
-> +			     BUSWR_V31X_CLIENT_OFFS(wm));
-> +}
-> +
-> +static u32 ife_buswr_31x_irq_status(struct ife_buswr_ctx *ctx)
-> +{
-> +	void __iomem *base = ctx->base;
-> +	u32 bus_stat;
-> +	u32 iif_stat;
-> +
-> +	bus_stat = readl_relaxed(base + BUSWR_V31X_OVERFLOW_STATUS_REG);
-> +	writel_relaxed(BIT(0), base + BUSWR_V31X_STATUS_CLEAR_REG);
-> +	if (IS_BUSWR_V31X_OVERFLOW_ERR(bus_stat)) {
-> +		writel_relaxed(bus_stat, base + BUSWR_V31X_STATUS_CLEAR_REG);
-> +		pr_warn("BUSWR common overflow: 0x%x\n", bus_stat);
-> +	}
-> +
-> +	bus_stat = readl_relaxed(base + BUSWR_V31X_VIOLATION_STATUS_REG);
-> +	if (IS_BUSWR_V31X_VIOLATION_ERR(bus_stat))
-> +		pr_warn("BUSWR common violation: 0x%x\n", bus_stat);
-> +
-> +	bus_stat = readl_relaxed(base + BUSWR_V31X_IMG_SIZE_VIOLATION_REG);
-> +	if (IS_BUSWR_V31X_IMG_SIZE_VIOLATION_ERR(bus_stat))
-> +		pr_warn("BUSWR common image size violation: 0x%x\n", bus_stat);
-> +
-> +	iif_stat = readl_relaxed(base + BUSWR_V31X_IIF_IRQ_STATUS_S0);
-> +	writel_relaxed(iif_stat, base + BUSWR_V31X_IIF_IRQ_CLEAR_S0);
-> +	if (iif_stat) {
-> +		if (IS_BUSWR_V31X_IIF_IRQ_S0_IMG_SIZE_VIOLATION(iif_stat))
-> +			pr_warn("BUSWR image size violation from CCIF: 0x%x\n", iif_stat);
-> +		if (IS_BUSWR_V31X_IIF_IRQ_S0_VIOLATION(iif_stat))
-> +			pr_warn("BUSWR violation from CCIF: 0x%x\n", iif_stat);
-> +	}
-> +
-> +	writel_relaxed(BUSWR_V31X_IIF_IRQ_CMD_CLEAR, base + BUSWR_V31X_IIF_IRQ_CMD_REG);
-> +
-> +	return iif_stat;
-> +}
-> +
-> +static void ife_buswr_31x_irq_enable(struct ife_buswr_ctx *ctx)
-> +{
-> +	writel_relaxed(~0, ctx->base + BUSWR_V31X_IIF_IRQ_MASK_S0);
-> +}
-> +
-> +static void ife_buswr_31x_irq_disable(struct ife_buswr_ctx *ctx)
-> +{
-> +	void __iomem *base = ctx->base;
-> +
-> +	writel_relaxed(0, base + BUSWR_V31X_IIF_IRQ_MASK_S0);
-> +	writel_relaxed(~0, base + BUSWR_V31X_IIF_IRQ_CLEAR_S0);
-> +	writel_relaxed(BUSWR_V31X_IIF_IRQ_CMD_CLEAR, base + BUSWR_V31X_IIF_IRQ_CMD_REG);
-> +}
-> +
-> +const struct ife_hw_buswr_ops ife_buswr_31x_ops = {
-> +	.acquire	= ife_buswr_31x_acquire,
-> +	.release	= ife_buswr_31x_release,
-> +	.irq_enable	= ife_buswr_31x_irq_enable,
-> +	.irq_disable	= ife_buswr_31x_irq_disable,
-> +	.wm_config	= ife_buswr_31x_wm_config,
-> +	.wm_enable	= ife_buswr_31x_wm_enable,
-> +	.wm_disable	= ife_buswr_31x_wm_disable,
-> +	.queue_buf	= ife_buswr_31x_queue_buf,
-> +	.consumed_addr	= ife_buswr_31x_consumed_addr,
-> +	.irq_status	= ife_buswr_31x_irq_status,
-> +	.is_fifo_full	= ife_buswr_31x_is_fifo_full,
-> +};
-> diff --git a/drivers/media/platform/qcom/camss/camss-ife.h b/drivers/media/platform/qcom/camss/camss-ife.h
-> index c163c336fcc3..efbb1e75d550 100644
-> --- a/drivers/media/platform/qcom/camss/camss-ife.h
-> +++ b/drivers/media/platform/qcom/camss/camss-ife.h
-> @@ -397,6 +397,7 @@ camss_ife_pipe_for_stream_id(int nstreams,
->  extern const struct ife_pads_descriptors ife_pads_v20x;
->  extern const struct ife_hw_top_ops ife_top_20x_ops;
->  extern const struct ife_hw_buswr_ops ife_buswr_20x_ops;
-> +extern const struct ife_hw_buswr_ops ife_buswr_31x_ops;
->  extern const struct camss_mod_ops ife_mod_v10x_ops;
->  
->  extern const struct ife_pads_descriptors ife_lite_pads_v20x;
+Best regards,
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 
