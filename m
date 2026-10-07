@@ -1,113 +1,87 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DC9649483D
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:40:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 789A7431E71
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:45:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791373276; cv=none; b=WL93sH4rXFUD6rEoc3zo1oAYqjULnINJS6b/KZi4ZDzD8et/W7PEGK0CblBVrV+D0IuFaRIYdU6KCV5Jv7sQHoiNItzwpGUK+0HMPDKvpJqTa3zeNOmZm1vWZvW0cbOYvG9IVS269QRyXxoQGbW42LYiEGcPVwCOtqr/dLlLpe0=
+	t=1791373520; cv=none; b=JIB4dVTMqZbjHMdfSRwaG/jZGxe816riOM0aPDCZtv2iojHhsatNrXF0L4D3Q4ktdz7tonrchQxTURYZJRtxYlAHsi92LvGoqrqeETMI8AiIapCoY4lZq7+2W3lmD1cA7ZZauPFKxt7mV2brJ6jVu9tlBHrgiX7klGjYgFrtqX4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791373276; c=relaxed/simple;
-	bh=HrHOxl8vU4NtC3eVjUlc4i27OUvjn5hRvuvP9BpLLW8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QomUtJ9b+7x6NyHzpeFT5wAfR5SqbEoaFuYHkWcXVPjqx0A8lPITXUV0g3GjHDtGVE+jADlRNhoVBfd1NX+QOU90X83/1v8+hoKBBtoW+wIVtuOE/bf2NUWIsoeY7yOZQ2x836DI2eOX9XI6c0/KZl8VZLNBI0H31bYfNqUcc+s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AKxsODvu; arc=none smtp.client-ip=209.85.216.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791373520; c=relaxed/simple;
+	bh=nz28DfqvHtefyNegxqFh1duVUJANumKDTLI00w9IPY8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=tDnKFhotf3Z5UOof4RK5brCWjjEZICCxQd2E3bn+bIjAFT1B0HQPoHD3w71mmKSdfV0Mqc5msox1mEdhePUm8D0kVAGs3SyvpJI07VZhNsk3p4qZVzBjaGliqrrO5HyB6a6RM7cZXeBvU+76ipUUOnUdHYU40zPc1okV8TQo7Ys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cvu055ET; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AKxsODvu"
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3a8adb68d8bso376320a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 04:40:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791373247; x=1791978047; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1S+23ZtOjWwrYVTwNmNORRFxt1wYzNyVlF7uFakN9wo=;
-        b=AKxsODvuOCo7ST92k4/L8taWX/E1wKOTTRb6x0ZB2HOUxt522M9TVesw4/Qzz0s8Nm
-         dASR1xMiOGb49376DEEs8Ot9LkRYUDKnLZ53vj2nQvLFEm7AHQCREyTTaQDM9Uel9mJu
-         8lC1l97sHDtn8LBtN+nqpvywHMOOIYOxkAgv4zIgkXnHOPWXzkSBpp76z3OevDpLLw8l
-         2chpgwxN56yiTX5/8YhwivEogDteeRZvHeJzfK7QQwBQJXRCHyP7mWgBXWJA+/0LyNIC
-         hLk6ti1SR385ghDQu6jyTfO1O/0YaKwNcKXyV716MfHnZABTubxB+n+8pIe/Nt52bZTG
-         O61g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791373247; x=1791978047;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1S+23ZtOjWwrYVTwNmNORRFxt1wYzNyVlF7uFakN9wo=;
-        b=j1cnCI7qjAFYU0yKv0wosIXJdUz3s4uixwV8I/N5bxNr1NnLvMkuqBezmSH20BwMLl
-         +azTO268f976UoVMuTCnZXT8QEHCv54SX1kNJNoo1PJZkXtW2Z3hEkM7Qv6cXfuYNke9
-         MclrOsWgItVw8d5DwtZDVtEHuGThfVyrnpuGbELmyqtTrYKmnaMyeN53eNElwwPgYTA0
-         0aQB2mcbU8uww3W4s1J4P8UmAeizy3Gwvq3LCiWpnGUz0MmMOQVONZsA17Ut7rTqKTW+
-         9nWomBXCwdAU8Z3CnckcpOTYBY5o+woq/4y7U3xWl4hwzFUf4XAdz78RgnsrirRYu0gC
-         U1DQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxp8pqmEUwCjZpq1eCQEzPQi1dPVM1bJKajg32jx50RyvWjFR3N6Rngtnfk2LfMEAX9RDB00wEEN9nVI24g@vger.kernel.org
-X-Gm-Message-State: AFq9FYIoisBLV9c5s1j/Oo3/Oio7FYQCqaIxQeHcSx8UqI88sfcxolMi
-	cu1QNp6pAp8/k0d/9bmnH4e7eqnpgWPzq7DDCZxbUwZg6XPvOQa9Bjzn
-X-Gm-Gg: AYBFou3EIrPHmk8/WzygbUEZaxRk504FqPVky4To1JMochKllvWSrGFy6O67Vo7A8Gj
-	Nzjcw71e/v0RVlHPhSgMaf6NIaZNBtciaOFFmsGZ5zNHDUC/H/bRYhBIDAPJ27ghtLilvIT0c4T
-	b+TXdmA0c/AHDZD/kw1907V0U0TTH46oJYxqGPCOmK/eC32/ovKpgFSJToRGtpiOxl2EAnSV+41
-	rpdzfIzMy8nhyJmhgmZgmW4imcHm9JDhwLOKY4Ho6CMY0PGqYGax2ETZHLAeuMAOHStyUT2GPO3
-	agFkPemBSKC7qMES9Xv+bEKTZ5KNgtxXbY5j6WDBicNRpv2zZQK2fQzSbd1fbY33RSbqwnuG/oy
-	5kgACVufb6kz10Jir8laq0dONoXNO/UN5fMV/NjgYmgrHs813x4jFVnPxGBWlx5nl+kBKbsVJhF
-	Cgi69FLUhRroSOf+MulhIwojy0cAzgiBXrae/md+gPSqqmj32wi+DFkA==
-X-Received: by 2002:a17:90b:384d:b0:39e:6c68:c787 with SMTP id 98e67ed59e1d1-3a8a1553dedmr1695567a91.61.1791373246732;
-        Wed, 07 Oct 2026 04:40:46 -0700 (PDT)
-Received: from lgs.. ([2001:250:5800:1000::8534])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a89b5c5d9asm4127072a91.11.2026.10.07.04.40.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 04:40:46 -0700 (PDT)
-From: Guangshuo Li <lgs201920130244@gmail.com>
-To: Sinan Kaya <okaya@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Frank Li <Frank.Li@kernel.org>,
-	Andy Shevchenko <andy.shevchenko@gmail.com>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	dmaengine@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Guangshuo Li <lgs201920130244@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] dmaengine: qcom: hidma_mgmt: fix autosuspend cleanup on probe failure
-Date: Wed,  7 Oct 2026 19:38:36 +0800
-Message-ID: <20261007113836.115774-1-lgs201920130244@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cvu055ET"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 229A31F0089C
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:45:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791373510;
+	bh=nz28DfqvHtefyNegxqFh1duVUJANumKDTLI00w9IPY8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=cvu055ETLVJ5XMoJM+CIrEuMDk3VJcs4AkkpZyeaSYjh3dki7VugPtMmqvJgXLtfU
+	 9I0GaD0ZZnzMsIETGB2Og49KiQw04ltHIXVjMyQQ90yjmB0ZFoAzYBt+pGo55Mt75K
+	 xRhoA1OYlIeTUWZNh/bt7VgEtsMSwM5PgDufIE6qfHnnEIpzI9aDdFBXqd0gxwb2bX
+	 tFgccpiyrigskdeLjA+4WVk998CWg3r6ORsvLp1bTSvN3rnsP4AJOIQosk5VBBoxBQ
+	 POgjg2Hn2xgm0eVeVlJvxvay9RBIjte8KT7XEsLhAwilfzJFAcbKcr8Uzcs59D0r/E
+	 4SosWiCUJdY/A==
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-3a98f260f85so20550501fa.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 04:45:10 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBw6uwDOZMEW6/Ym0dMbQUOLOb9egqVZHi/rezYPcutPIdSMJdHn9PKwa7EYXuQ+6sxK/RFlmY3jhgxDPvyh@vger.kernel.org
+X-Gm-Message-State: AFq9FYKn7J8TINwRwRc0tGdyBFtSdfUrGCl9Hbf1uZvZOhqIBzILH4cM
+	LgEb3VDryd5bUxrv2MuJuQPtmdcQQCX0MBl7EY8fSEPMvHuuXnWDz5+Q5Ryv+lU+q4K5K4gNKwm
+	R8aijEvEYlKpn8NXKKWohr1FCYUDkw5Q=
+X-Received: by 2002:a05:651c:b08:b0:3a6:6831:6e28 with SMTP id
+ 38308e7fff4ca-3a9a2c34eb6mr4880381fa.6.1791373508809; Wed, 07 Oct 2026
+ 04:45:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261006231900.3230373-1-briannorris@chromium.org> <20261006161337.5.Ica4bfaf179a86c8d77f8f845826602914b81181b@changeid>
+In-Reply-To: <20261006161337.5.Ica4bfaf179a86c8d77f8f845826602914b81181b@changeid>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 7 Oct 2026 13:44:54 +0200
+X-Gmail-Original-Message-ID: <CAD++jLm0w_fs-O_BSwTVbGOwozB7yBcFAgTe=ubzFE_SxWjSUA@mail.gmail.com>
+X-Gm-Features: AclHuK_tq1pfIubCAp0KCEs_RXsZkfKO4Fx3eMbI5PAcOYf2xBy3KSKKGEfBZkw
+Message-ID: <CAD++jLm0w_fs-O_BSwTVbGOwozB7yBcFAgTe=ubzFE_SxWjSUA@mail.gmail.com>
+Subject: Re: [PATCH 05/13] pinctrl: qcom: lpass-lpi: Discard
+ pm_runtime_put_autosuspend() return values
+To: Brian Norris <briannorris@chromium.org>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, linux-pm@vger.kernel.org, 
+	Ulf Hansson <ulfh@kernel.org>, linux-kernel@vger.kernel.org, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	linux-gpio@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-hidma_mgmt_probe() calls pm_runtime_use_autosuspend() during probe, but
-the probe failure path does not call the matching
-pm_runtime_dont_use_autosuspend() before disabling runtime PM.
+On Wed, Oct 7, 2026 at 1:19=E2=80=AFAM Brian Norris <briannorris@chromium.o=
+rg> wrote:
 
-Add the missing pm_runtime_dont_use_autosuspend() call to the probe
-failure path before pm_runtime_disable() so that the autosuspend
-setting is properly undone during cleanup.
+> Passing the pm_runtime_put_autosuspend() return value to callers is not
+> particularly useful.
+>
+> Returning an error code from pm_runtime_put_autosuspend() merely means
+> that it has not queued up a timer or work item to check whether or not
+> the device can be suspended and there are many perfectly valid
+> situations in which that can happen, like after writing "on" to the
+> device's runtime PM "control" attribute in sysfs for one example.
+>
+> Accordingly, update the LPASS LPI pinctrl driver to simply discard the
+> return value of pm_runtime_put_autosuspend() and return 0 to the
+> callers.
+>
+> This will facilitate a planned change of the
+> pm_runtime_put_autosuspend() return type to void in the future, similar
+> to commit 3afd8df02433 ("PM: runtime: Change pm_runtime_put() return
+> type to void").
+>
+> Signed-off-by: Brian Norris <briannorris@chromium.org>
 
-This issue was found by manual code inspection.
+Acked-by: Linus Walleij <linusw@kernel.org>
 
-Fixes: 7f8f209fd6e0 ("dmaengine: add Qualcomm Technologies HIDMA management driver")
-Cc: stable@vger.kernel.org
-Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
----
- drivers/dma/qcom/hidma_mgmt.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/dma/qcom/hidma_mgmt.c b/drivers/dma/qcom/hidma_mgmt.c
-index 4805ce390ffa..d8c56af5882d 100644
---- a/drivers/dma/qcom/hidma_mgmt.c
-+++ b/drivers/dma/qcom/hidma_mgmt.c
-@@ -310,6 +310,7 @@ static int hidma_mgmt_probe(struct platform_device *pdev)
- 	return 0;
- out:
- 	pm_runtime_put_sync_suspend(&pdev->dev);
-+	pm_runtime_dont_use_autosuspend(&pdev->dev);
- 	pm_runtime_disable(&pdev->dev);
- 	return rc;
- }
--- 
-2.43.0
-
+Yours,
+Linus Walleij
