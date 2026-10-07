@@ -1,281 +1,176 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53E4849A3B7
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:25:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791372364; cv=none; b=CUx+VaemU6kBLbaG/+g/ydnzgxzV8tOfT6c6FYC+NnEj/OxLIvSz/YLTJgeHnPH6CDgJbdq3j8JMNuOokM5WpeqqBHjS/mn4tVDzOY63Fz97GYyAq0XWweP3AJoogqgquxSOCUyKiRwVt0BsGHPysx880FWqGwVZXbpT9KnkR9A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791372364; c=relaxed/simple;
-	bh=KJnbpRVIHloDGfDhE5+fXC557tLNYH9I8hBo5WFW5oo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ruhvSOyrDhKGpirXJ3hSKQXHRcUqbnA4ynio3ZowYl7kF0wffkbu5ut++2UpHXe2MZvZS3+ikouO0lWxhs1Q/cLYPAshCMazdqR/uyshhPN+DMcqQ2Zh8os6T87UOR5yqGBx54+93EMpjDozAzyMTYmYkUU8ktBjW0sr02hPC4U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hbZWwd4f; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aBrEOBD1; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA31E4349A0
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:27:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.49
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791372481; cv=pass; b=AR777mfqvYL4E+0ouu56DB+XlxTDil9i0MrPWPu8ezgzE1w/LDVWDCP1Qy076Z9uOiRmrv5QIDDXmWU3Idd0wa601F0lAjvMBYPe+V3tsCYI1oYZ40QNfSAvb7AxAGoTH1m07NoCAtlqz0lJ6qo85UfrqV1e996eZEG0pjEfr00=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791372481; c=relaxed/simple;
+	bh=FpzJ35zvhmqOa2+RwZnppUz698uzzC9G/FlxDAwKxyI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=TfFbkYeHlkxhEYICZV8VNBntS0B6ohBp5bZwwiVNQZLDvCa8YHKii8UwxSaxWXMs07OSzEacG+ok7i9J/y1QjCxB/CuiGbnyz2bEAOIZKya85Ffx2rggK1cuzi20zsldIp4gflSVBhvNg/Mj8CL7nWALfPwfsUYLqYFYCN3531E=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ekAsJW71; arc=pass smtp.client-ip=74.125.224.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hbZWwd4f";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aBrEOBD1"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6977jTV73298200
-	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 11:25:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	asNdnnn+jFtAWyz3FKWehQEy/53BJ1c+C7uY4v6X2c0=; b=hbZWwd4f45taM7oR
-	1t/YxBlNIjROoMvoLxe0gQSim8xIGFobL9WRamvq9/R82/Y+TltHr2PAUJJ0H+Cv
-	HaL084GfrENxafIPOUFc2pdpG79at5prnlP3qor8IIp+/Q3knXd+NIcsaOvQtZky
-	zdaYb4wf7K6GAnlGUkcOCufrBOLB/oHIKlWJ7QlbxIWyj7OFQ85TPvCIuWC6W9ih
-	BfA/WJxsIJfFX9k4oBIXuy1Vk+53Hr/pWqE+XkCjZfEcEXj6HvTk+uJOPVp0CFnj
-	7mg0WpoTEk5zoY25BTy1NK5oDKltaas/XPKjwVkr9eJbsoN332Qlc01uvfon59mY
-	8ggRLA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5hdcrtqa-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 11:25:48 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cb6391e89so723225485a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 04:25:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ekAsJW71"
+Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-67699afea08so1805711d50.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 04:27:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791372465; cv=none;
+        d=google.com; s=arc-20260327;
+        b=XbFBFzaGbSMICXbCZk/hyV+zV2zR6QBFvOmABPgeQfZ83ZSMxAr8M3AZHFrwh9QKBf
+         25xHL8C9+kRUyvlR/GMQ9Fh4YUj9jRx4fUTQpqGKvkXZ7opbcuLRtXVSbmRl1+ns0oQy
+         bqt2MTMgT2nv6Vv97Db3GqaWCq4k3Vigg+YH7MvivD0ZTJ1eSBuZ1RBbEm70N7G52I9d
+         y5RUabmhaJB77Z83wUbL8z2h1xnh1TTnlNssoxPt1HGTTdmiML+QAOEPOTYLTG2kFuyq
+         vY02r1+Oyfg58HCTaqE9XVmvb1VsGGPUHvYgnqzzmx3q3h6tRqyz59rFEgdx1bkxMmq9
+         uroA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=pavyWN5UuE9jlfBpdpJeca0fIeVjQP6tBMNr3yh5OZo=;
+        fh=BikEyu30mHsYpV4GeR3gWWJ4mGuGFbUbr52bHRbsqfU=;
+        b=Njl6IzgVeqsBZNvAgpluifvnIWC9ESRw0B5hW821HS0iWqRLFYu6GcST6SmQsxc9vf
+         2GQCa+Ox19g2x7eIrMPEikyH2Vng8kpluiexxc7Wpxjmdv3pfBvw1XfoUtbAxGzswHcu
+         CB2yB8kiTp04pLHGidxdnT+pZsJR21FOlpa/X97/+6Y1MYcovrAb53O3rUzq5mTbhvx+
+         sTrf2GN1bL57k5OtzHFOzIX4fhvr8gw62G7rFjjFFutVGnZIHrQRt8FVtxm48GGPR/rB
+         brYYwZzQltPG8mn7GiU9aHcCQvAH0uh8yWA4kCRc7SVwSZG2foAtSzFPqnFPAN/jI+Bu
+         ahZQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791372348; x=1791977148; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1791372465; x=1791977265; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=asNdnnn+jFtAWyz3FKWehQEy/53BJ1c+C7uY4v6X2c0=;
-        b=aBrEOBD15UX1nWXHaZmo7GQBnOiQ1TUm1flblzmq8yWtt8/gOLQffY3iMbhYEoOGdZ
-         R3wivr4BUmAxYSNq+XM/Qgw/Fg1zM+aN82QUS4+UxYiqf7FifrN3ykcPO79m7KPuC1as
-         3sNF6HtiLJGmWSAgsCyUy0Ms4uWg+QbvMYfcojXnalVAdqcqoxctQRfSC8n9cqkj6Zj1
-         E16d25eLMPfvdF0TjbULqVrW8EYJ0yp7RXBfvQ4D8EkJe55JIBghYjM2Xonuv8YIYNZw
-         RbfhzvVQFn0qq/Bd0trIQX8r4WcaKiTLrCf0YXCyVSZexOsutsP+b3VdmSR3NsXtkaql
-         w+sA==
+        bh=pavyWN5UuE9jlfBpdpJeca0fIeVjQP6tBMNr3yh5OZo=;
+        b=ekAsJW71M9T9SI/egh4sshHwR7cszL3UPcuQljDyCjPu7KzXjwEDvTaRBqszr9jTbp
+         o16EnFaWwL7HV3TI2cvXq7So3tpp9Vblj+zpY5YaunZJfBSjceaGGNndi6DY/10ernu6
+         Cf0dY6kF02KBthwTwnnx2Cxldp+xxDfh/XYHptxyic7YhVr0tJyT1chQXp02h8jCwZEA
+         j7g+h5Gu/jKROvgVOOqWTNcmakOKkgi9JkFpsY3vvlVfmNklHhnI5LApP4O6CsxEgxCK
+         wk3Fpx9r2fZhJdCW3ZTZfPt9YpU4hlZ6lRJTswEUl0l79xfQdsIYIOxHiK/+3z4o3mn2
+         CSAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791372348; x=1791977148;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=asNdnnn+jFtAWyz3FKWehQEy/53BJ1c+C7uY4v6X2c0=;
-        b=IBqKOIGXYLhmTS27+UrJVjEUkuTruiszej/KTmqEcNbACqYl/SN/rWJyXUp4lRvqvq
-         s2nSKiQTX5HUj2EoUm/QwAJYtefZiM+hG+EqZN7vq2XnIdl4cZTvmbhwOdu7FLBkfYdp
-         P731c5mLMm+/3EKSrGoSPmPAIPaadX0obykUsHqSi72E6fiJkLoG655dmoMpSKecbKg3
-         UTqg56YQeXPXPp5MEj4Q5r+K6MrjiYVLVFXQ/ZsiuCWln1pYHXFphbpdSTSo1VY9vXvq
-         xsxKRijE9A01lcKgCBhSRphm3l5+sQZ1U+Whb165qYe4XYosb4TmILkvimPm1FQr661K
-         K6kQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzNbkGSydKH1W6V55jE23WTytW8/jacPUmvX2qPP6N7UwPP0sf5H+tQXbY1Mh/nQhaL3VOPKiqPDp6gp2+L@vger.kernel.org
-X-Gm-Message-State: AFuF++ms0yl4KREMOgS1St513OXIUi/o3us6SBY84Vt1b14id+QDHrZ2
-	H9ZL4yND3Y2UKu/aEkHv42Gh1oM6PEbJ+9PA3AaFU7fpPPbr12JuChfmajZ155rnncTl4DipODj
-	XROD3p8kjXE4TFqGxZ9mdD/l/JbFF5k7KM+6XyD+3QA8Oya+scxl2EX6Xu73TZ2lMLWBYmQD5of
-	qp9Cc=
-X-Gm-Gg: AYBFou3f0RIe23L34OrPlpy6vXDam3xbxZ+ZvDwp8bQp8ste5btugrWMv0TTwDAt3Mr
-	BRJdW77Jon/TmDsmDXUoLu7SpPMOwqtyHbqczPB1P1l266cksXENJJvfBk1VYAJZ58v2jAEWRS3
-	rbRrhKEYpvDcI0Bi0/XWDPzxY/WuABjcpViE3g7nfI/m+M1MZpoUXTX4f0yO9Wvpcf5S+pOhZkx
-	lcaa9u4XvUUTMdkQYiXxPikmgSJgR99URlbhlFHhaltvAiy028feWHbXCSsEzVBU7JbIHNRVVA8
-	ptbuiSqO7glkOg3DN8EhtK5vWGS1yf2XVm91VvVvvH89rmT/VouronszMKkvhLuEJmDEZXRI+hA
-	WhGZq1HycfSjy3zg6n0HpFDXSHW5o7ehr2cyM5AQi
-X-Received: by 2002:a05:620a:40c4:b0:93c:ba2a:6c03 with SMTP id af79cd13be357-93e9b71c7c1mr368507385a.21.1791372348047;
-        Wed, 07 Oct 2026 04:25:48 -0700 (PDT)
-X-Received: by 2002:a05:620a:40c4:b0:93c:ba2a:6c03 with SMTP id af79cd13be357-93e9b71c7c1mr368493185a.21.1791372345970;
-        Wed, 07 Oct 2026 04:25:45 -0700 (PDT)
-Received: from [192.168.25.64] ([94.155.124.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a17f4482c4sm111196265e9.0.2026.10.07.04.25.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Oct 2026 04:25:44 -0700 (PDT)
-Message-ID: <647cdc36-d6ba-407f-9eb3-f3b34ad9df4d@oss.qualcomm.com>
-Date: Wed, 7 Oct 2026 14:25:42 +0300
+        d=1e100.net; s=20260707; t=1791372465; x=1791977265;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=pavyWN5UuE9jlfBpdpJeca0fIeVjQP6tBMNr3yh5OZo=;
+        b=NAVXl3G78xBnzKW66G8H3/1kUz3vzNLtF01CP9jnyEhRKJydM1xSMx1ma4XIXYj9g9
+         Tnfsf2mmUQZnh9GTMMshCXwIzgoEzLI7a6jGXh7SzEKNloyL6iWFUaGPSHkws4rcNSRi
+         DvYnI0dVjchcgkJpBOOUAJvBagw13vfRgb8cMuY7tfQbPMHJdsEk8EdXU1RBprqrkwbu
+         rnc9qKBxau8+CKCkDlokPcswOG5cnkDz9WSt+qqZVaPypMGeoLLHCk1eTVFXqH7pLkrJ
+         D6dyc+52UgzEtsRHT2Uy9d7tv9bT/p+NfS0+lT9zZWlMisoNKcUcr1taozpshq4W2H9t
+         cBlg==
+X-Forwarded-Encrypted: i=1; AKwUvBzXX7bXv5bGm1UgAJanxlNPITAYul29+/wTqzHcrhgF8Hbtl5VI6LlgTOBndK/lE/PtCDHUoMs2Y8XLafsk@vger.kernel.org
+X-Gm-Message-State: AFq9FYIlas8Lmq5jnN2nXwEvmP+F+V9xT3cfxq1wNjAePzMhvZnnI7TK
+	8BYqL5ip/5LS6tmf8X+4WWwHalKStQk7eoU11xHR50SOao0QCdqzjqLXB+CPFp4ucjWt4iQp2gF
+	ScFt5tmXvQCbokRhcdeTbjBXBsDsyn9c=
+X-Gm-Gg: AYBFou1HqqAqyFjPmVrED5lLo9KDvZpK9VdeQv69/Rks17YD5MdPRLWPGIxqRcr1yHX
+	fFT33cmoCZBJbGJr8w8HQA99aaMNhqEfrSrrdV/s8eIVRFo7TiGCsJ3WydT9S+dmwChXyzkoBev
+	sJcAmwpxHtp1lk7QUS5UM+kIF3+WsFWAZG9H8V0iiYZmfMuWkL/eIVh0WKAgaMw2ni/2OvnLahz
+	lFNVXJTort4q+IaFKls9XKbd7W3mE/BE7/SBln7S6ElOFxduBiHb3bKPInWmMe8dqV6zIVCnsep
+	88j2bh+NNFiJIPU02hmbr0jHnlQBKnyD30eVJVv2DE/Wz6jDF5wOQjE0XttPPtlSMWk=
+X-Received: by 2002:a05:690e:1182:b0:675:6d8c:f445 with SMTP id
+ 956f58d0204a3-6790a0b3142mr964922d50.10.1791372465276; Wed, 07 Oct 2026
+ 04:27:45 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/74] media: qcom: camss: vfe: Add helper
- vfe_bus_v3_packer_fmt()
-To: Bryan O'Donoghue <bod@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
-        Daniel Scally <dan.scally@ideasonboard.com>,
-        Keke Li <keke.li@amlogic.com>,
-        Richard Acayan <mailingradian@gmail.com>,
-        Hans Verkuil
- <hverkuil@kernel.org>,
-        Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
-        Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>,
-        Robert Foss
- <rfoss@kernel.org>,
-        Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
- <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-18-ed985aefd611@kernel.org>
-Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-18-ed985aefd611@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: RgvZGZHudrVRqHp9Qda_dBhMo5Z42RQj
-X-Authority-Analysis: v=2.4 cv=aKFlOr9m c=1 sm=1 tr=0 ts=6ac62c3c cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=F-lHOqjDzm0Mqe-WZYMA:9 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDA0NSBTYWx0ZWRfX7P0KRTQYVSEq
- 9oXh46ONBJ/8C28YJNk6IznUzs/Isaj5cI0LrkzgCazxaOTFtUVPfhvnzwjGt/nn4xlxiC9CRBi
- zv3gk+60WHVXOfYWMmNSToEGptcIqLY=
-X-Proofpoint-ORIG-GUID: RgvZGZHudrVRqHp9Qda_dBhMo5Z42RQj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDA0NSBTYWx0ZWRfX3zEzdE0Rbq1a
- sMu54RhV2JY3JlNyGjfZD3rWsF8BpOf/FFufsGS5xEIT60XaRmhhibY2V3SnXC6B9r6y3ThueGv
- t6pY0uu8+5CrJPiRReRlKZ98KmcZCEcU0W3ImKO2FYV7m44tSXeuZaNveosVOcBCMZSTIri6xff
- +duNEgw4g7mQRuvBdPbXlMLLw9EV8Oaky2JALsFqu3k0HGbS+qXmPO5Q+ZslZDB60DIFiT7tw8w
- O7dUmiunhUvGswI+vzFR0rsKfbRTUFvmqU4XD/zEwmpkbsqjQrH7+cSd2IKn31rzSr8Fx6Fsmuo
- W5oC0qqNz7LctnWWREJaet4is0fOjnIUN9OlHOA2M9bCfn5i+/CXOD8OlYN+n7SoyeMUAAdSkWA
- w4k5Pifg8QeOCUx1MxubaanKtlO7NOPOc2iENbH697yHugmNBYJV1a7PZwj+jhR/1nqSmPP0ihB
- 4FXw9vMbDeZhjUF1MWw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-07_03,2026-10-06_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
- bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070045
+References: <20260808112043.2781244-1-lgs201920130244@gmail.com> <ar1yiPC1pxx8H974@lizhi-Precision-Tower-5810>
+In-Reply-To: <ar1yiPC1pxx8H974@lizhi-Precision-Tower-5810>
+From: Guangshuo Li <lgs201920130244@gmail.com>
+Date: Wed, 7 Oct 2026 19:27:34 +0800
+X-Gm-Features: AclHuK9xkPJNTgSq7-x7dqK0gz-t6G-LeWcqzQTZVQ2BJAwWf9PL48vGNZtximY
+Message-ID: <CANUHTR_w4cOAOoYDCDS8bwzPEuYgWp1KjZztgLx-4P1kkhwjiA@mail.gmail.com>
+Subject: Re: [PATCH] dmaengine: qcom: hidma_mgmt: fix autosuspend cleanup on
+ probe failure
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Sinan Kaya <okaya@kernel.org>, Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
+	Andy Shevchenko <andy.shevchenko@gmail.com>, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Bryan,
+Hi Frank,
 
-On 10/5/2026 8:13 PM, Bryan O'Donoghue wrote:
-> vfe_bus_v3_packer_fmt()'s job in life is to translate a given v4l2 pixel
-> format and plane into the appropriate bus packing format for v3 class
-> hardware.
-> 
-> Other versions are currently not covered.
-> 
-> Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
-> ---
->  drivers/media/platform/qcom/camss/camss-vfe.c | 53 +++++++++++++++++++++++++++
->  drivers/media/platform/qcom/camss/camss-vfe.h | 32 ++++++++++++++++
->  2 files changed, 85 insertions(+)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-> index 5b5201b55a485..c95fe5b0b05fc 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-> @@ -370,6 +370,59 @@ const struct camss_formats vfe_formats_pix_845 = {
->  	.formats = formats_pix_845
->  };
->  
-> +u32 vfe_bus_v3_packer_fmt(u32 v4l2_fmt, u8 plane, u8 align_shift)
-> +{
-> +	switch (v4l2_fmt) {
-> +	case V4L2_PIX_FMT_NV12:
-> +	case V4L2_PIX_FMT_NV12M:
-> +	case V4L2_PIX_FMT_NV16:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_LSB_MSB_10;
-> +	case V4L2_PIX_FMT_NV21:
-> +	case V4L2_PIX_FMT_NV21M:
-> +	case V4L2_PIX_FMT_NV61:
-> +		return plane ? VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_LSB_MSB_10_ODD_EVEN
-> +			     : VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_LSB_MSB_10;
-> +
-> +	case V4L2_PIX_FMT_SRGGB10P:
-> +	case V4L2_PIX_FMT_SGRBG10P:
-> +	case V4L2_PIX_FMT_SGBRG10P:
-> +	case V4L2_PIX_FMT_SBGGR10P:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_MIPI10;
-> +	case V4L2_PIX_FMT_SRGGB12P:
-> +	case V4L2_PIX_FMT_SGRBG12P:
-> +	case V4L2_PIX_FMT_SGBRG12P:
-> +	case V4L2_PIX_FMT_SBGGR12P:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_MIPI12;
-> +	case V4L2_PIX_FMT_SRGGB14P:
-> +	case V4L2_PIX_FMT_SGRBG14P:
-> +	case V4L2_PIX_FMT_SGBRG14P:
-> +	case V4L2_PIX_FMT_SBGGR14P:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_MIPI14;
-> +
-> +	case V4L2_PIX_FMT_SRGGB10:
-> +	case V4L2_PIX_FMT_SGRBG10:
-> +	case V4L2_PIX_FMT_SGBRG10:
-> +	case V4L2_PIX_FMT_SBGGR10:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_10BPP |
-> +		       BIT(align_shift);
-> +	case V4L2_PIX_FMT_SRGGB12:
-> +	case V4L2_PIX_FMT_SGRBG12:
-> +	case V4L2_PIX_FMT_SGBRG12:
-> +	case V4L2_PIX_FMT_SBGGR12:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_12BPP |
-> +		       BIT(align_shift);
-> +
-> +	case V4L2_PIX_FMT_SRGGB8:
-> +	case V4L2_PIX_FMT_SGRBG8:
-> +	case V4L2_PIX_FMT_SGBRG8:
-> +	case V4L2_PIX_FMT_SBGGR8:
-> +		return VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8;
-> +	}
-> +
-> +	WARN_ONCE(1, "no packer format for 0x%08x\n", v4l2_fmt);
-> +	return VFE_BUS_WM_PACKER_FMT_V3_PLAIN_128;
-> +}
-> +
->  static u32 vfe_src_pad_code(struct vfe_line *line, u32 sink_code,
->  			    unsigned int index, u32 src_req_code)
->  {
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/media/platform/qcom/camss/camss-vfe.h
-> index 089f525b98cf5..98d403a71cf95 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.h
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.h
-> @@ -56,6 +56,27 @@ enum vfe_line_id {
->  	VFE_LINE_NUM_MAX = 4
->  };
->  
-> +enum vfe_packer_format_v3 {
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_128 = 0,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_ODD_EVEN,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_LSB_MSB_10,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_8_LSB_MSB_10_ODD_EVEN,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_10BPP,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_12BPP,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_14BPP,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_16_16BPP,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_32,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN_64,
-> +	VFE_BUS_WM_PACKER_FMT_V3_TP_10,
-> +	VFE_BUS_WM_PACKER_FMT_V3_MIPI10,
-> +	VFE_BUS_WM_PACKER_FMT_V3_MIPI12,
-> +	VFE_BUS_WM_PACKER_FMT_V3_MIPI14,
-> +	VFE_BUS_WM_PACKER_FMT_V3_MIPI20,
-> +	VFE_BUS_WM_PACKER_FMT_V3_PLAIN32_20BPP,
-> +	VFE_BUS_WM_PACKER_FMT_V3_MAX,
-> +};
+Thanks for the review.
 
-I think all wm configurations should be separated in separate bus or wm
-abstraction and move those per version of the wm/bus.
+On Thu, 1 Oct 2026 at 04:35, Frank Li <Frank.li@oss.nxp.com> wrote:
+>
+> On Sat, Aug 08, 2026 at 07:20:43PM +0800, Guangshuo Li wrote:
+> > hidma_mgmt_probe() calls pm_runtime_use_autosuspend(), but its failure
+> > path does not call the matching pm_runtime_dont_use_autosuspend()
+> > before disabling runtime PM.
+> >
+> > If the autosuspend delay is set to a negative value while autosuspend
+> > is enabled, the runtime PM core increments usage_count to prevent
+> > runtime suspend. Without calling pm_runtime_dont_use_autosuspend()
+> > during cleanup, this reference is not dropped and usage_count remains
+> > unbalanced.
+> >
+> > Add the missing pm_runtime_dont_use_autosuspend() call to the probe
+> > failure path before disabling runtime PM.
+> >
+> > This issue was found by manual code inspection.
+>
+> Your descripption doesn't match your patch. You change change pm_runtime_enable()
+> to devm_pm_runtime_enable()
+>
+> Frank
+>
+> >
+> > Fixes: 7f8f209fd6e0 ("dmaengine: add Qualcomm Technologies HIDMA management driver")
+> > Cc: stable@vger.kernel.org
+> > Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+> > ---
+> >  drivers/dma/qcom/hidma_mgmt.c | 7 +++++--
+> >  1 file changed, 5 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/dma/qcom/hidma_mgmt.c b/drivers/dma/qcom/hidma_mgmt.c
+> > index 4805ce390ffa..470c88f36d25 100644
+> > --- a/drivers/dma/qcom/hidma_mgmt.c
+> > +++ b/drivers/dma/qcom/hidma_mgmt.c
+> > @@ -168,7 +168,11 @@ static int hidma_mgmt_probe(struct platform_device *pdev)
+> >       pm_runtime_set_autosuspend_delay(&pdev->dev, HIDMA_AUTOSUSPEND_TIMEOUT);
+> >       pm_runtime_use_autosuspend(&pdev->dev);
+> >       pm_runtime_set_active(&pdev->dev);
+> > -     pm_runtime_enable(&pdev->dev);
+> > +
+> > +     rc = devm_pm_runtime_enable(&pdev->dev);
+> > +     if (rc)
+> > +             return rc;
+> > +
+> >       pm_runtime_get_sync(&pdev->dev);
+> >
+> >       virtaddr = devm_platform_get_and_ioremap_resource(pdev, 0, &res);
+> > @@ -310,7 +314,6 @@ static int hidma_mgmt_probe(struct platform_device *pdev)
+> >       return 0;
+> >  out:
+> >       pm_runtime_put_sync_suspend(&pdev->dev);
+> > -     pm_runtime_disable(&pdev->dev);
+> >       return rc;
+> >  }
+> >
+> > --
+> > 2.43.0
+> >
 
-> +
->  struct vfe_output {
->  	u8 wm_num;
->  	u8 wm_idx[3];
-> @@ -315,4 +336,15 @@ int vfe_enable_output_v2(struct vfe_line *line);
->  int vfe_queue_buffer_v2(struct camss_video *vid,
->  			struct camss_buffer *buf);
->  
-> +/*
-> + * vfe_bus_v3_packer_fmt
-> + *
-> + * @v4l2_fmt: v4l2 format
-> + * @plane: plane for the given format
-> + * @align_shift: bit position of the PLAIN16 LSB alignment flag
-> + *
-> + * Return: the bus packer format for the register
-> + */
-> +u32 vfe_bus_v3_packer_fmt(u32 v4l2_fmt, u8 plane, u8 align_shift);
-> +
->  #endif /* QC_MSM_CAMSS_VFE_H */
-> 
+You are right, the description of the patch does not match the actual
+change. This was my mistake.
 
+The patch tried to address the missing autosuspend cleanup, but
+instead of adding the explicit pm_runtime_dont_use_autosuspend() call
+in the error path, it switched to devm_pm_runtime_enable(). This made
+the implementation and the commit message inconsistent.
+
+I will prepare and send a v2 patch with the fix matching the description.
+
+Thanks again for catching this.
+
+Best regards,
+Guangshuo
