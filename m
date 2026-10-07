@@ -1,374 +1,135 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93369492E4C
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 11:31:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41ABF4AA57E;
+	Wed,  7 Oct 2026 11:32:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791372722; cv=none; b=f0gaDire9EtruGLq2x00hPmHjqNx+YoV9b4eYfODt7IAw6Ori5mtf5bBnyk2KSi5kQ/uShYJ9X+bHzQG2S5mbEMyMnbzw5dAnkqYXHXdNL17O1TQPDnzZ4hRmnnMTPuE72pAZiSSOAGMPYUqTD8GGs0szONzE+kbANfwVUHwdHw=
+	t=1791372760; cv=none; b=Fs9IjDyvAm8j84tcqdLTjXZQR6fq4qsS+7n5lsAivUgy3hjUpiN5ke1DkM6q9nGI5n29rVzHxYztb/f7xU4Ul6A7OUw2lwdQzTH1fHAFW7GAVK2bfaeB9Ppiv1la6Jinrlq2OKy9QbSjDKxmjbgxMSqG3zovHih/KZiRGl4VI6s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791372722; c=relaxed/simple;
-	bh=ZMiiaGyDYTCxz97Sz+PlnJpX40AY+IuV2cS3lwByG+o=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SKW2fMcThXFSa1Atr77IpUAwpSct5taywlr56Q6wXjuFGQ0s8iK9Bbl7GtnvGbk+MJLMVj7DMeTFr5GV4lmhFwLa4KLzKPbwBf0Pr2+XtuBxG/XyiowB9Gya1vMu6yVyQ9G6o+cWgnh/5JhOxRA5vHNVomgC/aqnczp9qE/HZ20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JvyTIzPl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L2EZ3ARE; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791372760; c=relaxed/simple;
+	bh=jU8W3uTLLilw0+w2z/HfS8+JPAexnPEoxrs7IvvBv/o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=M2u4AMgkDoGNZroAejBtZVF2V91nQBGqOU+wWwNXiWRaBfQAmCcYNTG0go6B5agPdcVboP+dFKhCg2TvDaiXbq+ydomV5+bvse1cKJtUq4DCKi/SfsjmcFi7eFW9njFz0XUNJgOV5FFcEd53o91PbCB55St5ga5zaNrC6LDUa1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=g6Ig8+eQ; arc=none smtp.client-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JvyTIzPl";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L2EZ3ARE"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 697BVK822363982
-	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 11:31:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HmYaoe+lJGtCYKh/EC4wIHB7K0XcNmCPYjiXJ8nhW0A=; b=JvyTIzPlCDI4/IC0
-	aSsOzIZCMmdbzM0M77i0zVmy3gmvNgfAB/594YXaRMzV+jmETQCWZY94EAMHC2dY
-	ulTB2ESJ5d57i3zhFA0DedLCjlyPQbuoaIw9giokX6Lo4ohJcKNw+M80beFFR6E1
-	TPBog61WSdSCxzI2Qpx4+ZpSOQk7yyrOBvbceBd4soP+ROhwJ1XaaC05ebDu5ujz
-	IQK9tfomyc0gKSoFq5rOJpDTwriykwqIWejMZw6WL6NLcfN6Em7QCfeqrmTHj11o
-	1inW6jE1SyRPFDxMk9PoketnvxqpPnBWyGeCyPZS8r4WKTUiU2eDpOFOt15C9VCI
-	3DTDGA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5fw8s51y-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 11:31:43 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d6f80c76e6so47415965ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 04:31:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791372703; x=1791977503; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HmYaoe+lJGtCYKh/EC4wIHB7K0XcNmCPYjiXJ8nhW0A=;
-        b=L2EZ3AREGZkA4Xzp2vQ0Y9QKdHnMk+RbOnQqsoOc448EMJ43CRdljbqOSawhav8PeJ
-         V3zNDfSogeXRNayyociUn5WO2qr7wCD9kLGWsNk3BvymcopjS3aKNczKtefBnaWo8aie
-         ki5InXgDOwko+jDgjbbpSQiVj+N19MXRqb+mtG8o3VqnuZdOmBSu4belJyiMdvvOD6Ac
-         cbjD8LiA502Zsom3T1TGKTq82LxzWXj9WwXLuQDEkb3mfIa+YuJnsnjjKltgQvvuWlbD
-         eVjzm/Pn+u0rh0CuGEz6exKdSfdRIJAkn+c1nirdRJcwYlcgJ3rWvVFwU1xdTKdeoqGL
-         zWow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791372703; x=1791977503;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HmYaoe+lJGtCYKh/EC4wIHB7K0XcNmCPYjiXJ8nhW0A=;
-        b=SYzJoa+ucTAP2PnwLIIXdn7rlPrSwAcxp385mo+XZvvNiCQEVscz5bdNssnBXWl7bh
-         ioYV1phQnCL0I/J1YZL9YVzUGFliEWqlEb54EZ33N47dM7GOmR7VezAWTzkLAYoVO4wc
-         IprZ9trs6cl4L7ejgWDjrfzY7+YR7rsKlCilmSqOEvy3mwu/foc7IHGVAxJ+cydKvKHP
-         zSMpXetk10oEgq9tXvUwVsGj7HQuPwOfBgscT1RiA6gNaNUHfB6LE1thHLRvv+iXMB5t
-         r3RUxjDU/WGA3LiaHvdJlOU+AUNyUkWZdsLQmZqiSPdppVJ7m4b7Kyt6EhiA/hTGkovS
-         mmpg==
-X-Forwarded-Encrypted: i=1; AKwUvBwTlTgrQNf5mG1ehy7kTl+Wzxr8QxepwsTwBFhfDOJiWI0amyRFVM8qJFiBtYkZ8Ch6k/kHtUvcw6uKvVzF@vger.kernel.org
-X-Gm-Message-State: AFq9FYIk3EtQQe9fiDV2YrLKC4eEJPYOhFaHJFtSTWzpERFqzn8nVUDf
-	7CplWM32JQKsIuvyEf7MxYxHZQnd80t6ss/a8qRMWm3ee7e10JNiY4sOiyEDqPIjuk1bMtX1xuA
-	jCDKwEOUPeGQTLCHk0K/S5vpLMIoyRsemCWjyi1Wy1LxrvNm2IUzqZ9zmbjrF8LnQi1Lj
-X-Gm-Gg: AYBFou3DYjT/lvKH+1z/4FwCVL4a5lsoK1syVIyIYphB2L+GUtHLF/UgBMlCrd7gydB
-	Zj5B2NM06Tvvunb43d1y2h2SHoD2cB1Hq+RheeePoARd5ZbpXNTBDocLLv86nCk0Mx7O6JGfmel
-	ldGfDEdItdovBumhmO+WafcC9q8m25A5TLr/sNn1qv/RnOYazqsrC3yID35VFrYcY7TMg659kN0
-	1bZ1hB86PNV1Nsn4h/Ti0otOWXqmt2HwhdvNFQuRPFH+LBCXg9hX2bCfDsfQ7rvBI9bVqOwWRjw
-	R0LF1zM90qSrfpqF3C8G08uhJesZx+2Rc85+J9T+Ged+R/0jGj6x7D3A4kkhabvg+esJM3cND1j
-	pBjM1ZePVsNccEdTjf7VHzyHgMB1uJ5rw0A==
-X-Received: by 2002:a17:902:e74d:b0:2e6:13b1:e196 with SMTP id d9443c01a7336-2e613b1f621mr8732435ad.74.1791372702643;
-        Wed, 07 Oct 2026 04:31:42 -0700 (PDT)
-X-Received: by 2002:a17:902:e74d:b0:2e6:13b1:e196 with SMTP id d9443c01a7336-2e613b1f621mr8732155ad.74.1791372702041;
-        Wed, 07 Oct 2026 04:31:42 -0700 (PDT)
-Received: from hu-bvisredd-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e6046fe0d9sm8388515ad.20.2026.10.07.04.31.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 04:31:41 -0700 (PDT)
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Date: Wed, 07 Oct 2026 17:01:06 +0530
-Subject: [PATCH 2/2] media: qcom: iris: Wait for threaded IRQ completion
- during power-off
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="g6Ig8+eQ"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791372745; x=1822908745;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=jU8W3uTLLilw0+w2z/HfS8+JPAexnPEoxrs7IvvBv/o=;
+  b=g6Ig8+eQ1WBSqETYfhylQtpGhQGBZPVm8ROdgXQrKRU1d+otGHlohCqb
+   903mvd589i6yYmKa/b+lnKkUqhBtLzVs7VYlVIN0YUMXKtecqPf5CHbhB
+   pr/vpVvUs/jNxh1s2xVG7Sd1yA89OJoEn2cYD9nBK/jcNiacyztePFQAE
+   Kv+n8sQdWn2TlN6D6iR8neu9bb6DwkJ9aCBOKG3RUQuiGoZVwsiY91VCy
+   bfKaNjy3AR3Cd/d6AIWYzb46k/3A0+ihzS1onUe3itvmEBq3GwHchnJd/
+   kNELYeA2Lo1iJ/DpEJiJ/OVfGQVh9GoHOObcrl2hLSp8715w5zOapuBHP
+   Q==;
+X-CSE-ConnectionGUID: P96szmPGTvKtTgUXytkbOA==
+X-CSE-MsgGUID: Eu2Dh8eUThO5BdKCdb/sKQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11927"; a="134712"
+X-IronPort-AV: E=Sophos;i="6.27,144,1787036400"; 
+   d="scan'208";a="134712"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Oct 2026 04:32:24 -0700
+X-CSE-ConnectionGUID: F1D4gIqQRIKWj+TCENWYEA==
+X-CSE-MsgGUID: EcBYxUJsQx29EeyrLJa3+w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,144,1787036400"; 
+   d="scan'208";a="33426"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa006.fm.intel.com with ESMTP; 07 Oct 2026 04:32:20 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xEPsf-000000002u4-0w5Q;
+	Wed, 07 Oct 2026 11:32:17 +0000
+Date: Wed, 7 Oct 2026 19:32:15 +0800
+From: kernel test robot <lkp@intel.com>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Wesley Cheng <quic_wcheng@quicinc.com>,
+	Manu Gautam <mgautam@codeaurora.org>,
+	Stephen Boyd <sboyd@kernel.org>, Philipp Zabel <pza@pengutronix.de>
+Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH v5 6/6] phy: qcom: snps-femto-v2: Add IPQ9650 support
+Message-ID: <202610071946.Z4D9aPGU-lkp@intel.com>
+References: <20261006-phy-v5-6-cbe9330a6449@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261007-fix-disable-irq-safely-v1-2-45746f9a92de@oss.qualcomm.com>
-References: <20261007-fix-disable-irq-safely-v1-0-45746f9a92de@oss.qualcomm.com>
-In-Reply-To: <20261007-fix-disable-irq-safely-v1-0-45746f9a92de@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Hungyu Lin <dennylin0707@gmail.com>,
-        Stefan Schmidt <stefan.schmidt@linaro.org>,
-        Hans Verkuil <hverkuil@kernel.org>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-media@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>, stable@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791372685; l=8327;
- i=busanna.reddy@oss.qualcomm.com; s=20260216; h=from:subject:message-id;
- bh=ZMiiaGyDYTCxz97Sz+PlnJpX40AY+IuV2cS3lwByG+o=;
- b=nS5ubLhwDSaEH3cKb1JICyOHeJzyDQQqyrYEnMmFlHEBsO+XsonEGwIZ6pWuu+uXDOlGArcWj
- liq3Uox8McTBxlhGheq2tsmrhsFLB9fwMwEA6vgDf9ZTSOv1yfWIR/S
-X-Developer-Key: i=busanna.reddy@oss.qualcomm.com; a=ed25519;
- pk=9vmy9HahBKVAa+GBFj1yHVbz0ey/ucIs1hrlfx+qtok=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDA0NSBTYWx0ZWRfX3Pj8GfNVhluu
- ad5GG7Fuonnsvg+lWiBq8Q4IHAJdJcHwn6mW0TSA4aoxSBAsXQ7vZb9aquIvOpYe4mh87ejWtPD
- ucU29quBRo+4w2aJxJsu7ENgrkmmnpk=
-X-Proofpoint-ORIG-GUID: bG6P1QlYrjEjcyhpig614CcNSOOBr_UP
-X-Proofpoint-GUID: bG6P1QlYrjEjcyhpig614CcNSOOBr_UP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDA0NSBTYWx0ZWRfX7iLWPFKimobj
- Ul5c4A0C31sBek48uoAvl+OFDRwBgoAK/RG0HGkQCV66283GsBlsjqQX5X30OjS133WrRxmnFAy
- 1p9WuFvQdK5V3NwqfTubpu5gSC4urupx+nmRnDQbIeI+u5IT9mBhhWj1YgoWc3jxeh522lK1pZe
- 637qAsAXlqI/QaHPOQ7tdplrhWkbXzh5dqzyu3NzzVBTk+OEwGZUQFfoWajQKIx4euswmA9j6F5
- EMmIy4Abi5pmvsI52+qjVeZjacv3KEXdgumm3Rmnc+XvvmANWOAdYiEzyJJw5f5ttNA34TOkpzD
- /AWM9Oz9ENnfHQnZRq+WqtiGKi7gJnjyNBfSkLU/wiwD7C54LqQ5i6s56V8sMxlptQjjJOUUXUG
- PmASCYGnAoxOWv9xpOgO0qCbIY8XXE0ukVArDIMWQjWpbeLwEglxCiMJSLu85kXpcNl4PGOFp5O
- M5IZEIWUqTg/f5u+WXQ==
-X-Authority-Analysis: v=2.4 cv=Af0kjHXG c=1 sm=1 tr=0 ts=6ac62d9f cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=m_RbpQ2zxIAPIIsuggwA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-07_04,2026-10-06_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
- adultscore=0 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070045
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261006-phy-v5-6-cbe9330a6449@oss.qualcomm.com>
 
-The VPU power-off path calls disable_irq_nosync() after powering down the
-hardware, allowing a pending threaded IRQ handler to access powered-off
-hardware. Switch to disable_irq() so that any in-flight threaded IRQ
-handler completes before power is removed.
+Hi Varadarajan,
 
-However, disable_irq() waits for the threaded IRQ handler to complete,
-while the handler requires core->lock to proceed. Since the caller of
-iris_vpu_power_off() holds core->lock, calling disable_irq() directly can
-deadlock if the IRQ handler is queued and waiting for the same lock.
-Release core->lock before calling disable_irq() and reacquire it after the
-handler completes. Introduce an irq_disabling flag and waitqueue to
-serialize concurrent power management operations while the core->lock is
-released.
+kernel test robot noticed the following build errors:
 
-Fixes: bb8a95aa038e ("media: iris: implement power management")
-Cc: stable@vger.kernel.org
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
----
- drivers/media/platform/qcom/iris/iris_core.c       | 10 +++++-----
- drivers/media/platform/qcom/iris/iris_core.h       |  5 +++++
- drivers/media/platform/qcom/iris/iris_probe.c      |  9 +++++----
- drivers/media/platform/qcom/iris/iris_resources.c  | 16 ++++++++++++++++
- drivers/media/platform/qcom/iris/iris_resources.h  |  2 ++
- drivers/media/platform/qcom/iris/iris_vpu_common.c | 16 +++++++++++++---
- 6 files changed, 46 insertions(+), 12 deletions(-)
+[auto build test ERROR on 15551282e82db772bfc862f96a8abf14a60f4ea5]
 
-diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-index d558475986ff0..f81fb6d42557d 100644
---- a/drivers/media/platform/qcom/iris/iris_core.c
-+++ b/drivers/media/platform/qcom/iris/iris_core.c
-@@ -17,7 +17,7 @@ void iris_core_deinit(struct iris_core *core)
- 
- 	ret = pm_runtime_resume_and_get(core->dev);
- 
--	mutex_lock(&core->lock);
-+	iris_acquire_core_lock(core);
- 	if (core->state != IRIS_CORE_DEINIT) {
- 		iris_fw_unload(core);
- 
-@@ -27,7 +27,7 @@ void iris_core_deinit(struct iris_core *core)
- 		iris_hfi_queues_deinit(core);
- 		core->state = IRIS_CORE_DEINIT;
- 	}
--	mutex_unlock(&core->lock);
-+	iris_release_core_lock(core);
- 
- 	if (!ret)
- 		pm_runtime_put_sync(core->dev);
-@@ -55,7 +55,7 @@ int iris_core_init(struct iris_core *core)
- 	const struct vpu_ops *vpu_ops = core->iris_platform_data->vpu_ops;
- 	int ret;
- 
--	mutex_lock(&core->lock);
-+	iris_acquire_core_lock(core);
- 	if (core->state == IRIS_CORE_INIT) {
- 		ret = 0;
- 		goto exit;
-@@ -96,7 +96,7 @@ int iris_core_init(struct iris_core *core)
- 	if (ret)
- 		goto error_unload_fw;
- 
--	mutex_unlock(&core->lock);
-+	iris_release_core_lock(core);
- 
- 	return iris_wait_for_system_response(core);
- 
-@@ -109,7 +109,7 @@ int iris_core_init(struct iris_core *core)
- error:
- 	core->state = IRIS_CORE_DEINIT;
- exit:
--	mutex_unlock(&core->lock);
-+	iris_release_core_lock(core);
- 
- 	return ret;
- }
-diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-index 3e4cf652bf39a..0b1b9721e6f9a 100644
---- a/drivers/media/platform/qcom/iris/iris_core.h
-+++ b/drivers/media/platform/qcom/iris/iris_core.h
-@@ -10,6 +10,7 @@
- #include <linux/dma-mapping.h>
- #include <linux/pm_domain.h>
- #include <media/v4l2-device.h>
-+#include <linux/wait.h>
- 
- #include "iris_hfi_common.h"
- #include "iris_hfi_queue.h"
-@@ -70,6 +71,8 @@ struct qcom_ubwc_cfg_data;
-  * @message_queue: shared interface queue to receive responses from firmware
-  * @debug_queue: shared interface queue to receive debug info from firmware
-  * @lock: a lock for this strucure
-+ * @irq_disabling: flag to indicate an IRQ-disable is in-progress
-+ * @irq_disable_waitqueue: waitqueue to wait for the IRQ-disable to complete
-  * @response_packet: a pointer to response packet from fw to driver
-  * @header_id: id of packet header
-  * @packet_id: id of packet
-@@ -116,6 +119,8 @@ struct iris_core {
- 	struct iris_iface_q_info		message_queue;
- 	struct iris_iface_q_info		debug_queue;
- 	struct mutex				lock; /* lock for core related operations */
-+	bool					irq_disabling;
-+	wait_queue_head_t			irq_disable_waitqueue;
- 	u8					*response_packet;
- 	u32					header_id;
- 	u32					packet_id;
-diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index 41dec90f3e2be..d207d5757648c 100644
---- a/drivers/media/platform/qcom/iris/iris_probe.c
-+++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -288,6 +288,7 @@ static int iris_probe(struct platform_device *pdev)
- 
- 	core->state = IRIS_CORE_DEINIT;
- 	mutex_init(&core->lock);
-+	init_waitqueue_head(&core->irq_disable_waitqueue);
- 	init_completion(&core->core_init_done);
- 
- 	core->response_packet = devm_kzalloc(core->dev, IFACEQ_CORE_PKT_SIZE, GFP_KERNEL);
-@@ -379,14 +380,14 @@ static int __maybe_unused iris_pm_suspend(struct device *dev)
- 
- 	core = dev_get_drvdata(dev);
- 
--	mutex_lock(&core->lock);
-+	iris_acquire_core_lock(core);
- 	if (core->state != IRIS_CORE_INIT)
- 		goto exit;
- 
- 	ret = iris_hfi_pm_suspend(core);
- 
- exit:
--	mutex_unlock(&core->lock);
-+	iris_release_core_lock(core);
- 
- 	return ret;
- }
-@@ -398,7 +399,7 @@ static int __maybe_unused iris_pm_resume(struct device *dev)
- 
- 	core = dev_get_drvdata(dev);
- 
--	mutex_lock(&core->lock);
-+	iris_acquire_core_lock(core);
- 	if (core->state != IRIS_CORE_INIT)
- 		goto exit;
- 
-@@ -406,7 +407,7 @@ static int __maybe_unused iris_pm_resume(struct device *dev)
- 	pm_runtime_mark_last_busy(core->dev);
- 
- exit:
--	mutex_unlock(&core->lock);
-+	iris_release_core_lock(core);
- 
- 	return ret;
- }
-diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
-index 883ef7e752915..6c92857a6b8eb 100644
---- a/drivers/media/platform/qcom/iris/iris_resources.c
-+++ b/drivers/media/platform/qcom/iris/iris_resources.c
-@@ -16,6 +16,22 @@
- 
- #define BW_THRESHOLD 50000
- 
-+void iris_acquire_core_lock(struct iris_core *core)
-+{
-+	mutex_lock(&core->lock);
-+
-+	while (READ_ONCE(core->irq_disabling)) {
-+		mutex_unlock(&core->lock);
-+		wait_event(core->irq_disable_waitqueue, !READ_ONCE(core->irq_disabling));
-+		mutex_lock(&core->lock);
-+	}
-+}
-+
-+void iris_release_core_lock(struct iris_core *core)
-+{
-+	mutex_unlock(&core->lock);
-+}
-+
- int iris_set_icc_bw(struct iris_core *core, unsigned long icc_bw)
- {
- 	u32 icc_ib_multiplier = core->iris_platform_data->icc_ib_multiplier;
-diff --git a/drivers/media/platform/qcom/iris/iris_resources.h b/drivers/media/platform/qcom/iris/iris_resources.h
-index 6bfbd2dc6db09..6e1a5e734925f 100644
---- a/drivers/media/platform/qcom/iris/iris_resources.h
-+++ b/drivers/media/platform/qcom/iris/iris_resources.h
-@@ -8,6 +8,8 @@
- 
- struct iris_core;
- 
-+void iris_acquire_core_lock(struct iris_core *core);
-+void iris_release_core_lock(struct iris_core *core);
- int iris_opp_set_rate(struct device *dev, unsigned long freq);
- int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev);
- int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev);
-diff --git a/drivers/media/platform/qcom/iris/iris_vpu_common.c b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-index 1e183fc4e58ce..fcf060a72c4cf 100644
---- a/drivers/media/platform/qcom/iris/iris_vpu_common.c
-+++ b/drivers/media/platform/qcom/iris/iris_vpu_common.c
-@@ -232,15 +232,25 @@ void iris_vpu_power_off_hw(struct iris_core *core)
- 	iris_disable_power_domains(core, core->pmdomain_tbl->pd_devs[IRIS_HW_POWER_DOMAIN]);
- }
- 
-+static void iris_vpu_disable_irq(struct iris_core *core)
-+{
-+	WRITE_ONCE(core->irq_disabling, true);
-+	mutex_unlock(&core->lock);
-+	disable_irq(core->irq);
-+	mutex_lock(&core->lock);
-+	WRITE_ONCE(core->irq_disabling, false);
-+	wake_up_all(&core->irq_disable_waitqueue);
-+}
-+
- void iris_vpu_power_off(struct iris_core *core)
- {
-+	if (!iris_vpu_watchdog(core, core->intr_status))
-+		iris_vpu_disable_irq(core);
-+
- 	iris_opp_set_rate(core->dev, 0);
- 	core->iris_platform_data->vpu_ops->power_off_hw(core);
- 	core->iris_platform_data->vpu_ops->power_off_controller(core);
- 	iris_unset_icc_bw(core);
--
--	if (!iris_vpu_watchdog(core, core->intr_status))
--		disable_irq_nosync(core->irq);
- }
- 
- int iris_vpu_power_on_controller(struct iris_core *core)
+url:    https://github.com/intel-lab-lkp/linux/commits/Varadarajan-Narayanan/dt-bindings-phy-qcom-qmp-usb-Add-IPQ9650-USB3-PHY/20261006-105915
+base:   15551282e82db772bfc862f96a8abf14a60f4ea5
+patch link:    https://lore.kernel.org/r/20261006-phy-v5-6-cbe9330a6449%40oss.qualcomm.com
+patch subject: [PATCH v5 6/6] phy: qcom: snps-femto-v2: Add IPQ9650 support
+config: i386-buildonly-randconfig-1003-20261007 (https://download.01.org/0day-ci/archive/20261007/202610071946.Z4D9aPGU-lkp@intel.com/config)
+compiler: gcc-13 (Debian 13.3.0-16) 13.3.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261007/202610071946.Z4D9aPGU-lkp@intel.com/reproduce)
 
--- 
-2.34.1
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610071946.Z4D9aPGU-lkp@intel.com/
 
+All errors (new ones prefixed by >>):
+
+>> drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:39:49: error: implicit declaration of function 'FIELD_PREP_CONST' [-Werror=implicit-function-declaration]
+      39 | #define FSEL_24MHZ                              FIELD_PREP_CONST(FSEL_MASK, 2)
+         |                                                 ^~~~~~~~~~~~~~~~
+   drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:449:60: note: in expansion of macro 'FSEL_24MHZ'
+     449 |         { USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, FSEL_24MHZ },
+         |                                                            ^~~~~~~~~~
+>> drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:39:49: error: initializer element is not constant
+      39 | #define FSEL_24MHZ                              FIELD_PREP_CONST(FSEL_MASK, 2)
+         |                                                 ^~~~~~~~~~~~~~~~
+   drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:449:60: note: in expansion of macro 'FSEL_24MHZ'
+     449 |         { USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, FSEL_24MHZ },
+         |                                                            ^~~~~~~~~~
+   drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:39:49: note: (near initialization for 'hs_6nm_phy_pre_tuning[3].val')
+      39 | #define FSEL_24MHZ                              FIELD_PREP_CONST(FSEL_MASK, 2)
+         |                                                 ^~~~~~~~~~~~~~~~
+   drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c:449:60: note: in expansion of macro 'FSEL_24MHZ'
+     449 |         { USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, FSEL_24MHZ },
+         |                                                            ^~~~~~~~~~
+   cc1: some warnings being treated as errors
+
+
+vim +/FIELD_PREP_CONST +39 drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
+
+    33	
+    34	#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0	(0x54)
+    35	#define SIDDQ					BIT(2)
+    36	#define RETENABLEN				BIT(3)
+    37	#define FSEL_MASK				GENMASK(6, 4)
+    38	#define FSEL_DEFAULT				(0x3 << 4)
+  > 39	#define FSEL_24MHZ				FIELD_PREP_CONST(FSEL_MASK, 2)
+    40	#define VATESTENB_MASK				GENMASK(1, 0)
+    41	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
