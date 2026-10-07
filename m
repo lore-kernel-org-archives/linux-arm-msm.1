@@ -1,150 +1,152 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D5474A4858
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 12:54:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B63CB416873;
+	Wed,  7 Oct 2026 12:56:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791377686; cv=none; b=S6xUO3navFJ64wwqBNQ+JKiP6OCEsqjNR5dRDE9O7mJtPBXVx87pX0wVWCtNeh5oSJNkCpqqQq9WsfmPykEo9CWZ9lZ1rdd+HCtrII3DM/I7hwU3UcQE2LHhR7lc/Q3JOzDXI3aHt+Jl6GYiRiJNyhpsirlOuDdGIHK9sVZgiN0=
+	t=1791377794; cv=none; b=oafVYpUcaI/LuxJQ5ExDlIAy9At+95fz2FLvPwfUCxJ1wpxgU1tHY49FXGCyNzxy/XA6/uSgenuGgwKMSPITzZnp/hxZxDYSTnqSVUWDfjFOZ9PsUMTGjKF+OafOnzuenljZIG3MXYQcKu03cNYC63203XIc2k/YYZreDTXJIdM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791377686; c=relaxed/simple;
-	bh=dXlEoLZn8xIfnNC7jxrPUVl7m9FtX0nbVYNpExtd+WE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=r01EUr1A94kIchH1f1qUzXbizUdjyWcWBTpjjYnbVbMwbl2hxXGOPilE+7ULuMjrTDUcZlCsDYUl84iQtZqtZmwR5KJsBLTEx+BBP1b0ZHS0t8XyzujgAGCcje2704vYzKJyEt/iz5pf0kwS7qEIPVqxz4upnslSRYk4tWZWBSA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=VHnPLwpy; arc=none smtp.client-ip=209.85.167.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1791377794; c=relaxed/simple;
+	bh=Wc8IB0edWVGgQ80Cx3uFojUV4Vhr/RFS1m7KR7vHpmE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=qbYcEIDCs+3jWyEIxlJZzDkrAkebtIl4tTyPX7RcAagzxPOlEOTk0i8iUNFe+BSHBpbee4FW84M5a2aqRAGHFQ/omWvVhQOTf9z5i5s4Ms0Av/9IcTJB3278lr7ZpjuSci/VDSkypmDl1hvhK1Xvfd2fcuK/QNw/hfxyzXRcj3g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OKziODL0; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="VHnPLwpy"
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5bad794b197so1828930e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:54:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1791377669; x=1791982469; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=R+rvRY3MxyDDJlHyGuP46Q73CKubNnzJd6vSmt+6L74=;
-        b=VHnPLwpyK4+g0fPQEELGlQkHgobyUEjFVcnpMd6FUn2Ksr8IQ9SxnbxQa6NNLSiAjb
-         v5S1p+gPoXfw5SsjfC6eCvJ5RORK97KdQcF35JtNlin48I7sCGUqfJn68VUoEaN1tGEv
-         PTPL5WZaSYp85fo2kr8X+FAjG8nrN9UaeG+Xg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791377669; x=1791982469;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=R+rvRY3MxyDDJlHyGuP46Q73CKubNnzJd6vSmt+6L74=;
-        b=aKMpdKfCWxKrXZQEuK0FwiRtTGSUZTJMv6nJByJL38426OBDjmjSIC1YRRr8YO4Lwd
-         VG5D5lZMjr4jluH75g9AI9wGPPHZtxZ7W0TD9n8LyHCSew8T5XBE7dF0JCZHtiqfv3u6
-         vpT2bXUpH/mUYkvM8ZJPkeE1kHUPF/Uu0CWEzpJku/EJLEmy3snxYdPz7iA6O7GD9Wrj
-         aShCz58NovWDCVT4x5s1sT+kasvmTotvAXblB2JqRg7kOKevPxJCjAjw+CIayL1mlhFx
-         Hl+TNma1qQD+d4sywfLcS3U/zkif9MZRGivw7Jg89qPygd5XZEDpy0cNBTXaSH9j4wM2
-         ktNA==
-X-Forwarded-Encrypted: i=1; AKwUvBxJYE7aGmfLFfNwbdz1BQQpeZ9Ic2K1LHqTvaoAQPNFtsoOJqJyYM9EHYTzohagNqcHPz7WqQO0U+pF8JKc@vger.kernel.org
-X-Gm-Message-State: AFq9FYI2Wp0lUqOhzzP5x6+ZKZ1zo9wZOGsamcS/yqhvrYx7D5e3z6Je
-	KyA89pOTYWvnb82FnEhsVCwjWfdv16+XnTaNpS/aMV88qdiD89mYdG5ETUAZlfjJ5xSJzonAEUw
-	nIm5rtw==
-X-Gm-Gg: AYBFou1gF4TRnzmFz1cQ/nNgrKwiriPYEFq1F/063WkrvZCXtjzCB184edtoAokMyTh
-	bTEo96jQIX5bvc75W6heHkCee8KvvdGAApK3eY0LnrDsj+zMbNSyY5ZaICydrh2rgyptoXCUp/2
-	XO3xT11h+Vp0enQu0nOIkfdDFEt8ax75avteCxYQ95mDItC6LOTlEMMk908A7bu7BUw6ZjZ9p7X
-	96k1bMynkB4CYhPD59DFl5ckqL42z7C60tL+2KyTd7o2dioRmcGUdh0clHetC/W7ye47+bosWWv
-	kn9j0kO6A5crliWC+pn705hqe3TxTSZFZ1C0kXFHyJjodMjFfexf2FtfDY1aOnszL9ov7xZTIg1
-	xnFIbcI1TY7RMuSZ9KAaJBhLaiWn/aDd5WPstz12zyneFTxBbYeocX9S4uQ/o4fxnoM9nbLwznT
-	fFQnLqRe3wF3vGURwQnEnfpp4nONidONNaX9tI16WWGqsEFGDYkCHfu9rspv5Qh3mFSAhvewWsM
-	S978CYuJader8T5EI5PWir3famXtyXYVsVXNw==
-X-Received: by 2002:a05:6512:250e:b0:5b8:f960:1bd8 with SMTP id 2adb3069b0e04-5bcd0748b2amr740825e87.61.1791377668959;
-        Wed, 07 Oct 2026 05:54:28 -0700 (PDT)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com. [209.85.167.52])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcd30833ddsm7431e87.44.2026.10.07.05.54.26
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Oct 2026 05:54:28 -0700 (PDT)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5bad794b197so1828857e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:54:26 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxQxd5gawGxktnJ6anas5X6ThbEEtHlUuxanThd0qv0VkJU8qrJ6IhveZoARqTT8AmTmwRA5Txnw+0Id3JN@vger.kernel.org
-X-Received: by 2002:a05:6512:b83:b0:5bc:a9f9:b649 with SMTP id
- 2adb3069b0e04-5bcd06e8b11mr798936e87.31.1791377665307; Wed, 07 Oct 2026
- 05:54:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OKziODL0"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 697BV9rf3687353;
+	Wed, 7 Oct 2026 12:55:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	OlKUE9ylFAD8NCtlw73fnFqtcH/esRsqk0VoFtGwfZs=; b=OKziODL0My/UpEjN
+	BCenq4ulv/GAwdbHpi2n0DBdClNwKOZ7zdt2iiF3KK6S+jaEQW59HqgdCemh7kvG
+	eqRtlzbRbYix0GhRYsU75VKCPdbyNd+hEeJVbQ6dPvuuB2jz0RC9X6Apw68VNXdN
+	ZbX38llQXko/HXRDqMObhlEitjdd6mHV/izvfIpPaz8YKlFXArkuaybHcHYTo6qr
+	3xKB8K6CRturB60GRz5oAzaBMaGkUu8vsKQ+4JI33R/415G7E0RFLYpAEcJXXygo
+	k1FT0mbdhwdody+vPKYk4cplFYTQlYPeZyvWkWosLn0kTRlFOmtHOJSzYF4/24br
+	LqRLYA==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5mgr8ffh-13
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 07 Oct 2026 12:55:57 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69776nGU1872895;
+	Wed, 7 Oct 2026 07:06:49 GMT
+Received: from hu-ffaruque-hyd.qualcomm.com (hu-ffaruque-hyd.qualcomm.com [10.147.245.31])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTP id 69776m1r1872875;
+	Wed, 07 Oct 2026 07:06:49 +0000 (GMT)
+From: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Date: Wed, 07 Oct 2026 12:36:36 +0530
+Subject: [PATCH v16 1/6] power: Extend power_on_reason.h for upcoming PSCRR
+ framework
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261006-mahua-surface-laptop-v1-0-406fc042162a@oss.qualcomm.com> <20261006-mahua-surface-laptop-v1-4-406fc042162a@oss.qualcomm.com>
-In-Reply-To: <20261006-mahua-surface-laptop-v1-4-406fc042162a@oss.qualcomm.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 7 Oct 2026 05:54:12 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=Vh-GRYtuGM+By9BfpO4X7skp9QOYeHRj7Rzc_tgQ0KEA@mail.gmail.com>
-X-Gm-Features: AclHuK-ILqIUiSWOn4shaOpkE4nC07lDEACeQZtcv49rxdfgv5oCmNXTTOAhHtk
-Message-ID: <CAD=FV=Vh-GRYtuGM+By9BfpO4X7skp9QOYeHRj7Rzc_tgQ0KEA@mail.gmail.com>
-Subject: Re: [PATCH 4/5] drm/panel-edp: Add Sharp LQ138P1JX61 (Surface Laptop
- 8th Ed.)
-To: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Maximilian Luz <luzmaximilian@gmail.com>, Hans de Goede <hansg@kernel.org>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Pankaj Patil <pankaj.patil@oss.qualcomm.com>, 
-	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	platform-driver-x86@vger.kernel.org, dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261007-pscrr-framework-v16-1-3642c277bebb@oss.qualcomm.com>
+References: <20261007-pscrr-framework-v16-0-3642c277bebb@oss.qualcomm.com>
+In-Reply-To: <20261007-pscrr-framework-v16-0-3642c277bebb@oss.qualcomm.com>
+To: Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Guenter Roeck <groeck@chromium.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Matti Vaittinen <mazziesaccount@gmail.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>,
+        Ulf Hansson <ulfh@kernel.org>,
+        Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+        Sebastian Reichel <sebastian.reichel@collabora.com>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDA1MSBTYWx0ZWRfX3oxSvWMz6kTp
+ +ZPf11W64awXyARBDXTWn1X4gh0H3K5PwIusu3mBI0N3QcHJXTfVQnMeIoctXp5D7KCRfPctGta
+ EZymNGnGM7pOagmEiuQxDcqYngTdVqdIqOHF239I/eeukCKC2F2dMyxL+iR4CptC4Wo7v2ZaD2v
+ Y9szHAxYELUz/EOZRFEU0ARvvPLJ3kyIoPxFKRVooFzAIonVaqPZaCb53HazLzISDqIxJhc7XPL
+ xmLOuSpgJB3yTXxkRaGvFOuNOTgeJ0dm7L3SNh64pKIH0jT6ycQKNTJMlqK4MUUiVsj6/FuSRr4
+ TZs0vvBHRKdD5GFB0ODE4zyj5UIFAmzjNebu+IkCdKNGae/NaWn+aZExryZSRqqVhtU1acl0KCT
+ MrfJLGqC2iSnpE6AHQbYXb/eBZY5ZmU4n1dmizrpOq9tR19AI1BhVY0a7zEt1iwvvXBJMp85gCb
+ 7K33b528gv1d5UTO7bg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDA1MSBTYWx0ZWRfXxqcDGBbLppGK
+ xcjya6kSr3lgbl5CdXk0Wk3h9yGz4WLYYO7G4YHurOo7O1S45+aC4HSr7vni9of1PZ8ie8IxnGH
+ eZZ+wggG48rHDYUp/2hP6ymhheLvHf4=
+X-Proofpoint-ORIG-GUID: tjQEDfzAdyoBBiJknVG1ixBHvfS4U1qA
+X-Proofpoint-GUID: tjQEDfzAdyoBBiJknVG1ixBHvfS4U1qA
+X-Authority-Analysis: v=2.4 cv=OYkNnRTY c=1 sm=1 tr=0 ts=6ac6415d cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=QX4gbG5DAAAA:8
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=7kjejDXy1mYeYQkWB3oA:9 a=QEXdDO2ut3YA:10
+ a=AbAUZ8qAyYyZVLSsDulk:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-07_04,2026-10-06_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 clxscore=1015 spamscore=0 phishscore=0
+ bulkscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070051
 
-Hi,
+Prepare for the introduction of the Power State Change Reason Recorder
+(PSCRR) framework by expanding the power_on_reason.h header. This
+extension includes new power-on reasons:
+- POWER_ON_REASON_OVER_CURRENT for over-current conditions.
+- POWER_ON_REASON_REGULATOR_FAILURE for regulator failures.
+- POWER_ON_REASON_OVER_TEMPERATURE for over temperature situations.
+- POWER_ON_REASON_EC_PANIC for EC panics.
+- POWER_ON_REASON_EXTERNAL for an external reset source.
 
-On Tue, Oct 6, 2026 at 2:50=E2=80=AFAM Gopikrishna Garmidi
-<gopikrishna.garmidi@oss.qualcomm.com> wrote:
->
-> The internal eDP panel of the Microsoft Surface Laptop 13.8" 8th Edition
-> is not in edp_panels[], so panel-edp falls back to conservative timings.
->
-> EDID, read over the panel's DP AUX DDC bus:
->
->   00 ff ff ff ff ff ff 00 4d 10 72 15 a1 31 05 54
->   31 23 01 04 b5 1d 13 78 03 7d 77 ad 50 46 ad 26
->   0f 50 53 00 00 00 01 01 01 01 01 01 01 01 01 01
->   01 01 01 01 01 01 60 b6 00 a0 90 00 2b 60 30 20
->   3a 00 23 c2 10 00 00 18 60 b6 00 a0 90 00 56 66
->   30 20 3a 00 23 c2 10 00 00 18 00 00 00 fd 00 18
->   78 be be 2f 01 00 00 00 00 00 00 00 00 00 00 fc
->   00 4c 51 31 33 38 50 31 4a 58 36 31 0a 20 01 4e
->
->   02 03 0f 00 e3 05 80 00 e6 06 05 01 73 6a 0b 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 aa
->
->   Manufacturer: SHP
->   Model: 0x1572
->   Made in: week 49 of 2025
->   Display Product Name: 'LQ138P1JX61'
->   DTD 1: 2304x1536 120.000329 Hz 3:2 (291 mm x 194 mm)
->   DTD 2: 2304x1536  60.000164 Hz 3:2 (291 mm x 194 mm)
->
-> No datasheet is available, so use delay_200_500_e200: it keeps the
-> 200 ms enable delay of the conservative fallback, but uses the 500 ms
-> unprepare delay of the real panels in the table. This matches the entry
-> for the closely related Sharp LQ120P1JX51 (SHP 0x15a7).
->
-> Assisted-by: LLM
-> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-> ---
->  drivers/gpu/drm/panel/panel-edp.c | 1 +
->  1 file changed, 1 insertion(+)
+Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
+Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+Reviewed-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+Reviewed-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
 
-Reviewed-by: Douglas Anderson <dianders@chromium.org>
+changes v12:
+- add POWER_ON_REASON_EXTERNAL
+changes v10:
+- add Reviewed-by: Sebastian Reichel ...
+changes v6:
+- add POWER_ON_REASON_EC_PANIC
+- s/POWER_ON_REASON_OVERTEMPERATURE/POWER_ON_REASON_OVER_TEMPERATURE
+---
+ include/linux/power/power_on_reason.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Pushed to drm-misc-next:
+diff --git a/include/linux/power/power_on_reason.h b/include/linux/power/power_on_reason.h
+index 95a1ec0c403c..13e61ace14f5 100644
+--- a/include/linux/power/power_on_reason.h
++++ b/include/linux/power/power_on_reason.h
+@@ -15,5 +15,10 @@
+ #define POWER_ON_REASON_XTAL_FAIL "crystal oscillator failure"
+ #define POWER_ON_REASON_BROWN_OUT "brown-out reset"
+ #define POWER_ON_REASON_UNKNOWN "unknown reason"
++#define POWER_ON_REASON_OVER_CURRENT "over current"
++#define POWER_ON_REASON_REGULATOR_FAILURE "regulator failure"
++#define POWER_ON_REASON_OVER_TEMPERATURE "over temperature"
++#define POWER_ON_REASON_EC_PANIC "EC panic"
++#define POWER_ON_REASON_EXTERNAL "external reset"
+ 
+ #endif /* POWER_ON_REASON_H */
 
-[4/5] drm/panel-edp: Add Sharp LQ138P1JX61 (Surface Laptop 8th Ed.)
-      commit: 7cf88d0a3f5324eb44c2ae9840568adb2374ec10
+-- 
+2.34.1
+
