@@ -1,80 +1,76 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A384449B5DD
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 12:39:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B2E23BF66B
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 12:40:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791376804; cv=none; b=oVCx2s/f5IGvVIUURovTRHpXDjvje/z/yqG3py/N/vRWAog1GftXE4Zqd2aBuRSu1ojvE4r09uunglJ1UfX8g2yVw/voHw+AtnKtJVSZpUhVaAnOYMgmlXLTQYc2pTU9b8uJ2S9sVieLTGCMULK0QvUoSrAhHIQczNIpOv7kxT4=
+	t=1791376810; cv=none; b=cddmEmWLe8zW0f1EJj6t9C74wM089046XBA74eT11b5efq8xJQI5cWlgXab68RVduvec7Oy8HKg9uF+gQUJMpTV9jjb0o8HtcTlYju1ztZ2raBEPkOUKBcNQFQw+cba6Hit5n+d6tcy9cRrkxupK1Bzs64D8loPpX6s7B7TMEPQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791376804; c=relaxed/simple;
-	bh=f1QPQMmCEelKhv5EyxV/k3MVaSi11TvWPJBnLsxaEKY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HWXgjMoxIGC6EhgxiX9Oz06S7HOmt06Xzv3VNqld+jxubnIIfFAjXYfAHdEKsPxD2ALlXXAL5HQviXPFM15ZpidjqHJeLfhzzJgCMpVGpCw5pf7dIhAVc0UZ8uUI3UOnPVedafygy95GDVj4EyDuTKFHgLlQzwOfPy2ZR7Kj0CQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EiUCCY9G; arc=none smtp.client-ip=209.85.215.176
+	s=arc-20240116; t=1791376810; c=relaxed/simple;
+	bh=q5kb3Slwlwc0fl/bNQMM1k/M/9pq7+Hr3X7DDfLNjqc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iSB2fWkxZvWGwZz+6Zb3TdWW6KeJptB0SHg8cjsHOjOv8xB85csRqZppnk9znXYM5oDShORYRNMLNYLqjFogz/1hdxcadvvcZDtOFS25w7GigNcaCtF8JZ1SGgiu1AfnxD7tyt/zLcAdrSJJP4bIqFlxIAweM4uxPoQ4BGgcLoI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=syvFYw9Z; arc=none smtp.client-ip=209.85.216.54
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EiUCCY9G"
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-ca766c1c9ccso767159a12.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:39:54 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="syvFYw9Z"
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3a4d455ace3so1924930a91.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:40:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791376794; x=1791981594; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791376800; x=1791981600; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=stbPCEVKk5/43mdbhizGdpTlS+biXo1nBfE8ir7ZWR8=;
-        b=EiUCCY9Gp8O8xmWkPfUNRbNOaTl9mUK3y7cZSARDKU9wkmOsL7npc81T849XBC/qyR
-         R7s4re/SufA3OWTDWLqYzGMRcem9NDyc5yuXmXPEuIvFZlJwx6VitEVyM4VJf16XTTFs
-         g5lygdZhiyBX1H5G6mRPcuGrIaTxgZuEyaS7FRLo7bM2+gk3LIg/e3e0SLDXtU+qOBGY
-         7qYi1nD9r8j8FLyruflv1Oa8C1DZaY80er6nA6LzswCOAUCjFILc59oLhKxBrOSrFr//
-         RbZjGhnnjghIQtu3YuFHbuppbMHIZonrhhDu5xENXhMjtPtN7Tne+uFX8PA/VpA9SzLd
-         GMbw==
+        bh=PEY2dZJ0SUaUF0e5EfY3TFLbxPMert/9sV2HdEJuzdI=;
+        b=syvFYw9ZvuALriDoaQZSQAxJnPQiHakNLvlmvI1PrTFI+RDd7QghXnIHDROdX37hv8
+         nFrnaA8iCKtcjHKzYL8cEiSMoeGJgJ7WHenh5myLPXMch9HyKQDSmWdo71FgNnti2Ocu
+         q8WGAuQWOL1zy9YqCxtFw4OB5+UZ2ckPe+0UhhdRuTyHGhQD9Obn1QuaRL5FXfpZlNub
+         yE7zL9gWhPgKZ0SAAzg9a/akevgDuNSHOrHA8SeATw943YjChnNuNqFsNDfMAAtYkjqG
+         hfHJdnVZR+f4VIY5wQL37UZIi4jt/PUbDkVoCZFlIFiwkNTsjPwMVBOLoqy+KWv37QAo
+         5cSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791376794; x=1791981594;
+        d=1e100.net; s=20260707; t=1791376800; x=1791981600;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=stbPCEVKk5/43mdbhizGdpTlS+biXo1nBfE8ir7ZWR8=;
-        b=t997bx2Tqcr2WmyQ0hRS5W9kF3QjJvOJFgpBSBFSE8IQ0P+O04KPb8vdVscuvVYZYg
-         mNehZ91Qh7EZxY6AFoxZ9pD4agTxs/6FPv5CcAbq2xD610LMOhVzMzvE2+u3dhA6dRpb
-         50M6jCub04MY2SPc8Cq1Su0Y7wNszyhe9wnooL2LXICZtrbywYoEKih8byiLkEl6nADQ
-         j1EILah1xDeT27TchPNIGTKjXMKkkYYypr+vr8vMzEzS0C19UDxsze7Xt/pmrXpwKn5z
-         mv8b7QPbeQPksrf3oXhKL97V4z3M26vhuCxqgdaNI/wM0YCAk/waK7cqHMaPxJ5i7SAg
-         yecw==
-X-Forwarded-Encrypted: i=1; AKwUvBwwEAm5FgphlKu98w8ivbp9JeP2ggUdsu1R3PuHDCBdX28Inm1LVvkfC64j4+JoD6epPjI/HHbatn0i6izz@vger.kernel.org
-X-Gm-Message-State: AFq9FYKnnCy3KjV0/vQNl1WCievPH2KCX8uQh2wwYiM30K+bT/vjfeqI
-	dT3IwjmopJvDgRCCwhF74M0ESWM5kxyL2wMPnX6FaJswoOwV8+lGFpRQ
-X-Gm-Gg: AYBFou0F8PdyOU9mEyDmRWTfIt0MVfiUUaOxxbOlxGJ/szLQw3TuF6OkCY1hj+JaZkK
-	J70G47MFFB9hlKpVpg1Qfd2e7nHVtW0ydhGIYV/CDbGsk8hL7UgXFnfLjul7k8bCuyl2ovtqc/g
-	d2jPIVlGHc69Dqhx0yxJWsG3c9r/H+Q4MQ8Txd/a3EDSldd7WEhuII7d1NN71KSkHv2F/+uP+0l
-	88FbNd278VTcjyrIPM4WI5r8sl5NdiYX/kBFn7q3Opmm5C3wK1q+yrt/vQPbyq7P/8Mb1KsFeqj
-	QoPb6EtLvqxBaEkhzO/yNFiAynNc677XKJ4abpF37XMEERVeFR/qcB4/TzsTfyyC6za/0tUO/1e
-	oJ5ubN9Vdqwx+hJFRNbgnP84Ghd8j/Lk7afTYwL3h0F1xVQ2inTnCasgCD3WusKzssQHA5HEstN
-	qvbUua5BVtu1mEBVV0CxXkHLZJHdXvdr+OSatqyE+mb4zxIjNyk/7XbyqKgeJKMYXzFQSbdRNAB
-	dZrFwbFdkedgvQ=
-X-Received: by 2002:a17:90a:da84:b0:3a0:cbe2:9e0c with SMTP id 98e67ed59e1d1-3a8a1c84418mr1597807a91.63.1791376793729;
-        Wed, 07 Oct 2026 05:39:53 -0700 (PDT)
+        bh=PEY2dZJ0SUaUF0e5EfY3TFLbxPMert/9sV2HdEJuzdI=;
+        b=KGPnE962PcxgL0pBxaOZ8I2eFSGOOCSoXzpVelEmeEK5KRpcemfv8cAQ8cexbjyVM+
+         GBN+dfioHBOQG9t6BAiy2krrvqJXXAr/0AYrKGatZ3iA3y7iji5o22gf4q8U8s9guWPZ
+         rfo38W1oDgARwdvDX04qABsB6Gna4O9CG6CT4bGlDBOodT57euXfNvdjS3CMoP/RAYXe
+         iRCwxXizh0N6gjuwLLzJMQHMzIZZLlv73+392+ORVZ69AaP9kImKEBNdY8JeyJg7ZIsQ
+         rd71zl9UYIxrJf8jpCj/MuRkSGEkUw4tLq0tZDU5zGn2rXlgpvf68MAVu4GZvtxy9xnf
+         6pDQ==
+X-Forwarded-Encrypted: i=1; AKwUvByp7N113kUrKNLgMPHYkizG/DJ7sfAqhoDWi8nS0DBzyHgFYIbp71otzZ+GfuHl+QyP8FMJwHnq53GmkmP9@vger.kernel.org
+X-Gm-Message-State: AFq9FYLsGv3laO6CBx6tbhtmyzjhYFe+GdXJL6PNDP4lEw+Jtpr2NknI
+	xOFAsdN7wmgbOq0OslLrbFvzc6+bEzOm0w1cV138TCiynQ5Uq1t0ZOgB
+X-Gm-Gg: AYBFou0L7NhS9IFc/feviQFIsZIWHuEiD51cwJi1j094HnS/4irH7DwRRLAOKmqa7AG
+	QIUmDDklQNKmBb0PoNJ4twxVmPp0qSjrDqphSD7Azuv8VZsFkPR+dLMR4lqRDmgZUS99GFP/zCd
+	P/LTEK5N9fxidB0mzlyatLROijms2lPyrjw3ovSGpm8cObd/DdHSvNLaOwdHWxfU85z+kB/Jl/W
+	5iXDQBdefR36gjUwNg9VFKdRMcVrJo88Zq5Ztd2pmd9/LHwl+w+kniqA4aJV1kBFMAh17gt3rLS
+	2Non+tekoIU9Aq3V8RV6SfB00yQ2HjfQj3rCa+wSyHFtp+1aKXs5djGNOzvM3QlPVKgW+btJm8I
+	FQ3/rs7dxFLrf5zSOqtCN++grvd6sILMug7N/ySC9Q23+jyTGspOaVVaRK7pY9CXNy8hLCsUCeM
+	/KM3zYCshZ/oC21B4V6wAFUZ9n+TunEloXaZjIt2N+aWKVWA1AmeEOtbb6NT4cVm44jiJ19pzbw
+	BRDqMRZmsJrxg==
+X-Received: by 2002:a17:90b:3147:b0:39d:f4a8:75ef with SMTP id 98e67ed59e1d1-3a89f649784mr1968180a91.1.1791376800333;
+        Wed, 07 Oct 2026 05:40:00 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8c46a2f9bsm650899a91.2.2026.10.07.05.39.47
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a85436a39dsm10087459a91.9.2026.10.07.05.39.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 05:39:53 -0700 (PDT)
+        Wed, 07 Oct 2026 05:39:59 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
-To: robin.clark@oss.qualcomm.com,
-	lumag@kernel.org
-Cc: abhinav.kumar@linux.dev,
-	jesszhan0024@gmail.com,
-	sean@poorly.run,
-	marijn.suijten@somainline.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
-	yongxing.mou@oss.qualcomm.com,
-	yuanjie.yang@oss.qualcomm.com,
+To: srini@kernel.org,
+	broonie@kernel.org,
+	lgirdwood@gmail.com
+Cc: perex@perex.cz,
+	tiwai@suse.com,
+	neil.armstrong@linaro.org,
+	jonathan@marek.ca,
+	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] drm/msm/dpu: add the SSPP rec0/rec1 blocks to the snapshot
-Date: Wed,  7 Oct 2026 21:39:45 +0900
-Message-ID: <20261007123945.1694-1-26rote@gmail.com>
+Subject: [PATCH] ASoC: codecs: wcd939x: read the SoundWire port switches per channel
+Date: Wed,  7 Oct 2026 21:39:54 +0900
+Message-ID: <20261007123954.1709-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -84,50 +80,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On DPU 13 the SSPP block is only 0x84 long and the fetch registers
-(source address, size, format, multirect) live in the rec0/rec1
-sub-blocks at 0x1000 and 0x3000. The snapshot dumps the SSPP block and
-its scaler and CSC sub-blocks, but not rec0/rec1, so the plane fetch
-state is missing from the devcoredump and from debugfs dri/N/kms.
+The "HPHL/HPHR", "ADCn" and "DMICn" switches are channels of shared
+SoundWire ports (ADC1-4 are channels 0-3 of the ADC_1_4 port), but
+wcd939x_get_swr_port() reports a per-port flag. Once one channel of a
+port is switched on, every switch on that port reads back as on:
 
-Add the rec0/rec1 sub-blocks to the snapshot.
+  amixer cset name='ADC1 Switch' on   -> ADC1..ADC4 Switch all read "on"
 
-Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850).
+Setting one of the others then looks like a no-op to userspace, and
+"alsactl store" saves all of them as on, so a later "alsactl restore"
+really enables the unused channels of the port.
 
-Fixes: 688c7734002a ("drm/msm/dpu: Add Kaanapali SSPP sub-block support")
+Read the channel's own bit in the port's channel mask instead, drop the
+now unused port_enable[] and return 0 from the put handler when the
+switch does not change, as ALSA expects.
+
+Fixes: 10f514bd172a ("ASoC: codecs: Add WCD939x Codec driver")
+Link: https://lore.kernel.org/all/20251124064850.15419-6-jonathan@marek.ca/
 Assisted-by: LLM
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+Jonathan Marek posted the same read-back change in November 2025 as
+part of a wcd938x/wcd939x series [1]; the discussion stayed on the wsa
+patches of that series and this one was not picked up. This version also
+makes the put handler report "no change", which the original did not.
+wcd938x and wcd937x keep the same per-port flag.
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-index da3556eb6ecc..dba8a07d34bb 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-@@ -1006,6 +1006,20 @@ static void dpu_kms_mdp_snapshot(struct msm_disp_state *disp_state, struct msm_k
- 						    base + cat->sspp[i].sblk->csc_blk.base,
- 						    "%s_%s", cat->sspp[i].name,
- 						    cat->sspp[i].sblk->csc_blk.name);
-+
-+		if (cat->sspp[i].sblk && cat->sspp[i].sblk->sspp_rec0_blk.len > 0)
-+			msm_disp_snapshot_add_block(disp_state,
-+						    cat->sspp[i].sblk->sspp_rec0_blk.len,
-+						    base + cat->sspp[i].sblk->sspp_rec0_blk.base,
-+						    "%s_%s", cat->sspp[i].name,
-+						    cat->sspp[i].sblk->sspp_rec0_blk.name);
-+
-+		if (cat->sspp[i].sblk && cat->sspp[i].sblk->sspp_rec1_blk.len > 0)
-+			msm_disp_snapshot_add_block(disp_state,
-+						    cat->sspp[i].sblk->sspp_rec1_blk.len,
-+						    base + cat->sspp[i].sblk->sspp_rec1_blk.base,
-+						    "%s_%s", cat->sspp[i].name,
-+						    cat->sspp[i].sblk->sspp_rec1_blk.name);
- 	}
+Tested on a Lenovo TB323FU (WCD9395, two-mic capture on ADC1/ADC3).
+Before: with only ADC1 switched on, ADC1-4 all read back as on, and
+after "alsactl store" and "alsactl restore" the TX port's ChannelEn was
+0xf during capture. With this patch: ADC1-4 read on/off/on/off and
+ChannelEn is 0x5. Writing the same value again no longer sends a change
+event.
+
+[1] https://lore.kernel.org/all/20251124064850.15419-1-jonathan@marek.ca/
+
+ sound/soc/codecs/wcd939x.c | 10 +++++++---
+ sound/soc/codecs/wcd939x.h |  1 -
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/sound/soc/codecs/wcd939x.c b/sound/soc/codecs/wcd939x.c
+index 26fe0b6313cd..2d463f062e6d 100644
+--- a/sound/soc/codecs/wcd939x.c
++++ b/sound/soc/codecs/wcd939x.c
+@@ -1794,8 +1794,9 @@ static int wcd939x_get_swr_port(struct snd_kcontrol *kcontrol,
+ 	struct wcd939x_priv *wcd939x = snd_soc_component_get_drvdata(comp);
+ 	struct wcd939x_sdw_priv *wcd = wcd939x->sdw_priv[mixer->shift];
+ 	unsigned int portidx = wcd->ch_info[mixer->reg].port_num;
++	u8 ch_mask = wcd->ch_info[mixer->reg].ch_mask;
  
- 	/* dump LM sub-blocks HW regs info */
-
-base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
+-	ucontrol->value.integer.value[0] = wcd->port_enable[portidx] ? 1 : 0;
++	ucontrol->value.integer.value[0] = !!(wcd->port_config[portidx - 1].ch_mask & ch_mask);
+ 
+ 	return 0;
+ }
+@@ -1821,10 +1822,13 @@ static int wcd939x_set_swr_port(struct snd_kcontrol *kcontrol,
+ 	struct wcd939x_priv *wcd939x = snd_soc_component_get_drvdata(comp);
+ 	struct wcd939x_sdw_priv *wcd = wcd939x->sdw_priv[mixer->shift];
+ 	unsigned int portidx = wcd->ch_info[mixer->reg].port_num;
++	u8 ch_mask = wcd->ch_info[mixer->reg].ch_mask;
++	bool enable = !!ucontrol->value.integer.value[0];
+ 
+-	wcd->port_enable[portidx] = !!ucontrol->value.integer.value[0];
++	if (enable == !!(wcd->port_config[portidx - 1].ch_mask & ch_mask))
++		return 0;
+ 
+-	wcd939x_connect_port(wcd, portidx, mixer->reg, wcd->port_enable[portidx]);
++	wcd939x_connect_port(wcd, portidx, mixer->reg, enable);
+ 
+ 	return 1;
+ }
+diff --git a/sound/soc/codecs/wcd939x.h b/sound/soc/codecs/wcd939x.h
+index 6bd2366587a8..dab7ef108b48 100644
+--- a/sound/soc/codecs/wcd939x.h
++++ b/sound/soc/codecs/wcd939x.h
+@@ -899,7 +899,6 @@ struct wcd939x_sdw_priv {
+ 	struct sdw_stream_runtime *sruntime;
+ 	struct sdw_port_config port_config[WCD939X_MAX_SWR_PORTS];
+ 	const struct wcd_sdw_ch_info *ch_info;
+-	bool port_enable[WCD939X_MAX_SWR_CH_IDS];
+ 	int active_ports;
+ 	bool is_tx;
+ 	struct wcd939x_priv *wcd939x;
 -- 
 2.43.0
 
