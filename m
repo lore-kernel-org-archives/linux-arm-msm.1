@@ -1,38 +1,87 @@
-Received: from mta0.migadu.com (out-212.mta0.migadu.com [91.218.175.212])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5996B48C3E9
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 09:12:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.212
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B48046EF8A
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 09:20:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791364386; cv=none; b=XEytcuExykZUk5jRX61BsXVE4YE88g1e61ImIOrtK1t9+O2JgoeMVx3J1HP37DJ1l/x3GupOo5AWWCXtF76UblTrjY50INR9Yzkj43LSaxXkz49/NT4rHFIj42gH7uaUy56OPaM9tP3cpcUIcZjFCyPqXB2LkUsigaeFh9/mW6I=
+	t=1791364930; cv=none; b=YMLTGGlKzoGzZPJDv43cQapMLkK2qcsqcgDtjNpt3sPLFfy98f4ZJ57+fXwJjH0OBrgSDH2QxY0qTk6vzKyhgAH9kiwyVRSac74EDtu/nTKUQ+TuwEMAsYiQ+ehrCPnzntT2aUBfG1Ke2gXvrOkYEXkbm5WwbsgjdInp616WlP8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791364386; c=relaxed/simple;
-	bh=J/y1H3eemnVhW06Ctyt4QVgncGhn8rhFQ+PbyfP1y1s=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=gu/Va9fB7QDWQ6DLW9cmTyMepv8btXSh2s+TcojLXRGFHfTBWbdmsDYzLzFflcm/ZxIgJPUdjzcUvBPAfNHLCQxMzYOscED6ZEZodD4nQ6T4M96H93/wtnhw8KbbscMdcRXg/7yweRuy9IJcHgFaD0CPD3/pS04tFD3yKeeJm5g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=ZVkxtwZt; arc=none smtp.client-ip=91.218.175.212
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	s=arc-20240116; t=1791364930; c=relaxed/simple;
+	bh=rsSHzG9MCaRsgobX/CMFnVuhdEY//HFwz+WtL2zAHcU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CTII4vXX4SbdmUp5kkdm6Rr/CtYgIxEYtzRaQQLcr5kmVZghOKuCShXbDoPMTcUoPlTofmvRePO1Pj3o7eFn7S7ODU5l7Bxe6BF5VBsS+yJs1corqOJHMTNKG+72k3NQY94an3EOV4fKGxXGK39TlLYtpBUqCjufkHZiBOGhigI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FwxpWs6H; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bk44K04X; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="ZVkxtwZt"
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=J/y1H3eemnVhW06Ctyt4QVgncGhn8rhFQ+PbyfP1y1s=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1791364327; v=1; x=1791969127;
- b=ZVkxtwZt3ZJe6XW1B92izeivSqqn1LIsMOTLykadXsblRXNpsgFBaBbJ8Yokc+ws5ZYEM79e
- FPvn/GVkXzNhxBLhyHwQFi0jY0qcPGgs+yHaRK8J3Ds208S+Uvd0ex1NL8r//ye0cuSwDzKTPzV
- 6axXhjt/+dMDDsO4/Mjq3KDn09OhkFtQBOqPBaPL2tiyZbc/ybAT9/GizN2A5zhsh1oObvFdfi4
- mSQKdeMusSXt2MyobsgLiBvY7Z+VDu+ks2NacTqFVIbIpb+kKcrb67o+bJoxccqu2agMbb+Z1M3
- 57x40tfZ4rChTEm1p9uwtwRa+pKqnx41RVG/TdnIPrP7w==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 7d4030431edfb94a;
-	Wed, 07 Oct 2026 09:11:57 +0000
-X-Mizu-Trace-ID: 7d4030431edfb94a
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <f189cfc2-c36a-4bf5-bac7-36ddb15cc7a4@packett.cool>
-Date: Wed, 7 Oct 2026 06:11:46 -0300
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FwxpWs6H";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bk44K04X"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6977jieU151961
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 09:20:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	HmZU/tfQDHS+62aXxN/4u19VewursY3udPREkCWOYz8=; b=FwxpWs6H2tfu2+O8
+	WlzuWLf6UpBeZrlOO5ZL5GHRaL9RNK7g6L27Z0L2FmyGGM7Sam7LyVUqpDIW10pc
+	btX7qMR9f5zm3unrakvDK4dQKRmvxGTXdewzk7CP2tHSxle/z+aBvlJYcn7YW8DG
+	rrD8Q0lqydM3PhJGiz1W8YDGURglI+e/em+RZ1WKsIdsjec/h/jx6SUBCx51ysZV
+	2rezaZcWvtSYCRZnaQRx4s7cscrCkc/gYqFV+z1yrMmsxta96nNlTjuvm4heUMfx
+	goAkqlOPjahlTTdMzo1kkGAO6+dK3vBetbO4hh0gaOSr0i63PZNkffpDAw0uIko9
+	GZvJKw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c719e9h-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 09:20:23 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e564adf782so34589785ad.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 02:20:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791364823; x=1791969623; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HmZU/tfQDHS+62aXxN/4u19VewursY3udPREkCWOYz8=;
+        b=bk44K04XfSgcWNXtx3cqHrCpZJsLr8PgsrpmdsbjADtH5WHFZLGVgVB4XozDlFFCQ1
+         Rlrjxj6IHHAEIkeo3yg3SqJFkZBAvhbX2hckM9lYX0uvvdachMLsXMouA83jV3Si7KPa
+         MfDfDwkfVFGA2Cxk4kyY4wQntUQgztAeTmPDBs9lTfb+l9SZ228jnquJZ6u9p75ft4sf
+         9Xdt3RH0NwnIwdq9lbgsEhOZrLxiQhLTRuJSLViCwchfLuaexIp9vfaDaZjWUdX5e/hV
+         /MwlgLt3DrNLYnFAmu4QRGkOVyrMkVI4tbZsgUZDhu41SkUaefMIWPo5im+wbAfjBY1e
+         SoAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791364823; x=1791969623;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HmZU/tfQDHS+62aXxN/4u19VewursY3udPREkCWOYz8=;
+        b=PmmadR+grGp6LiFCYdWxds8ulSXZR6gF1ZDT3BtXrtJ6YF3557nhPAbX3AQVJmLWBk
+         hCAZpXswVstbCjWsNgANt3ILZK2357hDbr8DJU5/BBUMIuTGtP5QMHolmtoD35et8CJs
+         xFlyZNyy38pKqhWhvDqLd1s4BfcwSMYbYQqsA+0qCLpeRb0GuzT0aZd4G5IKl11guEmF
+         tIn3Blc84PSCBLizX6+5KGJzBTyC0LSPLYSIZ/BvY5tSKVIjkSbP4RdeglZu9IGm8wCF
+         KAsZ3uefQ+wSo+xoP9CUXqcIL8+CUxHnmU4VvHpUyxgrOYkl8EKQG/UNESvNTyYiR8Uh
+         3oMg==
+X-Gm-Message-State: AFq9FYLox6KexvUkUmCyAT3D7hL/4JoPDEACZFb4tc1WFVxH6x//H2zp
+	PuC8oEeI4cmADu18ERYbTcaFdeUM2viMc3jUxL4wTgLh1rFJ189iVYFkVx0irgDgQ//JUoZg6A7
+	aGqtfS2C6HtZT5vmsK01Pgl9Vwh0A+R00jfgnGqPL1xdfQocSP7ObAweo208rQINSVlCsooIA2W
+	Va
+X-Gm-Gg: AYBFou1e4yf79tnuy4p9zDK3Oaz9vxuD/dLp5TA1/ggFDK+j/u/+KgfvroDKPtzaGCI
+	YZKB8p7wGmaQ0JYZdCNi4oeOTl3WiCW0FIvRpPSyX925HNdDNQGCYSGahilSytEuhHTWaUJ5x8n
+	Cg8zwIVva5XZrCkSFO1WL+yWlfTA+gKGD4lZfai11+XO5qSNpAwPWZYV3+lqeNo+RCuIFBVIaI0
+	Arpeg8WUmR30k6Orl7Y3MUiBmbdapBewNM0qVtrXJuBct30gpmIDiOEybHck8oc3wcYqOvO4b8C
+	Pr3A1CNkZc/61gzV1HfsOqhAKjNlA23vYK6N3S0IG82SrnvoNNaDVz+I49Pr3gSrIIIWGMBxcYl
+	4KJzjjFCNvqRU5zyjgTcAwmBiu8ts
+X-Received: by 2002:a17:902:ef4f:b0:2e6:943:39e0 with SMTP id d9443c01a7336-2e609433caemr10524925ad.29.1791364822389;
+        Wed, 07 Oct 2026 02:20:22 -0700 (PDT)
+X-Received: by 2002:a17:902:ef4f:b0:2e6:943:39e0 with SMTP id d9443c01a7336-2e609433caemr10524575ad.29.1791364821658;
+        Wed, 07 Oct 2026 02:20:21 -0700 (PDT)
+Received: from [10.92.161.47] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e60482d316sm7159435ad.49.2026.10.07.02.20.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 07 Oct 2026 02:20:21 -0700 (PDT)
+Message-ID: <d33c6321-9d4d-456a-b349-4f46840a0343@oss.qualcomm.com>
+Date: Wed, 7 Oct 2026 14:50:16 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,150 +89,657 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Val Packett <val@packett.cool>
-Subject: Re: [PATCH v5 1/6] PCI/bwctrl: Set host bridge OPP and optionally
- disable ASPM around link retraining
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Jingoo Han <jingoohan1@gmail.com>, Lorenzo Pieralisi
- <lpieralisi@kernel.org>, Rob Herring <robh@kernel.org>,
- Jeff Johnson <jjohnson@kernel.org>, Bartosz Golaszewski <brgl@bgdev.pl>,
- Manivannan Sadhasivam <mani@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>
-Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, mhi@lists.linux.dev,
- linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
- qiang.yu@oss.qualcomm.com
-References: <20260819-bwscale-v5-0-6dea79786b37@oss.qualcomm.com>
- <20260819-bwscale-v5-1-6dea79786b37@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/3] tpm: Introduce Qualcomm TPM driver
+To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+        Peter Huewe <peterhuewe@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>
+Cc: linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+        linux-kernel@vger.kernel.org, linux-integrity@vger.kernel.org
+References: <20260907-tpm_qcom_driver-v2-0-71a6b1752da8@oss.qualcomm.com>
+ <20260907-tpm_qcom_driver-v2-2-71a6b1752da8@oss.qualcomm.com>
+ <6e2034eb-0192-4286-beb2-ba7f1186344c@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260819-bwscale-v5-1-6dea79786b37@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+In-Reply-To: <6e2034eb-0192-4286-beb2-ba7f1186344c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAzNyBTYWx0ZWRfX9FAG3vNj82E8
+ gf8csHv9YlPIUkiklXnsW2ZIFCtla/H9NX/50mrKk/LA58lTMgLNfggtYMVcxJTsdWdQSy5Xj3B
+ vnvEHlfC6kKVy9IWcA0bTa0sLQLPKCk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAzNyBTYWx0ZWRfX2vigb+Pr1unm
+ WYy6TUZeKIkCzVQ0iJSRyoul/PyXRqmmgGPDZt/KYvIcf2WKQf6zUICVx8gRZalnUqyXfwRC761
+ 2CZwmykvumZWKS0oEOEpGPjj4o6/DrP15qjrhGJAmBFjj69DRztJ9HhQi9Jk/F2RXxmsSmT+01c
+ 3QrHJ+aUyBesIr7MeOOIXS741t2z1w+ctX+aryIGMCU997vkf3qB9Y8AR87Bo0wi8GjuyCUDGiY
+ AL/tI+59LxfqRc6cSa4R2YQOoHXXq2U9zPxjYTC72peuZt/Z2rgqhOLtDYnhKDfovKAwYDGhTUv
+ ombBDX+TzFPNRE1HPOhu+TOJgb/lGLGrBDgySHTS8j5LNQfm3wiLTUZre5MVgTeNphzPgNvWfUg
+ zuV8KPdzOOomTEUhKQ+hnnqJOEiMWsit/94SZsTZ8GMv836J6BcjntE9gs34bVYZO+z9mABuh0E
+ 3ftOZEy6vUZsRGkMSxg==
+X-Proofpoint-GUID: cqNUWoGblRypEKBeUeqT-hj5BAyR0_V2
+X-Proofpoint-ORIG-GUID: cqNUWoGblRypEKBeUeqT-hj5BAyR0_V2
+X-Authority-Analysis: v=2.4 cv=LvYHWXdc c=1 sm=1 tr=0 ts=6ac60ed7 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=sBliAY4Pf1TY-0blGb4A:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-07_03,2026-10-06_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 impostorscore=0 suspectscore=0
+ lowpriorityscore=0 clxscore=1015 bulkscore=0 adultscore=0 phishscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610070037
 
+On 29-09-2026 04:59, Amirreza Zarrabi wrote:
+> Hi Kuldeep,
+> 
+> Sorry for late review.
+> 
+> On 9/7/2026 7:28 PM, Kuldeep Singh wrote:
+>> Add a TPM chip driver for platforms where a TPM 2.0 instance is
+>> implemented by a Trusted Application (TA) running in Qualcomm's Trusted
+>> Execution Environment (QTEE), reachable over the QCOMTEE object-IPC
+>> transport.
+>>
+>> The driver discovers the qcom.tz.tpm TEE-bus device, opens a session
+>> with the TPM TA, and register with tpm interface. This exposes the TA
+>> through the standard /dev/tpm interface and the existing tpm2 command
+>> layer. OS need not be aware underlying TPM instance is dTPM or fTPM.
+>>
+>> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+>> ---
+>>  drivers/char/tpm/Kconfig    |   9 ++
+>>  drivers/char/tpm/Makefile   |   1 +
+>>  drivers/char/tpm/tpm_qcom.c | 354 ++++++++++++++++++++++++++++++++++++++++++++
+>>  drivers/char/tpm/tpm_qcom.h |  83 +++++++++++
+>>  4 files changed, 447 insertions(+)
+>>
+>> diff --git a/drivers/char/tpm/Kconfig b/drivers/char/tpm/Kconfig
+>> index 5f672f2c01b0..05d704ed3632 100644
+>> --- a/drivers/char/tpm/Kconfig
+>> +++ b/drivers/char/tpm/Kconfig
+>> @@ -243,6 +243,15 @@ config TCG_FTPM_TEE
+>>  	help
+>>  	  This driver proxies for firmware TPM running in TEE.
+>>  
+>> +config TCG_QCOM
+>> +	tristate "Qualcomm TEE based TPM Interface"
+>> +	depends on QCOMTEE
+>> +	help
+>> +	  This driver provides interface to run TPM instances with Trustzone
+>> +	  having Qualcomm TPM TA running in Qualcomm TEE.
+>> +	  The mechanism uses the object-IPC based transport provided by
+>> +	  QCOMTEE.
+>> +
+>>  config TCG_SVSM
+>>  	tristate "SNP SVSM vTPM interface"
+>>  	depends on AMD_MEM_ENCRYPT
+>> diff --git a/drivers/char/tpm/Makefile b/drivers/char/tpm/Makefile
+>> index 5b5cdc0d32e4..471cbf49afd2 100644
+>> --- a/drivers/char/tpm/Makefile
+>> +++ b/drivers/char/tpm/Makefile
+>> @@ -45,5 +45,6 @@ obj-$(CONFIG_TCG_CRB) += tpm_crb.o
+>>  obj-$(CONFIG_TCG_ARM_CRB_FFA) += tpm_crb_ffa.o
+>>  obj-$(CONFIG_TCG_VTPM_PROXY) += tpm_vtpm_proxy.o
+>>  obj-$(CONFIG_TCG_FTPM_TEE) += tpm_ftpm_tee.o
+>> +obj-$(CONFIG_TCG_QCOM) += tpm_qcom.o
+>>  obj-$(CONFIG_TCG_SVSM) += tpm_svsm.o
+>>  obj-$(CONFIG_TCG_LOONGSON) += tpm_loongson.o
+>> diff --git a/drivers/char/tpm/tpm_qcom.c b/drivers/char/tpm/tpm_qcom.c
+>> new file mode 100644
+>> index 000000000000..ef29c66f18ae
+>> --- /dev/null
+>> +++ b/drivers/char/tpm/tpm_qcom.c
+>> @@ -0,0 +1,354 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + *
+>> + */
+>> +
+>> +#include <linux/mm.h>
+>> +#include <linux/slab.h>
+>> +#include <linux/tee.h>
+>> +#include <linux/tee_drv.h>
+>> +#include <linux/tpm.h>
+>> +#include <linux/uuid.h>
+>> +
+>> +#include "tpm.h"
+>> +#include "tpm_qcom.h"
+>> +
+>> +/* UUID of the QTEE-bus device representing the TPM TA. */
+>> +static const uuid_t tpm_qcom_uuid =
+>> +	UUID_INIT(0xaabcb593, 0x7083, 0x5536,
+>> +		  0xac, 0x27, 0x3d, 0x2d, 0x89, 0x41, 0x9d, 0xdb);
+>> +
+>> +static void tpm_qcom_release_object(struct tee_context *ctx,
+>> +				    struct tee_param_objref object)
+>> +{
+>> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+>> +
+>> +	inv_arg.id = object.id;
+>> +	inv_arg.op = QCOMTEE_MSG_OBJECT_OP_RELEASE;
+>> +	inv_arg.num_params = 0;
+>> +
+>> +	tee_client_object_invoke_func(ctx, &inv_arg, NULL);
+>> +}
+>> +
+>> +static int tpm_qcom_get_client_env_obj(struct tee_context *ctx,
+>> +				       struct tee_param_objref *client_env_obj)
+>> +{
+>> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+>> +	struct tee_param param[2] = {};
+>> +	int ret;
+>> +
+>> +	inv_arg.id = TEE_OBJREF_NULL;
+>> +	inv_arg.op = QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS;
+>> +	inv_arg.num_params = 2;
+>> +
+>> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT;
+>> +	param[0].u.objref.id = TEE_OBJREF_NULL;
+>> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
+>> +
+>> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+>> +	if (ret < 0 || inv_arg.ret != 0)
+>> +		return ret ?: inv_arg.ret;
+> 
+> These two functions are local. Do we really care about the return value?
+> No caller seems to check it. Why not return `TEE_OBJREF_NULL` on failure instead?
 
-On 8/19/26 10:25 AM, Krishna Chaitanya Chundru wrote:
-> PCIe host bridge controllers may need their operating point raised before
-> retraining to a higher link speed so that hardware resources (e.g., RPMh
-> votes on Qualcomm platforms) are available at the requested data rate.
-> After retraining, the operating point must be updated to reflect the
-> actual negotiated speed.
->
-> Add pcie_set_opp() to look up an OPP on the host bridge parent device
-> using a key of (per-lane frequency in kHz, LNKCTL2 Target Link Speed
-> level).  Keying by generation rather than total bandwidth lets OPP tables
-> remain width-independent.
->
-> In pcie_set_target_speed(), call pcie_set_opp() before retraining only
-> when upscaling (speed_req > cur_bus_speed), since only raising the
-> operating point requires pre-staging hardware.  After retraining, call
-> pcie_set_opp() unconditionally with the actual cur_bus_speed to settle
-> the votes.  Both calls are skipped for downstream ports of PCIe switches,
-> as those are outside the host controller's scope.
->
-> Some controllers also require ASPM to be disabled around link retraining.
-> Add a disable_aspm_for_retrain flag to pci_host_bridge; when set,
-> pcie_set_target_speed() saves the child device's ASPM state, disables all
-> ASPM link states before retraining, and restores them afterward.
->
-> Signed-off-by: Krishna Chaitanya Chundru<krishna.chundru@oss.qualcomm.com>
-> ---
-> [..]
-> @@ -176,6 +231,12 @@ int pcie_set_target_speed(struct pci_dev *port, enum pci_bus_speed speed_req,
->   	    !list_empty(&bus->devices))
->   		ret = -EAGAIN;
->   
-> +	if (bus && is_rootbus && host) {
-> +		if (child && host->disable_aspm_for_retrain)
-> +			pci_enable_link_state_locked(child, aspm_state);
-> +		pcie_set_opp(port, host, bus->cur_bus_speed);
-> +	}
-> +
->   	return ret;
->   }
+Ok, I think we can return common error but still need some error log
+which will point to exact failure. Maybe I'll add log to print
+ret/inv_arg.ret and return TEE_OBJREF_NULL directly. Sounds good?
+> 
+>> +
+>> +	*client_env_obj = param[1].u.objref;
+>> +	return ret;
+>> +}
+>> +
+>> +static int tpm_qcom_get_svc_obj(struct tee_context *ctx,
+>> +				struct tee_param_objref client_env_obj,
+>> +				struct tee_param_objref *tpm_svc_obj)
+>> +{
+>> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+>> +	struct tee_param param[2] = {};
+>> +	u32 tpm_uid = QCOMTEE_TPM_UID;
+>> +	int ret;
+>> +
+>> +	inv_arg.id = client_env_obj.id;
+>> +	inv_arg.op = QCOMTEE_OP_CLIENT_ENV_OPEN;
+>> +	inv_arg.num_params = 2;
+>> +
+>> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+>> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &tpm_uid,
+>> +						    .size = sizeof(tpm_uid) };
+>> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
+>> +
+>> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+>> +	if (ret < 0 || inv_arg.ret != 0)
+>> +		return ret ?: inv_arg.ret;
+>> +
+>> +	*tpm_svc_obj = param[1].u.objref;
+>> +	return ret;
+>> +}
+>> +
+>> +static int tpm_qcom_send_command(struct tpm_qcom_private *pvt_data,
+>> +				 u32 locality, void *req, size_t req_len,
+>> +				 void *rsp, size_t *rsp_len)
+> 
+> This function seems to return both negative and positive values,
+> with different translations. This can cause issues; see the bug in tpm_qcom_send().
+> Maybe this should be documented?
 
-ASPM is not actually reenabled here:
+I think we can improve like below:
+	1. Returning -ve ret value directly.
+	2. IF ret==0 and inv_arg.ret contains failure, print both values and
+return common value i.e -EINVAL to the callers.
+This will guarantee error is propagated correctly either from qcomtee/TA
+or QTEE.
 
-LnkCap: Port #0, Speed 16GT/s, Width x4, ASPM L1, Exit Latency L1 <8us
-         ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+
-LnkCtl: ASPM Disabled; RCB 128 bytes, LnkDisable- CommClk+
-         ExtSynch+ ClockPM- AutWidDis- BWInt- AutBWInt- FltModeDis-
-LnkSta: Speed 2.5GT/s (downgraded), Width x4
-         TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+>> +{
+>> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+>> +	struct tee_param param[3] = {};
+>> +	u8 locality_arg = locality;
+> 
+> What is the `locality` arg if it is always zero? planning for future?
+> Why not `u8 locality_arg = 0`?
 
+Locality arg is an input to idl and it's 0 for calls here.
+We can update directly in send_command and no need for caller input here.
+> 
+>> +	int ret;
+>> +
+>> +	inv_arg.id = pvt_data->tpm_svc_obj.id;
+>> +	inv_arg.op = QCOMTEE_TPM_OP_SEND_COMMAND;
+>> +	inv_arg.num_params = 3;
+>> +
+>> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+>> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &locality_arg,
+>> +						   .size = sizeof(locality_arg) };
+>> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+>> +	param[1].u.ubuf = (struct tee_param_ubuf){ .addr = req, .size = req_len };
+>> +	param[2].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT;
+>> +	param[2].u.ubuf = (struct tee_param_ubuf){ .addr = rsp, .size = *rsp_len };
+>> +
+>> +	ret = tee_client_object_invoke_func(pvt_data->ctx, &inv_arg, param);
+>> +	if (ret < 0 || inv_arg.ret != 0) {
+>> +		dev_err(pvt_data->dev,
+>> +			"send_command invoke ret: %d, err: 0x%x\n",
+>> +			ret, inv_arg.ret);
+>> +		return ret ?: inv_arg.ret;
+>> +	}
 
-Because as the comment for pci_enable_link_state(_locked) says, "note 
-that this does not enable states disabled by pci_disable_link_state(). 
-Use pci_force_enable_link_state() for that"!
+We can have cmd parameter here and this way we can avoid prints in
+callers of tpm_qcom_send_command.
+>> +
+>> +	*rsp_len = param[2].u.ubuf.size;
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static int tpm_qcom_get_ta_details(struct tpm_qcom_private *pvt_data)
+>> +{
+>> +	struct tpm_qcom_ta_version_req ver_req = {
+>> +		.command_id = QCOMTEE_TPM_GET_TA_VERSION_ID,
+>> +	};
+>> +	struct tpm_qcom_ta_version_rsp ver_rsp;
+>> +	size_t ver_rsp_len = sizeof(ver_rsp);
+>> +	struct tpm_qcom_type_req type_req = {
+>> +		.command_id = QCOMTEE_TPM_TYPE_ID,
+>> +	};
+>> +	struct tpm_qcom_type_rsp type_rsp;
+>> +	size_t type_rsp_len = sizeof(type_rsp);
+>> +	int ret;
+>> +
+>> +	ret = tpm_qcom_send_command(pvt_data, 0, &ver_req, sizeof(ver_req),
+>> +				    &ver_rsp, &ver_rsp_len);
+>> +	if (ret || ver_rsp_len < sizeof(ver_rsp) || ver_rsp.status != 0) {
+>> +		dev_err(pvt_data->dev,
+>> +			"failed to query TA version: ret=%d, status=%u\n",
+>> +			ret, ret ? 0 : ver_rsp.status);
+>> +		return ret ?: -EIO;
+>> +	}
+> 
+> You already print in tpm_qcom_send_command(), why here again.
+Yeah, we can skip printing here.
 
-This needs something like:
+> 
+>> +
+>> +	dev_info(pvt_data->dev, "TPM TA version %lu.%lu\n",
+>> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MAJOR, ver_rsp.version_num),
+>> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MINOR, ver_rsp.version_num));
+>> +
+>> +	ret = tpm_qcom_send_command(pvt_data, 0, &type_req, sizeof(type_req),
+>> +				    &type_rsp, &type_rsp_len);
+>> +	if (ret || type_rsp_len < sizeof(type_rsp) || type_rsp.status != 0) {
+>> +		dev_err(pvt_data->dev,
+>> +			"failed to query TPM type: ret=%d, status=%u\n",
+>> +			ret, ret ? 0 : type_rsp.status);
+>> +		return ret ?: -EIO;
+>> +	}
+> 
+> You already print in tpm_qcom_send_command(), why here again.
 
+Yeah, we can skip printing here.
 
-diff --git a/drivers/pci/pcie/aspm.c b/drivers/pci/pcie/aspm.c
-index 4bad311dc7..c54f2658e0 100644
---- a/drivers/pci/pcie/aspm.c
-+++ b/drivers/pci/pcie/aspm.c
-@@ -1709,6 +1709,12 @@
-  }
-  EXPORT_SYMBOL(pci_force_enable_link_state);
+> 
+>> +
+>> +	switch (type_rsp.tpm_type) {
+>> +	case QCOMTEE_TPM_TYPE_FTPM:
+>> +		dev_info(pvt_data->dev, "TPM type: fTPM\n");
+>> +		pvt_data->is_dtpm = false;
+>> +		break;
+>> +	case QCOMTEE_TPM_TYPE_DTPM:
+>> +		dev_info(pvt_data->dev, "TPM type: dTPM\n");
+>> +		pvt_data->is_dtpm = true;
+>> +		break;
+>> +	default:
+>> +		dev_err(pvt_data->dev, "unsupported TPM type: 0x%08x\n",
+>> +			type_rsp.tpm_type);
+>> +		return -EIO;
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/* fTPM does not implement this command and to be invoked via dtpm only. */
+>> +static void tpm_qcom_transfer(struct tpm_qcom_private *pvt_data,
+>> +			      u32 transfer_state)
+>> +{
+>> +	struct tpm_qcom_transfer_req req = {
+>> +		.command_id = QCOMTEE_TPM_TRANSFER_ID,
+>> +		.transfer_state = transfer_state,
+>> +	};
+>> +	struct tpm_qcom_transfer_rsp rsp;
+>> +	size_t rsp_len = sizeof(rsp);
+>> +	int ret;
+>> +
+>> +	ret = tpm_qcom_send_command(pvt_data, 0, &req, sizeof(req), &rsp,
+>> +				    &rsp_len);
+>> +	if (ret || rsp_len < sizeof(rsp) || rsp.status != 0)
+>> +		dev_warn(pvt_data->dev,
+>> +			 "transfer state=%u hint failed: ret=%d, status=%u\n",
+>> +			 transfer_state, ret, ret ? 0 : rsp.status);
+> 
+> You already print in tpm_qcom_send_command(), why here again.
+> If you remove the message, I also argue the function is not required.
+> Directly call tpm_qcom_send_command() bellow.
 
-+int pci_force_enable_link_state_locked(struct pci_dev *pdev, int state)
-+{
-+    return __pci_enable_link_state(pdev, state, true, true);
-+}
-+EXPORT_SYMBOL(pci_force_enable_link_state_locked);
-+
-  void pcie_aspm_remove_cap(struct pci_dev *pdev, u32 lnkcap)
-  {
-      if (lnkcap & PCI_EXP_LNKCAP_ASPM_L0S)
-diff --git a/drivers/pci/pcie/bwctrl.c b/drivers/pci/pcie/bwctrl.c
-index 623731b96c..530b9047a0 100644
---- a/drivers/pci/pcie/bwctrl.c
-+++ b/drivers/pci/pcie/bwctrl.c
-@@ -211,7 +211,7 @@
+Seems we can save merge this chunk into tpm_qcom_cmd_ready only.
+Let me do it.
 
-      if (bus && is_rootbus && host) {
-          if (child && host->disable_aspm_for_retrain)
--            pci_enable_link_state_locked(child, aspm_state);
-+            pci_force_enable_link_state_locked(child, aspm_state);
-          pcie_set_opp(port, host, bus->cur_bus_speed);
-      }
+> 
+>> +}
+>> +
+>> +static int tpm_qcom_cmd_ready(struct tpm_chip *chip)
+>> +{
+>> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+>> +
+>> +	if (pvt_data->is_dtpm)
+>> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_START);
+> 
+> Is it intentional to ignore failures here and in the next function, and always return success?
+> Are these functions best-effort, such that failures are considered irrelevant?
 
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 9f20bae6d7..59d7b67c9d 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1960,6 +1960,7 @@
-  int pci_enable_link_state(struct pci_dev *pdev, int state);
-  int pci_enable_link_state_locked(struct pci_dev *pdev, int state);
-  int pci_force_enable_link_state(struct pci_dev *pdev, int state);
-+int pci_force_enable_link_state_locked(struct pci_dev *pdev, int state);
-  void pcie_no_aspm(void);
-  bool pcie_aspm_support_enabled(void);
-  u32 pcie_aspm_enabled(struct pci_dev *pdev);
-@@ -1974,6 +1975,8 @@
-  { return 0; }
-  static inline int pci_force_enable_link_state(struct pci_dev *pdev, 
-int state)
-  { return 0; }
-+static inline int pci_force_enable_link_state_locked(struct pci_dev 
-*pdev, int state)
-+{ return 0; }
-  static inline void pcie_no_aspm(void) { }
-  static inline bool pcie_aspm_support_enabled(void) { return false; }
-  static inline u32 pcie_aspm_enabled(struct pci_dev *pdev) { return 0; }
+Yes, this is a mechanism to notify TA about making an optimization like
+acquiring dtpm spi bus and keeping spi/gpio resources active for
+upcoming raw tpm command.
+This indeed help for long running commands by keeping spi connections
+active and releasing once TRANSFER_END is called.
 
-(the addition of the new force+locked variant should go as a separate 
-commit, but well)
+If we don't make this call, it won't impact the functionality but some
+performance penalty will be there.
 
-With that,
+> 
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int tpm_qcom_go_idle(struct tpm_chip *chip)
+>> +{
+>> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+>> +
+>> +	if (pvt_data->is_dtpm)
+>> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_END);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/*
+>> + * The raw TPM2 command in @buf is sent directly as send_command's UBUF-in
+>> + * param and the raw TPM2 response is read back from its UBUF-out param.
+>> + */
+>> +static int tpm_qcom_send(struct tpm_chip *chip, u8 *buf, size_t bufsiz,
+>> +			 size_t cmd_len)
+>> +{
+>> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+>> +	size_t rsp_len = PAGE_ALIGN(MAX_RESPONSE_SIZE);
+>> +	size_t copy_len;
+>> +	int ret;
+>> +
+>> +	if (cmd_len > MAX_COMMAND_SIZE) {
+>> +		dev_err(&chip->dev, "len=%zd exceeds MAX_COMMAND_SIZE\n", cmd_len);
+>> +		return -EIO;
+>> +	}
+>> +
+>> +	u8 *response __free(kfree) = kzalloc(rsp_len, GFP_KERNEL);
+>> +	if (!response)
+>> +		return -ENOMEM;
+>> +
+>> +	ret = tpm_qcom_send_command(pvt_data, 0, buf, cmd_len, response,
+>> +				    &rsp_len);
+>> +	if (ret < 0) {
+> 
+> This does not seem right; tpm_qcom_send_command() can return positive on failure.
+> How about tpm_qcom_ops.send?
 
-Tested-by: Val Packett <val@packett.cool> # x1e80100-dell-latitude-7455
+Mentioned below, we can update return value to propagate errors
+correctly to userspace layer or the callers.
+> 
+>> +		dev_err(&chip->dev, "send_command failed: ret=%d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	copy_len = min_t(size_t, bufsiz, rsp_len);
+>> +	memcpy(buf, response, copy_len);
+>> +
+>> +	return copy_len;
+>> +}
+>> +
+>> +static const struct tpm_class_ops tpm_qcom_ops = {
+>> +	.flags = TPM_OPS_AUTO_STARTUP,
+>> +	.send = tpm_qcom_send,
+>> +	.cmd_ready = tpm_qcom_cmd_ready,
+>> +	.go_idle = tpm_qcom_go_idle,
+>> +};
+>> +
+>> +static int tpm_qcom_ctx_match(struct tee_ioctl_version_data *ver,
+>> +			      const void *data)
+>> +{
+>> +	return (ver->impl_id == TEE_IMPL_ID_QTEE);
+>> +}
+>> +
+>> +static int tpm_qcom_probe(struct tee_client_device *tee_dev)
+>> +{
+>> +	struct device *dev = &tee_dev->dev;
+>> +	struct tpm_qcom_private *pvt_data;
+>> +	struct tee_param_objref client_env_obj;
+>> +	struct tee_param_objref tpm_svc_obj;
+>> +	struct tpm_chip *chip;
+>> +	int rc, err;
+>> +
+>> +	pvt_data = devm_kzalloc(dev, sizeof(*pvt_data), GFP_KERNEL);
+>> +	if (!pvt_data)
+>> +		return -ENOMEM;
+>> +
+>> +	dev_set_drvdata(dev, pvt_data);
+>> +
+>> +	pvt_data->ctx = tee_client_open_context(NULL, tpm_qcom_ctx_match, NULL, NULL);
+>> +	if (IS_ERR(pvt_data->ctx))
+>> +		return -ENODEV;
+>> +
+>> +	rc = tpm_qcom_get_client_env_obj(pvt_data->ctx, &client_env_obj);
+>> +	if (rc) {
+>> +		err = -EINVAL;
+>> +		goto out_ctx;
+>> +	}
+>> +
+>> +	rc = tpm_qcom_get_svc_obj(pvt_data->ctx, client_env_obj, &tpm_svc_obj);
+>> +	if (rc) {
+>> +		err = -EINVAL;
+>> +		goto out_client_env;
+>> +	}
+>> +	pvt_data->tpm_svc_obj = tpm_svc_obj;
+>> +	pvt_data->dev = dev;
+>> +
+>> +	err = tpm_qcom_get_ta_details(pvt_data);
+>> +	if (err)
+>> +		goto out_svc_obj;
+>> +
+>> +	chip = tpm_chip_alloc(dev, &tpm_qcom_ops);
+>> +	if (IS_ERR(chip)) {
+>> +		dev_err(dev, "tpm_chip_alloc failed\n");
+>> +		err = PTR_ERR(chip);
+>> +		goto out_svc_obj;
+>> +	}
+>> +
+>> +	pvt_data->chip = chip;
+>> +	pvt_data->chip->flags |= TPM_CHIP_FLAG_TPM2 | TPM_CHIP_FLAG_SYNC;
+>> +
+>> +	err = tpm_chip_register(pvt_data->chip);
+>> +	if (err) {
+>> +		dev_err(dev, "tpm_chip_register failed with rc=%d\n", err);
+>> +		goto out_chip;
+>> +	}
+>> +
+>> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
+>> +	return 0;
+>> +
+>> +out_chip:
+>> +	put_device(&pvt_data->chip->dev);
+>> +out_svc_obj:
+>> +	tpm_qcom_release_object(pvt_data->ctx, tpm_svc_obj);
+>> +out_client_env:
+>> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
+>> +out_ctx:
+>> +	tee_client_close_context(pvt_data->ctx);
+>> +	return err;
+>> +}
+>> +
+>> +static void tpm_qcom_remove(struct tee_client_device *tee_dev)
+>> +{
+>> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(&tee_dev->dev);
+>> +
+>> +	tpm_chip_unregister(pvt_data->chip);
+>> +	put_device(&pvt_data->chip->dev);
+> 
+> Is there any reason you do not use tpmm_chip_alloc() and directly call put_device?
 
-Well, tested without that too, but losing ASPM is not good :)
+I explored and seems tpmm_chip_alloc is devm managed so put_device can
+be skipped but tpm_chip_unregister will still need to be called.
 
+> 
+>> +	tpm_qcom_release_object(pvt_data->ctx, pvt_data->tpm_svc_obj);
+>> +	tee_client_close_context(pvt_data->ctx);
+>> +}
+>> +
+>> +static const struct tee_client_device_id tpm_qcom_id_table[] = {
+>> +	{ tpm_qcom_uuid },
+>> +	{}
+>> +};
+>> +MODULE_DEVICE_TABLE(tee, tpm_qcom_id_table);
+>> +
+>> +static struct tee_client_driver tpm_qcom_driver = {
+>> +	.id_table	= tpm_qcom_id_table,
+>> +	.probe		= tpm_qcom_probe,
+>> +	.remove		= tpm_qcom_remove,
+>> +	.driver		= {
+>> +		.name	= "tpm_qcom",
+>> +	},
+>> +};
+>> +
+>> +module_tee_client_driver(tpm_qcom_driver);
+>> +
+>> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
+>> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
+>> +MODULE_LICENSE("GPL");
+>> diff --git a/drivers/char/tpm/tpm_qcom.h b/drivers/char/tpm/tpm_qcom.h
+>> new file mode 100644
+>> index 000000000000..3945b12643b7
+>> --- /dev/null
+>> +++ b/drivers/char/tpm/tpm_qcom.h
+>> @@ -0,0 +1,83 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#ifndef __TPM_QCOM_H__
+>> +#define __TPM_QCOM_H__
+> 
+> As most of these are only consumed in qcom_tpm.c, it makes more sense to
+> move them and drop the header. Unless you have some reason.
 
-Thanks,
-~val
+Yeah makes sense.
+We can have it in tpm_qcom.c only.
+> 
+>> +
+>> +#include <linux/bitfield.h>
+>> +#include <linux/tee_drv.h>
+>> +#include <linux/tpm.h>
+>> +#include <linux/uuid.h>
+>> +
+>> +#define QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS	5
+>> +#define QCOMTEE_OP_CLIENT_ENV_OPEN		0
+>> +#define QCOMTEE_MSG_OBJECT_OP_MASK		GENMASK(15, 0)
+>> +#define QCOMTEE_MSG_OBJECT_OP_RELEASE		(QCOMTEE_MSG_OBJECT_OP_MASK - 0)
+>> +
+>> +#define QCOMTEE_TPM_OP_SEND_COMMAND	0
+>> +
+>> +/* UID of the "qcom.tz.tpm" service */
+>> +#define QCOMTEE_TPM_UID			81
+>> +
+>> +/* Max buffer size supported by TPM TA */
+>> +#define MAX_COMMAND_SIZE		SZ_4K
+>> +#define MAX_RESPONSE_SIZE		SZ_4K
+> 
+> These names are confusing, rename to something like
+> `QCOM_TPM_MAX_COMMAND_SIZE` and `QCOM_TPM_MAX_RESPONSE_SIZE`.
+
+Sure.
+> 
+>> +
+>> +#define QCOMTEE_TPM_GET_TA_VERSION_ID	0x0001000
+>> +#define QCOMTEE_TPM_TA_VERSION_MAJOR	GENMASK(31, 16)
+>> +#define QCOMTEE_TPM_TA_VERSION_MINOR	GENMASK(15, 0)
+>> +
+>> +struct tpm_qcom_ta_version_req {
+>> +	u32 command_id;
+>> +} __packed;
+>> +
+>> +struct tpm_qcom_ta_version_rsp {
+>> +	u32 status;
+>> +	u32 command_id;
+>> +	u32 version_num;
+>> +} __packed;
+>> +
+>> +#define QCOMTEE_TPM_TYPE_ID		0x0080000
+>> +#define QCOMTEE_TPM_TYPE_DTPM		0x6454504dU
+>> +#define QCOMTEE_TPM_TYPE_FTPM		0x6654504dU
+>> +#define QCOMTEE_TPM_TYPE_NONE		0x4e6f6e65U
+>> +
+>> +struct tpm_qcom_type_req {
+>> +	u32 command_id;
+>> +} __packed;
+>> +
+>> +struct tpm_qcom_type_rsp {
+>> +	u32 command_id;
+>> +	u32 status;
+>> +	u32 tpm_type;
+>> +} __packed;
+>> +
+>> +/*
+>> + * dTPM SPI transfer optimization:
+>> + * TRANSFER_START before a burst of commands, TRANSFER_END once done.
+>> + */
+>> +#define QCOMTEE_TPM_TRANSFER_ID		0x0000002
+>> +#define QCOMTEE_TPM_TRANSFER_END	0
+>> +#define QCOMTEE_TPM_TRANSFER_START	1
+>> +
+>> +struct tpm_qcom_transfer_req {
+>> +	u32 command_id;
+>> +	u32 transfer_state;
+>> +} __packed;
+>> +
+>> +struct tpm_qcom_transfer_rsp {
+> 
+> nitpik: can you use `resp` instead of `rsp`?
+
+Umm, okay.
+
+> 
+>> +	u32 command_id;
+>> +	u32 status;
+>> +} __packed;
+>> +
+>> +struct tpm_qcom_private {
+>> +	struct tpm_chip *chip;
+>> +	struct device *dev;
+>> +	struct tee_context *ctx;
+>> +	struct tee_param_objref tpm_svc_obj;
+>> +	bool is_dtpm;
+>> +};
+>> +
+>> +#endif /* __TPM_QCOM_H__ */
+>>
+> 
+> Best Regards,
+> Amir
+
+-- 
+Regards
+Kuldeep
 
