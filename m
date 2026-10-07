@@ -1,212 +1,183 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76A1139182E;
-	Wed,  7 Oct 2026 08:22:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDA453F788D
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 08:25:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791361372; cv=none; b=t0ZEr6xBXx7hnTQHk/lJ+j22FDp29eQbkJzW94ep5ZobYCDdZj/J/eqiFyh8FAp4mXG2X34ok9MmCch7AB1fvmqtbeS6Tft/d4ymdiU84D0TQUS9r7KG5JO8lCxNdnhYx/vOIdHqoF4NbznAnGY5Rgd+jVfVhecZ3cWe73/mRsI=
+	t=1791361527; cv=none; b=pmIRecjeAU2DmhP9xw0EG/cHwAqkMpQ0pmZQz7oftTbKKR6dcn8EzQDp4pgvxJ2h0TzrChdy+z41TMToavxF5lleQdPDhC87dS2tRn2KswJp//BkGKBZDcTO8x6wMN6ig/snwTVV0hOEP7Qn4WipLJ1DytizGClsOEAA1afBK68=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791361372; c=relaxed/simple;
-	bh=fnfSyxyof8ldx1LKwlAm16hEicCGx2XP+A/qlkJrQbc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qRcRK+8ATpSQD97zY9v5r0iW+iKSriZK0nrjYbB/FxjvW1EH607q9thdmJiWFGxFlBeSPZSVdt8MUidUUGMDhafhp80/mEeNTWn2V98C7x/PsLuDUVggY92NI64brsvAiAtqMd5oe1joUmEw9keW3XF+CeU8GYQ8JpfRWar7c0M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OuaojcMF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791361527; c=relaxed/simple;
+	bh=ZDYszNVEjElmxLR0VTjx9YRTaDAmAgUHSJvjzGCh0RU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YOAi1uBcERr7J9stDyiw0YfBJ8XZAGrGNHOGCz5XDtuu9C8RZlXcDVshR+bx27lQiYgdOpY+wB+QcKtEM+GgtFY7sFauy4ODYrqk3YUFvaJkHDe3xvar7KH3gRynWxT+fhy1gpn3naFPxZwQOluHTjN2w+6g+ADE4foHgos6KAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HacJ4tN4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kO7qGJug; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OuaojcMF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0425F1F0089B;
-	Wed,  7 Oct 2026 08:22:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791361371;
-	bh=2F1HQQAc/fMJbnGCSZdEptu0N+9Pd3sBhH3laxTncQ4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=OuaojcMF5Q2O2v24+mHmpZN1tbhH15Q0+GZwNBgF4QdXcz5Nb8zUSqTQzV0Z/ql2N
-	 V2XsUl/qCzeV4eHTHhX/NFBY7iZx9F0raYXgHFMCQ8caZAYdm6M3CycXPc1OASOESp
-	 OGGP/Wk6uyHPxn+riOyq1UcDyFPgGM/+eqSQ8wzaJeviz+27fol7BZA4p5a/UX5DVC
-	 ESlDUEQ/Pu8m5n87irM2dHeA/IDrxrco3S5V9mxRPEFW90CKRmeDfnj+477KAVQro0
-	 YAfrHSilY+SpoD+NTuZrcCFuXHf8C6mXQPgugWBfqhZgIlUqKKfA5vUXcfep7kb7XV
-	 +VosUS6KN70iQ==
-Message-ID: <a9024516-a266-4d99-a28c-f356ed98af09@kernel.org>
-Date: Wed, 7 Oct 2026 10:22:46 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HacJ4tN4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kO7qGJug"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6977jWBx2481348
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 08:25:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=pQBG5SbwlH1RkPs7F97Dw6PI
+	C6xi4Vl8Iw2NiJzks4Y=; b=HacJ4tN4Qg83bgXfxkrxXlkf0wf0zZ/QGHe9tA6H
+	YS4KXyMLf1TCaQ6GyHXpbbtBEfiXaWGJjRP4KJ5sAm4rh91gENY0Rgz+3drn1nN8
+	9W1VdaOByzp4M3ZEDdJsytQp3eYK3ebhhqMXEiukrZbjw2kpp++/3EM4ASnABh+7
+	wgY0opeshwrIzYhqiM5bAgJmvJslw9Vbf7CGaZnYXNjkBPsC7jXzCae6wG7DSbFl
+	TpHnKjnOLi5QYtRjjdn+ANXPR9WxgPus65/AEhXGIlH7MpkeOtAHKdAv+JJdiudB
+	MquMgxXuIwzOlKXyo2E9M3JXhnONimoyoYVuoSM5RNRBdA==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c6u185r-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 08:25:25 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3510a481ae9so7367113eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 01:25:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791361525; x=1791966325; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=pQBG5SbwlH1RkPs7F97Dw6PIC6xi4Vl8Iw2NiJzks4Y=;
+        b=kO7qGJugi0BVZnH9scWpwxe9vPW7k5uK59bo+DLueD5W/tjVMDNd1sum6cE5fVXZxj
+         Cfn3LP3rsXHqZAwDhBPrrQkPz6zXveozPb8vflqF6PxwZb08dqYuatVTpuOeA16JfF5N
+         h0xnFzthkEnflEIO19/bm+8TP9sody6dAi7+rftB1fgtXYrEtDPWOMHEGmL527BB4zFo
+         xDqzG1sXm+cpeupohaZl8pt7tWQcqpgbdzDsjqsxacQmfxnBOuhnxPYq+MTWaFtR9k8y
+         3wQ0BLD8am60PNkKJC6p1MgqI6KoynB8Ked3RNxl270nkVIdj4e/ouLF9rwClgjOGqAi
+         2/Dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791361525; x=1791966325;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pQBG5SbwlH1RkPs7F97Dw6PIC6xi4Vl8Iw2NiJzks4Y=;
+        b=IvvPfyIAIAFBL0lYqBV3tARu5snfRRnCRCg2Ogojrk1xtiOcEPTbQBmaaPBNlXi+4E
+         mVgRLQOXgCPLSVY0DfQ/oyY7oU8y0mvZc+RaxJSojAlao6ko7hXyiTna81zpAWl702bt
+         fdkcrf38EH/jm/OvClmZCJl7Heq+X5mMd7/6jYv/FeAzFXgSuK8Y/3SfqxNWhdDdRGPC
+         TsQUHad8xcDDVQag31Oj9O2HRs+oo7RkydjqKUSLMVT4sKM0YiFXGegad7laTsyruWQM
+         jTk2zmH0gPsW38jIjdez7C5Vn2V4Z2aQ0E+4iclBJQ3jwq9WztAFaAnax4YfoGDEk7Dd
+         pYNQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzwUuABzfuPQmJz9iolurhe7MhOYsyYsdCWDar9iUqFKOPqiNumLkq17kBLqraxeStOsFBXqzd35dKapSjy@vger.kernel.org
+X-Gm-Message-State: AFuF++nkLojKkpJBLIOFmInG4SDpMtZ/fhBMamYZouyQfofIFj7dpe0G
+	CuNRD/OJyDV0QJ36pH3ozdZ1LOh8DJURMXHNnXuWE6hEOBr8yaiPxqBd6SGZ4ISZ1g/ufCayjW2
+	6tIOCFg+4JW43asYtSJX/rmmEHbhfCfsiElJgp9Y/1LAoZpOycpAmhWkMgvbNBGruWhfWVd9soc
+	wZ
+X-Gm-Gg: AYBFou1vwPfBDQfQQuUrxKXXVpKmClG9ClfjBSwD47BMXiHri2RxDn6pfFKQ42G4Dc1
+	m2w4mOW+Ur7OfSn/rMmGiushst39XKXeGGATGbD8z7iAtmlhD7if1x28A0gyJViYCc4HBT5drtn
+	aPdrxOAdjqc5xY5gDuFg4pzXmGkeu/m4dKQy1z/a0HX0URvR9O8YD/1jgQIdZJg3aGRPcRENrxl
+	m4Dr5n5AH0el08YOtPp3Ue7HJrsnJxOU/B51Ll8QLh43V546Xf0FUbwZ584nfOzgC8OoFmjMQsC
+	QQ2YyqiZqEVhR47QkDPJYKfLnENBg7knBuTgQPsbiWlksTlxURhILParRAFSg710vPkMEScFroV
+	IXds4yRHk6lV+cCrP8lFBCXBWyQ==
+X-Received: by 2002:a05:7301:32cd:b0:34d:2c1a:987f with SMTP id 5a478bee46e88-3515de554a1mr1487963eec.35.1791361524858;
+        Wed, 07 Oct 2026 01:25:24 -0700 (PDT)
+X-Received: by 2002:a05:7301:32cd:b0:34d:2c1a:987f with SMTP id 5a478bee46e88-3515de554a1mr1487913eec.35.1791361524067;
+        Wed, 07 Oct 2026 01:25:24 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3515aeb6013sm5961752eec.5.2026.10.07.01.25.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Oct 2026 01:25:23 -0700 (PDT)
+Date: Wed, 7 Oct 2026 13:55:15 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v3 1/2] dt-bindings: misc: qcom,fastrpc: Allow hex digits
+ in compute-cb node names
+Message-ID: <20261007082515.xmjpa5jjptgrl6y6@hu-mojha-hyd.qualcomm.com>
+References: <20261006-glymur-dtfix-v3-0-44e2bc5370c2@oss.qualcomm.com>
+ <20261006-glymur-dtfix-v3-1-44e2bc5370c2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/74] media: qcom: camss: Define PIX formats for x1e PIX
- interface
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
- Daniel Scally <dan.scally@ideasonboard.com>, Keke Li <keke.li@amlogic.com>,
- Richard Acayan <mailingradian@gmail.com>, Hans Verkuil
- <hverkuil@kernel.org>, Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
- Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>, Robert Foss
- <rfoss@kernel.org>, Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
- <Z8PAFUj3ZBxq4yvNpaYcxqBXjhqYCJ8VfhD_gwcAj7AGdCHMEE-tv5tk9aIDv2wEUoz0Dh9qA-E8iph3COwMQg==@protonmail.internalid>
- <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-17-ed985aefd611@kernel.org>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-17-ed985aefd611@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261006-glymur-dtfix-v3-1-44e2bc5370c2@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAzMyBTYWx0ZWRfXyFbjNmRxIJPO
+ R94FnGvfFACM/vj3DmFcNh6KyvtqC5+l2Zz/vpHNj/yw0DXXk6yOH2AuZ1Ol6STZtxAuRBSp/os
+ xHbnH7q4OiPfph3WO7y9ccXAuUGgE50=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAzMyBTYWx0ZWRfX4IfKi4sKylFH
+ mkKxcT5fi0ZIq22uXC0PGXdMYDsgGzSfGGgIiU03U4Q7Ds5aMErerx5e1sVCNo/Ay4J4QRI41d7
+ E/ceDSIO4GP/Rh7n6J5MXh36muGcJ7/m3ifGg8xfnS55MsZ/AS/VO8ObY9FpCePFME+XXvcGN12
+ IfOXYYcYURPVMhw0EqimJ1dvW8jfPjmRR7Q8wSst37yck1eujjSnlwU4wbWfKdv4XQPpIXCAjSP
+ W338Opj1rChynTf1rJSlPe9YoMNbgOEhkc88HAAVm+++hm0Jpk0e7Bm+YwzXAV1NE2El9G9vDRN
+ ch4VD5E8EP7m+qXDIMS5/OHKf333Z1frIuR3c0CwHTWuGaEdly+Rk8y0kRptHOmB28ptVkAT8Ba
+ hfDGsQdByCGJMfG43n0dwlhYIgz78OEjg+nnvak8zNRZ1AnvXPQyRT+hKov2KDWycFThgqzlLv2
+ enW2SoV78NU+YRSz34A==
+X-Proofpoint-ORIG-GUID: QRug3QpTPhiErMXMw1gZ1mc-0Y-4HNo2
+X-Authority-Analysis: v=2.4 cv=T5EZ3PKQ c=1 sm=1 tr=0 ts=6ac601f5 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=QGBbWe6yPyKI6YAsb-IA:9 a=CjuIK1q_8ugA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-GUID: QRug3QpTPhiErMXMw1gZ1mc-0Y-4HNo2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-07_03,2026-10-06_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
+ clxscore=1015 bulkscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070033
 
-On 05/10/2026 19:13, Bryan O'Donoghue wrote:
-> Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
+On Tue, Oct 06, 2026 at 03:56:06PM +0530, Ekansh Gupta wrote:
+> The patternProperties key for compute-cb subnodes used [0-9]* which
+> only matches decimal digits. However, per DTS convention, node unit
+> addresses must be the lowercase hexadecimal representation of the reg
+> value. For compute-cb nodes with reg values >= 10 (e.g. 12, 13, 14),
+> the correct node names are compute-cb@c, compute-cb@d, compute-cb@e
+> respectively, which are not matched by the current pattern.
+> 
+> Extend the pattern to [0-9a-f]* to allow lowercase hex digits, making
+> it consistent with DTS unit address conventions.
+> 
+> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+
+Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+
 > ---
->   drivers/media/platform/qcom/camss/camss-vfe.c | 93 ++++++++++++++++++++++++++-
->   drivers/media/platform/qcom/camss/camss.c     |  4 +-
->   2 files changed, 92 insertions(+), 5 deletions(-)
+>  Documentation/devicetree/bindings/misc/qcom,fastrpc.yaml | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-> index 319d191589884..5b5201b55a485 100644
-> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
-> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-> @@ -174,6 +174,94 @@ static const struct camss_format_info formats_rdi_845[] = {
->   	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
->   };
-> 
-> +static const struct camss_format_info formats_pix_845[] = {
-> +	/* Passthrought formats */
-> +	{ MEDIA_BUS_FMT_UYVY8_1X16, 8, V4L2_PIX_FMT_UYVY, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +	{ MEDIA_BUS_FMT_VYUY8_1X16, 8, V4L2_PIX_FMT_VYUY, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +	{ MEDIA_BUS_FMT_YUYV8_1X16, 8, V4L2_PIX_FMT_YUYV, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +	{ MEDIA_BUS_FMT_YVYU8_1X16, 8, V4L2_PIX_FMT_YVYU, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +	{ MEDIA_BUS_FMT_SBGGR8_1X8, 8, V4L2_PIX_FMT_SBGGR8, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 8) },
-> +	{ MEDIA_BUS_FMT_SGBRG8_1X8, 8, V4L2_PIX_FMT_SGBRG8, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 8) },
-> +	{ MEDIA_BUS_FMT_SGRBG8_1X8, 8, V4L2_PIX_FMT_SGRBG8, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 8) },
-> +	{ MEDIA_BUS_FMT_SRGGB8_1X8, 8, V4L2_PIX_FMT_SRGGB8, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 8) },
-> +	{ MEDIA_BUS_FMT_SBGGR10_1X10, 10, V4L2_PIX_FMT_SBGGR10P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 10) },
-> +	{ MEDIA_BUS_FMT_SGBRG10_1X10, 10, V4L2_PIX_FMT_SGBRG10P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 10) },
-> +	{ MEDIA_BUS_FMT_SGRBG10_1X10, 10, V4L2_PIX_FMT_SGRBG10P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 10) },
-> +	{ MEDIA_BUS_FMT_SRGGB10_1X10, 10, V4L2_PIX_FMT_SRGGB10P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 10) },
-> +	{ MEDIA_BUS_FMT_SBGGR10_2X8_PADHI_LE, 16, V4L2_PIX_FMT_SBGGR10, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +	{ MEDIA_BUS_FMT_SBGGR12_1X12, 12, V4L2_PIX_FMT_SBGGR12P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 12) },
-> +	{ MEDIA_BUS_FMT_SGBRG12_1X12, 12, V4L2_PIX_FMT_SGBRG12P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 12) },
-> +	{ MEDIA_BUS_FMT_SGRBG12_1X12, 12, V4L2_PIX_FMT_SGRBG12P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 12) },
-> +	{ MEDIA_BUS_FMT_SRGGB12_1X12, 12, V4L2_PIX_FMT_SRGGB12P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 12) },
-> +	{ MEDIA_BUS_FMT_SBGGR14_1X14, 14, V4L2_PIX_FMT_SBGGR14P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 14) },
-> +	{ MEDIA_BUS_FMT_SGBRG14_1X14, 14, V4L2_PIX_FMT_SGBRG14P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 14) },
-> +	{ MEDIA_BUS_FMT_SGRBG14_1X14, 14, V4L2_PIX_FMT_SGRBG14P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 14) },
-> +	{ MEDIA_BUS_FMT_SRGGB14_1X14, 14, V4L2_PIX_FMT_SRGGB14P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 14) },
-> +	{ MEDIA_BUS_FMT_Y8_1X8, 8, V4L2_PIX_FMT_GREY, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 8) },
-> +	{ MEDIA_BUS_FMT_Y10_1X10, 10, V4L2_PIX_FMT_Y10P, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 10) },
-> +	{ MEDIA_BUS_FMT_Y10_2X8_PADHI_LE, 16, V4L2_PIX_FMT_Y10, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
-> +
-> +	/* 4:2:0 Bayer to YUV */
-> +	{ MEDIA_BUS_FMT_YUYV8_1_5X8, 8, V4L2_PIX_FMT_NV12, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_YVYU8_1_5X8, 8, V4L2_PIX_FMT_NV12, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_UYVY8_1_5X8, 8, V4L2_PIX_FMT_NV12, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_VYUY8_1_5X8, 8, V4L2_PIX_FMT_NV12, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_YUYV8_1_5X8, 8, V4L2_PIX_FMT_NV21, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_YVYU8_1_5X8, 8, V4L2_PIX_FMT_NV21, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_UYVY8_1_5X8, 8, V4L2_PIX_FMT_NV21, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +	{ MEDIA_BUS_FMT_VYUY8_1_5X8, 8, V4L2_PIX_FMT_NV21, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> +
-> +	/* 4:2:2 Bayer to YUV */
-> +	{ MEDIA_BUS_FMT_YUYV8_1X16, 8, V4L2_PIX_FMT_NV16, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_YVYU8_1X16, 8, V4L2_PIX_FMT_NV16, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_UYVY8_1X16, 8, V4L2_PIX_FMT_NV16, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_VYUY8_1X16, 8, V4L2_PIX_FMT_NV16, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_YUYV8_1X16, 8, V4L2_PIX_FMT_NV61, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_YVYU8_1X16, 8, V4L2_PIX_FMT_NV61, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_UYVY8_1X16, 8, V4L2_PIX_FMT_NV61, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +	{ MEDIA_BUS_FMT_VYUY8_1X16, 8, V4L2_PIX_FMT_NV61, 1,
-> +	  PER_PLANE_DATA(0, 1, 1, 1, 2, 8) },
-> +};
-> +
+> diff --git a/Documentation/devicetree/bindings/misc/qcom,fastrpc.yaml b/Documentation/devicetree/bindings/misc/qcom,fastrpc.yaml
+> index 49d2a5e8ba39..14fed91fee50 100644
+> --- a/Documentation/devicetree/bindings/misc/qcom,fastrpc.yaml
+> +++ b/Documentation/devicetree/bindings/misc/qcom,fastrpc.yaml
+> @@ -79,7 +79,7 @@ properties:
+>      const: 0
+>  
+>  patternProperties:
+> -  "(compute-)?cb@[0-9]*$":
+> +  "(compute-)?cb@[0-9a-f]*$":
 
-The formats are fine but..
 
->   static const struct camss_format_info formats_pix_8x16[] = {
->   	{ MEDIA_BUS_FMT_YUYV8_1_5X8, 8, V4L2_PIX_FMT_NV12, 1,
->   	  PER_PLANE_DATA(0, 1, 1, 2, 3, 8) },
-> @@ -277,10 +365,9 @@ const struct camss_formats vfe_formats_rdi_845 = {
->   	.formats = formats_rdi_845
->   };
-> 
-> -/* TODO: Replace with pix formats */
->   const struct camss_formats vfe_formats_pix_845 = {
-> -	.nformats = ARRAY_SIZE(formats_rdi_845),
-> -	.formats = formats_rdi_845
-> +	.nformats = ARRAY_SIZE(formats_pix_845),
-> +	.formats = formats_pix_845
->   };
-> 
->   static u32 vfe_src_pad_code(struct vfe_line *line, u32 sink_code,
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index ff09873706c0d..6f3de2c185bc9 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4434,7 +4434,7 @@ static const struct camss_subdev_resources vfe_res_x1e80100[] = {
->   			.pd_name = "ife0",
->   			.hw_ops = &vfe_ops_680,
->   			.formats_rdi = &vfe_formats_rdi_845,
-> -			.formats_pix = &vfe_formats_rdi_845
-> +			.formats_pix = &vfe_formats_pix_845
->   		},
->   	},
->   	/* IFE1 */
-> @@ -4458,7 +4458,7 @@ static const struct camss_subdev_resources vfe_res_x1e80100[] = {
->   			.pd_name = "ife1",
->   			.hw_ops = &vfe_ops_680,
->   			.formats_rdi = &vfe_formats_rdi_845,
-> -			.formats_pix = &vfe_formats_rdi_845
-> +			.formats_pix = &vfe_formats_pix_845
->   		},
->   	},
->   	/* IFE_LITE_0 */
-> 
-> --
-> 2.55.0
-> 
-The SoC is not relevant to the patch, excise.
+While you are changing this, original change had * which allows
+cb@ as well ? should we make it to "(compute-)?cb@[0-9a-f]+$":
 
----
-bod
+
+>      type: object
+>  
+>      description: >
+> 
+> -- 
+> 2.34.1
+> 
+
+-- 
+-Mukesh Ojha
