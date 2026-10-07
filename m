@@ -1,72 +1,80 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AD0A47CA72
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 12:39:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A384449B5DD
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 12:39:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791376797; cv=none; b=giufJW9PXg4UzQ3NG4O6Tt1RRUtCOhBFmuDLGBN4QOa4IfGVc1NMGFpT9ekkmQ8ZVNfXByiXGQhvAJtEs6cs827vhiSiH2D4LGI6rJo07FcDqZ38qfOPQzYjl4Rpbl7o+Hbvb+7vt7m+K/FgxatUabWtPJywBqyIoHSi/lf5dyg=
+	t=1791376804; cv=none; b=oVCx2s/f5IGvVIUURovTRHpXDjvje/z/yqG3py/N/vRWAog1GftXE4Zqd2aBuRSu1ojvE4r09uunglJ1UfX8g2yVw/voHw+AtnKtJVSZpUhVaAnOYMgmlXLTQYc2pTU9b8uJ2S9sVieLTGCMULK0QvUoSrAhHIQczNIpOv7kxT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791376797; c=relaxed/simple;
-	bh=SKkjNCJ5WpJDPuaHvs6nYf73O01iPRji4G+T3ENRReM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tRhEPRND8eQb+xYOZyGV9K+JtJDo210iS1gFUyrS/nUeAAdO73kCqly6IjADb1QypOFmGAkDzYoFXSc5XwYhoo++IAfZ13ZqpFgrld2iCtSSvFBZNVq7PkjhCgNY8NhoZ8St1yBL14ng3x2wUCMEn4jckRkL9OQ8Z+0BpzaIlQs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dax66yum; arc=none smtp.client-ip=209.85.210.177
+	s=arc-20240116; t=1791376804; c=relaxed/simple;
+	bh=f1QPQMmCEelKhv5EyxV/k3MVaSi11TvWPJBnLsxaEKY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HWXgjMoxIGC6EhgxiX9Oz06S7HOmt06Xzv3VNqld+jxubnIIfFAjXYfAHdEKsPxD2ALlXXAL5HQviXPFM15ZpidjqHJeLfhzzJgCMpVGpCw5pf7dIhAVc0UZ8uUI3UOnPVedafygy95GDVj4EyDuTKFHgLlQzwOfPy2ZR7Kj0CQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EiUCCY9G; arc=none smtp.client-ip=209.85.215.176
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dax66yum"
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-8917c712f32so574610b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:39:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EiUCCY9G"
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-ca766c1c9ccso767159a12.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 05:39:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791376784; x=1791981584; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791376794; x=1791981594; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=h0D8m9XO+Tesp9dJkW37XxMOyt3NKohy2e1G558ub+g=;
-        b=dax66yumRhLQQVizHxWcqW2aNvGUrVL4MSE4yQASgQ1BLdEUkaAwKHMm8Bqv7Vzyv3
-         cZKvZ4ZiyfqBtR0oyyAGGKec6OnnbYSQ6zqMPaA6tTeccwB+o28mYleBCg22qXJee/qn
-         siz6ht89eNN44I66fljyPSisXF99N3c+l5nfLFvFyRde4VRjHlDCdn9YNg1dQn8co0+l
-         10ZQdKty/G+44fRCuy4yyFRXn4CzS/vlACV7//8Khwd/QH6pbCG29SYaDo5hqvRhUpq1
-         e9eaYawY1JcezC5bQ3MIobDs6Rg2j8XUGpmcjr64lqziJwT2QoUswx1s/aF0fmyC2rq7
-         vaPQ==
+        bh=stbPCEVKk5/43mdbhizGdpTlS+biXo1nBfE8ir7ZWR8=;
+        b=EiUCCY9Gp8O8xmWkPfUNRbNOaTl9mUK3y7cZSARDKU9wkmOsL7npc81T849XBC/qyR
+         R7s4re/SufA3OWTDWLqYzGMRcem9NDyc5yuXmXPEuIvFZlJwx6VitEVyM4VJf16XTTFs
+         g5lygdZhiyBX1H5G6mRPcuGrIaTxgZuEyaS7FRLo7bM2+gk3LIg/e3e0SLDXtU+qOBGY
+         7qYi1nD9r8j8FLyruflv1Oa8C1DZaY80er6nA6LzswCOAUCjFILc59oLhKxBrOSrFr//
+         RbZjGhnnjghIQtu3YuFHbuppbMHIZonrhhDu5xENXhMjtPtN7Tne+uFX8PA/VpA9SzLd
+         GMbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791376784; x=1791981584;
+        d=1e100.net; s=20260707; t=1791376794; x=1791981594;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=h0D8m9XO+Tesp9dJkW37XxMOyt3NKohy2e1G558ub+g=;
-        b=XjcxNN7uOjeEm3xmCLPJhiwJH1amagowOF3QmSe+dIjI/Z3zqo4wPSTqwuLcuRMibL
-         AlqNw+MqVbUEXIjH11nbgURk+WwnOFriM3ei3KP4aiKriAYNw19vC8+U4vc9BOLq/KRc
-         dj1yjnPbviNRgCEoi37jH33neB488MACpOQJWm2Qf9kYd9WmNOMI/AlWs0oLL9IKICc8
-         rdkDIJ+akY/UfHQHelf2ONtfIlnRNw9sPjr4kYIlKIOFLIL4mZ+AzOjXS9Ba43rCeX5n
-         9tK/lx5b/1/tY4uYLe2ASK2DP3mh/ZIvjAwgdobrWcahhrmsCzMB5DXVgsTIoseCfk+3
-         oZiQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzpTcd7M+tqJjm9E+xJR13P7AervFry+1SSAe5YFvLOI52EBHv9PIPWOm/zqjvrhEYJcY8GcfWNLAdUKrJ0@vger.kernel.org
-X-Gm-Message-State: AFuF++kDOSKASkC+o00Enr2+XJlDwwcJ5hiMxc+TmRICuqXv3Og4pUEf
-	FZBCkvgCPZE4Eo2UvcECTOpCJTQOaPVVFarZL5hsTqKlPNY5rbB3zq+t
-X-Gm-Gg: AYBFou2x6he/IYIROm36kSUJoxS9RZaGYVloS6lgQ+z0sFqzYJgF8Yzn0tKjCOUYoXg
-	QP/TK+yJBFfemJv9Twad9N3za5WOkQkJWy/1Z32Sdq5iO0eQgP6+mkLucseZGbPwxZs7nxmk1HP
-	pA7ItYiOwUF3MPdkLIXOTnE/dlbbjuBRfPVRe3Q4lfRIi1xRW3mYYJV5T8+2BkCfxTSbGEef2/G
-	Mc+kDcK3hOfKRREgfqJTguItXup/IXTgfXU2mOYkFfezzd9Ut/Glma9GknelfeLigiwsCxQuJgX
-	swavlhJzmScol78Op/l5+ZMNYImVuOy4eNE4qVmoa1fMivQEldh+0DMacvbBffDHcamE+pAzjBY
-	EgadVAGPaBHA+iQIxCLcg6/gHFz1aX5wKV7N8dMw972b1pKJQ1VYUKqjPNoqQ1fWl0WpGZEVf5l
-	fElAyoBUhDI66D2TjANfO9BgPvgDS77Gb2GEiW6/Ldo8ONMDVqFAnjmiJEnZTeguxuvI4xZtJw9
-	CjgT2NSJ32Eaw==
-X-Received: by 2002:a05:6a00:928c:b0:886:458a:42e9 with SMTP id d2e1a72fcca58-891b5fc2e55mr1813898b3a.49.1791376784232;
-        Wed, 07 Oct 2026 05:39:44 -0700 (PDT)
+        bh=stbPCEVKk5/43mdbhizGdpTlS+biXo1nBfE8ir7ZWR8=;
+        b=t997bx2Tqcr2WmyQ0hRS5W9kF3QjJvOJFgpBSBFSE8IQ0P+O04KPb8vdVscuvVYZYg
+         mNehZ91Qh7EZxY6AFoxZ9pD4agTxs/6FPv5CcAbq2xD610LMOhVzMzvE2+u3dhA6dRpb
+         50M6jCub04MY2SPc8Cq1Su0Y7wNszyhe9wnooL2LXICZtrbywYoEKih8byiLkEl6nADQ
+         j1EILah1xDeT27TchPNIGTKjXMKkkYYypr+vr8vMzEzS0C19UDxsze7Xt/pmrXpwKn5z
+         mv8b7QPbeQPksrf3oXhKL97V4z3M26vhuCxqgdaNI/wM0YCAk/waK7cqHMaPxJ5i7SAg
+         yecw==
+X-Forwarded-Encrypted: i=1; AKwUvBwwEAm5FgphlKu98w8ivbp9JeP2ggUdsu1R3PuHDCBdX28Inm1LVvkfC64j4+JoD6epPjI/HHbatn0i6izz@vger.kernel.org
+X-Gm-Message-State: AFq9FYKnnCy3KjV0/vQNl1WCievPH2KCX8uQh2wwYiM30K+bT/vjfeqI
+	dT3IwjmopJvDgRCCwhF74M0ESWM5kxyL2wMPnX6FaJswoOwV8+lGFpRQ
+X-Gm-Gg: AYBFou0F8PdyOU9mEyDmRWTfIt0MVfiUUaOxxbOlxGJ/szLQw3TuF6OkCY1hj+JaZkK
+	J70G47MFFB9hlKpVpg1Qfd2e7nHVtW0ydhGIYV/CDbGsk8hL7UgXFnfLjul7k8bCuyl2ovtqc/g
+	d2jPIVlGHc69Dqhx0yxJWsG3c9r/H+Q4MQ8Txd/a3EDSldd7WEhuII7d1NN71KSkHv2F/+uP+0l
+	88FbNd278VTcjyrIPM4WI5r8sl5NdiYX/kBFn7q3Opmm5C3wK1q+yrt/vQPbyq7P/8Mb1KsFeqj
+	QoPb6EtLvqxBaEkhzO/yNFiAynNc677XKJ4abpF37XMEERVeFR/qcB4/TzsTfyyC6za/0tUO/1e
+	oJ5ubN9Vdqwx+hJFRNbgnP84Ghd8j/Lk7afTYwL3h0F1xVQ2inTnCasgCD3WusKzssQHA5HEstN
+	qvbUua5BVtu1mEBVV0CxXkHLZJHdXvdr+OSatqyE+mb4zxIjNyk/7XbyqKgeJKMYXzFQSbdRNAB
+	dZrFwbFdkedgvQ=
+X-Received: by 2002:a17:90a:da84:b0:3a0:cbe2:9e0c with SMTP id 98e67ed59e1d1-3a8a1c84418mr1597807a91.63.1791376793729;
+        Wed, 07 Oct 2026 05:39:53 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89189cdeed2sm1349565b3a.51.2026.10.07.05.39.41
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a8c46a2f9bsm650899a91.2.2026.10.07.05.39.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 05:39:43 -0700 (PDT)
+        Wed, 07 Oct 2026 05:39:53 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
-To: sre@kernel.org
-Cc: konrad.dybcio@oss.qualcomm.com,
-	kamal.wadhwa@oss.qualcomm.com,
+To: robin.clark@oss.qualcomm.com,
+	lumag@kernel.org
+Cc: abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	sean@poorly.run,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	yongxing.mou@oss.qualcomm.com,
+	yuanjie.yang@oss.qualcomm.com,
 	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] power: supply: qcom_battmgr: Allow setting the USB input current limit
-Date: Wed,  7 Oct 2026 21:39:39 +0900
-Message-ID: <20261007123939.1679-1-26rote@gmail.com>
+Subject: [PATCH] drm/msm/dpu: add the SSPP rec0/rec1 blocks to the snapshot
+Date: Wed,  7 Oct 2026 21:39:45 +0900
+Message-ID: <20261007123945.1694-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -76,97 +84,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The SM8350 class USB power supply reports input_current_limit, but does
-not allow writing it, although the firmware accepts
-BATTMGR_USB_PROPERTY_SET for USB_INPUT_CURR_LIMIT (in uA).
+On DPU 13 the SSPP block is only 0x84 long and the fetch registers
+(source address, size, format, multirect) live in the rec0/rec1
+sub-blocks at 0x1000 and 0x3000. The snapshot dumps the SSPP block and
+its scaler and CSC sub-blocks, but not rec0/rec1, so the plane fetch
+state is missing from the devcoredump and from debugfs dri/N/kms.
 
-On a Kaanapali tablet connected to a PC port, the firmware keeps the
-input limit at 500 mA, which is less than the system draws with the
-display on, so the battery discharges while the supply reports
-"Charging". The vendor kernel sets 900 mA on the same port.
+Add the rec0/rec1 sub-blocks to the snapshot.
 
-Make input_current_limit writable and pass the value to the firmware.
-Handle the BATTMGR_USB_PROPERTY_SET response like the other set
-requests.
+Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850).
 
-On the PC port with the display on, writing 900000 raised the input
-current from 494 mA to 891 mA, and the battery discharge current went
-from about 540 mA to about 120 mA.
-
+Fixes: 688c7734002a ("drm/msm/dpu: Add Kaanapali SSPP sub-block support")
 Assisted-by: LLM
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
-Tested on a Lenovo Legion Tab Y700 gen 5 (qcom,kaanapali-pmic-glink,
-which uses the SM8550 path). With a USB PD charger the firmware keeps
-its own limit and the written value is not reflected in
-input_current_limit.
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-The value is left to the writer: userspace, or dwc3 through
-usb-psy-name, which sets INPUT_CURRENT_LIMIT from vbus_draw. The 900 mA
-above is what the vendor kernel uses on this port; the gadget here is
-high-speed.
-
-This is independent of "power: supply: qcom_battmgr: report the USB
-type from USB_ADAP_TYPE" and applies before or after it.
-
- drivers/power/supply/qcom_battmgr.c | 30 +++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
-
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index 7716eb9e1aff..12692de7f982 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -1065,6 +1065,33 @@ static const struct power_supply_desc sc8280xp_usb_psy_desc = {
- 		     BIT(POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID),
- };
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+index da3556eb6ecc..dba8a07d34bb 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+@@ -1006,6 +1006,20 @@ static void dpu_kms_mdp_snapshot(struct msm_disp_state *disp_state, struct msm_k
+ 						    base + cat->sspp[i].sblk->csc_blk.base,
+ 						    "%s_%s", cat->sspp[i].name,
+ 						    cat->sspp[i].sblk->csc_blk.name);
++
++		if (cat->sspp[i].sblk && cat->sspp[i].sblk->sspp_rec0_blk.len > 0)
++			msm_disp_snapshot_add_block(disp_state,
++						    cat->sspp[i].sblk->sspp_rec0_blk.len,
++						    base + cat->sspp[i].sblk->sspp_rec0_blk.base,
++						    "%s_%s", cat->sspp[i].name,
++						    cat->sspp[i].sblk->sspp_rec0_blk.name);
++
++		if (cat->sspp[i].sblk && cat->sspp[i].sblk->sspp_rec1_blk.len > 0)
++			msm_disp_snapshot_add_block(disp_state,
++						    cat->sspp[i].sblk->sspp_rec1_blk.len,
++						    base + cat->sspp[i].sblk->sspp_rec1_blk.base,
++						    "%s_%s", cat->sspp[i].name,
++						    cat->sspp[i].sblk->sspp_rec1_blk.name);
+ 	}
  
-+static int qcom_battmgr_usb_set_property(struct power_supply *psy,
-+					 enum power_supply_property psp,
-+					 const union power_supply_propval *pval)
-+{
-+	struct qcom_battmgr *battmgr = power_supply_get_drvdata(psy);
-+	int ret;
-+
-+	if (!battmgr->service_up)
-+		return -EAGAIN;
-+
-+	if (psp != POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT || pval->intval < 0)
-+		return -EINVAL;
-+
-+	mutex_lock(&battmgr->lock);
-+	ret = qcom_battmgr_request_property(battmgr, BATTMGR_USB_PROPERTY_SET,
-+					    USB_INPUT_CURR_LIMIT, pval->intval);
-+	mutex_unlock(&battmgr->lock);
-+
-+	return ret;
-+}
-+
-+static int qcom_battmgr_usb_is_writeable(struct power_supply *psy,
-+					 enum power_supply_property psp)
-+{
-+	return psp == POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT;
-+}
-+
- static const enum power_supply_property sm8350_usb_props[] = {
- 	POWER_SUPPLY_PROP_ONLINE,
- 	POWER_SUPPLY_PROP_VOLTAGE_NOW,
-@@ -1081,6 +1108,8 @@ static const struct power_supply_desc sm8350_usb_psy_desc = {
- 	.properties = sm8350_usb_props,
- 	.num_properties = ARRAY_SIZE(sm8350_usb_props),
- 	.get_property = qcom_battmgr_usb_get_property,
-+	.set_property = qcom_battmgr_usb_set_property,
-+	.property_is_writeable = qcom_battmgr_usb_is_writeable,
- 	.usb_types = BIT(POWER_SUPPLY_USB_TYPE_UNKNOWN) |
- 		     BIT(POWER_SUPPLY_USB_TYPE_SDP)     |
- 		     BIT(POWER_SUPPLY_USB_TYPE_DCP)     |
-@@ -1558,6 +1587,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 		break;
- 	case BATTMGR_REQUEST_NOTIFICATION:
- 	case BATTMGR_CHG_CTRL_LIMIT_EN:
-+	case BATTMGR_USB_PROPERTY_SET:
- 		battmgr->error = 0;
- 		break;
- 	default:
+ 	/* dump LM sub-blocks HW regs info */
 
 base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
 -- 
