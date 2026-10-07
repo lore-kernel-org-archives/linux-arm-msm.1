@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 723403D3314
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 06:12:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2D7737C90F
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 06:27:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791353571; cv=none; b=OmMnlzypkmKQhESbjIufQCsNpc1ExM+hZojcRbLB3E4XLxqi7oxRpODPqS6949Yk9E1kQBTnfkm3eMQPWcAe7PSg8Q5prkZKpYt04yodcXU2LeNQCOyY4bcbLlPWAoDXieciSvsOetwr2KFOA9O67Ixh11HSAxMzRBnIK4JUXhM=
+	t=1791354427; cv=none; b=u0LewCj34QrLbqq3qySt/vhhubuWAG8qUOFEIB3DUHlsTed63QPcDb2LQj12dGJuD5rQi/VaqBhmZGH6ospdizxZK+HDxB76FPjp5IsyoWYmTYUbKAK8rwr2uCPXMyjMgc+PDxyu4h+SDx3mhtBmnBVv+i4+zLGBplt4IhtjRhs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791353571; c=relaxed/simple;
-	bh=HDfxlLW6jyBpQpQPXFWOlUGmrqt4DNQzoTXk0MiiH90=;
+	s=arc-20240116; t=1791354427; c=relaxed/simple;
+	bh=nr3t2c3FfabwAJsY1Y66H6BA/S3O5ZheNY1S7/lXLyc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Qb/2925gVG+TVuvvn/OH7tCQjPLiEDoYgxteKLhV/l9/jeb1tKhCzztQIbi4HP0WLDp5Fj9kt4RgeUyHDgn0y2X3XCH0keQZane8xIUPSNCBRr0ntsY1TPTqnHrbkaSST9ymKcQk+nxfrMxAaa31O8ZeJqJDTbGGzjvSfvp18eY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JgmJTDGT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iOEbvnLT; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=MYSbMcoIKuKS2hZWVE5n0sVfVAX6C49VO/K4cUis2yF5ad9hix7zz5oA23J/FCIz8lwvPkasJVQNeEGBeu93Yqyc5c+OmxxNSSuYV0ECdUU2VdB+NzEt/Bh/dYBajUfAgZqsCUXRQW4NM/S1m1Pb9kTJ1Sevijcygb47/TzQRB8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pQr8HF4+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cCixGBpl; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JgmJTDGT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iOEbvnLT"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pQr8HF4+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cCixGBpl"
 Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6974U8tn2879130
-	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 06:12:49 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6974U3C52878905
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 06:27:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mEeWG7KO8nVXNOa5twFybh1jJy97lZB8PRaYGWiQRVk=; b=JgmJTDGTaC2kRj93
-	0Fbp8P9UhNeqSgVkFr6Us1tYGfuHS2rtwiXBc96Jrj4EPeQyxhdndYJvViOTvkmd
-	1ZsUb4rGIgfvFQEL6FpLZNXqtCSwHl3nry30P+wAWdDqeuw0aytv4MVn++obdiCV
-	Brf3OPFbTfVHF0R8aebxh5+IbnUr8k7qChCJvyoJk+5SQzgKgTPTXFMBMIuEMByh
-	RsLi8acLT+iruEA+xutpqIpge0nEe7JApFUQRpt2/TQZEom8KV88Qv+28AxEOPkk
-	OzbDNDQyaNFvxILKGxJmAqC9L0DguVL4LED9lzzURaoIpJO0d7LEEBRJHrRZBqpB
-	u2RqkA==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xc9vbxb-1
+	2Cl6uQFa+n5AW/tdXzfCPHDiO4SySDJDdRMN6Z7wpw8=; b=pQr8HF4+R+USK0/0
+	YhmBYiPm6QStkGpYu56s7w67YR6kBhKzyOZK96+UNbegYVGvxlKkOdQuoqybb6BH
+	wDBOfT/YDTlSJ4Al133Fwst1T+K7BNJGlqFy2fJpVIbXVlGlk+zRt8wP2Nrt8mrj
+	ct8yWuo8hUQPlwBhiThljQHkDTj9F9pfzE5jHRHJQZZUVF4LA3opR+1jUkh8jtL4
+	37MWFsBA4U+eaJKQcvK0OfWzEOvxkioOdlMaoDG2FpOvVPedaMj9dSVxkBpnG25X
+	DNXSkugPu+P2jtj5o20PHbzYlxbf9PNkwh7kS4Gry8ZvgNvYlJd21GwbD+niWqGI
+	I84csA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4xc9vd62-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 06:12:48 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e60bb65626so3412545ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 23:12:48 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 06:27:04 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4216aee8fso3967746a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 06 Oct 2026 23:27:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791353568; x=1791958368; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791354424; x=1791959224; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mEeWG7KO8nVXNOa5twFybh1jJy97lZB8PRaYGWiQRVk=;
-        b=iOEbvnLTwVD4LYkhw9lk0JoSbhLyCV1XxiP2NRnT6ZBdcNTPPHQmwHmwaDkeF4ob8o
-         3Mc7YOjMATvH6D0DdHj2LULzqrCXgbT4MupFR2wwE9ZtIJapIlJZAUf8RABdLLImaM62
-         j48Rfsws//tdpHVE9thzR3wf1AMzm4Lvc29qVaOrJjDqe2xyg06mC8UJqHkuDUZfvydS
-         inmPONcXpizbVqmy/Fz5rG/rmWfhCE7HU5/OmhB5L1p06Il24ALIqDc20MfpMPC+mwFj
-         2FYyMizjlp/2ZE6pjh4l1/L8XRaV+3GQevdPIuAS5D7EynZ4TYCEZh9vrncu4hr6RAqp
-         yWlw==
+        bh=2Cl6uQFa+n5AW/tdXzfCPHDiO4SySDJDdRMN6Z7wpw8=;
+        b=cCixGBplZxigl/gHq3SRZ208mSddr4+N4CQGXYnxSaemq2JhwaePeTRAD+pGuDhR/y
+         BY1ifiFmwYrIKHkPAEqW86A90gfSktLhKNZidaqx+S1IR+8Nmms4ppg+3aO5BurxnAtK
+         TKcDK3ZBZcghPaCYUkMseRcbLsJRrtpuefffeDo+vZ5AylN5DtzYH4GAm8z1/gJX1y1U
+         IxqxFFz34t3lKyCsP59WbrDBTyokhILHzTm0Oqn9ey1N5Ow18Klp2yBtsHnLr4ygRSD3
+         g8JEtWIUUqFKiCrjBp2ddKJWkkUm42dIMoTOiSfOaUOuL4NBCnL/o7grQ6F7ZetVspNU
+         jpsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791353568; x=1791958368;
+        d=1e100.net; s=20260707; t=1791354424; x=1791959224;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mEeWG7KO8nVXNOa5twFybh1jJy97lZB8PRaYGWiQRVk=;
-        b=aPcMjaTvrZoB7cjowKfgcq7OfYsd2WjaikGJyxRfPJp9vTDhXj7eeLFYfkAOzjNwso
-         GEN+5FQ7c+0BWg/r1YIiiZ4pnMCLNBhXyd2URkpn4A12OxftFi4sJLT6DUkDW12WlIBv
-         1mbtY11Ihyu7ZPJsSkRl/3NPyfhOcHKbeoUG3JM8iOL2b0k4QynMvbKk5r6mEICofePC
-         wiLzg7lSOvqfKnLTuxrTosJUFar72MSyRzJMAHwKNEiSNSA0f7irY7JnD3kPPw0VTj9S
-         NZz6ndeLfTi3vwe0hx//0wGj2GirulShm6c0/D+bJgb2Ir3f/zMBuD2t6iJusC/+duH4
-         IzQg==
-X-Forwarded-Encrypted: i=1; AKwUvByUJUZTRmPicO5dWYmWEwIzFQc202s08z4f89ny6G1ioyraWxvd1KP2tAkH8+RgBbtoteH7B40+FsIzA9r4@vger.kernel.org
-X-Gm-Message-State: AFq9FYIY1mm7CKMCHtCLubpOaMnjgvc/0I2psrhwuvIyx9Qf8Y8tTqkV
-	gQMxxkGdkFBW2tw4ahlzj8fAYXKTmpdafvGnyV9IXy5Xoris+apgOFa2V0MtAHwKZ4jrL4hOKX2
-	CC43WaGJCmgAbCVFWVC7VG4l8ElhUiuhEusvy8goWwXd9tKJxj/OpV+6ws9Uvw8V1LIcK
-X-Gm-Gg: AYBFou1P+kBOCmTHjWz3lsYCmwdT723Gm9pR478ffn+dR6ILJJuhL/Ur4FOcYU4zBPN
-	JTcMVAebYxelc9hMoL+E6ImSaAbEPDAj+2W0vy/E5I4ZMSWm5YhmVeL3ZVNA+BLmCSihmyP4+SO
-	xTFBMGyIuLO5qjY7xuVvPWujsFA33uYoEYKqIzCeMDaN5P/GVRUxdODUPZqSTxP3oUiiHUKiD6y
-	m7cN4LO97n1htqvKmF+WAglHhwAsXBks4UEt5A0ZMsrXqp3HulzMhDBwI/PJ9AWYQXrDJDOzu7i
-	xssGWkgqZKxHmWaBW11dT0srNZMzzR6mtEuIwC1KZtMgYeMP9MgDMrreO3Dl3zX1Zgeuo2aZfik
-	voVvHdYPIHLHafEeKaz9kBxZqBuP/
-X-Received: by 2002:a17:902:d54f:b0:2e6:1715:e4a6 with SMTP id d9443c01a7336-2e61715e821mr2275575ad.38.1791353567780;
-        Tue, 06 Oct 2026 23:12:47 -0700 (PDT)
-X-Received: by 2002:a17:902:d54f:b0:2e6:1715:e4a6 with SMTP id d9443c01a7336-2e61715e821mr2275455ad.38.1791353567290;
-        Tue, 06 Oct 2026 23:12:47 -0700 (PDT)
+        bh=2Cl6uQFa+n5AW/tdXzfCPHDiO4SySDJDdRMN6Z7wpw8=;
+        b=Qi/BbUYQ/m3smQ4T6upDypi/TSi6ZWBUGNzKTvmienwsgZ4givGgzAhTP/Y+ocxVn6
+         U0lOug+VnE+97Oib6tydKZMCshyP6eI8tRFdIkdq1APKlbGACvWTOLjNKTVQK/6niaxx
+         AmSakBJ4zecJ85PwkUyY3NQzNAYAFFXYoSy/uDAEKGH8O6pmg82w6UlSrF8Wr2xxolci
+         n7QaqUZJcZ9IMHd4vD7PIjZhybJHlaRzDzfhuU+e9Kv1rzped5SRgLuZOgrUaKAEHzil
+         kRkbO+wnTfP+P0i1fYZyveDcwRF9L2RmR5BEeisoi0Lcrqy4ZyagP/jRrmwfFtRFKCwc
+         YJLg==
+X-Forwarded-Encrypted: i=1; AKwUvBzKSg9mCmiN2sZf/MAOULW+BUosUtN1vqrHSTqAVgW85gd/s1/nP8lRcUfeQfn75mKHVk4RlgsSZXfUZ8ET@vger.kernel.org
+X-Gm-Message-State: AFuF++lisGHZQi9ohJJBc0Q88AfOlkGOPCiUZPfOeyoaFRefqbgks6s3
+	e0lfhWz1FqatwRIZRXf9Eo53ctFQrr6HBZEq/v0mCjU3fxZs07P8A6ywM0I8OjfEh02Q5glRPhL
+	YXZk53ON5pngPr0FOiR5nWLTCIJ2wKu5viBkuCQnd+MsqdIrwbadAEZlFeshGhq5jDh/p
+X-Gm-Gg: AYBFou2d4+7wSSsW3AGaWipVyP1Xy39bReYuWCkdBC6DM8yc6bsvX7dkvBGIv3NyfB9
+	EPdEZ+ZdLTIHTQIPrryFhGboJjVzCKxpGJWJ7REK+ESttBAZ1X7PLtN5ifjXS/E/Bh+ux2U4WFn
+	JW++/c25BZhXnnoFRbGs4MfraWWwG3S+dyJuStA0xCJ7P24F3IEv/nUebSlGq81za/CgbCRWQIB
+	EGvTc1YinGZAaRshqP9TD5/JqcpMjgt76lnL5X2gAhlC9c39dbVIwmtUoIpombt1J4OhtmQce9w
+	R1gChLMAGMwltZVkuTHS3Tvr7O64p1t0VJ3YDRhHFfLu3AkRb2DD3oNJ+Bx0HzHDyVyb7s0utMG
+	nRq4tVwYv4UZxUz13Gv65dPi5r50r
+X-Received: by 2002:a05:6a21:3b92:b0:3cc:8344:1213 with SMTP id adf61e73a8af0-3e133db4acfmr1098876637.8.1791354423656;
+        Tue, 06 Oct 2026 23:27:03 -0700 (PDT)
+X-Received: by 2002:a05:6a21:3b92:b0:3cc:8344:1213 with SMTP id adf61e73a8af0-3e133db4acfmr1098857637.8.1791354423123;
+        Tue, 06 Oct 2026 23:27:03 -0700 (PDT)
 Received: from [10.204.78.119] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e6046fe0e8sm5326635ad.25.2026.10.06.23.12.38
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd0a92d6547sm850526a12.13.2026.10.06.23.26.54
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Oct 2026 23:12:46 -0700 (PDT)
-Message-ID: <acfba985-ac89-4769-9d9e-d2ce9ecd6383@oss.qualcomm.com>
-Date: Wed, 7 Oct 2026 11:42:37 +0530
+        Tue, 06 Oct 2026 23:27:02 -0700 (PDT)
+Message-ID: <10b8c78d-7981-400b-8270-db0c54509272@oss.qualcomm.com>
+Date: Wed, 7 Oct 2026 11:56:53 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,7 +89,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/17] phy: qcom: edp: Add Nord-specific register offsets
+Subject: Re: [PATCH 08/17] phy: qcom: edp: Generalize power-on path to support
+ per-SoC overrides
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
  <neil.armstrong@linaro.org>,
@@ -115,32 +116,32 @@ Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
  <ritesh.kumar@oss.qualcomm.com>,
         Mahadevan P <mahadevan.p@oss.qualcomm.com>
 References: <20260911-nord-drv-dt-v1-0-e25c073cf1b6@oss.qualcomm.com>
- <20260911-nord-drv-dt-v1-7-e25c073cf1b6@oss.qualcomm.com>
- <t5thwekhz7wyhmyq3nobm37kag6n7ef2z2xpuwrqikv4aqniwc@ha2pjr32ecrp>
+ <20260911-nord-drv-dt-v1-8-e25c073cf1b6@oss.qualcomm.com>
+ <mpkoztwm2ts4pb3m4t6347wfes4yeua5a5uxrn66dgmn6b6gpq@syu2fxzfmvp7>
 Content-Language: en-GB
 From: Nabige Aala <nabige.aala@oss.qualcomm.com>
-In-Reply-To: <t5thwekhz7wyhmyq3nobm37kag6n7ef2z2xpuwrqikv4aqniwc@ha2pjr32ecrp>
+In-Reply-To: <mpkoztwm2ts4pb3m4t6347wfes4yeua5a5uxrn66dgmn6b6gpq@syu2fxzfmvp7>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=ctMOAF4i c=1 sm=1 tr=0 ts=6ac5e2e0 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=ctMOAF4i c=1 sm=1 tr=0 ts=6ac5e638 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=ws4HDfdl8TRdMr_wlFsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAyNCBTYWx0ZWRfX18l09pis6OEo
- ay0+6jfu1ftP9MP+6lZMlew+00J51mLZ/ZR59sbOaWkXgZZom7wejjcIh/CbCdUiX8ZDjaGz8wZ
- 6wtAle2ajubR2zPOoDNQsS1g+1BywyE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAyNCBTYWx0ZWRfX2M8Jk57RHeD8
- Iz0YUvk15pvXCz3cbwqQ8xMxuUeV6ywcrMdrLNzRbUQSMTyG4/ajWJlKDIZgkytwZSfB3GqgNbL
- bgiRGdxWgADTS7KTo5W8gNP3kQKe3yTBaoJc6CkPiXpvA3SzKt+McoJB5i82Hxjb4UevlIY3VAT
- O6LU6Ce236/naAu80+rSjCh8YPEBKwGroXn/FWEyi/I9fsxHXiIRn5okZ4tufYLAXrrxozRhwT0
- c4mtmdau+x1ho78imp+Xd5fH54ysVOO8lL0iMLLvRmWjfR3qRfQRcY2NSIjjw2U/MJjhlMGT1E2
- lKLl9FaEKvLhb2C9TuwD6CRbPHT8lvbKH2UPqXJES0RIS1mqysji5DHfsoNP66k3KPpS9MK7eW/
- e+dV/8oAAQW2wK0ANRj2zG7AG1Xcq3xppPQVviHRPIT9L/78dzZ0mJ2hmWp5ovlKTTXs085LYNf
- O7wL4IIlfNp2CzDJzDw==
-X-Proofpoint-ORIG-GUID: gC-aprRO2iKBvT5aJQTJe8IEzY_rhMnt
-X-Proofpoint-GUID: gC-aprRO2iKBvT5aJQTJe8IEzY_rhMnt
+ a=EUspDBNiAAAA:8 a=LataAnNBLSGNWv3D5v0A:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAyNSBTYWx0ZWRfX1hyV3kPPYu9Q
+ bOwyEQC5M/uGiRtlwqIWSw26/Oux2nDSzYMK0lr4oqnX8tEJ31VSAv6lGPv3Y1yMUOkbOU/gRcb
+ bs122W8B2djAxQgLpbAJ5Q9ff5pbFf4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAyNSBTYWx0ZWRfX9akkNU8MhRZO
+ PbMpao6tmOom/KdK3D3M9Es4jWPtjqacUEmKc8JSWDeHC4+dMDOduamKPysTw9k4G9iAxe0LN9D
+ LruXOMWPTjtWH3FKyrXOwKvt3ynP7vFLsdRew60m2XkEvi5qyDF3eNUdk0tQH5swiGqXmQcGUYq
+ m/5PwT/RRfgomBdRGitcADkFEfrXimiDCldEZ0pVRpQ4pgyTb7wwr2t/jNrzYAXFSKFuxETeYdb
+ lkgEVoCQS/JaUUUi2UFC8fj/PGRiq8bxYSHHTjqvazA2ZWOnNngs5mH78Yyaze6rS8QKVKkKrwC
+ fo2DHENRDJXBUqAitao6Q0bWCuom/+HxNOfxfNoCe0pYF8x9WCV22otlCTAUPpq/hjiuqKON02F
+ G6XcxjBFOM7mZmhA7Mgy+i/n17ujufQgWhhCnSyaohiTAiW52wOXA/dCKRazG0mTdzV2YfunJV0
+ fG+R4kNFQE9wByzULmA==
+X-Proofpoint-ORIG-GUID: ofqeRt8Cii5hgeEQDCkMvtkrwU8xYCdg
+X-Proofpoint-GUID: ofqeRt8Cii5hgeEQDCkMvtkrwU8xYCdg
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-07_02,2026-10-06_03,2025-10-01_01
@@ -148,72 +149,149 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  priorityscore=1501 phishscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
  bulkscore=0 suspectscore=0 spamscore=0 malwarescore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070024
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070025
 
 
-On 9/14/2026 5:28 AM, Dmitry Baryshkov wrote:
-> On Fri, Sep 11, 2026 at 09:06:38PM +0530, Nabige Aala wrote:
+On 9/14/2026 5:30 AM, Dmitry Baryshkov wrote:
+> On Fri, Sep 11, 2026 at 09:06:39PM +0530, Nabige Aala wrote:
 >> From: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
 >>
->> Nord relocates several DP PHY and QSERDES v8 COM registers relative
->> to existing SoCs.  Add Nord-specific defines for the relocated and
->> new-only registers in phy-qcom-qmp-qserdes-dp-com-v8.h and
->> phy-qcom-edp.c so Nord sequences can reference them by name.
-> If the registers are reallocated it usually means that there are other
-> registers being inserted (or deleted). Are those the only registers
-> being changed?
-Yes, only few register offset is changed that is taken care in this change.
+>> Nord has a different register layout and power-on sequence that the
+>> existing hard-coded paths cannot accommodate.  Make com_clk_fwd_cfg
+>> optional,
+> Why?
+As per the HPG, Nord does not require the com_clk_fwd_cfg callback 
+implementation. However, qcom_edp_phy_init() currently invokes this 
+callback unconditionally, without checking whether it is present.
+
+I see two possible ways to address this:
+
+1. Add a dummy com_clk_fwd_cfg implementation for Nord.
+2. Check whether the com_clk_fwd_cfg callback is present before invoking 
+it. This is the approach I have taken in this patch.
+
+Do you have a preference between these approaches? Alternatively, if you 
+think there is a better way to handle this, I would appreciate your 
+guidance.
+>
+>> add phy_tx_lane_cfg and phy_tx_res_cfg callbacks to
+>> phy_ver_ops, and add phy_status_reg and bias1_en_2lane fields to
+>> qcom_edp_phy_cfg so each SoC can override the defaults.  No
+>> functional change for existing SoCs; new fields default to zero/NULL.
+>>
 >> Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
 >> Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
 >> ---
->>   drivers/phy/qualcomm/phy-qcom-edp.c                   | 10 ++++++++++
->>   drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h |  3 +++
->>   2 files changed, 13 insertions(+)
+>>   drivers/phy/qualcomm/phy-qcom-edp.c | 43 ++++++++++++++++++++++++++-----------
+>>   1 file changed, 30 insertions(+), 13 deletions(-)
 >>
 >> diff --git a/drivers/phy/qualcomm/phy-qcom-edp.c b/drivers/phy/qualcomm/phy-qcom-edp.c
->> index a3c893f72908..bf8a17336c7e 100644
+>> index bf8a17336c7e..373f13b3d6d5 100644
 >> --- a/drivers/phy/qualcomm/phy-qcom-edp.c
 >> +++ b/drivers/phy/qualcomm/phy-qcom-edp.c
->> @@ -41,9 +41,19 @@
+>> @@ -92,6 +92,8 @@ struct phy_ver_ops {
+>>   	int (*com_configure_pll)(const struct qcom_edp *edp);
+>>   	int (*com_configure_ssc)(const struct qcom_edp *edp);
+>>   	int (*com_ldo_config)(const struct qcom_edp *edp);
+>> +	int (*phy_tx_lane_cfg)(const struct qcom_edp *edp);
+>> +	int (*phy_tx_res_cfg)(const struct qcom_edp *edp);
+>>   };
 >>   
->>   #define DP_PHY_VCO_DIV                          0x0074
->>   #define DP_PHY_TX0_TX1_LANE_CTL                 0x007c
->> +/* Nord uses a different register layout; non-Nord value is 0x00a0 */
->>   #define DP_PHY_TX2_TX3_LANE_CTL                 0x00a0
->> +#define DP_PHY_TX2_TX3_LANE_CTL_NORD            0x00c0
+>>   struct qcom_edp_phy_cfg {
+>> @@ -101,6 +103,8 @@ struct qcom_edp_phy_cfg {
+>>   	const struct qcom_edp_swing_pre_emph_cfg *dp_swing_pre_emph_cfg;
+>>   	const struct qcom_edp_swing_pre_emph_cfg *edp_swing_pre_emph_cfg;
+>>   	const struct phy_ver_ops *ver_ops;
+>> +	u32 phy_status_reg;
+>> +	u8 bias1_en_2lane;
+>>   };
 >>   
->> +/* Nord uses a different register layout; non-Nord value is 0x00e0 */
->>   #define DP_PHY_STATUS                           0x00e0
->> +#define DP_PHY_STATUS_NORD                      0x0110
->> +#define DP_PHY_LDO_CFG                          0x00f0
-> Why does it not have a _NORD suffix?
-
-Ack, I will add  _NORD suffix in the next revision.
-
-Thanks
-
+>>   struct qcom_edp {
+>> @@ -316,9 +320,11 @@ static int qcom_edp_phy_init(struct phy *phy)
+>>   
+>>   	memcpy(aux_cfg, edp->cfg->aux_cfg, sizeof(aux_cfg));
+>>   
+>> -	ret = edp->cfg->ver_ops->com_clk_fwd_cfg(edp);
+>> -	if (ret)
+>> -		return ret;
+>> +	if (edp->cfg->ver_ops->com_clk_fwd_cfg) {
+> Why?
 >
->> +
->> +/* Nord-specific TX lane registers */
->> +#define DP_PHY_TX_LN0_DRV_LVL_NORD             0x00e4
->> +#define DP_PHY_TX_LN1_DRV_LVL_NORD             0x00e8
->> +#define TXn_TX_BAND_NORD                        0x0024
+>> +		ret = edp->cfg->ver_ops->com_clk_fwd_cfg(edp);
+>> +		if (ret)
+>> +			return ret;
+>> +	}
 >>   
->>   /* LANE_TXn registers */
->>   #define TXn_CLKBUF_ENABLE                       0x0000
->> diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
->> index 93edabb830af..008b17222a8d 100644
->> --- a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
->> +++ b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
->> @@ -48,5 +48,8 @@
->>   #define DP_QSERDES_V8_COM_CLK_FWD_CONFIG_1		0x2f4
->>   #define DP_QSERDES_V8_COM_CMN_STATUS			0x314
->>   #define DP_QSERDES_V8_COM_C_READY_STATUS		0x33c
->> +#define DP_QSERDES_V8_COM_SVS_MODE_CLK_SEL_NORD		0x17c
->> +#define DP_QSERDES_V8_COM_CMN_STATUS_NORD		0x1d0
->> +#define DP_QSERDES_V8_COM_C_READY_STATUS_NORD		0x1f8
+>>   	writel(DP_PHY_PD_CTL_PWRDN | DP_PHY_PD_CTL_AUX_PWRDN |
+>>   	       DP_PHY_PD_CTL_PLL_PWRDN | DP_PHY_PD_CTL_DP_CLAMP_EN,
+>> @@ -1131,7 +1137,13 @@ static int qcom_edp_phy_power_on(struct phy *phy)
 >>   
->>   #endif
+>>   	/* TX Lane configuration */
+>>   	writel(0x05, edp->edp + DP_PHY_TX0_TX1_LANE_CTL);
+>> -	writel(0x05, edp->edp + DP_PHY_TX2_TX3_LANE_CTL);
+>> +	if (edp->cfg->ver_ops->phy_tx_lane_cfg) {
+>> +		ret = edp->cfg->ver_ops->phy_tx_lane_cfg(edp);
+>> +		if (ret)
+>> +			return ret;
+>> +	} else {
+>> +		writel(0x05, edp->edp + DP_PHY_TX2_TX3_LANE_CTL);
+> if it's about a single register, add a register to the map instead.
+Ack, I will update this in the next revision.
+>
+>> +	}
+>>   
+>>   	/* TX-0 register configuration */
+>>   	writel(0x03, edp->tx0 + TXn_TRANSCEIVER_BIAS_EN);
+>> @@ -1169,13 +1181,18 @@ static int qcom_edp_phy_power_on(struct phy *phy)
+>>   	writel(0x00, edp->tx1 + TXn_TX_POL_INV);
+>>   	writel(0x10, edp->tx0 + TXn_TX_DRV_LVL_OFFSET);
+>>   	writel(0x10, edp->tx1 + TXn_TX_DRV_LVL_OFFSET);
+>> -	writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX0);
+>> -	writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX1);
+>> -	writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX0);
+>> -	writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX1);
+>> -
+>> -	writel(0x10, edp->tx0 + TXn_TX_EMP_POST1_LVL);
+>> -	writel(0x10, edp->tx1 + TXn_TX_EMP_POST1_LVL);
+>> +	if (edp->cfg->ver_ops->phy_tx_res_cfg) {
+>> +		ret = edp->cfg->ver_ops->phy_tx_res_cfg(edp);
+>> +		if (ret)
+>> +			return ret;
+>> +	} else {
+>> +		writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX0);
+>> +		writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX1);
+>> +		writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX0);
+>> +		writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX1);
+>> +		writel(0x10, edp->tx0 + TXn_TX_EMP_POST1_LVL);
+>> +		writel(0x10, edp->tx1 + TXn_TX_EMP_POST1_LVL);
+> Either use a register map or move defaults to the callback too. My
+> preference is towards the former option.
+Ack, I will use the register map approach
+>
+>> +	}
+>>   	writel(0x1f, edp->tx0 + TXn_TX_DRV_LVL);
+>>   	writel(0x1f, edp->tx1 + TXn_TX_DRV_LVL);
+>>   
+>> @@ -1187,7 +1204,7 @@ static int qcom_edp_phy_power_on(struct phy *phy)
+>>   		cfg1 = 0x1;
+>>   	} else if (edp->dp_opts.lanes == 2) {
+>>   		bias0_en = 0x03;
+>> -		bias1_en = 0x00;
+>> +		bias1_en = edp->cfg->bias1_en_2lane;
+>>   		drvr0_en = 0x04;
+>>   		drvr1_en = 0x07;
+>>   		cfg1 = 0x3;
+>> @@ -1210,7 +1227,7 @@ static int qcom_edp_phy_power_on(struct phy *phy)
+>>   
+>>   	writel(0x19, edp->edp + DP_PHY_CFG);
+>>   
+>> -	ret = readl_poll_timeout(edp->edp + DP_PHY_STATUS,
+>> +	ret = readl_poll_timeout(edp->edp + (edp->cfg->phy_status_reg ?: DP_PHY_STATUS),
+> No hidden defaults, thank you.
+>
+>>   				 val, val & BIT(1), 500, 10000);
+>>   	if (ret)
+>>   		return ret;
 >>
 >> -- 
 >> 2.34.1
