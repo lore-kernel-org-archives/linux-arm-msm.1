@@ -1,168 +1,156 @@
-Received: from smtpbg151.qq.com (smtpbg151.qq.com [18.169.211.239])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A3073B47EF
-	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 13:41:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=18.169.211.239
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D92E147D93B
+	for <linux-arm-msm@vger.kernel.org>; Wed,  7 Oct 2026 13:42:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791380499; cv=none; b=BbVIvLAfw8K6iWlU+a1FP8+UM62qRgHGTtOY6TcdiiqLxmQfjy/FuoNvIXRZm2EIDMqOx2ve6LO6QlYzzOLmE2Qes4OEKoPYRE9am/kecLwsp6vSL/gzsBmAnSQyI6jnBF1XE6zwTewngPZHe0IWFKTWKChx8LcMIQ1Sgr2Du6A=
+	t=1791380531; cv=none; b=hZmmfjobHv7aolc+8sIWvcGYp48qIEPPtkOT4czA62pLv8Y4GjLptMPQ7wNXNun4CaEuax/pz8NK7EXpM5UFzcxLp57s3OXq9kuRiNzkP4UWpZkBLd1KNg2Og22bMU/g7RZbQo23n9OLZ+wvilSSu7Lzyg4OQ34XBf/Z1uEelkA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791380499; c=relaxed/simple;
-	bh=gsRxFqm+EzbIUJOT1wgGnw7SvjE6GxUMt3WSHeGGv2w=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RVeoN8k05qlICxmbuZDYGkj7ssLGhCrP5KTO/EIIhHLDMCIqnEfJcQKTqH4EG/8kHKYa6q9YfMu4CeYT3hS44S6iLU01qQQbKjLwNEOSdTMYaj8IDWqhr9rgdu38oJa+boBxyp2/2nTuB/4y8S2IpCy4i64dBTmoQDnPgCrP7jw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=18.169.211.239
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpsz4t1791380416t8179b403
-X-QQ-Originating-IP: PWpttXQ3DOBp5n0jZQWtZkD4nf5QeEN4Sg0ISfK7Tas=
-Received: from [127.0.0.1] ( [180.159.160.209])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Wed, 07 Oct 2026 21:40:13 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 9570977485540682427
-Message-ID: <401F87C23DE9A910+997f9376-6810-4066-ae0a-686af834c0bd@radxa.com>
-Date: Wed, 7 Oct 2026 21:40:11 +0800
+	s=arc-20240116; t=1791380531; c=relaxed/simple;
+	bh=LjHu/GXybxzs4xe5GtqrxQ728YWgfwBGwxNbu3gH8pY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Yb3hnsgtos8BQvJCcjpfT4cLR99nz1FhDeD3/dH3KHvjqrJkv0CjmgtDJbzxB4DvcWcmeXDpFrMC8WN/PU8qXgvRsbYqiSvB7J7oCRwM66RLByFuKy9NIi+RDY8pbaSPf9uOl17dgWni198i3h0Ntm9pGZ/sBMvAdAIXQ8tvGw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YRElo8ZW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HK1g/gGC; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YRElo8ZW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HK1g/gGC"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 697BVCeA3198233
+	for <linux-arm-msm@vger.kernel.org>; Wed, 7 Oct 2026 13:42:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=KGUO9Rm/3Kp7eJz0vM+BTmpU
+	efwN7FAzKqUEkIaj2gk=; b=YRElo8ZW5cnbpy/eU4UOhguAjnN+1T/XxF3EsT4u
+	l2iEvrSTdeVMoBMIk0IiMzR0IZCIEYcqx4bkP0GjDH/GcTrFAexAgC+kv3kb7Oee
+	e9dHcoX2q0h1nHv2vNxOjd2Irj5WdxCY9+o+7hehip++iNh0Tkx2aJhE7Kuf2run
+	XfAFA2/KDdqLn5v4Ie4BWiBHUx4wACTwGzIr50tIEGgjjP9MJHySOe9t6YDgXVZq
+	AbBowdkJU7egs2X3bFePu86mByRvzF8Iy8RGDTbhmQpoTNHz+lonQeu3Cg5Tjn4b
+	QaTf4G0vaTEgPZ14GEhwZv+PJZqJ71QWNkNlm7AR5l4cog==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c1s2dfq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 13:42:00 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93cbacbb996so656248185a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 06:42:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791380520; x=1791985320; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=KGUO9Rm/3Kp7eJz0vM+BTmpUefwN7FAzKqUEkIaj2gk=;
+        b=HK1g/gGCAlPYx/f+dweuhnn5edpGnl5gNeZzJrkTY4Vxk9AOaFIW6kDPHwnKZvoBnS
+         XzrjP8r9N7KqdaNjWL+48JT4aOtNWA/m3Aku6ioKf8ACaMcglDwTzId8YHLBcSiX42Xg
+         c2u6dxSUU8AM88OQoboUAD10SF6EBy2hCsS8YMym2p2SpJYsYj0B+5cM/yBELPc26iqn
+         OTy02LyClKUKeB+kkiLc4feTDMvd8JWvBoL3LcycAqIe5lr/ENko3Vbj2JMDYpN+PEsI
+         C2sv/svQQzGRCo5r39SKre3m1IGx5HblFA9DM8OSq4qROFohY+uqesgGQ4K0QmBuuYfu
+         FTxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791380520; x=1791985320;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KGUO9Rm/3Kp7eJz0vM+BTmpUefwN7FAzKqUEkIaj2gk=;
+        b=1N8sPrua8vFpvusxntW1JKD75/k0iCVDt/aqDK2uGC1XSlr2Ev/MqU2x4pd9ZRAweO
+         bYyuWIKKLpdVP7YRJZYZTFvKdqBU3X9/96GW3jikrMePWt0js+d+gjp1rCe9NQUsi/37
+         uEA1pn0xqJn602oUVjpbzUQ+l+XXHbC6sgYIO008IpBelF5D+8wpbEjOzcZNNz96SAIF
+         wioVFlaWSLqre3yZNU5nrBaWzXjsTd8H5qpRMqcqE3O8nQuC00bfZR0rvu6Y8YxkeEDg
+         J1ByJy03y9N7j7ESmFtoQG+aEWPT9xv+eIBLmPcRXwXyp8wEC0VKPp5RknKbS3a2v80O
+         NGaA==
+X-Forwarded-Encrypted: i=1; AKwUvBxA6yH+9+I2t24t3xrqpuUj3oQU49ep8wG4omgpITyIjaJtsjXFFSI0LDgL2CeAkqVOaLlkQ47VTqS0qCTf@vger.kernel.org
+X-Gm-Message-State: AFuF++l7PHncAGqY8UeOu2/btbFputv0qF2AKayXg2Rqlc5AQ5hhJieT
+	wJcJFehll0CogBIFy053tDOW/++QKmorQ5ge4lkcWOGXjQDxU+kjA0v+W+IW7+6phBL80a6HfOv
+	S+xfR2O8AFXUhlLp7nybW/EQKNJXNzm3KBECE4teJnk3ASm+tTx8Z0qS/bQnVW2LFQXM9
+X-Gm-Gg: AYBFou0EeJMWZ5k6ZaDfEI5urfh7RBj1t266c0vo3VCQ0QTRpYBibH6g8f/WKQzzQCL
+	JpKnDUGpcV5eiFzMCAvC97gRvoCkG5deTkR7Ez0IUojx8IzgAmTzqIi+LXmRqOhLDcz7FF3kafm
+	/joOeW2p5eEd2F1LUGJBFAbg4ffzju4jShO0bCXbaJJ3UstPxwHd5bYbCfnLZGk8eRswFv+6YBt
+	QviPZOCitsLugwLagLNlV5+5a528/7tsGvlKvhWDM5NwQRbgTQD+iYw5SG2CkBcmVRJE236AvUb
+	edQw/pwvcKQuVLNxj+Nh/dODgBg2B5YAnYgPeINlUJTsqD2e0pt7sjpk9UZtkgpiXoTQssOofDH
+	y4JsQy4GAypZaxkKhsn+x2A+3ywlR6XvXzps6AXpg1qNShhFohBO4Ze1YTW5myz+HWwP4EVPUs8
+	S43Ix8QMeYylN6
+X-Received: by 2002:a05:620a:2b47:b0:93a:2239:4ac1 with SMTP id af79cd13be357-93e9b7424cdmr451575485a.32.1791380519901;
+        Wed, 07 Oct 2026 06:41:59 -0700 (PDT)
+X-Received: by 2002:a05:620a:2b47:b0:93a:2239:4ac1 with SMTP id af79cd13be357-93e9b7424cdmr451569485a.32.1791380519340;
+        Wed, 07 Oct 2026 06:41:59 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcd30a959asm48293e87.84.2026.10.07.06.41.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Oct 2026 06:41:57 -0700 (PDT)
+Date: Wed, 7 Oct 2026 16:41:56 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Joonhoe Kim <26rote@gmail.com>
+Cc: robin.clark@oss.qualcomm.com, lumag@kernel.org, abhinav.kumar@linux.dev,
+        jesszhan0024@gmail.com, sean@poorly.run, marijn.suijten@somainline.org,
+        airlied@gmail.com, simona@ffwll.ch, yongxing.mou@oss.qualcomm.com,
+        yuanjie.yang@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] drm/msm/dpu: add the SSPP rec0/rec1 blocks to the
+ snapshot
+Message-ID: <seuzkp6defi5uft2uhgclrt6iltd3sj2hrntvdluesqqtoadmb@zp2zolf4qf5o>
+References: <20261007123945.1694-1-26rote@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: sophon@radxa.com
-Subject: Re: [PATCH v2 0/3] Add TPM support via Qualcomm TEE TPM TA
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Cc: zeroknots <zeroknots@protonmail.com>, amirreza.zarrabi@oss.qualcomm.com,
- jarkko@kernel.org, jenswi@kernel.org, jgg@ziepe.ca,
- linux-arm-msm@vger.kernel.org, linux-integrity@vger.kernel.org,
- linux-kernel@vger.kernel.org, op-tee@lists.trustedfirmware.org,
- peterhuewe@gmx.de, sumit.garg@kernel.org
-References: <20261001055029.1960743-1-zeroknots@protonmail.com>
- <0c6d29ce-920a-4566-9a4f-a0687b0e5ddc@oss.qualcomm.com>
- <b2xdth3hkuypnvxlrgssnj4toffbceohhnh7w2ju46fzinflfd@qaq6ai5plolq>
-From: Xilin Wu <sophon@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd
-In-Reply-To: <b2xdth3hkuypnvxlrgssnj4toffbceohhnh7w2ju46fzinflfd@qaq6ai5plolq>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: OQNQM5UP8StMrhpdw91u533Bb5Ceepdsc8Zx6HmiHW2tSz+l4vqVDCEk
-	sJHB9py06Tl6C+//3WL5VMpqzzypNYGUN6/y6qFAQCEdICs5pFMfmQ4FNpt95Zprmf3Hj4K
-	Ncw/zh/4DIEaGuPK44XI6yc7V6lwWfk4Ml62lLX1jJyRNQX7Lr3gNBlwr/yoah6uhgOgWxF
-	wIB2PQBBb1lNzEPjK0O6wkIn+H+LBixn9DVfeoMd0xAXWgJzE+/SolSLZr9WIffPCzwai2a
-	BU3HEEQJ+GxKpWIoSM98uoJqh43U2Bd+JZ8bhAlOm7ZceyRIS3nOdRFiDvv39OLW5Fz3fRy
-	f9D+VHGNrsc54JcmSwq7YpWXOBKhAdyab1PaAPwCj/aFI5Bhn4/9u+HmL+e+qEh/LjQR57U
-	ZuqufE1tineiXC2MITe40Z+MWJQhHIDZ/PjfwQBTakIk5Gz3xks0jqEX2NpMKSAXUagQdEw
-	8FR8yl/r90fNOqDv4ZDsPVhrTmZnfXaDLxCD0tkyyxTDuynIGtxK5Z4HmSZWhYIotylhXFl
-	BOofoTQMdPVSLmEIuBsGgDE22VmfYZ2zHHW/fv0qFHznRH32b4bOanq9vmerww1VB5K7vHe
-	ViRssivMmmUigaFqqVx66JaRNtulvfHhP7JUcZXIRjve4wOGptDCk4+UCl4+4Uak6+Hjpfk
-	NgyoYQ+Poinrhe7TpgBEJ/SNREb3VRf/leP6oMFNV9gllFz7kYxRULFav67A4l1g1MCeD1T
-	4H3tZTBr8D4RAOki9R/UYJo0ZIf7chLrBMp4oCWVu9qOK6bXoLH+6Y2NTFYPHNdmFQA18Kx
-	x5BY9iNggknN7ctoN2xjPua5YfmelSEhbupKaVj+kaDsGthog6ZQl39YxBOdLm55xR0Jdqv
-	mP1WgO7D3DEtppKZ2LYkWmznelUE22HJf3ub3G0rjh4wFhmr70G1bRzIaIXbFIeRcrM8GoI
-	ytO6vwnTAscu2xTSRnoya0GvVnMSmGAQe5aEmCA7cTUuEik8D8F0Jm0SM2TZDLc4+OWwNvR
-	K2IoJvMQ==
-X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261007123945.1694-1-26rote@gmail.com>
+X-Proofpoint-ORIG-GUID: B5eKdkG1VdUm19xL0cosexh2Hxcnffrj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDA1NCBTYWx0ZWRfX5/IfVFPsxl1F
+ KJ0yFpfCeh9SI6L2XAPBH2/iK6lodg0viZkLjZcZroyDQjR2KHD17DfzojpMUWXK2gLMK9BCWpm
+ pw46ggJQEMezh6NkisETjTqUG6JL+WjTLcBy8myEgzP1Joc3GRlbZ/qj+XuyvKHMZ7uVTm7MXa2
+ R79oMgoUDJ2VPP8kJmyIZMmaq86lTxhNmaErIX2Y6H7xW0nHWwS8eXILVGMwGtUiZKUYQHBlTCJ
+ fyRVso50bNbFdK28HxxseftN2NXVi28WrMAtgvOzOPJJ8nWhRcffCVdydH/VeO8ONV2q80SbNwg
+ mlCmUZ0F1+PwcdcS0pcF0k0eUkd8j0rLfht6sW1i+DcRdpeV9sZlH2AwF1ces/LkEqYFf3knWus
+ 7qHiHwlVzYpQCZvcjEFEEQipGMtoTsmgo8tRN9s7bS/7Uf5aQvU0mKk6AeXnqApYxZ+hIfHv7Vp
+ DnPjV/t1zOOwrHEsDvw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDA1NCBTYWx0ZWRfX6oDf5GryyS6G
+ KHAhr1WcGLBcRSWTY0+mXWt5QY3//zfkCCAnINu9cZ6FYn+TnaFzWzG6mGfZcfAq3//4Q6dlIE8
+ pUq5TWDzhsl3gBtgvxatVVDNZbsZ/iM=
+X-Proofpoint-GUID: B5eKdkG1VdUm19xL0cosexh2Hxcnffrj
+X-Authority-Analysis: v=2.4 cv=NatzRGD4 c=1 sm=1 tr=0 ts=6ac64c28 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=s5JHMdqm-UuCYFehMJkA:9 a=CjuIK1q_8ugA:10
+ a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-07_04,2026-10-06_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610070054
 
-On 10/5/2026 3:24 PM, Dmitry Baryshkov wrote:
-> On Mon, Oct 05, 2026 at 12:27:40PM +0530, Kuldeep Singh wrote:
->> On 01-10-2026 11:20, zeroknots wrote:
->>> Hi Kuldeep,
->>>
->>> A data point from retail hardware, in case it is useful for this
->>> series: on an ASUS Zenbook A14 UX3407NA (Glymur, X2E-88-100, BIOS
->>> UX3407NA.315) the TPM TA is not reachable as QTEE service 81, but it
->>> is present as the QSEECOM application "qcom.tz.tpm".
->>
->> Thanks for reaching out, Kindly check below.
->>
->>> With the qcomtee driver on a 7.3-rc3 based kernel, QTEE reports
->>> version 5.2.0, and service discovery finds neither 81 (TPM) nor 413
->>> (UEFI secure app). On the same boot, qseecom (version 0x1402000) works
->>> and backs efivars through "qcom.tz.uefisecapp" (app id 7). An app-id
->>> lookup for "qcom.tz.tpm" returns app id 1; a made-up name returns
->>> -ENOENT.
->>>
->>> The Windows driver for this machine agrees: QcTrEE8480.inf configures
->>> the TPM service with AppName="qcom.tz.tpm", SecureApp=1, LoadApp=0
->>> (preloaded by firmware). The EFI configuration table carries the
->>> TPMEventLog and TPMFinalLog entries, so the firmware TPM is active.
->>>
->>> Through that app, using a QSEECOM transport (based on Xilin Wu's
->>> out-of-tree SC8280XP driver: QUERY_INFO_2 / SEND_COMMAND with a
->>> CRB-style control area, here at 0x81d10000), /dev/tpm0 works: TPM 2.0,
->>> manufacturer QCOM, vendor string "xCG fTPM", firmware 0x40000, real
->>> PCR 0-7 values, GetRandom, ECC and RSA-2048 primaries, sign and
->>> verify, and a sealed object that persists across reboots.
->>>
->>> So, as far as I can tell, retail Glymur laptops may ship firmware on
->>> which this driver finds no TPM, while the same TA is available over
->>> QSEECOM.
->>>
->>> The same applies to the prerequisite series that moves uefisecapp to
->>> QCOMTEE [1]: on this firmware service 413 is absent and EFI variables
->>> work only through the QSEECOM uefisecapp. If the QSEECOM path were
->>> dropped for Glymur, efivars would stop working on this machine, so it
->>> would be good to keep it as a fallback when the QTEE service is not
->>> found.
+On Wed, Oct 07, 2026 at 09:39:45PM +0900, Joonhoe Kim wrote:
+> On DPU 13 the SSPP block is only 0x84 long and the fetch registers
+> (source address, size, format, multirect) live in the rec0/rec1
+> sub-blocks at 0x1000 and 0x3000. The snapshot dumps the SSPP block and
+> its scaler and CSC sub-blocks, but not rec0/rec1, so the plane fetch
+> state is missing from the devcoredump and from debugfs dri/N/kms.
 > 
-> No, the existing paths are not going to be stripped.
+> Add the rec0/rec1 sub-blocks to the snapshot.
 > 
->>>
->>> Two questions:
->>>
->>>   - Is service 81 expected to appear on retail firmware through an
->>>     update, or is it specific to the CRD firmware?
->>
->> Yes, there's spinor update(bootfw2.mbn) needed which is in progress to
->> publish as QTEE side changes were already merged long back.
->> Roughly it takes ~1month(ideal scenario) to get firmware changes
->> available but somehow it's taking more this time.
->>
->> I think i should have captured this dependency info in my series cover
->> letter to avoid any confusion.
->>
->> With the changes, service uid 81 will be available and won't see qcomtee
->> driver issue log there.
+> Tested on a Lenovo Legion Tab Y700 gen 5 (SM8850).
 > 
-> You are responding to the user who uses a COTS commercial device. Are
-> you suggesting that the user can somehow update the firmware on that
-> device?
-> 
->>
->>>   - Would you consider a QSEECOM-based path for such firmware? I am
->>>     happy to test this series, or any other service UID you would like
->>>     checked, on this machine, and to share the transport code.
->>>
->>
->> Qseecom-based firmware path is not recommend approach as it's not
->> generic and less scalable leaving less room for expanding featuresets.
->> qcomtee uses mink-ipc based model which does all interaction with TA
->> with just 2 scm calls and is very much scalable compared to qseecom.
->>
->> So, we are planning to use mink-ipc based qcomtee path only and I'll
->> drop an update once QTEE firmware changes are available in meta builds.
->> I'd be happy you to try it out and give any suggestions!
-> 
-> I feel it really sad that the team (again) ignores existing available
-> devices. Yes, QSEECOM is legacy, etc., etc. However we must make sure
-> that devices are being sold can be used.
-> 
-> I guess, at this point, the best course of action would be for Xilin Wu
-> to submit the QSEECOM driver upstream. Xiling, could you please do it?
+> Fixes: 688c7734002a ("drm/msm/dpu: Add Kaanapali SSPP sub-block support")
+> Assisted-by: LLM
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> ---
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 > 
 
-I'm also sad to hear that the proposed qcomtee path isn't even supported 
-on Glymur, and yet the Qualcomm team is ignoring QSEECOM, which is used 
-on all the devices currently being sold. I might submit the driver 
-upstream, but I can't promise anything.
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
 
 -- 
-Best regards,
-Xilin Wu <sophon@radxa.com>
-
+With best wishes
+Dmitry
