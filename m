@@ -1,43 +1,49 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C212437E5FD;
-	Thu,  8 Oct 2026 19:45:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7315F38E5E9;
+	Thu,  8 Oct 2026 19:48:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791488752; cv=none; b=flkSsHlb9Ux3bwS752c64OPXTNMfXkrSZISoFZg7+FfKKRIwJOHdrMkI5RCu2ZBk0pvL2YQepCFus+aHoCJiMZHNVRqwuM/bie7RddS9jKGll0hJafBslCcg5fBLQ64+9MGv1CQDVbEsrThw9TypsNilEnl3bxJA9tOjiNPopmI=
+	t=1791488900; cv=none; b=pVcq+xM2kyKYnAPpZYWO0qHDctbUI/MN9A+SJZhMZhh4Gt5KU5VCxq1ejVkh8EKKtT/Egd7tQo9MFMcxv3wjJs2i8Dr61Yoj60q6W9Kr7YK8YWM3DZjsRcAlPAyE9irmthoBMAGSVEDAOCLxEKoA5UXn3ev0zAdmSo534WtS2Lk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791488752; c=relaxed/simple;
-	bh=4UyLTIS/qxKCt1AXo4psa9BmH2o3OMVTVJCtzcrSsJ4=;
+	s=arc-20240116; t=1791488900; c=relaxed/simple;
+	bh=M5uIu6puK46fm6TLtTf711PSDJI5UlPdFbtyWHKvUP4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=no6TBu24ndzY96ynJRbqPc/RQYv/kMJaB0FmWyP7YsyIrbJtvbNIE1vw5BS4grArdGqXQ71skrw0GSRgy2Eu1DjBceST7JK2TCF+cFxuEeCkl8QkpUP/LiRc3sGp/xVgcKtG1Gloy2+fo+fgQ4iWBIQMR1fb2Lf4uBqSkk9Wx+o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mJ7v8JTK; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=cIsNCUaM542aB9lQGvzZjtSsfvgbcm5llKNm3g+o05AtAk4BGH+NP9LB/dIBXV86O5wWgWZ/06qSu91obJZ281uk3rymjLT/UlyvOX1yAcF6Piz+Egduy1Z6lRDodpgmV+QKZUYXrGPF5M2IWlNnR0wdi5/FQe2bwBdcyVqhXxw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G61gZWg7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mJ7v8JTK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37E311F000FF;
-	Thu,  8 Oct 2026 19:45:51 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G61gZWg7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAEFC1F000FF;
+	Thu,  8 Oct 2026 19:48:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791488751;
-	bh=q+Q6stYCq6cZJyDhEdIvVjO7t8cw3BzIFyIxVu6yjX0=;
+	s=k20260515; t=1791488897;
+	bh=/3W//7HChM3zyLxsRiM/y4C5pytan37O8X+1p3KOCdU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mJ7v8JTK0w2/G5CsjU6uURxIXMgNZXsxT4rY8s8Zoh+oQf3qwUovZu5EsU0asJeET
-	 5tSzG1uAu4u6XgbePbaAuG/DsMY62h//8TI1Kbwc5eMaFUAwpeeXJd/psQuw4W4wTz
-	 KJ3SSf3tjxzDox8N6YRCqVvV5on1Kj/DN6TIxstzqwOcRJ0wvc3YfNRDnD/l/QEIc8
-	 T8dQa4jvTncfKzIfVSuVNWexZBefKR/5z6TesWjw/J3VY2F/TLUY+lzZ34aI0W88lD
-	 UpAua6vZ0J6tkNL4x+sfbdVi3quExEJzfBgy4fPqXnLQz9LqPSHDKMWFM1Edr8NOEs
-	 hDVKmwOmeabYA==
-Date: Thu, 8 Oct 2026 14:45:50 -0500
+	b=G61gZWg7IxdkHW0KM1z0Ny2daAUxNkEKceH41inswh1JTwKSVUpsEbHR0XPq/GtMI
+	 NiJoqyiwC4pKoBOfKyc8BDIkrAgJ1ggQHwCUXYHfTcjZHVcFhbt/0dQuOkPmPVjFq+
+	 CE+o2KDoA8XOskaJRF+vDjxBlW4eusoBqmaU0HlXhdU/wnPNMHQeI0NPvk9i4/gl3V
+	 Wa+P7OViqLToo1MQrDOXz+yQtac0xwW1nNSSJHPelEK9omqreIg9B0Pe1yM9S0LW5L
+	 +7+KHs/u8J9QB8uUguiHvuLIvTujGLkD51eiE7eoXM111NN0Z0rZBBKA2Bg3ttN65t
+	 qajbIWRFqggzA==
+Date: Thu, 8 Oct 2026 14:48:16 -0500
 From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>,
-	linux-pwm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	Conor Dooley <conor+dt@kernel.org>,
+To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+	Conor Dooley <conor+dt@kernel.org>, Kevin Lu <kevin-lu@ti.com>,
+	Shenghao Ding <shenghao-ding@ti.com>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	George Moussalem <george.moussalem@outlook.com>
-Subject: Re: [PATCH] dt-bindings: pwm: add IPQ5210 binding
-Message-ID: <179148874952.892086.1972349791589080283.robh@kernel.org>
-References: <20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com>
+	Liam Girdwood <lgirdwood@gmail.com>, linux-sound@vger.kernel.org,
+	Srinivas Kandagatla <srini@kernel.org>,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	Sen Wang <sen@ti.com>, Mark Brown <broonie@kernel.org>,
+	devicetree@vger.kernel.org, Takashi Iwai <tiwai@suse.com>,
+	Jaroslav Kysela <perex@perex.cz>, Baojun Xu <baojun.xu@ti.com>
+Subject: Re: [PATCH v2 4/5] ASoC: dt-bindings: qcom,sm8250: Add Nord sound
+ card
+Message-ID: <179148889658.900686.10369549179867357791.robh@kernel.org>
+References: <20261008-nord-asoc-driver-support-v2-v2-0-0b6f7e94060d@oss.qualcomm.com>
+ <20261008-nord-asoc-driver-support-v2-v2-4-0b6f7e94060d@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,16 +52,18 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com>
+In-Reply-To: <20261008-nord-asoc-driver-support-v2-v2-4-0b6f7e94060d@oss.qualcomm.com>
 
 
-On Thu, 08 Oct 2026 14:14:00 +0530, Varadarajan Narayanan wrote:
-> Add DT binding for the PWM block in Qualcomm IPQ5210 SoC with
-> qcom,ipq6018-pwm as the fallback.
+On Thu, 08 Oct 2026 16:36:44 +0530, Mohammad Rafi Shaik wrote:
+> Document the bindings for the Qualcomm Nord sound card.
 > 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> The bindings are the same as for other newer Qualcomm ADSP
+> sound cards, thus keep them in existing qcom,sm8250.yaml file.
+> 
+> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml | 1 +
+>  Documentation/devicetree/bindings/sound/qcom,sm8250.yaml | 1 +
 >  1 file changed, 1 insertion(+)
 > 
 
