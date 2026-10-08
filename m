@@ -1,245 +1,285 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 279AD3C09E7
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:15:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791440132; cv=pass; b=KXxTbkG7p38HRf7n6Eazox8LdpWUH0j1pDyz+shEfnGtSBaqIZq+iqemkYUP8YvNrO39GGfkGqG41SHXTU+SJ72J2toN7/uo7JBNRPtkF6pzoMqVDqs63mYJK1KONnvGNj/53GkkvxfFPMRA70W7s4bIImMXnyYCjnV0ahgnX7g=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791440132; c=relaxed/simple;
-	bh=e3MUK5mLoJWucj7GyFl4ivsM4yVN/NwLBo+kC/yeKZM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=V4pmeYvUXS/PnthKIeTHE2Je950y2+d8TkVFdNoKW9QF2qKQ6jDWkQY+WLG5x2sNBGf2Ge4nLfM+67aliAtB/Ug0ZXrrezwEVt4anLlpprvEYIeGwuY7VWALY8yizUBTIZxZ+CEyRCaruCOK6OzJfYbor20lqhVqMhQrm5q2IDI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=INS536GR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=D/lLZUOe; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1504B35AC0C
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:23:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791440639; cv=none; b=e5p9RD2Jre4lWIAW8rxvgmDCse1OXGHyw/e9okv1NrH5CspVGC6VHjrM3UqrXi8nyGuYVi1lZA1pMdJnhrAqKZOvqZvfQklOu1WqZAQQ6N3uPTx2UviZmOOmytnrmmAdWaoNW7Q9kpVGX/lRnVqYr6JgF1OlY+NcpBSFQ5lXQDA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791440639; c=relaxed/simple;
+	bh=jd9PcWpk1n8AimGZ1zhzk4oE5h4on7nfC13PGzWnQ1U=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=M3yLNQLVuVitL6lwBG539D3/8AWhU05LK4ozhimvNEVOS2WFgct50s0XzOAm7gOCnVk/QJQ7qElypqkjdIe9N0brcwtQmKINh9tP3oI5D8DB9T3rVbYuI5RLeWCJPMNYIatoBkne0coDujUsN2w1bABdj22HD4nwM43Nn3WYM1U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BZ+AobiK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=H8NgpSZz; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="INS536GR";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="D/lLZUOe"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984CE1Z2147113
-	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:15:30 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BZ+AobiK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="H8NgpSZz"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984BUXX1775334
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:23:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	xQPAWZepEqBkyCXjjaXrcNi/jWE54i2O+AUc1+MHBYY=; b=INS536GRqXgAyLEv
-	LXBkqnEE6CLJX5tPvxB/ATYuK87GnsHHOm42VV/lFWu1MectcBvxMG7qlQx+uq/r
-	Rgrx8MJJdy3yZkb9LuEgUPblFU28n+BpMQiFObFIG0NWNb80v8wfUW18Uh5sCPl7
-	PEt3rQBll2kWsCuqyIXQHBn/jrqFqxGuQliMfhQkgUQlf2lkcMg4UKAPZUOQjJB1
-	WAKJLI83F7Ko7gHA2OwwSO82iQU/F/kWQF4XZlXhwrPY1pRaTHj5osCgOqHInTgq
-	iao0ZXO1hn+3l6Cj04JvpJOfjH/Voq05l+C1UJEav7/NHP7J0rbedfyfFJzF1xUc
-	nuNerA==
-Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe81cc0-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=y4CWLeMlcNA3kcl98GrNo7
+	h04JCowte9f/wMLBQFExE=; b=BZ+AobiKdWMrMA4qugJC3F5+M+m73Nwkf3Vu0+
+	j8Xl7hHal4U2a5ND0lOq2sBc/dKLkZT/BQ1VJJc+pqeo3kfiwsLIf0Hda76HEYYO
+	W32angPKpJX4MRl7nT21OPnJp1+Ga8nF0K+6NNRZ1F2VJhaq/ws6ew9vUHpkO3x4
+	bt9OdmCLluaWLap3/Q4sQFxgNPkX0PvZJ/qRSVl8BzMyumse/dhtmndJd8PC7zha
+	o+jYDQiOdMi6a6gh/qg+15Lo1l0rf6cKMhFOUc5u0iPwS/vebcJ4ITGLbcxHDw00
+	A1XeQEujHaGuD6w7C7DxDb8k+COODSc8lh4tbLd6Oe8Sp4pw==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe39d2p-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:15:29 +0000 (GMT)
-Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-675b7770f79so6792905d50.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:15:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791440129; cv=none;
-        d=google.com; s=arc-20260327;
-        b=RKzN28PcY/URnwkIqgMPDylWBCUzgPHt/137jmGYcTxeC/FJ+XVAW7Yqb8WMZj3fo1
-         jZx4pIlvO+1AB6yfTEMX8+3uJXJ+gonZYThnQOYHFqpH414WhDkB7a8rAM1I88GDr6VR
-         SxAjgWBDSZDm+S2Ob5qDuMZJub2Zl9AGop3MW15PnSB0qRmIUxG5y2lAixeQ0kLlSzCR
-         Q+FANondYmm1SbRbfZoYGW3mqpKlBzJJpmocyRKFRGjZ9tf7ZErA8rYA+CtV4qYIiuh6
-         20Qcvg9UXI3a+tboBg2v84heYm0q9k2kRji76rxaZgj3/y616MmsaStgbQ6jCAAPYDcC
-         Hvwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=xQPAWZepEqBkyCXjjaXrcNi/jWE54i2O+AUc1+MHBYY=;
-        fh=ezZUDwzVN+f46La9loNve8qltYOq+IoW1NPKOiApCss=;
-        b=Woxq3JLcMbTh7qIQH4QYHqeo93x1EFN3jxP0nkga12/sbRHy1SSbLJk6SQSWYqk6tU
-         FMjidfrVYindGaQcLj1LdQy/efTtQA9/6SdEI1o37wrcEd4figiLvW4TGWDh2t9oSjR8
-         0IWS9E9cXMfvORXIzatzvV9lhLptsJkiMTJyNXqZILOsSDgLITGUhJPHhz2m/QeP3ExF
-         x4NpDjo9I3ERTBA2SWHi4ZLHTUsK4n9V9DdqYuT25V1Sr33xuOyZf9aUzWYy17zlzBg4
-         YKQiTNP9WoE29L9fQDfIddSwSgmnk77+n0Uu9U3wi4ih6dybe816vAtAfDkQCjmlKr+O
-         3Alw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:23:57 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3a813204f87so3456899a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:23:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791440129; x=1792044929; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=xQPAWZepEqBkyCXjjaXrcNi/jWE54i2O+AUc1+MHBYY=;
-        b=D/lLZUOevFKlcjx08fFQ8+NL5ccAFOWL9W29VGUnykiCgmjlu7iJj8ZLYrBawUA+KA
-         vbZ4plaa5x9691q/9+ykJhItqDMHHRQMgI0SyMkgcuDbZVbCQUXxa7G7PA25dZW3rXzS
-         DxvXljd2J1MTLHZpVLkYWd37Z1lwS6Me1KBgYq2t5wx1UifqgYcQYDMxx0xnIXUvnXyV
-         E04mHreDhkWeUf4uKMndAgiVJdcJPu1M2BGZi88L/kGeUmsvZ+QVhwNE5Tf9gcheNNSx
-         XTi57cS+nOLFX4dky8wTyx/vIyoKlQn6UGFY+AC1ZMaYp8sw1CtWDP+W0nv+2pW/uExU
-         /Uzg==
+        d=oss.qualcomm.com; s=google; t=1791440636; x=1792045436; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=y4CWLeMlcNA3kcl98GrNo7h04JCowte9f/wMLBQFExE=;
+        b=H8NgpSZzF4DdUNowYxR6Ou5XzngeXzXlqs8zn7EEKEvFn0A19C03CVUPWqtNExKvRY
+         A+ai/iNkxuOPmnF21PTaWuM3/tmyzeNPUxIqyc6SGq3R7QnoMYZwNGCQA32KZ+VRXY3f
+         ycNSFbcrJu0YZdLPWLGaheJnhP4bHxEFNlW7BnWIVj/SzrBgftCQUQW0SNIsUM9v9nxf
+         lReHtx6jWqMCchZVInwx285kQuoROimyVBpY0XlUV+wca2DVkEEPO6kRZhC2ugze/Jht
+         XjuuNm9JbKSvDgIeZmLUpmw2aWXSDu2ZkECaGMPw+AzYXJ6CWnvYCtdU5a9LhRhu51++
+         25aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791440129; x=1792044929;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xQPAWZepEqBkyCXjjaXrcNi/jWE54i2O+AUc1+MHBYY=;
-        b=hO5DqgTcd0eemfoAJ3bHSOH9WwZZLic1w8320lzzuso8uokpBwNSmvAxHP6ozj691v
-         IEb61EmPR2Ii89wh8eCHpYwf6p4OJKfvXBb3zGiMd1hQmwq/nsnbO/sCfPeg1lnHKH6U
-         jghLWNt+ZMC7O372fyogADqd6Z9hScbyc6h6vJmW6whFhGTdRLQAL+DRT2Erf0wse+Df
-         hkkt3T2PaJTZWuXPzxhUhF/CwSX1ziA6ESmRbZ+Pk1ZGBW+Zugg75sgz/nrAi1sEBVS9
-         QtBBdWSAJxH9RdUTHnYzOZhzXkX0fB9qd0v2Dlnm2805G8s4MDbaaQwcCo68y+FagQ9p
-         5zkQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxZFnWkXLHFrFXqpBanUDA8q2hA45Wcjk/OlCA2k6H6aIVz8YxB47ZDOjCDg0TyzP3LwYPPGgy4cf1udS4h@vger.kernel.org
-X-Gm-Message-State: AFq9FYLMOyBshLPvM49kH6sOr0Z9d3CsG/lI9WbDmSJWwuX1Lkzq0EyH
-	fr1G6dAukWmONi3JNgWLGO7v0f5c1oExhgrA+I7IdzUEJXsVV1iC4fYWrVZG/4oOpe6rEI9V0ko
-	uU5e5UY/7vMOeVCotYq08r816cfnX+337o1k6OwBvBoJbE8VvLJhhYKlFeDSeshIosRwAtXfqhS
-	AesdtLtvsE/T86rUacXg9dS0O5YgWd+N9vwaFFbwOcBqU=
-X-Gm-Gg: AYBFou2cRTko+YDUrncgNJ8elNBbUtXOx+qeicBJiwPDe9mJT7DDD1W/f7bnR5W8BGk
-	SAyXd1qxgy7Kk+YkkLqW9i7pRerivGHqnhRokemzTiYycGjfzPt2WWm+l4eCHFbFDm5dYjDRoow
-	fbW6sE/nLedpLE/ZhS9chyZjdJC2goBosNn3JWMunWY1n9hvvQtqLsDDA=
-X-Received: by 2002:a05:690e:dc6:b0:673:1df3:86b2 with SMTP id 956f58d0204a3-6790a355225mr2466158d50.66.1791440129070;
-        Wed, 07 Oct 2026 23:15:29 -0700 (PDT)
-X-Received: by 2002:a05:690e:dc6:b0:673:1df3:86b2 with SMTP id
- 956f58d0204a3-6790a355225mr2466145d50.66.1791440128574; Wed, 07 Oct 2026
- 23:15:28 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791440636; x=1792045436;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=y4CWLeMlcNA3kcl98GrNo7h04JCowte9f/wMLBQFExE=;
+        b=U0MRTDDbjG4Oj+zo6ZbI9JrqVSb/al9MTCf+0cSRUNJGFrXsCYINwPgq1ToKVF0/GM
+         64cZs0AICyzDUvZMBJPsdOfMu57hcLskmiNdToOfQ7oQV2KRK/c2r31APzMXiMDu0/lO
+         NasYUqtmizHyW5uAJtsjZQuTSm0mD6u8x598iGfaPWGts0AuyEmFCGPJaWo7VAGZtUFd
+         S/tG6kFmr15XpgHK/t9d7+WlU5u0QUesZN9loy+wufSXVS/ZvLgnsIYLwRzeKTeJpBvI
+         XN5OIC7ICeV0KiTvIfgxkV3L3lqRU1unGWFZA9TuF9U6s6i4GC5fKwlj7XJYoIYm79Bw
+         zcDw==
+X-Forwarded-Encrypted: i=1; AKwUvBw6Wwicw2tvZ7zko7lATzXOzHpZJyMHmjXVSypeLvpmwwjPZnYqE8vC+Y8JfrkxALgvtny2NAoGHkXGQuXh@vger.kernel.org
+X-Gm-Message-State: AFq9FYKLW4/QVGbeT3Y9Dalx1PachVVqNz0+vreLGW0KubcALfFcNNCe
+	TRzeZMRm2xcNeqrlehQrMbOaZrq9DpSE0XJ26kHS0fBeAJvcvoJRZ3x5xtgs7S8wHewmXVx77jf
+	ugVNuaY2jxsQtnoeIkBbAg78kI44ck0qZSoZMM0T5SIwicT2SF9zvKl4rVdwsygkA9fZV
+X-Gm-Gg: AYBFou1bxDoU8/viyhhjC/vRBPPH6euN55KTeaV27NNj2xCz+6cTe2aosTH7lCMPQzr
+	R6UXWzlvn30XPhAzXGgE8xlFSgdsO5RvkVBLlK8v/GsHY3pIEt9lctMUYVMsOpWYKQiQ/nwXF4m
+	TNHtqbqy/G8dV1Ag5mVvFX+iizB+t4LhIHuOm4a/mIFyvozKRBTX8k9lXcZz6bCYnVnAfN3TgUI
+	+z2bUnSV3/VHhFLyn5Cp210RY69+w5cAw2R2ujCV0n3AENueOQIGTZzAvvq+tovyLMZLSRu1MWJ
+	pLY8XKe/lYkzTcJ/3+Sd5uq6HLPaXYuN8KBqcKSYjkuD2gCQZRoQNijuzsDQgD0+nkKScGFA8Fp
+	SigksASUZO+4PN8sX6lKmhCNOdFZX
+X-Received: by 2002:a17:90b:3ec9:b0:3a7:82ef:bcdd with SMTP id 98e67ed59e1d1-3a8a1b941e5mr3942987a91.41.1791440636377;
+        Wed, 07 Oct 2026 23:23:56 -0700 (PDT)
+X-Received: by 2002:a17:90b:3ec9:b0:3a7:82ef:bcdd with SMTP id 98e67ed59e1d1-3a8a1b941e5mr3942968a91.41.1791440635818;
+        Wed, 07 Oct 2026 23:23:55 -0700 (PDT)
+Received: from hu-batta-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a9ff7ab034sm2767618a91.4.2026.10.07.23.23.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Oct 2026 23:23:55 -0700 (PDT)
+From: Kishore Batta <kishore.batta@oss.qualcomm.com>
+Subject: [PATCH v7 0/7] Qualcomm Sahara protocol enhancements
+Date: Thu, 08 Oct 2026 11:53:44 +0530
+Message-Id: <20261008-sahara_protocol_new_v2-v7-0-90d278bd7414@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261005-rpmi-tee-service-grp-dev-v2-0-72f222e23ec1@oss.qualcomm.com>
-In-Reply-To: <20261005-rpmi-tee-service-grp-dev-v2-0-72f222e23ec1@oss.qualcomm.com>
-From: Jens Wiklander <jens.wiklander@oss.qualcomm.com>
-Date: Thu, 8 Oct 2026 08:15:15 +0200
-X-Gm-Features: AclHuK82G-aF0C4QrmEtOvpam9RmR-zAfqfbN8QwUZKZhMnDhKts1Wbg9cYmunk
-Message-ID: <CAGgiveXJXXaRNyfq6Gxk4moOHqM-vBuptugn5bHK5x9EeeGSQA@mail.gmail.com>
-Subject: Re: [PATCH RFC v2 0/8] tee: optee: add RPMI backend support on RISC-V
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Cc: Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
-        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-        Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Marouene Boubakri <marouene.boubakri@oss.nxp.com>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-riscv@lists.infradead.org,
-        devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfX07jxS23wGzU+
- l1fWHmTUglpps7o0MQssiI4oxaJS0AFR6LjBKeVaWRNYbzHR2EcDWEFKM7HBAqMzSMQ3gnPrfhC
- XRxVr5i7sgptkdAt03imju4EhQmoevIQPg2JZmVPJ0vsnQnYPGOTxcwm8RTEg9JzNGr0gODkB5s
- GyRkoQGlBRahq2XCwIWRBJq6NGbGD3Tr14IpQW1I6nI46ePFWlO1w55/j1959IyObC0m8Yy7CJm
- eSlh4WbH0iIBC+4amWXre25IIVrziUe10XaQgBv7/rTaxh3wXasfdruxe95YMnbKFMkYKe3CkFc
- n3kuD2pN2YUDS45iThkX2uPd/bIF1CNYHpEMjSqT5rWpOKcyROHDtilFbFKp2w+F1u7j/59I4yP
- b0aFc10HCdZXUjITMs61o2jZVnjKHXCZ+15Yk6Zrp85KTrf4Il/trq8uwadJiazWYP6VGBbVECL
- +D5n4Gz1wUYHDFx09cQ==
-X-Proofpoint-GUID: F6JTswveEs26HGEnrL1Q5cHOqyTtVSu8
-X-Proofpoint-ORIG-GUID: F6JTswveEs26HGEnrL1Q5cHOqyTtVSu8
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfXyYIIiuAM3pTi
- fMb3x4VqHszKOHuuG9WqBy5y4gmVOj6YDr6aIUbFKMwbLK5fB4Z6wg0aDyKyBYcJA8ytynwzzcc
- PCtVemsuLXXx0jq01X4bGP2HqLvB3N8=
-X-Authority-Analysis: v=2.4 cv=MPT1C8Zl c=1 sm=1 tr=0 ts=6ac73501 cx=c_pps
- a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=etr3aXc5xdJg75Mw1ecA:9 a=QEXdDO2ut3YA:10 a=nd2WpGr1bMy9NW-iytEl:22
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPA2x2oC/33QwWrEIBAG4FdZPNcw6qixp75HKcEY00h341bTt
+ GXJu9cslN1DLcjAPzDfDF5I9in4TB4PF5L8GnKIcwn64UDcZOdXT8NQMuHAFQjQNNvJJtudU1y
+ ii8du9p/dyqlSvJWotXCjJmX4nPwYvq7w80vJU8hLTN/XPSvbuzspoeWSATNcNZwpkBIpo28hT
+ zH5prfLYp9izs37hz26eDo1pZCdW/kv8e9V5QHlZnAa21564yqauNMYVDVRNGPQW+xhkHaoaHi
+ vmaqGRUNtB20EtFrxiiZvGjJV1WTRlPX9CCA99rV/UzdNA6tqqmjC6lYo7lAj+0Pbtu0HOstLM
+ j4CAAA=
+X-Change-ID: 20260307-sahara_protocol_new_v2-662854773cf7
+To: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        mhi@lists.linux.dev, Kishore Batta <kishore.batta@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791440631; l=7357;
+ i=kishore.batta@oss.qualcomm.com; s=20260206; h=from:subject:message-id;
+ bh=jd9PcWpk1n8AimGZ1zhzk4oE5h4on7nfC13PGzWnQ1U=;
+ b=m2McEMgDVVDvpL5ULKigxlctq5baEg4zKzJmwQ37k14b60fQvG1FIXoE81I4mmUeVyXOWwc1f
+ fpO5TLNAF9HAS+UFOwq3rw+EOTXd9FN+DHNWGJGF6qaq1RspLSvo3F5
+X-Developer-Key: i=kishore.batta@oss.qualcomm.com; a=ed25519;
+ pk=vJo8RvTf+HZpRLK2oOIljmbn9l3zFkibCGh+blaqZCw=
+X-Authority-Analysis: v=2.4 cv=J4s/fwnS c=1 sm=1 tr=0 ts=6ac736fd cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=TZsl4NGrXgOhBUOoEegA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNSBTYWx0ZWRfX9jBrjJc4Hwnt
+ MHk4jO3W4pbQXyiJ8HnMGWM99ftLX2wl9mR151RDMdAAtIoTjooTbQtIOa+BN6iOxPMbYcuRU9V
+ ZKJFLwlEC9hHCAu+N+wI3pC81YsTofc=
+X-Proofpoint-GUID: u-bU3LzeVgi2DS2WOJ47MBdQwF-Sxkmu
+X-Proofpoint-ORIG-GUID: u-bU3LzeVgi2DS2WOJ47MBdQwF-Sxkmu
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNSBTYWx0ZWRfXwqsloMDiaXi4
+ 4TRmdhhyTUU1CQ+Zu96UxpU+FG+RQIyFmZNsL8eJ28awaO/DD62F9HWo4BQ8rRyIonL8q5uSoIn
+ Nb0x55wBUoXrImx+rtaGOnZR0h6cCRVmpiz+Eg4cLrWpkg9eDGfvOGYeIv+Dql5n8vA5rt+39gC
+ jHlDgbTYY0i48W3LQ7MQKMVNvjSctucYVCCz84pS6HwEmjP2AlcM1PGsd5D/7wfLRsUlyNYaZpR
+ dmEpboc5Vxhs2RsJhFRC3K2JZAYzpW5iefpV7A0wLLqTk/pQt6sisV5/KAQENmG/Ga/hXc+BqAt
+ Ma60G6s2V4tCwWS6KHOrzW3sf3Gnjty5a8i7YSLy+N5MSRUZ/DCyZv8YfllHpYn8ckajVzCQDnS
+ nb3CrnokUiktX0y7YgEFQoNe5bQzmFDzrXSrlpBm45r2o3LjENPHhhw+VIZHz/KHqcoWHy5XNZd
+ 8I0nJndZ5cnZNTu+miA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-08_02,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 adultscore=0 priorityscore=1501 suspectscore=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ impostorscore=0 spamscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
+ adultscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080024
+ reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080025
 
-Hi Amir,
+Hi All,
 
-On Tue, Oct 6, 2026 at 2:39=E2=80=AFAM Amirreza Zarrabi
-<amirreza.zarrabi@oss.qualcomm.com> wrote:
->
-> This series adds an RPMI backend to the OP-TEE driver for RISC-V.
-> It builds on the separately posted RPMI TEE transport series [1],
-> which provides service discovery, synchronous calls, memory parcels
-> and asynchronous signals.
->
-> This revision is effectively a full rewrite of the original RFC.
-> The generic RPMI transport has been separated from the OP-TEE backend,
-> and the backend has been reworked around the service bus and a new
-> OP-TEE control ABI.
->
-> Unlike v1, the OP-TEE backend no longer manages SBI MPXY mailbox
-> channels or implements RPMI TEE service-group operations directly.
-> It binds to the OP-TEE service UUID on the RPMI TEE bus and uses the
-> transport's public operations. No additional OP-TEE device-tree node
-> is required.
->
-> The backend reuses the common OP-TEE session, shared-memory, argument
-> cache, call queue and RPC infrastructure. Shared memory is represented
-> by RPMI parcel IDs and nonces. Yielding calls pass command and RPC
-> buffer ranges within a parcel and resume suspended execution using
-> an opaque token returned by OP-TEE.
->
-> The OP-TEE control ABI uses fixed-width little-endian messages carried
-> in TEE_CALL payloads rather than reproducing FF-A's register-based
-> message layout. Asynchronous notifications use an allocated TEE-to-REE
-> signal as a bottom-half doorbell, while ordinary logical notifications
-> continue through the common RPC path.
->
-> Matching OP-TEE OS support for this ABI has not yet been implemented.
-> This remains an RFC for review of the backend integration and the
-> Linux-to-OP-TEE protocol.
->
-> [1] RPMI TEE transport dependency:
-> https://lore.kernel.org/op-tee/20260928-riscv-rpmi-tee-abi-v1-0-04908b81d=
-885@oss.qualcomm.com/
->
-> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Effectively rewrite the backend around the separately posted RPMI
->   TEE transport and a new OP-TEE control ABI.
-> - Remove backend-owned per-hart mailbox channels and the OP-TEE-specific
->   device-tree binding.
-> - Replace the register-like control payload with fixed-width messages,
->   explicit command/RPC buffer ranges and opaque resume tokens.
-> - Add a parcel-reference parameter layout carrying the parcel ID,
->   nonce, and 64-bit offset and size without changing parameter size.
-> - Make argument-offset support part of the baseline ABI and retain
->   the common shared argument cache.
-> - Use a transport-allocated signal for asynchronous bottom-half
->   notifications.
-> - Link to v1: https://lore.kernel.org/r/20260912-rpmi-tee-service-grp-dev=
--v1-0-1d1d35c2a859@oss.qualcomm.com
->
-> ---
-> Amirreza Zarrabi (8):
->       tee: optee: allow RPMI transport builds on RISC-V
->       tee: optee: define the RPMI control and parcel-reference ABI
->       tee: optee: add RPMI shared-memory and parameter support
->       tee: optee: add RPMI dynamic shared-memory pool
->       tee: optee: add RPMI RPC handling
->       tee: optee: execute yielding RPMI calls
->       tee: optee: bind RPMI services and negotiate backend capabilities
->       tee: optee: support RPMI asynchronous notification doorbells
->
->  drivers/tee/Kconfig               |    3 +-
->  drivers/tee/optee/Kconfig         |    3 +-
->  drivers/tee/optee/Makefile        |    1 +
->  drivers/tee/optee/call.c          |    2 +
->  drivers/tee/optee/core.c          |   10 +-
->  drivers/tee/optee/optee_msg.h     |   38 +-
->  drivers/tee/optee/optee_private.h |   54 +-
->  drivers/tee/optee/optee_rpmi.h    |  234 ++++++++
->  drivers/tee/optee/rpmi_abi.c      | 1059 +++++++++++++++++++++++++++++++=
-++++++
->  9 files changed, 1389 insertions(+), 15 deletions(-)
+This series reworks the Sahara protocol driver to make it reusable for
+multiple MHI based devices and adds support for capturing, restoring and
+exposing DDR training data using the Sahara command mode.
 
-The rpmi changes in the optee driver harmonize quite well with the
-rest of the driver, but there are two things I'd like fixed:
-- avoid <linux/cleanup.h> macros. They are distracting.
-- use rc for the trivial int ERRNO values.
+The Sahara protocol is transported over the MHI bus and is used by multiple
+flashless devices to transfer firmware images, retrieve memory dumps and
+exchange command mode data during early boot. However, the current
+implementation lives under the QAIC accelerator driver and contains
+device-specific assumptions that limit reuse.
 
-I would be great with a QEMU-based end-to-end prototype to demonstrate
-that the ABI works.
+Some MHI devices (for example, QDU100) expose the sahara protocol directly
+on a "SAHARA" MHI channel and rely on command mode to exchange DDR training
+data with the host. The existing driver does not bind to such devices and
+ignores Sahara command mode packets, causing training data to be dropped.
 
-More comments to come in the individual patches.
+This series addresses these issues by relocating the Sahara driver to the
+MHI subsystem, centralizing device specific configuration and adding command
+mode handling for DDR training data.
 
-Cheers,
-Jens
+Overview of the changes in this series -
+1. Move Sahara under the MHI subsystem:
+   a. Relocate the sahara protocol driver from QAIC accelerator tree to
+      drivers/bus/mhi/host/clients directory.
+   b. Register Sahara as an independent MHI protocol driver.
+
+2. Generalize device matching and configuration
+   a. Allow the driver to bind to devices exposing the protocol on a
+      SAHARA MHI channel.
+   b. Centralize firmware image table selection at probe time using a variant
+      table, instead of scattered conditionals.
+   c. Preserve existing behavior on AIC devices.
+
+3. Add QDU100 firmware image table support
+   a. Add a QDU100 image table and select it based on the matched MHI channel.
+   b. No separate client driver or registration mechanism is required.
+
+4. Add Sahara command mode support for DDR training.
+   a. Handle command mode packets(CMD_READY, EXECUTE, EXECUTE_DATA).
+   b. Query supported commands and retrieve DDR training data from the device.
+   c. Allocate receive buffers based on the reported payload size and copy
+      raw data from the MHI DL.
+   d. Store training data in controller-scoped memory using devres so it
+      survives sahara channel teardown.
+
+5. Expose DDR training data to userspace
+   a. Add a read-only binary sysfs attribute under the MHI controller device.
+   b. The attribute reads directly from controller-scoped storage and remains
+      available after the Sahara channel device is removed.
+   c. Cleanup is handled automatically via device-managed resources.
+
+6. Document the sysfs ABI
+   a. Add ABI documentation describing the DDR training data sysfs node.
+
+Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
+---
+Changes in v7:
+- Addressed review feedback by correcting documentation punctuation and
+  removing an unrelated formatting-only change.
+- Passed the QDU100 Sahara firmware mapping through struct mhi_pci_dev_info
+  instead of selecting it with a device-specific conditional in PCI probe.
+- Clarified the userspace persistence filename for captured DDR training data:
+  qcom/<fw_folder>/mdmddr_0x<serial_no>.mbn.
+- Link to v6: https://lore.kernel.org/r/20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com
+
+Changes in v6:
+- Used BIN_ATTR_RO() instead of struct bin_attribute.
+- Link to v5: https://lore.kernel.org/r/20260416-sahara_protocol_new_v2-v5-0-6aebf005e4ba@oss.qualcomm.com
+
+Changes in v5:
+- Sahara protocol documentation is moved to Documentation/mhi/ directory.
+- Sahara driver is now moved to drivers/bus/mhi/host/clients/ directory.
+- Squashed v4 patch 3 with v4 patch 5.
+- Squashed v4 patch 9 with v4 patch 8.
+- Firmware image tables are now moved to respective MHI controller files.
+- Removed redundant if-else conditions when loading DDR training data image.
+- Corrected commit subjects and messages.
+- Removed Sahara variant structure and introduced mhi_sahara_fw_table structure.
+- Link to v4: https://lore.kernel.org/r/20260319-sahara_protocol_new_v2-v4-0-47ad79308762@oss.qualcomm.com
+
+Changes in v4:
+- EDITME: describe what is new in this series revision.
+- EDITME: use bulletpoints and terse descriptions.
+- Link to v3: https://lore.kernel.org/r/20260310-sahara_protocol_new_v2-v3-0-994ea4b0d5ad@oss.qualcomm.com
+
+Changes in v3:
+- Dropped the explicit image table entry for the boot critical image ID and
+  added a generic image ID based firmware lookup fallback.
+- Link to v2: https://lore.kernel.org/r/20260307-sahara_protocol_new_v2-v2-0-29dc748b5e9c@oss.qualcomm.com
+
+Changes in v2:
+- Rebased onto latest linux-next tip.
+- Reworked commit messages to clearly start with the problem being solved and
+  end with a technical description of the change.
+- Moved the Sahara driver to drivers/bus/mhi instead of drivers/soc/qcom,
+  reflecting that its an MHI protocol driver rather than a SoC specific driver.
+- Removed client side image table registration and consolidated firmware
+  selection directly in the sahara driver using a probe-time variant
+  mechanism.
+- Ensured each patch is self-contained and does not break the build or runtime
+  behavior at any intermediate point.
+- Simplified state handling and lifetime management to avoid duplicated state
+  tracking and ad-hoc cleanup.
+- Updated sysfs handling to use controller-scoped devres and avoid one-shot
+  reads or manual teardown.
+- Link to v1: https://lore.kernel.org/r/20250825101926.2160554-1-kishore.batta@oss.qualcomm.com
+
+---
+Kishore Batta (7):
+      Add documentation for Sahara protocol
+      bus: mhi: Move Sahara protocol driver under MHI host client drivers
+      bus: mhi: Centralize Sahara firmware image table selection at probe time
+      bus: mhi: Add QDU100 Sahara variant and firmware fallback
+      bus: mhi: Load DDR training data using device serial number
+      bus: mhi: Capture DDR training data via command mode
+      bus: mhi: Expose DDR training data via controller sysfs
+
+ .../ABI/testing/sysfs-bus-mhi-ddr_training_data    |   19 +
+ Documentation/mhi/index.rst                        |    1 +
+ Documentation/mhi/sahara_protocol.rst              | 1241 ++++++++++++++++++++
+ drivers/accel/qaic/Kconfig                         |    1 +
+ drivers/accel/qaic/Makefile                        |    3 +-
+ drivers/accel/qaic/mhi_controller.c                |   61 +
+ drivers/accel/qaic/qaic_drv.c                      |    9 -
+ drivers/accel/qaic/sahara.h                        |   10 -
+ drivers/bus/mhi/Kconfig                            |    1 +
+ drivers/bus/mhi/host/Makefile                      |    1 +
+ drivers/bus/mhi/host/clients/Kconfig               |    5 +
+ drivers/bus/mhi/host/clients/Makefile              |    1 +
+ drivers/bus/mhi/host/clients/sahara/Kconfig        |   15 +
+ drivers/bus/mhi/host/clients/sahara/Makefile       |    2 +
+ .../qaic => bus/mhi/host/clients/sahara}/sahara.c  |  513 ++++++--
+ drivers/bus/mhi/host/pci_generic.c                 |   41 +
+ include/linux/mhi.h                                |   17 +
+ 17 files changed, 1850 insertions(+), 91 deletions(-)
+---
+base-commit: a0ae2a256046c0c5d3778d1a194ff2e171f16e5f
+change-id: 20260307-sahara_protocol_new_v2-662854773cf7
+
+Best regards,
+-- 
+Kishore Batta <kishore.batta@oss.qualcomm.com>
+
