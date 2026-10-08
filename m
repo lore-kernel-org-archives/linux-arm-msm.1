@@ -1,78 +1,85 @@
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 943B13CB2F8
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 19:35:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B57F3CB2DC
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 19:35:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791488131; cv=none; b=Bk8kzrz4VLExDHYQK4BXZasOs3BTL3+qv9rSPgdz1nLqy0G3iwIiCfPgJzCsbF8D3Yres3UixPl0WjoulxR4kJTVBYW3LNuqbW6ym4uS6FdVAcnb8qXaFrKqhhqS+nsC+l822xc1M72TIImdoR6u9AGl5s0qgEToZwmh90+cw3w=
+	t=1791488144; cv=none; b=qNVAbLFjqpvkQf2P+sD7Fv0t9YBik0si/7GI6kVtoVNmEOXD1DoRPf+8/zdw4gRh7v6huLHcy0VKQvi4+RYmMN5GerYPoKh5Ch+T3Xvlnh0Xj/Q5Yvcd2t5sjI03reQJlVXq/2SE6+1iK1XJBC1IQnpIVPHaDbMOyD6gkZ6TEfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791488131; c=relaxed/simple;
-	bh=QvZVaGbODwAM5jppJsUP+qBdizHnEOAGSyu2NQ6vYwk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=q7NSs0gns374MN6gkkSF5Y4WqW0S/5HvM9k0eznEdW2wOExDsj7FF326mDGR22Nh7PK8Vqj4IdHNSsdAQtbaLW0yIK7lppSAdvIks4yh47AhpXg3kneExRSDqTYyChxLpsLGjaOCX4ii92vK5REFZTFt1Hy2GzchyZRI9AcZvlE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LqC2VO8n; arc=none smtp.client-ip=209.85.208.51
+	s=arc-20240116; t=1791488144; c=relaxed/simple;
+	bh=fVvNhp/bhy8s5DEGKp2uImUHHOGSx/B3GI6jpnh2WvE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=n34Iq+p1e8JBfBGGF1dokHPWRt+GL/2iqITnLHErzxFkEwLkBiTE6ZDQx1Zg/xjzpLiJdaiGd7Yi+LURfAqCLeRsbh+7HEgsoyaiLVbU92ZsM0oSAQmM/lFLpaTEnqe/EcskFb2Rp77Y8foUuZwv2yAISGOeAhf7+oTjvssOJSE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eAOMJsFj; arc=none smtp.client-ip=209.85.218.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LqC2VO8n"
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6afb0d2a586so6461010a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 12:35:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eAOMJsFj"
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c2e8e738ae0so532898866b.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 12:35:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791488128; x=1792092928; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=iiPxBE9Ry4NGuZQKC7Sy9Rq5YEZRiRdQyKz0w0rafvA=;
-        b=LqC2VO8n/ilP3F1qOhicxYdquGXePBKabsPsOQx6H3rT7yTkxbML3t7DL9vovr/6PV
-         j1p9krKKIJ63KpHjSsr+OlPRK7n8wyMmR8YKiI3JEE8p9NZxuxl/XpOiUMX3q1XOufJ+
-         2W19S+GpIpmm4omM/I7akIx8bwIDhrNDzqZi9dGk7TBlbEALfub0ZppF0AAU6hUntwbh
-         wapq7D5A9LmkyYFQ29KUTJThGHAG1qBulRFNBVV5fUEJakz7Rx+nmI9g8bxJzjCqRioR
-         ccfCU4mBlR8LuqczCvDQrmwEqyDtTzxAiUAA/OOz4sWCUyWeHSpuVZNlGWKEDAkMsJPa
-         aljQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791488128; x=1792092928;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791488142; x=1792092942; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=iiPxBE9Ry4NGuZQKC7Sy9Rq5YEZRiRdQyKz0w0rafvA=;
-        b=hnEk0QLuzcnQlivHzLIsFhnBOvxCg/i7IOvyKoeUJtk5f6XLe7AlaBdHOb+p19rndj
-         C6XtMtqR6MjcZ0JbkCLnJKO3UUinEk7sSUzP/Y157YA9oVxkgjha/KgNO82RwAtubQFr
-         J7fTnIjBT3zL9SvB4NiHio0hh0uak3A3aZEBxrGHZDoZbM12DrgD/WM26q05CRwyT7we
-         ILhjVJDjnOGPJ/PwuPfVPG7Wf+a5PpjMRDlZBuTdO/O5a5Z1QaEafOwFzDmh38BBngmS
-         MZ+P8vMeWH9nbYtOVgL06GSvC61x+XNwX2/MKlB5Y1MFubDIkk0sD+pstkuiF7To+UGb
-         rwIQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzgsSSULKo6qB7z1OXq15wH6tbvWn5xo7GErvmitnFJzGxefz9ACK35QV6Tkm9Or4vG8zgWY4BGC4h/gXxf@vger.kernel.org
-X-Gm-Message-State: AFq9FYKj+FKWIGwripsnicYUagLk4CpVgm1Ul2sJbLT48Q8xcgpaQ4FS
-	pbPXwmfrUn24FKHyGrUSDsY2OqsE9Aae5ia6akS7ap6XbNRE9LX/FGjf
-X-Gm-Gg: AYBFou14nJPLPm0k/EhZ0lj1dHtrdAarKE2Sdc+FfcCe+HU1d48O9w0ZpA1ugjJvwkp
-	zrWmVkLMyWXmdCxEzdToMJio5bYGUOH9Pqsx0A4B2NC0kbnzjYuIfzOBR1pzhDg0E4iL7AhTMd2
-	vJBqynimeDYsa7nLdVEkh1r7ckQQP1517fsSFkXTwytVotgwmmHU8LAtnMwTSBLw6/9xCDk84lD
-	wxB3o110YGGuYXSSqeIRxDIdWQQcfwwEcxnFVIqhtJp5OjuP7DRezvL+B4shMSph5y6fekKibYk
-	oiaQzrT1IlypBfpiQ+abZpzTOEcWeHbxMEDyWH44KbfkQSmXdHc+vEoJEIq83I2hHsjJfg+ngjW
-	Z+w7x+DLTMT9bWohf2LWP0KYxzmw9EHfI+QPImKEzl9QbRTmW0jrgJxlANMuXPPCeOd3tyw/fbt
-	Vy+B5WOvxZRpruoGY/eYo3MyBCwqkyJQTqVLk6jfXqT3Kx51OYaUe6TXtWsQKTDJEDG/zNvfzbK
-	vugYUbSk3B4/hq1cDGX3FQdV6SsLK+K+/PheSULrcqEhlR+heTxJAxnQB2PPMiqZOUyFYYBir58
-	LUmMZHnepkDiIDTMtOUwLcU=
-X-Received: by 2002:a05:6402:2789:b0:6aa:915a:f51e with SMTP id 4fb4d7f45d1cf-6aff4421a6fmr5713755a12.17.1791488127623;
-        Thu, 08 Oct 2026 12:35:27 -0700 (PDT)
+        bh=fVvNhp/bhy8s5DEGKp2uImUHHOGSx/B3GI6jpnh2WvE=;
+        b=eAOMJsFjbCS+N/L5McZ3g6Ix1JCKP9Sz4N39RNd4/geHzzn5ovlYY/U1TU9+v/DbO+
+         giXDEcNSDDXnEcepTX2hes8XJyjfpLR2JIGcv+IIOWBwNM2cNy/Cx2+tqMaKzHx0IcIU
+         Ga8/Z10seqGr723vaJ9n6fvWHLBssfnmbu7v6zER829fuw0QcjHDCnxWMyvnpPI3CwSg
+         pRILhUQxhe4fL5yC9uwoCBtZpoYMljsXdZjgf0qpcRJhVwMIzZG7sawaXs2t0U0ypjz5
+         A8NjMkH97LyQNoYLbmdJM40WnUQuG6VM51xL1nzjmKOl14ecBm4p4TNKMoHAvKAlOd8z
+         neVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791488142; x=1792092942;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fVvNhp/bhy8s5DEGKp2uImUHHOGSx/B3GI6jpnh2WvE=;
+        b=twp2yCtwmQ/U2/7nDssUOiNNR+PxZKDk5+kWzbVyRYTP+MEq25XjoVGmCJobUu4DIW
+         JyNnDQnmsSSQMUpO2fIPiLCCOC9bPLPlNHeZeu/7Z/P2WAQD/3G3FalxmaHtkYagDrEg
+         6/VdeBFs58aHyUEYSB7Elgy/gRQWUDfk0kajVNStACTFt4gW+6jj/BpzOwuH64E1dnpu
+         4Ii/8rrkglKYB4fidBKH8twKFPD5Szvc4oyO3sf6LOS1/hiUaBq8oT0xgB95aG2njS05
+         7IggXqjFcRk16M4zKk/pSV9IPZoPmeGD64/moUMw2YBEnt/dc6qJIwGbTJla8CmC+EVp
+         C38w==
+X-Forwarded-Encrypted: i=1; AKwUvBx1MTXWFs18U52jvfUv8NS8i5iCqMQXNQfkXrxx9UpGHJoEzdk0Afh5ATxJ0XeEPgfalp4KGbqFyNfhnmXz@vger.kernel.org
+X-Gm-Message-State: AFuF++lKI885dQ+oBBaAvkL5pE32AOXYwTJpWmiyfDFKBmrxp5k8bYE8
+	6npHSYYmhGleZ3LB7WGRWzotbJUeL7lJNePwgULEd8j/Sw26M7ZHjabIzysFGTttB33mAw==
+X-Gm-Gg: AYBFou0e1iFQfyi5AHeX6iBNgqclS3ZlsFYPYTJTZhN1SgeEtTqBv8DAMPQ2ecwK6EE
+	QUx2Gg88us4+3mAGodmc993KHgEoYjq+7CA0nM24KjNTH+Pmj/ndcdkIwWQyHLRyjmUtPQtqDC6
+	4I7XwSWtbog7stk7ygn8bmgJUZ0PYCn+7ClNK7NYxUzNTBsrFQmYvnTVHqcOzMp8CLOrieaW6Wn
+	Hcbqq/yH1uvz7yOifbmHtKW8nFnLIMPq3cE/UHjufMCu+XWEMZpfutvjK43OalhXXeA3sO8hklR
+	UTPrzoZPP7r9vMwMOsQ7Vo+57NV4LpNlwezuxyKHyUKgqOtI6BD38RzOXTzoZBPikODG8WZA+td
+	D06v2iCJWjGl0OB3dqCh/Ld3tAYTckLFwRl7bzaWiw/SxfeZ216IVAiuf6TndUZxb8ms5ZnmDoh
+	fyvhX0FRZx/O64yIefyIaSnVpJxcG0jIOQ+cqTImqAfMeEMrufQYonnQ72A8TdJbUhr72jhoo/H
+	B2SwdE/uFbUkIzkPldio9DG5FgcB2sySCX2sUemUrJPFufY4HIOJFqt3I9TlPBoAMLZ77XSqZV8
+	Qow13rengkQoskPpse6AP3Urt8LWz+Bq4w==
+X-Received: by 2002:a17:907:1c84:b0:c2d:ca8d:435a with SMTP id a640c23a62f3a-c317c081874mr606329666b.38.1791488141493;
+        Thu, 08 Oct 2026 12:35:41 -0700 (PDT)
 Received: from localhost.localdomain (94-255-221-162.cust.bredband2.com. [94.255.221.162])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a4d0c2c0sm9043366b.28.2026.10.08.12.35.26
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a4d99db6sm8410766b.54.2026.10.08.12.35.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Oct 2026 12:35:27 -0700 (PDT)
+        Thu, 08 Oct 2026 12:35:41 -0700 (PDT)
 From: Yongzhao Chen <yongzhao.derek@gmail.com>
-To: netdev@vger.kernel.org
-Cc: Andrew Lunn <andrew@lunn.ch>,
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: netdev-bot+sashiko@kernel.org,
+	George Moussalem <george.moussalem@outlook.com>,
+	Ziyang Huang <hzyitc@outlook.com>,
+	Andrew Lunn <andrew@lunn.ch>,
 	Heiner Kallweit <hkallweit1@gmail.com>,
 	Russell King <linux@armlinux.org.uk>,
+	netdev@vger.kernel.org,
 	"David S. Miller" <davem@davemloft.net>,
 	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
 	Paolo Abeni <pabeni@redhat.com>,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH net v4] net: phy: qca83xx: read resolved QCA8337 link status
-Date: Thu,  8 Oct 2026 21:35:14 +0200
-Message-ID: <20261008193515.14880-1-yongzhao.derek@gmail.com>
+Subject: Re: [PATCH net v3] net: phy: qcom: at803x: Apply IPQ5018 analog settings at probe
+Date: Thu,  8 Oct 2026 21:35:27 +0200
+Message-ID: <20261008193528.14906-1-yongzhao.derek@gmail.com>
 X-Mailer: git-send-email 2.45.2.windows.1
+In-Reply-To: <20261008095547.6715b24e@kernel.org>
+References: <20261002210408.730-1-yongzhao.derek@gmail.com> <179106246893.434549.12601361985639254046@kernel.org> <20261008095547.6715b24e@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -81,139 +88,45 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-After a QCA8337 SmartSpeed downshift, genphy_read_status() can report
-1000 Mbit/s from the advertised modes when the PHY is running at
-100 Mbit/s. On a Redmi AX5400 running downstream OpenWrt Linux 6.18.52,
-this caused qca8k to program the user-port MAC for 1000 Mbit/s and
-traffic failed. An earlier prototype that read the resolved speed
-from the PHY restored traffic.
+On Sat, 03 Oct 2026 21:21:08 +0000 netdev-bot+sashiko@kernel.org wrote:
+> Is the GE PHY ready for these debug and MMD register accesses this soon
+> after the reset?
 
-Wrap genphy_read_status() and use at803x_read_specific_status() to
-replace its speed and duplex result when an autonegotiated link comes
-up. Resolve pause for the resulting duplex. Until the PHY reports a
-resolved speed and duplex, report the link as down so that the next
-poll reads them again, as marvell_read_status_page_an() does.
-QCA8337's register layout matches the helper (data sheet 80-Y0619-3
-Rev. D, pages 327-328).
+[ ... ]
 
-Keep the generic master/slave read order and the early return for a
-steady autonegotiated link. This avoids additional reads of the
-clear-on-read idle error count in MII_STAT1000. Forced mode continues
-to use BMCR. Report the MDI-X state read at link-up and invalidate it
-when the link goes down or autonegotiation is disabled. Clear
-mdix_ctrl because this driver does not implement MDI-X configuration.
+> The patch notes already ask whether a minimum delay or a readiness check
+> is needed after ARES is deasserted. Would it make sense to add one after
+> reset_control_reset() and before ipq5018_analog_init()?
 
-Fixes: b3591c2a3661 ("net: dsa: qca8k: Switch to PHYLINK instead of PHYLIB")
-Suggested-by: Andrew Lunn <andrew@lunn.ch>
-Signed-off-by: Yongzhao Chen <yongzhao.derek@gmail.com>
-Assisted-by: LLM
----
-v4:
- - Report the link as down while the PHY-specific status is unresolved
-   or holds the reserved speed value, as marvell_read_status_page_an()
-   does. v3 reported the link up with SPEED_UNKNOWN, and the early
-   return then kept it until the link dropped.
- - Invalidate mdix when the link goes down or autonegotiation is
-   disabled, instead of keeping the value read at the last link-up.
- - Rebased onto net 37f12441f557. The files involved are unchanged.
- Both issues were raised in the Sashiko review of v3, which Jakub
- forwarded.
+I have found no basis for a delay after ARES, and the measurements on
+the tested board show no sign that one is needed.
 
-v3: https://lore.kernel.org/netdev/20261006160316.1356-1-yongzhao.derek@gmail.com/
-v2: https://lore.kernel.org/netdev/20261003173210.1235-1-yongzhao.derek@gmail.com/
-v1: https://lore.kernel.org/netdev/20260928220749.857-1-yongzhao.derek@gmail.com/
+I have no data sheet figure for the time after GCC_GEPHY_MISC_ARES is
+deasserted, and the GCC entry sets no udelay. The vendor SDK waits
+200 ms after each assert and deassert, but it applies the same wait to
+every Ethernet block reset (GE PHY, UNIPHY, both GMACs) in one loop.
 
-Testing: the source-extraction model passes 27 checks covering speed
-and duplex at the phylib notification boundary, latch-low transitions,
-pause, forced mode, MDIO errors, the idle-error and MSFAIL read order
-from v3, and the two issues above. v3 fails exactly the four checks
-for those two issues: an unresolved or reserved status at link-up,
-and mdix after a link drop or with autonegotiation disabled. An arm64
-W=1 build of qca83xx.o, at803x.o and qcom-phy-lib.o is clean.
+On a Redmi AX5400, I logged six warm boots at register level. Every
+access after the reset returned without error, and none read as
+0xffff. In the three boots with the probe-time writes, the EEE, MSE
+and DAC writes read back as written, the MDAC/EDAC values were still
+in place before attach, and the PHY-to-PHY link came up at 1 Gb/s at
+about 5 s. In the three boots without them, both PHYs downshifted at
+about 15-17 s and the link stayed down. One write is an exception: the
+LDO_EFUSE field at debug register 0x1 read back 0x8031 instead of
+0x8052. The vendor SDK uses register 0x180 for that setting, and which
+address is correct is still open.
 
-v4 has not been tested on hardware. The hardware result above used
-v2's at803x_read_status() plus genphy_read_master_slave() on one board,
-with an Intel igb peer, a two-pair cable and default autonegotiation.
-Ping changed from 0/20 to 20/20 in each direction at resolved 100 Full.
-Whether QCA8337 can report link up before the resolved bit is set is
-unknown.
+The remaining gap is ANA_DAC_FILTER. Its read right after the reset
+returned 0x0000 in all six boots. I have no later read without an
+earlier write to compare it with, so a transient value remains
+possible. The existing config_init() path makes the same read with no
+settle guarantee either; how long after the reset it runs depends only
+on when the MAC attaches the PHY.
 
- drivers/net/phy/qcom/qca83xx.c | 53 ++++++++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
+George, or anyone with IPQ5018 boards: do you have empirical data
+showing that the GE PHY needs time after ARES before these accesses?
+If so, I will add a wait based on it.
 
-diff --git a/drivers/net/phy/qcom/qca83xx.c b/drivers/net/phy/qcom/qca83xx.c
-index bc70ed8efd8..be00bc7cda0 100644
---- a/drivers/net/phy/qcom/qca83xx.c
-+++ b/drivers/net/phy/qcom/qca83xx.c
-@@ -92,6 +92,58 @@ static int qca83xx_probe(struct phy_device *phydev)
- 	return 0;
- }
- 
-+static int qca8337_read_status(struct phy_device *phydev)
-+{
-+	struct at803x_ss_mask ss_mask = {
-+		.speed_mask = AT803X_SS_SPEED_MASK,
-+		.speed_shift = __bf_shf(AT803X_SS_SPEED_MASK),
-+	};
-+	int ret, old_link = phydev->link;
-+
-+	ret = genphy_read_status(phydev);
-+	if (ret)
-+		return ret;
-+
-+	/* Keep the state resolved at link-up while the link stays up */
-+	if (phydev->autoneg == AUTONEG_ENABLE && old_link && phydev->link)
-+		goto out;
-+
-+	phydev->mdix = ETH_TP_MDI_INVALID;
-+
-+	/* genphy_read_status() derives speed and duplex from the
-+	 * advertisements, which is wrong after a SmartSpeed downshift.
-+	 * Use what the PHY resolved instead.
-+	 */
-+	if (phydev->autoneg == AUTONEG_ENABLE && phydev->autoneg_complete &&
-+	    phydev->link) {
-+		phydev->speed = SPEED_UNKNOWN;
-+		phydev->duplex = DUPLEX_UNKNOWN;
-+		phydev->pause = false;
-+		phydev->asym_pause = false;
-+
-+		ret = at803x_read_specific_status(phydev, ss_mask);
-+		if (ret)
-+			return ret;
-+
-+		/* Report the link down until speed and duplex are resolved,
-+		 * so that the next poll reads them again.
-+		 */
-+		if (phydev->speed == SPEED_UNKNOWN ||
-+		    phydev->duplex == DUPLEX_UNKNOWN) {
-+			phydev->link = 0;
-+			phydev->mdix = ETH_TP_MDI_INVALID;
-+		} else {
-+			phy_resolve_aneg_pause(phydev);
-+		}
-+	}
-+
-+out:
-+	/* MDI-X configuration is not implemented */
-+	phydev->mdix_ctrl = ETH_TP_MDI_INVALID;
-+
-+	return 0;
-+}
-+
- static int qca83xx_config_init(struct phy_device *phydev)
- {
- 	u8 switch_revision;
-@@ -220,6 +272,7 @@ static struct phy_driver qca83xx_driver[] = {
- 	.flags			= PHY_IS_INTERNAL,
- 	.config_init		= qca83xx_config_init,
- 	.soft_reset		= genphy_soft_reset,
-+	.read_status		= qca8337_read_status,
- 	.get_sset_count		= qca83xx_get_sset_count,
- 	.get_strings		= qca83xx_get_strings,
- 	.get_stats		= qca83xx_get_stats,
-
-base-commit: 37f12441f557468a56c1e27790413aa78c82afa2
--- 
-2.43.0
-
+Thanks,
+Yongzhao Chen
