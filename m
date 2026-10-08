@@ -1,88 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A2734D9556
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 14:51:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249464BD346
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 14:51:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791471115; cv=none; b=ZT3ffhWNL9cTkB1kcNFShfeu07KEuoxzPe6EW7tSk0PsCvCpgT6Nd2ffgXaxwns6B0e1Vf5bUZjzW9y3n4SiDQktXiAT65v71YCnLICz7L7sHCUcuqBO6OMVFGF6OrCVnSqixyBFRnBD8g/md56TOLkEDG/cF1N8M5HEsMBW6fo=
+	t=1791471119; cv=none; b=K19d9eS8cUydp1XxmDeAVgnEIFZW0sECssusatkwZQiu5F/CVDc5zLJ15u+XTLL6e2VFagjpy8do7cBAUgP7uWSTBQTU9TciczkLNk60vNS46AemmGDs6mnGnc9EOTWoqOHbR7rc0pUdbMq6hbEl6vqrxXVEUHdU7syKpGb+dQo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791471115; c=relaxed/simple;
-	bh=xAlGA9ZWS04KIS+benLm+w2ukxp8v4ZDhslbugqb1fc=;
+	s=arc-20240116; t=1791471119; c=relaxed/simple;
+	bh=4ejXIHXllm/OX7toaawMvjc9fLMF06Wvz+3UPeI3Nfs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=t0ZzwJgVNiqPosS2sCXUu1wFy8xH5kKsr3O7w01BcbZbfqmLjCJldeP2xPwq60jS4ynujJiUOzxRcVLWlTNe/q6GUPI4gk6yOSU9L/LT5jBsRSJQRICFOF1lL+ZK/kpnuICuEL/KoVWub65hG/ybVccjDF+5iE6xZHxrdYuvXRg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=M9eKl15O; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kNvvMEcW; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=fC/MBnxyRpJzJONWQL4Ntr6wqCW2XAVxR4i6jNgSTsRAckXXLCv4h8LGNMbjzhSUAyc87wurqIqFLqJwXQFwrqe8HFsar7jfDcK88dessSfb6RqRAGhcO0rXzuVS9asWdyBA3MJBVWzyCrUzo1ut210sJgT9+VvDTzy3Wjt2ffw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d+trr0U4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CQKNfogD; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="M9eKl15O";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kNvvMEcW"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 698EVD613145563
-	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 14:51:43 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d+trr0U4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CQKNfogD"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 698EVI8U2299432
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 14:51:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	YlDcZg0BQE5duZulU+ElFFqS4rkCwqS++//cDsA6uqk=; b=M9eKl15ODcR90CcJ
-	jF+S5h2v85vXLm2S7D78vA3hvC3ETJl58ZW/dwTQxCsXPPl/TPzpYx8Cs/rxbBOh
-	cVUMBpM+GYAmMFDxVAhViBtAXRrNqQBQOr2A55WR7EJyDEAlSSHBH7mNp4lOO8O1
-	tRc/ZdzkDZf+kvjilkaVteDQBgufcwdvjpzSrgRWNE2UNzXLlAxAyOc3etnLQfCk
-	h05VUUXW7ue5+J/3KZ8A3Ex8i+XeZLqw22a9M0dFp8WvQlaUHnM1+wxhgMgQKrpe
-	9C9Kx7aBJvhonehMyyB071bZ9z0y+h+av0ru00/nvBIrTzlWTfiio3Az/fEeZcTY
-	9XCFdQ==
+	p8wa6N7QHPrG2N+PjfUfKP3nkKREIO0fyU3OWbjBzVg=; b=d+trr0U48J1ceIBI
+	sbH/u7BnmaaXMuyqqnIrEtMudn/2iGiqQlxC8DRPlrWBq13xIvaTkXAeIgJQyyjd
+	mO/eixiI7lmRCM3Axvs8Pn7VjHU/GxCa1pbPPnuClAIGr+HJr+b8ISTXLyY7QNw8
+	6xqhMWJQMuHpfFjl6xhbgJ4gWYroCw6REJKsFFra33zpuiqSMjkw5vDzC1Ls+HlO
+	D8FY/QfQpI8Ya6BHUjIbhcg1XE3SA/jV3Ns3t1n1TYKhKUlAdyy7MYeX5zQdqTkE
+	7u9PhHDXLo0DmnLnYjVz4KYgOdoRMumMvFvZ8hP8akG/VDse8iyF8XjdkOGATNXp
+	vdkuUw==
 Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com [209.85.128.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6baj0fyw-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe2ucq4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 14:51:43 +0000 (GMT)
-Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-836c416b236so71225877b3.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 07:51:43 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 14:51:46 +0000 (GMT)
+Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-895241d7405so75861107b3.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 07:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791471103; x=1792075903; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791471105; x=1792075905; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YlDcZg0BQE5duZulU+ElFFqS4rkCwqS++//cDsA6uqk=;
-        b=kNvvMEcWKXusk2CNJmL/T5zcMZbhRhMJwMfwlF+jJ+Db9a98V6mx4abydvnhVaj8Bs
-         lc7PIM8eMS3m50USQZGrm5YxTR5HYdafIiVzCDepBTp+8A43xfmGNts3Bj2ZPAU92Ujc
-         LD7pNW9YbNMCe3cOKp8Xu07Q5B6IEncQvfM26HPtpfU/9wYbOumE4zZ3fG5PuKJAYq2h
-         zpkQTrknFEJBJd/pFiTouSW1fmLtv+dlzrjX3P56IonOLgMjf7AONu9Z+KBiqKEJh/H7
-         5Co6aLUrs11yfe+Halhu3H3M4lIRY6xXSPz9NFl0MEpdaJj8bI7pYRUV/zuVMUogVSZD
-         +UQg==
+        bh=p8wa6N7QHPrG2N+PjfUfKP3nkKREIO0fyU3OWbjBzVg=;
+        b=CQKNfogDOT0+8vgTXK7zlfikX5Is+Sf3zEJj8bEPlQnIqBN7/FOkVjEiwNN+243NKZ
+         g6zBPEc88M09Rp4oml2ZNlHpH8cimLtocgVYWxxCff7w89E88RWrULsR9igh1EQpmzrA
+         M62HeJcGUfymFQTqcPtWRz2PA7OsQFbA5KmZZQaCSdqxCKRX5ixRn3dbZX487e2VRnvB
+         pJtmeYy3A59GMUPganC/FAetYR0u9NW4bGeR7ErfgdJStIC9LLvdqkdXFLimSM/FKyJc
+         DIKkz1hUIszIZGilvqezHZ5uSlgXqMnj/FQZAQa/eY08U6s65XZ95rNMBD5c7SR6oCK5
+         s1ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791471103; x=1792075903;
+        d=1e100.net; s=20260707; t=1791471105; x=1792075905;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YlDcZg0BQE5duZulU+ElFFqS4rkCwqS++//cDsA6uqk=;
-        b=V6OArkabcooCTCmjDcDn5v0ccWZoG0z7VAoYNWKxJx3CYs1t+x7MhNYXNf/wtZOAXM
-         UFHbXqH/5PIscr24BlenMNCVi9zmgvwsbixpzlM9ySZSB947Z4EwuWBmiv/2VT/JUrMc
-         5r43239iYF8+DGWb6wJ/Xk8Vm5S9y8yLqxDtBVC6jL4g54e9rWcp0ZBYuAc4B0aOwfYW
-         uOh1E7KMraxmIGQ0uRJ9cHhpFPH2nG72qleJdOR3llEOXkt2u5yTeQaAlnQqQl0z7Agq
-         /37On3uZ/rp8QA51oA76sZ+44OaF+37M3JXlQ1dMXmSS28CEauC4dtpwIYa8U8uclij4
-         uQSg==
-X-Forwarded-Encrypted: i=1; AKwUvByodYEobJaYIBYbqw1Frjoi9zuOujcSpSw4xi4hAlN5AcSdS9lhWevAW4xN8mMiA5Yk7/2FQRCpn48bxnhK@vger.kernel.org
-X-Gm-Message-State: AFq9FYK8FPc+LAYmcPdz6eJ6p8pech7BoExi/+k+o9Ff6vij6Fx0kgr6
-	M/L/XQ/ha3YtqCuyhPBmbjOIRN/gwcwQsSjA0PNSOkKWYZhp54JM1f0RCeBpf59EhdDDz/txdK/
-	odJw9Xd2JJYQqT9M++idfpsQDSTtCNbwpbGGpnPQpBM6TTF8hwIgGuiZ8BN3EpYjp0G5T
-X-Gm-Gg: AYBFou3M8iJvIDTayPaCfzjhoLbHCEVj5zGV3uJQqArKrbdy64m+qTSZ2oB1Nob159l
-	J5rVc4+iKnL6/AdQPa8Tq2BuvoQO6fd5StT76J2qwT1f/B0yIBJBEewPGTKvzbxSoR9L9KKV/Ka
-	FlRd2Ja6nm6xyzKE5hZJWd8/jSStA/vpnf8qpRh4UcQlrnUAVYk8yVAtpyOlAb8jFzMHkdjzWjv
-	2/UnsA4rmP/q5p1biLIaKtKJQEClXNJ1w9nb126vH4SjHaq3Q325uG0pPuTy9/2hBY7OpxbwNG2
-	wLUxQYcmHt/9lgteldPvcul9KSOwIVc9Rw9aJ4/si3CnTiCGFFniW3PiGy9mGTIBENLTQ0TwNUa
-	jWkty1ZvSezuURhbjFoCQ/DOntbmkayGlEJlu+W4cNeI=
-X-Received: by 2002:a05:690c:4990:b0:8af:1cb6:30ac with SMTP id 00721157ae682-8b05b11f8bfmr27029417b3.67.1791471102416;
-        Thu, 08 Oct 2026 07:51:42 -0700 (PDT)
-X-Received: by 2002:a05:690c:4990:b0:8af:1cb6:30ac with SMTP id 00721157ae682-8b05b11f8bfmr27029047b3.67.1791471101695;
-        Thu, 08 Oct 2026 07:51:41 -0700 (PDT)
+        bh=p8wa6N7QHPrG2N+PjfUfKP3nkKREIO0fyU3OWbjBzVg=;
+        b=R851S80dYGXPmQxVatX7O0cEJQsTqaA5o109Tjp+lHhlSBjR5XWzmg3roK1qwbK0yO
+         K1ciHWAEl/BgDfkAdJCs1TAxkRijLnogW1AgF+98cveQtXACmzfBuR6eYXpmppT07aWW
+         HLJ3AFDLWZig0txhV3UPAamptq2v920oq1gQqHiBm6Vo+IRfBKZnSBicDzuQzGioK0Xq
+         X+eZSX2ASJlKpnrlhYsYFmuQKC+ugpyavrybVuuAMbesJLtOVZF9fv4wgi3Y6tZpMZ/4
+         39EH7NUBEPK6mNAf6KzYX6S3eQgU+a5G0CP4/SkQSjfPWjeKlLgHcNSF6T4FcjKX4ohd
+         FKfQ==
+X-Forwarded-Encrypted: i=1; AKwUvByJb3G9q6ZFgE+W9reFk0m9zlC0Au8fs/d2DYWnZtV94skgkl16JxpQKgqjGd4Fxm8kVpVETpQvkIqDGM+L@vger.kernel.org
+X-Gm-Message-State: AFq9FYKEuhwLLspp6AGyNcr9pGV5JZP7R4wfXFva5RbfcmhoXFUZkCLa
+	GXyWkW2alh4Wc4uSV/AFHN+v9Xi2ogikGHVsAa2ztUJEOS6r+UkicUjLiF5zx+kcMhJJ/eo2CYh
+	3y+D3a7U/jfgctEpmsxu8IzH4r0Di6EueSrwdjoY3K24h19obH9aRgUq1zYhcHK/XZA0I
+X-Gm-Gg: AYBFou2KKGBOrBkK5WNdcMWfy/IpgSPHS9ydzJPFtrDEi/23PghsMsUXYaitbJIWJaU
+	+3Ud76gL3nPrtBlHai1yObpLORVl+2Oeu9f+o1+CobISKKxyu998bb2M7yoqlOuftQgl5wZsI/N
+	MYg6ouIw8EtVo80rEERMd869pQGLPUo5jkp74oMaMtTKn4UukZd0YOGqKJ63rcWomnhXMrjsnTB
+	iLabdSprCJnxwCGpUKJTheU4U07a+sXOi6rQ+KjsDy/0PuJgst8WpAPI2ZzU+56FUMyZrCWAmkW
+	fYL8klfItdjV0hS1/IL5pJySTZzswcn0CQPNLU7KVHJPeUUvhGGkowwy/KhHolZSQ5iJPvvmaIx
+	U1OixcOG1BLgAtcXRcg0AWakLAQoWofAr3GjtzTb4OHc=
+X-Received: by 2002:a05:690c:4902:b0:866:7724:3bcd with SMTP id 00721157ae682-8b05b01cd14mr39157417b3.16.1791471105001;
+        Thu, 08 Oct 2026 07:51:45 -0700 (PDT)
+X-Received: by 2002:a05:690c:4902:b0:866:7724:3bcd with SMTP id 00721157ae682-8b05b01cd14mr39157097b3.16.1791471104208;
+        Thu, 08 Oct 2026 07:51:44 -0700 (PDT)
 Received: from hu-luoj-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b05ab62607sm20903407b3.22.2026.10.08.07.51.39
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b05ab62607sm20903407b3.22.2026.10.08.07.51.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Oct 2026 07:51:41 -0700 (PDT)
+        Thu, 08 Oct 2026 07:51:43 -0700 (PDT)
 From: Luo Jie <jie.luo@oss.qualcomm.com>
-Date: Thu, 08 Oct 2026 07:51:34 -0700
-Subject: [PATCH net-next 02/11] net: ethernet: qualcomm: ppe: Fix multicast
- queue config table index
+Date: Thu, 08 Oct 2026 07:51:35 -0700
+Subject: [PATCH net-next 03/11] dt-bindings: net: qcom,ipq9574-ppe: Add
+ IPQ5424 PPE support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261008-qcom_ipq5424_ppe-v1-2-16caf43e44ee@oss.qualcomm.com>
+Message-Id: <20261008-qcom_ipq5424_ppe-v1-3-16caf43e44ee@oss.qualcomm.com>
 References: <20261008-qcom_ipq5424_ppe-v1-0-16caf43e44ee@oss.qualcomm.com>
 In-Reply-To: <20261008-qcom_ipq5424_ppe-v1-0-16caf43e44ee@oss.qualcomm.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>,
@@ -110,79 +110,177 @@ Cc: netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-doc@vger.kernel.org, quic_kkumarcs@quicinc.com,
         quic_linchen@quicinc.com, Luo Jie <jie.luo@oss.qualcomm.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791471094; l=1654;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791471094; l=5017;
  i=jie.luo@oss.qualcomm.com; s=20251128; h=from:subject:message-id;
- bh=xAlGA9ZWS04KIS+benLm+w2ukxp8v4ZDhslbugqb1fc=;
- b=WicTMr9iqzpLFpADMxM3B1i1JoCHa5f6Q4Jv7FB5145K/jZ6oRw1Ol3h1kdvkkJDLfq+Xmdzs
- s+fAOlPbvx1CvSYzhB9uZbBCa4NJR7YNVBPbBSCBqH8VUgtY93rdtM2
+ bh=4ejXIHXllm/OX7toaawMvjc9fLMF06Wvz+3UPeI3Nfs=;
+ b=L1EmTXZqUYIEviKnSUJ5xS6ppzQFL+i8pPyCv4ceiHPry+wkpyFsjyroR8d4yQHm0JMNe8Ls0
+ B0+V2ALB2R2DMPhBFO74PZ5az02oFHCSix/DSKQjPlWanVZJIfaCfrH
 X-Developer-Key: i=jie.luo@oss.qualcomm.com; a=ed25519;
  pk=gSsYMDakxtd6UDFYDdA9y9yjIs5Etp5GK/3DoXWPyS0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDA1OSBTYWx0ZWRfX8HxWWr/gWfkR
- 9/Jt94C0YCv/rj5XZFFPqSmfcryIURCbIAjwEDmyIwPhy/fFTdEoVqKvGlgzqbdpbDtaiIVykar
- IDdjuRDaR8m4d7lt7GbYUMadq8AX9/PDePgtMdMhaaar289Js8wuuUfxxrA28ya6fQfhADrCw4P
- pDoaf+Rl6hQtdDstu1oTomENBwIEnt2O/1IFPWiAD5XaGCWumsnV/dubWz8/1VZ0ZgtySOGtn8P
- pG+Mt0/5yJiU25dvibpgOdL2H/BAYtLUjZYmPifDbJih5hFR2N+Dyyk1zwvwdPnbHuWXg48DvHD
- YMotpRUWBUVJxbflDXf2tRgWT7sRteELPi3nMTxNY8Lhoz1xjvOwi5hkp8/uwHgkEg2tkdNP9aQ
- ywVTqhm03B6lcYC1RpuJcyLb0jvgPGO+R68oocOEwYOD5j8BXz4R2efnP1xJtSloSoWq/FAYcF2
- bTHrXwLMa/l/UV94VQw==
-X-Proofpoint-GUID: ePrM_I26jAJoRI6CU1vX1sSWae79qwGn
-X-Authority-Analysis: v=2.4 cv=H/dOUOYi c=1 sm=1 tr=0 ts=6ac7adff cx=c_pps
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDA1OSBTYWx0ZWRfX76uyBF4QXqVR
+ zramIIb4/JCr+Qyv5wlET5GmNuKIz/7qsWubufPHZJYA8XUWMNUd34Y8tQUXELYW5wRHQ1zdONl
+ B51ANZSuKFASydsM9NNLEtf3jXSCqDQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDA1OSBTYWx0ZWRfX7ls1Etg3GzEM
+ +LqISOHOe8h7zVcVCPBmTMR3uM5bv2FhFTUO7Tl62zyPubz9zer1HVwlmzmAoHp6HTOX+tXBzIN
+ k6VmRXBc/6EVWbhTHKn9Iq91dGkFa6BxF+JypmkrdlfQFlMUSSkEOKCTQDuCoRz6ca7Q1M5I+Up
+ dnyzDPEXYw8zu+dzvEnXlfvb1nfz3JW2eUrHXeO7mqfPlhi0lPiTRrPy1qcw4Wvg/62jmuWPL7/
+ mDbbrnWgXNP/Vm/Nlhk/VuYeQ6HKSh/i5gU4WS5q1ga4b7C1ag7q+4uTVzf3BkQbO1AfvA7CjAs
+ JhFao9i+gVC91ZJVU79NrFmn55fPZSbpw4q8isXz6v38wVzC35veJiJCXkMTqERm1tKPvCJXR6B
+ GApxCag11Q0mMnc6fgYMLG8mjeKaB10aipbOW8mX/DYaQ3GT+1fd7wert4TGeC5OqzIEYGo8JDn
+ uuE/ZrzsevF5WuKW4Mw==
+X-Proofpoint-ORIG-GUID: CoQn8VclJVgf53I5lDbyBKgxyxt_ERzE
+X-Proofpoint-GUID: CoQn8VclJVgf53I5lDbyBKgxyxt_ERzE
+X-Authority-Analysis: v=2.4 cv=CIm/zhrD c=1 sm=1 tr=0 ts=6ac7ae02 cx=c_pps
  a=g1v0Z557R90hA0UpD/5Yag==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=mx8D-BtPiHKBULbPJ0MA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=88jBO_RzNVI78HEcs5sA:9 a=QEXdDO2ut3YA:10
  a=MFSWADHSvvjO3QEy5MdX:22
-X-Proofpoint-ORIG-GUID: ePrM_I26jAJoRI6CU1vX1sSWae79qwGn
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDA1OSBTYWx0ZWRfXz5+gvIN689Vh
- wWu7lpQ7IjJzy8sbT9/nqKocqz2uivWUVbq898VghRVv/dy4Xd2IMLp9y+aWymv6JRzfkN1/mJz
- 6x9X+vbNQyiA1PD2u9t8FdyJ7uKAEWo=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-08_05,2026-10-08_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 phishscore=0 bulkscore=0 suspectscore=0
- lowpriorityscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610020000
- definitions=main-2610080059
+ phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080059
 
-PPE queues 0-255 are unicast queues and queues from 256 onwards are
-multicast queues. The multicast queue configuration table has its own
-index, starting from 0 for the first multicast queue.
+IPQ5424 integrates the same PPE switch core as IPQ9574, but requires a
+different, smaller set of interconnect paths, and has only 3 front panel
+ports plus the EDMA FIFO interface, without the EIP FIFO.
 
-The driver uses the absolute queue ID as the index of this table, which
-is out of range for every multicast queue. As a result, the multicast
-queue thresholds are never configured, and unrelated QM registers are
-written instead.
+Add the IPQ5424 compatible, describe the interconnect paths of each SoC,
+and limit the Ethernet ports of IPQ5424 to ports 1-3.
 
-Fix it by converting the queue ID to the index of the multicast queue
-configuration table.
-
-Fixes: 806268dc7efd ("net: ethernet: qualcomm: Initialize PPE queue management for IPQ9574")
 Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
 ---
- drivers/net/ethernet/qualcomm/ppe/ppe_config.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ .../devicetree/bindings/net/qcom,ipq9574-ppe.yaml  | 87 +++++++++++++++++-----
+ 1 file changed, 70 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-index 125b73be92b1..8a553902ffad 100644
---- a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-+++ b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-@@ -1530,8 +1530,13 @@ static int ppe_config_qm(struct ppe_device *ppe_dev)
- 				if (ret)
- 					goto qm_config_fail;
- 			} else {
-+				/* The multicast queue table is indexed from 0 for
-+				 * the first multicast queue, which follows the
-+				 * unicast queues.
-+				 */
- 				reg = PPE_AC_MULTICAST_QUEUE_CFG_TBL_ADDR +
--				      PPE_AC_MULTICAST_QUEUE_CFG_TBL_INC * queue_id;
-+				      PPE_AC_MULTICAST_QUEUE_CFG_TBL_INC *
-+				      (queue_id - PPE_AC_UNICAST_QUEUE_CFG_TBL_ENTRIES);
+diff --git a/Documentation/devicetree/bindings/net/qcom,ipq9574-ppe.yaml b/Documentation/devicetree/bindings/net/qcom,ipq9574-ppe.yaml
+index c899f4b56945..e5d218fc5d82 100644
+--- a/Documentation/devicetree/bindings/net/qcom,ipq9574-ppe.yaml
++++ b/Documentation/devicetree/bindings/net/qcom,ipq9574-ppe.yaml
+@@ -74,9 +74,14 @@ description: |
+     +------->|             QCA8075 PHY             | | PHY4  | | PHY5  |
+      (clock) +-------------------------------------+ +-------+ +-------+
  
- 				ret = regmap_bulk_read(ppe_dev->regmap, reg,
- 						       multicast_queue_cfg,
++  The IPQ5424 PPE reuses the same switch core, but wires up only 3
++  front panel ports (GMAC0-2) and the single EDMA FIFO interface; it
++  has no EIP FIFO and no ports 4-6.
++
+ properties:
+   compatible:
+     enum:
++      - qcom,ipq5424-ppe
+       - qcom,ipq9574-ppe
+ 
+   reg:
+@@ -105,24 +110,16 @@ properties:
+     description: PPE switch miscellaneous interrupt
+ 
+   interconnects:
+-    items:
+-      - description: Bus interconnect path leading to PPE switch core function
+-      - description: Bus interconnect path leading to PPE register access
+-      - description: Bus interconnect path leading to QoS generation
+-      - description: Bus interconnect path leading to timeout reference
+-      - description: Bus interconnect path leading to NSS NOC from memory NOC
+-      - description: Bus interconnect path leading to memory NOC from NSS NOC
+-      - description: Bus interconnect path leading to enhanced memory NOC from NSS NOC
++    minItems: 5
++    maxItems: 7
++    description:
++      The number of interconnect paths depends on compatible, 5 paths for
++      qcom,ipq5424-ppe and 7 paths for qcom,ipq9574-ppe, enumerated in the
++      allOf conditionals below.
+ 
+   interconnect-names:
+-    items:
+-      - const: ppe
+-      - const: ppe_cfg
+-      - const: qos_gen
+-      - const: timeout_ref
+-      - const: nssnoc_memnoc
+-      - const: memnoc_nssnoc
+-      - const: memnoc_nssnoc_1
++    minItems: 5
++    maxItems: 7
+ 
+   ethernet-dma:
+     type: object
+@@ -182,7 +179,7 @@ properties:
+ 
+   ethernet-ports:
+     patternProperties:
+-      "^ethernet-port@[1-6]+$":
++      "^ethernet-port@[1-6]$":
+         type: object
+         unevaluatedProperties: false
+         $ref: ethernet-switch-port.yaml#
+@@ -236,6 +233,62 @@ required:
+ 
+ allOf:
+   - $ref: ethernet-switch.yaml
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: qcom,ipq9574-ppe
++    then:
++      properties:
++        interconnects:
++          items:
++            - description: Bus interconnect path leading to PPE switch core function
++            - description: Bus interconnect path leading to PPE register access
++            - description: Bus interconnect path leading to QoS generation
++            - description: Bus interconnect path leading to timeout reference
++            - description: Bus interconnect path leading to NSS NOC from memory NOC
++            - description: Bus interconnect path leading to memory NOC from NSS NOC
++            - description: Bus interconnect path leading to enhanced memory NOC from NSS NOC
++
++        interconnect-names:
++          items:
++            - const: ppe
++            - const: ppe_cfg
++            - const: qos_gen
++            - const: timeout_ref
++            - const: nssnoc_memnoc
++            - const: memnoc_nssnoc
++            - const: memnoc_nssnoc_1
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: qcom,ipq5424-ppe
++    then:
++      properties:
++        interconnects:
++          items:
++            - description: Bus interconnect path leading to PPE switch core function
++            - description: Bus interconnect path leading to PPE register access
++            - description: Bus interconnect path leading to CE AXI
++            - description: Bus interconnect path leading to CE APB
++            - description: Bus interconnect path leading to NSS CSR access
++
++        interconnect-names:
++          items:
++            - const: ppe
++            - const: ppe_cfg
++            - const: nssnoc_ce_axi
++            - const: nssnoc_ce_apb
++            - const: nssnoc_nss_csr
++
++        ethernet-ports:
++          patternProperties:
++            "^ethernet-port@[1-3]$":
++              properties:
++                reg:
++                  maximum: 3
++            "^ethernet-port@[4-6]$": false
+ 
+ unevaluatedProperties: false
+ 
 
 -- 
 2.43.0
