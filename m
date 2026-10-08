@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480FB3BB690
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:12:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 916073B9DA2
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:12:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791439961; cv=none; b=LcIJ51rUi/kbwRxE9k8r8P1hPnaUwHWFKOxYfY05Xe/x1rK3fJ/TtKMf/xprUG3T1mFH1GIkHhxqN5mX5VPdYdBPiPkgcVy2RZ2P0m3HA/OAj/bENNOSAueJw3W6KfiVhl4Ta2iTWW89F0fp5tRtKDssuNl2aAfSW7C4A+W2e4E=
+	t=1791439979; cv=none; b=j7PKiecP010/80ZIQIae/d8/devau28lP/SBy6/cAESSRNZM8TOl8hxj+V7PxCx5KNPhP3NoTrjqpalgXbugrHnkAyaiVX+fNEFw2bwNvh+A88kxGy2+/EtSHuRFiAKRni7qbqGZLdBwfNW8sGayTnJf7n6xxelc1KYkfdxpx9s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791439961; c=relaxed/simple;
-	bh=sCkEiN+qolnUMYJu0zZCdc1+ix2cmxHcK5i99B9vty0=;
+	s=arc-20240116; t=1791439979; c=relaxed/simple;
+	bh=waeWroeP4xKtFKOgISd7hpP9YrbNnTVkhGw0oIV3/fQ=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GGb+nrmni85fjP/eRRa1Y/cPIxw5MDTTJ2zUztVcf5jm5OK1kJp0qbZMeTjC/DGYbkBwqU427LEXeXwg54AjVlJeVpB23AqMW0g5kIPXZPd5YNPVeCNPjYakCXVm64eOnxCALLECQ+GYTV71l9vsSWlLWUGk27sMZzf+XHuM3BQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d+Y8weLU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Oj/iw2tw; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=XtnZ2QZJTJZEaITnDrwrrxdJYEcpzy+XBnWJOo9hbhJgmL9bboNWDe3RiCqRHIN6YW+KYf71CsCTSr0WSffY7seHk/YiJrRhXtIsMrEQZTfZd0XyLE162kdSGhh7sgBpo9V+Tv8/3LiKu0WZQ7vWvUbCb5AcOuvRReTyYUlsDx8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VtR08Tba; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jLUOKf1L; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d+Y8weLU";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Oj/iw2tw"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984BUlR2895417
-	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:12:39 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VtR08Tba";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jLUOKf1L"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984CHjm930695
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:12:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	YPGiFq54jDa1xyPtt96t6RMiyZYDpPryks68gXkQPlQ=; b=d+Y8weLU28GSBE3q
-	hyzTdHjUqu0MoG9oE7BMMVpixr0jym6chlbVLyh95W9Eji88xVsqFZJNef/DoUw7
-	Obx3sfnhxloT9BDE4BWjzaggfa5zK6RhZvt5Fn5e03n1QSqVN+5L/Q09mf5s3A2m
-	6m8E29+WzGV6cSLDo2zKcwsUMkQZEEKMXzGXewuQ9g3z2VwazZOJDakO5hU+J6ue
-	jn353z90aVVqQKwpnSbMPgAsfI19ORNDVGef9D7QiAn2jhihcVk8Kg0GWS195L6C
-	IB5lYTVH3G+1aSlcItsbmf31Dq5zIu6O2XgAXelbEGz3Fzhq7dOX5uBwezXMiGQQ
-	y7YsxA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h60sg8ymd-1
+	h0f3SYb/QaHvXkN8gz/IfSSHe6Mh2Mxm/hOMkaVJ0nM=; b=VtR08Tba7WqHucVJ
+	U+8Piw0OWr+jbsezrQNyIh+WTA8mRVuCxJKaCAnhZaW7jDJZjS9zb8aYltomoOjB
+	f1TRxxShskiEx7Y7pO8QBE9CNOsDIKyIPjZ2OsDPE9M14lTX6y7pmKvdpd1gneNb
+	n3peM54vp25KmPCBwuOUt4S0ipcKYwPVjSwtvSM+BVaahFh2H7fK+cydpoWHJevR
+	5j3HLah8P72wZ31tdbKUfFInHCOLHV9oSh3v7dlvjfr4r+gdGtlTi4cAkdw8mxze
+	IaeWTNCzKodKhMCk3nHrxxds76tD/diHUVPrVsvHKVeIM7OCowGBglaTH7ku6e5z
+	nf4QIg==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe2sdbr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:12:39 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39b77130a7fso5410445a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:12:39 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:12:57 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93e46c120dfso538642685a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:12:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791439959; x=1792044759; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791439975; x=1792044775; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YPGiFq54jDa1xyPtt96t6RMiyZYDpPryks68gXkQPlQ=;
-        b=Oj/iw2twS3VBhn+xLqe412SHu3vSMaIlDzR4PAyxpNohry4VnLrDOprnC3blZ87SjI
-         hdPiB1e0YxlcUN5GJJqMyHUe0PA+zPbLDms489T9mlz2lTp+tPOeKLXwMBTaU6xo+di4
-         BU6FDlKt8S2fBXSgFsr9vSSA4t9uFbTTIIUZZxzW4sduDXZ3qOS/mtDjC4vEY8CtZp/4
-         GRdyBPHJKXoVnqCcLMn0T7CLx/FR9Jg9RxURY/lXorMdqkh5IffBZ2SzOBzGVCalj6//
-         119f5oz8I+317Ut0Apkd2O4o+Qjto2viE4Z7fZkv3rR8JLU9vNcTlS+yjJJNtoGmjmb2
-         6VDA==
+        bh=h0f3SYb/QaHvXkN8gz/IfSSHe6Mh2Mxm/hOMkaVJ0nM=;
+        b=jLUOKf1L97xPrK/9oVhVKoMC9r8VAjY5yJXrKLros3qaRSiY0goNcb4lTYzuXVZh47
+         hCrKV66U/sqORdDqlpc5iB9ChrVc9V4SOcuJ3XG8Ly8Ar3GblVN8kIH7Xv48tmbiktS4
+         Vh06alZim2HnHcPQX/kLuFpdqNpmqKC9Nyt82vyyKHBhPu8Qg6Tp3CcC1O9KpSChqpBq
+         O18495dvCf0cTuiIqBLVYh1Cf/Lm2yQPdSNq80ZJO+hw5PWLFYgP/sJKhw17MsoiRBPS
+         m/TMCjxeLKr27cEXi1yO7pGJUG7SUuaoMcY8kmHvyI6srPfnFvPkrImGa9JiPrik7cwz
+         x2QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791439959; x=1792044759;
+        d=1e100.net; s=20260707; t=1791439975; x=1792044775;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YPGiFq54jDa1xyPtt96t6RMiyZYDpPryks68gXkQPlQ=;
-        b=0R8zIS7CLHoGt1N3Vu2TeCrrLuC1LAaho8izoVscPL/5fzvgvie5vqZlxB9l8QskYi
-         ErHj88zteEqtzo9XUaOQGzEdLJtM5hWwKQeKJIAHjEyYVO5Y6ik3o9+k632qT4wVoy4p
-         VoOjWzzE0WqR7+h5Y3GZc4yKivtS9xh0WGwsm8CYgCACh8VJ/Esi4t+OOlFxjoLBwwwD
-         rjgMWKXVNQA/Adv3Njl8xuib3wI+fMZT/7M7Josg/NW2UD/8pwh2RLc1e9JhJf4Xdr1G
-         O7mtlflaxOQ5u2ucxhK4J+KgjPqXaOvLFlgixkxueaFx90dpb2iBDqPvpYbbUShOh+Ly
-         JNgQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzY9AdFAKZg2y6Q3zIU+FeHjbvP6r1Igw+DzaCQez+/ADYgeN2xlYCGjvtqymV7aH4rOe2NaPafjmKtWAMq@vger.kernel.org
-X-Gm-Message-State: AFq9FYKiK53UOZK61TZJghDuav8PQJtdS8xe1+Fi+PMGtC4AN0O9bwgb
-	7RYgN8E84Yx4I3hGfED7Nx4XsYwB6XOdhU3+f2WdoUluxL2LuCCYIkMqAcsY0+xLqzHPgmh1Jsk
-	9Hqa8gE1mOBzRsTCJcb7+qQKXDatackM6DbcZM1XdJ4B9LUowJR/XXRBRwnYCRgmnN5Ic
-X-Gm-Gg: AYBFou1L+z+vtgS8G6YX6UTX+NiR0nurZYh2iwrOxK+15xla+9HpDMFBbhsGB1Dp3ri
-	OahR7rSOevWrj23m+aqnJQ0QCo6BY6P3R0XE+LE45QymG3HeSIthmQPEu1+Cpf11JJXM3TRowcq
-	awKo9Bh1A9TfjEiwAdEwWgX2itqH2xSZcsdkugTwz4n1IYyXxaPzvBZo//yvIAwlL0v5+vyuPVM
-	NstmEadDhkvOJluF/Qv3cFRL7Bt83D9Ezjek0dDZWIaqgdwf/SPRXNCAfAOyjgundkANVf9rcvg
-	zw19I0hD3oHsTndHIjRCXv7Yc2p/kLvQhvoWGO6czY4fouKP1LMUnLXjbiYORjTQ84EF9rmJ2aS
-	SscHnlCFxBFdqX01gX700d9skUaarTEWG
-X-Received: by 2002:a17:90b:1811:b0:3a4:a592:4cfa with SMTP id 98e67ed59e1d1-3a8a1bbf16dmr4086858a91.45.1791439958824;
-        Wed, 07 Oct 2026 23:12:38 -0700 (PDT)
-X-Received: by 2002:a17:90b:1811:b0:3a4:a592:4cfa with SMTP id 98e67ed59e1d1-3a8a1bbf16dmr4086833a91.45.1791439958315;
-        Wed, 07 Oct 2026 23:12:38 -0700 (PDT)
-Received: from [10.217.219.169] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a9f1a23c82sm2882655a91.1.2026.10.07.23.12.34
+        bh=h0f3SYb/QaHvXkN8gz/IfSSHe6Mh2Mxm/hOMkaVJ0nM=;
+        b=uox4tkfNhNCkeiT6xd/kMNMGx13zB5hua/u9ICJTM7t95asc/zG1IWmxwKDXs0cDXG
+         SMHlOnZQjLGk+8wBVinzGWwfnDPI6byldq+CJKwrfuh2Bi0LNXqZGV+7feqt8jkacn1k
+         e1rNpfDQ6UOGLBIT9A8tijxUVDRZVJMk9QqL4M0ZO5OZ0V36u9Yj3wAAMkRqBAKXUj9i
+         4dpU4QGLHFkhKutxjom7KxEuTpztvIG7lon5otCH998iGZiHu+TQFv21lpyw8eZjuwsq
+         MuXQTV54If+EnvSQ2gmgElVIrjntJu6XWbj9gefoh2a4+lzF+8MghhE4GwDY4TbFs3Ma
+         z14g==
+X-Forwarded-Encrypted: i=1; AKwUvBzPPABbUiIy2jPg+ACFvPHopZFNMV2ppQ/e5dyrxNxMi8CcMe59NZRXgcdrVr9k62nFCguYH1LEIcuNwEVO@vger.kernel.org
+X-Gm-Message-State: AFuF++nWahYXye1sueNUzdGFTwVd0nUpiWzTgodbfImS0OAES1iQy4z1
+	FS/Y7CZ7aEYPXIxSK8Y4gqGRUTDr6wiOwjDLAi/2OI8Jv8XzSdzUuwLvyXiCHCf8v7TEiTvixJM
+	8uTFLuRRBMWxRcdwUqRB5Mm4WEjUnGxJGdto3owKCPRykfppFcjmlKDw2f9eQOKOKygs8
+X-Gm-Gg: AYBFou3qddpnb8rFT7htNGaGusvaL/apvPrAPxmzwsrocO0zLcIHh5JgkpDJLDGI5Ga
+	Zq/2GImeQd+322jO2K1bQ7PtjFvJlMg3hldrZrt8nBE+6WSTZ7l2FGCHeMAsMZwrHq0QcSoxlRr
+	eAy3hbQBhGhcJEK4Hb5NlmHXeGCl5+wwGNSNSku/R238+fohJa8g/5nH89BveAQg5rO2MY3Ob63
+	ImW1Z1Sa2z+oH1lehDt9bci1hpT4sqQQHpbMxDEAPKniZBNB8hSlGuqjXHOlYYBO8O0Eyt8Yfw0
+	yq3bYcUjVxX+LwPBCZmrU3YF46cvWPbXEkKJF+q6StRDIOqdPbN3Zu3SkR3Hqi2LLuPTYkVRfdG
+	9HiUM1YFOKw0bHw3rqmSFZS8SQAcyZWDa8rO5y20=
+X-Received: by 2002:a05:620a:1d0d:b0:939:93a1:1383 with SMTP id af79cd13be357-93e9b75cba8mr846472685a.32.1791439974552;
+        Wed, 07 Oct 2026 23:12:54 -0700 (PDT)
+X-Received: by 2002:a05:620a:1d0d:b0:939:93a1:1383 with SMTP id af79cd13be357-93e9b75cba8mr846468785a.32.1791439974060;
+        Wed, 07 Oct 2026 23:12:54 -0700 (PDT)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48c75b4e399sm8112748f8f.56.2026.10.07.23.12.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Oct 2026 23:12:38 -0700 (PDT)
-Message-ID: <d57835a1-9a56-465c-946a-ff261d2df0e1@oss.qualcomm.com>
-Date: Thu, 8 Oct 2026 11:42:33 +0530
+        Wed, 07 Oct 2026 23:12:53 -0700 (PDT)
+Message-ID: <2b5c6895-58df-4fae-8d65-24806cea35c3@oss.qualcomm.com>
+Date: Thu, 8 Oct 2026 09:12:50 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,204 +89,95 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 7/7] bus: mhi: Expose DDR training data via controller
- sysfs
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
-        Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, mhi@lists.linux.dev
-References: <20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com>
- <20260701-sahara_protocol_new_v2-v6-7-3a78362c4741@oss.qualcomm.com>
- <n35ouuyvy25ocbfaedksryoz5d53cylk2pcsxz7f25us444gh7@7ybkifq3fbae>
+Subject: Re: [PATCH 35/74] media: qcom: camss: vfe: Add helper
+ __vfe_pix_format_is_raw
+To: Bryan O'Donoghue <bod@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
+        Daniel Scally <dan.scally@ideasonboard.com>,
+        Keke Li <keke.li@amlogic.com>,
+        Richard Acayan <mailingradian@gmail.com>,
+        Hans Verkuil
+ <hverkuil@kernel.org>,
+        Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
+        Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>,
+        Robert Foss
+ <rfoss@kernel.org>,
+        Milen Mitkov <quic_mmitkov@quicinc.com>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
+ <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-35-ed985aefd611@kernel.org>
 Content-Language: en-US
-From: Kishore Batta <kishore.batta@oss.qualcomm.com>
-In-Reply-To: <n35ouuyvy25ocbfaedksryoz5d53cylk2pcsxz7f25us444gh7@7ybkifq3fbae>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-35-ed985aefd611@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: UeRHwMKI5vUKlIPhlJ4m9pTnvauEi8-w
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfXzCoHD9OFBory
- aPy8UHeuMehvXz3LPcfm0t6JGONm/m/4ABZC01VA+z7q29SZQik8IF9Y4CIrfJEMqRfVhzlLdvO
- W3Qu1KN1OhmoNjEBK3xvqJ46Su/YmSE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfX9+jrwoFJddnw
- Vzw9Qml6CiHbgCDh6/ftSsrWVkpn2jmSIuvAwYXaX9I7bKza1i2mc8UnMACII3PYgEcbD+PTA21
- 6C9q5D4Nu3D2/cLxyoxt6xA7Ux3wNxtOborAQlZX0fLHBNJW22WAmRWmIEh3mzAw1tHZ2sZw8N+
- 2QBj4ZYllRLlgMU6CFHnEYSN8egbepkXUCXXrHmnu5PqrGmvMDmM0sXQzSRw3Kdc2HppIGhTaWG
- 5KtT+Y1olbbNSyK8piwN7ld9f/XYXNBQGpbn1UFPa858OTfUge2aVAI4vWQs/+9tinIH7K0ahq+
- Lwcy55fa+1Tsc5ZaeDzJGVR5FrpJjAbt8qrpgUzybgW7S6blLrmOlJWvlHjI42Srb9bLdc2tWYF
- Ob4ppUU0gatE7kmQBdd9oWxa4qPEhvTdj9cIj1ikOHJciEhUo1xZEwj9veRKX2epnTR6bvJ+uk8
- kac7nyb7NMhZ1zX6qWA==
-X-Authority-Analysis: v=2.4 cv=DfWCOftW c=1 sm=1 tr=0 ts=6ac73457 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfXzH8M+3r7lqW+
+ o0j2BaMv0TGel+50k5TOeivXIwJUCa6S0YJKv33vvpCMKgrKvmw5KVPnNgRQBXafvaY/ZlEdISs
+ MFhO2Mv0siZG2BsGigju9OXMkX+N8JU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNCBTYWx0ZWRfX/8e4iUCGaRsR
+ 4EyHFo1v81+PVuYij5atg4pAeZWLSz2WZ3JgFIKAjI6N04ow5+bG78EPqSC6/mpWuG8qttWG+nJ
+ MeqhrC+5X8bE292OW030TlpL7F5VPBFSJAeK3oklyCEqKzwynfLYtOGa4p/7xkjmUzhEnN11xVP
+ vjRA/oVLi6LY5/lxYOPA1kXi94BNQODuM9AY2E4Wui029KB9YvSkafUcsLRN3ys/N18AvJpmSmM
+ EQ9NuJuoTwyI8TxoQV059IRsr8xJG/90bdcIAyu0Fkc6U7GsOaBYsIDGCkJeee7sxyCTiJFIUY5
+ 9llIdAavejfndS01ZQ4zVqXjFfb0vpSgezxg4oCg6/M5kU+x3ewYKF83Rqoi/78Ev3Hqfph6n/j
+ NQsh4VrnJkdO+Fc8a9JqnodymL/p7rueYCeUI3FOqMhUhdbrMs2Yd1IHg7rvhcmnfkW2TNLd9AG
+ PYDeqhuTnKNPSm8Mrgg==
+X-Proofpoint-ORIG-GUID: bB7IArpnjBrqlygbBKJY9abQ1HYLHDbp
+X-Proofpoint-GUID: bB7IArpnjBrqlygbBKJY9abQ1HYLHDbp
+X-Authority-Analysis: v=2.4 cv=CIm/zhrD c=1 sm=1 tr=0 ts=6ac73469 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=0IlxrgZsFcjQ__LXY9EA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: UeRHwMKI5vUKlIPhlJ4m9pTnvauEi8-w
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=STDLOB1srjojY5QKT3EA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-08_02,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 bulkscore=0 phishscore=0 clxscore=1011
- priorityscore=1501 suspectscore=0 spamscore=0 impostorscore=0 adultscore=0
+ phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080024
 
+Hi Bryan,
 
-On 7/9/2026 12:27 PM, Manivannan Sadhasivam wrote:
-> On Wed, Jul 01, 2026 at 04:07:41PM +0530, Kishore Batta wrote:
->> DDR training data captured during Sahara command mode needs to be
->> accessible to userspace so it can be persisted and reused on subsequent
->> boots. Currently, the training data is stored internally in the driver
->> but has no external visibility once the Sahara channel is torn down.
->>
->> Expose the captured DDR training data via a read-only binary sysfs
->> attribute on the MHI controller device:
->>
->> /sys/bus/mhi/devices/<mhi_cntrl>/ddr_training_data
->>
->> The sysfs read callback serves data directly from controller scoped storage
->> and protects access with the controller training data lock. The attribute
->> lifetime is tied to the controller device via devres, allowing the data to
->> remain readable after Sahara channel teardown and ensuring automatic
->> cleanup when controller device is removed.
->>
-> If this training data is RO, then what is the use of exposing it to userspace?
->
-> - Mani
-The sysfs attribute is read-only because its purpose is to export the 
-training data captured by the driver to userspace. Userspace reads and 
-persists it as a serial number specific firmware file. During next boot, 
-the Sahara driver loads that file through the firmware framework and 
-transfers it back to the device. The data is therefore not written back 
-through sysfs, making the attribute writable is unnecessary and would 
-allow arbitrary data injection.
->> Userspace flow:
->> 1. For each controller device, userspace reads the ddr_training_data sysfs
->>     attribute.
->> 2. If the read returns non-zero data, userspace persists it using a
->>     serial specific filename (for example, mdmddr_0x<serial_no>.mbn).
->> 3. On subsequent boots, the Sahara driver attempts to load this serial
->>     specific DDR training image before falling back to the default
->>     training image, restoring DDR calibration data and avoiding retraining.
->>
->> Add ABI documentation for the DDR training data sysfs attribute exposed by
->> Sahara MHI driver.
->>
->> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
->> ---
->>   .../ABI/testing/sysfs-bus-mhi-ddr_training_data    | 19 +++++++
->>   drivers/bus/mhi/host/clients/sahara/sahara.c       | 62 ++++++++++++++++++++++
->>   2 files changed, 81 insertions(+)
->>
->> diff --git a/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data b/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..810b487b5a5fdba133d81255f9879844e3938a10
->> --- /dev/null
->> +++ b/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data
->> @@ -0,0 +1,19 @@
->> +What:                   /sys/bus/mhi/devices/<mhi-cntrl>/ddr_training_data
->> +
->> +Date:                   March 2026
->> +
->> +Contact:                Kishore Batta <kishore.batta@oss.qualcomm.com>
->> +
->> +Description:            Contains the DDR training data for the Qualcomm device
->> +                        connected. MHI driver populates different controller
->> +                        nodes for each device. The DDR training data is exposed
->> +                        to userspace to read and save the training data file to
->> +                        the filesystem. In the subsequent boot up of the device,
->> +                        the training data is restored from host to device
->> +                        optimizing the boot up time of the device.
->> +
->> +Usage:                  Example for reading DDR training data:
->> +                        cat /sys/bus/mhi/devices/mhi0/ddr_training_data
->> +
->> +Permissions:            The file permissions are set to 0444 allowing read
->> +                        access.
->> diff --git a/drivers/bus/mhi/host/clients/sahara/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
->> index 07bc743aa061dd2fa85638067d494562152474e3..72ac751c302a98448b5756c9feb438647bd0ce4b 100644
->> --- a/drivers/bus/mhi/host/clients/sahara/sahara.c
->> +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
->> @@ -273,6 +273,66 @@ static struct sahara_cntrl_training_data *sahara_cntrl_training_get(struct devic
->>   	return ct;
->>   }
->>   
->> +static ssize_t ddr_training_data_read(struct file *filp, struct kobject *kobj,
->> +				      const struct bin_attribute *attr, char *buf,
->> +				      loff_t offset, size_t count)
->> +{
->> +	struct device *dev = kobj_to_dev(kobj);
->> +	struct sahara_cntrl_training_data *ct;
->> +	size_t available;
->> +
->> +	ct = sahara_cntrl_training_get(dev);
->> +	if (!ct)
->> +		return -ENODEV;
->> +
->> +	mutex_lock(&ct->lock);
->> +
->> +	/* No data yet or offset past end */
->> +	if (!ct->data || offset >= ct->size) {
->> +		mutex_unlock(&ct->lock);
->> +		return 0;
->> +	}
->> +
->> +	available = ct->size - offset;
->> +	count = min(count, available);
->> +	memcpy(buf, (u8 *)ct->data + offset, count);
->> +
->> +	mutex_unlock(&ct->lock);
->> +
->> +	return count;
->> +}
->> +static BIN_ATTR_RO(ddr_training_data, 0);
->> +
->> +static void sahara_sysfs_devres_release(struct device *dev, void *res)
->> +{
->> +	device_remove_bin_file(dev, &bin_attr_ddr_training_data);
->> +}
->> +
->> +static void sahara_sysfs_create(struct mhi_device *mhi_dev)
->> +{
->> +	struct device *dev = &mhi_dev->mhi_cntrl->mhi_dev->dev;
->> +	void *cookie;
->> +	int ret;
->> +
->> +	if (devres_find(dev, sahara_sysfs_devres_release, NULL, NULL))
->> +		return;
->> +
->> +	ret = device_create_bin_file(dev, &bin_attr_ddr_training_data);
->> +	if (ret) {
->> +		dev_warn(&mhi_dev->dev,
->> +			 "Failed to create DDR training sysfs node (%d)\n", ret);
->> +		return;
->> +	}
->> +
->> +	cookie = devres_alloc(sahara_sysfs_devres_release, 1, GFP_KERNEL);
->> +	if (!cookie) {
->> +		device_remove_bin_file(dev, &bin_attr_ddr_training_data);
->> +		return;
->> +	}
->> +
->> +	devres_add(dev, cookie);
->> +}
->> +
->>   static int sahara_find_image(struct sahara_context *context, u32 image_id)
->>   {
->>   	char *fw_path;
->> @@ -1131,6 +1191,8 @@ static int sahara_mhi_probe(struct mhi_device *mhi_dev, const struct mhi_device_
->>   		return ret;
->>   	}
->>   
->> +	sahara_sysfs_create(mhi_dev);
->> +
->>   	return 0;
->>   }
->>   
->>
->> -- 
->> 2.34.1
->>
+On 10/5/2026 8:14 PM, Bryan O'Donoghue wrote:
+> It does exactly what it says on the tin.
+
+I dont think it does exact what it says, my comments inline,
+
+> 
+> Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
+> ---
+>  drivers/media/platform/qcom/camss/camss-vfe.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
+> index 9793df66b4149..43c91ec8db494 100644
+> --- a/drivers/media/platform/qcom/camss/camss-vfe.c
+> +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
+> @@ -340,6 +340,18 @@ static const struct camss_format_info formats_pix_8x96[] = {
+>  	  PER_PLANE_DATA(0, 1, 1, 1, 1, 16) },
+>  };
+>  
+> +static bool __vfe_pix_fmt_is_raw(const struct camss_formats *fmts, u32 code)
+> +{
+> +	unsigned int i;
+> +
+> +	for (i = 0; i < fmts->nformats; i++) {
+> +		if (fmts->formats[i].code == code)
+> +			return true;
+> +	}
+
+This function checks whether there is code present in the formats, it can be raw/yuv anything
+why is called is_raw? Can it be is_mbus_code_supported? Or something similar?
+
+~Gjorgji
+
+
