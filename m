@@ -1,73 +1,112 @@
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch [109.224.244.22])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AF7A2F8EAC;
-	Thu,  8 Oct 2026 21:39:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.22
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81A433BD64A;
+	Thu,  8 Oct 2026 21:49:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791495578; cv=none; b=W3TgZ9KN8JO7+NKQpQYXIaWqUeWSiBEkXrq9qxuFaxctqA7Q3Ij6XjyaSVZ60yY9yj5+UzEOzcHO+pxEV2ZBaCmiENpT9dtfPg5P5wZxQhdXPHquvB/YkU91AlRW89wY5efWMF2ZsfySRS3j7mdC9ZJ7DMn1+aVDHv9bZtLNucI=
+	t=1791496166; cv=none; b=UJsTFy43LVsWDxTWC49L4JbdgtBQHPX5kFWz+GSWIIA0nxyCo3exPfTC8bW3FeKTBxI/kDQdBV1DANFyNH90fNs0nC8Wjm7GpIjF2jQbTdI+MVq3J2VxorQVofk56RDRdlU40zgokB3bXeTivEAGOARnKsfOYzEI5U5bmwBzm/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791495578; c=relaxed/simple;
-	bh=xSjNxiodg+6yd07ntk91k2iFIK4a2SynGiN3plsLjO0=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IANXzIT6gea9UpS8nBkFXK2yy5Bszm6kCpLwrlfggoVHH7dG7OL9H7ccrYHorvgeTy2Bv9cQDNZjrYXAzLEmeOkfh1KbTvmplcf7qGjJennlQa54A7AYnEycpZADi1Zo+dytdcNhh4xvJESVxL7lH8HOe0dH6ldoDFQ/A7q2pK4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=dawidwrobel.com; spf=pass smtp.mailfrom=dawidwrobel.com; dkim=pass (2048-bit key) header.d=dawidwrobel.com header.i=@dawidwrobel.com header.b=mtS1b8yA; arc=none smtp.client-ip=109.224.244.22
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=dawidwrobel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dawidwrobel.com
+	s=arc-20240116; t=1791496166; c=relaxed/simple;
+	bh=kUr5WLS3/NS86dn4okmxyawl/ihwQrfE84KiHi/fXc4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=PiUknuRlsspOJB87OHbv0ymm/esmZDVCMUK/pH6yMMyxMTocO3mHZlPkgfHASqbpunR+xgBma9SjBZ2nhYGfmDnliQRlw9a2timtp0ddAQpp8/dqIu9rMHBX7ijxV7Dd5RL165DFtSpER9ZVfCrETzbtg9y1/yVqw+uz7R6ZHOg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zv8weXQV; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=dawidwrobel.com header.i=@dawidwrobel.com header.b="mtS1b8yA"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dawidwrobel.com;
-	s=protonmail2; t=1791495565; x=1791754765;
-	bh=xSjNxiodg+6yd07ntk91k2iFIK4a2SynGiN3plsLjO0=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=mtS1b8yA53AqbOvYKBx3JH52RLhEuQ9k/qxtNwwYeknk9Q7E0scU1yDn17212pwXK
-	 SkWaJ/tsyNU5Df9pNVy1gzy5fEZDEeoPgHIi4tJBhzmtLilLEPULbIomgLpDcIGyrp
-	 tU8k6TnEFqPFH3xT9zW90mzSl1yHVvHuKBgXoaPOMJcb7d61jzVlHE/bxFRI4Z8hfa
-	 7bpUs06gSedfvkQbVSgOdiA5Dk4I95YLdmoRw0X0woMR2uMhyhk4KcbYvAMoZYlmya
-	 TOfeFA8dZTrT16zecCF5nhfDULi5eIretDZbuWu6l+DAMA7wW7mPsOZVC1I5YUIxP7
-	 e23Wh7IG2TmVQ==
-Date: Thu, 08 Oct 2026 21:39:16 +0000
-To: Jianhua Lu <lujianhua000@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-From: Dawid Wrobel <me@dawidwrobel.com>
-Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/3] arm64: dts: qcom: add the Xiaomi Mi Pad 5 Pro 5G
-Message-ID: <acd0ced0-533b-40e4-9514-1c616da6f9cf@dawidwrobel.com>
-In-Reply-To: <20260908-sm8250-xiaomi-enuma-v3-0-0198c3bf954a@dawidwrobel.com>
-References: <20260908-sm8250-xiaomi-enuma-v3-0-0198c3bf954a@dawidwrobel.com>
-Feedback-ID: 173987960:user:proton
-X-Pm-Message-ID: 71766e61f2fb574fd04937a409dd73e56ca88dc5
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zv8weXQV"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E17ADC2BCC7;
+	Thu,  8 Oct 2026 21:49:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1791496166;
+	bh=kUr5WLS3/NS86dn4okmxyawl/ihwQrfE84KiHi/fXc4=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=Zv8weXQV7CctIIeoMPsqS7HUme1BJA79ZmxzLK498nAV4v1z3PCgJZWwiGBvVuM96
+	 1DJ3YwIzuuwajxiNxlWhNRreCSOv6auLBuHhdEMeX7tXbHS9/9TRbqxyw52K9s9KR9
+	 qZo8w91vwUyutWvV2v+s+sgL93ViIiVHvqfF9D2pP9f9Tn9Kc6eNGN4fUWvkRsT9N0
+	 O71pNFKpRBaLlxr3Cvu3vB5e6of1zUJgaO7F3HxjzVzzwrfDUdZYm/ii9ApgVMUDfj
+	 55PN06BhewaHER0L/rtkPAjgPkZfejtNjwGUAukzIxjNpbuEsdelpJ5i+6FGhl8Hn+
+	 v94tXEWwhJR0A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8F88CA6017;
+	Thu,  8 Oct 2026 21:49:25 +0000 (UTC)
+From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
+Date: Thu, 08 Oct 2026 18:49:18 -0300
+Subject: [PATCH] clk: qcom: mmcc-sdm660: Do not keep the video core clock
+ always on
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261008-mmcc-sdm660-video-core-v1-1-3a772ad6a436@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMAyA4VeRnBeIlRXZq4wdbBpnhNrRTBHEd
+ 1+3Hb/D/x9gUlQMbs0BRTY1zUtFe2mAp2F5CmqsBkfOt0Q9psSMFpP3hJtGyci5CFLsrz6EsXO
+ DQI1fRUbdf+P7429bwyz8/t7gPD9QGgHGegAAAA==
+X-Change-ID: 20261008-mmcc-sdm660-video-core-0d856bbf32ae
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>, 
+ Martin Botka <martin.botka@somainline.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Fabricio Akio <fabricioakio@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791496164; l=1532;
+ i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
+ bh=geC/qp10mNx09GEN8J1SfnH1K7aO8l0Ey/TJA7nUjhg=;
+ b=jM8aDSTTm673lKKyryvGnzUFUG2OJF3aMSQ8Gw3qyqgxTMeEuRTjH+kOGNJLEh6E3mq9U/7N9
+ HIy9+xyMPp9CkqiScUUSnw9PvnQNQRIwhHJv6CkrYUL5cMTnS50hcMH
+X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
+ pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
+X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
+ auth_id=1076
+X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
+Reply-To: fabricioakio@gmail.com
 
+From: Fabricio Akio <fabricioakio@gmail.com>
 
-On 8.09.2026 17:56, Dawid Wr=C3=B3bel via B4 Relay wrote:
-> The Mi Pad 5 Pro 5G (enuma, 2021) is the modem-equipped variant of the
-> Mi Pad 5 Pro (elish). The two boards share a design, so this describes
-> enuma as sm8250-xiaomi-elish-common.dtsi plus the three things that
-> differ: the board ID the bootloader matches on, the panel compatible and
-> the WiFi board data variant.
->=20
+video_core_clk_src is marked CLK_IS_CRITICAL, so it is kept prepared and
+enabled from boot, and with it its parent XO, which the RPM then can
+never shut down. Nothing records why: the clock only feeds the video
+codec, whose driver enables the core clock it needs, and the same clock
+is not critical on MSM8996 or MSM8998.
 
-Gentle ping.
+Drop the flag.
 
-The series has been on the list for a while now. Krzysztof's Acks are
-on both binding patches, which remain unchanged since v1. Konrad's
-Reviewed-by is carried on the DTS patch, with the two nits from his
-review fixed in v3.
+Fixes: 5db3ae8b33de ("clk: qcom: Add SDM660 Multimedia Clock Controller (MMCC) driver")
+Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
+---
+Tested on a Motorola Moto X4 (SDM630): with the other votes that hold
+XO removed, the SoC shut XO down in every suspend with this change and
+in none without it. With the video codec enabled for the test, it
+probed and loaded its firmware, and the clock was off while the codec
+was idle.
+---
+ drivers/clk/qcom/mmcc-sdm660.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Anything left for me to do before this can be picked up, hopefully
-still for 7.4?
+diff --git a/drivers/clk/qcom/mmcc-sdm660.c b/drivers/clk/qcom/mmcc-sdm660.c
+index 9f8b8e29fa0f..a38631889797 100644
+--- a/drivers/clk/qcom/mmcc-sdm660.c
++++ b/drivers/clk/qcom/mmcc-sdm660.c
+@@ -1086,7 +1086,6 @@ static struct clk_rcg2 video_core_clk_src = {
+ 		.parent_data = mmcc_xo_mmpll0_mmpll8_mmpll3_mmpll6_gpll0_mmpll7,
+ 		.num_parents = ARRAY_SIZE(mmcc_xo_mmpll0_mmpll8_mmpll3_mmpll6_gpll0_mmpll7),
+ 		.ops = &clk_rcg2_ops,
+-		.flags = CLK_IS_CRITICAL,
+ 	},
+ };
+ 
 
---=20
-With Kind Regards,
-Dawid Wrobel
+---
+base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
+change-id: 20261008-mmcc-sdm660-video-core-0d856bbf32ae
+
+Best regards,
+--  
+Fabricio Akio <fabricioakio@gmail.com>
 
 
