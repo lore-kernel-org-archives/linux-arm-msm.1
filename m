@@ -1,88 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18B9C3C4553
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:47:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 484393C3F68
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 06:47:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791442055; cv=none; b=iD+IyBeeRxLx4quBUaseWzbld1fQj/iRlwNx8lqgpkO8ZdtoQQ6jJxSM9H/59gYVm/K0wClMNbH9YCsNhzK8Mpjd03nwZhCzO7J+Yx3qutyKGonG1dzROdx4gjG1YzzLkxVMLAp5S1zGn6bcvHbHb9tUIprNnj6UUPerXaepo9Q=
+	t=1791442063; cv=none; b=bWDner8E/D81qNOsZAI32yysX66D3Y3GgddwmQFk+yRPNa0mFLLEAWemTqvcItSoF+ohMmg6iPpmd6MSvkV5RzBXtqhqbZArpzRvPkdRZj4W+YqnXValHCiP/6IT5QOmBoH75qhKel/SuhjBBDt+orlHVxzgMRRtYGl0kSEb3HE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791442055; c=relaxed/simple;
-	bh=1/dwipsmDrfzLit921IQVdk2VPlf3+aUAoUuV6A273g=;
+	s=arc-20240116; t=1791442063; c=relaxed/simple;
+	bh=E+esblg9glXlDI5Gc75GxNxdOWu8vG3UzOZCx/Uj7KE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=c4WCtegzcg3niXERTKs3HOX6LiialbZlzVqc4A0LqeXtTBMibLb4VCWdd57u7de4/SAVxGbABYHo5rMhOXo4NqfqXAdZCKPopD+hYOl3w0UF2W3VCnQPrYXu4w735ZE6rbUMpA7DiM3L71ihs/zZTzzZkMm5pmVfnOSdJacSVPQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pck4sEto; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PduVV/OS; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=HIFJDLZr8X6uBoCMYww9pHXQrvAok0W6Ba3EpCtTUrad3Hvhj9J8B1ROPseV+8WfN1W0QS7qzHizqvb1FZul6TO+pbm8Z2LhJj42kToKu0WU5yy89dJmtuNJ3pfX5dMMeUbAnkGk/hyB6EwJ3R/JnlhNTj5RnmJnPYYNjq/XCVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NrF1ZJ6i; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GivAKPv6; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pck4sEto";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PduVV/OS"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NrF1ZJ6i";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GivAKPv6"
 Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984BUbd1775334
-	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:47:33 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6984BtJA1776297
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 06:47:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mtciI2dXuSRKP7znBi6/ImEi5cWqof1ckcMtFCHtuf8=; b=pck4sEtouPHply+j
-	N4rqGchia3wA0pQadXpMbBUeZqsKdaVnQXkpJiq7/Uhvogo/0VbIcNACedUfB3tY
-	1zGnNcXUNnE7hYFbKU+HCyw+p8q5VhpWb6+KylcZHGpKTquJwDl//J6q/CmN5C8N
-	49s3yh6IrwMhqJcXgptFn96A2sP7uA3XLWU3C0roLx5R2AtiXLajIrVKrEj1HVhw
-	h/gO178lgx6HTI5EaG/460XCHqcgWx/bCATgEYHWItlDttz4CONRtfoh13wuAyXl
-	5DvBHmCQv6XXr4FXRCiGisUgfKiod9UPpqVyUDUlOBjvG35XOzWUebJPkmBMhKg3
-	yZmGlA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe39fsn-1
+	71NyeBYDmCqD0chIznv1L3I776+rdWk83Vvezy9W2pk=; b=NrF1ZJ6iZNzELCe+
+	n3pL0uNC7TTGnVOz3igxCW7SFdPuCn8oSMRtiQVq4biNTBfVfWIuQB9OoErnqsVR
+	Z/mKHuc24eAUZLaVoY+FGC2kaDGxHNiuQ4OCpG6SD9eueKBimA+KRXH5NFtuCSvX
+	Sh3ItMO7hlu/5bAdlGwsDTvTmjrfvxBLUbaXg/QxX6OTjOOKaVY5w51yJiqnFKfb
+	C2fvXRq1DfV458pHcsMh/BMeaIjdjptKmZ/WAgvoyE/Eh4XN43OGZaLD4qJsKd34
+	xhMn3650qNKqLqwxs+oeLGUp/ppUWThJgK3nV/IzK5h5b7aAOlB4EnDUf6SbElee
+	Ly5qNw==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe39ftk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:47:33 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3823dcc1647so3946939a91.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:47:33 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:47:41 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3ab0a814c67so159266a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 23:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791442053; x=1792046853; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791442061; x=1792046861; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mtciI2dXuSRKP7znBi6/ImEi5cWqof1ckcMtFCHtuf8=;
-        b=PduVV/OS0qnaE256IoaMenlugQOCVtstazZAzcBPaEOW4PFvy4+JIc7meDGo77HfoO
-         fgkNRoS+NicobC146Egxw8Hftx/+/Sy+JtdxLQn6AtDzBJ2ZJ1zJAcCPgxnwSStfZw6G
-         e1vTU7mWbM9JaBPmMccwYhN6to1ijEMBT17d/aIdnvGhkVuinJ6CQqsmQOFgTLxYxf+w
-         yojdelAXr4ZLe0OGUZLjFQnPdH/o94uS0baNSRFDl6KMj/kQm3xXo2K4up+VqphxA8kl
-         KsodHcspZKf/gObI5RQJIXk7TK6572e8/rut+MhVGfbBA5bSGkkJXFij1b4ZWfmV1utl
-         nHcw==
+        bh=71NyeBYDmCqD0chIznv1L3I776+rdWk83Vvezy9W2pk=;
+        b=GivAKPv6SB2XukdRhPMYNFEZAVN9Nfurz93Syk1IDJHaLROn7nlLkqu5UauC87/2gp
+         Wqk4dbqKujP9Wic9hWuS+rJlht3D2Gxc+BqopFsgOejZNlc5jSEJzrtwOI/R763Ozpsp
+         jO6z/6CRTfbat/SAc13Ed3TkrwgdJINjS+g1e4Dm3YXWTWd+R+G2aw5+/1zYigOPj3Ig
+         69MdADwBwAlNvnMqVKOKbXU+0DxWLJkfNfrQLrcJsFur0SF6XfmBkvkie/IKCpCxVUMW
+         aVIZ4g+q/wuyNnRlSQzY+SmB5e147hNLUdlhq0uQsuVkYchIDCDnY3Z0i/Jt5OIwX/Zc
+         wlQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791442053; x=1792046853;
+        d=1e100.net; s=20260707; t=1791442061; x=1792046861;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mtciI2dXuSRKP7znBi6/ImEi5cWqof1ckcMtFCHtuf8=;
-        b=eAXfqaIJXEbYlFhOpfglDnJfntLM2vldkiQAaIhiAo4IfQ/vU0hVRmuQ/t9/AEP+mS
-         jASyN3fL/x3wtsoJwSDEIGaDms/waGoLfNyjWcvifb+Ch001TOCPZlHW9HBI2TWQQ6Mx
-         54w2+x5TGFHC9LiZsYsyGTfVPZeX6TrPB19NGNF3vme+U7PJZp5AsjGuxdXmkViVkheo
-         ZyudfBPR7qCCF90zBljBBSOxeQ8/11xJBNk2bQQ+kXMrFzl/53lsaFVuqeY32qjhIZ83
-         9CiRsloOHKqTM5vUYubKRA0BJIKCPVRXwME8kAtr91CesIb0npdLvVioElUYVCgZq2Pw
-         jJHA==
-X-Forwarded-Encrypted: i=1; AKwUvBxgnMTLcgZciVcgvx3h4sMDq7zmMfeIx1uj+98GjODa8FamPR4oxh5ia9pCIY4tZw2CQUHAGNjHrLgc5vNd@vger.kernel.org
-X-Gm-Message-State: AFq9FYLKJnPFPe4be5fMoWRpEp1M0p1X6R+5pnYECrchqhitbtL11fJk
-	B+LazH7WXWAkjMCuG3iQsJBlHgSpNgJAD04xHvRz6j4xBtgKDVRq8qwWYIBxP5DtfgCA5QYB4mK
-	FYqr1uqrlEAzsU4c/4CDizKOpw5Aav0K9I4TxCdcQQYcmUNv9iVRhnPztD7VK73vc4ifv
-X-Gm-Gg: AYBFou3KrlROqgcr3+E5zJMqUN1Cxiz4SkrqxCt6lFt+lVGRhgosj72ey427FNG67uW
-	ZzG1sqFVCllmNNvxXi/2mtKkml0+e7AqRq7Qj63/hqwJnse6c8dDZwD3mjBQojF3PzVQLm2Viqm
-	3bdm6MO/EIhiZvpun6FrZxjOm6vzGQGz4Ldd8o06+SZVOVyoMqR8b9cQOVocZcHLGqyK7FWkzPK
-	2nzFQbLnAcSA1KeA1OlDiGWxH41EsQ2imuR9INqfjWscTOeZTZDL1ic/93Wx65kinNBdJaRlmxt
-	jPe5E6zCtwh8QaLo+40q8ovXUft4BwiUUfIhwRSAnVjEtN9Y5Yrpp6Ovh+2RbruT5IDlWA6Zsn2
-	2aE5/zdY19q2Q0VicW+6LeoeugxhfdxSztCs6d9/l9ddgfU5clR/Sd7g=
-X-Received: by 2002:a17:90b:4fc5:b0:3a6:dc2f:f07f with SMTP id 98e67ed59e1d1-3a8a1982a7fmr4138279a91.10.1791442052676;
-        Wed, 07 Oct 2026 23:47:32 -0700 (PDT)
-X-Received: by 2002:a17:90b:4fc5:b0:3a6:dc2f:f07f with SMTP id 98e67ed59e1d1-3a8a1982a7fmr4138265a91.10.1791442052227;
-        Wed, 07 Oct 2026 23:47:32 -0700 (PDT)
+        bh=71NyeBYDmCqD0chIznv1L3I776+rdWk83Vvezy9W2pk=;
+        b=xSI+l8kZYZTyFNjy/KJDZeK3PQQnpJKV4eC8rSEA0lLwDAByZR4oetEAbi0tGj2vHP
+         igh4hWR9KkMW9ezHgzMOwY7I9kTwE+lsnRwiqNIa2yvt1/26veaPu50MHIebkIQ7/Liu
+         N8TN7ULUX9DsSiXneufwzloQOFHggulwOo0Z+w0pshtUhCB3qgJtnwCanul9KWKA2Abx
+         KlilEqb2T41Kt6vTcBn8aoTn986hM1UBYl30b7Qbjpz9kuhgJXBs2raR1ltzgLTqHi3Z
+         Dtzfe1XMU3ahqQZiIlzgqXqhnc+r7QmHpxdFjAmvxDNdWcuJGvwpfkUwmbdusKqYmQ60
+         gliw==
+X-Forwarded-Encrypted: i=1; AKwUvBya4CJ/rfdxZAhGQ/8/cPd38CuTdFwNf+20ndagUNwIvIG7S3fu5+VNO97Ej5VDhE1RXcQE84OlhQB4CYO0@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ2XTAY+fdJ9e32Y7QDq0jkQn7tZzRpVI0spYqyHC7azHUur8rY
+	S3ZyRGMoIUFUybEjOORZm4PXY8Db/nF2LIR8kF8Mi4IQ2ZsF2zUQ3+MJeDYjQPPh2niKSyqK6XI
+	dPwU3V57LRs/rhsZmE6I++Lgxbjuc15wEOK1QqZ1sF4/8iakkn9/Pb8FuP1KU8jXwhqBI
+X-Gm-Gg: AYBFou1VLnL0GL2iens9iGfNH0vVs1NaREJD87keuIfwSTzQKol8miunu276mvYPFfE
+	/F6w6/OPnTsgEexqatoOE38sd0I5JTB0nBB6LLqY9yzGWkjRTybuGmf1t5uslJDRhtP53ygUq5m
+	4u7zbOD2M40I6FULzWuj3ugOPmS+tYqv3lHc0Uswj6FwtA/rjPedLS3isTuFFUyyxn9xnpWEsEd
+	YXVcdrJerSOOnSXgUzNGbiGJKTeVz8itWM5ySLz4yfH4pmLVQLrSciqicrqJsMKq5ik7NhXa/az
+	hnZ8XCK/DdpCC4d9LKnFnAyV366WRxf3O4O2DLimKaKr9YhjF8Zljc+X+hhv2jvPxlhVm8/91te
+	EZFFZDU00CXjpYc19aC98bAjlKzEyBA7XSAODQFFlo58csatrqw5sFAY=
+X-Received: by 2002:a17:90b:2804:b0:3a7:eb0:119e with SMTP id 98e67ed59e1d1-3a8a19270c5mr3450687a91.21.1791442060751;
+        Wed, 07 Oct 2026 23:47:40 -0700 (PDT)
+X-Received: by 2002:a17:90b:2804:b0:3a7:eb0:119e with SMTP id 98e67ed59e1d1-3a8a19270c5mr3450658a91.21.1791442060236;
+        Wed, 07 Oct 2026 23:47:40 -0700 (PDT)
 Received: from yli42-gv.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a9f1a254b3sm3313925a91.2.2026.10.07.23.47.24
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a9f1a254b3sm3313925a91.2.2026.10.07.23.47.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 23:47:31 -0700 (PDT)
+        Wed, 07 Oct 2026 23:47:39 -0700 (PDT)
 From: Yin Li <yin.li@oss.qualcomm.com>
-Date: Thu, 08 Oct 2026 14:41:11 +0800
-Subject: [PATCH v3 2/8] arm_mpam: Fix MSC MMIO window size off-by-one with
- resource_size()
+Date: Thu, 08 Oct 2026 14:41:12 +0800
+Subject: [PATCH v3 3/8] dt-bindings: arm: Add MPAM MSC binding
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261008-mpam-resctrl-dt-knp-support-v3-2-35196c2b43bf@oss.qualcomm.com>
+Message-Id: <20261008-mpam-resctrl-dt-knp-support-v3-3-35196c2b43bf@oss.qualcomm.com>
 References: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
 In-Reply-To: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
 To: James Morse <james.morse@arm.com>, Rob Herring <robh@kernel.org>,
@@ -117,35 +116,35 @@ Cc: Yin Li <yin.li@oss.qualcomm.com>, Andre Przywara <andre.przywara@arm.com>,
         Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
         linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
-        devicetree@vger.kernel.org, kernel test robot <lkp@intel.com>
+        devicetree@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791442021; l=1748;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791442022; l=7058;
  i=yin.li@oss.qualcomm.com; s=20260811; h=from:subject:message-id;
- bh=1/dwipsmDrfzLit921IQVdk2VPlf3+aUAoUuV6A273g=;
- b=+oEui8TWP9g+43keyW0RGKQR6one1M7JZqzaByeLJ26nfwJu/nWDLI2OcGMGJDG+gftRieh+t
- 2ePmuc/bBELDbzzZnDigIUCwoY0oUrx1oo5x6KBw/akurJKSrEEEgwy
+ bh=VRx8aZC4+R/lliq1ecNgi7KxlRqXWCW+Hr/b1wE9+y4=;
+ b=Mp0GCgrijdwOmFrCyPUiLdPtAuQDzMPXaDHW9ovkFNm/ztl2jH1wiOts3kOy//givHCEej4ow
+ MjqX6aZEUHbDubSsRQvpbaHHPZ4REz9iB7HhWVRY/7qezHXcBgEaU4w
 X-Developer-Key: i=yin.li@oss.qualcomm.com; a=ed25519;
  pk=e/2LM97aSWGBMrxY240URBi9Zi8/kL5hXgB+VHkYvW0=
-X-Authority-Analysis: v=2.4 cv=J4s/fwnS c=1 sm=1 tr=0 ts=6ac73c85 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-Authority-Analysis: v=2.4 cv=J4s/fwnS c=1 sm=1 tr=0 ts=6ac73c8d cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=QyXUC8HyAAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8
- a=s3E7sL18FQBPR4dFS-QA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
- a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNiBTYWx0ZWRfX2TWjfMLg9QjL
- DkNsvQK2xBNyKAVeVY6LbQYXWZZSw4v1dXIcu7gEkIJb+U6DFC40GQobJvZ35o7oKXEtAEHb7/5
- qkZViEvIRxOkr8uTMlUk7P5BWeefJ0w=
-X-Proofpoint-GUID: kRtIYhR50ObdULouXqtKVDl4MWpfX6MB
-X-Proofpoint-ORIG-GUID: kRtIYhR50ObdULouXqtKVDl4MWpfX6MB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNiBTYWx0ZWRfX4iqioCKjiJEt
- IWWh7PlLgF4nK+QlHApeDrIHu/fZuWmoHZxUHqCXlHQYoADi++7bPDcfsc0iJuzkX9lxRpa1zHI
- OjeMHwJ9oYtxZCRCtfa5CW34ADwFhIElCbz5XU8d/hurXxKAiBppqV6B5bUpJgsMVhyytNbGoMn
- QCinNL7mBgTtkathFiJx06KBtD/yqsor4umi8LTHLCE+cWRuSfY5cGXsyc77SvgQyePDUqU+KmR
- TlYoVygc1dZ7CnEnWYZA0u+L+Rnjhy/0Mqipn8mvgJXegailQBFqzb053tNKH0on+ip2F1uftEr
- mkkxZ/lEALvn3enYohHGnwDnXR9MK58PSQk06ZhoT0db2JhvQIjy/3/2gDld0hOZtCkW2oWyPQ9
- 5BiaaCeHgH1bugUXKptbdBkb8SsCJvKfUftOUoQHSKvpL0EBOdOj2Md0wEHbDIyI8qmoYsbM1Hc
- jE/F8zPIi1JvSSYsfRQ==
+ a=gEfo2CItAAAA:8 a=7CQSdrXTAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=FqHZ4tX-ONj_CKorFbsA:9 a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
+ a=sptkURWiP4Gy88Gu7hUp:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAyNiBTYWx0ZWRfX6yvK6UMJ3/hc
+ WuJw1nBRyI1l6TQOvyObtkyKoGeCFAdEAVp1/NofMkr86iunv1ufxk1qS5XXzJ37/91+pldQK0N
+ rFoN4BP8/FEu3xAC+XSSjPLAZp0jQjM=
+X-Proofpoint-GUID: paGE7uds9ADH8n1iQEskbrbuBNU7EBp5
+X-Proofpoint-ORIG-GUID: paGE7uds9ADH8n1iQEskbrbuBNU7EBp5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAyNiBTYWx0ZWRfX1lS8dQlzhfPw
+ RXI6/IVDLAIQESQ66XFowSd3bhQVFpuaNMqVcApXwrdcEHh5NFa4mrvf2fkn4bmY9AHCAzH7fm9
+ fLdAvWIJ4GKWp1sELjD+nUruRyG/sBJfQMbjWicD12/ykH41qJ7RP52yfNu6FcJ5mJXytmjG4OY
+ AY5nLenUWVgKfJkofAaqtnabswjv06b6lvZ8ym2/cqTpvWDRlwulU/+s5jrEyD1myOps929UQts
+ F7Ci6Tdybk76ixp+TnVNUj7VyxDEUQy8hSw1ttBj5uE/Ryam+TW7iYUw+ftFU1oogIYUf3tr5Rg
+ Xj2cafRyDnPiZ8B3vGy4RP7q4KcQHCRq7g89HraA0TwdPdkPF7uDVH/DkTxVvaH5lq9xZ6gXwYg
+ 5cPIl61bAbx/EG1CG6dg37ada1M5FnUIWgnna/5XwNx7H/y651i9op2nCFAjeKgtDPkfljep1Q+
+ lz+yssafzfaED8ejvEQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-08_02,2026-10-06_03,2025-10-01_01
@@ -155,43 +154,241 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080026
 
-struct resource uses an inclusive end address, so the window size is
-end - start + 1. do_mpam_msc_drv_probe() computed it as end - start,
-which is one byte too small.
+From: Rob Herring <robh@kernel.org>
 
-mapped_hwpage_sz is used by the register access bounds checks, which
-have the form "offset + width > mapped_hwpage_sz". With the size one
-byte too small, an access to the last register in the window is
-incorrectly flagged as out of bounds: for a 0x1000 window, a 4-byte
-access at offset 0xFFC (bytes 0xFFC..0xFFF, legal) computes
-0xFFC + 4 = 0x1000 > 0xFFF and falsely warns.
+The binding is designed around the assumption that an MSC will be a
+sub-block of something else such as a memory controller, cache controller,
+or IOMMU. However, it's certainly possible a design does not have that
+association or has a mixture of both, so the binding illustrates how we can
+support that with RIS child nodes.
 
-Use resource_size() so the size is correct. The ">" bounds checks are
-correct as-is once the size is accurate and are left unchanged.
+A key part of MPAM is we need to know about all of the MSCs in the system
+before it can be enabled. This drives the need for the genericish
+'arm,mpam-msc' compatible. Though we can't assume an MSC is accessible
+until a h/w specific driver potentially enables the h/w.
 
-Fixes: f04046f2577a ("arm_mpam: Add probe/remove for mpam msc driver and kbuild boiler plate")
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202609030809.ObirDhR3-lkp@intel.com/
+Cc: James Morse <james.morse@arm.com>
+Signed-off-by: Rob Herring <robh@kernel.org>
+Signed-off-by: James Morse <james.morse@arm.com>
+[ Yin Li and Huang Yiwei: use oneOf for the compatible to allow both
+  standalone arm,mpam-msc and the two-item combination; fix schema field
+  order, type constraints and yamllint spacing; fix example reg addresses,
+  add arm,mpam-device phandle and remove TODO comment ]
+Co-developed-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+Signed-off-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
 Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-Reviewed-by: Ben Horgan <ben.horgan@arm.com>
 ---
- drivers/resctrl/mpam_devices.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../devicetree/bindings/arm/arm,mpam-msc.yaml      | 202 +++++++++++++++++++++
+ 1 file changed, 202 insertions(+)
 
-diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
-index 6da217abf689..c68135ee0ffc 100644
---- a/drivers/resctrl/mpam_devices.c
-+++ b/drivers/resctrl/mpam_devices.c
-@@ -2095,7 +2095,7 @@ static struct mpam_msc *do_mpam_msc_drv_probe(struct platform_device *pdev)
- 			dev_err_once(dev, "Failed to map MSC base address\n");
- 			return ERR_CAST(io);
- 		}
--		msc->mapped_hwpage_sz = msc_res->end - msc_res->start;
-+		msc->mapped_hwpage_sz = resource_size(msc_res);
- 		msc->mapped_hwpage = io;
- 	} else {
- 		return ERR_PTR(-EINVAL);
+diff --git a/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+new file mode 100644
+index 000000000000..3c7b13a23ff2
+--- /dev/null
++++ b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+@@ -0,0 +1,202 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/arm/arm,mpam-msc.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Arm Memory System Resource Partitioning and Monitoring (MPAM)
++
++maintainers:
++  - Rob Herring <robh@kernel.org>
++
++description: |
++  The Arm MPAM specification can be found here:
++
++  https://developer.arm.com/documentation/ddi0598/latest
++
++properties:
++  compatible:
++    oneOf:
++      - const: arm,mpam-msc                   # Further details are discoverable
++      - items:
++          - const: arm,mpam-memory-controller-msc
++          - const: arm,mpam-msc
++
++  reg:
++    maxItems: 1
++    description: A memory region containing registers as defined in the MPAM
++      specification.
++
++  interrupts:
++    minItems: 1
++    items:
++      - description: error (optional)
++      - description: overflow (optional, only for monitoring)
++
++  interrupt-names:
++    oneOf:
++      - items:
++          - enum: [error, overflow]
++      - items:
++          - const: error
++          - const: overflow
++
++  arm,not-ready-us:
++    description: The maximum time in microseconds for monitoring data to be
++      accurate after a settings change. For more information, see the
++      Not-Ready (NRDY) bit description in the MPAM specification.
++
++  numa-node-id:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description: NUMA node identifier for the memory resource this MSC controls.
++
++  '#address-cells':
++    const: 1
++
++  '#size-cells':
++    const: 0
++
++patternProperties:
++  '^ris@[0-9a-f]+$':
++    type: object
++    additionalProperties: false
++    description:
++      RIS nodes for each resource instance in an MSC. These nodes are required
++      for each resource instance implementing known MPAM controls
++
++    properties:
++      compatible:
++        enum:
++          - arm,mpam-cache
++          # Memory bandwidth
++          - arm,mpam-memory
++
++      reg:
++        minimum: 0
++        maximum: 0xf
++
++      cpus:
++        $ref: /schemas/types.yaml#/definitions/phandle-array
++        description:
++          Phandle(s) to the CPU node(s) this RIS belongs to. By default, the
++          parent device's affinity is used.
++
++      arm,mpam-device:
++        $ref: /schemas/types.yaml#/definitions/phandle
++        description:
++          By default, the MPAM enabled device associated with a RIS is the MSC's
++          parent node. It is possible for each RIS to be associated with
++          different devices in which case 'arm,mpam-device' should be used.
++
++    required:
++      - compatible
++      - reg
++
++required:
++  - compatible
++  - reg
++
++dependencies:
++  interrupts: [interrupt-names]
++
++additionalProperties: false
++
++examples:
++  - |
++    L3: cache-controller@30000000 {
++        compatible = "foo,a-l3-cache", "cache";
++        cache-level = <3>;
++        cache-unified;
++
++        ranges = <0x0 0x30000000 0x800000>;
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        msc@10000 {
++            compatible = "arm,mpam-msc";
++            reg = <0x10000 0x2000>;
++            interrupts = <1>, <2>;
++            interrupt-names = "error", "overflow";
++            arm,not-ready-us = <1>;
++            /* CPU affinity implied by parent cache node  */
++        };
++    };
++
++    mem: memory-controller@20000 {
++        compatible = "foo,a-memory-controller";
++        reg = <0x20000 0x1000>;
++
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges;
++
++        msc@21000 {
++            compatible = "arm,mpam-memory-controller-msc", "arm,mpam-msc";
++            reg = <0x21000 0x1000>;
++            interrupts = <3>;
++            interrupt-names = "error";
++            arm,not-ready-us = <1>;
++            numa-node-id = <1>;
++        };
++    };
++
++    iommu@40000 {
++        reg = <0x40000 0x1000>;
++
++        ranges;
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        msc@41000 {
++            compatible = "arm,mpam-msc";
++            reg = <0x41000 0x1000>;
++            interrupts = <5>, <6>;
++            interrupt-names = "error", "overflow";
++            arm,not-ready-us = <1>;
++
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            ris@2 {
++                compatible = "arm,mpam-cache";
++                reg = <2>;
++                arm,mpam-device = <&L3>;
++            };
++        };
++    };
++
++    msc@80000 {
++        compatible = "foo,a-standalone-msc";
++        reg = <0x80000 0x1000>;
++
++        clocks = <&clks 123>;
++
++        ranges;
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        msc@10000 {
++            compatible = "arm,mpam-msc";
++            reg = <0x10000 0x2000>;
++            interrupts = <7>;
++            interrupt-names = "overflow";
++            arm,not-ready-us = <1>;
++
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            ris@0 {
++                compatible = "arm,mpam-cache";
++                reg = <0>;
++                arm,mpam-device = <&L2_0>;
++            };
++
++            ris@1 {
++                compatible = "arm,mpam-memory";
++                reg = <1>;
++                arm,mpam-device = <&mem>;
++            };
++        };
++    };
++
++...
 
 -- 
 2.34.1
