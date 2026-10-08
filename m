@@ -1,70 +1,73 @@
-Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6E8248E0DF;
-	Thu,  8 Oct 2026 12:41:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.210.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6055D495517;
+	Thu,  8 Oct 2026 12:43:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791463288; cv=none; b=q9kawRBR1QH3QxJCdXppX61dyMuGxdqSoiuUNLnx6qf8rlrIXZAPNMF5Ec1W66NeDxK5ufUHIaTUijIIld9VevbErCgAhaYJGCseq603A3lKE8lQZoQgW56pH/obmDn/g51XwBi2K569O98moDSB9E3HIwxnnO3iFr7BatIoFGE=
+	t=1791463423; cv=none; b=NSJTnK6EpICyHpqO7x7u+xFyk0HvJ6zY4qKnPTiiBz2+QpwY5q2of9VQGTtcYPi2G2vICNQ20di2b1FJmWK0KPIRTgy+khqEHx49Q2EokP57FzDs5ldBgxfQxmgnuqxvCinKapQ2mOsf0wCag7cBE8fowqgi8FZ4EEWpjGt0YEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791463288; c=relaxed/simple;
-	bh=pAN1Hu/IgJg9pp21jQlzsrS9fZUvzUEWWSwlguTguFw=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AY0aLcdZb/R2+V5qjTSSY5elyW2H19mZeffkOrnTwv54jowxB5Xd8ZbzhaJoCWUzii1zCHi0DtrZyE4dcY7V+ifIEyGjXgBLlab6lz9D57ptB9BLcNVssHY5vjZTmYLnRJl3jTP3p7M+TDUTFJP2dowCZdvA7mfP+lAXU4vAs3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=sBg2uco6; arc=none smtp.client-ip=85.9.210.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1791463423; c=relaxed/simple;
+	bh=HoV+OFLwXq4GWYAT3Gv7nYfWq/HmqlaGoiIWaG1I+Yw=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=cjqsJYj3semtZPOwM/zvaDTg8pTCgxY3iOZAeQy3++3FYXfB2A8GQkqDNEE7VsQFrNm28UBPWUncmcu9dkYrV9VlmyEAQzpn1aNEv5uasVFpsAiaCHfhR16SH66UDUIpK+yiIFxrcZWLzc21rK2elBOahLlWPu4+SVcTG3RM9XY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XiUhDp32; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="sBg2uco6"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1791463281; x=1791722481;
-	bh=pAN1Hu/IgJg9pp21jQlzsrS9fZUvzUEWWSwlguTguFw=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=sBg2uco60tDYkZIT/pbScYHrGUKjN+oDZoGuCo6D+QHPaciBg9dtKUSi/P5zJZyDS
-	 2+89OIXi6b+8wSErm1fn+Jx2F2HAI38yDsmgWFTJG36hNzBSJVJeUD7zadpf9Qs2ks
-	 F6r96fBNkLgZp2Mcb6JlD5gWkLLbTljRcjuk+AeL/rm7S1DhVN6shuTYVRBJV74aMN
-	 4CXElH9VdmOv/LyXzPWV3DWdh5OI+1aML5AUuCYW/9Ti3D7FAaE0oK3tYRKd9oLvPy
-	 UpOSFfVuUyWL5sLhuJrQEKd5Ff57HeKhQVnvFuzrV9VeG4j1htaV1b6kUE/fuCcUyr
-	 yFGb9KZULcq2Q==
-Date: Thu, 08 Oct 2026 12:41:18 +0000
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: mani@kernel.org, linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: X1E80100 USB4 PCI0 MSI-X routing under EL1/Gunyah
-Message-ID: <179146327547.21465.818931382318963045@pm.me>
-In-Reply-To: <179145909457.22346.16055361038608923365@pm.me>
-References: <g7V4kc2AO9xogkH0h-XHDvPbjDXcnS11cp1q3hv0X96KPW-zed6V79HUJY5BFA4pBWUE-p2MBYCeDcjWwUGBIU2hXjDpodiWaxB38obe8RE=@pm.me> <arEjxhvfIFGGo9O9@hu-qianyu-lv.qualcomm.com> <C8SBDdV0hyOxs4G2FfZBHt4_1PSRVoxaNFSmy_riJk91MhqFMRAt30lpxdyniPMLWnc5Ph93lS0R1nCkVbuV941UrNmWyPNbDER9zIHlrJg=@pm.me> <7PyP8TPDWSo4VXsNVgDQREx6MqiqQWWL_BsssgI4SBuA9jkR707AGw5AVnm6k1OgH6F2n6Y6QAxah6ZRtKpjZfIKOiOngog3eeLFXIXXf44=@pm.me> <179145909457.22346.16055361038608923365@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: da726e5c9b2edd5ffbae10b72cb9fa3e3b020ee4
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XiUhDp32"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D66BE1F000FF;
+	Thu,  8 Oct 2026 12:43:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791463422;
+	bh=Fr6lprjqXKeoj+K3xBxYBGrVIrwlOpJEEWvZwKmyIIc=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=XiUhDp32+CL2rCQeKh/UjvrCv9HC1AKIvijTltddVK/Q7HqJTva4QKZNJTq4xPrzY
+	 mNJHDncS66pBwJTMZGslqYbdo8TfAx8shmtL08vDqukF12c++iMjdQIVfOhKHAZ9Pf
+	 EmjRiUxRpGFHwEiBPlpNN90oCvrd1jKuR/2bpNgYyrlmM95oqGiNcZnnuJT8QWPZ5F
+	 sx2CQvnIm7LhvdMiw/STt8wqP2ZiuokGzJTz7oQISZiCNCpcX8Z02Vxz33s4eVPOxe
+	 Jl+QVfet4pAjIBOE9rPgkx+5lOmqDdm3hzSWQbV9UnbNQzBrrNVxogAETwPvBj9k8j
+	 XfzqjqFbDbVuA==
+From: Vinod Koul <vkoul@kernel.org>
+To: Frank Li <Frank.Li@kernel.org>, Andy Gross <agross@codeaurora.org>, 
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, brgl@kernel.org, stable@vger.kernel.org, 
+ Sashiko <sashiko-bot@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>
+In-Reply-To: <20261006-bam-dma-free-irq-v26-1-eef5c713d831@oss.qualcomm.com>
+References: <20261006-bam-dma-free-irq-v26-1-eef5c713d831@oss.qualcomm.com>
+Subject: Re: [PATCH v26] dmaengine: qcom: bam_dma: free interrupt before
+ the clock in error path
+Message-Id: <179146341953.488308.18215967421549392555.b4-ty@kernel.org>
+Date: Thu, 08 Oct 2026 14:43:39 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-Hi Qiang, Konrad,
 
-A correction to my mail from earlier today. Releasing the tunnel reset
-is only half of it.
+On Tue, 06 Oct 2026 10:08:11 +0200, Bartosz Golaszewski wrote:
+> The BAM interrupt is requested with a devres helper and so on error it's
+> freed after probe() returns. We disable the clock before freeing or
+> masking it so it may still fire and we may end up reading BAM registers
+> with clock disabled.
+> 
+> Stop using devres for interrupts as we free it in remove() manually
+> anyway. Add an appropriate label and free the interrupt before disabling
+> the clock in error path and in remove().
+> 
+> [...]
 
-gcc_usb4_0_gdsc also sticks at off, with the same GDSCR 0x6822f800, if
-it went off with gcc_usb4_0_phy_sys_clk_src (0x9f0e4) on input 2.
-clk_regmap_phy_mux_ops leaves it there when gcc_usb4_0_sys_clk is gated,
-and gcc-glymur lists input 2 of that selector as the PHY's PCIe pipe
-clock.
+Applied, thanks!
 
-With the selector moved to 0 before the power-off and the tunnel reset
-released, the router restarted three times in one boot, and a drive
-connected afterwards.
+[1/1] dmaengine: qcom: bam_dma: free interrupt before the clock in error path
+      commit: 82eed160cfa7a296ae4eb5acb8dd8f493323eea7
 
-Konrad, the selector part is mainline code, so your driver may hit it
-too.
+Best regards,
+-- 
+~Vinod
 
-Thanks,
-Birk
 
