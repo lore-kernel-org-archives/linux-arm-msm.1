@@ -1,125 +1,81 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 979B6494826
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 13:08:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C703497B6C
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 13:11:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791464925; cv=none; b=DebORNGOBii57qPQR6tifw/Vh2PNV1bK25+BW3pKsS0Lt/rmKiuDF4TuqmfNNsZi6B+AfEmsHqFtN8FRiRYL5BfoOSA2+r3r52oJOLBHigGVoUxJ2yfoNzEQHjTeOuacMUUAhM0IMT9/UEh1gh9WtQYd/ePp6qF8bM14lME7LhQ=
+	t=1791465109; cv=none; b=mDRLs4+tx6opmmGAG9d7PV4OtzxDmIsBTb/3DwsTf4tWbx9zmgzEOCC05eZWQaDYBN9k08FFE+9AmMOKuuOvNk1gDG9Pp5Xj9uKi2bebJB0QghwMkBPwlOWDQmqX8GQhBvsAm+FUXI6sGAtl042rVXsaZfEl7mXnZanpLhlNuPA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791464925; c=relaxed/simple;
-	bh=QwH8JTwtGqJvwi5xVGeamby7ttvbkMogom5klSRXEsE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Yq8sfnbhpA9cnOdvUCR8pdaxdo41ZLL/khztel8z/METnpBNK9qijyG/vhvRJnbJ4FTcVMk2O0eLxMoalAeMafQaxCp1UE7LprTRFZTsFEub/kxVY4p24urNtVDd8/GpHx3vmL5b4k+TfQGbcUzMdL6yiOb1391bHLQnyhDWCNU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=X0oLT9Ey; arc=none smtp.client-ip=209.85.218.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791465109; c=relaxed/simple;
+	bh=3ZUbMxUpxX0Lqzuy2UJBKxnXi5XYr9NHRVpDorwgq/o=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=cNjJ8iv50DmfKiT+8Dc7WuXhTAPc/gZNpxbYG5QKP5o3nOxqIlbIEkVn04RKc9Dl1IlJFaAADwrOsshBxVgOLZIJfy27l+Ev4mIO2xy7l59F5Sa28Kgyc73FpXrgBBqfB30zd0GCQEddWilr9u9wXg7WYCIEZSs0BQzR+5VvDWw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Gc+Q4XJW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="X0oLT9Ey"
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c2e2db5e8e4so868093666b.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:08:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791464922; x=1792069722; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=1zkMv5B4UbM6QWd5wAgGktVY1O+Cdav6y2Be1vNvxcA=;
-        b=X0oLT9EyliWOrrQHunWButGnWLrnv8iI5Grzo7TvdHwvh+N1ucYZDp3dV/1xQmJaDq
-         fx8NeECMI8fU5WFAkPhGsPxDBmep5r9l0sCadEvcRO1/Sa3hB8ygYEJ3ZS0a+C4sm6cb
-         SOzvQFvzTQRDt3C0lNWueurrpKQO1VH4k3Vpeq7T+i8dy23abpD0ebMaWmRyFNvlVqqn
-         51oWQTuYBBI3X2BKJBRmfnwJn2uawpiKro1JKr9XWs+fLi3EnYDmpLFa6HcMM9+Uv6Hx
-         AVp+auFML++HELT3SNbdTgc6Jk7UPkWy+HAwt4A2+6GBepIww+K5lW1/g+bcfDO4Nwc2
-         sciw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791464922; x=1792069722;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1zkMv5B4UbM6QWd5wAgGktVY1O+Cdav6y2Be1vNvxcA=;
-        b=0rKGaxbwt3OkLu2VlXP/njvKeRAl/ed6Yrnoh980U/3TgIaxUQS90IAKAbdUx1jUW6
-         HNPSfibWoj2MCu0c28iZGAxQrCCkg+uWEWTzcIcq9KUShmPWlqVGoVmRAr68hPFHo/J6
-         g0wIffUS2hL1N0yH5fv/Adi9iIQdYraK0SQo7UqigriXbJ1ijdNeKAkZ7PC4Gi2Ks1zJ
-         EmejTRUoybgoT+J70oDl4e38+f7ZTJl6Qor18AYDcjBXchiLoJNPJD0cdzyglCH4zyME
-         974L0pqhRn70uAfJY3ZwQTfvpkMSc0wfjKFDLZgm12jGeobJNKhiOMvw5798UFnhyI8M
-         4n7w==
-X-Forwarded-Encrypted: i=1; AKwUvBy5nvcJRB4oundyIcXM4iKvXaKn+Y6GA911nr1sSAvnKX8FiTSobJly2nVj1oDKFQ/CEej3ERvhyrkxIZeJ@vger.kernel.org
-X-Gm-Message-State: AFuF++kBY5wFdO9E2XA09Kd5C9h7xg+ev7NKKugkn4Mjwvi3zxi9VlkM
-	1moHiECkOHy6VuQwoAhJrUcQ8OSPRV5Nk+fnqxmm/3e/KAwIqC4mzalkFC3dkq/m7J8=
-X-Gm-Gg: AYBFou3A0fjMwQQ9OTy1TL7oYl4d173ahgu3xPe1xSPDZ3BRVqX9/mKzybYJOjItuHb
-	xp3MnOreAzG7PNnJb56ecviugs0+RNgBuSUlK8Y3MJ0BjBdQVKP/OdH1oGPeiz2F3cu4G0o1qTk
-	IcD4ngxxW2eFZRspgCZXzTNKoj3n3Y91V2cM2IhAW6k5YGdCTdhzd4nDV1/unOYAya7ixIg+tbG
-	C1slFIDJE6a93ybCyjzG32pnyXgX4em4YbRjj5ASxWhL2sMF+FCKb37zICcxvY9GgUztJwSuT0C
-	BBRCPB44HAckfQgDmVt6qedQ207rtwmE69zztzFvWLVihhWIxuK2rwLTVBzKumhIL5SgXrJs7Id
-	8GtFIN2in6wIsrAEqLgfwbJk0tm28ezSqndageWElwfxY5bC28f782ecN/ek2ws4+wGDIFLvwE8
-	agOnP070lWDGx6DfoN//yXL7zfd12AxhszKEAOHI46o7BgjCyge522nUjZ33ZtHfDB5ZMlG1U9O
-	tLLCJq626el
-X-Received: by 2002:a17:907:3d12:b0:c2e:3ed7:7db4 with SMTP id a640c23a62f3a-c317c08dd5fmr521063766b.23.1791464921762;
-        Thu, 08 Oct 2026 06:08:41 -0700 (PDT)
-Received: from [192.168.0.167] ([109.77.203.235])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c317c2fd4a2sm224034166b.56.2026.10.08.06.08.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 08 Oct 2026 06:08:40 -0700 (PDT)
-Message-ID: <09f1f11d-c269-4cd9-9016-dc8a6d8cab18@linaro.org>
-Date: Thu, 8 Oct 2026 14:08:40 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Gc+Q4XJW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 431641F00898
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 13:11:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791465108;
+	bh=3ZUbMxUpxX0Lqzuy2UJBKxnXi5XYr9NHRVpDorwgq/o=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Gc+Q4XJWclPhlbaRpo2R+ExSrEtVW6wPROlsQ4Bi7an43X87dFa3DxQ7hrqnJaPTn
+	 Scn6QJ6eiOQIPr9d7Ecs/ta+OfQAIte5ICHNa7Bd1g/v4cLQPuT7ZumWBXX36Qn8sN
+	 epRzgHjpC4afw3b7iGZckjkCPZL7yrkHgxcFz8fQnuhXlf6zbRY/+5HQGMwBFCHBlp
+	 2OgnR1f02p7wfnu1/v6U277lnEJzxlZsUTp+Rtuxi83RlgtNB+vqMM5DKTLtbx/4GK
+	 2mKj/S2Z09VDFEJKqBxv8rmmuJYtonS74KaPkhEK3TpxVS6z3aAIJ+Ut9JryjYQu0R
+	 LIJNTAqfvAggA==
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-49dd13a91d0so1736806fac.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 06:11:48 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvByiGihb/lpzZKv1HKpfmVWYXEzrKIWVzi6bVO1SMiHaalkYop8l1HTUPWgrcgvLZGcSBmZNR9J7lS+EnWrz@vger.kernel.org
+X-Gm-Message-State: AFuF++lefzGPgC2bEPPwngMr0gtv2O8SCeLbYnws8hpCe3pcemGwiQRm
+	ziHpLmcl4/cjOLAgLR8P9JA77I955k6KddEWKhSFN1u3Tgk8kGDqsbcEWJar8ltzVKiUbArtE1/
+	PifljlUedYrtrasW6IgX/r7JDycOTvMM=
+X-Received: by 2002:a05:6871:e494:b0:447:1ceb:7cc6 with SMTP id
+ 586e51a60fabf-4a25941a610mr4860389fac.15.1791465107628; Thu, 08 Oct 2026
+ 06:11:47 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 28/74] media: qcom: camss: vfe: Add planes identifier to
- struct wm
-To: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
- Daniel Scally <dan.scally@ideasonboard.com>, Keke Li <keke.li@amlogic.com>,
- Richard Acayan <mailingradian@gmail.com>, Hans Verkuil
- <hverkuil@kernel.org>, Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
- Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>, Robert Foss
- <rfoss@kernel.org>, Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
- <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-28-ed985aefd611@kernel.org>
- <6a2df7c7-274f-4620-8a56-31551536c49a@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <6a2df7c7-274f-4620-8a56-31551536c49a@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com> <5555b1ee-1355-429f-b3de-f0926e4c30d6@oss.qualcomm.com>
+In-Reply-To: <5555b1ee-1355-429f-b3de-f0926e4c30d6@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 8 Oct 2026 15:11:31 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkPeEQN07Qk9RrmxkRf5EbMmnuwdq2yBFccwM_QpvjsLw@mail.gmail.com>
+X-Gm-Features: AclHuK9XbU-gzMmBKDUbW7UPuP5oQ_ICgGoyJeEiFkqnZtp9niPEqb7SccXKcXU
+Message-ID: <CAD++jLkPeEQN07Qk9RrmxkRf5EbMmnuwdq2yBFccwM_QpvjsLw@mail.gmail.com>
+Subject: Re: [PATCH v7 0/2] Add initial support for Qualcomm Kuno SoC
+To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abel Vesa <abel.vesa@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 08/10/2026 06:56, Gjorgji Rosikopulos (Consultant) wrote:
-> Hi Bryan,
-> 
-> On 10/5/2026 8:13 PM, Bryan O'Donoghue wrote:
->> Define the number of planes a given IFE write master will write as a
->> data-field in the WM structure.
->>
->> Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
->> ---
->>   drivers/media/platform/qcom/camss/camss-vfe.h | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/media/platform/qcom/camss/camss-vfe.h b/drivers/media/platform/qcom/camss/camss-vfe.h
->> index bf8dccf4c901e..8bc07fe7798e1 100644
->> --- a/drivers/media/platform/qcom/camss/camss-vfe.h
->> +++ b/drivers/media/platform/qcom/camss/camss-vfe.h
->> @@ -101,6 +101,7 @@ enum vfe_v3_comp_group {
->>   
->>   struct vfe_wm {
->>   	u8 bus_client;
->> +	u8 plane;
-> 
-> Can we change this to num_planes, plane is somehow not well descriptive for number of planes.
-> 
-> ~Gjorgji
+On Thu, Oct 8, 2026 at 5:12=E2=80=AFAM Hardeep Sharma
+<hardeep.sharma@oss.qualcomm.com> wrote:
 
-.plane denotes which plane not the count of planes here.
+> Hello All,
+>
+> Both of the following patches are ready to be picked:
+>
+> [PATCH v7 1/2] dt-bindings: soc: qcom,geni-se: Allow 1 or 2 address and
+> size cells
+> [PATCH v7 2/2] ARM: dts: qcom: Add initial device tree for Kuno SoC
+>
+> Could you please pick them ?
 
----
-bod
+Missing from the To: header of your mail: Bartosz, who actually maintains
+Qualcomm pin control.
+
+This is likely why it has not been picked.
+
+Yours,
+Linus Walleij
