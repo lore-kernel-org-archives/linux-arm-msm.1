@@ -1,73 +1,85 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9AD949C4B5;
-	Thu,  8 Oct 2026 12:43:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9190349BD7D
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 12:48:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791463425; cv=none; b=UbN59l+hWNBl0V3vYfdMcnW5sxwPRwsoeOYnqkN0yIEX8sA/VxU//lewGox660Snm5V3/MSkcXo71VWYoLTcJ0V3sY8SQr5+eJ5LjZulIIdReMNVj9wm+3KKfjXyDbzLIEFZhD+8EWIANRhuvx0dGNxC3KvuKzpOWq/lwFLuASo=
+	t=1791463682; cv=none; b=O/68rdGEtwjnrwOuV82kh/6DM5KcW2odn8c2Xqc1SXtvLh1cgX6mlO3qGJXNP/eEVN/H5uE+lRkuse0e61nEXh0aJJ5aWrFoZIjaz+EhC+Mao9q0rSxvZ86oWQNoJYdfglCBgGMfmweLazPQXFSjoakAqMbjCJXswDQIyzH0/cI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791463425; c=relaxed/simple;
-	bh=CZEpxoj7osafW6sPXVlmd5gvfgm8mFy62rioat8DIPQ=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=FAU+MOSs1fcGKaBR7Y8MdJaOZu5KbBF7QQgzFIY6uXQHugcVJqByHMRac+u+e31WfG3KAQT44Rcqhr0tIHrc1Yg8cxFBqWSTMjvcHfk8QjkNeU1rWPy0mBkUwrUUsFD4HruUXFjCcinZcn+OfeH0v75zGkG0jmnKbvYjjxX5zyo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PnlNVr9d; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791463682; c=relaxed/simple;
+	bh=LV6/shKBT5pKWVf3EgNrs1KtHkV4PagZx7OmupPK8os=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ssP69QAEsUVPGLCyasZgzYECrUOzv4B4z/nMegUrETd1Dxz5ycniLICllSVKePCWktiCibBKolxB6nzsL8Ri4YdoVEyUcnBoVZPekcu20+220FiDsCxIjbGe0j9sji0JdP1mUTU71xiKez2+U/S173PuzcVK8SdjeheUhzz18bg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N5ZC6XZC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PnlNVr9d"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 844401F00893;
-	Thu,  8 Oct 2026 12:43:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N5ZC6XZC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4393B1F00899
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 12:48:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791463424;
-	bh=C1efxFgcw8yYebQG9Ico6xaJCUlgQA5pFB/ghCLxXfk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=PnlNVr9d3tqTv2NHzuDKm5ztyQreLONH3J5MpREJkoBXrDwp20ALS3EAzY5J7FkUh
-	 1SfKO5rO/AUjgU0IVsoqOwhihPR/TXOidSYTcqtcyvtC0vU26+1WlNcoFpAM291qkr
-	 er5UjWjoygxxLZLYSeNfghoLhjmKUswMM03yrj0l+a9NCrf4VQRDXQBTqKSXp333gB
-	 I+nTBkAu7cASWN9U7K1VsBj+e8w+2Oo1jIAL37Nzncyrkh81lOqdBG/CYpJoNR6eJF
-	 1O4E4gVWnw51iwzW/sjZi0busdq7DoaSqduoELPBp8V8FESysbSd2lu3KnGir6QkmF
-	 zWu3gBKoEtlMA==
-From: Vinod Koul <vkoul@kernel.org>
-To: Frank Li <Frank.Li@kernel.org>, Andy Gross <agross@codeaurora.org>, 
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
- linux-kernel@vger.kernel.org, brgl@kernel.org, stable@vger.kernel.org, 
- Sashiko <sashiko-bot@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>
-In-Reply-To: <20261008-bam-dma-free-irq-v28-1-5e5b10de441e@oss.qualcomm.com>
-References: <20261008-bam-dma-free-irq-v28-1-5e5b10de441e@oss.qualcomm.com>
-Subject: Re: [PATCH v28] dmaengine: qcom: bam_dma: free interrupt before
- the clock in error path
-Message-Id: <179146342226.488308.5545075747929342879.b4-ty@kernel.org>
-Date: Thu, 08 Oct 2026 14:43:42 +0200
+	s=k20260515; t=1791463681;
+	bh=LV6/shKBT5pKWVf3EgNrs1KtHkV4PagZx7OmupPK8os=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=N5ZC6XZCTkHjShr1cBVfTimo4MwQ7jBisVXf4sxN0jnwoqTpNJegdnNnSpWj8lurh
+	 zx5NFRxd1kS9INoJ1WvTByWNScpEPFlQ9QPpitfMmlIe/utcQbH7Bv3drrau6BOrlc
+	 avYUr9M4y3dRk7VjFG8lc+76ysRjXjlT6fcJVXdw6Y+90Ep394CGTN2PXWAZN61uA/
+	 p9yPW+20qRGzS9wlWJvUXzES2skDA0wj3WsKFwZy/LnZe4YjoM318TVRORYd/mUbQq
+	 33v5nlapaza/fdy412vGV6ax311xfDO25q59uAj8JrWFcv2CCJUfx0zmGpZkp0GXoZ
+	 SISx5gq0LmGcw==
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3a98f260f85so28663491fa.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 05:48:01 -0700 (PDT)
+X-Gm-Message-State: AFq9FYKynNQHDg8GfjQymOmmpHTCyeqtPFcf/J/KLAxo7LX+lRH86yYa
+	0duJPmZ1b5v7F3JqPVk2InMbKBUz0DTI6tR1AFXhBoa8ZjJqzs0Z2BcwTKGiOg1fGD+398/kwfq
+	CYKudNEDYhOMtcWOd0oaPKnBw7S+quGQJomaXu2GZFQ==
+X-Received: by 2002:a2e:b8c5:0:b0:3a6:5fd7:c98a with SMTP id
+ 38308e7fff4ca-3a9a2c6357dmr13064601fa.13.1791463680000; Thu, 08 Oct 2026
+ 05:48:00 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 8 Oct 2026 12:47:58 +0000
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 8 Oct 2026 12:47:58 +0000
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <CAD++jL=fkJNgCHb7M4mm5nc0nwb1GZmozngCEv-A5VCBULXD3A@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20261008090724.5423-1-bartosz.golaszewski@oss.qualcomm.com> <CAD++jL=fkJNgCHb7M4mm5nc0nwb1GZmozngCEv-A5VCBULXD3A@mail.gmail.com>
+Date: Thu, 8 Oct 2026 12:47:58 +0000
+X-Gmail-Original-Message-ID: <CAMRc=Mfx3a-vD9HoQuirjDL_4TF-tOw=mAC=PMcR6DRt_Kat5w@mail.gmail.com>
+X-Gm-Features: AclHuK_R7g7m4hPEKjqHgTKLRbJgKqk-mkMpcqjQPito5GqgoJTskotDp8Lpis8
+Message-ID: <CAMRc=Mfx3a-vD9HoQuirjDL_4TF-tOw=mAC=PMcR6DRt_Kat5w@mail.gmail.com>
+Subject: Re: [GIT PULL] Qualcomm pin control fixes for v7.3-rc7
+To: Linus Walleij <linusw@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, brgl@kernel.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, 8 Oct 2026 13:39:59 +0200, Linus Walleij <linusw@kernel.org> said:
+> On Thu, Oct 8, 2026 at 11:07=E2=80=AFAM Bartosz Golaszewski
+> <bartosz.golaszewski@oss.qualcomm.com> wrote:
+>
+>> Please pull the following set of Qualcomm pin control driver fixes for t=
+he
+>> next RC. This is based on v7.3-rc5 where the previous set of pinctrl fix=
+es
+>> landed.
+>
+> OK pulled in!
+>
+> It's a bit weird to me that you merge in -rc5 instead of just rebasing on
+> -rc5 but I guess it makes sense if the fixes were queued before -rc5
+> was out and it checks out, so whatevs.
+>
 
-On Thu, 08 Oct 2026 11:54:35 +0200, Bartosz Golaszewski wrote:
-> The BAM interrupt is requested with a devres helper and so on error it's
-> freed after probe() returns. We disable the clock before freeing or
-> masking it so it may still fire and we may end up reading BAM registers
-> with clock disabled.
-> 
-> Stop using devres for interrupts as we free it in remove() manually
-> anyway. Add an appropriate label and free the interrupt before disabling
-> the clock in error path and in remove().
-> 
-> [...]
+I really prefer to avoid rebases if I can. I typically queue patches all th=
+e
+time and just merge in upstream tags if needed. With merges you don't risk =
+any
+accidents with rebasing like dropping existing merge commits, etc.
 
-Applied, thanks!
-
-[1/1] dmaengine: qcom: bam_dma: free interrupt before the clock in error path
-      commit: 82eed160cfa7a296ae4eb5acb8dd8f493323eea7
-
-Best regards,
--- 
-~Vinod
-
-
+Bart
