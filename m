@@ -1,115 +1,102 @@
-Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99D1E3EC687;
-	Thu,  8 Oct 2026 08:35:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 870EB3BFE4C;
+	Thu,  8 Oct 2026 08:40:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791448534; cv=none; b=LGr3qrZg8aIl6gy0ht4MsWZB+asssKWPX/P4ZTcbhSYgMmF6sL3EWcDjyVg9RsZGMMoeYxj9qQl/Quf+le4o/B2Ea68/nR5DiFVkg0DhWfEgCNI/1SoXPn46lYg2KwcUBBR7ltEHGSddhhVjIx1zAapXvMDSkHD2Yc8MRi9uRng=
+	t=1791448833; cv=none; b=J2SLsG8v553J2iZ/8Q0pg4sF/OMUwjSs6Ru3ihCH/oMw82vpvhWMR4qxkTG/1IILoqMk3AgL2RxAaPnpkp2hUPyewJrQqELbbsOgqJCaKE+/J4oB3O4/0U1rrzFn69Ym+CLk58+5UqWNyA3lLEWe18DdJ2ssn/MFYcUgYZdwsSo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791448534; c=relaxed/simple;
-	bh=ZesY1Y5yCPzTMzqwSHn1I1JQn5haocBLKRMhSM8rRP0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uTjtPoUweLST69DOYcB1DoqV+stR9UwRiQuG6H8I90aLEOaDBn1Zcz8dRiFGpACurQiGsE7tkbexqbI+S5csvh52ZYeDzjnzeC3PbmNpgf5C7DzWUtQglenzwLNqBJmd/WW5p6WI8sz2vxW08+LbzC4yJM4eKAoylg4eKxJhvsM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=EJN7pIsI; arc=none smtp.client-ip=180.181.231.80
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
+	s=arc-20240116; t=1791448833; c=relaxed/simple;
+	bh=cyhLKmoFQnNcEba8TMrb9ar6DwIiwUmEwtd9zdMt+7c=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=EQruy8y2o4jBbB3Fk5MqwOye2jdY315bRwrTBqZf4ZcaP4pu/hblr/U4RY9BllGOLGOPw0CJJJScQSQq0elSM9555rBVV4o0eiwLXPTidA9g/CWXfJZNykrM/+xBtG97zgzCn5ARc/rZFFO+hD/gpgzV8+q/7crHjMIvsXQBKzM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=AjB9skkX; arc=none smtp.client-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="EJN7pIsI"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
-	from:content-type:reply-to; bh=s2Ray92q6Vmgf55HUr1VGCUVBdkkO0DjyIM5lhthz7I=; 
-	b=EJN7pIsIGeo72dNY8XzKRQTcAWf5B+9ncRDI9R8bdlKZfx7YMgi4PDZPhZLbsLQ6x+ptNNyYXjU
-	CW2IQf3doIlkXneU9b483E5eZSkxbgxEfgy8glz7H78FGx8dZL184T5GJGiGPbueP0MPGAnUBVYuk
-	bLkzm+4dleewvrj+tYMBZISKr7aRdeWSWWJdcsL2BPUwK/5kF8tBFyanWxuBpSbWl3aGZa3qUyj4L
-	Npytki0Q3iodeQjwVXI8d2JExSeUmwPvHSXrPPvzYGE4Em2R8iCs8cEGKqIjkLY+4VH8sU8nGXW1I
-	Pb5F2msazMk3lP1jMgw6WhcLa7Kk2L9Ovo6Q==;
-Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
-	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
-	id 1xEjaz-00000001o7M-3enA;
-	Thu, 08 Oct 2026 16:35:23 +0800
-Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Thu, 08 Oct 2026 19:35:21 +1100
-Date: Thu, 8 Oct 2026 19:35:21 +1100
-From: Herbert Xu <herbert@gondor.apana.org.au>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Thara Gopinath <thara.gopinath@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Stanimir Varbanov <svarbanov@mm-sol.com>,
-	Eneas U de Queiroz <cotequeiroz@gmail.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Eric Biggers <ebiggers@kernel.org>,
-	Demi Marie Obenour <demiobenour@gmail.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, stable@vger.kernel.org,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v9 00/14] crypto: qce - Fix crypto self-test failures
-Message-ID: <asdVyUKWndnZ1Mxv@gondor.apana.org.au>
-References: <20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com>
- <ar9qNirrzOTDLipN@gondor.apana.org.au>
- <CAMRc=MdRBu5gg7Q3pz8Wn9Da4RpmmiKLP2-LwiszKCd3o8jQdQ@mail.gmail.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="AjB9skkX"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=cyhLKmoFQnNcEba8TMrb9ar6DwIiwUmEwtd9zdMt+7c=; b=A
+	jB9skkXfGqnNQxju0UenIGtnm2JboNEqZBQbx7t8i/LlD/DBDeVaEp9bqMNyLoQf
+	h8HLl/yzjO6O79l3hGmq6dT3gXNfxhpNcQNC8J4o+6z8b0cdpxIFns5kDXS/BE9o
+	UOvJ+hkpRm1bkPTA0Jb0RHLZhP6a4P/OiJX8irNo2g=
+Received: from slark_xiao$163.com ( [2409:895b:3802:ef4d:5c90:718e:af0:b2d0]
+ ) by ajax-webmail-wmsvr-40-102 (Coremail) ; Thu, 8 Oct 2026 16:40:09 +0800
+ (CST)
+Date: Thu, 8 Oct 2026 16:40:09 +0800 (CST)
+From: "Slark Xiao" <slark_xiao@163.com>
+To: "Manivannan Sadhasivam" <mani@kernel.org>
+Cc: "Krishna Chaitanya Chundru" <krishna.chundru@oss.qualcomm.com>,
+	jeff.hugo@oss.qualcomm.com, mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re:Re: [PATCH] bus: mhi: host: pci_generic: Add autosuspend_delay
+ customized support
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <nsaa4cchprkgqka7uc4ccr5wq7v6uhue5dpsvquwxyk4ndr57t@i56bkvwpclpo>
+References: <20260919095506.9570-1-slark_xiao@163.com>
+ <bf94f351-777d-4dc0-98a2-7af77f832f2b@oss.qualcomm.com>
+ <1bec2fd7.99f3.1a0c8ea4db6.Coremail.slark_xiao@163.com>
+ <2b0d3e13-96fa-437a-9de9-4a61911fe232@oss.qualcomm.com>
+ <nsaa4cchprkgqka7uc4ccr5wq7v6uhue5dpsvquwxyk4ndr57t@i56bkvwpclpo>
+X-NTES-SC: AL_Qu2SA/ift0Ar7yCQZ+kfmk8Sg+84W8K3v/0v1YVQOpF8jCzp/hotVmRkOXTG9OWtLh+WvjeKWxF17vpGdIJbeYwJAaYyRbH69B8rJEexO2df+A==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMRc=MdRBu5gg7Q3pz8Wn9Da4RpmmiKLP2-LwiszKCd3o8jQdQ@mail.gmail.com>
+Message-ID: <5506abc6.8919.1a11aab7e81.Coremail.slark_xiao@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:ZigvCgD3uzHpVsdq2x9UAA--.5142W
+X-CM-SenderInfo: xvod2y5b0lt0i6rwjhhfrp/xtbC5wlcwGrHVunTFQAA3m
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-On Fri, Oct 02, 2026 at 10:31:41PM +0300, Bartosz Golaszewski wrote:
->
-> > Please check the Sashiko comments:
-> >
-> > https://sashiko.dev/#/patchset/20260922-qce-fix-self-tests-v9-0-b1aa742e79af%40oss.qualcomm.com
-> >
-> 
-> I've gone through them. None of the issues were introduced by this series, all
-> are pre-existing. I've added them to my list and will fix them. Can we not
-> delay this series any longer and instead work in smaller steps since the crypto
-> algos will be disabled by default anyway?
+CgpBdCAyMDI2LTA5LTI2IDE5OjI2OjE1LCAiTWFuaXZhbm5hbiBTYWRoYXNpdmFtIiA8bWFuaUBr
+ZXJuZWwub3JnPiB3cm90ZToKPk9uIFdlZCwgU2VwIDIzLCAyMDI2IGF0IDA5OjI0OjU1QU0gKzA1
+MzAsIEtyaXNobmEgQ2hhaXRhbnlhIENodW5kcnUgd3JvdGU6Cj4+IAo+PiAKPj4gT24gOS8yMi8y
+MDI2IDU6MDkgUE0sIFNsYXJrIFhpYW8gd3JvdGU6Cj4+ID4gQXQgMjAyNi0wOS0yMiAxMjoxMjoz
+NSwgIktyaXNobmEgQ2hhaXRhbnlhIENodW5kcnUiIDxrcmlzaG5hLmNodW5kcnVAb3NzLnF1YWxj
+b21tLmNvbT4gd3JvdGU6Cj4+ID4+Cj4+ID4+IE9uIDkvMTkvMjAyNiAzOjI1IFBNLCBTbGFyayBY
+aWFvIHdyb3RlOgo+PiA+Pj4gRm9yIHNvbWUgV1dBTiBkZXZpY2UsIGl0IG1heSBnZXQgYSBTWVMg
+RVJST1IgaXNzdWUgd2hlbiByZXN1bWluZwo+PiA+Pj4gZnJvbSBzdXNwZW5kIHN0YXRlIGZyZXF1
+ZW50bHkuIFJlZmVyIHRvIHRoZSBRdWFsY29tbSBXaW5kb3dzCj4+ID4+PiBkcml2ZXIsIHRoZSBk
+ZWZhdWx0IHZhbHVlIG9mIGF1dG9zdXNwZW5kX2RlbGF5X21zIGlzIHNldCBhcyA1MDAwCj4+ID4+
+PiBtcy4gQnV0IGluIExpbnV4IHNpZGUsIGFsbCBXV0FOIGRldmljZSB3ZXJlIHNldCBhcyAyMDAw
+bXMuIFdlCj4+ID4+PiB0cmllZCB0byBzZXQgdGhpcyB2YWx1ZSB0byA1MDAwbXMgYW5kIHdlIGNh
+biBnZXQgYSBwb3NpdGl2ZSB0ZXN0Cj4+ID4+PiByZXN1bHQuCj4+ID4+Pgo+PiA+Pj4gU28gd2Ug
+YWRkIGEgc3VwcG9ydCB0byBhbGxvdyB2ZW5kb3IgdG8gc2V0IGEgZGlmZmVyZW5jZSB2YWx1ZSBm
+b3IKPj4gPj4+IHNwZWNpZmljIFdXQU4gZGV2aWNlLgo+PiA+PiB5b3UgY2FuIGNoYW5nZSBhdXRv
+IHN1c3BlbmQgZGVsYXkgZnJvbSBzeXNmcywgcGxlYXNlIHVzZSB0aGF0IHdheSBpbnN0ZWFkIG9m
+Cj4+ID4+IGRvaW5nIGluIHRoZSBkcml2ZXIuCj4+ID4+Cj4+ID4+IC0gS3Jpc2huYSBDaGFpdGFu
+eWEuCj4+ID4gWWVzLCB3ZSBjYW4gZG8gdGhpcyBieSBzZXR0aW5nIHRoZSBzeXNmcyBBUEkgLiBI
+b3dldmVyLCBub3QgYWxsIHVzZXJzIAo+PiA+IGFyZSBhd2FyZSBvZiB0aGlzIG1ldGhvZC4gQWRk
+aXRpb25hbGx5LCB0aGlzIGFwcHJvYWNoIGlzIG9ubHkKPj4gPiBlZmZlY3RpdmUgZm9yIGEgc2lu
+Z2xlIGluc3RhbmNlOyBpdCByZXF1aXJlcyByZWNvbmZpZ3VyYXRpb24gYWZ0ZXIgZWFjaAo+PiA+
+IHJlc3RhcnQsIHdoaWNoIGlzIHF1aXRlIGluY29udmVuaWVudC4KPj4geW91IGNhbiBoYXZlIHVk
+ZXYgcnVsZSB0byBzZXQgdGhpcyB3aXRob3V0IGFueSB1c2VyIGludGVydmVudGlvbi4KPgo+V2Ug
+c2hvdWxkIG5vdCByZWx5IG9uIHVzZXJzcGFjZSB0byBmaXggdGhlIFNZU19FUlJPUi4gVXNlcnNw
+YWNlIGtub2Igc2hvdWxkIG9ubHkKPmJlIGV4ZXJjaXNlZCB0byBjdXN0b21pemUgdGhlIGRlbGF5
+IGZvciBwb3dlciBtYW5hZ2VtZW50IHB1cnBvc2VzLCBub3QgdG8gZml4Cj5maXJtd2FyZSBjcmFz
+aC4KCj4KQWdyZWUuIFdlIGFyZSBzdGlsbCB3b3JraW5nIG9uIHRoZSBpc3N1ZSBkZWJ1ZyBvbiB0
+aGUgbW9kZW0gc2lkZS4gCgo+Rmlyc3Qgd2Ugc2hvdWxkIGtub3cgd2hldGhlciB0aGUgZGVmYXVs
+dCBkZWxheSBjYW4gYmUgaW5jcmVhc2VkIHRvIDUwMDBtcyBmb3IKPmFsbCBkZXZpY2VzIG9yIG5v
+dC4gSWYgdGhhdCBpcyBub3QgZGVzaXJlZCwgdGhlbiB3ZSBjYW4gZ28gZm9yIEVuZHBvaW50IHNw
+ZWNpZmljCj5kZWxheS4KPgo+LSBNYW5pCj4KRm9yIHJlZmVyZW5jZSwgTVRLIDVHIG1vZGVtIFQ3
+MDAgaXMgdXNpbmcgNTAwMG1zIGFzIGRlZmF1bHQgdmFsdWUuIEFuZCBRdWFsY29tbQpXaW5kb3dz
+IGRyaXZlcnMgc2lkZSwgdGhlIGRlZmF1bHQgdmFsdWUgaXMgNTAwMG1zIGFzIHdlbGwuCkhvd2V2
+ZXIsIEkgY2Fubm90IGd1YXJhbnRlZSB0aGF0IGlmIGFsbCBNSEkgZGV2aWNlcyBhcmUgYWRqdXN0
+ZWQgdG8gNTAwMG1zLCBzb21lCnBvd2VyLXNlbnNpdGl2ZSBkZXZpY2VzIHdpbGwgbm90IG9wcG9z
+ZSB0aGlzIGNoYW5nZS4gQWRkaXRpb25hbCwgREVMTCBob3BlcyB0aGF0CndlIG9ubHkgbW9kaWZ5
+IHRoZSBTRFg3MiBkZXZpY2Ugd2hpbGUga2VlcGluZyB0aGUgMjAwMG1zIHNldHRpbmcgZm9yIHRo
+ZSBTRFg2MgpkZXZpY2VzLCBhcyB0aGVyZSBhcmUgY3VycmVudGx5IG5vIHNpbWlsYXIgaXNzdWVz
+IHdpdGggdGhlIFNEWDYyIHBsYXRmb3JtLgoKSWYgZW5kcG9pbnQgc3BlY2lmaWMgZGVsYXkgc2V0
+dGluZyBpcyBhY2NlcHRhYmxlLCBJIHdpbGwgY29tbWl0IGEgVjIgd2hpY2ggaW5jbHVkZXMKc29t
+ZSBzcGVjaWZpYyBjaGFuZ2VzIGZvciBEVzU5MzRlIGRldmljZXMgb25seS4KClRoYW5rcwo+LS0g
+Cj7grq7grqPgrr/grrXgrqPgr43grqPgrqngr40g4K6a4K6k4K6+4K6a4K6/4K614K6u4K+NCg==
 
-The very first comment appears to be pointing to new code:
-
-> > +/*
-> > + * BAM DMA cannot handle zero-length transfers, so the driver always holds
-> > + * back at least one byte to submit to the engine. A zero rctx->buflen at
-> > + * finalization time does not necessarily mean the message is empty: the
-> > + * caller may have imported a state that already reflects some hashed data
-> > + * with nothing currently buffered. Handle both cases through the software
-> > + * fallback: reconstruct the running state when there is one instead of
-> > + * assuming the message is empty.
-> > + */
-> > +static int qce_ahash_finalize_zero(struct ahash_request *req)
-> > +{
-> > +	struct qce_sha_reqctx *rctx = ahash_request_ctx_dma(req);
-> > +	HASH_FBREQ_ON_STACK(fbreq, req);
-> > +	struct __sha256_ctx core;
-> > +	struct scatterlist sg;
-> > +	int ret;
-> > +
-> > +	sg_init_one(&sg, NULL, 0);
-> Can this trigger a kernel panic during zero-length finalization?
-> qce_ahash_finalize_zero() creates a dummy scatterlist by calling
-> sg_init_one(&sg, NULL, 0).
-> sg_init_one() unconditionally calls sg_set_buf(), which attempts to resolve
-> the page via virt_to_page(NULL).
-> If CONFIG_DEBUG_SG is enabled, this triggers a BUG_ON(!virt_addr_valid(buf))
-> kernel panic, because 0 is not a valid linear map address.
-> If disabled, it results in a bogus PFN being stored in the scatterlist,
-> leading to potential invalid memory access during software fallback operations.
-> This path appears reachable by untrusted userspace via AF_ALG performing a
-> zero-length HMAC finalization.
-
-How is this a pre-existing issue?
-
-Cheers,
--- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
