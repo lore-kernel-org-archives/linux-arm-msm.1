@@ -1,67 +1,87 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70C264B7A59
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 15:16:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86A33449EB6
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 15:18:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791472613; cv=none; b=cvAnkEcTypNZySp51ui7SEbWeRdclKtw8hhSrDZt56YC5vsrErvTIKwh/RTbvv9/rcXA2kQTtED7UzgKM3JLWkwmRp2R/L04SVU5Sg045lffOVxC8QadovtTZdA7dRD2PmJbjuSEpVIduo0KU9tkKXPT8CL8mAhMS2K7PC02cvg=
+	t=1791472732; cv=none; b=YiSXwW+irWB/Imv6HC0dNIfyDBB36gk4R4f4GXdh59JRl6Sf7IwFAckVXyGIqrKnzcYg20jO1QFFN6SyuiFix6Tymt+IkihQx6dYgI0vMAci7ZF9wIehvNV6jLo+ZhwR0Oo+GKJcWQI1VPjMcJ7xCMmcR8DhpFlGem1CUyu+BK8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791472613; c=relaxed/simple;
-	bh=ZTBqoYhGDm+J/pFaw0Ch+MdV1zAK5Ys8DujDZL9Y4RY=;
+	s=arc-20240116; t=1791472732; c=relaxed/simple;
+	bh=LHr0gqH7n0yRSAkE/aalDwrj21rLVhWzRJr0Xrj57rU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZP0gst2KeSh+Q2TwIsz6OKvHDBRGhmZmd+0xaHW3Y3exmXr24lydggF2VrvAIvP96+PqadLTFoXAymuqkPHlwoLOkeX9+aHtAetwx4yj2SVJ4nK0r4fC+mfPM1Q9zjjlm1C6UWwiY+J5tYJk1pyLjHpD92NE+jNYMvGBA/ckfSE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ipot0wNf; arc=none smtp.client-ip=209.85.218.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=MRR8Br46GzIMR1gRJgdOBSHTxOzBVB0NM0GHMEUyG5dIxtZkpF/rVd3jZnk0jnoBh3K93oFjNUITWo9uX6TVXKaZLwqSeMS9bGsdMNhARidffwY5kPiCUqKNhE3QkmQiTR6QhcQ+PJUACgWEUpo9BiNuGGOHa7uD3bqhTkdspgY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RryFkP88; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XzMBAvx7; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ipot0wNf"
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c2e69aa07c3so748053066b.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 08:16:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RryFkP88";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XzMBAvx7"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 698EVaqv3641938
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 15:18:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LOaMsWHOvOprnRa69YNWuqJ2U5SFuaIR1zue+6jvCdI=; b=RryFkP88wN8a/mxl
+	xOr2ZWTyExtE7my0hLk/4UaEP2w3EKwaOUXFyCuAP65hpjmF3zGminfKQ0JHKQFE
+	kYcVzZ10drhhvYsOacr0B+EIy3OLWZHQ01vnY+nBgp7q4+kIZLHhlN3qkT9nHeqc
+	+ze9jj40QjLYR6D4iV0jH/yXULlEUWPd3lpW4YQeXPqv4XDiL8l/CzMlLrBSk2AJ
+	KVZxhsewck0dOIzowKiBHfQXfKFFPXskpRp0Bvc6lAzBD8U+qnggX8/2I8Q034RV
+	Ckuk6tJknarJSp5+/cFl7Kkx8hoVb+pEkGYqIwCGLm+PlcOH1NKWKZpXtHZxVY1W
+	PDxCYw==
+Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe43gg0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 15:18:48 +0000 (GMT)
+Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5e15539a3e7so1230349e0c.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 08:18:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791472607; x=1792077407; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=l6I4Ey1RdgYWJmoD601d9WiKcqtmCdqt9tXemaY6tL0=;
-        b=ipot0wNf3Qv6pjAOTaGMAyNNVONQFoAhpm71v1k/rcIJ0Oqn+6gY0w2plpdjWjBdEW
-         bqe+QNDBPPgKjS2Yid4mdrLpVmx2JufklxPaKisdRl/8BtWxf4VYZP+ojxhlLMLRWkHM
-         CKDlzG0T09TW/tjpPz1gyYcis8Sl1PsH1VuQj5wK7b9Bpp3KI+q+sQsd3vsMVZ/lo2El
-         jRDlTop7xKMXGg+XHpquOYoJjhTRZBImdF5qHeumbAYSP0rIB0QCXOH9Cilh+MHtSrGS
-         bdtOPUUdL8MERSNMoMUcCStrNnAXwGPMj2hc1VTNk1U8nwbG/psoJH0ZVaRdA68duTiD
-         6Kuw==
+        d=oss.qualcomm.com; s=google; t=1791472727; x=1792077527; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LOaMsWHOvOprnRa69YNWuqJ2U5SFuaIR1zue+6jvCdI=;
+        b=XzMBAvx7IfFS5/nKmqsATbbdehY2+o2A1wblINrG83sy/yfwa8wqijahie4r+0cwxi
+         XKQA73sUpkmkFJSQac4YsPp0XOMONWmC0R1aiWlkYhpRUbWCa5Zt+vERgD6bpM6Jl+8A
+         M/Hz11bSMQF+JdGB/zyk2smz0dhqFPAAUzx/O+4GoZi4t9k3l5YfddIqe+YuvmXTfsTk
+         iH/amiO67ctTEvNR9o134dDI5sQ0aKgfnSUbHYSIvnoDpGoNE/oAB+uIVjgxLiuR8LnL
+         Z9tenzXehwbeK127g/vOasL2P4Ud9NcXpMFOp2yeMKsvd/Y2qTrI688QoERJtOFeMHfW
+         e8Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791472607; x=1792077407;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1791472727; x=1792077527;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=l6I4Ey1RdgYWJmoD601d9WiKcqtmCdqt9tXemaY6tL0=;
-        b=PW+PJiLtRKY2wkxI6jhoOaJb697kSInm0c9C0Hklg3TZQ7p7PsXoUDLid9pu3r9ZlO
-         RtcNOwa7yigEh4/aGZDLOwBWkbMQdqeR/ezWFBwe9N5sngqFmMLQQXDFgnEqiEyiCPpL
-         vZbK9cTRTFmbEsfVCoL5SlOdYPFODd/dLS1be4nMT5vv6hOygLVVItB7efJ0rGVeVGhH
-         6VpA/Y3hV2HODvzYhbHaGeSB2TBTPtfrZudoeHjXE4lxIG3xtSGYgndMa/W5C5J/DpY5
-         8eCAbATYBuGUV0Ge8xGqKwfM6ztotgfKQRPsrCOq5yMPYGZm2o+0Y1x6ihrNexhDMwIV
-         LoGg==
-X-Forwarded-Encrypted: i=1; AKwUvBxQmywsHxwS9HC7LFnS6CIiM2a582gUfamK1oq63ERS/wo0QifNRZOcTzlB9ukjVsu6GPwBpNnMt37ISq1c@vger.kernel.org
-X-Gm-Message-State: AFuF++mfEG2IMIrfnfeehDlDV70b9rV0mOVZ2MarOSzSGw83vDMSAvrH
-	kzBhJvg98njnEPT2f9WdxzQMQiEQ8LFQTpNUFIdahV6bv2rZ+u1uh5ZkkvgapcYCDyU=
-X-Gm-Gg: AYBFou02UMnU6RdqpAQUAz4FGWiWgU/UlJtNMJeoUNS5i85bYG3qhnS6nDJKBgiTECw
-	ryyngZjosLjKJYJSL5PQeyNKuhUAB1YzQeRM0pIdm/Gkw+ATjo2vHPP2DmN5KJJU/+dR9Mj92IG
-	ZOqeDRC8f6ernpAGOcpWQlTCpPOxSn9hvG7f3haZdps8lhjv6IGArJ8a6wjKXAjdI2CY22a3sSi
-	66MsrKq52UTwI7EXc2k8/omO4lwj2vAe06Lq2t/1kLcz9vuu3kHZdsnenkBD4w3SxepTwCiwkUF
-	Mu1bJ6t+CgmYtRZ9jGyqiIda3Uh3pfvT65RD/uDLK4FaH+tIFgHvHpT7nFdMbCJ86z5LZ/ef+QX
-	qeSYvDYr3kl74LeAAx2WwbgCe6/653iD7RmahIrXym6YbLH0BlhkhndxbL5V7QSA8jsj5yz7+In
-	lGw1DUi7KBfGNaZ1hz2SVsT5+HJzCpNzSb5c5y2bYk0dFufBRrIX8tSZqn5LgapxRwukbKhPD+1
-	Wg1MSMmli/h
-X-Received: by 2002:a17:907:3ea6:b0:c26:19e3:e982 with SMTP id a640c23a62f3a-c317c0bb076mr560631666b.34.1791472607404;
-        Thu, 08 Oct 2026 08:16:47 -0700 (PDT)
-Received: from [192.168.0.167] ([109.77.203.235])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a1012ab2sm10963766b.85.2026.10.08.08.16.46
+        bh=LOaMsWHOvOprnRa69YNWuqJ2U5SFuaIR1zue+6jvCdI=;
+        b=MnQKW/eOlIE7Gjtvors3xebAm+nPPAFU6uKhUz4NNRywxcyTVRsgDY71rY73dX6e1c
+         3WnXv/8ON7/yA+lcDdsyYWTuVxZiyQ/RdRWxGCKwezV8waJJNxIOlrCSQWrRDp92NIpF
+         7QK7pCxQvr5X+YWqx15SJY963KioUTX+aI280nKLpWm66rfu2rwy9zkg/QQ4meSbY7lO
+         RAm3UydbFElS6bHinCd12jw+NA0Zuir53B8qQ0D8QohBt3otxpemm7Q5a8q+f911sIp7
+         fxAhCWBgAHuBVU3kcF+jgqKouf4WYoY9DPN/KqVzdDIlSTX2gpLMlSaHBmTJG7jDH903
+         GHOg==
+X-Forwarded-Encrypted: i=1; AKwUvByrESTt+FSktwKjt0p0n7Zm36arAiGGnla0VgJjkMpAhDF4G0kk5YWDIo1GxWvvqhdvoTjiWyRvh8fs5O07@vger.kernel.org
+X-Gm-Message-State: AFq9FYKuDEVs9flrhd7SQxsfVkncnoUHfJNHz3Tk0X4BYXZ9+ZWCK0/V
+	rdc2682jc0N3dUQx5Nxab0PxbcTa7R89hfMLiFXHnyb15fRWLq37YbTqMtJZHuZgKeojOKUf+bA
+	qaRgKJ3IeBIoVcy7Op0tgiH6zJiei1KN/Z1M14E8LQSWHN3q73SEisfk2itiyewY0nPx6
+X-Gm-Gg: AYBFou2WtO57M8Y9dPZGtpGV0XD1kUHz/i+i/MTMpSiJag+4sWki6GB0GEnMitpj9cf
+	yIKcwZq5GCSlVrTChXgw9tsKkXmUKLaZNrwGrRrsX2lv7IxU02guPPAYNI9+rOmvjZjMsKHzqSD
+	Q3FC+UE55qo5a3mRXVEPZA4+iHD1wzl9o8CUrT9t45a2YVxjHO4TVMteWqs/FeX1/nKJo3DzOmD
+	8MEZEOxsvyn9XoSKz1jDk3+y9gh7Dpk+LFzNIZYRKhdUKdapIxw4fbA8g8mzhbD0j3FGPpYY+ax
+	apLf6WtQNt4tjhue2mVE+I1PmbBakL+hQ30yA68pzPfjEFWd3pZKVzQfMniihlJIfeI6AwrCgXO
+	t+4VtGh5ln2Mw3A0ebjR7OZbf7I1YFcvhpv6WpUw=
+X-Received: by 2002:a05:6122:1d53:b0:5d6:36d0:d20f with SMTP id 71dfb90a1353d-5e6d360322dmr2727007e0c.23.1791472727488;
+        Thu, 08 Oct 2026 08:18:47 -0700 (PDT)
+X-Received: by 2002:a05:6122:1d53:b0:5d6:36d0:d20f with SMTP id 71dfb90a1353d-5e6d360322dmr2726979e0c.23.1791472726995;
+        Thu, 08 Oct 2026 08:18:46 -0700 (PDT)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a185d914fdsm119815825e9.7.2026.10.08.08.18.45
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 08 Oct 2026 08:16:46 -0700 (PDT)
-Message-ID: <a0a9a782-8ab4-4f32-97fd-f030203fbc49@linaro.org>
-Date: Thu, 8 Oct 2026 16:16:45 +0100
+        Thu, 08 Oct 2026 08:18:46 -0700 (PDT)
+Message-ID: <337dfe66-eb55-4e96-b5a6-b2b9214d9170@oss.qualcomm.com>
+Date: Thu, 8 Oct 2026 18:18:43 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,98 +89,121 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 25/74] media: qcom: camss: vfe: Define output based VFE
- controls
-To: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>, Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
- Daniel Scally <dan.scally@ideasonboard.com>, Keke Li <keke.li@amlogic.com>,
- Richard Acayan <mailingradian@gmail.com>, Hans Verkuil
- <hverkuil@kernel.org>, Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
- Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>, Robert Foss
- <rfoss@kernel.org>, Milen Mitkov <quic_mmitkov@quicinc.com>
+Subject: Re: [PATCH 58/74] media: uapi: Add CAMSS ISP statistics definition
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, bod@kernel.org,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
+        Daniel Scally <dan.scally@ideasonboard.com>,
+        Keke Li <keke.li@amlogic.com>,
+        Richard Acayan <mailingradian@gmail.com>,
+        Hans Verkuil
+ <hverkuil@kernel.org>,
+        Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
+        Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>,
+        Robert Foss
+ <rfoss@kernel.org>,
+        Milen Mitkov <quic_mmitkov@quicinc.com>
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
+        linux-kernel@vger.kernel.org
 References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-0-ed985aefd611@kernel.org>
- <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-25-ed985aefd611@kernel.org>
- <307f12f9-8805-4b3c-92d7-422d994fdeff@oss.qualcomm.com>
- <0d1c5d19-68f8-4d44-9efd-f7d1aeaa7b32@linaro.org>
- <5e19888d-d037-41e8-a3ca-f92d9991f3d5@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <5e19888d-d037-41e8-a3ca-f92d9991f3d5@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-58-ed985aefd611@kernel.org>
+ <7cec7156-e85b-42e0-857a-e590b9e252b2@oss.qualcomm.com>
+ <c0d8ff20-ee5a-48b2-8cb4-3a837077e192@linaro.org>
+Content-Language: en-US
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <c0d8ff20-ee5a-48b2-8cb4-3a837077e192@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: -XdK0fYgwK7ZBmJ4b7BDQFqFxfAHx0n4
+X-Authority-Analysis: v=2.4 cv=AbwkjHXG c=1 sm=1 tr=0 ts=6ac7b458 cx=c_pps
+ a=wuOIiItHwq1biOnFUQQHKA==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=UWgbE6y0LSW-oyGiUeIA:9 a=QEXdDO2ut3YA:10 a=XD7yVLdPMpWraOa8Un9W:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDA2MCBTYWx0ZWRfXyZptya8Ohntl
+ Ya5sj/JIkl2hjMIoyojI63WSx6FO68M2BVU2Y0zF9j+RyIANlDDzQkebXorGDwK4FH5EZasciEM
+ I0k4jCJ0sdmArRe/wt6xQQVkl0RlM7Y=
+X-Proofpoint-ORIG-GUID: -XdK0fYgwK7ZBmJ4b7BDQFqFxfAHx0n4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDA2MCBTYWx0ZWRfX3S0RYfG+xQ5I
+ fluT7o7kv3Almwq7q22gvyYhB2FM/JSTFIsm901cRwHuuZ7NiYXqW8hzWQUyx6Vgjb7PAiA11Me
+ Wu2DW4iwe5m8YJqw3IX58u+/XMbCApPtT4ADEmxZ9Hd2gIPVvqT7Ig5uBu9cFR4BSOGSTgk9pXM
+ 4O4vZ5YGz8hI/ny3ARFi3C/hx2dOqbNm+Ru6wfdzxY24FwtUrv9+k8FmM1KoqgJGULnelQzbymS
+ orvAGOp9b1U+5Nl3Xafka7YxzpfpNMk3N4E2of9FanYEXLYDDSnRSnkKSEQrH1XrM5j1nL24b84
+ xzR00c+gXmMfNej4mYoFyPmXt2zgbXNC9EuvPiwGqH/Et9q7wrZx50NSRb7mp991y15014Rk8fF
+ u7bhFbdV+hyVPmzUTRUg5roO37PjhI2NYxOpmdi/3+V8EiJdnl9m0uqIvB+i5TYhlaJPelE3gb0
+ lcN7gcXdhICHB/yQqFQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-08_05,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ clxscore=1015 suspectscore=0 priorityscore=1501 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080060
 
-On 08/10/2026 12:35, Gjorgji Rosikopulos (Consultant) wrote:
-> Hi Bryan,
+Hi Bryan,
+
+On 10/8/2026 4:40 PM, Bryan O'Donoghue wrote:
+> On 08/10/2026 12:23, Gjorgji Rosikopulos (Consultant) wrote:
+>>> +/* Number of bins in a Bayer histogram. */
+>>> +#define CAMSS_STATS_BHIST_BINS	1024
+>>> +
+>>> +/**
+>>> + * struct camss_stats_bhist - Bayer histogram
+>>> + *
+>>> + * Histogram of the luma of each 2x2 Bayer quad inside the histogram's region,
+>>> + * over CAMSS_STATS_BHIST_BINS equal bins spanning its input range. Quads
+>>> + * whose luma falls outside the input range are not counted.
+>>> + *
+>>> + * @header: block header; @header.type = CAMSS_STATS_AEC_BHIST
+>>> + * @bins:   number of quads per bin
+>>> + */
+>>> +struct camss_stats_bhist {
+>>> +	struct v4l2_isp_block_header header;
+>> I think that the whole format is not correct, having header is preventing address alignment
+>> of the buffer for the stats, as i have mentioned in the next patch copying the statistics
+>> on each frame is not correct, just to have generic statistics format in userspace.
 > 
-> On 10/8/2026 2:17 PM, Bryan O'Donoghue wrote:
->> On 08/10/2026 06:55, Gjorgji Rosikopulos (Consultant) wrote:
->>>> +
->>>> +	/* Output based API - new and shiny */
->>>> +	void (*vfe_output_start)(struct vfe_device *vfe, struct vfe_output *output);
->>>> +	void (*vfe_output_stop)(struct vfe_device *vfe, struct vfe_output *output);
->>>> +	void (*vfe_output_buf_done)(struct vfe_device *vfe, struct vfe_output *output);
->>>> +	void (*vfe_output_update)(struct vfe_device *vfe, struct vfe_output *output,
->>>> +				  struct camss_buffer *buf);
->>>> +
->>> This also deserves good commit message, this is exact copy of the other RDI API with other arguments 🙂 Shall we migrate
->>> all existing drivers to this api in respect to use other deprecated API but having both of them leave in vfe file which
->>> creates even more confusion and readability of the code?
->> Ah but that's the point.
->>
->> You add in a parallel API which is 1:1 but which can be extended to
->> describe completion groups not WM indexes.
->>
->> WM indexes have always been wrong - limited to RDI and we have all sorts
->> of spaghetti code to work around that indexing mismatch.
->>
->> The fix is to stop doing that so yes, implement output / bus-client /
->> completion group - with wm and planes described in the output layer and
->> then move everything to that new interface.
->>
->> Including new submissions. The only real barrier is finding old
->> hardware, making the changes and ensuring nothing breaks.
->>
->> Since there's no DT dependency its "just software" - easy.
-> You are maintainer and responsible of the code. But i also want to make the point
-> again (which i think others may share) that having one vfe core code which is trying to support
-> different architectures of the ISP's which are quite different is not correct, it is match easier
-> to have different implementations based on ISP generation (different sub-device) and abstract some
-> handlers which are shared. As of today camss vfe have mixed interfaces try to match multiple
-> generations in one implementation. So that said i will not be convinced that the direction
-> which camss is moving is good. However we need to live with it and add support as you are
-> proposing, so all is good lets wait those changes to be cleanup and we will start re-basing.
+> Err no I'll disagree with you there.
+> 
+> Since we are introducing stats on the qcom side we get to be the first - 
+> or close to first - system to implement extensible self-describing stats 
+> which is the mirror to the params.
+> 
+> Extensible stats lands in 7.3 so IMO there's no reason not to use it.
+> 
+> Also I think its kind of a crap design to have extensible params but not 
+> extensible stats.
+> 
+> It should be all or nothing. I don't see a gigantic problem in copying 
+> in data and then looking at how to accommodate dma straight into the 
+> stats output with block alignments later.
 
-Well for me its about sustainability and paying down technical debt.
+Well i dont see reason to accept copying of the data in the first place,
+i have no time to check the exact structure but the statistics are 
+not same as parameters, usually there is structure mirroring exact
+layout of the hw, parameters need to be parsed and written to the memory.
+There should be a way the header to give exact offset of the data in the 
+memory and that will create a hole min with page size maybe bigger.
+There should be some common sense here adding everything in the kernel to have
+generic UAPI should not be at the price of copy overhead.
 
-RDI as WM indexes is just wrong and I firmly subscribe to Joel Spolsky's 
-edict "fix bugs before writing new code".
 
-https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/
+> 
+> The extensible header facilitates next-hopping anyway so userspace 
+> shouldn't have to change once we DMA to the aligned regions.
+> 
+> Also if that is not supported by extensible stats then it _should_ be 
+> supported by extensible stats - i.e. it should be possible to DMA 
+> directly into the output buffer and pad the blocks as much as you need.
 
-The WM/RDI indexing is absolutely a bug - a design bug - that's just 
-been a 'baked in' thing that's been repeated over and over again it 
-hasn't mattered while we've been RDI only but, that won't do now.
+Here i disagree we should have proper implementation in first merged series.
 
-Its also why I've been so dogmatic about insisting on drivers/phy to 
-represent the PHY - its a PHY, so make it a PHY; anything else is a 
-design bug.
+The question is what we will do with the first header which describes first block.
+I need to check exactly the discussion and implementation for this topic.
 
-So from that principle the logical result is fix the representations - 
-not implement something else in parallel - we should be able to resue 
-existing proven code as much as possible - it also keeps us more honest 
-WRT to maintaining the user-space contract re: interface stability.
+~Gjorgji
 
-€0.02
-
-To your point about different versions of the VFE that may be true but 
-at least for the bit in front of me right now I don't see the need for 
-different version of the VFE core.
-
----
-bod
