@@ -1,203 +1,275 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B9293A5449
-	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 03:12:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EAC52EEE76
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 03:12:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791429127; cv=none; b=KjG7KHlyaP0SgUlbIJWtWqUSx7BZRtsLrCGwCjCaBuCd25QwsHTl+A0ICu/de2iUOzk8Kxt13svA7ll18uH8S38IIIB7BqLY7o+VEx0nGc0IyMrBF/ZBPYKSWWSCSIQmmk6+mpdtOOHl4SqhiMSXwO08BW40YUAdB+oEoZmoo48=
+	t=1791429128; cv=none; b=WR3jO2YFGxGr8F+atP+lSGcwTrgu7by7DRt7a/Wo7x1j4EeT4pvHe0GLL2SEbqrsw4WG0UggLeA4yFtp7ulV9/xlfNlGFeZ8eCluPUXX1gaF3sGw+n/4xqqdHeiGJu5RUYJ5+WdGF/FO1DvIysQzBzL71dzD4wGTeaDp056Pves=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791429127; c=relaxed/simple;
-	bh=7ijS/TOAzTV5NWOFXokJRwAiAUu+gJlV37Lq2OGX2QM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=im9aWRQLs2iAGcbwiQ48UOUU8wiyBYuipiX6NlP0wa9O9cyJ4/K6y4s96l2pTf5RGiI9m/z2S9Uaftwe7EK2htAPVB8lIU5CSm4AXwdsKhgtMtChT9yzfl74EzLS6rv95RGwEzO3DX+SERIk8NQ9+3WdFbCOHVeAVvSbeB1++BY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=I/NmDDtE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E0nJVN/6; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791429128; c=relaxed/simple;
+	bh=tkeZ6QKECN4uRnnat8d3f1rWRCe/1IOkwR8LV4JSC8s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=NK2YT2cmMUXWi8l5QofnnAByd4z7R9MIsT/fzUvJcDS43EnSfBCpe7mSDYlzURyYa6DBL/BBKEZSZYf/pMEOpEAZPp36FKLnT65yBc+smXo2DAL7WYdOH0Mf+ScPEIhLY5fcMl6qhU5imbltaKFaEI/uprveAaEYoMD0t4eUsPE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Abzp8AzM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dfZPzpFs; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="I/NmDDtE";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E0nJVN/6"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6981hhsS4186920
-	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 03:12:06 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Abzp8AzM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dfZPzpFs"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6981hdOT607686
+	for <linux-arm-msm@vger.kernel.org>; Thu, 8 Oct 2026 03:12:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=6wJnCzUlDD5MfrFRYrCj/LQYjXikZd2YnpB
-	6KpaefGM=; b=I/NmDDtEfyXjHaRxIrJU2vf33OYKyNkTBTW27GDWbmlVrKjcJ+V
-	SWC7cPerGYF0T7O2wFB9ExWunKDmnOtOm2Ep8UTr+3Fkm7db0OU5ISojhq/j1Slz
-	fEHCNCtxzTG3NScs9nDLHFwN/cI4uzSxcfricN72tvPuEXkCD/m+ZKDnx3+TUI48
-	9v18qIjV9tzkLXqNfNK6EPChMLnL10uUsuZNCByAdVn+QZnJTjNm3PkbSXCoMUT4
-	6ch/M+LfuG3V4Mmdp/plj+alM879hKByjN0vZ9WgdfK1TTiAoYDH0CaEpXmwleEW
-	jmUsOfCEPhNXLZuyflBTQdnMKe2ciwbLwVw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe30t1j-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1KVmEdWOafiMPjikiSHCknyPjVh/YtlD1R8rru/D4bU=; b=Abzp8AzMlJ8HqrHS
+	VYfpRrZ9HLQMguIYr/P9L+X89UScB4PEiua6NADStsqmDAQXNtFXeuOLs8cnZG0U
+	Ai99UjvuASNO8FRrb0jFobuICsJdghp7sI5Jpr4TqtdyMPAwVY+wbbRih0hKz1XS
+	ZyUEMr5pPQ2PDbI9Jq2QVUSFN0vSAZElCB5v7kefROYozxT136GAoZl5GGvm7ime
+	ZcViKFZ7SCeZumYB1zw8lFBMqVSOb89jqbyF1imMR8u8wAb6xjjr88Mrp19i0Dcj
+	AiGkqT3+UsnKZGrswrhqCtw59H+tTdu1vPgOGyipyLMDgJ/1uNcUcKBsFd05TnuK
+	aQR89A==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5xe2rv2e-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
 	for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 03:12:05 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30bcb065bfdso9264101eec.0
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3517ee4b01cso101032eec.1
         for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 20:12:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oss.qualcomm.com; s=google; t=1791429125; x=1792033925; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6wJnCzUlDD5MfrFRYrCj/LQYjXikZd2YnpB6KpaefGM=;
-        b=E0nJVN/6be40qrA6j5FgczGsF83msKocRVGeZaaifk1f7cezKswO9skN9R1FXa0BO3
-         yY8uOUVGMmJM8mgW7tfah60x5hozlWhvWexyuFvph0I9vaFRvQ8TDUoVwNYLOP4vhBdR
-         4uR+zyQvdufaT6CfwuFDY0wb6WkdzzieSs+DlgqfEJ4Y38L+MjN4x/6weaNRQcId0J9q
-         bDv4SHs+cqEwcinTxZDgojoZDMgw5c1J+KTgMbZAoxk68aHXfIsZCeQGQ8eC1jqXyQaR
-         MkAsx7qPyTvEuQJGxsJ3fjkoTUbQjNGVMYRQwu1stGr5blbS5OaLYumx2mrhqnmvoT86
-         auWw==
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1KVmEdWOafiMPjikiSHCknyPjVh/YtlD1R8rru/D4bU=;
+        b=dfZPzpFslAd3o4h3WoxQk2EAy18hgmpgWGYQE5ICRpIwY3hkerXq25PyH626rUt4bU
+         aE29hJHa26pdiKJQTe6kTW9oGEzxat4HdhQRGIcCiplnZ1vQLhw85EYHoy7z20/kY/1z
+         kjjMLwT5aJTogQ9H0HZk95cta3KACIWEcEBVJOhU7phvLyPT/XtvYRsKGCtRdk8MR2Rw
+         vNJ2ubLVfJGp9tZ9dMYnlu9iV39b260IkkyPmtn8gaMu+S77C+5hOHK6JKrU5pKl0XJv
+         9BPsZeL5GtfKw+lUNNP3yra9mWXKQl7nHdIdUj9VX7lAAcXP9aVZbp36+GdGMEKdn39p
+         RMBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1791429125; x=1792033925;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6wJnCzUlDD5MfrFRYrCj/LQYjXikZd2YnpB6KpaefGM=;
-        b=gP2j0j2T4DJkI77A0tCaiTjhtbqjeYWtP5iju+6llpYxe64laglJ24jt9xSJ/zqpKU
-         Dehodd8R28yhctHfNLevwO5GOwud4vbRGRNLkCxdBJIczYX/69HXrEn5sz3sIk+/vblf
-         DFvON+89G5dBmFZiQKJ25AoJHyZzcUobeXhOEIyqeoRGBKu9Nl/l9z1s3IhQirYRpDB9
-         DUNArB4Gb7rsxiONr3KpfRek3Kpdwf+NKhGkbCKMiQlyV8+gkZAACw/qxqGMh5logNIl
-         TqZVm5Gi5ve1OFeJxP3w2NYhGzMJEGW8WDBHbHGX1Zo4/eiCtwzh/nph9uEpjnsbKC36
-         r3Lw==
-X-Forwarded-Encrypted: i=1; AKwUvBwUVlSWit9ICROrQ9iEz+pbjQi98dPvT7MZQ77pc7oXwnZMrW/txcp/ZPUafAZEpNBh6QUdFdVaQsOfKRVO@vger.kernel.org
-X-Gm-Message-State: AFq9FYIkEkGvmnqVrfe45gWTX2i1xnXJ2W2fdS2CZND69Y3WluhThI8O
-	IqMYvWUvF/fndJehrv2XcF1o2lrAqCsv3Te3OiFYVhyXlILK6h2AtT+lkvo8fkRUq3nY9WDTwXm
-	8Jkodkc2UnXWMSkquisX0e1a2imrtLahkmNx3g32LwaWTuBDt9IIBAOzsJZrI/aupZvT7
-X-Gm-Gg: AYBFou3AFvO6rUn+VBKhFBH8k3skkedKrQoGmQ4F37gCdvYPReCiqewdoH2QcohHBgu
-	yl/QdPnl1lwtwrHXL6oMx2m/Qv0+pPkojA81p9s9lSUMB/5u4DIA1ZGE7bvucJgq6SzApg6vOC0
-	j0jWnyOBrBmPCyVItnQd9hB4yM17kEDsxABOFbKb2vNdt8BI2ZEK8Yn3oHCZ4Ay9vaG6j+ujbiF
-	4w8r6ZoC8HKKZdOdDyoD4lsDdx8OtEH4A4/xrSf2GYRdmKZQH57E5zh4RCS/fC2lhdq3Avfnpdl
-	uRIWNMBNOjJHbPeFdlXszoZzSWGLX3mVAtxT55TxkqkLpy9APXM56PHGehEHGtK0qO65KjyigRg
-	sw+2CeMzNa1CdwGOCzPK89qDjyebwHolz/gPuANs0sQgL5fQcflYc6O2ccz0=
-X-Received: by 2002:a05:693c:6391:10b0:34c:d1f2:b552 with SMTP id 5a478bee46e88-3515da5dd21mr4625775eec.4.1791429124722;
+        bh=1KVmEdWOafiMPjikiSHCknyPjVh/YtlD1R8rru/D4bU=;
+        b=uxbpH0g3ptZCD01JGseApOErjw1B7Ap4HgiJT/Nbfg9GmAI0o27fAf17szraYA7DPD
+         enL35QyX4A/BaAZZfc9tto1vML21ksrPn06/7rMIzrW7dOKqGkjwo5yCse571Jja92wd
+         RVTSzApPA4Z/R9o099hhJ8BUkTfgSY2/tig0yDR2/rhEj/Vxui6lI9gk3z6YuWUjrp0U
+         ncTuwYm6x/JGYeFTux1fgb3PCVLIXNArajHn/roOppCDBBhnBKiuvyBg0miYQt7K6kUy
+         6rccz122JyPojFSOoOPbIsCW7UlefYhPkSx/ioyH7AGR3FWGVBLOkMu5VAQbZkDSTGfZ
+         hz1Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxwmyopYXjXx3ou0SHGNmnII9cjnnPBuCoR7tO8eaZ+uL2aDoz9lWVqZ3Ni0QPGyCUQd8Y0SZaAaUMgqBef@vger.kernel.org
+X-Gm-Message-State: AFuF++kAPnRJ0yby3G6hfZRIdEmr93wyYrn/iQzyATiymdnUUzRmisKL
+	xbUD3oVc108t0qO+jH7hirXvL2hnwvkaHWOm9mlgge/P9l1p1akoHkmieR7uBLo2Xz0wulBUMhn
+	LJNynNSUymAXgZYK+OlHse705SqiphMoPdc/tIuaAYDIvzqzosWqNtrJnxNZKHttF9oZo
+X-Gm-Gg: AYBFou0eUeKhEeuGTsKTnGZugnGjsWx6C3Va85RxNVrLTnhVgGi4jha31GfU37ftFVH
+	65/eu4yrpI4L1Lfn73xu9u0NtutsxQV9Bt00hh7WiRQqcEPSWLlhIfkBn9NpDzBnkeIRfpoXMaP
+	1GNUEm/kyugOFrXhjWD14dqUuSfN/0QKOQwOAkP62xXHByYCqkDxAHcDPkFZAmOu5rZ5D/ZszGz
+	bxftCEj3qq+N4zIVuMv8JqJxNgVCOF4mvNJ0v/fZuGQuJDgU33tp5COhnMSiqcyT0fQbVvVoS1M
+	i9L+KC5kZCDqLywswMNDgLgqGaOiPmmgxh7sN4hmdQFlWDaCxIeYV9WCfDRPKxKQ8HgqeG0i2oA
+	Rqt8szZxhXszPrK4Z3p0LLhPCw5x+WUwuZqELTh0d6UJGrbBmTYTyUfE/nb65rz+Dc2RC0N8+To
+	epPr09Py12mwbreqiX1xM=
+X-Received: by 2002:a05:7022:4381:b0:149:f2b3:efcb with SMTP id a92af1059eb24-165a602bc41mr2109320c88.14.1791429124317;
         Wed, 07 Oct 2026 20:12:04 -0700 (PDT)
-X-Received: by 2002:a05:693c:6391:10b0:34c:d1f2:b552 with SMTP id 5a478bee46e88-3515da5dd21mr4625725eec.4.1791429123893;
+X-Received: by 2002:a05:7022:4381:b0:149:f2b3:efcb with SMTP id a92af1059eb24-165a602bc41mr2109240c88.14.1791429123253;
         Wed, 07 Oct 2026 20:12:03 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3515afd00e0sm12179530eec.23.2026.10.07.20.11.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2026 20:12:03 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: David Lechner <dlechner@baylibre.com>,
-        =?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-        Andy Shevchenko <andy@kernel.org>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>, Dan Carpenter <error27@gmail.com>,
-        =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Allocate unique ADC_TM aux device IDs
-Date: Thu,  8 Oct 2026 11:11:54 +0800
-Message-ID: <20261008031154.3440632-1-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+Received: from [10.79.117.82] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-163e3c5bed6sm5057986c88.7.2026.10.07.20.11.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 07 Oct 2026 20:12:02 -0700 (PDT)
+Message-ID: <5555b1ee-1355-429f-b3de-f0926e4c30d6@oss.qualcomm.com>
+Date: Thu, 8 Oct 2026 08:41:57 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAxMiBTYWx0ZWRfX5cMT4YkeCNxy
- 82kBG9hvZYjIT3LeNi3QplMNbClBiyNbi1c8MNUI13gmy0Eg6ctUDT5KNrytBE9shlpNYDApnlL
- 2WTYz/y6YWcuefmu/188ufIkEhkQ2l47IiUI5qJmiI8M7jqucjdDbLmBZDj9Rg4dHNHwU6+PfIh
- jcnWyPARqcDSGDuQMoN+ukpdQSwktZ7mmv8Zo5rSsGUpi8LyYgcUmcSuf5EXWwHTVY02tLVeWC4
- 72tHCGJhpCpgaAUSnxOvDLsSrKfSIbdt/4wcuOUcU5q55sWhB+HboeHowviQzA+taTh23CrDmkf
- oGIY1XYPfnBseYdhPIpkbKlGC8cP9MrSyy43rc2PrXTORDJNDSMA4iqVymSk3rArDguyoMQDS56
- Pw+rriFajgCjMfP82Dvm0gLQ8li4cymDRpmJUZYeP9TDc/nGpOpdyQWR1tPnAYBzDo8dkw/9VF1
- mJ+b5JBqS5c82xWFJMg==
-X-Proofpoint-ORIG-GUID: gRyW8kbDdUO3Ipzc3iF4ZFwUQ8BN1tAK
-X-Proofpoint-GUID: gRyW8kbDdUO3Ipzc3iF4ZFwUQ8BN1tAK
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAxMiBTYWx0ZWRfXyzGpTFsD76DN
- AjN37gbeXJ1mMfOtJ8aosqNNoJA0yly5vgnSL6f83uQb5HJie216NBiOwGSEKGgGkYQNuKgrwOw
- CIdArCFmhkViXjyxY0c0PmcMo29mNYU=
-X-Authority-Analysis: v=2.4 cv=KcdHIgYD c=1 sm=1 tr=0 ts=6ac70a05 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=izmiiGAzHhnd4z7VojAA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/2] Add initial support for Qualcomm Kuno SoC
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Linus Walleij <linusw@kernel.org>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
+Content-Language: en-US
+From: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+In-Reply-To: <20260929-kuno-soc-support-v7-0-530f62dc4020@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDAxMiBTYWx0ZWRfX/DuLMDoZ9+ZU
+ dASpb/puCjnyVnvk01RTpFvdGhunW85Xto4vZ6wcuLRfqElcJXMXQol8tLvS9E4NRUpvihkR5Kf
+ D/ltwo0AuL8KFz0ceETduixqkfcm2NI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDAxMiBTYWx0ZWRfX2gdEQekUIVnM
+ /p6KNHmutOp7EaJtSXimdV+n6D1JKYYOocEir2i3dU1Br2wnlwfH+5M2zgxWaysabMj6Eom9Z9u
+ DSeBVIORENYHjfYmy3cdTpgFiwjgReCwO64cpI9D0kplMBLglMyZZlaReH9vPGaLE+ZcEVriTT1
+ jGIZC0KMLoA8SxCOtf8s/98ao3Xp0DciBvnhC6cZyzU1t6gOv6Sj0Gfv/RzNMKBgMASMt0zqH1e
+ L4azwg5g5Q5zRpk4C2lr+fd0lsOOPuWAVf6wrN1/7P5H4vTwtdDq7EB4RGnWlW+t9/bmhXxJv2g
+ YbEPwg+LReydmnjcIC65i3Ynu5tUo5B96izLB0uHFy8MvhxfBjtOpme76W3Ogum1MoplHrBGrtZ
+ 79a+fW73UYPhoe1znAMclxW75y0reWbYaEGpxFOACU2tUin4KvOC724DrVoEF8emtWFNfVkVv0x
+ sno1XMz0khRRgKEY6Qg==
+X-Proofpoint-ORIG-GUID: 8NTDXAfICgRP8_AJlveG0reOx3QUiOfn
+X-Proofpoint-GUID: 8NTDXAfICgRP8_AJlveG0reOx3QUiOfn
+X-Authority-Analysis: v=2.4 cv=CIm/zhrD c=1 sm=1 tr=0 ts=6ac70a05 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Gpu_kyyjuvhznk9Z_CEA:9 a=QEXdDO2ut3YA:10
+ a=O8hF6Hzn-FEA:10 a=PxkB5W3o20Ba91AHUih5:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-08_01,2026-10-06_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
- phishscore=0 priorityscore=1501 clxscore=1015 impostorscore=0 suspectscore=0
+ phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080012
 
-adc5_gen3_add_aux_tm_device() never sets the auxiliary device id, so
-every ADC5 Gen3 instance with at least one qcom,adc-tm channel tries
-to register the same device name. With ADC_TM channels on more than
-one PMIC, the second instance to probe fails:
 
-  sysfs: cannot create duplicate filename '/bus/auxiliary/devices/qcom_spmi_adc5_gen3.adc5_tm_gen3.0'
-  ...
-  auxiliary qcom_spmi_adc5_gen3.adc5_tm_gen3.0: adding auxiliary device failed!: -17
-  qcom-spmi-adc5-gen3 c400000.spmi:pmic@8:adc@7200: error -EEXIST: Failed to add auxiliary TM device
+On 9/29/2026 3:18 PM, Hardeep Sharma wrote:
+> This series adds initial support for the Qualcomm Kuno SoC and the Kuno
+> IDP reference board.
+>
+> Kuno is a 32-bit ARM (Cortex-A7) Qualcomm platform. The rest of the
+> series (bindings, GCC, RPMh clocks and power domains, interconnect,
+> pinctrl, geni-se) has been applied and is in linux-next, so v7 carries
+> only the SoC and IDP board devicetree, plus a small geni-se binding
+> update that lets the QUP wrapper use one address/size cell on 32-bit
+> SoCs.
+>
+> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+> ---
+> Changes in v7:
+> - Addressed v6 review feedback:
+>    - New patch: allow 1 or 2 #address-cells/#size-cells in the geni-se
+>      QUP wrapper binding.
+>    - Switched the QUP wrapper to one address/size cell with an empty
+>      ranges, instead of the explicit 32-bit window.
+> - Link to v6: https://lore.kernel.org/all/20260929-kuno-soc-support-v6-1-a16afafbcbc7@oss.qualcomm.com/
+>
+> Changes in v6:
+> - Rebased on next-20260928. The rest of the series has been applied,
+>    so only the devicetree patch remains.
+> - Addressed v5 review feedback:
+>    - Added the full qcom,pdc-ranges map (22 ranges instead of 3), so
+>      that all PDC-routed wakeup GPIOs can wake the system.
+>    - Added wakeup-parent = <&pdc> to the TLMM node.
+>    - Replaced the explicit soc ranges with an empty ranges and named the
+>      node soc, matching the other 32-bit Qualcomm SoCs.
+>    - Widened the QUP wrapper ranges to cover the whole 32-bit address
+>      space instead of a 16 MiB window.
+> - Link to v5: https://lore.kernel.org/all/20260827-kuno-soc-support-v5-0-6d47636a8f09@oss.qualcomm.com/
+>
+> Changes in v5:
+> - Selected QCOM_GDSC from the Kuno GCC config. The driver registers GDSCs
+>    (added in v4), so like the other Qualcomm GCC drivers it must select
+>    QCOM_GDSC; otherwise, in a configuration where nothing else enables it
+>    (e.g. COMPILE_TEST or a minimal Kuno-only build), gdsc_register() returns
+>    -ENOSYS and the clock controller fails to probe.
+> - Link to v4: https://lore.kernel.org/all/20260827-kuno-soc-support-v4-0-dd34f235fc1a@oss.qualcomm.com/
+>
+> Changes in v4:
+> - Addressed v3 review feedback:
+>    - Registered the interconnect NoC provider from an explicit
+>      core_initcall() instead of module_platform_driver(), matching the
+>      established qcom interconnect driver convention.
+>    - Replaced the NA mux-slot placeholder with _ across the pinctrl
+>      PINGROUP table, matching the upstream qcom pinctrl convention.
+>    - Added minItems: 1 to the interconnect binding clocks property so a
+>      single clock is valid (system-noc), and aligned the binding
+>      examples with the sdx75 labelled-node style.
+>    - Added GDSC power-domain support to the Kuno GCC: the binding now
+>      defines GDSC macros and the driver registers the EMAC0, PCIe and
+>      USB20 GDSCs, so #power-domain-cells has real backing providers.
+>    - Split the cpu-idle-states phandle list so each phandle is on its
+>      own line.
+>    - Collected Acked-by / Reviewed-by tags from v3.
+> - Link to v3: https://lore.kernel.org/all/20260821-kuno-soc-support-v3-0-196e2b306368@oss.qualcomm.com/
+>
+> Changes in v3:
+> - Addressed v2 review feedback:
+>    - Reworked the interconnect binding clocks: dropped clock-names and
+>      replaced the flexible min/maxItems list with fixed per-compatible
+>      clocks (aggre-noc: 2, system-noc: 1), required where present and
+>      disallowed otherwise, matching the sdx75/glymur shape.
+>    - Made #power-domain-cells required on the Kuno GCC binding and
+>      declared it on the SoC gcc node, since the Kuno GCC hosts GDSCs and
+>      is a power-domain provider (following qcom,sdx75-gcc); the driver's
+>      GDSC support will follow separately.
+>    - Made the GPIO65/66 QDSS CTI trig1 funcsel-3 route selectable: added
+>      a distinct qdss_cti_trig1_mire pin function (and allowed it in the
+>      TLMM binding enum), as the duplicate funcsel-2/3 entry left
+>      funcsel-3 unreachable.
+>    - Collected Acked-by / Reviewed-by tags from v2.
+> - Link to v2: https://lore.kernel.org/all/20260814-kuno-soc-support-v2-0-3079794f0f73@oss.qualcomm.com/
+>
+> Changes in v2:
+> - Addressed v1 review feedback:
+>    - Reworked soc: qcom: geni-se commit message; dropped the Fixes: tag.
+>    - Reworded dt-bindings commit messages to the "Document X for the
+>      Qualcomm Kuno SoC" one-liner form.
+>    - Canonicalized copyright headers on interconnect binding / driver /
+>      NoC ID header to the single-line Qualcomm Technologies form.
+>    - Dropped unused <linux/mod_devicetable.h> from the interconnect
+>      driver.
+>    - Fixed MODULE_DESCRIPTION casing "KUNO" -> "Kuno" in the interconnect
+>      driver.
+>    - Extended interconnect binding to optionally allow up to four QoS AHB
+>      clocks (matches sdx75/glymur shape).
+>    - Cleaned up brace/space style in gcc-kuno.c to match peer clock
+>      drivers.
+>    - Reworked initial DTS: moved idle-states / domain-idle-states inside
+>      cpus{}, wrapped fixed clocks in a clocks{} container with peer node
+>      names (xo-board, sleep-clk), dropped the pcie_pipe_clk fixed-clock
+>      stub (the GCC 4th clock now uses <0> in DTS to match the sdx75
+>      idiom; the YAML example uses a named placeholder), dropped the
+>      RPMHPD_CX power-domain reference on GCC (Kuno GCC has no GDSCs /
+>      no corner votes / no pm_runtime, so the reference was inert), and
+>      added a bootloader hand-off comment on the memory node.
+>    - Collected Acked-by / Reviewed-by tags from v1.
+> - Link to v1: https://lore.kernel.org/all/20260809-kuno-soc-support-v1-0-5e0ede4a0c72@oss.qualcomm.com/
+>
+> ---
+> Hardeep Sharma (2):
+>        dt-bindings: soc: qcom,geni-se: Allow 1 or 2 address and size cells
+>        ARM: dts: qcom: Add initial device tree for Kuno SoC
+>
+>   .../devicetree/bindings/soc/qcom/qcom,geni-se.yaml |   4 +-
+>   arch/arm/boot/dts/qcom/Makefile                    |   1 +
+>   arch/arm/boot/dts/qcom/qcom-kuno-idp.dts           |  25 ++
+>   arch/arm/boot/dts/qcom/qcom-kuno.dtsi              | 444 +++++++++++++++++++++
+>   4 files changed, 472 insertions(+), 2 deletions(-)
+> ---
+> base-commit: 6375e61c01e93e35ee7acd336a689ac1fae4b509
+> change-id: 20260809-kuno-soc-support-1dab826de0bf
+>
+> Best regards,
+> --
+> Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
 
-The ADC probe then fails as a whole, so that PMIC loses both its IIO
-channels and its thermal zones. This shows up on Nord, which has
-thermistor channels on two PMAU0102 PMICs.
+Hello All,
 
-Allocate the id from a driver-wide IDA and release it from the
-auxiliary device release callback. The ADC_TM driver matches on the
-device name only, so the instance number does not affect binding.
+Both of the following patches are ready to be picked:
 
-Assisted-by: LLM
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- drivers/iio/adc/qcom-spmi-adc5-gen3.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+[PATCH v7 1/2] dt-bindings: soc: qcom,geni-se: Allow 1 or 2 address and 
+size cells
+[PATCH v7 2/2] ARM: dts: qcom: Add initial device tree for Kuno SoC
 
-diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-index c68c6c5f6aca..f0b2544c1632 100644
---- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-+++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-@@ -15,6 +15,7 @@
- #include <linux/dev_printk.h>
- #include <linux/err.h>
- #include <linux/export.h>
-+#include <linux/idr.h>
- #include <linux/iio/adc/qcom-adc5-gen3-common.h>
- #include <linux/iio/iio.h>
- #include <linux/interrupt.h>
-@@ -608,7 +609,14 @@ static void adc5_gen3_delete_aux(void *data)
- 	auxiliary_device_delete(data);
- }
- 
--static void adc5_gen3_aux_device_release(struct device *dev) {}
-+static DEFINE_IDA(adc5_gen3_aux_ida);
-+
-+static void adc5_gen3_aux_device_release(struct device *dev)
-+{
-+	struct auxiliary_device *adev = to_auxiliary_dev(dev);
-+
-+	ida_free(&adc5_gen3_aux_ida, adev->id);
-+}
- 
- static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
- {
-@@ -642,9 +650,16 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
- 
- 	aux_device->n_tm_channels = adc->n_tm_channels;
- 
--	ret = auxiliary_device_init(&aux_device->aux_dev);
--	if (ret)
-+	ret = ida_alloc(&adc5_gen3_aux_ida, GFP_KERNEL);
-+	if (ret < 0)
- 		return ret;
-+	aux_device->aux_dev.id = ret;
-+
-+	ret = auxiliary_device_init(&aux_device->aux_dev);
-+	if (ret) {
-+		ida_free(&adc5_gen3_aux_ida, aux_device->aux_dev.id);
-+		return ret;
-+	}
- 
- 	ret = devm_add_action_or_reset(adc->dev, adc5_gen3_uninit_aux,
- 				       &aux_device->aux_dev);
--- 
-2.43.0
+Could you please pick them ?
+
+Thank you for your review and support.
+
+Best Wishes
+
+Hardeep Sharma
 
