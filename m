@@ -1,194 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE4DD37FF53;
-	Thu,  8 Oct 2026 03:31:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5573A48E4
+	for <linux-arm-msm@vger.kernel.org>; Thu,  8 Oct 2026 03:52:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791430282; cv=none; b=jZhLjal5X8w72wm5pWX1mTaVTKVwHcuxexXndawb9jhfrK5mfWwEKkKpw/I9W8ILBgvdfm5cfbTU8bSd40pnyR4qbxHVdl553gMtxyLJ4Eg8PefQ6QcKoQwSD5jb1QsrJtFlDwceevorUTob9zXqMHURVuCHcaXiT+WRVqnUolU=
+	t=1791431551; cv=none; b=SpgVSmGGgWf5HBplejrs27h+s2xc5d66ZqkJ9zpMTYQRWyTfAwZA2IVycHdxrtjm5AwdoPzaPMrb/Kz+WchOKucXw17e0WMOgb2lRMwCCNxSyHUfFvyHLi5UpD0TjDgVBqD3YC7kETHTss7r2455fqSn+4egBtXLKFbKcRmbveY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791430282; c=relaxed/simple;
-	bh=Rsk8qalhAFrI7bNXjDuRHfYdKBM4cNyRHBGNeCntXgU=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=gge6VBwg/0Q/ylsYr2ugsWkz4PWU9f9pz5BuKJ2pKQfsZjcmGzaEDEdjXuFargoLrYmMF4LucFmy80/k5sOHQprf1P3ESNPg0Xd9lQVjPXQ6kwFw+3AtYWA6crGGNQxRr/lYCQT31h0E8FS5xhYofSqfDJrVh+02Pm9vbGnCFOA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SuTyKB8P; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791431551; c=relaxed/simple;
+	bh=+S7+6b0tE0OmnLFC+QstPEqY3o50EFg74OIiryzh5ws=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LHUIDxZPa7N54F/I4lfaRdhdQ5Jo1/BeezafdvwKstccQtyi2L2h5iJguz9CcMS0XcjvT//bw/R4k0D4bRQ3sIQUpnmEVfrlmiX80x46CntqFvA0tTLdfo6ip6mS58bzuAJQMqo3UrGWIdsOhhjeC3JTlRaQJoKByMjnKMzkUWU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=c+JIULFa; arc=none smtp.client-ip=209.85.210.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SuTyKB8P"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32AA01F000FF;
-	Thu,  8 Oct 2026 03:31:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791430280;
-	bh=doKya4TAuwuHLjF27X1lAAmDyISiCJjGAuVsJzbKKn8=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=SuTyKB8PKCpuXQRpNNMteStsvgdrrTq2oVSPKL1hgKIngWsnJNqMsCeOMPeokbN3J
-	 +zzkePmdsXkyx29wm5SIejSGty1eVdM8tJXkuJwxrwbi+ki0Sir7RWcrD33lQJNjpG
-	 DbuZXEhScB1+Crbc+ehCF6MXNxJqPwTzc55mFDWNR6ca8ChFRG8ycFsH7yE1J6tWfX
-	 Yo3eKm9IYYhAZ+n7MqeGhZk8oH32Ou7W3btRNvGo6SUZ/dSeLawd1ApR4KZY09Yi/O
-	 LoZ8BxVw1v6vIHiLyPfJtxgN4NrgFt3QlDivG8m8mJrBGScsdyaHuo1+kiuk8omp0e
-	 LtI8yrqJImX4Q==
-Subject:
- Re: [PATCH net-next 4/4] net: ethernet: qualcomm: ppe: Add IPQ5332 support
-From: netdev-bot+sashiko@kernel.org
-To: mail@tk154.de
-Cc: netdev@vger.kernel.org, jie.luo@oss.qualcomm.com, andrew+netdev@lunn.ch,
- davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, horms@kernel.org,
- corbet@lwn.net, skhan@linuxfoundation.org, rdunlap@infradead.org,
- quic_leiwei@quicinc.com, quic_suruchia@quicinc.com, quic_pavir@quicinc.com,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Date: Thu, 08 Oct 2026 03:31:18 +0000
-Message-ID: <179143027873.434549.15034517641240789690@kernel.org>
-In-Reply-To: <20261005152915.101780-5-mail@tk154.de>
-References: <20261005152915.101780-5-mail@tk154.de>
-X-sashiko-severity: Low
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="c+JIULFa"
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-885cd98d226so90047b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 07 Oct 2026 20:52:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1791431550; x=1792036350; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Vy0poknliGswHcpdQnidx1yFhBPlUDC+lTCKJfWkmRg=;
+        b=c+JIULFawh9O9VQ87fwLeM+LvkiSl70/x6DXs5EcnJs4AIMY1GEWJp8ObgBPZGJB4x
+         Mv05UncODjqv2XyRjoBKQVbMrhjwEpgHXgw9TY63vhs/aUwuE3SSQTJZSrZUcCc/8UiJ
+         ddvf+4LXB6MROmkpIb8AqBcLQdRz76QjzjoX0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791431550; x=1792036350;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Vy0poknliGswHcpdQnidx1yFhBPlUDC+lTCKJfWkmRg=;
+        b=rYrdvS1bhtrqBF+BFyQulpSSUaPXyYt8V7wkfWk8F7a3nYhIU7jOgDOQsQcRCfrk/I
+         ryp3mmDurLhzz/Gev9N0dsgAExEDMiYFplws+wrUnpobAU6Hiy/+u1XjGp16BlrKPCUd
+         is+qlISg+vvy6I9EiTQRf7eoKYa5Bfxyo9skn1ME1zDJFpCPXlN0eoMB8NPjAnTkoUY1
+         AgrEQgIzwtHJlQZUBjNEVG4zy51IscIRDBV4OvF//o+RWdKvYq8Q5BZREkTQxKSHFdl6
+         aNxF/mjRWc4zjlPBLLk/1uXOGsZdpTUKrTxSx3iCXSlxrm5QKJk5k3bPjoLYTGRNnkoE
+         blMw==
+X-Forwarded-Encrypted: i=1; AKwUvBzfi5X4UMVzWH/dbmXYEyIvoo9cPBF07eylebl0/M3Svva6A8VJgXoGxpdXPeIQbDL/EtCyB3uTILo06iqm@vger.kernel.org
+X-Gm-Message-State: AFq9FYIqUwzOBiRPFwFXMbeBtjnEBkcpfqbh7sg+TIV9UDXz9h0cpXIU
+	3L68+l0S5BPz3cmPYZkG2wQxKd6BxTb1Jd2G2C9q3cAeTApTH5gNfaDNMjdalS7T7Y1b9HowE8o
+	2u+A=
+X-Gm-Gg: AYBFou1PrnLFwKdbM4pMaYD3E8Q1fK3gVPsV3QnIzcswV8frYP5+ZPDGZ9YRn/8Q1L/
+	nh2UL9uXAZpqe7loDycPH36cKWypLAtpT716Nv/FQIzpiGh/tos0Ji/46/mfj9XkqWmS+Gf9buW
+	zeAw0+ycVpFupm+pHcD3PFpVJLeCtzddprYXl0+oJ4RkVfCIrBh1oJSRLjGyRaNMk7ENawbMj4c
+	5R9yLbCES93ZR0Lfs1jhInrBIoLhh4S185Rf2iCuKeeR25jzbkMXXZ1kW3RNE98cwXRCiSVY+Bt
+	drratUK7EiKNP8YajNHtC6eUnT1BM51Dzfv4qEx3Wx3qhzFrfSbCx+sHhIaDBd+SLvz96r/8X2R
+	5QOo69wWEBWYPtJIfIpEGAc70aa1inuc5+q+TZ+ONDRyfs1zakdNm4jq4wE/dCtB+ztV6rsNLSt
+	nCFIq29SDgI9cfKgbMgsJS9jxyCbmC2+x/juNEqbwQpy3qze2zYnaQPK2eFf0iY3gcyAADJBblT
+	F2q6scCqQXuGjF196rwxuWcgUg8RB4lGlL2AQ==
+X-Received: by 2002:a05:6a00:4b4f:b0:880:f22a:b123 with SMTP id d2e1a72fcca58-8930d0045e0mr655238b3a.36.1791431549972;
+        Wed, 07 Oct 2026 20:52:29 -0700 (PDT)
+Received: from google.com ([2a00:79e0:2031:6:97d3:292:91b3:138d])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-892bb49a188sm977281b3a.33.2026.10.07.20.52.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Oct 2026 20:52:29 -0700 (PDT)
+Date: Thu, 8 Oct 2026 12:52:23 +0900
+From: Sergey Senozhatsky <senozhatsky@chromium.org>
+To: Oreoluwa Babatunde <oreoluwa.babatunde@oss.qualcomm.com>
+Cc: Sergey Senozhatsky <senozhatsky@chromium.org>, 
+	Georgi Djakov <georgi.djakov@oss.qualcomm.com>, andersson@kernel.org, konradybcio@kernel.org, 
+	abelvesa@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
+	minchan@kernel.org, axboe@kernel.dk, rostedt@goodmis.org, mhiramat@kernel.org, 
+	mathieu.desnoyers@efficios.com, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+	djakov@kernel.org
+Subject: Re: [PATCH 4/6] zram: Add QPaCE zcomp backend
+Message-ID: <ascS2nPCSQJxOGDS@google.com>
+References: <20260930145215.3380977-1-georgi.djakov@oss.qualcomm.com>
+ <20260930145215.3380977-5-georgi.djakov@oss.qualcomm.com>
+ <ar3yt8Kl3WUV93lP@google.com>
+ <4ed3f09f-74fc-4f07-8897-5c773fbde0b2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4ed3f09f-74fc-4f07-8897-5c773fbde0b2@oss.qualcomm.com>
 
-Thank you for your contribution! Sashiko AI review found more severe
-issue(s) in other patches of this series. This mail is only an FYI, in case
-you want to address the nit picks below when you respin.
+On (26/10/06 16:53), Oreoluwa Babatunde wrote:
+> On 9/30/2026 10:43 PM, Sergey Senozhatsky wrote:
+> > On (26/09/30 07:52), Georgi Djakov wrote:
+> > [..]
+> > > @@ -80,10 +87,10 @@ static const struct zcomp_ops *lookup_backend_ops(const char *comp)
+> > >   	while (backends[i]) {
+> > >   		if (sysfs_streq(comp, backends[i]->name))
+> > > -			break;
+> > > +			return backends[i];
+> > >   		i++;
+> > >   	}
+> > > -	return backends[i];
+> > > +	return NULL;
+> > >   }
+> > 
+> > This hunk looks unrelated to the patch in question.
+> ACK. Will remove this.
 
-Low priority / nit picks for your consideration:
+Thanks, if you are going to add qpace zcomp backend, please note
+that zcomp API is undergoing some architectural changes [1] (shouldn't
+be too much extra work to adapt.)
 
-- [Low] On IPQ5332, the comment in ppe_clock_init_and_reset() (ppe.c
-  lines 187-190) is no longer true.
-
-Pre-existing issues:
-- [Medium] This problem wasn't introduced by this patch, but the patch
-  depends on it.
-
---
-
-net: ethernet: qualcomm: ppe: Add IPQ5332 support
-
-This patch adds qcom,ipq5332-ppe match data to the PPE driver: a 200 MHz
-PPE clock, four interconnect paths and three ports. It also adds IPQ5332
-specific BM/QM limits, thresholds and scheduler arbitration tables, and
-reuses the IPQ9574 scheduler resource table for ports 0-2.
-
-> diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe.c b/drivers/net/ethernet/qualcomm/ppe/ppe.c
-> index 0ef72c20364be..69e970db4a78b 100644
-> --- a/drivers/net/ethernet/qualcomm/ppe/ppe.c
-> +++ b/drivers/net/ethernet/qualcomm/ppe/ppe.c
-
-[ ... ]
-
-> @@ -65,6 +89,14 @@ static const struct icc_bulk_data ipq9574_icc_data[] = {
->  	},
->  };
->  
-> +static const struct ppe_plat_data ipq5332_ppe_data = {
-> +	.soc_cfg = &ipq5332_soc_config,
-> +	.icc_data = ipq5332_icc_data,
-> +	.ppe_clk_rate = 200000000,
-
-[Severity: Low]
-This isn't a bug, but now that IPQ5332 goes through
-ppe_clock_init_and_reset(), is the comment there still accurate?
-
-drivers/net/ethernet/qualcomm/ppe/ppe.c:ppe_clock_init_and_reset() {
-    ...
-	/* The PPE clocks have a common parent clock. Setting the clock
-	 * rate of "ppe" ensures the clock rate of all PPE clocks is
-	 * configured to the same rate.
-	 */
-	clk = devm_clk_get(dev, "ppe");
-    ...
-}
-
-In this series, the qcom,ipq9574-ppe.yaml binding requires a fifth clock
-for qcom,ipq5332-ppe. It is described as "PPE sleep clock from GCC" and
-does not share the NSSCC parent of the other PPE clocks.
-
-devm_clk_bulk_get_all_enabled() enables that clock at its own rate. Only
-"ppe" gets clk_set_rate().
-
-Could the comment be updated so it no longer claims that all PPE clocks
-end up at the same rate?
-
-> +	.num_icc = ARRAY_SIZE(ipq5332_icc_data),
-> +	.num_ports = 3,
-> +};
-
-[ ... ]
-
-> diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-> index 65ac6c0841d5a..91e6ee9524a60 100644
-> --- a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-> +++ b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-
-[ ... ]
-
-> @@ -264,6 +298,30 @@ static const struct ppe_qm_queue_config ipq9574_ppe_qm_queue_config[] = {
->  	},
->  };
->  
-> +/* IPQ5332 unicast and multicast queue thresholds. */
-> +static const struct ppe_qm_queue_config ipq5332_ppe_qm_queue_config[] = {
-
-[ ... ]
-
-> +	{
-> +		/* QM settings for multicast queues 256 to 299. */
-> +		.queue_start	= 256,
-> +		.queue_end	= 299,
-> +		.prealloc_buf	= 0,
-> +		.ceil		= 50,
-> +		.weight		= 0,
-> +		.resume_offset	= 18,
-> +		.dynamic	= false,
-> +	},
-> +};
-
-[Severity: Medium]
-This is a pre-existing issue, but do these multicast thresholds ever reach
-the hardware? ppe_config_qm() indexes the multicast admission control
-table with the global queue ID:
-
-drivers/net/ethernet/qualcomm/ppe/ppe_config.c:ppe_config_qm() {
-    ...
-	} else {
-		reg = PPE_AC_MULTICAST_QUEUE_CFG_TBL_ADDR +
-		      PPE_AC_MULTICAST_QUEUE_CFG_TBL_INC * queue_id;
-    ...
-}
-
-The multicast config table is a separate table with 44 entries:
-
-#define PPE_AC_MULTICAST_QUEUE_CFG_TBL_ADDR	0x84a000
-#define PPE_AC_MULTICAST_QUEUE_CFG_TBL_ENTRIES	44
-#define PPE_AC_MULTICAST_QUEUE_CFG_TBL_INC	0x10
-
-With that indexing, queue 256 maps to 0x84b000 and queue 299 maps to
-0x84b2b0. Both addresses are past the end of the table at 0x84a2c0 and
-before PPE_AC_GRP_CFG_TBL_ADDR (0x84c000).
-
-The debugfs code for the matching multicast counter table subtracts the
-unicast entry count first:
-
-drivers/net/ethernet/qualcomm/ppe/ppe_debugfs.c:ppe_queue_counter_get() {
-    ...
-			int mq_offset = i - PPE_AC_UNICAST_QUEUE_CFG_TBL_ENTRIES;
-    ...
-}
-
-If that is the intended indexing, neither these IPQ5332 values (ceil 50,
-resume_offset 18) nor the IPQ9574 ones are ever written. The real
-multicast entries keep their reset values, and the read-modify-write
-cycles hit undocumented QM addresses instead.
-
-This looks like it goes back to commit 806268dc7efd ("net: ethernet:
-qualcomm: Initialize PPE queue management for IPQ9574").
-
-Should ppe_config_qm() use queue_id - PPE_AC_UNICAST_QUEUE_CFG_TBL_ENTRIES
-as the multicast table index?
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261005152915.101780-1-mail%40tk154.de
+[1] https://lore.kernel.org/linux-kernel/20261005122036.718976-1-senozhatsky@chromium.org
