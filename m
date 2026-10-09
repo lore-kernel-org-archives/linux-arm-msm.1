@@ -1,202 +1,133 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEDA54C8C68
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 11:25:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2C7A3F329A;
+	Fri,  9 Oct 2026 11:25:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791545121; cv=none; b=beRhFUkMapFe5dfqVN76poYooBbaJD2c5DX+jFqbWN5aGFLHwFg6Ix7/HtohxCQ+e9uIx2/0tNbCqYiI2BKR7hErzO9PPlEaIGsKnbkOHnKTU9p7p4BbchCqC3QGWrdSuMX7Ho8H4nYJ4NfOab6oVRmKPFepTf08QCfuZ0dQXIo=
+	t=1791545159; cv=none; b=j1vaq5+hDpmGlLm90IJDP577qzoJ9PrJsfvNVggCeTbqAkNIAXDJG+re0i4L7m2DzMoHi+NoVdg/SjUxuNwC4zPLKwVnFOZ5xF7+GJCJ1fmCWfYj3VbverGyTvFot6/zXlaU1MYy0j0Bf1QSiJuldAw0TTwYgBTiyayH84xPN5o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791545121; c=relaxed/simple;
-	bh=K/UuwAdCDzSNTdbtCp/oiK4VjRQqMyDj/QIu8/Tze7s=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Gghidi+ztCc4xvH1SpCX2OeHvS6pqC7gIDYdmgh88tpud6Lm11tWrklcz8cIhy/gxqzeD+ZOtMsP/VBkheH7BbcvlPufnyIr2Gfw1tqxLiW6XFx7inuEYW6fw0a2Cts8RZtQax1rgk7Lk5SgBYOhTBgvqpOAkePKU2tDmWKfBQ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=EHdwTzMi; arc=none smtp.client-ip=209.85.208.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1791545159; c=relaxed/simple;
+	bh=JKJIxTyryZxcLfwAq/m3TqMiI88ySXek90Fko7fZZtw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=gJUjoEReAMUmEEvyMnLPKiFrWdtlhxrVMgqDD8B6/DLoZlTpoGL6p5330hQHIq5XfYuqcdRBync17CRyNeKg2Hwu0596XoWUPkzpBRsc8/nLfdRSE+XvECB1Ea2ziAqO3mBR/bphMAZGbU1UmrmA+mOiEsEZxl8mlnc2KxWSCzU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VK+3IeMw; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="EHdwTzMi"
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6b16824c0fcso2039908a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 04:25:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1791545110; x=1792149910; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=365rpWbQTI8r+XdiFb+KF1sTOX5DYF/iothdwDHKaSc=;
-        b=EHdwTzMiTjdZbLMA/h1lqRsfXHXfVAfO4QghI2VWYjNb/tf0toHzR495NlzuxRbG2k
-         4AdtS9MML6liWkfK5pJzr5XAyX9ZKw5llpvd9i1Tj46GRIbpZUOHNPmzt6tMtNEO3w2b
-         GpE4ai882MtPjH9zPmpq/SGX37SamqUPcP4SR1j1TL6yaTgx1NRCzYqdXHmvruE+pbYE
-         U7/WXTC4z/4EWSZ2IssKuOnqOG0WjQSbiESwpzT7f4EcJ3NH2u8db5YJ7jWbyJaTRAPz
-         VGgcAIimbCY/o/ZqAElE2e5nGSztD6BCRRF0P/PAc5IFYdEMY1Kdv1jATchy52W25eQP
-         HrgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791545110; x=1792149910;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=365rpWbQTI8r+XdiFb+KF1sTOX5DYF/iothdwDHKaSc=;
-        b=BhzSYspMYkOTOGMtZI9AJqXGv+M7Z18U/CdCj7XyEf35iVzRptz8TG8QWRT3MD3aI7
-         00xG6fvpEfyt16bEYo+JJBuC3yrgBU6EAZkXFetwUycD3XKTfmAePCgP+3IWLbA7y7GD
-         c63bxQE8WmxMrDz81B68zCv+l8nlwHmT3ya3mKMrc1ckZDXyY2DPUNdqfm8o9Zl5uUrE
-         knaaBZxTuDN91rxNRQK7FYyGFcmMJN3zydAfRuZhkv/ocWziYQ7hewx42JJ6H4b9N7ae
-         jaBk8e0W8WReMbmYiSIXOpooIwYShplmUM0ybqHmWoHrBBF2QAvqq6KGb2gi263n1Mdb
-         iRzg==
-X-Forwarded-Encrypted: i=1; AKwUvByGPQGoxc8hLkEO2muIaHsvTzz7BWx3pCpffe33QbGFOLWAQz593YDSMw5GWFwJJ0XoFtNvRtLgy1MNlZ37@vger.kernel.org
-X-Gm-Message-State: AFq9FYIFgaGKMKwsQB4Gud5f8L1y2BG3otyVtzMObGM90tJKP4ExkMTn
-	xakNZZexDp4Xc2p2GhtK5v17j+allzXRLYFkjvCAjXnS3QnVZCXyCQrRTeXwVbupZ6I=
-X-Gm-Gg: AYBFou0An1zjlc7Tp3VgYglW/y+a0j4hsCytvceNoFPIyNAJxYHGai1D5yNxIUkEB6d
-	FFQYpQcFrWGGWfc2Gs11JE/FtrvBFhmyFG2hJe3wGajUvPpIVdPtKWqCM1MitBYHcFf32M+l1gq
-	DkaGDujo8a74M1RUYlTAMDozjY2ScIUdBEk43GNjEmhbGwebG3KFi1cJGZdEjlKCdzPMDW1vG2s
-	+B5XH8rp9qA9KT7zjuxAqjzJgKWT2gtULs0g/2mOvDJ9LbgwvJL2/6pHnV41nFxMCxkhslKvaQu
-	HmfWgi3Z7V16Xb1wsOy7361Zkl66FUGUIF02g5d75lWjd2cJWRbPYkjRhIVPRwgus+UbTxWQiZa
-	Dk9iYKGfCYRWdcN0Da/GmTpzGVIvIptQFRruQd0xdqqr4HzJbU6BLqcayQQ3mj4MzRkQg1r5Jj8
-	qrOmruUSilOOgQCwzrmWY5A4B2fKbRjke0VyWsD6Xm6OigG7reeyMQ74x95N5AmgDISiAYIE0YO
-	zuBTaCy99HIKW3F3c3ofD/qih6HqL9TTPXInKbTvHeaMy5Wwapf
-X-Received: by 2002:a05:6402:190f:b0:6ab:6e:a8e4 with SMTP id 4fb4d7f45d1cf-6b17c2919a2mr1279444a12.44.1791545109895;
-        Fri, 09 Oct 2026 04:25:09 -0700 (PDT)
-Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b179dd3597sm985764a12.14.2026.10.09.04.25.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 04:25:09 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 09 Oct 2026 13:25:03 +0200
-Subject: [PATCH v4 4/4] arm64: dts: qcom: milos-fairphone-fp6: Enable
- display
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VK+3IeMw"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6998KNem1223206;
+	Fri, 9 Oct 2026 11:25:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=6FbwaaY3OzfD2u8g/JqvJW9gPG/pdQ6vN2b
+	cOgBjsYU=; b=VK+3IeMwy9/sU2kRNR5hmGEvnczThZJ44JeTOjIXkQRC4HpKRXq
+	y4zYo2cpplhyM556pxnlGManL8iEYzY/qVv3IS3fLIZmw1/mSzk/7o1NW1XdFKoZ
+	/q0ZKIo1JhWGhVzNNSZJ5neTZDDMQzBZJV3aOLZXTYHn6JXPlJikj9ykph7WIcTU
+	xuL+AmN4fR3d7N9rCuOnnzQnNpcEPN1YVGyEmjkXJZVPQlNxy1EmmHWR7m66IJ9d
+	INVKJoHdWu3+Zqiq29JHx6jY+8SoeoYK9ewhFsuTVpbuU6ZSVpIfsi5XnM8aKg5b
+	UlvsqT0bb6eCw9OpnR/na6lrCwRa5d8nmgw==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6fxkb7y9-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 09 Oct 2026 11:25:41 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 699BHNcr1842464;
+	Fri, 9 Oct 2026 11:17:23 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-pkumpatl-hyd.qualcomm.com [10.147.245.204])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 699BHNWc1842444
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 09 Oct 2026 11:17:23 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 3914174)
+	id 260D0643; Fri,  9 Oct 2026 16:47:22 +0530 (+0530)
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] This series resends the self-contained ASoC changes from the earlier Hawi/Maili LPASS audio submission.
+Date: Fri,  9 Oct 2026 16:47:17 +0530
+Message-Id: <20261009111719.2609060-1-prasad.kumpatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-fp6-panel-v4-4-7c3819664778@fairphone.com>
-References: <20261009-fp6-panel-v4-0-7c3819664778@fairphone.com>
-In-Reply-To: <20261009-fp6-panel-v4-0-7c3819664778@fairphone.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791545105; l=2284;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=K/UuwAdCDzSNTdbtCp/oiK4VjRQqMyDj/QIu8/Tze7s=;
- b=+RENV5BTwuJZenkB/tqi4Ledclqeb7XKWAMWUX+RVt0JGWYi6hJZJFY91iUXFwZmz89TsCRE7
- /oHOtl9hGpoA3+AJesVeUI7yU+ifKJovTWzz+fN4xrzyAidTMUrrqNm
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-GUID: 7-FdOoUlA3lXPT779lG4nV22CP2CGvdA
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA0NSBTYWx0ZWRfX0i+2vILuxxBl
+ +vd9Nr/QxcNLH/P9b1mGJ4kt4az6DstdB6mDuEqRVh/ZsVAyqf2XQQGW8d8RA1bf0qsZbRdqgn8
+ iCJ3P4WGJYDLgBwwQPQETijrLvemiLU=
+X-Authority-Analysis: v=2.4 cv=Cs0q4X4D c=1 sm=1 tr=0 ts=6ac8cf35 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=VQ4Fj_RYcp3dFWGW_loA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA0NSBTYWx0ZWRfX/QkcgR2hYrCF
+ tXV/vbVs10UzdbG4NZXWSo1ST0XNHVvw30u1eo8SjvTrX6XUVXkK9RI7nWzBswT1v+jrfb5i6EB
+ l6REUHfbfSfhmzjcws6FgvYZEtNeSEbkM+rmbSGqZYf1PHUbgU9D3UrpvaXc3X8XldMWUDUvn6Y
+ mzF2YQQSWX6Qe2o6m+keZpC7zJdFJg2nGDhWUW4YoLGLeRBTkMpMt3vasGfArtvKlCpVL5xGXHX
+ hiEZleKdNXAg1GUDOAJ0ABiqtsWXWqSbmKvAAxxLmG4soIMIyg8iTuzQ2ileOXle5NJs/AeVXHp
+ 9p/R4lFHTA9BWUNTXLNZcJz0yK8D2ARKNHOvKnLLh6bjpnfh9mSBK1NhD2sWckq/445xw1f1Zz9
+ f4kFxamfoVVvfF7rWqS1dT3q03/xIY1JrRBCQX5ghOlixdpLMpEQLVxP5NXl8a33nxryyJc1ewD
+ 0Eak6HZSp9OYSX8QElA==
+X-Proofpoint-ORIG-GUID: 7-FdOoUlA3lXPT779lG4nV22CP2CGvdA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-09_03,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 lowpriorityscore=0 impostorscore=0 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610020000
+ definitions=main-2610090045
 
-Configure the MDSS nodes for the phone and add the panel node.
+Hi,
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+The original v1 series included bindings, devicetree and defconfig changes
+which either depend on other LPASS macro/platform updates or need to be
+handled with the corresponding platform enablement. Keep this revision scoped
+to the two ASoC changes which are independent and can be reviewed/applied
+separately.
+
+The October 6 subset was incorrectly posted as v1. This v2 supersedes that
+posting and keeps the revision history tied to the original September 23 v1
+series.
+
+Previous submissions:
+v1:
+  https://lore.kernel.org/all/20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com/
+incorrectly-numbered subset:
+  https://lore.kernel.org/all/20261006053717.3455143-1-prasad.kumpatla@oss.qualcomm.com/
+
 ---
- arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts | 64 ++++++++++++++++++++++++
- 1 file changed, 64 insertions(+)
+Changes in v2:
+- Correct the revision number. These patches were previously posted as part
+  of the September 23 v1 Hawi/Maili audio series; the October 6 subset was
+  incorrectly labelled v1.
+- Drop the Maili LPASS macro binding and Hawi/Maili DTS patches from this
+  series because they depend on other platform/audio changes still being
+  reviewed.
+- Drop the arm64 defconfig patch from this series. That patch belongs with
+  the Hawi/Maili platform enablement and needs a separate rationale if it is
+  reposted.
+- Keep only the two independent ASoC patches.
 
-diff --git a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-index 4e8777162b53..11015c3fa331 100644
---- a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-+++ b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-@@ -709,6 +709,49 @@ &ipa {
- 	status = "okay";
- };
- 
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&vreg_l4b>;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		compatible = "boe,bj631jhm-t71-d900";
-+		reg = <0>;
-+
-+		reset-gpios = <&tlmm 12 GPIO_ACTIVE_LOW>;
-+
-+		vci-supply = <&vreg_l19b>;
-+		vddio-supply = <&vreg_l9b>;
-+		dvdd-supply = <&vreg_oled_dvdd_1p2>;
-+
-+		pinctrl-0 = <&disp_reset_n_active>, <&mdp_vsync>;
-+		pinctrl-1 = <&disp_reset_n_suspend>, <&mdp_vsync>;
-+		pinctrl-names = "default",
-+				"sleep";
-+
-+		port {
-+			panel_in: endpoint {
-+				remote-endpoint = <&mdss_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	data-lanes = <0 1 2 3>;
-+	remote-endpoint = <&panel_in>;
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vreg_l2b>;
-+
-+	status = "okay";
-+};
-+
- &pm8550vs_c {
- 	status = "okay";
- };
-@@ -872,6 +915,20 @@ &tlmm {
- 			       <13 1>, /* NC */
- 			       <63 2>; /* WLAN UART */
- 
-+	disp_reset_n_active: disp-reset-n-active-state {
-+		pins = "gpio12";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	disp_reset_n_suspend: disp-reset-n-suspend-state {
-+		pins = "gpio12";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
- 	sdc2_card_det_n: sdc2-card-det-state {
- 		pins = "gpio65";
- 		function = "gpio";
-@@ -906,6 +963,13 @@ pm8008_int_default: pm8008-int-default-state {
- 		drive-strength = <2>;
- 		bias-disable;
- 	};
-+
-+	mdp_vsync: mdp-vsync-state {
-+		pins = "gpio129";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
- };
- 
- &uart5 {
+Prasad Kumpatla (2):
+  ASoC: codecs: wsa885x: Reset registers on teardown for B2B playback
+  ASoC: qcom: sc8280xp: add Maili sound card configuration
+
+ sound/soc/codecs/wsa885x.c | 11 ++++++++++-
+ sound/soc/qcom/sc8280xp.c  | 11 ++++++++++-
+ 2 files changed, 20 insertions(+), 2 deletions(-)
 
 -- 
-2.56.0
+2.34.1
 
