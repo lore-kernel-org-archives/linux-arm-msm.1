@@ -1,154 +1,136 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5394A3E16B9;
-	Fri,  9 Oct 2026 05:20:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 695943D9556;
+	Fri,  9 Oct 2026 05:25:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791523239; cv=none; b=lQS2t3afvDyy9MzqJyTs4sg3ZlsQwfGrYBV9gT4POPJkTKgAJ5PvHzmq596TdX4FVfoOqCStBXet71SA5u4uWeQr9RDOGcrZcmVu4YP/FaoEdCQfmudCOQQq/Z1lRc3elDvmb/meFSCAwGNB9MedhcTkDlMWIw6K2ChKeKilgAg=
+	t=1791523538; cv=none; b=gQxxmUbiQ3QmDS6yOEV2qWK7Lww1gikgtnYgqZG/yhj1Pl4B3xi7SCgMKypGV/oo0gux4iNKnq5Ua4MeGNsR3qwH8keZ1rl3oVS0pYVpShbedZcdycCL7rHhvnjO5cXOB8bH1DrAVXHvquAIGhm8q2429Au0/ffkf+UhNt0TbN0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791523239; c=relaxed/simple;
-	bh=aP0fEHvQ/QaAgLAQCsKU0lla8LGEEkXic5qJRlIA+0w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iXUGmk8TUydBjO0Ft9guQOciOAF2LEICyNVT5hXVULHOUrvVIh14T+y110/V8lIroTNal+2mluY0eVBYkpjheoEMGtcGUNeeg9LBX+M26UAYhUPBZeW2wPjxuAgSTrFGxU8xoXaSsCbgK2gm2TwoDOg0KQO81FWeaES8MInisfY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=YGWJwEQp; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="YGWJwEQp"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791523238; x=1823059238;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=aP0fEHvQ/QaAgLAQCsKU0lla8LGEEkXic5qJRlIA+0w=;
-  b=YGWJwEQpfU9iqTwi38TTksMnzz7ydWNynqOIueVdNG+lHRALRl1ofH1j
-   iRSrrEgfoFWcZ9veOC+B7NiK3gOP7kS4vFtEmyWFynAUZLRZxO3ZmpDX6
-   ZkSGmKLWMaWhDYu+6/m+6Z4W7nwX6+sYnbEXZs3KteZFtdhKnjrM14yD3
-   pAgaCS/sVCkKx1JdyvXxgypsFO7TbsgTDDn59GtdF4fVVFU8izg/5ONer
-   edih4fB35h6aRfwzDApAzYXq9BXkmjFfIirOOxk7b4Tfv8Q0rcl6y8zzK
-   mNWKtLN7fBHgml85Oq0Beda4+HGO+NtTehZ/tZvIhF4KHseaoa9wPU+sn
-   A==;
-X-CSE-ConnectionGUID: uimerN2FTgiJ8HDqyruP6Q==
-X-CSE-MsgGUID: 8Y8J6HiFQdaMkbPgaLYMeA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11929"; a="324351"
-X-IronPort-AV: E=Sophos;i="6.27,147,1787036400"; 
-   d="scan'208";a="324351"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Oct 2026 22:20:37 -0700
-X-CSE-ConnectionGUID: j7B2XznQQtaMjYvr1OiqTw==
-X-CSE-MsgGUID: 9HTjMy3mRw6qtewz3yxe3g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,147,1787036400"; 
-   d="scan'208";a="181331"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa001.jf.intel.com with ESMTP; 08 Oct 2026 22:20:33 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xF31y-000000005Lo-1rmo;
-	Fri, 09 Oct 2026 05:20:30 +0000
-Date: Fri, 9 Oct 2026 13:20:06 +0800
-From: kernel test robot <lkp@intel.com>
-To: Bryan O'Donoghue <bod@kernel.org>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
-	Daniel Scally <dan.scally@ideasonboard.com>,
-	Keke Li <keke.li@amlogic.com>,
-	Richard Acayan <mailingradian@gmail.com>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
-	Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>,
-	Robert Foss <rfoss@kernel.org>,
-	Milen Mitkov <quic_mmitkov@quicinc.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 19/74] media: qcom: camss: vfe: Represent output as an
- array instead of a singleton
-Message-ID: <202610091311.xZd9hTAf-lkp@intel.com>
-References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-19-ed985aefd611@kernel.org>
+	s=arc-20240116; t=1791523538; c=relaxed/simple;
+	bh=5XFToSMPlXDYnoEpKp92QLokgssjNR++5cJstGj4MNc=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=qv7HkofATIYlGb7F/MHib4w6M5dVlJJp3NTLrp3/hZescuSqNCU8JMO/osEHgmUiOUOH7nDNzV6hi0lBt3flK0OufEoslwqsY0hgnuIxjBZq8rWfwjq6PtqKvVqHHyl6zBen6ByK8PHYvVKjrBBvNHanWtQVuiWYNMKrdEcOrCc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from fc87d0ffb700.home.arpa (unknown [36.110.52.2])
+	by APP-03 (Coremail) with SMTP id rQCowACnrjzNeshqxfMcCg--.3390S2;
+	Fri, 09 Oct 2026 13:25:34 +0800 (CST)
+From: Haotian Zhang <vulab@iscas.ac.cn>
+To: Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] clocksource/drivers/qcom: Fix error propagation in msm_timer_init()
+Date: Fri,  9 Oct 2026 13:25:36 +0800
+Message-Id: <20261009052536.3139407-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-19-ed985aefd611@kernel.org>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:rQCowACnrjzNeshqxfMcCg--.3390S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxur4fKFW5Jw4xAFy7tr4kXrb_yoW5Ar15pa
+	y3u3sxtryjva12vwsxtFn7JF95W393tFWxGa4Sk343Ar43Ar1qyFWUtFyjqFy7GFZ7Zw12
+	qFn5ZF43uFyDAF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUySb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AKxVWxJVW8Jr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxAIw28IcxkI7VAKI48JMxC2
+	0s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI
+	0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE
+	14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20x
+	vaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8
+	Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x07beYLPUUUUU=
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiCRQPA2rIZLs7SQAAse
 
-Hi Bryan,
+msm_timer_init() reuses the res variable for the clocksource_register_hz()
+return value in its common exit path. When request_percpu_irq() or
+cpuhp_setup_state() fails, res holds a negative error code, but it is
+unconditionally overwritten by clocksource_register_hz() before the
+function returns. As a successful clocksource registration returns 0, the
+failure is reported as success: the percpu IRQ is not registered (or the
+hotplug state is not installed) and yet msm_dt_timer_init() believes the
+timer is usable. The same happens when alloc_percpu() fails, which also
+leaves msm_evt NULL for the hotplug callbacks to dereference.
 
-kernel test robot noticed the following build errors:
+Return -ENOMEM when alloc_percpu() fails and bail out through a dedicated
+error path that frees msm_evt and returns the original error code instead
+of falling through to the clocksource registration.
 
-[auto build test ERROR on 8d3ae59288f1e7d58d76558a6ee96d533bc5019f]
+Fixes: ab51189ca485 ("clocksource/drivers/qcom: Convert init function to return error")
+Assisted-by: DeepSeek-V4.1-Flash
+Signed-off-by: Haotian Zhang <vulab@iscas.ac.cn>
+---
+ drivers/clocksource/timer-qcom.c | 34 +++++++++++++++++++-------------
+ 1 file changed, 20 insertions(+), 14 deletions(-)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Bryan-O-Donoghue/media-qcom-camss-vfe-Rename-gen3-back-to-vfe780/20261005-191331
-base:   8d3ae59288f1e7d58d76558a6ee96d533bc5019f
-patch link:    https://lore.kernel.org/r/20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-19-ed985aefd611%40kernel.org
-patch subject: [PATCH 19/74] media: qcom: camss: vfe: Represent output as an array instead of a singleton
-config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20261009/202610091311.xZd9hTAf-lkp@intel.com/config)
-compiler: sh4-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261009/202610091311.xZd9hTAf-lkp@intel.com/reproduce)
+diff --git a/drivers/clocksource/timer-qcom.c b/drivers/clocksource/timer-qcom.c
+index ddb1debe6a6b..d12c1c3dd6d8 100644
+--- a/drivers/clocksource/timer-qcom.c
++++ b/drivers/clocksource/timer-qcom.c
+@@ -160,28 +160,28 @@ static int __init msm_timer_init(u32 dgt_hz, int sched_bits, int irq,
+ 	msm_evt = alloc_percpu(struct clock_event_device);
+ 	if (!msm_evt) {
+ 		pr_err("memory allocation failed for clockevents\n");
+-		goto err;
++		return -ENOMEM;
+ 	}
+ 
+-	if (percpu)
++	if (percpu) {
+ 		res = request_percpu_irq(irq, msm_timer_interrupt,
+ 					 "gp_timer", msm_evt);
+-
+-	if (res) {
+-		pr_err("request_percpu_irq failed\n");
+-	} else {
+-		/* Install and invoke hotplug callbacks */
+-		res = cpuhp_setup_state(CPUHP_AP_QCOM_TIMER_STARTING,
+-					"clockevents/qcom/timer:starting",
+-					msm_local_timer_starting_cpu,
+-					msm_local_timer_dying_cpu);
+ 		if (res) {
+-			free_percpu_irq(irq, msm_evt);
+-			goto err;
++			pr_err("request_percpu_irq failed\n");
++			goto err_free_evt;
+ 		}
+ 	}
+ 
+-err:
++	/* Install and invoke hotplug callbacks */
++	res = cpuhp_setup_state(CPUHP_AP_QCOM_TIMER_STARTING,
++				"clockevents/qcom/timer:starting",
++				msm_local_timer_starting_cpu,
++				msm_local_timer_dying_cpu);
++	if (res) {
++		free_percpu_irq(irq, msm_evt);
++		goto err_free_evt;
++	}
++
+ 	writel_relaxed(TIMER_ENABLE_EN, source_base + TIMER_ENABLE);
+ 	res = clocksource_register_hz(cs, dgt_hz);
+ 	if (res)
+@@ -190,6 +190,12 @@ static int __init msm_timer_init(u32 dgt_hz, int sched_bits, int irq,
+ 	msm_delay_timer.freq = dgt_hz;
+ 	register_current_timer_delay(&msm_delay_timer);
+ 
++	return res;
++
++err_free_evt:
++	free_percpu(msm_evt);
++	msm_evt = NULL;
++
+ 	return res;
+ }
+ 
+-- 
+2.25.1
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610091311.xZd9hTAf-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/media/platform/qcom/camss/camss-vfe-17x.c: In function 'vfe_get_output':
->> drivers/media/platform/qcom/camss/camss-vfe-17x.c:395:16: error: assignment to 'struct vfe_output *' from incompatible pointer type 'struct vfe_output (*)[1]' [-Wincompatible-pointer-types]
-     395 |         output = &line->output;
-         |                ^
-
-
-vim +395 drivers/media/platform/qcom/camss/camss-vfe-17x.c
-
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  385  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  386  static int vfe_get_output(struct vfe_line *line)
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  387  {
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  388  	struct vfe_device *vfe = to_vfe(line);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  389  	struct vfe_output *output;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  390  	unsigned long flags;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  391  	int wm_idx;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  392  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  393  	spin_lock_irqsave(&vfe->output_lock, flags);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  394  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16 @395  	output = &line->output;
-8ce158c1be981b drivers/media/platform/qcom/camss/camss-vfe-170.c Milen Mitkov 2022-12-09  396  	if (output->state > VFE_OUTPUT_RESERVED) {
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  397  		dev_err(vfe->camss->dev, "Output is running\n");
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  398  		goto error;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  399  	}
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  400  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  401  	output->wm_num = 1;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  402  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  403  	wm_idx = vfe_reserve_wm(vfe, line->id);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  404  	if (wm_idx < 0) {
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  405  		dev_err(vfe->camss->dev, "Can not reserve wm\n");
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  406  		goto error_get_wm;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  407  	}
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  408  	output->wm_idx[0] = wm_idx;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  409  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  410  	output->drop_update_idx = 0;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  411  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  412  	spin_unlock_irqrestore(&vfe->output_lock, flags);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  413  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  414  	return 0;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  415  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  416  error_get_wm:
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  417  	vfe_release_wm(vfe, output->wm_idx[0]);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  418  	output->state = VFE_OUTPUT_OFF;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  419  error:
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  420  	spin_unlock_irqrestore(&vfe->output_lock, flags);
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  421  
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  422  	return -EINVAL;
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  423  }
-7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  424  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
