@@ -1,32 +1,32 @@
-Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
+Received: from bg1.exmail.qq.com (bg1.exmail.qq.com [114.132.62.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46D1A384CF5;
-	Fri,  9 Oct 2026 03:18:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.19.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B51A0352029;
+	Fri,  9 Oct 2026 03:18:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.132.62.65
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791515933; cv=none; b=pWj/siBBw4qLw/YOqpeN0971qmk7NixWzLUXKfu0/d53T/uYwJ9R9xj0doQjKRBj3lKE/woH8wA8DyxMrUo6nMIh2HQ+6e5RmqQ2gj4NT2DU1bYAUTH1dj1N+JLUD4HFwpnP4+Qmq9err2R97LErSbG7Kty1iGpMSZtadLL6W1o=
+	t=1791515943; cv=none; b=ezxKioHRUY4O79eSNt+eQ/a4QAaQsZzeL6zB7bas+UpNoAEEMvV9naeb2LtC2LMg96RVeQY/YFQZ7iAgf0jRGhvL97n6bRW48Ttd1HaEtp2JPDU4eFYeCsuoURWHOvoNCKilhZwWFCYKlGb7A8FHiAYuLpHzfsVld8WfEjIB8NA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791515933; c=relaxed/simple;
-	bh=4U9Nmsy1uYb82VMp2QQ+dOjRfnyMbjdVCFQc3Q/Ljg8=;
+	s=arc-20240116; t=1791515943; c=relaxed/simple;
+	bh=5ucLmD84+B3JGHJEDlBaULUVYEj81Nym/HMWEBfcJAg=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=WQa/eoKmqBfJOKd4JEe2Y4JFXrl4aGq1pYqOMOjRk/nsqV8g7uYywv91l+MvKD7S7ouvBaWArZ0q2qKcTe/Whs+RRmKIJQO6APaeMEL86meaN3LsLqpbUGvSdkKx8tkM+N9mzellcrPEFc0GTVB2p7YZ5v/crDPxPX0KmKWSSOo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.207.19.206
+	 In-Reply-To:To:Cc; b=DTYeIUk9sr0jIuD2qRgCW0bRjUaT0J814BkQWSqKuy5NvYvgjMcKLiDs9LdPuz1ZDpmcW3dNfEUF3LxVu4MzwzZ7sejaiXTsLgU7RGyM6hEDaSbaF45t8alaxkq5WMV4nReC4v4iPaJED4XIt9drcHP1SvgmdoLMX9vKPUmcIFc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=114.132.62.65
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip2t1791515846teda7ddcf
-X-QQ-Originating-IP: ll4UOsQI2GjH/rTZmdJovT7JYtS+9/6bQa8Au5skvjI=
+X-QQ-mid: zesmtpip2t1791515862t41d55fdb
+X-QQ-Originating-IP: 78gJAcIGUVSr0IWztGV4pGd7LvEMa0gC7Diilw8quLk=
 Received: from [192.168.30.32] ( [localhost])
 	by bizesmtp.qq.com (ESMTP) with 
-	id ; Fri, 09 Oct 2026 11:17:23 +0800 (CST)
+	id ; Fri, 09 Oct 2026 11:17:39 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 7874777080659291572
+X-BIZMAIL-ID: 7530361477103805638
 EX-QQ-RecipientCnt: 29
 From: Xilin Wu <sophon@radxa.com>
-Date: Fri, 09 Oct 2026 11:15:58 +0800
-Subject: [PATCH v2 06/20] drm/msm/dp: Keep runtime PM calls outside the
- connection lock
+Date: Fri, 09 Oct 2026 11:16:02 +0800
+Subject: [PATCH v2 10/20] drm/msm/dp: Report stream enable failures through
+ link status
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,7 +35,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-msm-dp-hdr10-v2-6-1835d4966da3@radxa.com>
+Message-Id: <20261009-msm-dp-hdr10-v2-10-1835d4966da3@radxa.com>
 References: <20261009-msm-dp-hdr10-v2-0-1835d4966da3@radxa.com>
 In-Reply-To: <20261009-msm-dp-hdr10-v2-0-1835d4966da3@radxa.com>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -58,158 +58,224 @@ Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  dragon@radxa.com, Xilin Wu <sophon@radxa.com>, 
  linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3743; i=sophon@radxa.com;
- h=from:subject:message-id; bh=4U9Nmsy1uYb82VMp2QQ+dOjRfnyMbjdVCFQc3Q/Ljg8=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFknYlboR7QsYLp/rCH9tMCZ358nr7acvqXxG5Nf0/+dq
- Tk3qvbnd5SyMIhxMciKKbIoxDPMZa/MvfZUrFQPZg4rE8gQBi5OAZjIDSGG/z4L2o+xeM+OuDOl
- wLV9dfJFJwe+33P3TCmf8HWhrZrMRCWGf9ZSonba3/dd7HRafVlE+rezWv/7DSo2n+TlWrdmz5K
- 24AAA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6880; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=5ucLmD84+B3JGHJEDlBaULUVYEj81Nym/HMWEBfcJAg=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFknYlZeivUsOv2vx/zYC8YDm9s6JW9t3GCoN6/EYFMG0
+ 6R5+6bt7yhlYRDjYpAVU2RRiGeYy16Ze+2pWKkezBxWJpAhDFycAjCRHV8Y/in15hR7/RG6orVn
+ han5289CDGKVqoY3FgQfSzfcc3ju/XaGfwo8R29fLZgZ9enGMzUPL21BsaWr9Jt3T829X3l2u8U
+ EUU4A
 X-Developer-Key: i=sophon@radxa.com; a=openpgp;
  fpr=205F009D07796DD6E516752E32C31567AD9E324E
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: OezpMYl8oadHqaIgANuMSk6DDUAhfMinjSe62GslEBE0YbPpursx9J1R
-	/MKRoaWYeHyGaD04Yyan4WvtVAAxXQ0VJ2fS6l1cyLjYtCs4zqDsFItZHGPSZROIdtMINOa
-	D3i88dc8ApcEK4LhGultasJ3MhSiganBDV4g1Y7dBjSJnT7I8dTuYuykdM9k4f8OBdyQHa1
-	E5caRwdoaq9qdMcSgHAi707jcyTxPFn6LZ2eSxS/JWVwz8wao67rigeJM0iUAtOZkOiGguv
-	eb9iVvW312SdzhRqMZGsCGCkVCI3k7ny6I1zlb90DJqXqePUbvCijH4Ne2O1+cn+wxFWQVF
-	ouHZem5Jgn+2z3mvIBBbTjnh10VKXrLmZsByogMlgy6G/t3skTwg+NzNykqagajhPoRwGap
-	uP3jOlXbudbbyV7n8x29ys6sz7UOx8V/8jnqfFdcXLkd8ojsDP8+kQDD8qg4BzViG96997p
-	sjVO08E2BIn4CTLpSKT3SUs0fY0TpkUPFV83Nw8KY5evmVkmx1219WUlsgzd34sICMwxYUr
-	POcPUiFp87hA+YUYaeVRnoyJ7NKw/CB1/31T3Z5s5S5iDgeK24kjJHlTtWYwYK888+nhusu
-	mH7N4xIijZ0WM20heRCqETLzS0bkGioJxmnTW0jeAQp5Rl+eHwViCQ5QZi7BkdNc1iqqvC9
-	z4j7vvMJUaTUu/0lUsIkvRXmWtqFHBWPnCpS9yisMXEyRvQCA8nXbLkZIVL+SqNiwziW/kg
-	ku7WRL6Lkz03g8X24RsJ+E8lZLre+CUSAKbSJYa3N4QqszsmDFIsOEjNOUJLagggMBV3hkf
-	K3sDByV7TF/5e6bbrxxJjPkaXehUXU68M0FK/f2RIurABOMTfFU1flOXBhHcqnRIJqc1WGt
-	XPO/Fme4a/DjpGx3xcKPXmHm/ZNsPVARkla8NC+VLmfXwe241XLSPPb74burfXBTxHoQd6J
-	Beg8kj6YAMk4HpJ01jMPyWHLZIeFv6c638yexkVIUcTFU6h/4eo6Il5/yJtx5E2k03dbQVV
-	06TgAuQ8N/3FIGwZJnzWTadIqjGxkwIMRYogCkaLWSYaeBKy2ovuOq7ct3CYbJ9oYnmXyy/
-	A==
-X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+X-QQ-XMAILINFO: MWcODxCKFQ3Yw+dfbVR0V/Z8hur5upFUI+tzvdud2FIP6agfPiq0bhRr
+	VceG/iFCyui+tbKs1lCvqLMExiNomDzorWsg3DkzLuhRgTdt9zrteMj8s1uog6LbPpmU4Zh
+	3loxSGiIq/Ozqh4BCNPPmLQNYWq0QW92bmgaCSeQdrqaDeCmo0IoXV9eviaFdFXmbbXDXM8
+	Okb/Iv3MlXUwDZ+I9viRln3qSctPYBZNcV8I5BkuTaT8rBNHemLyqQvxVOYqyrZ3xYokLwC
+	u25aP3jjBApj38/6/r7ZE6PqHKdrUI7AVoPAeT5i88ASzZUMWeyH0MnBJN3j8OqG8W69/ge
+	WDddq6etDFwT6Jq1OJWGPZT+Uusvx9Dj4qfZai9dPTuY1Mz7w7l6b+XXQTzK73wMvqi5WBs
+	2llLOhBSSFgYyJ68JcjGNiKrgp/bKS8Qkoa1jZfpjNhBz2X/q8/opht8CVSKGbrAabvPmcn
+	/LiAmnghFCHzLZJqlEDfTRREdl/PqZJncntB8l6oM+Il/AzryVehdGkG3ZDB5NrC1fTd8zM
+	BzsXCVX2MggeOJemGWran5ThhcV0hiEV9JHmmd0HJnOi8gc93dWF77Tko8Nk+QmzMXWcov5
+	7Yzz8uUrSl6vA6aFZME6isVvS4u8ZjXPmI2CAq59k/vDd5XxdM+45ajEcOoGvFs+tMf2D4f
+	S7ilz5/SvtU2t+ir1aBvSeQNNNVF9+hkdTzVOyVrpqLDO5vDX8dhekw3o1hlCLzeXHf8lyM
+	JkjjhXXVOgKh3npe8jd75rHCDnwUkL791ddThbwncBWsCK6T//uclj28aMR2pAfo36aUbS4
+	5FSrK7v047bsfMh2eyLdOAbI4yL21F7jto75Rxs8cx5bXMYYIQasUjl3+dktCDTf/KrA3JS
+	3c69Bj+hKaqmuuo3cUGu1hfU50ryEr9EodCzQvkVjlgHn3l4arzFXedhgIRh8HPW8tzAyvq
+	Hgbuc34q9816KB2VSFPk3m6s0ZZnPhw+EaAKHpQ5q8VslMoRihES5iMD0lHVDaYZ/8QV1/z
+	wGxsUPk6OgUVMFksaKfdKmNQoIFgJdTJJbGIjSfaDwTFsBGENfMDrAqbjV29OSbsPttwLrN
+	1H4f3jibiOq
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
 X-QQ-RECHKSPAM: 0
 
-Runtime suspend disables the display IRQ synchronously. Calling it while
-holding plugged_lock can wait for an HPD IRQ thread that needs the same
-lock. Acquiring a runtime PM reference under that lock can also wait for
-an in-progress suspend with the same dependency.
+Atomic bridge enable callbacks cannot return an error to userspace.
+After a failed enable, leaving link-status unchanged gives userspace
+no indication that it needs to retry the configuration.
 
-Acquire runtime PM references before taking plugged_lock in plug and
-detect handling, and release them after unlocking in unplug and detect
-handling. Keep connection state and PHY operations protected while the
-runtime PM reference holds the controller active.
+Mark the connector link status bad from a work item after unwinding
+the failed enable.
 
-This prepares for serializing stream operations with HPD processing
-without extending the connection lock over synchronous runtime PM calls.
+Send one connector hotplug notification per failure episode. The
+notification also invokes the fbdev hotplug handler, which can retry
+the modeset synchronously. Since atomic enable callbacks cannot
+return errors, another stream enable failure can requeue this work
+without reporting a failed commit to fbdev. Notifying on every
+failure could therefore cause an unbounded retry loop.
+
+Subsequent failures still restore BAD after a retry sets link-status
+to GOOD, but suppress further notifications until a successful enable
+or an external sink connection change. Do not reset the notification
+latch during eDP's internal plug and unplug handling, which runs on
+every retry.
+
+Skip failures superseded by recovery or an external unplug before the
+worker checks the failure state. Protect the failure state with
+plugged_lock, then release it before calling
+drm_connector_set_link_status_property(). The helper takes the
+connection mutex, which precedes plugged_lock in atomic check's lock
+order. Send the notification after the helper releases the mutex.
+Recovery concurrent with the property update can cause an extra retry.
+
+Initialize the work at probe and cancel it before unbinding the
+display.
 
 Assisted-by: LLM
 Signed-off-by: Xilin Wu <sophon@radxa.com>
 ---
- drivers/gpu/drm/msm/dp/dp_display.c | 30 ++++++++++++++++++++----------
- 1 file changed, 20 insertions(+), 10 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_display.c | 61 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 58 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index 3ca039ff57b8..32a2ac89d8ed 100644
+index b076d44b5118..816f2dc11aea 100644
 --- a/drivers/gpu/drm/msm/dp/dp_display.c
 +++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -409,14 +409,14 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- 			dp->msm_dp_display.connector_type,
- 			dp->link->sink_count);
+@@ -12,9 +12,11 @@
+ #include <linux/phy/phy.h>
+ #include <linux/delay.h>
+ #include <linux/string_choices.h>
++#include <linux/workqueue.h>
+ #include <drm/display/drm_dp_aux_bus.h>
+ #include <drm/display/drm_hdmi_audio_helper.h>
+ #include <drm/drm_edid.h>
++#include <drm/drm_probe_helper.h>
  
--	guard(mutex)(&dp->plugged_lock);
--
- 	ret = pm_runtime_resume_and_get(&pdev->dev);
- 	if (ret) {
- 		DRM_ERROR("failed to pm_runtime_resume\n");
- 		return ret;
- 	}
+ #include "msm_drv.h"
+ #include "msm_kms.h"
+@@ -54,10 +56,14 @@ struct msm_dp_display_private {
+ 	bool audio_supported;
+ 	bool stream_pm_active;
+ 	bool stream_link_attempted;
++	struct work_struct link_status_work;
  
-+	mutex_lock(&dp->plugged_lock);
+ 	/* Serializes HPD, stream and PSR operations while runtime active. */
+ 	struct mutex plugged_lock;
+ 	bool plugged;
++	/* Protected by plugged_lock, including accesses from link_status_work. */
++	bool link_failed;
++	bool link_status_notified;
+ 
+ 	struct drm_device *drm_dev;
+ 
+@@ -205,6 +211,39 @@ void msm_dp_display_signal_audio_complete(struct msm_dp *msm_dp_display)
+ 	complete_all(&dp->audio_comp);
+ }
+ 
++static void msm_dp_display_reset_link_status(struct msm_dp_display_private *dp)
++{
++	lockdep_assert_held(&dp->plugged_lock);
++
++	dp->link_failed = false;
++	dp->link_status_notified = false;
++}
++
++static void msm_dp_display_link_status_work(struct work_struct *work)
++{
++	struct msm_dp_display_private *dp = container_of(work,
++			struct msm_dp_display_private, link_status_work);
++	struct drm_connector *connector = dp->msm_dp_display.connector;
++	bool notify;
++
++	scoped_guard(mutex, &dp->plugged_lock) {
++		/* Skip failures superseded before this work starts. */
++		if (!dp->link_failed)
++			return;
++
++		notify = !dp->link_status_notified;
++		dp->link_status_notified = true;
++	}
++
++	/* The helper takes connection_mutex, so drop plugged_lock first. */
++	drm_connector_set_link_status_property(connector,
++					       DRM_MODE_LINK_STATUS_BAD);
++
++	/* fbdev can retry the modeset synchronously from this notification. */
++	if (notify)
++		drm_kms_helper_connector_hotplug_event(connector);
++}
++
+ static int msm_dp_display_bind(struct device *dev, struct device *master,
+ 			   void *data)
+ {
+@@ -235,6 +274,7 @@ static void msm_dp_display_unbind(struct device *dev, struct device *master,
+ 	struct msm_dp_display_private *dp = dev_get_dp_display_private(dev);
+ 	struct msm_drm_private *priv = dev_get_drvdata(master);
+ 
++	cancel_work_sync(&dp->link_status_work);
+ 	of_dp_aux_depopulate_bus(dp->aux);
+ 
+ 	msm_dp_aux_unregister(dp->aux);
+@@ -424,6 +464,10 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
+ 
+ 	mutex_lock(&dp->plugged_lock);
+ 
++	/* eDP calls this for every enable, including automatic retries. */
++	if (!dp->msm_dp_display.is_edp && !dp->plugged)
++		msm_dp_display_reset_link_status(dp);
 +
  	msm_dp_aux_enable_xfers(dp->aux, true);
  
- 	msm_dp_display_host_phy_init(dp);
-@@ -428,6 +428,7 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- 			dp->link->sink_count);
+ 	ret = msm_dp_display_host_phy_init(dp);
+@@ -466,6 +510,9 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
  
- 	dp->plugged = true;
-+	mutex_unlock(&dp->plugged_lock);
+ 	mutex_lock(&dp->plugged_lock);
  
- 	return ret;
- };
-@@ -450,7 +451,7 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- {
- 	struct platform_device *pdev = dp->msm_dp_display.pdev;
- 
--	guard(mutex)(&dp->plugged_lock);
-+	mutex_lock(&dp->plugged_lock);
- 
++	if (!dp->msm_dp_display.is_edp)
++		msm_dp_display_reset_link_status(dp);
++
  	dp->panel->video_test = false;
  
-@@ -460,8 +461,10 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- 			dp->msm_dp_display.connector_type,
- 			dp->link->sink_count);
+ 	msm_dp_aux_enable_xfers(dp->aux, false);
+@@ -529,10 +576,12 @@ static int msm_dp_irq_hpd_handle(struct msm_dp_display_private *dp)
+ 	if (!rc) {
+ 		sink_request = dp->link->sink_request;
+ 		drm_dbg_dp(dp->drm_dev, "sink_request=%d\n", sink_request);
+-		if (sink_request & DS_PORT_STATUS_CHANGED)
++		if (sink_request & DS_PORT_STATUS_CHANGED) {
++			msm_dp_display_reset_link_status(dp);
+ 			rc = msm_dp_display_process_hpd_high(dp);
+-		else
++		} else {
+ 			rc = msm_dp_display_handle_irq_hpd(dp);
++		}
+ 	}
  
--	if (!dp->plugged)
-+	if (!dp->plugged) {
-+		mutex_unlock(&dp->plugged_lock);
- 		return 0;
+ 	drm_dbg_dp(dp->drm_dev, "After, type=%d, sink_count=%d\n",
+@@ -682,7 +731,6 @@ static int msm_dp_display_prepare_link_locked(struct msm_dp_display_private *dp)
+ 	rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
+ 	if (rc) {
+ 		DRM_ERROR("Failed link training (rc=%d)\n", rc);
+-		// TODO: schedule drm_connector_set_link_status_property()
+ 		return rc;
+ 	}
+ 
+@@ -1278,6 +1326,7 @@ static int msm_dp_display_probe(struct platform_device *pdev)
+ 	dp->hpd_isr_status = 0;
+ 
+ 	mutex_init(&dp->plugged_lock);
++	INIT_WORK(&dp->link_status_work, msm_dp_display_link_status_work);
+ 
+ 	rc = msm_dp_display_get_io(dp);
+ 	if (rc)
+@@ -1571,6 +1620,7 @@ void msm_dp_display_atomic_enable(struct msm_dp *msm_dp_display,
+ 		goto err;
+ 	}
+ 
++	msm_dp_display_reset_link_status(dp);
+ 	mutex_unlock(&dp->plugged_lock);
+ 
+ 	drm_dbg_dp(msm_dp_display->drm_dev, "type=%d Done\n", msm_dp_display->connector_type);
+@@ -1583,6 +1633,11 @@ void msm_dp_display_atomic_enable(struct msm_dp *msm_dp_display,
+ 	if (msm_dp_display->is_edp)
+ 		msm_dp_hpd_unplug_handle(dp);
+ 	msm_dp_display_unprepare(dp);
++	scoped_guard(mutex, &dp->plugged_lock) {
++		dp->link_failed = true;
++		/* Keep reporting BAD, but notify only once until recovery. */
++		schedule_work(&dp->link_status_work);
 +	}
- 
- 	/* Don't forget modes for eDP */
- 	if (!dp->msm_dp_display.is_edp)
-@@ -488,10 +491,10 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- 			dp->msm_dp_display.connector_type,
- 			dp->link->sink_count);
- 
--	if (dp->plugged) {
--		pm_runtime_put_sync(&pdev->dev);
--		dp->plugged = false;
--	}
-+	dp->plugged = false;
-+	mutex_unlock(&dp->plugged_lock);
-+
-+	pm_runtime_put_sync(&pdev->dev);
- 
- 	return 0;
  }
-@@ -899,19 +902,22 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 	u8 dpcd[DP_RECEIVER_CAP_SIZE];
- 	struct drm_dp_desc desc;
- 	bool phy_deinit;
-+	bool put;
- 	int ret;
  
- 	dp = to_dp_bridge(bridge)->msm_dp_display;
- 
- 	priv = container_of(dp, struct msm_dp_display_private, msm_dp_display);
- 
--	guard(mutex)(&priv->plugged_lock);
- 	ret = pm_runtime_resume_and_get(&dp->pdev->dev);
- 	if (ret) {
- 		DRM_ERROR("failed to pm_runtime_resume\n");
- 		return status;
- 	}
- 
-+	mutex_lock(&priv->plugged_lock);
-+	put = false;
-+
- 	phy_deinit = msm_dp_display_host_phy_init(priv);
- 
- 	msm_dp_aux_enable_xfers(priv->aux, true);
-@@ -961,8 +967,12 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 			msm_dp_display_host_phy_exit(priv);
- 		}
- 
--		pm_runtime_put_sync(&dp->pdev->dev);
-+		put = true;
- 	}
-+	mutex_unlock(&priv->plugged_lock);
-+
-+	if (put)
-+		pm_runtime_put_sync(&dp->pdev->dev);
- 
- 	return status;
- }
+ void msm_dp_display_atomic_disable(struct msm_dp *dp)
 
 -- 
 2.56.0
