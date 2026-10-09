@@ -1,150 +1,69 @@
-Received: from mail-43103.protonmail.ch (mail-43103.protonmail.ch [185.70.43.103])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from out-2z4y-a139.jellyfish.systems (out-2z4y-a139.jellyfish.systems [198.54.127.139])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D351A4FC8F3;
-	Fri,  9 Oct 2026 20:24:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.103
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A5C0386C25
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 20:30:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.139
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791577486; cv=none; b=BGr94/yQbn/MbbtrHdzfzaaUSDeZsuiHRKIYYdu41LDa4h+RTrVICO2+DVR5S4QeERlHobt1i0TktEIjhqRbrf/PeR133Ly8+0x3Y4htbuI7ZVFdGPSytBXIk2GCVUfETBSc52MNiuaH7/xGeryxY3k/uZUqhIFJ9QUuOu8bzZ4=
+	t=1791577840; cv=none; b=Q15HkmM3lglD5N6AfWSETUeICBk8CtcWn6Ronlzd5rDCOKr6uYD3OdVg9cOqeHSeJKP41anxOyt2UBTerpTdV7frD09mRScJ3ODjnrbD5lo605uGmcCfciKbEiQgIbi3ZkAT39n4UEquOJoxUjdbF3skJxmK6e9AMnCLPl4kNDY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791577486; c=relaxed/simple;
-	bh=RF9SaaEdUyx+FcPebl8EX4giQo+egaqj3XAYu2EBg1s=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=UEcK23CyeeCjcmKYF56M6YJBTkVEqKvympMMnBtnLAfUG9r7xw1+Iaj40bkRHON392EEyKU7o5Mg8SMMtecxFgwDN6v5n0ZJqr5+lvuYO/moM+Ur3CCYDB53s4XKujLi1QQCM144YVLxCzVGhhhyeVuvO2GCNERW+kW17TYFtTU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=GZScJI5K; arc=none smtp.client-ip=185.70.43.103
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="GZScJI5K"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1791577477; x=1791836677;
-	bh=I+a0if4c2UWUy+sL+HktIUbpBbdgiWxSaud2Qq8P3PQ=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=GZScJI5KWXwe85/p8Ig4CsFP4lTB2A6F+gc1YU7QhcdxUM1tc0H0ukUdctvu4tna+
-	 Pp3RQ4yw1ia4eH/pUa4o/UV0JFhq2xOxYyNemrZeVbpao/jOta9KU4v/NmigBNWkbn
-	 463nj/vJvP75cTTb3Ve91rDy6Bh+QgZ/a6BIxSfFqffJneVOFpK18HQFSwI+RV4E6P
-	 WaH8oCPQisZSgPC+67nn7W4kqMv3xwD4In0tTC1U0+el2N50b2FoJGoR4b6yn6l2/l
-	 56lqf3Yiw/RMFCvhtuxH5QYMRmKt/DvclZqcv/R4gpSzPYjkasu47wCSnrMPyljNZ5
-	 KtlkQmBZVZX7Q==
-Date: Fri, 09 Oct 2026 20:24:32 +0000
-To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, =?utf-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Rob Herring <robh@kernel.org>, Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC PATCH] PCI: dwc: Power the controller down when hibernating
-Message-ID: <179157746908.73485.2343672865542690797@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 9d1e7e5081e13ee1b52bf0ec9a68154ae32691ea
+	s=arc-20240116; t=1791577840; c=relaxed/simple;
+	bh=g1FgcabXUwjvQAtoSiunHmHSXXnBckrY4xA79nisWq4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=JaJH35XO6wPG4gpF7jMPjUHBCsLXvM/shdpR8R01vdLQ+bhp3iOJyFADFH0FySzAiXLrw3us6RcvhbBPiqGVyj//DxhleMsL27GkQ+EmXbxY9vqpBdlGiZnuQ8sFlbN0Zf31ab2310aK3A70xjKbLCxoBMEPZfUgvjrU9TYnPu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=reject dis=none) header.from=catcrafts.net; spf=fail smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.127.139
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=reject dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (unknown [87.215.145.39])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4j1dlP2PHKz8sXC;
+	Fri, 09 Oct 2026 20:30:09 +0000 (UTC)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: Alexander Koskovich <akoskovich@pm.me>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <mkp@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] scsi: ufs: qcom: Power down UFS during system suspend on Milos
+Date: Fri,  9 Oct 2026 22:30:06 +0200
+Message-ID: <20261009203006.452335-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261005-milos-ufs-suspend-v1-1-a6f8b89d5b63@pm.me>
+References: <20261005-milos-ufs-suspend-v1-1-a6f8b89d5b63@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Envelope-From: jorijnvdgraaf@catcrafts.net
 
-dw_pcie_suspend_noirq() leaves the controller powered, with
-pci->suspended false, when a device below it cannot go to D3cold.
-dw_pcie_resume_noirq() then returns early and the driver carries on
-with the controller as it was.
+On Mon, Oct 05, 2026 at 05:02:06PM +0000, Alexander Koskovich wrote:
+> On Milos the UFS PHY GDSC is turned off on every system suspend and the
+> PHY loses its register state, so exiting hibern8 on resume fails:
+> 
+> ufshcd-qcom 1d84000.ufshc: pwr ctrl cmd 0x18 with (MIBattribute 0x0, mode 0x0) failed, host upmcrs:0x5
+> ufshcd-qcom 1d84000.ufshc: ufshcd_uic_hibern8_exit: hibern8 exit failed. ret = 5
+> ufshcd-qcom 1d84000.ufshc: __ufshcd_wl_resume: hibern8 exit failed 5
+> 
+> Set no_phy_retention so the controller and device are powered down
+> during system suspend and the link is brought up again on resume.
 
-That is fine for suspend. Drivers use the same two functions for
-hibernation, where they run as freeze_noirq and restore_noirq. Devices
-are normally still in D0 at freeze, so a controller with a device
-behind it is left powered and the image records it as running. That
-image is resumed after a power cycle, by a kernel that may never have
-brought the controller up.
+On the Fairphone (Gen. 6) which is also milos using 7.3/scsi-fixes (469fa055664b)
+3 of 3 s2idle resumes fail hibern8 exit with the quoted lines above.
 
-On a Lenovo Yoga Slim 7x (X1E80100) this resets the machine on every
-resume from hibernation. The Wi-Fi card is behind pcie4, whose link
-only comes up once the power sequencing drivers have been loaded from
-the root file system. The kernel that loads the image resumes before
-that, so it never powers pcie4, and the restored kernel then reads the
-DBI registers of that controller:
+With the patch 5 s2idle and 10 deep suspend/resume cycles: no hibern8 exit failure
+ufshcd_wl_resume 32-35 ms each, a 4 MiB fsync write succeeds after every resume.
 
-  qcom_pcie_resume_noirq()
-    qcom_pcie_icc_opp_update()
-      dw_pcie_find_capability()
-        dw_pcie_read_dbi()
-
-The machine resets at that read. pcie6a, which holds the NVMe drive and
-is brought up by both kernels, gets through the same path.
-
-Take the shortcut only while a suspend is in progress. A hibernation
-image then always holds a controller that is down, and thaw and restore
-bring it up through dw_pcie_resume_noirq(), like after any other loss
-of power.
-
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
----
-RFC because this changes the freeze path of every driver that uses
-dw_pcie_suspend_noirq(), and I can only test qcom. If you would rather
-have it in pcie-qcom alone, or solved on the restore side, I am happy
-to redo it.
-
-Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel plus
-this patch, booted both for the image and for the resume.
-dw_pcie_suspend_noirq() is the same in v7.3-rc6 and in pci/next, which
-this is based on.
-
-- A hibernation with a real power-off resumes (one run). Before, every
-  attempt reset the machine.
-- pm_test=3Dcore and test_resume pass.
-- pcie4 and pcie6a both go down at freeze and their links come back at
-  thaw and at restore. NVMe and Wi-Fi work afterwards.
-- A suspend (deep) and wake still works, and neither link is retrained
-  across it.
-
-Two things to know about the test:
-
-- I unloaded ath12k and the Bluetooth UART driver for the hibernation.
-  With the Bluetooth UART open the resume stops later, in the GENI
-  serial driver, and the remote processors do not come back after a
-  resume either. Both are separate from this and still open.
-- With ath12k unloaded the Wi-Fi card is in D0 at freeze, and the wait
-  for L2 times out on pcie4 ("Timeout waiting for L2 entry! LTSSM:
-  0x11"). pcie6a does not show that.
-
-Nothing survives the reset, so to find the read a test module wrote
-each step of the restored kernel to an EFI variable before it ran. The
-last record is the entry into dw_pcie_read() for pcie4, after
-gdsc_enable() and icc_enable() had returned.
-
- drivers/pci/controller/dwc/pcie-designware-host.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/pci/controller/dwc/pcie-designware-host.c b/drivers/pc=
-i/controller/dwc/pcie-designware-host.c
-index 77aa79ef0..458e4c6e7 100644
---- a/drivers/pci/controller/dwc/pcie-designware-host.c
-+++ b/drivers/pci/controller/dwc/pcie-designware-host.c
-@@ -19,6 +19,7 @@
- #include <linux/pci.h>
- #include <linux/pci_regs.h>
- #include <linux/platform_device.h>
-+#include <linux/suspend.h>
-=20
- #include "../pci-host-common.h"
- #include "../../pci.h"
-@@ -1231,7 +1232,14 @@ int dw_pcie_suspend_noirq(struct dw_pcie *pci)
- =09if (!dw_pcie_link_up(pci))
- =09=09goto stop_link;
-=20
--=09if (!pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable))
-+=09/*
-+=09 * Leaving the controller powered is only safe if it keeps its state
-+=09 * until resume. A hibernation image is resumed after a power cycle, by
-+=09 * a kernel that may not have brought this controller up, so only a
-+=09 * suspend may leave it powered.
-+=09 */
-+=09if (pm_suspend_in_progress() &&
-+=09    !pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable))
- =09=09return 0;
-=20
- =09if (pci->pp.ops->pme_turn_off) {
-
-base-commit: 591d89f23a7cbc668579521513c7f53b0968754c
---=20
-2.53.0
-
-
+Tested-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
