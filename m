@@ -1,200 +1,167 @@
-Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch [79.135.106.30])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DCF73CB55C;
-	Fri,  9 Oct 2026 21:28:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.30
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1349634E744
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 23:05:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791581288; cv=none; b=qeqM5ixkLspGPmfyQPORpek8PgCle9mkpqp/CS+90oqVXQfduvH327vxChzu/+s3qc194rTfmzHuI4zf181Xct6iNerb580bxCel+sIkkU7Qui8i0VQIrVSiZ64iLowOvGLJIG4312Qnkk4kMAyFxVrWYVUBnn0wu/olhknwrz0=
+	t=1791587128; cv=none; b=gNUN2U9Oa5IF4U7mGF4WZ3eTnh66+RiAkXHodoVgcwrcDst7n+gV3Z8wyx/d8RWIzFnU0/zRiD0GHcbFT2EYj9SqUYajicIKTPHApiIzDupGYWYtCyh0b1QBEUHTSNKq0wG/D9DVZCrsJkyb9186BkZoYx9wwCuStcNKqFvAyMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791581288; c=relaxed/simple;
-	bh=TACQqvV+ua0Ane64B0qJzthFbEE3k5JIyMZs9Zy+/eA=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=D03QR2BnW1JFu4ZbcykWI3jyzbf9gjo2tP0PX128U6Xfch3ae7qGC/Dl6cCYm1JMa2lIBcTFO86oLg9hz/X2suix/63/OvnmxSL6utJ4cF7sbrj+/4mdmd0SYW5Jop5AqCGXkL1hOrid3pE1f0We575QOXgO7RopakrURqpGrvg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=UoCNIA21; arc=none smtp.client-ip=79.135.106.30
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1791587128; c=relaxed/simple;
+	bh=cuml1WRoVPo5CU/+noegueeRxjpqh8+p6J/SZJnA1Js=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DZGAgXkfarRgjKMkQvAlai9rk8ZQuSk6rY71umAEUKd0F573vmV9+fWOCs8EkzW4V3KP9qybIhePr32O8sQftpKftbjsMkNMpGxeNeJaKIGBG5V1N/BHoT/3CIwg85Z0TS7jwY4vheo/MfN1/F0/C1161ur27o30zCBt2cXcN+A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=A825mXVh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jnDuoouI; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="UoCNIA21"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1791581278; x=1791840478;
-	bh=QXf4hTjVvhY++R7+vZFN3cZjPxa0QWrUt5Tsecb70U8=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=UoCNIA217633Q8zxxTQNQThjgyxxAtGSn29CAP+rTJf6hoWjQW/mHznQ8EANqGhhu
-	 dFTOkeVfQjB1o0PeXvc9y5wJkbHlDMd6BjGp/hMBJMBjHBHYSpqu2zcHtR3IPHdmGQ
-	 0HyiYrFTmdrIv6+4WK9uA1CPOjK+AUSueY87g3qF7L1QKVY/rdNDJQRutSa8hW3QWr
-	 FcBlBpVBPKC7c3NSh1NZ4/739hZq5VvsDEaYCgOK/7iZVGfi4RGJGeLAsjqoYuXTmW
-	 C9NTozV5Av/cexVnDIdKc7q3NlPJ4kBaA+8FWSZS5sOuv277HAqfI2ahaRmwiEYvIP
-	 JnMrZxMFAArPQ==
-Date: Fri, 09 Oct 2026 21:27:54 +0000
-To: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] soc: qcom: smp2p: Start over after a restore from hibernation
-Message-ID: <179158127177.70185.5691100900886332545@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 356a7d20711be57c357883af5010b18ee31e6f11
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="A825mXVh";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jnDuoouI"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 699Khpve3275351
+	for <linux-arm-msm@vger.kernel.org>; Fri, 9 Oct 2026 23:05:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=92iPLLNWa6TK/xvUvTOqX3t1
+	epK+uEt96Kr0e/HgmSs=; b=A825mXVhs+KZwUrOLshBD8MYP9LLoFjL+Yzw3ys6
+	dtB5xLCIer94OMkdcIa3QJJKsjuzxMkafDAmzCDvDRkbTxS9ubh0+WCCjENVhJWU
+	gDhweaud8dn0TW7ARsHFTOjF1H10S3n3jTDeyn6mJizHguPz8ziI35vTSTE16xOg
+	J1kLYlLWQ2UqwOT6DGAcCj/dpzBGVTFWMegWR9qNvf0iSacKFdB9ajhzKC3vue7i
+	cqhlKLASmdGk0rFfJRHB0s6OxR+4SqBmih9YfjYEgnPcr/5BfHXvQVuT30kCgc2W
+	P0KsLXRh0tcHyEW7qi8QF2Fa9HyrVs76IdBtlsrAeMYaIQ==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h74t7h27f-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 23:05:24 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-91b650901a0so6756676d6.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 16:05:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791587124; x=1792191924; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=92iPLLNWa6TK/xvUvTOqX3t1epK+uEt96Kr0e/HgmSs=;
+        b=jnDuoouIQvmXvA9LrB14GrvwcEsgw7GrhO+ZFcxV1c6EVXdHbYqDilYd+wKqNLu4xI
+         w//qxIVgyNY6ABXXhHJYOaicdnSxDQZoaIugIcXuqpLQXvcwNw2B9jM3RcrxLbahDcpX
+         ZBL7JWShiL0wIcC5N/F/IdoV3F/GrwBjp3jcq14tABqWEse2B1OF2aa3wazduN85T6V2
+         52G0Nurp7JU8q1X+ZyS/2A4up4ey3cok7F5FliKhjAl3LP1EnwIPByP8HxCq0ZoWgIvR
+         t+D1ZAOKRI6bg2SzEH6gXainB7CMnW/qKCCM+HttMURFCnGN7Texvmc3S9Tqq3l+enp/
+         Z2aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791587124; x=1792191924;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=92iPLLNWa6TK/xvUvTOqX3t1epK+uEt96Kr0e/HgmSs=;
+        b=WOL3c/JCXO2jowoAAshnrM0fGEY9K4YthZ8wSDxNqH72EL5C/GRaaWCpvqiwoR0tPy
+         kJy0aUSaAcjM7TrrdrtMheOP3dHBIf06bC87kL+aAlPn2A7Q+lLODSuBEhXLhlMdtiLP
+         B2+tocs8PvZXZeiE91ZXk/vQjTOEL/izFTwIfb6j4j6qrpUCsvwR90PByVBKWkBhNkZL
+         AE9iA3+s4Y0HjancflwR/oCDFwsmQtQ3vczlYwgWVRfghKhmL3L9INf0LVkCbVAh9XZM
+         VGiAVmnVk1BeESQh+J8FqLhP4TP5sqw3Iw2GlnhCWAcq08Lt/Qcq1GQtev+A4jsfF6V+
+         dcRw==
+X-Forwarded-Encrypted: i=1; AKwUvBwnKq1S0dg7n/9OY41zl9tty2f8V6+kE+NoEdhtZtaec+VKynkRzX/HQxKYgrnfqdA2oxczj0Byz9ynB0vA@vger.kernel.org
+X-Gm-Message-State: AFq9FYKxJI/hUN2rl1wawTFBuRDvxba/co8As2wIY020vbXk5EkgHPss
+	4WJkhN/r7FWG6/OGhtwNGYUDoeLlkY+UDf2XmXIm5rKGt5CyLn82b4na69MsHSwSwKlDMfBM6nC
+	uqrM3SOk7DhoOGBgW8jVLr0kQ60amuegZKF0HuVPMJq87KxFjoyryfbyMwrB91wsfLbGdju+Fc1
+	WaOTnPow==
+X-Gm-Gg: AYBFou2QuDkYp7WwuPUblpGZ3VbLqfukSAkuY/7de+y+5rE+Fc7IG5ilGVyhuPnscOD
+	3F7tKn6MN2ooH13PYWs2OLO7q3Nad/5LsicBsdJLAWaJ4s97rxkNjyE16fcYw2zjJMFxAzgw15N
+	pplm+ldog+gvxch3PTtWD2sRWYaV00MduVxa/4AfTKBMCKfJiHEm5msuQPwzgmFIsAVD98i8rev
+	oNK0lKyo1zN1c+UVK0ZT2Jo9TS3uC63W0HV+PSwe8u0QhjGPkvUdai+/VcurgEY1nxX3+Fp8swC
+	1WK5n3OkXPPaxphkm58aEr1S1FNCwP0vJaAOYEsCLrg5n2wf0E/YpJWqxko7bPA3YQSgRETPw2T
+	kSDIXBCsjFkt9d7od3mYlX1F81OJyGD/NZbQ8XF/8YVUQAMAzBnNrkWxU0Tj5CQJaAzMuMeyFD3
+	jfyMXKFc3i18OM
+X-Received: by 2002:a05:620a:46a1:b0:93e:95ce:53b5 with SMTP id af79cd13be357-93ebd28b9b7mr596920785a.52.1791587124267;
+        Fri, 09 Oct 2026 16:05:24 -0700 (PDT)
+X-Received: by 2002:a05:620a:46a1:b0:93e:95ce:53b5 with SMTP id af79cd13be357-93ebd28b9b7mr596913385a.52.1791587123677;
+        Fri, 09 Oct 2026 16:05:23 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcdde9bae2sm1004191e87.35.2026.10.09.16.05.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2026 16:05:21 -0700 (PDT)
+Date: Sat, 10 Oct 2026 02:05:18 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: fabricioakio@gmail.com
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Alexey Minnekhanov <alexeymin@postmarketos.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Martin Botka <martin.botka@somainline.org>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: sdm630: Add interconnect paths to the
+ BLSP I2C and SPI controllers
+Message-ID: <k4yulw6hzkiw37ju7tp2bdxbh3kxrffkemyfb2zlxeuk6sul24@j6obth36alho>
+References: <20261009-sdm630-blsp-paths-v1-1-6a86ba193e8e@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261009-sdm630-blsp-paths-v1-1-6a86ba193e8e@gmail.com>
+X-Authority-Analysis: v=2.4 cv=W8atxhWk c=1 sm=1 tr=0 ts=6ac97334 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=OGs46NaP8JcU_4BjHI8A:9 a=CjuIK1q_8ugA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-GUID: GfGu2F5ouomWj2hHRa7t1ZUXfRUfvi_u
+X-Proofpoint-ORIG-GUID: GfGu2F5ouomWj2hHRa7t1ZUXfRUfvi_u
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA5MiBTYWx0ZWRfX3rrrrwQom//w
+ P8K1uHAgY7YAUvTVtH9dekvIydUpP/a5TOljH6S/dAXXLPWFQ7ZR4W+XLNRt1WT3gw2RBQec8Uw
+ bau3QceG0UxSzypesn4HF707Dbczhc0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA5MiBTYWx0ZWRfXzZnqA5RDoVt9
+ D5aVfTvz7XMXIrUKiWZq2BHzMCV0yOZKPrKBWZ2LXmblH3g7LZGZkaqlon2oic9LC7Ef3uEcp/U
+ HY3G8EGzG0V4s0SodHei0OdMDqUIiz3NKgn2Pko5XIPYy9TF43zMvqj3NGbyhc+ent9o2pWJR72
+ e8qLRkZss4WdBCVT93Pnid5h34M5+W6g1CNsw5Lh/ZdYFl3bIhvq0AkzqI2ZfPmHCS3XKyEk0nP
+ vmYKOlsEOToLw4U49rD3yf+fD+8FqJcx+9Q9ggrl64dKqjdhngruiWO2yfpbQCUR0tqouFy57Sg
+ Mmxg4o0wa1d4pSYsJsKwiDoaDelhJl9ytcMjMh/FeHfNGqfeOmIeaiMKE1EGF3GxNvRbagmZoi3
+ wbhHOROuwjalVAitUftKrcf73W72+deGGUxKWDJuFKjeMX2zRiRy0tjPYgtpBrpPi27tg0hd/Gr
+ padd7i9f4NQqiQHTekw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-09_06,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 phishscore=0 priorityscore=1501 bulkscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610090092
 
-smp2p remembers what it has negotiated with the remote processor: where
-the remote's item is, which of its entries are matched, that version
-and features are agreed, and whether the remote's last restart has been
-acknowledged.
+On Fri, Oct 09, 2026 at 05:49:30PM -0300, Fabricio Akio via B4 Relay wrote:
+> From: Fabricio Akio <fabricioakio@gmail.com>
+> 
+> The QUP I2C and SPI controllers move their data through the BLSP BAM
+> DMA engines, which reach DDR as the aggregation NoC masters BLSP_1 and
+> BLSP_2. No path is described for them, so nothing requests bandwidth for
+> those masters while a transfer runs.
+> 
+> Describe the path from each controller's BLSP master to DDR, as the
+> vendor kernel votes it. On a Motorola Moto X4 (SDM630), with the
+> boot-time interconnect votes released and system-level sleep enabled,
+> an I2C transfer running as the SoC entered that sleep hung the SoC
+> without these paths; with them, 5,000 transfers ran through about 3,000
+> sleep entries.
+> 
+> Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
+> ---
+> Tested on a Motorola Moto X4 (SDM630), whose board file is not in
+> mainline yet, on the sdm660-mainline tree. System-level sleep there
+> comes from changes not yet posted. The UART nodes get no path: their
+> driver requests no bandwidth.
+> ---
+>  arch/arm64/boot/dts/qcom/sdm630.dtsi | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+> 
 
-None of that holds when a hibernation image is restored. The machine
-has been through a power cycle, shared memory has been set up again,
-the kernel that loaded the image has created a fresh item for us, and
-the remote starts from nothing.
-
-On a Lenovo Yoga Slim 7x (X1E80100) a remote processor that is started
-after a resume from hibernation never comes up:
-
-  remoteproc remoteproc0: Booting fw image qcom/x1e80100/LENOVO/83ED/qcadsp=
-8380.mbn, size 21592504
-  qcom_q6v5_pas 6800000.remoteproc: start timed out
-  remoteproc remoteproc0: can't start rproc adsp: -110
-
-For the ADSP the driver still has ssr_ack set while the fresh item has
-RESTART_ACK clear. When the remote sets RESTART_DONE,
-qcom_smp2p_check_ssr() sees no restart, and the acknowledgement the
-remote waits for is never written. For the CDSP the driver believes the
-negotiation is done, so the fresh item is left at version 2 while the
-remote uses version 1.
-
-Forget all of it in restore_noirq and build our item again, the way
-probe does. If the remote is still running, as after test_resume,
-qcom_smp2p_start_in() finds its item again and the next interrupt
-redoes the negotiation.
-
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
----
-Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel, where
-this file differs from qcom/for-next only in the __iomem annotations and
-two small cleanups.
-
-- After a hibernation with a real power-off both the ADSP and the CDSP
-  start again, in under half a second each, and the battery manager
-  answers. Without the patch both starts time out.
-- test_resume with both remote processors running passes, and they keep
-  running.
-
-Two things to know about the test:
-
-- Resuming at all on this machine needs the PCI change in [1], and I
-  closed the Bluetooth UART and unloaded ath12k for the hibernation.
-- I stopped the remote processors before the hibernation and started
-  them after it by hand. remoteproc does not do that itself, so a
-  remote that was running when the image was taken is still shown as
-  running after the resume and cannot be stopped ("failed to shutdown:
-  -22"). That is a separate problem and still open.
-
-[1] https://lore.kernel.org/r/179157746908.73485.2343672865542690797@pm.me
-
- drivers/soc/qcom/smp2p.c | 53 +++++++++++++++++++++++++++++++++++++---
- 1 file changed, 50 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/soc/qcom/smp2p.c b/drivers/soc/qcom/smp2p.c
-index 01b8580c9..64fc1ce3c 100644
---- a/drivers/soc/qcom/smp2p.c
-+++ b/drivers/soc/qcom/smp2p.c
-@@ -510,9 +510,8 @@ static const struct qcom_smem_state_ops smp2p_state_ops=
- =3D {
- =09.update_bits =3D smp2p_update_bits,
- };
-=20
--static int qcom_smp2p_outbound_entry(struct qcom_smp2p *smp2p,
--=09=09=09=09     struct smp2p_entry *entry,
--=09=09=09=09     struct device_node *node)
-+static void qcom_smp2p_claim_outbound_entry(struct qcom_smp2p *smp2p,
-+=09=09=09=09=09    struct smp2p_entry *entry)
- {
- =09struct smp2p_smem_item *out =3D smp2p->out;
- =09char buf[SMP2P_MAX_ENTRY_NAME] =3D {};
-@@ -525,6 +524,13 @@ static int qcom_smp2p_outbound_entry(struct qcom_smp2p=
- *smp2p,
- =09entry->value =3D (u32 __iomem *)&out->entries[out->valid_entries].value=
-;
-=20
- =09out->valid_entries++;
-+}
-+
-+static int qcom_smp2p_outbound_entry(struct qcom_smp2p *smp2p,
-+=09=09=09=09     struct smp2p_entry *entry,
-+=09=09=09=09     struct device_node *node)
-+{
-+=09qcom_smp2p_claim_outbound_entry(smp2p, entry);
-=20
- =09entry->state =3D qcom_smem_state_register(node, &smp2p_state_ops, entry=
-);
- =09if (IS_ERR(entry->state)) {
-@@ -774,6 +780,46 @@ static void qcom_smp2p_remove(struct platform_device *=
-pdev)
- =09smp2p->out->valid_entries =3D 0;
- }
-=20
-+/*
-+ * A hibernation image is restored after a power cycle. Shared memory has =
-been
-+ * set up anew since and the remote starts from nothing, so forget what wa=
-s
-+ * negotiated with it and build our item again.
-+ */
-+static int qcom_smp2p_restore_noirq(struct device *dev)
-+{
-+=09struct qcom_smp2p *smp2p =3D dev_get_drvdata(dev);
-+=09struct smp2p_entry *entry;
-+=09int ret;
-+
-+=09smp2p->in =3D NULL;
-+=09smp2p->valid_entries =3D 0;
-+=09smp2p->negotiation_done =3D false;
-+=09smp2p->ssr_ack_enabled =3D false;
-+=09smp2p->ssr_ack =3D false;
-+
-+=09list_for_each_entry(entry, &smp2p->inbound, node) {
-+=09=09entry->value =3D NULL;
-+=09=09entry->last_value =3D 0;
-+=09}
-+
-+=09ret =3D qcom_smp2p_alloc_outbound_item(smp2p);
-+=09if (ret < 0)
-+=09=09return ret;
-+
-+=09/* Entries were added at the head of the list, so walk it backwards. */
-+=09list_for_each_entry_reverse(entry, &smp2p->outbound, node)
-+=09=09qcom_smp2p_claim_outbound_entry(smp2p, entry);
-+
-+=09qcom_smp2p_start_in(smp2p);
-+=09qcom_smp2p_kick(smp2p);
-+
-+=09return 0;
-+}
-+
-+static const struct dev_pm_ops qcom_smp2p_pm_ops =3D {
-+=09.restore_noirq =3D pm_sleep_ptr(qcom_smp2p_restore_noirq),
-+};
-+
- static const struct of_device_id qcom_smp2p_of_match[] =3D {
- =09{ .compatible =3D "qcom,smp2p" },
- =09{}
-@@ -786,6 +832,7 @@ static struct platform_driver qcom_smp2p_driver =3D {
- =09.driver  =3D {
- =09=09.name  =3D "qcom_smp2p",
- =09=09.of_match_table =3D qcom_smp2p_of_match,
-+=09=09.pm =3D &qcom_smp2p_pm_ops,
- =09},
- };
- module_platform_driver(qcom_smp2p_driver);
-
-base-commit: 705529dab1fa872d8b53b09c95e1b03a95573376
---=20
-2.53.0
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
 
+-- 
+With best wishes
+Dmitry
