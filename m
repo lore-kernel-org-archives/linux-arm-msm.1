@@ -1,68 +1,68 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D686C4CDDEF
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 11:25:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 512F44AA008
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 11:25:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791545119; cv=none; b=T2WLjLYdwgx8kvwpFNx1Edws+KGKnSqrCFtlqOPReC25CpLTVAzX9srL8jPKxAnhE8xhb2RBUQAGJVMZvx2U98yw0QkAvYD9ibbWnHOSY4SZEOvOHUmjgOgh7EhRiS3L/YIEYJvXVkuvUEiszeGJoDMjATpXvOiFvql3nWkSXqU=
+	t=1791545119; cv=none; b=i0I21hV2BL+mi+jsu92qV3D5+wLdsJOuUmvC0iudYuscf3FIn3Ie/rDsJ+1j1/VhVsMYMh1jeAs22Joi0Urzr8m8dT2tIl+3scCnlvuyZ08fLtB8Yjdw14O7WLt6Cb/ygC1BExOeob+KP/Wqjm2J0TvoeszqOEfLAItmCGejH+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1791545119; c=relaxed/simple;
-	bh=Ow1g5nb84JaBXwtId7U1Ei7JzeZxrlP38LbY2puBam8=;
+	bh=ZXP6OkY2DxkiTYSnHO0CLOwn5hC6SXDi4hWyiPvZAl8=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=KKnfgaviGhS4zA/xJHuS7z2rIHPWHO9MfVMREzRYXyBZA4x+Ao/xxrQCXd2KcX4lZCPOHxKWeLG3ZeYyQwp8gCJn+v8Uv5Es6l64kA+XBKzaWlbTZX8Qz5ws08UEyWPhqt1lYcp25jDZTeBLanJkWVN2s/2lwTqp3af63H/l3yg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=uQDmbYME; arc=none smtp.client-ip=209.85.208.41
+	 In-Reply-To:To:Cc; b=iRmPdh/xJpTFzyzbKdSV4ptOylq46qM9CgXtsmVb4oTrnLDETpVFG6g7tcweNHOBtrb3dfwv7nILTqjgX1FaE/BiFhusCeFeA2EotvIT663nDmuZLa/7bGqyMjlDzhskfaSpMHIOgj2z0egxdhWbU+GWvW3eh5HScICendOHG70=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=0C4JTQyS; arc=none smtp.client-ip=209.85.208.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="uQDmbYME"
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6a9e5ba741aso5985530a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 04:25:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="0C4JTQyS"
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6afe29c08ccso5294022a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 04:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1791545109; x=1792149909; darn=vger.kernel.org;
+        d=fairphone.com; s=fair; t=1791545107; x=1792149907; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=trob71jrLJmnCTpqAQkVdV8k9io4Vh7M+IWZZGLBcWY=;
-        b=uQDmbYMEU7KJd5um3qYuideomb4P60KzbzDnJfX4B594Co19Jj9F5nsokp9I5JoRHC
-         MDKHBHRtKS9801fG+wEC6jZAVRUL4J6PyJEocYRgel76iCtY1Htp4d4yREGsj1KIv5sH
-         rs6E5Ke1f0Xefw7x0Y1traXYA5uCVkyPQVMUTQlWZ7H/BkFBpeK3kjL4FRQGzmFMjPQn
-         LmQs09cx7Uoeph5nZhTLPgCCxzgZ+ji30+1a55KcWKJRR3qVXWinku7JfySUzsykl+na
-         8Jqmtx+r1zacazmfTtfBnzJ/SeYL+6JtIYpGtFxkFOHMv1onDHAKp7D+yK2NLB9ExHhI
-         pt/Q==
+        bh=Qgqhj3Epuh5RclDvybJ2oNFa673B4IjvzwU5Ux/nnZ0=;
+        b=0C4JTQySJ4riCwDj2WkYktX7WkJJRzsyS1lYm+754aFCn1sO1IY9tNFl6EHP8c85Mt
+         fTezYQ55rKxDjHvAZTVAqNJIQhGSer/bTvVs6oksd4Du4xP/LHKvQhGSDT4HHLNyvSzW
+         /Qh0adv3GKsaPQbJojb5l0OwrMOb4aEqhdg88Yf7RLr+3ie8PIT5cXDgDMrbdLyiB5F3
+         N4HRCfw6DgbDhREQihxNcvKZQxARmhDaAqi23KFgJPYNj8Q1xk6S3eUom/duGlqdk6sU
+         0Un08M2mzP6YYwjXcTALrAySZDnRYd3qNU8o7714nxxWMgwfUSW87VDaKz+svH0XjCUM
+         h5xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791545109; x=1792149909;
+        d=1e100.net; s=20260707; t=1791545107; x=1792149907;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=trob71jrLJmnCTpqAQkVdV8k9io4Vh7M+IWZZGLBcWY=;
-        b=1AEec8/bcouEgR/pVufYGObJQfJhVAF/ygtGMcme7bD3Y01YJ+twoMndtgiMPjTJKZ
-         7B0+7rv/Xrcgo+D4xugh6bcRy2IR/+eHwAOuEvAYLO9e2/hDLJVpNQih0B/NZqvmKC6p
-         eN171ZVOwKgaTwarw+//3znf2bipkpW5eEex4rnsOrzyCoutzq94TKZWWXUTqVw0Hb4b
-         F0DV7y1RuPE/Gswn3AYCmnWbXQ6kZDjHSaqF78Ihyhru5/g37vQyCBlWzvzgaAJ9nBKf
-         uyUC7czMXIKF2EPd+tnHGC5jzXYyvgzgmEc8yrt4VFwbJC/gyoT6pWL/7fDKxnbneYCA
-         hImw==
-X-Forwarded-Encrypted: i=1; AKwUvByl2konoSDynPK6hQRga4cPDfL3JzcyLakq4kUHM8+FvQ00Z3Cs81q58/jShphm5/P9GGILrchUFkjeRKUe@vger.kernel.org
-X-Gm-Message-State: AFq9FYIymWcC/F6+0M3uQZbZMSLf2iezgBLUGoXW8P1V3QzDrbWzK790
-	W+J/tmc8vJXABz+TvmmefeZcZgrf2C+9X67xpilJFsQJMIQhpPpTsD8hvkncuRj5a+w=
-X-Gm-Gg: AYBFou2DHIyoIWsbAX4+lGdrJknxxaKZbtdY8B1gqwWTPVqIrL2VTh6Dqv+CP6tkdgJ
-	NJwOCOJIzMrq5jfr+ECkSDrkrSp0NLT5Wn0l7BuaN3bV9Bw2FSTFv01Kg98HoXZQsC0UqN3hit4
-	5YJZUomfragIoKVb8N3h9/47x9Xfh/ZsF2ymNoRhVCInzSGdGjATLKLMKr1vtRIWUW2YKfCFwST
-	ldIFPU5i9xPF3/I8MmIhcQt1s9/M8OF60QJh6s0bZXHoz6Vg03I09CxwOvt+wuGfAI0RoIrUSMI
-	FZ//M2yus16urkVVhmr/mLH9aelF48Osv7aqoHpoKurTfHpPbkIxryKJEUQ3DwFFaKEGvwGNvCW
-	BK27DnfPWyN61scub+w6vPABev0pZgfJmCOXHSHzemlADZVFeFKZ1iW0n5VJJv9nIAgWxRkUCST
-	uG1jobfA68AxFXveEUrnF1gKHdHfJOSxFRZbzgUaWHeKQ7lHmykp5cuIwuBq47SjPXZlcBIqJYk
-	PZ04rMDnrRiASjHq2Mf9UFvO/VF8/bpICd3dCz4iRZoMTTeSTR5
-X-Received: by 2002:a05:6402:274c:b0:6aa:e3f3:c9df with SMTP id 4fb4d7f45d1cf-6b17c252c9amr1447419a12.20.1791545108898;
-        Fri, 09 Oct 2026 04:25:08 -0700 (PDT)
+        bh=Qgqhj3Epuh5RclDvybJ2oNFa673B4IjvzwU5Ux/nnZ0=;
+        b=CiogpoYoWlNVPnf5CbyFHjSwZwTLoXTsmqmbiGkHNto9MHDHTfktXsLIzu90ROLcqh
+         ughybtqT2i/cMKASPgmEwiewlF5pA4/1im9Ce7WElp1CGDt4349ERaddOu0GsoVnbq17
+         +FKUbTWHlt/5tfM33SiPztlckfBLQS/49WyOK9rievL4/Oy4UnA8eLooAirTUEMH8zcj
+         6rWnFIvXPnuFbloWCpgKIAMusQEV5ADaggNzOFU/P+5LrngU6dV+mRWaNSz/eAcwbtas
+         a63gtJ0R9xZ0D6Nw954KQf8k4Ns7QnmYQwEO0SZRub7Z5dy4T1Hug+BgYURScFUJ6qOi
+         OTsg==
+X-Forwarded-Encrypted: i=1; AKwUvBxlJcvp8KlQuQYb3ZjSFk3tY2mfmZZUHbiVrwvSWyXKnvInmBO6fK0Fvh/0BQcgBaRYA2lUG4Mj29l9VszE@vger.kernel.org
+X-Gm-Message-State: AFq9FYKZ5Wf4PO1zArFqHzQ9GXez9GNqk3omY86M4QQrwLnmR42Tlisy
+	UKHeEB/0X6WdxzyV4661DFmZNrrK24IoetkC+rRHJwoyZTvQpCS5yIJPRHWOmpz2O5E=
+X-Gm-Gg: AYBFou08eLCfdKTp1adcMh6jINCyko2ZwSLF3Mnfty2h8UsMW7zIGLILFCWXeM+zgBY
+	GJyHBIbDkWUXWdR0RtVE+/dI0I3xFuc6ECJFOC8yGli/PlYc9cHP+wj8aAGRJtX20UqISK6R+1o
+	vUdoWpGPDu4V4yqvVM6H2Dt9PTnAQCt4I8XHEah7b0mSlW/RGn6Ah7Dndd/RChy1xp/8BF72UXN
+	VhnYodOubMmNnfxWOqowT9kurf3XTMKNSHFC+e4fwuWnno+RaQxuMLbLSrAcQRzOtE608V1BrjN
+	6Yj/zVBiknN3UGGwXJf4gZGR8EojM5/vLlMSsosn9ZvI6RQdqiLmouOwfHbcdDZTwyoUvi7pktH
+	paj1yrP0QjceYl6y/osjaGuHiK6G4kII8EvGdc68XUQnhi2A8g6OvCeCY7WcBQCFOWmlT0iZPWQ
+	WzFZ1gzHDdqqayQ4DMO/Rpuk21Z3ZiKQYTgpY+IoFeuFqOiiCE0KYLtpl0IcFIeKgpv9mf6IJnT
+	DC3oLYMdwH6w2Djm1kadcJlnW3vqu096O3PKQ==
+X-Received: by 2002:a05:6402:46c5:b0:6aa:9fd4:35fb with SMTP id 4fb4d7f45d1cf-6b17c2a3a96mr1071864a12.8.1791545107423;
+        Fri, 09 Oct 2026 04:25:07 -0700 (PDT)
 Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b179dd3597sm985764a12.14.2026.10.09.04.25.08
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b179dd3597sm985764a12.14.2026.10.09.04.25.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 04:25:08 -0700 (PDT)
+        Fri, 09 Oct 2026 04:25:06 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 09 Oct 2026 13:25:02 +0200
-Subject: [PATCH v4 3/4] arm64: defconfig: Enable Novatek NT37705 panel
+Date: Fri, 09 Oct 2026 13:25:00 +0200
+Subject: [PATCH v4 1/4] dt-bindings: display: panel: Add Novatek NT37705
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,7 +71,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-fp6-panel-v4-3-7c3819664778@fairphone.com>
+Message-Id: <20261009-fp6-panel-v4-1-7c3819664778@fairphone.com>
 References: <20261009-fp6-panel-v4-0-7c3819664778@fairphone.com>
 In-Reply-To: <20261009-fp6-panel-v4-0-7c3819664778@fairphone.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,36 +86,105 @@ Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  Luca Weiss <luca.weiss@fairphone.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791545105; l=791;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791545105; l=2354;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=Ow1g5nb84JaBXwtId7U1Ei7JzeZxrlP38LbY2puBam8=;
- b=zcZTLYpESs6HkFuhiJJO4ex7iS3OKoMwbYeYOixjFkTwhHKF6/mXLg00Wm2n2nZuJbFx10Srw
- hzYG+p/eC5fClyEBuI4SYS1ZuYA1CMxxotWYaEVsc48KMcsuoKB/Vpe
+ bh=ZXP6OkY2DxkiTYSnHO0CLOwn5hC6SXDi4hWyiPvZAl8=;
+ b=C+M4NZ57qJgderrEKqwE1gICaP8nnZl/AfQkRQF9zw8yx5PfCq072o6iLhRO4Gg79d2Ci7KPe
+ Wg1nfHk6yJXCzznwRDm1eNVnS3IC+4sMqtW8RAqWHzth9V7ZH1s9DQc
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Enable the NT37705 panel driver which is used on Fairphone (Gen. 6).
+Novatek NT37705 is a display driver IC used to drive AMOLED DSI panels.
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Describe it and the panel in the Fairphone (Gen. 6) (BJ631JHM-T71-D900
+from BOE) using it.
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/81a3c207-4d8f-490f-8e2a-6f3f4c2acd35@kernel.org/
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- arch/arm64/configs/defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ .../bindings/display/panel/novatek,nt37705.yaml    | 71 ++++++++++++++++++++++
+ 1 file changed, 71 insertions(+)
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 6ec8d3a69c98..1d4afc733c8a 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -1023,6 +1023,7 @@ CONFIG_DRM_PANEL_KHADAS_TS050=m
- CONFIG_DRM_PANEL_MANTIX_MLAF057WE51=m
- CONFIG_DRM_PANEL_NOVATEK_NT36672A=m
- CONFIG_DRM_PANEL_NOVATEK_NT36672E=m
-+CONFIG_DRM_PANEL_NOVATEK_NT37705=m
- CONFIG_DRM_PANEL_NOVATEK_NT37801=m
- CONFIG_DRM_PANEL_RAYDIUM_RM67191=m
- CONFIG_DRM_PANEL_RAYDIUM_RM692E5=m
+diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
+new file mode 100644
+index 000000000000..850d91e25af5
+--- /dev/null
++++ b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
+@@ -0,0 +1,71 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/display/panel/novatek,nt37705.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Novatek NT37705-based DSI display panels
++
++maintainers:
++  - Luca Weiss <luca.weiss@fairphone.com>
++
++description:
++  The Novatek NT37705 is a generic DSI Panel IC used to control AMOLED panels.
++
++allOf:
++  - $ref: panel-common.yaml#
++
++properties:
++  compatible:
++    const: boe,bj631jhm-t71-d900
++
++  reg:
++    maxItems: 1
++
++  vddio-supply:
++    description: I/O voltage rail
++
++  dvdd-supply:
++    description: Digital voltage rail
++
++  vci-supply:
++    description: Analog voltage rail
++
++required:
++  - compatible
++  - reg
++  - reset-gpios
++  - vddio-supply
++  - dvdd-supply
++  - vci-supply
++  - port
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/gpio/gpio.h>
++
++    dsi {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        panel@0 {
++            compatible = "boe,bj631jhm-t71-d900";
++            reg = <0>;
++
++            reset-gpios = <&tlmm 12 GPIO_ACTIVE_LOW>;
++
++            vci-supply = <&vreg_l19b>;
++            vddio-supply = <&vreg_l9b>;
++            dvdd-supply = <&vreg_oled_dvdd_1p2>;
++
++            port {
++                panel_in_0: endpoint {
++                    remote-endpoint = <&dsi0_out>;
++                };
++            };
++        };
++    };
++
++...
 
 -- 
 2.56.0
