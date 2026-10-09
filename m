@@ -1,37 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3061B2D7D47;
-	Fri,  9 Oct 2026 20:45:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB46344021;
+	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791578746; cv=none; b=FhpI0GSeQLkpyrAeiedwblIsuO7upbd+G+7RT7Y+Mt+Wkwr9JQkttI5bk4vB71h6kiPhxr6cldyme3Ogcvu0O/CnIwZZImRzg1wJSF9I6YbHaIIDJkkTDFb4FhMukDEdxvzKxvlTIJOL6Qx4kmocXxE6plVzPhGsk8g/k80hLNE=
+	t=1791578993; cv=none; b=goNQ5n1EaSNHcwVaPrF32eZEUTYC/9617HzHjoDdtHoDD656rqYIZ4k7AAstje8y4XZ5V3HSMCdDsaPPMXOAD2SoPiqBjRVH9VZ2sMbTUIx51vdekon6tccVa9Leq/VOsnV0Jcs6VNLKluYP8feOeRMUK7wQvQqyKlFTC129yDQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791578746; c=relaxed/simple;
-	bh=RNeNBFzs9EeyQn3a7mFZBMc+LN7ETfRdtSMC0HY9+wI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=PPQhbynx8MEB1VuukJNM90pBthb7HWI/lnX0JfXenagFFjuV6/1z7CgR7H4iwUM6Hyb22MC+O0TZfqUXEiDXYTs163tXd/m6AML3BhQNMQa9zZ0ucLxyRjZQweQGgA2i9b27A+KedLOG/kJR0+hZCGLy5A3t4VGUINECCZkN/RM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RY+tujRX; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1791578993; c=relaxed/simple;
+	bh=bS8ffElq8Vg3QV8tgH8g3k8lB4aEbkKQfj/QlcnNgCs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=rDFbuasNPPWz72czyCkbBPspO2c1s4fV88TGdl0kPV1a810Ojnp8mSO1ueqYe5jQ8pQrUbtdE9VxBxKbIKAaPDO/v9KnpAoYkOdsuEzhqrpmDGoMmPqJQ7CjrJUMU83Bim63V6G2JPCw8vdGBsN5q2Z0YioGhXU9rUWqPQKuNAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I2AXzG51; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RY+tujRX"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E5676C2BCF4;
-	Fri,  9 Oct 2026 20:45:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I2AXzG51"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B4C0FC2BCF4;
+	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1791578746;
-	bh=RNeNBFzs9EeyQn3a7mFZBMc+LN7ETfRdtSMC0HY9+wI=;
+	s=k20201202; t=1791578992;
+	bh=bS8ffElq8Vg3QV8tgH8g3k8lB4aEbkKQfj/QlcnNgCs=;
 	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=RY+tujRXS+mJKSNYobHAj3uJa0MUWExmrecMcuMYArH8lrpB0cfgBfNLGXrs5uRiV
-	 CXy/dzgKcpHAH7aUsx+HPg6x/gDhIjv78TYBI4nKjfVWPJOgGzIi8ToI4hqEPBvc+/
-	 M4bUUFKJFb68JuZEYvMRUbRirPHYcf9YDFd8vYRY3XWfGhHThbe5YkgczPl8IhRYOP
-	 CZSEDnu75VPbB0H8wuFsEoKdQfy8s4MRWBPOyZwFzy62ap6v4anBhYQKmrqUIC2C7k
-	 ZZ8Bsm98E7vOWA/+xY5FLLPTe8BAefGj3xaMUiN0syLSpVIKxNU74zI/Pe78xwiB5/
-	 Ng78sUZ+pAlzA==
+	b=I2AXzG517INSAJu7L2uvJpLsB/Vn7vy8gFLgJhdHNGFNOth74iOcnBht5h+bH4jBw
+	 yb6Jm1olzbuLsN/eAf6Vi/eMnML69+w4lPhFtzYFVz+1GZw9bmJAjrV58c6lZBrnTE
+	 EQRPob9m6reGdvrEq5s67YpzOhykKF0CySvhSKy2yr1feKRWhpyZ/abN1ru7Gcvbdg
+	 mh3YRmh8Cm44siCnAaRAvA2Dw3mnUHKlyAXCRDSXwTRP/SAN8wmB2QrglhaPD5qBfg
+	 R5FnV3E2uMqG4dO4uDXjKYyyxlNCrTMuznXRI3l983MvFk//m8iFnJsluO1ucYO9Q+
+	 1ZJ/ted6tDPcg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D02F9CA9EBB;
-	Fri,  9 Oct 2026 20:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C61ACA9EBE;
+	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
 From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Fri, 09 Oct 2026 17:45:41 -0300
-Subject: [PATCH] interconnect: qcom: sdm660: Enable keep_alive and
- sync_state
+Date: Fri, 09 Oct 2026 17:49:30 -0300
+Subject: [PATCH] arm64: dts: qcom: sdm630: Add interconnect paths to the
+ BLSP I2C and SPI controllers
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,28 +40,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-sdm660-icc-sync-state-v1-1-77b8d2501cb2@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBCF4auUWTswCRoaryIu6mRqp9AomShK6
- d2NunnwLd6/gklRMTh2KxR5quktN7hdBzwN+SqoqRk8+eCIIlpaQiBUZrR3blOHKkgh9ikevBv
- 3DO17LzLq69c9nf+2x2UWrt8YbNsH7Hl9cnkAAAA=
-X-Change-ID: 20261009-sdm660-icc-sync-state-0698d9521f4c
-To: Georgi Djakov <djakov@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>
-Cc: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Krzysztof Kozlowski <krzk@kernel.org>, 
+Message-Id: <20261009-sdm630-blsp-paths-v1-1-6a86ba193e8e@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB0YE1TsVYoLE0cdaW3IaCmId
+ zfW5Vv8v4NyFFZ4ZDtE/orKZ0ko8gz81C0jo/TJYMhUBVGD2r8rS+heGjB066TonC3r0lsiayB
+ 1IfIgv//z2d7Wzc3s12sEx3EC1O244HUAAAA=
+X-Change-ID: 20261009-sdm630-blsp-paths-bb3575c30032
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, 
  Alexey Minnekhanov <alexeymin@postmarketos.org>, 
  Dmitry Baryshkov <lumag@kernel.org>, 
  Martin Botka <martin.botka@somainline.org>, linux-arm-msm@vger.kernel.org, 
- linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  Fabricio Akio <fabricioakio@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791578744; l=3835;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791578991; l=4078;
  i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=I6FZICF6sWxIWjC/karjpr0hJtPbBkE7vMKoHoT2/KI=;
- b=Qjski/AvzPL+FBrKuw+xgtHZ9lyEj98SObL44VXbgHIGZciAb+MzmGuz6LgXNy58DYjBVwq7W
- hntLr2Qx8BvBZYBrpBnDlM2LVPklydy+RwiJW7XmJIGxB7cw8252Cfi
+ bh=98XWULvFlrGsaywNs2+4EVpHMKg2rfljbJphpWqR6lo=;
+ b=Ism90WRgddmgiwZX1UP/7b5dUo0Qz3uuoN+deMvUbCRxczEXZlwEOeo9NinTMHkSZmrKjOPsA
+ 3z8GX6YneovCXnJ8EKrhHQvVc9zpkkyIBx65quj2KnEXVB4wvl7MJAx
 X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
  pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
 X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
@@ -71,97 +70,117 @@ Reply-To: fabricioakio@gmail.com
 
 From: Fabricio Akio <fabricioakio@gmail.com>
 
-The interconnect core starts every node at INT_MAX and only lowers it in
-icc_sync_state(), which this driver never hooks up. Every bus therefore
-stays at its maximum rate, in the active and the sleep set.
+The QUP I2C and SPI controllers move their data through the BLSP BAM
+DMA engines, which reach DDR as the aggregation NoC masters BLSP_1 and
+BLSP_2. No path is described for them, so nothing requests bandwidth for
+those masters while a transfer runs.
 
-Hook up icc_sync_state(). Releasing those votes also drops buses that no
-driver votes for, so enable keep_alive on the providers with a bus clock,
-as QCM2290 does: it keeps a minimum active-set vote and leaves the sleep
-set free.
+Describe the path from each controller's BLSP master to DDR, as the
+vendor kernel votes it. On a Motorola Moto X4 (SDM630), with the
+boot-time interconnect votes released and system-level sleep enabled,
+an I2C transfer running as the SoC entered that sleep hung the SoC
+without these paths; with them, 5,000 transfers ran through about 3,000
+sleep entries.
 
-On a Motorola Moto X4 (SDM630) with the screen off, this takes the
-battery current from 117 mA to 68 mA.
-
-Fixes: f80a1d414328 ("interconnect: qcom: Add SDM660 interconnect provider driver")
 Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
 ---
-Konrad Dybcio included the sync_state hook-up for this driver in a 2021
-fix of its paths [1], Marijn Suijten posted it alone the same year [2],
-and Krzysztof Kozlowski for eight Qualcomm drivers in 2022 [3]. Georgi's
-concern then was that buses with no bandwidth user would be turned off
-at sync state. keep_alive, added since for that case, keeps a minimum
-active-set vote on them; QCM2290 and SM6115 use it on all their buses.
-
 Tested on a Motorola Moto X4 (SDM630), whose board file is not in
-mainline yet, on the sdm660-mainline tree, with sdm630.dtsi's
-interconnect paths as they are in mainline: all six providers synced;
-the eMMC, the SD card and the USB gadget worked, and the phone
-suspended and resumed.
-
-[1] https://lore.kernel.org/r/20210728222033.52500-1-konrad.dybcio@somainline.org
-[2] https://lore.kernel.org/r/20210904111452.248804-1-marijn.suijten@somainline.org
-[3] https://lore.kernel.org/r/20220427145616.523557-1-krzysztof.kozlowski@linaro.org
+mainline yet, on the sdm660-mainline tree. System-level sleep there
+comes from changes not yet posted. The UART nodes get no path: their
+driver requests no bandwidth.
 ---
- drivers/interconnect/qcom/sdm660.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm64/boot/dts/qcom/sdm630.dtsi | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/drivers/interconnect/qcom/sdm660.c b/drivers/interconnect/qcom/sdm660.c
-index d8c979a12235..82dd0b916e1f 100644
---- a/drivers/interconnect/qcom/sdm660.c
-+++ b/drivers/interconnect/qcom/sdm660.c
-@@ -1514,6 +1514,7 @@ static const struct qcom_icc_desc sdm660_a2noc = {
- 	.intf_clocks = a2noc_intf_clocks,
- 	.num_intf_clocks = ARRAY_SIZE(a2noc_intf_clocks),
- 	.regmap_cfg = &sdm660_a2noc_regmap_config,
-+	.keep_alive = true,
- };
+diff --git a/arch/arm64/boot/dts/qcom/sdm630.dtsi b/arch/arm64/boot/dts/qcom/sdm630.dtsi
+index 3a1014804fb0..20225732e4a8 100644
+--- a/arch/arm64/boot/dts/qcom/sdm630.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm630.dtsi
+@@ -1811,6 +1811,8 @@ blsp_i2c1: i2c@c175000 {
+ 			dmas = <&blsp1_dma 4>, <&blsp1_dma 5>;
+ 			dma-names = "tx", "rx";
  
- static struct qcom_icc_node * const sdm660_bimc_nodes[] = {
-@@ -1542,6 +1543,7 @@ static const struct qcom_icc_desc sdm660_bimc = {
- 	.bus_clk_desc = &bimc_clk,
- 	.regmap_cfg = &sdm660_bimc_regmap_config,
- 	.ab_coeff = 153,
-+	.keep_alive = true,
- };
++			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c1_default>;
+ 			pinctrl-1 = <&i2c1_sleep>;
+@@ -1831,6 +1833,8 @@ blsp_i2c2: i2c@c176000 {
+ 			dmas = <&blsp1_dma 6>, <&blsp1_dma 7>;
+ 			dma-names = "tx", "rx";
  
- static struct qcom_icc_node * const sdm660_cnoc_nodes[] = {
-@@ -1597,6 +1599,7 @@ static const struct qcom_icc_desc sdm660_cnoc = {
- 	.num_nodes = ARRAY_SIZE(sdm660_cnoc_nodes),
- 	.bus_clk_desc = &bus_2_clk,
- 	.regmap_cfg = &sdm660_cnoc_regmap_config,
-+	.keep_alive = true,
- };
++			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c2_default>;
+ 			pinctrl-1 = <&i2c2_sleep>;
+@@ -1851,6 +1855,8 @@ blsp_i2c3: i2c@c177000 {
+ 			dmas = <&blsp1_dma 8>, <&blsp1_dma 9>;
+ 			dma-names = "tx", "rx";
  
- static struct qcom_icc_node * const sdm660_gnoc_nodes[] = {
-@@ -1662,6 +1665,7 @@ static const struct qcom_icc_desc sdm660_mnoc = {
- 	.num_intf_clocks = ARRAY_SIZE(mm_intf_clocks),
- 	.regmap_cfg = &sdm660_mnoc_regmap_config,
- 	.ab_coeff = 153,
-+	.keep_alive = true,
- };
++			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c3_default>;
+ 			pinctrl-1 = <&i2c3_sleep>;
+@@ -1871,6 +1877,8 @@ blsp_i2c4: i2c@c178000 {
+ 			dmas = <&blsp1_dma 10>, <&blsp1_dma 11>;
+ 			dma-names = "tx", "rx";
  
- static struct qcom_icc_node * const sdm660_snoc_nodes[] = {
-@@ -1698,6 +1702,7 @@ static const struct qcom_icc_desc sdm660_snoc = {
- 	.num_nodes = ARRAY_SIZE(sdm660_snoc_nodes),
- 	.bus_clk_desc = &bus_1_clk,
- 	.regmap_cfg = &sdm660_snoc_regmap_config,
-+	.keep_alive = true,
- };
++			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c4_default>;
+ 			pinctrl-1 = <&i2c4_sleep>;
+@@ -1919,6 +1927,8 @@ blsp_i2c5: i2c@c1b5000 {
+ 			dmas = <&blsp2_dma 4>, <&blsp2_dma 5>;
+ 			dma-names = "tx", "rx";
  
- static const struct of_device_id sdm660_noc_of_match[] = {
-@@ -1717,6 +1722,7 @@ static struct platform_driver sdm660_noc_driver = {
- 	.driver = {
- 		.name = "qnoc-sdm660",
- 		.of_match_table = sdm660_noc_of_match,
-+		.sync_state = icc_sync_state,
- 	},
- };
- module_platform_driver(sdm660_noc_driver);
++			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c5_default>;
+ 			pinctrl-1 = <&i2c5_sleep>;
+@@ -1939,6 +1949,8 @@ blsp_i2c6: i2c@c1b6000 {
+ 			dmas = <&blsp2_dma 6>, <&blsp2_dma 7>;
+ 			dma-names = "tx", "rx";
+ 
++			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c6_default>;
+ 			pinctrl-1 = <&i2c6_sleep>;
+@@ -1959,6 +1971,8 @@ blsp_i2c7: i2c@c1b7000 {
+ 			dmas = <&blsp2_dma 8>, <&blsp2_dma 9>;
+ 			dma-names = "tx", "rx";
+ 
++			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c7_default>;
+ 			pinctrl-1 = <&i2c7_sleep>;
+@@ -1979,6 +1993,8 @@ blsp_spi7: spi@c1b7000 {
+ 			dmas = <&blsp2_dma 8>, <&blsp2_dma 9>;
+ 			dma-names = "tx", "rx";
+ 
++			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&spi7_default>;
+ 			pinctrl-1 = <&spi7_sleep>;
+@@ -1999,6 +2015,8 @@ blsp_i2c8: i2c@c1b8000 {
+ 			dmas = <&blsp2_dma 10>, <&blsp2_dma 11>;
+ 			dma-names = "tx", "rx";
+ 
++			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
++
+ 			pinctrl-names = "default", "sleep";
+ 			pinctrl-0 = <&i2c8_default>;
+ 			pinctrl-1 = <&i2c8_sleep>;
 
 ---
 base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
-change-id: 20261009-sdm660-icc-sync-state-0698d9521f4c
+change-id: 20261009-sdm630-blsp-paths-bb3575c30032
 
 Best regards,
 --  
