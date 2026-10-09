@@ -1,299 +1,154 @@
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CCD74DD3C3
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 13:44:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D91C44DDB4C
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 13:50:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791553452; cv=none; b=nKYACqu8CUBRJbxwj5YEKKQJthf8y/yKYFLH28yjK0/kQa08TsCriYEOqk1+q1Jza4bkiN36v7nX3+BCWW/BhgdsQUIxzfofHvTp0U9IU97srZYv04jI0h3oG6J8IAbSt9I19W3n/ZhZL4C1yazp4ZaxrQUuh0qKNYDPv9/vF0k=
+	t=1791553847; cv=none; b=CK1zHzGMXC6RCvB5F+LxDrj5cfVLqIyYMm5NyQ1hzYS9ahacoHDwQuN45XlQfPnZUdvpz4kdqxAwJ4A5H0af3tgED7B+9/CERsFaZJMGhaRizJtsc+lq0WRCHZItf4hAZQhB2KEHugDdrsCvtPMqvi3AbCmFU+iO9zKBWWc0rJw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791553452; c=relaxed/simple;
-	bh=BakjqIoUF2dlef5BwvpXbTZHoWoCLddCRgN7G2pQUKA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pl9MWZ743zNU1/0AVR+DUcSXAfV+X1xEu5v0UE3vkbnLmSLvSLCRIofqG5b5hFwh0oTv1eYUSPf+RUIuQqLf+YKnDFV4x2B/N07ny31aOgqtBi5GKqD0uXIu8DDhGDe2Ga1yK7xRJS7YpBdwkjVSv2+XZ8tUYYd+VRRY5cZ5r4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=NM128vmt; arc=none smtp.client-ip=209.85.222.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1791553847; c=relaxed/simple;
+	bh=stBxVgdNOgQWunu8kaDx/txPbyMtClwM95nZL+C2jD4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VbNg89o3AKGiko4ynV2wdZw2MB50V2gyMo43nTUyPP9w3mhSN4HRdSJm+GdVM0fKHdzeMwCvAg8sgkOvCbtxRxR/tB0qXojnpOwW4PLmm1VS+zg3dxv/INhQ8gRcGb+P86CCAzxIDQlvPsOb9zyK+pXru8iO2EH7yAU+NVj1T4o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X91fTtJ/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZG0/JRzt; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="NM128vmt"
-Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-93cbc3ab2fdso307123085a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 06:44:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X91fTtJ/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZG0/JRzt"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 699DKJWY3024176
+	for <linux-arm-msm@vger.kernel.org>; Fri, 9 Oct 2026 13:50:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=7rTJtxguyvS4KOXPA+y+we
+	c2wHZ2XQZWGXcO09Ab0HI=; b=X91fTtJ/lv+mBrT4q93YwYkc2D9arYrDW9twvH
+	k6LMNgNgSdstvuwgU4/ZoFhTDXXn1shQv/zF4Pjzhr5621M1KHYoDMrMGsV9Zw2m
+	HgsjNLyL7LVNeqOvfHngPnl/Hg7OpKWxk5GUdJYTsWNi5+oKkkuqVZdceqR80+DJ
+	iDLgU31qxIjEIJPHNmPOdp9dOGrVDyWXUp/00CJ3EbvfvAhoqqCjp6AzRFREEhWt
+	Buh+mc94rE/GE0nte+J7BRQoHM08G/tZED+6ykCAa6LRU6kGxAzn9gh/m+N0oNle
+	R99kSbDKQCRi1H64q6dyy1GeeDpo5l64ik1HMvOZLhD5bvTA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6fxwbtqx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 13:50:45 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e80ef3e0a3so26119435ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 06:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1791553449; x=1792158249; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=I7JSMLmgxrZlpqG/1fBPvESDCwzbPNyS4PWiTgAV+mk=;
-        b=NM128vmtYZsNkuTAyqbbdNzjYltyli/mQ66sV3uQm+BMt8wsMu0lkcbU3vz9mI0V8l
-         rWhQjXX5ubizmWMrME5eiuVeRB92a3HWlrjBrdXqB1axHX1gBref6Zb1LoiZbUZ8RNxU
-         Khbr0giwvH4y5pSkx6gRiQ5kxuZS7AQ0pbSdquFdcoelLNx0KAhXs8VxSZ1piN+OBOha
-         BDe/pix7Lba50Fnz76scWX7gpmJJ9ALw1DBZZLwm3zi4ghUBEGNqUSiQAdZBQOGvQPbR
-         6Znd40ETi7hYB+Pakth0jnpygI6LMmcNf2hRojlCpGG905YQkC9/SJXy2deAOnjcEaKd
-         B5VQ==
+        d=oss.qualcomm.com; s=google; t=1791553844; x=1792158644; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=7rTJtxguyvS4KOXPA+y+wec2wHZ2XQZWGXcO09Ab0HI=;
+        b=ZG0/JRztd0Lokjw71BBiXHRTxIjVbbWPUxpU1OElhJW7O9TCks79ZekmfT13Q/t9q5
+         lZGY+7XustKasaPXD1bb4QICHKVoT4OCKivTM/CQFnFXMvXMG71P/xobj0Dv4rsI2RD4
+         qqVb2MnYXI0kBJpKX5U14HC9FEdcNRQ2fqSuDaAt+OPxKTT9Bbpc2YZW6hNa/xx8XbG/
+         cKOrOXXr2Ymo5JvLyXr4Q9cXC6Qbrg9TM9S3DHMSmGFWaBW4Po/9EHbWcbJIsN6YK4eT
+         tANjWjf9O7M/foHJSi81co/g6aUlrDtiE/H1rgWn+PAFaDBvQNbL5YdWjPd4CI9/9y/t
+         KebA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791553449; x=1792158249;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=I7JSMLmgxrZlpqG/1fBPvESDCwzbPNyS4PWiTgAV+mk=;
-        b=f0ZCGt+if+rBJSQ/vBvfFWQXIo/hwDfE3peFpiiKiSpCS576/rvr7/zH3T16Adii3l
-         FbcFoll1EjomgmGjritvaF7cZjahdSxEkgksMvSQ5oBPg+6Rr4reHCKWqVSQtZde6j6d
-         hjBGAbQKKWRG6iknkjaPA+M4+mazgcwWbiValVAirbdOkLXTAWXS9DHtcPgy7qc8bbD/
-         IJLkVWrsLrqagpXZvehu9Vupm0mVAHZ9OmyyiFuelayJ95uwLpfaFcoHhwWOIV+pLnqU
-         9ajQ5MycU/jmS9FC1pPAJsF3CspGUQpfpWtvNTSVc5/UuxLD3QSzRG41iI0vHnU5Ggt+
-         mJ8g==
-X-Forwarded-Encrypted: i=1; AKwUvByrrUAF9Z1vSIaWqfXFXR/iEBa4vtQE/njGXsJOIB7cug2v0rMEPM6JKRITlRJL+l6HBKRM9GWsYjj9ysuU@vger.kernel.org
-X-Gm-Message-State: AFq9FYJQB3MWNAMUMKJPzE4ZzaDxCGlJpkqPcCGoxs/XwgVbsNtVx4GK
-	jzgFcyinUNEPkuS+u82KcC7oU2cmnlx/vtliaDlyW8m8fsrfKGoglw37Kb9c+9PiR8U=
-X-Gm-Gg: AYBFou3f4DVYUVelaSQWvxuSiJjq8JyEbRE4JHNl/eILkyfe9n4cISbrp5zMPALQ0BH
-	v5boi7Kdr8KzV4MfVjZ0i1NjJuYx0by3B2Jm39OnZ37SEExZs+n01+5L8raGAQKO9cs4zmEMexo
-	7z2eoUdWq0Hmn7Tzbm55B8ZAi6tzHoSQAWYdIx+pBBAb3hV6XIXXdb92sOHedUhtXYrsRvTDBdv
-	OwOvPhhu2y02++ILD+T5ggIGfzOwcGOAEjLDNJ3mo6dY7sz/j4r95+yh2kXlRBluDHXBO13mCV0
-	eR/7REpdDoiDlDiQBuPcygODwrq0M4zgemoYIjAJ5PSwmjZrZ851dTkMAS3ZqbNbo8qJA6SuVb+
-	HULLbuW+RZudmugg/9+akC3h5X6ZpTuQ8qTjLW0WoZg3jJTshgRT8B8KS0BfbUa13MBKPQNfEjV
-	WG8K4VivDTzI/ONjwiiuChoMNLwxfJrqZKF5Q6wYJfv0zHcbP+J12NraJMsBlCaxya5UGy65A=
-X-Received: by 2002:a05:620a:8018:b0:93e:7ddb:5098 with SMTP id af79cd13be357-93ebd21138fmr276133285a.25.1791553449022;
-        Fri, 09 Oct 2026 06:44:09 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93eb98cd599sm186678485a.39.2026.10.09.06.44.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 09 Oct 2026 06:44:07 -0700 (PDT)
-Message-ID: <b190fe58-364b-4b94-9cab-c5f81f874289@riscstar.com>
-Date: Fri, 9 Oct 2026 08:44:05 -0500
+        d=1e100.net; s=20260707; t=1791553844; x=1792158644;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=7rTJtxguyvS4KOXPA+y+wec2wHZ2XQZWGXcO09Ab0HI=;
+        b=LxDnOYj8E53MtJYc4ofUo/omCyzxfJxqi4o86ypFWM99XRVghWcmqRa77RV18z+1r1
+         CDIqq84ufOgzOhgw9Q07bjxngVjcEowoBLKIrxqkVIHe57TrhH6YovzVtt4f+pvmW0Xz
+         XG6ALzMMY0vzhqT7/kd9zy0YBJh2rpe4R1D+CQpm18RMPxyhO0Ui2wEV2LuqzwR7AY8B
+         TmBxDpHnIpcGZzqYLn0NRir0Jm41d/w+C1A+JZrYf6BY7bdpbnG/QjINWSsD73Zcpdmf
+         DHlujxuC6Db6UfGbaLaHyg5r0ThKuh4DlI0bK48A2O2V5GW07Ykox9m6EbCZshtGh7SJ
+         pNKw==
+X-Gm-Message-State: AFq9FYJJ+OQViEx6Udp/gwBx3YGOABZ1O4W71E5BPRhszkfA5WYJkc7A
+	AunQPA1N6wuGaTK5qTp7Px9oI4PJAeRl/nevGqgbxb/oTDsPwNvp7R/TnxpJPQmGoQakA5yhh37
+	CTm+zMXar6P/V6dH6rXxV4pViP+cYkhrlm/dg2V4uz8W+2BJPNqlf+XOPDC62PFFqyr532Vi5YP
+	Ji
+X-Gm-Gg: AYBFou0vW3pRYP6fDXGsoz8CunF4evlx7eLfgKmmLhfdeun8RAy14EgTmglmMtNePrX
+	MSqD7UXzgxKvbM7AQ+NnEwvVpLUJPhqKqzF3QXcPb/Sc71Qz2O07Vtg7xfrQlXYaY/Pa3PDJYIH
+	Fi/2mzFu6FVswjx+gOkQaZGWlvN6z+uZGfQJ6iB+nYrd9ijKEUjrbIL1UvMq5n+UlietAu/OLTb
+	8kBe38g+cprUSb8dcR6WyWRtsaYyXa2jwo3TxNu1FSjdgyK6REtsyjt5EPDGAymIwIeoYQJ0K2Y
+	yhkzgFt5InV2W0+YXU2/WwfK7nVVslHjmXTXtQ7lwME72zvN4IJcYupF+Sv0rwpIAE0XpA44B27
+	YPZaPOEp5clnPBbqreXAVdhS8q+4vSQPomwkvUYSL02qP0aqhObZYBZnaUXp0VMZouuPFd/7j9E
+	UoxSEyQDMgWaQi14sarneywiv4JpAzBD7ob6k=
+X-Received: by 2002:a17:903:2305:b0:2e4:949b:1ea1 with SMTP id d9443c01a7336-2e842cd4a63mr16545255ad.55.1791553844463;
+        Fri, 09 Oct 2026 06:50:44 -0700 (PDT)
+X-Received: by 2002:a17:903:2305:b0:2e4:949b:1ea1 with SMTP id d9443c01a7336-2e842cd4a63mr16544985ad.55.1791553843829;
+        Fri, 09 Oct 2026 06:50:43 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8422c9944sm9574135ad.64.2026.10.09.06.50.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2026 06:50:42 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Subject: [PATCH 0/2] Add LLCC configuration for Qualcomm's IPQ9650
+Date: Fri, 09 Oct 2026 19:20:30 +0530
+Message-Id: <20261009-ipq9650_llcc-v1-0-572e40b18522@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: clock: introduce
- toshiba,tc9564-clock.yaml
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
- linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, Daniel Thompson <daniel@riscstar.com>
-References: <20261005230927.2000398-1-elder@riscstar.com>
- <20261005230927.2000398-2-elder@riscstar.com>
- <20261009-gifted-stylish-tortoise-95b14d@quoll>
-Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <20261009-gifted-stylish-tortoise-95b14d@quoll>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACbxyGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDAwNL3cyCQkszU4P4nJzkZF1LA+MUc1NzMyMLiyQloJaCotS0zAqwcdG
+ xEH5xaVJWanIJyAyl2loAK1M5dnAAAAA=
+X-Change-ID: 20261009-ipq9650_llcc-903d7576288b
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Conor Dooley <conor@kernel.org>,
+        Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA1NSBTYWx0ZWRfX4a9yshwcdAw3
+ 29HowEwGWZe8x/lgWeZ3nFT7wcBnDRRWvkAsycM97d/oQwAk2+s+MZbZSooYX+Ih9+9OC9Ybau2
+ l4ycv60fzgw19xIjTkUecf+jBe1A119SfV5d8ryicBrxL28mRJZActyBmPzU8dGQHVfEqbHVxO2
+ goBhw8saBQIDq/g2gdg86rOfUyML7sUVvzeMMnrCnWa3HYMMFCqnsn2LnpiO1VuDS3ydUrT6pgj
+ LKY/6gn8NdOvZeuByvtqcCcGuew5ssH024MJdhkK72peH/NpFKic2ZomKZBJQWP3anK4U5iojpL
+ Ydqut0FAlmPsBS1IjIJqPTkRQmEY2tUcpiM7bnr9tdfUc4bkXLJAQd5+aFGDPmohkK9WYQRFZSd
+ niuRUBzAwylqh8Q6sgqo3KizM3aPrPBoMPEIc+ZbOaQPnkW+IX/Y+1at2kz8l4nod2cHks1LlaD
+ hqCtoLpLe5rmVpFUC/Q==
+X-Proofpoint-GUID: naj2010nzMEaZf3RLjExERoun17Mzu8Z
+X-Authority-Analysis: v=2.4 cv=cMB1IVeN c=1 sm=1 tr=0 ts=6ac8f135 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=rfC8kGU1DnSi0xxC8ZoA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA1NSBTYWx0ZWRfX1AQ8jvTLnp19
+ p4JjZx88ARxb/iIwpqctMF2Oz9rE+vbi38MDKIOt4aAPZj8lEyRVfHVz749DwiQx1EtPDawG8v7
+ G/hZd4QeUeRcsVU5iOVRD6yhvYe9WXU=
+X-Proofpoint-ORIG-GUID: naj2010nzMEaZf3RLjExERoun17Mzu8Z
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-09_04,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 spamscore=0 lowpriorityscore=0
+ malwarescore=0 adultscore=0 bulkscore=0 impostorscore=0 phishscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610020000
+ definitions=main-2610090055
 
-On 10/9/26 4:31 AM, Krzysztof Kozlowski wrote:
-> On Mon, Oct 05, 2026 at 06:09:24PM -0500, Alex Elder wrote:
->> Define the binding for the clock controller functionality present in
->> the Toshiba TC9564 SoC.
->>
->> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Alex Elder <elder@riscstar.com>
+Add the system cache table for IPQ9650 and the IP version is v7.1 but
+similar to IPQ5424, there is no broadcast region.
 
-I'm just about to send version 3 of this series (and
-then a new reset series derived from the code that was
-previously combined with the clock code).  Some things
-related to what you mention have changed.  I show that
-below, but also respond to your other comments, and try
-to advocate for the approach used.
->> ---
->> v2: - Only define clock information, not reset information
->>      - Reworded description to avoid talking about software
->>      - Clock IDs are now consecutive (no more commented-out values)
->>
->>   .../bindings/clock/toshiba,tc9564-clock.yaml  | 54 +++++++++++++++++++
->>   MAINTAINERS                                   |  7 +++
->>   include/dt-bindings/clock/toshiba,tc9564.h    | 34 ++++++++++++
->>   3 files changed, 95 insertions(+)
->>   create mode 100644 Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
->>   create mode 100644 include/dt-bindings/clock/toshiba,tc9564.h
->>
->> diff --git a/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml b/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
->> new file mode 100644
->> index 0000000000000..329b8f002cf2d
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
->> @@ -0,0 +1,54 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/clock/toshiba,tc9564-clock.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Toshiba TC9564 Clock Controller
->> +
->> +maintainers:
->> +  - Alex Elder <elder@riscstar.com>
->> +  - Daniel Thompson <daniel@riscstar.com>
->> +
->> +description:
->> +  The Toshiba TC9564 is an SoC accessed by a host system through the
->> +  upstream PCIe port on the PCIe switch it implements.  The switch
->> +  includes an embedded PCIe endpoint that provides access to various
->> +  SoC peripherals (including a clock controller) via its BARs.
->> +
->> +  A total of 21 clocks are implemented, though two of these are not
->> +  controllable.  Access to the clock controller relies on PCIe being
->> +  functional, so the PCIe clock is assumed to be always on.  Similarly,
->> +  the PCIe controller relies on I2C, so the I2C clock is also assumed
->> +  to be always on.
->> +
->> +  Clock ids are defined in <dt-bindings/clock/toshiba,tc9564.h>.
->> +
->> +properties:
->> +  compatible:
->> +    const: toshiba,tc9564-clock
->> +
->> +  toshiba,config-syscon:
->> +    $ref: /schemas/types.yaml#/definitions/phandle
->> +    description:
->> +      Phandle for the configuration space system controller.
-> 
-> I do not see my previous comment addressed - you have no resources here,
-> so this belongs to the parent. You responded something about pci-ep, but
-> the parent is not pci-ep. Open your code:
-> https://lore.kernel.org/lkml/20260918165234.687224-5-elder@riscstar.com/
-> 
-> I clearly see code like:
->    syscon {
->      clock@ {
->      };
->    };
-> 
-> so I do not understand what pci-ep has anything to do here.
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+---
+Kathiravan Thirumoorthy (2):
+      dt-bindings: cache: qcom,llcc: Add IPQ9650 compatible
+      soc: qcom: llcc: Add LLCC configuration for IPQ9650
 
-What I have now (about to send) looks like this:
+ .../devicetree/bindings/cache/qcom,llcc.yaml       |  2 +
+ drivers/soc/qcom/llcc-qcom.c                       | 76 ++++++++++++++++++++++
+ include/linux/soc/qcom/llcc-qcom.h                 |  1 +
+ 3 files changed, 79 insertions(+)
+---
+base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
+change-id: 20261009-ipq9650_llcc-903d7576288b
 
-     syscon@0 {
-         compatible = "syscon", "simple-mfd";
-         reg = <0x0 0x2000>;
-
-         clock {
-             compatible = "toshiba,tc9564-clock";
-             #clock-cells = <1>;
-         };
-     };
-
-A reset node will also go inside the syscon, so there is another
-function for that MFD.
-
-The regmap belongs to the parent, and is looked up this way:
-
-     regmap = syscon_node_to_regmap(dev_of_node(dev->parent));
-
-> What's more, I still do not see any usage of these clocks outside. And I
-> still did not receive actual answers (or I missed them) how these clocks
-> are routed OUTSIDE of the connector. You said for example:
-> "Ultimately the TC9564 SoC has a single 25 MHz input clock,"
-> 
-> but that is input. I did not ask how this device receives clocks. I
-> asked how the host receives the clocks from this device.
-
-I was explaining that the clock input gets split into a number
-of "output" clocks derived from that one input.  However you're
-right, almost all of these clocks are connected to blocks
-internal to the SoC.  There is only one 25 MHz clock that is
-exposed externally (CLOCK_REFCLKO).
-
-I think your point (or one of them) is that, even if pci-ep-bus
-is used, the only things that warrant being described with
-devicetree are those that can affect things outside the chip.
-Everything else is not really variable from the perspective of
-the platform, and inner details can be determined (and controlled)
-by software.
-
-
-Our original version of this code incorporated clock and reset
-control inside the networking driver.  Rob commented that the
-DWMAC driver should bind to the PCI functions and "everything
-else...should be under the PCIe switch upstream node in a
-pci-ep.bus".
-
-The only driver associated with the switch inside the TC9564
-is the special power control driver, accessed via I2C.  The
-PCI switch functionality is otherwise provided without any
-special handling, or is handled by generic code.
-
-What *is* available is the PCI endpoint functions and their
-BARs, so the endpoint buses use those.
-
-PCI endpoint bus makes available things that devicetree
-does that are very useful (including a standard way of
-describing connections between blocks in the SoC).
-
-
-I know that doesn't address the "exposed clocks" issue,
-but it provides some background on why things were done
-the way they were.
-
-
-The single exposed clock *might* justify presenting the
-clock controller device in devicetree.  There are also
-resets exposed externally via GPIOs, and these control
-external entities (PHYs).
-
-But I'll reiterate how *nice* it is to use devicetree to
-model the inner structure and of this SoC and the connections
-between its various parts.  The DWMAC device driver can use
-standard Linux clock (and reset, etc.) interfaces to manage
-them--as if they were provided externally, or as if they
-*could* be provided by something outside the TC9564.
-
-There was no need to implement "unrelated" clock driver code
-inside the DWMAC driver.  Granted, enabling/disabling the
-clocks amounts to trivial register updates.  But supporting
-two separate PCI functions that share access to those clocks
-requires adding reference counting logic for every clock,
-and it's just a lot nicer to benefit from the core Linux
-code that already does that very well.
-
-
-This is part of why I asked about the use of devicetree
-overlays.  Can devicetree be used to describe an SoC (as
-if it were an attached board)?  Would separating the DTS
-portion into an overlay make this more palatable?
-
-
-(Is this what the RPi RP1 does?)
->> +
->> +  "#clock-cells":
->> +    const: 1
->> +
->> +required:
->> +  - compatible
->> +  - toshiba,config-syscon
->> +  - "#clock-cells"
->> +
->> +unevaluatedProperties: false
->> +
->> +examples:
->> +  - |
->> +    #include <dt-bindings/clock/toshiba,tc9564.h>
-> 
-> Looks unused.
-
-You're right, it's unused in the example.  I'll remove this.
-
-
-> 
->> +
->> +    clock {
-> 
-> Anyway, if this stays, that's a clock-controller.
-
-OK.  I'm still going to send version 3 shortly.
-
-					-Alex
-
-> 
-> Best regards,
-> Krzysztof
+Best regards,
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 
