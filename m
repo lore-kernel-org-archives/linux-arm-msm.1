@@ -1,127 +1,163 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92DFA38E8B2
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 08:26:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67D7534F46F
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 08:29:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791534411; cv=none; b=EqsLD1B95lX32jGRbA519siYeN9EFqKiNg4ixnDlVUy1DZoJrmTUWvD5vbKCpq9sF0bBE4vC1cmKoT/PkYbOn7Oq9mKKLz7/xBTpr20XGVSQCwQrDVpR8G+yUkxFF664/1l5HIgE6WsScYSdJ0lj/95XuHjZ6DzLJdS2xIc9xH4=
+	t=1791534559; cv=none; b=fkxEZ/HfF3etWaZylTy473mnzPccBhdHz0JZQNsiCEb1Hg9FhKxyNlNRJ958XwVDzjpa694sm4/0E+/mFW0Q/6BiEkKnSHKZb1WdDkte/fdfz3d3LJaTdqmVfMIg+f5M2s6RzVyTSdGwG3XE6XeqpEoGKxcjw3PjgasURUU8Jks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791534411; c=relaxed/simple;
-	bh=CN/RDqciV7FqCK94e/7Y6l661ja6FQu1hE4KqFV/hJU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Q62ldMmj0kTLoT/8vUkVtMPusm+31yiACdfu/COmpZcqWbvFL95JxGdVs25//QWPqjg7hXDD0l4hkVgxDhl9+RD8ets9fGlmVxFMZdE7phsqTAqUVBlfsKI6G5+vMlqUPFSJoctqdA2Wm2j2f8nNxOU6jUK9pdiZ+LSJZMAN8EU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HLKfUwxz; arc=none smtp.client-ip=209.85.221.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791534559; c=relaxed/simple;
+	bh=/SOBR0Ps2BnUTRiVud7w3FAIdcUaSqQ8Mu+izs62k5w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Hwggr4I/R3EFp5iZpy8IlupGp1jVbNsdL5Y/lD06uRe3GwZLqHVr62y1cUgMb4uIK4888a0X+N0Uym1nKs6RliVxVrXpbTS4KQub2U9bCo5lQNBXd8wlROEZvsaHCWz4B6dzXRon8/Ok52y/71KBXn5570ZhR/QNfyvaIuMmPnY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZwbGWNR6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jIniirBy; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HLKfUwxz"
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48afcd7ba9bso2237144f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 01:26:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZwbGWNR6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jIniirBy"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6998KIvG231144
+	for <linux-arm-msm@vger.kernel.org>; Fri, 9 Oct 2026 08:29:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=lXGhk/a8780ZR6oMz9Rsju0v
+	1tiLizXrFKOLc8mUmHM=; b=ZwbGWNR6D867cmEY0fujoxLXXXMdO9GZAdrDv8/+
+	e0SNERucHwLT383fDLSthPXNF1KAzFyvNhpQJhUBAHsaS1eGMckECBE7r894XQQk
+	Hf8rFodpCNW3gHgJDjdoNX1LSzr3ij1M30w0HEd85UsXcuScuTVqri5o+TBEZumM
+	9PtTghEn+2LgCbzKbix7XtgLs3CLFmBWNbsGZfOHxaRcTJghYulP70xg88KJRKQg
+	riZl51lXyfJoHW12Jk9lZkgES4oFXNX2aq5hxnlCE/3hCvN7N15IEZlNVSAWJNH4
+	Xci8lMxRItpQyQ+eog1RXbPullYLbdbfnT93pQ2GRngLww==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6fxu2ne9-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 08:29:17 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-91961d4b31bso123587486d6.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 01:29:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791534409; x=1792139209; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wH620z4UoPNlXk5Xt/Lvob6+Dvky4s07fyD7Cx5ik8Y=;
-        b=HLKfUwxz02brRIJmD/DmuF9sggx/XJquMvCj3GcK+jgFvWJwiWTm4A/mW74S7zrEf8
-         nC7JogflcHzqiCtPLzqBism1QPIa++mwdRw4ShbqrboSZ5YG2mz13CtQHbseiMKZ4Vc7
-         kRbpwgFF+qq1tuUVvftQIjnVhqCps0+ldmEQ8wLKKGVWov7QtojHKahJt4+qNBI2Vq2K
-         TOcZfCV02l0tJBhwZZtFJFiOWye/nh80rM72Xbcc8QqlCyOc4wMMvFYz+t4D70QtXwnC
-         txfmFo2HM5ToV+t1h+FXpERDGSR39eE9XKZLUReTlW55bz7a1AK561h2CY62UzXUq3cK
-         kYKw==
+        d=oss.qualcomm.com; s=google; t=1791534555; x=1792139355; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=lXGhk/a8780ZR6oMz9Rsju0v1tiLizXrFKOLc8mUmHM=;
+        b=jIniirBy6tVc1vv9YmtdQGbWSGHynC6rF8vEBTnzqdxvwVN/CnHHVP5QPgkI9ZlwQs
+         jFqy8TSe28CcXYJv0jsKpNIcgP6tjbrzOOp2jdefoAE6BpDAbzg7Gtc+cjBmBkm58Vke
+         91aLlq8hZDWuVsdhEEvbbKAmMlI+7DBkWwTCKzDmFbOuEi02EuKpRyARmTeSkKtndLaw
+         mldlo9vhy2XxZ4AMZbBtBv8EFP9wdVyazdVc4C04YM1Yc92dySK26g57SAMjbZ+W3Hsn
+         yLf5DWcnsy7YaMESp7mt6ztj8GQL1P+cD8lgkezVsU2jHNQL9vY2TYjl7+etzj1Xc8o7
+         bQRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791534409; x=1792139209;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wH620z4UoPNlXk5Xt/Lvob6+Dvky4s07fyD7Cx5ik8Y=;
-        b=FczS35Wnkezw+G9VujzUghaRUxObw2LZmmpbmj7uF1mGXWp8kdK0+ZdMeuZuWOQ+kX
-         jwRjDS9X9ZXhwVYsAuxRBBWIFD/vIwXU04MAFDl1xuVu034okfdjrgXy0+1EBJ6O8qmP
-         OsOuxdYXtbBE1S6w9Py+o0IjagoTldIk/2BkbAS6fAeNefPDve5uJRweS1T4VsexbyJl
-         PbypK5ivJ48ktIMMrOZVn7hiEk9JlvAwrjmhVvHIn3Ud1ZMuJ3r4XjFgv7WqRPLk5Yg8
-         xJaGFh92V2lnz4QoBQ7RWP7vo/tOGndIPjN8YsJ/mT2l2sB+B74EkdfpD8Ldl2izebM8
-         K8Cw==
-X-Forwarded-Encrypted: i=1; AKwUvByfwbi39yQr+QpXL5obIcNxNjGsp8oAJCpg86rDRzBDtmphlg+koXkIMUqKFQu/JWWhjqLwkC+cYnen7kRu@vger.kernel.org
-X-Gm-Message-State: AFq9FYK2abSHX9rg43Sdjnr5dD+rYpnhQR+uGcg8W7BS5cyx8eM0E6tl
-	fhd21FbQLrpFguh3bchBKj5aCVt5bTYqSsw1dFNu2oRfpucWWM49kH/M
-X-Gm-Gg: AYBFou2voDaUPzGOtKB9icLc2z5Y6tlUlywNLvIy9ufx2/f2wMaQ5FU7BtEy6RoTHUC
-	cUl+3VhOzIQA7Wpc7eNdcg6e9Gm6yFeqXfatX7nKjAnqkr99ADiopCKu08CwOExRCx11ByLTZSq
-	T+n8w8AxpkWPq21Z9Gq3/FRVyjrADjIlEi52S4NNFL04ZxR0QhRtifR93CqPWpvSY0BIkzMebK+
-	Hbtp/qhIsrLoN4ZPvBetywbVgOCnPkKqYSQwFptWk0V5g2lsA+8XrdGXMHr/VjiYvPoemZiQ8AU
-	3LO98TkQfyzHiHJJ28Eo1RaWsMOX1pTuVN3cy+c3VyBFHxu34lrQNNYDS1WeTQR7mN1ODfZcHNw
-	KuYrvM0jYwpaNJ3tp6CH6sctlhdLJ6r8I79aHWFmTUSbb0ubxHUXcBbxsGawgDjEAiCV9FmpIOe
-	3ZralCyT9rBgGMejCTkam7Y4i0Mdk5loe95m61qNAiLYKy6nywKaR0M/3EYWXP9zlmrTt3Xo/lQ
-	GtuEcUwbvS7nw==
-X-Received: by 2002:a05:6000:4a0b:b0:48b:11e1:8bc8 with SMTP id ffacd0b85a97d-48dbace678emr1797471f8f.39.1791534408610;
-        Fri, 09 Oct 2026 01:26:48 -0700 (PDT)
-Received: from localhost.localdomain ([194.154.195.114])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-48db9abce2fsm2698522f8f.33.2026.10.09.01.26.47
+        d=1e100.net; s=20260707; t=1791534555; x=1792139355;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lXGhk/a8780ZR6oMz9Rsju0v1tiLizXrFKOLc8mUmHM=;
+        b=Uiaof4HDky9SDebdLohvoJVZ29kTT5N7gk/tqvLhI+/EP2cscD72N2OfBOkglNGiqD
+         rdB0Eg16Fh0z4iFWGI/O9RPFMwsnR86+dWs3YWAIfat5w/9gu50R2wcAuWE92AcH/k1I
+         Or/K5gC4KEoLcLjmBcMC7wQnLpuU4Sw8j1qZ4C4ZsjmvB6jctdpp9oObzF0jHbMX0Mub
+         TyyyyIB9MWdNelSnny28n9w4oib+EiJ/FaJ412VuNsLMmHdBRGKd6MDGJe6x+bu2zl18
+         ttkBwst1+U4KCOsI6YnLfOsv3CZiv0MWWgCHe1/CrM7XeEEKYqDx5/sURlfV5h0zozjM
+         Dgmg==
+X-Forwarded-Encrypted: i=1; AKwUvBzgLk6to8qgFThKaKuoT/bQWPa2KL9rATkTKKFgqY0LBAbNaFoePjAY8nYmZBdmgI5FcFLBdz0Rxq2gWslY@vger.kernel.org
+X-Gm-Message-State: AFuF++kmrOr887sazJbPxKGhGxsEfoNk2P08EFgIM0dfi82Ol5n924w/
+	ZUU0i7ht78nS9Q8jrQ9ZlkPhb4AoXb1nR1kWUU0NBvHhLsViDKj7e2HlVoK0qVBpI55rvon5ojw
+	bex2hPGPixQS9WTHw5iPwHD3UnWICqPQRo7zmjHFAdzcqPGxfhs6V6Tspsm+e1NgIzwVT
+X-Gm-Gg: AYBFou12gyK/Z2uYfY6N9UDMpslWXCWtG98fxpBB7i9vsiF/N3ii7NU0T8OLfoZR833
+	5LWWDlgKUd/+Ae3WvuH53Q9QeGlL8kYMfd6Tg/cQgyT+cu5Qo8++CyLOr9ZO9KEBK1/WbZW4bJv
+	DI6Zf6T36uUlPpKHjynf5xdn1JIpM0YUK+Nbkne40HXu6Q++yf01+MaIV5Ll/cXljzJzCEAKzvK
+	/lVw8efsBQ1ZueutxN10CRNkjVZoIOxfZrFP5lOUOJazTr6sUUFKrYhnAaqXoUMnbIEfYoGE+1z
+	EVy8hJK06z3/d5MPn7/tfIDArdSSafPDyaYjbVNFzJ4SjSSj3N/r8tbHqR/zjJif5lVwN0pXNb1
+	Orc/nDqO6mi7S2RMpla7pbaSENPW6CidOiNAEFUjWpCNOJokGqj7ipSjDL4bWfz5J1SzzCWChlk
+	c8Lx7HHmFR5eeT
+X-Received: by 2002:a05:620a:2985:b0:93c:9d56:a860 with SMTP id af79cd13be357-93ebd228f3dmr162550185a.19.1791534554717;
+        Fri, 09 Oct 2026 01:29:14 -0700 (PDT)
+X-Received: by 2002:a05:620a:2985:b0:93c:9d56:a860 with SMTP id af79cd13be357-93ebd228f3dmr162546085a.19.1791534554149;
+        Fri, 09 Oct 2026 01:29:14 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcdde9bde3sm435232e87.42.2026.10.09.01.29.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 01:26:48 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>
-Cc: Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-arm-msm@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Oleg Keri <okerixx@gmail.com>
-Subject: [PATCH v2] soundwire: qcom: disable the interrupt before gating the clock
-Date: Fri,  9 Oct 2026 10:26:39 +0200
-Message-ID: <20261009082639.22662-1-okerixx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261007193332.5270-1-okerixx@gmail.com>
-References: <20261007193332.5270-1-okerixx@gmail.com>
+        Fri, 09 Oct 2026 01:29:12 -0700 (PDT)
+Date: Fri, 9 Oct 2026 11:29:11 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Balaji Kalkonda <balaji.kalkonda@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Kuogee Hsieh <quic_khsieh@quicinc.com>,
+        Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+        Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Mahadevan P <mahadevan.p@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/5] drm/msm/dp: Add DisplayPort controller for Kaanapali
+Message-ID: <ayqjh5syjbnayfu7wp647tclaer6vd3jbtfuoj32tlpqjyhfal@2uh543ydchm3>
+References: <20261005-kaanapali_dp-v1-0-6faeac3a6d59@oss.qualcomm.com>
+ <20261005-kaanapali_dp-v1-2-6faeac3a6d59@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261005-kaanapali_dp-v1-2-6faeac3a6d59@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDAzMiBTYWx0ZWRfXwI4hl6PsvCQE
+ xDPepX0b7SxguePN5yOV0XigNBmNj9/P8Ao7wA/f/boHfdgD0BIZMFVPbB1yZ7UJsB+Ek2tZrLt
+ /fE8SJRkYQg4Jyhz6N4Wq2OO38QeSBOUY0bnF9ajjIOjWy6B342O+PleNffaiUIbBRGyI4gxUQH
+ pQ0HtyJpEw0+BfKUeBvFZM4HUF0DqYuzNq4W/5UarhJE0xbhJKmPYvuIvLeYEVwP9VOVIhtxg0L
+ dPwq/yDW5TdRO6PTfRYyPyekOSwkgMnNoT/OI+elme7Q/+vnlGxfUSEpi6PpSck+ov4XlcBIe8P
+ 5OVNpBrt93q00liYhNqqzoRS6bOsiMsGIefQwhG6LTXGZW+K0KZ9i5CliUD93F6e7QS81EOFtCB
+ Ens5fQomOr+j5doimA4s2WlTP3x83px1ybFeExZWd5rkGrcgEOEBBzHbsUhhuPweDNoAW4U8Tel
+ jFe09J1tPYArjlt1zrg==
+X-Authority-Analysis: v=2.4 cv=QbjzLcbv c=1 sm=1 tr=0 ts=6ac8a5dd cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=OHVtJ8ySOF6wsxM0GN0A:9 a=CjuIK1q_8ugA:10 a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-GUID: iZyt0FbwRKIctkHx1BhDa6721hOKuXeT
+X-Proofpoint-ORIG-GUID: iZyt0FbwRKIctkHx1BhDa6721hOKuXeT
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDAzMiBTYWx0ZWRfX5mTBO5j0u9GY
+ aspIvhvbGQ6BTmCnrr9dMj6hfFfW8IuyR6ViswEqwEkNEvR60HJXNDv/0p9ktxzd+De9TQw/JdG
+ Vv1k0i8BZIiYS/PyE8dfTSxgwybFy3M=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-09_03,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
+ bulkscore=0 phishscore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610090032
 
-swrm_runtime_suspend() gates hclk straight after the ClockStopNow
-broadcast, while the interrupt thread that completed it is still
-clearing the status and CLK_STOP_FINISHED is about to fire. Both touch
-registers with the clock going away; on x1e80100 and glymur hclk is the
-SoundWire clock itself. The next clock-stop exit then fails at random
-(bus clash, parity errors, AUTO_ENUM_FAILED) and one side of the
-speakers stays detached until reboot.
+On Mon, Oct 05, 2026 at 12:54:27PM +0530, Balaji Kalkonda wrote:
+> The Qualcomm Kaanapali platform comes with a DisplayPort controller
+> with a different base offset than the previous SM8650 SoC, add support
+> for this in the DisplayPort driver.
+> 
+> Signed-off-by: Balaji Kalkonda <balaji.kalkonda@oss.qualcomm.com>
+> ---
+>  drivers/gpu/drm/msm/dp/dp_display.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
 
-Disable the interrupt before gating the clock and enable it again once
-the clock is back.
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
-Fixes: 74e79da9fd46 ("soundwire: qcom: add runtime pm support")
-Signed-off-by: Oleg Keri <okerixx@gmail.com>
----
-v2: disable_irq() instead of synchronize_irq(), which left a window for
-CLK_STOP_FINISHED; about one boot in four still hit it.
 
- drivers/soundwire/qcom.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 6e0c5fb10efa..147e55b7a600 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -1801,6 +1801,7 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 	}
- 
- 	clk_prepare_enable(ctrl->hclk);
-+	enable_irq(ctrl->irq);
- 
- 	if (ctrl->clock_stop_not_supported) {
- 		reinit_completion(&ctrl->enumeration);
-@@ -1887,6 +1888,7 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
- 		}
- 	}
- 
-+	disable_irq(ctrl->irq);
- 	clk_disable_unprepare(ctrl->hclk);
- 
- 	usleep_range(300, 305);
 -- 
-2.55.0
-
+With best wishes
+Dmitry
