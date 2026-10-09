@@ -1,188 +1,133 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC5264E9C0A
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 16:18:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E9313AEF4A
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 16:32:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791562699; cv=none; b=BxT5Eegm6LPD1sH8khLN4YiaA8kbFyPIvOm5SdPj7FZV4HV+6FDx56rr+rSrQd7VNksi7gl7dJBp5ikyTgcQdcnpPyccxaVyeNpdam8KBd0cGpU7d8V/G0Dk6R0w3tTAASG8BADYxCPaq+p+urzOoyrgCmecbVUzYktDRxV4tvY=
+	t=1791563560; cv=none; b=NjFauL9Le/3OnZJSGqpSmahoa7zwE3Vhc70asoBHIu0oQ19bz0Ir6zJXan1lpVjy43knS7E7pxNjMuXNORAa4w+uIDeCNWAFtQtRkeWeA9Z1pwnoHb4hVtjP0eLSv8YCf0Nz/sm+O9LyiavnpycC3pCjRuwPekCKc0QmpLTZHlg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791562699; c=relaxed/simple;
-	bh=c1yk8Di/jmymkTJRvn/VaUEImzqv1dOE803I1gGu0iw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=m+xp1QPIMD31YrMgV3MTm0IeWspiL4dQCkLmaRvcjLeP7Dz4ZZdJ7K4HTHQ1Cr+n3Hh0nEXFULZW7BFgW/i2RE2f7LLhNMROxsRzj9gWsN92jNyCqtceYYbyk1XQR57EZyH69acZs+ISMgxgIJE6ktp2zZy2QuZQnILW8lFg5WQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HAOvu+gH; arc=none smtp.client-ip=209.85.221.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791563560; c=relaxed/simple;
+	bh=07yf6xBRrUXFeq5vbgPfsiIGYgZGyZxl3GUx7RyhdKM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=UG7lgNAYQ/lMz7sBh66PuWNJIKiQARsb184hCx1Jn7iH08+t0s5eIBIpQH5DBFOCGKLHpjnAsZfFF34oyrs6xZlGrVBjEKE0zLzV/xsXnwn416V0/SBTVKn1w/vangL+YcH6JGhAu9Qebx/Ma36p/DDWoZ3QCk8K9w1yuDlcgwU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=EBP18Dwa; arc=none smtp.client-ip=209.85.222.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HAOvu+gH"
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48afbd2c386so3218218f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 09:18:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="EBP18Dwa"
+Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-93e55db58cfso593017685a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 09:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791562696; x=1792167496; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=BT3Kplva3WiG4o+dXirMa63CjRV9ppQitco44DeQ3bs=;
-        b=HAOvu+gHu/+LvgQyUO6Q08suImoV0dBQS/qSd6jRa9lKDWPJZ67m1FREcYUUFIkW/l
-         yf2CGukmsT+ehmXGP5DMTp+7AnI3bw9TMI6p/agKn8VRv/1aF4KVVbgGHPS4jhkwAjkX
-         IuTK8OZLHbrg6Yg8P/FXUe/2E46D15D38uhT0rX5bU8BouXCZWyeHS8nJWi3gtCaveNw
-         EM5TK0Gx8bGSxlQ13zHX2NvJhzxAbo7ca7rDhc8wV/9vokNfWBIi+QMsVC4l7km7uslv
-         oE8MEPTYbyDrkuhUx3quHGGKC3rXD4R6IQwaEEbBNbok5UZ+VF1y9//GOuk8ZhRDHZ8y
-         6NbA==
+        d=ziepe.ca; s=google; t=1791563556; x=1792168356; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=e/TRD6BwLaJ/NfMLCCm5dSOuj3VkkC7kRDobdLq+Uh4=;
+        b=EBP18DwabsAmk/ldPqkZs5ttP4ZXj2zfsqssMvZL2UZ+8gbjGU1+AXzQJaSO1Fx8do
+         Tet0BEfQtbUcaOug7UP3mMhPUXHricqcTX1wsym/eIfnuPw/xyDWwAA4AGY3ltsRW6gN
+         kxUBzKo9mD+TPVikA9PUwFjEqLDwqrxyll6ggOWZn3RVQctdZq3/+Fr3tCEz4E2UctOO
+         d1L/jAKQyEG+xdZqr0wWzAGJkhstAs9djgfSdPyYdJD3h4b4cE/xFqJlcco82d5HIMbk
+         /LlBs5Tzxk0B6a65p9pbjZxWiK0F0FYKh9LclAN52wpwgRY8CILzo1DiY7KsXx9OPnlm
+         mEuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791562696; x=1792167496;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=BT3Kplva3WiG4o+dXirMa63CjRV9ppQitco44DeQ3bs=;
-        b=08z4RnftgTWepfBufS4OX9bvBOCa6e/zywd8PXOCG4ASf6LbFyhIaQ7LplZkO15yDL
-         TqmPFn4q6HcteLbp6uh+eBFiwM8UXjOtoM0fLDWlJKjbE1UWdlRdGhWZ68MutPC/+tJX
-         LI5zjz1W0ck63SLM99nCxSqSiBPXXeQxzGaHl1ENg+ATbFN8ptHrWM76Bnb7MoTLcr/G
-         srfpaxe2NEC4XmnJ4m+v24JXrOjXfYwGDxOh9F/6Qu+S0mBTqJc4VzZEJfs1p+GJAV/Y
-         vL65h4oDcG5N2ijfZ7y1BRlW8fhA71Q9LI1OUVUCvJKColh7gnamyfsFVXJGia97dSbg
-         1yLQ==
-X-Forwarded-Encrypted: i=1; AKwUvByayby+BQIHpSU+rSFEKjjvk1szRpJMTcFW2m9sk+34TpiPu+lRG3PwMvSJMtlY6WkZ62kwqj2NaWfhG2IJ@vger.kernel.org
-X-Gm-Message-State: AFq9FYIuaidJEY1ZlzVwcJJZXksbL2egh4K0qKMgLwO+kpSYd5CBJiEJ
-	Al6Yx7w1nuKZ0tbRhFy3aRCJm8WoKJqOXslaRdBhUCZlzVWclVCMzBGa
-X-Gm-Gg: AYBFou3d2F7ZAZ3HCC+OifGPBJiqUHrrcl3oiDNrGbjqWZGoDRnzirfUHql9fOHMMUc
-	otf/U51H/TM55qvZUph6s8Eb1GuHnyg8GcYhHZc7LWxMGm7rU7nJkhusmhY4bUhZcBgXcFZ3xSU
-	pwbszgKO5PrDJiVOK6NzUNYODnf1+dlSRHMOo6w07WjUFeKQTCY5r3m1FiYOnt345OmjGz7Ij1m
-	+/+IVWpwnEjaWhAod/8Fpxvv6juhvPtFK4Zxq6OUzCJSiWaGwhrOmUkn9pvAEy5Nrhtm+Lv6Zy7
-	3M6oxA1/cCnY/imA1OGjZSj6C5BQ/gafDmSUGloUxjNroPH29I2Xc+9OZWvb9vZd/5OBy7nw2ih
-	GgrUrCr4a1ts90xvSAnrjDQ2rWDvFnJPKERjXTll9tJoeji/VOgskaBrfz3LX1AmbUpdfGbE93N
-	WhqmEccxXSooLszvxBN3bJoGQV0b5NkxAIPaoFfeW9FISs7IkeZDki7gvTkTVbGhUlrlJnsUOU+
-	Kxbfaq4jHW4FUbghIOPuEiw5PhHJQ==
-X-Received: by 2002:adf:e006:0:20b0:48c:54ec:ebb with SMTP id ffacd0b85a97d-48dbacf598bmr3401360f8f.23.1791562695687;
-        Fri, 09 Oct 2026 09:18:15 -0700 (PDT)
-Received: from [10.147.33.44] ([135.136.51.219])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9acee65sm4576018f8f.49.2026.10.09.09.18.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 09 Oct 2026 09:18:15 -0700 (PDT)
-Message-ID: <b74e53e2-600a-4aae-a401-2d1ba59bf68b@gmail.com>
-Date: Fri, 9 Oct 2026 17:18:07 +0100
+        d=1e100.net; s=20260707; t=1791563556; x=1792168356;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=e/TRD6BwLaJ/NfMLCCm5dSOuj3VkkC7kRDobdLq+Uh4=;
+        b=GvL3s4Nthdg3mszo7oqBTR+bcFIRn7dIKyb8Oelx5byTvhVrix+yQ1h7cy49qsW6az
+         W+bSelrLr3lG08Il31nm0NHDM8Mln1kfwhUJxVn6zxJdSp/u7v69GQpjWLNMq2a/iVFz
+         zBtFljFseWPn8LGfI+tuGbl+kdfd8rwAS5tJ8gTVCujr1lgbXml+2qyRrnphnHIBTPfn
+         jLAUAvq0TZ4xZycdpv3dLX+QK7wtQOF53Tvd9Tgb2sITOJF91Qc5SRHVijztylyeqhdm
+         kQMvBDMPjKE9EHE8kLAhJe/HBMw6rM8LFPMwUCdfmY6WR5nhC7mj2MYvPvBxvEZ2ut4L
+         YmDg==
+X-Forwarded-Encrypted: i=1; AKwUvBx5EvNHkDDHWLrZWSDLBvYGFXZ+XulccwansTZDziqC3l8pjfqm1KkzQ0rTMJ5xNCBlLlSJQ8bYmjalrpgQ@vger.kernel.org
+X-Gm-Message-State: AFuF++kftHYd+NIccx+8pVvyVs2qecXKmhFqUj+PI4gBvGyHQSc+FAQj
+	vd0QI7faMBwYG8lU3lnYRIqlxOOkIfkuCr0CqbldSQyqb3v+4YphMGHwNpQJv2zEjLE=
+X-Gm-Gg: AYBFou2TKRgHYJA9xzXUEBtPeIRQOQXQfjERn08XutGHGZO7lojWFT7UkMzjXPfFNai
+	8dJ/Y5fUM/QqdiUI3JBx8FSBTaUXzyS/YR3MIUMsurgB7Z3Nb14yNazq2eOyrrJZ5LQy1jxZvdx
+	obIpT1OxnMwmUEz/ndtQLQCHgzs3Se854eeAM9wqktn65M8OWE2yb0CmJv4TnlIIss3YqDuvOcP
+	Sirb7PXjYOUIy2e0xpYNa0BGh+L61OOYUH+De95vvYMekIJ3bOrdcaApWxxFB+D1HHihvVCNwKt
+	fpFqVlrSpfK7RkLoYFSZSiOFHTo1dJH2MqcYUSCV3zDyZCTYwri3y7u6L6zfMXqz94ENoFTQKPm
+	XyykHnrspyvwXcumoLeocAYQR3TWe5aixypKE/EH89OBSdrufhJYpWL5oaYGVWHuc7TpMIN/HTV
+	7/WRw1tgQ7i2vojGGjX+bZltUFzheWNQW2C1HimZ/bTVHzdB0ViTb1bweQo5jzjGkgLHBfDM7Rm
+	WZqZgddvPYdFMlld5wRmVehiexlFB+sEtuWE4A03mfZkKJOaBUu2n8V
+X-Received: by 2002:a05:620a:4456:b0:93b:be6d:4f3e with SMTP id af79cd13be357-93ebd1b7386mr410267085a.25.1791563555872;
+        Fri, 09 Oct 2026 09:32:35 -0700 (PDT)
+Received: from ziepe.ca (hlfxns010zw-159-2-239-150.pppoe-dynamic.high-speed.ns.bellaliant.net. [159.2.239.150])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93eb98906c3sm225037585a.26.2026.10.09.09.32.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2026 09:32:32 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1xFDWK-00000000Kpb-0HpH;
+	Fri, 09 Oct 2026 13:32:32 -0300
+Date: Fri, 9 Oct 2026 13:32:32 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Robin Murphy <robin.murphy@arm.com>
+Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+	Daniel Mentz <danielmentz@google.com>,
+	Will Deacon <will@kernel.org>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+	Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+Subject: Re: [PATCH v5] iommu/io-pgtable-arm: Add support for contiguous hint
+ bit
+Message-ID: <20261009163232.GB14213@ziepe.ca>
+References: <20260921-iommu_contig_hint-v5-1-e7fbd1c3774d@oss.qualcomm.com>
+ <20260924001502.GO1540250@ziepe.ca>
+ <CAE2F3rCVh0CmW6+a__PcCrBgsMJVompKJX_qYBdQ=exj3bYtCg@mail.gmail.com>
+ <20260924225340.GC16465@ziepe.ca>
+ <7ab6eab6-ec6e-47dc-b387-eb380e2e365c@oss.qualcomm.com>
+ <52ba8a64-2d3d-4c3f-ae8f-54ab4f0f164d@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] power: sequencing: qcom-wcn: power off WLAN at probe
-To: =?UTF-8?Q?Fran=C3=A7ois_Roux?= <franzelfranzel@gmail.com>,
- Bartosz Golaszewski <brgl@kernel.org>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
- linux-pm@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, regressions@lists.linux.dev,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261004165124.4277-1-franzelfranzel@gmail.com>
-Content-Language: en-US
-From: Dale Whinham <daleyo@gmail.com>
-In-Reply-To: <20261004165124.4277-1-franzelfranzel@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <52ba8a64-2d3d-4c3f-ae8f-54ab4f0f164d@arm.com>
 
-On 04/10/2026 17:51, François Roux wrote:
-> The WLAN enable GPIO is requested with GPIOD_ASIS and then kept at its
-> current level, so that a WLAN module left powered on by the firmware is
-> not switched off. The FIXME explains why: toggling it would take the
-> PCIe link down, and the controller driver could not recover from that.
-> 
-> That reasoning held while the PCIe link was trained before the
-> sequencer probed. Since commit b921aa3f8dec ("PCI/pwrctrl: Switch to
-> pwrctrl create, power on/off, destroy APIs"), qcom_pcie_host_init()
-> powers the endpoint through pwrctrl before it starts link training, and
-> defers until the pwrctrl driver is bound. That driver cannot bind
-> before this sequencer has probed. Power-on therefore always comes
-> before link training, and keeping the firmware state is now harmful.
-> 
-> On the Microsoft Surface Pro 11 (X1E80100), the WCN7850 sits on a
-> PCIe port without a PERST# GPIO. While pci-pwrctrl-pwrseq is not yet
-> bound, the host init is deferred about ten times, and each attempt
-> powers the PHY and controller back down. The later power-on only sets
-> a GPIO that is already high, so the chip is never reset and the link
-> never comes up:
-> 
->    qcom-pcie 1c08000.pcie: Device found, but not active
-> 
-> The endpoint is not enumerated and ath12k never probes. Bluetooth on
-> the same chip fails too ("QCA Failed to send TLV segment (-110)").
-> 
-> Request the GPIO as GPIOD_OUT_LOW. The chip is then off when the
-> sequencer probes, and pwrctrl powers it up cleanly right before link
-> training. Drop the FIXME and the code that preserved the firmware
-> state.
-> 
-> Tested on a Surface Pro 11:
->   - b921aa3f8dec plus a one-line version of this change: endpoint
->     enumerated at 2.4 s, ath12k and Bluetooth working.
->   - next-20260929 plus this patch: "PCIe Gen.3 x2 link up" at 3.4 s,
->     ath12k and Bluetooth working, Wi-Fi connected.
-> Without the change, neither kernel enumerates the endpoint.
-> 
-> The culprit was found by bisecting v6.17..v7.1, with the DTB and
-> .config held constant.
-> 
-> Fixes: b921aa3f8dec ("PCI/pwrctrl: Switch to pwrctrl create, power on/off, destroy APIs")
-> Closes: https://lore.kernel.org/all/CAPjyS8dY0Q_o3XmFjuKZZsjhzhoSNL+ZGJtw5cQt8HiV3sUtxA@mail.gmail.com/
-> Cc: stable@vger.kernel.org
-> Assisted-by: LLM
-> Signed-off-by: François Roux <franzelfranzel@gmail.com>
-> ---
-> Changes in v2:
-> - Sign off with my full name.
-> - Use the Assisted-by format from Documentation/process/coding-assistants.rst.
-> - Add a Closes: tag pointing to the regression report.
-> No code change.
-> 
-> v1: https://lore.kernel.org/all/20261003091451.4727-1-franzelfranzel@gmail.com/
-> 
->   drivers/power/sequencing/pwrseq-qcom-wcn.c | 16 +---------------
->   1 file changed, 1 insertion(+), 15 deletions(-)
-> 
-> diff --git a/drivers/power/sequencing/pwrseq-qcom-wcn.c b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-> index 7f88a29b2..636dd7e63 100644
-> --- a/drivers/power/sequencing/pwrseq-qcom-wcn.c
-> +++ b/drivers/power/sequencing/pwrseq-qcom-wcn.c
-> @@ -526,15 +526,8 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
->   		return dev_err_probe(dev, PTR_ERR(ctx->bt_gpio),
->   				     "Failed to get the Bluetooth enable GPIO\n");
->   
-> -	/*
-> -	 * FIXME: This should actually be GPIOD_OUT_LOW, but doing so would
-> -	 * cause the WLAN power to be toggled, resulting in PCIe link down.
-> -	 * Since the PCIe controller driver is not handling link down currently,
-> -	 * the device becomes unusable. So we need to keep this workaround until
-> -	 * the link down handling is implemented in the controller driver.
-> -	 */
->   	ctx->wlan_gpio = devm_gpiod_get_optional(dev, "wlan-enable",
-> -						 GPIOD_ASIS);
-> +						 GPIOD_OUT_LOW);
->   	if (IS_ERR(ctx->wlan_gpio))
->   		return dev_err_probe(dev, PTR_ERR(ctx->wlan_gpio),
->   				     "Failed to get the WLAN enable GPIO\n");
-> @@ -545,13 +538,6 @@ static int pwrseq_qcom_wcn_probe(struct platform_device *pdev)
->   		return dev_err_probe(dev, PTR_ERR(ctx->xo_clk_gpio),
->   				     "Failed to get the XO_CLK GPIO\n");
->   
-> -	/*
-> -	 * Set direction to output but keep the current value in order to not
-> -	 * disable the WLAN module accidentally if it's already powered on.
-> -	 */
-> -	gpiod_direction_output(ctx->wlan_gpio,
-> -			       gpiod_get_value_cansleep(ctx->wlan_gpio));
-> -
->   	ctx->clk = devm_clk_get_optional(dev, NULL);
->   	if (IS_ERR(ctx->clk))
->   		return dev_err_probe(dev, PTR_ERR(ctx->clk),
-> 
-> base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+On Fri, Oct 09, 2026 at 04:37:08PM +0100, Robin Murphy wrote:
 
-Tested successfully on Surface Pro 11 X1E/OLED/WiFi model.
+> range size being unmapped, so even if the total gathered size exceeds a
+> single command, we still wouldn't split it _within_ any single one of those
+> ranges, only at a boundary between two unrelated ones.
 
-Tested-by: Dale Whinham <daleyo@gmail.com>
+The question revolves on when the iopgtable path flushes gathers.
 
+If the gather only holds a single page size and always starts aligned
+to that size then the RIL splitting algorithm won't cause an issue.
+
+It isn't a question of allowing CONTs to be split, it is about when
+consecutive unmaps can merge into a single gather. iommupt is very
+general here so it can create gathers with mixed up page sizes and
+trigger the problem.
+
+For iopgtable we have several layers of logic splitting and flushing
+things. I keep forgetting about this bit in iommu_iotlb_gather_add_page():
+
+	/*
+	 * If the new page is disjoint from the current range or is mapped at
+	 * a different granularity, then sync the TLB so that the gather
+	 * structure can be rewritten.
+	 */
+	if ((gather->pgsize && gather->pgsize != size) ||
+
+I didn't try to do a full analysis that it really is enough for this
+series, but if size here is the PTE size including the CONT effect
+then it seems like it could be OK. The gather has to be aligned and
+has to have a single CONT size within it.
+
+My original reply was mostly to be taken as 'RIL alone isn't enough',
+meaning write an explanation someplace why it is safe under the
+current system. The commit messages for the SVA and my later fixup for
+iommupt explain the general concept and problem..
+
+Regards,
+Jason
