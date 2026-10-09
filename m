@@ -1,189 +1,89 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail-24417.protonmail.ch (mail-24417.protonmail.ch [109.224.244.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB46344021;
-	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44EBF3BF660;
+	Fri,  9 Oct 2026 21:08:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791578993; cv=none; b=goNQ5n1EaSNHcwVaPrF32eZEUTYC/9617HzHjoDdtHoDD656rqYIZ4k7AAstje8y4XZ5V3HSMCdDsaPPMXOAD2SoPiqBjRVH9VZ2sMbTUIx51vdekon6tccVa9Leq/VOsnV0Jcs6VNLKluYP8feOeRMUK7wQvQqyKlFTC129yDQ=
+	t=1791580087; cv=none; b=q8z6wwblavEipc3Kt56vxsTkhqj4bBFLh4HnpRq4RzR6Lc7Aq0WsgVIChrf6AlaaJoEJZbr6IT37MsGFzaRH3pPbOMZsyBRWwKARf0LWhGX3lQ5TTdl+dj4KoZggkw4F+O11C5SdYcavxbzf+Vr5mG2FKuHWzFEXCFHAPnm8OXk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791578993; c=relaxed/simple;
-	bh=bS8ffElq8Vg3QV8tgH8g3k8lB4aEbkKQfj/QlcnNgCs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=rDFbuasNPPWz72czyCkbBPspO2c1s4fV88TGdl0kPV1a810Ojnp8mSO1ueqYe5jQ8pQrUbtdE9VxBxKbIKAaPDO/v9KnpAoYkOdsuEzhqrpmDGoMmPqJQ7CjrJUMU83Bim63V6G2JPCw8vdGBsN5q2Z0YioGhXU9rUWqPQKuNAQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I2AXzG51; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1791580087; c=relaxed/simple;
+	bh=5sMHZk4Hc88OhXhjJkqjDNeV6rinFGuPqsbkYItAWz0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=jGWbDiXmDXqsE04KPhsLEcLGh0JCiLGz00LvQDBw+5meDB1nqQLTxtTwfBMJpnk5n/LfUBAOAPlMM1c4aCabaRjh2oGAmMfP3EE7ImcMS0OCCKHfoIWJK+2Yz8TNCZ6K/zKIeolqMJpzzsXAiqwkY6fi0z/DumHzz9Zy9toqIAc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=EcgIALZD; arc=none smtp.client-ip=109.224.244.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I2AXzG51"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B4C0FC2BCF4;
-	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1791578992;
-	bh=bS8ffElq8Vg3QV8tgH8g3k8lB4aEbkKQfj/QlcnNgCs=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=I2AXzG517INSAJu7L2uvJpLsB/Vn7vy8gFLgJhdHNGFNOth74iOcnBht5h+bH4jBw
-	 yb6Jm1olzbuLsN/eAf6Vi/eMnML69+w4lPhFtzYFVz+1GZw9bmJAjrV58c6lZBrnTE
-	 EQRPob9m6reGdvrEq5s67YpzOhykKF0CySvhSKy2yr1feKRWhpyZ/abN1ru7Gcvbdg
-	 mh3YRmh8Cm44siCnAaRAvA2Dw3mnUHKlyAXCRDSXwTRP/SAN8wmB2QrglhaPD5qBfg
-	 R5FnV3E2uMqG4dO4uDXjKYyyxlNCrTMuznXRI3l983MvFk//m8iFnJsluO1ucYO9Q+
-	 1ZJ/ted6tDPcg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C61ACA9EBE;
-	Fri,  9 Oct 2026 20:49:52 +0000 (UTC)
-From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Fri, 09 Oct 2026 17:49:30 -0300
-Subject: [PATCH] arm64: dts: qcom: sdm630: Add interconnect paths to the
- BLSP I2C and SPI controllers
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="EcgIALZD"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1791580076; x=1791839276;
+	bh=8mepSe62s0ugerwpFuXic0aCmj871cPqnta8q4WTVwc=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=EcgIALZDakrxXNkCM/5aUw8DLoDg4bDNi/NqhDKyCh7SYpJN+NswgIxAPS/SJhsVc
+	 yKuSiRTw6+bDTvXRsZyupu2Ech353t/irzazx6llMjKcJDMC8+yzONohxNFucrOM++
+	 TQwjiggKgiATDwYUCARn/jXfbLvYmgTbPPNVJohBJTR70rBuWe8cxZg8vuQbIBKFU7
+	 JoBhf7jLZf/rlVGGGb2VnnwYmW038rqL9kSzpzt7+FF1HyyKgTw/L0pZe3uErLpO+i
+	 a7zAlJgrHp7mAH9/c2qrGJ1iMDkLIUddcmGq1CPtCKAEugdpx2ZqlrJhLUzSuOqXez
+	 ZcvQ2OT2isp5A==
+Date: Fri, 09 Oct 2026 21:07:53 +0000
+To: sashiko-bot@kernel.org
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, =?utf-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Rob Herring <robh@kernel.org>, Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH] PCI: dwc: Power the controller down when hibernating
+Message-ID: <179158007085.33373.10495486250879471249@pm.me>
+In-Reply-To: <sashiko-outbox-166041@kernel.org>
+References: <179157746908.73485.2343672865542690797@pm.me> <sashiko-outbox-166041@kernel.org>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 97b4da40f43a418c58b48886561281d9e2d8eeff
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261009-sdm630-blsp-paths-v1-1-6a86ba193e8e@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB0YE1TsVYoLE0cdaW3IaCmId
- zfW5Vv8v4NyFFZ4ZDtE/orKZ0ko8gz81C0jo/TJYMhUBVGD2r8rS+heGjB066TonC3r0lsiayB
- 1IfIgv//z2d7Wzc3s12sEx3EC1O244HUAAAA=
-X-Change-ID: 20261009-sdm630-blsp-paths-bb3575c30032
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, 
- Alexey Minnekhanov <alexeymin@postmarketos.org>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Martin Botka <martin.botka@somainline.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Fabricio Akio <fabricioakio@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791578991; l=4078;
- i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=98XWULvFlrGsaywNs2+4EVpHMKg2rfljbJphpWqR6lo=;
- b=Ism90WRgddmgiwZX1UP/7b5dUo0Qz3uuoN+deMvUbCRxczEXZlwEOeo9NinTMHkSZmrKjOPsA
- 3z8GX6YneovCXnJ8EKrhHQvVc9zpkkyIBx65quj2KnEXVB4wvl7MJAx
-X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
- pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
-X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
- auth_id=1076
-X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
-Reply-To: fabricioakio@gmail.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Fabricio Akio <fabricioakio@gmail.com>
+> Does this short-circuiting && operator cause issues during hibernation?
+> [...]
+> Since pme_capable is unconditionally false, pci_pwrctrl_power_off_devices=
+()
+> will force cutting auxiliary power.
 
-The QUP I2C and SPI controllers move their data through the BLSP BAM
-DMA engines, which reach DDR as the aggregation NoC masters BLSP_1 and
-BLSP_2. No path is described for them, so nothing requests bandwidth for
-those masters while a transfer runs.
+That part is right. At poweroff_noirq the devices are in D3hot, the
+helper would have reported PME from D3cold, and with this patch a
+wake-enabled device loses its power anyway. In v2 I will call the
+helper first and ignore only its verdict, not its PME result:
 
-Describe the path from each controller's BLSP master to DDR, as the
-vendor kernel votes it. On a Motorola Moto X4 (SDM630), with the
-boot-time interconnect votes released and system-level sleep enabled,
-an I2C transfer running as the SoC entered that sleep hung the SoC
-without these paths; with them, 5,000 transfers ran through about 3,000
-sleep entries.
+=09if (!pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable) &&
+=09    pm_suspend_in_progress())
+=09=09return 0;
 
-Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
----
-Tested on a Motorola Moto X4 (SDM630), whose board file is not in
-mainline yet, on the sdm660-mainline tree. System-level sleep there
-comes from changes not yet posted. The UART nodes get no path: their
-driver requests no bandwidth.
----
- arch/arm64/boot/dts/qcom/sdm630.dtsi | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+At freeze_noirq the devices are in D0, so the helper stops at the first
+one and pme_capable stays false, which is what the image needs. I ran
+this version on the Yoga Slim 7x before writing, and a hibernation with
+a power-off resumes as it does with v1.
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm630.dtsi b/arch/arm64/boot/dts/qcom/sdm630.dtsi
-index 3a1014804fb0..20225732e4a8 100644
---- a/arch/arm64/boot/dts/qcom/sdm630.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm630.dtsi
-@@ -1811,6 +1811,8 @@ blsp_i2c1: i2c@c175000 {
- 			dmas = <&blsp1_dma 4>, <&blsp1_dma 5>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c1_default>;
- 			pinctrl-1 = <&i2c1_sleep>;
-@@ -1831,6 +1833,8 @@ blsp_i2c2: i2c@c176000 {
- 			dmas = <&blsp1_dma 6>, <&blsp1_dma 7>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c2_default>;
- 			pinctrl-1 = <&i2c2_sleep>;
-@@ -1851,6 +1855,8 @@ blsp_i2c3: i2c@c177000 {
- 			dmas = <&blsp1_dma 8>, <&blsp1_dma 9>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c3_default>;
- 			pinctrl-1 = <&i2c3_sleep>;
-@@ -1871,6 +1877,8 @@ blsp_i2c4: i2c@c178000 {
- 			dmas = <&blsp1_dma 10>, <&blsp1_dma 11>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_1 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c4_default>;
- 			pinctrl-1 = <&i2c4_sleep>;
-@@ -1919,6 +1927,8 @@ blsp_i2c5: i2c@c1b5000 {
- 			dmas = <&blsp2_dma 4>, <&blsp2_dma 5>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c5_default>;
- 			pinctrl-1 = <&i2c5_sleep>;
-@@ -1939,6 +1949,8 @@ blsp_i2c6: i2c@c1b6000 {
- 			dmas = <&blsp2_dma 6>, <&blsp2_dma 7>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c6_default>;
- 			pinctrl-1 = <&i2c6_sleep>;
-@@ -1959,6 +1971,8 @@ blsp_i2c7: i2c@c1b7000 {
- 			dmas = <&blsp2_dma 8>, <&blsp2_dma 9>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c7_default>;
- 			pinctrl-1 = <&i2c7_sleep>;
-@@ -1979,6 +1993,8 @@ blsp_spi7: spi@c1b7000 {
- 			dmas = <&blsp2_dma 8>, <&blsp2_dma 9>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&spi7_default>;
- 			pinctrl-1 = <&spi7_sleep>;
-@@ -1999,6 +2015,8 @@ blsp_i2c8: i2c@c1b8000 {
- 			dmas = <&blsp2_dma 10>, <&blsp2_dma 11>;
- 			dma-names = "tx", "rx";
- 
-+			interconnects = <&a2noc MASTER_BLSP_2 &bimc SLAVE_EBI>;
-+
- 			pinctrl-names = "default", "sleep";
- 			pinctrl-0 = <&i2c8_default>;
- 			pinctrl-1 = <&i2c8_sleep>;
+> wipes endpoint hardware state during the freeze phase, violating the
+> core PM contract that thaw operates on preserved hardware state.
 
----
-base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
-change-id: 20261009-sdm630-blsp-paths-bb3575c30032
+The reset between freeze and thaw is real, and it is the price of this
+approach. pci_pm_thaw_noirq() returns the device to D0 and restores its
+config space before the driver's thaw runs, so that much is covered,
+and a driver whose thaw is its resume copes. NVMe did here. A driver
+with a lighter thaw that expects the device's own state to be intact
+would not.
 
-Best regards,
---  
-Fabricio Akio <fabricioakio@gmail.com>
+I did it at freeze because I do not see how to do it at restore. The
+image says the clocks, regulators and PHY of the controller are on, so
+restore_noirq cannot bring them up without first taking them down, and
+that means writing to a PHY that may have no power, the same kind of
+access that resets the machine today. If there is a way to do this on
+the restore side, or if it belongs in pcie-qcom only, I would rather do
+that.
 
+I will hold v2 until a maintainer has had a look.
 
