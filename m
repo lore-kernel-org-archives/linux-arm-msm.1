@@ -1,133 +1,191 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33BF728315D;
-	Fri,  9 Oct 2026 03:04:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCEF237E300;
+	Fri,  9 Oct 2026 03:18:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.254.200.128
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791515053; cv=none; b=MZyxz1g/N2Ak8oHaVuLLPQwAJ0mY8CjnGT5exBO3tmg2OWMv1DzxgRYDwjedcPIutyPagv/WhyhPGE7B9rmXm8jdsYSkvI8zeZ/8By1h7XZwOOX/fy921ITLvbz3oEYjAMyDMVRP6cnt064q1G45mEZpJ4+yce71vbdjs+CBrB0=
+	t=1791515908; cv=none; b=j1uHV/9ZobROr9wSoqhECUG78SrXsyZ7gTgJLk/UWykTXdla0CRL+5cn5UXEaDZSun0AwxSk3nIw11JZX6AY+SMJCehF4jam1goJcVhw/GOrg/U1mSomd6Toq8/XKwPlSyAz4JesXalhsSr1PVTtFAHaFKGp/FrFADUs1Aiq90k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791515053; c=relaxed/simple;
-	bh=bc940CaYDJoEqACAsUQZVvnlY5Y6rf8fa4bWs6efDmU=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=laRA75ic+M5+7PkvJKjEZjiFG6dA60Ml3JR8evhoxE1i3feO5PQEh49U4dvb/NSNgbmbLvr3T0+TEijjFAlgPFi19UBvgOJzM8WAqgDUttms1lmUZ4I/t9qwODBhQ6466Q3yntWr2hwTNo+g7fJUO7JIvX7oBj8qgQ3fPBPBvwI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=L/GgKc05; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="L/GgKc05"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6990Pdaa230079;
-	Fri, 9 Oct 2026 03:04:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=9ckk8c12QJ0+nY4bJtYCI2MRimju1Liptuu
-	owVneOyM=; b=L/GgKc05eIE23Pnz9wKKQ5J72JlMC0Fc6M6//Qv0tKpZxTH1+q0
-	6+DtZXvo0vC89VgN3XBKU/07lnJ60La9Z4bPTokeF/Bany9qmXxYuoU/GE3NqzkQ
-	KpM1DxDlUCRbu+nAJxq9Lvu+nxglK1pe47p0DWHWO4h2Eo8XCHHDametg195urZy
-	DHSj3FIB00s+o6BfIJWa0t4SXoL91n9k26ColsmBKYEWH5mGZ2fTKWHbhiRMYH6l
-	g8Mf3KTRgKRzfl0fQqLyhimOZlaMQH1xHJ5LTWszJbQaSSkNE+VWJbf5UgDdd80/
-	LXwTIyqpqs9S9Ite4PESasT/j8W+XhrqjaA==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6baj2ta5-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 09 Oct 2026 03:04:09 +0000 (GMT)
-Received: from pps.filterd (aptaippmta01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 699348Bu3036336;
-	Fri, 9 Oct 2026 03:04:08 GMT
-Received: from cse-cd01-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 6993477b3036324
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 09 Oct 2026 03:04:07 +0000 (GMT)
-Received: by cse-cd01-lnx.ap.qualcomm.com (Postfix, from userid 4531182)
-	id 3B2EB20B13; Fri,  9 Oct 2026 11:04:06 +0800 (CST)
-From: Le Qi <le.qi@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kernel@oss.qualcomm.com, Le Qi <le.qi@oss.qualcomm.com>
-Subject: [PATCH v1] arm64: dts: qcom: purwa-iot-evk: add missing DP2 audio link
-Date: Fri,  9 Oct 2026 11:04:04 +0800
-Message-Id: <20261009030404.1981995-1-le.qi@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1791515908; c=relaxed/simple;
+	bh=zp9J/I3KL2ekRKRZ8uv9r2FRGz6DzqPhr0mZSqbj3oI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=e6byizmAOwgJ3DUDCdqS7+7Mxv/j6aRriloR8VGp9fxqZEuj2LAcY7OfqYS6bSFw7eJoNpVCmjnWD4YqCSNuo+otlamkfE5bJb9umQ7u3NZ5QQ9gzOiMpjhrjtGG83OLfa+NMdAGaV0xckkFlfO6Uka0Ejl+5HotUhvvcAuUJbo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.254.200.128
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpip2t1791515842t5bf99465
+X-QQ-Originating-IP: EPo9yvjcUKSxfds5pH10PS+8bETia1Xjr/JTyOz/FM8=
+Received: from [192.168.30.32] ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Fri, 09 Oct 2026 11:17:19 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1232975757929523936
+EX-QQ-RecipientCnt: 30
+From: Xilin Wu <sophon@radxa.com>
+Date: Fri, 09 Oct 2026 11:15:57 +0800
+Subject: [PATCH v2 05/20] drm/msm/dp: Support multiple generic SDP slots
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDAxMSBTYWx0ZWRfX0/2bD/ve3HR2
- Hn7x8eGnKEV2rYffAS1LeLt/KvlIUawfK4De6tegzJDisFpT6sTg4HNp4hBZk6Gxc2iMNWYVVQj
- 0qBVcXD2DiJjnTSU5WY8u1K6S2GmYaNoF+sX9C7ZeDy35oTOroY78pMidKate1k+6LDjdrgn2tk
- b2Bd+hbE0/LSc3R8wJXXZj39WfiRpPJlmsURUA4zVwYg7pLBSf+YVS/hR9Ql6p4gB1vfAqsdTKR
- hHm+JnlFUg411Sd9peeRtvD9EcJoJPPaEB/4WoV9I4dwfuZ13cCK593XYNamDrCw72zCxvCfEy+
- 2Rc+8nBaqhw9zjRaWVldPYrsKelgowdhyINmbnU13m/xQl6sVhn/24Jb7JsIRN0+SPu0SnDyNPx
- QgfI6ZBKK74F9exqmyfV7QvbkBpFPZFraK599juNgeqjOrx2KPu30XWnGN7zAzCvF52LO1BGiYa
- qI6iQSao13ttwmD2dpQ==
-X-Proofpoint-GUID: Xc2Vj0_0vXqpgbQVT2dTfqoezVbFG0vo
-X-Authority-Analysis: v=2.4 cv=H/dOUOYi c=1 sm=1 tr=0 ts=6ac859a9 cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=8R6ti0cNnEqwqZHyyg4A:9
- a=zgiPjhLxNE0A:10
-X-Proofpoint-ORIG-GUID: Xc2Vj0_0vXqpgbQVT2dTfqoezVbFG0vo
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDAxMSBTYWx0ZWRfX51qJGNw9oJhJ
- KI5aRTxGLP8LdUsksmkFx9i9Eq1qa4ONCEMDwR/yT/SFzJqzxn6Tp46DL5LcGWQHc797lv6UL9o
- 1H8WvbeoO4CTLVjMPWxL0lnf29+yTmU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-09_01,2026-10-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 phishscore=0 bulkscore=0 suspectscore=0
- lowpriorityscore=0 priorityscore=1501 malwarescore=0 clxscore=1011
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610020000
- definitions=main-2610090011
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261009-msm-dp-hdr10-v2-5-1835d4966da3@radxa.com>
+References: <20261009-msm-dp-hdr10-v2-0-1835d4966da3@radxa.com>
+In-Reply-To: <20261009-msm-dp-hdr10-v2-0-1835d4966da3@radxa.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+ Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ dragon@radxa.com, Xilin Wu <sophon@radxa.com>, 
+ linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3697; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=zp9J/I3KL2ekRKRZ8uv9r2FRGz6DzqPhr0mZSqbj3oI=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFknYlaUy17ccsbAemrHk8quDZmxgcmqxgUGifWiH5n5U
+ npr6zg7SlkYxLgYZMUUWRTiGeayV+ZeeypWqgczh5UJZAgDF6cATCTQieGf9Z2fvZMTV6QYZqeY
+ /Zq5b2t2t484/6WsjY57l7PdbmYyYGT40DnzKPOMH7vyVOX3uR+sWjfrsf6yWzX65TofD67zZc1
+ lAwA=
+X-Developer-Key: i=sophon@radxa.com; a=openpgp;
+ fpr=205F009D07796DD6E516752E32C31567AD9E324E
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: NMDsnXof05FG0W9l1NoTqTZ1r92JkcZomcgWpXeUzMRWBra7D23xcqAW
+	Jq2n05lnc2cW5rSU5oMC+GzbpScXF72bGtXTVV4QExUqG+NmU8e0H3Ba5MEudsmlRer0KIi
+	tBWKFWEX30c/5ZL8m2SA7Nixbg8JRPpwD9JP5BdQCYsY40ZICWO2okr6C9uIHSP/SQcyU/L
+	XkVQ1YOazwuX44b7Ni6+HhoWkshjClKqY4NAH8nrWyKb1yxm74rGd6BbCPN5fRp5KrTqOk3
+	Cxq3RwSGvX/SORO3967M3DOlSWNyyUBgLWlpuufDSkfPyvusgFdqKSF1veRev5F7fJI6bfi
+	j0wv3v8MvvMnvlMDbxUKnVXzwKlCP56NUMPtgPbyAtChh6mczxeMiBnFt5yk8AzYcFknKcq
+	+BBr35JFNSkDmucKtgsI7j5NKXO7CtcY0kMyRiN0zJjfnDtXP+OSoxfqZERaqWwo7uS9s0m
+	0oAIuVGhYNtPQJ/DFWa2xirR6m7RP4CAClpboptK1vhcW3u2n1xUskzdIujPGpeHOvRYZvl
+	x97Brnw7MNyh5yeG3Anq79rmQmcxIjGgtU7pRICvl3TZbGvs9HwT6U44hTNIk5dlxpRtt5C
+	gPG2Kh6ppRogaUAl9Z9GDh5/pIFFyZEX+52YFti0rXc/pYVgDx0AAF2YyNLk3QiyqQ0hhDc
+	jsjv30bjqKtYo4KDWXHu9cM/b691hwg4/E60XAY/3QgwmpDbCAvd7Fc6413X2cLGE4sUq2Q
+	JU9mwduJ7PLwOC9ImfuiHfzSWr4LrRmmFoIF3HOK97+rzFoj8CVV1gnVI2ELsjnNDvABvtm
+	L+RsXm8XZLpNhINKzx4FYh9ajmeRiDBj3XV9alTQ9qfsXpBcodecFXoZWJsDGuz7jGLy6aU
+	QO+N0u9DrIvmIkAF+2ecxO1DuL50ny54uheVyLqnzMSMdlwS1YkAgNQ2XwDKcgo5pIldQbJ
+	7u99oPTr8AaABxADYWxyHcYt8CDXTUfVRYgr1kd7LMMQfB+gezPJBcXXPa/SGS+bdrOGN1m
+	GkPlwqbROAhveidBa0j0JCmMS9ypp5IOWxq6JtVRsg9q5ciFNG1rxyg0zdM/HG3/9ZfFARh
+	Q==
+X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
+X-QQ-RECHKSPAM: 0
 
-The DP2 DAI link is missing from the sound card definition, preventing
-audio playback over the third DisplayPort interface.
+The SDP writer currently targets Generic0 for VSC packets. Static HDR
+metadata needs a separate slot so that both packets can be sent on the
+same stream.
 
-Add the required codec, CPU, and platform DAI configuration to enable
-audio playback over DP2.
+Allow the SDP writer to address a generic packet slot, and define the
+Generic2 registers needed for static HDR metadata. Use unaligned
+little-endian loads for the payload words.
 
-Signed-off-by: Le Qi <le.qi@oss.qualcomm.com>
+The existing VSC packet continues to use Generic0 without changing its
+layout or enable sequence.
+
+Assisted-by: LLM
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Xilin Wu <sophon@radxa.com>
 ---
- arch/arm64/boot/dts/qcom/purwa-iot-evk.dts | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/gpu/drm/msm/dp/dp_panel.c | 22 ++++++++++------------
+ drivers/gpu/drm/msm/dp/dp_reg.h   |  4 ++++
+ 2 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-index a811d8ca2dbf..93cefffd1f46 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-@@ -641,6 +641,22 @@ platform {
- 				sound-dai = <&q6apm>;
- 			};
- 		};
-+
-+		dp2-dai-link {
-+			link-name = "DP2 Playback";
-+
-+			codec {
-+				sound-dai = <&mdss_dp2>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_2>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
- 	};
+diff --git a/drivers/gpu/drm/msm/dp/dp_panel.c b/drivers/gpu/drm/msm/dp/dp_panel.c
+index e76dad0f6663..fdf1a3f437ba 100644
+--- a/drivers/gpu/drm/msm/dp/dp_panel.c
++++ b/drivers/gpu/drm/msm/dp/dp_panel.c
+@@ -14,6 +14,7 @@
  
- 	wifi-bt-connector {
+ #include <linux/io.h>
+ #include <linux/types.h>
++#include <linux/unaligned.h>
+ #include <asm/byteorder.h>
+ 
+ #define DP_INTF_CONFIG_DATABUS_WIDEN     BIT(4)
+@@ -442,22 +443,19 @@ void msm_dp_panel_clear_dsc_dto(struct msm_dp_panel *msm_dp_panel)
+ 	msm_dp_write_p0(panel, MMSS_DP_DSC_DTO, 0x0);
+ }
+ 
+-static void msm_dp_panel_send_vsc_sdp(struct msm_dp_panel_private *panel, struct dp_sdp *vsc_sdp)
++static void msm_dp_panel_send_sdp(struct msm_dp_panel_private *panel,
++				  const struct dp_sdp *sdp, u32 base)
+ {
+ 	u32 header[2];
+-	u32 val;
+ 	int i;
+ 
+-	msm_dp_utils_pack_sdp_header(&vsc_sdp->sdp_header, header);
++	msm_dp_utils_pack_sdp_header(&sdp->sdp_header, header);
++	msm_dp_write_link(panel, base, header[0]);
++	msm_dp_write_link(panel, base + 4, header[1]);
+ 
+-	msm_dp_write_link(panel, MMSS_DP_GENERIC0_0, header[0]);
+-	msm_dp_write_link(panel, MMSS_DP_GENERIC0_1, header[1]);
+-
+-	for (i = 0; i < sizeof(vsc_sdp->db); i += 4) {
+-		val = ((vsc_sdp->db[i]) | (vsc_sdp->db[i + 1] << 8) | (vsc_sdp->db[i + 2] << 16) |
+-		       (vsc_sdp->db[i + 3] << 24));
+-		msm_dp_write_link(panel, MMSS_DP_GENERIC0_2 + i, val);
+-	}
++	for (i = 0; i < sizeof(sdp->db); i += 4)
++		msm_dp_write_link(panel, base + 8 + i,
++				  get_unaligned_le32(&sdp->db[i]));
+ }
+ 
+ static void msm_dp_panel_update_sdp(struct msm_dp_panel_private *panel)
+@@ -487,7 +485,7 @@ void msm_dp_panel_enable_vsc_sdp(struct msm_dp_panel *msm_dp_panel, struct dp_sd
+ 	cfg2 |= GENERIC0_SDPSIZE_VALID;
+ 	msm_dp_write_link(panel, MMSS_DP_SDP_CFG2, cfg2);
+ 
+-	msm_dp_panel_send_vsc_sdp(panel, vsc_sdp);
++	msm_dp_panel_send_sdp(panel, vsc_sdp, MMSS_DP_GENERIC0_0);
+ 
+ 	/* indicates presence of VSC (BIT(6) of MISC1) */
+ 	misc |= DP_MISC1_VSC_SDP;
+diff --git a/drivers/gpu/drm/msm/dp/dp_reg.h b/drivers/gpu/drm/msm/dp/dp_reg.h
+index dda4b642c81b..6767a215b662 100644
+--- a/drivers/gpu/drm/msm/dp/dp_reg.h
++++ b/drivers/gpu/drm/msm/dp/dp_reg.h
+@@ -232,10 +232,12 @@
+ #define MMSS_DP_AUDIO_CTRL_RESET		(0x00000214)
+ 
+ #define MMSS_DP_SDP_CFG				(0x00000228)
++#define GEN2_SDP_EN				BIT(19)
+ #define GEN0_SDP_EN				(0x00020000)
+ #define MMSS_DP_SDP_CFG2			(0x0000022C)
+ #define MMSS_DP_AUDIO_TIMESTAMP_0		(0x00000230)
+ #define MMSS_DP_AUDIO_TIMESTAMP_1		(0x00000234)
++#define GENERIC2_SDPSIZE_VALID			BIT(20)
+ #define GENERIC0_SDPSIZE_VALID			(0x00010000)
+ 
+ #define MMSS_DP_AUDIO_STREAM_0			(0x00000240)
+@@ -291,6 +293,8 @@
+ #define MMSS_DP_GENERIC1_8			(0x00000348)
+ #define MMSS_DP_GENERIC1_9			(0x0000034C)
+ 
++#define MMSS_DP_GENERIC2_0			(0x000003D8)
++
+ #define MMSS_DP_VSCEXT_0			(0x000002D0)
+ #define MMSS_DP_VSCEXT_1			(0x000002D4)
+ #define MMSS_DP_VSCEXT_2			(0x000002D8)
+
 -- 
-2.34.1
+2.56.0
 
