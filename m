@@ -1,952 +1,160 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90D923EEAF4
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 06:59:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 894663B058F;
+	Fri,  9 Oct 2026 07:15:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791529157; cv=none; b=VMZj4Xksy1GW/1S7GVBf5KjtSECCVtz0m/YiSnoa6AUHYY9kn3UE+yq+9U/yzaAgn1b94MrthdSdh5hv6fO8vlit3RYoC/G7qw4nVYHgbsSwNPDFp8y0lizb4KlV074BYTs8Rq9q2wU5ExWCGSkXaGOv5jgQEYNzadBu7ycp7iY=
+	t=1791530161; cv=none; b=tmZBIBtzq8OGdFDeDmdy9f0s5CPolDQ3nXJ0vGr0D7W9dzszDDZmRqi/j4QTq73dKA1GAI2kPKAY7Pb1OpwJk15E+wbYnSCc/Ul/8skQXrm5vTMHdepokZ5adcXFVZev2sa/oz1YjCtUDhC7lJ+kQRXkNgvv9g4s0z6faLaZqtE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791529157; c=relaxed/simple;
-	bh=WDBjC5JQF5VdSIq9O9eCf7LHS6j6XM87O1Og4dEIOhw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=USRdCuuNLZDlaPSGwB3uiGopL1YpFpRNVpcLwFBRvkN8//GavLQofH+D9TmAz0xB1nbuIAo+HXRCGMiQzA4XyTU6LQ5EKjEO1PGcwgKQAP5CBRDx+egVJ13rAiQaCgq1eqZiDgH9vwF+Afl3HVCumqShhZUjMB4R8ZWZcLigPpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d//kM1kI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GCzKLIIc; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791530161; c=relaxed/simple;
+	bh=frDbYnuN5wzbU8V6z78m0FPDsCjoDX8J54ZVqLmRxnk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=U0tby644D918nEGaXgi8hsHEsfnHwjCgJS7UPwZ9cvETjBIy4uFlH3KbOC5P16yEaE+VD7dECZf5iW3mQm37u3VBkrID1jk4TdflvYjFu96Cx5Afjgd72+Mxm3O+MUGKj+XmjTW33frugJf4uDA0DCzXu9GNTHKQNZAm27xkvkM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=L8ZrUF77; arc=none smtp.client-ip=192.198.163.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d//kM1kI";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GCzKLIIc"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6993HXce3323146
-	for <linux-arm-msm@vger.kernel.org>; Fri, 9 Oct 2026 06:59:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	sz/X42fuQftb91zwXJTjvjf8awAls/1D2fUWK5cjhVw=; b=d//kM1kISpt2p2cB
-	pCJLS+9ZJ4x/o8nPDh+iYP6LX84TbbjpOtJ7+e4NUvEJs6Ukh5t+LFukBd/C4XeZ
-	uDblinQ1wI0YhrFVhnGTykf3721fp/IjwM3l/p2fU+W4MhMDzdJDAbGJogQG5/iu
-	x6Nn7dngTlcd5Z/KlB6MRAzR1yKaNnxZVYdJqFO+eAyBJdXJFggpweziN+pBcYGX
-	hE/2eDK5yIKEqOpqyfMmbDBq+1z+RELjayuoAldWjB2sbR0Gc8m8OZH4kQ14c0C9
-	RNPzjgMLQYEQAUfVdiVuNmK8MF1y+jln/Tika71+zdKUOnFS9q4pWKHtLQbddrWz
-	L6KLsw==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6ev5amdp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 06:59:14 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cbb92868263so3722185a12.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 08 Oct 2026 23:59:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791529154; x=1792133954; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sz/X42fuQftb91zwXJTjvjf8awAls/1D2fUWK5cjhVw=;
-        b=GCzKLIIcN19FscFfFf6FDCfHTtr79/mp8a+jmYbJunwB+bNtOLxylttW7eZygchyui
-         pdd67mf7JD1LVzZ9kVVy+MhVlY5wXU58jDlmDGkf3xl9VOJgb3KePAuskxDmQ/iYH9iX
-         JoTrAt1e77JolTqaFl6ht7G5c3qBBjNxoXIIuCf2hkDDxMkiHO4Oh/cTkFoePNukGcdf
-         Ma5mzLDnYAVH2iUxbZs1jzJZMUo2+E1XrB8Ip35WB91SqqHHO6hZOemAMQYubFhcpxjV
-         eMGNzYigt7SvUsGmD5LliooOafYM8NwxfCRUW/sEE3y3N5b0hT+I2spk5oC+Mxk0aGOh
-         VZxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791529154; x=1792133954;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sz/X42fuQftb91zwXJTjvjf8awAls/1D2fUWK5cjhVw=;
-        b=IIKZbVWv47Lzrap6SJthAKEZioTYJF4JGL6ojAn07+TO8BjQQoK2H9/9RSuUo4vxUh
-         ysIdTkYLFDHrVB79EwPHGFzoQsdDvq2jcC601AYJ8TEKdWonbca8MHMdwUwcifQFjDFt
-         5vM0sNWrw8g1ZhCLd6M3nNYX1hr/KvXnyzvUJx3XuoUVcy84RMI4gw4l6Yzeo0pySFzY
-         RMNs48aRdncAQUFanea8VruN80F8PLXh2QyoBCijfJU5BCphcF1iMbEbhlCxaY1FpgTV
-         oQZd1S5tp1CiucThD25z5uwp+HVSQNu4NMeeHvsUQkuwDUBtNv4VLfd3hGoetkEgFr2D
-         P93w==
-X-Gm-Message-State: AFuF++kL9RPWdt2aREUjh2iu5d54YlMPmVhY/mFzAQKkquKHjmq/k3zJ
-	fTWAe/bnYAlG+aHludzE47YSzO2q3AvFAyQdvFJCmz+HjMujwFGpII7qb1jcHX76IaZgkygKtNC
-	dFDbQAzb5iBORjoHzLRmmg3J6wMWAGJasWK8DW3vhyz8uSRD3jc4dTxUA0ZgM3ptXTK08
-X-Gm-Gg: AYBFou3y7iWJn4svukFY1jZmX1NhYQbSjJQssSr4/rWgUptGoWB1lYbbkLhZMvXDms3
-	7tzFMvSxCpb4vuf6IAnpA8ivLFylC2/4OUm0CKm8a265fWBXhix4zChTsTZjP9fKLn9hyqko/AR
-	HlKEHv3MkNqiBw/7ZrSDCQsPhwTUn4pAiZjoVV9rxXl7PuhpB+niKCRCAjNMMVuWVFdGjvDjTSd
-	oBqLY/eIqyjt2sIGhgAHxox6cgrobYHHJ+JFtAheuSYez+vmay2xwVZl83S1SM0Umdm4e8gm5lL
-	zcHmVskMWKVHwn/83mvT6Nb+4LfmISPWpV73MZ7avo3ZVb0T/iqUsIkaqAb2GAbar/dZkaYEwYl
-	Z/g2eNrKejlKhAUIHMK3y
-X-Received: by 2002:a05:6a20:3d06:b0:3d1:39e9:b261 with SMTP id adf61e73a8af0-3e16b7aa7dcmr755364637.0.1791529153428;
-        Thu, 08 Oct 2026 23:59:13 -0700 (PDT)
-X-Received: by 2002:a05:6a20:3d06:b0:3d1:39e9:b261 with SMTP id adf61e73a8af0-3e16b7aa7dcmr755343637.0.1791529152850;
-        Thu, 08 Oct 2026 23:59:12 -0700 (PDT)
-Received: from [10.213.103.163] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd3d9e088efsm499980a12.11.2026.10.08.23.59.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Oct 2026 23:59:12 -0700 (PDT)
-From: Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
-Date: Fri, 09 Oct 2026 12:27:56 +0530
-Subject: [PATCH 4/4] tty: serial: qcom_geni_serial: Add GPI DMA support
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="L8ZrUF77"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791530160; x=1823066160;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=frDbYnuN5wzbU8V6z78m0FPDsCjoDX8J54ZVqLmRxnk=;
+  b=L8ZrUF77eW7dkvN501Rt3vlzApqcHLIp7PJF5nq6kOD5BgBqB01Y6nvQ
+   +VB/4b5paMN/XY1HLxxL33khc/ub2M/e+qUlpE4YZXGK6mDiwoKM45fa/
+   2uMgMty+jYI/MiDWqiONi7buwHky5PQM62TdOslduYy4DkVc0fNKsPmoV
+   nP1MAEsIduoost4kIjERfAPGAA92ohzJeRZD6XlKrg6W0v52y3ZnXVafO
+   5WbQer9SlqxbxO9NLjQnkMAsAujsqoIW055S4lE7Co3EJSkQP60ad7S1G
+   MBZSN1Tx149cllmetX2xnrX7NCKvQZzAxR2FiUVO14s5l/r1yHy8VMYlx
+   g==;
+X-CSE-ConnectionGUID: Z6rdaxOSRJ2VYOyU5LGnLA==
+X-CSE-MsgGUID: L8ukCZ6kTMuWvnm/Lxn6jw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11929"; a="336912"
+X-IronPort-AV: E=Sophos;i="6.27,147,1787036400"; 
+   d="scan'208";a="336912"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2026 00:15:04 -0700
+X-CSE-ConnectionGUID: VN43JGbVTcOAqCtNrQ9MCA==
+X-CSE-MsgGUID: 1xM6lJ34QAyWrhgL7Nfo+A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,147,1787036400"; 
+   d="scan'208";a="703258"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa010.fm.intel.com with ESMTP; 09 Oct 2026 00:14:45 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xF4oT-000000005S4-0uxX;
+	Fri, 09 Oct 2026 07:14:41 +0000
+Date: Fri, 9 Oct 2026 15:14:40 +0800
+From: kernel test robot <lkp@intel.com>
+To: Bryan O'Donoghue <bod@kernel.org>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
+	Daniel Scally <dan.scally@ideasonboard.com>,
+	Keke Li <keke.li@amlogic.com>,
+	Richard Acayan <mailingradian@gmail.com>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Gjorgji Rosikopulos <quic_grosikop@quicinc.com>,
+	Radoslav Tsvetkov <quic_rtsvetko@quicinc.com>,
+	Robert Foss <rfoss@kernel.org>,
+	Milen Mitkov <quic_mmitkov@quicinc.com>
+Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 21/74] media: qcom: camss: vfe: Represent vfe wm inside
+ of a struct
+Message-ID: <202610091546.gjktxCLS-lkp@intel.com>
+References: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-21-ed985aefd611@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261009-add-gpi-dma-support-for-uart-v1-4-c69e728df686@oss.qualcomm.com>
-References: <20261009-add-gpi-dma-support-for-uart-v1-0-c69e728df686@oss.qualcomm.com>
-In-Reply-To: <20261009-add-gpi-dma-support-for-uart-v1-0-c69e728df686@oss.qualcomm.com>
-To: konrad.dybcio@oss.qualcomm.com, Vinod Koul <vkoul@kernel.org>,
-        Frank Li <Frank.Li@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>,
-        chandana.chiluveru@oss.qualcomm.com, jyothi.seerapu@oss.qualcomm.com,
-        praveen.talari@oss.qualcomm.com,
-        Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791529122; l=27059;
- i=naresh.maramaina@oss.qualcomm.com; s=20260316; h=from:subject:message-id;
- bh=WDBjC5JQF5VdSIq9O9eCf7LHS6j6XM87O1Og4dEIOhw=;
- b=+9IxgMnvt3Y0cRqb3mWltWEPWqfDZYJZ6yBRFXfx5D9AUJK+TgOQ0GbTd1OcYQa6wsTvqSa3x
- FLvXp8gOFvwBsEH/AyzqwwTLkuxtIVQPlKT2cazcNrki8qfC2gqBHcX
-X-Developer-Key: i=naresh.maramaina@oss.qualcomm.com; a=ed25519;
- pk=j7iST9yrLbsgWcWrqdlUNIOWl2WBl4wV1q35/n9SCkg=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDAyNyBTYWx0ZWRfX2wSQRCTKor74
- eTth5wbJEoGVPTpYqFXWTgYNPqzJ9BQJjONNl1fhzb7gbGJ4aJn3ORAfbgPpSkx5tlp+wVBpgJH
- 4g7Hj3U76rmZkVZZ1ZvEcEsJTHnil+M=
-X-Authority-Analysis: v=2.4 cv=MMT1C8Zl c=1 sm=1 tr=0 ts=6ac890c2 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=hBjL1wLKESsYej-2EWwA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-GUID: Ah7oUvmCG94ih6GoeTLXnWOGGA9hladL
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDAyNyBTYWx0ZWRfX7TLBMg8Snuai
- T1HTmvRJUaH9hZNaxAMw+K1U2d+zLowQ3yIcLoc4wf5okR4HWPkamVoQqSIcsv6racSWF0zzZGk
- f4dzqAZsfRvQIYe17flW6JYop4CSDXfgrBrQ1j/urscMVnqKZ5BPas8gGmOI9SdipDuWZLxtcvl
- Mmz9wRcoRgu/9uXJ6ZpUa/51n+/tuhJfcPBXLW6vUUzSVpIC/iKcrMU9McSBq5farTnJeJZSXUu
- JaGVpPhTtYC/mJizYXBKSInR21n8OazOiqFEB7J4V0FCMz28aZqKLUQVO84TWsb6YgZB1qo1Slj
- d5NFPosELNF1Vr+jMNnRJD21iycPFwCe1a+Pl5FlVbUwY2Vcego5/32BKZtXUwmRP+ilpJ/s5ZJ
- sOsLQdzPQEky9JCOgA2bi8Yv+6IhpJ+DncGL4G4UxWwlfLlerA/E7MC6AC94fKmARh9/XfEJNBH
- mxDG3vXU5wrPpFGO5fA==
-X-Proofpoint-ORIG-GUID: Ah7oUvmCG94ih6GoeTLXnWOGGA9hladL
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-09_02,2026-10-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 clxscore=1015 spamscore=0
- lowpriorityscore=0 adultscore=0 suspectscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610090027
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-21-ed985aefd611@kernel.org>
 
-Some QUP serial engines are configured to operate in GPI DMA mode,
-while the UART driver currently supports only FIFO and SE DMA
-transfers. Add support for UARTs operating through the DMAengine GPI
-interface.
- 
-Allow UART serial engines to remain in GPI DMA mode during firmware
-loading instead of forcing FIFO mode. Detect GPI DMA operation during
-port setup and initialize the DMA channels, workqueues and RX buffers
-required for GPI transfers.
- 
-Submit TX and RX transfers through DMAengine when operating in GPI
-mode, and route transfer cancellation and shutdown through the GPI DMA
-channels. Defer these operations to workqueues since the DMAengine path
-may sleep while waiting on mutexes or timeouts, whereas UART transfer
-operations can be invoked with the port spinlock held.
+Hi Bryan,
 
-Pass clock source, clock divider, character format, parity,
-flow-control settings, RX stale timeout, FIFO threshold and other
-UART configuration parameters to the GPI DMA driver through the
-UART peripheral configuration structure. Start RX only after this
-configuration is available so the DMA engine can program the
-corresponding CONFIG0 TRE.
+kernel test robot noticed the following build errors:
 
-Support 2-wire UART TX and RX transfers in GPI DMA mode. GPI DMA
-support for CTS/RTS flow control is outside the scope of this change.
+[auto build test ERROR on 8d3ae59288f1e7d58d76558a6ee96d533bc5019f]
 
-Keep the existing FIFO and SE DMA paths unchanged.
+url:    https://github.com/intel-lab-lkp/linux/commits/Bryan-O-Donoghue/media-qcom-camss-vfe-Rename-gen3-back-to-vfe780/20261005-191331
+base:   8d3ae59288f1e7d58d76558a6ee96d533bc5019f
+patch link:    https://lore.kernel.org/r/20261005-linux-mainline-7-2-sm8650-hdk-rfc-0-v1-21-ed985aefd611%40kernel.org
+patch subject: [PATCH 21/74] media: qcom: camss: vfe: Represent vfe wm inside of a struct
+config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20261009/202610091546.gjktxCLS-lkp@intel.com/config)
+compiler: sh4-linux-gcc (GCC) 16.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261009/202610091546.gjktxCLS-lkp@intel.com/reproduce)
 
-Signed-off-by: Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
----
- drivers/soc/qcom/qcom-geni-se.c       |   4 -
- drivers/tty/serial/qcom_geni_serial.c | 576 ++++++++++++++++++++++++++++++++--
- 2 files changed, 557 insertions(+), 23 deletions(-)
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610091546.gjktxCLS-lkp@intel.com/
 
-diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
-index 074087c592cc..2e5ba93e1d7e 100644
---- a/drivers/soc/qcom/qcom-geni-se.c
-+++ b/drivers/soc/qcom/qcom-geni-se.c
-@@ -1582,10 +1582,6 @@ int geni_load_se_firmware(struct geni_se *se, enum geni_se_protocol_type protoco
- 	if (of_property_read_bool(se->dev->of_node, "qcom,enable-gsi-dma"))
- 		mode = GENI_GPI_DMA;
- 
--	/* GSI mode is not supported by the UART driver; therefore, setting FIFO mode */
--	if (protocol == GENI_SE_UART)
--		mode = GENI_SE_FIFO;
--
- 	ret = request_firmware(&fw, fw_name, se->dev);
- 	if (ret) {
- 		if (ret == -ENOENT)
-diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
-index 4a6f526340b8..eb66194a7f64 100644
---- a/drivers/tty/serial/qcom_geni_serial.c
-+++ b/drivers/tty/serial/qcom_geni_serial.c
-@@ -12,7 +12,9 @@
- 
- #include <linux/clk.h>
- #include <linux/console.h>
-+#include <linux/dmaengine.h>
- #include <linux/dma-mapping.h>
-+#include <linux/dma/qcom-gpi-dma.h>
- #include <linux/io.h>
- #include <linux/iopoll.h>
- #include <linux/irq.h>
-@@ -69,6 +71,16 @@
- #define PAR_ODD				0x01
- #define PAR_SPACE			0x10
- 
-+/* UART GPI mode parity flags */
-+#define GPI_PAR_EVEN		0x0
-+#define GPI_PAR_ODD		0x1
-+#define GPI_PAR_SPACE		0x2
-+#define GPI_PAR_MARK		0x3
-+#define GPI_PAR_NONE		0x4
-+
-+#define GPI_START_TRANSFER	1
-+#define GPI_CHAR_SIZE_OFFSET	5
-+
- /* SE_UART_MANUAL_RFR register fields */
- #define UART_MANUAL_RFR_EN		BIT(31)
- #define UART_RFR_NOT_READY		BIT(1)
-@@ -106,6 +118,8 @@
- #define BYTES_PER_FIFO_WORD		4U
- 
- #define DMA_RX_BUF_SIZE		2048
-+#define NUM_GPI_RX_BUFFERS	4
-+#define INC_WRAP_RX_INDEX(index) (((index) + 1) % NUM_GPI_RX_BUFFERS)
- 
- static DEFINE_IDA(port_ida);
- 
-@@ -129,6 +143,26 @@ struct qcom_geni_private_data {
- 	unsigned int write_cached_bytes_cnt;
- };
- 
-+struct qcom_geni_serial_gpi {
-+	struct gpi_serial_config peripheral;
-+	struct qcom_geni_serial_port *port;
-+	struct work_struct tx_cancel_work;
-+	struct work_struct tx_xfer_work;
-+	struct work_struct rx_cancel_work;
-+	struct work_struct rx_xfer_work;
-+	struct workqueue_struct *tx_wq;
-+	struct workqueue_struct *rx_wq;
-+	struct completion tx_xfer_completion;
-+	struct dma_chan *tx_chan;
-+	struct dma_chan *rx_chan;
-+	dma_addr_t rx_dma_addr[NUM_GPI_RX_BUFFERS];
-+	void *rx_buf[NUM_GPI_RX_BUFFERS];
-+	u32 xmit_size;
-+	u8 rx_done_index;
-+	unsigned int baud;
-+	bool tx_cancel_pending;
-+};
-+
- struct qcom_geni_serial_port {
- 	struct uart_port uport;
- 	struct geni_se se;
-@@ -157,6 +191,9 @@ struct qcom_geni_serial_port {
- 	struct qcom_geni_private_data private_data;
- 	const struct qcom_geni_device_data *dev_data;
- 	struct notifier_block panic_nb;
-+
-+	struct qcom_geni_serial_gpi *gpi;
-+	bool gpi_mode;
- };
- 
- static const struct uart_ops qcom_geni_console_pops;
-@@ -170,6 +207,8 @@ static void qcom_geni_serial_cancel_tx_cmd(struct uart_port *uport);
- static int qcom_geni_serial_port_setup(struct uart_port *uport);
- static void qcom_geni_serial_start_tx_fifo(struct uart_port *uport);
- static void qcom_geni_serial_resume_tx(struct uart_port *uport);
-+static void
-+qcom_geni_serial_gpi_rx_callback_result(void *cb, const struct dmaengine_result *result);
- 
- static inline struct qcom_geni_serial_port *to_dev_port(struct uart_port *uport)
- {
-@@ -789,6 +828,11 @@ static void handle_rx_uart(struct uart_port *uport, u32 bytes)
- 
- static unsigned int qcom_geni_serial_tx_empty(struct uart_port *uport)
- {
-+	struct qcom_geni_serial_port *port = to_dev_port(uport);
-+
-+	if (port->gpi_mode)
-+		return !port->tx_dma_addr ? TIOCSER_TEMT : 0;
-+
- 	return !readl(uport->membase + SE_GENI_TX_FIFO_STATUS);
- }
- 
-@@ -805,6 +849,17 @@ static void qcom_geni_serial_stop_tx_dma(struct uart_port *uport)
- {
- 	struct qcom_geni_serial_port *port = to_dev_port(uport);
- 
-+	if (port->gpi_mode && port->tx_dma_addr) {
-+		/*
-+		 * Allow tx_xfer_work to finish. Buffer cleanup is deferred until
-+		 * the DMA channel has been terminated.
-+		 */
-+		port->gpi->tx_cancel_pending = true;
-+		complete(&port->gpi->tx_xfer_completion);
-+		queue_work(port->gpi->tx_wq, &port->gpi->tx_cancel_work);
-+		return;
-+	}
-+
- 	if (qcom_geni_serial_main_active(uport))
- 		__qcom_geni_serial_cancel_tx_cmd(uport);
- 
-@@ -836,6 +891,11 @@ static void qcom_geni_serial_start_tx_dma(struct uart_port *uport)
- 	if (kfifo_is_empty(&tport->xmit_fifo))
- 		return;
- 
-+	if (port->gpi_mode) {
-+		queue_work(port->gpi->tx_wq, &port->gpi->tx_xfer_work);
-+		return;
-+	}
-+
- 	xmit_size = kfifo_out_linear_ptr(&tport->xmit_fifo, &tail,
- 			UART_XMIT_SIZE);
- 
-@@ -996,6 +1056,11 @@ static void qcom_geni_serial_stop_rx_dma(struct uart_port *uport)
- 	if (!qcom_geni_serial_secondary_active(uport))
- 		return;
- 
-+	if (port->gpi_mode) {
-+		queue_work(port->gpi->rx_wq, &port->gpi->rx_cancel_work);
-+		return;
-+	}
-+
- 	geni_se_cancel_s_cmd(&port->se);
- 	done = qcom_geni_serial_poll_bit(uport, SE_DMA_RX_IRQ_STAT,
- 			RX_EOT, true);
-@@ -1021,6 +1086,11 @@ static void qcom_geni_serial_start_rx_dma(struct uart_port *uport)
- 	if (qcom_geni_serial_secondary_active(uport))
- 		qcom_geni_serial_stop_rx_dma(uport);
- 
-+	if (port->gpi_mode) {
-+		queue_work(port->gpi->rx_wq, &port->gpi->rx_xfer_work);
-+		return;
-+	}
-+
- 	geni_se_setup_s_cmd(&port->se, UART_START_READ, UART_PARAM_RFR_OPEN);
- 
- 	if (!port->rx_dma_addr) {
-@@ -1311,6 +1381,16 @@ static void qcom_geni_serial_shutdown(struct uart_port *uport)
- 	/* Atomic console output queues tx_kick without taking the port lock. */
- 	WRITE_ONCE(port->tx_kick_enabled, false);
- 	irq_work_sync(&port->tx_kick);
-+
-+	if (port->gpi_mode) {
-+		qcom_geni_serial_stop_tx_dma(uport);
-+		flush_workqueue(port->gpi->tx_wq);
-+		flush_workqueue(port->gpi->rx_wq);
-+
-+		pm_runtime_put_sync(uport->dev);
-+		return;
-+	}
-+
- 	disable_irq(uport->irq);
- 
- 	uart_port_lock_irq(uport);
-@@ -1332,6 +1412,379 @@ static void qcom_geni_serial_flush_buffer_fifo(struct uart_port *uport)
- 	qcom_geni_serial_cancel_tx_cmd(uport);
- }
- 
-+static void qcom_geni_serial_gpi_tx_unmap(struct qcom_geni_serial_port *port)
-+{
-+	struct qcom_geni_serial_gpi *gpi = port->gpi;
-+
-+	if (!port->tx_dma_addr)
-+		return;
-+
-+	dma_unmap_single(port->se.dev->parent, port->tx_dma_addr,
-+			 gpi->xmit_size, DMA_TO_DEVICE);
-+	port->tx_dma_addr = (dma_addr_t)NULL;
-+}
-+
-+static void qcom_geni_serial_gpi_cancel_tx_work(struct work_struct *work)
-+{
-+	struct qcom_geni_serial_gpi *gpi = container_of(work, struct qcom_geni_serial_gpi,
-+							tx_cancel_work);
-+	struct qcom_geni_serial_port *port = gpi->port;
-+
-+	dmaengine_terminate_sync(gpi->tx_chan);
-+	qcom_geni_serial_gpi_tx_unmap(port);
-+}
-+
-+static void qcom_geni_serial_gpi_cancel_rx_work(struct work_struct *work)
-+{
-+	struct qcom_geni_serial_gpi *gpi = container_of(work, struct qcom_geni_serial_gpi,
-+							rx_cancel_work);
-+	dmaengine_terminate_sync(gpi->rx_chan);
-+}
-+
-+static void qcom_geni_serial_gpi_rx_queue_dma_tre(struct qcom_geni_serial_port *port, u8 idx)
-+{
-+	struct qcom_geni_serial_gpi *gpi = port->gpi;
-+	struct uart_port *uport = &port->uport;
-+	struct dma_async_tx_descriptor *desc;
-+	unsigned long flags = DMA_PREP_INTERRUPT | DMA_CTRL_ACK;
-+	dma_cookie_t rx_cookie;
-+
-+	desc = dmaengine_prep_slave_single(gpi->rx_chan, gpi->rx_dma_addr[idx],
-+					   UART_XMIT_SIZE, DMA_DEV_TO_MEM, flags);
-+	if (!desc) {
-+		dev_err(uport->dev, "Error setting up rx desc\n");
-+		return;
-+	}
-+
-+	desc->callback_result = qcom_geni_serial_gpi_rx_callback_result;
-+	desc->callback_param = port;
-+	rx_cookie = dmaengine_submit(desc);
-+	if (dma_submit_error(rx_cookie)) {
-+		dev_err(uport->dev, "%s: dmaengine_submit failed: %d\n", __func__, rx_cookie);
-+		dmaengine_terminate_sync(gpi->rx_chan);
-+		return;
-+	}
-+	dma_async_issue_pending(gpi->rx_chan);
-+}
-+
-+static void
-+qcom_geni_serial_gpi_rx_callback_result(void *cb, const struct dmaengine_result *result)
-+{
-+	struct qcom_geni_serial_port *port = cb;
-+	struct uart_port *uport = &port->uport;
-+	struct tty_port *tport = &uport->state->port;
-+	size_t bytes = UART_XMIT_SIZE - result->residue;
-+	u8 idx = port->gpi->rx_done_index;
-+	int ret;
-+
-+	if (result->result != DMA_TRANS_NOERROR) {
-+		dev_err(uport->dev, "rx dma xfer failed: %d\n", result->result);
-+		qcom_geni_serial_stop_rx_dma(uport);
-+		qcom_geni_serial_start_rx_dma(uport);
-+		return;
-+	}
-+
-+	if (bytes <= 0) {
-+		port->gpi->rx_done_index = INC_WRAP_RX_INDEX(idx);
-+		qcom_geni_serial_gpi_rx_queue_dma_tre(port, idx);
-+		return;
-+	}
-+
-+	dma_sync_single_for_cpu(port->se.dev->parent,
-+				port->gpi->rx_dma_addr[idx],
-+				UART_XMIT_SIZE, DMA_FROM_DEVICE);
-+
-+	ret = tty_insert_flip_string(tport, port->gpi->rx_buf[idx], bytes);
-+	if (ret != bytes) {
-+		dev_err(uport->dev, "%s: Unable to push data %d_bytes %zu\n",
-+			__func__, ret, bytes);
-+		WARN_ON_ONCE(1);
-+	}
-+
-+	uport->icount.rx += ret;
-+	tty_flip_buffer_push(tport);
-+	dma_sync_single_for_device(port->se.dev->parent, port->gpi->rx_dma_addr[idx],
-+				   UART_XMIT_SIZE, DMA_FROM_DEVICE);
-+
-+	port->gpi->rx_done_index = INC_WRAP_RX_INDEX(idx);
-+	qcom_geni_serial_gpi_rx_queue_dma_tre(port, idx);
-+}
-+
-+static void qcom_geni_serial_gpi_rx_xfer_work(struct work_struct *work)
-+{
-+	struct qcom_geni_serial_gpi *gpi = container_of(work, struct qcom_geni_serial_gpi,
-+							rx_xfer_work);
-+	struct qcom_geni_serial_port *port = gpi->port;
-+	struct uart_port *uport = &port->uport;
-+	struct dma_slave_config config = {};
-+	int ret, i;
-+
-+	config.peripheral_config = &gpi->peripheral;
-+	config.peripheral_size = sizeof(gpi->peripheral);
-+
-+	ret = dmaengine_slave_config(gpi->rx_chan, &config);
-+	if (ret) {
-+		dev_err(uport->dev, "rx dma config error: %d\n", ret);
-+		return;
-+	}
-+
-+	gpi->rx_done_index = 0;
-+	for (i = 0; i < NUM_GPI_RX_BUFFERS; i++)
-+		qcom_geni_serial_gpi_rx_queue_dma_tre(port, i);
-+}
-+
-+static void
-+qcom_geni_serial_gpi_tx_callback_result(void *cb, const struct dmaengine_result *result)
-+{
-+	struct qcom_geni_serial_port *port = cb;
-+	struct uart_port *uport = &port->uport;
-+	struct tty_port *tport = &uport->state->port;
-+	unsigned long flags;
-+
-+	if (result->result != DMA_TRANS_NOERROR) {
-+		dev_err(uport->dev, "tx dma xfer failed: %d\n", result->result);
-+		qcom_geni_serial_stop_tx_dma(uport);
-+		return;
-+	}
-+
-+	uart_port_lock_irqsave(uport, &flags);
-+	uart_xmit_advance(uport, port->gpi->xmit_size - result->residue);
-+	complete(&port->gpi->tx_xfer_completion);
-+
-+	if (kfifo_len(&tport->xmit_fifo) < WAKEUP_CHARS)
-+		uart_write_wakeup(uport);
-+	uart_port_unlock_irqrestore(uport, flags);
-+}
-+
-+#define UART_BITS_PER_BYTE		10	/* 8N1 */
-+#define UART_TX_SAFETY_COEFF		10
-+#define UART_TX_MIN_TIMEOUT_USEC	20000
-+
-+static unsigned long qcom_geni_serial_gpi_tx_timeout(struct qcom_geni_serial_gpi *gpi)
-+{
-+	u64 wire_time_usec;
-+	u64 timeout_usec;
-+
-+	if (!gpi->xmit_size || WARN_ON_ONCE(!gpi->baud))
-+		return 0;
-+
-+	wire_time_usec = mul_u64_u32_div((u64)gpi->xmit_size * UART_BITS_PER_BYTE,
-+					 USEC_PER_SEC, gpi->baud);
-+	timeout_usec = wire_time_usec * UART_TX_SAFETY_COEFF + UART_TX_MIN_TIMEOUT_USEC;
-+
-+	return usecs_to_jiffies(min_t(u64, timeout_usec, UINT_MAX));
-+}
-+
-+static void qcom_geni_serial_gpi_tx_xfer_work(struct work_struct *work)
-+{
-+	struct qcom_geni_serial_gpi *gpi = container_of(work, struct qcom_geni_serial_gpi,
-+							tx_xfer_work);
-+	struct qcom_geni_serial_port *port = gpi->port;
-+	struct uart_port *uport = &port->uport;
-+	struct tty_port *tport = &uport->state->port;
-+	struct dma_slave_config config = {};
-+	struct dma_async_tx_descriptor *desc;
-+	unsigned long flags = DMA_PREP_INTERRUPT | DMA_CTRL_ACK;
-+	unsigned long time_left;
-+	unsigned long timeout;
-+	dma_cookie_t tx_cookie;
-+	u8 *tail = NULL;
-+	int ret;
-+
-+	gpi->xmit_size = kfifo_out_linear_ptr(&tport->xmit_fifo, &tail,
-+					      UART_XMIT_SIZE);
-+	if (!gpi->xmit_size)
-+		return;
-+
-+	config.peripheral_config = &gpi->peripheral;
-+	config.peripheral_size = sizeof(gpi->peripheral);
-+
-+	ret = dmaengine_slave_config(gpi->tx_chan, &config);
-+	if (ret) {
-+		dev_err(uport->dev, "tx dma config error: %d\n", ret);
-+		return;
-+	}
-+
-+	port->tx_dma_addr = dma_map_single(port->se.dev->parent, tail,
-+					   gpi->xmit_size, DMA_TO_DEVICE);
-+	ret = dma_mapping_error(port->se.dev->parent, port->tx_dma_addr);
-+	if (ret) {
-+		dev_err(uport->dev, "DMA mapping failure: %d\n", ret);
-+		port->tx_dma_addr = (dma_addr_t)NULL;
-+		return;
-+	}
-+
-+	dma_sync_single_for_cpu(port->se.dev->parent, port->tx_dma_addr,
-+				gpi->xmit_size, DMA_TO_DEVICE);
-+	desc = dmaengine_prep_slave_single(gpi->tx_chan, port->tx_dma_addr,
-+					   gpi->xmit_size, DMA_MEM_TO_DEV, flags);
-+	if (!desc) {
-+		dev_err(uport->dev, "Error setting up tx desc\n");
-+		goto err;
-+	}
-+
-+	desc->callback_result = qcom_geni_serial_gpi_tx_callback_result;
-+	desc->callback_param = port;
-+	tx_cookie = dmaengine_submit(desc);
-+	if (dma_submit_error(tx_cookie)) {
-+		dev_err(uport->dev, "%s: dmaengine_submit failed: %d\n", __func__, tx_cookie);
-+		dmaengine_terminate_sync(gpi->tx_chan);
-+		goto err;
-+	}
-+	reinit_completion(&port->gpi->tx_xfer_completion);
-+	dma_async_issue_pending(gpi->tx_chan);
-+
-+	gpi->peripheral.set_tx_config = false;
-+
-+	timeout = qcom_geni_serial_gpi_tx_timeout(gpi);
-+
-+	time_left = wait_for_completion_timeout(&port->gpi->tx_xfer_completion, timeout);
-+	if (!time_left) {
-+		dev_err(uport->dev, "Error: gpi tx timedout:%ld\n", timeout);
-+		dmaengine_terminate_sync(gpi->tx_chan);
-+		goto err;
-+	}
-+
-+	/*
-+	 * tx_cancel_work will terminate the channel and release the DMA
-+	 * mapping. Return early to avoid racing with that cleanup.
-+	 */
-+	if (gpi->tx_cancel_pending) {
-+		gpi->tx_cancel_pending = false;
-+		return;
-+	}
-+
-+err:
-+	qcom_geni_serial_gpi_tx_unmap(port);
-+}
-+
-+static void qcom_geni_serial_unprepare_gpi_rx_dma(struct qcom_geni_serial_port *port)
-+{
-+	struct qcom_geni_serial_gpi *gpi = port->gpi;
-+	int i;
-+
-+	for (i = 0; i < NUM_GPI_RX_BUFFERS; i++) {
-+		if (gpi->rx_dma_addr[i]) {
-+			dma_unmap_single(port->se.dev->parent, gpi->rx_dma_addr[i],
-+					 UART_XMIT_SIZE, DMA_FROM_DEVICE);
-+			gpi->rx_dma_addr[i] = (dma_addr_t)NULL;
-+		}
-+	}
-+}
-+
-+static int qcom_geni_serial_prepare_gpi_rx_dma(struct qcom_geni_serial_port *port)
-+{
-+	struct qcom_geni_serial_gpi *gpi = port->gpi;
-+	struct uart_port *uport = &port->uport;
-+	int i, ret;
-+
-+	for (i = 0; i < NUM_GPI_RX_BUFFERS; i++) {
-+		gpi->rx_buf[i] = devm_kzalloc(uport->dev, UART_XMIT_SIZE, GFP_KERNEL);
-+		if (!gpi->rx_buf[i])
-+			return dev_err_probe(uport->dev, -ENOMEM, "RX buffer %d\n", i);
-+
-+		gpi->rx_dma_addr[i] = dma_map_single(port->se.dev->parent, gpi->rx_buf[i],
-+						     UART_XMIT_SIZE, DMA_FROM_DEVICE);
-+		ret = dma_mapping_error(port->se.dev->parent, gpi->rx_dma_addr[i]);
-+		if (ret) {
-+			dev_err(uport->dev, "Failed to map gpi rx buffer[%d]\n", i);
-+			return ret;
-+		}
-+	}
-+	return 0;
-+}
-+
-+static void qcom_geni_serial_release_gpi_dma(struct qcom_geni_serial_port *port)
-+{
-+	if (port->gpi->rx_chan) {
-+		dma_release_channel(port->gpi->rx_chan);
-+		port->gpi->rx_chan = NULL;
-+	}
-+
-+	if (port->gpi->tx_chan) {
-+		dma_release_channel(port->gpi->tx_chan);
-+		port->gpi->tx_chan = NULL;
-+	}
-+}
-+
-+static int qcom_geni_serial_setup_gpi_dma(struct qcom_geni_serial_port *port)
-+{
-+	struct qcom_geni_serial_gpi *gpi = port->gpi;
-+	int ret = -EINVAL;
-+
-+	gpi->tx_chan = dma_request_chan(port->se.dev, "tx");
-+	if (IS_ERR(gpi->tx_chan)) {
-+		dev_err(port->se.dev, "Failed to get tx DMA ch\n");
-+		return ret;
-+	}
-+
-+	gpi->rx_chan = dma_request_chan(port->se.dev, "rx");
-+	if (IS_ERR(gpi->rx_chan)) {
-+		dev_err(port->se.dev, "Failed to get rx DMA ch\n");
-+		dma_release_channel(gpi->tx_chan);
-+		gpi->tx_chan = NULL;
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int qcom_geni_serial_gpi_init(struct qcom_geni_serial_port *port)
-+{
-+	struct uart_port *uport = &port->uport;
-+	int ret;
-+
-+	port->gpi = devm_kzalloc(uport->dev, sizeof(*port->gpi), GFP_KERNEL);
-+	if (!port->gpi)
-+		return -ENOMEM;
-+
-+	ret = qcom_geni_serial_prepare_gpi_rx_dma(port);
-+	if (ret)
-+		return ret;
-+
-+	port->gpi->port = port;
-+	ret = qcom_geni_serial_setup_gpi_dma(port);
-+	if (ret)
-+		goto err_unprepare_gpi_rx_dma;
-+	/*
-+	 * Defer GPI DMA operations to workqueues as the DMAengine path may
-+	 * sleep while waiting on mutexes or timeouts, whereas UART transfer
-+	 * operations can be invoked with the port spinlock held.
-+	 */
-+	port->gpi->tx_wq = alloc_ordered_workqueue("%s_tx_wq", WQ_HIGHPRI,
-+						   dev_name(uport->dev));
-+	if (!port->gpi->tx_wq) {
-+		ret = -ENOMEM;
-+		goto err_release_gpi_dma;
-+	}
-+
-+	port->gpi->rx_wq = alloc_ordered_workqueue("%s_rx_wq", WQ_HIGHPRI,
-+						   dev_name(uport->dev));
-+	if (!port->gpi->rx_wq) {
-+		ret = -ENOMEM;
-+		goto err_destroy_tx_wq;
-+	}
-+
-+	INIT_WORK(&port->gpi->tx_xfer_work, qcom_geni_serial_gpi_tx_xfer_work);
-+	INIT_WORK(&port->gpi->tx_cancel_work, qcom_geni_serial_gpi_cancel_tx_work);
-+	INIT_WORK(&port->gpi->rx_xfer_work, qcom_geni_serial_gpi_rx_xfer_work);
-+	INIT_WORK(&port->gpi->rx_cancel_work, qcom_geni_serial_gpi_cancel_rx_work);
-+	init_completion(&port->gpi->tx_xfer_completion);
-+
-+	/* Prevent spurious interrupts during data transfers for gpi mode */
-+	writel(0, uport->membase + SE_GENI_M_IRQ_EN);
-+	writel(0, uport->membase + SE_GENI_S_IRQ_EN);
-+	return 0;
-+
-+err_destroy_tx_wq:
-+	destroy_workqueue(port->gpi->tx_wq);
-+err_release_gpi_dma:
-+	qcom_geni_serial_release_gpi_dma(port);
-+err_unprepare_gpi_rx_dma:
-+	qcom_geni_serial_unprepare_gpi_rx_dma(port);
-+	return ret;
-+}
-+
- static int qcom_geni_serial_port_setup(struct uart_port *uport)
- {
- 	struct qcom_geni_serial_port *port = to_dev_port(uport);
-@@ -1352,13 +1805,26 @@ static int qcom_geni_serial_port_setup(struct uart_port *uport)
- 		return -ENXIO;
- 	}
- 
-+	port->gpi_mode = readl(uport->membase + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE;
-+	if (port->gpi_mode) {
-+		geni_se_select_mode(&port->se, GENI_GPI_DMA);
-+		ret = qcom_geni_serial_gpi_init(port);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	qcom_geni_serial_stop_rx(uport);
- 
- 	ret = setup_fifos(port);
- 	if (ret)
- 		return ret;
- 
--	writel(rxstale, uport->membase + SE_UART_RX_STALE_CNT);
-+	if (port->gpi_mode) {
-+		port->gpi->peripheral.rx_stale_timeout = rxstale;
-+		port->gpi->peripheral.rfr_level = port->rx_fifo_depth - 2;
-+	} else {
-+		writel(rxstale, uport->membase + SE_UART_RX_STALE_CNT);
-+	}
- 
- 	pin_swap = readl(uport->membase + SE_UART_IO_MACRO_CTRL);
- 	if (port->rx_tx_swap) {
-@@ -1379,10 +1845,12 @@ static int qcom_geni_serial_port_setup(struct uart_port *uport)
- 	 */
- 	if (uart_console(uport))
- 		qcom_geni_serial_poll_tx_done(uport);
--	geni_se_config_packing(&port->se, BITS_PER_BYTE, BYTES_PER_FIFO_WORD,
--			       false, true, true);
--	geni_se_init(&port->se, UART_RX_WM, port->rx_fifo_depth - 2);
--	geni_se_select_mode(&port->se, port->dev_data->mode);
-+	if (!port->gpi_mode) {
-+		geni_se_config_packing(&port->se, BITS_PER_BYTE, BYTES_PER_FIFO_WORD,
-+				       false, true, true);
-+		geni_se_init(&port->se, UART_RX_WM, port->rx_fifo_depth - 2);
-+		geni_se_select_mode(&port->se, port->dev_data->mode);
-+	}
- 	port->setup = true;
- 
- 	return 0;
-@@ -1415,11 +1883,23 @@ static int qcom_geni_serial_startup(struct uart_port *uport)
- 	if (uart_console(uport))
- 		tport->closing_wait = ASYNC_CLOSING_WAIT_NONE;
- 
--	uart_port_lock_irq(uport);
--	qcom_geni_serial_start_rx(uport);
--	uart_port_unlock_irq(uport);
-+	/*
-+	 * FIFO and SE-DMA modes apply UART configuration directly to
-+	 * hardware registers, so configuration updates take effect
-+	 * without restarting RX.
-+	 *
-+	 * GPI mode programs UART configuration through a CFG TRE
-+	 * submitted with an RX transfer. Defer RX startup until the
-+	 * initial configuration can be queued.
-+	 */
-+	if (!port->gpi_mode) {
-+		uart_port_lock_irq(uport);
-+		qcom_geni_serial_start_rx(uport);
-+		uart_port_unlock_irq(uport);
-+
-+		enable_irq(uport->irq);
-+	}
- 
--	enable_irq(uport->irq);
- 	WRITE_ONCE(port->tx_kick_enabled, true);
- 
- 	return 0;
-@@ -1461,6 +1941,10 @@ static int geni_serial_set_rate(struct geni_se *se, unsigned long baud)
- 
- 	uport->uartclk = clk_rate;
- 	port->clk_rate = clk_rate;
-+	if (port->gpi_mode) {
-+		port->gpi->peripheral.clk_div = clk_div;
-+		port->gpi->peripheral.clk_src = clk_idx;
-+	}
- 	dev_pm_opp_set_rate(uport->dev, clk_rate);
- 	ser_clk_cfg = SER_CLK_EN;
- 	ser_clk_cfg |= clk_div << CLK_DIV_SHFT;
-@@ -1474,6 +1958,9 @@ static int geni_serial_set_rate(struct geni_se *se, unsigned long baud)
- 	port->se.icc_paths[CPU_TO_GENI].avg_bw = Bps_to_icc(baud);
- 	geni_icc_set_bw(&port->se);
- 
-+	if (port->gpi_mode)
-+		return 0;
-+
- 	writel(ser_clk_cfg, uport->membase + GENI_SER_M_CLK_CFG);
- 	writel(ser_clk_cfg, uport->membase + GENI_SER_S_CLK_CFG);
- 	/* Configure clock selection register with the selected clock index */
-@@ -1494,8 +1981,22 @@ static void qcom_geni_serial_set_termios(struct uart_port *uport,
- 	u32 rx_trans_cfg;
- 	u32 rx_parity_cfg;
- 	u32 stop_bit_len;
-+	u8 gpi_parity;
- 	int ret = 0;
- 
-+	/*
-+	 * Drain pending GPI transfers before updating the UART
-+	 * configuration. Unlike FIFO and SE-DMA modes, configuration
-+	 * changes are not applied directly to hardware registers in
-+	 * GPI mode. Stop the active RX transfer so the next RX request
-+	 * can submit an updated CFG TRE.
-+	 */
-+	if (port->gpi_mode) {
-+		flush_workqueue(port->gpi->tx_wq);
-+		qcom_geni_serial_stop_rx(uport);
-+		flush_workqueue(port->gpi->rx_wq);
-+	}
-+
- 	/* baud rate */
- 	baud = uart_get_baud_rate(uport, termios, old, 300, 8000000);
- 
-@@ -1516,18 +2017,22 @@ static void qcom_geni_serial_set_termios(struct uart_port *uport,
- 		if (termios->c_cflag & PARODD) {
- 			tx_parity_cfg |= PAR_ODD;
- 			rx_parity_cfg |= PAR_ODD;
-+			gpi_parity = GPI_PAR_ODD;
- 		} else if (termios->c_cflag & CMSPAR) {
- 			tx_parity_cfg |= PAR_SPACE;
- 			rx_parity_cfg |= PAR_SPACE;
-+			gpi_parity = GPI_PAR_SPACE;
- 		} else {
- 			tx_parity_cfg |= PAR_EVEN;
- 			rx_parity_cfg |= PAR_EVEN;
-+			gpi_parity = GPI_PAR_EVEN;
- 		}
- 	} else {
- 		tx_trans_cfg &= ~UART_TX_PAR_EN;
- 		rx_trans_cfg &= ~UART_RX_PAR_EN;
- 		tx_parity_cfg &= ~PAR_CALC_EN;
- 		rx_parity_cfg &= ~PAR_CALC_EN;
-+		gpi_parity = GPI_PAR_NONE;
- 	}
- 
- 	/* bits per char */
-@@ -1570,16 +2075,41 @@ static void qcom_geni_serial_set_termios(struct uart_port *uport,
- 		WRITE_ONCE(port->poll_timeout_us, timeout);
- 	}
- 
--	if (!uart_console(uport))
--		writel(port->loopback,
--				uport->membase + SE_UART_LOOPBACK_CFG);
--	writel(tx_trans_cfg, uport->membase + SE_UART_TX_TRANS_CFG);
--	writel(tx_parity_cfg, uport->membase + SE_UART_TX_PARITY_CFG);
--	writel(rx_trans_cfg, uport->membase + SE_UART_RX_TRANS_CFG);
--	writel(rx_parity_cfg, uport->membase + SE_UART_RX_PARITY_CFG);
--	writel(bits_per_char, uport->membase + SE_UART_TX_WORD_LEN);
--	writel(bits_per_char, uport->membase + SE_UART_RX_WORD_LEN);
--	writel(stop_bit_len, uport->membase + SE_UART_TX_STOP_BIT_LEN);
-+	if (port->gpi_mode) {
-+		struct gpi_serial_config *peripheral = &port->gpi->peripheral;
-+
-+		port->gpi->baud = baud;
-+		peripheral->char_size = bits_per_char - GPI_CHAR_SIZE_OFFSET;
-+		peripheral->loopback_en = !!port->loopback;
-+		peripheral->packing = true;
-+		peripheral->stop_bit_len = stop_bit_len;
-+		peripheral->opcode = GPI_START_TRANSFER;
-+		peripheral->parity = gpi_parity;
-+		peripheral->hw_flow_ctrl_en = !(tx_trans_cfg & UART_CTS_MASK);
-+		peripheral->set_rx_config = true;
-+		peripheral->set_tx_config = true;
-+	} else {
-+		if (!uart_console(uport))
-+			writel(port->loopback, uport->membase + SE_UART_LOOPBACK_CFG);
-+		writel(tx_trans_cfg, uport->membase + SE_UART_TX_TRANS_CFG);
-+		writel(tx_parity_cfg, uport->membase + SE_UART_TX_PARITY_CFG);
-+		writel(rx_trans_cfg, uport->membase + SE_UART_RX_TRANS_CFG);
-+		writel(rx_parity_cfg, uport->membase + SE_UART_RX_PARITY_CFG);
-+		writel(bits_per_char, uport->membase + SE_UART_TX_WORD_LEN);
-+		writel(bits_per_char, uport->membase + SE_UART_RX_WORD_LEN);
-+		writel(stop_bit_len, uport->membase + SE_UART_TX_STOP_BIT_LEN);
-+	}
-+
-+	/*
-+	 * Re-arm RX to submit the updated CFG TRE. FIFO and SE-DMA
-+	 * modes apply configuration changes immediately through
-+	 * register updates, whereas GPI mode requires a new RX
-+	 * transfer for the updated settings to reach hardware.
-+	 */
-+	if (port->gpi_mode) {
-+		qcom_geni_serial_start_rx(uport);
-+		flush_workqueue(port->gpi->rx_wq);
-+	}
- 
- 	trace_geni_serial_set_termios(uport->dev, baud, bits_per_char,
- 				      tx_trans_cfg, tx_parity_cfg, rx_trans_cfg,
-@@ -2035,6 +2565,14 @@ static void qcom_geni_serial_remove(struct platform_device *pdev)
- 
- 	WRITE_ONCE(port->tx_kick_enabled, false);
- 	irq_work_sync(&port->tx_kick);
-+
-+	if (port->gpi_mode && port->setup) {
-+		destroy_workqueue(port->gpi->tx_wq);
-+		destroy_workqueue(port->gpi->rx_wq);
-+		qcom_geni_serial_release_gpi_dma(port);
-+		qcom_geni_serial_unprepare_gpi_rx_dma(port);
-+	}
-+
- 	dev_pm_clear_wake_irq(&pdev->dev);
- 	device_init_wakeup(&pdev->dev, false);
- 	if (!port->dev_data->console)
+All errors (new ones prefixed by >>):
 
--- 
-2.34.1
+   drivers/media/platform/qcom/camss/camss-vfe-17x.c: In function 'vfe_get_output':
+   drivers/media/platform/qcom/camss/camss-vfe-17x.c:395:16: error: assignment to 'struct vfe_output *' from incompatible pointer type 'struct vfe_output (*)[1]' [-Wincompatible-pointer-types]
+     395 |         output = &line->output;
+         |                ^
+>> drivers/media/platform/qcom/camss/camss-vfe-17x.c:408:15: error: 'struct vfe_output' has no member named 'wm_idx'
+     408 |         output->wm_idx[0] = wm_idx;
+         |               ^~
+   drivers/media/platform/qcom/camss/camss-vfe-17x.c:417:35: error: 'struct vfe_output' has no member named 'wm_idx'
+     417 |         vfe_release_wm(vfe, output->wm_idx[0]);
+         |                                   ^~
 
+
+vim +408 drivers/media/platform/qcom/camss/camss-vfe-17x.c
+
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  385  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  386  static int vfe_get_output(struct vfe_line *line)
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  387  {
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  388  	struct vfe_device *vfe = to_vfe(line);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  389  	struct vfe_output *output;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  390  	unsigned long flags;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  391  	int wm_idx;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  392  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  393  	spin_lock_irqsave(&vfe->output_lock, flags);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  394  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  395  	output = &line->output;
+8ce158c1be981b drivers/media/platform/qcom/camss/camss-vfe-170.c Milen Mitkov 2022-12-09  396  	if (output->state > VFE_OUTPUT_RESERVED) {
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  397  		dev_err(vfe->camss->dev, "Output is running\n");
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  398  		goto error;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  399  	}
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  400  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  401  	output->wm_num = 1;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  402  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  403  	wm_idx = vfe_reserve_wm(vfe, line->id);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  404  	if (wm_idx < 0) {
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  405  		dev_err(vfe->camss->dev, "Can not reserve wm\n");
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  406  		goto error_get_wm;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  407  	}
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16 @408  	output->wm_idx[0] = wm_idx;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  409  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  410  	output->drop_update_idx = 0;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  411  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  412  	spin_unlock_irqrestore(&vfe->output_lock, flags);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  413  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  414  	return 0;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  415  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  416  error_get_wm:
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  417  	vfe_release_wm(vfe, output->wm_idx[0]);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  418  	output->state = VFE_OUTPUT_OFF;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  419  error:
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  420  	spin_unlock_irqrestore(&vfe->output_lock, flags);
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  421  
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  422  	return -EINVAL;
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  423  }
+7319cdf189bb64 drivers/media/platform/qcom/camss/camss-vfe-170.c Robert Foss  2021-03-16  424  
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
