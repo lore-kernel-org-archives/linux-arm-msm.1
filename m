@@ -1,166 +1,213 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65F373D34A2
-	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 14:38:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85C88473C8D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 14:38:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791556699; cv=none; b=s2/b9APNJ0vq0UeFL212olg4/nr2/CrqlkB7fjfKGbztz1l4ornoNHwOhG4A3JlKEH9cTOgO/GBfSC6KHNdeIy3nozs6tqxVHTMugKy2Oiybe2pchTIJ6Ppet+GsRnigeckpxo5oqIjHXk7obZyAYjIxJBe/WeMA8ml8+HqwKA8=
+	t=1791556712; cv=none; b=LgqIg3u7r+WVCyWZeFbj5uiHRxeu4sQzLc6OYE+G1Worm5MFHb0NGzyOEtWBfU0aHJFZz3jk8sVTYrUVi4YDrkkHVHUm5QmTw7qPNver0Sr+tJqYparUROQMjWMObbmnioqP7J/1ImdtTFsfLaBdUYUpFlaxPKQNfXOUvnm9vjI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791556699; c=relaxed/simple;
-	bh=WVChwmzOJXlx/K3vTVPxtUdHIg/2GuvU3lzTNBEWicI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tRsaKGbnV0yq7dOex/CqAbBYQ8onzKWOh6Qj0plw0DMkrmfhOtFt1E2bAXgCXdJVnJtgflH/ylRW37ZzPj02ILHs/Yz5dA0HlpQlMeGslrvTcNIATwp7rZT90mgLBqUrmZGEZBCjRsBQ9pFjbOTTP7kgvavDLv4mihBsq65M2/0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=kmoBcd3x; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791556712; c=relaxed/simple;
+	bh=fR7q+Enx5sddKW2mLK9nmPbd75EbrXPCo0qCI1rlWN0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=WyQYZlBcs39i3p5+yEDqiOxy8sNSPa6phdOTMWsV0Dn9iErlI+uox2v7M4Atq7NJL6ghUaNckuqoSS8dp3h49YToRJ8jOzSU8Dzynman1BE3GyLc4wwOxteNonIsxJF2Zj7VsMwRwTaoCf4HwruadCmyYxCkALHKknuYiQJkBac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=No+ZOGgc; arc=none smtp.client-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="kmoBcd3x"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4956869750eso26148915e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 07:38:18 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="No+ZOGgc"
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48afcd7ba9bso2473237f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 07:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791556696; x=1792161496; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ADsYu9bd8YELZpguZOm7XXP0fQTzNLazolnLueW7QDs=;
-        b=kmoBcd3xP3Pv9Q053KJBCo01tw/yzQqUAwN5v4t3Hs7UoHOk9EbIIy6EjdCpEGm2XM
-         26CCMqswQ2eDb5v3GxKXWLqnOQTvArBgQK4fCtboUUYU4LRFWAaUs6higRCWjNNgF/hp
-         X/HvocpPEA89YviXoMb8fxnLP3cyG2QfgmMvGEMLtnPz+EsQR8h5UwlCzomPg04Y0jG1
-         R/Hhl5DvJx3a06XJvgQ7CnNm+aW6cwxfl7H+9MWDTbZutyRjWVERbzUaM1J9Fhgo9RmS
-         V7YXcp4feUhEz8D3fYfnkGqfgaR2VJ7ijxNl+B5CgakhbqikTa+Iq6kDHdnqYLmHO1YC
-         Pq7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791556696; x=1792161496;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=baylibre.com; s=google; t=1791556708; x=1792161508; darn=vger.kernel.org;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ADsYu9bd8YELZpguZOm7XXP0fQTzNLazolnLueW7QDs=;
-        b=2qmMGpWVNjWKcn79bnvCLSbD5UQZOS+rNCVwP9JonNRy/AofhHCg7UDtsdq+Fj0D+E
-         nfI3MmxHiPjRaxfniw+/xfz14TmpZFStiOp+HScAJAzZq/XJaXBNvt4HmdOwF8uBAq+s
-         uO0lC0RxkkvTms3rr692eoNawL64/jyH2y8fTrXaaNshgMuJEVvSjR510QHr1uoZPiLu
-         AhfNKuRm7HFRzOn9Ito56lwyq3TfJedRE5O627g1AzIBP3BljwONOQowlNLF2AJgCwJz
-         TGWzDbjJVgTZs4UNmha/4lJh8tNJQB+0IyQEyCXcHSuIrdQCasKutsmQQeNS/BArFSYp
-         p1cA==
-X-Forwarded-Encrypted: i=1; AKwUvByRSFM0avCz6fjDjZzgsP6xMhKjvuYgVIzjXMccH3LcNeg2ut7vOdEFs7kKGwGw+n8ZK4Dko+mR9yjhhg4I@vger.kernel.org
-X-Gm-Message-State: AFuF++nBlTqWDZnizFd+jkLmvFNkSCPS08yOAOtTJwyCCfoaBxoczOYL
-	UIq9fPCgdHNYvuHyNE5RHrcfEMsMohliQLUjphlIKo+GGgrU2qh/WSVKEHZaiNoSz0c0eUgCr8u
-	4Lz4gz9I=
-X-Gm-Gg: AYBFou0wDhJQsPDw2fLqjMmqdnEra0oHzgdS0Ej61Z/hTjY453BTDhzLl9iaxAbmuiN
-	QVY+j2RoZPCOph4Q6618SJC0D3Oz3N+IncRGehmmkq/GPUjTaiSVuksqQ+rWUhzIF2DYuIkZkZJ
-	3wPU+nAKa+n/PDoxJY0LNYwyx4NQsm33vUgxW70YFzd6YAhB2zh9o+xW5ip7o10WiApal5Xg4mh
-	tnp2merzK+VLZFpEVDODvrBxkyz9X0/R+NbGihTJu33k8XJ9LMd+EmTzQgL66fQ0sooF1ATLfki
-	tmGW0ZP3yShkvHGKwjr4t6M4xO59yF9JuNReL7+ynmuadP1Jgn86WAwXYjlHOPYrWfPPrcPR4Um
-	Bk31Pr6hWhkCfKyWP8l3W9llc3NVWtx06xO1+ul3aQEYSLtHHqC1XQRkbl6Wycq9J8GRXzUx8s4
-	c/5LMX6m9cjyFoyK7/kUNJx2n3n6/+a/1KjwafnK35WPO6r9B+y5/rOyYXMf/CiLOKcD9SHS9eP
-	rqUzW1WkG8=
-X-Received: by 2002:a05:600c:c176:b0:4a0:c2a:485e with SMTP id 5b1f17b1804b1-4a18e4dce0cmr41026305e9.33.1791556696563;
-        Fri, 09 Oct 2026 07:38:16 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff25:4f41:8f61:e8db:b29a:c15a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18e4225f4sm72506615e9.0.2026.10.09.07.38.15
+        bh=pw+7/YrpQiBB458JMj0CBklEjmVY2DERmPYaWqC3uAI=;
+        b=No+ZOGgcBVHwhMV4Wn5JYf1370qKpeHgZVPZ8WSd3YboTxtzzaf6fJfkaWOlLz/FDG
+         DQgkZvV77zmWf6SAdEIdBBGfWUGpIQlovAnTbWPREviYUsCLHfbAqZMffUJHhVvd8wwh
+         f+39i1rEkZFRSONXeWX1+pX561pZoJ8w7/F3adPQ02S2+9zefxlE80ETvPEvYUoAxG0e
+         EKxKFshVokCp53jtLQt3njuZ+v0JR2a2yKqCzQivLdGzeO4fiPhO3nYC5bZTrj9j0Lv1
+         X5c4GyT1B6Pak4syqhVgXoTplUzfR/jmtiHw1R6F4RkAdW4X9tSnWhbMJW9IlyTgqWCL
+         jrGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791556708; x=1792161508;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=pw+7/YrpQiBB458JMj0CBklEjmVY2DERmPYaWqC3uAI=;
+        b=nNg3POKl4Gf2JO+NhOJSUYCWZm9boZe9wIDkjGqY3Yi4YiyKJB3Ok58s8P3bBoeot0
+         bt2mlol+Xhh7pxn8MLo9Ci7oSoO/1IG3rOrJDVjZoQtf5U5EhXVIZZ5jlITOdSMWBoW6
+         HG2s6rwKTEx+pA/XkXWGkw3usDsc9DlHozCP3lmVD1djTpIrj0xKa47tdi5bixi/71ls
+         HSbiW2WIeDAYmLnkVtkNbOdJJtC8fb4gjiBtCYgKkohyH4pvCKzhBliiJJFr6n8tnlCO
+         VJP/s2l3HUNybgAdiZzcWiio6F/w5ORZHjSYNjXf1ZFBgKjWrGRo4bRdZag1Z9Iq+WqM
+         dJjQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwcn1tHXFMtJDSigj3VBOnAzbDGZbeDkGWZGu9IcWMIIhn/p3Nn4lCk72QuHE/PehMCgUDxS5RqMfWnKFpV@vger.kernel.org
+X-Gm-Message-State: AFq9FYL4hlXFE9ILW9gA2ngao2Iofv3oUWsrrdrWHAIwuuIOz1I5eARl
+	RA7BL+7i5g5nWthCx6RA4fjjii+fwDvIPdbL7cXjK8a5b+jwYwOtAa3kICGfvFeWjMQ=
+X-Gm-Gg: AYBFou22Pi0bvMP6+NmKzJkQYKoYcmjq7H5MXwvSpIMqoWLKU8CtkDEiVsa6rFzIBi/
+	ycG6dkASW1DHl8MCQqprgA6uQ1RyzxBLCyCDmtRpL8BiY7lKS3NMq5DjG+HHu+GhHrdPSACFAWP
+	NvhwY61j2YAOC0h2CWHQW7GzSxRcM4y5f/NoKql4Y+O3NMvD3YC7y9fb0veETxJbyrXFjuMCH88
+	GPuZplkPG4Gv5RHDebj+c8b4NQBRzpXAlKjOpL7WhBy39EG6AbRDbxr5f9nP1KO4r3663/pGkpx
+	Um/gj/ygaPMa0yxdoLqU2zmPtnkE/BwMDX7w64vF7iD3h51PLw9UdDcwjBzIXZ5GmINjunY3Qeo
+	wcd/VtdE15tSvl8Ohsolnmp7wQRF0eSGRpVfM8nU+kKsVpCyAZX18A3sTPVlHvebreTZO+MNZk7
+	UAUgc+lpZuZzUMehpV8QZNzW6R1Vo85TeqLUkaqZKl5d8KFEyTATle+qkFQwtLNjlV+X8nLkgo2
+	tH0LdA8f9eV8T7ovw==
+X-Received: by 2002:a5d:5b87:0:b0:48c:5c2e:434d with SMTP id ffacd0b85a97d-48dbaae84eemr2941589f8f.21.1791556707821;
+        Fri, 09 Oct 2026 07:38:27 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db94e2ef0sm4359750f8f.20.2026.10.09.07.38.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2026 07:38:16 -0700 (PDT)
-Date: Fri, 9 Oct 2026 16:38:14 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] remoteproc: qcom: pas: Don't fail attach if the
- remote has crashed
-Message-ID: <asj8VnSmKBF3nA79@linaro.org>
-References: <20261006033550.2726451-1-shengchao.guo@oss.qualcomm.com>
- <20261006033550.2726451-3-shengchao.guo@oss.qualcomm.com>
+        Fri, 09 Oct 2026 07:38:27 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Alex Elder <elder@riscstar.com>, Krzysztof Kozlowski <krzk@kernel.org>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Daniel Thompson <daniel@riscstar.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: clock: introduce
+ toshiba,tc9564-clock.yaml
+In-Reply-To: <77dacc46-7294-47c8-899a-fd56b6a2af55@riscstar.com>
+References: <20261005230927.2000398-1-elder@riscstar.com>
+ <20261005230927.2000398-2-elder@riscstar.com>
+ <20261009-gifted-stylish-tortoise-95b14d@quoll>
+ <b190fe58-364b-4b94-9cab-c5f81f874289@riscstar.com>
+ <aafe2703-bfb8-43da-8472-b1dfa36fa8f9@kernel.org>
+ <77dacc46-7294-47c8-899a-fd56b6a2af55@riscstar.com>
+Date: Fri, 09 Oct 2026 16:38:26 +0200
+Message-ID: <1jcxtjos65.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261006033550.2726451-3-shengchao.guo@oss.qualcomm.com>
+Content-Type: text/plain
 
-On Tue, Oct 06, 2026 at 11:35:50AM +0800, Shawn Guo wrote:
-> When qcom_pas_attach() finds the fatal SMP2P bit already set, it reports
-> a crash and then fails the attach. The core unwinds the attach while the
-> crash work is queued: rproc_boot() drops the power refcount back to 0,
-> and __rproc_attach()/rproc_attach() unprepare the subdevices, clean up
-> the resource table and disable the IOMMU. Once rproc_boot() releases
-> rproc->lock, the crash handler finds the rproc still RPROC_DETACHED,
-> marks it RPROC_CRASHED and runs rproc_boot_recovery() on top of that
-> torn-down state:
-> 
->  - the subdevices are unprepared a second time by rproc_stop(), so SSR
->    and sysmon notifiers see a duplicate shutdown;
->  - qcom_pas_stop() and the subsequent rproc_start() operate on resources
->    that rproc_attach() already released, e.g. iommu_unmap() on a
->    disabled domain for rproc->has_iommu;
->  - recovery leaves the rproc RPROC_RUNNING with power == 0. A later
->    "stop" via sysfs takes power to -1 and returns success without
->    stopping anything, so the remote stays running. A following "start"
->    then boots the firmware again on the running remote and fails to
->    re-add the still registered subdevices:
-> 
->   sysfs: cannot create duplicate filename '.../qcom_common.pd-mapper.0'
->   remoteproc remoteproc0: failed to prepare subdevices for adsp: -17
->   remoteproc remoteproc0: Boot failed: -17
-> 
-> A crash found at attach time is no different from one reported by the
-> fatal interrupt right after attaching. Treat it the same way as
-> q6v5_fatal_interrupt() does: clear q6v5.running, report the crash and
-> let the attach succeed. The core completes the attach with balanced
-> bookkeeping, and the crash handler then recovers the subsystem through
-> the regular RPROC_ATTACHED -> RPROC_CRASHED path.  With running cleared,
-> qcom_q6v5_request_stop() does not wait for a stop ack the dead remote
-> cannot send, and handover_issued already prevents a spurious handover
-> on stop.
-> 
+On ven. 09 oct. 2026 at 09:23, Alex Elder <elder@riscstar.com> wrote:
 
-Hmmmm okay, I have never thought of this option, but reusing the
-existing crash path as-is by making the attach succeed feels actually
-quite clever! I suppose starting all the subdevs is really redundant in
-this case, but the crash case is also nothing worth optimizing for.
+> On 10/9/26 8:56 AM, Krzysztof Kozlowski wrote:
+>> On 09/10/2026 15:44, Alex Elder wrote:
+>>> On 10/9/26 4:31 AM, Krzysztof Kozlowski wrote:
+>>>> On Mon, Oct 05, 2026 at 06:09:24PM -0500, Alex Elder wrote:
+>>>>> Define the binding for the clock controller functionality present in
+>>>>> the Toshiba TC9564 SoC.
+>>>>>
+>>>>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>>>>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>>>>> Signed-off-by: Alex Elder <elder@riscstar.com>
+>
+> . . .
+>
+>>>>> +properties:
+>>>>> +  compatible:
+>>>>> +    const: toshiba,tc9564-clock
+>>>>> +
+>>>>> +  toshiba,config-syscon:
+>>>>> +    $ref: /schemas/types.yaml#/definitions/phandle
+>>>>> +    description:
+>>>>> +      Phandle for the configuration space system controller.
+>>>>
+>>>> I do not see my previous comment addressed - you have no resources here,
+>>>> so this belongs to the parent. You responded something about pci-ep, but
+>>>> the parent is not pci-ep. Open your code:
+>>>> https://lore.kernel.org/lkml/20260918165234.687224-5-elder@riscstar.com/
+>>>>
+>>>> I clearly see code like:
+>>>>     syscon {
+>>>>       clock@ {
+>>>>       };
+>>>>     };
+>>>>
+>>>> so I do not understand what pci-ep has anything to do here.
+>>>
+>>> What I have now (about to send) looks like this:
+>>>
+>>>       syscon@0 {
+>>>           compatible = "syscon", "simple-mfd";
+>>>           reg = <0x0 0x2000>;
+>>>
+>>>           clock {
+>>>               compatible = "toshiba,tc9564-clock";
+>>>               #clock-cells = <1>;
+>>>           };
+>>>       };
+>>>
+>>> A reset node will also go inside the syscon, so there is another
+>>> function for that MFD.
+>>>
+>>> The regmap belongs to the parent, and is looked up this way:
+>>>
+>>>       regmap = syscon_node_to_regmap(dev_of_node(dev->parent));
+>> 
+>> That's driver code, so irrelevant. So how does this solve my comment
+>> from v1?
+>
+> I'm trying Krzysztof.
+>
+> The clock controller uses two registers, 0x1004 and 0x100c,
+> to manage whether a set of clock signals are enabled or not.
+> (The reset controller uses two adjacent registers, 0x1008
+> and 0x1010, to manage whether a set of reset signals are
+> asserted or not.)
+>
+> You said "no resources except a small address space" and I
+> guess it's not clear to me what size is "big enough" to
+> warrant representing something as a separate device.
+>
+> *One* of the managed clocks is a 25 MHz clock, exposed
+> through a pin on the SoC.  That one clock signal is
+> therefore usable by the platform (although on the RB3gen2
+> it's not used).
+>
+> Rather than expose the register addresses in the clock
+> node, a syscon is defined, covering 8 KB, and the actual
+> offsets used are just defined in the clock and reset
+> driver source code.
+>
+> If that's not the right thing to do, please say that.
+>
+>>>> What's more, I still do not see any usage of these clocks outside. And I
+>>>> still did not receive actual answers (or I missed them) how these clocks
+>>>> are routed OUTSIDE of the connector. You said for example:
+>>>> "Ultimately the TC9564 SoC has a single 25 MHz input clock,"
+> . . .
+>
+>>> The single exposed clock *might* justify presenting the
+>>> clock controller device in devicetree.  There are also
+>>> resets exposed externally via GPIOs, and these control
+>>> external entities (PHYs).
+>> 
+>> I cannot find any of these exposed. Please point me to DTS code showing
+>> this.
+>
+> It is not used by this platform, but is available for other
+> platforms to use.  Its name is "REFCLKO" and is exposed on
+> ball C17 of the SoC, if a platform designer decided to use it.
+>
+> I only mention its existence as a reason to justify defining
+> the clock as a separate device, but I realize you are arguing
+> that I should do it somehow differently.
+>
+> 					-Alex
 
-> Assisted-by: LLM
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
->  drivers/remoteproc/qcom_q6v5_pas.c | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-> index 8f3d45c604c9..0ecd7688a54d 100644
-> --- a/drivers/remoteproc/qcom_q6v5_pas.c
-> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
-> @@ -562,10 +562,14 @@ static int qcom_pas_attach(struct rproc *rproc)
->  		goto disable_running;
->  
->  	if (crash_state) {
-> +		/*
-> +		 * Complete the attach and let the crash handler recover the
-> +		 * subsystem from the attached state, as for a crash reported
-> +		 * by the fatal interrupt.
-> +		 */
->  		dev_err(pas->dev, "Subsystem has crashed before driver probe\n");
-> +		pas->q6v5.running = false;
->  		rproc_report_crash(rproc, RPROC_FATAL_ERROR);
-> -		ret = -EINVAL;
-> -		goto disable_running;
->  	}
+While on the topic of description, I'm little bit concerned that this
+controller does not any input ? Does it have an on-board oscillator
+somehow ?
 
-My only nitpick is that it would be nice to fully reuse the normal crash
-handling in this case, in particular the crash_reason logging inside
-q6v5_fatal_interrupt(). Can you extract that part into a common function
-and call it from here?
+None of the clocks described in your driver take a parent from what I
+can see. It is as if the clocks of this device are generated out of thin
+air. Is it really how this works ?
 
-(I guess you could also call the existing q6v5_fatal_interrupt()
-function since it should work as-is, but externally calling an interrupt
-handler might be a bit weird...)
+>
+>> 
+>> Best regards,
+>> Krzysztof
+>
 
-Thanks,
-Stephan
+-- 
+Jerome
