@@ -1,141 +1,146 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5758F4CCDCB;
-	Fri,  9 Oct 2026 11:17:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 654C54CCDDF
+	for <linux-arm-msm@vger.kernel.org>; Fri,  9 Oct 2026 11:25:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791544669; cv=none; b=gHKnU1/ZwocH2PkQEDf9l9igVnrB5LQZaWK9nYlZtzdm2QZ3r+JHxWZN/LKD/iteSSJfxkXJR6PeKvn5mFeqk+a3c8GktKrNjCieMpJIhsaNiL5Xz+T6Anri2lQ65v7CtL33pG61NaqD0hH1iQkQoC8tjCjKH/xePp9j/maLUfg=
+	t=1791545116; cv=none; b=CaU4EDZToKSU0PRz5I0xmZ8ZfO9u0WgG894VUpbAZ/DnCmR6N9om/U0WuOCanfIuUBfUP/0gPCGVZITX2tn4qO0tA8S1IMGqooDYqUAfILQg/oEHaLLBDzBFpFFFBcT82ekmd0v6iiNbHwcScg6Y3Um8FKxD88O9JbfepzTLjDc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791544669; c=relaxed/simple;
-	bh=9RfGSbnAAgPx8iq+UO1stOFZcqYXUxRD51qJhy948uA=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=O6Isei5gixKdd862nzYd8DhjoO2ph5+TuwXEIyg6QdMgf0GJdtC7Gaebag2INtITvch2Cz26J4HKB087UbxwR7NMvnS3YZ/C3+WxmCK5D70socaukViyB3ADfQxIX1p+I1PIJ1C2v7Gk/pr89VC7YkgSPxAP/2wNq1qXz6ZEYzs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ndvANtU4; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1791545116; c=relaxed/simple;
+	bh=3RiJrg3T/A4hkKUCBr13+wDz2DdeBZFJrHuY/UKpTuQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=mPonP3voVSt5fpWrc9TA8Hf1dB2QpGcHGUk5iJrmgzc5QL+lutBa9dFxyFKN2RjEg3uByENScm1nkzY3E7ZXQWr6s3pMB4CiG1K8AP7xZROhn4idd+iL2ueFVpWQD1WuheGANifVilFeO5d98+gIi3Xt4hzPMIE9njz3QMk7hcE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=hN/HGWRx; arc=none smtp.client-ip=209.85.208.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ndvANtU4"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6998KBvg2256985;
-	Fri, 9 Oct 2026 11:17:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=572iF0N5kSc
-	W0SG16WWDLYoK0Ti4qFqER7fuHzcYZ3Y=; b=ndvANtU4rm/PjVS/KfmHhPzRMvW
-	Vg3XDfIZohYw38wisrsik30W2Ja03dICc3+mpDgA+ihkk8HN71/Xl1qYkMWjSmND
-	QxbIetkCsCAEWw6YpInXFjSNUfSQ8JMVQJWdXamgt9Y2SeHIOILBCp0comYEcrGY
-	KYJPFa+xedC+jM6Lba0fWlJbmp0nlrmPkT0jXjY2xix/zU0R+8rFQK6DPInyNPz0
-	utUJwRN0ROicXfYa9z8/8yvK2YS+lGzrps9XNL4+c4aMSM+mje8tAdIOkiP5W697
-	4EcdXiGgFC/O5KIdGrfoQ4ntbjNonrzKzr5XgPOJPyJDzR5fc5cTRdMxq+A==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h6nuft2ma-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 09 Oct 2026 11:17:26 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 699BHNCn1842465;
-	Fri, 9 Oct 2026 11:17:23 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-pkumpatl-hyd.qualcomm.com [10.147.245.204])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 699BHNR31842443
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 09 Oct 2026 11:17:23 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 3914174)
-	id 2C0E4641; Fri,  9 Oct 2026 16:47:22 +0530 (+0530)
-From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-        Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] ASoC: qcom: sc8280xp: add Maili sound card configuration
-Date: Fri,  9 Oct 2026 16:47:19 +0530
-Message-Id: <20261009111719.2609060-3-prasad.kumpatla@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261009111719.2609060-1-prasad.kumpatla@oss.qualcomm.com>
-References: <20261009111719.2609060-1-prasad.kumpatla@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="hN/HGWRx"
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6a0a4aa99bdso5372215a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 09 Oct 2026 04:25:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fairphone.com; s=fair; t=1791545106; x=1792149906; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=N0b0o/iVMAqwN7EkNfQamm6FVceYxCUCOkfAzEvfWWw=;
+        b=hN/HGWRxW3YZ/5O4+RWg/aydO1y0TbNXnp98Y2+LBLHkboBSLYAlI+wbVkn103rb+M
+         o+rZ0d6AA6vZddiCPnZql73iISMiH9cqvNIHL1EPZrVlSeY2PyRNJMZ4EpVsidMp86gD
+         k9xos6zQzciU3cTG44HQBU6s9l3yJfLTUO/5dxfpNlymFqEmD+jAT/1rlHEAG4avVMM3
+         htby4SSoQk406bPU5Eolhn9oNEeLl7/YNQYl6YYEwSB92auGDvD06qwDOWRIte8fIpan
+         TeEwikA8gPLNo1Pze96H/ZN3GVhK6jQ1nYxvWj/mpLXWVH8Sw10OKc0yvSVFTA81+6dh
+         ZqAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791545106; x=1792149906;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=N0b0o/iVMAqwN7EkNfQamm6FVceYxCUCOkfAzEvfWWw=;
+        b=0yD7XpxTI/nLXJ6Irt9agYMKx249ZjhhaqTZNpTlei2SxzWje3EKVqmu5gaZC/qVBI
+         eCP1xIQpZi6D1JvE0+empa9ALsj9cUdFBCVYzMfziQOBkQd1nCOH9sOLvP0PlYRr32o4
+         MSsdwsZDbWbUN3YqpUGUyjiiywkZRdI3ycNX9/501vOqmnAKzdr5QCGFl3ozYTA6mWU9
+         oaoggryqffCgMk9P+O0Z09I7RwbWJ6Xt/QqdIKCUcq9CzpjTttTpQBo7Rf45KzGg5bId
+         DktKsJt/PAfdkwMNKxVGMC15sM55x9SInM1IbDknwYCjSvD0Spxhephnl22TeR1WE5i/
+         LkTw==
+X-Forwarded-Encrypted: i=1; AKwUvBxvIstIPf4e1xF3ohwZbZpuGNCqZKdy5JmJXzS4vaDPzqwxsLU5KlijB3whbv+j9VHS/lhEOFtOav4sNzcs@vger.kernel.org
+X-Gm-Message-State: AFq9FYKmWwyzzbqMsbVzU6twcPykC/EcXTZ34oTeTQXW5ZB9Hyx8qkz5
+	XrXMVTFJAFNM8w/SCfTJ0Q11RFUXXGwCpyEooPflgKFAAmKl3/X8eio8AHZ28aWCK2Y=
+X-Gm-Gg: AYBFou2P12maMWV0YpP2I+tIMLVnji5v38GztmrnVreRLPhVTsE4keVMcYV8+6lQSrL
+	MQpdWS/imW6KNcWmF2PKTlj9Brxyw4jDVU/G0qtgp77lHr2u2Ajt7aJraIIK4BlSNY16V980CDK
+	GHdfzAu0xVGd5o0g9SUAfEndY2MYwUE9k8PLdtujdrkPGIJ72YIB5I5uKeiA6WJ5H1pDUHIv1iW
+	Z2sOr4zSXjgCNuUT52VCLM8xW6m2/tRK+n/h6GOJDvcxCL6Szqm1wx647i2QZUT9VN10PFgDCiW
+	asLPleX8TIcy1h2skzuRF+hfTstYJCIe5ZC1SuXfFlevUwiAsI+UjXT3TZBhgSUAnKV0tSx9e+N
+	yjVfAmuefI+REgNlkZeKN8MZ1rboEG1r0msDThRIaptWC1pkI+ImnQHhR29GJHfuIvmGMTyLk6I
+	4HRluI9VBoS/1nuB68yNYHm0otTgJf+C1RXEymkmdQ3fpj+ly/N4L3n6cgKwPcOEqYT320mh9dw
+	Rrq5d2D3gSis/fmSJWtiHBCorL0dC8tuMohOdIVYBjHfzAlxKSc
+X-Received: by 2002:a05:6402:5189:b0:6aa:96b3:9d7b with SMTP id 4fb4d7f45d1cf-6b17c29892dmr1280328a12.45.1791545106487;
+        Fri, 09 Oct 2026 04:25:06 -0700 (PDT)
+Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b179dd3597sm985764a12.14.2026.10.09.04.25.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2026 04:25:05 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH v4 0/4] Add Novatek NT37705 panel driver for Fairphone
+ (Gen. 6)
+Date: Fri, 09 Oct 2026 13:24:59 +0200
+Message-Id: <20261009-fp6-panel-v4-0-7c3819664778@fairphone.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=afn0Dhot c=1 sm=1 tr=0 ts=6ac8cd46 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=2q0SpPMmqTH-E8r16rgA:9
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDA0NCBTYWx0ZWRfX50s+hi4tLvVs
- gAMndDWIhVyLnBLrP3Iu0OdTvLBUc7o4UaSKtgpXuctBzsXptS9GVVP4p7IVTpBMfoM9pvohJkr
- 6B0dNq4QhJlk4Bz5FaALplljRomzYf4=
-X-Proofpoint-GUID: UOXnD0HR-fJi6niAWzWqoQ97s005DGlD
-X-Proofpoint-ORIG-GUID: UOXnD0HR-fJi6niAWzWqoQ97s005DGlD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDA0NCBTYWx0ZWRfX6qfSULbRkgEQ
- Qmd+5VmqFnyFAo2Ws/LX6++1w18VFO4ud6jjs3CM96SA0BS6dcocYm7wPeqeV2R4L+Kbem2+L3x
- K7CkUPIq4VrdxW0P8VXHcj/b0DenEiggDxct5IaZzOOFvUI4nZK4SUCez+kdelWD35LEhnDIZfn
- jGOvuHs3340Edo6i2F9WlxaOpopYi6tEAB6FcrzPLd/+XKUMCBsltC3U8kOxuV7Fvmd5I2FDWBt
- IQyUbtpZTeGrO+JQEheEg0pw9c0d39oRqYZAvjjycSIpoNGN/cFjYkMIiPoZ4r+MgGRWxckCTn0
- IlI+LE4FvW8UY88bnbeXLP9D5hYwx8YgLQbCspTWkbglHS17sh89AuDvGMQqE0Tr3ioF8EiOtMx
- I2+XexMSOrnTZ9iskTpSwIYpaAYiS9u8auuLTSq5WtaZdDkZxGWP4UKuA3oF0Ti4D5lBNklmz73
- bFgIO7nyKMjJw3czI/Q==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-09_03,2026-10-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 suspectscore=0 impostorscore=0 bulkscore=0
- phishscore=0 clxscore=1015 priorityscore=1501 spamscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610090044
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23OQW7CMBAF0KtEXmM0tmPXZtV7VF3EkwlxBUlqB
+ wuEcveaULUIsfzSf3/myhLFQIntqiuLlEMK41BCvakY9s2wJx7akpkEaUCD4N1k+NQMdOCqVRq
+ dc611NSv9KVIXzuvWx+c9p5P/IpxvA7+NSN+ncmS+15hvEnEcj8cw76r8tlU8omI33Yc0j/GyP
+ pbFWn7xQxYcOIFDD9pogfjeNSFO/TjQtsyuS1n+ayfso5ZFG+M01gDWSXil1Z8WAPJRq6Jrb6G
+ zyqNT5lkvy/IDgGAixmABAAA=
+X-Change-ID: 20260501-fp6-panel-3d35c999d894
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791545105; l=1623;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=3RiJrg3T/A4hkKUCBr13+wDz2DdeBZFJrHuY/UKpTuQ=;
+ b=n9sHWAPeaTz9L7Cy6z9jwdx3y6w5vzk+5mzW0/ZlQz3qGFVUMFYW57e+R6ZqSvxIy0hegT4mX
+ x3/J0mNuhZHBttdJDYIRjMBMuURkyAbJDcdJ6clw7UjiSEyywsqyeAu
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Maili ships its own firmware, so its topology file has to live in a
-separate maili/ firmware directory. The topology load path is derived
-from the sound card driver_name, so reusing the Hawi data would look
-up the topology under hawi/ instead.
+Add bindings and a panel driver for the NT37705, and then enable display
+on the Fairphone (Gen. 6).
 
-Add a dedicated maili_priv_data with driver_name "maili" for the
-qcom,maili-sndcard compatible so the topology is loaded from the maili/
-directory. It keeps the same DAPM widgets and enables codec sysclk,
-MI2S BCLK and WCD jack detection for the Maili audio pipeline.
-
-Reviewed-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- sound/soc/qcom/sc8280xp.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+Changes in v4:
+- Use MIPI_DCS_* for a few commands (Dmitry)
+- Link to v3: https://patch.msgid.link/20261002-fp6-panel-v3-0-4b80f83bc936@fairphone.com
 
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index b5d367486d56..b97cafeb8e78 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -552,6 +552,15 @@ static const struct qcom_snd_soc_common kaanapali_priv_data = {
- 	.wcd_jack = true,
- };
- 
-+static const struct qcom_snd_soc_common maili_priv_data = {
-+	.driver_name = "maili",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.codec_sysclk_set = true,
-+	.mi2s_bclk_enable = true,
-+	.wcd_jack = true,
-+};
-+
- static const struct qcom_snd_soc_common qcs9100_priv_data = {
- 	.driver_name = "sa8775p",
- 	.dapm_widgets = sc8280xp_dapm_widgets,
-@@ -676,7 +685,7 @@ static const struct of_device_id snd_sc8280xp_dt_match[] = {
- 	{ .compatible = "qcom,eliza-sndcard", .data = &eliza_priv_data },
- 	{ .compatible = "qcom,hawi-sndcard", .data = &hawi_priv_data },
- 	{ .compatible = "qcom,kaanapali-sndcard", .data = &kaanapali_priv_data },
--	{ .compatible = "qcom,maili-sndcard", .data = &hawi_priv_data },
-+	{ .compatible = "qcom,maili-sndcard", .data = &maili_priv_data },
- 	{ .compatible = "qcom,qcm6490-idp-sndcard", .data = &qcm6490_priv_data },
- 	{ .compatible = "qcom,qcs615-sndcard", .data = &qcs615_priv_data },
- 	{ .compatible = "qcom,qcs6490-rb3gen2-sndcard", .data = &qcs6490_priv_data },
--- 
-2.34.1
+Changes in v3:
+- dt-bindings: don't use 'contains' (Sashiko)
+- driver: Use devm_drm_panel_add & devm_mipi_dsi_attach
+- driver: Replace linux/mod_devicetable.h with linux/device-id/of.h
+  (Uwe)
+- Link to v2: https://patch.msgid.link/20260918-fp6-panel-v2-0-6695c4008920@fairphone.com
+
+Changes in v2:
+- Fix kconfig dependencies of panel driver
+- Pick up tags
+- Link to v1: https://patch.msgid.link/20260501-fp6-panel-v1-0-e09cb05651cc@fairphone.com
+
+---
+Luca Weiss (4):
+      dt-bindings: display: panel: Add Novatek NT37705
+      drm/panel: Add driver for Novatek NT37705 panel
+      arm64: defconfig: Enable Novatek NT37705 panel
+      arm64: dts: qcom: milos-fairphone-fp6: Enable display
+
+ .../bindings/display/panel/novatek,nt37705.yaml    |  71 ++++
+ arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts   |  64 ++++
+ arch/arm64/configs/defconfig                       |   1 +
+ drivers/gpu/drm/panel/Kconfig                      |  12 +
+ drivers/gpu/drm/panel/Makefile                     |   1 +
+ drivers/gpu/drm/panel/panel-novatek-nt37705.c      | 396 +++++++++++++++++++++
+ 6 files changed, 545 insertions(+)
+---
+base-commit: c2cd463d6ee7d55a3ec0719d93c49ff99022d58f
+change-id: 20260501-fp6-panel-3d35c999d894
+
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
