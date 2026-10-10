@@ -1,183 +1,235 @@
-Received: from outbound-ip199a.ess.barracuda.com (outbound-ip199a.ess.barracuda.com [209.222.82.65])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D70518FDBD;
-	Sat, 10 Oct 2026 17:15:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=209.222.82.65
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791652573; cv=fail; b=ZHHH0dkJQA7p+wzAdkwC6kXpkrNeyRZcrrzSek5R7rHrXCeRh6SDmuuXPEGjUjtVCr/YM7H4BnujXVEu53BtQfneyPq+6dSLxDIpSzRYYhB5BExpL0Ntw4dSXWYfAi9JptJIHRfcXhshgqHWtGj5UtJgb1tnTZ6zOvdfAkny5MI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791652573; c=relaxed/simple;
-	bh=xDI7UlboCzoxT0lQUrKdCa3mxuOO7NdG7mgC3LZwvsc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=R4UfxiEshIsfR8tWwmYEe1jYtq0sxu5qifn+RH1SMqg+ejfGE1PqP9OeGBDuJcPSctZMqn5h3J6PD+muE56J2cDbqTVhirh2WDJQwJ5U42iwvUoCXdyWbzyaixeQ+pHRCE6iy6sK8J/8pM0BIBUJL27TRcyqGih2JCJrCIXrg3I=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com; spf=pass smtp.mailfrom=digi.com; dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b=WLCzLEGb; arc=fail smtp.client-ip=209.222.82.65
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digi.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D29137FF66
+	for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 19:52:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791661979; cv=none; b=bWDgpQ7fN3qLgPArwWM7rR5r3olTFnPeObKh7OiH/Tvw3yAQPc/ET7OwTlssjyUDHCUwuhA3xbvoINhA4kXJHcwsqhi2O6YJ0NgcMNpo5eoIlpIuJDfF74dX9/TDvBID9ZZdn6DPROj1/YxMNUnYM9dgOJf/NFDWV4bKbe/mZCg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791661979; c=relaxed/simple;
+	bh=l7Efzsnfv3qywaHkyur3AcvZcWrKIUflOPGO8lxviHI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=N6GDQ9H49Ov7M05WBKoxIJDRUn9FTLbVPXXVCTNrqiwFq/A8F8R4jwyLuWtBC2dZl2Y6YOQJ0/m/WFBAL5+3P50Y65+RvXlEMT2twhBcBZJSsl5u2HkGIP+ufr5Mr4c2aFyKzTIhmxbq7TjfEWgHkIPcBrftZ1Nnum8y/goHiwU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NTBF1d7t; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HSj22z1Z; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b="WLCzLEGb"
-Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11022080.outbound.protection.outlook.com [52.101.43.80]) by mx-outbound11-208.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Sat, 10 Oct 2026 17:15:38 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZMXZR5gS5fT74PwOCH3wmxEBR0gtgHIP/PH6/qpxFSgn/6KWqEiMfxgqBSHZzPFZvNQxWp+dKRX9Ry8XE2Hlt/zgwknCQ9TIid894rMdt6Zjk2ZkxT4ldofdE1zW9L9ce//OPnfWCBO5L2JIF0hXmk4qhhFVlCtBJH/YAq+BOdGd5CMuJhCcQ4xCvLO27gvumYMWNHLdv56eNVYokThgoqwg9xdTYeZIcjoycwo241d71VY0t+KKgR4we+5GH2g1Qw2rd6AD/45hJJLI5u0MWn5l8PAMN6oV1Qq9Elb0A1twECZiGOoHg0wJyfOmSRdV83DUWoVhQ/VJaApuEIc2GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GtDxXTDdSe4y1cmFH2l+06b/ykaS5x1dLKeNkVOd76k=;
- b=Ky/eX9Q7i1zcZqZX6fETE7lV0lNDNcMSwA81Ty82by5qzaSx3D0IZlfZbiDAYeKH7OO2AfboPZo6GrarpepW+Eb+1eGIhdOL7Eu+vPK7DzZDzR6w2/AruMraqjr7wRyq2fgLznaiAIr9IRwjq9tQ/BC7dRLYeeD6iERhl1ZZQdmkdsWHv5SQxYXJomyJylfmq2YUTUfLiInmaMHlq8jHnvP2bgZCi0XMxVituL/bdcCC24NmdTM92Z1nkcmIEImggYXllk5a93C0/6eA3H5obhepqZufd0QzJTXIqrlflTXCaogmsa5iJepkBtP1EDU4x0r9Pfpofy30E6mPHvsoQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=digi.com; dmarc=pass action=none header.from=opengear.com;
- dkim=pass header.d=opengear.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GtDxXTDdSe4y1cmFH2l+06b/ykaS5x1dLKeNkVOd76k=;
- b=WLCzLEGb/vwZlnCd/wfCsZBNXCrHAy5aEj+5iLxexIAft+sbPzUiX2rqrw+7IiQniU60dqg8FtFtbcD8rrKK+EuytIHWsdt45JVHKrYL46snfHwvDSwEs3PECjqxmUn9QCCO/LZaGLwhYK9m2tZjVPCOjhUKtGDlv/t9dVf+HPxeRZDdLt2kT2l6Q5/pLiIfV5HrVlwRwY1HCfRXx13ENTEgIAW3AgBUQs+k9my7oOjlQnZILEfQHm/EMlI0Cp9wKFYZRFTAyLQULCzYhZPKjDZemv0AqhCD0u7PEYeH9KjylrP25wHSdn1PS4T99PYBEwU0fmjXuyaQ5YwnOzUU9Q==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=opengear.com;
-Received: from MWHPR1001MB2095.namprd10.prod.outlook.com
- (2603:10b6:301:32::34) by PH7PR10MB6310.namprd10.prod.outlook.com
- (2603:10b6:510:1b1::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.5; Sat, 10 Oct
- 2026 17:15:34 +0000
-Received: from MWHPR1001MB2095.namprd10.prod.outlook.com
- ([fe80::3933:62ac:2729:f017]) by MWHPR1001MB2095.namprd10.prod.outlook.com
- ([fe80::3933:62ac:2729:f017%7]) with mapi id 15.21.0522.006; Sat, 10 Oct 2026
- 17:15:33 +0000
-From: Peter Hunt <peter.hunt@opengear.com>
-To: loic.poulain@oss.qualcomm.com
-Cc: Daniele Palmas <dnlplm@gmail.com>,
-	ryazanov.s.a@gmail.com,
-	johannes@sipsolutions.net,
-	mani@kernel.org,
-	andrew+netdev@lunn.ch,
-	davem@davemloft.net,
-	edumazet@google.com,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	netdev@vger.kernel.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v8 1/2] net: wwan: core: propagate modem control signals to port drivers
-Date: Sat, 10 Oct 2026 11:15:31 -0600
-Message-ID: <20261010171531.1659006-1-peter.hunt@opengear.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261009001714.1078580-1-peter.hunt@opengear.com>
-References: <20261007182238.1154851-2-peter.hunt@opengear.com> <CAFEp6-2QsKyZfEdSotVPhxVNOyRzncUphqLY5cRwHXGJiEbzuA@mail.gmail.com> <20261009001714.1078580-1-peter.hunt@opengear.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0212.namprd13.prod.outlook.com
- (2603:10b6:a03:2c1::7) To MWHPR1001MB2095.namprd10.prod.outlook.com
- (2603:10b6:301:32::34)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NTBF1d7t";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HSj22z1Z"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69AIfX1b1767640
+	for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 19:52:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	lwjqTvVgkBjNJF/ouDo5/S2ypeV7Y1OJppFgq5AUL+0=; b=NTBF1d7tsKuvErin
+	2j1axxi0Ng5VZcUaaonMlLnsXgbJE6vUuzaEmQFHnrdUbvf26fPsjf5gp9t56eg/
+	Cg9Cqde/4E//M1NbOHyUM67uXs9Zh7jpev9BYOMW66vormUsReVfxfsbuAbO0u9q
+	HAFw6uv2CY85dGtHOTXAY5k+WfkMciPmfQMBpSPZu7nSBt/UTfsf56843AAMJeQE
+	d3dMuWkCQr49rInIoA9bYjAF+mcOOzHvN4OTWnNiTBvuNa8LJl8mWLpFACFg8TVr
+	1Eijba4WKtYTdXmIDXMG/Gsw7UZJY9cra3ysWngbNg0JemBJLeh6+yvi3Ir/MGsT
+	zVEy1Q==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7cc69ueq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 19:52:53 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-17188d538c7so143328c88.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 12:52:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791661972; x=1792266772; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lwjqTvVgkBjNJF/ouDo5/S2ypeV7Y1OJppFgq5AUL+0=;
+        b=HSj22z1Zbu8v77NSpmp0pEvTONy7UnwMZ9+5mWmMXVHxTjNcPzxgjavXF8tw/Mes8E
+         Ti4uDk7nFRxmcjsXA7vmD/CnOydTmCTCwBoZTupAKCWQsNNfPrq3SmzTiG10OYXEg0X5
+         3JF4AjfmOYLY2KNaGHsiovUupM+UVakYFNDUAVNvtTRFvcYF9xNPCApgiEOhz83w0MZb
+         89/6ISdNl8baXy38uT4madtaxdZh1zapz4SNs7JTdzArVteedPkSYyK5wqLotQrohT9S
+         3y78C0VOl56zdFp2XXKvvBDGukpmJD/SPQErhpuv8zFiueNa76HTmk4fOycu0NU8Dc9e
+         9VUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791661972; x=1792266772;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lwjqTvVgkBjNJF/ouDo5/S2ypeV7Y1OJppFgq5AUL+0=;
+        b=C5spERkrVOGTVebxUamMddzm6Tpdq3R48b34M03/KKqmag/tHe7BZs+mhLhQbF3TRu
+         6kaqLlAiQrQd/oLlHldFgtTNh27b6t4IIWnPAegdjBqQBtT8TGirDjMHjtcFKlVBA9Ck
+         5jSqQkTYXgb2M+KT+DqiJa8FoXbC1JQrtS/1zxOl5JXHv+aGD9b82FYE8Y2ZTUkPueEp
+         iDjWptQfIuAvy+GylfN3vJ8bNAwadJqBg1VwhVYeLnJrXUpRfgKB6tPbZ30dexG0mkxp
+         Hs+kAIEgF9hQtKy8sV5akbI8eyl1mWo4e3Stjbt8kXJc9ozO88kY7W2emdjDwzL5nKu2
+         SfHQ==
+X-Gm-Message-State: AFq9FYIw5pK6H8W+EWBTkTdfuTmiAroN2UTUs5E9g098+ECcg/FTsFCO
+	npqY6f6NEL88lnWzvZv4Hj4asazFf8+ZjNDvj/JMiW+XfGlbBPt3Q4qx3vR7+T5tVbrlQ2GGjC+
+	lTlnKJ9tYt1A72u70JXfnt+Z5dejdPYmik96fCwITG5YXSyq0OuTsvzdofMdQJm1Fv5ja
+X-Gm-Gg: AYBFou2kqb99H2shu04vHEep3gcWqEzrwfyixQ5zXpzR+zzxfEXQ/YRvASa8gGcFah8
+	H02zGocUbhbOTJ3N4a3+XfNAAUq0S71Sa3PYwDOu8KZOraIbbU8L4LGdzs43JcmWvNHCTCHQmFH
+	DA9vzfeiSoPyznMysFcOYd8blhhT9uQA/k9PrunwQtreUe1RlNUQoXY2nkB3V0fNLKKgYb9OUUE
+	MuXP4g/apDoMVosXVv2TPnxqVhKys+XgHWUz0b9jDZ1Ct/03Xa6OTL46JJqIZpac1LBhYvLwGod
+	f9oSarXEc8KgSWDf2ziRDDJNM8HXpNbmWJXqcfCRZLh+idP/+VlCbe+KrQE7C4Ix0dz9+xV1/GV
+	+fxj6q/ZHmxitdpkXOFhNJKRIbcDFRg==
+X-Received: by 2002:a05:7022:1702:b0:13f:b41f:bda with SMTP id a92af1059eb24-16a5c5f4414mr7341884c88.16.1791661971971;
+        Sat, 10 Oct 2026 12:52:51 -0700 (PDT)
+X-Received: by 2002:a05:7022:1702:b0:13f:b41f:bda with SMTP id a92af1059eb24-16a5c5f4414mr7341825c88.16.1791661970943;
+        Sat, 10 Oct 2026 12:52:50 -0700 (PDT)
+Received: from [192.168.29.225] ([49.37.144.177])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a42407e7sm16545214c88.15.2026.10.10.12.52.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 10 Oct 2026 12:52:50 -0700 (PDT)
+Message-ID: <396781e8-8115-4524-87a8-ec989330ce4f@oss.qualcomm.com>
+Date: Sun, 11 Oct 2026 01:22:44 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWHPR1001MB2095:EE_|PH7PR10MB6310:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6850609d-0125-4e04-7787-08df26f217b2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|366016|23010399003|1800799024|18002099003|11063799006|4143699003|10067099003|22082099003|56012099006|261009223027099003;
-X-Microsoft-Antispam-Message-Info:
-	StJqX07xWZmihxiYcPiY4QioVpL+a6dW5wij3DByIEkeOvn794gvWqwZtghhZPfbN8SF1HIdeRsPCzW5ZIH9aCGl6MsUMRwZOQ91H5gx79HUIGMQk8e9oUMcTe+NcSL9JRW283fVOycSZHdb8BA2N4gDXUE658ZCR0p7fYPmdiTL7wiuVBI7BcsLQ03x/KVai9fut6+DPbaJwH6h9NGdfwsxqKutNWHTHaESuRZdQALHwzRwFJTdM+/jXY/hczXNs4tdtkZMg7Haki8o1KvzwzXPdkq63pp3Av3/akz7NYFscLjDYj3vltEyUQUqyxBQlsrUF30MAQYi/GviUu41tmYcvi1F2d6XhwEULhMZR2u1v3PXNqEAaULgjFqqT7AFZ7Bdq55Y2KzauvnFxGgQo1ownjwb4A0lBAakIyGZAvrP24HUlj0GrrVIgpAQfEB6uX2aP85aUGg1ShFPMNnHhTAGEx1Y9dk+XS4xF/rBwCKVb3pZ+WW0aftVDB+R0OZRziWHmP6xCsZXgpNOM00C3zqs9tBIjZPlWH/PgyJ74ibAARhISDX26hOuv3LifMpfhR9sk8hUYH0PfBtQyb/l8zlaw5YAuhBapFluxbbNI79d3r3u9eewQvmkog/q+2D6yzF5WApolCj9Gq05cDMYuM0cRn73g4+NUEVKpIlNpYk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR1001MB2095.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(23010399003)(1800799024)(18002099003)(11063799006)(4143699003)(10067099003)(22082099003)(56012099006)(261009223027099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?7bNzLbh9jK2tXFVV5TeS+VIB3hUKSOeoJrTAasfkXLQ4Q/x1Hfb2bior7B/U?=
- =?us-ascii?Q?O/Lmfenr32jlXeN6Kn7yjmC50E4/adLF6ZKi1kk6JVrfXSO1cZwA+3LMmPJS?=
- =?us-ascii?Q?VrGP68LvndEi0moN3xlDbFsQpgCbseac52yB14F6NgRQkJn95Ikq2252Kpq3?=
- =?us-ascii?Q?g2jHwrtg1rE7dhkk60Crc9FE1m7QOKsyYX4PqEr+OnKH9OQAImqCuDD5E0e6?=
- =?us-ascii?Q?3x7ePrCMM9QQWS+i0Cy1EVvn+a/Y+ktRT9YMkCrIPOlc2VM9cp+PTnjS8je8?=
- =?us-ascii?Q?QNUId9KycqXcSmBqu3Qf/F6ultCR49qw0MRurdz+029NxhaA5/zGN20oh9rC?=
- =?us-ascii?Q?HPgUJDV85gPGC8bWdElDMn89M/PHFk8RKBTWUD0Q0DZXro8qLVWTOcrIR/rI?=
- =?us-ascii?Q?3nUoLkM/laESvJVpTUMOKbMCPAChJZntRJR2w7z1xvrOiS1GkUpCMzHfHs+f?=
- =?us-ascii?Q?z2SveScTENOqmC5M5kv2ASlKIbXi7sOAV69TGyIxk+kSRQ8gNRbttciFGAiP?=
- =?us-ascii?Q?/JILclVMlJCxhyRnZLbHW+c7d6dwfcMnp4ksXkmkhOKuBmNgTosutbS+6chl?=
- =?us-ascii?Q?UTjxU3brhUA/enZmNeiV4gtZ6e725B/PMc2X4CIs4C88E2oAx2rrNwoZXy3A?=
- =?us-ascii?Q?ebu369O0Lg9ia0gPHmp3HUvO8U4/IHUSTKTaatOXtnq+8j+abcQPr14+YV06?=
- =?us-ascii?Q?TFOo/4Aqzm23iwd863fvGmy9mk09q4qAmJPgLJ8qL0oyUXsctx+JpPTbNaRJ?=
- =?us-ascii?Q?7h2xuxI4OyCWkzG2/h9wv9KJ5a3ZEzusGA71eHEVCJZyPI6Ge2x6Zfjze5LL?=
- =?us-ascii?Q?cIAJAzUTbzdpH1hgahOyaAfpHMbk9P9ibEyBhUjL1rBYWn3QpBcYS0GwCVSF?=
- =?us-ascii?Q?R9GHf394BaKqV3y/fmKQylF1kotibiguQCcXx+czo+5nsiCDCO9+9gA9cQY3?=
- =?us-ascii?Q?2vQe7c/rmfbsYi8Utl3TJWwV6/KVcra7IXyeHa1nFIqqEBlfoz9YSojoCxfJ?=
- =?us-ascii?Q?WoHp8KvceakKn9LDZh5nwnK38ggBHejgxxC8VYGPnsTwim+uB9Iqi8Smoh2C?=
- =?us-ascii?Q?sD+0S23XY+QtWa1ZXaVGrs+38rwJiqEFsjdV2/I9C/V+XS1Bhy6s4I27b8iN?=
- =?us-ascii?Q?pG9jQqQYAM1rak45S1mzcKcZAHT7pI5Zd+T2yXVmElvxtXqrJo4HwHqoYeYl?=
- =?us-ascii?Q?qa2pX0a3VJ7SwgUuCGTUHupHiJwnkrWKf4USit6isBX0jvNGsitwp4QR/cE4?=
- =?us-ascii?Q?Ndem4O3qCV/2DSjgeUXpw6uZY0mzcrxl7tbSK3b1flKi9XdHiKrRbdIGdvjW?=
- =?us-ascii?Q?LZOAndm/qJqBYMPzFe7AU11T+5Ji45OvtxvsbxGJFuy+TiXBwIZOEnqIalRi?=
- =?us-ascii?Q?qITmB1MeqmhKdIZHQjyiUfIgNVUs2M2GBGAStMRTVHH1203HZ3D1YCfq/eP0?=
- =?us-ascii?Q?KvOlhlLqY6e1vQOi/6LGHjWnHQN+El4oDfurP/ZpduC8r+wM8ZsTjRde+vDn?=
- =?us-ascii?Q?O4Lyk4+o8CEGwHnnwX/m08H+30m/0LVc3KfqQNv1FuYDINAl2TeZS4PxHsuR?=
- =?us-ascii?Q?YSkMrzDTQ01fWZnhRuVLOr7Yt3g+RQFYL+s2e2dHovE9h8dIeI8TB6KpKjyL?=
- =?us-ascii?Q?zwRsAIGbQwii6MZcBShZUj+2SqFQNi8bfvmK7nAhuTIjV7HomiHA6LcpghXm?=
- =?us-ascii?Q?SQCJoFhKoc1hvv0vqT63TkbMEy+6/h1EudDA3A+WNgiMyl2o?=
-X-Exchange-RoutingPolicyChecked:
-	q1AZGGNRuA3Wvryha63t0fJptN8qTLYClWUsEt6uFBlVBnIUShUkuiCR6exNx7Lq8DK7e9oe5phipEa17xvnrT+iWRpgYKo1PL14QhK34KW1xVRHaAv9sLSpPIMP0i1p9omacJPhddhMSFFnmMjClIKtRMdkdHYUq1PI8JMQaiWuq0oyJQI2iRrxOWW7NeGHnmTHscnsK1I/dQqrqsd2sKwFrebF6c+NVEPkXtryImU+SKM47mkZTTjnKhBaPO2ZX/QkZDGSyeYlNnxqda460nWRk5y97aphAp0irr+AiSUkr6wO748EJSRhwpS0WWT5UQflVyGiytXnQbG/wPlHig==
-X-OriginatorOrg: opengear.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6850609d-0125-4e04-7787-08df26f217b2
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2095.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2026 17:15:33.2570
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BGYuz0A4U+ryfoLuOz45L5wYDQMPFeR9j6qEOULQGDBlYCOYHpy77BJjOLaBgFml
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6310
-X-BESS-ID: 1791652536-103024-9149-3634-1
-X-BESS-VER: 2019.1_20260924.1519
-X-BESS-Apparent-Source-IP: 52.101.43.80
-X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoZmxuZAVgZQMM00OcXSLCnRwN
-	DcOMnM3CzJICnFyMLYKDHNxDLN1NRMqTYWAF/kIe1BAAAA
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.276744 [from 
-	cloudscan13-111.us-east-2a.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
-X-BESS-BRTS-Status:1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] drm/msm/dpu: rework layer mixer allocation and
+ mode limits
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar
+ <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Xilin Wu <sophon@radxa.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20261008-lm_fixes_final-v4-0-fa986071c3c1@oss.qualcomm.com>
+Content-Language: en-US
+From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+In-Reply-To: <20261008-lm_fixes_final-v4-0-fa986071c3c1@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: FW_l9BpQbY19nRSWUnp9gdRdVDetLdoV
+X-Authority-Analysis: v=2.4 cv=XdQcX455 c=1 sm=1 tr=0 ts=6aca9795 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=20alU+YIu2uqf8Hyrg49Cw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=L3DgtkeIYyT9a_Y7rtsA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEwMDA3OSBTYWx0ZWRfX7cMKqImWxwpZ
+ Q+01mh76v1Lfnjc7aFrqKayv5Ey5TIXhY6ac49zUM3mchcpEqvW2n9btexJ8tTQ5wlLys6f7p4G
+ 6MlnRJq6W9tzjV5B3snmri/axCJFji+XHhMZkxi8Q4ElpqPLYAXNJ14oSQIkLD4Eo2hVKV+7RwT
+ d6vSWbBGfIDOd+dCUHqLvouN6b0IZQm3dU6xI1DSo9s4Obk/gljglqBrvN36JFJ+cSIYpe7YG/q
+ //0B8F1Ms/HVF9+CqfIlHfEfVpn4Y2z7UZ/YCyOe3vvo87vz7xuHeSmUX5EOwVgE9EwzfsEn72o
+ zezugxIB2tfduzVQZTYG85hTjBpJ171hgBnDZdOW7slI6JlaG6MVTGwhgKHwGFdmgkj+DcdvjIH
+ UtGKSvCtd3S8uqvJqUz6/lXq6XsyJ/N/4hP1faPacIC5ILcW/mroB85kXoTzSkOZ7B4Ubn1QQkV
+ BZJFih8vqmACa9smxlg==
+X-Proofpoint-ORIG-GUID: FW_l9BpQbY19nRSWUnp9gdRdVDetLdoV
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEwMDA3OSBTYWx0ZWRfX6ImVo27mAFN4
+ 1dHy2s2uBrinHSBMPxlhtQQwxhPW69Tg0vdaejacusGSaD2h2UVjApe7GzMX1X350WjGagudERw
+ ogGF3ZEqqPC+8w14dLVOwpuFjvMfxvE=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-10_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
+ bulkscore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610100079
 
-Hi Loic,
+On 10/8/2026 10:53 PM, Mahadevan P wrote:
 
-A follow-up to my reply, as I overstated one point and would rather ask
-than argue on both. (Adding Daniele, as the first question touches his
-recent QCDM ioctl work.)
+> Currently, the DPU driver bases LM reservation off of the maximum
+> supported width for the layer mixer and an arbitrary MAX_HDISPLAY_SPLIT.
+> However, these limits are not hardware limits meaning that a single LM
+> can support higher resolutions.
+>
+> Switch to basing LM reservation off of PINGPONG and DSC encoder hardware
+> limits.
+>
+> This revision also adds clock-based mixer selection and a source-pipe
+> width guard for mixers without source split.
+Hi Dmitry,
 
-On the AT-only check: I said QCDM has no DTR semantics, but I don't
-actually know that. I've only verified DTR/RTS on the AT (DUN) port of a
-Sierra EM9291. I don't know whether the DIAG channel behind QCDM ports
-honours DTR on these modems, or whether libqcdm relies on it now that
-QCDM ports have the TIOCM ioctls. So I see two options:
+I missed the ongoing quad-pipe changes 
+(https://lore.kernel.org/all/20261003-dpu-quad-pipe-fixed-v1-0-6a6a00917b71@oss.qualcomm.com/#t) 
+when preparing this v4.
+I’ll rework my changes on top of your series, check the topology 
+interactions, and resend an updated version.
 
-  a) Keep it AT-only in all four places (open, close, removal, ioctl).
-  b) Call ->dtr_rts for any port with the TIOCM ioctls (AT and QCDM)
-     whenever the driver implements it, again in all four places, and
-     leave it to the driver to ignore ports where it doesn't apply.
-
-Which would you prefer? If you or Daniele know that QCDM/DIAG ports
-care about DTR, that would settle it for b).
-
-On the locking: I agree the data_lock/ops_lock split is awkward, and
-it's this series that made the two locks interact. Most of the races
-found in earlier versions came from it. My only concern is the blocking
-write case I mentioned, so the options as I see them are:
-
-  a) Use only ops_lock, with the whole ioctl handler under a guard and
-     mutex_lock_interruptible() so a waiting ioctl can be interrupted,
-     accepting the wait behind a blocking write on rpmsg ports.
-  b) Keep data_lock for the termios/TIOCM state and take ops_lock,
-     interruptibly, only around the ->dtr_rts call. v9 already limits
-     that to when DTR or RTS actually changes.
-
-I'm happy to do either in v9, which do you prefer?
-
-Thanks,
-Peter
+Thanks, Mahadevan
+>
+> Assisted-by: LLM
+> Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+> ---
+> Changes in v4:
+> - Rebased on msm-next, resolving conflicts.
+> - Added clock-based mixer selection and reused the helper in mode
+>    validation.
+> - Added a source-pipe width guard for mixers without source split.
+> - Extended the catalog cleanup to newer platforms.
+> - Link to v3: https://lore.kernel.org/r/20260112-max-mixer-width-v3-0-f98063ea21f5@oss.qualcomm.com
+>
+> Changes in v3:
+> - Rebased on msm-next, fixing conflicts
+> - Updated commit messages to describe the actual issue.
+> - Link to v2: https://lore.kernel.org/r/20260103-max-mixer-width-v2-0-ef5d3d246709@oss.qualcomm.com
+>
+> Changes in v2:
+> - Dropped PP and DSC encoder width drop the catalog, they are now
+>    determined in the code by using the DPU programming
+> - Corrected DSC encoder width for DPUs < 8.x (2048 vs 2560)
+> - Link to v1: https://lore.kernel.org/r/20250514-max-mixer-width-v1-0-c8ba0d9bb858@oss.qualcomm.com
+>
+> ---
+> Jessica Zhang (3):
+>        drm/msm/dpu: check mode against PINGPONG or DSC max width
+>        drm/msm/dpu: filter writeback modes using writeback maxlinewidth
+>        drm/msm/dpu: remove max_mixer_width from catalog
+>
+> Mahadevan P (3):
+>        drm/msm/dpu: split modes a single layer mixer cannot clock
+>        drm/msm/dpu: do not assume a merged datapath when validating mode clock
+>        drm/msm/dpu: limit the mode width to a pipe if the LM has no source split
+>
+>   .../drm/msm/disp/dpu1/catalog/dpu_10_0_sm8650.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_10_2_milos.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_12_0_sm8750.h    |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_12_2_glymur.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_13_0_kaanapali.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_1_14_msm8937.h   |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_1_15_msm8917.h   |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_1_16_msm8953.h   |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_1_7_msm8996.h    |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_3_0_msm8998.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_3_2_sdm660.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_3_3_sdm630.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_4_0_sdm845.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_5_0_sm8150.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_5_1_sc8180x.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_5_2_sm7150.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_5_3_sm6150.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_0_sm8250.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_2_sc7180.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_3_sm6115.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_4_sm6350.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_6_5_qcm2290.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_6_9_sm6375.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_7_0_sm8350.h |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_7_2_sc7280.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_8_0_sc8280xp.h   |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_8_1_sm8450.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_8_4_sa8775p.h    |  1 -
+>   .../gpu/drm/msm/disp/dpu1/catalog/dpu_9_0_sm8550.h |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_9_1_sar2130p.h   |  1 -
+>   .../drm/msm/disp/dpu1/catalog/dpu_9_2_x1e80100.h   |  1 -
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c           | 82 +++++++++++++++++++---
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h     |  9 ++-
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c      |  9 +--
+>   36 files changed, 79 insertions(+), 54 deletions(-)
+> ---
+> base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
+> change-id: 20261008-lm_fixes_final-9b9a8d0d9835
+>
+> Best regards,
