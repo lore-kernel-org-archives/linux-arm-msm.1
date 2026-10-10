@@ -1,48 +1,39 @@
-Received: from e234-58.smtp-out.ap-northeast-1.amazonses.com (e234-58.smtp-out.ap-northeast-1.amazonses.com [23.251.234.58])
-	(using TLSv1.2 with cipher AES128-SHA256 (128/128 bits))
+Received: from mail-244116.protonmail.ch (mail-244116.protonmail.ch [109.224.244.116])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C980437845;
-	Sat, 10 Oct 2026 09:23:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=23.251.234.58
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 934CC44F56D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 11:23:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791624202; cv=none; b=dL28veGCdPPvCbUxPS0K4+Z0jL0DZabMi2SqHpS5BAd8awef5pXkGiTonrVpNzlL2ep9GL5t3DwdGpDiKj6swZ01NCfGIve8yFWUPjs2r7afLoLZmnZ63gx7a8V80ToJnntQ58fMKmlH/sxDZjGp7TxiZ6zgaNKv1gDvgCLD/dI=
+	t=1791631432; cv=none; b=YLKmzR/j9NCT9IeqLcPRWMtwxvoVddEH86lIYWVmu31O6NAyzO9Vo3wovvF8PQjTTczJamhltSR2VYBpYKGy2Iyt/XWNo51sSjQ6EHP9HDei8i+1w9qCCB2Atc7XRBxOPKdJUm9x0LQCaxwVOa1de7fMkmJAAVRMHkWlnxw8NEo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791624202; c=relaxed/simple;
-	bh=delSSJoOAFqL+sKNM3FQb+5AQMHdDkVqX01un2hNa8g=;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Date:
-	 MIME-Version:Content-Type; b=aRTlc+YuR+GWH7Yke8iqFXaMdA/7K9mcq1aOfjnShP5lP9tgfw5qjWRF/SCJtMuChDuh0Dvts5S1dR1GmGJ/A/+X7VXmE110QH59FARVNC37qJcnqw+ifWh+yMN2IbGd/ITP9PmR3hPeQWYJYDoobXMHm2/AXAoO08XVBUCO110=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz; spf=pass smtp.mailfrom=send.fqwqf.xyz; dkim=pass (1024-bit key) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.b=1FnM/bEJ; dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b=ko6mhqii; arc=none smtp.client-ip=23.251.234.58
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
+	s=arc-20240116; t=1791631432; c=relaxed/simple;
+	bh=29EACdLxzYRratyDbeWoNXVIHRUiUVtnepkFCk69mzE=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=X5/7SuH6sBhRxy5i+i+QAldc+iWrC8kLaxcpsn5QEkrOEGiEO7dsF0IxZuaBVOIIBTd+yziXTKb3XEornYD+jrhJsKIhuYtohOqEM8YXcrGtK9rfXrL3Y41Ls/77ABGv8SFPuTWnKYeOhwx7bAq7dqHTqK/hqU9Sfd1ISXOcXNY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=Ci6dayoF; arc=none smtp.client-ip=109.224.244.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.b="1FnM/bEJ";
-	dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b="ko6mhqii"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1791624200;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=delSSJoOAFqL+sKNM3FQb+5AQMHdDkVqX01un2hNa8g=;
-	b=1FnM/bEJtzJVyqRS3XRX0ifd8/iAnJSVSCQzuKrLpP50oXOM39TDs61SXQ1wcArz
-	l/vUg/LTuyxRf1KPt6jTpIi5gSBuuZa22zqvdFHNW5c9QshxguY8IfZjr9rxRlJiHEQ
-	WiaiNJjQKGFjKnMUPGV5c/GU+b+ENb9BY5jWiS5s=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1791624200;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=delSSJoOAFqL+sKNM3FQb+5AQMHdDkVqX01un2hNa8g=;
-	b=ko6mhqii+ZshFLCKilIR4Jh0hzjcGt6IKOVeQHKtmnzBlH2bybjYvNsmxS8GJvQG
-	wQUklJ99Sst7AoWvdfdSjnInBT/y27E96pLni8rVfAijPaHJuzx0j99Y4AIk/dVB7n5
-	IiQvJQjlirScbd+pyt45oCfDu/7DZ0MAGQrsvWok=
-In-Reply-To: <20260917-x1e-csi2-phy-v18-2-6515b5255fa9@linaro.org>
-References: <20260917-x1e-csi2-phy-v18-2-6515b5255fa9@linaro.org>
-X-Mailer: git-send-email 2.53.0
-From: fQwQf <fqwqf@fqwqf.xyz>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: vkoul@kernel.org, linux-phy@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org
-Subject: [RFC PATCH] phy: qcom-mipi-csi2: round the requested settle
- interval up
-Message-ID: <010601a1251fbfb9-9afc4070-5194-4714-86b1-5358791e7770-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: quoted-printable
-Date: Sat, 10 Oct 2026 09:23:20 +0000
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="Ci6dayoF"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1791631421; x=1791890621;
+	bh=oo79LKWTx4aAtArHq4xXSoc7i/wEN7VwGdsWaQW6NV8=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=Ci6dayoFUMY/k81NymBOBaqSuC3q9llTEfP0Sh1/TyVzD0VdE/QJnnlpzaz2j7e+K
+	 hgk864ShChkLFGmLQkwf9CqHMIq8dNeNAfxxzn2Yqg7obJA9XI4DJtyXnxolUCIr5Y
+	 THfL5HTQyLigYecEPQop6RPkv3+BvH9rhyEqukKlI5WThxcNZW+GiwnUQt1puerxRj
+	 uCpXr0VBncgvXKPla3S9uLRjjNeSx33PWnp12Wdfoi++dtXXZ48oiXHosVNip8+qJc
+	 jmLSSNcNYDj/WTbynCKKFvwTqMsNHayJiYQzWkeo+IC/jV1maXaJrVNDkgIshY/vfd
+	 S6NbjfnkwwvIQ==
+Date: Sat, 10 Oct 2026 11:23:36 +0000
+To: Bjorn Andersson <andersson@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [RFC PATCH] pinctrl: qcom: Restore the pin configuration after hibernation
+Message-ID: <179163141354.18006.80461347454353634@pm.me>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 9005c5cbff3375a4d0631500baca45f5b1b2f650
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,72 +41,236 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.10.10-23.251.234.58
+Content-Transfer-Encoding: quoted-printable
 
-The settling counter represents the requested interval in timer ticks,
-with the existing six-tick hardware offset. Truncating the division
-programs fewer ticks than requested when the interval is not an exact
-multiple of the timer period.
+A hibernation image is restored after a power cycle. The TLMM registers
+then hold what the boot firmware and the kernel that loaded the image
+made of them. The restored kernel has the configuration it applied in
+memory only, and nothing writes it to the hardware again, so every pin
+that the loading kernel did not set up the same way stays wrong.
 
-At a 402 MHz link frequency and a 100 MHz =
-timer, the existing calculation
-requests 92458 ps but programs nine ticks =
-(90000 ps). Round up to ten
-ticks instead. Preserve the existing =
-minimum-counter handling and
-hardware offset.
+On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
+are two of them. Their drivers are loaded from the root file system, so
+the kernel that loads the image never touches the pins. This is
+/sys/kernel/debug/gpio before the hibernation and after the resume:
 
-Signed-off-by: Jizhou Tong =
-<fqwqf@fqwqf.xyz>
+  gpio116 : out low  func0 2mA no pull
+  gpio117 : out high func0 2mA no pull
+
+  gpio116 : in  low  func0 2mA pull down
+  gpio117 : out high func0 16mA no pull
+
+The driver that owns gpio116 still believes it drives the line.
+
+Save the control, output and interrupt configuration registers of every
+valid pin in freeze_noirq and write them back in restore_noirq, the
+output level first, so that a pin drives the right level from the
+moment it becomes an output. Enabling the raw interrupt status can
+latch an interrupt, so the status is cleared afterwards, as
+msm_gpio_irq_set_type() does.
+
+msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
+these ops. With that x1e80100 also gets their suspend and resume
+callbacks, which apply the sleep and default state of the controller's
+own pins where a board defines them.
+
+Signed-off-by: Birk Skyum <birk.skyum@pm.me>
 ---
-Incremental change against media-next at ee2e9bf41d3e=
-, which includes
-the v18 CSI2 PHY driver. The settle calculation still =
-truncates.
+RFC because the two callbacks go into msm_pinctrl_dev_pm_ops, which the
+sc7180, sc7280, sdm845 and sm7150 drivers use as well, and I can only
+test x1e80100. If you would rather have this for x1e80100 alone, or
+done another way, I am happy to redo it.
 
-Original series:
-https://lore.kernel.org/all/20260917-x1e-csi2-=
-phy-v18-2-6515b5255fa9@linaro.org/
+Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel plus
+this patch. The kernel also carried the PCI change in [1], without
+which this machine does not resume at all, the smp2p change in [2] and
+a GENI serial change that is not ready for the list. The patch is
+based on pinctrl/devel, where it builds without warnings (W=3D1,
+CONFIG_HIBERNATION=3Dy).
 
-An extracted-function test checks 7105 =
-link/timer combinations. The
-previous calculation violates the computed =
-lower bound; rounding up
-passes those cases. This validates the arithmetic,=
- not the electrical
-timing model.
+- Without the patch, gpio116 and gpio117 come back as shown above
+  after a hibernation with a real power-off. With it, in four such
+  hibernations, the TLMM part of /sys/kernel/debug/gpio differs only
+  in the level read on two inputs (gpio93 and gpio153).
+- pm_test=3Dcore and test_resume pass.
+- A suspend (deep) and wake still works. On x1e80100 it now goes
+  through msm_pinctrl_suspend() and msm_pinctrl_resume().
 
-I am sending this as an RFC to confirm =
-that rounding up is appropriate
-for the hardware counter and its existing =
-six-tick offset. This change
-has been used in my SL7 camera stack, but I =
-have not isolated its effect
-on capture reliability from the other camera =
-changes.
+Not covered here: the LPASS LPI pin controller, whose pins also came
+back at their reset values after a hibernation.
 
- drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+[1] https://lore.kernel.org/r/179157746908.73485.2343672865542690797@pm.me
+[2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
 
-diff --git =
-a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c =
-b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-index 966d79c98f..ce1de1a689 100644
---- a/drivers/phy/qualcomm/phy-qcom-mip=
-i-csi2-3ph-dphy.c
-+++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-@@ -236,7 +236,8 @@ static u8 phy_qcom_mipi_csi2_settle_cnt_calc(s64 =
-link_freq, u32 timer_clk_rate)
- 	if ((t_hs_settle_ps / timer_period_ps) < =
-6)
- 		return 0;
+ drivers/pinctrl/qcom/pinctrl-msm.c      | 106 +++++++++++++++++++++++-
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
+ 2 files changed, 105 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinc=
+trl-msm.c
+index 27f06bbc1..fba8a4165 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -39,6 +39,14 @@
+ #define MAX_NR_TILES 4
+ #define PS_HOLD_OFFSET 0x820
 =20
--	settle_cnt =3D t_hs_settle_ps / timer_period_ps - 6;
-+	/* Do not round the requested settling interval down. */
-+	settle_cnt =3D DIV_ROUND_UP(t_hs_settle_ps, timer_period_ps) - 6;
++/* Register values of one pin, kept across a hibernation. */
++struct msm_pin_state {
++=09u32 ctl;
++=09u32 io;
++=09u32 intr_cfg;
++=09u32 intr_target;
++};
++
+ /**
+  * struct msm_pinctrl - state for a pinctrl-msm device
+  * @dev:            device handle.
+@@ -58,6 +66,7 @@
+  * @soc:            Reference to soc_data of platform specific data.
+  * @regs:           Base addresses for the TLMM tiles.
+  * @phys_base:      Physical base address
++ * @saved:          Pin registers kept while a hibernation image is taken.
+  */
+ struct msm_pinctrl {
+ =09struct device *dev;
+@@ -80,6 +89,8 @@ struct msm_pinctrl {
+ =09const struct msm_pinctrl_soc_data *soc;
+ =09void __iomem *regs[MAX_NR_TILES];
+ =09u32 phys_base[MAX_NR_TILES];
++
++=09struct msm_pin_state *saved;
+ };
 =20
- 	return settle_cnt;
+ #define MSM_ACCESSOR(name) \
+@@ -1583,9 +1594,93 @@ static __maybe_unused int msm_pinctrl_resume(struct =
+device *dev)
+ =09return pinctrl_force_default(pctrl->pctrl);
  }
+=20
+-SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
+-=09=09  msm_pinctrl_resume);
++static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
++=09=09=09=09=09const struct msm_pingroup *g)
++{
++=09return !pctrl->intr_target_use_scm && g->intr_target_reg &&
++=09       g->intr_target_reg !=3D g->intr_cfg_reg;
++}
++
++/* Remember how the pins are set up when a hibernation image is taken. */
++static int msm_pinctrl_freeze_noirq(struct device *dev)
++{
++=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
++=09const struct msm_pingroup *g;
++=09struct msm_pin_state *s;
++=09unsigned long flags;
++=09unsigned int i;
++
++=09raw_spin_lock_irqsave(&pctrl->lock, flags);
++=09for (i =3D 0; i < pctrl->chip.ngpio; i++) {
++=09=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
++=09=09=09continue;
++
++=09=09g =3D &pctrl->soc->groups[i];
++=09=09s =3D &pctrl->saved[i];
++=09=09s->ctl =3D msm_readl_ctl(pctrl, g);
++=09=09s->io =3D msm_readl_io(pctrl, g);
++=09=09if (!g->intr_cfg_reg)
++=09=09=09continue;
++
++=09=09s->intr_cfg =3D msm_readl_intr_cfg(pctrl, g);
++=09=09if (msm_pin_has_own_intr_target(pctrl, g))
++=09=09=09s->intr_target =3D msm_readl_intr_target(pctrl, g);
++=09}
++=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
++
++=09return 0;
++}
++
++/*
++ * The image is restored after a power cycle, when the pins are back at wh=
+at
++ * the firmware and the kernel that loaded the image made of them. Nothing=
+ else
++ * writes the configuration again, so put back what was there.
++ */
++static int msm_pinctrl_restore_noirq(struct device *dev)
++{
++=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
++=09const struct msm_pingroup *g;
++=09struct msm_pin_state *s;
++=09unsigned long flags;
++=09unsigned int i;
++=09u32 val;
++
++=09raw_spin_lock_irqsave(&pctrl->lock, flags);
++=09for (i =3D 0; i < pctrl->chip.ngpio; i++) {
++=09=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
++=09=09=09continue;
++
++=09=09g =3D &pctrl->soc->groups[i];
++=09=09s =3D &pctrl->saved[i];
++
++=09=09/* Set the level before the pin starts driving it. */
++=09=09val =3D msm_readl_io(pctrl, g);
++=09=09val &=3D ~BIT(g->out_bit);
++=09=09val |=3D s->io & BIT(g->out_bit);
++=09=09msm_writel_io(val, pctrl, g);
++
++=09=09msm_writel_ctl(s->ctl, pctrl, g);
++=09=09if (!g->intr_cfg_reg)
++=09=09=09continue;
+=20
++=09=09if (msm_pin_has_own_intr_target(pctrl, g))
++=09=09=09msm_writel_intr_target(s->intr_target, pctrl, g);
++=09=09msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
++
++=09=09/* Enabling the raw status can latch an interrupt. */
++=09=09if (s->intr_cfg & BIT(g->intr_raw_status_bit))
++=09=09=09msm_ack_intr_status(pctrl, g);
++=09}
++=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
++
++=09return 0;
++}
++
++const struct dev_pm_ops msm_pinctrl_dev_pm_ops =3D {
++=09SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
++=09.freeze_noirq =3D pm_sleep_ptr(msm_pinctrl_freeze_noirq),
++=09.restore_noirq =3D pm_sleep_ptr(msm_pinctrl_restore_noirq),
++};
+ EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
+=20
+ int msm_pinctrl_probe(struct platform_device *pdev,
+@@ -1663,6 +1758,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+ =09if (ret)
+ =09=09return ret;
+=20
++=09if (IS_ENABLED(CONFIG_HIBERNATION)) {
++=09=09pctrl->saved =3D devm_kcalloc(&pdev->dev, pctrl->chip.ngpio,
++=09=09=09=09=09    sizeof(*pctrl->saved), GFP_KERNEL);
++=09=09if (!pctrl->saved)
++=09=09=09return -ENOMEM;
++=09}
++
+ =09platform_set_drvdata(pdev, pctrl);
+=20
+ =09dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
+diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom=
+/pinctrl-x1e80100.c
+index e4c0abcd9..bfe122fc7 100644
+--- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
++++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+@@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver=
+ =3D {
+ =09.driver =3D {
+ =09=09.name =3D "x1e80100-tlmm",
+ =09=09.of_match_table =3D x1e80100_pinctrl_of_match,
++=09=09.pm =3D &msm_pinctrl_dev_pm_ops,
+ =09},
+ =09.probe =3D x1e80100_pinctrl_probe,
+ };
 --=20
 2.53.0
+
+
