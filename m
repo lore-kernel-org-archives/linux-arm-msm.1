@@ -1,276 +1,144 @@
-Received: from mail-244116.protonmail.ch (mail-244116.protonmail.ch [109.224.244.116])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 934CC44F56D
-	for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 11:23:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA455455607;
+	Sat, 10 Oct 2026 11:25:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791631432; cv=none; b=YLKmzR/j9NCT9IeqLcPRWMtwxvoVddEH86lIYWVmu31O6NAyzO9Vo3wovvF8PQjTTczJamhltSR2VYBpYKGy2Iyt/XWNo51sSjQ6EHP9HDei8i+1w9qCCB2Atc7XRBxOPKdJUm9x0LQCaxwVOa1de7fMkmJAAVRMHkWlnxw8NEo=
+	t=1791631540; cv=none; b=DfEHEZP5koNoSgcTXKGIBq8cBUHoV4d4z7AuxxFyRaU5voE1iykq9DBDjBh34kicxynDr5NFHtwuhVJhpa/XG00jVj6+Tmr97g3SuHPM7hoQetNIkhuy3DUw16PEEtLzQpA90XLIGJMAcC9gXpSTuGdhSF5zaVHKQ4fc5cGWF7w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791631432; c=relaxed/simple;
-	bh=29EACdLxzYRratyDbeWoNXVIHRUiUVtnepkFCk69mzE=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=X5/7SuH6sBhRxy5i+i+QAldc+iWrC8kLaxcpsn5QEkrOEGiEO7dsF0IxZuaBVOIIBTd+yziXTKb3XEornYD+jrhJsKIhuYtohOqEM8YXcrGtK9rfXrL3Y41Ls/77ABGv8SFPuTWnKYeOhwx7bAq7dqHTqK/hqU9Sfd1ISXOcXNY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=Ci6dayoF; arc=none smtp.client-ip=109.224.244.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1791631540; c=relaxed/simple;
+	bh=YzqLPw7XgcjHjtBA3K7qVaKgKH+F5SwiMXFMpixd7WE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XyMU6GDkgIej78WKbwQmUU6Oy4T5mt1S0Uw1GOFRjoqHtAfBAMGEmO5uvTYoGfTRlJVx4IfCEmztgQf+7/Ne5DlDASsmTs0h54MJrrqoQGZnBPGj8W/wHy5FpYf0bhG80sLOGEoJx/BKAq0Flt8jTjhje+T/6mDMtLEVGwGCAVQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EkWDQV81; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="Ci6dayoF"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1791631421; x=1791890621;
-	bh=oo79LKWTx4aAtArHq4xXSoc7i/wEN7VwGdsWaQW6NV8=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Ci6dayoFUMY/k81NymBOBaqSuC3q9llTEfP0Sh1/TyVzD0VdE/QJnnlpzaz2j7e+K
-	 hgk864ShChkLFGmLQkwf9CqHMIq8dNeNAfxxzn2Yqg7obJA9XI4DJtyXnxolUCIr5Y
-	 THfL5HTQyLigYecEPQop6RPkv3+BvH9rhyEqukKlI5WThxcNZW+GiwnUQt1puerxRj
-	 uCpXr0VBncgvXKPla3S9uLRjjNeSx33PWnp12Wdfoi++dtXXZ48oiXHosVNip8+qJc
-	 jmLSSNcNYDj/WTbynCKKFvwTqMsNHayJiYQzWkeo+IC/jV1maXaJrVNDkgIshY/vfd
-	 S6NbjfnkwwvIQ==
-Date: Sat, 10 Oct 2026 11:23:36 +0000
-To: Bjorn Andersson <andersson@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC PATCH] pinctrl: qcom: Restore the pin configuration after hibernation
-Message-ID: <179163141354.18006.80461347454353634@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 9005c5cbff3375a4d0631500baca45f5b1b2f650
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EkWDQV81"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 534C41F000FF;
+	Sat, 10 Oct 2026 11:25:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791631534;
+	bh=sfY+uRPXEdWtjLqcJybNaXUFUCXdQfre4GQZmBn9q+I=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=EkWDQV81ES1DiWJ9wSkZqMiad1XbLcb+RmAxG+yGosD++Z9VE7utgqi/C0E6ywBAb
+	 4catZUSGzeCgoVPyQxCr6pCW8wEivmFgEFnU035MinLtih4EeRS3rhtEHLj8r7GnUc
+	 om7VFblNFyKl6KXVPSi7bnEDwAESnVlGDHzQ0hMipKXbGPcC1Y36uU7lleuYL8q6ch
+	 WjNs05xmUrZLhGxQCDsigiACvl1BEyM6Ld0FCd8LPxOeyCAfHioObUjaTlpk0ODQ/5
+	 1rZYzzexcGr+N53mcDK0zUSwYpc4X/nEUhaLuMAhpJhLrzh4rbOpaKwFLesIriJ6Po
+	 c1a0Y2R5sJ2Yw==
+Date: Sat, 10 Oct 2026 16:55:28 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>, andersson@kernel.org,
+	mathieu.poirier@linaro.org, konrad.dybcio@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] remoteproc: qcom: pas: pass no resource table when the
+ firmware has none
+Message-ID: <asogqMMvsGTTmHr1@sumit-xelite>
+Mail-Followup-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>,
+	andersson@kernel.org, mathieu.poirier@linaro.org,
+	konrad.dybcio@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261005125411.2151326-1-jorge.ramirez@oss.qualcomm.com>
+ <20261005161224.umj6zzov57tifv7v@hu-mojha-hyd.qualcomm.com>
+ <asQQJNOd_p9acgT1@RAMIREZO.na.qualcomm.com>
+ <20261006100344.piyiffp6rwvt3w2s@hu-mojha-hyd.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20261006100344.piyiffp6rwvt3w2s@hu-mojha-hyd.qualcomm.com>
 
-A hibernation image is restored after a power cycle. The TLMM registers
-then hold what the boot firmware and the kernel that loaded the image
-made of them. The restored kernel has the configuration it applied in
-memory only, and nothing writes it to the hardware again, so every pin
-that the loading kernel did not set up the same way stays wrong.
+Hey Mukesh,
 
-On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
-are two of them. Their drivers are loaded from the root file system, so
-the kernel that loads the image never touches the pins. This is
-/sys/kernel/debug/gpio before the hibernation and after the resume:
+On Tue, 06 Oct 2026 at 15:33:44 +0530, Mukesh Ojha wrote:
+>On Mon, Oct 05, 2026 at 11:01:24PM +0200, Jorge Ramirez wrote:
+>> On 05/10/26 21:42:24, Mukesh Ojha wrote:
+>> > On Mon, Oct 05, 2026 at 02:54:00PM +0200, Jorge Ramirez-Ortiz wrote:
+>> > > The firmware resource table is passed to the PAS backend even when the
+>> > > firmware carries none. This only works on the first boot, while the
+>> > > cached pointer and its size are both zero.
+>> > >
+>> > > Stopping the remote processor, or failing to start it, frees the cached
+>> > > table and clears the pointer but leaves the size set. The next start
+>> > > then pairs a NULL table with a non-zero size.
+>> > >
+>> > > The SCM backend substitutes an empty table and hides the problem. The
+>> > > TEE backend copies from the NULL pointer:
+>> > >
+>> > >   remoteproc remoteproc2: powering up cdsp
+>> > >   pc : __pi_memcpy_generic+0x110/0x22c
+>> > >   lr : qcom_pas_tee_get_rsc_table+0xf4/0x25c
+>> > >   Call trace:
+>> > >    __pi_memcpy_generic+0x110/0x22c (P)
+>> > >    qcom_pas_get_rsc_table+0x38/0x60
+>> > >    qcom_pas_parse_firmware+0xa0/0x100
+>> > >    rproc_boot+0x2d4/0x380
+>> > >    state_store+0x40/0x100
+>> > >
+>> > > Fixes: a4584bff63c8 ("remoteproc: pas: Extend parse_fw callback to fetch resources via SMC call")
+>> > > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+>> > > ---
+>> > >  drivers/remoteproc/qcom_q6v5_pas.c | 11 ++++++-----
+>> > >  1 file changed, 6 insertions(+), 5 deletions(-)
+>> > >
+>> > > diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+>> > > index a005546c265d..e871e03ba794 100644
+>> > > --- a/drivers/remoteproc/qcom_q6v5_pas.c
+>> > > +++ b/drivers/remoteproc/qcom_q6v5_pas.c
+>> > > @@ -463,7 +463,7 @@ static int qcom_pas_parse_firmware(struct rproc *rproc, const struct firmware *f
+>> > >  	struct resource_table *table = NULL;
+>> > >  	size_t output_rt_size;
+>> > >  	void *output_rt;
+>> > > -	size_t table_sz;
+>> > > +	size_t table_sz = 0;
+>> > >  	int ret;
+>> > >
+>> > >  	ret = qcom_register_dump_segments(rproc, fw);
+>> > > @@ -476,11 +476,12 @@ static int qcom_pas_parse_firmware(struct rproc *rproc, const struct firmware *f
+>> > >  		return 0;
+>> > >
+>> > >  	ret = rproc_elf_load_rsc_table(rproc, fw);
+>> > > -	if (ret)
+>> > > +	if (ret) {
+>> > >  		dev_dbg(&rproc->dev, "Failed to load resource table from firmware\n");
+>> > > -
+>> > > -	table = rproc->table_ptr;
+>> > > -	table_sz = rproc->table_sz;
+>> > > +	} else {
+>> > > +		table = rproc->table_ptr;
+>> > > +		table_sz = rproc->table_sz;
+>> > > +	}
+>> >
+>> >
+>> > Earlier code was intentional please read the comment below.. /**...*/
+>> >
+>>
+>> AFAICS the comments say that the call might pass NULL and zero as input
+>> resources. And this patch does exactly that - it doesnt allow NULL and
+>> non-zero.
+>>
+>> did I miss something?
+>
+>No, you did not miss anything.. I just wanted to highlight that I
+>did not keep else statement in my initial implementation
+>intentionally and relied table_ptr and size will be NULL on
+>failure of rproc_elf_load_rsc_table()..
 
-  gpio116 : out low  func0 2mA no pull
-  gpio117 : out high func0 2mA no pull
+Looks like you still haven't understood the problem this patch is trying
+to solve. It's the PIL restart sequence where the table_ptr is NULL and
+size being passed as non-zero which is incorrect from caller point of
+view.
 
-  gpio116 : in  low  func0 2mA pull down
-  gpio117 : out high func0 16mA no pull
+The backend will surely error out in this case. On a restart you again
+have to pass the table_ptr as NULL with size as 0 to fetch the resource
+table again. Surely we don't want the backend to hide errors on client
+part here.
 
-The driver that owns gpio116 still believes it drives the line.
-
-Save the control, output and interrupt configuration registers of every
-valid pin in freeze_noirq and write them back in restore_noirq, the
-output level first, so that a pin drives the right level from the
-moment it becomes an output. Enabling the raw interrupt status can
-latch an interrupt, so the status is cleared afterwards, as
-msm_gpio_irq_set_type() does.
-
-msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
-these ops. With that x1e80100 also gets their suspend and resume
-callbacks, which apply the sleep and default state of the controller's
-own pins where a board defines them.
-
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
----
-RFC because the two callbacks go into msm_pinctrl_dev_pm_ops, which the
-sc7180, sc7280, sdm845 and sm7150 drivers use as well, and I can only
-test x1e80100. If you would rather have this for x1e80100 alone, or
-done another way, I am happy to redo it.
-
-Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel plus
-this patch. The kernel also carried the PCI change in [1], without
-which this machine does not resume at all, the smp2p change in [2] and
-a GENI serial change that is not ready for the list. The patch is
-based on pinctrl/devel, where it builds without warnings (W=3D1,
-CONFIG_HIBERNATION=3Dy).
-
-- Without the patch, gpio116 and gpio117 come back as shown above
-  after a hibernation with a real power-off. With it, in four such
-  hibernations, the TLMM part of /sys/kernel/debug/gpio differs only
-  in the level read on two inputs (gpio93 and gpio153).
-- pm_test=3Dcore and test_resume pass.
-- A suspend (deep) and wake still works. On x1e80100 it now goes
-  through msm_pinctrl_suspend() and msm_pinctrl_resume().
-
-Not covered here: the LPASS LPI pin controller, whose pins also came
-back at their reset values after a hibernation.
-
-[1] https://lore.kernel.org/r/179157746908.73485.2343672865542690797@pm.me
-[2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
-
- drivers/pinctrl/qcom/pinctrl-msm.c      | 106 +++++++++++++++++++++++-
- drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
- 2 files changed, 105 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinc=
-trl-msm.c
-index 27f06bbc1..fba8a4165 100644
---- a/drivers/pinctrl/qcom/pinctrl-msm.c
-+++ b/drivers/pinctrl/qcom/pinctrl-msm.c
-@@ -39,6 +39,14 @@
- #define MAX_NR_TILES 4
- #define PS_HOLD_OFFSET 0x820
-=20
-+/* Register values of one pin, kept across a hibernation. */
-+struct msm_pin_state {
-+=09u32 ctl;
-+=09u32 io;
-+=09u32 intr_cfg;
-+=09u32 intr_target;
-+};
-+
- /**
-  * struct msm_pinctrl - state for a pinctrl-msm device
-  * @dev:            device handle.
-@@ -58,6 +66,7 @@
-  * @soc:            Reference to soc_data of platform specific data.
-  * @regs:           Base addresses for the TLMM tiles.
-  * @phys_base:      Physical base address
-+ * @saved:          Pin registers kept while a hibernation image is taken.
-  */
- struct msm_pinctrl {
- =09struct device *dev;
-@@ -80,6 +89,8 @@ struct msm_pinctrl {
- =09const struct msm_pinctrl_soc_data *soc;
- =09void __iomem *regs[MAX_NR_TILES];
- =09u32 phys_base[MAX_NR_TILES];
-+
-+=09struct msm_pin_state *saved;
- };
-=20
- #define MSM_ACCESSOR(name) \
-@@ -1583,9 +1594,93 @@ static __maybe_unused int msm_pinctrl_resume(struct =
-device *dev)
- =09return pinctrl_force_default(pctrl->pctrl);
- }
-=20
--SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
--=09=09  msm_pinctrl_resume);
-+static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
-+=09=09=09=09=09const struct msm_pingroup *g)
-+{
-+=09return !pctrl->intr_target_use_scm && g->intr_target_reg &&
-+=09       g->intr_target_reg !=3D g->intr_cfg_reg;
-+}
-+
-+/* Remember how the pins are set up when a hibernation image is taken. */
-+static int msm_pinctrl_freeze_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned long flags;
-+=09unsigned int i;
-+
-+=09raw_spin_lock_irqsave(&pctrl->lock, flags);
-+=09for (i =3D 0; i < pctrl->chip.ngpio; i++) {
-+=09=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
-+=09=09=09continue;
-+
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+=09=09s->ctl =3D msm_readl_ctl(pctrl, g);
-+=09=09s->io =3D msm_readl_io(pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-+
-+=09=09s->intr_cfg =3D msm_readl_intr_cfg(pctrl, g);
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09s->intr_target =3D msm_readl_intr_target(pctrl, g);
-+=09}
-+=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
-+
-+=09return 0;
-+}
-+
-+/*
-+ * The image is restored after a power cycle, when the pins are back at wh=
-at
-+ * the firmware and the kernel that loaded the image made of them. Nothing=
- else
-+ * writes the configuration again, so put back what was there.
-+ */
-+static int msm_pinctrl_restore_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned long flags;
-+=09unsigned int i;
-+=09u32 val;
-+
-+=09raw_spin_lock_irqsave(&pctrl->lock, flags);
-+=09for (i =3D 0; i < pctrl->chip.ngpio; i++) {
-+=09=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
-+=09=09=09continue;
-+
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+
-+=09=09/* Set the level before the pin starts driving it. */
-+=09=09val =3D msm_readl_io(pctrl, g);
-+=09=09val &=3D ~BIT(g->out_bit);
-+=09=09val |=3D s->io & BIT(g->out_bit);
-+=09=09msm_writel_io(val, pctrl, g);
-+
-+=09=09msm_writel_ctl(s->ctl, pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-=20
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09msm_writel_intr_target(s->intr_target, pctrl, g);
-+=09=09msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
-+
-+=09=09/* Enabling the raw status can latch an interrupt. */
-+=09=09if (s->intr_cfg & BIT(g->intr_raw_status_bit))
-+=09=09=09msm_ack_intr_status(pctrl, g);
-+=09}
-+=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
-+
-+=09return 0;
-+}
-+
-+const struct dev_pm_ops msm_pinctrl_dev_pm_ops =3D {
-+=09SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
-+=09.freeze_noirq =3D pm_sleep_ptr(msm_pinctrl_freeze_noirq),
-+=09.restore_noirq =3D pm_sleep_ptr(msm_pinctrl_restore_noirq),
-+};
- EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
-=20
- int msm_pinctrl_probe(struct platform_device *pdev,
-@@ -1663,6 +1758,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
- =09if (ret)
- =09=09return ret;
-=20
-+=09if (IS_ENABLED(CONFIG_HIBERNATION)) {
-+=09=09pctrl->saved =3D devm_kcalloc(&pdev->dev, pctrl->chip.ngpio,
-+=09=09=09=09=09    sizeof(*pctrl->saved), GFP_KERNEL);
-+=09=09if (!pctrl->saved)
-+=09=09=09return -ENOMEM;
-+=09}
-+
- =09platform_set_drvdata(pdev, pctrl);
-=20
- =09dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
-diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom=
-/pinctrl-x1e80100.c
-index e4c0abcd9..bfe122fc7 100644
---- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-+++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-@@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver=
- =3D {
- =09.driver =3D {
- =09=09.name =3D "x1e80100-tlmm",
- =09=09.of_match_table =3D x1e80100_pinctrl_of_match,
-+=09=09.pm =3D &msm_pinctrl_dev_pm_ops,
- =09},
- =09.probe =3D x1e80100_pinctrl_probe,
- };
---=20
-2.53.0
-
-
+-Sumit
