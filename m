@@ -1,144 +1,124 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA455455607;
-	Sat, 10 Oct 2026 11:25:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A0C5475334;
+	Sat, 10 Oct 2026 11:35:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791631540; cv=none; b=DfEHEZP5koNoSgcTXKGIBq8cBUHoV4d4z7AuxxFyRaU5voE1iykq9DBDjBh34kicxynDr5NFHtwuhVJhpa/XG00jVj6+Tmr97g3SuHPM7hoQetNIkhuy3DUw16PEEtLzQpA90XLIGJMAcC9gXpSTuGdhSF5zaVHKQ4fc5cGWF7w=
+	t=1791632140; cv=none; b=toUPtqsJNJUe1HKYzHZG0k9xk4lGZaFRdD1KR3oPx7CoMBjx+1QUGfQ1rvjErlzC1fNVq2HiAU9ea1fblxhma7jbPSYpA8KsIfyLsvxOLYgzUzEklARDnqO7sUUag2YFbjk+9cwBiiyja5xc7y6KucuhXsSIRIYyhDMK87vvg8k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791631540; c=relaxed/simple;
-	bh=YzqLPw7XgcjHjtBA3K7qVaKgKH+F5SwiMXFMpixd7WE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XyMU6GDkgIej78WKbwQmUU6Oy4T5mt1S0Uw1GOFRjoqHtAfBAMGEmO5uvTYoGfTRlJVx4IfCEmztgQf+7/Ne5DlDASsmTs0h54MJrrqoQGZnBPGj8W/wHy5FpYf0bhG80sLOGEoJx/BKAq0Flt8jTjhje+T/6mDMtLEVGwGCAVQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EkWDQV81; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791632140; c=relaxed/simple;
+	bh=/itNkXNH1JxfAtbgLYU43ReT1lu9d2Vv6u4JiAK4MLo=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=FPSwbYCdcZB5aPwY/A3w9nW/8OOj5S1dx6akRZPeD+I2/3/sWfEi1cuY7rOU643qadzgmuC2JkcxdmT2yykQq59fLbeKbmUB7qcz3BBFnPOI5LcRd2lv0Y8lq0Z92fVSg9+c+XDEjDSsLKorsgLtzMUUQwN4nUpSMxvDCPOoZ7U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=IQstWvGz; arc=none smtp.client-ip=109.224.244.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EkWDQV81"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 534C41F000FF;
-	Sat, 10 Oct 2026 11:25:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791631534;
-	bh=sfY+uRPXEdWtjLqcJybNaXUFUCXdQfre4GQZmBn9q+I=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EkWDQV81ES1DiWJ9wSkZqMiad1XbLcb+RmAxG+yGosD++Z9VE7utgqi/C0E6ywBAb
-	 4catZUSGzeCgoVPyQxCr6pCW8wEivmFgEFnU035MinLtih4EeRS3rhtEHLj8r7GnUc
-	 om7VFblNFyKl6KXVPSi7bnEDwAESnVlGDHzQ0hMipKXbGPcC1Y36uU7lleuYL8q6ch
-	 WjNs05xmUrZLhGxQCDsigiACvl1BEyM6Ld0FCd8LPxOeyCAfHioObUjaTlpk0ODQ/5
-	 1rZYzzexcGr+N53mcDK0zUSwYpc4X/nEUhaLuMAhpJhLrzh4rbOpaKwFLesIriJ6Po
-	 c1a0Y2R5sJ2Yw==
-Date: Sat, 10 Oct 2026 16:55:28 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>, andersson@kernel.org,
-	mathieu.poirier@linaro.org, konrad.dybcio@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] remoteproc: qcom: pas: pass no resource table when the
- firmware has none
-Message-ID: <asogqMMvsGTTmHr1@sumit-xelite>
-Mail-Followup-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>,
-	andersson@kernel.org, mathieu.poirier@linaro.org,
-	konrad.dybcio@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261005125411.2151326-1-jorge.ramirez@oss.qualcomm.com>
- <20261005161224.umj6zzov57tifv7v@hu-mojha-hyd.qualcomm.com>
- <asQQJNOd_p9acgT1@RAMIREZO.na.qualcomm.com>
- <20261006100344.piyiffp6rwvt3w2s@hu-mojha-hyd.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="IQstWvGz"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1791632130; x=1791891330;
+	bh=u/XyS0fFwdXSO/nAyUmGOgyVOEMZmfrG8b3gOmGgnns=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=IQstWvGzGoGHE9qtWPZKn15AgkUBc9Y37IAtSf7cXw5Wjym8pRqR8Olw8iw7I7ZBo
+	 BLXGUajVCl/Jej5bolpLBedu25L8K5ve/STNLIx6Zdl4HiPOWU34W9ux3nMupyAlVe
+	 WwwRI0J7SfK0dQ4UE5ARATUqJ3tLdJQyNBVevj6X8Gy0DGQceSlRDbJPpYdjgkozGf
+	 9hfUvAmQC1qaNLGs9hnlk9WTna/B46xWP9KtjmTU3cDx6ZOOZubjKwm0uZJIzCDE+6
+	 9edbf9voQHuFWdqtDMCtrruPDLGApA3oNJzzg3mMj5C9eEQJ1jh5DS4Gqmvo9W8euN
+	 dK79ioPKjC+ew==
+Date: Sat, 10 Oct 2026 11:35:26 +0000
+To: Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: linux-bluetooth@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] Bluetooth: hci_qca: Reset the in-band sleep state on power off
+Message-ID: <179163212446.46972.2306254853726299632@pm.me>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 884b30a7e7cc678a90e94af3bff0cc6b2f0676a5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20261006100344.piyiffp6rwvt3w2s@hu-mojha-hyd.qualcomm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hey Mukesh,
+qca_power_off() cuts the power of the controller but leaves the host
+side of the in-band sleep (IBS) protocol as it was. tx_ibs_state and
+rx_ibs_state are initialised in qca_open() only, so a controller that
+qca_setup() powers on again meets whatever state the last session ended
+in.
 
-On Tue, 06 Oct 2026 at 15:33:44 +0530, Mukesh Ojha wrote:
->On Mon, Oct 05, 2026 at 11:01:24PM +0200, Jorge Ramirez wrote:
->> On 05/10/26 21:42:24, Mukesh Ojha wrote:
->> > On Mon, Oct 05, 2026 at 02:54:00PM +0200, Jorge Ramirez-Ortiz wrote:
->> > > The firmware resource table is passed to the PAS backend even when the
->> > > firmware carries none. This only works on the first boot, while the
->> > > cached pointer and its size are both zero.
->> > >
->> > > Stopping the remote processor, or failing to start it, frees the cached
->> > > table and clears the pointer but leaves the size set. The next start
->> > > then pairs a NULL table with a non-zero size.
->> > >
->> > > The SCM backend substitutes an empty table and hides the problem. The
->> > > TEE backend copies from the NULL pointer:
->> > >
->> > >   remoteproc remoteproc2: powering up cdsp
->> > >   pc : __pi_memcpy_generic+0x110/0x22c
->> > >   lr : qcom_pas_tee_get_rsc_table+0xf4/0x25c
->> > >   Call trace:
->> > >    __pi_memcpy_generic+0x110/0x22c (P)
->> > >    qcom_pas_get_rsc_table+0x38/0x60
->> > >    qcom_pas_parse_firmware+0xa0/0x100
->> > >    rproc_boot+0x2d4/0x380
->> > >    state_store+0x40/0x100
->> > >
->> > > Fixes: a4584bff63c8 ("remoteproc: pas: Extend parse_fw callback to fetch resources via SMC call")
->> > > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
->> > > ---
->> > >  drivers/remoteproc/qcom_q6v5_pas.c | 11 ++++++-----
->> > >  1 file changed, 6 insertions(+), 5 deletions(-)
->> > >
->> > > diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
->> > > index a005546c265d..e871e03ba794 100644
->> > > --- a/drivers/remoteproc/qcom_q6v5_pas.c
->> > > +++ b/drivers/remoteproc/qcom_q6v5_pas.c
->> > > @@ -463,7 +463,7 @@ static int qcom_pas_parse_firmware(struct rproc *rproc, const struct firmware *f
->> > >  	struct resource_table *table = NULL;
->> > >  	size_t output_rt_size;
->> > >  	void *output_rt;
->> > > -	size_t table_sz;
->> > > +	size_t table_sz = 0;
->> > >  	int ret;
->> > >
->> > >  	ret = qcom_register_dump_segments(rproc, fw);
->> > > @@ -476,11 +476,12 @@ static int qcom_pas_parse_firmware(struct rproc *rproc, const struct firmware *f
->> > >  		return 0;
->> > >
->> > >  	ret = rproc_elf_load_rsc_table(rproc, fw);
->> > > -	if (ret)
->> > > +	if (ret) {
->> > >  		dev_dbg(&rproc->dev, "Failed to load resource table from firmware\n");
->> > > -
->> > > -	table = rproc->table_ptr;
->> > > -	table_sz = rproc->table_sz;
->> > > +	} else {
->> > > +		table = rproc->table_ptr;
->> > > +		table_sz = rproc->table_sz;
->> > > +	}
->> >
->> >
->> > Earlier code was intentional please read the comment below.. /**...*/
->> >
->>
->> AFAICS the comments say that the call might pass NULL and zero as input
->> resources. And this patch does exactly that - it doesnt allow NULL and
->> non-zero.
->>
->> did I miss something?
->
->No, you did not miss anything.. I just wanted to highlight that I
->did not keep else statement in my initial implementation
->intentionally and relied table_ptr and size will be NULL on
->failure of rproc_elf_load_rsc_table()..
+If that state is HCI_IBS_TX_WAKING, the host is waiting for a wake
+acknowledgment, and qca_hci_shutdown() has deleted the timer that
+sends the wake indication again. The setup still works, because frames
+bypass IBS while QCA_IBS_DISABLED is set. Once the flag is cleared,
+qca_enqueue() puts every frame on tx_wait_q and nothing takes it off:
 
-Looks like you still haven't understood the problem this patch is trying
-to solve. It's the PIL restart sequence where the table_ptr is NULL and
-size being passed as non-zero which is incorrect from caller point of
-view.
+  Bluetooth: hci0: QCA setup on UART is completed
+  Bluetooth: hci0: Opcode 0x0c03 failed: -110
 
-The backend will surely error out in this case. On a restart you again
-have to pass the table_ptr as NULL with size as 0 to fetch the resource
-table again. Surely we don't want the backend to hide errors on client
-part here.
+A restore from hibernation gets there on a Lenovo Yoga Slim 7x
+(WCN7850). The controller has been through a power cycle, while the
+restored kernel holds the state from before the image was taken. Its
+wake indications go unanswered, the commands behind them time out, and
+the core closes the device and sets it up again. From then on
+tx_ibs_state reads 1 in debugfs and Bluetooth stays dead until hci_uart
+is reloaded.
 
--Sumit
+When the controller loses power, put both sides back to asleep, which
+is where qca_open() starts, and stop the two IBS timers.
+
+Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+---
+Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel and
+hci_uart rebuilt with this change. qca_open(), qca_enqueue() and
+qca_hci_shutdown() are the same there as in bluetooth-next, which this
+is based on and where it builds without warnings (W=3D1).
+
+Each run is a fresh boot, a hibernation with a real power-off and a
+resume, with Bluetooth powered before it:
+
+- Without the patch Bluetooth is dead afterwards in four runs out of
+  four, with the log above. In the one run where I read it, debugfs
+  showed tx_ibs_state=3D1, ibs_sent_wakes=3D109 and ibs_recv_wake_acks=3D8.
+- With the patch it is powered again by itself in two runs out of two,
+  about 20 seconds after the resume. The log shows a failed version
+  read and "Retry BT power ON:0" before a setup that works. In the run
+  where I read it, debugfs showed tx_ibs_state=3D0 afterwards.
+- Powering the controller off and on with bluetoothctl still works.
+
+The 20 seconds are the commands that time out before the core gives up
+on the old session. This patch does not change that part.
+
+The kernel also carried the hibernation changes in [1], [2] and [3],
+without which this machine does not get this far, and a GENI serial
+change that is not ready for the list.
+
+[1] https://lore.kernel.org/r/179157746908.73485.2343672865542690797@pm.me
+[2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
+[3] https://lore.kernel.org/r/179163141354.18006.80461347454353634@pm.me
+
+ drivers/bluetooth/hci_qca.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+index 7089e9b63..19a75faba 100644
+--- a/drivers/bluetooth/hci_qca.c
++++ b/drivers/bluetooth/hci_qca.c
+@@ -2235,6 +2235,11 @@ static void qca_power_off(struct hci_uart *hu)
+ =09spin_lock_irqsave(&qca->hci_ibs_lock, flags);
+ =09set_bit(QCA_IBS_DISABLED, &qca->flags);
+ =09qca_flush(hu);
++=09/* A controller that loses power is asleep when it comes back. */
++=09timer_delete(&qca->wake_retrans_timer);
++=09timer_delete(&qca->tx_idle_timer);
++=09qca->tx_ibs_state =3D HCI_IBS_TX_ASLEEP;
++=09qca->rx_ibs_state =3D HCI_IBS_RX_ASLEEP;
+ =09spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
+=20
+ =09/* Non-serdev device usually is powered by external power
+--=20
+2.56.0
+
+
