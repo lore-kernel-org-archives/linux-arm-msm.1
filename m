@@ -1,227 +1,326 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mail-08.mail-europe.com (mail-08.mail-europe.com [57.129.93.249])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E22D733E346
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD9E1368957
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:28:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.129.93.249
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791743016; cv=none; b=mIS+S8gyYylLRoHAv3hPWx1Jg2B8nYMKsm+wYUpIZze6+OgpQvsMdU38aI4uK//kjIQREhcz3muzX2ObwGGWqMglEEpZC+MQkvTSYKzcGaQxZ/19KxsNK0YC5KlZphCi4oeUaq4taNB7S3ulrb6FzMlOBdOGpkJKHXmldsSKtKw=
+	t=1791743330; cv=none; b=HVwSNdP4V6Kr793ixoMFQFr8ugMZswPNWwt63u4mS0Teb+bnEY6loNjLGcMAhxi2asYTrizYVO/DC6P1pv1y0Eg9NMjbogPsvkI2PkDK1dUARhybhZinVWcK6XLamabfY3DdLQkbBAmKFt9julVkBtQa1S9HVwTam5nzppbh+a4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791743016; c=relaxed/simple;
-	bh=Sx/YLYtHnsGcMNWokhm0pgpzH9N8876oemZHYtrdgtA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uMSTvfT0v3DOau5u4jqfgy+DDkP5Hmv5Ms0P+abP29c4Yt4G37AiGOrxftTshx9nmC0TBXQ6HIOqbEfGu7vR4j1tmnpZeYMle6slYoiRjNcAB5zqQKWDc9lXvb/97bzYI60VAKEVu32M9eZ6OcdfgooHm0X4s0gGluID8/I9MsM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jc6qT34I; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=j6R3QYNx; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791743330; c=relaxed/simple;
+	bh=6KWPx72+CFDP30hTguFnf7/6ovxWOPyRdeWB57p6IOk=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=GD01WekfYCF12aIMwHKz4OTIN/dwn8OxlySW0ZAZylYQCTtiNGHEBSOWs+uU43aafQiJ2xRTkKGJpCL+/Q/751EqNt5H4DCAwwphLl4+o+7I9Ny8E4XD7C1NjEDhy1JTxt2xYQB2hFdqUPkyUf4JDNLguMswDYGNajK5nGNlsd0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com; spf=pass smtp.mailfrom=vinarskis.com; dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b=PrxA09Vw; arc=none smtp.client-ip=57.129.93.249
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jc6qT34I";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j6R3QYNx"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69BIKfad1026901
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=; b=jc6qT34I/IsNsxmu
-	+vEiY6Z/HcWeE1+pk0LJ5BfW5j38Uw7kYf2kf8xz/zZf8CbnN7p7HIDxtN9pHNHk
-	6VWK47tzwUZQjDiHe8YlXU/qRHF24u+oSc7C9MPeVv2EHabHUlovBM80itaJhuqt
-	Xy147D9pWJ4yrpr+II3Udip+s4FMv6bni4AHs86VnJHoh8CKm8SH6Lzf3ARVC++4
-	fhPWk5qu22WogjceN7O3Wpy/YVFmiRQi1DK64JhDMYlhKej1kOl5g/0yn4YCgy68
-	g/FXE0KmVs+4nNYzrj50jQcQSf7DyJAtGUM1od4ovz2S2ljo2vX/PegGr7kQAdpT
-	b+Mu2Q==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7casbprw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:33 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3515266f6eeso2409508eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 11:23:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791742950; x=1792347750; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=;
-        b=j6R3QYNxfxAMNEVQl7vLPLFYrFjUtegk+Yf7nYJOwRl05aFO8L+5ECzkplmMka/Kz4
-         cz9SSaNFXUb4MgTtGoC+6vAF0Pyqg1q1KE2HRg4fgyS3uXv1KETSlE6OGukIF3CUFLwd
-         epkopxs8Xj5etOI23yr0inOda4xP0PbbQ/IiWjBqfkV2ltbxVTFNPlUktCYeSthO04jP
-         of/4hEDR6KeuWaTfRXhclVy3yIU6gBb8xucZrCP749UshpzAxcRVoIj+kyHkPGzm7p37
-         wefskmbXWsheHaI8/JrK3jvRPYG6o09HDy7mAGrF9WyhW57aoVXb6Rbwl6e4XiS5eH7Z
-         Za+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791742950; x=1792347750;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=;
-        b=0f42Kw3CKlAD3cO0pYhLLvHBqaBFth8H6zBMNsto4V9c+nHiTfbDs9Lwibt7Pznl62
-         GePnmm4M+QBP+qjc6A2HG1cGeUAoiwY2/1gDrPmIJw9JlNVlE3HCl2CHFukFQpQK41gl
-         eC3STKWYGuDKDCCQ0ezh7jp+HHre7biukuBNVh6NGXrYkAIyPKpdW1MrE1uQcUlw6WtB
-         NNvc7xHGuZGNj/gCj9JahSMQMq9BmhS7QdPb8dtbnmTypeKN/9u8/f16WUxW1disyjp0
-         yxNFTM9uCB7eaf2H/fplkddfDbdzSGkUJ2O8lITGJDja/H9z/R1+ixHim1N6JEBD5UHG
-         cQdA==
-X-Forwarded-Encrypted: i=1; AKwUvBwfjmyTCeynMcSEJI8wmlDE3WNosft+bHZzlYkOkgKfJxSg3h2DAJ/LqP0h8UVgAp1E5J2QhLtpQnwxquM2@vger.kernel.org
-X-Gm-Message-State: AFq9FYIMam+vAKlMjKP0G6bG5SUjBYIlU52tflybLYWwYFsSglCSQyo7
-	snTfNQhV/Hktrr8OniD9H/niwCqhINPS2jbGHkek8OrX/Xsdu+cyZDM6dcmssvEmq0ooRBUpV5w
-	BgtleyHUDB/mhoD8lyYRknbXZtez2vNVkQimsRaZFFskruGl1GOXysHyssFYy/hQ2zqq4
-X-Gm-Gg: AYBFou1Df6cV9ynrtGQeZyK5PojMzG8fuiZVZIb4tZXjjUxIvdaylx+T8FSRVtwQVlg
-	6cpRAPPd3bqy+Ml+ZxGwKS10IQIKgJ01yJzsuGskdOO7pZiHfX2BNIp16NC4K1lCnSLs7xp6uOS
-	SLJrZ9v8bG99vbHULdCpoo7Sip4SOHD9i44YO7Bog62/ydL03K5kVB2sqKNd9EE3Mw7xzQeUA3H
-	QekqUrxKA1qWdQdSkLFIRQGUx0Y87C9msz57010htHtNA52NPWHGkRlNi1HnTgjPMuUkEgH8rkf
-	wIG5eWTJXkGEzZ2nSvETKy+RxXw6d16SJhi8WV3VirXdV/PympkOL5Dk349SwrAEsT9L5LeKLzD
-	D92robWY+5bxwd/LKWuBi5tz4MM9vI2xJUD+OGDMcJl2ZkQUEbS/NkBSMZg==
-X-Received: by 2002:a05:7300:8a1d:b0:351:35b3:c5b6 with SMTP id 5a478bee46e88-3537e0fbed7mr11835709eec.27.1791742949804;
-        Sun, 11 Oct 2026 11:22:29 -0700 (PDT)
-X-Received: by 2002:a05:7300:8a1d:b0:351:35b3:c5b6 with SMTP id 5a478bee46e88-3537e0fbed7mr11835670eec.27.1791742949107;
-        Sun, 11 Oct 2026 11:22:29 -0700 (PDT)
-Received: from [192.168.1.20] (33.sub-75-218-193.myvzw.com. [75.218.193.33])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3581f594a41sm17453666eec.23.2026.10.11.11.22.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 11 Oct 2026 11:22:28 -0700 (PDT)
-Message-ID: <b1a3f755-19e3-407e-b8f8-b494de83f59a@oss.qualcomm.com>
-Date: Sun, 11 Oct 2026 11:22:26 -0700
+	dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b="PrxA09Vw"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
+	s=protonmail3; t=1791743315; x=1792002515;
+	bh=47Ien8+5jycXxhN8nifC6j89S5IpZIIT4rkjaYPhcwc=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=PrxA09VwuLL8ALC9yg/UD68KWzvHtT5BHFMnh1FfcIaPy1UQlZYM5c/yLND4AoHQE
+	 EvOyvo1fYELPov4SKIk1c1d7URMmpjF2Mfl1xqWUjJz4yOquA/zq2sP8fkZv0RSFyP
+	 Tdk18sJz3kgW4xThg6E/i85YsbevahwM1zvL7meW5zCTfN2Pk6Ib+7ai6qVTU4ucLH
+	 vQNZW9Ywpyi7Eq59q7clvWOSrLlau4YJDuZwvturGjzDFtiKzZ3gN9tnEW12oJ4Hsc
+	 akAGo9PM8lGvehvt47tKlXqea6rKeGp7OTXJuJDUXH2OPT/QFQv1MlPFRVDbPDC2C1
+	 v8qhy0msG9PnA==
+Date: Sun, 11 Oct 2026 18:28:30 +0000
+To: Liviu Nicoara <lnicoara@thinkoid.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
+From: Aleksandrs Vinarskis <alex@vinarskis.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Bryan O'Donoghue <bod@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v3] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
+Message-ID: <b53444dd-c273-4d92-9502-046978303d47@vinarskis.com>
+Feedback-ID: 158356072:user:proton
+X-Pm-Message-ID: e4a5dfe10b839fc8e547879355edf715897a40e1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
-To: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>, jgg@ziepe.ca,
-        alex@shazbot.org, bhelgaas@google.com, jjohnson@kernel.org
-Cc: johannes@sipsolutions.net, mani@kernel.org, yishaih@nvidia.com,
-        skolothumtho@nvidia.com, kevin.tian@intel.com,
-        linux-pci@vger.kernel.org, kvm@vger.kernel.org,
-        linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
-        ath12k@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Baochen Qiang <baochen.qiang@oss.qualcomm.com>,
-        Rameshkumar Sundaram <rameshkumar.sundaram@oss.qualcomm.com>
-References: <20261011074514.515894-1-jtornosm@redhat.com>
-From: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261011074514.515894-1-jtornosm@redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX5BODQLS7tWtn
- uHdPZh+ID+7/afP2zs4a0EQZiTgD+/dr6QvhtuOW+JGNxjR4zka9jqwrdeRL5pQrf71Aqff4vfd
- 6gfbugbwsfu07FmQu9W9imgvttazeeo=
-X-Proofpoint-ORIG-GUID: GDNkHAJ4-dl_HoDD0tn-IzA7BNMFeKIu
-X-Proofpoint-GUID: GDNkHAJ4-dl_HoDD0tn-IzA7BNMFeKIu
-X-Authority-Analysis: v=2.4 cv=eMWGH3p1 c=1 sm=1 tr=0 ts=6acbd425 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=AnolQpdaNwb4XK4FG+QP+g==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=20KFwNOVAAAA:8 a=COk6AnOGAAAA:8 a=vTVf00-0V6mThgBseXsA:9
- a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfXzoOHMLE5wzEA
- pFNsPXzyvkpEzj6k2yB6NVumu7ISIOOIpKeIAYKoK1Kw2XQV3jE+xPxWb46JdMs7bbPWcXrTp33
- 0+lOVCG3OSUcCtqtEr5fThZIUxJtVRu+7/lJEUuVoiiSIK/eSWV79ttP+am92RhqMU66Y5U1iMr
- v9GSlDzvNUT2CBm55dnXWpXKr7wnJAIojZBnrYNh6/1DF42pEBCE7aJeLAXY79ckb+LmFKl84IS
- lpS5is0NWhX0P52h6dgGuVmit9OW8wTbwA7tA/tydumfay5zwpYx4lDA9agDZUJTeh3/uZMpH0X
- 5mTJUI222+Ww/CC3611JTyVhNLmCvqwMBA/AIGolYgdOSh3wzSj5mzQJ4W2hkwZ6pdQ9itRtHhp
- Ogvf6ONARDDujq3lnguGSeIiRBK5UO+7oyA4+e976tVlQy1OfJFPuY+8R3KfCryMoOBcIgDMLI/
- S47+d55l4fQY1TK1Uhg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
- suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610110073
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 10/11/2026 12:45 AM, Jose Ignacio Tornos Martinez wrote:
-> This series enables Qualcomm ath11k/ath12k WiFi devices to work in VM
-> passthrough scenarios, addressing a long-standing issue where these
-> devices fail to initialize when passed through to VMs via VFIO.
-> 
-> Qualcomm ath11k/ath12k WiFi devices have been broken in VM passthrough
-> since they were introduced. The Qualcomm firmware has its own interrupt
-> controller with private registers that need to be programmed with MSI
-> addr/data. The driver extracts the addr/data from the MSI descriptor
-> and programs the firmware's private registers. In a VM, the driver
-> only sees virtual (IOVA) addr/data, but the firmware's private writes
-> bypass the IOMMU, so they need the physical host values. This causes
-> firmware initialization to fail with errors like "BHI offset:
-> 0xffffffff is out of range".
-> 
-> Multiple attempts have been made to solve this over the past 2 years:
-> 
-> March 2024: Workaround using module parameters [1]
->   - Required manually copying MSI values from host to VM
->   - Rejected by Johannes Berg as too manual, suggested VMM solution
-> 
-> August 2024: QEMU + kernel solution by Alex Williamson [2]
->   - Kernel disables MSI virtualization, QEMU intercepts config writes
->   - Uses brute force pattern matching to infer MSI data writes
->   - Stuck as RFC - no progress in 8+ months
-> 
-> No action from Qualcomm: Despite multiple reports, no vendor solution
-> 
-> The solution in this series provides a clean, kernel-only approach that
-> addresses the previous concerns. The PCI reset support for these devices
-> has already landed in linux-next (commit f8522a518e59 "PCI: Add device-
-> specific reset for Qualcomm WCN6855/WCN7850 WLAN") [3], solving the device
-> reset path for VFIO passthrough. This MSI series is the remaining
-> piece, with both in place, these Qualcomm WiFi devices would be fully
-> operational in VMs for the first time.
-> 
-> In practice, this specific behavior (firmware requiring physical host
-> MSI addresses in private registers, bypassing the IOMMU) has only
-> been observed in Qualcomm ath11k/ath12k devices. A device-specific
-> approach seems appropriate, and the VFIO variant driver pattern fits
-> well for this, following the same established pattern as mlx5-vfio-pci
-> and nvgrace-gpu for their own device-specific needs.
-> 
-> Architecture:
-> 1. qcom-vfio-pci variant driver caches physical host MSI values and
->    exposes them via extended config space with magic signature "QMSI".
->    Device-specific hardware quirks belong only in kernel drivers, not
->    userspace, independent of the tools used.
-> 2. VM drivers (ath11k/ath12k) automatically discover and use cached values
-> 3. PCIe link recovery handles VM timing variations
-> 
-> Thoroughly tested: 3 VMs across 2 WiFi generations, all devices
-> successfully initialized and are ready for use.
-> - VM1: ath11k (WCN6855)
-> - VM2: ath11k (WCN6855)
-> - VM3: ath12k (WCN7850)
-> 
-> Series structure:
->   Patch 1/7: PCI helper to find free space in extended config space
->     for device-specific data exchange between host and VM drivers
->   Patch 2/7: Shared header defining the MSI cache protocol between
->     the host variant driver and VM drivers
->   Patch 3/7: qcom-vfio-pci variant driver that caches host physical
->     MSI address/data and exposes them to VMs through extended config
->     space
->   Patch 4/7: ath11k PCIe link recovery retry to handle initialization
->     timing variations in VM environments
->   Patch 5/7: ath11k support to read cached host MSI values and
->     configure firmware with correct physical addresses, making the
->     device operational in VMs
->   Patch 6/7: ath12k PCIe link recovery retry to handle initialization
->     timing variations in VM environments
->   Patch 7/7: ath12k support to read cached host MSI values and
->     configure firmware with correct physical addresses, making the
->     device operational in VMs
-> 
-> [1] https://lore.kernel.org/all/20240322104912.94811-1-jtornosm@redhat.com/
-> [2] https://lore.kernel.org/kvm/20240812170014.1583783-1-alex.williamson@redhat.com/
-> [3] https://lore.kernel.org/all/20261005105436.83962-1-jtornosm@redhat.com/
-> [4] Original problem report:
->     https://lore.kernel.org/all/fc6bd06f-d52b-4dee-ab1b-4bb845cc0b95@quicinc.com/
-> 
+
+On 9/26/26 14:25, Liviu Nicoara wrote:
+> Describe the OV02C10 front camera on CCI1 bus 1 at 0x36, fed by MCLK4
+> at 19.2 MHz into CSIPHY4 over two D-PHY lanes at 400 MHz, the only
+> link frequency the ov02c10 driver offers.
+>
+> The wiring comes from the Windows driver store. CAMF_RES_QRD.bin
+> switches a single rail, GPIO 91, before releasing reset on GPIO 237;
+> GPIOs 235 and 236 are muxed to aon_cci there, the CCI1 bus 1 pins, not
+> rail enables. No camera resource file votes a PMIC rail for the
+> sensor, so avdd and dvdd are left out and fall to dummy regulators.
+> The CSI PHY file votes LDO1_C at 1.2 V and LDO2_C at 0.88 V for the
+> PHYs, which is vdda-1p2 and vdda-0p9 here, as on the Inspiron 14 Plus.
+> MCLK drive strength is 2 mA, as CAMP_RES_QRD.bin programs GPIO 100,
+> and tested streaming.
+>
+> The module sits upside down in the lid: with both sensor flips on, the
+> picture is upright and unmirrored, so rotation is 180.
+>
+> The white camera indicator on GPIO 110 becomes the sensor's privacy LED,
+> so the V4L2 core lights it while the sensor streams and takes it away
+> from sysfs; the comment waiting for a "camera on" trigger goes, and
+> panic-indicator stays, as on the X13s.
+>
+> Assisted-by: LLM
+> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
 > ---
-> v2: Complete cover letter with more information
 
-Thank you for providing this level of detail in your cover letter. I've raised
-this issue with the engineering team in the past, but I've once again raised
-the issue with your in-depth analysis.
+Great to see a follow up!
 
-/jeff
+The initial patch for camera from Laurentiu Tudor that Abel was referring t=
+o
+was never submitted upstream, as it depends on CAMSS PHY and DT camera
+series which are trying to find their way upstream for over a year now.
+
+For reference, it can be found here:
+https://gitlab.com/Linaro/arm64-laptops/linux/-/commit/d79e44083197b263ee59=
+dc3521a2b16ad2a12bd8
+
+Either way very nice to see someone following up to have it upstreamed.
+
+
+> v3: add the Signed-off-by missing from v2; no other change.
+>
+> v2:
+> - Drop the dependency paragraph from the commit message (Abel).
+> - Say in the message that panic-indicator stays, as on the X13s.
+> No change to the DT.
+>
+> v2: https://lore.kernel.org/all/20260926122032.4847-1-lnicoara@thinkoid.o=
+rg/
+> v1: https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.=
+org/
+>
+> Depends on the x1e80100 camera DT series, v7:
+> https://lore.kernel.org/all/20260917-x1e-camss-csi2-phy-dtsi-v7-0-1a63eb3=
+5838b@linaro.org/
+> and on the CAMSS PHY API series, v20 patches 5/6 and 6/6, which read the
+> CAMSS endpoint's data-lanes as 1-based:
+> https://lore.kernel.org/all/20260918-b4-linux-next-25-03-13-dtsi-x1e80100=
+-camss-v20-0-dc244e124e71@linaro.org/
+>
+> Built and checked (dtbs_check, W=3D1) on next-20260925 with the DT series
+> applied. Run-tested on 7.2.6 with the same board hunks, the CSI2 PHY
+> driver v18, the PHY API series v20 and patches 1-4 of the DT series:
+> the sensor streams at 30 fps through libcamera's software ISP, and the
+> privacy LED lights while it streams and goes out after.
+>
+> Bryan, happy for you to fold this into your next version of the DT
+> series if that is easier.
+>
+>   .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 120 +++++++++++++++++-
+>   1 file changed, 118 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch=
+/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+> index ad62350ba670..73f06fdcd138 100644
+> --- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+> +++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+> @@ -10,6 +10,8 @@
+>   #include <dt-bindings/input/gpio-keys.h>
+>   #include <dt-bindings/input/input.h>
+>   #include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/media/video-interfaces.h>
+> +#include <dt-bindings/media/video-interface-devices.h>
+>   #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+>  =20
+>   #include "hamoa.dtsi"
+> @@ -46,14 +48,13 @@ leds {
+>   =09=09pinctrl-names =3D "default";
+>   =09=09pinctrl-0 =3D <&cam_indicator_en>;
+>  =20
+> -=09=09led-camera-indicator {
+> +=09=09privacy_led: led-camera-indicator {
+>   =09=09=09label =3D "white:camera-indicator";
+>   =09=09=09function =3D LED_FUNCTION_INDICATOR;
+>   =09=09=09color =3D <LED_COLOR_ID_WHITE>;
+>   =09=09=09gpios =3D <&tlmm 110 GPIO_ACTIVE_HIGH>;
+>   =09=09=09linux,default-trigger =3D "none";
+>   =09=09=09default-state =3D "off";
+> -=09=09=09/* Reuse as a panic indicator until we get a "camera on" trigge=
+r */
+>   =09=09=09panic-indicator;
+>   =09=09};
+>   =09};
+> @@ -151,6 +152,25 @@ linux,cma {
+>   =09=09};
+>   =09};
+>  =20
+> +=09/*
+> +=09 * The one rail Windows switches for the front camera
+> +=09 * (CAMF_RES_QRD.bin: TLMM 91 high before reset release), the 1.8 V
+> +=09 * LDO enable on the sibling thena boards.
+> +=09 */
+
+Just an FYI: CAMF_RES_QRD.bin is an AeoB file. Some time ago I made a=20
+repo to
+keep a list of already de-compiled files for other developers to use,=20
+might come
+handy. Here is one for Dell XPS 13 9345' front camera:
+
+https://github.com/alexVinarskis/qcom-aeob-dumps/blob/master/dell-xps-9345/=
+CAMF_RES_QRD.json#L245-L257
+
+IMO this comment can be dropped.
+
+> +=09vreg_cam_1p8: regulator-cam-1p8 {
+> +=09=09compatible =3D "regulator-fixed";
+> +
+> +=09=09regulator-name =3D "VREG_CAM_1P8";
+> +=09=09regulator-min-microvolt =3D <1800000>;
+> +=09=09regulator-max-microvolt =3D <1800000>;
+> +
+> +=09=09gpio =3D <&tlmm 91 GPIO_ACTIVE_HIGH>;
+> +=09=09enable-active-high;
+> +
+> +=09=09pinctrl-0 =3D <&cam_ldo_en>;
+> +=09=09pinctrl-names =3D "default";
+> +=09};
+> +
+>   =09vreg_edp_3p3: regulator-edp-3p3 {
+>   =09=09compatible =3D "regulator-fixed";
+>  =20
+> @@ -674,6 +694,78 @@ vreg_l3j_0p8: ldo3 {
+>   =09};
+>   };
+>  =20
+> +&camss {
+> +=09status =3D "okay";
+> +};
+> +
+> +&camss_csiphy4_in_port {
+> +=09camss_csiphy4_inep: endpoint {
+> +=09=09data-lanes =3D <1 2>;
+> +=09=09remote-endpoint =3D <&csiphy4_out_ep>;
+> +=09};
+> +};
+> +
+> +&cci1 {
+> +=09status =3D "okay";
+> +};
+> +
+> +&cci1_i2c1 {
+> +=09camera@36 {
+> +=09=09compatible =3D "ovti,ov02c10";
+> +=09=09reg =3D <0x36>;
+> +
+> +=09=09reset-gpios =3D <&tlmm 237 GPIO_ACTIVE_LOW>;
+> +=09=09pinctrl-0 =3D <&cam_rgb_default>;
+> +=09=09pinctrl-names =3D "default";
+> +
+> +=09=09clocks =3D <&camcc CAM_CC_MCLK4_CLK>;
+> +=09=09assigned-clocks =3D <&camcc CAM_CC_MCLK4_CLK>;
+> +=09=09assigned-clock-rates =3D <19200000>;
+> +
+> +=09=09orientation =3D <MEDIA_ORIENTATION_FRONT>;
+> +=09=09/* upside down in the lid; both sensor flips give an upright, unmi=
+rrored image */
+> +=09=09rotation =3D <180>;
+> +
+> +=09=09leds =3D <&privacy_led>;
+> +=09=09led-names =3D "privacy";
+> +
+> +=09=09/*
+> +=09=09 * Windows switches no rail for avdd or dvdd, only GPIO 91; they
+> +=09=09 * are left to dummy regulators rather than invented.
+> +=09=09 */
+> +=09=09dovdd-supply =3D <&vreg_cam_1p8>;
+
+Windows may only be switching one rail, however there in fact a 2v8 rail=20
+provided by LDO 7B.
+You can find it in:
+* Tudor's patch linked above
+* Device's schematics
+
+I would recommend to add it.
+
+Regards,
+Alex
+
+> +
+> +=09=09port {
+> +=09=09=09ov02c10_ep: endpoint {
+> +=09=09=09=09data-lanes =3D <1 2>;
+> +=09=09=09=09link-frequencies =3D /bits/ 64 <400000000>;
+> +=09=09=09=09remote-endpoint =3D <&csiphy4_in_ep>;
+> +=09=09=09};
+> +=09=09};
+> +=09};
+> +};
+> +
+> +&csiphy4 {
+> +=09vdda-0p9-supply =3D <&vreg_l2c_0p8>;
+> +=09vdda-1p2-supply =3D <&vreg_l1c_1p2>;
+> +
+> +=09status =3D "okay";
+> +};
+> +
+> +&csiphy4_in_port {
+> +=09csiphy4_in_ep: endpoint {
+> +=09=09bus-type =3D <MEDIA_BUS_TYPE_CSI2_DPHY>;
+> +=09=09data-lanes =3D <1 2>;
+> +=09=09remote-endpoint =3D <&ov02c10_ep>;
+> +=09};
+> +};
+> +
+> +&csiphy4_out_port {
+> +=09csiphy4_out_ep: endpoint {
+> +=09=09remote-endpoint =3D <&camss_csiphy4_inep>;
+> +=09};
+> +};
+> +
+>   &gpu {
+>   =09status =3D "okay";
+>   };
+> @@ -1102,6 +1194,30 @@ cam_indicator_en: cam-indicator-en-state {
+>   =09=09bias-disable;
+>   =09};
+>  =20
+> +=09cam_ldo_en: cam-ldo-en-state {
+> +=09=09pins =3D "gpio91";
+> +=09=09function =3D "gpio";
+> +=09=09drive-strength =3D <2>;
+> +=09=09bias-disable;
+> +=09};
+> +
+> +=09cam_rgb_default: cam-rgb-default-state {
+> +=09=09/* 2 mA streams; the sibling X1E boards use 16 */
+> +=09=09mclk-pins {
+> +=09=09=09pins =3D "gpio100";
+> +=09=09=09function =3D "cam_aon";
+> +=09=09=09drive-strength =3D <2>;
+> +=09=09=09bias-disable;
+> +=09=09};
+> +
+> +=09=09reset-n-pins {
+> +=09=09=09pins =3D "gpio237";
+> +=09=09=09function =3D "gpio";
+> +=09=09=09drive-strength =3D <2>;
+> +=09=09=09bias-disable;
+> +=09=09};
+> +=09};
+> +
+>   =09edp_bl_en: edp-bl-en-state {
+>   =09=09pins =3D "gpio74";
+>   =09=09function =3D "gpio";
+>
+> base-commit: f5f84daefcd92d7a630066635ecea1433ed5eac7
+> prerequisite-patch-id: a7fbea14628b62a8de096dea420473b283010aba
+> prerequisite-patch-id: 270d82b4c1760f1ec0a64a1b56c68ce26e6ae3b1
+> prerequisite-patch-id: a12186bafac9b287c19fd719aeceb8ff1372dfbf
+> prerequisite-patch-id: 4bc923fa59ee4c1ff68e64497f11e937c0ab3918
+> prerequisite-patch-id: 4d000086386a3b344b1d6d345ab93d9b2b569615
+> prerequisite-patch-id: 8cde6fd860c857dd7f3efce25970c88c783193b3
+> prerequisite-patch-id: 1f22ff7fc93d0135e8759d45955bf998b037e11e
+> prerequisite-patch-id: edb32e32f2b6be0b93f66d8da460c9f9de0c52e2
+> prerequisite-patch-id: 09444936808e801a58c83356c9ae95415bacc83a
+> prerequisite-patch-id: 348caa9cd0d1d70f181a47b40e2d75e8b25b5938
+> prerequisite-patch-id: 1c4e4c457d8f95d8f5aaa2d93976c374b8282bf0
+> prerequisite-patch-id: deedbed2643ca8a0f26bd87175d787d2f0c87417
 
