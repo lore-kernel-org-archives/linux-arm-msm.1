@@ -1,88 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47A4944F555
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 624A84519BE
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791723795; cv=none; b=Gf6L4HtvJOqKn8LPmg1eaXg761ltGJJNBjYaQ2mOR86Ix4CoERonKjcyf4Qi5NzY+dGdKbD+N36zw2NGfKyJtmpbmzCzgZfJLpIWQPDMANSxva3H+Z2uIsIXBRL+f6uZkENnoMf4oxh3Z1lI3/AbwAVBBjNE7+NqesYt8nRMx6A=
+	t=1791723796; cv=none; b=AQxm7fX3WZwt/it3TDL5geQti5y7nQU9cs24T6hCl2mUYKpBMjNhdZoFB7thyaPs7nQK1EPLM846S2AwTFDw+ARRCuASPd7eTMkgZnVJSjQcTGDeuqgdMsyLoDZiwkFOTaffAc4L0vSVJOfxak2lLgL1uYPKoFJn9rV3mvccSBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791723795; c=relaxed/simple;
-	bh=VNvt8gQu8Lg4Os/r62s18Lb+XGjG7ToKZw+3dX7hH+I=;
+	s=arc-20240116; t=1791723796; c=relaxed/simple;
+	bh=PeIDZ9ZvLBn2ComBGRH5CSzm2sE8lWrroJLbFwf4FOU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=evlF8OKS0jDdFCk0uwlTMs4i7yX3I8ztH8y4aLyWZCMbosUHQ2EsMvsv041JbJcXp6SHdxaBKyALlfbbcXNYrdNEIJEanwCFH752sX8bsARVV1sZ/n2kuYcMPDUQMeUeC+Xe4jh9iMLWX5BTtT2Z2dd06HZ3OCPT4qyQT9DAc8s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MWvx9RcZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XQgCRkES; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=N80rCvEVhL993QUXkuhSgXrnNI0YFKr0qbGM2bwjrDX5EJ+2VXmq2KMkLmpkeh5bmYsELZPMMFb5+HO5VKJ37z/rpWQybLudlpbXi7GYW5QZnAcgTB8TyLbuUrkFp7G1qKQtshXe1bjiP8Y2zDudUD6OaC9Uxtqhtfc6G1P29tc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gJeNe53M; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OsGaUa9J; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MWvx9RcZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XQgCRkES"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69B85IpJ1513022
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:12 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gJeNe53M";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OsGaUa9J"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69B85KRJ3982567
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XDB+97tMKM27jruM2B3itkeFHs4Cs5suKrp3XzeD/9U=; b=MWvx9RcZbPc/mIQ4
-	aLc57M5a+0z1d5kRl1g7EzNs0IiANXBKcI6V1K2nBSdPST+AtL5TNt8OxuVfrSP6
-	PnDOUSAGtIIWYjySkdkP4hzneRfkIvev9dLiwOfux9K1sc1FYhd7Z41pc0C12F24
-	FdrdXdU0X3VJRu6W83QOL5xTPrY+0p6jjKXIBxi3goqG1I6Ck8AvjbMxKEbGi3m3
-	e94DeNbj2XKTVFxO0Ee2XLwGz6on5tv760IPlDlDEwGCG2aTTA9vM54xxe3jIJRC
-	nPvDfNpOxqxfb0xMrFM84mKYrmnNc5blkP8S9lkwH/WUx1GiCdRg5USqy10JqM1i
-	Dq6t4w==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7ehjjx0n-1
+	QrRL4B0nTOu0FNZfqLDv3k7qnligih+VKCyqZVW5V5Y=; b=gJeNe53MlDbh14gJ
+	6PN8SivIAS2KMq6tybuvrhX/9UtEMfFlQdlXbjMDDGG1An5W0M+QqWZ6NV4/ke6Q
+	hx1PQ1Mq2uCYJjCG9bJl4PgUhfHAurcOrknhUYXwPv4XUJr02AB3ziKxYsVy+6Uh
+	9AWQ0c1UF614BILtsBAlCU4JPmzgAvD7eScWwe8uCSYEcwsHH/D26HhGFDGWbXoB
+	6IY368soxm78VMKESoaplvN0gYGdXDrmS0iEk18RZHHJ+ntAvTkjOyd8kwxDJw5f
+	Lmp8F79rha0FSV5XxjVG0GDLTpQoy15m0/aBhRzKUTeZtF+mfJVszEbwkCX8wgMm
+	dvqXDA==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7casb6cf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:12 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso2950513eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 06:03:12 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:03:13 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-35a0c25def6so549055eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 06:03:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791723792; x=1792328592; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791723793; x=1792328593; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XDB+97tMKM27jruM2B3itkeFHs4Cs5suKrp3XzeD/9U=;
-        b=XQgCRkESRXj/olaHfI7b7q2XqyEhQDNNBbnjC1HDrjDbwhlKauuSsqWxrrdGty+xri
-         ZF5Oa8NF5JOIC/quji1hCYwNAwK0cXIqyba7BWjFG8YoCQyG4jV/GPilsm01tRl2jShH
-         qZnlhX0NYYTLk7tVSO4h2Did6f7+5GAoqhN0+2hbfnEcyx/gn/WCLVNzaJJve+4ZpvPs
-         V5loSXjZMcn3DucmSSA7Rdmz+nbAY2kJMQOV7SfnbSs6RCHTToAoxiMaJbySCACCLGxj
-         3Dx4g83X9gb6+h+smI9RBxIBrXzrSZVHJBkFP0INttB1BiYm/gDkiLlsk52J4jg3Mclz
-         NjHA==
+        bh=QrRL4B0nTOu0FNZfqLDv3k7qnligih+VKCyqZVW5V5Y=;
+        b=OsGaUa9JV+DglH3lB7qVH2NAto8bZnmiNwNBurgVKrEqWPkd19Smve9rGbMJGDAiBd
+         9nNlCwoCGW30u+K/iWioHjmqMXiokBrO8rSxpzIOX2rjvpz7oEHrUvglmPk4krvFFCL3
+         dLpuQnmY6RTZ5XFCmvMEhW+L/pDP11nfeLJN4y3oIx+7G/4fensyd4q/WfBbxaTA6gcC
+         ekcwjIbubIfJOogFtBoDoXkFwda8a6lc2TbRLF5PJbVGdoX88aptq0uqW5v0QAtVonC2
+         YlIpEqPCGxHSJfvBt0J9qpqMWLpOySFvKSRULtY0x9lm+cUaQ/UcJEixPpdtEcpepUY9
+         ZAVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791723792; x=1792328592;
+        d=1e100.net; s=20260707; t=1791723793; x=1792328593;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XDB+97tMKM27jruM2B3itkeFHs4Cs5suKrp3XzeD/9U=;
-        b=KIqjh9w1gsWj+RopzPi5Z7+MItfu/Nu1vPrHXql06uiXmtIMWv3TQ+f9C9cdoyTzTd
-         bQEW+ioBkP0Zz1qCiv1r46kAsKSEJL/+bgcr1SJ9SbGpNpkis5lJUEHnsaS3T3Ryg/b4
-         JRgv9Getv6sSMgo7+JeIolwzr+SBl+f0A8Ee8O/I2kjel+y4tpoLfTbuNilO4QEqAz1B
-         5es4LOGP7XYo4R13Ww8dSPzC11ZIPjgxCr2muS/rj4FNb7K4lVRaXsmTfseYRe1WF48Z
-         o/pg1xtNXX+Vk5plbW1v8nYGj9yZ4e3O1yJLdkW1ySfG1lupFU0Zh6hZ47OsNYtkX/af
-         X7Cg==
-X-Forwarded-Encrypted: i=1; AKwUvBwdLm65XRh2kv1Bjk4Emx/aVauMlEd8LGgU4h7WbBR/Aj6X4cmnQa7Hrv5RNHgndUOe15DMhUOHz3UMTgHX@vger.kernel.org
-X-Gm-Message-State: AFq9FYJUWzsXpCTZ9PXSCGoNXh4c+PV9/DIZawrJhoOR5HLXvsu7c+Zz
-	0QowDCBi5FBmzcva5YHHhx8SUW63zXjvuN/FepfRmjLyQWy5LHGaVIEHfdC9kq7LDVz5kpVDEnh
-	NUFrqzXRrsKCGXoMiVBya7xGsfS3RYwk4OQtYa04wMUW5p9D7TX40Ts7LUE+71uxt6HEF
-X-Gm-Gg: AYBFou29cpUiLMe4NXQA1rpHGIjh6EGCkLpkS1KIEepUGB7w9hZBzmJNqjBKmE0BjFu
-	EMf2mnSn0hhefKUT8Ft4CVK9Nivh9ZwY1LwEJNRbCheooHN5zu65h6mVsAFcVF8MLmHVapNjxfs
-	Ui+6KApS6IEp/3fKmlbcSnWIpny2NZrAurS0bNi3qrRWLCeYnpPuFpLL6k8+y1vv8UfLIu8S5Gp
-	K3up6k9k5beYKi36/j+Bzivcz+Oo4R+JoP4GoHWwGOQVu4vXfWGzb5WlvyJX1JYPR77hLSaKoyx
-	Phk7gybqBdggQkMxzOittecoLT/rhcAZGRihJ0uzo69dIUCp7yY+h0TD57WB/lyy4h3D73L/jaM
-	ndamNVBX6AjYeehEASdF+VxvASsL/13dNuCA4/BQoTRc=
-X-Received: by 2002:a05:7022:7e87:b0:143:26f5:c617 with SMTP id a92af1059eb24-16a60347295mr12159826c88.32.1791723791333;
-        Sun, 11 Oct 2026 06:03:11 -0700 (PDT)
-X-Received: by 2002:a05:7022:7e87:b0:143:26f5:c617 with SMTP id a92af1059eb24-16a60347295mr12159766c88.32.1791723790535;
-        Sun, 11 Oct 2026 06:03:10 -0700 (PDT)
+        bh=QrRL4B0nTOu0FNZfqLDv3k7qnligih+VKCyqZVW5V5Y=;
+        b=sE2ekeKmE7N2ECny6SbxJjXKjM16iwab5dFE9u3KqkT2wu3MbbUsBBvEiTWnPhytTE
+         +w0N+Ho6syztFvSVIlOAaPjXe6BtVwyT19vTsUCX9AXaPTLVPzGCmaQl0mwIU5aUn2gK
+         izj+V5cmbcCPHI3oVROmT1+P1UyFZev5ZKWdpKhTghmxw6T63zfT0OAXvYnCjQCYobj/
+         RjU6RqkwJ7RFltZlfc5S0pOo/KcCK4TBK5Pq4F7zvOqqnc1Ct+8UK0nsEAq/DpRA67UA
+         B6M4MAIAs6tY2pdZRNnYX13C5FAVw5xZi/DX4O5AzK9IwA/ikXQRYBsz5+7ZS98qcTLT
+         WEog==
+X-Forwarded-Encrypted: i=1; AKwUvByBecFnSEK8MiWltQHYeLUFiYMbzhu266hPyOc3nJwvgk3CLsdSZ0R3J02L8EYTDhQihltwJU4BOYt+0vgl@vger.kernel.org
+X-Gm-Message-State: AFq9FYI7zboaUH9I+SMV59+97c4q0QvnxrqiZ8245SbjVvTm3ZYxmRqP
+	d/Sv/1j0sn/rNFNh0UEwKzVUixZgvD4+fPgkbySwr6M1sfwfUPBwiNUW7vv/LgmzjfbwOJGZxwt
+	tAbtpKBttzO9fWWLpaK8MPTcCAFIt5icsHS4XyNglNftNVxPhVjaciidib76GjmoSl15U
+X-Gm-Gg: AYBFou3eV+dVlXMmAqKoiN1lTP0j9jHY7B10ns7exEIKtK18SbiQf6nhKGzthUaiAvZ
+	WdQSqORcnTUC2mofY39c9g8O22hkbB6d5+wgX5wZSx5BLM27wv4qsQFuvzW7tCm76T/zma2SMa8
+	2H1slHrGtMM5WEX0vNxjUd56KtM1glJS+WKBs3iLq1QNn+2QZwUSb/goYi1rL/1tY8ieMI05QgI
+	OQNdTsUdWXrWAbjnx0RUYAP8msKjdcIWUFJyojtgjJjqWGIbqY0RLHC/16q0AHlNQQMGyFa9dkI
+	xLv8LLS+N8FJv2w6AVcSHZZDtWOHkslNtJxCQ1FT6ShO/TTCXoRFHeWEQ6laJ9a9q8xokAhKqsi
+	1bwjRRAQqMbb8yIW17LuykFLLK5n6JWkqok8LGLIl1zA=
+X-Received: by 2002:a05:7300:ce13:b0:35a:3045:3aff with SMTP id 5a478bee46e88-35a3054a74bmr1119326eec.29.1791723792825;
+        Sun, 11 Oct 2026 06:03:12 -0700 (PDT)
+X-Received: by 2002:a05:7300:ce13:b0:35a:3045:3aff with SMTP id 5a478bee46e88-35a3054a74bmr1119286eec.29.1791723792096;
+        Sun, 11 Oct 2026 06:03:12 -0700 (PDT)
 Received: from hu-luoj-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537c841648sm27009074eec.3.2026.10.11.06.03.09
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537c841648sm27009074eec.3.2026.10.11.06.03.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 06:03:09 -0700 (PDT)
+        Sun, 11 Oct 2026 06:03:11 -0700 (PDT)
 From: Luo Jie <jie.luo@oss.qualcomm.com>
-Date: Sun, 11 Oct 2026 06:02:12 -0700
-Subject: [PATCH net-next v2 06/11] net: ethernet: qualcomm: ppe: Add
- IPQ5424 BM buffer configuration
+Date: Sun, 11 Oct 2026 06:02:13 -0700
+Subject: [PATCH net-next v2 07/11] net: ethernet: qualcomm: ppe: Add
+ IPQ5424 QM configuration
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261011-qcom_ipq5424_ppe-v2-6-8c7b057e2c43@oss.qualcomm.com>
+Message-Id: <20261011-qcom_ipq5424_ppe-v2-7-8c7b057e2c43@oss.qualcomm.com>
 References: <20261011-qcom_ipq5424_ppe-v2-0-8c7b057e2c43@oss.qualcomm.com>
 In-Reply-To: <20261011-qcom_ipq5424_ppe-v2-0-8c7b057e2c43@oss.qualcomm.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>,
@@ -110,316 +110,141 @@ Cc: netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-doc@vger.kernel.org, quic_kkumarcs@quicinc.com,
         quic_linchen@quicinc.com, Luo Jie <jie.luo@oss.qualcomm.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791723782; l=10523;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791723782; l=3638;
  i=jie.luo@oss.qualcomm.com; s=20251128; h=from:subject:message-id;
- bh=VNvt8gQu8Lg4Os/r62s18Lb+XGjG7ToKZw+3dX7hH+I=;
- b=EACUXPRB2zIZFrZgHQZw7aXFVPlkdBSJJ/ef9sSddM2eyiWK3i17ZDfmwnVOUqKvJXhlVGqeT
- Vc3Ep8Qw70mAyM2iRxzfQyWwizAP2NoO8STmtM9pjiA0gD7C7e0COUT
+ bh=PeIDZ9ZvLBn2ComBGRH5CSzm2sE8lWrroJLbFwf4FOU=;
+ b=bM/zT2AcQmX617BTGIoNHu/47WPJEbVZcE2X4by9igjYnxLouiT0hpXOtFaOQP/ec2/IHnbOR
+ aZ0mf8ux3jsAgPzwl4BrhVhRCG+D3tiTnvkD2vcOvaIixfBJinYzUQG
 X-Developer-Key: i=jie.luo@oss.qualcomm.com; a=ed25519;
  pk=gSsYMDakxtd6UDFYDdA9y9yjIs5Etp5GK/3DoXWPyS0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA1MSBTYWx0ZWRfX91LgfM2httvL
- +H5M/4HCE99qoOh7D/zfhbd9lKQ9b4ppKg/3VRhEAael537Mlh2CWgw4SvCRdHbwi0WEeK283tG
- u1+cYJ39w2IxOwxrYSoCiyDqcdbNGHeae5cXMuw5bSso8oaxl1mYYSNwsN7DLOZGW9HBcVT6Xlb
- 1IRKfffvaM+MF+J3b2TtDNlY+4T1BWcIiXoFJqlRdyiU9nyDaajWHG/RHJ/Xps14qkzOHe+FMOV
- jI6jc8J/prPkCEXSpflaIGrk3phh+lQBnIyi+ryWJAGoZC2f1Mbmg5dqjgjjvn2EGubfHxSdtj+
- QpOS6W4NHNxMrm2jVRvtIhHCQjAPA9MnGwP30+0qxsJndtsTK2lm6tu6Onhue97AlLMKIPau3/D
- C8U0gFKSQgG78v5vUhZ+aVegL1InTOGiwsuDtUR1pI9OSpMmYn562nb/Rrb17/4I5ajY2DJzJQ5
- LOzSmNVdw6ltdHbSdnw==
-X-Proofpoint-ORIG-GUID: odECY_GQiDcJWsz81CkZpMiNo7KVw5oR
-X-Authority-Analysis: v=2.4 cv=MpTHeGae c=1 sm=1 tr=0 ts=6acb8910 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA1MSBTYWx0ZWRfX6pX4R5QMTpwA
+ IOgNb8xXZp/MBMZyb+KoqchAwHY5MMWFqORPqxzWUsTn3wEmgZLo2g3Xcai2b4n3oIS3LHwYQ0n
+ YC28oBe+eat8+XGGCTLXei4zf0XKpVQ=
+X-Proofpoint-ORIG-GUID: vlQoxdze3Hydxyn1yauYFMe5uKMdtLUh
+X-Proofpoint-GUID: vlQoxdze3Hydxyn1yauYFMe5uKMdtLUh
+X-Authority-Analysis: v=2.4 cv=eMWGH3p1 c=1 sm=1 tr=0 ts=6acb8911 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=hbDBTZp0xKPJ1oUTAGIA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-GUID: odECY_GQiDcJWsz81CkZpMiNo7KVw5oR
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA1MSBTYWx0ZWRfX0ByCQtKBGq+3
- igvY5O1Ti9XMsx5+u6UORDx3M1EmGVdGERS+yej6r4UpZGW7frqzNLE0EaENInKAWfiHWveMQQY
- /IHlWDdv8iUzBW49Bvt/0uBBfF+e74A=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=9QRhiHdFDdAkXRKojpMA:9 a=QEXdDO2ut3YA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA1MSBTYWx0ZWRfX/JeIJ3aqQiXL
+ 5BryJ1isFr8uuIbUcTTdsj3p7VSaUJ8ZuOTbMUJbB+lRlLeEsoYo3sb+juS+j3BtldZNHLUulrr
+ Ndyz9kcf0Op53SYI+WG0eAprzVWxzFjqldWNUSaW0b1GPaJwxVpgCo8EmBiYJK9snLUNSEIhVkn
+ 2/NN4RVK9RubBI6IiB7TpwETwofioFAI0BSu+M+dzIuICpSFRUZ93m5p+F6EgdscFqgMrPru8BY
+ Jk6lNd11f0mQH2c9Z5B03naWZ9NAY5iHjvJnBP2RY5QaXv1nbSdJHI8e4Ss4qHPaT3NHGMYdDuf
+ 8hao5N6CEMbIEzR/i79ITnZOtHNTDatXyZmzWo6N71xVlZ5s7Jpk08+x/5sGZGQrjC4MZDT/jmF
+ xcgNQm/zxE5ndVH5XY2Pp3Gv17ic+mob4ZZyoBEK8n1U8rgjMCcAKQuvcCw6X2cm5cfmmmSPLCv
+ rgHUDEB4erhwzctCkaw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-11_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
- suspectscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ adultscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
  definitions=main-2610110051
 
-IPQ5424 has fewer PPE ports than IPQ9574, so it requires a different buffer
-configuration per port, and more buffers are left for the shared buffer
-pool. IPQ5424 also has more BM ports than IPQ9574, 19 versus 15, so some BM
-register tables have more entries on IPQ5424, and some of them are located
-at different addresses.
+Multicast queues are dedicated per PPE port. IPQ5424 has only 3 physical
+PPE ports, versus IPQ9574's 6 PPE ports, so multicast queues 284 to 299 are
+not available on IPQ5424, and 2010 buffers are assigned to the shared
+group0 buffer pool, instead of IPQ9574's 2000.
 
 Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
 ---
- drivers/net/ethernet/qualcomm/ppe/ppe.c        |  5 ++
- drivers/net/ethernet/qualcomm/ppe/ppe.h        | 15 +++++
- drivers/net/ethernet/qualcomm/ppe/ppe_config.c | 79 +++++++++++++++++++++++---
- drivers/net/ethernet/qualcomm/ppe/ppe_regs.h   | 35 +++++++++---
- 4 files changed, 118 insertions(+), 16 deletions(-)
+ drivers/net/ethernet/qualcomm/ppe/ppe_config.c | 53 ++++++++++++++++++++++++--
+ 1 file changed, 49 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe.c b/drivers/net/ethernet/qualcomm/ppe/ppe.c
-index f71b673b6f97..b144fd818998 100644
---- a/drivers/net/ethernet/qualcomm/ppe/ppe.c
-+++ b/drivers/net/ethernet/qualcomm/ppe/ppe.c
-@@ -28,6 +28,7 @@
- 
- /**
-  * struct ppe_of_data - PPE private data of IPQ SoC
-+ * @type: PPE type value
-  * @ppe_rate: PPE clock rate
-  * @num_ports: Number of PPE ports
-  * @regmap_config: Regmap configuration
-@@ -35,6 +36,7 @@
-  * @num_icc_paths: Number of ICC paths
-  */
- struct ppe_of_data {
-+	enum ppe_type type;
- 	unsigned long ppe_rate;
- 	int num_ports;
- 	const struct regmap_config *regmap_config;
-@@ -275,6 +277,7 @@ static int qcom_ppe_probe(struct platform_device *pdev)
- 		return dev_err_probe(dev, PTR_ERR(ppe_dev->regmap),
- 				     "PPE initialize regmap failed\n");
- 	ppe_dev->dev = dev;
-+	ppe_dev->type = data->type;
- 	ppe_dev->clk_rate = data->ppe_rate;
- 	ppe_dev->num_ports = data->num_ports;
- 	ppe_dev->num_icc_paths = data->num_icc_paths;
-@@ -302,6 +305,7 @@ static void qcom_ppe_remove(struct platform_device *pdev)
- }
- 
- static const struct ppe_of_data ipq9574_data = {
-+	.type = IPQ9574_PPE,
- 	.ppe_rate = IPQ9574_PPE_CLK_RATE,
- 	.num_ports = IPQ9574_PPE_PORT_MAX,
- 	.regmap_config = &regmap_config_ipq9574,
-@@ -310,6 +314,7 @@ static const struct ppe_of_data ipq9574_data = {
- };
- 
- static const struct ppe_of_data ipq5424_data = {
-+	.type = IPQ5424_PPE,
- 	.ppe_rate = IPQ5424_PPE_CLK_RATE,
- 	.num_ports = IPQ5424_PPE_PORT_MAX,
- 	.regmap_config = &regmap_config_ipq5424,
-diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe.h b/drivers/net/ethernet/qualcomm/ppe/ppe.h
-index 27458f0bc206..33b876d2e079 100644
---- a/drivers/net/ethernet/qualcomm/ppe/ppe.h
-+++ b/drivers/net/ethernet/qualcomm/ppe/ppe.h
-@@ -13,10 +13,24 @@ struct device;
- struct regmap;
- struct dentry;
- 
-+/**
-+ * enum ppe_type - PPE device type.
-+ * @IPQ9574_PPE: PPE device of IPQ9574.
-+ * @IPQ5424_PPE: PPE device of IPQ5424.
-+ *
-+ * PPE type is used to identify the PPE device of the different
-+ * IPQ platform.
-+ */
-+enum ppe_type {
-+	IPQ9574_PPE,
-+	IPQ5424_PPE,
-+};
-+
- /**
-  * struct ppe_device - PPE device private data.
-  * @dev: PPE device structure.
-  * @regmap: PPE register map.
-+ * @type: Different PPE type on various IPQ SoC.
-  * @clk_rate: PPE clock rate.
-  * @num_ports: Number of PPE ports.
-  * @debugfs_root: Debugfs root entry.
-@@ -30,6 +44,7 @@ struct dentry;
- struct ppe_device {
- 	struct device *dev;
- 	struct regmap *regmap;
-+	enum ppe_type type;
- 	unsigned long clk_rate;
- 	unsigned int num_ports;
- 	struct dentry *debugfs_root;
 diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-index 2f4f59280647..ef46e9b133fe 100644
+index ef46e9b133fe..d2bd78853b98 100644
 --- a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
 +++ b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
-@@ -230,6 +230,56 @@ static const struct ppe_bm_port_config ipq9574_ppe_bm_port_config[] = {
+@@ -314,6 +314,37 @@ static const struct ppe_qm_queue_config ipq9574_ppe_qm_queue_config[] = {
  	},
  };
  
-+/* IPQ5424 has fewer PPE physical ports (3) than IPQ9574 (6), so fewer
-+ * buffers need to be reserved for per-port purposes. Out of the same
-+ * 2048 total, the rest assigned to the general 'group0' pool is
-+ * correspondingly larger here, 1650 versus IPQ9574's 1550.
++/* Multicast queues are dedicated per PPE port. IPQ5424 has only 3 physical
++ * PPE ports, versus IPQ9574's 6 PPE ports, so multicast queues 284 to 299
++ * are not available on IPQ5424, and the buffer pool assigned to the general
++ * 'group0' is larger here, 2010 versus IPQ9574's 2000.
 + */
-+static const int ipq5424_ppe_bm_group_config = 1650;
++static const int ipq5424_ppe_qm_group_config = 2010;
 +
-+/* The buffer configurations per PPE port on IPQ5424. There are 19 BM
-+ * ports supported by PPE. BM port (0-15) is for EDMA port 0, and BM
-+ * port (16-18) is for the 3 PPE physical ports.
-+ */
-+static const struct ppe_bm_port_config ipq5424_ppe_bm_port_config[] = {
++/* Default QM settings for unicast and multicast queues for IPQ5424. */
++static const struct ppe_qm_queue_config ipq5424_ppe_qm_queue_config[] = {
 +	{
-+		/* Buffer configuration for the BM port ID 0 of EDMA. */
-+		.port_id_start	= 0,
-+		.port_id_end	= 0,
-+		.pre_alloc	= 0,
-+		.in_fly_buf	= 100,
-+		.ceil		= 1146,
++		/* QM settings for unicast queues 0 to 255. */
++		.queue_start	= 0,
++		.queue_end	= 255,
++		.prealloc_buf	= 0,
++		.ceil		= 1200,
 +		.weight		= 7,
-+		.resume_offset	= 8,
-+		.resume_ceil	= 0,
++		.resume_offset	= 36,
 +		.dynamic	= true,
 +	},
 +	{
-+		/* Buffer configuration for the BM port ID 1-15 of EDMA. */
-+		.port_id_start	= 1,
-+		.port_id_end	= 15,
-+		.pre_alloc	= 0,
-+		.in_fly_buf	= 100,
++		/* QM settings for multicast queues 256 to 283. */
++		.queue_start	= 256,
++		.queue_end	= 283,
++		.prealloc_buf	= 0,
 +		.ceil		= 250,
-+		.weight		= 4,
++		.weight		= 0,
 +		.resume_offset	= 36,
-+		.resume_ceil	= 0,
-+		.dynamic	= true,
-+	},
-+	{
-+		/* Buffer configuration for the BM port ID 16-18 of PPE ports. */
-+		.port_id_start	= 16,
-+		.port_id_end	= 18,
-+		.pre_alloc	= 0,
-+		.in_fly_buf	= 128,
-+		.ceil		= 250,
-+		.weight		= 4,
-+		.resume_offset	= 36,
-+		.resume_ceil	= 0,
-+		.dynamic	= true,
++		.dynamic	= false,
 +	},
 +};
 +
- /* QM fetches the packet from PPE buffer management for transmitting the
-  * packet out. The QM group configuration limits the total number of buffers
-  * enqueued by all PPE hardware queues.
-@@ -1413,7 +1463,7 @@ static int ppe_config_bm_threshold(struct ppe_device *ppe_dev, int bm_port_id,
- 
- 	/* Assign the default group ID 0 to the BM port. */
- 	val = FIELD_PREP(PPE_BM_PORT_GROUP_ID_SHARED_GROUP_ID, 0);
--	reg = PPE_BM_PORT_GROUP_ID_ADDR + PPE_BM_PORT_GROUP_ID_INC * bm_port_id;
-+	reg = PPE_BM_PORT_GROUP_ID_ADDR(ppe_dev) + PPE_BM_PORT_GROUP_ID_INC * bm_port_id;
- 	ret = regmap_update_bits(ppe_dev->regmap, reg,
- 				 PPE_BM_PORT_GROUP_ID_SHARED_GROUP_ID,
- 				 val);
-@@ -1431,25 +1481,38 @@ static int ppe_config_bm(struct ppe_device *ppe_dev)
+ /* PPE scheduler configuration for BM includes multiple entries. Each entry
+  * indicates the primary port to be assigned the buffers for the ingress or
+  * to release the buffers for the egress. Backup port ID will be used when
+@@ -1535,12 +1566,28 @@ static int ppe_config_bm(struct ppe_device *ppe_dev)
+  */
+ static int ppe_config_qm(struct ppe_device *ppe_dev)
  {
- 	const struct ppe_bm_port_config *port_cfg;
- 	unsigned int i, bm_port_id, port_cfg_cnt;
--	u32 reg, val;
-+	u32 reg, val, group_cfg;
- 	int ret;
++	int ret, i, group_buffer_cfg, queue_id, queue_cfg_count;
+ 	const struct ppe_qm_queue_config *queue_cfg;
+-	int ret, i, queue_id, queue_cfg_count;
+ 	u32 reg, multicast_queue_cfg[3];
+ 	u32 unicast_queue_cfg[4];
+ 	u32 group_cfg[3];
  
 +	switch (ppe_dev->type) {
 +	case IPQ9574_PPE:
-+		port_cfg = ipq9574_ppe_bm_port_config;
-+		port_cfg_cnt = ARRAY_SIZE(ipq9574_ppe_bm_port_config);
-+		group_cfg = ipq9574_ppe_bm_group_config;
++		group_buffer_cfg = ipq9574_ppe_qm_group_config;
++		queue_cfg = ipq9574_ppe_qm_queue_config;
++		queue_cfg_count = ARRAY_SIZE(ipq9574_ppe_qm_queue_config);
 +		break;
 +	case IPQ5424_PPE:
-+		port_cfg = ipq5424_ppe_bm_port_config;
-+		port_cfg_cnt = ARRAY_SIZE(ipq5424_ppe_bm_port_config);
-+		group_cfg = ipq5424_ppe_bm_group_config;
++		group_buffer_cfg = ipq5424_ppe_qm_group_config;
++		queue_cfg = ipq5424_ppe_qm_queue_config;
++		queue_cfg_count = ARRAY_SIZE(ipq5424_ppe_qm_queue_config);
 +		break;
 +	default:
 +		dev_err(ppe_dev->dev, "Invalid PPE type %d\n", ppe_dev->type);
 +		return -EINVAL;
 +	}
 +
-+	reg = PPE_BM_SHARED_GROUP_CFG_ADDR(ppe_dev);
-+
- 	/* Configure the allocated buffer number only for group 0.
- 	 * The buffer number of group 1-3 is already cleared to 0
- 	 * after PPE reset during the probe of PPE driver.
- 	 */
--	reg = PPE_BM_SHARED_GROUP_CFG_ADDR;
--	val = FIELD_PREP(PPE_BM_SHARED_GROUP_CFG_SHARED_LIMIT,
--			 ipq9574_ppe_bm_group_config);
-+	val = FIELD_PREP(PPE_BM_SHARED_GROUP_CFG_SHARED_LIMIT, group_cfg);
- 	ret = regmap_update_bits(ppe_dev->regmap, reg,
- 				 PPE_BM_SHARED_GROUP_CFG_SHARED_LIMIT,
- 				 val);
+ 	/* Assign the buffer number to the group 0 by default. */
+ 	reg = PPE_AC_GRP_CFG_TBL_ADDR;
+ 	ret = regmap_bulk_read(ppe_dev->regmap, reg,
+@@ -1548,15 +1595,13 @@ static int ppe_config_qm(struct ppe_device *ppe_dev)
  	if (ret)
- 		goto bm_config_fail;
+ 		goto qm_config_fail;
  
--	/* Configure buffer thresholds for the BM ports. */
--	port_cfg = ipq9574_ppe_bm_port_config;
--	port_cfg_cnt = ARRAY_SIZE(ipq9574_ppe_bm_port_config);
- 	for (i = 0; i < port_cfg_cnt; i++) {
- 		for (bm_port_id = port_cfg[i].port_id_start;
- 		     bm_port_id <= port_cfg[i].port_id_end; bm_port_id++) {
-diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h b/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
-index 746dfbb5a682..441e8e04a80b 100644
---- a/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
-+++ b/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
-@@ -386,17 +386,32 @@
- #define PPE_PSCH_SCH_CFG_TBL_DES_SECOND_PORT_EN	BIT(16)
- #define PPE_PSCH_SCH_CFG_TBL_DES_SECOND_PORT	GENMASK(20, 17)
+-	PPE_AC_GRP_SET_BUF_LIMIT(group_cfg, ipq9574_ppe_qm_group_config);
++	PPE_AC_GRP_SET_BUF_LIMIT(group_cfg, group_buffer_cfg);
  
--/* There are 15 BM ports and 4 BM groups supported by PPE.
-- * BM port (0-7) is for EDMA port 0, BM port (8-13) is for
-- * PPE physical port 1-6 and BM port 14 is for EIP port.
-+/* There are 15 BM ports on IPQ9574 and 19 BM ports on IPQ5424, and
-+ * 4 BM groups supported by PPE. On IPQ9574, BM port (0-7) is for EDMA
-+ * port 0, BM port (8-13) is for PPE physical port 1-6 and BM port 14
-+ * is for EIP port. On IPQ5424, BM port (0-15) is for EDMA port 0 and
-+ * BM port (16-18) is for PPE physical port 1-3.
-+ *
-+ * The per-BM-port tables PPE_BM_PORT_FC_MODE and PPE_BM_PORT_FC_CFG_TBL
-+ * are at the same address on both SoCs, IPQ5424 only has more entries.
-  */
-+#define PPE_BM_PORT_IPQ9574_ENTRIES		15
-+#define PPE_BM_PORT_IPQ5424_ENTRIES		19
-+#define PPE_BM_PORT_ENTRIES(ppe_dev)						\
-+	((ppe_dev)->type == IPQ5424_PPE ? PPE_BM_PORT_IPQ5424_ENTRIES :	\
-+					  PPE_BM_PORT_IPQ9574_ENTRIES)
-+
- #define PPE_BM_PORT_FC_MODE_ADDR		0x600100
--#define PPE_BM_PORT_FC_MODE_ENTRIES		15
-+#define PPE_BM_PORT_FC_MODE_ENTRIES(ppe_dev)	PPE_BM_PORT_ENTRIES(ppe_dev)
- #define PPE_BM_PORT_FC_MODE_INC			0x4
- #define PPE_BM_PORT_FC_MODE_EN			BIT(0)
+ 	ret = regmap_bulk_write(ppe_dev->regmap, reg,
+ 				group_cfg, ARRAY_SIZE(group_cfg));
+ 	if (ret)
+ 		goto qm_config_fail;
  
--#define PPE_BM_PORT_GROUP_ID_ADDR		0x600180
--#define PPE_BM_PORT_GROUP_ID_ENTRIES		15
-+#define PPE_BM_PORT_GROUP_ID_IPQ9574_ADDR	0x600180
-+#define PPE_BM_PORT_GROUP_ID_IPQ5424_ADDR	0x6001c0
-+#define PPE_BM_PORT_GROUP_ID_ADDR(ppe_dev)					\
-+	((ppe_dev)->type == IPQ5424_PPE ? PPE_BM_PORT_GROUP_ID_IPQ5424_ADDR :	\
-+					  PPE_BM_PORT_GROUP_ID_IPQ9574_ADDR)
-+#define PPE_BM_PORT_GROUP_ID_ENTRIES(ppe_dev)	PPE_BM_PORT_ENTRIES(ppe_dev)
- #define PPE_BM_PORT_GROUP_ID_INC		0x4
- #define PPE_BM_PORT_GROUP_ID_SHARED_GROUP_ID	GENMASK(1, 0)
+-	queue_cfg = ipq9574_ppe_qm_queue_config;
+-	queue_cfg_count = ARRAY_SIZE(ipq9574_ppe_qm_queue_config);
+ 	for (i = 0; i < queue_cfg_count; i++) {
+ 		queue_id = queue_cfg[i].queue_start;
  
-@@ -412,13 +427,17 @@
- #define PPE_BM_REACT_CNT_TBL_INC		0x4
- #define PPE_BM_REACT_CNT_VAL			GENMASK(8, 0)
- 
--#define PPE_BM_SHARED_GROUP_CFG_ADDR		0x600290
-+#define PPE_BM_SHARED_GROUP_CFG_IPQ9574_ADDR	0x600290
-+#define PPE_BM_SHARED_GROUP_CFG_IPQ5424_ADDR	0x6002f0
-+#define PPE_BM_SHARED_GROUP_CFG_ADDR(ppe_dev)						\
-+	((ppe_dev)->type == IPQ5424_PPE ? PPE_BM_SHARED_GROUP_CFG_IPQ5424_ADDR :	\
-+					  PPE_BM_SHARED_GROUP_CFG_IPQ9574_ADDR)
- #define PPE_BM_SHARED_GROUP_CFG_ENTRIES		4
- #define PPE_BM_SHARED_GROUP_CFG_INC		0x4
- #define PPE_BM_SHARED_GROUP_CFG_SHARED_LIMIT	GENMASK(10, 0)
- 
- #define PPE_BM_PORT_FC_CFG_TBL_ADDR		0x601000
--#define PPE_BM_PORT_FC_CFG_TBL_ENTRIES		15
-+#define PPE_BM_PORT_FC_CFG_TBL_ENTRIES(ppe_dev)	PPE_BM_PORT_ENTRIES(ppe_dev)
- #define PPE_BM_PORT_FC_CFG_TBL_INC		0x10
- #define PPE_BM_PORT_FC_W0_REACT_LIMIT		GENMASK(8, 0)
- #define PPE_BM_PORT_FC_W0_RESUME_THRESHOLD	GENMASK(17, 9)
 
 -- 
 2.43.0
