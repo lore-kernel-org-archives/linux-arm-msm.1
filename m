@@ -1,197 +1,227 @@
-Received: from mail-244106.protonmail.ch (mail-244106.protonmail.ch [109.224.244.106])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 814783E025C;
-	Sun, 11 Oct 2026 17:50:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.106
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E22D733E346
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791741027; cv=none; b=ofaYu5eL4hVwZyI9IOTsxXMESV4lC5NGzempoKAfS3QSxJ4drIYUGFk7Y6rMgY/3yOSx0VZU/XQRrRiP/akf0OwuoLpC+zfs6snzMcLO5VDvBfg3PgNbzZ0pnUnWvt7LFp8mOE95LhPx8maxfF41Yi9e8mkRnvc65WTRa0eWSKk=
+	t=1791743016; cv=none; b=mIS+S8gyYylLRoHAv3hPWx1Jg2B8nYMKsm+wYUpIZze6+OgpQvsMdU38aI4uK//kjIQREhcz3muzX2ObwGGWqMglEEpZC+MQkvTSYKzcGaQxZ/19KxsNK0YC5KlZphCi4oeUaq4taNB7S3ulrb6FzMlOBdOGpkJKHXmldsSKtKw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791741027; c=relaxed/simple;
-	bh=ZJwYl4GvIqT9szLm2C/5LX66xNjQq3DHgIUDHJSVn4I=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=asz1MA8CQDTKLEmpZ34xgzqeQzGwPOAk0IGAXn1wz+gJE42oZXT00Nf9mHAE0kpFl+w02cMAnKCJGLDVt7HBhMKI4KPrId6yBogkWd0EitOMtTYkY1zf9+b0mBK/gEEB6yVLpDGnsMRU72WYSGGVOVf+I5ULTFdIcs61bz4OVO4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com; spf=pass smtp.mailfrom=vinarskis.com; dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b=LIeSjcue; arc=none smtp.client-ip=109.224.244.106
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
+	s=arc-20240116; t=1791743016; c=relaxed/simple;
+	bh=Sx/YLYtHnsGcMNWokhm0pgpzH9N8876oemZHYtrdgtA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uMSTvfT0v3DOau5u4jqfgy+DDkP5Hmv5Ms0P+abP29c4Yt4G37AiGOrxftTshx9nmC0TBXQ6HIOqbEfGu7vR4j1tmnpZeYMle6slYoiRjNcAB5zqQKWDc9lXvb/97bzYI60VAKEVu32M9eZ6OcdfgooHm0X4s0gGluID8/I9MsM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jc6qT34I; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=j6R3QYNx; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b="LIeSjcue"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
-	s=protonmail3; t=1791741020; x=1792000220;
-	bh=3yOm2fQxbvA/6mgsK3eGoJjwEpZ83Amzl1bV7hnL/hE=;
-	h=From:Date:Subject:Message-Id:References:In-Reply-To:To:Cc:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=LIeSjcuelasv2uq0yj1vEhp1T9KWzlh66m6vlSu2d94UuJ8xVZR+Ws5V6Q/yoWv6g
-	 qklDrw6wFQZNySSs2Gs3fzwKqvgYcT5ohxj0N8DRNoSKIIzsfE16wbeMTpDs6cjckr
-	 6qOm334pLp/4mHIDUulUFXredJs9rpBQ9dIUKKeki4NLvuWiqBmhfAEAYtQauwJqSi
-	 a1jPqb3nUaBNt+jMFeOfoGeX22Wh3VMn65idNOE2pf3tEp3vJTLj+s/rcNnAzvH79J
-	 qN/jAfuBqfNV9ulWRtJlOl+YKJzLVZdygQpx9PJAvPhAQrWY4H8dZbBZsv4kp7SEVz
-	 GX4m77iCem60Q==
-X-Pm-Submission-Id: 4j2p6321Qwz2ScQ2
-From: Aleksandrs Vinarskis <alex@vinarskis.com>
-Date: Sun, 11 Oct 2026 19:50:10 +0200
-Subject: [PATCH v6 3/3] arm64: dts: qcom: x1e80100-dell-xps13-9345:
- introduce EC
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jc6qT34I";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j6R3QYNx"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69BIKfad1026901
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=; b=jc6qT34I/IsNsxmu
+	+vEiY6Z/HcWeE1+pk0LJ5BfW5j38Uw7kYf2kf8xz/zZf8CbnN7p7HIDxtN9pHNHk
+	6VWK47tzwUZQjDiHe8YlXU/qRHF24u+oSc7C9MPeVv2EHabHUlovBM80itaJhuqt
+	Xy147D9pWJ4yrpr+II3Udip+s4FMv6bni4AHs86VnJHoh8CKm8SH6Lzf3ARVC++4
+	fhPWk5qu22WogjceN7O3Wpy/YVFmiRQi1DK64JhDMYlhKej1kOl5g/0yn4YCgy68
+	g/FXE0KmVs+4nNYzrj50jQcQSf7DyJAtGUM1od4ovz2S2ljo2vX/PegGr7kQAdpT
+	b+Mu2Q==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7casbprw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:23:33 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3515266f6eeso2409508eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 11:23:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791742950; x=1792347750; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=;
+        b=j6R3QYNxfxAMNEVQl7vLPLFYrFjUtegk+Yf7nYJOwRl05aFO8L+5ECzkplmMka/Kz4
+         cz9SSaNFXUb4MgTtGoC+6vAF0Pyqg1q1KE2HRg4fgyS3uXv1KETSlE6OGukIF3CUFLwd
+         epkopxs8Xj5etOI23yr0inOda4xP0PbbQ/IiWjBqfkV2ltbxVTFNPlUktCYeSthO04jP
+         of/4hEDR6KeuWaTfRXhclVy3yIU6gBb8xucZrCP749UshpzAxcRVoIj+kyHkPGzm7p37
+         wefskmbXWsheHaI8/JrK3jvRPYG6o09HDy7mAGrF9WyhW57aoVXb6Rbwl6e4XiS5eH7Z
+         Za+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791742950; x=1792347750;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=J4GnUzarc/n9kpP41afLq33uqFjjFV9bhvTE/hjv9dU=;
+        b=0f42Kw3CKlAD3cO0pYhLLvHBqaBFth8H6zBMNsto4V9c+nHiTfbDs9Lwibt7Pznl62
+         GePnmm4M+QBP+qjc6A2HG1cGeUAoiwY2/1gDrPmIJw9JlNVlE3HCl2CHFukFQpQK41gl
+         eC3STKWYGuDKDCCQ0ezh7jp+HHre7biukuBNVh6NGXrYkAIyPKpdW1MrE1uQcUlw6WtB
+         NNvc7xHGuZGNj/gCj9JahSMQMq9BmhS7QdPb8dtbnmTypeKN/9u8/f16WUxW1disyjp0
+         yxNFTM9uCB7eaf2H/fplkddfDbdzSGkUJ2O8lITGJDja/H9z/R1+ixHim1N6JEBD5UHG
+         cQdA==
+X-Forwarded-Encrypted: i=1; AKwUvBwfjmyTCeynMcSEJI8wmlDE3WNosft+bHZzlYkOkgKfJxSg3h2DAJ/LqP0h8UVgAp1E5J2QhLtpQnwxquM2@vger.kernel.org
+X-Gm-Message-State: AFq9FYIMam+vAKlMjKP0G6bG5SUjBYIlU52tflybLYWwYFsSglCSQyo7
+	snTfNQhV/Hktrr8OniD9H/niwCqhINPS2jbGHkek8OrX/Xsdu+cyZDM6dcmssvEmq0ooRBUpV5w
+	BgtleyHUDB/mhoD8lyYRknbXZtez2vNVkQimsRaZFFskruGl1GOXysHyssFYy/hQ2zqq4
+X-Gm-Gg: AYBFou1Df6cV9ynrtGQeZyK5PojMzG8fuiZVZIb4tZXjjUxIvdaylx+T8FSRVtwQVlg
+	6cpRAPPd3bqy+Ml+ZxGwKS10IQIKgJ01yJzsuGskdOO7pZiHfX2BNIp16NC4K1lCnSLs7xp6uOS
+	SLJrZ9v8bG99vbHULdCpoo7Sip4SOHD9i44YO7Bog62/ydL03K5kVB2sqKNd9EE3Mw7xzQeUA3H
+	QekqUrxKA1qWdQdSkLFIRQGUx0Y87C9msz57010htHtNA52NPWHGkRlNi1HnTgjPMuUkEgH8rkf
+	wIG5eWTJXkGEzZ2nSvETKy+RxXw6d16SJhi8WV3VirXdV/PympkOL5Dk349SwrAEsT9L5LeKLzD
+	D92robWY+5bxwd/LKWuBi5tz4MM9vI2xJUD+OGDMcJl2ZkQUEbS/NkBSMZg==
+X-Received: by 2002:a05:7300:8a1d:b0:351:35b3:c5b6 with SMTP id 5a478bee46e88-3537e0fbed7mr11835709eec.27.1791742949804;
+        Sun, 11 Oct 2026 11:22:29 -0700 (PDT)
+X-Received: by 2002:a05:7300:8a1d:b0:351:35b3:c5b6 with SMTP id 5a478bee46e88-3537e0fbed7mr11835670eec.27.1791742949107;
+        Sun, 11 Oct 2026 11:22:29 -0700 (PDT)
+Received: from [192.168.1.20] (33.sub-75-218-193.myvzw.com. [75.218.193.33])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3581f594a41sm17453666eec.23.2026.10.11.11.22.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 11 Oct 2026 11:22:28 -0700 (PDT)
+Message-ID: <b1a3f755-19e3-407e-b8f8-b494de83f59a@oss.qualcomm.com>
+Date: Sun, 11 Oct 2026 11:22:26 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
+To: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>, jgg@ziepe.ca,
+        alex@shazbot.org, bhelgaas@google.com, jjohnson@kernel.org
+Cc: johannes@sipsolutions.net, mani@kernel.org, yishaih@nvidia.com,
+        skolothumtho@nvidia.com, kevin.tian@intel.com,
+        linux-pci@vger.kernel.org, kvm@vger.kernel.org,
+        linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
+        ath12k@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Baochen Qiang <baochen.qiang@oss.qualcomm.com>,
+        Rameshkumar Sundaram <rameshkumar.sundaram@oss.qualcomm.com>
+References: <20261011074514.515894-1-jtornosm@redhat.com>
+From: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261011074514.515894-1-jtornosm@redhat.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261011-dell-xps-9345-ec-v6-3-2a66a364fe70@vinarskis.com>
-References: <20261011-dell-xps-9345-ec-v6-0-2a66a364fe70@vinarskis.com>
-In-Reply-To: <20261011-dell-xps-9345-ec-v6-0-2a66a364fe70@vinarskis.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
- =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Kees Cook <kees@kernel.org>, 
- "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
- Abel Vesa <abelvesa@kernel.org>
-Cc: Liviu Nicoara <lnicoara@thinkoid.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- platform-driver-x86@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
- Tobias Heider <tobias.heider@canonical.com>, Val Packett <val@packett.cool>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>, 
- linux-hardening@vger.kernel.org, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3436; i=alex@vinarskis.com;
- h=from:subject:message-id; bh=ZJwYl4GvIqT9szLm2C/5LX66xNjQq3DHgIUDHJSVn4I=;
- b=owGbwMvMwCX2dl3hIv4AZgHG02pJDFmnz4TVn1poOUkskHMGa2T6p9/NPF0d67tFNdYVL/KoP
- fmj9pdTRykLgxgXg6yYIkv3n69pXYvmrmW4rvENZg4rE8gQBi5OAZjIqw8Mf2XvCXt3vV7sVjFv
- 199iQw9fnwnvnk/j3OXU43Gjx+z8yTiGf8a3fHc771cuu+Jd4Xcmav5pwxX+3TPvzvt03nGPlP7
- EQH4A
-X-Developer-Key: i=alex@vinarskis.com; a=openpgp;
- fpr=8E21FAE2D2967BB123303E8C684FD4BA28133815
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX5BODQLS7tWtn
+ uHdPZh+ID+7/afP2zs4a0EQZiTgD+/dr6QvhtuOW+JGNxjR4zka9jqwrdeRL5pQrf71Aqff4vfd
+ 6gfbugbwsfu07FmQu9W9imgvttazeeo=
+X-Proofpoint-ORIG-GUID: GDNkHAJ4-dl_HoDD0tn-IzA7BNMFeKIu
+X-Proofpoint-GUID: GDNkHAJ4-dl_HoDD0tn-IzA7BNMFeKIu
+X-Authority-Analysis: v=2.4 cv=eMWGH3p1 c=1 sm=1 tr=0 ts=6acbd425 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=AnolQpdaNwb4XK4FG+QP+g==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=20KFwNOVAAAA:8 a=COk6AnOGAAAA:8 a=vTVf00-0V6mThgBseXsA:9
+ a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfXzoOHMLE5wzEA
+ pFNsPXzyvkpEzj6k2yB6NVumu7ISIOOIpKeIAYKoK1Kw2XQV3jE+xPxWb46JdMs7bbPWcXrTp33
+ 0+lOVCG3OSUcCtqtEr5fThZIUxJtVRu+7/lJEUuVoiiSIK/eSWV79ttP+am92RhqMU66Y5U1iMr
+ v9GSlDzvNUT2CBm55dnXWpXKr7wnJAIojZBnrYNh6/1DF42pEBCE7aJeLAXY79ckb+LmFKl84IS
+ lpS5is0NWhX0P52h6dgGuVmit9OW8wTbwA7tA/tydumfay5zwpYx4lDA9agDZUJTeh3/uZMpH0X
+ 5mTJUI222+Ww/CC3611JTyVhNLmCvqwMBA/AIGolYgdOSh3wzSj5mzQJ4W2hkwZ6pdQ9itRtHhp
+ Ogvf6ONARDDujq3lnguGSeIiRBK5UO+7oyA4+e976tVlQy1OfJFPuY+8R3KfCryMoOBcIgDMLI/
+ S47+d55l4fQY1TK1Uhg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610110073
 
-Describe embedded controller, its interrupt and required thermal zones.
-Add EC's reset GPIO to reserved range, as triggering it during device
-operation leads to unrecoverable and unusable state.
+On 10/11/2026 12:45 AM, Jose Ignacio Tornos Martinez wrote:
+> This series enables Qualcomm ath11k/ath12k WiFi devices to work in VM
+> passthrough scenarios, addressing a long-standing issue where these
+> devices fail to initialize when passed through to VMs via VFIO.
+> 
+> Qualcomm ath11k/ath12k WiFi devices have been broken in VM passthrough
+> since they were introduced. The Qualcomm firmware has its own interrupt
+> controller with private registers that need to be programmed with MSI
+> addr/data. The driver extracts the addr/data from the MSI descriptor
+> and programs the firmware's private registers. In a VM, the driver
+> only sees virtual (IOVA) addr/data, but the firmware's private writes
+> bypass the IOMMU, so they need the physical host values. This causes
+> firmware initialization to fail with errors like "BHI offset:
+> 0xffffffff is out of range".
+> 
+> Multiple attempts have been made to solve this over the past 2 years:
+> 
+> March 2024: Workaround using module parameters [1]
+>   - Required manually copying MSI values from host to VM
+>   - Rejected by Johannes Berg as too manual, suggested VMM solution
+> 
+> August 2024: QEMU + kernel solution by Alex Williamson [2]
+>   - Kernel disables MSI virtualization, QEMU intercepts config writes
+>   - Uses brute force pattern matching to infer MSI data writes
+>   - Stuck as RFC - no progress in 8+ months
+> 
+> No action from Qualcomm: Despite multiple reports, no vendor solution
+> 
+> The solution in this series provides a clean, kernel-only approach that
+> addresses the previous concerns. The PCI reset support for these devices
+> has already landed in linux-next (commit f8522a518e59 "PCI: Add device-
+> specific reset for Qualcomm WCN6855/WCN7850 WLAN") [3], solving the device
+> reset path for VFIO passthrough. This MSI series is the remaining
+> piece, with both in place, these Qualcomm WiFi devices would be fully
+> operational in VMs for the first time.
+> 
+> In practice, this specific behavior (firmware requiring physical host
+> MSI addresses in private registers, bypassing the IOMMU) has only
+> been observed in Qualcomm ath11k/ath12k devices. A device-specific
+> approach seems appropriate, and the VFIO variant driver pattern fits
+> well for this, following the same established pattern as mlx5-vfio-pci
+> and nvgrace-gpu for their own device-specific needs.
+> 
+> Architecture:
+> 1. qcom-vfio-pci variant driver caches physical host MSI values and
+>    exposes them via extended config space with magic signature "QMSI".
+>    Device-specific hardware quirks belong only in kernel drivers, not
+>    userspace, independent of the tools used.
+> 2. VM drivers (ath11k/ath12k) automatically discover and use cached values
+> 3. PCIe link recovery handles VM timing variations
+> 
+> Thoroughly tested: 3 VMs across 2 WiFi generations, all devices
+> successfully initialized and are ready for use.
+> - VM1: ath11k (WCN6855)
+> - VM2: ath11k (WCN6855)
+> - VM3: ath12k (WCN7850)
+> 
+> Series structure:
+>   Patch 1/7: PCI helper to find free space in extended config space
+>     for device-specific data exchange between host and VM drivers
+>   Patch 2/7: Shared header defining the MSI cache protocol between
+>     the host variant driver and VM drivers
+>   Patch 3/7: qcom-vfio-pci variant driver that caches host physical
+>     MSI address/data and exposes them to VMs through extended config
+>     space
+>   Patch 4/7: ath11k PCIe link recovery retry to handle initialization
+>     timing variations in VM environments
+>   Patch 5/7: ath11k support to read cached host MSI values and
+>     configure firmware with correct physical addresses, making the
+>     device operational in VMs
+>   Patch 6/7: ath12k PCIe link recovery retry to handle initialization
+>     timing variations in VM environments
+>   Patch 7/7: ath12k support to read cached host MSI values and
+>     configure firmware with correct physical addresses, making the
+>     device operational in VMs
+> 
+> [1] https://lore.kernel.org/all/20240322104912.94811-1-jtornosm@redhat.com/
+> [2] https://lore.kernel.org/kvm/20240812170014.1583783-1-alex.williamson@redhat.com/
+> [3] https://lore.kernel.org/all/20261005105436.83962-1-jtornosm@redhat.com/
+> [4] Original problem report:
+>     https://lore.kernel.org/all/fc6bd06f-d52b-4dee-ab1b-4bb845cc0b95@quicinc.com/
+> 
+> ---
+> v2: Complete cover letter with more information
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Aleksandrs Vinarskis <alex@vinarskis.com>
----
- .../boot/dts/qcom/x1e80100-dell-xps13-9345.dts     | 85 +++++++++++++++++++++-
- 1 file changed, 83 insertions(+), 2 deletions(-)
+Thank you for providing this level of detail in your cover letter. I've raised
+this issue with the engineering team in the past, but I've once again raised
+the issue with your in-depth analysis.
 
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-index f48e6bc35006..bb20cf33847e 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-@@ -759,8 +759,32 @@ retimer_ss0_con_sbu_out: endpoint {
- 
- &i2c5 {
- 	clock-frequency = <100000>;
--	status = "disabled";
--	/* EC @0x3b */
-+	status = "okay";
-+
-+	embedded-controller@3b {
-+		compatible = "dell,xps13-9345-ec";
-+		reg = <0x3b>;
-+
-+		interrupts-extended = <&tlmm 66 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&ec_int_n_default>;
-+		pinctrl-names = "default";
-+
-+		io-channels = <&pmk8550_vadc ADC5_GEN3_AMUX3_GPIO_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX4_GPIO_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		io-channel-names = "sys_therm0",
-+				   "sys_therm1",
-+				   "sys_therm2",
-+				   "sys_therm3",
-+				   "sys_therm4",
-+				   "sys_therm5",
-+				   "sys_therm6";
-+	};
- };
- 
- &i2c7 {
-@@ -1025,6 +1049,57 @@ rtmr0_1p8_reg_en: rtmr0-1p8-reg-en-state {
- 	};
- };
- 
-+&pmk8550_vadc {
-+	sys_therm0: channel@14c {
-+		reg = <ADC5_GEN3_AMUX3_GPIO_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "lpddr5_therm";
-+	};
-+
-+	sys_therm1: channel@14d {
-+		reg = <ADC5_GEN3_AMUX4_GPIO_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "usb_charger_left_therm";
-+	};
-+
-+	sys_therm2: channel@144 {
-+		reg = <ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "vph_pwr_therm";
-+	};
-+
-+	sys_therm3: channel@145 {
-+		reg = <ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "usb_charger_right_therm";
-+	};
-+
-+	sys_therm4: channel@146 {
-+		reg = <ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "ssd_conn_therm";
-+	};
-+
-+	sys_therm5: channel@147 {
-+		reg = <ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "sys_therm5";
-+	};
-+
-+	sys_therm6: channel@148 {
-+		reg = <ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "keyboard_therm";
-+	};
-+};
-+
- &qupv3_0 {
- 	status = "okay";
- };
-@@ -1103,6 +1178,12 @@ cam_indicator_en: cam-indicator-en-state {
- 		bias-disable;
- 	};
- 
-+	ec_int_n_default: ec-int-n-state {
-+		pins = "gpio66";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
- 	edp_bl_en: edp-bl-en-state {
- 		pins = "gpio74";
- 		function = "gpio";
-
--- 
-2.54.0
+/jeff
 
