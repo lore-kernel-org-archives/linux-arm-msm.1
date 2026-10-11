@@ -1,361 +1,380 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D774E3603DF;
-	Sun, 11 Oct 2026 19:13:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791746017; cv=none; b=fD4xPW/M04vWof3nMEU2n6Y2l+vxOQ76EWOp6Mnkq+uDi6tU0V9fE8YRfRDOOX7TpJH3QGClAdeosNONFqGDUeSJRoBdMeyMSJpXe9k3Ey6P5xYdx5EeMZM2S0sCzX+aLkGUyGcf3Hxq8b2snZwvyXecDiOYnU40Y8kWFkgK5aI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791746017; c=relaxed/simple;
-	bh=ZGV2vIh0/KBGU1oZwFmHUpi4kBz6Xm2Llfiyjwm8VTs=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=hkVBgzyVOsaKK8sOiN222WohmSr+dC8Se+3hko5gOZiR+5UHoi1StfzP4Rcf4tqFFEjrfBWdygVS02GnkD1R498CZvXQAaEV5mRL8pTpVnPrz097g0Siq6L4sN6SB/34mN9dxniQsehKGZkHLc6uQL6WEYK25WrlyMFXmMz7y/M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H4u/IgrR; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DA142C0303
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:27:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791746828; cv=pass; b=hzf4pTdj24xsHdudKrmXWoLdAFpLGxTrdl5O/Sizq1QgWvXN3MyAlovM+4ZmOr6MudIjA8PxBgP6fDpQPAzSSvnnsl45EDecMGKAef4LeEk/9K9AxIkgn1ICvslsnk0q/v+pgJ2K/sQXAQyoS+Hq7pU7aX4Kg2MGRO/tBy+078s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791746828; c=relaxed/simple;
+	bh=dFZm0B429+1EMMBzRGEA+XklVFzouiTDcePnsZisvzw=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=OLQa8NwMSeGgQ8h/f7v/Ibg15x8yzg+ecnw2iZ4eu1HKi2FvnNhaSivR4SQiky//fs324oI9HnhX0YTggBN+gP7hbMiTgtNj4wnWpxXdME9Qg6JYM/ZrK9mDp6S5/DDxyYV2QIIOnCaXc+y+fNUVvZ8DJ6NCydqMvfs1u2lX4XI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZlE9biYu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qkxz4W3z; arc=pass smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H4u/IgrR"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC84D1F0089B;
-	Sun, 11 Oct 2026 19:13:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791746015;
-	bh=oFMGe7A7jXBHyDAEo+RvnvGYBzGkORWLEt7pLGKtQtA=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=H4u/IgrRqHLPj8XKdbQrORvWlM4V0UeY31e1XGeREclAhdqFiZiUbfXc1rBi3mVjm
-	 YdwyR/2zj+kcyTm8iziNhFs3oOVw2HS74Z37C4aCCsPoadPkIWNwixRBa4C4ll55Lc
-	 cf17Uo6P35DT0W99oKb0+HGJ7JAQU1n9pflLBA30IYQ8mGuQrNl4jwoEBWqkuAhRVT
-	 Yi+3246yC8h6PS+tYZSLJok4xO/gHMZImgOA1D3KQN1W/W0vCK5ZmYtt10ZL0nAsz3
-	 3yjRfM/zy60YQoF4Uo/GihhqBFi1/aS1MtzxjAry1/UQwDbwpGT7Xa9i22l2qpxHC/
-	 6Ahv6GWX+8Nwg==
-Subject:
- Re: [PATCH net-next v2] net: stmmac: dwxgmac2: enable L2 split header support
-From: netdev-bot+sashiko@kernel.org
-To: sagar.cheluvegowda@oss.qualcomm.com
-Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
- netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- lorenzo.bianconi@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com,
- abhishek.chauhan@oss.qualcomm.com, sarosh.hasan@oss.qualcomm.com
-Date: Sun, 11 Oct 2026 19:13:34 +0000
-Message-ID: <179174601434.434549.13553290378854885570@kernel.org>
-In-Reply-To: <20261007183905.2582759-1-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20261007183905.2582759-1-sagar.cheluvegowda@oss.qualcomm.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZlE9biYu";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qkxz4W3z"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69BINJp11121500
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:27:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:message-id:mime-version:reply-to
+	:subject:to; s=qcppdkim1; bh=hx9WS1z5UPv15wgxUK+UOiFQICa1zaBdNIm
+	cKXdKysw=; b=ZlE9biYuN5xQv1O7PtXX3oKV7eg2S4n32z6iFnVNVyk3aCDd13A
+	cROZdQoRGaaMq3BIEUYWmZT2WpjEqmZAr1GT7s9BlKvRvxV/TEyOy1sl/7xBDjhe
+	7b0ezaAUAJEkDllOBGEa/vM3ldiSUqfZwf+EAC75XAivkhzQfQqAdLmaywgif5rl
+	+cOTT0vegg5J6BmueLNCwZfHN7NHtwwsaJBDuSPydvYUTgTVMoCMb2ZZezzqqazD
+	V2MuyscdlI4jSzp+Gi5T0wlfpLfYyWWWHBlvAayIxQC7h89c0taaOz9PjqyooGwJ
+	AVc5CxgQ/CRBO36/tU47+qC2aefmRiUadoA==
+Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com [209.85.210.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7b2fc0hm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:27:05 +0000 (GMT)
+Received: by mail-ot1-f71.google.com with SMTP id 46e09a7af769-82274137201so2525596a34.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 12:27:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791746820; cv=none;
+        d=google.com; s=arc-20260327;
+        b=cG6JKTd+yPM6eXNbVx63pu8w47zkj05XtqfD8hZjKtEsBhGmA25NNKZLnljYoIJ2RY
+         NN15GtqORXPPNqgbuDTbiaosia2rP86XhOIFk7B8nfsXglROThigVzK/OjtrbZuO4SjN
+         2g+tq+RKwW7lL+l8DDbFCGd58Bb3hbb26XU/AarxZYpiNAIAoe9Ee7VPvnf+SREwK8M+
+         mB6ey901QD+sfH7DpGQJNkxfpGFohLc5rUj62anleGhmoMByHHwB0ONTSG5XLHTSuYRm
+         Gz8hVts3UmvDIA1nxq4LHdznA+JW8GOF4VCGTULoxrknivsyUAsw0uMi5d5v/iq+gGGb
+         LyWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:reply-to:mime-version
+         :dkim-signature;
+        bh=hx9WS1z5UPv15wgxUK+UOiFQICa1zaBdNImcKXdKysw=;
+        fh=QB7Jormn5Mugd1YDH+ws209SBxtHe3CtCMSrolpFoo8=;
+        b=rH/RwhmN10uB8+ph3x5rg3wKp+DVEKJDJJXyB5ZlcF7fDm67k3JiodRQDKqbU2l1PX
+         CEMpRZjj+8JTAY9YIEx83EJ5OrM2IYkoUV1ciESCQGg6/MBTe5YOaZwI33RR/tAg1Vqy
+         skB+MJiKj6WwN2Z3ZQo6XTKEdc6lr4Bjjm3dV9fU3oH6uUHr7NGMrBqEIJAHiN65kajt
+         sZBubRnmQ1Rpov4YXI9Z0N/nfbupaM6yvf/I1lYI0chsXq/LQYXoJWoLDb9izMYw1czQ
+         USirpUTGo/vwq+OCJPTdecve0gakTSVK/8UBzYnG44KBa05ySFR8vuoFLFUI6LlzPDjz
+         nGTw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791746820; x=1792351620; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hx9WS1z5UPv15wgxUK+UOiFQICa1zaBdNImcKXdKysw=;
+        b=Qkxz4W3zwXnxUfhQdeUa29tn0/HX5+3P38xwRFbfdAYtMK6i3sIWbM2L0aOHCW5fEx
+         d6AJSldGhpPdeaXzrp4TUFITrp9FlknhcZgQHhmN7Rg+h7MsOnF6YZFvMMwkz2CAyF2B
+         gKw0LJ6Dy5sDRqpDQW4KV9dX+6GkaVg10F01W1uiILY/akaFGDEc9E46nCMsM0KWQCV7
+         9qSIxdTSoI6kQlKFGbY92sU8Z16zgUprtBhR0hlehPdWlp23xzSwzHs6VV2mbzq2Y9Xl
+         04oyZ4sXB0Xe7GPriqpwQ9iWKoeuzhszjvUiOSYI2hCtVD5oRuOJ/YZtjANHJztSNm/F
+         DpIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791746820; x=1792351620;
+        h=content-type:cc:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hx9WS1z5UPv15wgxUK+UOiFQICa1zaBdNImcKXdKysw=;
+        b=0zRmm+/dvWgvZcpSuIpUYjd0E5VMm7jo5hn7YuVw+F1wnhP3mE6yITiBp/GaG6j0ls
+         Jmb/Rj3NGaDjWvLBqCLXh9jmpSK+mCozGK46Dkw2Fw8xChILga7FEQdgBGI1keHjR9Zw
+         hz0UvlGf7/uO3RzAmgxX6s9qLgOf1r6kFfDu+C/P9yVIpOCWpGDWaVyuzR7yztZ2w1zb
+         fyFX/T9FvHwhchYf73DSEbO4JT+sXz0l/CqtE9uhjnA3RlIBug2XqwmTEU4PMS3//Blq
+         7YNBvRPeKazbSNk2PxzlGql40tq0BPXlSi0PtO8kvIQy1MyAifD+5LG6O2c+R+bIwgSa
+         Tguw==
+X-Gm-Message-State: AFq9FYI96G3JuwPjTE+0hhEQJ+yokny8RapG3CsAcAcnidlZd14Oad0C
+	Lh2Yt4tbZe0U111fJSJZsLrFIhln0O/f7NXb7ouyLgN0y9DvlZvyl3NywfkI8Fr5EIOY8FgIVXO
+	YDVQiHy1kx45Rgfcve7K8smA98rjeVTcLLlra2Kv+KV1qVQsqmKwyoo+kThoUD/hxJFKs4JfGTq
+	wU6MOjvFV1H4xX3lxUWSn84jYs95WyAc2vqDshNNRgB4c=
+X-Gm-Gg: AYBFou0XKF3VWMKUfix8nblXn0YQUVDv82qGcreFbljuhqr8F15Mk//X2bhcq2KwZWX
+	rp0hdt4r26aQsrG7jj9hImgOeFLlf+uPWbWI5Rl1rMrHkJFWgfrJKUZ+5UxljwuKfABbeT1eYBM
+	VKidcssVeqFXyLEW3iz8l1L8FAHRg+M2xzsPZ0UtSKmaD0MOP95aMPP3Ha+g==
+X-Received: by 2002:a05:6820:a28c:20b0:6f5:6ba1:aeff with SMTP id 006d021491bc7-6f56ba1b18amr655431eaf.37.1791746820006;
+        Sun, 11 Oct 2026 12:27:00 -0700 (PDT)
+X-Received: by 2002:a05:6820:a28c:20b0:6f5:6ba1:aeff with SMTP id
+ 006d021491bc7-6f56ba1b18amr655423eaf.37.1791746819486; Sun, 11 Oct 2026
+ 12:26:59 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-
-Thank you for your contribution! Sashiko AI review found 6 potential
-issue(s) to consider.
-
-Critical: 0 · High: 2 · Medium: 2 (2) · Low: 2
-
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
-
-- [High] On XLGMAC cores, dwxgmac2_enable_sph() writes to the wrong
-  registers.
-- [High] net: stmmac: incorrect shift in non-IP header length calculation
-- [Medium] dwxgmac2_enable_sph() programs the MAC-wide split
-  configuration regardless of `en` or split-header capability, which…
-- [Medium] stmmac: missing mask clear before setting XGMAC_CONFIG1_SPLM
-  field
-- [Low] The commit message presents the RX header-length change in
-  dwxgmac2_get_rx_header_len() as a fix for an existing defect: RDES3…
-- [Low] net: stmmac: dwxgmac2: missing mask when setting multi-bit SPLM
-  field
-
-Pre-existing issues:
-- [Medium] This problem wasn't introduced by this patch, but the error
-  handling in stmmac_rx() can lose the partial-packet state.
-- [Medium] This problem wasn't introduced by this patch, but the XGMAC RX
-  path reads descriptor write-back fields without a DMA read barrier…
-
---
-
-net: stmmac: dwxgmac2: enable L2 split header support
-
-This patch makes dwxgmac2_enable_sph() set SPLM and SAVE_EN in
-XGMAC_EXT_CFG1 and clear VPRE in XGMAC_EXT_CFG0, so that L2 header
-splitting works on XGMAC2. It also changes dwxgmac2_get_rx_header_len().
-On non-last descriptors it now reads the header length from RDES2[9:0]
-directly. On the last descriptor it uses RDES2[9:2] for non-IP packets
-that have L2T set.
-
-[ ... ]
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> index 6719ac6e395bc..65ac5403ec583 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> @@ -292,8 +292,18 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
->
->  static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
->  {
-> -	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-> +	u32 rdes3 = le32_to_cpu(p->des3);
-> +
-> +	/* when FD=1 and LD=0, HL is RDES2[9:0] */
-> +	if (!(rdes3 & XGMAC_RDES3_LD)) {
-
-[Severity: Medium]
-This is a pre-existing issue, not one introduced by this patch. The
-comment says FD=1, but the code never checks FD. Can a continuation
-descriptor get here and be treated as a first descriptor?
-
-In stmmac_rx(), suppose napi_build_skb() fails on the first descriptor
-of a multi-descriptor packet:
-
-stmmac_rx() {
-    ...
-			skb = napi_build_skb(page_address(buf->page),
-					     rx_q->napi_skb_frag_size);
-			if (!skb) {
-				page_pool_recycle_direct(rx_q->page_pool,
-							 buf->page);
-				buf->page = NULL;
-				rx_dropped++;
-				count++;
-				goto drain_data;
-			}
-    ...
-}
-
-error is not set, and the code goes back to read_again. If the next
-descriptor is still owned by the DMA, status is dma_own and the loop
-exits. The state save is then skipped, because status has no
-rx_not_ls and skb is NULL:
-
-	if (status & rx_not_ls || skb) {
-		rx_q->state_saved = true;
-		...
-	}
-
-On the next poll, len and error are both 0 even though the descriptor
-is a continuation. That bypasses this guard in stmmac_rx_buf1_len():
-
-	if (priv->sph_active && len)
-		return 0;
-
-dwxgmac2_get_rx_header_len() is then called on a descriptor with FD
-clear.
-
-Would buffer 1 of that continuation be handled as the header of a new
-packet, so a malformed packet reaches the stack? Split IP packets
-could already hit this before the patch. The patch only changes which
-RDES2 field gets read here.
-
-> +		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +		return;
-> +	}
-
-[Severity: Medium]
-This isn't a bug introduced by this patch, but is there an ordering
-problem between the OWN check and this RDES2 read?
-dwxgmac2_get_rx_status() checks OWN first:
-
-	u32 rdes3 = le32_to_cpu(p->des3);
-	u32 rdes2 = le32_to_cpu(p->des2);
-
-	if (unlikely(rdes3 & XGMAC_RDES3_OWN))
-		return dma_own;
-
-stmmac_rx() then reads des2 again through
-stmmac_rx_buf1_len()->stmmac_get_rx_header_len()->
-dwxgmac2_get_rx_header_len(). There is no dma_rmb() between the two
-reads on this path.
-
-On weakly ordered platforms, could the RDES2 load complete before the
-RDES3 load that sees OWN cleared, and return a stale header length?
-This patch now reads RDES2 in more cases (non-last descriptors and L2T
-packets).
-
-> +
-> +	if (rdes3 & XGMAC_RDES3_L34T)
->  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +	else if (rdes3 & XGMAC_RDES3_L2T)
-> +		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
->  }
-
-[Severity: High]
-Does this shift turn a byte count into a dword count?
-
-If RDES2[9:2] holds the non-IP header length in units of 4 bytes, the
-value masked with XGMAC_RDES2_NONIPHL is already the length in bytes.
-Shifting it right by 2 then gives the number of dwords instead.
-
-stmmac_rx_buf1_len() passes hlen straight back to stmmac_rx() as a
-byte count:
-
-	stmmac_get_rx_header_len(priv, p, &hlen);
-	if (priv->sph_active && hlen) {
-		priv->xstats.rx_split_hdr_pkt_n++;
-		return hlen;
-	}
-
-stmmac_rx() then uses buf1_len for dma_sync_single_for_cpu(),
-xdp_prepare_buff() and the skb_put() on the head buffer. For a 16-byte
-header this returns 4, so only 4 bytes of the Ethernet header land in
-the linear part of the skb, and buffer 2 is attached after them as a
-frag. The rest of the header is lost.
-
-Wouldn't stmmac_rx_vlan() and eth_type_trans() then read past the
-4-byte linear area, and the ETH_HLEN pull in eth_type_trans() hit the
-BUG() in __skb_pull()?
-
-The L34T case right above uses RDES2[9:0] as a byte count with no
-shift. Can you confirm against the databook whether the non-IP case
-really needs the >> 2?
-
-[Severity: Low]
-The commit message describes this change as a fix for an existing
-defect:
-
-  Also fix the RX header-length calculation for split-header
-  descriptors. Per the XGMAC2 descriptor format, RDES3's L34T and
-  L2T fields are only valid on the last descriptor (LD set); on a
-  non-last descriptor they can hold stale write-back data from a
-  previous packet.
-
-The L34T-gated read being replaced came from commit 96147375d49f
-("net: stmmac: xgmac: Only get SPH header len if available").
-
-If that premise holds, existing XGMAC SPH users can get hlen == 0 on a
-split first descriptor. They then fall through to this in
-stmmac_rx_buf1_len():
-
-	if (status & rx_not_ls)
-		return priv->dma_conf.dma_buf_sz;
-
-Should this part go in its own patch with a Fixes: tag? Then it could
-be backported without the new L2 split and VPRE changes.
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> index ff83858ebc1f3..0a9c787305a4e 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c
-> @@ -561,6 +561,16 @@ static void dwxgmac2_enable_sph(struct stmmac_priv *priv, void __iomem *ioaddr,
->  	value |= XGMAC_CONFIG_HDSMS_256; /* Segment max 256 bytes */
->  	writel(value, ioaddr + XGMAC_RX_CONFIG);
->
-> +	value = readl(ioaddr + XGMAC_EXT_CFG1);
-> +	value |= XGMAC_CONFIG1_SPLM(1);
-> +	value |= XGMAC_CONFIG1_SAVE_EN;
-> +	writel(value, ioaddr + XGMAC_EXT_CFG1);
-> +
-> +	/* Disable variable preambles to keep the L2 split offset deterministic. */
-> +	value = readl(ioaddr + XGMAC_EXT_CFG0);
-> +	value &= ~XGMAC_EXT_CFG0_VPRE;
-> +	writel(value, ioaddr + XGMAC_EXT_CFG0);
-
-[Severity: Medium]
-This read-modify-write keeps whatever was in bits 9:8 of
-XGMAC_EXT_CFG1 and ORs in SPLM=1 on top. If a bootloader or earlier
-firmware left SPLM at 2, the register ends up with SPLM=3 instead of
-the L2 offset mode this patch wants.
-
-dwxgmac2_enable_sph() is called from stmmac_hw_setup() for every RX
-channel, and again from the XDP and stmmac_set_features() paths. None
-of those calls would ever correct the field, so the MAC would stay in
-whatever split mode the combined value selects. What does SPLM=3 do on
-XGMAC2? If it is reserved or selects a different split point, the
-header length the hardware reports would no longer match what
-dwxgmac2_get_rx_header_len() expects.
-
-dwmac4_enable_sph() looks to have the same pattern for GMAC_EXT_CFG1,
-so copying it here carries the issue over. Should the field be cleared
-with XGMAC_CONFIG1_SPLM_MASK before XGMAC_CONFIG1_SPLM(1) is applied?
-
-[Severity: Low]
-XGMAC_CONFIG1_SPLM_MASK is a two-bit field, GENMASK(9, 8), but the
-old contents of that field are never cleared before the new value is
-ORed in. If bit 9 is already set when dwxgmac2_enable_sph() runs, the
-field ends up as 3 rather than 1.
-
-The reset value is probably 0, so this may not matter in practice.
-Still, the usual pattern for FIELD_PREP() in a read-modify-write is to
-clear the mask first:
-
-	value &= ~XGMAC_CONFIG1_SPLM_MASK;
-	value |= XGMAC_CONFIG1_SPLM(1);
-
-The v2 changelog says the mask was added for XGMAC_CONFIG1_SPLM().
-Could it also be used here to clear the field?
-
-[Severity: High]
-Can this clear an RX queue enable bit on XLGMAC? The DWXLGMAC_ID entry
-in stmmac_hw[] in hwif.c uses the XGMAC DMA ops:
-
-		.desc = &dwxgmac210_desc_ops,
-		.dma = &dwxgmac210_dma_ops,
-		.mac = &dwxlgmac2_ops,
-
-That means dwxgmac2_enable_sph() also runs on XLGMAC. On that core,
-offset 0x140 is the RX queue enable register in dwxlgmac2.h:
-
-#define XLGMAC_RXQ_ENABLE_CTRL0		0x00000140
-
-dwxlgmac2_rx_queue_enable() programs a 2-bit enable field per queue in
-that register:
-
-	if (mode == MTL_QUEUE_AVB)
-		value |= 0x1 << XGMAC_RXQEN_SHIFT(queue);
-
-For queue 4 in AVB mode this is BIT(8). That is the same bit this code
-clears as XGMAC_EXT_CFG0_VPRE.
-
-stmmac_hw_setup() enables the RX queues in stmmac_mtl_configuration().
-After that, it calls stmmac_enable_sph() for every RX channel, without
-checking sph_capable or the core type:
-
-	sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
-	for (chan = 0; chan < rx_cnt; chan++)
-		stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
-
-Would an AVB-mode RX queue 4 on XLGMAC end up disabled after every
-open, every XDP reconfiguration, and every stmmac_set_features() call?
-
-The write to 0x144 also sets bits 8 and 24 on XLGMAC, and the driver
-doesn't define what that offset holds on that core.
-
-Should these MAC register writes move into the per-core MAC ops, or be
-gated on the core ID?
-
->  	value = readl(ioaddr + XGMAC_DMA_CH_CONTROL(chan));
->  	if (en)
->  		value |= XGMAC_SPH;
-
-[Severity: Medium]
-The XGMAC_EXT_CFG1 and XGMAC_EXT_CFG0 writes above run whether or not
-en is set. Only the per-channel XGMAC_SPH bit depends on en. The
-commit message says:
-
-  Finally, disable the variable-length preamble when L2 splitting
-  is enabled.
-
-stmmac_hw_setup() and the XDP setup path call stmmac_enable_sph() for
-every RX channel without checking priv->sph_capable. Does that mean
-every XGMAC instance gets SPLM and SAVE_EN set and VPRE cleared? That
-would include cores without SPH, STMMAC_FLAG_SPH_DISABLE setups, setups
-with XDP attached, and setups with RX checksum off.
-
-The en == false path, for example stmmac_set_features() after ethtool
--K rx off, also never clears SPLM/SAVE_EN or restores VPRE. The dwmac4
-sequence sets SPLM/SAVE_EN unconditionally too, but the VPRE change is
-new.
-
-Should these settings be applied only when en is true, and undone
-otherwise?
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261007183905.2582759-1-sagar.cheluvegowda%40oss.qualcomm.com
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Sun, 11 Oct 2026 12:26:48 -0700
+X-Gm-Features: AclHuK-wXtAQszxLAiJzWStuKUtS-jSj0vu8__CELnWePjfHAgcPQ7n0ultvhNY
+Message-ID: <CACSVV02V-FOzGj71G0ZL7khkYEKWFW4q4biOZR8B8vyWy20PdQ@mail.gmail.com>
+Subject: [pull] drm/msm: drm-msm-next-2026-10-11 for v7.4
+To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3NyBTYWx0ZWRfX9mfYjzxIH6VC
+ KXvHzK56ml2q79TRvr+b2NDC79jlRdmYyRywmHw6sbebjEwd6OMZh+t1SrNksnIn+/JL6s8XcAV
+ pwfC50dsZgVpfWUB49ZVK3hD/D3V2pQ=
+X-Proofpoint-GUID: l4weusC_F8dDhIfol0zuDpm7eOZHjAGT
+X-Authority-Analysis: v=2.4 cv=NddzRGD4 c=1 sm=1 tr=0 ts=6acbe30a cx=c_pps
+ a=OI0sxtj7PyCX9F1bxD/puw==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=e5mUnYsNAAAA:8 a=gcM9zsgL9M5nzF_IVqQA:9
+ a=QEXdDO2ut3YA:10 a=Z1Yy7GAxqfX1iEi80vsk:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3NyBTYWx0ZWRfXyRFZmqzX6daV
+ G0taNwevhuZETnd/zjcVo6XFOtDymYt35mLRoUNFrMHCDAUz8WV6jl2qHubsjoP6MABqvKx/F+d
+ NXzNWbmdbXXU0k54vlyLETFPi6qqIEpZRCOOuloyXYC/MylDKAnbUJW0svHIx+L5kfmw5Byu2TJ
+ yCle6kjP5HJrY6oS3p9qUi/yQe7mTxCWC6S3GFYxe5UA3b79Qs+VPDVB2LDXGEQ8uJocRY7OwWr
+ ySUXzFnJraniaxnQ9vCUSYvSAAia0pc+CB8s4nw2OQf2m1g93prrLGL06ZHuxv7wbiodg0idteu
+ N1gVU6IuJbo0iCeWNaShpzj+9YJRruZP7brBcMx8nMiRzpl+TSVm2rZ584ovrMP2hFS1XeJmwLx
+ Zy/zIM9dgj1bBjlPswvcNZp0UudcIslTTMR7VjH20gFAr13/XFkCpt3W8dOsXoflPeToaN40IkE
+ KX4ooNcF8eUqQrgH+rw==
+X-Proofpoint-ORIG-GUID: l4weusC_F8dDhIfol0zuDpm7eOZHjAGT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610110077
+
+Hi Dave, Simona,
+
+Pull request for v7.4, as described below.
+
+The following changes since commit d33622598496c8994c35ba0a8a913de064dfc1a4:
+
+  Merge tag 'qcom-drivers-for-7.4' into
+msm-next-merge-qcom-drivers-for-7.4 (2026-09-26 07:53:04 -0700)
+
+are available in the Git repository at:
+
+  https://gitlab.freedesktop.org/drm/msm.git tags/drm-msm-next-2026-10-11
+
+for you to fetch changes up to d024361c631b3f020a26c07d683e5103404b0fbf:
+
+  drm/msm/a6xx: Split out a7xx/a8xx device tables (2026-10-10 15:00:45 -0700)
+
+----------------------------------------------------------------
+Changes for v7.4
+
+CI:
+- Dropped sc7180 trogdor lazor from the CI
+
+Core:
+- Fixed msm_ioremap for resources without a name
+- Changed msm.separate_gpu_kms to default to auto selection
+
+GPU:
+- Enable CLX (Current Limit eXtension) for gen8 to avoid
+  exceeding limits on CX/GX rails
+- New GPUs: a830 (Pakala), a845 (Maili), a850 (Hawi),
+  x2-85 (Mahua)
+- Fix VBIF halt mask on a306, which was preventing runpm
+  suspend
+- Enable THP support for GEM buffers
+- Add modparam to disable waiting on fences in shrinker
+- Drop use of drm_prime_sg_to_page_array()
+- a5xx: don't read the GPMU registers on GPUs without a GPMU
+- a2xx/a3xx/a5xx: hangcheck progress detection
+- a6xx: gmuwrapper runpm fix
+- Calculate reported GMEM size based on active slices
+- Split a6xx/a7xx/a8xx catalog
+
+DP:
+- Picked up some preparation patches for the MST support
+- Fixed reported status of the link training
+
+DPU:
+- Fixed CRTC bandwidth computation
+- Fixed DSC programming
+- Fixed encoder disablement path
+
+DSI:
+- Fixed VM leak in error path
+- Indention fix
+
+MDP5:
+- Added MSM8952 configuration
+- Dropped incorrect cursor pipe on MSM8976/56
+
+HDMI:
+- Small fixes
+
+Notes:
+- Merged qcom-drivers-for-7.4 to pick up UBWC_7_0 support
+  (needed for Hawi/Maili) which in turn depended on
+  qcom-arm64-for-7.4
+
+----------------------------------------------------------------
+Abhinav Kumar (3):
+      drm/msm/dp: move link-level teardown from display_disable to
+display_unprepare
+      drm/msm/dp: introduce stream_id for each DP panel
+      drm/msm/dp: add support for programming p1/p2/p3 register blocks
+
+Akhil P Oommen (12):
+      drm/msm/a6xx: Add HFI support for CLX feature
+      drm/msm/a6xx: Enable CLX feature on A840
+      drm/msm/a8xx: Enable CLX feature on Adreno X2-85
+      drm/msm/a6xx: Honor perfmode_bw threshold on A8x
+      drm/msm/a6xx: Fix secondary rail vote in ARC votes
+      drm/msm/a6xx: Fix RPMH dependency votes
+      drm/msm/a6xx: Factor out RPMh arc-vote helpers
+      drm/msm/a6xx: Add BX rail support to GMU dependency votes
+      drm/msm/a6xx: Clamp MX dependency vote
+      drm/msm/a8xx: Add Adreno 850 support
+      drm/msm/a6xx: Send THINMEM config to GMU for A850
+      dt-bindings: display/msm: Document A850 GPU and GMU
+
+Bhaskar Reddy Valluru (2):
+      drm/msm/a8xx: Add Adreno 845 support
+      dt-bindings: display/msm: Document A845 GPU and GMU
+
+Dmitry Baryshkov (5):
+      drm/msm/mdp5: drop cursor pipe for msm8x76
+      drm/msm/a5xx: don't read the GPMU registers on GPUs without a GPMU
+      drm/msm/a2xx: Add hangcheck progress detection
+      drm/msm/a3xx: Add hangcheck progress detection
+      drm/msm/a5xx: Add hangcheck progress detection
+
+Jie Zhang (5):
+      drm/msm/a8xx: Add support for Adreno 830 GPU
+      dt-bindings: display/msm: Document Adreno 830 GPU/GMU
+      dt-bindings: display/msm/gmu: Fix Glymur's compatible
+      drm/msm/a8xx: Add Mahua GPU support
+      dt-bindings: display/msm: gpu: Document Mahua GPU/GMU
+
+Joonhoe Kim (3):
+      drm/msm/dpu: disable the slave encoder before the master
+      drm/msm/dpu: compute the CRTC bandwidth from the state being checked
+      drm/msm/dpu: round up the compressed INTF width
+
+Krzysztof Kozlowski (7):
+      drm/msm/hdmi_phy: Cleanup after msm_hdmi_phy_resource_enable() failure
+      drm/msm/hdmi: Handle msm_hdmi_power_on() errors during
+.atomic_pre_enable()
+      drm/msm/hdmi_bridge: Correct poweroff/audio cleanup order in post_disable
+      drm/msm/hdmi_bridge: Drop redundant initialization in
+msm_hdmi_bridge_init()
+      drm/msm: Properly handle msm_ioremap() without name
+      drm/msm/dsi: Fix indentation of if block in dsi_mgr_bridge_mode_valid()
+      dt-bindings: display/msm: hdmi: Correct name of disallowed supplies
+
+Mahadevan P (1):
+      drm/msm: default separate_gpu_kms to auto selection
+
+Muzaffer Kadir (2):
+      dt-bindings: display/msm: qcom, mdp5: Add MSM8952 compatible
+      drm: msm: mdp5: Add MDP5 configuration for MSM8952
+
+Oleg Keri (1):
+      drm/msm/dp: don't report link training success after a reinit
+
+Rahul Pon (1):
+      drm/msm/a8xx: report the GMEM size of the active slices
+
+Rob Clark (14):
+      drm/msm: Enable THP for GEM buffers
+      drm/msm/gem: Add modparam to disable shrinker blocking
+      drm/msm/dpu: Fix GAMMA LUT for sm8750 related DPUs
+      drm/msm: Sync registers from mesa
+      drm/msm/gem: Add helper to check if resident
+      drm/msm/gem: Mmap imported dma-bufs via the exporter
+      drm/msm/gem: Use get_pages() directly in vmap path
+      drm/msm/gem: Stop exposing a page array
+      drm/msm/gem: Stop calling get_pages() for imported dma-bufs
+      drm/msm/gem: Drop use of drm_prime_sg_to_page_array()
+      Revert "dt-bindings: display/msm: Document A845 GPU and GMU"
+      Revert "dt-bindings: display/msm: Document A850 GPU and GMU"
+      drm/msm/a6xx: Move a702/a704 to a6xx list
+      drm/msm/a6xx: Split out a7xx/a8xx device tables
+
+Roman Demidov (2):
+      drm/msm/a6xx: fix use-after-free of OPP in a6xx_pm_resume
+      drm/msm/a6xx: check pm_runtime_resume_and_get during resume
+
+Sam Day (1):
+      drm/msm/a3xx: fix VBIF halt mask for A306/A306A
+
+Vignesh Raman (1):
+      drm/ci: Remove sc7180-trogdor-lazor-limozeen job
+
+Wentao Liang (2):
+      drm/msm: Fix vm_bo use-after-free in with_vm_locks()
+      drm/msm/dsi: Fix VM leak in dsi_tx_buf_alloc_6g()
+
+Xilin Wu (2):
+      drm/msm/dp: Serialize HPD state updates
+      drm/msm/dp: Initialize the debugfs connector pointer
+
+Yongxing Mou (4):
+      drm/msm/dp: Pass panel to msm_dp_ctrl_config_msa()
+      drm/msm/dp: drop redundant config_ctrl_link() from msm_dp_ctrl_on_stream()
+      drm/msm/dp: add MST stream register definitions
+      drm/msm/dp: add stream-aware link register accessors
+
+ .../devicetree/bindings/display/msm/gmu.yaml       |    8 +-
+ .../devicetree/bindings/display/msm/gpu.yaml       |    3 +
+ .../devicetree/bindings/display/msm/hdmi.yaml      |    4 +-
+ .../devicetree/bindings/display/msm/qcom,mdp5.yaml |    1 +
+ drivers/gpu/drm/ci/build.sh                        |    1 -
+ drivers/gpu/drm/ci/test.yml                        |   10 -
+ .../msm-sc7180-trogdor-lazor-limozeen-fails.txt    |   22 -
+ .../msm-sc7180-trogdor-lazor-limozeen-flakes.txt   |   20 -
+ .../msm-sc7180-trogdor-lazor-limozeen-skips.txt    |   30 -
+ drivers/gpu/drm/msm/Makefile                       |    2 +
+ drivers/gpu/drm/msm/adreno/a2xx_gpu.c              |   18 +
+ drivers/gpu/drm/msm/adreno/a3xx_gpu.c              |   30 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c              |   76 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.h              |    2 +
+ drivers/gpu/drm/msm/adreno/a6xx_catalog.c          | 1440 +--------------
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c              |  231 ++-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.h              |    1 +
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c              |   42 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.h              |   17 +
+ drivers/gpu/drm/msm/adreno/a6xx_hfi.c              |   96 +
+ drivers/gpu/drm/msm/adreno/a6xx_hfi.h              |    1 +
+ drivers/gpu/drm/msm/adreno/a7xx_catalog.c          |  502 ++++++
+ drivers/gpu/drm/msm/adreno/a8xx_catalog.c          | 1846 ++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c              |   21 +-
+ drivers/gpu/drm/msm/adreno/adreno_device.c         |    6 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c            |    3 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h            |   35 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c      |   17 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c        |   10 +-
+ .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c   |    4 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c     |    2 +
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c           |   14 +
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_cfg.c           |   81 +-
+ drivers/gpu/drm/msm/dp/dp_ctrl.c                   |  164 +-
+ drivers/gpu/drm/msm/dp/dp_ctrl.h                   |    8 +-
+ drivers/gpu/drm/msm/dp/dp_debug.c                  |    1 +
+ drivers/gpu/drm/msm/dp/dp_display.c                |  115 +-
+ drivers/gpu/drm/msm/dp/dp_panel.c                  |  193 +-
+ drivers/gpu/drm/msm/dp/dp_panel.h                  |   17 +-
+ drivers/gpu/drm/msm/dp/dp_reg.h                    |   56 +
+ drivers/gpu/drm/msm/dsi/dsi_host.c                 |    2 +
+ drivers/gpu/drm/msm/dsi/dsi_manager.c              |    2 +-
+ drivers/gpu/drm/msm/hdmi/hdmi_bridge.c             |   34 +-
+ drivers/gpu/drm/msm/hdmi/hdmi_phy.c                |   16 +-
+ drivers/gpu/drm/msm/msm_drv.c                      |   89 +-
+ drivers/gpu/drm/msm/msm_drv.h                      |    6 +-
+ drivers/gpu/drm/msm/msm_gem.c                      |  107 +-
+ drivers/gpu/drm/msm/msm_gem.h                      |   10 +-
+ drivers/gpu/drm/msm/msm_gem_prime.c                |    9 +-
+ drivers/gpu/drm/msm/msm_gem_shrinker.c             |    9 +-
+ drivers/gpu/drm/msm/msm_gem_vma.c                  |    8 +-
+ drivers/gpu/drm/msm/msm_io_utils.c                 |    6 +-
+ drivers/gpu/drm/msm/msm_mdss.c                     |   15 +
+ drivers/gpu/drm/msm/registers/adreno/a2xx.xml      |   25 +-
+ drivers/gpu/drm/msm/registers/adreno/a5xx.xml      |   17 +
+ drivers/gpu/drm/msm/registers/adreno/a6xx.xml      |   89 +-
+ .../gpu/drm/msm/registers/adreno/adreno_pm4.xml    |   41 +-
+ 57 files changed, 3771 insertions(+), 1864 deletions(-)
+ delete mode 100644
+drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-lazor-limozeen-fails.txt
+ delete mode 100644
+drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-lazor-limozeen-flakes.txt
+ delete mode 100644
+drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-lazor-limozeen-skips.txt
+ create mode 100644 drivers/gpu/drm/msm/adreno/a7xx_catalog.c
+ create mode 100644 drivers/gpu/drm/msm/adreno/a8xx_catalog.c
