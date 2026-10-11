@@ -1,101 +1,181 @@
-Received: from vtj.irix.systems (vtj.irix.systems [82.76.27.144])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C46D52EEE60;
-	Sun, 11 Oct 2026 22:12:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.76.27.144
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32A2E367F2F
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 22:39:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791756765; cv=none; b=cOPv9eYpmcYfJDBrVDBOzyQNYI0eJ1Y9hKtacAnkD026YaDrTBrKwBIg/XX9pjYwen6OKD8dBRvmrE0NzEGggfT5DeJa54l94yK9YlG+ADRWimDy4aCsq1C2GnLAeSoTsCIezOGWFAuM34Xqz65k55PmBhAxNcpL+cEWO/vwVI0=
+	t=1791758399; cv=none; b=t3jWERgMYyOIiC8b4j7kNXqMcTcBcjOPM9AO+hTAyQOK9gBj19yYNMZBeAnaEerpx8wKl3QvRmqeF+G7pVbagVzgHyaBxV7AYc5vQ/jc25ars6Cl5ejBTar1v9ocATagRWGPqikpa5s0isD4lrvqQJfp9XHBldSy20KMxOrrYI0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791756765; c=relaxed/simple;
-	bh=8DH7BN6/rFlLHn4Kx/LYG92C+fCfjqdvDOumpWkDBHk=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AUUKpgEgv2XDSkiEr+l+7vOHPBQ/FoCULMVPyH3ovkJ+OQvuZ/cUwiHJS3zITZvk6LyGXkSNtG4Dw0VBo7SzP1yZ8vBC3gByA7EFEPq5Pba8NASVhL146q3BvW2vbkpLT2WWP6D8EYmXR3Jmz71uqo94ePiNyf7S4wp8yrWCJz8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com; spf=pass smtp.mailfrom=andrei-z.com; dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b=Mlp5kPf2; arc=none smtp.client-ip=82.76.27.144
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=andrei-z.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=andrei-z.com
+	s=arc-20240116; t=1791758399; c=relaxed/simple;
+	bh=xm7zmmCmvA/Kz7KfL1R9Yqv2NSWneryvUBrSk9xgCDo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dqMdhVMPf8tWmXDJ62i3Z6Xn6kb20AXuam59eczRCzUEDnpOCD/5ZQ4VEDAno7Ux9PIaHVV8gfFfljjr9Qsk8m1EY0GX3EClF4YDgbL6ujsfu8LW2OIEozDMtke/RPNnfcZYK/x9y4WI3Ecx7YK0q8jX6e5iQtT9kEWELJ6alFU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=aRsPZtzM; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=andrei-z.com header.i=@andrei-z.com header.b="Mlp5kPf2"
-Received: from MAILGW-HP.hp.vtj.corp.irix.systems (localhost [127.0.0.1])
-	by vtj.irix.systems (Proxmox) with ESMTP id ADACA991;
-	Mon, 12 Oct 2026 01:12:41 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andrei-z.com; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:from:from:in-reply-to:message-id:mime-version:references
-	:reply-to:subject:subject:to:to; s=sig1; bh=M59/VKkKUMyheZD/wOv6
-	K6nK8h2w8/CWCgURVowxwWk=; b=Mlp5kPf2BFW1B4FoZlLNwxDijuPIXUaa7Mhg
-	Izkh4uSE4aCd0FihjnnvXVjqlz44lgOdvjTUo9yG9864T8Dave6pt4Y1ngRLX8oy
-	PMDv8/kSq0wiEOCFEzruNU0XmXv5rD6EiGLAZcb05X9HuEg4BPc10odlWyd0n+O4
-	IadXBSKD7b8dTU6tRcxeWEjy6XwkMt7sZb+0w+LmLNarXXSxhvi82oHKtj/Ks9CJ
-	8V+SjWHHxhzzKVhYlv3gYrPneSiLf0WzHsqRB2VuG0pZryDrdZfh3PggBSDxaT9X
-	02Hlh4+LWrR+ZWz2JqoOFbFNczFrXYkL0/18Z3sVmK+nVbqQ1w==
-Received: from VTJ-MX.corp.irix.systems (unknown [IPv6:2a02:2f04:1:9c24::6])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by vtj.irix.systems (Proxmox) with ESMTPS id 309AB8DA;
-	Mon, 12 Oct 2026 01:12:40 +0300 (EEST)
-Received: from workspace.corp.irix.systems (2a02:2f04:1:9c23::c) by
- VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Mon, 12 Oct 2026 01:12:39 +0300
-From: Andrei-Alexandru Bleortu <me@andrei-z.com>
-To: Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Marcel Holtmann
-	<marcel@holtmann.org>
-CC: <linux-bluetooth@vger.kernel.org>, <linux-kernel@vger.kernel.org>, George
- Moussalem <george.moussalem@outlook.com>, <linux-arm-msm@vger.kernel.org>
-Subject: [PATCH 3/3] Bluetooth: btqcomipc: take the board's address from the host
-Date: Mon, 12 Oct 2026 01:09:19 +0300
-Message-ID: <20261011220919.1816407-4-me@andrei-z.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261011220919.1816407-1-me@andrei-z.com>
-References: <20260709-ipq5018-bluetooth-v5-4-e476c41f03b8@outlook.com>
- <20261011220919.1816407-1-me@andrei-z.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="aRsPZtzM"
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-48b0584ad71so617447f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 15:39:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1791758396; x=1792363196; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xwhYc9CDw7ZgP6emNisFG66EG4JKlhzFKT9RLmp7nJU=;
+        b=aRsPZtzM/CVizgyW5uQCYGYegHyHSxJeYwd1/FhVlRqINvK+hBr3CqxoH7xfFQli+5
+         dE8GFrQQX/R1ctL0DVZ0B/E2JCuaxOI7u09ahG+0jr0ZPkhM4Uf/rCch41mQ407bp9uQ
+         +MXoyeS+tp/86Tnf3/vGwJhMHvqoaLJBk4b0DeQtfVLRtrg4iEK/yGS/uWfba4iaN/NV
+         5st6YOpfeVGmXSzW28aHmMzWNnImutU7/DScP/VqSSkWNxyendDUeI7U/PGKnatC4Sab
+         0d8i1SQu/xuawj/IzUun+xXldnlN1EhtjrDBhK6S8P6eBbCfoMkbJNwHm1tNTb6DuhNr
+         fL8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791758396; x=1792363196;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xwhYc9CDw7ZgP6emNisFG66EG4JKlhzFKT9RLmp7nJU=;
+        b=GqwnQ6apUHNun8dOiHINHPRbJ3osjTpdptzJpFkQp49lnSV/MHIVQYtJJd6HM6ZLA8
+         oxXnJTN9vkejXKOmVXaIfkAMf0cSDTO6w1K9wGz4rynViMwclY+C3nci95Q5ZfKwTPuH
+         r80I9ZwD2H1Po76rkFsVrG0ETVzfLNq3VnU5pataV9AhpxkkBp+A/1ukfIMTvHF+y2j+
+         qUqMKg+E0FLVRkFTCeGkIVleu6Q9LS/Gwntt/j2Qmpe61W5gCUVAljfs9ZNv5nP2u6iq
+         NPKP0ANjYFySy54AQVHnP09yPb7kaofTE7XbuGmczTQlk9GXtcwvN6dGuIMuv5Awdxs/
+         5EnA==
+X-Forwarded-Encrypted: i=1; AKwUvBwJuqjAHg4o+ar5xahqF3yKp2uzAdi2gipiVEnv1xcBZTI6DsniE8k00zqoj/PwS+GDILLd85l8qA9DwMjr@vger.kernel.org
+X-Gm-Message-State: AFq9FYIUY4qeqcS/6EFZlzkm9NHjwTz50sMgCkvkekwl50yMe/vbJ6x+
+	eeivI79rl5e/L6BnI0vpfXM2sI40vOgI1N67pmYkaMM/V0kC64h4do3KJHAfSAzpPKQ=
+X-Gm-Gg: AYBFou0exju17RJWgiqvK/dVPcmaTD0PYlrEZg9nxwR3IaggtsfItVD0AH/bcAZ5dWO
+	vV7rezKOa1wScvrTZPt/9G5MBKZQuOjlEiEFhGefp/uQOYbRCAB4dKXZqgDvZd3fCL837h6XJw1
+	diqwx1ITnVVeRYTpTSeGIy4qxu0DSzPHe/pVoKYnoaEU1fV8FDS3ASpgxt0ws7gByvhKKDH4rib
+	EzqFhmPxGAfYeZAyjMMd9gNIIX7Q+RKzEEhcUnxw+7ihTmG6D3wn1tZwI9BY+C6y1wslDPmVA6V
+	yomzL0iAcR3JrcnFUHnCw1Fuoh0hWWszgdAF49zrfOMMjAjvATCOLbvtr2/Sp6zEoqW7OYTHXQz
+	glEFiftDo5eeScLXzV0ZVIgxKpguLQHU6DlQLDYqSd8dxIGEMWVks0qrDR2y6xnA9WACdOKJY+5
+	M3pMJBVEjuIFxIyzrL6C5ONJCHOUkpQfGOIt7cKJ4qrwS/Frh8WaVcG4w9kKuG9M7oCb8HkqAwI
+	V8sfso5IR7C4Q==
+X-Received: by 2002:a05:6000:40e0:b0:48c:6a4d:3b67 with SMTP id ffacd0b85a97d-48dbaceb433mr14028801f8f.19.1791758396194;
+        Sun, 11 Oct 2026 15:39:56 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.165.237])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9463a9dsm16723214f8f.6.2026.10.11.15.39.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 11 Oct 2026 15:39:54 -0700 (PDT)
+Message-ID: <5f238c7a-c17e-4127-afad-38eb2cea9c34@linaro.org>
+Date: Sun, 11 Oct 2026 23:39:53 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6) To
- VTJ-MX.corp.irix.systems (2a02:2f04:1:9c24::6)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/8] media: qcom: camss: Add streams API support for
+ CSIPHY
+To: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+ Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+References: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
+ <20260911062213.195007-2-gjorgji.rosikopulos@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260911062213.195007-2-gjorgji.rosikopulos@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The IPQ5018 NVM carries one placeholder address (50:18:00:00:5a:ad) for
-every board, and btqca skips the NVM tag parsing on IPQ5018, so the
-placeholder check that sets HCI_QUIRK_USE_BDADDR_PROPERTY for other QCA
-parts never matches: the controller came up configured with the
-placeholder and, being set up again on every power on, went back to it
-even after an address was set through mgmt.
+On 11/09/2026 07:22, 
+Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com wrote:
+> From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+> 
+> Add the V4L2 subdev streams API to the CSIPHY driver: a passthrough
+> routing table (one VC per stream) and NO_STREAM_MIX routing validation.
+> 
+> enable/disable_streams pad ops track active streams per pad via a
+> per-pad enabled_streams[] bitmask, so that multiple source-pad
+> consumers can share a single propagated sink stream without redundant
+> or colliding propagation to the sensor. The shared D-PHY lanes are
+> enabled once, on the transition from no active streams to at least
+> one, and disabled once all streams have gone idle.
+> 
+> This is opt-in per CSIPHY instance via the new streams_enable resource
+> flag; no platform sets it yet, so CSIPHYs continue to use the legacy
+> non-streams subdev ops unchanged.
+> 
+> Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
++ static const struct v4l2_subdev_core_ops csiphy_core_ops = {
++       .s_power = csiphy_set_power,
+++>>>>>>> media: qcom: camss: Add streams API support for CSIPHY
+   };
 
-Set the quirk in setup, so the controller stays unconfigured until the
-board's address comes from the local-bd-address property or from
-userspace, and the core programs it after each setup.
-
-Assisted-by: LLM
-Signed-off-by: Andrei-Alexandru Bleortu <me@andrei-z.com>
----
- drivers/bluetooth/btqcomipc.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/bluetooth/btqcomipc.c b/drivers/bluetooth/btqcomipc.c
-index 8513c1780..92a0d671e 100644
---- a/drivers/bluetooth/btqcomipc.c
-+++ b/drivers/bluetooth/btqcomipc.c
-@@ -997,9 +997,13 @@ static int btqcomipc_setup(struct hci_dev *hdev)
- 	}
- 
- 	/*
--	 * 7.2 has no NVMEM-backed BD address in the HCI core; the board's
--	 * address is set from userspace through set_bdaddr instead.
-+	 * The NVM carries the same placeholder address for every board, so
-+	 * the controller stays unconfigured until the board's address comes
-+	 * from the local-bd-address property or from userspace, and the core
-+	 * programs it again after each setup.
- 	 */
-+	hci_set_quirk(hdev, HCI_QUIRK_USE_BDADDR_PROPERTY);
+   static const struct v4l2_subdev_video_ops csiphy_video_ops = {
+@@@ -932,17 -981,17 +1133,30 @@@ int msm_csiphy_register_entity(struct c
+   {
+         struct v4l2_subdev *sd = &csiphy->subdev;
+         struct media_pad *pads = csiphy->pads;
+++<<<<<<< HEAD
+  +      struct camss *camss = csiphy->camss;
+  +      struct device *dev = camss->dev;
+  +      int ret;
+  +
+  +      if (camss->legacy_phy)
+  +              v4l2_subdev_init(sd, &csiphy_v4l2_ops_legacy);
+  +      else
+  +              v4l2_subdev_init(sd, &csiphy_v4l2_ops);
+  +
+  +      sd->internal_ops = &csiphy_v4l2_internal_ops;
+++=======
++       struct device *dev = csiphy->camss->dev;
++       bool streams_api = csiphy->res->streams_enable;
++       int ret;
 +
- 	return 0;
- }
- 
-
++       v4l2_subdev_init(sd, streams_api ? &csiphy_streams_v4l2_ops
++                                             : &csiphy_v4l2_ops);
++       sd->internal_ops = streams_api ? &csiphy_streams_internal_ops
++                                       : &csiphy_v4l2_internal_ops;
+++>>>>>>> media: qcom: camss: Add streams API support for CSIPHY
+         sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
++       if (streams_api)
++               sd->flags |= V4L2_SUBDEV_FL_STREAMS;
+         snprintf(sd->name, ARRAY_SIZE(sd->name), "%s%d",
+                  MSM_CSIPHY_NAME, csiphy->id);
+         sd->grp_id = CSIPHY_GRP_ID;
+@@@ -968,22 -1025,16 +1190,35 @@@
+         ret = v4l2_device_register_subdev(v4l2_dev, sd);
+         if (ret < 0) {
+                 dev_err(dev, "Failed to register subdev: %d\n", ret);
+++<<<<<<< HEAD
+  +              goto media_entity_err;
+  +      }
+  +
+  +      if (!IS_ERR(csiphy->phy)) {
+  +              ret = phy_init(csiphy->phy);
+  +              if (ret) {
+  +                      dev_err(dev, "%s init fail %d\n", csiphy->name, 
+ret);
+  +                      v4l2_device_unregister_subdev(sd);
+  +                      goto media_entity_err;
+  +              }
+  +      }
+  +
+  +      return 0;
+  +
+  +media_entity_err:
+  +      media_entity_cleanup(&sd->entity);
+++=======
++               goto err_v4l2_subdev_cleanup;
++       }
++
++       return 0;
++
++ err_v4l2_subdev_cleanup:
++       v4l2_subdev_cleanup(sd);
++ err_media_entity_cleanup:
++       media_entity_cleanup(&sd->entity);
++
+++>>>>>>> media: qcom: camss: Add streams API support for CSIPHY
