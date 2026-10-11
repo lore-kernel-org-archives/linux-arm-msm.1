@@ -1,250 +1,305 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85FDF2BCF4C
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 02:28:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 002B2282F27
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 03:25:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791685719; cv=none; b=CYOO3Fing9F2tj3bAroXya6o/P9AvgdcTNqAcTsbM0193x6ZqHMLrQB7Iju8GuTygZEPfZrIBe96BbKrVo5q07mEXouLlE1rhFodNloD5Vo2fLZ/i6y/AdxcdEucti1OhuIJpPbV6c6tdhumRQlpr5L6Y0NHvyNKNsAA63JHZ7M=
+	t=1791689127; cv=none; b=BniP7zFDLV6s8phidzeS32NsgRdl5PiaacFBfrv4r/5YU0Cghi1R+QB6Qw4T6TluLgz2QDeS2kgk4CUsacrkF6Z1/8cD4p/4pmeVH+bqCgotRIRR4zps6H08C0rZ5SMjrsBvyFlpQDEHfI6ipw1OAnuWre0jYZPEMigVHlmyeEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791685719; c=relaxed/simple;
-	bh=etq7+g2rL94QK0gzoUV5j76lq9AirHyTnHCtlBi3LuI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=piJVHRrieVHcpObUatXwZYLvWNWBUfqEjCGPkGKJQLmmfauzhIftaZDeWqYMKmSCogWuZgsG7tloRqogtLk5VpzL2CBjGMUTE/Ozvfl6h8FfPhJYoHWy+qKvbOCEqslI8dufyOMaN6LtVWkdQE92LO0EpMz0bcgSGvvMrrBlw+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UP9xemUO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NIT+ZxRy; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791689127; c=relaxed/simple;
+	bh=FGRSLqWwJCmAsaZ57DgUjFFzqf8ez1EAmjqtO1uZ8b8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qzYxOL0l8muNo+QZP56WphGGqKsqVzRZET6sRyDlj+CUd58jojIEMRZej3NK2HZZvikAm+L8sReN4u9P1awrasM6W71qFhYWjOSjQ00hZWN3aLZWWKqwFwFC9sUkaSj0R8+sZufRzSI7mNQ0qcy9ghdsLnkHhbczSNaaQsVDalY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MesY5mZI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hMx/wTgQ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UP9xemUO";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NIT+ZxRy"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69B1ovBS1364596
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 02:28:37 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MesY5mZI";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hMx/wTgQ"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69B1qD0S3329837
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 03:25:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=Tsw52ZQ+RZP
-	9IDHZvMkKCCM6Ksyer2YkUUSMBBReSdE=; b=UP9xemUOCj2mnhEUyGRstY/Zymm
-	9oNmKFW07QH2IFaPQawSYIbDusYBPAGb4IVfFf8pkA9IAl/4KOhNiLQcJ0dcQIVN
-	7svRMAFFY1f4YITg/v9c5MxcsSK/9ZPJXy0v67oiJ3LwGEpo5O1yqOwGnYLSuL7T
-	wGmg7hR9iw09ILQ7jGsTAUb/TQ8cvILn2QnKxpGALK76u130TKfn3YpfWNgXAgow
-	W55GklXvYKcHeUFhrkOzMfzfblZPo+60VE5xbUrjP3JGLrWzHt3yYle4HcrD2nAM
-	tBqdE8qDL8g9sDPJqi18P4aETI7l6TilrDn8+AaI5Ov4h6Cc1MOpyb1fsZw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7en9t1av-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=ki8pPIk/6jBLuAEjzjkKNzgj
+	IL2/HgZYij415q9mlfY=; b=MesY5mZIIzXmco6uzhlKDC4Z0qGdWV1oTgbr8Xh2
+	8JmwVJRlMPut8ybRRXJ+mcaF3y7KvzMu9Ws8I/Sk+dvZZqvy9MwAaFgSWMzbPI9w
+	rSJ2qF9YBEx97dGqe7VsWDYlQTuowq0JLmWg8AEznSwnCE5L4Y69eEwb6WzGd9ot
+	1Qe2c3DkWgAi2I4GQUn8yI1/68ksZ5uhEjlOIXII3lrfuh1i+hG9RnTl4mqGfiW2
+	Q6NH2OLO2iXH7cQaavPLyiitcj6K86OtVI6QPVh7tXw1eske/qH5Ev4obLo39JGX
+	3nLdHXsO6AlK7mABTIAx+39V52lYY8t6j2iKIQBQ9OpUUg==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7b2fam5c-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 02:28:36 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-30bcb065bfdso1522725eec.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 19:28:36 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 03:25:25 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-35158d674e1so4468900eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 10 Oct 2026 20:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791685716; x=1792290516; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Tsw52ZQ+RZP9IDHZvMkKCCM6Ksyer2YkUUSMBBReSdE=;
-        b=NIT+ZxRyzUesx+32ZCSINoD115z9ZYhX4WAYcJCH7DdIGoGrv3au/s7RViq0ssIKBS
-         8bM92ZQe/m9Kg7DycUQ6cd6OtTC1Go2Jb8r8/emyLtwvF4CzrIpvCcQDEptdQavvWmA9
-         tD4Eln5AaS8M4Fyib00VRqAH15WfhyKPAJxBjzuAhGAM67i6Coq+91sp5xT0fjAN1N0F
-         jq/GIBi5ITvU3culbmOVSdLczDcceK5+mcEC3BGILFWoUXiOjBahZwkR/4bWsSer9+j1
-         tUqlS+lZzDyt8F5FfaBN0qBsVnc3yZeuuVnkjqCinrXgW/TrqHt/KrmmvwC2V7Q3FOlJ
-         dZYw==
+        d=oss.qualcomm.com; s=google; t=1791689124; x=1792293924; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ki8pPIk/6jBLuAEjzjkKNzgjIL2/HgZYij415q9mlfY=;
+        b=hMx/wTgQW0UoJlqMcEqUdnHlNTQ0oal50ibRaa4OMwSR4zH/tmfDL0HeiGeVnapWyL
+         R/rhbTaGfeJx+OAcmFQAm4QD+6BQkADcIffUyFygxnvaZiSt9wOI4GdwptXki+SDVTLD
+         sIr0IY7+23+LoJk+e3fbmCnlL4E/h2G0iVJm2wzlYp7I7ImS5jAoRVDF9/80HD+5uQjG
+         CmY17Ksdg4xdxyqv3CqP/httJazV7rJIBMI1mL4A/2y5ugexyo2tw45xRuNIVgFAVY98
+         TI+c9ZvEF3bl+QywSV3qzBd7nxLnoMYST5EPrIS1vZrBLrRbraUdePMcIwXjfDPhma3o
+         ypyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791685716; x=1792290516;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Tsw52ZQ+RZP9IDHZvMkKCCM6Ksyer2YkUUSMBBReSdE=;
-        b=S0ygThyuDIn3iS76mZ/4mKRonLfemPHnmclC/lST4SOIYvsCXdEygmzP38Z5c2QZ1D
-         OOg9QiUYskDsN+LEaHAT0sq/K80J3aPkSkawnvF7Q2gOBgJX9y1ySZXeF5wSV3vToDtl
-         Aa70ZMz5kmtpG5LRg++dgd08RewenQyhU1H8Yln+P02kmG87qvmOjJmmN0Q80NcxSczk
-         Y6wUZ3u+Tr8YKkWTK3riHld1nrzzZ0CpPZm8QYVggez727GVxEybjKFi3kLtaIclrDqC
-         l2fG54qVsVsn5aJ8AN+sR8Msmc/akvuqGHRHidCu7d7cP8kBUvKRIkqyAdzCJ5AgQXUI
-         yI/w==
-X-Forwarded-Encrypted: i=1; AKwUvBzb37d3Yx/MPldIHxHqFSb1bERKJMLa02NSOHf1O1ljDv+Pb13Cu3epnFBJIQQTVd/Wl0VjmF58hB3TWXSX@vger.kernel.org
-X-Gm-Message-State: AFq9FYLKEmX088k/X/vnT6Bh3W00LURVuclKcm5cPIIXq3UlFgsPoNsg
-	TmOF2nFxqZpu2t9odah/Lf24/0cvjm/H9Dz3fQTYS23etIbV/FujH+b95SCcPeyNSGSHxk4mU0n
-	pVQEWkm0l8aHT/KvJlJBwGBI5Cw7Hc8mF72heLUnqqboepSoWODHOA6E/7Rxv1ywdZYXe
-X-Gm-Gg: AYBFou2OXr/tiY3K4z6Xq3K4gH4cYwwV4tdMepj4uy3yybUzrdlCiFVzZ1U3bM6WulW
-	eYsEGsEzBy5alWViWynTXqo4RPCVPay7NKUKVj9BxAnyLVj3UyxXV8XdvTmQmJ5MPobBQO3xvoV
-	plt6FxuSbfFMJ2XPDIlml7uHN9jWAxKTgnrTMZWECHJYJvFYJpBqSmrykWBMKM7GdPTprmjBQ05
-	2YbmXb38n3BQIVkRkFZqAsoiP/QaZRUdyHou6yL/xsPucy8e410JDU6zI0Z3ic+hi4jR6iTrUPp
-	HqRnYfib8QUsgVNBM3sv4eaCoXG/XcSZ7GP4pL+8tHSiCWcUmqt/z27tOBSeUTn+snFzKYsvV+Z
-	ErSo7Yb3XlIJwPpFULJibwOCIWO3WwrSRBudQ7+U2ugHpRdrttieaK9w1kdk=
-X-Received: by 2002:a05:7300:c7c6:b0:351:7108:c62 with SMTP id 5a478bee46e88-3537e0f3a99mr7693031eec.23.1791685715916;
-        Sat, 10 Oct 2026 19:28:35 -0700 (PDT)
-X-Received: by 2002:a05:7300:c7c6:b0:351:7108:c62 with SMTP id 5a478bee46e88-3537e0f3a99mr7693008eec.23.1791685715261;
-        Sat, 10 Oct 2026 19:28:35 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537c841648sm22068243eec.3.2026.10.10.19.28.32
+        d=1e100.net; s=20260707; t=1791689124; x=1792293924;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ki8pPIk/6jBLuAEjzjkKNzgjIL2/HgZYij415q9mlfY=;
+        b=Vz5orUZbLNHNh9lKvihRTlJjYe5/TDA32Hgj9LbSxkJ5+SBdLfw7li8lTEHny53WVO
+         R0V3L1JFXch+rElRW6GKDV1W2yRheFf1XLlGWnYwhlZ+oYRCU1OsLNJxjFAj6qitat0v
+         bVTyJjSxlZ9zobYF/eHVUjtxiMIWzIJgd3EMjUq8hbGMT3y9HuzmVddJemXQoW8E2h5b
+         xfxYcIglISJV9rxetIuFk/9NMPXDMeTnc4r87SO98D3EcQgvXF3MWGlX+NF441ljB+AY
+         MRchFRDPgch/HFUon0wPec4sCAsfhQDSSfEyWDhI5QlEC7Lish9hlsWBuuVl3Y0T881V
+         XKKQ==
+X-Forwarded-Encrypted: i=1; AKwUvBypJKlm3XE9D4nL4TRD0twPGmSlxFWDE1RaWCIerrzgQdFOQYoEJJL+DjrRM9HRJWHKqBEcH/BeZlQ5BWES@vger.kernel.org
+X-Gm-Message-State: AFq9FYJgQaj6r3aeiw2Nmst8ocfHfl9Q0Mc+vslRLQ/bumr5TIPqZg7z
+	hs2pCI7WW3WNdoByhtRfcjsFgotJ6WZUpA4tdGVRo8sEFujChia17meGo1jR1Fd518ayyg5guUV
+	6jI0gRdDgIJCPya/o4D+rlT9P1OIXk8lmvOwSY4x7hlkUiaQ/sVr9u0qVtALj1m+NChvG
+X-Gm-Gg: AYBFou3EG7kfZ2T5CzWgBHR9Xl8fYs7kPeF6mpKU0lh//gKQRT3L/Ypjk6rxuw+Jzyh
+	E10XKc2L+/oi7+Zm86qgaSwphHfHaMY0eu7HH9luJZv9D9oOD7t4+F9a0AdAcCoints39jyVaqY
+	fn8k8PvrkIfA0N/PCZgY1s8EWgXMrcPLhvbBUZehEdarxjl3Gyd3rbEc++98Z1MwRuInaFX1yGC
+	1ELQGSUfvXSY9KBuGfxGjKhBzGk8Bce6ctk9IiDaPx+So/CeGaCXN82boZIcXFT6XeynR2bdzTE
+	d+bBNLNr7Ut4FynZDXMiCe/ZqiLkfxBpSuJ3oJQq6+b3Anh0aHb/xwSjSvA8VSfbMMs4n3uE8Hj
+	JNgrBPoFl/QAc82BIL/8CqTq/zFCFAUaDZrAfVdM3qA==
+X-Received: by 2002:a05:7301:140b:b0:352:4f11:8118 with SMTP id 5a478bee46e88-3537e08c6camr8328659eec.40.1791689124097;
+        Sat, 10 Oct 2026 20:25:24 -0700 (PDT)
+X-Received: by 2002:a05:7301:140b:b0:352:4f11:8118 with SMTP id 5a478bee46e88-3537e08c6camr8328612eec.40.1791689123305;
+        Sat, 10 Oct 2026 20:25:23 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537cb68e56sm17840817eec.29.2026.10.10.20.25.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Oct 2026 19:28:35 -0700 (PDT)
+        Sat, 10 Oct 2026 20:25:23 -0700 (PDT)
+Date: Sun, 11 Oct 2026 11:25:15 +0800
 From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
         Konrad Dybcio <konradybcio@kernel.org>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] remoteproc: qcom: pas: Don't fail attach if the remote has crashed
-Date: Sun, 11 Oct 2026 10:28:02 +0800
-Message-ID: <20261011022802.4069489-3-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261011022802.4069489-1-shengchao.guo@oss.qualcomm.com>
-References: <20261011022802.4069489-1-shengchao.guo@oss.qualcomm.com>
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Shivam Rawat <shivrawa@qti.qualcomm.com>
+Subject: Re: [PATCH 3/5] arm64: dts: qcom: nord: Add Adreno 753 GPU and GMU
+ nodes
+Message-ID: <assBm36Joq5pdULw@QCOM-aGQu4IUr3Y>
+References: <20261009-nord-gpu1-v1-0-a06a6c57bde7@oss.qualcomm.com>
+ <20261009-nord-gpu1-v1-3-a06a6c57bde7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Woe+otfv c=1 sm=1 tr=0 ts=6acaf454 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=3PKELjQNWO5EQmssXgYA:9 a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-GUID: ihNPTSSzqBgSU0F09_l5JiMRPjIKF6iY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDAwOSBTYWx0ZWRfX6uStT6zIWc0V
- zsU3fNuGc04v9JOpa4me/EeuDgsS9BTGzPCAZ4ZmFHcK4eH+SGwlZ507xTT5oNsvG5FVK91dkbI
- MFeGkfrpy2GEA5UvRpnp4bsMOAqAYhc+9hP0tfR2FiUu3fMDWTQIGjNMOjA6h0voCPVT7vxXsH1
- N2NeZ0m2pCgSO4if/IUigzItfSsqHlGMfBeCG4uulavrG4PuzYhA7gbPrHrgspCOYGhAabwLCh+
- DgkHQYge8oy6GtyDf6t0WgneAlpVDoU/ccbRV+FE+jtQSYgOwd1M2YC8c6V4DSXAGq33Hc+rxje
- zz7JnL229+5H+pv4PeP96+ikOyGXHlyz/ZpxabhLh5Sc9kSmheL6qzLZUq++t9CzCa5vPaY+mmA
- xkzwzKVq5pmKOgqLtkQk5BO3rY4cP+4IXVymAjY2Taf8Ba7gt0sbF61kF8Ph7xhwomfUWEj8RTK
- vpAvwkpsBrFLgayzR1A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDAwOSBTYWx0ZWRfX6eV2Jn/pfAZ1
- 8FXMyfXiH6EcYWzx0h2tO7uNlF8lBfUy+Tb36//l7zwYaXczlZaHGm8jhoGjyAvDgMJ3qRL0STK
- nalbYF+MYm2wiVAF+VPwjVBQ9qnk1Kc=
-X-Proofpoint-ORIG-GUID: ihNPTSSzqBgSU0F09_l5JiMRPjIKF6iY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261009-nord-gpu1-v1-3-a06a6c57bde7@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDAxMyBTYWx0ZWRfXya07mQXaF4Zs
+ ihV4MSjKXJLW0d8quRzrU9P1lN5kkIk7C/SEqfZ35wQ+8egPzhyqsjHMfS4CKScAcVvZUgjJ+Gb
+ aOVNKMC4c5zB6Cu57BwmmtC8v4E/3YM=
+X-Proofpoint-GUID: g4YGjSkTfQsTDOv60XZRppNcmGt35pei
+X-Authority-Analysis: v=2.4 cv=NddzRGD4 c=1 sm=1 tr=0 ts=6acb01a5 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=BJWcozxxeopv1PEHIoIA:9 a=CjuIK1q_8ugA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDAxMyBTYWx0ZWRfX5mYYb27aTAlw
+ UfUGYuCqsqnPzEbEvV4OZpxM/V5/ow+hfpy6MsVZkh4LyihZE98LbABuDW1CZRAoTziGcZlxZCK
+ NgzTB55FmO16JdfdgxF6Fs8YJzlwwLFZr35q2cl4EAgmKR2v2uotfoX6QgytKXadwSi6eWc6v8T
+ xEqtpI+9sZVn3farYSZuglb29g3iwmuBw1CoCJO2fSNpAFL25PAe+xH6Wk3NzWnW/SEq2kHH9Mv
+ vFsf1JzPiJrJEqyVe71V08utIxAoggmpd7/fCxW/tuiAiCGfd/ePGqlpqDbGfgV7kL2J0vxbk3E
+ jzPwdGO/OVYu4QruPuhSE6mKOFLt0DymgaIFPQVxh7Er7HkXi2mjDXBpxJ4KmIZ1+1vArV3NlmK
+ cOcVDFcDGbquS+iSbD0elNC+F2o0u9FUmtrWKEo9W2WPCa/tm9YDddegCe4vF/PnFkk9O1nsYJO
+ FAbir6OkUGSkVKA7S+A==
+X-Proofpoint-ORIG-GUID: g4YGjSkTfQsTDOv60XZRppNcmGt35pei
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-11_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 priorityscore=1501 phishscore=0 spamscore=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0 clxscore=1015
+ adultscore=0 phishscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610110009
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610110013
 
-When qcom_pas_attach() finds the fatal SMP2P bit already set, it reports
-a crash and then fails the attach. The core unwinds the attach while the
-crash work is queued: rproc_boot() drops the power refcount back to 0,
-and __rproc_attach()/rproc_attach() unprepare the subdevices, clean up
-the resource table and disable the IOMMU. Once rproc_boot() releases
-rproc->lock, the crash handler finds the rproc still RPROC_DETACHED,
-marks it RPROC_CRASHED and runs rproc_boot_recovery() on top of that
-torn-down state:
+On Fri, Oct 09, 2026 at 02:36:37AM +0530, Akhil P Oommen wrote:
+> From: Shivam Rawat <shivrawa@qti.qualcomm.com>
+> 
+> Nord SoC integrates an Adreno 753 GPU as its primary GPU, belonging to
+> the A7xx Gen3 family, along with its Graphics Management Unit (GMU).
+> 
+> Add the GPU and GMU nodes together with their OPP tables. The GPU sits
+> behind adreno_smmu_0 and uses the gen71300 zap shader, while the GMU is
+> clocked and powered from GPUCC.
+> 
+> Unlike previous Adreno SoCs, where the GMU AXI clock comes from the
+> single global clock controller, Nord splits its GCC into four blocks
+> (GCC, SE_GCC, NE_GCC and NW_GCC). The GPU's AXI clock,
+> NW_GCC_HSCNOC_GPU_AXI_CLK, is provided by NW_GCC, so the GMU node
+> references nwgcc directly.
+> 
+> Signed-off-by: Shivam Rawat <shivrawa@qti.qualcomm.com>
+> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+> ---
+>  arch/arm64/boot/dts/qcom/nord-embedded.dtsi | 116 ++++++++++++++++++++++++++++
+>  1 file changed, 116 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/nord-embedded.dtsi b/arch/arm64/boot/dts/qcom/nord-embedded.dtsi
+> index 1ab7d9bc3cfe..4379092b7bf8 100644
+> --- a/arch/arm64/boot/dts/qcom/nord-embedded.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/nord-embedded.dtsi
+> @@ -776,6 +776,122 @@ hscnoc: interconnect@2000000 {
+>  		qcom,bcm-voters = <&apps_bcm_voter>;
+>  	};
+>  
+> +	gpu_0: gpu@3d00000 {
+> +		compatible = "qcom,adreno-43051701", "qcom,adreno";
+> +		reg = <0x0 0x03d00000 0x0 0x40000>,
+> +		      <0x0 0x03d9e000 0x0 0x2000>,
+> +		      <0x0 0x03d61000 0x0 0x800>;
+> +		reg-names = "kgsl_3d0_reg_memory",
+> +			    "cx_mem",
+> +			    "cx_dbgc";
 
- - the subdevices are unprepared a second time by rproc_stop(), so SSR
-   and sysmon notifiers see a duplicate shutdown;
- - qcom_pas_stop() and the subsequent rproc_start() operate on resources
-   that rproc_attach() already released, e.g. iommu_unmap() on a
-   disabled domain for rproc->has_iommu;
- - recovery leaves the rproc RPROC_RUNNING with power == 0. A later
-   "stop" via sysfs takes power to -1 and returns success without
-   stopping anything, so the remote stays running. A following "start"
-   then boots the firmware again on the running remote and fails to
-   re-add the still registered subdevices:
+nord-embedded.dtsi is created to accommodate Nord Embedded (Non-GearVM)
+variant specific resources like clocks, resets, power dmains,
+interconects, PHYs, etc. The common resources like reg, interrupts,
+iommus, etc, should go to nord.dts. Please follow the existing device
+examples to do the split.
 
-  sysfs: cannot create duplicate filename '.../qcom_common.pd-mapper.0'
-  remoteproc remoteproc0: failed to prepare subdevices for adsp: -17
-  remoteproc remoteproc0: Boot failed: -17
+Shawn
 
-A crash found at attach time is no different from one reported by the
-fatal interrupt right after attaching. Factor the crash handling out of
-q6v5_fatal_interrupt() into qcom_q6v5_report_fatal(), which logs the
-SMEM crash reason, clears q6v5.running and reports the crash, and call
-it from qcom_pas_attach() before letting the attach succeed. The core
-completes the attach with balanced bookkeeping, and the crash handler
-then recovers the subsystem through the regular RPROC_ATTACHED ->
-RPROC_CRASHED path.  With running cleared, qcom_q6v5_request_stop() does
-not wait for a stop ack the dead remote cannot send, and handover_issued
-already prevents a spurious handover on stop.
-
-Assisted-by: LLM
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5.c     | 22 +++++++++++++++++-----
- drivers/remoteproc/qcom_q6v5.h     |  1 +
- drivers/remoteproc/qcom_q6v5_pas.c |  9 ++++++---
- 3 files changed, 24 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/remoteproc/qcom_q6v5.c b/drivers/remoteproc/qcom_q6v5.c
-index fe148b4b3775..51b24cbd4336 100644
---- a/drivers/remoteproc/qcom_q6v5.c
-+++ b/drivers/remoteproc/qcom_q6v5.c
-@@ -147,15 +147,18 @@ static irqreturn_t q6v5_wdog_interrupt(int irq, void *data)
- 	return IRQ_HANDLED;
- }
- 
--static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
-+/**
-+ * qcom_q6v5_report_fatal() - report a fatal error of the remote processor
-+ * @q6v5:	reference to qcom_q6v5 context
-+ *
-+ * Log the crash reason published by the remote in SMEM, mark the remote as
-+ * no longer running and report the crash to the remoteproc core.
-+ */
-+void qcom_q6v5_report_fatal(struct qcom_q6v5 *q6v5)
- {
--	struct qcom_q6v5 *q6v5 = data;
- 	size_t len;
- 	char *msg;
- 
--	if (!q6v5->running)
--		return IRQ_HANDLED;
--
- 	msg = qcom_smem_get(QCOM_SMEM_HOST_ANY, q6v5->crash_reason, &len);
- 	if (!IS_ERR(msg) && len > 0 && msg[0])
- 		dev_err(q6v5->dev, "fatal error received: %s\n", msg);
-@@ -164,6 +167,15 @@ static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
- 
- 	q6v5->running = false;
- 	rproc_report_crash(q6v5->rproc, RPROC_FATAL_ERROR);
-+}
-+EXPORT_SYMBOL_GPL(qcom_q6v5_report_fatal);
-+
-+static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
-+{
-+	struct qcom_q6v5 *q6v5 = data;
-+
-+	if (q6v5->running)
-+		qcom_q6v5_report_fatal(q6v5);
- 
- 	return IRQ_HANDLED;
- }
-diff --git a/drivers/remoteproc/qcom_q6v5.h b/drivers/remoteproc/qcom_q6v5.h
-index 8991ff090579..a0507860a21c 100644
---- a/drivers/remoteproc/qcom_q6v5.h
-+++ b/drivers/remoteproc/qcom_q6v5.h
-@@ -56,5 +56,6 @@ int qcom_q6v5_unprepare(struct qcom_q6v5 *q6v5);
- int qcom_q6v5_request_stop(struct qcom_q6v5 *q6v5, struct qcom_sysmon *sysmon);
- int qcom_q6v5_wait_for_start(struct qcom_q6v5 *q6v5, int timeout);
- unsigned long qcom_q6v5_panic(struct qcom_q6v5 *q6v5);
-+void qcom_q6v5_report_fatal(struct qcom_q6v5 *q6v5);
- 
- #endif
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 56179b71fd2a..99f627db6bd3 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -562,10 +562,13 @@ static int qcom_pas_attach(struct rproc *rproc)
- 		goto disable_running;
- 
- 	if (crash_state) {
-+		/*
-+		 * Complete the attach and let the crash handler recover the
-+		 * subsystem from the attached state, as for a crash reported
-+		 * by the fatal interrupt.
-+		 */
- 		dev_err(pas->dev, "Subsystem has crashed before driver probe\n");
--		rproc_report_crash(rproc, RPROC_FATAL_ERROR);
--		ret = -EINVAL;
--		goto disable_running;
-+		qcom_q6v5_report_fatal(&pas->q6v5);
- 	}
- 
- 	return 0;
--- 
-2.43.0
-
+> +
+> +		interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH>;
+> +
+> +		iommus = <&adreno_smmu_0 0 0x0>,
+> +			 <&adreno_smmu_0 1 0x0>;
+> +
+> +		operating-points-v2 = <&gpu_opp_table_0>;
+> +
+> +		qcom,gmu = <&gmu_0>;
+> +		#cooling-cells = <2>;
+> +
+> +		interconnects = <&hscnoc MASTER_GFX3D QCOM_ICC_TAG_ALWAYS
+> +				 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
+> +		interconnect-names = "gfx-mem";
+> +
+> +		status = "disabled";
+> +
+> +		gpu_0_zap_shader: zap-shader {
+> +			memory-region = <&gpu_microcode_mem>;
+> +		};
+> +
+> +		gpu_opp_table_0: opp-table {
+> +			compatible = "operating-points-v2-adreno",
+> +				     "operating-points-v2";
+> +
+> +			opp-468000000 {
+> +				opp-hz = /bits/ 64 <468000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
+> +				opp-peak-kBps = <781250>;
+> +			};
+> +
+> +			opp-625000000 {
+> +				opp-hz = /bits/ 64 <625000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
+> +				opp-peak-kBps = <6075000>;
+> +			};
+> +
+> +			opp-735000000 {
+> +				opp-hz = /bits/ 64 <735000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
+> +				opp-peak-kBps = <8175000>;
+> +			};
+> +
+> +			opp-854000000 {
+> +				opp-hz = /bits/ 64 <854000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_TURBO>;
+> +				opp-peak-kBps = <10687500>;
+> +			};
+> +
+> +			opp-1000000000 {
+> +				opp-hz = /bits/ 64 <1000000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L1>;
+> +				opp-peak-kBps = <12450000>;
+> +			};
+> +		};
+> +	};
+> +
+> +	gmu_0: gmu@3d6a000 {
+> +		compatible = "qcom,adreno-gmu-753.1", "qcom,adreno-gmu";
+> +		reg = <0x0 0x03d6a000 0x0 0x35000>,
+> +		      <0x0 0x03d50000 0x0 0x10000>,
+> +		      <0x0 0x0b2a0000 0x0 0x10000>;
+> +		reg-names = "gmu",
+> +			    "rscc",
+> +			    "gmu_pdc";
+> +
+> +		interrupts = <GIC_SPI 304 IRQ_TYPE_LEVEL_HIGH>,
+> +			     <GIC_SPI 305 IRQ_TYPE_LEVEL_HIGH>;
+> +		interrupt-names = "hfi",
+> +				  "gmu";
+> +
+> +		clocks = <&gpucc GPU_CC_AHB_CLK>,
+> +			 <&gpucc GPU_CC_CX_GMU_CLK>,
+> +			 <&gpucc GPU_CC_CXO_CLK>,
+> +			 <&nwgcc NW_GCC_HSCNOC_GPU_AXI_CLK>,
+> +			 <&gpucc GPU_CC_MEMNOC_GFX_CLK>,
+> +			 <&gpucc GPU_CC_HUB_CX_INT_CLK>;
+> +		clock-names = "ahb",
+> +			      "gmu",
+> +			      "cxo",
+> +			      "axi",
+> +			      "memnoc",
+> +			      "hub";
+> +
+> +		power-domains = <&gpucc GPU_CC_CX_GDSC>,
+> +				<&gpucc GPU_CC_GX_GDSC>;
+> +		power-domain-names = "cx",
+> +				     "gx";
+> +
+> +		iommus = <&adreno_smmu_0 5 0x0>;
+> +
+> +		operating-points-v2 = <&gmu_opp_table_0>;
+> +
+> +		gmu_opp_table_0: opp-table {
+> +			compatible = "operating-points-v2";
+> +
+> +			opp-416666000 {
+> +				opp-hz = /bits/ 64 <416666000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
+> +			};
+> +
+> +			opp-625000000 {
+> +				opp-hz = /bits/ 64 <625000000>;
+> +				opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
+> +			};
+> +		};
+> +	};
+> +
+>  	gpucc: clock-controller@3d90000 {
+>  		compatible = "qcom,nord-gpucc";
+>  		reg = <0x0 0x03d90000 0x0 0x9800>;
+> 
+> -- 
+> 2.55.0
+> 
+> 
