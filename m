@@ -1,213 +1,316 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B298314D34
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:59:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F53A349CE7
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 20:54:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791748789; cv=none; b=cFBoh1IF/tjw5y8Iu3X3lmoWIcnAqzWAxSC43LPLRq6VSwH/ivS9ngFqAFBFsWEMHLBlkMpTC1Ylq4my2IsN08i1f2VA4R4YtTcICyXD8wn7l2wzXC5Cnws3ipKiw865ePzfh74nhkZim2+6JwFRK0zdd3X1QyA2PlDWC2hcUzw=
+	t=1791752083; cv=none; b=I2l+kNSOMyGB2WmTW7DR7ekgq2zRJyuTBSZyCgJyaQRloDakxvPnERKfuNnQhBJg3KZ7CHm9TFJyeqB/mnGF62dlonETqjAvdO9w15jP6u4ViCYW3ZBbms+Eufi36vjifoJ3y39SP3Q13b3PcVRPblPc4RTgrV7A5D93PEnAes0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791748789; c=relaxed/simple;
-	bh=pXI6OlPwMpEo6kmDbz1z2982+JLE5t9Xdu4oOD+wfvg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=OLmmri6Mv5nDHEM1YoY8MdBJJEmdg0F/CNEBluUcy5oYTN2IAfxeX/MMwkzevx+SF/ifjLHA1LIA3xIJCli6dKAPsBAnHE1BnnN6Or2BQ3qypQ/X7A68NhcgqsDfrpkwYYqyiuiUFlpHEMCHcWh4jW/l806ec7d105viaQkaCmc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dH2TRf1n; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dCH8kIPP; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791752083; c=relaxed/simple;
+	bh=YohP8B9omEKNJal7JqSezkCGArULtPbPg4hBO+IwlSs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qizq93IFZNLOvb81j22pd+5HWCf/8VrW0+PhkxAl3u2aj0T3SI+wOIkS/+7kLsjHQNr2JLW4w3MapuF0twv5e9IVrpMbXAV/gsmm1fLbAFN4GMGRnl7xv5EuUqt8W7PaifnV8n/51ZfjcnLfWaD07ll4cXpIedIkuUI+89wFtDg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=pkX4SMZ7; arc=none smtp.client-ip=209.85.222.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dH2TRf1n";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dCH8kIPP"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69BIL2tp3346424
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:59:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=QCffxlhXptHA2fxCamUbUo
-	Ww67cvQ96kdRlJhyvXZ1c=; b=dH2TRf1n9RznsTHS8HIPyqincaWMt8/Y2gwX8H
-	klTNyT6ZKAdpI4N7A8uIbXjEFETXl2QZICS0SRtdbQ/XRuP/k/WonehRr8qfF89G
-	9nZzw+pSsiim5imcT4SCghtXrq4M7eEaxy5WglVETMM6U6vonnmMF43btQUuZSPI
-	NDcaZjKnLCCvaD9eHDvp+EH44iXeKK7B9EbEPzDOukSXG0GzL2FOF1ATA9H9YBO5
-	5VEe/y4cod6MzomvXrEsmKKxvcmhp/BAtvJXvvJVI92J2uUJTCyW3fGhnPAJp980
-	F2jk0aQvvayPHW7Je0GR4E5Lrk8PljXUl2Lo5NV7uaxyQQBw==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7en9ugt6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:59:47 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-91064f6e75bso61141846d6.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 12:59:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="pkX4SMZ7"
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-93e55db58cfso143223185a.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:54:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791748787; x=1792353587; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=QCffxlhXptHA2fxCamUbUoWw67cvQ96kdRlJhyvXZ1c=;
-        b=dCH8kIPPhDBXFPjFYmzSlckZRdVcbFvRJgdtpDq59yK1F1QVZryuK09RAaiZtZcQzA
-         Knzze/yMinEw/7fL4iSkFzM444nVNXH6mPrc+3wZ1/JskP82zdy+p1kyawMjjEmhtp5N
-         ksba77dCovbdEtOwcvg3ozfUHKspaB7prJcoVc9LTDq0KE1B8pcaMQgfdp99BBbC6HWH
-         nqp2MnDveMN27v3T5gxLN3fCAc4omWfmkmP08zdzlye8mjWYHvVg4eATIuSs9uVB5jeV
-         5iNEkbTOXKY35kgsplXY3NwicDr3jK80fdHfhPWb30q0jE8+jjplYRwA1XH4bRiEWlvV
-         2RSw==
+        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1791752079; x=1792356879; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8ezoGfDQtxAvSalgmJqsqkDd7nhdWtwbdJ4Gv/LTkYA=;
+        b=pkX4SMZ7RfgRvlPHIwXzlFsSo/PjC1St2iL6XA6DV4b7A3JttVT2+BCDbRbLtXHE33
+         F/aslCmGxq1cWHk0i+SCuiRvmkquLOKnNVS7EQO1fqRRPudKLHxYGVOCxf1im9i7rFOf
+         47J7jyOOHq3fa8cE1WoYoMjKyOxkSFk8tL7CYQZSfZOEAawHxdMrQ0xwz88K6Ja8a9Xg
+         ylSpn8TLwSoHIVwTgaiSfsYG5wCqvf7ichR1ZtODVdfgeyEIBWwuhQ8Za1W1ijdwtos1
+         fhQX6dVUbFqqjt6ev2pDf/nKePhPzXWz7G4Qx8b0t9iQCua9lhUY4PH/Rom95CCkLO2M
+         Dp9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791748787; x=1792353587;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=QCffxlhXptHA2fxCamUbUoWw67cvQ96kdRlJhyvXZ1c=;
-        b=Bl5rHVaURAikAP3JxWWQZYLYxiN2m6V1SSalVMitRyeAEqadnx6YkpXpXU8o7+KKx2
-         MIqh4Xcf5/ZrGWCHjssJ0mK3S5b5ir4dcLVI4mwqfYWeuA/WhQHeHbqTBJLNuK1uHiqz
-         cyX+g3TpEpD4XnyUUqvrKG838JThs+X0PbbTf8ZZ5EdTkGSfe1N67JqQGBkiIbZBdMyT
-         mFzCxfbqP1CwXpEOpnysFzPcl7QIkqTX4CSgIDP0qTl8LIJnxPnHHkY3mn0qu2o0MyPG
-         effub2wSkINNJ9pi5u6a8QeCMa5aN/6kp77Kjtb5X2FwOEOnOV+SqVucy/U+cjZC6sMU
-         pj8g==
-X-Forwarded-Encrypted: i=1; AKwUvByt/Szcb27yJb+GRr614yVjBsDNI0wlFpxFZxnavbHWH5Q++yQP7pM3r0uCZFrZJA/JadSsmOX4t+zhaoAr@vger.kernel.org
-X-Gm-Message-State: AFq9FYIhc5uepI1eL5gj1Dwpm25npemXtRDyk8mg6sztQYEKbf22xOZt
-	41ZWeEXVgFaRKcTf/jsOh/1casU1SFPeGWyNGK8Rg+lq2HheGlYEgC53K6+S6gRce5Gc28uOaEp
-	Jf52JPypXAJX7XAbKcoEKvu548Z0A+LB2r1tknzk9h+YbtNRt+Tjn5n9EgIMsmNdxIE+t
-X-Gm-Gg: AYBFou3yee636r68TOz7YR/Ua9eJoPfSk1CQqhHVJ54NoIZFtg0WepU+sacGKR45Lge
-	FuKqU12oO0mY/rpmABVDXwhYu2uVKnts6pLQTo1BNS24qheYVBedfkRC279MI1W0DUGRv+aisbx
-	b4A1Bs7lfRune06HN25tj9qQrjtezuLofWbhWecAL5bu5iEl8jIb064REFW+P02vOSQX7sVGC9j
-	iI2Q7mtLyXlKR4qYhaXG8imYahp2BKcb040zBrSu1TP3g3j7WsLVmj+llvM3cO5g020d7fZ6/GL
-	SHcvXOBZVL/JLYGEaaygrwCE4uIgbyqWIXsXXhbTcHxnEuah4Iq0BW5y9ZUQVyqrSOusFJVlwXr
-	Vi+ZZvLpd
-X-Received: by 2002:a05:620a:1707:b0:93e:a7e0:9a66 with SMTP id af79cd13be357-93ebd2253d0mr1364102585a.27.1791748786565;
-        Sun, 11 Oct 2026 12:59:46 -0700 (PDT)
-X-Received: by 2002:a05:620a:1707:b0:93e:a7e0:9a66 with SMTP id af79cd13be357-93ebd2253d0mr1364100285a.27.1791748786012;
-        Sun, 11 Oct 2026 12:59:46 -0700 (PDT)
-Received: from [127.0.1.1] ([188.27.161.193])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18bf21276sm366759315e9.8.2026.10.11.12.59.44
+        d=1e100.net; s=20260707; t=1791752079; x=1792356879;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8ezoGfDQtxAvSalgmJqsqkDd7nhdWtwbdJ4Gv/LTkYA=;
+        b=frOJc8I35JgO/U1WIfsT8s+VmRZD54AkMUIq/VEVf4avPdgokw55G4HApCsCDiiJ9H
+         XmpAx+QJ/hj+Qtl7Vbkb9xmEzi7UuzZJyaTzJgehAWeltDvpeTy67bCs8h5BooMTSIfR
+         piSDz+b1yffnd+xV44t2JeCyyOdrB9LfJt7z0seaoDuSztg2Ua1TjbNwaWqQRj9JJ7ER
+         GgckyixwDYvZCQlGp11o318NjvDOk1E2DvTANzPg5gasoWYL2Y+gKCkUCfQdPInydz46
+         TXb5zzVK/5V6AwE4EoAkyMG/etvoa/0alFkqwzUNMA0I4FQgL6UVrcVH8k1XNuY6qETA
+         PrFw==
+X-Forwarded-Encrypted: i=1; AKwUvBywEPfndWWEoBQ+A/UGjPQJcJIqMAvYBLaAvX4t473W0YBrtRxLP9pSrTP5vtgWdgvyAVkYqMuI3An3S+XU@vger.kernel.org
+X-Gm-Message-State: AFq9FYL//EHjzlczN61rgbvmQK37DoSBY9RYfioZqXPUyDVcUKGhwbAj
+	hhSsMklRvWd8Fm7J8jvI1hqDhrCtUxJ6gVUkR1Z6/9Oqgw/Rmzw+KqVJKaWZ4wgOud4=
+X-Gm-Gg: AYBFou0uYV6rjk3aWWh3aQDrw/U4AL+12ZQ+i0GGeNVPL10oz5NHtkh6KFvmzoM9cGe
+	Uhsvi1Io+b7ch0T/uNj2H1EUMBZj9aMjCbanQK+SCY9GiRGSxJCrVSeWkLbECrPrtdEU57Yukg7
+	TxGz304mV46aVCGiYcUpnYJbOTow0Bjt64h6scwkJmNiSzslx5O6tfuRQiIxv8bSuS5uo1atqvA
+	J/IYI9ySeOfvZKDspn9bEih/u+2JaS1B1+F8yjYas5PBH3UvYuZh2d39DJySUeYEcKh25wQ1kFw
+	vdPGEQsIO2Ojgv9faYshwnycyy6t2gI2LQn3AZpUwR1UYXC9QbE0QCvak+3XZKWIJw6mZxUMiQB
+	ejk05CEI4oC4hIq9IdBmbOTbYxjTELRjuV34V3qhG0RbDxoObreISrz5mYq5ZF4ENVF16ag7+fW
+	9b3S8bghmWo18VU2gFZcke9q5gIFbUe5NqM9Ne3ka2MPEjHRo=
+X-Received: by 2002:a05:620a:4692:b0:93a:2150:ec06 with SMTP id af79cd13be357-93ebd1f29d2mr1341041285a.31.1791752078869;
+        Sun, 11 Oct 2026 13:54:38 -0700 (PDT)
+Received: from armok ([2605:a601:a61d:7a00::c])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93eb986c0e9sm712617085a.20.2026.10.11.13.54.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 12:59:45 -0700 (PDT)
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Sun, 11 Oct 2026 22:59:35 +0300
-Subject: [PATCH] clk: qcom: gcc-eliza: Use retention for PCIe power domains
+        Sun, 11 Oct 2026 13:54:38 -0700 (PDT)
+From: Liviu Nicoara <lnicoara@thinkoid.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Aleksandrs Vinarskis <alex@vinarskis.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: [PATCH v4] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
+Date: Sun, 11 Oct 2026 16:41:25 -0400
+Message-ID: <20261011204125.8357-1-lnicoara@thinkoid.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAKbqy2oC/yXMyw6CMBBG4Vchs3YSSrior2JY1PYHx5hKOoUQC
- e9uxeW3OGcjRRQoXYuNIhZReYcMcyrIPWwYweKzqSqr1pTGMF7ysTw5AY9eHUckhJQr9tbWl84
- 3TXceKPdTxCDr8b71f+t8f8Kl35D2/QvfIOVEfQAAAA==
-X-Change-ID: 20261011-eliza-pcie-gdsc-retention-daa497d5578f
-To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1846;
- i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=pXI6OlPwMpEo6kmDbz1z2982+JLE5t9Xdu4oOD+wfvg=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqy+qvhTh/eEOu4fVtb4hgNEZmNzojZKK4EdPSS
- jzlJPbkzWiJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCasvqrwAKCRAbX0TJAJUV
- VrRND/431MMDHKd/Z09ZznOjj0iswnwhULi7wboTwHE0c632L/uCWPKi5Z09baWOH10R1jyBOgS
- 4ZCrdDz4xLv8OXr0lMR1O6OgnIcFsmgVLy1n774JRAsZ43AztWAPzgyKbFB0AibBS4kZTKCKh4x
- b1bISA//ZBM13xiAKzpgOGKtCfQD+3lstszo37bsW7f/akaI67cz9LQ90sNdhPQpYuq9dQl+W0t
- isBFImlQoRHR+DOzU7Ch1EOa4388KnsRQbyY4zV8cQgIaIzWJ2IB9HvlL402d1onfnYb0QJ7aU+
- 12O2BwS2gMWLGd+ERWApT3cdYcwWxcfVO514WA6vF5Z+QY06TUCyt9JmK/j9A77Er/wpH1/Xd0B
- nddBAO8CeVaNloz4mGDPLd9egyZMwGXtZrbVXnljg2rW/TW65rIYKs18B/jRm5JXqONla563IAw
- 4QkAR35t5Tl+/aoTmKLDnd/pZNXAszzkbLVVg3z3Fl7Tq2oHNiUVIiaOsaTDfzv5Nhl28TiIVT1
- xlhtRaoDFUUt5urHsgFcOkpnsf54ssb884bE18WONpDt3rbfWK0faiAtYIQl0dfiliMdjmUvgFF
- PUQTe6VfMhcGxfAtg00eKNj/5E7ZRO/nYfk5mcObrUhM9x7/hd7LqeTK7HDxFRjBqop3dflPl2N
- ECyVkaaucKf+oOQ==
-X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Authority-Analysis: v=2.4 cv=Woe+otfv c=1 sm=1 tr=0 ts=6acbeab3 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=EiYrS7xXfcF7w+nkr41hpQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=x0TZ4X2153IZKJAi_hAA:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-GUID: 0i894b0uMaDRiEDTcexl4zoQvXiWmMeW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3OSBTYWx0ZWRfX/903Rk/yvPSb
- oOUeWFhFeHGXvUkWz1K5kYMneXNrwk3yPjPqLxsF8nU22udrXI0BlUJEbA0iT30JqlmG6KTCQkQ
- EhknyxRdLc+AnwDIM4HVmbHgEI6b1G6jGuQCtMS8n04Fvq/BqKqmI5fUc2zkNeUjfsgtZQeZnZk
- 5EXAOT+7wSrgd70kf/cY8igadKZBMDRcFRh8qLRG2AhL8+hxbh6wBiPd7DKcgeRM80wabHM/NpZ
- 0TWhqOTL86mMUwCsMIglJM5rOrwJviaURzavYJtW3FFrZMxMZ30yNNxCoO/4jWZBQvFbiopTLCq
- ckJTu0jdU5jSbKxbtq2s6zrzmZJsBhS73VxeH2TUG0CqHoQkQVKyYU42GJGyYZGmYrKpGbmrAwV
- jROFMntaNwVA/tTuFz2S+Z95xeV3a8ZQulnWbtAsz2aQU2ktZOv9XaaxcpL0vSBnGHbRhciKCWP
- PA/CX5nFXXER3bNspLQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3OSBTYWx0ZWRfX5iZAY22tceFA
- uDyztAXTClgPa4RKNy2vBqz+sKZp2wqltu213MynRb2ViCOpUU3hDmjcO4JlV/nRAvN2NKPCZYI
- 0sy3Tsm6VUMG6tAAwirV6kejC3Vaorc=
-X-Proofpoint-ORIG-GUID: 0i894b0uMaDRiEDTcexl4zoQvXiWmMeW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 priorityscore=1501 phishscore=0 spamscore=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610110079
+Content-Transfer-Encoding: 8bit
 
-When resuming from system suspend on Eliza CQS EVK, gcc_pcie_0_gdsc
-gets stuck off when powering back on, preventing the system from resuming.
+Describe the OV02C10 front camera on CCI1 bus 1 at 0x36, fed by MCLK4
+at 19.2 MHz into CSIPHY4 over two D-PHY lanes at 400 MHz, the only
+link frequency the ov02c10 driver offers.
 
-Use retention for all four PCIe GDSCs, as on SM8550, to preserve their
-state across suspend and allow the system to resume.
+The wiring comes from the Windows driver store. CAMF_RES_QRD.bin
+switches a single rail, GPIO 91, before releasing reset on GPIO 237;
+GPIOs 235 and 236 are muxed to aon_cci there, the CCI1 bus 1 pins, not
+rail enables. The sensor's avdd is PM8550 LDO7 at 2.8 V, which the
+firmware leaves on, so no resource file votes for it; the module
+regulates its own dvdd from the rails it is given, and the supply is
+named as on the Inspiron 14 Plus. The CSI PHY file votes LDO1_C at
+1.2 V and LDO2_C at 0.88 V for the PHYs, which is vdda-1p2 and
+vdda-0p9 here, as on the Inspiron 14 Plus. MCLK drive strength is
+2 mA, as CAMP_RES_QRD.bin programs GPIO 100, and tested streaming.
 
-Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
+The module sits upside down in the lid: with both sensor flips on, the
+picture is upright and unmirrored, so rotation is 180.
+
+The white camera indicator on GPIO 110 becomes the sensor's privacy LED,
+so the V4L2 core lights it while the sensor streams and takes it away
+from sysfs; the comment waiting for a "camera on" trigger goes, and
+panic-indicator stays, as on the X13s.
+
 Assisted-by: LLM
-Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
 ---
- drivers/clk/qcom/gcc-eliza.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+v4:
+- Add vreg_l7b_2p8 (PM8550 LDO7, 2.8 V) and put avdd and dvdd on it, as
+  the Inspiron 14 Plus does (Aleksandrs Vinarskis: the schematics show
+  the 2.8 V rail from LDO7B; the dvdd step-down is on the module).
+  Laurentiu Tudor's unposted patch for this board wires the same:
+  https://gitlab.com/Linaro/arm64-laptops/linux/-/commit/d79e44083197b263ee59dc3521a2b16ad2a12bd8
+- Drop the two comments on the rail Windows switches (Aleksandrs).
+- Message: the supplies paragraph, to match.
+Bryan's Reviewed-by and Abel's Tested-by from v3 are not carried: the
+DT gained a rail.
 
-diff --git a/drivers/clk/qcom/gcc-eliza.c b/drivers/clk/qcom/gcc-eliza.c
-index 064771726e9b..21fd93a1f6b2 100644
---- a/drivers/clk/qcom/gcc-eliza.c
-+++ b/drivers/clk/qcom/gcc-eliza.c
-@@ -2715,7 +2715,7 @@ static struct gdsc gcc_pcie_0_gdsc = {
- 	.pd = {
- 		.name = "gcc_pcie_0_gdsc",
- 	},
--	.pwrsts = PWRSTS_OFF_ON,
-+	.pwrsts = PWRSTS_RET_ON,
- 	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
+v3: https://lore.kernel.org/all/20260926122533.8200-1-lnicoara@thinkoid.org/
+v2: https://lore.kernel.org/all/20260926122032.4847-1-lnicoara@thinkoid.org/
+v1: https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.org/
+
+Depends on the x1e80100 camera DT series, v7:
+https://lore.kernel.org/all/20260917-x1e-camss-csi2-phy-dtsi-v7-0-1a63eb35838b@linaro.org/
+and on the CAMSS PHY API series, v20 patches 5/6 and 6/6, which read the
+CAMSS endpoint's data-lanes as 1-based:
+https://lore.kernel.org/all/20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org/
+
+Built and checked (dtbs_check, W=1) on next-20260925 with the DT series
+applied. Run-tested on 7.2.6 with the same board hunks, the CSI2 PHY
+driver v18, the PHY API series v20 and patches 1-4 of the DT series:
+the sensor streams, twice in a row; LDO7 is off while the camera is
+idle and on, with avdd and dvdd as its users, while it streams; the
+privacy LED lights while it streams and goes out after.
+
+Bryan, happy for you to fold this into your next version of the DT
+series if that is easier.
+
+ .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 120 +++++++++++++++++-
+ 1 file changed, 118 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+index ad62350ba670..39d76b9a63f4 100644
+--- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
++++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
+@@ -10,6 +10,8 @@
+ #include <dt-bindings/input/gpio-keys.h>
+ #include <dt-bindings/input/input.h>
+ #include <dt-bindings/leds/common.h>
++#include <dt-bindings/media/video-interfaces.h>
++#include <dt-bindings/media/video-interface-devices.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+ 
+ #include "hamoa.dtsi"
+@@ -46,14 +48,13 @@ leds {
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&cam_indicator_en>;
+ 
+-		led-camera-indicator {
++		privacy_led: led-camera-indicator {
+ 			label = "white:camera-indicator";
+ 			function = LED_FUNCTION_INDICATOR;
+ 			color = <LED_COLOR_ID_WHITE>;
+ 			gpios = <&tlmm 110 GPIO_ACTIVE_HIGH>;
+ 			linux,default-trigger = "none";
+ 			default-state = "off";
+-			/* Reuse as a panic indicator until we get a "camera on" trigger */
+ 			panic-indicator;
+ 		};
+ 	};
+@@ -151,6 +152,20 @@ linux,cma {
+ 		};
+ 	};
+ 
++	vreg_cam_1p8: regulator-cam-1p8 {
++		compatible = "regulator-fixed";
++
++		regulator-name = "VREG_CAM_1P8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++
++		gpio = <&tlmm 91 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_ldo_en>;
++		pinctrl-names = "default";
++	};
++
+ 	vreg_edp_3p3: regulator-edp-3p3 {
+ 		compatible = "regulator-fixed";
+ 
+@@ -436,6 +451,13 @@ vreg_l6b_1p8: ldo6 {
+ 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+ 		};
+ 
++		vreg_l7b_2p8: ldo7 {
++			regulator-name = "vreg_l7b_2p8";
++			regulator-min-microvolt = <2800000>;
++			regulator-max-microvolt = <2800000>;
++			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
++		};
++
+ 		vreg_l8b_3p0: ldo8 {
+ 			regulator-name = "vreg_l8b_3p0";
+ 			regulator-min-microvolt = <3072000>;
+@@ -674,6 +696,76 @@ vreg_l3j_0p8: ldo3 {
+ 	};
  };
  
-@@ -2729,7 +2729,7 @@ static struct gdsc gcc_pcie_0_phy_gdsc = {
- 	.pd = {
- 		.name = "gcc_pcie_0_phy_gdsc",
- 	},
--	.pwrsts = PWRSTS_OFF_ON,
-+	.pwrsts = PWRSTS_RET_ON,
- 	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
++&camss {
++	status = "okay";
++};
++
++&camss_csiphy4_in_port {
++	camss_csiphy4_inep: endpoint {
++		data-lanes = <1 2>;
++		remote-endpoint = <&csiphy4_out_ep>;
++	};
++};
++
++&cci1 {
++	status = "okay";
++};
++
++&cci1_i2c1 {
++	camera@36 {
++		compatible = "ovti,ov02c10";
++		reg = <0x36>;
++
++		reset-gpios = <&tlmm 237 GPIO_ACTIVE_LOW>;
++		pinctrl-0 = <&cam_rgb_default>;
++		pinctrl-names = "default";
++
++		clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
++		assigned-clock-rates = <19200000>;
++
++		orientation = <MEDIA_ORIENTATION_FRONT>;
++		/* upside down in the lid; both sensor flips give an upright, unmirrored image */
++		rotation = <180>;
++
++		leds = <&privacy_led>;
++		led-names = "privacy";
++
++		avdd-supply = <&vreg_l7b_2p8>;
++		dvdd-supply = <&vreg_l7b_2p8>;
++		dovdd-supply = <&vreg_cam_1p8>;
++
++		port {
++			ov02c10_ep: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <400000000>;
++				remote-endpoint = <&csiphy4_in_ep>;
++			};
++		};
++	};
++};
++
++&csiphy4 {
++	vdda-0p9-supply = <&vreg_l2c_0p8>;
++	vdda-1p2-supply = <&vreg_l1c_1p2>;
++
++	status = "okay";
++};
++
++&csiphy4_in_port {
++	csiphy4_in_ep: endpoint {
++		bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++		data-lanes = <1 2>;
++		remote-endpoint = <&ov02c10_ep>;
++	};
++};
++
++&csiphy4_out_port {
++	csiphy4_out_ep: endpoint {
++		remote-endpoint = <&camss_csiphy4_inep>;
++	};
++};
++
+ &gpu {
+ 	status = "okay";
  };
+@@ -1102,6 +1194,30 @@ cam_indicator_en: cam-indicator-en-state {
+ 		bias-disable;
+ 	};
  
-@@ -2743,7 +2743,7 @@ static struct gdsc gcc_pcie_1_gdsc = {
- 	.pd = {
- 		.name = "gcc_pcie_1_gdsc",
- 	},
--	.pwrsts = PWRSTS_OFF_ON,
-+	.pwrsts = PWRSTS_RET_ON,
- 	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
- };
- 
-@@ -2757,7 +2757,7 @@ static struct gdsc gcc_pcie_1_phy_gdsc = {
- 	.pd = {
- 		.name = "gcc_pcie_1_phy_gdsc",
- 	},
--	.pwrsts = PWRSTS_OFF_ON,
-+	.pwrsts = PWRSTS_RET_ON,
- 	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
- };
- 
-
----
-base-commit: becb95e45ef0dda9ffb35156d909d3da7a2789c3
-change-id: 20261011-eliza-pcie-gdsc-retention-daa497d5578f
-
-Best regards,
---  
-Abel Vesa <abel.vesa@oss.qualcomm.com>
-
++	cam_ldo_en: cam-ldo-en-state {
++		pins = "gpio91";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_rgb_default: cam-rgb-default-state {
++		/* 2 mA streams; the sibling X1E boards use 16 */
++		mclk-pins {
++			pins = "gpio100";
++			function = "cam_aon";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		reset-n-pins {
++			pins = "gpio237";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++	};
++
+ 	edp_bl_en: edp-bl-en-state {
+ 		pins = "gpio74";
+ 		function = "gpio";
