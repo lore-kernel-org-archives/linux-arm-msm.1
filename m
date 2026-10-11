@@ -1,326 +1,118 @@
-Received: from mail-08.mail-europe.com (mail-08.mail-europe.com [57.129.93.249])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD9E1368957
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:28:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.129.93.249
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7700C34DCC7;
+	Sun, 11 Oct 2026 18:34:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791743330; cv=none; b=HVwSNdP4V6Kr793ixoMFQFr8ugMZswPNWwt63u4mS0Teb+bnEY6loNjLGcMAhxi2asYTrizYVO/DC6P1pv1y0Eg9NMjbogPsvkI2PkDK1dUARhybhZinVWcK6XLamabfY3DdLQkbBAmKFt9julVkBtQa1S9HVwTam5nzppbh+a4=
+	t=1791743649; cv=none; b=fNylJoB8Z8Rhot7p3ejEaqbytjuHU6gLFbl2MBHheoQ4v++Mi90ZZGvUiHsZVTXz1JvF1fkN/bbMxqNSbk4bK5g7orDgUO2fWmmsNGl0E1k9wGprUgTpEuAWiaRWA4XIF1v1AOsONCS9AwVl9u6tDpuvnUkh7CujoUnVYmHIxtw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791743330; c=relaxed/simple;
-	bh=6KWPx72+CFDP30hTguFnf7/6ovxWOPyRdeWB57p6IOk=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=GD01WekfYCF12aIMwHKz4OTIN/dwn8OxlySW0ZAZylYQCTtiNGHEBSOWs+uU43aafQiJ2xRTkKGJpCL+/Q/751EqNt5H4DCAwwphLl4+o+7I9Ny8E4XD7C1NjEDhy1JTxt2xYQB2hFdqUPkyUf4JDNLguMswDYGNajK5nGNlsd0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com; spf=pass smtp.mailfrom=vinarskis.com; dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b=PrxA09Vw; arc=none smtp.client-ip=57.129.93.249
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
+	s=arc-20240116; t=1791743649; c=relaxed/simple;
+	bh=aZJJfCmjGYU9OS7JP/ue6L1Be0zhi8EqOqVhYtkSXl0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Wwhe1cnVmB4+kgDiXYnr3m34sAeDaGQ6se6zyYAGD67VkOdm0ux+7o8VlroOhcFX6Flv+bG18QCVyqQSvVwHgNW3jEa7WXXRNzWucGlosLQW6IQn4H50Mq43VbmFocXgj/0wIKoO9TroK2cxDrzO4di6F32we0uCLOS3N/eDbIg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=C2r2QALi; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b="PrxA09Vw"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
-	s=protonmail3; t=1791743315; x=1792002515;
-	bh=47Ien8+5jycXxhN8nifC6j89S5IpZIIT4rkjaYPhcwc=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=PrxA09VwuLL8ALC9yg/UD68KWzvHtT5BHFMnh1FfcIaPy1UQlZYM5c/yLND4AoHQE
-	 EvOyvo1fYELPov4SKIk1c1d7URMmpjF2Mfl1xqWUjJz4yOquA/zq2sP8fkZv0RSFyP
-	 Tdk18sJz3kgW4xThg6E/i85YsbevahwM1zvL7meW5zCTfN2Pk6Ib+7ai6qVTU4ucLH
-	 vQNZW9Ywpyi7Eq59q7clvWOSrLlau4YJDuZwvturGjzDFtiKzZ3gN9tnEW12oJ4Hsc
-	 akAGo9PM8lGvehvt47tKlXqea6rKeGp7OTXJuJDUXH2OPT/QFQv1MlPFRVDbPDC2C1
-	 v8qhy0msG9PnA==
-Date: Sun, 11 Oct 2026 18:28:30 +0000
-To: Liviu Nicoara <lnicoara@thinkoid.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-From: Aleksandrs Vinarskis <alex@vinarskis.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Bryan O'Donoghue <bod@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v3] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
-Message-ID: <b53444dd-c273-4d92-9502-046978303d47@vinarskis.com>
-Feedback-ID: 158356072:user:proton
-X-Pm-Message-ID: e4a5dfe10b839fc8e547879355edf715897a40e1
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="C2r2QALi"
+Received: from [IPV6:2003:100:7701:8b01::1815] (p2003010077018b010000000000001815.dip0.t-ipconnect.de [IPv6:2003:100:7701:8b01::1815])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 281535340C95;
+	Sun, 11 Oct 2026 20:33:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1791743638;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Pe4mRI2fg3KsbjQH/Y2yr3HuTMoWYn5p9NihC/CNpb0=;
+	b=C2r2QALiB9DiiJcomq8zym0YOAuedHKMR80lwTX+3o1fUyStCAZTNAohJxRhh0XswduuWA
+	kzo9GMdN7GDOnwL5NKO6wi3Hq9CrJiBvI2QVMwc2fehDlG4DKBbMzPQZqdXXd7UJ61iCzs
+	llqDkLjU24xLq8duG+I3KWm2C5Hv1Ds=
+Message-ID: <4684e46d-01b0-4288-b251-aff6a22d014c@ixit.cz>
+Date: Sun, 11 Oct 2026 20:33:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] remoteproc: qcom: q6v5-mss: Fix memory banks count for
+ SDM660
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ Konrad Dybcio <konradybcio@gmail.com>,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
+References: <20261011-sdm660-mss-banks-count-v1-1-f4eced49b509@minlexx.ru>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20261011-sdm660-mss-banks-count-v1-1-f4eced49b509@minlexx.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
-On 9/26/26 14:25, Liviu Nicoara wrote:
-> Describe the OV02C10 front camera on CCI1 bus 1 at 0x36, fed by MCLK4
-> at 19.2 MHz into CSIPHY4 over two D-PHY lanes at 400 MHz, the only
-> link frequency the ov02c10 driver offers.
->
-> The wiring comes from the Windows driver store. CAMF_RES_QRD.bin
-> switches a single rail, GPIO 91, before releasing reset on GPIO 237;
-> GPIOs 235 and 236 are muxed to aon_cci there, the CCI1 bus 1 pins, not
-> rail enables. No camera resource file votes a PMIC rail for the
-> sensor, so avdd and dvdd are left out and fall to dummy regulators.
-> The CSI PHY file votes LDO1_C at 1.2 V and LDO2_C at 0.88 V for the
-> PHYs, which is vdda-1p2 and vdda-0p9 here, as on the Inspiron 14 Plus.
-> MCLK drive strength is 2 mA, as CAMP_RES_QRD.bin programs GPIO 100,
-> and tested streaming.
->
-> The module sits upside down in the lid: with both sensor flips on, the
-> picture is upright and unmirrored, so rotation is 180.
->
-> The white camera indicator on GPIO 110 becomes the sensor's privacy LED,
-> so the V4L2 core lights it while the sensor streams and takes it away
-> from sysfs; the comment waiting for a "camera on" trigger goes, and
-> panic-indicator stays, as on the X13s.
->
-> Assisted-by: LLM
-> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
+On 11/10/2026 14:56, Alexey Minnekhanov wrote:
+> As per downstream driver [1], SDM660's MSS version QDSP6v62 1.5 has 29
+> banks, not 28. Leaving something unpowered sounds bad and can potentially
+> cause unexpected crashes. This was missed during addition of the initial
+> support for SDM660 modem remoteproc, fix it.
+> 
+> [1] https://git.codelinaro.org/clo/la/kernel/msm-4.4/-/blob/
+>      LA.UM.7.2.c25-11600-sdm660.0/drivers/soc/qcom/pil-q6v5.c#L508
+> 
+> Fixes: 10b6fec2c8c99 ("remoteproc: qcom: q6v5-mss: Add support for SDM630/636/660")
+> Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
 > ---
-
-Great to see a follow up!
-
-The initial patch for camera from Laurentiu Tudor that Abel was referring t=
-o
-was never submitted upstream, as it depends on CAMSS PHY and DT camera
-series which are trying to find their way upstream for over a year now.
-
-For reference, it can be found here:
-https://gitlab.com/Linaro/arm64-laptops/linux/-/commit/d79e44083197b263ee59=
-dc3521a2b16ad2a12bd8
-
-Either way very nice to see someone following up to have it upstreamed.
-
-
-> v3: add the Signed-off-by missing from v2; no other change.
->
-> v2:
-> - Drop the dependency paragraph from the commit message (Abel).
-> - Say in the message that panic-indicator stays, as on the X13s.
-> No change to the DT.
->
-> v2: https://lore.kernel.org/all/20260926122032.4847-1-lnicoara@thinkoid.o=
-rg/
-> v1: https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.=
-org/
->
-> Depends on the x1e80100 camera DT series, v7:
-> https://lore.kernel.org/all/20260917-x1e-camss-csi2-phy-dtsi-v7-0-1a63eb3=
-5838b@linaro.org/
-> and on the CAMSS PHY API series, v20 patches 5/6 and 6/6, which read the
-> CAMSS endpoint's data-lanes as 1-based:
-> https://lore.kernel.org/all/20260918-b4-linux-next-25-03-13-dtsi-x1e80100=
--camss-v20-0-dc244e124e71@linaro.org/
->
-> Built and checked (dtbs_check, W=3D1) on next-20260925 with the DT series
-> applied. Run-tested on 7.2.6 with the same board hunks, the CSI2 PHY
-> driver v18, the PHY API series v20 and patches 1-4 of the DT series:
-> the sensor streams at 30 fps through libcamera's software ISP, and the
-> privacy LED lights while it streams and goes out after.
->
-> Bryan, happy for you to fold this into your next version of the DT
-> series if that is easier.
->
->   .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 120 +++++++++++++++++-
->   1 file changed, 118 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch=
-/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-> index ad62350ba670..73f06fdcd138 100644
-> --- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-> +++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-> @@ -10,6 +10,8 @@
->   #include <dt-bindings/input/gpio-keys.h>
->   #include <dt-bindings/input/input.h>
->   #include <dt-bindings/leds/common.h>
-> +#include <dt-bindings/media/video-interfaces.h>
-> +#include <dt-bindings/media/video-interface-devices.h>
->   #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
->  =20
->   #include "hamoa.dtsi"
-> @@ -46,14 +48,13 @@ leds {
->   =09=09pinctrl-names =3D "default";
->   =09=09pinctrl-0 =3D <&cam_indicator_en>;
->  =20
-> -=09=09led-camera-indicator {
-> +=09=09privacy_led: led-camera-indicator {
->   =09=09=09label =3D "white:camera-indicator";
->   =09=09=09function =3D LED_FUNCTION_INDICATOR;
->   =09=09=09color =3D <LED_COLOR_ID_WHITE>;
->   =09=09=09gpios =3D <&tlmm 110 GPIO_ACTIVE_HIGH>;
->   =09=09=09linux,default-trigger =3D "none";
->   =09=09=09default-state =3D "off";
-> -=09=09=09/* Reuse as a panic indicator until we get a "camera on" trigge=
-r */
->   =09=09=09panic-indicator;
->   =09=09};
->   =09};
-> @@ -151,6 +152,25 @@ linux,cma {
->   =09=09};
->   =09};
->  =20
-> +=09/*
-> +=09 * The one rail Windows switches for the front camera
-> +=09 * (CAMF_RES_QRD.bin: TLMM 91 high before reset release), the 1.8 V
-> +=09 * LDO enable on the sibling thena boards.
-> +=09 */
-
-Just an FYI: CAMF_RES_QRD.bin is an AeoB file. Some time ago I made a=20
-repo to
-keep a list of already de-compiled files for other developers to use,=20
-might come
-handy. Here is one for Dell XPS 13 9345' front camera:
-
-https://github.com/alexVinarskis/qcom-aeob-dumps/blob/master/dell-xps-9345/=
-CAMF_RES_QRD.json#L245-L257
-
-IMO this comment can be dropped.
-
-> +=09vreg_cam_1p8: regulator-cam-1p8 {
-> +=09=09compatible =3D "regulator-fixed";
-> +
-> +=09=09regulator-name =3D "VREG_CAM_1P8";
-> +=09=09regulator-min-microvolt =3D <1800000>;
-> +=09=09regulator-max-microvolt =3D <1800000>;
-> +
-> +=09=09gpio =3D <&tlmm 91 GPIO_ACTIVE_HIGH>;
-> +=09=09enable-active-high;
-> +
-> +=09=09pinctrl-0 =3D <&cam_ldo_en>;
-> +=09=09pinctrl-names =3D "default";
-> +=09};
-> +
->   =09vreg_edp_3p3: regulator-edp-3p3 {
->   =09=09compatible =3D "regulator-fixed";
->  =20
-> @@ -674,6 +694,78 @@ vreg_l3j_0p8: ldo3 {
->   =09};
->   };
->  =20
-> +&camss {
-> +=09status =3D "okay";
-> +};
-> +
-> +&camss_csiphy4_in_port {
-> +=09camss_csiphy4_inep: endpoint {
-> +=09=09data-lanes =3D <1 2>;
-> +=09=09remote-endpoint =3D <&csiphy4_out_ep>;
-> +=09};
-> +};
-> +
-> +&cci1 {
-> +=09status =3D "okay";
-> +};
-> +
-> +&cci1_i2c1 {
-> +=09camera@36 {
-> +=09=09compatible =3D "ovti,ov02c10";
-> +=09=09reg =3D <0x36>;
-> +
-> +=09=09reset-gpios =3D <&tlmm 237 GPIO_ACTIVE_LOW>;
-> +=09=09pinctrl-0 =3D <&cam_rgb_default>;
-> +=09=09pinctrl-names =3D "default";
-> +
-> +=09=09clocks =3D <&camcc CAM_CC_MCLK4_CLK>;
-> +=09=09assigned-clocks =3D <&camcc CAM_CC_MCLK4_CLK>;
-> +=09=09assigned-clock-rates =3D <19200000>;
-> +
-> +=09=09orientation =3D <MEDIA_ORIENTATION_FRONT>;
-> +=09=09/* upside down in the lid; both sensor flips give an upright, unmi=
-rrored image */
-> +=09=09rotation =3D <180>;
-> +
-> +=09=09leds =3D <&privacy_led>;
-> +=09=09led-names =3D "privacy";
-> +
-> +=09=09/*
-> +=09=09 * Windows switches no rail for avdd or dvdd, only GPIO 91; they
-> +=09=09 * are left to dummy regulators rather than invented.
-> +=09=09 */
-> +=09=09dovdd-supply =3D <&vreg_cam_1p8>;
-
-Windows may only be switching one rail, however there in fact a 2v8 rail=20
-provided by LDO 7B.
-You can find it in:
-* Tudor's patch linked above
-* Device's schematics
-
-I would recommend to add it.
-
-Regards,
-Alex
-
-> +
-> +=09=09port {
-> +=09=09=09ov02c10_ep: endpoint {
-> +=09=09=09=09data-lanes =3D <1 2>;
-> +=09=09=09=09link-frequencies =3D /bits/ 64 <400000000>;
-> +=09=09=09=09remote-endpoint =3D <&csiphy4_in_ep>;
-> +=09=09=09};
-> +=09=09};
-> +=09};
-> +};
-> +
-> +&csiphy4 {
-> +=09vdda-0p9-supply =3D <&vreg_l2c_0p8>;
-> +=09vdda-1p2-supply =3D <&vreg_l1c_1p2>;
-> +
-> +=09status =3D "okay";
-> +};
-> +
-> +&csiphy4_in_port {
-> +=09csiphy4_in_ep: endpoint {
-> +=09=09bus-type =3D <MEDIA_BUS_TYPE_CSI2_DPHY>;
-> +=09=09data-lanes =3D <1 2>;
-> +=09=09remote-endpoint =3D <&ov02c10_ep>;
-> +=09};
-> +};
-> +
-> +&csiphy4_out_port {
-> +=09csiphy4_out_ep: endpoint {
-> +=09=09remote-endpoint =3D <&camss_csiphy4_inep>;
-> +=09};
-> +};
-> +
->   &gpu {
->   =09status =3D "okay";
->   };
-> @@ -1102,6 +1194,30 @@ cam_indicator_en: cam-indicator-en-state {
->   =09=09bias-disable;
->   =09};
->  =20
-> +=09cam_ldo_en: cam-ldo-en-state {
-> +=09=09pins =3D "gpio91";
-> +=09=09function =3D "gpio";
-> +=09=09drive-strength =3D <2>;
-> +=09=09bias-disable;
-> +=09};
-> +
-> +=09cam_rgb_default: cam-rgb-default-state {
-> +=09=09/* 2 mA streams; the sibling X1E boards use 16 */
-> +=09=09mclk-pins {
-> +=09=09=09pins =3D "gpio100";
-> +=09=09=09function =3D "cam_aon";
-> +=09=09=09drive-strength =3D <2>;
-> +=09=09=09bias-disable;
-> +=09=09};
-> +
-> +=09=09reset-n-pins {
-> +=09=09=09pins =3D "gpio237";
-> +=09=09=09function =3D "gpio";
-> +=09=09=09drive-strength =3D <2>;
-> +=09=09=09bias-disable;
-> +=09=09};
-> +=09};
-> +
->   =09edp_bl_en: edp-bl-en-state {
->   =09=09pins =3D "gpio74";
->   =09=09function =3D "gpio";
->
-> base-commit: f5f84daefcd92d7a630066635ecea1433ed5eac7
-> prerequisite-patch-id: a7fbea14628b62a8de096dea420473b283010aba
-> prerequisite-patch-id: 270d82b4c1760f1ec0a64a1b56c68ce26e6ae3b1
-> prerequisite-patch-id: a12186bafac9b287c19fd719aeceb8ff1372dfbf
-> prerequisite-patch-id: 4bc923fa59ee4c1ff68e64497f11e937c0ab3918
-> prerequisite-patch-id: 4d000086386a3b344b1d6d345ab93d9b2b569615
-> prerequisite-patch-id: 8cde6fd860c857dd7f3efce25970c88c783193b3
-> prerequisite-patch-id: 1f22ff7fc93d0135e8759d45955bf998b037e11e
-> prerequisite-patch-id: edb32e32f2b6be0b93f66d8da460c9f9de0c52e2
-> prerequisite-patch-id: 09444936808e801a58c83356c9ae95415bacc83a
-> prerequisite-patch-id: 348caa9cd0d1d70f181a47b40e2d75e8b25b5938
-> prerequisite-patch-id: 1c4e4c457d8f95d8f5aaa2d93976c374b8282bf0
-> prerequisite-patch-id: deedbed2643ca8a0f26bd87175d787d2f0c87417
-
+>   drivers/remoteproc/qcom_q6v5_mss.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+Reviewed-by: David Heidelberg <david@ixit.cz>
