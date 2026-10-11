@@ -1,79 +1,95 @@
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F53A349CE7
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 20:54:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 707653D348C
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 21:48:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791752083; cv=none; b=I2l+kNSOMyGB2WmTW7DR7ekgq2zRJyuTBSZyCgJyaQRloDakxvPnERKfuNnQhBJg3KZ7CHm9TFJyeqB/mnGF62dlonETqjAvdO9w15jP6u4ViCYW3ZBbms+Eufi36vjifoJ3y39SP3Q13b3PcVRPblPc4RTgrV7A5D93PEnAes0=
+	t=1791755317; cv=none; b=nDiSlYb7ITaXsqEcYloN8irOXXct9TpaZft/JXe75+X9p3P+G57/arL4GJcpVklc1bTB7ieHrUmx1Y5jst3jqm6zQjktEYqI087CCt/Vh0r9DwjPetqAS1GlHpsW6m9NtD0gKsW+qaj+T/Bg/fFnyH9q8Ux+MH9DXYmuYbX50bA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791752083; c=relaxed/simple;
-	bh=YohP8B9omEKNJal7JqSezkCGArULtPbPg4hBO+IwlSs=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qizq93IFZNLOvb81j22pd+5HWCf/8VrW0+PhkxAl3u2aj0T3SI+wOIkS/+7kLsjHQNr2JLW4w3MapuF0twv5e9IVrpMbXAV/gsmm1fLbAFN4GMGRnl7xv5EuUqt8W7PaifnV8n/51ZfjcnLfWaD07ll4cXpIedIkuUI+89wFtDg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=pkX4SMZ7; arc=none smtp.client-ip=209.85.222.174
+	s=arc-20240116; t=1791755317; c=relaxed/simple;
+	bh=qL56l/74i7UPnkj0GLxOV/StLiKn6Ktn+Ot7xproics=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=fSIulsNsmlqj0gwrf9azbNLIGjmjyuaAlrv9LMW+nxa/FBt3Heqz5psC+t6YRWuLXC52vQrFYKBx6qx6+sDVVK8EsZt9wphO/ZQ9TBFrQPdHKkHcxhp5PVKPtXe5y8UVQNEOR5YipOTgv9yXLKowbX/9MhC015BkKV8sWZuYbJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=x5bDV2lD; arc=none smtp.client-ip=209.85.160.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="pkX4SMZ7"
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-93e55db58cfso143223185a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 13:54:39 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="x5bDV2lD"
+Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-5338c1197easo10462851cf.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 14:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1791752079; x=1792356879; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8ezoGfDQtxAvSalgmJqsqkDd7nhdWtwbdJ4Gv/LTkYA=;
-        b=pkX4SMZ7RfgRvlPHIwXzlFsSo/PjC1St2iL6XA6DV4b7A3JttVT2+BCDbRbLtXHE33
-         F/aslCmGxq1cWHk0i+SCuiRvmkquLOKnNVS7EQO1fqRRPudKLHxYGVOCxf1im9i7rFOf
-         47J7jyOOHq3fa8cE1WoYoMjKyOxkSFk8tL7CYQZSfZOEAawHxdMrQ0xwz88K6Ja8a9Xg
-         ylSpn8TLwSoHIVwTgaiSfsYG5wCqvf7ichR1ZtODVdfgeyEIBWwuhQ8Za1W1ijdwtos1
-         fhQX6dVUbFqqjt6ev2pDf/nKePhPzXWz7G4Qx8b0t9iQCua9lhUY4PH/Rom95CCkLO2M
-         Dp9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791752079; x=1792356879;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1791755312; x=1792360112; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8ezoGfDQtxAvSalgmJqsqkDd7nhdWtwbdJ4Gv/LTkYA=;
-        b=frOJc8I35JgO/U1WIfsT8s+VmRZD54AkMUIq/VEVf4avPdgokw55G4HApCsCDiiJ9H
-         XmpAx+QJ/hj+Qtl7Vbkb9xmEzi7UuzZJyaTzJgehAWeltDvpeTy67bCs8h5BooMTSIfR
-         piSDz+b1yffnd+xV44t2JeCyyOdrB9LfJt7z0seaoDuSztg2Ua1TjbNwaWqQRj9JJ7ER
-         GgckyixwDYvZCQlGp11o318NjvDOk1E2DvTANzPg5gasoWYL2Y+gKCkUCfQdPInydz46
-         TXb5zzVK/5V6AwE4EoAkyMG/etvoa/0alFkqwzUNMA0I4FQgL6UVrcVH8k1XNuY6qETA
-         PrFw==
-X-Forwarded-Encrypted: i=1; AKwUvBywEPfndWWEoBQ+A/UGjPQJcJIqMAvYBLaAvX4t473W0YBrtRxLP9pSrTP5vtgWdgvyAVkYqMuI3An3S+XU@vger.kernel.org
-X-Gm-Message-State: AFq9FYL//EHjzlczN61rgbvmQK37DoSBY9RYfioZqXPUyDVcUKGhwbAj
-	hhSsMklRvWd8Fm7J8jvI1hqDhrCtUxJ6gVUkR1Z6/9Oqgw/Rmzw+KqVJKaWZ4wgOud4=
-X-Gm-Gg: AYBFou0uYV6rjk3aWWh3aQDrw/U4AL+12ZQ+i0GGeNVPL10oz5NHtkh6KFvmzoM9cGe
-	Uhsvi1Io+b7ch0T/uNj2H1EUMBZj9aMjCbanQK+SCY9GiRGSxJCrVSeWkLbECrPrtdEU57Yukg7
-	TxGz304mV46aVCGiYcUpnYJbOTow0Bjt64h6scwkJmNiSzslx5O6tfuRQiIxv8bSuS5uo1atqvA
-	J/IYI9ySeOfvZKDspn9bEih/u+2JaS1B1+F8yjYas5PBH3UvYuZh2d39DJySUeYEcKh25wQ1kFw
-	vdPGEQsIO2Ojgv9faYshwnycyy6t2gI2LQn3AZpUwR1UYXC9QbE0QCvak+3XZKWIJw6mZxUMiQB
-	ejk05CEI4oC4hIq9IdBmbOTbYxjTELRjuV34V3qhG0RbDxoObreISrz5mYq5ZF4ENVF16ag7+fW
-	9b3S8bghmWo18VU2gFZcke9q5gIFbUe5NqM9Ne3ka2MPEjHRo=
-X-Received: by 2002:a05:620a:4692:b0:93a:2150:ec06 with SMTP id af79cd13be357-93ebd1f29d2mr1341041285a.31.1791752078869;
-        Sun, 11 Oct 2026 13:54:38 -0700 (PDT)
+        bh=UFJLfz+4sRUNEqtKCFfthYjnWFBYCE3On80t62/yc6w=;
+        b=x5bDV2lDtBrgXaC5lmeZz/tTzTvLRxaUk9m1Qh5HPjizFera7HiyiVdhHLUcDodM/F
+         Ao8tUXFgbGUrsI1OYeKmTpr2JFFFOEz2RE7BCdEGnH11vsMc317Jy2e6iAxeHK5DKgge
+         mxmvgpLNL69TvCQ/us3UJvs48BRxuYACVQwLtNBw64o58nFZFZdqGtMB4Q357VWWLHRr
+         wgDkgAmpBtGeo4lJQsJXhVUy/R7bhkwt3Bx22evvRy+JrXf6tjjygovfs+BmI59wXvXp
+         RoshgizhcOwjBVqFlQSVsPieBLo/z4MNrWnitXu7qFURjPSclYaG1XLVInxNlOURd3Ld
+         BqgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791755312; x=1792360112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=UFJLfz+4sRUNEqtKCFfthYjnWFBYCE3On80t62/yc6w=;
+        b=Kii3KPvKSucnsvit26zBfE6hcuhjtYBcPORIDpom72drVNPn9TKryCgSf86Q+UOs1h
+         PjtBpfmVtEUGTPZYyEc6ug6IClU4S6mF6ts3HibcLvlgi8cNm4QCFVXqbKJnLmGDLzI0
+         eq6lV20VYfFNbCWFP9j2oZUBEfHqh5XYFGpfyrZ/05wqXaxh9asJ0Jvav1YNSwfXMs8i
+         R78RsygHDGSoDvlISh2BQJo5H/JZNaiVZ5wY0XU1Q1XPdR3ZxNXJhh72DDjYgWzVMJC5
+         QJnI9aqlpH8UGOABEXxwAt56yxB/5DfwexrVi+VDUCaZ0JcoRruptHPpJar61khtOQ3k
+         XWxg==
+X-Gm-Message-State: AFq9FYIANh1ifBCnXkn/XmmofZD9mmi1M0DbYzPG2Pzzi8QmpvHAtGSd
+	Gfv5edqw0NwfyEhznIXofpIsOxw7TWkI2DzhsyxV5hPRUOqkG7wiBsbdjDmppNMx3Me2lt3OkvK
+	qLCVHRTMATg==
+X-Gm-Gg: AYBFou0emiMRIElcHdpijcuJdBC5Uvl23gnMuEUAokQ+0W4JuNmzQteHelFfMevfGXf
+	u1e2nivCsDYVfs/3lyBumVKXGfqJy5A2imfI8c3HQaeUlf0jzT+dIBS2Nv/wGUJb9A3n2BkPdPr
+	LPOa0Ym3YCFwYVwmXQnKXwz5kSkQoPWEiJrTEqXPMlfeBoXgsRjkVHgCpdE9ntyMFjdvSnCvm5U
+	oCqz+Mjg2X0C1SNvoo5tiQ6clnTX8lcMKpDz8QQ4IOK+/NVTf6asGzgvZdcGEzzZigcMowEYl+5
+	Z/Ba+WMhmKY3tzgw3mghelauI9wqBg+6bdhNv1oA9KI9JS6j2idJcAvrGVL62BHABvETGmX5lXv
+	ZCUQbVhFasWwqCKZW/Wci133YvSV+1/HsRBaZBtp0Evb4HdlqUdbDOqf7xr60lS+ksJE2Nn39HP
+	9SXhQJUG86gcj5llIuqc+qLdRO4ssLxyvmfP4xtMxENVHwI0I=
+X-Received: by 2002:a05:622a:144c:b0:533:3bf7:49f0 with SMTP id d75a77b69052e-5359fa8cf25mr138217211cf.25.1791755311784;
+        Sun, 11 Oct 2026 14:48:31 -0700 (PDT)
 Received: from armok ([2605:a601:a61d:7a00::c])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93eb986c0e9sm712617085a.20.2026.10.11.13.54.38
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5359b7ecccdsm65857371cf.30.2026.10.11.14.48.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2026 13:54:38 -0700 (PDT)
+        Sun, 11 Oct 2026 14:48:31 -0700 (PDT)
 From: Liviu Nicoara <lnicoara@thinkoid.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
+To: Aleksandrs Vinarskis <alex@vinarskis.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Kees Cook <kees@kernel.org>,
+	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Aleksandrs Vinarskis <alex@vinarskis.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: [PATCH v4] arm64: dts: qcom: x1e80100-dell-xps13-9345: add the front camera
-Date: Sun, 11 Oct 2026 16:41:25 -0400
-Message-ID: <20261011204125.8357-1-lnicoara@thinkoid.org>
+	platform-driver-x86@vger.kernel.org,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Tobias Heider <tobias.heider@canonical.com>,
+	Val Packett <val@packett.cool>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Stephan Gerhold <stephan.gerhold@linaro.org>,
+	linux-hardening@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v6 0/3] Introduce EC driver for Snapdragon X1E based Dell XPS 13 9345
+Date: Sun, 11 Oct 2026 17:35:28 -0400
+Message-ID: <20261011213528.13207-1-lnicoara@thinkoid.org>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261011-dell-xps-9345-ec-v6-0-2a66a364fe70@vinarskis.com>
+References: <20261011-dell-xps-9345-ec-v6-0-2a66a364fe70@vinarskis.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -82,235 +98,42 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Describe the OV02C10 front camera on CCI1 bus 1 at 0x36, fed by MCLK4
-at 19.2 MHz into CSIPHY4 over two D-PHY lanes at 400 MHz, the only
-link frequency the ov02c10 driver offers.
+On Sun, 11 Oct 2026 19:50:07 +0200, Aleksandrs Vinarskis wrote:
+> This series adds Embedded Controller (EC) driver for Dell XPS 13 9345.
+> While EC appears to control most of device's peripherals, particular
+> driver addresses power and thermal managment issues.
 
-The wiring comes from the Windows driver store. CAMF_RES_QRD.bin
-switches a single rail, GPIO 91, before releasing reset on GPIO 237;
-GPIOs 235 and 236 are muxed to aon_cci there, the CCI1 bus 1 pins, not
-rail enables. The sensor's avdd is PM8550 LDO7 at 2.8 V, which the
-firmware leaves on, so no resource file votes for it; the module
-regulates its own dvdd from the rails it is given, and the supply is
-named as on the Inspiron 14 Plus. The CSI PHY file votes LDO1_C at
-1.2 V and LDO2_C at 0.88 V for the PHYs, which is vdda-1p2 and
-vdda-0p9 here, as on the Inspiron 14 Plus. MCLK drive strength is
-2 mA, as CAMP_RES_QRD.bin programs GPIO 100, and tested streaming.
+Tested v6 on a second XPS 13 9345 (BIOS 2.14.0), on 7.2.6 with the
+PMIC5 Gen3 ADC and ADC_TM drivers and the board thermal zones [1]
+backported. The driver probes, gets all seven channels and reports to
+the EC without an error. Two observations from this unit:
 
-The module sits upside down in the lid: with both sensor flips on, the
-picture is upright and unmirrored, so rotation is 180.
+1. The two GPIO thermistor channels. Here AMUX3_GPIO (0x14c,
+   lpddr5_therm) reads the top of the conversion table, ~130 C, from
+   boot on, and AMUX4_GPIO (0x14d, usb_charger_left_therm) does not
+   move when a charger warms the left port. AMUX2_GPIO (0x14b) does,
+   1.6 C in three minutes, and AMUX1_GPIO (0x14a) reads a plausible
+   board temperature. Windows' ADC1.bin puts SYS_THERM1/2 on
+   0x14a/0x14b, and hamoa-pmics.dtsi in next defines those two. The
+   patch configures no PMIC GPIO for AMUX3/4, where mainline sets
+   pm8550 gpio3 and gpio4 for AMUX1/2; so either the two thermistors
+   sit on 0x14a/0x14b on this board, or AMUX3/4 want the pin
+   configuration. As it stands the EC is told the memory is at 130 C.
+   The fans did not react to that here, at idle on battery.
 
-The white camera indicator on GPIO 110 becomes the sensor's privacy LED,
-so the V4L2 core lights it while the sensor streams and takes it away
-from sysfs; the comment waiting for a "camera on" trigger goes, and
-panic-indicator stays, as on the X13s.
+2. Resume. With the driver loaded, a key press wakes the machine
+   through the PMIC power key: the EC has powered the keyboard off, as
+   the comment in the driver says, and the keyboard delivers no event
+   for the key that woke the machine; instead pm8941-pwrkey reports a
+   KEY_POWER press and release at resume. With logind's default
+   HandlePowerKey=poweroff and no desktop holding the power-key
+   inhibitor, the machine shuts down right after it wakes. With the
+   inhibitor held, the resume is clean and the machine stays up, so
+   the resume command does its job. Without the driver the keyboard
+   wakes the host as an i2c-hid device and no power-key event appears.
+   Reproduced twice; GNOME and KDE take that inhibitor, so they would
+   not see it.
 
-Assisted-by: LLM
-Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
----
-v4:
-- Add vreg_l7b_2p8 (PM8550 LDO7, 2.8 V) and put avdd and dvdd on it, as
-  the Inspiron 14 Plus does (Aleksandrs Vinarskis: the schematics show
-  the 2.8 V rail from LDO7B; the dvdd step-down is on the module).
-  Laurentiu Tudor's unposted patch for this board wires the same:
-  https://gitlab.com/Linaro/arm64-laptops/linux/-/commit/d79e44083197b263ee59dc3521a2b16ad2a12bd8
-- Drop the two comments on the rail Windows switches (Aleksandrs).
-- Message: the supplies paragraph, to match.
-Bryan's Reviewed-by and Abel's Tested-by from v3 are not carried: the
-DT gained a rail.
+[1] https://lore.kernel.org/all/20261006185557.23016-1-lnicoara@thinkoid.org/
 
-v3: https://lore.kernel.org/all/20260926122533.8200-1-lnicoara@thinkoid.org/
-v2: https://lore.kernel.org/all/20260926122032.4847-1-lnicoara@thinkoid.org/
-v1: https://lore.kernel.org/all/20260925181024.20352-1-lnicoara@thinkoid.org/
-
-Depends on the x1e80100 camera DT series, v7:
-https://lore.kernel.org/all/20260917-x1e-camss-csi2-phy-dtsi-v7-0-1a63eb35838b@linaro.org/
-and on the CAMSS PHY API series, v20 patches 5/6 and 6/6, which read the
-CAMSS endpoint's data-lanes as 1-based:
-https://lore.kernel.org/all/20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org/
-
-Built and checked (dtbs_check, W=1) on next-20260925 with the DT series
-applied. Run-tested on 7.2.6 with the same board hunks, the CSI2 PHY
-driver v18, the PHY API series v20 and patches 1-4 of the DT series:
-the sensor streams, twice in a row; LDO7 is off while the camera is
-idle and on, with avdd and dvdd as its users, while it streams; the
-privacy LED lights while it streams and goes out after.
-
-Bryan, happy for you to fold this into your next version of the DT
-series if that is easier.
-
- .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 120 +++++++++++++++++-
- 1 file changed, 118 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-index ad62350ba670..39d76b9a63f4 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-@@ -10,6 +10,8 @@
- #include <dt-bindings/input/gpio-keys.h>
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/leds/common.h>
-+#include <dt-bindings/media/video-interfaces.h>
-+#include <dt-bindings/media/video-interface-devices.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- 
- #include "hamoa.dtsi"
-@@ -46,14 +48,13 @@ leds {
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&cam_indicator_en>;
- 
--		led-camera-indicator {
-+		privacy_led: led-camera-indicator {
- 			label = "white:camera-indicator";
- 			function = LED_FUNCTION_INDICATOR;
- 			color = <LED_COLOR_ID_WHITE>;
- 			gpios = <&tlmm 110 GPIO_ACTIVE_HIGH>;
- 			linux,default-trigger = "none";
- 			default-state = "off";
--			/* Reuse as a panic indicator until we get a "camera on" trigger */
- 			panic-indicator;
- 		};
- 	};
-@@ -151,6 +152,20 @@ linux,cma {
- 		};
- 	};
- 
-+	vreg_cam_1p8: regulator-cam-1p8 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VREG_CAM_1P8";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		gpio = <&tlmm 91 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&cam_ldo_en>;
-+		pinctrl-names = "default";
-+	};
-+
- 	vreg_edp_3p3: regulator-edp-3p3 {
- 		compatible = "regulator-fixed";
- 
-@@ -436,6 +451,13 @@ vreg_l6b_1p8: ldo6 {
- 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
- 		};
- 
-+		vreg_l7b_2p8: ldo7 {
-+			regulator-name = "vreg_l7b_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
- 		vreg_l8b_3p0: ldo8 {
- 			regulator-name = "vreg_l8b_3p0";
- 			regulator-min-microvolt = <3072000>;
-@@ -674,6 +696,76 @@ vreg_l3j_0p8: ldo3 {
- 	};
- };
- 
-+&camss {
-+	status = "okay";
-+};
-+
-+&camss_csiphy4_in_port {
-+	camss_csiphy4_inep: endpoint {
-+		data-lanes = <1 2>;
-+		remote-endpoint = <&csiphy4_out_ep>;
-+	};
-+};
-+
-+&cci1 {
-+	status = "okay";
-+};
-+
-+&cci1_i2c1 {
-+	camera@36 {
-+		compatible = "ovti,ov02c10";
-+		reg = <0x36>;
-+
-+		reset-gpios = <&tlmm 237 GPIO_ACTIVE_LOW>;
-+		pinctrl-0 = <&cam_rgb_default>;
-+		pinctrl-names = "default";
-+
-+		clocks = <&camcc CAM_CC_MCLK4_CLK>;
-+		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
-+		assigned-clock-rates = <19200000>;
-+
-+		orientation = <MEDIA_ORIENTATION_FRONT>;
-+		/* upside down in the lid; both sensor flips give an upright, unmirrored image */
-+		rotation = <180>;
-+
-+		leds = <&privacy_led>;
-+		led-names = "privacy";
-+
-+		avdd-supply = <&vreg_l7b_2p8>;
-+		dvdd-supply = <&vreg_l7b_2p8>;
-+		dovdd-supply = <&vreg_cam_1p8>;
-+
-+		port {
-+			ov02c10_ep: endpoint {
-+				data-lanes = <1 2>;
-+				link-frequencies = /bits/ 64 <400000000>;
-+				remote-endpoint = <&csiphy4_in_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&csiphy4 {
-+	vdda-0p9-supply = <&vreg_l2c_0p8>;
-+	vdda-1p2-supply = <&vreg_l1c_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&csiphy4_in_port {
-+	csiphy4_in_ep: endpoint {
-+		bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
-+		data-lanes = <1 2>;
-+		remote-endpoint = <&ov02c10_ep>;
-+	};
-+};
-+
-+&csiphy4_out_port {
-+	csiphy4_out_ep: endpoint {
-+		remote-endpoint = <&camss_csiphy4_inep>;
-+	};
-+};
-+
- &gpu {
- 	status = "okay";
- };
-@@ -1102,6 +1194,30 @@ cam_indicator_en: cam-indicator-en-state {
- 		bias-disable;
- 	};
- 
-+	cam_ldo_en: cam-ldo-en-state {
-+		pins = "gpio91";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	cam_rgb_default: cam-rgb-default-state {
-+		/* 2 mA streams; the sibling X1E boards use 16 */
-+		mclk-pins {
-+			pins = "gpio100";
-+			function = "cam_aon";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+
-+		reset-n-pins {
-+			pins = "gpio237";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-disable;
-+		};
-+	};
-+
- 	edp_bl_en: edp-bl-en-state {
- 		pins = "gpio74";
- 		function = "gpio";
+Liviu
