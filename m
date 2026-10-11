@@ -1,90 +1,113 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3472734E744
-	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 07:54:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAF7E4279E0
+	for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 08:56:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791705284; cv=none; b=Rw7kuKqAfZtjuCn4HxSUBwHFJZTgnc/DtA4ZAiFwAPUaxl1rfDeFLVN/TZxfeW9wygJNYZr8lSo3yprFuTqYNPgrpt4z0mRi8bHeptw9C5p7CKgLyQIKavvd2/EXhwTjNi7+NGKJcsQYr8xvG+IXNCL4zNn2bGtHmk7HcVDE5sM=
+	t=1791708995; cv=none; b=CD3LguVKAFNILNAxX18HVC02F3RBCNxTcadidci67OC2yOOG8B05q0OdnaKIqdum0yr5u1A9QBzLRyp960joQqkWucK+m6z3eXM8keaRtqCZbm//foitcY+bs4a/n+6j+RB9JE5eRD7JPrVqgIPA7XJH4dpu0iOPoTZctNwqw2Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791705284; c=relaxed/simple;
-	bh=dEcJ/pFItgtT4/Uq84V4nCOcw5lFpC5TWp8hGwZydFE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Z+kcE1rQPKVQ/I83IJ+Qz/ENlR/tl9ZpTIig3ET5V4DK7L8eBHoe95YB5x3sSArR95epq/m6cnBOji14VFkHYRJFjfNLno74WTaBQqdYgpDTsF6jZZ66DLEhTpSKDlXLW+QOecHxbjDhvZTwQQ3u79RgeicZW1E62diC4KWs1uA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=F6gRmQ14; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1791708995; c=relaxed/simple;
+	bh=trXuCyofDSoyesvjUgDrKmbXdt/YLOeYazvd/Osj+lQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=eirA1mQXsl3kwKS8LhowpEuf7Ivgg0D14PUXBigr2/bY5/98lg+H1M7aiMy/UuhS/xBYIVUc6pbAs+pbxtHWXZodnSTVWg8gZ8EKdwmXnxNnnT4OmhJQKtHgy93cGiqJTO1cxzlouagUyHSUXM/MrKZODeHrL7AZfGDzIE0DW4U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=HCf+9AJj; arc=none smtp.client-ip=209.85.208.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="F6gRmQ14"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1791705282;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=dEcJ/pFItgtT4/Uq84V4nCOcw5lFpC5TWp8hGwZydFE=;
-	b=F6gRmQ14JbAzU1LPb3JTi3gLlFNsY8or5VHfxQBrskKb9v/XH+IacC8dkQimCsI2I3j1Bu
-	2MyHR+K8oO/jUKH8pXa6a0FvdDY2ODh3ypIGVM1kl6s0bTHeIjCAk4hiAY/0KcV0Dbpf6N
-	vrR1wqd36eLFUserfUOjMcWx2E48ZhE=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-404-76GULbi8MJqa5ia54w_hFw-1; Sun,
- 11 Oct 2026 07:54:33 +0000
-X-MC-Unique: 76GULbi8MJqa5ia54w_hFw-1
-X-Mimecast-MFC-AGG-ID: 76GULbi8MJqa5ia54w_hFw_1791705271
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 1C0F31800A7F;
-	Sun, 11 Oct 2026 07:54:31 +0000 (UTC)
-Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet03.pony-001.prod.iad2.dc.redhat.com [10.2.32.114])
-	by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 4FEC8472;
-	Sun, 11 Oct 2026 07:54:26 +0000 (UTC)
-From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-To: jgg@ziepe.ca,
-	alex@shazbot.org,
-	bhelgaas@google.com,
-	jjohnson@kernel.org
-Cc: jtornosm@redhat.com,
-	johannes@sipsolutions.net,
-	mani@kernel.org,
-	yishaih@nvidia.com,
-	skolothumtho@nvidia.com,
-	kevin.tian@intel.com,
-	linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	ath11k@lists.infradead.org,
-	ath12k@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
-Date: Sun, 11 Oct 2026 09:54:25 +0200
-Message-ID: <20261011075425.516927-1-jtornosm@redhat.com>
-In-Reply-To: <20260930140833.576941-1-jtornosm@redhat.com>
-References: <20260930140833.576941-1-jtornosm@redhat.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="HCf+9AJj"
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6b1b13e09ffso269786a12.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 01:56:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1791708991; x=1792313791; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=dKOqZxKxSOHNw25+e85CqVx4B1361RF8kK92P+D5pVQ=;
+        b=HCf+9AJj68FQjIxYxllcXMPh/xLWNhDxiwo2416kSNqHz9iEkEonTNZ0QTH+Yt+uWg
+         +vJGQ4ibw2DaCwgZaaBa822cYfUtKvqeK9yPyjgXlGRvkCsqD2kHCUJc46s+qrWAeW9s
+         x0CI+g+36a+2AANQEActK1Zog4eQuF+G9vtYFogZZnob3kMx2EzHaHQ+dVwT2NmurOBI
+         Mf9FhnqzJHXeY3Y7TTnqbwWE/lSmHy91caoz52tlv5uo8QjI2autT/HQ5qF3UTdLoZOb
+         bCLBrRViqKctlHnPtoO3R3qJiYsz+Uqbox3IpsXQFHlrFt+anLfctQCEtIs608+sxEU8
+         Kkrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791708991; x=1792313791;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dKOqZxKxSOHNw25+e85CqVx4B1361RF8kK92P+D5pVQ=;
+        b=qP2Rw5oAWFQ4ngEVho6K9vCHRe7P+KKc6aIxbQiNF/yzH55nmRPvmhOjw3o8JDU4EG
+         s5Q20PfbD1JDzptmkHJ0cX2ZQ1J/wN2q+TkhtWiFOvBJI7NxwfC2hXaUhLh3Ft0+7ixV
+         M8cHeBQxR5M9m/IPuNnDGy40nl7eyIxf8LIbYTw08aX6Od1WySQ4+lBfXCCwlJ4enjhD
+         pquohB7E3wrdmVK0yGV+6VMMSo0EMoj6C2nz7nuqCUiebWUDVb9Wj9+XFkbOYLh48a9D
+         jmA0aRCCPrUo9VVvU9OdJKJZDTwMTg6Iys8eY2nNWOHG0XYZ5bB0PgOd+kiKL2qouDmJ
+         lSnA==
+X-Forwarded-Encrypted: i=1; AKwUvBwMGbt9yxuFRhd5q5vyK2O/5H2Ck/XG5LV8RXryAeckJfJ/YdF8RPIZEab7o2z63CQ6aaH1+2lD4M6/ZDge@vger.kernel.org
+X-Gm-Message-State: AFq9FYK9FfKCuSGwS/vHIytflIreop9k7Sb37HZJqPT1vkz/nkMAvJF9
+	eyC1nWvTHXhKsdA6YvLxY9WNiS/5rrpl5wdzAd9yCgM6f0rt/AfRgN1ttO4yrE4rEcs=
+X-Gm-Gg: AYBFou3MTS8uiLMPI2jAub9eaFmijA2MZ2ekaaNXk8me07ZMHDoFuiN2913tgUejO3Q
+	xgU0rZqHnW/0YkcL+G9PzfTmkI4IjxAOtbx2oqqky1ArTMIwJwuLfwz19g+wh5jPEJainkL++Cq
+	SnQ/ZKrQGHM2GPmg+dB4k9cY3Q6qLkB8C0S9ASEeWD0l0R6a40Inz4Nx8tyrnltl09FuQ2pjYR2
+	CWkhhtKHtMya6DgDrQsGpyqbuW6fC41YwyLWgKLNWdUX9iYFsYh0rPr+Kj+EQ+76na33/vH+VbT
+	C/z61B3/OuxPvSj9Qg4EwJ0QXdSqf4VLSY96uaNXodsit41JfiAdBjxv1pyEBh3N5v7QaWr4rff
+	omgWlmRH0gOTMSytAmYSkoBsGW/6i4+Re4/Hgbb1TuKFQQuZJXE/J3+QyD7NZtfdMvrz3IEZYUl
+	Va7wBeTVSC/FRyUp9+QlhI4CV4j9wH/gR3t6y3pZ77St0wM2yNCaz7XBNH6tMoJw2fkfFoJJcrY
+	05MiOt0hyM7
+X-Received: by 2002:a17:907:940b:b0:c2a:ef15:2be0 with SMTP id a640c23a62f3a-c31a9ffee01mr693409466b.24.1791708991035;
+        Sun, 11 Oct 2026 01:56:31 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.165.237])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9ae59f9sm334413466b.80.2026.10.11.01.56.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 11 Oct 2026 01:56:30 -0700 (PDT)
+Message-ID: <a6e5dc34-c2e7-4a3c-a0e4-fb0a3a28cece@linaro.org>
+Date: Sun, 11 Oct 2026 09:56:28 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v20 08/13] media: qcom: camss: vfe: Add support for VFE
+ 1080
+To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, jeyaprakash.soundrapandian@oss.qualcomm.com,
+ Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>,
+ Atiya Kailany <atiya.kailany@oss.qualcomm.com>
+References: <20261010-kaanapali-camss-v20-0-63e98ce9ac0c@oss.qualcomm.com>
+ <20261010-kaanapali-camss-v20-8-63e98ce9ac0c@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261010-kaanapali-camss-v20-8-63e98ce9ac0c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 10/10/2026 17:01, Hangxiang Ma wrote:
+> +		if (!vfe->res->reg_update_after_csid_config)
+> +			ops->reg_update(vfe, line->id);
 
-Since no further feedback was received after the last discussion,
-I proceeded with v2 addressing review findings (Sashiko):
-https://lore.kernel.org/all/20261011074514.515894-1-jtornosm@redhat.com/
+So I'd prefer to have a discussion about if we can move all of the 
+updates to one method.
 
-I remain open to suggestions and happy to iterate further if needed
-to get this acceptable.
+i.e. why should any of the updates happen before csid ?
 
-Thanks
+Sure vfe 1080's documentation makes some sort of explicit statement 
+about an update that has been implied for some time.
 
-Best regards
-Jose Ignacio
+My question is why not gate all of the updates this way and make this 
+not a flag but a global behaviour ?
 
+---
+bod
