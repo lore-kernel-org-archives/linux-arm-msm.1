@@ -1,153 +1,136 @@
-Received: from SY8PR01CU002.outbound.protection.outlook.com (mail-australiaeastazolkn19010077.outbound.protection.outlook.com [52.103.72.77])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mta0.migadu.com (out-162.mta0.migadu.com [91.218.175.162])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E28D2EEE7C;
-	Mon, 12 Oct 2026 18:44:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.72.77
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791830689; cv=fail; b=ajK5XHz2f4Q0gVkZhuxngjF4FhRIddaOLiy3ECipkiMKNXafJCQs9KGUUptBF3qJkz9khYmXW1WmUCHPgWIfkzAB8EO3sg72QUwhOn2yVwOTw2BH1XT4BDCIsag2d/h8IzuG1xww7hjpVFGU2EKcaIPzqAOfoj+wL0+qfJE8cXI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791830689; c=relaxed/simple;
-	bh=VAnH6qsmyN9m0E2uwAxN57Vb+wDSzUyUrX7Kj46nyZk=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=mwGdDj/y+LeaPR3suUv1iWeuDu3njGhxw7HvVcrTJctpIeh12LhtQbfX7x4ZwCP6H1ZX19nQtPpLbTCSAK0RvCTonvc7GjjhseViyG2qaRIYmqQX69Q63G3Zd63RwuACc++XsRHLFj/EVgtGymdNktsI840WY+2wB1pGhJDDchA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com; spf=pass smtp.mailfrom=outlook.com; dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b=VVejdKMx; arc=fail smtp.client-ip=52.103.72.77
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3EEF10F2
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:47:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.162
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791830860; cv=none; b=bLt27xHLD6xvO68LcQIKRmyTE4T9sqYJZN52z1KdcAEIr8FJJUFItcuL2oMjJh7SbAauj5JcESc72fyR7RJuYwbm8n5oiqEZKHwPe/UWTJCKxODBza+FPPVABBqJ4zScNLOLc+pYc2sHcPU7eYj6C/Gz7XJox+d5uT7iDvHMN4I=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791830860; c=relaxed/simple;
+	bh=ijNlhyv4xCTmTbbejLtSuQAfF6caH2RK4q9or0ieFkM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=outEtAGZ8xqi7bTYSLQOugnXUG00OBcpV+AkZSZEIRL8jQtbh1G9izTiMQGMR/cFYNTOUOTf8lFcJxr1tg04W3CFagS10i6wwSYKraBRbkf7qDzCbq8o/rEzTbBcvPx7Yc+E44+oxrfq5ptWIakQ2Fn2J+9UBMdGcbo25ZQgcEo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=ZhGqK3aC; arc=none smtp.client-ip=91.218.175.162
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b="VVejdKMx"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xckwAIpn3vv85hmtgq3MGVUUgNZpdgWhlifIYSGtxYsn55A2riVszM/r7A1bwlu6gFjXjTlMQIVDmI8/VmWVp+kH9SbWrdDNFYdZTJmL7QIIJj7p5iVb7pDDYoB/WDNKx6uENp+D0gEhj4SLUhFC0+21AscGR+8Y1hep+Qk7Yx74MCknwM/wHeqcmUf1Bk54YqHnloAHt5fxDRrBqvsh5D465U56j9VNG8t71/yOAi7RaWrH7jSNjzinSCDvuRVI4gywUjTkkRWt1FS3RFuPq4mdBCgWsDiSAGVLe7/ZQhN6otmbXvRUVw2O8F+P7HCbNe9YcO/wjPq53iiESJhvtQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VAnH6qsmyN9m0E2uwAxN57Vb+wDSzUyUrX7Kj46nyZk=;
- b=id9d9jV9ppj4bZPhoEo+WvKpR26+wBc0ROkGddXdrRFLecY3i/s7GC+tJscsOWwyr8R/g/VRGIw7UPJz5uwvr5j5se6fatPsuOBmU9uldNv2HjG8IfHpn3U5pjN1PnREZd01RkTMzAmTbVeX3Q6U8XRPAssi7HizsNr4vnaIXwhvZ4tFyrFOn46YG63v+6FQwd7q2i90mWJG9fjZ3APFvLTWSgVZpEfrfjPT+OFB0w3kjLIEChCRHDjoNV8VzBj8TNrzb01pEWOoO67byUi7X8jDGEdJidUj5AEhEMM34Vb9bByo2a3sseoJUoLA6yW0XXUZfgaJiG0+hoWalothUg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VAnH6qsmyN9m0E2uwAxN57Vb+wDSzUyUrX7Kj46nyZk=;
- b=VVejdKMx50TBRTH+eEOXLcFUDSGAUa/KqpsWD6o4w+R1DLQkJiE0/8eJgl1I7gp+U5mTZP4FYhFjYYaBBuVnK6UUW34m3Yp497TdQhqVXb+h4Ig/KKp89YZMqAI5Z0tYTaULTWqW6uFk3RccJvjU1Awv46G8RDymbAI+xknrl+vTaUcPJ0vsRXKwKwSPNSR+e2Dd23iyCMpMU7D1HVeNEnCnrHHa8KliF+7l1rICnQ12mH7pxKJVNVUCK4kadAWcYuPn/DgL5iQM5H3exWuNiBobxDLFAa7nkNgWfEU9EgJjcdKD7g0H3WjmpHJl90UAjVxEl8Q5AK/l4GAc1BU4HQ==
-Received: from SY5PR01MB10600.ausprd01.prod.outlook.com (2603:10c6:10:32c::14)
- by SY7PR01MB8900.ausprd01.prod.outlook.com (2603:10c6:10:21a::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Mon, 12 Oct
- 2026 18:44:39 +0000
-Received: from SY5PR01MB10600.ausprd01.prod.outlook.com
- ([fe80::db5f:2818:b791:cc19]) by SY5PR01MB10600.ausprd01.prod.outlook.com
- ([fe80::db5f:2818:b791:cc19%3]) with mapi id 15.21.0522.011; Mon, 12 Oct 2026
- 18:44:39 +0000
-From: Zhang Jiaxi <Z1529105815@outlook.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Rob Clark
-	<robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>
-CC: Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang
-	<jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten
-	<marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, Simona
- Vetter <simona@ffwll.ch>, "linux-arm-msm@vger.kernel.org"
-	<linux-arm-msm@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
-	<dri-devel@lists.freedesktop.org>, "freedreno@lists.freedesktop.org"
-	<freedreno@lists.freedesktop.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>
-Subject: RE: [RFC PATCH 0/3] drm/msm: correct DSC RGB and command-mode vblank
- handling
-Thread-Topic: [RFC PATCH 0/3] drm/msm: correct DSC RGB and command-mode vblank
- handling
-Thread-Index: AQHdV3U6XlRrfQVtoE2pt31EYdhCw7b5f/MAgADEljU=
-Date: Mon, 12 Oct 2026 18:44:39 +0000
-Message-ID:
- <SY5PR01MB10600F65F1EE8B710159B2988A19F2@SY5PR01MB10600.ausprd01.prod.outlook.com>
-References:
- <SY5PR01MB1060041363FC41A7F40DF59DBA1932@SY5PR01MB10600.ausprd01.prod.outlook.com>
- <6e67b0b2-8bae-4568-a276-56f9db360b80@oss.qualcomm.com>
-In-Reply-To: <6e67b0b2-8bae-4568-a276-56f9db360b80@oss.qualcomm.com>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SY5PR01MB10600:EE_|SY7PR01MB8900:EE_
-x-ms-office365-filtering-correlation-id: 8dc9a39b-9026-47ce-f7b5-08df2890df3a
-x-microsoft-antispam:
- BCL:0;ARA:14566002|38102599003|24021099003|15080799012|39105399006|25010399006|22091999003|25031999004|24121999003|4140399003|31061999003|8060799015|19110799012|8062599012|40105399003|41105399003|18071099003|26121999007|2607281247196008|102099032|3412199025|26104999009|440099028;
-x-microsoft-antispam-message-info:
- =?us-ascii?Q?Ki+R63OEXQ9wcm2M8MX3aqpbmDXxGp21vZxQk4J/hJqb1KcF2IyKG2eFItmt?=
- =?us-ascii?Q?mCY2YBHI83GbigQtZ+Y5R6hcZNQKLos+/XLwfz+ADajP0RnFze/iZux3sxUN?=
- =?us-ascii?Q?J4WXHrvVsnRtuySHrJruv30NxuYJ4RwQvLUR5GRUc9sFnWKSPLpkirgY2Zcv?=
- =?us-ascii?Q?dpdiZl9Wg1aPjD6FlqXEt5DoMComAvrSqtsTBr6OqT9zvmCzb4LapFLUILs0?=
- =?us-ascii?Q?EtleQ0FBupJWQYRKWJ/f2Pfj3f29v0KHU2vt3YmdD4oUl9hh1RC+dLxCXhQI?=
- =?us-ascii?Q?IQh1YUDo6YI5WnTQuz8HIcHuXGYUrF/FkqlWAJNaWGUJmxVjhzGSVcsw5KUq?=
- =?us-ascii?Q?Lrhh5/Y88CU6IpQ5UFSpNsroxbH6Ka8XD99mClc+0k59+AIN/B5Usz2FGcpf?=
- =?us-ascii?Q?E35c1pp9auIXqTawEHSbHW/7B8qDPqJjJhlg0o2JIVpijRlzPD4ZGHaUPuKC?=
- =?us-ascii?Q?yCuplouC2Y9BBN0JN8MJ/TOkdgRNDbyXUJNQjRD2nla9o5NGFsniIGs9BH5a?=
- =?us-ascii?Q?YgDCjYUQDsQfN1MAmS7WJxX0Ye/mYjr1G1VjpnJIcQlr1tC5Sp0Fa5arSz2H?=
- =?us-ascii?Q?jcUZoaWD6cLRxHHuyUbw0M6738fDUKTIpLQPRnqL4+k9CJ+qa7YHnMz7cxyB?=
- =?us-ascii?Q?+0fyRwIzJpXymmT0AL5+VGAsP42hjx14eJYoB6o3ZPvYAUR/rPsO4DHS1RIK?=
- =?us-ascii?Q?5UMe0rO+t6FmtUMixaBF6FLefwSvpf/mIMMlzHM77hEYtTO6Zj39Kh8bHE2J?=
- =?us-ascii?Q?2G/wPwNlcCgMTY9I/wtBHi+nOLl2a9fSCY9/MT5gmS1C+8iEu8U7Et1ieri3?=
- =?us-ascii?Q?EK7gNmoIysUtfZNAXA7TvcdixuWXYwHLqvzGhftzLEPcD0SeQW43bxyAP4Sp?=
- =?us-ascii?Q?KibTcbNcvqaeSnodw7yYqmQQOKSK+N9vqOFaiwouxjuywNkyuYSCWaeSXT2y?=
- =?us-ascii?Q?8Ot/dWih+g7GTfF++XYXgLbtl16yIBXODahfLQdclKCRKjvvDcLo6I9qP8gy?=
- =?us-ascii?Q?4YxaiXXJsL9SEcS02+C4m5xzLhmmr8aDIlD9D7J5e1UYpMtXqZpGuehPVILL?=
- =?us-ascii?Q?yE+j5+oxEWHXwZZqEiJra1wx5oUL4oZjXw1LmTPBjaoQ+avSUmFw7ty0YOCK?=
- =?us-ascii?Q?tLB/XTgwQEXj9NxKaebivrC+ESQ1xxfVhkkMwdJdHhlvM9smCBV6IH8=3D?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?us-ascii?Q?agLcBjnZos0vn5R6xgL7Eh/REhvCfkKCbyKvTdkYST0oQ57bP8tzfcyVVILR?=
- =?us-ascii?Q?NKwjwfzOoYVFMTBLKofQNxXWsKH8WQFMmvSB/oqa7i4SnNGiVHW42poOxzfZ?=
- =?us-ascii?Q?G8D1b76Sz64hz2NmCjjEkwEmB/0bKIYCmIsBpHrkZ434rd3BqWaD/qtTVI18?=
- =?us-ascii?Q?Fk/OAmD4gXDs0+WLaPJNoRZtTChDZ65mwI1ZGYlTk6pCZLoHPzLMwH1wLr9b?=
- =?us-ascii?Q?d/YzPc5Xqk+YI2jY5QFWpevkxDsK7Fcf92OxDftvY7cp0LAaWRqjcYy5yRvg?=
- =?us-ascii?Q?AME8OdJdAhfssGrBE2GNGxF94fkv14pffrCCmZB9XF4K4PDjCazjufYng1vv?=
- =?us-ascii?Q?6vNOK8T+ZKl72ACCAyjaFGvq35RngxaVURa5tFQLNhMMeEsHtb3fgDB2SeaZ?=
- =?us-ascii?Q?vZiShw2jXVOAHGXOAv2qp5+xwJC5QuE/cdOrOq1u4vWSLS4ab8S9tCtbLxMN?=
- =?us-ascii?Q?PNGm3pQ/H3wVpHH27OB7N7ngjrNAYTVcc6QnD1b2VzRYfAp5H+P5fpm48BlP?=
- =?us-ascii?Q?fF0dxj0xfDUOXfw1vROYeOsexbWW74YLP601FGOA27851bW2FTkiSHwTGCnU?=
- =?us-ascii?Q?AFIyMTXO2hYNSycXTRln7t2TzqjQKwJBkNlVTpEHqz5HKtiMXhqHFwfCad+i?=
- =?us-ascii?Q?eNSF4FDiHG8oNIfzLTYT6Ek4/6fiX+cx9Q3vm5jFLBnwoEHcQUGmhj3Oh1hQ?=
- =?us-ascii?Q?s0u+3lPHlijn6qIZxReqF3Mz+RFN1ykwF5F569x0tuQRy5P2tKs1GAz0rcxm?=
- =?us-ascii?Q?rOlpIr/MFYcSqryFt5C99DXY36SM98cTSyzSKFw3qFBV/bvBfrb5Z5khnxm/?=
- =?us-ascii?Q?P6dpa9pWgii0Bofb9V8DXsjyiVWfGQcImiTxmOC7mKPkMyedss9afRmBwtFj?=
- =?us-ascii?Q?QYhkhi4d6Kot2RAaW5852pjuTNX0cwmwAGa86ZTOLlyK28qA62qNVCGJf7C3?=
- =?us-ascii?Q?u4ddDFcTcyvfABQnbmOW67c75RWlPzgxLKY5MhVg1HprS/rb+a/cfZO6hm91?=
- =?us-ascii?Q?+eRxxDd/0nZrgXQIXvZ3u+MlmU5xlNa/HxCPOq4H9fobeno1w2RUELL8tfFB?=
- =?us-ascii?Q?DR74fiWFPGxC9H4zT732q47a994bNA6UArt5olSU4PWzvLusTwq0Nr5XaP+I?=
- =?us-ascii?Q?5w3fjXPrO2QF1sljvJ8dAaPd4AgWl+yQzJOB0LNJ+qNnDKsbRTHBIPYG6cWP?=
- =?us-ascii?Q?lJ/4cM2FP+OazS3qc84sSlesTMeorhvHSP1+rdQj8hJ6O3UxHZa8Tst9A+HQ?=
- =?us-ascii?Q?QkQ0HWLdUVfMcGLRR3mstNs5Jp+HeOX87a9r0BYtnC7FnwBEYJ4pUawp/1+j?=
- =?us-ascii?Q?HcoWvR3Y8UybRzXF8ZMWu8YXNLbhsqt/NQ8VWlklOygpTagh0mJ9SAgnAsau?=
- =?us-ascii?Q?TBDwSUS5GLrTV7AwtVeb57eoSXZq?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="ZhGqK3aC"
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=ijNlhyv4xCTmTbbejLtSuQAfF6caH2RK4q9or0ieFkM=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1791830854; v=1; x=1792435654;
+ b=ZhGqK3aC1dEA6AFriFzlD2Uk6O50NhTH/2K58qAsaTd7mFMFOlu5POxCR+JigEyzvGCWQiDS
+ vk5o4HHjFh6qaPdGJL47AyXYO3LgvtuNa4GytcrJULEY/pSR3fMSfhv2og6HKefhVqemO9FJvPB
+ Vol8ZNoKL/vfXpXMn+34E/KmdzI4X+XcTh+vqMZyax0+RDMOB5GavCFS7kY4slu4IZ5wYH7LBBK
+ 6B2EHq0HW5u8aGqg/2o9clsVjr+iUc0kRf3W1547SmPnjYAY0OKplQZ1oqhg2aA92ezHr4bp27P
+ k1AOIMo9B1efaHZeVNX677Asu7Vitt1ClXYKYLRopboCw==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id f67ebc8caef7985e;
+	Mon, 12 Oct 2026 18:47:34 +0000
+X-Mizu-Trace-ID: f67ebc8caef7985e
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <a3464be4-bd4d-4590-9804-147e16016a07@packett.cool>
+Date: Mon, 12 Oct 2026 15:47:24 -0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SY5PR01MB10600.ausprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8dc9a39b-9026-47ce-f7b5-08df2890df3a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Oct 2026 18:44:39.5085
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY7PR01MB8900
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 0/4] nfc: st-nci: Fairphone 5 NFC bring-up (ST21NFCD)
+To: Kristian Brox <isyourbrainfoss@proton.me>,
+ David Heidelberg <david@ixit.cz>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ oe-linux-nfc@lists.linux.dev, netdev@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Tim auf der Landwehr <tadl-git@taufderl.de>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20261005-fp5-st21nfcd-v5-v5-0-7be15a86c61c@proton.me>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261005-fp5-st21nfcd-v5-v5-0-7be15a86c61c@proton.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Konrad,=0A=
-=0A=
-Thank you for pointing this out. I sent the patches as separate messages,=
-=0A=
-so they were not threaded correctly under their cover letters. Sorry for=0A=
-the inconvenience.=0A=
-=0A=
-I will use b4 to prepare and send future revisions with proper threading.=
-=0A=
-=0A=
-Best regards,=0A=
-Jiaxi=0A=
+
+On 10/5/26 5:51 PM, Kristian Brox wrote:
+> This adds NFC on the Fairphone 5 (qcm6490). The board uses an ST21NFCD
+> on I2C. That part speaks raw NCI; the current st-nci driver always
+> wraps NDLC, so using st,st21nfcb-i2c leaves the adapter unusable.
+>
+> The series adds a st,st21nfcd compatible for the raw-NCI path and the
+> Fairphone 5 DT node. Boards that already use st21nfcb / st21nfcc keep
+> the NDLC path.
+>
+> A later poll start that times out in "failed to set local general bytes"
+> is still unreproduced on this phone.
+>
+> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+> ---
+> Link to v4:
+> https://lore.kernel.org/oe-linux-nfc/20260902-fp5-st21nfcd-v4-v4-0-ded2f1c501be@proton.me/
+>
+> Changes in v5:
+> - Map proprietary RF protocol 0x90 to MIFARE (Tim). On this phone a
+>    Classic 1K was accepted as 0x90 and was not dropped.
+> - Binding carries Reviewed-by from Krzysztof Kozlowski. DTS carries
+>    Reviewed-by from Konrad Dybcio and Abel Vesa. The patch bodies are
+>    the v4 patches. The raw-NCI driver change is unchanged.
+> - Tim's reference-clock restart and leading-0x7e check were tried on
+>    this phone and left out.
+
+Hi, I've been trying to enable the st21nfcj on the Motorola Edge 30, 
+which uses the same protocol.
+
+These mentioned left-out patches seemed like they would help, but they 
+didn't really. The leading-0x7e check does skip over the "7e 60 00" but 
+is not enough to untangle the desynced mess that starts with "79 3e 59 c0"..
+
+sendQlen=1 unackQlen=0
+ndlc frame written:
+ndlc: 00000000: 20 00 01 01
+incoming frame:
+ndlc: 00000000: 7e 60 00
+incoming frame:
+ndlc: 00000000: 1f 01 01 20
+rcvQlen=1
+incoming frame:
+ndlc: 00000000: 02 1a 04 04 01 20 92
+rcvQlen=1
+incoming frame:
+ndlc: 00000000: 80 02 03 01 59 c0
+rcvQlen=1
+nci: nci_rx_work: unknown MT 0x4
+incoming frame:
+ndlc: 00000000: 79 3e 59 c0 47 75 00 00 00 01 00 00 61 66 02 7e
+ndlc: 00000010: 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 40
+ndlc: 00000020: 00 01 00 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e
+ndlc: 00000030: 60 00 1f 02 01 20 02 1a 04 04 01 20 92 80 02 03
+ndlc: 00000040: 01 59 c0 79 3e 59 c0 47 75 00 00 00 01 00 00 61
+ndlc: 00000050: 66 02 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e
+rcvQlen=1
+nci: nci_ntf_packet: unknown ntf opcode 0x93e
+nci: __nci_request: wait_for_completion_interruptible_timeout failed 0
+
+I've tried changing things like interrupt trigger (with rising edge 
+only 1f 01 01 20 arrives, with falling edge nothing) but nothing seems 
+to help. I wonder if anyone has any idea of what might be the actual 
+cause of those strange frames. It's interesting that these two 
+workaround patches were found necessary on one phone but not on another..
+
+Thanks,
+~val
+
