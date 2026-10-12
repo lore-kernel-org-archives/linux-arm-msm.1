@@ -1,100 +1,109 @@
-Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FC5B1FE44A;
-	Mon, 12 Oct 2026 03:38:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.204.34.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9011F3955FF;
+	Mon, 12 Oct 2026 03:57:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791776297; cv=none; b=Bno1d9d2NYkO0UkTa+sVrwU71m6wzRcnc+1CnvcEJAA0O04NKQRftJpUrNu8O2s/0IzesbMPuacquszvbJ2qCbIUOysd+Vx4sN/FElBKRgGqycIZF+2jRoYmthgznuoQlLuwhUZiijAzSx06p3YJW/faW6TqcmgXaTLNrOHEc3E=
+	t=1791777422; cv=none; b=Ad4M3Em+P8PljhQjs48sHKFxKgbwmPE6XQvGtqSsjd+tBYHzfGoiZL5RmxKn1/nQlWpWfSM71usr5y9R+bjA8JFNXP2N1Djp3ot0gS1maxY7TP2O3drSVaGCapdJ5iF9e+vw55WlHk7VCyvx5m3K1CoAJY9gsy5XSazOTicZhds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791776297; c=relaxed/simple;
-	bh=Q/ZntsoyiUl5NAlZg3yKNvPVzUJ2o9Hmh3mDzMZtxFE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qpm3/kWzEe5unFH9Dsvxxv07TyaGTvMIqs0JiFO01A5LOOKUsRjAkpLwKQXRkJtDC6tPSGqVIsAJl6GK6NVe76O6sJZg8mKl9TayeaLjhC3rjeD7CNPqlQ1gplnny8YIIYFd5byYnfeiBtGFIvH+r3DAngnV6qv9Ivhm4SDAvVM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.204.34.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: esmtpgz10t1791776244td9fa7646
-X-QQ-Originating-IP: MR/FYUQhdzrCy4c41JyPnhRsY7QqiN4XYNkmggF2M08=
-Received: from [127.0.0.1] ( [180.159.160.209])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Mon, 12 Oct 2026 11:37:22 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 3249404130733337182
-EX-QQ-RecipientCnt: 10
-Message-ID: <F11D76974BFAD981+e2472997-2f7e-4a8c-8c82-c7371b554bd2@radxa.com>
-Date: Mon, 12 Oct 2026 11:37:17 +0800
+	s=arc-20240116; t=1791777422; c=relaxed/simple;
+	bh=w9kTsY78JmCrb87bSa72DL2IVDLvj0lnMC2vJKSw2c0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=D3vBcba0Cv/badkaUBBiWhZE+GxHKH1IA4zbXnjJgFOU84RU2VtOEkqRq4xvZfVZCsEJgi/O+FykbL5uNK03cAa0eGm5gW6JNlaSqBA2JkztuGsDgLen+QU6ebAWXBcbBMh6u2pB3H0BKkz5hUEab1NwKpPW5uPsNf5lBh+rAv8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q5Cl74mT; arc=none smtp.client-ip=10.30.226.201
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q5Cl74mT"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id ECC22C2BCC7;
+	Mon, 12 Oct 2026 03:57:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1791777422;
+	bh=w9kTsY78JmCrb87bSa72DL2IVDLvj0lnMC2vJKSw2c0=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Q5Cl74mTxPYZtu05GB50g6rGeh15DFB3F3B50X+W2MOdqXUyKGbz0cXFo7zdat71y
+	 BKofNuT0YmdX+/HRJgKZtqWCFY1hI5ifjgqZ2LK8AYE2ZduCQhigKi4dzPYOn/Lce4
+	 FsEC6r+GDxO+SGWN3vrJ+ul03sRA8HT/lsmaztZIrVS/28nIJIjn95+8Sa4Cy710Uk
+	 rSOpWBUPNoqgtWmcpr3hyTKIIPSwPhKbTMWdSeL+Qm3bmkjc2ePA7Nx7lkuoWehPPw
+	 yEpYFmbC6xMhFDAJjISLyVkBvFA2uTyvlPT4KdcmXwtpbndQJBMt0MgcHbd2OViPdD
+	 shFEEleJN/sRg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9B24CA9ED1;
+	Mon, 12 Oct 2026 03:57:01 +0000 (UTC)
+From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
+Subject: [PATCH v2 0/2] arm64: dts: qcom: sm8350: Add CPU capacities and
+ power coefficients
+Date: Mon, 12 Oct 2026 03:56:03 +0000
+Message-Id: <20261012-sm8350-cpu-capacity-v2-0-67ce449becf0@fromdisposition.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: sophon@radxa.com
-Subject: Re: [PATCH] PCI: qcom: Disable halting feature
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, dragon <dragon@radxa.com>
-References: <20261009-halt-v1-1-4a2d7899d91f@oss.qualcomm.com>
-From: Xilin Wu <sophon@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd
-In-Reply-To: <20261009-halt-v1-1-4a2d7899d91f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpgz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: M75I2DDAzREFkXxLjHqDfXEfd8HDkL1OuFR+HjlvPJdArDfbEFlmlp5a
-	TP/A/5MK6mp950LdaMzsjLvnk18fPSPOCRvtURkXYyCghswlPHs8T2Y0SRbwZhRgJYoYNjV
-	lv9Ysc0k8nkoW3CWxz19o1NaAPFpNivz89rx0ZijN9sGbiYwdDdFVuStscDor2EtSvAD9FL
-	tkoH4pbeOuHqb6GMZ8yZL8Tj43kG61I30WMrbGKsu7p/QjG00sEWbMEKVJC/aBLBejmUJKT
-	F9VS+t5ELHuhL9grE1VcvA+vxjUUXMAJrWyvPp8YXxZZvSVC58jELJUNBxwQFpeYepU4QU5
-	ZU1MXSPUjjPx/JOfkz1fL/BUTh914a9ELKUWBBkwClTm1JONZOB22urYVsOr1TeZ14oXbnx
-	TZzpdtxaUuJVRP8wt6NAnw7HgODtxJlDsxuHdFjn73SyKs3lCqBs1Sooc6zzd4KOgZRPoqk
-	JFggTsis8kDrIiS4vhpKctnulmrLf0GOBGKU1wOsMZGlbnJBHEGyuRGd24s8L7GZv79MWXI
-	zVC5M1ex/5H3NEFox91BpIaE1QrhX0/L/7kLbj2wI0GSpZc2ZVcQuUbLMTxwsaEmPyIaB+8
-	vI6mWhJyKm4YHZRxXOnVxCAYazn/Pzy8hPCaTl+pSmXabXN+kvffqi9/Cr5Gu126+IPvWEK
-	73Rtc651+mv7l8c4Xk0wanorBbAveud8xiMV+cGZg0Rydy9oZMNaWQlype+k6LlPpz4seo+
-	Y0QHVqCrvzb5aItp75rhexRqPWG5H0YCyDLeVgtCLpO4LD4ZiR1Km5YXTnYNzynWiTEvx/W
-	H9QWjSis6yKyHN/nuAAhnv7wH4umNuNNcvMLAblgp6u+HUdzMU7aiLUKjRNYb1rc6RNPnZs
-	s3IShrmjICwa8RSvO3/1oyECkrurDZynzgiwBtbYSMsASaKo6LpQbM4Bn339hBstEJTZdOi
-	ceC3gKRo/G3O02QGboSiuAXSpzUsdNjLkDvuTexcDNq8zsubOmncKBqgn
-X-QQ-XMRINFO: Nq+8W0+stu50tPAe92KXseR0ZZmBTk3gLg==
-X-QQ-RECHKSPAM: 0
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32OQQ6DIBREr2JYl4YPYmpXvUfjAgH1N7EQvpoa4
+ 92Ldt/lS2bezMbIJ/TE7sXGkl+QMLwzyEvB7GDevefoMjMpZAUCJKfxprTgNs7cmmgsTitXUGp
+ TedB1q1huxuQ7/JzWZ/NjmtuXt9OhOhID0hTSes4ucOT+LyzABVcOSvBC1LXTjy6F0SHFQDjlz
+ 9eQetbs+/4FqbB8WNIAAAA=
+X-Change-ID: 20261012-sm8350-cpu-capacity-3145a6e159b3
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Demeter Barna <me@fromdisposition.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791777425; l=1799;
+ i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
+ bh=w9kTsY78JmCrb87bSa72DL2IVDLvj0lnMC2vJKSw2c0=;
+ b=k2+Ld8UrsCCizogtNl53u3PuYAFm8A6fTJLOduMyZPK/L7WU6675kNPPU7JUG0pbXcxzL0EjT
+ QWWMWfgYxdGB9OD8O/46A1LRivjtyJIovScyxbidn7M8BoK5LutjClx
+X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
+ pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
+X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
+ auth_id=1163
+X-Original-From: Demeter Barna <me@fromdisposition.org>
+Reply-To: me@fromdisposition.org
 
-On 10/9/2026 8:55 PM, Krishna Chaitanya Chundru wrote:
-> The PARF write, read and BDF halt features make the controller wait
-> for earlier AXI transactions to complete before issuing new ones. This
-> is needed on SoCs whose NoC cannot preserve the ordering of inbound
-> transactions from the controller.
-> 
-> On newer SoCs, the NoC preserves this ordering on its own. Halting at
-> the controller adds no correctness benefit and reduces inbound DMA
-> bandwidth.
-> 
-> Add a noc_ensures_ordering flag to struct qcom_pcie_cfg. Clear all
-> three halt features on SoCs that set it. Other SoCs keep enabling
-> write halt as before.
-> 
-> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-> ---
-> On shikra we should not disable this feature, when respining the shikra
-> we need to make sure this is not getting disabled.
-> ---
->   drivers/pci/controller/dwc/pcie-qcom.c | 37 +++++++++++++++++++++++++++++++---
->   1 file changed, 34 insertions(+), 3 deletions(-)
-> 
+Give the SM8350 CPUs their capacities and dynamic power coefficients, so
+that the scheduler sees the three clusters as they are and energy aware
+scheduling gets an energy model. Both come from Qualcomm's downstream
+device trees.
 
-Thanks for the patch. It helps to increase NVMe read speed from 2855MB/s 
-to 3106MB/s on SC8280XP.
+Downstream, the capacities are the same for v1 and v2 silicon, but the
+power coefficients are not: patch 2 takes the v2 ones, which the device
+tested here (v2.1) carries too. I have no v1 part to check them on; if
+v1 boards matter, patch 2 can wait without holding up patch 1.
 
-Tested-by: Xilin Wu <sophon@radxa.com>
+Tested on a Razer Edge 5G (SM8350 v2.1), whose board support is not
+upstream yet: cpu_capacity reads 308, 785 and 1024 once the kernel has
+scaled the values by each cluster's maximum frequency (1804, 2419 and
+2995 MHz), sched_energy_aware is 1, and the energy model covers all
+three clusters. Compared with the same kernel without these patches, an
+unpinned CPU-bound task now runs mostly on the X1 and a light periodic
+task on the A55s. dtbs_check shows no new warning for the SM8350 boards.
+The values come from Razer's kernel release for this device
+(Nicole-msm-5.4.254-20240515).
 
--- 
+---
+Changes in v2:
+- From and Signed-off-by now carry my real name instead of the handle
+  "fromdisposition" used for v1 (same author). No code changes.
+- Link to v1: https://patch.msgid.link/20261012-sm8350-cpu-capacity-v1-0-3d141e0099d5@fromdisposition.org
+
+---
+Demeter Barna (2):
+      arm64: dts: qcom: sm8350: Add CPU capacities
+      arm64: dts: qcom: sm8350: Add CPU dynamic power coefficients
+
+ arch/arm64/boot/dts/qcom/sm8350.dtsi | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+---
+base-commit: d053e38e614fb2e383b298ce8fc308a780d7f209
+change-id: 20261012-sm8350-cpu-capacity-3145a6e159b3
+
 Best regards,
-Xilin Wu <sophon@radxa.com>
+--  
+Demeter Barna <me@fromdisposition.org>
+
+
