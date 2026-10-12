@@ -1,47 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DBF537A831;
-	Mon, 12 Oct 2026 06:26:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27B7A42AFB1;
+	Mon, 12 Oct 2026 06:32:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791786362; cv=none; b=RyfUNUY+A/K7ENRanbe/9eatqWCF/UYivWLDWh9AP450SVgM+Q2hWFsStQ0wPWtNnb/ZNkuiYGCQG0rt+M8NGLLT0kWtIH8wO26X7zHDFbX2aiHzDVRVg1Ps0yhF6vHhrYVX2wL7oBkDKpBLOhOT8h1TPsqWVgG6p9091XssSCY=
+	t=1791786732; cv=none; b=o2FAuoiHtxOAoBaE1ki2OhqYKe8IvOkx5t35qLt8LBV6Khsip28Gn3dY8P3lXEKuCEGVWxcoA5IYXe/6KpIMqGR/i0x93Y4C7UmOUDxGIAZBozAboEKAv6FZCXWfwBUQjfaz3aSBEH+oH8l+zYvewKS1gvD8vm3QUTVgIwfMv/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791786362; c=relaxed/simple;
-	bh=vzJXMLTThYRji0skbVygomMV3ZGlbrhq+ovchqiueJc=;
+	s=arc-20240116; t=1791786732; c=relaxed/simple;
+	bh=ZCPlN1GBu3uwTPZKU6bYU40qsxaCzT9BSqSVYWaCFJw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LPM65rZZ3tel15ASKtWobvnQDZLjFYqv6rz7GwwuUU3eSqBMWxI7AWDznxHz/PMfv8XZDsNoA2+pfuR1hLOhdHN6F0qoOmXVumzARlEU0lH3hhtiBVlOz368FULoHzulqe3l4Znarn5AG7kuHkR4UoIyVbHzPPdthO36shB38ZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hOabMNBT; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=smbdiZeN1NRfPX+lcrY34u+XzBri7ooVl5jBruWe1dg/iDNAXA+9qYToFWEcA7tTv3kKieaw0uQkVuW+v8gY7/OD5wkLlmNZrakhqeauYaGOEacEFQw8GNxSR/Ewe12vepdVoTdKPqAjxPWpTeMdkuFev5k/7TjMElKgmecZQAE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V/G3rrnk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hOabMNBT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D21321F0089C;
-	Mon, 12 Oct 2026 06:25:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V/G3rrnk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2F5A1F0089B;
+	Mon, 12 Oct 2026 06:32:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791786360;
-	bh=JNsngLvT0sVL5BoR/HX1TkEukMDWlo7+i/ROtNjFOxY=;
+	s=k20260515; t=1791786730;
+	bh=3VWxnyAueG7SeTWz3i+fPsxpGP2dM48HQl3mbCNVA6Y=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=hOabMNBTQ+gb3DdNXm1QyJlzmpg1fXsjwV5zyTr6NTHgCgKfWje54312pkOj81+Wx
-	 Gbzl115SGZjIt4EuNt/2FV9pRDlYzhT0p9YPj6nTIScWUFqI3MDwKBkkNeBleCMsMG
-	 cZpagH5d8J7LS9ZDMm60dVMlqfY7B9sbFycDlIWIfXx+pMU8AER+25DNZWF1Xqa0mt
-	 GOEZViKAOdE6UJ2Hz6PuIVjRyG88G+JRBEG1W2jfMKed210N+XOTVRutKUkgZE8HWn
-	 nAUQP38rvxehbhV1rW2PUT+wEV1pE5qLOXRtYrxWZFmKAKtZB+RkmY9vvmiguarRKb
-	 rWmoXXht+MWwg==
-Date: Mon, 12 Oct 2026 08:25:56 +0200
+	b=V/G3rrnkSexi/qIWIYdElSRqHF/bsaK+0XfNAUD1ZKvzdxOauqhOGJePR1/3AMDBw
+	 1jYe9N18MT5PSlqezo0xgUYcTjgSDmhbEulys+sP0VqCzz1+PK2pcpDy4CAICcvtXi
+	 l+Rg8QsUot4lghiNaHRv7du0DTGSUfTMAf7/tML315yzalL82YT5ZQ3naQzLQ4o5i7
+	 3sV3dS1pAPuq/shU8UVKlNhV1dnSV2clU5Q5ZD47l5r88zamfuaXhizh5v0EW4RNc8
+	 VjhP2rdrQyO1LkPN4QyufIUGIaBSdVi2cDQ0DeNkZ3x3pKewjpiw0tsRn8NbM0kiU8
+	 26TZWBAj7IJTA==
+Date: Mon, 12 Oct 2026 08:32:07 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>, 
-	Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	Srinivas Kandagatla <srini@kernel.org>, Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
-	linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 4/7] ASoC: dt-bindings: ti,pcm1681: Document the
- PCM1681 supplies
-Message-ID: <20261012-aloof-cordial-starling-4accc4@quoll>
-References: <20261009-nord-asoc-driver-support-v3-v3-0-0c1897f21ccf@oss.qualcomm.com>
- <20261009-nord-asoc-driver-support-v3-v3-4-0c1897f21ccf@oss.qualcomm.com>
+To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Conor Dooley <conor@kernel.org>, 
+	Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: cache: qcom,llcc: Add IPQ9650 compatible
+Message-ID: <20261012-outgoing-essential-flounder-cffaff@quoll>
+References: <20261009-ipq9650_llcc-v1-0-572e40b18522@oss.qualcomm.com>
+ <20261009-ipq9650_llcc-v1-1-572e40b18522@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,20 +46,19 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261009-nord-asoc-driver-support-v3-v3-4-0c1897f21ccf@oss.qualcomm.com>
+In-Reply-To: <20261009-ipq9650_llcc-v1-1-572e40b18522@oss.qualcomm.com>
 
-On Fri, Oct 09, 2026 at 06:42:50PM +0530, Mohammad Rafi Shaik wrote:
-> From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+On Fri, Oct 09, 2026 at 07:20:31PM +0530, Kathiravan Thirumoorthy wrote:
+> Document the Last Level Cache Controller on IPQ9650. Similar to IPQ5424,
+> IPQ9650 does not have a broadcast region, since there is only one
+> instance of LLCC.
 > 
-> The PCM1681 takes a 5V analog supply on VCC1 and VCC2 and a 3.3V
-> digital supply on VDD. On boards where these rails are switchable, the
-> codec has to know about them to be able to power the DAC up and down,
-> which needs a way to describe the connections in Device Tree.
-> 
-> Document the VCC1, VCC2 and VDD supply properties.
+> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+> ---
+>  Documentation/devicetree/bindings/cache/qcom,llcc.yaml | 2 ++
+>  1 file changed, 2 insertions(+)
 
-Property names in the bindings are always lowercase. Please see DTS
-coding style.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
