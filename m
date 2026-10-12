@@ -1,125 +1,153 @@
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4567948CD7A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:18:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD4CA47D472
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:20:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791814700; cv=none; b=vDaNXhx4JWxg7HCNAjBUVmehodp8AGiqQ+E9oHW0wraJImOOd/94VfTpdoHQf4KG7X484si1V7DKtY0wD78PmaCeZC7ze0YTwlTMpR0lEdyTbn1TYpKWS+VR9Wd4fpz8doV6v8QCO3aDIn4IXlNRfk6MrzVCk0wczx3gSCSYnkc=
+	t=1791814816; cv=none; b=ADiGLT8IPjCPkOJwMiOVwPiskse1ddTQx6vzcJLDVuSDrQvP5TtLjyz6fhjoT/qlI4vEgECzMVmGj0pkgh3vdL6W5aV84pBErqkwkuvJx3Q/U68fyXTxP2Pv/m+D3zsdS0iJFYiIqjbE5Ss2/UMrgjVuYGVkl7muMWpuQst0YBo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791814700; c=relaxed/simple;
-	bh=xsipEPEhRlPufE3owq6BYPDTNCupZs7aJocTjmILrD0=;
+	s=arc-20240116; t=1791814816; c=relaxed/simple;
+	bh=vGRDJl7kyRoobjtQdlgk+yLGBbR5Hgt/PTr9zi/5TuA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qsYs1rHt9GSYURZo9V1SW0KfQBgi5jx07V6BueQMjVWl1++JtogaHMy7KTheIT+WQd9SHt5adT3+icF17+c80GDZNro2mgg8laSHTFO0Vk40CglBJGMbuwq7Z/KF7L0LzGaPvITjoRHL6R2+5b09QBYuBgnjwu9vZPoyMWeQIro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sifeVwhn; arc=none smtp.client-ip=74.125.82.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 In-Reply-To:Content-Type; b=n77ld4ELlVghWLIiNv2951loCi+P+2XnACcKzSZBbJYuiCGzWtle5nqhhTNKX4GeUOQC2tnlWOL9S8xhml+OxX/3uG7fjOIqUMIqMy5lej5r024JhV2Q++20KPfe4iOt7UZlPG7dCRqPbO75l9y1sNA3eDMYQznv2iwzdZO/wE8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LxeHOCiV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XLrpWO8m; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sifeVwhn"
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-16079d54c17so2251428c88.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:18:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LxeHOCiV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XLrpWO8m"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CC0AgU2275884
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:20:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ylCK8hYC7LZLZaR0wLbmkM5b7kq2nz3B1dnKXYSCvp0=; b=LxeHOCiV+2KSo/Qa
+	/QrIJiuAwRpQMW6LoLY1q6sLOwspiD3PuSd9WKVXm69JWIcOm1iQimp1bYIPWQLo
+	3dj5kTWLttUk/LmXtLlKr+BgUSpjcg84eTOmIl3Npo2NmXfynxL5XZlGz3Cg4L0M
+	Mp95zBa8GlM3mtRkm7td6QS7rjOVYE0nn8l6TclKM2k3PPKxyMCuFr/Vn1SjiHOt
+	VX4DmODDXgYTuxmLcWwhPEl9/RPX52xRmOeYt6dPAvqvRm/dtEupswae8L2QIl1S
+	+XfokUHKj5KUkXndkd52T3+FTDv+N/6e11itNGba9v+TkZtgSjvf/o9mPfbmw9Jb
+	hkzhXQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8udq1rgj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:20:15 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-91782d0a163so4847636d6.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:20:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791814698; x=1792419498; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791814814; x=1792419614; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ERwSK8KKE1W5zoZLZRnHG0stGyfGnvHWTKq0AM5CtPQ=;
-        b=sifeVwhnawn4SdKKrVhr3YxJ1+x2AXwGkkVn8O9CaQ/qYt2yr0iOZLM9TKYGl+DCQO
-         Qr+7Mw6On0oATRgqZrSKw0lim9gGcVHo+ciCULtzuNz7BFreRG8+9w4uWGkxjiOuS52M
-         Jo1vodb1RDGC4+nzKlHcyUqjwjb3gF9Wd+y8VnOZYMcclPdmodG/ok1/4XFFtATvaHV+
-         i54OfOE5IhQXyYJgckMVBbl+4pcXj5I/2XvU+l3LHYCizS0BqC/MBhFe9YKYJvjK4R17
-         fvi1BnzrYIdQhlqFRoDPHnFh/2qTxVKxm8QMJ5rayYTRK/q55b7KYmT3G+0G6snldXP2
-         Qwxg==
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ylCK8hYC7LZLZaR0wLbmkM5b7kq2nz3B1dnKXYSCvp0=;
+        b=XLrpWO8ml5PNxDG6GH1ikBe3bVXw/4hycA5aGJXgMHv2xtBYFT3sfjrFmbkN2HnwR3
+         /Ir9BVlINteYzObM4UPQvT7H/0X5Rb/KdLWF7/NDFxKAe8gidr6+nIQfMCUanDPDtpYN
+         0Kk+IxpTKMlLc8Xil3FH8SqLYG39CNMUN/0k37x4xCSx+NmBdmylpt4xr23EwkTrsYFg
+         pca7dOmAvs6tfapsUGcySUNLh5KIn0XdQXABqeCBtFE8BNs11odQTVMiY2IHPBtIQwVU
+         2LGwJVrritRNHbcndBl3vWmQCL0wseg0HFIt/Ss5qckXXGTo09Mj+KLYUKuV/OfFGNja
+         CciQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791814698; x=1792419498;
+        d=1e100.net; s=20260707; t=1791814814; x=1792419614;
         h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ERwSK8KKE1W5zoZLZRnHG0stGyfGnvHWTKq0AM5CtPQ=;
-        b=owuL/6nN6eFTL5mRFih+wlUBMB0vSRXD2aLCEyRLd/L2vHngH5/2XjBkrRgKkNWsDY
-         LIP+4sWRqPtOIh3VjAnPE01W0/E/oO6FAgXTPQmainMr+i0n0jz/BZYVdk+zzNDbXNM3
-         osuKjCNtEquSAAmldYjpQdvW5pIAHIZy2eFSp1U77fjB/cBbumjHiOMAABh09/3LCIuq
-         sDELTL5nREddO7MT+MTf8P1dj3KZQNK2z0FLpI72du4/krXYwyZs2+V2XhRAdB+ATq2M
-         FJheyBOGP88Kgaj7PuhMy4c+YHoyrnz7MCSbJ7bG7+Hwtvu4LVmxSM8gTMLy68xOVR6L
-         bMng==
-X-Forwarded-Encrypted: i=1; AKwUvByaJLGx4DfPHs++lRsQBMrinkl1aVtH91jfZurluc1j/6jFeLrvKiPr3w1d96CzknEfaPfTa2Su0AfQdhLE@vger.kernel.org
-X-Gm-Message-State: AFq9FYIFnekEJowOQ+NlKe1E0wsaZ/wrO9k94nNCjz+mFqUMmwd24Cyw
-	G98MpZtgrD1VcPb9E3716z9gB5AsrJTBKsLjFcCVwJw/hjYneeCZPfrh
-X-Gm-Gg: AYBFou1nfs3MtfE3oxYiPcZmDGyRLBz7C00BwhCiq/X+0ajx1tF2W6I97NscFDBEusl
-	csJALbGlHRJxJ8ST/rAzeQTWUehJyOtFw5KIhPWnKI5yvLtDagzkE7aLoVFsUj07zYBtXIj5BDB
-	hlUv+Uy6jO7xp6vjnGa3E88oEkLLY1Nv7ArrE+8TXHC7RZpK9WMQZQAm2qUgTiALfkwm+U6XKw+
-	HPP48gKC10MOD/Zon4nODkXCCfwFfDUQfwu5KLSkYqRGlQIxZX3V88N5hq65pTqpER5KnQMK8Qk
-	svSSmSK6V/DdSAKYiFvA/38v8PU6Fdh6YCCtzIyn/0XQyfnGfDQWmusxQ53sIAa9yLwp9/3O1z/
-	2wDFqvQy/TzCq8PII3KgXHczCFh6VhOiVGUOc7OIijObOI+TWPY0uUa6PTPHQcCg+QplZqwEt+l
-	6rQ1X7MpoWTowkSj8OugCfUw8YZOmomts5xYhMf/NTbr3bd3NgZAuQxDynMtLlnVLau815/gdPo
-	ms/6D/yE2MOv5Jvw07psEZjU8+bpcp+sU2T+idQCwlfNhxCyoiBBnbktDjiqjxUWyHmlb7nl0lf
-	RB0iIXzHeqPC/CUAafWpOHlLQHlabOvMkZE+cKuZL22CWuMS2tkr7aDJxqZtRds8f4QxoKP/6lu
-	SY2/mCZY5W3ol4ZKp0Q==
-X-Received: by 2002:a05:701a:c90a:b0:147:9ad0:cf10 with SMTP id a92af1059eb24-16a610ca3d6mr13377655c88.47.1791814698097;
-        Mon, 12 Oct 2026 07:18:18 -0700 (PDT)
-Received: from mail.codeweavers.com ([69.63.209.59])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a1becb11sm28442350c88.4.2026.10.12.07.18.15
+        bh=ylCK8hYC7LZLZaR0wLbmkM5b7kq2nz3B1dnKXYSCvp0=;
+        b=ufM3bsFPencTfnoJiyhOhiu7AOVSF1r/pcduk6u5sICOeGeBNJLf08cafrrSCSf61X
+         FxGPNXn9SHeT2FmA2IBE4Dl595c7In40oFYZFRjXRujDQII7+gOCdVaOQ6D5i10CH+Vl
+         wqWVyirhVu3/53zYRNP9iuAmkYuC1EV9FBj+UEatpmLqzYuFmfISNIBxodUCItr9rkH6
+         pZEfCpGn7EoPqWRAxr8BWbyfI3A0cAvC1CqhyHNm/MtJ3RGtR5pUsiZ+rPaZqX+0ecg5
+         dJf1O3BE6Bwy8JNDlqqBm4nEBQija1RDMKX3wGThr0lt5QOAcEZe0vfdjcHHXWKIFgZ2
+         9Gew==
+X-Gm-Message-State: AFq9FYLmvUeNeCsFFawUXdwGsBre4XaXW89lnV19ZCftRpF/Y87rTlnG
+	axpPgm1asZWVuVx/hdxsigRxHeU3fIZd4Mx6wqxOE7jIvxoMQXTzTjg9SlrCns7dwJg0TOKm/wT
+	3aWLder8N2jmApCg59/+KgZL8ytv54GLMig14HAiukak+rSbPuUDalkdR5qAaEgX0J1n7
+X-Gm-Gg: AYBFou3YLyIVXd1elaIkbA8aF0wQaXv2NbRjtbzuTAbf1u/qtLDIDlsTolaT8kjBYhe
+	TbqGxE6Abh+RUNP7ZWwDd6Vv1ZO5t/H7Z/M808+sAa9xyIjVPNGxmcg/V15I0XFo5p7ve+FctPZ
+	hX/wvzvQiVKzdhZlYE0pGHZcNeuGIP9pFq5nIs0VWqTCQSSLJr+LJ8Z2n2g0N/U3W6RC535TVXQ
+	KVMMycuApiKEoaYF6GQk57tS2+j3wDaqJo0Mdfr5IYEFc3FMPuhSohmij4CPu1+5XqmGjRrhtou
+	iS3uey1smzafGDw5pGIReLuO4OADKepqyRlQkbXLlunewOB+qAt9h9LPj9Fp0SFmZw1ThE/yJf7
+	NhCa+7jtV0L+zGD/3vH9XWg==
+X-Received: by 2002:a05:620a:45a1:b0:939:9205:4d78 with SMTP id af79cd13be357-93ebd1ff38fmr1904420885a.3.1791814814063;
+        Mon, 12 Oct 2026 07:20:14 -0700 (PDT)
+X-Received: by 2002:a05:620a:45a1:b0:939:9205:4d78 with SMTP id af79cd13be357-93ebd1ff38fmr1904413485a.3.1791814813429;
+        Mon, 12 Oct 2026 07:20:13 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b1aaec1b9dsm2257054a12.0.2026.10.12.07.20.11
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 07:18:17 -0700 (PDT)
-Message-ID: <13181dfa-b92c-43b5-ae12-912abaf79c41@gmail.com>
-Date: Mon, 12 Oct 2026 22:18:13 +0800
+        Mon, 12 Oct 2026 07:20:12 -0700 (PDT)
+Message-ID: <351225fe-4698-416a-be97-df68b9297224@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 16:20:10 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 0/2] Add device tree for Acer Swift Go Pro AI
- (SFA14-11)
-To: Jianfeng Liu <liujianfeng1994@gmail.com>, kaipeng94@gmail.com
-Cc: andersson@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org,
- konradybcio@kernel.org, krzk+dt@kernel.org, linux-arm-msm@vger.kernel.org,
- robh@kernel.org
-References: <CAHk8ZdsVK-n6u+KO5W0=7c_4_eQ2Aj0aqTg_tqU_x_58t0L6dQ@mail.gmail.com>
- <20261012100325.38128-1-liujianfeng1994@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] remoteproc: qcom: q6v5-mss: Fix memory banks count for
+ SDM660
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Konrad Dybcio <konradybcio@gmail.com>,
+        Alexey Minnekhanov <alexeymin@postmarketos.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
+References: <20261011-sdm660-mss-banks-count-v1-1-f4eced49b509@minlexx.ru>
 Content-Language: en-US
-From: Jactry Zeng <jactry92@gmail.com>
-In-Reply-To: <20261012100325.38128-1-liujianfeng1994@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261011-sdm660-mss-banks-count-v1-1-f4eced49b509@minlexx.ru>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=evJKXYpX c=1 sm=1 tr=0 ts=6accec9f cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=qC_FGOx9AAAA:8 a=ZEkBDfZtAAAA:8 a=EUspDBNiAAAA:8 a=BNY3paFinK7L0Tc9HpMA:9
+ a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22 a=fsdK_YakeE02zTmptMdW:22
+ a=IqjDwHP2KxQYjTbYCZGP:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1NyBTYWx0ZWRfXx9WTW/dHVJWn
+ vH+J+Tm9MU1EPX9BNrl4IUn4B/ozVtEQolRqaw3NRnfhxYqTAekg8kZdpW6SmFE3xLiUTSC0SJj
+ 8Vde7VvXDwX3amYDJgLRPunjTdY/+mc=
+X-Proofpoint-GUID: gvsvYxzA8L74aJkYayhZFDVakiIvKpr7
+X-Proofpoint-ORIG-GUID: gvsvYxzA8L74aJkYayhZFDVakiIvKpr7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1NyBTYWx0ZWRfX/Rmw1G0H2zbX
+ PBP0/R09sA5M0ihcQLuQGZEz4YIpQHl4lD6Q+JNUtiNRfwF2lziaFQdz8VakACdi66hqDUoZi5u
+ OOT/NeM68eZyWwTMcznYn/vc0cO7gNbufXQ7/gmJMoqJStm1FG9S9+yc154bugVjIWzWXkBlsv8
+ 6LolTYnnRCKwJdzIeu3SflJGNZG2zLT8PdoTJr/QVMVTvgIUoo7jQu4VdaANpDH2OjF4oHQ6ZOy
+ rvB95LMpXQDbf6eNITi+PanhsHqbjxTBUEIpScDTkGOEqjXCaVJPegxZ6nCSeMzgb3r5NTeo+dp
+ b0DW/CS71zRf6n9tLW65exifjhd++xVAmS3rAMfXRRiL7SJ3GvKBV/GEY9EGhaeIP4+S/0u17N3
+ +oQN9WTzZQs8HgzagdblMm1t4nF+ZHE7F35/8agD024wjHqEqE3ki2IBqovABQacFoe0+LQLNZH
+ 1YzHXScozZC1ZaSPSgg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ phishscore=0 adultscore=0 suspectscore=0 malwarescore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120057
 
-Hi,
+On 10/11/26 2:56 PM, Alexey Minnekhanov wrote:
+> As per downstream driver [1], SDM660's MSS version QDSP6v62 1.5 has 29
+> banks, not 28. Leaving something unpowered sounds bad and can potentially
+> cause unexpected crashes. This was missed during addition of the initial
+> support for SDM660 modem remoteproc, fix it.
+> 
+> [1] https://git.codelinaro.org/clo/la/kernel/msm-4.4/-/blob/
+>     LA.UM.7.2.c25-11600-sdm660.0/drivers/soc/qcom/pil-q6v5.c#L508
 
-On 10/12/26 18:03, Jianfeng Liu wrote:
-> On Mon, 12 Oct 2026 16:15:19 +0800,Kaipeng Zeng wrote:
->> Acer had a page about "Acer Swift Go Pro AI" but it was deleted,
->> fortunately here is
->> a snapshot:
->> https://web.archive.org/web/20260314171131/https://www.acer.com.cn/ 
->> product_list.html?parentid=323
->> It's sold in China using the name "Acer 非凡 Go Pro AI".
->> There is some discussion in the thread of my previous version:
->> https://lore.kernel.org/linux-devicetree/20260729064538.19564-3- 
->> kaipeng94@gmail.com/
->> I have no idea if your "swift SFA14-11" is the same as my "Acer swift
->> Go Pro AI".
-> On the naming: you're right, and thanks for the pointer — the SFA14-11
-> series was indeed marketed in China as 宏碁非凡 Go Pro AI (my unit is
-> an SFA14-11-QWU1; the retail listings I found, e.g. on Suning, are other
-> SKUs like the SFA14-11-QGU1). One thing I noticed though: that retail page
->   has since been taken down, and Acer's support sites — global and China
-> alike [2] — identify the machine as plain "SFA14-11" within the Swift/非凡
-> series, matching the DMI and the model string shown in Windows. So it
-> looks like "Swift SFA14-11" is the stable, support-level identity, while
-> "Go Pro AI" was the transient retail name.
+The linebreak here makes the link unclickable
 
-I think we are about confusing the product name and the model name here?
-It is clear that the product name is Acer Swift (aka '非凡' in Chinese) Go 
-Pro AI; the link to Ubuntu stubble you provided also reveals this somehow.
+> 
+> Fixes: 10b6fec2c8c99 ("remoteproc: qcom: q6v5-mss: Add support for SDM630/636/660")
+> Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+> ---
 
-Also, IMHO, I think we can't use 'stable' to describe this situation. As 
-soon as the product is produced, it was given a product/model name; 
-unless Acer renames it, this is it. The vendor can also remove the 
-support page that you referred to sometime in the future, just like they 
-removed the product page; this isn't rare; I think we always shouldn't 
-depend on it.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-As Kaipeng mentioned, there were more discussions about naming in the 
-threads of his v1 and v2 to this mailing list in July, if you are 
-interested.
+Konrad
