@@ -1,300 +1,207 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC7E847206E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:11:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E3B33E450D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:19:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791799892; cv=none; b=P5MKtAiW2Q3cCkgvTIGwAqzRSfO4dq/KGOe9HFxXHTM2NVpLKGQJIaoGb5qtF8+YW8mpmP5xd3ElC5pudlw+nEWnqOXA1Pxgqo0zVNiXxZUvwJ+SMrzFcPlQ9/7YLQjfk8JIYppvFlN55ZTBbMAd13b+9bPnVkIaf1a/BrAYar0=
+	t=1791800356; cv=none; b=daiWqeDTPvp19tUSxhjd2/8wNnncuPqrLCr1NfFFWQMnddCvf9RezW4DyvySWcwExfNzFl2FGv3hZ0OOfet6uDrrIzKtSMXvmDRxoQzdjAXikyHzlcJasyU1lpr8wE2yBOc3hjKSZLXUTQLcyYZnu3pKu/db8AWQyDIFfUPNb6Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791799892; c=relaxed/simple;
-	bh=TvsucdrpRWbg+nMNXlqHZpLBasZrZ8y3ICHplgkyc/4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=THMJLkisyX0itC6o5IcBjlW5q2SJssK97Pao3ulFk2O37/wu3GnZKl66D7+nvtaNjLRy+B5MwgbYlh9NdXQO+4k5H7WNavBoJKlbb69KnRwGQ42p8IAvneu1+VvVCtS8Q2c+kUeAbF6DU4Ojc76qu6TGj04V7V/v2baS/Dwy/10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MWgNbi01; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dLchOpxA; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1791800356; c=relaxed/simple;
+	bh=bbKjj1C0Me1kB2gAMk/MgjrJQ9ZuhQvmZb10mxHzzrw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=JJRH85lE4Gp+PVJsLY+HUEvWKTdM8kaVSUP6u+cgDQOJ/Cqyjf83Fs3QQwM2Lje8f3m8tj6V+6Od1uBnv7ZJ8KeN36k7s2kw3h6H1xqRKCsR8krbXXLGvJdf/emx+K0HIX5a/8cCT/CjlALWlbUcxW7oJVFUdG5DwAevgjQT+ws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TYsKTKMO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jxUG7jtE; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MWgNbi01";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dLchOpxA"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8Kmao1439204
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:11:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TYsKTKMO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jxUG7jtE"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KnoE1593601
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:19:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	oLO3xElZC/wcDFG9lAUoZKlFW4ekiZ3DscpSdqapZBw=; b=MWgNbi01PvSuV0K/
-	GF5vPCOZWMSjPDap+X8gxQFGn0AxFPzoOlEuhclgJlQoh+1EyVaLIEMI9aDt6V2u
-	E4JTNI2xJ2WVBWFmrlPfqMd2FmMKaNzPOnQX9w0OdTYiFZ9E/sCmOwbgOUgxbPc+
-	q9w/HB3hXhNDqntAfxEeSUNgCQapin4GrYsI26ruhS7cJrTeNRl9fGHnaUJximpn
-	bZBRC/015zibDeqOHhuGE9WpdFLSI0wob5SUYSompRBWtA8qOEQfxY6fFD8hafTN
-	N0/YQkRBLX1o4zVMPipBGfCyZ/0QUFVz7Fu3bHqYdDwOAb48flvJXm+DxewaaALa
-	xQY4Kg==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8qtkhgt5-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=MrTikc7PzU67E1D6XWu5lp
+	0nNMPg3MxZCKmkjWFxU3Y=; b=TYsKTKMOc66u77Ln5f1UfNEJtTqshfPaGzRx/P
+	H4tlF8Tssd5Sfb29LEzYGXX7aTvMZYviYC8kBjKg9oIUtb+IDI283giHe3mpm39G
+	/+IKPkD4xR2gSkAWk+AIVZ5PX/yv8vldfYIeV+P+l9OZUi8cp5duJ8dwiixVvZdB
+	0R9cQztDpXLzMjY8W3/2gKHNeCp8yokBYYnMQhxz0nnrUgVAfccf7PTP9w429eGE
+	evvi24Nl8l3xomn7JkU/DhSFqmWu810Z8DUk1fiqL/jsqSG8xswQQlYSjfH3ebHN
+	9gjI0GINYKC/VM27mWXsde7D4M5bGMo29AZBp080cz79a7wg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu180g-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:11:23 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc11b5dd54dso3721529a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 03:11:23 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:19:00 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93caa0ce0cdso179264785a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 03:19:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791799882; x=1792404682; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oLO3xElZC/wcDFG9lAUoZKlFW4ekiZ3DscpSdqapZBw=;
-        b=dLchOpxAD0L97zvOdybCKkf9DbPCiRBjrwE0+xGEijMjT/eOAb+c/9um4DxIv3lKpN
-         wKD8CbsyrPHEeGdAXKCHo4ryxxda+bZM8VZXGFmL1CoG70nn2cOo26sade54rDCQnxfl
-         Am5VNiU7lrAxJGQfIrq9eS4/WOm164dV7fKZomOnBp1g0hnYss8kGmGK+/8DLcWntCS9
-         9bgrbvJr9kpS+IDZZG3l71VCSdvOrzE1ZKCQHv675HFKeaQuS7i3dOEPG9q+IYfyiLhZ
-         gnqORj7gZfuXtw9oGuiLsPgsdUO0zb+ozPcWvtRJTlMPoNCmZ1Pd4GfGXIPJRFJxCNRN
-         5C5Q==
+        d=oss.qualcomm.com; s=google; t=1791800340; x=1792405140; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=MrTikc7PzU67E1D6XWu5lp0nNMPg3MxZCKmkjWFxU3Y=;
+        b=jxUG7jtETdRAI805LzmTt2yIjeRxIMqH55Rugq8vV/wtpggEms1kI7oww6IQu1qjjK
+         LAJ+Y+9i0to8q9dE/EgdwiYzU2f3bqZob8cWhZs7I7gOho01XbqB7NSg9CPDO52UiQjE
+         Vh/Ukx9NP8HItKdbnuu89NuvQabGZLjRG1LJhtJDWyDJdlj8LNwT4ctEdHnxGjG2Ipj5
+         haOFF2nQP1OhlohYcQPN/0U01vNP9+syC8HLC/n22uxfiNq2PVavyVjry3R/hlK/EwPi
+         xpBIzdkI2fDlpzueKLPLZmJgAwWOrGd+t9HajibrB2kY4CVKo15Q7QdDsVzZaH12U8Pc
+         9h1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791799882; x=1792404682;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oLO3xElZC/wcDFG9lAUoZKlFW4ekiZ3DscpSdqapZBw=;
-        b=Oe92CKIavoVJSFcNGFEdT16mYa+FODHlS9hPTEgWmoqbJaH3qpMxWlrrGsMlPXkhPy
-         4UjlsjweMCnp6DDcg4xVGCplmcqZoiclhXU/5IajqP+BRrrOglYQ7krEshCktLOeMw+w
-         SdFDJp6VQvanXwCUDb+/mKTkIMooHWEWkomVxkbB0f5tf6wbCZ7ARXj7bUofMNHs1qiT
-         W5pxT8V91CvPQfkM5EBGWXyL6I0Ezv0AOuV+34JDclD/yVAo+SGB0+Zw3hXROoXPHtxn
-         j1XM+JvUtA6TXvWJV816y5EkPVuMEKFKzMQMrWWez4BmoKzgxFmg93yy7mFvCuQgZk9E
-         VV8A==
-X-Forwarded-Encrypted: i=1; AKwUvBw+CC6f+TLPopaF6l4tH4BrrrMIFC0IkLZ9lL+J5Oj/l6/ubCbuz8qPbSFH+tSHHZ74OC+r0mOhPqzPrpCO@vger.kernel.org
-X-Gm-Message-State: AFq9FYIiZlFgL6Cwi5WFE0tLUiCua4ux5YH32tofU5h/JF9RBE4BzjtP
-	PL/7zO8GleTNbMMN+ww5o1RS7uvXKJNQldylAv3up1sq7TAknRMla1VX15Q/FZ88KVuh0DDs0TC
-	vq7ACzenVodxeHA+k693CenrooD2fKpx2Ys8I14f1/aM56HpAzCLVpE/OItUWB2ERsF1q
-X-Gm-Gg: AYBFou13Ezq49Ioah3rlfWc48Eno809fuCn4CeknGOly+N9C9ZZmNp2SIUfPrHfuzE9
-	qKDWXWl0NsFA9RylpQTrXhlNyMyn5auNZRN8EOfhM8rXCMtxttaXBFRqP/QUkakjeCPYXjXZ/cZ
-	cfVMmFEAyQuW2kTsfjnbySsEo68M0PzP0aDngCJV+eLQowERKvTzyeCc3YmaDV2c4n8PgieXepM
-	J1IJDhxKNpGvfOUQrs3hFGjOHywDn30mQkA1joduzA88bz7XEBp10lSNDP976CKQQcIWgOzXii1
-	Cqe/3mrZLqcjFHTVv9Esos8tSL9vLihpgVyQQdgRFcA+GjuxHNJnR7Otrg1S8ONfAe8pTB2lfIG
-	WT5p43IKQUSSdJiBzJA==
-X-Received: by 2002:a05:6a21:329a:b0:3dd:a00a:170d with SMTP id adf61e73a8af0-3e16be79864mr7616219637.40.1791799882442;
-        Mon, 12 Oct 2026 03:11:22 -0700 (PDT)
-X-Received: by 2002:a05:6a21:329a:b0:3dd:a00a:170d with SMTP id adf61e73a8af0-3e16be79864mr7616168637.40.1791799881951;
-        Mon, 12 Oct 2026 03:11:21 -0700 (PDT)
-Received: from [10.64.69.36] ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-896c3107348sm3869973b3a.13.2026.10.12.03.11.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 03:11:21 -0700 (PDT)
-Message-ID: <e25158f9-9fda-4561-8bb0-d05a21f420e2@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 18:11:12 +0800
+        d=1e100.net; s=20260707; t=1791800340; x=1792405140;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=MrTikc7PzU67E1D6XWu5lp0nNMPg3MxZCKmkjWFxU3Y=;
+        b=DRL5JiIjZYp8zFMQleCtFPJ5Mj+SJqQbTqh5wPb6VllzXkQCaaGejlB8nbuHgm1fpJ
+         vAhLKdClB2lVY2LEPBYosUQzfYxjDm1svaqpVEiS3rCjoBOcIm44pYdX8bRVllVqWdMG
+         mY9FTabS6fMrRfl7vtlab0HGO153ogJQHfF40/nbv/8/w7Ks/MmRg1g0YM0hpFQSjvfF
+         T6uledblnPpVWg9Zo8SwuTRDGur65csT5Tqna5R6D1bPpVv6IX8D/va7xmp9DzPux1XD
+         IrS3sm6w8QzGJRVDpQ1/0L/q4FXnY9vGIE8KyMJv8DjfX+nqYvftzgTcIAI6gZvtH3Xw
+         swjA==
+X-Forwarded-Encrypted: i=1; AKwUvBw0OD0foRdlWOyLU6iVlpSUUcEEcxZLckDeM/wIM9982Zle8mo7gaDmVHqLl5ye/qg+xGGgv0B2VL28BIIJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJZQc3YcKsqVS3ifvtIChxoV8XRhVqqdhvv+T2eq5yoPD6ZASe6
+	IiHDZeB/hZCt2tbk/wL4laI7abwAae86uMT0DeqtonEnMWhoqDlZtEDgIYt4PDg/50/QZjbUzFA
+	IRFP2hjkf4oo199inistg0Q6GP4CY+hmsr4UAzDgs8CG7OEg5YIW/GJg7IS1Eihnp3dn/
+X-Gm-Gg: AYBFou0YbqmdB1cz5M4SB01XHVP7PxKQXJMvws9VU0Q6T9jrTe1FFouncMMQuVE/7uO
+	Bf3USbL5KQ802/HcyfrKNHMpwaQUK/cD7NxEJ+RxP8fWeBYoSEspCiLGgKAgV7ksbRQYCLaHsb7
+	+Y0OIdiJ26h5o04+7YDEqM14NAiCsqYNJF5oZyFAyOJJkI0SzGws6BR9XPMFG8qmb9hjRN00qPn
+	myIgb5HmvekoPU+TrNMr4OjSU8QeqEOVxYOGQAq3EIOcYbudN0dSFL0bVNaRr2D2zkPvrhYTE8i
+	k9r5v6PLEVExEM9ZX0plNqPfbCbCLKuY5/agA++GymiQDlXNgeR7UkM74e3q3ls3mTc7KuRSxCk
+	6ne1UrSw87NRi
+X-Received: by 2002:a05:620a:1a0e:b0:93a:2611:270f with SMTP id af79cd13be357-93ebd20ecaemr1562936485a.13.1791800340061;
+        Mon, 12 Oct 2026 03:19:00 -0700 (PDT)
+X-Received: by 2002:a05:620a:1a0e:b0:93a:2611:270f with SMTP id af79cd13be357-93ebd20ecaemr1562934285a.13.1791800339512;
+        Mon, 12 Oct 2026 03:18:59 -0700 (PDT)
+Received: from localhost ([2a00:23c4:e5c9:901:c496:8838:86d0:bc8c])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db94e530esm17734057f8f.13.2026.10.12.03.18.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 03:18:58 -0700 (PDT)
+From: Christopher Obbard <chris.obbard@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 11:17:55 +0100
+Subject: [PATCH] soundwire: qcom: Fix off-by-one error in port exhaustion
+ check
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/8] arm_mpam: Add support for memory controller MSC on
- DT platforms
-To: Rob Herring <robh@kernel.org>
-Cc: James Morse <james.morse@arm.com>,
-        Shanker Donthineni <sdonthineni@nvidia.com>,
-        Ben Horgan
- <ben.horgan@arm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Catalin Marinas
- <catalin.marinas@arm.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Reinette Chatre <reinette.chatre@intel.com>,
-        Fenghua Yu
- <fenghuay@nvidia.com>, Jonathan Cameron <jic23@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Gavin Shan <gshan@redhat.com>,
-        Andre Przywara <andre.przywara@arm.com>,
-        Drew Fustini <fustini@kernel.org>,
-        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-        Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
-        trilok.soni@oss.qualcomm.com, aiqun.yu@oss.qualcomm.com,
-        ganapatrao.kulkarni@oss.qualcomm.com,
-        Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>,
-        Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
-        devicetree@vger.kernel.org
-References: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
- <20261008-mpam-resctrl-dt-knp-support-v3-6-35196c2b43bf@oss.qualcomm.com>
- <20261008212904.GA1450868-robh@kernel.org>
-Content-Language: en-US
-From: Yin Li <yin.li@oss.qualcomm.com>
-In-Reply-To: <20261008212904.GA1450868-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA0MCBTYWx0ZWRfX7N3YgpR2sqUQ
- Np7FpVGH7IwJjtwjY+LV30HsgJaGAYnrJ94vMMH6L0DDrZSZ88/StqadWxSyxGe6j9FBOZA4TvQ
- fskZj1FTUHKvm/W0bF8QJCEyoSPeWtaqd0TK9J8773BLNPYfjJEMC5Yt8phxE2qUAFT9vQB/YAE
- J3C9tr1ClSPgKb6S213wxnI8KG3CyVqkx3xZ4xpF2BIDQJKdbp1Mzlpw+auzDg5GtStG4BJJmXB
- yPVUvlQ7pOQZBfZq3JmSzed6HQigplrVw+cQAvjvwGsNvp9JgQRW9L54uUhO7XYp+Jcrw2zCfzx
- TpqtlntcJn90Ot9zusOLpAY3FXFqo1L4IbsZWN8mp+NJM76U8UjaG0U2U5/s433knPxKJ/LaBbk
- TCPVaXPWkm2lxW8tWm9PGR9ckZz50KCitx5c7E/FRuojJ+nqmGDUgwRDAcFnLWFgbbxkQU66yQB
- qmUzt9oMhQa67uCQwfw==
-X-Authority-Analysis: v=2.4 cv=c8U+0h9l c=1 sm=1 tr=0 ts=6accb24b cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=Ikd4Dj_1AAAA:8 a=7CQSdrXTAAAA:8 a=EUspDBNiAAAA:8 a=urU-21cbkK_4QL_mq_YA:9
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA0MCBTYWx0ZWRfX95M1jFI7mJIk
- z3I98Wy8PVzTtBEPygJcR8eHzZtj5G1Y7Uzw+26arkpjzzMe9cohNZ7xXvBahUG4hirbLzc4rBp
- d3j7VX2Fvm6clK+U/dbZeR5O8lOy/nA=
-X-Proofpoint-ORIG-GUID: B9AsvQdCFW7LO6IiH1Bhot60gUtBmq0d
-X-Proofpoint-GUID: B9AsvQdCFW7LO6IiH1Bhot60gUtBmq0d
+Message-Id: <20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v1-1-81f1a4c9c73a@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNywoCMQyF4VcZsjbQDt7wVcRFm6Yawaa2c1GGe
+ XerLj84nH+BykW4wqlboPAkVTQ12E0HdHPpyiihGXrT762xPc6SUb13JRBWHVOYpTA+SR8Y5YV
+ Zy4AaI/o3amLcHsi4o4uWdgztNBdus1/wfPm7jv7ONHwrsK4fGwhB/5IAAAA=
+X-Change-ID: 20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-47c0a8af1c5e
+To: Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Christopher Obbard <chris.obbard@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2223;
+ i=chris.obbard@oss.qualcomm.com; h=from:subject:message-id;
+ bh=bbKjj1C0Me1kB2gAMk/MgjrJQ9ZuhQvmZb10mxHzzrw=;
+ b=owEBbQKS/ZANAwAKAWNNxPBocEb4AcsmYgBqzLQNnUMouCxqa0nI4ulO401eVAkkBT/KCAh1x
+ xd/bzoRe1SJAjMEAAEKAB0WIQTxi9yLbCX5CqI9UXRjTcTwaHBG+AUCasy0DQAKCRBjTcTwaHBG
+ +P4XD/0SO0dEhLv5uR2QB2XsA4UnScmMXw1p6G8UV2rIRURPrqkAFogiVfbOaMUN0E/s0IOBpG1
+ THqnL4cu81EgA7Y8CKiickQipViKhpLhBsH5U1zcZo5i3iJaY7vpyT/qlMe4EK8TVlbGzEPceZw
+ ok8tshEnFPBo9WzyfJiRfCTA0dRnxmllD32sij9GyojzneMzbBCUadTiMcmmawG3VKyh06qP2Iu
+ YbpfTsmuDJ3WgT2fS7n2HtBFp2SV49+5ZVpxKxJ9eP5YIoeoyeI70UTkDXtNzdKvaKgaOT04TJp
+ B39otspltMppuUJ82+kodG9t6LK6GC8n24K4dYeB565jl5ATwiDR1qwqmW/KVc6+x6PCaZRF0ox
+ Y05SiKYQuL9U2l3pPNYT4lEviMIgmWzRHGeRdH7+PEX3iMPNPLbwsScnyEBoHMBMQXQ48XLh0pe
+ bDRf6Jeuet2z+TI7IrnSeOOZqb71afaj78RlSQUC3Q1Ow5unoQ+RfAFKVJc+SLUMwE9S9khePKD
+ oW5EBipci1Tx3xFq8AE+JGUmtaTsb4kXf8V7E11cK3YzqLJIfypjcj3NnB5vrb9LoEkF8eg095/
+ v8eEJ49sRuVK/VXMOUp22TSIcnXMjIZ1U35E6whoAHwhreWn/5jdj6+kkn7ZDWT0/hMVG/MSSJS
+ RW92NvPj9nMumbg==
+X-Developer-Key: i=chris.obbard@oss.qualcomm.com; a=openpgp;
+ fpr=F18BDC8B6C25F90AA23D5174634DC4F0687046F8
+X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6accb414 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=WHBPfnyW_ekF-p2RvPMA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA0MCBTYWx0ZWRfXwSoXJtcBw0DM
+ lXMoVp0/z6iKcJ/bw0WwG+bdRc1bkujvHMBpNiTCKJvV22udxms/gLyAd9PCFbf/7/Ta9kG4IhU
+ gGfrOvzzPEbGvPjfNe8RawSS4PT+3szukzf0jX0/mqbo5ZsqkhJG4MPHx/qVUX5ORunS6GzC/tC
+ cl+n3xSq4gP9jC5DAoZNyh35BUZnRfjbs0QHKLcflG1q8oM9urQF2+qnrPwW0RX/6J735lNDFYb
+ CtFTBBMSVJjh5oNFIoGwxPL1Ygw5q09Wt3vvuuKTsienUT2ruVTc7vnCXkOWHyrnwID1BHe7+Yp
+ DMTQVRYAXAcWtkhLs6zGgSuHq7TocIR+xgEADjNrfsEX9KBnG2YpJYnXBiMZXPUNvM2SnSCPBDU
+ mI6mULtNCUIRqyDdBPLQdAsG6dz+iLoBj+ZxCdLG7JjsAHI+IZoAhBRwgnL/AE6/iZUm5Z4inva
+ g4Gy4wkFtyUTjuuzjMA==
+X-Proofpoint-ORIG-GUID: OIyahzVQyHAt2gFdkDKEktBHh0Ftqd6h
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA0MCBTYWx0ZWRfX/Rm/i7tNLZWO
+ b3uLnS9T3gYgAcsLg2p9orPolIRo2ge6HjhwMPqdD5Q/gP3KvzJved2soWkwn5GfLTv23twOXNe
+ bRP6G3pH9r57wivQkmKQY6TrAneKjzM=
+X-Proofpoint-GUID: OIyahzVQyHAt2gFdkDKEktBHh0Ftqd6h
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- priorityscore=1501 spamscore=0 impostorscore=0 clxscore=1015 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120040
+ bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120040
 
+Qualcomm SoundWire master ports are indexed from 1, with bit 0 of
+port_mask reserved. Valid port numbers therefore range from 1 to
+maxport.
 
+Commit 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in
+stream_alloc_ports") changed the port exhaustion check from
+pn > maxport to pn >= maxport which rejects the last valid port.
 
-On 10/9/2026 5:29 AM, Rob Herring wrote:
-> On Thu, Oct 08, 2026 at 02:41:15PM +0800, Yin Li wrote:
->> From: Shanker Donthineni <sdonthineni@nvidia.com>
->>
->> The MPAM DT path only handles cache MSCs. Memory-controller MSCs
->> cannot be probed yet.
->>
->> Add support to discover memory-controller MSCs from the device tree:
->> derive the component id from the NUMA node and create a 'memory' class
->> RIS, and treat a memory parent as accessible from all CPUs.
-> 
-> Where's an actual user?
-> 
+On RB3gen2 (QCS6490), two WSA883x speaker amplifiers are connected
+to swr2, which has 8 ports. Each amplifier uses one port for playback
+and another for voltage and current sensing. The right amplifier's
+VISENSE port is mapped to master port 8, which is rejected by the new
+check.
 
-Hi Rob,
+Since all ports in a SoundWire stream are allocated together during
+hw_params, this causes the stream to fail with:
 
-The Kaanapali platform in this series only uses cache MSCs. This patch
-is inherited from Shanker and James's work; They may have a platform in 
-mind, but we do not have one to point to at the moment.
+    qcom-soundwire 3250000.soundwire: All ports busy
 
-The binding already includes 'arm,mpam-memory-controller-msc' and the
-corresponding example, so if the driver support is dropped the binding
-entry should go too, to keep the two consistent.
+The codec DMA backend then returns -EBUSY, preventing speaker playback.
+Disabling VISENSE works around the issue but also disables speaker
+protection.
 
-We are happy to drop both. Shanker, James, please let us know if you
-have a platform that needs this before we do.
+The original fix addressed an exhaustion check that could never
+trigger because find_first_zero_bit() returns maxport when all
+searched bits are set. Include the reserved bit 0 in the search so
+exhaustion returns maxport + 1 and restore the pn > maxport check.
 
-Thanks,
-Yin
+Fixes: 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in stream_alloc_ports")
+Signed-off-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
+---
+ drivers/soundwire/qcom.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 6e0c5fb10efad..b4ce96792fa94 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -1348,9 +1348,9 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 				if (m_port)
+ 					pn = m_port;
+ 				else
+-					pn = find_first_zero_bit(port_mask, maxport);
++					pn = find_first_zero_bit(port_mask, maxport + 1);
+ 
+-				if (pn >= maxport) {
++				if (pn > maxport) {
+ 					dev_err(ctrl->dev, "All ports busy\n");
+ 					return -EBUSY;
+ 				}
 
->> Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
->> [ morse: split out of a bigger patch, added affinity piece ]
->> Signed-off-by: James Morse <james.morse@arm.com>
->> [ Yin Li: fix context offset conflicts; use of_node_get() for the memory
->>    parent to avoid a refcount underflow; use u32 instead of unsigned long
->>    for component_id and compare against ~0U ]
->> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
->> ---
->>   drivers/resctrl/mpam_devices.c | 55 ++++++++++++++++++++++++++++++------------
->>   1 file changed, 40 insertions(+), 15 deletions(-)
->>
->> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
->> index 0640690eae2c..048d32e69f55 100644
->> --- a/drivers/resctrl/mpam_devices.c
->> +++ b/drivers/resctrl/mpam_devices.c
->> @@ -263,10 +263,12 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
->>   				  u8 ris_idx)
->>   {
->>   	int err = 0;
->> -	u32 level = 0;
->> -	u32 cache_id;
->> +	u32 class_id = 0;
->> +	u32 component_id = 0;
->>   	struct device *dev = &msc->pdev->dev;
->> +	enum mpam_class_types type = MPAM_CLASS_UNKNOWN;
->>   	struct device_node *cache __free(device_node) = NULL;
->> +	struct device_node *memory __free(device_node) = NULL;
->>   	struct device_node *parent __free(device_node) = of_get_parent(np);
->>   
->>   	if (of_device_is_compatible(np, "arm,mpam-cache")) {
->> @@ -275,27 +277,48 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
->>   			dev_err_once(dev, "Failed to read phandle\n");
->>   			return -EINVAL;
->>   		}
->> +		type = MPAM_CLASS_CACHE;
->> +
->>   	} else if (of_device_is_compatible(parent, "cache")) {
->>   		cache = of_node_get(parent);
->> +		type = MPAM_CLASS_CACHE;
->> +	} else if (of_device_is_compatible(np, "arm,mpam-memory")) {
->> +		memory = of_parse_phandle(np, "arm,mpam-device", 0);
->> +		if (!memory) {
->> +			dev_err_once(dev, "Failed to read phandle\n");
->> +			return -EINVAL;
->> +		}
->> +		type = MPAM_CLASS_MEMORY;
->> +	} else if (of_device_is_compatible(np, "arm,mpam-memory-controller-msc")) {
->> +		memory = of_node_get(parent);
->> +		type = MPAM_CLASS_MEMORY;
->>   	} else {
->> -		/* For now, only caches are supported */
->> -		cache = NULL;
->> -		return err;
->> -	}
->> -
->> -	err = of_property_read_u32(cache, "cache-level", &level);
->> -	if (err) {
->> -		dev_err_once(dev, "Failed to read cache-level\n");
->> +		/*
->> +		 * For now, only caches and memory controllers are
->> +		 * supported.
->> +		 */
->>   		return err;
->>   	}
->>   
->> -	cache_id = cache_of_calculate_id(cache);
->> -	if (cache_id == ~0U) {
->> -		dev_err_once(dev, "Failed to calculate cache-id\n");
->> -		return -ENOENT;
->> +	/* Determine the class and component ids, based on type. */
->> +	if (type == MPAM_CLASS_CACHE) {
->> +		err = of_property_read_u32(cache, "cache-level", &class_id);
->> +		if (err) {
->> +			dev_err_once(dev, "Failed to read cache-level\n");
->> +			return err;
->> +		}
->> +		component_id = cache_of_calculate_id(cache);
->> +		if (component_id == ~0U) {
->> +			dev_err_once(dev, "Failed to calculate cache-id\n");
->> +			return -ENOENT;
->> +		}
->> +	} else if (type == MPAM_CLASS_MEMORY) {
->> +		err = of_node_to_nid(np);
->> +		component_id = (err == NUMA_NO_NODE) ? 0 : err;
->> +		class_id = MPAM_CLASS_ID_DEFAULT;
->>   	}
->>   
->> -	return mpam_ris_create(msc, ris_idx, MPAM_CLASS_CACHE, level, cache_id);
->> +	return mpam_ris_create(msc, ris_idx, type, class_id, component_id);
->>   }
->>   
->>   static int mpam_dt_parse_resources(struct mpam_msc *msc, void *ignored)
->> @@ -2169,6 +2192,8 @@ static void update_msc_accessibility(struct mpam_msc *msc)
->>   	} else {
->>   		if (of_device_is_compatible(parent, "cache"))
->>   			get_cpumask_from_cache(parent, &msc->accessibility);
->> +		else if (of_device_is_compatible(parent, "memory"))
->> +			cpumask_copy(&msc->accessibility, cpu_possible_mask);
->>   		else
->>   			dev_err_once(dev, "Cannot determine accessibility of MSC.\n");
->>   	}
->>
->> -- 
->> 2.34.1
->>
+---
+base-commit: 2e9eff8847a46530ab937696f340b9d5bea2e4ef
+change-id: 20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-47c0a8af1c5e
 
--- 
-Thx and BRs,
-Yin
+Best regards,
+--  
+Christopher Obbard
 
