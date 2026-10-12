@@ -1,143 +1,173 @@
-Received: from MA0PR01CU009.outbound.protection.outlook.com (mail-southindiaazon11020076.outbound.protection.outlook.com [52.101.227.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EDDF3AAF5F;
-	Mon, 12 Oct 2026 10:00:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.227.76
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791799215; cv=fail; b=Kp5hkw/5Sjxd7JSV6HIrKxPQtRgtY/SqfB/SExZMcUXCrcJy5mLR6/itBS9mQEWLYWKOwQwKjnfZENUtj+M0+i63t+K7e7DNc3zi22h9scHxktrvL0Qx8VUzXKNed0izry9f7EvLpwufv+30F+c2eGDRVaQV9igUeh/4nZMCDrU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791799215; c=relaxed/simple;
-	bh=iQDQn81bCnDzno1sZLrFmD16NN1sw6zigo5MVSU3EkQ=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EE1A23B63E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 10:03:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791799413; cv=none; b=XVv5K6H8SkWuhbon7QL81klWNZAn9HOh5UXWMmUV6EaLLQGc4TZabIVoZScGUGnzbUlSikzWIVrN2E1A8nXQ+nhMbAJWiKMSo/A4lGym6rmei5VrtkEcaamDiZqX463gVdM+0Vt1/dWlBZZ2cFAvzQsqCxvliRq6vGTHVDSzu2M=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791799413; c=relaxed/simple;
+	bh=pMB0A21SryNXlmUH3phs16FUTBMr5ipX7K9gSx4AdVk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=N3HKyTTkEbLFjDkDfveeIUBIGTr+J5TLsDiDaVLv+4YrITh5cpFH1YSs98KX6mJGzkEKkCDVMXfYxp8vy/Ke5oalr4eSr4W+1+PsTRezc13G40UW/d5LJY2NyVe8GGHFFypTih+uMSMcEMK1F4bcJ4kAMw/c7LSq2xaYXkqP0mU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=52.101.227.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mAZSM/6VG9sW++tt1i+J857BOnZal0QJuvBAoMDtyEoBf8x2LCjg4qyobzTIx3KljkByeDGRrLgLER6dWsAsR0HemvSEmVdwwtZmzOWRz6zBOp/lDYk2PI8hATcnhgGhfMl2xGnF/fkVLvAz1AGlfyHhuYFkWjzPeYdLR42PtKvrxuzKGq5qRhToMWO4CVVjjd+iJ76ftJTg1VcPSxmrNDudafndIaluZo9Dwp2fDRwqlhf2Ga3S9hOQ0dyDSw8HykSXT9QnCdjh/AkUtepYElipxCuOVTFtiRbaa43VbrEAUDzS/DCrYQ0jk/SKjkpTY3xHpgI8rpOcO+32xAZnhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=za61V/DRrxDmSGTY2Lln46O9gnL9bGPevp19n6QWdps=;
- b=Jh7dGnaf/tgPLQU5YM15IYENXKHZPyMtVEvQgk4yXjg+kxEsNRcqKU3rojFZAp+2SMES47mS4CRG8YjYTJ5Kuz9Mp86u/ikYHwV0b35Kgvg4QMIlJhrq9sJInvyG5Np7QJW3OC5LZ5YuOAt9USILNwsukVii55oJRi/neYFpqb7Ak+iZnrHqrXHteAT4+ZMnLCZ9s0wITWTX+iNV0vySVQTPdHaraBxq8OKaS1Mx5q5Om36rzuCiT3f6BJU/4JNIJpbFW8XLPG7pPIAtSjW9OO+85QbmV0LdmEG+0nQQzwOWO9yZyS7hpUNfqF7zJdIFNn8ywrB16xch2J2y2jCR9w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
- header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ebytelogic.com;
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
- by PN2P287MB0256.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:ef::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
- 2026 10:00:09 +0000
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0496.020; Mon, 12 Oct 2026
- 10:00:08 +0000
-From: Hitesh Patel <hitesh@ebytelogic.com>
-To: linux-media@vger.kernel.org
-Cc: Hitesh Patel <hitesh@ebytelogic.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
+	 MIME-Version:Content-Type; b=UHc3aKm6zdtAD/4qf+Wj6Z4lvqMil+bkapzOqswaj9KDtGIqLjPB8HcwV5Yrt/+F37WsTm5o9NuP6FL9s299Sz21ETL6F/exda3mEi6h6HIn0JkRhXcDGK/Xvy4DiC1Hwic+auj06cIEmiC0YP3s7lI26im6EfHTxgT4Ro2yIg4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QuUfMxGS; arc=none smtp.client-ip=209.85.214.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QuUfMxGS"
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2e8ad5b2f61so979835ad.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 03:03:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791799412; x=1792404212; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=pMB0A21SryNXlmUH3phs16FUTBMr5ipX7K9gSx4AdVk=;
+        b=QuUfMxGSrJyTq206XjGDYxRcDbLEWnPKUWaibCM94G6qDpXv6Au3zPUtL2xSm+Z6Dd
+         o+rEXB4/lmzCi2E8vBCW+XnU4ZOLEPPa7/Xj0AKIgl9/La7uAz9LBa7sKdPgkdZRXVVj
+         N55CtL39ek9O/FsY6zLohCwRaZ/0bdSQoV2hTBTIltNB0lriAvvV4RHuyfyp/5411qPz
+         bu9DQWiS5QRQHyh5bLQm45Lun7TyfD3DEuk0E3661macxPa4rvmA9CgxCfgrl5dLwpkg
+         QvBCoztR/p3KBUos5qH4ITxkY5i2x7jIboMP1Ndayn4GrvuZKC2oKVLzVXNhwITCKz+i
+         /m7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791799412; x=1792404212;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pMB0A21SryNXlmUH3phs16FUTBMr5ipX7K9gSx4AdVk=;
+        b=mLI9y2eMrNs6io62CayJVfKTrdlyM2WvS5HsmkdbhOJYeLKa7/+4hnerFL1N/IlFBC
+         P2rQoNgR8qtsEsAzGWO0zMpmQhfPavAhJ0owJwNJcgXPcDthQ0zicZxvP2ehJh3gThV0
+         fkA4OnLRwL2gFz6+MgllhrNO5rCPMVySk4w9H+IMgu6HiQkuBsPhVE/MJrXjoIX4Wion
+         r/SPIZzz+Oif2l8Q/kC4nzO2c1rEhYSwjmp9DhrJkSa3p6hPxEfqURgZ0v+Qo0g1Q8jM
+         KFPw6tnjW4ZYjA6fgdu2eA+PSfGWCeCPRu07m0Zb3+Wg4vIxBwOFxm9ElyD3gJtMr9so
+         AYLw==
+X-Forwarded-Encrypted: i=1; AKwUvByVe5+WanJx5qBeNxtpDKFZJeiCqtQZIJo+e3/l/mFd3sJHGhl4kXpockZusLSq8fumOjSg7JkIoYLAe8Dw@vger.kernel.org
+X-Gm-Message-State: AFq9FYJGhNUl3dsx7+mrjTLIeVRdzENeZkeVqNwbAevvTT3gBCT0xmKs
+	d1UGwOT6SsuIrvZSJbXjHU5Y26wUJ9PuKzULwDEzy29RkKzRtJOaKzgb
+X-Gm-Gg: AYBFou1sUF/87yrsQ5GO4KVL1FWVnqQNVRZD34Ph+NiY/Zd/dzmiY5/StzqxfaNUjzY
+	CU+FohZbJz+s9yu0t9mn277s/6rS1SX39Yx61crAzYmGJH2VV+zLYoOwzo6FI0ew/zhRLULOIMl
+	LN/hjXlyNmVfL539wHKsQj+95rDQT1hZJ0nG7M2BleN88AgSYMdODwQ56qoXpTl4gGUYiCUAM7p
+	eJzWa3blzp5BCyLWtJZwV1Xi7J0a6zZf8++kTuw1TtaLWssEtmMJ0H2tqEF+Ot5nNu2R8E/PA0e
+	B81Br8WTrKnNIeBgUlvSY7w2I3lQJt5j5KThV+R5oDMBEZWdWcZyJrmx1XgNBYXtsNvVjr+Iuz7
+	oGkbkFqXj9zBuZElsiPyDZWRu8jM05QxVtUsh26fcjq/bWB801bbWMmg5hjPRHEOA2nzMyzyGh3
+	11r0W08MiRj7IOHD62xY+RI45dxpJ7fHEBzY0CcRILtI6r+r9IBCWnwOVlbezBVKkVQsP+2A4GQ
+	zH/pwW/aqvnTA==
+X-Received: by 2002:a17:90b:224e:b0:3a0:bcc8:1549 with SMTP id 98e67ed59e1d1-3ab3afb180emr12455847a91.6.1791799411141;
+        Mon, 12 Oct 2026 03:03:31 -0700 (PDT)
+Received: from jfliu-sfa1411.. ([129.227.183.200])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab3690474esm16124808a91.0.2026.10.12.03.03.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 03:03:30 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: kaipeng94@gmail.com
+Cc: andersson@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	konradybcio@kernel.org,
+	krzk+dt@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	ravi@ebytelogic.com
-Subject: Re: [PATCH v5 0/6] media: qcom: camss: fixes for several cameras behind a CSI-2 bridge
-Date: Mon, 12 Oct 2026 15:30:00 +0530
-Message-ID: <20261012100000.316917-1-hitesh@ebytelogic.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260928121508.1404808-1-hitesh@ebytelogic.com>
-References: <20260928121508.1404808-1-hitesh@ebytelogic.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PNYP287CA0118.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c01:2b3::16) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c04:1::97)
+	liujianfeng1994@gmail.com,
+	robh@kernel.org
+Subject: Re: [PATCH v4 0/2] Add device tree for Acer Swift Go Pro AI (SFA14-11)
+Date: Mon, 12 Oct 2026 18:03:21 +0800
+Message-ID: <20261012100325.38128-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <CAHk8ZdsVK-n6u+KO5W0=7c_4_eQ2Aj0aqTg_tqU_x_58t0L6dQ@mail.gmail.com>
+References: <CAHk8ZdsVK-n6u+KO5W0=7c_4_eQ2Aj0aqTg_tqU_x_58t0L6dQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PN2P287MB0256:EE_
-X-MS-Office365-Filtering-Correlation-Id: 54065a3c-0103-4bda-ae78-08df284798b3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|10070799003|23010399003|1800799024|52116014|376014|366016|10067099003|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	0q2nVUAP/pPw+eZrEPbsKHGLiyverUWnicksqscjqHFazjlC1pLLX3pA6aodOKg0ZSDiMc3QdL3HfA5eWmZIb4i3ihJb2qcRaKbeBw3b8DCCtDMRYsMUmyE1NT/qbBdcP9qGIU7yR7nT1mD3GZA45shClZDXpOjk5e5FtjB4P42aaYf7YDfwTgLhE8XoFCPMk9VsgtOXrMi25+kEch8LBA/L9WQbolF8/WrnmBR++rlzBRHXBiEa9FggM+1o3IJirDQv5z1mD4ak4OJKgaWWnfkC220ma4zL4UTB+4FdnZh9e2mtYCBtYdqcTt7FMCmXmFqZJmKqWh1IET/2Q5pOTvoHWOG+gDZnPzqqMGPS0PgO9BnDv7mRhlM0L49jTrCfH1f1lK3al2xBQ2kYirm9OdkQlEvuxC06nd5miE/2WrpvMwo4PjtJFkpa7tfPnjE6hoh+ugHUXym27dmM6/1WOcOJpxMymcDJWxHSgB2OucJ8fRuj8f5ugY8zBqd0lQjk01vBUqFrgXqFamXh8LhYkzwdUmoM7ZkwdbtvqQgEajKJ+vsXW4E1OUvSp67kGzZQsFUVlP5nthEuYfbfL3GWe4LVZw74zSz3lytv3+AFWaYbdEdNt3jbcpuFplV66lLXW35tC7Xjl2c4zcbMJQNSmFRiI9IX9pcuDdNr5JnosiQ=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(23010399003)(1800799024)(52116014)(376014)(366016)(10067099003)(18002099003)(22082099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?j0AK7JBmg+WMRkn999epVOjAg2QVQ9DbOsdb4uFdea8DTi+2zoQsXDXPjild?=
- =?us-ascii?Q?SKoUjBa0s3Tg/Vb2m7iLqhdAY2R+WbPbKlJB2QVnTdwAmw/AFd1arOwSR/WE?=
- =?us-ascii?Q?kZo32e13kbbCXEpqg/zpkpbfPEJpSom9ZK8nBsnzSRGD1qXFCv+4okkTLc8b?=
- =?us-ascii?Q?epHim5bJEeUE7ZnTMiNKJ/EIyMgUiZMpdT2ElxOCVQphF0X88YjDUJRwnwRz?=
- =?us-ascii?Q?SdzxQnUqWyLBgLClgqoReJa4/02iRQlSeiZ27/3hp141CdBpbWsHBU09zqEW?=
- =?us-ascii?Q?Mv7RqRfEnDED19VEQHvEuaekMvLeh6KYvSyTXJjliBdNNa/5wQiLvFp0kWKS?=
- =?us-ascii?Q?80phZKGymfAgRKn3F31O0mT48PMUr79nDmAi6/OLKFF5U8U9D6Jk0qS+t2ym?=
- =?us-ascii?Q?stM0fJQEqa5mfyf45RawoUe9GqC3WwY0b+jdMfRQDyqUWp8S15GEl4GaM2ZV?=
- =?us-ascii?Q?1DNYpsjD1K3+vRBh8uWNjDp+Dy8rzo+4EMkerDxBBmXBPJV/e3zCgo7t9dnB?=
- =?us-ascii?Q?rMTOmkE4FbCoCBLf0dnyn7KY8GhB6FyWyo7TCLRQpmkVYQGxxqnrhcri1Jxt?=
- =?us-ascii?Q?5HRqUEtr6i6zTWAmastugSGD6glPwLP0W0G4LiqDJahYNR71pyUwOV7A4cFx?=
- =?us-ascii?Q?DA0Xy2Dyaogek+EauHEmoaysp3KZTrUuj1f/AnASsLWlxqxgqYLusSOPjYiy?=
- =?us-ascii?Q?Y4qXyPC59idsJx238E4mXzbkKNwJsc0Q6nTXo+4NaOoNb5YM7Tp7ez08n8QY?=
- =?us-ascii?Q?I0Tzgb44lbDX1rUfyOwd2+DxjWDPod2Q7tcqheV5GZm2fzwdQCmCQiTuDBxw?=
- =?us-ascii?Q?psLNud9txV2pK9Csd6tVQ+ImX9iLd/TBnTKeA5gJOqmipn8LX7h6CQ4P/HF1?=
- =?us-ascii?Q?MYWyn8wCg/l1B2XppcyPbbBC4rGytC3cEeWuheo64H+nRevTwG5IF8rXNiiV?=
- =?us-ascii?Q?iF2fzbwfiT7730iyzV/e5ldof9xPwD5dNWj1H+a8HjaWAsUutL+aYLfZAWX9?=
- =?us-ascii?Q?LoOh+FJvO3lPPYJI7eaXYSqATXQiC9lrm4fEbYaWlxfH70RxWF97XTTAaGF9?=
- =?us-ascii?Q?s2HY7V/udXlpEpQ/NW53rY/KKwOnp3QYjnXCR60hCFL4kXHPo6OGJLw35MQC?=
- =?us-ascii?Q?EwoijJIdCjdhF/uIPxyi1n0GrxdWGwcNgEe5IZQHP0wzqmgChgEBFL8XcUh9?=
- =?us-ascii?Q?wRRpHWS4+BGDRDfwDhZYtMbmCvx6ZzIYu7xw2X78w7RR0dLHN5rrSeXjbclS?=
- =?us-ascii?Q?hjCC5NMQAhgQSJiiNMu6n/gIQUh5kkXXtbkPJix1aIB2bh7UmCVOhZIywHp+?=
- =?us-ascii?Q?sodztZqXBTtTKAjTzPANmtrOcxI2t2MlVK3DIZC1Mi1iowHbEJ4xmhZbnAUf?=
- =?us-ascii?Q?a/bu7Y/Xhzdar6VYtQe980RqsY2wDJSLj1cKqSBjJxoUwGRJ2Q8oiYke+2Jt?=
- =?us-ascii?Q?5m8zpzYr7WKlyN9tqaN1K1sZHvWjM4A2l/EIlr2MmLMzDis4YmGCqhqtGZxm?=
- =?us-ascii?Q?Th+wvaOHpbM+K6xhx0WjhMcFG7A6KDvxCmeWbgRwLVj9MX0zNs2fsHA5Ec+2?=
- =?us-ascii?Q?ObBAKeiXYD/WAJztNXyvE8KEw5kP2ku0pfIquyatBjhyLWlOP1Tz9JcKvHUk?=
- =?us-ascii?Q?zQ9/asu88WS7j6Fl4apexsXX9Mh/YpfiizAnvUug8dREWN2pMWulZ3ApAzXT?=
- =?us-ascii?Q?x0dArUU0XdoAJpWQ2bgQuu/JdIsfnJCC1XIGwoRpmxxz9iIuBzlU88gWWhIw?=
- =?us-ascii?Q?15c4vmtrrI4dpAsoT6D9GOsV9Ef+LyIfvHLoat7ibaE50wWxd7MFsCrRSdCk?=
-X-MS-Exchange-AntiSpam-MessageData-1: Y0g8X9Y4RWHb1A==
-X-OriginatorOrg: ebytelogic.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54065a3c-0103-4bda-ae78-08df284798b3
-X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 10:00:08.2525
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KNTbIazyaDCL+4gPAjZ5sci7ovbkhOiCn/jdj0VvJFBZBiT8MU2QUgCJ2hR/dT5pjpnXT3j1zVRnCaNr4Co2JQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2P287MB0256
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Bryan,
+Hi Kaipeng,
 
-Thanks for picking up 1/6, 2/6 and 3/6 - I can see all three in
-next-20261009, and the VFE reset fix is behaving as expected on the board.
+Thanks for the detailed reply!
 
-A gentle ping on the remaining three, which are still at under-review in
-patchwork with no outstanding comments against them:
+On Mon, 12 Oct 2026 16:15:19 +0800,Kaipeng Zeng wrote:
+>Acer had a page about "Acer Swift Go Pro AI" but it was deleted,
+>fortunately here is
+>a snapshot:
+>https://web.archive.org/web/20260314171131/https://www.acer.com.cn/product_list.html?parentid=323
+>It's sold in China using the name "Acer 非凡 Go Pro AI".
+>There is some discussion in the thread of my previous version:
+>https://lore.kernel.org/linux-devicetree/20260729064538.19564-3-kaipeng94@gmail.com/
+>I have no idea if your "swift SFA14-11" is the same as my "Acer swift
+>Go Pro AI".
+On the naming: you're right, and thanks for the pointer — the SFA14-11
+series was indeed marketed in China as 宏碁非凡 Go Pro AI (my unit is
+an SFA14-11-QWU1; the retail listings I found, e.g. on Suning, are other
+SKUs like the SFA14-11-QGU1). One thing I noticed though: that retail page
+ has since been taken down, and Acer's support sites — global and China
+alike [2] — identify the machine as plain "SFA14-11" within the Swift/非凡
+series, matching the DMI and the model string shown in Windows. So it
+looks like "Swift SFA14-11" is the stable, support-level identity, while
+"Go Pro AI" was the transient retail name.
 
-  4/6 media: qcom: camss: vfe: Remove unused frame-skip
-  5/6 media: qcom: camss: Take the link frequency from the CSI-2 transmitter
-  6/6 media: qcom: camss: Create the source to CSIPHY link per endpoint
+In my series the maintainers asked me to use "acer,swift-sfa14-11";
+Ubuntu's stubble has also independently settled on that exact string as
+the hwid for this machine [1], so that is the string my series will keep
+unless the maintainers reconsider after seeing your evidence — happy to
+align either way.
 
-4/6 is Loic's own cleanup that I carried into the series, so it should be
-uncontroversial. If 5/6 or 6/6 need rework I am happy to respin them - I
-would just like to be sure they are not waiting on me for something.
+>Currently, the audio of my dts can only work partially.
+>I suspect there is something wrong in my ALSA configuration, and
+>adding sound-name-prefix
+>can improve nothing in my case.
+>I still need time to try to solve this problem (also dmic23 / "VA
+>DMIC2/3" routing problem
+>you point out).
+>I notice you list that your audio totally works, if your
+>alsa-ucm-config is your customized or
+>just using X1E80100-CRD.conf?
+I'm using the UCM configuration for this machine from Ratizux's downstream
+alsa-ucm-conf tree [3] (small world — your brightness work is based on
+their kernel repo [4]). Upstream alsa-ucm-conf doesn't have a profile for
+this machine yet, so if your Ubuntu 26.04 doesn't carry one either, that's
+likely a good part of your audio issues, on top of the missing
+displayport-2 DAI link. It would be nice to coordinate with Ratizux and get
+the profile submitted upstream.
 
-All three still apply to next-20261009 and I can re-test on RB3 Gen2
-whenever that is useful.
+On the dmic23 question: the array on my machine is a dual-mic setup next to
+the camera — I verified by tap-testing around the chassis (only the camera
+area shows mic response), and the VA capture device exposes 2 channels.
+The other X1E laptops in tree (T14s, Vivobook, EliteBook, ...) all use
+dmic01 only; dmic23 is only wired on the CRD, which made me suspect it was
+carried over from the template.
 
----
-Hitesh
+>BTW, could you let me know, how can you know which usb devices use
+>which repeater?
+The repeater mapping mostly comes from the ThinkPad T14s device tree, which
+is the same reference design — it gives the i2c addresses, reset GPIOs and
+which hsphy each repeater feeds (0x43/0x47/0x4f on i2c5 with tlmm 7/6/184).
+On my board i2cdetect shows the repeaters at 0x47/0x4b/0x4f (the camera's
+repeater sits at 0x4b rather than T14s's 0x43), so I kept the T14s mapping
+with that one address adjusted, and verified functionally: webcam on usb_2,
+USB-A ports on usb_mp. Your UEFI hypothesis sounds right by the way — since
+Linux never touches the reset GPIOs when the nodes are absent, chips
+initialized by UEFI keep working; describing them is still the correct thing
+to do since it makes the boot-to-boot behaviour deterministic.
+
+>It may be an unused USB root hub device, can be found via lsusb or sysfs.
+>I didn't verify if there is any device wired to it before.
+>I verified after you point out this, and I couldn't find any device is
+>wired to it.
+>All USB devices I tested still worked when I disabled it.
+>If so, I think it could be removed.
+>But, I can't confirm if this USB device would be used by SoC internal.
+Thanks for checking! On this board the internal devices (webcam, the fingerprint hub) hang off usb_2 and usb_mp, so with nothing answering on ss1 I agree it can be dropped.
+
+Since you're planning to send the next version, I'll keep my series updated in parallel and will of course review yours — I'll leave it to Bjorn and Konrad to pick whichever they prefer. Thanks also for the EL2 notes; I haven't tested that configuration yet and will give it a try with iommu.passthrough=1.
+
+Best regards,
+Jianfeng
+
+[1] https://github.com/ubuntu/stubble/blob/main/hwids/json/x1e78100-acer-sfa14-11.json
+[2] https://www.acer.com.cn/support.html?type=1
+[3] https://github.com/Ratizux/alsa-ucm-conf
+[4] https://github.com/Ratizux/linux-device-acer-sfa14-11.git
