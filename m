@@ -1,180 +1,117 @@
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12A5430DEA6
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 23:53:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6860F3ED12C;
+	Mon, 12 Oct 2026 23:57:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791849243; cv=none; b=k7aQNBPYn1Inm6YH17VC1YyHFxhwJ+ONc0wXmy29Ez7kyA7Qr/fsPKG5ZdX4ZNnZdd4zbh+D9/gqmprtYI/WbfZfK+XSk/OCjmKGyvhzSjpngAGkKqW4oSaUdZLFiAhB3Qh6EjeKqH8KDKVTqCgKqRHwAAFN/n1kpSSv6lpKe1g=
+	t=1791849434; cv=none; b=cfiw1/vZ37tJRjJPdoCpdhZEdLutJxn1d/0/5t7hsXH9JY5U0Wea9n67C/Nxt1WKjQjvchaUVfYv0XSTMKbkAqePijpgWCbd4RZg2mby56RMVNRu/AogzomuFJ0wShXCWbTGTKJMd35IoWw/GmteAl3w+NfvHUs5xZ9HoqdCSBI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791849243; c=relaxed/simple;
-	bh=omXa3Qu6qnkmK2LG4gCYNnvZaUkV0e8Ks0BSg+aLJ9I=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=h2UV2CBPKfcEpO3JZqwDjSXig9ZKR+nC9MjXNDYftN9VEtnv7ZL/wA1GnI08e/X+2SlPhkyBoiyUAee5obWLKasiL7arbYkuo+ewWLxkz2TNwP1EuF3WhxTShha4MqSo/C7RO7OOZ6b6+nyCQ8u2wzDggm2xIDzmEGxNyo+P+bY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=e27yedtC; arc=none smtp.client-ip=202.38.64.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	s=arc-20240116; t=1791849434; c=relaxed/simple;
+	bh=m6EUhJBt6Aorqmdp15CSFGwH6955h1X3Y4u1DwvkJD0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VkKJVKO9tyo4UXNZdACjeK1rigzIDLtD5D8f0tcNHaU1Fk/9Q6B10bgX5B6Faw5PTJpsIWW9wgiPbtvB1FFy3IpNdPFmJ7HT3ase+RRfdYBeoqvwgQOP9YyyiJjDN9XzhWNWq3EBPvjVLbbEEMqLuiQqEeERAhUhPoMCfoiwNJc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hPfp8Or2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="e27yedtC"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version;
-	bh=CJfL06JPdyNUgB9rTGyzWBVI5MtskF8eKsFORIWNw/I=; b=e27yedtCSGZMT
-	yCluQzr0AqY642aF59c3nguLqTCHBf/XL+SzvZdZq5biMAh016vZO8b4XoEtxvSV
-	hfDPjyo0pFUFZ7op+HLyKjYEpGjQ4o3Q6GqU56dufHcU9nOPyBk5Tdup5Hgy2bhu
-	tHDxAUw/pgNbnOmO0A0T9TFjNfMgtE=
-Received: from [127.0.1.1] (unknown [114.214.192.228])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgC3ohkPc81qcXzcAQ--.944S2;
-	Tue, 13 Oct 2026 07:53:51 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-arm-msm@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- dmitry.baryshkov@oss.qualcomm.com, neil.armstrong@linaro.org,
- abelvesa@kernel.org, mitltlatltl@gmail.com
-Subject: [REPORT] SM8750 bonded dual-DSI + NT36536: first DCS command-DMA
- timeout on cold boot (DMA engine stays latched; DSI-side reset does not clear
- it)
-Date: Tue, 13 Oct 2026 07:53:51 +0800
-Message-ID: <179184923104.248043.14168731037113716140@mail.ustc.edu.cn>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hPfp8Or2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E7601F0089B;
+	Mon, 12 Oct 2026 23:57:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791849430;
+	bh=c94c4wliHaWmcoOXtZ1pULeQxMhYJPO+hjijykxcXHM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=hPfp8Or27RPDW2v2Mu3rSJE2D0ZCR7hw3hx2uQsfpoRtK3DH1xL2b6i2iduK7hQ+X
+	 EL4A5R+nQdcYHgI6MNZluAebevMvVDVlypapYKOVL7EMTacH1VW3YIWgVtoSpdsjHq
+	 EeJ2HbJKe2FlSrAN0hBGTB77EZkE1t5MGiErCS5bP97rDZa2o8DHPcWpFLoYKcgkYe
+	 W+0VFuNByGgbW4nHPHZNgbck9j37MVGSB37MbM+0/HZk1gY9fiLHkUs1MZFnZA6GtE
+	 B3Pf8/+BvDdF5/U7sE0ROfiyh39UnCSXeMramQl/FHviz8QgD1Rn7soZCETJK4tyL1
+	 HpE8B7gIl3PYQ==
+Message-ID: <fa4625a2-d6ea-4904-a381-82f7e0f6cdbb@kernel.org>
+Date: Tue, 13 Oct 2026 00:57:04 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgC3ohkPc81qcXzcAQ--.944S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3XFykKw15CrWrZFyxZr4fKrg_yoWxZF45pF
-	WDtwnxCr4kJF1093Z2yw1UWry0qanYyayUJr98Kry8Aa15WF1vvrWIyFyvyayakrn3Xa1Y
-	qFZYg3WrWF1YyaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkab7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwV
-	C2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
-	Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJV
-	W8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l
-	42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
-	WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
-	I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
-	4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY
-	6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07bYYLPUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARESB2rMHwl7FAAms8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/4] media: qcom: camss: Set the streams API flag per
+ SoC
+To: Hitesh Patel <hitesh@ebytelogic.com>, linux-media@vger.kernel.org
+Cc: gjorgji.rosikopulos@oss.qualcomm.com, bryan.odonoghue@linaro.org,
+ mchehab@kernel.org, vladimir.zapolskiy@linaro.org,
+ loic.poulain@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
+ atanas.filipov@oss.qualcomm.com, jigarkumar.zala@oss.qualcomm.com,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ ravi@ebytelogic.com
+References: <20261012120542.1140157-1-hitesh@ebytelogic.com>
+ <dJh9MFGkVcRUJRGlgGGQ3ffpAvS2i7dAwvaxQeLGR8aE5QIDVHPibTk3DVe4cJHhPju3m3wgFnqlWKAinMRocQ==@protonmail.internalid>
+ <20261012120542.1140157-3-hitesh@ebytelogic.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261012120542.1140157-3-hitesh@ebytelogic.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 12/10/2026 13:05, Hitesh Patel wrote:
+> +	bool streams_api = csiphy->camss->res->streams_enable;
+>   	int ret;
 
-We are bringing up a Lenovo Legion Y700 (2025) tablet, TB322FC / Qualcomm
-SM8750P, with a Novatek NT36536 panel (1904x3040, DSC, video mode) driven by
-bonded dual DSI (ae94000.dsi master, ae96000.dsi peer).  Our tree is
-GEEKiDOS/linux, a 7.2-based tree that carries the bonded command path
-(dsi_mgr_bonded_cmd_xfer() plus the "bonded command DMA failed" / "peer command
-DMA timeout" messages).  We could not find that path in the vanilla 7.2 sources
-we compared against, so question 1 is partly whether it is upstream-supported
-at all.
+> @@ -2168,7 +2168,7 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
+>   		pads = vfe->line[i].pads;
+>   		video_out = &vfe->line[i].video_out;
+> 
+> -		v4l2_subdev_init(sd, vfe->res->streams_enable ? &vfe_streams_v4l2_ops
+> +		v4l2_subdev_init(sd, vfe->camss->res->streams_enable ? &vfe_streams_v4l2_ops
+>   								   : &vfe_v4l2_ops);
+>   		sd->internal_ops = &vfe_v4l2_internal_ops;
 
-SYMPTOM
+This is a pretty inconsistent pattern.
 
-On a *cold* boot (power off -> bootloader -> fastboot boot <image>) the very
-first DCS command of the panel init intermittently times out and the panel is
-never enabled.  Warm reboots do not reproduce this signature (a warm reboot
-reproducibly ends up in mode (b) below); all three modes are cold-boot only.
-Signature, identical in all failing samples:
+If you're booling in a variable, then Boole in a variable *
 
-  [    9.032148] msm_dsi ae94000.dsi: command DMA timeout: status=0x2200200
-  [    9.037910] msm_dsi ae96000.dsi: peer command DMA timeout: status=0x2200200
-  [    9.037912] msm_dsi ae94000.dsi: bonded command DMA failed: master=-110 peer=-110
-  [    9.037914] panel-novatek-nt36536 ae94000.dsi.0: sending dcs data ff 20 failed: -110
-  [    9.096078] panel-novatek-nt36536 ae94000.dsi.0: Failed to initialize panel: -5
-  [    9.102187] [drm:dpu_encoder_phys_vid_prepare_for_kickoff:576] [dpu error]enc35 intf1 ctl 1 reset failure: -22
-  [   10.176852] msm_dpu ae01000.display-controller: [drm] vblank wait timed out on crtc 0
-
-On a good boot the same step prints "panel prepared: scheduling firmware
-upload".  "DSI PLL(0) lock failed" x4 and device-link warnings also appear on
-good boots (we treat them as benign noise).
-
-THREE FAILURE MODES, ALL COLD-BOOT ONLY
-
-(a) panel-init timeout with the system up: card0 exists, DSI-1 connected, SSH
-    reachable, only backlight - the signature above.  Most common.
-(b) no card0 at all (DSI host probe fails earlier).
-(c) *new* 2026-10-13: bootloader ACKs the image, but there is no SSH and no
-    fastboot at all for 30+ minutes, backlight only.  In this mode the machine
-    never reaches userspace, so even an on-device watchdog cannot recover it.
-
-REGISTER-LEVEL EVIDENCE (bad boot, instrumented)
-
-We patched the DSI path to dump state around the failure and to attempt
-recovery.  Bad boot, all timestamps in one boot:
-
-  first DCS times out (status=0x2200200)
-  before-reset : CTRL=0x175  STATUS0=0x20003  CLK_STATUS=0x3743  CMD_DMA_CTRL=0xd4000000  INTR_CTRL=0x2200200
-  after our reset (see below): CTRL=0x0 CLK_CTRL=0x0 CLK_STATUS=0x1403
-  after link re-power-on    : CTRL=0x171  STATUS0=0x20003  CLK_STATUS=0x1743  CMD_DMA_CTRL=0x14000000
-  retry of the first DCS    : failed: -110 (identical registers, three attempts in a row)
-
-What we did in that window: cleared the driver-side failure latch, powered the
-link down and up again (clock rate set, clock enable, PHY reset/re-lock, ctrl
-enable), and additionally forced the terminal state of the stock
-ctrl_reset() sequence (engines off, CLK_CTRL = 0x00) on both controllers before
-re-enabling.  The last step *did* take effect - CLK_STATUS dropped from 0x3743
-to 0x1403, i.e. the DYN_PCLK / DYN_CMD_PCLK / CMD_PCLK bits were cleared while
-CLK_CTRL was 0 - but as soon as the link is powered on again CLK_STATUS returns
-to 0x1743 and STATUS0 stays 0x20003 (ENGINE|DMA busy).
-
-So: the failure is not a state we can clear from inside the DSI controller.  It
-looks like the dynamic pixel-clock request is re-asserted during link power-on
-and the command engine stays busy; PLL_UNLOCKED is not set (the PLL is locked),
-the DSI interrupt counters do not advance while the engine is busy, and the
-registers before the first command are byte-identical to those of a good boot.
-
-WHAT WE RULED OUT (controlled, same images)
-
-* Kernel build identity: 2-digit vs 3-digit KBUILD_BUILD_VERSION, same source
-  rebuilt, empty-commit / one-line-pr_info arms, 20+ cold boots.  We first
-  measured "0 bad / 20+" for 3-digit builds; that window simply contained no
-  failure, and the same class of images later failed 4/7.  Pairing #60 against
-  a 3-digit arm inside one window showed no measurable identity effect.
-* Failures cluster in time: adjacent cold boots fail, and a clean window can
-  give 10 good boots in a row.  Rate drifts with session/environment, not with
-  the image.
-* Upstream 2028280686f4 ("round the byte clock rate after reparenting to the
-  PHY PLL"): ported to this tree with upstream semantics (rounding inside
-  dsi_link_clk_set_rate_6g(), byte-intf rate from byte_intf_clk_div_2).  First
-  cold boot still fails with the identical signature.
-* Driver-side recovery: clearing the failure latch and resetting DSI ctrl+PHY
-  (both links) + retrying, as described above.
-* Forcing the stock ctrl_reset() terminal state (CLK_CTRL = 0x00) before
-  re-enabling - the DYN bits come back on power-on (see above).
-* Using the standard broadcast command path instead of the tree's custom bonded
-  sequence: same hang, different error path.
-* Enabling-time dynamic force-on (vendor-style CLK_CTRL force-on around DSI_EN,
-  both transient and held for the whole panel-init window): still fails, and the
-  DYN bits are latched in the forcing case too.
-* ramdisk/initramfs variants, DTB variants, strict 30 s power-off POR: no effect.
-* Runtime recovery by rebinding panel / msm_dsi: this tears DRM down (card0
-  disappears, fb switches to dummy, GPU hangcheck) instead of recovering.
-
-QUESTIONS
-
-1. Is there a documented ordering requirement for the bonded command path
-   (DSI0 master / DSI1 peer) for the *first* DCS after PHY enable / PLL lock?
-   Our engine latches with STATUS0 = 0x2200200 and TRIG_DMA never self-clears.
-2. Given that a DSI-side reset cannot clear it, is the dynamic pixel-clock
-   request supposed to be dropped by the client (dispcc / INTF) side, and is
-   there a known issue with that handshake on SM8750?  Should the DSI driver
-   wait for the DYN domain to settle before the first command?
-3. Should this timeout be recoverable in the driver (reset host/PHY and
-   re-issue) instead of failing panel init permanently?  Is there an upstream
-   precedent we should follow?
-4. Any known SM8750 / DSC video-mode erratum for the first DCS after a cold
-   boot?  We looked at the PLL re-lock series (6cd33b6f4155 and 2028280686f4);
-   the symptom does not match.
-5. Would you like the full dmesg, DSI/PHY register dumps, CLK_STATUS, RPMh
-   votes, and our repro scripts, from both a good and a bad boot?  We have both
-   and can attach them.
-
-Thanks,
-Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
-
-The bring-up tree is GEEKiDOS/linux plus local patches; we are happy to publish
-the repro scripts (cold-boot runner, three-state probe) and the failing-boot
-captures if that helps.  Happy to test any patch you suggest on the device.
-
+---
+bod
