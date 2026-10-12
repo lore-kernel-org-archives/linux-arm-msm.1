@@ -1,135 +1,142 @@
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AF5537205F
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 01:32:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84D93255E43
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 01:32:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.53
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791768723; cv=pass; b=sZFBwBjJee6qYlkxj8VD853i384FwTmKrre3U7S0boZ7nYlJL/MUS29XDSHsFrUmZwI8Wie6tUZVJKzL1dIZ/TZbrxL39w1VJpoKL6jZthTK9UHKjA+AiKV7TdNWvWGb1q8uktHUhfHGK0xkM8IFYVVXvAzyCx1jfoA98rqnz7g=
+	t=1791768763; cv=pass; b=UZHrEFHRoQyCIU4BSopeW52OFp77JVHM/gdPuum7MjK8pR/IwELt1atGYqKmup9zX/xJEW18cNJY4yHWtw3xUiG5EuGYDadcHuBTXWhUTiTBkHj2B6raqFlEgV0DGUDURbdCKJQJyps3iYMEkhwsyabgGEpap7Qk0PM3a1bxHl0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791768723; c=relaxed/simple;
-	bh=vhUDDHake6PjVodeFYRTd89BpqCVb70Env0+ub9W+Ck=;
+	s=arc-20240116; t=1791768763; c=relaxed/simple;
+	bh=iD1e3KEP3AMbX2eRRt7ptL90vcnRYwFR2RyAi738hw0=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=auU3MJAJY5+hiD42IvTv/bgjuKx4xJdJtnw+iwq32CedWDucx2tTjX0/QujpWfMJiDzzswhEo4wgEMZNzn5RecwvT4NS/ZD6EjX5JtTNAOiHO+bJSNaqo7ntsOGA3lLP5kEdOJDzThed9WCdDwlo6f34MRWU+FNWcKexyCddAIE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GCGQwL4a; arc=pass smtp.client-ip=209.85.160.44
+	 To:Cc:Content-Type; b=LWQTPRLbP/gd+s8i/v8GfTbMwuYRzfJIldU7ytVMsmgoxguEihLbp95o9QMnjnFE8FjiVRxtmVGDJ6YqZShwlWXo/Wgo/NjfvJqS0QPtEMblC6bDXuODVb5mcEZM3pz1QQnB1oRmQQJ/GCqGMoR991lgyOHqFsIr1/XHjVBnLQ8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JIam9170; arc=pass smtp.client-ip=209.85.160.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GCGQwL4a"
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-483a66818edso792772fac.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:32:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791768720; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JIam9170"
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-49dfaa16190so2483378fac.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 18:32:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791768761; cv=none;
         d=google.com; s=arc-20260327;
-        b=Wk6jwJI0v8gpKLZAnOo1oH1Z9PBJBfxABx++sa22D4CI9usTu59nC+osoEXTIqk6TI
-         a3ynqQeLctMyqx7TIrvmsYB0fBivJyIYY+OTRbK4HUF9knB0FhTfV8Psyevfm2uF31+4
-         yEQaYDcITAJ6RkApMTvGqRqhaBjzW3ElBqUcY9o+1wFEKizpE9DvJbrl1glh/J3PNdOP
-         HePGQdIsxyKnW4Sntoce10ihIYWLv8FofCL0U9hsugAhE2hS5rQ0LzptFjlMb8V7IkXU
-         vMCyjlwduF3FkWwnI1EbntfxDsqw6cPDzedMMdcRukacdVlSNrogLzuMUzCuLf/Xo0by
-         qSMw==
+        b=bl1EjHBoTftEsQ8PiAnZUsgYVvVR0UCsUdZYciTzuxvJUcsB7LXKAwfrsn4PosUhXP
+         TAH9+E3qAWO1sepFgbalpby/h898PZTcZtkuiT+gw/sYLs4BNWhCz2ySDvSvJocck++m
+         m8oW2v2knEYdNjuDrU755VLjdxFqNe8K/DzsCppqIsImw0nm8Z0SJZwpDNHiCWQQMgFE
+         pxp6X3SKZ+6S0prLqwFtPG0d675alEg5kwxiEH5eTViRH2NfJAbN+TFlF3Ixn6k1A0ve
+         IdArHiI7tb8GuUTVlpRe8vvi39A+y9QTPb8ynTDBvunAHsxKnATkyzY/WoFDA5j1Gmep
+         a1PA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=NDQUO9E3aLbOqLlDqGwF/awXVPyTQZEvQb89vn5yfsI=;
-        fh=+Lk3Jf6JhOwevfAhWRXb4LuQqNfCysSKmFB7sTeZYzk=;
-        b=ctD59LBHZxPehNTAEafHjmUt6j0vFJJqygX4kLLWnSUVmUR5h8IKhwcyaC8SNT/8NU
-         qGVyduM/YiYibsj68Hh4zWOl9kkjXykrdlBjm/pl7vOOw4jacz+LwRVa+NIkgynnNjRz
-         L+IqN02EZRD/N7pBe3l1CPEiv0Him+wq+6anCpaMG19BdMu1NvT091MEjcP27990ESaC
-         zitJSVcu+Zf9d4LsYCb2vtGf9k9dQC8mV/MiX+qerVa3lSvrDE6Z2gCsT5twgZib92Ky
-         tHl3AtrlEsYLmoZV/mt7+yGLFliNrCd8X9oxoTJqUchUFqsJvzC4lRi6MlDAWJUim/6A
-         MVQQ==;
+        bh=xg5eXxPVCOfP2W1fQuA9+y5+ssRl17yP6bP6c1CGKWE=;
+        fh=3ne3SKmJkbIvVpPUg65bqDxbYRtS55//pa829mMUoHo=;
+        b=pMfGe+36r6CH/w4ZFylOx+Ku2X9xSt95VLplx6uPYZpZ0w4HdziXr0zAGJXInEEpRf
+         YPR2PEc66D9MmfBRWUSp+0Xwr522H3/+U6PiRp5+bj1lK6o7lmSZxKRT6Zv+AkRMhgEe
+         EYtYodiXBJ3PMMj0UkeiRwmh6BcMwa2mXQwKI+hoZQdBAKHQ6sx/xNfYN7M4y4uTTFQr
+         kdah8xwvsFrtrYFevKIhtdgxkU0ffKA+Cgyiv6Zk9tc//WQc0HVzIkviN4IefVOmFxcu
+         mQ0JwWDvrKe5Pp5R3u3FAv7sxoka9VPxG+F7zdQO4Ki9HOjiyoheqOg8G7lDBoiiH9MB
+         kETw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791768720; x=1792373520; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791768761; x=1792373561; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=NDQUO9E3aLbOqLlDqGwF/awXVPyTQZEvQb89vn5yfsI=;
-        b=GCGQwL4ab1od3moolhk3hHqGU4woVDxfP/nPc5Z2Ra061NJhVqGDZqpfeQ+MpOV/Sa
-         PFhkCfhjfe4kgJ4XxoXFqs4HYwiUWlu51BB2NILtfl+uixL0rcCcILPI7bIYFMzgGOpS
-         TUs6/NKEcMmCBIMeAbF6iF/RKinW4f2yt7qd1q0uGZCC93M8jrpkPL9/XZ93bpK2Ela4
-         c2uEUbLAo1BGHNDs6oeKp+txknqWavUpSPWc020TmDblTzMIRdYLUa1viSmRxdtqV+wS
-         PI5HO3HsF7mLbB1Uv1XHuhywQJ9OPQkAk07guSXjoGi+v5UU8uI1nzPqC0Ev1izC91Cs
-         AIMQ==
+        bh=xg5eXxPVCOfP2W1fQuA9+y5+ssRl17yP6bP6c1CGKWE=;
+        b=JIam9170K0mpyHgyKbY5oyjDQtW6eOUfZbsYSJh+WizflM10iW62QqinEzHCvWUOPy
+         QB5K9SOF6vsaym6QAs3fgbSqiLUTSbwMChsd41OnMj/AeweMsKT5KN8inSE7XQB36DoS
+         BNyeMOECGBKLO3ZjcglBIxG1sXjfGaGwDearLZHypl3KoQVD0Z6RbjO2u7atKMj3JWgF
+         NB0i6bzuNZa8HNqTMIthjJwMRiQFaGiS8185W46ls19K9o2dxId8SciT+NOxLw7QlPm1
+         ZcfpY+37eOE6NGmQEH2biiihRNKoZu/xpr0yzhuaIe4C48PmphAZ9TdLODqBK0d0YlH7
+         BTow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791768720; x=1792373520;
+        d=1e100.net; s=20260707; t=1791768761; x=1792373561;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NDQUO9E3aLbOqLlDqGwF/awXVPyTQZEvQb89vn5yfsI=;
-        b=RjcWZZXdKfoISdp3f4QMC49t5BWPq9rsWo0cKcfVmWPnaVRvQcCd9lsWg7P5Ff3odp
-         ffIXzE92MHPhK+XO/nAPW5AoA3g8kqL57rWfnfuBf4Nt+xsppM45zpU1KHNzUMnBw0y5
-         QM9NIpHA6H/RK07N+FntPlMfnS1gUsNXv50yyfmcvRnTk9R7iWVARxSuAVBq6uD20etQ
-         o4kMeuDcTgv4FNwsUK5ijeZPRj6j7DNCgxDxy5iSkrXt04IewITp71tt707f6EsuWveu
-         FY3Eyr4r4BB9MutDWSrvzyTChZnkbrVoAtRQmG6/Z9FP7cgXTFbjr1w0yGRCYv10lCe8
-         E0xg==
-X-Forwarded-Encrypted: i=1; AKwUvBzqatqwhIqg/yFO3Jw2QF4tCD5enANxAHt3kpXmeRzhhw+dbhVOyROQMl/OeCc2pjoJFtrVjkwlUG3qw5G0@vger.kernel.org
-X-Gm-Message-State: AFq9FYK4cLspfVpitmMzDvHGMiLR9tb16BtFi/blJ6B2bCmQ9tRxbXeb
-	X02kTmMf1JFH2YwYnR4SYR6iv0O49HE4reN9YSH3vwu5yIATHjWdGblt8S5yF90I59J5gkrfbqx
-	NlxWwtnMMBhF8CxpoXwN8jHE5flgp+hQ=
-X-Gm-Gg: AYBFou1rc3pYfqQ4vVVgiuTyXA+w6IC5G/3ghgFx32Xhad9BOGwwHIICNJHy/uLXWnO
-	UWK/v6GHBSBmWAdpCyV0TKBfVNhT/eLyebz6Yb5FUnHVLxTbLaeyOPK/bHsNkUPeUzDWzzomBLg
-	mYO0PTCrpauoMqnIbHgze4v38N7FPwv+vGPOug1G5ygKwjtl/eqFApYmSNeyUKYjpNxmF2WEl2e
-	aVKVTyLuAWYmkpNlDWR5JOgv0wCzit88/5dJGH+NoAzo6ww6G82V0rozORgdpUUur8P/WQiHEuq
-	qOpC8lPW2IMUQ5CjHIyRqfzy6gaaz4Cc9NUGsV7R4a/fj+wcYX+EpBs=
-X-Received: by 2002:a05:6870:b523:b0:451:22e0:9604 with SMTP id
- 586e51a60fabf-4a2a86aca5cmr6021572fac.7.1791768720455; Sun, 11 Oct 2026
- 18:32:00 -0700 (PDT)
+        bh=xg5eXxPVCOfP2W1fQuA9+y5+ssRl17yP6bP6c1CGKWE=;
+        b=ieFl78oo878RLL40Z9pBxXfqvfSfrxc73/ScFONndFky1GiJKpBOKZqo2eeRt3x5l+
+         VxOvK4NwiyLpLqK9ru4Fr7/xnxR7ZBABYEYggVDyJTaNG8i7NnE2NYfyZ77wzFrZJaCI
+         PWaAFRRFhORPr0KzOWQqzszoA3vuOnsO1eEPtMvIYPRri987ajcTvuwd3T63hpmJTpXA
+         +BolVIq+NmYvVxNriAOF/1Qj3zGoO0oLCst0tE/PShnqZJLDgS/W6L2ETKXao7PpSQQr
+         NZKtkLwEREwC7mi0xbF0QkD4gbzaeJYn/MDiY1ocXxFeugFoLwzjAaf5SMSaOMz1VLZX
+         oJow==
+X-Forwarded-Encrypted: i=1; AKwUvBzidcEi1gpQ8Grbj8KcMDNtLlqwP9YCo0+YCWu1BXdDDRi5iAr5KwwAyQQQBeNcJhaVhYsTOAaiSLS1vras@vger.kernel.org
+X-Gm-Message-State: AFq9FYLl0behJWxtOCfDlow6hKB+3uGE9nXi6+h+t6K3pKWHlG2052GE
+	ifmQr5d0LTiG7vuqCHg/502X80P5eFrahChRBDK7UVnSPuzIGP7tWORpDTyPZwM0Jx/ieEjf2hD
+	t8BF2qqJf2iQ+uypDRWaemK38V7Y8eng=
+X-Gm-Gg: AYBFou1zv3yBX+OiLMOUrEu57mzU+3JaNyYSYUKpMiyPupPxCnXpAxP/doVoicDfNyC
+	qd5QChVhbPZyQTOtgU5GzQbg5dlMd7lgw8P12mXdAZ6jl83OBA3pU3bekKgg9XAzqqkmQtaEO6g
+	5vlaX/W/WpWFQ9994Yqc3FW6BI7t34RHn/Jmvs0/z2Og2o9vfnK3CP7BucEFLQOM0isJbrGl+Hb
+	j1k7VrX5YevjodirUF3whGzPf2HeHQ37SCKzgDx6kd4YZQ6xWlwllVilKwooo6p0orVsy3fz/2/
+	2SCnwsxiy3G+sxhtmE3M/fOkmZ6LJ0dzw0HlmgqoX6auzaEMfGOvU9k=
+X-Received: by 2002:a05:6871:3841:b0:49e:404f:5f21 with SMTP id
+ 586e51a60fabf-4a2a89d1db1mr5274092fac.12.1791768761487; Sun, 11 Oct 2026
+ 18:32:41 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261003175659.23536-1-mailingradian@gmail.com> <20261003175659.23536-3-mailingradian@gmail.com>
-In-Reply-To: <20261003175659.23536-3-mailingradian@gmail.com>
+References: <20261006-b4-mbox_double_unregister_fix-v2-0-cd5739b60718@oss.qualcomm.com>
+In-Reply-To: <20261006-b4-mbox_double_unregister_fix-v2-0-cd5739b60718@oss.qualcomm.com>
 From: Jassi Brar <jassisinghbrar@gmail.com>
-Date: Sun, 11 Oct 2026 20:31:49 -0500
-X-Gm-Features: AclHuK8whbaG7v0eCCsuN4wni82p4hRfYmu-N78P0lmjY_ExUyztPMiJe-8P32A
-Message-ID: <CABb+yY3gCzgVL1qZ7XCapkUBr4MGfUO8NG3kXY_3QL9_pkHo2w@mail.gmail.com>
-Subject: Re: [PATCH v2 02/11] dt-bindings: mailbox: qcom: Add SDM670 APCS compatible
-To: Richard Acayan <mailingradian@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Srinivas Kandagatla <srini@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	linux-sound@vger.kernel.org
+Date: Sun, 11 Oct 2026 20:32:29 -0500
+X-Gm-Features: AclHuK9TFyJC0nw2fQpH9Y6YLn7Y_Y3tLTVWgLwXQneH_ywV-6sddXTE5ZUfZT8
+Message-ID: <CABb+yY0G=ubsGQ2_AzM=5LAZW7xSucVMZbt8xd0GMELG7xQDGw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] mailbox: Remove redundant mbox_controller_unregister()
+ on probe failure
+To: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>, Huang Yiwei <quic_hyiwei@quicinc.com>, 
+	Sudeep Holla <sudeep.holla@kernel.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 3, 2026 at 12:57=E2=80=AFPM Richard Acayan <mailingradian@gmail=
-.com> wrote:
+On Tue, Oct 6, 2026 at 5:59=E2=80=AFAM Anup Vishwakarma
+<anup.vishwakarma@oss.qualcomm.com> wrote:
 >
-> Add the compatible for the APCS in the SDM670 SoC.
+> Changes in v2:
+> - Remove now-empty err_req_irq: label in qcom-ipcc.c (patch 1/2)
+> - Restore original alignment of devm_request_threaded_irq() arguments
+>   in arm_mhu_db.c (patch 2/2)
 >
-> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Signed-off-by: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
 > ---
->  .../devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml       | 1 +
->  1 file changed, 1 insertion(+)
+> Changes in v2:
+> - Link to v1: https://patch.msgid.link/20261006-b4-mbox_double_unregister=
+_fix-v1-0-9011ca208d36@oss.qualcomm.com
 >
-> diff --git a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-glo=
-bal.yaml b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.=
-yaml
-> index 39bc374300c3..74f24e07abc3 100644
-> --- a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yam=
-l
-> +++ b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yam=
-l
-> @@ -50,6 +50,7 @@ properties:
->                - qcom,qcs615-apss-shared
->                - qcom,sc7180-apss-shared
->                - qcom,sc8180x-apss-shared
-> +              - qcom,sdm670-apss-shared
->                - qcom,shikra-apss-shared
->                - qcom,sm7150-apss-shared
->                - qcom,sm8150-apss-shared
+> To: Manivannan Sadhasivam <mani@kernel.org>
+> To: Jassi Brar <jassisinghbrar@gmail.com>
+> To: Huang Yiwei <quic_hyiwei@quicinc.com>
+> To: Sudeep Holla <sudeep.holla@kernel.org>
+> Cc: Jassi Brar <jaswinder.singh@linaro.org>
+> Cc: linux-arm-msm@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+>
+> ---
+> Anup Vishwakarma (2):
+>       mailbox: qcom-ipcc: Remove redundant mbox_controller_unregister() o=
+n probe failure
+>       mailbox: arm_mhu_db: Remove redundant mbox_controller_unregister() =
+on probe failure
+>
+>  drivers/mailbox/arm_mhu_db.c | 4 +---
+>  drivers/mailbox/qcom-ipcc.c  | 5 +----
+>  2 files changed, 2 insertions(+), 7 deletions(-)
+> ---
+> base-commit: bf1ee2bd5c2da8992f33c8950ef194aaff74ed6c
+> change-id: 20261006-b4-mbox_double_unregister_fix-42d5057d3ad5
+>
+> Best regards,
 > --
-> 2.56.0
+> Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
 >
 Applied to mailbox/for-next
 
