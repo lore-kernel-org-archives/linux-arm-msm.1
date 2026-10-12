@@ -1,250 +1,332 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D9C7440638;
-	Mon, 12 Oct 2026 20:58:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 459524FC325
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791838734; cv=none; b=HvBHPBqDvaN5AdtvXU9AFgrC+1oAg6aCWgJQV0SBbJL4csIGPN1MCEt2wrx15Zrizl0y+Sm5uSAbMQqSuLLRvM3ZinYLjfPtE6H+90mPZ4+jLrGrfjSAcBvrXAaRhs8m/FCHXpcDWlf5ePQUGOBeYerFeoecqBhb1jasklchiWg=
+	t=1791840929; cv=none; b=JcfB5yVpvuPQ9yd5G3bDW0qRDKoyn5+gQ77GF4pe08GhooaH7lkzJiV6dvJCrDq/WFFdRpDM60U6PmsouWTmdMeJUvkT6ySqTIhxqhASPPzmu1OCykI4X51UWuaZFi8FRtC8+PiIhNWiBoLXtVF1C7Q3CRnvDUyUi4oYEz03+VM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791838734; c=relaxed/simple;
-	bh=D7pN0hGL42tFapFXUSfMQNOTFusmYTMs49SZu/rtjMs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XtH6n/gpjkvJj9q8RwKxc/vFJP+YBlqwiQrzzzsZf033u1VaxlBjy904RQ+pOVgIUE1Nt1doS74WeB41M8eV9k/pxqNu91EdgSlU8rKT7WYufS8RsjACoUJh5+1l05/CyseWwupKt+SfrLZOt2O4zkik5okfh7GTNVoDA3XYKOw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UEFA2/Xv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791840929; c=relaxed/simple;
+	bh=W2Trm/nICL8IpQWE3KSrb1Z1635z6pVvaf7pWexEYS4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=E1DT7KYfq3Nt5nTn9Pua5ngiES1CaMgCm0arI+mU7p72op7MF8Ertj9hUHcT6cKodyRvgOrEXN2bLFLwJi2CysLBQ7nTwzlCMOkADo1c98HSR5Ii020xP/TEEEO8scldCsj1Wh8ve8RQkE0fNMIx5Y7gc44BZjyKdOkLLucX090=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=g0h3LdSm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CChk/a1G; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UEFA2/Xv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D09AB1F0089B;
-	Mon, 12 Oct 2026 20:58:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791838732;
-	bh=FTERMtJjBfGpwEW/7N9atE/SuZtPxRrxPJJ+sCrbI1k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UEFA2/XvZh6xGwmFTr1gmFKTGwkquuem+CBCyvU65UziSfWztd6/4S7znRYs4ihh9
-	 18Xm5NXQV53k2H1OVpcTZ1zIq2mlimGIW2YuezkpsiJyqGT5fSBhX/chXNgAkYudcC
-	 me3OYfW0ezy2I7i0WHIvKUAbMSO/j67x14HHBqs6DH8JhMZBxEh8eBZLj3hThet6pp
-	 QglO5S8DVi25KZMi/D9ihaCT5uayeI8uvEMyr69W38GQxVv9X+ZajAtQdi39PprP3B
-	 t4XiBQwsnO/9KfqUDxEA7ZhifaDyjqoe3FKUMzSVPI/oCmd2QeaDYXkEquEPvN03yD
-	 eczSP5LPU0PQw==
-Date: Mon, 12 Oct 2026 21:58:46 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Alex Elder <elder@riscstar.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
-	kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
-	lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Daniel Thompson <daniel@riscstar.com>
-Subject: Re: [PATCH v3 1/4] dt-bindings: clock: introduce
- toshiba,tc9564-clock.yaml
-Message-ID: <20261012-citizen-garbage-57e1314b4817@spud>
-References: <20261012152408.3729237-1-elder@riscstar.com>
- <20261012152408.3729237-2-elder@riscstar.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="g0h3LdSm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CChk/a1G"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CJMtGM2211070
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=; b=g0h3LdSmFr4e3N4W
+	kWFQe6Z72oW7bYJwcLrMoI5ic9/ZrLHhXclKmvQO9d8Fy40NhuW9un2UqIgeyn2m
+	wjdooOi6odu+gbyxNLMT5pSu+kT5BtAGsufB2oyu5O4K0jytMzNg7DexMv7EI3mj
+	IsNCo06gBtnrBVxWMKZeSy6cg+l4u/bKHEOm/K+w0NX/NFHesjvl7xF/9sdLGarg
+	MJqspBr5k3SNcbIO5NSZSYXcgccBiYswuymKqUV++qA22acWHvTMUHg+wYAFxWOT
+	6bbX3AJ/lq90VXxgVHE7fgKdA8o/2DnPivnM5AXgvQ4w1yeT/VHNXuwGc5APpV8C
+	+WovyQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h93aes3pw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:24 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3510d0baf63so6536697eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:35:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791840924; x=1792445724; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=;
+        b=CChk/a1GJwtG07CbzO25tk/kldi2BtAojPQ2kXPwVFhPTUP46tpefLq4E/GSQNgjzC
+         UhO1lRv1lMMVUmVr3ZUzq71K0mVLRioNdaSgg9Xq6usUoW/PHVFVegoRtrJ3xm1FVKVR
+         t4M/wWlcmCns3ui4FLDLUoBsMhn+Ke1D5MhRXJSxfzAo+gm+y7UHC0M9nHimepNEGX8H
+         MQxktUnixd/6qxM4wHaxXvQgiUD0GUjfhNVHpNF22+2SdmqRjyRWJ0kpMtprSSt8U4IP
+         X5LcMjUAR2H4gYXW5vAkkwDAOYC0HcmrM16uArXxBcR2ETjVmgYHlUBRfPmUU0sUorT2
+         WWaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791840924; x=1792445724;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=;
+        b=py9KnculTsa3JwOsO7fomWEzhX8gTIT+iKMbbGHvJBQK4hjrtBHRz7em8fa7etjQnr
+         dVOUb2xSM2fZGAqFf3ap2mBhUc+7M+1gkm2h2zN0bYLVlwXbTLBNoTOjEvTJlrMhT0+J
+         xr5QWoIrgPZulbeTnDW7DtBtIzfIjYlufW7JNvTbRbx0S531VjunZC/b/ZRSCqS7uA47
+         0kp9R5IO9J59dcE9PHXMV5VgOrSGz0k6sDyzyLI9uCP+8HPnsBc9kqpFqw/TEJXrc4hN
+         qpPuNOBT4WZitYX3c0J457Y7ra4Q9PcUHW180g/o1Tn2rh+MK5EmOWN8LsTqjsE3pNWj
+         mUrg==
+X-Forwarded-Encrypted: i=1; AKwUvByHORe1tBPul/H6PjQC9InyXL5wCdliOV2VwuARh5+DT655kHysLgZunvBPFqR85is+sy/rVZqnVQkb8tDq@vger.kernel.org
+X-Gm-Message-State: AFq9FYIEybto77lR0Xp18El619cV/VnQCk51XOxn6hZB6RMBJNscjAlF
+	53WM55F+L2e3MOmAg74br7bH6mA5YQDkwSZXC89aeKmnimGt84ZxvCl/zXPVYpkrB9hXbhRbv8R
+	mugeABpPYu49WJMn9wL1+IdHTU6G9f4EoCDXLK1IXtQ15PLf5u/3iXR4FVsgG0fX02tdq
+X-Gm-Gg: AYBFou3DVc00BFt7brMC7klwLxiT1yMGdJQ1scovEtL01ct4kkNAi/G9GShFmGhMe+K
+	WWapRs1YHUZ37CuplxQhDORbFmhalbx3qg7mX+Vp4nM0qKnnrsbMr6fDCeByCqkJIiFhXWKZlH2
+	Ais7mf/WMXiWSKieWFJeMH8m15s3TwS6pI0945bSNVU6fRe8OvI613ADtCY+Kul6fKdlAa54AY2
+	p+g3H93TX1egbiqbBebBwbWE4T4CU5FZbt84PyCQhlL0kEm6V7JZ26RfpquZGjGZSW4OO0LS9QN
+	ujPvRgi1PEbsFHIvf/n0n9U1HoKMzymFvaosIC08gak835mfvXueD6FaXrZ9xysb7P/m441Jn5M
+	Ez0xajhD7+ty5W4gdAB8nfxm6ylqnFrw+J9GR+lRVRfgoYo5bspRw
+X-Received: by 2002:a05:7022:1581:b0:151:2e62:fe89 with SMTP id a92af1059eb24-16a60812c7fmr20204161c88.32.1791840923612;
+        Mon, 12 Oct 2026 14:35:23 -0700 (PDT)
+X-Received: by 2002:a05:7022:1581:b0:151:2e62:fe89 with SMTP id a92af1059eb24-16a60812c7fmr20204104c88.32.1791840922795;
+        Mon, 12 Oct 2026 14:35:22 -0700 (PDT)
+Received: from [10.73.232.100] (pat_11.qualcomm.com. [192.35.156.11])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a3f6186fsm34188115c88.14.2026.10.12.14.35.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 14:35:22 -0700 (PDT)
+Message-ID: <2bf0a2e0-7466-4e90-b53d-f3fc0d26378c@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 14:35:20 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="/AODqDgrLRFJHav6"
-Content-Disposition: inline
-In-Reply-To: <20261012152408.3729237-2-elder@riscstar.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 2/7] bus: mhi: Move Sahara protocol driver under MHI
+ host client drivers
+To: Kishore Batta <kishore.batta@oss.qualcomm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        mhi@lists.linux.dev
+References: <20261012-sahara_protocol_new_v2-v8-0-e12939d229a1@oss.qualcomm.com>
+ <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
+Content-Language: en-US
+From: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>
+In-Reply-To: <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: tcuPN6MOQw7mzVQMDBCVFNU29GtzaZ7p
+X-Authority-Analysis: v=2.4 cv=JJuuIMKb c=1 sm=1 tr=0 ts=6acd529c cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZdW6uxA9NKXbfdqeeS2OGA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=EyST5JTptKXFtIIvUhkA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA4NiBTYWx0ZWRfX25JxcK/MiG+t
+ n1OtYYMkMQH2z65Z60pjQHiAz/lzfIsdA5dEWcyZXVfjoKb2bMvxnJMZ1tCr8HnokeFYajCoDCq
+ 1oPhZz/mJDWCRYkBNzSKB0zjo7R7Q/k=
+X-Proofpoint-ORIG-GUID: tcuPN6MOQw7mzVQMDBCVFNU29GtzaZ7p
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA4NiBTYWx0ZWRfX8t1/nbf5aHVj
+ qraSppKILrwTK4fqAj1Eb+yYHSlRT9gj6NB38S4bht0NdE7yXv6S1ThBxriX6XLqK2jiCxt/Kgw
+ pWzwH1Sr1FVjYMl4QbMmHf9S7Q+HyrIM+xplBNCONvOE1ce0BeLaLEV4oCEaChyghKA8Okvv4d1
+ Fi5lIHG02abLGaHeV/5q5JYHP5ckMpfO5cgZpnQtZFEFixK6d+uNxl50QYrNUxYkHj8Mj8kfEYe
+ bB+QJ41Y57weeVtD9VQhqi9hqPlCgGr0Hif7UqJ+d3dVSQx5md+8hk1wbwASabMEcTgG6ZTwBFc
+ DUXiTLtzQyJfyDgUCv/ug3ff+VtwY9NyTZHyoY0fDo2rEgckR3CvBAaELY/tHZRtDSVxdxc+v0c
+ 1OFBHLOzD3WqXBwYG5IBDcOjzE+A5ZDn2ICxJhr1NZh+BYOasMX9CnRUfxOO7o4qTUkjUNzMLlv
+ arZu7kYnnk5rO/Qc+SQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_06,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 adultscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120086
 
---/AODqDgrLRFJHav6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 12, 2026 at 10:24:04AM -0500, Alex Elder wrote:
-> Define the binding for the clock controller functionality present in
-> the Toshiba TC9564 SoC.
->=20
-> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Alex Elder <elder@riscstar.com>
+On 10/12/2026 11:18 AM, Kishore Batta wrote:
+> The Sahara protocol driver currently lives under the QAIC accelerator
+> subsystem even though the protocol is transported over MHI and is used by
+> multiple Qualcomm flashless devices. This makes Sahara appear QAIC specific
+> and complicates reuse by other MHI based devices.
+> 
+> Move the Sahara protocol driver under drivers/bus/mhi as a host client
+> driver and build it as an independent MHI protocol driver. This keeps the
+> QAIC driver focused on the accelerator device while allowing other MHI
+> users to enable Sahara without depending on QAIC.
+> 
+> As part of the move, add a dedicated Kconfig/Makefile hierarchy under the
+> MHI host client drivers and convert the driver to use module_mhi_driver()
+> instead of register/unregister hooks.
+> 
+> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
 > ---
-> v3: - What was formerly described as a "clock" node is now "clock-control=
-ler"
->     - The clock-controller DTS node, which dropped its reg property in v2=
-, is
->       now a sub-device of the config syscon
->     - The config syscon is now (also) compatible with "simple-mfd"
->     - The clock-controller DTS node no longer defines a toshiba,config-sy=
-scon
->       property, and the config syscon no longer requires a label
->     - The clock-controller now requires a (parent) clock property
->     - The header file is no longer included in the binding example
->     - The binding example now includes the definition of fixed 25 MHz clo=
-ck
->=20
->  .../bindings/clock/toshiba,tc9564-clock.yaml  | 65 +++++++++++++++++++
->  MAINTAINERS                                   |  7 ++
->  include/dt-bindings/clock/toshiba,tc9564.h    | 34 ++++++++++
->  3 files changed, 106 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/clock/toshiba,tc956=
-4-clock.yaml
->  create mode 100644 include/dt-bindings/clock/toshiba,tc9564.h
->=20
-> diff --git a/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock=
-=2Eyaml b/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
+>  drivers/accel/qaic/Kconfig                          |  1 +
+>  drivers/accel/qaic/Makefile                         |  3 +--
+>  drivers/accel/qaic/qaic_drv.c                       |  9 ---------
+>  drivers/accel/qaic/sahara.h                         | 10 ----------
+>  drivers/bus/mhi/host/Makefile                       |  2 +-
+>  drivers/bus/mhi/host/clients/Kconfig                |  6 ++++++
+>  drivers/bus/mhi/host/clients/Makefile               |  1 +
+>  drivers/bus/mhi/host/clients/sahara/Kconfig         | 15 +++++++++++++++
+>  drivers/bus/mhi/host/clients/sahara/Makefile        |  2 ++
+>  .../qaic => bus/mhi/host/clients/sahara}/sahara.c   | 21 ++++++++-------------
+>  10 files changed, 35 insertions(+), 35 deletions(-)
+> 
+> diff --git a/drivers/accel/qaic/Kconfig b/drivers/accel/qaic/Kconfig
+> index 116e42d152ca885b8c59e33c7a87519a0abc6bb3..af90fdfcf77eeb6dd5ad309b33d793d4fdc91b1e 100644
+> --- a/drivers/accel/qaic/Kconfig
+> +++ b/drivers/accel/qaic/Kconfig
+> @@ -8,6 +8,7 @@ config DRM_ACCEL_QAIC
+>  	depends on DRM_ACCEL
+>  	depends on PCI && HAS_IOMEM
+>  	depends on MHI_BUS
+> +	depends on MHI_SAHARA
+>  	select CRC32
+>  	select WANT_DEV_COREDUMP
+>  	help
+> diff --git a/drivers/accel/qaic/Makefile b/drivers/accel/qaic/Makefile
+> index 71f727b74da3bb4478324689f02a7cea24a05c2d..e7b8458800072aa627f7f36c3257883aa56f4ce4 100644
+> --- a/drivers/accel/qaic/Makefile
+> +++ b/drivers/accel/qaic/Makefile
+> @@ -13,7 +13,6 @@ qaic-y := \
+>  	qaic_ras.o \
+>  	qaic_ssr.o \
+>  	qaic_sysfs.o \
+> -	qaic_timesync.o \
+> -	sahara.o
+> +	qaic_timesync.o
+>  
+>  qaic-$(CONFIG_DEBUG_FS) += qaic_debugfs.o
+> diff --git a/drivers/accel/qaic/qaic_drv.c b/drivers/accel/qaic/qaic_drv.c
+> index 0acf6cdd44f81430ec52c7120b8b50c60721a615..64e87dfaa560376ecdf1e6f8bf7abf6153160926 100644
+> --- a/drivers/accel/qaic/qaic_drv.c
+> +++ b/drivers/accel/qaic/qaic_drv.c
+> @@ -32,7 +32,6 @@
+>  #include "qaic_ras.h"
+>  #include "qaic_ssr.h"
+>  #include "qaic_timesync.h"
+> -#include "sahara.h"
+>  
+>  MODULE_IMPORT_NS("DMA_BUF");
+>  
+> @@ -789,12 +788,6 @@ static int __init qaic_init(void)
+>  		goto free_pci;
+>  	}
+>  
+> -	ret = sahara_register();
+> -	if (ret) {
+> -		pr_debug("qaic: sahara_register failed %d\n", ret);
+> -		goto free_mhi;
+> -	}
+> -
+>  	ret = qaic_timesync_init();
+>  	if (ret)
+>  		pr_debug("qaic: qaic_timesync_init failed %d\n", ret);
+> @@ -816,7 +809,6 @@ static int __init qaic_init(void)
+>  
+>  free_bootlog:
+>  	qaic_bootlog_unregister();
+> -free_mhi:
+>  	mhi_driver_unregister(&qaic_mhi_driver);
+>  free_pci:
+>  	pci_unregister_driver(&qaic_pci_driver);
+> @@ -845,7 +837,6 @@ static void __exit qaic_exit(void)
+>  	qaic_ras_unregister();
+>  	qaic_bootlog_unregister();
+>  	qaic_timesync_deinit();
+> -	sahara_unregister();
+>  	mhi_driver_unregister(&qaic_mhi_driver);
+>  	pci_unregister_driver(&qaic_pci_driver);
+>  }
+> diff --git a/drivers/accel/qaic/sahara.h b/drivers/accel/qaic/sahara.h
+> deleted file mode 100644
+> index 08037281c80e28f6c85b924c45ce2c2f9dc60c39..0000000000000000000000000000000000000000
+> --- a/drivers/accel/qaic/sahara.h
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0-only */
+> -
+> -/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
+> -
+> -#ifndef __SAHARA_H__
+> -#define __SAHARA_H__
+> -
+> -int sahara_register(void);
+> -void sahara_unregister(void);
+> -#endif /* __SAHARA_H__ */
+> diff --git a/drivers/bus/mhi/host/Makefile b/drivers/bus/mhi/host/Makefile
+> index 2a16008aeb38127494782bbff4e1656428d2b776..2e8949f1a2fe6f3f3b2e1dc541f97d2c393d6a0f 100644
+> --- a/drivers/bus/mhi/host/Makefile
+> +++ b/drivers/bus/mhi/host/Makefile
+> @@ -4,4 +4,4 @@ mhi-$(CONFIG_MHI_BUS_DEBUG) += debugfs.o
+>  
+>  obj-$(CONFIG_MHI_BUS_PCI_GENERIC) += mhi_pci_generic.o
+>  mhi_pci_generic-y += pci_generic.o
+> -obj-y += clients/
+> +obj-$(CONFIG_MHI_BUS) += clients/
+> diff --git a/drivers/bus/mhi/host/clients/Kconfig b/drivers/bus/mhi/host/clients/Kconfig
+> index 8bb5715e61d0d6e64a51012b4e1594ba46e5bfc1..1932344157a5b1dc25c8d63f6d4ac38f896d08a7 100644
+> --- a/drivers/bus/mhi/host/clients/Kconfig
+> +++ b/drivers/bus/mhi/host/clients/Kconfig
+> @@ -15,3 +15,9 @@ config MHI_BUS_LOOPBACK
+>  
+>  	  To compile this driver as a module, choose M here. The module
+>  	  will be called mhi_loopback.
+> +
+> +menu "MHI host client drivers"
+> +
+> +source "drivers/bus/mhi/host/clients/sahara/Kconfig"
+> +
+> +endmenu
+> diff --git a/drivers/bus/mhi/host/clients/Makefile b/drivers/bus/mhi/host/clients/Makefile
+> index 3811b6928f42b38f94b1167941cf3b0fe512d32b..67e70de280369870164b4808f39d9b3340f2589b 100644
+> --- a/drivers/bus/mhi/host/clients/Makefile
+> +++ b/drivers/bus/mhi/host/clients/Makefile
+> @@ -1,2 +1,3 @@
+>  obj-$(CONFIG_MHI_BUS_LOOPBACK) += mhi_loopback.o
+>  mhi_loopback-y += loopback.o
+> +obj-$(CONFIG_MHI_SAHARA) += sahara/
+> diff --git a/drivers/bus/mhi/host/clients/sahara/Kconfig b/drivers/bus/mhi/host/clients/sahara/Kconfig
 > new file mode 100644
-> index 0000000000000..24e07d4aead32
+> index 0000000000000000000000000000000000000000..f1fc7013a2dee0be645c50f32305659e591de7e7
 > --- /dev/null
-> +++ b/Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
-> @@ -0,0 +1,65 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/clock/toshiba,tc9564-clock.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +++ b/drivers/bus/mhi/host/clients/sahara/Kconfig
+> @@ -0,0 +1,15 @@
+> +config MHI_SAHARA
+> +	tristate "Sahara protocol driver"
+> +	depends on MHI_BUS
+> +	help
+> +	  Enable support for the Sahara protocol transported over the MHI bus.
 > +
-> +title: Toshiba TC9564 Clock Controller
+> +	  The Sahara protocol is used to transfer firmware images, retrieve
+> +	  memory dumps and exchange command mode DDR calibration data between
+> +	  host and device. This driver is not tied to a specific SoC and may be
+> +	  used by multiple MHI based devices.
 > +
-> +maintainers:
-> +  - Alex Elder <elder@riscstar.com>
-> +  - Daniel Thompson <daniel@riscstar.com>
+> +	  If unsure, say N.
 > +
-> +description:
-> +  The Toshiba TC9564 is an SoC accessed by a host system through the
-> +  upstream PCIe port on the PCIe switch it implements.  The switch
-> +  includes an embedded PCIe endpoint that provides access to various
-> +  SoC peripherals (including a clock controller) via its BARs.
-> +
-> +  A total of 21 clocks are implemented, though two of these are not
-> +  controllable.  Access to the clock controller relies on PCIe being
-> +  functional, so the PCIe clock is assumed to be always on.  Similarly,
-> +  the PCIe controller relies on I2C, so the I2C clock is also assumed
-> +  to be always on.
-> +
-> +  Clock ids are defined in <dt-bindings/clock/toshiba,tc9564.h>.
-> +
-> +  The clock controller uses registers within the same page as a
-> +  reset controller, so both devices are defined as children of a
-> +  "config" syscon.
-> +
-> +properties:
-> +  compatible:
-> +    const: toshiba,tc9564-clock
-> +
-> +  clocks:
-> +    maxItems: 1
-> +
-> +  "#clock-cells":
-> +    const: 1
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - "#clock-cells"
-> +
-> +unevaluatedProperties: false
-> +
-> +examples:
-> +  - |
-> +    tc9564_xo_board: clock-25000000 {
-> +        compatible =3D "fixed-clock";
-> +        clock-frequency =3D <25000000>;
-> +        #clock-cells =3D <0>;
-> +    };
-> +
-> +    syscon@0 {
-> +        compatible =3D "syscon", "simple-mfd";
-> +        reg =3D <0x0 0x2000>;
-
-Same comments apply here as did on the reset, so I won't bother
-discussing it in two places at once.
-
-I'm going to mark this CR so that the lads don't need to look at it,
-given that you need to resubmit anyway for the driver side.
-pw-bot: changes-requested
-
-Thanks,
-Conor.
-
-> +
-> +        clock-controller {
-> +            compatible =3D "toshiba,tc9564-clock";
-> +            clocks =3D <&tc9564_xo_board>;
-> +            #clock-cells =3D <1>;
-> +        };
-> +    };
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 77bd64bae919f..b19c62eabaa7e 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -28166,6 +28166,13 @@ F:	Documentation/devicetree/bindings/media/i2c/t=
-oshiba,tc358743.yaml
->  F:	drivers/media/i2c/tc358743*
->  F:	include/media/i2c/tc358743.h
-> =20
-> +TOSHIBA TC9564 CLOCK DRIVER
-> +M:	Alex Elder <elder@kernel.org>
-> +M:	Daniel Thompson <danielt@kernel.org>
-> +S:	Maintained
-> +F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
-> +F:	include/dt-bindings/clock/toshiba,tc9564.h
-> +
->  TOSHIBA TC9564 PCI DRIVER
->  M:	Alex Elder <elder@kernel.org>
->  M:	Daniel Thompson <danielt@kernel.org>
-> diff --git a/include/dt-bindings/clock/toshiba,tc9564.h b/include/dt-bind=
-ings/clock/toshiba,tc9564.h
+> +	  To compile this driver as a module, choose M here: the module will be
+> +	  called mhi_sahara.
+> diff --git a/drivers/bus/mhi/host/clients/sahara/Makefile b/drivers/bus/mhi/host/clients/sahara/Makefile
 > new file mode 100644
-> index 0000000000000..2106e4199ed45
+> index 0000000000000000000000000000000000000000..fc02a25935011cbd7138ea8f24b88cf5b032a4ce
 > --- /dev/null
-> +++ b/include/dt-bindings/clock/toshiba,tc9564.h
-> @@ -0,0 +1,34 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +
+> +++ b/drivers/bus/mhi/host/clients/sahara/Makefile
+> @@ -0,0 +1,2 @@
+> +obj-$(CONFIG_MHI_SAHARA) += mhi_sahara.o
+> +mhi_sahara-y := sahara.o
+> diff --git a/drivers/accel/qaic/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
+> similarity index 99%
+> rename from drivers/accel/qaic/sahara.c
+> rename to drivers/bus/mhi/host/clients/sahara/sahara.c
+> index c7c0b3eb4b65fb7776a6c724cb3105046cf6f7eb..dc64beae06ada6915a506ed8f4ae4d71c03158bb 100644
+> --- a/drivers/accel/qaic/sahara.c
+> +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
+> @@ -1,19 +1,20 @@
+>  // SPDX-License-Identifier: GPL-2.0-only
+> -
+> -/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
 > +/*
-> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights res=
-erved.
+> + * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+> + *
 > + */
-> +
-> +#ifndef __CLOCK_TOSHIBA_TC9564_H__
-> +#define __CLOCK_TOSHIBA_TC9564_H__
-> +
-> +/* Clock IDs */
-> +
-> +#define CLOCK_MCU		0
-> +#define CLOCK_INTC		1
-> +#define CLOCK_SRAM		2
-> +#define CLOCK_UART		3
-> +#define CLOCK_MSIGEN		4
-> +#define CLOCK_PLL		5
-> +#define CLOCK_SGMII		6
-> +#define CLOCK_REFCLKO		7
-> +
-> +#define CLOCK_MAC0_TX		8
-> +#define CLOCK_MAC0_RX		9
-> +#define CLOCK_MAC0_125M		10
-> +#define CLOCK_MAC0_312_5M	11
-> +#define CLOCK_MAC0_ALL		12
-> +
-> +#define CLOCK_MAC1_TX		13
-> +#define CLOCK_MAC1_RX		14
-> +#define CLOCK_MAC1_RMII		15
-> +#define CLOCK_MAC1_125M		16
-> +#define CLOCK_MAC1_312_5M	17
-> +#define CLOCK_MAC1_ALL		18
-> +
-> +#endif /* __CLOCK_TOSHIBA_TC9564_H__*/
-> --=20
-> 2.53.0
->=20
 
---/AODqDgrLRFJHav6
-Content-Type: application/pgp-signature; name=signature.asc
+Never delete the copyright lines please.  Is there any previous discussion on why we are doing it? 
 
------BEGIN PGP SIGNATURE-----
+---Trilok Soni
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCas1KBgAKCRB4tDGHoIJi
-0iSnAP9MGRKjIPSHz1wrmbjS8fuYvn1HnO5o3n0pilv/nDIPbAEAkzKCtP7/LFTk
-K3rVqG6piggU5+riXPAx2XhMT3xZCQI=
-=gtoV
------END PGP SIGNATURE-----
-
---/AODqDgrLRFJHav6--
