@@ -1,122 +1,96 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C48744ACC94
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 16:26:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C1F814AAC63;
+	Mon, 12 Oct 2026 16:28:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791822390; cv=none; b=JxBMzPuF2Udiy1V6wVvlFr62O0TyVA0g1JJbLT8lFusGb4tAx8lHPZtvUIWZ0S1KxSW718AG0uo2iuyalZAyJeuKzabXMB2D5TMQ2VrHCcr0xjrkSOw+EnBLZnxRdHodq0zZIjwb4PWKYZg+FO+EVSIqtU0jVOP4uLHG6gs5Vac=
+	t=1791822539; cv=none; b=B425hippaBsu1dQUcbS80pLacvnWWq4Zobo+c+ujhDFSuIiJARUwipr6D5/9vxD+Cq3jslgMKK4aOUjZCiygDf7FvuIrZX76lClJVacnAIapU/dOYz7IdTbNwzenGEuaxykL+u0FtWoPDlJ1cELvF0MHDxuLQTTgdj/5Ou3Do8I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791822390; c=relaxed/simple;
-	bh=DJl1h1zX1CaTeRF2kmfSSDgZTrjxgcg6/cl3EJ7w9Lc=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=FEijxglSVcemqj32tvILJ2/0689UqqembYng+HSsBo8HAczgIyui2SsSxwssr+pZRTdD2Ef9yOOniKVgVqwgYJVschl8SptZZEnbt8P0sh6vyRPX5Sf9rfBuG+xThDlvoE2wc9zewXU8M4XeoPziEEI4vLEhES4BQl8HZAvn3y0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H/y6NOSp; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791822539; c=relaxed/simple;
+	bh=gIJwf2heM9XCD/JqzbYgIt2MgD8ykDZ06NKl6r3wTEo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pKoT5/l15C2+4OEZhM5dECg8IENVBIk/iajH1p1ftcyt88bCvWHZbv3nSpQKK5b6D0cTz+srfw+lTE75kuaYUzaEBpnDzu43dW68MhN0CYf4rIV9OR2wjCA/OQOykuaDD2wa0a+lqHe7M6KPRvyQM00V2wRGW+yyfJwGOyMOQps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=V7LPfNA7; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H/y6NOSp"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 831EF1F008A5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 16:26:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791822389;
-	bh=A5yMycJwawPg0C3KC+oeROk1OVlGqbmOeMxx37gHkgo=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=H/y6NOSpa1dM7CEj5vQvvFBcP9cuGERYPsfPAlkJtFRd0ATEj36G6bXIK0Pl+VtDc
-	 pPds8LGurpWdqo0KQAO2bBn2BPYtpcDVHyhWNOhZjJYeNWTcTfOpZYzE60m1AiP92Z
-	 rcug3S2fT44XKbSZhWbM4RXyjC9l7rnpe9tH0xTKMKCZDe1bz1jqS2aiDJkPQjRSuB
-	 WXnWGY4ZrazMfrnRmr2c3BpsOotfrHfqivHHx7Gl9+83nK2I5/QjLC5/mTXq1G7sne
-	 ysUWStjhwxoqN15ElgaqBzyE2FRh6VVkhTuDbXQshlId2BvAAdOLSCUgCRS7uYAfY0
-	 DwKXJZwd5lNRg==
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3a1eb6fa0f4so22390601fa.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:26:29 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBz+7YajRsOdobHwy8YDabLeu5mA7yY/dTtQCyYnVqphGDHQglXEw+Gy5PZ7qCCjSO8/j3PPBJz3PXkzQxBX@vger.kernel.org
-X-Gm-Message-State: AFq9FYK2XL3OUJ0tYIhbNu+Gr0aD6XBFxSVLh/NrXK0qKCRBy8wuslMK
-	NGkmRRJ6WggTg6JYMmWdBkxSjy17kzWgK5sHJ6nQd2nt8iEfeVMPLHmkrag1E7uEYRyOr3epWSp
-	2FAIRWlzIRSbjKRWeCyfgN3ye+6mNrVKS9wPeeT0Jjw==
-X-Received: by 2002:a05:651c:211b:b0:39c:624d:82b9 with SMTP id
- 38308e7fff4ca-3a9c51556e2mr26412571fa.4.1791822388127; Mon, 12 Oct 2026
- 09:26:28 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 12 Oct 2026 12:26:26 -0400
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 12 Oct 2026 12:26:26 -0400
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <asdVyUKWndnZ1Mxv@gondor.apana.org.au>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="V7LPfNA7"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4466D169E;
+	Mon, 12 Oct 2026 09:28:51 -0700 (PDT)
+Received: from localhost (unknown [10.2.196.114])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 274433F673;
+	Mon, 12 Oct 2026 09:28:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1791822534; bh=gIJwf2heM9XCD/JqzbYgIt2MgD8ykDZ06NKl6r3wTEo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=V7LPfNA7s8RoIZ3hI5+HCdI5KNciqvmLoKZPd7Smr9cADlUE6FWh94GlhN94SM8zE
+	 08ufpKcftvWxkinUalIyA9KPb7gnmBMsNjtfJOoExmY0eaETYrlmN8ZnXoANAeztqa
+	 nm3rC2OtKj+jd5UH4FWdu5latuwMyZHbrtyo5qAw=
+Date: Mon, 12 Oct 2026 17:28:51 +0100
+From: Leo Yan <leo.yan@arm.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@arm.com>,
+	James Clark <james.clark@linaro.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Wei Xu <xuwei5@hisilicon.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>, coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 1/5] dt-bindings: arm: coresight: Limit static replicator
+ to atclk
+Message-ID: <20261012162851.GB26205@e132581.arm.com>
+References: <20261002-arm_coresight_hi3660_remove_dynamic_funnel_clocks-v1-0-c3edca1c480b@arm.com>
+ <20261002-arm_coresight_hi3660_remove_dynamic_funnel_clocks-v1-1-c3edca1c480b@arm.com>
+ <1128f456-ed6e-47ee-8dda-157af99cc404@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com>
- <ar9qNirrzOTDLipN@gondor.apana.org.au> <CAMRc=MdRBu5gg7Q3pz8Wn9Da4RpmmiKLP2-LwiszKCd3o8jQdQ@mail.gmail.com>
- <asdVyUKWndnZ1Mxv@gondor.apana.org.au>
-Date: Mon, 12 Oct 2026 12:26:26 -0400
-X-Gmail-Original-Message-ID: <CAMRc=McxneS=y9eof9cO7CY2Z0GW6swk8JZKiCvY7wQxLyxdeA@mail.gmail.com>
-X-Gm-Features: AclHuK90qLjVg-NEmXjcMIVyxP5clymZXcyYKBdYqwoXDXyduVU9WFnN6XNIWLU
-Message-ID: <CAMRc=McxneS=y9eof9cO7CY2Z0GW6swk8JZKiCvY7wQxLyxdeA@mail.gmail.com>
-Subject: Re: [PATCH v9 00/14] crypto: qce - Fix crypto self-test failures
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: Thara Gopinath <thara.gopinath@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
-	Stanimir Varbanov <svarbanov@mm-sol.com>, Eneas U de Queiroz <cotequeiroz@gmail.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, 
-	Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Russell King <linux@armlinux.org.uk>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, stable@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1128f456-ed6e-47ee-8dda-157af99cc404@amd.com>
 
-On Thu, 8 Oct 2026 10:35:21 +0200, Herbert Xu
-<herbert@gondor.apana.org.au> said:
-> On Fri, Oct 02, 2026 at 10:31:41PM +0300, Bartosz Golaszewski wrote:
->>
->> > Please check the Sashiko comments:
->> >
->> > https://sashiko.dev/#/patchset/20260922-qce-fix-self-tests-v9-0-b1aa742e79af%40oss.qualcomm.com
->> >
->>
->> I've gone through them. None of the issues were introduced by this series, all
->> are pre-existing. I've added them to my list and will fix them. Can we not
->> delay this series any longer and instead work in smaller steps since the crypto
->> algos will be disabled by default anyway?
->
-> The very first comment appears to be pointing to new code:
->
->> > +/*
->> > + * BAM DMA cannot handle zero-length transfers, so the driver always holds
->> > + * back at least one byte to submit to the engine. A zero rctx->buflen at
->> > + * finalization time does not necessarily mean the message is empty: the
->> > + * caller may have imported a state that already reflects some hashed data
->> > + * with nothing currently buffered. Handle both cases through the software
->> > + * fallback: reconstruct the running state when there is one instead of
->> > + * assuming the message is empty.
->> > + */
->> > +static int qce_ahash_finalize_zero(struct ahash_request *req)
->> > +{
->> > +	struct qce_sha_reqctx *rctx = ahash_request_ctx_dma(req);
->> > +	HASH_FBREQ_ON_STACK(fbreq, req);
->> > +	struct __sha256_ctx core;
->> > +	struct scatterlist sg;
->> > +	int ret;
->> > +
->> > +	sg_init_one(&sg, NULL, 0);
->> Can this trigger a kernel panic during zero-length finalization?
->> qce_ahash_finalize_zero() creates a dummy scatterlist by calling
->> sg_init_one(&sg, NULL, 0).
->> sg_init_one() unconditionally calls sg_set_buf(), which attempts to resolve
->> the page via virt_to_page(NULL).
->> If CONFIG_DEBUG_SG is enabled, this triggers a BUG_ON(!virt_addr_valid(buf))
->> kernel panic, because 0 is not a valid linear map address.
->> If disabled, it results in a bogus PFN being stored in the scatterlist,
->> leading to potential invalid memory access during software fallback operations.
->> This path appears reachable by untrusted userspace via AF_ALG performing a
->> zero-length HMAC finalization.
->
-> How is this a pre-existing issue?
->
+On Mon, Oct 12, 2026 at 02:35:37PM +0200, Michal Simek wrote:
+> 
+> 
+> On 10/2/26 17:07, Leo Yan wrote:
+> > Static replicators have no programmable registers and need no APB
+> > programming clock.
+> > 
+> > The Zynq clock controller registers dbg_trc and dbg_apb and calls
+> > clk_prepare_enable() for each gate the bootloader left on.
+> 
+> That's one bootloader behavior. If there is another bootloader that clocks
+> can be simply disabled. I don't think there is any reason to depends on
+> bootloader behavior. If there are clocks which has to be ON I can't see any
+> reason not to drive them.
 
-Sorry, this and a couple others were introduced here, v10 coming up.
+My reference to zynq_clk_setup() was to explain that this patch leaves
+the existing management of dbg_trc and dbg_apb unchanged.
 
-Bart
+The CoreSight drivers do not request clocks named "dbg_trc" or "dbg_apb".
+And removing those unused clock properties introduces no additional
+dependence on the bootloader. Could you clarify how retaining these
+entries addresses the bootloader concern?
+
+> TRM page 741
+> 
+> Trace Port Clock The trace port clock is used to clock the TPIU and trace
+> buffer when the MIO interface is chosen and must be twice the frequency of
+> the desired TPIU clock. The TPIU clock frequency must be chosen to be fast
+> enough to allow the trace port to keep up with the amount of data being
+> traced, but slow enough to meet the dynamic characteristics of the data
+> output buffers of the TPIU.
+
+The quoted paragraph establishes a trace-clock requirement for the TPIU
+and trace buffer, how does it identify the clock inputs of the funnel
+and replicator?
+
+Thanks,
+Leo
