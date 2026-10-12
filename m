@@ -1,100 +1,165 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DA3F4A5EA5;
-	Mon, 12 Oct 2026 15:55:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4A1931D362
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 16:02:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791820557; cv=none; b=fDNRXC6PxE0nPJM2K8zNqu0zw5gQkMEs8IzEtly9AThM4xyZ+bTVoNs5meXBelyqvcOM5jggeiUQX5bs9XYfriiTxZdO7vybiqT2Z1pftwFr9QmwN2DytsjArEAVZM2eb12cwZFHzaVXkZlAXYroM9SCovE2LMu+zVHtrqtHmKA=
+	t=1791820935; cv=none; b=A4LF3N8OqaQS4dWtDrhMnAIvDaDjst9JLYc8Nw0OBi+JRCYDWUsUohfK8rCU2n1r8a914qDwycF+Ry9yfQI4mjyOIIfIon2YxCZzPslj3bKs5gtLHFPawqmV3B0Ibaaqiyz1IT0MyHzLAbHNLoNw3U8tJRCU5jPjYpvuC0UfW/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791820557; c=relaxed/simple;
-	bh=4FmKRksIO7Bny3rPzmqieKmk9ZT0xdfNxBEHw2BnAxc=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=dOBwjacIGfLtqcL6/UDUAQSzVlVb2m4wUW+sFC4V7OwLpNuyTLjzDFSW4oi4J2Uj44SoCY2vzwj1odRn4WtPZhwd0evI2v967e8SJyueSxoPKmJOscnLACACxnM2Cu/w2B3LzVFUgCGVDCw+gjt+P0Y/G9zTvoF5/0PuzmAZZT8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UrRsszOk; arc=none smtp.client-ip=198.175.65.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1791820935; c=relaxed/simple;
+	bh=2RjDGaBIt9UpCsIrhhyUdlCRXMviK38qRoAakOzKOBI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uUUOy0t8Uu1noFfYumUEBv8wCRmrS5lbvMpRkkdcKfHdQnPO8dSWzYCrlvPm9goH4MvvxzI//3jlatyYXeK/YTOE4B9Aiuu/JF8a5pLQQeAhCFcO31tWZbO+3eGXKfWI9hHrtQ4PgC0H5b4a/0rul/k0drWv+G90nKzjrlW3TZU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bkbucb44; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y1HIDQ5A; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UrRsszOk"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791820556; x=1823356556;
-  h=from:to:cc:in-reply-to:references:subject:message-id:
-   date:mime-version:content-transfer-encoding;
-  bh=4FmKRksIO7Bny3rPzmqieKmk9ZT0xdfNxBEHw2BnAxc=;
-  b=UrRsszOk9rNtXndkm/zxajuRXkRRbUtyF4OQwexjfp8HajpjaIgmPf1Q
-   PEAcFaAoUy1lo01KZynIbhSU94N1CsNagQXlruNZgEdlRFhev3axejrNc
-   eBhTucQ8uEeARM6ABoaRXwyViImm37iE88OwHZzcozIWxUJQP4hLNzbU6
-   kZ2xeTq82kXA4tWoaI9OXfTH9dJcCYaET2PO0c+mZMQ/P9s4GM5xXwjuL
-   y0HVbxF++8FMYQNvdmTwLIpHpSRRQXMffI3CG6nXjxRqELYCaBhEVqSrX
-   ElnkJ7NWRqIvZcsLyxOf16Ux9Dk1kQa7XuBfuKJP5RaBCfglafMb5Qoyr
-   g==;
-X-CSE-ConnectionGUID: A+m60B2MQi2Zhje0yGNNzg==
-X-CSE-MsgGUID: UDGRwmlxTVe3rI7AB0/utw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="417117"
-X-IronPort-AV: E=Sophos;i="6.27,153,1787036400"; 
-   d="scan'208";a="417117"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2026 08:55:56 -0700
-X-CSE-ConnectionGUID: 6nyPggpLSYymnaC9VpvNTQ==
-X-CSE-MsgGUID: TK4xHRppRUeHGNLCQgARow==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,153,1787036400"; 
-   d="scan'208";a="908837"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.202])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2026 08:55:52 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-To: Anvesh Jain P <anvesh.p@oss.qualcomm.com>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Hans de Goede <hansg@kernel.org>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Maya Matuszczyk <maccraft123mc@gmail.com>, 
- linux-arm-msm@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261001-qcom-hamoa-ec-suspend-irq-v2-1-ec71a7cdec79@oss.qualcomm.com>
-References: <20261001-qcom-hamoa-ec-suspend-irq-v2-1-ec71a7cdec79@oss.qualcomm.com>
-Subject: Re: [PATCH v2] platform: arm64: qcom-hamoa-ec: Disable the SCI IRQ
- during suspend
-Message-Id: <179182054705.17897.3149043112275162830.b4-ty@b4>
-Date: Mon, 12 Oct 2026 18:55:47 +0300
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bkbucb44";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y1HIDQ5A"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CFf0fE2175322
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 16:02:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	gyByxyOQ8a0f415k4TSij77SdQVIwV0lR/nDvlbYRAA=; b=bkbucb44LiOp9kmQ
+	qGRbEZUyO9umgF4oWHpmy38uPyfxWf5aW7mT/d+mG1anXeDz9uNZRNn37wwkFqBA
+	R6Cdwumqd3FcdZ+xxqoVYiTOJJn3ftU5OKnPpQR8N/zuy0Noo8WdrZp5RnJ9wTlJ
+	G/PFo38Qo7XUcvPvvHokJakAc3tlDaro8rWnmaRpMVceZ0Y1HgFMhqEgwyOsLI+4
+	CKzknB22nh1stQhXijTkhje/2hUvRBXIo5B8wYX3ck94c6vJlZvpGjaH+mjEO5D4
+	LWsgBbJGaTUGuAEJxAKNrTB7ww+Jc9QVU9OhgMua3heH1haOyLX86y3nNyAMY7j8
+	2uPR/A==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8wbc1mkc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 16:02:12 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-533962f6bc9so4834251cf.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:02:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791820932; x=1792425732; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=gyByxyOQ8a0f415k4TSij77SdQVIwV0lR/nDvlbYRAA=;
+        b=Y1HIDQ5AH1yIo+rF+HHwlh3+iGURRQvPus7SYLdPVxZspdOLylBtDzUq6pRI3CwjvC
+         3KV1/HgsFlYhpkRHw5pFPSpFrWAk0texHrQZodE6rqIxQigLH3BtbV2iNjMNKYSfTPD/
+         liSjbmYTV6fp4dk/It3sW++tZlromMLFH7vptjijQRmMzbSi9LZZ+ediv9loeTQry3/V
+         khFb7sJaIvZy/D4uE2fWvf6GvCtbbDjqC5s7xFSW8d0FOUS1oQ6vG8XIIYKPZO0c2v6Y
+         8wi72HTKH8DZYBKI2c2HgICeMHE434mUiWQRmr8LHEfFXKCIK5W88X6J125jQsqPLHJZ
+         M+6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791820932; x=1792425732;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=gyByxyOQ8a0f415k4TSij77SdQVIwV0lR/nDvlbYRAA=;
+        b=c+SCODS6viIPAoObpGbyv8+jFKNvvoHJOJqujLAwHFV8opumodhb+A9N+I46nu3GL9
+         IIrfYCF2Tmsuf7uhDrYyNeP088HFRx7jIgSuEePX1/tbuPpQga6G+xZ0w2575syDnCcn
+         fEHV3Ea2caEJKwaODMa23TohdoKFnrkj/XGU5lcclhL0aCvRIpAammETWZblY99oJsxD
+         yxubo4cmOg6m4OCrksq3ufZrSxSRkee5WapVi0kPGqhRWUWy9bzCw6v6Y1LUqd3NrcSU
+         0Du6aF/oRn8rnQXy6uQ30PK5LnDSgon2kfy8xFJX8HBviP0CpE67fuxVApr9KBTH0Lzq
+         iqyQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzK2dzekD7nPQnd3/pdNLnNkNVwoNG08qSB2XkOIvKWK8kxFWt0u/M2ZBeK3iKT08bJtfj3RPRUURAh0rLU@vger.kernel.org
+X-Gm-Message-State: AFq9FYKyK7nTgC40KtAlDn1qOoOW165KLM8tueq46/TmGoGF5T11H3uM
+	E8wqzI372tgqfy07/yoaJ9Zf+RMZGVqFfV8b+yDGKLXQIvzFCzt/QSgSL9mDtBCQgjj6XGZKSMs
+	M0oyeB0JhTAIbnxQ0mEmXqFK8jJ2c0ffkjeRLypJ7ZV5O3+O0XnYIYr5xw7gfDsPPAs3U
+X-Gm-Gg: AYBFou2p/to6aMXljigy8E6aPpSy74NIB6mcr12e5TFtSG7dO2r858+mUBMdG23um+x
+	XpQVsTRgzgat/RPtgA+0ylxhcpA0x2dGIZ7yspMzb+SZ0OQJV7LPJtDnWcpnb2s23aw0AzFeGXo
+	0+xzTVZK4AJ5b5Jy4cEj0cHu6kJKxpVR/a9b29gwdZMxiiCKRAJtcorAm5Tkewupf2woacnn0tP
+	aNAJ4KrjLDDWCn0jqnVSzk64ykNOv69GWUGcxDJFcMXLbet/v7FX0l1ttYej4zfvqSzxU9eH9uc
+	aOur7NGWarhtkh/REvt9l3nu66PYUI+bBNVrH8l1fVRDT6xcAOn94o0Xk2w1OCcA0G2aVmvc1mS
+	1/c7hTdqAs+yvP6DFluixzQ==
+X-Received: by 2002:a05:622a:110a:b0:535:1a6:6e93 with SMTP id d75a77b69052e-5359f4e01bfmr192065401cf.2.1791820931998;
+        Mon, 12 Oct 2026 09:02:11 -0700 (PDT)
+X-Received: by 2002:a05:622a:110a:b0:535:1a6:6e93 with SMTP id d75a77b69052e-5359f4e01bfmr192064921cf.2.1791820931537;
+        Mon, 12 Oct 2026 09:02:11 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c353bf3a541sm110415666b.25.2026.10.12.09.02.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 09:02:10 -0700 (PDT)
+Message-ID: <a8e6e9b7-ca66-4969-bc34-99df34058af0@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 18:02:08 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/4] arm64: dts: qcom: qcs6490-rb3gen2: add the clock
+ controller
+To: Alex Elder <elder@riscstar.com>, sboyd@kernel.org, bmasney+clk@redhat.com,
+        jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org,
+        conor+dt@kernel.org, andersson@kernel.org, konradybcio@kernel.org
+Cc: abelvesa@kernel.org, kees@kernel.org, gustavoars@kernel.org,
+        mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
+        danielt@kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Daniel Thompson <daniel@riscstar.com>
+References: <20261012152408.3729237-1-elder@riscstar.com>
+ <20261012152408.3729237-5-elder@riscstar.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261012152408.3729237-5-elder@riscstar.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA2MyBTYWx0ZWRfX+7jeV2X4eg/b
+ pxirFeXtz6ErlZrJVB4RcVyyepOr1Z+T/bgc8hMxrFmlBi6L7fLfm8dI1eBw3bbr+QYBCHrvA18
+ Hgk+3257FiTRUyTvqB2VTe4tAHk6fdc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA2MyBTYWx0ZWRfXxUst9v3BEhd2
+ DemwhOPRGn3RwhhMx/XTUg4Zyait3KsChvt9Lp0SxADoxzeMRu7bIRMaN7eM0Fu3FJ0sywBfeaQ
+ PtpsvJJoBNdUCP9Gn9NNYJuTA8bS+TZkb9s5Fv0QHutOiNiVqOnrOiSBfRrhQR27Vs/zud+EUGl
+ N3748YJSe8hoWhRqBjw+Q39XD/ZjuKmWhCmDEayDhSrZub7pMURSkmXsV+JiWwSyGeGMnF6kjJR
+ w3N3danVZFhwAzOT7G9Ho/4tztfZk8vNhhrH5V8p3+NG/pDMzi/sAGQA4ThVIYmcgEEFN2k7Ne0
+ zXylFJBiTQ6XeKdYbCux2g9ZLT86/dLQj+gY8KVZ5JipFF4esLBVQK36nFiIgxvt3IUdom70jvv
+ BjTnpMTPkUGxBI68z1VlJvd4I3jrhSp4sU46cqAJSAe1T233IcPVBCC8vBTAA5kLVOjjPzq2wq9
+ 5yRgh6DJR9rHrCxpBfg==
+X-Authority-Analysis: v=2.4 cv=C4p8WgP+ c=1 sm=1 tr=0 ts=6acd0484 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=ee_2aqc6AAAA:8 a=WjKZ7VJ2YQ59rNZOuecA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=a_PwQJl-kcHnX1M80qC6:22 a=VOpmJXOdbJOWo2YY3GeN:22
+X-Proofpoint-ORIG-GUID: o-c6ifVzHQj_x7VBCpOtuif1QGjeMUUB
+X-Proofpoint-GUID: o-c6ifVzHQj_x7VBCpOtuif1QGjeMUUB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0 adultscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120063
 
-On Thu, 01 Oct 2026 10:46:36 +0300, Abel Vesa wrote:
-
-> EC SCI events require I2C transfers to retrieve the event information.
-> During system resume, an SCI interrupt can be delivered before the I2C
-> controller is ready to handle transfers, resulting in failed event reads:
+On 10/12/26 5:24 PM, Alex Elder wrote:
+> The clock controller within the TC9564 SoC is accessed via a PCI
+> endpoint bus through BAR 4 of the first embedded PCIe function.
+> A syscon node is created to provide access to a range of memory
+> that is used by the clock controller and shared with other devices.
 > 
->   geni_i2c a84000.i2c: error turning SE resources:-13
->   qcom-hamoa-ec 3-0076: Failed to read EC SCI Event: -13
-> 
-> [...]
+> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Alex Elder <elder@riscstar.com>
+> ---
 
-Thank you for your contribution, it has been applied to my local
-review-ilpo-next branch. Note it will show up in the public
-platform-drivers-x86/review-ilpo-next branch only once I've pushed my
-local branch there, which might take a while.
+[...]
 
-FYI [if applicable to your patch], as per Linus' policy change, also
-fixes are mostly routed through for-next unless the fix is for a
-commit introduced in the most recent cycle or is clearly a regression
-fix.
+> +&pcie_s1b5d0f0_bar4_bus {
+> +	syscon@0 {
+> +		compatible = "syscon", "simple-mfd";
+> +		reg = <0x0 0x2000>;
+> +
+> +		tc9564_clock0: clock-controller {
+> +			compatible = "toshiba,tc9564-clock";
+> +			clocks = <&tc9564_xo_board>;
+> +			#clock-cells = <1>;
+> +		};
+> +	};
 
-The list of commits applied:
-[1/1] platform: arm64: qcom-hamoa-ec: Disable the SCI IRQ during suspend
-      commit: 16624ca212e67afd0bffe983d5e9600e87e321bc
+It's the same file - just put the node under the ep-bus definition
 
---
- i.
-
+Konrad
