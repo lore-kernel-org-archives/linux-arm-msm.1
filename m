@@ -1,85 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEE1D3C9EE0
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:09:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0405730C606
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:14:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791806956; cv=none; b=fZTQWVOJdJi5gVKFHfsUY5PuWEd+MvYeuriEFtOS33LyGqS2Xl/fmuCLM+pG4RX1PiFPCxr/a+22cjm2r7MK11vpJ8JChMnRUpv2H8+cSSWOpWlLRz/BQX5aXK+J7P2yuKsIKnyM70ZLwGiQzLCu67LSM/EVjT8XXnqzJtxdf+Y=
+	t=1791807301; cv=none; b=FHb6ZNuK5HCPWFUg0ycCBZzwQStgNJhD0+u4Ie+4ZNJQQMh3hSdH0Ul7kY5/RJUpHoWvOy8Kr3tJ18J12S9tJJFDvvrUT0NYpTimR4ACJAytangQZS2uwLV586oTWz5UzqdUPXIUpE96eSNb9NjC0YsYqZd6JsVcac9LkxfzHJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791806956; c=relaxed/simple;
-	bh=7gDGeRMtHjE8XIaoNvoEv+Yb06Mc7LJbe9EfpStF7KQ=;
+	s=arc-20240116; t=1791807301; c=relaxed/simple;
+	bh=zpH1RrQPEpCPdQaKz6SHrd4kSAVlPCrsQI6bIa3qi34=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rm/IYKTqia4SWJ3y13YXsdbumq/OaIe+8nuazzww3UWe/+wHlZ8S2F4qBnzsqQoySaCQF/g5FfBhHwyf3eh5jqBInjCOtLGkRqAOKXtpd/FZCsll3jsbkmEbiQv6idWVKNQJ50oR8DOiQDu3EqHAE8M+mbh88q3oE/WuNwodF9k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UWi2RKW2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hAC+k40I; arc=none smtp.client-ip=205.220.168.131
+	 Content-Type:Content-Disposition:In-Reply-To; b=BFNnymOQw9nkg+leis3OzKPDmtp+tIrwOwp9j3W5BHf8utFisyL3K8K8Z3aIVC7jkmaXYsC+2mtcbWF9lzDgcNrjlXjOckiPRgWNqoUIXgqfa+tU4fSvh6lh2JPxoEa8jHo5IfkP0Ld1H/AD5/3DDrbW6tRCKlDKfpMOdcQWWxc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FGhE4hUf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WNwqjkl8; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UWi2RKW2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hAC+k40I"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CC03WV801966
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:09:14 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FGhE4hUf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WNwqjkl8"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CC0AL62275884
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:14:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=y9ZrP8rOv+ZZPiV33sAcp+pu
-	UevN4wv31y+rDLa7hTw=; b=UWi2RKW2sZm6BnjUxRR2CvQBnKnxgU9HZhDsLrvi
-	LzLSc6d4E0oVS9yGxgs/zaE2FTKaLwzs21iMLwwSr6/4I2WXr3Gokte81URTNt3x
-	PTPSPVB/x1HppSgyVmHeQcQQRIsk7UPBheJEVEm+39QqlMgg7iCzxhjB9bJCOKSx
-	sHjGOFbMCofnBqG2M3js0yJK9vwzlA7BjFnCrSDg/nLpIKyMZoDh+DVpRB5WEns1
-	Gb+lSDI9qlThzyMNCZlR847MAjdUmatY0ejSIlBAaH3lsH4zVIVyuaQ9DHoQIcEr
-	eqBpYSPmW1+2UKj2Ll2MKIiMUTsKzs721U6mqki7RuLFUw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8wfcrk4n-1
+	:references:subject:to; s=qcppdkim1; bh=SpuOW3irnSF9gZWodyKphbnc
+	flg4AOxCzIxt+F492qw=; b=FGhE4hUfGbH3tvVr29hEAg+OCyVPFAtVfQ28XeKb
+	7xXoc13xxUMz62CLDsV6f+bkpzFbxvupMbXrwQ6iJWlFj4d4b4SrcJtkN4mqq3x0
+	ccDQsZtVPOKWWPzRDJUeJFETkoMgOn3fZCa0qvJl5IdJpJjhKmP3KH3Mai0cm8G+
+	Gh2JgHYhHGR8+zE+otGY3QaAgjCmsLZhU7NCqxyzrk6YdWlL6wrzVrC8M9xu5SPP
+	ZIgyoZljw1Epkyxlwt8m9trhLSFVNkbeZUjLpHSY09bflv/MWdpUS/rS2oWyv1BO
+	RZURVL5MqaZIwxP1a4Y6kqVPAlQ/eLwjk/+ATmJtC54hVg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8udq18cu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:09:14 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb93c874bso767193885a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 05:09:14 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:14:59 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93dea1b6c89so365805185a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 05:14:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791806953; x=1792411753; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791807298; x=1792412098; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=y9ZrP8rOv+ZZPiV33sAcp+puUevN4wv31y+rDLa7hTw=;
-        b=hAC+k40IBn7K5VunIfRkuowOMSts/ogyFAvHTkKMNz2k9lUc3gD2xiFPj55r5hgt2H
-         U4RPuGOKhhwGZvwaZ1yQJ+4HySkpvxYC91e1thu53ZDWPVA2GCTtLAO4YvD/0N7qQh7b
-         tBGegtEk07v96Bbyoh2MSdT+Jtaw/ZolC0D9EDD6wDRe3lGHioQL2BGsjrxBf7bcCjw/
-         1RSDZ9gc/b3343TQcKo3Lpoi6UiOqqVHSP3U+Dkd9TbQ5VfFuc/oMK0nYC9T6i7So2dN
-         RYSq+b/PNuB5NSh4yFU6jcs+uM1wC9/tGBj8wF60usVZj8qwOaMl4DWwX4ZaVEs6cQ7f
-         oPFw==
+        bh=SpuOW3irnSF9gZWodyKphbncflg4AOxCzIxt+F492qw=;
+        b=WNwqjkl8l0y2/JHer8Xi1pk7RNs7tQlZTqZs5Tw1dJHR8aOZKfHhwjBri/j/wOQjnx
+         6FuY516+0qulwLgyOB6mgrMJ6UkrN19PsF1WqYCD0PWuFavfQzzgSfEU3wWJNHVuClWe
+         R1W5AV1M9BgzsMOadP/4RQ5bKxFgJI91wbYGqvsCdYHGISdoyJ+iufq587NvReyLdYHt
+         0VeLEaJBVlllxX8D89aLMj4t541GESl+DUP3I55YlXd7pENSxysrjyn2yemtOWz/kfp2
+         iYq8/Y4ofVJcZvA/oj2tWEedduQumQYeb9y1Ighbu/Ps9q+Kss1vtdqsmo5/S3l6lkoJ
+         UtGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791806953; x=1792411753;
+        d=1e100.net; s=20260707; t=1791807298; x=1792412098;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=y9ZrP8rOv+ZZPiV33sAcp+puUevN4wv31y+rDLa7hTw=;
-        b=atA/URyrEY1PuDwFYqI+R46R2J8vmmc/yqviEUYB3oTgBb+Nfmz/KSxa69Oi7yLaLM
-         1pDspSvsOlezv1fIMWooNlezHK+dPU40CJWsLJ0bTUDVLhVNeHbdb1cRVGOqj4npKPOl
-         mnnfXZJh6/D/W5ZeCY06DfRbxJenVp/lduTGJOiOt5AAgQYkn4EbOgml27N8iBy82nsE
-         baV0c32ztdWBoYdCRwrcwcCd7V/EopzQ8jVftCShSzbaMo8JWUSeqrepXcJu7bLVTbXo
-         h1VBIT/+k5Wwty1UPbWJUT4e3xiwN8ynQp7PT7SKoZNEZqw7KXZESAGS3p6hH7sW2B8A
-         gN9Q==
-X-Forwarded-Encrypted: i=1; AKwUvByHfzBYl0dgpA7grz+1TRcA8C8XjkAG4IADQK3uq4EA7nqrAs5ya25epLgvb8oOTHP6UlDgWtuZhh/67tPP@vger.kernel.org
-X-Gm-Message-State: AFq9FYITo3gNn9M55leyDGLrAKUkUYYW5OKW1g/MQgbWxcrQka4vwN4U
-	ixD5U1T6JlqG4ksTDhG7CqB81awXzmoYAc286E0Ocy8IDq655tGthcMKf7ARWzYOxu21U4uVOoY
-	aeca6kKnLUkdjKAr/d2hLMijEleMUwkHU8J582L0UnOd9N6JV8gOKTxFXHMZylc0oWXhe
-X-Gm-Gg: AYBFou0mPp4Tgzvw7RuM680mtMXXQN/KCp6hG+VNnxxlCD0jMEQlt3zmj3hSW3PaoPU
-	QtgFZvzw/lUM6fm+00zjA4hkZfkMebk8tNV/rBYfeTCfe4l5zw//XlWrlfvnSy4rFbb4hcwtvTw
-	/1wDewSiCtYQDh7aHM1XAIRaBty7I0zappRcdfxNWgTnIlr8YVSCkl0yFHcHecTVdHaLhNf6r7a
-	4jx6o7cEEbE/zlVIEmCk0KySU/9WpuwtoKNJ/ojDpPRi+wW7GgjzIIOk4DslwMSralhfNvLhd7J
-	1wo/9y2twm0uDStaffQEkzyyj9Xr9fSo7VZ/cqESAszMKDCHyw1ktsAIpfgX02B3jX++MTqAsT+
-	Aq2jBH4yRvc4cSxf7arOcsy6pR9EVFsjCmswgcDbHiUgUchWibxePs5vZHJdHFaEM2nKaXsby1W
-	r0qsXX84n+BrTn
-X-Received: by 2002:a05:620a:2841:b0:93e:618f:8127 with SMTP id af79cd13be357-93eb95e2a8dmr1542314185a.8.1791806953108;
-        Mon, 12 Oct 2026 05:09:13 -0700 (PDT)
-X-Received: by 2002:a05:620a:2841:b0:93e:618f:8127 with SMTP id af79cd13be357-93eb95e2a8dmr1542310685a.8.1791806952605;
-        Mon, 12 Oct 2026 05:09:12 -0700 (PDT)
+        bh=SpuOW3irnSF9gZWodyKphbncflg4AOxCzIxt+F492qw=;
+        b=XeWCPRcx0Sb0kuaPvzxd5bSKI5lOq5doJSqUNf/wrBan80HpjTe+BvIokTjhX2wxJd
+         H8dAaj3/3NE4ZJmW+87pNthtjvHTyhZH79auZI2F6Pne5owVQw3EBc1uMxRsb6Yk2vMi
+         AYqXzs94Zh9repe4luZf4q4o0F1l1VIw20imRYJQRe6MRrINUCviMOccGV1bSlU8Uk+q
+         EGWE74Kowy9yrm55J4/T2RIvsz6Lgs3wqFbSzHet9FrKaYE1b0yODeTRp9g0E6ejqfHn
+         YXbubeFIPaTDWqUBIQi7707f5uxV6MiAa+WEYVfaCFEI+sFwzhl0J9VB8beH0scezCZX
+         95zw==
+X-Forwarded-Encrypted: i=1; AKwUvBysy5b2V3sTgTCjV/SUDFqkLigO3VxUqHdvcACbAw8+PtND2O6exB/2wYdmz/M7kDWA5bjcQd4Vm5z+fNuI@vger.kernel.org
+X-Gm-Message-State: AFq9FYKRIa3HCBUMw3980kD34pl2N19UKuERHZGWz/B2Dx502F73ct5x
+	v7gPcAPgCwtGZQvdJZytgKrVfW8KsG4w8ZKUk++ZWWIWZNwUY5cZiSi6ZhGNANdjxgLo3pkb01b
+	rfzZWfHwIb7MVB1E+iyFHV554vji7HduPQc2yFty6H3lJAFiouqBrH9iF0XD/qkQSwOn61Dhu0J
+	Eg
+X-Gm-Gg: AYBFou06ljlFSU6ISXgPW10DQOvtavkCacAxFpqaWmVFZqlZ5fNRnQVsQzrDwxkNTL6
+	1eAAa0q0ofsaZB4nzy/8J0O113YkT9rS48Xuc3ZGEBRNMsk8BaUSNhNwhADB8RfkTXqrCSRS+/B
+	1QkxSBX7r9HH6sxLfCrVEc9aC3o8n8yNiZuwrUVIYE8DGbhLgyJe1wAr7uh8snco7LYkIlFdMoE
+	mTONCS83DVqIJYjUGapkgpCs+r8YQsz3l51mDPXg4KW/ohq0k/3PQktE/dyVfV9pwGxDqbPy4Y9
+	vI8Bcf94vwcuSZRVsn2R+VdUDEBOHxK7k2bmqMthMZMHqP1AmrdZLM5/ZCdE2+ZCUplcdZAsUpn
+	6QUbLJ5cnYIj0Z/8zMh/JEcxwvGpsrE9Z8Q6nf6PktD2cxh/+VMMc8kXvRaihy2VNP3vo6jzspw
+	7IN16UBoxMimWo
+X-Received: by 2002:a05:620a:470b:b0:93e:c12c:43fd with SMTP id af79cd13be357-93ec12c4a90mr1419179685a.74.1791807298155;
+        Mon, 12 Oct 2026 05:14:58 -0700 (PDT)
+X-Received: by 2002:a05:620a:470b:b0:93e:c12c:43fd with SMTP id af79cd13be357-93ec12c4a90mr1419174485a.74.1791807297651;
+        Mon, 12 Oct 2026 05:14:57 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a9c3caaafbsm31078121fa.19.2026.10.12.05.09.07
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcddcd3fcbsm2817950e87.0.2026.10.12.05.14.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 05:09:09 -0700 (PDT)
-Date: Mon, 12 Oct 2026 15:09:05 +0300
+        Mon, 12 Oct 2026 05:14:54 -0700 (PDT)
+Date: Mon, 12 Oct 2026 15:14:49 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -91,11 +92,11 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         Xilin Wu <sophon@radxa.com>, linux-arm-msm@vger.kernel.org,
         dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/6] drm/msm/dpu: do not assume a merged datapath when
- validating mode clock
-Message-ID: <iqkzz4wnfeeul4nkkemhcvjluucot5ia7pfin5ghu3tkwkjfso@raqzz43t7lxz>
+Subject: Re: [PATCH v4 3/6] drm/msm/dpu: check mode against PINGPONG or DSC
+ max width
+Message-ID: <2mut637ssnnyf7spywezdkx5fpoc4virkr3zuqzj3klwd3ijfr@xk46zya3hgak>
 References: <20261008-lm_fixes_final-v4-0-fa986071c3c1@oss.qualcomm.com>
- <20261008-lm_fixes_final-v4-2-fa986071c3c1@oss.qualcomm.com>
+ <20261008-lm_fixes_final-v4-3-fa986071c3c1@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -104,74 +105,146 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261008-lm_fixes_final-v4-2-fa986071c3c1@oss.qualcomm.com>
-X-Proofpoint-GUID: dbizdRfklvevFOk8femXW31Zql7sZ-nD
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA0NyBTYWx0ZWRfX6+r05YG2/0Cf
- Uf0tGoVC7w5nT9ickz+KlShMKzpthzg5zSkJRl4TBqVWa7ippNOSh1PHHSLE47nNsXV8jloV3Pr
- Kh3Ryz+sS8byJIeZ6CXjoj3jH8vhxME=
-X-Proofpoint-ORIG-GUID: dbizdRfklvevFOk8femXW31Zql7sZ-nD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA0NyBTYWx0ZWRfX0pnzISNg365y
- CGoRlodM/zVEFRvgKTv9tWZKTIB9Wv8S75/BBYBugygv2ixLe9L9B65UaaKtuuxobSZpsUDEPnI
- H+QQn2qbZzZZrCJk2kfvHG4+USxYUn8yqeUDJWW4/nmcDeMCHMeEjCtuMK2yMlvjhnYEmoxSs3D
- Cl2aVCegExsi4VZ99/Bl4gUqS/n5XCeIpDQeKoxGSmzQ1t7wu4ROSpZy3ppub0xbrVeLXkaE/VW
- Z+HNWJhTHVXbdg46CKlWc2jv/yUpk2XOj8G68IXOb3c+HZ4MGlb/EcSgK/rggO1Xdxk+FNRGKnf
- l4pIg0CE+3Io51ZcFzveFFXJLCw121kPXe1EpX/mboqukdsdq7EyvHdE901JuapEDRJXyHMTtHI
- 5RUM2n0dFRTqX3cu7r0Sy8DhZVpmbm3a3Kgq6cvLVK1lD5zs9qXmrAVjvcWCN5m8pwqMjE7icQh
- fTreVjtndpxTlFXkxxw==
-X-Authority-Analysis: v=2.4 cv=PbhqFShd c=1 sm=1 tr=0 ts=6acccdea cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20261008-lm_fixes_final-v4-3-fa986071c3c1@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=evJKXYpX c=1 sm=1 tr=0 ts=6acccf43 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=7qsbTKUd7HEg1-mJ9OQA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=ksxQWNrZAAAA:8 a=Wa-MJAjFNFIhp57g3PAA:9 a=CjuIK1q_8ugA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=l7WU34MJF0Z5EO9KEJC3:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA0OCBTYWx0ZWRfXzdF7iPr9U/k7
+ VZNW5sJfDgYPy7HuzLdKqPPR/+PIufkaDRfOFnn/qcmc//Hmg2DCcfSt/iqO9o/P8/NGu2bU2zb
+ paU2WGyyTa44N9nKJ8uZgvy6KvDvq8A=
+X-Proofpoint-GUID: rU6nWP9exjqJosNTcWSKlZNHnYapfIUn
+X-Proofpoint-ORIG-GUID: rU6nWP9exjqJosNTcWSKlZNHnYapfIUn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA0OCBTYWx0ZWRfX2ecA9ROBD0mt
+ d8lK+1sNbaDmnBD54PF5cQb3WlxY80CLqSW7TMEhLU8rdeO1r8i8sDSvYSptN/Ew0ZvXcr0IZgj
+ Vis/33LeIkoEIw0DBi6wAN4cO0ErpXYYtUbswUYGg8ejGFrAbpC2cuDBRbNzuKS98tfPezlaHlg
+ /sbTn/TnhmOBnyd/krKBbzLzAEfvRvidfLNJrAtkQJqb4xCXLVdAD7wSTl8nnUO+hBSjLBFS26Y
+ ReBCFB2sS8v1yRn7q88Wm3kdNp/zLaqTlEwqTSt5v3H1z03FlsDaPZGuVxFMSJewfxWiH1NLkTu
+ LPkk3aA4RgxV1Z2VBLPsMC8S+MEkVjXiLAJ2PHNt63uuydw+mCohPcqMn1+oySxVRA2FGxU6jyF
+ 7YV4NgM0Ls0VWbsQgLneVSYDOqW2FmFvQfY21J6h5gLMMhcDwBVRHbhERSXdcxZ+gb61+QMXwue
+ Cl8y+vh/FElXR2e84yA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_04,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 clxscore=1015 impostorscore=0 spamscore=0
- phishscore=0 suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ spamscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ phishscore=0 adultscore=0 suspectscore=0 malwarescore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120047
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120048
 
-On Thu, Oct 08, 2026 at 10:53:48PM +0530, Mahadevan P wrote:
-> dpu_crtc_mode_valid() halves the adjusted mode clock whenever the
-> hardware has a 3d_mux block, assuming the mode will be driven by two
-> layer mixers. Modes no wider than MAX_HDISPLAY_SPLIT are driven by a
-> single mixer, so for those the check permits twice the pixel rate the
-> datapath can sustain.
+On Thu, Oct 08, 2026 at 10:53:49PM +0530, Mahadevan P wrote:
+> From: Jessica Zhang <jesszhan0024@gmail.com>
 > 
-> Divide by the mixer count the mode will really be driven by, as reported
-> by dpu_crtc_num_lm_for_mode(). Split modes still get the halved rate,
-> single mixer modes are held to what one mixer sustains, and parts
-> without a 3d_mux divide by one.
+> LM block doesn't have a hardware buffer (unlike PINGPONG and DSC
+> encoders). As such, don't use ephemeral max_mixer_width and
+> MAX_HDISPLAY_SPLIT to validate requested modes. Instead use PP and DSC
+> buffer widths.
 > 
-> Assisted-by: LLM
+> While on the DPU 8.x+ supports a max linewidth of 8960 for PINGPONG_0,
+> there is some additional logic that needs to be added to the resource
+> manager to specifically try and reserve PINGPONG_0 for modes that are
+> greater than 5k.
+> 
+> The layer-mixer count for a merge-capable, non-DSC mode is chosen by
+> dpu_crtc_num_lm_for_mode(); feed the PINGPONG/DSC derived width to it as
+> the split threshold in place of the removed MAX_HDISPLAY_SPLIT, so the
+> pixel-rate floor added earlier keeps high-refresh modes that now fit
+> within a single PINGPONG buffer split across two mixers.
+> 
+> Signed-off-by: Jessica Zhang <jessica.zhang@oss.qualcomm.com>
+> Tested-by: Xilin Wu <sophon@radxa.com> # qcs6490-radxa-dragon-q6a
+> [DB: reworked to drop catalog changes, updated commit message]
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> [MP: rebased on msm-next; fed PINGPONG/DSC width into
+>  dpu_crtc_num_lm_for_mode() instead of open-coding the width test]
 > Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
 > ---
->  drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c       | 54 +++++++++++++++++++++-----
+>  drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h |  7 ++++
+>  2 files changed, 51 insertions(+), 10 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> index 0b51a4c5db57..209b25dbeb6c 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-> @@ -1631,8 +1631,7 @@ static enum drm_mode_status dpu_crtc_mode_valid(struct drm_crtc *crtc,
->  	adjusted_mode_clk = dpu_core_perf_adjusted_mode_clk(mode->clock,
->  							    dpu_kms->perf.perf_cfg);
+> @@ -765,13 +781,14 @@ static int _dpu_crtc_check_and_setup_lm_bounds(struct drm_crtc *crtc,
+>  	struct drm_display_mode *adj_mode = &state->adjusted_mode;
+>  	u32 crtc_split_width = adj_mode->hdisplay / cstate->num_mixers;
+>  	struct dpu_kms *dpu_kms = _dpu_crtc_get_kms(crtc);
+> +	int max_pingpong_width = msm_display_get_max_pingpong_width(dpu_kms);
+>  	int i;
 >  
-> -	if (dpu_kms->catalog->caps->has_3d_merge)
-> -		adjusted_mode_clk /= 2;
-> +	adjusted_mode_clk /= dpu_crtc_num_lm_for_mode(dpu_kms, mode);
+>  	/* if we cannot merge 2 LMs (no 3d mux) better to fail earlier
+>  	 * before even checking the width after the split
+>  	 */
+>  	if (!dpu_kms->catalog->caps->has_3d_merge &&
+> -	    adj_mode->hdisplay > dpu_kms->catalog->caps->max_mixer_width)
+> +	    adj_mode->hdisplay > max_pingpong_width)
+>  		return -E2BIG;
 
-With the 64-bit division fixed, LGTM. When submitting patches to these
-drivers please make sure to build for armhf as well as for the arm64.
+I guess Sashiko is correct here, we need to check DSC width.
 
 >  
+>  	for (i = 0; i < cstate->num_mixers; i++) {
+> @@ -783,7 +800,7 @@ static int _dpu_crtc_check_and_setup_lm_bounds(struct drm_crtc *crtc,
+>  
+>  		trace_dpu_crtc_setup_lm_bounds(DRMID(crtc), i, r);
+>  
+> -		if (drm_rect_width(r) > dpu_kms->catalog->caps->max_mixer_width)
+> +		if (drm_rect_width(r) > max_pingpong_width)
+>  			return -E2BIG;
+>  	}
+>  
+> @@ -1374,17 +1391,17 @@ static int dpu_crtc_reassign_planes(struct drm_crtc *crtc, struct drm_crtc_state
+>  }
+>  
+>  #define MAX_CHANNELS_PER_CRTC PIPES_PER_PLANE
+> -#define MAX_HDISPLAY_SPLIT 1080
+>  
+>  static u32 dpu_crtc_num_lm_for_mode(struct dpu_kms *dpu_kms,
+> -				    const struct drm_display_mode *mode)
+> +				    const struct drm_display_mode *mode,
+> +				    u32 max_hdisplay_split)
+>  {
+>  	u64 mode_clk;
+>  
+>  	if (!dpu_kms->catalog->caps->has_3d_merge)
+>  		return 1;
+>  
+> -	if (mode->hdisplay > MAX_HDISPLAY_SPLIT)
+> +	if (mode->hdisplay > max_hdisplay_split)
+>  		return 2;
+>  
+>  	mode_clk = dpu_core_perf_adjusted_mode_clk(mode->clock,
+> @@ -1403,6 +1420,7 @@ static struct msm_display_topology dpu_crtc_get_topology(
+>  	struct drm_display_mode *mode = &crtc_state->adjusted_mode;
+>  	struct msm_display_topology topology = {0};
+>  	struct drm_encoder *drm_enc;
+> +	u32 max_hdisplay_split;
+>  
+>  	drm_for_each_encoder_mask(drm_enc, crtc->dev, crtc_state->encoder_mask)
+>  		dpu_encoder_update_topology(drm_enc, &topology, crtc_state->state,
+> @@ -1410,6 +1428,19 @@ static struct msm_display_topology dpu_crtc_get_topology(
+>  
+>  	topology.cwb_enabled = drm_crtc_in_clone_mode(crtc_state);
+>  
+> +	max_hdisplay_split = msm_display_get_max_pingpong_width(dpu_kms);
+> +
+> +	if (topology.num_dsc > 0) {
+> +		u32 max_dsc_encoder_width;
+> +
+> +		if (dpu_kms->catalog->mdss_ver->core_major_ver < 6)
+> +			max_dsc_encoder_width = DPU_1_x_MAX_DSC_ENCODER_WIDTH;
+> +		else
+> +			max_dsc_encoder_width = DPU_8_x_MAX_DSC_ENCODER_WIDTH;
+> +
+> +		max_hdisplay_split = min(max_hdisplay_split, max_dsc_encoder_width);
+
+Should this be min() rather than max()?
+
+> +	}
+> +
 >  	/*
->  	 * The given mode, adjusted for the perf clock factor, should not exceed
-> 
-> -- 
-> 2.34.1
-> 
+>  	 * Datapath topology selection
+>  	 *
 
 -- 
 With best wishes
