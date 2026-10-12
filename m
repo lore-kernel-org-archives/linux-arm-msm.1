@@ -1,132 +1,116 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C09B3033E6
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:00:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE8BF3168E6
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:03:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791810063; cv=none; b=a7v2B0r45Nbxa6QWxFhnbcfW6YzlYP1zt63Azp4n/WFQaoVPkbF/wrg8GgsV5iYsIy99jpjLFo+rNP1EsG31qk4jvevO5GHfNBeo/Q5p/aKYzcE+8wT2oPpx3iQQNNipIrUzW118CXgQkg67lEn0XJWvDkJe/6YAOQZPuMmaB5M=
+	t=1791810205; cv=none; b=ZLngCOYhJrunF+axOZlSFR/M/Ag862JD0rzN3m7OWoEVgCXGa40W8lZWoMqsuawg19wXXFgsjnN6+2iyYVpkbjM2quNTupg+Gw0hTcIzsubgrf6YLkvp1w6QsoouUZjnHBGfEXBCTNLTeVphkLW4vmncooRsBYsDU6pa6x3d6s4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791810063; c=relaxed/simple;
-	bh=+4zUTyq3J6D0WJWX/Ui2UZzNSTwF6xlek6vWAXjql6o=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MHWjUoqh7tip1jhMJxmzJc4in8gR8nI4xhOFNr+zw1pGBuIwXaIn8VH7+2W9SjrAEB0w346Hp86Sazo283FuepGalqoBK6slq5TJ3HqU+a+b2MaOe2LMrOa6Q++/yFXux2Y9i7KnlVTBqfzGfdl1+U0dQ5ckXWXbjy8yOptskDE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pkBG6TnH; arc=none smtp.client-ip=209.85.216.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791810205; c=relaxed/simple;
+	bh=JspSAmg2h5s7/0NVQMAr3BatjKhkiwjv9OkJ2Opmc0A=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=rHweVnVe+bvXTLMSO5hkU+nX7Bd/MPwnezPtFsfXOCn0fRcdyAS0smgQdhIQi+kB5Vxjo50DVOTG51kE7Ez8jGmcIYOWs/CvYJ3xfceLA09zRuGuOyAQ0GtGQaK9DPXunQA/XQiGTAk9xxE7x8Eaix/07YqloKoCgxCALGVsvxo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=UOoBGhzr; arc=none smtp.client-ip=209.85.128.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pkBG6TnH"
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-398a4dcf289so841985a91.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 06:00:58 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="UOoBGhzr"
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4998b5a63e2so19342845e9.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 06:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791810058; x=1792414858; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qgN5EQTZPAe/8W26fAOdp25QZc56hSLNje2myOYBavI=;
-        b=pkBG6TnHdrgGU7ztcFV75AZ28hr2eW0Xohdtxbprzdrs77tVL2CUe4qzfHMBGS7Uk9
-         2/bby8kQwt4V+a3Dq4eJpJK7rA4uC1bPusqA7SSCr1SHLfDgtM9/d72rEliaNb10VAw1
-         Q7aiigyxR4+Kfjrw8WLs3Nkb/bBFrzadGhY/crzsxklkczhi7e9jSgz03YfAce5MB3pP
-         yYYEf3nvqSGcbvseaGowlJYJFCWrKfZhBTZWPi4Z2IDRGQtapDDeXsQ8y6aDdmINKlRz
-         MPQe1X9jOcQQ8V1v6+WhQ55TJmDVg+lntdbg3TlkClTLEJDlLd4c4eKQUHm0syjrXvpT
-         ICog==
+        d=imd-tec.com; s=google; t=1791810201; x=1792415001; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=AYpBwd7jtueYD/5N70HOFcX5OQ+BSChXVXn/2tIlCDg=;
+        b=UOoBGhzrGEw+HGMlx7IVUpVUgc6bCcBcbBTvnjFs5bsnFlmWxp135zoU9ec5H5RZ3E
+         JeqJmDJVbIoj3hOkIo3a7Nw2KxdaEIVXYRKO3AWwjKkgxHecxe8fhrJmloZYa9/B8oT0
+         YqFJ6rGp2XLbmfLoq0cSJULmvuYmPEwjqc4AF3CnSrzLmglJJKnIM2Spt4vTNvZi56eH
+         8iQ/ETQlVN7cVbAsZZEyiE4TxabozgFxYJJaFSLm8jEhVQ7z0QQKuvT1vzcZyTOkX1nR
+         7rwYpHJUaKn8V3o19LTo9s/0vX+tfdMvfWrjKl0ZoP2K4TW+OYEsqEsXa0yp43e4ov2N
+         BAcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791810058; x=1792414858;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qgN5EQTZPAe/8W26fAOdp25QZc56hSLNje2myOYBavI=;
-        b=BO97z47YTGOUZG7H5xL08bWt36uK7oS3sCJBI7c1f7WkdDsuHYO+wAxlyXflKE8fxR
-         N/0hbQWf3E+8lsc4QGFYl1PLMS4haUZtEnQP1xsaW5crLXINJNmnZOhP8OUoKfwlsOEr
-         3r9COronHkuGTfFt8c1+Olpm1LeIvJHYKKVL+B2mCZ++D38a3Wm1fEHwYeaZwsPmZXrS
-         8XhgjSWQayZLJmKwihEJzL7cisbh24LSFgDMz46XBs51acKltEW8eE+MFLQ80NjPkejh
-         EfJVH53lND93PbQHKa/PIf42wPwt5+y8sHSd54c/18wW+nclhxdxPQxA3zCX9BkqMTG1
-         yovA==
-X-Forwarded-Encrypted: i=1; AKwUvBwWAWycNwPWishHdPOBAWs6I7QEjASFZnlJVD95/k7ARiyW6YUGlNbAipHLic6HDvsjFNF1AXVdUTCmjscY@vger.kernel.org
-X-Gm-Message-State: AFq9FYKNpE8rPuRizsZNcZOELDlgyyo/7OZk5XHnO2qzakKUkksIzB2L
-	osUtTSYXQUtQZcohm4+CsBbxoM4dIynaUXRqmaxxyCZ5uDBlVHj8CRJR
-X-Gm-Gg: AYBFou1nowTSAMA9tRdpYMefP4mqkDI95JmGXHV+BaNh5dym1JOuBFQB4PfrkxIPMCA
-	OyNCout+cUIptD6FEmWYUp0nObaWDn2bw2+D5kd1zTAgJBucaluftXPeC9i2USECjyHYF68vCQl
-	yMc8cSsmxsya/KMPIkOUo2LLrPxE5rk3/hZtFqcBnmvbDKeVCiLBuhErJTVhIdPV7dO+SvAGo3m
-	uoN//xlAvLkwWbO5PgELf/E3Rlx9O5SVS5nMosfJmI+QXsdJGhR+PwtWGi5l6ZeIuypx9Da53+W
-	86sTtvop+CESZipV95cAx9h5aQoLQJ4o4ws2YGSth0GKFX2JCxWt5tuh7rGTNQCHW63LFBvgo7O
-	PJron0V3zMvh1W6WCJ0NpgWMerlQ3P9HzDpnBkJ6cnf1c4LpNu4H5kkSPXcqFl9j5WtUf+xuPRA
-	AkLPfDnPTleEV2bpXK1zxEWL51I/wgbwXDRp9t7R+BqxIzAp3+qzg0nv4+4ze4w+wfWYp1cn8Te
-	UX+45OnoAFEFQ==
-X-Received: by 2002:a17:90a:d2ce:b0:39d:e54c:8658 with SMTP id 98e67ed59e1d1-3ab3a364f7emr7429624a91.5.1791810058210;
-        Mon, 12 Oct 2026 06:00:58 -0700 (PDT)
-Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38f4863esm19295887a91.11.2026.10.12.06.00.54
+        d=1e100.net; s=20260707; t=1791810201; x=1792415001;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=AYpBwd7jtueYD/5N70HOFcX5OQ+BSChXVXn/2tIlCDg=;
+        b=awjXGjuf4AZIr6MXyfPp6D6Ton4V0qmKczZQ7xBkfrAHrVFYQbqYP9Owi1atYIrfBZ
+         Bxs7Xd+dS2T6QmF2gez2gONVwyFD1iIMkPNJS6whu2y2Xih8wfjRolFFlsC12Q1zLEbv
+         j3arC7BR0JWBPvZj6iTWYBMw+wgZE243RtSZRD34uHWQtJWqJLM1fKaJqJKsxp8nUi02
+         i+Y/E17l9Y5ZhWsscl5iu0xloriG324dAHzchdkQBAz32kMbAQgBoEvfmnEv3QXqubAL
+         OuE74jmkxPrlkHZWqlQWRNPjM/jhULPksiX++JWZCfgvQ58xObMksZW5SifoDHuN7O8V
+         fG6Q==
+X-Forwarded-Encrypted: i=1; AKwUvByCfbZDtR/ZW+f6JfayYI+gUv2FK8HwGHie806NlnAG0XCVULfBWUvUu+SA5L/gysNgh8+SsDFnFxCf1pLY@vger.kernel.org
+X-Gm-Message-State: AFq9FYLHVcJiTtoKVuWQ5oYVSIqSEuT/oo8d4LU3wjFxHFs+8JZp0M2N
+	CzBVbf8G/ouwjNPGn3HsLvFRlHLI78MXW+20S/OHgcvdqCBv3Ir+JKw84TW34ffOgIs=
+X-Gm-Gg: AYBFou3IKclLkFcxOsDhgDuPO9ZkVxUDY2UueUFroGrK/glDjWhpqbjJ6okOFZNFYk0
+	tkhTgIlR/lwMAr3GrR+//JrwkWXtFMKU0KpLeVIQRLdeUaeFDasdW9JEFqS2lLIfBizCSuLRl0T
+	C+ONuYTQHVQZqIM3BRngy5vzMHW3mZnBPYG/kSKFCTdFNgKeAPHvXsQKe9FVU2jqZL8bohQ6qaD
+	SAklrR0qd1rC8jmHAbVkig2fiHtyg/myYJw12UpMQOvQenuQQ7/0jBfT+IiBNYFs8QzKDzUFdN9
+	wXdRyIYUfpe0d7IRyH5UKZuUZeQJA1sbqftnVUWEbAKRfvCjGy+Ox69TdbyBnI465QX43nygmaI
+	aRMYlMsyXp/IZPtITxnVsAypZQ3oIjp1jhpmX1Pj5aMwVXKXqfQp9VqZbACN7KLpfJ01+4aBXr9
+	YC+ZqF13lWqdJH7RZUdJGMG68Xm0onQ9ApaJCCmw+95EitOT7ckyOgop4i+sncipKpGtJwV9M6V
+	cvLjbXbVIzjwSFW+6QDzJLRlDLbM4H/1RA9OA+vGSGnL5QSbN9RS/UFkZQ0yfBsa/UuW4FTk3oc
+	NEGYFUdBpBiOr0wQXUBvhg==
+X-Received: by 2002:a05:600c:8b09:b0:4a1:6f78:842f with SMTP id 5b1f17b1804b1-4a18e4987b8mr186087765e9.11.1791810200910;
+        Mon, 12 Oct 2026 06:03:20 -0700 (PDT)
+Received: from [127.0.1.1] ([82.71.135.85])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9abdaa5sm20088782f8f.35.2026.10.12.06.03.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 06:00:55 -0700 (PDT)
-From: Joonhoe Kim <26rote@gmail.com>
-To: sre@kernel.org
-Cc: konrad.dybcio@oss.qualcomm.com,
-	kamal.wadhwa@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] power: supply: qcom_battmgr: report the USB type from USB_ADAP_TYPE
-Date: Mon, 12 Oct 2026 22:00:53 +0900
-Message-ID: <20261012130053.442-1-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
+        Mon, 12 Oct 2026 06:03:20 -0700 (PDT)
+From: William Bright <william.bright@imd-tec.com>
+Subject: [PATCH 0/3] media: qcom: camss: Add the SM8550 CSI TPGs
+Date: Mon, 12 Oct 2026 14:03:02 +0100
+Message-Id: <20261012-sm8550-camss-tpg-v1-0-620ab6f151dd@imd-tec.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIbazGoC/yXMQQ7CIBBA0as0s3YSQCHiVUwXLYx1TIoN05omh
+ LsXdfkW/xcQykwCt65Apg8Lv1ODPnUQnkOaCDk2g1HGaaUNyny1VmEYZhFclwndGJX3+nI2wUP
+ LlkwP3n/Le/+3bOOLwvr9QK0HidmYMnQAAAA=
+X-Change-ID: 20261012-sm8550-camss-tpg-6bd0991432c9
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Depeng Shao <quic_depengs@quicinc.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ William Bright <william.bright@imd-tec.com>
+X-Mailer: b4 0.15.2
 
-On SM8350 and SM8550 class firmware the USB power supply reads its
-usb_type from the USB_TYPE property. On a Kaanapali (SM8850) tablet that
-property is 1 (SDP) whatever is plugged in, while USB_ADAP_TYPE reports
-the adapter, using the same numbering as POWER_SUPPLY_USB_TYPE_*:
+SM8550 has three CSI test pattern generators next to the CSIPHYs. They
+report hardware version 2.1.0, the same as the x1e80100 TPGs, so the
+existing gen1 TPG ops drive them unchanged.
 
-  PC port                  USB_TYPE 1   USB_ADAP_TYPE 1 (SDP)
-  USB-C dock, 5 V PD       USB_TYPE 1   USB_ADAP_TYPE 6 (PD)
-  65 W PPS charger         USB_TYPE 1   USB_ADAP_TYPE 8 (PD_PPS)
+Describe their register regions in the binding and in sm8550.dtsi and
+add them to the SM8550 camss resources.
 
-Qualcomm's downstream qti_battery_charger driver also maps
-USB_ADAP_TYPE to POWER_SUPPLY_PROP_USB_TYPE.
-
-Request USB_ADAP_TYPE for POWER_SUPPLY_PROP_USB_TYPE instead.
-
-Tested on a Lenovo Legion Tab Y700 gen 5 (qcom,kaanapali-pmic-glink,
-which uses the SM8550 path). Only tested on this device; the SM8350
-variant shares the property map and was not tested.
-
-Fixes: 29e8142b5623 ("power: supply: Introduce Qualcomm PMIC GLINK power supply")
-Reviewed-by: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Assisted-by: LLM
-Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
-v2: add Fixes tag, collect Kamal's Reviewed-by
-v1: https://lore.kernel.org/all/20261007123932.1664-1-26rote@gmail.com/
+William Bright (3):
+      dt-bindings: media: qcom,sm8550-camss: Add the CSI TPG regions
+      media: qcom: camss: Add the SM8550 CSI TPGs
+      arm64: dts: qcom: sm8550: Add the CSI TPG regions to camss
 
- drivers/power/supply/qcom_battmgr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../bindings/media/qcom,sm8550-camss.yaml          |  7 ++-
+ arch/arm64/boot/dts/qcom/sm8550.dtsi               | 10 ++++-
+ drivers/media/platform/qcom/camss/camss.c          | 50 ++++++++++++++++++++++
+ 3 files changed, 64 insertions(+), 3 deletions(-)
+---
+base-commit: ba86f67908354f41f269ca1d64b22e4624766dcf
+change-id: 20261012-sm8550-camss-tpg-6bd0991432c9
 
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index 7716eb9e1aff..b24860d2ded2 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -975,7 +975,7 @@ static const u8 sm8350_usb_prop_map[] = {
- 	[POWER_SUPPLY_PROP_CURRENT_NOW] = USB_CURR_NOW,
- 	[POWER_SUPPLY_PROP_CURRENT_MAX] = USB_CURR_MAX,
- 	[POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT] = USB_INPUT_CURR_LIMIT,
--	[POWER_SUPPLY_PROP_USB_TYPE] = USB_TYPE,
-+	[POWER_SUPPLY_PROP_USB_TYPE] = USB_ADAP_TYPE,
- };
- 
- static int qcom_battmgr_usb_sm8350_update(struct qcom_battmgr *battmgr,
-@@ -1513,7 +1513,7 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 		case USB_INPUT_CURR_LIMIT:
- 			battmgr->usb.current_limit = le32_to_cpu(resp->intval.value);
- 			break;
--		case USB_TYPE:
-+		case USB_ADAP_TYPE:
- 			battmgr->usb.usb_type = le32_to_cpu(resp->intval.value);
- 			break;
- 		default:
--- 
-2.43.0
+Best regards,
+--  
+William Bright <william.bright@imd-tec.com>
 
