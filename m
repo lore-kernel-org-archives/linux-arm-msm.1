@@ -1,150 +1,83 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57BA34A261A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 15:42:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961434A840E;
+	Mon, 12 Oct 2026 15:42:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791819747; cv=none; b=ihsiaUJQw9HNFBd2khLRy4WKjBb6pbsJ8jDWWxFIuC6coj2r+hLSwPzVzAdwcCGRrZA4htUrTBu+v4Og8u5aFL211EXIoza/t91cg2AiSxQi0miQ2imWm/AQ1BVrJ3X4EMCMy1G4aoTh7PkQlVcfOrGxRzdgojcvETDbqupTb3A=
+	t=1791819770; cv=none; b=m6ZPM+oFFJ8jTw8SzNUd0JxuOtX5ERL8fn0A9vtWeDkvd7cQb8EpC34KRxNrpd3gwbFrbreb7GADKBm+4gIae/zi30NT/MZgPmntRcIu5Ai1PA8wz8DJitqbMFemXDWEZfnV4IEzKMAUvWIQ1RDfcUCME5E3TgPc2cftXcyC5VY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791819747; c=relaxed/simple;
-	bh=v4u1w5XZwsxePjN89WZQvo59fsNee+Jy0VORGbI77Z0=;
+	s=arc-20240116; t=1791819770; c=relaxed/simple;
+	bh=BGGlCmXSJ9dc9pT6uMdwXBc9H2tpB4yFNU8GFLb6ywo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OSt72S1gcXmzDLcTETKEkdiH6JLc93aV9mtbsx8/pCtqce4/yFtM2Yh0CHQy6qQXepGp2B/TQVA6UADJf9UgIYQBwD4BDsL7TttFQ4MaqUffrXAzrn2aBryohnxVQumT5PGO0k/J1OvCWQbklG5Yb9gtbBeagt0Fx/IR/A0hgNo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hals3LLb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C4zpM/SO; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=MFWkZl5Q13XdFuzrERrnwmP1XA6wDyrDHg+h+axJKziYSgWTI89bPAzCKdl+9C3XjKC0KKHl3SrgHil+UYhRve3KWIUA8KIBnOFcO0I1HYwc0ZioagNDJX380DZ1r2RafmbRZuzPoJxCqOzR9rBTw6KipdYPdvzvoMKHJAiyluY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R7dAvg7i; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hals3LLb";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C4zpM/SO"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CFeuZP2575553
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 15:42:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=CLm6P2VrMK/N1mjpSHX62Oh6
-	XCm/2AdtfUkOUj1Mujs=; b=hals3LLb0WgYXI5Iy4z8trvdoLrYBTSFOJbsavZ6
-	irkruxNftWCuW4Dp+zbnfIn+VCU11DbpIVeqZ9mMGzBfqQx8Gn1X6fJF7BF278VO
-	XBIPMfHkhTNPfa3i/hI10QMXpC5ti7ZeqMYKkmZ/qaiwrz9j2F5Ntes7idzT4uDr
-	DNJClu5DJ9DwyIYabkg4VUC/pMTvawaZivHIcjrTOkY0gUjn1ivYOugLw8aVEQDt
-	0CIFDrQvExv/WQedgFMtzvK/wv/98PU0cZU6nFf/4oqMOWJw+5VwgK4AEVrMhNGo
-	JsNLrzUasEatGsgKtAi4oSSKG9W0UiMyycpH5cWOuOE/uw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu2p2v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 15:42:25 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35a4d2e39acso4338983eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 08:42:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791819744; x=1792424544; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=CLm6P2VrMK/N1mjpSHX62Oh6XCm/2AdtfUkOUj1Mujs=;
-        b=C4zpM/SOYf65S/rRujYajD4mNPp17RHPUaeY6P0e0dnN8IpSYa9cITQQwZwGWkZU2q
-         xxtLlACPdngEAQ5I5nBEsNylX95GJh8gen2sCDFHxdRyOo8gtieH3kAWIzZqQKY9xaV1
-         UBekienoUvIfZLK4Q0wWj6Cdi5pn5iw82A9coBockCqFIhszga5gCFRNZP6OX+2rvHOD
-         hCnVGh+3+Qh6m1/Nb/9qbCY3ZVI+fUu8C41svVMQmmB3t/XV9QjTIL9avUfgy9v2I4jK
-         +bcGcFcnGlAeJZWMyAN6WwYhTP+FBMdBkQ1kuustwrPN30TYr9/X+D16lVWIQm1jwZKC
-         CgkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791819744; x=1792424544;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CLm6P2VrMK/N1mjpSHX62Oh6XCm/2AdtfUkOUj1Mujs=;
-        b=EXnpzeEEYg/tuXluHz49gnxBbjShrzpwJR6Os0574CQBK2BhnHyJXaP54FcPWmGrqe
-         5Dx09hmR0SV5BgdJujCKHylb/kmpHNnUB4pufSIbA6wKvT2ShcS7vZAQST/G5eWhQuiG
-         9bNac3eF3IkEVsYgwq5d4I6Vg87+ylaTf2XYH4PjTMUXCyx9WNjOyhijXQ0ci4WijqKE
-         mZ0Og1Aon0vVnFDd4B2cko3sN+KS5Ie5loq3XjizSehnL3rX2vB4eXaNOZMSoYwTbaL2
-         t5v4StXvZEbQOSl9JJQcChmElIYOpwEbZF0sEnWGdKR6STZe2dMC6GEkGirDMd/TXXDY
-         ENzQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxsP2QVTQ054O6qZKahk/7jByTDw6b1XTsWuCyx7brEeXdlSLvlDulYz0tesRcbRvtl4osJWWXbjGgQdtvJ@vger.kernel.org
-X-Gm-Message-State: AFq9FYJcU3rzuU1YCtpg/E25XhaXsYScPU0rCxNNy0Djfj1NnI5SjfMu
-	rjxwkTpfjyumUVs3TTwsldiYfRVG6xmAPRsqmqgM6jDG6L+CliyFzHOuU9TAP55/oNMN3IfwbBj
-	0qS16KOAcD5EOALOVxm2sGRq7LHar8ghuf4+WOOjqzF+j/0xKR/PLAnBuho6iX8/v/gdc
-X-Gm-Gg: AYBFou2VxTDxQoDJYiNk2Wx2qvLocZUg38u0N8BUlyfhDO1YX2gKSGoXV72xx/yhMtX
-	s1IjLymmgpqLDEXSbqFTpTjaN/dRgQwX3HUyDj0wvwApY7rukD/ayg40jpAmLDNAxB/lTXQQp6j
-	IT2k1bCX+xtcsszjH0PjT0u7LLoVWBqpSiQAdpcvKlELe8z2qRU9KlekvOLV8EsJvjFwKtM1bB6
-	vpNw7aWHYB4oq9TJiD/+Dx0hVRvhcJex71Sd89dqD1zL9dtrI/j3iitdzEYeHYtybaV8K2Y2r3w
-	kmst2wUC9RUSowbKClKqbjRvuBjnay5DJplK7vNo1PKVsU1B0AGz6CUVWMmqetOJj/Y+6WIBDli
-	Qz5GgjzdRVoc4dFMn+eWL9qovbg==
-X-Received: by 2002:a05:7301:c016:b0:351:1cc6:995e with SMTP id 5a478bee46e88-3537dde3aeemr13758670eec.5.1791819743859;
-        Mon, 12 Oct 2026 08:42:23 -0700 (PDT)
-X-Received: by 2002:a05:7301:c016:b0:351:1cc6:995e with SMTP id 5a478bee46e88-3537dde3aeemr13758644eec.5.1791819743243;
-        Mon, 12 Oct 2026 08:42:23 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-358de54fe47sm21928392eec.31.2026.10.12.08.42.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 08:42:22 -0700 (PDT)
-Date: Mon, 12 Oct 2026 21:12:16 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mark Brown <broonie@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3] soc: qcom: rpmh-rsc: Update CMD_MSGID_LEN to 4 bytes
- for read request
-Message-ID: <20261012154216.v5kxojvmn6exevih@hu-mojha-hyd.qualcomm.com>
-References: <20261007-rsc_read-v3-1-7501c014fb37@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R7dAvg7i"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E495C1F0089C;
+	Mon, 12 Oct 2026 15:42:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791819769;
+	bh=SyHM0rJpa0i6/JQi3L2s4V3dPDYMlVLe2JZQsMF0C/0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=R7dAvg7iyUGmIBekAWeOAmUXAljLV/GroY44/lp6nL99leW7X4yFzRaKKYaYFwdW8
+	 WcdwUvnLQY+Lgqt8DVmyBt3qYG+t0X14lhcZ/iILBobtCSngmJ+WjaGlLw7clzrhkC
+	 eleCv4qDQtHX2t491MSa6g+MEkSdOp40qKUbovojRYbiDrZr45Jw4zo9u/h9TAqkkS
+	 iHud9xSDjJ31VeT/TBTQwQYhmGzVDqAz14dVqVDqzPwW/2qHcxJKvKAUAsWHvZyEDT
+	 u5xG8hrvJQwvbnQxJsESuFRcmVQ1wtU7uIDHdPHrFC7KyWwQg+atAwr0U9WcLzeGkY
+	 Nq2yr6KRVzg/w==
+Date: Mon, 12 Oct 2026 21:12:39 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	peter.chen@oss.qualcomm.com, qiang.yu@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, 
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/4] phy: qcom: qmp-pcie: Add qref and refgen
+ regulator vote for QCS8300 and SA8775p PHY
+Message-ID: <asz_4F1zUeTlMVvG@debian>
+References: <20260916102023.2054761-1-ziyue.zhang@oss.qualcomm.com>
+ <20260916102023.2054761-3-ziyue.zhang@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261007-rsc_read-v3-1-7501c014fb37@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6accffe1 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=pP68ExRZSLElUsFVznMA:9 a=CjuIK1q_8ugA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA2MiBTYWx0ZWRfX3iR1EhXquqUN
- ZGxk+2b4jFzARXxpqxB3JSJy9UPfU0mElBhobbUUuNEt8U+8PzS4ERrPIdV9A3Cf+WBkn5z5ULE
- 0QGnUAAvBkOPG7Q6wxgYMoMuK25Nq2QQwTrvxtMS4gW/f52pYQnLSaWyZUiUUPd6jOO+0oeGHNF
- zGKJnMEDeh0wyZKdF2ub2H8ZTfw4PZmh9kzoawjCJyJd0UXeEM+376rVmN5rK4FPxlGNfVjS6vg
- yf1Fo2AQ7sXu4LoQa8xp0pMyt2obbIbpitBNp0Fq7JARVNG/g40Woz6gEwric+aGmZxOmGlwhi7
- Wxsk790ype4BppAPfLPEDfDPQ5I+Dk94aa7GJ4vlwmXyGB79awciveU8J6lQVjRvEn+c1ipWMx4
- Ya+SbiWwhcv+9sfj6aYVu5pwN1l9hkYNcAznO9VJNnwy/V6wkM1RZFCJBdATg3uGJiw5sUHjqwA
- 9P7qyWMlg672gc05aIw==
-X-Proofpoint-ORIG-GUID: 0A8TI_49X2Ew3ORF6XXpSruhvddz69X8
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA2MiBTYWx0ZWRfX1aofYJJBiYrx
- ViSL6ClAN7LpYE/7kCPaMF7lO4hhW8eaXRsdzBCukOgOxkXG8b1A+Hbi1CoNEXDBbo2N3iJi73f
- 1W1NPdDwVUbKUU8szdEsIncWKcp8nqs=
-X-Proofpoint-GUID: 0A8TI_49X2Ew3ORF6XXpSruhvddz69X8
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610120062
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260916102023.2054761-3-ziyue.zhang@oss.qualcomm.com>
 
-On Wed, Oct 07, 2026 at 03:35:49PM +0530, Maulik Shah wrote:
-> Newer SoC like hawi with RSC version v4.5 support 4 byte message read
-> request instead of default 8 byte on older SoCs. The write request
-> continues to be 8 bytes.
+On Wed, Sep 16, 2026 at 06:20:21PM +0800, Ziyue Zhang wrote:
+> Add a new sa8775p_qmp_phy_vreg_l that includes vdda-phy, vdda-pll,
+> vdda-qref, vdda-refgen and refgen supplies, and use it for QCS8300
+> and SA8775p PCIe PHY configurations. This avoids modifying
+> sm8550_qmp_phy_vreg_l and breaking SM8550 and SM8650.
 > 
-> The CMD_MSGID_LEN field is [3:0] bits. Describe the length bits as a
-> GENMASK() and use FIELD_PREP() when programming 4-byte or 8-byte message
-> length.
+> These supplies were missing from the original driver, which was found
+> to be the root cause of occasional system crashes observed on QCS8300
+> and SA8775p platforms. Without voting for these supplies, the PCIe PHY
+> lacks stable reference clock and voltage, so the PHY never becomes
+> ready and initialization times out:
 > 
-> Tested-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com> #Hawi
-> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+>   [    7.303119] qcom-qmp-pcie-phy 1c04000.phy: phy initialization timed-out
+>   [    7.309948] phy phy-1c04000.phy.0: phy poweron failed --> -110
+> 
+> Note that due to a hardware issue, QREF actually depends on refgen3
+> rather than refgen2 as documented; refgen3 is therefore voted manually
+> via the refgen supply as a workaround.
+> 
+> Fixes: a05b6d5135ec ("phy: qcom-qmp-pcie: add support for sa8775p")
+> Fixes: ebf198f17b5a ("phy: qcom-qmp-pcie: add dual lane PHY support for QCS8300")
+> Signed-off-by: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
 
-I am not sure if we are still picking patches for 7.4. If there is a
-chance, please pick this as without this Hawi SoC would not boot
-with upstream kernel.
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+
+- Mani
 
 -- 
--Mukesh Ojha
+மணிவண்ணன் சதாசிவம்
