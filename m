@@ -1,181 +1,597 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 496114D37B3;
-	Mon, 12 Oct 2026 19:56:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63F243CE489
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:59:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791834970; cv=none; b=Dlg50SkXMAd5z7akLlPYTWuEiS306aHADxHTUV1JZrzxqa1z1kmP8HNjPH0dBCgHSKoKb5qqyoxne/hgEQ9Y+E4KMccLrA7zMNrOy6REihdmdXKYFJdjKB08G1DgvQQpihJGJuYugThpIjK5rl5Ss0SQxpZm9dRuM+G/fOllXYE=
+	t=1791835164; cv=none; b=p6Qv3Lgi536lbnilu94P9tr5/IFlt9vJ3Oi6u9McYIMqQU/FitqfXUptC8MOaGSa3oiEGOGiiVya73VyNzQ08aFphJbb+ITzhZLIejI+KOW4JnCdHzFs8hhGEhIcqCKQB+/0k7dbDXavxWTy7bzUEtEW4FIBwvixh58hD+dkfLc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791834970; c=relaxed/simple;
-	bh=MNdlXHD/O4KIK8M11oB/su2SKfCvrs8KvIq6vtZonrM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=m6/0mWdiuP3RWfz4gj1bwX04U/jlcNH6ZHw9AMyeZqTmsLMMcMITR6XRzK1a1fFzP5mohj0TKfdEtBDIJXDoXgqkMENaMicxY7ID5mrY2wVg6raI44lh1/deljNjmrNEknKPq1SJgF1109ZzCByOpJ7RDj62c0NZaxqiKFM0YHE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aDKgfuFx; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1791835164; c=relaxed/simple;
+	bh=W9aJcZ9a4vyNN7ZzMoEZ+7SiibSwoQI9DS+fHznHRYA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=drt2uozpym33DZfSpqRyKVGHJatGGZ4qeYLCzJpjt9kyqnM6sTNTx/vn3i2zuzCXZivVmvAURZDpYnUHiuCyH463V7/+AhPkFQl53y6nYFrZRbLozT7inC+IPb048SS74Iy4XWyHnrFXW+GQ9lZbU52oMgXAxh+vA50h3taAXuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=S0wM4J/w; arc=none smtp.client-ip=209.85.160.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aDKgfuFx"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791834967; x=1823370967;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=MNdlXHD/O4KIK8M11oB/su2SKfCvrs8KvIq6vtZonrM=;
-  b=aDKgfuFxJXsStUkOdL2Bj1YNjIqRV+Z4Nd/84HydCu1e9zJpq3Z8ERzT
-   Txabp92+kOWg3xCkptK1NdytXMckkisMGsNWsVzR6OrnZSOSlTkg/C9r8
-   wx+kXO4UMRKokj+TKse6H5bWrigcWATH0kD33/E1UjxyL5Eexz4s7qK7W
-   VEzmnxoMx2HKNRJe/Upv7wN838PWFq5vt44l1AJ6gg9iCz9QZDNzAlhvL
-   FRcRyDz+1rN6GbNUcDEpDL3u9sDATFj/oUKrLZMvvmlj4ZMe8aAL/BtZQ
-   VuBoRTzpoP4E8pHJK2luUYHwrybpg7YUVt/Tyd5U7GmTVuKa5TeKm7vPV
-   w==;
-X-CSE-ConnectionGUID: 0RemkQ/CSN2/CDyAJ0VTLg==
-X-CSE-MsgGUID: RmKZcYKGT4SHRBpEUOQpTg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="649956"
-X-IronPort-AV: E=Sophos;i="6.27,154,1787036400"; 
-   d="scan'208";a="649956"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2026 12:56:07 -0700
-X-CSE-ConnectionGUID: 9ZHbw5lBQ5mcYZ7BSjPejw==
-X-CSE-MsgGUID: 5fnDqjvXQ2e0elEVPeQuUw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,154,1787036400"; 
-   d="scan'208";a="969192"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa001.jf.intel.com with ESMTP; 12 Oct 2026 12:56:02 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xGM7r-00000000C3M-1buN;
-	Mon, 12 Oct 2026 19:55:59 +0000
-Date: Tue, 13 Oct 2026 03:55:37 +0800
-From: kernel test robot <lkp@intel.com>
-To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-	Sebastian Reichel <sre@kernel.org>,
-	Benson Leung <bleung@chromium.org>,
-	Tzung-Bi Shih <tzungbi@kernel.org>,
-	Guenter Roeck <groeck@chromium.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	Oleksij Rempel <o.rempel@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>
-Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	chrome-platform@lists.linux.dev, avaneesh.dwivedi@oss.qualcomm.com,
-	Umang Chheda <umang.chheda@oss.qualcomm.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-	Bradley Morgan <brads@mainlining.org>
-Subject: Re: [PATCH v16 2/6] reboot: hw_protection_trigger: use standardized
- numeric shutdown/reboot reasons instead of strings
-Message-ID: <202610130313.ziYum5Kq-lkp@intel.com>
-References: <20261007-pscrr-framework-v16-2-3642c277bebb@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="S0wM4J/w"
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-533972e0cccso26228971cf.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:59:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1791835161; x=1792439961; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DAWTZN30kCbwQpO/YGvYysEeNKQ6p0wo7IxFjRZ55zc=;
+        b=S0wM4J/wmh34AT8OzNJq1F+Xp85FaxKaHvcxPxY2ZZua3B2EC+SWGxPSISJ989Ttkk
+         8X/ZKMgSY2VykJ7XVVkXRaUMKEYnHpVNg+wVclMiP6LxQaAIokVzbCTm0kUvbVnOLqyX
+         dUSJU0icTsdOx8nIrWP8pdOuvgjZy9Yop2FLCqMz9ii15JGvqjfb1Y9KEDHQBuDG35x7
+         ixtUcWRcWylqcRgeXV+YNqgJ18qAdXnztyBvwwmgmw9/WL60CcggpW8WVCa/vLLjO12c
+         ZnjLAVZWvzDb/oRRN0GcP9YYqD3jzzinxfa3LfMQYR/KygX1AJwh3/zG7ufBbH3cXJky
+         6pyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791835161; x=1792439961;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DAWTZN30kCbwQpO/YGvYysEeNKQ6p0wo7IxFjRZ55zc=;
+        b=YwXoZ3Fqwt9Ug9TaBEpYY0GLtY25lgJkOFnp4qbsOeWnOxie5jfnr2Ei0RA0Kbr5XU
+         KaREp2HVoTavSj2vKKskkg1CGJDAfVfWa6M0WNl4+lv+ZgCM2Qi9UWQsw5uNJXkOReJB
+         xo5uUe0LfOKm4QRj30daGc/Eyyyp7o40OoDZMq1C63D2SY5c5KKUofHf5mxJ83ilJsV6
+         PLZWI68y6IhXLzmbkjvu9gwlaTBc1LzITqXgIQG6asy10Dz3DUGb5AmoU7q48mVlel9Q
+         AtCugmXlCgc3dP7Scqgb8DzSb/+4xbRZXtX0DQYqZG+Jldv3+tcf/pQPA6O8sM7QAj7g
+         WENA==
+X-Forwarded-Encrypted: i=1; AKwUvByCwzO3/BN0f8z4kiUS2oA3niTCLwdVZXbORHdTLV7gP+wI+ZDP7eeMPNdWnaJrAFjyYFm4jNctQx/PQLzB@vger.kernel.org
+X-Gm-Message-State: AFq9FYKiPT6NSp/VASuj4qvofL2pRkjYcsIdivRM8i9/W78DPKh4JNoB
+	mgK5W13zSUCy8wRcgEU0OSoOaGJz/reFXTL1fJU3U28OCnFcVh8GdsBJBxiMIgTN74Q=
+X-Gm-Gg: AYBFou09VlABD30e7uiV8YUfVezMGnUSOPnFQ6rtGJSeZu95iOYokSP4XqIgWMm17Xm
+	MQJzZ484OI6QwdyK/NK/dnPKQF2oYEIWMblayuB6HlqmzxmWKSYvejmQX4PiySz3xA4yy3cBbBq
+	PZ83fuvUVX71/G315xacI9vqLELVIJQzYWYrWUT5f9Wa94dK47SXPVD4dLym1V1cYjJ90xo4cra
+	qV4qbqb/4vgSi2cJSsWXyJJBp/v17ZdD0NgMhmeT3DmCqO6DUjQ8AE63JL3rw8jP6OHS7Ruh4GI
+	hmr//ZvXzn5YwLi6lkkHrke9erq+1pWyFH3xGf3Bv+nQs62OUEGsgxP6vEiWHk/fuHuHKeXqeS0
+	tOXGboY4UPQQPvffIDQPPXFLA+3iyoTYgJph7IoH/7F/t9GVfLqmxHuT0gyGrAKEyfTc5vPG5/L
+	5YKkPaNI/6miY+N53oS2xath/Ra54/BG76RMirmrywOlvXjaf+/xoml9S10aqM7ycWQhnArL0=
+X-Received: by 2002:a05:622a:144a:b0:533:3bf7:49e5 with SMTP id d75a77b69052e-5359facf0e9mr163429641cf.23.1791835161002;
+        Mon, 12 Oct 2026 12:59:21 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5359b79a186sm87032691cf.20.2026.10.12.12.59.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 12:59:20 -0700 (PDT)
+Message-ID: <10007ecc-3604-4c58-9da7-f056dd4355a1@riscstar.com>
+Date: Mon, 12 Oct 2026 14:59:18 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261007-pscrr-framework-v16-2-3642c277bebb@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/4] clk: toshiba: introduce a TC9564 SoC clock driver
+To: Jerome Brunet <jbrunet@baylibre.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Brian Masney <masneyb@kernel.org>,
+ Daniel Thompson <daniel@riscstar.com>
+References: <20261012152408.3729237-1-elder@riscstar.com>
+ <20261012152408.3729237-3-elder@riscstar.com>
+ <179183220207.266355.11690534397452731561.b4-review@b4>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <179183220207.266355.11690534397452731561.b4-review@b4>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Faruque,
+On 10/12/26 2:10 PM, Jerome Brunet wrote:
+>> Define a new platform driver that manages clocks implemented by the
+>> Toshiba TC9564 SoC.  There are 21 clocks that can be enabled and
+>> disabled.  Two of these are reserved, so only 19 can be managed.
+>>
+>> Two registers manage the state of the clocks.  The registers are
+>> accessed via a regmap supplied by a system controller, because the
+>> region of memory accessed is shared with other drivers.
+>>
+>> Access to the memory region is provided via a BAR on a PCIe endpoint
+>> function embedded in the TC9564 SoC.  For that reason the PCIe clock
+>> cannot be manipulated by this driver (it is assumed to be enabled).
+>> Similarly, control is not available for the I2C clock, because the
+>> PCIe subsystem on the TC9564 relies on I2C.
 
-kernel test robot noticed the following build errors:
+Thanks a lot for this review.  I respond to all of your
+comments below.
 
-[auto build test ERROR on 5c4d4169604b335c38bbc79bc1fc03042981fc6f]
+>> Reviewed-by: Brian Masney <masneyb@kernel.org>
+>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Alex Elder <elder@riscstar.com>
+>> ---
+>> v3: - The clock driver now gets its regmap by calling syscon_node_to_regmap()
+>>        on its device parent's devicetree node
+>>      - The clock driver now must get its parent clock from devicetree
+>>      - Added Brian's Reviewed-by tag to the second patch
+>>
+>>   MAINTAINERS              |   1 +
+>>   drivers/clk/Kconfig      |  12 ++
+>>   drivers/clk/Makefile     |   1 +
+>>   drivers/clk/clk-tc9564.c | 268 +++++++++++++++++++++++++++++++++++++++
+>>   4 files changed, 282 insertions(+)
+>>   create mode 100644 drivers/clk/clk-tc9564.c
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 746fc8918714..25443a2de1f7 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -28178,6 +28178,7 @@ M:	Alex Elder <elder@kernel.org>
+>>   M:	Daniel Thompson <danielt@kernel.org>
+>>   S:	Maintained
+>>   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
+>> +F:	drivers/clk/clk-tc9564.c
+>>   F:	include/dt-bindings/clock/toshiba,tc9564.h
+>>   
+>>   TOSHIBA TC9564 PCI DRIVER
+>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+>> index 37a8e35d4178..928fff40597e 100644
+>> --- a/drivers/clk/Kconfig
+>> +++ b/drivers/clk/Kconfig
+>> @@ -293,6 +293,18 @@ config COMMON_CLK_S2MPS11
+>>   	  clock. These multi-function devices have two (S2MPS14) or three
+>>   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+>>   
+>> +config COMMON_CLK_TC9564
+>> +	tristate "Toshiba TC9564 clock support"
+>> +	depends on TC9564_PCI
+> 
+> Consider "depends on TC9564_PCI || COMPILE_TEST".
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Faruque-Ansari/power-Extend-power_on_reason-h-for-upcoming-PSCRR-framework/20261007-123636
-base:   5c4d4169604b335c38bbc79bc1fc03042981fc6f
-patch link:    https://lore.kernel.org/r/20261007-pscrr-framework-v16-2-3642c277bebb%40oss.qualcomm.com
-patch subject: [PATCH v16 2/6] reboot: hw_protection_trigger: use standardized numeric shutdown/reboot reasons instead of strings
-config: powerpc-allmodconfig (https://download.01.org/0day-ci/archive/20261013/202610130313.ziYum5Kq-lkp@intel.com/config)
-compiler: powerpc64-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261013/202610130313.ziYum5Kq-lkp@intel.com/reproduce)
+Yes.  I normally prefer doing that, but haven't actually tried
+to cross-compile this code on other target architectures yet
+and didn't want to encounter "unrelated" errors.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610130313.ziYum5Kq-lkp@intel.com/
+I will do so before I send the next version so I can add
+COMPILE_TEST.
 
-All errors (new ones prefixed by >>):
+> This driver gets little build coverage otherwise and it has no
+> compile-time dependency on the PCI driver.
+> 
+>> +	select MFD_SYSCON
+>> +	default TC9564_PCI
+>> +	help
+>> +	  This enables support for the clock controller embedded in the
+>> +	  Toshiba TC9564 SoC.  The state of each clock is controlled via
+>> +	  MMIO to a region managed by a system controller; this ensures
+>> +	  access to the region is coordinated between this and the reset
+>> +	  and XGMAC (stmmac) drivers.
+>> +
+>>   config CLK_TWL
+>>   	tristate "Clock driver for the TWL PMIC family"
+>>   	depends on TWL4030_CORE
+>> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+>> index 52d138d4ffc8..a11a8326d79c 100644
+>> --- a/drivers/clk/Makefile
+>> +++ b/drivers/clk/Makefile
+>> @@ -111,6 +111,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
+>>   obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
+>>   obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
+>>   obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
+>> +obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
+>>   obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
+>>   obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
+>>   obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
+>> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
+>> new file mode 100644
+>> index 000000000000..09a4f6a144fd
+>> --- /dev/null
+>> +++ b/drivers/clk/clk-tc9564.c
+>> @@ -0,0 +1,268 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +
+>> +/*
+>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
+>> + */
+>> +
+>> +#include <linux/bits.h>
+>> +#include <linux/clk.h>
+>> +#include <linux/clk-provider.h>
+>> +#include <linux/device-id/of.h>
+>> +#include <linux/mfd/syscon.h>
+>> +#include <linux/module.h>
+>> +#include <linux/platform_device.h>
+>> +#include <linux/regmap.h>
+>> +#include <linux/string_choices.h>
+>> +
+>> +#include <dt-bindings/clock/toshiba,tc9564.h>
+>> +
+>> +#define CLK_CTRL0_OFFSET	0x1004
+>> +#define CLK_CTRL1_OFFSET	0x100c
+>> +
+>> +struct tc9564_clock_init {
+>> +	const char *name;	/* NULL means unused entry */
+>> +	u32 offset;
+>> +	u32 mask;
+>> +};
+>> +
+>> +struct tc9564_clock {
+>> +	struct clk_hw hw;
+>> +	u32 which;
+> 
+> Seems like this is only used to get back to the regmap, isn't it ?
 
-   drivers/power/supply/macsmc-power.c: In function 'macsmc_power_critical_work':
->> drivers/power/supply/macsmc-power.c:587:39: error: incompatible type for argument 1 of 'hw_protection_trigger'
-     587 |                 hw_protection_trigger("Battery voltage below design minimum", 1500);
-         |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                                       |
-         |                                       char *
-   In file included from drivers/power/supply/macsmc-power.c:22:
-   include/linux/reboot.h:276:58: note: expected 'enum psc_reason' but argument is of type 'char *'
-     276 | static inline void hw_protection_trigger(enum psc_reason reason,
-         |                                          ~~~~~~~~~~~~~~~~^~~~~~
+If you mean the "which" field, it is mainly used for
+that purpose, yes.  It's also used in a warning message,
+but that only occurs if it's a bad value, which I don't
+think will ever happen.
+
+If we just trust that clk_hw_get callback function won't
+get called with a bad clock, the "which" field can probably
+be eliminated, and the result will be a little simpler.
+
+If you were referring to something other than "which" please
+say so.
+
+>> +	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
+>> +	u32 mask;		/* Zero means undefined clock */
+> 
+> Is there any such undefined clock ?
+
+There isn't any more.  There was at one time, because the
+list of clock IDs was enumerated, and two were skipped.
+Krzysztof said to eliminate the hole in that range.  So
+this comment can go away now.
+
+>> +};
+>> +
+>> +struct tc9564_clocks {
+>> +	struct device *dev;
+>> +	struct regmap *regmap;
+>> +	size_t clock_count;
+>> +	struct tc9564_clock clocks[] __counted_by(clock_count);
+>> +};
+>> +
+>> +#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
+>> +#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
+>> +
+>> +#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
+>> +	[CLOCK_##_name] = {				\
+>> +		.name	= #_name,			\
+>> +		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
+>> +		.mask	= BIT(_bit),			\
+>> +	}
+> 
+> Those clock still have no parent, so my previous comment regarding unparented clock
+> remains unaddressed.
+
+You're right.  I added a parent in devicetree, but did not
+have these clocks point back to it.
+
+We have this set of clocks with fixed frequencies, but no
+definitive definition of how they're derived.  So the best
+I can do is have them all refer back to the single 25 MHz
+input clock.
+> 
+>> +
+>> +/*
+>> + * The PCIe and I2C clocks are controllable, but we depend on PCIe
+>> + * and that relies on I2C, so we don't allow them to be disabled.
+>> + */
+>> +static const struct tc9564_clock_init tc9564_clock_init[] = {
+>> +	TC9564_CLOCK_INIT0(MCU, 0),
+>> +	TC9564_CLOCK_INIT0(INTC, 4),
+>> +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
+>> +	/* TC9564_CLOCK_INIT0(I2C, 12), */
+> 
+> Please don't leave commented-out code. The comment above already
+> explains why these two clocks are not exposed.
+
+OK.  My main goal was to document those bit numbers.
+
+> BTW, the comment points more toward CLK_IS_CRITICAL, rather
+> than removing the clocks.
+
+That's a good idea (and it documents the bits).
+> None of the consumer will ever need those clocks ?
+
+To the best of my knowledge, no.
+
+>> +	TC9564_CLOCK_INIT0(SRAM, 13),
+>> +	TC9564_CLOCK_INIT0(UART, 16),
+>> +	TC9564_CLOCK_INIT0(MSIGEN, 18),
+>> +	TC9564_CLOCK_INIT0(PLL, 24),
+>> +	TC9564_CLOCK_INIT0(SGMII, 25),
+>> +	TC9564_CLOCK_INIT0(REFCLKO, 26),
+>> +
+>> +	TC9564_CLOCK_INIT0(MAC0_TX, 7),
+>> +	TC9564_CLOCK_INIT0(MAC0_RX, 14),
+>> +	TC9564_CLOCK_INIT0(MAC0_125M, 29),
+>> +	TC9564_CLOCK_INIT0(MAC0_312_5M, 30),
+> 
+> Are those really just providing the oscillator parent ?
+> That is what they will appear to do without a proper recalc_rate()
+
+They are fixed clocks that can be gated, but their
+rate cannot be changed.
+
+Looking at __clk_core_init(), should I define a
+recalc_rate() callback that just returns the
+equivalent of get_rate()?
+
+> Their names suggest that maybe, it is not the osc coming out
+> of them ...
+
+We have requested a clock tree that explains exactly
+how these clock rates are derived from the 25 MHz
+oscillator.  They're all fixed rates, and although
+we could easily speculate how they're derived, we
+don't have the documentation.
+>> +	TC9564_CLOCK_INIT0(MAC0_ALL, 31),
+>> +
+>> +	TC9564_CLOCK_INIT1(MAC1_TX, 7),
+>> +	TC9564_CLOCK_INIT1(MAC1_RX, 14),
+>> +	TC9564_CLOCK_INIT1(MAC1_RMII, 15),
+>> +	TC9564_CLOCK_INIT1(MAC1_125M, 29),
+>> +	TC9564_CLOCK_INIT1(MAC1_312_5M, 30),
+> 
+> same here
+> 
+>> +	TC9564_CLOCK_INIT1(MAC1_ALL, 31),
+>> +};
+>> +#define TC9564_CLOCK_COUNT	ARRAY_SIZE(tc9564_clock_init)
+>> +
+>> +static const struct tc9564_clock *hw_to_tc9564_clock(struct clk_hw *hw)
+>> +{
+>> +	return container_of_const(hw, struct tc9564_clock, hw);
+>> +}
+>> +
+>> +static const struct tc9564_clocks *
+>> +tc9564_clock_to_clocks(const struct tc9564_clock *clock)
+>> +{
+>> +	u32 which = clock->which;
+>> +
+>> +	if (which >= TC9564_CLOCK_COUNT)
+>> +		return ERR_PTR(-ENXIO);
+>> +
+>> +	return container_of_const(clock, struct tc9564_clocks, clocks[which]);
+>> +}
+>> +
+>> +static int tc9564_clk_manage(struct clk_hw *hw, bool enable)
+>> +{
+>> +	const struct tc9564_clock *clock = hw_to_tc9564_clock(hw);
+>> +	const struct tc9564_clocks *clocks;
+>> +	u32 offset = clock->offset;
+>> +	u32 mask = clock->mask;
+>> +
+>> +	clocks = tc9564_clock_to_clocks(clock);
+>> +	if (IS_ERR(clocks) || !mask) {
+>> +		dev_err(clocks->dev, "invalid clock (%s id %u)\n",
+>> +			str_enable_disable(enable), clock->which);
+> 
+> clocks is an error pointer at this point so this will oops.
+
+Wow, you're right, and it's used twice in that dev_err().
+I'll fix this.
+
+> Good thing is that this is dead code because it manifest only if there
+> a hole in your table, which do not have ATM. Drop everything related to
+> this hole managment that you did not test ... you'll introduce it when
+> you need it and test it
+> 
+>> +		return -ENXIO;
+>> +	}
+>> +
+>> +	return regmap_update_bits(clocks->regmap, offset, mask,
+>> +				  enable ? mask : 0);
+> 
+> The dance around clocks and 'which' is only to get to this regmap, right ?
+> 
+> You could just use clk_hw_get_dev() and use the drvdata to get back to it.
+> That would be a lot simpler.
+
+OK, that sounds much better.
+
+> 
+>> +}
+>> +
+>> +static int tc9564_clk_enable(struct clk_hw *hw)
+>> +{
+>> +	return tc9564_clk_manage(hw, true);
+>> +}
+>> +
+>> +static void tc9564_clk_disable(struct clk_hw *hw)
+>> +{
+>> +	(void)tc9564_clk_manage(hw, false);
+>> +}
+>> +
+>> +static const struct clk_ops tc9564_clk_ops = {
+>> +	.enable = tc9564_clk_enable,
+>> +	.disable = tc9564_clk_disable,
+> 
+> Please implement is_enabled(). This helps disabling unused clocks.
+
+OK, that's easy.
+
+> 
+>> +};
+>> +
+>> +static void tc9564_clock_disable_all(struct tc9564_clocks *clocks)
+>> +{
+>> +	for (u32 i = 0; i < clocks->clock_count; i++) {
+>> +		const struct tc9564_clock *clock = &clocks->clocks[i];
+>> +
+>> +		if (clock->mask)
+>> +			regmap_update_bits(clocks->regmap, clock->offset,
+>> +					   clock->mask, 0);
+>> +	}
+>> +}
+>> +
+>> +static struct clk_hw *tc9564_clk_hw_get(struct of_phandle_args *clkspec,
+>> +					void *data)
+>> +{
+>> +	struct tc9564_clocks *clocks = data;
+>> +	u32 i = clkspec->args[0];
+>> +
+>> +	if (i < clocks->clock_count)
+>> +		return &clocks->clocks[i].hw;
+>> +
+>> +	dev_err(clocks->dev, "invalid index %u\n", i);
+>> +
+>> +	return ERR_PTR(-EINVAL);
+>> +}
+> 
+> clk_hw_onecell_data and register it with of_clk_hw_onecell_get() maybe ?
+
+I'll look into that.
+
+> 
+>> +
+>> +static struct tc9564_clocks *tc9564_clk_init(struct device *dev)
+>> +{
+>> +	struct tc9564_clocks *clocks;
+>> +	struct regmap *regmap;
+>> +	size_t clocks_size;
+>> +	int ret;
+>> +
+>> +	regmap = syscon_node_to_regmap(dev_of_node(dev->parent));
+>> +	if (IS_ERR(regmap)) {
+>> +		dev_err(dev, "failed to get config regmap\n");
+>> +		return ERR_CAST(regmap);
+>> +	}
+>> +
+>> +	clocks_size = struct_size(clocks, clocks, TC9564_CLOCK_COUNT);
+>> +	clocks = devm_kzalloc(dev, clocks_size, GFP_KERNEL);
+>> +	if (!clocks)
+>> +		return ERR_PTR(-ENOMEM);
+>> +
+>> +	clocks->dev = dev;
+>> +	clocks->regmap = regmap;
+>> +	clocks->clock_count = TC9564_CLOCK_COUNT;
+>> +
+>> +	for (u32 i = 0; i < TC9564_CLOCK_COUNT; i++) {
+>> +		const struct tc9564_clock_init *clock_init;
+>> +		struct clk_init_data init = { };
+>> +		struct tc9564_clock *clock;
+>> +
+>> +		clock_init = &tc9564_clock_init[i];
+>> +		if (!clock_init->name)
+>> +			continue;
+>> +
+>> +		init.name = clock_init->name;
+>> +		init.ops = &tc9564_clk_ops;
+> 
+> No parent is declared. The input clock from the binding should be the
+> parent of every gate:
+> 
+> 	init.parent_data = &(const struct clk_parent_data){ .index = 0 };
+> 	init.num_parents = 1;
+
+Yes, understood.  I neglected to do this.
+
+> Without a parent, these clocks are orphans with rate 0, and enabling
+> one never enables the input if it needs to be.
 
 
-vim +/hw_protection_trigger +587 drivers/power/supply/macsmc-power.c
+> 
+>> +
+>> +		clock = &clocks->clocks[i];
+>> +		clock->hw.init = &init;
+>> +
+>> +		ret = devm_clk_hw_register(dev, &clock->hw);
+>> +		if (ret) {
+>> +			dev_err(dev, "failed to register clock \"%s\"\n",
+>> +				init.name);
+>> +			return ERR_PTR(ret);
+>> +		}
+>> +
+>> +		clock->which = i;
+>> +		clock->offset = clock_init->offset;
+>> +		clock->mask = clock_init->mask;
+> 
+> These fields are set after the clock is registered. Please fill in the
+> clock completely before calling devm_clk_hw_register(). Ops may be called
+> as soon as the clock is registered
 
-0ebf821cf6c75d Hector Martin     2026-02-17  554  
-0ebf821cf6c75d Hector Martin     2026-02-17  555  static void macsmc_power_critical_work(struct work_struct *wrk)
-0ebf821cf6c75d Hector Martin     2026-02-17  556  {
-0ebf821cf6c75d Hector Martin     2026-02-17  557  	struct macsmc_power *power = container_of(wrk, struct macsmc_power, critical_work);
-0ebf821cf6c75d Hector Martin     2026-02-17  558  	u16 bitv, b0av;
-0ebf821cf6c75d Hector Martin     2026-02-17  559  	u32 bcf0;
-0ebf821cf6c75d Hector Martin     2026-02-17  560  
-0ebf821cf6c75d Hector Martin     2026-02-17  561  	if (!power->batt)
-0ebf821cf6c75d Hector Martin     2026-02-17  562  		return;
-0ebf821cf6c75d Hector Martin     2026-02-17  563  
-0ebf821cf6c75d Hector Martin     2026-02-17  564  	/*
-0ebf821cf6c75d Hector Martin     2026-02-17  565  	 * Avoid duplicate atempts at emergency shutdown
-0ebf821cf6c75d Hector Martin     2026-02-17  566  	 */
-0ebf821cf6c75d Hector Martin     2026-02-17  567  	if (power->emergency_shutdown_triggered || system_state > SYSTEM_RUNNING)
-0ebf821cf6c75d Hector Martin     2026-02-17  568  		return;
-0ebf821cf6c75d Hector Martin     2026-02-17  569  
-0ebf821cf6c75d Hector Martin     2026-02-17  570  	/*
-0ebf821cf6c75d Hector Martin     2026-02-17  571  	 * EMERGENCY: Check voltage vs design minimum.
-0ebf821cf6c75d Hector Martin     2026-02-17  572  	 * If we are below BITV, the battery is physically exhausted.
-0ebf821cf6c75d Hector Martin     2026-02-17  573  	 * We must shut down NOW to protect the filesystem.
-0ebf821cf6c75d Hector Martin     2026-02-17  574  	 */
-0ebf821cf6c75d Hector Martin     2026-02-17  575  	if (apple_smc_read_u16(power->smc, SMC_KEY(BITV), &bitv) >= 0 &&
-0ebf821cf6c75d Hector Martin     2026-02-17  576  	    apple_smc_read_u16(power->smc, SMC_KEY(B0AV), &b0av) >= 0 &&
-0ebf821cf6c75d Hector Martin     2026-02-17  577  	    b0av < bitv) {
-0ebf821cf6c75d Hector Martin     2026-02-17  578  		power->emergency_shutdown_triggered = true;
-0ebf821cf6c75d Hector Martin     2026-02-17  579  		dev_emerg(power->dev,
-0ebf821cf6c75d Hector Martin     2026-02-17  580  			  "Battery voltage (%d mV) below design minimum (%d mV)! Emergency shutdown.\n",
-0ebf821cf6c75d Hector Martin     2026-02-17  581  			  b0av, bitv);
-0ebf821cf6c75d Hector Martin     2026-02-17  582  
-0ebf821cf6c75d Hector Martin     2026-02-17  583  		/*
-0ebf821cf6c75d Hector Martin     2026-02-17  584  		 * Shutdown is now imminent. Kick userspace again and give it some
-0ebf821cf6c75d Hector Martin     2026-02-17  585  		 * brief time to (hopefully) flush what's needed, before forcing.
-0ebf821cf6c75d Hector Martin     2026-02-17  586  		 */
-0ebf821cf6c75d Hector Martin     2026-02-17 @587  		hw_protection_trigger("Battery voltage below design minimum", 1500);
-0ebf821cf6c75d Hector Martin     2026-02-17  588  	}
-0ebf821cf6c75d Hector Martin     2026-02-17  589  
-0ebf821cf6c75d Hector Martin     2026-02-17  590  	/*
-0ebf821cf6c75d Hector Martin     2026-02-17  591  	 * Avoid duplicate attempts at orderly shutdown.
-0ebf821cf6c75d Hector Martin     2026-02-17  592  	 * Voltage check is above this as we may want to
-0ebf821cf6c75d Hector Martin     2026-02-17  593  	 * "upgrade" an orderly shutdown to a critical power
-0ebf821cf6c75d Hector Martin     2026-02-17  594  	 * off if voltage drops.
-0ebf821cf6c75d Hector Martin     2026-02-17  595  	 */
-0ebf821cf6c75d Hector Martin     2026-02-17  596  	if (power->orderly_shutdown_triggered || system_state > SYSTEM_RUNNING)
-0ebf821cf6c75d Hector Martin     2026-02-17  597  		return;
-0ebf821cf6c75d Hector Martin     2026-02-17  598  
-0ebf821cf6c75d Hector Martin     2026-02-17  599  	/*
-0ebf821cf6c75d Hector Martin     2026-02-17  600  	 * Check if SMC flagged the battery as empty.
-0ebf821cf6c75d Hector Martin     2026-02-17  601  	 * We trigger a graceful shutdown to let the OS save data.
-0ebf821cf6c75d Hector Martin     2026-02-17  602  	 */
-f7b253a6e217f7 Sasha Finkelstein 2026-07-12  603  	if (macsmc_battery_read_bcf0(power, &bcf0) == 0 && bcf0 != 0) {
-0ebf821cf6c75d Hector Martin     2026-02-17  604  		power->orderly_shutdown_triggered = true;
-0ebf821cf6c75d Hector Martin     2026-02-17  605  		dev_crit(power->dev, "Battery critical (empty flag set). Triggering orderly shutdown.\n");
-0ebf821cf6c75d Hector Martin     2026-02-17  606  		orderly_poweroff(true);
-0ebf821cf6c75d Hector Martin     2026-02-17  607  	}
-0ebf821cf6c75d Hector Martin     2026-02-17  608  }
-0ebf821cf6c75d Hector Martin     2026-02-17  609  
+Yes, you're right.  I'll fully initialize the clock structure
+before registering.
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+> 
+>> +	}
+>> +
+>> +	ret = devm_of_clk_add_hw_provider(dev, tc9564_clk_hw_get, clocks);
+>> +	if (ret) {
+>> +		dev_err(dev, "failed to add clock hardware provider\n");
+>> +		return ERR_PTR(ret);
+>> +	}
+>> +
+>> +	return clocks;
+>> +}
+>> +
+>> +static int tc9564_clk_probe(struct platform_device *pdev)
+>> +{
+>> +	struct device *dev = &pdev->dev;
+>> +	struct tc9564_clocks *clocks;
+>> +	struct clk *clk;
+>> +
+>> +	if (!dev_of_node(dev))
+>> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
+>> +
+>> +	clk = devm_clk_get(dev, NULL);
+>> +	if (IS_ERR(clk))
+>> +		return dev_err_probe(dev, PTR_ERR(clk),
+>> +				     "failed to get input clock\n");
+> 
+> Nothing is using this. This is not how you set the parent. See above
+
+It will once I have the clocks get properly parented.
+
+>> +
+>> +	clocks = tc9564_clk_init(dev);
+>> +	if (IS_ERR(clocks))
+>> +		return dev_err_probe(dev, PTR_ERR(clocks),
+>> +				     "failed to initialize clocks\n");
+>> +
+>> +	/* Force all clocks to be initially disabled */
+>> +	tc9564_clock_disable_all(clocks);
+> 
+> Why is this needed ? In general a provider should never act the provided
+> clock on its own. Let the framework deal with the used clocks
+
+The intent was to start with everything disabled--a known
+state.  Sashiko pointed out this races with a user that
+could get the clock right away, so I intend to do this
+by initially disabling all the clocks before they're
+all registered.
+
+> At this point you've already register the provider so you may be turning
+> off a clock on a consumer already using it and also mess with the
+> enable count.
+
+Yes, understood.  This will be done in the proper order.
+
+> 
+>> +
+>> +	platform_set_drvdata(pdev, clocks);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static void tc9564_clk_remove(struct platform_device *pdev)
+>> +{
+>> +	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
+>> +
+>> +	/* Leave all clocks disabled when done */
+>> +	tc9564_clock_disable_all(clocks);
+> 
+> Same type of problem here, there may be still active consumer at this
+> point. Please drop .remove() entirely.
+
+Exactly (as I responded to the Sashiko message that said roughly
+the same thing).
+
+This was a great review.  I really appreciate it.
+
+					-Alex
