@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 849A044F560;
-	Mon, 12 Oct 2026 11:24:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A2AC413D99;
+	Mon, 12 Oct 2026 11:25:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791804285; cv=none; b=iInxsNxY69iHFztWir2njxO5nrOf/jLI95lWKHlBC5C/FDhzC58Y8bq1hKGclaHKSbc2hfYKcqByXuXN2FCGvUflbeTAb0CAK3kuNGpoDfc0yJUknJ9MNiZww+3fvw6J2DB/3hKeWED3kYGqhjvo/Jdn85md86KyZrkLQ5GFeUU=
+	t=1791804359; cv=none; b=fAFHpOEq0bx9fh47IEvGo7yEYl1bV1N1l0RGgTfXuHfWtIdXd8F95CjNRN/zNMUPA8V3S0WIFHbS5hjdfFOLvIYdIH2XHcDwsBmlkSSL6TtS+s6TbT8YtSiWFbQ5pGFWB5IEi1jjA1FwHXu/fpP3g5ckLKJTxs33iFgUfj7WnRY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791804285; c=relaxed/simple;
-	bh=AmbGlxaAfBu3C7pt+gVacg9JyIe4CSjqdXweiVH3+fo=;
+	s=arc-20240116; t=1791804359; c=relaxed/simple;
+	bh=WFdon6r+LKUHpfT1vAowXRppWhWpDj4o1nWxX8ed/vM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=m+BCSM186PUWvTt6Up/JTyz6qMvwDkNF6ZQt46Q1CBRh+TYLS1yaduD0MiVZIUhVR/jl7dNcJdj5+rRoJVm6NExog4B6hQtmVTdDg7TrFMcpk4WVrDl1D3ZLNslLehjkahXp+ENVtJ3RQ2JHfZybctu0Ifdvk7f9Jkx7kyZzsyk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c92p8h7L; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=eXYdXMtukasimXn3BJepu4+hM3sSeQH/tSDN2NYkpTqrX7nY1scG2/x9hQ6EW2STITTEGXWHRmx917xOW52oUMr/Sq2cFZ3aiwLnv7RpNDjJnZCydueTUsCWE4DnQ0h6rZsa0oNYewbdI9oUTjYsFQJOT2a+DNATtNuF50ki/Hk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K6XJA2hS; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c92p8h7L"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 056151F0089D;
-	Mon, 12 Oct 2026 11:24:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K6XJA2hS"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21EF61F0089B;
+	Mon, 12 Oct 2026 11:25:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791804284;
-	bh=ZJRpPTUM8JL06w8zYKJ1/wwBBLjSlYsacYxXrQ3k0W8=;
+	s=k20260515; t=1791804358;
+	bh=OYud2pwVRp0z9zd+38ShiaAlBdyzIF9h4UWE8HoHZGc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=c92p8h7LUFMADYC5inPQHlLhogyH8CpAiYLZ/4B1pTVmXCkNYMb4vKPccmzQIiD5F
-	 PTigZNiw8POXQnz1DzIdyecZ+1XyLws+v17CAY3NJaITpWwgzlqspErTNjuc2epU8w
-	 nGyboDSKCHe7/l68Z8u35tFO66Lz7I1cLTjtFpJwWgzpwxI6V1wOffUr963OsRwNK0
-	 jxC4xIT7PXgtfQZ5+Ed4OkvyQhk9+GhwKnhiZIq5q/ALaXIJ9LGRl9wWDj5tjEUolD
-	 pg6skjMVfmZ8Gpt1piv/VMfImzYlDdSTAuz73AQSAdCiTZg640FJlnAdklekASRfSI
-	 g9dLVzo5y+TqQ==
-Message-ID: <1cb252eb-a7d9-4eac-8d28-8d7781ea430d@kernel.org>
-Date: Mon, 12 Oct 2026 13:24:37 +0200
+	b=K6XJA2hSH7O/anOUuvkol+Vd+qFNSdlSQZ8i34RjDAdX5/IkFFV+rp0/3vW0RjeVS
+	 ZyXBsrHphbFJJUKdJCXQVd3AuljO0LM7sU51PG8dY4oEIlhQcbZXNI3Lz9dUT9f5tc
+	 xqyemcgb+eMxKfwplEieOAcE929793+SNp5n2smdfKXEbV9K9ehoomgwegcdGIq4SP
+	 gCSD035SFB3imZbMYlNHpyMyIs6sNG7CnGLXZRbN/POlxjxVNgABoSNLBwTM1cuH6m
+	 2TDXK9bohOn2gXfuafehcd5GuyRLg9eX/6qd6MK1W2VxvEqZC8eoqDgWCBzgzAm89i
+	 DP3C6Yb3VYgqA==
+Message-ID: <298d2903-c8b1-4aa8-801f-82fe0a650252@kernel.org>
+Date: Mon, 12 Oct 2026 13:25:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,7 +35,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] dt-bindings: arm: qcom: Add Talos Lyra EVK board
+Subject: Re: [PATCH v2 2/4] arm64: dts: qcom: talos: Add Talos Lyra EVK SoM
+ platform
 To: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>,
  Bjorn Andersson <andersson@kernel.org>,
  Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
@@ -44,9 +45,12 @@ To: Ruchira Revdekar <ruchira.revdekar@oss.qualcomm.com>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org,
  Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>,
+ Monish Chunara <quic_mchunara@quicinc.com>,
+ Rakesh Kota <rakesh.kota@oss.qualcomm.com>,
+ Sayali Lokhande <sayalil@qti.qualcomm.com>,
  Nirmesh Kumar Singh <nirmesh.singh@oss.qualcomm.com>
 References: <20261012-talos-lyra-evk-v2-v2-0-dcc9316ebb59@oss.qualcomm.com>
- <20261012-talos-lyra-evk-v2-v2-1-dcc9316ebb59@oss.qualcomm.com>
+ <20261012-talos-lyra-evk-v2-v2-2-dcc9316ebb59@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -92,22 +96,38 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261012-talos-lyra-evk-v2-v2-1-dcc9316ebb59@oss.qualcomm.com>
+In-Reply-To: <20261012-talos-lyra-evk-v2-v2-2-dcc9316ebb59@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 12/10/2026 08:16, Ruchira Revdekar wrote:
 > From: Avaneesh Kumar Dwivedi <avaneesh.dwivedi@oss.qualcomm.com>
 > 
-> Add the qcom,talos-lyra-evk compatible string for the Talos Lyra EVK
-> board, which pairs the Talos Lyra EVK SoM with a common carrier board.
+> Introduce the device tree for the QCS615-based Talos Lyra EVK SoM.
+> Lyra EVK SoM is a compact compute module integrating the QCS615 SoC,
+> PMIC, and essential connectivity, designed to mount on carrier boards.
 > 
+> The initial SoM device tree includes basic support for:
+> 
+> - CPU and memory
+> - PMIC and board-level regulators
+> - UFS and SD card storage
+> - QUPv3 (I2C/SPI/UART) instances
+> - ADSP/CDSP remoteprocs
+> - GPU
+> 
+> Co-developed-by: Monish Chunara <quic_mchunara@quicinc.com>
+> Signed-off-by: Monish Chunara <quic_mchunara@quicinc.com>
+> Co-developed-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+> Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+> Co-developed-by: Sayali Lokhande <sayalil@qti.qualcomm.com>
+> Signed-off-by: Sayali Lokhande <sayalil@qti.qualcomm.com>
 > Tested-by: Nirmesh Kumar Singh <nirmesh.singh@oss.qualcomm.com>
 
-No, this did not happen.
+There is no trace of this tag, look:
+https://lore.kernel.org/all/20260901-lyra_upstreaming-v1-1-e3a76dc9e21c@oss.qualcomm.com/
 
-Please do not add inapplicable/fake tags.
-
+Where was it given?
 
 Best regards,
 Krzysztof
