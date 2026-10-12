@@ -1,123 +1,199 @@
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BECDD43B6C9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:02:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA47849B5CA
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:03:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791831778; cv=none; b=ayElyGZJLmi5JEK7SSu5eCVZaRcnpYa9Ps7YRMw8HqGOws3BtRLbGB3JubbLkmH5N5YYaE9fyigmP0qZpFR7OFWj4U4v9xclrX1VhXH5adXDDvKKVz+a0eBiNciqcIlGq5wm07cnSrwDGrXc6VF87l0Wcrx+u9LwXE9lKXGw0j8=
+	t=1791831828; cv=none; b=WaFpKogXh5+ZXmB5rub6EWyyYqchQVDKHjoiplzbFAac6J8qddvaFtVsYGMm3fjykqz4gsdb6GWkmWZk8oeFzy93Lysnz+K6tv/fpALj7nV2+6ci10eLFKEvkHnpqw9uJTWFhQj4ZK6urInD5sV2PhDM93itfk6YlJjVmZ4cjz8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791831778; c=relaxed/simple;
-	bh=BlAW2s3WJD+TEcvpjdpLLq/egK9JpkVxEaygxyYoXWc=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=Sey4t5KXq66eJ9eTkLQwrLJ+c64UF8pbRRy/cuSPVRKzQMdJxq9djQHyeJ0mr4qfbcNzeqQTNM3VtgNx/9m0bubpNhy+G4j8PFy9572JM2N1vew+f/6FFTMp5gIFyQ/nWtoqwQFZ0C49WG3HfwWTDCtNZGZh4YthvmdGe4r8J8c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=JyqxcYkM; arc=none smtp.client-ip=209.85.160.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1791831828; c=relaxed/simple;
+	bh=asbnt5jEds/RpGA6Vjd23I6NBxWIZzgn++dKraTO9Qc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=b4Xi1YbK6uSmAaA7yqmePOOkVHIm1C7dwdd/1z4v8mnxwI8+mEbPRKLX2piBFOFO/X/C/+KurTYpGkv2XRl2xahWhFAqTnC6HffapNO0o/ezppgJv80vOWPpDYqKfm+YY7JsB4/dQGJdSj7KgpXDwu8CJbjRyladIQLwmSAi59E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qc87fPCb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="JyqxcYkM"
-Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-5352a876d5aso29675721cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:02:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1791831776; x=1792436576; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=laFs7jlIkL/wK8Exmb0UUuiq4aC/G+SY8DOFmho4Nis=;
-        b=JyqxcYkMEhPPd1CSNODJ/jyyrnpymJCtRpdQCMEZ3yphQItkCsPm12bs43Icvu4Z2g
-         Iqyk4/KiB68Drk91Zu396UTq+Py+IsMtKbGPeoRcivVBpXlEYDyEonw+32HPzig8b4Yi
-         qGWLfd3sCRABPzv9807cyBRvj7cRFc1Qe0EwgcpHdFiEB4bgMEHz6/m7p9DfcEjSwlwo
-         PpZkfI/0EIbriGH9jWsXFaMqOvRxNGWvBKosGJ+VRvlUMTuyMeciExpxT4tWE9wY9XFh
-         6ORveyNMq195sFlGbCHd1Bt4p5OtIEPGbG/O6CvNrSUC26SdiEDWmN1p8zHkk5j4i33T
-         tbRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791831776; x=1792436576;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=laFs7jlIkL/wK8Exmb0UUuiq4aC/G+SY8DOFmho4Nis=;
-        b=CiLiLzgdjL7xSNbzuzFEJz4zL+g5xN2mDIzriMUylMSdrxGC4GjvZYC8ejc5rLEyk+
-         2q+37XMgmFJWK+bQRxQ4sZjhkJEicE7ufahceyUklnPAGy6QGEpLXWR1km9QRDQAcJlD
-         1c+K6p0Lbox2LBx+bIZ1Xx/VSh0ngn+XBng/5Jz2d3ClOdhb5hxd4I567z7q2V13yk4L
-         niDwQx1uTuxFgezt4m+4STwbnOaKym5YeiFuM/iOCZkvzECWjCsmq7g7Ewjg/q2tc2HH
-         nID5PmzXS2xD5AfAgm6nZCb9+Mko6epuj4PUMF4RkZWw60K/xyZHz3uV3hniJbEzet0Y
-         hqow==
-X-Forwarded-Encrypted: i=1; AKwUvBx6P3LH6aBkovSm2ybzo1zffxL1KoHBrrRi8cAmFdDE+fHlW1Cb+4wMHNWOmQdt9l/avRKpo3B+0a7xgR2S@vger.kernel.org
-X-Gm-Message-State: AFq9FYI8l/UjTjAESE+eJleuQJWT0XYpRjsrg3IUn5e6/rfg9OsyE1DL
-	zKB9AbWPxp6R30F15UxQwS/5TFQhN/vC5Pk8elot1KlU3BIdauw6aQhmCX1AiPhwkqQ=
-X-Gm-Gg: AYBFou13OiEp6iNElUsAqdOhvE2D+bE/ldP2/9BKWKkr2YGl/AyckLmLl3t4cK9E270
-	xUBay0DlL+n5Fvpj/o9+TRMfM+e/+A61IC9guL0/kevTygeLL9cRsHxDoUKpb8dS3lj9EbEUSyV
-	wMfk8/TsmeErsE2UBXRbCA+XODk9/Rh0xIXIhYi/fDG42YHERtH5Axf7RunQ5BrLTPv56uKxUrZ
-	SM53jE8gBXGM3Da8OQ4tKvaNiLLYqu0D6re7lvY1C6tY9oSaxycWu6Y1pKFD10nP6SvEVMAvZxO
-	B18dxNexHL9ukC6SeMZLwFZGowcqNcoGRfS/CwXx7ribeppY64grFczzeLaiD304iF0cV8Dm/WB
-	3MeaVUKo0+Hna5sCrda3j/9uJ87pgCKezzBYrrpPZ/B3/r/YhRmfJJR4PRTLrhG9d1WzOSaxlny
-	qeG3+sK1wq+1Btmef0FGyCtyQ5Vhf2TVHI60C4NK1a87hpl84Fjklr6YFMgHYp6oj1q6qAKMU=
-X-Received: by 2002:a05:622a:8cf:b0:533:370c:7600 with SMTP id d75a77b69052e-5359fac22demr153697041cf.27.1791831775276;
-        Mon, 12 Oct 2026 12:02:55 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b9783c8e5sm5196456d6.1.2026.10.12.12.02.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 12:02:54 -0700 (PDT)
-Message-ID: <71854ab7-107a-4218-ad37-14c6c6fe6bac@riscstar.com>
-Date: Mon, 12 Oct 2026 14:02:52 -0500
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qc87fPCb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD75E1F0089B;
+	Mon, 12 Oct 2026 19:03:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791831816;
+	bh=ClqrB5Nb1VE/6HPxn34XKW1S5rErGzsfqCMXXB5t2dI=;
+	h=From:To:Cc:Subject:Date;
+	b=Qc87fPCbdRHXT6Crexos9HfSxNeqhRI0i3BcudRlX4omUs/qESaurv6wqZuNz+wte
+	 wBCfi/8HIQ7tFp8hNaYIqtLIi/T0vC2079pAQwq7EM5VsJNGUqAxaRANdeSKzscjkn
+	 30tfZib5RIXIIb7CxCfQadk7HzmIzEjoLwUmfZt4RpoR8Cu/tNMusN294ydZ9vtW3Y
+	 fT5dH1lPPvAoc331yDB+Kb/jsSpDbFrRN8bqF7/0sPUOSqUpIpAIYKaGEgJQ1TwUFf
+	 7k5mJmW6NRyQCKjlEhin4JlHUziJFXu1u79UcqGfFCVFoIoUs0yluXhKstrvA8s1/B
+	 4i0+VldJu93/A==
+From: Bjorn Andersson <andersson@kernel.org>
+To: arm@kernel.org,
+	soc@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+	Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>,
+	Hemanth Selam <hemanth.selam@gmail.com>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Muzaffer Kadir <muzafferkadir@mainlining.org>,
+	Sneh Mankad <sneh.mankad@oss.qualcomm.com>,
+	Antony Kurniawan Soemardi <linux@smankusors.com>,
+	Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Peng Fan <peng.fan@nxp.com>,
+	Sasha Levin <sashal@kernel.org>,
+	Somesh Dey <somesh.dey@oss.qualcomm.com>,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Vitalii Skorkin <nikroksm@mail.ru>,
+	Yibo Tan <lhfff@tju.edu.cn>
+Subject: [GIT PULL] More Qualcomm driver updates for v7.4
+Date: Mon, 12 Oct 2026 14:03:31 -0500
+Message-ID: <20261012190332.10322-1-andersson@kernel.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/4] clk: toshiba: introduce a TC9564 SoC clock driver
-From: Alex Elder <elder@riscstar.com>
-To: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org
-Cc: abelvesa@kernel.org, kees@kernel.org, gustavoars@kernel.org,
- mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
- danielt@kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, Brian Masney <masneyb@kernel.org>,
- Daniel Thompson <daniel@riscstar.com>
-References: <20261012152408.3729237-1-elder@riscstar.com>
- <20261012152408.3729237-3-elder@riscstar.com>
-Content-Language: en-US
-In-Reply-To: <20261012152408.3729237-3-elder@riscstar.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10/12/26 10:24 AM, Alex Elder wrote:
-> +static int tc9564_clk_probe(struct platform_device *pdev)
-> +{
-> +	struct device *dev = &pdev->dev;
-> +	struct tc9564_clocks *clocks;
-> +	struct clk *clk;
-> +
-> +	if (!dev_of_node(dev))
-> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
-> +
-> +	clk = devm_clk_get(dev, NULL);
 
-This should be devm_clk_get_enabled().
+The following changes since commit 87802d4dc4850bf27b3955ee9162b1e52c99da1a:
 
-(It still works this way, given it's an always-on fixed clock.)
+  firmware: qcom: scm: Allow QSEECOM on Asus Zenbook A14 (UX3407NA) (2026-10-05 09:10:43 +0200)
 
-					-Alex
+are available in the Git repository at:
 
-> +	if (IS_ERR(clk))
-> +		return dev_err_probe(dev, PTR_ERR(clk),
-> +				     "failed to get input clock\n");
-> +
-> +	clocks = tc9564_clk_init(dev);
-> +	if (IS_ERR(clocks))
-> +		return dev_err_probe(dev, PTR_ERR(clocks),
-> +				     "failed to initialize clocks\n");
-> +
-> +	/* Force all clocks to be initially disabled */
-> +	tc9564_clock_disable_all(clocks);
-> +
-> +	platform_set_drvdata(pdev, clocks);
-> +
-> +	return 0;
-> +}
+  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-drivers-for-7.4-3
 
+for you to fetch changes up to f44ee24f4a96ad97c2f0191e503c91477d9b530b:
+
+  soc: qcom: geni-se: Drop unused icc_ddr parameter from geni_icc_get() (2026-10-05 09:10:45 +0200)
+
+----------------------------------------------------------------
+More Qualcomm driver updates for v7.4
+
+Add SM8950 Maili and SM8975 Hawi SoC IDs. Document the Maili CPUCP
+mailbox and PMIC arbiter compatibles.
+
+Allow QSEECOM on the Kalambo CRD, Glymur QCB, and Lenovo ThinkPad T14s
+Gen 7. Reuse Glymur's UBWC configuration for Kalambo, and add the Nord
+LLCC configuration and binding.
+
+Add Shikra SoC and subsystem low-power statistics. Document its
+modem_apps GLINK audio channel. Document MSM8952 SCM and record that
+MSM8952 has no UBWC. Describe IPQ5424 IMEM as mmio-sram and add the
+MSM8960 SPS interrupt-controller syscon compatible.
+
+Fix SCM PAS resource-table retries and handling of empty tables. Use
+sleepable one-time initialization for TZMEM, and correct SCM Kconfig
+selection for non-Qualcomm builds. Disable the SHM bridge on SM7125
+to avoid boot-time RCU stalls.
+
+Fix PMIC GLINK probe ordering and PD charger ULOG removal races. Provide
+I2C Hub serial-engine program-RAM depth without accessing absent DMA
+registers.
+
+----------------------------------------------------------------
+Antony Kurniawan Soemardi (1):
+      dt-bindings: mfd: syscon: add qcom,msm8960-sps-sic
+
+Anurag Pateriya (2):
+      dt-bindings: cache: qcom,llcc: Add Nord compatible
+      soc: qcom: llcc: Add LLCC configuration for Nord
+
+Fenglin Wu (1):
+      dt-bindings: spmi: glymur-spmi-pmic-arb: Add compatible for Qualcomm Maili SoC
+
+Gopikrishna Garmidi (3):
+      firmware: qcom: scm: Allow QSEECOM on the Glymur QCB
+      firmware: qcom: scm: Allow QSEECOM on Kalambo CRD
+      soc: qcom: ubwc: Add Kalambo UBWC config
+
+Hemanth Selam (2):
+      firmware: qcom: fix typo "uninterruptable" in comment
+      soc: qcom: fix typo "upto" in comment
+
+Jingyi Wang (2):
+      dt-bindings: arm: qcom,ids: Add SoC ID for SM8950
+      soc: qcom: socinfo: Add SM8950 SoC ID
+
+Kathiravan Thirumoorthy (1):
+      dt-bindings: sram: describe the IPQ5424 IMEM as mmio-sram
+
+Konrad Dybcio (1):
+      soc: qcom: pmic_glink: Avoid losing early rpmsg probe
+
+Mohammad Rafi Shaik (1):
+      ASoC: dt-bindings: qcom,apr: Add modem_apps GLINK channel for shikra
+
+Mukesh Ojha (5):
+      dt-bindings: arm: qcom,ids: Add SoC ID for SM8975
+      soc: qcom: socinfo: Add SM8975 SoC ID
+      firmware: qcom: tzmem: Use DO_ONCE_SLEEPABLE() in qcom_tzmem_enable()
+      firmware: qcom_scm: handle empty PAS resource table
+      firmware: qcom_scm: align PAS resource table retry
+
+Muzaffer Kadir (2):
+      dt-bindings: firmware: qcom,scm: Document MSM8952 SCM
+      soc: qcom: ubwc: Add UBWC config for MSM8952
+
+Neil Armstrong (1):
+      soc: qcom: geni-se: provide PROG_RAM_DEPTH for I2C HUB Serial Engines
+
+Peng Fan (1):
+      soc: qcom: use assign_bit() where applicable
+
+Sasha Levin (1):
+      firmware: qcom: scm: Hide QCOM_SCM instead of depending on ARCH_QCOM
+
+Sneh Mankad (2):
+      dt-bindings: soc: qcom: stats: Add compatible for Shikra
+      soc: qcom: stats: Add stats compatible and config for Shikra
+
+Somesh Dey (1):
+      soc: qcom: geni-se: Drop unused icc_ddr parameter from geni_icc_get()
+
+Srinivas Kandagatla (1):
+      firmware: qcom: scm: Allow QSEECOM on ThinkPad T14s Gen 7
+
+Taniya Das (1):
+      dt-bindings: mailbox: qcom: Document Maili CPUCP mailbox controller
+
+Vitalii Skorkin (1):
+      firmware: qcom: tzmem: disable SHM bridge for SM7125 platform
+
+Yibo Tan (1):
+      soc: qcom: pmic_pdcharger_ulog: prevent work requeue during remove
+
+ .../devicetree/bindings/cache/qcom,llcc.yaml       |  55 +++++++-
+ .../devicetree/bindings/firmware/qcom,scm.yaml     |   3 +
+ .../bindings/mailbox/qcom,cpucp-mbox.yaml          |   1 +
+ Documentation/devicetree/bindings/mfd/syscon.yaml  |   1 +
+ .../devicetree/bindings/soc/qcom/qcom,apr.yaml     |   4 +-
+ .../devicetree/bindings/soc/qcom/qcom-stats.yaml   |  25 ++--
+ .../bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml   |   1 +
+ .../devicetree/bindings/sram/qcom,imem.yaml        |   1 -
+ Documentation/devicetree/bindings/sram/sram.yaml   |   1 +
+ drivers/firmware/qcom/Kconfig                      |   3 +-
+ drivers/firmware/qcom/qcom_scm-legacy.c            |   2 +-
+ drivers/firmware/qcom/qcom_scm.c                   |  19 ++-
+ drivers/firmware/qcom/qcom_tzmem.c                 |   3 +-
+ drivers/soc/qcom/llcc-qcom.c                       | 139 +++++++++++++++++++++
+ drivers/soc/qcom/pmic_glink.c                      |   3 +-
+ drivers/soc/qcom/pmic_pdcharger_ulog.c             |   2 +-
+ drivers/soc/qcom/qcom-geni-se.c                    |  20 ++-
+ drivers/soc/qcom/qcom_stats.c                      |   9 ++
+ drivers/soc/qcom/smp2p.c                           |  10 +-
+ drivers/soc/qcom/smsm.c                            |  16 +--
+ drivers/soc/qcom/socinfo.c                         |   2 +
+ drivers/soc/qcom/ubwc_config.c                     |   2 +
+ include/dt-bindings/arm/qcom,ids.h                 |   2 +
+ include/linux/soc/qcom/geni-se.h                   |   2 +-
+ include/linux/soc/qcom/llcc-qcom.h                 |   2 +
+ 25 files changed, 280 insertions(+), 48 deletions(-)
