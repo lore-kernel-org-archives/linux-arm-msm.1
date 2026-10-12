@@ -1,88 +1,88 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65CBC1A682C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E41A24322F1
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:38:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791797786; cv=none; b=VTI91rID+qPyjvjkT+7oDgbWcrp5SanNkI+UlBSgVJBwSFNSHr3kwzcisBC38KYdzt8+Bg1mqAT2oFKSra5mD64v7ItgrQ1rUjGrBvbFp7z5Z04GMHembMcu1YdCZTyp46988qFJzQmysJc0gUnhIUvLwQONopLbAIU5NNNs7UU=
+	t=1791797923; cv=none; b=bZVSogxs45/v54YtsOgImHvTco2Pk7udDL3ZUwRaX2us1/Exu28lKBQZhgnLBoe9MJkyMYYuMnjZRx/Hf2U5rm2GVc2e5TvCN4EIzJXhJBoLcW8smwaVV10qnLpQVeuHWtzkAap1WSodGp0I26ewMF43AoDM75czdS72HEnw6iA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791797786; c=relaxed/simple;
-	bh=LASZqrLY1ba6bJ9r9c5Rs/iTZdNGREMx91rXLmcgaGU=;
+	s=arc-20240116; t=1791797923; c=relaxed/simple;
+	bh=aob59RsURu+FUrDkWWq58XPi1H9rODiQexwwefJyNFI=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cMk1dH7YVp5+SmuE4LkFIbQzuQLYtiZyn4TgcRv24q6QiFJ1YSTusC9mCqrKyfvUMfyobhyCs0SgEYFKBn1mVE7c16hkJFdTaTBA5CtBbvU4GtTC6/BTssm+vBQKjvVNgNz9EtrWf0NgxY8wb0tatctJPJXw01gQWW6/y9NKOsg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IGPCwvt1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aMbSNjBZ; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=SrYuFFeFAyPUABIeFJsEoaukjoUjTjy+SigTCYAM4fn94fW0aYxrRQMx7rxENgIcjbS5Ui6plu6jwag343PBoItSNBBtm5mCSXI0EbOhb5yvIlHcCHxoyskJQm24LS+usa5H03NRerG26kEE+DTCoLRZ2eoxDy3f8Y/bGfnSTDo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=h8z7xHjA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=N30zaQql; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IGPCwvt1";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aMbSNjBZ"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KmGx1439187
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:24 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="h8z7xHjA";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="N30zaQql"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8LFbw1754855
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:38:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	aNfbkWr5wnS5VB6dUyT2oeWRhJlFNcm7TZmPyZKuY4Y=; b=IGPCwvt13Lzm4gbx
-	P9aWkNvONHsOjePWpvoUfgoEmW8Cea64bcyFtQImhd+LO0XgzcIrYOuiLwyxgqRR
-	YDsTqNEjmaNo4jqckklWnxyWty1Gl+Ol+oWq/QhM7PwFP9sHLfJVtJf8h+fSS6+V
-	p78yL+Y4OAnDQIjKzIE/CUkf+YJQilziTnQpytlBEKQbpZ9sApkTATS1wDDAWpIo
-	Gevloz8yVOEyD139YrxrwgnBxizta3qz7HOXXRMvhRv+z3q7mR3ugIRAaxsYAYgp
-	LJsemhBYvYVZYHVDqrBzRnU55YxeopSv7Yq02Gmqul1ngXonhzQYTeiL+NuHbL2a
-	LKzDgA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8qtkhbsn-1
+	pitDrUWGMmOcfY8ECPjobsbRe6e431atrR7IeBEqY+Q=; b=h8z7xHjAPN5cFzBB
+	4XNeAgc1lIToNWRrQOLGn0crzDvty7dptRljOkuQUcDp4PrU5bLgLCZcLqWHh0ZU
+	W2oRc7LGV06Gp3LXQlzbcoubX7I8cwF6c7Ku0r5ZXkG5D9bYPVNTG5hv5H0Pgxd8
+	PvUAEdHKERkmHcaU4Z4v1MJfWJZhxnfLKezw5BiRcoHLwTKfgQ35quTHpoDe8/32
+	oa6JY0w9lr4g0ZVoK9QH8Kms+W+uoenAhn2jYLMuFVt+GrZMC6eh7K9vJC9BnugX
+	9K2LnnQzboaWow5OdirYa9NkvmI8/5y+nk1cChWSmq/pV9S8vuowfRJZwWWrtEbq
+	/IvBjw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8j7125cj-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:24 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3a4a0017549so2646750a91.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:36:24 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:38:40 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2df8d1e91c9so35890475ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:38:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791797783; x=1792402583; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=aNfbkWr5wnS5VB6dUyT2oeWRhJlFNcm7TZmPyZKuY4Y=;
-        b=aMbSNjBZyK+dWR0h248/zaHUDKlpo24+UIWgaI7J6UgyD4OvAIgQLHt0PF1hI5vAyr
-         M10cb3sSmpGex2c4Nh/SJhAgKY2bok8QL3cWlM/p9VVWOuV+iPQO6VEXu2o5m3vEiphB
-         HY4H0MgqgXy3/nQQq/n++WSM+ArlbesGC7OmJcACm2iPrNx+roIjeyVebuutzDXxRIiE
-         A7J3wOIaaCBj0yjSeJO4QDCoIZL2LugUkhVJlsPrXUKQ8gkcHHutcfKbp9+NmvZ0ACx9
-         D467/YkVloHm3deME3b9JiGcWH3kTHWZI/nsr7wcArbo7I7bS+e7QFZAnIvrz56rPRMp
-         QtRg==
+        d=oss.qualcomm.com; s=google; t=1791797920; x=1792402720; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=pitDrUWGMmOcfY8ECPjobsbRe6e431atrR7IeBEqY+Q=;
+        b=N30zaQqltwp9CcdV8M5KWysFaYc3AgVZlkpZoUU2lPGqHLetgTTCuH2J0FRnQfhpdT
+         dBSGRINRngCnvFdbEtJPT0VkYnoG0w8nG22pc4XuFMAvVThU3ikIn6fuJoek8BfkhD8K
+         raWdxdKgR3fEYUURZfP3zHP+fNw1oYzkJ7VOuhqWQgCGqR7BbR2SIMMWo/9yR7jfbFcE
+         LwocOfAGJjMSYEP4nHKHKqhinWaE05fgvee8vO056nB+zcTF0b7FgdyH1nc3EJRB8kxb
+         pvw5W4oouGM17X7SOs1Neo03bZgFisLqR6g2n+Y3QzwprGg1K3e5yjhfpja7hW2eRxT0
+         OYHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791797783; x=1792402583;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aNfbkWr5wnS5VB6dUyT2oeWRhJlFNcm7TZmPyZKuY4Y=;
-        b=gc0ZEVvBD9McOLX4iQcxnrgHQXjXiIbHiGYId92LpF7qQdWn0GmuIedofaG+eXbdmM
-         LytdNTsU7pXFFUZM82ubGgK0XxFMED8d8d1Sc8cI+a+6suEXudhlDG0iOX2RH3Zyt54F
-         gLlhXUj08L5QLGB8bqmJ963DA3+hrb+iYi7NHTB4Wlu3F1rvKiEe5xfNV1dvq2snklMJ
-         EQFIp8d2seuaBUgO1sS0I2XPOXDNiGAAJZVzJajaK8jse+OcF0OlUZHbCgUpUjHmXORr
-         EUivSiq9kXF7m5dfirl5eam7WbFDgx6MFZ4eeJcuVPFReza5kJoeJZjzTrzMido4OlGv
-         a/jw==
-X-Forwarded-Encrypted: i=1; AKwUvBwgM/zJdQeQDEeFkjmnQqvTPvGzlt2T4n3eSdrhqGXI5GFaffn27Q32p6MkgfmYoqib0kk/ocAWuL/TqLV1@vger.kernel.org
-X-Gm-Message-State: AFq9FYKcehoCWnaFcHp3j6WNEK+HW3NMX6hIp7ZRAYMWWaoOcGVvX9KZ
-	3YMQ2tfEXR5dWJCWsxDPiG20neQaz/pcRkkcbwbEOyX01W2HXWinjuuqQKgIib/wNEuNRf3Agq1
-	eXLa7kPXecN0QHI3+6QDsYIezk+GFlVdLTDsOiclBTjBJudGCfutxCm49zCDN7tJz3CTt
-X-Gm-Gg: AYBFou2SVRWVtoLAI2Z8ZS6KkQ0K/kvP2I7ohUBJqG86TFdY1uyTYoH7xphZzze149R
-	KCAf7LPgZUhMZvzo5a0Fh75wnc1A3kIHk+xhNKCcPZMTAn+2mJqzz+jjUsy7m92RbH+LY4QHiwm
-	yRvsENeaHW9IgN2hlwTK2LMl9XAyMFNuGPUBG9sBFM6dXBduLI154cRNHoKfZm9tqZh1Nsjyaur
-	tqsRwynJ+6pYhHDNAOERMuKhOg6i1ysLtOwX4sUNSGv+ZGUzHlQaCq7GhkL1l5O/u9lhm+heM/Q
-	bLTZqBNFdxlTuV9odaxHjKpt1rnzWN2Ni4StjUhHGgytYTGZSBdkEqvHcuK9j1Q79qkSV1hassB
-	dqWGET18kfyTSQHOwLsoUngzbBR92xcaufe7Io7YjWgntWuRzYPsCxHmZxA7As0QiRj0aRJqxfm
-	yTnvFoR1am/kk=
-X-Received: by 2002:a17:90b:4d85:b0:3a4:c946:9f4e with SMTP id 98e67ed59e1d1-3ab3acdc386mr6665527a91.58.1791797783176;
-        Mon, 12 Oct 2026 02:36:23 -0700 (PDT)
-X-Received: by 2002:a17:90b:4d85:b0:3a4:c946:9f4e with SMTP id 98e67ed59e1d1-3ab3acdc386mr6665518a91.58.1791797782625;
-        Mon, 12 Oct 2026 02:36:22 -0700 (PDT)
-Received: from [10.79.117.80] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab8a393666sm10999279a91.15.2026.10.12.02.36.18
+        d=1e100.net; s=20260707; t=1791797920; x=1792402720;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=pitDrUWGMmOcfY8ECPjobsbRe6e431atrR7IeBEqY+Q=;
+        b=WvHc4hY8c4eOvs69/PgHlDoG40CkY6MtYVE0YCTWVecHI3F9flilgRWE7xOZKldnYO
+         1JJ7dmee7AKWXvWdxhPTMXuDUPSWew6hUmaLCMlNQmbGdVOvuAKsN7HU7NAm67Nzq/wM
+         8PfCdqhgBFsL+iTFSGr3hF9OyV5oEVntVzJGkKVDRk5aBxCqqLj+97AntUW8mSqP25lR
+         5ZABS5n1SP74dNefivy75ePEC+mqcQykSix04rk+xOca2dfemrrljAILCYHokQ5idGDO
+         o34WS07GX3O32gybxsmqARav8VvRlJYaGJMK+lLRnsWDIGcKmvaQRXYyuRmOrh/Ue3Lj
+         qwpA==
+X-Forwarded-Encrypted: i=1; AKwUvBxMpRPciRCguruRqkwZSX7wqx48r0CzuI+BVDIt+iA4+J5t5vbHFy2Lf6DZahRi6KWaObY3cEKcCKC0tTJG@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ4yRL/gsR7wKaSD/8ujt7Ljy8IX5+SEQK1hHsvkiC0i1sAKM1C
+	DQevNwobffHgfEiRO1dKOb1nZzHFj+Cj6gDmZlv6ijOAKtTIXTSPoA+GNtGl4bPsgMo3EKif6me
+	hRezQfp2j8rlJlJj/ucTt8Dtjcgt4pKknb3fQK8QsiGBHabRFhBpb4PnPXCAmKyMLRXObbAgpls
+	yE
+X-Gm-Gg: AYBFou1OZAqq2tHP8pR0krTt8LUTMQuRs3UP62/ehjQjJzlQArVjkWA/s7U41KCYXc+
+	fItTwhO43icXvYhqeaeg+/TT/L86UaOJTvImVWXWDAMjcomfvGGzPXg4DwHK9qkedbVYtGVUOpi
+	kE9XzbI6pvq80EGB17lXRftCM+XAi2HT4dFd2HI6K2+eF7duPtwGVS76b+gBWt7bonUIiYXZez2
+	it80nb9BqCSe1zolZBnI+zUEHX08s1UyYd1XOu+6wz7MgpMS6Y9HHxNHDWZUrx3xGgOO0jvVHwW
+	2r6RKaHamrgZnATWmuQvcS7Ghzk8ifXM5wVoYaDr+/dHQpdUim//+6r9AY4JtVkxZj1jeT2LKmE
+	YxZPiI+N7hWFPJ4P7M/LziGboC6nDwA==
+X-Received: by 2002:a17:902:f789:b0:2e8:3534:eeab with SMTP id d9443c01a7336-2e842aa60c0mr76887965ad.14.1791797919645;
+        Mon, 12 Oct 2026 02:38:39 -0700 (PDT)
+X-Received: by 2002:a17:902:f789:b0:2e8:3534:eeab with SMTP id d9443c01a7336-2e842aa60c0mr76887735ad.14.1791797919091;
+        Mon, 12 Oct 2026 02:38:39 -0700 (PDT)
+Received: from [192.168.29.10] ([49.37.155.134])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e841a0124csm41234105ad.5.2026.10.12.02.38.33
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 02:36:21 -0700 (PDT)
-Message-ID: <7a091ebe-86d7-4edb-9fa3-9026d2c44176@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 15:06:16 +0530
+        Mon, 12 Oct 2026 02:38:38 -0700 (PDT)
+Message-ID: <f7530ce2-ed7c-422e-9b15-cfdbc265c77b@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 15:08:31 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,264 +90,266 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] dt-bindings: remoteproc: qcom: Add Glymur OOBMSS PAS
- binding
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-References: <20261009-oob-support-glymur-v1-0-96cc8ffcced3@oss.qualcomm.com>
- <20261009-oob-support-glymur-v1-1-96cc8ffcced3@oss.qualcomm.com>
- <20261012-impossible-illustrious-dog-702afc@quoll>
+Subject: Re: [PATCH v4 3/7] tee: qcomtee: Allow object invokes from kernel
+ clients
+To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20261006-qcom_uefisecapp_migrate_qcomtee-v4-0-bf1c8e2a64ab@oss.qualcomm.com>
+ <20261006-qcom_uefisecapp_migrate_qcomtee-v4-3-bf1c8e2a64ab@oss.qualcomm.com>
+ <daa0983a-5fc2-462c-92f0-6ad87dfd71de@oss.qualcomm.com>
 Content-Language: en-US
-From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
-In-Reply-To: <20261012-impossible-illustrious-dog-702afc@quoll>
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Organization: Qualcomm
+In-Reply-To: <daa0983a-5fc2-462c-92f0-6ad87dfd71de@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX+P1l2rU9AixE
- uICWbwGCflh9ENg+8TmGFg6oj0a8nUG0hJvhGRVStGjsfhvJYn4EzpLuTHCaPyZxboEBsu/YKMF
- mU4IwlBJjS2JoF1VVEYcO0xkD7NW0r4PGrL3eLI+QKRa8Hwj57/5zVVZm3amwRbrg/A+iP3cfdf
- VocyoMG8WGM4Pjc9Zp8EfBbtafhG1q5LX6saA6i7p6/rvGmd7KHggGSYNvF3KZh1qd3XptnMLxm
- qpohVx121eZCZLAYfuJt4R2OIltLcePuGD+M7BXhE6e3zagYWmx4QaNBoQnn94ORIXPGoCAF4ZO
- qQtU/TPHIYjxDBjD8HiUtWKpn+s1xCXiGhIpy0uo5DZ/8HKADqfTGr1P3lX0Nuhtc/wvLgmMIw3
- 7U5azhUEKRJ7dp9tXspTqoLY8GOKOytgjBYmHvXjg1rqLsLOUeAulZKUnBOy1eURM7zETc1adZV
- EmbFG0VorqaUmYjmwFw==
-X-Authority-Analysis: v=2.4 cv=c8U+0h9l c=1 sm=1 tr=0 ts=6accaa18 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX26kenr7SPEiK
+ QJBeRK2+6U60gPLgv053wJEZAFhEDHuCYBmV3nT3QFU6ifaLt+GOK6W+RKdMY6V0TTwyTSO9u3v
+ 42w9YlBA+dS+5ewGkge/3wFXXrcqO1Q=
+X-Proofpoint-GUID: d8j_jDZZDmbz2njtRMDtSLzN_FKfYjA1
+X-Proofpoint-ORIG-GUID: d8j_jDZZDmbz2njtRMDtSLzN_FKfYjA1
+X-Authority-Analysis: v=2.4 cv=ePGGH3p1 c=1 sm=1 tr=0 ts=6accaaa0 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ivpbP8R7Mhpy7qfOLL/Q+g==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=P-IC7800AAAA:8 a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=UONzWho2_RmusEta7RoA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
- a=d3PnA9EDa4IxuAV0gXij:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfXw71FMPSJZh1g
- e0a/QxLTTwOggcfJ719bM+rOd+1hyGQhfsZXQVz1DxZXmVAOYt/mVVwZk1glv3FejqofTmKh/AM
- esY5HJc4XVoG3D7glarZgMXEAC2ojqo=
-X-Proofpoint-ORIG-GUID: mPmqERiN-s4hD0KD-pGOy6jgHePjDvxq
-X-Proofpoint-GUID: mPmqERiN-s4hD0KD-pGOy6jgHePjDvxq
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=3dGLg5FSYMxJAeFSFNkA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX7tOsfgUmrgfK
+ Ko+4Xqv3mszCYBaQsMe0OqV+57kGFbGWHK9OaShlaYw246874ecdLtlevFFMlUT1nsMrWx4BCVf
+ Kc4zDV0Id3yg7fnocof7xYktHNiq/pQajA3Gc4fi8dNU254u8xRWYERwRSITf63FNoH/qDDZ4WU
+ Y8tB6OYxReKDmcCSNgA6QlxWNtgVwDb/mHjIVOeGcqY2Ez/fhiTHWfpJiiKrTW85DRvBMz6icNU
+ 8/3VlW+lx2MUzaNJTtnrTEjF7R/ru+CgGaRDNw5mJND+RQJFaxE/gmzzEIQtnivcqNqTki6kQcz
+ 4ey8G3oFw5rc0aoLCleNww2dYh7xs/9Bx2ImADE4awDbGImcbk86M+QIRILmlQHijZhAZLbl1H2
+ 6Sxo3k0qmI11E1KD54O3M9MU8RE+0a4KcWz6oamgYO9Iu3zqM71fqaA1hYTZRczfU4FbsnZzHZ+
+ 2wy04w1vGYxFXMyvtnA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- priorityscore=1501 spamscore=0 impostorscore=0 clxscore=1015 suspectscore=0
+ spamscore=0 clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120038
 
+Hi Amir,
 
-
-On 10/12/2026 2:25 PM, Krzysztof Kozlowski wrote:
-> On Fri, Oct 09, 2026 at 12:47:39PM +0530, Anvesh Jain P wrote:
->> Document the Glymur OOBMSS PAS node with its secure GLink edge,
->> shared-memory signaling, firmware carveouts, and power resources.
->>
+On 09-10-2026 06:49 am, Amirreza Zarrabi wrote:
 > 
-> A nit, subject: drop second/last, redundant "binding". The
-> "dt-bindings" prefix is already stating that these are bindings.
-> See also:
-> https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
->
-
-
-Hi Krzysztof,
-
-Thanks for reviewing this series. I’ll drop the redundant “binding” from
-the subject in the next revision.
-
->> Signed-off-by: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
+> 
+> On 10/6/2026 10:33 PM, Harshal Dev wrote:
+>> From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+>>
+>> QCOMTEE currently treats UBUF parameters as userspace addresses and
+>> applies userspace restrictions when invoking the root object. This is
+>> not suitable for object invocation requests issued by kernel clients.
+>>
+>> Use the kernel_ctx flag to distinguish kernel client requests from
+>> userspace requests. For kernel contexts, do not mark UBUF parameters as
+>> user addresses, and allow permitted root-object operations to proceed
+>> without applying the userspace-only checks.
+>>
+>> This allows in-kernel users of tee_client_object_invoke_func() to issue
+>> object invocation requests through the qcomtee backend.
+>>
+>> Co-developed-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+>> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+>> Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+>> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 >> ---
->>  .../bindings/remoteproc/qcom,glymur-oob-pas.yaml   | 156 +++++++++++++++++++++
->>  1 file changed, 156 insertions(+)
+>>  drivers/tee/qcomtee/call.c           | 38 ++++++++++++++++++++++++------------
+>>  drivers/tee/qcomtee/qcomtee_object.h |  5 +++--
+>>  include/linux/tee_drv.h              |  5 ++++-
+>>  3 files changed, 32 insertions(+), 16 deletions(-)
 >>
->> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oob-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oob-pas.yaml
->> new file mode 100644
->> index 000000000000..bd4f397da40f
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,glymur-oob-pas.yaml
->> @@ -0,0 +1,156 @@
->> +# SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/remoteproc/qcom,glymur-oob-pas.yaml#
+>> diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
+>> index 3de54af45719..c97afaa1b4aa 100644
+>> --- a/drivers/tee/qcomtee/call.c
+>> +++ b/drivers/tee/qcomtee/call.c
+>> @@ -193,7 +193,7 @@ int qcomtee_objref_from_arg(struct tee_param *param, struct qcomtee_arg *arg,
+>>   * @u: QTEE arguments.
+>>   * @params: TEE parameters.
+>>   * @num_params: number of elements in the parameter array.
+>> - * @ctx: context in which the conversion should happen.
+>> + * @oic: context to use for the current invocation.
+>>   *
+>>   * It assumes @u has at least @num_params + 1 entries and has been initialized
+>>   * with %QCOMTEE_ARG_TYPE_INV as &struct qcomtee_arg.type.
+>> @@ -202,7 +202,7 @@ int qcomtee_objref_from_arg(struct tee_param *param, struct qcomtee_arg *arg,
+>>   */
+>>  static int qcomtee_params_to_args(struct qcomtee_arg *u,
+>>  				  struct tee_param *params, int num_params,
+>> -				  struct tee_context *ctx)
+>> +				  struct qcomtee_object_invoke_ctx *oic)
+>>  {
+>>  	int i;
+>>  
+>> @@ -210,8 +210,14 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
+>>  		switch (params[i].attr) {
+>>  		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
+>>  		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
+>> -			u[i].flags = QCOMTEE_ARG_FLAGS_UADDR;
+>> -			u[i].b.uaddr = params[i].u.ubuf.uaddr;
+>> +			if (oic->kernel_ctx) {
+>> +				u[i].flags = 0;
+>> +				u[i].b.addr = params[i].u.ubuf.addr;
+>> +			} else {
+>> +				u[i].flags = QCOMTEE_ARG_FLAGS_UADDR;
+>> +				u[i].b.uaddr = params[i].u.ubuf.uaddr;
+>> +			}
+>> +
+>>  			u[i].b.size = params[i].u.ubuf.size;
+>>  
+>>  			if (params[i].attr ==
+>> @@ -223,7 +229,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
+>>  			break;
+>>  		case TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT:
+>>  			u[i].type = QCOMTEE_ARG_TYPE_IO;
+>> -			if (qcomtee_objref_to_arg(&u[i], &params[i], ctx))
+>> +			if (qcomtee_objref_to_arg(&u[i], &params[i], oic->ctx))
+>>  				goto out_failed;
+>>  
+>>  			break;
+>> @@ -260,7 +266,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
+>>   * @params: TEE parameters.
+>>   * @u: QTEE arguments.
+>>   * @num_params: number of elements in the parameter array.
+>> - * @ctx: context in which the conversion should happen.
+>> + * @oic: context to use for the current invocation.
+>>   *
+>>   * @u should have already been initialized by qcomtee_params_to_args().
+>>   * This also represents the end of a QTEE invocation that started with
+>> @@ -270,7 +276,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
+>>   */
+>>  static int qcomtee_params_from_args(struct tee_param *params,
+>>  				    struct qcomtee_arg *u, int num_params,
+>> -				    struct tee_context *ctx)
+>> +				    struct qcomtee_object_invoke_ctx *oic)
+>>  {
+>>  	int i, np;
+>>  
+>> @@ -288,7 +294,8 @@ static int qcomtee_params_from_args(struct tee_param *params,
+>>  			break;
+>>  		case QCOMTEE_ARG_TYPE_OO:
+>>  			/* TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT */
+>> -			if (qcomtee_objref_from_arg(&params[np], &u[np], ctx))
+>> +			if (qcomtee_objref_from_arg(&params[np], &u[np],
+>> +						    oic->ctx))
+>>  				goto out_failed;
+>>  
+>>  			break;
+>> @@ -304,7 +311,7 @@ static int qcomtee_params_from_args(struct tee_param *params,
+>>  	/* Undo qcomtee_objref_from_arg(). */
+>>  	for (i = 0; i < np; i++) {
+>>  		if (params[i].attr == TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT)
+>> -			qcomtee_context_del_qtee_object(&params[i], ctx);
+>> +			qcomtee_context_del_qtee_object(&params[i], oic->ctx);
+>>  	}
+>>  
+>>  	/* Release any IO and OO objects not processed. */
+>> @@ -357,7 +364,8 @@ static int qcomtee_params_check(struct tee_param *params, int num_params)
+>>  }
+>>  
+>>  /* Check if an operation on ROOT_QCOMTEE_OBJECT from userspace is permitted. */
+>> -static int qcomtee_root_object_check(u32 op, struct tee_param *params,
+>> +static int qcomtee_root_object_check(struct qcomtee_object_invoke_ctx *oic,
+>> +				     u32 op, struct tee_param *params,
+>>  				     int num_params)
+>>  {
+>>  	/* Some privileged operations recognized by QTEE. */
+>> @@ -366,6 +374,9 @@ static int qcomtee_root_object_check(u32 op, struct tee_param *params,
+>>  	    op == QCOMTEE_ROOT_OP_ADCI_SHUTDOWN)
+>>  		return -EINVAL;
+>>  
+>> +	if (oic->kernel_ctx)
+>> +		return 0;
+>> +
+>>  	/*
+>>  	 * QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS is to register with QTEE
+>>  	 * by passing a credential object as input OBJREF. TEE_OBJREF_NULL as a
+>> @@ -430,7 +441,8 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
+>>  	/* Get an object to invoke. */
+>>  	if (arg->id == TEE_OBJREF_NULL) {
+>>  		/* Use ROOT if TEE_OBJREF_NULL is invoked. */
+>> -		if (qcomtee_root_object_check(arg->op, params, arg->num_params))
+>> +		if (qcomtee_root_object_check(oic, arg->op, params,
+>> +					      arg->num_params))
+>>  			return -EINVAL;
+>>  
+>>  		object = ROOT_QCOMTEE_OBJECT;
+>> @@ -438,7 +450,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
+>>  		return -EINVAL;
+>>  	}
+>>  
+>> -	ret = qcomtee_params_to_args(u, params, arg->num_params, ctx);
+>> +	ret = qcomtee_params_to_args(u, params, arg->num_params, oic);
+>>  	if (ret)
+>>  		goto out;
+>>  
+>> @@ -456,7 +468,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
+>>  
+>>  	if (!result) {
+>>  		/* Assume service is UNAVAIL if unable to process the result. */
+>> -		if (qcomtee_params_from_args(params, u, arg->num_params, ctx))
+>> +		if (qcomtee_params_from_args(params, u, arg->num_params, oic))
+>>  			result = QCOMTEE_MSG_ERROR_UNAVAIL;
+>>  	} else {
+>>  		/*
+>> diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomtee/qcomtee_object.h
+>> index 5f40617361fc..d3740099fae0 100644
+>> --- a/drivers/tee/qcomtee/qcomtee_object.h
+>> +++ b/drivers/tee/qcomtee/qcomtee_object.h
+>> @@ -113,8 +113,9 @@ struct qcomtee_buffer {
+>>   * @b: address and size if the type of argument is a buffer.
+>>   * @o: object instance if the type of argument is an object.
+>>   *
+>> - * &qcomtee_arg.flags only accepts %QCOMTEE_ARG_FLAGS_UADDR for now, which
+>> - * states that &qcomtee_arg.b contains a userspace address in uaddr.
+>> ++ * If %QCOMTEE_ARG_FLAGS_UADDR is set in &qcomtee_arg.flags then it implies
+>> ++ * that &qcomtee_arg.b contains a userspace address in uaddr.
+>> ++ * Otherwise, &qcomtee_arg.b contains a kernel address in addr.
 > 
-> Filename must match the compatible.
+> Fix the doc, remove extra `+`, then
 >
 
-Ack, will rename binding file.
+Ack, many thanks for your careful review.
 
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Qualcomm Glymur Out-of-Band Management Subsystem (OOBMSS) PAS
->> +
->> +maintainers:
->> +  - Anvesh Jain P <anvesh.p@oss.qualcomm.com>
->> +
->> +description: |
->> +  Qualcomm Glymur Out-of-Band Management Subsystem (OOBMSS) contains two
->> +  processors running Zephyr, managed together as one remoteproc instance.
->> +  The Out-of-Band Trusted Execution Environment (OOB-TEE) is the primary
->> +  processor. The OOB-Non-Secure processor is an auxiliary processor that
->> +  depends on the primary processor and cannot function independently.
->> +
->> +  The primary processor runs the primary image, while the auxiliary
->> +  processor runs the secondary image. Each processor has its own DTB.
->> +  The two images and their DTBs have separate PAS identifiers for
->> +  authentication and dedicated reserved-memory carveouts.
->> +
->> +  OOBMSS is booted by earlier-stage firmware and uses an XO clock and the
->> +  CX and MX power domains. Shared Memory Point-to-Point (SMP2P) provides
->> +  boot, shutdown, handover and ping/pong signaling, as well as fatal error
->> +  notifications. The subsystem exposes a secure GLink edge to the host,
->> +  with doorbell interrupts provided by the Inter-Processor Communication
->> +  Controller (IPCC).
->> +
->> +properties:
->> +  compatible:
->> +    enum:
->> +      - qcom,glymur-oobmss-pas
->> +
->> +  reg:
->> +    maxItems: 1
->> +
->> +  interrupts:
->> +    items:
->> +      - description: Watchdog interrupt
->> +      - description: Fatal interrupt
->> +      - description: Ready interrupt
->> +      - description: Handover interrupt
->> +      - description: Stop acknowledge interrupt
->> +      - description: Pong interrupt
->> +
->> +  interrupt-names:
->> +    items:
->> +      - const: wdog
->> +      - const: fatal
->> +      - const: ready
->> +      - const: handover
->> +      - const: stop-ack
->> +      - const: pong
->> +
->> +  clocks:
->> +    items:
->> +      - description: XO clock
->> +
->> +  clock-names:
->> +    items:
->> +      - const: xo
->> +
->> +  power-domains:
->> +    items:
->> +      - description: CX power domain
->> +      - description: MX power domain
->> +
->> +  power-domain-names:
->> +    items:
->> +      - const: cx
->> +      - const: mx
->> +
->> +  memory-region:
->> +    items:
->> +      - description: Secure firmware carveout
->> +      - description: Secure device tree carveout
->> +      - description: Non-secure firmware carveout
->> +      - description: Non-secure device tree carveout
->> +
->> +  firmware-name:
->> +    items:
->> +      - description: Secure firmware
->> +      - description: Secure device tree firmware
->> +      - description: Non-secure firmware
->> +      - description: Non-secure device tree firmware
->> +
->> +  qcom,smem-states:
->> +    minItems: 2
->> +    description: States used by the AP to signal OOBMSS
->> +
->> +  qcom,smem-state-names:
->> +    minItems: 2
->> +    description: The names of the state bits used for SMP2P output
->> +
->> +required:
->> +  - compatible
->> +  - reg
->> +  - power-domains
->> +  - power-domain-names
->> +  - memory-region
+Regards,
+Harshal 
+> Reviewed-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 > 
-> firmware-name as well, I guess?
+> - Amir
 > 
->
-
-I think firmware-name should remain optional. The driver provides
-defaults when loading images, and attach-only operation does not request
-firmware.
-
->> +
->> +allOf:
->> +  - $ref: /schemas/remoteproc/qcom,pas-common.yaml#
->> +
->> +unevaluatedProperties: false
->> +
->> +examples:
->> +  - |
->> +    #include <dt-bindings/clock/qcom,rpmh.h>
->> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
->> +    #include <dt-bindings/interrupt-controller/irq.h>
->> +    #include <dt-bindings/mailbox/qcom-ipcc.h>
->> +    #include <dt-bindings/power/qcom,rpmhpd.h>
->> +    #define IPCC_MPROC_OOB_S 56
->> +    #define IPCC_MPROC_OOB   55
+>>   */
+>>  struct qcomtee_arg {
+>>  	enum qcomtee_arg_type type;
+>> diff --git a/include/linux/tee_drv.h b/include/linux/tee_drv.h
+>> index 369c87ad0205..367208210a32 100644
+>> --- a/include/linux/tee_drv.h
+>> +++ b/include/linux/tee_drv.h
+>> @@ -83,7 +83,10 @@ struct tee_param_memref {
+>>  };
+>>  
+>>  struct tee_param_ubuf {
+>> -	void __user *uaddr;
+>> +	union {
+>> +		void *addr;
+>> +		void __user *uaddr;
+>> +	};
+>>  	size_t size;
+>>  };
+>>  
+>>
 > 
-> Drop these two
->
-
-noted, will remove these definition.
->> +
->> +    remoteproc@1f000000 {
->> +        compatible = "qcom,glymur-oobmss-pas";
->> +        reg = <0x1f000000 0x30000>;
->> +
->> +        interrupts-extended = <&intc GIC_SPI 86 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 0 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 1 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 2 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 3 IRQ_TYPE_EDGE_RISING>,
->> +                              <&smp2p_oobmss_in 9 IRQ_TYPE_EDGE_RISING>;
->> +        interrupt-names = "wdog", "fatal", "ready", "handover", "stop-ack", "pong";
->> +
->> +        clocks = <&rpmhcc RPMH_CXO_CLK>;
->> +        clock-names = "xo";
->> +        power-domains = <&rpmhpd RPMHPD_CX>,
->> +                        <&rpmhpd RPMHPD_MX>;
->> +        power-domain-names = "cx", "mx";
->> +
->> +        memory-region = <&oob_secure_mem>, <&oobdtbqc_mem>,
->> +                        <&oob_nonsecure_mem>, <&oobdtboem_mem>;
->> +        firmware-name = "qcom/glymur/oobmss_tee.mbn",
->> +                        "qcom/glymur/oobmss_qc_dtb.mbn",
->> +                        "qcom/glymur/oobmss_ns.mbn",
->> +                        "qcom/glymur/oobmss_oem_dtb.mbn";
->> +        qcom,smem-states = <&smp2p_oobmss_out 1>,
->> +                           <&smp2p_oobmss_out 8>;
->> +        qcom,smem-state-names = "stop", "ping";
->> +
->> +        glink-edge {
->> +            interrupts-extended = <&ipcc IPCC_MPROC_OOB_S
-> 
-> Just use numbers here
->
-
-Ack.
-> Best regards,
-> Krzysztof
-
--- 
-Best Regards,
-Anvesh
 
