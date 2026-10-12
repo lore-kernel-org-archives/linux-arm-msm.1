@@ -1,248 +1,216 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 554EE45C6F0
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 08:48:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D5BA362149
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 08:48:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791794897; cv=none; b=IKBqU4vvLODUyI8kOsn6v1Q3G2IE7HZYbrn1iKc1nxFX3a28xS2ewRAEDaEWgA+gJGX4oUzUAInRsNudY+ZCXXrPG7N4sORFkyawgt15LEDB2bx4mVuVq9UuMSPUUYbvFRwF/vc1D6K/QovjxoCT7Wbrtw0E164nR8ntgVdjNcg=
+	t=1791794933; cv=none; b=racQ8RFgQvw6QZk42whHbtabW5UeFv6MvlhQEBoY3L5/o5Aa4+XARzERNUvt/cyhzLhHoniBnFExeHkIm0ZPmMIO9ClkxbleI4dnwTrI1EzIaXUCzZunUWwjviEBmzmLKRszGygB0pEhLKO/xnDA0aEREm/l0K3fSoS9o/u1STQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791794897; c=relaxed/simple;
-	bh=w7r2svvWZl17n1VZIdfuMLsZzqmBQZqB6TJKXudUmGo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Y0MCsosLeAXxV+BUfK820RdwFtBNKAZVenELFw+7vzemEDEXLCyt9G2gF1QFK/6cudvSIzQ91Y9RMIMFCqdeFllXsGiYkEFvfhlT+Iv8TqDZ1rrp6VoxstmOEug3nH99zslTVMyzmwEslYqbg2p9fEkR4xH70S6i74VE/ytDQ/U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YmZiRkPV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jwT9P5rk; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791794933; c=relaxed/simple;
+	bh=1eOpVzSHBaZ6yZXrZrTN/Es+LXfRmjlxWvWnixDQFmo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BUs3FZmV+r6heeUMsVOvTz0i07DwodgGgWoEPDYlBwWWlEXfLc9uk7x6djUZWsGzVP4D3EaQLxFOaU7Zytzz9+OCWrRt7pngQ8gzTvSuIGlqgCGiEuQqsVqUq81inZJhDXtyP++NAEC9egsk0fBRAhVwZ5hptARcJGgnZd69udM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=VskVFhY1; arc=none smtp.client-ip=209.85.221.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YmZiRkPV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jwT9P5rk"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KhZK741672
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 08:48:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	D+PwqydQSMK0RfY9WDLxxuX/FrSgdWszK9rNSdMn3W0=; b=YmZiRkPVKRbbhwwH
-	JPMPAief4Er4v12OGm6y3ox0KmODjuQv8WO5KpTpvYNUQRgKLT77FAqZxe8uRCB+
-	uSrx5jQ+HC9Pxkme0AcRoh6uQ7w7skuI/KqN+aOG7q5XprDu/7ct677noLINQq7o
-	vuqDeOM4D0dPzq5h4IA/JOvuA+2hP7R5jwyz5KaXyOlYnWwbL0wV//SucmdSyBQk
-	QLLngJuoxy4OnMe33tJ/RroxWTzyDWE6PmaDpKTQ5h8GrTJKGAuP0AIvzOXDFKB/
-	9HkUskNeTiY2oLZ6pJvDaL8Gs7KyNFxIrsiSnOeajjYJ6aHocAenHOMNhdrSrr28
-	40qLWg==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8j6dhwmk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 08:48:15 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-86fa6b15ed3so2569676b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 01:48:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="VskVFhY1"
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48afe0081a6so1099319f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 01:48:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791794893; x=1792399693; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=D+PwqydQSMK0RfY9WDLxxuX/FrSgdWszK9rNSdMn3W0=;
-        b=jwT9P5rkEvQmU0S4wDQA13D2yrxLiyhjyvcg30WGA8P6V++6bJl08dd9EJ7+R1bJhc
-         gfcn+naqwcJElahemDVYxvAoJxGT2bk27mAcfzTHZ8gq4E4yhr8KSqmfEJ7cdv1EON0g
-         1oJhW6NCI6WmJJN3uC9paZassqptJAv/GUdWfyLYqB2fkmij6YdABjhoijA/6gqSZ0Yt
-         kQTzyxP+kw+pTc5mxUsYI0YSR3wmY/6R6SJN2B887j58dQdBneliH5mLhxOp36BxVraM
-         lNC/UkZHTEEK6MMWBtzZ7OE4dXdCLG4R3LhsDi7BVlyF+c4uZiuMgxLaE7mdWk6VXzmr
-         3GQw==
+        d=linaro.org; s=google; t=1791794929; x=1792399729; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3cASW6w1EYZAgoYuqInWi7bvGxpflIrfTx3mhO3Baq4=;
+        b=VskVFhY1h/PWH/3Lg6myfccXMSXciiA1OLXid3aqdnYs1Fpp5Bpuxs9Or2TTEUAUgm
+         ANrLA5Ycmp0ba3dDqCDPxV2/JnOZMpMI0Sjp5FCSziaAmrG00/ZpF5v53vhGCeRB5E/I
+         xTso93mz8h3/BYWhpmbeiwgaWMwpbIL2JhCnJqwcbtrZwhrIj1BaF9785Rs4ZDLI9Ydf
+         REb1osXC4qlY5mU5AgDYeMiT/fMJe3qzW8WYa7t65mYCYA0j10jsOGMNntuesTFUxe2f
+         bNJvRGtKoeh22HhUOaxGrK5c/zVk2oanarDG1Y3tn7Bpn/4Vgx/H6N7SIKKIhH8QVHz+
+         O21w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791794893; x=1792399693;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=D+PwqydQSMK0RfY9WDLxxuX/FrSgdWszK9rNSdMn3W0=;
-        b=R0y5JvYyf+/0AjhE1Xu0mlh1GR5YL48DTxtKUYnGnbSAEGwzJo8JeRFDvMjMWK+hpN
-         735WB2ZTd3osRYZiyacwPOlaYjH/LW83X5p5GUTXlroG4Y2OtRBnu2sMq//4umFD9Cku
-         qlvtwLhb96+fpXvXmjV3loosYGrl//tCao788K3wksCI7Qh3HW1tYsdqnFHAchWZCEh0
-         BPp9OjYdv41Cux0pcglt87dw2Mi50CFR+64FQQf463fMukwIR22j/FKEyZR/Y3dKaqgT
-         MeTTN5egyi8wEki+kmV0jsu/IBZUXODKVW8YGbs/OpUSSN1XaEizaq5nk8jEkduNb+Xm
-         T/5w==
-X-Forwarded-Encrypted: i=1; AKwUvBwX4r4V5pJyAUuEEtsjsq9tScoUlQRAc1g0ufAX8eCazDsRov4C/rQXUVHJUjb5QBQNvZ4cHZGEKlH4sYMv@vger.kernel.org
-X-Gm-Message-State: AFq9FYIAVsuG7ZAl5ATP4hSCYOBDWtjikY6mgY8Ye4qoIoKJ98dlAQmt
-	4hzIuYZX7qH6M8ha+/nq+advhVLfLc6bh0cF6DY1G23vWfV4plVTSjsiOkOZSgWmukaUuBjACSl
-	JMAkixExRJD3vBzT4aYJAXJ4urG5T8qjUFB16Uer7wdTu5koUOword8W9Oc/QpFY5dxDL
-X-Gm-Gg: AYBFou2kFlZ3287Y/q5qP4fWNElP+mN9JoSWH8xnotzbj2A1/0IYf8AY0LizRdkvN9H
-	vyOfA0/+NgD2DnlFU63RXwLPM1KliD/Z4Fgsx3uw2QPzg96IPJoLmcwYDFr2wFg0XQOwnSLPlQq
-	5n0AkgOXY/K1DasQnq/ySPpn6Yw+9pxA/uhrgU1Ztnr8MEuwQW1QntLAf3cQf29eDD9YoZ2d6hH
-	6XT+ezHDUATziMTG1bZvE4krRl9rnmh0v1HOyUBB/wWE5ZBoCGLbmGX5FFatddQuJBu31qNfbxt
-	8kCxrHWXGXVhYmc3WzDFSNXtvaM9Unuw4WFF77QinqARHBcECgPi1M6spUI6Gcvk4VRfvqJ38Z5
-	dBZMCkjAo6NOsNNy08jmo/gNy65bi6yEe
-X-Received: by 2002:a05:6a00:c1c4:10b0:899:5117:2ac with SMTP id d2e1a72fcca58-899511703bamr2681159b3a.46.1791794893082;
-        Mon, 12 Oct 2026 01:48:13 -0700 (PDT)
-X-Received: by 2002:a05:6a00:c1c4:10b0:899:5117:2ac with SMTP id d2e1a72fcca58-899511703bamr2681147b3a.46.1791794892529;
-        Mon, 12 Oct 2026 01:48:12 -0700 (PDT)
-Received: from [10.218.42.145] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-896c3cc80b0sm3717202b3a.29.2026.10.12.01.48.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 01:48:12 -0700 (PDT)
-Message-ID: <305cf7a9-7ec0-49a1-a990-101536beaae8@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 14:18:07 +0530
+        d=1e100.net; s=20260707; t=1791794929; x=1792399729;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3cASW6w1EYZAgoYuqInWi7bvGxpflIrfTx3mhO3Baq4=;
+        b=wrzIRS0nj7WVja9I8g2jGTbQ8tObUKVOrwixzojGJW3M4E+vNKChf7qsNO9cJt2Q5S
+         Yyaf/g4I50W0AoyTtdH33XrtHd6StdAh6j57jvnCr8vWO44k36ILWLAr/6SnxQSqLt5r
+         s+kytx2mm0qjKLI5cNikukWBVxs+yF7vbhkODnninloTVxai7twQF7Ebdc/BeQUGSpVr
+         EHU+RQm3cVy9Mx3iPwaIhyyWZztVQdZN7XDpmgaRx+sixFBxDYaTm58aLo77z5rtw8mF
+         Z1IVHX69hgW4ittBGa/Xda0MtsptMWqmqV/71gDiEzndCpTYUBuRjQv/QgNaeNu56NdC
+         GRpg==
+X-Forwarded-Encrypted: i=1; AKwUvBzSthGQWTjKqVm28L/w6PQ3Y9pPzgaBUckdAX6fZOO2+qZhpXeeZaup4+odDBBN3AByqF4KOmvK+r2C9W+M@vger.kernel.org
+X-Gm-Message-State: AFq9FYJo3m+pF6PTL/aToryW+c8Iyal9qwrtExxfsMTJVIxhv1c3fQ0j
+	lDTCRjCHQCjMtS8Z81adVhhfSaHEagfaZs1y8cEEzWbZIBdpiaG1zXw4h/FBQSHG1kM=
+X-Gm-Gg: AYBFou12tQF7Zpze+/PV0a/iAubEYzn0aleHyfcbtnKC6es81Eqal+h/VzgrZybFFqn
+	TJGk3nBOhjDvLxhJT6tum0UFZa93lpAxv0AUxJNHyeYk+y7sNwQgHN1RZmjIdnacaNNtI/v4erc
+	jwr3DAtxCCQQM5r9vG8uqMFsyDkxam2raPyaoe4oLAkICYKndMJyEKmEL9rcs8qSOYAI0BrcMLQ
+	ryEcPfPIQO2m3+fwHOIreC77MlAVeLjlKuaKzOsJzUkri++TKy7WS2rnmQqvs7eX7Puinyy091p
+	NOULgAyk14S2oXFv9pVx0E3oO8gFeyvx2Zbqlu4j3QNIfiCclj0yCKXD1ZEaCAATxa1DddA0OFr
+	/ZhmGQC0oii6ddziGQjiXECknFG2p4QCgYA+8BmY4upeIE6Xs5Q82Gu/8tvDcTiKSjVosYR+bQM
+	oRKqBy2apMquCEg/7t5SQ0Z9/BmdsrjHyw2UruDZpCPgG91VFAfpOlJCtvtC7rtER3fsxWzdKtW
+	2hfGPOuA2o=
+X-Received: by 2002:a05:600c:4e91:b0:4a1:7ec7:a479 with SMTP id 5b1f17b1804b1-4a18e4f56bcmr174368605e9.33.1791794929369;
+        Mon, 12 Oct 2026 01:48:49 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff25:4f41:fef7:ab03:44ed:97e7])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a19f249692sm132645895e9.3.2026.10.12.01.48.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 01:48:48 -0700 (PDT)
+Date: Mon, 12 Oct 2026 10:48:43 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] remoteproc: qcom: pas: Decide early_boot attach
+ at probe time
+Message-ID: <asye6zJKwBBpcrCX@linaro.org>
+References: <20261011022802.4069489-1-shengchao.guo@oss.qualcomm.com>
+ <20261011022802.4069489-2-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] PCI: dwc: Power the controller down when hibernating
-To: Birk Skyum <birk.skyum@pm.me>, Jingoo Han <jingoohan1@gmail.com>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, linux-pci@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <179157746908.73485.2343672865542690797@pm.me>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <179157746908.73485.2343672865542690797@pm.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzNCBTYWx0ZWRfX7/9+7dynLtbV
- 9q3ByEItY7RkcD6Ij3GGMgmiGD7JC337bTaMT44ZKSKvfQYzYd054zp9JceLAedsrDt1x26b72f
- M/JeS6Nl/sPWTe4BQRFVO5wFlbrFSA3FlI0/57iPxGdg7JifrrwisLGsggIa+39q/+Y9JbngnWz
- EEqPnhKIN65CsP9YqarwD9zQ84sPWUbsWw3tas51Zn95I2FveK5F6OkHGq9/j5MZ29iDmKA4E2A
- dMJqUaB39p8Atdv0ezwsG38uo5d/TMeHE2jnkkjuPWLXe1pAAQmXomHJimvwnnreGS3HMlQ9Obf
- ZzBhwI2DM+Yex95a/A9yAMUBkWLOkjB/v7i0I+MQHP47ds8csCbG8PK6Jyvam4ZSUyX0fdyK3sq
- ylq8uvmGuKI1o3ShLamhRdxBjkCws6DIxzJsjSNQjLScIEi0ZmTKQxZkmmU4enu5m9gmMTt9p8P
- OQV03/1yaxTpnAGKHgg==
-X-Authority-Analysis: v=2.4 cv=aK5lOr9m c=1 sm=1 tr=0 ts=6acc9ecf cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=zA2YdQmmiT9HswpVmB0A:9 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-GUID: 5xi1qpLmtcCo1bEQh9yLqncdZgKTzWyq
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzNCBTYWx0ZWRfXwFLLIezY65xv
- vdYmsbIpZlsFb5NX0lyW9BTA2XTY1qPOav3UsG76N3wfwbD6bpp/vLgCMCdpPXCoYGqmlZLbgZ1
- N69ArlCU8pQy8Xznj+k0rDfjOrZhduA=
-X-Proofpoint-ORIG-GUID: 5xi1qpLmtcCo1bEQh9yLqncdZgKTzWyq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 impostorscore=0 spamscore=0
- suspectscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120034
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261011022802.4069489-2-shengchao.guo@oss.qualcomm.com>
 
+On Sun, Oct 11, 2026 at 10:28:01AM +0800, Shawn Guo wrote:
+> For early_boot subsystems, probe unconditionally marks the rproc
+> RPROC_DETACHED and qcom_pas_attach() discovers from SMP2P whether the
+> bootloader actually started the remote. If it did not, attach sets the
+> state back to RPROC_OFFLINE and fails, expecting the core to boot the
+> firmware instead. The core does not do that: rproc_boot() treats the
+> attach failure as fatal and the remote is never started.
+> 
+> This is hit on Nord with firmware where XBL no longer brings ADSP out
+> of reset. The remote never publishes its inbound SMP2P entries, so the
+> very first state read fails (debug print below) and the ADSP stays down:
+> 
+>   qcom_q6v5_pas 4c00000.remoteproc: Failed to get fatal_irq state: -19
+>   remoteproc remoteproc0: can't attach to rproc adsp: -19
+> 
+> The ready, stop-ack and sysmon shutdown-ack signals cannot change while
+> Linux has not yet interacted with the remote, so there is no reason to
+> defer the decision to attach time. Check them in probe and only mark
+> the rproc RPROC_DETACHED when the remote is up and has not been asked
+> to stop; otherwise leave it RPROC_OFFLINE so the regular firmware boot
+> path is taken. The ready state is read first so that a missing SMP2P
+> entry -ENODEV is treated as "not running" before sysmon is queried.
+> 
+> qcom_pas_attach() keeps only the fatal check, since that is the one
+> signal that has to be acted upon once the rproc is attached.
+> 
+> Assisted-by: LLM
 
+I think we should add stable/Fixes here for backporting to 6.3:
 
-On 10/10/2026 1:54 AM, Birk Skyum wrote:
-> dw_pcie_suspend_noirq() leaves the controller powered, with
-> pci->suspended false, when a device below it cannot go to D3cold.
-> dw_pcie_resume_noirq() then returns early and the driver carries on
-> with the controller as it was.
->
-> That is fine for suspend. Drivers use the same two functions for
-> hibernation, where they run as freeze_noirq and restore_noirq. Devices
-> are normally still in D0 at freeze, so a controller with a device
-> behind it is left powered and the image records it as running. That
-> image is resumed after a power cycle, by a kernel that may never have
-> brought the controller up.
->
-> On a Lenovo Yoga Slim 7x (X1E80100) this resets the machine on every
-> resume from hibernation. The Wi-Fi card is behind pcie4, whose link
-> only comes up once the power sequencing drivers have been loaded from
-> the root file system. The kernel that loads the image resumes before
-> that, so it never powers pcie4, and the restored kernel then reads the
-> DBI registers of that controller:
->
->   qcom_pcie_resume_noirq()
->     qcom_pcie_icc_opp_update()
->       dw_pcie_find_capability()
->         dw_pcie_read_dbi()
->
-> The machine resets at that read. pcie6a, which holds the NVMe drive and
-> is brought up by both kernels, gets through the same path.
->
-> Take the shortcut only while a suspend is in progress. A hibernation
-> image then always holds a controller that is down, and thaw and restore
-> bring it up through dw_pcie_resume_noirq(), like after any other loss
-> of power.
->
-> Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+Cc: stable@vger.kernel.org
+Fixes: 16472c99f469 ("remoteproc: qcom: pas: Add late attach support for subsystems")
+
+I'm not sure if b4 picks up Cc/Fixes as trailers when applying so you
+may need to resend.
+
+> Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
-> RFC because this changes the freeze path of every driver that uses
-> dw_pcie_suspend_noirq(), and I can only test qcom. If you would rather
-> have it in pcie-qcom alone, or solved on the restore side, I am happy
-> to redo it.
->
-> Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel plus
-> this patch, booted both for the image and for the resume.
-> dw_pcie_suspend_noirq() is the same in v7.3-rc6 and in pci/next, which
-> this is based on.
->
-> - A hibernation with a real power-off resumes (one run). Before, every
->   attempt reset the machine.
-> - pm_test=core and test_resume pass.
-> - pcie4 and pcie6a both go down at freeze and their links come back at
->   thaw and at restore. NVMe and Wi-Fi work afterwards.
-> - A suspend (deep) and wake still works, and neither link is retrained
->   across it.
->
-> Two things to know about the test:
->
-> - I unloaded ath12k and the Bluetooth UART driver for the hibernation.
->   With the Bluetooth UART open the resume stops later, in the GENI
->   serial driver, and the remote processors do not come back after a
->   resume either. Both are separate from this and still open.
-> - With ath12k unloaded the Wi-Fi card is in D0 at freeze, and the wait
->   for L2 times out on pcie4 ("Timeout waiting for L2 entry! LTSSM:
->   0x11"). pcie6a does not show that.
->
-> Nothing survives the reset, so to find the read a test module wrote
-> each step of the restored kernel to an EFI variable before it ran. The
-> last record is the entry into dw_pcie_read() for pcie4, after
-> gdsc_enable() and icc_enable() had returned.
->
->  drivers/pci/controller/dwc/pcie-designware-host.c | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/pci/controller/dwc/pcie-designware-host.c b/drivers/pci/controller/dwc/pcie-designware-host.c
-> index 77aa79ef0..458e4c6e7 100644
-> --- a/drivers/pci/controller/dwc/pcie-designware-host.c
-> +++ b/drivers/pci/controller/dwc/pcie-designware-host.c
-> @@ -19,6 +19,7 @@
->  #include <linux/pci.h>
->  #include <linux/pci_regs.h>
->  #include <linux/platform_device.h>
-> +#include <linux/suspend.h>
+>  drivers/remoteproc/qcom_q6v5_pas.c | 64 +++++++++++++++---------------
+>  1 file changed, 33 insertions(+), 31 deletions(-)
+> 
+> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+> index 2e1e39826ffa..56179b71fd2a 100644
+> --- a/drivers/remoteproc/qcom_q6v5_pas.c
+> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
+> @@ -550,9 +550,7 @@ static unsigned long qcom_pas_panic(struct rproc *rproc)
+>  static int qcom_pas_attach(struct rproc *rproc)
+>  {
+>  	struct qcom_pas *pas = rproc->priv;
+> -	bool ready_state;
+>  	bool crash_state;
+> -	bool stop_state;
+>  	int ret;
 >  
->  #include "../pci-host-common.h"
->  #include "../../pci.h"
-> @@ -1231,7 +1232,14 @@ int dw_pcie_suspend_noirq(struct dw_pcie *pci)
->  	if (!dw_pcie_link_up(pci))
->  		goto stop_link;
+>  	pas->q6v5.handover_issued = true;
+> @@ -570,42 +568,46 @@ static int qcom_pas_attach(struct rproc *rproc)
+>  		goto disable_running;
+>  	}
 >  
-> -	if (!pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable))
+> -	ret = irq_get_irqchip_state(pas->q6v5.stop_irq,
+> -				    IRQCHIP_STATE_LINE_LEVEL, &stop_state);
+> -	if (ret)
+> -		goto disable_running;
+> -
+> -	if (stop_state || qcom_sysmon_shutdown_irq_state(pas->sysmon)) {
+> -		dev_info(pas->dev, "Subsystem found stop state set. Falling back to start.\n");
+> -		goto unroll_attach;
+> -	}
+> -
+> -	ret = irq_get_irqchip_state(pas->q6v5.ready_irq,
+> -				    IRQCHIP_STATE_LINE_LEVEL, &ready_state);
+> -	if (ret)
+> -		goto disable_running;
+> -
+> -	if (unlikely(!ready_state)) {
+> -		/*
+> -		 * The bootloader may not support early boot, mark the state as
+> -		 * RPROC_OFFLINE so that the PAS driver can load the firmware and
+> -		 * start the remoteproc.
+> -		 */
+> -		dev_err(pas->dev, "Failed to get subsystem ready interrupt\n");
+> -		goto unroll_attach;
+> -	}
+> -
+>  	return 0;
+>  
+> -unroll_attach:
+> -	pas->rproc->state = RPROC_OFFLINE;
+> -	ret = -EINVAL;
+>  disable_running:
+>  	pas->q6v5.running = false;
+>  
+>  	return ret;
+>  }
+>  
+> +/*
+> + * The bootloader may or may not have started the subsystem. Inspect the
+> + * SMP2P state, which is static until Linux interacts with the remote, to
+> + * decide whether to attach or to load and start the firmware.
+> + */
+> +static bool qcom_pas_is_running(struct qcom_pas *pas)
+> +{
+> +	bool ready_state;
+> +	bool stop_state;
+> +	int ret;
+> +
 > +	/*
-> +	 * Leaving the controller powered is only safe if it keeps its state
-> +	 * until resume. A hibernation image is resumed after a power cycle, by
-> +	 * a kernel that may not have brought this controller up, so only a
-> +	 * suspend may leave it powered.
+> +	 * Check ready first: if the remote never published its SMP2P
+> +	 * entries the state read fails with -ENODEV.
 > +	 */
-> +	if (pm_suspend_in_progress() &&
-> +	    !pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable))
->  		return 0;
+> +	ret = irq_get_irqchip_state(pas->q6v5.ready_irq,
+> +				    IRQCHIP_STATE_LINE_LEVEL, &ready_state);
+> +	if (ret || !ready_state) {
+> +		dev_info(pas->dev, "Subsystem not running, not attaching\n");
+> +		return false;
+> +	}
+> +
+> +	ret = irq_get_irqchip_state(pas->q6v5.stop_irq,
+> +				    IRQCHIP_STATE_LINE_LEVEL, &stop_state);
+> +	if (ret || stop_state || qcom_sysmon_shutdown_irq_state(pas->sysmon)) {
+> +		dev_info(pas->dev, "Subsystem found stop state set, not attaching\n");
 
-Birk Skyum,
+Another nitpick from the original message, the subsystem is stopped so
+it cannot find anything, "Subsystem *has* stop state set" would probably
+be better. :-)
 
-can you add freeze_noirq and restore_noirq instead of reusing the suspend_noirq & resume_noirq. After adding them you can force d3cold similar to this patch[1]
-
-[1] [PATCH v6 3/3] PCI: qcom: Implement shutdown() callback - Krishna Chaitanya
-Chundru <https://lore.kernel.org/all/20260909-shutdown-v6-3-62b7bd123236@oss.qualcomm.com/>
-
-- Krishna Chaitanya.
-
->  
->  	if (pci->pp.ops->pme_turn_off) {
->
-> base-commit: 591d89f23a7cbc668579521513c7f53b0968754c
-
+Thanks,
+Stephan
