@@ -1,151 +1,227 @@
-Received: from PNZPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11021129.outbound.protection.outlook.com [40.107.51.129])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE056386C08;
-	Mon, 12 Oct 2026 09:23:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.51.129
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791797031; cv=fail; b=Qra6LVQzFcj+SuPMo35xAe5LDElt2+e9gvxOKF8bJ2J5UUkRK9bs7IlDJZVGW3iao1jgvTEmv+/4yjx7WJHossg+T2RKcXAtYk0PScWJnM2AMphmkk095ZWknWW/+i//b3oIB50V8GfSeQ49BsEZNzMpMT8jzMSb9aKtjTWVuEs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791797031; c=relaxed/simple;
-	bh=mC9oxWmk/oKw/8IzpVXdOdS7G242sQXNoE2DEPst2pM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=SdKSkgPCBXfo6iirL8p0mB3VITF1ATsF9VgW3+4Q8hB5SPPiaKNPt+3Uefw5+nF1FGAtQLDv+n/35wH4FoAGbUmIv9acvrBj6IiD+RLrb4LXc7CtLqunk1IS1rdQKu31DjZhy3WM+n6BvE9wVAMIDmQhMHAVlV1584WR5rj0QNk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=40.107.51.129
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t3IlaculBDScwfj4hNFUNXnU0nmnb9UtxCvuaK9hAs0/2xszPdhTqnXZ9fxgbMXM53DTFiFnEO1bqWM4LfmSOIWHaq4YnX5pbeyqcYvi4/pzjZN9REq+PGl7761hUvtm2t77zwlHUQ87YGGJBvpUFZbGLfWzxSh4fZ/7qrtosUagSQrDDODvAN6JECIkDHu2sGCfNdJ+FbZiUCf6aIllBqDiAwSRh/cmk7/1YV2T1XDz99Ox8qXnGpOvMB//KDHOyA5CqPNq8X0XRNKMOpKKSBHCYvyAOx+PFriSHNVoJknpZFonkViaQ6m/kDF0WFikm32iltoLKVWeZ6T51j+FqQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=f8qURjXG7pRmus8giR56/mee6Grsd/hrYy6xupfWuVA=;
- b=DA154fZk25b2lxrvLnjM0VOJnuZS3muzvNAZ5qBOI4JSJAx9PbDnuwrPPHsaLaJOMNSpDpjfAgcpIR8wJm9gvnkxwNaqsYZy283mvYSZh4KwpBfMgL2nU/rEzXoPLfeAm5TMcmRyashnRkDXr0ss9M0u+RHaplKDHlJbzRVRU+EmtKz9ZUcY1NhEPIBqMZhZoRw5wxPRmNl4iAs8aKqJ9zQxWsPWN8HM9iB3IIgTe6S6/38AAS8HswxhiYOYtRkza+3NMAbPkycRL6XKDHzt32I7vD4l7mNLL/QYsp+ZKUpje4/fTnOJkkHjdyWvOp4ZHks2UHtqacnC5w6rzi9fsQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
- header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ebytelogic.com;
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
- by MA0P287MB1304.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:de::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
- 2026 09:23:44 +0000
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0496.020; Mon, 12 Oct 2026
- 09:23:44 +0000
-From: Hitesh Patel <hitesh@ebytelogic.com>
-To: gjorgji.rosikopulos@oss.qualcomm.com
-Cc: Hitesh Patel <hitesh@ebytelogic.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-	Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 2/2] media: qcom: camss: Enable the streams API on SC7280
-Date: Mon, 12 Oct 2026 14:53:28 +0530
-Message-ID: <20261012092328.120984-1-hitesh@ebytelogic.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <f2f42426-16b8-41f5-8501-a01a1c33dc01@oss.qualcomm.com>
-References: <20260915121536.19207-1-hitesh@ebytelogic.com> <20260916065422.819512-1-hitesh@ebytelogic.com> <20260916065422.819512-3-hitesh@ebytelogic.com> <f2f42426-16b8-41f5-8501-a01a1c33dc01@oss.qualcomm.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PN3PR01CA0088.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:9a::23) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c04:1::97)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5A3133A9E1
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791797339; cv=none; b=WziRlmFTw4ugdniCAIQSGt5EchZ12KDE6edwdXaZ+yaY/hBsJLeOn9+lqRy78T8U3/J2pAqn+72iLpB+JvKsShAe+dEVwBL5gpUv9QZ/9OHTHf7nsssakN1M1oC+KzEnJ1mIkdYNdrFJrp7bPHvKnAZjX0HPwWWbe3ecFw5w2/E=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791797339; c=relaxed/simple;
+	bh=HyAYHeh1Vo0SrqzbBagm0y+GX6OcPB+IoMqBVEfh+Zs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uUXLOi4yOdkv9230px4RVIznnPetKjYMHXrNz9mjwBMoAuvogevGbukfxUjSaKIHlOk4AGNKFY5Z1Yq0yhWzLeMU11xzaje4mlc3oGOp77RLMxfNbxMLij+m1zf0+agIc8PyqGSnuYDmGwaCG5oJ2C97OTi7joSI8h4lPeoXnYA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Bbc6jrA4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qz3QUg2P; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Bbc6jrA4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qz3QUg2P"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KcLo1592777
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=; b=Bbc6jrA42muGp6HO
+	oHKS+YUI6IhV4RWCKAeyLGKtG31nv2MYtBZDcMC2gL7niCl0QTJaT6u/eglnQpeD
+	AnpshpMQET3PGlJtVkNQwxXSA1ndc6lcVRaZQv06eXoFxYVu62I5IXmiqaPUCKzs
+	/mXRvLQ3kSDuDAhcavgI1Ot6KXibFERbSfuPrJvCvqFBQMBQr+Mt5cdPOAEMAlyt
+	bgV82iEcXh5TXGwarphcbD8/sChwrGpy+slqpsAsVEObbF34B/iBT34Di5A7LoR1
+	Lz7E9hihErRoJ7SG0aSjaMuz6Zz/t3Mlxn24sv3t+1sVad2dfudMyInC2zzxt1OM
+	zDx/pw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu10t6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:55 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e61a8eb087so32085645ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:28:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791797330; x=1792402130; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=;
+        b=Qz3QUg2P4sT9JBSMR+fXKJl4jUnbwbvhcyK5oRQEeSV/ax0e00Sn9Ziha4ftU1M44S
+         aoEu7fyN6j7E9lb9h15/I9AFK3w7qUIKv+WQFLWFchn0M08A20S3NO25TrFtrbRrshfh
+         8L+L3QisaDifLlDrME4vz+mqvE25QU/vCQzWFTE43gsGMgFf05dv7eD69az4Kn6Oe77a
+         cHpX2b26V4wMNQdYT5twzWypKhFcjZg3X4SROhgygEgy2NiOwC7+fS+gl0SSMk7PiCJK
+         W8S1yV0JTrEys8w3fCHxPhBhTLuofUvFdlXxXr8nUStRTdIcMUaoaBhIxL63kseN3OU4
+         FA9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791797330; x=1792402130;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=;
+        b=HOW5Tm1iAau27ti5Fzsh0Cm+uHZ0s532i/TPtQIB/gTLjrXvl52qtgRo8yXV3mY+xq
+         797xcPAH7JbtUrJs2AqR8ujY/6QrFVzrw692sY1QDXvFUkvc1PN521lkUblHomqJmzWQ
+         thu4aE5V5DSIzpYNVJatg+d95phkn300LUOhaUnhXY6+JmFDImkxTpJDhv53qHZNjNB6
+         QNcmLp33zsK2gPryFoHZOVCpioJ7guZIDc1POlNMXRTW/g3V3EJp/71Y7vZA1utirpGh
+         +LXWnBohe3/8BAfNHQL8pY7yxGUV9HLHm9BWek20Kyt73YALYaSIgeQOqZDbz82q1NgA
+         EW+Q==
+X-Forwarded-Encrypted: i=1; AKwUvByjpD7rk6ZUEbD05Acb5RPCoJH23wZk4sl+wMgLHAmFZGz6Zc6MrbygwOL9vpSTa7qWLQ0Y/tfI0ZD8r7Ef@vger.kernel.org
+X-Gm-Message-State: AFq9FYICJ/nRTGqGWIaRaXyGcnCzCi1CczFjaWP7yJkx+1XRS7rWOkct
+	bizNibzyTIVaOQFkTYF/p+vY2IHELMq7w2FpfV3xF8ETR/ae9/h8XP6rrmSJcqzRqzaD5vJ0n+M
+	3C6vgF22ZO08WHp3mccE1oXOJRb+um89wzFMd+/IILN0UHw6PhityjnXZy1gvxLMp22HL16EG24
+	0p
+X-Gm-Gg: AYBFou3/mQkVY7KC/rqYTm8DflEhLSqZ6bM5rVcHTDYORuLbfyO8j/HCZVuzj80kRjp
+	5jycDpZKWAq9JH/THuYw/jQwg+ZEECNXkpku0olqMMXD1yB87nMaztFIEAlg+y0zMss2jR0kYg+
+	gaGT6UjRu35iXGrSquq88z7cnnzO59sH24AQUEBnXL/TIhQZ9yi6yLvfDVm9sXP8XTT/SCyACO4
+	vnxRoJwgJSDDK9w109MOS37LkY7qotRoRcd1kpXKtr39NaVa2n5iQapCbUnCh8ovQOK8WfUQMAc
+	jlNZFvi3/yc74f5CbiveUIekAT2SoClVC19FNaW8b2hhItPaxi9ANK6Ch8gzmKzd0z2W8cMDjSa
+	seLiN6jGcxK6iw/HSavZapyz/6D9pgw==
+X-Received: by 2002:a17:903:4b4f:b0:2e3:1d30:8654 with SMTP id d9443c01a7336-2e842cd4527mr77385315ad.10.1791797330365;
+        Mon, 12 Oct 2026 02:28:50 -0700 (PDT)
+X-Received: by 2002:a17:903:4b4f:b0:2e3:1d30:8654 with SMTP id d9443c01a7336-2e842cd4527mr77385075ad.10.1791797329860;
+        Mon, 12 Oct 2026 02:28:49 -0700 (PDT)
+Received: from [10.218.5.182] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8421b1807sm40875295ad.43.2026.10.12.02.28.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 02:28:49 -0700 (PDT)
+Message-ID: <273f7f8c-e24d-4322-a418-4fd5ed84b0bd@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 14:58:43 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MA0P287MB1304:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08f54ae1-fd79-442c-712b-08df28428306
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|52116014|1800799024|10070799003|366016|376014|10067099003|22082099003|18002099003|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	Y060k5Qi8txV7ZfRJ4aScLxtqXNodF14MDCDJqNabZWmJhW1aCfPf/GLrBMnjAIEWEF0MWWdgXegJfJxzkGc0nH26jhEk0u2Np6HNQdPEettSwhMVV5lJjvsU18TH4j8fi2pr4pJowjTfLIEeo5CDbb2QKL8GJ+Hql7Gjb5yPb3QJ3aqG3J2De3uUETTD1uu8SAjtRbgy6T6Sixin5q7Z7AzxZmOcrKZ8UOjWFkeaDjtvf8+YAqDdWVSOYZj4Wx2wo27ILUvfBn7UT/KHfdCg0ueBCIMZcy83bYLsCKn+ZJSF+HN0pryNAt3LJR6nJuOa9Fxb0jW4GA9E2bIYNG8QI9RlHlRUKsWA6IIrkhcPUovjipoDtu6wdtSWBcBwuX1Uh8DA15Vi1/O7NxMm9hFVUjJFTqTkTQPTwVGZmuSirZq2P1kFr7lwhcKqogK7NX2Xw0i8MZ+FMrq5w4mIawTIfWbHkzmkCR9wq+gubUSxPFpNq0LxrTfrR7JnHny/BJpc/GkzJnjVyOrLfxX18prZ26e978/xj5o+UEXWt5P5Lz6eebqyuqs0k8PxhSdnNV5SacJM/GsKu41pbnUnChTS6idhtOXp/WXhgtLJNLs+HSiJ8VZh9DawVlo6ws6pTIvhNgU+j1AeLVPSPUNrZSIzwZ57G546g32ouGLc2Ibcmc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(52116014)(1800799024)(10070799003)(366016)(376014)(10067099003)(22082099003)(18002099003)(4143699003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?c2rpVKv8mLfHuM8y58Tixzngw9D4Bwaj2KNduZt5Btyj+pfC6xqwex7FsuoV?=
- =?us-ascii?Q?7/vxoJjqYS/ZV1ngPuNkXUsqassxdoed3KX5zg5f7Vnh/3/6suSwzB1Pejcc?=
- =?us-ascii?Q?81lCXpIHDI/lGYgfulWUH81XvydU8SH28eAOavrkxSCyJ4FpMIleUsYjxhz3?=
- =?us-ascii?Q?SGY+gShHEASxXKHyVh+IR+CszpqETbhxxjtgNiFV8HuHAqjrmJVeDO5kuu0c?=
- =?us-ascii?Q?sUFnaevFHsHM2Ek+Q/8YbsCwpz/hNjegJJgdjLIAVpfMnbL6rFxuQFfVlHHT?=
- =?us-ascii?Q?33b4xxsvpJ7lMUhwSUOYLuKFhb274AuykHBWq/j5EIV8YXA2lylIwfqhUNqr?=
- =?us-ascii?Q?E+KEBrXgTwnlMfPoiSaN8uoECEfrGS4lwe4+Svqn3pya7CAPNpaoMSkoZ46X?=
- =?us-ascii?Q?KWXYEOP381xy3WAD/sfjwF3spPwLxxpdZd6iYte80hcI9u/PDPBonicfGak4?=
- =?us-ascii?Q?b2JM9PBO9/UTp4PSKnl2num31Sna3E93APAr3PRgWTIHJKbX/sa+NRTCfkrk?=
- =?us-ascii?Q?1n7A3bi5pWYoE6LtgoJ8x0cyTcS1MiIiqyvf7T/kQBWIohgO10b5vyW+1ieo?=
- =?us-ascii?Q?XT6gjpvkvyysVWhLvg/6gQdC3mv4M7j6B1D3RVPeJNtMaLGH2s+IM4WEJBAk?=
- =?us-ascii?Q?MQW6wImFWF+r1l3ihnhE/An/oDT2W1T5GYfUWZ90Mx0Sngve8CEUbMC+/0qJ?=
- =?us-ascii?Q?2YgiyZFKO1n4LxOG0selWK+ASK3IUcqTvWmcbEcAVilLN9dPTVgDGQu1eMOc?=
- =?us-ascii?Q?PakS+a8Qt+M8Q8TK5xSIJrVkBau/qbVN4t5t77ipCWUdDyv5tvBh7Pozkvn3?=
- =?us-ascii?Q?o/Fs7ntkJDq3ZnNCr7xuXiJhCp9GxkJUm+nw9f029Prt/aP+QRipX8In5uQK?=
- =?us-ascii?Q?dOdJ1PRA5kSLi+i5TEobyA5sBaYEnRDZhA2OzaC2sBgmLMPaTMvmoJXZmYA4?=
- =?us-ascii?Q?peoi7p3nFmz3xn4qNHxGy+inmpfLzZLH/tMKwDSCZ6i00Q+Tt2OLleBbY6Zn?=
- =?us-ascii?Q?8cw++x+88xE+74jxpSZfVj5G5HUIJF/j06HIftyf+d8uzDThPOPMB5WSm1NJ?=
- =?us-ascii?Q?qyQO9onOry4wWiZapeFinGQEYzQT9iT0mwwhpPC3OPH+az9lY6tzOVGGlH2g?=
- =?us-ascii?Q?eHMWFUXk36/brIrYuPaIuvEMhNtIdMB31GntnOJIjb6AkXCYk/ckaf7Pdkz0?=
- =?us-ascii?Q?yGA757DdsAUZmskWZNBdO960bevuip/1nSNpOaWT5sVPuixut51LJX9Sm8zh?=
- =?us-ascii?Q?XH/0ynqVtbR6zJw56GMfDsnbRHILtcZYfoBOtcpIwQGMaF6oDfKdtu0/1hxo?=
- =?us-ascii?Q?j8VaQeegXCn5Dm0WHcoRBELWAgGEKEob6SrAUQqB60sfEXBa/oNdC38/7Knq?=
- =?us-ascii?Q?wozIGYbg1YN3F0SS9lJZgrppteoZtqXAdgGb1WkpiCWdMPuuLmeVZflz4gqY?=
- =?us-ascii?Q?WBcJ/WNO66uTl3wss6rcuJ3zkVgrDGhIp9dV1qFfCiZEgV4YYFRsTeV36JDa?=
- =?us-ascii?Q?Zcb6vSVWfaXatJMGQwNv+K6kashClO8i3B/mgeF77dMkxVLt/vMn5tZqPalp?=
- =?us-ascii?Q?wBpm7BnVo4yw8xMjy/aDd8c+6nEmr5Lh7KlF+Sp1wI+j24OEaQYj9kNU6Bug?=
- =?us-ascii?Q?9sUUOTRr8kx5agMAxeDu4Crku3Jg46jtno5kAQX3NILpzCCZmSotUsQEQWhp?=
- =?us-ascii?Q?/OSn/vF8TY4ymw3fEAdP/INYp+HN/TIgbmYTckmBMjqsmOq6jFCjZR2xpZkC?=
- =?us-ascii?Q?DMQewtMXFl4uB1EpfS/jiETP79BCZuVTtOc/+XGqhjwMXgI9cs7T3Qo48GeU?=
-X-MS-Exchange-AntiSpam-MessageData-1: jpYNeXMAGx4G7Q==
-X-OriginatorOrg: ebytelogic.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08f54ae1-fd79-442c-712b-08df28428306
-X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 09:23:44.3363
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: C//IuiVkMHJcCmAUQdsUBbCjVKnk31CuU8s2YhxsNyNA7LFSCk2dPrntYWObThUJTe+qXzdevehQuFLnB8ipgw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0P287MB1304
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: gcc-eliza: Use retention for PCIe power
+ domains
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
+Content-Language: en-US
+From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+In-Reply-To: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6acca857 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Z9TVNPNHG0Lt5lYLwu8A:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX2jDTq0lUG/4L
+ 2W1k3+BJKjgQLjxvpo1b1Fv3xTZaPOOwo8F73ZtFe2O1r+3akZQPBB2/AQYrrl8KK44iWmVoT1S
+ ahOr87BQctxnP6ANI6N0phy5o7UqRdyZ33ANZaUw0Ep0a2PujnZBt4VnjOP5OZf8n7uZpip+fPW
+ 7kGkonU4ph5MlfdLjzcoS+tusb6z16ILToEdX1EUhJLj2oiytOnwOebhupGqmivNrN4MmR2dlfT
+ FNk8+mGdPONAugBhWUZEQ/B8XmnrzgHc1RfkAsE1rxOdRyvvDF5tVyc3WkMHSqfskyS/cRxjwJ0
+ w6892RE3jm7edCwkQvQkY/NJOlEBWIgXw4R2STqXNi3c7pOAfSfXl/3KFD8hMOqCWdPFIYG4OME
+ QDoAQBn9ku3tYxT9auADLqKKqGPxjnz146cCMe3nj7rbcpSejAjIZaRwmfY+yoCqqtGGN6jhmfR
+ KWiRWR+R0cUauvv4mNw==
+X-Proofpoint-ORIG-GUID: cg6fJo-Io7m5kEK7G0m4i_eeuXjb-s0t
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX9kf1qolwV39u
+ 0DsNgOCXM8oud7h+LC09Aq50wj4+uvXzowBiY4lPMbwnwSG2tMMuwbI5GamuiNfImYOBMGvf0uP
+ Q/fSAfvR37jdRV2UpFx9q3CPfBN8AGs=
+X-Proofpoint-GUID: cg6fJo-Io7m5kEK7G0m4i_eeuXjb-s0t
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120037
 
-On 12/10/2026 10:27, Gjorgji Rosikopulos (Consultant) wrote:
-> Thanks i will try to include your changes in my next series,
-> it will need verification from your side as well.
 
-Please do carry it in v2 - that is the right way round, since the patch
-does not build without your series and there is no point in it going
-separately.
 
-Two things to make v2 easier:
+On 10/12/2026 1:29 AM, Abel Vesa wrote:
+> When resuming from system suspend on Eliza CQS EVK, gcc_pcie_0_gdsc
+> gets stuck off when powering back on, preventing the system from resuming.
+> 
+> Use retention for all four PCIe GDSCs, as on SM8550, to preserve their
+> state across suspend and allow the system to resume.
+> 
+> Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
+> Assisted-by: LLM
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> ---
+>  drivers/clk/qcom/gcc-eliza.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
 
-1) streams_enable at SoC level, per Bryan's comment. struct camss_resources
-   already has legacy_phy set once per SoC, so putting streams_enable
-   next to it keeps the two consistent and drops the 15 per-subdev
-   assignments my patch was adding. Happy to prepare that hunk if useful.
 
-2) The CSIPHY legacy-PHY conflict Bryan reported on 1/8 yesterday. I
-   already resolved that when porting to qcom-next v7.2; details in my
-   reply on that thread. Reusing it should let v2 apply to current
-   linux-next without you needing the hardware to test the legacy path.
+Hi Abel,
 
-The SER/DES setup is up and running here, so send v2 whenever it is ready
-and I will verify on RB3 Gen2 (QCS6490 / SC7280) with two GMSL cameras
-behind a MAX9296A, one per CSI-2 port. I will run it against current
-linux-next rather than our vendor branch this time, so the Tested-by
-applies to the tree you are actually submitting against.
+Using PWRSTS_RET_ON keeps the GDSC forever ON after first enable and the GDSC never
+collapses.
 
----
-Hitesh
+For similar issue on Lemans (pcie_0_gdsc gets stuck off when powering back on), picking
+the below changes from PCIE side helped to power ON the GDSC properly without any issue.
+
+https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
+https://lore.kernel.org/all/20260729071514.859778-1-manivannan.sadhasivam@oss.qualcomm.com/
+
+Can you please try if above changes are helping on Eliza also?
+
+Thanks,
+Jagadeesh
+
+
+> diff --git a/drivers/clk/qcom/gcc-eliza.c b/drivers/clk/qcom/gcc-eliza.c
+> index 064771726e9b..21fd93a1f6b2 100644
+> --- a/drivers/clk/qcom/gcc-eliza.c
+> +++ b/drivers/clk/qcom/gcc-eliza.c
+> @@ -2715,7 +2715,7 @@ static struct gdsc gcc_pcie_0_gdsc = {
+>  	.pd = {
+>  		.name = "gcc_pcie_0_gdsc",
+>  	},
+> -	.pwrsts = PWRSTS_OFF_ON,
+> +	.pwrsts = PWRSTS_RET_ON,
+>  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
+>  };
+>  
+> @@ -2729,7 +2729,7 @@ static struct gdsc gcc_pcie_0_phy_gdsc = {
+>  	.pd = {
+>  		.name = "gcc_pcie_0_phy_gdsc",
+>  	},
+> -	.pwrsts = PWRSTS_OFF_ON,
+> +	.pwrsts = PWRSTS_RET_ON,
+>  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
+>  };
+>  
+> @@ -2743,7 +2743,7 @@ static struct gdsc gcc_pcie_1_gdsc = {
+>  	.pd = {
+>  		.name = "gcc_pcie_1_gdsc",
+>  	},
+> -	.pwrsts = PWRSTS_OFF_ON,
+> +	.pwrsts = PWRSTS_RET_ON,
+>  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
+>  };
+>  
+> @@ -2757,7 +2757,7 @@ static struct gdsc gcc_pcie_1_phy_gdsc = {
+>  	.pd = {
+>  		.name = "gcc_pcie_1_phy_gdsc",
+>  	},
+> -	.pwrsts = PWRSTS_OFF_ON,
+> +	.pwrsts = PWRSTS_RET_ON,
+>  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
+>  };
+>  
+> 
+> ---
+> base-commit: becb95e45ef0dda9ffb35156d909d3da7a2789c3
+> change-id: 20261011-eliza-pcie-gdsc-retention-daa497d5578f
+> 
+> Best regards,
+> --  
+> Abel Vesa <abel.vesa@oss.qualcomm.com>
+> 
+> 
+
