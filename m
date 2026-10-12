@@ -1,241 +1,170 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EA461FF7C8;
-	Mon, 12 Oct 2026 02:36:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C0E738C2A5
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:52:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791772565; cv=none; b=E5EIkjvN7kiigwVfPprId+Rpzz3x6JZoI12klapCBbHRxPKBiIxdu7PY4m5CrrEcfX0KSxxXoGrTVck5f/be/wKrzdQS+kq9fg4J/W6uZVDXrvag3GXxW3uh3wmIHkYrsJf8h9ixNbH09Tn/W+0wX/YC5BYyEL4KP1+iZ686q7M=
+	t=1791773550; cv=none; b=dn5SerXa02eukxVWRBVeNqMIDtd3cPJs9WFsaVSJ/z/mw3EmtIscATcepP3clhjIPsgxcTUlLl3+4m5Yp5nrqWBH+sOgN5tUFPLdHujcx5fHauNHalmyCZwp+gAnGzrHw9SZnvZcXjUE/L+OaKXyPmpfxwlFZ6L1p6qA/AjmDts=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791772565; c=relaxed/simple;
-	bh=T4ruSoRClhQbEaHdxHWGbRjJy+TGfpyOvkHNaCtrSxM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=CkpFOtlZqVBBX7g3dG9wQ6OQqbGUfQxKDkU1MXH/EyHFt9cBS7krcZMQ+ynH28SqtbFQt7N/hn4jj/F6oXJ1jTU1YEk1ofbgbARPIAsuiSU92t16OurrkpnYbp197EPnMmqazpMhNCPKxjURq6voN7Ez4Af04MHOuUgZT2Kg2zU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K99o9M6q; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1791773550; c=relaxed/simple;
+	bh=c1bq/qqkjuRGWjHR9UcyqCsfWN6iu6XHZr6qBKD8ouA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hsoyHbjt0M/arq1fRSJVhY2UlLS/5YkoIccXX3+0BZyFhuEkJxzG7kKT1Y+h1Kjzi2+KjEWol4uLkBQr4uiexbw5xuJ9UM0ED+inQpMKlp0RE/uoCHwOqrks7i0Y0s+0nn8ZFxkVes9ll1Vakb6q8R4KiyL+e2wBgsEi6mx98LQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P6rqp6Yy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cXr3saiJ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K99o9M6q"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C47A8C2BCF5;
-	Mon, 12 Oct 2026 02:36:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1791772564;
-	bh=T4ruSoRClhQbEaHdxHWGbRjJy+TGfpyOvkHNaCtrSxM=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=K99o9M6q0OXNM58Kz2sm8ZfSBgm2mq5IzDDTtudVTqC7N2npm9+VKXTDUrQLoJliY
-	 Hcig2AngyzsOEBmXbsQkyZL/Fzy5cu3CtyfzjlWmZtkT64ZtNLrDWm376q0FZfx48x
-	 APJShlpSU1YiJzJA4KSvJ0QxlCqECKgyZUgpYMTZdPtaqhei9iz4JkLcA9Y/vutrGm
-	 rhUEu1mkY4jMKug/FUYcd4N00s9gaPAXsrShbzhaqVET4DaJtZ9722xS/xfRyztavk
-	 q1PlR6DeUbFnGPQPm2IaKCJ2hxHzv6UBkLlFcF3JDfXmwMskz4qsmv7qyoQhd3IwjS
-	 f8somJyr4js0Q==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C192CA9ED1;
-	Mon, 12 Oct 2026 02:36:04 +0000 (UTC)
-From: Haipeng Lin via B4 Relay <devnull+jimmie.lin.gmail.com@kernel.org>
-Date: Sun, 11 Oct 2026 22:35:56 -0400
-Subject: [PATCH RFC] bus: mhi: host: pci_generic: Add MBIM-mode config for
- generic SDX65
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P6rqp6Yy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cXr3saiJ"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C1lFbW915926
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:52:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	QJbREqwsQUUO1NfreZZnhUkKL1+aQh3D5/8AoPrzCmg=; b=P6rqp6Yy2CKdpa4l
+	yjj10dDeodgVAgks7h+nP+wEK1O3d65zjptYwzVk7WqBwuli3o82TnFd332GwR74
+	B+k4R/frn0OZX8dI5I0jPm0IFDauk/ari4N97AUoQS7T6NADO+h2It/m7S+kZCkW
+	9bBlrF72GpHYEdx3GxOxN2HPquKiye0r/8hU7fbVs0iwLdmLrxP/g8tkG3JOFlRE
+	tIcdZw8N5vuJm5L4NexYjjIp3GhwR3BoqXvgT1upXwBFqEma1c1Iv9D03TUCcs09
+	N0KSAs1Q+9rM55olerqkwuG7VOjYV4J7lhtkdr65ZhehGkXYNMVF2Q3u84S6om8H
+	Z+siRw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7dk24e68-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:52:22 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e80ef3e0a3so23243115ad.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 11 Oct 2026 19:52:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791773542; x=1792378342; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=QJbREqwsQUUO1NfreZZnhUkKL1+aQh3D5/8AoPrzCmg=;
+        b=cXr3saiJITZDuV3B96MyNR9Y6x+aG4Ci1E6VUJLkIHzwYBVwLKwYOk6159Ok0VeYyu
+         j2xy7Pgtn31snd16jHacjWLZGZ+5BFfuazZBIxOP47P8P3YIDZErxvorK4n+IwrW0T2u
+         D77EEBp+PTNPxOwR/wuEZLEjTxvn/AsT54E94zHjpvNpCFQpThxGzq4Voh2dzg/1ZYiO
+         MdbySvB7theQOagkyajtLx7+Wzy94up0JD0dOvJtDk+45TiGMhxxgbFhjLllu2ypXfG6
+         hHhaA3qw4fsEJ6Uusk7Iq26lPwkVhK0KLcL7uKMCHlTvXV3tt3/sMi7FKe2ql0XbheWk
+         jENA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791773542; x=1792378342;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QJbREqwsQUUO1NfreZZnhUkKL1+aQh3D5/8AoPrzCmg=;
+        b=Ke/W+FTdOUY0VmG+rM1BLWQHceun1+WEEYi07RB18uaPRIKnzUuccMoVaGIgsjJeWF
+         d4gPRMNFJC4pTOt8feH3dXAbP4LCd02xgF5bV8AkRoMhGrrpGE16zDas44ogt9WLxKTg
+         qGvWg9diibevVEper3rqozC2O3uo32V4bf5AdsaCrzY4lIiATURL5vaX6cB74yEbEE56
+         zt54EXS5kwiVZ90EQyzfpR4T8MVpFmQROYJ4Yv/YLaCtiXcrW1Vy2wXU+50rWYrrVCaN
+         GrJKSRThc91m5f5slgg+i9MKCbjgXqJhU5sWrHYud0mMu7zIHEjdzHn51RTKwdRD8cfA
+         1ZXw==
+X-Forwarded-Encrypted: i=1; AKwUvBwevQx/GMBNa8A/izF+k7VctKtrEVLlINGy5p3yAgB6z4dDD7ye3dHal22jSrRjv2zpJSGcEQD9BZRD9o9X@vger.kernel.org
+X-Gm-Message-State: AFq9FYJg0utd2bgGYwA4ILZw+hO8zw4voKsBFZiNQE4uUEQDFlkLQWVk
+	ld/9mTXMlr7W9ueYZQHjQbInFeRPw5Q6mFtdPgp5+XH7yirz5KXm5MUU6ZkyK4NQ4iptQ5Fhkbj
+	P9ERpMrZc5zYbmMBdU3kIv5odKW4BRc+fUc/QBlhaIEDZvuEaBfdatZmRfYoM6BHz6PBeScAv0U
+	bh
+X-Gm-Gg: AYBFou2RbVmlcTst1uvjJVnhNqvvr4DxQRJXsl8FHII1VKZu6pD2yWZgW/t5V/dqzna
+	oO1aLVXWJxPsKo5xU4FrKyvE5SW/FNiv+VGCkhJ6fHgXM+LoWP3SdVUuaTOA04PZFF4H8gqWtJK
+	Nu9cuYwj1x3/2OnccnRb872nGuvYZHQpp7OHLsiezT3hiMkMcY/QUNkdoB6PSWq9fcvwQsh7Jkr
+	QFiWLEWG2ztsYFFXCEZ5XmpJ6961M7LWjFo90eVDwm8I52uiGjSp8z5FiIqeZBBx7VqpufU3QxA
+	uxOOfmCfbVVPtU1HU4FxtoxhgdmPtbcILz9iCFiD8UlV9fiEntYIproo7Lu5BIoGuP4DjpWQqNq
+	ec37YPJSsBbsZllktgaJpAiCAV3d2oYo=
+X-Received: by 2002:a17:902:e847:b0:2e5:e1e2:21fb with SMTP id d9443c01a7336-2e842ac8aa0mr79892155ad.37.1791773542141;
+        Sun, 11 Oct 2026 19:52:22 -0700 (PDT)
+X-Received: by 2002:a17:902:e847:b0:2e5:e1e2:21fb with SMTP id d9443c01a7336-2e842ac8aa0mr79891925ad.37.1791773541669;
+        Sun, 11 Oct 2026 19:52:21 -0700 (PDT)
+Received: from [10.231.194.200] ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8422b8202sm35146905ad.51.2026.10.11.19.52.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 11 Oct 2026 19:52:20 -0700 (PDT)
+Message-ID: <c6c45288-1eff-420e-82a0-db9d92286db5@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 10:52:15 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261011-mhi-sdx65-mbim-rfc-v1-1-8089b4d33d5b@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDA0ND3dyMTN3ilAozU93cpMxc3aK0ZF2LxGSLpESDFHNzi0QloMaCotS
- 0zAqwodFKQW7OSrG1tQCP/ef0aQAAAA==
-X-Change-ID: 20261011-mhi-sdx65-mbim-rfc-8ac8ba0d778a
-To: Manivannan Sadhasivam <mani@kernel.org>, 
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, daleyo@gmail.com, 
- Haipeng Lin <jimmie.lin@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791772564; l=6715;
- i=jimmie.lin@gmail.com; s=20261011; h=from:subject:message-id;
- bh=12BqEQFC2zNFvRylvqVSEtj1UlA8nqo2lwDSkjHX2y0=;
- b=vP1kMRlhSbHPkFTrpYPTwc0Cuzavc6czw63h1+bxHRXfGcF9RgE3cHoZSsvOGG/JtUQP+lUKm
- co1PEGEMi6wAqB9R5UZC/bmtDxuRKJpQxpVqWFWqinFCrFRCciL9bPX
-X-Developer-Key: i=jimmie.lin@gmail.com; a=ed25519;
- pk=3KDRF1RQ/9A7ZUVTdRVEZnVrGltdmq1bRocsOYeXezI=
-X-Endpoint-Received: by B4 Relay for jimmie.lin@gmail.com/20261011 with
- auth_id=1164
-X-Original-From: Haipeng Lin <jimmie.lin@gmail.com>
-Reply-To: jimmie.lin@gmail.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] wifi: ath12k: skip hardware rfkill setup on Microsoft
+ Surface devices
+To: =?UTF-8?Q?Fran=C3=A7ois_Roux?= <franzelfranzel@gmail.com>,
+        Jeff Johnson <jjohnson@kernel.org>
+Cc: Jeff Johnson <jeff.johnson@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Konrad Dybcio
+ <konradybcio@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        =?UTF-8?Q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>,
+        Dale Whinham <daleyo@gmail.com>, ath12k@lists.infradead.org,
+        linux-wireless@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261006062728.45007-1-franzelfranzel@gmail.com>
+From: Baochen Qiang <baochen.qiang@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261006062728.45007-1-franzelfranzel@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: yUIgiXbtqDgemkucM2EVDTB_gWgMfb8d
+X-Proofpoint-GUID: yUIgiXbtqDgemkucM2EVDTB_gWgMfb8d
+X-Authority-Analysis: v=2.4 cv=E6hYNqdl c=1 sm=1 tr=0 ts=6acc4b66 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=4vkvQpwsUkj-1mQPOeIA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAxMSBTYWx0ZWRfXwtzH8jMxD0Kc
+ UDzZZ21oJSBz+rmRJHEFFqkLK3eczNwsbTWun4daX0ARvY/e6TSFCZcWFHmndqugaw90IOujkyQ
+ 0hLKhhCPZcAHy+08oNG82OFUicxNdvqo7yZ+y+dkFertX2KpDntCnvFsKfevtRBlgBivfBVDHgY
+ L7qtlUHdwotqW+mFSySbEF0lUiSTKBROZHfurQUJoCeBXebRrGgaUmFWfMvhooAa6iTnK6QkVZ6
+ ++bEG0HNroU+S4C+4lSMXaVgh9TYGyaiIMiWgPhxWlTLueX685l82zOHYdRWNbzgW24bz5ezgRj
+ yJMWVoya0OPTiEZ0IvhpT+2DmWFyjEjgUhdOvRVeCd4ANgK7z2cFrPjJKdAhZmmOuzOHaJTySEr
+ LUQJ9Y8xUCZwO9xDeZq0UxBtBh2Rdi8jV8itUVNhvjUcK+hV47Qbt16hTFomQ9wsoARKjLNwRcZ
+ dtGAo403bhBibAifpBA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAxMSBTYWx0ZWRfX0h/0nV17L/J1
+ bo9VzTsgQV2QFMP69xxxzBqikRC8uHEgdLAiyefKgtxLvyh+uMQiAbjbeA5QzfLQhJFCrSPmmpY
+ +bUABXHd8GXMAxiGymq98Rt3KFV1tqk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 impostorscore=0 phishscore=0
+ bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501 clxscore=1011
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120011
 
-From: Haipeng Lin <jimmie.lin@gmail.com>
 
-The Surface Pro 11 5G carries an SDX65 that enumerates with Qualcomm's
-generic IDs (17cb:0308, subsystem 17cb:0308) but runs the MBIM-mode
-firmware it ships with for Windows.
 
-Control is MBIM only (the QMI channel never answers), and data on
-channels 100/101 is framed as MBIM NTBs: the modem reports a WDA data
-format of raw IP with MBIM aggregation, up to 32 KiB downlink.
+On 10/6/2026 2:27 PM, François Roux wrote:
+> On the Microsoft Surface Pro 11 and Surface Laptop 7 (X1E80100), the
+> WCN7850 hardware rfkill input reads as "radio off" and the OS has no
+> way to control it. ath12k enables hardware rfkill handling, so Wi-Fi
+> stays hard-blocked:
+> 
+>   iwd: Error bringing interface 4 up: Operation not possible due to RF-kill
+> 
+> ACPI platforms can opt out through ath12k_acpi_get_disable_rfkill(),
+> but DT platforms cannot. A DT property was proposed for this and
+> rejected, because it describes what the OS should do rather than the
+> hardware. The suggested alternative was to handle these machines in
+> the driver until a connector binding can describe a broken rfkill line.
+> 
+> Add a table of board compatibles and hardware revisions on which
+> hardware rfkill is known to be unusable, and skip the rfkill setup
+> there. Other affected machines then only need a new table entry.
+> 
+> Tested on a Surface Pro 11 (microsoft,denali) with next-20260929,
+> booted with the unmodified mainline DTB: the interface is no longer
+> blocked and connects. The Surface Laptop 7 entries (microsoft,romulus13
+> and microsoft,romulus15) are based on reports from Jérôme de Bretagne
+> and Dale Whinham. I have not tested them.
+> 
+> Link: https://lore.kernel.org/all/2ixwny6hzumlqmok5cjwutvtk7nzmx4t3dhxc44ao4l2u755pj@n6m7jyxf2o62/
+> Suggested-by: Manivannan Sadhasivam <mani@kernel.org>
+> Assisted-by: LLM
+> Signed-off-by: François Roux <franzelfranzel@gmail.com>
 
-The generic qcom-sdx65m entry names channels 100/101 "IP_HW0", which
-binds mhi_net. mhi_net expects raw IP, so no data session can work.
-The MBIM-mode modules in this driver name them "IP_HW0_MBIM" instead
-which binds mhi_wwan_mbim.
-
-Boards with a Qualcomm-ID modem in MBIM mode have so far been told
-apart by subsystem ID, like the SC8280XP CRD's SDX55 (17cb:010c).
-This modem carries the generic subsystem ID, so we select an MBIM
-configuration by machine compatible instead. The channel layout is
-modem_qcom_v1 with data on IP_HW0_MBIM and without the QMI and IP_SW0
-channels. With the stock layout ModemManager spent about 45 s probing
-the silent QMI port and put the bearer on mhi_swip0 (IP_SW0);
-with this layout it does neither.
-The MRU is 32 KiB to match the modem's downlink aggregation size.
-
-Tested on a Surface Pro 11 5G (Surface_Pro_with_5G_11th_Edition_2077,
-modem firmware 251216-DE-dc49bb9-00197) on a v7.2.8-based kernel:
-ModemManager registers the modem on wwan0mbim0, uses wwan0 for data and
-connects over 5G NR.
-
-Assisted-by: claude-opus:5.5
-Signed-off-by: Haipeng Lin <jimmie.lin@gmail.com>
----
-Hi Mani, maintainers,
-
-I am sending this patch developed to support the Qualcomm SDX65 modem
-in the Surface Pro 5G (LCD, X1P-64-100 variant) for your consideration
-and comments.
-
-I am sending this as an RFC because I am not sure how you would like
-the MBIM-mode configuration to be selected. The device exposes the
-modem with fully generic PCI IDs (17cb:0308, subsystem 17cb:0308) so
-we cannot tell it apart from QMI-mode SDX65 modules using
-PCI_DEVICE_SUB() entries.
-
-This patch proposes to match the machine compatible. This is a smaller
-change without a new DT ABI but the PCI driver looking at the root
-compatible may be unusual, hence the RFC.
-
-An alternative would be to describe the endpoint in DT (a pci17cb,308
-node under the root port) with a property naming the firmware mode or
-channel layout, similar to ath11k's qcom,calibration-variant, then read
-it from pdev->dev.of_node; this would describe the board instead of the
-machine but needs a new binding.
-
-Additionally we could potentially reuse modem_foxconn_sdx55_config
-instead of adding a channel table, as the SC8280XP CRD entry does but I
-haven't tested that layout on this modem yet.
-
-I would be happy to rework the patch based on your comments.
-
-DTs for Surface Pro 11 LCD are in the process of being upstreamed
-separately and I've submitted patches to Dale Whinham's Surface Pro 11
-tree to enable pcie5 to enumerate the modem. This patch was
-functionally tested on top of that tree based on v7.2.8.
-
-This patch is based on mhi-next and build-tested in arm64 and x86_64
-without CONFIG_OF. mhi-next adds DUN (32/33) to
-modem_qcom_v1_mhi_channels. I left DUN out of the MBIM table because
-I haven't tested it on this modem.
-
-Thank you for your consideration.
-
-Best,
-Haipeng
----
- drivers/bus/mhi/host/pci_generic.c | 55 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
-
-diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-index 7193a384cca4..4df5f9962ee7 100644
---- a/drivers/bus/mhi/host/pci_generic.c
-+++ b/drivers/bus/mhi/host/pci_generic.c
-@@ -12,6 +12,7 @@
- #include <linux/device.h>
- #include <linux/mhi.h>
- #include <linux/module.h>
-+#include <linux/of.h>
- #include <linux/pci.h>
- #include <linux/pm_runtime.h>
- #include <linux/timer.h>
-@@ -373,6 +374,33 @@ static const struct mhi_controller_config modem_qcom_v1_mhiv_config = {
- 	.event_cfg = modem_qcom_v1_mhi_events,
- };
- 
-+/*
-+ * Channel layout of the same modems running MBIM-mode firmware:
-+ * data travels on IP_HW0 as MBIM NTBs,
-+ * and the QMI and IP_SW0 channels go unused.
-+ */
-+static const struct mhi_channel_config modem_qcom_v1_mbim_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 16, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 16, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 4, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 4, 0),
-+	MHI_CHANNEL_CONFIG_UL(20, "IPCR", 8, 0),
-+	MHI_CHANNEL_CONFIG_DL(21, "IPCR", 8, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0_MBIM", 128, 4),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0_MBIM", 128, 5),
-+};
-+
-+static const struct mhi_controller_config modem_qcom_v1_mbim_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(modem_qcom_v1_mbim_channels),
-+	.ch_cfg = modem_qcom_v1_mbim_channels,
-+	.num_events = ARRAY_SIZE(modem_qcom_v1_mhi_events),
-+	.event_cfg = modem_qcom_v1_mhi_events,
-+};
-+
- static const struct mhi_pci_dev_info mhi_qcom_sa8775p_info = {
- 	.name = "qcom-sa8775p",
- 	.edl_trigger = false,
-@@ -405,6 +433,29 @@ static const struct mhi_pci_dev_info mhi_qcom_sdx65_info = {
- 	.sideband_wake = false,
- };
- 
-+static const struct mhi_pci_dev_info mhi_qcom_sdx65_mbim_info = {
-+	.name = "qcom-sdx65m-mbim",
-+	.fw = "qcom/sdx65m/xbl.elf",
-+	.edl = "qcom/sdx65m/edl.mbn",
-+	.edl_trigger = true,
-+	.config = &modem_qcom_v1_mbim_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+};
-+
-+/*
-+ * Machines whose SDX65 carries the generic Qualcomm IDs
-+ * (17cb:0308, subsystem 17cb:0308) but runs the MBIM-mode firmware
-+ * it ships with for Windows.
-+ * The PCI IDs cannot tell these apart from QMI-mode modules, so match the machine.
-+ */
-+static const char *const mhi_qcom_sdx65_mbim_machines[] = {
-+	"microsoft,denali",
-+	NULL
-+};
-+
- static const struct mhi_pci_dev_info mhi_qcom_sdx55_info = {
- 	.name = "qcom-sdx55m",
- 	.fw = "qcom/sdx55m/sbl1.mbn",
-@@ -1389,6 +1440,10 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
- 	unsigned int dma_data_width;
- 	int err;
- 
-+	if (info == &mhi_qcom_sdx65_info &&
-+	    of_machine_compatible_match(mhi_qcom_sdx65_mbim_machines))
-+		info = &mhi_qcom_sdx65_mbim_info;
-+
- 	dev_info(&pdev->dev, "MHI PCI device found: %s\n", info->name);
- 
- 	/* mhi_pdev.mhi_cntrl must be zero-initialized */
-
----
-base-commit: 0b1883ca75c0005ab5ca52c7bc1a26329bc39746
-change-id: 20261011-mhi-sdx65-mbim-rfc-8ac8ba0d778a
-
-Best regards,
--- 
-Haipeng Lin <jimmie.lin@gmail.com>
-
+Reviewed-by: Baochen Qiang <baochen.qiang@oss.qualcomm.com>
 
