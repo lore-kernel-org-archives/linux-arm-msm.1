@@ -1,124 +1,123 @@
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5727382283
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:47:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C72543C81AD
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:52:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791812847; cv=none; b=AnceEsGpiwBcFaMN52HLSJqU6vqA/iaCMv6aABo77kti8ppQ++rKsGBNaB8Aq08klcR1dZv6SuWc18ap5uKIrx17tuVJGO0uOEogmkpRlDctQ1k9nhDpZHXDo5vLzD6hnzIE59I53F/cUytWcGasn8cs/O/qb9/xM6R5FD3fREY=
+	t=1791813135; cv=none; b=rlG07j3moZg7WijqL1yb3aftdWcRhDyT9S4lfMd5C9RjtowpzLTN2+8nhRb2YzebpVPYyx4EmhjoxSSWZPeGfvI2X6aOyJf2XeTiNfmbXcsgVwQeLDwaB0WBbs5UfuKGOEkEb8v8PBtIt2ZvnjbPwlXbvjPixQL0MekUpKMaLko=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791812847; c=relaxed/simple;
-	bh=mvoMyMEF23qiE7YbRO+z3EFZlH5bVE9dBQLlox9zVQM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=iPN/NXocxDKt/4nSc/80QSNk75BDwH8KQKOMYrFA5eUXh76Z1tyzueTMqla30AcUbtCV8QIIr8urVaUfzkUlXqq6LqhAjcb4UU4lE0MNqyvmmwUQd0qCYp6NrSvmCidWq9HBtITwt/Me42tgYo7jsojwnulMRarQc7Ii6zqLoO0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=TXJK4xXy; arc=none smtp.client-ip=209.85.208.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1791813135; c=relaxed/simple;
+	bh=XW1djT0Vdpsbvd9ni2r7C9RCQFJQ6pGumgwaGDmtYY0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=utI7lSlM1VLHVKhHtToVVyDARM3Kkko1odYLteMB1bnTDPMXec59qPUIYb/qJVWgm9SE7lDebRC+MwCv7wIurFDaTn/iHfgPIQQ11mZj6yVUlB5nJ4/4zZ2K1PWgi79g6Ilkk8V9C+cGhDehJXYmx5IqNeG/D//BXWQjDsTSbfE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=SQ5ruEkY; arc=none smtp.client-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="TXJK4xXy"
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-6b1cc392d8bso855770a12.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 06:47:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="SQ5ruEkY"
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48afcfc4bf5so1804587f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 06:52:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791812844; x=1792417644; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WDpmXyGOWYzIAfqCmBiCkL6X89MoKxiD5dfOJNrnyDY=;
-        b=TXJK4xXyKL7Z0gzdB/vtTB92XHZWI2Uz19d3O20VRCVjGux+32YW9jqNhDWN/LWmCe
-         jMInVfAdf/YVMUp+iqg2HAf9fMWlEvK4aqeMq1nNx3f9hgWksXbBUZfh7pEdkhga1wH+
-         Cb7VunNJ1+XXn+Yf0Z2qUy3S99fbeF8jjOu5/gZNRcvp0Usrtrq6Ji4u/wlbIlCB3CGJ
-         r1acUFcyEAzJ0eaWo7R0/C05aq2TEFEEEcWg7lUgRtHkOrl2zdqZ4haxBPNYB6/+PXBQ
-         57HjBM/w4/fb0SRzkYFv1KiDS/iJC8k/9SQBVfYkW4AUBu6rktSZtDujCjvZA31EOz8A
-         6sRQ==
+        d=imd-tec.com; s=google; t=1791813131; x=1792417931; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=09LAm3CRdRMlY+AjcF4iVhhVeJyo0GxMWk2sX+iS7gg=;
+        b=SQ5ruEkY6qbh9w1Rl7hr7BEzBStb15CQw0+rvVEfHJodvgLk99/5YPeJxBmR2JO/yv
+         0MVoM1kTeWQiRXmfEdK4Cqu/394ZU70HaPlw0g3cyXHQaEbrTRrbNn0LULPt84GTS0OA
+         Vf8CMY7miG0i9rB0/FrzD4SKWUQZxJTdbOF+lS//8P8zdKnhq8GCbSZokOUt+AV689ed
+         Sbxpw/tUrESR8K/ADXAQlOJOtUbj1CFgfO55EbZ/Nl2KKrsY8orNDqWOSJRuMl3GWfbo
+         qDzTkpsP5VhGmfSJ8EBjOWE8NcDLukD7KBrWIblHKzxSJKrz2MNoDNNI6W02S9GkdaRk
+         lfDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791812844; x=1792417644;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WDpmXyGOWYzIAfqCmBiCkL6X89MoKxiD5dfOJNrnyDY=;
-        b=UnGo8BXZHnjB9mKpnFdwXPKpDXwVrgpXlADTXXfHOajlrZgc5NekxuKOFOxcrOZVSF
-         RpL/uElAUiR86JSo+xtCXK1VCr6WKrtm753Apio3GVx5OSNl0PUHOKrwlTXrtOAjFqGe
-         8nHHtYSxLNy2L8fuqYhflzORAfnivoq+Eux7U/WouWfbhtIkJCp7OVuqVp7cQ3dKpARu
-         f62z8Gr8hd1eKe0dAsIzjcvtxBrpSzYEGbGoeSajUEf3e1moMWi8liTI/AZRKX1p3bhg
-         Bo1EEz6gT8qv8AQQYvavgYTQvWtxtZTL9yrcEcSJS7zIjDDJaSCVFGx/FHJ7G6DLaFHQ
-         P/jw==
-X-Forwarded-Encrypted: i=1; AKwUvBzw34T41mZ4f7TzQj1ZxlJUZz3+tKBmnlW3x0tBoKZkbagbRutZFRhAGNqaKfvOBxTUZuKXgDbcDeyMWHk8@vger.kernel.org
-X-Gm-Message-State: AFq9FYIGiZnOp5R87VK4FUuCK+dLZA+whKSyfLYmFi+ApzFfSkY1cDE9
-	iZUZQ2b4jwsyhIVYv6zXHUlosac2S2uesrFU3Rl+QAaRkn6BOikhqdvhd4DKzOWfLSo=
-X-Gm-Gg: AYBFou18SxizXlVa7L2vyDa5Go0A6OMsxG5LhwH168GjFToj+NGYXgmEPl4oh1a9YWD
-	YgDCX27FAZxn3+vxgECTyez4dhNv06ji26rcdhYojY8dJafYsMHSjI9pYjlDXQHO2n4x44bLIYI
-	1guXgm/ob/5oTLX+bKec3/MHwM5K/ko9wpNP6TJT+BlxBqsMu9l/XsKpjcaa33PnOa2IjZhlCl4
-	EV6v0awCjd4vzXBpACrJFIL3qo5fcraxxPV14Ll63lzTA6PqQ+lu94weAlgwcv8ubJE9FZu8jP0
-	9s4B1hbtC9KAk4kvF5QaznzZkgjM1fRxdo5Q6MZOlEEwqtsqoImcKArn8blYyq6ptUEhIF2gdCJ
-	1U95FUFSZM5GglzanJ6fwG1mm4Hs9HoQxJJqE2eOYceDRrYwKvTgZSIOZVsvu1rNm51x20F8iHD
-	lmwEtr3NTc1JJaM03huge8LpHVJGgDN74qytXA+3yR8dyzkWqUjZIY0cGjPTs2LmKzwCwPh8S/b
-	8aHK04h+cV1P/AhxGOsMA==
-X-Received: by 2002:a05:6402:c4ce:20b0:6b1:dd07:8e64 with SMTP id 4fb4d7f45d1cf-6b1dd079bd0mr624426a12.5.1791812843956;
-        Mon, 12 Oct 2026 06:47:23 -0700 (PDT)
-Received: from [192.168.0.167] ([109.77.202.22])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b1c27f0f3esm1350124a12.27.2026.10.12.06.47.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 06:47:22 -0700 (PDT)
-Message-ID: <66eaf57e-9023-45ea-9c21-737304f6d1e7@linaro.org>
-Date: Mon, 12 Oct 2026 14:47:20 +0100
+        d=1e100.net; s=20260707; t=1791813131; x=1792417931;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=09LAm3CRdRMlY+AjcF4iVhhVeJyo0GxMWk2sX+iS7gg=;
+        b=fYGk8dIxAwC4scHi/VODRw9Q8azX2ILOwPevhGhlPjIdkiDzWRiVgtYsMLmfGA3vOQ
+         3nfzuECPdPH21m2iRr3JOqJw7Cwq9I6WWyR9OXTP3kNxS4x2SWJFV3xryDKqfKVNyrW6
+         +OLMtgXDKGqLYz0rKXZERi6Bok6wS5RkGRcODHGymbbgShpKWMyjU4T96KPpnpn6SCgZ
+         bs1v7pQixmZ9qx2XpmfgOLkvRqNWo1P8qVVf5AePr+6FpVXzwQQA846xhCwMVu9vzELx
+         WO+LW/MAGFw0SO6BC6omID7+1v+TWelOW7hWePNrEoYvM3dgq89hg7e/D1dMD73dYjtA
+         EXow==
+X-Forwarded-Encrypted: i=1; AKwUvBxdqICNNnKb/iu111Ovs0iljCEN0p+SQqy6ykJg9ZUudGtp2lcX4dq78P54P5lVyqgE+MUSvRZhYapI0FcD@vger.kernel.org
+X-Gm-Message-State: AFq9FYKCRXISjIV/kEl/XoODAFt7qwcefoj7pBQnETQVawsF7lVX8uaK
+	03yrbq9rEUBls72Fgl/yngFOb0o1gcRl6JlzucbEHOtqfEZRxluy3iYZua5xO0Rt8VTnCc9FrK2
+	wNO/Rj5nl2+QM7UA=
+X-Gm-Gg: AYBFou18va/3vUHEYyfi5suI3O2SUl+F7/SL7rpltcKv+PpqNBGRDp6NNK3XRfoi1o8
+	c708pX41EPhBZbR64oET8zHD6lFzfwBKP6OvBoyZ2PY74ifOed5UOkWdXBdJtDmF6mxrnsQDQS7
+	MOfZ/dnOqYXZ+fUdcquEd/vQoNNGNyJCwHL4lDLD+egz5nOsK74eF4QbZGdrCq4Kv5Y66QQHJSz
+	lpisO1mHoGwum2WxHGS4kYkavX7IGlzznLI5dWVOiPaQA4hm5YC2K4ksp6BuquGk0ephuNvNhrv
+	WSwc/tWDCOwy+8IM1D0cJoQnFj2hLTTlIlzi5L3Eyfi/qUD9NzTppcWLMlvxksJFU5OIj/X7SDX
+	itk6xEy9TnUXG/BgvNMYIp7WxAEiZrij3iWK9oRsogy296vX2HbbZRmRDeZHEUb/0gFx9D3PGF8
+	DKr1wMSorJKjNXAkF04r6YD6+YhgGCB2RUgW9WxVOCyonoxAhgGK3Oltq6hGFjgH6W4dJJQropd
+	AroiJ8c0OHLt0mf4507OSzWDuHteCS9zI8J5WmGFwOAG/mjgoISqxBDyDVnE5M9qVn4TKMWkNQt
+	41gFMnLXLLd4ALxiF9hliTCt5B6EpRko
+X-Received: by 2002:a05:6000:4313:b0:48c:5358:f999 with SMTP id ffacd0b85a97d-48dbaaf07d4mr17559870f8f.37.1791813129855;
+        Mon, 12 Oct 2026 06:52:09 -0700 (PDT)
+Received: from [127.0.1.1] ([82.71.135.85])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db94e3519sm21355523f8f.16.2026.10.12.06.52.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 06:52:09 -0700 (PDT)
+From: William Bright <william.bright@imd-tec.com>
+Subject: [PATCH v2 0/3] media: qcom: camss: Add the SM8550 CSI TPGs
+Date: Mon, 12 Oct 2026 14:51:59 +0100
+Message-Id: <20261012-sm8550-camss-tpg-v2-0-06dbbe36ecd2@imd-tec.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] media: qcom: camss: csid: Match the current
- set_fmt pad op signature
-To: Hitesh Patel <hitesh@ebytelogic.com>, linux-media@vger.kernel.org
-Cc: gjorgji.rosikopulos@oss.qualcomm.com, bod@kernel.org, mchehab@kernel.org,
- vladimir.zapolskiy@linaro.org, loic.poulain@oss.qualcomm.com,
- dmitry.baryshkov@oss.qualcomm.com, atanas.filipov@oss.qualcomm.com,
- jigarkumar.zala@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, ravi@ebytelogic.com
-References: <20261012120542.1140157-1-hitesh@ebytelogic.com>
- <20261012120542.1140157-2-hitesh@ebytelogic.com>
- <6f40cf25-1967-4a7a-9952-a0fba3bb5fe6@linaro.org>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <6f40cf25-1967-4a7a-9952-a0fba3bb5fe6@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP/lzGoC/32NQQ6CMBBFr0Jm7ZhOlUZccQ/DAtoCY1IgnUo0h
+ LsLuHf5kvffX0B8ZC9wzxaIfmbhcdhAnzKwfT10HtltDFppQ4o0SrjluUJbBxFMU4emcaoo6Hr
+ RtoBtNkXf8vtIPqofy6t5epv2zm70LGmMn+Nzpt37k58JFRqt6sa0lJNzJQeHyduzHQNU67p+A
+ dWGy7vEAAAA
+X-Change-ID: 20261012-sm8550-camss-tpg-6bd0991432c9
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Depeng Shao <quic_depengs@quicinc.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ William Bright <william.bright@imd-tec.com>
+X-Mailer: b4 0.15.2
 
-On 12/10/2026 14:46, Bryan O'Donoghue wrote:
-> On 12/10/2026 13:05, Hitesh Patel wrote:
->> v4l2_subdev_pad_ops::set_fmt gained a
->> const struct v4l2_subdev_client_info * parameter, so
->> csid_streams_set_format() no longer matches the op it is assigned to
->> and the driver fails to build with -Werror=incompatible-pointer-types.
->>
->> Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
->> ---
->>   drivers/media/platform/qcom/camss/camss-csid.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/drivers/ 
->> media/platform/qcom/camss/camss-csid.c
->> index 2559ebe98..991275398 100644
->> --- a/drivers/media/platform/qcom/camss/camss-csid.c
->> +++ b/drivers/media/platform/qcom/camss/camss-csid.c
->> @@ -1696,6 +1696,7 @@ static int csid_streams_get_format(struct 
->> v4l2_subdev *sd,
->>    * Return -EINVAL or zero on success
->>    */
->>   static int csid_streams_set_format(struct v4l2_subdev *sd,
->> +                   const struct v4l2_subdev_client_info *ci,
->>                      struct v4l2_subdev_state *sd_state,
->>                      struct v4l2_subdev_format *fmt)
->>   {
-> 
-> Please add an appropriate Fixes: tag and Cc: stable@vger.kernel.org
-> 
-> ---
-> bod
+SM8550 has three CSI test pattern generators next to the CSIPHYs. They
+report hardware version 2.1.0, the same as the x1e80100 TPGs, so the
+existing gen1 TPG ops drive them unchanged.
 
-Ah my mistake, this is a patch for Gjorgji's streams series.
+Describe their register regions in the binding and in sm8550.dtsi and
+add them to the SM8550 camss resources.
+
+Signed-off-by: William Bright <william.bright@imd-tec.com>
+---
+Changes in v2:
+- Added commit message to patch 3
+- Link to v1: https://patch.msgid.link/20261012-sm8550-camss-tpg-v1-0-620ab6f151dd@imd-tec.com
 
 ---
-bod
+William Bright (3):
+      dt-bindings: media: qcom,sm8550-camss: Add the CSI TPG regions
+      media: qcom: camss: Add the SM8550 CSI TPGs
+      arm64: dts: qcom: sm8550: Add the CSI TPG regions to camss
+
+ .../bindings/media/qcom,sm8550-camss.yaml          |  7 ++-
+ arch/arm64/boot/dts/qcom/sm8550.dtsi               | 10 ++++-
+ drivers/media/platform/qcom/camss/camss.c          | 50 ++++++++++++++++++++++
+ 3 files changed, 64 insertions(+), 3 deletions(-)
+---
+base-commit: ba86f67908354f41f269ca1d64b22e4624766dcf
+change-id: 20261012-sm8550-camss-tpg-6bd0991432c9
+
+Best regards,
+--  
+William Bright <william.bright@imd-tec.com>
+
