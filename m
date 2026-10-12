@@ -1,87 +1,87 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EDCA443E3A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:27:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C4DE3A8749
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:36:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791790037; cv=none; b=hvpQiXUGl4tOQ3tgQhc3Onm5ERwv1f1GT4JviBKK+W/lhOfKFUeqP+E2ItHhymiI2qT8iR0hLILozDkv4leMozNNUl3d7Wv3Lfybfut7bBGHZx6DQW/3SjyxP/1mI6cZDD62W4ZTlcd/hDq746utBcpmPl6/PRrUPQkxMXqCDb0=
+	t=1791790570; cv=none; b=qZgRF/sM+PWoA8GtDdJ0GgI9RKq4CmYdOD/42fVwd6X3C5bQ9X89bJKzeNL7TDKQdOb32Hl3uHaknO0crhPF79NHl28itx25vJL9dIkaK5KnGLi0W91b7kBushliF1PE+Ici2RlcSjO9+1TzFPw+MK5SbLxda9RcoPgV3wv71n8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791790037; c=relaxed/simple;
-	bh=i4VKammu5buQoQJpeeXuROL/djsewq+/0g1Rk/STEME=;
+	s=arc-20240116; t=1791790570; c=relaxed/simple;
+	bh=TXcyWi9MxUFrhuCWMhk46kWiqU8K1lwQ74c2cZ1O1Ao=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KftSBlc/C3H1sRY1P68Qr3U+kPOvs0MOXAehRGdDCByVfQW/SP9SKW8zSzBGoWJ5B+5hH6NRNRmV31cjEBAOlZ+FejRLsThKCs3Nhp6CKuP2U/k4EbWxWmjN0m5m4FInbgeEdCRgP1JQXqcC0dsVBame3qHf19WG0Dme6sR1BuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bx6cXTta; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PmEgM6wO; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=iaofT+o/qw1LU10dfUT2uR/rjpGV2b6sDcAUhXI8ya3LQc1RbQF4osHUsJGXZaQSSCExsAPk4CqzlkOw5hLgSX9KgirESIaVFSrNPIPlzV6bMTATgZ9RfiL4ubsXIleVKHunYei7qjuSWOFm4N6MuWJjQHgjgHGa3viuVjRHlYQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kGaHHMNv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HRb12P5p; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bx6cXTta";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PmEgM6wO"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C55l3o1856988
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:27:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kGaHHMNv";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HRb12P5p"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C55vIZ4068725
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:36:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	C4fyEjrePybpWgh38Es527yBPdJjlebPtKOB1ktyX08=; b=bx6cXTtaP9nm0zq0
-	j8GTzMm0yPWTrSODa0JYEqS6RTFjREX/EAPhxjCh4mMmmgTPrWGYSOT5JJTc3kvc
-	l6stk64/Ysu1Kn6g7CT/AtoXnGbUJYXWNjWO/M1xWXNOXBqpb2D6M9SftbW91oFX
-	fzPT3ff6TmmHnHKZLszsecXzviWbuIgsPrGfJP8TKmGkaVRvjswIlvjB/oC7OIBL
-	sM7zfN9o36xbZbgMzhjH54N8ebZfeTlvPvgYqGPVcUuohP9nWbQlZTUlmC1v18ZJ
-	cUwyVP8ZG5z9NWAiIROd4PFQY98ljsOWrRY1RISe3/1R4DTk+m1v0AI+6lJ17h2a
-	1z1k7Q==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7cxxnfpj-1
+	+O4WBLRQXLDXDWNTb17081RKE4oqj0deMnQ8d0nHMAw=; b=kGaHHMNvFy7zG7ND
+	hkv6J/PkR9eHfknH4408wWxAqh6M3u2FeAdPpq1PGVFcMAX957XeTYqywP1ZnR15
+	7xC4nSy+N954FNy8inOvHPQy3uXMi8X1xBMGj1YBLsX5Q6uEhh4MRVMl6KkCICp9
+	WvBOQZKUvWugQDl/ZJwKfKU6h/RTnHhott6RGwmodj3Uzj+l4sxnUtH1TZdqIJi0
+	fKtByN7nlyY1OPTlmYZwnPNyg4wERwh1TRo+wr4sEhF1XvJmGIYNouR5d6StIq7K
+	+QcUmSMJUw+aa5PtalbCFFstgZbwGTZ3uDfp8KyiEZo9WZo2VphVIcn4qOnBi8A3
+	3fs4DQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7ehjnd39-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:27:13 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93ea8067974so445995885a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 00:27:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:36:08 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-90520763ceaso8902856d6.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 00:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791790032; x=1792394832; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791790568; x=1792395368; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=C4fyEjrePybpWgh38Es527yBPdJjlebPtKOB1ktyX08=;
-        b=PmEgM6wO5P09DBY4OwhjCm6nRSS/UjEjbnL6UAZMCojlGW0agDRrpGmxDHNPiJRcPK
-         ADaTeJMnbNgQzNz2V2zQ409sE6djO5rpa8GbfE9Ce4/noW/KIJraxm7UtK2PM5Xo+Tmf
-         brVqN7CASuOWWH7MpUZ+MNXXFOttN4toUOxuP25OT9khfrXww2PrQKM8ZhsMOiqg39zI
-         0DY8GA1Fld/krcnJS2KPxqMR1fFd3kz0bnSi/A2kOeejyB07WyZ0ArL+eG9rSjAjRphr
-         ummgdyWPIgKetFi7qqa0OGG7FavyUHaxi4C0BdUadkXYiGuyyO0B354k7/7WkkqMf1i9
-         sP0A==
+        bh=+O4WBLRQXLDXDWNTb17081RKE4oqj0deMnQ8d0nHMAw=;
+        b=HRb12P5pCKgY7JnBqdPWRzYS7/RyQjB8gPrDGQQTqaOPCkVhua6M87sbhk0yTkGmQq
+         8O+wlMF8DUoqZICL8Y62yCek8m3aSseJdg5PNr/nAUTz0I03EZKSV1fJ2t371uCiUK+3
+         4TKP0fXLyY1w3BPjmLDcLKlEXeFaQRiA3TSDQeZeuskKYuKo8u6XGUekHgrfkmCtpVGt
+         zq0ayH/Hntx/r6A3tqZe1/I0vIFfq+uLZtmAiNm8qMZxhxsYqpBabN6U9UuKZVXyCoQd
+         ZEMdYuHYu3Du2rlQc78roIHDlqZfFQaRwGOztR/k6WzOUEXOdSTGXpmOgmpTUS/AerK0
+         oOow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791790032; x=1792394832;
+        d=1e100.net; s=20260707; t=1791790568; x=1792395368;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=C4fyEjrePybpWgh38Es527yBPdJjlebPtKOB1ktyX08=;
-        b=iq65oN+0vZJyOflNs99FBdl+alR5VQHyF1MOyXBXUOT6THRwZ7qnxlT/w3agTyilXD
-         0TsKfnZUx56o9WKL/RMg3rRbHfCcKl4UdUOe6ypn3RpFYoQSlNS/QkL48Fy28BY3ZZFI
-         a/X+5Ao6VVry3O1v3o5Pp3KM9YpWF9Ux0k2gpqCxnr9qHQqwDjyLbS/wyWhvRtOS+5LA
-         oaUgzZK+1tt3e4zd8ea6Qv0R5lQij5yJE5ybv48z18QNy6sdi8mNHl9DWxT1CQM4KETm
-         nE7B1TcPI4i/xbdHddn+/5rs2YoqW8k5QhBrIVJdvmrCIaU7KWcoWIh7b67mG+x9rq7H
-         pl/Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwt39gr+WqjWbRVFeWPDTRbgGq8+R9kueDWeCq6vei9dLZGwbrpn+xgT7QTEN12RG4PN792L6P+DPnwK6w6@vger.kernel.org
-X-Gm-Message-State: AFq9FYIebnMUf2v6YIue88GWmLM0q0cAPxGz5zx85WqY3WDAh8ub1mry
-	7DIBdlgDCgEsQ1nThX5gq5NQTXY9eXjfS+DlOArlvfdWMz5TpUcmkR42YJWe5wpvE2Di5dEQ0fz
-	NNtKM1iZG19atxRgUeJt2vDOTWIqA7unZp8IAERJQjpBV1FKRaGvLssW0/CU+gSsCeahF
-X-Gm-Gg: AYBFou29Q8XSr8rNLQKSToGDODZs2rs/vACJlOtPqH6RdlyDFtXl54I7+2ZNn3Ysvg3
-	9rYa9hkzgBg/FjDzdCNhT9mtg99edFuiMk3l/z+3e/4SdIMUWXVCk5GrJzDjVsDZ9AFZvb+oU6x
-	1V3N3kchgvxARMG8wh6M3K4xX4D6E2v5QO+LRaHV+HKn1DUnjrpGVtW8C0hwACTNCoDvcnFTyo0
-	eXN/Z2xuFyoMn9uUqpvljZbYz1oMBDHyjVHzDBhIfAcnfhhwzsdIMg47ftncJ09aZS4hMB4m1oO
-	55k4aaFV51mtlpxT5+YmknXjL7p+7EbtlBTIBFJcXDCl2YfAyfFMu+YI79EmycrhOZYVS5czv4e
-	Hl5GkVVFE61qHq1r1QsMdCTGdxRcdD4bz9tptbHg=
-X-Received: by 2002:a05:620a:2713:b0:93e:c12c:fbb8 with SMTP id af79cd13be357-93ec12d0844mr1554167385a.69.1791790032504;
-        Mon, 12 Oct 2026 00:27:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:2713:b0:93e:c12c:fbb8 with SMTP id af79cd13be357-93ec12d0844mr1554165685a.69.1791790031953;
-        Mon, 12 Oct 2026 00:27:11 -0700 (PDT)
-Received: from [192.168.1.31] ([85.196.172.179])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18c198134sm267210535e9.15.2026.10.12.00.27.10
+        bh=+O4WBLRQXLDXDWNTb17081RKE4oqj0deMnQ8d0nHMAw=;
+        b=Vdy0Rd35OxXP/OOotnypIEDdJVXJbo75lDFG0grzj/28HPxJI02TH0rjqignDZjN/Q
+         rKwP6m+GhSYQYkiAIESEgDwBTZuEM+RioPTbIDN59xPNkiVguUFYllIq0mdwGUBZlT/4
+         F8UXlMauOxiqzGv0eaM50C12vl+IevxQtOos3yZQzKCI78988RlWZ0qLfxZWw/Cl3+8K
+         +w4NBakGbUtygJd+F/hm1sI9D1WWDlyhty2qvqWWb3QH07FY3smvDD/DCPpqTgf3ez8A
+         4csyPg6JP5WvycbFvxiT1UnwmJItCdHRaOhX5Xb9PPvMLby1MxvfCl32Oc8SJhg9FQMl
+         KUVQ==
+X-Forwarded-Encrypted: i=1; AKwUvByr5QGfJDYSeItK/6L1k1zEo+5GpfvtjA/Fsk7NwJlzLVm8HNAPsOday/4BiOC3UcDQdKtR/8yTKrpTcZB3@vger.kernel.org
+X-Gm-Message-State: AFq9FYISrruRbczmQ8YXs1Ja0OEonaIm03MZXGZmoIEN2hPW8bqWrBWQ
+	ehB+QcOLTyk4B7HlKPwX+hTO8oqmc4EAXx3dRMmISb1qBqNEDJHmjVcJelZ4bgslHw3xP643NMa
+	7w80yIkwXmg6jv+N7Sy/kVTuqbhy4YnM4o37/0pZIpdSJI27kL6Q9hy4FvdKkmXNNmwAA
+X-Gm-Gg: AYBFou2EnHPwCsZj2DsPmVcp9acS5WTSTS+BnOU4cMH69pjRVoLrVh5tJV7zLo4Moyc
+	/mOerPIeRRKIhOpdbrf7KYBgRaKZ/ZYJfc+2rCyYrusyASqQY2Qc+TdTjAp1ER9XK21WPP+vjWt
+	MQ9jZwsQoj4xXvXE1umDPvuT1KC2o4lzyFVAzR8Wpp5I7wO36wW7QfXgieOg5UaB1l9NqssDJ/7
+	kh4gmLxX7tQBq0+O4gYI8fEd8HBAahnNLq06KjPTiloX7jqK9isY1cHH41SlvLxtzwC7+SYP4p0
+	x1IZqy/NQmK8HlzvAgrGA8emXWlzIAefbb2NfFCrMOgfZAoJ//C8i23ECByL2BCgMCmvXqBOHTh
+	jjLo/jAFSsIOfckWIAzKnZA==
+X-Received: by 2002:a05:622a:507:b0:532:d67e:bc2e with SMTP id d75a77b69052e-5359f0634femr174331061cf.0.1791790567750;
+        Mon, 12 Oct 2026 00:36:07 -0700 (PDT)
+X-Received: by 2002:a05:622a:507:b0:532:d67e:bc2e with SMTP id d75a77b69052e-5359f0634femr174330821cf.0.1791790567263;
+        Mon, 12 Oct 2026 00:36:07 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9ac969dsm426611366b.73.2026.10.12.00.36.04
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 00:27:11 -0700 (PDT)
-Message-ID: <f2f42426-16b8-41f5-8501-a01a1c33dc01@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 10:27:08 +0300
+        Mon, 12 Oct 2026 00:36:06 -0700 (PDT)
+Message-ID: <22703d47-496d-475e-a09d-871c891ec51e@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 09:36:04 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,212 +89,59 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] media: qcom: camss: Enable the streams API on
- SC7280
-To: Hitesh Patel <hitesh@ebytelogic.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, ravi@ebytelogic.com
-References: <20260915121536.19207-1-hitesh@ebytelogic.com>
- <20260916065422.819512-1-hitesh@ebytelogic.com>
- <20260916065422.819512-3-hitesh@ebytelogic.com>
+Subject: Re: [PATCH] PCI: qcom: Disable halting feature
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261009-halt-v1-1-4a2d7899d91f@oss.qualcomm.com>
 Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <20260916065422.819512-3-hitesh@ebytelogic.com>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261009-halt-v1-1-4a2d7899d91f@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 0lbuGS9KfMpYp48jcYrnVnobPFPxT76V
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfX//mIG9o/GlAW
- 2xKMKR8DBf6UxeNMIVQU3SEA85NOs1xH1JYeJl+97dC+YcHdvrb9fEclUM/DGP72lNE02+9eIux
- E8AXp8eAUI4cN7uH8Y5zWQwWm2Tv1oU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfX8sdHybmWHBGL
- jZ5v7xmim3XS56wFoSJCBGE7wbqK/mO6/KYbcFEzVwOAv72eNdxQn6/4C4BaymqWHdEfmf1Km9j
- 30KngQYjIbYM+xI8zHwClTmjQ2KYW+fcoPIgqTXI7z8dOQCjYG8MGCkInVWStrBG0XXjSlAGKSb
- Re/tcLIvFfcYCc8L0Vyi9JGRHBaoT93rY83NSiHXvDJ3VkiMuG4t++jnv6aRs0pCBlKi9ianyr5
- D5XPBJPENdkWOF3DDcuNurhS1rCOlho+FnQbKLtj+1+Q/FhWl5H7y0RuIPpUTQa03XtDC0k4jwp
- UbxWK4M8syTDzS13YA8dPEla12AFoDj+3uNzJ7++Oirmt7SaeI+e/IxAH0XUBM/hMTSYqFpcuV3
- 77tyDrJVSTkGx3aJnmGCWsZzfhLSa74uN+E6R6XZwSM4R6Ekip8csvCuITFPaXVpNYbwKbFDyys
- /DvX4lfirxd/tqZWCdA==
-X-Authority-Analysis: v=2.4 cv=AsJ7T+9P c=1 sm=1 tr=0 ts=6acc8bd1 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzMCBTYWx0ZWRfX882ySxZtM1Rr
+ yZsjdiSxdDIJGeREW5r8d1mw6qiXxMEQA+iiJa5D0S6d/Z9h+GCvX/r36/AxAzeb/lXBOVeRQ/i
+ N9tH89TE8EAzLNQRQuUSTJbn7m4q87M2tTLS1ZeBldjdDBmEjMUDGvNOYnMnKqxeaXpLTridkf0
+ mo/QlZ3n1tA1MmRKZapz5pk5OR8sZv6ibQ1WzD0FR+h69bKBAu7RhS1QqTxwowaoi0Sm9vcOzr0
+ 0Q2ufWyMRbXVSfnym+QS29WP/fh3ajncFJzcvu0Nz5Hb/Vt+s8ysROWtSBx/D1OVN0EpgKPBhcK
+ UecG0O9CTUQ8gfiILGIi6gkKBYZyWgavw/8CaYzx6fDtXtOsf6zB6UcVNVg3d0rWpivsd9ZIvIp
+ Q7Ppaq97PR9A65+F3USlMtM4T2KdK2rYb0rmXTrhqMmUTqYoIuuGvobNX6AQSxqzmDdV2ljaWtk
+ YYmRNZnePRS3yEfQRaQ==
+X-Proofpoint-ORIG-GUID: 2na7H9LmWctT5aamnIf-3OxHb94VC7VB
+X-Authority-Analysis: v=2.4 cv=MpTHeGae c=1 sm=1 tr=0 ts=6acc8de8 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ZovgdgjKAAAA:8 a=XLtVEzLVMLZyz3yzeyUA:9
- a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=VOxKbm1zgHvARWIDjr3b:22
-X-Proofpoint-GUID: 0lbuGS9KfMpYp48jcYrnVnobPFPxT76V
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=mFIT96Bc5s7vh8gnFTIA:9 a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-GUID: 2na7H9LmWctT5aamnIf-3OxHb94VC7VB
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzMCBTYWx0ZWRfXwjqKgnL+5qYN
+ lywg0ELCYqaIwiDCKzZVSr8MtB3cWP/TbugfKI8+LkJ4W+PnDczY9QlfexqIWDyVCJL6/QHgull
+ MDCovduq8bcIciinth13tMtaNsLUFOU=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_02,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
- adultscore=0 priorityscore=1501 clxscore=1015 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120029
+ phishscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610120030
 
-Hi Hitesh,
+On 10/9/26 2:55 PM, Krishna Chaitanya Chundru wrote:
+> The PARF write, read and BDF halt features make the controller wait
+> for earlier AXI transactions to complete before issuing new ones. This
+> is needed on SoCs whose NoC cannot preserve the ordering of inbound
+> transactions from the controller.
+> 
+> On newer SoCs, the NoC preserves this ordering on its own. Halting at
+> the controller adds no correctness benefit and reduces inbound DMA
+> bandwidth.
 
-Thanks i will try to include your changes in my next series,
-it will need verification from your side as well.
+Please explain what makes a SoC go into the "newer" category in this
+context
 
-~Gjorgji
-
-On 9/16/2026 9:54 AM, Hitesh Patel wrote:
-> Set streams_enable on every CSIPHY, CSID and VFE line of SC7280, as
-> done for SM8250.
-> 
-> Tested on RB3 Gen2 (QCS6490) with two GMSL cameras behind a MAX9296A
-> deserializer, one camera per CSI-2 port, so two independent pipelines
-> share the deserializer subdev: both cameras stream concurrently, and
-> each can be started and stopped repeatedly while the other keeps
-> streaming, without the WARN in call_s_stream() and without the second
-> pipeline tearing the first one down that the legacy s_stream path
-> produces. The CSID test pattern generator keeps working.
-> 
-> This patch applies on top of Gjorgji Rosikopulos' series "media: qcom:
-> camss: add V4L2 subdev streams API support" (see Link below); it does
-> not build without it.
-> 
-> Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
-> Link: https://lore.kernel.org/r/20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com
-> ---
-> v3: no code change. Reference the prerequisite series with a Link: tag
->     instead of a long URL in the text (checkpatch line-length warning).
-> v2: no code change. Add the dependency to the commit message and as
->     base-commit/prerequisite-patch-id trailers, so patchwork and the
->     Media CI do not try to build the patches standalone.
-> 
->  drivers/media/platform/qcom/camss/camss.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 0201debd4..2023c0df2 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -2280,6 +2280,7 @@ static const struct camss_subdev_resources csiphy_res_7280[] = {
->  		.reg = { "csiphy0" },
->  		.interrupt = { "csiphy0" },
->  		.csiphy = {
-> +			.streams_enable = true,
->  			.id = 0,
->  			.hw_ops = &csiphy_ops_3ph_1_0,
->  			.formats = &csiphy_formats_sdm845,
-> @@ -2298,6 +2299,7 @@ static const struct camss_subdev_resources csiphy_res_7280[] = {
->  		.reg = { "csiphy1" },
->  		.interrupt = { "csiphy1" },
->  		.csiphy = {
-> +			.streams_enable = true,
->  			.id = 1,
->  			.hw_ops = &csiphy_ops_3ph_1_0,
->  			.formats = &csiphy_formats_sdm845,
-> @@ -2316,6 +2318,7 @@ static const struct camss_subdev_resources csiphy_res_7280[] = {
->  		.reg = { "csiphy2" },
->  		.interrupt = { "csiphy2" },
->  		.csiphy = {
-> +			.streams_enable = true,
->  			.id = 2,
->  			.hw_ops = &csiphy_ops_3ph_1_0,
->  			.formats = &csiphy_formats_sdm845,
-> @@ -2334,6 +2337,7 @@ static const struct camss_subdev_resources csiphy_res_7280[] = {
->  		.reg = { "csiphy3" },
->  		.interrupt = { "csiphy3" },
->  		.csiphy = {
-> +			.streams_enable = true,
->  			.id = 3,
->  			.hw_ops = &csiphy_ops_3ph_1_0,
->  			.formats = &csiphy_formats_sdm845,
-> @@ -2352,6 +2356,7 @@ static const struct camss_subdev_resources csiphy_res_7280[] = {
->  		.reg = { "csiphy4" },
->  		.interrupt = { "csiphy4" },
->  		.csiphy = {
-> +			.streams_enable = true,
->  			.id = 4,
->  			.hw_ops = &csiphy_ops_3ph_1_0,
->  			.formats = &csiphy_formats_sdm845,
-> @@ -2373,6 +2378,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
->  		.reg = { "csid0" },
->  		.interrupt = { "csid0" },
->  		.csid = {
-> +			.streams_enable = true,
->  			.is_lite = false,
->  			.hw_ops = &csid_ops_gen2,
->  			.parent_dev_ops = &vfe_parent_dev_ops,
-> @@ -2392,6 +2398,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
->  		.reg = { "csid1" },
->  		.interrupt = { "csid1" },
->  		.csid = {
-> +			.streams_enable = true,
->  			.is_lite = false,
->  			.hw_ops = &csid_ops_gen2,
->  			.parent_dev_ops = &vfe_parent_dev_ops,
-> @@ -2411,6 +2418,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
->  		.reg = { "csid2" },
->  		.interrupt = { "csid2" },
->  		.csid = {
-> +			.streams_enable = true,
->  			.is_lite = false,
->  			.hw_ops = &csid_ops_gen2,
->  			.parent_dev_ops = &vfe_parent_dev_ops,
-> @@ -2430,6 +2438,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
->  		.reg = { "csid_lite0" },
->  		.interrupt = { "csid_lite0" },
->  		.csid = {
-> +			.streams_enable = true,
->  			.is_lite = true,
->  			.hw_ops = &csid_ops_gen2,
->  			.parent_dev_ops = &vfe_parent_dev_ops,
-> @@ -2449,6 +2458,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
->  		.reg = { "csid_lite1" },
->  		.interrupt = { "csid_lite1" },
->  		.csid = {
-> +			.streams_enable = true,
->  			.is_lite = true,
->  			.hw_ops = &csid_ops_gen2,
->  			.parent_dev_ops = &vfe_parent_dev_ops,
-> @@ -2475,6 +2485,7 @@ static const struct camss_subdev_resources vfe_res_7280[] = {
->  		.reg = { "vfe0" },
->  		.interrupt = { "vfe0" },
->  		.vfe = {
-> +			.streams_enable = true,
->  			.line_num = 3,
->  			.is_lite = false,
->  			.has_pd = true,
-> @@ -2501,6 +2512,7 @@ static const struct camss_subdev_resources vfe_res_7280[] = {
->  		.reg = { "vfe1" },
->  		.interrupt = { "vfe1" },
->  		.vfe = {
-> +			.streams_enable = true,
->  			.line_num = 3,
->  			.is_lite = false,
->  			.has_pd = true,
-> @@ -2527,6 +2539,7 @@ static const struct camss_subdev_resources vfe_res_7280[] = {
->  		.reg = { "vfe2" },
->  		.interrupt = { "vfe2" },
->  		.vfe = {
-> +			.streams_enable = true,
->  			.line_num = 3,
->  			.is_lite = false,
->  			.hw_ops = &vfe_ops_170,
-> @@ -2551,6 +2564,7 @@ static const struct camss_subdev_resources vfe_res_7280[] = {
->  		.reg = { "vfe_lite0" },
->  		.interrupt = { "vfe_lite0" },
->  		.vfe = {
-> +			.streams_enable = true,
->  			.line_num = 4,
->  			.is_lite = true,
->  			.hw_ops = &vfe_ops_170,
-> @@ -2573,6 +2587,7 @@ static const struct camss_subdev_resources vfe_res_7280[] = {
->  		.reg = { "vfe_lite1" },
->  		.interrupt = { "vfe_lite1" },
->  		.vfe = {
-> +			.streams_enable = true,
->  			.line_num = 4,
->  			.is_lite = true,
->  			.hw_ops = &vfe_ops_170,
-
+Konrad
