@@ -1,803 +1,204 @@
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23CFC4CDA2E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:11:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14FB84AA1EB
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:12:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791828680; cv=none; b=boO+wqycKJLxDl1piYt09uMDNTbDh2d/esnty1Xfit9KIErZK0G9YqQeM8sOktLTV8tyDFymbL+6tNxEnSXt+uDk49akfBj5xrzA4uMuu/x4bsnLy7DGND2ryWc6D7GKwr7Jq0DMVhZyoJVRs7JWkrlhFxEPo3lgpZwv3Rx7LcU=
+	t=1791828759; cv=none; b=SZwPRolm+oFa4I+cGHkXSKjFlBGXUZQr/o5CTOrn/94tpbGirVetVwUS7+9mbkyw7BBZ51kmjl0pa+PL79hVNF8YBwHTeXWwrBWXtNvF1kMGVeErROAOnA8tHYiF7Alu6e+p1lSBE5lGtuFXuRAtw2i7PsjX7BH9W3WNgsSHzSs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791828680; c=relaxed/simple;
-	bh=me4kgkDxl4oTqvv2SgWOYYHObNOgTKdHxOxZ7ZE6Y7c=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=H9r64AZkhZKzTd71exoboezSxKwKCUR9w3MaUt5mTIz4uWPEC2TIqJIJzcKzNuFNP6QZ3Ypk8RhVviAxhphgj9+akrK0SrL8chPcup7eIwSCfge7BO3AjN/Ue/Wbh3rGXtNEoNXbdRV6SJDMBx0p81NShVpPeI8KIyStU8+z9T0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=1oFYc5pb; arc=none smtp.client-ip=209.85.208.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1791828759; c=relaxed/simple;
+	bh=xMOB+Xeswh/VHG1JRXbW55ogVP/Sfyg4N3upBRTPGH0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=vEkjZWZosza775bpQe8sq5Iauhx+JXwNfpmtPtnbkaBncv+2OByDA49CqGpcCPiv20SwvUEpHg/tEPS1nBG6noA9E/scYR1Bfaho2hnuzhH/EZsSjlkOvA5nhbfl2KBht2YDPePR3ZUO+yY99WQeRG4moR9V1Ivyiw1UaLwNLMU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YNSM7lB4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Noq80VJB; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="1oFYc5pb"
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6b1d8944cb0so1136215a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 11:11:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YNSM7lB4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Noq80VJB"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CHv62c4086162
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:12:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	218J+j7wE8PIduGE71lICGhFvQKcwEnxX938pBY/Ais=; b=YNSM7lB4JH/yNGny
+	CkiKnKe2Q/7w9vBoMyHJg/uLWTnONhHn5J+/1bsPsEAs9AUyIxXShnRefFp3lNN7
+	5hqZyXp2gMfq9tjuyE4TlUWUQ2IW36U8gheCFvniVwXnJy8RETjpu0u0qjqWUgGI
+	7iZCLRvwUy6/ZpMWCRXTEj27D6TzlX9+IdQh4vawLxl+t8yNoEDxfGJ6xvpRLVcR
+	Ao/FfP1gSDZgFLvTgU9lCXKYwsPWi32FZmAd9aBiB1Sam2FeWMfCtsKkyphgXDSI
+	IN1E8sbVGedTsfCtjh7QWbRGXiG03Oc5S/YOd6iBR3krdFZcDZIV7mNW+5wlBPPr
+	wxa4/A==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8uh3jtb7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:12:37 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-351788121cfso15169eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 11:12:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1791828675; x=1792433475; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3a82ddz5GrnUXDGUPzMm5pep0Z9lqtKy5jkX8QwoyUY=;
-        b=1oFYc5pbPwC37cyjAkBRa2fAbFlAkzt9TBvoZ0ZFku1DOYyu4S+PyUk+ASQqfyxgOm
-         iHOHoxLvDOLKnj7H3+v7zc4+unrOMHL2NOam7RzAdcrOe4e/9nMVAHIgsbMq9rZ3Dj24
-         tS5bii5Bv8dxsFDrp5bPBhiJJezqKHFCVoQI+0IbCq9R7HRIypvDHEPCfWEFFcegNXPN
-         aoNSisCPkV/hiRV0NtpY9kR+XAxPZEudACwsJT1yjOGFHyfgb87sXVYTNByd7bL9t20h
-         sWrvu48LHbjhHw8QWZ2l4ORp5P1kOHXeD9h+wz+oAIyQ5bE3ZblM+nn3sxw2OSy2VFc8
-         oWZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791828675; x=1792433475;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1791828757; x=1792433557; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3a82ddz5GrnUXDGUPzMm5pep0Z9lqtKy5jkX8QwoyUY=;
-        b=0vAOa6HicrGduTED/bMm0L7agRXofWHv3rTy4kyMDWs5nB+sGUrbN+JNMzHVQ60FiN
-         t5Z/4PB94CvR3mIXUrukLXtI2RHZ1Vwqyl2aJI/vYyYl2kMJ8cE/gcF8K7YC9zcI3B3b
-         HNTZBL9SLteOccIcd3utNaCTCMDRPikGvnPd5oDDdzY1QMNQiSMJQnOcpEJX8ngN1hC5
-         R8BHURDNPKQm7QWJUZ1QW8eTzMG96QYL6fmfFFWbH544Iq8sRw8U+uxW8b9stK3k4l2q
-         OgoVvjdIOPMt4e2PVnyAvlVNsP9/P7kcU9PmaUWQA/LV6I/+y7P5qwuohfIH3Epv0aaL
-         kTzw==
-X-Forwarded-Encrypted: i=1; AKwUvBwSrnNeM01ENAbdiPjw/yFdrHpMhlGh4jfr6eKd7CQ57FJvNJ0X60AQNIl/Uu8oW+1waqWLrvqdBMYU0qr/@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ7knhoRWC0YaO4Kre97SWN+pxrbD7v2Vwe/I8xvPsHhHhxdrs3
-	aobXZaOq3H3M5B5bENqYsRtqpkynVZCy+1ykZwy2/L2xhSlWJo7CqhaSiQZbItacy+o=
-X-Gm-Gg: AYBFou2AQXyaxdHRjyl/qcvCihYrH5GCPP31WWsf9KXjdPi+MSlUT5DuCLva/eOCFzc
-	ofkg6weJwjbGic5jHrX6aOq9ouA+hNCGNJzGwP17nlp9SxWm4itepLs5fnDFlvpHvO5tCloA38J
-	d+4Mxdui5OxCxULs/jQY+MnNA6Pu01NaA/dSNkOoRpEN9hSdTcnQIl1YO0VKpw0ZdowU7l9b4QF
-	hwENg4HRZdzF7rsOwIXmP9U7WMR0zkrLthVgsQnZmGJfl2Bzn1Ggn1Ssw7D+9apFtaqP3jJAquf
-	znro0zNrCk67b0BQL9crRgZyfI8OMOnlYJpg9s671obI9dSswtDufxPlEQYYeUhVwme6t9pSt0j
-	1fvuXRiZJIUjhquANQkObrRwD4GsJwI9g/cAeHoDIWdRqR0222lpmukv+RPYEJHFsWCUxrZbYcl
-	tv3vrtWHvBbs/bhrHKs44BbAphwu3Ne2bmjeHRogyZ+1EXuQrGw1Ob/Qm0sdl4nIYMVHEP52ofA
-	sRtA4mWlpChy89pGfdnTu44YupeKKoWxbXaMD5QIxS0/CyadazgWNuSpZPTkAtr2f+UpMRuithU
-	RF0+xEO/e50O9lOKvhS6
-X-Received: by 2002:a17:907:d8f:b0:c29:d31f:7d73 with SMTP id a640c23a62f3a-c31a9fd5dc1mr1021443466b.9.1791828675437;
-        Mon, 12 Oct 2026 11:11:15 -0700 (PDT)
-Received: from [192.168.101.179] (2001-1c04-0504-7401-4b2e-1820-6d24-b264.cable.dynamic.v6.ziggo.nl. [2001:1c04:504:7401:4b2e:1820:6d24:b264])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9ac924dsm498415466b.70.2026.10.12.11.11.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 11:11:15 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Mon, 12 Oct 2026 20:11:05 +0200
-Subject: [PATCH 3/3] arm64: dts: qcom: Add Samsung Galaxy Book2 Go
+        bh=218J+j7wE8PIduGE71lICGhFvQKcwEnxX938pBY/Ais=;
+        b=Noq80VJBdkDsTop9jfBPtASzuH3378inM5C3trX88Qqht7uSdKZZURNAmyMVPjNKig
+         zK9dNHcx/3MMgPE22x1yNMOuxhdBzA8Y3r5TlY+764deUTsjqgfaIwamx8VgNFFZIwad
+         G8sa68cgnvh8+70PjWOt7oVzoHnvjRz74lclx7brXP31URmkwp2mozHrL9Thxl82txrk
+         6OHX/uOnwfwj8x1/P6l82bMIYiO1jbOZqm359B9MlAgAaIycmYgVuAg01CzjT72FR/i1
+         8B5XUjhILWnXObhREvNzgUkFZ/485zuUeuKllJ4A3fpGvzkhnulKoSTvJD0qlSFmFBDQ
+         p4dA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791828757; x=1792433557;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=218J+j7wE8PIduGE71lICGhFvQKcwEnxX938pBY/Ais=;
+        b=xzShVrQ7CVQfBM6SKj+tgEJA4mI3mNQMowhaa+Pi0V4GIQ/gsgzsDM3m5pEnn5ESwy
+         2NdiW9K2im9QNDYj4mBu8VrzCWQrkb05Xt5/sVhdWMFjKctRw9dbUqax7+twgVK/tyK4
+         rQPeuAYCWZf5icKhljJqECc1midstrIez+vclEWjiBnywUvK5dSuyBEbIP2J+2oyit4v
+         GSDMkFkj9r706wuci+5odBPC6PIJm9GVxdIPLqmhECjfeHYgLu2Wfl7rzsmQnKiU43p/
+         z1QGVQOHQ36b43fO0bhdLY7D67a2dAsGuFIwUW5U3uIzt7GgKnpg6Ttqw9ouRt7OI51t
+         L3tA==
+X-Forwarded-Encrypted: i=1; AKwUvBy3D8aojBwNG3p6cm9bWlpwANm38hVWgg2USztvOdOVsquY60/zv6EFrUpHnUd1fY5NVH9pOP5SQedDkc7P@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ3ENDoyD94wMOBPabRPqQNGNsjmFKaz9kgKAX89yM3Ki5sEU0i
+	03IjRfdSNAHBa9EFRzku1zy+SU4MDceJbzERONUWnB0UQWzCwi++8WwvEmXLg9MBGu4AqrIAbHR
+	qXdDjWBeWlKFRsQY1qvKpZpSZ0r4SQP2zNIhygcz6ZsGbkWbbTVfl+0c4TpitFttfoE4K
+X-Gm-Gg: AYBFou0HQtpKQChmqfFTIP+/9CiosuW1DOiOIwzJeH7zgMsHJJXC0G9yZ4nCf5/Ymkz
+	aaD5LZU2zp3LVpZkPtsL0aY+XHyYobpxBweuvams4GnORWWZqPIyrRdnE8PiWitRLu/OqM0+VYM
+	vRQSEWIK/OOVe2cgiIVn18JkI5NRCdf9cVuGPZtiZS8JtA1tcUXaOyz7yimc27j0vfEe8p7u2KK
+	dOy7XKZxDD7gYwY/hBr32EB921VUuwdF6lLe3jXb+EQLH83Djz9JpP8QJl8qu/BOUugbYKJarhp
+	gbLB8r4lUpTsvCV+kQvvuZnyNaoP5Af3E2M0eVcTx3FPyi9hSFLa0v4hj97LWnZk6Fsc7x+hb/z
+	Ivtdy/BE68gLQrrl3/vjcl4rFEw5ChF4=
+X-Received: by 2002:a05:7300:6822:b0:35b:bb89:231e with SMTP id 5a478bee46e88-35bbb892336mr1842532eec.29.1791828756625;
+        Mon, 12 Oct 2026 11:12:36 -0700 (PDT)
+X-Received: by 2002:a05:7300:6822:b0:35b:bb89:231e with SMTP id 5a478bee46e88-35bbb892336mr1842396eec.29.1791828754450;
+        Mon, 12 Oct 2026 11:12:34 -0700 (PDT)
+Received: from [192.168.0.215] ([49.205.115.55])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537c841648sm40504487eec.3.2026.10.12.11.12.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 11:12:34 -0700 (PDT)
+Message-ID: <1997618b-1350-4b67-9168-794be3e40683@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 23:42:28 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/7] Qualcomm Sahara protocol enhancements
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, mhi@lists.linux.dev
+References: <20261008-sahara_protocol_new_v2-v7-0-90d278bd7414@oss.qualcomm.com>
+ <asu5x72z9-p0U8G0@debian>
+Content-Language: en-US
+From: Kishore Batta <kishore.batta@oss.qualcomm.com>
+In-Reply-To: <asu5x72z9-p0U8G0@debian>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261012-book2go-v1-3-7188e7ea7a15@fairphone.com>
-References: <20261012-book2go-v1-0-7188e7ea7a15@fairphone.com>
-In-Reply-To: <20261012-book2go-v1-0-7188e7ea7a15@fairphone.com>
-To: Douglas Anderson <dianders@chromium.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, cros-qcom-dts-watchers@chromium.org
-Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- Luca Weiss <luca.weiss@fairphone.com>, Jasper Korten <jja2000@gmail.com>, 
- Federico Amedeo Izzo <federico@izzo.pro>, Luca Weiss <luca@lucaweiss.eu>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791828669; l=15911;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=Y6IkfJVo8OdD/E5asQkmfMjQa0Pptj/sIYcLSB1GiEQ=;
- b=o8udCmoEQniTklG5LQtU4+NXjB49mpF3nyRi64VwOB8PpUs055HvzbRuiXWA85PEQtGHO6Hwd
- jphrC+pmASJDkI/Vtf6gP99mcKGUKXg/Hmmixmbu6il54Z52LXYBvfe
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA3MiBTYWx0ZWRfX//a4gGkfsSkI
+ XlwZWECa/G1VXTLpWz03P/5XTQ9KUQiNv0v7zFaV+bLLmQORRPsyTolmDRR7jmtBV0lFKUZuuKL
+ hAgrbGYAp1ePV2dJ+DdpsXVfJZp8tO4hQnMlBcZAZ2/RN2JOUlSmNsaBwm+bicYA1RevFkQZn72
+ adSqnLWA/aprtswZSSdfINti+lxzbAKW90NRs+PnvYRVdQkyqA8YYgBNNDKoQ5DEvUa7M/axVjT
+ g5M3hdWp1qJuHxn3naS5OgfcGW8Gx9N4ZqVJVply7iId/GMELA8tLdVh0oqNsv9ncVFF9uOOhJG
+ hWcn+LTW+w8L0emlwRw1NvlDzhcxAcPpoQdc3C4dBdHpYlEGFxWvZgzgu967Kz6jq07crcpCvFJ
+ YI/Sg8Cd9TZgl6c8XavYhlvTemholyInLoS9RIvrvha8u83W219mz+1NKk8Bc91g1GcdBZA1YP8
+ IGhEQRjuTOtMgfumMKw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA3MiBTYWx0ZWRfX+ETPbDNMlifw
+ QHsA3nTd0gq9/Z+yQX+BZ9JCytrzys7DmY2k5+CSnOrkd16osCOGTIdIz/VVbMWLO9vklGJ3+46
+ dxBYVw2+x+5nrd1IWiMkKqm8cZVIRvI=
+X-Authority-Analysis: v=2.4 cv=QO391QLL c=1 sm=1 tr=0 ts=6acd2315 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=rMnsrh5NOwviKPWndHUBiA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=YvxDvPKW4DV_tE5yJ3MA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-ORIG-GUID: z5gutV3If0JcJ0s02Kt4tBV_VGTBOmuX
+X-Proofpoint-GUID: z5gutV3If0JcJ0s02Kt4tBV_VGTBOmuX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-12_05,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 impostorscore=0 phishscore=0 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120072
 
-From: Jasper Korten <jja2000@gmail.com>
 
-The Samsung Galaxy Book2 Go is a laptop with a Snapdragon 7c+ Gen 3 SoC
-(SC7280).
+On 10/11/2026 10:03 PM, Manivannan Sadhasivam wrote:
+> On Thu, Oct 08, 2026 at 11:53:44AM +0530, Kishore Batta wrote:
+>> Hi All,
+>>
+>> This series reworks the Sahara protocol driver to make it reusable for
+>> multiple MHI based devices and adds support for capturing, restoring and
+>> exposing DDR training data using the Sahara command mode.
+>>
+>> The Sahara protocol is transported over the MHI bus and is used by multiple
+>> flashless devices to transfer firmware images, retrieve memory dumps and
+>> exchange command mode data during early boot. However, the current
+>> implementation lives under the QAIC accelerator driver and contains
+>> device-specific assumptions that limit reuse.
+>>
+>> Some MHI devices (for example, QDU100) expose the sahara protocol directly
+>> on a "SAHARA" MHI channel and rely on command mode to exchange DDR training
+>> data with the host. The existing driver does not bind to such devices and
+>> ignores Sahara command mode packets, causing training data to be dropped.
+>>
+>> This series addresses these issues by relocating the Sahara driver to the
+>> MHI subsystem, centralizing device specific configuration and adding command
+>> mode handling for DDR training data.
+>>
+>> Overview of the changes in this series -
+>> 1. Move Sahara under the MHI subsystem:
+>>     a. Relocate the sahara protocol driver from QAIC accelerator tree to
+>>        drivers/bus/mhi/host/clients directory.
+>>     b. Register Sahara as an independent MHI protocol driver.
+>>
+>> 2. Generalize device matching and configuration
+>>     a. Allow the driver to bind to devices exposing the protocol on a
+>>        SAHARA MHI channel.
+>>     b. Centralize firmware image table selection at probe time using a variant
+>>        table, instead of scattered conditionals.
+>>     c. Preserve existing behavior on AIC devices.
+>>
+>> 3. Add QDU100 firmware image table support
+>>     a. Add a QDU100 image table and select it based on the matched MHI channel.
+>>     b. No separate client driver or registration mechanism is required.
+>>
+>> 4. Add Sahara command mode support for DDR training.
+>>     a. Handle command mode packets(CMD_READY, EXECUTE, EXECUTE_DATA).
+>>     b. Query supported commands and retrieve DDR training data from the device.
+>>     c. Allocate receive buffers based on the reported payload size and copy
+>>        raw data from the MHI DL.
+>>     d. Store training data in controller-scoped memory using devres so it
+>>        survives sahara channel teardown.
+>>
+>> 5. Expose DDR training data to userspace
+>>     a. Add a read-only binary sysfs attribute under the MHI controller device.
+>>     b. The attribute reads directly from controller-scoped storage and remains
+>>        available after the Sahara channel device is removed.
+>>     c. Cleanup is handled automatically via device-managed resources.
+>>
+>> 6. Document the sysfs ABI
+>>     a. Add ABI documentation describing the DDR training data sysfs node.
+>>
+>> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
+> Series fails to apply to mhi-next branch. Please rebase and resend. Since I'm
+> about to send the PR for v7.4, this will miss the upcoming cycle. But I can
+> queue it once v7.4-rc1 is released.
+>
+> - Mani
 
-Add initial functionality:
-* Display (with backlight, GPU)
-* Touchpad & keyboard (without Fn key mapping support)
-* UFS storage
-* SD card
-* USB Type-A port
-* Modem and mobile data
-* WiFi & Bluetooth
-* ADSP & CDSP bootup
-* Battery fuel gauge
-* Venus/Iris
-* Lid switch
-* RGB LED (Operating status LED)
-* Webcam (USB UVC)
 
-Notably missing:
-* Speaker & microphone
-* Charging
-* USB Type-C ports (except when active at boot)
-* DisplayPort on right-side USB-C port
+Sure Mani. I'll rebase the series onto the current mhi-next branch and 
+resend it in v8 version.
 
-Signed-off-by: Jasper Korten <jja2000@gmail.com>
-Co-developed-by: Federico Amedeo Izzo <federico@izzo.pro>
-Signed-off-by: Federico Amedeo Izzo <federico@izzo.pro>
-Co-developed-by: Luca Weiss <luca@lucaweiss.eu>
-Signed-off-by: Luca Weiss <luca@lucaweiss.eu>
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |   1 +
- .../dts/qcom/sc7280-samsung-galaxy-book2-go.dts    | 643 +++++++++++++++++++++
- 2 files changed, 644 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 1c86e7e98f55..8e54d9ce5f3d 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -287,6 +287,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sc7280-herobrine-zombie-nvme-lte.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sc7280-idp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sc7280-idp2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sc7280-crd-r3.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sc7280-samsung-galaxy-book2-go.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sc8180x-lenovo-flex-5g.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sc8180x-primus.dtb
- sc8280xp-crd-el2-dtbs	:= sc8280xp-crd.dtb sc8280xp-el2.dtbo
-diff --git a/arch/arm64/boot/dts/qcom/sc7280-samsung-galaxy-book2-go.dts b/arch/arm64/boot/dts/qcom/sc7280-samsung-galaxy-book2-go.dts
-new file mode 100644
-index 000000000000..fe1a1b01f67e
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sc7280-samsung-galaxy-book2-go.dts
-@@ -0,0 +1,643 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2025, Jasper Korten <jja2000@gmail.com>
-+ * Copyright (c) 2026, Luca Weiss <luca@lucaweiss.eu>
-+ */
-+
-+/dts-v1/;
-+
-+/* PM7250B is configured to use SID8/9 */
-+#define PM7250B_SID 8
-+#define PM7250B_SID1 9
-+
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include "kodiak.dtsi"
-+#include "qcs6490-audioreach.dtsi"
-+#include "pm7250b.dtsi"
-+#include "pm7325.dtsi"
-+#include "pm8350c.dtsi"
-+#include "pmk8350.dtsi"
-+
-+/delete-node/ &ipa_fw_mem;
-+/delete-node/ &rmtfs_mem;
-+/delete-node/ &wpss_mem;
-+/delete-node/ &xbl_mem;
-+
-+/ {
-+	model = "Samsung Galaxy Book2 Go";
-+	compatible = "samsung,galaxy-book2-go", "qcom,sc7280";
-+	chassis-type = "laptop";
-+
-+	aliases {
-+		serial1 = &uart7;
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&hall_int_default>;
-+		pinctrl-names = "default";
-+
-+		switch-lid {
-+			label = "Switch Lid";
-+			gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
-+			linux,input-type = <EV_SW>;
-+			linux,code = <SW_LID>;
-+			wakeup-source;
-+		};
-+	};
-+
-+	pm8350c_pwm_backlight: backlight {
-+		compatible = "pwm-backlight";
-+		pwms = <&pm8350c_pwm 3 65535>;
-+		enable-gpios = <&pm8350c_gpios 7 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&pmic_lcd_bl_en>;
-+		pinctrl-names = "default";
-+	};
-+
-+	vreg_edp_3p3: regulator-edp-3p3 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VREG_EDP_3P3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 96 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&edp_reg_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	reserved-memory {
-+		wpss_mem: wpss@84800000 {
-+			reg = <0x0 0x84800000 0x0 0x1900000>;
-+			no-map;
-+		};
-+
-+		rmtfs_mem: rmtfs@a0800000 {
-+			compatible = "qcom,rmtfs-mem";
-+			reg = <0x0 0xa0800000 0x0 0x300000>;
-+			no-map;
-+
-+			qcom,client-id = <1>;
-+		};
-+
-+		ipa_fw_mem: ipa-fw@81800000 {
-+			reg = <0x0 0x81800000 0x0 0x70000>;
-+			no-map;
-+		};
-+	};
-+};
-+
-+&apps_rsc {
-+	regulators-0 {
-+		compatible = "qcom,pm7325-rpmh-regulators";
-+		qcom,pmic-id = "b";
-+
-+		vreg_l1b_0p8: ldo1 {
-+			regulator-name = "vreg_l1b";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <912000>;
-+		};
-+
-+		vreg_l2b_3p0: ldo2 {
-+			regulator-name = "vreg_l2b";
-+			regulator-min-microvolt = <3072000>;
-+			regulator-max-microvolt = <3072000>;
-+		};
-+
-+		vreg_l6b_1p2: ldo6 {
-+			regulator-name = "vreg_l6b";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+		};
-+
-+		vreg_l7b_2p9: ldo7 {
-+			regulator-name = "vreg_l7b";
-+			regulator-min-microvolt = <2504000>;
-+			regulator-max-microvolt = <2960000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l9b_1p2: ldo9 {
-+			regulator-name = "vreg_l9b";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l18b_1p8: ldo18 {
-+			regulator-name = "vreg_l18b";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		vreg_l19b_1p8: ldo19 {
-+			regulator-name = "vreg_l19b";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		vreg_s1b_1p8: smps1 {
-+			regulator-name = "vreg_s1b";
-+			regulator-min-microvolt = <1872000>;
-+			regulator-max-microvolt = <1872000>;
-+		};
-+
-+		vreg_s7b_0p9: smps7 {
-+			regulator-name = "vreg_s7b";
-+			regulator-min-microvolt = <952000>;
-+			regulator-max-microvolt = <952000>;
-+		};
-+
-+		vreg_s8b_1p2: smps8 {
-+			regulator-name = "vreg_s8b";
-+			regulator-min-microvolt = <1256000>;
-+			regulator-max-microvolt = <1256000>;
-+		};
-+	};
-+
-+	regulators-1 {
-+		compatible = "qcom,pm8350c-rpmh-regulators";
-+		qcom,pmic-id = "c";
-+
-+		vreg_l1c_1p8: ldo1 {
-+			regulator-name = "vreg_l1c";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		vreg_l6c_2p9: ldo6 {
-+			regulator-name = "vreg_l6c";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2950000>;
-+		};
-+
-+		vreg_l7c_3p0: ldo7 {
-+			regulator-name = "vreg_l7c";
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3300000>;
-+		};
-+
-+		vreg_l9c_2p9: ldo9 {
-+			regulator-name = "vreg_l9c";
-+			regulator-min-microvolt = <2960000>;
-+			regulator-max-microvolt = <2960000>;
-+		};
-+
-+		vreg_l10c_0p8: ldo10 {
-+			regulator-name = "vreg_l10c";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <880000>;
-+		};
-+
-+		vreg_l12c_1p8: ldo12 {
-+			regulator-name = "vreg_l12c";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+	};
-+};
-+
-+&gcc {
-+	protected-clocks = <GCC_CFG_NOC_LPASS_CLK>,
-+			   <GCC_EDP_CLKREF_EN>,
-+			   <GCC_MSS_CFG_AHB_CLK>,
-+			   <GCC_MSS_GPLL0_MAIN_DIV_CLK_SRC>,
-+			   <GCC_MSS_OFFLINE_AXI_CLK>,
-+			   <GCC_MSS_Q6SS_BOOT_CLK_SRC>,
-+			   <GCC_MSS_Q6_MEMNOC_AXI_CLK>,
-+			   <GCC_MSS_SNOC_AXI_CLK>,
-+			   <GCC_QSPI_CNOC_PERIPH_AHB_CLK>,
-+			   <GCC_QSPI_CORE_CLK>,
-+			   <GCC_QSPI_CORE_CLK_SRC>,
-+			   <GCC_SEC_CTRL_CLK_SRC>,
-+			   <GCC_WPSS_AHB_BDG_MST_CLK>,
-+			   <GCC_WPSS_AHB_CLK>,
-+			   <GCC_WPSS_RSCP_CLK>;
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/qcdxkmsuc7280.mbn";
-+};
-+
-+&i2c0 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	/* SSTP0001 */
-+	touchpad@40 {
-+		compatible = "hid-over-i2c";
-+		reg = <0x40>;
-+		hid-descr-addr = <0x0e>;
-+
-+		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
-+
-+		vdd-supply = <&vreg_l7c_3p0>;
-+		vddl-supply = <&vreg_l18b_1p8>;
-+
-+		post-power-on-delay-ms = <2>;
-+
-+		pinctrl-0 = <&hid_touchpad_default>;
-+		pinctrl-names = "default";
-+
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c1 {
-+	status = "okay";
-+};
-+
-+&i2c2 {
-+	status = "okay";
-+
-+	/* A96T396 Proximity @ 0x20 & 0x21 ? */
-+};
-+
-+&i2c4 {
-+	status = "okay";
-+
-+	/* LIS2DLC12 Accelerometer @ 0x1d ? */
-+};
-+
-+&i2c9 {
-+	status = "okay";
-+
-+	/* A96T396 Proximity @ 0x20 ? */
-+};
-+
-+&i2c10 {
-+	status = "okay";
-+
-+	/* ? @ 0x09 */
-+
-+	battery@b {
-+		compatible = "sbs,sbs-battery";
-+		reg = <0x0b>;
-+	};
-+};
-+
-+&i2c12 {
-+	clock-frequency = <100000>;
-+
-+	status = "okay";
-+
-+	/* SSEC0001 */
-+	keyboard@5 {
-+		compatible = "hid-over-i2c";
-+		reg = <0x5>;
-+		hid-descr-addr = <0x20>;
-+
-+		interrupts-extended = <&tlmm 131 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&hid_keyboard_default>;
-+		pinctrl-names = "default";
-+
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c14 {
-+	status = "okay";
-+
-+	/* EC2 (?) @ 0x62 */
-+};
-+
-+&ipa {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/ipa_fws.elf";
-+
-+	status = "okay";
-+};
-+
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_edp {
-+	status = "okay";
-+
-+	aux-bus {
-+		edp_panel: panel {
-+			compatible = "edp-panel";
-+
-+			power-supply = <&vreg_edp_3p3>;
-+			backlight = <&pm8350c_pwm_backlight>;
-+
-+			port {
-+				edp_panel_in: endpoint {
-+					remote-endpoint = <&mdss_edp_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_edp_out {
-+	data-lanes = <0 1 2 3>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+	remote-endpoint = <&edp_panel_in>;
-+};
-+
-+&mdss_edp_phy {
-+	vdda-pll-supply = <&vreg_l10c_0p8>;
-+	vdda-phy-supply = <&vreg_l6b_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&pm8350c_gpios {
-+	pmic_lcd_bl_en: pmic-lcd-bl-en-state {
-+		pins = "gpio7";
-+		function = "normal";
-+		bias-disable;
-+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
-+		output-low;
-+		power-source = <0>;
-+	};
-+
-+	pmic_lcd_bl_pwm: pmic-lcd-bl-pwm-state {
-+		pins = "gpio8";
-+		function = "func1";
-+		bias-disable;
-+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
-+		output-low;
-+		power-source = <0>;
-+	};
-+};
-+
-+&pm8350c_pwm {
-+	pinctrl-0 = <&pmic_lcd_bl_pwm>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+
-+	multi-led {
-+		color = <LED_COLOR_ID_RGB>;
-+		function = LED_FUNCTION_STATUS;
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		led@1 {
-+			reg = <1>;
-+			color = <LED_COLOR_ID_RED>;
-+		};
-+
-+		led@2 {
-+			reg = <2>;
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
-+
-+		led@3 {
-+			reg = <3>;
-+			color = <LED_COLOR_ID_BLUE>;
-+		};
-+	};
-+};
-+
-+&pon_pwrkey {
-+	status = "okay";
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&qupv3_id_1 {
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/qcadsp7280.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/qccdsp7280.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_mpss {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/qcmpss7280.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_wpss {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/wpss.mbn";
-+
-+	status = "okay";
-+};
-+
-+&sdc2_clk {
-+	drive-strength = <16>;
-+	bias-disable;
-+};
-+
-+&sdc2_cmd {
-+	drive-strength = <10>;
-+	bias-pull-up;
-+};
-+
-+&sdc2_data {
-+	drive-strength = <10>;
-+	bias-pull-up;
-+};
-+
-+&sdhc_2 {
-+	vmmc-supply = <&vreg_l9c_2p9>;
-+	vqmmc-supply = <&vreg_l6c_2p9>;
-+
-+	pinctrl-0 = <&sdc2_clk>, <&sdc2_cmd>, <&sdc2_data>;
-+	pinctrl-1 = <&sdc2_clk_sleep>, <&sdc2_cmd_sleep>, <&sdc2_data_sleep>;
-+
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	qup_uart7_sleep_cts: qup-uart7-sleep-cts-state {
-+		pins = "gpio28";
-+		function = "gpio";
-+		/*
-+		 * Configure a bias-bus-hold on CTS to lower power
-+		 * usage when Bluetooth is turned off. Bus hold will
-+		 * maintain a low power state regardless of whether
-+		 * the Bluetooth module drives the pin in either
-+		 * direction or leaves the pin fully unpowered.
-+		 */
-+		bias-bus-hold;
-+	};
-+
-+	qup_uart7_sleep_rts: qup-uart7-sleep-rts-state {
-+		pins = "gpio29";
-+		function = "gpio";
-+		/*
-+		 * Configure pull-down on RTS. As RTS is active low
-+		 * signal, pull it low to indicate the BT SoC that it
-+		 * can wakeup the system anytime from suspend state by
-+		 * pulling RX low (by sending wakeup bytes).
-+		 */
-+		bias-pull-down;
-+	};
-+
-+	qup_uart7_sleep_tx: qup-uart7-sleep-tx-state {
-+		pins = "gpio30";
-+		function = "gpio";
-+		/*
-+		 * Configure pull-up on TX when it isn't actively driven
-+		 * to prevent BT SoC from receiving garbage during sleep.
-+		 */
-+		bias-pull-up;
-+	};
-+
-+	qup_uart7_sleep_rx: qup-uart7-sleep-rx-state {
-+		pins = "gpio31";
-+		function = "gpio";
-+		/*
-+		 * Configure a pull-up on RX. This is needed to avoid
-+		 * garbage data when the TX pin of the Bluetooth module
-+		 * is floating which may cause spurious wakeups.
-+		 */
-+		bias-pull-up;
-+	};
-+
-+	hall_int_default: hall-int-state {
-+		pins = "gpio35";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
-+	hid_touchpad_default: hid-touchpad-default-state {
-+		pins = "gpio61";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+
-+	bluetooth_enable_default: bluetooth-enable-default-state {
-+		pins = "gpio85";
-+		function = "gpio";
-+		output-low;
-+		bias-disable;
-+	};
-+
-+	sw_ctrl_default: sw-ctrl-default-state {
-+		pins = "gpio86";
-+		function = "gpio";
-+		bias-pull-down;
-+	};
-+
-+	edp_reg_en: edp-reg-en-state {
-+		pins = "gpio96";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-pull-up;
-+	};
-+
-+	hid_keyboard_default: hid-keyboard-default-state {
-+		pins = "gpio131";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+};
-+
-+&uart7 {
-+	/delete-property/interrupts;
-+	interrupts-extended = <&intc GIC_SPI 608 IRQ_TYPE_LEVEL_HIGH>,
-+			      <&tlmm 31 IRQ_TYPE_EDGE_FALLING>;
-+
-+	pinctrl-1 = <&qup_uart7_sleep_cts>, <&qup_uart7_sleep_rts>, <&qup_uart7_sleep_tx>, <&qup_uart7_sleep_rx>;
-+	pinctrl-names = "default", "sleep";
-+
-+	status = "okay";
-+
-+	bluetooth: bluetooth {
-+		compatible = "qcom,wcn6750-bt";
-+
-+		pinctrl-0 = <&bluetooth_enable_default>, <&sw_ctrl_default>;
-+		pinctrl-names = "default";
-+
-+		enable-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
-+		swctrl-gpios = <&tlmm 86 GPIO_ACTIVE_HIGH>;
-+
-+		vddio-supply = <&vreg_l19b_1p8>;
-+		vddaon-supply = <&vreg_s7b_0p9>;
-+		vddbtcxmx-supply = <&vreg_s7b_0p9>;
-+		vddrfacmn-supply = <&vreg_s7b_0p9>;
-+		vddrfa0p8-supply = <&vreg_s7b_0p9>;
-+		vddrfa1p7-supply = <&vreg_s1b_1p8>;
-+		vddrfa1p2-supply = <&vreg_s8b_1p2>;
-+
-+		max-speed = <3200000>;
-+	};
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 175 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l7b_2p9>;
-+	vcc-max-microamp = <800000>;
-+	vccq-supply = <&vreg_l9b_1p2>;
-+	vccq-max-microamp = <900000>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l10c_0p8>;
-+	vdda-pll-supply = <&vreg_l6b_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1 {
-+	dr_mode = "host";
-+
-+	status = "okay";
-+};
-+
-+&usb_1_hsphy {
-+	vdda-pll-supply = <&vreg_l10c_0p8>;
-+	vdda33-supply = <&vreg_l2b_3p0>;
-+	vdda18-supply = <&vreg_l1c_1p8>;
-+	qcom,hs-rise-fall-time-bp = <0>;
-+	qcom,squelch-detector-bp = <(-2090)>;
-+	qcom,hs-disconnect-bp = <1743>;
-+	qcom,hs-amplitude-bp = <1780>;
-+	qcom,hs-crossover-voltage-microvolt = <(-31000)>;
-+	qcom,hs-output-impedance-micro-ohms = <2600000>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_qmpphy {
-+	vdda-phy-supply = <&vreg_l6b_1p2>;
-+	vdda-pll-supply = <&vreg_l1b_0p8>;
-+
-+	status = "okay";
-+};
-+
-+&venus {
-+	firmware-name = "qcom/sc7280/Samsung/galaxy-book2-go/qcvss7280.mbn";
-+
-+	status = "okay";
-+};
-+
-+&wifi {
-+	status = "okay";
-+};
-
--- 
-2.56.0
 
