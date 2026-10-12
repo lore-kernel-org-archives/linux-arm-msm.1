@@ -1,88 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5A3133A9E1
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA258348C6B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791797339; cv=none; b=WziRlmFTw4ugdniCAIQSGt5EchZ12KDE6edwdXaZ+yaY/hBsJLeOn9+lqRy78T8U3/J2pAqn+72iLpB+JvKsShAe+dEVwBL5gpUv9QZ/9OHTHf7nsssakN1M1oC+KzEnJ1mIkdYNdrFJrp7bPHvKnAZjX0HPwWWbe3ecFw5w2/E=
+	t=1791797771; cv=none; b=qJDoTuhDCFs+vfoIJ+NAyza1i0AVmEJQwN7E88X4E8G56ZACSr50pELuzAhl9Ni9m8akJ+9TvVysIZNzBcY+Iy2Gj+93QAsUC1obIurYU983rj4GUoyx243berUQQ1is1YDslfLBcoIs1TGcgmcgIWuytCqub8+yfN5LLRSVnUg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791797339; c=relaxed/simple;
-	bh=HyAYHeh1Vo0SrqzbBagm0y+GX6OcPB+IoMqBVEfh+Zs=;
+	s=arc-20240116; t=1791797771; c=relaxed/simple;
+	bh=Cd1sz5HqVwywuKmbSEi2GjApynlrMw3/S4hBxggZCtA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uUXLOi4yOdkv9230px4RVIznnPetKjYMHXrNz9mjwBMoAuvogevGbukfxUjSaKIHlOk4AGNKFY5Z1Yq0yhWzLeMU11xzaje4mlc3oGOp77RLMxfNbxMLij+m1zf0+agIc8PyqGSnuYDmGwaCG5oJ2C97OTi7joSI8h4lPeoXnYA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Bbc6jrA4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qz3QUg2P; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=QwzZEjXhWgRCugGLloLmWQT31q5+oUORT0cOZTY3Rh+tS6NP70uW7pXZnYrZE1PfXi8M6NplOcLoUsWbliLeNNCHylHGyFSlEhWSDgRmKw50iFm5/8ByxNlu39ZUVok0FMv8zyODQcKUtmMzpfGltEBMQdfQy6pvkkOQ4fojac0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SUoBJNe0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RRTuwbtf; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Bbc6jrA4";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qz3QUg2P"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KcLo1592777
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:55 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SUoBJNe0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RRTuwbtf"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8LEQx1754822
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=; b=Bbc6jrA42muGp6HO
-	oHKS+YUI6IhV4RWCKAeyLGKtG31nv2MYtBZDcMC2gL7niCl0QTJaT6u/eglnQpeD
-	AnpshpMQET3PGlJtVkNQwxXSA1ndc6lcVRaZQv06eXoFxYVu62I5IXmiqaPUCKzs
-	/mXRvLQ3kSDuDAhcavgI1Ot6KXibFERbSfuPrJvCvqFBQMBQr+Mt5cdPOAEMAlyt
-	bgV82iEcXh5TXGwarphcbD8/sChwrGpy+slqpsAsVEObbF34B/iBT34Di5A7LoR1
-	Lz7E9hihErRoJ7SG0aSjaMuz6Zz/t3Mlxn24sv3t+1sVad2dfudMyInC2zzxt1OM
-	zDx/pw==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu10t6-1
+	vFI6tpwU01Vx9Ur1mcn8qmOufatJQe19bsiv/JBf6+I=; b=SUoBJNe0eJ8QLDwM
+	XVWcB7cO5XkHjsV0YxCtcZpg1Ex9AhGqVqkWaA/gC1XSQlof4xfLYmreJVV0KMzm
+	vINpEem1O/EBoCtHU1V5faS+EtIg5Dr53hHTl++L5m3N5YU7/hQ9T08HF/mNpg/d
+	ECwQ8WgGr9Qnhbn98hWjTwkPrTDqJqg5Zaa6FtTj4PLiggDJNp4ATCwpHXKeyYKF
+	OO3Tos2CYiDLInEd093sYJSBiplCag5/JOz1U/TfeEOdX9dWGF1m2RCtSqE3akmq
+	O1iwqs6CL5N9IftG/O31Savzt3RGdme2Wg9f2VWAEHhDZJUOdnpIua5su1blkr6F
+	87apPw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8j712506-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:28:55 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2e61a8eb087so32085645ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:28:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:36:08 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8862ed0539dso2028092b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791797330; x=1792402130; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=;
-        b=Qz3QUg2P4sT9JBSMR+fXKJl4jUnbwbvhcyK5oRQEeSV/ax0e00Sn9Ziha4ftU1M44S
-         aoEu7fyN6j7E9lb9h15/I9AFK3w7qUIKv+WQFLWFchn0M08A20S3NO25TrFtrbRrshfh
-         8L+L3QisaDifLlDrME4vz+mqvE25QU/vCQzWFTE43gsGMgFf05dv7eD69az4Kn6Oe77a
-         cHpX2b26V4wMNQdYT5twzWypKhFcjZg3X4SROhgygEgy2NiOwC7+fS+gl0SSMk7PiCJK
-         W8S1yV0JTrEys8w3fCHxPhBhTLuofUvFdlXxXr8nUStRTdIcMUaoaBhIxL63kseN3OU4
-         FA9g==
+        d=oss.qualcomm.com; s=google; t=1791797767; x=1792402567; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=vFI6tpwU01Vx9Ur1mcn8qmOufatJQe19bsiv/JBf6+I=;
+        b=RRTuwbtfeH+9RNoqgKoG4E/ueZW/0qeWM1FUdPwTlVcBgCNPZdcmoVUT4kY20XVOlV
+         Om67wnNGNDlEqbXj67grflZtKABC04XaYYazExVb6dy647tfcczCPvVJPbenqnVfJpqY
+         I+2VON6VLy8NNy93YDJPcxvxjh6uEJOnBDpZr3YhO1+w6L9JJBHvaaaGMllDjP0Lkf5N
+         QA9lqYQ11JK9aiKbGtjjKtynEPpU5IUcBzmT3/LTSLxiYfPo/wES84FAlGpzxA7ZFW28
+         JE6ndob4PiRwn0ImxJzzq1xoZMehEZ50+IMMMUSwD5KjuOe14O5ZTKmM0Pem9WTb06Fj
+         zRwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791797330; x=1792402130;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6zN8RehjJsYWPFVmwb24sNULXmAN9Lv2jI4egGwK8oA=;
-        b=HOW5Tm1iAau27ti5Fzsh0Cm+uHZ0s532i/TPtQIB/gTLjrXvl52qtgRo8yXV3mY+xq
-         797xcPAH7JbtUrJs2AqR8ujY/6QrFVzrw692sY1QDXvFUkvc1PN521lkUblHomqJmzWQ
-         thu4aE5V5DSIzpYNVJatg+d95phkn300LUOhaUnhXY6+JmFDImkxTpJDhv53qHZNjNB6
-         QNcmLp33zsK2gPryFoHZOVCpioJ7guZIDc1POlNMXRTW/g3V3EJp/71Y7vZA1utirpGh
-         +LXWnBohe3/8BAfNHQL8pY7yxGUV9HLHm9BWek20Kyt73YALYaSIgeQOqZDbz82q1NgA
-         EW+Q==
-X-Forwarded-Encrypted: i=1; AKwUvByjpD7rk6ZUEbD05Acb5RPCoJH23wZk4sl+wMgLHAmFZGz6Zc6MrbygwOL9vpSTa7qWLQ0Y/tfI0ZD8r7Ef@vger.kernel.org
-X-Gm-Message-State: AFq9FYICJ/nRTGqGWIaRaXyGcnCzCi1CczFjaWP7yJkx+1XRS7rWOkct
-	bizNibzyTIVaOQFkTYF/p+vY2IHELMq7w2FpfV3xF8ETR/ae9/h8XP6rrmSJcqzRqzaD5vJ0n+M
-	3C6vgF22ZO08WHp3mccE1oXOJRb+um89wzFMd+/IILN0UHw6PhityjnXZy1gvxLMp22HL16EG24
-	0p
-X-Gm-Gg: AYBFou3/mQkVY7KC/rqYTm8DflEhLSqZ6bM5rVcHTDYORuLbfyO8j/HCZVuzj80kRjp
-	5jycDpZKWAq9JH/THuYw/jQwg+ZEECNXkpku0olqMMXD1yB87nMaztFIEAlg+y0zMss2jR0kYg+
-	gaGT6UjRu35iXGrSquq88z7cnnzO59sH24AQUEBnXL/TIhQZ9yi6yLvfDVm9sXP8XTT/SCyACO4
-	vnxRoJwgJSDDK9w109MOS37LkY7qotRoRcd1kpXKtr39NaVa2n5iQapCbUnCh8ovQOK8WfUQMAc
-	jlNZFvi3/yc74f5CbiveUIekAT2SoClVC19FNaW8b2hhItPaxi9ANK6Ch8gzmKzd0z2W8cMDjSa
-	seLiN6jGcxK6iw/HSavZapyz/6D9pgw==
-X-Received: by 2002:a17:903:4b4f:b0:2e3:1d30:8654 with SMTP id d9443c01a7336-2e842cd4527mr77385315ad.10.1791797330365;
-        Mon, 12 Oct 2026 02:28:50 -0700 (PDT)
-X-Received: by 2002:a17:903:4b4f:b0:2e3:1d30:8654 with SMTP id d9443c01a7336-2e842cd4527mr77385075ad.10.1791797329860;
-        Mon, 12 Oct 2026 02:28:49 -0700 (PDT)
-Received: from [10.218.5.182] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8421b1807sm40875295ad.43.2026.10.12.02.28.44
+        d=1e100.net; s=20260707; t=1791797767; x=1792402567;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=vFI6tpwU01Vx9Ur1mcn8qmOufatJQe19bsiv/JBf6+I=;
+        b=16+RGKZXxo0nQilSp2fECBn9fq47/YVfbrRACc9sfEt3z8xH+PS8X8vQFGFrZD7ie0
+         iDR6HZykiJ++ztZCxFlneX/qQ+oalUpv0miTsXCY+9erZivSmTdK6TbABEwlF8o2sTOC
+         0DfkhTSxAS6g21idCFIjEhFIcWFtHJ3N44x1QaubbugRnWSaMXj8Wju/9sGYtPOfB5MF
+         OVHcj8i2qq99dnnKUEmnOQv8KO43tQeCRBlNhh2QNuPP7leixpgc0gLV2V4SLWDyRhDb
+         kGhCSYGtxPgbD6GyiBCge8qKenooYemQs+Svbbo8aicRE2s97viIdXXC2cID8S9tQIli
+         u6Qg==
+X-Forwarded-Encrypted: i=1; AKwUvBywC/vs5UGIP1p+BrxqtrH7wV8FEicPOjGkFNU0Ug7ZZAc13S/RkFm8b3xIb6WauuPG0ERuigtt8eqEKalC@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ7k0xLuS4cvlBMMdix9kH0FVU4aJGvs4Z9hUuyKmtJiXlk+eFX
+	pNF7w/zl6O2I0NVLL6QF5XD6HYsUuThxhvrBNzdeKX8GJwS0brSOeru8nFoQ++xrQn82hT1nwVN
+	DuMKzNmRlvfaBVFLH93KznCP0RPM4TL1XoGzHhxqM9Rc7QSwSZQkxF6wzaxZYxOVLLU1C
+X-Gm-Gg: AYBFou0C1EwXUjCRnkkCUZoomkY/yRNvHh9SWgpbdplHS4UKeV3b/6J5+yUnA2e/cqQ
+	+N7E34blfMKQRjVXgNZNp9RKLTyTJnMxPVpGjQ2v0fPCSXHs8Tk5NoeuhBV6M2Af8YAPYAN87Bn
+	DAcyN+6GK4aIzA17JP8pninzwWYMC8COKxL4tGsDJW4n3fJw+ACT7EJkSAHufXEtrfSjkn8eGQB
+	IEJdd87PbI9y3UikpnW7dYeqynRGhIR0T9VWz53VPpyQeycqMVJdR8dc9P3ZCQKpfASace1L4Rr
+	wZXj5Q/IW3gntcKVRpTHENDxaMDc2WP4tgu1L4cDLr9W2TtxmAY4+uujOqH4G1dT5EPHJXc6MPU
+	ePSd/Oa6aC03JBjPs+ZJTjhMBym1Mfw==
+X-Received: by 2002:a05:6a21:610e:b0:3dd:a00a:1715 with SMTP id adf61e73a8af0-3e16bebe9c7mr7324441637.48.1791797767389;
+        Mon, 12 Oct 2026 02:36:07 -0700 (PDT)
+X-Received: by 2002:a05:6a21:610e:b0:3dd:a00a:1715 with SMTP id adf61e73a8af0-3e16bebe9c7mr7324422637.48.1791797766811;
+        Mon, 12 Oct 2026 02:36:06 -0700 (PDT)
+Received: from [192.168.29.10] ([49.37.155.134])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd3d9d4fc36sm4014405a12.1.2026.10.12.02.36.02
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 02:28:49 -0700 (PDT)
-Message-ID: <273f7f8c-e24d-4322-a418-4fd5ed84b0bd@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 14:58:43 +0530
+        Mon, 12 Oct 2026 02:36:06 -0700 (PDT)
+Message-ID: <1854d39a-9ef9-4b04-8b5b-3384b8403375@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 15:06:00 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,138 +89,331 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: gcc-eliza: Use retention for PCIe power
- domains
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
+Subject: Re: [PATCH v4 6/7] firmware: qcom: Add support for TEE based EFI-var
+ client driver
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@kernel.org>,
+        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
         Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Krzysztof Kozlowski
+ <krzk@kernel.org>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20261006-qcom_uefisecapp_migrate_qcomtee-v4-0-bf1c8e2a64ab@oss.qualcomm.com>
+ <20261006-qcom_uefisecapp_migrate_qcomtee-v4-6-bf1c8e2a64ab@oss.qualcomm.com>
+ <r7gtspju4cp5iwelv4zs4xoh4d7ambeceptmjtqaf5hcjzmc5n@4msc3ap4yfhz>
 Content-Language: en-US
-From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-In-Reply-To: <20261011-eliza-pcie-gdsc-retention-v1-1-9349dba7e0b6@oss.qualcomm.com>
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Organization: Qualcomm
+In-Reply-To: <r7gtspju4cp5iwelv4zs4xoh4d7ambeceptmjtqaf5hcjzmc5n@4msc3ap4yfhz>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6acca857 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX08vPb9Zp7HQj
+ dJ4Aa79WRo2cJZtsTOuqr7+Yn+CJGNENqz5v1lZ3qF8pGMR/egLjI8kewAtuxbHSm07p/SlxKKq
+ PVkUNIe1miS6m35QfrQoNX2UzDcwhTU=
+X-Proofpoint-GUID: fCwbwcVSvkckU_x5S_j7YH4PXEJtPAM9
+X-Proofpoint-ORIG-GUID: fCwbwcVSvkckU_x5S_j7YH4PXEJtPAM9
+X-Authority-Analysis: v=2.4 cv=ePGGH3p1 c=1 sm=1 tr=0 ts=6accaa08 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=ivpbP8R7Mhpy7qfOLL/Q+g==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Z9TVNPNHG0Lt5lYLwu8A:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX2jDTq0lUG/4L
- 2W1k3+BJKjgQLjxvpo1b1Fv3xTZaPOOwo8F73ZtFe2O1r+3akZQPBB2/AQYrrl8KK44iWmVoT1S
- ahOr87BQctxnP6ANI6N0phy5o7UqRdyZ33ANZaUw0Ep0a2PujnZBt4VnjOP5OZf8n7uZpip+fPW
- 7kGkonU4ph5MlfdLjzcoS+tusb6z16ILToEdX1EUhJLj2oiytOnwOebhupGqmivNrN4MmR2dlfT
- FNk8+mGdPONAugBhWUZEQ/B8XmnrzgHc1RfkAsE1rxOdRyvvDF5tVyc3WkMHSqfskyS/cRxjwJ0
- w6892RE3jm7edCwkQvQkY/NJOlEBWIgXw4R2STqXNi3c7pOAfSfXl/3KFD8hMOqCWdPFIYG4OME
- QDoAQBn9ku3tYxT9auADLqKKqGPxjnz146cCMe3nj7rbcpSejAjIZaRwmfY+yoCqqtGGN6jhmfR
- KWiRWR+R0cUauvv4mNw==
-X-Proofpoint-ORIG-GUID: cg6fJo-Io7m5kEK7G0m4i_eeuXjb-s0t
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX9kf1qolwV39u
- 0DsNgOCXM8oud7h+LC09Aq50wj4+uvXzowBiY4lPMbwnwSG2tMMuwbI5GamuiNfImYOBMGvf0uP
- Q/fSAfvR37jdRV2UpFx9q3CPfBN8AGs=
-X-Proofpoint-GUID: cg6fJo-Io7m5kEK7G0m4i_eeuXjb-s0t
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=P-IC7800AAAA:8 a=VwQbUJbxAAAA:8 a=sfOm8-O8AAAA:8 a=LDF6XqZlvw75vdSADQcA:9
+ a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22 a=d3PnA9EDa4IxuAV0gXij:22
+ a=TvTJqdcANYtsRzA46cdi:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX4WmwicEzZs7b
+ swl0n6gH+WRmCOADjN9tmtBcHIGbLoHALM54C9XqP6IB6E2z67gLr4s5lD2Y+r0BDC++JwO3bOm
+ e1BqfFha813cRsLIVoqnnIWyNLwTXnNIHz1U5zeSUkxVv0iDAknQnTFtuKKVjNvNsc+qIRSE2jR
+ AV/oO5V4BRuYCaKHfGMl1GJQNKy7/cBHhtFGI4xInsHHzuRF9ptc018VeXWG0QYgdjFkA3UU7+y
+ 4IUgyZIvMm7vKMMCOJfNC6Zp9S70bI5ClDFYAgxGQQP/qfPdJXCTkJR4+wLfUJImAiRFqvO+5is
+ Z7sgYwHRLk2kANLeyShKRY4TUAR8VaiSkxECIsMKoGri84mjmlOtQ1XS3ctffZefoIi+HREulyi
+ FGnSd82TsvI3/vtBctBSn/QbjsZOkXYUe0hOOPVnXsphoxSpiFUJUH6Lt7n+aniOT0R0/DnAh6j
+ AM0jCJHiUlV48faJJfQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610120037
+ spamscore=0 clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120038
 
+Hi Dmitry,
 
-
-On 10/12/2026 1:29 AM, Abel Vesa wrote:
-> When resuming from system suspend on Eliza CQS EVK, gcc_pcie_0_gdsc
-> gets stuck off when powering back on, preventing the system from resuming.
+On 06-10-2026 07:18 pm, Dmitry Baryshkov wrote:
+> On Tue, Oct 06, 2026 at 05:03:27PM +0530, Harshal Dev wrote:
+>> On Qualcomm SoC based platforms, UEFI stores EFI variables within the
+>> Replay Protected Memory Block (RPMB) located within either the UFS,
+>> eMMC or SPI-NOR storage. The RPMB key which is one-time programmed into
+>> the storage controller to allow authentication of the RPMB frames is
+>> generated by and only available to the Qualcomm Trusted Execution
+>> Environment (QTEE).
+>>
+>> The legacy QSEECOM protocol used for communicating with the QTEE is
+>> deprecated and replaced with the use-case agnostic SMCInvoke protocol
+>> starting with the Qualcomm SM8x50 series. On platforms where the QSEECOM
+>> driver still probes, it does not support a listener interface with QTEE
+>> to enable writing of non-volatile EFI variables to the RPMB for UFS and
+>> eMMC storage.
+>> Therefore on such platforms, a TEE client driver which communicates with
+>> QTEE via the SMCInvoke protocol implemented by the QCOMTEE driver (and
+>> registered with the TEE subsystem) must be used to update such EFI
+>> variables.
+>>
+>> Add support for a TEE based uefisecapp client driver which installs efivar
+>> operations after obtaining an object reference to the uefisecapp service.
+>> This enables the kernel/user-space to access or modify both volatile EFI
+>> variables stored by the Secure Application (in-memory) and non-volatile
+>> ones stored within RPMB.
+>>
+>> +
+>> +static efi_status_t qcomtee_uefi_query_variable_info(u32 attr, u64 *storage_space,
+>> +						     u64 *remaining_space,
+>> +						     u64 *max_variable_size)
+>> +{
+>> +	int ret;
+>> +	u32 out_errno;
+>> +	u64 maximum_variable_storage_size;
+>> +	u64 remaining_variable_storage_size;
+>> +	u64 maximum_variable_size;
+>> +
+>> +	if (!storage_space || !remaining_space || !max_variable_size)
+>> +		return EFI_INVALID_PARAMETER;
+>> +
+>> +	ret = qcuefi_query_variable_info(attr,
+>> +					 &maximum_variable_storage_size,
+>> +					 &remaining_variable_storage_size,
+>> +					 &maximum_variable_size,
+>> +					 &out_errno);
+>> +
+>> +	if (ret)
+>> +		return EFI_DEVICE_ERROR;
+>> +
+>> +	if (!out_errno) {
+>> +		*storage_space = maximum_variable_storage_size;
+>> +		*remaining_space = remaining_variable_storage_size;
+>> +		*max_variable_size = maximum_variable_size;
 > 
-> Use retention for all four PCIe GDSCs, as on SM8550, to preserve their
-> state across suspend and allow the system to resume.
+> Why do we need to copy data? Can we pass pointers directly to the
+> qcuefi_foo calls?
+>
+
+Ack, this function can have this optimization, no need for copying.
+ 
+>> +	}
+>> +
+>> +	return uefisecapp_err_to_efi_status(out_errno);
+>> +}
+>> +
+>> +/**
+>> + * qcomtee_release_object() - Release an object returned by QTEE.
+>> + *
+>> + * Each object returned by QTEE repesents a secure service exposed to the
+>> + * client. Whenever an secure service is opened, QTEE may allocate resources
+>> + * on the client's behalf. Therefore, once the client is done accessing the
+>> + * secure service, the object representing it should be explicitly released
+>> + * so that QTEE can release the associated resources as well.
+>> + *
+>> + * @ctx: TEE context.
+>> + * @object: The object to release.
+>> + */
+>> +static void qcomtee_release_object(struct tee_context *ctx,
+>> +				   struct tee_param_objref object)
+>> +{
+>> +	struct tee_ioctl_object_invoke_arg inv_arg;
+>> +
+>> +	memset(&inv_arg, 0, sizeof(inv_arg));
+>> +	SET_INVOKE_ARG(inv_arg, object.id, QCOMTEE_MSG_OBJECT_OP_RELEASE, 0);
+>> +	tee_client_object_invoke_func(ctx, &inv_arg, NULL);
+>> +}
+>> +
+>> +/**
+>> + * qcomtee_get_uefisec_svc_obj() - Get a UEFI Secure App service object to
+>> + * begin communication with the service.
+>> + * @ctx: TEE context.
+>> + * @client_env_obj: The client environment object returned earlier by QTEE.
+>> + * @uefisec_svc_obj: The UEFI Secure App service object.
+>> + *
+>> + * Returns 0 on success.
+>> + * Returns < 0 if client environment object invocation failed.
+>> + * Returns > 0 if client environment invocation was success but UEFI Secure App
+>> + * service object could not be returned for some other reason (represented by the
+>> + * returned value)
+>> + */
+>> +static int qcomtee_get_uefisec_svc_obj(struct tee_context *ctx,
+>> +				       struct tee_param_objref client_env_obj,
+>> +				       struct tee_param_objref *uefisec_svc_obj)
+>> +{
+>> +	int ret;
+>> +	struct tee_ioctl_object_invoke_arg inv_arg;
+>> +	u64 obj_id = client_env_obj.id;
+>> +	struct tee_param param[QCOMTEE_GET_UEFI_SVC_NPARAMS];
+>> +	u32 uefisec_uid = QCOMTEE_UEFI_SEC_UID;
+>> +
+>> +	memset(&inv_arg, 0, sizeof(inv_arg));
+>> +	memset(&param, 0, sizeof(param));
+>> +
+>> +	SET_INVOKE_ARG(inv_arg, obj_id,
+>> +		       QCOMTEE_OP_CLIENT_ENV_OPEN,
+>> +		       QCOMTEE_GET_UEFI_SVC_NPARAMS);
+>> +	SET_TEE_PARAM_UBUF(param[0], UBUF_INPUT, TEE_PARAM_UBUF(uefisec_uid));
+>> +	SET_TEE_PARAM_OBJREF(param[1], OBJREF_OUTPUT, 0, 0);
+>> +
+>> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+>> +	if (ret < 0 || inv_arg.ret != 0) {
+>> +		dev_err(uefisec_app.dev, "QCOMTEE_CLIENT_ENV_OPEN invoke ret: %d, err: 0x%x\n",
+>> +			ret, inv_arg.ret);
+>> +		return ret ?: inv_arg.ret;
+>> +	}
+>> +
+>> +	*uefisec_svc_obj = param[1].u.objref;
+>> +	return ret;
+>> +}
+>> +
+>> +/**
+>> + * qcomtee_get_client_env_obj() - Get a client environment object to begin
+>> + * object exchange with QTEE.
+>> + * @ctx: TEE context.
+>> + * @client_env_obj: The client environment object returned by QTEE.
+>> + *
+>> + * Returns 0 on success.
+>> + * Returns < 0 if root object invocation failed.
+>> + * Returns > 0 if root object invocation was success but client environment
+>> + * object could not be returned for some other reason (represented by the
+>> + * returned value)
+>> + */
+>> +static int qcomtee_get_client_env_obj(struct tee_context *ctx,
+>> +				      struct tee_param_objref *client_env_obj)
+>> +{
+>> +	int ret;
+>> +	struct tee_ioctl_object_invoke_arg inv_arg;
+>> +	struct tee_param param[QCOMTEE_GET_CLIENT_ENV_NPARAMS];
+>> +
+>> +	memset(&inv_arg, 0, sizeof(inv_arg));
+>> +	memset(&param, 0, sizeof(param));
+>> +
+>> +	SET_INVOKE_ARG(inv_arg, TEE_OBJREF_NULL,
+>> +		       QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS,
+>> +		       QCOMTEE_GET_CLIENT_ENV_NPARAMS);
+>> +	SET_TEE_PARAM_OBJREF(param[0], OBJREF_INPUT, TEE_OBJREF_NULL, 0);
+>> +	SET_TEE_PARAM_OBJREF(param[1], OBJREF_OUTPUT, 0, 0);
+>> +
+>> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+>> +	if (ret < 0 || inv_arg.ret != 0) {
+>> +		dev_err(uefisec_app.dev, "QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS invoke ret: %d, err: 0x%x\n",
+>> +			ret, inv_arg.ret);
+>> +		return ret ?: inv_arg.ret;
+>> +	}
+>> +
+>> +	*client_env_obj = param[1].u.objref;
+>> +	return ret;
+>> +}
+>> +
+>> +static const struct efivar_operations qcom_efivar_ops = {
+>> +	.get_variable = qcomtee_uefi_get_variable,
+>> +	.set_variable = qcomtee_uefi_set_variable,
+>> +	.get_next_variable = qcomtee_uefi_get_next_variable,
+>> +	.query_variable_info = qcomtee_uefi_query_variable_info,
+>> +};
+>> +
+>> +static int qcomtee_ctx_match(struct tee_ioctl_version_data *ver,
+>> +			     const void *data)
+>> +{
+>> +	return (ver->impl_id == TEE_IMPL_ID_QTEE);
+>> +}
+>> +
+>> +static int qcomtee_uefisecapp_probe(struct tee_client_device *tee_dev)
+>> +{
+>> +	int ret, err;
+>> +	struct tee_param_objref client_env_obj;
+>> +	struct tee_param_objref uefisec_svc_obj;
+>> +
+>> +	uefisec_app.dev = &tee_dev->dev;
+>> +	/* Open context with QCOMTEE driver */
+>> +	uefisec_app.ctx = tee_client_open_context(NULL, qcomtee_ctx_match, NULL,
+>> +						  NULL);
+>> +	if (IS_ERR(uefisec_app.ctx))
+>> +		return -ENODEV;
+>> +
+>> +	/* Obtain a reference to client_env object to begin object exchange
+>> +	 * with QTEE
 > 
-> Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
-> Assisted-by: LLM
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/gcc-eliza.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> Nit: check out the preferred block comment format. also, I think these
+> comments echo the code which pretty obvious here.
+>
+
+Ack, I'll just drop this comment. And update the other ones to the preferred
+block comment format.
+
+>> +	 */
+>> +	ret = qcomtee_get_client_env_obj(uefisec_app.ctx, &client_env_obj);
+>> +	if (ret) {
+>> +		err = -EINVAL;
+>> +		goto err_get_client_env;
+>> +	}
+>> +
+>> +	/* Obtain a reference to the uefisec_svc object which provides access to
+>> +	 * the EFI var storage.
+>> +	 */
+>> +	ret = qcomtee_get_uefisec_svc_obj(uefisec_app.ctx, client_env_obj,
+>> +					  &uefisec_svc_obj);
+>> +	if (ret) {
+>> +		err = -EINVAL;
+>> +		goto err_get_uefisec_svc;
+>> +	}
+>> +	uefisec_app.uefisec_svc_obj = uefisec_svc_obj;
+>> +
+>> +	ret = efivars_register(&uefisec_app.efivars, &qcom_efivar_ops);
+>> +	if (ret) {
 > 
-
-
-Hi Abel,
-
-Using PWRSTS_RET_ON keeps the GDSC forever ON after first enable and the GDSC never
-collapses.
-
-For similar issue on Lemans (pcie_0_gdsc gets stuck off when powering back on), picking
-the below changes from PCIE side helped to power ON the GDSC properly without any issue.
-
-https://lore.kernel.org/all/20260728-hotplug_pci-v1-1-d1f38cfb9122@oss.qualcomm.com/
-https://lore.kernel.org/all/20260729071514.859778-1-manivannan.sadhasivam@oss.qualcomm.com/
-
-Can you please try if above changes are helping on Eliza also?
-
-Thanks,
-Jagadeesh
-
-
-> diff --git a/drivers/clk/qcom/gcc-eliza.c b/drivers/clk/qcom/gcc-eliza.c
-> index 064771726e9b..21fd93a1f6b2 100644
-> --- a/drivers/clk/qcom/gcc-eliza.c
-> +++ b/drivers/clk/qcom/gcc-eliza.c
-> @@ -2715,7 +2715,7 @@ static struct gdsc gcc_pcie_0_gdsc = {
->  	.pd = {
->  		.name = "gcc_pcie_0_gdsc",
->  	},
-> -	.pwrsts = PWRSTS_OFF_ON,
-> +	.pwrsts = PWRSTS_RET_ON,
->  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
->  };
->  
-> @@ -2729,7 +2729,7 @@ static struct gdsc gcc_pcie_0_phy_gdsc = {
->  	.pd = {
->  		.name = "gcc_pcie_0_phy_gdsc",
->  	},
-> -	.pwrsts = PWRSTS_OFF_ON,
-> +	.pwrsts = PWRSTS_RET_ON,
->  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
->  };
->  
-> @@ -2743,7 +2743,7 @@ static struct gdsc gcc_pcie_1_gdsc = {
->  	.pd = {
->  		.name = "gcc_pcie_1_gdsc",
->  	},
-> -	.pwrsts = PWRSTS_OFF_ON,
-> +	.pwrsts = PWRSTS_RET_ON,
->  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
->  };
->  
-> @@ -2757,7 +2757,7 @@ static struct gdsc gcc_pcie_1_phy_gdsc = {
->  	.pd = {
->  		.name = "gcc_pcie_1_phy_gdsc",
->  	},
-> -	.pwrsts = PWRSTS_OFF_ON,
-> +	.pwrsts = PWRSTS_RET_ON,
->  	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE | VOTABLE,
->  };
->  
+> If we have both QSEECOM and QTEE drivers enabled (which we hopefully
+> will in distro kernels) and if QSEECOM has already provided UEFI vars
+> implementation, this call will print a warning and a probe error in
+> kernel logs. Similarly, if this driver registers UEFI vars
+> implementation first, the QSEECOM one will print out the error.
 > 
-> ---
-> base-commit: becb95e45ef0dda9ffb35156d909d3da7a2789c3
-> change-id: 20261011-eliza-pcie-gdsc-retention-daa497d5578f
-> 
-> Best regards,
-> --  
-> Abel Vesa <abel.vesa@oss.qualcomm.com>
-> 
+> We know that there is this kind of a clash. I think it makes sense to
+> handle it. Earlier you wrote that QTEE would be a better option if the
+> platform supports both. Would it be possible to implement this kind of
+> selection?
+>
+
+This has been on my mind since the beginning. We could have a central
+hub layer which both the QCOMTEE and QSEECOM drivers register with during
+their probe and pass a list of services they can communicate with. This
+one for example:
+https://elixir.bootlin.com/linux/v7.3-rc5/source/drivers/firmware/qcom/qcom_qseecom.c#L86
+
+When the hub realizes (at QCOMTEE registration) that a service is available
+via both QSEECOM and QCOMTEE, it could call an API such as qcomtee_check_service()
+to check if the current QTEE firmware OS version supports it. If so, it would
+call qseecom_client_remove() for this service:
+https://elixir.bootlin.com/linux/v7.3-rc5/source/drivers/firmware/qcom/qcom_qseecom.c#L30
+and then call qtee_register_service().
+
+This is a high level view of how such a framework could work. But since
+only uefisecapp currently fits this scenario it feels like an overkill to
+push it along with this series. I can see that Kuldeep's series which is adding
+TPM service support also fits the scenario of a service being available via both
+QSEECOM and QCOMTEE:
+https://lore.kernel.org/all/20261001055029.1960743-1-zeroknots@protonmail.com/
+
+I am fine with investigating the feasibility of such a framework in more
+depth if everyone here feels that it is now required. Amir's inputs on this
+would be welcome since he is the maintaiiner for QCOMTEE.
+
+And this would have to be a separate patch series after this one lands.
+
+Regards,
+Harshal 
+>> +		err = ret;
+>> +		goto err_efi_vars_reg;
+>> +	}
+>> +
 > 
 
