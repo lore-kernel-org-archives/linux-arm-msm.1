@@ -1,148 +1,94 @@
-Received: from mta0.migadu.com (out-240.mta0.migadu.com [91.218.175.240])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ACB640E8FD
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:10:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.240
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C16D4D179A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:21:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791832242; cv=none; b=E5XeIW/jhg4h+9zEYYx3exw7xc4kdT1KgSl1K8AX97VPzp/b9Egw7hVqWOVfUBxLpqgyDb88QE6RVk/IMYaGlY1Plf1keIHGeephRVnZD5rX2hGln/BZN7D3sfw5PsntGYTsiH001GH7oQYcRGgKEy6JaSSLh+D6Qi/LP+g6gFw=
+	t=1791832868; cv=none; b=lZo28o708Z+ShCvQ6w1NuodlTI1Ce2dexqQfXG8FGR+imGuuiTrViNl4FMp6WgpyEktAVqfmOeOC0x1hXvEfiGJBADpXflQGqmJQZP9KgEAHf8/v5mW/J4gLKK2DDnqGgBFO9r1PvsYtOBHsdOKhy1FETmmDxQHouZKoH1pAOCk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791832242; c=relaxed/simple;
-	bh=dLukfl9aaEAOrrRPH269Sia2X8apvGWB2LGSoU+njfo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TjSSyvOF97xakS02wSR9HMJrRTTlooJ4d7D/Cvb/bEZ+xuOE+mF3RcX71FYB05HAyNPm6rvDmY9axFjaKl8E0tKCGdHHEH9Ui6ALRiybMDbpielWNpt81mIrCNh1qetRDBC+ZZP4WMTsw9GaZRCWO1tl+47y6G5GwTVx4++7mpk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=eZYoLxVJ; arc=none smtp.client-ip=91.218.175.240
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	s=arc-20240116; t=1791832868; c=relaxed/simple;
+	bh=r8GHIgBtTR7WSB0FeH03V1z3B5/YXMhj2GbjMcamAsc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jJZnm/+nxH70VOC1FsEgkEbzg152gA25T0UjPYnuHOfm2qQV8bmhOYJv0lLeAkIYy6BJIKyapiS9y79HgXL0ToU5AzJnMHvE5VoBdi3HJNLgTBpJ8v8hOYY8eIFWhB1K0uCCKD6tPfudrauzl2gVSl1GkjBUE87St0a8wxPoX90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yx3pr79S; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="eZYoLxVJ"
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=dLukfl9aaEAOrrRPH269Sia2X8apvGWB2LGSoU+njfo=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1791832238; v=1; x=1792437038;
- b=eZYoLxVJTImQyzpOKtMfM5XrdCjb4FbIhSPbrP9qUwEV0A8dc+akk/LF1OvesUAjJdnICrJw
- 6U/wwXvtYUS48p1Q2y++jsElMnjEXQ3XIGeswQrA/K02/GF8rxlzqWlqEGtIYWbAI3P8IqE8I03
- wucjGolsxxSkfc6LzGhaM11majSNMmp1RIiB5oYOvanB2JxBPO1CzDJkFxKQPUuzLWp5Dkxp74a
- KMS+7QbqLRK8gKqCfesP8Gh8dz0Dma+BCf39qVKasOJVdpcuccp5sBtLJz4Cefdcy4/Q6LvaqwT
- GVLNOX6MdZ8Mkkaf24GwecXG8lvDsJiXO5JXI3EfiFkIA==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 9c03da5cd8c2d228;
-	Mon, 12 Oct 2026 19:10:38 +0000
-X-Mizu-Trace-ID: 9c03da5cd8c2d228
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <906ebec9-de19-4a1e-9472-dcf8529fa232@packett.cool>
-Date: Mon, 12 Oct 2026 16:10:26 -0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yx3pr79S"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A89121F008A1;
+	Mon, 12 Oct 2026 19:21:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791832866;
+	bh=bsaFSZfndAczrKiugFmOGwtt440SXaY/1HwOOWFeNCg=;
+	h=From:To:Cc:Subject:Date;
+	b=Yx3pr79SOnZBTyh4x5/XmITPz1+aTdKgovI/dHQX4ZW6FagzVMvistC/u8xAXKJpc
+	 7P0Mo2/yZxuxboOkgRbB4I/B5RnnhTBk7Klcb6KOgViaagpEowTI5lJuEeRZj7Y9fZ
+	 c/4PK3dhQPRFn/QJHkh0U8zN2wn6gouVyl7KylaAS+baZp6eTfpuAyfvTABfIzGVmr
+	 qS/kHhZOR8F/gRtC/ccBr50TuaFwPB8C6FwRcT2QdSGUZZhcaOLK3lMGLiIdVwU56I
+	 WLbzKTwseYAfuRz6ynkpd7WptCg40fQ366ochZ/xwDNx4SiSZlZIFozjlUdYPoXB/T
+	 idJct2b0Ue/+w==
+From: Bjorn Andersson <andersson@kernel.org>
+To: arm@kernel.org,
+	soc@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Antony Kurniawan Soemardi <linux@smankusors.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Subject: [GIT PULL] Qualcomm Arm32 DeviceTree updates for v7.4
+Date: Mon, 12 Oct 2026 14:21:02 -0500
+Message-ID: <20261012192102.12999-1-andersson@kernel.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 5/8] Bluetooth: hci_qca: Support QCA2066 on M.2
- connector via pwrseq
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann
- <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Wei Deng <wei.deng@oss.qualcomm.com>
-References: <20261005-monza-wireless-v7-0-5a6de7662dcb@oss.qualcomm.com>
- <20261005-monza-wireless-v7-5-5a6de7662dcb@oss.qualcomm.com>
- <bc7730e4-8b47-4c2b-84ef-277749f2aab8@packett.cool>
- <CAFEp6-3Mt-CCJEz=RAJUh6pxH-Ssgkqfx3QQfyzvS9HwzFp9QQ@mail.gmail.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <CAFEp6-3Mt-CCJEz=RAJUh6pxH-Ssgkqfx3QQfyzvS9HwzFp9QQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
-On 10/9/26 1:40 PM, Loic Poulain wrote:
-> Hi Val,
->
-> On Thu, Oct 8, 2026 at 12:58 AM Val Packett <val@packett.cool> wrote:
->>
->> On 10/5/26 9:21 AM, Loic Poulain wrote:
->>> For QCA2066 (and other QCA chips) on M.2 connectors, the UART enable is
->>> controlled by the W_DISABLE2# signal managed by the pcie-m2 power sequencer
->>> rather than a dedicated BT enable GPIO.
->>>
->>> When the serdev controller has an OF graph (indicating it is connected to
->>> an M.2 connector), acquire the 'uart' pwrseq target from the connector's
->>> power sequencer and use it to control BT power instead of the bt-enable
->>> GPIO. This is factored out into qca_serdev_get_m2_pwrseq().
->>>
->>> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
->>> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->>> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->>> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
->>> ---
->>>    drivers/bluetooth/hci_qca.c | 47 +++++++++++++++++++++++++++++++++++----------
->>>    1 file changed, 37 insertions(+), 10 deletions(-)
->>>
->>> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
->>> index 1d27ff98034ba99d0783e48db5c605f3b31117ea..b6ec1a57248e2cf4bd138898ffc5cad45b1b4a8b 100644
->>> --- a/drivers/bluetooth/hci_qca.c
->>> +++ b/drivers/bluetooth/hci_qca.c
->>> @@ -1875,6 +1875,9 @@ static int qca_power_on(struct hci_dev *hdev)
->>>                        /* Controller needs time to bootup. */
->>>                        msleep(150);
->>>                }
->>> +
->>> +             if (qcadev->bt_power.pwrseq)
->>> +                     pwrseq_power_on(qcadev->bt_power.pwrseq);
->>>        }
->>>
->>>        clear_bit(QCA_BT_OFF, &qca->flags);
->>> @@ -2396,6 +2399,34 @@ static int qca_init_regulators(struct qca_power *qca,
->>>        return 0;
->>>    }
->>>
->>> +static void qca_serdev_put_pwrseq(void *data)
->>> +{
->>> +     pwrseq_put(data);
->>> +}
->>> +
->>> +static int qca_serdev_get_m2_pwrseq(struct qca_serdev *qcadev)
->>> +{
->>> +     struct serdev_device *serdev = qcadev->serdev_hu.serdev;
->>> +     struct pwrseq_desc *pwrseq;
->>> +
->>> +     if (!of_graph_is_present(dev_of_node(&serdev->ctrl->dev)))
->>> +             return 0;
->> Seems like of_graph_is_present does *not* return false for the existing
->> (non-connector) setup which is currently used in all the laptop device
->> trees..
-> If I understand the issue correctly, this can only occur when a UART
-> 'port' is left unconnected, in which case the failure is legitimate.
-> The laptop device trees should be fixed accordingly, either by
-> connecting the port to the corresponding M.2 device or by using the
-> usual Bluetooth UART child-node approach. I don't see this issue in
-> mainline.
+The following changes since commit cee9395acd8043be0644b25c34bfa86623f2b935:
 
-So it looks like this is because commit 014501d141ed ("arm64: dts: qcom: 
-hamoa: Add graph port/endpoint anchors to pcie4_port0 and uart14") 
-unconditionally added the uart14 endpoint to hamoa.dtsi itself in 
-preparation for the future transition to proper M.2 descriptions.
+  Linux 7.3-rc1 (2026-08-30 13:34:40 -0700)
 
-The laptop dts'es themselves still have the older child-node description 
-for bluetooth, with a dummy port { uart14_ep: endpoint {}; }; that's not 
-used yet.
+are available in the Git repository at:
 
-Could the check be extended to actually verify that there's actually 
-something the graph endpoint is connected to? Or should that commit be 
-reverted?
+  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-arm32-for-7.4
 
-Thanks,
-~val
+for you to fetch changes up to ccf7f47dbe15d2c2bf57e7c443e9e485d2290c2d:
 
+  ARM: dts: qcom: sdx55: Fix PCIe WAKE# GPIO polarity (2026-09-27 21:25:32 -0500)
+
+----------------------------------------------------------------
+Qualcomm Arm32 DeviceTree updates for v7.4
+
+Add MSM8960 wireless connectivity support by describing the RPM clock
+controller, SCM, SMEM, SFPB hardware mutex, SMSM, and Riva/WCNSS nodes,
+including firmware memory and Bluetooth/Wi-Fi pinctrl state. Enable Wi-Fi
+and Bluetooth on the Sony Xperia SP (Huashan) board.
+
+Fix MSM8960 USB clock descriptions by wiring the controller to the RPM
+Daytona fabric clock and correcting the HS1 transceiver clock usage.
+
+Fix MSM8974 display by adding the MDSS reset line needed for reliable DSI
+bring-up, and fix the SDX55 T55 PCIe WAKE# GPIO polarity to active-low.
+
+----------------------------------------------------------------
+Antony Kurniawan Soemardi (6):
+      ARM: dts: qcom: msm8960: add RPM clock controller and fix USB clocks
+      ARM: dts: qcom: msm8960: add SCM
+      ARM: dts: qcom: msm8960: add SMEM & hwlock
+      ARM: dts: qcom: msm8960: add SMSM & SPS
+      ARM: dts: qcom: msm8960: add Riva
+      ARM: dts: qcom: msm8960: huashan: enable Wi-Fi and Bluetooth
+
+Dmitry Baryshkov (1):
+      ARM: dts: qcom: msm8974: add MDSS reset
+
+Krishna Chaitanya Chundru (1):
+      ARM: dts: qcom: sdx55: Fix PCIe WAKE# GPIO polarity
+
+ .../boot/dts/qcom/qcom-msm8960-sony-huashan.dts    |  15 ++
+ arch/arm/boot/dts/qcom/qcom-msm8960.dtsi           | 169 ++++++++++++++++++++-
+ arch/arm/boot/dts/qcom/qcom-msm8974.dtsi           |   3 +
+ arch/arm/boot/dts/qcom/qcom-sdx55-t55.dts          |   2 +-
+ 4 files changed, 186 insertions(+), 3 deletions(-)
