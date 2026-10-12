@@ -1,231 +1,181 @@
-Received: from linkmauve.fr (linkmauve.fr [82.65.109.163])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 701384D4871;
-	Mon, 12 Oct 2026 19:52:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 496114D37B3;
+	Mon, 12 Oct 2026 19:56:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791834748; cv=none; b=XyvNsT1AEPoc8878wACZ1Fe3TCQvwJ8DCbWTeJ2TE+pt4t0qi+MJiOhIPOm+Ta0XFVWsNUV4/5L/qZxjmFQzTSe2r5thteuT6rQlIC+2XCb4CYq+pARG2WaREF6/EJBKAM4DE1PKv0qQHQlxgKf4t/4MnR9x48MRHDqSb1tfJOA=
+	t=1791834970; cv=none; b=Dlg50SkXMAd5z7akLlPYTWuEiS306aHADxHTUV1JZrzxqa1z1kmP8HNjPH0dBCgHSKoKb5qqyoxne/hgEQ9Y+E4KMccLrA7zMNrOy6REihdmdXKYFJdjKB08G1DgvQQpihJGJuYugThpIjK5rl5Ss0SQxpZm9dRuM+G/fOllXYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791834748; c=relaxed/simple;
-	bh=2Zjm6BZDvKO6SHZVAkCsxH/TywQRjnavCRzQi35j4IM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UTr33yMCWxpiuBDw682zTfNrAdNYeJp8yn/On+7ZrsODbTxJzrqUgGSmWdPkmXsQOIEvRxlclG1TX8WjtTEyimIQaxcTZypWBRKEzOzVCzac3AclTC2KW0yo6fiJZUiD1qlM2LJdzWZvphuPXaSV0iE1k1a21esCLLD9uOBm/Ck=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
-Received: by linkmauve.fr (Postfix, from userid 1000)
-	id 2515A71FB39B; Mon, 12 Oct 2026 21:52:16 +0200 (CEST)
-From: Link Mauve <linkmauve@linkmauve.fr>
-To: Srinivas Kandagatla <srini@kernel.org>
-Cc: Link Mauve <linkmauve@linkmauve.fr>,
-	Sasha Finkelstein <k@chaosmail.tech>,
-	Andy Shevchenko <andriy.shevchenko@intel.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	Sven Peter <sven@kernel.org>,
-	Janne Grunau <j@jannau.net>,
-	Neal Gompa <neal@gompa.dev>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Vladimir Zapolskiy <vz@mleia.com>,
-	=?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Kalyani Akula <kalyani.akula@amd.com>,
-	Michal Simek <michal.simek@amd.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>,
-	Johan Hovold <johan@kernel.org>,
-	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	s=arc-20240116; t=1791834970; c=relaxed/simple;
+	bh=MNdlXHD/O4KIK8M11oB/su2SKfCvrs8KvIq6vtZonrM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=m6/0mWdiuP3RWfz4gj1bwX04U/jlcNH6ZHw9AMyeZqTmsLMMcMITR6XRzK1a1fFzP5mohj0TKfdEtBDIJXDoXgqkMENaMicxY7ID5mrY2wVg6raI44lh1/deljNjmrNEknKPq1SJgF1109ZzCByOpJ7RDj62c0NZaxqiKFM0YHE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aDKgfuFx; arc=none smtp.client-ip=198.175.65.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aDKgfuFx"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791834967; x=1823370967;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=MNdlXHD/O4KIK8M11oB/su2SKfCvrs8KvIq6vtZonrM=;
+  b=aDKgfuFxJXsStUkOdL2Bj1YNjIqRV+Z4Nd/84HydCu1e9zJpq3Z8ERzT
+   Txabp92+kOWg3xCkptK1NdytXMckkisMGsNWsVzR6OrnZSOSlTkg/C9r8
+   wx+kXO4UMRKokj+TKse6H5bWrigcWATH0kD33/E1UjxyL5Eexz4s7qK7W
+   VEzmnxoMx2HKNRJe/Upv7wN838PWFq5vt44l1AJ6gg9iCz9QZDNzAlhvL
+   FRcRyDz+1rN6GbNUcDEpDL3u9sDATFj/oUKrLZMvvmlj4ZMe8aAL/BtZQ
+   VuBoRTzpoP4E8pHJK2luUYHwrybpg7YUVt/Tyd5U7GmTVuKa5TeKm7vPV
+   w==;
+X-CSE-ConnectionGUID: 0RemkQ/CSN2/CDyAJ0VTLg==
+X-CSE-MsgGUID: RmKZcYKGT4SHRBpEUOQpTg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="649956"
+X-IronPort-AV: E=Sophos;i="6.27,154,1787036400"; 
+   d="scan'208";a="649956"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Oct 2026 12:56:07 -0700
+X-CSE-ConnectionGUID: 9ZHbw5lBQ5mcYZ7BSjPejw==
+X-CSE-MsgGUID: 5fnDqjvXQ2e0elEVPeQuUw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,154,1787036400"; 
+   d="scan'208";a="969192"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by orviesa001.jf.intel.com with ESMTP; 12 Oct 2026 12:56:02 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xGM7r-00000000C3M-1buN;
+	Mon, 12 Oct 2026 19:55:59 +0000
+Date: Tue, 13 Oct 2026 03:55:37 +0800
+From: kernel test robot <lkp@intel.com>
+To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+	Sebastian Reichel <sre@kernel.org>,
+	Benson Leung <bleung@chromium.org>,
+	Tzung-Bi Shih <tzungbi@kernel.org>,
+	Guenter Roeck <groeck@chromium.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
 	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-amlogic@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	asahi@lists.linux.dev,
-	imx@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	rust-for-linux@vger.kernel.org
-Subject: [PATCH v7 2/3] nvmem: core: deprecate reg_write callback with reg_write_const
-Date: Mon, 12 Oct 2026 21:52:09 +0200
-Message-ID: <20261012195213.875403-3-linkmauve@linkmauve.fr>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261012195213.875403-1-linkmauve@linkmauve.fr>
-References: <20261012195213.875403-1-linkmauve@linkmauve.fr>
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	chrome-platform@lists.linux.dev, avaneesh.dwivedi@oss.qualcomm.com,
+	Umang Chheda <umang.chheda@oss.qualcomm.com>,
+	Ulf Hansson <ulfh@kernel.org>,
+	Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+	Bradley Morgan <brads@mainlining.org>
+Subject: Re: [PATCH v16 2/6] reboot: hw_protection_trigger: use standardized
+ numeric shutdown/reboot reasons instead of strings
+Message-ID: <202610130313.ziYum5Kq-lkp@intel.com>
+References: <20261007-pscrr-framework-v16-2-3642c277bebb@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261007-pscrr-framework-v16-2-3642c277bebb@oss.qualcomm.com>
 
-This callback used to take a mutable void * for no reason, which causes
-the compiler to be unaware that the val buffer should never be modified
-by the callback.
+Hi Faruque,
 
-This was found while drafting the nvmem-provider Rust abstraction.
+kernel test robot noticed the following build errors:
 
-Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
----
- drivers/nvmem/core.c           | 26 +++++++++++++++++---------
- drivers/nvmem/internals.h      |  1 +
- include/linux/nvmem-provider.h |  6 +++++-
- 3 files changed, 23 insertions(+), 10 deletions(-)
+[auto build test ERROR on 5c4d4169604b335c38bbc79bc1fc03042981fc6f]
 
-diff --git a/drivers/nvmem/core.c b/drivers/nvmem/core.c
-index 7d4cce8e2742..df36ad5e9695 100644
---- a/drivers/nvmem/core.c
-+++ b/drivers/nvmem/core.c
-@@ -71,7 +71,7 @@ static int __nvmem_reg_read(struct nvmem_device *nvmem, unsigned int offset,
- }
- 
- static int __nvmem_reg_write(struct nvmem_device *nvmem, unsigned int offset,
--			     void *val, size_t bytes)
-+			     const void *val, size_t bytes)
- {
- 	struct nvmem_operations *ops;
- 	int ret, wr_ok;
-@@ -81,14 +81,17 @@ static int __nvmem_reg_write(struct nvmem_device *nvmem, unsigned int offset,
- 	if (!ops)
- 		return -ENODEV;
- 
--	if (!ops->reg_write)
-+	if (!ops->reg_write && !ops->reg_write_const)
- 		return -EOPNOTSUPP;
- 
- 	ret = gpiod_set_value_cansleep(nvmem->wp_gpio, 0);
- 	if (ret)
- 		return ret;
- 
--	wr_ok = ops->reg_write(nvmem->priv, offset, val, bytes);
-+	if (ops->reg_write_const)
-+		wr_ok = ops->reg_write_const(nvmem->priv, offset, val, bytes);
-+	else
-+		wr_ok = ops->reg_write(nvmem->priv, offset, (void *)val, bytes);
- 
- 	ret = gpiod_set_value_cansleep(nvmem->wp_gpio, 1);
- 	if (ret)
-@@ -309,7 +312,7 @@ static umode_t nvmem_bin_attr_get_umode(struct nvmem_device *nvmem)
- 	if (!nvmem->read_only)
- 		mode |= 0200;
- 
--	if (!ops->reg_write)
-+	if (!ops->reg_write && !ops->reg_write_const)
- 		mode &= ~0200;
- 
- 	if (!ops->reg_read)
-@@ -346,13 +349,13 @@ static umode_t nvmem_attr_is_visible(struct kobject *kobj,
- 	struct nvmem_operations *ops = rcu_dereference_raw(nvmem->ops);
- 
- 	/*
--	 * If the device has no .reg_write operation, do not allow
--	 * configuration as read-write.
-+	 * If the device has no .reg_write or .reg_write_const operation, do
-+	 * not allow configuration as read-write.
- 	 * If the device is set as read-only by configuration, it
- 	 * can be forced into read-write mode using the 'force_ro'
- 	 * attribute.
- 	 */
--	if (attr == &dev_attr_force_ro.attr && !ops->reg_write)
-+	if (attr == &dev_attr_force_ro.attr && !ops->reg_write && !ops->reg_write_const)
- 		return 0;	/* Attribute not visible */
- 
- 	return attr->mode;
-@@ -904,7 +907,7 @@ struct nvmem_device *nvmem_register(const struct nvmem_config *config)
- 	if (!config->dev)
- 		return ERR_PTR(-EINVAL);
- 
--	if (!config->reg_read && !config->reg_write)
-+	if (!config->reg_read && !config->reg_write && !config->reg_write_const)
- 		return ERR_PTR(-EINVAL);
- 
- 	nvmem = kzalloc_obj(*nvmem);
-@@ -960,6 +963,7 @@ struct nvmem_device *nvmem_register(const struct nvmem_config *config)
- 
- 	ops->reg_read = config->reg_read;
- 	ops->reg_write = config->reg_write;
-+	ops->reg_write_const = config->reg_write_const;
- 
- 	nvmem->owner = config->owner;
- 	if (!nvmem->owner && config->dev->driver)
-@@ -994,8 +998,12 @@ struct nvmem_device *nvmem_register(const struct nvmem_config *config)
- 	if (rval)
- 		goto err_put_device;
- 
-+	if (ops->reg_write)
-+		dev_warn(&nvmem->dev, "Usage of reg_write in nvmem is deprecated, please "
-+		                      "migrate to reg_write_const.\n");
-+
- 	nvmem->read_only = device_property_present(config->dev, "read-only") ||
--			   config->read_only || !ops->reg_write;
-+			   config->read_only || (!ops->reg_write && !ops->reg_write_const);
- 
- #ifdef CONFIG_NVMEM_SYSFS
- 	nvmem->dev.groups = nvmem_dev_groups;
-diff --git a/drivers/nvmem/internals.h b/drivers/nvmem/internals.h
-index bc7a99f5aefb..14243d44815d 100644
---- a/drivers/nvmem/internals.h
-+++ b/drivers/nvmem/internals.h
-@@ -12,6 +12,7 @@
- struct nvmem_operations {
- 	nvmem_reg_read_t	reg_read;
- 	nvmem_reg_write_t	reg_write;
-+	nvmem_reg_write_const_t	reg_write_const;
- };
- 
- struct nvmem_device {
-diff --git a/include/linux/nvmem-provider.h b/include/linux/nvmem-provider.h
-index 6063fe5b7784..e944530999b4 100644
---- a/include/linux/nvmem-provider.h
-+++ b/include/linux/nvmem-provider.h
-@@ -20,6 +20,8 @@ typedef int (*nvmem_reg_read_t)(void *priv, unsigned int offset,
- 				void *val, size_t bytes);
- typedef int (*nvmem_reg_write_t)(void *priv, unsigned int offset,
- 				 void *val, size_t bytes);
-+typedef int (*nvmem_reg_write_const_t)(void *priv, unsigned int offset,
-+				       const void *val, size_t bytes);
- /* used for vendor specific post processing of cell data */
- typedef int (*nvmem_cell_post_process_t)(void *priv, const char *id, int index,
- 					 unsigned int offset, void *buf,
-@@ -93,7 +95,8 @@ struct nvmem_cell_info {
-  * @root_only:	Device is accessibly to root only.
-  * @of_node:	If given, this will be used instead of the parent's of_node.
-  * @reg_read:	Callback to read data; return zero if successful.
-- * @reg_write:	Callback to write data; return zero if successful.
-+ * @reg_write:	**DEPRECATED** - please use reg_write_const instead.
-+ * @reg_write_const:	Callback to write data; return zero if successful.
-  * @size:	Device size.
-  * @word_size:	Minimum read/write access granularity.
-  * @stride:	Minimum read/write access stride.
-@@ -128,6 +131,7 @@ struct nvmem_config {
- 	struct device_node	*of_node;
- 	nvmem_reg_read_t	reg_read;
- 	nvmem_reg_write_t	reg_write;
-+	nvmem_reg_write_const_t	reg_write_const;
- 	int	size;
- 	int	word_size;
- 	int	stride;
--- 
-2.56.0
+url:    https://github.com/intel-lab-lkp/linux/commits/Faruque-Ansari/power-Extend-power_on_reason-h-for-upcoming-PSCRR-framework/20261007-123636
+base:   5c4d4169604b335c38bbc79bc1fc03042981fc6f
+patch link:    https://lore.kernel.org/r/20261007-pscrr-framework-v16-2-3642c277bebb%40oss.qualcomm.com
+patch subject: [PATCH v16 2/6] reboot: hw_protection_trigger: use standardized numeric shutdown/reboot reasons instead of strings
+config: powerpc-allmodconfig (https://download.01.org/0day-ci/archive/20261013/202610130313.ziYum5Kq-lkp@intel.com/config)
+compiler: powerpc64-linux-gcc (GCC) 16.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261013/202610130313.ziYum5Kq-lkp@intel.com/reproduce)
 
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610130313.ziYum5Kq-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   drivers/power/supply/macsmc-power.c: In function 'macsmc_power_critical_work':
+>> drivers/power/supply/macsmc-power.c:587:39: error: incompatible type for argument 1 of 'hw_protection_trigger'
+     587 |                 hw_protection_trigger("Battery voltage below design minimum", 1500);
+         |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         |                                       |
+         |                                       char *
+   In file included from drivers/power/supply/macsmc-power.c:22:
+   include/linux/reboot.h:276:58: note: expected 'enum psc_reason' but argument is of type 'char *'
+     276 | static inline void hw_protection_trigger(enum psc_reason reason,
+         |                                          ~~~~~~~~~~~~~~~~^~~~~~
+
+
+vim +/hw_protection_trigger +587 drivers/power/supply/macsmc-power.c
+
+0ebf821cf6c75d Hector Martin     2026-02-17  554  
+0ebf821cf6c75d Hector Martin     2026-02-17  555  static void macsmc_power_critical_work(struct work_struct *wrk)
+0ebf821cf6c75d Hector Martin     2026-02-17  556  {
+0ebf821cf6c75d Hector Martin     2026-02-17  557  	struct macsmc_power *power = container_of(wrk, struct macsmc_power, critical_work);
+0ebf821cf6c75d Hector Martin     2026-02-17  558  	u16 bitv, b0av;
+0ebf821cf6c75d Hector Martin     2026-02-17  559  	u32 bcf0;
+0ebf821cf6c75d Hector Martin     2026-02-17  560  
+0ebf821cf6c75d Hector Martin     2026-02-17  561  	if (!power->batt)
+0ebf821cf6c75d Hector Martin     2026-02-17  562  		return;
+0ebf821cf6c75d Hector Martin     2026-02-17  563  
+0ebf821cf6c75d Hector Martin     2026-02-17  564  	/*
+0ebf821cf6c75d Hector Martin     2026-02-17  565  	 * Avoid duplicate atempts at emergency shutdown
+0ebf821cf6c75d Hector Martin     2026-02-17  566  	 */
+0ebf821cf6c75d Hector Martin     2026-02-17  567  	if (power->emergency_shutdown_triggered || system_state > SYSTEM_RUNNING)
+0ebf821cf6c75d Hector Martin     2026-02-17  568  		return;
+0ebf821cf6c75d Hector Martin     2026-02-17  569  
+0ebf821cf6c75d Hector Martin     2026-02-17  570  	/*
+0ebf821cf6c75d Hector Martin     2026-02-17  571  	 * EMERGENCY: Check voltage vs design minimum.
+0ebf821cf6c75d Hector Martin     2026-02-17  572  	 * If we are below BITV, the battery is physically exhausted.
+0ebf821cf6c75d Hector Martin     2026-02-17  573  	 * We must shut down NOW to protect the filesystem.
+0ebf821cf6c75d Hector Martin     2026-02-17  574  	 */
+0ebf821cf6c75d Hector Martin     2026-02-17  575  	if (apple_smc_read_u16(power->smc, SMC_KEY(BITV), &bitv) >= 0 &&
+0ebf821cf6c75d Hector Martin     2026-02-17  576  	    apple_smc_read_u16(power->smc, SMC_KEY(B0AV), &b0av) >= 0 &&
+0ebf821cf6c75d Hector Martin     2026-02-17  577  	    b0av < bitv) {
+0ebf821cf6c75d Hector Martin     2026-02-17  578  		power->emergency_shutdown_triggered = true;
+0ebf821cf6c75d Hector Martin     2026-02-17  579  		dev_emerg(power->dev,
+0ebf821cf6c75d Hector Martin     2026-02-17  580  			  "Battery voltage (%d mV) below design minimum (%d mV)! Emergency shutdown.\n",
+0ebf821cf6c75d Hector Martin     2026-02-17  581  			  b0av, bitv);
+0ebf821cf6c75d Hector Martin     2026-02-17  582  
+0ebf821cf6c75d Hector Martin     2026-02-17  583  		/*
+0ebf821cf6c75d Hector Martin     2026-02-17  584  		 * Shutdown is now imminent. Kick userspace again and give it some
+0ebf821cf6c75d Hector Martin     2026-02-17  585  		 * brief time to (hopefully) flush what's needed, before forcing.
+0ebf821cf6c75d Hector Martin     2026-02-17  586  		 */
+0ebf821cf6c75d Hector Martin     2026-02-17 @587  		hw_protection_trigger("Battery voltage below design minimum", 1500);
+0ebf821cf6c75d Hector Martin     2026-02-17  588  	}
+0ebf821cf6c75d Hector Martin     2026-02-17  589  
+0ebf821cf6c75d Hector Martin     2026-02-17  590  	/*
+0ebf821cf6c75d Hector Martin     2026-02-17  591  	 * Avoid duplicate attempts at orderly shutdown.
+0ebf821cf6c75d Hector Martin     2026-02-17  592  	 * Voltage check is above this as we may want to
+0ebf821cf6c75d Hector Martin     2026-02-17  593  	 * "upgrade" an orderly shutdown to a critical power
+0ebf821cf6c75d Hector Martin     2026-02-17  594  	 * off if voltage drops.
+0ebf821cf6c75d Hector Martin     2026-02-17  595  	 */
+0ebf821cf6c75d Hector Martin     2026-02-17  596  	if (power->orderly_shutdown_triggered || system_state > SYSTEM_RUNNING)
+0ebf821cf6c75d Hector Martin     2026-02-17  597  		return;
+0ebf821cf6c75d Hector Martin     2026-02-17  598  
+0ebf821cf6c75d Hector Martin     2026-02-17  599  	/*
+0ebf821cf6c75d Hector Martin     2026-02-17  600  	 * Check if SMC flagged the battery as empty.
+0ebf821cf6c75d Hector Martin     2026-02-17  601  	 * We trigger a graceful shutdown to let the OS save data.
+0ebf821cf6c75d Hector Martin     2026-02-17  602  	 */
+f7b253a6e217f7 Sasha Finkelstein 2026-07-12  603  	if (macsmc_battery_read_bcf0(power, &bcf0) == 0 && bcf0 != 0) {
+0ebf821cf6c75d Hector Martin     2026-02-17  604  		power->orderly_shutdown_triggered = true;
+0ebf821cf6c75d Hector Martin     2026-02-17  605  		dev_crit(power->dev, "Battery critical (empty flag set). Triggering orderly shutdown.\n");
+0ebf821cf6c75d Hector Martin     2026-02-17  606  		orderly_poweroff(true);
+0ebf821cf6c75d Hector Martin     2026-02-17  607  	}
+0ebf821cf6c75d Hector Martin     2026-02-17  608  }
+0ebf821cf6c75d Hector Martin     2026-02-17  609  
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
