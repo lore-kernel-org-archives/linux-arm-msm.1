@@ -1,85 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CE4E4399D5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D047F43DEB8
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791789792; cv=none; b=d/MjVP2IWWitjsfjgBPwWSmbpFnUDCkhmsITsQJMDuaiJYZhW8MMIV/DP1WbXXuFSP+6byix+WfNsNzWgy0hahOzli2/N90qcu8OaoNpOMY3NRsTQ3i2JS9C/cGt2VmouGBkukfoup5Cbd02iP5B1EaZ657oNdqwvAa6tcezMkI=
+	t=1791789798; cv=none; b=AwUAqM39ogJg5qWmvqrM6K0cGLxUGmI+K8PNEOHIX6b8Vj9EBjle9QZnP9sdykiy4IHnhogkv8daPW00AKWNbQ7pTAaV89j4EP/rqfo8OzVNVwumjgALD71NBbNnRKpPidwAji7KZMtPcnF5dlGjp2D62dMj5ACEPbMD3IazahU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791789792; c=relaxed/simple;
-	bh=SZoF1r1ZFl1IDeVvaRrJjXtsKrxqP0tcNRsGuKvOKXE=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=lfrLIs2YFpP67b/77pnnT8lFzDPNFjzQ6KCmrtxbwP+3vSg2bRgiPwnXvadk4nMYVcskus/sN8/9u1yu5nEsirEdvyJRNhO7ZabKG3tfJ2uGWi74r7OWFe+RbdtETGoCH6Bd6UsNStaRDabHfwXqBcBACkIxJR5vGaqpADHsdgw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kYhVNb/7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OY2Jyh3x; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791789798; c=relaxed/simple;
+	bh=QC3e8pXxCGRaPGmR1QyNYLgCCpqJtjVX8F+JI+CqX4s=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Q5Jfdr2n/XqwqqDyPLRw60gD+SEN9KLxBTPDyzRnHkcOW80gtoqD1HnSCN3XTeSEGi+j4ku4XCWhHUpT3Z74c2DmfBDykwWrs10TX5G0K/a94o5+J3vCAnEvChVrexLhRcKztefzz2ZXRiPIlMO+2WuJ8dvmHlfCIr7Q/T1QZ1g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=czaxuLeU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ELnxzQ4f; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kYhVNb/7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OY2Jyh3x"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C55hgi2355038
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="czaxuLeU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ELnxzQ4f"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C55qpS303007
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=8u+xOD3u5q1Zym1HS1bDVr
-	21UHfxOOzFZfmACqvP9Oo=; b=kYhVNb/7TzATkb7Nu36Lj1wPU7Y+7pLLswo2Ph
-	7i4KO2anxnJVfeXriDmOMElEfmyAQCV7KX5glpSROXOV0M42wzCLNQ/8O5TA+wkQ
-	D4JlUqNBBJAS3hiMI8OfrDBVbTuA39iMcixa07WydD8W1ffYXWspzENrM14rP9pK
-	KudmwV/rSMMQGiDc1QAD+ugQlDSygCJ/809v90IsPfcIZ5K6bnRJNR39AJK9DQE5
-	vEyy2oS5pGPgbGYfHRFyKElkRe3rxeetY9WxFYnUL0wJby19Io4vW8lW5PerrRUv
-	++isjssnz/VyoE6I+OA0/2cvsaWqeu38JEGauHmutACrxsNA==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7casdh1h-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	cRJA1cxfi7VUntunHtqLBBrQ+oVYezoPDU02dXc9ofc=; b=czaxuLeU6QFO9I1a
+	xHX6yyXjm55XjG+daKqvlIW5MC3c5Tifw0r3FcBPBeYg2tfyYNu0iOLSOCxOl0lQ
+	82XgmX+4Hxl64U9MxN0S+NRVjip43ysgnZbrDj0/BTx6nj8RiMYpzjIsdOw8LwzV
+	bDjTDygqxDFoul8OVA7ZoXbvEzDM5xR1kmJkS1qr9WUkeWnVtWX06wLXPG5EiMet
+	hPYL+AC8WMrez3mmYUXNMmoqTe5vWscWmaHD24CC5C10+/hctT1L2lgKXM+wRNcJ
+	7Z8MOlJ3nNTUt2C5GZsF/s7G0i46At0Dz3zWrO5aKYuaTkOcPaHY0KS1i3IsEY/z
+	YQekug==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8j6dhhsp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:09 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35b68bc1985so242026eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 00:23:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 07:23:15 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-35b68bc1985so242129eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 00:23:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791789789; x=1792394589; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=8u+xOD3u5q1Zym1HS1bDVr21UHfxOOzFZfmACqvP9Oo=;
-        b=OY2Jyh3xf7GMW+i0rw/xMKwjcdzJjhsT6yTc3VZlQzsKTH50c/WSmyrqgSFsVmdB09
-         Zxh+QgNkiMKZtmXlNqMyHv8AEgdpfN4jGXAfq/RSdCxmsFrsedMGgbh60aDrwUTrp38H
-         51wSkoL7Q2TMo0zVY+Nxd2Q7YtP6rx57C0UKxyEUYb8nrtk/I4fOWLhiGA9KCTy/H8Sb
-         HBSCfSzIE51PbsBpJOLk0TshJJAKfHcuQKHyo+DN92J58qU3BZTPpoIFtaNxwPx7C3PU
-         7DnWamxJT5wOtR8LmUYflZVHNjoDh2kyogs5Sq1azzUAQXmuQ2ROmwdwUx+qiWF/UjSp
-         dzDA==
+        d=oss.qualcomm.com; s=google; t=1791789795; x=1792394595; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cRJA1cxfi7VUntunHtqLBBrQ+oVYezoPDU02dXc9ofc=;
+        b=ELnxzQ4fwqz5QEbp63fyY42kC0zUy9VnPxDx5hl8EYIgh5sdsZTwdBKgvjvQ7Y1Z9K
+         qM+np8uycrkY91dyMhJmpi+J5/shztmcHRXwk+5Vd1L3NMzOt/ZUv/C54yZxk50ECv0v
+         X0oFn7VOIKjMrtBZtFf0mkHT7YShqa6NHRxx7kpW2oA0EUFUXY+X1cS41mbON33hwYQS
+         Xc6u8dDFrIQfNB9z/AkW7oGMlZ5d/S0Hh0J4eWcl3DkumN0EeDyMLe5Gs5wapVo1zfKQ
+         zSFyAsAGlHoJUoJQwg/2vHJEdbeHyuxfQXh80+z9T82wP1hvfGmJ+8vP+XiOnhmebxgT
+         LSZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791789789; x=1792394589;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=8u+xOD3u5q1Zym1HS1bDVr21UHfxOOzFZfmACqvP9Oo=;
-        b=dHR5LKlnz2J8b/FDGt5qikt2zpnRUXMh/P7dtI16udhg/O7U0uZBJ/L/zyYLvR8jte
-         IpJe8WY/bJzHGXc0MjKC35QzmgpEx2mQk3+81hCUfCNMxAe8ZMxq2ha7agO8PGOw3vgR
-         SBJ2FgQFG2FBcsDWNZHn4LsDwRhFveD2J7mWF8ncUhzJgX2GInuo2QRSAUo3h4zNDMeo
-         oqSysNfibFVf0tQHwJdrNGxnBHwRC2gy9X1HM5jGmLzcb9yTgYbOEzu4CCmBF5LKzURX
-         D/kEfdisKRYSJyIQeduddTMaCgXk2z4bkLcWtjGWVsRumTi//Wn9KSKx7z40dwEzemEq
-         WiAA==
-X-Gm-Message-State: AFq9FYKsCJWu8wPCwxpQ8M63fO3EVc3BYiymYb2QL+dQbFAjE+9d+mFJ
-	lmqIXrdaiaDarO4gd9mQM+25+mzViJLL4OfJh4JqtDsNzl6HESkCy9nVZUp9/9+DZdfg6qxmBUH
-	gLi0vRqzHgcc4vVDaB4fkdhlMgIIsaLAz207F5WYCt7P9zpc64+K6gcH6SQvzIn1VkQFB
-X-Gm-Gg: AYBFou1INTcbe+RyIVewnd9mGYhvqDSMbiD+kin7Vav1DcytGtKqOBvzrTGIcPC4CQy
-	8wDnGRlHmpCuqkFqiUccuWdcrG8/P5oIGIcQESGIkciVb3u2DRXNdWopkEGVY9y2IP9zOe3ASWl
-	8+v1Pjf8faWGqddyvMmfhcWb0p+pkjMthzojhY8Wbu3O5ICB3qRe7vW7Xql2nztjLtGjbPKA2/I
-	Rnamtmg4lXFx8tlJfvI1YCrjtcmWpGH7GVGPLf3+OhNrW+O8Kn/mvJ9iYI49/MkS/U0K1bYckB+
-	rMNTztAgOB5+ywcvrvG8Fvoo4+LYFuf9uVomKytfazkBFxSZxY+s1aacCk3su1jFxwyjQzJlcNB
-	Y1kCErV27dMJDHLlkYGvfamBwfxdkyA5l3ZPGjd+46QG08uD4YTJuJzwhVbEMLc9OBjVDbT8KPD
-	KdkDYnsKfqGt/00oeFQ1fEWU5eMOuw
-X-Received: by 2002:a05:701b:2084:10b0:156:cbe5:9467 with SMTP id a92af1059eb24-16a5e77e226mr13162818c88.21.1791789788677;
-        Mon, 12 Oct 2026 00:23:08 -0700 (PDT)
-X-Received: by 2002:a05:701b:2084:10b0:156:cbe5:9467 with SMTP id a92af1059eb24-16a5e77e226mr13162777c88.21.1791789787971;
-        Mon, 12 Oct 2026 00:23:07 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791789795; x=1792394595;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cRJA1cxfi7VUntunHtqLBBrQ+oVYezoPDU02dXc9ofc=;
+        b=zcPG/arqQdK06fDRRYWQNz0GybI4P99Shi/931pT8ibhJI1/kw4LjbU5sVvzkihlUY
+         wTWxjnhsxYhnXflFlhJZ+6MCD2tPrhJBgpuXU5FhWJJYxejX9VYzkcJaY0zXbSSZMXN0
+         8YLnyE+BTsXjGXuSbQ9rIQjW0UBIP0CbZGjbC/qIQuFPjtOCyJ4kk79cVGJjkqsEt7aC
+         MIylCXDLFrdz1J+Spu8p/PJxz5fzhm5lW9tWO/LyjXFm/Shdm+Wvkrx8bGbaZHdBdgM+
+         Xiw6hSmk/ZwbQx6bwT+z9Ra4NSySRM8GGgXKuXJz1KusFqKBfu3WdADpACDh7rS3wcrF
+         ldXQ==
+X-Gm-Message-State: AFq9FYKcQWbeu+o1LXFRToRjyY7iyvvqWGx3smiSl5m/ebCnahajCRdl
+	nrmA3Xjev6JBRN+yvq8Z3hv0vCUddKAjsuSBW/xRIhuHirnYM7jgXFtcIwEI95sKTPlB+8wKW4K
+	MXE85vVRa388qqA+Z5IT3zqoqqv8IbDHz3+rCQl7Oo/zFaBR7GJz6h4z82hSPBhsfenmX
+X-Gm-Gg: AYBFou2LZuRcBkNGo+jWMZA5AfNyjlOK4yF2P8eZ6GPXp0M3f0YdyWG3fvQ9h7s48kl
+	GMHpSbn/zegKKYu+SptS7ss8QkH0Ux7G+OROaD5emzHpn68Q3dJUd6+4RP2i33x8eun251XnKrU
+	wfh4o8a4fQasJx4LQ4n4KpaPbqgf+uu/boM401RJojbfDBhg/F2tYbDsC6QOWY5W+ff6ZJCl+kI
+	ZbQ97qeQSJoiRGZppYcwkTQAkoNflSxmaeNkwivhPymXHNqE4ECaSNwHHhqYSk9NmBXO8R2lUuU
+	Gj4e4rMMNGS2nhrx3cCNpxkieq6jNvuFgiyziPT5NZ1Wg/GIaYx2zwYVl5VYeNWw0sHdjJqpP7F
+	zhRpsfKArPYqFOXOuZL/VR9TGuGJqTOGJubUKVXCgNbiYK990womYQ8eIvQAnd8U7UqDSKZqb+N
+	eqpgXeweXjhr5S1K5/UV1WQvP+KbmH
+X-Received: by 2002:a05:7022:b058:20b0:143:808b:b178 with SMTP id a92af1059eb24-16a15efb546mr12923162c88.26.1791789794108;
+        Mon, 12 Oct 2026 00:23:14 -0700 (PDT)
+X-Received: by 2002:a05:7022:b058:20b0:143:808b:b178 with SMTP id a92af1059eb24-16a15efb546mr12923071c88.26.1791789792360;
+        Mon, 12 Oct 2026 00:23:12 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a1becf08sm29748733c88.5.2026.10.12.00.23.04
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a1becf08sm29748733c88.5.2026.10.12.00.23.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 00:23:07 -0700 (PDT)
+        Mon, 12 Oct 2026 00:23:11 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Subject: [PATCH v7 00/11] Enable mutliple peripherals in IPQ5210
-Date: Mon, 12 Oct 2026 12:53:00 +0530
-Message-Id: <20261012-08-dts-v7-0-77bd3d68d850@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 12:53:01 +0530
+Subject: [PATCH v7 01/11] arm64: dts: qcom: ipq5210: Add nodes for multiple
+ peripherals
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,15 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANSKzGoC/5WSTW7bMBBGr2JoXRrD/5ERBL1H0QVJjWIWsWyLi
- pog8N0zohPXQG2gXYjiEHqPQ356bwqNmUqzWb03I8255P3Ahf+2atI2DE8kcsd1o0A58OAEoOi
- mIgg1xKh88io2/PFhpD6/VtGPn+d6pOML+6bzYhNDIZH2u12eNquBXiexOCVAu/A7KiXU3Tarh
- 7qZlUbklEQ+HK2SIGYpQETLTXR9JOPg+76U9fElPC/SNQ+Pt0VOWkBW4FoaJbXxQoo5jKHj51c
- Y1gO/38IQhn8UcssoDr93S0fcU0TvnW7RafU/gnF4Ogs8WosQMBrsbwsOYUrbimtLgDpGtEabo
- E2HzjhPVseWAknTe+yCVLZZItjmMu3HtxrtLGsGnyn6rxTrnfaJUDGcOtn91UA1zeqKlvZCqyU
- RcBAdEijr7tD6ilb6QvNMgDcUpZa9RnWHNte0udA8E86Sk0Fywj3coe0fur06N59BWDRkA/9R0
- dyj3YWumX3Rbrm1NhlK6ByHcIM+nU4fHARdjVwDAAA=
-X-Change-ID: 20260706-08-dts-e830bb27c72b
+Message-Id: <20261012-08-dts-v7-1-77bd3d68d850@oss.qualcomm.com>
+References: <20261012-08-dts-v7-0-77bd3d68d850@oss.qualcomm.com>
+In-Reply-To: <20261012-08-dts-v7-0-77bd3d68d850@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -106,149 +103,741 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfX5VFhOMFMsuLh
- LTvD1yK+BdyWju6bkvC0yixuq+Gwrbv3C2zHgjnsZl36X9e0sC2fI4LdlDgEclL9fxqeQ5GtoIW
- 2yDzTWKElhuBCpECCv62t+Cual6oRBU=
-X-Proofpoint-ORIG-GUID: PyThnLyOPOWZUZsNIY3b3pt1ScBrxg6x
-X-Proofpoint-GUID: PyThnLyOPOWZUZsNIY3b3pt1ScBrxg6x
-X-Authority-Analysis: v=2.4 cv=eMWGH3p1 c=1 sm=1 tr=0 ts=6acc8add cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfXwv0eTsLPJfoH
+ PP4ONPorYmx99/ryAe+BGJa7dhvO5YYlv6NexNR01xC/xt55Jf/v/joUyflgAT+vqcDa60i8zbl
+ 9aU34DrPEmQzfwVrxbf3GveqeYL35gYyGTU7UuVYEZr02IRGSrSZPsNs5/cy6F2XY7D8uqE7t+X
+ IFWvmL31gwGKA25Key6Yi7JokFQ3Df9bbR1eMtxg0HEacCEKn7WZyUnuzsbcSAhk+/Ts156prx0
+ 1kUVUYrefMP7jnlFnDDcPm9PJr4K+cYAyp9zCdQt2i55XOs7KOiPIn6p/txrK1sFF/FuWONvVbS
+ +3Q59E+HvgVHQDQ/jeS4mXg0NA7Lo5Gjny9FBRR9dL1vJPjzwLKPb+x728FBx1dI8qeXB+ckpoI
+ Lu+Bx7ybLgEEL8tE9cmhv17MOhMH4iamMQUd5X85Tboe06OMQl3jO96Ea/yxAYEBJ4rULfwB6oH
+ MWHUKiAVi+IfOU/nnTg==
+X-Authority-Analysis: v=2.4 cv=aK5lOr9m c=1 sm=1 tr=0 ts=6acc8ae3 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=OAVUEJiqWiMpwp8HbvkA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfX6yh8nWb842/H
- Mr6aqPDeYhZph9zdWfuYSRq8qE5J3zj2k6aqZ8GekMb1ly1CSaqjVQQ3UV0etWWvdXEu/rC2m8q
- EKded8+BBosWKHCinPpL6vFgAF5lBuzDlouFMIWK0UX3/GUzzyh2dH1S9WiYlD2MkkZgH570qRB
- sq3TYuN1hpUz4uXV1hUi3xPUeib6O/ayuYHqH5WKOiiMz5OmpjmKWmK22gjrlNo/nhJPCtk7/z/
- X5DlyZ6Qycg3xo2HMFnVy72tXL+woZwPNQlO6dZ6sGrp1cQ/r6Sbpo/+pCdyhcuPftrr4Z7dudE
- c1ko88iPG3LlnicPyE+U17lWlARwIiV9Yvw4V2undy5zYwOOmtQ5hVb7mOgVO0u2CCmRjx9hUpR
- pegbrdd2i2Ou0m1gb6J/6LFAxslBqGwuweq0R2iz4axnHamCPB01efk2MJJkRDjhjZaiSXLTdaR
- ZRMaA/EMFBYTPwDadJQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=L-oS5-zLtgPf8eA3vCsA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-GUID: KVPnGSmi3aai_TLZykwXAnRAdPrUypHQ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAyOSBTYWx0ZWRfXyp0gxh2X9SZy
+ 3hvRt8D4Np8axOTArKhwP7GvE5dCSXKF56bp03rBRD8laNq5sTgKvUYLdweqww8wDXv480MirQ/
+ R2jaEm2z4A+VrjTRq8SYMg7K4WuINBs=
+X-Proofpoint-ORIG-GUID: KVPnGSmi3aai_TLZykwXAnRAdPrUypHQ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_02,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
- suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610120029
+ priorityscore=1501 phishscore=0 bulkscore=0 impostorscore=0 spamscore=0
+ suspectscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120029
 
-This set of patches enable mutliple peripherals like USB, PCIe etc.
-Additionally, it enables CPUfreq and thermal tripping points.
+Describe common IPQ5210 SoC peripherals in the base DTSI so board DTS files
+can enable the hardware they use.
 
-Please refer to [1] for initial review comments on the PCIe related DT
-changes.
+Add nodes for USB, PCIe, QPIC NAND/BAM, QFPROM, TSENS and thermal zones.
+Also describe the CPU OPP table and CPU cooling cells needed for CPU
+frequency scaling and thermal throttling.
 
-1 - https://lore.kernel.org/linux-arm-msm/20260514-pci-ipq5210-v1-0-a09436200b35@oss.qualcomm.com/
-
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-Changes in v7:
-- In 'Add nodes for multiple peripherals' patch (it has R-B Konrad)
-	* Reduce critical temperature by about five degrees per recent
-	  calibration updates
-	* Fix placement of 'efuse@a4000' node
-- Move 'spi-{rx,tx}-bus-width = 4' to rdp504-common.dtsi instead of
-  rdp504-nand.dts
-- Change 'reg' details in spi@1a80000 from 32 to 64 bit
-- Add #address-cells = <1>; and #size-cells = <0>; to spi0 & spi1 nodes
-- Fix incorrect placement of rng@4c3000 node
-- Link to v6: https://lore.kernel.org/r/20261008-08-dts-v6-0-f9c4ec8664d8@oss.qualcomm.com
+ arch/arm64/boot/dts/qcom/ipq5210.dtsi | 605 +++++++++++++++++++++++++++++++++-
+ 1 file changed, 599 insertions(+), 6 deletions(-)
 
-Changes in v6:
-- Didn't touch the existing patch as it has R-b
-- Add DT changes to enable more devices. Not sure if these can be squashed
-  into a single patch. Please let me know, will squash if that is
-  preferrable. Following were added
-	Random number generator
-	SPI node definitions
-	I2C definitions
-	PWM block
-	Download mode support
-	ICE support for sdhci
-	C3 CPU idle state
-	Support for WPS button
-- New compatibles used are documented in
-	https://lore.kernel.org/linux-arm-msm/20261008-rng-v1-1-785580a8b48f@oss.qualcomm.com/
-	https://lore.kernel.org/linux-arm-msm/20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com/
-- Link to v5: https://lore.kernel.org/r/20260907-08-dts-v5-0-584e5ab50b40@oss.qualcomm.com
+diff --git a/arch/arm64/boot/dts/qcom/ipq5210.dtsi b/arch/arm64/boot/dts/qcom/ipq5210.dtsi
+index 20e8b240642c..0c03295f61b0 100644
+--- a/arch/arm64/boot/dts/qcom/ipq5210.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5210.dtsi
+@@ -4,8 +4,11 @@
+  */
+ 
+ #include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/clock/qcom,apss-ipq.h>
+ #include <dt-bindings/clock/qcom,ipq5210-gcc.h>
++#include <dt-bindings/interconnect/qcom,ipq5210.h>
+ #include <dt-bindings/reset/qcom,ipq5210-gcc.h>
++#include <dt-bindings/thermal/thermal.h>
+ 
+ / {
+ 	#address-cells = <2>;
+@@ -28,36 +31,48 @@ cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 
+-		cpu@0 {
++		cpu0: cpu@0 {
+ 			device_type = "cpu";
+ 			compatible = "arm,cortex-a53";
+ 			reg = <0x0>;
+ 			enable-method = "psci";
+ 			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
++			operating-points-v2 = <&cpu_opp_table>;
+ 		};
+ 
+-		cpu@1 {
++		cpu1: cpu@1 {
+ 			device_type = "cpu";
+ 			compatible = "arm,cortex-a53";
+ 			reg = <0x1>;
+ 			enable-method = "psci";
+ 			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
++			operating-points-v2 = <&cpu_opp_table>;
+ 		};
+ 
+-		cpu@2 {
++		cpu2: cpu@2 {
+ 			device_type = "cpu";
+ 			compatible = "arm,cortex-a53";
+ 			reg = <0x2>;
+ 			enable-method = "psci";
+ 			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
++			operating-points-v2 = <&cpu_opp_table>;
+ 		};
+ 
+-		cpu@3 {
++		cpu3: cpu@3 {
+ 			device_type = "cpu";
+ 			compatible = "arm,cortex-a53";
+ 			reg = <0x3>;
+ 			enable-method = "psci";
+ 			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++			clocks = <&apcs_glb APCS_ALIAS0_CORE_CLK>;
++			operating-points-v2 = <&cpu_opp_table>;
+ 		};
+ 
+ 		l2_0: l2-cache {
+@@ -84,6 +99,40 @@ memory@80000000 {
+ 		reg = <0x0 0x80000000 0x0 0x0>;
+ 	};
+ 
++	cpu_opp_table: opp-table-cpu {
++		compatible = "operating-points-v2-kryo-cpu";
++		opp-shared;
++		nvmem-cells = <&cpu_speed_bin>;
++
++		opp-816000000 {
++			opp-hz = /bits/ 64 <816000000>;
++			opp-supported-hw = <0x3>;
++			opp-microvolt = <850000>;
++			clock-latency-ns = <200000>;
++		};
++
++		opp-1008000000 {
++			opp-hz = /bits/ 64 <1008000000>;
++			opp-supported-hw = <0x3>;
++			opp-microvolt = <850000>;
++			clock-latency-ns = <200000>;
++		};
++
++		opp-1200000000 {
++			opp-hz = /bits/ 64 <1200000000>;
++			opp-supported-hw = <0x3>;
++			opp-microvolt = <850000>;
++			clock-latency-ns = <200000>;
++		};
++
++		opp-1416000000 {
++			opp-hz = /bits/ 64 <1416000000>;
++			opp-supported-hw = <0x1>;
++			opp-microvolt = <1000000>;
++			clock-latency-ns = <200000>;
++		};
++	};
++
+ 	pmu {
+ 		compatible = "arm,cortex-a53-pmu";
+ 		interrupts = <GIC_PPI 7 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
+@@ -130,6 +179,170 @@ soc@0 {
+ 		dma-ranges = <0 0 0 0 0x10 0>;
+ 		ranges = <0 0 0 0 0x10 0>;
+ 
++		qusb_phy_0: phy@7b000 {
++			compatible = "qcom,ipq5210-qusb2-phy", "qcom,ipq6018-qusb2-phy";
++			reg = <0x0 0x0007b000 0x0 0x180>;
++			#phy-cells = <0>;
++
++			clocks = <&gcc GCC_USB0_PHY_CFG_AHB_CLK>,
++				 <&xo_board>;
++			clock-names = "cfg_ahb",
++				      "ref";
++
++			resets = <&gcc GCC_QUSB2_0_PHY_BCR>;
++			status = "disabled";
++		};
++
++		ssphy_0: phy@7d000 {
++			compatible = "qcom,ipq5210-qmp-usb3-phy", "qcom,ipq9574-qmp-usb3-phy";
++			reg = <0x0 0x0007d000 0x0 0xa00>;
++			#phy-cells = <0>;
++
++			clocks = <&gcc GCC_USB0_AUX_CLK>,
++				 <&xo_board>,
++				 <&gcc GCC_USB0_PHY_CFG_AHB_CLK>,
++				 <&gcc GCC_USB0_PIPE_CLK>;
++			clock-names = "aux",
++				      "ref",
++				      "cfg_ahb",
++				      "pipe";
++
++			resets = <&gcc GCC_USB0_PHY_BCR>,
++				 <&gcc GCC_USB3PHY_0_PHY_BCR>;
++			reset-names = "phy",
++				      "phy_phy";
++
++			#clock-cells = <0>;
++			clock-output-names = "usb0_pipe_clk";
++
++			status = "disabled";
++		};
++
++		pcie0_phy: phy@84000 {
++			compatible = "qcom,ipq5210-qmp-gen3x1-pcie-phy";
++			reg = <0x0 0x00084000 0x0 0x1000>;
++
++			clocks = <&gcc GCC_PCIE0_AUX_CLK>,
++				 <&gcc GCC_PCIE0_AHB_CLK>,
++				 <&gcc GCC_PCIE0_PIPE_CLK>;
++			clock-names = "aux", "cfg_ahb", "pipe";
++
++			assigned-clocks = <&gcc GCC_PCIE0_AUX_CLK>;
++			assigned-clock-rates = <20000000>;
++
++			resets = <&gcc GCC_PCIE0_PHY_BCR>,
++				 <&gcc GCC_PCIE0PHY_PHY_BCR>;
++			reset-names = "phy", "common";
++
++			#clock-cells = <0>;
++			clock-output-names = "pcie0_pipe_clk";
++
++			#phy-cells = <0>;
++			status = "disabled";
++		};
++
++		efuse@a4000 {
++			compatible = "qcom,ipq5210-qfprom", "qcom,qfprom";
++			reg = <0x0 0x000a4000 0x0 0x741>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			cpu_speed_bin: cpu-speed-bin@28 {
++				reg = <0x28 0x1>;
++				bits = <0 8>;
++			};
++
++			tsens_sens11_off: s11@3dd {
++				reg = <0x3dd 0x1>;
++				bits = <4 4>;
++			};
++
++			tsens_sens12_off: s12@3de {
++				reg = <0x3de 0x1>;
++				bits = <0 4>;
++			};
++
++			tsens_sens13_off: s13@3de {
++				reg = <0x3de 0x1>;
++				bits = <4 4>;
++			};
++
++			tsens_sens14_off: s14@3e5 {
++				reg = <0x3e5 0x2>;
++				bits = <7 4>;
++			};
++
++			tsens_sens15_off: s15@3e6 {
++				reg = <0x3e6 0x1>;
++				bits = <3 4>;
++			};
++
++			tsens_mode: mode@419 {
++				reg = <0x419 0x1>;
++				bits = <0 3>;
++			};
++
++			tsens_base0: base0@419 {
++				reg = <0x419 0x2>;
++				bits = <3 10>;
++			};
++
++			tsens_base1: base1@41a {
++				reg = <0x41a 0x2>;
++				bits = <5 10>;
++			};
++		};
++
++		pcie1_phy: phy@f4000 {
++			compatible = "qcom,ipq5210-qmp-gen3x2-pcie-phy",
++				     "qcom,ipq9574-qmp-gen3x2-pcie-phy";
++			reg = <0x0 0x000f4000 0x0 0x2000>;
++
++			clocks = <&gcc GCC_PCIE1_AUX_CLK>,
++				 <&gcc GCC_PCIE1_AHB_CLK>,
++				 <&gcc GCC_PCIE1_PIPE_CLK>;
++			clock-names = "aux", "cfg_ahb", "pipe";
++
++			assigned-clocks = <&gcc GCC_PCIE1_AUX_CLK>;
++			assigned-clock-rates = <20000000>;
++
++			resets = <&gcc GCC_PCIE1_PHY_BCR>,
++				 <&gcc GCC_PCIE1PHY_PHY_BCR>;
++			reset-names = "phy", "common";
++
++			#clock-cells = <0>;
++			clock-output-names = "pcie1_pipe_clk";
++
++			#phy-cells = <0>;
++			status = "disabled";
++		};
++
++		tsens: thermal-sensor@4a9000 {
++			compatible = "qcom,ipq5210-tsens", "qcom,ipq5332-tsens";
++			reg = <0x0 0x004a9000 0x0 0x1000>,
++			      <0x0 0x004a8000 0x0 0x1000>;
++			nvmem-cells = <&tsens_mode>,
++				      <&tsens_base0>,
++				      <&tsens_base1>,
++				      <&tsens_sens11_off>,
++				      <&tsens_sens12_off>,
++				      <&tsens_sens13_off>,
++				      <&tsens_sens14_off>,
++				      <&tsens_sens15_off>;
++			nvmem-cell-names = "mode",
++					   "base0",
++					   "base1",
++					   "tsens_sens11_off",
++					   "tsens_sens12_off",
++					   "tsens_sens13_off",
++					   "tsens_sens14_off",
++					   "tsens_sens15_off";
++			interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "combined";
++			#thermal-sensor-cells = <1>;
++			#qcom,sensors = <5>;
++		};
++
+ 		tlmm: pinctrl@1000000 {
+ 			compatible = "qcom,ipq5210-tlmm";
+ 			reg = <0x0 0x01000000 0x0 0x300000>;
+@@ -146,8 +359,8 @@ gcc: clock-controller@1800000 {
+ 			reg = <0x0 0x01800000 0x0 0x40000>;
+ 			clocks = <&xo_board>,
+ 				 <&sleep_clk>,
+-				 <0>,
+-				 <0>,
++				 <&pcie0_phy>,
++				 <&pcie1_phy>,
+ 				 <0>,
+ 				 <0>;
+ 			#clock-cells = <1>;
+@@ -205,6 +418,87 @@ sdhc: mmc@7804000 {
+ 			status = "disabled";
+ 		};
+ 
++		qpic_bam: dma-controller@7984000 {
++			compatible = "qcom,bam-v1.7.0";
++			reg = <0x0 0x07984000 0x0 0x1c000>;
++			interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&gcc GCC_QPIC_AHB_CLK>;
++			clock-names = "bam_clk";
++			#dma-cells = <1>;
++			qcom,ee = <0>;
++			status = "disabled";
++		};
++
++		qpic_nand: spi@79b0000 {
++			compatible = "qcom,ipq5210-snand", "qcom,ipq9574-snand";
++			reg = <0x0 0x079b0000 0x0 0x10000>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			clocks = <&gcc GCC_QPIC_CLK>,
++				 <&gcc GCC_QPIC_AHB_CLK>,
++				 <&gcc GCC_QPIC_IO_MACRO_CLK>;
++			clock-names = "core",
++				      "aon",
++				      "iom";
++
++			dmas = <&qpic_bam 0>,
++			       <&qpic_bam 1>,
++			       <&qpic_bam 2>;
++			dma-names = "tx",
++				    "rx",
++				    "cmd";
++
++			status = "disabled";
++		};
++
++		usb3: usb@8a00000 {
++			compatible = "qcom,ipq5210-dwc3", "qcom,snps-dwc3";
++			reg = <0x0 0x08a00000 0x0 0x200000>;
++
++			clocks = <&gcc GCC_CNOC_USB_CLK>,
++				 <&gcc GCC_USB0_MASTER_CLK>,
++				 <&gcc GCC_USB0_PHY_CFG_AHB_CLK>,
++				 <&gcc GCC_USB0_SLEEP_CLK>,
++				 <&gcc GCC_USB0_MOCK_UTMI_CLK>;
++
++			clock-names = "cfg_noc",
++				      "core",
++				      "iface",
++				      "sleep",
++				      "mock_utmi";
++
++			assigned-clocks = <&gcc GCC_USB0_MASTER_CLK>,
++					  <&gcc GCC_USB0_MOCK_UTMI_CLK>;
++			assigned-clock-rates = <200000000>,
++					       <24000000>;
++
++			interrupts-extended = <&intc GIC_SPI 161 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 165 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 174 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 175 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "dwc_usb3",
++					  "pwr_event",
++					  "qusb2_phy",
++					  "dp_hs_phy_irq",
++					  "dm_hs_phy_irq";
++
++			phys = <&qusb_phy_0>,
++			       <&ssphy_0>;
++			phy-names = "usb2-phy",
++				    "usb3-phy";
++
++			resets = <&gcc GCC_USB_BCR>;
++
++			tx-fifo-resize;
++			snps,is-utmi-l1-suspend;
++			snps,hird-threshold = /bits/ 8 <0x0>;
++			snps,dis_u2_susphy_quirk;
++			snps,dis_u3_susphy_quirk;
++
++			status = "disabled";
++		};
++
+ 		intc: interrupt-controller@b000000 {
+ 			compatible = "qcom,msm-qgic2";
+ 			interrupt-controller;
+@@ -244,6 +538,24 @@ watchdog@b017000 {
+ 			clocks = <&sleep_clk>;
+ 		};
+ 
++		apcs_glb: mailbox@b111000 {
++			compatible = "qcom,ipq5210-apcs-apps-global",
++				     "qcom,ipq6018-apcs-apps-global";
++			reg = <0x0 0x0b111000 0x0 0x1000>;
++			#clock-cells = <1>;
++			clocks = <&a53pll>, <&xo_board>, <&gcc GPLL0>;
++			clock-names = "pll", "xo", "gpll0";
++			#mbox-cells = <1>;
++		};
++
++		a53pll: clock@b116000 {
++			compatible = "qcom,ipq5210-a53pll";
++			reg = <0x0 0x0b116000 0x0 0x1000>;
++			#clock-cells = <0>;
++			clocks = <&xo_board>;
++			clock-names = "xo";
++		};
++
+ 		timer@b120000 {
+ 			compatible = "arm,armv7-timer-mem";
+ 			reg = <0x0 0x0b120000 0x0 0x1000>;
+@@ -307,6 +619,287 @@ frame@b128000 {
+ 				status = "disabled";
+ 			};
+ 		};
++
++		pcie1: pcie@50000000 {
++			compatible = "qcom,pcie-ipq5210", "qcom,pcie-ipq9574";
++			reg = <0x0 0x50000000 0x0 0xf1c>,
++			      <0x0 0x50000f20 0x0 0xa8>,
++			      <0x0 0x50001000 0x0 0x1000>,
++			      <0x0 0x000f0000 0x0 0x3000>,
++			      <0x0 0x50100000 0x0 0x1000>,
++			      <0x0 0x000f6000 0x0 0x1000>;
++			reg-names = "dbi",
++				    "elbi",
++				    "atu",
++				    "parf",
++				    "config",
++				    "mhi";
++			device_type = "pci";
++			linux,pci-domain = <1>;
++			bus-range = <0x00 0xff>;
++			#address-cells = <3>;
++			#size-cells = <2>;
++
++			ranges = <0x01000000 0x0 0x0 0x0 0x50200000 0x0 0x00100000>,
++				 <0x02000000 0x0 0x0 0x0 0x50300000 0x0 0x0fd00000>;
++
++			#interrupt-cells = <1>;
++			interrupt-map-mask = <0 0 0 0x7>;
++			interrupt-map = <0 0 0 1 &intc 0 0 GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 2 &intc 0 0 GIC_SPI 201 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 3 &intc 0 0 GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 4 &intc 0 0 GIC_SPI 203 IRQ_TYPE_LEVEL_HIGH>;
++
++			interrupts = <GIC_SPI 191 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 192 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 193 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 195 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "msi0",
++					  "msi1",
++					  "msi2",
++					  "msi3",
++					  "msi4",
++					  "msi5",
++					  "msi6",
++					  "msi7",
++					  "global";
++
++			clocks = <&gcc GCC_PCIE1_AXI_M_CLK>,
++				 <&gcc GCC_PCIE1_AXI_S_CLK>,
++				 <&gcc GCC_PCIE1_AXI_S_BRIDGE_CLK>,
++				 <&gcc GCC_PCIE1_RCHNG_CLK>,
++				 <&gcc GCC_PCIE1_AHB_CLK>,
++				 <&gcc GCC_PCIE1_AUX_CLK>;
++			clock-names = "axi_m",
++				      "axi_s",
++				      "axi_bridge",
++				      "rchng",
++				      "ahb",
++				      "aux";
++
++			resets = <&gcc GCC_PCIE1_PIPE_ARES>,
++				 <&gcc GCC_PCIE1_CORE_STICKY_RESET>,
++				 <&gcc GCC_PCIE1_AXI_S_STICKY_RESET>,
++				 <&gcc GCC_PCIE1_AXI_S_ARES>,
++				 <&gcc GCC_PCIE1_AXI_M_STICKY_RESET>,
++				 <&gcc GCC_PCIE1_AXI_M_ARES>,
++				 <&gcc GCC_PCIE1_AUX_ARES>,
++				 <&gcc GCC_PCIE1_AHB_ARES>;
++			reset-names = "pipe",
++				      "sticky",
++				      "axi_s_sticky",
++				      "axi_s",
++				      "axi_m_sticky",
++				      "axi_m",
++				      "aux",
++				      "ahb";
++
++			interconnects = <&gcc MASTER_CNOC_PCIE1 &gcc SLAVE_CNOC_PCIE1>,
++					<&gcc MASTER_SNOC_PCIE1 &gcc SLAVE_SNOC_PCIE1>;
++			interconnect-names = "pcie-mem", "cpu-pcie";
++
++			status = "disabled";
++
++			pcie1_port0: pcie@0 {
++				device_type = "pci";
++				reg = <0x0 0x0 0x0 0x0 0x0>;
++				bus-range = <0x01 0xff>;
++
++				phys = <&pcie1_phy>;
++
++				#address-cells = <3>;
++				#size-cells = <2>;
++				ranges;
++			};
++		};
++
++		pcie0: pcie@70000000 {
++			compatible = "qcom,pcie-ipq5210", "qcom,pcie-ipq9574";
++			reg = <0x0 0x70000000 0x0 0xf1c>,
++			      <0x0 0x70000f20 0x0 0xa8>,
++			      <0x0 0x70001000 0x0 0x1000>,
++			      <0x0 0x00080000 0x0 0x3000>,
++			      <0x0 0x70100000 0x0 0x1000>,
++			      <0x0 0x00086000 0x0 0x1000>;
++			reg-names = "dbi",
++				    "elbi",
++				    "atu",
++				    "parf",
++				    "config",
++				    "mhi";
++			device_type = "pci";
++			linux,pci-domain = <0>;
++			bus-range = <0x00 0xff>;
++			#address-cells = <3>;
++			#size-cells = <2>;
++
++			ranges = <0x01000000 0x0 0x0 0x0 0x70200000 0x0 0x00100000>,
++				 <0x02000000 0x0 0x0 0x0 0x70300000 0x0 0x0fd00000>;
++
++			#interrupt-cells = <1>;
++			interrupt-map-mask = <0 0 0 0x7>;
++			interrupt-map = <0 0 0 1 &intc 0 0 GIC_SPI 185 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 2 &intc 0 0 GIC_SPI 186 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 3 &intc 0 0 GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 4 &intc 0 0 GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>;
++
++			interrupts = <GIC_SPI 176 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 177 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 178 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 179 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 180 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 181 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 182 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 183 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 184 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "msi0",
++					  "msi1",
++					  "msi2",
++					  "msi3",
++					  "msi4",
++					  "msi5",
++					  "msi6",
++					  "msi7",
++					  "global";
++
++			clocks = <&gcc GCC_PCIE0_AXI_M_CLK>,
++				 <&gcc GCC_PCIE0_AXI_S_CLK>,
++				 <&gcc GCC_PCIE0_AXI_S_BRIDGE_CLK>,
++				 <&gcc GCC_PCIE0_RCHNG_CLK>,
++				 <&gcc GCC_PCIE0_AHB_CLK>,
++				 <&gcc GCC_PCIE0_AUX_CLK>;
++			clock-names = "axi_m",
++				      "axi_s",
++				      "axi_bridge",
++				      "rchng",
++				      "ahb",
++				      "aux";
++
++			resets = <&gcc GCC_PCIE0_PIPE_ARES>,
++				 <&gcc GCC_PCIE0_CORE_STICKY_RESET>,
++				 <&gcc GCC_PCIE0_AXI_S_STICKY_RESET>,
++				 <&gcc GCC_PCIE0_AXI_S_ARES>,
++				 <&gcc GCC_PCIE0_AXI_M_STICKY_RESET>,
++				 <&gcc GCC_PCIE0_AXI_M_ARES>,
++				 <&gcc GCC_PCIE0_AUX_ARES>,
++				 <&gcc GCC_PCIE0_AHB_ARES>;
++			reset-names = "pipe",
++				      "sticky",
++				      "axi_s_sticky",
++				      "axi_s",
++				      "axi_m_sticky",
++				      "axi_m",
++				      "aux",
++				      "ahb";
++
++			interconnects = <&gcc MASTER_CNOC_PCIE0 &gcc SLAVE_CNOC_PCIE0>,
++					<&gcc MASTER_SNOC_PCIE0 &gcc SLAVE_SNOC_PCIE0>;
++			interconnect-names = "pcie-mem", "cpu-pcie";
++
++			status = "disabled";
++
++			pcie0_port0: pcie@0 {
++				device_type = "pci";
++				reg = <0x0 0x0 0x0 0x0 0x0>;
++				bus-range = <0x01 0xff>;
++
++				phys = <&pcie0_phy>;
++
++				#address-cells = <3>;
++				#size-cells = <2>;
++				ranges;
++			};
++		};
++	};
++
++	thermal_zones: thermal-zones {
++		ethphy-thermal {
++			thermal-sensors = <&tsens 11>;
++
++			trips {
++				ethphy-critical {
++					temperature = <120000>;
++					hysteresis = <9000>;
++					type = "critical";
++				};
++			};
++		};
++
++		pon-uniphy-thermal {
++			thermal-sensors = <&tsens 12>;
++
++			trips {
++				pon-uniphy-critical {
++					temperature = <120000>;
++					hysteresis = <9000>;
++					type = "critical";
++				};
++			};
++		};
++
++		nss-top-thermal {
++			thermal-sensors = <&tsens 13>;
++
++			trips {
++				nss-top-critical {
++					temperature = <120000>;
++					hysteresis = <9000>;
++					type = "critical";
++				};
++			};
++		};
++
++		cpu0-thermal {
++			thermal-sensors = <&tsens 14>;
++
++			trips {
++				cpu-critical {
++					temperature = <115000>;
++					hysteresis = <9000>;
++					type = "critical";
++				};
++
++				cpu0_thermal_alert: cpu-passive {
++					temperature = <100000>;
++					hysteresis = <9000>;
++					type = "passive";
++				};
++			};
++
++			cooling-maps {
++				map0 {
++					trip = <&cpu0_thermal_alert>;
++					/* Set maximum frequency as 816 MHz */
++					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++				};
++			};
++		};
++
++		cpu1-thermal {
++			thermal-sensors = <&tsens 15>;
++
++			trips {
++				cpu-critical {
++					temperature = <115000>;
++					hysteresis = <9000>;
++					type = "critical";
++				};
++
++				cpu-passive {
++					temperature = <100000>;
++					hysteresis = <9000>;
++					type = "passive";
++				};
++			};
++		};
+ 	};
+ 
+ 	timer {
 
-Changes in v5:
-- Pick one R-b Konrad
-- Do not remove ipq5210-rdp504.dtb from arch/arm64/boot/dts/qcom/Makefile
-  and add it in a subsequent patch. Instead, move the ipq5210-rdp504.dts
-  nodes to ipq5210-rdp504.dtb-common.dtsi and include common dtsi in rdp504
-  dts file and introduce rdp504-nand dts in the 3rd patch
-- No code changes
-- Link to v4: https://lore.kernel.org/r/20260724-08-dts-v4-0-65e61a1061f0@oss.qualcomm.com
-
-Changes in v4:
-- Fix following sashiko comments
-	- Add #include <dt-bindings/thermal/thermal.h> to dtsi file for
-	  THERMAL_NO_LIMIT definition
-	- Change tsens interrupt from edge to level
-	- Remove ipq5210-rdp504.dtb from Makefile in the second patch to
-	  avoid build break and add it back in the 3rd patch
-- Dependency related sashiko comments ignored as they are addressed in the
-  prerequisite patch information
-- Link to v3: https://lore.kernel.org/r/20260723-08-dts-v3-0-074eb131f382@oss.qualcomm.com
-
-Changes in v3:
-- Address v2 comments
-	- Introduce RDP504 common dtsi and two board specific dts files one
-	  for NAND and one for eMMC
-	- Move 'dr_mode' to board file instead of SoC file
-	- Dropped 'polling-delay-passive = 0' and 'polling-delay = 0'
-	- Use THERMAL_NO_LIMIT in 'cooling-device'
-	- '\n' before status = okay
-- Removed 'num-lanes' from pcie0 & pcie1 nodes
-- Link to v2: https://lore.kernel.org/r/20260715-08-dts-v2-0-b060b68e0256@oss.qualcomm.com
-
-Changes in v2:
-- Change usb3@8a00000 -> usb@8a00000
-- Ignore other comments as they are covered in the following prerequisite
-  prerequisite-message-id: <20260514-icc-ipq5210-v1-0-b5070dfbe460@oss.qualcomm.com>
-- Link to v1: https://lore.kernel.org/r/20260707-08-dts-v1-0-fce82e14cd1d@oss.qualcomm.com
-
----
-Varadarajan Narayanan (11):
-      arm64: dts: qcom: ipq5210: Add nodes for multiple peripherals
-      arm64: dts: qcom: ipq5210: Introduce RDP504 common DT file
-      arm64: dts: qcom: ipq5210: Introduce RDP504 NAND variant DT file
-      arm64: dts: qcom: ipq5210: Add support for WPS button
-      arm64: dts: qcom: ipq5210: Add C3 CPU idle state
-      arm64: dts: qcom: ipq5210: Add ICE support to SDHCI
-      arm64: dts: qcom: ipq5210: Enable download mode support
-      arm64: dts: qcom: ipq5210: Enable the PWM block
-      arm64: dts: qcom: ipq5210: Add I2C nodes
-      arm64: dts: qcom: ipq5210: Add SPI node definitions
-      arm64: dts: qcom: ipq5210: Add random number generator node
-
- arch/arm64/boot/dts/qcom/Makefile                  |   2 +-
- .../arm64/boot/dts/qcom/ipq5210-rdp504-common.dtsi | 269 ++++++++
- arch/arm64/boot/dts/qcom/ipq5210-rdp504-nand.dts   |  17 +
- arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts        |  66 +-
- arch/arm64/boot/dts/qcom/ipq5210.dtsi              | 729 ++++++++++++++++++++-
- 5 files changed, 1008 insertions(+), 75 deletions(-)
----
-base-commit: c74ef2fbf60ff7e7b956c023a881e87502c1852a
-change-id: 20260706-08-dts-e830bb27c72b
-prerequisite-message-id: <20260514-icc-ipq5210-v1-0-b5070dfbe460@oss.qualcomm.com>
-prerequisite-patch-id: 0b6145b6635b18fe79fbbff5815041b43778c5ed
-prerequisite-patch-id: 924c6ff7baf4283ac7991ee94c803a00fc5cece4
-prerequisite-patch-id: c2fe1800fe769dccd37f94c19860a07f979e3c4c
-prerequisite-message-id: <20260615085218.1421347-1-varadarajan.narayanan@oss.qualcomm.com>
-prerequisite-patch-id: 66aa95814074faffb61393faa30396c42af41126
-prerequisite-patch-id: 0a03dc1c91a2f0c03af823aa43f59a9005eb8607
-prerequisite-message-id: <20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com>
-prerequisite-patch-id: 5d4c92815c73188205f1b05d0f42b02224e9f51e
-prerequisite-message-id: <20261008-rng-v1-1-785580a8b48f@oss.qualcomm.com>
-prerequisite-patch-id: 08aa18faecd4f3588cfd01f3330eadb1a76dcd13
-prerequisite-patch-id: 35e083bb85434a34d86467e53b9eae14f78da125
-
-Best regards,
 -- 
-Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+2.34.1
 
