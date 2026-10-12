@@ -1,127 +1,123 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C6884E80CA
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 20:43:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791837814; cv=none; b=ndh+Fp7QlMvPhNUM3WwGUlqENDTnxjotEe/F3jX5sTh7WaSiv5vVB/xRz2GXxz4Ol2F9D3CcSjI0aoaJr3wmt8hGGQVj6YtLHfkvuF8mB3ZLucM5h6ItGwonAsAe/ibXuddKiicG5cIWrsoJwt1K0G1DObElsyLii0QPIps+9WU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791837814; c=relaxed/simple;
-	bh=SWVAfflsvR7uwsFRFLUgJMbObCSKiB2/FdyOcDm66zE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oqhUKCIG5shi3Vxz3Q3u+t1T/o63SEozbew/yQUGN2R1JxE0H+g+u3/LmpWP7A8RgWdzNBXCVwzHOtYcYqGVTNCpAN+6AprFwmH0bJeCW+ateprk1cbLxrcolL7N6beauGKiwgO+F7PCrKN1akNUY3oZ+3CW7RpFZZ8aCTVgtw4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=dGLzxKc1; arc=none smtp.client-ip=209.85.221.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 000A34AC156
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 20:57:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791838666; cv=pass; b=sXb3mPOZvMpnDL2uCxFQWMaRxnBGJq7LqrvT3pXe+iJOoPvsdxIOU0K5KnFOEW/4aCyH4yKb8ATBAglB3F0kt6T8cRrrdxnDWomxZjOMhkLDYTkn+V/3EXu5UrFVwW2z0F1wVKjtKgbcQvGmVdmQm691lPmgWIKGI1orWHOA4bU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791838666; c=relaxed/simple;
+	bh=qfhNpMKikTUE4GXuTXMhSz598q5HToAtxwd6kVZHfsk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=gzYMI9TA2DWz6WrXJgNnpltaST7nik7aWqfyJ6rn7bzhtrXuvrM9CE7SEW0mxwDS1SuDRr1NZS25tQKc55yDb6jpti+DyOD/YlONZHxHLPR4acIZ/4gPvoCn8fr7pLl6DNzaYZtgRCmfv5qMqrA6Xc90mCrej1Z7Uc999MUM4E4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Bbz16QiI; arc=pass smtp.client-ip=209.85.167.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="dGLzxKc1"
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48b042c0759so1709054f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:43:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Bbz16QiI"
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5bcb2ecebb4so1710559e87.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 13:57:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791838663; cv=none;
+        d=google.com; s=arc-20260327;
+        b=B1dctbS/1iHRgjL3CqMsAp3ifSThvqmx/wheNMouTtpae2M6F+g4VWNyN6idU2rvQE
+         SrVEu6pETOzaAGv/dY95sXc7/jda3mAPaFURbhClXDlrHWAbYa3Yp11U59DaMSXrxDUE
+         lZYnESKx8uQK+Lewwoqb9jUegD6WmIfMLVsGI6k9MwvH2gonRmTe7BgV9qPIPUWAEJjO
+         t8L9Yogx+6Yclt8+XQzo7xhOn6ArmJ10/OZs0N6Zc2gQ9E37/QJRq9/4/Jn+CCC1u2KO
+         mdxmTAOX6PuLGA6GnpbVjO9y2EEiX7U6jfP7wQ4mFEmqC4unlIv5zkj4bEcqSbMz9NyA
+         3iZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=jLix4JrWc+gaL1YtlKdXsZNF8UYItzc7REKQDH8C5y4=;
+        fh=fKwPzt6XTTNkk+XAq4rk10I5pngsbGk3F80qL/k3qNs=;
+        b=Gws5AiqMC559Ge/TIxmwjS/BGiEHP3xjgZJxm2FlJVlT28FmR81rJcaolmvZudAfnU
+         GKLz62O6giacPxPjnyUz5rUvcQY57E6nItCi+r2K4yTe1EEcNTRKcIYguIJZCS4vswFw
+         0NOehLvh2tNaqBR3cGWpmixG4rNiq0ueNf5UxSxx03EWWTfqB7NQtFdW5+2emxgqoSN3
+         0HN+J3Vw4ytgcBXlTCD+jJUFVBHyohKbNNQ3rv0acAYP+YhtjaKyeJrhnCVK6YJuCTGP
+         KUD6P/aXy6gBBNT3zBpDRv4I71pbwyHxLto8yQJ+iDyNOOvyGJv/FT0UMVBlpEuiNk2R
+         FTcA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1791837811; x=1792442611; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XK+SEB+e/GS3thSnPWg9ZaAuDfBuOx8piTMr3Esm78A=;
-        b=dGLzxKc1JirYvojo0RObX1aFxRnkvO/Alo1BeCnN6QbXoLPOqWh+/mCb+wi7IgUu05
-         StF00gmsypnUd7iKBzYy/HE4RrxAt9r8KFAbb7X+kmKU0I8VTn1h9giWAsfeMXcjOtjA
-         R9KpNp8rIV9zXnFzlaqUTzdMUsUMyYk/KfZOJbuTH4H7zJAy+xo053cyKY2nA9MB8YbT
-         2ougQHSFyOg1LsUTfVlJDNNpk7Lyx2aYSX+c5lU2Yh68Z/BbkOM+ShopVC+D+bdXKFrF
-         pR3ZIj9zYISTReJE/dNgp4MnImaINnSl80R619cqP5PVDejLOhtB/UaqZBoTV69FbkWf
-         pbOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791837811; x=1792442611;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1791838663; x=1792443463; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XK+SEB+e/GS3thSnPWg9ZaAuDfBuOx8piTMr3Esm78A=;
-        b=GvJ38h+HtVISzU8aWgoPBaLfxICi4qflsI9Q+K8nu0uL8MlErXux1IWryCQ41hmGcJ
-         +KxjeNcghoNHVncHXzlMc7YN4hXFuViMkNFnJxd/lwGo1aPftLhU0ote42QMdaAzD6xF
-         KsRSwRZIgdgQymYUAhrghGbD/knWQKAvgGzBAd/e5e36qt+Z6ENrwPUkBzmgXjlO9i+f
-         D3j3WuW5iujA2SIavyH3FI2iUUK0jRxVhDkpRDTFRz5+8iYu1YO2J76736tMPqEV/lrf
-         CCzMCWJg73QBuRFcd7NX7wrvRcf3ZiqX+CpS21iZxuKKf8zXrFy6TKAecotphFpoKA7W
-         CDHQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwfmvqbuQkYk38s2YvvdkFCqgPw4sxe5uFU/Nbi7Ra0pFsKjE34yYlSv6X5ba7tddKoCPhTdpHFqDt/U+1z@vger.kernel.org
-X-Gm-Message-State: AFq9FYLxeBipMc7maxVuYMr6dSvqstjlImokAXw4jtH8ut/fzc+t8xJi
-	vRR8FRQRiKxCCZ/G54WqGCOt2FUs0p37AgD51LvuBVzq9+ym3ohgJNOzvMrLXDbQeuYzbbepU14
-	nR31w
-X-Gm-Gg: AYBFou31FVlesTJIGf4Ms1+RcF2jq1MLQiDLLjrknh88XUiq1byCplD/5/PgsygviYY
-	F9oYt+9zik0Cvn/Ge7+3V6zpnE9Rm3DANn+S+WBRbMAorlrXUKHTmnyeZWih+a/pGoUacix6arh
-	7var2w56VviGib/JNtBJQ3hP7Fy9gwvD0tosIp/Q3aY0TcRBwDnC1ey2uzq8yLyj8G/ORG6MYg8
-	Qb1BiK8e8wGmzF6ZLHkhvw0+QYxqtylbJ3BcNPgok5erGPjLe4D3gQquPqUZA93/mplLMK/qt9f
-	MbhjZiYGVb92kQdKnFHvszcpv6pVXtNHqPjroKg1ff4I2DvfhN65ha06gGmxGR618Ie8nytTnjv
-	FRU5wesWkO/cPqo/L3EgssjmN2PJF5fUyqmTTzAcRjlMWvwusCQQtYMgSj3KMin1kql9wzvwy2A
-	AtTQ1vBkLpfd/80Q1y0CDarbTvORtwWVIoRdpQoFyXJwUMhFqtODah3aGOCTbjIfr7DovY6tLNC
-	Gw=
-X-Received: by 2002:a05:600c:548e:b0:49f:f9d1:e618 with SMTP id 5b1f17b1804b1-4a18e4aa057mr205547665e9.17.1791837811442;
-        Mon, 12 Oct 2026 13:43:31 -0700 (PDT)
-Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4a199e5db12sm197660805e9.2.2026.10.12.13.43.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 13:43:30 -0700 (PDT)
-Date: Mon, 12 Oct 2026 22:43:29 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Kishore Batta <kishore.batta@oss.qualcomm.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
-	Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	mhi@lists.linux.dev
-Subject: Re: [PATCH v8 2/7] bus: mhi: Move Sahara protocol driver under MHI
- host client drivers
-Message-ID: <as1F08YNeWz_1bre@monoceros>
-References: <20261012-sahara_protocol_new_v2-v8-0-e12939d229a1@oss.qualcomm.com>
- <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
+        bh=jLix4JrWc+gaL1YtlKdXsZNF8UYItzc7REKQDH8C5y4=;
+        b=Bbz16QiI9Ar3XCnJJS2neAbkOd1tzEK8qJMur6Va/i2SojzGri0Z/wTNMwdO0kbDDm
+         JONh0CLLZJhp3l7V3dbmAhiPsSh+TfkDsuDw+tWbXGb6okvORkv5ccMQYwwTdefC1Uh5
+         B8T85pvKrT3DTCkeFmw0HKAF/Kx7mqsXEw6o6nrT0XmTo+Ds/8PrDYvFI0oWA2p+l9oz
+         LNtY+KPUlRTFSEbzn5dxe0YBvA5bvpRVdA3S3Mtx5k51shqQmRg4+SWmcjDJ+oZtB7cC
+         E791JiFSd+XewQgw2D69Ugr1dCsZBKTw3XQMGT8rRj/PHtE18OABbAAzf6TCElUeDSyj
+         Hc6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791838663; x=1792443463;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=jLix4JrWc+gaL1YtlKdXsZNF8UYItzc7REKQDH8C5y4=;
+        b=PwORKAvaTch1JxwFjZaCN92Yj40lINA+ucZSXgOIYF+NiScnv4nW0w1QKaKezD3nsp
+         qg6XEKi5xBhoxHS4iZHXcxJ1EQHe1JTYhmEvGLeIpi+T4/0Xdib3mwS3KB6iVWDBppWI
+         qVBsQoF8AwEgqAu2JORa9nNzVTBXb0wNDUbAbNHnKJ8BKgcxkWjm+V0sJjBqHqKmr8cF
+         NpD/tZu5c9ZYg4IK3lEvvPeGEiwNhK/cr843Q1035fxD1xr90msTNWB7QwSpntnCgryD
+         ALGend1f7526ab3FRSJursbfNOAVswMlgUIG1llEUvCNjQLvXw6mbte2Wvu6+BtgjBbd
+         Oy4A==
+X-Forwarded-Encrypted: i=1; AKwUvBzx1jDfre4W5bSIbg2EwDznC52jUuyCWNDc5XDZzc42Bi2JtxflmyYGYfRYLYd6acUdRbXgaZrrqwucH061@vger.kernel.org
+X-Gm-Message-State: AFq9FYKYJ+WBLvVc4CPIgiNib3T6YL3cOi6zzyRsCQsZI500ISVBjozF
+	VRIVdpiWmjomCTG8B35LIjfb7FRfWGayYo63IWzJ4UbrCjz/yJyHeTXKaIIqXx6awZvOslEDoRC
+	Cn2EJUjvx8apSsSXBoDY9mSLLcjtQDqY=
+X-Gm-Gg: AYBFou2iI/uH4AfeTUGsCiRuF1CjzalGafCvGbMK9ElODtg57u1QuKQsQUvseQtv+lf
+	JwCoUpy3l9liJh2mESUB6fNWeMB5SPjw78zTxOy5QhlSkvT+DqY3/49ATdEmpNA6fERp8LzN4/+
+	th9U5todBXSQuxC2ZZ9QQFGpMOX867Yte2/76eGMgz8qEZlsz1cfpUvN+8+GKQiHtbTc71LPbqU
+	VPGqO1JC3VyU2mFsgin9uqtkvGHzIEynR01IdfusSirv6aFPFYgN8Aqvy7QX5vt+vEPRrQucGjf
+	C7CnLNYm9iKIGbOKy5HYTHpyMg4Ubgzu7g47RJ8JUtLvMkICKxSMV4gyQw==
+X-Received: by 2002:a05:6512:12cf:b0:5bc:d0fd:8c13 with SMTP id
+ 2adb3069b0e04-5bcde6c99b0mr3562593e87.30.1791838662732; Mon, 12 Oct 2026
+ 13:57:42 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="k75v5fxmll73bi5h"
-Content-Disposition: inline
-In-Reply-To: <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
+References: <20261009-sdm660-icc-sync-state-v1-1-77b8d2501cb2@gmail.com> <0ee83fd8-dcc2-4666-a864-de52fdef1c7f@oss.qualcomm.com>
+In-Reply-To: <0ee83fd8-dcc2-4666-a864-de52fdef1c7f@oss.qualcomm.com>
+From: Fabricio Akio <fabricioakio@gmail.com>
+Date: Mon, 12 Oct 2026 17:57:05 -0300
+X-Gm-Features: AclHuK9R2roF5QsBv8_V9u4Vazf51mZ_EeLjSM2qy9Ih7_PcYXeb3AMjJuQTvEI
+Message-ID: <CANxzQdH196iquX=kKFm450W63E6=v9H1N-=OQygr64z90a_11Q@mail.gmail.com>
+Subject: Re: [PATCH] interconnect: qcom: sdm660: Enable keep_alive and sync_state
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Georgi Djakov <djakov@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Alexey Minnekhanov <alexeymin@postmarketos.org>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Martin Botka <martin.botka@somainline.org>, linux-arm-msm@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
+> None should be necessary on 660, except on bus_0 / RPM_CNOC_PERIPH_CLK,
+> which is not associated with any interconnect master on this platform
+> (so it will actually get disabled through clock cleanup!)
 
---k75v5fxmll73bi5h
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH v8 2/7] bus: mhi: Move Sahara protocol driver under MHI
- host client drivers
-MIME-Version: 1.0
+I tested removing the keep_alives on a Moto X4 (SDM630), on the
+sdm660-mainline 7.2 tree with this patch:
 
-On Mon, Oct 12, 2026 at 11:48:00PM +0530, Kishore Batta wrote:
->  #include <linux/devcoredump.h>
->  #include <linux/firmware.h>
->  #include <linux/limits.h>
->  #include <linux/mhi.h>
-> +#include <linux/mod_devicetable.h>
+  keep_alive on    result
+  ---------------  ------------------------------------
+  none             resets during boot
+  all but bimc     resets during boot
+  all but mnoc     boots, powers off in the first suspend
+  bimc and mnoc    boots, 10/10 suspends
+  all five         boots, 2/2 suspends
 
-Why? There isn't even a (new) usage of any *_device_id. There is a
-mhi_device_id, please rely on linux/mhi.h to provide that. The main
-effect of including linux/mod_devicetable.h is that the driver grows
-many unneeded dependencies, so don't.
+So on payton those two seem required, and the other three not.
 
-Best regards
-Uwe
+I also checked bus_0: it isn't disabled here, its active-only clock is
+CLK_IS_CRITICAL at 19.2 MHz since your commit e1cd74b6dccb ("clk: qcom:
+smd-rpm: Set XO rate and CLK_IS_CRITICAL on PCNoC"), and the RPM votes
+logged on the device show it held at 19.2 MHz while the CPUs run.
 
---k75v5fxmll73bi5h
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmrNRm4ACgkQj4D7WH0S
-/k4JaAf+LQbc81GUcwrqUE1hp5/ZCb05DUb37f03Yl819y3z00pXYZgwXJDUTd9T
-GxJKc/iB9t1KKUv41uObbdOWw/pX8fpB4QMUgZQ1hlt7cRumJE11HOvk3ieg5WNf
-pb4dIHEZGziIGLgCybUc7cofDnbPzwRnzZHOM7ngjQ1pg6U7wFlwInyjQD9mkett
-cBtgIfwxlb61WfBOpmn2HajtmR/jVHmrj28oEqs6rJYH4yqR5eDpna/VhGCLfSV6
-/AGqL77ZVNBz+bljTJO/GmIXlHHKNMQ9siCwfbX8dqLVG+HqxQB9+07RAtKA7t3q
-ehCntiPriE7DoQa/XfRDpRlCwDiqzA==
-=+TQr
------END PGP SIGNATURE-----
-
---k75v5fxmll73bi5h--
+Would a v2 with keep_alive on bimc and mnoc only look right to you?
