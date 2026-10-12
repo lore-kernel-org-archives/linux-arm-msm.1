@@ -1,140 +1,88 @@
-Received: from mail-ua1-f42.google.com (mail-ua1-f42.google.com [209.85.222.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DCBB3E7BBD
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 14:03:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0524B4F3939;
+	Tue, 13 Oct 2026 14:06:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791900231; cv=none; b=SnfVz7JrvqhP1QllHlm1AtIEK1o8Oof6Tr7UeBKO1YtDq1Uii50fgEICUFTWFiDrRKT05e7vYdyR9UW3ArVWklptGCx29ES1eIn8DTwWx9d2aL/+dEjLFigfJ6y7vwZDBe/USXl/l03g/iJxdZ4SeAbfX93sKFcLoiun9Ir99T0=
+	t=1791900368; cv=none; b=TOmBwy9o2km34GijUJT1MI4fpX8m5/VAWEP7zZYiBWoAJgBhXrTvH4EPRjyOYDa4EyM90+vs1cXryy7mOzKoVfUIotNhUZk5yCMZ3H0rPysTwHNXA9ybe5qhhHUa72ZJgLXcioz3AGnkgjjOtrFIQvTNb/5yJqfe8O7b3Q81Rqw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791900231; c=relaxed/simple;
-	bh=UHry0BPkquJw/CuJwnGhyuxl/slkjmr1qnD/xn81qew=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=I5FWVtQVIPnWcESUZ7dwePHHNj0WI8HvFE8CQZIspdYtHg9jJ4ik4aFhY3d0D7mwkgUlV2Ed0pP2deNspvBL7inLcujA1z4n/ifrb/Jfw/xXxUgGXw7ailVSGY+Gec5W2PPfjcX00TzrdIdtNkvWoG+isyGW9widX9m/voijACU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=CBEzo/4j; arc=none smtp.client-ip=209.85.222.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+	s=arc-20240116; t=1791900368; c=relaxed/simple;
+	bh=QlbAfkPPFpaw58RZxV/YQ2jnS9l4Juf7CsuDwzWYkrU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=eTm0TKiQiLKxT+tD3JIp4MhOJknL9FbPJ/iw6+N/y6NGtPGGI2DYz84YV0vvv8g/W07dCi7+QiEOQz9wgldtatRCLgSRxKpJEREHCRlffwShQftj8PMOTa+eVy9Uz2+1QKXF7O35NucSnmMNB9isfPaCCTQx0sJhQ4hiyjEhsoA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l4gDerQk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="CBEzo/4j"
-Received: by mail-ua1-f42.google.com with SMTP id a1e0cc1a2514c-9903fde8db8so213972241.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:03:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1791900229; x=1792505029; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sxRXmPGGOdI1+4/8LW6E01BCp/MjtS9NyfOV1SrhfSY=;
-        b=CBEzo/4jeiz4WlID7U/njZM7AWjCMFsKhRPE2lZcPfdbjT5/IhMC7CPhAthUzS/zjC
-         7JdpJuzrx/MaN0DflF6oAbENcPd/EKLzlkXO3xhW/4F5syHofVyYESUmZBXMOG8P4d/o
-         U0+8nId/s3j8PBkkGKMw9+6JThitqmt/tGl1U5Nh1xq4Hd0djOAhqJt0lU/i0VlyiGGx
-         3lIrp+VrVqteNUBHh72uss+6qHhfv911OjNj/lBhTo0M3tCp5OKbWWQv6+N+m74fPDOO
-         CCafrXkio5dlBgBy0OeRosZpOR483gn1R9Bmc9hfkBJ3Hjq6TdOR8etcp4eTP7mIJR7u
-         MRrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791900229; x=1792505029;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=sxRXmPGGOdI1+4/8LW6E01BCp/MjtS9NyfOV1SrhfSY=;
-        b=RnM/V5i4v1TueTrV9s7714yjiFAAE2oY5UdWk/g8IXnc6uSMNhHcV53YFDbGg5FnsO
-         D50UjH4wgz6G8p8NBOP4s43E6HqxdEfc/jW6IYAWFzpCb+4MRhe6OTACqCadooZlG/vQ
-         wQpAKa/qPH6hbff7PKzSw2mr0QJI1Jx0FcppBU9i9Xm69rlSuQyVwbN41mAIAYEB6Ev+
-         qCqecJLrRkxGnLwkP65Y7+Bx27X46CboZuFTF5ItUGzSJHDGw6e+vvnOgpwKqjWtvDiS
-         e0R4mgfJUO6zRWfjsWPcKSZIHmrF/E7C1Y4PSFJJAVIRaL4fnfuMkf0qsEAC1pnB5QdU
-         ykKQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwBgjaL55O8GY2PH3RiIemJwdl+vO9lpwxLje6BPgI118h1yGgZbP4BXjKna+HJfzps5+Lq/2CkSKBRY9e8@vger.kernel.org
-X-Gm-Message-State: AFq9FYLOM25ljo6e/srHi1RKnmL+9BJ05SfqPhEyu/mMvTrAMXySbk7B
-	GlmD0mJc1ZFcChnC54Xg8qIDhZI2A+6HSJgn7v9Mraj/eWT+MOGHuNkQv0KOUTuLNeizmdVIjm0
-	lQjlC
-X-Gm-Gg: AYBFou07cYgDx/lZgp11GC28EJi/wdOfpjw8HDNHzcxOkLZMebPZZyQWs9XwX+azyA+
-	dnkzwCoI3V+QngAPOsY2/FB8u0iWoK7VD84zA8EZvD1IBfy5w6BUcNqB2pqxnVsZYEN70R28Drl
-	T77e6roObIGZ8x1MHN2K4JcwejgYsMr4shgAy/dcms/YxKaOMUJIlhJadt7udQoXGvgDbU2Y2mZ
-	IHfCG/lUpHWTCgY5flUe1P/BEv3KGXPBWcC7V/SH//X4K+8IaClt94lL3+OcZiCIB4THtsWgQV2
-	ZEguiyy3LcHeXYPOB6zfcxO7er9vfX7fgERvEaOY4mBrxTTKg9O14tWqqOM2vtCym/sEi6mYo04
-	lOmsQiQxFGi0eDj+8XC7HnFVrFOKN1TcREG/k8tC0mFsksRfZDv3eEA7naEbqYxkL4RzSzf52UW
-	fqAwoxbeFXRqlSo8GJDkhMHg5+e8/jKe/NTasWbq0qAhP2P/4CNTbO4YS02+UsW/r2UQNvFD41J
-	LALyTBVgQkJ2afoMzXaF4TGaUk338zpb1TTpQ1r8NcELWqOPLfP/XsKeA==
-X-Received: by 2002:a05:6102:a48:b0:7c3:875e:593b with SMTP id ada2fe7eead31-7cb373fae29mr3183710137.32.1791900228555;
-        Tue, 13 Oct 2026 07:03:48 -0700 (PDT)
-Received: from ziepe.ca (hlfxns010zw-159-2-239-150.pppoe-dynamic.high-speed.ns.bellaliant.net. [159.2.239.150])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b97bdfb89sm25903626d6.40.2026.10.13.07.03.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 07:03:47 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1xGd6X-00000009i6J-387e;
-	Tue, 13 Oct 2026 11:03:45 -0300
-Date: Tue, 13 Oct 2026 11:03:45 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-Cc: alex@shazbot.org, ath11k@lists.infradead.org,
-	ath12k@lists.infradead.org, bhelgaas@google.com,
-	jjohnson@kernel.org, johannes@sipsolutions.net,
-	kevin.tian@intel.com, kvm@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-pci@vger.kernel.org, linux-wireless@vger.kernel.org,
-	mani@kernel.org, skolothumtho@nvidia.com, yishaih@nvidia.com
-Subject: Re: [PATCH 0/7] Enable Qualcomm WiFi PCIe passthrough to VMs
-Message-ID: <20261013140345.GK14213@ziepe.ca>
-References: <20261011132558.GD14213@ziepe.ca>
- <20261013134317.174234-1-jtornosm@redhat.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l4gDerQk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C840E1F000FF;
+	Tue, 13 Oct 2026 14:06:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791900367;
+	bh=QDUFgi5qXoKJKWdS4isV8ww+zH8ENZP7NGQ4t9Dfgoo=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=l4gDerQkCIpqyBzoZ/lSrf+5xR13Vq2ltrY+RkXbMNmQdB170jSL7gdyDodCqNO19
+	 faDe4FutFDGiK/mKIR6v0xDCumFe90Y/jkbmbBc4WmrAFQZjO1aTMqGPkQ7n6n1hQB
+	 FN2bPz+H7cu5zPUtZm9kRMYb2pKatdi9Y6vPrHzlsLaQYPRNBQEHRQnw2cWtp1Yv6R
+	 jFoX2aFsjUsFkXhBkAwJMqjAs/LPlFVRmKg7JagW6xkqQSK90Ceshuz2JyMqGPOPHk
+	 ysm9IgrzY2Lw3ffnmp26aWDNKg63CFluqW3KhGcrmGoYulak/P1u9bOMaQjTbHGq0J
+	 OCp5W5goLAAmw==
+From: Mark Brown <broonie@kernel.org>
+To: srini@kernel.org, lgirdwood@gmail.com, Joonhoe Kim <26rote@gmail.com>
+Cc: perex@perex.cz, tiwai@suse.com, neil.armstrong@linaro.org, 
+ jonathan@marek.ca, linux-sound@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261007123954.1709-1-26rote@gmail.com>
+References: <20261007123954.1709-1-26rote@gmail.com>
+Subject: Re: [PATCH] ASoC: codecs: wcd939x: read the SoundWire port
+ switches per channel
+Message-Id: <179184618495.390394.12922276610796741760.b4-ty@b4>
+Date: Tue, 13 Oct 2026 00:03:04 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261013134317.174234-1-jtornosm@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1150; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=QlbAfkPPFpaw58RZxV/YQ2jnS9l4Juf7CsuDwzWYkrU=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLLOWZ222nJyiYGuqMC3iw8P6tnmL1D56bq5Qvf3lzm3M
+ 17FZB641FHKwiDGxSArpsgSl8X9sr7k9Rq+gwvbYOawMoEMYeDiFICJPCliZPgyXe0Yl0+txR/P
+ vxPLlwfGdzRVPpz+sZVlfSKzSmHVP36G/0lva0qK33QvrdNX+rgmMdEmkPX87re7O3bbWciqLlO
+ WYwIA
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Tue, Oct 13, 2026 at 03:43:13PM +0200, Jose Ignacio Tornos Martinez wrote:
-> Hi Jason,
-> 
-> I understand the concern about compatibility implications, but to
-> clarify, my intention is not to create an ABI or a "MSI caching
-> concept". 
+On Wed, 07 Oct 2026 21:39:54 +0900, Joonhoe Kim wrote:
+> ASoC: codecs: wcd939x: read the SoundWire port switches per channel
 
-It very much is an ABI, you defined a new ABI in the config space a
-layout between guest and host that we have to maintain forever.
+Applied to
 
-Just for a hacky solution, it is not so nice.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
 
-> I can explore converting ath11k/ath12k to
-> platform_device_msi_init_and_alloc_irqs(). However, if I understood
-> correctly, the VM problem remains identical after that change — the
-> firmware still needs physical host addresses, and device MSI domains
-> in the VM would still provide virtual ones.
+Thanks!
 
-Yes, but it removes the solution of copying data from the existing
-MSI-X table from consideration, which is the primary hacky thing here.
+[1/1] ASoC: codecs: wcd939x: read the SoundWire port switches per channel
+      https://git.kernel.org/broonie/misc/c/e7860dc5d8d4
 
-> I'm happy to do this refactoring if it opens a path to get these
-> devices working in VMs. What VM mechanism would you accept for
-> exposing physical MSI values through device MSI domains?
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-Once you have a MSI domain you just need a driver wired into it that
-can request and get the physical addresses from the hypervisor. Then
-when that domain is in use the guest will always see true physical.
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-That part is easy enough, it already exists and you don't need any
-driver changes.
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-The bit that isn't clear is how you get the domain in the first
-place. I suppose something like a virtio-msi is a good starting point,
-but I don't know enough about ACPI/etc to imagine how to wire it into
-the flow.
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
-IIRC hyperv does this, so maybe there is something to follow there..
+Thanks,
+Mark
 
-> Jeff is escalating to Qualcomm engineering again (thank you for
-> that), but users with deployed hardware need something working in a
-> reasonable timeframe.
-
-Yes, but it has already been years, and Qualcomm doesn't seem to care
-about these uses cases, so I'm not sure I see the urgency to do a bad
-ABI hack..
-
-Jason
