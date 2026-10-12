@@ -1,181 +1,176 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CA67489892
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:48:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26B554399F9
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:55:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791809314; cv=none; b=Hqu5P4PPZWqjdAM2urVHHOGwH5ywl6ltG96hjoF9hcfhHs5fIA4/0v3j2g6t8aOw6GmGX9YmDYvuXBl+hyzcVDc0SJZRYITw+jKFTwDLz7zZSp8QCQoOaRebxhqBs3Nw88r2a2VQeYr6zS48w4dv4VMkULc1YGqNbogrfcGASuE=
+	t=1791809708; cv=none; b=CKF84KiS51VXXQ4Y91vUxE93/S+s4+Q44eemJDRKVeQlG5BI11EyCNITWx4shRqWp7IWFuQNAxYcwT114JdKgt+H02+jae5ElN8PX1d0CWPv4OMYXQhVxR+l6hULOBrt3q19e/u5X2sdzNkDjh2gQRkGLb8Fo9YhgHJkBweUWxQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791809314; c=relaxed/simple;
-	bh=LoitFbl/+ivchCR9SctHVfKX1HvFK0aZ0Y3NUBG4rro=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sr38xMKWFw9zQb+57Jef/xGfnhfS+9wQZAfjz+p8d8jvF5pK0K2dr3beh2tcQI6CA6FMmKhyGQtX0UOiZTy2lbp12Vr/xsV5/1MPvhUn8c05qHEYXduYNYEIB+q6o+hvyEzBKmzMxUW2plgavYi9eFEriLOUT1CsPHy93P+4WQU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c1SpKsnF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U8/Olmji; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1791809708; c=relaxed/simple;
+	bh=3DNvQ+5W11ysh7H8w0QPfVVTN+cFqTMCZ6Hi45mMF0k=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=pa9lZIkC4CgiL7bgk8ZVct2NyfjH/SjJE6bHYSL0heO1mUExWgQRr0ggJ+gINhNaawV+F+TLAulmNpx0FlWCvEiJZKsV30JLo/zORsdI74FC8fu93566RWi7zSCc2bkGSKswzi1WnwPpabxXioeWjSeJU/HA5X9S7qGewcGg5UA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=i/8rPzM0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KdFkI9MA; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c1SpKsnF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U8/Olmji"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CC06mt1933154
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:48:32 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="i/8rPzM0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KdFkI9MA"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CC0WPq2252640
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:55:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=47vqK7Iv9Xuep7A6C/o1Hemt
-	gJkLnTAUGBL9UovdPBg=; b=c1SpKsnFABlG0oAUswbhng32HHGQaOPi3tQ7ktDu
-	V5WiKbfuFdchJ6e7rBuZvdNNGkQPPQKCIkgxdJhtxzOJoCC/jA6nfTyI5kT/C842
-	gC75AimibBYPtQ/L0SYvdTgwAWBEAjOeeqvrHlEHUD3fii6/89GHrlHHj2Mj1hgK
-	qmYzRj0Ks2DFd34WYKZ4nDRvpLxjd5lm9cDshTqGHaDtCi+damY3HhYITrPjUduf
-	QT/jl+bqpGHP25gFeRJ98A0MsQ0dKtRZTXJrDcVpy0rckjVoTuClNmk7l+mMrNzs
-	GK+2t6XmhAqT7WGJOL9oRnyPsRQHj2TwstivL8mE5mNbzg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8qtkj83j-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=V0ukRDCmPB7qomVNkf05fa
+	fiLd6aVrYL79dV4P8GC9k=; b=i/8rPzM0l273tkfxF1GIuZg3zphwT61gCOw417
+	WS80IosppiV6vThn+b0Ji2ji9Mg/GiCOziB6kh0mh8fk2SHRyvmfWLdIGlEbATHV
+	D1h2n8rH8osA0qgu2cDxEFWOl+ddIe0Lkv+v9/ogRrydZZHug3A6V+E7TCuC+42l
+	A/FxLt0NZLCsRPFEd5lJTfAoVU9LrSkmICeTmPtrKbY1w3Eb0VUZZO+1jVSXPlg7
+	ldpWmevErPJtS8Fpnw1yK8pXAsaxaLAQYYVOMAdKCYXOtXyxnMTr/0icpLW+hP+g
+	6oBnoeQI6PlV9rQ3wayPI3N9yKIDfDGV+efRyOoKM1a2k7Eg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8j7131w1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:48:31 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-917a3c27c9bso39605306d6.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 05:48:31 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:55:05 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cc359d9easo321195185a.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 05:55:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791809311; x=1792414111; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=47vqK7Iv9Xuep7A6C/o1HemtgJkLnTAUGBL9UovdPBg=;
-        b=U8/OlmjiSeROwZnOpW31kvnkyjQ0Mv+gJsngl+cKzFafVUCgB3xTWwkPU2X7eqGnyn
-         pzRYl8Jv3Z1ZozHc7yh/cLHg6rYf2Y780VcGz/KVDgEp2nd0dKZQDomGz0e8ZQBvQzlF
-         SEnaV6UcJeaXkdqzxad0UMjH/fUnN3Lo0WGQVLvfdgfXKBNnYAQ1Jz/hZ9oMqSOxgL8D
-         3oM/WyAb1GwTdDO47hu/j6vzEY8Q+hTpu9Mly9qMijDhkS5CS8XmDNGaucbrgkoXC7+V
-         VrBd5LtRM6yzdY0BgUutVVw2BQVnoETx+Gkin7BZxwv+AavqzSj46BcjTVX8j87QPeEU
-         EqKg==
+        d=oss.qualcomm.com; s=google; t=1791809705; x=1792414505; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=V0ukRDCmPB7qomVNkf05fafiLd6aVrYL79dV4P8GC9k=;
+        b=KdFkI9MAWFp1XK2+QFA+QspqLKKPAUkNgZBWUVEPxw+uA8ol+iHutwMmiczhRSjKOx
+         7rwg1ORxLxpZY3An1taREAd5f4oibB5Lv8PMJMshB4agBrkXUEaSsFAR2YHByzACFqRT
+         PJbXafRKeNX+RB0qrWlqm9iqX3OyYxeZ3nwrYMPQHe77WGEoHdVuDhKUxYtdh3C6s5Km
+         Xy3sITAKsiEYRdmvgjKe7U4tOBa518KjtzMZSaVbDkjPhsgeT92zLy/GC2HbhT0wdvAv
+         BmHfbU0PcitkWzeAEASIxuiz95oN03NCxYae+ISdpsI1M71oOOHybY3TTsnP4AaK12OT
+         ZLsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791809311; x=1792414111;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=47vqK7Iv9Xuep7A6C/o1HemtgJkLnTAUGBL9UovdPBg=;
-        b=VMTQ6dVAN1ou6rcfkSuRTgzMb9B+AfO5Mbnf0BMwWsE3RenhmyxosvvfiU3dH72nKk
-         9n+zrv6YLQprm7wgB46+3k2hjlwLb3cHYwyo7SCCmYxqeD0ffhq4ccB2MA3Ej0PQ5yb7
-         2LFx+AwFzt6esunnpKIcxqJwna/rzxG7aelpMxjAAWzy63bp0mdgI240yDWOi8RC4aky
-         0btSotWdDlNtMlsTi3w4QAjISDFOrskXSNgmw+fB/+TTFQIOTf3fodydI3mVspYdE5sl
-         qIDwAzlGYDyf0g107S8DM334RxBH7yBjPrsIrr+L2UPAFu3BdV9/y08s1LYPeDvSBq6X
-         MkBg==
-X-Forwarded-Encrypted: i=1; AKwUvBzZNn2GCruccknVAGHU50YNV3DXX5jWK69nLBweWqGTIV2WCQ/5SQQ1TBLNtTUICDQtuONOQPss06mNVnV+@vger.kernel.org
-X-Gm-Message-State: AFq9FYIDERx8YezG6izTcQYwSejw2S53jy4gUDPaZj0uzM30bu8TdFqZ
-	8QmcCMY+FtpJxbahPUUwaw2hT/0FPMaydCDP60XooJrXFc19niINh0L9oGD1D92UZ0yKapxyl4b
-	X13P5Dcmo2AW+l7BO911DWU8dXi1kniz4QCEyg+88cRmj3JCAUtc1KTEyx6EpuWvg3cxY
-X-Gm-Gg: AYBFou3yFvQ1+4GCDVLX5UisbegRSHvOurWqFKGUq3OoIEzaN41fpWV1IvOqf1JoBNI
-	LJgI7KmcG5zCDKnq8hJ+PjX0suu7/iOGi8uOiUD70gN0o1FPQoq+bmVFkQLSYEwRyi5HzsUK65t
-	efbmj5t9Z0moLl+n7nXPKTlMXrkhYKqBj7ryMW4ZHBQn7CDtD+089xTmSP5jPzFc2xSgxXjF83x
-	sscBamZO3GYhQ7pVnh4VH8+xhlZoAVu4emVv+UtlTEIERGOhLb/XmebNhzRH4pyhKK4PkCy7qr8
-	zfN6cwrcD9TCiYDifQurSNTZopbWEh9tw7y36GsGCLmN3sxfZK3nglLpLk2+/OhoDbWSIeNhIVq
-	cq9t3I9jf1UrsQAON5AXdyLEuhwf1LjkyRg3d6SkXus6O+B4LmHmddQJPVRcbhp4YY+4EfjBV4Z
-	RPi8aNxKmfmyMs
-X-Received: by 2002:a05:620a:7118:b0:93e:9cc1:7b95 with SMTP id af79cd13be357-93ebd24265bmr1568716085a.58.1791809311348;
-        Mon, 12 Oct 2026 05:48:31 -0700 (PDT)
-X-Received: by 2002:a05:620a:7118:b0:93e:9cc1:7b95 with SMTP id af79cd13be357-93ebd24265bmr1568711685a.58.1791809310825;
-        Mon, 12 Oct 2026 05:48:30 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcdde912a7sm2753995e87.18.2026.10.12.05.48.29
+        d=1e100.net; s=20260707; t=1791809705; x=1792414505;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=V0ukRDCmPB7qomVNkf05fafiLd6aVrYL79dV4P8GC9k=;
+        b=By2t1sdYUNgwkMXTqVrNNeXqsdddGFbrQH8AXJflvvdnkJjatN9IbX3vviyh/wnb2V
+         elRQYTLrou5rNSQgogFJFoqoG7H+hT9lh9pVpqi3hovajYC7r3/Z3Usmzr8OeHB28Jio
+         GRVi2kcbv/UVVLPN3nq6QVuvHgDoIisXdWDfjMueasmp4UGiauPz6kWLpAHP7AXMcIUo
+         qegDmvq4mebMPInoElDqoIqxAIoP3Yj/NjIjTz/i+4rOGEFJhcCa3Ze0mLuor6YLARBj
+         Cz3d0OEsNsrDIEE4tlcNl/SeaLROQGvvjOm5C+gUZwd4ROsQ0aKqrVHBVx8AaRcSUHxj
+         MMZw==
+X-Forwarded-Encrypted: i=1; AKwUvBypZMiX7tpSN+3Oc9810/jQWHhYEzLIbTPc+XipOm9o7t3GzI+ZxvnH0c4zOJEtqmPuXkRVXwi8AddMNMwI@vger.kernel.org
+X-Gm-Message-State: AFq9FYLG7Bf1pqnD83ID98f2jx1B/49LjaJjeu0kYKkWzdOANN/rNyP8
+	6mX7G2WH8XHTuto0eBsYtD78pMAFdymKCz3EXaqOwayUE5gD5Im1/SBhNhM2i/eNV/3nB7/9BU/
+	Ue58+4YUhhUZpl9LmQ8mRskie6Ec8Dt/0Sm77T050ypAIh5UBqojXnI1yq67ZZ2M7XLD7
+X-Gm-Gg: AYBFou1giee+4FK6eDrdU+eBlcCIfUMrtlGfir9fnELRrnDvi4uz5DKtDQdHKGNjcBF
+	iy9G1QBnP4sWWozOd4HbPMdAoAuGG0LqGFZ3V5ZgFajs667tkdeBS3Nunxlr0a0p1rL4BrO0T85
+	+EvnRi1+a5kyFQtNxlFlNfApsr0wPjv/DDSJsCqgxUpMTiGSwCWraQgp1tY9sBXNznPeYixyvfF
+	d4DVo5kZ6Iq5n9CSDAD7dsLXV/2yZ+wo3C4grVOLcMHw8nH4Z1a0s6p/k29F/ipWEC+STbdKAUo
+	kjjt5YAGCVD58oIijCuDCFLTqvBzvUxApQI6/q0xvkei8G773ro4F9XzLv+3KVTiYgJVM9QVsc9
+	aJgwCUq/noVa8RnTTnsiQoVHr6nNvZwxAZtKnPhjqE5KO/Lb4H4n8Lu9T2hgwtTJLSt0ZX8nmWy
+	loO1rOo7xJHzIWvlKVmSowN+NZIzNjev0tBVN5lyqXsmwI4s1SxRU=
+X-Received: by 2002:a05:620a:450a:b0:93c:b10:7243 with SMTP id af79cd13be357-93ebd0cbfe0mr1629045785a.5.1791809705127;
+        Mon, 12 Oct 2026 05:55:05 -0700 (PDT)
+X-Received: by 2002:a05:620a:450a:b0:93c:b10:7243 with SMTP id af79cd13be357-93ebd0cbfe0mr1629042485a.5.1791809704665;
+        Mon, 12 Oct 2026 05:55:04 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:d108:3895:812b:662a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9acc936sm19187442f8f.44.2026.10.12.05.55.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 05:48:29 -0700 (PDT)
-Date: Mon, 12 Oct 2026 15:48:27 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Xilin Wu <sophon@radxa.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Andrzej Hajda <andrzej.hajda@intel.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Robert Foss <rfoss@kernel.org>,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Luca Ceresoli <luca.ceresoli@bootlin.com>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-        dragon@radxa.com, linux-amlogic@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH v2 07/20] drm/msm/dp: Serialize stream operations with
- HPD processing
-Message-ID: <wk4gnn4pq4jkm7rwxle4ivleqj5eb5jpllfkjep4x3kacbadim@5bsg6g33e3es>
-References: <20261009-msm-dp-hdr10-v2-0-1835d4966da3@radxa.com>
- <20261009-msm-dp-hdr10-v2-7-1835d4966da3@radxa.com>
+        Mon, 12 Oct 2026 05:55:02 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 14:54:56 +0200
+Subject: [PATCH] i2c: qcom-cci: Fix HALT_ACK reset request being dropped
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261009-msm-dp-hdr10-v2-7-1835d4966da3@radxa.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1MCBTYWx0ZWRfX9HdkxZqozMqf
- VGO/aCDio0jO6/vGvp3cGmrYb16tVDocBMxlTwPeXammS2gOfCPO46e9bIls9h4cBeQfHAwi/ID
- jQ1nd9gejautSkDTEjiXZM8XCiWQKBTqb/CqilHIllFhnT2LqQ/1crp30SpbaNp3cbrycPCRcIW
- OHkxaGnzMbHfri4o1/kWEPpDdzeVzbNJRsv7ah7Nf0CMQ9Mhw0du4Id/5gC19BiMjtkQhZS2IHR
- ahAyzMw9Bz9M1LTzZa8j853QQOcMt4rjROkX5BXUuohdPqhGif/NywBK8HPM8YvfE9VK+HD7iXR
- WhcJBJ9zwyLX/KJFyayzSH4Ykz3SIpXAPuuBZ8Llzl2kKh4knVHEh00Iz/lYPAGwR1K2/0xsAMC
- VXUKhRtaMpJEmt3MSX/EvHLVOp9CSBZ39mfZFMG5fU9FzoXWxD556voguHSbLdat2FN544q00og
- xIjHBj3hcNjGu3Azl4A==
-X-Authority-Analysis: v=2.4 cv=c8U+0h9l c=1 sm=1 tr=0 ts=6accd71f cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261012-cci-fixes-v1-1-8cd4eb1fc5f9@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAKDYzGoC/x3KMQqAMAxA0auUzAbaiA5eRRxCTTVLlRZEKL27w
+ fHxf4MqRaXC4hoUebTqlQ1hcBBPzoeg7mYgT3PwgTBGxaSvVOTEXiYamTiC/XeRP9i+br1/F5y
+ BaVsAAAA=
+X-Change-ID: 20261012-cci-fixes-afa0e523a2ac
+To: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+        Vinod Koul <vkoul@kernel.org>, Wolfram Sang <wsa@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Todor Tomov <todor.too@gmail.com>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1MSBTYWx0ZWRfX3/g7t/AJXMKD
+ 8io9CxVRoQZr/MUdZnHyFiZ+KbF3HboJtQ2o0UHmcVDuIKJEkqVFs2giFtfIpYThsaQ/6KOP39J
+ sc9/QeFIqmf30O8Sbx1vdFdQZ8GUZO8=
+X-Proofpoint-GUID: iyC5ZSSYetb0KkZDjPl9M_cvwlKrm_W7
+X-Proofpoint-ORIG-GUID: iyC5ZSSYetb0KkZDjPl9M_cvwlKrm_W7
+X-Authority-Analysis: v=2.4 cv=ePGGH3p1 c=1 sm=1 tr=0 ts=6accd8a9 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=ksxQWNrZAAAA:8
- a=gPIhC6YDpAGJdL8mzGgA:9 a=CjuIK1q_8ugA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
- a=l7WU34MJF0Z5EO9KEJC3:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1MCBTYWx0ZWRfX1Ul8IZyYd7qk
- H3IFUij35m5K0VCFeH0kzqrWdAllyar8d7I0HYBsz2XajQ5N7VykLoem/khlExUO1YuDxnza+yX
- DbSrgLcNSLBnOfi2yer8+lGDHTv5RPA=
-X-Proofpoint-ORIG-GUID: rLTei6zW123kY5t7XzvzcfbjKXuWSVB5
-X-Proofpoint-GUID: rLTei6zW123kY5t7XzvzcfbjKXuWSVB5
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=fiHgs4EJ_qdzu2AaPLEA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1MSBTYWx0ZWRfX03wasQb5d8kP
+ tvyxs2zfqdZZ5gLvdpp3e6THxbGEuVGXGvvv2pUrkClcSDkRp2gCut9yjkCX1sZ6AVO+dmBWgHU
+ 5mMZR1XAZVOU76NJofX1/zhuNuJwKhJt26Xzyy0QntNBhxEA59J35Dhz/G6VUPpioPaVmWhDlcV
+ BuXsSeTa/MvbD1+gGdT2PrYecXR9HGXyyEgTkOfKPLGYfIqfbknRSVwiUewY8jTCOKK4qRcdmvF
+ fND9HYSESVScoSbQa/ARR51TeKkust+bxJuRwIius47A7ZiN6nMlUCs8Mb+/gABCAOtGF8TERfM
+ HJr4pyH3mQnOXHy2oZblxwSdOPZzYCNBnk+pD+KIGz+GEEczqrahPwMGtf13l2rLPCyixuoJ6WK
+ 7sIO5/I3iqcmfLxSfWc6oER4q8YeWlwTqIC16XlvRg/jnbEEfCPCp+wos4xenEsYeuVnUYZp8bJ
+ Aas6TEYMHYcL2LzpuSg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_04,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- priorityscore=1501 spamscore=0 impostorscore=0 clxscore=1015 suspectscore=0
+ spamscore=0 clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120050
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120051
 
-On Fri, Oct 09, 2026 at 11:15:59AM +0800, Xilin Wu wrote:
-> HPD PHY test requests stop and restart the mainlink under plugged_lock,
+A HALT_ACK interrupt indicates that the corresponding I2C master has
+entered the halted state and must be reset before further operation.
 
-What is HPD PHY test?
+The M0 and M1 HALT_ACK status bits may be asserted simultaneously in a
+single interrupt. However, the interrupt handler currently overwrites
+the reset mask when processing each HALT_ACK condition, causing the
+first reset request to be lost if both events are reported together.
 
-> but atomic stream enable and disable do not take that lock. Both paths
-> can check a resource flag before either updates it and acquire duplicate
+Accumulate reset requests instead of overwriting them so that both
+masters are properly reset when M0 and M1 HALT_ACK events occur in the
+same interrupt.
 
-Which flag?
+Fixes: e517526195de4 ("i2c: Add Qualcomm CCI I2C driver")
+Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+---
+ drivers/i2c/busses/i2c-qcom-cci.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> clock or PHY references. They can also reset a link while the other path
-> is training it or enabling video.
-> 
-> Hold plugged_lock across link preparation, stream enable and post-enable,
-> and protect stream disable and PSR transitions with the same lock. Add
-> lock assertions to the internal stream helpers. Acquire the runtime PM
-> reference and handle the eDP plug event before entering the critical
-> section, and leave audio shutdown waits and runtime PM release outside.
-> 
-> This provides the serialization required by PHY ownership tracking and
-> the subsequent stream enable rollback paths.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Xilin Wu <sophon@radxa.com>
-> ---
->  drivers/gpu/drm/msm/dp/dp_display.c | 42 ++++++++++++++++++++++++++++++-------
->  1 file changed, 35 insertions(+), 7 deletions(-)
-> 
+diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
+index 873e901a23d7a2874af5c1e738167247adff1910..bd70c6bae5dc685435bf2ad031cf7a11ec60ab4f 100644
+--- a/drivers/i2c/busses/i2c-qcom-cci.c
++++ b/drivers/i2c/busses/i2c-qcom-cci.c
+@@ -164,12 +164,12 @@ static irqreturn_t cci_isr(int irq, void *dev)
+ 	}
+ 
+ 	if (unlikely(val & CCI_IRQ_STATUS_0_I2C_M0_Q0Q1_HALT_ACK)) {
+-		reset = CCI_RESET_CMD_M0_MASK;
++		reset |= CCI_RESET_CMD_M0_MASK;
+ 		ret = IRQ_HANDLED;
+ 	}
+ 
+ 	if (unlikely(val & CCI_IRQ_STATUS_0_I2C_M1_Q0Q1_HALT_ACK)) {
+-		reset = CCI_RESET_CMD_M1_MASK;
++		reset |= CCI_RESET_CMD_M1_MASK;
+ 		ret = IRQ_HANDLED;
+ 	}
+ 
 
+---
+base-commit: ae8364085574203e7f4ea961921a1c7493bcb6de
+change-id: 20261012-cci-fixes-afa0e523a2ac
+
+Best regards,
 -- 
-With best wishes
-Dmitry
+Loic Poulain <loic.poulain@oss.qualcomm.com>
+
