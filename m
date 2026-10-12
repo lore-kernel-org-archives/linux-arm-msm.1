@@ -1,250 +1,489 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6DBC46C830
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:45:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92A414734C0
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:48:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791798321; cv=none; b=WGQKwzKOo2fkYD/kNVbqOE7+0y1HT++Gf5TZgKe7CduUfaMOfkCr4sr66zWW9pXFBG8zuYOZ40yxTSRvgiLohc2qGNTmo6TqO4nYtogPj1LatEfW958ZYpAX9ST0caAmYrAUo/MlSrxFkFkLn/X0pRDnpqZW9NgODOeIy8SDSDI=
+	t=1791798527; cv=none; b=sGfNs5sjKNbptygtbryBGOmFw6ry1kKkLoK3mfEViD05dyEDCy7HZ+UHwEbR+nJVwzIL2T3p2qSTZtk2FpsxXPrki70scXBH4LrUTg7X189MzIEV/n3jgrgu9RXt/+S84Zri3n9pVXO5/2q8jswAt1NIEx8m9d6/5bWLZtRMrJg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791798321; c=relaxed/simple;
-	bh=fBVkiEo0lmz4W4b+TPHdkvDruTk6CvZhhfO3wDZi8IY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DJGZ6CLEqQx+6rI8pumkdW+mIsSAw5j9DJ6iCuaN/i1Q4mYqQPOgSJZ0SrjpjNERJO+AAxVg50QEfVPp/23QIJj0PqeCcckGHWMAG1317Re2RzfyXKYxHi9zBb+7OBYh1FX4Z9k1CvjNJhROnGhvoox3vzrQ8m1tf18D+OfHWBw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=e+R1im6n; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aP8+0oAH; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1791798527; c=relaxed/simple;
+	bh=4BbMmfzMF5lvVMk7GGQMOWA3sAGRqyPhsZM4uh38LGE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=btasbPceTvo5eDx2+AG+TaUe0c68Y3Lx9YOsFz93mMm9pBTu3Iye+9/0nNQQi3qEhRYtW+yTNZYRsYtLS1+6wdVcOSICSSyKD4z/DvnZD5SvIUodvDZxjPANe53ljGhvTJ4g6yxRgaofsmog4nTtgSvEH9hVvmhpB4xgzjhcAvM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lhrToNRo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KlwoNERF; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="e+R1im6n";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aP8+0oAH"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8Klv42181459
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:45:18 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lhrToNRo";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KlwoNERF"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69C8KccS1592784
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:48:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hGtCNZ4UOOWqf7HnzftzRzSNN1uF1K70PGOPcNQI8Xg=; b=e+R1im6nSBfgZvwo
-	gFVO9HSnJq3nv+S72lUMy8HKZHl6LIpmNiS3YK9x8eFPmm1MJ2W0Fv6RoPVVrxAh
-	7RT4fNUiGl2xJpc4heOb7+hGfux8kP9wb5/q05Zy6p6+RE2UYq49BNL4vMfENtQi
-	xm5Ml6CNaaDiPYG6kaSGYOnF41HtTcCk32wBBW845ynHwqEXPa08SmnbpJ2+qReo
-	BTChexx0V4Qf6ysLW+b7xzgw+YH2YnpcCNf+iy+mCcoQXEsHQLj678cYfA/YPk7L
-	AEDBDpIVh3S+5gjGGI5aWKOWDSUfbOReAlbfRtwB1YaMS4PIOafFNGM3U8jWZXQj
-	8hVJiQ==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sd1s487-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=0l/sfOavHqjSmoYSJ+2Y03gzAvSOn7dx3/F
+	A1a4dFX0=; b=lhrToNRoF8mTAQ7OYp1iwu2KQB7yvvDwK++iJDWgTmR8HIZt7Y/
+	vUWPCispdOmiefkbx5NuRsDJLZ41IksnLhDh2yx7iW1K7F6OxVYd9cO+eAgsPWVb
+	CWqY32QTGEnrt46XkwwnKYBg75vk7ioubo31c9awIcP5UikEXZobmAwh6fs2Btj3
+	XTRNA93b8C6FZ7z/Wan3QTJKBz7rfFPlWyCKJL/fDfnDSTuadzQ1DuFKDbn2r2Xj
+	8pHwZm/5yh/IJ3AkAnvmYNgbTlQ/P94svT+tqyZirOzwd+PdBaKeqUwJUd+WO6iI
+	fFi56ndxFADvlz4r8NedvY013MZ9qRRK1OA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu13g3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:45:18 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39deda201bcso2557973a91.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:45:18 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 09:48:44 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-3510d0baf63so4856143eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 02:48:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791798317; x=1792403117; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :from:content-language:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=hGtCNZ4UOOWqf7HnzftzRzSNN1uF1K70PGOPcNQI8Xg=;
-        b=aP8+0oAHBp/oWMMrRsfviqWPL0JxRHqTG0iKg9rZ44+gUwtZs15oM1ft4K4O/K+OXS
-         w73KSWLjhV1ol1jlkKlh4q6sGCmF+Yh6KE1iO0k75toxdIvSAh6yu8sAQ6vNzLMh5aE2
-         VUxiGdG2DpeobROp2ULFW+OQ8pWFXBK2yVXRuGS2mwAHYYAWPGPUlkywJbC2vQQ/rtX5
-         DHq2JRkv1A9BZkZ9C6QdYCgfPsRQGE3Mf63PSNA+y/dagRgZAwfwazludNSV+CBHyWaD
-         hirfqVg6pkjPex6VX6gj7PHl64DJUOKyTlHGXpg9Qk+7GZNlbo6DLx5wbSMs04Te+LDY
-         VWEQ==
+        d=oss.qualcomm.com; s=google; t=1791798523; x=1792403323; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=0l/sfOavHqjSmoYSJ+2Y03gzAvSOn7dx3/FA1a4dFX0=;
+        b=KlwoNERFgiOcPotjWI7reB5pvFeMwlmV01HF4EPxrh6SZsg/kxIRCcaUymWKqACF1Y
+         97LusDgLKq9zvpv8TU6PVCfb+FShVpdfJVjc4Mx2URPBIltN9yf6l9T8pHyfphJWG7xr
+         jKkCf1iZTNukvJHSLGTvcA1qDjRatcUzf7fQFav7+d8k0YC8xcKl2o/omLJj2FrlVY5Q
+         2KTEBnEehvi2Zalpzg0t0tnNsb8ke/+7KQQ1yQSdDBlrYmSIxy33Zvvj/p1oeP2CWt18
+         LGMR7VJ7BsmoL+WI8nC7ilUUgZvkjOUJMzKG05Ykzbm69fZ2//lN5Bj/dbbZGGvFMIyD
+         p1iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791798317; x=1792403117;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :from:content-language:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=hGtCNZ4UOOWqf7HnzftzRzSNN1uF1K70PGOPcNQI8Xg=;
-        b=fRm5bEbbgvODTb3EIDRvYLyenZMxxhNnoRrnM67bI2g/b4PEkTUi4Sieuppq5htfdM
-         2UCBzCsRULEGAwYSgWOjR7VZFqay1MyhS5rvpTSUuJlQMMb5WquUsFaHpW7XMVrfrJAX
-         H7PSEfdIRzYaWrjBGv3KERmKhHzcWdfz9j9Lvs7ZkL9EyNHRkrIDZkQbw44ge6gp++TM
-         QkdpIozVD1dzJpfrEuc9/Pd2m1iEMLUbjCu87pjN97084T/v1/LInZp3msqusbbrYfY7
-         Tzc4CuZyJhNi7/yP4z6t4o/5VmrDZB0aP71ZY+VXdgUmGGPr3OxcHl7i3mRJR1qkepBG
-         s9sA==
-X-Forwarded-Encrypted: i=1; AKwUvBzUsTrnIQ30v1CXTz/RdiwASJ8KrQMd6Glh2iYb3IMAypNbWQM1vm+fmxQpah8kegjuNEkFulAe2kq+tHYm@vger.kernel.org
-X-Gm-Message-State: AFq9FYLggUY4u4dv++6ouS/rguhfNe3uIHToIRxw0uaDbmJ4cwif6d68
-	cnMBzH/xGicvMZT2Kj8Xa1JFdJoIucm136aCt8JmKTSB4YakwCjbVlrq+1G7okcso6OI7wx5mW9
-	BNZKqQwMOdz3lwb/nFW4eHhqV9pP/W8fVUSf7m0MWFxrsYypaEK4JR42aqjqEjqcwc1vm
-X-Gm-Gg: AYBFou0HdgT89EwnbsxS5BkMOjr3b4MpMob2KA1RyM7k33FBvSBRYmLYp8fOcoFzahJ
-	zaBbrrF7QYzE/hpC7jj4uPgmexW1v/n47yinI8po8JAjNhysJ7caRGuDHQI865CL8IPXWyguRKb
-	hncHhfH+5XsmbkwQUuokL8qr+hK+mbVGLVFyx36Fzwuy9jwCNPOM4seee30Hxidl9/rHcFhoVoF
-	mAtk+SmbzMTtBhTKD6s9tBRBO4nVQOCrIywXNBnaWwRsPDVFcQasmSj/k/ekxp+h/VQpa5oD4W6
-	awIl19vbzyVWU/r6s+GjBPlak35svggXt2d06Mg3rQLUL2xgWWqQWX5ZT8dXxVPFebI6eR+n2W2
-	DaFpQy8XJyy1W0/Q+JvGkwGWtc2QtSw==
-X-Received: by 2002:a17:90b:5486:b0:39e:6a7f:1dcd with SMTP id 98e67ed59e1d1-3ab3ab1d56cmr8087595a91.41.1791798317383;
-        Mon, 12 Oct 2026 02:45:17 -0700 (PDT)
-X-Received: by 2002:a17:90b:5486:b0:39e:6a7f:1dcd with SMTP id 98e67ed59e1d1-3ab3ab1d56cmr8087568a91.41.1791798316854;
-        Mon, 12 Oct 2026 02:45:16 -0700 (PDT)
-Received: from [192.168.29.10] ([49.37.155.134])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab36f8277bsm15560286a91.11.2026.10.12.02.45.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 02:45:16 -0700 (PDT)
-Message-ID: <447d71bd-b9fe-44c5-b4ac-375661bbbd92@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 15:15:10 +0530
+        d=1e100.net; s=20260707; t=1791798523; x=1792403323;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0l/sfOavHqjSmoYSJ+2Y03gzAvSOn7dx3/FA1a4dFX0=;
+        b=ytQ2sSsrzC0wDK8cAAr7IqgYpn9rDkhi3O5epbpFarlXAVJE2nfag4r54+4JOuPSOG
+         lbd2ZSa4qaqyXjZfWk0od7BW0oU6cNhuq9zE5wUEaT7sTZcA59m82HEkXUEzVAyVSl+k
+         ZJFuhn3Qicbu0VaL0qRGYwsv2g59vZxqHdxu1I4iPCu+zTZfYiaEhQoI0DVfNDuxD8vX
+         YVVAzbL1RSh3rwCeTKWCERYUqf0CE6wiIe6zabtJA8TH13s9bMj9Yc0HY0FUu9byklss
+         9drVyvUWMVvyQbMXAyYjobAYi+S3+VGMTxKbqDcnggw63hNiNDGqZOReNj1rX9sT4Z8y
+         SLBw==
+X-Forwarded-Encrypted: i=1; AKwUvBxfR7Cn5CZnRSPxobZy6VDaht5aHgCkee2Ecxx1JkUNe8rtSJkUxA4cqVfpcqzkLt3bCbJmln83vzjPn7Ze@vger.kernel.org
+X-Gm-Message-State: AFq9FYKjIy8jFIs85Xo0CtZm2rnsJejteEqCEVtdYZ/1uOZntPiOKFfx
+	pZDkLi780R3ee4oJWQrtK7xWixWsXKvif/w44mgiiOU+GmSlYzWiUFaEK9QeuNoSBRshulLYpW6
+	eF1f5cvJz/8uLnm5MUBwxz5ExsG9HtErk6GBCVPBnYAZ3RSuJFWVs5umgUL5SyPsINYgV
+X-Gm-Gg: AYBFou3orGjJDCmoa3weq7+ZQDhH/I9x/5La1zzLnL4TYTojSSQg/XOhfg/wK/rygsK
+	uQ5iYnowP7zwLiyxx4ASW/QmZG0EZWnWGQUorbRdodWJ7lNr/jQSScXkboJ9+t+n7z/J/QMGCnC
+	vQGngnhZ2a9reuGGqrMWo5WwgJH2gyOFwj0+pgRIJ67vaB2N/J6hAECKAJWh19NWKgtlQ7bHRSt
+	CaP7FtypzwleOoMVKR1672C1i1gT4h8covJQnhfaILyZoS5kGG8/aPwBt9BhPik0oQVAEHU8UlH
+	n6h1wSv0jvD+3e4WyU2JfJ4er/NG4V9ByUn6Kjm2GcTcMBIp/R0edATQKbXfukReKTVqTm+Wslq
+	ZTrjjLQZ0HxyQFsYw5MvGecuV6W8=
+X-Received: by 2002:a05:7022:5f0b:b0:167:4198:2cb3 with SMTP id a92af1059eb24-16a5f5de930mr12895125c88.18.1791798523247;
+        Mon, 12 Oct 2026 02:48:43 -0700 (PDT)
+X-Received: by 2002:a05:7022:5f0b:b0:167:4198:2cb3 with SMTP id a92af1059eb24-16a5f5de930mr12895076c88.18.1791798522473;
+        Mon, 12 Oct 2026 02:48:42 -0700 (PDT)
+Received: from hu-akakum-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a5866477sm27603289c88.22.2026.10.12.02.48.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 02:48:41 -0700 (PDT)
+From: Akash Kumar <akash.kumar@oss.qualcomm.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+Subject: [PATCH v3] arm64: dts: qcom: shikra: Add CYPD6129/CYPD6229 Type-C controller support
+Date: Mon, 12 Oct 2026 15:15:00 +0530
+Message-ID: <20261012094835.647882-1-akash.kumar@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/7] tee: Export uuidv5 generation for TEE backends
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Basant Kumar <basantk@qti.qualcomm.com>,
-        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20261006-qcom_uefisecapp_migrate_qcomtee-v4-0-bf1c8e2a64ab@oss.qualcomm.com>
- <20261006-qcom_uefisecapp_migrate_qcomtee-v4-4-bf1c8e2a64ab@oss.qualcomm.com>
- <4b5d8ee4-4927-4932-963c-19eb76a8f67d@oss.qualcomm.com>
-Content-Language: en-US
-From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Organization: Qualcomm
-In-Reply-To: <4b5d8ee4-4927-4932-963c-19eb76a8f67d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: XGLA3vt3ewhsFrRD0CZs2pIkx8Owcl-D
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX2/P9hN+q2a6/
- Nqp6eTMiyY15B3+eig/Mqg7EJc5SGfLpTHdmcBlFQmusiDq1dfKEDIw4uD5kAMrXC06O1xDHTiZ
- lkT8HOjvXp/vyKP68HKup1qC2DYKeV4=
-X-Authority-Analysis: v=2.4 cv=QtHLTlyd c=1 sm=1 tr=0 ts=6accac2e cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ivpbP8R7Mhpy7qfOLL/Q+g==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=HvXYQvMWAyfQ06qojRcA:9 a=+jEqtf1s3R9VXZ0wqowq2kgwd+I=:19
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: XGLA3vt3ewhsFrRD0CZs2pIkx8Owcl-D
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfXzWVE9pcIzcys
- +sWGA87xfwfDz2iIOQ6vJUQTB2r8eUuYkhz+FXrXoGGOTrE9oEKyAOka7NOCn4606PlM5W8TynH
- 6S8XZy1X3bz7kyNDAaCT+I+HOsU7THJCRFWpe9d6WXa+zHW4mza6UrEjKP7K/KZoyDo7o4v/8n5
- liX5HK1vFGsagnrGNsHjeNUhrGVoOAX1JfwGkYsZvOSo9I5WJV6FSAss5dbE582c1pwNQu4cPyX
- gz08xvRa86kM0BSu12z0q/oQcdNdAJiPJQe2oAFebcJMuJqlzwnfUMlbSHTaRIRGlt3bGlST10d
- zzqtSqVZ/nsXMG6lO95Zh0p59mn1ktCDR+ZGRWyxZwOVuDAD5Dyobq0+T2SYnbSalzw9ghntXRI
- jxJM0GHuU8QbCSzJN6MWm5bCAKKrXvmzf66CGWyuY6o69ou9qpI704xZQREwVLYz8JHrTlQBJpG
- KaxiLW3KIp0CA3C5vTg==
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6accacfc cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=Ma0iw96SZgBQPb5D2AYA:9 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfXykBHEOAe4/NV
+ wsj83FA7DmTt709QRvY4qjSDJCOCrp6cdbhh6ovT1v9E281EB/EX++36obVa4g3xEs+eVQMudh9
+ VJIS0a0tksvpikuxN5M8GGrisnMlskja/HRKO/CMDHD1T/IX+0dmZmoydAV6BMOdK2obbogX9aH
+ rAeRz8/kPFPehJFZMJkL2X/w1i+uiHsUfUSYQ/N4DRMMFwZpPn/6uZHW2NYqJ76RMTLil1cQ89V
+ Nl+g3FmcrTcDriP/69rUuPVy3N97rIX5NI/eQxrhGWpUDW4CjTfAymsUToETo30JxoJU865NYQX
+ 1OAnhsvKc0/k3nLLXZdah/wKyznCYhzxp3Dy6ibtTS9LVQMtOiX9sZ+b/64jsLSeVSvWu/Dpb7c
+ QbaCLrylzPzEnU4L7HzS6Q8i4HH6Jl9I3IdtBfM89rUdjZX5OOy2IVmMP8ZzFYG4snhCwei0J3V
+ UWEjWLCjTm9TG+SFIiA==
+X-Proofpoint-ORIG-GUID: Vu0ShC6XjIsa6lInNp84xANPhGNjSS5A
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzOCBTYWx0ZWRfX1O5KiWvdfKqi
+ /lRFUHnrO6zw5JWJ4nCDTcwcByPw/qu2KnZdntxHZtVJDSXHJTCHtLQG6sJ6AKOm21M+uTtL3Ug
+ FBbDCQWrRjmaiNE3f0FNDKe5jZCPFOs=
+X-Proofpoint-GUID: Vu0ShC6XjIsa6lInNp84xANPhGNjSS5A
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 bulkscore=0 clxscore=1015
- lowpriorityscore=0 suspectscore=0 impostorscore=0 phishscore=0 adultscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
  definitions=main-2610120038
 
-Hi Amir,
+This series adds support for the Cypress cypd6129/cypd6229 dual
+Type-C PD controllers used on the Shikra CQM/CQS/IQS platforms to
+handle usb-role-switch, and wires up the corresponding DT nodes.
 
-On 09-10-2026 06:53 am, Amirreza Zarrabi wrote:
-> 
-> 
-> On 10/6/2026 10:33 PM, Harshal Dev wrote:
->> Export the uuidv5() function defined in the TEE core to all TEE backends.
->> This enables the TEE backend drivers to generate a UUID for identifying
->> and registering their secure services on the TEE bus.
->>
->> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->> ---
->>  drivers/tee/tee_core.c   |  9 +++++----
->>  include/linux/tee_core.h | 15 +++++++++++++++
->>  2 files changed, 20 insertions(+), 4 deletions(-)
->>
->> diff --git a/drivers/tee/tee_core.c b/drivers/tee/tee_core.c
->> index a03a3d645dd1..2cfd302d1393 100644
->> --- a/drivers/tee/tee_core.c
->> +++ b/drivers/tee/tee_core.c
->> @@ -135,7 +135,7 @@ static int tee_release(struct inode *inode, struct file *filp)
->>  }
->>  
->>  /**
->> - * uuid_v5() - Calculate UUIDv5
->> + * tee_generate_uuid_v5() - Calculate UUIDv5
->>   * @uuid: Resulting UUID
->>   * @ns: Name space ID for UUIDv5 function
->>   * @name: Name for UUIDv5 function
->> @@ -146,8 +146,8 @@ static int tee_release(struct inode *inode, struct file *filp)
->>   * This implements section (for SHA-1):
->>   * 4.3.  Algorithm for Creating a Name-Based UUID
->>   */
->> -static void uuid_v5(uuid_t *uuid, const uuid_t *ns, const void *name,
->> -		    size_t size)
->> +void tee_generate_uuid_v5(uuid_t *uuid, const uuid_t *ns, const void *name,
->> +			  size_t size)
->>  {
->>  	unsigned char hash[SHA1_DIGEST_SIZE];
->>  	struct sha1_ctx ctx;
->> @@ -163,6 +163,7 @@ static void uuid_v5(uuid_t *uuid, const uuid_t *ns, const void *name,
->>  	uuid->b[6] = (hash[6] & 0x0F) | 0x50;
->>  	uuid->b[8] = (hash[8] & 0x3F) | 0x80;
->>  }
->> +EXPORT_SYMBOL_GPL(tee_generate_uuid_v5);
->>  
->>  int tee_session_calc_client_uuid(uuid_t *uuid, u32 connection_method,
->>  				 const u8 connection_data[TEE_IOCTL_UUID_LEN])
->> @@ -228,7 +229,7 @@ int tee_session_calc_client_uuid(uuid_t *uuid, u32 connection_method,
->>  		goto out_free_name;
->>  	}
->>  
->> -	uuid_v5(uuid, &tee_client_uuid_ns, name, name_len);
->> +	tee_generate_uuid_v5(uuid, &tee_client_uuid_ns, name, name_len);
->>  out_free_name:
->>  	kfree(name);
->>  
->> diff --git a/include/linux/tee_core.h b/include/linux/tee_core.h
->> index bcb5418d6fdc..a3f4f88b8423 100644
->> --- a/include/linux/tee_core.h
->> +++ b/include/linux/tee_core.h
->> @@ -272,6 +272,21 @@ void tee_device_set_dev_groups(struct tee_device *teedev,
->>  int tee_session_calc_client_uuid(uuid_t *uuid, u32 connection_method,
->>  				 const u8 connection_data[TEE_IOCTL_UUID_LEN]);
->>  
->> +/**
->> + * tee_generate_uuid_v5() - Calculate UUIDv5
->> + * @uuid: Resulting UUID
->> + * @ns: Name space ID for UUIDv5 function
->> + * @name: Name for UUIDv5 function
->> + * @size: Size of name
->> + *
->> + * UUIDv5 is specific in RFC 4122.
->> + *
->> + * This implements section (for SHA-1):
->> + * 4.3.  Algorithm for Creating a Name-Based UUID
->> + */
-> 
-> I think the functions in the header do not need to replicate the docs from c files.
-> If you want you can remove it. Otherwise,
->
+Signed-off-by: Akash Kumar <akakum@qti.qualcomm.com>
+---
+Patch v3 adds the Shikra board-specific Device Tree changes required to
+connect the CYPD6129/CYPD6229 Type-C PD controllers to the USB controllers.
 
-I can see that the exported function tee_session_calc_client_uuid() in the
-.c file only provides the docs in the header file. Perhaps I can do the same
-and remove the doc from the .c file and keep it here instead of replicating
-it in both files. 
-> Reviewed-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->
+On the CQM and CQS platforms, enable the CYPD6129 controller on I2C3,
+configure its GPIO136 interrupt, and connect its Type-C connector to USB2.
+Both USB controllers are configured in OTG mode to allow role switching.
 
-Hope I can keep your tag with this. :)
+On the IQS platform, enable the CYPD6229 controller with the CYPD6129
+fallback compatible, configure its GPIO50 interrupt, and describe both
+Type-C connectors. The first connector is connected to USB2, while the
+second connector is connected to USB1, including its SuperSpeed path.
 
-Regards,
-Harshal
+The changes also add the required pinctrl configuration, wakeup-source
+property, I2C alias, VBUS boost GPIO hog, and USB endpoint
+remote-endpoint connections.
+
+Link to v2: Link: https://lore.kernel.org/all/20260820145036.2035641-1-akash.kumar@oss.qualcomm.com/
+
+Link to v1: https://lore.kernel.org/all/20260820145036.2035641-1-akash.kumar@oss.qualcomm.com/
+
+Link to Driver and DT-binding change:
+https://lore.kernel.org/all/20261012091658.635441-1-akash.kumar@oss.qualcomm.com/
+
+base commit Link: https://lore.kernel.org/all/20260912-usb-shikra-v7-v9-0-c7b507a0ec27@oss.qualcomm.com/
+commit e77b5e2b5816bfb8fab930156a320550ee5a0ffe
+
+---
+ arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts |  57 ++++++++++
+ arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts |  57 ++++++++++
+ arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts | 109 ++++++++++++++++++++
+ 3 files changed, 223 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
+index 2d26435b257a..508c24a2ce99 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
++++ b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
+@@ -14,6 +14,7 @@ / {
+ 	chassis-type = "embedded";
  
-> - Amir
-> 
->> +void tee_generate_uuid_v5(uuid_t *uuid, const uuid_t *ns, const void *name,
->> +			  size_t size);
->> +
->>  /**
->>   * struct tee_shm_pool - shared memory pool
->>   * @ops:		operations
->>
-> 
+ 	aliases {
++		i2c3 = &i2c3;
+ 		mmc0 = &sdhc_1;
+ 		serial0 = &uart0;
+ 	};
+@@ -23,6 +24,43 @@ chosen {
+ 	};
+ };
+ 
++&i2c3 {
++	status = "okay";
++
++	typec@40 {
++		compatible = "cypress,cypd6129";
++		reg = <0x40>;
++		interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
++		pinctrl-0 = <&usb0_intr_state>;
++		pinctrl-names = "default";
++		wakeup-source;
++
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ccg_typec_con0: connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++			label = "USB-C";
++			data-role = "dual";
++			power-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					ucsi_ccg_port: endpoint {
++						remote-endpoint = <&usb_2_dwc3_hs>;
++					};
++				};
++			};
++		};
++	};
++};
++
+ &pm4125_hs_in {
+ 	remote-endpoint = <&usb_1_dwc3_hs>;
+ };
+@@ -66,6 +104,15 @@ &sdhc_1 {
+ 	status = "okay";
+ };
+ 
++&tlmm {
++	usb0_intr_state: usb0-intr-state {
++		pins = "gpio136";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-up;
++	};
++};
++
+ &usb_1 {
+ 	dr_mode = "otg";
+ };
+@@ -82,6 +129,16 @@ &usb_1_hsphy {
+ 	status = "okay";
+ };
+ 
++&usb_2 {
++	dr_mode = "otg";
++
++	port {
++		usb_2_dwc3_hs: endpoint {
++			remote-endpoint = <&ucsi_ccg_port>;
++		};
++	};
++};
++
+ &usb_2_hsphy {
+ 	vdd-supply = <&pm4125_l12>;
+ 	vdda-pll-supply = <&pm4125_l13>;
+diff --git a/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
+index fcafd8aa6384..eaa79b2960a9 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
++++ b/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
+@@ -14,6 +14,7 @@ / {
+ 	chassis-type = "embedded";
+ 
+ 	aliases {
++		i2c3 = &i2c3;
+ 		mmc0 = &sdhc_1;
+ 		serial0 = &uart0;
+ 	};
+@@ -23,6 +24,43 @@ chosen {
+ 	};
+ };
+ 
++&i2c3 {
++	status = "okay";
++
++	typec@40 {
++		compatible = "cypress,cypd6129";
++		reg = <0x40>;
++		interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
++		pinctrl-0 = <&usb0_intr_state>;
++		pinctrl-names = "default";
++		wakeup-source;
++
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ccg_typec_con0: connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++			label = "USB-C";
++			data-role = "dual";
++			power-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					ucsi_ccg_port: endpoint {
++						remote-endpoint = <&usb_2_dwc3_hs>;
++					};
++				};
++			};
++		};
++	};
++};
++
+ &pm4125_hs_in {
+ 	remote-endpoint = <&usb_1_dwc3_hs>;
+ };
+@@ -66,6 +104,15 @@ &sdhc_1 {
+ 	status = "okay";
+ };
+ 
++&tlmm {
++	usb0_intr_state: usb0-intr-state {
++		pins = "gpio136";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-up;
++	};
++};
++
+ &usb_1 {
+ 	dr_mode = "otg";
+ };
+@@ -82,6 +129,16 @@ &usb_1_hsphy {
+ 	status = "okay";
+ };
+ 
++&usb_2 {
++	dr_mode = "otg";
++
++	port {
++		usb_2_dwc3_hs: endpoint {
++			remote-endpoint = <&ucsi_ccg_port>;
++		};
++	};
++};
++
+ &usb_2_hsphy {
+ 	vdd-supply = <&pm4125_l12>;
+ 	vdda-pll-supply = <&pm4125_l13>;
+diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
+index 779b9582c011..f7dc3026d028 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
++++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
+@@ -14,6 +14,7 @@ / {
+ 	chassis-type = "embedded";
+ 
+ 	aliases {
++		i2c3 = &i2c3;
+ 		mmc0 = &sdhc_1;
+ 		serial0 = &uart0;
+ 	};
+@@ -23,6 +24,72 @@ chosen {
+ 	};
+ };
+ 
++&i2c3 {
++	status = "okay";
++
++	typec@40 {
++		compatible = "cypress,cypd6229", "cypress,cypd6129";
++		reg = <0x40>;
++		interrupts-extended = <&tlmm 50 IRQ_TYPE_LEVEL_LOW>;
++		pinctrl-0 = <&usb0_intr_state>;
++		pinctrl-names = "default";
++		wakeup-source;
++
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ccg_typec_con0: connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++			label = "USB2-Type-C";
++			data-role = "dual";
++			power-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					ucsi_ccg_port0_hs: endpoint {
++						remote-endpoint = <&usb_2_dwc3_hs>;
++					};
++				};
++			};
++		};
++
++		ccg_typec_con1: connector@1 {
++			compatible = "usb-c-connector";
++			reg = <1>;
++			label = "USB3-Type-C";
++			data-role = "dual";
++			power-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					ucsi_ccg_port_1_hs: endpoint {
++						remote-endpoint = <&usb_1_dwc3_hs>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					ucsi_ccg_port_1_ss: endpoint {
++						remote-endpoint = <&usb_qmpphy_out>;
++					};
++				};
++			};
++		};
++	};
++};
++
+ &remoteproc_cdsp {
+ 	firmware-name = "qcom/shikra/cdsp.mbn";
+ 
+@@ -58,6 +125,32 @@ &sdhc_1 {
+ 	status = "okay";
+ };
+ 
++&tlmm {
++	vbus_boost_5v: vbus-boost-5v-hog {
++		gpio-hog;
++		gpios = <79 GPIO_ACTIVE_HIGH>;
++		output-high;
++		line-name = "vbus-boost-5v";
++	};
++
++	usb0_intr_state: usb0-intr-state {
++		pins = "gpio50";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-up;
++	};
++};
++
++&usb_1 {
++	dr_mode = "otg";
++
++	status = "okay";
++};
++
++&usb_1_dwc3_hs {
++	remote-endpoint = <&ucsi_ccg_port_1_hs>;
++};
++
+ &usb_1_hsphy {
+ 	vdd-supply = <&pm8150_l4>;
+ 	vdda-pll-supply = <&pm8150_l12>;
+@@ -66,6 +159,18 @@ &usb_1_hsphy {
+ 	status = "okay";
+ };
+ 
++&usb_2 {
++	dr_mode = "otg";
++
++	status = "okay";
++
++	port {
++		usb_2_dwc3_hs: endpoint {
++			remote-endpoint = <&ucsi_ccg_port0_hs>;
++		};
++	};
++};
++
+ &usb_2_hsphy {
+ 	vdd-supply = <&pm8150_l4>;
+ 	vdda-pll-supply = <&pm8150_l12>;
+@@ -80,3 +185,7 @@ &usb_qmpphy {
+ 
+ 	status = "okay";
+ };
++
++&usb_qmpphy_out {
++	remote-endpoint = <&ucsi_ccg_port_1_ss>;
++};
+-- 
+2.43.0
 
