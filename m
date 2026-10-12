@@ -1,176 +1,123 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E71B3CF1F2
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:57:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.48
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791831424; cv=pass; b=XoZOPE8oeUErK4J6mDrHWTxopNYZ/1rWNEQ6iiKosEWO6GtLZDzFd2cxT2zUBDo5U/tdFjpOaMej6HLPUO3DV8cNXPMn/b5XXHeEtbTEBE+3/4XSv5pkkDX6aBnBKmD2OUdku5K5XjtmdFDAUDxVvup0dAb/CiHWy47wF6coR68=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791831424; c=relaxed/simple;
-	bh=nMkb5bAZ7ybwAbgFArWE6KX2eaNmCxoRO1fDwwh6Qkw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=l4GyfatC65ObWcNxMjGQ3fjFA4gSrjZJZEJZNVUrvebfZ3WTZId9PxbBvVtOSwOR70HmXL0p4PxgcHCot2mvQmIAmW1i3WG7n1YCOXwPTRxYPAhDri5QdyZCGgMGhbByRt7gq/wYamZXqWYS0FRbsIB5Pv6icZkKdAk6ybWtLmg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bxEMn19X; arc=pass smtp.client-ip=209.85.208.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BECDD43B6C9
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:02:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.179
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791831778; cv=none; b=ayElyGZJLmi5JEK7SSu5eCVZaRcnpYa9Ps7YRMw8HqGOws3BtRLbGB3JubbLkmH5N5YYaE9fyigmP0qZpFR7OFWj4U4v9xclrX1VhXH5adXDDvKKVz+a0eBiNciqcIlGq5wm07cnSrwDGrXc6VF87l0Wcrx+u9LwXE9lKXGw0j8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791831778; c=relaxed/simple;
+	bh=BlAW2s3WJD+TEcvpjdpLLq/egK9JpkVxEaygxyYoXWc=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Sey4t5KXq66eJ9eTkLQwrLJ+c64UF8pbRRy/cuSPVRKzQMdJxq9djQHyeJ0mr4qfbcNzeqQTNM3VtgNx/9m0bubpNhy+G4j8PFy9572JM2N1vew+f/6FFTMp5gIFyQ/nWtoqwQFZ0C49WG3HfwWTDCtNZGZh4YthvmdGe4r8J8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=JyqxcYkM; arc=none smtp.client-ip=209.85.160.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bxEMn19X"
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6af9cc73235so2002380a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 11:57:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791831420; cv=none;
-        d=google.com; s=arc-20260327;
-        b=qnc4iPZydfxQXd4x5fRsBz9cVFWFpHWsX4MR3qendQ6PLDY4k2FlbUj7xIZJMxNLOJ
-         FRoQC7IfxTjX7n3kbov1zWKeostsmBU0wNt07l4x9Ee6Ps1GEhz/hDY57NcuXGeMF5M+
-         E2z4RUpAnyI8qj2omu3Myqm0/YQ2TQZEIcar2Zaqky2QOsUKh/U7TJGKZVb5FC4FXiNp
-         GUnHpKsenjv5QlyrFF9Dm4YZAloAyDNWZCECZUggGvP79w2SjNPXe/kd5/d/nt6OuwHe
-         awSY0VDd5mX5ml1qZSSUJDhY+QU3JHq5lR8z+0WWNluIqKC+rIV5wXBc0gwxr5YVTk4J
-         c9OA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nMkb5bAZ7ybwAbgFArWE6KX2eaNmCxoRO1fDwwh6Qkw=;
-        fh=hsJ0G66fhNpYGHdD+wTPhV9o7MeDJq3OW76TAzHYmoQ=;
-        b=GDafp2KXaPtVbnVOJifpn1uTeS+516yoG+GfME0JBJz+yPrmlAqEx3RRGrO28vzs8E
-         vAxlcNxFFeIqwzNtsUzfWDfKtdTQ0/vA5NMg7DhBhWanOenspX2UO2LQXZk2WB0ttITj
-         bOzJE0AZCGa6mndT+7IqBMS/pgGhjLGJU+eIBas5eJ1kSMMOp7S4g0bGW6xBXfNlzODA
-         Dqu1gb313zq5wqLHWoRwv2vPy99+4VkBR2X4DW8lKu6QjNfGUzVD4ccVf7FvQ0BmNSp0
-         TeVaJL4SYTky8u9JSP5V3k4haRCOIfCR14cZgZj8G9vO2ScNyEVuPRClv0UJjsxtuabn
-         hHWA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="JyqxcYkM"
+Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-5352a876d5aso29675721cf.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 12:02:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791831420; x=1792436220; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nMkb5bAZ7ybwAbgFArWE6KX2eaNmCxoRO1fDwwh6Qkw=;
-        b=bxEMn19XS52JX/QLtpdQJA5Ijg6+QkF0DfUX5HfmJeeEvv7OSmrc8vTQhSozQX8C9S
-         dlfMP+XEtzvP06O9OTONNK/TTOKC/zOTdDMhuIn4Mu+1fLYEejJKTdNGHO+B9X3z0PRG
-         cX5TyxSobs+n0jq71nx80h3N6zFw+4ZCTqc1FzT8z9mxCYcpEtANTWCgm4F9cGrGB1Up
-         3QSkJQNF1uXoaevPsiIVOhfRZL5vH9RE6MRqZ48Isu/xOFtxN2bWWK4ZR1JVM0XaTdtm
-         W5fLzrwL79Cq2tE7UtCsE4ww/2g1+EzDPW9ziaixxuKDfx8uZRJS4z7I++VcAfdVNdaR
-         hkcQ==
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1791831776; x=1792436576; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=laFs7jlIkL/wK8Exmb0UUuiq4aC/G+SY8DOFmho4Nis=;
+        b=JyqxcYkMEhPPd1CSNODJ/jyyrnpymJCtRpdQCMEZ3yphQItkCsPm12bs43Icvu4Z2g
+         Iqyk4/KiB68Drk91Zu396UTq+Py+IsMtKbGPeoRcivVBpXlEYDyEonw+32HPzig8b4Yi
+         qGWLfd3sCRABPzv9807cyBRvj7cRFc1Qe0EwgcpHdFiEB4bgMEHz6/m7p9DfcEjSwlwo
+         PpZkfI/0EIbriGH9jWsXFaMqOvRxNGWvBKosGJ+VRvlUMTuyMeciExpxT4tWE9wY9XFh
+         6ORveyNMq195sFlGbCHd1Bt4p5OtIEPGbG/O6CvNrSUC26SdiEDWmN1p8zHkk5j4i33T
+         tbRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791831420; x=1792436220;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nMkb5bAZ7ybwAbgFArWE6KX2eaNmCxoRO1fDwwh6Qkw=;
-        b=G3uQ71gzKEj4ugOjwgepxl+4KR5mBAZXzU4UzHzYkyFq3N9onUzH+qjpK1lDW4jUxl
-         tV0ob20Rglki02VT5I6O3at4H8lALiYbhEUHv4LBvPrMMiwRbdjKoL7PdjVR+SgZ7Pwx
-         tSX3wbw93UQYCk/mJKGBNyMSHErYHiatV/olSOJjTE1OHCiPnAaejjVBXTxlOhnT+9wr
-         gL01Z7FiSjE//0/m27EscMpZ2K51m007IDZDtJDFGoAKk626bMkhAEQACenJqlufPX9c
-         rDqNMjluxG5E3gbiXzCJYWzqS5aGh9eaBn9U9pwXMJQS0L5L89AtaY9GqLBaiAAyJjxR
-         +RgQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzrx78YDqzH5yidk6R0lXzvZJedgdYda1KQT89IdkPg8FAA354zfO4jG6OeT86tkvLodgU1ex/rC114tdIa@vger.kernel.org
-X-Gm-Message-State: AFq9FYKRN5TkCCk2XNJLBjqjtXSkYXQp7A+DRCGMT6sZb3hSODWsq5Fr
-	0SMsbsz5zMSOg9IV6vaSHEyIHN27VIeZMz/8vaerl32Yib24Rd6kLB5r0THP5SKaw0jLm3Aff7y
-	CkNJLoP6nff5oM0bN4JkTZqOtx6Xb+A==
-X-Gm-Gg: AYBFou37VeoA9yMd2UkG3wVogDb+6toow1g+Uxhni7DECBz0WJcRcdoCg7uombMlO7k
-	mGmXtS1tzmZaXtnPbNK841hKLnX2EvGBSSFUgVuDwSX8c+dk4bvtMYAyPjwqIhyuk8+gfAbEDiz
-	iAPgujVu801EXMgLDLINE69/ccEeuR1AEn5UFdGdE9PuBiFaA4BHpKoA7bSiNRvl6P8cjLwWPZS
-	zDZ4RBNj2vRaVmW3ev672StpYxADUNohZ/FL/6bD8n+TNuCivyKbPMnKzQh9y+EIXSuRebeeuE5
-	v1xv7YTcXSheXL0oVCe4CcTk4IpYHUShi6pY2JsArsxNWOL1RjAJlQ==
-X-Received: by 2002:a17:907:7b8a:b0:c2e:1e4c:35a0 with SMTP id
- a640c23a62f3a-c31a702fee2mr1083958066b.14.1791831420287; Mon, 12 Oct 2026
- 11:57:00 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791831776; x=1792436576;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=laFs7jlIkL/wK8Exmb0UUuiq4aC/G+SY8DOFmho4Nis=;
+        b=CiLiLzgdjL7xSNbzuzFEJz4zL+g5xN2mDIzriMUylMSdrxGC4GjvZYC8ejc5rLEyk+
+         2q+37XMgmFJWK+bQRxQ4sZjhkJEicE7ufahceyUklnPAGy6QGEpLXWR1km9QRDQAcJlD
+         1c+K6p0Lbox2LBx+bIZ1Xx/VSh0ngn+XBng/5Jz2d3ClOdhb5hxd4I567z7q2V13yk4L
+         niDwQx1uTuxFgezt4m+4STwbnOaKym5YeiFuM/iOCZkvzECWjCsmq7g7Ewjg/q2tc2HH
+         nID5PmzXS2xD5AfAgm6nZCb9+Mko6epuj4PUMF4RkZWw60K/xyZHz3uV3hniJbEzet0Y
+         hqow==
+X-Forwarded-Encrypted: i=1; AKwUvBx6P3LH6aBkovSm2ybzo1zffxL1KoHBrrRi8cAmFdDE+fHlW1Cb+4wMHNWOmQdt9l/avRKpo3B+0a7xgR2S@vger.kernel.org
+X-Gm-Message-State: AFq9FYI8l/UjTjAESE+eJleuQJWT0XYpRjsrg3IUn5e6/rfg9OsyE1DL
+	zKB9AbWPxp6R30F15UxQwS/5TFQhN/vC5Pk8elot1KlU3BIdauw6aQhmCX1AiPhwkqQ=
+X-Gm-Gg: AYBFou13OiEp6iNElUsAqdOhvE2D+bE/ldP2/9BKWKkr2YGl/AyckLmLl3t4cK9E270
+	xUBay0DlL+n5Fvpj/o9+TRMfM+e/+A61IC9guL0/kevTygeLL9cRsHxDoUKpb8dS3lj9EbEUSyV
+	wMfk8/TsmeErsE2UBXRbCA+XODk9/Rh0xIXIhYi/fDG42YHERtH5Axf7RunQ5BrLTPv56uKxUrZ
+	SM53jE8gBXGM3Da8OQ4tKvaNiLLYqu0D6re7lvY1C6tY9oSaxycWu6Y1pKFD10nP6SvEVMAvZxO
+	B18dxNexHL9ukC6SeMZLwFZGowcqNcoGRfS/CwXx7ribeppY64grFczzeLaiD304iF0cV8Dm/WB
+	3MeaVUKo0+Hna5sCrda3j/9uJ87pgCKezzBYrrpPZ/B3/r/YhRmfJJR4PRTLrhG9d1WzOSaxlny
+	qeG3+sK1wq+1Btmef0FGyCtyQ5Vhf2TVHI60C4NK1a87hpl84Fjklr6YFMgHYp6oj1q6qAKMU=
+X-Received: by 2002:a05:622a:8cf:b0:533:370c:7600 with SMTP id d75a77b69052e-5359fac22demr153697041cf.27.1791831775276;
+        Mon, 12 Oct 2026 12:02:55 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b9783c8e5sm5196456d6.1.2026.10.12.12.02.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 12:02:54 -0700 (PDT)
+Message-ID: <71854ab7-107a-4218-ad37-14c6c6fe6bac@riscstar.com>
+Date: Mon, 12 Oct 2026 14:02:52 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251220-surface-sp11-for-next-v5-0-16065bef8ef3@gmail.com>
- <M7kfFb5fz-WB43U_xCUwgxpmBJ4TNdp4jE6yFu6HmemIcDx5tXO6H4xnW_pEQz6DMkKm-3POdB9hIdB092zhGQ==@protonmail.internalid>
- <20251220-surface-sp11-for-next-v5-2-16065bef8ef3@gmail.com>
- <e0e9e690-c56e-4b56-90f9-2af46a7feaf3@nxsw.ie> <20251220-fervent-mamba-of-sunshine-f680a8@quoll>
- <571681d6-67f3-47fe-9a42-dce5aca13c99@oss.qualcomm.com> <6a90eb12-87c7-4942-9f18-6490a91cb0b7@kernel.org>
-In-Reply-To: <6a90eb12-87c7-4942-9f18-6490a91cb0b7@kernel.org>
-From: =?UTF-8?B?SsOpcsO0bWUgZGUgQnJldGFnbmU=?= <jerome.debretagne@gmail.com>
-Date: Mon, 12 Oct 2026 20:56:24 +0200
-X-Gm-Features: AclHuK8XNRMVa5i_-1gcBHkcX16OiXLgWfJwauZ8ZsGnsvSYHUGeaNp1UtvCa9w
-Message-ID: <CA+kEDGEBqMh8X=q54EkQNutxTpqutQ11QdkUr7bvJO8_iFy5JA@mail.gmail.com>
-Subject: Re: [PATCH v5 2/7] dt-bindings: wireless: ieee80211: Add
- disable-rfkill property
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, "Bryan O'Donoghue" <bod.linux@nxsw.ie>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Johannes Berg <johannes@sipsolutions.net>, Lorenzo Bianconi <lorenzo@kernel.org>, 
-	Maximilian Luz <luzmaximilian@gmail.com>, Hans de Goede <hansg@kernel.org>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-wireless@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
-	ath12k@lists.infradead.org, Jeff Johnson <jeff.johnson@oss.qualcomm.com>, 
-	Dale Whinham <daleyo@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/4] clk: toshiba: introduce a TC9564 SoC clock driver
+From: Alex Elder <elder@riscstar.com>
+To: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org
+Cc: abelvesa@kernel.org, kees@kernel.org, gustavoars@kernel.org,
+ mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
+ danielt@kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Brian Masney <masneyb@kernel.org>,
+ Daniel Thompson <daniel@riscstar.com>
+References: <20261012152408.3729237-1-elder@riscstar.com>
+ <20261012152408.3729237-3-elder@riscstar.com>
+Content-Language: en-US
+In-Reply-To: <20261012152408.3729237-3-elder@riscstar.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Le lun. 12 oct. 2026 =C3=A0 18:53, Krzysztof Kozlowski <krzk@kernel.org> a =
-=C3=A9crit :
->
-> On 12/10/2026 18:38, Konrad Dybcio wrote:
-> > On 12/20/25 10:12 AM, Krzysztof Kozlowski wrote:
-> >> On Sat, Dec 20, 2025 at 06:04:00AM +0000, Bryan O'Donoghue wrote:
-> >>> On 20/12/2025 00:21, J=C3=A9r=C3=B4me de Bretagne via B4 Relay wrote:
-> >>>> From: J=C3=A9r=C3=B4me de Bretagne <jerome.debretagne@gmail.com>
-> >>>>
-> >>>> For some devices, Wi-Fi is entirely hard blocked by default making
-> >>>> the Wi-Fi radio unusable, except if rfkill is disabled as expected
-> >>>> on those models.
-> >
-> > [...]
-> >
-> >>> Is this really a hardware description though ?
-> >>>
-> >>> Its really more of a logical/functional description. It tells the run=
-time
-> >>> what todo, not what the hardware is.
-> >>>
-> >>> You could also have a list of quirks in ath12k for this or have a use=
-r-space
-> >>> utility look for the appropriate platform device string name and disa=
-ble
-> >>> rfkill.
-> >>>
-> >>> I think this logic belongs in drivers/net/wireless/ath/ath12k/ trigge=
-ring on
-> >>> a compat string.
-> >>
-> >> This is good point. Either this could be deducible from the compatible
-> >> or this should actually describe the hardware and whatever is there
-> >> wired/configured, not what OS should do.
-> >
-> > Sorry for digging up an old thread. The board-compatible change is now
->
-> I don't get why exactly the board-compatible option was chosen, except
-> of course finding workaround which did not need digging out the root of
-> the problem. I suggested the compatible of this device or proper
-> hardware description.
+On 10/12/26 10:24 AM, Alex Elder wrote:
+> +static int tc9564_clk_probe(struct platform_device *pdev)
+> +{
+> +	struct device *dev = &pdev->dev;
+> +	struct tc9564_clocks *clocks;
+> +	struct clk *clk;
+> +
+> +	if (!dev_of_node(dev))
+> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
+> +
+> +	clk = devm_clk_get(dev, NULL);
 
-Could someone give an example of what a "proper hardware description"
-would be in this case, to move the needle a bit? It is quite abstract for m=
-e.
+This should be devm_clk_get_enabled().
 
-I guess this was chosen as a workaround since not having Wi-Fi working
-for 10 months has been a major difficulty for some new users trying to
-get Linux working on their SP11 / SL7.
+(It still works this way, given it's an always-on fixed clock.)
 
-I can only talk for my own contribution but in my case I had removed
-this patch from the series as I had understood from Mani that the
-connector binding would have to get merged first and it was far
-from ready at the time.
+					-Alex
 
-Thank you,
-J=C3=A9r=C3=B4me
+> +	if (IS_ERR(clk))
+> +		return dev_err_probe(dev, PTR_ERR(clk),
+> +				     "failed to get input clock\n");
+> +
+> +	clocks = tc9564_clk_init(dev);
+> +	if (IS_ERR(clocks))
+> +		return dev_err_probe(dev, PTR_ERR(clocks),
+> +				     "failed to initialize clocks\n");
+> +
+> +	/* Force all clocks to be initially disabled */
+> +	tc9564_clock_disable_all(clocks);
+> +
+> +	platform_set_drvdata(pdev, clocks);
+> +
+> +	return 0;
+> +}
 
-> > I think merged into ath12k, but I'm not sure I like that, as now every
-> > OS consuming this DT has to carry a table of board compatibles (hence
-> > needing updates _every single time_ we want to support a new device),
-> > instead of being able to convey the quirk through the property
->
-> Best regards,
-> Krzysztof
