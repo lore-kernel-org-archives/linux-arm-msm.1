@@ -1,332 +1,103 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 459524FC325
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 824C54F4736
+	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:47:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791840929; cv=none; b=JcfB5yVpvuPQ9yd5G3bDW0qRDKoyn5+gQ77GF4pe08GhooaH7lkzJiV6dvJCrDq/WFFdRpDM60U6PmsouWTmdMeJUvkT6ySqTIhxqhASPPzmu1OCykI4X51UWuaZFi8FRtC8+PiIhNWiBoLXtVF1C7Q3CRnvDUyUi4oYEz03+VM=
+	t=1791841660; cv=none; b=rhMunM8RlgvFQ0oRWlGPn/1CRLOaJKQg/ZzapqVjKUjL8BHHqre3NdlyBxGrTMAov50Y8XVoDE4ah2bwzDFGVGVbNBxSOz9yTBo7QXI9TQObZ9k2WsOoyDYXbiTRk2zi0RtmUvZ9zNiEDaALNolrXOglu9cJ0grBXFc2nMCFiz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791840929; c=relaxed/simple;
-	bh=W2Trm/nICL8IpQWE3KSrb1Z1635z6pVvaf7pWexEYS4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=E1DT7KYfq3Nt5nTn9Pua5ngiES1CaMgCm0arI+mU7p72op7MF8Ertj9hUHcT6cKodyRvgOrEXN2bLFLwJi2CysLBQ7nTwzlCMOkADo1c98HSR5Ii020xP/TEEEO8scldCsj1Wh8ve8RQkE0fNMIx5Y7gc44BZjyKdOkLLucX090=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=g0h3LdSm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CChk/a1G; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791841660; c=relaxed/simple;
+	bh=gBFBxLm8HkrP6Q8DthyOwtOjSWDTaFoDbTRkrYjC0pc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=csK3D+mpNCzko2cpbs12jf5cv/S6vXH9GG74/osm3WPeBlavSfexfXlVxeWCR4VqwUtjWeZo/ThDjYh9Bx66nCXPUqwY6dLut/kPNz2lnFVf4sgnxfbYmy2V37ox2x26HfL4cZPKMVnyh2UQhMH73WMhnIfEf8mb1U+1Q+znckw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Wp3fjWl+; arc=none smtp.client-ip=209.85.215.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="g0h3LdSm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CChk/a1G"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69CJMtGM2211070
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=; b=g0h3LdSmFr4e3N4W
-	kWFQe6Z72oW7bYJwcLrMoI5ic9/ZrLHhXclKmvQO9d8Fy40NhuW9un2UqIgeyn2m
-	wjdooOi6odu+gbyxNLMT5pSu+kT5BtAGsufB2oyu5O4K0jytMzNg7DexMv7EI3mj
-	IsNCo06gBtnrBVxWMKZeSy6cg+l4u/bKHEOm/K+w0NX/NFHesjvl7xF/9sdLGarg
-	MJqspBr5k3SNcbIO5NSZSYXcgccBiYswuymKqUV++qA22acWHvTMUHg+wYAFxWOT
-	6bbX3AJ/lq90VXxgVHE7fgKdA8o/2DnPivnM5AXgvQ4w1yeT/VHNXuwGc5APpV8C
-	+WovyQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h93aes3pw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:35:24 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3510d0baf63so6536697eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:35:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Wp3fjWl+"
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-cc4dbda1e5dso696487a12.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 14:47:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791840924; x=1792445724; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=;
-        b=CChk/a1GJwtG07CbzO25tk/kldi2BtAojPQ2kXPwVFhPTUP46tpefLq4E/GSQNgjzC
-         UhO1lRv1lMMVUmVr3ZUzq71K0mVLRioNdaSgg9Xq6usUoW/PHVFVegoRtrJ3xm1FVKVR
-         t4M/wWlcmCns3ui4FLDLUoBsMhn+Ke1D5MhRXJSxfzAo+gm+y7UHC0M9nHimepNEGX8H
-         MQxktUnixd/6qxM4wHaxXvQgiUD0GUjfhNVHpNF22+2SdmqRjyRWJ0kpMtprSSt8U4IP
-         X5LcMjUAR2H4gYXW5vAkkwDAOYC0HcmrM16uArXxBcR2ETjVmgYHlUBRfPmUU0sUorT2
-         WWaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791840924; x=1792445724;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791841658; x=1792446458; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9ksiK0T4L7o5SFNFytJEd7y68wkigvQZU6mjV4dVdPM=;
-        b=py9KnculTsa3JwOsO7fomWEzhX8gTIT+iKMbbGHvJBQK4hjrtBHRz7em8fa7etjQnr
-         dVOUb2xSM2fZGAqFf3ap2mBhUc+7M+1gkm2h2zN0bYLVlwXbTLBNoTOjEvTJlrMhT0+J
-         xr5QWoIrgPZulbeTnDW7DtBtIzfIjYlufW7JNvTbRbx0S531VjunZC/b/ZRSCqS7uA47
-         0kp9R5IO9J59dcE9PHXMV5VgOrSGz0k6sDyzyLI9uCP+8HPnsBc9kqpFqw/TEJXrc4hN
-         qpPuNOBT4WZitYX3c0J457Y7ra4Q9PcUHW180g/o1Tn2rh+MK5EmOWN8LsTqjsE3pNWj
-         mUrg==
-X-Forwarded-Encrypted: i=1; AKwUvByHORe1tBPul/H6PjQC9InyXL5wCdliOV2VwuARh5+DT655kHysLgZunvBPFqR85is+sy/rVZqnVQkb8tDq@vger.kernel.org
-X-Gm-Message-State: AFq9FYIEybto77lR0Xp18El619cV/VnQCk51XOxn6hZB6RMBJNscjAlF
-	53WM55F+L2e3MOmAg74br7bH6mA5YQDkwSZXC89aeKmnimGt84ZxvCl/zXPVYpkrB9hXbhRbv8R
-	mugeABpPYu49WJMn9wL1+IdHTU6G9f4EoCDXLK1IXtQ15PLf5u/3iXR4FVsgG0fX02tdq
-X-Gm-Gg: AYBFou3DVc00BFt7brMC7klwLxiT1yMGdJQ1scovEtL01ct4kkNAi/G9GShFmGhMe+K
-	WWapRs1YHUZ37CuplxQhDORbFmhalbx3qg7mX+Vp4nM0qKnnrsbMr6fDCeByCqkJIiFhXWKZlH2
-	Ais7mf/WMXiWSKieWFJeMH8m15s3TwS6pI0945bSNVU6fRe8OvI613ADtCY+Kul6fKdlAa54AY2
-	p+g3H93TX1egbiqbBebBwbWE4T4CU5FZbt84PyCQhlL0kEm6V7JZ26RfpquZGjGZSW4OO0LS9QN
-	ujPvRgi1PEbsFHIvf/n0n9U1HoKMzymFvaosIC08gak835mfvXueD6FaXrZ9xysb7P/m441Jn5M
-	Ez0xajhD7+ty5W4gdAB8nfxm6ylqnFrw+J9GR+lRVRfgoYo5bspRw
-X-Received: by 2002:a05:7022:1581:b0:151:2e62:fe89 with SMTP id a92af1059eb24-16a60812c7fmr20204161c88.32.1791840923612;
-        Mon, 12 Oct 2026 14:35:23 -0700 (PDT)
-X-Received: by 2002:a05:7022:1581:b0:151:2e62:fe89 with SMTP id a92af1059eb24-16a60812c7fmr20204104c88.32.1791840922795;
-        Mon, 12 Oct 2026 14:35:22 -0700 (PDT)
-Received: from [10.73.232.100] (pat_11.qualcomm.com. [192.35.156.11])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a3f6186fsm34188115c88.14.2026.10.12.14.35.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 12 Oct 2026 14:35:22 -0700 (PDT)
-Message-ID: <2bf0a2e0-7466-4e90-b53d-f3fc0d26378c@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 14:35:20 -0700
+        bh=RQBJTSOmJET7mou+bxBw1N4I5xwZbM40VMBF+pO+89E=;
+        b=Wp3fjWl+JaP9/5sMmj4HaTG4AWArX95YjxrxwjLkpb9imY30dUvc9ST+Eg0slPPuZG
+         QBGzVEsA8TY663YMpP0M0JpM+wFR+y/TVbmh1p319HogyJtzLqyO17GU0RFjWGlYLlqk
+         bONZOrDUZjIa8X3g9GDTWuwgI4t98o7Xx5VpPc+jELtck4u1OC/3ChWxdx6g2F0XMeyM
+         S0eYCOnD4aJJr0iUmlfk93JF+DLs4Kep0EYdw8aqaKVyb6+rlw+VXNXnQFqgswmawzdJ
+         wIjSz69B/v0J0LXNJUcanCOYDHf2zWZBPalbRubZBmxRVyzFj03oiNZkUyT7F1VgF45R
+         GkQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791841658; x=1792446458;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=RQBJTSOmJET7mou+bxBw1N4I5xwZbM40VMBF+pO+89E=;
+        b=ywRYUYTNxhdA90XKz1P8n6ue3GUU9imC4mgqWbQ0mSZ2BHmnCRRHwKTHW55870S4jo
+         XlcufLgmTHFoSAJtIzLiKt8xQYxKljF0gbQfRnckcwcelQWv8f58LkbihGcmNqjs9HZF
+         9nX100m/y4jCo1gQTduGq1X03UV5vIN1tcPb1AOnRfLLmetyM7jeRLuaK+Wh0ilIk1Xc
+         1y3sUc1TKSnKINsP5B3G++PRk3kCcoqx6VqgMctsQjT0YKrI3dJenoEn+QXesbNoyPAe
+         CvlCLAcc4jxyxCRivfy3u9b2I4iJq8HEgHWs3oK0PSZ0/NEa/sWBA0lbgfG6G4Oo/vpU
+         ZRuA==
+X-Forwarded-Encrypted: i=1; AKwUvBzgRRVM2Ah0BIO4zx7OtQcxK5FV9qJ9OUBNXMA6pb9YgAH8VXKyD7O0uj5Foh7yv3YiO/AK2lY++KZ8V3yD@vger.kernel.org
+X-Gm-Message-State: AFq9FYKkNUXOeaqYort+C6V4AftLoHntWia3+vNxFIyS+Y1Is+Qyvvph
+	301KxdmgBdq8xX34XD3WWzIUATNmJ7l1EUsLMIu7dF0/Ku+fR6MUQtcq
+X-Gm-Gg: AYBFou01UCRTfrLn9cO9RoFXtY3+7trmqFIpLYKP9m3AegvSPOUK1GaZPIVv9OwsT56
+	Aao+14wSgF5hNUMbrVqd0kXJFYITLPFjk/Po0N9yJqCEwszekUsLNiVLPOroJLYIpLg7lcVL1L/
+	e/7bwojCe5uZbfXvGkB0iFTp9ARPtgRJdustXy5rIY95v3dp1WNIeyNKUCcVAg33bOoovpvLwb7
+	fcpUsPj1b7PtHSPWJwS7CdEGfate3n8CZJseSqQP4h3IpK5anj5vOouLTUo3KtNOfniwqW8tEHw
+	PDCkxoNQzmY1iJ1MT1NFowBMkDiLl/3Nc50RckNeuL76IyvJsMGLktYL1EPCflLb82ZQeeV6n5X
+	j5ag0IvhU0yF/vWthWFkWIxOXgQiO6C5GaFY4VTxzVBBUN5V8rgNEwkMThNrLuw6IV6QWnlZ9Qr
+	kh2QgIe5X/Z+Ie7M9If5NCH5DmSEzVa6UKSADYCEgGvUDTKytIv+7Wn2fNhJ5N+c62kr90CvQTG
+	QPJLNWOp13u5j9v7k5A7Kdxbuh9uyXmb/nZYtLHO3Tk1WLc+BC+He4z5n3eZw==
+X-Received: by 2002:a17:90b:3b84:b0:3aa:f4af:1e16 with SMTP id 98e67ed59e1d1-3ab3a4871e5mr8322337a91.7.1791841657487;
+        Mon, 12 Oct 2026 14:47:37 -0700 (PDT)
+Received: from ryu.remote.fontis.id.au ([2403:5814:a404:0:cbc1:7a8e:f385:c576])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3abdd5adaadsm7208435a91.0.2026.10.12.14.47.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 14:47:37 -0700 (PDT)
+From: Lloyd Hazlett <lloyd.hazlett@gmail.com>
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Lloyd Hazlett <lloyd.hazlett@gmail.com>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>
+Subject: Re: [PATCH v7 03/12] arm64: dts: qcom: x1e80100: Add CCI definitions
+Date: Tue, 13 Oct 2026 08:46:57 +1100
+Message-ID: <20261012214658.357133-1-lloyd.hazlett@gmail.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260917-x1e-camss-csi2-phy-dtsi-v7-3-1a63eb35838b@linaro.org>
+References: <20260917-x1e-camss-csi2-phy-dtsi-v7-3-1a63eb35838b@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 2/7] bus: mhi: Move Sahara protocol driver under MHI
- host client drivers
-To: Kishore Batta <kishore.batta@oss.qualcomm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
-        Oded Gabbay <ogabbay@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Randy Dunlap <rdunlap@infradead.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        mhi@lists.linux.dev
-References: <20261012-sahara_protocol_new_v2-v8-0-e12939d229a1@oss.qualcomm.com>
- <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
-Content-Language: en-US
-From: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>
-In-Reply-To: <20261012-sahara_protocol_new_v2-v8-2-e12939d229a1@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: tcuPN6MOQw7mzVQMDBCVFNU29GtzaZ7p
-X-Authority-Analysis: v=2.4 cv=JJuuIMKb c=1 sm=1 tr=0 ts=6acd529c cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZdW6uxA9NKXbfdqeeS2OGA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=EyST5JTptKXFtIIvUhkA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA4NiBTYWx0ZWRfX25JxcK/MiG+t
- n1OtYYMkMQH2z65Z60pjQHiAz/lzfIsdA5dEWcyZXVfjoKb2bMvxnJMZ1tCr8HnokeFYajCoDCq
- 1oPhZz/mJDWCRYkBNzSKB0zjo7R7Q/k=
-X-Proofpoint-ORIG-GUID: tcuPN6MOQw7mzVQMDBCVFNU29GtzaZ7p
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA4NiBTYWx0ZWRfX8t1/nbf5aHVj
- qraSppKILrwTK4fqAj1Eb+yYHSlRT9gj6NB38S4bht0NdE7yXv6S1ThBxriX6XLqK2jiCxt/Kgw
- pWzwH1Sr1FVjYMl4QbMmHf9S7Q+HyrIM+xplBNCONvOE1ce0BeLaLEV4oCEaChyghKA8Okvv4d1
- Fi5lIHG02abLGaHeV/5q5JYHP5ckMpfO5cgZpnQtZFEFixK6d+uNxl50QYrNUxYkHj8Mj8kfEYe
- bB+QJ41Y57weeVtD9VQhqi9hqPlCgGr0Hif7UqJ+d3dVSQx5md+8hk1wbwASabMEcTgG6ZTwBFc
- DUXiTLtzQyJfyDgUCv/ug3ff+VtwY9NyTZHyoY0fDo2rEgckR3CvBAaELY/tHZRtDSVxdxc+v0c
- 1OFBHLOzD3WqXBwYG5IBDcOjzE+A5ZDn2ICxJhr1NZh+BYOasMX9CnRUfxOO7o4qTUkjUNzMLlv
- arZu7kYnnk5rO/Qc+SQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-12_06,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 phishscore=0 priorityscore=1501 spamscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610120086
+Content-Transfer-Encoding: 8bit
 
-On 10/12/2026 11:18 AM, Kishore Batta wrote:
-> The Sahara protocol driver currently lives under the QAIC accelerator
-> subsystem even though the protocol is transported over MHI and is used by
-> multiple Qualcomm flashless devices. This makes Sahara appear QAIC specific
-> and complicates reuse by other MHI based devices.
-> 
-> Move the Sahara protocol driver under drivers/bus/mhi as a host client
-> driver and build it as an independent MHI protocol driver. This keeps the
-> QAIC driver focused on the accelerator device while allowing other MHI
-> users to enable Sahara without depending on QAIC.
-> 
-> As part of the move, add a dedicated Kconfig/Makefile hierarchy under the
-> MHI host client drivers and convert the driver to use module_mhi_driver()
-> instead of register/unregister hooks.
-> 
-> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
-> ---
->  drivers/accel/qaic/Kconfig                          |  1 +
->  drivers/accel/qaic/Makefile                         |  3 +--
->  drivers/accel/qaic/qaic_drv.c                       |  9 ---------
->  drivers/accel/qaic/sahara.h                         | 10 ----------
->  drivers/bus/mhi/host/Makefile                       |  2 +-
->  drivers/bus/mhi/host/clients/Kconfig                |  6 ++++++
->  drivers/bus/mhi/host/clients/Makefile               |  1 +
->  drivers/bus/mhi/host/clients/sahara/Kconfig         | 15 +++++++++++++++
->  drivers/bus/mhi/host/clients/sahara/Makefile        |  2 ++
->  .../qaic => bus/mhi/host/clients/sahara}/sahara.c   | 21 ++++++++-------------
->  10 files changed, 35 insertions(+), 35 deletions(-)
-> 
-> diff --git a/drivers/accel/qaic/Kconfig b/drivers/accel/qaic/Kconfig
-> index 116e42d152ca885b8c59e33c7a87519a0abc6bb3..af90fdfcf77eeb6dd5ad309b33d793d4fdc91b1e 100644
-> --- a/drivers/accel/qaic/Kconfig
-> +++ b/drivers/accel/qaic/Kconfig
-> @@ -8,6 +8,7 @@ config DRM_ACCEL_QAIC
->  	depends on DRM_ACCEL
->  	depends on PCI && HAS_IOMEM
->  	depends on MHI_BUS
-> +	depends on MHI_SAHARA
->  	select CRC32
->  	select WANT_DEV_COREDUMP
->  	help
-> diff --git a/drivers/accel/qaic/Makefile b/drivers/accel/qaic/Makefile
-> index 71f727b74da3bb4478324689f02a7cea24a05c2d..e7b8458800072aa627f7f36c3257883aa56f4ce4 100644
-> --- a/drivers/accel/qaic/Makefile
-> +++ b/drivers/accel/qaic/Makefile
-> @@ -13,7 +13,6 @@ qaic-y := \
->  	qaic_ras.o \
->  	qaic_ssr.o \
->  	qaic_sysfs.o \
-> -	qaic_timesync.o \
-> -	sahara.o
-> +	qaic_timesync.o
->  
->  qaic-$(CONFIG_DEBUG_FS) += qaic_debugfs.o
-> diff --git a/drivers/accel/qaic/qaic_drv.c b/drivers/accel/qaic/qaic_drv.c
-> index 0acf6cdd44f81430ec52c7120b8b50c60721a615..64e87dfaa560376ecdf1e6f8bf7abf6153160926 100644
-> --- a/drivers/accel/qaic/qaic_drv.c
-> +++ b/drivers/accel/qaic/qaic_drv.c
-> @@ -32,7 +32,6 @@
->  #include "qaic_ras.h"
->  #include "qaic_ssr.h"
->  #include "qaic_timesync.h"
-> -#include "sahara.h"
->  
->  MODULE_IMPORT_NS("DMA_BUF");
->  
-> @@ -789,12 +788,6 @@ static int __init qaic_init(void)
->  		goto free_pci;
->  	}
->  
-> -	ret = sahara_register();
-> -	if (ret) {
-> -		pr_debug("qaic: sahara_register failed %d\n", ret);
-> -		goto free_mhi;
-> -	}
-> -
->  	ret = qaic_timesync_init();
->  	if (ret)
->  		pr_debug("qaic: qaic_timesync_init failed %d\n", ret);
-> @@ -816,7 +809,6 @@ static int __init qaic_init(void)
->  
->  free_bootlog:
->  	qaic_bootlog_unregister();
-> -free_mhi:
->  	mhi_driver_unregister(&qaic_mhi_driver);
->  free_pci:
->  	pci_unregister_driver(&qaic_pci_driver);
-> @@ -845,7 +837,6 @@ static void __exit qaic_exit(void)
->  	qaic_ras_unregister();
->  	qaic_bootlog_unregister();
->  	qaic_timesync_deinit();
-> -	sahara_unregister();
->  	mhi_driver_unregister(&qaic_mhi_driver);
->  	pci_unregister_driver(&qaic_pci_driver);
->  }
-> diff --git a/drivers/accel/qaic/sahara.h b/drivers/accel/qaic/sahara.h
-> deleted file mode 100644
-> index 08037281c80e28f6c85b924c45ce2c2f9dc60c39..0000000000000000000000000000000000000000
-> --- a/drivers/accel/qaic/sahara.h
-> +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0-only */
-> -
-> -/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
-> -
-> -#ifndef __SAHARA_H__
-> -#define __SAHARA_H__
-> -
-> -int sahara_register(void);
-> -void sahara_unregister(void);
-> -#endif /* __SAHARA_H__ */
-> diff --git a/drivers/bus/mhi/host/Makefile b/drivers/bus/mhi/host/Makefile
-> index 2a16008aeb38127494782bbff4e1656428d2b776..2e8949f1a2fe6f3f3b2e1dc541f97d2c393d6a0f 100644
-> --- a/drivers/bus/mhi/host/Makefile
-> +++ b/drivers/bus/mhi/host/Makefile
-> @@ -4,4 +4,4 @@ mhi-$(CONFIG_MHI_BUS_DEBUG) += debugfs.o
->  
->  obj-$(CONFIG_MHI_BUS_PCI_GENERIC) += mhi_pci_generic.o
->  mhi_pci_generic-y += pci_generic.o
-> -obj-y += clients/
-> +obj-$(CONFIG_MHI_BUS) += clients/
-> diff --git a/drivers/bus/mhi/host/clients/Kconfig b/drivers/bus/mhi/host/clients/Kconfig
-> index 8bb5715e61d0d6e64a51012b4e1594ba46e5bfc1..1932344157a5b1dc25c8d63f6d4ac38f896d08a7 100644
-> --- a/drivers/bus/mhi/host/clients/Kconfig
-> +++ b/drivers/bus/mhi/host/clients/Kconfig
-> @@ -15,3 +15,9 @@ config MHI_BUS_LOOPBACK
->  
->  	  To compile this driver as a module, choose M here. The module
->  	  will be called mhi_loopback.
-> +
-> +menu "MHI host client drivers"
-> +
-> +source "drivers/bus/mhi/host/clients/sahara/Kconfig"
-> +
-> +endmenu
-> diff --git a/drivers/bus/mhi/host/clients/Makefile b/drivers/bus/mhi/host/clients/Makefile
-> index 3811b6928f42b38f94b1167941cf3b0fe512d32b..67e70de280369870164b4808f39d9b3340f2589b 100644
-> --- a/drivers/bus/mhi/host/clients/Makefile
-> +++ b/drivers/bus/mhi/host/clients/Makefile
-> @@ -1,2 +1,3 @@
->  obj-$(CONFIG_MHI_BUS_LOOPBACK) += mhi_loopback.o
->  mhi_loopback-y += loopback.o
-> +obj-$(CONFIG_MHI_SAHARA) += sahara/
-> diff --git a/drivers/bus/mhi/host/clients/sahara/Kconfig b/drivers/bus/mhi/host/clients/sahara/Kconfig
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..f1fc7013a2dee0be645c50f32305659e591de7e7
-> --- /dev/null
-> +++ b/drivers/bus/mhi/host/clients/sahara/Kconfig
-> @@ -0,0 +1,15 @@
-> +config MHI_SAHARA
-> +	tristate "Sahara protocol driver"
-> +	depends on MHI_BUS
-> +	help
-> +	  Enable support for the Sahara protocol transported over the MHI bus.
-> +
-> +	  The Sahara protocol is used to transfer firmware images, retrieve
-> +	  memory dumps and exchange command mode DDR calibration data between
-> +	  host and device. This driver is not tied to a specific SoC and may be
-> +	  used by multiple MHI based devices.
-> +
-> +	  If unsure, say N.
-> +
-> +	  To compile this driver as a module, choose M here: the module will be
-> +	  called mhi_sahara.
-> diff --git a/drivers/bus/mhi/host/clients/sahara/Makefile b/drivers/bus/mhi/host/clients/sahara/Makefile
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..fc02a25935011cbd7138ea8f24b88cf5b032a4ce
-> --- /dev/null
-> +++ b/drivers/bus/mhi/host/clients/sahara/Makefile
-> @@ -0,0 +1,2 @@
-> +obj-$(CONFIG_MHI_SAHARA) += mhi_sahara.o
-> +mhi_sahara-y := sahara.o
-> diff --git a/drivers/accel/qaic/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> similarity index 99%
-> rename from drivers/accel/qaic/sahara.c
-> rename to drivers/bus/mhi/host/clients/sahara/sahara.c
-> index c7c0b3eb4b65fb7776a6c724cb3105046cf6f7eb..dc64beae06ada6915a506ed8f4ae4d71c03158bb 100644
-> --- a/drivers/accel/qaic/sahara.c
-> +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> @@ -1,19 +1,20 @@
->  // SPDX-License-Identifier: GPL-2.0-only
-> -
-> -/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
-> +/*
-> + * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
-> + *
-> + */
+Tested on an ASUS Zenbook A14 (UX3407RA, X1E80100), which this series does
+not enable. Applied onto next-20261001 together with local nodes for this
+machine's OV02C10 on CCI1's second I2C bus and CSIPHY4, written to the
+pattern of patches 07 and 08.
 
-Never delete the copyright lines please.  Is there any previous discussion on why we are doing it? 
+The sensor is reached over CCI1 rather than a GENI controller, so these
+nodes are what make it addressable at all. It binds as ov02c10 11-0036 on
+a Qualcomm-CCI adapter, and libcamera enumerates it by the path the node
+gives it:
 
----Trilok Soni
+  /base/soc@0/cci@ac16000/i2c-bus@1/camera@36
 
+Both directions of the bus work, not just discovery: the sensor's
+auto-exposure writes take effect, with analogue_gain moving from 96 to 199
+between captures as the scene changes.
+
+Tested-by: Lloyd Hazlett <lloyd.hazlett@gmail.com>
