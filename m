@@ -1,280 +1,228 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1945E481640
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F32C4480DFC
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:27:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791867340; cv=none; b=ZWuCZiej6d02pMJ3+XymIM4LBgflOzCcXkgJCKg1/RTY8ROnTA/YqOPWH8SNAIF9Wu1MU+wlkUXHrACy/zt7XJNzQhuDIRHd9HyV/Cqvr/VrtdzaPR3wh+4kHX7EdOcwUaeOh45IEOdLL7sdY87pMzx6eDEGmplrXdgsdIGqcG8=
+	t=1791869254; cv=none; b=TqS3K9rQchpWCTmupK+72nbXebuXTWOL7h1k3kGJl2QjB9WwlYaxxxUTXNSnmoeDAfy5yQym/iI3GiUF9fa4U1cPahPaqTpTsmVmvmm8TnqOyAQDUusotYKS9/ycrxeLuctDUB5sV5z+HPHLLRrl0sPcbtexC8KTCBPLpLnT/Mw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791867340; c=relaxed/simple;
-	bh=5dkfnnJD51SeeZaegEhThVSljf33cHQpicyTq/Loa1c=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=E+qBEAQtcndhmI8qnUI2jVBrZaMpmvO7+ic3hRTXWI5hQ4VcI0njnH77T2OWuT4T4N0Wk0l7FN8dtl4mVCkvNnwGcrdn7UVVKc+trPzzUyFv4q6IWm8rdq9i/S1sFXn/YUjs8XFeMbAPNioSvGbCgTOvqihePjnZUtc0+TRhMlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jDUPIe8S; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jFMCjyVZ; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791869254; c=relaxed/simple;
+	bh=p8v7zGw+jnmOL9ic9pcmIw3cEU5hBsK/Ef+eTcjY3ok=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=EySa6bDXdnqgL220qBtsc0vhPvMn7d5pPlShqkhFJf6OlLQiF0IbYofSH2HNig0HzavZv76Zve0GxfM6slIKJXYmF+OGwuVzhL2oG+1It6SpJBHqri0vKgi+c3Vi/UY89DH55oYfOf3WdvOeoDs05lwv/ieR+YsQ6nPS/gtBY/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WogzpvGK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZbcMln+z; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jDUPIe8S";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jFMCjyVZ"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D20qMl923086
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WogzpvGK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZbcMln+z"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D21FhQ3752560
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:27:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=5I98+ngzky6
-	+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=; b=jDUPIe8SBUcf09Lmim2C7NxL0NS
-	rUm58lnbqbNj9JcvbQtqc2nGTYGpnWrRbIOdkPPUCAozxLU8Af5ExvaoQDU0+1UH
-	AphMdBXZ3k/hU1iJoLtHIOdC6iQEFJ5JH7o7jT/LZZVefBeLHgt3lJKDYw45blLq
-	IFk2xX1dkZtYT3i7cTsT4D0m7txjtf4KiEj05HpTUF+aQBD03gb4QXKq6wb/04WS
-	YR8Of6vzncX1GYlgG2GP7TqNdNff0NoSq3//a7GFD8nD9/51Hm6jTOQE/L7rSjDV
-	rkwm9URdYA+Fcmt5t3E9gGB/0K04zZDC41ZWLyO/e/r4T6knO9UYNfdpUxQ==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h98h1s3ny-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	W/6a4uSy+t25RmWcX0cupcRr5bplqRSqJY2Uj5L4mUs=; b=WogzpvGKwKg5qgPR
+	tkI01liBHEkX2Ij0Uc3i0FNYsQw2ycg8nvf6h+TAGJh1gpMA1ZXaK41Rx1rJPV6G
+	bhxffOnzK5UuZWcbdAxwyxVIvTo3iuOvZo2vNcNKXM/8mBb6orKxjgzlbkoqy74N
+	k0jsmB9LxGb63/WMU1PdAAc/P9WZvCyxuzHQZ0Bw2alp8HO1x6/J4rNIuPTeM6cm
+	ys5iLrrEfbjwU1Yneor8wvL0fnw4H6RItgHHy4MnLLqAxgoV3erFWofcKl+qMjsZ
+	aTNFmgR4vcCL2TLjmlLFkBIeBeGTYu6X0mNJz1dNtEGOWqYlufSeLKj2cZ09f64r
+	GrHRkg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h940w2c33-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cd5fd02ee26so328624a12.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:55:38 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:27:31 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ab341816f6so2574285a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 22:27:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791867337; x=1792472137; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5I98+ngzky6+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=;
-        b=jFMCjyVZbgmSuguiDq5sMeIrtcDGUthMctZuiv24LmDNRqpvePUUDhx+U1Nw1OWh0v
-         vSfJfg2fMRe3njpTnVJH+Xp0GK3E9gXprYRBVx+DHTYHP7SVMLdY4Sku1jOXgfGt0z70
-         0DhShphpbunc4aGzDV+Tqopps3tNqLUojUzpSix73/ywdxeV+DNyVxvgYOkKHUVzYjNs
-         MU9L9G6GsMVjgjjt/JOLRj0pFUowI8M22GmRCWIoZ+HHqeP7n+6u+stz3fXkqG0fxmRI
-         qc58Fc32IdTAxhv0BDYzMRB62LwyX2TvnhOrSoU8b2VzP3wH9ZZNF8EcDS1hMUrjxU0+
-         EWOw==
+        d=oss.qualcomm.com; s=google; t=1791869251; x=1792474051; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=W/6a4uSy+t25RmWcX0cupcRr5bplqRSqJY2Uj5L4mUs=;
+        b=ZbcMln+z0+ir7hEN7Xu6QnI9NhX1xfoYX2T4MN9MuYwPVrR3BOVWzGRuBQFCy9KxBy
+         4LTpWwbmbzwvPAG/CkeNI38nUA8HUQz+G2ICJfulnQf++xYqfm+cE/6uGiB3vLttYBGa
+         GbIS6M0I35dgJMHqIbe4Jk8L6s1pgdoOG8PDqxxhoo1pBotaGos9p0lD+TSXNpcVOWHD
+         Iu1z0knADi+X/YEDdmBMJVjguIbyD6QRekmY9/Jw347opblqHGFazT+WsBRg1chGPL7k
+         u/P0Kem2O5wXaZcb8C62RcTJ+YTUothhCTaikehUkSjwIRwKgJgR0BHac9STaLWE/vP3
+         voYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791867337; x=1792472137;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5I98+ngzky6+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=;
-        b=sNVeXQ7TVIOCxHqmJCdOtgViq36sNJ7NhL6Z1rF/3eWdftVuhaLdZ38wIqDq8ewiLc
-         AYhj1ypzuIwJ7XaWJn2jPqA6Zcy6D3rPjY0uTBP3187ROZIg7Eq16BHV/YIfypDNcfVt
-         l7nY6JM4ExPvseAmRjkb6oP6Dler+07TjK/v68Z9jCEYX1d8dk0ybElZmBWea0yLXYXA
-         3XHXqrzdWLZDQ5BHfl5n2LYkgOnr2DC/y9dIGm9tI064AJ5TVC4noiAdAh/UQPXlyYzm
-         h96umCeZ/+S4N3JvfjLYLlnu1CupoRC0CvBhsy925zMSMRz9AowjBTFZs9vdzMUfPxo3
-         Z19w==
-X-Forwarded-Encrypted: i=1; AKwUvBwLRRbRFQezapbOKTt1+pJePMtjfVoDxJtQCn94SPJVZL4yqIPDdg7ViL2HWAvGwx+rBWegrwFVsgG/oNIR@vger.kernel.org
-X-Gm-Message-State: AFq9FYK+XBwhcnSJbNWHMCZHS+gw/PEmcUIUf6X5PbmnMkcvhYvwLd9u
-	4G+eAMuHHERssVH9QI3opW0jOVERiMaxmoJTS12kgjhHihSmWe3F830Pr2trBiHbSB7d8Z4FED+
-	ip4k/oguP3iyM9NNh1EQYpsPrkMOv8UBBDhVql6FTEbiWS0Ooi6M4bP53+Vv+ZkESS7zM
-X-Gm-Gg: AYBFou0mVvcGBamh1rQmr0rAQ1pYftxtWCl3Iy+3k0ECyfHIXpyEGI/lEee53437Wn9
-	z5/qfZmG+lYgZgF54TTKa+nDJEqF2lUX0Pk+BhyvAcKUbmsv9JwpMMZsYDTT2xRxMGX9ez8+LHh
-	lNhkfOiE3/qcJ6GH4iPIrcChsCKdYE9PmOu7mW9WtrhtRN0tUw0T9n2docTVFHxNbd3NHlJJG/O
-	BVNRSFFEQrdM5dZFpB0MM4pcwuOIbZdFVSmEhLarrPmFEPGTP0qaAQ7h0tI0pgqjsAzamUFQCA8
-	z4Q4dEgK6AdD7lK/js6xv9q5/RJaJA10KaWKRRHbH7F+wuo1UdcnADUWAz/jwoi32ntp7jgyF3/
-	pH8s5hXCh8wNB/Et1nQtcmpxmb4Le
-X-Received: by 2002:a05:6a20:430e:b0:3de:7dd4:e32a with SMTP id adf61e73a8af0-3e16bdae01emr14421848637.2.1791867337386;
-        Mon, 12 Oct 2026 21:55:37 -0700 (PDT)
-X-Received: by 2002:a05:6a20:430e:b0:3de:7dd4:e32a with SMTP id adf61e73a8af0-3e16bdae01emr14421824637.2.1791867336842;
-        Mon, 12 Oct 2026 21:55:36 -0700 (PDT)
-Received: from sdciot-sh07-lnx.qualcomm.com ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-899b738d03bsm2438382b3a.41.2026.10.12.21.55.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 21:55:36 -0700 (PDT)
-From: Linghui Wu <linghui.wu@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, kernel@oss.qualcomm.com
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>,
-        Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>,
-        Cheng Jiang <cheng.jiang@oss.qualcomm.com>,
-        Linghui Wu <linghui.wu@oss.qualcomm.com>,
-        Wei Deng <wei.deng@oss.qualcomm.com>
-Subject: [PATCH v2] arm64: dts: qcom: shikra-iqs: add M.2 Wi-Fi and Bluetooth overlay
-Date: Tue, 13 Oct 2026 12:55:27 +0800
-Message-ID: <20261013045527.56941-1-linghui.wu@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
-References: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1791869251; x=1792474051;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=W/6a4uSy+t25RmWcX0cupcRr5bplqRSqJY2Uj5L4mUs=;
+        b=CZZQ6AgQfUTwZfZTrcHq7gPyyQxbuoh1BdIE/M8A05NdF3DTjyQe0EyqWLLDrX4GDN
+         fhdLCIe78GK1cveNV3VTw9WPeVG9Co9wuXaMrH1FIamEg4bL983T/G/K8LS9WdFRyNQq
+         qE/fJjxhEDoL7/qMF6mMc6FoCfO7M+P5+vlLH8K0E/iOKyQgJwCfcw7/ly3z5hyFAHsg
+         zi2uzNCylN4qefyUWwkGyGfTmi5ZK2r0a1U66BL0IvUaj06XIOxnGVXpMaFEh53MNt/x
+         n1zclU6xfST/JEF6AX9JfrUW4edwZtG9i7EaKxBHEkhUGvIwqAabmZ8825EOqpHG+1z0
+         f3HA==
+X-Gm-Message-State: AFq9FYJNMXCWwdNauquY4xPiDEces06jIjjSkaut+5xe5fu+T+4OBIw5
+	5pVGqbcjzx3xUsDiWqcFafd+okp70Q8m0JQ4ltV89veOPAtqkHh/USavTZERyY4is3Zo4la7z46
+	Bag7lGHKabiROFMq2CoRs46nwMPRo2M2SVw799mdFi1tseBM85DN3k86Meg0v72rfYUr1PGFTwH
+	b9
+X-Gm-Gg: AYBFou3UsJquD0LmNnMnqgPQYh/bVLmjTU7npXwZatdeVV+aCXkUMSH2ULvKUawieOt
+	mDp3PYdmApZjrwrPy2lBWZ6/l5y6c36O6c3USWJQIQTIbUX2RrhrFvHnSBMQOOHQFeQXfCA3lle
+	rBtox0D/PH51jKqsXl/D6VJmMuVx2dOumEjh4vdKlDE4J3ftsKORzwyukIX9ETfc46zz+FV6g4X
+	MV0A5B2WQRuS1YsuPIYl/sPuzPlR3Kl8tmxt+R4vz9mcdDjsmq9Q+L6LcW8vLbROsMWF/kZbTpd
+	j9teIhN1WM0IRhT6vUunRjzqkAGz7ZhYv5jO0X1fFiRXcFOmG6N+LwQ1IP6Hjr11sJ7SL21DDyJ
+	CIjqg/DoYXUKZEu/doeGvuoJXvVfhXbg4
+X-Received: by 2002:a17:90b:1d48:b0:3a6:582e:5e17 with SMTP id 98e67ed59e1d1-3ab3ab25b70mr6161954a91.48.1791869250790;
+        Mon, 12 Oct 2026 22:27:30 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d48:b0:3a6:582e:5e17 with SMTP id 98e67ed59e1d1-3ab3ab25b70mr6161933a91.48.1791869250307;
+        Mon, 12 Oct 2026 22:27:30 -0700 (PDT)
+Received: from [10.217.218.111] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab36ed0daesm19468684a91.5.2026.10.12.22.27.25
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Oct 2026 22:27:29 -0700 (PDT)
+Message-ID: <903bec3e-14a0-447a-8652-f57efa58cb68@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 10:57:24 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/3] i2c: qcom-geni: Add bus recovery support for GPI
+ DMA mode
+To: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
+References: <20260826-i2c_bus_recovery-v1-0-203f0ec76f84@oss.qualcomm.com>
+ <20260826-i2c_bus_recovery-v1-3-203f0ec76f84@oss.qualcomm.com>
+ <7cc05c51-811f-4949-9fe6-10580ff90eea@oss.qualcomm.com>
+ <bcf5b148-d4d0-434d-a020-deca2381f5a3@oss.qualcomm.com>
+Content-Language: en-US
+From: Aniket RANDIVE <aniket.randive@oss.qualcomm.com>
+In-Reply-To: <bcf5b148-d4d0-434d-a020-deca2381f5a3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=VqC2kO2n c=1 sm=1 tr=0 ts=6acdb9ca cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=HwT7i5cL4_BIIXZyjbQA:9 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-GUID: CUVjeeo8JXasHxn1gl-7gamEUdELCOZd
-X-Proofpoint-ORIG-GUID: CUVjeeo8JXasHxn1gl-7gamEUdELCOZd
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAxOSBTYWx0ZWRfXyjsnptciUoQX
- am2ybJ1l7r5PjPj4GRq8ha//VpTmg+Iq4U/EA05x/B7BHE36J8UPl/a3BtDrxGairbrtXA/Ezxu
- PAdYRFUUWc4kQ7qVAdNjnjCqoXsBMe8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAxOSBTYWx0ZWRfX6YX30yz8KvcZ
- imJVUpHvIoD7fB+leGlViSlBMrNRiaSXDOVTHXNDG1/JPnhpg+5OIrc9HDuWyFE4+QhpluloEIM
- plOfF0i9Sm5/aqH1CnXzk2uawPgvl3rC3gmvR7LQgpNzp5nFUTfyBTQwnNV6urXZUCWXgafh1ZO
- fCXNG12OY7GiJLH//cvDd/2ObmtU/My6kASy9QD3m2IDhFrZxEKMsR2LtcYUkLf8iQ/AOCnbqzQ
- OKp0Tba/E7mqQzcVUmSh9r1PpRHiwek1ngKI1R2FzeeyEz0p1xvQLZZfsFPgxxfQBOe13MTStGd
- uJnguvQXITBAC7nx39Xn8T0j96SgdhlMDyliPTJsY0a3TiFu7a54mWgjd1swrMhM6w/dq4Hhv7s
- TCXaY/0x/rQ1QKA5NPIxRdVq4i2dET8dsRQIQ0rfq6UVok1hVIIrL9CrgoKNqJkvj5dSQRO6ZM4
- 6trxTV2XYHLDBcZViuw==
+X-Proofpoint-GUID: OyiBLpxxmvEn0RmXzud6pifUmPufhY2E
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfXzgNPBIm93lLj
+ 9akHsBUXYXoEJ/++00jiDUjfpoIlYhty+WjwQRpnpu1P3ym3Uf7ObvaD1/c+U33PMGPFwoFSx9k
+ MpNHo/BjsIm5XeP3IZzfWwBi1HFidel6qr7SwHSbmHbm20Oxg08nEGFCgOTxyYyZlTwxQmWhOpr
+ 9jbEOCH5KiByudf/NQoXuV3+10zHI3TN10p0/MBKNaRzit7ERSktXOKw3d5BrgBx5b4eHEovE1u
+ LteIJR+OFtOFrjEGpnhfLzt7MADJyHirY60Fs3x8IJMtF5cGgtvOP7CLAhQZu21DyHvG1aWnvxJ
+ BW6KDkbd/jCLeD+ZqBjmg+LGhMZhlbm/u9U5UQiF6C/FfTaIR/GHLDgCM0S5+9EILDpNAxF7s6B
+ kUGn4EXtjDke7r692jdbDXpSoJSo1SkftnM6CNBvHMdt4n5mHf4yUgUD/AOB4NqcJc9Jrqr4OvI
+ 5ppYxK1M8Vbdocl6QBQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfX9FJXZHzXhXN2
+ 0w10H2U0c18o8aTZioNGYHiA9TEUQLAQ4/4fgaZ5nJbMMr+lSJNlR0PrmTGoPfmNDdOQXtEJjXj
+ zGOtxBXlgAnaD4+JP2gMW3UWB6u7h7k=
+X-Authority-Analysis: v=2.4 cv=ftZJ914f c=1 sm=1 tr=0 ts=6acdc143 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=jt_ap3qWCKZ60gYu8XkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-ORIG-GUID: OyiBLpxxmvEn0RmXzud6pifUmPufhY2E
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- adultscore=0 phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
+ adultscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501
+ impostorscore=0 suspectscore=0 spamscore=0 clxscore=1015 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130019
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130021
 
-Add an overlay for M.2 Key-E Wi-Fi and Bluetooth modules on Qualcomm
-Shikra IQS EVK.
 
-Describe the PCIe and UART connections through the M.2 connector, the
-3.3 V supply, the W_DISABLE signals and the PCIe reset signal. Disable
-the onboard Wi-Fi and Bluetooth nodes when the overlay is selected.
 
-The Wi-Fi PCIe path was tested on a Shikra IQS EVK with a QCC2072
-module. The overlay was applied, the link trained at Gen2 x1 and the
-endpoint enumerated. Bluetooth UART and HCI runtime validation is
-pending.
+On 9/7/2026 12:16 PM, Mukesh Savaliya wrote:
+> 
+> 
+> On 9/3/2026 9:44 PM, Jyothi Kumar Seerapu wrote:
+> [...]
+> 
+>>> +static int geni_i2c_gpi_bus_cmd(struct geni_i2c_dev *gi2c, enum 
+>>> i2c_op cmd)
+>>> +{
+>>> +    const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
+>>> +    struct dma_async_tx_descriptor *desc;
+>>> +    struct gpi_i2c_config peripheral = {};
+>>> +    struct dma_slave_config config = {};
+>>> +    unsigned long time_left;
+>>> +    unsigned long flags;
+>>> +    dma_cookie_t cookie;
+>>> +
+>>> +    config.peripheral_config = &peripheral;
+>>> +    config.peripheral_size = sizeof(peripheral);
+>>> +
+>>> +    peripheral.set_config  = 1;
+>>> +    peripheral.pack_enable = I2C_PACK_TX | I2C_PACK_RX;
+>>> +    peripheral.cycle_count = itr->t_cycle_cnt;
+>>> +    peripheral.high_count  = itr->t_high_cnt;
+>>> +    peripheral.low_count   = itr->t_low_cnt;
+>>> +    peripheral.clk_div     = itr->clk_div;
+>>> +    peripheral.op          = cmd;
+>>> +
+>>> +    if (dmaengine_slave_config(gi2c->tx_c, &config)) {
+> should capture the return value and print, as it returns specific error 
+> code.>> +        dev_err(gi2c->se.dev, "dma config error for bus cmd 
+> %u\n", cmd);
 
-Co-developed-by: Wei Deng <wei.deng@oss.qualcomm.com>
-Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
-Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
----
-Changes in v2:
-- Drop regulator-boot-on and startup-delay-us from the 3.3 V regulator.
+Yes we can capture it. I will update it in v2 patch.
 
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso   | 106 ++++++++++++++++++
- 2 files changed, 107 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
+>>> +        return -EIO;
+>>> +    }
+>>> +
+> 
+> [...]
+> 
+>>> @@ -1066,14 +1136,18 @@ static int geni_i2c_xfer(struct i2c_adapter 
+>>> *adap,
+>>>       else
+>>>           ret = geni_i2c_fifo_xfer(gi2c, msgs, num);
+>>> -    if (!gi2c->gpi_mode &&
+>>> -        (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN)) {
+>>> +    if (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN ||
+>>> +        (gi2c->gpi_mode && ret == -EIO)) {
+>>>           /*
+>>>            * Only attempt recovery if SDA is stuck low. -EPROTO and
+>>>            * -ETIMEDOUT indicate bus errors where the target may be
+>>>            * holding SDA low. ARB_LOST (-EAGAIN) on a single-controller
+>>>            * bus indicates a stuck target, not a real arbitration loss.
+>>> -         * GPI DMA mode extends this trigger separately.
+>>> +         * In GPI DMA mode the completion callback reports NACK,
+>>> +         * BUS_PROTO and ARB_LOST alike as -EIO, so the SE_GENI_IOS
+>>> +         * RX_DATA_IN check below is what distinguishes a genuinely
+>>> +         * stuck bus from a benign NACK: a NACK leaves SDA released
+>>> +         * (high) after the STOP, so recovery is skipped.
+> after the STOP, indicating i2c bus is in idle state, so.....>> 
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 1c86e7e98f55..799faa32e2d9 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -339,6 +339,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sdx75-idp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-m2-wifi-bt.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
-new file mode 100644
-index 000000000000..9496c6558eef
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
-@@ -0,0 +1,106 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&{/} {
-+	m2_keye_3p3: regulator-m2-keye-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "VREG_3P3_KEYE";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&qps_gpio_expander 6 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	wifi-bt-connector {
-+		compatible = "pcie-m2-e-connector";
-+
-+		vpcie3v3-supply = <&m2_keye_3p3>;
-+		w-disable1-gpios = <&tlmm 61 GPIO_ACTIVE_LOW>;
-+		w-disable2-gpios = <&tlmm 60 GPIO_ACTIVE_LOW>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_pcie_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&pcie_port0_ep>;
-+				};
-+			};
-+
-+			port@3 {
-+				reg = <3>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2_e_uart_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&uart8_ep>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&{/wcn3988-pmu} {
-+	status = "disabled";
-+};
-+
-+&i2c3 {
-+	qps_gpio_expander: gpio@3c {
-+		compatible = "nxp,pca9534";
-+		reg = <0x3c>;
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+	};
-+};
-+
-+&pcie {
-+	iommu-map = <0x0 &apps_smmu 0x0800 0x0 0x1>,
-+		    <0x100 &apps_smmu 0x0801 0x0 0x1>;
-+	vddpe-3v3-supply = <&m2_keye_3p3>;
-+};
-+
-+&pcie_port0 {
-+	compatible = "pciclass,0604";
-+	reset-gpios = <&tlmm 118 GPIO_ACTIVE_LOW>;
-+
-+	port {
-+		pcie_port0_ep: endpoint {
-+			remote-endpoint = <&m2_e_pcie_ep>;
-+		};
-+	};
-+};
-+
-+&tc9563 {
-+	reg = <0x1ff00 0x0 0x0 0x0 0x0>;
-+	status = "disabled";
-+};
-+
-+&uart8 {
-+	bluetooth {
-+		status = "disabled";
-+	};
-+
-+	port {
-+		uart8_ep: endpoint {
-+			remote-endpoint = <&m2_e_uart_ep>;
-+		};
-+	};
-+};
-+
-+&wifi {
-+	status = "disabled";
-+};
--- 
-2.43.0
+Sure. Will update the comment.
+
+>             */
+>>>           if (!(readl_relaxed(gi2c->se.base + SE_GENI_IOS) & 
+>>> RX_DATA_IN)) {
+>>>               int recovery_ret = i2c_recover_bus(adap);
+>> This does not appear to handle scenarios such as an I2C multi-message 
+>> transfer where the stretch bit is set during the first message, but an 
+>> error occurs while preparing the second message (for example, during 
+>> memory allocation or DMA descriptor preparation). In such cases, the 
+>> SCL line may remain asserted low and impact subsequent transfers.
+>>   > @@ -1292,10 +1366,8 @@ static int geni_i2c_probe(struct 
+>> platform_device *pdev)
+>>>       if (ret < 0)
+>>>           return ret;
+>>> -    if (!gi2c->gpi_mode) {
+>>> -        gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
+>>> -        gi2c->adap.bus_recovery_info = &gi2c->rinfo;
+>>> -    }
+>>> +    gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
+>>> +    gi2c->adap.bus_recovery_info = &gi2c->rinfo;
+>>>       ret = i2c_add_adapter(&gi2c->adap);
+>>>       if (ret)
+>>>
+>>
+> 
+
