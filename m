@@ -1,176 +1,167 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E00B23E63AA
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:03:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C891048032F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:10:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791875019; cv=none; b=Y97eTOzicKaO1/H8NO4N5wleGZb0PYVHIUpi44nk52U2tRq17Gj0MVwmMT3pbHTfqOUxcFoxTxM8595MwmZAXLA7nDQgVcW6PTivyKhKj1qRq4rQi4S020zDHw3EzD4g66AEKpABpAKJ3nJa5beNRLkJnZGvwNFcuY7UK9smQVw=
+	t=1791875406; cv=none; b=fzLjjjaV5/NiK9vGWWVbzRWUf0kwl3mCIY/cttdVd12/Z1gdbcDiAk61eL7184zvRhmv1UtVLbUtupAWGS0KVrlHosE8Y3RD8vJ0Nqo/tV6iU7EmNl3zdjmVG5TpsHLl+UrhBMomREi6ekTTneTeSZHfe3p8NYXST+SVZIeUYp8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791875019; c=relaxed/simple;
-	bh=bpVKy2BhDr0Xypr7ffunLET37+ynqUZSFqpwnsDkUiI=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=V6N2c3683v0R1ItLl7Rlf2g7Lue6IgHonY4OUlKxyqNOZEDBFv2JFN7zOicejXJRrFu+Hk2Xk7FsOUONwMrnnj3EH4oB3pyVlicst6iyvNUCwxlQdJrmLsgpISdV3u5T+mQ1Inzy0KPynn/KEKUwZG7VTlGffNVUYJ5MQTrdrJ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=aL738snE; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1791875406; c=relaxed/simple;
+	bh=nmI30fUqVCpCFxi02t5avDZqwUXNluqW5vIrqB2mefM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=KRVVw5UlZ9BAXH1KpxlotnUu9lK5HyJeU5GMtpgfPjeTGDlGuEWk3ffNIX9htdAnCYEHM8SvRuSqqtxTPXejnStzDFJwnrHIm6zAbn7Te/gDtrmdeAOMzFsjewtIYoarB9Nx3S7Jk8XwGaxPz54sc9avxJvJEeJ6jwyn5QtaYWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YalTV4DJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HAf/TM/2; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="aL738snE"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a16c1608faso33237915e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 00:03:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YalTV4DJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HAf/TM/2"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D2167M3908217
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:09:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=jTJ7ttvv6RXcjrHzxgguvw
+	Xv0PAtR9MrUXhp1lcfF9k=; b=YalTV4DJXKLnh8iH0sMkv0jEn03HirkUNp0ooX
+	jpUckRKxuwYvowpKeFQHhT69h0IPk47fm90fDghwUD4O03fMVNTExikcFOUBulLT
+	V+B4K2iJngc4IAypjmfSU6bq5iMFW91+eb44+Yb8WbFDmVc3YJ9tk5VbyQxCuJRO
+	Qz1+/u1oIqiZcZ4omsPS8CIFmEYk5xaojgby5SfYEZ/A6A6ixvN72e3uGkyYJSW9
+	HEutH/3RodjzSYCnTBtOavKwanpkaj0i6XiEtq09ywSzAWEbt0h7FyNteLDHyjtQ
+	mt5WBYLXGuyeJWpZIVcwe8hoRI27xj/lMaf1Y3vHST/3o2Dw==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h95xqt6jq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:09:57 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3580c07911eso7084540eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 00:09:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1791875016; x=1792479816; darn=vger.kernel.org;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gfEF2n+OMurtKnv7qxvMH9ExfmZTYZWpuDvpjIsu/+o=;
-        b=aL738snE2xmARTbvpsgE+9sM2qigUWJOQIS9SCYHWFaPSKoL7mBiPlAdKHM8a1pV8y
-         k5vskTYfBH/6I+4lFdlgE8RMcI8Sdw27xhpPAGzGfNTRERMW3MvCTgw2BSomh+fhQIwR
-         kUHXoQgtupczQGIEs7u8lOXb0XNFrf1/9QAWXVXvRhExs7IScF4XoT4dmrZGC/OzVs/u
-         yC6FLv8H82sdph6TD+P851kdbQRLxYYnLdCqrVjmm/JuoeKksQkc+J19dRL7JgAej3N7
-         +zszAaWpL0Jv3JxJALsqxRsQheDL+4ip4LUfIgVqQv3o1T5Wgn04CBXiBnc+vP+oVHR+
-         7TGw==
+        d=oss.qualcomm.com; s=google; t=1791875396; x=1792480196; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=jTJ7ttvv6RXcjrHzxgguvwXv0PAtR9MrUXhp1lcfF9k=;
+        b=HAf/TM/2CkHrJnjsvFcnmv05Y/LUXYLVlcaGOgeXV1gCBNeHZOisKrcU9JBh2ZHfm/
+         kmMDMuWpTewyJzWffZG7U0+eVfAj4AvLHSNPFoKHOYFybpdGZsqbXj5BsfLKafXF9h7g
+         JUIAi+KNDwVTESZ92PhvyhX5U50IA7lGfMMj0HbFD0UlKr6hlj2kWCzzBezEkAZTUi/E
+         +6rw6JzLkuUChjrM8DoT7xUx1XC+YeFyn20b9ajPxHBHEP5OFCn3LZt8hGIAZzZPiM8m
+         M410gqOYhKUoeraJUXP5HHJtTqhLHISElMlyuuImuzPwCpWLuapeW3UelqiYX6eWFZT1
+         T2TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791875016; x=1792479816;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=gfEF2n+OMurtKnv7qxvMH9ExfmZTYZWpuDvpjIsu/+o=;
-        b=P497G0O8on/U1ZxSue82EWJJJ/nQcHJzOFQ2497vsKueE7izdBLrQGR9uzj6DtLeCA
-         4YEfDhEMMk7b/TpjggpOFMStbKL11xeS6nvJeQj3vfQvgMg1wOA//EzvbMUsz2ZUHnEY
-         us71DpTjTHsFb/ZL7cMe099cx+kThV5PuBs5MGm+I/3Dbs+ivDJ3Czhy7kW4NWKragk0
-         m+RoprIDw+u5KfY/AEnzxSH4NcSBIja8swQ3oUwBi8+9i5EmVbANL9eubcEuNQb+XtvC
-         NzHJLHezbuY/ETNazq6N7wJxRDFoCN8AAzmHgdzeaK6GuAwLYqc8GwsPI3cPSDbZv+Er
-         S22w==
-X-Forwarded-Encrypted: i=1; AKwUvBzGGWrbPkrlvcBSBS3vJJReduhw30HLdDw8sOUEBvPzqrpeZu2RFA0SUWAX26KNM6FE7ZpZ5AWYFb78aoLi@vger.kernel.org
-X-Gm-Message-State: AFq9FYJIzm1Fkkf32Lht6YLlg/VRnsKZ6oii4NiPjXm8mUTGvyg+UlCs
-	zd1v1TdBnTkAwMT7KyZhqhTJerBEW3rxOEbOuj1REQKL8P4kAnlvcQw+bQTFaADCUZRWN4E45X0
-	DvB9TZg4=
-X-Gm-Gg: AYBFou3B2yMO2umZJH34XJJRguzpF2QeKOChLfbwnfRotS4wYMA4QZYOmNVrGAFSK/B
-	3jIi/LZfskIhfchdOWHCDUAbxmNQ5sUJ377ZILCKXOlwiRrh4gr62dfA/DeLeVdRcxa3Hmk49zW
-	s9u0CTwMKZVK6mEql0kNixuz8oZkIy3eGYYduToW1WiG4O/b3ceidBws6bNFZqtGYQpBYpjKZvH
-	fqLoBaw7eS2JxitUA9nEFz17tRFgF0+AFPCpKbWVOEavFZXl56+VHmYzP/wyc/bZi+VV72zKeWm
-	kIo71Rube9lfzi+F6/Sjo+P3xKDdXfNSp5EX2zu3CMnZ28P4oKYwKtZTMefmy4rizvl6i/p1bEf
-	8j0GJq5NB7TrvdECdOxCmFf3FEQQZoryZQt9rD6UjizO5mMoWJuzf5O9qzUCGb+fC3kHMAI6B7d
-	731ztD5mAQj4WmTBt+Kz3nVntFUdsNLZBPQp8E/1gcBCpfZSVZXBnG3ka2v0/0lJR4v3o11m7nG
-	ohnir4LrqA6o5fTrkM3Z5pHleql
-X-Received: by 2002:a05:600c:3146:b0:4a0:34a:588c with SMTP id 5b1f17b1804b1-4a18e4a7cb9mr228807105e9.14.1791875016083;
-        Tue, 13 Oct 2026 00:03:36 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a19c8244edsm174001365e9.2.2026.10.13.00.03.35
+        d=1e100.net; s=20260707; t=1791875396; x=1792480196;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=jTJ7ttvv6RXcjrHzxgguvwXv0PAtR9MrUXhp1lcfF9k=;
+        b=FkyBpieT/KshJnsrO1gY+34kEZVsw6pgOm+tJ4ilem0W5ncuRO/t0DqoZbQ4tj3HDN
+         vpUtOze0Nfs9DN9FFor4yvJLiilk1Z1t/kf7u8olaj8M9V7+sh8z16HyZ/wzBpOw4t41
+         W/ogaY7emzF9dbtwCrWlS770FuxtDNi2+AvRjcLfTh+jkhouKyjBVBNjXpBmFVTR4KnC
+         FQ3y5FNL/2YvV/WYvCjszLm946wpRGZ5WAL1iMxQ6GaBKtRngD+iIPgPlygohcwR8xDc
+         9OpSchUuTHrM8o44nC8OMJhJgmN8wjGzlB5rx0WoyaGFAcT91vgjMSLGISMWql+mXZiW
+         ohXA==
+X-Forwarded-Encrypted: i=1; AKwUvBwogZQrK73Bxo0d9y0DReQCV2bfpC6gpwfjnUk6j2iUEdcuN1hOgwWaIjktODsPUML2sgUFafxQwhl0ceY9@vger.kernel.org
+X-Gm-Message-State: AFq9FYIhN+s5RDA2mVcjNOVt88yl35V+xvZs41UN+TEdhzc1/+0mBBvI
+	0vkQjisJ6h0csyngSiSkjXH2sCmyrG7P6sa3ic09fXEBBhg0QCwWbZy/SNvZcwKOBfuKze3OqTD
+	Cnc+6F8PR4LBOSaJWu4Fq9BFVClLSlmjiE2rcdaVYaQPN3ReziJZolJ0+n+SSqhoJ6fM6
+X-Gm-Gg: AYBFou0qgvOb63JnbPH3WrXJk4Fm01YI12zNqS5+ut34QRtoAjCgBHFMjxxHmHyM55k
+	lH9n0OOvNMIxTz4mUcben0qQOVo8/C9K4a2CakR+34MHjdlbDXX/XuyCSToDp+Un0QYvWTVnuKJ
+	BOGLnwXhvZmAeuzr/MrwAOIY0wx/w65dHWyMZUNqJHxqHx72Y90+Ga+yZr9P/3rzdXUjs9Hea0q
+	LES9TcC2bSEjfcySiRToKGK6BnwYa7uPAi+7/CU6SZuLZfZMlqPLoxzKuyTXldfxuFk1dtraWmE
+	Kjc5w2IntPOWB8kUvGr81TA00Wl8Pyl1Ib9DrqA5iqVxU1axMtMFbUj/6pid2ablf8Nj7eB8rM1
+	2CxNJObUsjsDAEgzkOfBCqa8bWe+3gjsUZaVPncWctg5W5ZfrNvP8RXhGCSVGhF/OJxBXbNicsR
+	RW8r46HtB6Bi8ZDGtHuC+A/UTyQMssTg==
+X-Received: by 2002:a05:7301:77cc:b0:357:e9:dcea with SMTP id 5a478bee46e88-35700e9df2fmr13673132eec.15.1791875396401;
+        Tue, 13 Oct 2026 00:09:56 -0700 (PDT)
+X-Received: by 2002:a05:7301:77cc:b0:357:e9:dcea with SMTP id 5a478bee46e88-35700e9df2fmr13673046eec.15.1791875394852;
+        Tue, 13 Oct 2026 00:09:54 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3537cab27d5sm46081248eec.17.2026.10.13.00.09.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 00:03:35 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Alex Elder <elder@riscstar.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
- linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, Brian Masney <masneyb@kernel.org>, Daniel
- Thompson <daniel@riscstar.com>
-Subject: Re: [PATCH v3 2/4] clk: toshiba: introduce a TC9564 SoC clock driver
-In-Reply-To: <10007ecc-3604-4c58-9da7-f056dd4355a1@riscstar.com>
-References: <20261012152408.3729237-1-elder@riscstar.com>
- <20261012152408.3729237-3-elder@riscstar.com>
- <179183220207.266355.11690534397452731561.b4-review@b4>
- <10007ecc-3604-4c58-9da7-f056dd4355a1@riscstar.com>
-Date: Tue, 13 Oct 2026 09:03:34 +0200
-Message-ID: <1jtsmq9j5l.fsf@starbuckisacylon.baylibre.com>
+        Tue, 13 Oct 2026 00:09:54 -0700 (PDT)
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v2 0/3] Enable icc-clk support for Qualcomm ipq5210
+Date: Tue, 13 Oct 2026 12:39:42 +0530
+Message-Id: <20261013-icc-v2-0-196b219e25c1@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADbZzWoC/y2OSw6DIBCGr2JYFwNUqHXVezQuBMc6SSsKaGyMd
+ y9iN5N8k/+1EQ8OwZMq24iDBT3aIYK4ZMT0zfACim1kIphQnPErRWNoIfm906VSqmxJVI4OOlx
+ TyrOO3KMP1n1T6MKPb/IzyYvkx3GSgjO6cMqoluzG2k5DodjDep9Pc/M29vPJ4yH1fuY7mOY4L
+ pwlRDce6CHCUGUDrIH+B4ro2H9O7Tor1gAAAA==
+X-Change-ID: 20261013-icc-4519fb86668d
+To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-clk@vger.kernel.org,
+        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyOCBTYWx0ZWRfXyEVi8abK/YnR
+ 7A7q7UxZNgCWU2xoKdeGK7JEXftr1SiRj327h/TFoteRy/iHmuct/9WB47aEX2CiH3bzSKcjOGj
+ iOD+mgngjWSbeLnGqztIXBvrImk4h0Tzco3DaXwdsG+V1rIE8nJ6n8lfRpdPE2TA3D8pHIpYCVz
+ iUDL7oEolL8thpGWNfhInx7IGCLRYhjURoP6q0xwDr6Bla21mGaI4S6oyzJTD1DeDf4Bnt+xcMp
+ xnlVmGpw1j49q34lSWcImexdpcoTcsPgPEqMz8SqnZVTIaXo/Bs3EqqQPO866/yKSUKriPg5H77
+ rsD6jEeu15+VKEvIVwQxYcWMuLJfWpXNGT8/3MRQ4Y8B1EmFKmFUExjbhSEgYzQxNIDQ1v5ua86
+ wXbuciBlW+O54wM/jk2GRhLiIFTC6Re7eXDh3Mk0yyqQTSwGtvQd4AvX79LuXVZv3Rzj/APbv4I
+ Chq4uAxoGOS4Z4Muh3A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyOCBTYWx0ZWRfX+eAkulgIAv5w
+ Re0JE8AwIDNJQvgslq/Y5nVukiUzpxvYuzwtuLeFYf6WF7KGa/6wbE7BVT8qLMcrMRxJ4z4NftQ
+ k7oxrGLONbK1PG34Q1gAb6R7TZDcoYk=
+X-Proofpoint-ORIG-GUID: sxQFxiFmoZ3V65ZaGlK3BUVpQ54xJVgL
+X-Authority-Analysis: v=2.4 cv=EP+TQFZC c=1 sm=1 tr=0 ts=6acdd945 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=wl81dVeC2YmWyYG1D1AA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-GUID: sxQFxiFmoZ3V65ZaGlK3BUVpQ54xJVgL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015 spamscore=0
+ malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130028
 
-On lun. 12 oct. 2026 at 14:59, Alex Elder <elder@riscstar.com> wrote:
+Add relevant master/slave ids and update the gcc-ipq5210 driver to enable
+icc-clk support.
 
->>> +	TC9564_CLOCK_INIT0(MAC0_TX, 7),
->>> +	TC9564_CLOCK_INIT0(MAC0_RX, 14),
->>> +	TC9564_CLOCK_INIT0(MAC0_125M, 29),
->>> +	TC9564_CLOCK_INIT0(MAC0_312_5M, 30),
->> 
->> Are those really just providing the oscillator parent ?
->> That is what they will appear to do without a proper recalc_rate()
->
-> They are fixed clocks that can be gated, but their
-> rate cannot be changed.
+Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+---
+Changes in v2:
+- No code changes
+- Rebased to top of tree
+- Pick Reviewed-by & Acked-by
+- Link to v1: https://lore.kernel.org/r/20260514-icc-ipq5210-v1-0-b5070dfbe460@oss.qualcomm.com
 
-It is not a problem if the rate cannot be changed but still
-a consumer could call clk_get_rate() and change its behavior
-based on the result, so it is better if it does reflect the
-reality to some extent.
+---
+Varadarajan Narayanan (3):
+      dt-bindings: interconnect: Add Qualcomm ipq5210 support
+      clk: qcom: ipq5210: Use icc-clk for enabling NoC related clocks
+      arm64: dts: qcom: ipq5210: Enable interconnect capability to clock controller
 
-Just add fixed_factor clock elements on the path of clocks
-where do know the output does not match the input osc
+ arch/arm64/boot/dts/qcom/ipq5210.dtsi           |  1 +
+ drivers/clk/qcom/gcc-ipq5210.c                  | 16 ++++++++++++++++
+ include/dt-bindings/interconnect/qcom,ipq5210.h | 16 ++++++++++++++++
+ 3 files changed, 33 insertions(+)
+---
+base-commit: 5ed59b3a5cb64e0ba357275df4862258e3872c8a
+change-id: 20261013-icc-4519fb86668d
 
->
-> Looking at __clk_core_init(), should I define a
-> recalc_rate() callback that just returns the
-> equivalent of get_rate()?
->
->> Their names suggest that maybe, it is not the osc coming out
->> of them ...
->
-> We have requested a clock tree that explains exactly
-> how these clock rates are derived from the 25 MHz
-> oscillator.  They're all fixed rates, and although
-> we could easily speculate how they're derived, we
-> don't have the documentation.
-
-If you know the input and output, you have enough to figure
-out a fixed factor. If later on someone gets more information
-than you, they'll just modify the clock tree.
-
-If you no idea what the ouput rate is, at least clearly say
-so in the comment so a future user or contributor can easily
-understand the situation.
-
->>> +	TC9564_CLOCK_INIT0(MAC0_ALL, 31),
-
-[...]
-
->>> +
->>> +	clk = devm_clk_get(dev, NULL);
->>> +	if (IS_ERR(clk))
->>> +		return dev_err_probe(dev, PTR_ERR(clk),
->>> +				     "failed to get input clock\n");
->> 
->> Nothing is using this. This is not how you set the parent. See above
->
-> It will once I have the clocks get properly parented.
-
-No it won't. You don't need a consumer clock reference. just drop it.
-
->
->>> +
->>> +	clocks = tc9564_clk_init(dev);
->>> +	if (IS_ERR(clocks))
->>> +		return dev_err_probe(dev, PTR_ERR(clocks),
->>> +				     "failed to initialize clocks\n");
->>> +
->>> +	/* Force all clocks to be initially disabled */
->>> +	tc9564_clock_disable_all(clocks);
->> 
->> Why is this needed ? In general a provider should never act the provided
->> clock on its own. Let the framework deal with the used clocks
->
-> The intent was to start with everything disabled--a known
-> state.  Sashiko pointed out this races with a user that
-> could get the clock right away, so I intend to do this
-> by initially disabling all the clocks before they're
-> all registered.
-
-We do not do that because (in general) there maybe devices already using
-a clock provided by your device and setup at a prior stage (like the
-bootloader). Doing so would break them.
-
-Leave this alone, the framework will disable the unused clock for you
-once the init is done and most devices have probed.
-
+Best regards,
 -- 
-Jerome
+Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+
