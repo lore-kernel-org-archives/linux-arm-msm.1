@@ -1,310 +1,290 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F67F3D5657;
-	Tue, 13 Oct 2026 11:41:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ABB64E80B5
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:49:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791891707; cv=none; b=P4ztuhMjJylguftLIelepgyWfaY49/87bR7y8B11f6zhPZK4OcogiiJIZXI4W76A/Zb/LJW0/qkkLZMji6xQX1EDpTI1C8NgOJeckvHY9gNz2BhGRFuWRvIBbVp8+8sAMIE+qIIEprafX4AUvKTqkADa3Pj2sI5jtZx7X91LbBQ=
+	t=1791892176; cv=none; b=pPBJrOUIheHn1YqUcecslfb38zmqX8gqFCD7Cx06oucM+d+El0V0F38+rFzxaHi47dVmCblVP9uaELyCw0j9zfNR5i9xrbQR9yyX6aMS4K0L9KzLatJxnkPeS3MblrJYD/3lO93zEYAUdNd0KaM82fKs2kXdHRYqEH4oGajgtZ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791891707; c=relaxed/simple;
-	bh=YAJaHA3FL843BSgj3aVZh2SzSmUdAo8/w5ok0jPj4ro=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=Or5E/5zKhlMUEW9rp8T0OlZ1KisoaimlGXsD+DfasfFfpTPPVvJUTIs+DP8u/OXDbqPD/mTN+nz8v0KmahVXDn51VaYqSRq667gtdCqguZI4XvinJtX1g7fanisfFN8t+gztxPYMYy8ljFcKztkQfRIr6e1v4qfUr/x1qY95n3A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=npu+QCRd; arc=none smtp.client-ip=192.198.163.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1791892176; c=relaxed/simple;
+	bh=uPem++P5ND2UdG5Rfp/39oIo1piUSvZOSUqNOqUrr6I=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=oUqHxleduz0Blhm7tOmnfHdLcE1TAFhvfNAQsaMnWxqCDuEw2L45eywisw7GGGqQrBPFn9f+XpmrmoAJv9cA6onj0BetxU5WtUjJsb6lJpp9lsWTkFM2YKES5ShaCeFc4RT1xAaYyfVrksuYF6q67V4IDGSt25KTzsBtaZ04e1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P5e642az; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=b2LCLKsO; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="npu+QCRd"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791891706; x=1823427706;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version:content-id;
-  bh=YAJaHA3FL843BSgj3aVZh2SzSmUdAo8/w5ok0jPj4ro=;
-  b=npu+QCRdxHDeQ+hopmntH8gv6i/ESNlGJk1TX/xF3RNfXOAl+Qx6VW/h
-   ubozrqrGhDTvFDvekO4D98ycDLQ2C/iivUEewR1ALAGOKmuXV/wgKrrGN
-   q4GGAQ0cCtAdY3Xh8vKpwa9Jrvfv6dzYzmW0UPegyiPOpTQwJn+p3ixBF
-   OLmqjkZzKg2ILDlvCWEVfauYx/Jh94j7DXMdO22yYX0K/Cd6pR+L9EjVx
-   3KVnZhFqL2dI0URDrp5Br1i3kRX7biWO87qs97NUAiJuVG3d+ELPZMXlT
-   LqpF60TCsWHuatdhsx2k5f+r50vDiKblsHbwxssCungEOt2Wh+mN+4/d6
-   w==;
-X-CSE-ConnectionGUID: oJRbqSpuR2meDHx38zrtmA==
-X-CSE-MsgGUID: o02KUoaQTKGHApKa9Jwvqg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="515081"
-X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
-   d="scan'208";a="515081"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 04:41:45 -0700
-X-CSE-ConnectionGUID: b8gYIYLoRdyjmsQDQ/nStQ==
-X-CSE-MsgGUID: JaGIfAB3QKqpSXdMgk+ecQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
-   d="scan'208";a="1501815"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.106])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 04:41:39 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Tue, 13 Oct 2026 14:41:32 +0300 (EEST)
-To: Bjorn Helgaas <helgaas@kernel.org>
-cc: Manivannan Sadhasivam <mani@kernel.org>, 
-    Bjorn Helgaas <bhelgaas@google.com>, 
-    Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-    =?ISO-8859-2?Q?Krzysztof_Wilczy=F1ski?= <kwilczynski@kernel.org>, 
-    Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>, 
-    Jonathan Derrick <jonathan.derrick@linux.dev>, 
-    Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org, 
-    LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org, 
-    linux-wireless@vger.kernel.org, ath12k@lists.infradead.org, 
-    ath11k@lists.infradead.org, ath10k@lists.infradead.org, 
-    Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
-    Qiang Yu <qiang.yu@oss.qualcomm.com>, 
-    Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/8] PCI/ASPM: Add pci_force_enable_link_state() API
-In-Reply-To: <20261012225832.GA1415301@bhelgaas>
-Message-ID: <f1390db8-2369-9ab7-49a9-b7f09ef7b1ea@linux.intel.com>
-References: <20261012225832.GA1415301@bhelgaas>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P5e642az";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="b2LCLKsO"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D9471i483105
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:49:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	BzlXRUn6u2bY0KUvJNLoRH9T0Jg5xwYBbgQJM3XPKPg=; b=P5e642azLWVj3iu+
+	iN+i8gF8R1uBaMGN8uFWFOa4m46cKuRBLzV/ZmzD6VQNGadMLEY2VlGtYVPeTrbT
+	Zd9epKhfcnHDA+xF5dAscAkqNO34USt3cAaeNt87PYFpXXDPmlzQULZGpxLCBCn7
+	J13LPjtwi5eTQxXise18XcxRjjtz+weAMN4myDN+io4++8khkk9Mp8cUoFph3kMR
+	7CcOjuhLyuOPrDa0lsRzElMlcbXP8Dx3p7YXhOK8/wVd8ztZ9DarKtEmEnWFpmMo
+	e65c0GcURel6JZU3dcV1EB/CUj0gZa7GOaZFN55ZVkZlX1/OlNcpBZc0NWGlF04T
+	T2RrrA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9hpg8p5b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:49:33 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-88c768886a6so1876082b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:49:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791892173; x=1792496973; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=BzlXRUn6u2bY0KUvJNLoRH9T0Jg5xwYBbgQJM3XPKPg=;
+        b=b2LCLKsOIaQmJU/WSHI9bK2AJWoYmQOwaS8FSNXBDguTMyLnSBpWbnFGwm/gWbR0dY
+         LXZELn8AkjlpDW2YasZ3byMuoG1Ssd47GblbypbOVpTJOFJ2q4lvAqbpWvTfjjHrx42f
+         H3jRbwMFvdc9zbp9zMFlyWVBKdN8Bt2TuMOyDf/WYe+e4YlsMgTUoY8pqm/Hbt10r7Qm
+         pcqVwRztGDVMaSL2rhkAO72yIRD3YNM4fQj0BTuPgRM7fueAFZcfNZqDoC2o1JVia2Oy
+         wEEDBiYK+BQYw373dloEM0yIeO9Vutr41r/gFMrlgsFZ9rMkLLTGaqjEBmB8dtRTr6/V
+         /D3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791892173; x=1792496973;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BzlXRUn6u2bY0KUvJNLoRH9T0Jg5xwYBbgQJM3XPKPg=;
+        b=clMkEOmRD4vNbI6cliAyZkWlvhYG0+fS6DTe8dF+LhdQ7Hfd5tRATHUqZYm+7DJCvO
+         yMItJIsNlifPsIn+6vioCbq06ktCG/QvSqg8/AbgQVsEt8F7XDtkvQn5LKfxB4mbhjke
+         xtBWk1vLHvdZvNuKV64eUMEN1tcDztPY7GErdbLB4aWc3iKvk68OcBxVcZc/xlKgoIlM
+         9RlglMl4eBzmtpdUsnG+NlLPi6181CsOtD1FHMgcpdXLSaoy5fZt9pjlwYNMfmaFzaLf
+         dkmX70niQ51g+bXrMNVZ4XFILPjGu+qmqybUkijuyLi96BsQK8tvaBCAUPKmVjupnue+
+         f0Lg==
+X-Forwarded-Encrypted: i=1; AKwUvBw7h7+ImlivVANzfQRccYd+ztVenR39+y0adWL8iIdcCzpwZNqYlkLoDcJZDdeRur1NNHASS457E0aG9tQj@vger.kernel.org
+X-Gm-Message-State: AFq9FYI7F7zVP4sZ8AgnAGUUYlRnnJHCQiyeA61Bw/mnz/T12/NGu6kf
+	qes/7+OygKOP3R2s7pEa2GSGYpAOLxipFPRBFUCU7720GeSoUsP+DBB8W0AnVmjiYiA92IOyBR6
+	S90/pARtvPeSdEF0BRo/hZLqUcPGqqHQdnCTj3jqc6FZIZKAgwnif/deEiZC1/F1nZWBE
+X-Gm-Gg: AYBFou2iWrV8bXysSExWHasnEAL0P/mnNjkykcNeasx6Kojc/pckL/GSbAa1TTW6fkC
+	pzE8gywP3psODFI+t0e6ZmDB3ZeuNmEGuuxiVIcLM7I5GkA9NlLm/VqryEGxHzez4ClECLvg5YB
+	Ujvjv0ajAoHlHWH7p4+VavWaHSiU77fEQ+aBi7VcpfxeEMPhKYAOmvLJkZblCaR1FMtlAEYaqT1
+	L154NT4VEJFV5UO9KLLe5UawFu4UZ4ctYbJdZIXre57CaX5kH4CDoLbjHXSg4mY/xn44c/Ebou+
+	LEoszKecHyrciDjKMsBIP+/RUHxJ+wIIF6AV8aUKctsvO3pv3sQQmmuP2DkF3ffQY/kvBa3rEjB
+	VLVzmFVgZsD1pm7/GeAuN5v/wA9ye
+X-Received: by 2002:a05:6a00:7615:b0:897:dda6:ad35 with SMTP id d2e1a72fcca58-897dda6b684mr8132089b3a.41.1791892172929;
+        Tue, 13 Oct 2026 04:49:32 -0700 (PDT)
+X-Received: by 2002:a05:6a00:7615:b0:897:dda6:ad35 with SMTP id d2e1a72fcca58-897dda6b684mr8132066b3a.41.1791892172464;
+        Tue, 13 Oct 2026 04:49:32 -0700 (PDT)
+Received: from [10.217.216.70] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-896c3106de6sm4969602b3a.14.2026.10.13.04.49.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 04:49:32 -0700 (PDT)
+Message-ID: <7f6839fb-59b0-4f6d-a3f8-7579f6d40857@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 17:19:15 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323328-2110680251-1791890800=:1237"
-Content-ID: <eb4da7c3-6b95-7dae-87b6-bb3fda24da91@linux.intel.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] dt-bindings: ptp: Document the TSCSS on Qualcomm
+ Lemans and Monaco SoCs
+To: Krzysztof Kozlowski <krzk@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S. Miller"
+ <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
+ <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
+ <02792987-7ad8-4a6b-81ad-559c63174bb0@kernel.org>
+ <640acacb-1704-4ee6-aa34-d6be3b30b44b@oss.qualcomm.com>
+ <f5aa313d-0e23-41fa-b59b-9388839b2525@kernel.org>
+Content-Language: en-US
+From: Imran Shaik <imran.shaik@oss.qualcomm.com>
+In-Reply-To: <f5aa313d-0e23-41fa-b59b-9388839b2525@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: KN6-r2zawyPljPyI3RnIDxCCtB5eqHj9
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0NiBTYWx0ZWRfXwfXtpsdfIO4b
+ 5XQK8cqdLOkPSIBdazs+ZpI/XbR6Pr26PjXFn7ZkHtjKZJsONJ0whVhzbVWzGfa57k7DwIlKYjF
+ rfJ6/yCapBErymwsLSs4ifg+WSv/VZk=
+X-Proofpoint-ORIG-GUID: KN6-r2zawyPljPyI3RnIDxCCtB5eqHj9
+X-Authority-Analysis: v=2.4 cv=Z4Z5j3RA c=1 sm=1 tr=0 ts=6ace1ace cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=L7LEkksTssx7nc12Xf0A:9 a=QEXdDO2ut3YA:10 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0NiBTYWx0ZWRfXwpTlPy28kcNL
+ wcseV1lNeKaN8Sy9K/Ry5WeLkuVaRIQegm2D10T1Lr14J6SR68+mDVN/YM3ScBD1H8vbQbhNf9D
+ cni5Yj4/Eoa8LPKZoSW9mGUFNYExPrqVNmRv1H73iQGUp/6ugk61pKLsJqYO9LwvG4DD7fVkllr
+ Uhf6C4gWTlhjq9eoT63DEMnsYRLfO2RnHIwD0bt9a671rIgbkyeiXlnbb4HBcSW8q/ohbvLB3nF
+ 78UjJ2CvTciWk8PMO+WlLDIZ85S3Ac9APYj1tvoKF5FLECr1t5aKCozgLO5qBROpDpoQq49PEvo
+ BC2ZTGXX/a3MEz9+jJfLiNsBRc8lUg42gGVktyhyiKz7XWhDqCRZ8Cv7kab/mvJRxUH9KUh1786
+ ehezQzQ2ABhZGqVjeRIYxUkl1CCabfGxIdcBsRMwKWZoJn32bJO0EFZU0o9AnXxz5CsM/aV3cTo
+ n/EdUPL5LBAAHl+V+bA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
+ malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610130046
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323328-2110680251-1791890800=:1237
-Content-Type: text/plain; CHARSET=ISO-8859-15
-Content-Transfer-Encoding: QUOTED-PRINTABLE
-Content-ID: <6e83485e-223f-0f0c-17ad-c73df48cefdf@linux.intel.com>
 
-On Mon, 12 Oct 2026, Bjorn Helgaas wrote:
+On 01-09-2026 12:10 pm, Krzysztof Kozlowski wrote:
+> On 01/09/2026 08:31, Imran Shaik wrote:
+>>>
+>>>> +  clocks:
+>>>> +    minItems: 2
+>>>> +    items:
+>>>> +      - description: TSC AHB configuration clock.
+>>>> +      - description: TSC global counter clock.
+>>>> +      - description: TSC ETU clock.
+>>>> +
+>>>> +  clock-names:
+>>>> +    minItems: 2
+>>>
+>>> Why is this flexible?
+>>>
+>>
+>> Actually, the TSC block can standalone work without the ETU support as
+>> well. This ETU clock is require only when we add the ETU slice sub
+>> nodes. Hence, keeping the minItems to 2, excluding the ETU clock.
+> 
+> Hardware either has them or not. Whether they are necessary to
+> prepared/enabled is independent thing and job for the driver.
+> 
 
-> On Wed, Jul 08, 2026 at 04:30:16PM +0200, Manivannan Sadhasivam wrote:
-> > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> >=20
-> > pci_enable_link_state() and pci_enable_link_state_locked() APIs only en=
-able
-> > the ASPM states that were not previously disabled via
-> > pci_disable_link_state*() API or blacklisted during init (e.g. the pre-=
-1.1
-> > device blacklist, which is only meant to be overridden with
-> > 'pcie_aspm=3Dforce'). This is an intentional behavior as these APIs mus=
-t not
-> > silently re-enable states that were deliberately disabled, since doing =
-so
-> > could enable ASPM on a link where it is known to be unsafe.
->=20
-> I think this is saying that many uses of pci_disable_link_state() are
-> to avoid hardware errata, i.e., these are basically quirks, and we
-> should *never* enable those ASPM states.
->=20
-> > However, some drivers (e.g. the atheros WLAN drivers) save the currentl=
-y
-> > enabled ASPM states, disable all ASPM states before firmware download, =
-and
-> > then try to restore exactly the states that were enabled before. Restor=
-ing
-> > those states requires re-enabling states that were just disabled via
-> > pci_disable_link_state() API. But, this cannot be achieved using the
-> > existing APIs.
->=20
-> This sounds like it's also for hardware errata: if ASPM works
-> correctly, there's no need to disable it during firmware download.  I
-> think this is *only* the atheros drivers, isn't it?  I didn't see any
-> others.
+Sure, will drop that flexible logic.
 
-Hi,
+> 
+>>
+>>>> +    items:
+>>>> +      - const: ahb
+>>>> +      - const: cntr
+>>>> +      - const: etu
+>>>> +
+>>>> +  interrupts:
+>>>> +    description: Summary interrupt raised based on external event for any of the ETU slices.
+>>>
+>>> Please follow Linux coding style.
+>>>
+>>
+>> Sure, will update.
+>>
+>>>> +    maxItems: 1
+>>>> +
+>>>> +  interrupt-names:
+>>>> +    items:
+>>>> +      - const: etu_summary
+>>>> +
+>>>> +  assigned-clocks: true
+>>>> +  assigned-clock-rates: true
+>>>
+>>> Drop. From where did you take it?
+>>>
+>>
+>> Actually, we need these properties to be present in the DTS to take care
+>> of the clock rate requirements.
+>>
+>> Please suggest on how to handle such requirements.
+> 
+> Why does this binding has to be different than ALL other bindings in the
+> kernel? I am not talking about DTS now.
+> 
 
-There are more that should use disable/enable API. In addition ath*, I had=
-=20
-also these in my unfinished series:
+Sure, will check and drop.
 
-  brcmfmac
-  ib-hfi1
-  rtlwifi
-  rtsx
-  r8169
+>>
+>>>> +
+>>>> +  "#address-cells":
+>>>> +    const: 2
+>>>> +
+>>>> +  "#size-cells":
+>>>> +    const: 2
+>>>> +
+>>>> +  ranges: true
+>>>> +
+>>>> +patternProperties:
+>>>> +  "^etu-slice@[0-9a-f]+$":
+>>>> +    type: object
+>>>> +    description: ETU slice configuration
+>>>> +    properties:
+>>>> +      reg:
+>>>> +        maxItems: 1
+>>>> +
+>>>> +      pinctrl-0: true
+>>>> +
+>>>> +      pinctrl-names:
+>>>> +        items:
+>>>> +          - const: default
+>>>
+>>> Heh? Which code do you copy?
+>>>
+>>
+>> Each ETU slice has its own external event pin config, so kept pinctrl-0
+>> and pinctrl-names on the slice subnode. Please suggest if you prefer
+>> otherwise.
+> 
+> No, from where did you get this code? Why are you sending bindings which
+> are different then all other bindings?
+> 
 
-> > Hence, add pci_force_enable_link_state() API for such callers. Unlike
-> > pci_enable_link_state(), it re-enables the requested states even if the=
-y
-> > were previously disabled via pci_disable_link_state() or disabled durin=
-g
-> > init. The caller is therefore responsible for only enabling states the
-> > device actually supports, typically the ones previously reported by
-> > pcie_aspm_enabled().
->=20
-> The problem is that pci_enable_link_state() cannot enable things that
-> were disabled by pci_disable_link_state().  They're not symmetric,
-> which violates the caller's expectation.
+I was referring to the example in [1] when adding the pinctrl properties
+under the etu-slice sub node.
 
-Yes.
+[1] - 
+Documentation/devicetree/bindings/media/samsung,exynos4212-fimc-is.yaml
 
-This patch seems to come with my Suggested-by but what I suggested (and=20
-had a patch for) was to make disable/enable proper symmetric pairs because=
-=20
-it is very trappy otherwise. If something else is needed in addition, that=
-=20
-should be named differently like Bjorn also seems to suggest (however see=
-=20
-my alternative suggestion below).
+On checking further, I found that our etu-slice sub node deviates from
+that example, since we don't have a compatible string for the sub node.
 
-I renamed the current pci_enable_link_state() to=20
-pci_set_default_link_state() in my own attempt to get room for adding the=
-=20
-symmetric pair.
+Please let me know if we should move the pinctrl properties under the
+tscss node with per-slice names, or instead keep them under the
+etu-slice sub node and add a compatible there.
 
-> Instead of adding pci_force_enable_link_state(), I think we should add
-> a new interface for the *quirk* behavior that permanently disables
-> states.  Then pci_enable_link_state() and pci_disable_link_state()
-> could be made symmetric.
+> 
+>>
+>>>> +
+>>>> +      qcom,etu-event-sel:
+>>>> +        description: Event selection value for this slice.
+>>>> +        $ref: /schemas/types.yaml#/definitions/uint32
+>>>> +
+>>>> +      qcom,etu-slice:
+>>>> +        description: ETU slice identifier.
+>>>
+>>> You do not get identifiers. Please read writing bindings.
+>>>
+>>
+>> In general, any ETU slice can function with any ETU event sel, and this
+>> might not be 1-1 always. Also, these ETU slices can be configured by the
+>> vendors based on the requirements of the GPIOs on the board. Hence, this
+>> etu-slice identifier will provide the flexibility to configure
+>> accordingly.
+> 
+> 'reg' defines which ETU slice is this, no?
+> 
 
-My suggestion is to make the disables/enables counted per state which=20
-would allow parallel sources of disables to function without clashing.
+Yes, will drop qcom,etu-slice property.
 
-Disable quirks could simply not have the pairing enable, no special=20
-interface needed.
+> 
+> Best regards,
+> Krzysztof
 
-And the lane margining proposal would also just fit in with that approach=
-=20
-as well.
-
---
- i.
-
-> > This API is implemented by adding a 'force' parameter to the shared
-> > __pci_enable_link_state() helper. When 'force' is true, the requested
-> > states are cleared from 'link->aspm_disable' before enabling.
-> >=20
-> > Suggested-by: Ilpo J=E4rvinen <ilpo.jarvinen@linux.intel.com>
-> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcom=
-m.com>
-> > ---
-> >  drivers/pci/pcie/aspm.c | 37 ++++++++++++++++++++++++++++++++++---
-> >  include/linux/pci.h     |  3 +++
-> >  2 files changed, 37 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/drivers/pci/pcie/aspm.c b/drivers/pci/pcie/aspm.c
-> > index 1c15a14718e8..c04fb71de91c 100644
-> > --- a/drivers/pci/pcie/aspm.c
-> > +++ b/drivers/pci/pcie/aspm.c
-> > @@ -1506,7 +1506,8 @@ int pci_disable_link_state(struct pci_dev *pdev, =
-int state)
-> >  }
-> >  EXPORT_SYMBOL(pci_disable_link_state);
-> > =20
-> > -static int __pci_enable_link_state(struct pci_dev *pdev, int state, bo=
-ol locked)
-> > +static int __pci_enable_link_state(struct pci_dev *pdev, int state, bo=
-ol locked,
-> > +=09=09=09=09   bool force)
-> >  {
-> >  =09struct pcie_link_state *link =3D pcie_aspm_get_link(pdev);
-> > =20
-> > @@ -1527,6 +1528,10 @@ static int __pci_enable_link_state(struct pci_de=
-v *pdev, int state, bool locked)
-> >  =09=09down_read(&pci_bus_sem);
-> >  =09mutex_lock(&aspm_lock);
-> >  =09link->aspm_default =3D pci_calc_aspm_enable_mask(state);
-> > +
-> > +=09/* Force enable states that were previously disabled */
-> > +=09if (force)
-> > +=09=09link->aspm_disable &=3D ~link->aspm_default;
-> >  =09pcie_config_aspm_link(link, policy_to_aspm_state(link));
-> > =20
-> >  =09link->clkpm_default =3D (state & PCIE_LINK_STATE_CLKPM) ? 1 : 0;
-> > @@ -1553,7 +1558,7 @@ static int __pci_enable_link_state(struct pci_dev=
- *pdev, int state, bool locked)
-> >   */
-> >  int pci_enable_link_state(struct pci_dev *pdev, int state)
-> >  {
-> > -=09return __pci_enable_link_state(pdev, state, false);
-> > +=09return __pci_enable_link_state(pdev, state, false, false);
-> >  }
-> >  EXPORT_SYMBOL(pci_enable_link_state);
-> > =20
-> > @@ -1576,10 +1581,36 @@ int pci_enable_link_state_locked(struct pci_dev=
- *pdev, int state)
-> >  {
-> >  =09lockdep_assert_held_read(&pci_bus_sem);
-> > =20
-> > -=09return __pci_enable_link_state(pdev, state, true);
-> > +=09return __pci_enable_link_state(pdev, state, true, false);
-> >  }
-> >  EXPORT_SYMBOL(pci_enable_link_state_locked);
-> > =20
-> > +/**
-> > + * pci_force_enable_link_state - Force enable device link state
-> > + * @pdev: PCI device
-> > + * @state: Mask of ASPM link states to enable
-> > + *
-> > + * Enable device link state, so the link will enter the specified stat=
-es.
-> > + * Unlike pci_enable_link_state(), this also re-enables states previou=
-sly
-> > + * disabled by pci_disable_link_state() and overrides the ASPM states =
-disabled
-> > + * during init (e.g., the pre-1.1 device blacklist). The caller is the=
-refore
-> > + * responsible for only enabling states the device supports, typically=
- the ones
-> > + * previously reported by pcie_aspm_enabled().
-> > + *
-> > + * Note that if the BIOS didn't grant ASPM control to the OS, this doe=
-s nothing
-> > + * because we can't touch the LNKCTL register.
-> > + *
-> > + * Note: Ensure devices are in D0 before enabling PCI-PM L1 PM Substat=
-es, per
-> > + * PCIe r6.0, sec 5.5.4.
-> > + *
-> > + * Return: 0 on success, a negative errno otherwise.
-> > + */
-> > +int pci_force_enable_link_state(struct pci_dev *pdev, int state)
-> > +{
-> > +=09return __pci_enable_link_state(pdev, state, false, true);
-> > +}
-> > +EXPORT_SYMBOL(pci_force_enable_link_state);
-> > +
-> >  void pcie_aspm_remove_cap(struct pci_dev *pdev, u32 lnkcap)
-> >  {
-> >  =09if (lnkcap & PCI_EXP_LNKCAP_ASPM_L0S)
-> > diff --git a/include/linux/pci.h b/include/linux/pci.h
-> > index ebb5b9d76360..be6719626c8f 100644
-> > --- a/include/linux/pci.h
-> > +++ b/include/linux/pci.h
-> > @@ -1918,6 +1918,7 @@ int pci_disable_link_state(struct pci_dev *pdev, =
-int state);
-> >  int pci_disable_link_state_locked(struct pci_dev *pdev, int state);
-> >  int pci_enable_link_state(struct pci_dev *pdev, int state);
-> >  int pci_enable_link_state_locked(struct pci_dev *pdev, int state);
-> > +int pci_force_enable_link_state(struct pci_dev *pdev, int state);
-> >  void pcie_no_aspm(void);
-> >  bool pcie_aspm_support_enabled(void);
-> >  bool pcie_aspm_enabled(struct pci_dev *pdev);
-> > @@ -1930,6 +1931,8 @@ static inline int pci_enable_link_state(struct pc=
-i_dev *pdev, int state)
-> >  { return 0; }
-> >  static inline int pci_enable_link_state_locked(struct pci_dev *pdev, i=
-nt state)
-> >  { return 0; }
-> > +static inline int pci_force_enable_link_state(struct pci_dev *pdev, in=
-t state)
-> > +{ return 0; }
-> >  static inline void pcie_no_aspm(void) { }
-> >  static inline bool pcie_aspm_support_enabled(void) { return false; }
-> >  static inline bool pcie_aspm_enabled(struct pci_dev *pdev) { return fa=
-lse; }
-> >=20
-> > --=20
-> > 2.43.0
-> >=20
-> >=20
->=20
-
---=20
- i.
---8323328-2110680251-1791890800=:1237--
