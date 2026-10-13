@@ -1,432 +1,310 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C22E4EFFD5
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:35:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F67F3D5657;
+	Tue, 13 Oct 2026 11:41:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791891317; cv=none; b=e6SP3VYtxvfFCV5z1IkoMGrcp4n9/zAEt8m1yhwoIdS1QDBQjJ0J5vrXfRrxcXZ25r1SHfRRKPoj424BRcoczpV/HRTMeN5uiurOt3EVA08ZlAps2pBUubIINvG0V/JcWhSsSkhUIymuAuV+b06nSbwFC2mDJE0C/tusfBYYppY=
+	t=1791891707; cv=none; b=P4ztuhMjJylguftLIelepgyWfaY49/87bR7y8B11f6zhPZK4OcogiiJIZXI4W76A/Zb/LJW0/qkkLZMji6xQX1EDpTI1C8NgOJeckvHY9gNz2BhGRFuWRvIBbVp8+8sAMIE+qIIEprafX4AUvKTqkADa3Pj2sI5jtZx7X91LbBQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791891317; c=relaxed/simple;
-	bh=W3DTpxCqgf4xS5KZ48t7rFxsY3KPDa8BD2Ab5YmpZ2U=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=b6/+TWPh5SBcqK0+epv62ynlM3JICBnzIbpo8frmt9MEm8JHIo7/2va+LzAYamnIAIo3k9G61x90OzmQuhwRoaSKAoxko1zWPp1XEp+s+OtgEkLEglUIF1Gw0dowr0u/EdYn1l4OzAtSH32ahuqlscKYnzkARLomB+Ye560di5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CijESa72; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DUC06b1H; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791891707; c=relaxed/simple;
+	bh=YAJaHA3FL843BSgj3aVZh2SzSmUdAo8/w5ok0jPj4ro=;
+	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=Or5E/5zKhlMUEW9rp8T0OlZ1KisoaimlGXsD+DfasfFfpTPPVvJUTIs+DP8u/OXDbqPD/mTN+nz8v0KmahVXDn51VaYqSRq667gtdCqguZI4XvinJtX1g7fanisfFN8t+gztxPYMYy8ljFcKztkQfRIr6e1v4qfUr/x1qY95n3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=npu+QCRd; arc=none smtp.client-ip=192.198.163.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CijESa72";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DUC06b1H"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D87bxd3908217
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:35:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rOWF6+wWXELZQAmsqp39gtDxZVBjhJ4eZEQSwPiqs+s=; b=CijESa72fxMLyrSJ
-	8hZ0avTq+pHYSdfUi0GtIwT/t48o/yioMYTNFY4Sw8sx9imOIeWoellakGqk5FnC
-	wZd6Xok2hwguswmalKL/e1cBt4Bvp50hKYEON7cViUC433GHUeuUS8IKJiN6odyq
-	4RDk7aw2BGJ0TgeXS7Y/NvbLeSXuWUC0NyTXyWlsSSeEO4AM+XaY9uB9El/f4Ktk
-	mhfy8EHHO25Vn+sCAsY0X6ry5/73BCBnx+dPPwILLXAmRyk3Don7Md2LQjevpx3H
-	PAQGOKOSv8V3h1Uwzmwk38JBynV9IAhng0uEJGRy6Gd+ozxCFnK0e3UJwtkR3JAo
-	gk1slA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h95xquab6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 11:35:13 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93e834ff4d0so808722685a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:35:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791891312; x=1792496112; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rOWF6+wWXELZQAmsqp39gtDxZVBjhJ4eZEQSwPiqs+s=;
-        b=DUC06b1HwKWKt+Y9fNcu7ZKjAoKyDIjYJwfFKKh1//r4BshTt2u4UpOWv/ITv770Dk
-         2qfXveGvFuM+OuFvGyjRB1iB9ktWLBDsswakFlcEFfm3HNVgHJJcmtKk0hwEVRBJzSHC
-         2Ydj/0deBEKqzgbXxsZK0GAwxJvXC37paraMozdGfEutWtFp6x286Ggz5zRK8LK0Quwu
-         rxSCPWWbUoBNUx0xGXVDwdyyND50+Vt3re5rC5yOstWIj/n/llZDR9uz48OGACOL37qd
-         C1OMLxGN9W2QrQ+2deN7z62tu8eEOBEjfpYUlOSK38MCny1Ja7BPcyoHTaPCW5L9WHLi
-         qxvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791891312; x=1792496112;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rOWF6+wWXELZQAmsqp39gtDxZVBjhJ4eZEQSwPiqs+s=;
-        b=vHhZWkHVqhQ5N9WGIHObsm+SVwqshUzt2RFZjYDcLmOukcsbskKlaFgmJUxKSNgSCE
-         VH1ZI8wEe5HA6IbQRMju6b187+iTi3DxM5zVu6PGrmJIp7lCOhZZfifh7yWYQMEFUrUb
-         vn2BCJQXLwD1AKJXu0okId+UTPoaMwMoXjfT6CuaISOYyQGy+W+INHato/SRT0fje/Bv
-         l+2/JbKKn+sQ/NFF37+/wJY76AXKSRyu67IyjrLWmR5X4HOFWngAyoMfBlwLuKXCU5kL
-         WVzMMDHpVA0rfh1aKp19xejo+dVvQVX+e3TU24TrENlB6NrSsQ0znxSQ2GXue1s5zdsl
-         ALsQ==
-X-Gm-Message-State: AFq9FYJIgSM0l7MZz6cQyUjo20QQl2+Mf+0lRT/QcSgQTc6Hai8ExWIC
-	Q5NnFaa88pnRzqvgI/ITQb0gw7bjweXc49nYbe10lAJmGkksDF/5CGIwr0FAylg65htz0KhYIJA
-	zG9IZPID/Bfg08RwasQWmXjIhz6udKybkntxEwvWQz45pw1J+lURxdC6IfBt/lNH0geViWBsIrq
-	lR
-X-Gm-Gg: AYBFou3d4fuAecTect5jtdvyeEHwVe6DhYf79zVez1UCf2Oq/TYYOwmFgZf+UJYnlRW
-	nPyOK3VYoDEh6x1mAroq/BdmlZ+aWCbf1rwDdsJN9d4bF+/CLTZ7PiAvLocGvbk1YbUqQ0x1NkW
-	sW0S+c2T8vAMCAuZvjhi8PpUjtpiPGL9442ExKixCOXPXItRTvUZxZBPLqq0dvhQ7dinyQuNtIv
-	xwvfuGTgD+mYGniTM5yS9QEO7OAZsNWMT/lH5gzzl6izibEH/LEaTUWf1o0Iu9Ykmjn9cBAZPGO
-	IJ58cMoZqgtheftmDoGzyFEHUB1e5Wza7L+bG3ctIY0L9zcL71zyVkYnXAiPfVhI/tqI0txt3cl
-	yQN1utLeeG5/ov6No2lc1Iqwixdk5
-X-Received: by 2002:a05:620a:711a:b0:93e:7dfa:2f3f with SMTP id af79cd13be357-93ebd493d90mr2161688885a.62.1791891312461;
-        Tue, 13 Oct 2026 04:35:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:711a:b0:93e:7dfa:2f3f with SMTP id af79cd13be357-93ebd493d90mr2161684185a.62.1791891311913;
-        Tue, 13 Oct 2026 04:35:11 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18bf2343asm654407215e9.9.2026.10.13.04.35.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 04:35:10 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 13:34:49 +0200
-Subject: [PATCH v3 4/4] arm64: dts: qcom: nord-ride-embedded: Enable USB
- ports
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="npu+QCRd"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791891706; x=1823427706;
+  h=from:date:to:cc:subject:in-reply-to:message-id:
+   references:mime-version:content-id;
+  bh=YAJaHA3FL843BSgj3aVZh2SzSmUdAo8/w5ok0jPj4ro=;
+  b=npu+QCRdxHDeQ+hopmntH8gv6i/ESNlGJk1TX/xF3RNfXOAl+Qx6VW/h
+   ubozrqrGhDTvFDvekO4D98ycDLQ2C/iivUEewR1ALAGOKmuXV/wgKrrGN
+   q4GGAQ0cCtAdY3Xh8vKpwa9Jrvfv6dzYzmW0UPegyiPOpTQwJn+p3ixBF
+   OLmqjkZzKg2ILDlvCWEVfauYx/Jh94j7DXMdO22yYX0K/Cd6pR+L9EjVx
+   3KVnZhFqL2dI0URDrp5Br1i3kRX7biWO87qs97NUAiJuVG3d+ELPZMXlT
+   LqpF60TCsWHuatdhsx2k5f+r50vDiKblsHbwxssCungEOt2Wh+mN+4/d6
+   w==;
+X-CSE-ConnectionGUID: oJRbqSpuR2meDHx38zrtmA==
+X-CSE-MsgGUID: o02KUoaQTKGHApKa9Jwvqg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="515081"
+X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
+   d="scan'208";a="515081"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 04:41:45 -0700
+X-CSE-ConnectionGUID: b8gYIYLoRdyjmsQDQ/nStQ==
+X-CSE-MsgGUID: JaGIfAB3QKqpSXdMgk+ecQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
+   d="scan'208";a="1501815"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.106])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 04:41:39 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Date: Tue, 13 Oct 2026 14:41:32 +0300 (EEST)
+To: Bjorn Helgaas <helgaas@kernel.org>
+cc: Manivannan Sadhasivam <mani@kernel.org>, 
+    Bjorn Helgaas <bhelgaas@google.com>, 
+    Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+    =?ISO-8859-2?Q?Krzysztof_Wilczy=F1ski?= <kwilczynski@kernel.org>, 
+    Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>, 
+    Jonathan Derrick <jonathan.derrick@linux.dev>, 
+    Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org, 
+    LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org, 
+    linux-wireless@vger.kernel.org, ath12k@lists.infradead.org, 
+    ath11k@lists.infradead.org, ath10k@lists.infradead.org, 
+    Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
+    Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+    Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/8] PCI/ASPM: Add pci_force_enable_link_state() API
+In-Reply-To: <20261012225832.GA1415301@bhelgaas>
+Message-ID: <f1390db8-2369-9ab7-49a9-b7f09ef7b1ea@linux.intel.com>
+References: <20261012225832.GA1415301@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261013-nord-usb-dwc-dts-v3-4-bcaaf3faae24@oss.qualcomm.com>
-References: <20261013-nord-usb-dwc-dts-v3-0-bcaaf3faae24@oss.qualcomm.com>
-In-Reply-To: <20261013-nord-usb-dwc-dts-v3-0-bcaaf3faae24@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>, brgl@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6301;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=d301Fm0XDvrwsa6TXfjOMiTGbtOjnd+ES5joDqto0xE=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqzhdhizKIuO/07r7FuA30AdwAJPqT6UI8LYUEP
- lfbONBD2KGJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCas4XYQAKCRAFnS7L/zaE
- w5AsD/9o3ammLlN6gLLoltso353HTavJQC+mvetI3lvggMnJmWRWZmCRaQhWPLL+VOY8jQ/C0RC
- IPFv3gNm+MRF3SEu4yrlkKQR+6FoSyZq5gLYEmCpBaYR+kWcFf1umOD70SpsmOEBmBJDiObzkPu
- U+T7pOv9XVCnXplKxO/hChjwDsg8ER81keFCvtBOTO9ogOwyjz5/DAKV79YMA+Y8dh9zjCyiEay
- 2atFbRGiEe9YMf9dzVbkBhjI/55zQ0dCW1Hvmfm35camCEpR7AGp35pJbtFQclL8lNo0Y1Sv51k
- WkzlM7DLdZZQv4vrlIwf2qpbdhajhZ789/5f0VrJWWyc6KQvFyCgvusatBb0fefFI0S3kK+nBXi
- bYxiQkSWVbzhr+CnAfT3Ay+toKYjry3kpWyNHtkYal43McHBETNiWXvyLmc4UEseUXgNr9xhPCW
- +Hvm/62p/kEb8u/RWwvMgGXggyYj5+KDDsqOfnm+FVhKPyw0+MceBhgrbGl3jviuUAygo8Vfb6E
- WZHjIMIORJ++hnZfYHIoN5cNYvNjU3c93tGhe0XMc1E5P9rpVptXNo9dzjC6cQ+1aZ30LIWR+Hy
- ZH30E/gTXkPSczkz4ZQISTeN7eDFavgSSa1h/HArrEsDxli6S9qmEI5H2W56JicDeqV3CQIUHnv
- 0v65Ar03HiPhyYg==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0NiBTYWx0ZWRfXz2g/tgYe2JDL
- VLyDPvSasLiddz5y5U4ipOskmIsrcJGpiKtvfuC5mJ71Xd1OF6jaGX12RExGxvcmcJgeOweCwW1
- zoPYNj/C5vrzQJ4Z4OG+VyUs0hS2H2H+XQwXgb4fQYGJKXHld+O6BdWmH+YadRS5DXiga7UV6+9
- wpiRdgZo5QwA4UGq/QuXcs2+LHvnY7liZ2PeOOL1sMkx5yeziorKQoWNqpi7rj776OdolHtoveW
- 5ojmNmEYuGsY7DmWIDFivfIt6OdAw1VhdJPeLFozblt4XwV/3oNH5IyElRDbR0jJ1Zw+CLqMuto
- mzc1XtPlxS6dx1i5XqUgmH29dKgb9LY3KISUquYhxZQDK/L+vdmhfZS8bva4HwCApHjKsOttiK3
- Q1U8Wv9/8L+UajfonN25cLXt4/qft4f89IvbtC8e2XiEHPMzs4ejCMeHaPAOYinhNboLsKd67Oz
- nFv6yxs43pId7scgYHA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0NiBTYWx0ZWRfX0sxMsreMvs2q
- 7KDO2lLyHeOpu7szj1rv+hO3gsfb16gfDO4DMQHqTI2cnySPPx61ntt0oec1VAWMSxo71JcsyT3
- T422Oa/EUPcle+ATg25AVHq3dUxWz1U=
-X-Proofpoint-ORIG-GUID: dlrOxMxqJwFgc51LDL5MxX104b8I2bla
-X-Authority-Analysis: v=2.4 cv=EP+TQFZC c=1 sm=1 tr=0 ts=6ace1771 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=Zzu6nnJzC5dSXObhMU0A:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-GUID: dlrOxMxqJwFgc51LDL5MxX104b8I2bla
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015 spamscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130046
+Content-Type: multipart/mixed; BOUNDARY="8323328-2110680251-1791890800=:1237"
+Content-ID: <eb4da7c3-6b95-7dae-87b6-bb3fda24da91@linux.intel.com>
 
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Wire up the board specific pieces for USB ports. Enable i2c9 and add the
-three NXP PTN3222 eUSB2 repeaters (one per USB port) with their 1.8 V
-supply and reset GPIOs on the PMIC GPIO expanders.
+--8323328-2110680251-1791890800=:1237
+Content-Type: text/plain; CHARSET=ISO-8859-15
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+Content-ID: <6e83485e-223f-0f0c-17ad-c73df48cefdf@linux.intel.com>
 
-Add the onsemi FUSB15201 dual port Type-C controller at 0x50, with
-its interrupt and pinctrl state on pmau0102_i gpio8. Both controller
-ports are wired on this board, so describe two usb-c-connector
-children and cross-link their HS and SS endpoints to the dwc3 HS
-endpoint and the QMP combo PHY SS output of USB_0 and USB_1. Both
-controllers therefore run in OTG mode with usb-role-switch.
+On Mon, 12 Oct 2026, Bjorn Helgaas wrote:
 
-USB_2 has no Type-C connector, so it is configured as a fixed host
-port. Its VBUS is supplied by a fixed regulator gated by
-pmau0102_h gpio3, kept always-on since nothing switches it at
-runtime.
+> On Wed, Jul 08, 2026 at 04:30:16PM +0200, Manivannan Sadhasivam wrote:
+> > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> >=20
+> > pci_enable_link_state() and pci_enable_link_state_locked() APIs only en=
+able
+> > the ASPM states that were not previously disabled via
+> > pci_disable_link_state*() API or blacklisted during init (e.g. the pre-=
+1.1
+> > device blacklist, which is only meant to be overridden with
+> > 'pcie_aspm=3Dforce'). This is an intentional behavior as these APIs mus=
+t not
+> > silently re-enable states that were deliberately disabled, since doing =
+so
+> > could enable ASPM on a link where it is known to be unsafe.
+>=20
+> I think this is saying that many uses of pci_disable_link_state() are
+> to avoid hardware errata, i.e., these are basically quirks, and we
+> should *never* enable those ASPM states.
+>=20
+> > However, some drivers (e.g. the atheros WLAN drivers) save the currentl=
+y
+> > enabled ASPM states, disable all ASPM states before firmware download, =
+and
+> > then try to restore exactly the states that were enabled before. Restor=
+ing
+> > those states requires re-enabling states that were just disabled via
+> > pci_disable_link_state() API. But, this cannot be achieved using the
+> > existing APIs.
+>=20
+> This sounds like it's also for hardware errata: if ASPM works
+> correctly, there's no need to disable it during firmware download.  I
+> think this is *only* the atheros drivers, isn't it?  I didn't see any
+> others.
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Co-developed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/nord-ride-embedded.dts | 222 ++++++++++++++++++++++++
- 1 file changed, 222 insertions(+)
+Hi,
 
-diff --git a/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts b/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
-index 49635695f832eca91040e45bcd75eebd7d566906..cd73ad19b368ee04e512b9ba63bd4336d80ba4d1 100644
---- a/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
-+++ b/arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
-@@ -6,6 +6,7 @@
- /dts-v1/;
- 
- #include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- 
- #include "nord-embedded.dtsi"
-@@ -53,6 +54,37 @@ bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
- 			clock-div = <2>;
- 		};
- 	};
-+
-+	vreg_per_3p3: regulator-per-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_per_3p3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+	};
-+
-+	usb2_vbus: regulator-usb2-vbus {
-+		compatible = "regulator-fixed";
-+		regulator-name = "usb2_vbus";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		gpio = <&pmau0102_h_gpios 3 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		regulator-always-on;
-+	};
-+
-+	usb2-connector {
-+		compatible = "usb-a-connector";
-+		label = "USB-2-Type-A";
-+		power-role = "source";
-+
-+		vbus-supply = <&usb2_vbus>;
-+
-+		port {
-+			usb2_con_hs: endpoint {
-+				remote-endpoint = <&usb_2_dwc3_hs>;
-+			};
-+		};
-+	};
- };
- 
- &apps_rsc {
-@@ -366,6 +398,121 @@ vreg_l3l_1p8: ldo3 {
- 	};
- };
- 
-+&i2c9 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	usb0_repeater: redriver@43 {
-+		compatible = "nxp,ptn3222";
-+		reg = <0x43>;
-+		#phy-cells = <0>;
-+		vdd1v8-supply = <&vreg_l3l_1p8>;
-+		vdd3v3-supply = <&vreg_per_3p3>;
-+		reset-gpios = <&pmau0102_i_gpios 9 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	usb2_repeater: redriver@47 {
-+		compatible = "nxp,ptn3222";
-+		reg = <0x47>;
-+		#phy-cells = <0>;
-+		vdd1v8-supply = <&vreg_l3l_1p8>;
-+		vdd3v3-supply = <&vreg_per_3p3>;
-+		reset-gpios = <&pmau0102_l_gpios 3 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	usb1_repeater: redriver@4f {
-+		compatible = "nxp,ptn3222";
-+		reg = <0x4f>;
-+		#phy-cells = <0>;
-+		vdd1v8-supply = <&vreg_l3l_1p8>;
-+		vdd3v3-supply = <&vreg_per_3p3>;
-+		reset-gpios = <&pmau0102_i_gpios 10 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	typec@50 {
-+		compatible = "onnn,fusb15201";
-+		reg = <0x50>;
-+		interrupts-extended = <&pmau0102_i_gpios 8 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&usb_pd_int_default>;
-+		pinctrl-names = "default";
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			label = "USB-C0";
-+			power-role = "dual";
-+			data-role = "dual";
-+			try-power-role = "sink";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					usb_0_con_hs: endpoint {
-+						remote-endpoint = <&usb_0_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					usb_0_con_ss: endpoint {
-+						remote-endpoint = <&usb_0_qmpphy_usb_ss_out>;
-+					};
-+				};
-+			};
-+		};
-+
-+		connector@1 {
-+			compatible = "usb-c-connector";
-+			reg = <1>;
-+			label = "USB-C1";
-+			power-role = "dual";
-+			data-role = "dual";
-+			try-power-role = "sink";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					usb_1_con_hs: endpoint {
-+						remote-endpoint = <&usb_1_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					usb_1_con_ss: endpoint {
-+						remote-endpoint = <&usb_1_qmpphy_usb_ss_out>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pmau0102_i_gpios {
-+	usb_pd_int_default: usb-pd-int-state {
-+		pins = "gpio8";
-+		function = "normal";
-+		input-enable;
-+		bias-pull-up;
-+		power-source = <0>;
-+	};
-+};
-+
- &qupv3_0 {
- 	firmware-name = "qcom/nord/qupv3fw.elf";
- 
-@@ -440,3 +587,78 @@ &ufs_mem_phy {
- 
- 	status = "okay";
- };
-+
-+&usb_0 {
-+	status = "okay";
-+};
-+
-+&usb_0_dwc3_hs {
-+	remote-endpoint = <&usb_0_con_hs>;
-+};
-+
-+&usb_0_hsphy {
-+	vdd-supply = <&vreg_l1h_0p9>;
-+	vdda12-supply = <&vreg_l2h_1p2>;
-+
-+	phys = <&usb0_repeater>;
-+
-+	status = "okay";
-+};
-+
-+&usb_0_qmpphy {
-+	vdda-phy-supply = <&vreg_l2k_0p9>;
-+	vdda-pll-supply = <&vreg_l2h_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_0_qmpphy_usb_ss_out {
-+	remote-endpoint = <&usb_0_con_ss>;
-+};
-+
-+&usb_1 {
-+	status = "okay";
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&usb_1_con_hs>;
-+};
-+
-+&usb_1_hsphy {
-+	vdd-supply = <&vreg_l1h_0p9>;
-+	vdda12-supply = <&vreg_l2h_1p2>;
-+
-+	phys = <&usb1_repeater>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_qmpphy {
-+	vdda-phy-supply = <&vreg_l2k_0p9>;
-+	vdda-pll-supply = <&vreg_l2h_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_qmpphy_usb_ss_out {
-+	remote-endpoint = <&usb_1_con_ss>;
-+};
-+
-+&usb_2 {
-+	dr_mode = "host";
-+
-+	status = "okay";
-+};
-+
-+&usb_2_dwc3_hs {
-+	remote-endpoint = <&usb2_con_hs>;
-+};
-+
-+&usb_2_hsphy {
-+	vdd-supply = <&vreg_l1h_0p9>;
-+	vdda12-supply = <&vreg_l2h_1p2>;
-+
-+	phys = <&usb2_repeater>;
-+
-+	status = "okay";
-+};
+There are more that should use disable/enable API. In addition ath*, I had=
+=20
+also these in my unfinished series:
 
--- 
-2.47.3
+  brcmfmac
+  ib-hfi1
+  rtlwifi
+  rtsx
+  r8169
 
+> > Hence, add pci_force_enable_link_state() API for such callers. Unlike
+> > pci_enable_link_state(), it re-enables the requested states even if the=
+y
+> > were previously disabled via pci_disable_link_state() or disabled durin=
+g
+> > init. The caller is therefore responsible for only enabling states the
+> > device actually supports, typically the ones previously reported by
+> > pcie_aspm_enabled().
+>=20
+> The problem is that pci_enable_link_state() cannot enable things that
+> were disabled by pci_disable_link_state().  They're not symmetric,
+> which violates the caller's expectation.
+
+Yes.
+
+This patch seems to come with my Suggested-by but what I suggested (and=20
+had a patch for) was to make disable/enable proper symmetric pairs because=
+=20
+it is very trappy otherwise. If something else is needed in addition, that=
+=20
+should be named differently like Bjorn also seems to suggest (however see=
+=20
+my alternative suggestion below).
+
+I renamed the current pci_enable_link_state() to=20
+pci_set_default_link_state() in my own attempt to get room for adding the=
+=20
+symmetric pair.
+
+> Instead of adding pci_force_enable_link_state(), I think we should add
+> a new interface for the *quirk* behavior that permanently disables
+> states.  Then pci_enable_link_state() and pci_disable_link_state()
+> could be made symmetric.
+
+My suggestion is to make the disables/enables counted per state which=20
+would allow parallel sources of disables to function without clashing.
+
+Disable quirks could simply not have the pairing enable, no special=20
+interface needed.
+
+And the lane margining proposal would also just fit in with that approach=
+=20
+as well.
+
+--
+ i.
+
+> > This API is implemented by adding a 'force' parameter to the shared
+> > __pci_enable_link_state() helper. When 'force' is true, the requested
+> > states are cleared from 'link->aspm_disable' before enabling.
+> >=20
+> > Suggested-by: Ilpo J=E4rvinen <ilpo.jarvinen@linux.intel.com>
+> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcom=
+m.com>
+> > ---
+> >  drivers/pci/pcie/aspm.c | 37 ++++++++++++++++++++++++++++++++++---
+> >  include/linux/pci.h     |  3 +++
+> >  2 files changed, 37 insertions(+), 3 deletions(-)
+> >=20
+> > diff --git a/drivers/pci/pcie/aspm.c b/drivers/pci/pcie/aspm.c
+> > index 1c15a14718e8..c04fb71de91c 100644
+> > --- a/drivers/pci/pcie/aspm.c
+> > +++ b/drivers/pci/pcie/aspm.c
+> > @@ -1506,7 +1506,8 @@ int pci_disable_link_state(struct pci_dev *pdev, =
+int state)
+> >  }
+> >  EXPORT_SYMBOL(pci_disable_link_state);
+> > =20
+> > -static int __pci_enable_link_state(struct pci_dev *pdev, int state, bo=
+ol locked)
+> > +static int __pci_enable_link_state(struct pci_dev *pdev, int state, bo=
+ol locked,
+> > +=09=09=09=09   bool force)
+> >  {
+> >  =09struct pcie_link_state *link =3D pcie_aspm_get_link(pdev);
+> > =20
+> > @@ -1527,6 +1528,10 @@ static int __pci_enable_link_state(struct pci_de=
+v *pdev, int state, bool locked)
+> >  =09=09down_read(&pci_bus_sem);
+> >  =09mutex_lock(&aspm_lock);
+> >  =09link->aspm_default =3D pci_calc_aspm_enable_mask(state);
+> > +
+> > +=09/* Force enable states that were previously disabled */
+> > +=09if (force)
+> > +=09=09link->aspm_disable &=3D ~link->aspm_default;
+> >  =09pcie_config_aspm_link(link, policy_to_aspm_state(link));
+> > =20
+> >  =09link->clkpm_default =3D (state & PCIE_LINK_STATE_CLKPM) ? 1 : 0;
+> > @@ -1553,7 +1558,7 @@ static int __pci_enable_link_state(struct pci_dev=
+ *pdev, int state, bool locked)
+> >   */
+> >  int pci_enable_link_state(struct pci_dev *pdev, int state)
+> >  {
+> > -=09return __pci_enable_link_state(pdev, state, false);
+> > +=09return __pci_enable_link_state(pdev, state, false, false);
+> >  }
+> >  EXPORT_SYMBOL(pci_enable_link_state);
+> > =20
+> > @@ -1576,10 +1581,36 @@ int pci_enable_link_state_locked(struct pci_dev=
+ *pdev, int state)
+> >  {
+> >  =09lockdep_assert_held_read(&pci_bus_sem);
+> > =20
+> > -=09return __pci_enable_link_state(pdev, state, true);
+> > +=09return __pci_enable_link_state(pdev, state, true, false);
+> >  }
+> >  EXPORT_SYMBOL(pci_enable_link_state_locked);
+> > =20
+> > +/**
+> > + * pci_force_enable_link_state - Force enable device link state
+> > + * @pdev: PCI device
+> > + * @state: Mask of ASPM link states to enable
+> > + *
+> > + * Enable device link state, so the link will enter the specified stat=
+es.
+> > + * Unlike pci_enable_link_state(), this also re-enables states previou=
+sly
+> > + * disabled by pci_disable_link_state() and overrides the ASPM states =
+disabled
+> > + * during init (e.g., the pre-1.1 device blacklist). The caller is the=
+refore
+> > + * responsible for only enabling states the device supports, typically=
+ the ones
+> > + * previously reported by pcie_aspm_enabled().
+> > + *
+> > + * Note that if the BIOS didn't grant ASPM control to the OS, this doe=
+s nothing
+> > + * because we can't touch the LNKCTL register.
+> > + *
+> > + * Note: Ensure devices are in D0 before enabling PCI-PM L1 PM Substat=
+es, per
+> > + * PCIe r6.0, sec 5.5.4.
+> > + *
+> > + * Return: 0 on success, a negative errno otherwise.
+> > + */
+> > +int pci_force_enable_link_state(struct pci_dev *pdev, int state)
+> > +{
+> > +=09return __pci_enable_link_state(pdev, state, false, true);
+> > +}
+> > +EXPORT_SYMBOL(pci_force_enable_link_state);
+> > +
+> >  void pcie_aspm_remove_cap(struct pci_dev *pdev, u32 lnkcap)
+> >  {
+> >  =09if (lnkcap & PCI_EXP_LNKCAP_ASPM_L0S)
+> > diff --git a/include/linux/pci.h b/include/linux/pci.h
+> > index ebb5b9d76360..be6719626c8f 100644
+> > --- a/include/linux/pci.h
+> > +++ b/include/linux/pci.h
+> > @@ -1918,6 +1918,7 @@ int pci_disable_link_state(struct pci_dev *pdev, =
+int state);
+> >  int pci_disable_link_state_locked(struct pci_dev *pdev, int state);
+> >  int pci_enable_link_state(struct pci_dev *pdev, int state);
+> >  int pci_enable_link_state_locked(struct pci_dev *pdev, int state);
+> > +int pci_force_enable_link_state(struct pci_dev *pdev, int state);
+> >  void pcie_no_aspm(void);
+> >  bool pcie_aspm_support_enabled(void);
+> >  bool pcie_aspm_enabled(struct pci_dev *pdev);
+> > @@ -1930,6 +1931,8 @@ static inline int pci_enable_link_state(struct pc=
+i_dev *pdev, int state)
+> >  { return 0; }
+> >  static inline int pci_enable_link_state_locked(struct pci_dev *pdev, i=
+nt state)
+> >  { return 0; }
+> > +static inline int pci_force_enable_link_state(struct pci_dev *pdev, in=
+t state)
+> > +{ return 0; }
+> >  static inline void pcie_no_aspm(void) { }
+> >  static inline bool pcie_aspm_support_enabled(void) { return false; }
+> >  static inline bool pcie_aspm_enabled(struct pci_dev *pdev) { return fa=
+lse; }
+> >=20
+> > --=20
+> > 2.43.0
+> >=20
+> >=20
+>=20
+
+--=20
+ i.
+--8323328-2110680251-1791890800=:1237--
