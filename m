@@ -1,241 +1,102 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7F70411FBF
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E354F41D631;
+	Tue, 13 Oct 2026 10:00:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791885610; cv=none; b=V17uh3nnu+BhrwVvNU6Uy+Hb2nnwy9mB41DPzlUdxStUmHZtxjQ/uvVGdKYuNI31B5FUttDWpbrGhlx6X8qH9faCDH8kROZ+QqB/ljDpgF1hPZ52R/XkcmeAo9FYlzFH18NryGEmpQpxt+KsDhXU9y0qFLWHTY9xFS4LOW1gCJE=
+	t=1791885630; cv=none; b=fndnyKktMQMl0/YhGtMDBLp8aIRAke1+muXu7ulAODLOTzeuIJiKnWXLx6wezpivcbvRZ7B9go5BYR5OE9Y2MPGecYHfrtXjJhlnCFVCY2t7dDlkyHQ9SLunyen9/n0RMLyKo78/6pQkF9NhRXhyVVAxZT0X1Kuuc5BRPXBCXKU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791885610; c=relaxed/simple;
-	bh=tPuke9GZue1598rJs945YYEbvnGdQO2FD3TmVsXbGg4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Mhw5cWZl9wFJOBiSvVREb2cfgqptex02X1BS8sWasbWPSj2LtprdqxWDUPGa+9pQyC1W01mHPjeSToJGyd6vDjz2wuKX7gLxyaLfRgF6qxZLaZ9XGiaQEpks2i3OgSiQaNxtmqrs2d9Z9PAa/Z0xKuyJotBhCNBj0i3Tzi0alR0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HIAk8UvD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ON5Sbcg/; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791885630; c=relaxed/simple;
+	bh=ij8DXb9AszlL7+ayMVlj08Let4/fuS6eqq7j3crkeGg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QoF3e24UQIwuZm7YZX4SUHYACPhYiz436KddEIn9qLQhhhPoZdiezfdy34n2PzVV82j3HB0C03xEoB/RTy+KF0tlYJio2ArjHrgLhhGFD20nHai1vRmaAJNoWCi/5Nr2WQf6YPhMRe1VX1eicWp7uaq/iYX6m+m2oPeZm/YqqwU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lBvhgzhu; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HIAk8UvD";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ON5Sbcg/"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D9fk573475851
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=; b=HIAk8UvDljORE4jX
-	4/vr0PByQOq/FC2imvFYV30TGaKOC5OsHNY6mGoV9r9vLRSIkz7fe42rJkls406f
-	XNdnn+9MuVMLAsXj2m8/RN/0LKTQJop2dUvqK12WHyMwXlzU6CtIzLjUcfnjcWOK
-	7hbC0HVYuonELceH2QW45VDzI35C+BR2qiM+nc0GcnpGNiUmZVmuwT0l6VfrfcUO
-	xgRNxVUcuucOJU40qWRT7AKOV/YIGmRaA1NeZh6E+v8hJfKH7+g390Ff5yc/niZ8
-	eoka+PggHkPly8uzatMw/TWPzhvr0fwBc1FdNsYnqzlhGNubYYMOHZGa9InFzqVc
-	po1c7Q==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9d7j9dee-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb6391e89so609396285a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:00:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791885605; x=1792490405; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=;
-        b=ON5Sbcg/IkOxTEqL9l39RNefOphsxQIVoCJ06ts/KcC22sWrXcKlVlYVvkYkmgiTG3
-         M+gWaPCcyqKpS69c8U4QuGTgBkgLziwjlsk/f1pKa2Rf9QMmG4uJhnbaTdMp7DTztRQ9
-         fhg8NJNNRt5WyjE+5hfVDvghGRaOB2of3aD2IwMyHwJB153myPfOVoVY0wIbyPQiLTFO
-         9MgB05ywVCSZj1r23bthQ5cAoLH4ZjZkZsC+j9MN6VPClvyWqhcDjLJHOSHOc/qwswXW
-         TKiNz2/iaPVV8kFs1wkocUwXQ1faQB4CAVQL9TY5q31c5/2hn0cZ+52G3FT6mT43UuYT
-         KOJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885605; x=1792490405;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=;
-        b=jqA2uC/F9lRx2ytgCyaUf5qhvrO/ip6uBwv+HaDEPxglpAH+qHWSAZgioaF6eL/e/Z
-         WBEwctO3tEh2D+fXbr3fbkb3eo1BSx1LWsIqB0mLqf0RcV2wIY3yIUd1XxTpEyorOK0N
-         QXeeYUSsYivZZDRS5DK9PCm2COMvaQAm4c31dZs138D5WhlGDzwpcQ5kfLG4eCf4RpaR
-         rGmtXMgi2WDduXovrhzOLO24oa1arlypujSv5trVa+aK3cpkSeimcHWd5yPafEQndkAT
-         VZPLM5UM8hFR45AC/KCBcCrFNjDYR7gz0fAFsBhKupnE+a2n7u5K0K5BTMMe0g/Szd4F
-         VdMg==
-X-Forwarded-Encrypted: i=1; AKwUvBxW5+UWucf4qRN+Z0cpYuXjqyUeJbF0nPzIE85zdY1dMPiy7UHLToAipilLU8dDgy/XVL/PxAr/6zX2TfrG@vger.kernel.org
-X-Gm-Message-State: AFq9FYKPu5e4PQmSZArLvv6FrgwIQ6M3+hgAU4pcRPyaMCLj6a6LRSSV
-	LEaT3idVOOi+fzW6DjoIxgW0Ds0gzTds1LKdncu/AscztbQX5h3KkxV8hBLkg94VXudDyVDV5p7
-	0TWHU3ALbA0SYJeW9LwoJ5r2jeDlqmeUGt1H7+e96xMdmpPFUEUJnb86zfN+Fed02VtyL
-X-Gm-Gg: AYBFou1PLwy6CCbOWmOjg1T5gtI94npm39CgvDsqv9q6go1xkNBP7NYoAHvqdtWG1Lz
-	TP639a9+CSBc+56UGzUyPClsGdMssmrEHvX6wQCpL76y8a1u/bKuFiByqaBQMDIcw0XlhPdoGks
-	G3P6OGzkhOXhZYO6FIbS0MuGzQT8oNc48RgYMG6+97lgY2rOcpJzeYpRaSgnu+BBxMEBgXyfvGc
-	6LwjPr2HWme3EXeqHbuvtm/uPFG72LOiWk5wuQJoGcgj3/3+eFMNMErPSn7fXbdNVAT7SovosYE
-	Yav8rCLE5EFhlKt5+xLhNLUzbVLpskADs2FviIHFsbuWMT2rpfXTuXKskk3xTPMkU1GG1cTwnTi
-	v64Jn+QfUSOayCY6cxgezkRnzfS71MrgwDjXDELhmS3DlOaM0Kv5TM9GtDgqmdA==
-X-Received: by 2002:a05:620a:271d:b0:93b:c537:fdb8 with SMTP id af79cd13be357-93ebd0df02emr1885361385a.6.1791885604855;
-        Tue, 13 Oct 2026 03:00:04 -0700 (PDT)
-X-Received: by 2002:a05:620a:271d:b0:93b:c537:fdb8 with SMTP id af79cd13be357-93ebd0df02emr1885354685a.6.1791885604246;
-        Tue, 13 Oct 2026 03:00:04 -0700 (PDT)
-Received: from ?IPV6:2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7? ([2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaaebsm4390052f8f.14.2026.10.13.03.00.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 13 Oct 2026 03:00:03 -0700 (PDT)
-Message-ID: <f01126d0-4ad6-4f23-bf00-88521cd0c2b8@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 12:00:00 +0200
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lBvhgzhu"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791885629; x=1823421629;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ij8DXb9AszlL7+ayMVlj08Let4/fuS6eqq7j3crkeGg=;
+  b=lBvhgzhuLSyzz0t3SHE+8/2c1Ddtz/++G+Dh3jccBUxgWZNwHr5YDuWX
+   PmAqeq/9gmHfbYDkiLWkTh2TXua5hVtEM5v1TyhORvIItGeIymW4wm1W0
+   FTHMlWE5apL529Ci1FC7q2vhs/eMbPabZh+43aHcRdcFarDE/plkg5s36
+   N8cfcXYG1TSOq+qhp/bwxGc/hbjqt4Dr9IJpulMLEx5oc7M+4zrzCbAEu
+   AhiPqgfUsnh1AM3uKA5fdJCvt2vUEnACcOeqFEHsA2+/1tyM8gUWgQr9A
+   VN1tRBCm3S1YRwJr5q8tAsllpN9e9fG15ZQvb+UtHOfofbZh1+EFb1oD3
+   A==;
+X-CSE-ConnectionGUID: 1tnwBDxXQMaFdEAqymxhTw==
+X-CSE-MsgGUID: rh1101sWQEOjlvAyGW7Akg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11933"; a="504189"
+X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
+   d="scan'208";a="504189"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 03:00:28 -0700
+X-CSE-ConnectionGUID: H4dzonFgTGeBaxHmUhc+fw==
+X-CSE-MsgGUID: LAu6IWiFQG+/Z8ptIW0ILA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,155,1787036400"; 
+   d="scan'208";a="1055460"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa005.jf.intel.com with ESMTP; 13 Oct 2026 03:00:26 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1003)
+	id EE5BE99; Tue, 13 Oct 2026 12:00:24 +0200 (CEST)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: "Martin K. Petersen (Oracle)" <mkp@kernel.org>,
+	Can Guo <can.guo@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Subject: [PATCH v1 1/1] scsi: ufs: ufs-qcom: Don't define variable in the middle of the code
+Date: Tue, 13 Oct 2026 11:59:24 +0200
+Message-ID: <20261013095924.959455-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] power: reset: pscrr: add watchdog pretimeout
- reason tracking
-To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-        Sebastian Reichel <sre@kernel.org>,
-        Wim Van Sebroeck
- <wim@linux-watchdog.org>,
-        Guenter Roeck <linux@roeck-us.net>, Benson Leung <bleung@chromium.org>,
-        Tzung-Bi Shih <tzungbi@kernel.org>,
-        Oleksij Rempel <o.rempel@pengutronix.de>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-watchdog@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        =?UTF-8?Q?S=C3=B8ren_Andersen?=
- <san@skov.dk>,
-        Guenter Roeck <groeck@chromium.org>,
-        Matti Vaittinen <mazziesaccount@gmail.com>,
-        Ahmad Fatoum <a.fatoum@pengutronix.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        avaneesh.dwivedi@oss.qualcomm.com,
-        Umang Chheda <umang.chheda@oss.qualcomm.com>
-References: <20260805-pscrr-reboot-reason-v4-0-54ef517084cc@oss.qualcomm.com>
- <20260805-pscrr-reboot-reason-v4-2-54ef517084cc@oss.qualcomm.com>
- <07562f41-c269-48b7-9ca2-be324282a456@oss.qualcomm.com>
- <8774f401-7efa-4577-8d03-6fe652e856e3@oss.qualcomm.com>
-Content-Language: en-US
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-In-Reply-To: <8774f401-7efa-4577-8d03-6fe652e856e3@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: DfFK1Bd_Txv8X_A87UAiH1xzloaSYU0r
-X-Proofpoint-ORIG-GUID: DfFK1Bd_Txv8X_A87UAiH1xzloaSYU0r
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX/SScQmTRT+y0
- FYbeFMa2iOf1JzF4PNC8ZR8o7pBRTp607JzQ8upizxTvqGpqeJkwhebo/algMXLUlBZRVgKVs1b
- zi8SdY2yNXwFV87m+UbR/J4hOrvxpk4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX4wD/EE3f3mAx
- vwvrQ7sxvkKynLJqTLd5RfrnEqPUvUE3wJGS+bEwlCrVGqzZHO/DsvoYXQ6l/7rjj5e2A0Luj3Q
- B2pkNa3ymx8LsUGvriU427hqp32kNaTE1mOioscvLVJfTlI1CCSOdto+74r6klCEW2RJY5h9Wlk
- tAOvg5/cKGiZlo+SnH7je/ZWOJHSz4TMmqIqmRFmFaz5Ro3DqXVQbx/CIC6ykXDsnnhiQF2uab4
- Gln80RJ2TigqqnTEzbrAqC3OeCqAUMTG6jA6N+eg5ddXE/FOfG1jKoyvRuV6LXDjbu/DC+8V6Pg
- ZzoPncvj5xEh0tlxz2DMHycl1ADWOmc0soKB1dl/NFn86DRGEBcZ75MuAgZLZ7Cj4Cg7kWrYQjp
- QnV+T/UssADFzhduTADOvjA35N+GLhi/VsFi7W3NI8xuyPojEVhFmPP+OyTfSNbVp3+oFuIchQ9
- ocVuQeGMKgfLI+8dLGQ==
-X-Authority-Analysis: v=2.4 cv=PMGaavqC c=1 sm=1 tr=0 ts=6ace0126 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=a5JEe3mAxTw7QyptA7EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 impostorscore=0 malwarescore=0
- lowpriorityscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610130039
 
-On 10/12/26 13:06, Faruque Ansari wrote:
-> 
-> Hi Daniel Lezcano,
-> 
-> On 07-Oct-26 4:24 PM, Daniel Lezcano wrote:
->> On 8/5/26 10:54, Faruque Ansari wrote:
->>> Watchdog pretimeout resets are not recorded with a dedicated reason,
->>> causing subsequent boots to report PSCR_UNKNOWN and making it difficult
->>> to distinguish them from other unexpected resets.
->>>
->>> Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reason code and prevent the
->>> panic notifier from overwriting a watchdog pretimeout reason with
->>> PSCR_KERNEL_PANIC when the pretimeout governor triggers a panic.
->>>
->>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
->>> ---
->>>   drivers/power/reset/pscrr/pscrr.c     | 11 +++++++----
->>>   include/linux/power/power_on_reason.h |  1 +
->>>   include/linux/reboot.h                |  4 ++++
->>>   kernel/reboot.c                       |  1 +
->>>   4 files changed, 13 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/drivers/power/reset/pscrr/pscrr.c b/drivers/power/ 
->>> reset/pscrr/pscrr.c
->>> index 8c45b84059a9..b7e6239e207e 100644
->>> --- a/drivers/power/reset/pscrr/pscrr.c
->>> +++ b/drivers/power/reset/pscrr/pscrr.c
->>> @@ -529,12 +529,15 @@ static struct notifier_block pscrr_reboot_nb = {
->>>   static int pscrr_panic_notifier(struct notifier_block *nb,
->>>                   unsigned long action, void *unused)
->>>   {
->>> -    struct pscrr_provider_dir *dir;
->>> -    set_psc_reason(PSCR_KERNEL_PANIC);
->>> +    /*
->>> +     * Do not overwrite a watchdog pretimeout reason already set by the
->>> +     * pretimeout path before it triggered this panic.
->>> +     */
->>> +    if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
->>> +        set_psc_reason(PSCR_KERNEL_PANIC);
->>
->> It does not sounds correct.
- >>>> May be you should move the set_psc_reason() to different places for
->> panic.
->>
->> I did not explore the panic() function but I would suggest to have 
->> something like:
->>
->> panic(..., ) --> defaults to PSCR_KERNEL_PANIC
->>
->> panic_with_pscrr(..., reason)
->>
->> Then pscrr_panic_notifier() only does the record
-> 
-> Thanks for your review.
-> 
-> I agree that handling the kernel panic reason in this notifier may not 
-> be the ideal approach today. However, my intention is to add userspace 
-> crash recording support in the future as well. Since this notifier 
-> already serves as the common point for recording restart reasons, it 
-> seems like the most appropriate place to handle userspace-triggered 
-> reboot reasons when that support is added.
-> 
-> For consistency, I added the handling for kernel panic and watchdog 
-> reset reasons here as well. While they are not strictly required for the 
-> current use case, this notifier is the most suitable place to record 
-> reboot reasons. Keeping all reboot reason handling in one place will 
-> also make it easier to add userspace reboot/crash recording support in 
-> the future, without introducing a separate mechanism later.
+While the C11 allows us to define variables in the code, we do not
+do this style (see more at [1]). Move the declaration to the top of
+the function.
 
-I understand the purpose of the series, but setting the reboot reason 
-directly from this notifier does not seem like the right approach.
+Link: https://lore.kernel.org/lkml/58fd478f408a34b578ee8d949c5c4b4da4d4f41d.camel@HansenPartnership.com/ [1]
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ drivers/ufs/host/ufs-qcom.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-The notifier should be responsible for recording the reason, while 
-determining and updating that reason should be handled independently, as 
-it may originate from different execution contexts.
-
-The need to explicitly check for PSCR_WATCHDOG_PRETIMEOUT before setting 
-PSCR_KERNEL_PANIC illustrates the problem: the notifier now needs to 
-know about other reboot reasons and their relative priorities.
-
-As more reboot reasons are introduced, this approach will require 
-additional special cases and become increasingly difficult to maintain.
-
-Wouldn't it make more sense to centralize the reason selection policy, 
-keeping the notifier focused on recording the selected reason?
-
+diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
+index 91a14a32f205..fee9b54ba5e1 100644
+--- a/drivers/ufs/host/ufs-qcom.c
++++ b/drivers/ufs/host/ufs-qcom.c
+@@ -2439,6 +2439,7 @@ static irqreturn_t ufs_qcom_mcq_esi_handler(int irq, void *data)
+ static int ufs_qcom_config_esi(struct ufs_hba *hba)
+ {
+ 	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
++	struct ufs_qcom_irq *qi;
+ 	int nr_irqs, ret;
+ 
+ 	if (host->esi_enabled)
+@@ -2457,8 +2458,7 @@ static int ufs_qcom_config_esi(struct ufs_hba *hba)
+ 		return ret; /* Continue without ESI */
+ 	}
+ 
+-	struct ufs_qcom_irq *qi = devm_kcalloc(hba->dev, nr_irqs, sizeof(*qi), GFP_KERNEL);
+-
++	qi = devm_kcalloc(hba->dev, nr_irqs, sizeof(*qi), GFP_KERNEL);
+ 	if (!qi) {
+ 		platform_device_msi_free_irqs_all(hba->dev);
+ 		return -ENOMEM;
+-- 
+2.50.1
 
