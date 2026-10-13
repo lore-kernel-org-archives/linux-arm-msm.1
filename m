@@ -1,79 +1,118 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from ahti.lucaweiss.eu (ahti.lucaweiss.eu [128.199.32.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD7975437CE;
-	Tue, 13 Oct 2026 20:54:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D44F4ED19E;
+	Tue, 13 Oct 2026 21:24:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=128.199.32.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791924848; cv=none; b=m12mskzNSKQENg/8EY5OuP5FLx/qRbAXB/eZf9A7UU2HBSG4Iq++r2Sft0itYZJWvPvIew7Sz34UNhORguH8Ivd/l8RHwXzjJoODxICJ1FHikowxYF+g7y6YK1nKVU9XvU+86y0TkjaNc4PtFQWZF6LC68garefkHOiGiIS7U/k=
+	t=1791926695; cv=none; b=Bj6cYfPqbSp+GTLKIH9n56sFbBVCDfzA0CymP5RwBgRwy/wCfIr23tOKm5tka1ypfc3XFwcs0uFl9yZNkV5hggWZYdSK2kLMGem27bMWFwZhWoAclauaxBGka4YQIwkoqjHNUfZollIkurOCCa12in3axpyA8zP2QEfTpFk+MG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791924848; c=relaxed/simple;
-	bh=S99ly0hySM1Oppd062WwvIU3tAiY+7B0+KcZ40Lero8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iqgA+5RKdxItOS3hoyI6a6sYcLiHH+6FBoJtH/mpOVrNnbYgvJlm5wOng32/+ntmclXudq6gOHxkXXjYF3VTdZA0fztEqvlTYT3Tw4lLm3gxbuO5G004owuFF3bvNuMSlC+4c3fAeL1+2ZN2D4X5+42U6FD2dJePLn2EHETbHUc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=FdG9Le1K; arc=none smtp.client-ip=198.175.65.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1791926695; c=relaxed/simple;
+	bh=nKDrPdtKkv5zqB66996w81/rOjJtFS71nRCLGtuyIJ0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LyqAFMtR+IWHqLWJxxGbbu/jCDrqi1rrncTGMtNw6vEU7uVpq9pJPBR5nf8woxJPRLTulqMCkiwzTq69XiLBCn+wXMcjGrCqp0KWz3LBi5WCRO5UauM5ZoXmWUj4NteF6gjaw51Vg0hRNrSPA0+bfiZlH/H+Kd4kxN/U3cuv8oI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=lucaweiss.eu; spf=pass smtp.mailfrom=lucaweiss.eu; dkim=pass (1024-bit key) header.d=lucaweiss.eu header.i=@lucaweiss.eu header.b=wr1S/Hvg; arc=none smtp.client-ip=128.199.32.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=lucaweiss.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lucaweiss.eu
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="FdG9Le1K"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791924848; x=1823460848;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=S99ly0hySM1Oppd062WwvIU3tAiY+7B0+KcZ40Lero8=;
-  b=FdG9Le1KfBLXfvl339ymSFZxCiCtPmKaXF3A+wTu0Y2D08SA4bka9QvG
-   H17L0JfMV0AbdVc4K3Ve+aumWxWMAHoU4Z9IXDKtzSS/I9RyxmA1x9Z+Z
-   0rrdkNOK6bk802uihxnL8R1+NXRBnIIohLr/bQWW4zkMUjHT3tfgY5x8t
-   J74n8rdovMC0NBc3EV110eRPO+EiHDhyuEGdUkDaQmYRU7Tz7bqokJ87F
-   AWC+kTBlQGI6tdY/cv2XpBBIwqtS3Taj3I0vkgqMzDVqLB/iNXVdRf7/D
-   qX0baVxx80HIO40F1t72qd9R86TYKDXqGWFYTpJmQEPuEYaATW2nQ+f6z
-   A==;
-X-CSE-ConnectionGUID: e+ukQzGUSJ2FyzNouDkwdw==
-X-CSE-MsgGUID: Yx//+zFXQI2WKlH57Yz/3Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11934"; a="649454"
-X-IronPort-AV: E=Sophos;i="6.27,156,1787036400"; 
-   d="scan'208";a="649454"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 13:54:07 -0700
-X-CSE-ConnectionGUID: b8K4uZ5PQnWjXTJAI6OitA==
-X-CSE-MsgGUID: A+jsxrnWTieKBlwuYEL73g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,156,1787036400"; 
-   d="scan'208";a="1353957"
-Received: from ncintean-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.48])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2026 13:54:06 -0700
-Date: Tue, 13 Oct 2026 23:54:03 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>
-Subject: Re: [PATCH v1 1/1] soc: qcom: cmd-db: Use %*pEhp specifier to add
- some sanity
-Message-ID: <as6aa0lqhUC8dttv@ashevche-desk.local>
-References: <20261002103209.875124-1-andriy.shevchenko@linux.intel.com>
+	dkim=pass (1024-bit key) header.d=lucaweiss.eu header.i=@lucaweiss.eu header.b="wr1S/Hvg"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=lucaweiss.eu; s=s1;
+	t=1791926315; bh=nKDrPdtKkv5zqB66996w81/rOjJtFS71nRCLGtuyIJ0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=wr1S/Hvg5UXnBzW08p4gPWHuR5AUhaU8qt4o5jIMTKUj+OeKC+hNv93KH3yAvxDpT
+	 bWSf/OAlI7YyJk65IcIwrBW0JqyDSnoTqzp3ZhjWda8U9ksXiLe8wAvyVGfQ/R7T4g
+	 RTRlh/TI7DeRsVXgSYU+OT8rmt8J0LNvkvc8ugV8=
+Message-ID: <6956afb7-9344-4979-bdf0-2584e890fb22@lucaweiss.eu>
+Date: Tue, 13 Oct 2026 23:18:34 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261002103209.875124-1-andriy.shevchenko@linux.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Subject: Re: [PATCH 1/3] drm/panel-edp: Add AUO B140HAN04.0 panel entry
+Content-Language: en-US
+To: Doug Anderson <dianders@chromium.org>,
+ Luca Weiss <luca.weiss@fairphone.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, cros-qcom-dts-watchers@chromium.org,
+ ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ Jasper Korten <jja2000@gmail.com>
+References: <20261012-book2go-v1-0-7188e7ea7a15@fairphone.com>
+ <20261012-book2go-v1-1-7188e7ea7a15@fairphone.com>
+ <CAD=FV=WVAnohGm8kmaLpfchk_MxCiUB8EcyyWBxZqtnc+9YPcg@mail.gmail.com>
+From: Luca Weiss <luca@lucaweiss.eu>
+In-Reply-To: <CAD=FV=WVAnohGm8kmaLpfchk_MxCiUB8EcyyWBxZqtnc+9YPcg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 02, 2026 at 12:30:46PM +0200, Andy Shevchenko wrote:
-> As Sashiko pointed out in [1] the %*pEp makes the whole thing
-> like "no escape". To add some sanity to this the used specifier
-> also includes ESCAPE_HEX.
+On 13-10-2026 22:35, Doug Anderson wrote:
+> Hi,
+> 
+> On Mon, Oct 12, 2026 at 11:11 AM Luca Weiss <luca.weiss@fairphone.com> wrote:
+>>
+>> From: Jasper Korten <jja2000@gmail.com>
+>>
+>> Add an entry for the B140HAN04.0 eDP panel. It is found on the Samsung
+>> Galaxy Book2 Go.
+>>
+>> $ edid-decode /sys/class/drm/card0-eDP-1/edid
+>>
+>> 00 ff ff ff ff ff ff 00 06 af a9 65 00 00 00 00
+>> 28 20 01 04 a5 1f 11 78 02 9b 85 92 56 59 90 29
+>> 20 50 54 00 00 00 01 01 01 01 01 01 01 01 01 01
+>> 01 01 01 01 01 01 14 37 80 b8 70 38 24 40 10 10
+>> 3e 00 35 ae 10 00 00 18 00 00 00 0f 00 00 00 00
+>> 00 00 00 00 00 00 00 00 00 20 00 00 00 fe 00 41
+>> 55 4f 0a 20 20 20 20 20 20 20 20 20 00 00 00 fe
+>> 00 42 31 34 30 48 41 4e 30 34 2e 30 20 0a 00 ed
+>>
+>> Signed-off-by: Jasper Korten <jja2000@gmail.com>
+>> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+>> ---
+>>   drivers/gpu/drm/panel/panel-edp.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/gpu/drm/panel/panel-edp.c b/drivers/gpu/drm/panel/panel-edp.c
+>> index 2b455369ed70..73cdc2d37ab7 100644
+>> --- a/drivers/gpu/drm/panel/panel-edp.c
+>> +++ b/drivers/gpu/drm/panel/panel-edp.c
+>> @@ -1986,6 +1986,7 @@ static const struct edp_panel_entry edp_panels[] = {
+>>          EDP_PANEL_ENTRY('A', 'U', 'O', 0x635c, &delay_200_500_e50, "B116XAN06.3"),
+>>          EDP_PANEL_ENTRY('A', 'U', 'O', 0x639c, &delay_200_500_e50, "B140HAK02.7"),
+>>          EDP_PANEL_ENTRY('A', 'U', 'O', 0x643d, &delay_200_500_e50, "B140HAN06.4"),
+>> +       EDP_PANEL_ENTRY('A', 'U', 'O', 0x65a9, &delay_200_500_e50, "B140HAN04.0"),
+> 
+> I'd assume you don't have a datasheet here and that the timings are a
+> bit of a guess. It's nice if you put that in the commit message, but I
+> won't block it. Ideally you could reply here and let me know if you
+> referred to a datasheet or just made a guess about the timings so if
+> the question ever comes up later we can find the conversation based on
+> the Link: tag...
 
-Any comments on this, please?
+I assume this is just based on copy-paste from the lines around this. 
+Jasper made this patch, but I assume he doesn't have any docs like that.
 
--- 
-With Best Regards,
-Andy Shevchenko
+I briefly searched for the panel identifier some days ago and didn't 
+directly stumble upon a datasheet.
 
+Regards
+Luca
+
+> 
+> Reviewed-by: Douglas Anderson <dianders@chromium.org>
+> 
+> Pushed to drm-misc-next:
+> 
+> [1/3] drm/panel-edp: Add AUO B140HAN04.0 panel entry
+>        commit: 9125232bc2a5020710db1eadd21973757f740648
 
