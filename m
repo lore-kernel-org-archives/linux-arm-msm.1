@@ -1,120 +1,154 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FC20513554;
-	Tue, 13 Oct 2026 15:51:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 621C047F3B1;
+	Tue, 13 Oct 2026 16:31:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791906667; cv=none; b=K1Z+xoWtl1D1WAuGNcqAsihoQo3Wmuwa4qF5TBq+z+U90ZfHpaBWEgnPjjVtKi/HG+qXEAcFQjeX5TF5UmKsS07z6g3rlvabaA0UIIfpP8ii+Vh4pKo9nw1g4JADy1hBe2sW+8gggdJ7NXYf8gHE8osEkjbiY7RVvat3f5v0nD8=
+	t=1791909070; cv=none; b=a4Ek9UQ2Go2Hz9HZCqlsypyBAWfZtm4E8mlj3GJHwTuSYobzdKN8qGlMfr/sh/DVKXhlq4apBZJAw80ZedKozJN54zhaUAYZeYttSp1OoUDvBcFgDxIMGbvykp+fq1A4GYlGBBX9b8sP/XLvWLyRw4XXpZhmxMzlFqrKryZcfSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791906667; c=relaxed/simple;
-	bh=r3dPIqJVZRDrga/MJbTb3/5uaWkSC7+Lc43sA/eq0hQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IZC6z0ETHKyvLJVwguzUtl2+mIGS8+3LQdWuBhRwzILCAQLXqAhFHA1Q7xzxU82nmGWy7Dv9IOg5lxb1ltgX0U9f/V0d57SuKNajirpdsHRfeYi9W73//0RBO9qQZm9u56FEbFRONwqWIPH/GSVKUB6liKGA6EAVCPW95juRh1M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M7k7sMsx; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791909070; c=relaxed/simple;
+	bh=3PWdcDHBhbPWpZh4tpl2UNxQ8ZhM6kxojcRsoH1f5fI=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=I58HqvLBJcUHpgNUVIDr+MSJT2cFyelyBgXMg9+uAL5OpqgvMNL0qt5vLqNHXbUkpM6CBw/DR2ObC7J104DAzkNZUMWYho96Uy4NtJn7z506liTtGIrr2A5ivtvSR08xCGyKpVzYEJj8EW2oP1XW7OFt3LJKSirQcDLoHdGyhs0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ngPdDnNj; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="M7k7sMsx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 230E81F000FF;
-	Tue, 13 Oct 2026 15:51:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ngPdDnNj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9B351F00893;
+	Tue, 13 Oct 2026 16:31:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791906665;
-	bh=MJ86ar7ft1Sjd5oHlVMjY4gwK71NzHJf7v8T3vhrJ3o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=M7k7sMsxNzFfFxydRPey+N/9CCSkwmN5DyNYLRN5dFgRPYd43mfp0TWbfEdFgtY/w
-	 H00/6MvApVWWBqq6LDZx7/+XInjZmbM5zuio3/3YukuSPwX35+4v+bZT4srhksV8Y/
-	 8bn1MH/mlIp1/ryVdV5wSZQDhrWJpceSWiOoCDwcWL+D5pwOATLTjZsmlUmRJ4pMfD
-	 kLlwAqKnCSGxhK43xZgCQAZ5VYC99wMNctVqXBsraoV+Tk46krOgTi1shEbqCtFfVL
-	 Yf1Ycg8KCjLzBo9AnqlKiK7HQ47FXsYThbecmNPzqLxcksT0Py5AI5nA/VimCa4vcF
-	 VB7t70b3CeeaA==
-Date: Tue, 13 Oct 2026 17:51:03 +0200
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Cc: Andi Shyti <andi.shyti@kernel.org>, 
-	Mika Westerberg <westeri@kernel.org>, Shyam Sundar S K <shyam-sundar.s-k@amd.com>, 
-	Elie Morisse <syniurge@gmail.com>, Benson Leung <bleung@chromium.org>, 
-	Guenter Roeck <groeck@chromium.org>, Mika Westerberg <mika.westerberg@linux.intel.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Wolfram Sang <wsa+renesas@sang-engineering.com>, 
-	Devyn Liu <liudingyuan@h-partners.com>, Oleksij Rempel <o.rempel@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Binbin Zhou <zhoubinbin@loongson.cn>, Khalil Blaiech <kblaiech@nvidia.com>, 
-	Asmaa Mnebhi <asmaa@nvidia.com>, Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
-	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, Ard Biesheuvel <ardb@kernel.org>, 
-	Laxman Dewangan <ldewangan@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Israel Cepeda <israel.a.cepeda.lopez@intel.com>, 
-	Hans de Goede <hansg@kernel.org>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
-	Hans Hu <hanshu@zhaoxin.com>, George Cherian <gcherian@marvell.com>, linux-i2c@vger.kernel.org, 
-	linux-acpi@vger.kernel.org, linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH 1/2] i2c: i2c-core-acpi: use named initializers for
- acpi_device_id
-Message-ID: <as5TMuJUE3H7bcFX@orome>
-References: <20260918-acpi-i2c-v1-0-caf4bea4886c@thegoodpenguin.co.uk>
- <20260918-acpi-i2c-v1-1-caf4bea4886c@thegoodpenguin.co.uk>
- <as5S4eXw9_olPYTK@orome>
+	s=k20260515; t=1791909068;
+	bh=OKaeHoDMxbcRdhaEWBqicGHaLuwHpHXnx6ahTNQjleE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To;
+	b=ngPdDnNjKhLyQT2N6RhyXzNbBJDw86DCky0DDkFZybGOWOVKgXN/ad/0sBCVkayei
+	 HNYj9hrjWpWtBFX/UYrVuXDu9Nm7T92X1bPsmBFtk4Y//+tnDFq0hvpgYtRGyFnd2P
+	 c30Gm7kdg0sOrDiIM+eseypQum5fGKkqjPdbpcWGVdosSz8LpVBEl5UHRwM88GzhMF
+	 LxJV4rIAovtRgv9XNXWPgotqgnhY5XjoeljLa9b9heAjpcpggcX2vRtxecvBr3LGzE
+	 e4URZupBZVLhzqUcLPkBuj4YCM0EBklpXxFGlAABFL+uXuGY4FJty1HMPPxJ406n+g
+	 bQsk8Di+vLpcw==
+Date: Tue, 13 Oct 2026 11:31:07 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Nirmal Patel <nirmal.patel@linux.intel.com>,
+	Jonathan Derrick <jonathan.derrick@linux.dev>,
+	Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org,
+	LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
+	ath11k@lists.infradead.org, ath10k@lists.infradead.org,
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+	Qiang Yu <qiang.yu@oss.qualcomm.com>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/8] PCI/ASPM: Add pci_force_enable_link_state() API
+Message-ID: <20261013163107.GA1522779@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ta66zshbuz6aaek2"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <as5S4eXw9_olPYTK@orome>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <f1390db8-2369-9ab7-49a9-b7f09ef7b1ea@linux.intel.com>
 
+On Tue, Oct 13, 2026 at 02:41:32PM +0300, Ilpo Järvinen wrote:
+> On Mon, 12 Oct 2026, Bjorn Helgaas wrote:
+> > On Wed, Jul 08, 2026 at 04:30:16PM +0200, Manivannan Sadhasivam wrote:
+> > > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> > > 
+> > > pci_enable_link_state() and pci_enable_link_state_locked() APIs only enable
+> > > the ASPM states that were not previously disabled via
+> > > pci_disable_link_state*() API or blacklisted during init (e.g. the pre-1.1
+> > > device blacklist, which is only meant to be overridden with
+> > > 'pcie_aspm=force'). This is an intentional behavior as these APIs must not
+> > > silently re-enable states that were deliberately disabled, since doing so
+> > > could enable ASPM on a link where it is known to be unsafe.
+> > 
+> > I think this is saying that many uses of pci_disable_link_state() are
+> > to avoid hardware errata, i.e., these are basically quirks, and we
+> > should *never* enable those ASPM states.
+> > 
+> > > However, some drivers (e.g. the atheros WLAN drivers) save the currently
+> > > enabled ASPM states, disable all ASPM states before firmware download, and
+> > > then try to restore exactly the states that were enabled before. Restoring
+> > > those states requires re-enabling states that were just disabled via
+> > > pci_disable_link_state() API. But, this cannot be achieved using the
+> > > existing APIs.
+> > 
+> > This sounds like it's also for hardware errata: if ASPM works
+> > correctly, there's no need to disable it during firmware download.  I
+> > think this is *only* the atheros drivers, isn't it?  I didn't see any
+> > others.
+> 
+> There are more that should use disable/enable API. In addition ath*, I had 
+> also these in my unfinished series:
+> 
+>   brcmfmac
+>   ib-hfi1
+>   rtlwifi
+>   rtsx
+>   r8169
 
---ta66zshbuz6aaek2
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 1/2] i2c: i2c-core-acpi: use named initializers for
- acpi_device_id
-MIME-Version: 1.0
+Thanks for those pointers!
 
-On Tue, Oct 13, 2026 at 05:48:58PM +0200, Thierry Reding wrote:
-> On Fri, Sep 18, 2026 at 02:01:50PM +0100, Pawel Zalewski wrote:
-> > Use a designated initializer for the acpi_device_id fields which makes =
-the
-> > code more readable and consistent with how lists are initialized in the
-> > rest of the kernel code base. Also drop explicitly setting fields to 0
-> > where it is redundant.
-> >=20
-> > Unify the list terminator to have a single space between the brackets a=
-nd
-> > no trailing comma.
-> >=20
-> > Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-> > ---
-> >  drivers/i2c/i2c-core-acpi.c | 14 +++++++-------
-> >  1 file changed, 7 insertions(+), 7 deletions(-)
->=20
-> Reviewed-by: Thierry Reding <treding@nvidia.com>
+> > > Hence, add pci_force_enable_link_state() API for such callers. Unlike
+> > > pci_enable_link_state(), it re-enables the requested states even if they
+> > > were previously disabled via pci_disable_link_state() or disabled during
+> > > init. The caller is therefore responsible for only enabling states the
+> > > device actually supports, typically the ones previously reported by
+> > > pcie_aspm_enabled().
+> > 
+> > The problem is that pci_enable_link_state() cannot enable things that
+> > were disabled by pci_disable_link_state().  They're not symmetric,
+> > which violates the caller's expectation.
+> 
+> Yes.
+> 
+> This patch seems to come with my Suggested-by but what I suggested (and 
+> had a patch for) was to make disable/enable proper symmetric pairs because 
+> it is very trappy otherwise. If something else is needed in addition, that 
+> should be named differently like Bjorn also seems to suggest (however see 
+> my alternative suggestion below).
+> 
+> I renamed the current pci_enable_link_state() to 
+> pci_set_default_link_state() in my own attempt to get room for adding the 
+> symmetric pair.
 
-Nevermind, I realized too late that this popped up in my inbox because
-of Andi's message saying the patches were applied.
+We might need new names for pci_enable_link_state(),
+pci_disable_link_state(), and the quirk thing.  If we keep the same
+names, I think it will be pretty complicated to manage the changing
+semantics when backporting driver changes that use them.
 
-Thierry
+> > Instead of adding pci_force_enable_link_state(), I think we should add
+> > a new interface for the *quirk* behavior that permanently disables
+> > states.  Then pci_enable_link_state() and pci_disable_link_state()
+> > could be made symmetric.
+> 
+> My suggestion is to make the disables/enables counted per state which 
+> would allow parallel sources of disables to function without clashing.
 
---ta66zshbuz6aaek2
-Content-Type: application/pgp-signature; name="signature.asc"
+By parallel sources, are you thinking of sysfs and driver calls?  If
+locking would be sufficient I think that would end up being simpler.
 
------BEGIN PGP SIGNATURE-----
+But maybe the issue is these devices where we think ASPM breakage only
+happens in certain circumstances, e.g., firmware download, so we want
+to keep states disabled for that period.  Then I guess locking inside
+the enable/disable doesn't prevent sysfs from enabling those states
+during that period.
 
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrOU2cACgkQ3SOs138+
-s6EkQg//Q94g8lhAZ9FF1mSkUo8+4iAGe4AwVPaHJcaAsp/d3MMwLNgGHDNCCUTg
-G+wEpoEVHWYXoLXJdfApoubX1HNKCyZixOydZMuy/vyjfKK8d24WoUwsrruWKNoC
-Qr6q3NbnPuILsnE6wQDTVdRqZ5iJlmJKMwdL9zfnVqM3bLVwpDqLWA7QkJrqsNY+
-XJcQw62QQ2bvNUYmnEMs96w/3hFC5bQeQkZcRFHxT5YaZwH7n8XX3hvrMUqPUclG
-PWzaf3rRgKJvhonQNuJSHjaSbHTtBt1uuxV/RncTBbTqczCwADWg+huMeyInDKNG
-9jZddMF5telzFS0C6Qm320brFB2ZzTRmjHM+2QzdwwnIN48mkmpy3lwdzBDIsd1O
-aHW2OyY2zyfp3NG+HeVuBNWw3ctMLcffAk5pdZeVvW15ZaAYUMBFd6xMDS40I4TX
-6zJCJz7BRWHyAxLcuIK90E5LgVatIVCJvHGaYnwGPWgGan7CvL3WC+bGGu9u5huD
-LdxQ8jbuT81xOMrbWy9h8so1N+3KjZXMnz12Z2TD8mK+BJpgZt52vXOSzmNWB5Jt
-O1f8qDoslIrvaisD5tgoXZmn9NhZquYjFl1HqpnHxWpBK4rCW0fzIcMO1vByl8eF
-cwD+MtMt4inGeVuyn7CCI4ntQKPY1jGEF0X9EwXGBBfcYoocK/A=
-=H7B1
------END PGP SIGNATURE-----
+> Disable quirks could simply not have the pairing enable, no special 
+> interface needed.
 
---ta66zshbuz6aaek2--
+I'm not sure what this looks like to the caller.  A parameter that
+says whether to count the disable?
+
+I think having a different function name would be helpfully
+descriptive because permanently removing an advertised capability is
+different from temporarily disabling a feature.
+
+Bjorn
