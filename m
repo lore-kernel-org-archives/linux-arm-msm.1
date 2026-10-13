@@ -1,106 +1,187 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from e234-61.smtp-out.ap-northeast-1.amazonses.com (e234-61.smtp-out.ap-northeast-1.amazonses.com [23.251.234.61])
+	(using TLSv1.2 with cipher AES128-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 470B641837E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 02:31:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 629E94718C3;
+	Tue, 13 Oct 2026 02:54:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=23.251.234.61
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791858713; cv=none; b=rdRk6sOUJJmSyHbdNrgSwxxMIo1ZIocv9O+ErYfF2GiN8HwmMHtl7iYpKgSQoVprLmbpyTzrkauQ2XHeCv95mZp/3FF0gd8mYbcp7DIFt4DJhVMdCIdAIEoa/yLA4vkW45n5zOMBlTOdX9DOew80TIc7OxKeHakyKuak1o/JhrY=
+	t=1791860096; cv=none; b=UQNk9inRqN4BW8ipPD1X+CUdHHPKcMQK4W0m/zLIxouq3LuSUgSvsMwL6AMOqzNEKspj1d/qoqS/SPtV0+JJ/LMX807h8FHVg+v1jCyCLdk3lE/B3rn5Wx5rzy5vLIXJnnI7ZU+JpkjT1XRel54PYTtCY0t89LuctR89I2yHfUs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791858713; c=relaxed/simple;
-	bh=QOOZmGzQCw2gDhk3nVUeUzJZ9ASLU+x1zH4rqZROcfM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=useHqtGiibrYsiLKcTZO3bEGysmQeff2ZS5RmGR3A5B+7mKNjkpcdr6hPpbBvnzJCZ7ZXmXdH9SFVz6bAejo69B6swCPFnv4h6I9UlNQo3vbCKaK2j9hyZc8/2e7OW6hLk/Uwo4HffZNOL05VrzKal1RJTsAaORG56gB3I9pyJA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h50cSm1m; arc=none smtp.client-ip=209.85.214.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791860096; c=relaxed/simple;
+	bh=R5dUOAP4FxM0ylbvQIr1OGrrL2192Rwy0KCDgnHxHf4=;
+	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Date:
+	 MIME-Version:Content-Type; b=nDgnsMRX7A2HeZGMOk7gz5lk7L7FRcmUxC9YaUD+3EicBfiSa0IVXBYYLKB0Ud+Ue764xd9lvSfTz7BIray9Fr9X4YInUttOdqc9iL/TDsqq4Ai+hN7t4+HAzMv95JhbAY35v+8t3mOOmc6SKUCw1N4oaahOpoCxr2Ap17l2UKQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz; spf=pass smtp.mailfrom=send.fqwqf.xyz; dkim=pass (1024-bit key) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.b=6VL0XphO; dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b=DbHmXFu4; arc=none smtp.client-ip=23.251.234.61
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h50cSm1m"
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e81738d24eso21090155ad.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:31:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791858712; x=1792463512; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+kM4xBm5zG4P6Fh6dSoNAGMsQSGloU4B+abBkTHzWlg=;
-        b=h50cSm1mFyxpdEDGyK0vCz4wB8eD7Q832rkQ7N55YvmOnReRT7n0lVtB1FNbUpN7Sz
-         2sTdowoPEl13Cl/gKXbtuMppXj3vDc2Kc0aHzx2/kmbK6XVPZBI2/RUq3eW1zAwU/G1O
-         kgpOEqW4s0ImLx/AsnVnHnKYGH7iWqcuufcv0vNYom2lWV7uf+7JVmgFXYzKsshI3nfH
-         wBG/KrbcRKTYEv5fok5QqLMv/4Qob484HokrxiNt3kU6jlgYHxdC0ksJzVd+p5CkULZq
-         1l8nNdRMCWlzVR8fOox40WHd8mBrNopL5eW96JNxQvYbMxMeCpvkbfCR0nxV8SZrlV4k
-         mlXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791858712; x=1792463512;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+kM4xBm5zG4P6Fh6dSoNAGMsQSGloU4B+abBkTHzWlg=;
-        b=UQ06UsRSY2hqWXUdVDYkBqo6+ba/JPzNPb9Ii+BcB1EiSN1jeSfg1kHLxJIhN1ZM6Q
-         ePEZ0Lg2l68JhHfryi/JGEh6M/o01qTU5rpiOv/MXWP5tut0O/1X1yhftav6tePZOHbT
-         B6MxK65AIZrf6lYES6wN7Be5KPwN7YdKEf1whLkzs5dfWGEaqgeNoo5Sq18sva2Ep1GD
-         SXBAmUL9tMhum3bYkfSM3mCF64AyTrKeOOdF+E2c9mdPFBCTbSw+DdCkZyEDkzr+T8lT
-         KSIK5ozUw7x2pQpIOoFztbAnFrMJt87qWHl2M0U/toqA8C2D2wB0WYrZXnBgnBEB/heI
-         jTJQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx6v/Upmy+RxrYWmBIF6jDjSM2bZQhcuNDCoS47tEU253HSmYP1IXJzr1GSim09vZm6zaaHjj3JgKbnxubD@vger.kernel.org
-X-Gm-Message-State: AFq9FYIiW+W3OxpQTOxooUrtWn+18bnKBTIhp0SRz8c+45243nMLzf9F
-	5FatKuolM4rELAUgd0D6pAyoqwmUFKvU5eRc+UAIXlrnD9jZ3zC/Tkzt1SAH1IEd4Ax7vw==
-X-Gm-Gg: AYBFou3FQWzxHGetg9+nEwK76+nudmBBHsTgwq9kKFiV8qV8a94MggO5Ksvx0BqjXLm
-	umj/TblBNS0/e1CHqIxrXVk/DSF0x0/NwKrT1aSoHuIRlSumAalbDgvMKaCzshbqMcW039KUvIz
-	aUDRMJ2XSSQLey9GbZzZnoniJL1YtwfgQZh19cQIT056k+CajQjIlPL/+j6uuXZTYQq/dVt7R8u
-	70MnsUnmrpbHDjcwUi0Lr1pYNTL/pPLIZiAUE6XQ30D+cU+IKN5tFfgkX+J8pwKCEnNGBZADmyq
-	fU2yj8QxU9iwbscJGw/1Mn1oAgPVG0YhoW0VbmBSCuysub1oVrNt7dCevcsEjKilGJb5DRfodvU
-	bua80yrI4R+DetvPIOFTzdHh6XlF/kf6YO7eLQIxLirqKnextZI8PyW/cyovM7lss6bPLOmUUJa
-	Imo6Q+X6kVSZvLO7H0y73XlaE8Ng58/GIra8ZrhjMseH0FJCSY5BRBUprlj5iQ/b4uhmPrWY0VA
-	CVAHuMX9R38nflH7ON3QH4KZn1q877VZT0W3iPHHTTKYdoqkRI=
-X-Received: by 2002:a17:903:1ae3:b0:2e2:d77b:e587 with SMTP id d9443c01a7336-2e842cd4484mr116125665ad.18.1791858711577;
-        Mon, 12 Oct 2026 19:31:51 -0700 (PDT)
-Received: from ryu.remote.fontis.id.au ([2403:5814:a404:0:cbc1:7a8e:f385:c576])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e84219efbasm49079865ad.19.2026.10.12.19.31.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 19:31:50 -0700 (PDT)
-From: Lloyd Hazlett <lloyd.hazlett@gmail.com>
-To: Ramshouriesh <rshouriesh@gmail.com>
-Cc: Lloyd Hazlett <lloyd.hazlett@gmail.com>,
-	Aleksandrs Vinarskis <alex@vinarskis.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 1/9] arm64: dts: qcom: x1-asus-zenbook-a14: Add on OV02C10 RGB sensor on CSIPHY4
-Date: Tue, 13 Oct 2026 13:31:32 +1100
-Message-ID: <20261013023141.436980-1-lloyd.hazlett@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260610-a14-himax-hm1092-v1-1-0c9907da47ed@gmail.com>
-References: <20260610-a14-himax-hm1092-v1-1-0c9907da47ed@gmail.com>
+	dkim=pass (1024-bit key) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.b="6VL0XphO";
+	dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b="DbHmXFu4"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=fqwqf.xyz; t=1791860094;
+	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
+	bh=R5dUOAP4FxM0ylbvQIr1OGrrL2192Rwy0KCDgnHxHf4=;
+	b=6VL0XphOYUcNFSyr3gumygH+LJYIDRlZzxmD9eqX5VQV7PhRHMPEbTjId42jUVpr
+	opkrEvFa20OYuYJfXFAjA8pTLk3UzCr7fb7B0ZTuZe7OpsCmDRMpfD7dns81zGrqywV
+	Z2vU9ScuWTeB1J2JaHZf6YNjGwuLXLTrr4olNnek=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1791860094;
+	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=R5dUOAP4FxM0ylbvQIr1OGrrL2192Rwy0KCDgnHxHf4=;
+	b=DbHmXFu4cx2dckbJu8Tadik+98oDobw6QcqVjmKciH+ruRMV+Uf2wkx+siR13uBr
+	IZLSmS77MLHm+4DnQwPSO37TR7phd1DtHv2+qrjUDqtyOHo15AlvMHzUp9QJuXxtfH/
+	bKzHRpi2fTKfRrf0GKAdygFyvDpVBM+Om7P320Mo=
+In-Reply-To:
+ <010601a1251fbfb9-9afc4070-5194-4714-86b1-5358791e7770-000000@ap-northeast-1.amazonses.com>
+References:
+ <010601a1251fbfb9-9afc4070-5194-4714-86b1-5358791e7770-000000@ap-northeast-1.amazonses.com>
+X-Mailer: git-send-email 2.53.0
+From: Jizhou Tong <fqwqf@fqwqf.xyz>
+To: Bryan O'Donoghue <bod@kernel.org>
+Cc: vkoul@kernel.org, linux-phy@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org, 
+	sashiko-reviews@lists.linux.dev
+Subject: [RFC PATCH v2] phy: qcom-mipi-csi2: round the requested settle
+ interval up
+Message-ID: <010601a1332f343c-b1381230-9344-4bef-a709-99e07b18d513-000000@ap-northeast-1.amazonses.com>
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 13 Oct 2026 02:54:54 +0000
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
+X-SES-Outgoing: 2026.10.13-23.251.234.61
 
-For whenever this comes back: it also works on the X1E80100 variant of
-this machine, a UX3407RA, which shares this dtsi with the X1P42100 one
-you tested on.
+The settling counter represents the requested interval in timer ticks,
+with the existing six-tick hardware offset. Truncating the division
+programs fewer ticks than requested when the interval is not an exact
+multiple of the timer period.
 
-I rebased it onto v7 of "arm64: dts: qcom: Add x1e/Hamoa camera DTSI",
-since the ports rework there means the endpoints as posted no longer
-apply. In that form the graph links end to end:
+Rounding the final division alone is =
+insufficient: the earlier unit
+interval calculation already rounds down =
+before multiplying by six.
+At a 599.9 MHz link frequency and a 100 MHz =
+timer, the exact requested
+interval is approximately 90000.833 ps. The =
+truncated unit interval
+produces 89998 ps, so even a rounded-up final =
+division programs nine
+ticks (90000 ps) instead of the required ten.
 
-  ov02c10 11-0036 -> msm_csiphy4 -> msm_csid0 -> msm_vfe0_rdi0 -> msm_vfe0_video0
+Compute the complete six-unit-interval term as 3 / link_freq and round
+it up to picoseconds with a 64-bit divisor. Then round up the conversion
+to timer ticks. Retain the timer-period calculation, minimum counter
+handling and six-tick hardware offset.
 
-carrying SGRBG10_1X10/1928x1092, with libcamera capturing continuously at
-28-32 fps through the software ISP and producing correctly exposed frames
-rather than blank ones.
+Link: https://lore.kernel.=
+org/all/sashiko-outbox-166399@kernel.org/
+Signed-off-by: Jizhou Tong =
+<fqwqf@fqwqf.xyz>
+---
+Changes in v2:
+- Round the complete 6 * UI term up =
+instead of truncating UI first.
+- Use 64-bit division for the =
+link-frequency denominator and interval.
+- Add the 599.9 MHz counterexample=
+ and rational-boundary regression tests.
 
-Beyond moving the endpoints onto the ports that series declares, dropping
-phy-type and following the vdda-0p8 to vdda-0p9 rename, one thing looked like
-it might be worth changing: the pm8010 block declares vdd-l7-supply while
-instantiating no LDO 7, so nothing consumes it. I dropped it and the sensor
-still comes up.
+v1: https://lore.kernel.=
+org/all/010601a1251fbfb9-9afc4070-5194-4714-86b1-5358791e7770-000000@ap-nor=
+theast-1.amazonses.com/
+Review: https://lore.kernel.=
+org/all/sashiko-outbox-166399@kernel.org/
 
-Happy to send the rebase if that saves you anything when the prerequisites
-land. Claude (opus-5) was used for the rebase and for running the tests above.
+Rechecked against media-next =
+d7e7bca71698 on 12 October 2026, which
+contains the v18 CSI2 PHY driver and=
+ still truncates this calculation.
+The base/prerequisite metadata also =
+permits applying this increment
+on Linux 7.3-rc5 plus the original v18 PHY =
+changes.
 
-Tested-by: Lloyd Hazlett <lloyd.hazlett@gmail.com>
+Validation: ARM64 W=3D1 driver-object build and 128482 ASan/UBSan=
+ test
+cases using the actual C function against independent rational bounds=
+.
+The v1 calculation fails 410 cases, including 599.9 MHz / 100 MHz.
+
+This remains an RFC for confirmation of the hardware counter's rounding
+policy and existing six-tick offset. The timer-period convention is
+unchanged. The v2 arithmetic has software/build coverage; it has not
+yet been isolated in a new SL7 hardware test.
+
+ .../phy/qualcomm/phy-qcom-m=
+ipi-csi2-3ph-dphy.c    | 15 ++++++---------
+ 1 file changed, 6 =
+insertions(+), 9 deletions(-)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-m=
+ipi-csi2-3ph-dphy.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+index 966d79c98f9b21e1a235b8397c4c84b25d869427..f07699ba1fde63536b4d63cc400=
+8ff936f78cc7d 100644
+--- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy=
+.c
++++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+@@ -9,6 +9,7 @@
+ #include <linux/delay.h>
+ #include <linux/interrupt.h>
+ #include <linux/io.h>
++#include <linux/math64.h>
+ #include <linux/time64.=
+h>
+=20
+ #include "phy-qcom-mipi-csi2.h"
+@@ -220,23 +221,19 @@ static void =
+phy_qcom_mipi_csi2_reset(struct mipi_csi2phy_device *csi2phy)
+  */
+ static u8 phy_qcom_mipi_csi2_settle_cnt_calc(s64 link_freq, u32 =
+timer_clk_rate)
+ {
+-	u32 t_hs_prepare_max_ps;
+ 	u32 timer_period_ps;
+-	u32 t_hs_settle_ps;
++	u64 t_hs_settle_ps;
+ 	u8 settle_cnt;
+-	u32 ui_ps;
+=20
+-	ui_ps =3D div64_u64(PSEC_PER_SEC, link_freq);
+-	ui_ps /=3D 2;
+-	t_hs_prepare_max_ps =3D 85000 + 6 * ui_ps;
+-	t_hs_settle_ps =3D =
+t_hs_prepare_max_ps;
++	/* Round the complete 6 * UI term up, avoiding an =
+intermediate truncation. */
++	t_hs_settle_ps =3D 85000 + =
+DIV64_U64_ROUND_UP(3 * PSEC_PER_SEC, link_freq);
+=20
+ 	timer_period_ps =3D div_u64(PSEC_PER_SEC, timer_clk_rate);
+=20
+-	if ((t_hs_settle_ps / timer_period_ps) < 6)
++	if (div_u64(t_hs_settle_ps,=
+ timer_period_ps) < 6)
+ 		return 0;
+=20
+-	settle_cnt =3D t_hs_settle_ps / =
+timer_period_ps - 6;
++	settle_cnt =3D DIV_U64_ROUND_UP(t_hs_settle_ps, =
+timer_period_ps) - 6;
+=20
+ 	return settle_cnt;
+ }
+
+base-commit: =
+72d3fcf802c45d00b300f25b848a93c3a2bd7c7e
+prerequisite-patch-id: =
+ab0db8f40ef87320e67543686702109ac045784f
+prerequisite-patch-id: =
+d6b3dab26f8a95822465a176f691280a5610c22e
+--=20
+2.53.0
+
