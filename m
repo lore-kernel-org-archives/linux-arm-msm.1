@@ -1,96 +1,106 @@
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D1483E3152
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 02:04:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 470B641837E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 02:31:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791857087; cv=none; b=Ad+YEI0syQfXqfK4rB2IPDbscTyqTsD+/Eu2fG4dF4q6sGD4EglpQkPjh4Bl5PxioF8V6TCjIyBJprAQ96rRMaxKDmlgMPL9AVTbuYBiFmAm2zHndRkpS3Rb1bZU0XwteXii88bPr6RqTHZSL4eWpLYgrMnmqZu2cAOuBhAnhiw=
+	t=1791858713; cv=none; b=rdRk6sOUJJmSyHbdNrgSwxxMIo1ZIocv9O+ErYfF2GiN8HwmMHtl7iYpKgSQoVprLmbpyTzrkauQ2XHeCv95mZp/3FF0gd8mYbcp7DIFt4DJhVMdCIdAIEoa/yLA4vkW45n5zOMBlTOdX9DOew80TIc7OxKeHakyKuak1o/JhrY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791857087; c=relaxed/simple;
-	bh=mJROJe3OAAU0Pu8r3fKHcLm47TUe2ZgflXuCwEYIEHA=;
+	s=arc-20240116; t=1791858713; c=relaxed/simple;
+	bh=QOOZmGzQCw2gDhk3nVUeUzJZ9ASLU+x1zH4rqZROcfM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=Q/Uck+9Be4UtpAWu1WqJv82XXEypPgF9w5+jpNCt63+/ASkq+71QZk96qF/rzjNfBbCFD1fol3yuTR1jM4dRINr6fN++I8SvZog2m3VjfCqiGNTJvv6pPUhKZoNE8qhWbdGiKg2KbdaBraq4QzbvVnannIlrWWlucqt2zv+pxro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=MHYGTG6q; arc=none smtp.client-ip=202.38.64.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	 MIME-Version; b=useHqtGiibrYsiLKcTZO3bEGysmQeff2ZS5RmGR3A5B+7mKNjkpcdr6hPpbBvnzJCZ7ZXmXdH9SFVz6bAejo69B6swCPFnv4h6I9UlNQo3vbCKaK2j9hyZc8/2e7OW6hLk/Uwo4HffZNOL05VrzKal1RJTsAaORG56gB3I9pyJA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h50cSm1m; arc=none smtp.client-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="MHYGTG6q"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h50cSm1m"
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e81738d24eso21090155ad.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 19:31:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:Content-Type:
-	Content-Transfer-Encoding:MIME-Version; bh=KI2btd297R1oHdc/tKxzf
-	IhNKhPVfKEkKW+obUuhMWE=; b=MHYGTG6qxCv2Vclht/uFV9SgyPND+Xph7309S
-	+uKkNUFMtdCFt3MjCmrB0iIWBBh1Bn4N8NPTniKOnsAkJzqLY0egabHi5pfyVUMk
-	J+nfhGFaooN5yiO0Xllm8DXyduTikKPoxl5/K36nh4S7JxhzdWgxmaNps/DnN04f
-	9kJg6A=
-Received: from [127.0.1.1] (unknown [114.214.192.228])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgAnLTSkkc1qe3PdAQ--.14S2;
-	Tue, 13 Oct 2026 10:04:20 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: dri-devel@lists.freedesktop.org
-Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>
-Subject:
- Re: [PATCH] drm/msm/dpu: add the missing GC block to the SM8750 DSPP catalog
-Date: Tue, 13 Oct 2026 10:04:20 +0800
-Message-ID: <179185706019.408862.3377489837866634553@mail.ustc.edu.cn>
-In-Reply-To: <20261013002124.332074-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261013002124.332074-1-xiaqinghuan@mail.ustc.edu.cn>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=gmail.com; s=20251104; t=1791858712; x=1792463512; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+kM4xBm5zG4P6Fh6dSoNAGMsQSGloU4B+abBkTHzWlg=;
+        b=h50cSm1mFyxpdEDGyK0vCz4wB8eD7Q832rkQ7N55YvmOnReRT7n0lVtB1FNbUpN7Sz
+         2sTdowoPEl13Cl/gKXbtuMppXj3vDc2Kc0aHzx2/kmbK6XVPZBI2/RUq3eW1zAwU/G1O
+         kgpOEqW4s0ImLx/AsnVnHnKYGH7iWqcuufcv0vNYom2lWV7uf+7JVmgFXYzKsshI3nfH
+         wBG/KrbcRKTYEv5fok5QqLMv/4Qob484HokrxiNt3kU6jlgYHxdC0ksJzVd+p5CkULZq
+         1l8nNdRMCWlzVR8fOox40WHd8mBrNopL5eW96JNxQvYbMxMeCpvkbfCR0nxV8SZrlV4k
+         mlXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791858712; x=1792463512;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+kM4xBm5zG4P6Fh6dSoNAGMsQSGloU4B+abBkTHzWlg=;
+        b=UQ06UsRSY2hqWXUdVDYkBqo6+ba/JPzNPb9Ii+BcB1EiSN1jeSfg1kHLxJIhN1ZM6Q
+         ePEZ0Lg2l68JhHfryi/JGEh6M/o01qTU5rpiOv/MXWP5tut0O/1X1yhftav6tePZOHbT
+         B6MxK65AIZrf6lYES6wN7Be5KPwN7YdKEf1whLkzs5dfWGEaqgeNoo5Sq18sva2Ep1GD
+         SXBAmUL9tMhum3bYkfSM3mCF64AyTrKeOOdF+E2c9mdPFBCTbSw+DdCkZyEDkzr+T8lT
+         KSIK5ozUw7x2pQpIOoFztbAnFrMJt87qWHl2M0U/toqA8C2D2wB0WYrZXnBgnBEB/heI
+         jTJQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx6v/Upmy+RxrYWmBIF6jDjSM2bZQhcuNDCoS47tEU253HSmYP1IXJzr1GSim09vZm6zaaHjj3JgKbnxubD@vger.kernel.org
+X-Gm-Message-State: AFq9FYIiW+W3OxpQTOxooUrtWn+18bnKBTIhp0SRz8c+45243nMLzf9F
+	5FatKuolM4rELAUgd0D6pAyoqwmUFKvU5eRc+UAIXlrnD9jZ3zC/Tkzt1SAH1IEd4Ax7vw==
+X-Gm-Gg: AYBFou3FQWzxHGetg9+nEwK76+nudmBBHsTgwq9kKFiV8qV8a94MggO5Ksvx0BqjXLm
+	umj/TblBNS0/e1CHqIxrXVk/DSF0x0/NwKrT1aSoHuIRlSumAalbDgvMKaCzshbqMcW039KUvIz
+	aUDRMJ2XSSQLey9GbZzZnoniJL1YtwfgQZh19cQIT056k+CajQjIlPL/+j6uuXZTYQq/dVt7R8u
+	70MnsUnmrpbHDjcwUi0Lr1pYNTL/pPLIZiAUE6XQ30D+cU+IKN5tFfgkX+J8pwKCEnNGBZADmyq
+	fU2yj8QxU9iwbscJGw/1Mn1oAgPVG0YhoW0VbmBSCuysub1oVrNt7dCevcsEjKilGJb5DRfodvU
+	bua80yrI4R+DetvPIOFTzdHh6XlF/kf6YO7eLQIxLirqKnextZI8PyW/cyovM7lss6bPLOmUUJa
+	Imo6Q+X6kVSZvLO7H0y73XlaE8Ng58/GIra8ZrhjMseH0FJCSY5BRBUprlj5iQ/b4uhmPrWY0VA
+	CVAHuMX9R38nflH7ON3QH4KZn1q877VZT0W3iPHHTTKYdoqkRI=
+X-Received: by 2002:a17:903:1ae3:b0:2e2:d77b:e587 with SMTP id d9443c01a7336-2e842cd4484mr116125665ad.18.1791858711577;
+        Mon, 12 Oct 2026 19:31:51 -0700 (PDT)
+Received: from ryu.remote.fontis.id.au ([2403:5814:a404:0:cbc1:7a8e:f385:c576])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e84219efbasm49079865ad.19.2026.10.12.19.31.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 19:31:50 -0700 (PDT)
+From: Lloyd Hazlett <lloyd.hazlett@gmail.com>
+To: Ramshouriesh <rshouriesh@gmail.com>
+Cc: Lloyd Hazlett <lloyd.hazlett@gmail.com>,
+	Aleksandrs Vinarskis <alex@vinarskis.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 1/9] arm64: dts: qcom: x1-asus-zenbook-a14: Add on OV02C10 RGB sensor on CSIPHY4
+Date: Tue, 13 Oct 2026 13:31:32 +1100
+Message-ID: <20261013023141.436980-1-lloyd.hazlett@gmail.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260610-a14-himax-hm1092-v1-1-0c9907da47ed@gmail.com>
+References: <20260610-a14-himax-hm1092-v1-1-0c9907da47ed@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgAnLTSkkc1qe3PdAQ--.14S2
-X-Coremail-Antispam: 1UD129KBjvJXoWruw4kGr1kuF45Xw1DJrWrXwb_yoW8Jr4xpa
-	y3Cr1Sqrs5Kr97Aws7uw17K3s7twn5X3srtFWrWr98Cas5KF1akrWfGFWUuryj9rZxG39r
-	tFs8trZ5X3WUZaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkab7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4
-	vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
-	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
-	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x0262kKe7AKxVWUtVW8ZwCF
-	04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r
-	18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vI
-	r41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr
-	1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvE
-	x4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07j8KsUUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARETB2rNcIkC0AAasS
+Content-Transfer-Encoding: 8bit
 
-Hi,
+For whenever this comes back: it also works on the X1E80100 variant of
+this machine, a UX3407RA, which shares this dtsi with the X1P42100 one
+you tested on.
 
-Please drop this patch, it is a duplicate.  The same change is already in the
-msm tree as
+I rebased it onto v7 of "arm64: dts: qcom: Add x1e/Hamoa camera DTSI",
+since the ports rework there means the endpoints as posted no longer
+apply. In that form the graph links end to end:
 
-  3389406e6a03 ("drm/msm/dpu: Fix GAMMA LUT for sm8750 related DPUs")
+  ov02c10 11-0036 -> msm_csiphy4 -> msm_csid0 -> msm_vfe0_rdi0 -> msm_vfe0_video0
 
-applied on 2026-09-30 for v7.4.  I based my patch on v7.3-rc7, where the entry
-is still missing, and I missed drm-msm-next while checking for existing work.
-Sorry for the noise.
+carrying SGRBG10_1X10/1928x1092, with libcamera capturing continuously at
+28-32 fps through the software ISP and producing correctly exposed frames
+rather than blank ones.
 
-On sashiko's two findings:
+Beyond moving the endpoints onto the ports that series declares, dropping
+phy-type and following the vdda-0p8 to vdda-0p9 rename, one thing looked like
+it might be worth changing: the pm8010 block declares vdd-l7-supply while
+instantiating no LDO 7, so nothing consumes it. I dropped it and the sensor
+still comes up.
 
-- The missing gamma LUT size check is real, and pre-existing.  The DRM core
-  passes max_size and expected_elem_size to drm_property_replace_blob_from_id()
-  but no exact size, so a blob shorter than
-  DPU_GAMMA_LUT_SIZE * sizeof(struct drm_color_lut) is accepted, and
-  _dpu_crtc_get_gc_lut() then reads DPU_GAMMA_LUT_SIZE entries.  This affects
-  every DPU platform that exposes the GC block (SDM845, SM8650, SM8750), not
-  just the catalog entry in this patch.  I have just sent a patch that adds
-  the size check to dpu_crtc_atomic_check().
+Happy to send the rebase if that saves you anything when the prerequisites
+land. Claude (opus-5) was used for the rebase and for running the tests above.
 
-- The GFP_KERNEL allocation in dpu_crtc_atomic_begin() (through
-  _dpu_crtc_setup_cp_blocks()) is also pre-existing and independent of this
-  patch.  I did not want to bundle it with the size fix; happy to follow up
-  with a separate patch if that is wanted.
-
-Thanks,
-Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
-
+Tested-by: Lloyd Hazlett <lloyd.hazlett@gmail.com>
