@@ -1,214 +1,565 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F603AF667
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 08:21:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791879687; cv=pass; b=DhGj8zgwdS7/Fsi2agQrrH7UhuM8GIYBO9m4mQrGgNec8Lh4fwBPVyxX46c8HI+OjpTTtNsobJLl4pP7BmXKdMG5mGt5CKwBPZqGxiVTg5IP+vlqUR5iglI4UoeR4Me/K5Oh8Uv8TaxyxHrbR7rBGb8M0TJvKgACv5kp2gOBfMs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791879687; c=relaxed/simple;
-	bh=Nx1SjMixwkrle4y3U7Ab2IqOkuOdHGj1UhkIxBeqQFg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hRaW7p387ba+QYZSg47qqzvGBz8nhWkTDwduvOoLa76UFjPbvxtfxTPPgLQg8+tgGLg+1CoMBV1esr+Rb4hcsiLu7qZU232iTsadnQKDOeFJtX2bAnt6IjhLbalxPUQulPsgeKM6fOH8r4MZU07nLpprVulG+ZY129wdb5ZUQK8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gJqhhety; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QEGmre6K; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1F613B993B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 08:21:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791879704; cv=none; b=fcuIagnWh1ir4J0R+9m9/k2Q6pfqu0bn33jIAk8bbLWL/1cdBGe97yVcbxtmAeCPMk5fPbZBdLqQYGa0bCdBaYj+sMZcZLB3WS9R4mrFjUalc3Wr2z4EZfJwfzNGa5r0YeSq4806s4w5WgNrmHz0b4Q/4nE012EU739ggccuvpU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791879704; c=relaxed/simple;
+	bh=UZJ/hrHDPSKi0/NdmI02ttuZ38VVd5KNlUzAgBWKVh4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=QB+uFbrDeY61HKtnJjzflJcGvL7FUAxcvOarq7uGdNiM7Y1S2sSdyIe/H74TdXI9l5a2FAGp6rxpihsLpyvCNzfBnm2XfNnzgojn9SWbz1ybzfDtL4TcUEwFr/mJSXGpsSm8vek3p+61aYahCR4dISO3TEKclFlp7H30yNKhvsU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=YZg7w5Pd; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gJqhhety";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QEGmre6K"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D8GQLL3054805
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 08:21:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	c1PNbxNjxl3yMAPLNBXy8s1I6w1mnoqka0xQAK1gKCs=; b=gJqhhety9WqLgbhm
-	DPZ5pkN9ePz0IasGDvLN7xivT0wGbJVPY+JcPy2W+WhjY6zWN1Y82ADafcAjCuY2
-	uy+EmvSLU8BAXl80MLS6loNmUnCXQKBlwf5rmZqMLRY671j5TEst+YtQP1qwS5i8
-	qMyWyGBSQYjbNAXm/3oiCiwy1de+ZlqjGl94XHIsP+D6vRQ2zx7x4xK6AcUUMwDe
-	I7Vq0MP1HwbxcvmHy3j+s0yLAH22SXe/i83KaozBfk4zRsayTDgqveZZaHDoT5JS
-	r2WD8zvrfv40NUSUjhYOvDRuRfIb1ilb0eUgJzF2z4vWXg3zOgkxViHFc3YewnLa
-	+2l1FQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h93aeu8dh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 08:21:25 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93cbacbb996so441461885a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 01:21:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791879685; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ftGFyifmSgIRIf0G5jmU/Dvh23OatKtbs4tvHym/8UqQYHWXL5T/fJxwLEgRqEAgRh
-         B31GVwUooREAmKu26sTQfN64pdb91u5RDz0D0rH42F0VfYluMChracC6+0RX3bu0Y7Br
-         TO0ghkGcAai2zER9KCKlXHVDzFaz8X1Rfr3+E6/ex7eukjIlC8XMbWlN7pR3P4qyR4ai
-         oy0jZs40CSp3ztuIYc62a1lYAEgRaqAe7SM/jIbGwrpNLuWrsegH9UoSQIkyi/neyjUs
-         AmpuuFX7+u1RSVTUyVRW7v9GhmFFrbDZi/4Hr3m7cOC0HlqhmdN+8H6ktBoXHp5UQDV/
-         GHPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=c1PNbxNjxl3yMAPLNBXy8s1I6w1mnoqka0xQAK1gKCs=;
-        fh=NJtln2Xu/QNX7spzzl3ClSIrPVNnCWX7kmefNnPkORg=;
-        b=i+iAArgdiRzB+/zh4jxavax9xS4gKdAp9978xcsCPpoFx41zWjqea51CKBZeawNB3l
-         H8ELewASmrqM1bcmDCg5wXjEUep5cU8NH2d8d7tWfWx/pAPnF76To8EDJ7mD0K0ewEz9
-         bBsSM4vjvemLbvGCnL/nsO1wMWS4GpmOgjPQ1HojKqYNa5STRXx9bgEJ42v1vAzXab9C
-         R8kSzrh85r/qvtp+iEZyseVJGFL0rvLIMZguZVCYe16hpWKUA8f0pwSSWlns5B2ttXhs
-         pxsXBeCfzE51U3jaAciNuwwwC9F1kLORjK5Y6X49zeYCtIrWHm4Ve44/PxfrAK7rva4V
-         7ODA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="YZg7w5Pd"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a16c1608faso34280695e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 01:21:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791879685; x=1792484485; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=c1PNbxNjxl3yMAPLNBXy8s1I6w1mnoqka0xQAK1gKCs=;
-        b=QEGmre6K1AkI91UXE6JocG1heQf9zW2nTZQwD+IpmzfKyp6JRwNKqJawK91ah+6B3M
-         lY5Np1965Pp+Ck6Ew0dwMGZqz/KKJd1959W2C89UFGebmlELS8y5bUmNVgpQaQDZt+u6
-         E2Xl1qPgPs3hWw/fSt4rVa+Kq0ZmeZEoljWq/t34ctPGPHXtvuGAfI42uZEPJOx9FSC8
-         pGMOkjYFZ1SxuVcl9h5LW5RvXKc6Kf4xUmCCk1Rv5ef4/wkDcIsJMcqa7ai70/HHbTSg
-         2gKWT7vMVNqu0S9RSzWihqVBAUii/PPFeo/gkZ9FpbhpcgtkQni5ojhoS4C+C5Xi8TmE
-         Yp0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791879685; x=1792484485;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=baylibre.com; s=google; t=1791879699; x=1792484499; darn=vger.kernel.org;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=c1PNbxNjxl3yMAPLNBXy8s1I6w1mnoqka0xQAK1gKCs=;
-        b=aHMCujiqVtNjwtSbgz+hbG6vjz1loT9RM6J78XmJn3S1Q0UH5X/kghW8BLhFNAl1x7
-         pmreVzGHi7TKCXfdGZBdrbvKSRboUgAJ7qZACCgBiHFMf5Uj3N7uKxRvg0RQ/bp9hvUs
-         a7efnjutsiVxUTRIVdlh7XUFAN6xct0c2pCWNRUU8pXypEDkDd4NZFM6Zxe609UVBktq
-         1O3Tm2k/Zd+zRvMqOIDYaScdiijoPydrWjPEruCRSVYuEowBYZBxvR6Uifl/EItxXphR
-         xzJU3jOX48U1Ssgqu3Mgh9O9qNMlqWSCgH7JnRQmIK5V+AKpAQEbxsqBsv8QFdQVWegh
-         2rlw==
-X-Forwarded-Encrypted: i=1; AKwUvBzYZkcz16GnE7Q/h5GVNGOVPZ/LPngdmCpbaj+PssuMBdqeqo3ib9KJGEDbNN18lQEwmJZ6rhPcHXmnR8tF@vger.kernel.org
-X-Gm-Message-State: AFq9FYKjjUFztWRabJ4npDVU8L1HPjh1taYBRJeQr4kjdg+r2oqxFWzG
-	ZfNmk5mTC/Q/Jp+AszL0ERLQd8xjdqNh2ED09vvnJaE6exJRvCwWHSkjobza0lgAmcX6yQBPOtD
-	+rv0wQ0QpLfZOx/9BFJd1htAlmxmXEFeao6V2ro+WzDp9GuB6Ppt6uPRcZOHeeOxzVhVZszXMBA
-	T2/KeCZkByJVDurkQjFeQZsAFBnxyDgSF5v+4w2QomVIKQ+H2FnlfhNg==
-X-Gm-Gg: AYBFou3JHR/UzI4t4cKcosWAVPVeRboHGDTBJubsws6PwezFW3slXLGakKwrMr5Avd1
-	jCHX6AWU5XSKW5+opYlKufkOZ9UluXvh603uClHrthzXJeDArmBMoQv1hp9qZrDyCRqD+0KVUC0
-	53cq+9T/8qV5NxwhVvwn0uzgktHqZF7uoK/+wZMAALfvl1qEQxdem7xlisq6vNVdpSylbsvLtKX
-	r2Q8IzbftIjgJLquqjzMeRRZG7H7z1Wrs9TcBaCyszMgjmkAT5l6A28FivSNHJoH8kqNnjWn85L
-	FTuNKOH13J2Tg8uv07mK+fy4/4Dw
-X-Received: by 2002:a05:620a:6e87:20b0:93e:c5eb:2230 with SMTP id af79cd13be357-93ec5eb2796mr1173391385a.33.1791879684439;
-        Tue, 13 Oct 2026 01:21:24 -0700 (PDT)
-X-Received: by 2002:a05:620a:6e87:20b0:93e:c5eb:2230 with SMTP id
- af79cd13be357-93ec5eb2796mr1173389185a.33.1791879683843; Tue, 13 Oct 2026
- 01:21:23 -0700 (PDT)
+        bh=BxWR1zl2O5SCfVo1idfGGbDEUF4x05UeizzmTwczSb4=;
+        b=YZg7w5PdqFIGedpEadVcnCtqxNgvDF+ETvgc6q4/NpO3xMRfx2cq3EvgoYLWSC2r2Q
+         ySAkE0XwE2iGOmPGN7jsMWfeUTRaeeA+IBVhdiXgPrOpDb52lYD0SxS80VeGcMVGk901
+         n3uI8eH8usA5G1xN1rVbS06s8JzRX18SY28Nt9lratRyPQAywmtb7dzv9o7wzJjVqp/H
+         19S4SFZcRRldIYJHWEjGcsFz27arPpfnYevTepB4FgnqigpQ/KHTADpYzdYeuvO70xX6
+         cvDbZ2aglLCNMtkN7St0mCTu200/16ZmrmE//SHBxyWWl9dwmWkv6G5m2ZIgV3XQcu4W
+         3gTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791879699; x=1792484499;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=BxWR1zl2O5SCfVo1idfGGbDEUF4x05UeizzmTwczSb4=;
+        b=BPmQvjXtU+NZC7nVBv7dKoKQ8WciUfZiLsjhG289znzb2P4VDvzG/9KsOY/Vqgpuav
+         BHy2ElvvgaxrKqh34uec3799jBUkgoacLB8B1ZFxozA4AlINx3bkXnmsx+1Fl4U8IGZP
+         9dJI2F3SELm50i+xWO4osfx2n4jNry5tarN5Z4FvfGiR9zPjS8y3goX/k5anH74gvjvy
+         oqQtimHPq5PMSAicyc7Hgh9rNKJ6E83fwyE3PfIM1siJSR2yNM62c+2w3GRiQKxXfo7N
+         4iDvmcItWSDFIq/7wqHFR/+yqVL4R3Nz0ZYSZEYea8b9P84WirS1cAVCbJqDLMLZxHcl
+         a8RA==
+X-Gm-Message-State: AFq9FYKflq+qgd0jpOMwOmij2l2Kv276CHQ2HV1vYDhT3a3c1qWSHLKS
+	RAu3gws2FbP+k6TE2rbButNAQUx0eiFlrd/iCZz6HIs8QoGczldy9QR8c5XoCNs65cA=
+X-Gm-Gg: AYBFou0jhXMtURCRC6xtQF6tXcaSVyoT9Fw5rh5ax+eAGC4E5xzh36tbGn9iAUl+FIq
+	C6FlHAbC0iGqFyk9F0rCVXCz+m5BXkrLxBE1VnBAhEWePxqK+5sTqfFR1iaJ/8CicesRNzhBwHb
+	np/zmVW6eyV3wiqus1HryJJVA/IL1ZtuajrUZZfx/zxK+XJ1QWpEQEITPKpPcTA6YB7rPOVrlqu
+	PpSIezDQPsJRSEhe+B/Mak7feJTjg3sAqXT0uLeQHLReAqHPIRryNql3zpxphr/4RkqhsOvstZN
+	17xNVU9xY2MCxUbcWoJFEkDHP8ixRoLgfvrvbK+Gwo4F7Qe2XSdlp9HNmyNIwBxtyexWnmdzM94
+	L0K78DS6tsQfd7+gsipIeM/j5EcyYdkCPAGVO0Ns0mjZT9drMT8vXJIK+WHe87OKEKApLDXyqqS
+	hMdTN9fgdUs2eEI6RUHKIYiHPdaccHalMH13V4o33eNIjYzPC664yFlAzym7Zrt5qIYQn+L2wUU
+	GkKoXSsHTlaSXZKiA==
+X-Received: by 2002:a05:600d:111:b0:49c:ff66:7d88 with SMTP id 5b1f17b1804b1-4a18dcc0459mr154895425e9.7.1791879698825;
+        Tue, 13 Oct 2026 01:21:38 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaa3fsm3841809f8f.10.2026.10.13.01.21.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2026 01:21:38 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ linux-clk@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Taniya Das
+ <taniya.das@oss.qualcomm.com>, Luo Jie <jie.luo@oss.qualcomm.com>,
+ Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, Kathiravan Thirumoorthy
+ <kathiravan.thirumoorthy@oss.qualcomm.com>, Brian Masney
+ <bmasney@redhat.com>, Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Bjorn Andersson
+ <bjorn.andersson@oss.qualcomm.com>, Esteban Urrutia <esteuwu@proton.me>,
+ Muzaffer Kadir <muzafferkadir@mainlining.org>, Bartosz Golaszewski
+ <bartosz.golaszewski@oss.qualcomm.com>, Dongfang Zhao
+ <dongfang.zhao@oss.qualcomm.com>, Imran Shaik
+ <imran.shaik@oss.qualcomm.com>, Qiang Yu <qiang.yu@oss.qualcomm.com>,
+ Sreeshankar K <sreeshankar0910@gmail.com>, Vivek Aknurwar
+ <vivek.aknurwar@oss.qualcomm.com>, Aamir Ahmed <elb12345@hotmail.co.uk>,
+ Erikas Bitovtas <xerikasxx@gmail.com>, Gabor Juhos <j4g8y7@gmail.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Shawn Guo
+ <shengchao.guo@oss.qualcomm.com>, Sivansh Gupta
+ <sivansh.gupta@oss.qualcomm.com>, Srinivas Kandagatla
+ <srinivas.kandagatla@oss.qualcomm.com>
+Subject: Re: [GIT PULL] Qualcomm clock updates for v7.4
+In-Reply-To: <20261012220017.65733-1-andersson@kernel.org>
+References: <20261012220017.65733-1-andersson@kernel.org>
+Date: Tue, 13 Oct 2026 10:21:37 +0200
+Message-ID: <1jmrsi9fji.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261004-cci-imp-v1-0-227d12cb4829@oss.qualcomm.com>
- <20261004-cci-imp-v1-3-227d12cb4829@oss.qualcomm.com> <717d9cb2-d7e5-423b-9d0e-fad307385474@oss.qualcomm.com>
-In-Reply-To: <717d9cb2-d7e5-423b-9d0e-fad307385474@oss.qualcomm.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 10:21:12 +0200
-X-Gm-Features: AclHuK8BcryeFwF7_mfVGnZ02cWvL43_LCZ_Rm7JvQqSScTUu5Q5fBxBQFd8Gt0
-Message-ID: <CAFEp6-20=Hkb9ZsubULMg9YYVzEc11Y37g90Gu1mxpvOwqJB9g@mail.gmail.com>
-Subject: Re: [PATCH 3/5] i2c: qcom-cci: Detect capabilities from
- CCI_HW_VERSION at runtime
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: iNNmiqmw8J3AIoYFLdX1XZqx_yuULOoU
-X-Authority-Analysis: v=2.4 cv=JJuuIMKb c=1 sm=1 tr=0 ts=6acdea05 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=GZDsnYW4LkaCH1OrQOQA:9
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzMyBTYWx0ZWRfX/P5uw/pI/fUx
- 8P5yL3cyV8n8M2UMXXgnP++r8q7dxPHXYTMdHWg85lEXCBErNnuf5Tp7ZshMvE5ODxbEw6dgBUR
- tK/bArQVwouCzfFsm9wthGhHUmYvvjM=
-X-Proofpoint-ORIG-GUID: iNNmiqmw8J3AIoYFLdX1XZqx_yuULOoU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzMyBTYWx0ZWRfX2LtUGuMDEijw
- 6nusTaSrOmlCjg6YmmnCktdk/grjmRQLOO+3FJ+7HS/VzQlcaL+ereDoDI38bRDxZImTOBVs3+v
- HkmDxBMKYW8RY+Z4/nnf51MTY+D0idimqQv6EwyiDb6gJxEkpBiv45AEqGY1c+JNls7IYtWY2bB
- gu9uah5+YyIVvFC05XpVX76zeBtI9kaCY9eQJ9qsvTApuVyfhCHBcy6/6MMaJHzaXrZpgks+JX+
- FRkLcb/jeQ9hx/rX9SOzvi7gVjAWxEZFS7O2ggSftKyPhR87YMi10OlVxDEjxSqpzdVGNI0J/YF
- mSln5GDaBOSTU9l9D4Wha9AJUxIREHfyx2HvmdMmDjQogtfiAvwO0H5BVccqsut7ehWM72byzMg
- laC7SHGW3dVvN2Y8ikHQTZkvN44/H7PMf4ELGOucueAw2Il9Z1M0tB9RumF7MpeFecV5g76GUYS
- WeSQ9WKcxvX5eqQeDZA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 phishscore=0 priorityscore=1501 spamscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610130033
+Content-Type: text/plain
 
-On Mon, Oct 12, 2026 at 3:58=E2=80=AFPM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
->
-> On 10/4/26 9:09 PM, Loic Poulain wrote:
-> > In theory, every SoC integrating a CCI revision that differs from
-> > an existing one should introduce a dedicated compatible string.
->
-> [...]
->
-> > diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c=
--qcom-cci.c
-> > index 099da0069251681cc52e351fb656bd73e78a96c9..c0b39d419e296454a083d38=
-ce302940875b8ad2b 100644
-> > --- a/drivers/i2c/busses/i2c-qcom-cci.c
-> > +++ b/drivers/i2c/busses/i2c-qcom-cci.c
-> > @@ -14,6 +14,10 @@
-> >  #include <linux/pm_opp.h>
-> >
-> >  #define CCI_HW_VERSION                               0x0
-> > +#define CCI_HW_VERSION_MAJOR(val)            (((val) >> 28) & 0xf)
-> > +#define CCI_HW_VERSION_MINOR(val)            (((val) >> 16) & 0xfff)
-> > +#define CCI_HW_VERSION_STEP(val)             ((val) & 0xffff)
->
-> GENMASK/FIELD_GET(), please
->
-> [...]
->
-> >  static const struct of_device_id cci_dt_match[] =3D {
-> > -     { .compatible =3D "qcom,msm8226-cci", .data =3D &cci_v1_data},
-> > -     { .compatible =3D "qcom,msm8953-cci", .data =3D &cci_v2_data},
-> > -     { .compatible =3D "qcom,msm8974-cci", .data =3D &cci_v1_5_data},
-> > -     { .compatible =3D "qcom,msm8996-cci", .data =3D &cci_v2_data},
-> > +     { .compatible =3D "qcom,msm8226-cci", .data =3D (void *)1 },
-> > +     { .compatible =3D "qcom,msm8953-cci", .data =3D (void *)NUM_MASTE=
-RS },
-> > +     { .compatible =3D "qcom,msm8974-cci", .data =3D (void *)NUM_MASTE=
-RS },
-> > +     { .compatible =3D "qcom,msm8996-cci", .data =3D (void *)NUM_MASTE=
-RS },
-> >
-> >
-> >       /*
-> >        * Legacy compatibles kept for backwards compatibility.
-> >        * Do not add any new ones unless they introduce a new config
-> >        */
-> > -     { .compatible =3D "qcom,msm8916-cci", .data =3D &cci_v1_data},
-> > -     { .compatible =3D "qcom,sdm845-cci", .data =3D &cci_v2_data},
-> > -     { .compatible =3D "qcom,sm8250-cci", .data =3D &cci_v2_data},
-> > -     { .compatible =3D "qcom,sm8450-cci", .data =3D &cci_v2_data},
-> > +     { .compatible =3D "qcom,msm8916-cci", .data =3D (void *)1 },
-> > +     { .compatible =3D "qcom,sdm845-cci", .data =3D (void *)NUM_MASTER=
-S },
-> > +     { .compatible =3D "qcom,sm8250-cci", .data =3D (void *)NUM_MASTER=
-S },
-> > +     { .compatible =3D "qcom,sm8450-cci", .data =3D (void *)NUM_MASTER=
-S },
->
-> This looks a little sloppy - can we infer the number of masters at
-> runtime somehow?
+On lun. 12 oct. 2026 at 17:00, Bjorn Andersson <andersson@kernel.org> wrote:
 
-Yes, we can either add a small msm8916-specific condition in the probe
-path, or derive the number of masters dynamically from the number of
-master subnodes present in the Device Tree.
+> The following changes since commit cee9395acd8043be0644b25c34bfa86623f2b935:
+>
+>   Linux 7.3-rc1 (2026-08-30 13:34:40 -0700)
+>
+> are available in the Git repository at:
+>
+>   https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-clk-for-7.4
+>
+> for you to fetch changes up to 4ba7bf34e60fec198b1b76470ba02b495c45788e:
+>
+>   clk: qcom: Add support for camera clock controller on Maili (2026-09-29 15:17:44 -0500)
+>
+> ----------------------------------------------------------------
+> Qualcomm clock updates for v7.4
+>
+> Add new clock support for Eliza, Kuno, MSM8952, Nord, Hawi, Maili, and
+> IPQ5210. Rework common probe and CX power-domain handling.
+> Add generic subsystem-init helpers and clean up the initcall setup.
+>
+> - Add camera, camera BIST, GPU, and video clock controllers for Eliza,
+>   and complete the Milos camera and video power-domain bindings.
+> - Add Nord camera and video clocks, video AXI and QUSB2 PHY resets,
+>   EMAC interconnect clocks, and the corrected GCC GPLL enable offset.
+> - Add Hawi camera and GPU clock controllers, extend them for Maili,
+>   and correct the camera Rivian PLL configuration.
+> - Add global and RPMh clock controllers for Kuno.
+> - Add the MSM8952 global clock controller and RPM clock binding.
+> - Extend the IPQ common PLL driver with all IPQ5210 networking clock
+>   outputs, divider flags, and safe bounds handling.
+> - Add IPQ9650 NoC clock management through the interconnect framework,
+>   add 24 MHz USB UTMI rates for three IPQ SoCs, and correct IPQ5018 and
+>   IPQ5424 clock and reset handling.
+> - Add QCS8300 TSCSS clocks and resets, SM7250 RPMh clocks, and Glymur
+>   LNBB clocks.
+> - Model GCC CX power-domain dependencies and runtime PM across the
+>   affected application, compute, and modem platforms.
+> - Move always-on clock and GCC initialization into common Qualcomm
+>   probe handling across 47 camera, display, GPU, video, audio, and
+>   global clock controller drivers.
+> - Add generic subsys_driver and subsys_platform_driver helpers, then
+>   convert the Qualcomm and Renesas clock drivers to use them.
+> - Fix shared RCG initialization, status error propagation, and cleanup
+>   after failed rate changes.
+> - Correct clock and reset register offsets for SM6115, QCS615, MSM8996,
+>   SDM660, and IPQ5424.
+> - Correct APQ8064 PLL15 setup, MSM8939 Venus GDSC flags, SM8450 display
+>   clock ops, Glymur clock IDs and UFS mux ops, X1E80100 USB4 polling,
+>   and Lucid Ole PLL status handling.
+> - Split out the X1E80100 TCSR binding and use the clk_ref helper, merge
+>   SM7150 into the SM6375 GCC binding, sort the Nord Kconfig entries,
+>   and migrate the SM8450 display controller to common driver data.
+> - Add Abel Vesa as a reviewer for Qualcomm clock drivers.
+>
+> ----------------------------------------------------------------
+> Aamir Ahmed (1):
+>       clk: qcom: ipq-cmn-pll: Assign .num before accessing .hws
+>
+> Abel Vesa (80):
+>       MAINTAINERS: add Abel as reviewer for Qualcomm clocks drivers
+>       clk: qcom: gcc-qcs615: Fix GCC_CPUSS_GNOC_CBCR offset
+>       dt-bindings: clock: qcom: gcc-sdm845: Require CX power domain
+>       dt-bindings: clock: qcom: gcc-sm8150: Add CX power domain
+>       dt-bindings: clock: qcom: gcc-sm8250: Add CX power domain
+>       dt-bindings: clock: qcom: gcc-sm8350: Add CX power domain
+>       dt-bindings: clock: qcom: gcc-sm8450: Add CX power domain
+>       dt-bindings: clock: qcom: qcs615-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: sm8550-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: sm8650-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: sm8750-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: sm4450-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: gcc-sm6350: Add CX power domain
+>       dt-bindings: clock: qcom: qcs8300-gcc: Add CX power domain
+>       dt-bindings: clock: qcom: sdx75-gcc: Add CX power domain
+>       clk: qcom: gcc-eliza: Tie the CX power domain to controller
 
-Regards,
-Loic
+Hey Bjorn, Abel,
+
+The Fixes trailer in the change above point to a commit that does not
+exist.
+
+I think you meant:
+
+Fixes: 3d356ab4a1ec ("clk: qcom: Add support for Global clock controller on Eliza")
+
+To fix it, I would likely have to rebase (and add my SoB everywhere). I
+don't think this is desirable.
+
+Not quite sure how to proceed, do you want to re-spin ?
+
+>       clk: qcom: gcc-kaanapali: Tie the CX power domain to controller
+>       clk: qcom: gcc-qcs8300: Tie the CX power domain to controller
+>       clk: qcom: gcc-sa8775p: Tie the CX power domain to controller
+>       clk: qcom: gcc-sar2130p: Tie the CX power domain to controller
+>       clk: qcom: gcc-sc7280: Tie the CX power domain to controller
+>       clk: qcom: gcc-sdx75: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm4450: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm8350: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm8450: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm8550: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm8650: Tie the CX power domain to controller
+>       clk: qcom: gcc-sm8750: Tie the CX power domain to controller
+>       clk: qcom: gcc-x1e80100: Tie the CX power domain to controller
+>       clk: qcom: gcc-ipq5424: Fix TME reset register offsets
+>       clk: qcom: mmcc-msm8996: Fix FD AHB clock register offset
+>       clk: qcom: mmcc-sdm660: Fix MDSS AHB clock HWCG register offset
+>       clk: qcom: mmcc-msm8960: Configure PLL15 only on APQ8064
+>       clk: qcom: camcc-sa8775p: Use common probe handling for always-on clocks
+>       clk: qcom: camcc-sc8280xp: Use common probe handling for always-on clocks
+>       clk: qcom: camcc-sm7150: Use common probe handling for always-on clocks
+>       clk: qcom: camcc-sm8150: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sc7280: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sc8280xp: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm4450: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm6115: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm7150: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm8250: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm8550: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-sm8750: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc-x1e80100: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc0-sa8775p: Use common probe handling for always-on clocks
+>       clk: qcom: dispcc1-sa8775p: Use common probe handling for always-on clocks
+>       clk: qcom: gcc-qcs615: Use common clock controller probe data
+>       clk: qcom: gcc-qcs8300: Use common clock controller probe data
+>       clk: qcom: gcc-sa8775p: Use common clock controller probe data
+>       clk: qcom: gcc-sar2130p: Use common clock controller probe data
+>       clk: qcom: gcc-sc7180: Use common clock controller probe data
+>       clk: qcom: gcc-sc7280: Use common clock controller probe data
+>       clk: qcom: gcc-sc8280xp: Use common clock controller probe data
+>       clk: qcom: gcc-sdx55: Use common clock controller probe data
+>       clk: qcom: gcc-sdx65: Use common clock controller probe data
+>       clk: qcom: gcc-sdx75: Use common clock controller probe data
+>       clk: qcom: gcc-sm4450: Use common clock controller probe data
+>       clk: qcom: gcc-sm7150: Use common clock controller probe data
+>       clk: qcom: gcc-sm8250: Use common clock controller probe data
+>       clk: qcom: gcc-sm8350: Use common clock controller probe data
+>       clk: qcom: gcc-sm8450: Use common clock controller probe data
+>       clk: qcom: gcc-sm8550: Use common clock controller probe data
+>       clk: qcom: gcc-sm8650: Use common clock controller probe data
+>       clk: qcom: gcc-sm8750: Use common clock controller probe data
+>       clk: qcom: gcc-x1e80100: Use common clock controller probe data
+>       clk: qcom: gpucc-sar2130p: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-sc7280: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-sc8280xp: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-sm4450: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-sm8550: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-x1e80100: Use common probe handling for always-on clocks
+>       clk: qcom: gpucc-x1p42100: Use common probe handling for always-on clocks
+>       clk: qcom: lpasscorecc-sc7180: Use common probe handling for always-on clocks
+>       clk: qcom: videocc-sa8775p: Use common probe handling for always-on clocks
+>       clk: qcom: videocc-sm6350: Use common probe handling for always-on clocks
+>       clk: qcom: videocc-sm7150: Use common probe handling for always-on clocks
+>       clk: qcom: videocc-sm8250: Use common probe handling for always-on clocks
+>       clk: qcom: videocc-sm8350: Use common probe handling for always-on clocks
+>
+> Bartosz Golaszewski (2):
+>       dt-bindings: clock: qcom: nord-negcc: Add the secondary QUSB2 PHY reset
+>       clk: qcom: negcc-nord: Add the secondary QUSB2 PHY reset
+>
+> Bjorn Andersson (10):
+>       Merge branch '20260806-eliza-mm-cc-v9-v10-1-6ba52dd14343@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260730-gpucc-hawi-v2-1-7bf618ab8a34@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260805-qcs8300-tsc-clks-v1-1-e7a5101ed479@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260801-nord_videocc_camcc-v2-1-674d7718e41f@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260827-kuno-soc-support-v5-10-6d47636a8f09@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260817082457.64797-2-krzysztof.kozlowski@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260915-camcc-hawi-v3-1-5b57f45477f1@oss.qualcomm.com' into HEAD
+>       Merge branch '20260921-msm8952-initial-support-v3-1-b96fd3fe298b@mainlining.org' into clk-for-7.4
+>       Merge branch '20260811-ipq9650_icc-v2-1-55b8efbd62c6@oss.qualcomm.com' into clk-for-7.4
+>       Merge branch '20260922-maili_camcc-v4-1-87704b664dde@oss.qualcomm.com' into clk-for-7.4
+>
+> Brian Masney (4):
+>       driver: core: add subsys_driver() macro
+>       driver: core: platform: add subsys_platform_driver() macro
+>       clk: qcom: convert drivers over to use subsys_platform_driver()
+>       clk: renesas: convert drivers over to use subsys_platform_driver()
+>
+> Dongfang Zhao (2):
+>       dt-bindings: clock: qcom: Add Hawi GPU clock controllers
+>       clk: qcom: Add support for Hawi GPUCC
+>
+> Erikas Bitovtas (1):
+>       clk: qcom: gcc-msm8939: mark Venus core GDSCs as hardware controlled
+>
+> Esteban Urrutia (3):
+>       clk: qcom: dispcc-sm8450: Fix disp_cc_mdss_mdp_clk_src ops
+>       clk: qcom: dispcc-sm8450: Migrate to qcom_cc_driver_data
+>       clk: qcom: alpha-pll: Check Lucid Ole PLL status before configuring
+>
+> Gabor Juhos (1):
+>       clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as critical
+>
+> Hardeep Sharma (4):
+>       dt-bindings: clock: qcom: Add Kuno Global Clock Controller
+>       dt-bindings: clock: qcom,rpmhcc: Add Kuno RPMh clock controller
+>       clk: qcom: clk-rpmh: Add support for Kuno RPMh clocks
+>       clk: qcom: Add Global Clock Controller driver for Kuno
+>
+> Imran Shaik (2):
+>       dt-bindings: clock: qcom,qcs8300-gcc: Add TSCSS clocks and resets
+>       clk: qcom: gcc-qcs8300: Add support for TSCSS clocks and resets
+>
+> Jagadeesh Kona (7):
+>       dt-bindings: clock: qcom: Add Maili Graphics Clock Controllers
+>       clk: qcom: Add Graphics clock controller support on Qualcomm Maili SoC
+>       clk: qcom: rpmhcc: Add LNBB clocks support for Glymur
+>       clk: qcom: gcc-glymur: Use clk_regmap_phy_mux_ops for GCC UFS muxes
+>       clk: qcom: Fix camera rivian PLL configuration settings
+>       dt-bindings: clock: qcom: Add Maili camera clock controllers
+>       clk: qcom: Add support for camera clock controller on Maili
+>
+> Kathiravan Thirumoorthy (5):
+>       clk: qcom: ipq5018: add 24MHz rate for USB UTMI clock
+>       clk: qcom: ipq5332: add 24MHz rate for USB UTMI clock
+>       clk: qcom: ipq5210: add 24MHz rate for USB UTMI clock
+>       dt-bindings: interconnect: Add Qualcomm IPQ9650 support
+>       clk: qcom: ipq9650: Use icc-clk for enabling NoC related clocks
+>
+> Konrad Dybcio (4):
+>       clk: qcom: gcc-x1e80100: Don't poll the status bit of GCC_USB4_n_SYS_CLK
+>       clk: qcom: rcg2: Initialize shared floor clock state
+>       clk: qcom: rcg2: Propagate force-enable status errors
+>       clk: qcom: rcg2: Clear force enable after rate failure
+>
+> Krzysztof Kozlowski (1):
+>       dt-bindings: clock: qcom,sm6375-gcc: Merge SM7150 into SM6375
+>
+> Luo Jie (10):
+>       dt-bindings: clock: qcom: Add CMN PLL support for IPQ5210 SoC
+>       clk: qcom: ipq-cmn-pll: Use devm_clk_hw_register_fixed_rate_parent_data
+>       clk: qcom: clk-regmap-divider: Support CLK_DIVIDER_* flags
+>       clk: qcom: ipq-cmn-pll: Register CMN PLL /2 clock
+>       clk: qcom: ipq-cmn-pll: Add NSS clock support
+>       clk: qcom: ipq-cmn-pll: Add PPE clock support
+>       clk: qcom: ipq-cmn-pll: Add PON reference clock support
+>       clk: qcom: ipq-cmn-pll: Add EPHY-RAW clock support
+>       clk: qcom: ipq-cmn-pll: Add clock gate support for fixed clocks
+>       clk: qcom: ipq-cmn-pll: Add all output clocks for IPQ5210
+>
+> Muzaffer Kadir (3):
+>       dt-bindings: clock: qcom: Add MSM8952 global clock controller
+>       clk: qcom: Add global clock controller driver for MSM8952
+>       dt-bindings: clock: qcom,rpmcc: Add MSM8952 compatible
+>
+> Qiang Yu (2):
+>       dt-bindings: clock: qcom: Move x1e80100 TCSR to own binding
+>       clk: qcom: tcsrcc-x1e80100: Migrate to clk_ref helper
+>
+> Shawn Guo (1):
+>       clk: qcom: Sort Nord clock driver entries in Kconfig
+>
+> Sivansh Gupta (1):
+>       clk: qcom: Fix CLK_GLYMUR_GPUCC default and CLK_GLYMUR_EVACC duplicate
+>
+> Sreeshankar K (2):
+>       dt-bindings: clock: qcom,rpmhcc: Document RPMHCC bindings for SM7250
+>       clk: qcom: rpmh: Add SM7250 rpmh clocks
+>
+> Srinivas Kandagatla (1):
+>       clk: qcom: fix SM6115 lpasscc register offset
+>
+> Taniya Das (17):
+>       dt-bindings: clock: qcom,milos-camcc: Add missing power-domains support
+>       dt-bindings: clock: qcom,milos-videocc: Add missing power-domains support
+>       dt-bindings: clock: qcom: Add video clock controller on Qualcomm Eliza SoC
+>       dt-bindings: clock: qcom: document the Eliza GPU Clock Controller
+>       dt-bindings: clock: qcom: Add support for CAMCC for Eliza
+>       clk: qcom: videocc: Add video clock controller driver for Eliza
+>       clk: qcom: gpucc: Add GPU Clock Controller driver for Eliza
+>       clk: qcom: camcc: Add support for camera clock controller for Eliza
+>       dt-bindings: clock: qcom: Add GCC video axi reset clocks for Nord
+>       dt-bindings: clock: qcom: Add video clock controller on Nord SoC
+>       dt-bindings: clock: qcom: Add support for Camera Clock Controller for Nord
+>       clk: qcom: nwgcc-nord: Add video axi clock resets for Nord
+>       clk: qcom: videocc-glymur: Add video clock controller support for Nord
+>       clk: qcom: camcc: Add support for camera clock controller for Nord
+>       clk: qcom: gcc: Fix GPLL enable register offset for Nord SoC
+>       dt-bindings: clock: qcom: Add EMAC CNOC APB clocks for Nord
+>       clk: qcom: segcc-nord: Add EMAC CNOC APB clocks for Nord SoC
+>
+> Vivek Aknurwar (2):
+>       dt-bindings: clock: qcom: Add Hawi CAMCC compatible strings
+>       clk: qcom: Add support for the camera clock controller (CAMCC) on Hawi
+>
+>  .../bindings/clock/qcom,gcc-msm8952.yaml           |   65 +
+>  .../devicetree/bindings/clock/qcom,gcc-sdm845.yaml |    6 +-
+>  .../devicetree/bindings/clock/qcom,gcc-sm6350.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,gcc-sm8150.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,gcc-sm8250.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,gcc-sm8350.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,gcc-sm8450.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,hawi-gpucc.yaml |   80 +
+>  .../bindings/clock/qcom,ipq9574-cmn-pll.yaml       |    1 +
+>  .../bindings/clock/qcom,kaanapali-gxclkctl.yaml    |   23 +-
+>  .../devicetree/bindings/clock/qcom,kuno-gcc.yaml   |   52 +
+>  .../bindings/clock/qcom,milos-camcc.yaml           |   39 +-
+>  .../bindings/clock/qcom,milos-videocc.yaml         |   29 +-
+>  .../devicetree/bindings/clock/qcom,qcs615-gcc.yaml |    7 +
+>  .../bindings/clock/qcom,qcs8300-gcc.yaml           |    7 +
+>  .../devicetree/bindings/clock/qcom,rpmcc.yaml      |    5 +
+>  .../devicetree/bindings/clock/qcom,rpmhcc.yaml     |    2 +
+>  .../devicetree/bindings/clock/qcom,sdx75-gcc.yaml  |    7 +
+>  .../devicetree/bindings/clock/qcom,sm4450-gcc.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,sm6375-gcc.yaml |    9 +-
+>  .../devicetree/bindings/clock/qcom,sm7150-gcc.yaml |   53 -
+>  .../bindings/clock/qcom,sm8450-camcc.yaml          |   47 +-
+>  .../bindings/clock/qcom,sm8450-gpucc.yaml          |    3 +
+>  .../bindings/clock/qcom,sm8450-videocc.yaml        |    2 +
+>  .../devicetree/bindings/clock/qcom,sm8550-gcc.yaml |    7 +
+>  .../bindings/clock/qcom,sm8550-tcsr.yaml           |    1 -
+>  .../devicetree/bindings/clock/qcom,sm8650-gcc.yaml |    7 +
+>  .../devicetree/bindings/clock/qcom,sm8750-gcc.yaml |    7 +
+>  .../bindings/clock/qcom,x1e80100-tcsr.yaml         |  114 +
+>  MAINTAINERS                                        |    1 +
+>  drivers/clk/qcom/Kconfig                           |  149 +-
+>  drivers/clk/qcom/Makefile                          |    9 +
+>  drivers/clk/qcom/cambistmclkcc-eliza.c             |  464 +++
+>  drivers/clk/qcom/cambistmclkcc-kaanapali.c         |    7 +
+>  drivers/clk/qcom/cambistmclkcc-sm8750.c            |    7 +
+>  drivers/clk/qcom/camcc-eliza.c                     | 2803 ++++++++++++++++
+>  drivers/clk/qcom/camcc-glymur.c                    |    7 +
+>  drivers/clk/qcom/camcc-hawi.c                      | 3152 +++++++++++++++++
+>  drivers/clk/qcom/camcc-nord.c                      | 2941 ++++++++++++++++
+>  drivers/clk/qcom/camcc-sa8775p.c                   |   36 +-
+>  drivers/clk/qcom/camcc-sc8280xp.c                  |   13 +-
+>  drivers/clk/qcom/camcc-sm7150.c                    |   13 +-
+>  drivers/clk/qcom/camcc-sm8150.c                    |   13 +-
+>  drivers/clk/qcom/clk-alpha-pll.c                   |    9 +
+>  drivers/clk/qcom/clk-rcg2.c                        |   35 +-
+>  drivers/clk/qcom/clk-regmap-divider.c              |   16 +-
+>  drivers/clk/qcom/clk-regmap-divider.h              |    1 +
+>  drivers/clk/qcom/clk-rpmh.c                        |   44 +
+>  drivers/clk/qcom/dispcc-sc7280.c                   |   13 +-
+>  drivers/clk/qcom/dispcc-sc8280xp.c                 |   18 +-
+>  drivers/clk/qcom/dispcc-sm4450.c                   |   15 +-
+>  drivers/clk/qcom/dispcc-sm6115.c                   |   13 +-
+>  drivers/clk/qcom/dispcc-sm7150.c                   |   13 +-
+>  drivers/clk/qcom/dispcc-sm8250.c                   |   13 +-
+>  drivers/clk/qcom/dispcc-sm8450.c                   |   40 +-
+>  drivers/clk/qcom/dispcc-sm8550.c                   |   13 +-
+>  drivers/clk/qcom/dispcc-sm8750.c                   |   19 +-
+>  drivers/clk/qcom/dispcc-x1e80100.c                 |   27 +-
+>  drivers/clk/qcom/dispcc0-sa8775p.c                 |   15 +-
+>  drivers/clk/qcom/dispcc1-sa8775p.c                 |   15 +-
+>  drivers/clk/qcom/gcc-eliza.c                       |   13 +-
+>  drivers/clk/qcom/gcc-glymur.c                      |   81 +-
+>  drivers/clk/qcom/gcc-hawi.c                        |   12 +-
+>  drivers/clk/qcom/gcc-ipq5018.c                     |   10 +
+>  drivers/clk/qcom/gcc-ipq5210.c                     |    1 +
+>  drivers/clk/qcom/gcc-ipq5332.c                     |    1 +
+>  drivers/clk/qcom/gcc-ipq5424.c                     |    4 +-
+>  drivers/clk/qcom/gcc-ipq9650.c                     |   22 +
+>  drivers/clk/qcom/gcc-kaanapali.c                   |   13 +-
+>  drivers/clk/qcom/gcc-kuno.c                        | 1473 ++++++++
+>  drivers/clk/qcom/gcc-milos.c                       |   12 +-
+>  drivers/clk/qcom/gcc-msm8939.c                     |    4 +
+>  drivers/clk/qcom/gcc-msm8952.c                     | 3548 ++++++++++++++++++++
+>  drivers/clk/qcom/gcc-nord.c                        |   12 +-
+>  drivers/clk/qcom/gcc-qcm2290.c                     |   12 +-
+>  drivers/clk/qcom/gcc-qcs615.c                      |   69 +-
+>  drivers/clk/qcom/gcc-qcs8300.c                     |  167 +-
+>  drivers/clk/qcom/gcc-qdu1000.c                     |   12 +-
+>  drivers/clk/qcom/gcc-sa8775p.c                     |   56 +-
+>  drivers/clk/qcom/gcc-sar2130p.c                    |   58 +-
+>  drivers/clk/qcom/gcc-sc7180.c                      |   60 +-
+>  drivers/clk/qcom/gcc-sc7280.c                      |   67 +-
+>  drivers/clk/qcom/gcc-sc8280xp.c                    |   47 +-
+>  drivers/clk/qcom/gcc-sdx55.c                       |   43 +-
+>  drivers/clk/qcom/gcc-sdx65.c                       |   43 +-
+>  drivers/clk/qcom/gcc-sdx75.c                       |   44 +-
+>  drivers/clk/qcom/gcc-shikra.c                      |   12 +-
+>  drivers/clk/qcom/gcc-sm4450.c                      |   77 +-
+>  drivers/clk/qcom/gcc-sm6115.c                      |   12 +-
+>  drivers/clk/qcom/gcc-sm6125.c                      |   12 +-
+>  drivers/clk/qcom/gcc-sm6375.c                      |   12 +-
+>  drivers/clk/qcom/gcc-sm7150.c                      |   72 +-
+>  drivers/clk/qcom/gcc-sm8150.c                      |   12 +-
+>  drivers/clk/qcom/gcc-sm8250.c                      |   69 +-
+>  drivers/clk/qcom/gcc-sm8350.c                      |   65 +-
+>  drivers/clk/qcom/gcc-sm8450.c                      |   64 +-
+>  drivers/clk/qcom/gcc-sm8550.c                      |   70 +-
+>  drivers/clk/qcom/gcc-sm8650.c                      |   72 +-
+>  drivers/clk/qcom/gcc-sm8750.c                      |   89 +-
+>  drivers/clk/qcom/gcc-x1e80100.c                    |   80 +-
+>  drivers/clk/qcom/gpucc-eliza.c                     |  606 ++++
+>  drivers/clk/qcom/gpucc-hawi.c                      |  477 +++
+>  drivers/clk/qcom/gpucc-sar2130p.c                  |   13 +-
+>  drivers/clk/qcom/gpucc-sc7280.c                    |   22 +-
+>  drivers/clk/qcom/gpucc-sc8280xp.c                  |   15 +-
+>  drivers/clk/qcom/gpucc-sm4450.c                    |   17 +-
+>  drivers/clk/qcom/gpucc-sm8550.c                    |   15 +-
+>  drivers/clk/qcom/gpucc-x1e80100.c                  |   13 +-
+>  drivers/clk/qcom/gpucc-x1p42100.c                  |   17 +-
+>  drivers/clk/qcom/ipq-cmn-pll.c                     |  538 ++-
+>  drivers/clk/qcom/lpasscc-sc7280.c                  |   12 +-
+>  drivers/clk/qcom/lpasscc-sdm845.c                  |   12 +-
+>  drivers/clk/qcom/lpasscc-sm6115.c                  |    4 +-
+>  drivers/clk/qcom/lpasscorecc-sc7180.c              |   31 +-
+>  drivers/clk/qcom/mmcc-msm8960.c                    |    3 +-
+>  drivers/clk/qcom/mmcc-msm8996.c                    |    4 +-
+>  drivers/clk/qcom/mmcc-sdm660.c                     |    2 +-
+>  drivers/clk/qcom/negcc-nord.c                      |    5 +-
+>  drivers/clk/qcom/nwgcc-nord.c                      |    5 +-
+>  drivers/clk/qcom/segcc-nord.c                      |   40 +-
+>  drivers/clk/qcom/tcsrcc-eliza.c                    |   12 +-
+>  drivers/clk/qcom/tcsrcc-glymur.c                   |   12 +-
+>  drivers/clk/qcom/tcsrcc-kaanapali.c                |   12 +-
+>  drivers/clk/qcom/tcsrcc-sm8550.c                   |   12 +-
+>  drivers/clk/qcom/tcsrcc-sm8650.c                   |   12 +-
+>  drivers/clk/qcom/tcsrcc-sm8750.c                   |   12 +-
+>  drivers/clk/qcom/tcsrcc-x1e80100.c                 |  347 +-
+>  drivers/clk/qcom/videocc-eliza.c                   |  404 +++
+>  drivers/clk/qcom/videocc-glymur.c                  |   38 +
+>  drivers/clk/qcom/videocc-sa8775p.c                 |   17 +-
+>  drivers/clk/qcom/videocc-sm6350.c                  |   13 +-
+>  drivers/clk/qcom/videocc-sm7150.c                  |   13 +-
+>  drivers/clk/qcom/videocc-sm8250.c                  |   15 +-
+>  drivers/clk/qcom/videocc-sm8350.c                  |   31 +-
+>  drivers/clk/qcom/videocc-sm8750.c                  |   12 +-
+>  drivers/clk/renesas/r9a06g032-clocks.c             |    8 +-
+>  drivers/clk/renesas/renesas-cpg-mssr.c             |    7 +-
+>  drivers/clk/renesas/rzg2l-cpg.c                    |    7 +-
+>  drivers/clk/renesas/rzv2h-cpg.c                    |    7 +-
+>  .../dt-bindings/clock/qcom,eliza-cambistmclkcc.h   |   32 +
+>  include/dt-bindings/clock/qcom,eliza-camcc.h       |  151 +
+>  include/dt-bindings/clock/qcom,eliza-gpucc.h       |   51 +
+>  include/dt-bindings/clock/qcom,eliza-videocc.h     |   37 +
+>  include/dt-bindings/clock/qcom,gcc-msm8952.h       |  215 ++
+>  include/dt-bindings/clock/qcom,hawi-camcc.h        |  165 +
+>  include/dt-bindings/clock/qcom,hawi-gpucc.h        |   47 +
+>  include/dt-bindings/clock/qcom,ipq5210-cmn-pll.h   |   30 +
+>  include/dt-bindings/clock/qcom,kuno-gcc.h          |  100 +
+>  include/dt-bindings/clock/qcom,nord-camcc.h        |  167 +
+>  include/dt-bindings/clock/qcom,nord-negcc.h        |    1 +
+>  include/dt-bindings/clock/qcom,nord-nwgcc.h        |    3 +
+>  include/dt-bindings/clock/qcom,nord-segcc.h        |    2 +
+>  include/dt-bindings/clock/qcom,qcs8300-gcc.h       |    6 +
+>  include/dt-bindings/interconnect/qcom,ipq9650.h    |   28 +
+>  include/linux/device/driver.h                      |   31 +
+>  include/linux/platform_device.h                    |   30 +
+>  156 files changed, 19545 insertions(+), 1544 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/clock/qcom,gcc-msm8952.yaml
+>  create mode 100644 Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml
+>  create mode 100644 Documentation/devicetree/bindings/clock/qcom,kuno-gcc.yaml
+>  delete mode 100644 Documentation/devicetree/bindings/clock/qcom,sm7150-gcc.yaml
+>  create mode 100644 Documentation/devicetree/bindings/clock/qcom,x1e80100-tcsr.yaml
+>  create mode 100644 drivers/clk/qcom/cambistmclkcc-eliza.c
+>  create mode 100644 drivers/clk/qcom/camcc-eliza.c
+>  create mode 100644 drivers/clk/qcom/camcc-hawi.c
+>  create mode 100644 drivers/clk/qcom/camcc-nord.c
+>  create mode 100644 drivers/clk/qcom/gcc-kuno.c
+>  create mode 100644 drivers/clk/qcom/gcc-msm8952.c
+>  create mode 100644 drivers/clk/qcom/gpucc-eliza.c
+>  create mode 100644 drivers/clk/qcom/gpucc-hawi.c
+>  create mode 100644 drivers/clk/qcom/videocc-eliza.c
+>  create mode 100644 include/dt-bindings/clock/qcom,eliza-cambistmclkcc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,eliza-camcc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,eliza-gpucc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,eliza-videocc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,gcc-msm8952.h
+>  create mode 100644 include/dt-bindings/clock/qcom,hawi-camcc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,hawi-gpucc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,ipq5210-cmn-pll.h
+>  create mode 100644 include/dt-bindings/clock/qcom,kuno-gcc.h
+>  create mode 100644 include/dt-bindings/clock/qcom,nord-camcc.h
+>  create mode 100644 include/dt-bindings/interconnect/qcom,ipq9650.h
+
+-- 
+Jerome
