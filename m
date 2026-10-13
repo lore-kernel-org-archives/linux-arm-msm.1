@@ -1,533 +1,174 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE7494499B3
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791885646; cv=pass; b=Yyg3EVRGpMtMXWhVu+m5lOuucFDPW94BsF5TStKCJdNexCJA3Hc/BkOmEfcPYZ0+b0KMIf6PyHGiKmmaHKe5Uh7Sl1PE5ddJv5taT8RrMbDn++9EsymN0/64TCVyEvgVKvB7aE1X1y0LxpLEEi0TrT6Ag3d97OvfRH6i4aAW+VQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791885646; c=relaxed/simple;
-	bh=D9KSjrkHPD8Wu2Nm5hyfS9vz6EafslLeeY+LM1Mhy+4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uT6qr/x/iUyNmEfIvzzFzXwLYQZlJhXen0PEuEScgK3s8k6IcwP9oTohxGfri/smceU8c+XpcQQztQjP4R8Exm8NMAdgrq0ccCPZ1Hdd7miIMauJl7KXQ+MeI7uySWsgjsPnXjtDb+NWtd8C2p1bbjwrl6RtPJ3hEHnI1T+P/yQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AAoP5ra1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KzKgoWRL; arc=pass smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A89AD3C3443
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:03:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791885801; cv=none; b=aDMZsSY//370Pg23rYBlUST99kpNBuU2VVTTB29TFwygnZgJVLJC96fQ9RzgFwx3QB9UMZ5+S45kMHsnCuW4AgvZMMx58Ns8Q7ZG1koFot7iRqHVL1vzUKsn9YLSFL2LY/urubSlev2ZtLZbZNGnpIckWYFoe+G6hXd4LdAbF98=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791885801; c=relaxed/simple;
+	bh=rjo4I26n3c0IXUdbdxD0MoFTbWpgzJ6l+W042Fwrmq4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=AOBUwD0HqLlqK/VJzAQRS72/vPA1itBculqW5+rXNQTcUmeQjx7nwkarJcIeWuqZq+Jr+aq04OClpzT/fbBL5qfULdeyu0CyHP/9eD9M9HwGFdF9p6JVnfxLXM/AZqZejGUZIyBaLLIHDKkI9mfNSLZ+8tP4YzJ7PUEDmLcdkoY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DcdrSJl2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NtSDacc6; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AAoP5ra1";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KzKgoWRL"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D9oCFj174876
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:43 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DcdrSJl2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NtSDacc6"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D7OWYk015185
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:03:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	TxMcC0othliemrbg2EMDjZga3pMywAt4z8NnU3vrza8=; b=AAoP5ra1XH7UfZlm
-	oq19m+s0RaYgFq+usT8+rWnRG6rk+iJXuri1hnu2sY6hNX/Lb4AP/bqh0VFpOkjw
-	yrEmut00ASZElCiWB4Q5xY7MA2KD0w1jCUWsmN1/Mz44CnU8lEbmo/G/kKn8wmHv
-	f/smJB8Q4NkV6TeDpMXFuOeGJPij5/G6wfyGjT/ALePmE6cYJ0uh2PF2foK38kPS
-	akP2laU+aqQjaAcXBxEZyoUKo/mPGD70bFLycx1FO7hqJU5V2VwHXB/HpdtxNd5w
-	azJ4kD40GSGpO0tEIpxHcQ0kyREW8hlEKsiWPvXg9uo7dvdyP6ZHaW8VnXnCCOKp
-	hz47DQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9daqscfe-1
+	7BotSoDsAkukhdswcmyp9WdfMfl79/kPupfZf2fAwI4=; b=DcdrSJl2nXO30Y0y
+	GDBS8l+hQaSBXlaUW+OKiIh85KP4C4/BqnRQn4rgM6OPuelA03nKcSAJuMZsxoEK
+	f5rB1kLvDwNh/ixN6cCkN1a6HM6fvDFMX88MeCnsu9vuz1LoN1H6kNqF9iVZiAhC
+	2n4E5iMWhraJaL4pbwSdslLdGxTnjuAJggJmWbCbsk/RNEc+qrZHKrY6PTLCJs/+
+	WHVIM+ZrkLadVv/IYiHsR+cmV2wwbkKxC9G+MipmI7viPDER5nf6KtQaZs64TRW0
+	Lhzg5DytG5ItwPI6G3Hq8Se6OcpqiWdKPvjiwCOJfDsmJw1chBUMljPXArIJVauT
+	UR5i0A==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9g7ugnjy-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:42 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93e46c120dfso288930285a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:00:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791885642; cv=none;
-        d=google.com; s=arc-20260327;
-        b=DitnIFnQ4mNvseHRteDY3nq+A6gOj6XaWDqUp3zKSthAkpz2nWbsx4mo11Gf8DHCOW
-         BQhpw1f0e+uXtF6sboOK2SV960ZIzJwYdBZqCkO7F7e0gFabNzKa/b8pOzc94GSOvf58
-         b0gxEs6haufWyjvswybbOz7dF8ORryf0y6DbXHrKCNjvezWVFNTXjobJZGh2ovnKcSJD
-         9eVHrI4HZcGXt2dqyrp52KUlt5v9EebTyG/+YKLKIGZnqDp+Pg8UxqSnYxDB2pfeRc4T
-         cyPdKhHAQhb3RidPQqju5Xj2wetedZP1qwlsD89AMBoJF41+zVwdXksNDTKiYdQbVARl
-         8wUA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=TxMcC0othliemrbg2EMDjZga3pMywAt4z8NnU3vrza8=;
-        fh=rAYXc0s4U3hpo/ofnSlODP0Uee71m59CP2+RuaW6kOE=;
-        b=oRu0DOVr2yAwOIziMoSn5hvWDSKx9VS5+Nt4x0ZzOBe2btQnqTdoGCq0l6Cvq8fJUv
-         iu2uN9OKJWMXzguhzIDS/oNu4MQ7MHbJVTIkbj344ESsHdVHOSJwdfKwHSX07qYJucaY
-         cxZN8P1vIqoI2MnifJgoEzZg90IJ3fXQ9LTG1kVDINwwuP8iL2rran1pTPG+rCOh3pL+
-         ihcPDlLNScQOIcLJ1A0Vwd4ZSHXRqX7P0eFZIaep2e6gV4Q7KHIEAtYV/K6NRwkKMOPY
-         Gak8OwjGsmgMlZiM/ST+crMwiwrXbRrUpH/ZvvLw4yn9Mr9yQ+gUC+gmffqDIq2TtDjX
-         p0/w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:03:19 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-530cd3dff25so5862931cf.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:03:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791885642; x=1792490442; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=TxMcC0othliemrbg2EMDjZga3pMywAt4z8NnU3vrza8=;
-        b=KzKgoWRLggQswV9Yh3zTn133QC/NTnwOxy14oLnhmwecUD4UysLkTAIIZ+C8ogZBEE
-         xqkc0di9DTItEob6Yn6WDYd3Pe4dPMbnhSaGj6NevftRKDyERmNemiGL6dN3KEictgza
-         m19YswXbg2ipIYCniqXsPqNiBkq5aeve8vdC1fMhhysEr2VJpPYBg36RABR8PmE5/sWZ
-         MhTxeMhvILg7cn2wwjPUucfA0YwhtGrLChIlv2Ouu9P8tJMMmWMkueXcLGsjSPMX6cf6
-         iIBxkrFuY25gtKCQdecjXgX0W/JNf7fw1YXaGUci94+Sn4Mr9ouDtysCabzoDnx/B96f
-         zxqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885642; x=1792490442;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1791885799; x=1792490599; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=TxMcC0othliemrbg2EMDjZga3pMywAt4z8NnU3vrza8=;
-        b=TWjxbann7yYs692uL2z5rXkiRqV9/ONTv9iuPVEJz6l84KKGqKMrcby0Sz186PE4QS
-         80RkDtG/Y96l7W7bFm5D83noJky+GHQgpiDu5iiMxYmiex2BTI9a0AOCNrOqjeSNoBXx
-         ofHxkpDDGeIO96U/ogrRa2qpk3eDZTJEQD11cpMXiHNHgXeG/pkT2lr4hnSi15eiLjZJ
-         F06+FDOgOABbqcx71M6Bueir0oOuJm/UXMaZD5NwWsx5bmDB6Q6LRd3xLwGiUtrHcvuL
-         51hblrs5yWw0BmH5YgUFAwCC2ynblQMqpdlWVBzQgjzzY6GMpcSHGlBieTIbW/6yxMGh
-         B7eQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxsSegPAs9yOi8SPM4UmHHNIjW/O6OnnThbGUwpvQwXCICWD2rzxuMgLPtbrt65sgDGSTkgdj9ZJnYkt1N1@vger.kernel.org
-X-Gm-Message-State: AFq9FYIv7E20QNjKsUhBc0n0m0V6I5HaOz19QhbURMr8xD2a68KG53GX
-	btCN5fTHg02SvmgemkkUv2JUrZepW160VXTFHpwVojTaRR0g9OMfyBWT5h+dDRnH8JhLlcev5Il
-	8+Q7o3HngjvlXdEBPbJ61EPhKhoPdz1dNnAlK7WvpRw3U+kSlMLdp6O0H2QxSwiBH6B6SQlNPQO
-	pFVFT/4HaHb1/ymRvqT9v0qRkP0HaSCqKiyDsxibZKIXI=
-X-Gm-Gg: AYBFou1ETDPmCxnnjLJd1I9DI79uaMmIaS3Jti3RSfJeVRr6tX8bt6xTUb7YX3D7SnN
-	NgrAcGfwCF9OWXXyz1H7McThMAUmrJNNx20s/868fc+ZYlc0lGEPaYEtUXxDOv9Dr6m9gHVu50F
-	eTxpmjG3RDrT49u6LtlHD3cBb0eGKb3taiYth8nUrJE+mNd7dpj4nalm4r/8geY+25hdDFqN7Pj
-	dUIppR5ba8VMUwDI/ETbD97onpLwpufBOz6TvQ3OjWNs2pQjPJyVDLstawh9v9IpQYfKxeQkIHm
-X-Received: by 2002:a05:620a:469e:b0:93e:c12c:fbce with SMTP id af79cd13be357-93ec12d06a0mr1932844685a.74.1791885641232;
-        Tue, 13 Oct 2026 03:00:41 -0700 (PDT)
-X-Received: by 2002:a05:620a:469e:b0:93e:c12c:fbce with SMTP id
- af79cd13be357-93ec12d06a0mr1932836485a.74.1791885640539; Tue, 13 Oct 2026
- 03:00:40 -0700 (PDT)
+        bh=7BotSoDsAkukhdswcmyp9WdfMfl79/kPupfZf2fAwI4=;
+        b=NtSDacc6Nj8sPzy1HA7AUJLDOIA79PhrMd3jc2qV9ZSCtnXn7omKHcbQoBXjt174+X
+         t0oVQNrVBP+ww1q8962GptqB41wfAWIW8EQFbLUYm4iK3V3UiQ5X/CO7qwYJsU+NclB9
+         ksvO8wtBXk9kT6PvB4kKHTVqKlazVmBfab+/V5CMKCHJm7twyE3ogFoJMaZg0kcIR0BB
+         0wSgV7LDdBMxrNbNnX7jzn4Mdkp7I4FG6U8pqvBy8rYXCkwj4JYDKK+f9UZ/CPN3vFk+
+         cS26xklMWsmeFkyVM74hWOYmDnFSananrjhowrX5zUC3OuJkMujIkscKdXCJHxaZAZ2K
+         2dIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791885799; x=1792490599;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7BotSoDsAkukhdswcmyp9WdfMfl79/kPupfZf2fAwI4=;
+        b=c5gN021l5ccVYV10XAQGET5y4YlTnERer/KgeEBIHqyGeJcFXMV6TcI/Z0mEaW3eQq
+         QI1/zOK4X3TmTU61Ca3z3zve+ZiIcYzMtjvcFVz7TPHsgpA26/Z1WiX/BWif0gfzQ/Z5
+         19PSQ1inxEh4xQzJIw05nEUqQfEjGjytmPvZ2Pv83onzgyUGehgubwnw10TiEVrYG1zv
+         NHojqgWH+B2jQ5bsOG2OlkTWCEzm0jfKI6yFtBe66K0t7Tw8NEaKfVIbFahpgPz07wue
+         aCkQvNrCVWCBvAt0fCTeceS0NBMv2jnB6g5ourfsEWuJlpnMHoosqlNzv4fmR5SBlz9/
+         YoGw==
+X-Gm-Message-State: AFq9FYJ0fGPtlnzjO0DFZtRWj7KHfioNu17j9Ix9VXH6arCaLWGe+cN3
+	0bTpAbk97Vz5I0sbWZiUajN8XAel4RrexkWeg1v7tY/DLgLQoapdQysJf3DDkzze5EcrfwUNsFA
+	EImLSO4m123Obt98TXCcLXR4HzTvqn/4ZBpN4KfkzT55BImLoDPUKlgaIq2T9Y+AtxJ59
+X-Gm-Gg: AYBFou3bAZF9XXx25FLLppCs54zF7ZkNrjMaIGB/vyFRzRgFqflwwiat3vQMh+4x/FA
+	wwuXMHGzcS3b7Cp49AheAZGV+PGoOasDTjA5Gfy8f21V7/B6MWGQDXh4pyAkYiR8v6SmCYhu1Mt
+	cikjzUyFSmINuKryeV5xzjkxuC9RDrDiPI8RE/3gvowg87N/Qo64nkh8+UaiygxP+iIOAPt9cXQ
+	k7m0qRUSP/fSZNiTB+vDGiFSd7wnwqkfif8tc6AHfC7/thww1FeXwgCn69Sosjs1eOYh0FtjmIz
+	45N+lCEk23eS5dPhD8IKdF0mcR5q8ITzDkf/vG0u33/ac0feFGSw5sR5MOvEsTBFE7j9PYjyU48
+	C8BPeZpQs6vrsXMAu4jMQxg==
+X-Received: by 2002:ac8:5e14:0:b0:535:84e3:b33c with SMTP id d75a77b69052e-5359fff77ccmr238294671cf.4.1791885798817;
+        Tue, 13 Oct 2026 03:03:18 -0700 (PDT)
+X-Received: by 2002:ac8:5e14:0:b0:535:84e3:b33c with SMTP id d75a77b69052e-5359fff77ccmr238294091cf.4.1791885798211;
+        Tue, 13 Oct 2026 03:03:18 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3350fcf309sm352768966b.39.2026.10.13.03.03.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 03:03:17 -0700 (PDT)
+Message-ID: <b2b51cef-cd88-41d8-b9b6-3c4f5ebf3d59@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 12:03:13 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261012172219.3668624-1-peter.hunt@opengear.com> <20261012172219.3668624-3-peter.hunt@opengear.com>
-In-Reply-To: <20261012172219.3668624-3-peter.hunt@opengear.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 12:00:28 +0200
-X-Gm-Features: AclHuK_mIfVIPFBQp7jWsz92VzUndal8Q1t_85zebew0TJk8kBYu92wm03aKn6c
-Message-ID: <CAFEp6-3JJy_3uFiwyAej_rV68sCm_f5Bx79223QUmDhuoQNWUw@mail.gmail.com>
-Subject: Re: [PATCH net-next v9 2/2] net: wwan: mhi_wwan_ctrl: drive DTR/RTS
- via the IP_CTRL channel
-To: Peter Hunt <peter.hunt@opengear.com>
-Cc: ryazanov.s.a@gmail.com, Daniele Palmas <dnlplm@gmail.com>,
-        johannes@sipsolutions.net, mani@kernel.org, andrew+netdev@lunn.ch,
-        davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, netdev@vger.kernel.org, mhi@lists.linux.dev,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: 7KI6soRc4ROLnBEUsNkux5S2oxXGcbmW
-X-Authority-Analysis: v=2.4 cv=FZuiV5+6 c=1 sm=1 tr=0 ts=6ace014a cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=t2vznHeBAAAA:8 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8
- a=NXuk3Y-Jq4XySTnNiK8A:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
- a=V_BghkRpYkFyHJIZkSH6:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX5twmsoPACxkR
- CCdoWMMCwZ8EXIDVR76Mp5H9MN6rSkTCZaYc1h6RpZ8vvAA+LebPJYZ5HaqPLCg2r45EJuzVwlq
- Cpt8QASteSRgZB/xWwTnhM3ujwyYG0o=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX9NFyUl9RJ+om
- 3//XGJqflbimGy7dmRGU+OGHAHFPslmuWP9sl4E1oty4F7zvZS5BaFAMCDgAGABg0BLROop4XxM
- c/s3Ng+6MjAUAjZcvxgJQqO/wrqp6rMy44BShzic4bxlCx5V7PW3Zy+DHXVyZ5OxOYb8ClW5idi
- Iz7xfh37+znkHed97qVjL8iLISIIqrEy9MuXVIetA6cDxZy/coZNXsGc4T+d69HNWZ6rWYDQHVI
- sftwMJEj28lT0Ts/p6MJwF6Qs4N5omR0Qcd3nMjVn4CsV/FMhIbtYWOih1O5TqigVBZHbOmU6Eu
- NnkJls3cBnnRihZGdUv6ybbOcimPlGTFhcNA76H7TA/2uN7P45og4UVPNH2X3evNZ+i4FER3vv0
- vjyeCbrl6n5pCegog5ipDsr9y46lcZF3e7o30yShwt2hFhXpyVXhzoXy0cHc0QSogqRiXw4a/Tx
- eUkiYTj+C5rFM+9uTRw==
-X-Proofpoint-ORIG-GUID: 7KI6soRc4ROLnBEUsNkux5S2oxXGcbmW
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] remoteproc: qcom_q6v5_pas: Add remoteproc support for
+ SOCCP on Nord
+To: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        shengchao.guo@oss.qualcomm.com
+References: <20261009-soccp_driver_dtbinding-v1-0-40862f7fc58b@oss.qualcomm.com>
+ <20261009-soccp_driver_dtbinding-v1-2-40862f7fc58b@oss.qualcomm.com>
+ <77e47222-e633-4d38-b598-8a02921a5d17@oss.qualcomm.com>
+ <62d0573e-4085-4a74-b730-faecbe4cacba@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <62d0573e-4085-4a74-b730-faecbe4cacba@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfXzAZfuOnvFVMn
+ wnZTGQhkGOU+RVYvF3DHLuioz4cWxgepjEN6/i31LZGL4MTiGsv/LRkvrftm1R5y4sN70Vd6cjf
+ qVeGVDUg//dczKu2Kkmi9Im6ZUgx/SHYmN3JEpGpegtZ4+blfNcd9g4L3o2tcmO9vbhanfzyAUe
+ LO5eCi2KhNWK2cvEJ3y2jpAtzFTZ6RE+o41YDw8J2Rv4hvh7x4TPjcfW2KtKSIZVoFMGHsoE77S
+ VXhGNti5EXzFFDbAM7IlPuT1t/lnV5Hxzzxp4EwBk7k82acmoOnC3YBH9MSerdsSYWUf+SN8COn
+ BBoROvsh28enhQK2Ojj50WqS68BBLEvCOroZ3whdbNubkLb3Uqh+kcgG630ysQ+ckkiEYRK3O0N
+ pVg6VrxGtLAMqU17leUir2/SWa9XCA7dxhMnefIFzctLS7DU33jouahXXNBjs3HCvcA1vCoDfrL
+ uzvFVHniFLP3Fev1Lbw==
+X-Authority-Analysis: v=2.4 cv=Z495j3RA c=1 sm=1 tr=0 ts=6ace01e7 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=CFQHZ4Gs7z3mzJWHRokA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: bK1gVKHGlf0CPD78jL5xI6rcbyvBBhxJ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfXyGcN/6zvopt+
+ vQ6WGfD/JUTPNEm1BD3+xCSaaWip8U8S4K5myxQBjFpIRyWXcz+iEZlvqGp0gvnK/n7sfsxiz5D
+ b995B6xkr6zNHPW2kC63nvuhprEJ9jU=
+X-Proofpoint-GUID: bK1gVKHGlf0CPD78jL5xI6rcbyvBBhxJ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 impostorscore=0
- adultscore=0 bulkscore=0 spamscore=0 malwarescore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610130039
+ impostorscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ malwarescore=0 priorityscore=1501 phishscore=0 suspectscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130039
 
-On Mon, Oct 12, 2026 at 7:23=E2=80=AFPM Peter Hunt <peter.hunt@opengear.com=
-> wrote:
->
-> Qualcomm/Sierra SDX55/SDX65 modems withhold unsolicited AT result codes
-> (URCs such as +CREG, and the +DMI OMA-DM/LwM2M session indications) on
-> an AT port until the host asserts DTR. mhi_wwan_ctrl exposed the AT
-> (DUN) ports but had no way to signal DTR, so URCs never reached
-> userspace.
->
-> Carry the host serial-control lines to the modem over the dedicated
-> IP_CTRL MHI channel, which this module now also binds. IP_CTRL uses a
-> separate mhi_driver with its own callbacks so the AT/QMI/MBIM data path
-> is untouched; the control-channel device for each MHI controller is
-> tracked in a small registry so an AT port drives the IP_CTRL channel of
-> its own modem (multiple modems are supported).
->
-> The IP_CTRL channel has to be declared in the controller's channel config
-> for this driver to bind. For the Sierra EM919x/EM929x this is done by
-> commit 83c29a55b89e ("bus: mhi: host: pci_generic: Add IP_CTRL channel
-> for Sierra EM919x/EM929x") in the MHI tree. On controllers that do not
-> declare IP_CTRL the driver does not bind and ->dtr_rts is a no-op.
->
-> The wwan core, with "net: wwan: core: propagate modem control signals to
-> port drivers", raises DTR/RTS on first open and drops them on last close
-> (if HUPCL is set) for any AT port whose driver implements ->dtr_rts, so
-> no open/close handling is needed here. The new ->dtr_rts op lets
-> userspace assert or de-assert them via TIOCMSET/TIOCMBIC/TIOCMBIS.
-> Received device->host serial state messages are silently discarded; a
-> single recycled sink buffer keeps the IP_CTRL DL ring live so the
-> modem's transmit path does not stall.
->
-> ->dtr_rts is void, following the tty_port_operations model it is modelled
-> on. Delivery is best-effort: at_data.mdmbits always reflects the committe=
-d
-> userspace intent for TIOCMGET regardless of whether the IP_CTRL message w=
-as
-> queued, and the next ioctl or open/close cycle will resynchronise the mod=
-em
-> state. The DL sink buffer is requeued from a work item, which retries a
-> transient -ENOMEM so the DL ring does not stay empty, and which remove()
-> disables before tearing down the channel.
->
-> Signed-off-by: Peter Hunt <peter.hunt@opengear.com>
+On 10/13/26 11:58 AM, Anurag Pateriya wrote:
+> On 10/13/2026 2:27 PM, Konrad Dybcio wrote:
+>> On 10/9/26 9:35 AM, Anurag Pateriya wrote:
+>>> The SoC Control Processor (SoCCP) is small RISC-V MCU that controls
+>>> USB Type-C, battery charging and various other functions on Qualcomm SoCs.
 
-Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+[...]
 
-> ---
-> v9: Requeue the DL sink buffer only from the refill work and disable it
->     with disable_delayed_work_sync() before mhi_unprepare_from_transfer()
->     in remove(), so no requeue can race with channel teardown (Loic
->     Poulain, Sashiko review of v7). Leave unpreparing to mhi_probe() when
->     probe fails. Name the wwan core commit instead of "patch 1"
-> v8: No changes
-> v7: Retry a failed DL sink buffer requeue from a delayed work item on
->     -ENOMEM, and log other failures. Note the dependency on the IP_CTRL
->     channel entry in pci_generic, now in the MHI tree. Both from the
->     Sashiko review of v6
-> v6: Rebase onto net-next. Allocate the IP_CTRL DL sink buffer separately
->     instead of embedding it in struct mhi_wwan_dtr, so DMA cache
->     maintenance on non-coherent platforms cannot touch neighbouring field=
-s.
->     Do not requeue the sink buffer from the DL callback when the transfer
->     completes with an error (e.g. -ENOTCONN during channel teardown)
-> v5: Implement ->dtr_rts(port, mdmbits) and drive DTR and RTS
->     independently. Pre-queue an RX sink buffer in probe and requeue it in
->     the DL callback so the IP_CTRL DL ring does not run empty and stall
->     the modem's transmit path
-> v4: Add dev_dbg when IP_CTRL channel is not enumerated for this controlle=
-r
->     and when mhi_queue_buf fails, to aid diagnosis of the "URCs missing"
->     case on controllers that do not declare IP_CTRL
-> v3: Remove is_at_port, implement ->dtr_rts instead of ->tiocmset,
->     open/close DTR raise/drop handled by wwan core (Loic Poulain)
-> ---
->  drivers/net/wwan/mhi_wwan_ctrl.c | 233 ++++++++++++++++++++++++++++++-
->  1 file changed, 232 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/net/wwan/mhi_wwan_ctrl.c b/drivers/net/wwan/mhi_wwan=
-_ctrl.c
-> index a31d8540fbb8..1cbbfcb3b920 100644
-> --- a/drivers/net/wwan/mhi_wwan_ctrl.c
-> +++ b/drivers/net/wwan/mhi_wwan_ctrl.c
-> @@ -1,8 +1,13 @@
->  // SPDX-License-Identifier: GPL-2.0-only
->  /* Copyright (c) 2021, Linaro Ltd <loic.poulain@linaro.org> */
->  #include <linux/kernel.h>
-> +#include <linux/list.h>
->  #include <linux/mhi.h>
->  #include <linux/module.h>
-> +#include <linux/mutex.h>
-> +#include <linux/slab.h>
-> +#include <linux/termios.h>
-> +#include <linux/workqueue.h>
->  #include <linux/wwan.h>
->
->  /* MHI wwan flags */
-> @@ -14,6 +19,32 @@ enum mhi_wwan_flags {
->
->  #define MHI_WWAN_MAX_MTU       0x8000
->
-> +/* IP_CTRL channel message that sets the modem's DTR/RTS control lines *=
-/
-> +struct mhi_dtr_ctrl_msg {
-> +       __le32 preamble;
-> +       __le32 msg_id;
-> +       __le32 dest_id;
-> +       __le32 size;
-> +       __le32 msg;
-> +} __packed;
-> +
-> +#define MHI_DTR_CTRL_MAGIC     0x4C525443      /* 'CTRL' */
-> +#define MHI_DTR_MSG_DTR                BIT(0)
-> +#define MHI_DTR_MSG_RTS                BIT(1)
-> +#define MHI_DTR_HOST_STATE     0x10
-> +
-> +/* Per-controller IP_CTRL channel, used to signal DTR/RTS to that modem =
-*/
-> +struct mhi_wwan_dtr {
-> +       struct mhi_controller *cntrl;
-> +       struct mhi_device *mhi_dev;
-> +       struct list_head node;
-> +       struct mhi_dtr_ctrl_msg *rx_buf; /* DL sink, separate allocation =
-for DMA safety */
-> +       struct delayed_work rx_refill; /* retries a failed sink buffer re=
-queue */
-> +};
-> +
-> +static LIST_HEAD(mhi_wwan_dtr_list);
-> +static DEFINE_MUTEX(mhi_wwan_dtr_lock);
-> +
->  struct mhi_wwan_dev {
->         /* Lower level is a mhi dev, upper level is a wwan port */
->         struct mhi_device *mhi_dev;
-> @@ -103,6 +134,61 @@ static void mhi_wwan_ctrl_refill_work(struct work_st=
-ruct *work)
->         }
->  }
->
-> +/* Signal the modem's DTR/RTS lines over its own controller's IP_CTRL ch=
-annel */
-> +static int mhi_wwan_ctrl_send_dtr(struct mhi_wwan_dev *mhiwwan, unsigned=
- int mdmbits)
-> +{
-> +       struct mhi_controller *cntrl =3D mhiwwan->mhi_dev->mhi_cntrl;
-> +       struct mhi_device *ctrl_dev =3D NULL;
-> +       struct mhi_dtr_ctrl_msg *dtr_msg;
-> +       struct mhi_wwan_dtr *dtr;
-> +       u32 msg =3D 0;
-> +       int ret;
-> +
-> +       guard(mutex)(&mhi_wwan_dtr_lock);
-> +
-> +       list_for_each_entry(dtr, &mhi_wwan_dtr_list, node) {
-> +               if (dtr->cntrl =3D=3D cntrl) {
-> +                       ctrl_dev =3D dtr->mhi_dev;
-> +                       break;
-> +               }
-> +       }
-> +       if (!ctrl_dev) {
-> +               dev_dbg(&mhiwwan->mhi_dev->dev,
-> +                       "IP_CTRL not enumerated; DTR/RTS not signalled to=
- modem\n");
-> +               return 0;
-> +       }
-> +
-> +       dtr_msg =3D kzalloc_obj(*dtr_msg);
-> +       if (!dtr_msg)
-> +               return -ENOMEM;
-> +
-> +       if (mdmbits & TIOCM_DTR)
-> +               msg |=3D MHI_DTR_MSG_DTR;
-> +       if (mdmbits & TIOCM_RTS)
-> +               msg |=3D MHI_DTR_MSG_RTS;
-> +
-> +       dtr_msg->preamble =3D cpu_to_le32(MHI_DTR_CTRL_MAGIC);
-> +       dtr_msg->msg_id =3D cpu_to_le32(MHI_DTR_HOST_STATE);
-> +       dtr_msg->dest_id =3D cpu_to_le32(mhiwwan->mhi_dev->ul_chan_id);
-> +       dtr_msg->size =3D cpu_to_le32(sizeof(__le32));
-> +       dtr_msg->msg =3D cpu_to_le32(msg);
-> +
-> +       ret =3D mhi_queue_buf(ctrl_dev, DMA_TO_DEVICE, dtr_msg, sizeof(*d=
-tr_msg),
-> +                           MHI_EOT);
-> +       if (ret) {
-> +               dev_dbg(&mhiwwan->mhi_dev->dev,
-> +                       "failed to queue DTR/RTS signal: %d\n", ret);
-> +               kfree(dtr_msg);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static void mhi_wwan_ctrl_dtr_rts(struct wwan_port *port, unsigned int m=
-dmbits)
-> +{
-> +       mhi_wwan_ctrl_send_dtr(wwan_port_get_drvdata(port), mdmbits);
-> +}
-> +
->  static int mhi_wwan_ctrl_start(struct wwan_port *port)
->  {
->         struct mhi_wwan_dev *mhiwwan =3D wwan_port_get_drvdata(port);
-> @@ -163,6 +249,7 @@ static const struct wwan_port_ops wwan_pops =3D {
->         .start =3D mhi_wwan_ctrl_start,
->         .stop =3D mhi_wwan_ctrl_stop,
->         .tx =3D mhi_wwan_ctrl_tx,
-> +       .dtr_rts =3D mhi_wwan_ctrl_dtr_rts,
->  };
->
->  static void mhi_ul_xfer_cb(struct mhi_device *mhi_dev,
-> @@ -255,6 +342,112 @@ static void mhi_wwan_ctrl_remove(struct mhi_device =
-*mhi_dev)
->         kfree(mhiwwan);
->  }
->
-> +/* IP_CTRL channel driver, bound separately so the data-port path is unt=
-ouched */
-> +static void mhi_wwan_dtr_ul_xfer_cb(struct mhi_device *mhi_dev,
-> +                                   struct mhi_result *mhi_result)
-> +{
-> +       /* MHI core has done with the buffer, release it */
-> +       kfree(mhi_result->buf_addr);
-> +}
-> +
-> +/* Requeue the single DL sink buffer so the IP_CTRL DL ring never runs e=
-mpty.
-> + * This only runs from the work item, so remove() can stop it before the
-> + * channel is torn down. A transient mapping failure is retried, other e=
-rrors
-> + * mean the channel is going away and the next probe queues a fresh buff=
-er.
-> + */
-> +static void mhi_wwan_dtr_refill_work(struct work_struct *work)
-> +{
-> +       struct mhi_wwan_dtr *dtr =3D container_of(to_delayed_work(work),
-> +                                               struct mhi_wwan_dtr, rx_r=
-efill);
-> +       int ret;
-> +
-> +       ret =3D mhi_queue_buf(dtr->mhi_dev, DMA_FROM_DEVICE, dtr->rx_buf,
-> +                           sizeof(*dtr->rx_buf), MHI_EOT);
-> +       if (ret =3D=3D -ENOMEM) {
-> +               dev_warn_ratelimited(&dtr->mhi_dev->dev,
-> +                                    "failed to requeue IP_CTRL RX buffer=
-, retrying\n");
-> +               schedule_delayed_work(&dtr->rx_refill, msecs_to_jiffies(1=
-00));
-> +       } else if (ret) {
-> +               dev_dbg(&dtr->mhi_dev->dev,
-> +                       "failed to requeue IP_CTRL RX buffer: %d\n", ret)=
-;
-> +       }
-> +}
-> +
-> +static void mhi_wwan_dtr_dl_xfer_cb(struct mhi_device *mhi_dev,
-> +                                   struct mhi_result *mhi_result)
-> +{
-> +       struct mhi_wwan_dtr *dtr =3D dev_get_drvdata(&mhi_dev->dev);
-> +
-> +       /* Channel is being torn down (e.g. -ENOTCONN), do not requeue */
-> +       if (mhi_result->transaction_status &&
-> +           mhi_result->transaction_status !=3D -EOVERFLOW)
-> +               return;
-> +
-> +       /* Modem serial state not needed, requeue the sink buffer to keep=
- DL ring live */
-> +       schedule_delayed_work(&dtr->rx_refill, 0);
-> +}
-> +
-> +static int mhi_wwan_dtr_probe(struct mhi_device *mhi_dev,
-> +                             const struct mhi_device_id *id)
-> +{
-> +       struct mhi_wwan_dtr *dtr;
-> +       int ret;
-> +
-> +       dtr =3D kzalloc_obj(*dtr);
-> +       if (!dtr)
-> +               return -ENOMEM;
-> +
-> +       dtr->rx_buf =3D kmalloc_obj(*dtr->rx_buf);
-> +       if (!dtr->rx_buf) {
-> +               ret =3D -ENOMEM;
-> +               goto err_free_dtr;
-> +       }
-> +       INIT_DELAYED_WORK(&dtr->rx_refill, mhi_wwan_dtr_refill_work);
-> +
-> +       ret =3D mhi_prepare_for_transfer(mhi_dev);
-> +       if (ret)
-> +               goto err_free_buf;
-> +
-> +       dtr->cntrl =3D mhi_dev->mhi_cntrl;
-> +       dtr->mhi_dev =3D mhi_dev;
-> +       dev_set_drvdata(&mhi_dev->dev, dtr);
-> +
-> +       /* On failure mhi_probe() unprepares the channels itself */
-> +       ret =3D mhi_queue_buf(mhi_dev, DMA_FROM_DEVICE, dtr->rx_buf,
-> +                           sizeof(*dtr->rx_buf), MHI_EOT);
-> +       if (ret)
-> +               goto err_free_buf;
-> +
-> +       mutex_lock(&mhi_wwan_dtr_lock);
-> +       list_add(&dtr->node, &mhi_wwan_dtr_list);
-> +       mutex_unlock(&mhi_wwan_dtr_lock);
-> +
-> +       return 0;
-> +
-> +err_free_buf:
-> +       kfree(dtr->rx_buf);
-> +err_free_dtr:
-> +       kfree(dtr);
-> +       return ret;
-> +}
-> +
-> +static void mhi_wwan_dtr_remove(struct mhi_device *mhi_dev)
-> +{
-> +       struct mhi_wwan_dtr *dtr =3D dev_get_drvdata(&mhi_dev->dev);
-> +
-> +       mutex_lock(&mhi_wwan_dtr_lock);
-> +       list_del(&dtr->node);
-> +       mutex_unlock(&mhi_wwan_dtr_lock);
-> +
-> +       /* Stop the refill work, and stop a late DL callback re-arming it=
-, before
-> +        * the channel is torn down so no requeue can race with the teard=
-own
-> +        */
-> +       disable_delayed_work_sync(&dtr->rx_refill);
-> +       mhi_unprepare_from_transfer(mhi_dev);
-> +       kfree(dtr->rx_buf);
-> +       kfree(dtr);
-> +}
-> +
->  static const struct mhi_device_id mhi_wwan_ctrl_match_table[] =3D {
->         { .chan =3D "DUN", .driver_data =3D WWAN_PORT_AT },
->         { .chan =3D "DUN2", .driver_data =3D WWAN_PORT_AT },
-> @@ -278,7 +471,45 @@ static struct mhi_driver mhi_wwan_ctrl_driver =3D {
->         },
->  };
->
-> -module_mhi_driver(mhi_wwan_ctrl_driver);
-> +static const struct mhi_device_id mhi_wwan_dtr_match_table[] =3D {
-> +       { .chan =3D "IP_CTRL" },
-> +       {},
-> +};
-> +MODULE_DEVICE_TABLE(mhi, mhi_wwan_dtr_match_table);
-> +
-> +static struct mhi_driver mhi_wwan_dtr_driver =3D {
-> +       .id_table =3D mhi_wwan_dtr_match_table,
-> +       .remove =3D mhi_wwan_dtr_remove,
-> +       .probe =3D mhi_wwan_dtr_probe,
-> +       .ul_xfer_cb =3D mhi_wwan_dtr_ul_xfer_cb,
-> +       .dl_xfer_cb =3D mhi_wwan_dtr_dl_xfer_cb,
-> +       .driver =3D {
-> +               .name =3D "mhi_wwan_dtr",
-> +       },
-> +};
-> +
-> +static int __init mhi_wwan_ctrl_init(void)
-> +{
-> +       int ret;
-> +
-> +       ret =3D mhi_driver_register(&mhi_wwan_dtr_driver);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret =3D mhi_driver_register(&mhi_wwan_ctrl_driver);
-> +       if (ret)
-> +               mhi_driver_unregister(&mhi_wwan_dtr_driver);
-> +
-> +       return ret;
-> +}
-> +module_init(mhi_wwan_ctrl_init);
-> +
-> +static void __exit mhi_wwan_ctrl_exit(void)
-> +{
-> +       mhi_driver_unregister(&mhi_wwan_ctrl_driver);
-> +       mhi_driver_unregister(&mhi_wwan_dtr_driver);
-> +}
-> +module_exit(mhi_wwan_ctrl_exit);
->
->  MODULE_LICENSE("GPL v2");
->  MODULE_DESCRIPTION("MHI WWAN CTRL Driver");
-> --
-> 2.43.0
->
+>>>   +static const struct qcom_pas_data nord_soccp_resource = {
+>>> +    .crash_reason_smem = 656,
+>>> +    .firmware_name = "soccp.mbn",
+>>> +    .pas_id = 51,
+>>> +    .proxy_pd_names = (char*[]){
+>>> +        "cx",
+>>> +        "mx",
+>>> +        NULL
+>>> +    },
+>>> +    .ssr_name = "soccp",
+>>> +    .sysmon_name = "soccp",
+>>> +    .auto_boot = true,
+>>
+>> No DTB?
+>>
+>> Konrad
+> 
+> The base patch isn't merged yet for nord-ride-embedded.dts.
+> we need to enable for both rrd and ride-embedded boards.
+> I was planning to send them together once nord-ride-embedded.dts is merged.
+
+This is not my question. Remoteprocs on recent SoCs come with split
+firmware - MBN for the main part and a separate DTB binary containing
+configuration data.
+
+Konrad
