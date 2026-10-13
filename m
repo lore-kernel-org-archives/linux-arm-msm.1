@@ -1,221 +1,167 @@
-Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11022128.outbound.protection.outlook.com [52.101.48.128])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79CEA3F928E;
-	Tue, 13 Oct 2026 14:50:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.48.128
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791903022; cv=fail; b=TEcu/cAgGm+CMSmDb7ktITVKaNiqk7Hf1vQhBcUy2VVXEYNYvAn06p0ahee3pQEBGMZ1HyFCBZsyboMlGc53EcgAGOZEhVq6mVeJPZSY2fz7uK28w7PLxJU9h1ti2GOUKWWQFFdtMPP6qhMx5mWlZcNm6uUvbUhrINVb5TEyY+8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791903022; c=relaxed/simple;
-	bh=p0/0++l+wLdlsd7XFMQ7YykhCc15hAS9nBeMXp9n/ls=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=AqK5jliyPmj9T5sI/xZSvknRPIMmikAdonhoDWY9qweHtLpsz1AzBiNg/85Elj1Ppu99PYiZJdAe0+IszBMRHOJO1MppeHL4/avsO7kQrAft4lk+X//jMFchbhtc8JFqHQxp5v4WqK/+s4t6USrf+p+5gXNt0JLQeivl7WjnM9k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelburch.net; spf=pass smtp.mailfrom=trailworks.io; dkim=pass (2048-bit key) header.d=michaelburch.net header.i=@michaelburch.net header.b=hmL+YL56; arc=fail smtp.client-ip=52.101.48.128
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelburch.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=trailworks.io
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07F6D50278E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 15:04:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791903880; cv=none; b=TnAZOXdPD7t6qOeuV0LQO3T0nIi0TExKiWW8F4jBCHnSr6juYcBEDb3zlxKfQnOgAsl1fWxUGiNxUkK5h9GmFmY+F4Eh/QeAPKZSwqW7OVXO6oHlenMtiKRBBseHbL51OE5VwJwnMWEWYCKBqTXDjJax8eFHDDK3oFyJfLsh9cI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791903880; c=relaxed/simple;
+	bh=YwJ/4Kh8dgIbqE3SXVnIlum34oAB97j1aaSxvl4JjT4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=TS4PSB5BmEsnf9/Kkc7mZ4yifsVaqrNGQPYkv+iNZ3lhbiCQlnNsM7ktHHT/uQrcO4DOOsW5prsM9LKXNBUAK9rpMezY8rQZ9421VNVo8jOMg2Lv1Guk7Rc53wRcYoZdzPA8zVbavj/OHxQTbxxe2GysKbSHtHj5a90QV28JML0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bc9TZcGX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HctcgWR9; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=michaelburch.net header.i=@michaelburch.net header.b="hmL+YL56"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tfUTUg5kde3kyb873yvorxlogNIg/6caj8hLYXLn9IzCW+c3HwfyvXjkK5fzzt7HNxHeFF+j4ljUkMN9cDmU5C7xgQE/oom6Lirl9LSZsKp7AQOV87MSqJ4lRGO1uizFSdwCDwqgGc2ufU/cfK5BP4jIwxZN1c/YIiOixxgpsQadOTdkvEd3NPRev9lOHR986BFbcjcom+7pv2NQHWMi0h177U4wOMQKfzkY/ZZF6qnCdvo9beeo/iYf0OppRmn26Zwydg6ME2ysbPeicvLjCCeKkPJVqfx8pOS9PJkBDwnml6aUnZq7lbHCB5jFX5LnVVjwuD3g4e3rqqVx9j2eKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x3YOJaupWOy9RmQ2FV/swSECxvVIYPpBKr20Al3VxlQ=;
- b=hYQiQbgkW6ieUbUOOJMj5V/WWcAOm/pCHspShCpbguyp3cR1fzNOTAfvtHCaudxaHocV52jN4GCCjgYfoHzbsPPX4j5LtwupxjIZ6wroc7fcaXq6F4E5rGAYLQEYJkHXjJIj0FnNRuflqQ1YB7XQXjQ7wJH5pvNB//5ASF3KePYvNM5X66nE1phpHKm4T7gfm5Y7huc2EwTvTgtivbj5jCDp/+775SMTbI+RmADD40eXCEdpl+CgCCAGbp+JAsxA4vAg248IqCfedUjVR2eluKziP3hdQyHG0swsoizfE8J6N8o38+ZTweczpw+eujhOKFVuh8czBqLqs72xo3MMwg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=trailworks.io; dmarc=pass action=none
- header.from=michaelburch.net; dkim=pass header.d=michaelburch.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=michaelburch.net;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x3YOJaupWOy9RmQ2FV/swSECxvVIYPpBKr20Al3VxlQ=;
- b=hmL+YL56nIPq2N9K9AnEoCaUi1Tm1BG6es2oWo64YQFI5uWzMSHn4ow63mEljTm71Wbx/EmU/YSBRxwXyXh/Qy9M+U3/NOU7nhbVOkamJrXj8NSmzphZTV+tmAXytrPtDNJE1fZWGW7fhzPzWC8lF1oObxW00lfG9cSQqiAHa3iikK3tksQUc9q47d9O6B927w2rs+Vf6UfQP6194CHnWw9P/dxxxqWC3ZcE1hYeafoB2saWLifOx9l5eKi3cjeSraNvS451FumaM0P2l2BoNt139wclpC2MwMBLcAefb68qwXAnbDTDrhw93wZrgoSUkPy1nsgwpWVhDXvH8Em07Q==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=michaelburch.net;
-Received: from PH7PR01MB8123.prod.exchangelabs.com (2603:10b6:510:2a4::19) by
- DS9PR01MB994429.prod.exchangelabs.com (2603:10b6:8:35d::18) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.23; Tue, 13 Oct 2026 14:50:16 +0000
-Received: from PH7PR01MB8123.prod.exchangelabs.com
- ([fe80::da98:a31d:73b6:7930]) by PH7PR01MB8123.prod.exchangelabs.com
- ([fe80::da98:a31d:73b6:7930%5]) with mapi id 15.21.0496.015; Tue, 13 Oct 2026
- 14:50:16 +0000
-From: Michael Burch <me@michaelburch.net>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>
-Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jun Nie <jun.nie@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH] drm/msm/dpu: count the pending frame before kicking it off
-Date: Tue, 13 Oct 2026 09:50:05 -0500
-Message-ID: <20261013145007.13111-1-me@michaelburch.net>
-X-Mailer: git-send-email 2.56.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SA9PR13CA0071.namprd13.prod.outlook.com
- (2603:10b6:806:23::16) To PH7PR01MB8123.prod.exchangelabs.com
- (2603:10b6:510:2a4::19)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bc9TZcGX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HctcgWR9"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69DE3ZwW443059
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 15:04:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	TPK3uPVCdiplnO240T4BT5juz8bHcffFNDKBRzJrh6M=; b=bc9TZcGXX0RUVy6/
+	RlvZU14waSJxX9UDqnxpiQhwDw/UrzN2l5KqwUbMnKN0XU4Uov9spoCzfv3xfS0y
+	P/84TpmlCIusv1RJlvpYOfVs7/wFQ1AHOgVIoFy1E7nys48XBdqoJHJMx3FIpFOe
+	Xzg9mWDk16PB9Dj6YTrjWOQGE7GsHf36tUVxL+z8C/z0qzY9dNzlzXxCe9O8DFqu
+	uXlKG1u6XTbQnyczpJ8eYBBWK3qNa0WjBAye85R0oAqvhnx0pfgujaQ5PPiO/mU2
+	+nv/hIl2dX1gD4wDJCfmmWJWx4DyPbQmYSqaKi1d+3Z86rpkHNJMM8MAWYqdKxea
+	vQK3eg==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9n71gjnm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 15:04:37 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5e915fd8a61so54205e0c.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 08:04:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791903877; x=1792508677; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=TPK3uPVCdiplnO240T4BT5juz8bHcffFNDKBRzJrh6M=;
+        b=HctcgWR9+HtTlmKJZeKe9tINLcgVpZCn3TBN0n74FOroc/C0WX1R7T7hX3S1RXIdyb
+         6ujh9jWnXzKl4aVR3/2kDe+y69qReyWrZaUnREPdhAgCCuhlfhkH3ox4In0+BypnMwp8
+         kqHBlJQunNpYBH7kVUcaelr688OxsGQO7lpkLZAiVUSgXmZqpCOC+9I2z881OUlXCTy7
+         qVa2QdM468noaVXJPYSQRg9ApiAUQaqjYR2cUZPWI5ynGXP8oPImmHuXO1ltfI4URDF+
+         siqGlmpt8mW4v9jZGYXl4H4ESF6ndcRV8UZHNRWrMgsaoRMZAW6ECtu3W3zHik9co/7M
+         4W8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791903877; x=1792508677;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TPK3uPVCdiplnO240T4BT5juz8bHcffFNDKBRzJrh6M=;
+        b=LnDLfepTEQY0R+tEEMgFZSG6RqRFn/UC2fD1TQMyt1TkofZyZ6HFCyvJQdK9PmXPlR
+         cKscp/NmVIs6SSAwLvFAnKC6jWDnPUY4b1Kn/+cM9JXCtDvex9Y5risB3L/V0ljqiPf4
+         C4p3wkRBXe6nQWt8Q3W21hDz0svr5ocUlExogbxIBwDjQOHgRyf9AXHTlj6KaJCCE+Q3
+         isK5sIO2OsELflL2F0RI5lxaxCdUI78DTqReB6lSZK2VWZxt/4C4Ne14AXM8tJlRb/L3
+         sJlpV0VDYeGuujM9giQUdjusIbtHfaS77bZV9N4ldXuwi+QgPz+y+9xsjWM6gbX4+S3v
+         ZcCg==
+X-Forwarded-Encrypted: i=1; AKwUvBw1sp08vGdC6zu9H7YI3MzB4h3P756XxVdUSN7M3aPrUMgMYN5RlaAVnkuDTskSa40pY0ZXcvRRRlHP2wtO@vger.kernel.org
+X-Gm-Message-State: AFq9FYK2iNgM5QPkS0T02omJkatHNK80L80CY+cx3f+6/SIqo86mMGHi
+	tpK7nZSGNjOCvKGcD5rSrqrFwXhaQmxddTfFXfwn4a3+KO/PxQo0uZoa9UVUvIIchcUjIAAOYej
+	SYncioSPN/FNKbTBhqilr99yp9u66cYdGYnNFdx+05YD1WVaHJXowSDy7ukAxt5InO8eV59jd94
+	Iy
+X-Gm-Gg: AYBFou1pNRYOgRNzyQNlqufY6wGDcy9IY8GtiOT153Vbmg/iPNGgSthcIXTXRPFS7oJ
+	TCIIeb6yDI4bbQ1OoeuLY95XLufaKHcy6pV48mZIaJbcl44jPOx+htOU896BYM+swJ3KqZ1+htA
+	EegUEt/h1Ee3iAftXximfv4qoILYjR5kSJw2FNCtVSjIRo+E01ihvP9owRv0xYPgdTxuBPLC9L5
+	gi/D9zMNL5eMFp/eb7zhoxeH7xgsXg+U7YLLM2x1IouOje3IOyHY8xhVKCEVZSpHB2pqccqF2IY
+	H0OWS5ySjxWlRNCgQGqOxGEwPzRvgbO8JfQW3NdV5P8kIpVkhZh+wP4NeWy5Q/gomv/rmDaRKgZ
+	5emKJI/wb9F+A9RjeWrJ36w==
+X-Received: by 2002:ac5:c001:0:20b0:5e9:4e2b:4c9f with SMTP id 71dfb90a1353d-5e94e2b4d71mr1052085e0c.4.1791903876779;
+        Tue, 13 Oct 2026 08:04:36 -0700 (PDT)
+X-Received: by 2002:ac5:c001:0:20b0:5e9:4e2b:4c9f with SMTP id 71dfb90a1353d-5e94e2b4d71mr1052049e0c.4.1791903876180;
+        Tue, 13 Oct 2026 08:04:36 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9a9f776sm595740966b.48.2026.10.13.08.04.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 08:04:35 -0700 (PDT)
+Message-ID: <0c195d46-64fe-4d27-9147-678ccd561329@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 17:04:33 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR01MB8123:EE_|DS9PR01MB994429:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a950bbc-5b6d-4074-bda5-08df29394b34
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|7416014|23010399003|10067099003|18002099003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	ksKdorAxvHfo9EplrAQ0eQhUn9yh0IR1nBrXzyD1f0W1fMWgEwuWDCk61eMUO8irxifdOOV6Joe2Gs155cM0fBupcXESECMEDkKBCBLPgjvYCEc3xHoFVAPdr29WEbCoMbD7VKLEIoGFoL7EXzIckkyKdX62wEawDzF3VtlAppfcQzlNR8QWZQVh90nyiMHcY02iAbyLYRfVAqKMTt2kovmjp+qm/pE3tOxcx45nN4/CwqWFrKAMXvgenq8ct9txHISSnA22uPMJnSLPGqWFKqvnq8lqhToKPt8I0dIZKKILOhrm16U72DVps2IaNl33Ol4D/JrWmnELxV7bn8htg0hPGMool3Zpu50b+r5WzFhOwlHS9IWpE+4T47FqAji3O5K1J1pkmPdJmV0aP7dew5+GUGUH7XR457EGGQYwWk2NjIfAiWyBT7h6XDJmcGJ7UteX4GNvy69Lr2vEquYVzuvkD5oDiAho4MDAga0yPu2Zaz2KVT2TDAMht13uNmSkCGqg6VCTadKfN0/LZgInbSuVwd3hlFtVWH4mP44Z3VUk8EynKGmkOmhuUA2eIJF+nQ6C1/Cm3YkUhbJFg1yAJrvyj6kOAgkIxXS8fm/H1XOqpjzbaEcLcgK67trO3kq9
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR01MB8123.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(10067099003)(18002099003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?EUB4ktc8/rfatJsU3wCFipURhHLkxjo/9iAxv/20ypWERkMZOh+kcSBGK1pu?=
- =?us-ascii?Q?j+zTFJb8dbeLZE6gi9tQQ1JiNXa6nSeWH0VGzDNiqObB56TXzUt8QIdc3TBa?=
- =?us-ascii?Q?66BossKeivSbf++NUlmgqt7uwCrmFGx4fTlFReutx4PB1FSB7gkzHuZWfEM3?=
- =?us-ascii?Q?W3OJTQTms3S0cHiuF0k/BCOHNKXX2KzcJHGbvE3xzcsQBWjFcqT2ajmaEiEz?=
- =?us-ascii?Q?LMA5dFKlSxbxSGNvjs93gGGyYveF7oihQJ+0Ab/eVUylRMmlOA94pnTLghD1?=
- =?us-ascii?Q?E2l7dGCgs8och9yoszVHhBlECu4Y+44LmSzFOoogOtxz/H7eGZivS+N8XeUT?=
- =?us-ascii?Q?GUf0xRLu/oLhe77xNl6cb5kC/ZMcznfWlLoLOUBbTFRWa0gCUxnt/J2NZD1D?=
- =?us-ascii?Q?pwZRsKEumPqHka47iSfvHF6UCghac+Q5+DrRTDqrZKkeHutw0eVVoUTcybEX?=
- =?us-ascii?Q?T1d4mDCrmRiMfodsWObuU17HFKCnSYcSc60vOJfelj4WrSNbhANJLXbJYYld?=
- =?us-ascii?Q?UhHIHRk+/EBmEpyxKxd1hRh5Gnm4JXEbUdsENsnIFTHz2jnXO2JEi0rfGgnE?=
- =?us-ascii?Q?QDANTejgUV5+LjKC6+GLdLuW/7NhzIyX0S6tHx2lKuRoWkvgp6GXwfURw4yx?=
- =?us-ascii?Q?gsmMkitSNRDI5tBQ0FIGibmGNWw9NJdoA0zM2hoj+flGX1U4xgUoJEtdc6qQ?=
- =?us-ascii?Q?pFKu5mdR4SjVVpKRhx/z+lxy9aU5agiAhGDuUKBfXtF3nRkRJBexBO69STAz?=
- =?us-ascii?Q?2oQY50BzsjNQkJcewhu2pVRsHhE7eiEm5nrKSV5Yx3atNw8pfUfgL5f/vDP9?=
- =?us-ascii?Q?VlP6vE9DiaJMDVBnyAnO1/wIIRMhA4pBF2SClyqKZtqYfwjUOB33p72BxeBo?=
- =?us-ascii?Q?IEvvyiP3dK7dWwu6pgzQqdH0A6HrSAr9YS4a3GwVNRIznFMoxp0lxhuBfOSP?=
- =?us-ascii?Q?oAWQU8tNq+XURAzwrcwyUIK4ksbJ3ZYP3TwcPoqWiEEKFeks2n09x6qyDAtQ?=
- =?us-ascii?Q?CkK0+asILZJzd/5D9WcExqSjv8z7wBAYsT6AQyieyYWePovYXMiyIssQz7b6?=
- =?us-ascii?Q?V+gzgAHDU9fUFCZphRbDrFEgy20A9bPei7Xzl1RfLbn6gMV1m4ZhqoDw3nRX?=
- =?us-ascii?Q?5cBrJF/85i0C8GpFprXOWBRsbSy01047APE5gfnskINpGiy8UJ55nzVtjEO0?=
- =?us-ascii?Q?TrQBgN3smskpwVMl7S0HcANCm3+OLsv1zj20hF6kzUwW6exys8jX27mxrZTU?=
- =?us-ascii?Q?MG3RtFz2fjY/b+xKddOpBbsB54FrtiXOHL5JCJNkUuo3jZF4v9fJ9/sh45T2?=
- =?us-ascii?Q?vsxBH0vdD1Vuz+veUse5nImfUZgfvpO2WOXZzOyJWI0Rm/gbQWgZ6PH0ZkdK?=
- =?us-ascii?Q?B660gpI8VgJTeeLMn4MWgqiZCzqEccbw6bpfv6FiyYQYz+aX9cD/obRjInCg?=
- =?us-ascii?Q?fg2Ht+EIJPLijZ/2Z324KFlAiDX4CkoTlIJ/foqcM7blxM6RTzfJRwoyvV4F?=
- =?us-ascii?Q?/A9XgvnrgqSQLkPq54nUlGX5rgFbYlckkKH8F6b8Mz/DKnpnyDokvRnsD8Zr?=
- =?us-ascii?Q?Bi4dU7G9joJyNS1zImcmApC3fihRnsVUD7f2RJdw2P/+Nx9RsTfvZZLRy5y3?=
- =?us-ascii?Q?bX0tGecry85eaDDZXTqaBXmLesvsTxNdhZi0nKavoMGPkqW8Ve9aG+5TCKRC?=
- =?us-ascii?Q?5ClYxn14fNW62fS26BZ3K8bB8TwOWb76B/8YNrwwArhniarUq9JxqzTvEPmO?=
- =?us-ascii?Q?IybBFWTBrg=3D=3D?=
-X-OriginatorOrg: michaelburch.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a950bbc-5b6d-4074-bda5-08df29394b34
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR01MB8123.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2026 14:50:16.2800
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8256b244-08e6-4df2-b146-877069d9ce10
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UVrA6oxlQfzRrVyA8EoOEZFRq4pmc4EZiU0lRm2ddA0YrYmJ37eeWOLeJrUX3QBfoceLTAwzWVSy9wAGWere3g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS9PR01MB994429
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rpmsg: glink: smem: preserve IRQ acquisition errors
+To: Avi Weiss <thnkslprpt@gmail.com>, Bjorn Andersson <andersson@kernel.org>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Sricharan Ramabadhran <quic_srichara@quicinc.com>,
+        Arun Kumar Neelakantam <quic_aneela@quicinc.com>,
+        linux-remoteproc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261013124328.1273340-1-thnkslprpt@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261013124328.1273340-1-thnkslprpt@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=FuqQbGrq c=1 sm=1 tr=0 ts=6ace4885 cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=pGLkceISAAAA:8 a=RAclOZT44kLJCt7_HWsA:9 a=QEXdDO2ut3YA:10
+ a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-GUID: DFCWVbxGv1wA4fj764VHz1W2XdtucGEZ
+X-Proofpoint-ORIG-GUID: DFCWVbxGv1wA4fj764VHz1W2XdtucGEZ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA1OSBTYWx0ZWRfX19ICZHNZ8xEC
+ hZHTEYklpBeEG1wQRbvE3P/QLzLTAUR4GYBMECJLhZBIAsdbuZ1ZAo/s8xlNzWhGU8cXH5LMG3y
+ EYECIvR57cTNaaBr+cp8OReS7VeUiDbHj5GUN+9LzstnTuqvIRcAcx52j+n03vmM9YZ1GbEHuVK
+ VKVt1znpEnlUhmjodPSG+31xcaIzLkc/03TTtESOs6L8vbZoFL0VW/wL3l9YqcwQHsoVLUXrg7v
+ DYFOSxk/RoOQX0VHK2nqQpW7GkFHEmwSlCSNSJVDSbaQ/tRedd/lEwiNPZNO3iwF4KHSNyBqBQB
+ DcgMO9IWRRrxYh2nG3R5b4ChP+MXs7RgmSGqK7Lms5klR5kWZvD5V/nUk9B+vUJZj5+MFo9vjzk
+ NMOh/e6ePt/e3sdysr/lHDtqAJ8pIBxn7/4UkKtB9DigVqm5icT8mPqVm0JsjVeYY/Ttpgr/RMB
+ q69L0+kwb9L06QrawvQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA1OSBTYWx0ZWRfX46NF/Tsx4UXf
+ /SwUeaQ3Mdciuy2fQEwcVYeU0uSBYmatIMCQkTRRHOSw3B3sEDKEGH9ynxckNO4DNuI/xjFP34I
+ YO4uDplDQ361EVN8J84D8lwlZkS6itA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 adultscore=0 phishscore=0 suspectscore=0
+ priorityscore=1501 bulkscore=0 spamscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130059
 
-dpu_crtc_commit_kickoff() increments frame_pending only after
-dpu_encoder_kickoff() has sent the frame to the hardware. If the frame
-completes before the increment, dpu_crtc_frame_event_work() sees
-frame_pending == 0 and ignores the frame-done event. The increment that
-follows is never matched, so the count stays one too high until
-dpu_crtc_disable() resets it.
+On 10/13/26 2:43 PM, Avi Weiss wrote:
+> qcom_glink_smem_register() passes the result of of_irq_get() directly
+> to devm_request_irq(). Negative errors are converted to unsigned IRQ
+> numbers, causing the IRQ request to return -EINVAL instead of the
+> original error.
+> 
+> Check the IRQ before requesting it. Preserve negative errors and
+> return -EINVAL if the IRQ mapping fails.
+> 
+> Fixes: caf989c350e8e ("rpmsg: glink: Introduce glink smem based transport")
+> Signed-off-by: Avi Weiss <thnkslprpt@gmail.com>
+> ---
+> A dev_err_probe() diagnostic can be added for IRQ acquisition failures
+> if preferred.
+> 
+>  drivers/rpmsg/qcom_glink_smem.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/drivers/rpmsg/qcom_glink_smem.c b/drivers/rpmsg/qcom_glink_smem.c
+> index 35bb03e67ae8..010a7da64906 100644
+> --- a/drivers/rpmsg/qcom_glink_smem.c
+> +++ b/drivers/rpmsg/qcom_glink_smem.c
+> @@ -312,6 +312,11 @@ struct qcom_glink_smem *qcom_glink_smem_register(struct device *parent,
+>  	}
+>  
+>  	smem->irq = of_irq_get(smem->dev.of_node, 0);
+> +	if (smem->irq <= 0) {
+> +		ret = smem->irq ?: -EINVAL;
+> +		goto err_put_dev;
+> +	}
 
-With frame_pending stuck at 1 or more:
+platform_get_irq() lets us drop the zero-dance
 
-- dpu_encoder_resource_control(FRAME_DONE) sees a pending count above 1
-  on every frame and never queues delayed_off_work. A video-mode encoder
-  therefore never reaches ENTER_IDLE and keeps its vsync interrupt
-  registered for as long as the display is on.
-- dpu_crtc_frame_event_work() never sees the count drop to zero, so
-  dpu_core_perf_crtc_release_bw() is never called.
-
-On an X1E80100 laptop with a 120 Hz eDP panel this left the vsync
-interrupt firing 120 times a second on an idle desktop: 14,407 vblank
-callbacks against 21 commits in 120 s, with no vblank events requested
-by userspace. Every frame-done took the frame_event_more_pending path
-(591 of 591 in one trace) and the encoder never entered idle. After a
-suspend cycle reset the count, the same desktop showed 3 commits, 3
-frame_event_done, 3 encoder idle transitions and 25 MDSS interrupts in
-60 s.
-
-Until commit ad06972d5365 ("drm/msm/dpu: Reorder encoder kickoff for
-CWB") the increment came before the kickoff. Move it back there, and
-undo it if the clone-mode kickoff fails before touching the hardware.
-
-Fixes: ad06972d5365 ("drm/msm/dpu: Reorder encoder kickoff for CWB")
-Cc: stable@vger.kernel.org
-Assisted-by: Copilot:claude-opus-5.5
-Signed-off-by: Michael Burch <me@michaelburch.net>
----
-Tested on a Dell XPS 13 9345 (X1E80100, 120 Hz eDP, video mode) with
-v7.3-rc6 based kernels. With this patch the count no longer leaks in
-normal use: a 120 s trace 50 minutes after boot showed 22 commits, 22
-frame_event_done and 22 encoder idle transitions; about 2 hours after
-boot there were 27,479 vblanks against 16,693 commits over 6,040 s,
-where a leaked count gives about 725,000. Not tested: clone mode or
-writeback, which this machine does not have.
-
-Jun Nie's "drm/msm/dpu: delete timeout timer when encoder is not busy"
-[1] hits the same window: the frame-done interrupt arriving before
-dpu_crtc_commit_kickoff() gets past dpu_encoder_kickoff().
-
-[1] https://lore.kernel.org/r/20260903143004.1026181-1-jun.nie@linaro.org
-
- drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-index 42d0a529b4d5..c8bd9c305a59 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
-@@ -1105,9 +1105,19 @@ void dpu_crtc_commit_kickoff(struct drm_crtc *crtc)
- 		}
- 	}
- 
-+	/* The frame-done event may be handled before the kickoff below returns. */
-+	if (atomic_inc_return(&dpu_crtc->frame_pending) == 1) {
-+		/* acquire bandwidth and other resources */
-+		DRM_DEBUG_ATOMIC("crtc%d first commit\n", crtc->base.id);
-+	} else {
-+		DRM_DEBUG_ATOMIC("crtc%d commit\n", crtc->base.id);
-+	}
-+
- 	if (drm_crtc_in_clone_mode(crtc->state)) {
--		if (dpu_crtc_kickoff_clone_mode(crtc))
-+		if (dpu_crtc_kickoff_clone_mode(crtc)) {
-+			atomic_dec(&dpu_crtc->frame_pending);
- 			goto end;
-+		}
- 	} else {
- 		/*
- 		 * Encoder will flush/start now, unless it has a tx pending.
-@@ -1126,12 +1136,6 @@ void dpu_crtc_commit_kickoff(struct drm_crtc *crtc)
- 		}
- 	}
- 
--	if (atomic_inc_return(&dpu_crtc->frame_pending) == 1) {
--		/* acquire bandwidth and other resources */
--		DRM_DEBUG_ATOMIC("crtc%d first commit\n", crtc->base.id);
--	} else
--		DRM_DEBUG_ATOMIC("crtc%d commit\n", crtc->base.id);
--
- 	dpu_crtc->play_count++;
- 
- 	reinit_completion(&dpu_crtc->frame_done_comp);
-
-base-commit: 24a19b953e2a3d0ea5a8c4951a0ab8f32720c907
--- 
-2.56.0
-
+Konrad
