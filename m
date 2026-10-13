@@ -1,148 +1,151 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30FFB3815E1
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:11:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791886311; cv=pass; b=Jk8sWkaOOu1EHITpPxPabm4fIj3OB9QRwJK/wimHrfOc94EHg+Dc/S8eeuquWGf4SZ5Le92RCVlVBMVDiTf2twlP4QZBfI4xMs5omPz4ewmLLAubSPTrPE+GB/E/IBotf/932595v6GKfVbuuwkjCJLbce+5DSynbVunsG1rI4Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791886311; c=relaxed/simple;
-	bh=Rh5sLLxFP2Sa8hBKcYwQzVB6G/uNzhJkAl2GeVbLNj4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZVCGBa9+vPxhwpharQsIDgg/GCHVxI+bNjmlOoyyLpFDz1uPY7DgFwm4U/HVwvcqyXNqSRLm4GOx83i7J6t5jz3bupG6xhdto/rhxY6MRwC2finji2OvmkFvmDDfr8H+xrBh3GACQbs92DU+kVyBnPadgj28B7nrQHOyRPUbmB8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SvRCFEAH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M79G7bPn; arc=pass smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2645638E135
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:13:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791886441; cv=none; b=qnalHVBU8RBsBjQs+oXtr8hqjbv86x4BebK67xk7Q4FDHhr2Fv50Pm1f2uN3SxwABNkvdsBubQ2extKVqG0PnrqmwMJJH3r3K3HL7SVkqGZ1r1HQRxx2fXL7yXu2d3kWq42F0fAKyZhxkxTL62ib8kBvFWu04pSmRClIrLtpZEc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791886441; c=relaxed/simple;
+	bh=PbLnTdlpMC70FbudpPYD16et/o+1PhDF6d/QdufD0dg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CEqy3I8kMrdCilMEEyYdsoip2+7z9ejxcc4luWq/8oWMRzPK5mNF9QkAdy12+Vxwb2el7D2UhhR5rmjtYVF2bpN5h19l6Mm1s3a/83kkCidUzaqs0CxDMqRHI4zg1TnHdImxbirf5gO4DY3Or2BsUmCRVj7I/iDS6AJggsAJ8RE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MDAUieoO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=P8Mhgq+v; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SvRCFEAH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M79G7bPn"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MDAUieoO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="P8Mhgq+v"
 Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D7OahL015549
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:11:49 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D7OWb1015185
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:13:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	S9aK4EA3wmMxurk3lpWsAkoLI9+SiYE0UjvlE70PuVk=; b=SvRCFEAHC1G3i8+Z
-	H5f1xhAv9VzXlMCF32lhbEXY6hhKiYr7KIULE1QmnmUvLrCOgHh9sDkMBm9SGhjp
-	bqII3sAoH7+rin8gJUTN6sLFd3hgwgdAoXDC9yzz9cnqfdQj2marcOLs1MfodNPG
-	SL9cnWywJb73QpHQlh3tteCcIq6leEXn1RUVnALb9NVdu+Gqjn6+vZemBhOcZq2Y
-	imEUjif+YNdqLDXh7TTNrJMnr++xjbnfkKvLoVpMu56nZApftJYoPdqghGKTwgsD
-	TfJYJBoVFeT75Qa/pQKj0sFE6c0VLw14hGbiW+WU1lmcqu1+r+n+Ly5PyxSCz5cd
-	CLr91w==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9g7ugpr7-1
+	Gdf//5Z6QECZ3vGiclYWMCzf16BftVzD6ObKd/Z0fjw=; b=MDAUieoO9HXtf2ah
+	tUFwuccCec+P1IeZsPNTsJ9IHe91jBOK9EhWG3DnQpCxTJXC4eUIYjzFoUL2eD4A
+	uy+R/yNGFdWiVXVarIvhq4fbDfr9qGmEoCEVGIS0fMGoiWFTCzKfMzAec4cJHnHS
+	n4Pp6wYhzILFvzDAYDiBBRS1nf0gP9227W27c8VwsZo1u46ya3m7jGWi7SCjwKv8
+	SPRztyE49rXkGXgsMp19uqnN1ZPz+2w0fEDJLqn0mt77VPOYg04D588YRiegmuL0
+	No2J9y9h94y455P7jCY8nNGzcoRrnslCetCT2X3SjIphAQjKJ+Mbdor6m3DIvcdt
+	wdahCA==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9g7ugq25-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:11:49 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2d02df2bf09so25213255ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:11:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791886309; cv=none;
-        d=google.com; s=arc-20260327;
-        b=VeVmr0QOPKwzhpbfCFp6ArEPok26kXC7GisunPC4M+Fvc0/FYg/cfIAyJc3gnPbCKr
-         zvslsNkpmwrC6WfKrKflek7pzjq0pdSteFCOYoou0oOLQzszDSgflOlpAPXQIHN5VSwu
-         Me6nCgCHK7oyKKrqJVHIR7QDHt1c1CD0WmsjTMjFxJ9ul/g9nCaMBDD8Hy/vpNd+G+XS
-         ClvcNfZLOwa61ATN8v61+CmErepzOQGBgYYptrWpjJtIjTqA7s6wE+MZc9y+c6l55k3n
-         kpBC1ktVi8gmVwxjpgB1MXC1OPFquPsHlNZ4eh0H599tq3A9DszP+WLtJmKJVfAkXVg1
-         SEsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=S9aK4EA3wmMxurk3lpWsAkoLI9+SiYE0UjvlE70PuVk=;
-        fh=oxS4S8lBwmJ5/PFU7CdsVK0OsNg/SW8rEV6gAXx6oRU=;
-        b=Noy9+ayVmTgKN9qu3+RtdCAmS9o9pA3By6giNCfM26tnlTtDJgingn+Hpx8zcy5PuG
-         2MS0K9fI1lFtgp5PQcabRg6dJ6MsMYtfsg7Zcle9UCsAH8MAtqydD6yhBuk1Bwx/6EO+
-         8ie5lMOZNQ1SnEuwsvXblWxSrfRp/nueTfMU38+8qxuO/Uf/fPlPxWUEXqrtHB3jlpqI
-         MMsMyF7bENc0XOhcF16usd3z1aysAILzNs35f7B8NTSoGuhYEBmMdy7rA3P/SKn8uzKu
-         vSlrpbX0Omj+j0pU7aYV/LMglWo1yAktl3dKFyERylExyOvSbpn9F9WiQf1O2Zssgnda
-         GvUw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:13:59 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3ab7f1efe67so2225255a91.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:13:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791886309; x=1792491109; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=S9aK4EA3wmMxurk3lpWsAkoLI9+SiYE0UjvlE70PuVk=;
-        b=M79G7bPnFeucwk+2kyYzjwBtcG+6pNgc6mmSDQmK1sPN/0NUVTF/UfS45Wmd0FkYNk
-         UI372eTdP2GeZfh3GLrSmKW3RlJCYH0FnIporq+sDcvmaBDRS+L3cfnk3D8nn+YU0+em
-         vQz7fXP7ZhR2kWlBzpgKgINFQOHWFBTi//1Hq/BXMa7p3Bt/R7fPrKJWFHIAQrVt+7yU
-         ONQ7N1EpzdVDL23dXet0CdqtUk8BJLgQPP/Fj73MK0RbjGcY7ny/kolnfv00itaON8N/
-         UnChJu6wwZjSS267PlFGqszAEG+hEYfQpARuqH3M1mqQve1P/qmAN7NpVhTtsH3i66b9
-         bGnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791886309; x=1792491109;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1791886439; x=1792491239; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=S9aK4EA3wmMxurk3lpWsAkoLI9+SiYE0UjvlE70PuVk=;
-        b=hUzyumz/Vkp6zP2pqlvsgh9QoKVO41J88KLGPJbMz6xIs5xCuSd8STvDpRdbBE38fS
-         vF4yU3vb8Rk8KWr8JCcQrjSY23/f6pllUFux/L++K7f/Mk6yWgO0ufTJ1TGAB2PI1Ii5
-         FHq343L/bRrmy1QR6XwLMf5FQSilxfBe8R7wqM9s/OuqTx54o3lxSq7sDpBAspUMWuTp
-         gnw43nYhYMeRq9HhztKByrIep+ulx6UYoiJL1BZwlgK1ZzmDEp9ilWjz9YqQK+mXOgR4
-         MU1y/UNqSbHx6SHXOZa/RZeyia3LB0b3imagy8kuRXkcx4obNJ3ySZ1v8OVmIcWjjpin
-         hxwQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzZti7vHdWsxV8lKVjIgCaOPeW/LzZGStDkq9YtX/DdE1O13RR1YotCSydeRuxYHDJZ7pwlVx2ERrPS52vf@vger.kernel.org
-X-Gm-Message-State: AFq9FYJp8S6dZUxYLFz9npTl/bro4GxVBrR1h0Nc8zbpFHUuovbY6Uck
-	QNCFN6/EaeM6FKUGaBgGu4ZJ4L15N/uH3t85MU59U/9hErS3n6td3mYHFpCodsc8ywIS2tU8tCY
-	U+GhLxw/BS3SYhI0Xt0uk6587PtAAQjViS2Ixh+mT1MsoHdH17fXSTPGEn9az+4c+rE1XKT7bMj
-	IXRoMUrJ6K79Q3sy8DxppuKp9muhg59HqsjCw9usfpb70=
-X-Gm-Gg: AYBFou1RtvZPsFJjRfCVnz36aypsPR5WPUUDYcTuAeSc4y+ZZizFQHdFkN/Wi0+getS
-	XdtJ/t30qXA+xL44aJRjGrPR1uJ5W6aUuQV+MvMNUgx7GrK8dc/LskNfFUDw4GgJ7tUZE66UrlD
-	9mDMHBn3yIeqLtSTephjVeT7+IMwaA+g5cI7X7RDNFwkSrJ2zB/IpEVGA6zw==
-X-Received: by 2002:a17:902:e74d:b0:2e2:cb65:a719 with SMTP id d9443c01a7336-2e842ab6a10mr89373595ad.15.1791886308591;
-        Tue, 13 Oct 2026 03:11:48 -0700 (PDT)
-X-Received: by 2002:a17:902:e74d:b0:2e2:cb65:a719 with SMTP id
- d9443c01a7336-2e842ab6a10mr89373115ad.15.1791886307458; Tue, 13 Oct 2026
- 03:11:47 -0700 (PDT)
+        bh=Gdf//5Z6QECZ3vGiclYWMCzf16BftVzD6ObKd/Z0fjw=;
+        b=P8Mhgq+v1azbXXNW6sEw6hiKb6YIXTXV+7yAOEx75fDu2ZdxMbQRfiPEoe1KQVyfRS
+         4SPhh6UnUrK5uKToYVU2GjzSzcnToR/jgCIUt1xwmtxRX2wqSZ5pMUGW0MOrCmIzilCn
+         qM4gx7JMr/60Iio7mZMmnEsOy5pWxXhTEn7WWYUh6GNaWJh8iMCG0BTaEEWPx4CdPNIm
+         9VynR9apuZoZn91HyHPTBkVC6qxcRLMnvBFnRONCIdl7CxUVD90rhlhpowO1h6iZBzo0
+         aefozD+LWYhBJsjbdI9ARuR13mYbXuQa1iWg9LiMAkexUtq4NIw+YAMZ7fkFnkt2Ibee
+         kUxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791886439; x=1792491239;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Gdf//5Z6QECZ3vGiclYWMCzf16BftVzD6ObKd/Z0fjw=;
+        b=POCV/2/f1OKLLRG52+ktNr2MNAYWc651bn7irynW1IkQ7+AaUnvunYHRzGA85pIhP3
+         BYzof9YBLGFYKc8QGU9m6VNdBAqHkg9wrr5zgId8cgr+X3KIG1yrReWQAkZanMdlCMNG
+         fc4bvbyn5iI48AcaHvYAHxdIXpTgu237dhS+SFGIsiU4/20wXYNv1O8pMVmc27R/N3Y2
+         BqVnZApavuDMVAuWAhpPd/U8Ts3an6V8PK+aWSddS/T+8S1vjZq/9qk2vt66WiQsJ3Ax
+         WUlXSLEr3K95mk5sTdO9y9y+hMhodr8NDEQhngVk5HhO5az2X+oSjUp2ln3Y+5iG/eEe
+         MMPQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzMMslWfPErNsUxbRCdBnoZFF2jPXlvHFGPPovSJxjSCbvq3hng7aOiyiZblVDMXNZCCIlDBLEkSUsk+Nw5@vger.kernel.org
+X-Gm-Message-State: AFq9FYLMASqlQESFYOX+jMj1krj+olFL3kaZhhllo0O5H+H71tUaCNWt
+	SLLaPxFRnFAtJhC/oXJHqcu7mWAnywI7XcqEgrRGWLGI+GZ105C/QU0+ZQDUd6g9fO7mlvOOuzi
+	F2ALORrE2epKynbsziAYFnmO+x4xJ95Q5iOWspnj6D1jyBNs3IMy1KOc3+dulpwp9YTFw
+X-Gm-Gg: AYBFou1VGXQP9Z3/Fd7kNvpfRjSeZBuHsZFTIkpZMiWfibc5h6bHCsTvUKpIRkvGJzU
+	Pd5H5WOKb7txpwnlMwh/tULRc6b6u35Ct2jQX8M/WbtSgP23DpIp8mr+esLKM3pK79KnQgzNs62
+	iOOk92MRGeg2dNkYR2WhRqeoFkNAytpTyBWtq013uc/O974H7W4Dc/G4D283aR24AfBAfSFEogQ
+	qErbk5SaWIGodNViW7CUoqlYxC8mtuwbEfc5H3i5VWjLI59vxbmT1NnoZiye8pgPPXJoCobHHli
+	qd838/W+j1LOdOZWr+0clDqnMOR9/rbKlA17305W21dJtUDZ3tKOk4PBGbweYmmyDIfb3Y318sb
+	rFEuXTUYnBEGMHVJPu7vRsavhAxJ8k1OyhvB62h30HhlBQrF6igVceUOGTHkyx30=
+X-Received: by 2002:a17:90a:10cf:b0:3ab:9c73:12e with SMTP id 98e67ed59e1d1-3ab9c7307d0mr4583232a91.6.1791886438487;
+        Tue, 13 Oct 2026 03:13:58 -0700 (PDT)
+X-Received: by 2002:a17:90a:10cf:b0:3ab:9c73:12e with SMTP id 98e67ed59e1d1-3ab9c7307d0mr4583201a91.6.1791886437842;
+        Tue, 13 Oct 2026 03:13:57 -0700 (PDT)
+Received: from [10.133.33.200] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab39238608sm21143079a91.17.2026.10.13.03.13.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 03:13:57 -0700 (PDT)
+Message-ID: <f17e31ca-817c-4607-a680-55ceb12169dc@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 18:13:48 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261005-s2idle_state-v1-0-3c402c66f388@oss.qualcomm.com>
- <20261005-s2idle_state-v1-2-3c402c66f388@oss.qualcomm.com>
- <20261006-romantic-stalwart-seriema-90e71d@sudeepholla> <CAPx+jO-T_0KT3GytYu8w6QvrhXFQNZQzR496RL=McU6rnMtnPA@mail.gmail.com>
- <20261009-frisky-rottweiler-from-avalon-6c409e@sudeepholla>
- <CAPx+jO-_aY5pMnWyy1hAs1WRmfW33vc317jdtBsEXYBoHsPfxA@mail.gmail.com> <20261009-skilled-mature-bittern-2206fc@sudeepholla>
-In-Reply-To: <20261009-skilled-mature-bittern-2206fc@sudeepholla>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 12:11:36 +0200
-X-Gm-Features: AclHuK-hucqj9IGIiaorMG2xXuxJ-qOYNImY5Izp_FoXJk3fQG3HJiolhaI8eq0
-Message-ID: <CAPx+jO87gkTumF=Tg=UPWpJO6O-CRF4njT2KxQ3f=4nF5m7GiQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] pmdomain: Add support for system-suspend-only states
-To: Sudeep Holla <sudeep.holla@kernel.org>
-Cc: Maulik Shah <maulik.shah@oss.qualcomm.com>, Rob Herring <robh@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH DNM v3 8/8] arm64: dts: qcom: kaanapali: Add MPAM MSC
+ nodes for the L2 caches
+To: Ben Horgan <ben.horgan@arm.com>, Rob Herring <robh@kernel.org>
+Cc: James Morse <james.morse@arm.com>,
+        Shanker Donthineni <sdonthineni@nvidia.com>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         "Rafael J. Wysocki" <rafael@kernel.org>,
+        Danilo Krummrich <dakr@kernel.org>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Fenghua Yu
+ <fenghuay@nvidia.com>, Jonathan Cameron <jic23@kernel.org>,
         Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfXwAZO+V/1+Yt9
- xz6lg56vmBTvfx8dNi/9oCnQf4M9iG2XvFCIhZ/gLk5Y149fWJu4NAFoDyMRjF7GsVxw1YqC/P7
- phuDAxOorM72UGY6xWcz8L0oqiyt91DDdv5HSsEPR5k9jefyywnriV944nJBucs8P9BeugSnLIm
- SHgor97cBHBceznuTRf8ynGoqbiVQM8OSrEdQI62anlKIt8mhfH0bxsA20SQGypSv2rs77+gROI
- TdOMHWx/u6W/2kRTSxICuNUKgcTjM3hv9AXYGB0RVVclEVJAoHllWSSUtS+zcD0/EzcXMDuXw2f
- qZjT2HHs3++pD8Wa0GcnrD4cXhLakXccVFuPouDt/UnIOHkfHo0idV5UFslRi0qPG7MjveH94Vy
- J/XbTYHpk+oY14Znna7HU+fArWrdBXODa+439oOBlGmaR4FqBA+A52pW4x8L8R2rU72xXCYoNly
- fTZRboPqCK9RtyAkClQ==
-X-Authority-Analysis: v=2.4 cv=Z495j3RA c=1 sm=1 tr=0 ts=6ace03e5 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8 a=d8yA8qk_i9ZICp0znskA:9
- a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-ORIG-GUID: xS2ys_fpg6tqNJ1pedd74kVUPU0hTi_z
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfX+uYr1XGCI1AI
- 0UKQ8QA6L7KuW949BT9m8c0+b/5MFXAMp8qv3gxekmXR25tNkHg2Pq6fRda4mPmS7/LBJAms2WG
- IXuV+umaT+jRMd+QC8/hjQtiNdufVP4=
-X-Proofpoint-GUID: xS2ys_fpg6tqNJ1pedd74kVUPU0hTi_z
+        Konrad Dybcio <konradybcio@kernel.org>, Gavin Shan <gshan@redhat.com>,
+        Andre Przywara <andre.przywara@arm.com>,
+        Drew Fustini <fustini@kernel.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
+        trilok.soni@oss.qualcomm.com, aiqun.yu@oss.qualcomm.com,
+        ganapatrao.kulkarni@oss.qualcomm.com,
+        Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>,
+        Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
+        devicetree@vger.kernel.org
+References: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
+ <20261008-mpam-resctrl-dt-knp-support-v3-8-35196c2b43bf@oss.qualcomm.com>
+ <20261008210004.GA1318789-robh@kernel.org>
+ <1d764a3d-7935-4e26-b1c2-92537e1d3811@oss.qualcomm.com>
+ <893507ca-b956-474c-9124-92fbfc25e9ab@arm.com>
+Content-Language: en-US
+From: Yin Li <yin.li@oss.qualcomm.com>
+In-Reply-To: <893507ca-b956-474c-9124-92fbfc25e9ab@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfX1zrEDuT7sEGy
+ r/SUtadfR+jsWrtPCMY+m0Z71LjyJ+WGVnRkOY6n/J5fKNNRGjEEBMkiFfaAsQCkCzVoz/LMmsQ
+ kP+vsKWW3lGX1vIdGAWuucrjYlHrsYB+RZbBiPTToM7bNNVd30nmEUxMqxBfmlzbXlJrZxLIS+W
+ a1rEhd951FEG2v9iK/l+1ry4HVOTRsMoFpqhZ0B5yGQ2rSGfUGhaCI+DFb5KpnrZPUd2b97UONB
+ YqRzoPporLngixBI2/Q4bPkdqOctB6W5Z7g3eRvWnjbyu6z8Rl8jmzPhql/cJCkEG3JzxyJp7gs
+ Bx3PaYF5o8B4IZjkA/GB8SYhTtb0FwJMZcrxsmCrablY8ANBncqBD0sIenxY+1Kp2cLFfMcPkNf
+ cVX0wh7iwWNF1DD6CJqF+X8tvbwb4c+k6F8eOR2zEyXiDXQ/9db11pTGNpKOJHM+nZ5TotnQYPy
+ 11jea1/q2j1GoXb3YAQ==
+X-Authority-Analysis: v=2.4 cv=Z495j3RA c=1 sm=1 tr=0 ts=6ace0467 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=i3Ix9vWbyZrPCULteTcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: SzGA-vQt5dZrFX-pt4YQ9o66SHwxIRg9
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfX88dSI0cGUGQv
+ Rtj6fz6CpjTJro4vbUV0OT1Doo+6n8Gxq7DtdhSznAKAaDLRUXR0JxjOgJb8/5chGpWMPWAwJoj
+ qseKBtkbngspzdcIemIB/GIItV1RvnI=
+X-Proofpoint-GUID: SzGA-vQt5dZrFX-pt4YQ9o66SHwxIRg9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
@@ -152,160 +155,89 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130040
 
-On Fri, Oct 9, 2026 at 5:27=E2=80=AFPM Sudeep Holla <sudeep.holla@kernel.or=
-g> wrote:
->
-> On Fri, Oct 09, 2026 at 04:26:38PM +0200, Ulf Hansson wrote:
-> > On Fri, Oct 9, 2026 at 2:21=E2=80=AFPM Sudeep Holla <sudeep.holla@kerne=
-l.org> wrote:
-> > >
-> > > On Thu, Oct 08, 2026 at 02:21:49PM +0200, Ulf Hansson wrote:
-> > > > On Tue, Oct 6, 2026 at 11:15=E2=80=AFAM Sudeep Holla <sudeep.holla@=
-kernel.org> wrote:
-> > > > >
-> > > > > On Mon, Oct 05, 2026 at 08:59:43PM +0530, Maulik Shah wrote:
-> > > > > > Some domain idle states require system-wide coordination and sh=
-ould not be
-> > > > > > selected during regular CPU idle. However those states remain v=
-alid for
-> > > > > > system-wide suspend like s2idle.
-> > > > > >
-> > > > > > Add a per-state system_state boolean and populate it from the s=
-ystem-state
-> > > > > > property. Make the genpd governor skip these states during CPU =
-idle. Leave
-> > > > > > the system wide suspend path unchanged so s2idle can select the=
-m.
-> > > > > >
-> > > > >
-> > > > > Instead of this I am thinking if we can QoS cpu latency setting a=
-nd block
-> > > > > system level states normally. Since s2idle is user driven, it sho=
-uld be
-> > > > > controllable via user-space and we don't have to define bindings =
-again
-> > > > > if systems that use platform-coordinated needs this too. They may=
- not
-> > > > > use domain-idle-states.
-> > > >
-> > > > Even if we likely could make that work, it's seems not correct to r=
-ely
-> > > > on userspace to make the kernel to pick the correct idle state, whi=
-le
-> > > > the decision should be based on the characteristics of the HW.
-> > > >
-> > > > In regards to PSCI PC mode, I believe we should consider adding the
-> > > > similar DT property for the arm,idle-state binding and make a
-> > > > corresponding change for the regular CPUIdle path/governors. Althou=
-gh,
-> > > > it doesn't necessarily need to be part of the $subject series. I wo=
-uld
-> > > >  be fine if that is handled later on too.
-> > > >
-> > >
-> > > While I agree with this line of argument, I am bit worried that there=
- is
-> > > more deviation from ACPI _LPI binding(equivalent to these in DT). If =
-other
-> > > OS has manged to run the same firmware without adding such informatio=
-n
-> > > to the firmware(ACPI in this case), why do we need that in DT. Is tha=
-t
-> > > information encoded elsewhere in a different form in ACPI and is this=
- the
-> > > right place(the idle state binding for DT) is what I am trying to und=
-erstand
-> > > here.
-> >
-> > I don't have the information about ACPI at hand, so I will leave that
-> > to Maulik to be answered. Or perhaps, someone else already has this
-> > information and can share that with us?
-> >
-> > In any case, I don't see any other reasonable way to describe this in
-> > DT at this point.
-> >
->
-> Fair enough, we can consider that once we finalise what we have in this
-> set is the way to progress(not important until then).
->
-> > >
-> > > Also taking the example of screen on, won't that be prevented as the
-> > > system domain is shared by the system level idle-states we are talkin=
-g
-> > > and the screen/display device. So it never votes to power down that
-> > > and the PSCI OSI domain idle driver must not be able to choose the sy=
-stem
-> > > level state.
-> > >
-> > > In general, there is some device that doesn't vote to power down the =
-domain
-> > > and hence we can't enter the state. So my question is, will there be =
-some
-> > > device that doesn't explicitly register vote and hence we need an alt=
-ernate
-> > > mechanism like the one proposed in this set ? If so, what are those a=
-nd
-> > > how does that work in system suspend states.
-> >
-> > Assuming I understand the above use case, you are thinking that the
-> > display device (for example) is a part of a cluster PM domain, right?
-> >
->
-> Yes, exactly.
->
-> > If that's the case, besides that the cluster PM domain topology must
-> > be modelled accordingly, the display device should be hooked up to the
-> > cluster PM domain it belongs to.
-> >
->
-> Ah, I thought that's the way the whole domain-idle was modelled as we
-> started this OSI discussion a decade ago with an example of CPU clusters
-> sharing power domains with some other devices. I am surprised if that is
-> not the case already =F0=9F=99=81.
 
-It works fine today, I was just trying to explain how it works,
-considering the use case that you brought up.
 
->
-> > Beyond that, it's the corresponding display driver that becomes
-> > responsible for what should happen during system suspend. If the
-> > screen needs to stay on it may need to call device_set_awake_path()
-> > for the display device - unless it's a decision for user space that
-> > can control the behaviour for the display device via its sysfs node.
-> > If things are managed accordingly, genpd_finish_suspend() may decide
-> > to keep the corresponding PM domain powered on during system suspend.
-> >
->
-> But the s2idle and s2ram anyways suspends all the devices, so they need
-> to vote in for the power domains to be turned off. If they are supposed
-> to stay on, the system enters the state it can based on the other votes.
->
-> > The above said, $subject patch doesn't change any of this. It only
-> > allows us to use more states (deeper), which are limited to system
-> > suspend (s2idle).
-> >
->
-> Still not convinced, if all devices are plugged in to the power domain
-> hierarchy correctly and the domain-idle states represent or carries
-> the entire system power domain topology, we shouldn't need this extra
-> information. Having it make cause issues when it conflicts with the
-> topology information IMO.
+On 10/12/2026 7:27 PM, Ben Horgan wrote:
+> Hi Yin,
+> 
+> On 12/10/2026 11:48, Yin Li wrote:
+>>
+>>
+>> On 10/9/2026 5:00 AM, Rob Herring wrote:
+>>> On Thu, Oct 08, 2026 at 02:41:17PM +0800, Yin Li wrote:
+>>>> Add an MPAM MSC device node for each L2 cache. Each MSC is nested
+>>>> directly under its L2 cache node so that the cache node is the MSC's
+>>>> parent device and its CPU affinity is derived from that cache.
+>>>>
+>>>> The L2 cache nodes are placed directly under the root node. The root is
+>>>> the root of the physical address space, so each cache node only needs an
+>>>> identity 'ranges' property for its nested MSC's 'reg' to be resolved to
+>>>> a physical address. The two caches use distinct node names (l2-cache-0
+>>>> and l2-cache-1) since a cache node has no MMIO unit-address of its own.
+>>>>
+>>>> The nodes are disabled by default. Production firmware does not expose
+>>>> MSC register access to the OS, so these nodes can only be enabled on a
+>>>> local test setup where firmware permits direct MMIO access to the MSCs.
+>>>> This DTS is therefore only an example for other platform DT authors and
+>>>> is not intended to be merged.
+>>>>
+>>>> Co-developed-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+>>>> Signed-off-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+>>>> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
+>>>> ---
+>>>>    arch/arm64/boot/dts/qcom/kaanapali.dtsi | 50 +++++++++++++++++++++++++--------
+>>>>    1 file changed, 38 insertions(+), 12 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+>>>> index 131fd2a16c54..b1dcb1e9c570 100644
+>>>> --- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+>>>> +++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+> 
+> [...]
+> 
+>>
+>>>> +
+>>>> +        msc@19870000 {
+>>>> +            compatible = "arm,mpam-msc";
+>>>> +            reg = <0x0 0x19870000 0x0 0x10000>;
+>>>
+>>> The MPAM register length is 0x321C.
+>>>
+>>
+>> You are right, the MPAM register space is 0x321c per the specification.
+>> Will update accordingly.
+> 
+> That is the full extent but truncation is allowed by the architecture.
+> 
+> Section B.9 9.2.3 Permitted truncation of an MPAM feature page IQGXFF it mentions
+> some conditions but these haven't been updated for the introduction of FEAT_MPAM_MSC_DOMAINS.
+> 
+> Does your implementation have domains?
+> 
 
-No, it's still not sufficient to model the power domain hierarchy correctly=
-.
+Hi Ben,
 
-These "system states" are special since they require additional
-coordination in FW/HW, to take into account votes not directly
-controlled by Linux.
+Our implementation does not have domains. So 0x321c reflects the full 
+feature page for MSC.
 
-I realize that the description in patch1 should be extended a bit to
-explain this better. In principle, we can compare this with the PSCI
-SYSTEM_SUSPEND support. The difference would be that PSCI
-SYSTEM_SUSPEND is limited to support only one state, while the
-$subject series would allow us to support multiple.
+Thanks,
+Yin
 
-In regards to ACPI. I think this is as simple as comparing it with the
-list of ACPI S-states.
 
-Kind regards
-Uffe
+> Thanks,
+> 
+> Ben
+> 
+> 
+>>
+>> Thanks,
+>> Yin
+>>
+>>> Rob
+>>
+> 
+
+-- 
+Thx and BRs,
+Yin
+
