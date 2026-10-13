@@ -1,160 +1,187 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E52E3B993A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:14:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5597D3E5598
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:17:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791886469; cv=none; b=TkociIJk11jiJ6iOPBzOli5lfPcFou9T9aKjRgQiRO7zS877X2ZtA5Z+8vcIh8TAGcRIMtwlf3iFCR0sIPR41XRnu4s9QfGY2FDGxbRjjsTcHlO2gsCtmrjN4tAgF+jnoRRbnrITONyYbFL6TUD6NCoDnWFgtHtBglJ3LX/Afr4=
+	t=1791886631; cv=none; b=BUyXtps2ilSErql7KXNaIB9+69C6441RKkZO285ugHal7v3R5cElESH0arxkQefcn0GZ0ilu+bK1rygX6+U685MIhPubCuLHOLPkJ5tUzSYcxxm7+OFp25eC96fmlynbWPU54DWVnugE3koJJ1F4fiYFjmWNSxpXmZs/a4ya1MY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791886469; c=relaxed/simple;
-	bh=HDR9Lb1twM5YBUBpeOyAY7TBRw+6zlrqUpHT7xMWPeU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mMevMr68EZWKUfuFFmbGGuhp6Rt2NXZhBh6IfJIaqyJvk925XQaotf/JAnWgeevH9y3GwdxFdvlrOjLb+URQ3kBKAk78Tv3Juq99fMxfANEM7cdWxyUQ7qAPAFUDJ2aZHA8CTVJhNRGGi0Tw1BcMdcZP5f3c0gv7LrXooVjnKoo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OYrOUy3D; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=epYQGqKQ; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791886631; c=relaxed/simple;
+	bh=HgfOYVUmqK15tK1qAZjGuLmszhgYJK9TaV4k+O5nopQ=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:From:To:Cc:
+	 References:In-Reply-To; b=J3eq1gs7cxGko85DF85i89sZXR8XOklEkDGUrNUbAWrnNyNxEkMfCl5weIRY732FaYDBOvdCzJCkMgC9eYFYpb9gdPj4zcwsVUzlAvv2zgik+JoIarrIAzthyj+ODGqJykG0RrfYRlxUzp9ZD+MQt+pPRjyHtAQzT2VzItBZ6r8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=uAdGDiEk; arc=none smtp.client-ip=209.85.208.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OYrOUy3D";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="epYQGqKQ"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D94306483019
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:14:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	RzMSUN4MtsJQfcIEV4XC8uK1MlOC1kFO25lFfA858j0=; b=OYrOUy3DHgJy3496
-	CX5zlHuVXIuL0QhmFlwsVv3Ye9GCp95CJILsQhGe21c8vkOjxniG+eoQ7OLn9I09
-	RBET2XhiFmRbnercyQtoDA8z1ElUncW4bfv3bUm3Viy77MByKBb3O6J1SzvXsZv4
-	qQuKKQiVfKMUqOEXmlA8d4tO96CwRsCqP/inAPO1LdoaKeahYSyXbiAELtX/35u9
-	BPN9Ih8nUIjPIFGp2wMq1ieVD4z19OueNv+4I7/eyMBKIjISgqi94Vi+HUkOSTsZ
-	E475rxhu3bPEYfTKc1Juz6p8iKKCESThCeZflMX5acpAhzfu8Dh0fEioi+rHpWbR
-	Zxl+Yg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9hpg8a2w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:14:26 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93e629c7b16so38625385a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:14:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="uAdGDiEk"
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6a0a4aa99bdso3419423a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:17:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791886466; x=1792491266; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RzMSUN4MtsJQfcIEV4XC8uK1MlOC1kFO25lFfA858j0=;
-        b=epYQGqKQD+RKHjd+162wdbW+NT1hYg7TNS35pQbvF/GcRDb6aOQbG6rh92JtFp+BDD
-         X/1u76nW66wpEC00bmLLBvvwS7zOLrfHJpEvvNhhZ32aN0XRTrehrvs75r1AkhQCBB1e
-         zapL43t211WGZq7jkBuE0oRqm15xsbuj9nmNE9HNnwbQZ1YCqzy7Sapof4Up0b0nj12m
-         kupmtVlyCwCdATQ2ZUP/VaYQ/uisOt5mqgyti7oeAKjRZMcF62obM4qbssU/JnvqvEtE
-         m9otp1LCQQ5wM5OMNQYkOuwz28FxsOCZYLStwdG6eKDIdXlElg8nv8c0x0rmvQmanU/T
-         J58Q==
+        d=fairphone.com; s=fair; t=1791886626; x=1792491426; darn=vger.kernel.org;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=q1nANBNsyQWXnn8HGzdSfGCDeYeCmohBuEkqclHHM04=;
+        b=uAdGDiEkXuKLYoaaVIT8Xsf73y7curREzVjaWEX6gSY2Assgsa2+Ro3Zc6A09Yna8T
+         j39I9MRjdKbuxOdSHC7sbvc4MU8mSdgjjOfhVGOpOpAchvjDMWRpPOlPQXK5mH4iXpJr
+         g8VMtp4ix3EtRELtIRPMklg/7UfyQY0TWqSmcgvAb3giEuYQihxz42DD4OVJbIFzWMtF
+         h+8rTrYYWCKKKJozBmDgVG/b1F9FJw9+x1/+ZTAk3vGO5fgLsfY5zyM+YHFeyHaV+0Hd
+         yzaN9y8xc+H+CUgKsxpSdyF8o0OfN12iQvD0hQ7OLVNSeaGA2P7Z4QFOMYL29HvmzqJq
+         EMnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791886466; x=1792491266;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=RzMSUN4MtsJQfcIEV4XC8uK1MlOC1kFO25lFfA858j0=;
-        b=tqH2Nd/FpxNYCkDfgWwuCrrPnv/lu8PuTol1YFW8tZDBBzQgWLpDeS1pbUEA5TJMPx
-         FVUmZwu4Wr2yvY5p2oI9YEyDMs3ylpPm0r/sYbkf2mUS0aqsL8F26zOrojSyue6sDkUh
-         bxA65qlovQsIb553wN4v7ugH0nJIsJhoeCUQvBY1mobKPwdZ5pIXEywb+VJHFu8/94Q/
-         Ff8vQCXTQGxKOjr9HPqVGxlUAfeYavcPG0+aPCGv9J8T4ceaneYCoGzZxfa0Kiyi4IuT
-         8i6qlSzf0/bgjWdP/6inU7Hm16LjY10+VI+koOZXaucku1yguFmZtTyssy7vrvhCFAns
-         R6Eg==
-X-Gm-Message-State: AFq9FYLXH234ht+1SOpD2LufeF31P664Dkm5eY3rdWyvT5rIDAXWa9wO
-	T7CpHsXpDIkriv03eUKnyZJk85K1ME9cXFRocsBEA8mnt4xlmWyWxhLH+QHVx/JpDQp5k1LqcvP
-	H8C5ugM4rumn2cz9sLOGnrEd27xtA8cFobB3W2MS/SzqrlisOaiczma8GUR7R28iOtc17
-X-Gm-Gg: AYBFou1z6c8lWioR9/jEKyNgSjTj9e7DdKQa0MS2aDmpvr5w4TrfaSUcTsVd5H2rswX
-	1DAz4AcB8kECqrWIs54T9pWo9+TVtYUJs3l4ZO1WviWRzo0HKc+YMgCAT1NnraNkrc/ArQzSy33
-	vFIU96CNlVoIzZCqk1EX33G9DwyDd8b/sGVZP7IBeQDmZ8kK0z5yEoISrAZTimwmeci8WokVaZB
-	EqNYH+xU9/VM3EZKFgBv0uiFWs7D/fBHCNbCzpaTH+bHkARQUJsaTHaKo11ZEKW/uVhqfmqOVQi
-	F9oRwCNVr4UgsYHB8qSLQ+0coJhoH8B2qFi85uwYIjQphPuv6JH4Wju9GmjEhN/F6TDkQCy6NLP
-	DYb6DwfGF2eSOwadZA1SBIQ==
-X-Received: by 2002:a05:620a:3725:b0:939:94c4:b799 with SMTP id af79cd13be357-93ebd25945cmr2285715485a.5.1791886465773;
-        Tue, 13 Oct 2026 03:14:25 -0700 (PDT)
-X-Received: by 2002:a05:620a:3725:b0:939:94c4:b799 with SMTP id af79cd13be357-93ebd25945cmr2285712085a.5.1791886465258;
-        Tue, 13 Oct 2026 03:14:25 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9ac924dsm580202266b.70.2026.10.13.03.14.22
+        d=1e100.net; s=20260707; t=1791886626; x=1792491426;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=q1nANBNsyQWXnn8HGzdSfGCDeYeCmohBuEkqclHHM04=;
+        b=pqBsiXpcXX8Mb1ER9ykVPhqs3szlcmnjpetsG/ATZDVeg3wcleTjh0OLcm0z6xGxVE
+         x7meLO1PI8GDJMt5TPDoB7S45+bEwI+du/WyOtXTdZWUBGV0VPN5jumlyWFb6kULAh4O
+         6PZvj6/z1uyfajphA+USAoXFKIqGcBLKUU/Wdafh8mIhdJqupzpUXlAwXrOFk/othuJj
+         4NHj87wodkLM/Sznw6I7cFeOJzpkaQ7Ome2qrygG92Tfe8awphj0xqWsSVT9MCAAUSPC
+         zwokEKxN+crD/wY7EQi6wfSqlzuRgSPQ2qgTxhIXoylqmGUnJIVokhgRe7lWlRvfxNyY
+         IysA==
+X-Forwarded-Encrypted: i=1; AKwUvByOYirXy9X2VIB6grjWAUK4twff14cC9zx3DsSV7kb0GDA3SxWA9Hc28wcrM9Ws7xQmWImD1KTc0ph9HtOy@vger.kernel.org
+X-Gm-Message-State: AFq9FYL8jK+ee8Xsa1R3rYON5+kSYDDW1cb4zQsYRI72gjSHylsusbvM
+	8zm5pmEYwxDvLdMOqnszxo7eK0yhBY/QQ8Jyr8a+yNJLiJeG2NR+t03yIwa/F2SiZB8=
+X-Gm-Gg: AYBFou1kDfFwgK/+qczvww+rztNAvOy5S3/XN+hQu8ePAbihZWs7sGScL3FpL+ElHYO
+	3qa2yiR4vncR9MaO3aVzWF5hv7f0YPs0drkaZENbwoZ2/BnUMN7ambm83yh6ZRW+lTVddgGloio
+	gIG+Jc0t17f3rUtZ27y9iwTjrbkwwsVtx2UbJo++SRtOpVpNauQOpB18IalVMtsKWfHcAt3otDa
+	0aykAqVf18f43VVxST8MKMsru85ApTz2eT6Zq0swjzYTnZO4nPsfHarM3zF590LSR8NKJm14qPF
+	/GDRjdVcqPivFzgPuL8V6QNJKnnDSi4q+H6KGZY3zR7kG0fe4lK7QtRZC4Dk8M6jFLBYJ9ArN2e
+	IrCVcWoiC6KIR5Vk2u2CHKu5lvNKtBTp2aaM+xWP5t9Vxsp93lja9OMqCZyHXayTO1ThCrGj0Le
+	xM+03nEB/ye+NmTtM0LZVDuiWdbZAKVx3booPgzi5CKgcyMTrloup5878vBqO8fCsCt1Pht/iIV
+	8rsvKyzPaX0jPAYyhyo/W+qx+vAuTYghL0+Qj0zymZG1K/MGHiQRw==
+X-Received: by 2002:a05:6402:254c:b0:6b1:b9df:6001 with SMTP id 4fb4d7f45d1cf-6b1b9df64e8mr5421183a12.6.1791886626364;
+        Tue, 13 Oct 2026 03:17:06 -0700 (PDT)
+Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b179e012a7sm6018180a12.36.2026.10.13.03.17.05
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 13 Oct 2026 03:14:24 -0700 (PDT)
-Message-ID: <a936a22a-0abe-48df-86f6-a67fbc20b465@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 12:14:21 +0200
+        Tue, 13 Oct 2026 03:17:05 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: x1e80100-medion-sprchrgd-14-s1: Add PWM
- backlight
-To: ferreira@se-rg.io, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Georg Gottleuber <ggo@tuxedocomputers.com>,
-        Ettore Chimenti <ek5.chimenti@gmail.com>,
-        Jens Glathe <jens.glathe@oldschoolsolutions.biz>,
-        Srinivas Kandagatla <srini@kernel.org>
-References: <20261003-medion-sprchrgd-14-backlight-v1-1-e47da56acfa2@se-rg.io>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261003-medion-sprchrgd-14-backlight-v1-1-e47da56acfa2@se-rg.io>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: hQDJcpoK56elz7DLNwzXomP_hQadhmMa
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfX385lvuH+sb7V
- W6si0yuQkGP4B2M5nlTsT8wlOnvD/CaSDr5jC9WmK6fu1htL4xK5XqYby0O8REplGUl5mTaRJcW
- 649FUSp9tSBRc65ZvXnoxhFQMqOf+4Q=
-X-Proofpoint-ORIG-GUID: hQDJcpoK56elz7DLNwzXomP_hQadhmMa
-X-Authority-Analysis: v=2.4 cv=Z4Z5j3RA c=1 sm=1 tr=0 ts=6ace0482 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=dk3OJlvReTGvn84GIeMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MCBTYWx0ZWRfX5B9SxV292gfB
- YmNqaEfdYIa6JbN/Wrjcq1p/6xCVIqpUiut6cVWq368peTz3hwhvACVqHjbpvG5RPv29Kt0jA5p
- Q5dfkE2trMfnwMOCv/uAwYoygxJeUG8QLlqlyvDjouEcI8zyhrEe6RuEtKGr4WqAhJrOodUz0z1
- SiPG/GBZ6BQgbRbAykAonIUXkOMEm3G2WrKv4IEAvutT9o/CZ/shthJVeSOjgLj5+1td46+V6oL
- qD8ELiNkSaZMB88BjTDYn44P6D3LfvGgUlc7ERgTrS4L2SEDgIVu/hEYST6h+hE2fj492ngyji6
- rbLsci2vU6xLJix8Yqr6g1INQj72EsR9F01TF1a81QBvxjmyg0kZawgJrSPkBozEzHYiqO5P+yc
- n7pSqu8punvna/twSilao2k/MTUQtCgh8nMX0Hbb5tB7HXnkN4pOiNe/6RGluYlnx/pnIgCv3nC
- XiqIUJVHDAARHcDp9ng==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610130040
+Date: Tue, 13 Oct 2026 12:17:05 +0200
+Message-Id: <DM3MSNLF42BV.1UV490PXB0C07@fairphone.com>
+Subject: Re: [PATCH 3/3] arm64: dts: qcom: Add Samsung Galaxy Book2 Go
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Konrad Dybcio" <konrad.dybcio@oss.qualcomm.com>, "Luca Weiss"
+ <luca.weiss@fairphone.com>, "Douglas Anderson" <dianders@chromium.org>,
+ "Neil Armstrong" <neil.armstrong@linaro.org>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Bjorn Andersson"
+ <andersson@kernel.org>, "Konrad Dybcio" <konradybcio@kernel.org>, "Rob
+ Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>, <cros-qcom-dts-watchers@chromium.org>
+Cc: <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
+ <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
+ <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>, "Jasper
+ Korten" <jja2000@gmail.com>, "Federico Amedeo Izzo" <federico@izzo.pro>,
+ "Luca Weiss" <luca@lucaweiss.eu>, "Hans de Goede"
+ <johannes.goede@oss.qualcomm.com>
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
+References: <20261012-book2go-v1-0-7188e7ea7a15@fairphone.com>
+ <20261012-book2go-v1-3-7188e7ea7a15@fairphone.com>
+ <fb634f17-de56-4f43-b139-3d040a35f019@oss.qualcomm.com>
+In-Reply-To: <fb634f17-de56-4f43-b139-3d040a35f019@oss.qualcomm.com>
 
-On 10/3/26 2:00 PM, Sérgio Ferreira via B4 Relay wrote:
-> From: Sérgio Ferreira <ferreira@se-rg.io>
-> 
-> The eDP panel (CSOT MNE007ZA3-2, IPS LCD) cannot have its brightness
-> set over eDP AUX. With no backlight phandle on the panel, panel-edp
-> falls back to the DP AUX backlight, which registers dp_aux_backlight
-> with a maximum brightness of 0, so brightness control has no effect.
+On Tue Oct 13, 2026 at 12:10 PM CEST, Konrad Dybcio wrote:
+> On 10/12/26 8:11 PM, Luca Weiss wrote:
+>> From: Jasper Korten <jja2000@gmail.com>
+>
+> [...]
+>
+>> Signed-off-by: Jasper Korten <jja2000@gmail.com>
+>> Co-developed-by: Federico Amedeo Izzo <federico@izzo.pro>
+>> Signed-off-by: Federico Amedeo Izzo <federico@izzo.pro>
+>> Co-developed-by: Luca Weiss <luca@lucaweiss.eu>
+>> Signed-off-by: Luca Weiss <luca@lucaweiss.eu>
+>> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+>
+> Good to see the Lucas are in agreement ;)
 
-[...]
+:)
 
-> +	backlight: backlight {
-> +		compatible = "pwm-backlight";
-> +		pwms = <&pm8550_pwm 3 500000>;
-> +		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
-> +
-> +		pinctrl-0 = <&edp_bl_pwm>;
+>
+> [...]
+>
+>> +&pm8350c_gpios {
+>> +	pmic_lcd_bl_en: pmic-lcd-bl-en-state {
+>> +		pins =3D "gpio7";
+>> +		function =3D "normal";
+>> +		bias-disable;
+>> +		qcom,drive-strength =3D <PMIC_GPIO_STRENGTH_LOW>;
+>> +		output-low;
+>> +		power-source =3D <0>;
+>> +	};
+>> +
+>> +	pmic_lcd_bl_pwm: pmic-lcd-bl-pwm-state {
+>> +		pins =3D "gpio8";
+>> +		function =3D "func1";
+>> +		bias-disable;
+>> +		qcom,drive-strength =3D <PMIC_GPIO_STRENGTH_LOW>;
+>> +		output-low;
+>> +		power-source =3D <0>;
+>> +	};
+>
+> Drop the output-low, the consumers already take care of the state
 
-Let's also add a pin state config for the enable GPIO (read back from
-firmware is fine - I assume it'll be func=normal/power-source=1/
-input-disable/output-enable)
+For both enable and pwm?
 
-Konrad
+>
+> [...]
+>
+>> +&uart7 {
+>> +	/delete-property/interrupts;
+>
+> Let's add a space after the '/'
+
+Will do
+
+>
+>> +	interrupts-extended =3D <&intc GIC_SPI 608 IRQ_TYPE_LEVEL_HIGH>,
+>> +			      <&tlmm 31 IRQ_TYPE_EDGE_FALLING>;
+>> +
+>> +	pinctrl-1 =3D <&qup_uart7_sleep_cts>, <&qup_uart7_sleep_rts>, <&qup_ua=
+rt7_sleep_tx>, <&qup_uart7_sleep_rx>;
+>
+> And let's wrap this line
+
+Sure
+
+>
+> [...]
+>
+>> +&usb_1 {
+>> +	dr_mode =3D "host";
+>
+> Does OTG not "just work"?
+
+Is this a feature one would want on a laptop? On a phone for sure, but I
+don't quite see the use case for the laptop to be a peripheral? But I
+didn't try it, the USB basic setup was done by Jasper
+
+>
+> I'm assuming there's no pmic-glink on this device?
+
+I'm not quite sure yet how the USB stuff works. For sure from
+observation, USB-C only works when stuff was plugged-in at boot time
+(UEFI?), and charger also only supplies any power (but not actually
+charging) when plugged in at boot time.
+
+Regards
+Luca
+
+>
+> Konrad
+
+
