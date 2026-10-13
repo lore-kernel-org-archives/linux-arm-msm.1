@@ -1,153 +1,280 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B58B47D44B
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:38:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791866320; cv=pass; b=X1FuRlhesflm4aRgMFD06RktWO1G5OiqAGa4QivHzP32WRsiEW76tYnQTxckI4NqJFd4oSDgI4sCH0Yic0UgMWp0YUnUnVN+nFjpprPQe0CivoTGJ0L26jp8ci0qqqI5V31lEE5WYjGbPJgrmcdZxA5RiD1qH2YcEfhT9/+aJ6k=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791866320; c=relaxed/simple;
-	bh=kwMGDx6YW7jEV6JGO4/HACSayrMp0IM828fpuRHk5/M=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=S78F3dX9RQ+Uiy+OHyO7PAbyOaSFsRbkZyeBl/1p0f54buZOwGowtxfzng3D5yGFpGi+Em1laFA6ISfQvJpQGJdPJj1rn5i/KeQUCDNZaeUMvaiD31RA7qF7IdlliUpoDnm2kGkk4KY99LeQRWIc+lgyga/3tWSoG2mizBHca/o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fCDrlHRy; arc=pass smtp.client-ip=209.85.208.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1945E481640
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791867340; cv=none; b=ZWuCZiej6d02pMJ3+XymIM4LBgflOzCcXkgJCKg1/RTY8ROnTA/YqOPWH8SNAIF9Wu1MU+wlkUXHrACy/zt7XJNzQhuDIRHd9HyV/Cqvr/VrtdzaPR3wh+4kHX7EdOcwUaeOh45IEOdLL7sdY87pMzx6eDEGmplrXdgsdIGqcG8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791867340; c=relaxed/simple;
+	bh=5dkfnnJD51SeeZaegEhThVSljf33cHQpicyTq/Loa1c=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=E+qBEAQtcndhmI8qnUI2jVBrZaMpmvO7+ic3hRTXWI5hQ4VcI0njnH77T2OWuT4T4N0Wk0l7FN8dtl4mVCkvNnwGcrdn7UVVKc+trPzzUyFv4q6IWm8rdq9i/S1sFXn/YUjs8XFeMbAPNioSvGbCgTOvqihePjnZUtc0+TRhMlM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jDUPIe8S; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jFMCjyVZ; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fCDrlHRy"
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6af8620a7d2so3038384a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:38:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791866317; cv=none;
-        d=google.com; s=arc-20260327;
-        b=BCxqaQ7x2VMjBz9s87K5oNTWW63zquJYYVTyaxznp9CcBFjFYXJWjG/8fHM1vs4ol8
-         XFjkpczOglAtwqkjkLpj/GF9qA8iPSAJFuety/43k+qv6CGWYB5vA1372hK3Wg5n4nO9
-         Lz+5QsLw/BT4FNvMeOp2pSw4EChtOJAhmGHIwWv2GglNsyIaszeMqf3etxNaoLArOrBv
-         U5/2e3QjyGPrqSr1Y1QEJ/hbU7nymW4F0cL17mlta4a6MHA7J1Em9QnkGzJrp3NiGJTl
-         TgAJB4EsIIwpXvOIgvxxv6rEQF91EY+eWEOsP1KjpV+/b2nNhx7QDyHC2zUpj2ggG+qe
-         ggrg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=pxgu3fx9TRD8oVfDId+xboYyQW4bMqWkiNr1MMvb6gs=;
-        fh=qDUCYx4hCZvY9ir3TTzy1s8nDP4n5IWZNvQv6Vp7KOE=;
-        b=aj8wZQ2J0qsYYEUl9mZL2PmgJBIdTXvsPOio1wGdtWfYG5NMtGfN2G2sP3FIMpks/l
-         Gv+KiGjmQGr+dCDNTgQC9NPykYGg7P3sQB+u0l5rqP86p3SkzJjCiYJXKFpiPLO7DjVU
-         CLRrG7c33wXCMIrcbw5j/D3hZXqPuHhmoFlsj0aE68t/YStQGJfNfjL1FfUiUadE5PFw
-         q2IAwAA95Q7wS+1qW/1vqL+g1KTymPAX4Y+NwoTRZRH3RGrzJ5OTq2cQj8K4jUNynHt8
-         lW9aY/rapPc7BgQnq/xyJWDvh/+V76sE+R5/9bnwRqcALiH/3uQTGeEuLmn+UNluH8V2
-         s65w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jDUPIe8S";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jFMCjyVZ"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D20qMl923086
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=5I98+ngzky6
+	+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=; b=jDUPIe8SBUcf09Lmim2C7NxL0NS
+	rUm58lnbqbNj9JcvbQtqc2nGTYGpnWrRbIOdkPPUCAozxLU8Af5ExvaoQDU0+1UH
+	AphMdBXZ3k/hU1iJoLtHIOdC6iQEFJ5JH7o7jT/LZZVefBeLHgt3lJKDYw45blLq
+	IFk2xX1dkZtYT3i7cTsT4D0m7txjtf4KiEj05HpTUF+aQBD03gb4QXKq6wb/04WS
+	YR8Of6vzncX1GYlgG2GP7TqNdNff0NoSq3//a7GFD8nD9/51Hm6jTOQE/L7rSjDV
+	rkwm9URdYA+Fcmt5t3E9gGB/0K04zZDC41ZWLyO/e/r4T6knO9UYNfdpUxQ==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h98h1s3ny-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 04:55:38 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cd5fd02ee26so328624a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 21:55:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791866317; x=1792471117; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=pxgu3fx9TRD8oVfDId+xboYyQW4bMqWkiNr1MMvb6gs=;
-        b=fCDrlHRy4lRATSaqObciAKFw0TJIGERr+ueGTzy/mCqBcxVK9KnVISeAYwgsaaXPeX
-         zu4Yws6v9gsRUEwx0gxDbfiijNCCne6D2FjQeOLPoZkFD4brk5MKM9KMxdiVkoE1qAui
-         qhBA83+SqxCFl6sINuqJVEDa+2atABpdktwBDPyE+alHvzSWKbpLl8tDnW1okrYqqdVc
-         5VZKYFHgIFFD+uotu/d5y1J6xs4x7R23G6hz+BItXBHbvapW/jasQGIfqK2FTThZaNlb
-         1isUhT1SqhlutVIyXGCI4/VO4MjJ+beyKnDQq/erC6nxBTzkt4tlkqdnzmLcEa+F88gd
-         noiw==
+        d=oss.qualcomm.com; s=google; t=1791867337; x=1792472137; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5I98+ngzky6+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=;
+        b=jFMCjyVZbgmSuguiDq5sMeIrtcDGUthMctZuiv24LmDNRqpvePUUDhx+U1Nw1OWh0v
+         vSfJfg2fMRe3njpTnVJH+Xp0GK3E9gXprYRBVx+DHTYHP7SVMLdY4Sku1jOXgfGt0z70
+         0DhShphpbunc4aGzDV+Tqopps3tNqLUojUzpSix73/ywdxeV+DNyVxvgYOkKHUVzYjNs
+         MU9L9G6GsMVjgjjt/JOLRj0pFUowI8M22GmRCWIoZ+HHqeP7n+6u+stz3fXkqG0fxmRI
+         qc58Fc32IdTAxhv0BDYzMRB62LwyX2TvnhOrSoU8b2VzP3wH9ZZNF8EcDS1hMUrjxU0+
+         EWOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791866317; x=1792471117;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pxgu3fx9TRD8oVfDId+xboYyQW4bMqWkiNr1MMvb6gs=;
-        b=NmEZ3s4vyiBSBUOlrY1zPOvHtethYvqBvVhqyfjcbsX5qV9mbfGswdSawzZqnC3+xW
-         k5MSmYuiwkTQcKFS8HtJ+u3wTp5RhpRbSBIddA7Hp3YKcqud1qJ6JqSxZyF33utxIS5n
-         DTul3I9DqXlaFlZnKCs03KdrSnAd/zFZEOWNAARjkJYV3GKxLA/4xKpmmfAB5RRZ6//7
-         tHLJcog5iUE9MlmEYpszLYBlcF3tz2ilZFttpl/0IUP6jrjEQM9gv8Ei1umwMM/oe8rf
-         crn+8TTvdyk5QSeKs1r89s/lFYuTTyloBZd1DbaqAdvCScki/EElulh88oHOlvjCRcr+
-         RHqw==
-X-Gm-Message-State: AFq9FYIOUbzORN+2iHMijRtpnCYjA5EbQ1QTBa9Bz1LZMJfBoagX15bz
-	OFuMXZvlh/LRV1eIR44s3vufH//dyCHbW7QlqrVBlJgOevPXzHaeF5lUE0DBkDGa4M94l2FrZHU
-	RqIXkoYPaUH3V23Jpd6ABIMp1UzPW8vE=
-X-Gm-Gg: AYBFou3x2mP67ZAhGmsWvRuROgDaj2T0VozWB88mLQQn/C4gdRlAQ4yLW5HPPpi8y2t
-	qz9MIgVQlXsbRz+L3IptF+soZu6TfvUzmUrMSImW2tqYAO2mz342EnZLpwRjbz03KY/CuTwpTUZ
-	l/9CoWgXcEbvMZTiUykPzk3kd2liDEThFNO5qeetRfUt4Y+zjDx7f3MMeHyVTyNXpxU51G4+90V
-	pLvNRbdZTIT1dBU7znmzp6r2Pm4m3X+i/hrnYS+ORep1ZyPlCPq8DYA0ICYqfnWgQFz2YgTNGx4
-	brELWIViYAykxxXrtOkTklLPq3sqN/s6v75dY6PAX/gsGIO+hAaWfB5pteEbjQXRM6zKeF+GrbN
-	yxWVpDdHfOVoL
-X-Received: by 2002:a05:6402:1f82:b0:6a9:bb40:6de7 with SMTP id
- 4fb4d7f45d1cf-6b17c2a2d54mr9683306a12.23.1791866317127; Mon, 12 Oct 2026
- 21:38:37 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791867337; x=1792472137;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=5I98+ngzky6+nS7Fi6x4NgOpjxaLbFud5EFJpCmhE0Q=;
+        b=sNVeXQ7TVIOCxHqmJCdOtgViq36sNJ7NhL6Z1rF/3eWdftVuhaLdZ38wIqDq8ewiLc
+         AYhj1ypzuIwJ7XaWJn2jPqA6Zcy6D3rPjY0uTBP3187ROZIg7Eq16BHV/YIfypDNcfVt
+         l7nY6JM4ExPvseAmRjkb6oP6Dler+07TjK/v68Z9jCEYX1d8dk0ybElZmBWea0yLXYXA
+         3XHXqrzdWLZDQ5BHfl5n2LYkgOnr2DC/y9dIGm9tI064AJ5TVC4noiAdAh/UQPXlyYzm
+         h96umCeZ/+S4N3JvfjLYLlnu1CupoRC0CvBhsy925zMSMRz9AowjBTFZs9vdzMUfPxo3
+         Z19w==
+X-Forwarded-Encrypted: i=1; AKwUvBwLRRbRFQezapbOKTt1+pJePMtjfVoDxJtQCn94SPJVZL4yqIPDdg7ViL2HWAvGwx+rBWegrwFVsgG/oNIR@vger.kernel.org
+X-Gm-Message-State: AFq9FYK+XBwhcnSJbNWHMCZHS+gw/PEmcUIUf6X5PbmnMkcvhYvwLd9u
+	4G+eAMuHHERssVH9QI3opW0jOVERiMaxmoJTS12kgjhHihSmWe3F830Pr2trBiHbSB7d8Z4FED+
+	ip4k/oguP3iyM9NNh1EQYpsPrkMOv8UBBDhVql6FTEbiWS0Ooi6M4bP53+Vv+ZkESS7zM
+X-Gm-Gg: AYBFou0mVvcGBamh1rQmr0rAQ1pYftxtWCl3Iy+3k0ECyfHIXpyEGI/lEee53437Wn9
+	z5/qfZmG+lYgZgF54TTKa+nDJEqF2lUX0Pk+BhyvAcKUbmsv9JwpMMZsYDTT2xRxMGX9ez8+LHh
+	lNhkfOiE3/qcJ6GH4iPIrcChsCKdYE9PmOu7mW9WtrhtRN0tUw0T9n2docTVFHxNbd3NHlJJG/O
+	BVNRSFFEQrdM5dZFpB0MM4pcwuOIbZdFVSmEhLarrPmFEPGTP0qaAQ7h0tI0pgqjsAzamUFQCA8
+	z4Q4dEgK6AdD7lK/js6xv9q5/RJaJA10KaWKRRHbH7F+wuo1UdcnADUWAz/jwoi32ntp7jgyF3/
+	pH8s5hXCh8wNB/Et1nQtcmpxmb4Le
+X-Received: by 2002:a05:6a20:430e:b0:3de:7dd4:e32a with SMTP id adf61e73a8af0-3e16bdae01emr14421848637.2.1791867337386;
+        Mon, 12 Oct 2026 21:55:37 -0700 (PDT)
+X-Received: by 2002:a05:6a20:430e:b0:3de:7dd4:e32a with SMTP id adf61e73a8af0-3e16bdae01emr14421824637.2.1791867336842;
+        Mon, 12 Oct 2026 21:55:36 -0700 (PDT)
+Received: from sdciot-sh07-lnx.qualcomm.com ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-899b738d03bsm2438382b3a.41.2026.10.12.21.55.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 21:55:36 -0700 (PDT)
+From: Linghui Wu <linghui.wu@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, kernel@oss.qualcomm.com
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>,
+        Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>,
+        Cheng Jiang <cheng.jiang@oss.qualcomm.com>,
+        Linghui Wu <linghui.wu@oss.qualcomm.com>,
+        Wei Deng <wei.deng@oss.qualcomm.com>
+Subject: [PATCH v2] arm64: dts: qcom: shikra-iqs: add M.2 Wi-Fi and Bluetooth overlay
+Date: Tue, 13 Oct 2026 12:55:27 +0800
+Message-ID: <20261013045527.56941-1-linghui.wu@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
+References: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <179184923104.248043.14168731037113716140@mail.ustc.edu.cn> <CAH2e8h6_pACX_j8YBDhhSZzbfs45waF-Y6KJo82_2c6BT0suEg@mail.gmail.com>
-In-Reply-To: <CAH2e8h6_pACX_j8YBDhhSZzbfs45waF-Y6KJo82_2c6BT0suEg@mail.gmail.com>
-From: Pengyu Luo <mitltlatltl@gmail.com>
-Date: Tue, 13 Oct 2026 12:38:20 +0800
-X-Gm-Features: AclHuK8ikXCMqYZWUZ4AdnSHfDjzbRjbXCHV1nm3CLE0ArHVljTTZwrpDStF-5M
-Message-ID: <CAH2e8h7H5-DzTj1zwejYQyNNtupurgzYq4t6gKPZoZw=7EQvrA@mail.gmail.com>
-Subject: Re: [REPORT] SM8750 bonded dual-DSI + NT36536: first DCS command-DMA
- timeout on cold boot (DMA engine stays latched; DSI-side reset does not clear it)
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, dmitry.baryshkov@oss.qualcomm.com, 
-	neil.armstrong@linaro.org, abelvesa@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=VqC2kO2n c=1 sm=1 tr=0 ts=6acdb9ca cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=HwT7i5cL4_BIIXZyjbQA:9 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-GUID: CUVjeeo8JXasHxn1gl-7gamEUdELCOZd
+X-Proofpoint-ORIG-GUID: CUVjeeo8JXasHxn1gl-7gamEUdELCOZd
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAxOSBTYWx0ZWRfXyjsnptciUoQX
+ am2ybJ1l7r5PjPj4GRq8ha//VpTmg+Iq4U/EA05x/B7BHE36J8UPl/a3BtDrxGairbrtXA/Ezxu
+ PAdYRFUUWc4kQ7qVAdNjnjCqoXsBMe8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAxOSBTYWx0ZWRfX6YX30yz8KvcZ
+ imJVUpHvIoD7fB+leGlViSlBMrNRiaSXDOVTHXNDG1/JPnhpg+5OIrc9HDuWyFE4+QhpluloEIM
+ plOfF0i9Sm5/aqH1CnXzk2uawPgvl3rC3gmvR7LQgpNzp5nFUTfyBTQwnNV6urXZUCWXgafh1ZO
+ fCXNG12OY7GiJLH//cvDd/2ObmtU/My6kASy9QD3m2IDhFrZxEKMsR2LtcYUkLf8iQ/AOCnbqzQ
+ OKp0Tba/E7mqQzcVUmSh9r1PpRHiwek1ngKI1R2FzeeyEz0p1xvQLZZfsFPgxxfQBOe13MTStGd
+ uJnguvQXITBAC7nx39Xn8T0j96SgdhlMDyliPTJsY0a3TiFu7a54mWgjd1swrMhM6w/dq4Hhv7s
+ TCXaY/0x/rQ1QKA5NPIxRdVq4i2dET8dsRQIQ0rfq6UVok1hVIIrL9CrgoKNqJkvj5dSQRO6ZM4
+ 6trxTV2XYHLDBcZViuw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
+ adultscore=0 phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130019
 
-On Tue, Oct 13, 2026 at 12:34=E2=80=AFPM Pengyu Luo <mitltlatltl@gmail.com>=
- wrote:
->
-> On Tue, Oct 13, 2026 at 7:53=E2=80=AFAM Qianhui Xu <xiaqinghuan@mail.ustc=
-.edu.cn> wrote:
-> >
-> > Hi,
-> >
-> > We are bringing up a Lenovo Legion Y700 (2025) tablet, TB322FC / Qualco=
-mm
-> > SM8750P, with a Novatek NT36536 panel (1904x3040, DSC, video mode) driv=
-en by
-> > bonded dual DSI (ae94000.dsi master, ae96000.dsi peer).  Our tree is
-> > GEEKiDOS/linux, a 7.2-based tree that carries the bonded command path
-> > (dsi_mgr_bonded_cmd_xfer() plus the "bonded command DMA failed" / "peer=
- command
-> > DMA timeout" messages).  We could not find that path in the vanilla 7.2=
- sources
-> > we compared against, so question 1 is partly whether it is upstream-sup=
-ported
-> > at all.
-> >
->
-> In a word, the panel driver is supported, the DPU may not be.
->
-> I think most drivers for dual dsi dual dsc panels in the upstream are
-> alright, but they may still not work due to the DPU. Once I upstreamed
-> partial patches, but it is not enough, we need more, like we need to
-> hack the dsi clk source select for the 10-bit CPHY plane, etc.
-> Integrating such kind of patch to upstream is time-consuming and
-> troublesome for me. Even if it works in Ver, nobody would ensure that
-> it still works in Ver + 0.1, as there would be many features and
-> regressions for the DPU when promotion.
->
-> I cannot help with this for now, sorry about that, I have not focused
-> on this for a while due to things irl,  You can find some threads in
-> LKML about 10bpc 10bpp support on DPU discussions that I was involved
-> in, it may give you some insight. You can also find some records about
-> bringup, for instance, please check the image in this thread if you
+Add an overlay for M.2 Key-E Wi-Fi and Bluetooth modules on Qualcomm
+Shikra IQS EVK.
 
-OOPS, the thread is
+Describe the PCIe and UART connections through the M.2 connector, the
+3.3 V supply, the W_DISABLE signals and the PCIe reset signal. Disable
+the onboard Wi-Fi and Bluetooth nodes when the overlay is selected.
 
-https://lore.kernel.org/all/CAH2e8h4Vp9fJYAUUbOmoHSKB25wakPBvmpwa62BTRqgRQb=
-MWuw@mail.gmail.com
+The Wi-Fi PCIe path was tested on a Shikra IQS EVK with a QCC2072
+module. The overlay was applied, the link trained at Gen2 x1 and the
+endpoint enumerated. Bluetooth UART and HCI runtime validation is
+pending.
 
-Best wishes,
-Pengyu
+Co-developed-by: Wei Deng <wei.deng@oss.qualcomm.com>
+Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
+Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
+---
+Changes in v2:
+- Drop regulator-boot-on and startup-delay-us from the 3.3 V regulator.
 
-> are confused about if it is __really__ supported(i.e.
-> https://postimg.cc/xJr11DK5, and another snapshot for GPU bringup
-> https://postimg.cc/0zz30h8P).
->
-> Best wishes,
-> Pengyu
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso   | 106 ++++++++++++++++++
+ 2 files changed, 107 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
+
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 1c86e7e98f55..799faa32e2d9 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -339,6 +339,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sdx75-idp.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-m2-wifi-bt.dtbo
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
+diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
+new file mode 100644
+index 000000000000..9496c6558eef
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso
+@@ -0,0 +1,106 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026 Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++/dts-v1/;
++/plugin/;
++
++#include <dt-bindings/gpio/gpio.h>
++
++&{/} {
++	m2_keye_3p3: regulator-m2-keye-3p3 {
++		compatible = "regulator-fixed";
++		regulator-name = "VREG_3P3_KEYE";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&qps_gpio_expander 6 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	wifi-bt-connector {
++		compatible = "pcie-m2-e-connector";
++
++		vpcie3v3-supply = <&m2_keye_3p3>;
++		w-disable1-gpios = <&tlmm 61 GPIO_ACTIVE_LOW>;
++		w-disable2-gpios = <&tlmm 60 GPIO_ACTIVE_LOW>;
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_pcie_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&pcie_port0_ep>;
++				};
++			};
++
++			port@3 {
++				reg = <3>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_uart_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&uart8_ep>;
++				};
++			};
++		};
++	};
++};
++
++&{/wcn3988-pmu} {
++	status = "disabled";
++};
++
++&i2c3 {
++	qps_gpio_expander: gpio@3c {
++		compatible = "nxp,pca9534";
++		reg = <0x3c>;
++		gpio-controller;
++		#gpio-cells = <2>;
++	};
++};
++
++&pcie {
++	iommu-map = <0x0 &apps_smmu 0x0800 0x0 0x1>,
++		    <0x100 &apps_smmu 0x0801 0x0 0x1>;
++	vddpe-3v3-supply = <&m2_keye_3p3>;
++};
++
++&pcie_port0 {
++	compatible = "pciclass,0604";
++	reset-gpios = <&tlmm 118 GPIO_ACTIVE_LOW>;
++
++	port {
++		pcie_port0_ep: endpoint {
++			remote-endpoint = <&m2_e_pcie_ep>;
++		};
++	};
++};
++
++&tc9563 {
++	reg = <0x1ff00 0x0 0x0 0x0 0x0>;
++	status = "disabled";
++};
++
++&uart8 {
++	bluetooth {
++		status = "disabled";
++	};
++
++	port {
++		uart8_ep: endpoint {
++			remote-endpoint = <&m2_e_uart_ep>;
++		};
++	};
++};
++
++&wifi {
++	status = "disabled";
++};
+-- 
+2.43.0
