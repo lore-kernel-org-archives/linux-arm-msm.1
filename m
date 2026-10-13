@@ -1,125 +1,241 @@
-Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1964040DB53;
-	Tue, 13 Oct 2026 09:59:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.204.34.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7F70411FBF
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791885598; cv=none; b=fBrZ6L12XhmvQDXS/rL+UWSW4zqej2VBXj5qTzqSWkZPF7MQegoW8lk/sD4U69mELj/AUpm5clU7YW458Bd2+U56OO6o0iPNiAaBsUIDGJj+KNaRT36jhwZGbsX1FEwKBm1C5dSira0RoY739em/nSj3fuXsvZToell3YY3Dz4Y=
+	t=1791885610; cv=none; b=V17uh3nnu+BhrwVvNU6Uy+Hb2nnwy9mB41DPzlUdxStUmHZtxjQ/uvVGdKYuNI31B5FUttDWpbrGhlx6X8qH9faCDH8kROZ+QqB/ljDpgF1hPZ52R/XkcmeAo9FYlzFH18NryGEmpQpxt+KsDhXU9y0qFLWHTY9xFS4LOW1gCJE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791885598; c=relaxed/simple;
-	bh=dUlL9M0ac+ElyrJhMA1aGNoBfZHQuHzk2sU1ZpuuXIg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fvJ3J3ZVgGsip2Y2dPbdZ6z5LTu+nYzQHTj9amlhtvd4Tg9N1+nsOfFTWtKMEJTqO56AOpBybRcTBGN9sjx10/ANlPiq83E/pmiYJd3hVeKT0X1Yc4M9x1bHvi4JnJRgIZwHuGANgBTyt528hFnnI7pTsFX4LaoFhTfzj6qrRGM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.204.34.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip3t1791885572tb6b18932
-X-QQ-Originating-IP: 1BGUWLkxMiuAX64AvAO65k2urEB/lKhw04MWwEKwyfI=
-Received: from [192.168.30.32] ( [localhost])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Tue, 13 Oct 2026 17:59:24 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 14585725684793915466
-EX-QQ-RecipientCnt: 10
-From: Xilin Wu <sophon@radxa.com>
-Date: Tue, 13 Oct 2026 17:59:19 +0800
-Subject: [PATCH] arm64: dts: qcom: sc8280xp: Fix GPU SMMU context fault
- interrupts
+	s=arc-20240116; t=1791885610; c=relaxed/simple;
+	bh=tPuke9GZue1598rJs945YYEbvnGdQO2FD3TmVsXbGg4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Mhw5cWZl9wFJOBiSvVREb2cfgqptex02X1BS8sWasbWPSj2LtprdqxWDUPGa+9pQyC1W01mHPjeSToJGyd6vDjz2wuKX7gLxyaLfRgF6qxZLaZ9XGiaQEpks2i3OgSiQaNxtmqrs2d9Z9PAa/Z0xKuyJotBhCNBj0i3Tzi0alR0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HIAk8UvD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ON5Sbcg/; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HIAk8UvD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ON5Sbcg/"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D9fk573475851
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=; b=HIAk8UvDljORE4jX
+	4/vr0PByQOq/FC2imvFYV30TGaKOC5OsHNY6mGoV9r9vLRSIkz7fe42rJkls406f
+	XNdnn+9MuVMLAsXj2m8/RN/0LKTQJop2dUvqK12WHyMwXlzU6CtIzLjUcfnjcWOK
+	7hbC0HVYuonELceH2QW45VDzI35C+BR2qiM+nc0GcnpGNiUmZVmuwT0l6VfrfcUO
+	xgRNxVUcuucOJU40qWRT7AKOV/YIGmRaA1NeZh6E+v8hJfKH7+g390Ff5yc/niZ8
+	eoka+PggHkPly8uzatMw/TWPzhvr0fwBc1FdNsYnqzlhGNubYYMOHZGa9InFzqVc
+	po1c7Q==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9d7j9dee-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:00:06 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb6391e89so609396285a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:00:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791885605; x=1792490405; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=;
+        b=ON5Sbcg/IkOxTEqL9l39RNefOphsxQIVoCJ06ts/KcC22sWrXcKlVlYVvkYkmgiTG3
+         M+gWaPCcyqKpS69c8U4QuGTgBkgLziwjlsk/f1pKa2Rf9QMmG4uJhnbaTdMp7DTztRQ9
+         fhg8NJNNRt5WyjE+5hfVDvghGRaOB2of3aD2IwMyHwJB153myPfOVoVY0wIbyPQiLTFO
+         9MgB05ywVCSZj1r23bthQ5cAoLH4ZjZkZsC+j9MN6VPClvyWqhcDjLJHOSHOc/qwswXW
+         TKiNz2/iaPVV8kFs1wkocUwXQ1faQB4CAVQL9TY5q31c5/2hn0cZ+52G3FT6mT43UuYT
+         KOJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791885605; x=1792490405;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8y+WbrICdIVcc2cdFgNnGMMKkbi9rFEAVmEY4pqLGkA=;
+        b=jqA2uC/F9lRx2ytgCyaUf5qhvrO/ip6uBwv+HaDEPxglpAH+qHWSAZgioaF6eL/e/Z
+         WBEwctO3tEh2D+fXbr3fbkb3eo1BSx1LWsIqB0mLqf0RcV2wIY3yIUd1XxTpEyorOK0N
+         QXeeYUSsYivZZDRS5DK9PCm2COMvaQAm4c31dZs138D5WhlGDzwpcQ5kfLG4eCf4RpaR
+         rGmtXMgi2WDduXovrhzOLO24oa1arlypujSv5trVa+aK3cpkSeimcHWd5yPafEQndkAT
+         VZPLM5UM8hFR45AC/KCBcCrFNjDYR7gz0fAFsBhKupnE+a2n7u5K0K5BTMMe0g/Szd4F
+         VdMg==
+X-Forwarded-Encrypted: i=1; AKwUvBxW5+UWucf4qRN+Z0cpYuXjqyUeJbF0nPzIE85zdY1dMPiy7UHLToAipilLU8dDgy/XVL/PxAr/6zX2TfrG@vger.kernel.org
+X-Gm-Message-State: AFq9FYKPu5e4PQmSZArLvv6FrgwIQ6M3+hgAU4pcRPyaMCLj6a6LRSSV
+	LEaT3idVOOi+fzW6DjoIxgW0Ds0gzTds1LKdncu/AscztbQX5h3KkxV8hBLkg94VXudDyVDV5p7
+	0TWHU3ALbA0SYJeW9LwoJ5r2jeDlqmeUGt1H7+e96xMdmpPFUEUJnb86zfN+Fed02VtyL
+X-Gm-Gg: AYBFou1PLwy6CCbOWmOjg1T5gtI94npm39CgvDsqv9q6go1xkNBP7NYoAHvqdtWG1Lz
+	TP639a9+CSBc+56UGzUyPClsGdMssmrEHvX6wQCpL76y8a1u/bKuFiByqaBQMDIcw0XlhPdoGks
+	G3P6OGzkhOXhZYO6FIbS0MuGzQT8oNc48RgYMG6+97lgY2rOcpJzeYpRaSgnu+BBxMEBgXyfvGc
+	6LwjPr2HWme3EXeqHbuvtm/uPFG72LOiWk5wuQJoGcgj3/3+eFMNMErPSn7fXbdNVAT7SovosYE
+	Yav8rCLE5EFhlKt5+xLhNLUzbVLpskADs2FviIHFsbuWMT2rpfXTuXKskk3xTPMkU1GG1cTwnTi
+	v64Jn+QfUSOayCY6cxgezkRnzfS71MrgwDjXDELhmS3DlOaM0Kv5TM9GtDgqmdA==
+X-Received: by 2002:a05:620a:271d:b0:93b:c537:fdb8 with SMTP id af79cd13be357-93ebd0df02emr1885361385a.6.1791885604855;
+        Tue, 13 Oct 2026 03:00:04 -0700 (PDT)
+X-Received: by 2002:a05:620a:271d:b0:93b:c537:fdb8 with SMTP id af79cd13be357-93ebd0df02emr1885354685a.6.1791885604246;
+        Tue, 13 Oct 2026 03:00:04 -0700 (PDT)
+Received: from ?IPV6:2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7? ([2a05:6e02:1041:c10:7d20:e20f:a77f:4ef7])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaaebsm4390052f8f.14.2026.10.13.03.00.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 03:00:03 -0700 (PDT)
+Message-ID: <f01126d0-4ad6-4f23-bf00-88521cd0c2b8@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 12:00:00 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261013-sc8280xp-gpu-smmu-fix-v1-1-8a781e3f1554@radxa.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM0QqCQBCF4VeRuW5gd4qUXiW60PVkE2jLjhuC+
- O5tevkdOP9KhqQwulUrJXzV9DMV+FNF4dVOA1j7YhInV+/8mS000rgl8hAz2zhmfurCcDUuraC
- vO6HyjQll3rv3x2HL3Rth/sdo234gElMUeQAAAA==
-X-Change-ID: 20261013-sc8280xp-gpu-smmu-fix-e07e4a2ed7b2
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, dragon@radxa.com, Xilin Wu <sophon@radxa.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1929; i=sophon@radxa.com;
- h=from:subject:message-id; bh=dUlL9M0ac+ElyrJhMA1aGNoBfZHQuHzk2sU1ZpuuXIg=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFnnGP7O054UzRf3vpv7n8q6dbv2bj9deO5t6/zHSVPus
- AQsW33xe0cpC4MYF4OsmCKLQjzDXPbK3GtPxUr1YOawMoEMYeDiFICJ5HAyMjyO2vtj5YO/cxOe
- vjtkbWSxbFfhlNs/Cysfr+RXFGv4qjuBkeFHU/MbX2+uSwv+PZY63ulw1mE/y4p5NxTCimvnh8g
- 4cXMDAA==
-X-Developer-Key: i=sophon@radxa.com; a=openpgp;
- fpr=205F009D07796DD6E516752E32C31567AD9E324E
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: MRlJlBnjh5AJey+NVI641g+syhYURjqEZ25cexL43X6GxnTP3nBAgNNX
-	tC9cIFZc/bTwIlJaHIpJRPYjmPI2GMg9QLNUeBRGsbKutLyMVFXocI3M0TgNLFpCKsLU66N
-	0V7/lilpqXBsM6lIuRq7bu08sF0yzzhzNOinNSPa4AwmXaJG9gQD1On0Prch+tDV/1OBQpz
-	5gKLxkWhoKNVlGvrNj6T49lfqlDPCwgGSdgOsi/xrb4Yq+D4yAwBSDoLvB7CN/OBRXDt28z
-	8p9taocd8hdbUQj9OLS9kVboHj8UAZCMja4FfPChio/cdjyK0n5kkVu439C7gqEMj/DEziW
-	bhhXS0l68Zf6YGfXOGq5elpV+6+np+UNfdFB/UkgkjE7Kweqy6deZhxBFk8tDXcR/ywcGqk
-	HqjPLHmOrcEhbYHlvbjoQHHOge7DTadCrrUydIFKJ0brq/2nwf985JXc7d3OuC+GyBIUiDF
-	DIkiSQpW/pc7G379FYdYaRF/pmeZ40fLpczr5Epsk4cU3ZmewNY15/n+9DR25I+77zITmik
-	D0FDihyqTBDvCbs7LWPC0DLRn783uEX96RWlujcahcyquYgQYq1ilHeCkZIkEQbkDDshYIF
-	8II2xvGAlwpw9RQXFw87nF1KkxJm1Z9vCsEGTQ0693ezyjVQV5kKTgm8x01IPa5/gYvMwm2
-	cXWv8WwhPP+8kPC2LtcVnvyuOXj/j2GC9YOEcmTghqwmkWgvgu9Dtw1RgGC8z5BN3/zgWc1
-	SJ9i9CXiX7Ae/T81xxcaLDNJEZEheIDVvfbsr6J7ysbV5cXWwJLk/v4YqNeBQmHD2uyr6pA
-	w9fSAbySEwTw1jtdG5q616BSlmid+vXV0njoiq49Ft/apjmFvEm+nGQdFwf+ta7aA+ED+zF
-	JrmFrF/7ZBpTyGpa5fPA63VDBC6rrs/OnlY2iT8Etz1un5m02WLuAf/UCbs/F9M0VjKvHc6
-	vqjx81XBC8Td+aLQA1IcLlGKtup0VZP4naaMaFkzXvSCobvr2P0oS17D2yeET5OAfS3lgD1
-	3KgSKfTpkj9MzdztxR
-X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
-X-QQ-RECHKSPAM: 0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] power: reset: pscrr: add watchdog pretimeout
+ reason tracking
+To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+        Sebastian Reichel <sre@kernel.org>,
+        Wim Van Sebroeck
+ <wim@linux-watchdog.org>,
+        Guenter Roeck <linux@roeck-us.net>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-watchdog@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        =?UTF-8?Q?S=C3=B8ren_Andersen?=
+ <san@skov.dk>,
+        Guenter Roeck <groeck@chromium.org>,
+        Matti Vaittinen <mazziesaccount@gmail.com>,
+        Ahmad Fatoum <a.fatoum@pengutronix.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>
+References: <20260805-pscrr-reboot-reason-v4-0-54ef517084cc@oss.qualcomm.com>
+ <20260805-pscrr-reboot-reason-v4-2-54ef517084cc@oss.qualcomm.com>
+ <07562f41-c269-48b7-9ca2-be324282a456@oss.qualcomm.com>
+ <8774f401-7efa-4577-8d03-6fe652e856e3@oss.qualcomm.com>
+Content-Language: en-US
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+In-Reply-To: <8774f401-7efa-4577-8d03-6fe652e856e3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: DfFK1Bd_Txv8X_A87UAiH1xzloaSYU0r
+X-Proofpoint-ORIG-GUID: DfFK1Bd_Txv8X_A87UAiH1xzloaSYU0r
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX/SScQmTRT+y0
+ FYbeFMa2iOf1JzF4PNC8ZR8o7pBRTp607JzQ8upizxTvqGpqeJkwhebo/algMXLUlBZRVgKVs1b
+ zi8SdY2yNXwFV87m+UbR/J4hOrvxpk4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzOSBTYWx0ZWRfX4wD/EE3f3mAx
+ vwvrQ7sxvkKynLJqTLd5RfrnEqPUvUE3wJGS+bEwlCrVGqzZHO/DsvoYXQ6l/7rjj5e2A0Luj3Q
+ B2pkNa3ymx8LsUGvriU427hqp32kNaTE1mOioscvLVJfTlI1CCSOdto+74r6klCEW2RJY5h9Wlk
+ tAOvg5/cKGiZlo+SnH7je/ZWOJHSz4TMmqIqmRFmFaz5Ro3DqXVQbx/CIC6ykXDsnnhiQF2uab4
+ Gln80RJ2TigqqnTEzbrAqC3OeCqAUMTG6jA6N+eg5ddXE/FOfG1jKoyvRuV6LXDjbu/DC+8V6Pg
+ ZzoPncvj5xEh0tlxz2DMHycl1ADWOmc0soKB1dl/NFn86DRGEBcZ75MuAgZLZ7Cj4Cg7kWrYQjp
+ QnV+T/UssADFzhduTADOvjA35N+GLhi/VsFi7W3NI8xuyPojEVhFmPP+OyTfSNbVp3+oFuIchQ9
+ ocVuQeGMKgfLI+8dLGQ==
+X-Authority-Analysis: v=2.4 cv=PMGaavqC c=1 sm=1 tr=0 ts=6ace0126 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=a5JEe3mAxTw7QyptA7EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 impostorscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610130039
 
-The GPU SMMU interrupt list includes PMU interrupts as the first two
-context fault interrupts. This makes the driver register the fault
-handlers for context banks 0 and 1 on SPIs 678 and 679 instead of 680
-and 681. Translation faults are consequently left unhandled, which
-can stall the GPU and prevent recovery.
+On 10/12/26 13:06, Faruque Ansari wrote:
+> 
+> Hi Daniel Lezcano,
+> 
+> On 07-Oct-26 4:24 PM, Daniel Lezcano wrote:
+>> On 8/5/26 10:54, Faruque Ansari wrote:
+>>> Watchdog pretimeout resets are not recorded with a dedicated reason,
+>>> causing subsequent boots to report PSCR_UNKNOWN and making it difficult
+>>> to distinguish them from other unexpected resets.
+>>>
+>>> Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reason code and prevent the
+>>> panic notifier from overwriting a watchdog pretimeout reason with
+>>> PSCR_KERNEL_PANIC when the pretimeout governor triggers a panic.
+>>>
+>>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>>> ---
+>>>   drivers/power/reset/pscrr/pscrr.c     | 11 +++++++----
+>>>   include/linux/power/power_on_reason.h |  1 +
+>>>   include/linux/reboot.h                |  4 ++++
+>>>   kernel/reboot.c                       |  1 +
+>>>   4 files changed, 13 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/drivers/power/reset/pscrr/pscrr.c b/drivers/power/ 
+>>> reset/pscrr/pscrr.c
+>>> index 8c45b84059a9..b7e6239e207e 100644
+>>> --- a/drivers/power/reset/pscrr/pscrr.c
+>>> +++ b/drivers/power/reset/pscrr/pscrr.c
+>>> @@ -529,12 +529,15 @@ static struct notifier_block pscrr_reboot_nb = {
+>>>   static int pscrr_panic_notifier(struct notifier_block *nb,
+>>>                   unsigned long action, void *unused)
+>>>   {
+>>> -    struct pscrr_provider_dir *dir;
+>>> -    set_psc_reason(PSCR_KERNEL_PANIC);
+>>> +    /*
+>>> +     * Do not overwrite a watchdog pretimeout reason already set by the
+>>> +     * pretimeout path before it triggered this panic.
+>>> +     */
+>>> +    if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
+>>> +        set_psc_reason(PSCR_KERNEL_PANIC);
+>>
+>> It does not sounds correct.
+ >>>> May be you should move the set_psc_reason() to different places for
+>> panic.
+>>
+>> I did not explore the panic() function but I would suggest to have 
+>> something like:
+>>
+>> panic(..., ) --> defaults to PSCR_KERNEL_PANIC
+>>
+>> panic_with_pscrr(..., reason)
+>>
+>> Then pscrr_panic_notifier() only does the record
+> 
+> Thanks for your review.
+> 
+> I agree that handling the kernel panic reason in this notifier may not 
+> be the ideal approach today. However, my intention is to add userspace 
+> crash recording support in the future as well. Since this notifier 
+> already serves as the common point for recording restart reasons, it 
+> seems like the most appropriate place to handle userspace-triggered 
+> reboot reasons when that support is added.
+> 
+> For consistency, I added the handling for kernel panic and watchdog 
+> reset reasons here as well. While they are not strictly required for the 
+> current use case, this notifier is the most suitable place to record 
+> reboot reasons. Keeping all reboot reason handling in one place will 
+> also make it easier to add userspace reboot/crash recording support in 
+> the future, without introducing a separate mechanism later.
 
-List SPIs 680 through 686 in context bank order to match the seven
-context banks exposed to non-secure software.
+I understand the purpose of the series, but setting the reboot reason 
+directly from this notifier does not seem like the right approach.
 
-Fixes: eec51ab2fd6f ("arm64: dts: qcom: sc8280xp: Add GPU related nodes")
-Signed-off-by: Xilin Wu <sophon@radxa.com>
----
- arch/arm64/boot/dts/qcom/sc8280xp.dtsi | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+The notifier should be responsible for recording the reason, while 
+determining and updating that reason should be handled independently, as 
+it may originate from different execution contexts.
 
-diff --git a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
-index fbcfd3883bbb..504ba6618bc7 100644
---- a/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sc8280xp.dtsi
-@@ -3533,18 +3533,13 @@ gpu_smmu: iommu@3da0000 {
- 			#global-interrupts = <2>;
- 			interrupts = <GIC_SPI 672 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 673 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 678 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 679 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 680 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 681 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 682 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 683 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 684 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 685 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 686 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 687 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 688 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 689 IRQ_TYPE_LEVEL_HIGH>;
-+				     <GIC_SPI 686 IRQ_TYPE_LEVEL_HIGH>;
- 
- 			clocks = <&gcc GCC_GPU_MEMNOC_GFX_CLK>,
- 				 <&gcc GCC_GPU_SNOC_DVM_GFX_CLK>,
+The need to explicitly check for PSCR_WATCHDOG_PRETIMEOUT before setting 
+PSCR_KERNEL_PANIC illustrates the problem: the notifier now needs to 
+know about other reboot reasons and their relative priorities.
 
----
-base-commit: a90ee4305c4a5df72c11b31dacfdc76e00fcf78a
-change-id: 20261013-sc8280xp-gpu-smmu-fix-e07e4a2ed7b2
+As more reboot reasons are introduced, this approach will require 
+additional special cases and become increasingly difficult to maintain.
 
-Best regards,
---  
-Xilin Wu <sophon@radxa.com>
+Wouldn't it make more sense to centralize the reason selection policy, 
+keeping the notifier focused on recording the selected reason?
+
 
