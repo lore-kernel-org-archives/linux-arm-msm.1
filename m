@@ -1,85 +1,85 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08DA642F718
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:26:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A05FF42122B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:27:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791887174; cv=none; b=QAf8VRGfdst9YRzJC8saHwxbQQopcTAVq3uqeHwWWc/vfcXZ8yRONvFmqdbFn3T6oaEStaHrASYdGe1ffZ9erbOIsO3pnhn5avgQc7HonLWYY+QMI9tLNMwYyqfTzNgQM4uTXVc7m6z5z0cJFBq4Eb3bp5PU4XivrXfy40XQmBY=
+	t=1791887261; cv=none; b=RYlgK4ttFe9bQxRxjXzBSvAj5lRqMTsbFOp7yJrOMKznADGN0Ee/4mtV0sNQ1FsHQDjPG+Jk7zD09s2FJBRUr2FQKHB7hpJfQemwextHrI5Y1Rg+7aKuf7IUCLnWyGPGNHBJn0jMXEjFggubbiot65XI+My+2DKNnZgLQiZIRRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791887174; c=relaxed/simple;
-	bh=7PWO/rmOMB/INrcy7L02xPLVPSTg5CtiuHCwAe7/WBo=;
+	s=arc-20240116; t=1791887261; c=relaxed/simple;
+	bh=aCXyDm9lEfTI94fau2s9dkips7wr0P3WARp6z8OULJU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aZkkGfvCcUAlC6wBqoxPWdHHLLKbqrp1PmGprOhr+75DdMOp8AP18tB0r0eHDIoZIE9OCab1t3eqzkR7d72HmEmu2yU5Aq18fcu/WcWpmNGnzDEZfj2xlgd8ZzfAMkeJbZXIIx6IjUMPG1bMjWtCbrqURf+2Hq2qjBBpAljiJb4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GX9DqWwH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V4PaIuo2; arc=none smtp.client-ip=205.220.180.131
+	 Content-Type:Content-Disposition:In-Reply-To; b=Q2+8ODjKDNE+Wq5VuME/SVgrMh8OFHlTqBUAEW+W3yQ0JeVA2gdpfso2YWIlK/Kit0eMbMI/3daPlye+mZDPlyYe0gy39SyD1od03RNDK8/VCjCukmo4nWKiJsr2Fk7/BoepX4nSCCHnH9Vk2ShMSUNeZI6lU6VZU839gdJw6pg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GDoecBCK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kW9qqTDY; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GX9DqWwH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V4PaIuo2"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D8Rmp3302871
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:26:12 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GDoecBCK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kW9qqTDY"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D902KA791439
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:27:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=XFUwTfQDkVnqeA/tF6NFKAol
-	awlux0KkzVVWyuMzsqc=; b=GX9DqWwH+E/919mEvs0RhmiLoecGAC768fDrT/sO
-	IkRtgNHxo/mWWGvL87dS0gk56l+Xq4Rxq6J+SGFvTUV8UBVRjvsbcXIOOuxU77ZO
-	izHpUyd22ulUGhNp1C49mYak2O96vfFV6Rz/7HY96nW+TJgdQsUPpmSLPioSgJ/T
-	WVKHuM+zuwr4KWsgoMA4oJEc+kZ85azti/CDznStH+xwI0lBZ4Q1ZdnXf1vHx41+
-	D43ObdnskSLTwofeDI/qTKviiJSoWpM/rhJz7Is1mWl7n3bjwpA/qVJRXWBIrWnC
-	LEGB/LTdJIdevg1W0enyQwk9D9gBj5hpXwwCJMunxtikWg==
+	:references:subject:to; s=qcppdkim1; bh=QGAQ+SPDmvHqJzwZscytDbFj
+	nJRM1Cy8AUNB2ckczKY=; b=GDoecBCKYq1UclhMIzU6gAUGU4jyMdg/pjj7HFCh
+	OSBVOjrQb/rnKJefWlP2oCTz5X84+x9Q6kLuzN/zBFUJwPFcm6MuYB7kHM0GrNrE
+	1OBV4u+hpOsd45NiSUbyJv5UI8nocTMzwD6+5oNVw3FZbRWE+/J8OgwV0FOY1jqw
+	DVEGmXldwF483UBV7CR6pX3Sv/qNnNOKuNLOKvbzPG5GoXntVR+9mfzaMhkG4NGZ
+	g6SNw3HglhZj1u737cu+EbIsUj67YBzexyOPv30e2WECOTAa6KsLuLxcbXMKSLTZ
+	OsVrTeHs+rllxvCsom40XvAwN+JGyK3hh8GQJt9Z4mZRuw==
 Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h98sqacdk-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9hmjrckc-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:26:11 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93ecdc701a2so335622185a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:26:11 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:27:38 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93ecdc701a2so335789285a.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:27:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791887171; x=1792491971; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791887257; x=1792492057; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=XFUwTfQDkVnqeA/tF6NFKAolawlux0KkzVVWyuMzsqc=;
-        b=V4PaIuo2zUXwXlpVjSZTnT9OYYPJtVRkhzv2BKrPu75BJkdmGXtcQxTlwypZOpUhe2
-         dPrU+sSsRp4UbvHYozN6B3mEvQHxIQ3dsNY8tfDQ9bxkg5tUInNQlxoBq4dP+ynux5cP
-         q2OlpbJOy7wARqToSzy5zps7+LoSSIloGKUx2ZF4xZ3kf2wpyU7Vyu7pdJDXcRb2kal3
-         y0ghTz4VDyxVIpB7mMwTS4PypE/a/8q4sm2Lozcs5dbd5ckWcDnY+ZCHzti4rDdj14kr
-         vtNOj6LiO+IXug08ioiZFf0Z21RFlTE/ZrNG/RwzXZrUPGmDE1tJ1fqwYPb4Yjm2T5+s
-         Jrrg==
+        bh=QGAQ+SPDmvHqJzwZscytDbFjnJRM1Cy8AUNB2ckczKY=;
+        b=kW9qqTDYif39DZnmcl8NLQEM3Xe+jeBHpkzZAf9V/p2eWQycbhh79fFA3ceNTLmFKY
+         hx1ORkXhn6lDXeZJkVJDpSC7xxyqnkyCGBZsTk0Y9uerqI1gqrnDIhGwHpp5kS4lwkoR
+         gDvqA0PqGWgJj9K4T7rgCBs9D8cmKV9oYC+wzIiZLs1xOLrZhwAnBROaMxsskU1Kh5ui
+         Td1DtFkWO/2mR/E8gwxtXHkodT72PmGBZZgMEKdQJgfUg2thWlSi51g6virmd1E0AgLI
+         v/c6PwakQzv9bHg+/bNlpq1O3xI2B7K2z6fmkujuQVou1QVwR2xCnTBVBwTvzMftaST0
+         mH/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791887171; x=1792491971;
+        d=1e100.net; s=20260707; t=1791887257; x=1792492057;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XFUwTfQDkVnqeA/tF6NFKAolawlux0KkzVVWyuMzsqc=;
-        b=Aodme2FkeFXolFAtFhOzvT5c3yNq4ejbXtcL3y0jzSktY75cGKXx13dPFgturIRSUp
-         sgOVvPNHcUI8Fx0vWIRHAnDgGGPLcI4kQ5EuWl7aBhUnlPwtEso9lGH4AKGtNkoOU3pH
-         fFz29aaXN6jxmr6fROiPqrqztl/k+e3Pz7zUzbgR3nmDUJ5bfk8p+SjHDv7qA5k150dY
-         PEvvKxdqWSj5JQrqPPSL51q44dK7SerKC6Ue0syqk85G8cSg3h7Gq4nbZJPG2bXnhpce
-         67s8HMsxk1cXH33uRxN9eMM4KIsRkxfxuFEm33QMTcym2df70eZ3WY83VuMZGmJibF9y
-         9r4A==
-X-Forwarded-Encrypted: i=1; AKwUvBwJrZ5+lQV9toM5RfPsZasNww4ykw2TEmzxkGJ/dCdLzRuVRTfnaVAxmrgKsFIsESUfSMCzsXUhYSEm3Ljc@vger.kernel.org
-X-Gm-Message-State: AFq9FYKpRD1Cxove46fPGNX/ELw8vQYltrLa5Q99EEN0eBUEoupA57mo
-	91ue1d3voZSykziex9pPDXwhFgt5HHnm+YAedjqin0xv2JgPKTqLziH9vGtpPi5EQRMDE3qBHsd
-	OPcatDHkLqWfmFGw/8j2b2vfBt/+Ns+0XGSKeeyXqFr6jQTijRIf3qkdif6ggUVVN5/ri
-X-Gm-Gg: AYBFou1gTpYogs/bVGgkMDOdGrSARDm1sj/5KD6oRwoir1f52zBSxTEig1R1Rk5sEUG
-	SQajxeoCgLnizfdzqr0RC5DqTpm+tf78v2IObx6cmupUykC151Nnm2wzT+6VMZwI9SRh7YuewiO
-	XgF4h3Tn7UmG/qyU/q+MU5FkcP5vB2Upy4z0Ya0X2OhSzVPKCVqBEXKDDUqqss/4J9K8PUHUmr1
-	d85nyJGznEZYwfUFSSYcmiIC1C66KUBCotxt56RqmVXoBo9ByRZuwpnf09HtCms32bTe+5vuoO2
-	fEuYgh4WuI9Lc5psP9oGrPhi6ss4Ox/oAkHeBNOHGZsi+Oow69Vo7uiTD+kyGNSXCIBmw2GPCJG
-	eEel4BxwdZng9tTPPNs/4SYVabHX4kacDuJ9c361e2j5NeXdPnjnv9dgksutEd52ft6DhyfNwbH
-	EnJgO2sYubFLeO
-X-Received: by 2002:a05:620a:2b8b:b0:93e:bbda:dd06 with SMTP id af79cd13be357-93ebcc0f86emr1896452485a.0.1791887171108;
-        Tue, 13 Oct 2026 03:26:11 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b8b:b0:93e:bbda:dd06 with SMTP id af79cd13be357-93ebcc0f86emr1896447685a.0.1791887170357;
-        Tue, 13 Oct 2026 03:26:10 -0700 (PDT)
+        bh=QGAQ+SPDmvHqJzwZscytDbFjnJRM1Cy8AUNB2ckczKY=;
+        b=KTpzl05ufFI/8oe/vV32dobAx18PxKQkyXjlcwt1F545t+fmodvE3abDsDyM7Jnf78
+         DCWmouMDLcVDgcN00ncGhryaRQnGxZA7JWZS6TUaW+ZRkMXr/32rNZ4iL3Fa+0lbILm4
+         XXMD/qLkLNIm5VxUTKlLgGzP16bqPaDJsg1v9kDBLHojS3Iu0+luVxHpjnVxoEFWM+iY
+         jgW6Hdxn7R3051Lc1bgqI7VbHaiXuMoH+zTQTHZlYJRtmC4SgdlRK/wzUp39JcwqlBQ3
+         RlkTk0OfALz9JtrirRdgZwWsI8EZyr0UxANqWU7ygnu5O9W2Er8HmILGtpCcLUvBUsUK
+         TJjw==
+X-Forwarded-Encrypted: i=1; AKwUvBzniGmOemfMNVFYXWoTgceRz3dqckZZjsB0jypIhkTHSKyokZILU+pyCUmVD2onb0QkI+tCDBhepuDc/uDL@vger.kernel.org
+X-Gm-Message-State: AFq9FYLzrFgwHIS1iZoQ8O13RKzaLGzdJJT7f10U61hDTLrtw5/OVW2A
+	rLL1hFi2XQUK+hhCN7zvLWqy1qV9x0yhUSQHpTwMg5gmtduykP1Qxf8yhMoJj6tZlooB/f8BgDB
+	erXGa9drKEAsi4bk399OmdHFJXOBV5qsqMYxaYs2P8UOb6W8fwLR/QHIVtNyidwlcCVJ+
+X-Gm-Gg: AYBFou26kGS1yGQz1SRQx0k2lehX44zcq0datAMxsk57/zhEBYMXYNaq/E7IyYsi2yY
+	zaVZaW5GMV5ow8x0jS82paJWnt3W3NOGhp3OXY7gK8GMZYeRMhLbRlSGsoubSVh+7vJhFlQjTaJ
+	uDKOmqnNySsTOabOl74m6r+3M03Y9RuLSmI7xS279ykYLWtmw2NFNlgl5lEcfa8h3XtIo8pwABg
+	18wbg55X4r7kmlEVcOCXtBJymItan90ueCTH81SO6r88RG9quB+LMBZ5WDaJfS9p9Wkr45U9jp4
+	Pfkk8rTMcwMakZQC0xuPYsdAgAPQSVvlqSuiv8fmQQXwVhvAXlRq29HIgzDmjV0KnuHbSxCv6tO
+	xXgicWtqon5lmJQxEoZ7+hvitmgxz7zBD3PFuq48ralFO6eS+8AoAeR8WBorg2FTUP0QnfeyotV
+	p4Stqb4psIweKF
+X-Received: by 2002:a05:620a:2691:b0:93b:d7a2:dd2c with SMTP id af79cd13be357-93ebd2823e2mr1854076885a.60.1791887257367;
+        Tue, 13 Oct 2026 03:27:37 -0700 (PDT)
+X-Received: by 2002:a05:620a:2691:b0:93b:d7a2:dd2c with SMTP id af79cd13be357-93ebd2823e2mr1854072785a.60.1791887256775;
+        Tue, 13 Oct 2026 03:27:36 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcddea81c7sm3490792e87.49.2026.10.13.03.26.08
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bce8aecad1sm2774560e87.8.2026.10.13.03.27.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 03:26:09 -0700 (PDT)
-Date: Tue, 13 Oct 2026 13:26:07 +0300
+        Tue, 13 Oct 2026 03:27:35 -0700 (PDT)
+Date: Tue, 13 Oct 2026 13:27:33 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Nabige Aala <nabige.aala@oss.qualcomm.com>
 Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -103,11 +103,11 @@ Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
         dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
         Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>,
         Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Subject: Re: [PATCH v2 08/13] phy: qcom: edp: Generalize power-on path for
- per-SoC overrides
-Message-ID: <y5yofnl3x5jg7yxwzlpl543yir6uos3c3tj45u4ocjvy7u6sgz@2c5u5szohx2i>
+Subject: Re: [PATCH v2 09/13] phy: qcom: edp: Add Nord voltage-swing and
+ pre-emphasis tables
+Message-ID: <ftif4r4l4orj7zgvssjqdtmkfj4kfahbxjx6kh4fo2dve6o33j@johl5kwn7cuz>
 References: <20261012-nord-drv-dt-v2-0-a2ab9af954d2@oss.qualcomm.com>
- <20261012-nord-drv-dt-v2-8-a2ab9af954d2@oss.qualcomm.com>
+ <20261012-nord-drv-dt-v2-9-a2ab9af954d2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -116,292 +116,142 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261012-nord-drv-dt-v2-8-a2ab9af954d2@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MSBTYWx0ZWRfX3P36ChmbpQ3k
- NvoT5KFT5LGyUSh5xjk3UFvt17A/T1BZWJOdhbnc0HZ9PFfLsENqbY2J3i5KEth7ARsxZkVVnh3
- TIa009T6P69G2e8aEiqOPeslMpvejvylSf0yUsBeqHTPLzyielNbNfY5vfUodjWak3phReG4t9t
- Ot0teprbxQMkox31Ui+A7UPUj7BvUQkyRMd+8LKB4un+n0dPvhlROemMlX9YeK7QPT4IeRPvJpE
- 4FNVc9Cec+dVb8q+gbSkhNMwSgGnyzQp1K2nAIgYyvu1mE5+EZj9+FOsPTw3MPnWnU+HOnm+HUx
- mZ2UmfbOgsrAlr+5EoU2JHOl+XrZyx8PKqzXdacGN+PnO4ObiHK8b5CRgaI9+fSmdXqO6II36wM
- pCt//dCG8zkjejdy/odg23jcgn1HGQk+3bAwZ2i+HhPyjVz27xoBj0B9dPriqkBL7xSBEIEI2zc
- wNF0G3YcqaNc+toTTng==
-X-Authority-Analysis: v=2.4 cv=JN+uIMKb c=1 sm=1 tr=0 ts=6ace0743 cx=c_pps
+In-Reply-To: <20261012-nord-drv-dt-v2-9-a2ab9af954d2@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MSBTYWx0ZWRfX9GFnN34qeCyf
+ tyn7Kh3MoVo3P/Q2+Gdfa3W1LJBjkEcs5kUa+bL6vMscuLa4sJchNywP37uE5oEoNRMVRykkk8d
+ ql94YfLZjBjhHkwfJbQBzUgeEI0Lm+0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MSBTYWx0ZWRfXz8qhzfdbwXUB
+ Z+F6m8rc5mXoIK+rsy4Z6uhrpeZHulKbC3OSWs4Lg8ezP+mlf0xqhTry9aJhmEtKVawhIJQenJj
+ jbonBp3aV7OOAawC77J1IeTWPGbPQWYNOA9YpD0regFXLFGAFFVo3463n/o43asSLXNt9Wzmk51
+ EBuwmT5fTKzjR5DAh/HFxxrFfHxCp2CQYtj3gPGc9MGzYhO3Thyo1ZssROtDtpcM1gEcFmF9bfN
+ l8JGixs1tIBd5EavK2QJ9XrtaStHE2TdTbjPYDpwJsRzzxhBrBuKs3cBQrjUSYajg1xSu00WA9S
+ CJHUmEGnF8ll2WsvztJegSMgzwbF9xzQQ02/HRmTZ7M+SMaNX3TWjvn6ZPIHGcuN4envSBJdXI3
+ Yi4gyQkqDyvazV1ZioPuY8A1T2CQPYwgnQhb8YIcNMZoOC4EXRlG5LeC8hXRuHSBivxF/ZUJD1l
+ uE1rTWZTlexxVxBieNg==
+X-Proofpoint-ORIG-GUID: fqLpTgtHukM5jclB8dIlaq-nLCap1laU
+X-Authority-Analysis: v=2.4 cv=O5+sLx9W c=1 sm=1 tr=0 ts=6ace079a cx=c_pps
  a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=x5eWZYghlK0YOYNvIKQA:9 a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MSBTYWx0ZWRfX3OuyiQCFc7lJ
- GTUkiqznlLASyEQlK0qvIJxVCHhdMO4dZX/QgnK9lQKO2ZnqX0WxcBXFc5A6EFAhxCado8QgNSz
- P6IqLA1OGKv1ldSt1+CgoarJeL8jsug=
-X-Proofpoint-ORIG-GUID: vOZKJsk45v4yk_PMXF_3H0e--qOK1GNd
-X-Proofpoint-GUID: vOZKJsk45v4yk_PMXF_3H0e--qOK1GNd
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=JfrnYn6hAAAA:8
+ a=EUspDBNiAAAA:8 a=HDF95dwk5MVqU-wvWFsA:9 a=CjuIK1q_8ugA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=1CNFftbPRP8L7MoqJWF3:22
+X-Proofpoint-GUID: fqLpTgtHukM5jclB8dIlaq-nLCap1laU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 priorityscore=1501 adultscore=0 suspectscore=0
- phishscore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0
+ clxscore=1015 impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130041
 
-On Mon, Oct 12, 2026 at 07:02:18PM +0530, Nabige Aala wrote:
+On Mon, Oct 12, 2026 at 07:02:19PM +0530, Nabige Aala wrote:
 > From: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
 > 
-> Nord has a different register layout that the existing hard-coded
-> power-on path cannot accommodate.  Introduce qcom_edp_tx_res_entry
-> and replace open-coded TX resistor writes with a data-driven loop
-> that also handles base=2 (PHY/edp base) for Nord.  Add
-> phy_status_reg, bias1_en_2lane, tx2_tx3_lane_ctl, tx_res_cfg,
-> cmn_status_reg and c_ready_status_reg to qcom_edp_phy_cfg, and
-> make com_clk_fwd_cfg optional.  No functional change for existing
-> SoCs.
-
-This becomes too much table-driven, while the edp driver preferred the
-code-driven approach.
-
+> Nord requires different TX voltage-swing and pre-emphasis levels for
+> both eDP and DP modes.  Add four pairs of 4x4 tables covering
+> RBR/HBR and HBR2/HBR3 for each mode, sourced from HPG Tables 2-2,
+> 2-4, 2-6-a and 2-6-b, and wrap them in qcom_edp_swing_pre_emph_cfg
+> descriptors.  The eDP RBR/HBR swing table reuses the existing
+> edp_swing_hbr_rbr directly; all other tables are new.
 > 
 > Assisted-by: LLM
 > Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
 > Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
 > ---
->  drivers/phy/qualcomm/phy-qcom-edp.c | 82 +++++++++++++++++++++++++++++--------
->  1 file changed, 66 insertions(+), 16 deletions(-)
+>  drivers/phy/qualcomm/phy-qcom-edp.c | 64 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 64 insertions(+)
 > 
 > diff --git a/drivers/phy/qualcomm/phy-qcom-edp.c b/drivers/phy/qualcomm/phy-qcom-edp.c
-> index d5c6835b6c70..c5df1086607f 100644
+> index c5df1086607f..c63f721702b1 100644
 > --- a/drivers/phy/qualcomm/phy-qcom-edp.c
 > +++ b/drivers/phy/qualcomm/phy-qcom-edp.c
-> @@ -81,6 +81,15 @@ struct qcom_edp_swing_pre_emph_cfg {
->  
->  struct qcom_edp;
->  
-> +struct qcom_edp_tx_res_entry {
-> +	u8  base;
-> +	u32 offset;
-> +	u32 val;
-> +};
-> +
-> +#define QCOM_EDP_TX_RES_ENTRY_END { .offset = 0, .val = 0, .base = 0xff }
-> +#define qcom_edp_tx_res_entry_is_end(e) ((e)->base == 0xff)
-> +
->  struct phy_ver_ops {
->  	int (*com_power_on)(const struct qcom_edp *edp);
->  	int (*com_resetsm_cntrl)(const struct qcom_edp *edp);
-> @@ -98,6 +107,12 @@ struct qcom_edp_phy_cfg {
->  	const struct qcom_edp_swing_pre_emph_cfg *dp_swing_pre_emph_cfg;
->  	const struct qcom_edp_swing_pre_emph_cfg *edp_swing_pre_emph_cfg;
->  	const struct phy_ver_ops *ver_ops;
-> +	u32 phy_status_reg;
-> +	u8 bias1_en_2lane;
-> +	u32 tx2_tx3_lane_ctl;
-> +	const struct qcom_edp_tx_res_entry *tx_res_cfg;
-> +	u32 cmn_status_reg;
-> +	u32 c_ready_status_reg;
-
-If anything, it should become a part of the ver_ops. But, I think, it's
-better if you add callbacks to ver_ops instead of just describing regs.
-
->  };
->  
->  struct qcom_edp {
-> @@ -313,9 +328,11 @@ static int qcom_edp_phy_init(struct phy *phy)
->  
->  	memcpy(aux_cfg, edp->cfg->aux_cfg, sizeof(aux_cfg));
->  
-> -	ret = edp->cfg->ver_ops->com_clk_fwd_cfg(edp);
-> -	if (ret)
-> -		return ret;
-> +	if (edp->cfg->ver_ops->com_clk_fwd_cfg) {
-> +		ret = edp->cfg->ver_ops->com_clk_fwd_cfg(edp);
-> +		if (ret)
-> +			return ret;
-> +	}
-
-This is fine, but why?
-
->  
->  	writel(DP_PHY_PD_CTL_PWRDN | DP_PHY_PD_CTL_AUX_PWRDN |
->  	       DP_PHY_PD_CTL_PLL_PWRDN | DP_PHY_PD_CTL_DP_CLAMP_EN,
-> @@ -672,6 +689,16 @@ static const struct phy_ver_ops qcom_edp_phy_ops_v4 = {
->  	.com_ldo_config		= qcom_edp_ldo_config_v4,
->  };
->  
-> +static const struct qcom_edp_tx_res_entry tx_res_cfg_default[] = {
-> +	{ 0, TXn_RES_CODE_LANE_OFFSET_TX0, 0x11 },
-> +	{ 0, TXn_RES_CODE_LANE_OFFSET_TX1, 0x11 },
-> +	{ 1, TXn_RES_CODE_LANE_OFFSET_TX0, 0x11 },
-> +	{ 1, TXn_RES_CODE_LANE_OFFSET_TX1, 0x11 },
-> +	{ 0, TXn_TX_EMP_POST1_LVL,         0x10 },
-> +	{ 1, TXn_TX_EMP_POST1_LVL,         0x10 },
-> +	QCOM_EDP_TX_RES_ENTRY_END,
-> +};
-
-This becomes hard to manage. Please use ops instead.
-
-> +
->  static const struct qcom_edp_phy_cfg sa8775p_dp_phy_cfg = {
->  	.is_edp = false,
->  	.aux_cfg = edp_phy_aux_cfg_v5,
-> @@ -679,6 +706,9 @@ static const struct qcom_edp_phy_cfg sa8775p_dp_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg,
->  	.ver_ops = &qcom_edp_phy_ops_v4,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static const struct qcom_edp_phy_cfg sc7280_dp_phy_cfg = {
-> @@ -687,6 +717,9 @@ static const struct qcom_edp_phy_cfg sc7280_dp_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg_v3,
->  	.ver_ops = &qcom_edp_phy_ops_v3,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static const struct qcom_edp_phy_cfg sc8180x_dp_phy_cfg = {
-> @@ -695,6 +728,9 @@ static const struct qcom_edp_phy_cfg sc8180x_dp_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg_v2,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg_v2,
->  	.ver_ops = &qcom_edp_phy_ops_v3,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static const struct qcom_edp_phy_cfg sc8280xp_dp_phy_cfg = {
-> @@ -703,6 +739,9 @@ static const struct qcom_edp_phy_cfg sc8280xp_dp_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg,
->  	.ver_ops = &qcom_edp_phy_ops_v4,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static const struct qcom_edp_phy_cfg sc8280xp_edp_phy_cfg = {
-> @@ -712,6 +751,9 @@ static const struct qcom_edp_phy_cfg sc8280xp_edp_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg,
->  	.ver_ops = &qcom_edp_phy_ops_v4,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static int qcom_edp_phy_power_on_v6(const struct qcom_edp *edp)
-> @@ -913,6 +955,9 @@ static struct qcom_edp_phy_cfg x1e80100_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg,
->  	.ver_ops = &qcom_edp_phy_ops_v6,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
->  };
->  
->  static int qcom_edp_com_configure_ssc_v8(const struct qcom_edp *edp)
-> @@ -1045,8 +1090,8 @@ static int qcom_edp_phy_com_resetsm_cntrl_v8(const struct qcom_edp *edp)
->  
->  	writel(0x20, edp->pll + DP_QSERDES_V8_COM_RESETSM_CNTRL);
->  
-> -	return readl_poll_timeout(edp->pll + DP_QSERDES_V8_COM_C_READY_STATUS,
-> -				     val, val & BIT(0), 500, 10000);
-> +	return readl_poll_timeout(edp->pll + edp->cfg->c_ready_status_reg,
-> +				  val, val & BIT(0), 500, 10000);
-
-This is already a version-specific callback. Can't you just add one for
-Nord?
-
+> @@ -1538,6 +1538,70 @@ static int qcom_edp_phy_probe(struct platform_device *pdev)
+>  	return PTR_ERR_OR_ZERO(phy_provider);
 >  }
 >  
->  static int qcom_edp_com_clk_fwd_cfg_v8(const struct qcom_edp *edp)
-> @@ -1074,8 +1119,8 @@ static int qcom_edp_phy_power_on_v8(const struct qcom_edp *edp)
->  	       edp->edp + DP_PHY_PD_CTL);
->  	writel(0xfc, edp->edp + DP_PHY_MODE);
->  
-> -	return readl_poll_timeout(edp->pll + DP_QSERDES_V8_COM_CMN_STATUS,
-> -				     val, val & BIT(7), 5, 200);
-> +	return readl_poll_timeout(edp->pll + edp->cfg->cmn_status_reg,
-> +				  val, val & BIT(7), 5, 200);
+> +static const u8 nord_edp_pre_emp_hbr_rbr[4][4] = {
+> +	{ 0x05, 0x11, 0x17, 0x1d },
+> +	{ 0x05, 0x11, 0x18, 0xff },
+> +	{ 0x06, 0x11, 0xff, 0xff },
+> +	{ 0x00, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const u8 nord_edp_swing_hbr2_hbr3[4][4] = {
+> +	{ 0x0b, 0x11, 0x17, 0x1c },
+> +	{ 0x10, 0x19, 0x1f, 0xff },
+> +	{ 0x19, 0x1f, 0xff, 0xff },
+> +	{ 0x1f, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const u8 nord_edp_pre_emp_hbr2_hbr3[4][4] = {
+> +	{ 0x0c, 0x15, 0x19, 0x1e },
+> +	{ 0x0b, 0x15, 0x19, 0xff },
+> +	{ 0x0e, 0x14, 0xff, 0xff },
+> +	{ 0x0d, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const struct qcom_edp_swing_pre_emph_cfg nord_edp_swing_pre_emph_cfg = {
+> +	.swing_hbr_rbr		= &edp_swing_hbr_rbr,
+> +	.swing_hbr3_hbr2	= &nord_edp_swing_hbr2_hbr3,
+> +	.pre_emphasis_hbr_rbr	= &nord_edp_pre_emp_hbr_rbr,
+> +	.pre_emphasis_hbr3_hbr2	= &nord_edp_pre_emp_hbr2_hbr3,
+> +};
+> +
+> +static const u8 nord_dp_swing_hbr2_hbr3[4][4] = {
+> +	{ 0x02, 0x12, 0x16, 0x1a },
+> +	{ 0x09, 0x19, 0x1f, 0xff },
+> +	{ 0x10, 0x1f, 0xff, 0xff },
+> +	{ 0x1f, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const u8 nord_dp_pre_emp_hbr2_hbr3[4][4] = {
+> +	{ 0x00, 0x0c, 0x15, 0x1b },
+> +	{ 0x02, 0x0e, 0x16, 0xff },
+> +	{ 0x02, 0x11, 0xff, 0xff },
+> +	{ 0x04, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const u8 nord_dp_swing_hbr_rbr[4][4] = {
+> +	{ 0x07, 0x0f, 0x16, 0x1f },
+> +	{ 0x11, 0x1e, 0x1f, 0xff },
+> +	{ 0x16, 0x1f, 0xff, 0xff },
+> +	{ 0x1f, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const u8 nord_dp_pre_emp_hbr_rbr[4][4] = {
+> +	{ 0x00, 0x0e, 0x15, 0x1a },
+> +	{ 0x00, 0x0e, 0x15, 0xff },
+> +	{ 0x00, 0x0e, 0xff, 0xff },
+> +	{ 0x02, 0xff, 0xff, 0xff },
+> +};
+> +
+> +static const struct qcom_edp_swing_pre_emph_cfg nord_dp_swing_pre_emph_cfg = {
+> +	.swing_hbr_rbr		= &nord_dp_swing_hbr_rbr,
+> +	.swing_hbr3_hbr2	= &nord_dp_swing_hbr2_hbr3,
+> +	.pre_emphasis_hbr_rbr	= &nord_dp_pre_emp_hbr_rbr,
+> +	.pre_emphasis_hbr3_hbr2	= &nord_dp_pre_emp_hbr2_hbr3,
+> +};
+> +
+> +
 
-The same.
+Double empty line. But also these tables are unused at this point. Why
+do you need to split the commit into multiple? You have performed
+refactoring in a separate commit, that's good, now just add support for
+Nord, squashing all "add Nord foo" commits.
 
->  }
->  
->  static const struct phy_ver_ops qcom_edp_phy_ops_v8 = {
-> @@ -1094,6 +1139,11 @@ static struct qcom_edp_phy_cfg glymur_phy_cfg = {
->  	.dp_swing_pre_emph_cfg = &dp_phy_swing_pre_emph_cfg_v8,
->  	.edp_swing_pre_emph_cfg = &edp_phy_swing_pre_emph_cfg,
->  	.ver_ops = &qcom_edp_phy_ops_v8,
-> +	.phy_status_reg = DP_PHY_STATUS,
-> +	.tx2_tx3_lane_ctl = DP_PHY_TX2_TX3_LANE_CTL,
-> +	.tx_res_cfg = tx_res_cfg_default,
-> +	.cmn_status_reg = DP_QSERDES_V8_COM_CMN_STATUS,
-> +	.c_ready_status_reg = DP_QSERDES_V8_COM_C_READY_STATUS,
->  };
->  
->  static int qcom_edp_phy_power_on(struct phy *phy)
-> @@ -1128,7 +1178,7 @@ static int qcom_edp_phy_power_on(struct phy *phy)
->  
->  	/* TX Lane configuration */
->  	writel(0x05, edp->edp + DP_PHY_TX0_TX1_LANE_CTL);
-> -	writel(0x05, edp->edp + DP_PHY_TX2_TX3_LANE_CTL);
-> +	writel(0x05, edp->edp + edp->cfg->tx2_tx3_lane_ctl);
-
-This one is almost fine.
-
->  
->  	/* TX-0 register configuration */
->  	writel(0x03, edp->tx0 + TXn_TRANSCEIVER_BIAS_EN);
-> @@ -1166,13 +1216,13 @@ static int qcom_edp_phy_power_on(struct phy *phy)
->  	writel(0x00, edp->tx1 + TXn_TX_POL_INV);
->  	writel(0x10, edp->tx0 + TXn_TX_DRV_LVL_OFFSET);
->  	writel(0x10, edp->tx1 + TXn_TX_DRV_LVL_OFFSET);
-> -	writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX0);
-> -	writel(0x11, edp->tx0 + TXn_RES_CODE_LANE_OFFSET_TX1);
-> -	writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX0);
-> -	writel(0x11, edp->tx1 + TXn_RES_CODE_LANE_OFFSET_TX1);
-> +	for (const struct qcom_edp_tx_res_entry *e = edp->cfg->tx_res_cfg;
-> +	     !qcom_edp_tx_res_entry_is_end(e); e++) {
-> +		void __iomem *base = e->base == 2 ? edp->edp :
-> +				    e->base ? edp->tx1 : edp->tx0;
->  
-> -	writel(0x10, edp->tx0 + TXn_TX_EMP_POST1_LVL);
-> -	writel(0x10, edp->tx1 + TXn_TX_EMP_POST1_LVL);
-> +		writel(e->val, base + e->offset);
-> +	}
-
-Unreadable. Once we move on, these regs can be used to write anything.
-If it's a really one-off for Nord, just check for the compatible string
-or do something similar. I'll check the other patch.
-
->  	writel(0x1f, edp->tx0 + TXn_TX_DRV_LVL);
->  	writel(0x1f, edp->tx1 + TXn_TX_DRV_LVL);
->  
-> @@ -1184,7 +1234,7 @@ static int qcom_edp_phy_power_on(struct phy *phy)
->  		cfg1 = 0x1;
->  	} else if (edp->dp_opts.lanes == 2) {
->  		bias0_en = 0x03;
-> -		bias1_en = 0x00;
-> +		bias1_en = edp->cfg->bias1_en_2lane;
->  		drvr0_en = 0x04;
->  		drvr1_en = 0x07;
->  		cfg1 = 0x3;
-> @@ -1207,7 +1257,7 @@ static int qcom_edp_phy_power_on(struct phy *phy)
->  
->  	writel(0x19, edp->edp + DP_PHY_CFG);
->  
-> -	ret = readl_poll_timeout(edp->edp + DP_PHY_STATUS,
-> +	ret = readl_poll_timeout(edp->edp + edp->cfg->phy_status_reg,
->  				 val, val & BIT(1), 500, 10000);
->  	if (ret)
->  		return ret;
+>  static const struct of_device_id qcom_edp_phy_match_table[] = {
+>  	{ .compatible = "qcom,glymur-dp-phy", .data = &glymur_phy_cfg, },
+>  	{ .compatible = "qcom,sa8775p-edp-phy", .data = &sa8775p_dp_phy_cfg, },
 > 
 > -- 
 > 2.34.1
 > 
+> 
+> -- 
+> linux-phy mailing list
+> linux-phy@lists.infradead.org
+> https://lists.infradead.org/mailman/listinfo/linux-phy
 
 -- 
 With best wishes
