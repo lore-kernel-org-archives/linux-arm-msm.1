@@ -1,132 +1,119 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ADBD43846C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 01:57:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D0AB3C81B2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 02:04:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791856656; cv=none; b=DCn8EmIE6B3RksQJetLvnr+qFHqOq9Qy7gZHD1BjsdBiGorPX3Seqjks8eZOAUDLl9AKZufm/5P9DmWxtIZZvhbVSQc0FclwSdQOVmfcAThooKFaFSvHyBqi4SLMwmNOx1yEM3msF7+D0mVcUCHwVFtak6+Z0I0QFKm0DD5B7oE=
+	t=1791857087; cv=none; b=AZB1mr/oarNGAbW7oomC6QP7arIYhhBJ9Jam5MefOOSQ4qR8kJNYqhl6+8LQ5GfqxnTXGwg+H7Kbnk0rgrtaNXaa96X4hfkSqE4An86KUKQu2JRhiOcG2JMMLIrGDozkLuYjZjL5tWsfuzG/Ye/q/U6GQ5kOqNkGx1otP0JzCO8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791856656; c=relaxed/simple;
-	bh=OIqYKR7x+vapQREvHec6EpfZXxtTZMYi/hDKDHZqrm8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XsBmCmY2K46diPvfYaC2fFxaz6JGNZEHsF3iyknGPWXTM+yBOyXU/DaygSaNmoi5gr7VYDPckOPcS133aMf/gcqyTuLABJZmmMIimuYeXRSWuez+FrVrywWsQFQlX28S7xlqg+JQpZhApAwquRfTXbDZ0hEI29Qlkae05gnHL0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=B2xW/qAF; arc=none smtp.client-ip=209.85.216.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791857087; c=relaxed/simple;
+	bh=/jYxboUjl2icRUS8AQSdnWqlZ16AR2DcL50+aQgSSEo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qH3/XeZWifrNkFRnf5Xw3tVejnoix/7v2wDEhwsBSZ+yD/kXu0Jz2Boung24uYN7PGtK7KxqUCNdpi+XPwHepR2lXOh1VmHKIfPAMAfyAfuAVUuaPpUcVv4QzHgoGcaYDvfMVtKC92wzE7AqHEI60uM1RHydlbtgBFYG52UOLos=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=ZCEDHm+e; arc=none smtp.client-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="B2xW/qAF"
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-3a47d4fb7feso141764a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 18:57:34 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="ZCEDHm+e"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791856654; x=1792461454; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ehjgEMj6/RVBDUJWsS+YpxJjQGwMw9r7SVgT28c/XUs=;
-        b=B2xW/qAFFnVogtzldLK3C8r3rMFvBKygzqichQcRcpwx2G8LHF3PrksGC4lx1BFPlA
-         M07jLgYIgTlJoANebi1MbiahUjU3l17SO8kuTrhJkb15K48gXnSLuiMHzFR8aqmUwjQs
-         I5MhS5OLmqS3oTqmrbBk5f/GtvlFcdDy/O1WWB0gR+JEpZ5sYu0A8mt0KjoioBcRxVtH
-         PKOKzUh+cPkSbKQcnif6vInI0JxAy45MqeM2Hr85IL7EATTk+RL00Sklu069Nt//pYXd
-         c8NsUJqIpQ6831O9epq3cAkkAzJd3grjz/v/xHVp+KSNMwvCiq/cKchekPplC9HQUGth
-         TKpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791856654; x=1792461454;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ehjgEMj6/RVBDUJWsS+YpxJjQGwMw9r7SVgT28c/XUs=;
-        b=iKXtb/AaAei8be+JC8IH5TrmVu/n7v5D8+IEJJAKWaiXgueNP7ZM8gv4o27jqucYcU
-         j96ZGmOPD7Lgk2e1rllTEa+KzY3wZxr0iVIV/nrgC1m0U4dlphnPwMQ8vNxhxWBRwXsV
-         6nxtScunyz18QFpnA4ItBwl5RfsPpHRXVF9PhoMrfT9pDq7KGHaoZjd7bzQnzea8cNGj
-         rRH/50HCoUiXsLnuZHJeBiZ63B/+SQliGRZd6EiVKOQwsfAXGwbLql8VvbM36deRUty/
-         hSm39biLqm6Vic8GTqwW5VSaY2fGg6Ll8OcNMe/Cfwwi3OHhyXt7Eo7Un2+L0A268IDw
-         KGoQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz6G7yxzZSXpdmMtyiH/CCG7JRznhRmg4RluDvEHAYVQZ13ApT4Uj9kuLhGCE/StjCw3RAUqdVqeajh0ART@vger.kernel.org
-X-Gm-Message-State: AFq9FYIRB09B21fjImTnxGc2DzGQjGZfNR+af8hGVo1EHLSMR6zMD+2G
-	XhntB4IN8wl6kIlOQFVEGeswsx38+RxCdz3lo8Zr39aD8qBSpYoeDkVj
-X-Gm-Gg: AYBFou137ziR/a83ZftYmLFbTZlX2Y439FVUuKmN1zz+wKp95+M819gLK44BId8vg9p
-	aST1tXkiKz4Ozv/OixZS75j8q/KBGgvbDi6c+bhVgUcqvPRSihNxxzQfLwMIL1NOKCoo+RD9xN6
-	Wo9gsc1z11yqQbeLGyWYBC7yb66Bs11u58S5KyjcUc1RsnmJBfpMYBILfRYaFTw9PEmODtpgnv3
-	6nEQv1b4zqifPJXKUWEnVTx9Vjd8Cy4p4mtbJqkVj5jo5+orlRpupFnLykVezAZvCq82QjxdfO3
-	M+raUIWXNxk+3XlCM5K8g+ou9lxaAuD5l3bBxBeU9TN2i9K0MSsjREAYbjLPxaOI7bJ3Ii8cySG
-	gu1qluvCDC5Il7/ZWKQ0Rs7EVol5I3CNltktVZ5h0jGKlWrm+qrvvY9mTcCIZCYyxyFK2ef0sVc
-	ZqCsqV1Rzi+TMucI93t2ZNWtxB3fViE2I0Eu79FIfWaBzor94vTdrpH9FDftv9+/yAEnva6LTcJ
-	Nv92LJwRatuTQ==
-X-Received: by 2002:a17:90b:1d03:b0:3a0:45f7:b361 with SMTP id 98e67ed59e1d1-3ab3a8a4794mr13965643a91.3.1791856654310;
-        Mon, 12 Oct 2026 18:57:34 -0700 (PDT)
-Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38dd5864sm18431400a91.8.2026.10.12.18.57.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 18:57:33 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: jactry92@gmail.com
-Cc: andersson@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	kaipeng94@gmail.com,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	liujianfeng1994@gmail.com,
-	robh@kernel.org,
-	krzysztof.kozlowski@oss.qualcomm.com
-Subject: Re: [PATCH v4 0/2] Add device tree for Acer Swift Go Pro AI
-Date: Tue, 13 Oct 2026 09:57:27 +0800
-Message-ID: <20261013015728.43307-1-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <13181dfa-b92c-43b5-ae12-912abaf79c41@gmail.com>
-References: <13181dfa-b92c-43b5-ae12-912abaf79c41@gmail.com>
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=l8RtcIRMpj
+	6HK78VVM1SomERGRxjnCGQbSgGXKIV4Mo=; b=ZCEDHm+ek8UFMloHr0rNIHLQ8Y
+	skeQJCbOXTFuXnSq9gl9yRsFIYt4hQbv7JxWIfmYWs24TJSwWv80tQz7X7wghSUi
+	knrwQ200pZO7dJaDrN9FVn00bwKA8gRLGuJhDyKNDyoPe3lckBlkp/zSMAuCfyI6
+	7yIJ3+4oXoCRsrkEs=
+Received: from 5700g-x8664.ustc.edu.cn (unknown [114.214.192.228])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCXkSipkc1qznPdAQ--.16S2;
+	Tue, 13 Oct 2026 10:04:25 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: dri-devel@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org
+Cc: freedreno@lists.freedesktop.org,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Subject: [PATCH] drm/msm/dpu: reject undersized gamma LUT blobs
+Date: Tue, 13 Oct 2026 10:04:25 +0800
+Message-ID: <20261013020425.408928-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgCXkSipkc1qznPdAQ--.16S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7AF47WF18uw1DKFW5Zw17trb_yoW8uF4DpF
+	W3ZFy5tr1qq3yfKwn7GF1kKas8CwnYqay7Gr9xK3sxZa4xAr1YvF95AayDuryUZw47Ar13
+	ta4DJrZ8AF109aUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+	JVWxJr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26r
+	xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+	6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr
+	0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+	8cxan2IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+	Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+	x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+	1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_
+	JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
+	sGvfC2KfnxnUUI43ZEXa7VUbHa0JUUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARETB2rNcIkC0AAbsT
 
-Hi,
+From: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
 
-On Mon, 12 Oct 2026 22:18:13 +0800, Jactry Zeng wrote:
->I think we are about confusing the product name and the model name here?
->It is clear that the product name is Acer Swift (aka '非凡' in Chinese) Go 
->Pro AI; the link to Ubuntu stubble you provided also reveals this somehow.
-I agree the product name / model name distinction is the right frame. It
-turns out we can settle the product name fairly directly, though: if I look
-my machine up on Acer's support site by its SNID, it resolves to
-"Swift SFA14-11" in every region I tried — Japan, US, Australia, UK —
-and on the China support site as well. So within Acer's support database
-the product name is uniformly "Swift SFA14-11", and "非凡 Go Pro AI" was
-only the retail marketing name used on the Chinese storefront, whose page
-has since been taken down. It is not even a China-vs-global split — the
-support identification is the same everywhere.
+_dpu_crtc_get_gc_lut() packs DPU_GAMMA_LUT_SIZE entries of the
+user-provided LUT unconditionally:
 
->Also, IMHO, I think we can't use 'stable' to describe this situation. As
->soon as the product is produced, it was given a product/model name;
->unless Acer renames it, this is it. The vendor can also remove the
->support page that you referred to sometime in the future, just like they
->removed the product page; this isn't rare; I think we always shouldn't
->depend on it.
-I fully agree that web pages are not a sound basis — so I'm happy to drop
-page-based arguments altogether. That leaves the two sources that cannot be
-taken down: the DMI tables provided by the firmware (Product Name:
-SFA14-11, which is also what Windows displays as the model) and the SNID
-label physically on the machine (SFA14-11-QWU1 on my unit). Both are
-model-name only.
+	for (i = 0; i < PGC_TBL_LEN; i++) {
+		val_even = drm_color_lut_extract(lut[i * 2].green, 10);
+		...
 
-I think the resolution follows from the product/model split itself: the
-model property is human-readable free text, and per the conventions in tree
-(e.g. "Dell XPS 13 9345", "Lenovo ThinkPad T14s Gen 6") it is free to carry
-the marketing name — so something like "Acer Swift Go Pro AI (SFA14-11)"
-works fine there, and users who bought it as 非凡 Go Pro AI can recognize
-their machine by it. The compatible, on the other hand, is the machine
-identifier, and it should correspond to what the firmware reports —
-either the model-only "acer,sfa14-11" (my v1, following the DMI) or family
-+ model "acer,swift-sfa14-11" (what the maintainers asked me to use on my
-series). I'd rather not embed a retail marketing name in the compatible.
-I'll leave the final call to the maintainers.
+The DRM core validates the blob against the maximum size and the element
+size (drm_property_replace_blob_from_id() with max_size and
+expected_elem_size), but not against the exact size, so a blob that is
+shorter than DPU_GAMMA_LUT_SIZE * sizeof(struct drm_color_lut) is accepted
+and the loop reads past the end of the blob.
 
-Best regards,
-Jianfeng
+Reject such blobs in dpu_crtc_atomic_check().  This is reachable from
+userspace on any DPU platform that exposes the GC block (SDM845, SM8650,
+SM8750, ...).
+
+Signed-off-by: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+index 42d0a529b4..7a2ed9ad64 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+@@ -1534,6 +1534,21 @@ static int dpu_crtc_atomic_check(struct drm_crtc *crtc,
+ 
+ 	bool needs_dirtyfb = dpu_crtc_needs_dirtyfb(crtc_state);
+ 
++	/*
++	 * The DRM core only checks the blob against the maximum LUT size and
++	 * the element size, so a shorter blob is accepted.  The GC path packs
++	 * DPU_GAMMA_LUT_SIZE entries unconditionally, so validate the size
++	 * here to avoid reading past the end of the blob.
++	 */
++	if (crtc_state->gamma_lut &&
++	    crtc_state->gamma_lut->length !=
++			DPU_GAMMA_LUT_SIZE * sizeof(struct drm_color_lut)) {
++		DRM_DEBUG_ATOMIC("%s: invalid gamma LUT size %zu, expected %zu\n",
++				 dpu_crtc->name, crtc_state->gamma_lut->length,
++				 DPU_GAMMA_LUT_SIZE * sizeof(struct drm_color_lut));
++		return -EINVAL;
++	}
++
+ 	/* don't reallocate resources if only ACTIVE has beeen changed */
+ 	if (crtc_state->mode_changed || crtc_state->connectors_changed ||
+ 	    crtc_state->color_mgmt_changed) {
+-- 
+2.53.0
+
