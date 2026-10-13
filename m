@@ -1,190 +1,165 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4116F314A9E;
-	Tue, 13 Oct 2026 14:14:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C9953FF1D8
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 14:15:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791900873; cv=none; b=WIFEB2sH/mUsHoGy1E/HSfHzmJcvs1q+769Ra5ssWlrvqDCpVG9S8MI1qgBa2IvzkIJQJPQKk3JmVcWUfRWAkK6RySKtultCTlhH8pwd41ptuu0tQn9EtBWJz3GmhO0gF9y0U4VeiL6sJwMudJnoluZ266lD90awAb/nwp5CvH0=
+	t=1791900927; cv=none; b=Y6rDrrRlRw5hok+9SuSjrJQh1guZJuGVycVw02FmD6aW4C9vGXiN1xBVEgfgalnfycyofZHbAGpy+eZXqF4q7+y9m6eKjLTgVdzphv9sZ1oUY2oTHJJOfi+MF1p+tNi0nKTi/JL6luYPTpGUrcRImzvi08qms5HNwn/st8GWlfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791900873; c=relaxed/simple;
-	bh=xxIxs3uqCQEpqihV0UcJRjshpmnXjwZHRHAbD5JheQs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=ak1uymlyR0zhU+iuEnfWvA2B7mPiYOT8w8+YWoIaOvsSSdQlG0wcVQABr42jM2YY7et7tGgwolxH6WXf+C2CrfScxtFmKlectABxBxTDrqMaECxUhHrJh9ou3AVc1fI3M3R8/eecbhE+do+vCfse2V8LdQcSTE84+9KSI6yrRlQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V7hb/S1U; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1791900927; c=relaxed/simple;
+	bh=Emg+OkO7QBbwSBpYFEASaSwaBOIaLaMY76HkNKUceGc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HJeN5BOCO5wZEFhBrAPyhuVG1S9Ra9czK4mjyB2UMricmCuVaxdzelNCoPDkdh3s2kR0k2RlqEJGH5niR8nGJvGU0uxY8+IJTDTXrLPhBNJQWZtWqn3T+W8nSHB+ecP2kIYJurbZKIF2T4IEOEPkS3YOV8H2srHyoXGTqlyBI8s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G/e4UX8j; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=biUZuMu7; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V7hb/S1U"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id BEDF9C2BCF4;
-	Tue, 13 Oct 2026 14:14:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1791900872;
-	bh=xxIxs3uqCQEpqihV0UcJRjshpmnXjwZHRHAbD5JheQs=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=V7hb/S1Ur2t600PJilgIW/uS9dL0y94jHIYMFk4EBmhmqu13UkIIiK7FbIIkyaSsO
-	 kWABBwZ4CvIDysEBfFvQaSBBwusRgR4Q9IZGuFu8qhBOAb9B+/W8781G3z9i3SRq33
-	 eXaig7YsBdH3Edf4z4drOC2QioUv5iZCyy/LMHkmdl1QlXA4BMh+LnSdQ9yp8y4I0d
-	 tiTgAmTJFyLka2v/2SM26gxwz1KCknlGHhy8K95QS/zQDn2DYmE5+0/x9AGYj0wpau
-	 msVb9Xv01/jkGrwRHJsagCbkk5jwaXfHrA9ZgFZfJrSFs3h3oEzd7tLt+WK9U7XzVx
-	 SgB+xIIYLMCcg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99CA7CC6B08;
-	Tue, 13 Oct 2026 14:14:32 +0000 (UTC)
-From: Steve Meek via B4 Relay <devnull+stevemeek82.gmail.com@kernel.org>
-Date: Tue, 13 Oct 2026 15:14:34 +0100
-Subject: [PATCH] bus: mhi: host: pci_generic: Disable doorbell burst mode
- for Quectel RM500Q-AE
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="G/e4UX8j";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="biUZuMu7"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69DE4dkW2512239
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 14:15:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	8CZVWM1ZfL+i9RUyAbx4kRYDFvtGE4TrDaWJXNG16OM=; b=G/e4UX8jRVF2CpHC
+	3h4jFPZQKwnXFfvPH5dPqHXMEZjfKy8EBn02dcvJWCpVNFCEdL/pFB3+5X2bPnbA
+	tPfu2lfX3WKYlRmJ4GEu0aHSA/ga9IQCrv0P8aP4V7+1fEMCasaf2NV5qPjMXB2L
+	2RnkX+hS75GecZ2Ck9RtBZZXb6uFqcIrOttYGowalTg+UeGwHm8Bi/RrHtGuUPVE
+	FvwYXUR0fk8fJGQ0uNgSlfqPVESqmB9WZ4jztgVNQH+JW+oLAuXydN2k9R4jzVdf
+	aeTF8FS0O+Z0vjmQ2A1ltiNdc1pdxBX4TXRZRTmuzjXDqPFrO2msiJ+KN+ad/63g
+	wtQGiA==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h98h1ucjv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 14:15:24 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-7c274c15c90so74488137.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 07:15:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791900924; x=1792505724; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8CZVWM1ZfL+i9RUyAbx4kRYDFvtGE4TrDaWJXNG16OM=;
+        b=biUZuMu7O7MLxnEbkBkDZzk7cnP+85qIRD14NsVEVcu3etTmUDcGIb4Oisbu+XbzlK
+         Vfowls7itgCLQ/6nKORILduHuwmzv7BUEOA4CApPq7MH13v+HDt/30/EwlSxU481P6h0
+         N1b+5Ek8CWLEuTPyVHIINWHcTbELQOp5edVzp++PYdvHNdk6QVzIfze/VVirmfCxJByV
+         CDE3cZRyeT61kD0r6j3vfWJedTX8ja1RG6YbUINrqOrzeEfgKgqFPK3NBqwMGR1vItMd
+         Htxs2qT2z5o0nH31XiEY6IvxxE0gOp/6dKo/iO3uxcXgufdwVCr6P9pjzjBRxGS4/986
+         8pzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791900924; x=1792505724;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8CZVWM1ZfL+i9RUyAbx4kRYDFvtGE4TrDaWJXNG16OM=;
+        b=XzX6bNE0+2XONFgJzIJmPDKAC3qS4bg4gf4QFlfk0jUO181oDZ2qdaoags6ocSbaSR
+         fWIkOQG/9VmobrIUOmBuzcEFcUW3AsWiStPllSaVKAquhRfOjO9V/mGPw++5CFjG7z7f
+         4GeBt9ZQm+8XfItAA1R9pl7W7Ocr8W6JkeV4HKQhMIN4BC5Dqjxq40NS96MFkbjh3adc
+         QnhYz5KOZYlgTm/P8+p6ttOF4JzrWNiEd2pmdkfRDsBLIh/8lq7DDiT632e5gXysnkiL
+         I9c/JZDl9OCC25z5eLoi788B9VLhVgYtC2zDDnmvk15HTm8vPSq1XPnhpGiVQjE3A2VN
+         JyBw==
+X-Gm-Message-State: AFq9FYJpCA/8EXrMXVFUS013AcDgxv8atVlvtcV9vnPKPRnIoG3zb5TY
+	fNsMQ8eymMV28y1UtqvU+qxp8Aoo/l9sm6n/UuUM445u56K35X6LyTxbJyLgIQeQHKnVoJnIK8T
+	2w+1svW1jV7+EBDLY1Pp/Gx3QUnMXjuQQyXLlICAWYyOxAbldu0Y50XFHmLk1rFeSTb3ahB+3kL
+	d7
+X-Gm-Gg: AYBFou1OMguZnIDSEOyc4tt5SNbM6BmTM3Ht8fccFVCbIhwx9qmXM5dcsuzBo+k6ZCI
+	ThCVC+Jp2gg+4wCfFUH1Ye/X3GvpbUQJLP28m1uXeCA0hftPev3ftMcTNIZc9aiueUprqmqnjL8
+	HhHp/dMhkrK3V+wkizv5JfbnBMI6IvmCRM8W1ZgI5wW1SerLwyyzI0OO7M9YlRQd++PDE18DiEw
+	6td5tY4Re3rNPiQqbMBWH/ba6Tw/z20MWcEY4H/sw9/JAJncstHt+ddglVmksMYy5nrT2yyJk6u
+	WiX4Wk0432/eE0ZKNob1uWJ4yxtnnbUk1pqGNA7YniWiKBQhLusRJnSSDYMu5V7dTYHsEUaED3G
+	IN8iqZEKcsyOi0UHJFeiajQ==
+X-Received: by 2002:a05:6122:8711:b0:5e6:6546:84c7 with SMTP id 71dfb90a1353d-5e91f339ea0mr2872722e0c.2.1791900923873;
+        Tue, 13 Oct 2026 07:15:23 -0700 (PDT)
+X-Received: by 2002:a05:6122:8711:b0:5e6:6546:84c7 with SMTP id 71dfb90a1353d-5e91f339ea0mr2872685e0c.2.1791900923323;
+        Tue, 13 Oct 2026 07:15:23 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bcdde913d0sm3740707e87.26.2026.10.13.07.15.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 13 Oct 2026 07:15:22 -0700 (PDT)
+Message-ID: <720f7b8f-29bc-4b6a-85f1-34df7bd5cca1@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 16:15:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] arm64: dts: qcom: sm8650: Add watchdog node
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+        Wim Van Sebroeck <wim@linux-watchdog.org>,
+        Guenter Roeck
+ <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Rajendra Nayak <quic_rjendra@quicinc.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-watchdog@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261002-topic-sm8650-deckard-watchdog-v1-0-7d7f7d71d88a@linaro.org>
+ <20261002-topic-sm8650-deckard-watchdog-v1-2-7d7f7d71d88a@linaro.org>
+ <f6febe84-c7c2-4aa8-bb02-5b56c63abc6c@oss.qualcomm.com>
+ <8b331c92-ce18-4886-ba87-77b6156cc9a1@linaro.org>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <8b331c92-ce18-4886-ba87-77b6156cc9a1@linaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261013-rm500q-db-burst-v1-1-bb850d54e2c4@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAMk8zmoC/yXMQQqDQAxA0atI1g1kHJTBq5QunDFqBG2bqBTEu
- 3dal2/x/wHGKmzQFAco72LyXDLcrYA0tsvAKF02lFTWjpxHnSuiN3YR46a2IqcqUGpD8N5Brl7
- KvXz+x/vjsm1x4rT+NnCeX8gAupZzAAAA
-X-Change-ID: 20261013-rm500q-db-burst-ec580ca88331
-To: Manivannan Sadhasivam <mani@kernel.org>, 
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
- mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Steve Meek <stevemeek82@gmail.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791900873; l=5124;
- i=stevemeek82@gmail.com; s=20261011; h=from:subject:message-id;
- bh=BSBArFla/DwFyRCB336wqMsgkVGpFN/iXB3N8/Qra/0=;
- b=btAw/hV6faG3YXcI5l3o0FZ5UthK5ZINCeCCRun9RKtYNjPxuiXtcbxQpQIopxfBWWtTdv6tg
- SxjdZ6T9L0uDm2vFl90bCpxDDn2a8nC8s3+SIe4FzT6MVn5CUACxskT
-X-Developer-Key: i=stevemeek82@gmail.com; a=ed25519;
- pk=dtyc4btZAMr4Kqf5DaioLF7wBCQbkFYyDo3X5EcpZw8=
-X-Endpoint-Received: by B4 Relay for stevemeek82@gmail.com/20261011 with
- auth_id=1154
-X-Original-From: Steve Meek <stevemeek82@gmail.com>
-Reply-To: stevemeek82@gmail.com
+X-Authority-Analysis: v=2.4 cv=VqC2kO2n c=1 sm=1 tr=0 ts=6ace3cfc cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=A_RqQ9NLQzPOhAJlhEYA:9 a=QEXdDO2ut3YA:10
+ a=gYDTvv6II1OnSo0itH1n:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: bXmPW6jlCt3nXOtmnL0fJ1UQF-d8mBuE
+X-Proofpoint-ORIG-GUID: bXmPW6jlCt3nXOtmnL0fJ1UQF-d8mBuE
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA1NSBTYWx0ZWRfXyax5cu9YzKxG
+ K5SjXFyX1C0iZjMLVBjEJINiiyZt8zjjaE5MzmkI8v16uff1TZdVZVYd9XUvag5qHrvF7ux+2H1
+ 5GdtAzcPoacp7NDcUsllveJdAA4CsBI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA1NSBTYWx0ZWRfXzMisX2qNd1Ax
+ Fefkl8G1Ezn/2+b5hOJ7qYvgwNb+dK/4RPcpdXjU3Zwx03jYr1dm+bU04220BH8uJ8xCmpaHdLJ
+ PPW1xEe9HIOv5v70rGCtS8ojHZ2suyyK2wQmu+ANjNfjs49obLDhEsPf1vm1xU1lZIH016yqODQ
+ /QceJo5/tqrzmsaOlje5NQ209SBdp+aUErCKeg4H7zn/eTEYBn+9zzbe27BDm22o/9hRLhaIpBn
+ DQk4MSveH9/RicRtvD+fPWpTLyxRAPRmNpjph918gQYu+KuM+UxeDS+QcWVGeSXv/3YQPYlf7BQ
+ j23UaBMRKL7KAl8C574C+LqWb7kYHc6MP1Cm6B+d+LppdCIiRADyK31OCik3UuLXdwWgRyJyrtb
+ Wspp0rDhkzabPTRrBaKf8NY11XXAh/EwgVPSjoGoPxpqx4byUxUOCKvvcZjMYDUS0oe/wnDe8Lo
+ Rzocfo3w149OzIA5rFw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
+ adultscore=0 phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130055
 
-From: Steve Meek <stevemeek82@gmail.com>
+On 10/13/26 4:09 PM, Neil Armstrong wrote:
+> On 10/13/26 11:21, Konrad Dybcio wrote:
+>> On 10/2/26 11:45 AM, Neil Armstrong wrote:
+>>> Add a node for the watchdog on the SM8650 SoC, the node
+>>> is marked as reserved since on most platforms the Watchdog
+>>> is owned by the Gunyah Hypervisor.
+>>>
+>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>> ---
+>>
+>> Do you have a HDK or something with gunyah at hand? A couple months
+>> ago qcom_scm_gunyah_wdt_init() was introduced to handle this -
+>> could you enable the node and give it a shot if you have one?
+> 
+> Why enabling the node ? the qcom_scm_gunyah_wdt_init() will bail out
+> if the node is enabled. Here we only want the node to be enabled when
+> we are in EL1 without Gunyah.
 
-With burst mode enabled on the IP_HW0_MBIM hardware channels, the
-RM500Q-AE downlink stops under sustained multi-stream load. The MHI
-state stays M0 and uplink keeps working, but the downlink event ring
-stops interrupting, and after a while the MBIM control channel times
-out as well. Only a reboot recovers it.
+Right, sorry, I misremembered and then misread
 
-At the stall, the last doorbell the host rang on channel 101 covered a
-single buffer. The host then refilled the ring without ringing again,
-as db_mode had been cleared, and the device never signalled doorbell
-mode again, so it never saw the new buffers. Writing the channel 101
-doorbell by hand with the current ring write pointer restores the
-downlink immediately.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-It is load dependent: it reproduces within a 25 second 16-stream TCP
-download when the wwan0 receive work runs on the same CPU as the
-modem's MSI, and was not seen with that work moved to another CPU.
-PCIe runtime PM is not involved, as it reproduces with PCIe port PM
-disabled.
-
-Give the RM500Q-AE its own channel table with burst mode disabled on
-the two hardware channels, so the host rings the doorbell on every
-transfer. Other modems sharing the em1xx table are left unchanged.
-
-Tested on a Xunison Exigo Hub D50 5G (IPQ5018, RM500Q-AE firmware
-RM500QAEAAR13A03M4G, 6.18 with this driver): with the receive work on
-the modem's CPU at up to 100% load, about 200 seconds of multi-stream
-downloads at up to 135 Mbps, no stall and no MHI errors, where the
-unpatched driver stalled within the first 25 second run.
-
-Fixes: f6985f512f82 ("bus: mhi: host: pci_generic: Add Quectel RM500Q-AE support")
-Assisted-by: LLM
-Signed-off-by: Steve Meek <stevemeek82@gmail.com>
----
-Hi Mani,
-
-A follow-up to the RM500Q-AE support you applied on 11 Oct. Under heavy
-multi-stream download the modem's downlink stalls with burst mode on,
-and a manual doorbell write on channel 101 brings it straight back, so
-this turns burst mode off for the RM500Q-AE's two hardware channels
-only.
-
-The stall looks like a lost doorbell-mode handshake rather than
-anything board-specific, so it may affect other modems on the shared
-em1xx table under the same load. I've only got the RM500Q-AE to test
-on, so I've kept the change to that device. If you'd rather it were
-fixed in the core, I'm happy to send the traces from the stall.
----
- drivers/bus/mhi/host/pci_generic.c | 49 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 48 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-index 7193a384c..f6672f1cc 100644
---- a/drivers/bus/mhi/host/pci_generic.c
-+++ b/drivers/bus/mhi/host/pci_generic.c
-@@ -490,10 +490,57 @@ static const struct mhi_pci_dev_info mhi_quectel_rm5xx_info = {
- 	.sideband_wake = true,
- };
- 
-+/*
-+ * The RM500Q-AE stalls its downlink when the host refills the hardware
-+ * channel in burst mode: the last doorbell covers one buffer, the host
-+ * then queues the rest without ringing, and the device never signals
-+ * doorbell mode again. Ring the doorbell on every transfer instead.
-+ */
-+#define MHI_CHANNEL_CONFIG_HW_NOBRST(ch_num, ch_name, el_count, ev_ring, d) \
-+	{						\
-+		.num = ch_num,				\
-+		.name = ch_name,			\
-+		.num_elements = el_count,		\
-+		.event_ring = ev_ring,			\
-+		.dir = d,				\
-+		.ee_mask = BIT(MHI_EE_AMSS),		\
-+		.pollcfg = 0,				\
-+		.doorbell = MHI_DB_BRST_DISABLE,	\
-+		.lpm_notify = false,			\
-+		.offload_channel = false,		\
-+		.doorbell_mode_switch = false,		\
-+	}
-+
-+static const struct mhi_channel_config mhi_quectel_rm500q_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL(0, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(1, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 32, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 32, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_NOBRST(100, "IP_HW0_MBIM", 128, 2, DMA_TO_DEVICE),
-+	MHI_CHANNEL_CONFIG_HW_NOBRST(101, "IP_HW0_MBIM", 128, 3, DMA_FROM_DEVICE),
-+};
-+
-+static const struct mhi_controller_config modem_quectel_rm500q_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 20000,
-+	.num_channels = ARRAY_SIZE(mhi_quectel_rm500q_channels),
-+	.ch_cfg = mhi_quectel_rm500q_channels,
-+	.num_events = ARRAY_SIZE(mhi_quectel_em1xx_events),
-+	.event_cfg = mhi_quectel_em1xx_events,
-+};
-+
- static const struct mhi_pci_dev_info mhi_quectel_rm500q_info = {
- 	.name = "quectel-rm500q",
- 	.edl = "qcom/sdx55m/edl.mbn",
--	.config = &modem_quectel_em1xx_config,
-+	.config = &modem_quectel_rm500q_config,
- 	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
- 	.dma_data_width = 32,
- 	.mru_default = 32768,
-
----
-base-commit: 0b1883ca75c0005ab5ca52c7bc1a26329bc39746
-change-id: 20261013-rm500q-db-burst-ec580ca88331
-
-Best regards,
---  
-Steve Meek <stevemeek82@gmail.com>
-
-
+Konrad
