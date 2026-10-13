@@ -1,154 +1,172 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 621C047F3B1;
-	Tue, 13 Oct 2026 16:31:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A56151DAF5
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 16:35:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791909070; cv=none; b=a4Ek9UQ2Go2Hz9HZCqlsypyBAWfZtm4E8mlj3GJHwTuSYobzdKN8qGlMfr/sh/DVKXhlq4apBZJAw80ZedKozJN54zhaUAYZeYttSp1OoUDvBcFgDxIMGbvykp+fq1A4GYlGBBX9b8sP/XLvWLyRw4XXpZhmxMzlFqrKryZcfSQ=
+	t=1791909357; cv=none; b=HS9qauUz/r7OSd7ZgSUlHmICPO71YzIgksaBXFG3MYlgMX9ATcvXAZMx4lwFPbCBLWB1tRUEKVqAh7hfff1lWIK6SnB4xFFTq+I+RLoXoG+oK/D22ir9aB8Fs1b1Vx/l9mkD1ANSmhN1wZDM4zPScRwhNov/LBGwkXfvTqqaqHw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791909070; c=relaxed/simple;
-	bh=3PWdcDHBhbPWpZh4tpl2UNxQ8ZhM6kxojcRsoH1f5fI=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=I58HqvLBJcUHpgNUVIDr+MSJT2cFyelyBgXMg9+uAL5OpqgvMNL0qt5vLqNHXbUkpM6CBw/DR2ObC7J104DAzkNZUMWYho96Uy4NtJn7z506liTtGIrr2A5ivtvSR08xCGyKpVzYEJj8EW2oP1XW7OFt3LJKSirQcDLoHdGyhs0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ngPdDnNj; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791909357; c=relaxed/simple;
+	bh=/37o6SMMt2KK0+yPuVjPvOanQ0meYy2PUx8BVOAv9VU=;
+	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id; b=qUXTUSLK0hn27zGopXxfsia/PLVz0YizGlATz1u/kqdC2q6ZrI88oikAJtcSn7I34FpKsOVPQwGx3xHq7CifvmaW4ELr65hHh+gXXCQP90h86jrCct66fmZnx+vY4Q1Ml5tmaOvfzqLhn/xvKLfZ//I3mgP+uhoXpqx1VkgEf3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YyWKoaMP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y3TUZ8q8; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ngPdDnNj"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9B351F00893;
-	Tue, 13 Oct 2026 16:31:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791909068;
-	bh=OKaeHoDMxbcRdhaEWBqicGHaLuwHpHXnx6ahTNQjleE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=ngPdDnNjKhLyQT2N6RhyXzNbBJDw86DCky0DDkFZybGOWOVKgXN/ad/0sBCVkayei
-	 HNYj9hrjWpWtBFX/UYrVuXDu9Nm7T92X1bPsmBFtk4Y//+tnDFq0hvpgYtRGyFnd2P
-	 c30Gm7kdg0sOrDiIM+eseypQum5fGKkqjPdbpcWGVdosSz8LpVBEl5UHRwM88GzhMF
-	 LxJV4rIAovtRgv9XNXWPgotqgnhY5XjoeljLa9b9heAjpcpggcX2vRtxecvBr3LGzE
-	 e4URZupBZVLhzqUcLPkBuj4YCM0EBklpXxFGlAABFL+uXuGY4FJty1HMPPxJ406n+g
-	 bQsk8Di+vLpcw==
-Date: Tue, 13 Oct 2026 11:31:07 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Nirmal Patel <nirmal.patel@linux.intel.com>,
-	Jonathan Derrick <jonathan.derrick@linux.dev>,
-	Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org,
-	LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
-	ath11k@lists.infradead.org, ath10k@lists.infradead.org,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	Qiang Yu <qiang.yu@oss.qualcomm.com>,
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/8] PCI/ASPM: Add pci_force_enable_link_state() API
-Message-ID: <20261013163107.GA1522779@bhelgaas>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YyWKoaMP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y3TUZ8q8"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69DE44IY009426
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 16:35:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	T10UKbhm2zdtZAt/cofDMRIn3isVZYRRzmc76dZ8BAc=; b=YyWKoaMPHX9bV37z
+	C3ARFrXjPW9FwpDeqA2XfGDoBCNmWTtkJWJbvLZJpGEkvTCjlS+chkW8R3RUdBok
+	w2MBVXUtXs6WV0kY002MaUmIwLQNBZ/uDwSQIVV9QmI7IBqOvSuQEnX86Xc6aVG2
+	R8NlpUwjL8I9sYZFybvk/iu1pGICUZVgcRwLjCm8xU0uPjS6ibYpkhUeQ9yH9iY6
+	GNZUzjHg1oNe5j4tjYeBJWler05lzjgNlIHbnlBs1brh3fPyMpAgQXVF/wB1eLbF
+	VV1YZFcNqexEqdBnhZeTm32xo73fDM4pfhVM3V+1SI03yUWrOUuQF0DBCxzHtNH1
+	KhpLbA==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9fgjjja6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 16:35:55 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93ca9b53afaso871186785a.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 09:35:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791909354; x=1792514154; darn=vger.kernel.org;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=T10UKbhm2zdtZAt/cofDMRIn3isVZYRRzmc76dZ8BAc=;
+        b=Y3TUZ8q8tFa9pMVTi+4UAcbNwrR1GD+jikkyFq6zRpvkxxIfGYBL84+DnXcyhGVPNS
+         vLWslFsRpcMENrW1L2cGGHMASLNbVjPEf5M9fCixIkiuut26Ye1/l9mxnXpnVIJQmA+b
+         1WrQfQBI22fY0Zzv9Wopvb0NVW5q0cFQWhKPfbQDcSVzG9B0B2xVfnVZZqQhBtrfUrZF
+         G1YBc7wsWJ0fj7n+1SB+5q9/z2bXSK66cWG5nY6kBK8QwLdBKrXCJNWHaXbiX4OFNrFf
+         32/YLsweJekZP0IZaY0O8EHNmBk+OrJM0rSj5KeIu+P9HmY1CvKiHdBhyGpPE4cYK5Xq
+         YTBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791909354; x=1792514154;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=T10UKbhm2zdtZAt/cofDMRIn3isVZYRRzmc76dZ8BAc=;
+        b=QeYKOSgRn0hGtYy2vLH/ziSj8kMnqhM9auSR2glzVhilkFjK4I6XFnEW8mekTunT6S
+         drYuUxy+zVP8PL8hIbYImSvShUivHu6PUGXY7PMNEqiDjfz1ggHooy6y3EX1MQAeTMmP
+         dGKdhkkffrUqmUo+8hVQ8HXUTQqLtruot0dDES76CS8Xij7JtIIUhIFbTnTqIwJkQlSd
+         nel9dDPIvmga2W5/0v7AY7ZzUGUO6+4Q4v1saardkj2KC0uZ8aVRXWe6uSmzWO9beviH
+         +Lh2suxItFR2HGYLcsZrRME+/obX/ti9xvGblBu0EZHAxPp91zJeDzBzEBG/4oPu1mKH
+         LmlQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwIAILvwchH+uifVuPpTdKqJ89WPPyJ2QA9oudlwBpO78mup/3E4LW/L1/M4rDJWdXxqNoI2hoox+5fBSn9@vger.kernel.org
+X-Gm-Message-State: AFq9FYJVG/vzlnmR47JRUMOO1msrXWJ+O6NEH1O++/rU28d35wVUOBrL
+	Q/b+2J02jQK6hAA0xk+rEULaTgGIouzo+D8PQ2Ekc/WODpQy8WoJVkRXzpPzB6ctxLRjcE103cl
+	WiU9o/xXksIqTGG8WPRASXotjliqliWKOfdtI5wW94ACCQmMaVwTufkWjpXh6g+z7NwKPeQWfY6
+	7C
+X-Gm-Gg: AYBFou0JpkrN7TO9Mgi9PYJXEZBTrIev9Ew7n7xJvxOODt5lxF1FtKiAFcH8asWlz2C
+	089o3wekCYK+xbPdVNEPiV961dvjus7YsfY6EDMlUgGo8GJg9gPTpwzOQRKxYO83fh7Ppo48JlP
+	Ec4AUrbbFBIB46TRU3g5EX+SHllQN4IaddTs3ullPXKWUl0ESxNj+7LZFKtGe4lwzBPwFGKlYac
+	sKddIKXDSzjEuTzZLnLJy0ceMRNHNP3Jotpjd4YcwMr2BwYPf0kFDGAVSyBkl9aNNgojc3ikIqR
+	UrWYFjDZGJGmvdMytsIAMfK6sZowGXIMlamRS/azs7UaogoMqAqwIkMhp05HotA6Hdnnv5bZ2Gi
+	+jr6N9jUBS9Es
+X-Received: by 2002:a05:620a:3720:b0:93e:5eaf:dd87 with SMTP id af79cd13be357-93ebd2a05fbmr2189946185a.62.1791909354248;
+        Tue, 13 Oct 2026 09:35:54 -0700 (PDT)
+X-Received: by 2002:a05:620a:3720:b0:93e:5eaf:dd87 with SMTP id af79cd13be357-93ebd2a05fbmr2189940285a.62.1791909353679;
+        Tue, 13 Oct 2026 09:35:53 -0700 (PDT)
+Received: from localhost ([2a00:23c4:e5c9:901:c496:8838:86d0:bc8c])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0bc506asm6445450f8f.47.2026.10.13.09.35.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2026 09:35:52 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <f1390db8-2369-9ab7-49a9-b7f09ef7b1ea@linux.intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] arm64: dts: qcom: agatti: Make the ADSP remote heap
+ no-map
+From: Christopher Obbard <chris.obbard@oss.qualcomm.com>
+To: Benjamin Kelenyi <benjamin@wendy.sh>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Christopher Obbard <chris.obbard@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261001085247.1897991-1-benjamin@wendy.sh>
+References: <20261001085247.1897991-1-benjamin@wendy.sh>
+Date: Tue, 13 Oct 2026 17:35:43 +0100
+Message-Id: <179190934307.2042121.13130632112509363375.b4-review@b4>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=773;
+ i=chris.obbard@oss.qualcomm.com; h=from:subject:message-id;
+ bh=/37o6SMMt2KK0+yPuVjPvOanQ0meYy2PUx8BVOAv9VU=;
+ b=owEBbQKS/ZANAwAKAWNNxPBocEb4AcsmYgBqzl3kgv0HkP+uXeUhrPxsN1adNVnfYKfplRwtm
+ UiYGcnShE+JAjMEAAEKAB0WIQTxi9yLbCX5CqI9UXRjTcTwaHBG+AUCas5d5AAKCRBjTcTwaHBG
+ +HElEAChxd9Y9VKZA880hfAmGhe/ai7iHBrJj8bRzE+IxB0N2FHWtirqnt7BsNLyb4PADQonp3w
+ ybZnIJUP/CaiOmqsQKnLDpPBQ/AOeax0g80qDWtJPwM0mqqQEOG1MVYInsyQjww8wzgJ41W5YJ8
+ FFCyJ7t9lgQ+CLlxNI5sdKGwh62Pwt3xe3twYAtvDM6Ombbp6rE8x32SUjJAiUuC648lN7yd9nX
+ hEogoMDi8i4IOC5Uj1+7PMdclosz6eSWt4HXDBv1qJRa0PGUrE8F1zivQm/gjS05ZReYlTJWD2h
+ 0ZBuwyqR0hRQR+Qm3rkKooSqjT/kNcmNhlfJO74XPzJm1PLZ70URR0AHjKJzmfxnza8J2Y5n7dl
+ znmi0XkPXhHSd1YXLS+SYsLkFtxB9T2/dKdsQKjEUXI1oRQGa1Qj/zfk5d74fuHpRuto5o+u5OE
+ 2jQM1SGhNkSNsH11Y58HWmqStABY8o8ecQ6lNVsrVJ5CACRb9bxwRvc+XAv7+2yv27cbMvsZ+Ao
+ 27eStqvjCJbUVH8+0DmpNKVLBqsp5WOijDEbkFyM+IWoBiY6ZYjndMBKjdP5Lnwh2fOEUVKliSm
+ 3N2rAiN8K6R8X6Z6gpdX76jgBvguRLyfRgufMNDavw289zapB37LCaZ0kUNbsD5n8bPyOM6QXH7
+ hcRB1+6sqtRGC1w==
+X-Developer-Key: i=chris.obbard@oss.qualcomm.com; a=openpgp;
+ fpr=F18BDC8B6C25F90AA23D5174634DC4F0687046F8
+X-Proofpoint-GUID: yRMrEuarhixU8lMNlPBuSaMXvFLxIUgY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA2NiBTYWx0ZWRfX3ekP/6/0VWCf
+ kF35F+mM1u7TZgcEI5XgOnfoaVwgSvkz84oAbdojTGjKZFZmhfypyb65fug3OyESY0zSgCmrAjH
+ JeRaMtzPZNPHQ9EPRYKYT4/78l5SxHxbCGKwwBZjGNlRszwKmVXAxT4IgZaIy5boFlY5MqsbKih
+ qR+LZGugGtBPC9MsA0Opr+zfYtM2hvp4EZmXFJRG8dS2FoBWasbX1KlsgPlqf4GHCNy0MYHeXvc
+ 6XfrUDOeKFemiTGrfTYfALu2Kvj3FT65xV2n4Sfi3CYsKNBzPHsSg0Ao3WOhwoJS4vVnnTXNQ1R
+ xjSEwlzKUKZCHKwpFFgL2Oe4t5PGsmOvX0ryaOPkW0yu5pN27Jzkl7p3flqpOG7PYJuNKvvCoYw
+ YRWj+r7vjdp03ZJ1aSpxCDl0rzCxNI3/JWOFRpqK1jUNVhn3/6LZW2MeWoCK5Nie/qYE5z1otto
+ UJJdof4mPqTyr9nOMeg==
+X-Proofpoint-ORIG-GUID: yRMrEuarhixU8lMNlPBuSaMXvFLxIUgY
+X-Authority-Analysis: v=2.4 cv=PedqFShd c=1 sm=1 tr=0 ts=6ace5deb cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=oKKEO0YrVi7KJ4T4WXQA:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA2NiBTYWx0ZWRfX9h5/2L1M6Y19
+ XdsYjRVyWjqEHfofgDGa5YlEaCs3QIZgADaCkLqqqsVIF8gINc4DCOxx4ns5MijLMXyTqzMf2af
+ IgpnvRr5wH4VHDTcL9wk99L7L6KVjuI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 priorityscore=1501 clxscore=1015
+ adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130066
 
-On Tue, Oct 13, 2026 at 02:41:32PM +0300, Ilpo Järvinen wrote:
-> On Mon, 12 Oct 2026, Bjorn Helgaas wrote:
-> > On Wed, Jul 08, 2026 at 04:30:16PM +0200, Manivannan Sadhasivam wrote:
-> > > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> > > 
-> > > pci_enable_link_state() and pci_enable_link_state_locked() APIs only enable
-> > > the ASPM states that were not previously disabled via
-> > > pci_disable_link_state*() API or blacklisted during init (e.g. the pre-1.1
-> > > device blacklist, which is only meant to be overridden with
-> > > 'pcie_aspm=force'). This is an intentional behavior as these APIs must not
-> > > silently re-enable states that were deliberately disabled, since doing so
-> > > could enable ASPM on a link where it is known to be unsafe.
-> > 
-> > I think this is saying that many uses of pci_disable_link_state() are
-> > to avoid hardware errata, i.e., these are basically quirks, and we
-> > should *never* enable those ASPM states.
-> > 
-> > > However, some drivers (e.g. the atheros WLAN drivers) save the currently
-> > > enabled ASPM states, disable all ASPM states before firmware download, and
-> > > then try to restore exactly the states that were enabled before. Restoring
-> > > those states requires re-enabling states that were just disabled via
-> > > pci_disable_link_state() API. But, this cannot be achieved using the
-> > > existing APIs.
-> > 
-> > This sounds like it's also for hardware errata: if ASPM works
-> > correctly, there's no need to disable it during firmware download.  I
-> > think this is *only* the atheros drivers, isn't it?  I didn't see any
-> > others.
+On Thu, 01 Oct 2026 11:52:47 +0300, Benjamin Kelenyi <benjamin@wendy.sh> wrote:
+> The ADSP remote heap is declared as a reusable CMA pool. The ADSP has no
+> IOMMU, so fastrpc hands the whole region to the DSP with
+> qcom_scm_assign_mem() when it probes, while CMA keeps lending the pool's
+> pages to movable allocations. Once memory runs low the kernel touches a
+> page the DSP now owns, and the board resets without an oops.
 > 
-> There are more that should use disable/enable API. In addition ath*, I had 
-> also these in my unfinished series:
+> On an Arduino UNO Q (QRB2210, 4 GB), writing and reading back 3.5 GB
+> through the page cache resets the board within seconds. With fastrpc
+> blacklisted, or with the heap declared no-map, the same test passes
+> repeatedly.
 > 
->   brcmfmac
->   ib-hfi1
->   rtlwifi
->   rtsx
->   r8169
+> [...]
 
-Thanks for those pointers!
+Reviewed-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
 
-> > > Hence, add pci_force_enable_link_state() API for such callers. Unlike
-> > > pci_enable_link_state(), it re-enables the requested states even if they
-> > > were previously disabled via pci_disable_link_state() or disabled during
-> > > init. The caller is therefore responsible for only enabling states the
-> > > device actually supports, typically the ones previously reported by
-> > > pcie_aspm_enabled().
-> > 
-> > The problem is that pci_enable_link_state() cannot enable things that
-> > were disabled by pci_disable_link_state().  They're not symmetric,
-> > which violates the caller's expectation.
-> 
-> Yes.
-> 
-> This patch seems to come with my Suggested-by but what I suggested (and 
-> had a patch for) was to make disable/enable proper symmetric pairs because 
-> it is very trappy otherwise. If something else is needed in addition, that 
-> should be named differently like Bjorn also seems to suggest (however see 
-> my alternative suggestion below).
-> 
-> I renamed the current pci_enable_link_state() to 
-> pci_set_default_link_state() in my own attempt to get room for adding the 
-> symmetric pair.
+-- 
+Christopher Obbard
 
-We might need new names for pci_enable_link_state(),
-pci_disable_link_state(), and the quirk thing.  If we keep the same
-names, I think it will be pretty complicated to manage the changing
-semantics when backporting driver changes that use them.
-
-> > Instead of adding pci_force_enable_link_state(), I think we should add
-> > a new interface for the *quirk* behavior that permanently disables
-> > states.  Then pci_enable_link_state() and pci_disable_link_state()
-> > could be made symmetric.
-> 
-> My suggestion is to make the disables/enables counted per state which 
-> would allow parallel sources of disables to function without clashing.
-
-By parallel sources, are you thinking of sysfs and driver calls?  If
-locking would be sufficient I think that would end up being simpler.
-
-But maybe the issue is these devices where we think ASPM breakage only
-happens in certain circumstances, e.g., firmware download, so we want
-to keep states disabled for that period.  Then I guess locking inside
-the enable/disable doesn't prevent sysfs from enabling those states
-during that period.
-
-> Disable quirks could simply not have the pairing enable, no special 
-> interface needed.
-
-I'm not sure what this looks like to the caller.  A parameter that
-says whether to count the disable?
-
-I think having a different function name would be helpfully
-descriptive because permanently removing an advertised capability is
-different from temporarily disabling a feature.
-
-Bjorn
