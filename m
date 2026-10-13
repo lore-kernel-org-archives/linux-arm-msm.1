@@ -1,201 +1,595 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD079456DE9
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:43:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E89F7410D3D;
+	Tue, 13 Oct 2026 10:43:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791888192; cv=none; b=s+9nKvVWODOGaoJtfmjk4sRKQtu2jXEvb75yTKaRillCuuGGo7YshBbrZk/eJ6sQcK222QkDoMzbVvllDEh5z83A31L4+XjC79jkazG2xgalwJvkX0o9qWhcre8LzdkhPZMSuCaKq2WRR98mmQlqv6J92dywb9G+6efejydp0po=
+	t=1791888215; cv=none; b=DjPxjK3YtSOIlXk1rbiEKbgNndHEHQIHqYt7L4c5g9UocJ5ShsqRevSfRDMnKWIhNKU4MO1zq+8YCjpZubQA59VgMCmAIxOSFBcsutV9bz/9vMeYQ9dgdwQyAoGtjHymHMBQb9M5tGaapEi8eZoxpsDEQBkfW1E/ZYgPV+t9mUs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791888192; c=relaxed/simple;
-	bh=np6bjerOYn1Zyw8+TrjpZHV++1EzsIEKSOeSr92z3XM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=e5bsO9JQZfQR+gieztvlhdHj4DoFVWClaP3TPsmMYRUCOSyjaKfKYlLap8e6Ll3Jbt3lvaWK76wfYKfIq3oIpxB5+HFR7Wv0txu1VxzZb/oZ8LImRzR+BToi60zpglL3xzrfilHzesfTnQ10hlSi+TviPV+5a5N7/b9wgqMbkiM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O7On7kp2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VeuPKZzs; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1791888215; c=relaxed/simple;
+	bh=b/OFaDIdyvpg2tD6RPfaKEaGH8EOj/QRzdm9sywx2T4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=FSl3t2cNESzQki73o0O6yqeuo1KaXkaAntX5l6GKQVV4Fmcg3lfWxuD4/BTcQzkk0zupPQPYmb9VSNFnfaExMVMVceZW4YaqPwyz52kwO6OaH7zueecFMjcnRjCuXfXIpBt5JBdSPGc1r+VLS+KoYiwjUjHOg5UbRbhmD5vvP8U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Qr/iZPbx; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O7On7kp2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VeuPKZzs"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D8NZ6E3907376
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:43:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Qr/iZPbx"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D6CRu4949361;
+	Tue, 13 Oct 2026 10:43:21 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=MXZwRO4BDFJqGb2cbS7wiYcy
-	bGxVIUNkZePoqU20lgw=; b=O7On7kp2ZExeU1gfqcV1UOmjCub8po7o0HkFjvcD
-	OPA2R1jbOvAdyzk3FbyeY7XGG1Ot8Ra/eKn+cwRwKb+cNd+ScwQhpoUQ/x57gbzP
-	M8MVi8NG0Bc7NsEZcXP+VPnsTCbNjFGraKWOy0MsQQJ4Ad3ASPuLmnc/4dRru/eN
-	nq1i38D8oNQ1i4l7BtYBbqeIqxv+i/8VeH88Jn/O+Xy0t5NpFIFjT2aioDVfg3Lb
-	xqFTBgjuKVhd0JRemyD2MWi+PiD3mgwzw3YGRsPIPvxREw4LO3MT1xE88CATApMk
-	mpiMr5lY+THIWYw19GEWosyOTgvsQDR969C8xY9GBMHbqA==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h95xqu44a-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 10:43:08 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-9197553d398so67207156d6.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 03:43:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791888188; x=1792492988; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=MXZwRO4BDFJqGb2cbS7wiYcybGxVIUNkZePoqU20lgw=;
-        b=VeuPKZzsu+dV65n5YQr9XtKp7Iu1wArQY9aHTX5ZwTowIAu8rSStoZLr9/bGhghVWh
-         lQpCdTKiR4s19Ge7NOg3i2ryyYaJbpsEQOCS6jpOBOtfz9n6XilqyBAwQD3XfbLLtwCH
-         rcBRrSLLmmPKDq0disHSUzzxQI9oYo5Uxfea54BUzCu0ckAkGBneSBe7oewRd4Z2SdyS
-         RvjGFm82c4n872QLjD+oyd5+Z8a355AmOtlhCEnbLoI82wi2AfgpZewzQsE9DTPBJqnh
-         8Uly16KkrrNGP4hC4ogMpgiF1AGXco3a12rzHWd4pZNICo6JUyvdAwNBuCiyAwBy5SMW
-         ZKrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791888188; x=1792492988;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MXZwRO4BDFJqGb2cbS7wiYcybGxVIUNkZePoqU20lgw=;
-        b=a/khT6FYJdsBk8KruvGsZ2hPNDXxmIfvCyAVPgfjCA+Q3rZ7s67kVbhZ3CnDOZVTEi
-         S8SUERdLUDRyL+BagIyfgzV2x5l4I0gD0sOigz3AvJZ1bneXQMczt7NOpSLMx4wp/Zfi
-         By0M36XdIpYz3rzV+Od7z1W1tazdV45c8uXAoXSzha1cqjPJNIohIlnLCjnMJjJf6BYP
-         8ZST9+S8LH5pZfKJ6K5MUjwaMnwjRsJR+Ij0WvifmjY3NRvMo/6X9AtbGWZLXc3ctIFp
-         x3ZzZDSjGUPYgKXvPQHyov2i+jUYpndbxKALZlmbYPszmr6/woev5fqiqtka5RftigTE
-         uv1Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxO6IBXH5YefnLOpKt9Qm3kwZJaSOdqiOzetDgGtkDO34EYPIU3pksIc9ik86I32P3NFhwq/3VVkNkD8GyV@vger.kernel.org
-X-Gm-Message-State: AFq9FYL0bmy+HzCqeNY/0H8kWrTLD8woJYaE/0WDR9Gus3KngD6pNqn6
-	si6PJlJTin7rcBAGhbsQm5zJ5lqDOZ2nvMxM4xkYFG67y29LB2KiPwR20AwlvaR7vzfV7YyGWA1
-	jWFW92zrE+NNTJXymUv4H0V4BHBsljiznZP47e7PQYotlixeQTYooo+Mmi3LhSPuFoE2n
-X-Gm-Gg: AYBFou1u9MvDbv3UvmVRUAmHibXy8PUdO4pIMDesCUvvIhfUrWCuhZkPsnSM7ulBpK+
-	08TMiqeqKeX2V9t6e4vuiOOaO6MJ9dn3M2efxHofGl1FKGsT9QkXJxxq4m1Ae6sCnnOy9seQABh
-	Cfv/fFGNoBzQ2aGQUON176VkRWYiua1gjSE+LBnEcTlcdOm27YqNfC2uFmtMvzoZQmzGhHSTd66
-	FXpZ1h2WqJagps8eXBA8Q9I8TiADRpsx3+rnzjZ93xH0VQlKWffgZAR19leFWQoo2al0CTtwRb6
-	fbR9wvJdW2SlTDSDAZyEEMxLReakSOH1iYUy1rJhtVSBkaUXpHaA20iTo6Ja8+zGx2icgZLlhYh
-	Gh4rnDCYV+2yrF0O6cvZIJiyoyWQQIdYS0mKEUyVEinE+NF3PIv0jU3PbfIG9AbdAz+QUPce5JR
-	UkLm5T3CqeM1mN
-X-Received: by 2002:a05:620a:1b9a:b0:93c:7582:14e4 with SMTP id af79cd13be357-93ebd2085ccmr1853088485a.40.1791888187865;
-        Tue, 13 Oct 2026 03:43:07 -0700 (PDT)
-X-Received: by 2002:a05:620a:1b9a:b0:93c:7582:14e4 with SMTP id af79cd13be357-93ebd2085ccmr1853085785a.40.1791888187320;
-        Tue, 13 Oct 2026 03:43:07 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a9c3befebcsm37453901fa.1.2026.10.13.03.43.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 03:43:06 -0700 (PDT)
-Date: Tue, 13 Oct 2026 13:43:04 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3 4/6] clk: qcom: Add Nord display clock controller
- support
-Message-ID: <ijqjle2jpl7ycdecndlx7qlj4qfm3s5zuxbsecnmhz5cnuomis@nnnxqbubt45z>
-References: <20260724-nords_mm_v1-v3-0-32b45232217f@oss.qualcomm.com>
- <20260724-nords_mm_v1-v3-4-32b45232217f@oss.qualcomm.com>
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	yRnmijQ4DcZo4wEnXob3kZrcWq8wSRoTN49GdWDJNX4=; b=Qr/iZPbxZJeXgOX1
+	xZjOSkNLcSlznBawA4S9QmbXGdVDKLYyululk/oAR+zdUB2VXu3bg5+xWMm5VeBG
+	QvQlNjK48JPTkFyKQBlYPHjBDHDA9bajXr58Cfwbt0GN5c7xCoKkST/EghF+7qr2
+	STnPX4VPrgvZKp+Vj1/Y1Q/c9y11di8QMfsau2R+t7sJ51ecVQnHMHY+rz9FCBz/
+	7v7p6AqdLSVZ3yUt2JbS+4u4r8N75GP5VWSqqZbkt11tmnTzq2PreLxN7QyFWc9l
+	HF1i0GmOHOmQECvfpzjJyJkj3A7UTKGRKTX4CUWRRZh6F7j0pzfom/u2XgJ1yiCY
+	eJ3a+w==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9f6294ka-27
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 13 Oct 2026 10:43:20 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69D5pmoS651504;
+	Tue, 13 Oct 2026 05:51:50 GMT
+Received: from hu-hgautam-hyd.qualcomm.com (hu-hgautam-hyd.qualcomm.com [10.147.247.91])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTP id 69D5plAX651483;
+	Tue, 13 Oct 2026 05:51:50 +0000 (GMT)
+From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 11:21:30 +0530
+Subject: [PATCH v9 07/10] ASoC: qcom: Add QAIF PCM operations
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260724-nords_mm_v1-v3-4-32b45232217f@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MiBTYWx0ZWRfX+Azr1Q22poTV
- yNnqjXWnkdHRysGGHnviDf8c+VAnjpCbb8g45e3roOO/y9blW1FzMvp9nOdX0HoKbzv/Kvbspyh
- O3LAqqSWKgwVafr1Rn4hI6djowwdOtNmWfJTfr0H4+x28zTfGPgOQJqQruzoiiVtgyPl+b9yCUe
- pLgqBMAOsUA0O/N4O0wWsW0d6A9gjEhust+Oo2uDSjwwn6r87aWbDqcauCoZX3TZEIGGnhIO3gg
- T8j+0Iv0ugbuEVXRfKOVb/81nXMPHXcRWtN3GuNbE+4isq852TgfUbFZoMmpIsxlRnRLGq24Rld
- 4FBal1sdOpAsbFtpGGrVUWbyeQVKY3JMTFxwcyqlDJuv9Pcn1OqnZetf6X35XcheMiODEW+8jzZ
- /UnKDrXZdObVRheTa6ESTDLoz/9QmXNaaedz4Mivcmnn+kaxGXU4KGPVbBGj3Q+oBelSMkvepch
- m9e+bZuFMxxLNrO14Bg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MiBTYWx0ZWRfX4LQS4hYgEmeM
- 3yvtG6I6FnskJvrzTJN9PryHzp1HCjqhNlAh2CKXcOlEm2YcFs6eZuRwh2K2u9QfHxI9PAp0kIR
- y1PnJOnSiI0LvMhQAzjvIZ/pcMzeDcY=
-X-Proofpoint-ORIG-GUID: THWkKeyAKYOv85OfQdSGvPuMXKPatnh7
-X-Authority-Analysis: v=2.4 cv=EP+TQFZC c=1 sm=1 tr=0 ts=6ace0b3c cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=mHeL4lCu1BsMOEic-KwA:9 a=CjuIK1q_8ugA:10 a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-GUID: THWkKeyAKYOv85OfQdSGvPuMXKPatnh7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261013-b4-qaif-shikra-audio-v9-7-f3022e28f2fd@oss.qualcomm.com>
+References: <20261013-b4-qaif-shikra-audio-v9-0-f3022e28f2fd@oss.qualcomm.com>
+In-Reply-To: <20261013-b4-qaif-shikra-audio-v9-0-f3022e28f2fd@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Authority-Analysis: v=2.4 cv=FOKOVOos c=1 sm=1 tr=0 ts=6ace0b48 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=2Ps45Wj44deZX3ff0YAA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0MiBTYWx0ZWRfX7wRZV5SU1g09
+ P8ORu7nesNrU0Vj2s2edNyZmAohKPdaaXFSUcRhEQsxIkJyxJ6NBzsqgXWJoVZRcGgKHmSBgHy5
+ V5sblwJsZY06qXiFixQPAH0d+T66V5Q=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0MiBTYWx0ZWRfX++V7wRioHpzy
+ vQNX7bu3gVMz1F1b8pPSX0b0/mitqtIC3x6WI+uPp3qbcX455nnfWvgsHo/5feahp7qq+SUgHc/
+ xECwIkzzATk2chUWK6I+3a/6M8MM3G0ycb8m3QxJEJamE/eZ0jqj299t7bxwV9kZ3KUtPeMpV94
+ R5C/JmyCN9WRsddakJbfoNWBRthdHtCcJcOtqO/a6a08b+IGoz5wADhkR38zehVUkI7yLEDNHeg
+ 0L8BCAMTOgby1lzGV7uZPn1/LgGOsq81dDnOTL1DRcJQX4tiLErm95oFeYel0wH73obKfn2XD+g
+ 8U7Zl7U/eYRy74bjkr6Bu9qr5f1iNyRVhSWim4/KY7kIRRYPp6wXzgUJfwkzi8ollvHOm9Bjxhw
+ CU6NUPlZ+sXglRjBEvQadLM9DRHDFjNLLjwkw0FBJLU9ALOu6FcQ7PkatyhGpXoORNtb5fOPiBn
+ Fe1nDFrBDDsfONVMXcw==
+X-Proofpoint-GUID: pYHDU6EPVuWgpoYVx8MQso4b7WvE8uxl
+X-Proofpoint-ORIG-GUID: pYHDU6EPVuWgpoYVx8MQso4b7WvE8uxl
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015 spamscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0 lowpriorityscore=0
+ suspectscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
+ spamscore=0 clxscore=1015 priorityscore=1501 malwarescore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130042
 
-On Fri, Jul 24, 2026 at 04:25:08PM +0530, Taniya Das wrote:
-> Add support for the display clock controllers (DISPCC) on the
-> Qualcomm Nord platform.
-> 
-> The platform includes two display clock controller instances,
-> display0 and display1. Register support for both controllers.
-> 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Reviewed-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/Kconfig        |   11 +
->  drivers/clk/qcom/Makefile       |    1 +
->  drivers/clk/qcom/dispcc0-nord.c | 2004 +++++++++++++++++++++++++++++++++++++++
->  drivers/clk/qcom/dispcc1-nord.c | 2004 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 4020 insertions(+)
-> 
-> +
-> +static struct clk_rcg2 mdss_0_disp_cc_mdss_mdp_clk_src = {
-> +	.cmd_rcgr = 0x810c,
-> +	.mnd_width = 0,
-> +	.hid_width = 5,
-> +	.parent_map = disp_cc_0_parent_map_8,
-> +	.freq_tbl = ftbl_mdss_0_disp_cc_mdss_mdp_clk_src,
-> +	.hw_clk_ctrl = true,
-> +	.clkr.hw.init = &(const struct clk_init_data) {
-> +		.name = "mdss_0_disp_cc_mdss_mdp_clk_src",
-> +		.parent_data = disp_cc_0_parent_data_8,
-> +		.num_parents = ARRAY_SIZE(disp_cc_0_parent_data_8),
-> +		.flags = CLK_SET_RATE_PARENT,
-> +		.ops = &clk_rcg2_shared_ops,
+Add the PCM platform callbacks needed to use QAIF DAIs for playback
+and capture.
 
-clk_rcg2_shared_no_init_park_ops
+Pre-allocate the DMA buffer via snd_pcm_set_fixed_buffer_all() in the
+.pcm_new callback. In open(), reserve a stream DMA index and perform
+the one-time QAIF hardware initialization. Program the DMA configuration
+in hw_params(), set the DMA clock rate and program the DMA base, buffer
+and period registers in prepare(), and report the current DMA position
+from pointer(). Release all resources in close().
 
-> +	},
-> +};
-> +
-> +static struct clk_rcg2 mdss_0_disp_cc_mdss_pclk0_clk_src = {
-> +	.cmd_rcgr = 0x80c4,
-> +	.mnd_width = 8,
-> +	.hid_width = 5,
-> +	.parent_map = disp_cc_0_parent_map_2,
-> +	.freq_tbl = ftbl_mdss_0_disp_cc_mdss_byte0_clk_src,
-> +	.hw_clk_ctrl = true,
-> +	.clkr.hw.init = &(const struct clk_init_data) {
-> +		.name = "mdss_0_disp_cc_mdss_pclk0_clk_src",
-> +		.parent_data = disp_cc_0_parent_data_2,
-> +		.num_parents = ARRAY_SIZE(disp_cc_0_parent_data_2),
-> +		.flags = CLK_SET_RATE_PARENT,
+The DMA clocks themselves are prepared and enabled by the CPU DAI
+driver's startup and shutdown callbacks.
 
-Here and in several similar places: No CLK_OPS_PARENT_ENABLE?
+Support mmap() for CIF and AIF paths.
 
-> +		.ops = &clk_pixel_ops,
-> +	},
-> +};
-> +
+Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+---
+ sound/soc/qcom/qaif-platform.c | 464 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 464 insertions(+)
+
+diff --git a/sound/soc/qcom/qaif-platform.c b/sound/soc/qcom/qaif-platform.c
+new file mode 100644
+index 000000000000..e24c4252825e
+--- /dev/null
++++ b/sound/soc/qcom/qaif-platform.c
+@@ -0,0 +1,464 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * qaif-platform.c -- ALSA SoC PCM platform driver for the Qualcomm Audio Interface (QAIF)
++ */
++
++#include <linux/dma-mapping.h>
++#include <linux/export.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/platform_device.h>
++#include <linux/regmap.h>
++#include <sound/pcm_params.h>
++#include <sound/soc.h>
++#include "qaif-reg.h"
++#include "qaif.h"
++
++#define DRV_NAME "qaif-platform"
++
++/* period: 5ms @ 48kHz/1ch/S16 min, 20ms @ 48kHz/8ch/S32 max */
++#define QAIF_PLATFORM_PERIOD_BYTES_MIN		(48 * 5 * 1 * 2)	/* 480 B */
++#define QAIF_PLATFORM_PERIOD_BYTES_MAX		(48 * 20 * 8 * 4)	/* 30720 B */
++#define QAIF_PLATFORM_PERIODS_MIN		2
++#define QAIF_PLATFORM_PERIODS_MAX		4
++/* QAIF_PLATFORM_PERIODS_MAX * QAIF_PLATFORM_PERIOD_BYTES_MAX = 122880 B */
++#define QAIF_PLATFORM_BUFFER_BYTES_MAX		\
++	(QAIF_PLATFORM_PERIODS_MAX * QAIF_PLATFORM_PERIOD_BYTES_MAX)
++
++/* DMA CFG register bit positions */
++#define QAIF_DMACFG_SHRAM_WM_MASK	GENMASK(11, 0)
++#define QAIF_DMACFG_BURST4_BIT		BIT(18)
++#define QAIF_DMACFG_DYNCLK_BIT		BIT(24)
++
++/* DMA CTL register bit positions */
++#define QAIF_DMACTL_ENABLE_BIT		BIT(0)
++#define QAIF_ALL_CLIENTS_MASK		(QAIF_BITMASK_AIF_RDDMA_WRDMA | \
++					 QAIF_BITMASK_CIF_RDDMA_WRDMA)
++
++static const struct snd_pcm_hardware qaif_platform_hardware = {
++	.info			=	SNDRV_PCM_INFO_MMAP |
++					SNDRV_PCM_INFO_MMAP_VALID |
++					SNDRV_PCM_INFO_INTERLEAVED |
++					SNDRV_PCM_INFO_PAUSE |
++					SNDRV_PCM_INFO_RESUME,
++	.formats		=	SNDRV_PCM_FMTBIT_S16 |
++					SNDRV_PCM_FMTBIT_S24 |
++					SNDRV_PCM_FMTBIT_S32,
++	.rates			=	SNDRV_PCM_RATE_8000_192000,
++	.rate_min		=	8000,
++	.rate_max		=	192000,
++	.channels_min		=	1,
++	.channels_max		=	8,
++	.buffer_bytes_max	=	QAIF_PLATFORM_BUFFER_BYTES_MAX,
++	.period_bytes_min	=	QAIF_PLATFORM_PERIOD_BYTES_MIN,
++	.period_bytes_max	=	QAIF_PLATFORM_PERIOD_BYTES_MAX,
++	.periods_min		=	QAIF_PLATFORM_PERIODS_MIN,
++	.periods_max		=	QAIF_PLATFORM_PERIODS_MAX,
++	.fifo_size		=	0,
++};
++
++static int qaif_map_ee_resource(struct qaif_drv_data *drvdata)
++{
++	const struct qaif_variant *v = drvdata->variant;
++	struct regmap *map = drvdata->audio_qaif_map;
++	int ret;
++
++	ret = regmap_write(map, QAIF_EE_RDDMA_MAP_REG(v), GENMASK(v->num_rddma - 1, 0));
++	if (ret)
++		return ret;
++	ret = regmap_write(map, QAIF_EE_WRDMA_MAP_REG(v), GENMASK(v->num_wrdma - 1, 0));
++	if (ret)
++		return ret;
++	if (v->num_intf > 0) {
++		ret = regmap_write(map, QAIF_EE_INTF_MAP_REG(v), GENMASK(v->num_intf - 1, 0));
++		if (ret)
++			return ret;
++	}
++	ret = regmap_write(map, QAIF_EE_CODEC_RDDMA_MAP_REG(v),
++			   GENMASK(v->num_codec_rddma - 1, 0));
++	if (ret)
++		return ret;
++	return regmap_write(map, QAIF_EE_CODEC_WRDMA_MAP_REG(v),
++			    GENMASK(v->num_codec_wrdma - 1, 0));
++}
++
++static int qaif_map_dma_path(struct qaif_drv_data *drvdata)
++{
++	struct regmap *map = drvdata->audio_qaif_map;
++	int ret;
++
++	if (drvdata->variant->qxm_type != QAIF_QXM0) {
++		dev_err(regmap_get_device(map),
++			"only QXM0 is supported, qxm_type=%d\n",
++			drvdata->variant->qxm_type);
++		return -EINVAL;
++	}
++
++	ret = regmap_write(map, QAIF_RDDMA_MAP_QXM, QAIF_QXM0);
++	if (ret)
++		return ret;
++	ret = regmap_write(map, QAIF_WRDMA_MAP_QXM, QAIF_QXM0);
++	if (ret)
++		return ret;
++	ret = regmap_write(map, QAIF_CDC_RDDMA_MAP_QXM, QAIF_QXM0);
++	if (ret)
++		return ret;
++	return regmap_write(map, QAIF_CDC_WRDMA_MAP_QXM, QAIF_QXM0);
++}
++
++static int qaif_config_shram(struct qaif_drv_data *drvdata)
++{
++	const struct qaif_variant *v = drvdata->variant;
++	struct regmap *map = drvdata->audio_qaif_map;
++	u32 start_addr, shram_len;
++	int ret, i;
++
++	if (v->qxm_type != QAIF_QXM0) {
++		dev_err(regmap_get_device(map),
++			"only QXM0 is supported, qxm_type=%d\n",
++			v->qxm_type);
++		return -EINVAL;
++	}
++
++	start_addr = v->rddma_shram_start_addr[QAIF_AIF_DMA];
++	shram_len = v->rddma_shram_len;
++	for (i = 0; i < v->num_rddma; i++) {
++		ret = regmap_write(map, QAIF_RDDMA_QXM0_SHRAM_ST_ADDR(i),
++				   start_addr + (shram_len * i));
++		if (ret)
++			return ret;
++		ret = regmap_write(map, QAIF_RDDMA_QXM0_SHRAM_LEN(i), shram_len);
++		if (ret)
++			return ret;
++	}
++
++	start_addr = v->wrdma_shram_start_addr[QAIF_AIF_DMA];
++	shram_len = v->wrdma_shram_len;
++	for (i = 0; i < v->num_wrdma; i++) {
++		ret = regmap_write(map, QAIF_WRDMA_QXM0_SHRAM_ST_ADDR(i),
++				   start_addr + (shram_len * i));
++		if (ret)
++			return ret;
++		ret = regmap_write(map, QAIF_WRDMA_QXM0_SHRAM_LEN(i), shram_len);
++		if (ret)
++			return ret;
++	}
++
++	start_addr = v->rddma_shram_start_addr[QAIF_CIF_DMA];
++	shram_len = v->rddma_shram_len;
++	for (i = 0; i < v->num_codec_rddma; i++) {
++		ret = regmap_write(map, QAIF_CDC_RDDMA_QXM0_SHRAM_ST_ADDR(i),
++				   start_addr + (shram_len * i));
++		if (ret)
++			return ret;
++		ret = regmap_write(map, QAIF_CDC_RDDMA_QXM0_SHRAM_LEN(i), shram_len);
++		if (ret)
++			return ret;
++	}
++
++	start_addr = v->wrdma_shram_start_addr[QAIF_CIF_DMA];
++	shram_len = v->wrdma_shram_len;
++	for (i = 0; i < v->num_codec_wrdma; i++) {
++		ret = regmap_write(map, QAIF_CDC_WRDMA_QXM0_SHRAM_ST_ADDR(i),
++				   start_addr + (shram_len * i));
++		if (ret)
++			return ret;
++		ret = regmap_write(map, QAIF_CDC_WRDMA_QXM0_SHRAM_LEN(i), shram_len);
++		if (ret)
++			return ret;
++	}
++	return 0;
++}
++
++static int qaif_init(struct snd_soc_component *component)
++{
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	int ret;
++
++	if (drvdata->qaif_hw_configured)
++		return 0;
++
++	ret = qaif_config_shram(drvdata);
++	if (ret) {
++		dev_err(component->dev, "failed to config shram: %d\n", ret);
++		return ret;
++	}
++
++	ret = qaif_map_ee_resource(drvdata);
++	if (ret) {
++		dev_err(component->dev, "failed to map EE resources: %d\n", ret);
++		return ret;
++	}
++
++	ret = qaif_map_dma_path(drvdata);
++	if (ret)
++		return ret;
++
++	drvdata->qaif_hw_configured = true;
++	return 0;
++}
++
++static int qaif_platform_pcmops_open(struct snd_soc_component *component,
++				     struct snd_pcm_substream *substream)
++{
++	struct snd_pcm_runtime *runtime = substream->runtime;
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	unsigned int dai_id = cpu_dai->driver->id;
++	struct qaif_pcm_data *data;
++	int ret, stream_dma_idx, dma_reg_idx, dir = substream->stream;
++
++	dma_reg_idx = v->get_dma_idx(dai_id);
++	if (dma_reg_idx < 0) {
++		dev_err(component->dev, "invalid DMA register index for DAI %u: %d\n",
++			dai_id, dma_reg_idx);
++		return dma_reg_idx;
++	}
++
++	data = kzalloc(sizeof(*data), GFP_KERNEL);
++	if (!data)
++		return -ENOMEM;
++	runtime->private_data = data;
++
++	mutex_lock(&drvdata->stream_lock);
++	stream_dma_idx = v->alloc_stream_dma_idx(drvdata, dir, dai_id);
++	mutex_unlock(&drvdata->stream_lock);
++	if (stream_dma_idx < 0) {
++		ret = stream_dma_idx;
++		goto err_free_data;
++	}
++
++	data->stream_dma_idx = stream_dma_idx;
++	data->dma_reg_idx = dma_reg_idx;
++
++	if (qaif_is_cif_port(dai_id))
++		WRITE_ONCE(drvdata->cif_substream[stream_dma_idx], substream);
++	else
++		WRITE_ONCE(drvdata->aif_substream[stream_dma_idx], substream);
++
++	snd_soc_set_runtime_hwparams(substream, &qaif_platform_hardware);
++
++	/*
++	 * The DMA buffer/period length registers are programmed in 64-bit
++	 * (8-byte) words, so constrain buffer and period sizes to that step
++	 * to keep the ALSA and hardware sizes identical.
++	 */
++	ret = snd_pcm_hw_constraint_step(runtime, 0,
++					 SNDRV_PCM_HW_PARAM_BUFFER_BYTES,
++					 BIT(QAIF_DMA_BYTES_TO_WORDS_SHIFT));
++	if (ret >= 0)
++		ret = snd_pcm_hw_constraint_step(runtime, 0,
++						 SNDRV_PCM_HW_PARAM_PERIOD_BYTES,
++						 BIT(QAIF_DMA_BYTES_TO_WORDS_SHIFT));
++	if (ret >= 0)
++		ret = snd_pcm_hw_constraint_integer(runtime,
++						    SNDRV_PCM_HW_PARAM_PERIODS);
++	if (ret < 0) {
++		dev_err(soc_runtime->dev, "setting constraints failed: %d\n", ret);
++		if (qaif_is_cif_port(dai_id))
++			WRITE_ONCE(drvdata->cif_substream[stream_dma_idx], NULL);
++		else
++			WRITE_ONCE(drvdata->aif_substream[stream_dma_idx], NULL);
++		mutex_lock(&drvdata->stream_lock);
++		v->free_stream_dma_idx(drvdata, stream_dma_idx, dai_id);
++		mutex_unlock(&drvdata->stream_lock);
++		goto err_free_data;
++	}
++	return 0;
++
++err_free_data:
++	kfree(data);
++	return ret;
++}
++
++static int qaif_platform_pcmops_close(struct snd_soc_component *component,
++				      struct snd_pcm_substream *substream)
++{
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	struct qaif_pcm_data *data = substream->runtime->private_data;
++	unsigned int dai_id = cpu_dai->driver->id;
++
++	if (qaif_is_cif_port(dai_id))
++		WRITE_ONCE(drvdata->cif_substream[data->stream_dma_idx], NULL);
++	else
++		WRITE_ONCE(drvdata->aif_substream[data->stream_dma_idx], NULL);
++
++	mutex_lock(&drvdata->stream_lock);
++	v->free_stream_dma_idx(drvdata, data->stream_dma_idx, dai_id);
++	mutex_unlock(&drvdata->stream_lock);
++
++	substream->runtime->private_data = NULL;
++	kfree(data);
++	return 0;
++}
++
++static int qaif_platform_pcmops_hw_params(struct snd_soc_component *component,
++					  struct snd_pcm_substream *substream,
++					  struct snd_pcm_hw_params *params)
++{
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	struct qaif_pcm_data *data = substream->runtime->private_data;
++	unsigned int dai_id = cpu_dai->driver->id;
++	int idx = data->dma_reg_idx;
++	int ret;
++
++	mutex_lock(&drvdata->stream_lock);
++	ret = qaif_init(component);
++	mutex_unlock(&drvdata->stream_lock);
++	if (ret) {
++		dev_err(soc_runtime->dev, "qaif_init failed: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_update_bits(drvdata->audio_qaif_map,
++				 qaif_dmacfg_reg(v, idx, substream->stream, dai_id),
++				 QAIF_DMACFG_BURST4_BIT | QAIF_DMACFG_SHRAM_WM_MASK,
++				 QAIF_DMACFG_BURST4_BIT | QAIF_DMACTL_WM_5);
++	if (ret)
++		dev_err(soc_runtime->dev, "error updating DMA CFG: %d\n", ret);
++	return ret;
++}
++
++static int qaif_platform_pcmops_hw_free(struct snd_soc_component *component,
++					struct snd_pcm_substream *substream)
++{
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	struct qaif_pcm_data *data = substream->runtime->private_data;
++	unsigned int dai_id = cpu_dai->driver->id;
++	int idx = data->dma_reg_idx;
++	int ret;
++
++	ret = regmap_update_bits(drvdata->audio_qaif_map,
++				 qaif_dmactl_reg(v, idx, substream->stream, dai_id),
++				 QAIF_DMACTL_ENABLE_BIT, 0);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error disabling DMA: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(drvdata->audio_qaif_map,
++			   qaif_dmacfg_reg(v, idx, substream->stream, dai_id), 0);
++	if (ret)
++		dev_err(soc_runtime->dev, "error clearing DMA CFG: %d\n", ret);
++	return ret;
++}
++
++static int qaif_platform_pcmops_prepare(struct snd_soc_component *component,
++					struct snd_pcm_substream *substream)
++{
++	struct snd_pcm_runtime *runtime = substream->runtime;
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	struct regmap *map = drvdata->audio_qaif_map;
++	struct qaif_pcm_data *data = runtime->private_data;
++	unsigned int dai_id = cpu_dai->driver->id;
++	int idx = data->dma_reg_idx;
++	int ret, dir = substream->stream;
++
++	ret = clk_set_rate(drvdata->aud_dma_clk, QAIF_DMA_CLOCK_FREQ);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error setting aud_dma_clk rate: %d\n", ret);
++		return ret;
++	}
++	ret = clk_set_rate(drvdata->aud_dma_mem_clk, QAIF_DMA_CLOCK_FREQ);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error setting aud_dma_mem_clk rate: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(map, qaif_sid_map_reg(dir, dai_id), drvdata->smmu_csid_bits);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error writing to SID MAP reg: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(map, qaif_dmabase_reg(v, idx, dir, dai_id),
++			   lower_32_bits(runtime->dma_addr));
++	if (ret) {
++		dev_err(soc_runtime->dev, "error writing to dma base reg: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(map, qaif_dmabuff_reg(v, idx, dir, dai_id),
++			   (snd_pcm_lib_buffer_bytes(substream) >>
++			    QAIF_DMA_BYTES_TO_WORDS_SHIFT) - 1);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error writing to dma buf reg: %d\n", ret);
++		return ret;
++	}
++
++	ret = regmap_write(map, qaif_dmaper_len_reg(v, idx, dir, dai_id),
++			   (snd_pcm_lib_period_bytes(substream) >>
++			    QAIF_DMA_BYTES_TO_WORDS_SHIFT) - 1);
++	if (ret)
++		dev_err(soc_runtime->dev, "error writing to dma period reg: %d\n", ret);
++	return ret;
++}
++
++static snd_pcm_uframes_t qaif_platform_pcmops_pointer(struct snd_soc_component *component,
++						      struct snd_pcm_substream *substream)
++{
++	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
++	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(soc_runtime, 0);
++	struct qaif_drv_data *drvdata = snd_soc_component_get_drvdata(component);
++	const struct qaif_variant *v = drvdata->variant;
++	struct regmap *map = drvdata->audio_qaif_map;
++	struct qaif_pcm_data *data = substream->runtime->private_data;
++	unsigned int dai_id = cpu_dai->driver->id;
++	unsigned int base_addr, curr_addr;
++	int idx = data->dma_reg_idx;
++	int ret, dir = substream->stream;
++
++	ret = regmap_read(map, qaif_dmabase_reg(v, idx, dir, dai_id), &base_addr);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error reading from rdmabase reg: %d\n", ret);
++		return SNDRV_PCM_POS_XRUN;
++	}
++
++	ret = regmap_read(map, qaif_dmacurr_reg(v, idx, dir, dai_id), &curr_addr);
++	if (ret) {
++		dev_err(soc_runtime->dev, "error reading from rdmacurr reg: %d\n", ret);
++		return SNDRV_PCM_POS_XRUN;
++	}
++
++	return bytes_to_frames(substream->runtime,
++			       (curr_addr - base_addr) %
++			       snd_pcm_lib_buffer_bytes(substream));
++}
++
++static int qaif_platform_pcmops_mmap(struct snd_soc_component *component,
++				     struct snd_pcm_substream *substream,
++				     struct vm_area_struct *vma)
++{
++	struct snd_pcm_runtime *runtime = substream->runtime;
++
++	return dma_mmap_coherent(component->dev, vma,
++				 runtime->dma_area, runtime->dma_addr,
++				 runtime->dma_bytes);
++}
++
++static int qaif_platform_pcm_new(struct snd_soc_component *component,
++				 struct snd_soc_pcm_runtime *rtd)
++{
++	struct snd_pcm *pcm = rtd->pcm;
++
++	return snd_pcm_set_fixed_buffer_all(pcm, SNDRV_DMA_TYPE_DEV,
++					    component->dev,
++					    QAIF_PLATFORM_BUFFER_BYTES_MAX);
++}
 
 -- 
-With best wishes
-Dmitry
+2.34.1
+
