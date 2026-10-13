@@ -1,84 +1,87 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 714744848BC
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28FC6485942
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791870110; cv=none; b=tcJr29knxNoodZrWY9cBJ8aJkAROtexIefaG/ftkaMnC/qn2icEF0638gVDL0uoeX+OrkfSZ9Sz+wfzGgXCZJAt1A2Aq9azGISpcPQqJ+WmYF86Z7UVrvHS1cXcBtrAPDhN7mqjly+5rdpDnWCM1uNlb8raF7jm7asDJnGzMD1Q=
+	t=1791870112; cv=none; b=aZE7O+IoSAgX3mKac0n+ouaBmz+/jHo4i1W4pc1hpExhEbeAW88wGv41UedBBwPA74Fid8EgM5NYqn3UKRKohMypZS6G3CCIM98EBqDjVv1no4iQCXoTAhZ0f5vgJkdTtaduBqtlgwiYIwaayBxVzbXoqfNSX/Win9j2NRk1kik=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791870110; c=relaxed/simple;
-	bh=GmyzzdSR34wcKZ7wk84YNudIPZ2Gqjk5ieu6wm2qqMw=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=mXrrDJVgRkJ9+hYtEmEhBcrjuOP/1CdAb+hoQppWPJ5dje5gRkkZ7PLz7KpfCGvCYqhY7M2xSpG8wZFl8kpRFtRm8T9Yt18S/NxhS0/KfRiCHByh2qcnCn0Ek7Iu3H5StYIO5pRL2Oy0lHeP8SJelHH11qNEJkesRRLJzkSsaC4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gqdYoTgZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MEWtJPO7; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791870112; c=relaxed/simple;
+	bh=NaGwPKL5fWG1Gs/g9B+z4aHOl9q0GOpXbFWLfPNwPuM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=RCA52TYure/z+jETzjEEcCPzD99xTEqB8s8aG3lWSa+h41I09opp4nCaNzjkM2uHo/Ws9ZGotCQg9YgHSBck74udc/+5QI6dlEZ1cZM8Dk3T/KRw3LaLjYuJz9m0HdYSUq0MUtlofuWwG9lgiGUGxfCsszg2jgvYbVlHXOfrFdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Kgs1HNga; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=COVhEmn6; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gqdYoTgZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MEWtJPO7"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D21Mgo3509530
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Kgs1HNga";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="COVhEmn6"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69D216vJ4071943
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=fywdYSI+QwC3MxSFOMdWKg
-	lnBFD0ZX+8NEQ03S4/7tA=; b=gqdYoTgZGf5IjK5iUfVOUexRw3UKrGN6us/1gm
-	IUlMQFYerLX4BtF5n2YMb0M+BsEwQClp+WuY4ZdGO7R0Y5IP3RVhp40sLp9TaZhz
-	LAjwZFPF6d3iXQQo+5QJhXP3EjSm0hfTOeqkB3Ehj4ShFIg9l90tastmJb2XH5rv
-	6IUfqXw2aMg3i1BdCF6pVYT5M0hLNFU1QAizwO5B9ZSTx5muoM9yBDXnQEn4+dN3
-	Sa8+oQQLZatkaJ8cj6SWUBSIImg4JPKhb7z7wLIbuXBNlF8s5rVuJD2De/rNrvJl
-	RXvh+t7XP+1cZXsmbOvDaK0AV+StZe6FcD2CrAM8dJQzmO7A==
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	QhAsvG4R/uLP8ngKuMfxJ7kEdHB3Lqf98dmrr1z6uUI=; b=Kgs1HNgatN5NAoOd
+	+fcEa8Wo/UkPFSI64uG/I0ZGiYU6b735Q4Q4jqDYYNnXV8MVdkZkDpNl5jjvOEDx
+	PzZQfE8mGiSTO/0CewjQCc+HRB8SgLOG9uxqr6y/LLUBCXILUMw0D6tEF/utug34
+	x5yvaAwQl5NNx50OjpJ48o484CiCKI5/MLPciPDjrWJCRViYSiQeFu49onlNU9Yl
+	ES2GwjLDMVrJmP+2k6GhXPlJtMxv7ZkdhoDs91l9Od+lNxg+5jYuAjrxb4ZrsjK0
+	e96Vytjb+12fFHtCS1WFw76WTfu5TWbPO5puSBI7Xpyw6qPSjIBYSCQg8y2d8WfL
+	UNWtYA==
 Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8wbc4fcd-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h92jjtvav-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:47 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3a8af172664so2042125a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 22:41:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 13 Oct 2026 05:41:49 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ab926c236aso1705756a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 12 Oct 2026 22:41:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791870107; x=1792474907; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=fywdYSI+QwC3MxSFOMdWKglnBFD0ZX+8NEQ03S4/7tA=;
-        b=MEWtJPO7fmQmP4ER31RoIoFgcizn2gt7taSFY6bhvrIuIT3Hh555cqM2T6B520t8a3
-         yQhh9OJSazvmKaeq8Uo66WQuX3uBEo03QpozwCjvHYUP8amHU8nWzLf3sOGDWBWQweDt
-         nu17uZiD8NVDuekQm8+WJWVeuOh6sP18v8APM5sn6tf+zY5Np2pQS4Fw4WxuYVGllGyY
-         8n0jc2vbAKYrHMb6BREGgWVBw75q9n7HL9XWJvwWEEx5dmWa6pSc09A+g1/9EPnHNS6N
-         4UxtELlAmId2PJys0E7yry6iJZuZIwcp9cjNZb8rczmlk//f5o2Or7nLQ2Uj+jpfSlc+
-         ySng==
+        d=oss.qualcomm.com; s=google; t=1791870109; x=1792474909; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QhAsvG4R/uLP8ngKuMfxJ7kEdHB3Lqf98dmrr1z6uUI=;
+        b=COVhEmn6kwTPFvwdYdbHAaoKNX2k4iCLoiswNXLV8p3VG5Y0c7qnU+caDZLhxJoOWS
+         UYZcihDX9Cb67AnXcOS6YFbl92qWY5vdttkpLOSgYVRnkddWf3rZ1QIN6Dom9zxzCq4X
+         3EDxXjgI1X5unpHsPS6B7E/k5e/a/H/EEPDmChqXzZKR7mGXqxpZ4eYVKxLkqvQkWATy
+         STVRVEvXG0WLsxZBjgvNBNfmKUuQURPB6UAgs+deP2GEjjMJZ02YNgrBaI9CxCWzYnJn
+         LKTzPV1Q3EAw9bdVar6NuHGC+GrQN5rz3PrqdGRlq6PDWel7EwvyEHPNsGA/aybkTfcz
+         IPtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791870107; x=1792474907;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=fywdYSI+QwC3MxSFOMdWKglnBFD0ZX+8NEQ03S4/7tA=;
-        b=IKnOdX4t4Cg+4xXPh/yzx9viUL/VKy5PSlyBpVd1FHeTy3tp3cSnf78imgdMKaTTdd
-         B8o8kioCDSTJfwS4FtwK4OFrmpJdk0Q+1sDajtSqQ+pw6WulKrid+i+h2beWYIM+E4e2
-         VSe74p7u3MYHeoHzUes6f+lORVlbDmCTEczpurzKvhnRYkbIHu5v2m3SsEA7GXP0w5rb
-         qimJQdieNjeP71zBaI8wD8mxRetjx0md/2X+3aU3Tn48+yzDOeIWv3lq7OlthF/ptwWE
-         a0Xs49bjxFROndSw70Yv4xTvEVzzuBx5krIHCpCE7Evt1i8z/f0Hs+v77b4xaurOZz63
-         uLZA==
-X-Gm-Message-State: AFq9FYI6Q+gW78SwbLNaGB/BXtWBQUSLYT2sMymeeiIlEJmgws/lwFkw
-	fPFdZXmft7OVWRAtfgcq3wDGuctIRhakid2OvYxKdSxPE0l0F2AsINed02NIgCivlNisYUm85IM
-	1oLviDzZ4ktRPm4eqdWBgbGWaKy9SxOFbuui2UcpmJnQDaDX80ICKXGD9ToTAnPvguuE=
-X-Gm-Gg: AYBFou1l0o/gdQ2cQ2nSJ0FVaZ7TBWt9pkexGc7Q9OGG0mdIKkpMsgRWL0vd67nylrt
-	XcWAeCMistA69827ifSKXNXTcx5cy8cckK+kciI6f1+zd1ntz3ZnCDtRtdxmUdhnkeVxh5YZOUG
-	S4PgREsB06bSpDOf7/IGh8Ml5FVgV4YGlfAJgOExLIOhRb2FECss1sWbn0rzUBt/NewE5yb3efC
-	SskiVUSyKeeKDKgEZNYfu+pvuyZ0mntVwth9SXjs4E6O7xw8jUv8iv4ah8ZPr4BBOhDGQPcuiNt
-	fOszrfZgrfnQCSW8cue/OsOK+IgJf+Vimn0Bm43Sz93E3eA1ZjS5OQ8ikt69KEH+s2dFwYBzXe/
-	2bwwkwYhAf4cGwGlxoOZY3PVioW+6uV4lPvMKTCZIHCws8aQf04mglRuIgA==
-X-Received: by 2002:a17:90b:28ce:b0:3a4:85c4:68fc with SMTP id 98e67ed59e1d1-3ab3a79df67mr9708200a91.29.1791870106706;
-        Mon, 12 Oct 2026 22:41:46 -0700 (PDT)
-X-Received: by 2002:a17:90b:28ce:b0:3a4:85c4:68fc with SMTP id 98e67ed59e1d1-3ab3a79df67mr9708173a91.29.1791870106161;
-        Mon, 12 Oct 2026 22:41:46 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791870109; x=1792474909;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QhAsvG4R/uLP8ngKuMfxJ7kEdHB3Lqf98dmrr1z6uUI=;
+        b=lBOfNDwjM7LnCbe5S3aSk89E8T7uUtATkL+boLhADcE6OsVw3mHMpVUa24g7v3Cvcj
+         oMQb+Yf0mJFnBY7q+2NsFXuhkNlZWqRSzD820mpK2t1gAd9UmRliOX4+ZXx4anEFlku9
+         9Qv1SbKolFedpdjJ67rBW5p0zZb8tlXLduMPBPtrZaWS3nf84tMnfOmLO2jK2/qGNB0p
+         LptHKA/3lJPn3AQZJJ+RElkgU03YfIa001LfDlfyW+0YvXezBzYpcLF6OqK6FxGkYBzI
+         6ZS36wvnBcFKlYQM7yzU+wlvQjT5bZix1ehBxiuz0D248yWiNoCDXF2/dy/YO+/uS/a4
+         ghKg==
+X-Gm-Message-State: AFq9FYLVLodI4RgBD/efIAk+16qeeCcL/cytO6XwVZ5O79+n56QHgptJ
+	zAuJ+QVsUF2+R39vuzMTFe93KN71y8HLkRvW3EwHgHl5Nwf6wu018VgGsYN1LH8owGRtIfMlYOG
+	r2rDqLf0xVHuNiuUdgmWSBxh9wAKfa4SjEFdKrJNKIr2UoOJblLtHE3Atf4qZ+RDv5tE=
+X-Gm-Gg: AYBFou0Oj6RrwLxPPI0G0wAkAuLuAx1T1eLSZtAOmQou+mVC2JGphdLYbhegwNcQLmq
+	8BpOKgo6MPAO7fjmo4ddQqNvvtpZbzJ8e8U/0GNEOlkhtOfNEzPAM2iTxsCYPJGdqNFWqhrItSC
+	++iffbamUsmgpDC3EA3njz8qtLd4KA9SrYoMnVc2MTcCx51mgon6JWB4FwoVQWBpJZai+UqlMbW
+	CYqMvegB4Wr/S1OFSH+Mdzayn04ymdoXZG+0VQh6fXH0AvK68iD77XOkUpZ0K4ZPtH1eqyiVOx8
+	mKiuiNYFfl3q5wFmQDQ1YUNndwZfgwCs1fsAHux873MmOlaXclw7CCzsjN6cPe58Nqpqk+HA4MY
+	CRZ/oi6HiZWGqqwj7ChLIU1wthmDlkeZQ/OgU0JZgkf6sPEW2BrnZO/1n4w==
+X-Received: by 2002:a17:90b:5346:b0:3ab:1a24:56e3 with SMTP id 98e67ed59e1d1-3ab3ac9dea0mr8535588a91.25.1791870108385;
+        Mon, 12 Oct 2026 22:41:48 -0700 (PDT)
+X-Received: by 2002:a17:90b:5346:b0:3ab:1a24:56e3 with SMTP id 98e67ed59e1d1-3ab3ac9dea0mr8535570a91.25.1791870107775;
+        Mon, 12 Oct 2026 22:41:47 -0700 (PDT)
 Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38f4863esm22926361a91.11.2026.10.12.22.41.42
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab38f4863esm22926361a91.11.2026.10.12.22.41.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 22:41:44 -0700 (PDT)
+        Mon, 12 Oct 2026 22:41:47 -0700 (PDT)
 From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Subject: [PATCH RFC v3 0/9] tee: optee: add RPMI backend support on RISC-V
-Date: Mon, 12 Oct 2026 22:41:27 -0700
-Message-Id: <20261012-rpmi-tee-service-grp-dev-v3-0-975b574667e2@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 22:41:28 -0700
+Subject: [PATCH RFC v3 1/9] tee: optee: share the global shared-memory ID
+ mapping
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,10 +90,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIfEzWoC/4XNwQrCMAwG4FeRns1oUzadJ0HwAbyKh9mmW8Gts
- 51FGXt3Sw+eRC+BP+H/MrNA3lJgu9XMPEUbrBtSkOsVU10ztARWp8yQY8VrgeDH3sJEBKkYrSJ
- o/QiaIlxREZpKEteGpfroydhnps/sdDywS1p2NkzOv/K7KPLpvxwFcBBaaFkqbLZlvXchFPdHc
- 1Ou74s0sh3x4wnOyx8eJm+DBhEJJSnxxVuW5Q12Ove/HAEAAA==
+Message-Id: <20261012-rpmi-tee-service-grp-dev-v3-1-975b574667e2@oss.qualcomm.com>
+References: <20261012-rpmi-tee-service-grp-dev-v3-0-975b574667e2@oss.qualcomm.com>
+In-Reply-To: <20261012-rpmi-tee-service-grp-dev-v3-0-975b574667e2@oss.qualcomm.com>
 To: Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
         Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
         Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
@@ -104,141 +106,514 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         devicetree@vger.kernel.org,
         Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 X-Mailer: b4 0.13.0
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyMiBTYWx0ZWRfX5/dRAhsX8Iw9
- sFPBZ3WMJANdmMde63kbqfGOp8x7SINW7hMLioRjaxAHkDA/v1Pa+zCsWAyJk9XXvk3qT3t7U0E
- SH6V3Sd6iWAQLKz//A9k2vcBm5AccaA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyMiBTYWx0ZWRfX3hlU1v7y2ben
- fZ5EZ978CacZbW6yFF7Ia7je7QPILs0IQ94l/86b6NGdeauI5n8PHz32a95OX/toSV89TFG0VZI
- I2paxEGOx/7HYlN8zO8cVyd+jIeEJ7RNzEI0yGOWT33Ov0lK2q/NxKtRehiVT0x7HPYQAG5kqjt
- z7EyRn6VekClEB3dBZr6x41eebpJFrZkuRjT5CAxtorQjjzJrGtYzNJmhgNiJ2Ay1fA23A7cVsS
- a5s2+6bAX/8RlCYIKLY6ez2dhCo4A6LZ/oGsvHayGMmi/KGL3Osxq+2ofg+gR0hKF/Jb6hI3ULh
- 3jj/tOSCXkaXN3USRsk1DEmZqv/odmufZQbHPJw2KYRrVapolVYjLlBZ+dNNPBBNal+vHWdWbwy
- xM0nQlH9U0/S4+XYYW+NzG1nf5FE8D4ZTlIFc55Ry7mY/STtqx/pOlTTmH2USw13KGP6DIv0QS6
- w1Vs9bUONCcHhiHMCXQ==
-X-Authority-Analysis: v=2.4 cv=C4p8WgP+ c=1 sm=1 tr=0 ts=6acdc49b cx=c_pps
+X-Proofpoint-GUID: 7k-Jtq5X3s-4BVaQCbjVgdVxGXXYpWZV
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyMiBTYWx0ZWRfX/UZca6ITkt62
+ AhYPqH4e0pJXGnZXRZAiVLlPATdd2VnuFHHktKZ8g0dcmu6AWkK7UHDDIUaZryWgPb8zdtix2MH
+ mFEvmXAOeJqPJwAdwlH2wE+0tAnJuYY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyMiBTYWx0ZWRfX4+cNQlh0u7M/
+ aT7PWjV9lZaTL2vAZ0KRDifBaYjrqka3a/FhtGVv9ONnfuIZU+2g6R2lPbH/1RI0WIM7NMslJ7E
+ Qv00e1qUfjlFeh/edIjF+WxfYfEzeGqPUqZEpoCO+WKTTv01zzkKWWrLxzIrTne51CQxw0r436X
+ OvtkIH23tPhxT9y7+ah1ymx8O+oN/oDsUFuxAZk5gB+soN2FA0X1PA7wSkkqbhFhBJxDVKBbCEe
+ nW2psIP4NWyg2muiiCzVHkHQ2tN/84vNbC/nML0cKtuZ/s5Uf/FuNC/0/+54Yc5nCXZEqOMhb92
+ LSnsPpjDxPfa3osSK/BYfJ/2CGELj93bpCbh0MX/Zr/IziGXy9QhSdEhE4xOnK7Duqp2isifW+N
+ 1oIOi9Pio6mtG272qIx+RDNFl/jXBBWYPgp11cr0QzcmDcdhYKDe7+gcyaE/XOFAqShKWxZL3C8
+ GRt5c0ayWlruisyBIZQ==
+X-Authority-Analysis: v=2.4 cv=GfKCDgXL c=1 sm=1 tr=0 ts=6acdc49d cx=c_pps
  a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=CKDX5oWuAds2uq8u-J8A:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=Hmcm6iJ0OgSZlEai1VoA:9 a=QEXdDO2ut3YA:10
  a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-ORIG-GUID: wkUQI0YXRK5W4fkveOULvE5q0FyS9JCZ
-X-Proofpoint-GUID: wkUQI0YXRK5W4fkveOULvE5q0FyS9JCZ
+X-Proofpoint-ORIG-GUID: 7k-Jtq5X3s-4BVaQCbjVgdVxGXXYpWZV
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0 adultscore=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ clxscore=1015 lowpriorityscore=0 malwarescore=0 bulkscore=0 impostorscore=0
+ spamscore=0 adultscore=0 suspectscore=0 priorityscore=1501 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130022
 
-This series adds an RPMI backend to the OP-TEE driver for RISC-V.
-It builds on the separately posted RPMI TEE transport series [1],
-which provides service discovery, synchronous calls, memory parcels
-and asynchronous signals.
+The FF-A backend maintains a hash table translating secure-world memory
+handles to TEE shared-memory objects. This bookkeeping does not depend
+on FF-A and is also needed by the RPMI backend.
 
-This revision is effectively a full rewrite of the original RFC.
-The generic RPMI transport has been separated from the OP-TEE backend,
-and the backend has been reworked around the service bus and a new
-OP-TEE control ABI.
+Move the mapping and its locking into common helpers and convert the
+FF-A backend to use them.
 
-Unlike v1, the OP-TEE backend no longer manages SBI MPXY mailbox
-channels or implements RPMI TEE service-group operations directly.
-It binds to the OP-TEE service UUID on the RPMI TEE bus and uses the
-transport's public operations. No additional OP-TEE device-tree node
-is required.
-
-The backend reuses the common OP-TEE session, shared-memory, argument
-cache, call queue and RPC infrastructure. Shared memory is represented
-by RPMI parcel IDs and nonces. Yielding calls pass command and RPC
-buffer ranges within a parcel and resume suspended execution using
-an opaque token returned by OP-TEE.
-
-The OP-TEE control ABI uses fixed-width little-endian messages carried
-in TEE_CALL payloads rather than reproducing FF-A's register-based
-message layout. Asynchronous notifications use an allocated TEE-to-REE
-signal as a bottom-half doorbell, while ordinary logical notifications
-continue through the common RPC path.
-
-Matching OP-TEE OS support has been implemented locally. OpenSBI
-integration and end-to-end validation remain pending. This remains an
-RFC for review of the backend integration and Linux-to-OP-TEE protocol.
-
-This series depends on:
-
-- The RPMI TEE transport series [1].
-- The OP-TEE notification bitmap fix, which allocates space for the
-  inclusive maximum notification key [2].
-
-[1] https://lore.kernel.org/op-tee/20261007-riscv-rpmi-tee-abi-v2-0-45939a13d223@oss.qualcomm.com/
-[2] https://lore.kernel.org/op-tee/20261009-fix-tee-max-keys-v1-1-1462d96bf438@oss.qualcomm.com/
+This prepares the OP-TEE driver for RPMI transport support on RISC-V.
 
 Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 ---
-Changes in v3:
-- Use GlobalPlatform TEE result codes for OP-TEE control responses,
-  keeping them separate from RPMI transport errors.
-- Combine the parcel ID and nonce into a single 64-bit global_id.
-- Make resume tokens opaque 32-bit values and track initial versus
-  resumed calls separately.
-- Remove unnecessary __packed annotations from the OP-TEE ABI structures.
-- Share the global-ID-to-SHM mapping implementation between the FF-A
-  and RPMI backends.
-- Replace the fixed SHM nonce with a per-instance IDA allocator; reuse
-  nonces after successful reclamation.
-- Report the maximum notification key instead of a notification count,
-  and use the negotiated maximum during initialization.
-- Consume capability-exchange results during probe.
-- Remove cleanup macros and use explicit resource-management paths.
-- Use rc consistently for Linux error returns.
-- Replace unnecessary unaligned accesses with endian conversions for
-  naturally aligned ABI fields.
-- Link to v2: https://lore.kernel.org/r/20261005-rpmi-tee-service-grp-dev-v2-0-72f222e23ec1@oss.qualcomm.com
+ drivers/tee/optee/Makefile         |   1 +
+ drivers/tee/optee/ffa_abi.c        | 133 +++++++----------------------------
+ drivers/tee/optee/optee_private.h  |  30 ++++++--
+ drivers/tee/optee/shm_handle_map.c | 138 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 188 insertions(+), 114 deletions(-)
 
-Changes in v2:
-- Effectively rewrite the backend around the separately posted RPMI
-  TEE transport and a new OP-TEE control ABI.
-- Remove backend-owned per-hart mailbox channels and the OP-TEE-specific
-  device-tree binding.
-- Replace the register-like control payload with fixed-width messages,
-  explicit command/RPC buffer ranges and opaque resume tokens.
-- Add a parcel-reference parameter layout carrying the parcel ID,
-  nonce, and 64-bit offset and size without changing parameter size.
-- Make argument-offset support part of the baseline ABI and retain
-  the common shared argument cache.
-- Use a transport-allocated signal for asynchronous bottom-half
-  notifications.
-- Link to v1: https://lore.kernel.org/r/20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com
+diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+index 183cdde1ac04..ec2efc27ef05 100644
+--- a/drivers/tee/optee/Makefile
++++ b/drivers/tee/optee/Makefile
+@@ -7,6 +7,7 @@ optee-objs += rpc.o
+ optee-objs += protmem.o
+ optee-objs += supp.o
+ optee-objs += device.o
++optee-objs += shm_handle_map.o
+ optee-$(CONFIG_HAVE_ARM_SMCCC) += smc_abi.o
+ optee-$(CONFIG_ARM_FFA_TRANSPORT) += ffa_abi.o
+ 
+diff --git a/drivers/tee/optee/ffa_abi.c b/drivers/tee/optee/ffa_abi.c
+index 702da7d98fbc..5a926353c653 100644
+--- a/drivers/tee/optee/ffa_abi.c
++++ b/drivers/tee/optee/ffa_abi.c
+@@ -22,100 +22,15 @@
+  * This file implement the FF-A ABI used when communicating with secure world
+  * OP-TEE OS via FF-A.
+  * This file is divided into the following sections:
+- * 1. Maintain a hash table for lookup of a global FF-A memory handle
+- * 2. Convert between struct tee_param and struct optee_msg_param
+- * 3. Low level support functions to register shared memory in secure world
+- * 4. Dynamic shared memory pool based on alloc_pages()
+- * 5. Do a normal scheduled call into secure world
+- * 6. Driver initialization.
++ * 1. Convert between struct tee_param and struct optee_msg_param
++ * 2. Low level support functions to register shared memory in secure world
++ * 3. Dynamic shared memory pool based on alloc_pages()
++ * 4. Do a normal scheduled call into secure world
++ * 5. Driver initialization.
+  */
+ 
+ /*
+- * 1. Maintain a hash table for lookup of a global FF-A memory handle
+- *
+- * FF-A assigns a global memory handle for each piece shared memory.
+- * This handle is then used when communicating with secure world.
+- *
+- * Main functions are optee_shm_add_ffa_handle() and optee_shm_rem_ffa_handle()
+- */
+-struct shm_rhash {
+-	struct tee_shm *shm;
+-	u64 global_id;
+-	struct rhash_head linkage;
+-};
+-
+-static void rh_free_fn(void *ptr, void *arg)
+-{
+-	kfree(ptr);
+-}
+-
+-static const struct rhashtable_params shm_rhash_params = {
+-	.head_offset = offsetof(struct shm_rhash, linkage),
+-	.key_len     = sizeof(u64),
+-	.key_offset  = offsetof(struct shm_rhash, global_id),
+-	.automatic_shrinking = true,
+-};
+-
+-static struct tee_shm *optee_shm_from_ffa_handle(struct optee *optee,
+-						 u64 global_id)
+-{
+-	struct tee_shm *shm = NULL;
+-	struct shm_rhash *r;
+-
+-	mutex_lock(&optee->ffa.mutex);
+-	r = rhashtable_lookup_fast(&optee->ffa.global_ids, &global_id,
+-				   shm_rhash_params);
+-	if (r)
+-		shm = r->shm;
+-	mutex_unlock(&optee->ffa.mutex);
+-
+-	return shm;
+-}
+-
+-static int optee_shm_add_ffa_handle(struct optee *optee, struct tee_shm *shm,
+-				    u64 global_id)
+-{
+-	struct shm_rhash *r;
+-	int rc;
+-
+-	r = kmalloc_obj(*r);
+-	if (!r)
+-		return -ENOMEM;
+-	r->shm = shm;
+-	r->global_id = global_id;
+-
+-	mutex_lock(&optee->ffa.mutex);
+-	rc = rhashtable_lookup_insert_fast(&optee->ffa.global_ids, &r->linkage,
+-					   shm_rhash_params);
+-	mutex_unlock(&optee->ffa.mutex);
+-
+-	if (rc)
+-		kfree(r);
+-
+-	return rc;
+-}
+-
+-static int optee_shm_rem_ffa_handle(struct optee *optee, u64 global_id)
+-{
+-	struct shm_rhash *r;
+-	int rc = -ENOENT;
+-
+-	mutex_lock(&optee->ffa.mutex);
+-	r = rhashtable_lookup_fast(&optee->ffa.global_ids, &global_id,
+-				   shm_rhash_params);
+-	if (r)
+-		rc = rhashtable_remove_fast(&optee->ffa.global_ids,
+-					    &r->linkage, shm_rhash_params);
+-	mutex_unlock(&optee->ffa.mutex);
+-
+-	if (!rc)
+-		kfree(r);
+-
+-	return rc;
+-}
+-
+-/*
+- * 2. Convert between struct tee_param and struct optee_msg_param
++ * 1. Convert between struct tee_param and struct optee_msg_param
+  *
+  * optee_ffa_from_msg_param() and optee_ffa_to_msg_param() are the main
+  * functions.
+@@ -133,7 +48,8 @@ static void from_msg_param_ffa_mem(struct optee *optee, struct tee_param *p,
+ 	p->u.memref.size = mp->u.fmem.size;
+ 
+ 	if (mp->u.fmem.global_id != OPTEE_MSG_FMEM_INVALID_GLOBAL_ID)
+-		shm = optee_shm_from_ffa_handle(optee, mp->u.fmem.global_id);
++		shm = optee_shm_handle_map_lookup(&optee->ffa.shm_map,
++						  mp->u.fmem.global_id);
+ 	p->u.memref.shm = shm;
+ 
+ 	if (shm) {
+@@ -262,7 +178,7 @@ static int optee_ffa_to_msg_param(struct optee *optee,
+ }
+ 
+ /*
+- * 3. Low level support functions to register shared memory in secure world
++ * 2. Low level support functions to register shared memory in secure world
+  *
+  * Functions to register and unregister shared memory both for normal
+  * clients and for tee-supplicant.
+@@ -313,7 +229,7 @@ static int optee_ffa_shm_register(struct tee_context *ctx, struct tee_shm *shm,
+ 	if (rc)
+ 		return rc;
+ 
+-	rc = optee_shm_add_ffa_handle(optee, shm, args.g_handle);
++	rc = optee_shm_handle_map_add(&optee->ffa.shm_map, shm, args.g_handle);
+ 	if (rc) {
+ 		mem_ops->memory_reclaim(args.g_handle, 0);
+ 		return rc;
+@@ -339,7 +255,7 @@ static int optee_ffa_shm_unregister(struct tee_context *ctx,
+ 	};
+ 	int rc;
+ 
+-	optee_shm_rem_ffa_handle(optee, global_handle);
++	optee_shm_handle_map_remove(&optee->ffa.shm_map, global_handle);
+ 	shm->sec_world_id = 0;
+ 
+ 	rc = msg_ops->sync_send_receive(ffa_dev, &data);
+@@ -367,7 +283,7 @@ static int optee_ffa_shm_unregister_supp(struct tee_context *ctx,
+ 	 * this ID.
+ 	 */
+ 
+-	optee_shm_rem_ffa_handle(optee, global_handle);
++	optee_shm_handle_map_remove(&optee->ffa.shm_map, global_handle);
+ 	mem_ops = optee->ffa.ffa_dev->ops->mem_ops;
+ 	rc = mem_ops->memory_reclaim(global_handle, 0);
+ 	if (rc)
+@@ -379,7 +295,7 @@ static int optee_ffa_shm_unregister_supp(struct tee_context *ctx,
+ }
+ 
+ /*
+- * 4. Dynamic shared memory pool based on alloc_pages()
++ * 3. Dynamic shared memory pool based on alloc_pages()
+  *
+  * Implements an OP-TEE specific shared memory pool.
+  * The main function is optee_ffa_shm_pool_alloc_pages().
+@@ -428,7 +344,7 @@ static struct tee_shm_pool *optee_ffa_shm_pool_alloc_pages(void)
+ }
+ 
+ /*
+- * 5. Do a normal scheduled call into secure world
++ * 4. Do a normal scheduled call into secure world
+  *
+  * The function optee_ffa_do_call_with_arg() performs a normal scheduled
+  * call into secure world. During this call may normal world request help
+@@ -488,7 +404,8 @@ static void handle_ffa_rpc_func_cmd_shm_free(struct tee_context *ctx,
+ 	    arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_INPUT)
+ 		goto err_bad_param;
+ 
+-	shm = optee_shm_from_ffa_handle(optee, arg->params[0].u.value.b);
++	shm = optee_shm_handle_map_lookup(&optee->ffa.shm_map,
++					  arg->params[0].u.value.b);
+ 	if (!shm)
+ 		goto err_bad_param;
+ 	switch (arg->params[0].u.value.a) {
+@@ -736,7 +653,8 @@ static int optee_ffa_lend_protmem(struct optee *optee, struct tee_shm *protmem,
+ 	if (rc)
+ 		goto err_reclaim;
+ 
+-	rc = optee_shm_add_ffa_handle(optee, protmem, args.g_handle);
++	rc = optee_shm_handle_map_add(&optee->ffa.shm_map, protmem,
++				      args.g_handle);
+ 	if (rc)
+ 		goto err_unreg;
+ 
+@@ -770,7 +688,7 @@ static int optee_ffa_reclaim_protmem(struct optee *optee,
+ 	};
+ 	int rc;
+ 
+-	optee_shm_rem_ffa_handle(optee, global_handle);
++	optee_shm_handle_map_remove(&optee->ffa.shm_map, global_handle);
+ 	protmem->sec_world_id = 0;
+ 
+ 	rc = msg_ops->sync_send_receive(ffa_dev, &data);
+@@ -785,9 +703,9 @@ static int optee_ffa_reclaim_protmem(struct optee *optee,
+ }
+ 
+ /*
+- * 6. Driver initialization
++ * 5. Driver initialization
+  *
+- * During driver inititialization is the OP-TEE Secure Partition is probed
++ * During driver initialization is the OP-TEE Secure Partition is probed
+  * to find out which features it supports so the driver can be initialized
+  * with a matching configuration.
+  */
+@@ -991,8 +909,7 @@ static void optee_ffa_remove(struct ffa_device *ffa_dev)
+ 	}
+ 	optee_remove_common(optee);
+ 
+-	mutex_destroy(&optee->ffa.mutex);
+-	rhashtable_free_and_destroy(&optee->ffa.global_ids, rh_free_fn, NULL);
++	optee_shm_handle_map_uninit(&optee->ffa.shm_map);
+ 
+ 	kfree(optee);
+ }
+@@ -1137,10 +1054,9 @@ static int optee_ffa_probe(struct ffa_device *ffa_dev)
+ 
+ 	optee_set_dev_group(optee);
+ 
+-	rc = rhashtable_init(&optee->ffa.global_ids, &shm_rhash_params);
++	rc = optee_shm_handle_map_init(&optee->ffa.shm_map);
+ 	if (rc)
+ 		goto err_unreg_supp_teedev;
+-	mutex_init(&optee->ffa.mutex);
+ 	optee_cq_init(&optee->call_queue, 0);
+ 	optee_supp_init(&optee->supp);
+ 	optee_shm_arg_cache_init(optee, arg_cache_flags);
+@@ -1193,12 +1109,11 @@ static int optee_ffa_probe(struct ffa_device *ffa_dev)
+ err_close_ctx:
+ 	teedev_close_context(ctx);
+ err_rhashtable_free:
+-	rhashtable_free_and_destroy(&optee->ffa.global_ids, rh_free_fn, NULL);
++	optee_shm_handle_map_uninit(&optee->ffa.shm_map);
+ 	rpmb_dev_put(optee->rpmb_dev);
+ 	mutex_destroy(&optee->rpmb_dev_mutex);
+ 	optee_supp_uninit(&optee->supp);
+ 	mutex_destroy(&optee->call_queue.mutex);
+-	mutex_destroy(&optee->ffa.mutex);
+ err_unreg_supp_teedev:
+ 	tee_device_unregister(optee->supp_teedev);
+ err_unreg_teedev:
+diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+index 02d6f79df407..92428945ee33 100644
+--- a/drivers/tee/optee/optee_private.h
++++ b/drivers/tee/optee/optee_private.h
+@@ -157,6 +157,29 @@ struct optee_smc {
+ };
+ #endif
+ 
++/**
++ * struct optee_shm_handle_map - Shared-memory lookup by secure-world identity
++ * @mutex: Serializes lookup, insertion and removal
++ * @rht: Maps opaque 64-bit identities to shared-memory objects
++ *
++ * Owners keep SHM objects alive while their registrations are in use.
++ * Never hold @mutex across transport calls, RPC or thread-availability waits.
++ */
++struct optee_shm_handle_map {
++	/* Protects lookup, insertion and removal. */
++	struct mutex mutex;
++	struct rhashtable rht;
++};
++
++int optee_shm_handle_map_init(struct optee_shm_handle_map *map);
++void optee_shm_handle_map_uninit(struct optee_shm_handle_map *map);
++int optee_shm_handle_map_add(struct optee_shm_handle_map *map,
++			     struct tee_shm *shm, u64 global_id);
++int optee_shm_handle_map_remove(struct optee_shm_handle_map *map,
++				u64 global_id);
++struct tee_shm *
++optee_shm_handle_map_lookup(struct optee_shm_handle_map *map, u64 global_id);
++
+ #if IS_REACHABLE(CONFIG_ARM_FFA_TRANSPORT)
+ /**
+  * struct optee_ffa -  FFA communication struct
+@@ -164,17 +187,14 @@ struct optee_smc {
+  *			OP-TEE in secure world
+  * @bottom_half_value:	notification ID used for bottom half signalling or
+  *			U32_MAX if unused
+- * @mutex:		serializes access to @global_ids
+- * @global_ids:		FF-A shared memory global handle translation
++ * @shm_map:		FF-A shared memory global handle translation
+  * @notif_wq:		workqueue for FF-A asynchronous notification
+  * @notif_work:		work for FF-A asynchronous notification
+  */
+ struct optee_ffa {
+ 	struct ffa_device *ffa_dev;
+ 	u32 bottom_half_value;
+-	/* Serializes access to @global_ids */
+-	struct mutex mutex;
+-	struct rhashtable global_ids;
++	struct optee_shm_handle_map shm_map;
+ 	struct workqueue_struct *notif_wq;
+ 	struct work_struct notif_work;
+ };
+diff --git a/drivers/tee/optee/shm_handle_map.c b/drivers/tee/optee/shm_handle_map.c
+new file mode 100644
+index 000000000000..54324c9c3644
+--- /dev/null
++++ b/drivers/tee/optee/shm_handle_map.c
+@@ -0,0 +1,138 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2021, 2023 Linaro Limited
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <linux/errno.h>
++#include <linux/slab.h>
++#include "optee_private.h"
++
++struct optee_shm_handle_map_entry {
++	struct tee_shm *shm;
++	u64 global_id;
++	struct rhash_head node;
++};
++
++static const struct rhashtable_params shm_handle_map_params = {
++	.head_offset = offsetof(struct optee_shm_handle_map_entry, node),
++	.key_offset = offsetof(struct optee_shm_handle_map_entry, global_id),
++	.key_len = sizeof(u64),
++	.automatic_shrinking = true,
++};
++
++static void shm_handle_map_free(void *ptr, void *arg)
++{
++	kfree(ptr);
++}
++
++/**
++ * optee_shm_handle_map_init() - Initialize a shared-memory identity map
++ * @map: Map to initialize
++ *
++ * Return: 0 on success or a negative error.
++ */
++int optee_shm_handle_map_init(struct optee_shm_handle_map *map)
++{
++	int rc;
++
++	mutex_init(&map->mutex);
++	rc = rhashtable_init(&map->rht, &shm_handle_map_params);
++	if (rc)
++		mutex_destroy(&map->mutex);
++
++	return rc;
++}
++
++/**
++ * optee_shm_handle_map_uninit() - Free a shared-memory identity map
++ * @map: Initialized map with no concurrent users
++ *
++ * Free tracking entries, not SHM objects or their secure-world registrations.
++ */
++void optee_shm_handle_map_uninit(struct optee_shm_handle_map *map)
++{
++	rhashtable_free_and_destroy(&map->rht, shm_handle_map_free, NULL);
++	mutex_destroy(&map->mutex);
++}
++
++/**
++ * optee_shm_handle_map_add() - Track a registered shared-memory object
++ * @map: Initialized map
++ * @shm: Shared-memory object kept alive by its owner
++ * @global_id: Opaque secure-world identity
++ *
++ * Return: 0 on success or a negative error.
++ */
++int optee_shm_handle_map_add(struct optee_shm_handle_map *map,
++			     struct tee_shm *shm, u64 global_id)
++{
++	struct optee_shm_handle_map_entry *entry;
++	int rc;
++
++	entry = kmalloc_obj(*entry);
++	if (!entry)
++		return -ENOMEM;
++
++	entry->shm = shm;
++	entry->global_id = global_id;
++
++	mutex_lock(&map->mutex);
++	rc = rhashtable_lookup_insert_fast(&map->rht, &entry->node,
++					   shm_handle_map_params);
++	mutex_unlock(&map->mutex);
++	if (rc)
++		kfree(entry);
++
++	return rc;
++}
++
++/**
++ * optee_shm_handle_map_remove() - Remove a shared-memory tracking entry
++ * @map: Initialized map
++ * @global_id: Opaque secure-world identity
++ *
++ * Return: 0 on success, -ENOENT if absent, or a negative removal error.
++ */
++int optee_shm_handle_map_remove(struct optee_shm_handle_map *map, u64 global_id)
++{
++	struct optee_shm_handle_map_entry *entry;
++	int rc = -ENOENT;
++
++	mutex_lock(&map->mutex);
++	entry = rhashtable_lookup_fast(&map->rht, &global_id,
++				       shm_handle_map_params);
++	if (entry)
++		rc = rhashtable_remove_fast(&map->rht, &entry->node,
++					    shm_handle_map_params);
++	mutex_unlock(&map->mutex);
++	if (!rc)
++		kfree(entry);
++
++	return rc;
++}
++
++/**
++ * optee_shm_handle_map_lookup() - Look up a registered shared-memory object
++ * @map: Initialized map
++ * @global_id: Opaque secure-world identity
++ *
++ * The caller must keep the SHM object alive; no reference is acquired here.
++ *
++ * Return: The shared-memory object or NULL if the identity is absent.
++ */
++struct tee_shm *
++optee_shm_handle_map_lookup(struct optee_shm_handle_map *map, u64 global_id)
++{
++	struct optee_shm_handle_map_entry *entry;
++	struct tee_shm *shm = NULL;
++
++	mutex_lock(&map->mutex);
++	entry = rhashtable_lookup_fast(&map->rht, &global_id,
++				       shm_handle_map_params);
++	if (entry)
++		shm = entry->shm;
++	mutex_unlock(&map->mutex);
++
++	return shm;
++}
 
----
-Amirreza Zarrabi (9):
-      tee: optee: share the global shared-memory ID mapping
-      tee: optee: allow RPMI transport builds on RISC-V
-      tee: optee: define the RPMI control and parcel-reference ABI
-      tee: optee: add RPMI shared-memory and parameter support
-      tee: optee: add RPMI dynamic shared-memory pool
-      tee: optee: add RPMI RPC handling
-      tee: optee: execute yielding RPMI calls
-      tee: optee: bind RPMI services and negotiate backend capabilities
-      tee: optee: support RPMI asynchronous notification doorbells
-
- drivers/tee/Kconfig                |   3 +-
- drivers/tee/optee/Kconfig          |   3 +-
- drivers/tee/optee/Makefile         |   2 +
- drivers/tee/optee/call.c           |   2 +
- drivers/tee/optee/core.c           |  10 +-
- drivers/tee/optee/ffa_abi.c        | 133 +----
- drivers/tee/optee/optee_msg.h      |  23 +-
- drivers/tee/optee/optee_private.h  |  73 ++-
- drivers/tee/optee/optee_rpmi.h     | 263 ++++++++++
- drivers/tee/optee/rpmi_abi.c       | 972 +++++++++++++++++++++++++++++++++++++
- drivers/tee/optee/shm_handle_map.c | 138 ++++++
- 11 files changed, 1498 insertions(+), 124 deletions(-)
----
-base-commit: bf1ee2bd5c2da8992f33c8950ef194aaff74ed6c
-change-id: 20260912-rpmi-tee-service-grp-dev-b2ce2f63e0df
-
-Best regards,
 -- 
-Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+2.34.1
 
