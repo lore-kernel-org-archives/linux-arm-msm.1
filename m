@@ -1,267 +1,204 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B58DA513550
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:19:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791983961; cv=pass; b=sFXdfrA9WttIHK/OfqatmmdB0bAlxXEd3CpJvz4hoNzqdGYDnU7OLKw4fF18phVults4x67Xq/gsNcqNi0LuV9vqwkA/ChPGi9UWHCd/Oz7ivGj7jf0PZzVX7xKUDM4t7Oyxyo3t4Dv9QqcSrmHhPCNY/1QcqQfj2xeWUcct6xI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791983961; c=relaxed/simple;
-	bh=YpT2Qe/T2mt0iT4P8ZgElxgZygQNwPCoUxNvE7UC/eA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VPGQXexJiLLzRz+x8HegH8pot/zO5hZzhfHEcokxVEYI4+dB/9/fHDEku0LebPKWM1008Ty+gbGCFleGYbB2KCq1jtJwO3AuvpzMkCjU5qJ5EKQdMibdDZsA8zyn0AIP1v0xHV5wZl6EDi35DaB8mfcpKZsDrII4ewOmvuX1hgg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RaokhI9l; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OoiN7LAn; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0870515993
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:23:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791984208; cv=none; b=B7fBYn+UiPyswgsY17ExorzY+v6HkUaGX5ftudXBHPWfBtOJ7ONCLWZcXiMXJn+H7VGXLaA5hBOQ950XW9RZBA4j4uMTPFJUI3/Lzk5Ws3rU6rAbFvNuLM+UHLQloZyEI+3QB5VQmb3C1pphEeHKvyI2qDt/3hyWSFG7LCSea24=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791984208; c=relaxed/simple;
+	bh=rnAfDQx7rD0LoelzY+i08EvNOwwd5qC1oOG3COH6+C4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=kZG3ZNaERfUr8XhnNRTPQfhSEpbWbxDWiuyOmXagFRXRDFzR2pPDZ3uQjRvM2Nb5HAqekDWcPGiz7LYOg/UDSBd4K8sIN4Ko1I8dcQ11+X7dhnr3/OQBBg1grcxGj9LQti5yc+4TMkQeU6OyYXv4/r7+PEMAx90XWft6HpDVtl4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mw4YGq4U; arc=none smtp.client-ip=209.85.128.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RaokhI9l";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OoiN7LAn"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EDI6R3329239
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:19:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	AbyY7L02Rxh26+8dxarTEhQrgLb4aPc0R4YmO2fQi8o=; b=RaokhI9lpwfZtctk
-	tnFXGMM4pdXprSGnRtJD1ew/HugC+VIzM6H8hM0jzHZRwth5cykuIATE/54nIMdw
-	hbzL5Aq0lg/zvV1UoDQWgzkWAu68bbdE/u88OfcGyQJlhaEM7YNDj2hxoUlRo5Jj
-	C113myqrV2HSinCyZoOLTFmns3LIZCA3IjOpXKlzcBZfZ64/FaWUmDmONRDoyL5F
-	QvgNyBNyrUtRmNQDApW/qZL5c/l78h/Iz0aeIQf/Q2eIYL7dgU/iqihNfjgFemkh
-	hRN34Ef/+BbXlgyPaOlivZ7YxNqg3ASdYLPnwla5ottWMvBXETXyWR3G7gE6ADBV
-	Unm2oQ==
-Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com [209.85.167.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haagf005h-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:19:11 +0000 (GMT)
-Received: by mail-oi1-f200.google.com with SMTP id 5614622812f47-4b37620eb73so8503833b6e.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 06:19:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791983951; cv=none;
-        d=google.com; s=arc-20260327;
-        b=YzTc1+z9nHWXZNyvr9D244vzoPTmGpMDjJ3j4mc9+7egp5WbdEYoLf0G6C36Aq6ZTa
-         /8nvd1lMd8RRRJx7DN4VFPKL2WVHNEbWBBIEMQ6u7bZiWw6x1MfmPoHGZ6QeIGE0pc4/
-         93TdXcPaHHkeGMjO9Swcj3ziG/h0MO3RAjl+dtqUSLjBMYeDSovbIlVwl61opKyO6mGG
-         3+ltLJo8rhQBYGMRojKJhQ9qlkGCcEOwsxZPX4Ac//Woj/O1Q5nmRr82ubiHvFF0dRyB
-         IZWMXSeFUH6U+8FZN5LRc/xSw0hIUGikUNM81Y/1i4OEvyD0gWb96i53VQ844thCUx46
-         S0Wg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=AbyY7L02Rxh26+8dxarTEhQrgLb4aPc0R4YmO2fQi8o=;
-        fh=yPCUNwzX/CpFvKeFZ1sVthUnOwc6d4XGx6leT5q6wWU=;
-        b=lzleYeOd3dDbeE2X3rjFQacgCGYmnmxj9IczmDoJX4TJwr+kvwXBH5g8jwkzmMbm6D
-         hpUtaHjJYelRynCAliaoGqB2TM/0TsMCcK2WYg9mjC1lZKAbgJcPcjMeAedrY5p/IY6m
-         7D6ieQkdNL+3PgR2bI7XQZlQNh5Ewkv6lpRRVyLrwbALJr31unDDUYQ2EA3zcXzivlzd
-         f8qzGkSg1z98ZFFTUnvD6q3fRq18Xt1O+l2SbmmCuSwdWxndZyHbbp7loRfJo2kJfNIE
-         BLUs1053StSF/6trSjBq1JLg29f8r2K6u7WA1utZg7JTNHtz166toAYMhbRUbGTUwjdZ
-         it9A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mw4YGq4U"
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4a022fee0caso38616735e9.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 06:23:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791983951; x=1792588751; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=AbyY7L02Rxh26+8dxarTEhQrgLb4aPc0R4YmO2fQi8o=;
-        b=OoiN7LAnnjXiQdTqj+NsoDCFizO4djPAcbVdP7Nx28gM42XLXpve1MOPKK58kIYXQT
-         pNbO2OyT3ImxuFhdY893dkQefTgFEoq6HecEte5AmDApDhvPcOP8bxXb6nwnXk7to2LH
-         LNhw/pR8nCQ+c7rR0V0tqxcpSJmtoZ6VyeT+K2RWScCW7plq1VgzVMXI0qpCRS/GH0TQ
-         sJSHMBDb/haKHchBS5ah+QBcW2bjxrdpInUsenTCmFEDICIH7Ot6DQBEbMcmivyvAU38
-         xEY5+wgVFQLfM2e/c/Yq+5h+T0EJPu4IJWZqGuBB+k09M/6D4HTcCm921SJRCyMGEczt
-         MLVg==
+        d=gmail.com; s=20251104; t=1791984204; x=1792589004; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Exht4vpfvBf2QY5fB2SjsZesTTxLrNkrbtQgeDFiJPs=;
+        b=mw4YGq4US6dyConrSiwMzbSKUZnzmYXn+q2oUQKE3ngEAEPeHKm7Wtx/XMfW/qjv8O
+         5NwuZDhx6XsMrakuW52vtNepo8UT0IKxUZ1/6UB/UjFN73PDz/P/uYyMabJ5fRc6P91u
+         gIuqTWUtym96ab/p4T13VzmtwCgu/8Irx3SpKuKZ0sDKrjMVx9BGOddjaDm3a1L9GkSF
+         AQS0jQ1Tmkm04Vv6MoyLtkKx/BByr9X3DgL0iYZL8Ag40E40jSpnWchq6vixGN3Q7eyz
+         XF+2uP+gdb+eGcRwhcX90gzuRPbHyHJi3NMbOuWrrdL3lOuduDYF6fm218Pnas3oo414
+         NrBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791983951; x=1792588751;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AbyY7L02Rxh26+8dxarTEhQrgLb4aPc0R4YmO2fQi8o=;
-        b=qTHhPjmYCTP/kg9QLaMer5WwC/Z2/ucfZ7rcrXzLvhO4fwKnnamySURTmBCSfiGhiW
-         bf9n1YduEkX0P47rwfcqzy/Zy3h823Qs+ONQl3XK2z1nZptTarG0dZB0AYxdmuOBAvcv
-         I0ZGeRscuJ1TCeMUb3sFbGm2IEjgvAZ3/yQ9QPDrkITVzy9Ygl8wc1Yr375NOQaLuC/8
-         JqsTylAKokhenpjadWek7gOoJas/I4wyOwS4mi1miPgapy2qwZRt5xTzZTSKe1wNfmoh
-         PHS2p7hyH66GaYEjqpkLrT85+tZVCTJcuxs7Vns9zEVZmssEG2Db5Y4KF93/XJ8bVCsO
-         mz8A==
-X-Forwarded-Encrypted: i=1; AKwUvBwkkrSKM1zWtsv+GknIxnDKUasyvowkfIPsw+1bYGOvnTuXR/rYiu/tucMuqlc5c0727BRgyrAyfTaokz0H@vger.kernel.org
-X-Gm-Message-State: AFq9FYJrMXZDslYPzonfe+IrgCNN6uyLAg0PuvarHXwLwvyVaKgMRYwz
-	GSjrNT2WZ8XTR3VfyAvRZipKAH29uUQZvH3wSAQ9ZXAVPX59bDg5a2CMqN38IKNjGeC/k3GlQEZ
-	jefzEvCBQwJ0ZG8CkHF+jAPlk2oadBIcyUpLO+LDRecjEaYRtSon+nrN1wp8kS5/UbV0h1oGZHt
-	2ZaMfLPYRM4a60pEJpLaJjvqyxoY/gJH2EAY9vrKCL84g=
-X-Gm-Gg: AYBFou2dHiUsSJWEZ3tmCxixNjokiK35UFegXCSfbtqzvoJA8lM9VXaBTsZiSzZjjKN
-	0Eqty+D5xAePirybQvQ9cXB/ymeu77ZBgchT2ooGzdrDCFjrIuFL6CjT6ajV0JQeYNMA6trBcpH
-	FLmCpem9I7iK7xrRhZJzgdaFD6jOY9gWKsP+VmMuFGHPdIqJjJiaMpzeZ7nfCg8sSMvtkjPmyIB
-	N3jJ2EcIos2nA/toCRYNv8B47fUthTqOdn792JsZa6WiqysSQGAh76wApLlHDs5XlBQTvaJNq6Q
-X-Received: by 2002:a05:6808:3203:b0:50a:6fcf:d287 with SMTP id 5614622812f47-50c5804970cmr14735551b6e.37.1791983950950;
-        Wed, 14 Oct 2026 06:19:10 -0700 (PDT)
-X-Received: by 2002:a05:6808:3203:b0:50a:6fcf:d287 with SMTP id
- 5614622812f47-50c5804970cmr14735512b6e.37.1791983950378; Wed, 14 Oct 2026
- 06:19:10 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791984204; x=1792589004;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Exht4vpfvBf2QY5fB2SjsZesTTxLrNkrbtQgeDFiJPs=;
+        b=n5KpUo+LB9Wzj9kl63DU3K3rC9jsgYcuEe3aTxkcwOmC7knPsj+2ILyPJXuxr98dFq
+         /5fwG69OUkc1jhjMXX/vz7uHL2Rm0rSB3b5D0xNjxBYoWAglkn2XN8lz70Rr5uJeoK+y
+         ekrGGvkFpu61xAEnRWUQye8vF7PzyCIa+QuWjplaSC4qN5EDXU5qElyCSAnAhzSdZa6F
+         hH0yTb4JqnyxZYTVTKhZ7C4VVFhh2N5n9ztZRENOjucRyPdet9OzwQvleXvzoaXNaYF4
+         O4z/wJGePvwJGG7m5QI9bG4zLFCMRI2S7LUNQHXnHvkgjfQnt8srhPi331I8trfF7IPA
+         ou+A==
+X-Gm-Message-State: AFq9FYKhMtBDGcxUi/mr4SR/zryUaNABGUwJfKGpqNTsmGeGJKHJS3y+
+	zmsJ/gIHeK3kP6H4HbdimeAHyXMQbhIaDZOThN4vnL8S3U6BKvlSjSy8
+X-Gm-Gg: AYBFou2zgsVlv2LtS6hEYbmWPshrO9jrBoBu6I3td9hKAwfYzeTGanvNRizNKY96EmM
+	PGCQEYRa4yqA9ez3xBkmgkQNQvFYUJw3f/DKkX4CC4NYyjnaZl0YXb40S/olGk5QP1cKF+HjUSl
+	98yfo2Wf4o12VmESUM5t144TVUHiczI5VXas92gJgiQrVi0ICS9+bzT3CNG0Iic+0hoVaq3FsqA
+	kmoVpU+vzpqdAwxRdn5yJN/Rbd8pFSR+9weO8huMsOgIrk0MeI90CAqaXNHRGB4uh87ae4owxyC
+	o5qNEEn9Iyk/RevC3lDOnoGxvUbRn797Ns+FATn5JDnS7wK7OSOk+2S426uYZcASJQTDulAdwC0
+	Gh7KvfulKdA5V12lrCbwmKppP1bYjNlKzrBpjyJj6uQGVLr7fShxp1rEOCrjPBKPuGwco6WxTtI
+	2SDXqrbXb0FTD7pGzinrKZlA/LbvdnqyueJarXsGiv5+ieE3B64F7w8ialfKlEKGZf32qIdr11G
+	3F59xkuFjRXWQ==
+X-Received: by 2002:a05:600c:8217:b0:4a1:a496:fc17 with SMTP id 5b1f17b1804b1-4a1a4bd3da9mr153963305e9.5.1791984203545;
+        Wed, 14 Oct 2026 06:23:23 -0700 (PDT)
+Received: from localhost.localdomain ([194.154.195.114])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4a1bcf69402sm782515e9.14.2026.10.14.06.23.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 06:23:23 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org,
+	linux-hwmon@vger.kernel.org
+Subject: [PATCH v6 0/3] platform/arm64: Lenovo Yoga Slim 7x Gen 11 embedded controller
+Date: Wed, 14 Oct 2026 15:23:12 +0200
+Message-ID: <20261014132315.4659-1-okerixx@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261013-cci-imp-v2-0-6873326b44a3@oss.qualcomm.com>
- <20261013-cci-imp-v2-1-6873326b44a3@oss.qualcomm.com> <d39189f9-e9fe-4019-9b64-c4d7c0694c4c@nxsw.ie>
-In-Reply-To: <d39189f9-e9fe-4019-9b64-c4d7c0694c4c@nxsw.ie>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 15:18:58 +0200
-X-Gm-Features: AclHuK_Mz1Imq5hkpEYTlM0BjO4RGLxYs653XPdMkpOfKA6siGSGzQJSVK3xg4Q
-Message-ID: <CAFEp6-1pYGy-TdQCY0pK8Nir3fg1hun_0pfdmH+j45sHZd8vnA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] i2c: qcom-cci: Factor out write command queue programming
-To: "Bryan O'Donoghue" <bod.linux@nxsw.ie>
-Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1MiBTYWx0ZWRfXxQL3DHV6p+AX
- WvF+TJf4VCf1AvJjvjaX/Giyt4afCjCuSGQpLwsCzhzX9QSIOMTqNUEPmdjHx7GldO5Jflb2j/r
- G/ycvI6iqb6wRDDnMrGjp59klusmT+dMIYShcGuprB2G0RSIacqo+UiZSgBj0NyN78NqzONPSSb
- LW71SuAD9/2jxgwXnkWy7N1ExZA69yIvztvghv2StdG0Xc0alOO75ACj3TaYutvmArJa/JX83Wz
- O9GSwoAM+c4YoWdVLGa8g9Gt0VClwNn+HrR6tZ6WFOSS2hgcZ+c6XnB/On78LgBBynor9syDD9d
- cFN282ifAUTCLQy8JAipfBdaX3IyZbckr3f3+ndiEcFNewRpgvpJnS5MSCIzW6PbyQMPqn/IVlS
- Lxp7CmurtdG6DAEFw7k7ZXURnlnsM8pAuuDIFGhR/gLM9FFbnerjFO0jgOg6igJNxD2EPKNFC89
- DjMBvmyy9XCSGSzaz9g==
-X-Proofpoint-GUID: nZJi1iE_1YSUn9mk-aDOEXbk0zLU27Gi
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1MiBTYWx0ZWRfX2y41nStc9R/U
- IeGqh1jd6cj5wIXbEHIo9i107M1wHyRuH08rliU2eVlQG8lmZTwl5wRLsWjtKh8G4eLXrEPIiye
- wa3DQNmvbeer+Ahxecf0NczYk+hEG5o=
-X-Proofpoint-ORIG-GUID: nZJi1iE_1YSUn9mk-aDOEXbk0zLU27Gi
-X-Authority-Analysis: v=2.4 cv=V/noQuni c=1 sm=1 tr=0 ts=6acf814f cx=c_pps
- a=AKZTfHrQPB8q3CcvmcIuDA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=PJnx2EBGx5yzlk0kfSEA:9
- a=QEXdDO2ut3YA:10 a=pF_qn-MSjDawc0seGVz6:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 lowpriorityscore=0 impostorscore=0
- bulkscore=0 adultscore=0 clxscore=1015 phishscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610140052
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 14, 2026 at 2:53=E2=80=AFPM Bryan O'Donoghue <bod.linux@nxsw.ie=
-> wrote:
->
-> On 13/10/2026 11:30, Loic Poulain wrote:
-> > Factor out write-command queueing into a dedicated helper and replace
-> > the manual byte-to-word packing code with iowrite32_rep().
-> >
-> > The resulting code is easier to follow and will be reused by
-> > upcoming burst-write support.
-> >
-> > Also add a sanity check on the write buffer length, which should
-> > already be validated by the caller/I2C-core.
-> >
-> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> > ---
-> >   drivers/i2c/busses/i2c-qcom-cci.c | 41 +++++++++++++++++++++---------=
----------
-> >   1 file changed, 22 insertions(+), 19 deletions(-)
-> >
-> > diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c=
--qcom-cci.c
-> > index d509dc1c14700d9c199d67df19082bae4f1ae470..3304760411082b72e10e529=
-a2bd66361e100fa06 100644
-> > --- a/drivers/i2c/busses/i2c-qcom-cci.c
-> > +++ b/drivers/i2c/busses/i2c-qcom-cci.c
-> > @@ -77,6 +77,9 @@
-> >   #define CCI_I2C_WRITE               9
-> >   #define CCI_I2C_READ                10
-> >
-> > +#define CCI_I2C_WRITE_WC     3
-> > +#define CCI_I2C_WRITE_NWORDS(len) DIV_ROUND_UP((len) + 1, sizeof(u32))
-> > +
-> >   #define CCI_I2C_REPORT_IRQ_EN       BIT(8)
-> >
-> >   enum {
-> > @@ -485,42 +488,42 @@ static int cci_i2c_read(struct cci *cci, u16 mast=
-er,
-> >       return 0;
-> >   }
-> >
-> > +static void cci_i2c_load_write(u8 *buf, u16 len, void __iomem *loadq)
-> > +{
-> > +     u32 cmd[CCI_I2C_WRITE_WC] =3D { };
-> > +
-> > +     if (WARN_ON(len >=3D CCI_I2C_WRITE_WC * sizeof(u32)))
-> > +             return;
->
-> Why not trap this and return the error - cci_i2c_write() has a result cod=
-e.
+The Lenovo Yoga Slim 7x Gen 11 is a Qualcomm Snapdragon X2 Elite (glymur)
+laptop. It carries a Compal EF06 embedded controller on I2C at address
+0x70, which is the only source on this machine for the board thermistors,
+the fan tachometer, the keyboard backlight, Fn-lock, and the mic-mute
+and airplane-mode keys.
 
-Because this condition should never occur, the I2C core is expected to
-enforce the transfer length limit through our max_write_len quirk
-before the request reaches the driver. This check is purely paranoid
-and is not expected to trigger even in normal error-handling paths.
-Not returning errors keeps the behavior aligned with the previous
-version, though we could have catched this issue earlier in i2c_write
-and return from there...
+Patch 1 documents the binding, patch 2 adds the driver, patch 3 adds the
+node to the board.
 
->
-> > +
-> > +     cmd[0] =3D CCI_I2C_WRITE | len << 4;
-> > +     memcpy((u8 *)cmd + 1, buf, len);
-> > +     iowrite32_rep(loadq, cmd, CCI_I2C_WRITE_NWORDS(len));
-> > +}
-> > +
-> >   static int cci_i2c_write(struct cci *cci, u16 master,
-> >                        u16 addr, u8 *buf, u16 len)
-> >   {
-> > -     u8 queue =3D QUEUE_0;
-> > -     u8 load[12] =3D { 0 };
-> > -     int i =3D 0, j, ret;
-> > +     void __iomem *loadq =3D cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(maste=
-r, QUEUE_0);
-> > +     int ret;
-> >       u32 val;
-> >
-> >       /*
-> >        * Call validate queue to make sure queue is empty before startin=
-g.
-> >        * This is to avoid overflow / underflow of queue.
-> >        */
-> > -     ret =3D cci_validate_queue(cci, master, queue);
-> > +     ret =3D cci_validate_queue(cci, master, QUEUE_0);
-> >       if (ret < 0)
-> >               return ret;
-> >
-> >       val =3D CCI_I2C_SET_PARAM | (addr & 0x7f) << 4;
-> > -     writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
-> > +     writel(val, loadq);
-> >
-> > -     load[i++] =3D CCI_I2C_WRITE | len << 4;
-> > -
-> > -     for (j =3D 0; j < len; j++)
-> > -             load[i++] =3D buf[j];
-> > -
-> > -     for (j =3D 0; j < i; j +=3D 4) {
-> > -             val =3D load[j];
-> > -             val |=3D load[j + 1] << 8;
-> > -             val |=3D load[j + 2] << 16;
-> > -             val |=3D load[j + 3] << 24;
-> > -             writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, q=
-ueue));
-> > -     }
-> > +     cci_i2c_load_write(buf, len, loadq);
-> >
-> >       val =3D CCI_I2C_REPORT | CCI_I2C_REPORT_IRQ_EN;
-> > -     writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
-> > +     writel(val, loadq);
-> >
-> > -     return cci_run_queue(cci, master, queue);
-> > +     return cci_run_queue(cci, master, QUEUE_0);
-> >   }
-> >
-> >   static int cci_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], =
-int num)
-> >
-> > --
-> > 2.34.1
->
->
+Why one driver
+--------------
+
+The automated review of v2 asked for the hwmon part to become an
+auxiliary driver under drivers/hwmon/. The hwmon channels, the LED and
+the input device all sit behind one command mailbox and one interrupt,
+so the driver stays in one file, like huawei-gaokun-ec,
+lenovo-thinkpad-t14s and qcom-hamoa-ec next to it. It is documented
+under Documentation/ABI only.
+
+Notes
+-----
+
+Fan speed is reported but not controlled, deliberately - the EC enforces no
+thermal floor over a manual setpoint. Patch 2 has the measurement.
+
+Tested on a Lenovo Yoga Slim 7x Gen 11 (DMI 83QR, "Yoga Slim 7 14Q8Y11").
+
+Changes in v6:
+- Patch 2: style fixes from Ilpo's review. fn_lock_show() now checks the
+  read error inside the scoped_guard() block, and lines are no longer
+  wrapped where they fit in 100 columns. To keep one line short, the
+  probe error "adapter does not support SMBus block transfers" now reads
+  "adapter lacks SMBus block transfers".
+- Patch 2: the Kconfig help also mentions Fn-lock and the hotkeys, and
+  the commit message says the driver exposes the thermistors it finds at
+  probe.
+- Link to v5: https://lore.kernel.org/all/20261003202143.4697-1-okerixx@gmail.com/
+
+Changes in v5:
+- Patch 2: drop the battery cell voltages. They live in an EC bank shared
+  with other EC activity, and 43-79% of reads failed the signature check
+  across runs; retries, a cache and a stale window only hid that.
+- Patch 2: fn_lock had the polarity inverted: 1 left the multimedia keys
+  primary and the Fn-lock LED off. SCUK bit 7 selects the multimedia keys
+  and bit 5 turns the LED off, as the vendor ACPI FNUS method reports it;
+  1 now means F1..F12, as documented and as in ideapad-laptop.
+- Patch 2: FIELD_MODIFY() for the backlight level; notify fn_lock when
+  the EC toggles it on Fn+Esc; Kconfig help updated; the ABI entry dated
+  October 2026 for 7.5.
+- Patch 3: pick up Reviewed-by from Konrad and Abel.
+- Link to v4: https://lore.kernel.org/all/20260922165737.260443-1-okerixx@gmail.com/
+
+Changes in v4:
+- Patch 2, after Ilpo's review: the missing includes added where the
+  symbols are used; the cache and stale periods defined in milliseconds
+  with the unit in the name and converted to jiffies at the call;
+  lockdep_assert_held() in the command path every EC access goes
+  through; each EC read checked right after the call; ARRAY_SIZE() for
+  the cell loop; MILLIDEGREE_PER_DEGREE from units.h; braces on the
+  multi-line returns; the ABI entry dated September 2026 for 7.4.
+- Patch 2: the i2c id was 20 characters, the size of i2c_device_id.name,
+  leaving no room for the terminator; now "slim7x-gen11-ec".
+- Patch 2: symbol prefix renamed from yoga_ec to slim7x11_ec, naming the
+  machine like the driver does. No user-visible name changes.
+- Link to v3: https://lore.kernel.org/all/20260921144953.15113-1-okerixx@gmail.com/
+
+Changes in v3:
+- Add the board DT node as patch 3. It was posted on its own [1], and a
+  node cannot be merged before its binding (Konrad).
+- Add the "Why one driver" section above.
+- Patch 2: name the driver after the module, and the i2c id after the
+  compatible.
+- Patch 2: spell out both SCUK bits the Fn-lock toggle moves instead of
+  the 0xa0/0x5f masks.
+- Patch 2: return -ENODATA for a thermistor reading of 0, as probe already
+  treats 0 as "not fitted".
+- Patch 2: ten tries for a cell-voltage sample instead of thirty.
+- Patch 2: include what is used directly, devm_mutex_init(), comment the
+  mutex, fix the address in MODULE_AUTHOR, say in the commit message that
+  results cannot be matched to commands.
+- Link to v2: https://lore.kernel.org/all/20260908183403.2107-1-okerixx@gmail.com/
+
+Changes in v2:
+- Patch 2: drop #include <linux/mod_devicetable.h>; <linux/i2c.h> already
+  provides both of_device_id (via linux/of.h) and i2c_device_id (via
+  linux/device-id/i2c.h), and the header is on its way out.
+  Reported-by: Uwe Kleine-Koenig <u.kleine-koenig@baylibre.com>
+- Patch 2: add "depends on INPUT" to EC_LENOVO_YOGA_SLIM7X_GEN11; the driver
+  registers an input device unconditionally, so a config with INPUT=n did
+  not link.
+- Patch 1: pick up Conor Dooley's Acked-by.
+- Link to v1: https://lore.kernel.org/all/20260908091752.5508-1-okerixx@gmail.com/
+
+[1] https://lore.kernel.org/all/20260914082950.9393-1-okerixx@gmail.com/
+
+Oleg Keri (3):
+  dt-bindings: embedded-controller: add Lenovo Yoga Slim 7x Gen 11 EC
+  platform/arm64: add Lenovo Yoga Slim 7x Gen 11 EC driver
+  arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the embedded
+    controller
+
+ .../sysfs-driver-lenovo-yoga-slim7x-gen11-ec  |  22 +
+ .../lenovo,yoga-slim7x-gen11-ec.yaml          |  56 ++
+ MAINTAINERS                                   |   8 +
+ .../dts/qcom/glymur-lenovo-yoga-slim7x.dts    |  12 +-
+ drivers/platform/arm64/Kconfig                |  24 +
+ drivers/platform/arm64/Makefile               |   1 +
+ .../arm64/lenovo-yoga-slim7x-gen11-ec.c       | 530 ++++++++++++++++++
+ 7 files changed, 651 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
+ create mode 100644 Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
+ create mode 100644 drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
+
+
+base-commit: 1fffefb00cc0b0da1f2ae24e3d33364530ea6515
+-- 
+2.55.0
+
