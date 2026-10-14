@@ -1,146 +1,264 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1253747F791
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 20:19:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89C8148B37B;
+	Wed, 14 Oct 2026 20:19:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792009183; cv=none; b=g13ayi8Jwj9GFe/Zx07qDvUQ/LU92OIuZdrt5S9vjIIcZXKWwZQS6bmSI1dJa608YpSS2D3V7lP0TVjJmnci7bE+kLLSjac951uGLLOgQ2w/E4OLybVb6v9d7ar/DoMW0VnHK/i3Eku6aPMD7mGRYmjrWOBkHsUXXycNLoDo2PI=
+	t=1792009192; cv=none; b=WA0NswVGXpkUWjETiWUW16dE3g59DDoDri4sFloKodwo/pVXpyM/JSI/IwtIJptcXfYvaRWHdnAHunRLMEfDi2uro1dUhTOzaCEQpSulPvOQJ9vHOlgGej8VtE1m+MJSdrRlDBwm0fNkhesAW0OdnaakszqD21ZJ9Z6NRUZ2CeE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792009183; c=relaxed/simple;
-	bh=k1D2Jt/MIMBi18JJ3Pt1Hkf+TwV5cUpgoCJZNM3kUto=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Q2F2YKEhhcIU5QykNe/RLSA/qUvcK1co9Qf6JakZsvhGRKgzDjoINThza4NMmYSu0Oeslo4hb83e8NLNYiwtqdxZhPWc7gkXCuzRUoELnbf86IZx4+E4Q79Ge554sI2t9rYxcgA93bSo40CZjDCxkGKjx88kbojQ1461bQsxMl4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OBnBTHm/; arc=none smtp.client-ip=209.85.221.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792009192; c=relaxed/simple;
+	bh=P0WBF/wz9WotxVezDgWS5cfXyWEipNWeQpFa9vHQgso=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ArnWYJZkKZE5pW+ovamf7UV57zi+7NEOtCB716i1bmfWedaLhwGbynlzHNbZ1tL3IN9TSAegH8MEAf0DxPN6pUNI/MLSlXA09Wqz8tgNkVXmX1d3DiTlgaRF3NS6qy7rNj2eqOgHDY1OiZ6VbAs0hvHHFzPnp2AHlzV9HAvMc/s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GGyil6e3; arc=none smtp.client-ip=192.198.163.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OBnBTHm/"
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48b042c0728so1088005f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:19:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792009180; x=1792613980; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OWEw1y+7jiUWTAz/9BEGibbvR7uznEdBfDaaovYCeps=;
-        b=OBnBTHm/FkkQTkD2chiu35SvD7upEnXnKmecrVI3S7wDlonoTuzZgzM+hjTX1VmpYy
-         QQHkSHVD58aegvUgrNrFt02hoIBkDzs6jwh9OyGBu7EVPGXI8ilhnKg7p/cj2o3pWftx
-         lL9Drok9uMfNUalZfeHT90XSj6jZutLCXahUQyLNjs4Aqq8LYemSQdxg4VH3AyCqOCQJ
-         rCpBI3lLHftfTdEPgxmcMiWSM/OBEla558rq0yighjgaVQd2CUYIHX3U8ur3UHK9f31b
-         FNBOR8pHqa7KHC6GkkQ7Eq8TJsMvv7n0/vPEVUjrovK+21ofQ+h+Ju1jyCUJIkpmQXLP
-         1CYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792009180; x=1792613980;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OWEw1y+7jiUWTAz/9BEGibbvR7uznEdBfDaaovYCeps=;
-        b=ZgMrIe01C9dlbXMa6l9ghrnnJ/fhL/9N1I6XWSM9xz//pnmof6eXcscaicoSL98k/O
-         RyNwcdA+i8z9Orx8x9rit5lAvJYP5WxCxDnlMdkWIpuK0Repiu8rlUen63FVk0+V1mGf
-         3gigx4EgUeWfNQaDuk3IF8AZmNV99SRj87vnEay7r6ok9fwsHfsAujc17IJ/Vep1uY/E
-         Z2ZWbSw1d3UrS3L8KnkcjlwFVrIJ43CLYl22JZOI5JK1dRnvB8U7yCpUO1jDgb15Vgrv
-         DiK+y5hnWsT6mHBb7sZ3SiKP1i61WTuvbJI3RJtmOVI3SLKyH25XjaLTrMy9QbwB3OSH
-         XTxQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx/90zcnlJp8yjoGfT/Lfa+Ocn29AglP89bVcB8tpEnB41C5HnQAImFNrbCZL4nGxmzTogt7+ojMoAEPh+u@vger.kernel.org
-X-Gm-Message-State: AFq9FYIVpodwemUIDKRNnTFGGgXzSnNsu6jejddAZvugHPIgqn8zWn6E
-	mRAekWO3fiQCyKaDzY7pJwUFNcKdK6azZ4VznPmZ4gR9fjpoOgftdgRR
-X-Gm-Gg: AYBFou1khRJWOnBHUNRVNG4UFr+jTdz0IOIlJ0XY+qziwHWA4zyIy0cFgZTAtq4tV+d
-	oAwDOyxWGF0Rrh0Gnh7X23ABchRgnfNg2bfYfWkwhL/A+x1Lvzjff7kRp4BgBu4Zj6qq7SjM28w
-	UhR+lTbuPxC27fFoHOU78XdULON4VKPeIDqXCGj7+Q8ywSX1qxX9kblpmIR88mp6sT4Yet+IzNw
-	npumDzYJ3goALUWUmkFCRx7htnlj8wxEYkzNIKz5X+P0UT+ntoZwOiHSY1V8Z8mCQgrdUDOD/Q6
-	sIFkpjl0CtJm/WO2YEM7TACPZ2JkDjU1rjBf3GW6SR0u25zYzTunUTZfkztTr8+9wEgqCOAyU9f
-	zrAfAzntZihnI9qsAirX1hI1X60mtzr616JBHZvRz4+h/+p9WbwQnmL44SGLpTGZMA7S2gCKsEZ
-	/bUCt7WuGIWRSn8MrMUle1XZ9wHGBIe6RfBTtouHGVzmroIXb/ucnnfn08K+mgphj6tRi/XW8NH
-	Imz44SqO7zwoT3rbTKyaRAlG4w=
-X-Received: by 2002:a05:6000:25ee:b0:48b:e50:715a with SMTP id ffacd0b85a97d-48dbace01abmr36901888f8f.34.1792009180027;
-        Wed, 14 Oct 2026 13:19:40 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48df0f8f624sm2708292f8f.5.2026.10.14.13.19.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 13:19:39 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Jeff Johnson <jjohnson@kernel.org>
-Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	linux-wireless@vger.kernel.org,
-	ath12k@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org
-Subject: ath12k: board specific SAR table and coex settings on a devicetree platform (WCN7880)
-Date: Wed, 14 Oct 2026 23:19:11 +0300
-Message-ID: <20261014201912.4487-1-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GGyil6e3"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792009188; x=1823545188;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=P0WBF/wz9WotxVezDgWS5cfXyWEipNWeQpFa9vHQgso=;
+  b=GGyil6e3wIGD2o+FvAoBn08k8L7d8eIeKgFN9Br+0ZlaeNSKGCSi0DcB
+   /5LrFixiaWXRdy22WuSVaTqGUV5mKQJKAA4tCagdSjeEO1fqJxbZ9+b7s
+   wbY1FldJbavMPbwa8eNUV5UOD/S49WR28OJDk4HRc7unHNFHj52/qAnhx
+   MtBzH80PojrmEo8NYFXhLQX/V09RTL69ls36lNpMeyzVxCjhWSTCi5YSG
+   73S080uHDG30QaWS4bsXkiWjIYz+11KhKhvXHzI8rBrhoWC3qeT7DajZn
+   IiM7ZUQrJabSZYEJuSx6Pb9+62NvBuusrtihGyImj6i2GKLwmrRzvrkjX
+   Q==;
+X-CSE-ConnectionGUID: 6P22c+GHQZymWXKDelua8Q==
+X-CSE-MsgGUID: j0vLWFTqR16lq4dvgb82Hw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11935"; a="667726"
+X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
+   d="scan'208";a="667726"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 13:19:48 -0700
+X-CSE-ConnectionGUID: ZrDByyW5QbWg2CSQyYO0mA==
+X-CSE-MsgGUID: BInblgMUQQqssqBcMnc3Jw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
+   d="scan'208";a="1483915"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by orviesa001.jf.intel.com with ESMTP; 14 Oct 2026 13:19:45 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xH5Ru-00000000FAF-2qQ2;
+	Wed, 14 Oct 2026 20:19:42 +0000
+Date: Thu, 15 Oct 2026 04:19:22 +0800
+From: kernel test robot <lkp@intel.com>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, linux-usb@vger.kernel.org
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Subject: Re: [PATCH 3/3] usb: dwc3: support two connectors sharing one HS
+ data bus
+Message-ID: <202610150418.XE8EkA7P-lkp@intel.com>
+References: <20261013102927.1141696-4-xiaqinghuan@mail.ustc.edu.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261013102927.1141696-4-xiaqinghuan@mail.ustc.edu.cn>
 
-Hi Jeff,
+Hi Qianhui,
 
-I am porting mainline to the OnePlus Pad 3 (SM8750, WCN7880 hw2.0 over
-PCIe, firmware WLAN.GNG.1.0-03342). Wi-Fi works on a local branch, and I
-would like to ask how you want two board specific settings to reach the
-firmware before I send anything beyond the WCN7880 support itself. Both
-are handled by the vendor stack today, and both are properties of the
-board, not of the chip.
+kernel test robot noticed the following build warnings:
 
-1. SAR table selection
+[auto build test WARNING on usb/usb-testing]
+[also build test WARNING on usb/usb-next usb/usb-linus linus/master v7.3-rc7 next-20261012]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-The board data of this tablet has SAR V2 tables. The stock user space
-always selects one of them per chain (index 6 for both chains): the
-vendor driver sends WMI_SAR_LIMITS_CMDID with SAR enabled as V2 and the
-table index in each row. Without that selection the firmware runs at
-the target and regulatory power of the board data, which is above the
-SAR level the device was certified with.
+url:    https://github.com/intel-lab-lkp/linux/commits/Qianhui-Xu/dt-bindings-usb-snps-dwc3-document-usb-psy-name/20261013-182925
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
+patch link:    https://lore.kernel.org/r/20261013102927.1141696-4-xiaqinghuan%40mail.ustc.edu.cn
+patch subject: [PATCH 3/3] usb: dwc3: support two connectors sharing one HS data bus
+config: arm-defconfig (https://download.01.org/0day-ci/archive/20261015/202610150418.XE8EkA7P-lkp@intel.com/config)
+compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 6719b9e31d6a93099612c474eec76d9f41d0275a)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261015/202610150418.XE8EkA7P-lkp@intel.com/reproduce)
 
-On ACPI laptops ath12k takes the BIOS SAR table from the DSM and sends
-WMI_PDEV_SET_BIOS_SAR_TABLE_CMDID. A devicetree board has no such source,
-and ath12k has no set_sar_specs, unlike ath11k (enabled for the AHB
-WCN6750 in 2023). The limits the device was certified with live in the
-board data as table indices, not as dBm values that user space could
-hand over through NL80211_CMD_SET_SAR_SPECS.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610150418.XE8EkA7P-lkp@intel.com/
 
-Which of these would you accept?
-  a) a devicetree property of the wifi node with the default SAR V2
-     table index, in the spirit of qcom,calibration-variant selecting
-     the board data;
-  b) set_sar_specs in ath12k as in ath11k, with user space providing
-     limits per frequency range (the board would then need its limits
-     as dBm values from somewhere else);
-  c) something else you have in mind.
+All warnings (new ones prefixed by >>):
 
-On my branch the WMI parts (the SAR capability in the service ready
-ext event, the SAR V2 limits command, the SAR2 result event) are
-generic; only the index comes from a module parameter for now, which I
-do not intend to send.
+>> drivers/usb/dwc3/core.c:171:16: warning: variable 'mux_role' set but not used [-Wunused-but-set-variable]
+     171 |         enum usb_role mux_role = USB_ROLE_NONE;
+         |                       ^
+   1 warning generated.
 
-2. WLAN/Bluetooth coexistence settings
 
-The vendor driver sends WMI_COEX_CONFIG_CMDID per station vdev with the
-values of the board's WCNSS_qcom_cfg.ini: tx power while BT is active,
-antenna isolation, BT RSSI and interference thresholds, TDD mode. With
-none of them sent, A2DP audio drops out on this board while Wi-Fi is
-busy on 2.4 GHz; with the stock values it does not.
+vim +/mux_role +171 drivers/usb/dwc3/core.c
 
-The command itself is generic, but antenna isolation and the power
-limits belong to the board. Would devicetree properties of the wifi node
-be acceptable here (ath10k has qcom,coexist-support and
-qcom,coexist-gpio-pin), with chip defaults in hw_params otherwise, or
-do you prefer another source?
+   165	
+   166	static void __dwc3_set_mode(struct work_struct *work)
+   167	{
+   168		struct dwc3 *dwc = work_to_dwc(work);
+   169		unsigned long flags;
+   170		struct dwc3_role_mux *mux = dwc->role_mux;
+ > 171		enum usb_role mux_role = USB_ROLE_NONE;
+   172		int mux_port = 0;
+   173		int ret;
+   174		u32 reg;
+   175		u32 desired_dr_role;
+   176		int i;
+   177	
+   178		mutex_lock(&dwc->mutex);
+   179		spin_lock_irqsave(&dwc->lock, flags);
+   180		desired_dr_role = dwc->desired_dr_role;
+   181		if (mux) {
+   182			mux_port = mux->desired_port;
+   183			mux_role = mux->desired_role;
+   184		}
+   185		spin_unlock_irqrestore(&dwc->lock, flags);
+   186	
+   187		if (mux && READ_ONCE(mux->error))
+   188			goto out;
+   189	
+   190		pm_runtime_get_sync(dwc->dev);
+   191	
+   192		if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_OTG)
+   193			dwc3_otg_update(dwc, 0);
+   194	
+   195		if (!desired_dr_role)
+   196			goto out;
+   197	
+   198		if (desired_dr_role == dwc->current_dr_role &&
+   199		    (!mux || mux_port == mux->active_port))
+   200			goto out;
+   201	
+   202		if (desired_dr_role == DWC3_GCTL_PRTCAP_OTG && dwc->edev)
+   203			goto out;
+   204	
+   205		switch (dwc->current_dr_role) {
+   206		case DWC3_GCTL_PRTCAP_HOST:
+   207			dwc3_host_exit(dwc);
+   208			break;
+   209		case DWC3_GCTL_PRTCAP_DEVICE:
+   210			dwc3_gadget_exit(dwc);
+   211			dwc3_event_buffers_cleanup(dwc);
+   212			break;
+   213		case DWC3_GCTL_PRTCAP_OTG:
+   214			dwc3_otg_exit(dwc);
+   215			spin_lock_irqsave(&dwc->lock, flags);
+   216			dwc->desired_otg_role = DWC3_OTG_ROLE_IDLE;
+   217			spin_unlock_irqrestore(&dwc->lock, flags);
+   218			dwc3_otg_update(dwc, 1);
+   219			break;
+   220		default:
+   221			break;
+   222		}
+   223	
+   224		/*
+   225		 * When current_dr_role is not set, there's no role switching.
+   226		 * Only perform GCTL.CoreSoftReset when there's DRD role switching.
+   227		 */
+   228		if (dwc->current_dr_role && ((DWC3_IP_IS(DWC3) ||
+   229				DWC3_VER_IS_PRIOR(DWC31, 190A)) &&
+   230				desired_dr_role != DWC3_GCTL_PRTCAP_OTG)) {
+   231			reg = dwc3_readl(dwc, DWC3_GCTL);
+   232			reg |= DWC3_GCTL_CORESOFTRESET;
+   233			dwc3_writel(dwc, DWC3_GCTL, reg);
+   234	
+   235			/*
+   236			 * Wait for internal clocks to synchronized. DWC_usb31 and
+   237			 * DWC_usb32 may need at least 50ms (less for DWC_usb3). To
+   238			 * keep it consistent across different IPs, let's wait up to
+   239			 * 100ms before clearing GCTL.CORESOFTRESET.
+   240			 */
+   241			msleep(100);
+   242	
+   243			reg = dwc3_readl(dwc, DWC3_GCTL);
+   244			reg &= ~DWC3_GCTL_CORESOFTRESET;
+   245			dwc3_writel(dwc, DWC3_GCTL, reg);
+   246		}
+   247	
+   248		/*
+   249		 * The previous host/gadget has been torn down above, so it is safe to
+   250		 * move the shared HS data path to the requesting connector.
+   251		 */
+   252		if (mux && mux_port != mux->active_port) {
+   253			ret = gpiod_direction_output(mux->select, mux_port);
+   254			if (ret) {
+   255				WRITE_ONCE(mux->error, ret);
+   256				goto out;
+   257			}
+   258	
+   259			spin_lock_irqsave(&dwc->lock, flags);
+   260			mux->active_port = mux_port;
+   261			spin_unlock_irqrestore(&dwc->lock, flags);
+   262		}
+   263	
+   264		spin_lock_irqsave(&dwc->lock, flags);
+   265	
+   266		dwc3_set_prtcap(dwc, desired_dr_role, false);
+   267	
+   268		spin_unlock_irqrestore(&dwc->lock, flags);
+   269	
+   270		switch (desired_dr_role) {
+   271		case DWC3_GCTL_PRTCAP_HOST:
+   272			ret = dwc3_host_init(dwc);
+   273			if (ret) {
+   274				dev_err(dwc->dev, "failed to initialize host\n");
+   275			} else {
+   276				if (dwc->usb2_phy)
+   277					otg_set_vbus(dwc->usb2_phy->otg, true);
+   278	
+   279				for (i = 0; i < dwc->num_usb2_ports; i++)
+   280					phy_set_mode(dwc->usb2_generic_phy[i], PHY_MODE_USB_HOST);
+   281				for (i = 0; i < dwc->num_usb3_ports; i++)
+   282					phy_set_mode(dwc->usb3_generic_phy[i], PHY_MODE_USB_HOST);
+   283	
+   284				if (dwc->dis_split_quirk) {
+   285					reg = dwc3_readl(dwc, DWC3_GUCTL3);
+   286					reg |= DWC3_GUCTL3_SPLITDISABLE;
+   287					dwc3_writel(dwc, DWC3_GUCTL3, reg);
+   288				}
+   289			}
+   290			break;
+   291		case DWC3_GCTL_PRTCAP_DEVICE:
+   292			dwc3_core_soft_reset(dwc);
+   293	
+   294			dwc3_event_buffers_setup(dwc);
+   295	
+   296			if (dwc->usb2_phy)
+   297				otg_set_vbus(dwc->usb2_phy->otg, false);
+   298			phy_set_mode(dwc->usb2_generic_phy[0], PHY_MODE_USB_DEVICE);
+   299			phy_set_mode(dwc->usb3_generic_phy[0], PHY_MODE_USB_DEVICE);
+   300	
+   301			ret = dwc3_gadget_init(dwc);
+   302			if (ret)
+   303				dev_err(dwc->dev, "failed to initialize peripheral\n");
+   304			break;
+   305		case DWC3_GCTL_PRTCAP_OTG:
+   306			dwc3_otg_init(dwc);
+   307			dwc3_otg_update(dwc, 0);
+   308			break;
+   309		default:
+   310			break;
+   311		}
+   312	
+   313	out:
+   314		pm_runtime_put_autosuspend(dwc->dev);
+   315		mutex_unlock(&dwc->mutex);
+   316	}
+   317	
 
-3. A scan observation, in case it is known
-
-With no vdev started, a scan that mixes 2.4 GHz or lower 5 GHz channels
-(up to 5330 MHz) with upper 5 GHz or 6 GHz channels does not report the
-lower 5 GHz BSSes on this firmware, while the same channels scanned on
-their own are found every time. A connection manager at boot then sees
-only the 2.4 GHz BSS of a dual band access point. Splitting the scan in
-the host works around it, but I would rather not send that. Is this a
-known firmware issue, or is there a scan parameter the firmware expects
-for this case?
-
-Thanks,
-Vladyslav
-
-(I used an AI assistant, Claude, for the analysis and to draft this
-mail; the tests ran on my device.)
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
