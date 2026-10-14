@@ -1,80 +1,79 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6ADF55D879
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:20:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48BED5349D3
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:27:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791994847; cv=none; b=cfrAJ1sDmweNdtfNYXsm+H1CQuveRL3N7+shTLYeW8kFC9rSuWEMbBqtsjEqAWz6E45fGz+sFRlELAXz7KhuP8L+LC532R79lBH1cPkfVDhsD2hK5A97uL3I7OtLC1XZcK85pICZhjR6QJEm/v/xwpprsBrTpqPZ5ae8hov4Xu0=
+	t=1791995237; cv=none; b=RQrtBw8S806Ks8BJDq2cPhwNmSU5AcsdNbabFlECbuCe5rl8ZRioviFJPmePwFnKVjCvgzZ2vxfZ6zaFY7daF9nGQLgb1131QOqnYd9EhPSIocm9e6m7w7AL3PocLmfcmlwW+/j9alPbfoLkTwFQcWScdGN1PzSw+4bl+l7MBOk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791994847; c=relaxed/simple;
-	bh=KOpW9NL741Wqf6CDHthraNjLF873jIDlBdmDkXr6AkU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=QdmPNVU+AFuqDk7etuvRyu+Gm8zAdbqM+T04wrSncytaLzdbGHLj+j4gxvlWWDBdNsSGOkRYEQBXiib91SxnMdOCIpJB246BOfkOP1C7irgeetTPCLcVLhXEN17KxOpciZ95940+57qJ1KNCLJuXCilcEhA9vkdCcao1fQw//p4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KRDDZ5dL; arc=none smtp.client-ip=209.85.221.41
+	s=arc-20240116; t=1791995237; c=relaxed/simple;
+	bh=c0yy33joFZEmbfuIHCPnHt1VOe6qCnqOzWFCVZq4LCs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=UCCvoG9nqM7zcz4FOSeqUq4SK9lVslHDQE1v4/KzwNh94lquZJU1F/vfY//TI3gYtotfNXdGA1ZmfoldGBm58X70+ymonGDbX/PyyBObSte0h9vxbGKOyVnoi1Qq3aTlFgsswIgCtilRlMTSaxfD6KuZbpsMzGE4VN096bSvQA4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fIP6YiS5; arc=none smtp.client-ip=209.85.128.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KRDDZ5dL"
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-48b042c0759so3258723f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:20:45 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fIP6YiS5"
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a0e1b0681bso31566755e9.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:27:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791994844; x=1792599644; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=EjI1AUhEkeYaz5+gj/BBEQM/J50SQrXWS0m/4fb/0T0=;
-        b=KRDDZ5dLvmQxVaWSv1xKVRejl6KzvnurMd7QKx5jrQMfTm1sHb+NW2H/JooVv7dMCk
-         Pb2c9vwVkMr/qnYP9JaLq5XF1Tb27ltBNF20hbCk3qYvitN4ylM70f1TEqd0EWag1V9M
-         FGUfSWa+kkvneTXncAGQfqaSVHhFDsrMQz3yeYC2ZTdMUfCi96lYMgjB0iXYA89xuwq3
-         Gr3jh14dnflPLRoqu6oIRlPH+tHu/VWGTCgm+pKmAbYXMlo7KxMxwDuxu126gu9qnU4l
-         +5uO41RXaYbb7UQrHaaNvyKPXvAZG8hTPxVPvz/tvP+7TqHdmywvyph0dfVTqbSjt6uy
-         cMbw==
+        d=gmail.com; s=20251104; t=1791995234; x=1792600034; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=yniGqF21dTRj7u5IQTGNCDiFri0/FKhl7euVY4lavmk=;
+        b=fIP6YiS5uBOn9iL0/HAZVL2wLYrKAifvwzGM+6us1I/ZjA504WxZgauawr3Pty8zuX
+         aKY+wARShGpyIOsRDKxDCbZ1srN7xXo5DXt/DBDwD4Tf/DpkkLti+Cj282L6+Jh1Eszz
+         zaP6tersBa1u8KftitQZjTLfUNKexurjBwnvEPNxd1Cv9Hxdf9axwsE9SiMTg0QDtWum
+         8gom47fmpbg/Ail2PaN5l1VTNrHLGtz53kh8a1ni7k8i8X51Qtq8PR9ql5RlRSF7QyVd
+         9TYbng32CdWBQIj8pH5LGOc7lZJ2lBAX0AfJmJrxk+Mc6MGhCIHCcwCZojJuJnGvggxY
+         zMnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791994844; x=1792599644;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EjI1AUhEkeYaz5+gj/BBEQM/J50SQrXWS0m/4fb/0T0=;
-        b=BxjmQltwdfMPylQ1nc2PbdzxOO9SRFss7intE+36WXaPvP4uJ98aIAVUEzNqYlDo7b
-         LRpusoTvQYwXnVG95/8kHIRlhDcL2iuDn48kV8AyOscmUTYl/3YCo4GNstuM5kgcXhQR
-         lq8xDdcV6Kim3JX6CyST0BDVVkiCQwUluqqsEKK++BWD2SxfXE3gNqwI8mv/bv61IloK
-         SNn9I1H4clikzg4/fgzbmVdedrrmHCGUkgQVtvH7mOPKDDOKCujAG4rV1rOUi9BU1Upd
-         Y3T/Bd4TuzyoUNSIBk4nTM564H0wSnKoGRgJU+Y3du3N5sWQQpxWkPQNm3GpvKJgUb85
-         30Lg==
-X-Forwarded-Encrypted: i=1; AKwUvBzxuIn2NbM85Ek47IaXKPMVlWMw1IpnX+e67Dau+d7mjxwwYlyJfIIATKP4/kjRFE3lLs8ohxgNDUmpP2Mz@vger.kernel.org
-X-Gm-Message-State: AFq9FYI7qYW9q3E9UNCESVrIbJPgeWe+OtPH67x8jMnmQmwBkiuLZjMK
-	4b+GQBNXAQ5eh1xFF7Yimro/b6Po19bfwPohdIUACBbQSthMHxiQcESq
-X-Gm-Gg: AYBFou28ydn5A5QDeWNZyGLUEtN5z8PSUXkJTiVRKF7uMzk42cW04wbYYr8+0rdZAzF
-	BQPC8WtYT9ijIKttKwLKD+J+5dDHJCzpHNtPizLgejd4LjpJuIDRfGzrs2lHI4GJ0zesisISoYa
-	2QFJnjwNQ/aqseoh8oTuQtGbehyu5zwDenH5wGwFCLLSdxkkFKstqzOgy5A7aagZZnO89HmWbNa
-	ypd32ms5IGV79y6rRQmiZlxpxeyNpRdY1AWq5TCFNa/ckMtxV0wqC7oEJeu6AnNX0ssL47kWOu8
-	Z8ZqgD6KVbHftyfWvMAEdGTTSM0z5T3goyKV0AvSZZ7U22S5lENJoD1AYJ4+olpkz0yhYHMrHCw
-	u4hs4LMbeoKhPZrk073oLCJRqg7pRNnGjzA3sF4KnJ2m2eofCe2GS2FDyO0+vLL6W8anGYPKOU9
-	TgTeyvA+lnDYte2f7azgc6tS2YR7r7N7ZIqVOuQpATZtsp0kks1t7EAVB0Ci35Vu3BiXOdLEuDm
-	tForT8Yr4p/GDKYmk6NqGSqWWkh/P/fNd0R
-X-Received: by 2002:adf:ed50:0:b0:48c:7caa:12cd with SMTP id ffacd0b85a97d-48dbaae379dmr21487148f8f.22.1791994843601;
-        Wed, 14 Oct 2026 09:20:43 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791995234; x=1792600034;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yniGqF21dTRj7u5IQTGNCDiFri0/FKhl7euVY4lavmk=;
+        b=c2cRJm+0Qhx3sJ2p4ERZrlN6Do78iAABNFuGidO77Yz/Kw0Gde+GgDA8N9UWGqKeJX
+         wWI1yRueN8XwRklPlH7+wG4euULO2ake5PbVgKAUCXt2Y4fidC0MeSoHL1/7gI+VXNPr
+         bD+8K7K2xuAW4E+P+TuTS5vf+XIm4q+Go9aRyUj6vhtqOKkXVXLvuGRcTjHdktbeDA3x
+         GH4F2DE3iF3H9O3EbF7kRCaqr7cWFvOkqcs97Mq+DlXk4PmoqbAPTsI7bDn+1WCcZoJU
+         /ZV66wx4zdkrPprTD0RUck5Or9HYX71caZ32ZW72cD3Y4wWMklGzLXb5q+aNupvlCaaG
+         A6EQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx+MkC8/R1+r2PS2wXgb4QeTAkBgKpnIui/5MSgTTQfQoBPdKf0mmz7bbTBVsOtbZEGuBoLxBx4tE9W0iIF@vger.kernel.org
+X-Gm-Message-State: AFq9FYLj1YqdAccc/Q+yptqJ4wKdjROUHirz2IWtU4LZTR7f5RCAoeKe
+	sOsdYEbywv6z8vZdEk0TOWiYUSn9JPx7IAaunyA3W3fARxSLR0aulMHB
+X-Gm-Gg: AYBFou1QqaCHTzedH1RUrA4x12NzZsDNNCgJj7hCiIfoF8FJQoocAJN0tL0cFTNZKFt
+	WWS3pKjRpRlSDfhcWW7Ri504Z+uO9TuzWOM6cez4hbwNi44tIpWJMoN2T/1BR2I90DhOu0oUHXZ
+	IomYICAJvHpJAmK8Tn7NWD2OcrJENuYcXbTw12po98Z/5tdOaqmXHYk5Lg4g9R0wGicBtFY6YIQ
+	Z+7GD3sEUtQ6OEiaJY2mWXdCFYpIdN9hrpZiH8Lr0+JEagcdpFXs2ZviArQ8x4meiTazem4aLC8
+	R8LoSwRBR4z1JEzhQ17xPSf1Rd2/vvzBzB+yTBdYMD9IdcwPY07pWrS8aJHiU7XN+yusra+e7wU
+	HuXayPu3KXQwrbJE+6efe18vNZKBHVuYomwtbsvtTd1hQtuJl5ndzvaKDfrFYTwq27qybFj+JlO
+	4+eFm/KXQvyVAyaxZqU443j2G5Pj23/QkQC/ymYE/hnReNxqhGqVfaELc6EA/ijSfi0ewj9nz4k
+	t/WRtj2MS4Zn3vkJ6CirXluJA==
+X-Received: by 2002:a05:600c:820d:b0:4a1:65d2:7912 with SMTP id 5b1f17b1804b1-4a18e47b302mr298262975e9.8.1791995234315;
+        Wed, 14 Oct 2026 09:27:14 -0700 (PDT)
 Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de7273a0esm8545727f8f.29.2026.10.14.09.20.35
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaabc3sm13076890f8f.16.2026.10.14.09.27.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 09:20:37 -0700 (PDT)
+        Wed, 14 Oct 2026 09:27:14 -0700 (PDT)
 From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Birk Skyum <birk.skyum@pm.me>
-Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	linux-bluetooth@vger.kernel.org,
+To: Srinivas Kandagatla <srini@kernel.org>,
+	Mark Brown <broonie@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Zhang Jiaxi <Z1529105815@outlook.com>,
+	Johan Hovold <johan@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Bluetooth: hci_qca: Reset the in-band sleep state on power off
-Date: Wed, 14 Oct 2026 19:20:24 +0300
-Message-ID: <20261014162025.3733-1-tvlad744@gmail.com>
+	linux-kernel@vger.kernel.org,
+	Vladyslav Tymoshchuk <tvlad744@gmail.com>
+Subject: [PATCH 0/3] ASoC: qcom: qdsp6: report the position of a drained buffer
+Date: Wed, 14 Oct 2026 19:26:59 +0300
+Message-ID: <20261014162703.10172-1-tvlad744@gmail.com>
 X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <179163212446.46972.2306254853726299632@pm.me>
-References: <179163212446.46972.2306254853726299632@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -83,110 +82,49 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi Birk,
+Since commit a93dad6f4e6a ("ASoC: q6apm-dai: make use of
+q6apm_get_hw_pointer") q6apm-dai reports one frame less than the
+position of the last buffer the DSP returned, and commit 44432315444c
+("ASoC: qcom: q6asm-dai: use q6asm_get_hw_pointer") did the same in
+q6asm-dai. When the application stops feeding a playback stream, the
+position never reaches appl_ptr: ALSA never sees the underrun, the
+stream stays RUNNING without period interrupts, and drain ends on its
+timeout with -EIO. On a OnePlus Pad 3 (SM8750) this left PipeWire's
+PCM stuck for hours after a stall.
 
-On Sat, 10 Oct 2026 11:35:26 +0000, Birk Skyum wrote:
-> qca_power_off() cuts the power of the controller but leaves the host
-> side of the in-band sleep (IBS) protocol as it was. tx_ibs_state and
-> rx_ibs_state are initialised in qca_open() only, so a controller that
-> qca_setup() powers on again meets whatever state the last session ended
-> in.
+Patch 1 wraps the q6apm position to 0 at the end of the ring, as before
+a93dad6f4e6a. Patch 2 resets the q6apm hw pointer on prepare, which
+a93dad6f4e6a also stopped doing. Patch 3 is patch 1 for q6asm-dai.
 
-I ran into the same bug from another side, on a OnePlus Pad 3 (SM8750,
-WCN7880 on UART at 8 Mbaud with IBS), and came to the same fix in the
-same place, so here is a second trigger and some test numbers.
+Patches 1 and 2 are tested on SM8750 (numbers in patch 1). Patch 3 is
+compile-tested only; a test on a Q6ASM board (RB3, RB5) and on x1e or
+sc8280xp for patches 1 and 2 would be very welcome.
 
-The second trigger is HCI_IBS_TX_AWAKE rather than WAKING:
-qca_hci_shutdown() deletes the IBS timers and then sends the
-pre-shutdown command, which goes through qca_enqueue() and arms
-tx_idle_timer again for 2 s. If the device is opened again within those
-2 s, the host still believes the controller is awake and sends the
-frames after the new setup without an HCI_IBS_WAKE_IND, while the
-freshly booted controller starts asleep. The commands right after the
-setup get through, the first one after the controller has gone to sleep
-breaks the link:
+The RFC "ASoC: qcom: q6apm: correct PCM formats and error handling" by
+Zhang Jiaxi [1] touches the same hw pointer, in graph_callback() (4/4
+"recover PCM from failed data receipts"). The two do not conflict:
+that series changes when the hw pointer is published, this one how it
+is turned into a position and when it is reset, and that series
+applies on top of this one on sound/for-next without conflicts.
 
-  Bluetooth: hci0: Frame reassembly failed (-84)
-  Bluetooth: hci0: Opcode 0x0c56 failed: -110
-  Bluetooth: hci0: crash the soc to collect controller dump
+The analysis, the patches and this text were drafted with an AI
+assistant (Claude, see Assisted-by); I reviewed them and ran the tests
+described in the patches.
 
-It shows up with "btmgmt power off" followed by "power on" within 2 s,
-and on every boot of a board without local-bd-address when user space
-sets the address with MGMT Set Public Address right after registration
-(the unconfigured controller is powered down after its setup and up
-again well within the 2 s). The stale idle timer can also queue an
-HCI_IBS_SLEEP_IND in the middle of the next setup, which is what
-df1e5c51492f was about.
+[1] https://lore.kernel.org/r/SY5PR01MB10600B2BE812BAA1B0FA501B4A1932@SY5PR01MB10600.ausprd01.prod.outlook.com
 
-> +	/* A controller that loses power is asleep when it comes back. */
-> +	timer_delete(&qca->wake_retrans_timer);
-> +	timer_delete(&qca->tx_idle_timer);
-> +	qca->tx_ibs_state = HCI_IBS_TX_ASLEEP;
-> +	qca->rx_ibs_state = HCI_IBS_RX_ASLEEP;
->  	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
+Vladyslav Tymoshchuk (3):
+  ASoC: qcom: q6apm-dai: wrap the position of a full ring to 0
+  ASoC: qcom: q6apm: reset the hw pointer with the fragment queue
+  ASoC: qcom: q6asm-dai: wrap the position of a full ring to 0
 
-I agree with what the Sashiko review pointed out [1]: without _sync a
-timer callback that is already waiting for hci_ibs_lock still runs
-after the unlock, and ws_awake_device/ws_awake_rx can queue a wake
-indication after the reset. As both timer callbacks take hci_ibs_lock,
-the _sync variants have to be called outside of it. This is what I
-have been testing (on bluetooth-next):
+ sound/soc/qcom/qdsp6/q6apm-dai.c | 12 ++++++++----
+ sound/soc/qcom/qdsp6/q6apm.c     |  1 +
+ sound/soc/qcom/qdsp6/q6asm-dai.c |  7 +++----
+ 3 files changed, 12 insertions(+), 8 deletions(-)
 
-	/* From this point we go into power off state. But serial port may
-	 * still be open, stop queueing the IBS data.
-	 */
-	spin_lock_irqsave(&qca->hci_ibs_lock, flags);
-	set_bit(QCA_IBS_DISABLED, &qca->flags);
-	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
 
-	/* The controller loses the IBS state with its power and comes back
-	 * with both sides asleep, as qca_open() assumes. Stop the IBS work and
-	 * timers, drop what they queued and start over from there.
-	 */
-	cancel_work_sync(&qca->ws_awake_device);
-	cancel_work_sync(&qca->ws_awake_rx);
-	timer_delete_sync(&qca->wake_retrans_timer);
-	timer_delete_sync(&qca->tx_idle_timer);
+base-commit: 8ef28aef33f2d5da6959ad6b579ec3cfccc009f6
+-- 
+2.43.0
 
-	spin_lock_irqsave(&qca->hci_ibs_lock, flags);
-	qca_flush(hu);
-	qca->tx_ibs_state = HCI_IBS_TX_ASLEEP;
-	qca->rx_ibs_state = HCI_IBS_RX_ASLEEP;
-	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
-
-All callers of qca_power_off() can sleep, and the work items do not
-call it, so there is no wait cycle. The flush moves after the waits,
-so it also drops what the work and the timers queued in the meantime.
-
-Sashiko also suggested Fixes: and Cc: stable, with df1e5c51492f. I
-would point Fixes: further back:
-
-Fixes: 3e4be65eb82c ("Bluetooth: hci_qca: Add poweroff support during hci down for wcn3990")
-Cc: stable@vger.kernel.org
-
-3e4be65eb82c is where the IBS state started to outlive the power of the
-controller; the AWAKE case exists since then, and df1e5c51492f made the
-WAKING case permanent. Mentioning the AWAKE trigger in the commit
-message would help too.
-
-Test numbers, five quick power cycles each (power on within 2 s of the
-power off, then a scan): 4 of 5 fail without the change, with commands
-timing out ("Opcode 0x2042 failed: -110"), and 0 of 5 with the code
-above. With it, user space also sets the address at boot without having
-to wait for the 2 s first, and it is now in the kernel I use on this
-tablet every day. I have not tried your v1 as posted; I expect it to
-cover my case as well most of the time, but I have only tested the form
-above.
-
-Would you fold this into a v2? I am happy to test it on this board and
-give my Tested-by there. If you would rather not, I can send it as a
-separate patch with your Reported-by, whichever you and the
-maintainers prefer.
-
-Thanks,
-Vladyslav
-
-[1] https://netdev-ai.bots.linux.dev/sashiko/#/patchset/179163212446.46972.2306254853726299632%40pm.me
-
-(I used an AI assistant, Claude, for the analysis and to draft this
-mail; the tests ran on my device.)
