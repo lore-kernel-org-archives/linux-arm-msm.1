@@ -1,165 +1,204 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF4A9563288;
-	Wed, 14 Oct 2026 16:58:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5583E54A7CC;
+	Wed, 14 Oct 2026 17:03:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791997112; cv=none; b=MyZ8Av1SsuTGS1eRE507Ff6OtnQb8vFu8gqTvFeuZa5UDT7RBdZyL2mWGj+oQZ0tJ3XYP6evpJush+PPcE1GhAYC3uTLjIjHLue/TPsZJ8NDipgVyIlQfkcPbo6VOZuuIqwZ81+1UiwpY/WYO6N37CFIPHJSIzHTPCX2fr6aKk0=
+	t=1791997388; cv=none; b=jjrQrRRTyKqBy4+8mkQmPkOBant4GkFqcYJ0K6ms4whkDoZfIEtOKb8KNeUdRuq4iOGauwgAPInKz4/FszAXyOTyJrSbO2rCR4rEoGhRvM7asX+rTs4nrKxggJSMw6DC0ckHevMGSVQR7Rn4hVyl+2EgENGPBvWlZ6vXsXt19DQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791997112; c=relaxed/simple;
-	bh=SWMfrCIO4YtH5M5e+HBbAjTtGT/8z2eh56CZQAT9lsQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=AAKrpP03MAAMtxfwFttEljEVUHmaeX/gqtWE9a5prlnILYqMUVJ7OCieFylOmOXY/U9VDCyanvO/8ihMHxE75r4NYb/U4l7rHDdN1sXhZu71CK0gaEZrsOEuXAa7RQJpL2ystvnNgV0cIPK1byMB8WT18t/9l+oysp30yHulBR8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a6ri6WzS; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791997388; c=relaxed/simple;
+	bh=iFAnrRfWiXjrZSVBmYWzgUIDLhMC4ZgrfW0F16D+pKA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=M026s19clbSiD0QKjnuIQEv96Tzbfk0AkdAszMJYmltvVHpmYC9HfSIDuEQ4PTy4TjNKZclqAlola1OoLieNx9wVhyZYPbx2F9uIhWYGYEics9vEKUOHzo/XPc8M/1IeWGKXYQ+Nk/5R8cd9mz4gR6hgZFDrohmii9PuIs+du60=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DeIKuK/9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a6ri6WzS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D5721F000C4;
-	Wed, 14 Oct 2026 16:58:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DeIKuK/9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3F6E1F000C4;
+	Wed, 14 Oct 2026 17:03:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791997110;
-	bh=pC10JpWaZK5q2nplJQQ/7Ng9MIH1WaCTPiIEoz3L6+4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=a6ri6WzS7o+KWbVhLNAerubNn8eACMbiby8b3bioPlA4QdWHkcT/EIZTBMeZruyOz
-	 uFIDz8t6NrFuh5yk2shxhD7OT1DfrWP19ss8/TBCBNVCaQj+pCvW3494pdTaAvuUdB
-	 W4FyN9YXYOlr5UInPQ5d4cf8+sFaXMJlnSYGfHPzNIg7PnGm5FBsZYSxoi0Z2jGpwf
-	 z7j2twiYiukHuc5EnkNzB9fsY7g1qECKtF6Fc2CJAOfCm/4xRrXTCmZhBfEGyjG2r7
-	 g8FGdd9RuTqcqb8sHYSW3kEXBRv4RLmwxnCpTz3W7ekkgUVuxDHfFHf6P9vsYTuZmn
-	 S8oAqGYUm2bEQ==
-Date: Wed, 14 Oct 2026 11:58:29 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-Cc: bhelgaas@google.com, alex@shazbot.org, jjohnson@kernel.org,
-	johannes@sipsolutions.net, mani@kernel.org, jgg@ziepe.ca,
-	yishaih@nvidia.com, skolothumtho@nvidia.com, kevin.tian@intel.com,
-	linux-pci@vger.kernel.org, kvm@vger.kernel.org,
-	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
-	ath12k@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 4/7] ath11k: add PCIe link recovery retry
-Message-ID: <20261014165829.GA1636877@bhelgaas>
+	s=k20260515; t=1791997386;
+	bh=Esd1xovFMot4e+VD6qfstBOMCypNZ2JuCPRuue5vIlA=;
+	h=From:Date:Subject:To:Cc;
+	b=DeIKuK/9Ukqqo3k2TYHCz95mDfB3zsX9ZGZr0PQ9suX9rd2w/2SdRnmP+rUZxNv+U
+	 /BKGPMz3YjTLRNZaecg0rglf3s4o4TXmlocHlWM7Q31iT4bPDeJS0UQv7KyRU6G9vP
+	 bnU446OhGmLDgzJj2mehNKfMb86/NO7Qpy3zzeqvjdm32dMVdDPK8wonDNbXLgKcHq
+	 R3bS3Dmdkh0lVksZ4OEefFnDKpO+lns9VjxSt9uxUyicpi9M20/DjMNStQ1BnMu8VO
+	 lArLRqiH6gU1uzK8xpcNAPH2a63iJUNgl1fsichCrmsUJl5NV83gXYlQmw4KnLrNN0
+	 7M5ocCjyychrg==
+Received: by venus (Postfix, from userid 1000)
+	id B6B1A180A50; Wed, 14 Oct 2026 19:03:04 +0200 (CEST)
+From: Sebastian Reichel <sre@kernel.org>
+Date: Wed, 14 Oct 2026 19:02:54 +0200
+Subject: [PATCH] ASoC: codecs: wsa884x: Add mute control knob
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260930140833.576941-5-jtornosm@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261014-wsa884x-mute-support-v1-1-74d98d79e635@collabora.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrDuQxBBsr1K6iDrqCNWQSVpBv
+ LtpXb7F/zsIRSaBR7VDpA8Lr0uBvlXQTX4ZCbkvBqOM00pb/IpvGrvhOydCySGsMeHdWUN1Paj
+ eOyhpiDTw9t8+X5cltzN16feC4zgBFns+EHgAAAA=
+X-Change-ID: 20261014-wsa884x-mute-support-9642e33f0da6
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Sebastian Reichel <sre@kernel.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4776;
+ i=sebastian.reichel@collabora.com; h=from:subject:message-id;
+ bh=iFAnrRfWiXjrZSVBmYWzgUIDLhMC4ZgrfW0F16D+pKA=;
+ b=owEBbQKS/ZANAwAKAdju1/PIO/qaAcsmYgBqz7XIyXj5SCAwyRN7Byvm3eFVrpF9sFGfzhiua
+ pAJ3lvqY+eJAjMEAAEKAB0WIQTvZg0HRj+Lcmp5VBPY7tfzyDv6mgUCas+1yAAKCRDY7tfzyDv6
+ mg9YEACL8rrEkqf42lgyUUGtT4Xe1Q4TptpSeA7+L66T2R++vCnYcwwH7ZvBbBk57hLwItCECnP
+ LKWflCOBjX4wcT5+/OjhDg1YXD9oSeU7MShUiKw124QSMY4wScKmKpdVg1gqypggK+EkBh90FrQ
+ bJF9FY17a6aY7+TsrqjvXSpMb4SVST6gcsRVpdZZBBpJUN19I1EkTS7WfSs2zW65DoIyKuCKwZW
+ t8sQ7Cv/i2l1UBdJhvSRe3roWmbFeo02ywGQaXJS+FgFNIZ6cjGmUnxF7eaDMQdlPZ5Pz+FipDt
+ gABWzq+Qry7IY4B11wVsLQv+H003aVB8KY4Z043IO1sgbyglNpDkoOdCW05DfNzHip39bOeF8ge
+ 6XrIpofxvf/HuGce3r0gyIcEzePHXmjNp+uina9zWuHQ08Qk0GpRTl+21QYBY4JdjBenyw0GUhu
+ pHpXWJv6GoHXnuNAxB3VuYPOoyMMtFgJjlCTeRmlZJB8q8pzVY+FA4DpRzTreFsKqifIBvE3w+r
+ dX5yWvuauzDxxAPJPiFCkAGNrbfNIwwep2LP7SNa2FqZpiKr7heaOFp940RCVj83RZa2xzwIS5I
+ i/yjh3YUzBWUqahz2Kp/DzbzL5zTik1685BIgcDvFZ9Rb6RrDE8z56TGO11g0m4lr4GGZBtZ3Rw
+ UoKwXeKhJMxxwWg==
+X-Developer-Key: i=sebastian.reichel@collabora.com; a=openpgp;
+ fpr=EF660D07463F8B726A795413D8EED7F3C83BFA9A
 
-On Wed, Sep 30, 2026 at 04:08:30PM +0200, Jose Ignacio Tornos Martinez wrote:
-> When ath11k devices are passed through to VMs via PCIe passthrough,
-> the PCIe link may not stabilize immediately after global reset due to
-> virtualization layer timing variations. This causes MHI initialization
-> to fail with "BHI offset: 0xffffffff is out of range" errors because
-> the device is read before it's ready.
-> 
-> Currently, ath11k_pci_soc_global_reset() just warns if the link is
-> down but continues anyway, leading to inevitable MHI failures.
-> 
-> This patch adds:
-> 1. A retry loop (up to 5000ms) to wait for the PCIe link to recover
->    after global reset (similar to the existing ath12k LTSSM retry logic)
-> 2. Proper error propagation to prevent continuing with a dead link
-> 
-> This is especially important for VM environments where timing can vary
-> significantly from bare metal.
-> 
-> Signed-off-by: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
-> ---
->  drivers/net/wireless/ath/ath11k/pci.c | 39 ++++++++++++++++++++++-----
->  1 file changed, 32 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/net/wireless/ath/ath11k/pci.c b/drivers/net/wireless/ath/ath11k/pci.c
-> index 7114eca8810d..4fc6aaf036c1 100644
-> --- a/drivers/net/wireless/ath/ath11k/pci.c
-> +++ b/drivers/net/wireless/ath/ath11k/pci.c
-> @@ -190,8 +190,10 @@ static void ath11k_pci_restore_window(struct ath11k_base *ab)
->  	spin_unlock_bh(&ab_pci->window_lock);
->  }
->  
-> -static void ath11k_pci_soc_global_reset(struct ath11k_base *ab)
-> +static int ath11k_pci_soc_global_reset(struct ath11k_base *ab)
->  {
-> +	unsigned long timeout;
-> +	bool link_recovered = false;
->  	u32 val, delay;
->  
->  	val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
-> @@ -211,14 +213,29 @@ static void ath11k_pci_soc_global_reset(struct ath11k_base *ab)
->  
->  	mdelay(delay);
->  
-> -	val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
-> -	if (val == 0xffffffff)
-> -		ath11k_warn(ab, "link down error during global reset\n");
-> +	/* Wait for PCIe link to recover, especially important in VM environments
-> +	 * where timing can vary significantly from bare metal.
-> +	 */
-> +	timeout = jiffies + msecs_to_jiffies(5000);
-> +	while (time_before(jiffies, timeout)) {
-> +		val = ath11k_pcic_read32(ab, PCIE_SOC_GLOBAL_RESET);
-> +		if (val != 0xffffffff) {
-> +			link_recovered = true;
-> +			break;
-> +		}
-> +		mdelay(20);
-> +	}
-> +	if (!link_recovered) {
-> +		ath11k_err(ab, "PCIe link failed to recover - device may need power cycle\n");
-> +		return -ETIMEDOUT;
-> +	}
+This codec is typically used with ALSA UCM, which right now falls back
+to handling mute in software. Expose proper hardware mute control
+considering the driver already handles it internally anyways, which
+allows UCM to bind speaker mute LED to the new control knob.
 
-Link down is a PCIe reset of the endpoint, which should clear all
-PCIe-specific state, e.g., BAR values.  Is that restored somewhere?
+Signed-off-by: Sebastian Reichel <sre@kernel.org>
+---
+UCM pull request for the speaker mute LED support:
 
->  	/* Restore window register as its content is cleared during
->  	 * hardware global reset, such that it aligns with host cache.
->  	 */
->  	ath11k_pci_restore_window(ab);
-> +
-> +	return 0;
->  }
->  
->  static void ath11k_pci_clear_dbg_registers(struct ath11k_base *ab)
-> @@ -373,8 +390,10 @@ static void ath11k_pci_force_wake(struct ath11k_base *ab)
->  	mdelay(5);
->  }
->  
-> -static void ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
-> +static int ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
->  {
-> +	int ret;
-> +
->  	mdelay(100);
->  
->  	if (power_on) {
-> @@ -387,8 +406,12 @@ static void ath11k_pci_sw_reset(struct ath11k_base *ab, bool power_on)
->  
->  	ath11k_mhi_clear_vector(ab);
->  	ath11k_pci_clear_dbg_registers(ab);
-> -	ath11k_pci_soc_global_reset(ab);
-> +	ret = ath11k_pci_soc_global_reset(ab);
-> +	if (ret)
-> +		return ret;
->  	ath11k_mhi_set_mhictrl_reset(ab);
-> +
-> +	return 0;
->  }
->  
->  static void ath11k_pci_init_qmi_ce_config(struct ath11k_base *ab)
-> @@ -818,7 +841,9 @@ static int ath11k_pci_power_up(struct ath11k_base *ab)
->  
->  	ab_pci->register_window = 0;
->  	clear_bit(ATH11K_FLAG_DEVICE_INIT_DONE, &ab->dev_flags);
-> -	ath11k_pci_sw_reset(ab_pci->ab, true);
-> +	ret = ath11k_pci_sw_reset(ab_pci->ab, true);
-> +	if (ret)
-> +		return ret;
->  
->  	/* Disable ASPM during firmware download due to problems switching
->  	 * to AMSS state.
-> -- 
-> 2.53.0
-> 
+https://github.com/alsa-project/alsa-ucm-conf/pull/880
+
+It's fine to land this patch before the ALSA UCM series (control knob
+will be unused), or after the UCM series (UCM will detect that the
+control knob is missing and fall back to existing behaviour).
+---
+ sound/soc/codecs/wsa884x.c | 67 ++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 50 insertions(+), 17 deletions(-)
+
+diff --git a/sound/soc/codecs/wsa884x.c b/sound/soc/codecs/wsa884x.c
+index a367c94bfb4d..97cd93c6f4a8 100644
+--- a/sound/soc/codecs/wsa884x.c
++++ b/sound/soc/codecs/wsa884x.c
+@@ -742,11 +742,13 @@ struct wsa884x_priv {
+ 	bool hw_init;
+ 	/*
+ 	 * Protects temperature reading code (related to speaker protection) and
+-	 * fields: temperature and pa_on.
++	 * fields: temperature, pa_on, user_mute and trigger_mute.
+ 	 */
+ 	struct mutex sp_lock;
+ 	unsigned int temperature;
+ 	bool pa_on;
++	bool user_mute;
++	bool trigger_mute;
+ };
+ 
+ enum {
+@@ -1731,10 +1733,52 @@ static const struct snd_soc_dapm_widget wsa884x_dapm_widgets[] = {
+ 
+ static const DECLARE_TLV_DB_SCALE(pa_gain, -900, 150, -900);
+ 
++static void wsa884x_set_mute(struct snd_soc_component *component, bool mute)
++{
++	snd_soc_component_write_field(component, WSA884X_DRE_CTL_1,
++				      WSA884X_DRE_CTL_1_CSR_GAIN_EN_MASK,
++				      mute ? 0x0 : 0x1);
++	snd_soc_component_write_field(component, WSA884X_PA_FSM_EN,
++				      WSA884X_PA_FSM_EN_GLOBAL_PA_EN_MASK,
++				      mute ? 0x0 : 0x1);
++}
++
++static int wsa884x_get_spk_mute(struct snd_kcontrol *kcontrol,
++				struct snd_ctl_elem_value *ucontrol)
++{
++	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
++	struct wsa884x_priv *wsa884x = snd_soc_component_get_drvdata(component);
++
++	guard(mutex)(&wsa884x->sp_lock);
++	ucontrol->value.integer.value[0] = !wsa884x->user_mute;
++
++	return 0;
++}
++
++static int wsa884x_put_spk_mute(struct snd_kcontrol *kcontrol,
++				struct snd_ctl_elem_value *ucontrol)
++{
++	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
++	struct wsa884x_priv *wsa884x = snd_soc_component_get_drvdata(component);
++	bool mute = !ucontrol->value.integer.value[0];
++
++	guard(mutex)(&wsa884x->sp_lock);
++	if (wsa884x->user_mute == mute)
++		return 0;
++
++	wsa884x->user_mute = mute;
++	if (wsa884x->pa_on)
++		wsa884x_set_mute(component, mute || wsa884x->trigger_mute);
++
++	return 1;
++}
++
+ static const struct snd_kcontrol_new wsa884x_snd_controls[] = {
+ 	SOC_SINGLE_RANGE_TLV("PA Volume", WSA884X_DRE_CTL_1,
+ 			     WSA884X_DRE_CTL_1_CSR_GAIN_SHIFT,
+ 			     0x0, 0x1f, 1, pa_gain),
++	SOC_SINGLE_BOOL_EXT("Speaker Switch", 0,
++			    wsa884x_get_spk_mute, wsa884x_put_spk_mute),
+ 	SOC_ENUM_EXT("WSA MODE", wsa884x_dev_mode_enum,
+ 		     wsa884x_dev_mode_get, wsa884x_dev_mode_put),
+ 	SOC_SINGLE_EXT("DAC Switch", WSA884X_PORT_DAC, 0, 1, 0,
+@@ -1802,23 +1846,11 @@ static int wsa884x_hw_free(struct snd_pcm_substream *substream,
+ static int wsa884x_mute_stream(struct snd_soc_dai *dai, int mute, int stream)
+ {
+ 	struct snd_soc_component *component = dai->component;
++	struct wsa884x_priv *wsa884x = snd_soc_component_get_drvdata(component);
+ 
+-	if (mute) {
+-		snd_soc_component_write_field(component, WSA884X_DRE_CTL_1,
+-					      WSA884X_DRE_CTL_1_CSR_GAIN_EN_MASK,
+-					      0x0);
+-		snd_soc_component_write_field(component, WSA884X_PA_FSM_EN,
+-					      WSA884X_PA_FSM_EN_GLOBAL_PA_EN_MASK,
+-					      0x0);
+-
+-	} else {
+-		snd_soc_component_write_field(component, WSA884X_DRE_CTL_1,
+-					      WSA884X_DRE_CTL_1_CSR_GAIN_EN_MASK,
+-					      0x1);
+-		snd_soc_component_write_field(component, WSA884X_PA_FSM_EN,
+-					      WSA884X_PA_FSM_EN_GLOBAL_PA_EN_MASK,
+-					      0x1);
+-	}
++	guard(mutex)(&wsa884x->sp_lock);
++	wsa884x->trigger_mute = mute;
++	wsa884x_set_mute(component, mute || wsa884x->user_mute);
+ 
+ 	return 0;
+ }
+@@ -2077,6 +2109,7 @@ static int wsa884x_probe(struct sdw_slave *pdev,
+ 	wsa884x->slave = pdev;
+ 	wsa884x->dev = dev;
+ 	wsa884x->dev_mode = WSA884X_SPEAKER;
++	wsa884x->trigger_mute = true;
+ 	wsa884x->sconfig.ch_count = 1;
+ 	wsa884x->sconfig.bps = 1;
+ 	wsa884x->sconfig.direction = SDW_DATA_DIR_RX;
+
+---
+base-commit: 0fcb05b72344f40806cbe810de8872f1698bf053
+change-id: 20261014-wsa884x-mute-support-9642e33f0da6
+
+Best regards,
+--  
+Sebastian Reichel <sebastian.reichel@collabora.com>
+
