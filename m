@@ -1,87 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 240B8515985
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 834D35012B7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791982997; cv=none; b=Vpr1GmlixnxQ0zB6xksQxFgdiW2pxgS6fDWlBRMQ5Bv7oJ2ttk5AA8x89qKfE34Yx+F/A6o+gp39MnvUY+9xc+CUAW89zxTthhqT+5g8BSKaFxOiWF6RNB2TCRksn840XhLl9PD8UN/54ZFMNoAyPl9y6n4XWtW3+0mypisbVCg=
+	t=1791982998; cv=none; b=q6e3Zl/zndGOD49zSOKArwC0cki6gB3L3F4Nise8enzXZO7J9WGF2Gi0YS517Nge1YG/hbWM3GvaOXH18BUv8nQezZLh7ohi0QIyJ3Rz0XpzYLnwayvpyOm9dQLBlRvT4Elv37Wp1crktNjQ4naZVAsvJNnNcPqtZsOzDDegH/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791982997; c=relaxed/simple;
-	bh=5rv38UcrwbFqOl8kIRBBDnFFUd9jARG6P+ogvn4XWwQ=;
+	s=arc-20240116; t=1791982998; c=relaxed/simple;
+	bh=o3CLylce040Uzmfs746UWO9V4mjo6gjq7klcNZMuAik=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pSCiZH05stSRpHiRIhWXAJJSGFhDJ7qI9TD3TlRYedCvyWXesWoHFr7XpqQjlwQdlZOP8j2LLsvephjDDClOQ6N/r56bR8rc8FHL1c1LkhnrB9N0CG9Oz+DrXNeYJyJt5v/aJvMevlmiT7xsDiffIs1zA9XJIr8n8Ua5ZeAM+9c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oe4NkxUL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HdtG+6wM; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=t1w7c9pCtaS9kc/g5+kHxa6h33jj1K8fhNvUcVei2RF2kW8oee4BBb9vKTpiMdJ81LH/ZVH+Da/pdG7npxEDGGrec6Lt8LYFR8VIWIF5ZC3KFFw71fA7evarRmDKpf4S+lGbnKbXpkVaG9+kDtMuaErE6HTQvr8bSe7CtoFbC8s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NqIEWlTp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VfhcwsVZ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oe4NkxUL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HdtG+6wM"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EAR39r466257
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NqIEWlTp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VfhcwsVZ"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EBImDT2685314
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	WNkD0orYO1VTH788P7bOUsG3azMo3cwZxLA2xjcYEo0=; b=oe4NkxULPhYmP4R3
-	jjYVZUtI4jpqFim/4jUCj2gLjvlbUnQS0LKUo8HPcm1OkZ0kFuCfTV1rlB+TC6nM
-	uIQhrHPlsSkyrr/I2F1p/F3JSg5Qgfys5vVji05MGvjYDD87O/UlsUVLOhKhxG0R
-	HnNziXKX6WX5y3rn1oGqfdpez3+XXS+C2C2xRidIUF8VOCtSKLPwkr0a34iV1bq1
-	J1bz9zqi7QsyQpkPKy7PU22G+or+0G8dLeNqACTMl/tbb+viTzwwx644zEZ6S0ki
-	Bwf98/h/53jQPqsbLfOmMfeQHPX+TMCWvWX3YM5eopZ5IXoFnjX5ULECT+A4NWuV
-	bdEdgw==
+	f6GuRcuGOLcIK8U1i/42FXzU8VT6SBWZltoaozE4kyo=; b=NqIEWlTpj31oiWxd
+	VyDcdIJj8hN4vD5SJQx92tB2Jj0meGvtc5ahP2salRE/mmW3MQAtDCcaFPJTdwJr
+	vIvMOXNk3Kz742RCCT+YsYQlm/msQ4yqYu3RtVaa9oIOlEnzNzSZcuXAbIwkSGjm
+	c/ZG06+0CuS5FFLcSn/Gl20RMvMhdtrZq0nNhM3fLab+kr7p1KTTcHssRanQ91Mb
+	JdQFe1QiICXanOb2Gn4u0na/EKz7jMblM30ADgHkEYeiOy5i+GR+PUuCbCNvz4Ce
+	arYcjFUwHepDgIcFfk5j/lG8ekSRfJtixneLEHFz/HzzoDsd1RgS4VO/Sm8bwPbs
+	qIve4A==
 Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha80crjbd-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha46u1ns6-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:08 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5c7c0d2b0aaso1727674e0c.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 06:03:08 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 13:03:12 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5db39f9a7b9so5011433e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 06:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791982988; x=1792587788; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1791982990; x=1792587790; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WNkD0orYO1VTH788P7bOUsG3azMo3cwZxLA2xjcYEo0=;
-        b=HdtG+6wMAZa3Qdz6E/mwt/MOu/qvVHctGHdI3G9RvBTf0gE1vTQ5QqlzY6sNWNcCdE
-         a9ZedXRmV+gQ4gu4TzjytwDHgYKvBz/pcScOUQxFO4OZuNOX4DV2fqJBM7yOBa1dMRK8
-         9sD0E317YfgOuNVt9tfy75Ho91GgT5t+WBJBDxTLAjEn3vk1VjACuSLS+G5nsEDDXlp6
-         CfWzXpn6Mo4yptXCzcw9qMia1yICtob4mX7hzfcfSXOmUqSvP6BfPDWHdAZTraAY8J6R
-         WTQ9ZjNVpg5bCTkcsdzdRIFccETPoWGk0/9CoHBMG801siyUM6gAVYP3PcimQdlTbIgB
-         ap4Q==
+        bh=f6GuRcuGOLcIK8U1i/42FXzU8VT6SBWZltoaozE4kyo=;
+        b=VfhcwsVZ51wdKvHK0M3aldmagg0SB1fF/oZXBamuodWQn6Db4HB65FJ2zzK6vXRrrq
+         nbo4S7a1JwPi5m1sv7PGVM6sRts+W4H+78+WcyzokIPOBDWSsxNTVZKip7pod23LkTjw
+         K4iv2KIe4SZUwRxm1HHvzAM+r+dqI+DuB4lS8a1I5OArpvrfcTXCi/MiibFFq+Ch6/vv
+         b8qHGIBbKeKj+w6UVhIgcKbn17u+3Gm8rDhlf6JdYimeMQjOop7X8/42DQkEZ59CgFJW
+         j1hlGNXHA9vU0wyJHierGiOirB+tckTUFCpZ2xi8qDBxK49SnyVCeedJbtRIS9VbxgA/
+         kVTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791982988; x=1792587788;
+        d=1e100.net; s=20260707; t=1791982990; x=1792587790;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=WNkD0orYO1VTH788P7bOUsG3azMo3cwZxLA2xjcYEo0=;
-        b=rM0qPfwME0gnvu7R/hA8ArIZRiLFkjK1g/tf0XHLc5iQrIoaUfpauAogCY4R3/QeFQ
-         +Fuonhdl5Ca9Ml5slvz70pP5dCVQZOTOIKZB/0jUp35w+9O6kJLu3lmpFU69Ta0jbaoj
-         IxDA/RIfYw4d/Zdw7MDOAroGJhZVy73R8VVFqeaViRm0DiWsWzNFvMgsneLTlzyKBOLj
-         pcuFnbSdc4MDYnPXAJuqlopetMrt0WoU6c+xfjoKn/fQGf5ywiKq92a++mpFUR29jm4s
-         pEZfSZt7Is8LqaZd1eX+miswofWm9wdPdsWkh+utk3jHA9+yT9i35W4ZLxBbz2KJ3s7w
-         w1Sg==
-X-Forwarded-Encrypted: i=1; AKwUvByiSMk4eQrDQBdYEWkPZWQJyClkTpb/NVonm0Ku65aVi5HzCv/3/eKYjFbeuIQZ+kNBhJU3kggJc7z+uNTT@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ6DuWLw9e8uP9NPgSXXk4xFuLb4bGojcMU/bw1Pc5mErB2V61R
-	8vKBxeENix+ZbBblviyFuUw53N6KbJ0YlsUEkBapQGNWxr4d4VQL0xrcnU4/b7AoDvupv0IaRCa
-	IASvSt8YbXV1SUAciYIfEsvsrgbOyZ3dd4/UjI+bvPs+AtWUdkOZ7JH1UH59KYqrI99zB
-X-Gm-Gg: AYBFou2TWkqoWHm+tJxYCn5SdbT1eVyS5V/ZueNUusCK7xMdw2ld+7TMTJ8jIsQyd+U
-	8dnUVEoC2pERqrk0yE+bvcIEUQSJ+A5MISs7s3TfRx9BZbFhuzN544VN7S2QV51YF7gFlKrmZaW
-	x66ucPvIL5OJHEyE3aMbHS9yyOQliZzesFIc0rGprHNPYfFGKEfZGmtFo+LnytUQHe+c/AaC3yG
-	CGJU5niqscnD+F/CJFSCBBbdpN2IrtVvCwvAFdRsJoq+DKsxPbsAj3W2tptZULlM6qLsdFd/uKi
-	a+6JJkc0Yb4ohyog5CqybWFRLzJe8szSPrS1GOqPdAvt+0rVW+GL4Hyqxr3B6XF/KxSVHP8cAyu
-	krAP2O67CTw==
-X-Received: by 2002:a05:6122:2896:b0:5cf:6f75:ff68 with SMTP id 71dfb90a1353d-5e91f250b62mr4861025e0c.1.1791982985917;
-        Wed, 14 Oct 2026 06:03:05 -0700 (PDT)
-X-Received: by 2002:a05:6122:2896:b0:5cf:6f75:ff68 with SMTP id 71dfb90a1353d-5e91f250b62mr4860885e0c.1.1791982983517;
-        Wed, 14 Oct 2026 06:03:03 -0700 (PDT)
+        bh=f6GuRcuGOLcIK8U1i/42FXzU8VT6SBWZltoaozE4kyo=;
+        b=w4vuj7RXSArxzkUkhFZcOWyTJXfDYl09PKqpmgRgZ8ui6jUuOyaRfVxUmBqzXsbO33
+         Pr5X33gfgc21qzb8yyq8XRlI1scukZFAxtUxBRtksC8akeOYDcshqeoRdRbo1+XCDsUz
+         j4c9vSiTMCBIidg0FTf6s0+uhHPb46KWv+I8jvis1bTiLWtT8yqgdJUuOS0QVDHbt0v0
+         7yzEe/LerF2Q9en3+lgnR0O5kxT0kGsmcajbdodr0F12X1hksWPvoSqIH0cMKiYrEmLn
+         1hRGTfAmg7fPkoZJfgEZLUnmj+jB7ks495yDq4XJhSDJkKspaiHIhaqKik3J2ALg9ZCF
+         9ZlA==
+X-Forwarded-Encrypted: i=1; AKwUvBxkcgMVcMymmeXU3FF/95IJSJIlLKBIl68/mDRcztSUWofktyv3YzuxhUXj18Z2zZi2H8SintaMXlCi6YTH@vger.kernel.org
+X-Gm-Message-State: AFq9FYI6UUJL9dHu/FTlGUGI2hDArqxeiIfI62r4C4Zf4DwGEn6YnZDG
+	2CezVEguGfJlb6lfrY+gXfvVxmWbhqwzJCGqqE+LrD/axbPguQjc4M+N9em73Ow6rT8x/rIFAUx
+	ZcQ5LGtjFTD3kKwjzePDCdqF3g67vGIN2fkhfwtnK0KfA7YzuN99n4YWVh/Gjb+JLKksf
+X-Gm-Gg: AYBFou0gEuxw9+0GelYjdD1kluNP1Vr+XHvRxqfPje7Xh56vh6H05mS0Fq6Xcvzegsv
+	13ouk0Zg7lS2BFA+0igS9PfJXwGtxjwHuATHKKWHmPjgLgiGjgw95J3Gb/U8qzT/8xxFPDtu87B
+	twwQNeubCPFDzemUftfkIyeV2LfYlFITCMcEAKj2bVsS0RsDGQHyTYp9csVIrUPs/eQwAPyruw3
+	Qrx7Rn/PUC4g7e4wMMD5ZfBSk/amjpL7y4rStiUFDJK6E8ISEmePmS7TUM2oLmxK0obCLPACWHS
+	vhO2I+66kh72BqKJSEXHSL2OWg7Grc1AT/q91NXzK5Kyo9v3h2UaMoEvYbRk0RV2ikRXX1UpPyF
+	vAh2GverQKw==
+X-Received: by 2002:a05:6122:6004:b0:5cf:dd67:cb32 with SMTP id 71dfb90a1353d-5e91e5b32e8mr2980462e0c.6.1791982989274;
+        Wed, 14 Oct 2026 06:03:09 -0700 (PDT)
+X-Received: by 2002:a05:6122:6004:b0:5cf:dd67:cb32 with SMTP id 71dfb90a1353d-5e91e5b32e8mr2980426e0c.6.1791982988613;
+        Wed, 14 Oct 2026 06:03:08 -0700 (PDT)
 Received: from [127.0.1.1] ([86.121.170.215])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bcece106sm567795e9.9.2026.10.14.06.03.01
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bcece106sm567795e9.9.2026.10.14.06.03.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 06:03:02 -0700 (PDT)
+        Wed, 14 Oct 2026 06:03:06 -0700 (PDT)
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 16:02:40 +0300
-Subject: [PATCH RFC 2/5] nvmem: Add UEFI variable NVMEM provider
+Date: Wed, 14 Oct 2026 16:02:42 +0300
+Subject: [PATCH RFC 4/5] wifi: ath12k: Support MAC address from the
+ firmware node
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261014-b4-nvmem-efivar-v1-2-187c85f65018@oss.qualcomm.com>
+Message-Id: <20261014-b4-nvmem-efivar-v1-4-187c85f65018@oss.qualcomm.com>
 References: <20261014-b4-nvmem-efivar-v1-0-187c85f65018@oss.qualcomm.com>
 In-Reply-To: <20261014-b4-nvmem-efivar-v1-0-187c85f65018@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -110,391 +111,105 @@ Cc: Bjorn Andersson <andersson@kernel.org>,
         linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
         Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10650;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2249;
  i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=5rv38UcrwbFqOl8kIRBBDnFFUd9jARG6P+ogvn4XWwQ=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqz316x6zE77o29K16W8GQeRXAUZw8XA0NlXE05
- xLeEpWHFMyJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCas99egAKCRAbX0TJAJUV
- Vl87D/9NfvV/4e2YcUFqjHfGpWTcxR7Ls9exA+J9kR1SHt3Z7DMobqt+8WvE9sOXKFnFdOC9nTW
- uO5dS8dXSBDy8fZy1GhyhBH3dHkscrChNfqIgD4ps/nudqxje2krtD99/OOgoAvCserWj4BzZ48
- b+Qf1tqHgLjFNLmGXrieQQ36SdoH9dUfKkV6qLWZ7uROkPgZKbyMDA9nTmnubnLRUcJ3SLY2n7t
- aFaaWQaMPxuT8tKDUf9TabvFcbD1BiSJVqjT/Rs2obc2O1xjkTjqxanVhw+X/C7wFVpHx5FC0g5
- JGzEBBjBRw4+pJ99V0IrpyqhwSfqL06jtPCP9PksZRjWmqTZ7KFeGuhFNVBTjHtPcLXhuHMfgsO
- XZSo9+L6K1pDMmY22352mimIE3MmfJD2NIJolEg1HHhJb0CI6TsJHulmnYgaCWu33u5rsLmpBjB
- n/AZzYHygZrVFGOApx3RgDZGEfvrBsjdGSpmI5EQVVkvuBLMhMi8lnwCXDPgNLpee2ufY75Y2aE
- RP7MKWCi/dicXiDCf5fPvE4GKBoMLcXk4s2a25DoWwd79SiYCudK6XP7cQuGaLi2YnVK6lGz3Tu
- 1no/9/bVt9fB8EkWuW7KW6s4E4nFw2Er2oDy38Xm33JOKIbTLiE//OPILaqCxuXWLTPL90v9t4G
- QeCiNuXyCCigbxA==
+ bh=o3CLylce040Uzmfs746UWO9V4mjo6gjq7klcNZMuAik=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqz318DQUQZj2g3zPetmcXTmEY2JotdT6sE/6vQ
+ tfCBrH1k8mJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCas99fAAKCRAbX0TJAJUV
+ VqqnD/wP5JoMwF0ih0vuQgLKP4VIUS96MyhSknO+sjN/Q9Q0BrULeCLswkUyfHTEpsR2Ck1Uevx
+ Da3W8gUrShICjvJ4HUdEgOa3vej4kDHzMvVWof6koUhvLnFoeTP6gmyuaNI0e46aFhaqsOroVgu
+ yQUVpu5+grq0ES9g+Rdz0Xp8T5sF3iU9Pr9Rk9xcZhZc7hJFdjeriffHikx0qswUGhg3dOoKIHd
+ dOIdJAQ9H222ZSuUCOSyTLItTNs6lOb7vDo8OnLIfcakNC8Aywh9AZZnjT8va7G2Rk2DAoDwVYa
+ iTesV0M+K/CW5ek8DOSiCwfOFx5cU0EoQHRQOmphakzLzQsU3nMV/gKmgbUeLkfUum2jn8z+38+
+ dvu+0FsKanxH/fzteGSNH0QUnTYIDO2vI78BqsqW/RwyNl9bSDSspaisBgbzLosu/Avsfg4abQ1
+ M2oia5hnYq9HrYApIxBtivHJLVD7D7tPAu+TFTKW1EDLIEsClDug0TspuRAwpG7/Dw4ZmVX85ok
+ 4afY1xGZXXvSjUU7RWHD9j+OpsLgz/JK38pL/bB3wPI3zlAvmSI7WAu1JcHeluS8AQ8bjbZf+m+
+ JTUb/Q4nAq8SfY/7o9IgJH+rdO1XZHPE0WaglSCFiF9X8S3YGz+t9R5y8HtRu7uuXBhaw/P4jo7
+ vnrZnX8znYCQtRg==
 X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
  fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX8YoTFjtlCqb/
- t6WvFOQUVVwZcHt4E+ei4Ub+/GkfPyTzJJq9aG3rsOdTRAvNS2rZW3mdI+mS/vj/LLIzq54hYog
- ZhNgF0ssReqnk5RiOSVtBMGZe7inLe0=
-X-Proofpoint-GUID: IgIAg4A9b7ETZGXOgXsVUhr-5J_EUBoB
-X-Proofpoint-ORIG-GUID: IgIAg4A9b7ETZGXOgXsVUhr-5J_EUBoB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfXxRm/mr//3r1D
- veQZwK9eJp2NnP6PLlOaqbg7Cm5vgqFBN25bZByi3O+f707EQZrH7HB+uICaj2nby6xPkhViw3v
- dF7TYT8R+JFnlz0QtHIDTQfjJi3W4hX0xt5UMLv3X9vo25kYlSlcDaQhmlD8QcWMy/wyfRfGyfx
- PB09QCkbU+KdivQonpv6oxYs72X8Z0SuA2drQQF0RELPlkAdbqzWmnRQ5O1QcNbcLbIkAGTaCLL
- crUw6+3RlW+G/gjaRMbTNVxe31+yaKzgPhEYbBdeug07aVnxXUiAVM4TEhL/lT0n2CkHUiz+0nR
- dzfPxhClWUVJVEGkVWy3OtODjWTl9dch2p06n2AWfN7oSaLALDhWNbnpK0qPbU4RDsUlkR+kBhj
- cFpGR4+og3k7WElhm4co9Ptl/AnypWuda2RAr2TCqs/R7FppEBLqjZgS+ulgrr7u24GLSxFYAiI
- Yj3Or5BIZ5ecdzrrXSA==
-X-Authority-Analysis: v=2.4 cv=JegpPkKV c=1 sm=1 tr=0 ts=6acf7d8c cx=c_pps
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX/ch1HAzcAzWr
+ Zga0Y7c1d9hG087vQwT18Az/arHzyuabz72/eaAerR9pUSS//KpKwSnjcVoP0cB0iy1Yc351AsQ
+ Ka9bEW8AyZ5N6aD1Q/b/9vqn/Q4cQ5w=
+X-Proofpoint-GUID: EX5tlcN3Hp2E-P401gmk0F-9cGpn6tpK
+X-Authority-Analysis: v=2.4 cv=Y6ttIReN c=1 sm=1 tr=0 ts=6acf7d90 cx=c_pps
  a=+D9SDfe9YZWTjADjLiQY5g==:117 a=Rt3kCFFBWhWisHNmluDamg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=4iBj1q6bK3updTuR3M4A:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=miyTlQIDcyHKYiHs0IUA:9 a=QEXdDO2ut3YA:10
  a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX/0JpZwSbGgmg
+ rNoBMII9yLonXe4i1dwzEnWDvHM+dXC8GaDVlF0qocghn9Pn53xsw/uD9aexBOsTYiQWPSel6E6
+ GGyz4NaFjNboWr5OufgP4kPJSTtmiETNmPUiVvoWA2PcLyzUUPeF63sk0QeCQ12kCLldiXl8fSw
+ Mj+QiH5PTtbEy5CVo6ldX+QYPGfKsqqen4bFkRByxZw5AT3tGRqzzBbi/RPdmOAiQWJRwHhL11d
+ 1rJGlg0HO8lLbF/H8OorJplp+CQF9gYSf1vxU/l9RQIIf5wP0UEduaUld802OQdA5a67zSzCexU
+ VyU4OeDKRSaGvPg9KZOKzI8xDLekoWsIs/cJg+et/JYc5Tu2CSS3q5x3Z4HNktwpMlZQ9r691ie
+ wm9p05S/yA69UAq/quCi2wqMzhcckwicBgc8KuYyCndWE/JPoN+ims1XAs8a7jf4OeScf6rf89t
+ +Bt6peEZt+DiVkxOk8g==
+X-Proofpoint-ORIG-GUID: EX5tlcN3Hp2E-P401gmk0F-9cGpn6tpK
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 phishscore=0 suspectscore=0 priorityscore=1501
- bulkscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140051
+ priorityscore=1501 malwarescore=0 adultscore=0 phishscore=0
+ lowpriorityscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610140051
 
-Add a provider that reads a UEFI variable via the EFI runtime
-GetVariable service and publishes its bytes as a read-only NVMEM device.
-NVMEM cells are described as device-tree child nodes and can be
-referenced by consumers through nvmem-cells / nvmem-cell-names.
+Read a MAC address from the device's firmware node (a DT "mac-address"/
+"local-mac-address" property, or an nvmem cell named "mac-address" via
+device_get_mac_address()), and use it in preference to the address from
+the firmware board data. This mirrors what ath10k and ath11k already do
+and lets the WLAN MAC be sourced from firmware-provisioned storage such
+as a UEFI variable exposed through nvmem.
 
-The vendor GUID is optional: when it is not provided, the variable is
-located by name by enumerating the variable store. This keeps working
-on platforms where GetVariable is emulated by firmware (e.g. the
-Qualcomm uefisecapp backend) and where direct flash access is
-unavailable to the non-secure world, in particular when Linux boots at
-EL2.
+A device tree / nvmem address takes precedence over the board-data MAC,
+so an explicitly provisioned address wins even when the firmware reports
+a valid per-pdev address. An all-zero (absent) address is ignored.
 
-If the variable has not been provisioned yet, the device is still
-registered, sized to cover the described cells and filled with zeroes,
-the same way an erased EEPROM would read. This keeps consumers probing
-and falling back to their default addresses.
+Note: the provisioned address must be a valid unicast MAC; a multicast
+address (odd first octet) is rejected by nvmem_get_mac_address().
 
 Assisted-by: LLM
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- drivers/nvmem/Kconfig  |  12 +++
- drivers/nvmem/Makefile |   2 +
- drivers/nvmem/efivar.c | 273 +++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 287 insertions(+)
+ drivers/net/wireless/ath/ath12k/mac.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/nvmem/Kconfig b/drivers/nvmem/Kconfig
-index 083a5e528960..3f619dfa1cf7 100644
---- a/drivers/nvmem/Kconfig
-+++ b/drivers/nvmem/Kconfig
-@@ -185,6 +185,18 @@ config NVMEM_BRCM_NVRAM
- 	  This driver provides support for Broadcom's NVRAM that can be accessed
- 	  using I/O mapping.
+diff --git a/drivers/net/wireless/ath/ath12k/mac.c b/drivers/net/wireless/ath/ath12k/mac.c
+index 01f8c6572f65..f4d2d0377c8e 100644
+--- a/drivers/net/wireless/ath/ath12k/mac.c
++++ b/drivers/net/wireless/ath/ath12k/mac.c
+@@ -14878,15 +14878,27 @@ static int ath12k_mac_hw_register(struct ath12k_hw *ah)
+ 	u32 ht_cap = U32_MAX, antennas_rx = 0, antennas_tx = 0;
+ 	bool is_6ghz = false, is_raw_mode = false, is_monitor_disable = false;
+ 	u8 *mac_addr = NULL;
++	u8 mac_from_dt[ETH_ALEN] = {};
+ 	u8 mbssid_max_interfaces = 0;
  
-+config NVMEM_EFIVAR
-+	tristate "UEFI variable NVMEM provider"
-+	depends on EFI || COMPILE_TEST
-+	help
-+	  Say y here to expose the contents of a UEFI variable as an NVMEM
-+	  device. This allows the kernel to consume data provisioned in a UEFI
-+	  variable, referenced from consumers via the standard nvmem-cells
-+	  bindings.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called nvmem-efivar.
-+
- config NVMEM_IMX_IIM
- 	tristate "i.MX IC Identification Module support"
- 	depends on ARCH_MXC || COMPILE_TEST
-diff --git a/drivers/nvmem/Makefile b/drivers/nvmem/Makefile
-index 5e70bad9f0f9..038d3d9ee95c 100644
---- a/drivers/nvmem/Makefile
-+++ b/drivers/nvmem/Makefile
-@@ -27,6 +27,8 @@ obj-$(CONFIG_NVMEM_BCM_OCOTP)		+= nvmem-bcm-ocotp.o
- nvmem-bcm-ocotp-y			:= bcm-ocotp.o
- obj-$(CONFIG_NVMEM_BRCM_NVRAM)		+= nvmem_brcm_nvram.o
- nvmem_brcm_nvram-y			:= brcm_nvram.o
-+obj-$(CONFIG_NVMEM_EFIVAR)		+= nvmem-efivar.o
-+nvmem-efivar-y			:= efivar.o
- obj-$(CONFIG_NVMEM_IMX_IIM)		+= nvmem-imx-iim.o
- nvmem-imx-iim-y				:= imx-iim.o
- obj-$(CONFIG_NVMEM_IMX_OCOTP)		+= nvmem-imx-ocotp.o
-diff --git a/drivers/nvmem/efivar.c b/drivers/nvmem/efivar.c
-new file mode 100644
-index 000000000000..699b1d67aea4
---- /dev/null
-+++ b/drivers/nvmem/efivar.c
-@@ -0,0 +1,273 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * nvmem-efivar - expose the contents of a UEFI variable as an NVMEM device
-+ *
-+ * Lets the kernel consume data provisioned in a UEFI variable through the
-+ * standard NVMEM cell bindings.  The variable is read at probe time through
-+ * the EFI runtime GetVariable service, which also works on platforms where
-+ * the variable store is emulated by firmware (for example the Qualcomm
-+ * uefisecapp backend) and where direct flash access is not available to the
-+ * non-secure world.  The variable contents are published as a read-only
-+ * NVMEM device, with cells described as child nodes in the device tree and
-+ * referenced by consumers through the standard "nvmem-cells" /
-+ * "nvmem-cell-names" properties.
-+ *
-+ * If the variable has not been provisioned yet, the device is still
-+ * registered, sized to cover the described cells and filled with zeroes,
-+ * the same way an erased EEPROM would read.  Consumers are expected to
-+ * validate the data they read so such systems keep working with their
-+ * defaults.
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include <linux/efi.h>
-+#include <linux/module.h>
-+#include <linux/mod_devicetable.h>
-+#include <linux/nvmem-provider.h>
-+#include <linux/of.h>
-+#include <linux/platform_device.h>
-+#include <linux/property.h>
-+#include <linux/slab.h>
-+#include <linux/ucs2_string.h>
-+#include <linux/uuid.h>
-+
-+struct efivar_nvmem {
-+	void	*data;
-+	size_t	size;
-+};
-+
-+static int efivar_nvmem_reg_read(void *priv, unsigned int offset,
-+				 void *val, size_t bytes)
-+{
-+	struct efivar_nvmem *p = priv;
-+
-+	if (offset >= p->size || offset + bytes > p->size)
-+		return -EINVAL;
-+
-+	memcpy(val, p->data + offset, bytes);
-+	return 0;
-+}
-+
-+/* Size needed to cover all cells described as child nodes. */
-+static size_t efivar_nvmem_cells_extent(struct device *dev)
-+{
-+	struct device_node *child;
-+	size_t extent = 0;
-+	u32 reg[2];
-+
-+	for_each_child_of_node(dev->of_node, child) {
-+		if (of_property_read_u32_array(child, "reg", reg, 2))
-+			continue;
-+		extent = max_t(size_t, extent, (size_t)reg[0] + reg[1]);
-+	}
-+
-+	return extent;
-+}
-+
-+/*
-+ * Find the vendor GUID of a variable given only its (UCS-2) name, by
-+ * enumerating the variable store.  Used when no 'efivar-guid' is provided.
-+ */
-+static int efivar_nvmem_find_guid(const efi_char16_t *want, efi_guid_t *out)
-+{
-+	unsigned long max = 512; /* in UCS-2 chars; variable names are short */
-+	efi_char16_t *name;
-+	efi_guid_t vendor = {};
-+	efi_status_t status;
-+	int ret = -ENODEV;
-+
-+	name = kcalloc(max, sizeof(*name), GFP_KERNEL);
-+	if (!name)
-+		return -ENOMEM;
-+	name[0] = 0;
-+
-+	for (;;) {
-+		unsigned long name_size = max * sizeof(*name);
-+
-+		status = efivar_get_next_variable(&name_size, name, &vendor);
-+		if (status == EFI_BUFFER_TOO_SMALL) {
-+			efi_char16_t *tmp;
-+
-+			max = name_size / sizeof(*name) + 1;
-+			tmp = krealloc_array(name, max, sizeof(*name), GFP_KERNEL);
-+			if (!tmp) {
-+				ret = -ENOMEM;
-+				break;
-+			}
-+			name = tmp;
-+			continue;
-+		}
-+		if (status != EFI_SUCCESS) /* EFI_NOT_FOUND ends the walk */
-+			break;
-+
-+		if (!ucs2_strncmp(name, want, ucs2_strlen(want) + 1)) {
-+			*out = vendor;
-+			ret = 0;
-+			break;
-+		}
-+	}
-+
-+	kfree(name);
-+	return ret;
-+}
-+
-+static int efivar_nvmem_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	const char *name, *guid_str;
-+	struct nvmem_config cfg = {};
-+	struct efivar_nvmem *priv;
-+	struct nvmem_device *nvmem;
-+	efi_char16_t *name16;
-+	efi_guid_t guid;
-+	guid_t g;
-+	unsigned long size;
-+	efi_status_t status;
-+	u32 attr;
-+	int i, len, ret;
-+	void *buf;
-+
+ 	wiphy->max_ap_assoc_sta = 0;
+ 
 +	/*
-+	 * The EFI variable service may not be a native EFI runtime service;
-+	 * backends such as the Qualcomm uefisecapp driver register the
-+	 * efivars operations asynchronously.  Wait for them.
++	 * Allow a MAC address provided through the device tree (directly or
++	 * via an nvmem cell named "mac-address") to override the one from the
++	 * firmware board data.
 +	 */
-+	if (!efivar_is_available())
-+		return -EPROBE_DEFER;
++	device_get_mac_address(ab->dev, mac_from_dt);
 +
-+	ret = device_property_read_string(dev, "efivar-name", &name);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "missing 'efivar-name'\n");
-+
-+	/* ASCII variable name -> UCS-2 as expected by the EFI service */
-+	len = strlen(name);
-+	name16 = kcalloc(len + 1, sizeof(*name16), GFP_KERNEL);
-+	if (!name16)
-+		return -ENOMEM;
-+	for (i = 0; i < len; i++)
-+		name16[i] = name[i];
-+
-+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv) {
-+		kfree(name16);
-+		return -ENOMEM;
-+	}
-+
-+	/*
-+	 * The vendor GUID is optional: if it is not provided, look the
-+	 * variable up by name across the whole store.  A variable that has
-+	 * not been provisioned yet is reported as not found and handled
-+	 * below like an erased EEPROM.
-+	 */
-+	if (!device_property_read_string(dev, "efivar-guid", &guid_str)) {
-+		ret = guid_parse(guid_str, &g);
-+		if (ret) {
-+			kfree(name16);
-+			return dev_err_probe(dev, ret, "invalid 'efivar-guid'\n");
-+		}
-+		memcpy(&guid, &g, sizeof(guid));
-+		status = EFI_SUCCESS;
-+	} else {
-+		ret = efivar_nvmem_find_guid(name16, &guid);
-+		if (ret && ret != -ENODEV) {
-+			kfree(name16);
-+			return dev_err_probe(dev, ret,
-+					     "failed to look up variable '%s'\n",
-+					     name);
-+		}
-+		status = ret ? EFI_NOT_FOUND : EFI_SUCCESS;
-+	}
-+
-+	/* First attempt with a modest buffer; grow if the firmware asks. */
-+	size = 512;
-+	buf = kzalloc(size, GFP_KERNEL);
-+	if (!buf) {
-+		kfree(name16);
-+		return -ENOMEM;
-+	}
-+
-+	if (status == EFI_SUCCESS) {
-+		status = efivar_get_variable(name16, &guid, &attr, &size, buf);
-+		if (status == EFI_BUFFER_TOO_SMALL) {
-+			kfree(buf);
-+			buf = kzalloc(size, GFP_KERNEL);
-+			if (!buf) {
-+				kfree(name16);
-+				return -ENOMEM;
-+			}
-+			status = efivar_get_variable(name16, &guid, &attr,
-+						     &size, buf);
-+		}
-+	}
-+	kfree(name16);
-+
-+	if (status == EFI_NOT_FOUND) {
-+		/*
-+		 * Variable not provisioned yet: behave like an erased
-+		 * EEPROM so that consumers still probe and fall back to
-+		 * their defaults.
-+		 */
-+		kfree(buf);
-+		size = efivar_nvmem_cells_extent(dev);
-+		if (!size)
-+			return dev_err_probe(dev, -ENODEV,
-+					     "variable '%s' not found and no cells described\n",
-+					     name);
-+		buf = kzalloc(size, GFP_KERNEL);
-+		if (!buf)
-+			return -ENOMEM;
-+		dev_info(dev, "variable '%s' not provisioned, reading as zeroes\n",
-+			 name);
-+	} else if (status != EFI_SUCCESS) {
-+		kfree(buf);
-+		return dev_err_probe(dev, -ENODEV,
-+				     "GetVariable('%s') failed: 0x%lx\n",
-+				     name, status);
-+	} else {
-+		dev_dbg(dev, "variable '%s' attr=0x%x size=%lu\n",
-+			name, attr, size);
-+	}
-+
-+	priv->data = devm_kmemdup(dev, buf, size, GFP_KERNEL);
-+	kfree(buf);
-+	if (!priv->data)
-+		return -ENOMEM;
-+	priv->size = size;
-+
-+	cfg.dev			= dev;
-+	cfg.name		= "efivar";
-+	cfg.id			= NVMEM_DEVID_AUTO;
-+	cfg.owner		= THIS_MODULE;
-+	cfg.type		= NVMEM_TYPE_OTP;
-+	cfg.read_only		= true;
-+	cfg.word_size		= 1;
-+	cfg.stride		= 1;
-+	cfg.size		= priv->size;
-+	cfg.reg_read		= efivar_nvmem_reg_read;
-+	cfg.priv		= priv;
-+	cfg.of_node		= dev->of_node;
-+	cfg.add_legacy_fixed_of_cells = true;
-+
-+	nvmem = devm_nvmem_register(dev, &cfg);
-+	return PTR_ERR_OR_ZERO(nvmem);
-+}
-+
-+static const struct of_device_id efivar_nvmem_of_match[] = {
-+	{ .compatible = "nvmem-efivar" },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, efivar_nvmem_of_match);
-+
-+static struct platform_driver efivar_nvmem_driver = {
-+	.probe = efivar_nvmem_probe,
-+	.driver = {
-+		.name = "nvmem-efivar",
-+		.of_match_table = efivar_nvmem_of_match,
-+	},
-+};
-+module_platform_driver(efivar_nvmem_driver);
-+
-+MODULE_DESCRIPTION("NVMEM provider backed by a UEFI variable");
-+MODULE_IMPORT_NS("EFIVAR");
-+MODULE_LICENSE("GPL");
+ 	for_each_ar(ah, ar, i) {
+ 		u32 ht_cap_info = 0;
+ 
+ 		pdev = ar->pdev;
+-		if (ar->ab->pdevs_macaddr_valid) {
++		if (!is_zero_ether_addr(mac_from_dt)) {
++			/* A device tree / nvmem address takes precedence. */
++			ether_addr_copy(ar->mac_addr, mac_from_dt);
++			ar->mac_addr[4] += ar->pdev_idx;
++		} else if (ar->ab->pdevs_macaddr_valid) {
+ 			ether_addr_copy(ar->mac_addr, pdev->mac_addr);
+ 		} else {
+ 			ether_addr_copy(ar->mac_addr, ar->ab->mac_addr);
 
 -- 
 2.54.0
