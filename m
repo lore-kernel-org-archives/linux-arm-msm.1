@@ -1,302 +1,192 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4599550DAB
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:20:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6ADF55D879
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:20:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791994823; cv=none; b=apn33B9vCU0oO41KpVQzgrYOlfRDKFVg0SDSBJY9iHzkw40dm/Vzm7PP4yviXRuIO/sXxcJoE8N83RhvEByLDEnWdHM2dFBDNCcHjwj0nsile2yRYRSzBWmvpmH2PLVDK9nDE85YRl/0Iq6e4moC10nhzcQd6juzHOXw3oAyszA=
+	t=1791994847; cv=none; b=cfrAJ1sDmweNdtfNYXsm+H1CQuveRL3N7+shTLYeW8kFC9rSuWEMbBqtsjEqAWz6E45fGz+sFRlELAXz7KhuP8L+LC532R79lBH1cPkfVDhsD2hK5A97uL3I7OtLC1XZcK85pICZhjR6QJEm/v/xwpprsBrTpqPZ5ae8hov4Xu0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791994823; c=relaxed/simple;
-	bh=fiG9JOwZ9RgoyoDyD6yndaiq97l2KW6CcMhSb/W8evw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Q+ddQFHk8hFXBHFBh1hGWIGVGkSNdgurxzpPODtu+q+zP7CtI83PNgQRrbahe8c5qaV1ndCr1KMVe/8sSE776cw3ck8FppIJrsqFmo6L3zGYSpWbZRGuNR+A5TCv+5p7cXcUK/MEwGDoXd+LO7kGp3fmcVNepvx7scUCeNTdMeE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LoJ0DLHx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KKdx6OtW; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791994847; c=relaxed/simple;
+	bh=KOpW9NL741Wqf6CDHthraNjLF873jIDlBdmDkXr6AkU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=QdmPNVU+AFuqDk7etuvRyu+Gm8zAdbqM+T04wrSncytaLzdbGHLj+j4gxvlWWDBdNsSGOkRYEQBXiib91SxnMdOCIpJB246BOfkOP1C7irgeetTPCLcVLhXEN17KxOpciZ95940+57qJ1KNCLJuXCilcEhA9vkdCcao1fQw//p4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KRDDZ5dL; arc=none smtp.client-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LoJ0DLHx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KKdx6OtW"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EEbJVs3642820
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:20:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	YvA5VN9F1N6zF9xJ2DQD0VDFC0d4+++etjYaQC8uc3Y=; b=LoJ0DLHx+hzj50SW
-	Mz+/y+fdRXGzkQVhoaK1cTkTFZR3onkq6dlJbo8VSkdfi1YMC/XFTW16aq7BnyCc
-	S6mlzMXTKwf0vDlN14S5C2OllMLnValya98x4hg1WoIiViQiHGEA4u5ecRFpO/4y
-	cj2yjNXsPItG/Z4EM97wJX5rkc0rJXRGO75dhPQ6/c+VudXaxtrrWk++GaSkj9xw
-	DHvF04ABxhZ0sA5njSLGldxdQl32G11mc3fRXG3BGDge5XeHMhekvvhho3z+HDxf
-	pwbA591ik/XpDkgRBlgrCUjfHyjVEJhw2cvfqVABQ4uZrdbHYL2gKH7kykGpEVVu
-	jFxECQ==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha470af09-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:20:18 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93e46c120dfso72662285a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:20:18 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KRDDZ5dL"
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-48b042c0759so3258723f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:20:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791994818; x=1792599618; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791994844; x=1792599644; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YvA5VN9F1N6zF9xJ2DQD0VDFC0d4+++etjYaQC8uc3Y=;
-        b=KKdx6OtWqxOa8wrmDWGSPxcWJ5OMTtHYX6xvZF/cYSzHx93+tEQ/DV8nakUm9Eg4m/
-         milIvQ9iMxNqCjt/02auaUgQmbSOD6AyBU8ko5sxaFhqMefvzj1O8vE6N7iUKUXXsOT2
-         9rkhbO6M0xoIYjxfJvGbxA/Z+yYajf7MhBzowXmsOfLseP8MdFRo6RwPE9LJJIeFGaWr
-         PzMm6+N+qUjMrWlvkaMLXN5hB1WaRMBX7fuQu5yP8N3ztjTkJFqvFmBhztJsxjmFTQPa
-         DVqKPdlS0ZhmhFlZyWUttdRxOJA/4jHITsKDlHXEdPyAWP/FHXL9pifSug5AKA5DiOuq
-         lb8g==
+        bh=EjI1AUhEkeYaz5+gj/BBEQM/J50SQrXWS0m/4fb/0T0=;
+        b=KRDDZ5dLvmQxVaWSv1xKVRejl6KzvnurMd7QKx5jrQMfTm1sHb+NW2H/JooVv7dMCk
+         Pb2c9vwVkMr/qnYP9JaLq5XF1Tb27ltBNF20hbCk3qYvitN4ylM70f1TEqd0EWag1V9M
+         FGUfSWa+kkvneTXncAGQfqaSVHhFDsrMQz3yeYC2ZTdMUfCi96lYMgjB0iXYA89xuwq3
+         Gr3jh14dnflPLRoqu6oIRlPH+tHu/VWGTCgm+pKmAbYXMlo7KxMxwDuxu126gu9qnU4l
+         +5uO41RXaYbb7UQrHaaNvyKPXvAZG8hTPxVPvz/tvP+7TqHdmywvyph0dfVTqbSjt6uy
+         cMbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791994818; x=1792599618;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YvA5VN9F1N6zF9xJ2DQD0VDFC0d4+++etjYaQC8uc3Y=;
-        b=pxkHynZ4IQqGZh7Rc63N13FvfoSJQB+vwM7Kmh+StuABMMLdO7YSyflPZgKZTs9N5l
-         2QEff7lsRJRme9veFqYwC5DW1166zTShz0rvQ1HaiPMMAnuaOPO6HeOnhqkRaQ2IDlgO
-         Ive6B6nzCSUT0S3uz/98AE5vOkH1Qkt9A2t5NTJdyohtR4fokHgzObye8ZSevAvC768k
-         J/HMb58vnSVv0Sx+rFOmzh1pvVFlqZ0HndJztCuOyrR+j+lT24fHtvKUduiCTuhDleau
-         uwqJ58HWNDIZCdAc2q3synBFtPJy89WTWYOnhptxDMA3svPwuw0gu60UwoZ54GFz3OU4
-         gKRg==
-X-Gm-Message-State: AFq9FYICLFxwd9CM7W4n3N5Ikebf+4qTJcIuPjoMmXZpwOb9tdSH3KGJ
-	GsVvCJm+8KlJpO+jbpqS/+5dNou6FjQ6XBD8E8xI44ZYeu17Wvh+lP2IyEZ6XGhUd6w02LpLIvm
-	z6gVCc0dH+xR3STgH18Q7z3glNLLi+9Fz6B5NPjIsO6Ku7DGXCjLY/r5kx/bt1Mgcigj+
-X-Gm-Gg: AYBFou1hpkX0zJXnquUrl+loO+whXDVau1tFmyEeFH86IpPAXm838KTTCvLIKZ5Kc3+
-	VQfC/uoJIkuDtvXSB2lA8hYgHxJKFp/sC79FtUZc6VLEvgAAuAlMfBjUH8lavyFdxncfJAUr+MT
-	rOpk3F8STlTpbul0w6kcuUN+0EouoJSfql9Vc+8kC+OAImOnLACx1fZwwlVxCaBF2AReDnoumff
-	HcoXq75jml92MxqonYtyNLqOCqrmD6ahCny7YR8KRocBiY+SUYndu7fdGp2NK0phtsu5xAzb8tP
-	8gYs7hsUsLTH87JEnqIZWLblSXojgQqHOXsZH3nmN3zZ+XCnQjH9GsuviL6nBPpXLp6QZcyepjW
-	1wyyndb40N7a2hgUJXsVWbMqyzct6n0NSd0ul2WjRuCiSdkrWouTIPjGCG1hAaI8UzZaS7VBg3Y
-	/QwQ+xgXUIp+zY
-X-Received: by 2002:a05:620a:4714:b0:939:ff11:5328 with SMTP id af79cd13be357-93ebd211034mr2620944585a.24.1791994817496;
-        Wed, 14 Oct 2026 09:20:17 -0700 (PDT)
-X-Received: by 2002:a05:620a:4714:b0:939:ff11:5328 with SMTP id af79cd13be357-93ebd211034mr2620936885a.24.1791994816864;
-        Wed, 14 Oct 2026 09:20:16 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be33d7d0f6sm740187e87.38.2026.10.14.09.19.49
+        d=1e100.net; s=20260707; t=1791994844; x=1792599644;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=EjI1AUhEkeYaz5+gj/BBEQM/J50SQrXWS0m/4fb/0T0=;
+        b=BxjmQltwdfMPylQ1nc2PbdzxOO9SRFss7intE+36WXaPvP4uJ98aIAVUEzNqYlDo7b
+         LRpusoTvQYwXnVG95/8kHIRlhDcL2iuDn48kV8AyOscmUTYl/3YCo4GNstuM5kgcXhQR
+         lq8xDdcV6Kim3JX6CyST0BDVVkiCQwUluqqsEKK++BWD2SxfXE3gNqwI8mv/bv61IloK
+         SNn9I1H4clikzg4/fgzbmVdedrrmHCGUkgQVtvH7mOPKDDOKCujAG4rV1rOUi9BU1Upd
+         Y3T/Bd4TuzyoUNSIBk4nTM564H0wSnKoGRgJU+Y3du3N5sWQQpxWkPQNm3GpvKJgUb85
+         30Lg==
+X-Forwarded-Encrypted: i=1; AKwUvBzxuIn2NbM85Ek47IaXKPMVlWMw1IpnX+e67Dau+d7mjxwwYlyJfIIATKP4/kjRFE3lLs8ohxgNDUmpP2Mz@vger.kernel.org
+X-Gm-Message-State: AFq9FYI7qYW9q3E9UNCESVrIbJPgeWe+OtPH67x8jMnmQmwBkiuLZjMK
+	4b+GQBNXAQ5eh1xFF7Yimro/b6Po19bfwPohdIUACBbQSthMHxiQcESq
+X-Gm-Gg: AYBFou28ydn5A5QDeWNZyGLUEtN5z8PSUXkJTiVRKF7uMzk42cW04wbYYr8+0rdZAzF
+	BQPC8WtYT9ijIKttKwLKD+J+5dDHJCzpHNtPizLgejd4LjpJuIDRfGzrs2lHI4GJ0zesisISoYa
+	2QFJnjwNQ/aqseoh8oTuQtGbehyu5zwDenH5wGwFCLLSdxkkFKstqzOgy5A7aagZZnO89HmWbNa
+	ypd32ms5IGV79y6rRQmiZlxpxeyNpRdY1AWq5TCFNa/ckMtxV0wqC7oEJeu6AnNX0ssL47kWOu8
+	Z8ZqgD6KVbHftyfWvMAEdGTTSM0z5T3goyKV0AvSZZ7U22S5lENJoD1AYJ4+olpkz0yhYHMrHCw
+	u4hs4LMbeoKhPZrk073oLCJRqg7pRNnGjzA3sF4KnJ2m2eofCe2GS2FDyO0+vLL6W8anGYPKOU9
+	TgTeyvA+lnDYte2f7azgc6tS2YR7r7N7ZIqVOuQpATZtsp0kks1t7EAVB0Ci35Vu3BiXOdLEuDm
+	tForT8Yr4p/GDKYmk6NqGSqWWkh/P/fNd0R
+X-Received: by 2002:adf:ed50:0:b0:48c:7caa:12cd with SMTP id ffacd0b85a97d-48dbaae379dmr21487148f8f.22.1791994843601;
+        Wed, 14 Oct 2026 09:20:43 -0700 (PDT)
+Received: from localhost.localdomain ([188.190.249.216])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de7273a0esm8545727f8f.29.2026.10.14.09.20.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 09:19:50 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 19:19:20 +0300
-Subject: [PATCH v2 5/5] arm64: dts: qcom: sdm845-hdk: add display card
- overlay
+        Wed, 14 Oct 2026 09:20:37 -0700 (PDT)
+From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+To: Birk Skyum <birk.skyum@pm.me>
+Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	linux-bluetooth@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Bluetooth: hci_qca: Reset the in-band sleep state on power off
+Date: Wed, 14 Oct 2026 19:20:24 +0300
+Message-ID: <20261014162025.3733-1-tvlad744@gmail.com>
+X-Mailer: git-send-email 2.45.1.windows.1
+In-Reply-To: <179163212446.46972.2306254853726299632@pm.me>
+References: <179163212446.46972.2306254853726299632@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261014-sdm845-hdk-v2-5-6d0b4b42f267@oss.qualcomm.com>
-References: <20261014-sdm845-hdk-v2-0-6d0b4b42f267@oss.qualcomm.com>
-In-Reply-To: <20261014-sdm845-hdk-v2-0-6d0b4b42f267@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Abel Vesa <abelvesa@kernel.org>, Ulf Hansson <ulfh@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        dri-devel@lists.freedesktop.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3759;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=fiG9JOwZ9RgoyoDyD6yndaiq97l2KW6CcMhSb/W8evw=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqz6uIKiPcnuT84rLen1AukFunySURVM0g03Lh1
- 21lVTg/aQ+JATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCas+riAAKCRCLPIo+Aiko
- 1XhoB/9pOmvOIaU1s0UmuN4LFEoRFcc6VK4R6vVfvDVOnjFiZkVFdV+RE8eVTfFJT1Ah996kYXj
- ckn1icJBgL1uw5U4+95RDZu8T/ukocAdgHJbUST8ZI5wfcdu3h/TGmEeRLPNvgBUq4a3yJp2mdH
- AL/21pc4fJCMNq7IcSmrdZ9GNrkB6w60UAERE5BDY+/aEQDPhBmISsoA2czMwcyVCAoDBAQws8E
- NL4oWqdPfwMHTdIxCT2wOR4RAkgBUIZHZsaGbj2MffARKX0Vy1KL8HUmmikZypFZzl+86OQ0DuM
- 1j/hGjWGE0xvnPnfCu2iPizghyiKHhlOo9cSS4kXet714zeA
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NSBTYWx0ZWRfX5hY4OqEh5rcW
- o64DV4+FodwIH8frplKr1NnMlsEXAsNMCboZrzXX9pxo2ajv5frtqW517REJqpFZpxT1H1825KD
- kaaRha5cNL4cYVnslK0l2yIM119dfw7aIWYTB/d5Ccsjp1vC3fz1UDG+Y6D+exvgrIgFtO7XFSl
- XDgPeNqaEe3nukHxRs7UMY+JN6lXcA/fSKpddDdAjma0gzlPeeVa9FOGqywlSPe4Xpp3SvdPMok
- 1BJ6gloWmHCW6iheSFjG2zsVFL9gtUl88HTbYysiVvf/yAswtAiW2K0seHUnnOtsN2sjM7HcEDp
- XZRhPBH1IW3vE3zPCJ48Y69EMCFv+KCHkoUu1fGEFKlxFwz4hTWqvqeiXukhCn9ItotH3rKht++
- uTZpZgllXcrXxDoN9CG25NYvnp7e2pqzo5hnW0hx+RDnuHTLdc94cNEzxvbZT9I4WtzIaZIFL8w
- kpz35TNTcJPyUv+Gu7Q==
-X-Proofpoint-GUID: pm7vHfWywFl08fE2e2ZYjrNOwxp4FE99
-X-Authority-Analysis: v=2.4 cv=P6avFSAu c=1 sm=1 tr=0 ts=6acfabc2 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=FFXsBguXHA8yshPlDHEA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: pm7vHfWywFl08fE2e2ZYjrNOwxp4FE99
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NSBTYWx0ZWRfX5/hLq744RGtV
- goZLNbBB06e0AxmTo8Z4uFIy5J3ua6isy8+kMflEGI1is0LAFKsFyhJtO3koBhayZ8KECZftOri
- g0REZjn7Z4tsMsiFBgBatajW7UE8Plo=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140065
+Content-Transfer-Encoding: 8bit
 
-The SDM845 HDK can be fitted with the same display card as the SM8150
-HDK, carrying a Truly NT36850 WQHD dual-DSI panel. Here it is powered
-by the PMI8998 LAB/IBB and WLED, and it is mutually exclusive with the
-on-board LT9611 HDMI bridge.
+Hi Birk,
 
-The configuration follows the vendor kernel, with the bias rails at the
-5.5 V default of the LCD mode and the mode select line driven low for
-the dual port mode.
+On Sat, 10 Oct 2026 11:35:26 +0000, Birk Skyum wrote:
+> qca_power_off() cuts the power of the controller but leaves the host
+> side of the in-band sleep (IBS) protocol as it was. tx_ibs_state and
+> rx_ibs_state are initialised in qca_open() only, so a controller that
+> qca_setup() powers on again meets whatever state the last session ended
+> in.
 
-Assisted-by: LLM
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |   4 +
- .../boot/dts/qcom/sdm845-hdk-display-card.dtso     | 109 +++++++++++++++++++++
- 2 files changed, 113 insertions(+)
+I ran into the same bug from another side, on a OnePlus Pad 3 (SM8750,
+WCN7880 on UART at 8 Mbaud with IBS), and came to the same fix in the
+same place, so here is a second trigger and some test numbers.
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 5be99934cf9f..85d06a950b4a 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -356,6 +356,10 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-db845c-navigation-mezzanine.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-google-crosshatch.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-google-blueline.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-hdk.dtb
-+
-+sdm845-hdk-display-card-dtbs	:= sdm845-hdk.dtb sdm845-hdk-display-card.dtbo
-+
-+dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-hdk-display-card.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-lg-judyln.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-lg-judyp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-mtp.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-hdk-display-card.dtso b/arch/arm64/boot/dts/qcom/sdm845-hdk-display-card.dtso
-new file mode 100644
-index 000000000000..1022ab096170
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sdm845-hdk-display-card.dtso
-@@ -0,0 +1,109 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/*
-+ * Display Card kit overlay.
-+ */
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+/dts-v1/;
-+/plugin/;
-+
-+/* Disable HDMI bridge related nodes (mutually exclusive with the display card) */
-+&lt9611_codec {
-+	status = "disabled";
-+};
-+
-+&ibb {
-+	regulator-min-microvolt = <5500000>;
-+	regulator-max-microvolt = <5500000>;
-+};
-+
-+&lab {
-+	regulator-min-microvolt = <5500000>;
-+	regulator-max-microvolt = <5500000>;
-+};
-+
-+&mdss_dsi0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	panel@0 {
-+		compatible = "truly,wqhd60-nt36850";
-+		reg = <0>;
-+
-+		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
-+
-+		vddio-supply = <&vreg_l14a_1p8>;
-+		avdd-supply = <&lab>;
-+		avee-supply = <&ibb>;
-+
-+		backlight = <&pmi8998_wled>;
-+
-+		pinctrl-0 = <&disp0_reset_n_active>, <&mdp_vsync>;
-+		pinctrl-1 = <&disp0_reset_n_suspend>, <&mdp_vsync>;
-+		pinctrl-names = "default", "sleep";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+
-+				panel0_in: endpoint {
-+					remote-endpoint = <&mdss_dsi0_out>;
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+
-+				panel1_in: endpoint {
-+					remote-endpoint = <&mdss_dsi1_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&panel0_in>;
-+};
-+
-+&mdss_dsi1_out {
-+	remote-endpoint = <&panel1_in>;
-+};
-+
-+&pmi8998_wled {
-+	qcom,num-strings = <2>;
-+	qcom,external-pfet;
-+
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	disp0_reset_n_active: disp0-reset-n-active-state {
-+		pins = "gpio6";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	disp0_reset_n_suspend: disp0-reset-n-suspend-state {
-+		pins = "gpio6";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
-+	mdp_vsync: mdp-vsync-state {
-+		pins = "gpio10";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+};
+The second trigger is HCI_IBS_TX_AWAKE rather than WAKING:
+qca_hci_shutdown() deletes the IBS timers and then sends the
+pre-shutdown command, which goes through qca_enqueue() and arms
+tx_idle_timer again for 2 s. If the device is opened again within those
+2 s, the host still believes the controller is awake and sends the
+frames after the new setup without an HCI_IBS_WAKE_IND, while the
+freshly booted controller starts asleep. The commands right after the
+setup get through, the first one after the controller has gone to sleep
+breaks the link:
 
--- 
-2.47.3
+  Bluetooth: hci0: Frame reassembly failed (-84)
+  Bluetooth: hci0: Opcode 0x0c56 failed: -110
+  Bluetooth: hci0: crash the soc to collect controller dump
 
+It shows up with "btmgmt power off" followed by "power on" within 2 s,
+and on every boot of a board without local-bd-address when user space
+sets the address with MGMT Set Public Address right after registration
+(the unconfigured controller is powered down after its setup and up
+again well within the 2 s). The stale idle timer can also queue an
+HCI_IBS_SLEEP_IND in the middle of the next setup, which is what
+df1e5c51492f was about.
+
+> +	/* A controller that loses power is asleep when it comes back. */
+> +	timer_delete(&qca->wake_retrans_timer);
+> +	timer_delete(&qca->tx_idle_timer);
+> +	qca->tx_ibs_state = HCI_IBS_TX_ASLEEP;
+> +	qca->rx_ibs_state = HCI_IBS_RX_ASLEEP;
+>  	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
+
+I agree with what the Sashiko review pointed out [1]: without _sync a
+timer callback that is already waiting for hci_ibs_lock still runs
+after the unlock, and ws_awake_device/ws_awake_rx can queue a wake
+indication after the reset. As both timer callbacks take hci_ibs_lock,
+the _sync variants have to be called outside of it. This is what I
+have been testing (on bluetooth-next):
+
+	/* From this point we go into power off state. But serial port may
+	 * still be open, stop queueing the IBS data.
+	 */
+	spin_lock_irqsave(&qca->hci_ibs_lock, flags);
+	set_bit(QCA_IBS_DISABLED, &qca->flags);
+	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
+
+	/* The controller loses the IBS state with its power and comes back
+	 * with both sides asleep, as qca_open() assumes. Stop the IBS work and
+	 * timers, drop what they queued and start over from there.
+	 */
+	cancel_work_sync(&qca->ws_awake_device);
+	cancel_work_sync(&qca->ws_awake_rx);
+	timer_delete_sync(&qca->wake_retrans_timer);
+	timer_delete_sync(&qca->tx_idle_timer);
+
+	spin_lock_irqsave(&qca->hci_ibs_lock, flags);
+	qca_flush(hu);
+	qca->tx_ibs_state = HCI_IBS_TX_ASLEEP;
+	qca->rx_ibs_state = HCI_IBS_RX_ASLEEP;
+	spin_unlock_irqrestore(&qca->hci_ibs_lock, flags);
+
+All callers of qca_power_off() can sleep, and the work items do not
+call it, so there is no wait cycle. The flush moves after the waits,
+so it also drops what the work and the timers queued in the meantime.
+
+Sashiko also suggested Fixes: and Cc: stable, with df1e5c51492f. I
+would point Fixes: further back:
+
+Fixes: 3e4be65eb82c ("Bluetooth: hci_qca: Add poweroff support during hci down for wcn3990")
+Cc: stable@vger.kernel.org
+
+3e4be65eb82c is where the IBS state started to outlive the power of the
+controller; the AWAKE case exists since then, and df1e5c51492f made the
+WAKING case permanent. Mentioning the AWAKE trigger in the commit
+message would help too.
+
+Test numbers, five quick power cycles each (power on within 2 s of the
+power off, then a scan): 4 of 5 fail without the change, with commands
+timing out ("Opcode 0x2042 failed: -110"), and 0 of 5 with the code
+above. With it, user space also sets the address at boot without having
+to wait for the 2 s first, and it is now in the kernel I use on this
+tablet every day. I have not tried your v1 as posted; I expect it to
+cover my case as well most of the time, but I have only tested the form
+above.
+
+Would you fold this into a v2? I am happy to test it on this board and
+give my Tested-by there. If you would rather not, I can send it as a
+separate patch with your Reported-by, whichever you and the
+maintainers prefer.
+
+Thanks,
+Vladyslav
+
+[1] https://netdev-ai.bots.linux.dev/sashiko/#/patchset/179163212446.46972.2306254853726299632%40pm.me
+
+(I used an AI assistant, Claude, for the analysis and to draft this
+mail; the tests ran on my device.)
