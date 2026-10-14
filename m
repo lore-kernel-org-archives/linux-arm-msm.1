@@ -1,181 +1,150 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 810BA36EAB2;
-	Wed, 14 Oct 2026 19:01:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ABCE44F563;
+	Wed, 14 Oct 2026 19:12:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792004501; cv=none; b=ZEMlMemPfSGWhVp+umZR6WzJ3dGUqIc+pMQ20S6O8lXHlJHeKRSVWVT+5eZ732SP7rMTJKcVC1IAaiBaEvI8dmpxB4mcFsFd9G8kJvJJpjB2aXjcKmvWHw9kTLTIoD684TCP++HyZrzEzO6aQgSf0FhmJLKJDaHhGdQIxcLBqfo=
+	t=1792005148; cv=none; b=H46DfHOHvta/pLEs5/M+qbmmzAl8NcwUsLWGXegF1c7m0oDU9/Yhc6IfpQZi7yy4KonCN6wwkvNiiYeJX94ySzd596O2geMReXWGqWSotI5B/DRTpPmLXLgSGTNVTPpXsJ5G2HturtiDzQ/XgUfgcfGgpJG7zwVDC0buq1nWNaw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792004501; c=relaxed/simple;
-	bh=eH2Judo0oDaJoMduW8BZVfPz3bobRSuAdFGcSBEw4KI=;
+	s=arc-20240116; t=1792005148; c=relaxed/simple;
+	bh=PhrFgxAyb5Wdn5xkWs0bigFi1PPwop1LsrGEQiyc4g4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=t5+oW0AL91+giwXyt00Gw4UKSSYR+0avGW1aEGsyCNpFnoNfBeVbuMJUEjEhtEDk3uFvmNoIngF7zFCeVI448LIfl4kwR/5+RzKjLFRRQrj9mPFRm0LigUTsuznoEQKysrtG/OHEmeJHi3yLfvQM6UCdlwMe2uVapN0Zy6os4U0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lJ81klCR; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=Uv3z8QUqwfkzeIm5WEtn5X/rVTN8sLNt9J0Fg8IvmfjYhupyegJaruHO6x6lBiwkpqXBoprOQQMxVKgmqt1RCOyA42XVtvI7Q720Ih5XmhQGP8PSrzhHmjUSFGeVW6dOK+TIg3yXA7zo0KV520Pm7jUHOI+cjTaph+YPXDwf0xY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WRbzJX9/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lJ81klCR"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792004500; x=1823540500;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=eH2Judo0oDaJoMduW8BZVfPz3bobRSuAdFGcSBEw4KI=;
-  b=lJ81klCRHz3I/QlLW5LyUz1PbjXe18wnWgkWUU0ORSsbC/91XLvYW+rE
-   NfWTMqEicbH4HwhW0tq/BPZlfVTm4E4lBK48o6BHcucGXwfiiBJ/NHTWf
-   weSPgsZ6ke7br7yA2Ub/DIRRSdiFkjaEMH9LXWAvpCHFOKnffPXDnH4IM
-   TYf94P9TLyXm+1D4LardacdCkx8RD2vDD5w/ZXJF/YGNhPZLAHe/gBiIU
-   IqrnmJL8Vj84fOXI8I6Tud/D8gcTf+m9BDy+HMLmpn0JHiA2oHuSEj2AB
-   WyxIlnw4+KvIZL/P9sVz4jw8ie2JDbKaNtYZacY4kLlgxoYuK6m4oaaNO
-   w==;
-X-CSE-ConnectionGUID: M3QE0IrhQQ+fskXrT+wEXw==
-X-CSE-MsgGUID: wD7ziTVUS/yan0+REkp+Xw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11935"; a="770530"
-X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
-   d="scan'208";a="770530"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 12:01:39 -0700
-X-CSE-ConnectionGUID: 7ZOYIYY/T3atE/S9XHVClQ==
-X-CSE-MsgGUID: w0sTSkONTIeOsmKMycL5Wg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
-   d="scan'208";a="1469613"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by orviesa001.jf.intel.com with ESMTP; 14 Oct 2026 12:01:36 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xH4EH-00000000F5P-0Lnl;
-	Wed, 14 Oct 2026 19:01:33 +0000
-Date: Thu, 15 Oct 2026 03:01:28 +0800
-From: kernel test robot <lkp@intel.com>
-To: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>,
-	andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org,
-	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org,
-	srinivas.kandagatla@oss.qualcomm.com,
-	sarath.ganapathiraju@oss.qualcomm.com
-Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, prasad.kumpatla@oss.qualcomm.com
-Subject: Re: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
-Message-ID: <202610150234.1B8DywxX-lkp@intel.com>
-References: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WRbzJX9/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 283221F000C4;
+	Wed, 14 Oct 2026 19:12:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792005146;
+	bh=sy51dZnwp63qodB69dzwmoIWn3ZCJ4Oue2+ZkfODJOQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=WRbzJX9/UI0iMSHjtQ92PNv3XZnhstPDKvD9dPgRFxetsXjqCIDgCIW9QIjncwRN7
+	 q8BNbmEaZTLNdPWvMpabTPcOlOEJxzkMSjxWpig3MzLMOURcgq7X9S6/OELHo7Ks6z
+	 YmvuI8JwT4ZE7lN90ch7XhvSVq1XH4GYLrNUVDcQIb5ZV4YpbGvY3zf5ylMEL8IwFO
+	 SN4i14bsdmTaZy4TyMMCZa2PKtVcve/NuMF1UgcJd3y8dJoLagne706fXx6aIxJsmi
+	 VmgNz2qbbeApxkuVLkikck8kM0oZCRLxd9ePdCftSTBzwatTsvbV0r4iQIj0ND6BJ8
+	 +1wZNDtBEe8tQ==
+Date: Wed, 14 Oct 2026 20:12:20 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Cc: Maulik Shah <maulik.shah@oss.qualcomm.com>,
+	Rob Herring <robh@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 2/3] pmdomain: Add support for system-suspend-only states
+Message-ID: <20261014-prudent-mini-duck-377cb6@sudeepholla>
+References: <20261005-s2idle_state-v1-0-3c402c66f388@oss.qualcomm.com>
+ <20261005-s2idle_state-v1-2-3c402c66f388@oss.qualcomm.com>
+ <20261006-romantic-stalwart-seriema-90e71d@sudeepholla>
+ <CAPx+jO-T_0KT3GytYu8w6QvrhXFQNZQzR496RL=McU6rnMtnPA@mail.gmail.com>
+ <20261009-frisky-rottweiler-from-avalon-6c409e@sudeepholla>
+ <CAPx+jO-_aY5pMnWyy1hAs1WRmfW33vc317jdtBsEXYBoHsPfxA@mail.gmail.com>
+ <20261009-skilled-mature-bittern-2206fc@sudeepholla>
+ <CAPx+jO87gkTumF=Tg=UPWpJO6O-CRF4njT2KxQ3f=4nF5m7GiQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAPx+jO87gkTumF=Tg=UPWpJO6O-CRF4njT2KxQ3f=4nF5m7GiQ@mail.gmail.com>
 
-Hi Sarath,
+On Tue, Oct 13, 2026 at 12:11:36PM +0200, Ulf Hansson wrote:
+> On Fri, Oct 9, 2026 at 5:27 PM Sudeep Holla <sudeep.holla@kernel.org> wrote:
+> >
+> > On Fri, Oct 09, 2026 at 04:26:38PM +0200, Ulf Hansson wrote:
 
-kernel test robot noticed the following build warnings:
+[...]
 
-[auto build test WARNING on becb95e45ef0dda9ffb35156d909d3da7a2789c3]
+> > > If that's the case, besides that the cluster PM domain topology must
+> > > be modelled accordingly, the display device should be hooked up to the
+> > > cluster PM domain it belongs to.
+> > >
+> >
+> > Ah, I thought that's the way the whole domain-idle was modelled as we
+> > started this OSI discussion a decade ago with an example of CPU clusters
+> > sharing power domains with some other devices. I am surprised if that is
+> > not the case already 🙁.
+> 
+> It works fine today, I was just trying to explain how it works,
+> considering the use case that you brought up.
+>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Sarath-Ganapathiraju-via-B4-Relay/dt-bindings-clock-qcom-Add-LPASS-VA-CSR-HeartBeat-pulse-clock/20261012-172258
-base:   becb95e45ef0dda9ffb35156d909d3da7a2789c3
-patch link:    https://lore.kernel.org/r/20261012-master-v11-2-15009e3ecac3%40oss.qualcomm.com
-patch subject: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
-config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20261015/202610150234.1B8DywxX-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261015/202610150234.1B8DywxX-lkp@intel.com/reproduce)
+Ah OK, good to hear. For once, it sounded like that's not the case. My bad.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610150234.1B8DywxX-lkp@intel.com/
+> >
+> > > Beyond that, it's the corresponding display driver that becomes
+> > > responsible for what should happen during system suspend. If the
+> > > screen needs to stay on it may need to call device_set_awake_path()
+> > > for the display device - unless it's a decision for user space that
+> > > can control the behaviour for the display device via its sysfs node.
+> > > If things are managed accordingly, genpd_finish_suspend() may decide
+> > > to keep the corresponding PM domain powered on during system suspend.
+> > >
+> >
+> > But the s2idle and s2ram anyways suspends all the devices, so they need
+> > to vote in for the power domains to be turned off. If they are supposed
+> > to stay on, the system enters the state it can based on the other votes.
+> >
+> > > The above said, $subject patch doesn't change any of this. It only
+> > > allows us to use more states (deeper), which are limited to system
+> > > suspend (s2idle).
+> > >
+> >
+> > Still not convinced, if all devices are plugged in to the power domain
+> > hierarchy correctly and the domain-idle states represent or carries
+> > the entire system power domain topology, we shouldn't need this extra
+> > information. Having it make cause issues when it conflicts with the
+> > topology information IMO.
+> 
+> No, it's still not sufficient to model the power domain hierarchy correctly.
+> 
+> These "system states" are special since they require additional
+> coordination in FW/HW, to take into account votes not directly
+> controlled by Linux.
+> 
 
-All warnings (new ones prefixed by >>):
+But if Linux doesn't control, some other entity would vote and until then
+the system shouldn't enter that state. Without knowing that it is system
+state, will the kernel be unable to choose that state as it hidden vote
+is invisible/not tracked ? I trying to understand why if Linux chooses
+that system level state as part of idle loop, the platform can't downgrade
+if all the voting requirements are not met. I am struggling with that
+and want to make sure we are not working around a broken firmware.
 
-   In file included from include/uapi/linux/posix_types.h:5,
-                    from include/uapi/linux/types.h:14,
-                    from include/linux/types.h:5,
-                    from include/linux/kasan-checks.h:5,
-                    from include/asm-generic/rwonce.h:26,
-                    from ./arch/m68k/include/generated/asm/rwonce.h:1,
-                    from include/linux/compiler.h:391,
-                    from include/linux/build_bug.h:5,
-                    from include/linux/bits.h:30,
-                    from include/linux/clk-provider.h:10,
-                    from drivers/clk/qcom/lpass-va-csr.c:6:
-   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_resume':
-   include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:78:25: note: in expansion of macro 'NULL'
-      78 | #define pm_clk_resume   NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:61:15: note: in expansion of macro 'pm_clk_resume'
-      61 |         ret = pm_clk_resume(dev);
-         |               ^~~~~~~~~~~~~
-   include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:77:9: note: in expansion of macro 'pm_clk_suspend'
-      77 |         pm_clk_suspend(dev);
-         |         ^~~~~~~~~~~~~~
-   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_suspend':
-   include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:83:16: note: in expansion of macro 'pm_clk_suspend'
-      83 |         return pm_clk_suspend(dev);
-         |                ^~~~~~~~~~~~~~
-   drivers/clk/qcom/lpass-va-csr.c: At top level:
->> drivers/clk/qcom/lpass-va-csr.c:81:12: warning: 'lpass_va_csr_runtime_suspend' defined but not used [-Wunused-function]
-      81 | static int lpass_va_csr_runtime_suspend(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
->> drivers/clk/qcom/lpass-va-csr.c:55:12: warning: 'lpass_va_csr_runtime_resume' defined but not used [-Wunused-function]
-      55 | static int lpass_va_csr_runtime_resume(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sorry for being pedantic, but some real example would help to understand
+it IMO.
 
+> I realize that the description in patch1 should be extended a bit to
+> explain this better. In principle, we can compare this with the PSCI
+> SYSTEM_SUSPEND support. The difference would be that PSCI
+> SYSTEM_SUSPEND is limited to support only one state, while the
+> $subject series would allow us to support multiple.
+> 
 
-vim +/lpass_va_csr_runtime_suspend +81 drivers/clk/qcom/lpass-va-csr.c
+I understand that part. SYSTEM_SUSPEND is sort of platform co-ordinated
+once the requirement for entering is met.
 
-    54	
-  > 55	static int lpass_va_csr_runtime_resume(struct device *dev)
-    56	{
-    57		struct lpass_va_csr *csr = dev_get_drvdata(dev);
-    58		const struct lpass_va_csr_data *data = csr->data;
-    59		int ret;
-    60	
-    61		ret = pm_clk_resume(dev);
-    62		if (ret)
-    63			return ret;
-    64	
-    65		ret = regmap_write(csr->hb.regmap, LPASS_RATE_GEN_COUNTER_0,
-    66				   data->counter_0);
-    67		if (ret)
-    68			goto err_pm_clk_suspend;
-    69	
-    70		ret = regmap_write(csr->hb.regmap, LPASS_RATE_GEN_DELAY, data->delay);
-    71		if (ret)
-    72			goto err_pm_clk_suspend;
-    73	
-    74		return 0;
-    75	
-    76	err_pm_clk_suspend:
-    77		pm_clk_suspend(dev);
-    78		return ret;
-    79	}
-    80	
-  > 81	static int lpass_va_csr_runtime_suspend(struct device *dev)
-    82	{
-  > 83		return pm_clk_suspend(dev);
-    84	}
-    85	
+> In regards to ACPI. I think this is as simple as comparing it with the
+> list of ACPI S-states.
+> 
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+I need to check if we use ACPI S-states via S2Idle which is the case with
+this patch set I assume.
+
+-- 
+Regards,
+Sudeep
