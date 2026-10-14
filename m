@@ -1,123 +1,140 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FBD84964F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:01:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAFF947F3BD
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:02:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791961299; cv=none; b=jfQTCn+DFlIXvtkg9Roqj/v/sAE9bSFfFw4JUsoQzwDRg8iXMi40gbywSGhqQI5xUcqz5zCsPkRSv1V+nXUlrA7vQBa+Af5MRSOyFxXQvj6UBOkhED0M1f0unouQ43OMdR3Dlm0MN/eI4mdymXCJq/Ljj2a5z+GTDdWJz32xUhk=
+	t=1791961384; cv=none; b=qgPVl3chz/MKotLwE3XtszAX/whHx9F/aThjVX3JWwil+vmvcuky1IeHTJm/7BlNs/Np0kWeiw003IaZEjrzA7oiz9Vgdm1ZnX6zE98rzYFwsChRR5ihQmH2eJtLoIxzu0kpbSmsDeaPZvpDNXtjhpwG5th7DfDXTSYyuOd7nv4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791961299; c=relaxed/simple;
-	bh=/Fi3cEGG/0WdIJfEfuxJy0AklWIXf36cl0GBkUle6nA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jonqkovyBjp/VNl3JWx16B+rtpVzzyyhD3VZ38cdHsFjfVsE1+lxiEC9K8kbPkTrb7Wec8yQsGl+lu7UsIrvsk8fny6TV56fHLQcN6pLCdh0NsbryxK3LGQwK/qThOX3jNhQTP/FTPFrsoiMkW3X2PBQpBiKBv2NSrhGUvdm9kk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X0mE1aka; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XcvR+p3m; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1791961384; c=relaxed/simple;
+	bh=42fA3kbyv7L/WERPBBK3jxCg7uB4lxUsNnUEAf1g6LY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FfVuO0H5LdhAT88jFNw0HywIwSWSDSSHPMtrHRKt3JZO7VOTzCmsCJD7ZC2tXub5/unioN32nThuF5AylYSjlOgvjrEsYlIBexmNWfnG7mhTiaNy0PJ25H7HikWI56xDjj08s5qmqu31aousxRonjJLGm43eK5t7pw04RQLJtes=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=B/pxwWfS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WPX7Xe/3; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X0mE1aka";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XcvR+p3m"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="B/pxwWfS";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WPX7Xe/3"
 Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E2Ihw83000934
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:01:37 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E2RYoW3000901
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:02:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=EQisfzLzBS4
-	VxQkfKP6jsZVhzhBxlSnN1Kj4T7LYkxI=; b=X0mE1akaMPbKmINU/Mi7VmITNYP
-	uEMJE9+/3JNPYfRAdcvoFHlINQ+18yneC1kr0mMsHuOqLDgFr1sfGmFpeIxvjVfI
-	sTAIv9ppb07whPd/B/ubwXBemZPM4gkVt8cWicbJDKjI1P+ewDOW5DzUgzribQBa
-	72UJrU8dbzEc30uzpypAwzz/GHXlD5Yk4X+CnEOMmvd2ria0k6JhQERmFJSB16Su
-	h0v492dANBD6/jU5UqJneryLuomTNgGI2pUV4y8pmzYOha8wMzk/nrM6tfYqL/iL
-	Y3Qa7aY1SffYMjriJPPnF08MYJVVich1w/ImFxV2AkVIY4EaDNAMJ6ufN1A==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9sbetnfs-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Yz0tN0y6VLuI1y4JV11gW4sPtr+uIZHLZbQYMZWSrr0=; b=B/pxwWfS/sNgW0Np
+	IFKb33OsvyAIy0jGaObt04/Pk8epoZ3a/wSmwOAq2l+k+X4KyL9KI4eRG8nxSdwJ
+	lfL2/90gtDSJUGKv96cB5LRP73rbHOk6zoBusFNnxyeIUOmZMBadEelqf2q85U72
+	AgF0hroOmPYkyzMLLL29tuvjUzOffqG+n6zZZRb2EzCNu64MQR6SODWIfRzpNGCu
+	yCRpFJhZcuimJ2l3oEEtVdNHQHwyMLZQ3fkYfx0ZKpnGcQ/Wr9TQfJP/6PO0Rl/x
+	m5D5AH8Qi6LmYiatlOvE7XF73GE3DSc0a9oQKs2JgWFfUVkIZ5bQNZSWGQZk3k+z
+	Ih6qeQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9sbetnpw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:01:37 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3ab1e771632so4043795a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 00:01:37 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:02:57 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3ab1e771632so4044890a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 00:02:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791961297; x=1792566097; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=EQisfzLzBS4VxQkfKP6jsZVhzhBxlSnN1Kj4T7LYkxI=;
-        b=XcvR+p3mckudDvDLSSIB9+B/uPvfzR2bzN7WJlLjXRcUO+l5ywuyhVv+/PLFqqfsc+
-         hnJ+kClQQQ5l92ofge0QDXNtilo4N5I7fn0debRLH9Tn0BOOBmLzgUQSTmDqiINktVVY
-         ubHVdw9vwHnIyzf33RYi9Qx8Cbq+uc44B0BZ2azWxxdNERw7c1oa/My/qv/xRXISDCSi
-         J8/REKWAaoTKEFwLMjp8G0XlX0X7cuNDSbpopn/RfgeqbKZGQY1f/Ha8oXiEp8I0fSuf
-         XXzXoqOmLvFRODfIsVCH65/0O8AU+ijmSQdAOv1cY79AxMcrGf5j3X84c68a4ABWJ1Fm
-         EmkA==
+        d=oss.qualcomm.com; s=google; t=1791961377; x=1792566177; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Yz0tN0y6VLuI1y4JV11gW4sPtr+uIZHLZbQYMZWSrr0=;
+        b=WPX7Xe/3Dcid8BhGinbgi7guBL6bp/wd8fFVH/mvwx1hnpM6CshRRlgCCLlvqDThwJ
+         JPK0zxfvuOrD5mVQlLao2KfX1Dsqez219j03xGYWK8/cUfKSFh2QCHplZkPVPmmKlEHz
+         Jhz4sVp1C/3h4IGG8eIPwLK6vrinkA1V7kytcjPI+aU663e6vYtrJbSW7/hXeG2kN45p
+         VthGAKx3C/P+RwjlDhGpqVReTyE83qHkoVUdTw/qfkEYhAeCCXIOGlVdRQzd1Rst1HUR
+         TMHCZzG8rnnZSg2Nla9aj2OZKcu3rAb3ehwSYqOmQAc40oIIo9V7s2kRbRHLrS59bqpq
+         D7LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791961297; x=1792566097;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EQisfzLzBS4VxQkfKP6jsZVhzhBxlSnN1Kj4T7LYkxI=;
-        b=JbYy9iVJ/kcigUJ9f/Os7D3AzL7k6IRXt0HJ4vSJdgt6aqTzYDhgvNnFnNKr8ssSFs
-         dhTJM7Y6qPDrsHsduooejc48vntpdV2ez3h0XfB1ftLpk+WX5oH6x6Y98ykHMYBcxZrT
-         smGqvs/M8C85uivCGdBhr3xWyUDLLM73SFoRd5pEW7Oz6dKSfyGgbsr1e2KDwvO51PwR
-         q1HbWwlngMj5n4ou0lO5D5uLmiMGp74gwlGikNDWzn+OJLdTQFK45Zite059qF3vCO1X
-         wbnYc1YaB/xXGpsGQMEr6xxY6n1OCykMG/42qlvtqf3VM0+Nj4V3jzTvMxvKfa3SZuiL
-         oF7w==
-X-Forwarded-Encrypted: i=1; AKwUvBxPeNULITs7JvdJS+uKbiI+9OF1coT993Dam4oPOHUZZYg4+jfEv6PzP+dYfKni7Ltl5BDKhR6X2SofiESJ@vger.kernel.org
-X-Gm-Message-State: AFq9FYLixJ3fMoKZ6RKuuMDo0a3gMKt7Sr6b8pWjhsr4+L/lHm9dF88S
-	riG0tJ4VZMc2hst2+3JJsilKrC8qycbc4toU3lb/rute3+8aRzSEEZxxBtGd1RlISB44G4WSCOx
-	9KAl0mZAOMDXbVqI060AI1dQ1lDhJ2IaHPrwB+PqrVUfiqMTLATSbcKxTQ9993TdoQJv0
-X-Gm-Gg: AYBFou2xM8ucxVw16SrBPot1vLdBcvH1XIX8/WTY2lfa/FIv8upQHX41VNiUljspJYs
-	EVwdMfswEesX4+e9iBpnx24rneCPJjPmAM7j0WYFX3g2IBb9kzjIWZgHTD+W2wEubHvQaGOpOWZ
-	FO5T5QMxb7Te76Ofc9NHcxbK6uC2NSaGhhS7AGgWM1ZDEXx11D6lPf4rJpAruzBuvWILnnDMszb
-	k3dmciz3FFOuwHmGB0pAvG52/0scu8HjrNkpR2d/Q3MdR1Z7PLww4RyrxD+tHXRLRFvL7RbLIlX
-	ScOnlyYCJ8aIz/rAQ9yxzZpSn01CqyitxJsOAoRelRfTHlq8MHVmNMfij0ztQAIkefYuSEVZBYD
-	F3jpeI+8Kraa5X03BXQDaA1hXJLdO7tJmqU/plQ706lUIeJxHPlBpW4MnBzs=
-X-Received: by 2002:a17:90b:498f:b0:3ab:d26b:c2df with SMTP id 98e67ed59e1d1-3abd26bc4e0mr5183270a91.27.1791961296492;
-        Wed, 14 Oct 2026 00:01:36 -0700 (PDT)
-X-Received: by 2002:a17:90b:498f:b0:3ab:d26b:c2df with SMTP id 98e67ed59e1d1-3abd26bc4e0mr5183192a91.27.1791961294141;
-        Wed, 14 Oct 2026 00:01:34 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac77441306sm444568a91.2.2026.10.14.00.01.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 00:01:31 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v3 2/2] remoteproc: qcom: pas: Don't fail attach if the remote has crashed
-Date: Wed, 14 Oct 2026 15:00:38 +0800
-Message-ID: <20261014070038.564879-3-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261014070038.564879-1-shengchao.guo@oss.qualcomm.com>
-References: <20261014070038.564879-1-shengchao.guo@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1791961377; x=1792566177;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Yz0tN0y6VLuI1y4JV11gW4sPtr+uIZHLZbQYMZWSrr0=;
+        b=QDF6Rra1cJPYsuNDuqx2yqA0Um8MgV9noOl5JtT1SzLt8hPDPSHoEWPWed1+lnDWNq
+         r7AzURJEHY5Upz+CeJBLZGlm2/qzHlZoS1bcYvvVF8B+sVsAWOrBscZ0yyvCoa+Ivs+N
+         Zv5JGU110M/3FrJSaRzWu57WRrV90QPXVWZFXua3PCI9CCums+IuNHnOAnS/GgFo/T3W
+         xkHORkccAH7X+TmDnFwwe6rX/RFb7VEiWhcPrsZ5SyUN127X6dstHD6DkbMWBj8sWyDD
+         3+VjSW5816u8Dqjshx+OXuBS3QJ7hxypu1REb5QGNyzWF4Sj8XP+5Apz/EtmupNaiOMJ
+         J1xg==
+X-Forwarded-Encrypted: i=1; AKwUvBzs/elifQqX/T1Q/nBl+NdXHAJfQzoOaf287JVD1qtKPYs4RSXiDFFCi74bIWfbPeuW2hCpxDyFd2TNt5HU@vger.kernel.org
+X-Gm-Message-State: AFq9FYLokhjyVCupFjSSyLI/UOg4aj2ekhrioCVHNKhyRjTPq2DJBVXt
+	+Lh2+twa5UL25ZkBr60FcRQpB+xPKEsmMK6N2UjMuGkeYkObByKsicGixIMSKo6DYZX/k8XswJ5
+	IPGHq/sAahJe6vxl7b4G51J40S9Dd8LWnD6vasbLzvPsc/j8y4m6OfMIDXYzArhXEJSqEnCZB8v
+	sH
+X-Gm-Gg: AYBFou0wtKLEsXzyf3mASwW5KPfMYA1G5KlOszSs77v9zh+6+VOUVBo+V0FWAhKmkB7
+	2jbFRoWf9tWMpHZDXo5GnML6EspPg1rZ6W2rc8yQ/5PSc6WEw20lNjWBknEtEPJlX5tfQtbzNI6
+	pMZKerRX6QkIhjwasFbaf20M/TbQHg+rTpwP+WIuCr0BaIbmaGtJyaZbLtMJp9AZ4U37KKniETl
+	ap90lQ/KMQiXMcSoLgQn3FBzd/Q99SduNFbn2Ooju1TEznd9T+nKaQSAnxiE5/qh8uwc/RwRbOr
+	Jx/xq1zfV6hkkZn8tT0zHl2LBCxCjKiXPoaSSTBZAzqlVgms4PgOdb71WDx/AloReFEEJjZtIy3
+	g6cvQEHnIZgn8ool9IB2ECunq+SE=
+X-Received: by 2002:a17:90b:4b82:b0:3ab:a09c:f858 with SMTP id 98e67ed59e1d1-3aba09d4a0cmr6031913a91.33.1791961376873;
+        Wed, 14 Oct 2026 00:02:56 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b82:b0:3ab:a09c:f858 with SMTP id 98e67ed59e1d1-3aba09d4a0cmr6031894a91.33.1791961376175;
+        Wed, 14 Oct 2026 00:02:56 -0700 (PDT)
+Received: from [10.218.18.193] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac752d590csm1306401a91.2.2026.10.14.00.02.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 14 Oct 2026 00:02:55 -0700 (PDT)
+Message-ID: <a188f159-6569-42de-8170-5d1a212f2970@oss.qualcomm.com>
+Date: Wed, 14 Oct 2026 12:32:47 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: w4ZSuEZ6Dvgze5bHRSXzkczaJG-TzStB
-X-Proofpoint-GUID: w4ZSuEZ6Dvgze5bHRSXzkczaJG-TzStB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAyNyBTYWx0ZWRfX9LhKgtl8ZLNR
- Dm4XzTxXHAI8u9ixFjcgi0UoCQiugcV13vdeTH69mKzw2uwttE9uPx26mIqVqoZBlUAOHiK4SDv
- LvV6SbSEmbCKxpvphsCUd1ywSIcYy7YCjXTMmBrS+zqa8IRkEFRwzj2NlAiQx4xsMJCR2fJWCG+
- 5vqNKruxWeyzw1/d1jwf6ZzPiENdj/d70G/6BIoQofLBeLbw3s+ybyq0f6GYRdNX31BvFSMpKg3
- /1LvvLH7KHE9xsCpnxLssqnEWk0Tl0TiNof7S/k7PJWjZ3zRvg9Ct4IQGpGsNELy3R5j/Cwl3aP
- gK6r7gXK2SnvRVdLChPLV4fR0C9CkVCAj4cvH4J8P4twMcJUCYDfJldQxiKdLFOkpDVJj1z3mej
- xoBPjpyH6/GsPcSHSm/z76YKj4aOQV4xT31eZ1acjYLK1rrXVj8xRJ9+IqqJpIHFq7pP4PnMI+r
- dREFftLLj4ddmBnD3oA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAyNyBTYWx0ZWRfX3jMo5D55mKh9
- pVzu8dRnYZtFq4tmhK2/iPYH+mca3hcJ1gGXeHORBBh46pmrdinvl7WqlXJu1YyIdiRTIiz/Zwf
- KUFEs2/NK4f0cyGL04t0bnzMTPmdu6Q=
-X-Authority-Analysis: v=2.4 cv=U7AHnuru c=1 sm=1 tr=0 ts=6acf28d1 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=KKAkSRfTAAAA:8
- a=EUspDBNiAAAA:8 a=Hl7sYoTBFiHLiXpXmLQA:9 a=rl5im9kqc5Lf4LNbBjHf:22
- a=cvBusfyB2V15izCimMoJ:22
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 01/10] ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add
+ binding
+To: Harendra Gautam <harendra.gautam@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        ajay.nandam@oss.qualcomm.com
+References: <20261013-b4-qaif-shikra-audio-v9-0-f3022e28f2fd@oss.qualcomm.com>
+ <20261013-b4-qaif-shikra-audio-v9-1-f3022e28f2fd@oss.qualcomm.com>
+Content-Language: en-US
+From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+In-Reply-To: <20261013-b4-qaif-shikra-audio-v9-1-f3022e28f2fd@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: VWdClizaqT-z8hDruU-U4qvge3kFWfyk
+X-Proofpoint-GUID: VWdClizaqT-z8hDruU-U4qvge3kFWfyk
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAyNyBTYWx0ZWRfX3iIGD2fH3Qdj
+ g2LUSnC92bbW4hvLI1fq5cFyetNRP6nWY3ARUp5bRdla8f04XOGiLUb9fXz5yWyPAvUEKCgV4HM
+ uMoVrpyUxK3T1H6k0cfo8KNwVh246PuPatH0WfSgz1kMuIApYxGZt5ioaio29sqS/Nh4Jmj/wh4
+ 04+xagRLQhJmg6ONty9vU1WoiJ9kI7OtnMcGiGg1YHn4M9JzT00Iu2iFPSca34YpDfN9/R0rPi4
+ PwFx3KDSb9VoxW2HrKoDTbI6jiLU733bDzet00czZvmWGGGXvG+X6h2Hr3dwcihLgZE+DCRvTyZ
+ l91v6OE0dvVSdZQOPtHsNP5EhbhHzl00mcwPY/4PTiKIWmxIK0nvVd6aU/1aiby0UsIba5lqFN1
+ em6tQFfdnpABZcCf0GYdg+yYPhgo4HsOxfqw/iwBheJgxRW5KYJIZfryPOARebsnnVLBQag9k4f
+ v/4WeDLUEySN52B23JQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAyNyBTYWx0ZWRfX+4u+Uyj/LroY
+ GT1WMcF+KH0FlNB1EFtZ1e19+lwIljnHp15V+gL6DTfsKxQKBV+tX8KJGP2Yez0QnRpztZLUBwQ
+ Uvys9qDxuo/3q0VyaA5JSytX1moZ548=
+X-Authority-Analysis: v=2.4 cv=U7AHnuru c=1 sm=1 tr=0 ts=6acf2921 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=hxzmZBCRppx9FJjG9dUA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22 a=sptkURWiP4Gy88Gu7hUp:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
@@ -128,127 +145,326 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
  definitions=main-2610140027
 
-When qcom_pas_attach() finds the fatal SMP2P bit already set, it reports
-a crash and then fails the attach. The core unwinds the attach while the
-crash work is queued: rproc_boot() drops the power refcount back to 0,
-and __rproc_attach()/rproc_attach() unprepare the subdevices, clean up
-the resource table and disable the IOMMU. Once rproc_boot() releases
-rproc->lock, the crash handler finds the rproc still RPROC_DETACHED,
-marks it RPROC_CRASHED and runs rproc_boot_recovery() on top of that
-torn-down state:
 
- - the subdevices are unprepared a second time by rproc_stop(), so SSR
-   and sysmon notifiers see a duplicate shutdown;
- - qcom_pas_stop() and the subsequent rproc_start() operate on resources
-   that rproc_attach() already released, e.g. iommu_unmap() on a
-   disabled domain for rproc->has_iommu;
- - recovery leaves the rproc RPROC_RUNNING with power == 0. A later
-   "stop" via sysfs takes power to -1 and returns success without
-   stopping anything, so the remote stays running. A following "start"
-   then boots the firmware again on the running remote and fails to
-   re-add the still registered subdevices:
 
-  sysfs: cannot create duplicate filename '.../qcom_common.pd-mapper.0'
-  remoteproc remoteproc0: failed to prepare subdevices for adsp: -17
-  remoteproc remoteproc0: Boot failed: -17
+On 10/13/2026 11:21 AM, Harendra Gautam wrote:
+> Add the Devicetree binding for the Qualcomm Audio Interface (QAIF) CPU DAI
+> controller used on the Shikra audio platform.
+> 
+> QAIF routes audio between system memory, external PCM/TDM/MI2S serial
+> interfaces and the internal Bolero/WCD codec. Platform Devicetree files
+> need a binding to describe the controller resources, DAI cells and per-
+> interface AIF configuration, and named constants to avoid raw numeric IDs
+> in sound-dai references and child-node reg values.
+> 
+> Describe the MMIO region, interrupt, clocks, DMA IOMMU mapping and
+> aif-interface child nodes required by the controller.
+> 
+> Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
 
-A crash found at attach time is no different from one reported by the
-fatal interrupt right after attaching. Factor the crash handling out of
-q6v5_fatal_interrupt() into qcom_q6v5_report_fatal(), which logs the
-SMEM crash reason, clears q6v5.running and reports the crash, and call
-it from qcom_pas_attach() before letting the attach succeed. The core
-completes the attach with balanced bookkeeping, and the crash handler
-then recovers the subsystem through the regular RPROC_ATTACHED ->
-RPROC_CRASHED path.  With running cleared, qcom_q6v5_request_stop() does
-not wait for a stop ack the dead remote cannot send, and handover_issued
-already prevents a spurious handover on stop.
+LGTM
 
-Assisted-by: LLM
-Fixes: 16472c99f469 ("remoteproc: qcom: pas: Add late attach support for subsystems")
-Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5.c     | 22 +++++++++++++++++-----
- drivers/remoteproc/qcom_q6v5.h     |  1 +
- drivers/remoteproc/qcom_q6v5_pas.c |  9 ++++++---
- 3 files changed, 24 insertions(+), 8 deletions(-)
+Reviewed-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
 
-diff --git a/drivers/remoteproc/qcom_q6v5.c b/drivers/remoteproc/qcom_q6v5.c
-index fe148b4b3775..51b24cbd4336 100644
---- a/drivers/remoteproc/qcom_q6v5.c
-+++ b/drivers/remoteproc/qcom_q6v5.c
-@@ -147,15 +147,18 @@ static irqreturn_t q6v5_wdog_interrupt(int irq, void *data)
- 	return IRQ_HANDLED;
- }
- 
--static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
-+/**
-+ * qcom_q6v5_report_fatal() - report a fatal error of the remote processor
-+ * @q6v5:	reference to qcom_q6v5 context
-+ *
-+ * Log the crash reason published by the remote in SMEM, mark the remote as
-+ * no longer running and report the crash to the remoteproc core.
-+ */
-+void qcom_q6v5_report_fatal(struct qcom_q6v5 *q6v5)
- {
--	struct qcom_q6v5 *q6v5 = data;
- 	size_t len;
- 	char *msg;
- 
--	if (!q6v5->running)
--		return IRQ_HANDLED;
--
- 	msg = qcom_smem_get(QCOM_SMEM_HOST_ANY, q6v5->crash_reason, &len);
- 	if (!IS_ERR(msg) && len > 0 && msg[0])
- 		dev_err(q6v5->dev, "fatal error received: %s\n", msg);
-@@ -164,6 +167,15 @@ static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
- 
- 	q6v5->running = false;
- 	rproc_report_crash(q6v5->rproc, RPROC_FATAL_ERROR);
-+}
-+EXPORT_SYMBOL_GPL(qcom_q6v5_report_fatal);
-+
-+static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
-+{
-+	struct qcom_q6v5 *q6v5 = data;
-+
-+	if (q6v5->running)
-+		qcom_q6v5_report_fatal(q6v5);
- 
- 	return IRQ_HANDLED;
- }
-diff --git a/drivers/remoteproc/qcom_q6v5.h b/drivers/remoteproc/qcom_q6v5.h
-index 8991ff090579..a0507860a21c 100644
---- a/drivers/remoteproc/qcom_q6v5.h
-+++ b/drivers/remoteproc/qcom_q6v5.h
-@@ -56,5 +56,6 @@ int qcom_q6v5_unprepare(struct qcom_q6v5 *q6v5);
- int qcom_q6v5_request_stop(struct qcom_q6v5 *q6v5, struct qcom_sysmon *sysmon);
- int qcom_q6v5_wait_for_start(struct qcom_q6v5 *q6v5, int timeout);
- unsigned long qcom_q6v5_panic(struct qcom_q6v5 *q6v5);
-+void qcom_q6v5_report_fatal(struct qcom_q6v5 *q6v5);
- 
- #endif
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 89450cbdb1ee..c50744bee506 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -562,10 +562,13 @@ static int qcom_pas_attach(struct rproc *rproc)
- 		goto disable_running;
- 
- 	if (crash_state) {
-+		/*
-+		 * Complete the attach and let the crash handler recover the
-+		 * subsystem from the attached state, as for a crash reported
-+		 * by the fatal interrupt.
-+		 */
- 		dev_err(pas->dev, "Subsystem has crashed before driver probe\n");
--		rproc_report_crash(rproc, RPROC_FATAL_ERROR);
--		ret = -EINVAL;
--		goto disable_running;
-+		qcom_q6v5_report_fatal(&pas->q6v5);
- 	}
- 
- 	return 0;
--- 
-2.43.0
+> ---
+>   .../bindings/sound/qcom,shikra-qaif-cpu.yaml       | 290 +++++++++++++++++++++
+>   1 file changed, 290 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml b/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
+> new file mode 100644
+> index 000000000000..acca6f617751
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
+> @@ -0,0 +1,290 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/sound/qcom,shikra-qaif-cpu.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm Audio Interface (QAIF) CPU DAI Controller
+> +
+> +maintainers:
+> +  - Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+> +
+> +description: |
+> +  The Qualcomm Audio Interface (QAIF) is a fully configurable DMA-based
+> +  audio subsystem controller. It serialises and deserialises PCM audio
+> +  between system memory and external serial audio peripherals (PCM, TDM,
+> +  I2S, MI2S) through the AIF path, and transfers parallel audio between
+> +  memory and an internal WCD codec through the CIF path.
+> +
+> +  AIF (Audio Interface): up to 13 multi-lane Unified Audio Interfaces,
+> +  each supporting up to 8 independent data lanes. Each lane is individually
+> +  configurable as TX (output/speaker) or RX (input/mic). All lanes of an
+> +  interface share a single bit clock and frame sync. Supported modes are
+> +  PCM (short/long sync), TDM, and MI2S (stereo/mono). Per-interface
+> +  configuration includes sync source (master/slave), sync mode, sync delay,
+> +  sync inversion, slot width (8/16/24/32-bit), sample width, active slot
+> +  masks (up to 32 slots), bits-per-lane frame size, lane enable/direction
+> +  masks, loopback, output-enable control, and full-cycle path support for
+> +  long chip-to-chip connections.
+> +
+> +  CIF (Codec Interface): up to 10 RDDMA (playback) and 10 WRDMA (capture)
+> +  channels connecting to an internal codec over a parallel bus. Each channel
+> +  supports active-channel enable mask (up to 16 channels), frame-sync
+> +  selection, frame-sync delay, frame-sync output gating, dynamic clock
+> +  gating, and 16-bit packing/unpacking.
+> +
+> +  Note on RX/TX naming convention: in QAIF, TX refers to the output
+> +  (speaker/playback) direction and RX refers to the input (mic/capture)
+> +  direction. This applies to both AIF lane directions and CIF slot/mask
+> +  properties.
+> +
+> +  DMA engine: RDDMA fetches audio from DDR/TCM/LPM into a shared SRAM
+> +  latency buffer (SHRAM) and drains it to the interface. WRDMA collects
+> +  data from the interface into SHRAM and writes it to memory. Each DMA
+> +  owns a private SHRAM region defined by start address and length registers.
+> +  Burst sizes of 1/2/4/8/16 beats (64-bit) are supported with up to 4
+> +  outstanding transactions per DMA. Two QSB master ports (QXM0 for TCM,
+> +  QXM1 for DDR/LPM) provide the memory interface.
+> +
+> +  Resources are partitioned among up to 5 Execution Engines (EEs) via
+> +  EE map registers. Each EE owns a set of DMAs, audio interfaces, and
+> +  interface groups, and receives its own independent interrupt output.
+> +  The interrupt hierarchy has a two-level structure: a summary register
+> +  identifies the event class (DMA period, underflow/overflow, error
+> +  response, audio interface underflow/overflow, group done, rate detector,
+> +  VFR), and per-resource status registers identify the specific channel.
+> +
+> +  Interface grouping (bonding) allows up to 6 groups of audio and codec
+> +  interfaces to start synchronously and align their DMA period interrupts
+> +  within half a frame duration using the RDDMA padding feature.
+> +
+> +  Two rate detector blocks measure the frequency of incoming frame sync or
+> +  word select signals and generate interrupts on rate change, undetected
+> +  rate, or sync timeout.
+> +
+> +  Block diagram::
+> +
+> +    System Memory (DDR / LPM / TCM)
+> +    +---------------------------------+
+> +    |  Circular Buffers (ping-pong)   |
+> +    +----------+----------+-----------+
+> +               |          ^
+> +         64-bit AXI  64-bit AXI
+> +               |          |
+> +    +----------v----------+-----------+
+> +    |        QSB Master Ports         |
+> +    |  +----------+  +----------+     |
+> +    |  |   QXM0   |  |   QXM1   |     |
+> +    |  +----+-----+  +-----+----+     |
+> +    +-------|--------------|----------+
+> +            |              |
+> +    +-------v--------------v----------+
+> +    |         Shared RAM (SHRAM)       |
+> +    |  +------------+  +------------+ |
+> +    |  | QXM0 Read  |  | QXM0 Write | |
+> +    |  | SHRAM      |  | SHRAM      | |
+> +    |  +------------+  +------------+ |
+> +    |  +------------+  +------------+ |
+> +    |  | QXM1 Read  |  | QXM1 Write | |
+> +    |  | SHRAM      |  | SHRAM      | |
+> +    |  +------------+  +------------+ |
+> +    +---+--------+--------+-------+---+
+> +        |        |        |       |
+> +    +---v--+  +--v---+ +--v---+ +-v----+
+> +    |RDDMA |  |RDDMA | |WRDMA | |WRDMA |
+> +    | AIF  |  | CIF  | | AIF  | | CIF  |
+> +    |[0..n]|  |[0..n]| |[0..n]| |[0..n]|
+> +    +--+---+  +--+---+ +--+---+ +-+----+
+> +       |         |       ^          ^
+> +       | TX      | TX    | RX       | RX
+> +       v         v       |          |
+> +    +--+--------------------+  +----+----------+
+> +    |  Unified Audio Intf   |  | Codec DMA     |
+> +    |  (AIF 0..12)          |  | Interface     |
+> +    |                       |  | (CIF)         |
+> +    |  AUD_INTFa block:     |  |               |
+> +    |  - Serializer (TX)    |  | RDDMA: DDR -> |
+> +    |  - De-serializer (RX) |  |   internal    |
+> +    |  - Sync gen/detect    |  |   codec       |
+> +    |  - Up to 8 data lanes |  | WRDMA: codec  |
+> +    |  - PCM / TDM / MI2S   |  |   -> DDR      |
+> +    |  - Near Pad Logic     |  | Up to 16 ch   |
+> +    +--+--------------------+  +----+----------+
+> +       |  Lane 0..7 (TX/RX)       |  Parallel bus
+> +       |  Bit clk + Frame sync    |  + Frame sync
+> +       v                          v
+> +    +--+--------+          +------+------+
+> +    | External  |          | Internal    |
+> +    | Serial    |          | Digital     |
+> +    | Peripherals|         | Codec       |
+> +    | (PCM/TDM/ |          | (Bolero/    |
+> +    |  MI2S)    |          |  WCD)       |
+> +    +-----------+          +-------------+
+> +
+> +allOf:
+> +  - $ref: dai-common.yaml#
+> +
+> +properties:
+> +  compatible:
+> +    const: qcom,shikra-qaif-cpu
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +    description:
+> +      QAIF summary interrupt for this Execution Engine.
+> +
+> +  iommus:
+> +    maxItems: 1
+> +
+> +  dma-coherent: true
+> +
+> +  clocks:
+> +    maxItems: 9
+> +
+> +  clock-names:
+> +    description:
+> +      Core clocks for register access and DMA, followed by one bit
+> +      clock per AIF interface.
+> +    items:
+> +      - const: lpass_config
+> +      - const: lpass_core_axim
+> +      - const: aud_dma
+> +      - const: aud_dma_mem
+> +      - const: bus
+> +      - const: aif_if0_ibit
+> +      - const: aif_if1_ibit
+> +      - const: aif_if2_ibit
+> +      - const: aif_if3_ibit
+> +
+> +  '#sound-dai-cells':
+> +    const: 1
+> +
+> +  '#address-cells':
+> +    const: 1
+> +
+> +  '#size-cells':
+> +    const: 0
+> +
+> +patternProperties:
+> +  '^aif@[0-9a-f]+$':
+> +    type: object
+> +    description:
+> +      QAIF AIF interface child node for PCM, TDM or MI2S configuration.
+> +
+> +    allOf:
+> +      - $ref: /schemas/sound/tdm-slot.yaml#
+> +
+> +    properties:
+> +      reg:
+> +        maxItems: 1
+> +        description:
+> +          DAI ID of the AIF interface (QAIF_MI2S_AIF* or QAIF_TDM_AIF*).
+> +
+> +      dai-format:
+> +        description: Serial audio interface format (MI2S, TDM or PCM).
+> +        enum: [i2s, dsp_a, dsp_b]
+> +
+> +      dai-tdm-slot-width:
+> +        enum: [8, 16, 24, 32]
+> +
+> +      dai-tdm-slot-num:
+> +        minimum: 1
+> +        maximum: 32
+> +
+> +      dai-tdm-slot-rx-mask:
+> +        minItems: 1
+> +        maxItems: 32
+> +
+> +      dai-tdm-slot-tx-mask:
+> +        minItems: 1
+> +        maxItems: 32
+> +
+> +      qcom,qaif-aif-lane-map:
+> +        $ref: /schemas/types.yaml#/definitions/uint32-array
+> +        description:
+> +          Per-lane direction map, one entry per lane starting from lane 0.
+> +          Use 0 for TX (output/speaker) and 1 for RX (input/mic).
+> +        minItems: 1
+> +        maxItems: 8
+> +        items:
+> +          enum: [0, 1]
+> +
+> +    required:
+> +      - reg
+> +      - dai-format
+> +      - qcom,qaif-aif-lane-map
+> +
+> +    if:
+> +      properties:
+> +        dai-format:
+> +          enum: [dsp_a, dsp_b]
+> +    then:
+> +      required:
+> +        - dai-tdm-slot-width
+> +        - dai-tdm-slot-num
+> +        - dai-tdm-slot-rx-mask
+> +        - dai-tdm-slot-tx-mask
+> +
+> +    unevaluatedProperties: false
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupts
+> +  - iommus
+> +  - clocks
+> +  - clock-names
+> +  - '#sound-dai-cells'
+> +  - '#address-cells'
+> +  - '#size-cells'
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    soc {
+> +        #address-cells = <2>;
+> +        #size-cells = <2>;
+> +
+> +        qaif_cpu: audio-controller@a000000 {
+> +            compatible = "qcom,shikra-qaif-cpu";
+> +            reg = <0x0 0x0a000000 0x0 0x20000>;
+> +            interrupts = <GIC_SPI 331 IRQ_TYPE_LEVEL_HIGH>;
+> +            iommus = <&apps_smmu 0x1c0 0x0>;
+> +            clocks = <&gcc 213>,
+> +                     <&gcc 214>,
+> +                     <&audiocorecc 15>,
+> +                     <&audiocorecc 17>,
+> +                     <&audiocorecc 18>,
+> +                     <&audiocorecc 5>,
+> +                     <&audiocorecc 8>,
+> +                     <&audiocorecc 11>,
+> +                     <&audiocorecc 14>;
+> +            clock-names = "lpass_config",
+> +                          "lpass_core_axim",
+> +                          "aud_dma",
+> +                          "aud_dma_mem",
+> +                          "bus",
+> +                          "aif_if0_ibit",
+> +                          "aif_if1_ibit",
+> +                          "aif_if2_ibit",
+> +                          "aif_if3_ibit";
+> +            #sound-dai-cells = <1>;
+> +            #address-cells = <1>;
+> +            #size-cells = <0>;
+> +
+> +            aif@b5 {
+> +                reg = <181>;
+> +                dai-format = "dsp_a";
+> +                dai-tdm-slot-width = <32>;
+> +                dai-tdm-slot-num = <2>;
+> +                dai-tdm-slot-rx-mask = <1 1>;
+> +                dai-tdm-slot-tx-mask = <1 1>;
+> +                qcom,qaif-aif-lane-map = <1 0>;
+> +            };
+> +        };
+> +    };
+> 
 
