@@ -1,136 +1,177 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC87153CA9A;
-	Wed, 14 Oct 2026 14:00:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 308DC53ED02
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 14:05:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791986423; cv=none; b=HNBAz7OU9cX14IIbBsprKkFDaYivE1tSyGQ/Mzhrq1oYNfCp3kd73t0ddpXNFWjb810A9o3ltmXC+8nOc0bqCn6r+xK3GTyNiFeEDp6XYBKDaB/9F4l40BFZRTA6e6PH/Rpjd1IEky+oF/CVJ3G1FdNeHpvJC3HgwNy0vrUe3co=
+	t=1791986720; cv=none; b=WbDhMxD54vspBfhfylzG9W3mB+5gqXYEaorAzwDTqSHH9AOSTa+I37nOL7/DurU2KT3sqGEwIxW5xke3ejbptVN77wFq+nyjokFuG3OiIVK0rJhyhgpwCZmu1sW5aSkcXibxN9NGEt+UEt02gu/tcJgGicNme4wb7gBB2wpkCOg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791986423; c=relaxed/simple;
-	bh=b9CXXtcashKP76vye/xkZHzz54m+XySmhG1AONZ/mM4=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=mGGRQLaUhD17ZiXWkZZpreljA2qocdxs8wIEACqaAeEziMgxQdKtiC6ATHbVgBrJyz07ne5FL6q2Tv+uT4wjobipcRY9MzukEgCDF/dDoEXOX3pjPQhQzPeaWXlxacgs349V/ynA0yVhAq6Q+AOSQOn/hS4N0llU0G5F+K5j5Lw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TcYYVqZZ; arc=none smtp.client-ip=198.175.65.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1791986720; c=relaxed/simple;
+	bh=on2PEhB3zQq1g4jTu3KddnrV7cQSAaGoMUS/teguhck=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FMCIWpIIbWq0PzacTxD6L4pQySPPOOL05QUpvRr3OnU/2Ty6H16qzdcf1/8x7eP44vIjcxztGuuhgh37bZxt7INTTqsPyb7ZlEtU6AYQIN5gqKvg/TmLbxqDa6Wc1rzpkGMmKqEO850MoXQ4C30u4f8AdT/mSLZL34xDs0IEtVI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H4YyJgJC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Gqm+93QL; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="TcYYVqZZ"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791986413; x=1823522413;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=b9CXXtcashKP76vye/xkZHzz54m+XySmhG1AONZ/mM4=;
-  b=TcYYVqZZZNH1IRFIPGLFwGnYt9pcS5jkVA8/4ANbLd573mG5qvvcgf8I
-   ratDosj6kybfsFdS47s2nUVHcTXszgMCyOfA590o0IBqQU08K9PL+GAZV
-   xPFufARjesnCHcp9qKpOL0vLwMFBNkhb56XhsMOEJN07dAjh4YZr473xi
-   0bJKa3B+FrC04aXcsTjIx1c18ljD+pvt4Lkxss7XEtzPgq4M7JL5kOw+x
-   UzGEDY3/w/fPMzcS/eeraPRmAn43nrR3Vy+VwzINVypgkQR63L72TwovZ
-   fVj1ylNzc0JKcvbPNyNaM0BZPTqwAfOXkko3b0EVhh5NiNFOnfpCCteNM
-   A==;
-X-CSE-ConnectionGUID: XVw47yJtQYWvWbYjgN5bbQ==
-X-CSE-MsgGUID: Re5uxRpjTg+EbkPWHVGIPA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11935"; a="735969"
-X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
-   d="scan'208";a="735969"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 07:00:12 -0700
-X-CSE-ConnectionGUID: fUyB5PeUSoesp9Y5TVqs8w==
-X-CSE-MsgGUID: mx0QbGqrQBGnJ2FYFU80Kw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
-   d="scan'208";a="1329530"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.234])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 07:00:07 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Wed, 14 Oct 2026 17:00:03 +0300 (EEST)
-To: Oleg Keri <okerixx@gmail.com>
-cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-    Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
-    Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
-    Guenter Roeck <linux@roeck-us.net>, Bjorn Andersson <andersson@kernel.org>, 
-    Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-    linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-    LKML <linux-kernel@vger.kernel.org>, platform-driver-x86@vger.kernel.org, 
-    linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH v6 2/3] platform/arm64: add Lenovo Yoga Slim 7x Gen 11
- EC driver
-In-Reply-To: <20261014132315.4659-3-okerixx@gmail.com>
-Message-ID: <3df5fce1-509b-1362-3b78-8f79337ebc05@linux.intel.com>
-References: <20261014132315.4659-1-okerixx@gmail.com> <20261014132315.4659-3-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H4YyJgJC";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gqm+93QL"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EBXDWI2685285
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 14:05:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	DXB1+owYQBBqW88XzzY6K4eceuh+GlN0C86aFl0rv78=; b=H4YyJgJCbnABl9nz
+	FmZ7sqPp+0OU5N0uI4WwVsQ6BxuZtcWiYZwgKoCwW9E/5flb+LG/sKBPnUMaNxGb
+	7MiUv6vxm7rrJbssZja31V8RfPFlrQZnt4pmlMul6VixjbYUpA0WzmfXSmxssXsH
+	GexKlSPHb4hhG/zIxIejefUy3VlURerLDXzfPEfZFE6w+E8ycwFaDDvZSLAq7tVz
+	Ph5zbELPlNS8yM7v3qB2/zxDXe08DKhDLq2hCDYVlbcyt4Cx01KAMKto9sft7DEG
+	ZNjw1b90zrQdHjUPewyxunuqZJHwgsqSU4Q9iiHBK/BDfDVeL7xKFNUXBM0H/+jz
+	QAPAzA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha46u1wr5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 14:05:10 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93edac58b24so53098685a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:05:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791986709; x=1792591509; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DXB1+owYQBBqW88XzzY6K4eceuh+GlN0C86aFl0rv78=;
+        b=Gqm+93QLsvhXkJGzpMiguhMUoOOWRp47JkJb/vPHAmMuqVmorC5sjrbFdCBfaRWp3i
+         5yh6XyFHB01QIV/05mexdANyKCBPLA3hyh7kF2udnQP9kH7v94z6GEamTe+RuzwNrY59
+         e7MRyGo9tjbVFHTp+LloYaLEvQAFqFbN8wvMbgUxV5I+gj8KoqFhNOZOpcS7pGKl351A
+         MfroU84up89C1p8xQ13PbqfD6m5h1mSgva89+GPg+CicaxXavVZJoxQEAaR87Mq1V7B3
+         QXmo6aACGyekZVhW/EBQ+2QCp/ur3XzpfVn37YrnMedZRgj6DlKE2I6m9Fa6GewkYw1Q
+         5I9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791986709; x=1792591509;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DXB1+owYQBBqW88XzzY6K4eceuh+GlN0C86aFl0rv78=;
+        b=P7sv60JauaJQquJfc15g0MmG7ZwUy9j6QDLUzeuo0Q/hFcUHNA6deEzHDXnYDDPd/P
+         DVyoAkXQng4GWGwppp/qWpy/mgbxkPyuwHbQ2wqdyB6wiBKviE3nIEXE4HEowztQpIt/
+         JW6z0WEEWgFeiEICW1GaqqEeWofh+yBgjJE+Mn1gvgo7aK05KC9nzIlWefMcFurce2GT
+         beEXdXOtpqO43iwM6KrsnBEwh/c5w6sYUfDePUC0K90nmuYTVE+9pmh26IZVRgp37mTe
+         qenk2aaUCp+D6F2ysas9vnuB8vrfweVLGsVPQGfk7kAol7LqsIk1jaEZ2OhuEGVYQvvt
+         yphQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx4w61exhgxmkiLaRpiZ/iV4PMpSUQtpH2JK0z3vtPbLgSdDDKEkEHmFopF0NkJA94h4Buomwf+HC+NBrab@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ9qi1/wkAX+LIwD5z3rFh1GmjYYkbGappe8/lnjDDl4UWFyGRg
+	1TwlOgVREm4B52KfHfh7wmH1O5URfbg6SB9EMv3ofCxASvnwGASdbn9VRSUDMylhDGthGRpZPIM
+	bXFPdCUoyVuok1XsdAXTa5MkFuLqrReQLiIXfhXBREmZRTd9vlFovfYOi5owOHKgTMTVm
+X-Gm-Gg: AYBFou0br0fXGRBq+qdA4iMmioEa6mAdY+l5jQmDU3L1TN6QLEjsQenwrayPCro3l39
+	I4S8n7GEker2KYclrfMFWevfAeCspuym36nB4b7g5uAii4LV5gAu/kM+ssQyExq7eRQQwiYK6ya
+	W3T5yZzDd1apqBUwYKyWdxbJDtqUTZbDmkFhwk35LSKn/cu92LQvxPWZDDbhLAkOu4VXfd6ddPV
+	4PtkSxHv7tBHQtfr+KSwwYFRmwzP6WbNKRrhJCnIiv87symI3d0EwCfldnc4xbxnjgMDYf60yA+
+	ocXFwQpzpO7BoNyr822y57vbbLsJkGdkoiOuh+9TF1HqaOYcOkW+kO5WSRVv38VyUkh/bL6FArG
+	ne3auyN3Vmbvx+EPqihqQhA==
+X-Received: by 2002:a05:620a:6498:b0:93e:e111:2771 with SMTP id af79cd13be357-93ee1112d0cmr1775883285a.2.1791986708843;
+        Wed, 14 Oct 2026 07:05:08 -0700 (PDT)
+X-Received: by 2002:a05:620a:6498:b0:93e:e111:2771 with SMTP id af79cd13be357-93ee1112d0cmr1775875785a.2.1791986708169;
+        Wed, 14 Oct 2026 07:05:08 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a9c6805985sm38426281fa.2.2026.10.14.07.05.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 14 Oct 2026 07:05:07 -0700 (PDT)
+Message-ID: <11f513bf-fdc1-419d-8eb6-5cabb6220fbb@oss.qualcomm.com>
+Date: Wed, 14 Oct 2026 16:05:03 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 5/5] arm64: dts: qcom: glymur-crd: Source MAC
+ addresses from a UEFI variable
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Jeff Johnson <jjohnson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+        linux-wireless@vger.kernel.org, ath12k@lists.infradead.org
+References: <20261014-b4-nvmem-efivar-v1-0-187c85f65018@oss.qualcomm.com>
+ <20261014-b4-nvmem-efivar-v1-5-187c85f65018@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261014-b4-nvmem-efivar-v1-5-187c85f65018@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1NiBTYWx0ZWRfXyfK0r2UG0Xeg
+ qrEBrHaGg8xLeRYVnzTZlJgh4oOlzz9ZZz9EEV8z5Pd5s7COODDZx/Qv2jw4KzH9MDF5A6nkR77
+ OdBlH6Pj40kWvs1+j9oEuvQ0vH48ekk=
+X-Proofpoint-GUID: CCfLBUs1D8BpvXsrs7voqwfCpOijGAsL
+X-Authority-Analysis: v=2.4 cv=Y6ttIReN c=1 sm=1 tr=0 ts=6acf8c16 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=jRqq2JA-ig1rCJpZVWcA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1NiBTYWx0ZWRfX3WaagU7teET5
+ aTkK/UBPBkH/M7rv4iD9erLVc8J0q+gYl7XEmSm7fxRxXTpf8OXvIy25wbHCCF45Z7f/P8q72Rd
+ 6H5OIrQN3bn1hdpu3ScY5RI+KCXK/qKtmS4zK8XpaLctacTPyT/Uhtd6hGJLsQQsO7MQCIxrui+
+ p1gMZSlxAWQyb4G+7I89uLSIW+w/6xinBnlae3so0XZeHYiL7/td//qpQh5B2MhXhJqp58Fm7Y3
+ +SefBkYs62owmz04GrWNvN+8XwGhyG7f5/ku6hu4rgYJgM34jZ8NyFw68ZNG10JUP8YkI+vIzTn
+ dNSFabpHjPDGdl9N1/7VRr6tIxtEGSzMTIUWXVT9P7CLNaZToD7eWbkgLlPr/1rJ8vsy3SoVe8h
+ Y6XKNLFoz2jr+yb8DQMv6AP6jkTNVCyjDZqgkQyp8cxGg0AuVKIpEgEHYXHYYLxbWx2ok1Xu8jm
+ hUY//g37vMWOaEKQVSg==
+X-Proofpoint-ORIG-GUID: CCfLBUs1D8BpvXsrs7voqwfCpOijGAsL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 malwarescore=0 adultscore=0 phishscore=0
+ lowpriorityscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610140056
 
-On Wed, 14 Oct 2026, Oleg Keri wrote:
-
-> The Lenovo Yoga Slim 7x Gen 11 (Qualcomm glymur / Snapdragon X2 Elite)
-> carries a Compal EF06 embedded controller on I2C at address 0x70. The
-> platform firmware describes it as an ACPI GenericSerialBus region, but the
-> machine boots from device tree, so nothing otherwise talks to it.
+On 10/14/26 3:02 PM, Abel Vesa wrote:
+> Add an nvmem-efivar provider exposing the "MacAddresses" UEFI variable,
+> carrying the Bluetooth BD_ADDR (bytes 0-5) and the WLAN MAC address
+> (bytes 6-11), both MSB first. The variable is looked up by name, so no
+> vendor GUID needs to be hardcoded.
 > 
-> Commands are exchanged with two raw I2C block transfers: a 7 byte write to
-> register 0x02 carrying the command and up to six arguments, then a 6 byte
-> read of register 0x01 for the result, with a short delay in between before
-> the result register is valid. The EC offers no way to match a result to
-> its command; the delay is the one the vendor ACPI code uses.
+> Wire the bd-address cell to the Bluetooth controller and the mac-address
+> cell to the WLAN endpoint (pci17cb,1107) via the standard nvmem-cells
+> binding. Until the variable is provisioned the cells read as zeroes and
+> the controllers keep using their default addresses.
 > 
-> Expose what the EC offers that the rest of the kernel does not already
-> provide:
-> 
->   - the board thermistors that report a value at probe, five on this
->     machine, as hwmon temperature channels. These are charger, CPU
->     voltage regulator, 5 V rail and ambient sensors, not die sensors, and
->     read considerably cooler than tsens
->   - CPU fan speed in RPM
->   - the keyboard backlight as an LED, off/low/high
->   - Fn-lock as a read/write sysfs attribute, matching the ideapad-laptop
->     interface. The EC reports Fn+Esc as an event but keeps no state of its
->     own, so the driver owns the bit and toggles it on the key
->   - the mic-mute and airplane-mode keys as KEY_MICMUTE and KEY_RFKILL.
->     These reach the host only as EC events; they are not on the keyboard's
->     HID interface and have no GPIO of their own
-> 
-> The EC signals pending events on a dedicated line, and keeps pulsing it
-> until they are read - so the queue must be drained completely on every
-> interrupt, including codes this driver ignores. Leaving one behind makes
-> the controller pulse indefinitely.
-> 
-> Fan speed is reported but not controlled. The EC accepts a manual setpoint,
-> however it enforces no thermal floor over it: with the fan pinned at
-> roughly 2000 RPM under full load the SoC rose from 69 to 91 degrees in 30
-> seconds without the EC ever overriding. Exposing pwm1_enable or fan1_target
-> would therefore let userspace overheat the machine, so neither is
-> implemented.
-> 
-> Note this is the Gen 11 machine specifically. Its EC differs from the
-> Qualcomm reference EC that the reference designs place at address 0x76,
-> which is not populated here, and so EC_QCOM_HAMOA does not drive it.
-> 
-> Signed-off-by: Oleg Keri <okerixx@gmail.com>
+> Assisted-by: LLM
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 > ---
+>  arch/arm64/boot/dts/qcom/glymur-crd.dtsi | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
+> index 58158b51fe29..2dd09ab1d550 100644
+> --- a/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/glymur-crd.dtsi
+> @@ -31,6 +31,22 @@ chosen {
+>  		stdout-path = "serial0:115200n8";
+>  	};
+>  
+> +	/* BD_ADDR and WLAN MAC from the "MacAddresses" UEFI variable. */
 
-> +static const struct of_device_id slim7x11_ec_of_match[] = {
-> +	{ .compatible = "lenovo,yoga-slim7x-gen11-ec" },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(of, slim7x11_ec_of_match);
-> +
-> +static const struct i2c_device_id slim7x11_ec_i2c_id[] = {
-> +	{ "slim7x-gen11-ec" },
+Let's drop this comment and sort the node
 
-Thanks for the update. I've applied patch 2 to the review-ilpo-next branch 
-in the platform drivers (pdx86) tree.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-The other two patches will need to go through some other tree.
-
-While applying, I added .name = into that id struct.
-
-
---
- i.
+Konrad
