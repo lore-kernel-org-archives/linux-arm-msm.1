@@ -1,159 +1,140 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12CC13A0E80
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 18:50:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAACA3FA5E4;
+	Wed, 14 Oct 2026 18:51:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792003831; cv=none; b=KJKi+VjA9x3hhgA9aRcjGjsNNV4EeYHL/7TlQbw6knaWKO5cck+DW/yPTO83SuhVCdn4Z++sdxhrAUtSvU1KEg5sHj4AtT8W47PQ3L4jWeqfyUEmKK2PZMyQDxywFDr4t32k0HxoZFG5EHMBk0htVCtolvUpJ7szuRr7bN4Aj90=
+	t=1792003898; cv=none; b=E/r0P/zTIsmCXLHp7sQCU4ppjX3goDG2HKM/4H+pP7yrgV1FSakUwjp7gkUQT24W6NnW7uoIVPujqvFm5FQlhR0cuv8DGUg0iVTQ3BvnpHotusgMRvk/S6Knn56/HuJ5tc3FIwX+1x5Fgy8TdOFkANxcb99NvgS7vjHZvyM9rQk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792003831; c=relaxed/simple;
-	bh=7ah7jUqQtUDrn4PSNymda/Iqm5p7zMRB4PxJ+OtxpWs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=XljxNE273XXxKS61SegY8EF1mHDNsd/Inn8v92GIpF5WxSkYbEfH782E2hIMJ64su+bCn7MSKDKJ6iMsQExciWRb/jXv0jX/WqKeJ1G50uHBMjKJtOOzcCjnkAKyVYLUpbZCPmbwmudSP+OipTm1e4Tn2QMHhxZ+yRZaRwlGrpA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hLw7FgaY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CDlyxjpb; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792003898; c=relaxed/simple;
+	bh=s/i8RPjRgl4wPrFTH5nImV2yVSNtfDmN232WCrWgTBQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HBoUjWhGQzZwo8klywMzbmw3+GQqIas21BwFxRHa6nuv7CGHpicjRonoAc7kNaHsyUeqH0AChCWUp67HbFOomCdlDOxD3TFCumdBKkVjtex/0zptj45pSIiULtHdH8d7oUu2xPZ+VeNZhaZYClCFUM8in7FGo8YdLlJRjyekuO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=YWccwvWx; arc=none smtp.client-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hLw7FgaY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CDlyxjpb"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EEbFFL301195
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 18:50:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	QmKAgT+BMROb7bsj9FpwRJzAdtcudV6UZcveycRYTO8=; b=hLw7FgaYpyNo6zxN
-	l8UvMhOCymTJmyoS3bWMjr5HzJVHGUDmM15PoeZw62rTAv7lAWVn+4w/Hn5g1+4X
-	/m3XN9322dQYzH9LtDo5PYG58tsWg3pKe4CtmZEZalzj1aiYPrgalBB9KeuhcMVa
-	BjmDS62vTj3Cuh3fTXBp0SJqfQjY8d1DAXX/AKNu1k1YrIaTOed3GbTA2OUWXI0b
-	5Q0OHU11f0kfDr+XCUAoOHBPuYcu2vtzh4LNNBYJz1WtBvllA9e5EVxr1BQsDWjP
-	ON1rFDnOcHjgSE319n24TVY1oL3h6wsAC8z3P7FyoemA7Qxus3vGzHqRDohxXyc1
-	mVfA8g==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha4623390-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 18:50:26 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1383723dfddso2385822c88.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 11:50:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792003826; x=1792608626; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QmKAgT+BMROb7bsj9FpwRJzAdtcudV6UZcveycRYTO8=;
-        b=CDlyxjpbo4zfV8DHanOTSiS05l5uhhmSw4x4HmEeO6jd7EnFjH6mgXE2HrctTZPbN/
-         e8SsLNqVy5gBLbCh8DDpE2cV2mKYOfynhO9ia0RmoigQIVmBmzTeXl8VlHSrOUaL/Q8D
-         +8A4zRPmQG8Pf4ld8OM53/7MlXZVp+4xyVDCOkP/KUtUGwneUTlao2Wmmhu3bIrqzHhj
-         f0jsb3cOXldJbgracQEGeGqDTjoNaSXmIOoDu+vUVW2RsRVxtIMUL56l7CQkOdYBQx5R
-         RMrNGxQh3iwFWy4o10BdUzuBQZ9l3OUV5h55liOhAjqM+6YQQ3WWyGTd9p35OQbEWn09
-         werg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792003826; x=1792608626;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QmKAgT+BMROb7bsj9FpwRJzAdtcudV6UZcveycRYTO8=;
-        b=GQyIL+GTRmArCTtYlOYaOBE0yft+HZshixP4Z8BYRrHc7/npMW7d9yZVK3CVLZ0qDv
-         aebaLVTHRlRkzuEJqPFQ8IhzcPW6z3O5CfsBAt74zJ+ILfPOlWj8GcbACHGssu+jqreC
-         Ft3+YLPh04K1MJDuwl392KImdaIkpmUb53znKjAI7WdLmLz8ct3YGIloYP/EmgjDQmwh
-         0uiSMzjDDaKU/5acjgrpRjSogeFCj8QywOWNzzWe69N/id7fR3AJ13qaBe0F2ptqKNHM
-         5SXTr3nhFw1jO6l3PmVzKqAPsFOloFifxpuR2ze3Kfsy+Ei9D7g8CnzM8YfB0XVl1vaC
-         HaRg==
-X-Forwarded-Encrypted: i=1; AKwUvBzxq6H1eHDPS40lHfvV+n0Tu0c740edphtZdCoat3WpOotbl+eFeq39gLtAsnAbL/E0Cv70Bs38GhlMH5fe@vger.kernel.org
-X-Gm-Message-State: AFq9FYK3zN/ULYhrKdcpjnwSNg3WtnLUdUkgs5PzjNrSJFswqkJ7G0mD
-	KuHj/lj19eUaQGVhGgOlw5vgwtsg8kv9bTz5HHkn0pCUycaFLE6tlBRbN5IwkfKa8lg9Mt3p5Wz
-	Y7rDnhWBzLwfH1gUeEPuXmwFSLnRKAN/xeDykI5RCvu6eOAjqZGnNZPD/KDDjCt0gYs/H
-X-Gm-Gg: AYBFou0mK5iRKTVjQw87IyATZJaFYwAVL7StkOZ2h5CnzjG1dloEd14S3Z+aqRPRsv5
-	9gnHZtM2JquBKnpAwt8MceoR8/e6XID5ihGZPzLyLjgnx7b/hKf8UUi4kA5oT8ZtCUYciiiyoo/
-	ja93ePxy5MXJH6iNm0iEF0OJNtqh3fVT/F2zl9xTpJfTSQPXiDECrhg8vHM4WGeHuLofpBYteye
-	EqRgRHCDcuK2NceKP+n/lnSYttFiZMPJfLMsNXCm6C9dYfGtFROu44RPMrRby4Uo/zKVNqg7YGm
-	oUac7Ol5U3aufQhdN9R9Nrf/PEDFjjTOvVRYO6NzPFZsanjcNY66LUFX3+sxcJdRGM32wmoQaGC
-	uE9/SpTKC2jbKJoVr/MgzFDp/UnHQTYxW
-X-Received: by 2002:a05:7022:1582:b0:143:298e:913d with SMTP id a92af1059eb24-16a63b2edc7mr32561288c88.47.1792003825538;
-        Wed, 14 Oct 2026 11:50:25 -0700 (PDT)
-X-Received: by 2002:a05:7022:1582:b0:143:298e:913d with SMTP id a92af1059eb24-16a63b2edc7mr32561225c88.47.1792003824748;
-        Wed, 14 Oct 2026 11:50:24 -0700 (PDT)
-Received: from [192.168.1.2] ([106.222.235.49])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-169a442956asm62519780c88.16.2026.10.14.11.50.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Oct 2026 11:50:23 -0700 (PDT)
-Message-ID: <16d94994-ff80-405c-ad98-ccefe4f951d6@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 00:20:14 +0530
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="YWccwvWx"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792003898; x=1823539898;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=s/i8RPjRgl4wPrFTH5nImV2yVSNtfDmN232WCrWgTBQ=;
+  b=YWccwvWxaGH3f7mPiSFqjkIQSuOWFx0JQk2oKa3Wi/ejrCdMM0DimkHf
+   nJ9Moj+SWrFVXHvtC6m5ykKVOZ8OXaP1eV0Cxk8QYZv02ikl/tkY3V35/
+   3008/UC0cqC7Z0VbHTOVclUoYT2P/j8v04n+gXdRLE5XMsBXk0JP3AAlz
+   wEyA/oZ/QYXGnBs8BJ6wQ61YLHc0+cCYpkyhNJoQBTp1h0C8AE4n3mPkr
+   zo5wivTimIdDeMRyXj7slfv4v8/aQHxhkWDUKgL//SnMdffk50nYqOUe6
+   hpJOLf4QwELYU29+ckkCaQCWYpm9WY5OFTUjoowZFcp5rZmube5MW6yMJ
+   w==;
+X-CSE-ConnectionGUID: 9BCBBmCwT2mxRY3lNUI+Mw==
+X-CSE-MsgGUID: cLR35IqBRwuPZlDeErDzxA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11935"; a="650250"
+X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
+   d="scan'208";a="650250"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 11:51:37 -0700
+X-CSE-ConnectionGUID: 0eg66OL7RyamEFcMixabuQ==
+X-CSE-MsgGUID: dZRf945+SmqDgyMp7XaU7g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,158,1787036400"; 
+   d="scan'208";a="1522678"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa004.fm.intel.com with ESMTP; 14 Oct 2026 11:51:33 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xH44Z-00000000F4d-0i0R;
+	Wed, 14 Oct 2026 18:51:31 +0000
+Date: Thu, 15 Oct 2026 02:50:54 +0800
+From: kernel test robot <lkp@intel.com>
+To: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>,
+	andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org,
+	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org,
+	srinivas.kandagatla@oss.qualcomm.com,
+	sarath.ganapathiraju@oss.qualcomm.com
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	prasad.kumpatla@oss.qualcomm.com
+Subject: Re: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+Message-ID: <202610150244.4heS16Km-lkp@intel.com>
+References: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 9/9] i2c: qcom-geni: Use geni_se_set_rate() for setting
- source clock frequency
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
-        Cristian Marussi <cristian.marussi@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
-        linux-i2c@vger.kernel.org
-References: <20260827-derive_clk_perf_tbl_from_perf_domain_opp_table-v2-0-091697dbeb02@oss.qualcomm.com>
- <20260827-derive_clk_perf_tbl_from_perf_domain_opp_table-v2-9-091697dbeb02@oss.qualcomm.com>
-Content-Language: en-US
-From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <20260827-derive_clk_perf_tbl_from_perf_domain_opp_table-v2-9-091697dbeb02@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: jfSLI1w9pm5xuUT-ZSKaSatBecXVlU7Y
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA3NSBTYWx0ZWRfX75Xk+d2jBR/9
- w1ngcGXSWzgUN6X06WZU/0Nw/AhJ3BGlQuQB4mYaJrH/wnKjDvfoyK2Y7d6CVcJUIDL6DTo/4TW
- 4DnZKeWVW5U8TWqbVfet37y8Op9eJcx3r1wI2O2xZwyK9UgvMnecVVqndkf5BHWkNJDP+Czz70O
- d/rl+dEex1P7mwfLtHEB+9RPlac3srMMTnE8pk2avVsZ2Me5ju+qNSIK4dMzctLm75CAFyAUflG
- 5IdXuKd0tu6sGRNPLLoPQ8g4SwRcuv8YJZh7qyzlg1euCkIOk5RN8poiLcR+4PUMk46nSRIe4Vv
- DIRCMo7V3uLqozholMtD/tyorrb/uFCT9fHu8neclIe6b+Eq1OThJTTSwWzS/YVvPdnQheyQ44p
- uTt3QFR8SbTC83v1vdRutSwgj5NyYBohKALwmJliFQKt/IFlA3YpfRTJWCogmRv0gH9UE2G/CN8
- nhevbZZf+hMsHMdsa+A==
-X-Authority-Analysis: v=2.4 cv=ErZHPicA c=1 sm=1 tr=0 ts=6acfcef2 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=N5Y/PXOiYxOVLBGg3HvMCg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=UheTk5Niw0niUJ_rJrEA:9 a=QEXdDO2ut3YA:10
- a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA3NSBTYWx0ZWRfX6REk2TQnoX/+
- Vc0RU4qkvyEyDJYQd+AE89xzr/AF3npZz0GevEbXKgr+DdMNnVPFJZnGZUJTBmmMWiy5NUdtpDp
- MF/TBIYj6hZGgEGFCNKqmaNaxLIwVvQ=
-X-Proofpoint-GUID: jfSLI1w9pm5xuUT-ZSKaSatBecXVlU7Y
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 bulkscore=0 impostorscore=0 adultscore=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 priorityscore=1501
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610140075
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+
+Hi Sarath,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on becb95e45ef0dda9ffb35156d909d3da7a2789c3]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Sarath-Ganapathiraju-via-B4-Relay/dt-bindings-clock-qcom-Add-LPASS-VA-CSR-HeartBeat-pulse-clock/20261012-172258
+base:   becb95e45ef0dda9ffb35156d909d3da7a2789c3
+patch link:    https://lore.kernel.org/r/20261012-master-v11-2-15009e3ecac3%40oss.qualcomm.com
+patch subject: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+config: powerpc64-randconfig-1000-20261014 (https://download.01.org/0day-ci/archive/20261015/202610150244.4heS16Km-lkp@intel.com/config)
+compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 6719b9e31d6a93099612c474eec76d9f41d0275a)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261015/202610150244.4heS16Km-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610150244.4heS16Km-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/clk/qcom/lpass-va-csr.c:61:21: error: called object type 'void *' is not a function or function pointer
+      61 |         ret = pm_clk_resume(dev);
+         |               ~~~~~~~~~~~~~^
+   drivers/clk/qcom/lpass-va-csr.c:77:16: error: called object type 'void *' is not a function or function pointer
+      77 |         pm_clk_suspend(dev);
+         |         ~~~~~~~~~~~~~~^
+   drivers/clk/qcom/lpass-va-csr.c:83:23: error: called object type 'void *' is not a function or function pointer
+      83 |         return pm_clk_suspend(dev);
+         |                ~~~~~~~~~~~~~~^
+   3 errors generated.
 
 
+vim +61 drivers/clk/qcom/lpass-va-csr.c
 
-On 8/27/2026 11:29 PM, Praveen Talari wrote:
-> GENI resource management may be handled either through the Linux clock
-> framework or a firmware-managed performance domain. Source clock
-> programming currently depends on platform-specific callbacks.
-> 
-> Use geni_se_set_rate() for source clock programming and perform the
-> source clock configuration from qcom_geni_i2c_conf(), allowing the GENI
-> core to abstract the underlying resource-management mechanism from the
-> I2C driver. This removes the need for platform-specific rate-setting
-> callbacks and enables a common code path across all GENI I2C platforms.
-> 
-> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
-> ---
-Reviewed-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+    54	
+    55	static int lpass_va_csr_runtime_resume(struct device *dev)
+    56	{
+    57		struct lpass_va_csr *csr = dev_get_drvdata(dev);
+    58		const struct lpass_va_csr_data *data = csr->data;
+    59		int ret;
+    60	
+  > 61		ret = pm_clk_resume(dev);
+    62		if (ret)
+    63			return ret;
+    64	
+    65		ret = regmap_write(csr->hb.regmap, LPASS_RATE_GEN_COUNTER_0,
+    66				   data->counter_0);
+    67		if (ret)
+    68			goto err_pm_clk_suspend;
+    69	
+    70		ret = regmap_write(csr->hb.regmap, LPASS_RATE_GEN_DELAY, data->delay);
+    71		if (ret)
+    72			goto err_pm_clk_suspend;
+    73	
+    74		return 0;
+    75	
+    76	err_pm_clk_suspend:
+    77		pm_clk_suspend(dev);
+    78		return ret;
+    79	}
+    80	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
