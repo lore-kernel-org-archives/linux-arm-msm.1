@@ -1,64 +1,64 @@
 Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 839B13DA5A0
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:27:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8759254B1C5
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:27:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791995239; cv=none; b=pB1JQcBq9FpUZCfU3aIHqqTNCRndplzPKWweYxh07CUoqcqNudneufvdvbPvIqIzCFip+fYrrRgVSesef0kL/ao+QZrAexAf1XgFUIagw4LmrVxJlWcHBD4YGPg7bktzK+UTeibOrz+lzdvX8BPUZVH3BjCPevEdg0ksWNWIF8s=
+	t=1791995240; cv=none; b=tKF1T8Ty1qPGcz3KlRANKiqS4opzRXb1gzoRv4kuLGi62USBH7i74JRo9ySGLUyfeHPGOvHenvcWJxoHksA0qWHzEkgPJJ0284Dq3vCtd1B8yRVRYEdVVCl+6PcWPUr1AdlXha5107c03jn3GKUyptLylZVpYaeah8i9+98EJrM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791995239; c=relaxed/simple;
-	bh=w0UxMJpxTIbUUoxkjgdBbOWY9aaStFWuKEVF+5GN4UQ=;
+	s=arc-20240116; t=1791995240; c=relaxed/simple;
+	bh=sKUZlLhOrMgRwmNi6jUDh1V2/nyPhhj3mYIjf0e2zew=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=WOOsiptCOWJ8SMRBP40TMGQQLpr22NHcbQ4u7VJPqb/XRXG50k5sRWp26m+QLGcWxgg8fZw9oYdFkKE+3x7TktYaBMbOxSWle6ki1xkN3eZw2IKX04n/cxSPqCz5RuPpdWdInTXkAKPW7f3jHc8Z9Z9JUHUdVDFRqCiEKJh1aZU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r95+R2JZ; arc=none smtp.client-ip=209.85.221.49
+	 MIME-Version; b=D6sweyTox7Y04rgVx5p6dtyvQoUyOOtheuUOyoeOzuQO5b7E1yb6+EYCg6mvtjP7JYoN6cV5atBPyMCoOSxtkg2oKU1761NoFwIDoM8mK4ux/Iy8E0tJvcV8S5f6XiEY7DfbUz5bJOMr0pPVCgLg5LN0Q2xMmhYlvwGxYQy1QoQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OE7wnSnG; arc=none smtp.client-ip=209.85.221.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r95+R2JZ"
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48b042c0728so1041894f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:27:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OE7wnSnG"
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48c14a06c95so3434252f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791995236; x=1792600036; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1791995237; x=1792600037; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fMXZF8oI/JAcZ89EGF/inoVVxrty6tqZd5ZRgOp/8l8=;
-        b=r95+R2JZp/2G8PexSfdsPuEbRHz4i2Xb2MmGIWh1bh4uKdpf32m7izvJRW2nZnG/gy
-         bFwhhzV4oOfO72KLGq/zk6WQPEyrmlkdFJIiJ+K+sqKefIsLmLVW/OeVFc6k6/mjzcR9
-         wIsPB3hCGIt9dpiIubtsXYeIzhh9eo3MGUGBfH2B5900kTZouGdqvw/4MyKucB49LjuR
-         dNAx5aZqOrjonIikXXDTz/rUgEhcPLHFZxekPtsYa2G3XGRIj9Ij8HpiJoaA6TteKG2i
-         j0TtB6fgVntEl3w4glEpl167tO3TcbI1zktv9CKiXYDSeFl5oGLKZJl/rgUPaU1h5PFG
-         qQ0Q==
+        bh=nnSdw0uaL1vtACAdgkw6vpJyes4Ayf/5pwfNbIBD7hw=;
+        b=OE7wnSnG5kXUrHEIMDOXj0Umf2juMILqsurHwdjrqLWxh2vR665iyZjbLScZ5XAsPB
+         S2rI9eWLV/ehW33pllWR6PdnYzKAgItJYkmeZ+EI4TMXfFY2XWYrFo/r0dU+tSwoqZAn
+         Bv+kBDbSjdi0bgBpEOMyPI+BgrvaYtglavWb9xc5diizMI+3k/X20/OuqpHzGqiZKAqd
+         NmtTH8djbSbHyBGOWuGrWNGjY91m2SkCun6S/37BU3QasMsR7QzYYoso4zbPYebCenak
+         SWmnXLjclARDwxS3KauS0Gj9z4iSOAHGfJVgnCIpdyRZ2LtjKSFuh7D1oieaFlnyXy3K
+         2IIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791995236; x=1792600036;
+        d=1e100.net; s=20260707; t=1791995237; x=1792600037;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fMXZF8oI/JAcZ89EGF/inoVVxrty6tqZd5ZRgOp/8l8=;
-        b=qLXpeE7KCaPuRmre6UyVUA6pGzb1dhY/nJ83kqhDEY8dRlp5LKJSVF9BPoqXua9AkL
-         WzwqHtOvzW0ElVaRSmeQiue5xcDKrpXCuBGEIKN0vwbakJfO6VJuVAGpr7lSdHgsWHCi
-         OtYg4uMexAxfNJWi6RzJFuMw3VrQ2LQLDWBkh9jxJQ0GBTrVk952d5J/C9wjrWTVUDgg
-         19aOVAsDKw/jEXjbYXY0uBY7FOnfvEY1lDRQLJbF0MwC4whtkYmMvEpsr+bj/Xt0npN4
-         /0/ZCd+gBU9QZvAS+kfmgf1QAbe4PIVpdAWuLqaMBDH9lCn+dyc/G53RurBbYLdL4wG/
-         K0Gw==
-X-Forwarded-Encrypted: i=1; AKwUvBxYaRO4ivRfQipVUTN8smdzdXc4+H/mJvhJsBGDiUZ5o0c6Z0f5JpXOTqCYw31/m5/Bc9xz5vHuHLzAK8Wd@vger.kernel.org
-X-Gm-Message-State: AFq9FYKdsj3zkBt9XUumYgariZzRFLLy/xHagaDeiO/L+wYJqIjv1tLM
-	0OCocHb3ser5bx2zpIHAbCyPAKHS8xdotZ65zk9L0PenV6Szw4e1NgbY
-X-Gm-Gg: AYBFou0dcceHLgu3CYxeeo+kjgw4j+Wos/QZVS1bZqZXBBOWPCcP4vOt0ah28kD6oOB
-	yYy0txzELTTPahobL3Rr2FctboSXffKKOjUCkkEXmUqxm+sddv/mmVXjCyMqmXLcKSVmApKiqEr
-	6wt78MHjnLj6fZPr9ASPCrYYqvqgLAcoH8Mlr57u07JQJhsRWaV4cPGmLreu+O9Sx72xRTYVZKm
-	88Aad9SgiBYTQuDvWGBtShVShR88pLZCYujOP5gDyKkAHn/wWvsITH4XKLgE18Et2wiZaKKPzKm
-	4aQkhDrUKhAX002nfy1t2uRSdnJxGtiaOx+U/2WkFNc7PYKfPa108xkGXbMRBn5qOSJCOQo4bqv
-	VeDZgeXzAVWiP6JmBLvATF6aghecAVReEc0wV/lqKz/ZW4910QOMVxgmPHXHtQ+3NxUt4HYmLzP
-	/Jol9SUeTn2Woxn+HIDoZB0GMgxM0ngFm58XEAleNMfJdHnQN6G3OMnrEBLzAbpvkHTlvAg+MfL
-	jiJpZ2HP2QtdccyILrL7Z1akA==
-X-Received: by 2002:a05:6000:471d:b0:48d:f068:6742 with SMTP id ffacd0b85a97d-48df0686929mr2512960f8f.3.1791995235501;
-        Wed, 14 Oct 2026 09:27:15 -0700 (PDT)
+        bh=nnSdw0uaL1vtACAdgkw6vpJyes4Ayf/5pwfNbIBD7hw=;
+        b=WcjbuzlbxkBEO7tUwVEqdkp3CMcmxuNi5PAq5+DKQRr2lOouDm3v5exe9NerUGLQEd
+         TEbzYUJqaI7k5ffPKz/VpgksMIsVLjdnIe65FMWjvGy/R38hBx1DRWR0VSFZtzD0PYGl
+         ziy6+H58NVSL7PkPKhV2FllXijVsQMwMzB0Jpozpa6adKP5z7kIZpUM9MgMdXS8UNnAI
+         4tiRyUIE3wfqggk4sKozV++/2d/wt79VEvliSATTjYZuDxG3wn/hxwDYlt8GhxUZ9Pnp
+         o+weJYc79uz7wucHvpVx29vi9NFz3ZsAvDR60w04e4L5EEmgqiizn4BdOdgZOb1lXVEL
+         0zHw==
+X-Forwarded-Encrypted: i=1; AKwUvBxeOzx9dBzPNpN+zj7IPiL7pM1YiAfBCmcEQ4wpbLRhaUtGeHJG24v1BKFd83LB4iF8JbgVSMoXdJIQcTu4@vger.kernel.org
+X-Gm-Message-State: AFq9FYJhpp6mCYQNlIRev7kaOTeu6rDR0R1N1m5qCZT5Hf+spEsyOan2
+	ngEC2+04zuJN2mEnz7LDZQ8E3zTlJbQXLjF2hl1mh3B96Y9ovVlcHGMT
+X-Gm-Gg: AYBFou3f9YbZfmbj2vu/f3TITBnhatZa/zAKZkIaXUVrS+By0gOw3RzIK2g+y4D8tlo
+	Pxa7ZHYWAB8KVvXR+Lf+CstmNafZ8uQ7eZkCoWGrB78J2rfvCe4sY5PCWrFC14zIkZMlVbPghz2
+	KieF/kOc/OaxUoRha/Gh1HJ6sn3z8SEn46fGfsyTs/aI0xNFe44Mmxr5s40rHsIdR6Jll1c+Nxh
+	fUVl+cnB81jzRsjIi8/MxO7Kicp7WUlT2cmKwwWG/ZdYmF1bfIWU0ObeFblEhovm5KZtQhpqvrh
+	mDW6WuzLDBNZrhenB3PDW1BUzcKNhJIRinPFqYMCL9PhkFNUnusDpjtXGEV7BeSBaiTWopEOd/E
+	WiQLUQbmeVuhMK3TldpXrMy6eAXOskOow7eG9yWqmBed7P+XzHr6NM6iAwcLxg6qBwRg8w2d1uj
+	B87IQxcm+qturRraYO56i+qnJ533CuLc1NfFTxZARk4zVY8INQ6J4hSA9UPdi8HZ0GkldClbRKj
+	Nixb2ea7ZXQuZP5MkFZHCtXmw==
+X-Received: by 2002:a05:6000:4285:b0:48c:4485:3357 with SMTP id ffacd0b85a97d-48dbacf2482mr29285172f8f.57.1791995236714;
+        Wed, 14 Oct 2026 09:27:16 -0700 (PDT)
 Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaabc3sm13076890f8f.16.2026.10.14.09.27.14
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaabc3sm13076890f8f.16.2026.10.14.09.27.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 09:27:15 -0700 (PDT)
+        Wed, 14 Oct 2026 09:27:16 -0700 (PDT)
 From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
 	Mark Brown <broonie@kernel.org>
@@ -73,9 +73,9 @@ Cc: Liam Girdwood <lgirdwood@gmail.com>,
 	linux-kernel@vger.kernel.org,
 	Vladyslav Tymoshchuk <tvlad744@gmail.com>,
 	stable@vger.kernel.org
-Subject: [PATCH 1/3] ASoC: qcom: q6apm-dai: wrap the position of a full ring to 0
-Date: Wed, 14 Oct 2026 19:27:00 +0300
-Message-ID: <20261014162703.10172-2-tvlad744@gmail.com>
+Subject: [PATCH 2/3] ASoC: qcom: q6apm: reset the hw pointer with the fragment queue
+Date: Wed, 14 Oct 2026 19:27:01 +0300
+Message-ID: <20261014162703.10172-3-tvlad744@gmail.com>
 X-Mailer: git-send-email 2.45.1.windows.1
 In-Reply-To: <20261014162703.10172-1-tvlad744@gmail.com>
 References: <20261014162703.10172-1-tvlad744@gmail.com>
@@ -87,75 +87,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-q6apm_dai_pointer() turns the number of period buffers the DSP has
-returned in the current lap, 1..periods, into a position and reports
-one frame less than that. Commit a93dad6f4e6a ("ASoC: q6apm-dai: make
-use of q6apm_get_hw_pointer") added the "- 1" so that the end of the
-ring is not reported as a position equal to the buffer size.
+On every prepare in queue mode, q6apm_dai_prepare() frees and allocates
+the fragments again, and q6apm_alloc_fragments() resets dsp_buf, so the
+first buffer queued after it is the first one of the ring. The hw
+pointer that q6apm_dai_pointer() reports is left as it was.
 
-One frame short has a cost once the application stops feeding the
-stream. The DSP returns the last queued buffer and the position stops
-at appl_ptr - 1, so avail stays at buffer_size - 1, below the default
-stop_threshold. The DSP sends nothing more as its queue is empty, so
-no period interrupt comes either: ALSA never detects the underrun and
-the stream stays RUNNING. A poll-driven application that missed its
-last wakeup waits forever, and drain only ends on its timeout, with
--EIO. On capture, the last frame of each period is held back until
-the next one.
+q6apm-dai used to keep its own position and cleared it in prepare.
+Since commit a93dad6f4e6a ("ASoC: q6apm-dai: make use of
+q6apm_get_hw_pointer") the position comes from the hw pointer, so a
+stream that is prepared again, e.g. to recover from an xrun, reports
+the position of the previous run until the DSP returns its first
+buffer, while ALSA has reset its own pointer to 0.
 
-Before that commit the position wrapped to 0 at the end of the ring.
-Do that again. A full lap is the start of the ring, and
-snd_pcm_update_hw_ptr0() accounts for the wrap: the position cannot
-move by more than one lap between two updates, as each returned buffer
-calls snd_pcm_period_elapsed() and the DSP holds at most periods
-buffers.
-
-Seen on a OnePlus Pad 3 (SM8750) with PipeWire in interrupt-driven
-scheduling: after a stall the PCM sat at hw_ptr 78239, appl_ptr 78240
-(avail 3839 of 3840) for two hours.
+Reset the hw pointer together with dsp_buf.
 
 Fixes: a93dad6f4e6a ("ASoC: q6apm-dai: make use of q6apm_get_hw_pointer")
 Cc: stable@vger.kernel.org
 Assisted-by: Claude:claude-opus-5-5
 Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
 ---
-Tested on a OnePlus Pad 3 (SM8750, AudioReach, queue mode) together
-with patch 2, with a small ALSA test program and no sound server,
-buffer 3840 frames, period 480:
- - write 4 periods and stop feeding: before, the PCM stays RUNNING at
-   hw_ptr 1919, appl_ptr 1920; after, it goes to XRUN and the next
-   write gets -EPIPE;
- - drain after 8 periods: before, -EIO after 182 ms; after, done in
-   78 ms (twice), and 18 ms for 2 periods;
- - 60 s of tone through PipeWire without an xrun.
+Found by reading the code; tested on a OnePlus Pad 3 only together with
+patch 1, with no separate test for this part.
 
- sound/soc/qcom/qdsp6/q6apm-dai.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ sound/soc/qcom/qdsp6/q6apm.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/sound/soc/qcom/qdsp6/q6apm-dai.c b/sound/soc/qcom/qdsp6/q6apm-dai.c
-index b0b10ba51c99..58beaf906b9f 100644
---- a/sound/soc/qcom/qdsp6/q6apm-dai.c
-+++ b/sound/soc/qcom/qdsp6/q6apm-dai.c
-@@ -613,11 +613,15 @@ static snd_pcm_uframes_t q6apm_dai_pointer(struct snd_soc_component *component,
- 		ptr = bytes_to_frames(runtime, index);
- 		return ptr;
- 	}
--	ptr = q6apm_get_hw_pointer(prtd->graph, substream->stream) * runtime->period_size;
--	if (ptr)
--		return ptr - 1;
-+	/*
-+	 * The hw pointer counts the period buffers the DSP has returned in
-+	 * this lap, 1..periods. A full lap is the start of the ring again:
-+	 * report 0 rather than one frame less, so that the position of a
-+	 * drained buffer reaches appl_ptr and ALSA sees the underrun.
-+	 */
-+	ptr = q6apm_get_hw_pointer(prtd->graph, substream->stream) % runtime->periods;
+diff --git a/sound/soc/qcom/qdsp6/q6apm.c b/sound/soc/qcom/qdsp6/q6apm.c
+index ea6680925f21..b6b1ef6833b3 100644
+--- a/sound/soc/qcom/qdsp6/q6apm.c
++++ b/sound/soc/qcom/qdsp6/q6apm.c
+@@ -285,6 +285,7 @@ int q6apm_alloc_fragments(struct q6apm_graph *graph, unsigned int dir, phys_addr
+ 	mutex_lock(&graph->lock);
  
--	return 0;
-+	return ptr * runtime->period_size;
- }
+ 	data->dsp_buf = 0;
++	atomic_set(&data->hw_ptr, 0);
  
- static int q6apm_dai_hw_params(struct snd_soc_component *component,
+ 	if (data->buf) {
+ 		mutex_unlock(&graph->lock);
 -- 
 2.43.0
 
