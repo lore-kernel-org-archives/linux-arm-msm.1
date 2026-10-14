@@ -1,81 +1,154 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-244118.protonmail.ch (mail-244118.protonmail.ch [109.224.244.118])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3BC94EB867;
-	Wed, 14 Oct 2026 12:53:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FB8830EF8F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 12:53:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.118
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791982416; cv=none; b=I7shW2hZeqqOFR3nkbCuqTuY0tNrqWlxwkg8E6zfJOx9vf+On7bPvxyIpU5PJyTmwqzPNMPSgr0Qmvpyqzbkp7qB48eq+/fXnuYIR3RV+h3bTOXmx5F2aXe1W+14ULmf4ICPPSN394lhn8Z37G550xOShQAyV1ALSR4aa/UZROA=
+	t=1791982441; cv=none; b=LzgndhJW51BVroNceTZBP1yi1ERqznn58ZDBElhvf1EHQILVKOJJJtWsWElJ54roteJyBK9ws8M2zKeb3xx8DaPO0u2s8ganYiqRkUq+WJ8Ro0epr0aAdbXO7/9W937GqbIlWvkZXWB2yax2HWB31gy65PGOLV3ku2yjaW4MSXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791982416; c=relaxed/simple;
-	bh=eoMK1eSx4TJIAPCo1ybO1vVsJOurRWdkZh5vzifCi5k=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=ulgd0kXHfckAx+PPPL7X2oiAYSjMbUoQpjWokkvksEyN2lFKzN8ceOlFSXl2yiwKrD1MN5iViUUAqn2HfHOXkQrChmYiS71KQWkcQuyYvTF25VMC5W/KtIDAD5q0DCY9CtSKpL6naIUu/PkZaZDdwZN16hCCt1s/6t/b8C1xrcA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VCjaGPzp; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791982441; c=relaxed/simple;
+	bh=6bjXC95zDcAs3LYu2AL42LqZZH94acS9uj9YG/YRG9Q=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=JYDs72kIPVpKrlU/zNjSnopQI1lFt8vIvqHUR5MsMAkJN66kuGv9dDmCZI4SqPxPtMGoZo1/d4G9T8KiRGPBMkAKxYhdFIVsKrif5s7tIOQQeOSJCtqTzjW967PH+uj0/8vFaPVYfjoKLuBeKDztzc8aLbtJ/hzritgz8s3S+tk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie; spf=pass smtp.mailfrom=nxsw.ie; dkim=pass (2048-bit key) header.d=nxsw.ie header.i=@nxsw.ie header.b=NFohqh44; arc=none smtp.client-ip=109.224.244.118
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxsw.ie
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VCjaGPzp"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECCE61F00893;
-	Wed, 14 Oct 2026 12:53:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791982389;
-	bh=jDT2IFdLA0AhV0qlErCAnYfvnnzPaGbbjaPIVQ+yjTk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=VCjaGPzpf3DHcN+K6gpqP8SaQaPPn0uKKZ75YU7rUNJHPufg/aWpGB8N+BzngOEcV
-	 vgD2/3EdiLgqOznc+QyLBN2D1KfFmCoYAXa11lEbZ2Lq3QKqQz75NGzanqi9hb2bIS
-	 fzb02m8sAEZMfjl3Slv3pDCJUsgunAxGLYvWgLeYJfEr10rk7eWZK0QoYN7+uros7t
-	 JGqX+qPgqDS5a2QmxTGNGQHQzpfdGwZA+stsQqfFnILH6do8C0SH/C9tOIcFyx8GqI
-	 2tlWjq41QqrrBeNeblv4PhROcohNk7TScSh8Yoo82RRYoIorBU3iAdt96WwfKWPhD9
-	 pY/2Mk9lMuFZg==
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Lorenzo Pieralisi <lpieralisi@kernel.org>, 
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
- Ayiluri Naga Rashmi <ayiluri.rashmi@oss.qualcomm.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
- Mrinmay Sarkar <mrinmay.sarkar@oss.qualcomm.com>, 
- Rama Krishna <rama.krishna@oss.qualcomm.com>, 
- Nitesh Gupta <nitesh.gupta@oss.qualcomm.com>
-In-Reply-To: <20260917-skipmsi_forlpi-v1-1-14a4932a4311@oss.qualcomm.com>
-References: <20260917-skipmsi_forlpi-v1-1-14a4932a4311@oss.qualcomm.com>
-Subject: Re: [PATCH] PCI: qcom: Skip DWC MSI host initialization when
- msi-map is present
-Message-Id: <179198237916.63727.13300930430351546653.b4-ty@b4>
-Date: Wed, 14 Oct 2026 18:22:59 +0530
+	dkim=pass (2048-bit key) header.d=nxsw.ie header.i=@nxsw.ie header.b="NFohqh44"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxsw.ie;
+	s=protonmail2; t=1791982408; x=1792241608;
+	bh=T3htCyi61LnIYLCIgruh3jeMbm8QKAj8fL+DVvyQtMg=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=NFohqh44zxqEHk1LgEE0JQWFlhmiLpn01Ky0P//eNG0qcurg44zxGQRbx630c3aKe
+	 GnobjpNySkGWVVkC+1aeAeLew4bldHLhzMxzBCNzCYtUGSblznZ4a5LzwRWAylGbn8
+	 eM/Qya8r3moc0EYkPxvu+stDw1At4J/+vOAqqjWpA+97d5PS/T3gnCMTqJbhQX3mTu
+	 YiAfsDdnQIyY57GI1jY/xbhU9wuoPON8UqGPbcZUivxcy6FIGRMmCUrUYydZQvUdcQ
+	 BJMvSWw/H/EeeAzEBmJHv88ve5C6iCq+w2FF8lrZs8BBXROWZCGYZ6U7VoVOY4oE6T
+	 XkacwwKwoYa9Q==
+Date: Wed, 14 Oct 2026 12:53:24 +0000
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+From: Bryan O'Donoghue <bod.linux@nxsw.ie>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/6] i2c: qcom-cci: Factor out write command queue programming
+Message-ID: <d39189f9-e9fe-4019-9b64-c4d7c0694c4c@nxsw.ie>
+In-Reply-To: <20261013-cci-imp-v2-1-6873326b44a3@oss.qualcomm.com>
+References: <20261013-cci-imp-v2-0-6873326b44a3@oss.qualcomm.com> <20261013-cci-imp-v2-1-6873326b44a3@oss.qualcomm.com>
+Feedback-ID: 136405006:user:proton
+X-Pm-Message-ID: 6d1d7a76d576577b25342e895170efd33b175fb7
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=364;
- i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=8ehoxGKFUmcfRUYVY7S9kKOZbczv0mIlzhFcl5EcS18=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqz3svA/LMAcRKbqMo0UtQM9ocQDxznymMHM4oI
- Xi5R/kK7VCJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCas97LwAKCRBVnxHm/pHO
- 9TuXB/0dOPbeYa2/U7QmJPIw4LjbhMHIsy44tCWqn4E8iMu20WGOAIV4yk8XUx1J9UfQgOrRDTW
- 4d1EaPQ5gkdFJRwbmDmE5/4iRLP2h03REt9Wk/sfOdm0GCnvWtFAb96IToNEThqnN9ouP3Pd8+/
- c4xSsBNgDi7XxFN66zolKpeuca+bp7Au/ip7vd+pR3lozBe5mAfbp7xIhRZOF12bkRIDVk8oEs2
- /ZUlzeoOeZReOctFNMoPQmf4dBaca7xro9VLTEPK/NRaGfWXJhBB281WzMowVg4y6+Bd87EwRqe
- lAnyTz0+BtoypkTpBBwWC77UKs9n4V++7/SjVMER9l/lZSbt
-X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
- fpr=C668AEC3C3188E4C611465E7488550E901166008
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On 13/10/2026 11:30, Loic Poulain wrote:
+> Factor out write-command queueing into a dedicated helper and replace
+> the manual byte-to-word packing code with iowrite32_rep().
+>  =20
+> The resulting code is easier to follow and will be reused by
+> upcoming burst-write support.
+>=20
+> Also add a sanity check on the write buffer length, which should
+> already be validated by the caller/I2C-core.
+>=20
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>   drivers/i2c/busses/i2c-qcom-cci.c | 41 +++++++++++++++++++++-----------=
+-------
+>   1 file changed, 22 insertions(+), 19 deletions(-)
+>=20
+> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-q=
+com-cci.c
+> index d509dc1c14700d9c199d67df19082bae4f1ae470..3304760411082b72e10e529a2=
+bd66361e100fa06 100644
+> --- a/drivers/i2c/busses/i2c-qcom-cci.c
+> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
+> @@ -77,6 +77,9 @@
+>   #define CCI_I2C_WRITE=09=099
+>   #define CCI_I2C_READ=09=0910
+>=20
+> +#define CCI_I2C_WRITE_WC=093
+> +#define CCI_I2C_WRITE_NWORDS(len) DIV_ROUND_UP((len) + 1, sizeof(u32))
+> +
+>   #define CCI_I2C_REPORT_IRQ_EN=09BIT(8)
+>=20
+>   enum {
+> @@ -485,42 +488,42 @@ static int cci_i2c_read(struct cci *cci, u16 master=
+,
+>   =09return 0;
+>   }
+>=20
+> +static void cci_i2c_load_write(u8 *buf, u16 len, void __iomem *loadq)
+> +{
+> +=09u32 cmd[CCI_I2C_WRITE_WC] =3D { };
+> +
+> +=09if (WARN_ON(len >=3D CCI_I2C_WRITE_WC * sizeof(u32)))
+> +=09=09return;
 
-On Thu, 17 Sep 2026 16:43:28 +0530, Ayiluri Naga Rashmi wrote:
-> PCI: qcom: Skip DWC MSI host initialization when msi-map is present
+Why not trap this and return the error - cci_i2c_write() has a result code.
 
-Applied, thanks!
-
-[1/1] PCI: qcom: Skip DWC MSI host initialization when msi-map is present
-      commit: b41d4c09797a626a555f333c13df5bfaf8e7ebb2
-
-Best regards,
--- 
-மணிவண்ணன் சதாசிவம்
+> +
+> +=09cmd[0] =3D CCI_I2C_WRITE | len << 4;
+> +=09memcpy((u8 *)cmd + 1, buf, len);
+> +=09iowrite32_rep(loadq, cmd, CCI_I2C_WRITE_NWORDS(len));
+> +}
+> +
+>   static int cci_i2c_write(struct cci *cci, u16 master,
+>   =09=09=09 u16 addr, u8 *buf, u16 len)
+>   {
+> -=09u8 queue =3D QUEUE_0;
+> -=09u8 load[12] =3D { 0 };
+> -=09int i =3D 0, j, ret;
+> +=09void __iomem *loadq =3D cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, Q=
+UEUE_0);
+> +=09int ret;
+>   =09u32 val;
+>=20
+>   =09/*
+>   =09 * Call validate queue to make sure queue is empty before starting.
+>   =09 * This is to avoid overflow / underflow of queue.
+>   =09 */
+> -=09ret =3D cci_validate_queue(cci, master, queue);
+> +=09ret =3D cci_validate_queue(cci, master, QUEUE_0);
+>   =09if (ret < 0)
+>   =09=09return ret;
+>=20
+>   =09val =3D CCI_I2C_SET_PARAM | (addr & 0x7f) << 4;
+> -=09writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
+> +=09writel(val, loadq);
+>=20
+> -=09load[i++] =3D CCI_I2C_WRITE | len << 4;
+> -
+> -=09for (j =3D 0; j < len; j++)
+> -=09=09load[i++] =3D buf[j];
+> -
+> -=09for (j =3D 0; j < i; j +=3D 4) {
+> -=09=09val =3D load[j];
+> -=09=09val |=3D load[j + 1] << 8;
+> -=09=09val |=3D load[j + 2] << 16;
+> -=09=09val |=3D load[j + 3] << 24;
+> -=09=09writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
+> -=09}
+> +=09cci_i2c_load_write(buf, len, loadq);
+>=20
+>   =09val =3D CCI_I2C_REPORT | CCI_I2C_REPORT_IRQ_EN;
+> -=09writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
+> +=09writel(val, loadq);
+>=20
+> -=09return cci_run_queue(cci, master, queue);
+> +=09return cci_run_queue(cci, master, QUEUE_0);
+>   }
+>=20
+>   static int cci_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], in=
+t num)
+>=20
+> --
+> 2.34.1
 
 
