@@ -1,179 +1,446 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7EC5485926
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:55:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD5E7485CD8;
+	Wed, 14 Oct 2026 08:00:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791964559; cv=none; b=qBMwHkYS+0+1Lhcb8qo+r2s2uFRFMdQR/uQZvSDTdIKxK4ezaZOCSnD0med7razeYlH8o0cvFu63dzvNgVwH/3o074TMcZHe3obW8hV8JOVdt0FdVPkgcFmez5xlFWododa7BpFYu07rSwZFInjICBxRhaKbnfizQ1xp1vqadv8=
+	t=1791964802; cv=none; b=JMYXYWrZTz5NEQZmflRRFbgIMcVbFJLAd4AxHHnMaXlHVKKX4tFYgN2+SSeNAWnl6s5962bt05v2V1pG/6JtfogTZvoDAT3HN1eP4xPMJoYihz3QXQotZsOEfI5nPqwqPqTbsQP2cu5F5d3D6mn5aLr49v5XCyLUdmV6NRDIHTM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791964559; c=relaxed/simple;
-	bh=zKPIcvOng6sOoWT5GIAeoysX7DOIQXuoTK9dJ/h0xXI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VOT0rOWmF3mO3YuCid+ocT6yLnVB2Vz+oPKOK+f7Fu+ahwU2f76G1Yfcbfngipzs3N0VeYQ7kFuYUX50WoERHMnt/ibW2iDQNIsmtxpkO3DNTnvedXeNe38tBsrachLDzLHmO7qb7Hvx5EjSABeXh8iHv3i4yEMEQYiKO1DeP0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PHs4u3Ep; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UIBRQqfv; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791964802; c=relaxed/simple;
+	bh=JcsNyUTum3gght6MaxO8G0xouWm3pIf9cr4IOEwyQ1Q=;
+	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=N/t89zQR9qEr0naMB6KbSiquGRIoj/msyqCQIbkR/QiBn95M/HeMhRACUvWx2Kv9zaLTX4VYH1EGAC7Hgzsev2pSx8J/xxKlVc2NFkACEDp3TIEJVhlAAJ4v4RBf1qqwVIvoAfEDV7fFdZjWkIRuYqrXHRUgaHy0SMgVtH2B5MY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WXrUse8R; arc=none smtp.client-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PHs4u3Ep";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UIBRQqfv"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E684WM2515922
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:55:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=bwcuSGY118ee4NtPshCbzgah
-	LOs36WmQjPRzBW+ykeg=; b=PHs4u3EpwD2o5FmrXfWp9HYocPJHSZz0vyHlZESP
-	Ktse98DmzNlcGuoCykVY4H5PAQQqYJ2mk0DNEzoxeWk2qSB0YZuj5zxVTmXkfjfr
-	iCdKk1ZZmsNeSq0XfHgJ5Qq1Yb8YRmN7BNo0yBmrO1x/o5i2gnX8/3pc5cfdURRP
-	B2Vj5uSs+5bMBw7eag/+lFS+wkBShxgOXUVrzkCYZugDNA4ZiQkipS/6NT7CZlnd
-	0eTt4hyVhXBhiWWEm7uJ4zAkL8FXWWVqh2WyHnwifPrn0xzh8eNsPEgHfTUvcnhp
-	XRpf8LXXMHNzUvKagydjtfwWYA7/LcUm4vSPgUrWW51k1Q==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha4708dn5-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 07:55:56 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3abfcf726dcso149095a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 00:55:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791964556; x=1792569356; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bwcuSGY118ee4NtPshCbzgahLOs36WmQjPRzBW+ykeg=;
-        b=UIBRQqfvnuMMVDVBPjtzFwSEWPPEiQ0Mgi9Uc0lu7eUhJ2nplt1UttpqFmxeBXPEuo
-         CRCk+4lGhicUwmRvPUyX2RwpuhAh/oHQIi7KQTFyCxVHQ0pN2sFKCshO3A88g5baqxy7
-         pI8LQe6A8+w3Sk172Xx4aDZZjN3MG3aIDlgprxTAX0UcZJK+tpEIl2EdeiC5DTd2EcBv
-         TpvGhiMrbn4VC5MtUKJwjkFsMhySMsO94KEcEi464IOmQH62zlRdQfeNVA6I60OsvMTY
-         1X+FuJRs7QAQMLdrE55VYWZI2Uuug5Xj/XXdNCk1CFTA+LwSJhXiuvoJ8yO++2fX2uqJ
-         dOIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791964556; x=1792569356;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bwcuSGY118ee4NtPshCbzgahLOs36WmQjPRzBW+ykeg=;
-        b=s7fznQqI+6u/189+kjtmG5J1pko87FHDPomELpEPooqPi6SI9Lwjm9kpG8YGn2DvwC
-         pJqA+ZnwXbc/u1SvveIXg5EoN8BDsDNg3zO+f9faNibUb3BhxXQWT9LxDr1ebQXmoz69
-         P9QMPrhmdZ+CchwG/yyVODxYFPq/FHWSee58EEpM77B31o3Ukm2oUn2/zdB0rvQ3m8Nw
-         kZdFGaJOpObaauYxCte3nXiF4lTHBtuP6yf5+LFpUXLW2GJLAi/wZRXlNVuFcimDjx60
-         1osN72SIxSDTpXw8OM2EPBBnyd5DVHaqbsL2odFAQhY56DPWNGUBha2OxhdlBRiipNOT
-         WcAw==
-X-Forwarded-Encrypted: i=1; AKwUvByfBprRIFb+La2euarVCqm9fYV7UOg1NQ4l7O9YoGE7KeJtGFOXkPit1sitmkNtmSTeOFNeKMjWNDWPfowI@vger.kernel.org
-X-Gm-Message-State: AFq9FYLL8WH8JBBJ5AghwKHm/zfFyoKnTY2oQLIc768QpdKft1fexfo0
-	jwF/SwPoAyQlGv2rgiR4hy1mPB9/sdlWAZo83zpLPfg0aHZ1h+QBqiQq0Y2/JGDPhiOg7hoZsnj
-	bQla84BygnspBdsQ2qsDuUpTZrKOxuEwHkYqGJID1Ul+LYdC5bwU/EGHZHiEymzuG0HjQ
-X-Gm-Gg: AYBFou0/EsKHceMyX/J6lNQdZqa9HzraIKMTgCWWYTSoIPouYYsANa0Qs1wVstI7mSF
-	nynYYu9RCAOWsfjN4uHhigPsD7nbiiUTIz5357plXtMzz4tFjKC2ZOq2JWlGWqKogPqTOMtDQFo
-	I0ehgauDtePtyjfJjxg4KVJ/riGWWt/hCdy1V+zIT/yIxNW8BI48CmK32kL74o0UrC7dpOeB2yL
-	RMYojeLWk7yowc+rWZztFtmHs7ajSSwWg80tZZhy/ALd2+m93eRDWtBUa/XBNN/ptd4Wv7PI+jH
-	TOXg2SSduqudprDa5WZCEMqOc6EkXTWPlV9PkmneVBaf2k9JEx4z46W0jTTgJbPt0TzYDmFgY2y
-	78OKIzy4JFd80EKCU0NYQNR1O0MPhHUlY/iW3W/NYkw==
-X-Received: by 2002:a17:90a:c2cc:b0:3aa:ee83:6f2b with SMTP id 98e67ed59e1d1-3ab3a955970mr13203637a91.13.1791964555240;
-        Wed, 14 Oct 2026 00:55:55 -0700 (PDT)
-X-Received: by 2002:a17:90a:c2cc:b0:3aa:ee83:6f2b with SMTP id 98e67ed59e1d1-3ab3a955970mr13203609a91.13.1791964554428;
-        Wed, 14 Oct 2026 00:55:54 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac5f2ba9efsm3255828a91.16.2026.10.14.00.55.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 00:55:54 -0700 (PDT)
-Date: Wed, 14 Oct 2026 15:55:48 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 1/2] remoteproc: qcom: pas: Decide early_boot attach
- at probe time
-Message-ID: <as81hN8Af7CKCYtl@QCOM-aGQu4IUr3Y>
-References: <20261014070038.564879-1-shengchao.guo@oss.qualcomm.com>
- <20261014070038.564879-2-shengchao.guo@oss.qualcomm.com>
- <as8zq_GMu1pkoMYA@linaro.org>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WXrUse8R"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791964802; x=1823500802;
+  h=from:date:to:cc:subject:in-reply-to:message-id:
+   references:mime-version;
+  bh=JcsNyUTum3gght6MaxO8G0xouWm3pIf9cr4IOEwyQ1Q=;
+  b=WXrUse8RdTE6Zohsf01qxq3zpYk012i/PpSSvq49hZCrEJngXQsNvXpK
+   buPYDtm9hY3VhVywQIA9m0MZnUbGa6aW1pGAmvC9aRy+D5ztyalAQRnaA
+   PhfMObmltXcgUDtKGVEi6H58cNrEolEhdYvA+2NhQrxrUZjCU3N6Gf4lX
+   1pvjNWrINWwWiYt9BC+e4CtkqnaI81/SFbQ2Qcs2Gqvr9h1vMHi1SAsY9
+   y5qxjyILuhTlkrdNCGRU8yQJ+tLjOwRA4pttzoSt8e96CNBp2v/Q+Sxky
+   2X1i4P7eJyieXQGlyYjd8GVuCZIkFc2O8z0HiVPVeMwR2m52tlyHea2li
+   w==;
+X-CSE-ConnectionGUID: teLw6qtkSlCU2Vf8H6KKxg==
+X-CSE-MsgGUID: CE1vQVodRYSHFD6Ih2MKuQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11934"; a="601674"
+X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
+   d="scan'208";a="601674"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 01:00:00 -0700
+X-CSE-ConnectionGUID: V6PuobAWQ3qRvYQCNF5cAA==
+X-CSE-MsgGUID: cL0AOjnJS8SPbtnvhJD09g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
+   d="scan'208";a="1378690"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.234])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 00:59:54 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Date: Wed, 14 Oct 2026 10:59:50 +0300 (EEST)
+To: Birk Skyum <birk.skyum@pm.me>
+cc: Anvesh Jain P <anvesh.p@oss.qualcomm.com>, 
+    Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
+    Hans de Goede <hansg@kernel.org>, 
+    Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+    Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+    Shuah Khan <skhan@linuxfoundation.org>, 
+    Randy Dunlap <rdunlap@infradead.org>, Daniel J Blueman <daniel@quora.org>, 
+    Maya Matuszczyk <maccraft123mc@gmail.com>, linux-arm-msm@vger.kernel.org, 
+    platform-driver-x86@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+    linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
+Subject: Re: [RFC PATCH v2 2/2] platform: arm64: qcom-hamoa-ec: test sensor
+ and variant handling
+In-Reply-To: <20260908135801.81436-3-birk.skyum@pm.me>
+Message-ID: <77c05024-1742-7106-eb83-a4776f76d397@linux.intel.com>
+References: <20260908135801.81436-1-birk.skyum@pm.me> <20260908135801.81436-3-birk.skyum@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <as8zq_GMu1pkoMYA@linaro.org>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAzMSBTYWx0ZWRfXxWeovbbeAOKu
- w4DYIyLsA7plhMiX0W0mjhUBj8u+05jnPqMouR4LzGkBHpERagn2Kj3bNG5L+WdD4VFKLqUpBrR
- nM26scwKd9COOs0hNpu87kZqCXB+JVTgtumPiH6tmHSsCJWXqibaxOe68y3+H+0KzSW6YsDF4d9
- JgJS9GG2YStmAeR/lC1K0R/2MOv/zZynyEY0/Y2hz2zQ7mqq4Wdt7fZkteau7vAuTvhgh6bVStX
- ALqbrptNkcu0jNuVLjKBf2qBFaeZhJ59yqz/BMJ7V9caG6Ea/CpQGW63znbMzNv8tf7tmghfCum
- Rl2i1V+0pFm2S7An05PlORrDWCRal6+x1emEV3ciqtqh+ENjQIimbsIAW79dSfrdEHgHG9QcvyI
- 9w7OA+Rjo1iGVhM/C6Ejo7APqJdaMSIGU8czjdFkwGuJ8REtlpWYOkYQ2JRFV9T3JkNQWdNnrq4
- 0S2yxYJL6p2xSsPUpRA==
-X-Proofpoint-GUID: 6Gztzv-e60JxNaWEa7eEdlZLkUy5foBy
-X-Authority-Analysis: v=2.4 cv=P6avFSAu c=1 sm=1 tr=0 ts=6acf358c cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=-9aZd_Kv_hcnAOLhCNgA:9
- a=CjuIK1q_8ugA:10 a=iS9zxrgQBfv6-_F4QbHw:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: 6Gztzv-e60JxNaWEa7eEdlZLkUy5foBy
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAzMSBTYWx0ZWRfX0wCrq5KGd+Ad
- 8q3qNowHbO7KqBKKHA/TSu4sZf0GXj1eATJIwb7hZP212+5muZ3y6VaKF1Xfna6T0rkL6VYwcyo
- C1NfHndxhPSNvBtzOMMqSg/pbssI+rI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140031
+Content-Type: text/plain; charset=US-ASCII
 
-On Wed, Oct 14, 2026 at 09:47:55AM +0200, Stephan Gerhold wrote:
-> On Wed, Oct 14, 2026 at 03:00:37PM +0800, Shawn Guo wrote:
-> > For early_boot subsystems, probe unconditionally marks the rproc
-> > RPROC_DETACHED and qcom_pas_attach() discovers from SMP2P whether the
-> > bootloader actually started the remote. If it did not, attach sets the
-> > state back to RPROC_OFFLINE and fails, expecting the core to boot the
-> > firmware instead. The core does not do that: rproc_boot() treats the
-> > attach failure as fatal and the remote is never started.
-> > 
-> > This is hit on Nord with firmware where XBL no longer brings ADSP out
-> > of reset. The remote never publishes its inbound SMP2P entries, so the
-> > very first state read fails (debug print below) and the ADSP stays down:
-> > 
-> >   qcom_q6v5_pas 4c00000.remoteproc: Failed to get fatal_irq state: -19
-> >   remoteproc remoteproc0: can't attach to rproc adsp: -19
-> > 
-> > The ready, stop-ack and sysmon shutdown-ack signals cannot change while
-> > Linux has not yet interacted with the remote, so there is no reason to
-> > defer the decision to attach time. Check them in probe and only mark
-> > the rproc RPROC_DETACHED when the remote is up and has not been asked
-> > to stop; otherwise leave it RPROC_OFFLINE so the regular firmware boot
-> > path is taken. The ready state is read first so that a missing SMP2P
-> > entry -ENODEV is treated as "not running" before sysmon is queried.
-> > 
-> > qcom_pas_attach() keeps only the fatal check, since that is the one
-> > signal that has to be acted upon once the rproc is attached.
-> > 
-> > Assisted-by: LLM
-> > Reviewed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> > Fixes: 16472c99f469 ("remoteproc: qcom: pas: Add late attach support for subsystems")
-> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+On Tue, 8 Sep 2026, Birk Skyum wrote:
+
+> Exercise the sensor callbacks against a simulated I2C adapter. Check
+> little-endian RPM decoding, short transfers, malformed byte counts,
+> the unavailable-temperature sentinel and propagation of bus errors.
 > 
-> Cc: stable@vger.kernel.org
+> Check that the Lenovo compatible takes precedence over its reference-
+> board fallback, that its sensor attributes are read-only, and that its
+> probe and PM/remove callbacks do not issue control writes. Keep coverage
+> of the strict reference-board capability-response validation.
 > 
-> is still missing. Would be good to have these fixes backported, since
-> the original change landed in 7.3. If you used b4 trailers -u and it
-> didn't add the Cc tag after my message that would confirm my suspicion
-> that b4 won't pick up that tag. :/
+> The tests use KUnit and never access a physical EC.
+> 
+> Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+> ---
+>  MAINTAINERS                                 |   1 +
+>  drivers/platform/arm64/Kconfig              |  12 +
+>  drivers/platform/arm64/qcom-hamoa-ec-test.c | 294 ++++++++++++++++++++
+>  drivers/platform/arm64/qcom-hamoa-ec.c      |   4 +
+>  4 files changed, 311 insertions(+)
+>  create mode 100644 drivers/platform/arm64/qcom-hamoa-ec-test.c
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c3c208602..53ad3ca48 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -22442,6 +22442,7 @@ L:	linux-arm-msm@vger.kernel.org
+>  S:	Maintained
+>  F:	Documentation/admin-guide/laptops/qcom-ec.rst
+>  F:	Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml
+> +F:	drivers/platform/arm64/qcom-hamoa-ec-test.c
+>  F:	drivers/platform/arm64/qcom-hamoa-ec.c
+>  
+>  QUALCOMM HEXAGON ARCHITECTURE
+> diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
+> index 4f338c715..d940973be 100644
+> --- a/drivers/platform/arm64/Kconfig
+> +++ b/drivers/platform/arm64/Kconfig
+> @@ -105,4 +105,16 @@ config EC_QCOM_HAMOA
+>  	  This driver supports Hamoa/Purwa/Glymur reference devices and read-only
+>  	  fan speed and temperature monitoring on the Lenovo Yoga Slim 7x.
+>  
+> +config EC_QCOM_HAMOA_KUNIT_TEST
+> +	bool "Tests for the Qualcomm EC driver" if !KUNIT_ALL_TESTS
+> +	depends on EC_QCOM_HAMOA && KUNIT && OF
+> +	depends on EC_QCOM_HAMOA=m || KUNIT=y
+> +	default KUNIT_ALL_TESTS
+> +	help
+> +	  Test the Qualcomm EC driver's sensor transactions and read-only
+> +	  callbacks using a simulated I2C adapter. No physical EC is accessed.
+> +	  Run these tests in a disposable test kernel, for example under QEMU.
+> +
+> +	  If unsure, say N.
+> +
+>  endif # ARM64_PLATFORM_DEVICES
+> diff --git a/drivers/platform/arm64/qcom-hamoa-ec-test.c b/drivers/platform/arm64/qcom-hamoa-ec-test.c
+> new file mode 100644
+> index 000000000..68868ef76
+> --- /dev/null
+> +++ b/drivers/platform/arm64/qcom-hamoa-ec-test.c
+> @@ -0,0 +1,294 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/* Included by qcom-hamoa-ec.c to test its private transport and callbacks. */
+> +
+> +#include <kunit/resource.h>
+> +#include <kunit/test.h>
+> +#include <linux/of.h>
+> +
+> +struct qcom_ec_test_context {
+> +	struct i2c_adapter adapter;
+> +	struct qcom_ec ec;
+> +	u32 functionality;
+> +	int transfer_result;
+> +	int byte_result;
+> +	u8 reply[4];
+> +	u8 block_length;
+> +	unsigned int transactions;
+> +	unsigned int writes;
+> +};
+> +
+> +static int qcom_ec_test_transfer(struct i2c_adapter *adapter,
+> +				 struct i2c_msg *messages, int count)
+> +{
+> +	struct qcom_ec_test_context *ctx = i2c_get_adapdata(adapter);
+> +
+> +	ctx->transactions++;
+> +	/* Only the RPM query's combined write/read transaction is allowed. */
+> +	if (count != 2 || messages[0].addr != 0x76 || messages[1].addr != 0x76 ||
+> +	    messages[0].flags || messages[1].flags != I2C_M_RD ||
+> +	    messages[0].len != 2 || messages[1].len != 3 ||
+> +	    messages[0].buf[0] != 0x22 || messages[0].buf[1] != 1) {
 
-Oops! I should have added the tag myself.
+Why are you using literals for things that are named on the driver side 
+(e.g. that 0x22)?
 
-> Bjorn might forget to add these, so it's likely easiest and most
-> reliable if you resend again with the tag added in both patches.
+-- 
+ i.
 
-Yes, will do.
-
-Shawn
+> +		ctx->writes++;
+> +		return -EPROTO;
+> +	}
+> +
+> +	if (ctx->transfer_result == 2)
+> +		memcpy(messages[1].buf, ctx->reply, messages[1].len);
+> +
+> +	return ctx->transfer_result;
+> +}
+> +
+> +static s32 qcom_ec_test_smbus(struct i2c_adapter *adapter, u16 address,
+> +			      unsigned short flags, char read_write, u8 command,
+> +			      int size, union i2c_smbus_data *data)
+> +{
+> +	struct qcom_ec_test_context *ctx = i2c_get_adapdata(adapter);
+> +
+> +	ctx->transactions++;
+> +	if (read_write != I2C_SMBUS_READ) {
+> +		ctx->writes++;
+> +		return -EPROTO;
+> +	}
+> +	if (address != 0x76 || flags)
+> +		return -EPROTO;
+> +
+> +	if (command == 0x29 && size == I2C_SMBUS_BYTE_DATA) {
+> +		if (ctx->byte_result < 0)
+> +			return ctx->byte_result;
+> +		data->byte = ctx->byte_result;
+> +		return 0;
+> +	}
+> +
+> +	if ((command == 0x0e || command == 0x42) && size == I2C_SMBUS_I2C_BLOCK_DATA) {
+> +		data->block[0] = ctx->block_length;
+> +		memcpy(&data->block[1], ctx->reply, ctx->block_length);
+> +		return 0;
+> +	}
+> +
+> +	return -EPROTO;
+> +}
+> +
+> +static u32 qcom_ec_test_functionality(struct i2c_adapter *adapter)
+> +{
+> +	struct qcom_ec_test_context *ctx = i2c_get_adapdata(adapter);
+> +
+> +	return ctx->functionality;
+> +}
+> +
+> +static const struct i2c_algorithm qcom_ec_test_algorithm = {
+> +	.master_xfer = qcom_ec_test_transfer,
+> +	.smbus_xfer = qcom_ec_test_smbus,
+> +	.functionality = qcom_ec_test_functionality,
+> +};
+> +
+> +static void qcom_ec_test_delete_adapter(void *data)
+> +{
+> +	i2c_del_adapter(data);
+> +}
+> +
+> +static void qcom_ec_test_unregister_client(void *data)
+> +{
+> +	i2c_unregister_device(data);
+> +}
+> +
+> +static int qcom_ec_test_init(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx;
+> +	int ret;
+> +
+> +	ctx = kunit_kzalloc(test, sizeof(*ctx), GFP_KERNEL);
+> +	KUNIT_ASSERT_NOT_NULL(test, ctx);
+> +	test->priv = ctx;
+> +	ctx->functionality = I2C_FUNC_I2C | I2C_FUNC_SMBUS_READ_BYTE_DATA |
+> +			     I2C_FUNC_SMBUS_READ_I2C_BLOCK;
+> +	ctx->transfer_result = 2;
+> +	ctx->reply[0] = 2;
+> +	ctx->byte_result = 36;
+> +	ctx->adapter.owner = THIS_MODULE;
+> +	ctx->adapter.algo = &qcom_ec_test_algorithm;
+> +	strscpy(ctx->adapter.name, "qcom-ec-kunit", sizeof(ctx->adapter.name));
+> +	i2c_set_adapdata(&ctx->adapter, ctx);
+> +	ret = i2c_add_adapter(&ctx->adapter);
+> +	KUNIT_ASSERT_EQ(test, ret, 0);
+> +	ret = kunit_add_action_or_reset(test, qcom_ec_test_delete_adapter, &ctx->adapter);
+> +	KUNIT_ASSERT_EQ(test, ret, 0);
+> +
+> +	ctx->ec.client = i2c_new_dummy_device(&ctx->adapter, 0x76);
+> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ctx->ec.client);
+> +	ret = kunit_add_action_or_reset(test, qcom_ec_test_unregister_client, ctx->ec.client);
+> +	KUNIT_ASSERT_EQ(test, ret, 0);
+> +	ctx->ec.variant = &qcom_ec_slim7x;
+> +	i2c_set_clientdata(ctx->ec.client, &ctx->ec);
+> +
+> +	return 0;
+> +}
+> +
+> +static void qcom_ec_rpm_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +	static const struct {
+> +		int transfer_result;
+> +		u8 count;
+> +		int error;
+> +	} failures[] = {
+> +		{ 0, 2, -EIO },
+> +		{ 1, 2, -EIO },
+> +		{ -EREMOTEIO, 2, -EREMOTEIO },
+> +		{ -ETIMEDOUT, 2, -ETIMEDOUT },
+> +		{ 2, 0, -EPROTO },
+> +		{ 2, 1, -EPROTO },
+> +		{ 2, 3, -EPROTO },
+> +		{ 2, 0xff, -EPROTO },
+> +	};
+> +	long value = -1;
+> +	int i;
+> +
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read_fan_rpm(&ctx->ec, &value), 0);
+> +	KUNIT_EXPECT_EQ(test, value, 0);
+> +	ctx->reply[1] = 0xef;
+> +	ctx->reply[2] = 0xbe;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read_fan_rpm(&ctx->ec, &value), 0);
+> +	KUNIT_EXPECT_EQ(test, value, 0xbeef);
+> +
+> +	for (i = 0; i < ARRAY_SIZE(failures); i++) {
+> +		value = -1;
+> +		ctx->transfer_result = failures[i].transfer_result;
+> +		ctx->reply[0] = failures[i].count;
+> +		KUNIT_EXPECT_EQ_MSG(test, qcom_ec_read_fan_rpm(&ctx->ec, &value),
+> +				    failures[i].error, "case %d", i);
+> +		KUNIT_EXPECT_EQ(test, value, -1);
+> +	}
+> +	KUNIT_EXPECT_EQ(test, ctx->writes, 0);
+> +}
+> +
+> +static void qcom_ec_temperature_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +	static const int temperatures[] = { 0, 36, 254, 255, -EREMOTEIO };
+> +	long value;
+> +	int i, ret;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(temperatures); i++) {
+> +		value = -1;
+> +		ctx->byte_result = temperatures[i];
+> +		ret = qcom_ec_hwmon_read(&ctx->ec.client->dev, hwmon_temp,
+> +					 hwmon_temp_input, 0, &value);
+> +		if (temperatures[i] < 0) {
+> +			KUNIT_EXPECT_EQ(test, ret, temperatures[i]);
+> +			KUNIT_EXPECT_EQ(test, value, -1);
+> +		} else if (temperatures[i] == 255) {
+> +			KUNIT_EXPECT_EQ(test, ret, -ENODATA);
+> +			KUNIT_EXPECT_EQ(test, value, -1);
+> +		} else {
+> +			KUNIT_EXPECT_EQ(test, ret, 0);
+> +			KUNIT_EXPECT_EQ(test, value, temperatures[i] * 1000);
+> +		}
+> +	}
+> +	KUNIT_EXPECT_EQ(test, ctx->writes, 0);
+> +}
+> +
+> +static void qcom_ec_read_only_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +	struct device *dev = &ctx->ec.client->dev;
+> +	long value = -1;
+> +
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_is_visible(NULL, hwmon_fan, hwmon_fan_input, 0),
+> +			0444);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_is_visible(NULL, hwmon_temp, hwmon_temp_input, 0),
+> +			0444);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_is_visible(NULL, hwmon_fan, hwmon_fan_input, 1), 0);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_is_visible(NULL, hwmon_pwm, hwmon_pwm_input, 0), 0);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_read(dev, hwmon_fan, hwmon_fan_input, 1, &value),
+> +			-EOPNOTSUPP);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_read(dev, hwmon_pwm, hwmon_pwm_input, 0, &value),
+> +			-EOPNOTSUPP);
+> +	KUNIT_EXPECT_EQ(test, value, -1);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_suspend(dev), 0);
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_resume(dev), 0);
+> +	qcom_ec_remove(ctx->ec.client);
+> +	KUNIT_EXPECT_EQ(test, ctx->transactions, 0);
+> +}
+> +
+> +static void qcom_ec_probe_transport_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +
+> +	ctx->functionality = I2C_FUNC_I2C;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_probe(&ctx->ec), -EOPNOTSUPP);
+> +	ctx->functionality = I2C_FUNC_SMBUS_READ_BYTE_DATA;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_probe(&ctx->ec), -EOPNOTSUPP);
+> +	KUNIT_EXPECT_EQ(test, ctx->transactions, 0);
+> +}
+> +
+> +static void qcom_ec_probe_sensor_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_probe(&ctx->ec), 0);
+> +	KUNIT_EXPECT_EQ(test, ctx->transactions, 1);
+> +	KUNIT_EXPECT_EQ(test, ctx->writes, 0);
+> +	ctx->reply[0] = 0;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_hwmon_probe(&ctx->ec), -EPROTO);
+> +	KUNIT_EXPECT_EQ(test, ctx->writes, 0);
+> +}
+> +
+> +static void qcom_ec_reference_validation_test(struct kunit *test)
+> +{
+> +	struct qcom_ec_test_context *ctx = test->priv;
+> +	u8 response[3];
+> +
+> +	ctx->block_length = 3;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read(&ctx->ec, EC_THERMAL_CAP_CMD, 3, response), 0);
+> +	ctx->block_length = 2;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read(&ctx->ec, EC_THERMAL_CAP_CMD, 3, response), -EIO);
+> +	ctx->block_length = 0;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read(&ctx->ec, EC_THERMAL_CAP_CMD, 3, response),
+> +			-EOPNOTSUPP);
+> +	ctx->block_length = 3;
+> +	ctx->reply[0] = 0;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read(&ctx->ec, EC_THERMAL_CAP_CMD, 3, response), -EINVAL);
+> +	ctx->reply[0] = 1;
+> +	KUNIT_EXPECT_EQ(test, qcom_ec_read(&ctx->ec, EC_THERMAL_CAP_CMD, 3, response), -EINVAL);
+> +	KUNIT_EXPECT_EQ(test, ctx->writes, 0);
+> +}
+> +
+> +static void qcom_ec_variant_test(struct kunit *test)
+> +{
+> +	static const char compatible[] = "lenovo,yoga-slim7x-ec\0qcom,hamoa-crd-ec";
+> +	struct property property = {
+> +		.name = "compatible",
+> +		.length = sizeof(compatible),
+> +		.value = (void *)compatible,
+> +	};
+> +	struct device_node node = { .properties = &property };
+> +	const struct of_device_id *match;
+> +
+> +	match = of_match_node(qcom_ec_of_match, &node);
+> +	KUNIT_ASSERT_NOT_NULL(test, match);
+> +	KUNIT_EXPECT_PTR_EQ(test, match->data, &qcom_ec_slim7x);
+> +	property.value = "qcom,hamoa-crd-ec";
+> +	property.length = sizeof("qcom,hamoa-crd-ec");
+> +	match = of_match_node(qcom_ec_of_match, &node);
+> +	KUNIT_ASSERT_NOT_NULL(test, match);
+> +	KUNIT_EXPECT_PTR_EQ(test, match->data, &qcom_ec_reference);
+> +}
+> +
+> +static struct kunit_case qcom_ec_test_cases[] = {
+> +	KUNIT_CASE(qcom_ec_rpm_test),
+> +	KUNIT_CASE(qcom_ec_temperature_test),
+> +	KUNIT_CASE(qcom_ec_read_only_test),
+> +	KUNIT_CASE(qcom_ec_probe_transport_test),
+> +	KUNIT_CASE(qcom_ec_probe_sensor_test),
+> +	KUNIT_CASE(qcom_ec_reference_validation_test),
+> +	KUNIT_CASE(qcom_ec_variant_test),
+> +	{}
+> +};
+> +
+> +static struct kunit_suite qcom_ec_test_suite = {
+> +	.name = "qcom-hamoa-ec",
+> +	.init = qcom_ec_test_init,
+> +	.test_cases = qcom_ec_test_cases,
+> +};
+> +
+> +kunit_test_suite(qcom_ec_test_suite);
+> diff --git a/drivers/platform/arm64/qcom-hamoa-ec.c b/drivers/platform/arm64/qcom-hamoa-ec.c
+> index 3a4ca8a0d..043f6ab7e 100644
+> --- a/drivers/platform/arm64/qcom-hamoa-ec.c
+> +++ b/drivers/platform/arm64/qcom-hamoa-ec.c
+> @@ -596,3 +596,7 @@ module_i2c_driver(qcom_ec_i2c_driver);
+>  
+>  MODULE_DESCRIPTION("QCOM Hamoa Embedded Controller");
+>  MODULE_LICENSE("GPL");
+> +
+> +#if IS_ENABLED(CONFIG_EC_QCOM_HAMOA_KUNIT_TEST)
+> +#include "qcom-hamoa-ec-test.c"
+> +#endif
+> 
