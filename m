@@ -1,68 +1,258 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E35C43BA237;
-	Wed, 14 Oct 2026 10:55:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 631C64F55D7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 11:01:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791975321; cv=none; b=UR7JzhYuN8C7SM6wAos8I4wroM9pdPVZB/+/KCIdQfXMMJE+ETZ14lifzGr75zL22HXG5Iz5QpvAXSRsWetnDovWq0W6ZwFh5MQgjHRODCIH2tA3YzX8slpQVaguElwRHoBG2/7HUjUWY8kglDV+inaJ8fhHrkzbUFtb96on5FI=
+	t=1791975683; cv=none; b=YniaYfovEP3Z6ZsYYPTdiNY1pokCMxeAllyDfjfjYI3uWO8TaTQnVlBn6YDkGNn0eoKPpkGO/+19sSeS8yXLLg7R+gcjoQ0hqY1DHkrQ8tisKQfPZ4fnGfR5btlNi74lvbTpwDMGxzdGSBkx5aF1+rOFb0m9J0AQsBhBqxSeyRU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791975321; c=relaxed/simple;
-	bh=crz34n0TJ3MvmDEmWUt93ljg6zzV4R8+X01ZJK1wtds=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lQCMjutD9isHHP5I5MUZbgRkun64S5eniHySJZnFZeCeVOs4R0CFnbJv0IqOtt8uXTiBIL6Y89StJm/bIsWKXmfHUAbOFredUZa6omG6MjtNuy1N31WI95f3mFEEMvv4NAsRrQ9ZwNSkhyJcpTw7Qtb57uDxxlBNjwr1sMWxkFQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L0QxsvaJ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791975683; c=relaxed/simple;
+	bh=H07bD6qOZsBemHcEi3dRq2VupQcxtQJdhbKbUJmW6II=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=bk87MHfX2ZiLxX41zdLxk6hu8AFL5S8RWLVdfGCQ4qdESJc8jwSq++aeVr+zQQCS0QqPcLjv+0lCSvxcb1zF04IqVUxfHq5gArtTjy7AtCoCdJVXk5++FDT4XnDbnsqV4RrW4b5o/7w7ER6UrLcdKdt96Ul9n1/Y0d1pnFfOT0g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=Dd+/4XJn; arc=none smtp.client-ip=74.125.82.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L0QxsvaJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37A0C1F000FF;
-	Wed, 14 Oct 2026 10:55:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791975320;
-	bh=vswIt4pH1ZzQKTGqBpC4xgzVGE1sxni+SHS3dcFA0tM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=L0QxsvaJ+/IDbpOuRVIXMbDoDCIkzEsvhOVU54IbZ/AyqfGHO8kIuKkfPeIHXAiVN
-	 mKBWMbZ6GnFahByOUbNrL4MF5dIwkpnDYI082j756cxTur6wADj3lY7jI/rNyX64oS
-	 1CgMDTIsxF5KQi3ZcsYIzN+qZWOdcgQx7Y9zaNM8pjVIlhrro6aQLpfKAI6Gu8LnoG
-	 Icn20sgTS8moX73R3Q3kJXfBEqXWPZA2roB3MBklSYngLa5/bBzHX01TZXR27GoQ6J
-	 oQtxWRjs2VJ6LgnQdflNar3NWhlpBgZfuivAd/oO9c5/ZmAIl3G9ZaxlE3lewOGq1x
-	 xTEHLnNZCjocw==
-Date: Wed, 14 Oct 2026 12:55:16 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-pm@vger.kernel.org, devicetree@vger.kernel.org, linux-clk@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: interconnect: Add Qualcomm ipq5210
- support
-Message-ID: <20261014-quantum-artificial-stallion-aa6be4@quoll>
-References: <20261013-icc-v2-0-196b219e25c1@oss.qualcomm.com>
- <20261013-icc-v2-1-196b219e25c1@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="Dd+/4XJn"
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-35aa0cf7c40so3764249eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 04:01:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1791975678; x=1792580478; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=FkSrvzv025Cve3dpst5Lo/aC86j8VHVRGBxCGikq32Q=;
+        b=Dd+/4XJnTKcTfQ398tDT0EofQHimFr0G0KcEwwaAOuEeTqJwkSp6gX46CVgo80Uy9d
+         iJKbu42AApQL5HISQvDuDPOOxU8q9zucyD/X5LpWov2l3bVXJD2HizpNDQoFW50NulcD
+         +4wJP/R2KriWlIPIYlfJumcIWTdAyHXfOkY5w1H2xtw8G4GBWdSpkYJNY6N1seCmm7Oh
+         i8TlyTSXpYoHkJrJn6yv6qakn8f6YJ5ARpN44qdTveNwUEK3iU7MItr9jvWbheduPT2W
+         KuNgeVWwZnunvJV53hONEZAT3UNZpesXPvlA8fgZnTRJzO/IakFNnLC7/hjpPrSOW5xK
+         dqig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791975678; x=1792580478;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=FkSrvzv025Cve3dpst5Lo/aC86j8VHVRGBxCGikq32Q=;
+        b=lt3p00utDc2x263kSU5fZ+uDiTkcEI/fBTS+mmynyl7knwbCG3dzy1xMLc7cnuEkKA
+         4KJq/CIz7qgBdaGBFb9XZ8bMSzkuNttWVYilf1eogFMxuSpO6maddXtIkYMdqRhjgId7
+         UudOUgriNQs92XPjzAuexbDM1xtS1a3o7TmkGAjYmEUkvQMFeZN+W0M9hyP4lv7zzR5M
+         2VKCWoVhk6SohIjwP1P71CpM4kMggZ4uma9i4gX/nvjAY18b2+I60AV7V7fslueiHYpx
+         VHHoNgY1iwA/VijKe0pkZqa7WuGswF9Sly/XQPhE/ySfPg19pnawVrQWFq2K0LLDJTKv
+         PTjA==
+X-Forwarded-Encrypted: i=1; AKwUvBxkL7dsEo0cZo49hX85ObX1uXE4YPRewTG4uOUTk/fhHu+jTNimUWDluM+g8Db8BY3RIOMJLy0MYOz8LmHE@vger.kernel.org
+X-Gm-Message-State: AFq9FYLqf2hNdEWYfSt4QM40PuhS28hWxAzwW81S+c3mt+L/18bx6XKd
+	wVVA/29iA1SgLP1rfQwJj9u7opuzVWbi99X4ZAeJ7zPuiN4rC7/mup+cFdUF/tgAE5c=
+X-Gm-Gg: AYBFou3Xid+77CAZtuzg7+OEy0OtUYOcxIm9/txGFpZKZnmGUWQwnuUWQrqIkke4Gof
+	zajoPuuFojwjjiYRAOi4/gtvSPmSzbPydIUN8mqANpZktSWIF2mY2zH2aWR8eJbvF3NjPrEs+yw
+	gp86S4f/BEAF5lAyTTFMDGgpqcEtgWcNggbomPcRVvQr2LMrF27GgH1NEox8OOd6IeLSN9EBQC2
+	9IJ2pdYferwOakYnizZKFeeFJ8syAta0B8VfamkToL2qh6CeKAbVybypn2u3KkphvBkFdKY6500
+	WUOgGarXRTrKsZmFb075Dr8iXyDKaO+lMgH04WF1ZzSbQcvD7XssLEAW/GNbyrS83tnCMDV5S0H
+	j1GWmHxL5indEmq9FnEv2ivz3WQPXGq69Tm9Yt0WQPXZc+tcs7Rzc6OfWB6BrT/+I99fkrnFNxZ
+	HXKeR8k0i8d9DmoV2cXj3uywn9HZZ4OkcGhg9wGUZvPeHUe1Z+8C9NO/L6ngFEY4o9sdxv7JDu4
+	91cN01k8m74
+X-Received: by 2002:a05:693c:6089:b0:35e:2c6:d46e with SMTP id 5a478bee46e88-35e02c6dab3mr2383001eec.41.1791975677968;
+        Wed, 14 Oct 2026 04:01:17 -0700 (PDT)
+Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:bf23:2386:c0c:815])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-35b29c2f861sm34407993eec.11.2026.10.14.04.01.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 04:01:17 -0700 (PDT)
+From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Date: Wed, 14 Oct 2026 12:00:43 +0100
+Subject: [PATCH] irqchip: Use named initializers for acpi_device_id
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261013-icc-v2-1-196b219e25c1@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261014-acpi-irqchip-v1-1-821917378de3@thegoodpenguin.co.uk>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDA0MT3cTkgkzdzKLC5IzMAl0TE0NDo0QTE0tzi0QloJaCotS0zAqwcdG
+ xEH5xaVJWanIJyAyl2loA3pC27nAAAAA=
+X-Change-ID: 20261014-acpi-irqchip-44112a44978a
+To: Marc Zyngier <maz@kernel.org>, 
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+ Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, 
+ Anup Patel <anup@brainfault.org>, Paul Walmsley <pjw@kernel.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+ Alexandre Ghiti <alex@ghiti.fr>, Rahul Pathak <rahul@summations.net>, 
+ Samuel Holland <samuel.holland@sifive.com>
+Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+ linux-riscv@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791975673; l=5723;
+ i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
+ bh=H07bD6qOZsBemHcEi3dRq2VupQcxtQJdhbKbUJmW6II=;
+ b=KnGKX2c9fWwUze4Svws/LFuCXmSjykvlWpd8zJPn5A8/r2ednT1o1wRjZ0QUBNLebrGroghet
+ EK4YT/EWBN+AaFhTQJeuZsJsUCL1FJ8jkPJNl5FLjNyMpEu+CRmzxCq
+X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
+ pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
-On Tue, Oct 13, 2026 at 12:39:43PM +0530, Varadarajan Narayanan wrote:
-> Add master/slave ids for Qualcomm ipq5210 Network-On-Chip
-> interfaces. This will be used by the gcc-ipq5210 driver
-> for providing interconnect services using the icc-clk framework.
-> 
-> Acked-by: Georgi Djakov <djakov@kernel.org>
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
->  include/dt-bindings/interconnect/qcom,ipq5210.h | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+Use a designated initializer for the acpi_device_id fields which makes the
+code more readable and consistent with how lists are initialized in the
+rest of the kernel code base. Also drop explicitly setting fields to 0
+where it is redundant.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Unify the list terminator to have a single space between the brackets and
+no trailing comma.
+
+Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+---
+This series is converting lists that contain the acpi_device_id struct,
+which is defined in the include/linux/device-id/acpi.h to make use of named
+initializers (which they do not use currently). This work is part of the on
+going effort in the kernel associated with device-ids [1]
+
+The plan is to convert acpi_device_id::driver_data to have an anonymous
+union, similarly to what was introduced for PCI and I2C device ID tables.
+The goal is to increase type-safety (most of the existing casts are gone),
+to improve readability and to make use intent a bit more clear:
+
+```
+union {
+	kernel_ulong_t driver_data;
+	const void *driver_data_ptr;
+}
+```
+
+But for that to work all lists containing the structs need to use named
+initializers first to avoid triggering -Wmissing-braces. I already have
+patches that implement this and touching a lot of kernel subsystmes that
+use the acpi_device_id struct and that list keeps on growing. Therefore,
+I have decided to split the series per every subsystem into:
+- pre-clean-ups that convert the lists to use named initializers
+  (which is this series)
+- actual implementations that make some of the modules use the new
+  driver_data_ptr member (does not apply to this tree)
+
+That way the task can be fragmented into manageable and independent chunks
+of work and makes this effort easier to review.
+
+[1] https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
+---
+ drivers/irqchip/irq-gic-v5-iwb.c        | 4 ++--
+ drivers/irqchip/irq-mbigen.c            | 4 ++--
+ drivers/irqchip/irq-riscv-aplic-main.c  | 4 ++--
+ drivers/irqchip/irq-riscv-rpmi-sysmsi.c | 4 ++--
+ drivers/irqchip/irq-sifive-plic.c       | 4 ++--
+ drivers/irqchip/irq-sni-exiu.c          | 4 ++--
+ drivers/irqchip/qcom-irq-combiner.c     | 2 +-
+ 7 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/irqchip/irq-gic-v5-iwb.c b/drivers/irqchip/irq-gic-v5-iwb.c
+index 442c20614dbe..34afa036c34d 100644
+--- a/drivers/irqchip/irq-gic-v5-iwb.c
++++ b/drivers/irqchip/irq-gic-v5-iwb.c
+@@ -282,8 +282,8 @@ MODULE_DEVICE_TABLE(of, gicv5_iwb_of_match);
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id iwb_acpi_match[] = {
+-	{ "ARMH0003", 0 },
+-	{}
++	{ .id = "ARMH0003" },
++	{ }
+ };
+ #endif
+ 
+diff --git a/drivers/irqchip/irq-mbigen.c b/drivers/irqchip/irq-mbigen.c
+index 12919836dadb..0b4d78a0bbde 100644
+--- a/drivers/irqchip/irq-mbigen.c
++++ b/drivers/irqchip/irq-mbigen.c
+@@ -247,8 +247,8 @@ static int mbigen_of_create_domain(struct platform_device *pdev,
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id mbigen_acpi_match[] = {
+-	{ "HISI0152", 0 },
+-	{}
++	{ .id = "HISI0152" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, mbigen_acpi_match);
+ 
+diff --git a/drivers/irqchip/irq-riscv-aplic-main.c b/drivers/irqchip/irq-riscv-aplic-main.c
+index d9afb6ae98cf..1676d64e6e4a 100644
+--- a/drivers/irqchip/irq-riscv-aplic-main.c
++++ b/drivers/irqchip/irq-riscv-aplic-main.c
+@@ -305,8 +305,8 @@ static void aplic_init_hw_irqs(struct aplic_priv *priv)
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id aplic_acpi_match[] = {
+-	{ "RSCV0002", 0 },
+-	{}
++	{ .id = "RSCV0002" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, aplic_acpi_match);
+ 
+diff --git a/drivers/irqchip/irq-riscv-rpmi-sysmsi.c b/drivers/irqchip/irq-riscv-rpmi-sysmsi.c
+index 612f3972f7af..bc80c38bb864 100644
+--- a/drivers/irqchip/irq-riscv-rpmi-sysmsi.c
++++ b/drivers/irqchip/irq-riscv-rpmi-sysmsi.c
+@@ -313,8 +313,8 @@ static const struct of_device_id rpmi_sysmsi_match[] = {
+ };
+ 
+ static const struct acpi_device_id acpi_rpmi_sysmsi_match[] = {
+-	{ "RSCV0006" },
+-	{}
++	{ .id = "RSCV0006" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, acpi_rpmi_sysmsi_match);
+ 
+diff --git a/drivers/irqchip/irq-sifive-plic.c b/drivers/irqchip/irq-sifive-plic.c
+index 5b0dac104814..ba9c200b12fd 100644
+--- a/drivers/irqchip/irq-sifive-plic.c
++++ b/drivers/irqchip/irq-sifive-plic.c
+@@ -538,8 +538,8 @@ static const struct of_device_id plic_match[] = {
+ #ifdef CONFIG_ACPI
+ 
+ static const struct acpi_device_id plic_acpi_match[] = {
+-	{ "RSCV0001", 0 },
+-	{}
++	{ .id = "RSCV0001" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, plic_acpi_match);
+ 
+diff --git a/drivers/irqchip/irq-sni-exiu.c b/drivers/irqchip/irq-sni-exiu.c
+index bfd2adedf8f3..108d7f2e59c4 100644
+--- a/drivers/irqchip/irq-sni-exiu.c
++++ b/drivers/irqchip/irq-sni-exiu.c
+@@ -307,8 +307,8 @@ static int exiu_acpi_probe(struct platform_device *pdev)
+ }
+ 
+ static const struct acpi_device_id exiu_acpi_ids[] = {
+-	{ "SCX0008" },
+-	{ /* sentinel */ }
++	{ .id = "SCX0008" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, exiu_acpi_ids);
+ 
+diff --git a/drivers/irqchip/qcom-irq-combiner.c b/drivers/irqchip/qcom-irq-combiner.c
+index 09819007d08e..6d83e1e4a7ea 100644
+--- a/drivers/irqchip/qcom-irq-combiner.c
++++ b/drivers/irqchip/qcom-irq-combiner.c
+@@ -262,7 +262,7 @@ static int combiner_probe(struct platform_device *pdev)
+ }
+ 
+ static const struct acpi_device_id qcom_irq_combiner_ids[] = {
+-	{ "QCOM80B1", },
++	{ .id = "QCOM80B1" },
+ 	{ }
+ };
+ 
+
+---
+base-commit: 4056b3c9d3c92ea45955641dbafeb9b960e146ef
+change-id: 20261014-acpi-irqchip-44112a44978a
 
 Best regards,
-Krzysztof
+--  
+Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
 
