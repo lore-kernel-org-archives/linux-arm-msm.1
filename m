@@ -1,175 +1,208 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A02F47ECC6;
-	Wed, 14 Oct 2026 10:20:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 432704EF155
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 10:33:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791973260; cv=none; b=am8zE+bPh2NLrM5AEZRWlwRs+TMca6kkIjbeayy52sHwEhwiGS4qMyc8VTBlDqus92NGC41A93irUkpeSj9wrdLhFcHlBCatS9uRPDHorU6rrxB+h92vrzxi7J0fuKBkMBDkNXL4VD6j5oCmcRGWw7DiufUTPyQk3XX7h0ybma0=
+	t=1791974000; cv=none; b=r8Tq1scD1HcegskAHg+LgiDVDqAdb2ULHZcBIUSk1sqeoV8ZY7AlVOSexWsL9bmbdRjMaUsNYUcFtOTETNdVMFGoz8NVBRVLC66LsdSVXOiQkjpA9O5Jg6k0atgYzAAX5N4GbMp/L4soN09VzGIRbiSYHL2Oa6MCpWW+Sf7kG3Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791973260; c=relaxed/simple;
-	bh=VhpDEZvTkXWqvyp2s8oj2CfAOxwHTIQU4dABiDBxRBk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mPSGXP9mOFyRVlZ0F3ZvIYYNlWioJEFyI79ayiPeDMNXz+HCb81/1SXkZwGmmRcGqMXqHcar1esZ6NdXcHenqMEAOXQ5TVzO1V40q5ev7tm7nFZmpRHpt1Ks+lasbsUXL7jFixn7nVPF1zUwRHUh38bgynfrA2pNLPhXXN1Tz8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LzAVM2XJ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791974000; c=relaxed/simple;
+	bh=cQdvvOL0HPwR95jC9VzmtLBKVAu5cXVRhXP1lbva3gk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=qxOhEi9vkwxp9FCcQgjCM1m5HBzC6ayNcz6kws2e98RR9fnmAwsSCUoJnI+7qeTNFB1CGvzgndkxbkHH9zi1l4RvCcYQngiRCpdSI0t99kkPauXbljm6hwSWWI8CMQks2uMww/d8oyw1iYaC+51Kc9GoSHNkW6/YCstfMmpx7q4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AYjVZY9c; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QQdMYSg7; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LzAVM2XJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE4A31F000FF;
-	Wed, 14 Oct 2026 10:20:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791973258;
-	bh=gWrSo/PMIGTc7kwWlNZNJ6yFmB8LvpG1bvD0PiyoSR4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=LzAVM2XJOLZYS2PM2+BzzYUUSQmQUvTCTh3tI1GNgWp/t+cn0AlhGl6G9jqYjS6Y7
-	 MKdBGy9mPDaqnft8G9IcunnPtBK71JU8j8qdVgb+MSHnp9m+LcX+5Yfk/xVKYpM5fM
-	 gG+6kRKx3hknYdPHoe5Qps09nhFlSnFvKyhWIGf+1tD2xAVojGFa60+jVoehTpEbWd
-	 /l2Kpr4kfSIKY+eBsLj+w3oCytLD1+hogKdCFiam0qAlZu04JCQCgfx2VpLqtQIC66
-	 Qo2i3NXm+ajvZnYrmhCq/oEynJqSVwoOOpxS1Lwc+tkrT3xtThuTDgIou7jBN04psx
-	 3gdVHqX/2Pfyg==
-Message-ID: <9bf93bde-8abe-4a83-afc6-d5f6954ed3c1@kernel.org>
-Date: Wed, 14 Oct 2026 12:20:49 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AYjVZY9c";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QQdMYSg7"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E8HYVQ3017842
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 10:33:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=rZRV0H3Eo7IaIesmvx47nA
+	Ej+mGzXT0oWjI9d7BBs5E=; b=AYjVZY9ctSIot+PTVK7P/rgFWkTUXcqiDrcYRq
+	zlTXQu8toOl/+2GR/jYqm2iosyYbfh8plyv1zbKN3ggGCms35osf2XKiLSExH1p0
+	IC/RczaabdNyyaUpx6/QAc/C7WFzB9ARjyB00LRc6KpYgH1F6Pi/jYO0iebHngxG
+	aCKV108ceKINBPqw72gWtnOex7JBQ9s0Y9xCAzFWK4Cd3YCAhoAFTI5H3M10WcqL
+	MVbIVm0iF2KI8cMqfPzOigo7badAVTINbk0exTb+rO+Vzllegesz9IAXSgvGrJIj
+	DFjiuB9JYtpSzlAg85ZsCvddl+gkZTV+0tdB/bQUhKQSAzKQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9s2b3ud3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 10:33:14 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cd5f7fe8ef1so2045534a12.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 03:33:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791973994; x=1792578794; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=rZRV0H3Eo7IaIesmvx47nAEj+mGzXT0oWjI9d7BBs5E=;
+        b=QQdMYSg7SCLZsYxKvNLZaWLRjpEdG9M4ZOuDqlZ2ZJFhGSL3bHbGDlB6pVivIPuoZh
+         0J5+eTKtnHERB3ARMrVVfjASUrJIhtgjpOa8ishUVjNvtqCk7xLt3SvKSwUwpxtOEEya
+         ga9oezl75jxy36XNeoHwwtn5jOLcdw7BextiVv8m6loZd+RznsfdmrMHOSa13s9oF+io
+         ntCExBWMjnYdjPp3Z5uPmOg+fYl35OpDVRIkZwsdibJx0+4WjeEtjUk2QC6WjxPLJYpP
+         D269P8ua0cYPyCL0szmQN5KL7oo0ofAqIyGAneUGH4aFIQEMIlZIZ89snBCREJP59naY
+         dRQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791973994; x=1792578794;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=rZRV0H3Eo7IaIesmvx47nAEj+mGzXT0oWjI9d7BBs5E=;
+        b=c7EuoK2WjgIwOcUc8+MPMC0jg3hvGkk2EEtPYbBe969a46Dj4PduUWTswrUEA8Kcf+
+         b9R41QMOKPfURsWKPtOm8+VyJpOvszmJn+SFeWgOEfhp3rQ95Jr/tCiC0S2lrvNySfhC
+         c43yeVs9qUVNpY1EYQUlhqi7Z9mrncuiLFoUUr7B1wFTZTJW1ZZ49Mj5KiK40qYYG3SE
+         YdUlRnTcmTWMXjz2TNH3gRMlyIDLvC6UF/dUg/VPrl9aQz7uISBBCTXpd7sGy4NIWJRg
+         MPCBxztgLtnvldytC74ifQ/ZUCa2FeYw/4CbhLccx0uxW6E9RsrAwXLnj6ZiO7qmXxrX
+         ELOg==
+X-Gm-Message-State: AFq9FYJ7UOfNFkfN8BL4cllzUcEGiaF5/pUmSZ3Q4OISrGutz2Vp4U05
+	j4OfP4x+8sSGZ+WHxfq15/TKZkVjGqzwi2Z/Wn9gZgBFDhBUGV+OtowxTVJMKo8+JBvSTBizvh6
+	RjdLF36KxwUrqYfnVukhAzRbkgmvd6FIHZffHPpgZV/a/F9uIrrprVv+MG+pZp3sJn7qITU0s2N
+	pI
+X-Gm-Gg: AYBFou2HNs+bImfOOu1R9VFujhgLYgVy7maAseiJFHVv8+Run7a9DnP2uE+3ZTVCtmT
+	h5phIkWgoRuOAs7gUrbYpGWgSfwBQu1pS2g2k04sjM9rhm2pMj11b7H2Yx/mOI1q1RuuASFTa6s
+	XcuPwfXmkJOipr9ymolcdJMXelyW3Pd6rFH1sTEO0nqAEMRh+NfYd6TOlzSK9LBBTlVQCVhqYrY
+	7chFzFlBgIo9y1nl2B+lOVjX4cgwHw39H4zeT8bye1W9UktJ7ygtQfT76DwR9NotFgK4T3iFDeK
+	SjIFM8qnQN6XFZEPzs8e89OuniNzlNpp+0vGcdrOEdFO7NbZA4xNqatVkNO8OTXXwGW3sYJE6Lk
+	shE9Nu9igoCmNMH217KM=
+X-Received: by 2002:a05:6a20:eec4:20b0:3e1:bb25:126b with SMTP id adf61e73a8af0-3e1bb2515f5mr3612539637.36.1791973993437;
+        Wed, 14 Oct 2026 03:33:13 -0700 (PDT)
+X-Received: by 2002:a05:6a20:eec4:20b0:3e1:bb25:126b with SMTP id adf61e73a8af0-3e1bb2515f5mr3612517637.36.1791973992923;
+        Wed, 14 Oct 2026 03:33:12 -0700 (PDT)
+Received: from [10.213.109.130] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd3d9e08905sm6822382a12.9.2026.10.14.03.33.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 03:33:10 -0700 (PDT)
+From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Subject: [PATCH v2 0/7] mfd: qcom-pm8008: Add support for PM8010 over I2C
+Date: Wed, 14 Oct 2026 16:01:57 +0530
+Message-Id: <20261014-pm8010_i2c_support-v2-0-b395d2b3f668@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] arm64: dts: qcom: qcs6490-rb3gen2: add the clock
- controller
-To: Alex Elder <elder@riscstar.com>, sboyd@kernel.org,
- bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
- konradybcio@kernel.org
-Cc: abelvesa@kernel.org, kees@kernel.org, gustavoars@kernel.org,
- mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
- danielt@kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, Daniel Thompson <daniel@riscstar.com>
-References: <20261012152408.3729237-1-elder@riscstar.com>
- <20261012152408.3729237-5-elder@riscstar.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261012152408.3729237-5-elder@riscstar.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAB1az2oC/22Nyw6CMBREf8V0bUl7qzxc+R+GEGyLXCO09gLRE
+ P7dgnHnZpKTzMyZGdmAlthpN7NgJyR0fQTY75hu6/5mOZrIDASkopBH7rtcSFEh6IpG710YuBI
+ pHECqDLRiceiDbfC1nV7KL9N4vVs9rE9ro0UaXHhv1kmuvZ8g/yeYJBfcWKVMlje1KczZESXPs
+ X5o13VJDFYuy/IBu07R3c0AAAA=
+X-Change-ID: 20260915-pm8010_i2c_support-3062421372c3
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        Oleg Keri <okerixx@gmail.com>,
+        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791973985; l=2699;
+ i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
+ bh=cQdvvOL0HPwR95jC9VzmtLBKVAu5cXVRhXP1lbva3gk=;
+ b=gMSEL65jLFuH27jgq75H4O+ARk/gSz01YO/rdffbNmGQGLRSxlLP2Z+2HxrWJLnpvZIlLrswd
+ Fxa+2OXGgqvD9K+NF+I1j703v8B9MdBbRRROWj8JwvSm57L/meoXYYM
+X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
+ pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
+X-Authority-Analysis: v=2.4 cv=RPQmjIi+ c=1 sm=1 tr=0 ts=6acf5a6a cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=pFWVvVhNtIjcWoVgkSgA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: rsgd2LqSfLHS7HOqPnARblSM7MUvTKga
+X-Proofpoint-ORIG-GUID: rsgd2LqSfLHS7HOqPnARblSM7MUvTKga
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0MSBTYWx0ZWRfX3Y8RgcBjapyr
+ RtY9r/ggX3D9n01EEnNRT20kwgQdLdesBZNZvMIY6ngoTdPgFNAbokgYdTO2kQ5wIvCTODNe2PH
+ vGKB23R2DOkQXmY6/oHHTcOzyIWXHOimyErhAsySE8FoT7eBkYrySGKITyCp8IO3e0+2T8NMB1K
+ RglfJFg1W14D2gwOEDePwSPDz8GoOw00VcauX0Halw7XvBa+1fIx9Q0GvoKZwI452MhJB8fx8E2
+ Y6YYVSR7fAf2sjRuR0n0vfF9KnsZMKQZlXlkZTis7FCMRPZN0oru3TWlwxJp65xoQ09xRsNtRCi
+ uM6vJLg7k1hYu7mfkYD5n5mfcHDvNwPUh96Q6FfcejWtUKXMHxGov7KakXvycaaLfybWs1cW9aA
+ MPdBfDwZWyQVx/lz1u/JXsGferTMHHdPvGgr4zik9X+mOxtIrEq0SXVig9qwvYmbO0Eso4pjSEW
+ dRBtBjAQakVREqJkJ/w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0MSBTYWx0ZWRfX2EpE5z2XRBtB
+ he8ISGDul7kv0imci8GD2Joqqk5UgFbV1ryQ+GdilBZYWTJb5dsuAeqLGIgXdBnqqUX8LycK6T6
+ 4AVLFoBqm2W1b9g/BwuSYHmD/9Quu/A=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 priorityscore=1501 clxscore=1015 malwarescore=0
+ phishscore=0 impostorscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140041
 
-On 12/10/2026 17:24, Alex Elder wrote:
-> The clock controller within the TC9564 SoC is accessed via a PCI
-> endpoint bus through BAR 4 of the first embedded PCIe function.
-> A syscon node is created to provide access to a range of memory
-> that is used by the clock controller and shared with other devices.
-> 
-> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Alex Elder <elder@riscstar.com>
-> ---
-> v3: 
-> - What was formerly described as a "clock" node is now "clock-controller"
-> - Label for the 25 MHz input clock is added (new in this version)
-> - The clock-controller node is now a sub-device of the config syscon
-> - The config syscon is now (also) compatible with "simple-mfd"
-> - The clock-controller DTS node no longer defines a toshiba,config-syscon
->   property, and the config syscon no longer requires a label
-> - The clock-controller now requires a (parent) clock property, which
->   refers to the new 25 MHz clock
-> 
->  arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> index b8d290eed2f38..e7601daf1bc5a 100644
-> --- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> +++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> @@ -9,6 +9,7 @@
->  #define PM7250B_SID 8
->  #define PM7250B_SID1 9
->  
-> +#include <dt-bindings/clock/toshiba,tc9564.h>
+PM8010 is the next generation PMIC following PM8008 and has similar
+functionality, providing 7 LDOs that power camera sensors and associated
+hardware, with some differences from PM8008 LDOs. The series also adds
+support for skipping interrupt configurations which is needed to support
+SoCs where the PMIC's interrupt pin is grounded, such as Glymur.
 
-Unused.
+Patch 1 adds the new compatible string for PM8010 over I2C
 
->  #include <dt-bindings/iio/qcom,spmi-adc7-pmk8350.h>
->  #include <dt-bindings/iio/qcom,spmi-adc7-pm7325.h>
->  #include <dt-bindings/leds/common.h>
-> @@ -891,7 +892,7 @@ pcie@0,0 {
->  		pinctrl-0 = <&tc9563_resx_n>;
->  		pinctrl-names = "default";
->  
-> -		clock-25000000 {
-> +		tc9564_xo_board: clock-25000000 {
->  			compatible = "fixed-clock";
->  			#clock-cells = <0>;
->  			clock-frequency = <25000000>;
-> @@ -967,7 +968,7 @@ dev@0,0 {
->  				#size-cells = <2>;
->  				ranges;	/* This will be updated dynamically */
->  
-> -				pci-ep-bus@4 {
-> +				pcie_s1b5d0f0_bar4_bus: pci-ep-bus@4 {
->  					compatible = "simple-bus";
->  					#address-cells = <1>;
->  					#size-cells = <1>;
-> @@ -995,6 +996,19 @@ pci-ep-bus@4 {
->  	};
->  };
->  
-> +&pcie_s1b5d0f0_bar4_bus {
-> +	syscon@0 {
-> +		compatible = "syscon", "simple-mfd";
-> +		reg = <0x0 0x2000>;
-> +
-> +		tc9564_clock0: clock-controller {
-> +			compatible = "toshiba,tc9564-clock";
-> +			clocks = <&tc9564_xo_board>;
-> +			#clock-cells = <1>;
+Patch 2 adds PM8010 LDO support
 
-So here is DTS which is supposed to be the argument why you need inner
-device representation in DTS and... no usage of that at all. Otherwise
-point me which part of this patch references tc9564_clock0 via phandle.
+Patch 3 adds mode voting support for PM8010, which is not supported on PM8008
+
+Patch 4 drops GPIO support from the MFD driver, as the GPIOs have fixed
+functions and don't need SW configurations
+
+Patch 5 adds PM8010 support in the MFD driver
+
+Patch 6 updates documentation to make interrupt configuration optional
+
+Patch 7 updates the MFD driver to tolerate a missing interrupt
+
+Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+---
+Changes in v2:
+- Simplified of_device_is_compatible() call in mode support patch as
+  suggested by sashiko.
+- Added a change to drop GPIO support in MFD driver as suggested by Konrad.
+- Replaced match_data parsing in probe in PM8010 MFD support patch with enum
+  identifier and switch() statement as suggested by Lee.
+- Moved interrupt configuration from probe into separate function in missing
+  interrupt support patch as suggested by Lee.
+- Added MFD cells for no-IRQ variants of PM8008/PM8010 and updated probe to
+  use them in missing interrupt support patch as suggested by sashiko.
+- Collected Rob's Acked-by tags on binding changes and Oleg's Tested-by tags
+  on regulator driver changes (not on MFD changes since some significant
+  changes are made in them now).
+- Link to v1: https://patch.msgid.link/20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com
+
+---
+Dhruvin Rajpura (1):
+      regulator: qcom-pm8008: Add PM8010 mode support
+
+Jishnu Prakash (1):
+      mfd: qcom-pm8008: Drop GPIO support
+
+Konrad Dybcio (5):
+      dt-bindings: mfd: pm8008: Add qcom,pm8010-i2c compatible
+      regulator: pm8008: Add PM8010 support
+      mfd: qcom-pm8008: Add PM8010 support
+      dt-bindings: mfd: pm8008: Make interrupts optional
+      mfd: qcom-pm8008: Tolerate missing interrupt
+
+ .../devicetree/bindings/mfd/qcom,pm8008.yaml       |  10 +-
+ drivers/mfd/qcom-pm8008.c                          | 165 +++++++++++++-----
+ drivers/regulator/qcom-pm8008-regulator.c          | 184 ++++++++++++++++++---
+ 3 files changed, 289 insertions(+), 70 deletions(-)
+---
+base-commit: 24a19b953e2a3d0ea5a8c4951a0ab8f32720c907
+change-id: 20260915-pm8010_i2c_support-3062421372c3
 
 Best regards,
-Krzysztof
+--  
+Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+
