@@ -1,187 +1,201 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A2F63FFFA1
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:33:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8156F44C502;
+	Wed, 14 Oct 2026 08:37:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791966833; cv=none; b=BcOZmFSUBzb26kHVeWLSez/lvLLcyaW5EHh0Ip7VZIV8R8fqNR/4oNXxO8NSyIW0Y5dcY7eessKOmhlg4sFE1R7kpbUEryg9dmfGiojs+1ik2kqCvQ6q6jLibC3dudTvsnTzIn9vZMdh8DL9GWG52kR2FeZ3vbWTs+YSZOJLXDQ=
+	t=1791967029; cv=none; b=HhVOa8qWosObpbxxGmrE9OklPbM/OYCkb1j0SuOBalMpdzWEs1b+l3FVmg67VNMaMQgLyyftE+mqxEScRmBsWoemrsdvlGqfGJnS43OxgFLlAVTAFmaHkj5nNVg+PPRWhlrztG0fLcQvfASKwoSVbGaaFcgoJV5ysAsYBomoFUM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791966833; c=relaxed/simple;
-	bh=6XixP0z1G9CMQv8ekstqyNS29bUTZB+3sD/GaUwTFlg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bLJZakxhzmYQIBfZu24J702UdNGzLt+j+IXvvmuqJX+M4MsPV9r26zlhU3WBOvHooLGoHunoaHf6kTTOKy58RqjlbN/H8f3p/tBt3TMEsPN6XxU3gm6XTfVbiptlWSExWvTP0n9huxAril7L1KCMI2Z/IFKVzm6fVvauqW9Sjy4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iSwXca40; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DEz9cEqy; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791967029; c=relaxed/simple;
+	bh=KkZwlhXb7ppouEWVWD59Fver9AGZ9taM6rrP0X+t6q4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ufwG8GtYbwYSle0DaYYyXMMQ1Osqce9UQ471ioUIiufI7zDGLdtMhPxxad+V1R7DsPlukG5Krx4nrjt5pzgwQ35wsHfUFlip++NWLDgWcYkP37He5Z2yZMl4DXVxlzGzDys5uwriEZGbK2p4DlULilECiMQOL4ya0vDAKm8Itqg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=cnf6f0/l; arc=none smtp.client-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iSwXca40";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DEz9cEqy"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E663MF3365337
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:33:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	PybHZgrIJI7iHE5wfvg6rW/UxWF/Umu+Ib5PZJNnMEU=; b=iSwXca40Y7/5zsiw
-	hCFu5AefdIRXjjLp3TTr8xnW/ZkdQW+546q9zBl4ElqfOLLCbelfFyehcqA57br/
-	Zzah2sQdJhyxpbC51s6k/rjLhbAZTCtqw9XX0TR3kw9OpPKeZs9fEp3eP4mNPj6s
-	VjW3aZvbmwkWDIj2utt0jdN9E4pH/qq809Y7uSpVC+GZ+s26kR7rOmlq5HUVwxGD
-	VUE3owj38zHOXyy5HyMCu2Jcot47zhqCvZjdXmLL+SQMGybCTAxiwdwhpcYpX+sV
-	+xpq1cpdN2h4bdclezcbuGaTeXliSpfSg4e5Yayr7JdTLiT6cPbZh3ztcrB5KqJW
-	/MImpQ==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha4620k51-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:33:50 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e651510a5dso34184355ad.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 01:33:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791966830; x=1792571630; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PybHZgrIJI7iHE5wfvg6rW/UxWF/Umu+Ib5PZJNnMEU=;
-        b=DEz9cEqyPCqHBNgmKrHvSv775zt6X4CrzWUjn/H6uJeqQYSOMaztCmL8LgDxwsgJJw
-         wtOhc96QXN6lfqnepVwt8L2lbzkHWgCiusMGCwDwnMDUezWXVs+NAgAzS4ISjEmXlbDq
-         7j082UiL4HHzml9Ot+vlTfybZNXJQHj+o6VykXQZgLzZZYjQ52pzw4KHpFjJr0hlhCjb
-         8ZqcbL3aee53SgRhP4WsFEqQQpws8FgiernaTnLgwRWucRR3Ys499KeMcqz6kklZ1svN
-         Z0tqNu6JkqbOAIwT19Ng1F4XXfoCXGug832uYl/x744bP85W2PSrxfZrA2t02n1+pZtT
-         SBjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791966830; x=1792571630;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PybHZgrIJI7iHE5wfvg6rW/UxWF/Umu+Ib5PZJNnMEU=;
-        b=FRwmRIel+/c5605vgYKKYQhQal+cSN1TTNt9HlNVgkZQQdCoQGSvKtMgTRRnkrbxXv
-         ow15Z0GmwCNYOlTuBz9YJAJDgoUUfa/ut4bAFTMPh2eQ0vq2A7X60ij/pikigmWX/IeR
-         nSIdveUKIjkt2buoBGlX2tKNLhY4f/Co5ibcNaGFDiUheu7uyHbbgg7oD8+vJHabIYPf
-         IN9xOKZednRdmxHGZRdYnMHFtaSt7eLFC6AbQ5eYTza41MZ9f+5uoREE0JESqGOyNFFY
-         I79/QOBQsO+Nudxd7QUSkkAwOTx69CvDZnLAGFYsSvGdnF+ACzUhcwQvuW30+iWf0912
-         HLOA==
-X-Gm-Message-State: AFq9FYKgEatmC2+PUdZYWIUpwpNRoIh5Qr82Savo+MwtSPLctKGDG9UA
-	myi/l7iPPyO/rgdaiMXr1kZnnZmY6RiXXXn1DgsjCM7VQgD9moJJxFpwl1i2gr3dK4Q0AX6ntEn
-	Kz1uruLfJNclhsHaxqOSCaCMMjvLTagqaVjHeznrM0peiH4jhhKd1dtrmrl7xGAAtbR73
-X-Gm-Gg: AYBFou1vlcrucU4c6Qlxz3a7nz8ASvxrDQHQLFEJfBURI/RDYGPSIPDTpE9D71oVokz
-	wSl5KTkPN4OPgu5wbxIY13vW3gBqX+W9ZlpZGAfqMJSbh3pS2QkqzncyjSJAOLwcEc9l4AK5x6B
-	JRhQOERHzhlPy5u7CEfvOMv47XzVEVnFdfswDcX6jPy9hVJfZzCoZyjl+fmdNE5Pi/ZB6rOCYHG
-	fInLP2P3P7R3lYeQ68v2V5Uf7pzggZmWWR1MlwqlgAKNgR3Z0gJeiWa4MqjGr4dur3zWSbbDLay
-	Z+oIvHp+VVRh1z6RDfKXef4eFYxeVxeFK5Mng1pUDnvY7QaAGYOUAMJJ9PI/Z8fdDcWtAChz8aC
-	y6dQd2MD4hBCcXXiwd/7tlvx6MkzQMI71y+3YDVYKXWHnWkYGVCJcwpmQBcy6WNQ=
-X-Received: by 2002:a17:903:1ac3:b0:2e9:3ff7:b0ec with SMTP id d9443c01a7336-2e93ff7b26fmr10064795ad.1.1791966829836;
-        Wed, 14 Oct 2026 01:33:49 -0700 (PDT)
-X-Received: by 2002:a17:903:1ac3:b0:2e9:3ff7:b0ec with SMTP id d9443c01a7336-2e93ff7b26fmr10064565ad.1.1791966829323;
-        Wed, 14 Oct 2026 01:33:49 -0700 (PDT)
-Received: from [10.133.33.80] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e8422b8d9asm65203255ad.62.2026.10.14.01.33.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Oct 2026 01:33:48 -0700 (PDT)
-Message-ID: <ef252ebf-ea61-41e8-b37f-ea3b1121746c@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 16:33:43 +0800
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="cnf6f0/l"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1791967028; x=1823503028;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=KkZwlhXb7ppouEWVWD59Fver9AGZ9taM6rrP0X+t6q4=;
+  b=cnf6f0/lGKnQUF9tEzOr1Rg6Zp61ZSS+opJpvl3vgxmPbqt6G0Ti0bAZ
+   6RxpZMDYex578bffBX3XznuUPPTVoLvCQLIO3UIO6mpP9qSThijzhzRnd
+   aec25PEFu8qEyYfVn0NLv46wJICSup34WWQXwe50OHw8rv8q9PsNlQWqt
+   ED0BnOXGwauVNRtE+Xt+MYMOSowILUq9TXzpLDdxsT/Iv+xaw/8kohHRJ
+   EwZfVV+hUjDWPoJwrxS4uMGKOIz2mMjEX1T9JHh/i2dxnw1h1nCl1FHUL
+   VY1HQ46uta0QhCea9xxxhZmXkPNiFms/vVLN36PQpJnpGJb4DQkYyn+IQ
+   g==;
+X-CSE-ConnectionGUID: yB9xy+YqSs2+E90xXLcGiQ==
+X-CSE-MsgGUID: id6nK5hSQcCarrl05hlzvQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11934"; a="737485"
+X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
+   d="scan'208";a="737485"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 01:37:08 -0700
+X-CSE-ConnectionGUID: GDhnAS2fTa2fxnusGSge9Q==
+X-CSE-MsgGUID: gGbEeHzqS0W1AP4lc+mGVg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
+   d="scan'208";a="1473407"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa002.fm.intel.com with ESMTP; 14 Oct 2026 01:37:02 -0700
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xGuTs-00000000EOd-1RUK;
+	Wed, 14 Oct 2026 08:37:00 +0000
+Date: Wed, 14 Oct 2026 16:36:45 +0800
+From: kernel test robot <lkp@intel.com>
+To: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>,
+	andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org,
+	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org,
+	srinivas.kandagatla@oss.qualcomm.com,
+	sarath.ganapathiraju@oss.qualcomm.com
+Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, prasad.kumpatla@oss.qualcomm.com
+Subject: Re: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+Message-ID: <202610141629.Jo17UNWq-lkp@intel.com>
+References: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: shikra: Switch CPU ETMs to MMIO-based
- probing
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Jie Gan <jiegan@qti.qualcomm.com>
-References: <20260922-fix-etm-probe-issue-on-shikra-v1-1-56d25e9bbe17@oss.qualcomm.com>
- <3fe1ac52-f69a-4288-88b6-edb5717dd315@oss.qualcomm.com>
- <2a6b9567-e07e-40ae-a214-2a4d6bcb29d1@oss.qualcomm.com>
- <1a8f0ef0-303d-4173-bfc2-ec8dd952f367@oss.qualcomm.com>
-Content-Language: en-US
-From: Jie Gan <jie.gan@oss.qualcomm.com>
-In-Reply-To: <1a8f0ef0-303d-4173-bfc2-ec8dd952f367@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: tg_QFt_Fno-KOxynrMHkNEXqsg7zlvMJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAzMyBTYWx0ZWRfX1ugF06WMg0T+
- /s7JacU13LT25LCzQHGOK/9B1kfPyniU+l5AL6YxXDKpotOxh9vtY72v5a8pwUUbE73wyMegNWO
- HK1jVGEIlNh9hUmB9VINHAPAtoh6OnKsG33DNBMFv18QUOso/p+gdd1oMXwIGCWEOC00UaedeKW
- QEGAA4O016brWrfrpHsuseE0DVPfTxwVBP3z4QJ/eHJS8lXDvsnfBd0Gqr7Weyfo8q97MctbXRM
- 9rf0e3qjKcd9Y9JhCr5opIbgO+q/3QAYljmKSeMr5fNgA7dU0oJAmOaan4urGfDCQ3CSJPIDsEJ
- 7CgpcIEr0zK4p3zUly0qJOceNukvj2VFAsNGw4F6tOOFivub2ASP3PlUbhDJ2MF6kB37zDbj5wS
- zY+o4kgNooqeymbQCebKO+HWPYuhdDA0nrtO9+VpGcBeyfzEXyPOPtIQ3h6lWIeIYaCBx61JZWS
- rwv60oUh2BQlF3qSqCw==
-X-Authority-Analysis: v=2.4 cv=ErZHPicA c=1 sm=1 tr=0 ts=6acf3e6e cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ESQR0jG560GBcKQeWBMA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAzMyBTYWx0ZWRfX8kR8pohaqUz7
- jnExgJb0/Zh3UfLQYpxSM9i9pA6VqSh1XzzrPlyE8QFsZDhKN01sCrl8PNHlGfe0x88MqDtWmx/
- u51BLSofnPHXuiaVFw5qr1+HLTIISpY=
-X-Proofpoint-GUID: tg_QFt_Fno-KOxynrMHkNEXqsg7zlvMJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 bulkscore=0 impostorscore=0 adultscore=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 priorityscore=1501
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610140033
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+
+Hi Sarath,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on becb95e45ef0dda9ffb35156d909d3da7a2789c3]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Sarath-Ganapathiraju-via-B4-Relay/dt-bindings-clock-qcom-Add-LPASS-VA-CSR-HeartBeat-pulse-clock/20261012-172258
+base:   becb95e45ef0dda9ffb35156d909d3da7a2789c3
+patch link:    https://lore.kernel.org/r/20261012-master-v11-2-15009e3ecac3%40oss.qualcomm.com
+patch subject: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+config: parisc-allmodconfig (https://download.01.org/0day-ci/archive/20261014/202610141629.Jo17UNWq-lkp@intel.com/config)
+compiler: hppa-linux-gcc (GCC) 16.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261014/202610141629.Jo17UNWq-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202610141629.Jo17UNWq-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   In file included from include/uapi/linux/posix_types.h:5,
+                    from include/uapi/linux/types.h:14,
+                    from include/linux/types.h:5,
+                    from include/linux/kasan-checks.h:5,
+                    from include/asm-generic/rwonce.h:26,
+                    from ./arch/parisc/include/generated/asm/rwonce.h:1,
+                    from include/linux/compiler.h:391,
+                    from include/linux/build_bug.h:5,
+                    from include/linux/bits.h:30,
+                    from include/linux/clk-provider.h:10,
+                    from drivers/clk/qcom/lpass-va-csr.c:6:
+   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_resume':
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:78:25: note: in expansion of macro 'NULL'
+      78 | #define pm_clk_resume   NULL
+         |                         ^~~~
+   drivers/clk/qcom/lpass-va-csr.c:61:15: note: in expansion of macro 'pm_clk_resume'
+      61 |         ret = pm_clk_resume(dev);
+         |               ^~~~~~~~~~~~~
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
+      77 | #define pm_clk_suspend  NULL
+         |                         ^~~~
+   drivers/clk/qcom/lpass-va-csr.c:77:9: note: in expansion of macro 'pm_clk_suspend'
+      77 |         pm_clk_suspend(dev);
+         |         ^~~~~~~~~~~~~~
+   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_suspend':
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
+      77 | #define pm_clk_suspend  NULL
+         |                         ^~~~
+   drivers/clk/qcom/lpass-va-csr.c:83:16: note: in expansion of macro 'pm_clk_suspend'
+      83 |         return pm_clk_suspend(dev);
+         |                ^~~~~~~~~~~~~~
+   drivers/clk/qcom/lpass-va-csr.c: At top level:
+   drivers/clk/qcom/lpass-va-csr.c:81:12: warning: 'lpass_va_csr_runtime_suspend' defined but not used [-Wunused-function]
+      81 | static int lpass_va_csr_runtime_suspend(struct device *dev)
+         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   drivers/clk/qcom/lpass-va-csr.c:55:12: warning: 'lpass_va_csr_runtime_resume' defined but not used [-Wunused-function]
+      55 | static int lpass_va_csr_runtime_resume(struct device *dev)
+         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+--
+   In file included from include/uapi/linux/posix_types.h:5,
+                    from include/uapi/linux/types.h:14,
+                    from include/linux/types.h:5,
+                    from include/linux/kasan-checks.h:5,
+                    from include/asm-generic/rwonce.h:26,
+                    from arch/parisc/include/generated/asm/rwonce.h:1,
+                    from include/linux/compiler.h:391,
+                    from include/linux/build_bug.h:5,
+                    from include/linux/bits.h:30,
+                    from include/linux/clk-provider.h:10,
+                    from lpass-va-csr.c:6:
+   lpass-va-csr.c: In function 'lpass_va_csr_runtime_resume':
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:78:25: note: in expansion of macro 'NULL'
+      78 | #define pm_clk_resume   NULL
+         |                         ^~~~
+   lpass-va-csr.c:61:15: note: in expansion of macro 'pm_clk_resume'
+      61 |         ret = pm_clk_resume(dev);
+         |               ^~~~~~~~~~~~~
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
+      77 | #define pm_clk_suspend  NULL
+         |                         ^~~~
+   lpass-va-csr.c:77:9: note: in expansion of macro 'pm_clk_suspend'
+      77 |         pm_clk_suspend(dev);
+         |         ^~~~~~~~~~~~~~
+   lpass-va-csr.c: In function 'lpass_va_csr_runtime_suspend':
+>> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
+       8 | #define NULL ((void *)0)
+         |              ^
+   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
+      77 | #define pm_clk_suspend  NULL
+         |                         ^~~~
+   lpass-va-csr.c:83:16: note: in expansion of macro 'pm_clk_suspend'
+      83 |         return pm_clk_suspend(dev);
+         |                ^~~~~~~~~~~~~~
+   lpass-va-csr.c: At top level:
+   lpass-va-csr.c:81:12: warning: 'lpass_va_csr_runtime_suspend' defined but not used [-Wunused-function]
+      81 | static int lpass_va_csr_runtime_suspend(struct device *dev)
+         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   lpass-va-csr.c:55:12: warning: 'lpass_va_csr_runtime_resume' defined but not used [-Wunused-function]
+      55 | static int lpass_va_csr_runtime_resume(struct device *dev)
+         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+vim +8 include/linux/stddef.h
 
-On 10/14/2026 4:31 PM, Konrad Dybcio wrote:
-> On 10/14/26 10:19 AM, Jie Gan wrote:
->>
->>
->> On 10/13/2026 8:38 PM, Konrad Dybcio wrote:
->>> On 9/22/26 5:09 AM, Jie Gan wrote:
->>>> The etm0-etm3 nodes are declared with "arm,coresight-etm4x-sysreg"
->>>> but do not implement self-hosted system-register trace access on
->>>> this SoC: ID_AA64DFR0_EL1.TraceVer reads as 0 on the affected CPUs,
->>>> so etm4_init_sysreg_access() correctly reports the access mechanism
->>>> as unavailable and the ETMv4 driver fails to probe with -EINVAL.
->>>>
->>>> The CPU ETMs have a memory-mapped aperture, so switch each node to
->>>> the standard "arm,coresight-etm4x", "arm,primecell" compatible with
->>>> its MMIO reg range.
->>>>
->>>> Fixes: eed738c6dd0c ("arm64: dts: qcom: shikra: Add coresight nodes")
->>>> Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
->>>> ---
->>>
->>> Do we still need qcom,skip-power-up on new SoCs *with* MMIO access?
->>>
->>
->> Yes, we need qcom,skip-power-up for all ETM device with or w/o MMIO access.
->>
->>> GPT has concerns regarding whether we need to add
->>> arm,coresight-loses-context-with-cpu>
->>
->> This logic to be handled by HYP on Shikra SoC, so I didnt enable it in kernel.
-> 
-> https://lore.kernel.org/linux-arm-msm/20261005-shikra-el2-v3-0-618f7343695c@oss.qualcomm.com/
-> 
-> We're going to, in parallel, ship Shikra without the Qualcomm
-> hypervisor so please keep that in mind. Should the submitters of the
-> non-Gunyah overlay add these properties there as they respin? Does
-> that concern all Coresight components?
+^1da177e4c3f415 Linus Torvalds   2005-04-16  6  
+^1da177e4c3f415 Linus Torvalds   2005-04-16  7  #undef NULL
+^1da177e4c3f415 Linus Torvalds   2005-04-16 @8  #define NULL ((void *)0)
+6e2182874324727 Richard Knutsson 2006-09-30  9  
 
-Making sense.
-
-I will add the property.
-
-Thanks,
-Jie
-
-> 
-> Konrad
-
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
