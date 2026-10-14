@@ -1,66 +1,96 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8156F44C502;
-	Wed, 14 Oct 2026 08:37:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 646DC47F786
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:37:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791967029; cv=none; b=HhVOa8qWosObpbxxGmrE9OklPbM/OYCkb1j0SuOBalMpdzWEs1b+l3FVmg67VNMaMQgLyyftE+mqxEScRmBsWoemrsdvlGqfGJnS43OxgFLlAVTAFmaHkj5nNVg+PPRWhlrztG0fLcQvfASKwoSVbGaaFcgoJV5ysAsYBomoFUM=
+	t=1791967073; cv=none; b=aEwwbvzheh+8q58XOtXxGmnFn3M8iPC/QriWcBeHJFEk3wjWQ1N2KtcuvcaFKUp/tef/KH4Icpir+oy4yp1SeUIB2FBt+xpKHQ6MMKcZPof/4pLk7z6SKVYvuRDzc2voLDqdLBqFrN9yeJp7C26UknVZQOXoxXPZyaJ+JXeHvFI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791967029; c=relaxed/simple;
-	bh=KkZwlhXb7ppouEWVWD59Fver9AGZ9taM6rrP0X+t6q4=;
+	s=arc-20240116; t=1791967073; c=relaxed/simple;
+	bh=w6i7lW/hwahzDmlSA6tJQSUGt6IJk5yjdUIT7PvGf7Y=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ufwG8GtYbwYSle0DaYYyXMMQ1Osqce9UQ471ioUIiufI7zDGLdtMhPxxad+V1R7DsPlukG5Krx4nrjt5pzgwQ35wsHfUFlip++NWLDgWcYkP37He5Z2yZMl4DXVxlzGzDys5uwriEZGbK2p4DlULilECiMQOL4ya0vDAKm8Itqg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=cnf6f0/l; arc=none smtp.client-ip=198.175.65.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=FRjELeIwjWIBnvFUe4Hk4QN/oUPaED7wB2k9H5VdwLUfWYFfz+SBdi9NOB6BmAxJSSW3Mia/AmZ/n/Hwbdh4JWZKtjpJqm0iaV//5wbmbTf7IADDSjQL7ZfmDdTLqVR52FQR6j3wP+AjJumueHx1VEQubcVnlB5svwG9P/zOO3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nHTLEYrf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DQlcIwuG; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="cnf6f0/l"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1791967028; x=1823503028;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=KkZwlhXb7ppouEWVWD59Fver9AGZ9taM6rrP0X+t6q4=;
-  b=cnf6f0/lGKnQUF9tEzOr1Rg6Zp61ZSS+opJpvl3vgxmPbqt6G0Ti0bAZ
-   6RxpZMDYex578bffBX3XznuUPPTVoLvCQLIO3UIO6mpP9qSThijzhzRnd
-   aec25PEFu8qEyYfVn0NLv46wJICSup34WWQXwe50OHw8rv8q9PsNlQWqt
-   ED0BnOXGwauVNRtE+Xt+MYMOSowILUq9TXzpLDdxsT/Iv+xaw/8kohHRJ
-   EwZfVV+hUjDWPoJwrxS4uMGKOIz2mMjEX1T9JHh/i2dxnw1h1nCl1FHUL
-   VY1HQ46uta0QhCea9xxxhZmXkPNiFms/vVLN36PQpJnpGJb4DQkYyn+IQ
-   g==;
-X-CSE-ConnectionGUID: yB9xy+YqSs2+E90xXLcGiQ==
-X-CSE-MsgGUID: id6nK5hSQcCarrl05hlzvQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11934"; a="737485"
-X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
-   d="scan'208";a="737485"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2026 01:37:08 -0700
-X-CSE-ConnectionGUID: GDhnAS2fTa2fxnusGSge9Q==
-X-CSE-MsgGUID: gGbEeHzqS0W1AP4lc+mGVg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,157,1787036400"; 
-   d="scan'208";a="1473407"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa002.fm.intel.com with ESMTP; 14 Oct 2026 01:37:02 -0700
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xGuTs-00000000EOd-1RUK;
-	Wed, 14 Oct 2026 08:37:00 +0000
-Date: Wed, 14 Oct 2026 16:36:45 +0800
-From: kernel test robot <lkp@intel.com>
-To: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>,
-	andersson@kernel.org, abelvesa@kernel.org, sboyd@kernel.org,
-	bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org,
-	srinivas.kandagatla@oss.qualcomm.com,
-	sarath.ganapathiraju@oss.qualcomm.com
-Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, prasad.kumpatla@oss.qualcomm.com
-Subject: Re: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
-Message-ID: <202610141629.Jo17UNWq-lkp@intel.com>
-References: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nHTLEYrf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DQlcIwuG"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E6lEge2088418
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:37:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=/dO9wEXpKZ351zph6knNuG++
+	0aS0MxQ81WRUeQ8zWvw=; b=nHTLEYrfHkTzxG5g6MzkDShNgP/4lVqSYgfELiBT
+	B5R1VgO4aXByJQP28PwMmdaZwoWTRpkcGZfo0cLRY0f8OCoQxAxNNuzD1KFJFp91
+	PSXPp89W3fPwK1+nckz0iAUDtFL4zGGV8K5wYdRRVOk/+F8UzDVEQl15ASgMHXiD
+	f5H7/mSYutVG4ddfhKIiJMpvdAlSNVSwhOP7pNUsN6WgiF/yr3HfFYAU33Znaq/V
+	qruLhlBgHX303zlA9U1q2DKk+xbvYH3nF5mb0I6HaEXohPgfD3c5MyhOTMooBZ1c
+	viPyvboM7W8fvPsVsPSdaesN0IvxGGM9jmUMGFzH15kMLw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9x49hvt3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 08:37:51 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93a082c014aso178113285a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 01:37:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1791967070; x=1792571870; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=/dO9wEXpKZ351zph6knNuG++0aS0MxQ81WRUeQ8zWvw=;
+        b=DQlcIwuGJwc56Z+nXopZ84HFL7hyqsnP/ciBPYz9jEWKvXduYZbeUT0KBG6UbeUQyL
+         R2chSim7kRnK4S0Au0E7t87LLcN7KVwjLuZlBjJzBNql8Is3FKnPoyjbCQwtHZLvaC12
+         SloCwpxsc5dkbglUdplwPWep7U7werOtlYfsVjoy66uth5BGEPxQpT787gVhdZHLma0H
+         38On6MBu39W1qznKuLue4dxYRlWsVfIq6r6kVBl/7L2KTenTz5EvAbS37uc7yPGWF+46
+         IqiawUK437eRcJei5qLi3hq2xkJppQ4HDd5e4tzvFsA38TyGhFP8gHkzAw8OqSBTDRBi
+         3RMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791967070; x=1792571870;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/dO9wEXpKZ351zph6knNuG++0aS0MxQ81WRUeQ8zWvw=;
+        b=DvAS6x9e9fQC6N/KGsIZjYufam5m7PvWjYoMS3Al0eXncVszRDo21KZqCpWLa59xaE
+         he34q9mRJ+OnK8Ex44gp1/N5d4UbOx6Lc/WTdYlRJooJ1YbZWUh7wbK3uGYxeM+TPmVk
+         vQQbPWYc8XJiD0C0Fx/SrUi1/jAZyJm52PRWFEBRzK7C0nOa1gvRCGRgrdzl/vHVE2SR
+         W+ky824a/xISVxhpFWcWhCLP0LcZ1dMDQT9eZce/akuEYSCkndrYMDrR+MXZY2SYlzZ9
+         12ViSHpVNu22lJeYkBB3vUwKGlX5lFPyQZLPrBOTsnrBbIWsGMvWjQBnnPtTE8O9CI4o
+         40yw==
+X-Forwarded-Encrypted: i=1; AKwUvBzLFnX4xBJUIte67nP1jfzmwpC8X7zVukDdir93hUQUiK9Ut3AezkFX8ClCWoYt+5FtrbMjH2fo4vh0Hf12@vger.kernel.org
+X-Gm-Message-State: AFq9FYLGeEkzv8AlthuJgFGdxkTiGlULxgmNbdH6OoUkRO5TeBI+iqGk
+	aKoCBrUJTBdtS0rvW+GeAcZY92EurW1O/DQ1wjFyBYfbGh7Ccgnu3ZpXZOzbSeBqd6uUegNO9tp
+	prNeFW8Nqm5VMq2AftBfNWvT2M5BsZn2LvZYCtdwFSpnafasnltM0+z9ndnC+7easeZPD
+X-Gm-Gg: AYBFou0URWx1zKlURWoT7Kz/QIb85atn1t2JVxxmCnQhN1SisJUSXdcbnpNTCMgNWRb
+	2uqnhgkkEggOprnf8FF2EhZMB6lC25la4UwC7aCibYF8XKCnauo41q7RT5mDRH0lIjpOZ2nfkto
+	T0/3yp0E4lug5T0/30Su6HReOLejgqE37hs2WhSJYZyxcEI8SCenhWRzLD55dSqAUVhpe1p+LKq
+	Ve3QvFzTzVEm9Jjo/2N6BQAHHyYJF/ws2h3TTT5QFoBw5/868yTpkuslmhkdb0vP8V+x+in/iTg
+	zRpupldBpGbKa3ObN/J96fBM2a+GZ7VUtb2+RHUGSlVf6j2ndgqc7Wp+v9snBfcU/OKXz3/Pja6
+	OLNqJO+WRNdJf4jSB
+X-Received: by 2002:a05:620a:1a03:b0:93c:6e1d:96b0 with SMTP id af79cd13be357-93eb96174d8mr2481090785a.17.1791967069955;
+        Wed, 14 Oct 2026 01:37:49 -0700 (PDT)
+X-Received: by 2002:a05:620a:1a03:b0:93c:6e1d:96b0 with SMTP id af79cd13be357-93eb96174d8mr2481087685a.17.1791967069285;
+        Wed, 14 Oct 2026 01:37:49 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.215])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a18bf2343asm767149055e9.9.2026.10.14.01.37.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 01:37:48 -0700 (PDT)
+Date: Wed, 14 Oct 2026 11:37:45 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: yoxcu <mick@yoxcu.de>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: sdm845: Route the SPMI interrupt
+ through the PDC
+Message-ID: <juep7e5qyp3fnlet2r5fqfeepwbkmhhaey4xxy46s2rfsjtg7c@ax2q5tionsuk>
+References: <20261013203749.3078262-1-mick@yoxcu.de>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,133 +99,50 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261012-master-v11-2-15009e3ecac3@oss.qualcomm.com>
+In-Reply-To: <20261013203749.3078262-1-mick@yoxcu.de>
+X-Authority-Analysis: v=2.4 cv=YJcKWhGx c=1 sm=1 tr=0 ts=6acf3f5f cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=Rt3kCFFBWhWisHNmluDamg==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=FxBUbxoBbJN2jJ9NEDIA:9 a=CjuIK1q_8ugA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAzNCBTYWx0ZWRfX1D3cNHtGHkUj
+ mOnVlT9h7Pk14/jfhOTwGNsN1UyxuGuP6jSrhBR9RFrpl/N+cm+xlIr3V1V9Je5yuSaGplbX8P5
+ M/PYBO9t2D+mbmh7PPIpAvYr8W9wsxqV443emg5tUEGCgXTs5ViPTgc/vAD6C+rVgsph8zOy3UO
+ n2XprSfwNmTg0vSKAOKkW6hZVWyf/0E+XR9XE1Baou09RlY6+OMMO2fGJT2MGzgsKPavsTXD7Rp
+ Ecx/gY6DFCzFknsldjtpSBjd+9WoJSeewZBYF9atthvKInZPUc1I4OAHJcZxtmy+phinuJfjild
+ HoGc3ELfU/0a0CgZ9qBUVaeOH7x8jcYMjUBnRz3GRCVvprliM1MU9+ogDtTWDH9g2FeV0xe1ZP/
+ 6Oxt7LZSMuyk9HLGAXPUV2DgPnju5WMkiYPri6SYszQ+gglNgzCWNnjMkkNNCJX1zg5Rkq6lsWT
+ pFNprHO9+w3K1jeS3mg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAzNCBTYWx0ZWRfX+8Rjpmatlfg/
+ LS24MPl/sPSZMocqEbcoG9kX96B3jDkkY/pbOWp3/QW3inpvtJtk7CRXfh4TTn/IBLBKcOz8RM+
+ jvsEVtOeaUK07nR1SZXgHPew9aBTLQQ=
+X-Proofpoint-GUID: ITZz_mI1QYGg-aVI3qhzHeYJl0XHV7-O
+X-Proofpoint-ORIG-GUID: ITZz_mI1QYGg-aVI3qhzHeYJl0XHV7-O
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 clxscore=1015 impostorscore=0 malwarescore=0
+ spamscore=0 suspectscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140034
 
-Hi Sarath,
+On 26-10-13 22:37:49, yoxcu wrote:
+> From: Michael Auer <mick@yoxcu.de>
+> 
+> The SPMI arbiter interrupt (PMIC RTC alarm, power key, charger) goes
+> directly to GIC SPI 481. In CX collapse the GIC does not detect
+> interrupts, so only interrupts routed through the PDC can wake the SoC.
+> 
+> SPI 481 is PDC pin 1. Route the interrupt through the PDC, as sc7180,
+> sm8250 and sc8280xp already do.
+> 
+> On a OnePlus 6 in CX collapse, a 60 s RTC alarm did not end s2idle. The
+> phone slept for 456 s, until the modem woke it. With this change the
+> alarm wakes it on time (after 62 s), and the power key wakes it too.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Michael Auer <mick@yoxcu.de>
 
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on becb95e45ef0dda9ffb35156d909d3da7a2789c3]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Sarath-Ganapathiraju-via-B4-Relay/dt-bindings-clock-qcom-Add-LPASS-VA-CSR-HeartBeat-pulse-clock/20261012-172258
-base:   becb95e45ef0dda9ffb35156d909d3da7a2789c3
-patch link:    https://lore.kernel.org/r/20261012-master-v11-2-15009e3ecac3%40oss.qualcomm.com
-patch subject: [PATCH v11 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
-config: parisc-allmodconfig (https://download.01.org/0day-ci/archive/20261014/202610141629.Jo17UNWq-lkp@intel.com/config)
-compiler: hppa-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261014/202610141629.Jo17UNWq-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202610141629.Jo17UNWq-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from include/uapi/linux/posix_types.h:5,
-                    from include/uapi/linux/types.h:14,
-                    from include/linux/types.h:5,
-                    from include/linux/kasan-checks.h:5,
-                    from include/asm-generic/rwonce.h:26,
-                    from ./arch/parisc/include/generated/asm/rwonce.h:1,
-                    from include/linux/compiler.h:391,
-                    from include/linux/build_bug.h:5,
-                    from include/linux/bits.h:30,
-                    from include/linux/clk-provider.h:10,
-                    from drivers/clk/qcom/lpass-va-csr.c:6:
-   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_resume':
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:78:25: note: in expansion of macro 'NULL'
-      78 | #define pm_clk_resume   NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:61:15: note: in expansion of macro 'pm_clk_resume'
-      61 |         ret = pm_clk_resume(dev);
-         |               ^~~~~~~~~~~~~
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:77:9: note: in expansion of macro 'pm_clk_suspend'
-      77 |         pm_clk_suspend(dev);
-         |         ^~~~~~~~~~~~~~
-   drivers/clk/qcom/lpass-va-csr.c: In function 'lpass_va_csr_runtime_suspend':
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   drivers/clk/qcom/lpass-va-csr.c:83:16: note: in expansion of macro 'pm_clk_suspend'
-      83 |         return pm_clk_suspend(dev);
-         |                ^~~~~~~~~~~~~~
-   drivers/clk/qcom/lpass-va-csr.c: At top level:
-   drivers/clk/qcom/lpass-va-csr.c:81:12: warning: 'lpass_va_csr_runtime_suspend' defined but not used [-Wunused-function]
-      81 | static int lpass_va_csr_runtime_suspend(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/clk/qcom/lpass-va-csr.c:55:12: warning: 'lpass_va_csr_runtime_resume' defined but not used [-Wunused-function]
-      55 | static int lpass_va_csr_runtime_resume(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
---
-   In file included from include/uapi/linux/posix_types.h:5,
-                    from include/uapi/linux/types.h:14,
-                    from include/linux/types.h:5,
-                    from include/linux/kasan-checks.h:5,
-                    from include/asm-generic/rwonce.h:26,
-                    from arch/parisc/include/generated/asm/rwonce.h:1,
-                    from include/linux/compiler.h:391,
-                    from include/linux/build_bug.h:5,
-                    from include/linux/bits.h:30,
-                    from include/linux/clk-provider.h:10,
-                    from lpass-va-csr.c:6:
-   lpass-va-csr.c: In function 'lpass_va_csr_runtime_resume':
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:78:25: note: in expansion of macro 'NULL'
-      78 | #define pm_clk_resume   NULL
-         |                         ^~~~
-   lpass-va-csr.c:61:15: note: in expansion of macro 'pm_clk_resume'
-      61 |         ret = pm_clk_resume(dev);
-         |               ^~~~~~~~~~~~~
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   lpass-va-csr.c:77:9: note: in expansion of macro 'pm_clk_suspend'
-      77 |         pm_clk_suspend(dev);
-         |         ^~~~~~~~~~~~~~
-   lpass-va-csr.c: In function 'lpass_va_csr_runtime_suspend':
->> include/linux/stddef.h:8:14: error: called object is not a function or function pointer
-       8 | #define NULL ((void *)0)
-         |              ^
-   include/linux/pm_clock.h:77:25: note: in expansion of macro 'NULL'
-      77 | #define pm_clk_suspend  NULL
-         |                         ^~~~
-   lpass-va-csr.c:83:16: note: in expansion of macro 'pm_clk_suspend'
-      83 |         return pm_clk_suspend(dev);
-         |                ^~~~~~~~~~~~~~
-   lpass-va-csr.c: At top level:
-   lpass-va-csr.c:81:12: warning: 'lpass_va_csr_runtime_suspend' defined but not used [-Wunused-function]
-      81 | static int lpass_va_csr_runtime_suspend(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   lpass-va-csr.c:55:12: warning: 'lpass_va_csr_runtime_resume' defined but not used [-Wunused-function]
-      55 | static int lpass_va_csr_runtime_resume(struct device *dev)
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-vim +8 include/linux/stddef.h
-
-^1da177e4c3f415 Linus Torvalds   2005-04-16  6  
-^1da177e4c3f415 Linus Torvalds   2005-04-16  7  #undef NULL
-^1da177e4c3f415 Linus Torvalds   2005-04-16 @8  #define NULL ((void *)0)
-6e2182874324727 Richard Knutsson 2006-09-30  9  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
