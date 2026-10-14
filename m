@@ -1,109 +1,131 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 570E833556B;
-	Wed, 14 Oct 2026 09:32:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48A103E5595
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:35:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791970329; cv=none; b=ZhK18ZW8oO5elxzxejCW5ukzOeXgiSPH1bshfXf1hOb28pGLYiqzeUrqCTTznGHUzS83K+JfJeoJqFGA7RljlrwTsQWVSZmt1Kl3rs//slv0xGa/NChmKTlBzmxNkPgnkg4mbvTgYlnHLyhbfEvGpplK7/gECcuK9nafX9jMFS4=
+	t=1791970536; cv=none; b=INsftbMg7DrnsgyK2q1FdmoaPa8rrEUnHOb5zesANY8Faj5fH60bGlm3Qb5NZMDN0UdkKOdp9yyyivu/kohyDK5qtTdTL/8IdmF7dhL6DkiP98pgdTvQOEx9ukaw/w2gjuGcUMyR7Qs2p1mbo3MCgzhXR9QVC1JJ0i+LmtEsz7E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791970329; c=relaxed/simple;
-	bh=J3ZibQyOt8EOgISnWGqIE2j058wGdTalEs7Qvrrjuo8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kjhkCWas7WcmQe4M6tNUeqphb8I6Vgs0kcznxZ5AlSMMzPgs94b6aSZhurznaxDVybMmcAeKP66sdrM5/fmOLJKY201gGETbqsc+pzGNxBFor5DlWKWKcLIVBYOga4fC3SXxt6zlKkWCHHnLGOJWcvclOpfofdDWi/9GSCfpz1A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LrngTVa1; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791970536; c=relaxed/simple;
+	bh=EYa+RBPbeYiN3nxkpFWH16ycAxJKW6uP2elqjLvjqFI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=N4+R49IdBcvrWjR048cHvUGw4N12erfK/L+sHQieOKW0qVqaa7ggjBJUzaQ/JxT7xNg4eN4MFdhq/9yVNsx1yZ1VFLsMfFgU43vEy7xBydpdaGTHC3czsBAxU0jT2luUMc0sLnQPLMAwQnT2FxWGPgJaz3h/y0DcTJdWEsrGtbg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=CcuwfIzK; arc=none smtp.client-ip=209.85.208.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LrngTVa1"
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 589351F000FF;
-	Wed, 14 Oct 2026 09:32:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791970327;
-	bh=7k4L+XmcqaiR3rYth3e/iXoJ284HcXQrcyi4M9FtnVY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=LrngTVa1jUTKYUsoYGUOMDX3+DwPxtZlRrBhAywQRS3C37zmj7O2UnvVUCd03yEJM
-	 VgbZp21hjpAmEC8cGNn4rTLy0bA3e36Kr8tkjL3ocu9F3hbOjLPoVS1X2zYde+w9u0
-	 xVE/Ie1Ew8mpcG/AkMcVaEPuRGzfGlus4EErsDdbIgPy5ew//yHSL/7iI2RFj6q/Ct
-	 zstX53fO+QP4r2hlVKtw/+g3ysfRR6NhWlN+e43F4ZWQCSepsHE3NXs7d2+kKkkr6w
-	 egw5ULdatf7EB6pHcuYb+hvCXeA2syNyi2mQZL3OAXhxQ/v8fHNotkLWLOp7kFo2gE
-	 CGsx+DYUPD4FA==
-Date: Wed, 14 Oct 2026 11:32:05 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	George Moussalem <george.moussalem@outlook.com>, linux-arm-msm@vger.kernel.org, linux-pwm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: pwm: add IPQ5210 binding
-Message-ID: <as9L8IEDMXuAYd4G@monoceros>
-References: <20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="CcuwfIzK"
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6acba4bf65eso5107722a12.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 02:35:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1791970533; x=1792575333; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=kzIz0X6ttxgOxkC5LXT332DK567KH/TTx/ooIFt2UKA=;
+        b=CcuwfIzKEcmfnSDgOAP1fH4Gqvq1aJwKo8ozVxlTGIsCdF8ftuieVFM0HigI3/2hdq
+         8N82j7CZUlTKPP1eDAtGmR+k4j0TZ9TiVvlxoa+nb3egYr3nyEH18fza+g0bJM2ovUlp
+         1RrTKQgVlj1N+oMDYeqP3wLxHinDfZYnG6sfsiuusTkWV0HEu4W2FusY3oKoyLwvdCLO
+         LVNUepZ0+TE6/9t8Jq3vksMDJKOe5qRzl4FiQkGSRDmX1CK3dJNxBuLHGEO/MUZSPSRN
+         4oHo3QmKYMUPkSm9EaOSDv8yTohbp56u5qVrVMsLCR5BzIBH5L3mXPOkgTuqfFvUIy1s
+         XEZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791970533; x=1792575333;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kzIz0X6ttxgOxkC5LXT332DK567KH/TTx/ooIFt2UKA=;
+        b=HAg0ATao5k0IWTVIgWhQWv9icoEOWVtkT8gTDPaZB1ZWJZBJeBXO+KicDe2d7pDeXC
+         W5B+R3H7upn+wf1zJfJgFIwYfybWZc2dk5NpYmlhrwTqIYC2wi5XK7GM24gf8tBAb7ID
+         9w76zn1zoDbssxzJKJA7icqQ45ax2l2DDuiZLYVEf8pZqgh2S/t9xbG0nxv9WnDSmXn6
+         fRf3NAeC4R+iR8AziTRBqhPWqlRTADRQ2ypW9ShhheayqZSEppiEgGhS+i7TQ/HR165y
+         e4W2Vjr0HpOesnOeiqojrHSVdkeqfXyAbLJxaZ9V/nAjCFxh45Eig/mQxE1PuOp6K6FF
+         PNlw==
+X-Forwarded-Encrypted: i=1; AKwUvBy9Wlat3LIFRLzNVO3adbvtOwx8Q7inN3ig9GaMy0FIl06VJMfmdokQgxZR8nIG4ZDytABzb0jYfoWDMHzp@vger.kernel.org
+X-Gm-Message-State: AFq9FYI7re3FDKCNj/OYCZ4suxNtXxGTFub5/cYkKWLLR2qwWtIKGTRY
+	j5hXU9zg7NV+Gt+lwXw75rlKY7Y3hZgZ4cj0vW9qbET+uJdIgGlJ3VINEDyivIntMuE=
+X-Gm-Gg: AYBFou2kJZ1Ruu6Ii4L7xXQDsmwmcrw/+ALJT4Y9XWBRcjmY2krW3r0IXZtq9qXIv/w
+	GtwUdpo+Yyh7NYRW8AEgamL5JbdeTQJOnQEfxjC+5ff7e/wZdws2ev6kJCM/reLonsSqY4ISv0t
+	/yAWwVaMiuCujYlfVHemUITQthw7/Ws+pHmxNahXlTGmagtoPs1X1g2QhU0W3kG9qTbBzNf0SN/
+	wDRqGy2PJuRLyf1dEFu2wjB96luzv/pcbnsnavP6kM91IHPagQfG2U3mKk6PkGxC3sjmXZty/Eq
+	992BYTg2qMmKXvfI5eFTxVre1AGyjRsBaJAIiAMylxC59DmxYz6iFB9mLDRXM03qGZHb7Ay/SOe
+	VWtqigikvi5NDRHYZnIAN0GEO80kGSpuPRcmfNI4F5jDVLm0pU72/KzTUScqXfNoFjkXo/jmR0m
+	LoURWjp5xJAQmb4dln+YaoKw/3AHoteARQbKxRNyBhXkoNCCSTZdDIIpPevpuE9R+vxPaIcuNQL
+	X6N1oiuTGSU
+X-Received: by 2002:a05:6402:2351:b0:6b1:b626:5bd9 with SMTP id 4fb4d7f45d1cf-6b1b6265e2fmr7285065a12.0.1791970533495;
+        Wed, 14 Oct 2026 02:35:33 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.126.202])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b203839764sm943163a12.7.2026.10.14.02.35.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 14 Oct 2026 02:35:32 -0700 (PDT)
+Message-ID: <8cb5164e-9f27-4e19-9f4a-37da35fe0770@linaro.org>
+Date: Wed, 14 Oct 2026 10:35:30 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5vstc2aamyuvuzxl"
-Content-Disposition: inline
-In-Reply-To: <20261008-pwm-v1-1-0b8776398632@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/8] dt-bindings: phy: qcom,x1e80100-csi2-phy: Add Hawi
+ and Maili compatibles
+To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: Suresh Vankadara <svankada@qti.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>, linux-i2c@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org
+References: <20261013-hawi-maili-camss-v2-0-fc93222da89c@oss.qualcomm.com>
+ <20261013-hawi-maili-camss-v2-2-fc93222da89c@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261013-hawi-maili-camss-v2-2-fc93222da89c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
---5vstc2aamyuvuzxl
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH] dt-bindings: pwm: add IPQ5210 binding
-MIME-Version: 1.0
-
-Hello,
-
-On Thu, Oct 08, 2026 at 02:14:00PM +0530, Varadarajan Narayanan wrote:
-> Add DT binding for the PWM block in Qualcomm IPQ5210 SoC with
-> qcom,ipq6018-pwm as the fallback.
->=20
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
-com>
+On 13/10/2026 12:02, Nihal Kumar Gupta wrote:
+> Hawi and Maili integrate the same CSIPHY IP as Kaanapali with an
+> identical register interface. Add qcom,hawi-csi2-phy and
+> qcom,maili-csi2-phy falling back to qcom,hawi-csi2-phy.
+> 
+> Co-developed-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml =
-b/Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml
-> index f9f1f652e752..c6b9004dd30e 100644
-> --- a/Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml
-> +++ b/Documentation/devicetree/bindings/pwm/qcom,ipq6018-pwm.yaml
-> @@ -15,6 +15,7 @@ properties:
->        - items:
->            - enum:
->                - qcom,ipq5018-pwm
-> +              - qcom,ipq5210-pwm
->                - qcom,ipq5332-pwm
->                - qcom,ipq9574-pwm
->            - const: qcom,ipq6018-pwm
-
-applied to
-
-https://git.kernel.org/pub/scm/linux/kernel/git/ukleinek/linux.git pwm/for-=
-next
-
-as merge window material.
-
-Best regards
-Uwe
-
---5vstc2aamyuvuzxl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmrPTBMACgkQj4D7WH0S
-/k5qpwf/fYRYL3KOYtqsaTbKGMI1tnzLWBoRH7mNKKshjl7O8aGhSqyEk+8QZ6b2
-t8VaFB9Wo4Al5ZCp+q/3MUnwvR93/E5e0J8TNlFkw7sdY0/AeATU3w26c4vDXQde
-9cvZKItIV3wBQEsMPzciWh7APIQOWUjqSVgBw+HgR1w1p7tKbNc1kfrz3wYSbMjA
-xlXR9ryFpWCEAaNttRpFFIVPNe4ZNVSJ2QdS3e4ZGSIgpLADvSzlAkJF8PMCMsaK
-G78MfgR4qlKgmFq534xCvI0SUbqYPcwsGQprvwUIoiXjfGAtkOFuKPGeAR4yekfl
-WCha/w3q1GUFE3B3fOS84Ks675jsOA==
-=Y704
------END PGP SIGNATURE-----
-
---5vstc2aamyuvuzxl--
+>   Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> index 6e9eb8e265df93b631101ae13f31f6365b6239b6..627aebc7cd9b7ca313457d3f70f72796e9671e8a 100644
+> --- a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> +++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> @@ -18,11 +18,16 @@ properties:
+>     compatible:
+>       oneOf:
+>         - enum:
+> +          - qcom,hawi-csi2-phy
+>             - qcom,kaanapali-csi2-phy
+>             - qcom,x1e80100-csi2-phy
+>         - items:
+>             - const: qcom,glymur-csi2-phy
+>             - const: qcom,x1e80100-csi2-phy
+> +      - items:
+> +          - enum:
+> +              - qcom,maili-csi2-phy
+> +          - const: qcom,hawi-csi2-phy
+>   
+>     reg:
+>       maxItems: 1
+> 
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
