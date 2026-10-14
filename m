@@ -1,139 +1,226 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2ED055820E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:27:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D9E655C31D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:31:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791995241; cv=none; b=XIm4DO+fJMkk4Ai9ch+eZxUhqBFcO7C4SFazBV15LK424FXpOvgh3Dv7gwsImIQMalpsBZdzIl0ynGOoVWSUhMKubl6VCRis3v3Xy456xEURVUMgXsxqAP9A1TFCH+8EQQCEpiIsU7kpyXa60kextJLXW7GYLwv7in8bPg1e4A0=
+	t=1791995466; cv=none; b=Ubs1Cx8EmSJNMSWRKWlW5OOhGdDiqiTPcewexTzrydB97TP4zFTt+JywqdXao/YTvf8bb1wdrtyd4TnX5qUgQlIN/LrS9vygAextoBtbglkVcwdpXLLoODuGO6SsjA8FTQvEIj7LqZXcC6lcshmZJ81hjoimmJmpIraj7FgW+co=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791995241; c=relaxed/simple;
-	bh=sBCaTY8ARBNUaW4lgyS60NrEr1RpU3oh4aQ5QCBZ51o=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XoxIBJOQ/n/MfWFjM0g5FNU+9Otx60zNW5P86gWBK7xqx9L/Xb5jUi/AFTzOM3FZkCS/vTcxkQvFZbKS6PM7EQeCXwg1NPuu7ZgEYVmIqQpQJsoWMTFYVwH64ZUO1XVTxY49KDFgacQQNboU9w+ZChrdp9vugtbjfZqEYltBSl8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YB7bwpYH; arc=none smtp.client-ip=209.85.221.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791995466; c=relaxed/simple;
+	bh=jDo8FmBNC6Zlvz5RdT+ttXl0I3pWgOXdBxK/FcXzf2Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BXc4iNg+Nd4Ot3DO2K/sxPUFege8M3ukrw4oIIJWfZaNbReumLEuG7jytIS4w7gWbbCYK5HZ+gGrQ59qw3IBMSBMui1SrvR5b13EA7/wi7HfK7xYVbyP8UkEl9Fs5qE836+Bcvjn5v7csJrJLO6n/f1Lkktmf6YIh3UT0Qy7EDk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OfFwPvMB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=X9/xw3Iq; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YB7bwpYH"
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-486e8faff03so1905734f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:27:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OfFwPvMB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="X9/xw3Iq"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EEbHKd467704
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:31:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=F9Qrk4Mg2F0knWzLkDlgBgLd
+	h1ZdAWIpmQGZLSyV4aU=; b=OfFwPvMBAeiXPOzfDsOZ3Z0SKskre0FSEH3H15qv
+	ttQ7m0Kfrb2hAhh/NTshXhXygqxkvYz3J63ZbyQMbMXp9q4x+Y3grpd+FV6h3KV3
+	DDYLEJQQ0vCk7HxFUg/dn8amrwBZegEBljnkcy3g3viUpoD3wGaQzd+tANtVAkO9
+	VaY8FpQ3WSGa9T/f3yoKQUN4fm8SH66Fr7cS22e7feq6JUIjRBodQhciMczxFgSB
+	J9X5wvjyXM0pbZ+rHZxnQ2rluSKgwcc0J+cJRfvBkthJoLP1IqMZbs0HaiHnvZnX
+	dqzqtiMfVpU+Y4Znu1mThM2Y60wJcxdBbGvh9ewevLmS6g==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9yphkgvq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:31:01 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-936aa34873bso116828485a.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:31:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791995238; x=1792600038; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Bm2vsVus2jrRRF0UKZkM8VLcFn0B4q9e6VlpkqoMQi4=;
-        b=YB7bwpYHddw4imUY5XgbW7eeGNA/zweZ2qmTaR2gPxm2uE3WiLGNJmrvZHYS8Qo55f
-         vw8j/WIlUyWElSg6Cx/UcyogvpuJacGf38HQ2ok8SqR7Q1T0kJKw488PDz2dWMOMnIqt
-         QoSXfP4HuRuSB5ttWO1ZmuphjmBj8Sz1fk8OyvbEOEGonnhehqCfYsv8DaT+KDP5XnyM
-         6rJKRvSD6AcC47FfVAqKnck6MzR8v8sMHvNIlff0maBNB940Hw5O/vqc45LxBm0foRZa
-         KtJCWtBKazc05FrL8acIgfSzXSz7/IF39B/6nC4u/Ia1snoDJoYjz9CdK7kWQN9CNs7r
-         Hemg==
+        d=oss.qualcomm.com; s=google; t=1791995461; x=1792600261; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=F9Qrk4Mg2F0knWzLkDlgBgLdh1ZdAWIpmQGZLSyV4aU=;
+        b=X9/xw3Iq853L6pZPTlduzfioOpo9KnME/w1nlr0Plva9hjSEYdaVk5X2uQ+2LemiF5
+         Ky93g+XnKPpCKs/c0Hwfk1NVNyzskXqDFG917I9CKeGPhaHjJLiG8lhi7WdRyUtcdvon
+         2jiad3M1YirU7TfPT4j3YIKgSBRyKy6dP3I2szkbIHBBC3pyzbPEh9Pgm6Xp7ZV5z8EN
+         +BK9mIfLeriJSWJlLX6M+/LbSaY/FGj7lFBgeUeLz6b0I6ji33x5KA59UxPrmiFZ89F1
+         v7oxOWdtym1AQqPLzpOycGkFpYoO95S8Zz/oOISPduqjyWhUw0Acido88IRgBlEIdXKf
+         zmfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791995238; x=1792600038;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Bm2vsVus2jrRRF0UKZkM8VLcFn0B4q9e6VlpkqoMQi4=;
-        b=gNt43X6KBwJn9YHXkUYbvN4DvOuKU+ddpDEWTBbwUoKwb07H+/yq0stUlG3O1rlUNU
-         H8OudggmRn75svDLNH4AMx0zTcyarXjqzSIcuGlf/x/F5ZaEACM62MyGRRpSYr5vKV4w
-         k5GzVuwLaWx0RljqzdWQehKJfdsOru1LX+7zhf+XKwJSlQONu6FCq1R/1txAHNEA/qoc
-         IzMsxBgCuH0sxOhflB+LDm0NCa08/4zpEUOIxK7ajrpmtYIIGhdprm50iT/jJT69OXJe
-         BypBN60MnvRqzWIGSRkIBhvDzIgaWvz1qKCxHvPLf11b5oxPn1QgHIRgi1Sz2e0e35By
-         +7Rw==
-X-Forwarded-Encrypted: i=1; AKwUvBzrBiJlr4s5+j+anKfrvZZHe6o15O8ghGvflANEHdRLRyUBnYKfWFJmL83JqX0ART+RrHyee3ao0bx1mt9B@vger.kernel.org
-X-Gm-Message-State: AFq9FYKQx9zKXNSHD+4YYSfhy8tV9YcaIgKx+wK/q77fwW+W/NYmd7cF
-	H/jZTLG9q5ZzFCcq6EkzcQvX4PDrFgrzgRYbuXaYx9OwqN3ND6YAzi0j
-X-Gm-Gg: AYBFou3SRXi3aGbUWbt6IpaK55LxHBRtmQ1qZhxzoRJ7r6i96CrEe3J4TAhsQoWt7HK
-	151g0TfhaiD35dsax6ZUizU6mVBN8wADC0sYRGnFxmpqMm7PoHjHeaCL5zqsYEWHY/ESqQSchgt
-	K96YHnaycqHSxAZ/y+y6D74kn5t02yFOUIs54jnJ2YiJNPkRu6yMuGjhNzHktTnsaAJnYkdrBEM
-	dC1JPulCQ4j/EJZ+ojDbHRO14DyihSiSvKR/Pcva5w0JVOZwWa6waoBK2bAS4qTxBFAOQcwIFWJ
-	AKxgeRuTTa++CdPGOv4sfudvqYWPuzIQyhvEGVrKnrWUTpdcZIGB31AM4WqztSVnRyK6/yToLnk
-	VcPm/frE3txB4mSI3xQTPL3qKUojv51ZY+Go6EQn0plci+BnI2EgQ4J4m+i67EyRqpxdV5wjrMk
-	vAjrK9ONdQxWsJPjEqbwxGThVQcpYBWh54wSTCQtjzc6IGeDWPcNQXc+02wuGPIBJ6fiy6kBPEx
-	kTtEpSHbiQDjrXOTuXodnTHpg==
-X-Received: by 2002:adf:f94e:0:b0:487:1256:ab80 with SMTP id ffacd0b85a97d-48dbad0d4fcmr24273401f8f.57.1791995237877;
-        Wed, 14 Oct 2026 09:27:17 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaabc3sm13076890f8f.16.2026.10.14.09.27.17
+        d=1e100.net; s=20260707; t=1791995461; x=1792600261;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=F9Qrk4Mg2F0knWzLkDlgBgLdh1ZdAWIpmQGZLSyV4aU=;
+        b=xdw/rOzAzhbxH7civBNCKf9o97UM3G2NWDCUuoXIz0mpj0Bhnm0HEcVyEeOrrydiLT
+         FAbwIkRXgYB5o6SHlx/MdNLb1wu+OJHEmIpKJPMvix1J/Ick4tZIEfAtd4uac4cvImak
+         JtuT77kxhMxec53MnJu8m2OWVIkyV3UXciazCJKH80pn5lnV32EP4OjnjQBdPlFrk3hf
+         MEqvXmfwAF/wxcssCCpNWdrO1qqnND7DWOo7ghRyDuL1b3JSdJH1kBp0Uv2l5YguUFIS
+         XhlX2OFf3OMMwSwQ/VDVxLsAwFpC1SNDKO/CPJeSpb8MCW/XXJyuPOfy3g7J8ekIULAe
+         qIog==
+X-Forwarded-Encrypted: i=1; AKwUvBxFLi7XO+1Gz90GjXJQfo+m0NHKU4MS52Kq3mlqxowoWQt/Km+uiUBAtvKFqXOvddWlK6Ypnl9Og5u8fH25@vger.kernel.org
+X-Gm-Message-State: AFq9FYLYXNspyUO0dLz6hsc9+3VQAt+0gD4wozJaW6mY/hHOQ+osKM+a
+	DXrS/VgvSYR2UGfuziVIAnbZnT6rgu22hcklTunmhP8RN3QbVLMu4xnAIUT8ARcKmcRWTP6jc7H
+	7a5+H/s7kXaXT4sUHSfGoeFpd2kLm8f8xaNgq37uTQnagl7a76Q4eq2dKefqcU5RwlVHU
+X-Gm-Gg: AYBFou05if4GroCRLTeAvf4KrHEwOmLe0vkejwtrIXetaxAgvhO9liyX2s+GUmLq6ge
+	g6Ev0VBc7/QUrHRla+8qlG0GtKhCinYAMpBZ1uJ7be/FAuQ4tc+2dQi2bAJ91DTs3Vz8aTRbylm
+	LCF355aOJmpj3Bww/ZJE9tNyn82HgQBe71Yn8D5iP1mC01Ck/uPsTSpRNn6MmdK50Y/XSbgnqCZ
+	1He/WTR0LgVwt6D6cSZ1fDjRMYQzVshPlHIYTY0Ke+hfwE7Tcz/sePYPL0wQEOdRPdXIvAAjy2D
+	Daw4Uadg1Qnh0xfSIdCJjT6TJ6fyNXYWndtQ7v99SEXV+1gDA6rodOoMBJ689PFUMncL+NxvaKM
+	Yat2aVXrYrN7PG1aWTHT5oiCU/No0h5cSuP9hbUxjAGm7DDlD4nA80r04AjXmoWUj6JI/uRBJet
+	IVLyBM1rTtxjvj
+X-Received: by 2002:a05:620a:6489:b0:939:3885:3131 with SMTP id af79cd13be357-93ebd0c2fc7mr2507400585a.3.1791995461281;
+        Wed, 14 Oct 2026 09:31:01 -0700 (PDT)
+X-Received: by 2002:a05:620a:6489:b0:939:3885:3131 with SMTP id af79cd13be357-93ebd0c2fc7mr2507392385a.3.1791995460686;
+        Wed, 14 Oct 2026 09:31:00 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3aafdf0f0besm241701fa.31.2026.10.14.09.30.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 09:27:17 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Mark Brown <broonie@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Zhang Jiaxi <Z1529105815@outlook.com>,
-	Johan Hovold <johan@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 3/3] ASoC: qcom: q6asm-dai: wrap the position of a full ring to 0
-Date: Wed, 14 Oct 2026 19:27:02 +0300
-Message-ID: <20261014162703.10172-4-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <20261014162703.10172-1-tvlad744@gmail.com>
-References: <20261014162703.10172-1-tvlad744@gmail.com>
+        Wed, 14 Oct 2026 09:30:59 -0700 (PDT)
+Date: Wed, 14 Oct 2026 19:30:56 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Danilo Krummrich <dakr@kernel.org>, Johan Hovold <johan@kernel.org>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Mike Tipton <mike.tipton@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+        driver-core@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org
+Subject: Re: [PATCH RFC 07/16] clk: qcom: Add clock-owned GenPD DVFS
+ aggregation
+Message-ID: <dbyuabhh3phhe3uq2kvhcnuem7qb2a6j5yvhl6ylizqikt2rlk@vyvrcj3lewtp>
+References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+ <20261014-topic-qc_clk_dvfs-v1-7-3041b788e9f7@oss.qualcomm.com>
+ <ygwhik5t6w74xcqz4igmb6t5esmjjgrmtwqqqmo4doj34t7rpu@jkngx4v76rxg>
+ <6c9937a6-88c3-4e5f-85a3-73d929d3ba01@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6c9937a6-88c3-4e5f-85a3-73d929d3ba01@oss.qualcomm.com>
+X-Proofpoint-GUID: KwtrQg7ixWrg21Wv8dsEBA-hIOeKVZms
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NSBTYWx0ZWRfX4g0LmFEI5P6m
+ 8xtPNn8vnv5WsCDDqWeaVlZrsTGyIJG5VFzQlNkCo51N0TTiOHT6QXIPu+RN35CL7wwIBy8vRUB
+ RmB7d9GPzlvlkt5vH+wjNwdrfVV8v3Y=
+X-Proofpoint-ORIG-GUID: KwtrQg7ixWrg21Wv8dsEBA-hIOeKVZms
+X-Authority-Analysis: v=2.4 cv=Uv72pOwB c=1 sm=1 tr=0 ts=6acfae46 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=HP_GaHYFTpJcVqZjrCEA:9 a=CjuIK1q_8ugA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NSBTYWx0ZWRfX2h9qxR4h3ssq
+ yeVrExMklDrgUd0Drb397MnWBPpONZEzJ/zPDRlc233wMCrw9IsQkq7hcMPyKKoakafauAivFy7
+ H0kvaDFXrh1X0aliV6dY2Y7tCt52WdIPA6EljAXQhP8q46Z6gJ06GD3Crf3csTSQrIcBngtky9z
+ dQ1j6UN4t4gWWHZU6GKOrWRs78mkoUCtZ0GnFXJoVfkDFAqrZp77X38VFdwxOVeBIRIKD46QwoZ
+ sFVGM/i/kYnc0S0geu7MsG1PqjLESEHenR59u3y6ls4KUFvbAMCt8OpkyCOiHSTEweofvS7Dewo
+ AjJyupVQUgBIuO54iYo9MrQKnef8Fam2LF5skTbOSSIpYu0WwaUdOfhhwl8CmEfAt1E8g90ausA
+ yIemeCfXiz5Qz3Bjg36xvXv3/ukhmMaZVaQ89k5yGOIPOyZcVVw7TXRVNgm26q+dYm+CaMvot1w
+ xUwBvG9pS+GFlLcUL4Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610140065
 
-Commit 44432315444c ("ASoC: qcom: q6asm-dai: use q6asm_get_hw_pointer")
-took the position from the number of period buffers the DSP has
-returned in the current lap, 1..periods, and reports one frame less
-than that, as q6apm-dai does.
+On Wed, Oct 14, 2026 at 05:26:00PM +0200, Konrad Dybcio wrote:
+> On 10/14/26 4:36 PM, Dmitry Baryshkov wrote:
+> > On Wed, Oct 14, 2026 at 02:19:07PM +0200, Konrad Dybcio wrote:
+> >> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> >>
+> >> Clocks on Qualcomm SoCs need a minimum power rail performance state to
+> >> operate at a given frequency. We currently leave this to clock
+> >> consumers, so a driver has to know which power domains supply both the
+> >> clock and its parents. This ties knowledge of the clock tree to
+> >> individual consumers and doesn't protect other users that prepare or
+> >> change the same clock without making those power requests.
+> > 
+> > Why would they prepare or change the same clock without making power
+> > requests? If it's a legitimate user of the clock, it should have an OPP
+> > table. If it's not, it should have a separate API to set the clock via a
+> > legitimate user / aggregator.
+> 
+> That's the entire problem that motivated this series. The consumer
+> doesn't know what it needs on Qualcomm platforms. The power
+> requirements are that of the clock controller's, not of that device's.
 
-One frame short, a playback stream whose application stops feeding it
-never reaches the stop threshold: the DSP returns the last queued
-buffer, the position stops at appl_ptr - 1 and no period interrupt
-comes any more, so ALSA never detects the underrun, the stream stays
-RUNNING and drain only ends on its timeout. On capture, the last frame
-of each period is held back until the next one.
+I'd still say that the consumers know that they need a certain
+frequency, which demands a certain voltage / power / etc.
 
-Before that commit the position wrapped to 0 at the end of the ring.
-Do that again, as for q6apm-dai.
+> 
+> > I see one usecase where this would help though. If the clocks use
+> > different power domains and the corners on one of the domains don't
+> > match voltage on the other domain. E.g. it's not infrequent that the PLL
+> > (powered by MX) requires performance vote change at a different
+> > frequency than the rest of the clock tree.
+> 
+> Correct
+> 
+> [...]
+> 
+> >> Move these requirements into the clock provider and aggregate the votes
+> >> per power domain. Keep the highest level needed by prepared clocks and
+> >> in-progress rate or parent changes so that one clock can't withdraw
+> >> another clock's requirement. Use separate virtual GenPD devices for
+> >> these votes and controller register access so their power requirements
+> >> can be managed independently.
+> > 
+> > The biggest question at this point would be the locking and lock
+> > nesting. What is the expected order of operations? Currently it's
+> > limited to pmdomains, but for some of the (older) platforms clock
+> > supplies are expressd as the normal regulators rather than pmdomains.
+> 
+> The Qualcomm case is easy - RPMH is *always* reachable, so the
+> pmdomain provider needs no clocks itself. For the other cases,
+> "patches welcome".
 
-Fixes: 44432315444c ("ASoC: qcom: q6asm-dai: use q6asm_get_hw_pointer")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
----
-Compile-tested only: I have no Q6ASM hardware (sdm845, sm8250 RB5...).
-A test on such a board would be welcome. The hw pointer of q6asm is not
-reset on a new prepare either (the same as patch 2 for q6apm); I left
-that alone as I cannot test the q6asm prepare paths.
+Ok. There is a promise that I2C PMICs will never ever be involved in the
+clock / power tables.
 
- sound/soc/qcom/qdsp6/q6asm-dai.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+> 
+> [...]
+> 
+> >> +static unsigned int
+> >> +qcom_clk_dvfs_aggregate(struct qcom_clk_dvfs_rail_voter *rail_voter)
+> >> +{
+> >> +	struct qcom_clk_dvfs_vote *vote;
+> >> +	unsigned int level = 0;
+> >> +
+> >> +	list_for_each_entry(vote, &rail_voter->votes, node)
+> >> +		level = max(level, vote->level);
+> >> +
+> >> +	return max(level, rail_voter->safety_floor_level);
+> > 
+> > I guess you want to avoid having too many voters, but would it be
+> > possible to have one voter per 'signficant' clock and let GenPD itself
+> > aggregate all the votes?
+> 
+> What does "significant" mean here?
 
-diff --git a/sound/soc/qcom/qdsp6/q6asm-dai.c b/sound/soc/qcom/qdsp6/q6asm-dai.c
-index cd4f82bb8cc7..4261c3048c36 100644
---- a/sound/soc/qcom/qdsp6/q6asm-dai.c
-+++ b/sound/soc/qcom/qdsp6/q6asm-dai.c
-@@ -485,11 +485,10 @@ static snd_pcm_uframes_t q6asm_dai_pointer(struct snd_soc_component *component,
- 	struct q6asm_dai_rtd *prtd = runtime->private_data;
- 	snd_pcm_uframes_t ptr;
- 
--	ptr = q6asm_get_hw_pointer(prtd->audio_client, substream->stream) * runtime->period_size;
--	if (ptr)
--		return ptr - 1;
-+	/* a full lap of period buffers is the start of the ring again */
-+	ptr = q6asm_get_hw_pointer(prtd->audio_client, substream->stream) % runtime->periods;
- 
--	return 0;
-+	return ptr * runtime->period_size;
- }
- 
- static int q6asm_dai_hw_params(struct snd_soc_component *component,
+I'd define it as "using a different power domain or requiring a
+different corner".
+
 -- 
-2.43.0
-
+With best wishes
+Dmitry
