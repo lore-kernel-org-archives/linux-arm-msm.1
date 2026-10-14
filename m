@@ -1,60 +1,76 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D868E363090;
-	Wed, 14 Oct 2026 02:49:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08CDC3019D9;
+	Wed, 14 Oct 2026 02:52:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791946143; cv=none; b=qfc2V361cLIEiXJ00ujDFkGXB4vpgH/y957oubGB4zrpYX8R8m+7ls5JWJp+XMxx48j2KXgif4oqBA8uBUHO6ctdne8dgJ1WqAhftMAYRdIUUCwjlFMLcRrzVUKFrNJ+80X6O8VTqNp2E0t2NGZk4fr1Vm1N88eeJjsDswNApdE=
+	t=1791946327; cv=none; b=LmXfv8cMpPDttfVm7GIiDCFmyaz7rSnS1pRzwnUmGOhIVoGOcpqDRMjTQQWwZiCNtFv7/o7jpoS7hY3qM5JPuFrSn7SoYwzixEjpjFpVW5PdnLgJqiTtGK8ok6k0AD3LcActYn59aN9qVTcGothZ43enLSRpU+C1I5I2pzX2pq4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791946143; c=relaxed/simple;
-	bh=RNbKNRS527FLzE3xL8s+PwAPD/cNMkxUwLI3NRRTkxs=;
-	h=To:Cc:Subject:From:In-Reply-To:Message-ID:References:Date:
-	 MIME-Version:Content-Type; b=GO30A9VFSvunm3bCTHlFRuuUIiTebaIhYnEmBXnUu6AJvFnadS7+wr1+AtM8beYJZasrbWQe/inOgiofIeVQ88J5Mw+hWBqNabPzskGy7R9+MEuFt/4AbcD6wBUeXw0Zexu/lhfmRDxd/So9AMw7w+jK4P5ekMGlGPT0mJPTkMA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YBfw1nxe; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791946327; c=relaxed/simple;
+	bh=ci6lwH7Wlf5uolwLWEhz1tMpvPXE5t0FdSARax8LoT8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=u+HE8QieSBzAp+BnSGLbZ73RX46QxIjDmzv6P4GuqD+2WPjTxf4Z5tE9poPR3Cc6IsDvEL/OnJU8UvsP7364lAk+wLti9xaIxQEwi2Lvz17wiTdAcnJt6EbFWb1mVd2E1agg2gVVM7/0P9SwUjNbSuma9/LTP7lC+iheyq8Sa/0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=GCS0FuDw; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YBfw1nxe"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D34E1F000FF;
-	Wed, 14 Oct 2026 02:49:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791946142;
-	bh=VhItWomDTz+JfgqkqvE4Z8m4XK0vlJdjPRhQGuVtbE8=;
-	h=To:Cc:Subject:From:In-Reply-To:References:Date;
-	b=YBfw1nxekSA90YNOSggNZ0nNtfcZ6BtZw4MYYld3cnps0sT4lZZ0FU403OsZfUL72
-	 p0Tm5GTBHwSQbEXP+386yyYGOeZ9UrE12eW+CuvDJlAs+28Q9hUQAxV3oLnuBTot8w
-	 3/rt0Wa4SDOpoKoVhJn1eqK2lzK7ONxycIEfQS65bDIuzj+5ITIGl8i6i0AbduuIsD
-	 /Lu48u9IF+O7+rJqsduqrGfq0iYtuZnVGyzlUJBu4CMstuu2DQTj3pzjnBDw5tTFYy
-	 OyqRAVR26Uh2YLDgILl6FvHCMsC20ZT4ZAWTv50adWaQvOjeqCGNHDsAKPck9ZuhHm
-	 KEXn9ho15Df5w==
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: "Martin K. Petersen (Oracle)" <mkp@kernel.org>,  Can Guo
- <can.guo@oss.qualcomm.com>,  linux-arm-msm@vger.kernel.org,
-  linux-scsi@vger.kernel.org,  linux-kernel@vger.kernel.org,  Manivannan
- Sadhasivam <mani@kernel.org>,  "James E.J. Bottomley"
- <James.Bottomley@HansenPartnership.com>
-Subject: Re: [PATCH v1 1/1] scsi: ufs: ufs-qcom: Don't define variable in
- the middle of the code
-From: "Martin K. Petersen" <mkp@kernel.org>
-In-Reply-To: <20261013095924.959455-1-andriy.shevchenko@linux.intel.com>
-Message-ID: <yq1pkxdf148.fsf@mail.kernel.org>
-References: <20261013095924.959455-1-andriy.shevchenko@linux.intel.com>
-Date: Tue, 13 Oct 2026 22:49:00 -0400
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="GCS0FuDw"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=ci
+	6lwH7Wlf5uolwLWEhz1tMpvPXE5t0FdSARax8LoT8=; b=GCS0FuDwBl3yq1Hua4
+	y1Q3fmf0QcxS/JH+v1IOl2TFzWR1vTnzfFxqpmfCEXxcyiZBP9k2cDGR1YTP4Dwp
+	csgoq5rPvj3Rpz0WDxWH1HszpLHjuyMKJ0pUjdJyihVvMkK417ctiFAIvd5jzxa0
+	KjGq7PZgk1UdlaOCvRfl3J6OU=
+Received: from localhost.localdomain (unknown [])
+	by gzsmtp2 (Coremail) with SMTP id PSgvCgD3H9kt7s5qJrRlEA--.21370S2;
+	Wed, 14 Oct 2026 10:51:26 +0800 (CST)
+From: Pengpeng Hou <hppiscas@163.com>
+To: konrad.dybcio@oss.qualcomm.com
+Cc: robert.marko@sartura.hr,
+	luka.perkov@sartura.hr,
+	vkoul@kernel.org,
+	neil.armstrong@linaro.org,
+	mani@kernel.org,
+	p.zabel@pengutronix.de,
+	linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	hppiscas@163.com
+Subject: Re: [RFC PATCH] phy: qcom: ipq4019-usb: Propagate reset operation failures
+Date: Wed, 14 Oct 2026 10:51:24 +0800
+Message-ID: <20261014025124.81874-1-hppiscas@163.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <f6f632b9-cc2a-4966-a43b-c474a05da7ca@oss.qualcomm.com>
+References: <20260828091857.8581-1-pengpeng@iscas.ac.cn> <f6f632b9-cc2a-4966-a43b-c474a05da7ca@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PSgvCgD3H9kt7s5qJrRlEA--.21370S2
+X-Coremail-Antispam: 1Uf129KBjvdXoWrJry3Ar43JF4UZrW8Gr13CFg_yoWxWrb_u3
+	4Skw17Aw4kta1UtF4UKr43tF9IgrWDAr1rW395ta13t348JrsrWFWDAry5uayrAF4aqr93
+	Gr1Uu34fuwnrZjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7VUjahF7UUUUU==
+X-CM-SenderInfo: 5kssx2xfdvqiywtou0bp/xtbC7g4V3WrO7i67vwAA3I
 
+Hi Konrad,
 
-Andy,
+Your comments on the declaration layout and unchecked rollback return
+are valid. Rechecking the provider exposed a more fundamental limitation
+in the RFC's premise: the in-tree IPQ4019 DT uses GCC resets, and
+qcom_reset_set_assert() returns zero after the regmap operations.
 
-> While the C11 allows us to define variables in the code, we do not
-> do this style (see more at [1]). Move the declaration to the top of
-> the function.
+I therefore do not have evidence that the hardware-failure case described
+in the RFC is reported through this provider. Generic reset API errors
+alone do not establish that case on this platform.
 
-Applied to 7.4/scsi-staging, thanks!
+Please keep this RFC on hold. I will not respin it as a demonstrated
+IPQ4019 bug fix based only on the local return-value checks.
 
--- 
-Martin K. Petersen
+Thanks,
+Pengpeng
+
