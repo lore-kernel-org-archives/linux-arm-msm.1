@@ -1,164 +1,74 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 687DB4BFE8D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 11:04:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FD563559D6;
+	Wed, 14 Oct 2026 11:08:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791975899; cv=none; b=GnVUnvxYgF9NSZCFnslhL2GA7Iifgzufdqp4pM/4qkm98RP08X52ntfcdIlV+RvZjbYTOVxnyvLKhHxjMngtTcsAM+sgnLnp1fVRuX3/Gh8+1gzqOV9A3FKls3ugx3JLsaQCdo6ph8e/l3/VsdfzK7kPwTyy2mlhdwDuiENPj4s=
+	t=1791976084; cv=none; b=EsbiCnAsMyxGWHvMh3ONrt2IV+moGVtM+ILpQ76AzcMGEdh/5IoAE+PEd5Jv8FZ3BDtYozl/GWpnRuHVZ7PqANWzv4+r9WAdzFHiX2TE8z+RXAAZtwe4mWgIagmPoeawqf73K56Ei8zt0oL18lErjlNc8Q0HXh2H6K9lHvHbPOQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791975899; c=relaxed/simple;
-	bh=Z3h816ZXGxVD4csE8LYPHv1WBDy5zaS6dsqoEyjpLBQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=N8JX1gOTozXIW3Dc/a/ZU5RUKQpwGdM9vMzPf96Ke4HIBB/Bv/uITuiNV6cN98OcIj+1Lf/+AjMDAa0K27i82rkiQJ4UUREjnbJlblLD8HKbHb65UV/l7HLV2m1Sdz7+eey6+UF1Ehx0gmM3BIyH3OaiTuBxu+zzHoyEPCcAutU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ehh42rNz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qe5Baexx; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1791976084; c=relaxed/simple;
+	bh=hgOXJRU3orsh1NBI3pvqUZkT3IhMcVU+D3dD+oX8nOM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BbFttoxnJ5+vkCfrBVE35FzaKS1iod41oafLK3MMpDHQUMvi2OUfGLdFF5k6R8HZaEWTIYoqHPem42yA52WTBiN1qMHTTLQIO8nhZSxO0uWVVBvFDs0FK676t9ZfCkLmF4Kb5WPQfTc+2t0UZ3hEU0+1P/GkT526x88ma1s0JEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ng3ouawJ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ehh42rNz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qe5Baexx"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69E685Yr2515934
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 11:04:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FNulU2JiXUoxqitj0tDF9NlTQTZRzx8RpIvKK9xWQ+8=; b=ehh42rNz+TnsrvSN
-	W7q6pgy/4ifYFAd5GvgGL+diTEULLtTvql+Q0VnzYU5IyrbfqY+YwOP8ZxknrdMp
-	eF3NJSU2yW74LRUc7O6fuUW9f+xEpnjBH84ERJV2YdcI9d3nIjjs0bPD76mKHEEP
-	zoMFmvOWtqoXaM1vtpDw9/Qr4xA4+3yY1qAOXp09KMAZ6Dj0h0DjALQfX8Ip/UNL
-	7CLFd1+WRV7bUBNyKH24NGhkB1YuG2yEAZF63Vkcp+MQxerYB90FSGrSjU6bfT8P
-	8THc5W/8r5K+5vIdbIp7yp6bFoawm8lN77iIFMmyrO3YJi7LP8YR2XOzyJ4M15M0
-	aai+aQ==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha470974f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 11:04:53 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7c100f6f8ffso129203137.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 04:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1791975892; x=1792580692; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FNulU2JiXUoxqitj0tDF9NlTQTZRzx8RpIvKK9xWQ+8=;
-        b=Qe5BaexxWo6EPoWxE22OOIj+cv9kZY/SMyV0Hh7+ts24l82vwiF0Odong2/KBvaHQ1
-         Ot/e/aWBvWXE50uzjBvzE4XxfLxrV0RMf4ps5ngO5bA3ugMNBUdnn98DKftVRh3tKO9O
-         INZj4vQDWakipiy5Y989KfoTsKr7OCIF8jSFGQ/MhVaOd0qHgrDQkeLGBCN/XUsp6zbO
-         CPnJKzdvP3uABz2KLatBTbIlRNL07VUckiqX8Artf7t139HfZVeUJapPLJVyxmRZbKhG
-         esF22SBfx9Q7pkQvBZcJsMjFC3DT5nXsSrbSJfD02BaAxi6YTYaa6IkhdzR43hkYW0dS
-         yOOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791975892; x=1792580692;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FNulU2JiXUoxqitj0tDF9NlTQTZRzx8RpIvKK9xWQ+8=;
-        b=p5MufbGltiEDWZyVjskgWDhCFDAwikJfcQfyvFIPzZvEBIcGycWny6ndt5WSObhV6J
-         op+LgwP4YgTJLuT8ArZgQXKSP8yMVB/cs7i7EDyfoBsnzUrLKLMkfJRzl2vZapfY/hE1
-         Z859vFoTE1kRxKj5zzmfwLWdbfPEdSbCfwQTkrDLorkjXtr42nltpKIFMW4uwKtieJYc
-         /WF97SEKIhPEk2tAPbBdwFdDB4VzuTZLb+kib6/kSEC2Fqg/c1bKtnhwfq6wGiFtkgkl
-         hNGLnsRs8ME1MGhgNYckXQyIiv3n5oRk9TlVauZpjuwuw+2NUM4bgeGzDDg/oBx7qYA8
-         IUZA==
-X-Forwarded-Encrypted: i=1; AKwUvBzQTzJssCAnaZSxxrLhvbBw7gzJFNJtNpBEJsItg+dknLws8thfvUO3qZq/ruU89ZxURjJUWdCX3pjnbFsv@vger.kernel.org
-X-Gm-Message-State: AFq9FYIxuY+LXcj/JbA6thp4sOoJsvLKPRR2+hsGVEQtjTmHeaYNlMrb
-	vcmOwitNE4pDvaCXVCgmaNqh9DI8/7IkxrAg7GGy8ccl8TMI2MchxIIFsST0C2ghTrb1KiuDV/p
-	syNGAFdrQvmpMinKSyZhcX4Jiqz8qXaK9eSWs1YU8rVQR8QYBw5yA5AlnXGiQjhot5Mi0K/ntEY
-	Vw
-X-Gm-Gg: AYBFou0qhGiOT1To3rxnhW5q611c/3NVOx1cMXfZyQl+mEimxyube5LvOJ2Gw+4oQg1
-	/TxnO97rqUjosNZocEg0MHwNl8F7RiEfgIj60kEyrbK/YRzyBpD4jEPlsi55Pdhjhd/nHwaYDr3
-	LPIy6wXqOgG/ojCXdfVrmK7Mh1z8yDh/dcoa4FyA8fJe6LG43gU4FuVdcb14aQ2XqocMLGKWrMx
-	6OMEcaSj9TwITFUamDboK9Nk5NXKsvZZax5Vg9dSdFuH+0qDGeEGR0/LD8bNG9ZXJyUaYCEO9NC
-	ni7Pf1DRgK3pSgvZjUWKV7yL2J03CnoXhvC6c40pVevgDhwaddbHA3gqt1DhtcsRoHCdEqySt/T
-	WV+SWomVgsO9NZxwaPZAPWQ==
-X-Received: by 2002:ac5:c54a:0:b0:5d1:9e07:8db1 with SMTP id 71dfb90a1353d-5e91f2b155bmr3325071e0c.1.1791975892372;
-        Wed, 14 Oct 2026 04:04:52 -0700 (PDT)
-X-Received: by 2002:ac5:c54a:0:b0:5d1:9e07:8db1 with SMTP id 71dfb90a1353d-5e91f2b155bmr3325050e0c.1.1791975891839;
-        Wed, 14 Oct 2026 04:04:51 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c31a9762af5sm700056066b.1.2026.10.14.04.04.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Oct 2026 04:04:51 -0700 (PDT)
-Message-ID: <9fcbc293-2b5e-4b52-9854-a9afc39dc946@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 13:04:48 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ng3ouawJ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F2901F000FF;
+	Wed, 14 Oct 2026 11:08:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791976083;
+	bh=i7Vm/ipdb4RFbngEiBrM2Kbqpue79Aa2GGMxvAz8GqY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ng3ouawJCasVk7LgevL638CVuYV2h9W2toQaDaf4h0VXW3vBcDbYVYF/0Zmh1con/
+	 fkvVhefWbxAgmOaQDW+O+QkHdnJvQXGWBzvAk5v/pnTeFGLEvxrh3TQ6HRPszhhKFw
+	 4TAJqaZuDOzqrB2owHGd8Rh0Wqu739LBOtnqHnCf5j8WiOh1r+ebHXkzCtg3LloYw1
+	 lNlmWI/A/MOAPAd5XkPGIBl8d9T94XiGOLW6Ki4ATbV/AGcjkFWyubUI4zDO6lS+dr
+	 8wxTu3i7bNm50rBFUxOpMENsL4pdj+XkbQ8IkcgXf4QlNvG3d58/Mn9tQyDUbuq0WI
+	 gL+4QTDtwj3cw==
+Date: Wed, 14 Oct 2026 13:07:59 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Larisa Grigore <larisa.grigore@oss.nxp.com>
+Cc: NXP S32 Linux Team <s32@nxp.com>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Avri Altman <avri.altman@sandisk.com>, 
+	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
+	"Martin K. Petersen" <mkp@kernel.org>, Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>, 
+	Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Pedro Sousa <pedrom.sousa@synopsys.com>, Hannes Reinicke <hare@suse.de>, 
+	Joao Pinto <Joao.Pinto@synopsys.com>, linux-scsi@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, 
+	echanude@redhat.com
+Subject: Re: [PATCH v8 10/12] arm64: dts: freescale: s32n79: Add UFS host
+ controller
+Message-ID: <20261014-wonderful-elusive-hornet-c32e5a@quoll>
+References: <20261013103003.373156-1-larisa.grigore@oss.nxp.com>
+ <20261013103003.373156-11-larisa.grigore@oss.nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] usb: dwc3: support two connectors sharing one HS data
- bus
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thinh Nguyen <Thinh.Nguyen@synopsys.com>, linux-usb@vger.kernel.org
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261013102927.1141696-1-xiaqinghuan@mail.ustc.edu.cn>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261013102927.1141696-1-xiaqinghuan@mail.ustc.edu.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0NCBTYWx0ZWRfX1BDNUbrUmx2d
- nuv+SowInC6bYsafbuNbv1EDfc8P+Nfhv4BWTloJKl+8CgZUV3ayWz1Ly0yyx7n0uVH3HDRabVF
- pQs7nrelx99pI3FMcJd2vbIDyjn4o5aK89bFt68f3m+qgv4iAfq/NWF3kZ7U+Jtt2lluxDPNITa
- m7XV9HmQT6hfrQdakRBmKqdErWpmTIhBUIBcGK46ggHSC2KDNgi0DAN5ratACqhYSLAJMCxz/lX
- zTwu/WslzZd0DaM1IJgzYmY3IZtsIEE8c+Sr/Gy9UmvCT2ubdsVPROPmNBnpkaVkDhxMjS3kocl
- mx8fys0gJqplamubOP2rnK13u/XyR0xjIIphSAnoWLgUIXumgv5ysbQ+RttBzAN9nRIcdGFkiyk
- koW5nnHJbIe3oltbYuuIDPxLZRZWFb6sm40OvJz6kd0mOYv4akN/rQrsObqx1zH9M4AMafjIo3v
- vwQmkuMJ15DZCjmOSGA==
-X-Proofpoint-GUID: XTnTrQw78HFe0o-54PpbkAxg7At9RN8t
-X-Authority-Analysis: v=2.4 cv=P6avFSAu c=1 sm=1 tr=0 ts=6acf61d5 cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=hm8Rrv06on9B903gwGAA:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
-X-Proofpoint-ORIG-GUID: XTnTrQw78HFe0o-54PpbkAxg7At9RN8t
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0NCBTYWx0ZWRfX7c1sn6rDPpgK
- bV3YegsTD2FNJsr8fdOHdLsIs/317yx25GPdGwMzzCOYLz865TMNXIruGiZK5c17wWfGKjnDdPh
- Qjj3IUZf9RCt24FqyaiwvVqREay9APs=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140044
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261013103003.373156-11-larisa.grigore@oss.nxp.com>
 
-On 10/13/26 12:29 PM, Qianhui Xu wrote:
-> From: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+On Tue, Oct 13, 2026 at 12:30:01PM +0200, Larisa Grigore wrote:
+> Add the S32N79 UFS host controller node to the SoC dtsi.
+> The controller remains disabled by default and is enabled by board dts
+> files as needed.
 > 
-> Some boards wire the High Speed data lines of a single DWC3 controller to
-> two receptacles and select between them with a GPIO, while the SuperSpeed
-> lanes stay per connector.  This series makes such a design usable:
-> 
->   - patch 1 documents "usb-psy-name", a property the dwc3 glue drivers
->     already parse but which the bindings never described;
-> 
->   - patch 2 describes the two-connector HS data path: "port-select-gpios"
->     plus a "ports" node whose connector endpoints carry "mux-state" (the
->     logical port-select level of that connector) and "usb-role-switch";
-> 
->   - patch 3 adds the driver side: one role switch per connector, mutual
->     arbitration between them, and a data-path switch performed after the
->     previous host/gadget instance has been torn down.
-> 
-> Single-connector designs are unaffected: the mux path is only taken when
-> "port-select-gpios" is present.
-> 
-> This work was developed on the Qualcomm SM8750 (Lenovo TB322FC) tablet;
-> the board device tree is not upstream yet, so no in-tree user is switched
-> over by this series.
+> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+> ---
+>  arch/arm64/boot/dts/freescale/s32n79.dtsi | 24 +++++++++++++++++++++++
 
-This is an incredibly strange setup. Are you sure it's actually how it's
-wired up?
+DTS shouldn't be in the UFS patchset as they tend to grab everything.
+Please split.
 
-Are there any hubs or other devices connected inline?
+Best regards,
+Krzysztof
 
-Konrad
