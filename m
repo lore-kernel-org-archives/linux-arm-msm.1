@@ -1,132 +1,111 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+Received: from mta1.migadu.com (out-154.mta1.migadu.com [95.215.58.154])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAB535616A2
-	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:38:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA9243D7D9F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 16:41:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.154
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791995937; cv=none; b=nrmwPC3XSxoyAX3YN7yvM0v+gRd+3IdHbZzEK90Il2VxnoCIrLPegLiE59TMMvo+yG6SfAjz04bDElD3vVy86nMUS8f838VY021iBzg9kqIB+PuD9XykGUiP51UqwE8I7L/BV4flu+RfCt2AKHzSVCanBsZ0+AHl4v69BbYcEyY=
+	t=1791996092; cv=none; b=vFjkqES01VPE+i1Wa4BdU7Pu6aASveDTeVkXUc6O1oi56sld7rJCcSvlwircxV8GxT1C2XMyBGSdFcI4qcWSfNnnrHQ/xb905yns8uTTeaod0o8Y4h67nuG/tsT8FiLp/W/q9aYjk6G1Gv0vdnqor0iO53wZFaHiudpW6ycgdsU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791995937; c=relaxed/simple;
-	bh=APYxkuDM9hHLS1zuQd0wn4SyxD7eEgKQxzZw7XzMkEQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FKRS3fzJAm5AuLnlOy+5zhCY4i3qRy1RTZQ6lizpSYc3FyBTAe+gEdV0EY8SFTQmbxk+iyXTuSHMSFVA38bArVlwQAJbkDO6Yere2s4xymnTgw+XRaBUffl09cDs0X00bd2r/qibjPVnIMlARDRgJh1DHiF479J9UkZLU4a9HXY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=l2igTe3x; arc=none smtp.client-ip=209.85.221.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1791996092; c=relaxed/simple;
+	bh=kQ75PMv+BY9OnLoeEVPyFqxTAPL+KhKo+I77xMhcgcc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LvWwmPPsLcy4IVKwTzEA+yW8Ql03tOKkW2KEMb8Q03vU8D2R+5M7MboJPbCFW6NesSHAejrD+oh16o6hIIhLONqKJeWr1szjnE5S0t0Cj0ZL6MBRukbEiG21uXSmFx3H2+1soY7mJIM8kgBrWdGcwEqQQ1cws6N/VzGnGA7JLvw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=MsOieU8G; arc=none smtp.client-ip=95.215.58.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="l2igTe3x"
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-487049569b6so3044126f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 09:38:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791995934; x=1792600734; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=APYxkuDM9hHLS1zuQd0wn4SyxD7eEgKQxzZw7XzMkEQ=;
-        b=l2igTe3xny5UQgcBVZ2yiFfkTmYgMrTrC2Xhy0uLvwLqQEHZtm3b5Us2K0z5k/Pkwf
-         S6ozpzGUcAj96RDIF3iW3viR0sv20/oP745O5sb5zmKxUz3KTBv9e6LMsiQT3VhiWEqC
-         An9aphrgI0cQT7mtoPUtyOWkwmt8gSSpdQMsHaH4YZ92PJ21RLcqjBOBwcCxZAZqQGuE
-         sw5OPbZcoAL7JxVv92Qo1mVvBvQHPLAHll8bQ7vk1kB1UIJb9oT0sVhNy4DGl3XoV1KN
-         SU30naVYCdxUR7TrSwnIH188shX3zL+vIf6fyE/7L8oDiwUcYDhZcHp9bwOf8lkd+GqX
-         OCUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791995934; x=1792600734;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=APYxkuDM9hHLS1zuQd0wn4SyxD7eEgKQxzZw7XzMkEQ=;
-        b=Urv/pM3cZs/AbkL3Sbu2qtXBqFMpg1DGhXxkrJktBSygSZnQz85OZzOq64GI1cnG9l
-         3AteadYHUv3a0G7+ihiU+LmMJ46qoT4oGTsmpa6G3rW6hvARj56zvjo+jui6C2YCqZyT
-         p4osLejts8kXrAPPUsdpTJCSF4WWnYuEdVC7BNWIuPdxafFd42ZGbQDDi1jBKbdO2S5o
-         2hapw8b8bO9D2GfxPNt5CpX3NkMoxY+G6Yi9PSb0TmrscNLDpCnefDk2KZX5aY4JdLhT
-         nSoencLLJRPa2cAmysypOhyb0EGn7JbsfORK79LxfLK3e9mfp16dLDXr6FnTI6e/NG7B
-         ezSg==
-X-Forwarded-Encrypted: i=1; AKwUvBwsCwKKo7JJ5wa57aEaD12p2NzRF9IDEfSGrH2Xdx/sVo8K+MZjz+A8zOXfSQFLebx9sQf7qVaweY/mZIwY@vger.kernel.org
-X-Gm-Message-State: AFq9FYJjz/e07eMmDkqNPlLWqglasmz6rXLGjT4GxOAxWJFViu47+e/o
-	vY6qsI762YbLZ7JjsqE4HtE/9itwEBfpmdoF25BoDbLJVAMJL11kTq2G
-X-Gm-Gg: AYBFou1ymq1dbnwzdtMpo3lyGLljSsQ/YrNdpJjsMNYs40j7/J6v2vphDECnGDwVFsw
-	m28UoQ91GxaNh4u8/zcvAVl94kcNq0AjzXTWAAejUxo9L51xVptVhmiT/lRaEaY92xmeIZn/N9r
-	Hzxy8KJizoRDBuErBalRmAK3nnw2OZZls3KJVA7yXFBhUYZtHDDzDW0wBMxQ/Hfi0owUIry1VB3
-	YCZ6qoQRqydjCzdrtyfs1DAoEUUeHCEMEhc1R76EpMOJnOOZMm594HdiOoOMjxoZT1OLQ0paOz+
-	989Y9/Q95x4aWSX3c4J3WG3JlVidEKPtHYh7HDH2kEguOWsDu32ffuZgiMKU1+B7kPi5dLgcFM2
-	oUeWXkhoPrbJnjxR/ArO005ARVEyHfBetOSTM7tdRU0tSVbSTb2PPfppes1mZO6uV7dkojGCFMA
-	hNgkH4/XDHbTJRgnOKSzSy3Fgzq9Lv2d+YUZk6zP3QQxI5UgtsM1Zrl4XpMJZLo6gh7QqrMOriw
-	zigGSb+iIuGphdQ6J1MgK+Amg==
-X-Received: by 2002:adf:e013:0:20b0:487:930:8acc with SMTP id ffacd0b85a97d-48dbaaddbd5mr23419177f8f.16.1791995933978;
-        Wed, 14 Oct 2026 09:38:53 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48ded185de7sm4552774f8f.31.2026.10.14.09.38.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 09:38:53 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Luca Weiss <luca.weiss@fairphone.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-	Mark Brown <broonie@kernel.org>,
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Val Packett <val@packett.cool>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Jianfeng Liu <liujianfeng1994@gmail.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH] ASoC: qcom: q6apm-lpass-dais: start the graph at prepare
-Date: Wed, 14 Oct 2026 19:38:42 +0300
-Message-ID: <20261014163842.13124-1-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <DM0ENR5MK476.UJSB8FMRYN50@fairphone.com>
-References: <20260705033830.305907-1-jorijnvdgraaf@catcrafts.net> <dee62f9f-1df3-4f57-a072-12b0b4b8a1a3@sirena.org.uk> <20260708215539.150590-1-jorijnvdgraaf@catcrafts.net> <137a9c85-67ab-434b-880b-d9d4efa5bccf@kernel.org> <20260710143214.142017-1-jorijnvdgraaf@catcrafts.net> <b099f316-0e30-40f6-8e6d-5717d96fce5c@oss.qualcomm.com> <20260715211919.49462-1-jorijnvdgraaf@catcrafts.net> <2545fdff-7bfc-4897-9185-34c45ee01bdc@kernel.org> <DM0ENR5MK476.UJSB8FMRYN50@fairphone.com>
+	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="MsOieU8G"
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=kQ75PMv+BY9OnLoeEVPyFqxTAPL+KhKo+I77xMhcgcc=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1791996088; v=1; x=1792600888;
+ b=MsOieU8GejELPQB8oXQZ702KEehwpVk1NSUAGj509KZOkxXo5eNCJepaJ/YuteKifIZQYZkI
+ LAOlwOis9kUDG7Nmyg3M19OQIHYRwjOeuVG2GmHB3aF3yB3J0vLmSncpSBgfV6fjZ6qrd+60w6F
+ ob9OFUTVW8QwncRsah8TiUOe/JxE3ouS3l/2ax47QVaUjqJwhwF/m/ywYMoFxM7wMAuy94qe3/h
+ hleDlYsc2Sjcch8KM51WPNmB3Bn1BYxS0II3bJS2+TZRzDKBCaZgZ0CrUnTLF6d4ekOedWJ4VZR
+ 7wBQPdJVxe4CD6D80pW1aUKuwL/fd+awHvVz8j2qHHLQw==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 454a9d4a808200d2;
+	Wed, 14 Oct 2026 16:41:28 +0000
+X-Mizu-Trace-ID: 454a9d4a808200d2
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <12d14e1d-8355-4b3b-9eef-bd5e90dfd19f@packett.cool>
+Date: Wed, 14 Oct 2026 13:41:19 -0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] arm64: dts: qcom: talos: Make the ADSP remote heap
+ no-map
+To: Jianping Li <jianping.li@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ ekansh.gupta@oss.qualcomm.com, quic_chennak@quicinc.com
+References: <20261014083820.468-1-jianping.li@oss.qualcomm.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261014083820.468-1-jianping.li@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+On 10/14/26 5:38 AM, Jianping Li wrote:
 
-On Fri, 09 Oct 2026 17:16:32 +0200, Luca Weiss wrote:
-> Is there any new info about this? This seems to be the last blocker to
-> upstream Fairphone (Gen. 6) speaker support. Without this patch, the amp
-> doesn't start up and audio can't play.
+> The ADSP remote heap is declared as a reusable CMA pool. FastRPC
+> assigns the entire region to the DSP through qcom_scm_assign_mem()
+> during probe without allocating the pages from CMA. Consequently,
+> the pages remain available for movable HLOS allocations even after
+> HLOS access to the region has been revoked.
 >
-> Can you suggest a way forward here?
+> On Talos, GPU stress testing triggers a synchronous external abort
+> when zram accesses pages within the ADSP remote heap.
+>
+> Replace reusable with no-map to prevent the region from being reused
+> for normal kernel allocations and exclude it from the kernel's
+> standard memory mapping.
+>
+> Fixes: b0b51a5f1911f ("arm64: dts: qcom: talos: Add memory-region for audio PD")
+> Link: https://lore.kernel.org/all/20260424-talosaudio-v3-1-9e2ad5d78a2e@oss.qualcomm.com/
+> Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
+> ---
+>   arch/arm64/boot/dts/qcom/talos.dtsi | 2 +-
 
-One more data point, and a possible way forward that does not touch
-q6apm.
+This also applies to: glymur, agatti, sm8250, kodiak, sm8750.. (at least 
+those I've found by grepping for the adsp_rpc_remote_heap_mem label)
 
-The OnePlus Pad 3 (SM8750) has six AW88261 on a TDM link of the
-AudioReach DSP, with the IBIT clock of the link voted from hw_params
-through the MI2S clock control of cc8495c1d45a. It behaves like the
-FP6 and the VENTUNO Q: the amplifiers see no bit clock in their PRE_PMU
-power-up check, each prepare gives six "start failure (-1)", and the
-clock only shows up once the BE graph starts in trigger.
+I've been hitting the SEA on a kodiak phone (sm7325-motorola-dubai) 
+constantly with just light everyday usage:
 
-Since the DP case rules out starting the graph at prepare, I moved the
-start to the codec side instead: aw88261 starts the amplifier from
-.mute_stream with .mute_unmute_on_trigger set, as wsa883x and wsa884x
-do. snd_soc_pcm_dai_trigger() runs the CPU DAI trigger first and the
-codec unmute after it, so the graph has started and the PLL locks right
-away; a prepare without trigger leaves the amplifier off. On the Pad 3:
-no start failure any more, all six running during playback, and the
-trigger that starts the stream (graph start plus six amplifier starts)
-takes 52 to 71 ms.
+Internal error: synchronous external abort: 0000000096000010 [#1]  SMP
+CPU: 7 UID: 10000 PID: 26485 Comm: pool-24 Tainted: G   M    W         
+7.3.0-rc6-next-20261009-uwu+ #167 PREEMPT(full)
+Tainted: [M]=MACHINE_CHECK, [W]=WARN
+Hardware name: motorola Motorola Edge 30 (Tianma)/Motorola Edge 30 
+(Tianma), BIOS 2026.07-gca7686425f32-dirty 07/01/2026
+pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : clear_page+0x30/0x70
+lr : prep_new_page+0x94/0x178 ...
+Call trace:
+  clear_page+0x30/0x70 (P)
+  get_page_from_freelist+0x1bd8/0x1c00
+  __alloc_frozen_pages_noprof+0x1cc/0x3f8
+  alloc_pages_mpol+0x124/0x210
+  vma_alloc_folio_noprof+0x124/0x200
+  vma_alloc_zeroed_movable_folio+0x3c/0x50
+  do_pte_missing+0x9e0/0xf80
+  ...
 
-The patch is here:
-https://lore.kernel.org/r/20261014120000.aw88261-trigger-v1-1-tvlad744@gmail.com
 
-Luca, Jorijn, it would be great to know whether it works on the FP6,
-and that it does not change anything on the FP5.
+This no-map does seem to fix it.
+
 
 Thanks,
-Vladyslav
+~val
 
-(I used an AI assistant, Claude, for the analysis and to draft this
-mail; the tests ran on my device.)
