@@ -1,64 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpbgjp3.qq.com (smtpbgjp3.qq.com [54.92.39.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C1DF8003D;
-	Thu, 15 Oct 2026 13:31:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72EFE2E5B2D;
+	Thu, 15 Oct 2026 13:31:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.92.39.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792071066; cv=none; b=sLe0pVtFn754UlHxeT0jL9JBdKw7uyX353fofoCmsayCP9ebhOA2nSBkLz+0jVUp1xrU4ou93HkQJSMLRhrKWm2G7q5yFOXkWxG7u/xPkMRZ7vDpmBfM5SkSMQJZau17SwHgPyxT8wnDVMceNRSz9QPAroy3aIo+l9/SVpsoeEs=
+	t=1792071081; cv=none; b=XDY25/Vya08VnZjGP98/kUfLkprNuBrNSZqknAZxp9xMCU4xDyM77OZ+Zh/ES83hJeojA2R6bu9mjbWl1dU4kh2X8a/wPBzb2UycMWNNZOPMMBzK5l8nB5q+jfxtwqWz97JwQNJlEoHNPOY9Ahf6ttbVaesllsbw+mZaMNGMrU4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792071066; c=relaxed/simple;
-	bh=qTODxqyJB391XQFDcDDrXjBsxFBg+VPofG4ByZjkVI4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dUNDq7kCg/P+ugPo7nRxs/00jQQveZeSRPisUIjTsYXjHwlp5okNz+1u5r1Dtr2/5b1aIVlxpWbUT3Fo2/gWZrBQRv0yZcwmH0SixL+dWXlgO88omjRm0lWD8/xviBtmV/IitAlM8YFiQjrLFoyfmKqczKJEWEK1dOW5GYj2o6k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AIu7lCqb; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AIu7lCqb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4E641F000C5;
-	Thu, 15 Oct 2026 13:31:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792071065;
-	bh=qTODxqyJB391XQFDcDDrXjBsxFBg+VPofG4ByZjkVI4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=AIu7lCqbte4yAOTJtAyyzf9jx7S+b1okAaMb2fFVc8eXa0sGWzVOhvdVNu/8t8pvS
-	 BycOMKkRi5Lbd44uOi2eeyDZ2RgkAPderosj8XB3JF07ow6wnfGgv7uGz3rntwSt11
-	 4/TXioFDhaj9IVjK4qYN1CEjkM2zjm0ycvSQn3LoDTwWdUo4VP3XUR6g5PARxTDYTv
-	 3MG2bCXwN265slDStPstAUuh/wDDwJDkClY2c++MQwVLpQQm3q7EI5foVun4507WzO
-	 vrjhJR2AUsiwEzd9lsnKnMwYJ5IRy7pqm0Avh/WPcvJI8UDEvUSE3LJOJ4dg2u6WVp
-	 XtkS7cF3cMb7w==
-Date: Thu, 15 Oct 2026 15:31:01 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Birk Skyum <birk.skyum@pm.me>
-Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Thorsten Leemhuis <regressions@leemhuis.info>, Daniel J Blueman <daniel@quora.org>, 
-	Sasha Levin <sashal@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Manikanta Mylavarapu <quic_mmanikan@quicinc.com>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org, regressions@lists.linux.dev
-Subject: Re: [PATCH] Revert "i2c: qcom-geni: Fix hardcoded clock index in
- SE_GENI_CLK_SEL"
-Message-ID: <atDVf3aEYgzO5rXQ@zenone.zhora.eu>
-References: <20261014130805.48840-1-birk.skyum@pm.me>
- <atC-ZZLkXs3yM6l4@zenone.zhora.eu>
- <179206679156.49371.3533488984291951831@pm.me>
+	s=arc-20240116; t=1792071081; c=relaxed/simple;
+	bh=vmA6XUYtlHqFYF1V3I5JQfJJrWaaZuz3a5rJ1xnV/z0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Pp1bb/6XJMGHlINiVcr5xbeIlvBJluQsrEwRlQkJs9kXKpssNlPp9c8U7GgPCy3oKu0LWqz6uPhm3TrDLW+Co2e8jp0jy2KAFavw/QwAASDPcjhlFS/zDLIb4oktJ8352rt1whTfA8tpPehwXkb5O/+iO2MMvCd+65Th7juO87E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.92.39.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: esmtpsz11t1792071051td5e74615
+X-QQ-Originating-IP: ZY3dpyG3QC+HIamw3iX4CacHKho9duMeYS2GbkIpwjU=
+Received: from [127.0.0.1] ( [180.159.160.209])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 15 Oct 2026 21:30:48 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 8017279923020972316
+Message-ID: <8E9F476DB51FFE97+cb168190-d184-474a-bec2-91edf7bdd2bb@radxa.com>
+Date: Thu, 15 Oct 2026 21:30:47 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <179206679156.49371.3533488984291951831@pm.me>
+User-Agent: Mozilla Thunderbird
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH v2] arm64: dts: qcom: sc8280xp: add missing QUP pinctrl
+ states
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260831-sc8280xp-qup-pinctrl-v2-1-a69bbbdb37e8@radxa.com>
+ <3d00c7d2-026e-4ce8-bda6-bb2d0f3c3123@oss.qualcomm.com>
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <3d00c7d2-026e-4ce8-bda6-bb2d0f3c3123@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: Nc4Sv39/e83WTkWT9LCrG+JtKlGp2is4gTi79+kMOaP/0VXRZmEcXsYc
+	Funsydf1nz+K8V9C8t5dag7jLSZJonpJa5FgjkHLMVrceuV7G12pHAaf682GZKMyXEii4u3
+	tI4TEmErKbYilqM9aLA+0jbYKl12+IN43CJO3m3XcX0bBt+j/3X23xDDw4K/A2XDPr/3f9k
+	zo2kPsFhJGGr+M5YCLEfh6SeARKJ0TvuJHZxhWydm0vPSJ04YDAAAQP/phgNPjPkecYHjex
+	fTUbOBa2IKwxywfNrRDf2THRTWKBrEqGbxC4565oIIQVxVHa95MqmkorzAPlgGd2rWlQn5v
+	E2IpJ70Tg3duQGej4FKsVifOTFCA77M4p+3UgerGYLpIfWZZkzheaVe/ENTf2glynvPdIvx
+	TRTi2M87b+V+o//oH3wNdpaVpQX9hXCul+PI0lYy2QKT1PaCbi/ynDhv+5Tfsk0d5iEWFKz
+	aZOa8NsITHC8eg4jAz//AdYPVJTkBPbck9zF5A5ItSezlLhFTkckXhniKNBvOlM5pt6PnL7
+	t0rst3YTpyYV3lyDZ59NFdEUxXm4Z/vhuN6y38GwluKg7aVVenBAzqAWmRgGpd1l+kCoZF9
+	c82bZfbwPepVxkGK1isNcj1JADjfCs0pBj5UkG8CCMCZsrpwzo71IKfYhbYiGvkkymQD3j1
+	AHBXMORoCuTIZeTnXW7l9FgGHbZFJqt9z/I5V06vkjLv9q9QR0Vx2ubJMqiVQRmbBc+u8ur
+	6FCIPw+Vqo2IoL2YZDGrMzQvLIhqMqzr1qUghvRNeXkSzBfx74lzsROUSIPLmRHEUJcdrQa
+	ru0ZjhkR0IC60wNE3LmaKcAjke76aSfeqRI0qN3Zfm39vBmE1lCOTe2o0+dOx2AmzCtfQH8
+	CNjuK989C7ob0ft7yg9gCHw1KPHc1Aa3wFKbkeZk/zC3XsBESawyyYrErH0DabAUOW5YFxB
+	hIJ3IibatZmUYqUmIgfPBjqu1MWGgX4ehdi/uaMKhDEVwHpM0bPyKESp8nVQXKfiyJwEZOw
+	1Udy4JkUVXFr+7m4kSm4P2M52LTooUoLAYiPh0rTs+HjUSyTv7w6V5zZ/uQD/NtMJXBp345
+	BoTvz0z6UWb
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+X-QQ-RECHKSPAM: 0
 
-Hi Birk,
+On 10/15/2026 8:18 PM, Konrad Dybcio wrote:
+> On 8/31/26 11:55 AM, Xilin Wu wrote:
+>> Add the missing tlmm pinctrl states for the SC8280XP QUP engines so common
+>> I2C, SPI and UART pinmux definitions are available from the SoC dtsi.
+>> Populate all 24 engines using the SC8280XP lane-to-GPIO mapping, including
+>> the non-linear QUP instances, and keep the mux function names aligned with
+>> the driver-supported qup0..qup23 names.
+> 
+> [...]
+> 
+>> +			qup_uart0_default: qup-uart0-default-state {
+>> +				cts-pins {
+>> +					pins = "gpio135";
+>> +					function = "qup0";
+>> +					bias-bus-hold;
+>> +				};
+>> +				rts-pins {
+> 
+> Please keep a \n between each subnode, there's a new tool in town
+> that will be very grumpy if you don't:
+> 
+> https://lore.kernel.org/linux-arm-msm/cover.1790892852.git.waqar.hameed@axis.com/
+> 
+> https://lore.kernel.org/linux-arm-msm/e869c2bb5005830c9ac1d4bf998696ffc4eed335.1790892852.git.waqar.hameed@axis.com/
 
-On Thu, Oct 15, 2026 at 12:19:59PM +0000, Birk Skyum wrote:
-> Thanks. I tested that fix on the Yoga Slim 7x with v7.3-rc7 and only
-> i2c-qcom-geni.ko swapped. The keyboard and touchpad work, also at the
-> disk passphrase prompt, and the I2C serial engines stay at 19.2 MHz. So
-> the revert is not needed.
+Cool! Thanks for the pointers.
 
-thanks a lot for testing! Appreciated!
+> 
+> with that:
+> 
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
+> Konrad
 
-Andi
+
+-- 
+Best regards,
+Xilin Wu <sophon@radxa.com>
