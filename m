@@ -1,87 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60A471A680B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA1B11FA272
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792070704; cv=none; b=IWIg6evodog7l1zKrc2q0Z5zuj/nRRIl3bhLQUzJLXDfPaMKWcU77TZMTHhXfIL6DGhd4pJMeoD85EPH4C2LQ3Zd7UefgNcTb2aGPmoQHN6/BzaZAv5KLGiMPF+QMjiblxyz1zNA0089W6jFujrdQmu3wZ29WtsBLrNf27cjDRU=
+	t=1792070729; cv=none; b=fxfwC9tWOAy7pl2MoeyLo7TOPECKXAqUM3ElU8arcvFh/CHOFk0fa/yTqO5tqBLiebUu5D8Z90pvgebYD12YlYjtYZz9m2QkwmkoXx2snocph0UZ3u3hZllYgvnK7JsxM5yVK0mVEkUqrdk0HK6K9FEYyaXJLoLnnrNs7C09EBA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792070704; c=relaxed/simple;
-	bh=QggDlgx80UU6E5gJJGiX2+tKlp8a7hqOIUXaRpgOebQ=;
+	s=arc-20240116; t=1792070729; c=relaxed/simple;
+	bh=OKl8FxF8IEbfAFyPdAhMBb2ftzDCnYFKMb5F9NMa5dw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BsvA6bpJ6dfnZ/8gg1zn50DcCOzKkJTnmvXXuVkxcefTmOalewMAf16HxfwAxw1IppungAqwaw4JXdHL1ZgylwC/gtG5gIsbAFkzDJacOzlDct1prJ3I2T2WnZk4GcalFcdX4g5istLHCiJErFpn4/kE5pzAcIKuH6yQe3/4U8Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=V6ffvFYr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=a+ImfXJl; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=VcLLPcGULdUQHM/Vm0I1uIB5OWHEA/FBtCUPLwoS5HTSJ3xsBclT+/FNzIUHxN0QN1GkjjrVPM0Gw29VqdfkqM3Yn56moif+L9jHcQspMrmECh6z6o/GhZy9SPQakomX7MC6CXdzZIO405fOpE/WIPdhTbI30FHf0vBcLEdKzLc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ddDE0uF9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LbK9FDGe; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="V6ffvFYr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="a+ImfXJl"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jYY32966392
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:02 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ddDE0uF9";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LbK9FDGe"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jIBv4077483
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kXzuvyD7vEPKPmhhGzoxroGZUMQEvbNNj+wxq/Ak3M8=; b=V6ffvFYrIJOQL3pg
-	a4UkYBPHULoo2vY914IfBEcZtedRpkNIZHo9Gx6V7PPtFdReNYmMz8UJvZBqkTAQ
-	oaHnPXO4q6bfFlS6HhKe7f0I6u0/m+aoPvsni3FXrzFspIIQlPkWBjH3tegB+2yJ
-	B6U1Ft1E3RkWDNy7JYtQ0zvh2NwtBbKysGWIdtLcV2fH3f5DnV4TbxwSsO6k7dzA
-	Usm8Q46C2iM55r93NNf7b2VnKGt441w5JzijLxbon3n1LEIAuDpiF9c+PGimhITe
-	3irRwyxMn/j43KlC9Y8vvlPQ3nO2fHCGaM542bDzGg08oRMSpCe2rAkQGXDrVUil
-	4YpKZQ==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hae4wv7xw-1
+	gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=; b=ddDE0uF9JmMiZi89
+	0pSWhIStLk91p2Oa3mAq/K1DHJ/UGyhTK7OBu9A1DP5NMKgCP1x+0lmeuCgCm2Bu
+	Hsp6velGQMQyWu00dsapalMCS0WjjRbF8S2f5a2Scz2e1i/k1pTD5vQmEHhdzAc4
+	WVdM0z0TYH09b3weQM+SRt7JJh2Ad1VaxmNtzQnRGkjN/gZv5x9ZLYPJQDy04Nt6
+	RupmY9mF3nzlHgRIy0X9bnYJ4P0KH3AAMW+bSDEvcE9kwcR9ircbLGBCyCZ70Ff6
+	f+uUBrmaeMyxIuWe+yLHg4gZltdylfDn3As63uqQgvGlgAubXYV5h0e1mQG6eP7e
+	J8SkgQ==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4havbc0wgn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:02 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39b77130a7fso6359173a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:25:02 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:25 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-7c02e1df088so653196137.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792070701; x=1792675501; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792070725; x=1792675525; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=kXzuvyD7vEPKPmhhGzoxroGZUMQEvbNNj+wxq/Ak3M8=;
-        b=a+ImfXJloOUcCbzRWOoAQV1HsBec27LCFg4yEj4+W3Sk0TN9i3ynzScLB6GWPpp5Ki
-         c/FP3pbVW22dNyvMjDZUq9Mid+84en8MB9OV2cRiAX1kgM2N9vn5jvMwRq4EoB8suHt2
-         lidGoMK/2Gk61EHWcwYQK6AHM20ESppuEOD437trLHHfl9bE2cA9A+4UAraQlr1/jVg+
-         aE4mE/sJpDRvhHVAI9cB7PEDUWIp/8WZ698Sjuxywm+Dq8+eTVpJ9LP2WETPMMnyJ9Od
-         QEWTKJTn/R5E4UIbgr8RyWDmhcJFOhDiSo9Yu0rHBa3XU1qXtQCwTYLxCNY4yv8xOTbb
-         OT+g==
+        bh=gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=;
+        b=LbK9FDGeeul3ZXiFJAkavP8OF2Qi8QtX4pI6552Yf3nYGpUXCo9iRTEX7/jYQdsMte
+         7LkZqExCS+PfhL4zSwaE/ryRkwTkdvXwNDGAR+TKIikJ+7zBqbFKviPySIrN0eaHfhAa
+         42XAfDl7NK6VaTeXiFQKcd+/WbInSJkEyvcqc+RfBPTms7JuZ8c5aI0EHn/+dM6nERsD
+         iE5G2FsLU5p9wxXM7M4VlqGsgKEXmvFGIJ6kvWZLgjMy5eOJRCBySpIC3x7HvHupWB1g
+         Lurq65BMHtm4rHIiR4fG5snehKFR0Qxwrnfj5gCjoaP0I8pWuU8s1xeN0k1YfJNoG29i
+         xOLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792070701; x=1792675501;
+        d=1e100.net; s=20260707; t=1792070725; x=1792675525;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kXzuvyD7vEPKPmhhGzoxroGZUMQEvbNNj+wxq/Ak3M8=;
-        b=Reg4/q9Vb9IubEzYRh6PNB3vqLIQxsmSqmE4yg3rngwIavn3IAP407EzktBwBaeW+Q
-         CzEt/gq8qzA36zW61shvimk9hRhTvz0ndGXvMBJFJZfr2s09S4wCLDlI48trSLmRzU+k
-         sH3ajPQWGSuQ/qsOaIylNqdyRwAGJwptGbaaqLDTRHe7fIRACb3rl2HM3NdjtQKyKLX4
-         FydgfaM3YQboXycTQ2JycgsX3eM3KNLU7tUDFLCjuIZEBb5rvsdZ3ZQZtiRC4R31a+Ne
-         Hxgx7iZf6CTQDkouvUsD2OfSv9tXSF7X0gq5DsB8YrADYy0zCf0IslLhxkvFaCriXmgS
-         JAeQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwHeel8+HOvHGDaqBoaPbxoDXCxR57Hj1N3QzsW/l2TX62ZyS7pKR/U5oBFCOeZVUqfbvtW4ukRDU0R9MHd@vger.kernel.org
-X-Gm-Message-State: AFq9FYJPbFpg7AMj4t0pcVIDeCSjaSbs3iArducGvf74CMb1ZsxNMPGm
-	1N57k4EWxT20c4t5ps9/zMknQsjIJFESh5Oda5TvdpoqRwMDg6izZLxD8KTwWgMPY5Hb+XJDfmg
-	vE4z6iLJZjoQ/CMgZx6+BF6zdugNP/Hn92XKoTpctU4gH7mZTRpClSy3c58uflOC+o9p5
-X-Gm-Gg: AYBFou1Llof3EVX5gT/i4kfgNby7TUVoETSqqOp4huzR9nHa7GSQ2acyRtWniUKpxYV
-	/cMcurqH4OnTqkwXVTNFtzGmB0kmLBU1bbZJSs2PTmV5EYClzq6SBTbEcbkP5ZYXo5xec+xi3E8
-	looUpL6gLyTKImN7bnJGzrxd7NxklqocB+lb0mvRoCoZGRd7y29X9SigQn1EAcZrPSV0ZcmVDXt
-	lAZC7KM+PH1+E3dAMO0lGkSuFuumBs/5INSsN45aT0w2CK2KpZg6Fayj+SgSzclpIPsPKeHT7Ek
-	dlneVyZwI5o5eSD/wvAog8tvmqCKq7Z7nDDMSWrjWlk9x8Di6uwupbKYmeEFbhj51zgzhgAUPyb
-	Fym1J/39Cw6k2XvU7QPfwggU5FrE=
-X-Received: by 2002:a17:90b:2b48:b0:3a8:1320:38b5 with SMTP id 98e67ed59e1d1-3ab3a747d7amr15737811a91.30.1792070701267;
-        Thu, 15 Oct 2026 06:25:01 -0700 (PDT)
-X-Received: by 2002:a17:90b:2b48:b0:3a8:1320:38b5 with SMTP id 98e67ed59e1d1-3ab3a747d7amr15737710a91.30.1792070699787;
-        Thu, 15 Oct 2026 06:24:59 -0700 (PDT)
-Received: from [10.64.69.173] ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac9437aa5fsm4592400a91.3.2026.10.15.06.24.54
+        bh=gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=;
+        b=OvBatxb044opWavAMKI9jrj4qmVyy4OPLk7XjCWjRBeC6DYXw3wkrmAZlkqjbmCsY5
+         2iaOY6umVJ+Z4dhCoGq8JPWD5vkRoeuqbnpWnbQFGATfRipOqZfxzicZYPDUNi5pR1n4
+         qpGdRuKFQ/gRonM0F9jUyoC6A3Bp3IAiGaAQIXXegi/CXMa56qPhmK29F9PVl6ViF763
+         unwpbOdGZRk4Dyz6/35JqBioXl4UFcrPaCFOMm7U7DI1AV73d/mNMMxgmmxAlRO7SC0A
+         Y5fAdS7AkUWjok9Zd3fynDacMpXI0yHGqi/HNOEZv7bjwyH8J5munSrk9ESUBaibS9I3
+         oQug==
+X-Forwarded-Encrypted: i=1; AKwUvBzSoEebicgS5pMNWQceCRSafs0J9v58iLTj3z2rzq9vMcgu+43/wA9xvfvd8sdmB/gMillyg6HapSxza6Hr@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ87DmfOR0l4HaaxK6i/QwgyONtAqaoYZ3ISkMhg9kZm31uqHYA
+	LgF4jsGLW0mdo0Be8/6Al9NeEDmKPcZyCdKNNiTrFdXDCwLf2OT27OHyL+zwP7E9DmYbKdT7eik
+	7FAshOQ3OVZ1g3+2vDWNIopTrSQ1UmhICsxEcl8/UeAfVmSFzZhJwQGLRSFSlIKgemWtxqBZIjV
+	0c
+X-Gm-Gg: AYBFou2F5ft3T3laasfTagx5y5jeCJlacmM5vZF4FhHGbovSOBoswDu0wDS5RTRm8uu
+	H1oaYRAtxCnwX3S31lU2kH3v833zbjVP0p5clG6nGnRcECsC4lIyHouhJjSCd4ZNR/G8jBVDpng
+	N4T2TFlu/JSlcuROZ3s697oZKT2KQin4WwXUkiLGsBYjBgjD3k5PZVF25nKYKUaBekQ528k45lL
+	ofLEeFAcDm6bDUbDnNnhsatdirhA/T4x1tEAyP8gZTFLya5QQQs1ASVHOLZUq7SK+qRmccD+HgE
+	UP6wdVGzCIQj/WdGdO+Qv8/jVX8hJNCTcDRnDctcnUQTsqhSyg0Z31TyOT34z89ax255ERNTuiO
+	jz6ljZ908SgSIyIJKPIeXqJ67Ih7i5w==
+X-Received: by 2002:a05:6102:41ac:b0:7cc:1045:610 with SMTP id ada2fe7eead31-7cc10451036mr217332137.27.1792070724683;
+        Thu, 15 Oct 2026 06:25:24 -0700 (PDT)
+X-Received: by 2002:a05:6102:41ac:b0:7cc:1045:610 with SMTP id ada2fe7eead31-7cc10451036mr217320137.27.1792070724111;
+        Thu, 15 Oct 2026 06:25:24 -0700 (PDT)
+Received: from [192.168.0.31] ([212.5.153.243])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd66ab3dsm65873415e9.2.2026.10.15.06.25.21
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 06:24:59 -0700 (PDT)
-Message-ID: <ab5ebfa2-9687-48ba-8403-186e517126d2@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 21:24:52 +0800
+        Thu, 15 Oct 2026 06:25:23 -0700 (PDT)
+Message-ID: <f44df63d-155e-41ad-8652-36d770efcdb6@oss.qualcomm.com>
+Date: Thu, 15 Oct 2026 16:25:21 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,145 +90,116 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 13/35] drm/msm/dp: add support for MST channel slot
- allocation
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar
- <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Jessica Zhang <jesszhan0024@gmail.com>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org,
-        Abhinav Kumar <quic_abhinavk@quicinc.com>
-References: <20260929-msm-dp-mst-v7-0-4b81473185e7@oss.qualcomm.com>
- <20260929-msm-dp-mst-v7-13-4b81473185e7@oss.qualcomm.com>
- <agm7esy726no4u4cntecmllz5kxdtxaue7xcn7vdhkuh73lxau@r6mqybgiyl7f>
+Subject: Re: [PATCH 2/6] soc: qcom: qpace: Add Qualcomm Page Compression
+ Engine driver
+To: Krzysztof Kozlowski <krzk@kernel.org>, senozhatsky@chromium.org
+Cc: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        minchan@kernel.org, axboe@kernel.dk, rostedt@goodmis.org,
+        mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
+        linux-trace-kernel@vger.kernel.org, djakov@kernel.org
+References: <20260930145215.3380977-1-georgi.djakov@oss.qualcomm.com>
+ <20260930145215.3380977-3-georgi.djakov@oss.qualcomm.com>
+ <20261001-hopping-belligerent-spider-876e7b@quoll>
 Content-Language: en-US
-From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-In-Reply-To: <agm7esy726no4u4cntecmllz5kxdtxaue7xcn7vdhkuh73lxau@r6mqybgiyl7f>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
+In-Reply-To: <20261001-hopping-belligerent-spider-876e7b@quoll>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfXwT941tUXfPlO
- 1OLsL2WZ28sC+T22sBusJo9jp0cZDKK9m+/ZHtKNZxvuW7eHOp03Azqr/DUONPt8s6HMo/Eoh3q
- WaP9J0A/Y12huu2tRyXWBFc7L7Dfm00=
-X-Proofpoint-ORIG-GUID: uEajlhATApBe9Sx3NhR6XW-xiq-rieCA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX9RWg4FEjMwFK
- UdYAT2N0SKjnX7U/U8IrNqWugXHfiTunm/f/bjCv3LSF6B3VZDCHTUvtbKhKs4vOOnHq96zo1EQ
- mPUklp2jUKJb8V3XPXQaktDx2F4BXNsksZ6dwBCzsli88buOEH4zvLo/3/GLNz1szUKntgGmots
- bkhGYk64ZcyZ6gGOJ7eWLDHJ72wHOiqvHOAU5hSnd4VkEAWUrFla5OQtCTbh4If98acxAEjHtge
- bLxLWZigCqoD5GlUy+ZobAUuQUAQcuJTQ5yDA2EIskK9rNd5QhdDhAHNoTbqiLi01ae2xd99PhP
- Ol2njCtoi48liKdOjYc3QUtgmnkb+ool4QTcoycEgE29mSs6dcc8dlO/ebg1g2XCHnlOVfv4qDe
- NyIEhLDL6GqJtLZkXzGmfz38YKBPf0tbTNHwE+3Nl7W/a1Icc9jyqiljkUctnJFPo6ksQ2yP3c8
- z7sYnj+XctFEK4E5M3w==
-X-Authority-Analysis: v=2.4 cv=E8BYNqdl c=1 sm=1 tr=0 ts=6ad0d42e cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+X-Authority-Analysis: v=2.4 cv=QbvzLcbv c=1 sm=1 tr=0 ts=6ad0d445 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=douLNevBrtimd63D7eljNA==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=pWGhcB3pyskuJKc3Q2AA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: uEajlhATApBe9Sx3NhR6XW-xiq-rieCA
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=vTTj8iH6AlmXu0jsvGYA:9 a=QEXdDO2ut3YA:10
+ a=gYDTvv6II1OnSo0itH1n:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX7b8dbBczr7+U
+ um+q1LNhsP9EYYcT/oSAh2XzjcwsAzfwMX5w4eCc1vjbd0m9TfaUPAoo55Im4konoqa6Ez2Yaqz
+ FTHcPxWatCLCCZHWlS2wbtVU/T1aeZ4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX8J6x48tzu/D4
+ 3qHBDYVWtXjuPk1QYfdPmlrHYHTQAOgC87F7pN95kP5bdwGe6Fv0C+tu1xfZjWeFnAdpCCXsb+7
+ ZNNMmUGkFE4LWrBL+9mdIeW/5U6/BMgvukW7NF+c8ro/dfMJykntyqnkR3hi2cFb/BaV56X79la
+ 9y4IlOnGhVhbmx+bnAzgDxQfwGGBDrjG9tzE/1of5h5XgMIyIl4DQFh5OfG5yKawO6kr4eEFX/Q
+ 6dpyswhjiu3KMRbfnZMfJ1kHCMOE/LOtvbC4lptG3q8q2XuJBoW8Ejg1cCt01Vz+9fFQgmdUcpV
+ ZV9eKssb6hyWasr4r3xf2AFOesL7y+uABZvnAcLCq/EzmDT0ib60vHafMwlPIZET3IDQrq1vSa2
+ hleSwNRqWAuqNtRP2VY4Ld1ORjNaRr6hs7L8HEASVzBLOXvRl7ZOYnenIsSl7BhjoRLZw32g8ak
+ L1iMXkKGqBS+HWwBJ7A==
+X-Proofpoint-ORIG-GUID: XVMvuc52AqPKHtk3oqe6CKTAgLTYMZCq
+X-Proofpoint-GUID: XVMvuc52AqPKHtk3oqe6CKTAgLTYMZCq
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0
- bulkscore=0 adultscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150053
+ impostorscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 spamscore=0 bulkscore=0 phishscore=0 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610150053
 
-
-
-On 10/1/2026 6:52 PM, Dmitry Baryshkov wrote:
-> On Tue, Sep 29, 2026 at 12:25:37PM +0800, Yongxing Mou wrote:
->> From: Abhinav Kumar <quic_abhinavk@quicinc.com>
+On 10/1/2026 11:50 AM, Krzysztof Kozlowski wrote:
+> On Wed, Sep 30, 2026 at 07:52:11AM -0700, Georgi Djakov wrote:
+>> Add a platform driver for the Qualcomm Page Compression Engine (QPaCE), a
+>> hardware block that accelerates compression and decompression of memory
+>> pages.
 >>
->> DP MST streams share 64 MTP slots in a time-multiplexed manner. Add
->> support for calculating the rate governor, slot allocation, and slot
->> reservation in the DP controller.
+>> Provide the urgent command path for synchronous single-page compression and
+>> decompression. This exposes the low-latency operations needed by
+>> compressed-memory users such as zram, especially for page decompression on
+>> the read path.
 >>
->> Each MST stream can reserve its slots by calling
->> msm_dp_display_set_stream_info() from its bridge callbacks.
->>
->> Signed-off-by: Abhinav Kumar <quic_abhinavk@quicinc.com>
->> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+>> Signed-off-by: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
 >> ---
->>   drivers/gpu/drm/msm/dp/dp_ctrl.c    | 187 ++++++++++++++++++++++++++++++++++++
->>   drivers/gpu/drm/msm/dp/dp_ctrl.h    |   4 +
->>   drivers/gpu/drm/msm/dp/dp_display.c |  13 +++
->>   drivers/gpu/drm/msm/dp/dp_display.h |   2 +
->>   4 files changed, 206 insertions(+)
+>>  drivers/soc/qcom/Kconfig          |  14 +
+>>  drivers/soc/qcom/Makefile         |   1 +
+>>  drivers/soc/qcom/qpace.c          | 764 ++++++++++++++++++++++++++++++
+>>  drivers/soc/qcom/qpace_internal.h |  84 ++++
+>>  include/linux/soc/qcom/qpace.h    | 154 ++++++
+>>  5 files changed, 1017 insertions(+)
+>>  create mode 100644 drivers/soc/qcom/qpace.c
+>>  create mode 100644 drivers/soc/qcom/qpace_internal.h
+>>  create mode 100644 include/linux/soc/qcom/qpace.h
 >>
->> diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
->> index 929e0f94f8dd..02732bd4efa1 100644
->> --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
->> +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
->> @@ -83,6 +83,7 @@
->>   #define MR_LINK_PRBS7 0x100
->>   #define MR_LINK_CUSTOM80 0x200
->>   #define MR_LINK_TRAINING4  0x40
->> +#define DP_MAX_TIME_SLOTS 64
->>   
->>   enum {
->>   	DP_TRAINING_NONE,
->> @@ -119,6 +120,12 @@ struct msm_dp_vc_tu_mapping_table {
->>   	u8 tu_size_minus1;
->>   };
->>   
->> +struct msm_dp_mst_ch_slot_info {
->> +	u32 start_slot;
->> +	u32 tot_slots;
->> +	u32 pbn;
->> +};
+>> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+>> index 535c8619197b..6bcb86dcd726 100644
+>> --- a/drivers/soc/qcom/Kconfig
 > 
-> How other drivers handle slot programming? Is it something to be shared
-> between the drivers? If so, maybe it would be better to update MST
-> helpers. Or, asking differently, why do we store it this way? I don't
-start_slot, tot_slots, and pbn come from the MST atomic state. The MSM 
-DP hardware uses start_slot and tot_slots to program the per-stream 
-timeslot registers, while pbn is used to calculate the rate governor. 
-Therefore, mst_ch_info[] is a cached copy added to make these values 
-easily accessible to dp_ctrl.c.
+> Sorry, but no. Soc is not a dumping ground. This has clear function of
+> compression offload, so it should have some dedicated maintainers like
+> other offload engines.
 
-Source hardware programming differs across vendors. Intel does not 
-explicitly program per-stream absolute start-slot or slot-mask registers 
-like QCOM does. Nouveau submits each head's allocation through its 
-NVIF/VCPI interface, while AMD converts the complete allocation table 
-into SAT entries and programs them into the source hardware. Therefore, 
-DRM MST helpers can handle the common payload allocation and 
-slot-shifting logic, but source hardware programming remains 
-driver-specific.
+Thanks Krzysztof, and thanks Sergey for the input on the zram side. Before
+I respin, let me elaborate on a possible structure, so we can choose the
+direction we want to go.
 
-Without mst_ch_info[], we would need to construct a temporary complete 
-allocation table from the MST atomic state during stream enable/disable 
-and pass it through dp_display.c to dp_ctrl.c. Specifically, this would 
-require extending msm_dp_display_enable_helper(), 
-msm_dp_display_disable_helper(), and msm_dp_ctrl_on_stream(). 
-msm_dp_ctrl_mst_timeslot_setup() would then use this table to program 
-the timeslot registers for all streams, while the current stream's pbn 
-would be passed to the rate governor calculation.
+The QPaCE driver splits into one engine and (up to) two consumers, following
+the IAA/idxd driver model split where the engine exports an in-kernel API and
+the crypto side is a separate, thin layer:
 
-> see where msm_dp_display_set_stream_info() will be called from, but
-Sorry,  you are right. The call sites are introduced in a later patch. I 
-will move this helper to the patch where it is first used.> isn't it a 
-part of the calculated state? if so, all the slot allocation
-> should be stored in the state structures rather than storing them
-> directly in the private structure.
-> 
->> +
->>   struct msm_dp_ctrl_private {
->>   	struct msm_dp_ctrl msm_dp_ctrl;
->>   	struct drm_device *drm_dev;
->> @@ -153,6 +160,8 @@ struct msm_dp_ctrl_private {
->>   	bool link_clks_on;
->>   	bool stream_clks_on[DP_STREAM_MAX];
->>   	bool mst_active;
->> +
->> +	struct msm_dp_mst_ch_slot_info mst_ch_info[DP_STREAM_MAX];
->>   };
->>   
->>   static inline u32 msm_dp_read_ahb(const struct msm_dp_ctrl_private *ctrl, u32 offset)
-> 
+Engine: drivers/soc/qcom/qpace.c + include/linux/soc/qcom/qpace.h - decompress
+primitives. It stays under soc/qcom, interacts with LLCC slices etc.
 
+zram: drivers/block/zram/backend_qpace.c - A zcomp backend calling the
+engine's in-kernel API directly. The zram intentionally does not use the
+crypto API today (917a59e81c34).
+
+zswap (?): drivers/crypto/qcom/qpace_crypto.c - Registers qpace-lz4 as a
+crypto acomp algorithm for crypto consumers (zswap maybe?). It will share
+the engine's primitives, so this would be a thin wrapper.
+
+If zram switches to the acomp API in the future, zram can use QPaCE through
+the acomp algorithm and backend_qpace.c simply goes away - so this will be
+compatible with that direction without depending on it.
+
+Krzysztof, does engine-in-soc/qcom + the crypto acomp address your concern?
+Or would you still prefer the engine live somewhere other than soc/qcom?
+An alternative would be to put it in drivers/crypto/qcom/ as a crypto
+driver - register with acomp, but there will be no user, and zram would
+still use the exported in-kernel API.
+
+Sergey, is a native backend_qpace.c the right thing for zram now, with
+acomp left as the future path rather than something I add to zram core
+today?
+
+Thanks,
+Georgi
