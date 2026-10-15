@@ -1,87 +1,86 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E81651AEF4
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 10:57:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AAC04BEE58
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:00:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792061858; cv=none; b=dShoYdOvsyjoepqRyCS/Foq50x6Tz/1eNxGodDqT4hIYCmhl6UucpBa/EiwYbQV29u+Jg2yImuBASQ95VtFC6hyKo1X/WJvTmpcl5YdBRpuswaj3ONje7lMv3WTODyl3GR4iuvAlGcTu+qkd6q9iEMyyJF8odf9UY3G3bMazuYQ=
+	t=1792062029; cv=none; b=jgYfIkUtlhKUmfNFymX7bK9kmvQQb5vhry1WN99Di8RG9Yzv1HKZsIb8s45ArdPv+1XKMiHHVO7hLMwNbg1jIaJSH1KafrSbtm6X648hIPTxV24/42F5qDuS2ejl5nt1j7zNkxHE9HPHDJG4uUMilb6w+PUdmxTVewc54tHpCM0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792061858; c=relaxed/simple;
-	bh=AcPfRM3vZkDZSubbc522Lfk5YywwxyJuwTjFzMcnOSg=;
+	s=arc-20240116; t=1792062029; c=relaxed/simple;
+	bh=rBYJ+VBooPiZVjyoQritmIrBDC7txb3ZU8qUUwQjDyE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uMeVZ7Q3t+OZwCQG/64wOrcLcMsBh5EG/UvyGXgp+wkBr1J/+BDdavKJ9QZckypZWDX9uyOJcLucfwa0T/L5+QM2x01SEY8epvgIObTR/XtKnc/xt8oq9Et3KQcZNfE6S4Qs+2vHzSDCNJ1V4X2DcbauXoL5r5SuQ99fKpLJycA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gTUKceUM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=P66Y7DbR; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=oIVvWvRSFbJH1vrr42YkbidbLgi7LCyD1hTx/mjScAzEgbiHDldQcRk/UJtmpgH4sL3DR64RC2Z8XIlqd7hX8zarbcNm6UTzCKdzzw7Out+8aHNDWlrxUhPdCXMeLyAa7UA0QFVM2zhxiOP24uZUskwRwtljVJJE+rn9btaS4Y0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j9HO6y/y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W5oXgeAK; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gTUKceUM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="P66Y7DbR"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j9HO6y/y";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W5oXgeAK"
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jTBa2809292
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 10:57:31 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jT4H2809312
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:00:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	AnVt82VPabbk8HOMdt4DGD6AAgX9o61Mi1c5nLHpoog=; b=gTUKceUMhWcfc8fE
-	BlcOXVx/ZDYgahxFheSA5e6dVwFgLe9Otetf3dLDZK94B5z2u5d5e+A2f/a4cxWM
-	xKp23yDqg71w/+AwRJKpC/mDuoV2fiRfdWAtT/f+NKYZ5NQYI6u/MaIuiYckr9AX
-	Y3hb6eLK5cFqdmiCbRSwP7b/Ct2MEOQu7JcYkVtzPx/XuyvgPvSkLKWYe4nX14Rg
-	XKmwiEe+lSxcUdVW+UvIsS44IXmU51N/FC2q+bB1hRbhlHmE/unKQqdmNqr/R0ia
-	29O+aHfvNo1VTn2QnpC7ex7/Lsc5p83v7b8lb0M+Ik5ZfZ6fOyoNxqXUkXeVGOvR
-	UXVL9Q==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4han54t6qf-1
+	2PoBbUGnti8pllKSaZNU3jmgFnOh5+/gt7g3sYXDcJk=; b=j9HO6y/ydwVkyQOZ
+	K8H62hOQxCyXL01kFo4Cp+Ga69p5a/kYJYfitjkaFWM6nrwxHgR77RQ2mqAZ4ur8
+	9MHoSRTgy/IviyWUUIAbw58xUl4vBiKIoaB7pxxzULpV4w3K2Q6NnWPXOXjkmMEv
+	ZZdfFtaWmC3ptr5DJ74mB43KWQHAkf6leg3SA9moBzm97wbWFQ1+NxJmjHWnEdNB
+	dfy1Vcn4qiuJNApNuURj7LrcAveB3fq3DpFL01kBeAr5QQS0AL4K/G7SwtISwoHh
+	zvdaTiOLykLu1FWwkmIpJBLkz8w9r7Jt+ttmaYToZrThrYeMqlFg2H6C+SZkSgFa
+	arFHzQ==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4han54t70r-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 10:57:30 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-89ed2e014fbso153603b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 03:57:30 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:00:24 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cd0cf3b1c70so1704194a12.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 04:00:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792061850; x=1792666650; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792062024; x=1792666824; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=AnVt82VPabbk8HOMdt4DGD6AAgX9o61Mi1c5nLHpoog=;
-        b=P66Y7DbRmGnbMxBYEaJFcQsTwZbFy3zSmUe80Oo4ARV48dTlmC5MvNuBzoEbn2hEJI
-         76L9tub4IoPidmi3TKVVjyxtn09Kba5yoveZ1x0s5mctkD2j/5pErNXTlLnMbn9TppCl
-         etnYRHMMwQrYk6QE25p1rEEglOqS7fu2MjXPeEHMAwWtjIVORJGFDI7jqFrmP8LluYdS
-         JhkhmqU83sia/lOUgM8gdc6awXs+ZQL3fH/ys9KKwLSQgslfmWZKWNLZ4mgpYje/j+Zj
-         /IV1BhKIHDtJMhlDt7aVFbH9t9Q5Ao5QUiB9aN3gd4Siys81AuN1vzhKlApHxVBPd/rD
-         Cuvg==
+        bh=2PoBbUGnti8pllKSaZNU3jmgFnOh5+/gt7g3sYXDcJk=;
+        b=W5oXgeAKPuWboxjvGh+NLz9BLz0M6NCqIgJnNRqTh6UvWTW22CN7j1FpNUHGe5j1ti
+         Ylz0hU7S77E6tAW5Vv8EwQHeO6foQ3YEx39VdcSrIepR7i8VLEB9KVs6ln98uFzDEqBE
+         LFAPh6iVY0p8ex6TvQZQi2UN1rbfrCCs8OlObFPqhk89uiOts+ghuaGX5i05TJxl7nrm
+         7AosqAbNDwcZX7GVGIgWRP78cIFcgItN8G8+JjMRJh5bb64JDX9mUE3EOzKnE4uhEbkC
+         OrBwHIMDOgPDk14zoCut8E+mGZEjdnOFX6Of4rq6UDIIfs1qt2+2eRfxwJCf2wXZ45JQ
+         P1PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792061850; x=1792666650;
+        d=1e100.net; s=20260707; t=1792062024; x=1792666824;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AnVt82VPabbk8HOMdt4DGD6AAgX9o61Mi1c5nLHpoog=;
-        b=kF9ZYD8LRo23p8A3RwGPPfpBv9nnJ0ua2qfFJ+4cY8kOLa9CdmO7z9GZ3as2C3BWtR
-         wrDNi69Xv+2Ocmyh7qjty/Nza4im7YS6BVtCFC7uYzx4XEo/QVxW6FTPXuc5jDjnuLVk
-         9YPZoxvWyeVnKqWR/S0RhufMsyZujbLVjxAXD9fvDjKECd69ZnJqDNKLc4hsoOm2e7gQ
-         /3SxWTeuVuUeDDzz7Yg1KqYNh1nommkFTSMZ+qsPHBrlLGFRDtKsJDcmt7C1cWXMtpVw
-         o82JsPzzFECe1aLQhe34IdRVHITPIf87vp4AUnx6wyYf+GN2Vh2LKw4eZRczZdFKEpay
-         XV3g==
-X-Forwarded-Encrypted: i=1; AKwUvBxPS9HZE3Kw2qBRGviNz8am1nbrOAbTD4CYDnkHPrXbLVjIIGEw/LOMSwgyTdOHQXyoD0iEs6Yt6PGPxusB@vger.kernel.org
-X-Gm-Message-State: AFq9FYIpsxqy3V8qyk54XyP64xHj/n3WDZyCTBHqY7y2hXmDthMzylc3
-	tH4ZVKKHhlBaoyXZzn+4qBQkjk4f5gD0XfuLCnYp32PCSthzR+4lbk4d7QvxemfwYFhh3SLBVi+
-	raDMARsBRU0UZREGOn9ETDJbN5FJRh8MXOwO2mJBQutTZ7jwBnCeVDnEsifAM7P811evT
-X-Gm-Gg: AYBFou35dc39Ou//wdMnX0n7dWdYkRN84Cj8uvkyS7U+pdCBmekMa0Jcitonur1znAd
-	SV9SKdZ72j/rQGJcLqZX5C4AI7h3ade2KPN6gok4KLxdrCmruXOknUQGJIfinj54wch5rjrJmhD
-	g+O7J4TytRyaCjd7RJQ6VD+V1vLQZPMMxxnyn9UIMEgGhDc7b6bXWVqbk2wGHC7UcaEcDGyg9nk
-	1/LbwgjqJGD3R1nD48tlJvEDvpFF1MI1VRnxjy2x0yzYlEMU+TM5jndalMhwks+5nfpchZchFvg
-	gFR4ed0toMp9hqc8gd8XDpoPFaDhUVDUwgCNn3U73DUfNOwo91KFxqYc2dv8na4sXTjdWDbX8QD
-	ta+ArBvkZn7tApzjF4R105NF17P4=
-X-Received: by 2002:a05:6a21:4cc2:b0:3de:138f:c86e with SMTP id adf61e73a8af0-3e1d03aa6camr5415499637.3.1792061849994;
-        Thu, 15 Oct 2026 03:57:29 -0700 (PDT)
-X-Received: by 2002:a05:6a21:4cc2:b0:3de:138f:c86e with SMTP id adf61e73a8af0-3e1d03aa6camr5415480637.3.1792061849512;
-        Thu, 15 Oct 2026 03:57:29 -0700 (PDT)
-Received: from [10.217.216.28] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd635b31a50sm1112723a12.2.2026.10.15.03.57.21
+        bh=2PoBbUGnti8pllKSaZNU3jmgFnOh5+/gt7g3sYXDcJk=;
+        b=Sw3ce6MBvfi7F5JnQnkqNctysSL4M4JYJWR0KC+vlDtw68NnpXfPFQAnY4q3RsGLVa
+         zHIUPgYKhieOqrUGUhoakfMh5kxwqSrXh/FsqnfBZ1fpWmSPaytnYGZ6BMsFXlGSKsn1
+         Gx66nooGeZrf/A7CaQvgAY4Zll/2wacpLRip4bOWiMVNLztyTvulcYH2CRB7+Nm0KRDX
+         pWq8mn/svoZWZPYATUVj6afvOARa+HYQMBTWEA6e2lhmTxoGTvUyFuJ5SNHVZ+PdZFA7
+         aWRhyMv1a/9Qf59TqK1dBKJGaQQ/eGjQ6u9Eo+AHr/YzFTQ0zYThRZfm5te4CR71p1As
+         E3+w==
+X-Gm-Message-State: AFq9FYJlUWM4Ppfd30y7MI/AQHVq0xdIv4+PrAZInFVFRLn8gZzj4Xn+
+	0fiLPE7hb4QLCHHf7eWLfhnvtN2JEmhGdPPTNkOc7II58Iz8HMhbye+uTz8b2G7i4XnMqP4yr0L
+	vpLhJSGZAZfJXoZQ9jAWC7tLOI4K9q/O5qMB8a/gLQq0rcDyzypj20/xvmIzdsu9Wz5Ls
+X-Gm-Gg: AYBFou1tGLciu14fwayAWb4CcXqw81qtCXA/+xVTwk7bHDPEUvre03Xq677QFsS4FFL
+	IKjXt/ky2fVIE1CZuQ8fP6aLyg37hS71dQChU6O4ZLo+N6rUtVwvBUfSbWX4GAt7kaefExHw/r9
+	6GPL70odZXMsQPQdsDLnVscq+UfQTPMVC5/67ty1BfKLOlkDWFdnnYWXoO7EgeOmx0thAyvtryq
+	RpgNcpJ0Y6jJsq1BiJlL5HYAiaP2qsd04c7H8J4lZNKDIgKycgWTdH4e2Fqab6/NHxqqiBA9+so
+	avlAB1Zyuv2YlMeBgRaADcjfEBJd3b1FGr2ZEaUIGBNIEGGWoN7QRLmM1cAytHr4SqN8lxI1yAY
+	MuZ9XY/4geLLPaRgZH9EKmAVDVe0=
+X-Received: by 2002:a17:90b:1e41:b0:3ab:de4:7fa5 with SMTP id 98e67ed59e1d1-3ab3a9726admr16268702a91.56.1792062023478;
+        Thu, 15 Oct 2026 04:00:23 -0700 (PDT)
+X-Received: by 2002:a17:90b:1e41:b0:3ab:de4:7fa5 with SMTP id 98e67ed59e1d1-3ab3a9726admr16268644a91.56.1792062022861;
+        Thu, 15 Oct 2026 04:00:22 -0700 (PDT)
+Received: from [10.204.66.72] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac92a31aa8sm2134817a91.0.2026.10.15.04.00.16
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 03:57:29 -0700 (PDT)
-Message-ID: <187f4cc2-05b3-4c8f-aad8-0d803f2f5b21@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 16:27:19 +0530
+        Thu, 15 Oct 2026 04:00:22 -0700 (PDT)
+Message-ID: <fe833dd6-0124-428f-95a4-bfc48c3a0dc7@oss.qualcomm.com>
+Date: Thu, 15 Oct 2026 16:30:15 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,52 +88,46 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 00/16] Centralize the ownership of power rail votes
- for Qualcomm clocks
-To: Konrad Dybcio <konradybcio@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Danilo Krummrich <dakr@kernel.org>, Johan Hovold <johan@kernel.org>,
-        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+Subject: Re: [PATCH v2 7/7] mfd: qcom-pm8008: Tolerate missing interrupt
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+        Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley
  <conor+dt@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Mike Tipton <mike.tipton@oss.qualcomm.com>
-Cc: linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, driver-core@lists.linux.dev,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-References: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        Oleg Keri <okerixx@gmail.com>
+References: <20261014-pm8010_i2c_support-v2-0-b395d2b3f668@oss.qualcomm.com>
+ <20261014-pm8010_i2c_support-v2-7-b395d2b3f668@oss.qualcomm.com>
 Content-Language: en-US
-From: Taniya Das <taniya.das@oss.qualcomm.com>
-In-Reply-To: <20261014-topic-qc_clk_dvfs-v1-0-3041b788e9f7@oss.qualcomm.com>
+From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+In-Reply-To: <20261014-pm8010_i2c_support-v2-7-b395d2b3f668@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=RYQFmFtv c=1 sm=1 tr=0 ts=6ad0b19b cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Authority-Analysis: v=2.4 cv=RYQFmFtv c=1 sm=1 tr=0 ts=6ad0b248 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=LpQP-O61AAAA:8 a=EUspDBNiAAAA:8 a=iEdp9f2tR9rxy83nKJ4A:9
- a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22 a=pioyyrs4ZptJ924tMmac:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA0MyBTYWx0ZWRfX3vljfyzchS4F
- HnqZshv05odgVTaePhzIk14q1CnKhx1wBlg8zsFl0YyS0Qi7930KZqSEh6TDp/GHrAH45jTUhdb
- EPIM8nHs8R42T5PU7sLEy7HQ96J89aVqsPtyc4CCKIWX5bU4qKEC4ME5IMfVwdTm4+LsqCgQd6u
- 6AhxGpbrCdroB/53aybIAhy6jDhk7iflW5AnfZFrUxX5vjItzwZ0v3cyt1f3mEmwsuGUKyePh9A
- xfU7JJtEOGMBdIv/o5nRwbX0fasbl1dftK1CBOrLcDRcKVgtUFf+Ebd8RDjG52AavmZ1Gl9LARk
- qWPfZ5NSrIxxBOsENyTOkgJhvZOxtaVcVh5NydWqc4+d+asTyF+O/4rYW8267J059PvsW4UuZqO
- zymyA/ouMKt98Mi53Tux846f70/PeWNpXO0MqyxnwlmvxcBnjK1elwr+wHo4hL5g8I83MA8RYrb
- ve0Q3jWeqnFOAb2HY9Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA0MyBTYWx0ZWRfX6RbLv4jxAGg/
- HQasdSdgcUrOUxKAynstSeiy8KqYjJvYeuwoATjvCU0tS5/kI2u7ccgCxrc5K9+XxlPnTJseCgK
- 64iPYJMc1XFY4DEBm76M8OZ1iIRBhB4=
-X-Proofpoint-GUID: TArLfd006s7YyCyn5UBhgOaCuX3YIAzR
-X-Proofpoint-ORIG-GUID: TArLfd006s7YyCyn5UBhgOaCuX3YIAzR
+ a=EUspDBNiAAAA:8 a=hpE6E10lv6cxlDq8Q4MA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA0MyBTYWx0ZWRfX9kL0wtsoFYnX
+ QVkc9Z2U7UrZswhrLGij3IGvxHkJgBCqajrEi7i429qOGFDg5HTRmzAX5PTLXgV9fuLup9x9Q8N
+ LjFINwkiidBD6bjNJp1RVRNmPkNUupI7GM9lqE57/I8fR7QxXnEZOFmcVGrqZYFwhVNCTazTHXd
+ 9Pup0/cP0hMu3Udz0tKli2lZUOsr0U01ZR6LjvaaOiwnpyOgkMHBTTRToY100B2XUDBvsiHH9EC
+ YB7BP4IpSNfaGYuZjBQ+f4yCU4XRj1HwICVfwIMm0uFs7SP4oufqB9iSfYB2PkExQtgNnlyFIlr
+ FQM550XgrBv50m3snopkAZVWxMjvcfVGlGbSfuC4Q4mN3BNFL1uf79vQXRol+tpEgh/X+BpTpH4
+ LSetnCSjdk5adK8RJcS1TY93HDyr0YvGXmPY5GwpdpqJU3oYXNc38j6L454qNEPwWHZoWvFkODR
+ 8MC/QhzUxcIHFBT9oyw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA0MyBTYWx0ZWRfX5jDda3BwxuT/
+ MMTxCke/0Jh4820X9PSLOZdeonQi73z8E3kb0nTRC34x/2LoGW5+U/KHf3Uf6nkq75o2lDagFMo
+ NZ3vvCwy6ZgEv2vG618zbT07Bh+4Qcs=
+X-Proofpoint-GUID: Da-m3Xo6YT4rpNYJ3lpuQZ9NC0gl0frO
+X-Proofpoint-ORIG-GUID: Da-m3Xo6YT4rpNYJ3lpuQZ9NC0gl0frO
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
@@ -146,222 +139,18 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 
 
 
-On 10/14/2026 5:49 PM, Konrad Dybcio wrote:
-> On Qualcomm SoCs, both the PLLs and other types of clocks alike require
-> specific voltage rail levels to operate in-spec, but through the
-> separation and decentralization of clock and voltage votes, these
-> requirements are often not met and are never explicitly stated.
-> This results in clocks being undervolted, or at the very least a state
-> we're unable to reason about.
-> 
-> The devices consuming these clocks very rarely have their own
-> requirements in that regard. (1)
-> 
-> This series moves the frequency-power_domain-perf_state mappings inside
-> the clock drivers, ensuring a single, trusted source of truth is
-> established and that the silicon is no longer driven at out-of-spec
-> conditions.
-> 
-> To illustrate the nuances involved, here's a couple examples of hidden
-> dependencies, as found on SM8650:
-> * video_cc_mvs0_clk requires LOW_SVS to run at 900 MHz, but the
->   PLL it sources the signal from requires SVS (higher corner) to
->   produce that frequency. Similarly, to produce 1140 MHz, the clock
->   requires SVS, but the PLL then requires SVS_L1.
->   Analogous story for mvs1_clk.
-> * gpu_cc_gmu_clk requires MX to be at SVS to output 625 MHz, the PLL
->   requires SVS_L1 to produce that frequency.
-> * A number of camera clocks follow the same pattern.
-> * Additionally, some clocks like cam_cc_cci_{0,1,2}_clk require
->   MMCX to run at LOW_SVS, but the PLL has the additional requirement
->   of keeping MXC (a wholly different rail) at SVS_L1.
-> 
-> There's a broad agreement that a consumer should only have to care
-> about the clock it consumes, and that configuring its parents is the
-> responsibility of the CCF. Requiring the consumers to care about the
-> above cases (as is the expectation today) is a clear violation of
-> that contract.
-> 
-> A clock controller may have on the order of hundreds of clocks, each
-> one with its own frequency-power map, and potentially all of them
-> could be similarly affected.
-> 
-> Recently, some drivers (Iris, CAMSS) have attempted to circumvent these
-> problems by holding a direct reference to the power rails and managing
-> the votes manually, through placing direct votes on each rail via an
-> OPP table. That however has a number of drawbacks:
-> * Because more than just one clock needs to be scaled at runtime, the
->   OPP table either has to contain NUM_CLOCKS * NUM_RATES to handle
->   that (which blows up pretty quickly), assume the worst case (and
->   waste power), or ignore that problem (and undervolt the clock
->   controller), instead of just being able to call set_rate() on each
->   clock as needed
-> * The data ends up being dispersed across various consumers, even
->   though it logically belongs to the clock controller, making it
->   absolutely unauditable
-> * It's horrendously error-prone because of the number of clocks
->   involved, the depth of the clock tree and the fact that at the end
->   of the day, one still has to consult the clock controller
->   documentation
-> 
-> The approach proposed here also happens to more naturally fit into the
-> process of how an SoC is brought up - clock controllers are always
-> the very first pieces that need to be complete before other IP blocks
-> can be brought up. And because of (1), enclosing the frequency-corner
-> data within the clock drivers takes a weight off of everyone else's
-> shoulders.
-> 
-> On a related topic, the GDSCs are modeled as children of *all* power
-> domains consumed by a clock controller at once. GDSCs are on/off switches
-> with some fancy logic attached to them and may need some (or none) rails
-> enabled to power on or off while meeting the hardware timing
-> requirements. Voting on them was never quite right in the first place
-> and is once again only a side-effect of the clocks' power requirements
-> not being handled centrally.
-> 
-> This series removes the vote propagation and the overly broad parent-
-> child links, resulting in dropping unnecessary/incorrect votes that are
-> now encapsulated by the clk-dvfs infrastructure. Big emphasis on (1)
-> once again.
-> 
-> The implementation is as follows:
-> 
-> Each clock describes the rail levels it needs at each frequency. The
-> new clk-dvfs helper combines these requirements and submits the
-> resulting votes through GenPD and RPMHPD. Votes remain held while a
-> clock is prepared, and rate or parent changes reserve the new
-> requirements before any clocks are reprogrammed. This also requires CCF
-> to report programming failures and OPP to retry failed transitions
-> instead of relying on stale cached state.
-> 
->                 Consumer: select rate, prepare clock
->                                    |
->                                    v
->         +------------------------ CCF ----------------------+
->         | Walk the clock tree and reserve resources          |
->         | before programming rates or parents                |
->         +--------------------------------------------------+
->                                    |
->                                    v
->  +------------------------------------------------------------------+
->  |                                                                    |
->  |    GPLL9 ------> SDCC2 RCG -------> SDCC2 apps clock               |
->  |      |               |                                             |
->  |      |               |                         Other GCC clocks    |
->  |      v               v                              |              |
->  |  +------------+  +------------+                     v              |
->  |  | PLL's own  |  | RCG's own  |          Per-clock requirements    |
->  |  | rate table |  | rate table |                         |          |
->  |  +-----+------+  +-----+------+                         |          |
->  |        |               |                                |          |
->  |        | CX            | CX + MX                        |          |
->  |        v               v                                v          |
->  |    +--------------------------------------------------------+      |
->  |    |                  Clock-owned DVFS                        |    |
->  |    |                                                          |    |
->  |    | Prepared votes + temporary transition votes              |    |
->  |    |                          |                               |    |
->  |    |               Maximum requirement per rail               |    |
->  |    +-----------+--------------+--------------+--------------+      |
->  |                |              |              |                     |
->  |            CX voter      CX_AO voter     MX voter                  |
->  +----------------+-------------+-------------+---------------------+
->                    |              |              |
->                    v              v              v
->        +----------------------- GenPD ----------------------+
->        |      Aggregate GCC votes with other consumers       |
->        +---------------------------------------------------+
->                                   |
->                                   v
->                             +-----------+
->                             |   RPMHPD  |
->                             +-----------+
-> 
-> Straightening out all of the above lets us tackle another problem
-> with the upstream description of the power grid - the dependency
-> between various rails. Most notably:
-> * CX does NOT need to follow the performance state of MMCX
-> * MX/MXA/MXC and CX are co-dependent only on some platforms (in coarse
->   terms, SM8350 and before)
-> 
-> However, the main part of series needs to land first to ensure that
-> dropping those relationships doesn't remove some wrongful votes the
-> system relied on to stay functional. Resolving that will save power and
-> finally ensure total stability as far as the providers are concerned.
-> 
-> SM8650 is used as an example in this series, but the conversion will
-> have to be done for all Qualcomm platforms. That will follow soon
-> after the patches are merged. DFS clocks are left out of this RFC to
-> reduce noise (the remaining diff is not particularly large but also
-> requires boilerplate changes to bus drivers).
-> 
-> dt-bindings changes are not included since it's an RFC.
-> 
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+On 14-10-2026 16:02, Jishnu Prakash wrote:
+> Co-developed-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+
+Tested-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com> # Glymur CRD
+
 > ---
-> Konrad Dybcio (16):
->       clk: Propagate rate programming failures
->       clk: Acquire resources for clock transitions
->       OPP: Retry failed default single-clock transitions
->       pmdomain: core: Support named indexed virtual attachments
->       pmdomain: core: Support subdomains without pstate propagation
->       pmdomain: core: Support indexed power-domain attachment lists
->       clk: qcom: Add clock-owned GenPD DVFS aggregation
->       clk: qcom: dvfs: Add debugfs
->       clk: qcom: clk-alpha-pll: Add DVFS (un)prepare
->       clk: qcom: clk-alpha-pll: Vote for the PLL calibration frequency
->       clk: qcom: gdsc: Make GDSC parenting optional
->       clk: qcom: gdsc: Link required power domains
->       [DNM] arm64: dts: qcom: sm8650: Describe clock controller power rails
->       [DNM] clk: qcom: Enable clk-dvfs on SM8650
->       [DNM] arm64: dts: qcom: sm8650: Drop required-opps
->       [DNM] pmdomain: qcom: rpmhpd: Stop forwarding MMCX pstate to CX
+>  drivers/mfd/qcom-pm8008.c | 82 ++++++++++++++++++++++++++++++++++-------------
+>  1 file changed, 60 insertions(+), 22 deletions(-)
 > 
->  arch/arm64/boot/dts/qcom/sm8650.dtsi        |  62 +--
->  drivers/base/power/common.c                 |  24 +-
->  drivers/clk/Makefile                        |   1 +
->  drivers/clk/clk.c                           | 793 +++++++++++++++++++++++-----
->  drivers/clk/clk_resource_test.c             | 376 +++++++++++++
->  drivers/clk/clk_test.c                      | 194 ++++++-
->  drivers/clk/qcom/Makefile                   |   1 +
->  drivers/clk/qcom/camcc-sm8650.c             | 282 ++++++++++
->  drivers/clk/qcom/clk-alpha-pll.c            | 317 ++++++++++-
->  drivers/clk/qcom/clk-dvfs.c                 | 635 ++++++++++++++++++++++
->  drivers/clk/qcom/clk-dvfs.h                 |  41 ++
->  drivers/clk/qcom/clk-rcg2.c                 |  93 +++-
->  drivers/clk/qcom/clk-regmap.h               |   6 +
->  drivers/clk/qcom/common.c                   |  28 +-
->  drivers/clk/qcom/common.h                   |   3 +
->  drivers/clk/qcom/dispcc-sm8550.c            | 328 ++++++++++--
->  drivers/clk/qcom/gcc-sm8650.c               | 261 +++++++++
->  drivers/clk/qcom/gdsc.c                     | 154 +++++-
->  drivers/clk/qcom/gdsc.h                     |   7 +
->  drivers/clk/qcom/gpucc-sm8650.c             | 101 +++-
->  drivers/clk/qcom/videocc-sm8550.c           | 135 ++++-
->  drivers/opp/core.c                          |  72 ++-
->  drivers/opp/opp.h                           |   2 +
->  drivers/pmdomain/core.c                     |  60 ++-
->  drivers/pmdomain/qcom/rpmhpd.c              |  14 +-
->  include/dt-bindings/clock/qcom,sm8650-gcc.h |   2 +
->  include/linux/clk-provider.h                |  39 ++
->  include/linux/pm_domain.h                   |  33 +-
->  28 files changed, 3734 insertions(+), 330 deletions(-)
-> ---
-> base-commit: 4eb2586bd40db27d77cc5b724ca9386ed0c71d53
-> change-id: 20261001-topic-qc_clk_dvfs-ef907f059611
-> 
-> Best regards,
-> --  
-> Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-
-
-This seems to be similar proposal which was there earlier
-
-https://lore.kernel.org/all/1532196902-28570-5-git-send-email-tdas@codeaurora.org/
-
 
 -- 
-Thanks,
-Taniya Das
+Regards,
+Nihal Kumar Gupta
 
