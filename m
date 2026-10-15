@@ -1,84 +1,87 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C412E4AA006
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:29:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E74904519AF;
+	Thu, 15 Oct 2026 08:33:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792052946; cv=none; b=CLMdFFQFFJz7iMjrS/0ir314m5dh4LxLwaQbtJGGS5DKq1cLrNjdaLCGhzIYOd8WveMfrlIY7gT5WowuO8zoCLSQKg1apqJg2OxnHTp5gt0Jv7Rh/Wrtbq5n6bHVqnPZg2x4TaFnb7Ic4oF4tq9UyDZM0IN+auA70gmGMHhDjMo=
+	t=1792053210; cv=none; b=pL+j5uR3dY5JKfuq4NlrwNBRzBUOQrFTL6YNplu5a2M3ebdfJPRVTIWwxcXq0CLsbDM/XZDn3eLf7cYIoVzBFIz7/qHmWY4Kq325QUBEtj4LNqbqx/JZ9RTB0mUpjjibNV+z8M6KwiTWTZudfaEuySIjiao8+nX3QlVSNE1HPSY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792052946; c=relaxed/simple;
-	bh=UclMXT5dgaXzi8d+Et2aQmWDjkQGmYQfEWHeAsuzHAI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=F2+tq3j6V6eqJzt8LiK/WNICibKM6bdxKLNG/kU5W+YIwsPJdVAhUezQn5DTwZeE9G5pjdpKMgT43CGHxuyNXGaAuiiWVThg51CVGfbVKYaFOBVZSJo1A57R+1e5gFsjMUzDySzK7g0nk4Ko+xLrtKxJ7UG3aIxNayogekwplWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TY/rY+h7; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792053210; c=relaxed/simple;
+	bh=j3srAWB0smoB0L9RdE+akBLmgDLIIcacMid+eoTKQ7w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LkpNiyffB2ccmKcwiNp0bSXIXkb593bCfd0UhJScTXgYXIHhmcKGVw6vuNe7kv0SpQuzzSv9XCUfgj+hNSV21TCeEYOc4DHAM3e7pi9wcahaTlrBnqDFuwW+IpBNqbn7hkGIdvT428FI6tOy8z4P39su7XfGT32uiWsgmQa7oWI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JwtEX01X; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TY/rY+h7"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 658EF1F000C4
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:29:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JwtEX01X"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1ADB1F000C4;
+	Thu, 15 Oct 2026 08:33:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792052945;
-	bh=UclMXT5dgaXzi8d+Et2aQmWDjkQGmYQfEWHeAsuzHAI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=TY/rY+h7wanHSplyQ+Tnf4ZmmiL9+9t1MktcHS2ZZd7G7RWv76+z/hfd0CSY72vwO
-	 Au/kiOm73Q08zNZzMK6Lg1fm7pvzSVyi/8r5pVoDrQNYOjjI+jubM7ju0PuCbbiPiW
-	 vR++g1RQOAU7m94BIZ0c0xN4ykHod5RYdq1a9/D0OtgP9s5NMEkPI6jLMRI7Rr1gjk
-	 JmHdx6tJ5WynTscSrTkZtIeZSwqBvBzyEB4SGd+A6ONpLD93/keqrd7seepJG6/6d7
-	 gk8/v0mFNFsyfkPB18h2upZlBC/l2cDOLreae37JwZ2bSEAEj+jBf6YO8+Q2VRol8q
-	 hisffRmRt3T0Q==
-Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-3a9787a14ecso12688321fa.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 01:29:05 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwlFnzEHCvAC9zfy+zCpuhgxoT1W2YpR1BT7iAUgcpXoCP2nVLKaNdGAMigmnhS9EUgkqW3NiuUIcMiVZwD@vger.kernel.org
-X-Gm-Message-State: AFq9FYIfm0bC5IkoXUZTR38qPtPECa/13WoAW1FfYDf+QQp/vpHrd2Ll
-	A8TGdvOG1HiLmE9CrnMaP/BxFcy42IpnIHi5WkHr5YsW+2tgZ+coNEXNyopxRQGBclyCLryBDTC
-	JhcltO6RrLhGiVP/1/N0OhZUOZL74gpg=
-X-Received: by 2002:a05:651c:502:b0:3a6:6efb:a0e3 with SMTP id
- 38308e7fff4ca-3a9c52544femr47372571fa.5.1792052943186; Thu, 15 Oct 2026
- 01:29:03 -0700 (PDT)
+	s=k20260515; t=1792053209;
+	bh=3JJOFG+/Lcmrcjwm8gj4vFxpyUJmGEw18JAOdt4/SQI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=JwtEX01Xl9e48pSRCYcm2j/QK8dOUtKk9gIbbrt0e+cI0HtWc5woePTnUwlnIFD+r
+	 LCuP6mS0PzIqCUBYR/j3bI9eNvilXQxXsB+2j+XhvlVyoCFp73VIf/FqhA81fNIWOp
+	 kfktbtd9JOrv5UKPQf8+ze7jKl0dE4h52zbvOmvWGaPMfIOXqQk5sAuD7+2lbZro0j
+	 r+Y6V0lVwsSpiGBjMb+qHhy6A6lOlzPhvfFP+O/hkYk15csYbbi51FfT6zyBtp/tMC
+	 a0TLdQHy1XJO7x/QBudtznXPhgxW+6htLFUJxQtL9gyJLeOpUGZ0Iczd5wGVKcElLF
+	 LKYyUeJ1v6cVQ==
+Date: Thu, 15 Oct 2026 10:33:25 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
+Cc: NXP S32 Linux Team <s32@nxp.com>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Avri Altman <avri.altman@sandisk.com>, 
+	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
+	"Martin K. Petersen" <mkp@kernel.org>, Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>, 
+	Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Pedro Sousa <pedrom.sousa@synopsys.com>, Hannes Reinicke <hare@suse.de>, 
+	Joao Pinto <Joao.Pinto@synopsys.com>, linux-scsi@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, 
+	echanude@redhat.com
+Subject: Re: [PATCH v8 07/12] dt-bindings: ufs: Add NXP S32N79 UFS host
+ controller
+Message-ID: <20261015-whimsical-amorphous-squid-6166c5@quoll>
+References: <20261013103003.373156-1-larisa.grigore@oss.nxp.com>
+ <20261013103003.373156-8-larisa.grigore@oss.nxp.com>
+ <20261014-valiant-goose-of-revolution-efec17@quoll>
+ <fa3a025b-0d82-42df-a4cc-e144d6a97b20@oss.nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260602-pdm_clk_gp_mnd_v1-v1-0-1522662b6c53@oss.qualcomm.com>
- <20260602-pdm_clk_gp_mnd_v1-v1-3-1522662b6c53@oss.qualcomm.com>
- <CAD++jLnqCipTxkOhiwQhKFymOxu1HOTbHzLbNrGTOkCO33y8Vg@mail.gmail.com> <0cb8005e-964c-43e2-8e9d-4e955cf2ff90@oss.qualcomm.com>
-In-Reply-To: <0cb8005e-964c-43e2-8e9d-4e955cf2ff90@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 15 Oct 2026 10:28:50 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmA65GL4xxFNSHr-j=Xo2o3dNmEcKjpNEkECXb5bOX8TA@mail.gmail.com>
-X-Gm-Features: AclHuK8sF_Rp3sPUvkXokg3OYjbIVxL6iVSLlt_kf3aFbP7rWfJnEWwj0w4dISM
-Message-ID: <CAD++jLmA65GL4xxFNSHr-j=Xo2o3dNmEcKjpNEkECXb5bOX8TA@mail.gmail.com>
-Subject: Re: [PATCH 3/5] pinctrl: qcom: Add gp_mn mux function for QCS8300,
- SA8775P and SC7280
-To: Taniya Das <taniya.das@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Michael Turquette <mturquette@baylibre.com>, 
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Richard Cochran <richardcochran@gmail.com>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Ajit Pandey <ajit.pandey@oss.qualcomm.com>, Imran Shaik <imran.shaik@oss.qualcomm.com>, 
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	netdev@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <fa3a025b-0d82-42df-a4cc-e144d6a97b20@oss.nxp.com>
 
-On Thu, Oct 15, 2026 at 9:14=E2=80=AFAM Taniya Das <taniya.das@oss.qualcomm=
-.com> wrote:
+On Wed, Oct 14, 2026 at 04:58:30PM +0300, Larisa Ileana Grigore wrote:
+> On 10/14/2026 2:10 PM, Krzysztof Kozlowski wrote:
+> > On Tue, Oct 13, 2026 at 12:29:58PM +0200, Larisa Grigore wrote:
+> > > +  clocks:
+> > > +    maxItems: 1
+> > > +
+> > > +  clock-names:
+> > > +    items:
+> > > +      - const: core
+> > 
+> > I don't get why you added the clock-names.
+> > 
+> Hello Krzysztof,
+> 
+> The properties, `clock-names` and `operating-points-v2`, are needed to let
+> the generic UFS platform code discover and manage the controller clock.
+> 
+> `ufshcd_parse_operating_points()` uses `clock-names` to create the
 
-> > This looks all right and no-one is saying anything about it, should
-> > I just apply this one patch to the pin control tree? It doesn't seem
-> > to have any dependencies.
-> >
-> Linus Walleij, sorry for the late response. I will split the patches as
-> per comments from Konrad.
+You have only one clock, so my point is that UFS code is just poor, but
+if that's the reason to mention its name, then just say that in commit
+msg... or probably the ufs-common should be fixed.
 
-In the meantime Bartosz has taken responsibility of
-Qualcomm pin control patch collection and integration, so
-check with him how he want to merge this, I think just some
-separate patches for pin control would work fine.
+Best regards,
+Krzysztof
 
-Yours,
-Linus Walleij
