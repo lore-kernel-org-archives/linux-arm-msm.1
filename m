@@ -1,157 +1,131 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 974E22F7ACE
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:41:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 847364E8E15;
+	Thu, 15 Oct 2026 13:51:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792071686; cv=none; b=SYW3LfJbFpFMxsydW8IHp4Otplf7Ins13es5FPagfEj/jVyVeUcSmY8yOxGSIMDbf5x7C+XVNLpqMO8i0SfMiXtwrZfbgbbhxksHKJ1XlTXMpoyRVDJcqmpFwvZv8vH/LNA8FVl5LcJsiT5w+xZl4var1KlkCaG+H1xMfHhYkbQ=
+	t=1792072291; cv=none; b=mtxljQrfeLJcOu/AN6S+mopkuaJh72LR3claC8ke60kgEJCN3v0svr8x9h+ikhpbE9qeqnM79uGRwJtL8JT4Dq7P1TQxIw/QBOrSBg1EmNwTmUNJnYao5fk8wxfO/yrgJp84AL6aQwfIE8uQHKYYC6UieKC1gLIphKdM3MjeiFE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792071686; c=relaxed/simple;
-	bh=lMC7kxURybpSjdFzTK6cOaCS5kL5BeKCo+5fKJoCl+E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ad+unblCbo3FCLMQYGAhpydl8nnBgSZKWcTXmXtxJ33NLuAqEnNBW/DMf87pAbViTIRQTlq75JOv2aE1j1M5j7wUx8gPsIyFer6hV350KZc37UGysDoLsDRsg5YuBAnRftYUtO3Ppf/g0VI51vQEXwHLX78GQd4pqGsp7fAQybo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Yd7ryF6A; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f3A+Ijgt; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792072291; c=relaxed/simple;
+	bh=RAY21xpGqEs8ofV/k20DKQeUzNm/8Inq5CJjVCWvefg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KLd1YIhkNuKTXKJmi9gobMlAOYiqRYn4qow2zlqzhNNIGwTE1yJBtyXAoFo2OhPrQzYGFMYHbvX+TvzMmU1tVbvY6ZO/YGiUoLrtUNJvelcuWIgSP5JdzOyakA+Pj2I6zFF8rNdU1kmNi0r/vZINRbbAsYoLz3eWkmwV+owWjuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zf1jItGk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Yd7ryF6A";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f3A+Ijgt"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jT4N2809293
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:41:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9hQ6+eENRuBrsEE0ZzvJU9MCl5hk/NK0q37BB4XSGvQ=; b=Yd7ryF6ARwEaJppk
-	GoAc3xiz4CZf/OJppB4KKcYsdBC+TXu7p5VE3YroWBJR60sL6wxTtEFLOYOgfHu5
-	a2rPy10u8EmTWF00ljWOLu7NiE5GsGgXZ344IhTh5nVMIQyndmmN/59XbqRUkXgk
-	/0SiVSgYNZTuwOXVL7As/E9dE3+fJ3dCjhtedNxdeZU6kgMd/lLzLSs+lITESruk
-	ZRHFQ0KkuYrBeXBcyM43yTLJftIj6kEpaEPpvxIFboTsB00pAqqR2T4iFTzwpRoK
-	ZR4WTeKkxc1gQ96dGD57gfrGAm1qvIUQGnVxoHHefsw/4ABXGLA429NrBHD14bEU
-	o0Tkgg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4han54tupw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:41:24 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93e629c7b16so85457185a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:41:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792071684; x=1792676484; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9hQ6+eENRuBrsEE0ZzvJU9MCl5hk/NK0q37BB4XSGvQ=;
-        b=f3A+Ijgt3szM34Gh4/P+GHW0C5GCOTGTV0AsZcsydmxZqKp44GhgM+qa84oRXa4c3m
-         VrOT43IeJKrvsvpTFEOCzkP8Wn8eXHLNFUo7WvOq45JIgxSOdfU/oLrRjamXELHpAbL8
-         72AbhrhCZZIG+FiS4uG32FTF38xXU7ZHMQMJ+wup+ZOoE1OGlOq0BTDUnKxpqrBlzqrQ
-         0sEbZyQB0mPqDazPXXINjsO6+GDefYtvc4FZIUdoVt8qJU9wsUfhHk8jatYBxvT2oxg0
-         kv/1fH5DS5MVayw3NTd1YmW2+Yq3tlIXySkypeA/wT2rjeGu+eVkpW1twuAq2KNqLuV7
-         uXeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792071684; x=1792676484;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9hQ6+eENRuBrsEE0ZzvJU9MCl5hk/NK0q37BB4XSGvQ=;
-        b=yjSJCO3O1GsF7jsZseS4vTCYX30I0Uej9NnesxfCjAe38UdCo0KXyEvM+2nFt+HJ0v
-         VArgDxkK+Yh7z4z3mRcI23L/CWLbg1aHPYM39XjDXX/LnCjcsbHCyHe6+4A245tmpqZH
-         ORvp5/4k46dNOficHFoQOjMApZB6N07XUo/cnbNuV3JmhuOKXMLTNnkzLpMqHsS2wn9g
-         B4OaWEsW1QuLf5M57aeLQQCFcfb+MsmBkrcMtTI+/f4J+Ch88FjrtgyP0pjejWRybh0t
-         FOaPMU/RkT1+E+0xvMcHJwTA5Cl0qV4A3olWg7hQFrC7rfWfN/PD6ZMNgK8xUtQPGB4q
-         /6Ew==
-X-Forwarded-Encrypted: i=1; AKwUvBwGEKhJ8NmgGfR58TSM57gKBgVedZeuNMEzRTTtkW5E0XqBfk6nNHCu5edOCco3E3/7Pdkoy/cNOjQGijSM@vger.kernel.org
-X-Gm-Message-State: AFq9FYIxUwPs2NcfRXRnudCVGIf/W1SfjpPU8pI4JHxg81v3g/M58LAq
-	mkcd8bclv7XQoDdRLY54tTzln/eJQ4BVkbZyMDQrTom6gEhODN+WoiOwfXZR/S6n7PeiFutqHfZ
-	XRDdfQdyuiVvbqazl6Owhs0R9xqe8q/ZJRLg4RrQ8B1zl1Y+hywGoF7gDoCOt8rWhaTj/
-X-Gm-Gg: AYBFou0WF1IlVn074z2b5e53ou7td98NSbg7GbJPw07qOlVTQcc0w4CYK/h+m/3u5O/
-	jL1AY+G0zGQX4127CYbaIelscHjk2FPQQIs7+/3aRE/+d8M8UIWRmZnJ9GmFpkVu411b+474JkZ
-	uGJ/8IwdZlD6p1S6gY316adGi4/uAkEIKQEkNWIYBqhcsLvJAT7PqhypCHplz3v7FVjb7FQWNCH
-	DM/mXRds/nTLyj06fdOabKjLfLYvB1D5gIzJGwQ0S5LWmbdnPkOqoTiHKQcqYuRqLdSBhQ3fV7M
-	GutziZOVfg3rEPLzwtgp8uUVM/RHC2zljq89Xzk/ip/Wdks/RPZh31TN3QXN5jDxPEf/Cl6Rp5b
-	kG9qc43/NESnK+V8N397O1g==
-X-Received: by 2002:a05:620a:29d4:b0:93f:977:5d9 with SMTP id af79cd13be357-93f097721f3mr739125285a.0.1792071683871;
-        Thu, 15 Oct 2026 06:41:23 -0700 (PDT)
-X-Received: by 2002:a05:620a:29d4:b0:93f:977:5d9 with SMTP id af79cd13be357-93f097721f3mr739118285a.0.1792071683216;
-        Thu, 15 Oct 2026 06:41:23 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3eda6276a5sm123620566b.71.2026.10.15.06.41.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 06:41:21 -0700 (PDT)
-Message-ID: <1be0ad8d-cf9d-4d54-9c16-e9e3213717ed@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 15:41:19 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zf1jItGk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C65101F000C4;
+	Thu, 15 Oct 2026 13:51:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792072290;
+	bh=LQL9K7FjotLrNIQa5EP0wrOkT/xTAPGvJiGrgbZ57gs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Zf1jItGkxeDKvZwKtxSrdc+c2zH1+At/56XkmzrwOfJJvX6GXoRvtliRF2108ZLR6
+	 VQGL/yPphm1XF1Mvd02TrlFvIPf8SrKh8nFNyt8iEuqFC738kcOx1WzfJgV2n+9mjz
+	 q8NFeTbU8FfMqFC0OxPN/ErWJqFYiWvS/7AuGFUp8cK6hrQKjXFkXZGx890/tbYaKH
+	 CmOpFkMAwhP5Swv2HUANQ0ZmjYhH9+ehdegW/Gl+s2QyYkGKRsTc4GRFzPrYpICzGa
+	 9dVtqyHRxIp3AiPrYbZzv7p6Zske3u2Dm4r5k0wb1zr9bTby36jEu1VmQoyhno1AbZ
+	 fBk2gF5zHliIg==
+Date: Thu, 15 Oct 2026 19:21:10 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Slark Xiao <slark_xiao@163.com>
+Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
+	jeff.hugo@oss.qualcomm.com, mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] bus: mhi: host: pci_generic: Add autosuspend_delay
+ customized support
+Message-ID: <atDZ7vQggXGK8bIo@debian>
+References: <20260919095506.9570-1-slark_xiao@163.com>
+ <bf94f351-777d-4dc0-98a2-7af77f832f2b@oss.qualcomm.com>
+ <1bec2fd7.99f3.1a0c8ea4db6.Coremail.slark_xiao@163.com>
+ <2b0d3e13-96fa-437a-9de9-4a61911fe232@oss.qualcomm.com>
+ <nsaa4cchprkgqka7uc4ccr5wq7v6uhue5dpsvquwxyk4ndr57t@i56bkvwpclpo>
+ <5506abc6.8919.1a11aab7e81.Coremail.slark_xiao@163.com>
+ <astaLolGh8XkPNms@debian>
+ <6e90be7f.4d64.1a13e32174b.Coremail.slark_xiao@163.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: sdm630: Fix the CPU retention idle
- state parameter
-To: fabricioakio@gmail.com, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>,
-        Alexey Minnekhanov <alexeymin@postmarketos.org>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Martin Botka <martin.botka@somainline.org>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261011-sdm630-idle-states-v1-0-3181d488dc0f@gmail.com>
- <20261011-sdm630-idle-states-v1-2-3181d488dc0f@gmail.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261011-sdm630-idle-states-v1-2-3181d488dc0f@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=RYQFmFtv c=1 sm=1 tr=0 ts=6ad0d804 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=BdOeh9TuWhobGdjKrbcA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1NCBTYWx0ZWRfXzAwSZQh68DCg
- 9pYiwQYZBcqZYXBhU3AelgWM+HJGfkxSnVO+hVzZLvRLT/+SuT6auQ6GlfBNDkEKhvUN5nN4eWm
- kfqWP9LUf5s8wuNapiTDts/rnEHGiJCOkJf4yJ/Q8DiwYqeo7ZJS8aOc/C7MdFrOPk0donB3t1D
- 4cZwXW2JRO2pOBDqsQte+W1PqhWUm5ZABvrpai+2pTxrQVryd7w+9k9ZHdIy2fpOhfBD/PVXjOi
- BWTMMyZfi0i6tcfpBt7cUL+sH8BzA2rVzrEdpEjRttEwYfpei8xCLF8PTLPj4ZNUIUNs7wPfDkW
- y5O6p3wLxxbwfHHCGwLCRp6cse6HjSGjmftdZbxRcmdtazdyG8jprV9tcdewj+S7eVfcNq4Ie1Z
- jhBFtgUwU/lHXqIwnhk8XtdZ8pIn8q7CutaOYeXCUW/CLlo19yQOfP7S7FDi5W6y02HRQT5aBcX
- 2fsFDNNnP/FwCSLrQyA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1NCBTYWx0ZWRfX9kV8YBhnBvvK
- PBlCKgAUcvkxR9cjvq8YbZuICFg0uHS4WWOgxJ2vVsDN7kMQCHctTXMmNKmwdy29Jl5uUeoBa/3
- mlWxsMe/HAQ07MQHLMPFfazXfvVEqIM=
-X-Proofpoint-GUID: Ql6ZWYpCvRDQFu13326MfnXC3UUev-EN
-X-Proofpoint-ORIG-GUID: Ql6ZWYpCvRDQFu13326MfnXC3UUev-EN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0 impostorscore=0
- lowpriorityscore=0 spamscore=0 malwarescore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150054
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <6e90be7f.4d64.1a13e32174b.Coremail.slark_xiao@163.com>
 
-On 10/12/26 4:18 AM, Fabricio Akio via B4 Relay wrote:
-> From: Fabricio Akio <fabricioakio@gmail.com>
+On Thu, Oct 15, 2026 at 02:13:52PM +0800, Slark Xiao wrote:
 > 
-> The CPU retention states set bit 30 of their PSCI power_state, which
-> marks a state that loses context. Retention keeps it, and the vendor
-> kernel requests it as 0x00000002.
+> At 2026-10-11 17:46:22, "Manivannan Sadhasivam" <mani@kernel.org> wrote:
+> >On Thu, Oct 08, 2026 at 04:40:09PM +0800, Slark Xiao wrote:
+> >> 
+> >> 
+> >> At 2026-09-26 19:26:15, "Manivannan Sadhasivam" <mani@kernel.org> wrote:
+> >> >On Wed, Sep 23, 2026 at 09:24:55AM +0530, Krishna Chaitanya Chundru wrote:
+> >> >> 
+> >> >> 
+> >> >> On 9/22/2026 5:09 PM, Slark Xiao wrote:
+> >> >> > At 2026-09-22 12:12:35, "Krishna Chaitanya Chundru" <krishna.chundru@oss.qualcomm.com> wrote:
+> >> >> >>
+> >> >> >> On 9/19/2026 3:25 PM, Slark Xiao wrote:
+> >> >> >>> For some WWAN device, it may get a SYS ERROR issue when resuming
+> >> >> >>> from suspend state frequently. Refer to the Qualcomm Windows
+> >> >> >>> driver, the default value of autosuspend_delay_ms is set as 5000
+> >> >> >>> ms. But in Linux side, all WWAN device were set as 2000ms. We
+> >> >> >>> tried to set this value to 5000ms and we can get a positive test
+> >> >> >>> result.
+> >> >> >>>
+> >> >> >>> So we add a support to allow vendor to set a difference value for
+> >> >> >>> specific WWAN device.
+> >> >> >> you can change auto suspend delay from sysfs, please use that way instead of
+> >> >> >> doing in the driver.
+> >> >> >>
+> >> >> >> - Krishna Chaitanya.
+> >> >> > Yes, we can do this by setting the sysfs API . However, not all users 
+> >> >> > are aware of this method. Additionally, this approach is only
+> >> >> > effective for a single instance; it requires reconfiguration after each
+> >> >> > restart, which is quite inconvenient.
+> >> >> you can have udev rule to set this without any user intervention.
+> >> >
+> >> >We should not rely on userspace to fix the SYS_ERROR. Userspace knob should only
+> >> >be exercised to customize the delay for power management purposes, not to fix
+> >> >firmware crash.
+> >> 
+> >> >
+> >> Agree. We are still working on the issue debug on the modem side. 
+> >> 
+> >> >First we should know whether the default delay can be increased to 5000ms for
+> >> >all devices or not. If that is not desired, then we can go for Endpoint specific
+> >> >delay.
+> >> >
+> >> >- Mani
+> >> >
+> >> For reference, MTK 5G modem T700 is using 5000ms as default value. And Qualcomm
+> >> Windows drivers side, the default value is 5000ms as well.
+> >> However, I cannot guarantee that if all MHI devices are adjusted to 5000ms, some
+> >> power-sensitive devices will not oppose this change. Additional, DELL hopes that
+> >> we only modify the SDX72 device while keeping the 2000ms setting for the SDX62
+> >> devices, as there are currently no similar issues with the SDX62 platform.
+> >> 
+> >
+> >I think we should know the root cause of the crash before adding my fix. Right
+> >now, we only know that it is a firmware crash, but we don't know if the crash is
+> >due to MHI stack or PCI bus. If it is the MHI stack, then we can quirk the
+> >device in pci_generic driver. If it is a PCI bus issue, then we need to handle
+> >the quirk in pci/quirks.c.
+> >
+> >- Mani
+> We provided the crash dumps to Qualcomm for further analysis. Issue seems
+> come from firmware side. Finally, Qualcomm recommend us to update this
+> auto suspend delay value to 5s. Otherwise we may get a unexpected issue
+> for some specific scenario.
+> And currently our customer agreed that we set this value to 5s for all DW5934e
+> products. So I want to add this update based on our real requirement.
 > 
-> With bit 30 set, no entry into these states succeeds on a Motorola Moto
-> X4 (SDM630). With it clear they are entered about 50 times per second
-> across the CPUs, and the failed idle entries across all states drop
-> from about 30 to about 9 per second.
-> 
-> Fixes: b190fb010664 ("arm64: dts: qcom: sdm630: Add sdm630 dts file")
-> Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
-> ---
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Sure, go ahead and respin this patch
 
-Konrad
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
