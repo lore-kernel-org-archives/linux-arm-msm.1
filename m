@@ -1,172 +1,108 @@
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 282653C9EF6
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:38:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77EAF361657;
+	Thu, 15 Oct 2026 14:41:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792075138; cv=none; b=lowuyZusP5Km8J+iuzxUF38dO96+hzvJ9qQCbrpoWKMZr0T/8IgiuBh4vsXGjcDtZQPAeYr3cVKAb9o3SnadVXgmsFRkddi5SGABPtNdvqbb0sOC8PqTM8e8cH3DU06+oZ6WbualJ9UQNtR8I/jwjEB4b+gQcRJpdrwn7j+84QA=
+	t=1792075262; cv=none; b=GVaZXe/0afPYtWOxaHlU2ghcfD/8HgcyoomtwQ1J9AtGhXvhEQHPMJz5gOje3VjpwmTVwYcx41w1Fl67YMajysMVcPb0/vkBw+a595cJtThbdaT8Etl4eYWMxG0oOPohXkqSDsOVaansSahEhqXNEEk/XwUEl2ZJ/B9q07X+l30=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792075138; c=relaxed/simple;
-	bh=4mhyYh9AhJdWh2Z54n/rDsetUsO9wDF5wBn1LCUSmSA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=osz4ZhxzOxlg5405uuctCwjjHwhHu9ijsVTN9Zpi4VQc71N0DmxtjQcK+rcYnIieU2X4wkaXaKK8276mJQrIClTTp3io20+nBv8JIac3h0H8e2zRceDWqTTOJT93pPfwXidNKXE3PBofqC/BEfd+ByeE9KoDOPHjhD7Yh+BB6/8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=fHDn0JsS; arc=none smtp.client-ip=209.85.219.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="fHDn0JsS"
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-918f75a68f0so85284546d6.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:38:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1792075136; x=1792679936; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PrZ4UoU0O5LeVfAO0Ji/pzxgUsFsUywSx2q0o8MOUoM=;
-        b=fHDn0JsSQRiQ1IQKzOaAZDzR8HeKmDNC303oCK3wjOVrgAPQy0NnMph3ueZxeEXU+0
-         syIfkxDMcff4VygMKizZ5bhXMcb/IznP2nfgEBMDUmnmhCE4feA3uwEEPTpG3UStE9+w
-         qjRFN+pxog68RoxJVipo09Is93b/4HJ/SnTid8RXJujjVVXRBStkKhwEr++//r6N1RKx
-         VnvMouU7QO7KA/aYaANOgI5X7/Wm1dsB+GxHYcssQjs7SEwLW+yIdqpP+98DC6lZMPmC
-         5SVAZbAc9aT9CYMavyvcUS9F3FHm1lr530Jr74bDJJZqZE2oluG18cd5Eju+vJwy0kXJ
-         uGnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792075136; x=1792679936;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PrZ4UoU0O5LeVfAO0Ji/pzxgUsFsUywSx2q0o8MOUoM=;
-        b=m9xk4AowVEWA27miUC37uoff+vYFFBbKBkLze5/K7bUdSaliCOo57npl6Astm6BAuZ
-         weZRDegGon1RXodL4x7axF8eH3omXsf96hzJyd1iVeneoImF1HND5eWGFypMFu0wIUMG
-         hwQ1rBw/o/EXdI3dSc6G1j4N9ZRhhp43wh7Gb0fu9mz7M95JvOdwP36HU8IGhBXdv54v
-         tGvu2His3SYTXGbe/pvmUO0Be1i6wr8OgQtxxvRYc/NxmuWm2gDI4GUzib2rWPlk12HF
-         UolHWuy4GFe6QpbvYIX8i6FyYxQTqZKnP7n963neBbvB0sVHU4RU4eXSyVp37ZewU/HP
-         Jvyg==
-X-Forwarded-Encrypted: i=1; AKwUvBypUaf7+drk9Pg6BJDlveui5s5ud1Ue3ua7er1Pf7MWVUAIMVIkZBo/DIH3YAjWz7NBZCUC1MfZPZmV6IEC@vger.kernel.org
-X-Gm-Message-State: AFq9FYJeB/m2fMqwLHtLeK0ppOJjlOs8cbx6l+QbmQB0dN50Rb2PQkXm
-	E1+4Ju20B3LsFywIx77adjAuvyaf70W9KXzKAg1YU1/3hWZzSGLot4+LFXpY5QzNO+4=
-X-Gm-Gg: AYBFou20Kxim1NizuQ3Z/vII4Cf+McmXxigW2LpGvbP4SJV5n7s1UvzMe/9vyXJRBtf
-	+6vzO03HUvtsoU/VH3odePs+6LwZn/OhzXVgHUiHhAdyH82xORS0M8DlU/WbHQ32s+m7YP+h+XK
-	c31/vTnmwtJC6vVsNhQNRFH+l6pboG/X9zuIFRsSiFNGR/Dhtkfi7Fv66H2ccuwUvGac00aF+/o
-	hHVTF6uBgBEPWjhbZLZVH1nb/kTAiYVOS2jVu+J4RwVrIQVo6VUlED4aKsJRS5gfB53dOu7dkHy
-	Esm8tp1p8vIaLBx6JOAJuDgHi4HT1WU3PGG7ZIxapg/RXKFchT6qkbdPmowHn2B/bpkzjZ7Em2D
-	52roAE5euJSfkQG/zOcepZxPUCRdnt7fzYJOzY8uXic81iANsQsv8V7TFty84YchGfdENuumnDg
-	NgC7A4xjTG4VLXcLXJo7Qs3uiAeO7VcqqdRH9sPAWuFphLPZtUVysmPIyetLCEL8BlRHV+IGDse
-	Kyu0druB9uVNA==
-X-Received: by 2002:a05:620a:4411:b0:93e:9292:1ba5 with SMTP id af79cd13be357-93ebd20defbmr3353447685a.21.1792075135235;
-        Thu, 15 Oct 2026 07:38:55 -0700 (PDT)
-Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b97bc6d42sm82581486d6.34.2026.10.15.07.38.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 07:38:54 -0700 (PDT)
-From: Alex Elder <elder@riscstar.com>
-To: andrew+netdev@lunn.ch,
-	davem@davemloft.net,
-	edumazet@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	hkallweit1@gmail.com,
-	linux@armlinux.org.uk
-Cc: Daniel Thompson <daniel@riscstar.com>,
-	ansuelsmth@gmail.com,
-	donggeunyoo.kernel@gmail.com,
-	mohd.anwar@oss.qualcomm.com,
-	lorenzo.bianconi@oss.qualcomm.com,
-	devicetree@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net-next v2 2/2] net: phy: qcom: qca808x: Add regulator management
-Date: Thu, 15 Oct 2026 09:38:47 -0500
-Message-ID: <20261015143849.483339-3-elder@riscstar.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261015143849.483339-1-elder@riscstar.com>
-References: <20261015143849.483339-1-elder@riscstar.com>
+	s=arc-20240116; t=1792075262; c=relaxed/simple;
+	bh=dqYqBUhFvXzvKQ6oa6P1QiNYgA1gHz6Oac8CaI75JlQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Mc/LsTKukwCMuPRM6G7pgcLZuU+BTA5HyBaokP4ocZBklNLrWBq5jQ5Gjkic+bhegrzNzskzzrD/JLT8hIO7VbNyEfM19hMuPXc6D058aPqz8JWnuNMts62BsnL1MG5BLuE/ke0xx6aB6oTmVo69CbMJ+h7gnD1WdsOJcKG3Vc0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F37F61F000C4;
+	Thu, 15 Oct 2026 14:40:55 +0000 (UTC)
+Date: Thu, 15 Oct 2026 20:10:53 +0530
+From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+	Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+Subject: Re: [PATCH 2/3] media: iris: Skip SCM call for non-SCM PAS backend
+Message-ID: <atDl9clfABlLMgkC@sumit-xelite>
+References: <20260911-video-optee-pas-v1-v1-0-7bbddaaac5ba@kernel.org>
+ <20260911-video-optee-pas-v1-v1-2-7bbddaaac5ba@kernel.org>
+ <38fa7602-f03a-4343-9999-0eda108332e3@oss.qualcomm.com>
+ <CAGptzHNO02tQJypLjQD+nKWW76m5R2fo-s=bAJhN=Hmu_oVvng@mail.gmail.com>
+ <d293c3a5-7318-4ef4-978e-2bf1c064d0fe@oss.qualcomm.com>
+ <CAGptzHN5uTR8w2b3ODHoSTcys4woRBmAf0fa=93H34ZDV+=ymw@mail.gmail.com>
+ <9ae0c4e2-35cd-402e-96d0-eccfe26e622b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <9ae0c4e2-35cd-402e-96d0-eccfe26e622b@oss.qualcomm.com>
 
-From: Daniel Thompson <daniel@riscstar.com>
+On Thu, 15 Oct 2026 at 11:43:19 +0200, Konrad Dybcio wrote:
+>On 9/18/26 1:10 PM, Sumit Garg wrote:
+>> Hey Vikash,
+>>
+>> On Thu, Sep 17, 2026 at 5:11 PM Vikash Garodia
+>> <vikash.garodia@oss.qualcomm.com> wrote:
+>>>
+>>> Hi Sumit,
+>>>
+>>> On 9/14/2026 11:44 AM, Sumit Garg wrote:
+>>>> Hey Konrad,
+>
+>[...]
+>
+>> The main disadvantage is that we don't want to carry these custom SCM
+>> ABIs per kernel subsystem with the open source TF-A/OP-TEE boot stack.
+>> ABIs always come with maintenance burdens, especially the custom ones
+>> we have in this case.
+>>
+>> Since we started from scratch for the open source boot stack, the
+>> motivation is to keep the TZ ABI minimal and that too with
+>> discoverable OP-TEE services like the PAS service.
+>
+>Okay, I can symphatize with that.
+>
+>Let's think of another solution though, as a strcmp over the provider
+>name is 10x worse.
 
-QCA8081 appears in embedded board designs paired with GPIO controlled
-regulators for its power rails. Add logic to allow these regulators to
-be turned on during a probe.
+Okay, I can rather stub these APIs via the generic PAS layer except the
+SCM backend, that can reuse the existing abstraction.
 
-In order to avoid the complexity of tracking state for suspend with and
-without WoL we take a tremendously simple "always-on" approach to
-regulator management, essentially relying on BMCR_PDOWN to conserve
-power when the phy device exists.
+Although I find these APIs not related to PIL/PAS but however it will be
+just overkill to have another abstraction layer for it.
 
-Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-Co-developed-by: Alex Elder <elder@riscstar.com>
-Signed-off-by: Alex Elder <elder@riscstar.com>
----
- drivers/net/phy/qcom/qca808x.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+>
+>What is the planned replacement on the open boot stack side?
 
-diff --git a/drivers/net/phy/qcom/qca808x.c b/drivers/net/phy/qcom/qca808x.c
-index bab26e4c61408..4aba513b9a512 100644
---- a/drivers/net/phy/qcom/qca808x.c
-+++ b/drivers/net/phy/qcom/qca808x.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
- #include <linux/phy.h>
-+#include <linux/regulator/consumer.h>
- #include <linux/module.h>
- 
- #include "qcom.h"
-@@ -181,15 +182,43 @@ static void qca808x_fill_possible_interfaces(struct phy_device *phydev)
- 		__set_bit(PHY_INTERFACE_MODE_2500BASEX, possible);
- }
- 
-+static int qca808x_power_on(struct phy_device *phydev)
-+{
-+	static const char * const regulator_names[] = {
-+		"avdd18", "vdd", "vdd18", "vdd125"
-+	};
-+	struct device *dev = &phydev->mdio.dev;
-+	u32 count = 0;
-+	int ret;
-+
-+	for (u32 i = 0; i < ARRAY_SIZE(regulator_names); i++) {
-+		ret = devm_regulator_get_enable_optional(dev, regulator_names[i]);
-+		if (!ret)
-+			count++;
-+		else if (ret != -ENODEV)
-+			return ret;
-+	}
-+
-+	if (count)
-+		fsleep(phydev->mdio.reset_assert_delay);
-+
-+	return 0;
-+}
-+
- static int qca808x_probe(struct phy_device *phydev)
- {
- 	struct device *dev = &phydev->mdio.dev;
- 	struct qca808x_priv *priv;
-+	int ret;
- 
- 	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
- 	if (!priv)
- 		return -ENOMEM;
- 
-+	ret = qca808x_power_on(phydev);
-+	if (ret)
-+		return ret;
-+
- 	priv->led_polarity_mode = QCA808X_PHY_LED_UNSET;
- 
- 	phydev->priv = priv;
--- 
-2.53.0
+In case of video subsystem, OP-TEE pseudo TA already holds platform
+specific info so we can directly add this info there which is being
+passed by the kernel in SCM calls.
 
+> FF-A lend?
+
+FF-A surely is being already enabled and tested with open boot stack.
+See TF-A PR for Lemans as an example here [1]. However for FF-A lend to
+work in real terms when kernel running in EL2 (KVM mode), we need
+capability to be able to unmap buffers from kernel linear map.
+
+See this proposal from Google where discussions are leading towards to
+make the generic CMA pool capable to unmap buffers on arm64 here [1]. It
+will actually unlock FF-A lend use-cases in the kernel.
+
+[1] https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/54873
+[2] https://lore.kernel.org/all/as4ATqhp0bPI03PA@sumit-xelite/
+
+-Sumit
