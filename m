@@ -1,251 +1,301 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66A5A37A848;
-	Thu, 15 Oct 2026 08:35:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92E84485516
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:36:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792053338; cv=none; b=Mb82gRiF7QiUkMKhyk4MKfrPE7gbpEetfDUJ+dVXgXZ2+TUQp8n73/QGBCqMskq9vYwRrGV5SPwI5imLuK7cP9yB8pXql/n/eOVxwzrBgad2Kd4ocEOucodPskAdqsyhU8m3f7vBGLlhmq8Z5p36LopX4r15i7Lt3dVLEgoF2VQ=
+	t=1792053387; cv=none; b=oqiwWvWQnqH72nqVeCoIOnOjzGu8YQRjboj+NJY01N+6yfNka0AzS7n+s5FYl6UGyYmLpsNnE6uw6UdSwXHD8B9MFkLsZoNZZ8XT4UIh9eefvV2kThrqhXkmtTtyQtNTKilQu33C+oITCOjRk3iXCHuK49jJiRS2ZmZ2WI0a9cU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792053338; c=relaxed/simple;
-	bh=pVvQ3KKvitHRAPJVAnlZcFqINR1f9Sbt+S8x9HaqwLk=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=WUWy1T9cbr7zL1jy3oeU+qYJ6fi3rzK6sPkUquFVlRpkBQl5OsAR6lIbqZGjAr5/wOIhFOI1wWVd1s289ALnJSjrkosrZHz4vfh+4nGe3jYFFEClWYxEh+CmXaqzoW8WK09u6QffZ1OaI3bg8Z+QztRMYBOYxpbelVMYW3saehQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gTQk9nnC; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1792053387; c=relaxed/simple;
+	bh=5MqX8eHZVo9OpafR8fwdCskbkthcFy0oRBvbPUBjcys=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=DdRH1m7Mi3LYO2zg9P6GWPpSamOZ0dIeAisSVGRrxjVyKaRtm7FuIyw25/w91uM0BGSRXUuZvIqr0l4XXRFBbPiC6/DSBtpzF5MmGnEW3pvfCsAaXDt9WZhI8b+oQSHtoL5T+5b+MRQ/0Xh6o/7Z4xN7IK3hKuPWCx3GN8ZeAI0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TYbeLhLp; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gTQk9nnC"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792053332; x=1823589332;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=pVvQ3KKvitHRAPJVAnlZcFqINR1f9Sbt+S8x9HaqwLk=;
-  b=gTQk9nnCI/ab4XVcgBDO29v7wQbnqT65wvP2F8eLxgsiAloI/5qDwrOC
-   X+2wpagSydasvh7Bd6Z6KcR/zsHz7wdvvBQz9aYbWnDHnKOp00lwUCpnI
-   AhCfdaodxDxe1a0OvRjMiWwwY8JFNp/An2T5GKint1SRGE/UVgf2wu4qc
-   0bmjy3ADipDMrO7gnSpS2E57KC1S5MElXE+Exp9w6hjLMADoYbIsQBEvn
-   t27ZrS8FUzapFmKa/tnNpUp0v4QNFW7Af473pyRxB1K8HOYuQiBRUWfTv
-   p6b3dlstvMuTGXnL5qWFq7wrFx/gETvOpTLKXeDk5Sxq5gWorvxDOqZCl
-   g==;
-X-CSE-ConnectionGUID: 0kwF9+SeQTO+FuAEZerxPA==
-X-CSE-MsgGUID: YWOoKuD1S9aJT+Sv/uDaog==
-X-IronPort-AV: E=McAfee;i="6800,10657,11935"; a="818151"
-X-IronPort-AV: E=Sophos;i="6.27,159,1787036400"; 
-   d="scan'208";a="818151"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Oct 2026 01:35:31 -0700
-X-CSE-ConnectionGUID: qY1s9havR7S48f+/BilHog==
-X-CSE-MsgGUID: H3lFISSnTrqQxKgw2Qdl9w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,159,1787036400"; 
-   d="scan'208";a="1699888"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.130])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Oct 2026 01:35:24 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Thu, 15 Oct 2026 11:35:19 +0300 (EEST)
-To: Bjorn Helgaas <helgaas@kernel.org>
-cc: Manivannan Sadhasivam <mani@kernel.org>, 
-    Bjorn Helgaas <bhelgaas@google.com>, 
-    Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-    =?ISO-8859-2?Q?Krzysztof_Wilczy=F1ski?= <kwilczynski@kernel.org>, 
-    Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>, 
-    Jonathan Derrick <jonathan.derrick@linux.dev>, 
-    Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org, 
-    LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org, 
-    linux-wireless@vger.kernel.org, ath12k@lists.infradead.org, 
-    ath11k@lists.infradead.org, ath10k@lists.infradead.org, 
-    Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
-    Qiang Yu <qiang.yu@oss.qualcomm.com>, 
-    Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
-    Emmanuel Grumbach <egrumbach@gmail.com>, 
-    Matthew Garrett <mjg59@srcf.ucam.org>
-Subject: Re: [PATCH v3 0/8] PCI/ASPM: Add pci_force_enable_link_state() API
- and convert Atheros drivers
-In-Reply-To: <20261014205117.GA1665327@bhelgaas>
-Message-ID: <2ddb1f53-b0bd-abf8-be0f-dc77da8a669e@linux.intel.com>
-References: <20261014205117.GA1665327@bhelgaas>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TYbeLhLp"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4295A1F000C4
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:36:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792053386;
+	bh=kyqPAP8gbfZgXqYwApY6S2VUSai3hfApMqSsO+21XHY=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=TYbeLhLpb810YrkYeati2gHulrEGe4QvJCpwrW5/ty/QUNYmMYDNZqQt9SChof2nl
+	 bkqWjAIBxPZPhpQT3l0gh/2bLBaWi5bMYf1TjVSGfIxSc5bUpg40EcDRyYpHoIfa+W
+	 43dX/opZQBDnAUqmCy7J5QbVbGJb1Qm0S4Amcc0+x6esxfeZDKRTPwndDvyYCgL3pE
+	 iXjXrba4LCCiLoQfwPr4IIl1tW4n4muPMvOaCLl0Hue5+3y5wXRU0Zt+yujHrzUcmg
+	 CVm6nptDIZwUAdx0vbS+sNnmPz3kal7XwFoJTetsMGsbg09DzlsIMnOSnxTGnKmsvQ
+	 l/L458YlUhQsw==
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5ba3adf78f5so1135478e87.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 01:36:26 -0700 (PDT)
+X-Gm-Message-State: AFq9FYJB1UVhi7S0SMoqXH1Isksg0naIMk1UwZkKYrRLb7r29MMy0gcM
+	8LhklgNe3FRJMCppMXN+tBw/NqtXVBcuIC3OhWSmdxVIzWdPjQZWrvUDNM+kPyDLXUP25JhDYn/
+	7fNqQQPa9iVS+lqRG/8Z48o/L951Yd6L1+P07MqpeBg==
+X-Received: by 2002:a05:6512:3f01:b0:5ba:3b1c:2f68 with SMTP id
+ 2adb3069b0e04-5bcde8d5d0emr6645100e87.47.1792053384918; Thu, 15 Oct 2026
+ 01:36:24 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 15 Oct 2026 08:36:22 +0000
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 15 Oct 2026 08:36:22 +0000
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <179163141354.18006.80461347454353634@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-606769928-1792053319=:1307"
+References: <179163141354.18006.80461347454353634@pm.me>
+Date: Thu, 15 Oct 2026 08:36:22 +0000
+X-Gmail-Original-Message-ID: <CAMRc=Me8-gMimv0qNNr15JnCzQmoFgf_tVmUQfg-5wQb9GDAMg@mail.gmail.com>
+X-Gm-Features: AclHuK98Smx14Zl5Wsew-q1M57A-NdB2f6aZBLBBY3hD4S9pqNn3XhleI05VRAE
+Message-ID: <CAMRc=Me8-gMimv0qNNr15JnCzQmoFgf_tVmUQfg-5wQb9GDAMg@mail.gmail.com>
+Subject: Re: [RFC PATCH] pinctrl: qcom: Restore the pin configuration after hibernation
+To: Birk Skyum <birk.skyum@pm.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Bjorn Andersson <andersson@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+On Sat, 10 Oct 2026 13:23:36 +0200, Birk Skyum <birk.skyum@pm.me> said:
+> A hibernation image is restored after a power cycle. The TLMM registers
+> then hold what the boot firmware and the kernel that loaded the image
+> made of them. The restored kernel has the configuration it applied in
+> memory only, and nothing writes it to the hardware again, so every pin
+> that the loading kernel did not set up the same way stays wrong.
+>
+> On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
+> are two of them. Their drivers are loaded from the root file system, so
+> the kernel that loads the image never touches the pins. This is
+> /sys/kernel/debug/gpio before the hibernation and after the resume:
+>
+>   gpio116 : out low  func0 2mA no pull
+>   gpio117 : out high func0 2mA no pull
+>
+>   gpio116 : in  low  func0 2mA pull down
+>   gpio117 : out high func0 16mA no pull
+>
+> The driver that owns gpio116 still believes it drives the line.
+>
+> Save the control, output and interrupt configuration registers of every
+> valid pin in freeze_noirq and write them back in restore_noirq, the
+> output level first, so that a pin drives the right level from the
+> moment it becomes an output. Enabling the raw interrupt status can
+> latch an interrupt, so the status is cleared afterwards, as
+> msm_gpio_irq_set_type() does.
+>
+> msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
+> these ops. With that x1e80100 also gets their suspend and resume
+> callbacks, which apply the sleep and default state of the controller's
+> own pins where a board defines them.
+>
+> Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+> ---
+> RFC because the two callbacks go into msm_pinctrl_dev_pm_ops, which the
+> sc7180, sc7280, sdm845 and sm7150 drivers use as well, and I can only
+> test x1e80100. If you would rather have this for x1e80100 alone, or
+> done another way, I am happy to redo it.
+>
 
---8323328-606769928-1792053319=:1307
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+These four use the same TLMM layout so should be safe.
 
-On Wed, 14 Oct 2026, Bjorn Helgaas wrote:
+> Tested on a Lenovo Yoga Slim 7x with Arch Linux ARM's v7.2 kernel plus
+> this patch. The kernel also carried the PCI change in [1], without
+> which this machine does not resume at all, the smp2p change in [2] and
+> a GENI serial change that is not ready for the list. The patch is
+> based on pinctrl/devel, where it builds without warnings (W=1,
+> CONFIG_HIBERNATION=y).
+>
+> - Without the patch, gpio116 and gpio117 come back as shown above
+>   after a hibernation with a real power-off. With it, in four such
+>   hibernations, the TLMM part of /sys/kernel/debug/gpio differs only
+>   in the level read on two inputs (gpio93 and gpio153).
+> - pm_test=core and test_resume pass.
+> - A suspend (deep) and wake still works. On x1e80100 it now goes
+>   through msm_pinctrl_suspend() and msm_pinctrl_resume().
+>
+> Not covered here: the LPASS LPI pin controller, whose pins also came
+> back at their reset values after a hibernation.
+>
+> [1] https://lore.kernel.org/r/179157746908.73485.2343672865542690797@pm.me
+> [2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
+>
+>  drivers/pinctrl/qcom/pinctrl-msm.c      | 106 +++++++++++++++++++++++-
+>  drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
+>  2 files changed, 105 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+> index 27f06bbc1..fba8a4165 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-msm.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+> @@ -39,6 +39,14 @@
+>  #define MAX_NR_TILES 4
+>  #define PS_HOLD_OFFSET 0x820
+>
+> +/* Register values of one pin, kept across a hibernation. */
+> +struct msm_pin_state {
+> +	u32 ctl;
+> +	u32 io;
+> +	u32 intr_cfg;
+> +	u32 intr_target;
+> +};
+> +
+>  /**
+>   * struct msm_pinctrl - state for a pinctrl-msm device
+>   * @dev:            device handle.
+> @@ -58,6 +66,7 @@
+>   * @soc:            Reference to soc_data of platform specific data.
+>   * @regs:           Base addresses for the TLMM tiles.
+>   * @phys_base:      Physical base address
+> + * @saved:          Pin registers kept while a hibernation image is taken.
+>   */
+>  struct msm_pinctrl {
+>  	struct device *dev;
+> @@ -80,6 +89,8 @@ struct msm_pinctrl {
+>  	const struct msm_pinctrl_soc_data *soc;
+>  	void __iomem *regs[MAX_NR_TILES];
+>  	u32 phys_base[MAX_NR_TILES];
+> +
+> +	struct msm_pin_state *saved;
+>  };
+>
+>  #define MSM_ACCESSOR(name) \
+> @@ -1583,9 +1594,93 @@ static __maybe_unused int msm_pinctrl_resume(struct device *dev)
+>  	return pinctrl_force_default(pctrl->pctrl);
+>  }
+>
+> -SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
+> -		  msm_pinctrl_resume);
+> +static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
+> +					const struct msm_pingroup *g)
+> +{
+> +	return !pctrl->intr_target_use_scm && g->intr_target_reg &&
+> +	       g->intr_target_reg != g->intr_cfg_reg;
+> +}
+> +
+> +/* Remember how the pins are set up when a hibernation image is taken. */
+> +static int msm_pinctrl_freeze_noirq(struct device *dev)
+> +{
+> +	struct msm_pinctrl *pctrl = dev_get_drvdata(dev);
+> +	const struct msm_pingroup *g;
+> +	struct msm_pin_state *s;
+> +	unsigned long flags;
+> +	unsigned int i;
+> +
+> +	raw_spin_lock_irqsave(&pctrl->lock, flags);
+> +	for (i = 0; i < pctrl->chip.ngpio; i++) {
 
-> [+cc Emmanuel, Matthew]
->=20
-> On Wed, Jul 08, 2026 at 04:30:14PM +0200, Manivannan Sadhasivam wrote:
-> > Hi,
-> >=20
-> > This series converts the atheros WLAN drivers (ath10k/ath11k/ath12k) to
-> > use the PCI core ASPM APIs for enabling/disabling ASPM instead of writi=
-ng
-> > to the LNKCTL register directly. Touching LNKCTL behind the PCI core's
-> > back leaves the ASPM service driver's view of the link state out of syn=
-c
-> > with the hardware, which is not nice.
-> >=20
-> > The catch is that these drivers save the currently enabled ASPM states,
-> > disable ASPM before firmware download, and restore the saved states
-> > afterwards. pci_enable_link_state() cannot restore states that were
-> > disabled via pci_disable_link_state() or blacklisted during init (like
-> > the pre-1.1 device blacklist, which is only meant to be overridden with
-> > pcie_aspm=3Dforce), and that is intentional. So the save/restore sequen=
-ce
-> > cannot be expressed with the existing APIs.
-> >=20
-> > In v2 I tried to fix this by making pci_enable_link_state*() symmetric
-> > with the disable APIs, but as pointed out during review, that also ends
-> > up overriding the init-time blacklist for every caller (including VMD),
-> > which is not something we want. So instead, this version adds a separat=
-e
-> > pci_force_enable_link_state() API (patch 2) that re-enables the request=
-ed
-> > states unconditionally. The caller is responsible for only asking for
-> > states the device actually supports, and the ath drivers do this by
-> > restoring exactly what pcie_aspm_enabled() reported earlier.
-> >=20
-> > The first five patches touch the PCI core: patch 1 (from Ilpo) makes
-> > pci_disable_link_state() disable ASPM unconditionally, patch 2 adds the
-> > new API, patch 3 moves the D0 transition needed before enabling PCI-PM
-> > L1 PM Substates (PCIe r6.0, sec 5.5.4) into the shared helper and drops
-> > it from the vmd and pcie-qcom callers, patch 4 cleans up the kernel-doc=
-,
-> > and patch 5 makes pcie_aspm_enabled() return the enabled state mask so =
-it
-> > can be used for save/restore. The last three patches convert the ath
-> > drivers.
-> >=20
-> > Testing
-> > =3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > I've tested this series on a Lenovo Thinkpad T14s with WCN7850 (so that=
-'s
-> > just the ath12k driver). Rest of the drivers are compile tested only.
-> >=20
-> > Merging Strategy
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > Even though there is no build dependency between the PCI core and ather=
-os
-> > patches, there is a functional dependency. So I'd recommend creating an
-> > immutable branch with the PCI patches and merging that branch into both
-> > the PCI and linux-wireless trees, and finally merging the atheros patch=
-es
-> > into the linux-wireless tree.
-> >=20
-> > If the immutable branch seems like a hassle, then the PCI core patches
-> > could get merged first and the atheros patches can wait for the next
-> > cycle.
-> >=20
-> > - Mani
-> >=20
-> > Changes in v3:
-> > * Dropped the change that made pci_enable_link_state*() symmetric with =
-the
-> >   disable APIs. Instead added a new pci_force_enable_link_state() API u=
-sed
-> >   only by the ath drivers, so the init-time blacklist stays overridable
-> >   only via pcie_aspm=3Dforce and existing callers like VMD are left
-> >   untouched.
-> > * Fixed the locked path to use pci_set_power_state_locked() for the D0
-> >   transition. The previous version called the non-locked variant, which
-> >   re-acquires pci_bus_sem.
-> > * ath drivers now disable PCIE_LINK_STATE_ASPM_ALL instead of
-> >   PCIE_LINK_STATE_ALL so that CLKPM is preserved and can be restored
-> >   (pcie_aspm_enabled() doesn't report CLKPM).
-> > * Reworked the kernel-doc patch to cover both the enable and disable AP=
-Is
-> >   and reference the new API.
-> > * Rebased on top of v7.2-rc1.
-> >=20
-> > Changes in v2:
-> > * Reworked the pcie_aspm_enabled() API to return the enabled states
-> >   instead of bool and used it to save/restore the ASPM states in ath
-> >   drivers.
-> > * Added a patch from Ilpo to disable ASPM even if BIOS didn't grant
-> >   permission.
-> > * Added the CONFIG_PCIEASPM dependency to ath{10/11/12}k drivers.
-> > * Rebased on top of v6.17-rc1.
-> >=20
-> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcom=
-m.com>
-> > ---
-> > Ilpo J=C3=A4rvinen (1):
-> >       PCI/ASPM: Always disable ASPM when driver requests it
->=20
-> I put this first patch on pci/aspm for v7.4 because there seems to be
-> a consensus that it's better to have the ASPM core disable things even
-> if it doesn't technically have control of ASPM, because the
-> alternative is that drivers just do it themselves, also ignoring ASPM
-> ownership concerns.  Having the drivers do it just means the PCI core
-> ASPM support doesn't know what's happening.
+This misses the SDC pads?
 
-Hi,
+> +		if (!gpiochip_line_is_valid(&pctrl->chip, i))
+> +			continue;
+> +
+> +		g = &pctrl->soc->groups[i];
+> +		s = &pctrl->saved[i];
+> +		s->ctl = msm_readl_ctl(pctrl, g);
+> +		s->io = msm_readl_io(pctrl, g);
+> +		if (!g->intr_cfg_reg)
+> +			continue;
+> +
+> +		s->intr_cfg = msm_readl_intr_cfg(pctrl, g);
+> +		if (msm_pin_has_own_intr_target(pctrl, g))
+> +			s->intr_target = msm_readl_intr_target(pctrl, g);
+> +	}
+> +	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+> +
+> +	return 0;
+> +}
+> +
+> +/*
+> + * The image is restored after a power cycle, when the pins are back at what
+> + * the firmware and the kernel that loaded the image made of them. Nothing else
+> + * writes the configuration again, so put back what was there.
+> + */
+> +static int msm_pinctrl_restore_noirq(struct device *dev)
+> +{
+> +	struct msm_pinctrl *pctrl = dev_get_drvdata(dev);
+> +	const struct msm_pingroup *g;
+> +	struct msm_pin_state *s;
+> +	unsigned long flags;
+> +	unsigned int i;
+> +	u32 val;
+> +
+> +	raw_spin_lock_irqsave(&pctrl->lock, flags);
+> +	for (i = 0; i < pctrl->chip.ngpio; i++) {
+> +		if (!gpiochip_line_is_valid(&pctrl->chip, i))
+> +			continue;
 
-Can you tweak the opening sentence as it has a small grammar error=20
-("Drivers can controlling") now that it has been altered from my original=
-=20
-wording.
+I'd extend this check to also cover pins that have no GPIO or mux owner or is
+an interrupt. See how pinctrl-intel.c does it. Otherwise you can have pins that
+are "valid" but are used by firmware.
 
---
- i.
+> +
+> +		g = &pctrl->soc->groups[i];
+> +		s = &pctrl->saved[i];
+> +
+> +		/* Set the level before the pin starts driving it. */
+> +		val = msm_readl_io(pctrl, g);
+> +		val &= ~BIT(g->out_bit);
+> +		val |= s->io & BIT(g->out_bit);
+> +		msm_writel_io(val, pctrl, g);
+> +
+> +		msm_writel_ctl(s->ctl, pctrl, g);
+> +		if (!g->intr_cfg_reg)
+> +			continue;
+>
+> +		if (msm_pin_has_own_intr_target(pctrl, g))
+> +			msm_writel_intr_target(s->intr_target, pctrl, g);
+> +		msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
+> +
+> +		/* Enabling the raw status can latch an interrupt. */
+> +		if (s->intr_cfg & BIT(g->intr_raw_status_bit))
+> +			msm_ack_intr_status(pctrl, g);
+> +	}
+> +	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+> +
+> +	return 0;
+> +}
+> +
+> +const struct dev_pm_ops msm_pinctrl_dev_pm_ops = {
+> +	SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
+> +	.freeze_noirq = pm_sleep_ptr(msm_pinctrl_freeze_noirq),
+> +	.restore_noirq = pm_sleep_ptr(msm_pinctrl_restore_noirq),
+> +};
+>  EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
+>
+>  int msm_pinctrl_probe(struct platform_device *pdev,
+> @@ -1663,6 +1758,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+>  	if (ret)
+>  		return ret;
+>
+> +	if (IS_ENABLED(CONFIG_HIBERNATION)) {
+> +		pctrl->saved = devm_kcalloc(&pdev->dev, pctrl->chip.ngpio,
+> +					    sizeof(*pctrl->saved), GFP_KERNEL);
+> +		if (!pctrl->saved)
+> +			return -ENOMEM;
+> +	}
+> +
+>  	platform_set_drvdata(pdev, pctrl);
+>
+>  	dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
+> diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> index e4c0abcd9..bfe122fc7 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> @@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver = {
+>  	.driver = {
+>  		.name = "x1e80100-tlmm",
+>  		.of_match_table = x1e80100_pinctrl_of_match,
+> +		.pm = &msm_pinctrl_dev_pm_ops,
+>  	},
+>  	.probe = x1e80100_pinctrl_probe,
+>  };
+> --
+> 2.53.0
+>
+>
+>
 
-> I think we should defer the rest of these because I think there's a
-> little room to make the enable/disable/force-enable dance more
-> intuitive for the drivers.  As far as I know, the rest of the series
-> is definite cleanups but doesn't fix any actual functional issues.
->=20
-> > Manivannan Sadhasivam (7):
-> >       PCI/ASPM: Add pci_force_enable_link_state() API
-> >       PCI/ASPM: Transition the device to D0 (if required) when enabling=
- ASPM link states
-> >       PCI/ASPM: Improve the kernel-doc for pci_{enable,disable}_link_st=
-ate*() APIs
-> >       PCI/ASPM: Return enabled ASPM states from pcie_aspm_enabled() API
-> >       wifi: ath12k: Use pci_{enable/disable}_link_state() APIs to enabl=
-e/disable ASPM states
-> >       wifi: ath11k: Use pci_{enable/disable}_link_state() APIs to enabl=
-e/disable ASPM states
-> >       wifi: ath10k: Use pci_{enable/disable}_link_state() APIs to enabl=
-e/disable ASPM states
-> >=20
-> >  drivers/net/wireless/ath/ath10k/Kconfig |   2 +-
-> >  drivers/net/wireless/ath/ath10k/pci.c   |  11 +--
-> >  drivers/net/wireless/ath/ath10k/pci.h   |   5 +-
-> >  drivers/net/wireless/ath/ath11k/Kconfig |   2 +-
-> >  drivers/net/wireless/ath/ath11k/pci.c   |  19 +----
-> >  drivers/net/wireless/ath/ath11k/pci.h   |   3 +-
-> >  drivers/net/wireless/ath/ath12k/Kconfig |   2 +-
-> >  drivers/net/wireless/ath/ath12k/pci.c   |  19 +----
-> >  drivers/net/wireless/ath/ath12k/pci.h   |   4 +-
-> >  drivers/pci/controller/dwc/pcie-qcom.c  |   5 --
-> >  drivers/pci/controller/vmd.c            |   5 --
-> >  drivers/pci/pcie/aspm.c                 | 140 ++++++++++++++++++++++++=
---------
-> >  include/linux/pci.h                     |   7 +-
-> >  13 files changed, 129 insertions(+), 95 deletions(-)
-> > ---
-> > base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
-> > change-id: 20260708-pci-aspm-fix-331826a2cb5d
-> >=20
-> > Best regards,
-> > -- =20
-> > =E0=AE=AE=E0=AE=A3=E0=AE=BF=E0=AE=B5=E0=AE=A3=E0=AF=8D=E0=AE=A3=E0=AE=
-=A9=E0=AF=8D =E0=AE=9A=E0=AE=A4=E0=AE=BE=E0=AE=9A=E0=AE=BF=E0=AE=B5=E0=AE=
-=AE=E0=AF=8D
-> >=20
-> >=20
->=20
---8323328-606769928-1792053319=:1307--
+Bart
