@@ -1,342 +1,310 @@
-Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch [79.135.106.28])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE3FA49F13A;
-	Thu, 15 Oct 2026 11:32:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4426045C702
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:39:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792063937; cv=none; b=FlJ7KO+cNXMJ2+eA0DNP77qARaayHG4ABihc53jF6ttp2uI7CKTu+pGxoPf9rtEVebbrxFo7TGCWt6qFFw9+AFGY4VQLxFjF+h5hQrU/Sm0se2oXrEqKjWGIcmbYfFkgxGVc8ROHoFPCCHflm/ke0bmTTr+TCxxQfzlG4WbfzGw=
+	t=1792064389; cv=none; b=aUH3vRm5hnMCRfPWmdoDOQnMxZNpW3qQoCLj+dg48Cxowtm778avrXzrrAM4HnVgQS2WsbN1e6xxEX3DwuLZeJ/ar77R2tD05EI2GgmZjYBnQGy7lecpl8M2vMR3G8m2d4nsb+p55HFWxBPVkpc6oRiQmc6G5R0FSdmph7sfjT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792063937; c=relaxed/simple;
-	bh=eWHZdGIt69imaqtUIYPNFJN2aHY1wNulOaeoVySRACU=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=fvMZCby7Aj9yqsWSP7Pp4Qd5GGxugAeXpPrsQNGZurOiwH6/s3efmA23QjNEuhjafW55J9wu/KXhBC7f4NJhhYcJqT5vdyBSBFfrtjTPAuVHcvYPFL1AGuoX8OqiZhwVvpjqFw2tio7lJqsUYbXwUeEceGrU14LAPMTNMrPXfZw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=lqsrtadV; arc=none smtp.client-ip=79.135.106.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1792064389; c=relaxed/simple;
+	bh=JXzL7S9bNiMOsigVQwbFH3I5AHLAWMPHnh2F+ewfMiY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=pz7M6s2fJ0FFEz69O6BLx50zLBwSWRyUSOYQZKW0yWnq90RuKww7IjxWcSkVWJb67TBZaogenF1BxTZODMP8IzeKw6BW9MC6aPyBCaR+LczdLGSEpJwXR5pig8jHWpOxE2of0254BZ+zOl/msYA76ICVTXamwQpkoJEWuFvuXgY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nqs4EIgD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jVg4awAg; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="lqsrtadV"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1792063920; x=1792323120;
-	bh=F49P6/YaXglCFw/CQmua198RbokbaF+x4tT5OkRvfjM=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=lqsrtadVtyQUZ2SNJ4tr8bXwstQ8JAaWkA2hYhTvAd1qT4vlHNnPi2EE3vrGocaEW
-	 i9UZ6XnfpFr0QG7CYZ8ECcvWs3xleDbv10J3aDLkMFl5qEJEiiw/riMnfDU4thFD0/
-	 Kp0GrFuMmlMmUuYQwcrvARO1ESwPbG0z6o5C9N6VaVuqiC9grcRevdTz6QDXCdDCOt
-	 uP9ZQ8d7WMmTxofylWQD7w8vHP8KQhCa+u/ieFld/NEx0wSJCfP6ytlZ7Vif0Xtcys
-	 xUzxzEnyhV0+A7nf31K1D2FpfAutSueNSkbR1RglQANgly1pL98FUwVVawgFrfLLvo
-	 /B/Np0aNv1Jsw==
-Date: Thu, 15 Oct 2026 11:31:54 +0000
-To: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] pinctrl: qcom: Restore the pin configuration after hibernation
-Message-ID: <179206391202.36987.1416057976823693032@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: b7b58f4345ded38ceb53d0c77936c8845bc47ed9
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nqs4EIgD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jVg4awAg"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FAPuaL1596361
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:39:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=Zw5Irjniue1tO+zMu7+ovK
+	viI3GOBmVus1nvVQ43SCE=; b=Nqs4EIgD9dXpaS7kQKyTCyPPT8x6s9Wf1n7msw
+	2miGkLJfkO0rqATvgwemXTg7bZJcvNPggC0HM5ZSyz5laXzR17vKBm9vBn8TLjCO
+	vN0xRcqnNfHeLAYUdepknML9jaBu+Zkm0lmBMKk4sGgSIdUsJK7wYamlfxbV0BUC
+	p6EIY9MixA374YMronDFtU0q98nhCbP1UinOfT47SWfXiVxHVaK3qlOJMimRCEmc
+	JcezPZqvFtJSCPiMZvAjm8Z/Ef8fPBIlY6sjQOnSSUwFqOS3yNICp8dpzBXcChiT
+	kJ26z8T+FsEm8/qaIf0femnEfzSryNJMHUeBXTc7kxUZK/UQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haw2v88q0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 11:39:46 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35c3c370b17so5747753eec.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 04:39:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792064385; x=1792669185; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Zw5Irjniue1tO+zMu7+ovKviI3GOBmVus1nvVQ43SCE=;
+        b=jVg4awAgtmoAiNcmTbgpdtodlhCbQm8gMNoY9MklOnFXwQKDFsMYNsV6OdAtvOgl6Y
+         4LDkOXK06cyvVBNewYMQmiWLq8xjzeDYAAX5HhuRx//2lWnz2hsoNGH59I0bAP2txV0u
+         oYu/XJvNun3MBRp5uPEjQaAR+EltzYvexBgiXqbfOWxrZH6GgflOBPrKkrKiEnJQIjoe
+         DodcJbyRxAvHG4gzr1Z2M112EM0Sm37pb5Lr8lUrb9sjI1NrWvWcvCr9r9rma6UFK14F
+         pG9LrGJmxcHuUloCICrtTLMHJVpV1JkuG+AVcrhsqqtMzMAPnvPkqpIn0dgCd8LTo9Zk
+         Tl0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792064385; x=1792669185;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Zw5Irjniue1tO+zMu7+ovKviI3GOBmVus1nvVQ43SCE=;
+        b=Fmj4pGVJmS0nmnm5kmdcT359KKN0ciysJOQsdJP1CPUiLIKTZGHaxmRz/fBOr0nUl9
+         9xNd2CY9ncXDN/hpLkqX/C8I6424J42Jvc/aVTZ083VKKptbMy8E7/LisQF4FGGwr1ij
+         9jP29NSISvFWY6e/aBqaEefOixPSwH4DvwmtXQ5158lhujz5ohGZrfqJmXHiunDRV4Su
+         DkPEslZ1kxzs0jqU6+cLr0cg2ZKwWKJqNrJl5NDkrr1TzfwIhwosC8MI8OZToMqZpi6x
+         3dBV1cC5pMlVx2cIjFijMImXt6am08nuYtiTMDqoKaip9NglwOzkSSrMMTbaYGBBc9S4
+         F1eQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwulQkY2pgXTJADmFHFeYnwTh/YbvTCVmEe88jpzz1R1h8bZT6CWxTttw9u6znspxnP0RlXgAKGV6fbxJiW@vger.kernel.org
+X-Gm-Message-State: AFq9FYLy5hjEPOOPAZpSdVmZ5M7lVR1L7x6fgW/EFWAXNk7Pl7rntG//
+	CHBT9wXMzFQ52A9tZPaJj3/oQksojC+GCxABOmS1yH6QZ+X0Dd4zL+KkcsAlkLfOIsepjUKQEJP
+	Ui4vQWamL/jnANCmMZCBCt9v/bdMu/fwHgi2OpGMAH5koDgv+bnM7QT8C29G3XU1Gifbf
+X-Gm-Gg: AYBFou39BcDpzc7pX3d2ZakVaWwvfTMNSolLl1afgJfV/Y+g0xYr6tu0BsH0lHohZw5
+	MR07Ztq1gnLAxlso6WdwwSFDiTSNhaM2Hly70v1L1HxD6ilbfAbny++w3RjdAqL/E2RFC9eP0F+
+	DJ32hSszD1PZRhPg6TpFjZCgNMDBnEJzN210tHGg0LRbBKrPwDaJy80IIcMupLkR4NlQ2t6s4eM
+	zj1QtaXIwVxtGmSg0ECLqTLhG12h2V4uVwEf4KCQBzLB/9/0lEABY7Q9I/LYd1NHKCo6vBdFW5i
+	ZIA7h385Z6teIepjRPVeZp06keLL5NmxcaCeUzDT3aOXWfMvvO5noxLHnTyGkpxrITMaUFN8ZYg
+	+N7pvFeJGjQef5P/RrYrTWDT74Q==
+X-Received: by 2002:a05:701b:231b:b0:14f:5549:c1ea with SMTP id a92af1059eb24-16a57a16d44mr27065296c88.1.1792064385198;
+        Thu, 15 Oct 2026 04:39:45 -0700 (PDT)
+X-Received: by 2002:a05:701b:231b:b0:14f:5549:c1ea with SMTP id a92af1059eb24-16a57a16d44mr27065251c88.1.1792064384378;
+        Thu, 15 Oct 2026 04:39:44 -0700 (PDT)
+Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-35b29c2f861sm48144891eec.11.2026.10.15.04.39.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Oct 2026 04:39:43 -0700 (PDT)
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Subject: [PATCH v5 0/7] Add TEE based client driver for UEFI Secure
+ Application
+Date: Thu, 15 Oct 2026 17:09:34 +0530
+Message-Id: <20261015-qcom_uefisecapp_migrate_qcomtee-v5-0-1460691b35d3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHa70GoC/4XOTWrDMBAF4KsEraugGf1E6ar3KMXI0igR1LEjO
+ SYh+O6VUyhZNHgz8Ibhe3NnhXKiwt43d5ZpSiX1pxr024b5ozsdiKdQM0OBRihh+dn3XXOhmAp
+ 5NwxNlw7ZjdQs+5GIg7RmH5QmAYpVZcj19vpo+Pyq+ZjK2Ofbo3CCZftr78Ru1Z6ACx6N3vs26
+ CCU/+hL2Z4v7rsedNs62FIx4ROLuM5iZVvrbPQtKQR4wco/FoSAdVZWFmSI2qPwSPIFq55Zs86
+ q5dsI3hI6o1z7DzvP8w93PbQo2gEAAA==
+X-Change-ID: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
+To: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@kernel.org>,
+        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Harshal Dev <harshal.dev@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792064379; l=8747;
+ i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
+ bh=JXzL7S9bNiMOsigVQwbFH3I5AHLAWMPHnh2F+ewfMiY=;
+ b=bqT1gva7AEuKsno12gP+UO2e6w5sfXsK7kR+pxI5x/evkiBN7V6K+16ASsZKG+APtezz3KGsH
+ 69sfz09ynanBDb6Da1fsfhwNDIuAatXBe82IMUbBQwWzxVcCSyhCGkw
+X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
+ pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA0NiBTYWx0ZWRfX4mdx+OxiAhv9
+ S5ozsJwLr7CpQGJYfEc8YkXz7ozlgi4RH8fqFIwVlTEQgOxybtEkDcqU0GrGpDKwKWF06L2ARQQ
+ wN68dlVc50TdvT6XSWRSbDYvU9jc9065qnNK1fVdtQHMEupux+kMWFChGLFXgRBm0PRHavaWnXu
+ pCW4+mXcTEAJSdWPFVHy29cjEEpbzlY4tXYlZ0w+XMv5VFEro0gkwKDkmZdOMoxfKQYzbccHzGu
+ Zzg3xnqKXC+gmike5mk5LEycaALYdfgfsD19OsOoDUYyzi7o7GhqVn0pAggBx57F6kGw2jxmPKI
+ 2cm5fjF9tYKMuaLVDrvSeqHxP7R6X+a3k9grzBuGp3pYYaC974euE+iMI35an0Y7rOv7WL/sx6n
+ OvI6fADE+gNL2H00FzwvnPvFJoqIa40NpRn6oD4MduUhYnKs8q+yBY/6xNk3uB9O2tXmM5TXY4f
+ whoDJ8tKq1lkU6faogw==
+X-Proofpoint-ORIG-GUID: 9uZ6Cc87xwffCq-HwfD3mj96b1DrypJj
+X-Proofpoint-GUID: 9uZ6Cc87xwffCq-HwfD3mj96b1DrypJj
+X-Authority-Analysis: v=2.4 cv=G/CJgNk5 c=1 sm=1 tr=0 ts=6ad0bb82 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=NEAV23lmAAAA:8 a=EPKcpx9xAAAA:20 a=EUspDBNiAAAA:8 a=P-IC7800AAAA:8
+ a=VwQbUJbxAAAA:8 a=VctfPk_oDqlEa1PX-fEA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22 a=d3PnA9EDa4IxuAV0gXij:22 a=ZT_8zCgGubuJgGonBfBE:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA0NiBTYWx0ZWRfX4H8hImpldGxr
+ TtdC8VmoWJYlcA8zDiHr+vnHHh05dj9PuitVWjP2ILKLZXh0g7dj9/meDY74cN1yCDMvKryo/Vh
+ iFK4OP2+hMXYes9qmDfatptuPbnfmmI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 spamscore=0 clxscore=1015 bulkscore=0
+ impostorscore=0 suspectscore=0 adultscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150046
 
-A hibernation image is restored after a power cycle. The TLMM registers
-then hold what the boot firmware and the kernel that loaded the image
-made of them. The restored kernel has the configuration it applied in
-memory only, and nothing writes it to the hardware again, so every pin
-that the loading kernel did not set up the same way stays wrong.
+On Qualcomm SoC based platforms, UEFI stores EFI variables within the
+Replay Protected Memory Block (RPMB) located within either the UFS,
+eMMC or SPI-NOR storage. The RPMB key which is one-time programmed into
+the storage controller to allow authentication of the RPMB frames is
+generated by and only available to the Qualcomm Trusted Execution
+Environment (QTEE). Thus, only QTEE can prepare the RPMB frames which
+will be accepted by the storage controller.
 
-On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
-are two of them. Their drivers are loaded from the root file system, so
-the kernel that loads the image never touches the pins. This is
-/sys/kernel/debug/gpio before the hibernation and after the resume:
+The legacy QSEECOM protocol used for communicating with the QTEE is
+deprecated and replaced with the use-case agnostic SMCInvoke protocol
+starting with the Qualcomm SM8x50 series. On platforms where the QSEECOM
+protocol still works (the QSEECOM driver probes) the driver does not
+support a listener interface with QTEE to enable writing of non-volatile
+EFI variables (via listener requests to Linux from QTEE) to the RPMB
+for UFS and eMMC storage. (Qualcomm Compute platforms with SPI-NOR storage
+are an exception to this and work with QSEECOM, see the NOTE below)
 
-  gpio116 : out low  func0 2mA no pull
-  gpio117 : out high func0 2mA no pull
+Therefore on such platforms, a TEE client driver (which communicates with
+QTEE via the SMCInvoke protocol implemented by the QCOMTEE driver
+registered with the TEE subsystem) must be used to update such EFI variables
+through the RPMB service hosted in the QTEE supplicant user-space daemon
+[1] which forwards RPMB packets to the RPMB device.
 
-  gpio116 : in  low  func0 2mA pull down
-  gpio117 : out high func0 16mA no pull
+This series introduces such a uefisecapp TEE client driver for the
+aforementioned Qualcomm platforms which installs efi-var operations _if_
+the QCOMTEE driver registers support for an object-IPC based uefisecapp
+service on the TEE bus during its probe. Only new QTEE firmware versions
+available at [2] provide access to the uefisecapp service via the SMCInvoke
+protocol.
 
-The driver that owns gpio116 still believes it drives the line.
+Thus, QCOMTEE now maintains a static list of always-available object-IPC
+based secure services exposed by QTEE. These services are implemented either
+within the QTEE kernel or within a pre-loaded Trusted Application (TA)
+usually loaded by the bootloader. The uefisecapp TA is an example of a
+preloaded TA loaded by UEFI. A static list is required since QTEE does not
+yet expose any way to dynamically query and enumerate the services exposed
+by it.
 
-Save the control, output and interrupt configuration registers in
-freeze_noirq and write them back in restore_noirq, the output level
-first, so that a pin drives the right level from the moment it becomes
-an output. Changing the interrupt configuration can latch an interrupt,
-so the status is cleared where the register changed, as
-msm_gpio_irq_set_type() does.
+To facilitate object-IPC interactions from the kernel-space, this
+series also introduces a tee_client_object_invoke_func() to allow
+invocation of TEE objects similar to the existing tee_client_invoke_func()
+API exported by the TEE subsystem which allows invocation of TEE functions.
+Some suporting changes are also introduced to track and handle operations
+for TEE contexts opened from the kernel-space in the back-end QCOM-TEE
+driver.
 
-Only the GPIOs the kernel uses are put back: those requested as a GPIO,
-muxed to a function or used as an interrupt, as pinctrl-intel does. A
-valid GPIO without an owner may be in use by firmware. The SDC pads
-after the GPIOs are configured without a mux function, so they never
-have an owner, and their control register is always put back.
+Finally and as previously mentioned, access to the object-IPC based uefisecapp
+service is restricted on older QTEE firmware versions. A new QTEE firmware
+release must be picked up from QArtifactory [2] for all upstream supported
+Qualcomm SoCs to enable access to uefisecapp service via the TEE client
+driver.
 
-msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
-these ops. With that x1e80100 also gets their suspend and resume
-callbacks, which apply the sleep and default state of the controller's
-own pins where a board defines them.
+This patch series has been validated on Kodiak RB3Gen2 platform with UFS
+storage by attempting to read/write EFI variables via the efivar tool [3]
+after mounting the efivarfs filesystem. See [4] for an example.
 
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+NOTE: Since Compute platforms do not have a firmware running on their SPI-NOR
+storage controller which must be programmed with a RPMB key, QTEE has a
+SPI-NOR driver which holds the key, and so the QSEECOM driver can be used
+for updating EFI variables on these platforms because QTEE never makes a
+listener request to Linux (QTEE doesn't need the Linux SPI-NOR driver).
+Such platforms are outlined in the following static list [5].
+
+Merge Strategy:
+
+This patch series could either be taken from the OP-TEE tree or the
+QCOM soc tree. I would prefer it to be picked by the OP-TEE tree since
+all except the uefisecapp TEE client driver patch in this series make
+changes relevant to the TEE subsystem. It would be great if the QCOM soc
+tree maintainers can Ack the uefisecapp driver patch.
+
+[1] https://github.com/qualcomm/minkipc
+[2] https://shorturl.at/zQU07
+[3] https://github.com/rhboot/efivar
+[4] https://docs.qualcomm.com/doc/80-70020-27/topic/manage_uefi_environment_variables_using_efivar_tool.html
+[5] https://elixir.bootlin.com/linux/v7.3-rc5/source/drivers/firmware/qcom/qcom_scm.c#L2302
+
+Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
 ---
-Changes since the RFC:
-- Put a GPIO back only when the kernel uses it, as a GPIO, through a
-  mux function or as an interrupt, as pinctrl-intel does (Bartosz).
-- Save and restore the SDC pads after the GPIOs as well (Bartosz).
-- Allocate the save area under the same option as the callbacks,
-  CONFIG_HIBERNATE_CALLBACKS (Sashiko).
-- Clear the interrupt status only where the restore changed the
-  interrupt configuration (Sashiko).
-- Say in a comment that a both-edge interrupt emulated by flipping the
-  polarity is not primed again. No SoC with such pins uses these ops.
-- Rebased on pinctrl-qcom/for-next.
-- Link to the RFC: https://lore.kernel.org/r/179163141354.18006.80461347454=
-353634@pm.me
+Changes in v5:
+- Fixed comment in qcomtee_object.h to drop '+'.
+- Removed duplicate function doc for tee_generate_uuid_v5() in .c file.
+- Fixed qtee_register_services() doc.
+- Dropped unused QTEE_UUID_NS_NAME_SIZE macro.
+- Optimized qcomtee_uefi_query_variable_info() to drop redundant stack variables.
+- Migrated to block comment format everywhere in qcom_tee_uefisecapp.c.
+- Drop comments which highlight obvious stuff in qcomtee_uefisecapp_probe().
+- Collected Reviewed-by tags from Amir.
+- Link to v4: https://lore.kernel.org/r/20261006-qcom_uefisecapp_migrate_qcomtee-v4-0-bf1c8e2a64ab@oss.qualcomm.com
 
-Tested on a Lenovo Yoga Slim 7x with v7.2 plus this patch. The kernel
-also carried the PCI change in [1], without which this machine does
-not resume at all, the smp2p change in [2] and a GENI serial change
-that is not posted. The Bluetooth driver had [3] applied. On
-pinctrl-qcom/for-next the patch builds without warnings with W=3D1 and
-sparse, with hibernation on, off and without sleep support.
+Changes in v4:
+- Fixed kernel test robot warnings with gcc v16.1.0 [-Wvla-larger-than].
+- Update parameter docs for qcomtee_object_invoke() and param_to/from_args().
+- Split the defconfig change enabling the UefiSecApp TEE driver into a separate
+  commit.
+- Use pr_debug() instead of pr_err() when QTEE says it does not implement a
+  service being enumerated.
+- Re-name qtee_enumerate_service*() functions to qtee_register_service*().
+- Collected Reviewed/Acked-by tags from Sumit.
+- Link to v3: https://lore.kernel.org/r/20261001-qcom_uefisecapp_migrate_qcomtee-v3-0-13df5c20c2e3@oss.qualcomm.com
 
-- Before the hibernation 45 TLMM pins have an owner, gpio116 and
-  gpio117 among them (wcn7850-pmu), and four are interrupts.
-- pm_test=3Dcore and test_resume pass.
-- After a hibernation with a real power-off the TLMM part of
-  /sys/kernel/debug/gpio differs only in the level read on two inputs
-  (gpio93 and gpio153), as it did with the RFC.
-- A suspend (deep) and wake still works.
+Changes in v3:
+- Updated the cover letter and commit messages to highlight the following:
+  1. Only QTEE has the ability to prepare RPMB frames since it generates and
+     holds the RPMB key.
+  2. The QSEECOM protocol is deprecated on new platforms and so this series
+     migrates the uefisecapp to SMCInvoke which is a use-case agnostic, transport
+     focused and easier to maintain protocol.
+- Use single if statement to update both flags and addr/uaddr.
+- Remove redundant use of new error variable in qcomtee_get_qtee_feature_list().
+- Minor fixes such as concise error prints and use of better error codes.
+- Fix a double free in qtee_enumerate_service().
+- Re-org the qcomtee_enumerate_services() function to re-use the same oic and
+  client_env object.
+- Remove depends on !QCOM_QSEECOM_UEFISECAPP from Kconfig since both drivers
+  can co-exist even on platforms that support both QSEECOM and SMCInvoke protocols.
+- Update the Kconfig description to better help the user understand when to enable
+  the TEE based uefisecapp driver.
+- Removed qcom_tee_uefisecapp.h file and inline the header in qcom_tee_uefisecapp.c
+- Rebased patch series onto the latest linux next tag: next-20260930.
+- Link to v2: https://lore.kernel.org/r/20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com
 
-The Yoga has no SD card slot and its SDC2 pads have no owner, so this
-only shows that putting them back does no harm. I did not read them
-back.
+Changes in v2:
+- Drop using MSB of the object_id to distingush kernel and user object invoke contexts.
+- Introduce enum tee_object_invoke_origin to check the context of object invocation.
+- Link to v1: https://lore.kernel.org/r/20260707-qcom_uefisecapp_migrate_qcomtee-v1-0-f659cbd5d04c@oss.qualcomm.com
 
-Not covered here: the LPASS LPI pin controller, whose pins also come
-back at their reset values after a hibernation.
+---
+Amirreza Zarrabi (2):
+      tee: Add kernel client object invoke helper
+      tee: qcomtee: Allow object invokes from kernel clients
 
-[1] https://lore.kernel.org/r/179181074907.22199.10556821368232442334@pm.me
-[2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
-[3] https://lore.kernel.org/r/179163212446.46972.2306254853726299632@pm.me
+Harshal Dev (5):
+      tee: qcomtee: Track the object invocation context
+      tee: Export uuidv5 generation for TEE backends
+      tee: qcomtee: Add support for registering QTEE services on TEE bus
+      firmware: qcom: Add support for TEE based EFI-var client driver
+      arm64: defconfig: Enable UefiSecApp TEE client driver for Qualcomm SoCs
 
- drivers/pinctrl/qcom/pinctrl-msm.c      | 147 +++++++++++++++++++++++-
- drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
- 2 files changed, 146 insertions(+), 2 deletions(-)
+ MAINTAINERS                                 |   6 +
+ arch/arm64/configs/defconfig                |   1 +
+ drivers/firmware/qcom/Kconfig               |  31 ++
+ drivers/firmware/qcom/Makefile              |   1 +
+ drivers/firmware/qcom/qcom_tee_uefisecapp.c | 644 ++++++++++++++++++++++++++++
+ drivers/tee/qcomtee/call.c                  | 210 ++++++++-
+ drivers/tee/qcomtee/core.c                  |   9 +-
+ drivers/tee/qcomtee/qcomtee.h               |  10 +
+ drivers/tee/qcomtee/qcomtee_msg.h           |   1 +
+ drivers/tee/qcomtee/qcomtee_object.h        |  16 +-
+ drivers/tee/tee_core.c                      |  34 +-
+ include/linux/tee_core.h                    |  23 +-
+ include/linux/tee_drv.h                     |  18 +-
+ 13 files changed, 959 insertions(+), 45 deletions(-)
+---
+base-commit: 6c2cb8b8b843d216ab549b678a0d8831c43153e0
+change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinc=
-trl-msm.c
-index 27f06bbc113c..0dd478e80e30 100644
---- a/drivers/pinctrl/qcom/pinctrl-msm.c
-+++ b/drivers/pinctrl/qcom/pinctrl-msm.c
-@@ -39,6 +39,15 @@
- #define MAX_NR_TILES 4
- #define PS_HOLD_OFFSET 0x820
-=20
-+/* Register values of one pin group, kept across a hibernation. */
-+struct msm_pin_state {
-+=09u32 ctl;
-+=09u32 io;
-+=09u32 intr_cfg;
-+=09u32 intr_target;
-+=09bool saved;
-+};
-+
- /**
-  * struct msm_pinctrl - state for a pinctrl-msm device
-  * @dev:            device handle.
-@@ -58,6 +67,7 @@
-  * @soc:            Reference to soc_data of platform specific data.
-  * @regs:           Base addresses for the TLMM tiles.
-  * @phys_base:      Physical base address
-+ * @saved:          Pin registers kept while a hibernation image is taken.
-  */
- struct msm_pinctrl {
- =09struct device *dev;
-@@ -80,6 +90,8 @@ struct msm_pinctrl {
- =09const struct msm_pinctrl_soc_data *soc;
- =09void __iomem *regs[MAX_NR_TILES];
- =09u32 phys_base[MAX_NR_TILES];
-+
-+=09struct msm_pin_state *saved;
- };
-=20
- #define MSM_ACCESSOR(name) \
-@@ -1583,9 +1595,133 @@ static __maybe_unused int msm_pinctrl_resume(struct=
- device *dev)
- =09return pinctrl_force_default(pctrl->pctrl);
- }
-=20
--SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
--=09=09  msm_pinctrl_resume);
-+static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
-+=09=09=09=09=09const struct msm_pingroup *g)
-+{
-+=09return !pctrl->intr_target_use_scm && g->intr_target_reg &&
-+=09       g->intr_target_reg !=3D g->intr_cfg_reg;
-+}
-+
-+/*
-+ * A GPIO is only put back when the kernel uses it, as a GPIO, through a m=
-ux
-+ * function or as an interrupt. Other valid pins may be in use by firmware=
-.
-+ * The pads after the GPIOs (SDC) have no GPIO and are configured without =
-a
-+ * mux function, so they never have an owner and are always put back.
-+ */
-+static bool msm_pin_in_use(struct msm_pinctrl *pctrl, unsigned int i)
-+{
-+=09const struct pin_desc *desc;
-+
-+=09if (i >=3D pctrl->chip.ngpio)
-+=09=09return true;
-+
-+=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
-+=09=09return false;
-+
-+=09desc =3D pin_desc_get(pctrl->pctrl, i);
-+
-+=09return desc && (desc->mux_owner || desc->gpio_owner ||
-+=09=09=09gpiochip_line_is_irq(&pctrl->chip, i));
-+}
-+
-+/* Remember how the pins are set up when a hibernation image is taken. */
-+static int msm_pinctrl_freeze_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned long flags;
-+=09unsigned int i;
-=20
-+=09raw_spin_lock_irqsave(&pctrl->lock, flags);
-+=09for (i =3D 0; i < pctrl->soc->ngroups; i++) {
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+=09=09s->saved =3D msm_pin_in_use(pctrl, i);
-+=09=09if (!s->saved)
-+=09=09=09continue;
-+
-+=09=09s->ctl =3D msm_readl_ctl(pctrl, g);
-+=09=09if (i >=3D pctrl->chip.ngpio)
-+=09=09=09continue;
-+
-+=09=09s->io =3D msm_readl_io(pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-+
-+=09=09s->intr_cfg =3D msm_readl_intr_cfg(pctrl, g);
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09s->intr_target =3D msm_readl_intr_target(pctrl, g);
-+=09}
-+=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
-+
-+=09return 0;
-+}
-+
-+/*
-+ * The image is restored after a power cycle, when the pins are back at wh=
-at
-+ * the firmware and the kernel that loaded the image made of them. Nothing=
- else
-+ * writes the configuration again, so put back what was there.
-+ *
-+ * A both-edge interrupt that is emulated by flipping the polarity gets th=
-e
-+ * polarity it had, which is not primed for a line that changed meanwhile.=
- No
-+ * SoC with such pins (one-bit detection) uses these callbacks.
-+ */
-+static int msm_pinctrl_restore_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned long flags;
-+=09unsigned int i;
-+=09u32 val;
-+
-+=09raw_spin_lock_irqsave(&pctrl->lock, flags);
-+=09for (i =3D 0; i < pctrl->soc->ngroups; i++) {
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+=09=09if (!s->saved)
-+=09=09=09continue;
-+
-+=09=09if (i >=3D pctrl->chip.ngpio) {
-+=09=09=09msm_writel_ctl(s->ctl, pctrl, g);
-+=09=09=09continue;
-+=09=09}
-+
-+=09=09/* Set the level before the pin starts driving it. */
-+=09=09val =3D msm_readl_io(pctrl, g);
-+=09=09val &=3D ~BIT(g->out_bit);
-+=09=09val |=3D s->io & BIT(g->out_bit);
-+=09=09msm_writel_io(val, pctrl, g);
-+
-+=09=09msm_writel_ctl(s->ctl, pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-+
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09msm_writel_intr_target(s->intr_target, pctrl, g);
-+=09=09val =3D msm_readl_intr_cfg(pctrl, g);
-+=09=09msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
-+
-+=09=09/*
-+=09=09 * Changing the configuration can latch an interrupt. One that
-+=09=09 * is latched with the configuration unchanged is a real one.
-+=09=09 */
-+=09=09if (val !=3D s->intr_cfg)
-+=09=09=09msm_ack_intr_status(pctrl, g);
-+=09}
-+=09raw_spin_unlock_irqrestore(&pctrl->lock, flags);
-+
-+=09return 0;
-+}
-+
-+const struct dev_pm_ops msm_pinctrl_dev_pm_ops =3D {
-+=09SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
-+=09.freeze_noirq =3D PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
-+=09=09=09       msm_pinctrl_freeze_noirq),
-+=09.restore_noirq =3D PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
-+=09=09=09=09msm_pinctrl_restore_noirq),
-+};
- EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
-=20
- int msm_pinctrl_probe(struct platform_device *pdev,
-@@ -1663,6 +1799,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
- =09if (ret)
- =09=09return ret;
-=20
-+=09if (IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS)) {
-+=09=09pctrl->saved =3D devm_kcalloc(&pdev->dev, pctrl->soc->ngroups,
-+=09=09=09=09=09    sizeof(*pctrl->saved), GFP_KERNEL);
-+=09=09if (!pctrl->saved)
-+=09=09=09return -ENOMEM;
-+=09}
-+
- =09platform_set_drvdata(pdev, pctrl);
-=20
- =09dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
-diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom=
-/pinctrl-x1e80100.c
-index e4c0abcd95b9..bfe122fc7e79 100644
---- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-+++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-@@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver=
- =3D {
- =09.driver =3D {
- =09=09.name =3D "x1e80100-tlmm",
- =09=09.of_match_table =3D x1e80100_pinctrl_of_match,
-+=09=09.pm =3D &msm_pinctrl_dev_pm_ops,
- =09},
- =09.probe =3D x1e80100_pinctrl_probe,
- };
---=20
-2.55.0
-
+Best regards,
+-- 
+Harshal Dev <harshal.dev@oss.qualcomm.com>
 
