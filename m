@@ -1,88 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA1B11FA272
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72E7A52B1C2
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:27:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792070729; cv=none; b=fxfwC9tWOAy7pl2MoeyLo7TOPECKXAqUM3ElU8arcvFh/CHOFk0fa/yTqO5tqBLiebUu5D8Z90pvgebYD12YlYjtYZz9m2QkwmkoXx2snocph0UZ3u3hZllYgvnK7JsxM5yVK0mVEkUqrdk0HK6K9FEYyaXJLoLnnrNs7C09EBA=
+	t=1792070838; cv=none; b=XBG58aXKWj+0ffSKy9+7+gRO4Zbe3VtVB0rPLqdIvwFrvuHsVvyadbKLkeoSSIz9YKAkI0yZVYKLoC6EbTLVxZ9bUJ5jA/Hy18GpUchfDIP2OwLaEub1B2fIMYp8DOZLNZDpCuq5pOqAcB6C3NQ4/lZtCQZ94/cyp43isTnU5zQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792070729; c=relaxed/simple;
-	bh=OKl8FxF8IEbfAFyPdAhMBb2ftzDCnYFKMb5F9NMa5dw=;
+	s=arc-20240116; t=1792070838; c=relaxed/simple;
+	bh=43d/IfQVGd0ktFWwh2ih4+KRV9k/SSk0R5GiuclYlrE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VcLLPcGULdUQHM/Vm0I1uIB5OWHEA/FBtCUPLwoS5HTSJ3xsBclT+/FNzIUHxN0QN1GkjjrVPM0Gw29VqdfkqM3Yn56moif+L9jHcQspMrmECh6z6o/GhZy9SPQakomX7MC6CXdzZIO405fOpE/WIPdhTbI30FHf0vBcLEdKzLc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ddDE0uF9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LbK9FDGe; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=F0dMHaSdofMl0WcPzYJ0+5fdSFGPlyKpCIg4s0sZs1Rllts9YDeVgx+TK+1zKR7Qk3lXTfwrYpmjaKRxUXTnvGgZ2ClllV88RQoNcp7GMK+Rx5wYdxLo5IGNcbcAU4QqMWdIis6Zvr7WfFpfD7WQHWvwYH6AmmEuwpgaUQC5fqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=URXVUZpM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JZgIKgIv; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ddDE0uF9";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LbK9FDGe"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jIBv4077483
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:26 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="URXVUZpM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JZgIKgIv"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9jSfU2662649
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:27:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=; b=ddDE0uF9JmMiZi89
-	0pSWhIStLk91p2Oa3mAq/K1DHJ/UGyhTK7OBu9A1DP5NMKgCP1x+0lmeuCgCm2Bu
-	Hsp6velGQMQyWu00dsapalMCS0WjjRbF8S2f5a2Scz2e1i/k1pTD5vQmEHhdzAc4
-	WVdM0z0TYH09b3weQM+SRt7JJh2Ad1VaxmNtzQnRGkjN/gZv5x9ZLYPJQDy04Nt6
-	RupmY9mF3nzlHgRIy0X9bnYJ4P0KH3AAMW+bSDEvcE9kwcR9ircbLGBCyCZ70Ff6
-	f+uUBrmaeMyxIuWe+yLHg4gZltdylfDn3As63uqQgvGlgAubXYV5h0e1mQG6eP7e
-	J8SkgQ==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4havbc0wgn-1
+	gGSmw4Qk0kQC5B4pGDw36PFQPUykZhpZLLcEgaeZJKQ=; b=URXVUZpMb+iTSGzd
+	FhgdBR8fbYC6wbxrWrKX7KR1VfZMaEJdfTOFw9nmcbnlJobC1ZnlHKevcBO7MAr8
+	Rl/YGxro7eMc9g/P4VENTjqF1PZrrMx1BjAoHm6MIafJcGHfmt+ywfPpwS9rMZvk
+	YIEByCDRszRmsYJanSDKpQnDRea9Mi0DD1N3ZV0cVR2mOFvwUwOzbhBWaf6ZjSYc
+	W3flCtHYVQ9AHTVz+0bGWF/rqI0y//P6eciFqZscOOOQl6tDNk0KgFpDmvKX+L9e
+	ubyPHUoG//9i8SGDiAVw9MCqS14/I9rGm34ugmLvZdimuarYLkU1Hqx11bjFSZnd
+	Rb36Cg==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haqda28a6-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:25:25 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-7c02e1df088so653196137.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:25:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:27:13 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5d44237e2faso276826e0c.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:27:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792070725; x=1792675525; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792070832; x=1792675632; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=;
-        b=LbK9FDGeeul3ZXiFJAkavP8OF2Qi8QtX4pI6552Yf3nYGpUXCo9iRTEX7/jYQdsMte
-         7LkZqExCS+PfhL4zSwaE/ryRkwTkdvXwNDGAR+TKIikJ+7zBqbFKviPySIrN0eaHfhAa
-         42XAfDl7NK6VaTeXiFQKcd+/WbInSJkEyvcqc+RfBPTms7JuZ8c5aI0EHn/+dM6nERsD
-         iE5G2FsLU5p9wxXM7M4VlqGsgKEXmvFGIJ6kvWZLgjMy5eOJRCBySpIC3x7HvHupWB1g
-         Lurq65BMHtm4rHIiR4fG5snehKFR0Qxwrnfj5gCjoaP0I8pWuU8s1xeN0k1YfJNoG29i
-         xOLA==
+        bh=gGSmw4Qk0kQC5B4pGDw36PFQPUykZhpZLLcEgaeZJKQ=;
+        b=JZgIKgIvSvYC/HpnvE5baG4AziXZ03ooZLYjEOova+oaa4m8sL8amdcnyszXQB0DxU
+         kwJulSznKq/kYDfs05Z6vfOLYaB65F7VfOKrLOYEadytqB7jW+oTlSac8rF96dRJWw1s
+         xehYASqQkSRpsOvqciuktHsW1NfNarTOnPbtlLILq9MjUnkRHIB9vdc5pWknSvQxYbyn
+         IYFwctjZ1iTyRrru5/+rhL+O6j80xMR/eaM6M016XHTDWdB1NcwITGBt3oBhAbC8vvVF
+         JTEqjuiRNdUNHhL5uAg7p0ulZXbBz/LhG6uwoTZobc+aiLGT0lqt0Uu/0i0+IOx5ne1c
+         x93A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792070725; x=1792675525;
+        d=1e100.net; s=20260707; t=1792070832; x=1792675632;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gCJfok3rHI2nfv7ozMgYv1Bh87GJoQXCUXkmVH8cksM=;
-        b=OvBatxb044opWavAMKI9jrj4qmVyy4OPLk7XjCWjRBeC6DYXw3wkrmAZlkqjbmCsY5
-         2iaOY6umVJ+Z4dhCoGq8JPWD5vkRoeuqbnpWnbQFGATfRipOqZfxzicZYPDUNi5pR1n4
-         qpGdRuKFQ/gRonM0F9jUyoC6A3Bp3IAiGaAQIXXegi/CXMa56qPhmK29F9PVl6ViF763
-         unwpbOdGZRk4Dyz6/35JqBioXl4UFcrPaCFOMm7U7DI1AV73d/mNMMxgmmxAlRO7SC0A
-         Y5fAdS7AkUWjok9Zd3fynDacMpXI0yHGqi/HNOEZv7bjwyH8J5munSrk9ESUBaibS9I3
-         oQug==
-X-Forwarded-Encrypted: i=1; AKwUvBzSoEebicgS5pMNWQceCRSafs0J9v58iLTj3z2rzq9vMcgu+43/wA9xvfvd8sdmB/gMillyg6HapSxza6Hr@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ87DmfOR0l4HaaxK6i/QwgyONtAqaoYZ3ISkMhg9kZm31uqHYA
-	LgF4jsGLW0mdo0Be8/6Al9NeEDmKPcZyCdKNNiTrFdXDCwLf2OT27OHyL+zwP7E9DmYbKdT7eik
-	7FAshOQ3OVZ1g3+2vDWNIopTrSQ1UmhICsxEcl8/UeAfVmSFzZhJwQGLRSFSlIKgemWtxqBZIjV
-	0c
-X-Gm-Gg: AYBFou2F5ft3T3laasfTagx5y5jeCJlacmM5vZF4FhHGbovSOBoswDu0wDS5RTRm8uu
-	H1oaYRAtxCnwX3S31lU2kH3v833zbjVP0p5clG6nGnRcECsC4lIyHouhJjSCd4ZNR/G8jBVDpng
-	N4T2TFlu/JSlcuROZ3s697oZKT2KQin4WwXUkiLGsBYjBgjD3k5PZVF25nKYKUaBekQ528k45lL
-	ofLEeFAcDm6bDUbDnNnhsatdirhA/T4x1tEAyP8gZTFLya5QQQs1ASVHOLZUq7SK+qRmccD+HgE
-	UP6wdVGzCIQj/WdGdO+Qv8/jVX8hJNCTcDRnDctcnUQTsqhSyg0Z31TyOT34z89ax255ERNTuiO
-	jz6ljZ908SgSIyIJKPIeXqJ67Ih7i5w==
-X-Received: by 2002:a05:6102:41ac:b0:7cc:1045:610 with SMTP id ada2fe7eead31-7cc10451036mr217332137.27.1792070724683;
-        Thu, 15 Oct 2026 06:25:24 -0700 (PDT)
-X-Received: by 2002:a05:6102:41ac:b0:7cc:1045:610 with SMTP id ada2fe7eead31-7cc10451036mr217320137.27.1792070724111;
-        Thu, 15 Oct 2026 06:25:24 -0700 (PDT)
-Received: from [192.168.0.31] ([212.5.153.243])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd66ab3dsm65873415e9.2.2026.10.15.06.25.21
+        bh=gGSmw4Qk0kQC5B4pGDw36PFQPUykZhpZLLcEgaeZJKQ=;
+        b=jlOywahlqNXfG0n99RXlFoXoYImx7/jWenVQVELXY3VBtxso7BZHFipJa5UFKI0g5t
+         Ue1ZmGAfk/aHXymjV+3o6CviYCQBUy5c6QeDtfwrhr+GQENice/Z763MZfhvz/xh+H5a
+         RcKgGv3Xcx1gEgF4NzYEsUolI7g7mRzoXGyFo8o5PHDRh8p0sg8AqE2m9BbZRva0Puar
+         5e43xMV8fDf8py25BWB+c4+00HVyPv2OQ667yLiuK7rLCKdmBWeQkeVhI9ymm2RgPyL8
+         v0ybfTp7yBali2/qe3OlcCFQ8MCBfF+caoUgkljmpIktg1MPPlR4qVS6HtYZmXPaWcev
+         wo0w==
+X-Gm-Message-State: AFq9FYJEPRkPWauMwBdcHbpTzlQvL3Et3AlJfPbmgn1b1Z3nnF9JB1Wz
+	MfjtYDs6sv3ZBrpUrjVdz8L8NNPk4jvVbWG+DuY/JKplWG9ExtCvyNVllBRB4lZHMuPsay+n+HZ
+	YO2aTfvINd0y3YBqmFueqB3LYtIiw7AMwWDXru1S5Tml+ugWpCMcJXOmksmCpOK4ZPX3O
+X-Gm-Gg: AYBFou1gSDSaS3x/6NC8qIdS52c6bN5vn4lUKWc5byN3ouBsSYmisXbKhpfOxQ4yd/5
+	fYGFYdJIzXYEjtKP3Ev+XwsLJf2Zdu1nA0VX9dJ+evqAhhyj+GP5viqjkktaMMdT2klEHgpac/R
+	5ssXXpgfAi7gCvsbuhbiE5jqW6sa52bY4AFEho4EjAtP0N8oXljNuVq8gWjB2Elyp0nBOq6Lm0m
+	/cf0UNbMEFWwsZlfL7Hv9IdCKBXXfbMLMOWWgUDp2c6BrUocccd6jRHAFiphMnX+BSZRh3zQ/t8
+	RoxR/rtn07I6X7M7qtO3792v7FZwZDp+dGP9wOR8zc1HY3xHOBPhgBSMg7PGdkveJMkGNLmB2oe
+	BpGQck8t992jkRUDGJ7lKRQ==
+X-Received: by 2002:a05:6123:5c4:10b0:5e6:589b:eeec with SMTP id 71dfb90a1353d-5e91f52a44bmr3913990e0c.5.1792070832398;
+        Thu, 15 Oct 2026 06:27:12 -0700 (PDT)
+X-Received: by 2002:a05:6123:5c4:10b0:5e6:589b:eeec with SMTP id 71dfb90a1353d-5e91f52a44bmr3913981e0c.5.1792070831845;
+        Thu, 15 Oct 2026 06:27:11 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3eda62768fsm125977266b.73.2026.10.15.06.27.09
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 06:25:23 -0700 (PDT)
-Message-ID: <f44df63d-155e-41ad-8652-36d770efcdb6@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 16:25:21 +0300
+        Thu, 15 Oct 2026 06:27:10 -0700 (PDT)
+Message-ID: <d3a67d47-9072-4094-85a0-7e1b75e08314@oss.qualcomm.com>
+Date: Thu, 15 Oct 2026 15:27:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,116 +88,148 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] soc: qcom: qpace: Add Qualcomm Page Compression
- Engine driver
-To: Krzysztof Kozlowski <krzk@kernel.org>, senozhatsky@chromium.org
-Cc: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        minchan@kernel.org, axboe@kernel.dk, rostedt@goodmis.org,
-        mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
-        linux-trace-kernel@vger.kernel.org, djakov@kernel.org
-References: <20260930145215.3380977-1-georgi.djakov@oss.qualcomm.com>
- <20260930145215.3380977-3-georgi.djakov@oss.qualcomm.com>
- <20261001-hopping-belligerent-spider-876e7b@quoll>
+Subject: Re: [PATCH] power: supply: qcom_battmgr: do not report power_now on
+ SM8750
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>, linux-pm@vger.kernel.org,
+        Sebastian Reichel <sre@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261013002124.332111-1-xiaqinghuan@mail.ustc.edu.cn>
 Content-Language: en-US
-From: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
-In-Reply-To: <20261001-hopping-belligerent-spider-876e7b@quoll>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261013002124.332111-1-xiaqinghuan@mail.ustc.edu.cn>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=QbvzLcbv c=1 sm=1 tr=0 ts=6ad0d445 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=douLNevBrtimd63D7eljNA==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX0JIhbuLfRsSP
+ y/8XX/CGVMLzlyxAgRrhmX5oNZV0kHhCWTcfCO4U3RE/xyiLv0gU4Qe0jVcM4jYpgj15moC+eIG
+ OG3WB5jexbL4R9+PCYZd9x07DyhRZa8=
+X-Authority-Analysis: v=2.4 cv=K9u3jCWI c=1 sm=1 tr=0 ts=6ad0d4b1 cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=vTTj8iH6AlmXu0jsvGYA:9 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX7b8dbBczr7+U
- um+q1LNhsP9EYYcT/oSAh2XzjcwsAzfwMX5w4eCc1vjbd0m9TfaUPAoo55Im4konoqa6Ez2Yaqz
- FTHcPxWatCLCCZHWlS2wbtVU/T1aeZ4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX8J6x48tzu/D4
- 3qHBDYVWtXjuPk1QYfdPmlrHYHTQAOgC87F7pN95kP5bdwGe6Fv0C+tu1xfZjWeFnAdpCCXsb+7
- ZNNMmUGkFE4LWrBL+9mdIeW/5U6/BMgvukW7NF+c8ro/dfMJykntyqnkR3hi2cFb/BaV56X79la
- 9y4IlOnGhVhbmx+bnAzgDxQfwGGBDrjG9tzE/1of5h5XgMIyIl4DQFh5OfG5yKawO6kr4eEFX/Q
- 6dpyswhjiu3KMRbfnZMfJ1kHCMOE/LOtvbC4lptG3q8q2XuJBoW8Ejg1cCt01Vz+9fFQgmdUcpV
- ZV9eKssb6hyWasr4r3xf2AFOesL7y+uABZvnAcLCq/EzmDT0ib60vHafMwlPIZET3IDQrq1vSa2
- hleSwNRqWAuqNtRP2VY4Ld1ORjNaRr6hs7L8HEASVzBLOXvRl7ZOYnenIsSl7BhjoRLZw32g8ak
- L1iMXkKGqBS+HWwBJ7A==
-X-Proofpoint-ORIG-GUID: XVMvuc52AqPKHtk3oqe6CKTAgLTYMZCq
-X-Proofpoint-GUID: XVMvuc52AqPKHtk3oqe6CKTAgLTYMZCq
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=AUfae7s1ju6HdZB4z7sA:9 a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22
+X-Proofpoint-GUID: wgtHKVtc8z43L1Rhb01AbszzjEwZlOdY
+X-Proofpoint-ORIG-GUID: wgtHKVtc8z43L1Rhb01AbszzjEwZlOdY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX/R23YPF4bL9s
+ sBOqZ/mJmIve+dHXswP/y4AKMK8nKsZPigJdvX6ZET57kGaXAC9rRlbBfawQJyBSzcArKHEaF7k
+ bELHGsi3q7jodI/4I2U940KR5vDJeIeXu4bBpTkYtpyZHvcoL7tS33kjaypLgOJFa+RqG+fPXdL
+ 2YYtFHTw+WEp5ErT/voE0dVNeZociCE5cXPoUWFqpERnvSK8bv8ZNvZy/IV/aQn+sR5E/a2URRv
+ FqchrM2J3wuyT4XsA5r7hhZCFynWIMJ3lREKj816JcM9MFkP3L9due2dlRdXkn4uYhlkiJJN4Mj
+ /xY2PbtNgp5m768YdGJhxw1pS+9TS+XnhpeLo0uJpJEDHBQVqIr1KiBqoN5Rgr4Ni5MvN6gzPzg
+ XQR+BzKS7fWEWSmE8ovW7rLI7d70GqXrNzjgfd9kkv0O6TpHvfzYEW10DAn8TF2loRrUQoNIR4R
+ +rF+78Vobb+OKNkmHJg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
- priorityscore=1501 spamscore=0 bulkscore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610150053
+ malwarescore=0 adultscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ phishscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150053
 
-On 10/1/2026 11:50 AM, Krzysztof Kozlowski wrote:
-> On Wed, Sep 30, 2026 at 07:52:11AM -0700, Georgi Djakov wrote:
->> Add a platform driver for the Qualcomm Page Compression Engine (QPaCE), a
->> hardware block that accelerates compression and decompression of memory
->> pages.
->>
->> Provide the urgent command path for synchronous single-page compression and
->> decompression. This exposes the low-latency operations needed by
->> compressed-memory users such as zram, especially for page decompression on
->> the read path.
->>
->> Signed-off-by: Georgi Djakov <georgi.djakov@oss.qualcomm.com>
->> ---
->>  drivers/soc/qcom/Kconfig          |  14 +
->>  drivers/soc/qcom/Makefile         |   1 +
->>  drivers/soc/qcom/qpace.c          | 764 ++++++++++++++++++++++++++++++
->>  drivers/soc/qcom/qpace_internal.h |  84 ++++
->>  include/linux/soc/qcom/qpace.h    | 154 ++++++
->>  5 files changed, 1017 insertions(+)
->>  create mode 100644 drivers/soc/qcom/qpace.c
->>  create mode 100644 drivers/soc/qcom/qpace_internal.h
->>  create mode 100644 include/linux/soc/qcom/qpace.h
->>
->> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
->> index 535c8619197b..6bcb86dcd726 100644
->> --- a/drivers/soc/qcom/Kconfig
+On 10/13/26 2:21 AM, Qianhui Xu wrote:
+> From: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
 > 
-> Sorry, but no. Soc is not a dumping ground. This has clear function of
-> compression offload, so it should have some dedicated maintainers like
-> other offload engines.
+> The SM8750 QBG firmware fills BATT_POWER_NOW via its maximum-load updater
+> instead of an instantaneous measurement: the property getter indexes
+> context + 0x6a8 + 4 * property, so property 22 (BATT_POWER_NOW) reads the
+> offset written by the maximum-load path.  Exposing that as power_now makes
+> userspace report e.g. 89 W while the battery is charging below 1 W, or
+> above 100 W while discharging at about 4 W.
+> 
+> The SM8750 PMIC GLINK node is already described in DT
+> ("qcom,sm8750-pmic-glink" in sm8750-mtp/qrd), but the driver has no entry
+> for it, so it falls back to QCOM_BATTMGR_SM8350 and advertises POWER_NOW.
+> 
+> Add the SM8750 variant and a battery descriptor that reuses the SM8550
+> properties without POWER_NOW.  The property array is reordered so that
+> POWER_NOW is the last entry, which keeps the new descriptor a two-line
+> addition; property ordering itself is not ABI.
+> 
+> Voltage, current, charge counters and the charge-control thresholds are
+> retained.
+> 
+> Tested on Lenovo Legion Y700 Gen4 (TB322FC, SM8750P): charging and
+> discharging, UPower state-of-charge and rate are unchanged and power_now
+> is no longer exposed.
+> 
+> Signed-off-by: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+> ---
 
-Thanks Krzysztof, and thanks Sergey for the input on the zram side. Before
-I respin, let me elaborate on a possible structure, so we can choose the
-direction we want to go.
++Fenglin would we know if this is an issue on all SM8750 devices, or
+perhaps something OEM-specific?
 
-The QPaCE driver splits into one engine and (up to) two consumers, following
-the IAA/idxd driver model split where the engine exports an in-kernel API and
-the crypto side is a separate, thin layer:
+Konrad
 
-Engine: drivers/soc/qcom/qpace.c + include/linux/soc/qcom/qpace.h - decompress
-primitives. It stays under soc/qcom, interacts with LLCC slices etc.
-
-zram: drivers/block/zram/backend_qpace.c - A zcomp backend calling the
-engine's in-kernel API directly. The zram intentionally does not use the
-crypto API today (917a59e81c34).
-
-zswap (?): drivers/crypto/qcom/qpace_crypto.c - Registers qpace-lz4 as a
-crypto acomp algorithm for crypto consumers (zswap maybe?). It will share
-the engine's primitives, so this would be a thin wrapper.
-
-If zram switches to the acomp API in the future, zram can use QPaCE through
-the acomp algorithm and backend_qpace.c simply goes away - so this will be
-compatible with that direction without depending on it.
-
-Krzysztof, does engine-in-soc/qcom + the crypto acomp address your concern?
-Or would you still prefer the engine live somewhere other than soc/qcom?
-An alternative would be to put it in drivers/crypto/qcom/ as a crypto
-driver - register with acomp, but there will be no user, and zram would
-still use the exported in-kernel API.
-
-Sergey, is a native backend_qpace.c the right thing for zram now, with
-acomp left as the future path rather than something I add to zram core
-today?
-
-Thanks,
-Georgi
+>  drivers/power/supply/qcom_battmgr.c | 29 +++++++++++++++++++++++++++--
+>  1 file changed, 27 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
+> index 7716eb9e1a..dbc98ac8a7 100644
+> --- a/drivers/power/supply/qcom_battmgr.c
+> +++ b/drivers/power/supply/qcom_battmgr.c
+> @@ -24,6 +24,7 @@ enum qcom_battmgr_variant {
+>  	QCOM_BATTMGR_SC8280XP,
+>  	QCOM_BATTMGR_SM8350,
+>  	QCOM_BATTMGR_SM8550,
+> +	QCOM_BATTMGR_SM8750,
+>  	QCOM_BATTMGR_X1E80100,
+>  };
+>  
+> @@ -916,9 +917,13 @@ static const enum power_supply_property sm8550_bat_props[] = {
+>  	POWER_SUPPLY_PROP_TIME_TO_EMPTY_AVG,
+>  	POWER_SUPPLY_PROP_INTERNAL_RESISTANCE,
+>  	POWER_SUPPLY_PROP_STATE_OF_HEALTH,
+> -	POWER_SUPPLY_PROP_POWER_NOW,
+>  	POWER_SUPPLY_PROP_CHARGE_CONTROL_START_THRESHOLD,
+>  	POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD,
+> +	/*
+> +	 * Kept last on purpose: SM8750 reuses this list without POWER_NOW,
+> +	 * see sm8750_bat_psy_desc.
+> +	 */
+> +	POWER_SUPPLY_PROP_POWER_NOW,
+>  };
+>  
+>  static const struct power_supply_desc sm8550_bat_psy_desc = {
+> @@ -931,6 +936,23 @@ static const struct power_supply_desc sm8550_bat_psy_desc = {
+>  	.property_is_writeable = qcom_battmgr_bat_is_writeable,
+>  };
+>  
+> +/*
+> + * The SM8750 QBG firmware fills BATT_POWER_NOW from its maximum-load updater
+> + * instead of from an instantaneous measurement, so the published value is not
+> + * a present power reading (it reports the maximum load, e.g. 89 W while the
+> + * battery is actually charging below 1 W).  Do not advertise POWER_NOW on
+> + * this platform.
+> + */
+> +static const struct power_supply_desc sm8750_bat_psy_desc = {
+> +	.name = "qcom-battmgr-bat",
+> +	.type = POWER_SUPPLY_TYPE_BATTERY,
+> +	.properties = sm8550_bat_props,
+> +	.num_properties = ARRAY_SIZE(sm8550_bat_props) - 1,
+> +	.get_property = qcom_battmgr_bat_get_property,
+> +	.set_property = qcom_battmgr_bat_set_property,
+> +	.property_is_writeable = qcom_battmgr_bat_is_writeable,
+> +};
+> +
+>  static int qcom_battmgr_ac_get_property(struct power_supply *psy,
+>  					enum power_supply_property psp,
+>  					union power_supply_propval *val)
+> @@ -1617,6 +1639,7 @@ static const struct of_device_id qcom_battmgr_of_variants[] = {
+>  	{ .compatible = "qcom,sc8180x-pmic-glink", .data = (void *)QCOM_BATTMGR_SC8280XP },
+>  	{ .compatible = "qcom,sc8280xp-pmic-glink", .data = (void *)QCOM_BATTMGR_SC8280XP },
+>  	{ .compatible = "qcom,sm8550-pmic-glink", .data = (void *)QCOM_BATTMGR_SM8550 },
+> +	{ .compatible = "qcom,sm8750-pmic-glink", .data = (void *)QCOM_BATTMGR_SM8750 },
+>  	{ .compatible = "qcom,x1e80100-pmic-glink", .data = (void *)QCOM_BATTMGR_X1E80100 },
+>  	/* Unmatched devices falls back to QCOM_BATTMGR_SM8350 */
+>  	{}
+> @@ -1690,7 +1713,9 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
+>  			return dev_err_probe(dev, PTR_ERR(battmgr->wls_psy),
+>  					     "failed to register wireless charing power supply\n");
+>  	} else {
+> -		if (battmgr->variant == QCOM_BATTMGR_SM8550)
+> +		if (battmgr->variant == QCOM_BATTMGR_SM8750)
+> +			psy_desc = &sm8750_bat_psy_desc;
+> +		else if (battmgr->variant == QCOM_BATTMGR_SM8550)
+>  			psy_desc = &sm8550_bat_psy_desc;
+>  		else
+>  			psy_desc = &sm8350_bat_psy_desc;
