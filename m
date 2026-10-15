@@ -1,87 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFACD37F748
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 627D252F271
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792074229; cv=none; b=klRSZ+Oym7gUkpKjzF/Imk0tt4bZ2h2dGeF4EBCR0ncEWcmOqyVcxoxu5X4q7lR2Jcv4n4vCJllkfVDcYuprDf3sBLT1LfvI72hJcaC05qxKp6M6Zbe61inIuhd+NCaoN0v/6fTBovX4LAhM4wNtfBGH13q8OvtezoPd9l5mm6k=
+	t=1792074234; cv=none; b=Vpt6lH+q6L6lgyuUMdXCtuu9nh0n/WeUdZl0SckUj/Mtz+9jxMZRvfHggoWkoHlBI1adbTGvnLcQFlyOtvlJTDe0vhA1VlB34MJiDtJ3ZXncwsou96iZaBtjGWI457FiCcr7UWRb0h6F2ULK68t6NMJ/RIl6yge40xMo0DEu/PM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792074229; c=relaxed/simple;
-	bh=mq9rEF7t+ayaQwPKjrARpnKTkdqnGpDbd/zX7wA7cRw=;
+	s=arc-20240116; t=1792074234; c=relaxed/simple;
+	bh=FNgqAuAODmWGHZWIRSs8C/bMHDsGbP6GnOBhsQcl0DU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kjoNZLYUKjpuM7BVcMnSDNuGglPyWLNf96dEODqgD3JRUrkIevDy/h/rj3Wg+GX0kAkQPVso8kcmzYGiofEln3f6xiEz7ZDeMFxrOzIbppg3DcNaiyvLJU0wLKCcV9sUNjEm47iA4B4B2QrRFU6fcsMM1+agpNSml/nhzBLuL0g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nndw5mpD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y6THkbIl; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=AvxmIvXUlCHxxSeY5T0phINIt3erbbV01o4oxeQ3lKux9oxBntdBUKO/Bnp07VYUEFAET5fNlzW3+6QwRX3JeVwEklmjRPFPVomJUkuo7OK2OAlUUuC1VdiiZjmGcvOl50UOdhcQAEG0ld04ecJV2o002oNAkULq753ULPGBJdQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=on6qMrcQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CEgnBSiY; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nndw5mpD";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y6THkbIl"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="on6qMrcQ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CEgnBSiY"
 Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FAPtcC1596357
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:48 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FAPuKU1596362
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FrZXCD3PHsI+MdTKLYNfSCMuzb2ii/BEmeVwGG5BOEg=; b=Nndw5mpDjPBn483Z
-	v3nFokO/xnRH01UKlRSK/rM4IsPJHsprulwZDnIoDUyf4pX1cftCXxuTIMs9Qx0H
-	OpgUVaz6CAg0YlOgoNItzg4tBkKQVXZk5p0K2ZpvFM5YyYfWgzW3spITH8tE6yen
-	wA3X+3MwTV364wduYrhIpCyyF70BAuBDC/eOuaoDpj305iMHPGsZo2j1vfvSEhWU
-	0o1AHlCFxrQbR+wwSbWBSD15OVUvZT1UGsTD5J6P87YwgbWbCITmhfeZ4RB3DSLl
-	jCtIlJbPAcTYVpW8nNjfhEQ1kpaxq2KQKw7dbziXFjBDN0t8axDHjDl89zNfNaQP
-	TFYniQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haw2v8wy2-1
+	XpzQJs5SpzZhj6NA78HHgEuNNUorM5ICZZwVwOEt83g=; b=on6qMrcQ7ky332sX
+	EGC9jMmByVk9wjtBXB8NKtCmBvWI6iTVCpL4UundtLF3Pfuk9nrLqCs7uCHAHr9A
+	T57cXb8Ax9EZ4YFFHqbh/xo5CBsHQYsRB3KGKp0eiYSRXJCLugwlH1z87eNU/az4
+	AxcFzzbhCv1QVJO+6IxBkgorml+Nu9XJO0+Lafl1kdOMETsCjGgQwHETIRcW0K6i
+	QG+r5tYnGP8v9N3InCAgqNqgx0XQ+evR8KZBVdq0x/dRmLi0nxdcLkZsnKVoM7xy
+	F7iXTrHAgj5FmHNt62Rz7sLoT1Kr8DV+n0PntVRN/y2vkN8yIond/0IPrczZ5BeU
+	xUB7Ig==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haw2v8wye-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:47 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35c3c370b17so6031736eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:23:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 14:23:52 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-152d1363a29so19047800c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:23:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792074227; x=1792679027; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792074232; x=1792679032; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FrZXCD3PHsI+MdTKLYNfSCMuzb2ii/BEmeVwGG5BOEg=;
-        b=Y6THkbIl6f1LCAn8mRNqqz/uH2wfWvGmLIr3XcxQrrJRYkbb6SOV6pGVY/cyqQcy9m
-         AWZAWavTrqS0o2BQIh7GESh2k4CQQP0uKyIeFgB+CImWWer9NhcNw+WvAj9U5kZq460e
-         /5JCXvhMF6uBwSS6scbze0HtFbp2QOJ32u5JlfTTstswDyb4xB9A52Ky9bj05UZDCcTM
-         pXRzEd+PG0UtAgCcMzWmDKFY+yY6+zZDTLu4KO2KKRCDZ5u4Lfgi3+VzPago0+YUlNL1
-         wFpvKHXLRHufPKRclSD7zvHaaAVcn032y3qtKNT0mwigkgj59AQ9FRp+griRQcdiR6NU
-         qcZQ==
+        bh=XpzQJs5SpzZhj6NA78HHgEuNNUorM5ICZZwVwOEt83g=;
+        b=CEgnBSiY7JTUmTKTTGZGfnvjyN7f3gft1Wt3IReSC0msmETVabwVcE9YvugLz51huc
+         x/JJ5GSRJobfe3GFUsiqsGfz8f/TAuQxk391MZK9t1ZDxE/n8TSJBfoRMJMhwuSRiEdu
+         1IJwD3uLtWAw70C1k6Y3gZRUDpXZubkxJ4pJ+egA4vDdOc9sAPFRbiDiIUsZ+XdEkgL2
+         38VYSNN6CADicUeQK6wiFmJ11YolovPjPjcMWSmRoaDsu3sQ+19cqe9PS/6mmj9aq+jC
+         Utc/qOu5fWySEG76avbvtTrizcyvuECh0XuzBjUS2TmFiCkgX8mzvQV6ZLTt4V5gi+Vx
+         bfoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792074227; x=1792679027;
+        d=1e100.net; s=20260707; t=1792074232; x=1792679032;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FrZXCD3PHsI+MdTKLYNfSCMuzb2ii/BEmeVwGG5BOEg=;
-        b=YRvA2JAckNyZkWPibPpw4lzIHdep9/PEUtbilUlwIftsj3mwEbIemjqHfpcyV+/dl0
-         WdldNIO2RTa8QH+GUy5lvc8F5coiE5rp280ilL68+hYpGG/jkrHb69X/79kTjx1rYloE
-         /59ZDne8bLXylMWD3XbMsmgpxYRr+X+3Wv0YZTcKrQwv77w8fRtYa2/+4OVfNJ5I9qnr
-         /Y1tUBqj4uqitnZCeTXDk0n8L3LN4x/7PGYNlGeGWT2HWOYDICgtQCGdxzkTSNsmFjqQ
-         l54OMoyYfYzhtweRHVtwv6yjBK5rVuuDJ5ckSkcQdVcJ3IsdjZY7v4vMmQsC+Hyz8rgR
-         LjSA==
-X-Gm-Message-State: AFq9FYK0YYsi8C8Ii09Doi3mhWvlbl7G5mzW921Whzhp5zo/j2mtximb
-	blabTQtmz1SvSeHbNXaf9Kd2j5I3oNeqzQTctZTfnD2RFXK829plDkEyh+uOSTOWASRN8b2rk/o
-	6vIGRrM+c51aPlzG+tSINQ5lzs+MluFbBtzy563aC6rsFZNg7uiKwHds+EqbTQ0cXQwFw
-X-Gm-Gg: AYBFou0pbbISZ86J6Y0uN8MxRbIbZ4sqoSWaoMA9aKfUBnYQHWxiLbFJuqTXuqW30vE
-	lb3Xk50p/YAHQ4OTDHlkqAOLBe37GhdRrsXwijQLM/2FvO5S7Tux6jl7WAJgWXY/iqMNiRHzVUW
-	1diGdZsCijeKET1FkCpptlMCKPkyatvf6NdXAtEX5P1oL+/pdy0IhMJWPV+OT3s8zK/wxZoPdok
-	efP4oLTC9Uw8dHzKVcrEyBokvIAHLbNuTLLuJ02CR0ig3cJMGqp3qi1p7XDCE/Na+2q0ZzV1u9B
-	iLmFiSWzoefuz/T1m7r8OJQX4AZL1to+XZ03+oCvTCsV+qrkh4yPHEaRJZ6w1OH5x1pGk24gLu/
-	c7J+VasFjKcLmFv4cRNWEswiNvwt4I+VxVOU=
-X-Received: by 2002:a05:701b:4211:10b0:14a:a6dc:9cd7 with SMTP id a92af1059eb24-16a57a16ef2mr25814183c88.2.1792074227081;
-        Thu, 15 Oct 2026 07:23:47 -0700 (PDT)
-X-Received: by 2002:a05:701b:4211:10b0:14a:a6dc:9cd7 with SMTP id a92af1059eb24-16a57a16ef2mr25813448c88.2.1792074211417;
-        Thu, 15 Oct 2026 07:23:31 -0700 (PDT)
+        bh=XpzQJs5SpzZhj6NA78HHgEuNNUorM5ICZZwVwOEt83g=;
+        b=IWstKIH/XeAwvlPzqEm8vxNrYnrUqdWz0mb3sWa+J4DBNGN7f7Qw8huY29WCo5sgi9
+         m9EcuFvbJ9Ddd8VNzktEWAFoh1peuv9QL0sNyOpUROpTcXkKGWQ73/JYvcBLHguwMewJ
+         aOSIswe+a0rSeGQj7TboWeBV/4vINuo6Of3jMVKtNTvawZdM0LR+LVscnvCN3m15FbSQ
+         RmyTrwxo5vETne53nst6iikcs8ca93fgrkB8rSogR71B/l58JZFkuWtLuUUssv9dh8Gg
+         PuYuik4F9pbeb21Pl74PMEAYS19RwRVYXKN44zz7topmFLTB6ItMu9mW6GO7CalNfNwf
+         wN/A==
+X-Gm-Message-State: AFq9FYLhJD8oXoQdPCg4Tjy7bUDFVBJrj+qGaBtf9C62RcO3k1y5Z0qP
+	rdpnWJfN6dWynJHIYDecinZk5swmFbdH0V5PcUIWxDC3PXL1VMhJcourUqlsMBCsX6PZPLLoeEq
+	Os6uui2SfSCG8HZhcxdqiuqQidS4+o4LumklDfl7zun9s5edQub6F9MZDlVIRj3sBQLJggXRPvo
+	cm
+X-Gm-Gg: AYBFou0TDFtPcXqm9CyYor25Ofw0m9D+t5R7BV3cB+NbqIoOL3BArpZFpbTyjLkjH9C
+	/gKkmJVy/5LeWZRTD6H6q2FlrCz+CYoOqAILLrvqEQsTD3WP379dAkscqNRfbqcpkZRjxPSIegs
+	Qxdbd49T9sq6APu+AhbTkw2V23hiy+IXwz0T91bsCVLKECCvM9Ghkcc9wIgqHO1w+qZgxoyWfaF
+	dcrZMddq/fw87igj9dtj6fd2mmkR99spjlmnuDRFnMwtipyj9rqa7DR+7KZixpx2kX5wfrKTBDL
+	NqK70LeEsg1WiuQ9mcrBa2x7Sz+zRLaQ90Pz41qzN5uEcAZX4Vp5arvI5DV2xtn20ZYK2jkFF48
+	k1VWWfZolmlZR8eYG2VHgY7mAKvfezTw+bjc=
+X-Received: by 2002:a05:7022:1702:b0:13f:b41f:bda with SMTP id a92af1059eb24-16a5c5f4414mr24506637c88.16.1792074231610;
+        Thu, 15 Oct 2026 07:23:51 -0700 (PDT)
+X-Received: by 2002:a05:7022:1702:b0:13f:b41f:bda with SMTP id a92af1059eb24-16a5c5f4414mr24506585c88.16.1792074230783;
+        Thu, 15 Oct 2026 07:23:50 -0700 (PDT)
 Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-17dc865cbffsm22921139c88.6.2026.10.15.07.23.27
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-17dc865cbffsm22921139c88.6.2026.10.15.07.23.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 07:23:30 -0700 (PDT)
+        Thu, 15 Oct 2026 07:23:50 -0700 (PDT)
 From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 19:52:59 +0530
-Subject: [PATCH v1 1/2] dt-bindings: pinctrl: qcom,tlmm-common: Add
- wakeup-enable
+Date: Thu, 15 Oct 2026 19:53:00 +0530
+Subject: [PATCH v1 2/2] pinctrl: qcom: Allow arming the wakeup_enable bit
+ from pin config
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-tlmm_wakeup_gpio_support-v1-1-c6d6f37a7e51@oss.qualcomm.com>
+Message-Id: <20261015-tlmm_wakeup_gpio_support-v1-2-c6d6f37a7e51@oss.qualcomm.com>
 References: <20261015-tlmm_wakeup_gpio_support-v1-0-c6d6f37a7e51@oss.qualcomm.com>
 In-Reply-To: <20261015-tlmm_wakeup_gpio_support-v1-0-c6d6f37a7e51@oss.qualcomm.com>
 To: Bartosz Golaszewski <brgl@kernel.org>,
@@ -102,32 +103,32 @@ Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792074202; l=2259;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792074202; l=6907;
  i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
- h=from:subject:message-id; bh=mq9rEF7t+ayaQwPKjrARpnKTkdqnGpDbd/zX7wA7cRw=;
- b=FOBgz70IKuMobP9CO5V242l4NMyi+psI4lueJUV5e32urGCGy5yzg3Bu1le31B40XYGC9lwSI
- To8GoIm/ykBDe1LSWI259wD32z21qPLMDXAPClnL/oAcySc0eF29Xzx
+ h=from:subject:message-id; bh=FNgqAuAODmWGHZWIRSs8C/bMHDsGbP6GnOBhsQcl0DU=;
+ b=bhnxtJ9RC27eopvvFUsWEXvtp7okQ/eyIpy4PRTmeo7rxM4z3mUH3te+EAZ+qQ6b9NZY5+eWO
+ 5QBWGhfKYN8CGJ9/tTDxkRMSSYMZ21rweqfwqg1HJVTcash97SHrPDH
 X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
  pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1NyBTYWx0ZWRfX4b/85c3FVhHm
- X7W7u2PwG8+jd2cnvCCjL/rlUbj4zPvXuZENcZXBIzF2srochreWyCkepohoRAbVZl/9G86Yo30
- CK0afSD+Uh1dGt97UKPezSRQ324LSuEI39VsvzkZaLQ3IaaE1rwBbxJnE6jmKgVhFJh7tJqhA3O
- RRudbdm81+bN6d9lLNZnraRKU/uhGV9Djn/brLXFPaJcezWn6BIHjm4EW5iN0aNC4DGB65kivzH
- QVlbMLEQ2m+u62WEnW51N/uMidqyiAokJWKYPkPZh+WkNdwyHtFp389HIEhfzaA8baTaZq1HcnX
- GwIcMTEg2k6PlnclxRW6mm4IompKDE3z+TtJzbzNTHm/X8Hfhcp9HP1FESfzlNE6cG92TxIL3QJ
- 5A+/UY6vSe7W3gZ3j2DEVCq3qLhSC0RbrmqD83ZfKeR0h5M3cijXEdahRFsWwzH9NAMdS/WXj6X
- iZhoRKMe22wKmHpplwQ==
-X-Proofpoint-ORIG-GUID: 9KBkNY6uAN_NFbh9sPqu0K4dGs5kZcan
-X-Proofpoint-GUID: 9KBkNY6uAN_NFbh9sPqu0K4dGs5kZcan
-X-Authority-Analysis: v=2.4 cv=G/CJgNk5 c=1 sm=1 tr=0 ts=6ad0e1f3 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1NyBTYWx0ZWRfX1BblZ0RK7uZA
+ a6Af4dFFFK03BkD0Tg/Qdj8CWrZHtFrnARXzD7ZEmK1V1kVWBfboMWTeLjSbBZ93vc2gzUA6oeL
+ wE7MmQyR5f8EKQeXoxJLZYGj8TBGWllRhscd5R1HvR6QAAbPeKPR0qSZrTMUFT+w89VXBHFubdc
+ k5iDVXzFYzeM+LBXoOVVmMdPGgqri3TN4XMyw0pc7nalUW4wVDIJc//VttXV8bL5p5SJ1qBiu9M
+ KRvEcC8NHxNnzjaHteUY4p8339EFKkH3e624ee57KTn6KEB6ENCN7U5zOZ/ktBdB2SabFG75GYQ
+ hk9W9/lzC62HsxghYFWUCUHnjJ2y0hhkWVeDQt64uMXhB8Wzu71LqgIgtHXxgeUYiNMRy/XMsUG
+ NBBy8oOjeLiPpel19WsbVlqan5J7cMtmCNKnfeRMuH7BBoa80BVTjaudB6lZiFfNEou0qFh9NTK
+ nTvn+vqmmjbJPT89U+A==
+X-Proofpoint-ORIG-GUID: oT4KC0DxGoU_bNINC0XitQ-Gr9wW8uTR
+X-Proofpoint-GUID: oT4KC0DxGoU_bNINC0XitQ-Gr9wW8uTR
+X-Authority-Analysis: v=2.4 cv=G/CJgNk5 c=1 sm=1 tr=0 ts=6ad0e1f8 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=Q4uxw_U0XqAMYNGLDEUA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1NyBTYWx0ZWRfX1g/K2oyUUoGh
- 3blB7TI64GS61ROJVipLAMFDOHw15pg7jPCahPnv81HMKgmovVvvusLqJqz9rmKtWNEFdXyP79x
- k1h2c6+gwHHzHrb2dYg2f/oBW4bxQbg=
+ a=EUspDBNiAAAA:8 a=FlIvIJjhoV0WH2cWnOIA:9 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1NyBTYWx0ZWRfX355RwVkQJVtY
+ 8o1FqSAutIpxbGMaCOBFMtIlIUEEZ1s5LEgJdGDjdM3UiNBYFWDb5nalAO7euQH+1GcnowYMF6S
+ hzDisEE/Rfw50vrMJJ/ulJuZUWsS8jA=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
@@ -137,51 +138,193 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150057
 
-The TLMM can gate whether a toggle of a pad is transferred to the wake up
-controller (PDC/MPM) while the system is in a low power mode. The pinctrl
-driver arms this for pins it requests as GPIO interrupts, but that path
-takes over the pin mux, so it cannot be used for a pin that has to stay
-muxed to a peripheral function.
+A pin's wakeup_enable bit controls whether a toggle of the pad is
+transferred to the PDC/MPM HW, which is what both wakes the system from a
+low power mode and, as the existing comment in msm_gpio_irq_reqres() notes,
+delivers the interrupt event. The driver sets it when a pin is requested as
+a GPIO interrupt and clears it when that interrupt is released.
 
-Such a pin exists on boards with a SoundWire codec: while the bus is clock
-stopped the codec requests a wake up by toggling the SoundWire data line,
-which is muxed to the SoundWire function and not to GPIO. Unless the pad is
-armed, the toggle never reaches the wake up controller, the controller is
-never resumed and the event - a headset insertion, for instance - is lost
-until something else happens to wake the bus.
+That is the only way the bit can be armed today, and it is not usable for
+every pin that needs it, because msm_gpio_irq_reqres() calls
+msm_pinmux_request_gpio() and so takes over the pin mux.
 
-Add a pin configuration property so such a pin can be armed from its own
-pin configuration, without being turned into a GPIO.
+A pin that must keep a peripheral function and is still toggled by an
+external device to request a wake up therefore has no way to get the bit
+armed. On boards with a SoundWire codec this loses interrupts: while the
+bus is clock stopped the codec asks to be read out by toggling the
+SoundWire data line, which stays muxed to the SoundWire function. With the
+pad not armed the toggle is dropped, the controller is not resumed, and the
+codec's interrupt - a headset insertion, for example - is only seen if
+something else wakes the bus first.
+
+Add a "wakeup-enable" pin configuration parameter so the bit can be armed
+from the pin's own configuration, and fold the existing open coded accesses
+in msm_gpio_irq_reqres() and msm_gpio_irq_relres() into the helper it
+shares. Pins the SoC does not describe as wakeup capable are rejected
+rather than silently ignored.
 
 Assisted-by: Claude Opus 5
 Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 ---
- .../devicetree/bindings/pinctrl/qcom,tlmm-common.yaml        | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/pinctrl/qcom/pinctrl-msm.c | 101 +++++++++++++++++++++++++++----------
+ 1 file changed, 73 insertions(+), 28 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,tlmm-common.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,tlmm-common.yaml
-index aec72e8c0..95f539611 100644
---- a/Documentation/devicetree/bindings/pinctrl/qcom,tlmm-common.yaml
-+++ b/Documentation/devicetree/bindings/pinctrl/qcom,tlmm-common.yaml
-@@ -87,6 +87,18 @@ $defs:
-       output-high: true
-       output-low: true
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+index 27f06bbc1..cb12f8b90 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -286,6 +286,54 @@ static const struct pinmux_ops msm_pinmux_ops = {
+ 	.strict			= true,
+ };
  
-+      wakeup-enable:
-+        type: boolean
-+        description:
-+          Allow a toggle of the specified pins to be transferred to the wake up
-+          controller while the system is in a low power mode. The driver arms
-+          this on its own for pins requested as GPIO interrupts, so it is only
-+          needed for pins that stay muxed to a peripheral function and are
-+          toggled by an external device to request a wake up, such as a
-+          SoundWire data line driven by a codec while the bus is clock stopped.
-+          Only supported on pins that are marked as wakeup capable by the
-+          hardware.
++/*
++ * "wakeup-enable" arms the wakeup_enable bit of a pin from its pin
++ * configuration. The driver already does this for pins requested as GPIO
++ * interrupts, but that path takes over the pin mux. A pin that has to stay
++ * muxed to a peripheral function and is toggled by an external device to
++ * request a wake up needs the bit armed without being turned into a GPIO.
++ */
++#define MSM_PINCONF_WAKEUP_ENABLE	(PIN_CONFIG_END + 1)
 +
-     allOf:
-       - $ref: pincfg-node.yaml#
-       - $ref: pinmux-node.yaml#
++static const struct pinconf_generic_params msm_gpio_bindings[] = {
++	{ "wakeup-enable", MSM_PINCONF_WAKEUP_ENABLE, 1 },
++};
++
++/*
++ * Set or clear the wakeup_enable bit of @g, which allows a pad event to be
++ * transferred to the PDC/MPM HW. While the name implies only the wakeup event,
++ * it's also required for the interrupt event.
++ *
++ * Returns -EOPNOTSUPP if the SoC does not describe the bit or the pin is not
++ * marked as wakeup capable.
++ */
++static int msm_pin_set_wakeup_enable(struct msm_pinctrl *pctrl,
++				     const struct msm_pingroup *g, bool enable)
++{
++	unsigned long flags;
++	int ret = -EOPNOTSUPP;
++	u32 intr_cfg;
++
++	if (!g->intr_wakeup_present_bit)
++		return ret;
++
++	raw_spin_lock_irqsave(&pctrl->lock, flags);
++
++	intr_cfg = msm_readl_intr_cfg(pctrl, g);
++	if (intr_cfg & BIT(g->intr_wakeup_present_bit)) {
++		if (enable)
++			intr_cfg |= BIT(g->intr_wakeup_enable_bit);
++		else
++			intr_cfg &= ~BIT(g->intr_wakeup_enable_bit);
++		msm_writel_intr_cfg(intr_cfg, pctrl, g);
++		ret = 0;
++	}
++
++	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
++
++	return ret;
++}
++
+ static int msm_config_reg(struct msm_pinctrl *pctrl,
+ 			  const struct msm_pingroup *g,
+ 			  unsigned param,
+@@ -354,6 +402,16 @@ static int msm_config_group_get(struct pinctrl_dev *pctldev,
+ 
+ 	g = &pctrl->soc->groups[group];
+ 
++	if (param == MSM_PINCONF_WAKEUP_ENABLE) {
++		if (!g->intr_wakeup_present_bit)
++			return -EOPNOTSUPP;
++
++		arg = msm_readl_intr_cfg(pctrl, g) & BIT(g->intr_wakeup_enable_bit);
++		*config = pinconf_to_config_packed(param, !!arg);
++
++		return 0;
++	}
++
+ 	ret = msm_config_reg(pctrl, g, param, &mask, &bit);
+ 	if (ret < 0)
+ 		return ret;
+@@ -443,6 +501,17 @@ static int msm_config_group_set(struct pinctrl_dev *pctldev,
+ 		param = pinconf_to_config_param(configs[i]);
+ 		arg = pinconf_to_config_argument(configs[i]);
+ 
++		if (param == MSM_PINCONF_WAKEUP_ENABLE) {
++			ret = msm_pin_set_wakeup_enable(pctrl, g, arg);
++			if (ret < 0) {
++				dev_err(pctrl->dev, "pin %u is not wakeup capable\n",
++					group);
++				return ret;
++			}
++
++			continue;
++		}
++
+ 		ret = msm_config_reg(pctrl, g, param, &mask, &bit);
+ 		if (ret < 0)
+ 			return ret;
+@@ -1221,7 +1290,6 @@ static int msm_gpio_irq_reqres(struct irq_data *d)
+ 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+ 	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+ 	const struct msm_pingroup *g = &pctrl->soc->groups[d->hwirq];
+-	unsigned long flags;
+ 	int ret;
+ 
+ 	if (!try_module_get(gc->owner))
+@@ -1255,19 +1323,7 @@ static int msm_gpio_irq_reqres(struct irq_data *d)
+ 	 * While the name implies only the wakeup event, it's also required for
+ 	 * the interrupt event.
+ 	 */
+-	if (g->intr_wakeup_present_bit) {
+-		u32 intr_cfg;
+-
+-		raw_spin_lock_irqsave(&pctrl->lock, flags);
+-
+-		intr_cfg = msm_readl_intr_cfg(pctrl, g);
+-		if (intr_cfg & BIT(g->intr_wakeup_present_bit)) {
+-			intr_cfg |= BIT(g->intr_wakeup_enable_bit);
+-			msm_writel_intr_cfg(intr_cfg, pctrl, g);
+-		}
+-
+-		raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+-	}
++	msm_pin_set_wakeup_enable(pctrl, g, true);
+ 
+ 	return 0;
+ out:
+@@ -1280,22 +1336,9 @@ static void msm_gpio_irq_relres(struct irq_data *d)
+ 	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+ 	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+ 	const struct msm_pingroup *g = &pctrl->soc->groups[d->hwirq];
+-	unsigned long flags;
+ 
+ 	/* Disable the wakeup_enable bit if it has been set in msm_gpio_irq_reqres() */
+-	if (g->intr_wakeup_present_bit) {
+-		u32 intr_cfg;
+-
+-		raw_spin_lock_irqsave(&pctrl->lock, flags);
+-
+-		intr_cfg = msm_readl_intr_cfg(pctrl, g);
+-		if (intr_cfg & BIT(g->intr_wakeup_present_bit)) {
+-			intr_cfg &= ~BIT(g->intr_wakeup_enable_bit);
+-			msm_writel_intr_cfg(intr_cfg, pctrl, g);
+-		}
+-
+-		raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+-	}
++	msm_pin_set_wakeup_enable(pctrl, g, false);
+ 
+ 	gpiochip_unlock_as_irq(gc, d->hwirq);
+ 	module_put(gc->owner);
+@@ -1639,6 +1682,8 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+ 	pctrl->desc.name = dev_name(&pdev->dev);
+ 	pctrl->desc.pins = pctrl->soc->pins;
+ 	pctrl->desc.npins = pctrl->soc->npins;
++	pctrl->desc.num_custom_params = ARRAY_SIZE(msm_gpio_bindings);
++	pctrl->desc.custom_params = msm_gpio_bindings;
+ 
+ 	ret = devm_pinctrl_register_and_init(&pdev->dev, &pctrl->desc,
+ 					     pctrl, &pctrl->pctrl);
 
 -- 
 2.34.1
