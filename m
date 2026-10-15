@@ -1,32 +1,32 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97D58566C58;
-	Thu, 15 Oct 2026 17:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B7F3392811;
+	Thu, 15 Oct 2026 18:11:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792086903; cv=none; b=jMWq6dm9uweWHqcwVnHTbzh2mxCQBuC8Um5AXFPMLCvwEyAQB4aJhOLGf6ief9fxahKvBl7zK5zaPxKudFmwMvOXIDRewjehShbKICdYK+XK195LMaMDXRVUOqE0xTMUJ3bdPTdwxiLco4PtNVXEIAazSkEtcRqYkSG4ByDSLmo=
+	t=1792087870; cv=none; b=IWOvYnYZihffhJXGFck/7xj9cFw59mTB6HGXBEMvLu9YIlh/KucengkTr4BjhxoJlVax1QYpYRiArA4sZskNRDAWlLZQyLWfYIGR3dJ9Dtyyy0B94rhP9nCbB3vqteKqxB7cZgiyIofPMdFwnBEHJ/Do9IAxj3hMcT8uYx2S5t4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792086903; c=relaxed/simple;
-	bh=jaqMRdxmRjsJU5dgnPTNECDUEUU1Qn26k41+D4Futnc=;
+	s=arc-20240116; t=1792087870; c=relaxed/simple;
+	bh=lsg1dfijms7lkhDf96j9gOlfkCYlZ3biuUFE22Qt6m8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=M6QEL6h6zjFrNPcGgXnVcMvS6vdCS8xUzK5ipoOk9g+vvf27Cyh/yzLv5qmfz35iCUt1tayQdcaX9pK3I0QJX9SM3Hsrt7376ZdYiQEjX0eUXHrEoGwb17jiV+TlfzwGNJLSku1PV0oLV4APO26QgtcseVtVRPxUGGBakRj+K0c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GvdCHza6; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=PzQFwl2aH1+Pl5+8D6vcYWj4R1bqCxZsl2qPkbAgrxNIG5ScjkaM+EZ2XkgCu7LAvCHDopRxPWaq3RZ/P3HtifrzmZilC14e2gMITSlNTssxw4XccppqsUkr5l7ZvssJO18ojZvZndzrWw6GG5Wn4VYSJTIOYnYIPkhmUwe+9F4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PWeo8Wq0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GvdCHza6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3609C1F000C4;
-	Thu, 15 Oct 2026 17:54:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PWeo8Wq0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 102141F000C4;
+	Thu, 15 Oct 2026 18:11:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792086896;
-	bh=uqjl8P/1C6J6qZp0U3fth0vu1NJId71zBoeCHtYpV1o=;
+	s=k20260515; t=1792087862;
+	bh=nNbgFoILvXz3KdF+x2gpod6rM+HqoXUVeCqW4noJ2MI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GvdCHza6jISI3u73/mEN6oTUfZD1LSc8g2bkldBoZXG17W6EDPP29x1urT1HlBkuJ
-	 sRuAzVYN/ZNKOS5XP83OTirmEhMARcpdsu2mp1QUPl9Zy2QajGBoxoqxEmG+kXPvcH
-	 o28JVSXVhbWllYZ3U82UBn0hkIVZwvXjYA3dtb/eFuePj18TD8fyrCK5ObHEMC51o1
-	 ECAmH6Ia+3e0uwaepbwecFqQz9GhC1d5EXRG/fDyt0EK4ZZXyKmSQFy9R5oG6/yDfn
-	 +7G4pKfDzdeY8CeBLhoVCUZGd+PULW1IwaqQg3jeq00OjiOkNOKcN+iGM8joGUuR0d
-	 p88TqU1usfYHg==
-Date: Thu, 15 Oct 2026 18:54:52 +0100
+	b=PWeo8Wq0x00IHGH2lHZb/0LiuKi0GXm7wnBbqa2PVvVqWhqEMgbvmCSKoUUb90xPh
+	 fPGjtYqDdKnW27H8GeEBPYkcLfyNVqOiL4x4YVmjAcvCIdg/AOC6qpqigUrpLYmTpF
+	 Lpg6gOFQnjAIa3IjV1zJmCveD8ZfHYBFCa+3j6/PGIkfk8LVx7jrGvyvoO5f3TgXkE
+	 eTiULcMc/LuEIcoXIr7djtzX+F91gt2KhVx+2CrBBz1DiiFLC0xAQJF/02a8Ddbb8Y
+	 AlBWUb4BxfeAXKHrgPYsu1mZyPMUO9Ctt/ABcDWu5Ap91JY93/tJkf42eWpdwM53pK
+	 4fFwhWvAgDELQ==
+Date: Thu, 15 Oct 2026 19:10:58 +0100
 From: Mark Brown <broonie@kernel.org>
 To: Sebastian Reichel <sre@kernel.org>
 Cc: Srinivas Kandagatla <srini@kernel.org>,
@@ -35,7 +35,7 @@ Cc: Srinivas Kandagatla <srini@kernel.org>,
 	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Subject: Re: [PATCH] ASoC: codecs: wsa884x: Add mute control knob
-Message-ID: <60cd552f-1de0-4304-8e84-bb307cdea45f@sirena.org.uk>
+Message-ID: <55831eb0-b7b0-43f3-8c03-4d1029ea97a2@sirena.org.uk>
 References: <20261014-wsa884x-mute-support-v1-1-74d98d79e635@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -44,39 +44,54 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="rGybbNyIWZeQcPR1"
+	protocol="application/pgp-signature"; boundary="bvels45Sch5WBIir"
 Content-Disposition: inline
 In-Reply-To: <20261014-wsa884x-mute-support-v1-1-74d98d79e635@collabora.com>
 X-Cookie: Tax and title extra.
 
 
---rGybbNyIWZeQcPR1
+--bvels45Sch5WBIir
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 On Wed, Oct 14, 2026 at 07:02:54PM +0200, Sebastian Reichel wrote:
+
 > This codec is typically used with ALSA UCM, which right now falls back
 > to handling mute in software. Expose proper hardware mute control
 > considering the driver already handles it internally anyways, which
 > allows UCM to bind speaker mute LED to the new control knob.
 
-The reason we have the mute control in stream startup is to mask
-glitches caused by the hardware during startup, for example clocking
-random things out of FIFOs.  Are we sure that this isn't an issue?
+> +	wsa884x->user_mute = mute;
+> +	if (wsa884x->pa_on)
+> +		wsa884x_set_mute(component, mute || wsa884x->trigger_mute);
 
---rGybbNyIWZeQcPR1
+This is checking for pa_on but...
+
+>  static int wsa884x_mute_stream(struct snd_soc_dai *dai, int mute, int stream)
+>  {
+
+> +	guard(mutex)(&wsa884x->sp_lock);
+> +	wsa884x->trigger_mute = mute;
+> +	wsa884x_set_mute(component, mute || wsa884x->user_mute);
+
+...I can't see what guarantees that pa_on is set here.  It looks like
+these are mono speakers with multiple speakers connected to a stream,
+someone could fiddle with the routing on an active stream and power up a
+speaker.  We should probably recheck in the speaker event.
+
+--bvels45Sch5WBIir
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmrRE2sACgkQJNaLcl1U
-h9Cn1wf/Slq1y4Lm483XDuKVG3SRy1PXcUpORrcXVkeIpS/c37hp9Yl7MkJF4vId
-/aqM2eA7ziot50gQQqCID+y3mgpENg9APR8KyGoVRbat2rPhIF/u43DwhYL5oPH9
-VqhfXeyn+P/rTu8bCaHeEAL1XPuVEQVPP8K0d6vsx3FEwK1KMv3hY3PlVtbhaYfo
-nItyCkaAewIPRiEPoPYR1zQZj4PQLq3Lz23h1tOP0t1v4RrZqhUmaoI8g7NkAcXD
-0Z41yjJn6d3ip3CFfGqkAS8MCjBMprD98wEK2QNmnQYNZbiSOaQR3tzBgsFgwvuG
-8NMeyGCQH7l3SBFt1PCB96Q/zmL1dQ==
-=qF5u
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmrRFzEACgkQJNaLcl1U
+h9CUFQf9EcgxtBivBJw7MRNDX+lovyKT+6n/oIqUwVjzdJR9fnFHr+0adwjwTuS7
+6IcssrX7G9beIUBdIkLDM2Bc1cd5bk1bPQbpT9KwHGCOPTLNtm9ZmtaZ8fL5ls0P
+u5+8DhkM8DyzosZP+JrUVWIWYfRIT8j/b59E37SzxoGXAbZojBsa6DKnBs/CTIg6
+kfNEGMOzI5uMlZ2P5lLirwhb5T8gNVG02UAdrj1JmGUcFMpuDUY8BMH1INV4297Q
+H9kbP3tXbkvuaajAa99P2TsqbgZo3xNBjkr4h7aQHOg6gZmuitO5ynqfZdKliJoo
+t+cwcmOmM0ikoNFygykcpplgEFbWrA==
+=eS07
 -----END PGP SIGNATURE-----
 
---rGybbNyIWZeQcPR1--
+--bvels45Sch5WBIir--
