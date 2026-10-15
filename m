@@ -1,293 +1,250 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAEBD4F4D1A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:59:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792054753; cv=none; b=U1xRq7PhBfvOVtO1vNc4rrdV8ZoPyH72PVx8fKh5T8xMN3HE1imc7gQbYl9cmmbLCohxHfuRanoH3X3RIKFymZiOhJ85SXGpNMMTeBspDpHSGBouR7vtUayfZ832MsEFTvblGqJj24IROFiBLhhf9HFxHqydAbsFY7IImypBUoA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792054753; c=relaxed/simple;
-	bh=0G8oHV7Iaf+F2rNSJejgBlOHtOGWquaiHcHxeXy4LWk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pcpZB/nJ+a0S0+LqKk+k0thWb+46CAyDGpwja+lq+8scztfri7fM+o8F0DS77o8snWf1W+NeYaeXDDBR5d90kCAxEp4/ETbutfd25SM1rHi/PB9VcS0ZivblHYjzpOpC2VQy0tMZ32NA5nlT4syA76EwAWjzgXOdmNHZcmqE28E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NL0VUDjM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E21FcEkx; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0192A4E9C14
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 09:00:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.46
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1792054836; cv=pass; b=ozOB+vigo0AmTFkEFWcdqnhU33EcQpFO+HYvrRKd8gAJ5p4mDVIzfLlpUVKjWtwdUy3mK3h+cVyRsogk3bBL1HrTtIujug2pf0LxyxtFRFP/7X/zVq32fURPOR/P6CLGfH5djUH7fpMX2ScauPF7hLUDxDmgrJMEzWsDmtslB3Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1792054836; c=relaxed/simple;
+	bh=k2Rzrx7XeCBQTzrPMgf0gJ6EQIfvVKL0241+vPFdwAI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=WuwC2g9P20bhP6TONw1LsOvFjLkFuiCPuqrzc4csqhvQrAtm3oAEdTlJL78NRqqOEDw5IiA6U1/SPqORsdKuQqPsutsWbPkXgnwX+wdO5gI8lNF3blJu6zYW+btXJHBihor/bjHOljO1KjGBAkafPXnQQj3lJt6DO6Wsl372PTo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=MtY1wELf; arc=pass smtp.client-ip=74.125.224.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NL0VUDjM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E21FcEkx"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F3xZEg2738645
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:59:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	1Bvz/kMR7NqEowR/9FJ0mOCFGWKDpq2MbUNyuR8mPjA=; b=NL0VUDjMmWLHlrnm
-	KgWfhAhbuiV1UZSWpNh5WYt8fEyx3TKkYUAcAgTBeRgV4tjyJNLhxisk321x8dfn
-	+2Nc5qaRX6/IS3p/1+WDRGasztTebnIGr/mO7wtgK/i94R/9qBrq+0atYiy54a8V
-	MiNUPOC4VUHcUUTJUSwEabDPhR/vacKPtn3ODJ/IZWql6UIwyE6SeBFD+4r4nMxU
-	LJ7ViUCVxyEElP8HSRlzmJ6iEJEb0G7z/xlnPAzBvuj2wCvjQ4DyKEIr5lLIiV4R
-	E7mmsu4Z1T9EFccVOSX1yX9xaRyL9+UGxmmwNDDInI1ZCO84okWfz2V1w404X9Tm
-	rFcxtw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haqds94hv-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:59:08 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb93c874bso328441685a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 01:59:08 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="MtY1wELf"
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-677d35fd1d2so1504383d50.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 02:00:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792054827; cv=none;
+        d=google.com; s=arc-20260327;
+        b=bw4mE0I568kM3v9yTVT7hT5iHJWbyXddE4DPc4uqel9RFWxuMHn+tV3R/K/lWoEPXP
+         Qa5z7nxoC7CqhA/IWP1BSMvm4V2beN+eOX28e6DFd1sJphzOqWTD4T4TgN49yuX+VImY
+         51fhk69yLZI2NtuBIwTcAv7gHDUUIHPnf1Uop1uP0IE1D/UHkrDOwcfwHv00cmvxSzXg
+         w+aNt9vYnH4q4hCmujLelRViX9YiswaadV+W9U8YfCWHCiTe87mp8lrq8yodyecR8ctB
+         f9l2WEVYRMz+I66A+VU5UgJefqqwzchEBPgd4aenUvBzKvx18jQ/YI+RfKxiLyTGKdOm
+         Ah4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=H2bwf3Gv5oNr3T6PPFbiYLp5czeo2CNPZ2amlY5zFVU=;
+        fh=QqD64iRH0HmiU3H7Oz14ag977qYgcQbZCuYi4S9XLkc=;
+        b=ZLktwzLwvC14iTqcUXJ63kaYXxq2X9/qEe7FEfwL80XOwKAmkdoXzgxp/+xVUEGN9o
+         CHnbzzJd6f72fesP3slRB+pV6BysWCuVyrgc3b8itkeywlPFtgJV7B3XYYJNmRiuwiu1
+         HwYPxZVmH2LqHRzVF1Mmj8kqwf0ivB0sKZFM+I4lADp9l7f2xDDhEKxSFTDv0M3F+rvr
+         QWQ2/2ujoX75xOd9NB35jx+7S/aM8WLBw4FdUDvGAEPkOa9fxYLFLaJ4er/LhuVd9540
+         jWnNI3ZhEO2tGHd6XgDtq6t4ElqCtZdIdZ+2TzESX7fBtar13LiA2HDIfXORZ+fNv9oq
+         p5uw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792054748; x=1792659548; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1Bvz/kMR7NqEowR/9FJ0mOCFGWKDpq2MbUNyuR8mPjA=;
-        b=E21FcEkxM5ycdR8Bx0axbf3Ibq0pMaYKaNmI0E7Ii/ttdFKW2DQo4qd6EOyQqtBfjO
-         B77hLB3mJdLZfa7u3rDfQUcKTGzoGrhL0IvyyCdmce03pUw1qcKjLWVDne4vx64tmoqq
-         ZHTyksaVDD2YXWfd6LFin7EriNYjohGWPXlIV5RmZYcrCl02S6fhkfalJJPKBMze5Abz
-         +3rRo9pG5iXRNy3QrfIXkFZW++LYp3Abjc2FE5ho5Cq/FiJCu28hCosn3FV1BzF1rD6U
-         GfFOcM4teLCs+2ah3pHBBak7VWD90XmDnCHyEim3pXy3RIm9lTeKvXiKZMpPHR90jk4A
-         Dl9A==
+        d=chromium.org; s=google; t=1792054827; x=1792659627; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=H2bwf3Gv5oNr3T6PPFbiYLp5czeo2CNPZ2amlY5zFVU=;
+        b=MtY1wELf+qkksC728VBdu9SvCEgLQu23fFh7RmnRNfPh23kTCbNI5rhl/J3iTqdcoq
+         Tw6ay0Ag5IsXl+ki8ClWhtY6DdvfIsPqm75fINvzIxoXS2heVcycyx/DGkZQqz7GknnX
+         oAsdXKGPQ4lAWOKwtozm1T3ShVnsIROoRl/QE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792054748; x=1792659548;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1792054827; x=1792659627;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1Bvz/kMR7NqEowR/9FJ0mOCFGWKDpq2MbUNyuR8mPjA=;
-        b=mwbhMwPeUyPez641npUSX6zpAjed1n7BcD7TXSaNGrBUmyK4IM+kO//WUaWOT8vYF2
-         CaynYV8OereLpfwIk4pzW38OUFsl9XYMps8rOFUDBjREeKTRV2y9sYCDBgDh5qgB5PdM
-         SftZBtdyHPvPLbX6fZTqe3FURDRld+k8DwOx2LlvL17gw5lZlh+e99vucb35Md5xSZ5H
-         KGOoOy3HEcLsmyqublKBOJJtmBBd938f4SQZslM+rYhJsUNdwt+25iiuVqgLkliwWN6u
-         c+Fm728Lpuo1ThrVR2ahHA0cMsvDtNJgFYDosykE2ytXj6pa/jGiawm19docwWgzu6+0
-         MleQ==
-X-Gm-Message-State: AFq9FYJ8AZmQmqPnCNkh3Nd99A45paaE/dSh4+349IJvQXdPzXWtlo3j
-	Hr2x5o4oze3md9hqFXrhKB3GDt6U9ydfjjkXRLw8nN/F4smRGpMDrJH3+2B0PF7UnnWdrV2kUUU
-	eWMSoth2HIbGm5zawW6ul76fDCLI6JMkkkPxxVBqJKVu805yKQ7Z46CzNJvQIk1PnP27U
-X-Gm-Gg: AYBFou1f8Z42rbTR6S4Dz4FZa47IQ31sSU/VgBfTkK7FYtUY7LRYYdQ9kUyeicGrXrI
-	zVOjQO/j6rmtm6YjCRV2JkDdSfOIg1N9mBeTdgmwBEtwFk/LxWXHQ97lq6OezvoKF63b55pu5Pj
-	asczb3LHZOYuV0CZDEFybWqxMMyDwz2pSY2MdazH1fesf31wHBU6/vDQbrRoJu7VkBJtc6A/B/1
-	gPMHR4nRmC+IIX7gVEX+RQg+2eLCSaO76fqao/DCTfFl57jP05Jc8oPD6HQL/5fWAams3Fs6LWA
-	utBPC6NSXrtNkKYblexundQFcWmNZLFIDkwCjnOKhp7bRovnESPdSzvuhrHJIfn+8ekEUtTLQXk
-	/I53eP3CAoe8hpeED/riD8NabTl6V1jWGMHsxXDdoxnoz3UPZde6gNRxMnVqkGcvTMDxUYk9JgJ
-	1Yj8X/ET9HMJY0
-X-Received: by 2002:a05:620a:199a:b0:93e:cf47:eb9e with SMTP id af79cd13be357-93ecf47f98amr2170752985a.11.1792054747687;
-        Thu, 15 Oct 2026 01:59:07 -0700 (PDT)
-X-Received: by 2002:a05:620a:199a:b0:93e:cf47:eb9e with SMTP id af79cd13be357-93ecf47f98amr2170750385a.11.1792054747204;
-        Thu, 15 Oct 2026 01:59:07 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be3b51fd1dsm371590e87.58.2026.10.15.01.59.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 01:59:05 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 11:58:46 +0300
-Subject: [PATCH 9/9] arm64: dts: qcom: sm8150-hdk: add display card overlay
+        bh=H2bwf3Gv5oNr3T6PPFbiYLp5czeo2CNPZ2amlY5zFVU=;
+        b=aC6DXySrjzi09xwiFy3jDrtO0siZheTNWPmCc3FmWkhT2BefLYnkzmxYn6mnXV5hLw
+         1CZtXQ1yySJiSkmzwYqODXKAwQ05+e7RCnrBbPcks53yrm5ZIxpWgGxyLmfqVaC58lMs
+         UuFyrfI4RA+r12vx/Nwk9XtI4xQAejLIJQkwL+H4ts7Bi7OncN6E28XGcmmMi/nrOMC1
+         E4ZV572OpeV9z07MS/6Cbim4iN6cP8EbmtVAR56PZrUoYaYBWOlRGG4QGeDfRMCYjHi6
+         7H2WjhxCsPn6OSP4UjfqMbrtm0ZhnqJsvSVyZOdBRqHsOMwXgiZmHMTc3u0nYd2THV70
+         pJOg==
+X-Forwarded-Encrypted: i=1; AKwUvBw1bmOZWRgqhYY75XwTqWK/uhWNAe2+1KiPAxHJUj3Fj42maLXKHgBI0jIXbiBwkSc0vsArp8qH5gBuVAZH@vger.kernel.org
+X-Gm-Message-State: AFq9FYI7pxgJ9N0kbK0qkQaZLFRqXkDz1nMFoxcrvhI37qQSkB9hXoQX
+	ifXPUqO03z2v7uD1I0yxeqMdVzCmyuQKW1tA0RXL9o3agrb14o+GbeOOuICoOg+6DKIbtjmqQtG
+	0rLz/85S5TfZXUpCMNFULmIoe1SLThyyoebWcNrkU
+X-Gm-Gg: AYBFou3tZEJRi2yVX3J352pNU1bdVZ5GMc7MjGkEVC3HefGpCkVcBMQaRBZAxmEwsud
+	YVGe1Z7Id3HGJIDYucjIjXt8jqD7EB/E5/GCL4Zy3L9uiB6KkTcllY9WKoMi6wwTAVQhkxCc9QO
+	o9BYvAPjh3+0qtxzBKc68dIb7QaAfXqyULXLBI/Yk+mo90cQK4lU9E4Qpm2d9AT7oEXnTOsGTc8
+	FAwlbNAEdJ/bmJJw5gUzIIBE6azejCVfKFcqC2Ygh/Mq+DBcO3PEkrR6bBMs2uLbY/ELVBEES4C
+	JIwN1J8OKWlDOymjY7BssZipcRcpzNH8ux9euLvUSPfqmlImObdh6CwgFBoOgyVG2nc=
+X-Received: by 2002:a53:ac9e:0:b0:675:449d:3d74 with SMTP id
+ 956f58d0204a3-679362786a1mr5012542d50.92.1792054826173; Thu, 15 Oct 2026
+ 02:00:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-sm8150-display-card-v1-9-5c14928cef29@oss.qualcomm.com>
-References: <20261015-sm8150-display-card-v1-0-5c14928cef29@oss.qualcomm.com>
-In-Reply-To: <20261015-sm8150-display-card-v1-0-5c14928cef29@oss.qualcomm.com>
-To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
-        Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>,
-        Kiran Gunda <quic_kgunda@quicinc.com>,
-        Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3677;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=0G8oHV7Iaf+F2rNSJejgBlOHtOGWquaiHcHxeXy4LWk=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq0JXIdAlz95KI9h/Kzl+CwuERsjroHKyCSch49
- rcQmC4Iy/yJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCatCVyAAKCRCLPIo+Aiko
- 1X8zB/sGFmKRpkZKPP3Pe4eixaHQrtRFlcQ7U4ki7V87Zh0fXkkspOXM631dB+G6qJXqXTMJQdj
- 345ORGYg9pDpXIQS6ynTN95ahClYwkejpnpTQGRcG0E/5tDpcjJGlocwWiRa3gjqiSqBCkCxE8Q
- +y7Kes5WUzTfJXMNi5I2UTmlKpD9p1qTkQJGJ3e15es3r3QljyYk/YxDf/PN7sdhYIajTbBFo+B
- rIUG/8PQBerZK744GEy8/cKOZrn+tOk4GOqfg6fHyOcW4Bo2z6xhbM8wh0Z+emCrocoHyqjfIGt
- hrxz7gocQprafndfcXP7ys1CROUMrfo99VOS59r1xrS4seut
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-ORIG-GUID: nGkdPup5TPZeFcZnx8AApOPlq32wr_vX
-X-Authority-Analysis: v=2.4 cv=fNusTpae c=1 sm=1 tr=0 ts=6ad095dc cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=k5xu95HCNwnmwRhsQXIA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAzNSBTYWx0ZWRfXxPel09ISKsMV
- XzHXZB/FDd2uPGpMJnLYr4lOhEQHB1BUOvsnnz2Ms9DX0n5SzT5Ihnt3DoG/efZWAEt+DAfqA2V
- JCzwMQuuCPjp4drF687u7OKkafl+eVDB/4BN0RTAlE9nC2KSDLP4ONYFe0iaWqITaLGg9q0X/1+
- 6pJsnyEd22WjEPRzGLj3EsQgIB7ekyILCcAl0xLgdAcp+NMCMY3ocbSsYt+lnUPxclB5Q5EFvHz
- WQnnHYIKsDK9011KBPJsnpkUrPPTaAeLjGdZOWQOn1gxn6WZQEu70Od3iK2GARcgi3AB+u4mmwM
- efuaz+NUbZbey7dgYE/6EhX4CnvJ1Y8kNRvQkQ3kG6slubPiat393MgC/Ag6ruEuDiFWn+yXdqH
- fbXW6WAuSiii4OufAPbLI8Yvm+qS22/so/NwcZ+CjqUfZzoIWP6tj/sZp1KWShcws5fhyAZwVS2
- aFQfV/TCuqO0KAhj8TQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAzNSBTYWx0ZWRfX2JJuvTq78Uhj
- Prz+OVWvDWaDzbeANIiVabSe8U70/16QH9qXb1QOHcucqLg/pKhTTzqx4//+T5AXjnbQq1At6oQ
- i4l2CM+dmpDQfd61lUw3VsLWZh4q1kw=
-X-Proofpoint-GUID: nGkdPup5TPZeFcZnx8AApOPlq32wr_vX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
- spamscore=0 clxscore=1015 priorityscore=1501 adultscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150035
+References: <20261014082037.1774672-1-wenst@chromium.org> <20261014082037.1774672-3-wenst@chromium.org>
+ <7020a7a6-332e-4fd0-a659-d82eb768614c@linaro.org> <CAGXv+5G1kgyumbj7wGf6rPFbg3spSO0zYmEkn-hZT4qUdJbytA@mail.gmail.com>
+ <03375a31-0ac6-47a4-b0dc-6327080e1622@linaro.org> <b4c0761b-34f2-42ad-97e7-ab34ae776281@oss.qualcomm.com>
+ <8d4d3ec2-3c97-4a46-97f8-048fdf81b853@linaro.org>
+In-Reply-To: <8d4d3ec2-3c97-4a46-97f8-048fdf81b853@linaro.org>
+From: Chen-Yu Tsai <wenst@chromium.org>
+Date: Thu, 15 Oct 2026 18:00:14 +0900
+X-Gm-Features: AclHuK909vzDVZhhmMGqz8RNS4kIz2k4tldUZDjIEfGnLkXIyAs5uz5oF7-pLmQ
+Message-ID: <CAGXv+5G_ig=k-eH8Cp0ES70WxTHcBS2TVj9VmHaG9caROiAuQQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] dt-bindings: usb: snps,dwc3: Fix downstream port numbering
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Felipe Balbi <balbi@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-usb@vger.kernel.org, devicetree@vger.kernel.org, 
+	Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>, Sven Peter <sven@kernel.org>, 
+	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, Joel Stanley <joel@jms.id.au>, 
+	Andrew Jeffery <andrew@codeconstruct.com.au>, Ryan Chen <ryan_chen@aspeedtech.com>, 
+	Billy Tsai <billy_tsai@aspeedtech.com>, Michal Simek <michal.simek@amd.com>, 
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Peter Griffin <peter.griffin@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	Tudor Ambarus <tudor.ambarus@linaro.org>, Heiko Stuebner <heiko@sntech.de>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Yixun Lan <dlan@kernel.org>, 
+	Troy Mitchell <troy.mitchell@linux.spacemit.com>, Minda Chen <minda.chen@starfivetech.com>, 
+	Shyam Pandey <radhey.shyam.pandey@amd.com>, Wei Yang <yangwei1@eswincomputing.com>, 
+	Senchuan Zhang <zhangsenchuan@eswincomputing.com>, Hang Cao <caohang@eswincomputing.com>, 
+	Li Jun <jun.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, Roy Luo <royluo@google.com>, 
+	Yang Xiwen <forbidden405@foxmail.com>, 
+	Ahmad Zainie <wan.ahmad.zainie.wan.mohamad@intel.com>, 
+	Robert Marko <robert.marko@sartura.hr>, Xu Yang <xu.yang_2@nxp.com>, 
+	Wesley Cheng <quic_wcheng@quicinc.com>, Stanley Chang <stanley_chang@realtek.com>, 
+	Ze Huang <huang.ze@linux.dev>, Aswath Govindraju <a-govindraju@ti.com>, 
+	Roger Quadros <rogerq@kernel.org>, linux-arm-kernel@lists.infradead.org, 
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	asahi@lists.linux.dev, linux-aspeed@lists.ozlabs.org, imx@lists.linux.dev, 
+	linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org, 
+	spacemit@lists.linux.dev, Mathias Nyman <mathias.nyman@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The SM8150 HDK can be fitted with a display card carrying a Truly
-NT36850 WQHD dual-DSI panel. It uses the PM8150L WLED for the backlight
-and LCDB for the bias rails, and it is mutually exclusive with the
-on-board LT9611 HDMI bridge.
+(Cc-ed Mathias, the xHCI driver maintainer in case I misunderstood xHCI.)
 
-Only two of the three WLED strings are connected on the card: the
-backlight stays dark and the boost runs into the overvoltage limit if
-only the third string is driven.
+On Thu, Oct 15, 2026 at 4:44=E2=80=AFPM Neil Armstrong
+<neil.armstrong@linaro.org> wrote:
+>
+> On 10/14/26 18:36, Konrad Dybcio wrote:
+> > On 10/14/26 11:44 AM, Neil Armstrong wrote:
+> >> On 10/14/26 11:29, Chen-Yu Tsai wrote:
+> >>> On Wed, Oct 14, 2026 at 5:28=E2=80=AFPM Neil Armstrong
+> >>> <neil.armstrong@linaro.org> wrote:
+> >>>>
+> >>>> On 10/14/26 10:20, Chen-Yu Tsai wrote:
+> >>>>> The DWC3 controller can operate in host mode. It does so with a XHC=
+I
+> >>>>> compliant host controller. The XHCI has two downstream ports, one f=
+or
+> >>>>> HS and one for SS. USB downstream ports start from 1, not 0.
+> >
+> > [...]
+> >
+> >
+> >>> IMHO having consistent numbering across controller types would be
+> >>> better. This avoids making the USB core and hub code deal with more
+> >>> exceptions, and also easier to understand and write device trees.
+> >>
+> >> I was in the impression the port number not necessarily reflects
+> >> an actual physical numbering, and can be a logical number we would
+> >> then map in the kernel.
+> >>
+> >> I don't see any issue here having base 0 for the bindings and then
+> >> converting it to base 1 for the XHCI port numbering.
+> >
+> > I thought base1 comes from the USB spec and not just XHCI?
+>
+> This is my question, is the spec says: each USB Host Controller root
+> port shall be considered as a port of a Hub and numbered the same way,
+> then fine, let's use the base1 numbering.
+>
+> As I understand how USB is architectured, all downstream ports of Hubs
+> are numbered in base1, and the whole topology is based on that.
+>
+> But here, we are speaking of physically separate USB busses, one
+> USB2.0 and one USB3.0, a controller could also have 10 USB2.0 ports
+> and 5 USB3.0 ports, who knows. The way those will be numbered is not
+> part of the specification because the specification only the defines
+> the topology of an USB bus, like PCI(e) defines the topology on a PCI(e) =
+bus.
 
-Assisted-by: LLM
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |   4 +
- .../boot/dts/qcom/sm8150-hdk-display-card.dtso     | 103 +++++++++++++++++++++
- 2 files changed, 107 insertions(+)
+No, the XHCI spec actually specifies how to identify the number of ports
+and which port supports what version. See below.
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 85d06a950b4a..571bda210d63 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -409,6 +409,10 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-nothing-spacewar.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-xiaomi-lisa.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-xiaomi-taoyao.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-hdk.dtb
-+
-+sm8150-hdk-display-card-dtbs	:= sm8150-hdk.dtb sm8150-hdk-display-card.dtbo
-+
-+dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-hdk-display-card.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-microsoft-surface-duo.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-sony-xperia-kumano-bahamut.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sm8150-hdk-display-card.dtso b/arch/arm64/boot/dts/qcom/sm8150-hdk-display-card.dtso
-new file mode 100644
-index 000000000000..205cd6d2cd71
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm8150-hdk-display-card.dtso
-@@ -0,0 +1,103 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/*
-+ * Display Card kit overlay.
-+ */
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+
-+/dts-v1/;
-+/plugin/;
-+
-+/* Disable HDMI bridge related nodes (mutually exclusive with the display card) */
-+&lt9611_codec {
-+	status = "disabled";
-+};
-+
-+&mdss_dsi0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	panel@0 {
-+		compatible = "truly,wqhd60-nt36850";
-+		reg = <0>;
-+
-+		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
-+
-+		vddio-supply = <&vreg_l14a_1p8>;
-+		avdd-supply = <&pm8150l_lcdb_ldo>;
-+		avee-supply = <&pm8150l_lcdb_ncp>;
-+
-+		backlight = <&pm8150l_wled>;
-+
-+		pinctrl-0 = <&disp0_reset_n_active>, <&mdp_vsync>;
-+		pinctrl-1 = <&disp0_reset_n_suspend>, <&mdp_vsync>;
-+		pinctrl-names = "default", "sleep";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+
-+				panel0_in: endpoint {
-+					remote-endpoint = <&mdss_dsi0_out>;
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+
-+				panel1_in: endpoint {
-+					remote-endpoint = <&mdss_dsi1_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&panel0_in>;
-+};
-+
-+&mdss_dsi1_out {
-+	remote-endpoint = <&panel1_in>;
-+};
-+
-+&pm8150l_lcdb {
-+	status = "okay";
-+};
-+
-+&pm8150l_wled {
-+	qcom,num-strings = <2>;
-+
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	disp0_reset_n_active: disp0-reset-n-active-state {
-+		pins = "gpio6";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	disp0_reset_n_suspend: disp0-reset-n-suspend-state {
-+		pins = "gpio6";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
-+	mdp_vsync: mdp-vsync-state {
-+		pins = "gpio8";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+};
+> How we aggregate all those busses to abstract them to software is not
+> part of the spec, we chose to declare a fake root Hub with a physical
+> downstream port as a virtual port of the root Hub, fine but this is
+> purely software abstraction.
 
--- 
-2.47.3
+As far as I understand the implementation in Linux and the XHCI spec,
+the XHCI hardware registers give the "maximum number of ports" in
+HCSPARAMS1. Then there is at least 1 "xHCI Supported Protocol Capability"
+entry in the "Extended capabilities" section that describes a group of
+ports (offset and number) and the USB protocol supported by that group.
 
+Using the example given by the XHCI spec on page 330 as figure 4-35:
+
+    XHCI port 1: HS on physical port 1
+    XHCI port 2: HS on physical port 2
+    XHCI port 3: HS on physical port 3
+    XHCI port 4: HS on physical port 4
+    XHCI port 5: SS on physical port 3
+    XHCI port 6: SS on physical port 4
+
+The DT would be something like:
+
+    xhci {
+        ports {
+            port@1 { /* graph to HS EP on USB A connector 1 */ };
+            port@2 { /* graph to HS EP on USB A connector 2 */ };
+            port@3 { /* graph to HS EP on USB A connector 3 */ };
+            port@4 { /* graph to HS EP on USB A connector 4 */ };
+            port@5 { /* graph to SS EP on USB A connector 3 */ };
+            port@6 { /* graph to SS EP on USB A connector 4 */ };
+        };
+    };
+
+> We may only use the hardware IP port numbering in the bindings, not
+> the software abstraction.
+
+And we are using hardware port numbering. It's just the numbers used
+are the physical port numbers from the XHCI registers, not the logical
+port numbers on the root hubs.
+
+In fact, we could say that the port numbers on the root hubs for XHCI
+are made up.
+
+> We could use the base1 to describe the DWC3 ports, but how to describe
+> all the physical USB busses a controller can expose ? We may not limit
+> the bindings to USB2.0 and USB3.0 ports only.
+
+Technically, there is one bus for USB 2.0 and one bus for USB 3.0. But
+currently for XHCI in DT, we describe the hardware ports directly,
+regardless of the USB protocol they support.
+
+I don't know why we don't describe the root hub, but maybe it's because
+prior to XHCI the controller and root hub were the same entity? Even for
+XHCI, the root hub is more of a logical entity.
+
+And AFAICT, the hardware registers don't distinguish between ports on the
+USB 2.0 root hub vs the USB 3.0 root hub. The port control registers are
+just in an array, indexed from 1 to maxPorts, i.e. the physical index.
+
+> How about the USB4, does it use the USB3.0 port ?
+
+I'm not familiar with USB4. A quick search says that it can tunnel
+USB 3.x, DP, and PCIe, and it doesn't have its own USB HCI defined.
+
+So I'm thinking the USB4 controller would be more like a nexus node
+or multiplexing node, or perhaps like a USB C connector. It has input
+ports for all the protocols it can tunnel, connected to their respective
+controllers (XHCI, DP, PCIe). The binding probably would be very messy
+if one controller supported multiple outgoing ports, as each downstream
+port has a 3-to-1 relationship with its respective upstream protocol
+interfaces.
+
+
+ChenYu
