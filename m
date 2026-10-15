@@ -1,93 +1,179 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EEF84A2062;
-	Thu, 15 Oct 2026 19:08:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9633D552922;
+	Thu, 15 Oct 2026 19:36:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792091286; cv=none; b=iv+aDbBDxqidjrsPzR/vNq13Pbjhf2ayS483jkT7t4NCBRXqSeXm/x2kLE8KRhygu7U4SaO73HUBigGsHg7S9fy77eRQ0M4L4cBmft0gcHbrh4wAOtKfEXTUVvvmtbmpIEY6qKs4ks3QDGOrW94jf1CjJO3Tp/8CJ9Sv23XhOUs=
+	t=1792093002; cv=none; b=JR8JvGP8zJ2eNYeWuz/TTgxB3Rf2Mf/Z7fUJzOfIXYWCN5TkJgDGr8lEYoiJ6gW60ERFEmYeU1l2HYRpMmZsBI4irGAO9J3lY1MgHKGKGvZN5PhoKpsfsiUaaXDvVaNJBJw9SqrLeD25l3BdCMgYeg4So4mKKxpQJ/wA3kUZXLA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792091286; c=relaxed/simple;
-	bh=cyU3X4JdKoxg9kUry1GAjfUWGDLRoQEz8UieWr1cxb4=;
+	s=arc-20240116; t=1792093002; c=relaxed/simple;
+	bh=EkSHH4cjzhD2ZWJZ5Z5sffPHQutdvk4S86y7aYi/F1Q=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=og+DV+rh4r56yZw7t4AXgqm8BJ/HMvlwDNSRuBJJGCsD/aFiz8isrVqDB08NM8ByEuZFxpG7P8SFtFBGOE3oUj/z3AIWGWt6ZL4XqQRryCxvXgeB2Ncb5j0jB6l4y3N8OTJodD5h2brzheJNelVjNrlXHJe+gJ3VbieUcCnV1cg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=et8klXTX; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Z9SN2UyaXMde4Rz0TJOWnCUuENX7J+1EUuH9evymwft6tWir3E72B4NruL4SsDJg1Wr5GH7TOfvY1fY8JJFHjBsje7JdTOWHRwuEMkmxPcttK1Khp/e+i2D0WVHqxRt6+SVIMR24Qz9k+tEQk88hvXiS2UhImImDD0eY/dos+9k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kLw0KzYY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="et8klXTX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 994EF1F000C4;
-	Thu, 15 Oct 2026 19:08:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kLw0KzYY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B4411F000C4;
+	Thu, 15 Oct 2026 19:36:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792091284;
-	bh=uOLB46dfm0aerWqo4MfS0HfL8CCeDthLlQvQVMVFuVM=;
+	s=k20260515; t=1792093001;
+	bh=0ExLOTvMpNdwpLI0kZtOgkFwCcZ4IqWfr3EbUwrSECg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=et8klXTXLJglDd5uZg1slra9e0Xq9rIEh8OqusA0qBEtB7+kUpPInQx9jvMMELUxA
-	 8N/G9s1ZGbpj+o6gL6Rm07lZSnHAvSCyuivYwCFXfAciV7gK6taEcrAcF8H3Ibkbsn
-	 0quw91+s/Xnqx/qI7+vjtx9Fi14T1hCJ38qcJgb9AJadMNIP0UZXpqk0NQCTRWu+AJ
-	 IBrMbjo9D0idyoexyyHmGfM9ReHS+W5TOrUVPCt75SmPckAFapJVPlv+d2asXEnPIz
-	 ZglE5gCNhNokb4svGKVj9o7r94NRHo6aXaMcYBuDq9L7Ti3Wqy89+H/FIcVZSfGsOa
-	 nOeT6nuuxJuVw==
-Date: Thu, 15 Oct 2026 14:08:02 -0500
+	b=kLw0KzYYomReQQbQQ+K2sJiVxDSsJH3OUDHmvawLUtBzvBzvcoW02JSoYsrIVSOS9
+	 o3t+C+DkAJOuGf8MwzrhLtFqBHaKpuB89H0Eqh8m3+VrAI/Qaxxgrty/FBnR9QmXbc
+	 mV+TBLIA4H6rnBhyWJRcwojbpXOxNKsODmequC9xvI5dGd5vBUad4/F0uLMJzOldK0
+	 T8t3g8LrSrBoo9dTrKfxNetSr+mDHHmzhX6hSeT3ZK99f/QhtkTUQnp1NUyPJra700
+	 T+eGYsGTzKY8rFD1jN0Q+jSpSCCSCYLlI+KA4Qie5tMdCcCdVE826GzWfz5sj6+yP5
+	 /nKwaas4pTTog==
+Date: Thu, 15 Oct 2026 14:36:39 -0500
 From: Rob Herring <robh@kernel.org>
-To: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
+To: Yin Li <yin.li@oss.qualcomm.com>
+Cc: James Morse <james.morse@arm.com>,
+	Shanker Donthineni <sdonthineni@nvidia.com>,
+	Ben Horgan <ben.horgan@arm.com>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
-	Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Subject: Re: [PATCH v8 01/10] ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add
- binding
-Message-ID: <20261015190802.GA5059-robh@kernel.org>
-References: <20260928-b4-qaif-shikra-audio-v8-0-ac618057fe85@oss.qualcomm.com>
- <20260928-b4-qaif-shikra-audio-v8-1-ac618057fe85@oss.qualcomm.com>
- <20261006141620.GA1950759-robh@kernel.org>
- <CAC-tS8DzW88Lu_k-yKQtyfYc8u5-rh9WKTSanJ6dq6Xo3wp+kQ@mail.gmail.com>
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Fenghua Yu <fenghuay@nvidia.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Gavin Shan <gshan@redhat.com>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Drew Fustini <fustini@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
+	trilok.soni@oss.qualcomm.com, aiqun.yu@oss.qualcomm.com,
+	ganapatrao.kulkarni@oss.qualcomm.com,
+	Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>,
+	Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 3/8] dt-bindings: arm: Add MPAM MSC binding
+Message-ID: <20261015193639.GE5059-robh@kernel.org>
+References: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
+ <20261008-mpam-resctrl-dt-knp-support-v3-3-35196c2b43bf@oss.qualcomm.com>
+ <20261008212736.GB1318789-robh@kernel.org>
+ <2eddfb6d-c622-4d72-827e-aed685e72b9c@oss.qualcomm.com>
+ <51bc6576-7e52-4685-b7b2-a355c2b7e1ae@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <CAC-tS8DzW88Lu_k-yKQtyfYc8u5-rh9WKTSanJ6dq6Xo3wp+kQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <51bc6576-7e52-4685-b7b2-a355c2b7e1ae@oss.qualcomm.com>
 
-On Mon, Oct 12, 2026 at 12:15:52PM +0530, Harendra Gautam wrote:
-> > > +
+On Mon, Oct 12, 2026 at 06:24:06PM +0800, Yin Li wrote:
+> 
+> 
+> On 10/12/2026 3:05 PM, Yin Li wrote:
+> > 
+> > 
+> > On 10/9/2026 5:27 AM, Rob Herring wrote:
+> > > On Thu, Oct 08, 2026 at 02:41:12PM +0800, Yin Li wrote:
+> > > > From: Rob Herring <robh@kernel.org>
+> > > > 
+> > > > The binding is designed around the assumption that an MSC will be a
+> > > > sub-block of something else such as a memory controller, cache
+> > > > controller,
+> > > > or IOMMU. However, it's certainly possible a design does not have that
+> > > > association or has a mixture of both, so the binding illustrates
+> > > > how we can
+> > > > support that with RIS child nodes.
+> > > > 
+> > > > A key part of MPAM is we need to know about all of the MSCs in
+> > > > the system
+> > > > before it can be enabled. This drives the need for the genericish
+> > > > 'arm,mpam-msc' compatible. Though we can't assume an MSC is accessible
+> > > > until a h/w specific driver potentially enables the h/w.
+> > > > 
+> > > > Cc: James Morse <james.morse@arm.com>
+> > > > Signed-off-by: Rob Herring <robh@kernel.org>
+> > > > Signed-off-by: James Morse <james.morse@arm.com>
+> > > > [ Yin Li and Huang Yiwei: use oneOf for the compatible to allow both
+> > > >    standalone arm,mpam-msc and the two-item combination; fix
+> > > > schema field
+> > > >    order, type constraints and yamllint spacing; fix example reg
+> > > > addresses,
+> > > >    add arm,mpam-device phandle and remove TODO comment ]
+> > > > Co-developed-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+> > > > Signed-off-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+> > > > Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
+> > > > ---
+> > > >   .../devicetree/bindings/arm/arm,mpam-msc.yaml      | 202
+> > > > ++++++++++ +++++++++++
+> > > >   1 file changed, 202 insertions(+)
+> > > > 
+> > > > diff --git
+> > > > a/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+> > > > b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+> > > > new file mode 100644
+> > > > index 000000000000..3c7b13a23ff2
+> > > > --- /dev/null
+> > > > +++ b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+> > > > @@ -0,0 +1,202 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > > +%YAML 1.2
+> > > > +---
+> > > > +$id: http://devicetree.org/schemas/arm/arm,mpam-msc.yaml#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Arm Memory System Resource Partitioning and Monitoring (MPAM)
+> > > > +
+> > > > +maintainers:
+> > > > +  - Rob Herring <robh@kernel.org>
+> > > > +
+> > > > +description: |
+> > > > +  The Arm MPAM specification can be found here:
+> > > > +
+> > > > +  https://developer.arm.com/documentation/ddi0598/latest
+> > > > +
+> > > > +properties:
+> > > > +  compatible:
+> > > > +    oneOf:
+> > > > +      - const: arm,mpam-msc                   # Further details
+> > > > are discoverable
+> > > > +      - items:
+> > > > +          - const: arm,mpam-memory-controller-msc
+> > > 
+> > > Why do we need this?
+> > > 
+> > 
+> > Hi Rob,
+> > 
+> > Thanks for the review.
+> > 
+> > The 'arm,mpam-memory-controller-msc' compatible is needed because,
+> > unlike cache MSCs, memory controller MSCs cannot rely on the parent node
+> > to identify the resource type.
+> > 
+> > Cache controllers universally carry a 'cache' compatible, so the driver
+> > can recognise any cache parent and derive the cache ID from standard
+> > properties. No equivalent convention exists for memory controllers, and
+> > the component ID comes from the MSC's own 'numa-node-id' rather than the
+> > parent, so there is no parent attribute to rely on.
+> > 
+> 
+> Hi Rob,
+> 
+> As a follow-up to my previous reply:
+> Whatever the outcome of the discussion on "arm_mpam: Add support for
+> memory controller MSC on DT platforms", we will keep the binding and
+> driver support consistent. If it's dropped, the
+> 'arm,mpam-memory-controller-msc' compatible, 'numa-node-id' property, and
+> the memory controller example will be removed together.
 
-[...]
-
-> > > +
-> > > +      qcom,qaif-aif-lane-map:
-> > > +        $ref: /schemas/types.yaml#/definitions/uint32-array
-> > > +        description:
-> > > +          Per-lane direction map, one entry per lane starting from lane 0.
-> > > +          Use 0 for TX (output/speaker) and 1 for RX (input/mic).
-> > > +        minItems: 1
-> > > +        maxItems: 8
-> > > +        items:
-> > > +          enum: [0, 1]
-> >
-> > Can't you use a single uint32 bit mask for this?
-> Here intention to keep this consistent with the other tdm mask array properties.
-
-What I mean is use 1-bit per lane/slot. That *is* aligned to the 
-existing properties:
-
-  '^dai-tdm-slot-[rt]x-idle-mask$':
-    $ref: /schemas/types.yaml#/definitions/uint32
-    description: Idle slot mask. Optional. A bit being set to 1 indicates
-      that the corresponding TDM slot is inactive/idle.
-
-It can be extended to an array if you someday have more than 32 lanes, 
-but it seems you only have 8 ATM.
+Which parts are you actually using/needing and not using? If you don't 
+need RIS support, for example, we should drop it.
 
 Rob
