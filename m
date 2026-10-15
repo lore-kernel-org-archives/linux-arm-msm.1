@@ -1,118 +1,140 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from mx3.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 119352264A9;
-	Thu, 15 Oct 2026 06:14:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D262148122F;
+	Thu, 15 Oct 2026 06:19:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=141.14.17.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792044874; cv=none; b=T+sR6UtrRXO6dr6gOs+JAEsiar4S26PQ/GLAxnSCAMbgIYYtOJW3mRXBIN/fUvMQYgyo90Ym0IVWm0aAekWhqeaViIXlZCiI0Uk7foeAn64+0+1OAmLgmEZq3HuH1Vo4RtMSNfy3YaAzVDCf8BmW+VRrNjkPFev6RtH9aTuIDuQ=
+	t=1792045197; cv=none; b=TilvxmRrBKJdML4Y66hiTFwymF4txsnU+8ETwGBxcYLbPOcrBTltQ+3b5bR1FVq6AsgZxx4VBBnTOj5TowSF0ewr9XhwoPNyXrYD9W6wamxAUGBcjOArr+moNhLbYd9mXQeqXjlXGR85pNWogMXt+h/HSthYV+P3fjQwrgGcvyg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792044874; c=relaxed/simple;
-	bh=A707wls31/eBkNhp2G0sxNimnvn4r7S/1WK2jh4NHoA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=Yx68mwZ2iEudNxY773s2lkv17d5HnVzmrwjGGoKKdJ/4Ufeo8KmsPoHZ1igb8jQTupxmVm/CyLAZK2bK4IDAr60aXfc8D42PAxMaOA+ph4SB4ITOATdFoSFGdOjGsuvFqTqzsX7JETHIewfwEIn2UCvsGsJeOxvwEbslDdraR3M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=RGmiTV6f; arc=none smtp.client-ip=117.135.210.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1792045197; c=relaxed/simple;
+	bh=uAzzCY3ndU+qqC/YhMsfqq4WI/d1uNiWBP52Yel97eg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=sAQj/v1gtdxvoTX7GKh4/hoN2vcqGEIWdSmHgev32X8nZE7G4RqnjYGlAOGMawefsBuQ99oLBxFYeKwCMu7trOzf5/p4trFUS7KqAtrlQs4Wux9DVev0VloHU2viQ0usbYTzTuzIv/jgdBAuOpfGImfmnCh6Awimm0V8/kuDbwM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=molgen.mpg.de; spf=pass smtp.mailfrom=molgen.mpg.de; dkim=pass (2048-bit key) header.d=molgen.mpg.de header.i=@molgen.mpg.de header.b=gV4uD0HD; arc=none smtp.client-ip=141.14.17.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=molgen.mpg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=molgen.mpg.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="RGmiTV6f"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=A707wls31/eBkNhp2G0sxNimnvn4r7S/1WK2jh4NHoA=; b=R
-	GmiTV6fTs45cmDkjTvf+IHC4L1K4HrynpgKlqmvoRNHsr8D4HLv5045FZBjBWo8M
-	XPAcucwOGyb4htYufaAMSmkW2rGhrH+ouLkuy8KE4E1AoEznXhq8eFtiMdNsI/sL
-	BbF1X7GdfzDIryg9KRgl8f2KkwetjkHNBlQXmLXoy0=
-Received: from slark_xiao$163.com (
- [2408:8459:3c60:813e:6c63:98bf:da07:5564] ) by ajax-webmail-wmsvr-40-113
- (Coremail) ; Thu, 15 Oct 2026 14:13:52 +0800 (CST)
-Date: Thu, 15 Oct 2026 14:13:52 +0800 (CST)
-From: "Slark Xiao" <slark_xiao@163.com>
-To: "Manivannan Sadhasivam" <mani@kernel.org>
-Cc: "Krishna Chaitanya Chundru" <krishna.chundru@oss.qualcomm.com>,
-	jeff.hugo@oss.qualcomm.com, mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re:Re: [PATCH] bus: mhi: host: pci_generic: Add autosuspend_delay
- customized support
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <astaLolGh8XkPNms@debian>
-References: <20260919095506.9570-1-slark_xiao@163.com>
- <bf94f351-777d-4dc0-98a2-7af77f832f2b@oss.qualcomm.com>
- <1bec2fd7.99f3.1a0c8ea4db6.Coremail.slark_xiao@163.com>
- <2b0d3e13-96fa-437a-9de9-4a61911fe232@oss.qualcomm.com>
- <nsaa4cchprkgqka7uc4ccr5wq7v6uhue5dpsvquwxyk4ndr57t@i56bkvwpclpo>
- <5506abc6.8919.1a11aab7e81.Coremail.slark_xiao@163.com>
- <astaLolGh8XkPNms@debian>
-X-NTES-SC: AL_Qu2SAPyfu0Ao5CWQZekdk0gTg+0/WsW4u/4n345Vc/sEggvW8AYGZURjOFv99fulMSO8nhORbil+1s9rXoV9UQjYBWIQWXWg6PUZagsO/A==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=GBK
+	dkim=pass (2048-bit key) header.d=molgen.mpg.de header.i=@molgen.mpg.de header.b="gV4uD0HD"
+Received: from [192.168.2.230] (p57bd9217.dip0.t-ipconnect.de [87.189.146.23])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: pmenzel)
+	by mx.molgen.mpg.de (Postfix) with ESMTPSA id 9CADF4C442F96C;
+	Thu, 15 Oct 2026 08:18:56 +0200 (CEST)
+Message-ID: <f63f8f6d-54b8-4f0d-bc4a-fdb9cdefaba2@molgen.mpg.de>
+Date: Thu, 15 Oct 2026 08:18:55 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Message-ID: <6e90be7f.4d64.1a13e32174b.Coremail.slark_xiao@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:cSgvCgDnz0Qgb9Bq_s9YAA--.20072W
-X-CM-SenderInfo: xvod2y5b0lt0i6rwjhhfrp/xtbC5wCyF2rQbyAI5AAA3b
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 4/5] wifi: ath12k: Support MAC address from the
+ firmware node
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+ Marcel Holtmann <marcel@holtmann.org>,
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+ Jeff Johnson <jjohnson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, linux-wireless@vger.kernel.org,
+ ath12k@lists.infradead.org
+References: <20261014-b4-nvmem-efivar-v1-0-187c85f65018@oss.qualcomm.com>
+ <20261014-b4-nvmem-efivar-v1-4-187c85f65018@oss.qualcomm.com>
+Content-Language: en-US
+From: Paul Menzel <pmenzel@molgen.mpg.de>
+In-Reply-To: <20261014-b4-nvmem-efivar-v1-4-187c85f65018@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=molgen.mpg.de; s=20260906; 
+	t=1792045139; 
+	h=from:from:subject:date:message-id:mime-version:content-type:content-transfer-encoding; 
+	bh=PV4vgUC8vzMQkMRZKRfTyHLU0bvgUrJ1JuVDgdBfKCM=; 
+	b=gV4uD0HDXWf64WAe9SD47afIh0zwoLH3zySpaE8EGBTXxO5r67cW0t5HXEJB7K2/o6ySSrJmwu5U
+	Xn9QJtnZ37RLPBJ4WrgVEkb//xYuhv3wilZCdKVWrFrmGFxDPzefPy1Z3jIbE6OSDdqRmFmQtgdQo9
+	aA4eExXakMVrzNevSpL4dYNQjEZxiMtNs0PTH4TybvpSKIN/2zGVZt5gE4G9/4qJVFFPKDqFjltTo5
+	QRwm8n2NteQ7liwaSp3btR30biUUWA9xQC3i5YqpIsg3gEZzURvphqki9eo9Zc5YD11LA0/40n8aIp
+	+ywb8j5TTxo9cw3ZDlT7eND7g9fVuoGA==
 
-CkF0IDIwMjYtMTAtMTEgMTc6NDY6MjIsICJNYW5pdmFubmFuIFNhZGhhc2l2YW0iIDxtYW5pQGtl
-cm5lbC5vcmc+IHdyb3RlOgo+T24gVGh1LCBPY3QgMDgsIDIwMjYgYXQgMDQ6NDA6MDlQTSArMDgw
-MCwgU2xhcmsgWGlhbyB3cm90ZToKPj4gCj4+IAo+PiBBdCAyMDI2LTA5LTI2IDE5OjI2OjE1LCAi
-TWFuaXZhbm5hbiBTYWRoYXNpdmFtIiA8bWFuaUBrZXJuZWwub3JnPiB3cm90ZToKPj4gPk9uIFdl
-ZCwgU2VwIDIzLCAyMDI2IGF0IDA5OjI0OjU1QU0gKzA1MzAsIEtyaXNobmEgQ2hhaXRhbnlhIENo
-dW5kcnUgd3JvdGU6Cj4+ID4+IAo+PiA+PiAKPj4gPj4gT24gOS8yMi8yMDI2IDU6MDkgUE0sIFNs
-YXJrIFhpYW8gd3JvdGU6Cj4+ID4+ID4gQXQgMjAyNi0wOS0yMiAxMjoxMjozNSwgIktyaXNobmEg
-Q2hhaXRhbnlhIENodW5kcnUiIDxrcmlzaG5hLmNodW5kcnVAb3NzLnF1YWxjb21tLmNvbT4gd3Jv
-dGU6Cj4+ID4+ID4+Cj4+ID4+ID4+IE9uIDkvMTkvMjAyNiAzOjI1IFBNLCBTbGFyayBYaWFvIHdy
-b3RlOgo+PiA+PiA+Pj4gRm9yIHNvbWUgV1dBTiBkZXZpY2UsIGl0IG1heSBnZXQgYSBTWVMgRVJS
-T1IgaXNzdWUgd2hlbiByZXN1bWluZwo+PiA+PiA+Pj4gZnJvbSBzdXNwZW5kIHN0YXRlIGZyZXF1
-ZW50bHkuIFJlZmVyIHRvIHRoZSBRdWFsY29tbSBXaW5kb3dzCj4+ID4+ID4+PiBkcml2ZXIsIHRo
-ZSBkZWZhdWx0IHZhbHVlIG9mIGF1dG9zdXNwZW5kX2RlbGF5X21zIGlzIHNldCBhcyA1MDAwCj4+
-ID4+ID4+PiBtcy4gQnV0IGluIExpbnV4IHNpZGUsIGFsbCBXV0FOIGRldmljZSB3ZXJlIHNldCBh
-cyAyMDAwbXMuIFdlCj4+ID4+ID4+PiB0cmllZCB0byBzZXQgdGhpcyB2YWx1ZSB0byA1MDAwbXMg
-YW5kIHdlIGNhbiBnZXQgYSBwb3NpdGl2ZSB0ZXN0Cj4+ID4+ID4+PiByZXN1bHQuCj4+ID4+ID4+
-Pgo+PiA+PiA+Pj4gU28gd2UgYWRkIGEgc3VwcG9ydCB0byBhbGxvdyB2ZW5kb3IgdG8gc2V0IGEg
-ZGlmZmVyZW5jZSB2YWx1ZSBmb3IKPj4gPj4gPj4+IHNwZWNpZmljIFdXQU4gZGV2aWNlLgo+PiA+
-PiA+PiB5b3UgY2FuIGNoYW5nZSBhdXRvIHN1c3BlbmQgZGVsYXkgZnJvbSBzeXNmcywgcGxlYXNl
-IHVzZSB0aGF0IHdheSBpbnN0ZWFkIG9mCj4+ID4+ID4+IGRvaW5nIGluIHRoZSBkcml2ZXIuCj4+
-ID4+ID4+Cj4+ID4+ID4+IC0gS3Jpc2huYSBDaGFpdGFueWEuCj4+ID4+ID4gWWVzLCB3ZSBjYW4g
-ZG8gdGhpcyBieSBzZXR0aW5nIHRoZSBzeXNmcyBBUEkgLiBIb3dldmVyLCBub3QgYWxsIHVzZXJz
-IAo+PiA+PiA+IGFyZSBhd2FyZSBvZiB0aGlzIG1ldGhvZC4gQWRkaXRpb25hbGx5LCB0aGlzIGFw
-cHJvYWNoIGlzIG9ubHkKPj4gPj4gPiBlZmZlY3RpdmUgZm9yIGEgc2luZ2xlIGluc3RhbmNlOyBp
-dCByZXF1aXJlcyByZWNvbmZpZ3VyYXRpb24gYWZ0ZXIgZWFjaAo+PiA+PiA+IHJlc3RhcnQsIHdo
-aWNoIGlzIHF1aXRlIGluY29udmVuaWVudC4KPj4gPj4geW91IGNhbiBoYXZlIHVkZXYgcnVsZSB0
-byBzZXQgdGhpcyB3aXRob3V0IGFueSB1c2VyIGludGVydmVudGlvbi4KPj4gPgo+PiA+V2Ugc2hv
-dWxkIG5vdCByZWx5IG9uIHVzZXJzcGFjZSB0byBmaXggdGhlIFNZU19FUlJPUi4gVXNlcnNwYWNl
-IGtub2Igc2hvdWxkIG9ubHkKPj4gPmJlIGV4ZXJjaXNlZCB0byBjdXN0b21pemUgdGhlIGRlbGF5
-IGZvciBwb3dlciBtYW5hZ2VtZW50IHB1cnBvc2VzLCBub3QgdG8gZml4Cj4+ID5maXJtd2FyZSBj
-cmFzaC4KPj4gCj4+ID4KPj4gQWdyZWUuIFdlIGFyZSBzdGlsbCB3b3JraW5nIG9uIHRoZSBpc3N1
-ZSBkZWJ1ZyBvbiB0aGUgbW9kZW0gc2lkZS4gCj4+IAo+PiA+Rmlyc3Qgd2Ugc2hvdWxkIGtub3cg
-d2hldGhlciB0aGUgZGVmYXVsdCBkZWxheSBjYW4gYmUgaW5jcmVhc2VkIHRvIDUwMDBtcyBmb3IK
-Pj4gPmFsbCBkZXZpY2VzIG9yIG5vdC4gSWYgdGhhdCBpcyBub3QgZGVzaXJlZCwgdGhlbiB3ZSBj
-YW4gZ28gZm9yIEVuZHBvaW50IHNwZWNpZmljCj4+ID5kZWxheS4KPj4gPgo+PiA+LSBNYW5pCj4+
-ID4KPj4gRm9yIHJlZmVyZW5jZSwgTVRLIDVHIG1vZGVtIFQ3MDAgaXMgdXNpbmcgNTAwMG1zIGFz
-IGRlZmF1bHQgdmFsdWUuIEFuZCBRdWFsY29tbQo+PiBXaW5kb3dzIGRyaXZlcnMgc2lkZSwgdGhl
-IGRlZmF1bHQgdmFsdWUgaXMgNTAwMG1zIGFzIHdlbGwuCj4+IEhvd2V2ZXIsIEkgY2Fubm90IGd1
-YXJhbnRlZSB0aGF0IGlmIGFsbCBNSEkgZGV2aWNlcyBhcmUgYWRqdXN0ZWQgdG8gNTAwMG1zLCBz
-b21lCj4+IHBvd2VyLXNlbnNpdGl2ZSBkZXZpY2VzIHdpbGwgbm90IG9wcG9zZSB0aGlzIGNoYW5n
-ZS4gQWRkaXRpb25hbCwgREVMTCBob3BlcyB0aGF0Cj4+IHdlIG9ubHkgbW9kaWZ5IHRoZSBTRFg3
-MiBkZXZpY2Ugd2hpbGUga2VlcGluZyB0aGUgMjAwMG1zIHNldHRpbmcgZm9yIHRoZSBTRFg2Mgo+
-PiBkZXZpY2VzLCBhcyB0aGVyZSBhcmUgY3VycmVudGx5IG5vIHNpbWlsYXIgaXNzdWVzIHdpdGgg
-dGhlIFNEWDYyIHBsYXRmb3JtLgo+PiAKPgo+SSB0aGluayB3ZSBzaG91bGQga25vdyB0aGUgcm9v
-dCBjYXVzZSBvZiB0aGUgY3Jhc2ggYmVmb3JlIGFkZGluZyBteSBmaXguIFJpZ2h0Cj5ub3csIHdl
-IG9ubHkga25vdyB0aGF0IGl0IGlzIGEgZmlybXdhcmUgY3Jhc2gsIGJ1dCB3ZSBkb24ndCBrbm93
-IGlmIHRoZSBjcmFzaCBpcwo+ZHVlIHRvIE1ISSBzdGFjayBvciBQQ0kgYnVzLiBJZiBpdCBpcyB0
-aGUgTUhJIHN0YWNrLCB0aGVuIHdlIGNhbiBxdWlyayB0aGUKPmRldmljZSBpbiBwY2lfZ2VuZXJp
-YyBkcml2ZXIuIElmIGl0IGlzIGEgUENJIGJ1cyBpc3N1ZSwgdGhlbiB3ZSBuZWVkIHRvIGhhbmRs
-ZQo+dGhlIHF1aXJrIGluIHBjaS9xdWlya3MuYy4KPgo+LSBNYW5pCldlIHByb3ZpZGVkIHRoZSBj
-cmFzaCBkdW1wcyB0byBRdWFsY29tbSBmb3IgZnVydGhlciBhbmFseXNpcy4gSXNzdWUgc2VlbXMK
-Y29tZSBmcm9tIGZpcm13YXJlIHNpZGUuIEZpbmFsbHksIFF1YWxjb21tIHJlY29tbWVuZCB1cyB0
-byB1cGRhdGUgdGhpcwphdXRvIHN1c3BlbmQgZGVsYXkgdmFsdWUgdG8gNXMuIE90aGVyd2lzZSB3
-ZSBtYXkgZ2V0IGEgdW5leHBlY3RlZCBpc3N1ZQpmb3Igc29tZSBzcGVjaWZpYyBzY2VuYXJpby4K
-QW5kIGN1cnJlbnRseSBvdXIgY3VzdG9tZXIgYWdyZWVkIHRoYXQgd2Ugc2V0IHRoaXMgdmFsdWUg
-dG8gNXMgZm9yIGFsbCBEVzU5MzRlCnByb2R1Y3RzLiBTbyBJIHdhbnQgdG8gYWRkIHRoaXMgdXBk
-YXRlIGJhc2VkIG9uIG91ciByZWFsIHJlcXVpcmVtZW50LgoKVGhhbmtzCgo=
+Dear Abel,
+
+
+Thank you for your patch.
+
+Am 14.10.26 um 15:02 schrieb Abel Vesa:
+> Read a MAC address from the device's firmware node (a DT "mac-address"/
+> "local-mac-address" property, or an nvmem cell named "mac-address" via
+> device_get_mac_address()), and use it in preference to the address from
+> the firmware board data. This mirrors what ath10k and ath11k already do
+> and lets the WLAN MAC be sourced from firmware-provisioned storage such
+> as a UEFI variable exposed through nvmem.
+> 
+> A device tree / nvmem address takes precedence over the board-data MAC,
+> so an explicitly provisioned address wins even when the firmware reports
+> a valid per-pdev address. An all-zero (absent) address is ignored.
+> 
+> Note: the provisioned address must be a valid unicast MAC; a multicast
+> address (odd first octet) is rejected by nvmem_get_mac_address().
+
+Please add a paragraph how you tested this.
+
+> Assisted-by: LLM
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> ---
+>   drivers/net/wireless/ath/ath12k/mac.c | 14 +++++++++++++-
+>   1 file changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/net/wireless/ath/ath12k/mac.c b/drivers/net/wireless/ath/ath12k/mac.c
+> index 01f8c6572f65..f4d2d0377c8e 100644
+> --- a/drivers/net/wireless/ath/ath12k/mac.c
+> +++ b/drivers/net/wireless/ath/ath12k/mac.c
+> @@ -14878,15 +14878,27 @@ static int ath12k_mac_hw_register(struct ath12k_hw *ah)
+>   	u32 ht_cap = U32_MAX, antennas_rx = 0, antennas_tx = 0;
+>   	bool is_6ghz = false, is_raw_mode = false, is_monitor_disable = false;
+>   	u8 *mac_addr = NULL;
+> +	u8 mac_from_dt[ETH_ALEN] = {};
+>   	u8 mbssid_max_interfaces = 0;
+>   
+>   	wiphy->max_ap_assoc_sta = 0;
+>   
+> +	/*
+> +	 * Allow a MAC address provided through the device tree (directly or
+> +	 * via an nvmem cell named "mac-address") to override the one from the
+> +	 * firmware board data.
+> +	 */
+> +	device_get_mac_address(ab->dev, mac_from_dt);
+> +
+>   	for_each_ar(ah, ar, i) {
+>   		u32 ht_cap_info = 0;
+>   
+>   		pdev = ar->pdev;
+> -		if (ar->ab->pdevs_macaddr_valid) {
+> +		if (!is_zero_ether_addr(mac_from_dt)) {
+> +			/* A device tree / nvmem address takes precedence. */
+
+The comment is redundant as the code ordering shows exactly this.
+
+> +			ether_addr_copy(ar->mac_addr, mac_from_dt);
+> +			ar->mac_addr[4] += ar->pdev_idx;
+> +		} else if (ar->ab->pdevs_macaddr_valid) {
+>   			ether_addr_copy(ar->mac_addr, pdev->mac_addr);
+>   		} else {
+>   			ether_addr_copy(ar->mac_addr, ar->ab->mac_addr);
+> 
+
+With the commit message extended, and the comment removed:
+
+Reviewed-by: Paul Menzel <pmenzel@molgen.mpg.de>
+
+
+Kind regards,
+
+Paul
