@@ -1,31 +1,31 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3A0535CB95;
-	Thu, 15 Oct 2026 03:16:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1889A39E162;
+	Thu, 15 Oct 2026 03:16:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792034205; cv=none; b=J/EG6ljHHgEKmqjSgEe3F67RflrsPuxJ3hROclvzI5AWZo2dYxIErMuOJ/uPn40pwGdCrxV7nncHB+/WxkAxL9xebsedsJUak4+UWRMJdpy6Wid3gEJnMDtFVKean1DDVPwe4bnlSYVMNE1ivxvmIbIMYlfX2eMcnE8SLMsvxEI=
+	t=1792034211; cv=none; b=M/npqxKWt1+RaF02hUi2XMu0D2NSdwgFsIZWz0GoSVBmPIQ9qcUDY6xbJUcqiZ7shhCTMIcRnhcPw0I9AC9d7OY+T6nyIi2PN7ruA4FSN4FNM9ZcIikHngqH5Hk3b5l3SFikH+5T19JFepGxAirkUl0qn167UHDJUNy7Cdomnmo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792034205; c=relaxed/simple;
-	bh=dHfT1khTObQ1cJOjowSyxwCQnvOB1cP/o2ky4LCuI8o=;
+	s=arc-20240116; t=1792034211; c=relaxed/simple;
+	bh=eGUl1EjHFcamJedCBJvDoNvoI7+1qfWz7Dp7Y+RswV4=;
 	h=Content-Type:MIME-Version:In-Reply-To:References:Subject:From:Cc:
-	 To:Date:Message-ID; b=H3ltxX+hStpZ3CCKalEN9RPwv0gx0Ppg7gTLhIU1yOYWlm9DNp3lr/h498P25j2nfcEPzeu2Bhonea1G+fE782HXxjg6yI97cemT2gcLYO1MnycZ8FvzPLN3/vjEHvikaMKsd9V2n9az4RRZ24DTYP8AWCI2w2zN+C3+0ZR3+xY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UcdzrASl; arc=none smtp.client-ip=100.103.45.18
+	 To:Date:Message-ID; b=j5ZJb1h0G2NLkfhuoX0RPgx9/gj12DGWTjBJdYW9Ea6E1/YtERUubYzYww3z1+++leMAnxoP8sCZiDTiSS2CKQzAdJ/NawCGGDTEPUSuuLnqo16djJ8ATOC5Fa8KqJpQ+k0h5XyQmdOoqIfA2imh0K1zWoxRwFOSVA92EdMqTLI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pi7XzO/z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UcdzrASl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E1B851F000C4;
-	Thu, 15 Oct 2026 03:16:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Pi7XzO/z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B60F31F000C4;
+	Thu, 15 Oct 2026 03:16:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792034204;
-	bh=dHfT1khTObQ1cJOjowSyxwCQnvOB1cP/o2ky4LCuI8o=;
+	s=k20260515; t=1792034209;
+	bh=2ou87yQuIEg2z7mT9ieRZYq1trZ1IHgqCJodj9CZDBs=;
 	h=In-Reply-To:References:Subject:From:Cc:To:Date;
-	b=UcdzrASlu6ExcqdpbMxYXA8lVkjTPMHToxvMzjCZ8Bh7unDPSJj0ACivBYz2l2uXJ
-	 eZI3UJn78pbyyk0GGFRs+iD8BQbBJFGOmzY8QMRb7OHHOof9Xr2zDdiR3kbxfZyKD8
-	 exuIttOxpyFQWYjT9ASdLKsMsFU1jJJjIzywsXgqKXDMsB5zY0J0KgkRdppgJ2AltM
-	 3gLPNRjzEBngmTpairRpXfgIKqrqfRGQ/YoVtEybnTu6xboZwpP0f85wAYfo4sqsGG
-	 Itsach7MG/B0VH1eRFBW6iE3bid/98SXx7f0gGB2QB9HYKHhHqQzkV/OHp6OMLqy7s
-	 iV5sSCFsZVpdw==
+	b=Pi7XzO/zUTN1unENBI/pj2wA7Mr5dc3U7XaaIyECGU5gB3+XfUjcU4JOkpTy+8oDe
+	 y7EYQ+gVO581hDokD+dreZABYwcx9ijoQkU69wUblPq3CIs+hWboglgAZRh8+nTlzD
+	 MJ1yQ2+mlu1flVdZKFH77UMusmFgkTa1+Q+YZD75mCaCaeWutm8178dkjrigwQzFVf
+	 ZLyUJDEwce/K6dGaC0py/FnJEWPYbCmmLpITDilXghJyCOG/4VcmeK+0wkLPI2UszR
+	 S0JpaMeUURQV/wLefMeVvevTReV1cqupGgPIMKdLHFGa4uRlRJxlM22EXO2wzx3Ii7
+	 L47pBRvDOWdAw==
 Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -34,21 +34,25 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20260608-spmi-bus-register-fix-v3-1-7fbcc65b2929@oss.qualcomm.com>
-References: <20260608-spmi-bus-register-fix-v3-1-7fbcc65b2929@oss.qualcomm.com>
-Subject: Re: [PATCH v3] spmi: pmic-arb: return 0 in spmi_pmic_arb_register_buses() on success
+In-Reply-To: <231214ab-9ae9-4e3f-a75b-d65a597e9956@collabora.com>
+References: <20260721093626.96264-1-angelogioacchino.delregno@collabora.com> <231214ab-9ae9-4e3f-a75b-d65a597e9956@collabora.com>
+Subject: Re: [PATCH v13 00/12] SPMI: Implement sub-devices and migrate drivers
 From: Stephen Boyd <sboyd@kernel.org>
-Cc: David Collins <david.collins@oss.qualcomm.com>, Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>, Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, kernel@oss.qualcomm.com, linux-kernel@vger.kernel.org, Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-To: Abel Vesa <abelvesa@kernel.org>, Fenglin Wu <fenglin.wu@oss.qualcomm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org
-Date: Wed, 14 Oct 2026 20:02:14 -0700
-Message-ID: <179203333416.5720.18209688504652640138@localhost.localdomain>
+Cc: dlechner@baylibre.com, nuno.sa@analog.com, andy@kernel.org, arnd@arndb.de, gregkh@linuxfoundation.org, srini@kernel.org, vkoul@kernel.org, neil.armstrong@linaro.org, sre@kernel.org, krzk@kernel.org, dmitry.baryshkov@oss.qualcomm.com, quic_wcheng@quicinc.com, melody.olvera@oss.qualcomm.com, quic_nsekar@quicinc.com, ivo.ivanov.ivanov1@gmail.com, abelvesa@kernel.org, luca.weiss@fairphone.com, konrad.dybcio@oss.qualcomm.com, mitltlatltl@gmail.com, krishna.kurapati@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org, linux-pm@vger.kernel.org, kernel@collabora.com
+To: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, jic23@kernel.org
+Date: Wed, 14 Oct 2026 20:04:49 -0700
+Message-ID: <179203348991.5720.8006688809115365098@localhost.localdomain>
 User-Agent: alot/0.12
 
-Quoting Fenglin Wu (2026-06-08 18:00:59)
-> The "ret" could be returned with an uninitialized value. Fix it.
+Quoting AngeloGioacchino Del Regno (2026-09-17 07:45:06)
+> On 7/21/26 11:36, AngeloGioacchino Del Regno wrote:
+> > Changes in v13:
+> >   - Removed `if (IS_ENABLED(CONFIG_OF))` check in spmi_dev_release (And=
+y)
+> >   - Rebased (though still applies cleanly) over next-20260720
+> >=20
 >=20
-> Fixes: 979987371739 ("spmi: pmic-arb: Add multi bus support")
-> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-> ---
+> Is there any further comment on this series?
+>=20
 
-Applied to spmi-next
+Applied the whole series to spmi-next
