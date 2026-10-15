@@ -1,402 +1,212 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D313499F35
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:41:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CADF49EC40
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:44:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792050068; cv=none; b=WGHMmlw0VyWG1f7FPdazi61BzgEo1POCbeZrP1TuKcKDeeIMJfdno1ZfC9FvRYsPsK1nlH8LJMKi7U0PfR6MeyyPskFTm4zbFsFvHm7Q3EdZEn8P/vG7L0VUhK2KAGgd5pXLjDtGrbgDar8G006/E9EFnSEUH6ykUbTdGHeJbvg=
+	t=1792050288; cv=none; b=ltkdzNRtKGR09UrsDbPqKJ0KI38SsXEuoyapfoaVZtiG2AkBY0boDk/xIK3pLv11REre8aB0fDwgb8VABlVUxQM35eCpUtNGsj0Ofv0u+2L/FGF8/Ns680CUoDWwrznm8sXpk+JkIgtBd9E4Sb59NF8/TqxGH3eFkO0PCdzT2+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792050068; c=relaxed/simple;
-	bh=QfsW7p+EnqCrkp5VxF7nJpn3yBDQp8WAB3SXDfvEA80=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=e1l2Y3qWeWOO1602FI3f+oxyDUkb0xMqAjt5pWStNvT/p3ePM7vzC+hjIHKJEoCQmeYutOk5/HcwUU30CqW5TLO8GljdslXargknn8DWjIb1I9oLeBQ7yrdLdgScYdlNVJcqXp1dtg2w9oenEfk832aIwCOvCdsJ5+82S6z/OVM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TgTPp/fi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FHifKsCJ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792050288; c=relaxed/simple;
+	bh=0UA8dSV6qvMA9myM9p5q2eyTL3r5zJtR3t1wLT4sjBw=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=fygQGsN2+dMgTUrBccqWxHDhuTNzDvXJ6gOOxHUnTRJE6n2hCFlX3IGkBMazVHjjiNuLULfc3AUR3OiRpQhVxyslp38Ovbv9+lYv6137b8wS85Zj8T7tklbc9kkbigSVTeiQbGckg6HeimJDHt46H9rbg9WpAe3K0hDmrx1aiLI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=waS4rwjR; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TgTPp/fi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FHifKsCJ"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F79kRe1684736
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:41:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZMJcSwYy1VxSlOobjS03qaCfSpehSXjZPpHWNlF8RAI=; b=TgTPp/fiRJ02OnRu
-	K6sP8iGeHpxZs7FtrEExFRzxz2OvdVxz7HKeaEOG5e++i4RD8tRD/diWI4ydxkp/
-	I4nGpFcSIj1e9UZeVtRQDYDAO6aeLHweGR90tTUY20TbcYh8XIeTFwwPsysK2SIu
-	k9xiLQYll0k+VsVISRPultioYj1jE9mLbrMLffAPRWWUu4ic2WMPqhcoME79hrTe
-	KLb9Ze6YupQ0TzCJyh7AL4eoen95eHVI/Lk/22GMC/HJrhPWRbMtQBibHLXJ4CRR
-	qULsSlnZo/UNM2Przc1S2/JE0obAq/1zDbIlKAtR6qxHBb6enil/2OEDXFxK1jKT
-	07BrkA==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hacb03ag9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 07:41:01 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2e8ad8c5f80so63103355ad.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 00:41:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="waS4rwjR"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a0e1b0681bso35771175e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 00:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792050061; x=1792654861; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1792050283; x=1792655083; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZMJcSwYy1VxSlOobjS03qaCfSpehSXjZPpHWNlF8RAI=;
-        b=FHifKsCJ/tEjjdRaDdw7gBC2Q89BdBZgAP36tRCS+6EuGybHyoR4MXVwJ577VwbfJN
-         atLgkhEvlMYmcwBeNIzJmRAvN7jEUfgSJwf2jkjeRurNda2mVixWYevIN5qhX5LqMWEM
-         am7q4fkH1OJCYNYJxHyX3890PPedMvCgOGy/j6/riq6PiKTho+IBvo4THIuh2xoyxCD/
-         OLqw0hXEMt9s5ahndk7Mp1m20Nhd2frcs59Am7SZYCg827wwXr6+Ott5HbqqM3uq1kAK
-         OmkvdDzfE9RNBqlho8w2M3NZDs8ZSd3PDJ+u6/s6/q2y9m0zGsUbh6sXseJYn5hwXeHu
-         K5LQ==
+        bh=+dvMNnzmsfKlXaQReE9W1eWaATaq+JUXJSwSZca7lFE=;
+        b=waS4rwjRImFZkHnseAxDWYX15NVH27l6sGdcGPQT3zxqSHeQrRBK5hFrT16Gc+gAwK
+         ksMx10tYpWhf0t+ISxFj3RU6amhJHvuODPxDXspgnB+2kYrYRh9vy5jMDfoTQ/nX/ctT
+         h7ZqWVSQDs9ZaTbksPrfSjFYURJ0qf0bh9Tlq8h7myFyf+Q7hfg/7o/TdIF5qpIlynCa
+         9NIVv+wRiup0T6k7yM3TJnU9cZSjWhOFBS0uHXsQYQaWwiEglQTReF12KzWSdNkRDdP2
+         tLTQs/TYTpBk65zq8b7VDeB263iVdxQJMMRK0C2IdTAAHHuHDdMydVbYt9MRKA140RWC
+         /ucQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792050061; x=1792654861;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZMJcSwYy1VxSlOobjS03qaCfSpehSXjZPpHWNlF8RAI=;
-        b=UqIxS8dkmieIgYE7x8Tj1fuxkvy5P3oCRUeUAl3KZCXc2j1G06xPvRmNHfAjake9ma
-         nAwO5M6SzS9RU13DoxVNRFBn+0UBxR0QwcHb+MiFcvkm/V9IXaZICqseFQFUJqycnvju
-         T2Wvm7mZbOtOr8Sv+xM8V7c5XDNbM5LU9kxBjfcxQlpFwBYhJ8FUOTEMgeQH5xPwJSfK
-         wU+TWnJsFIJxQqdFVsAY6IuSJSBgYL2Uz/howBZcXBgJ70kjAtw5ouuJ9NAvhCSbPBgH
-         fwYNUm/XrsDqWCL+I6PzrzskHbvcSGkin8C0XfcIMKq7RyDx2bvcK1yxt3sQSuupoIw6
-         byQQ==
-X-Gm-Message-State: AFq9FYLzHOKdZ5/J65tZ0ZXCO02vxOQ0eKfrUFriT4IPhSW/3v7TjL3T
-	drh0M9U4yyNMcWonTLYHvvK7iYUPWopekjv9tr0MB0sIT849D9L+i4TKNdgSgpzLt9X8NuhtwF9
-	3Y3eUkpDOKaNjFzDvrbTSuyEBnomh0eoahdAE6TZTK92gxAEorbAfw52/liY/uWimQIK+
-X-Gm-Gg: AYBFou1mASe77jYGwgr9DZiFRkeHXMyJv9GzDcWi5mqlLMpK66ZZUdA9kn1ML+AaVxe
-	yxfdmtqMjwDAf1Te5LFbGR7WJSjB2kJ7bXn3/ummcDazPWUcRXbL6ci8+pkDzwh6u+B3iFZZTvg
-	fWRqnHFg516KZxb/Qt+4Pf4WzbotxAZ+3X6sDj3RKBLCwQOsZ9iF5JkZQSfPVC6Al7ySSDgIkkc
-	qlZ+Cp4SpL/y8G99ZoP/G1IEeDbfLA6ieU5ju2jhE4lFg1d/etBR42/RvSlE5CfAbt97/9SDeKL
-	RSAa6cPGFk7RhxGNstnPCQbQr2LtPsgsdDSw4scR0LT5gVS5j8xmIizSXaTLQRHJYit09dyxZTn
-	3IptMEe0qPDBwjZQJXSM+41tm4dNveD53Ntk=
-X-Received: by 2002:a17:903:230c:b0:2df:4876:50d9 with SMTP id d9443c01a7336-2e8429a58b9mr173469265ad.18.1792050060841;
-        Thu, 15 Oct 2026 00:41:00 -0700 (PDT)
-X-Received: by 2002:a17:903:230c:b0:2df:4876:50d9 with SMTP id d9443c01a7336-2e8429a58b9mr173468885ad.18.1792050060272;
-        Thu, 15 Oct 2026 00:41:00 -0700 (PDT)
-Received: from hu-jshekhar-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e944c23f17sm14014825ad.27.2026.10.15.00.40.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 00:40:59 -0700 (PDT)
-From: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 13:08:33 +0530
-Subject: [PATCH 13/13] arm64: dts: qcom: hawi: Add DCP support
+        d=1e100.net; s=20260707; t=1792050283; x=1792655083;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+dvMNnzmsfKlXaQReE9W1eWaATaq+JUXJSwSZca7lFE=;
+        b=sBWatpNUF7oFXu1TbybOSxWGeqdkJUHMVXJ/APWY2dRD4yaPApDZD9A4xulVCg0j21
+         LtA3FJ3u6wHP6oH20Jq1swp9gW6D6LDNEDRulNhqAv5XGKScbBto9/+EevIuqWtNVRGc
+         vztZxkN8ClhDfjMttw0nzI2oAwOYrb2dthqIbM7YFBWSvjm4d9bcewkNPYyTB5hAwRk8
+         xLRnARo/DJan81v79Tez0NtdkXZ6ps5P2J3BNVRyezsjQb6vcBcbqA7YYmYzJl9JchtB
+         jNPn1O8aEnSGFSk67mthjb7LrugI7tzvlNTvK7T61fj7U5wh8SyS80gXHLeuBbsQATvW
+         d1bA==
+X-Forwarded-Encrypted: i=1; AKwUvBz9hBgNU0/MWi2KRN6uNqorEeUp+yeyBPvOQ40J52t71xT/pX8NdeNpKJhtD83W5p3jZAmHwXesOE1oShSp@vger.kernel.org
+X-Gm-Message-State: AFq9FYJMSbzVP8ctxZfYH4sTlUpOazPZwoFu3NKzyLoMT7VMQnyEAl+A
+	7kruMhYJo8AwjyUopDguFDf0A18U8wmqk+JvMQ8DwbpD7U/as8o9i+MDm9pyocVCPpM=
+X-Gm-Gg: AYBFou1b/HYQhtO4gynd9hlIG7hya8t+Pj1cXx2V7vrFLZHlvL4Hsb6Trr5nr/CAadE
+	D2ml3otyyZdgelFLp9s6sjHC7x1H+822rLSrp8cxJDcxIBuYs1fwntbsqb4oc/b3refyrLA+qYW
+	nGgZ3gtSgwqDozmfzrK4KRHM18q51nKiS+Qg9aP0I+xFb/O/c2Gkat4ITFk0zdq/4MdEo53NiJF
+	S4bYkTCQRTcP4toz0GB8BZnmmEUsJPrmdfyghOHWyzdoofr1FMrL2K1RlfMIWeh+l94RIlVfhW1
+	MufgPVClNlIkRpgm9f8YgliBiaZYukIEp0t+VgMndWRNgdix4pYPrbp44Uk5qYnAGFIDAoE4UfD
+	pxdf2kiiVkl4+Q4EKDlufHmkcFDU3KsVm+04v8X9L7kuUKRK8kN42dPiZng6RIfBv7jUBRCpLoJ
+	wMMyXWOOIhwMXUU+KLY80YSlsJT/rQU1P+kFNcqdAGrE37ozIOgAUVLcmsYKGoLNOCwyzJxcBK4
+	EcGZyGHisOmgoQpG12LGVadeK0RvIDFA+1ifbyy/uHJNzV0Ygfh5ZM=
+X-Received: by 2002:a05:600c:4685:b0:4a0:27eb:49b with SMTP id 5b1f17b1804b1-4a18e4ae6fcmr385008175e9.30.1792050282515;
+        Thu, 15 Oct 2026 00:44:42 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:fdbf:f373:6d5b:93e4? ([2a01:e0a:106d:1080:fdbf:f373:6d5b:93e4])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48ded185de7sm8548506f8f.31.2026.10.15.00.44.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 15 Oct 2026 00:44:42 -0700 (PDT)
+Message-ID: <8d4d3ec2-3c97-4a46-97f8-048fdf81b853@linaro.org>
+Date: Thu, 15 Oct 2026 09:44:40 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-jshekhar-drm-msm-dcp-v1-v1-13-48aad0fe4f72@oss.qualcomm.com>
-References: <20261015-jshekhar-drm-msm-dcp-v1-v1-0-48aad0fe4f72@oss.qualcomm.com>
-In-Reply-To: <20261015-jshekhar-drm-msm-dcp-v1-v1-0-48aad0fe4f72@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Philipp Stanner <phasta@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev,
-        Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792049920; l=6156;
- i=jayant.shekhar@oss.qualcomm.com; s=20260925; h=from:subject:message-id;
- bh=QfsW7p+EnqCrkp5VxF7nJpn3yBDQp8WAB3SXDfvEA80=;
- b=JxMeN+DmWGewFKBEVzcKUqFUkqoSyxqpGwErK350VoQIwFKd+fbhLmrtRxjrT83vph7NHMhD/
- kefG95krZ7aB85pcavRl2PIXjyPSamuyWWB5KyY+6SVKlJroQsTCpRq
-X-Developer-Key: i=jayant.shekhar@oss.qualcomm.com; a=ed25519;
- pk=saYTwtCCpug4b0Hz0jHFoATgDtdhFVicwMzDJo2z5ZE=
-X-Authority-Analysis: v=2.4 cv=VKpIDNPX c=1 sm=1 tr=0 ts=6ad0838d cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=_CzEFU3RdQMONSqgxRIA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAzMCBTYWx0ZWRfX9CJAvSZEXpHs
- iktnbXuezJ/3qGSCzK1JdiVeKIv2bNHJ2ixEAvTYIT/i0wMeVjnzIekqB6vEEFIXPUaVlUBIWdt
- OO/M5brzo4Xy7L5EF3Iys0xuEl+uzoo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAzMCBTYWx0ZWRfXwRE/+u2o4CrH
- C4YNo4z5nP2I8m9ki1+NoiATtCFJzflKlOYg5cbHjueuZ9Soikig2IIuzUd4WDAo8t5IviZteNK
- 67pPOAQ0kwUnjRQPPvN6MPpYcF8zSDykZSNGqJytPHMSaLUCZvx3pRzAE7NmKCuUHpMCeVrxgin
- nmJoGFCxUum5lgAgsCmHo7EwvTorzuIz/B7B+IjLE5bTtxxhKAqTHiqXG16e46hl8sJffV2n9os
- vcNtP7Om8ztkdXFHxGYMYNiMpqrVCjnTsiMNuZnB5bdokH9KZ0b/2B839GrR7n/X4voehpeyzCa
- YD68auZWq3Rq1DVb+LI185dkc2cMdwPilJDbOZ6/CJI8MFi4XSUhaE5OOIOg1f42aWdPUaxcYf2
- 0xyHSMdi4UFPGPcUiCNArROz8VxFV28vxwoiBtZXuPpE+AgfNvR8u4xMWxH/hPVYB/42h16/kpb
- /J06yQvXWqz5054Rv9w==
-X-Proofpoint-ORIG-GUID: IhoJOZzsjlcM3APVAGsKUEVAFO959o8H
-X-Proofpoint-GUID: IhoJOZzsjlcM3APVAGsKUEVAFO959o8H
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- malwarescore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150030
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/2] dt-bindings: usb: snps,dwc3: Fix downstream port
+ numbering
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Chen-Yu Tsai <wenst@chromium.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Felipe Balbi <balbi@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, linux-usb@vger.kernel.org,
+ devicetree@vger.kernel.org, Kevin Hilman <khilman@baylibre.com>,
+ Jerome Brunet <jbrunet@baylibre.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
+ Neal Gompa <neal@gompa.dev>, Joel Stanley <joel@jms.id.au>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Billy Tsai
+ <billy_tsai@aspeedtech.com>, Michal Simek <michal.simek@amd.com>,
+ Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Peter Griffin
+ <peter.griffin@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?=
+ <andre.draszik@linaro.org>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Heiko Stuebner <heiko@sntech.de>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Yixun Lan <dlan@kernel.org>,
+ Troy Mitchell <troy.mitchell@linux.spacemit.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Wei Yang <yangwei1@eswincomputing.com>,
+ Senchuan Zhang <zhangsenchuan@eswincomputing.com>,
+ Hang Cao <caohang@eswincomputing.com>, Li Jun <jun.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Roy Luo <royluo@google.com>,
+ Yang Xiwen <forbidden405@foxmail.com>,
+ Ahmad Zainie <wan.ahmad.zainie.wan.mohamad@intel.com>,
+ Robert Marko <robert.marko@sartura.hr>, Xu Yang <xu.yang_2@nxp.com>,
+ Wesley Cheng <quic_wcheng@quicinc.com>,
+ Stanley Chang <stanley_chang@realtek.com>, Ze Huang <huang.ze@linux.dev>,
+ Aswath Govindraju <a-govindraju@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, linux-amlogic@lists.infradead.org,
+ linux-kernel@vger.kernel.org, asahi@lists.linux.dev,
+ linux-aspeed@lists.ozlabs.org, imx@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
+ spacemit@lists.linux.dev
+References: <20261014082037.1774672-1-wenst@chromium.org>
+ <20261014082037.1774672-3-wenst@chromium.org>
+ <7020a7a6-332e-4fd0-a659-d82eb768614c@linaro.org>
+ <CAGXv+5G1kgyumbj7wGf6rPFbg3spSO0zYmEkn-hZT4qUdJbytA@mail.gmail.com>
+ <03375a31-0ac6-47a4-b0dc-6327080e1622@linaro.org>
+ <b4c0761b-34f2-42ad-97e7-ab34ae776281@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <b4c0761b-34f2-42ad-97e7-ab34ae776281@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hawi display hardware is owned by DCP firmware, so the platform device tree
-must describe the VirtIO transport, firmware display function, power-notify
-channel, IOMMU contexts, and display graph used by the MSM DRM driver.
+On 10/14/26 18:36, Konrad Dybcio wrote:
+> On 10/14/26 11:44 AM, Neil Armstrong wrote:
+>> On 10/14/26 11:29, Chen-Yu Tsai wrote:
+>>> On Wed, Oct 14, 2026 at 5:28 PM Neil Armstrong
+>>> <neil.armstrong@linaro.org> wrote:
+>>>>
+>>>> On 10/14/26 10:20, Chen-Yu Tsai wrote:
+>>>>> The DWC3 controller can operate in host mode. It does so with a XHCI
+>>>>> compliant host controller. The XHCI has two downstream ports, one for
+>>>>> HS and one for SS. USB downstream ports start from 1, not 0.
+> 
+> [...]
+> 
+> 
+>>> IMHO having consistent numbering across controller types would be
+>>> better. This avoids making the USB core and hub code deal with more
+>>> exceptions, and also easier to understand and write device trees.
+>>
+>> I was in the impression the port number not necessarily reflects
+>> an actual physical numbering, and can be a logical number we would
+>> then map in the kernel.
+>>
+>> I don't see any issue here having base 0 for the bindings and then
+>> converting it to base 1 for the XHCI port numbering.
+> 
+> I thought base1 comes from the USB spec and not just XHCI?
 
-Describe the DCP VirtIO transport and function, IPCC channel, IOMMU
-assignments, firmware-visible IOVA range, and DSI display endpoints on
-Hawi. Enable the DCP display device on the Hawi MTP platform.
+This is my question, is the spec says: each USB Host Controller root
+port shall be considered as a port of a Hub and numbered the same way,
+then fine, let's use the base1 numbering.
 
-Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
-Assisted-by: LLM
----
- arch/arm64/boot/dts/qcom/hawi-mtp.dts | 131 +++++++++++++++++++++++++++++++++-
- arch/arm64/boot/dts/qcom/hawi.dtsi    |  59 +++++++++++++++
- 2 files changed, 189 insertions(+), 1 deletion(-)
+As I understand how USB is architectured, all downstream ports of Hubs
+are numbered in base1, and the whole topology is based on that.
 
-diff --git a/arch/arm64/boot/dts/qcom/hawi-mtp.dts b/arch/arm64/boot/dts/qcom/hawi-mtp.dts
-index 9c86e0477053..03e4cc117109 100644
---- a/arch/arm64/boot/dts/qcom/hawi-mtp.dts
-+++ b/arch/arm64/boot/dts/qcom/hawi-mtp.dts
-@@ -36,6 +36,18 @@ chosen {
- 		stdout-path = "serial0:115200n8";
- 	};
- 
-+	display_panel_vdd: regulator-display-panel-vdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "display-panel-vdd";
-+		regulator-min-microvolt = <1100000>;
-+		regulator-max-microvolt = <1100000>;
-+		gpio = <&pmd8028_e1_gpios 2 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		regulator-boot-on;
-+		pinctrl-0 = <&sde_disp0_vdd_active>;
-+		pinctrl-names = "default";
-+	};
-+
- 	clocks {
- 		xo_board: xo_board {
- 			compatible = "fixed-clock";
-@@ -261,6 +273,7 @@ sdcard_vdd_3p0: sdcard-vdd-3p0 {
- 
- 		vin-supply = <&vreg_bob1>;
- 	};
-+
- };
- 
- &lpass_vamacro {
-@@ -271,7 +284,6 @@ &lpass_vamacro {
- 	qcom,dmic-sample-rate = <4800000>;
- };
- 
--
- &q6apmbedai {
- 	dai@40 {
- 		reg = <SECONDARY_TDM_RX_0>;
-@@ -1277,3 +1289,120 @@ &usb_1_dwc3_hs {
- &usb_dp_qmpphy_out {
- 	remote-endpoint = <&pmic_glink_ss_in>;
- };
-+
-+&dcp_dsi0 {
-+	panel@0 {
-+		compatible = "novatek,nt37801";
-+		reg = <0>;
-+
-+		pinctrl-0 = <&sde_dsi_active &sde_te_active &sde_esync0_suspend
-+			     &sde_mdp_vsync_p_1p2_active &sde_mdp_vsync_p_1p8_active
-+			     &sde_disp0_rst_1p2_active &sde_disp0_rst_1p8_active>;
-+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend &sde_esync0_suspend
-+			     &sde_mdp_vsync_p_1p2_active &sde_mdp_vsync_p_1p8_active
-+			     &sde_disp0_rst_1p2_active &sde_disp0_rst_1p8_active>;
-+		pinctrl-names = "default", "sleep";
-+
-+		vddio-supply = <&vreg_l12b_1p8>;
-+		vci-supply = <&vreg_l13b_3p0>;
-+		vdd-supply = <&display_panel_vdd>;
-+
-+		reset-gpios = <&tlmm 210 GPIO_ACTIVE_LOW>;
-+
-+		port {
-+			panel_dcp_in: endpoint {
-+				remote-endpoint = <&dcp_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&dcp_dsi0_out {
-+	remote-endpoint = <&panel_dcp_in>;
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&pmd8028_e1_gpios {
-+	sde_disp0_vdd_active: sde_disp0_vdd_active {
-+		pins = "gpio2";
-+		function = "normal";
-+		input-disable;
-+		output-enable;
-+		bias-disable;
-+		power-source = <2>;
-+		qcom,drive-strength = <2>;
-+	};
-+};
-+
-+&pmh0110_d_e0_gpios {
-+	sde_mdp_vsync_p_1p2_active: sde-mdp-vsync-p-1p2-active-state {
-+		pins = "gpio9";
-+		function = "paired";
-+		input-disable;
-+		output-enable;
-+		power-source = <2>; /* 1.2v */
-+	};
-+
-+	sde_mdp_vsync_p_1p8_active: sde-mdp-vsync-p-1p8-active-state {
-+		pins = "gpio10";
-+		function = "paired";
-+		input-enable;
-+		output-disable;
-+		power-source = <1>; /* 1.8v */
-+	};
-+};
-+
-+&pmh0110_f_e0_gpios {
-+	sde_disp0_rst_1p2_active: sde-disp0-rst-1p2-active-state {
-+		pins = "gpio9";
-+		function = "paired";
-+		input-enable;
-+		output-disable;
-+		power-source = <2>; /* 1.2v */
-+	};
-+
-+	sde_disp0_rst_1p8_active: sde-disp0-rst-1p8-active-state {
-+		pins = "gpio10";
-+		function = "paired";
-+		input-disable;
-+		output-enable;
-+		power-source = <1>; /* 1.8v */
-+	};
-+};
-+
-+&tlmm {
-+	sde_te_active: sde-te-active-state {
-+		pins = "gpio86";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
-+	sde_te_suspend: sde-te-suspend-state {
-+		pins = "gpio86";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
-+	sde_esync0_suspend: sde-esync0-suspend-state {
-+		pins = "gpio88";
-+		function = "mdp_esync0";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
-+	sde_dsi_active: sde-dsi-active-state {
-+		pins = "gpio211";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	sde_dsi_suspend: sde-dsi-suspend-state {
-+		pins = "gpio211";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+};
-diff --git a/arch/arm64/boot/dts/qcom/hawi.dtsi b/arch/arm64/boot/dts/qcom/hawi.dtsi
-index 0926d880cb0c..58fcf42cbaba 100644
---- a/arch/arm64/boot/dts/qcom/hawi.dtsi
-+++ b/arch/arm64/boot/dts/qcom/hawi.dtsi
-@@ -8235,4 +8235,63 @@ timer {
- 			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
- 			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>;
- 	};
-+
-+	dcp: virtio@9be8000 {
-+		compatible = "qcom,dcp-virtio", "virtio,mmio";
-+		reg = <0x0 0x09be8000 0x0 0x1000>;
-+		interrupts-extended = <&intc GIC_ESPI 956 IRQ_TYPE_LEVEL_HIGH>,
-+				      <&ipcc 13 5 IRQ_TYPE_EDGE_RISING>;
-+		interrupt-names = "virtio", "dcp_power_notify_irq";
-+		iommus = <&apps_smmu 0x15a3 0x0>;
-+		iommu-ranges = <0x0 0x84000000 0x0 0x04000000>;
-+		dma-coherent;
-+		mboxes = <&ipcc 13 5>;
-+		mbox-names = "dcp-power-tx";
-+
-+		dcp-subsystem {
-+			compatible = "virtio,device34";
-+
-+			iommus = <&apps_smmu 0x400 0x2>;
-+
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@1 {
-+					reg = <1>;
-+					dcp_intf1_out: endpoint {
-+
-+						remote-endpoint = <&dcp_dsi0_in>;
-+					};
-+				};
-+
-+			};
-+
-+			dcp_dsi0: dsi@0 {
-+				reg = <0>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				ports {
-+					#address-cells = <1>;
-+					#size-cells = <0>;
-+
-+					port@0 {
-+						reg = <0>;
-+						dcp_dsi0_in: endpoint {
-+							remote-endpoint = <&dcp_intf1_out>;
-+						};
-+					};
-+
-+					port@1 {
-+						reg = <1>;
-+						dcp_dsi0_out: endpoint { };
-+					};
-+				};
-+			};
-+		};
-+	};
- };
+But here, we are speaking of physically separate USB busses, one
+USB2.0 and one USB3.0, a controller could also have 10 USB2.0 ports
+and 5 USB3.0 ports, who knows. The way those will be numbered is not
+part of the specification because the specification only the defines
+the topology of an USB bus, like PCI(e) defines the topology on a PCI(e) bus.
 
--- 
-2.43.0
+How we aggregate all those busses to abstract them to software is not
+part of the spec, we chose to declare a fake root Hub with a physical
+downstream port as a virtual port of the root Hub, fine but this is
+purely software abstraction.
+
+We may only use the hardware IP port numbering in the bindings, not
+the software abstraction.
+
+We could use the base1 to describe the DWC3 ports, but how to describe
+all the physical USB busses a controller can expose ? We may not limit
+the bindings to USB2.0 and USB3.0 ports only.
+
+How about the USB4, does it use the USB3.0 port ?
+
+Neil
+
+> 
+> Konrad
 
