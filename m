@@ -1,234 +1,162 @@
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C92252ED2E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 12:22:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54B4D4E73B8
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 12:23:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792066933; cv=none; b=Fxr40r2WZidYnrdPfymReRIBTOv3/IzUTyZXQq4yTnDyjlSIMg/JxoF6eJ5r4fr1hj6MYiFtKERE1qpTgSiu4LfhIbpfqaCx3ztPUIrLav/pDgrK03yl51Dou36lIjzAzMVKHCpL7/Fo1no52OfKqyA0UD0LL8a3kB03B2ysR3E=
+	t=1792067027; cv=none; b=YBvFqKoPyxhoQZBLD8GXcFYshTND9S+IX8BJRrHBJl9+bAuJgTkOBN3PvEWMYnIPuIidiRdyLsigakRntlxOPdCHeRtUnXGwrVbCfAaQNG2mHGd9Su3ZUQvCgiAllAFz5nwrQXPS4CI37/hT2lhQ2tAWmrWyJC8lArpsvOZ4rAY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792066933; c=relaxed/simple;
-	bh=eTg8gqNz7MmjYEot6fGaVt+HF2MQP0pTExRiuxzRvbs=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=E58OJucP2ufXjE3DefWSKTsoMj12GlxAEPqTnIH8r6BCs3kHsEyVU1vFn/dPHjU1rYTOFrj1JkC3JsAvznuNJ8GN0Yf6BqstlxLKd5OSWEKz24MjkOAzfjCmvz6L2AmDqxi8vIqVobiyuMYfZ1/6CiQ4kluovq9GOvz3plFFOJA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=k2xEWgrA; arc=none smtp.client-ip=202.38.64.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	s=arc-20240116; t=1792067027; c=relaxed/simple;
+	bh=vYw3szEqR7zQw5YAGZqRLpKAPIDise6b7Wp5pAeF4L4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Yf9HJhVAXbfgwDZJT0tzH893rDDhF9jVusdUQ8LPhRwZ1/DaKhypItKOom4l4Ls+eKnczOMmVGmWFYvO0/uRtifa/+vsKPj82BPxtWOb2XOwFeQLgIaXGo5SYtxyBOVw1KqYdqr8E1y+RyrhoPym7ju15WBZUrqSirqMy72qwOA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bmHI4wUJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HgL5fCj0; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="k2xEWgrA"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bmHI4wUJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HgL5fCj0"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9kHwQ2999213
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 12:23:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LvFhKVI4lkCsedzrjtoN/EvLmnSUYjT8LaUiWGuOKcA=; b=bmHI4wUJQdGO42nj
+	dwWM6EEdKyRRpKdX9HZQUKO769PHEDw+K9nQco6GHnoDz+hV0xcvCxSRk7HFXfKq
+	gZW4wRmXOR+ZMk5f0rzQhx9Es56J6rTR0rP1taNcv5Nl79Had+CHVs6T9x6odtsu
+	Lco1e52o3pYWrOmhUe6ffDgEDxOMh7ifMfNP8BelF4qUW2zwGOkjCYY7uNm68hW8
+	whIix9kTcSW5umMNskMomXck0gPDsESGBb8R28Mk1U9tpbyJEqMC9j4kry9tKFcR
+	xi3Rcaq8OOxFEflTD5GRNv3wQBp/Jvtr0LCYz1JNaoOfOEIqQaG3kwGIbR4tw8iM
+	2EvuzA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hausm0vrb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 12:23:45 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93df7a9466bso60379885a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 05:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:Content-Type:Content-Transfer-Encoding:MIME-Version;
-	bh=fZ3FRe0Ls/JmWf3OG+4EyMsl/OFlCN8EX07ivX4RHCw=; b=k2xEWgrAWuAYZ
-	CSBhGZcEFBE2dsrBrn9iYtTeEesZLAjfaPZjpbIfH9pJuXCu6o4JXBdrj/g0jzgg
-	HDoVCJgNUzCyKwVcEZE3XQ9fnTjQQE7Q66gDs/H/vN0fblp1dbHpjbOIYdUNBeEG
-	dYFOIgF56VRfhx+qBYWKrZwNPFiI14=
-Received: from [127.0.1.1] (unknown [114.214.188.229])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgA3IBddxdBqXUL1AQ--.1300S2;
-	Thu, 15 Oct 2026 20:21:49 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-arm-msm@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- dmitry.baryshkov@oss.qualcomm.com, neil.armstrong@linaro.org,
- abelvesa@kernel.org, mitltlatltl@gmail.com
-Subject: [REPORT v2] SM8750 bonded dual-DSI + NT36536: the command-DMA-timeout
- signature is not the invariant; dark panel is not recoverable in software
-Date: Thu, 15 Oct 2026 20:21:48 +0800
-Message-ID: <179206690897.1177097.7309368787214649515@mail.ustc.edu.cn>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=oss.qualcomm.com; s=google; t=1792067024; x=1792671824; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LvFhKVI4lkCsedzrjtoN/EvLmnSUYjT8LaUiWGuOKcA=;
+        b=HgL5fCj0hvl1ib5GiNy6hcR8SLTuyT4oGXt6ddbTTpKPF0KoMUU0dsWA9o/D+86Exa
+         SSSY53XlXQ1ylpMBgRmxNHyMeUSAE/WQrSyKD1j/GmBVJU8JMRKWByOWE4GSDyyJCDFC
+         11TVdqFVt9E+nLShXzMzbq3gVNSi4Vpj8RugQNg9uqis4LXw583Lg3u6LjGqZ4QKK6KI
+         HRXlrk3KkSK/vOUxnGH4gri4/FZM/CCu0ewUUDjcwNvEFEqomkd35+u1wPe0griUljT4
+         tNwzl2GmrkF6BG9VPKf1HG/hBHiA9nngh1gw9+sPoIErla2M3RpOihLxjBfZ9+ohUV2P
+         vefg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792067024; x=1792671824;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LvFhKVI4lkCsedzrjtoN/EvLmnSUYjT8LaUiWGuOKcA=;
+        b=00oXWfnnFBhy8FMMlnnO0DtiGLTJDpODfKEWFLDZSreNhJS3XiFI2X7kdRiO41WA5Y
+         7p19PaFhDNUxPC5RePyrh/rHUZyaP/ZL3Ld8EzM178gTQb4wGqWteaMAOaHOtCxruUdG
+         KGV9j8khrhaPcnC/Mtnsy7lWNjRa1zifJ3wn07Pai6W1/jIK9OLhlxdDf4SnJ2JPoJmH
+         6ujXsez++LmPgyWkrL9XKBtBBy1E9494e5HA5iGfZ3IJD3NyrJ1+9Fkh7zBCSp5W8oFQ
+         vNrdqCNdClNtZJynubpbMblMILn3wlizrVJNdCfCyotBLjVd56iOm6zO+ihUmfgkyYuR
+         hEOA==
+X-Gm-Message-State: AFq9FYKYOh+gHJfdzFyZwqaF8/3jAfmUbRblw3P0Xo7y/mGvtYlk4aeM
+	ygvFCu2078R5gxYmIpN5Ay6dUNAo1saPuTHrrFvtj0h2yfbB4jqH1GGmOk0YEPfZ5j31YTsq1ps
+	nFdQmIDKq3Ec1CO34+Ur8lDUHIUUeP7b5mODjWCF9imEhnpOsYVpZzSzRKhAZiVta4tUnCGtAFR
+	vR
+X-Gm-Gg: AYBFou3GtGTmDdFgpxU0Q7igpkx4xmnhH7ClGobhvWZb8gAHS+aEbsZeUfK2XQkFoKp
+	//KLu+02S7IImUgWrgztf3U989tH8jK/HtS01q2LDLiXzYll9UvDb373GNVqAfzdFD49afKSs7B
+	OoekXNkipbmoru2sFzvDfnJeajlQTXgg3aoLDzraTlxXlgT+flA65IYRNlGuI1Nm+LrYICx3Rpo
+	842iHN6yCnJnKv/UiZ7OIEoe8bD7GN8agdlIA6niQYbYV2YoUo4s8u+6EquUDJMWPbgIsPPhNJP
+	8xDQRu+2wjnR2hblaAm6B+N4y7aQzdwI6bW//d3Md1fpIEA3KVBj5DWJOeeKBjeZt4zwIVroMlG
+	Bs0/pKQ1t3X7l3EW/JcpXzQ==
+X-Received: by 2002:a05:620a:6506:b0:936:2f59:dfe4 with SMTP id af79cd13be357-93ebcd2b830mr3138020885a.0.1792067024413;
+        Thu, 15 Oct 2026 05:23:44 -0700 (PDT)
+X-Received: by 2002:a05:620a:6506:b0:936:2f59:dfe4 with SMTP id af79cd13be357-93ebcd2b830mr3138015085a.0.1792067023825;
+        Thu, 15 Oct 2026 05:23:43 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3ed963cf98sm117559366b.13.2026.10.15.05.23.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 15 Oct 2026 05:23:42 -0700 (PDT)
+Message-ID: <2fb64437-e5e2-4c32-8ee5-6e81913789f7@oss.qualcomm.com>
+Date: Thu, 15 Oct 2026 14:23:40 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgA3IBddxdBqXUL1AQ--.1300S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3GFW5tr4fAFykZF4rCw1Utrb_yoWfAr4rpF
-	Z7KwsIkrWkJryxu3Z7Ar4UX34jyrsYyrZ8tas8KryUAan8GryIvr92kw4q9a45Wrn5Ja1j
-	qFZ0qas3Za1kZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUk2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkF7I0En4kS14v26r126r1DMxAI
-	w28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr
-	4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxG
-	rwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8Jw
-	CI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2
-	z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUgcTQUUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREBB2rQE4plRABDsX
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] soc: qcom: mdt_loader: fix off-by-one heap overflow in
+ segment name
+To: Kenneth Kabogo <kennethkabogo2@gmail.com>, andersson@kernel.org,
+        konradybcio@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260912065651.59968-1-kennethkabogo2@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260912065651.59968-1-kennethkabogo2@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 7t9dB8DVucd9wOk1DuoxAflVZIrIvHCP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA0OSBTYWx0ZWRfXzVfrBuS/2oXW
+ 5b+Y2xew6AsXpAALgJBBc34skTGNfnPa8Eyj7n+qV5omw1pXhVt+e8uF/4pjjsg+X84XDPnMcyd
+ H1CWvU/+FmJWAihRXWs7JnIpQ8Iwyqa7t7lt9B8F6+VTGjCMhG+wWTj5DA7Eu6xmtH3Y4tFQ8U5
+ eUa9qeVuYB1UyyB7bfqYhJAJGNzeimNbsgakzCzjWSpbLXoTWbDBep8phLi6O4Ew999xxZDiq03
+ tiwuHkgtqqWpgnMr26gAADE+CadpO9nri8wCV1JY+3iF0BZv7kRNZT3U7XKIhB6u+E70dvI7Q/N
+ tJFZMk1Um0oQMMN8qjOqAXZQFfFHzJ4UL7RozqFh8crJLgjDWfreknlRLm0d0nt0I3GFds6FyLq
+ GVf1SCqeAXk+ur+9Gj86/mMc0kS+VP9olr2Gnh2OmI/dW8aeRp6JK1v9XHzWZayA1xGnNjxigrn
+ CJOTcRw4oloBTvNcmuQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA0OSBTYWx0ZWRfX0/TjDNW9VE7X
+ 5QOEVHXQHR577otxQLbP8QA41GaQTggiKpZuNLzLjVwM7M19teKFthQ8ZcV7T17Zy5GnQ+sLD5M
+ 2MAy0LFErg3fCwA8dBYAkLDWu8ZzOCk=
+X-Authority-Analysis: v=2.4 cv=Eb5d0/mC c=1 sm=1 tr=0 ts=6ad0c5d1 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=GfdbEUfwneyheCU63SoA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: 7t9dB8DVucd9wOk1DuoxAflVZIrIvHCP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501
+ clxscore=1015 lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150049
 
-Hi,
+On 9/12/26 8:56 AM, Kenneth Kabogo wrote:
+> mdt_load_split_segment() builds a segment firmware filename by
+> overwriting the last three characters of a kstrdup'd copy of fw_name
+> with "b%02d" formatted from segment. %02d is a minimum field width,
+> not a cap: for segment in [0, 99] this produces exactly "bNN" + NUL,
+> which fits the buffer, but for segment >= 100 it writes "b100" or
+> wider, one or more bytes past the end of the kstrdup allocation.
+> 
+> segment is not bounded to [0, 99] anywhere before this point. It is a
+> raw index into the firmware's ELF program header table, ultimately
+> bounded only by e_phnum, a 16-bit ELF field (max 65535). The existing
+> check in mdt_header_valid() only verifies that the program header
+> table fits inside the firmware file, not that e_phnum itself is sane,
+> so a small firmware file can supply e_phnum > 100 and reach this path
+> with segment >= 100 from either qcom_mdt_read_metadata() (the hash
+> segment scan) or the main loadable-segment loop in
+> qcom_mdt_load_no_init(), whenever the image uses the split-firmware
+> convention.
+> 
+> segment was never valid past 99 under this driver's own "bNN" naming
+> scheme, so reject it outright instead of widening the buffer.
+> 
+> Found by code inspection while auditing the Qualcomm PIL/PAS
+> firmware-authentication flow. No reproducer beyond code inspection is
+> available; I don't have affected hardware to trigger it on.
+> 
+> Signed-off-by: Kenneth Kabogo <kennethkabogo2@gmail.com>
+> ---
 
-This is a follow-up to our 2026-10-13 report on the same board.  We have since
-run controlled single-variable experiments that force us to *correct* the
-diagnosis in that report, and we think the corrected picture is more useful to
-you.  Summary of what changed:
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-  - the "first DCS command-DMA timeout" (-110) is NOT the invariant.  We built
-    an image that removes that signature entirely, and the panel still does not
-    light up.
-  - the failure is NOT a driver-side latch that could be cleared.  We built an
-    image with a bounded retry instead of the permanent latch, and the retry
-    does happen - the panel still does not light up.
-  - the failure is NOT recoverable by re-running the modeset.  Restarting the
-    compositor (which re-runs panel prepare + full atomic commit) while in the
-    bad state fails again exactly the same way.
-
-So we now believe the bad state is a *persistent hardware/power-domain* state
-that survives everything we can reach from the DSI/DRM side, and that the
--110 message is a symptom rather than the root cause.  Details and evidence
-below; questions at the end.
-
-BOARD / SETUP
-
-Lenovo Legion Y700 (2025), TB322FC, Qualcomm SM8750P.  Panel Novatek NT36536,
-1904x3040, DSC, video mode, driven by bonded dual DSI (ae94000.dsi master,
-ae96000.dsi peer).  Our tree is GEEKiDOS/linux (7.2-based) plus the bonded
-command path; we have since rebased onto 7.3-rc7 and reproduced everything
-there, so the observations below are not specific to the 7.2 tree.
-
-All samples below are *cold* boots (power off -> bootloader -> boot).  We do not
-use warm resets for these measurements: a warm reset does not clear the DSI
-PHY/PLL state, and after a failure a warm reset tends to reproduce a
-*different* failure mode (no card0 at all), which makes it useless for A/B
-comparison.  Every sample quoted here is a real power-off.
-
-1) THE -110 SIGNATURE IS NOT THE INVARIANT
-
-   We built an image whose only difference is that the vendor bonded command
-   write path is disabled, so DCS goes through the standard need_sync double
-   write (dsi_manager.c, 3 hunks, single file).  Same config, DTB, ramdisk and
-   cmdline, verified byte-identical; same UTS.
-
-   Result on its bad boots: "command DMA timeout" 0 occurrences, "bonded
-   command DMA failed" 0 occurrences, "Failed to initialize panel" 0
-   occurrences, panel init reports success ("panel prepared").  The DPU side is
-   fine too (crtc active, compositor renders, a framebuffer readback from the
-   compositor contains real content, DPU frame counters advance).
-
-   And the panel is *still dark*.  Confirmed by eye on the physical device:
-   backlight on, power key controls the backlight, volume keys and audio work,
-   but there is no image.
-
-   So: removing the bonded command path removes the DMA-timeout message and
-   does not fix the panel.  -110 and "panel dark" are separable.
-
-   (Measurements that are "all normal" while the panel is dark, on this board:
-   card0-DSI-1 status "connected", DPMS "On", connector "enabled", backlight
-   non-zero and controllable, disp_cc_mdss_pclk0/1_clk_src = 172991986 Hz
-   claimed by ae94000.dsi/ae96000.dsi, byte clocks claimed, crtc intf_mode 2,
-   compositor screenshots succeed.  The only quantity we found that tracks the
-   physical state is the DSI interrupt count: 41 when the panel is lit, 0 in
-   every dark case.  We mention this because it cost us a false "GOOD" verdict:
-   screenshots and frame counters prove the DPU is running, not that the panel
-   received valid video.)
-
-2) THE FAILURE IS NOT A DRIVER LATCH
-
-   The tree latches a single bonded-command failure permanently
-   (dsi_bonded_cmd_failed is only ever set true) and several bridge callbacks
-   early-return on that latch, including power_off/post_disable - so after one
-   failure the teardown is skipped as well.  That looked like a plausible
-   "unrecoverable by construction" mechanism, so we changed exactly that, in
-   two orthogonal ways, single file:
-
-     (a) latch only after a bounded number of failures (3) instead of the
-         first one, logging each attempt;
-     (b) drop the cmd_failed() early-returns from power_off / pre_enable /
-         post_disable so the normal teardown and re-power-up always run.
-
-   On a bad boot the new log shows the retry budget working:
-
-     dsi: bonded command failure 1/3 (command DMA timeout), will retry
-     dsi: bonded command failure 2/3 (panel not prepared), will retry
-
-   and "giving up" never appears - i.e. the latch never engages.  The teardown
-   is no longer skipped.  The panel is *still dark*.
-
-   Worth noting for the general case: making the failure non-fatal is necessary
-   but not sufficient, because nothing re-issues the modeset afterwards.
-   drm_panel_prepare() runs once per atomic commit, and after the failure no
-   new commit is generated, so even a "retryable" error does not actually get
-   retried.  We only got a second attempt by forcing one (next section).
-
-3) THE STATE IS NOT RECOVERABLE BY RE-RUNNING THE MODESET
-
-   While in the bad state we restarted the session (stop greetd, kill phoc,
-   start greetd), which releases DRM master and produces a fresh atomic commit
-   and a fresh modeset.  The compositor did restart (process count 1 -> 2), so
-   the retry genuinely happened.  Result:
-
-     before: panel_prepared 0, dsi interrupts 0, ctl reset failure 268
-     after : panel_prepared 0, dsi interrupts 0, ctl reset failure 394
-
-   i.e. the second attempt failed in exactly the same way, and the panel stayed
-   dark (confirmed by eye).
-
-   Control, to be fair to the mechanism: the *same* operation on a healthy boot
-   is harmless - panel stays lit, DSI interrupts stay at 41, no new errors.  So
-   re-running a modeset does not break a working link; it just cannot repair a
-   failed one.
-
-4) WHERE WE THINK THIS LEAVES US
-
-   Combining 1-3: neither the command path, nor the driver latch, nor the
-   modeset re-entry is the lever.  The bad state appears to be established
-   during the first bring-up and to persist, and the DSI controller does not
-   appear to be where it lives.  Consistent with your earlier suggestion we
-   also checked the PHY clock-source selection (DSI_7nm_PHY_CMN_CLK_CFG1
-   DSICLK_SEL and the resulting disp_cc_mdss_pclk*_clk_src): our tree already
-   selects SEL=0 / pll_bit for this 30bpp 3-lane C-PHY case, matching the
-   downstream driver, and the resulting pclk is correct (756839941/2 * 16/35 =
-   172991986 Hz, matching the measured clock exactly).  So that particular
-   select is not the gap on this board.
-
-   What we can still see from the DSI registers, on a bad boot, is that
-   CLK_STATUS ends up with the DYN_PCLK / DYN_CMD_PCLK bits set together with
-   CMD_PCLK, STATUS0 = 0x20003 (engine|DMA busy), no DSI interrupts, and the
-   pre-first-command registers are byte-identical to a good boot.  On the DPU
-   side we get "hw recovery is not complete for ctl:1"
-   (dpu_hw_ctl.c:459, i.e. the CTL soft reset never completes) repeated, with
-   "ctl 1 reset failure: -22" and vblank/frame-done timeouts - but we read that
-   as a downstream consequence, not a separate fault.
-
-QUESTIONS
-
-1. Given that the -110 command-DMA timeout can be made to disappear while the
-   panel stays dark, is the DYN_PCLK / DYN_CMD_PCLK request handshake between
-   DSI and dispcc/INTF supposed to be released by the client side?  Is there a
-   known ordering requirement on SM8750 for the *first* command after PHY
-   enable / PLL lock?  (Our engine latches with STATUS0 = 0x2200200 and the
-   trigger never self-clears.)
-
-2. Is there anything we can inspect outside the DSI register block to tell
-   whether the pixel-clock domain actually came up - a dispcc/INTF status, a
-   vote we can read back, or a documented way to distinguish "request
-   asserted" from "request serviced"?  We cannot read MMIO directly from
-   userspace here (STRICT_DEVMEM), so a driver-side suggestion would help.
-
-3. Do you know of any SM8750 (or SM8650-family) erratum for cold-boot
-   video-mode DSC bring-up on bonded DSI that would put the link into a state
-   that only a full SoC reset clears?  We have ruled out the PLL re-lock series
-   (6cd33b6f4155, 2028280686f4) as far as we can tell from the symptom.
-
-4. Should a failure like this be surfaced differently by the driver?  Right now
-   the failure is reported and then the panel is simply never prepared, while
-   everything else reports success (connector connected, DPMS on, compositor
-   fine).  If there is a preferred upstream shape for "panel init failed, do
-   not pretend the output is up", we would rather implement that than keep
-   experimenting locally.
-
-5. Would you like the capture set?  We have full dmesg from lit and dark boots,
-   the DSI/PHY register dumps, CLK_STATUS transitions, the probe scripts
-   (cold-boot runner, three-state classifier) and both experimental patches
-   (command-path removal, bounded retry + non-short-circuited teardown).  Happy
-   to send any subset, and happy to test a patch on the device.
-
-Thanks,
-Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
-
-The bring-up tree is GEEKiDOS/linux plus local patches.  We can publish the
-repro scripts and the failing-boot captures, and we can run any experiment you
-suggest on the hardware.
-
+Konrad
