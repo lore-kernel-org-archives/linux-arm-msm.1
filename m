@@ -1,162 +1,93 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A1FD48097E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:38:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 219CD49F100
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:57:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792046312; cv=none; b=mTrnozLEYT5FFuR5CnVxECgV2KD6lSfxx5W+4xUKvsYNNqDjReXODPJEsLxLrNVYoZpBdF40DiuvmzGZ8AbSiZhhhE6xnFiBbkJEpxPpIgieiiz5SE/bMud9PRR/PN8oN02eCtQdsuICbpTKV4oUiVMpTZH0FiGTeHDLtKUbjSM=
+	t=1792047442; cv=none; b=kL4BxeacczVmhh6SnaEmq/1WP0qSJxQxqzwi1dcnj1FSHxjif2FvBI04X0nZHWIk8MAkfAYU20sjlvOFP4QW5wGZ7NwQgj7p9AwqfgO7ZVQa5oKGnzPMtSj6V2nyBBP51+JVbz+9gzph3Drxb4NjutrfjJzdd/A4fyoROiKa3Pw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792046312; c=relaxed/simple;
-	bh=JYTMtNgj/5fZcL3ftFEkoott1ir+FEvQxYenqM4wIjE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=VuNoJmT8AvLzCSNLoImK/2MiSJHgO2etCq63A+WwfYav+2sAXYvLugoS3zKf9ZW+jrVYORseJscOtQfaWq342dhceV5SpOWzw4IUlp4FsUF4SzLN78lDylLKyb1awzeNuNkPsdlXo49L48qz7w9lG7hjz5KiObyU/Vn74t4mrkc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TvXu1D1e; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=B3N5nEYx; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792047442; c=relaxed/simple;
+	bh=edDdu0m1Tays1tEmbQaqGjg3SKbY2zUZEO/enKdLJNA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=XiaStJ7FnLc0Mhcja/3kjG/8skxVrIwx4X8jHhNxoVcVfuEAArdFl6gO0QNQ2xaPcK0OVUDjJBs1M2hIPdW7K74lsgfXGjXC5h6/mEDdSuISZd+CmxBW4XL8hXLJVkH82bmqIDz70fxb9tyLw+VKudNbr7ceShuTSRpV+vsanM4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=edq8GbzZ; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TvXu1D1e";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="B3N5nEYx"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F6SOY01682636
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:38:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Vn+PAPU2yd7dK7uPhM98pxh8Uq/TtLrKIIgwoWoqb3U=; b=TvXu1D1ezG/STOX9
-	8R0AFj1gTvm2/nHC15+MuZiqzspRvk1HLnKXf4UGL7aK6ufIT3D82+PG4lYDENed
-	2FEX1L/DHyCgsk0SpV+bJMV7i5db5Wksppsd6LrHXuWR954+54infdTFRWAfc6YW
-	bZv8xx7yq1k2Hzz3L6Y8Qyh6XKQCljvo+zVecVDMW3aeMfXRxmXaQI9qxU0dW7fV
-	MUSBOlwWv8HVFwqdnE+r32Jx/13swZ3AyVazVPPCzxCQFFJzb6KbqAZEKPMKH2xn
-	PwSz4sp8WioAma1ICiJPmSgPV9rCceidSbBNB0Y7TIy9Q5o2t0f5IYzAsGWxt8kt
-	aSeeKA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hacb032hg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:38:30 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39512608fb1so1954422a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 14 Oct 2026 23:38:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792046309; x=1792651109; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Vn+PAPU2yd7dK7uPhM98pxh8Uq/TtLrKIIgwoWoqb3U=;
-        b=B3N5nEYxZ9ZHvBQkwV6Lr1UQD+n8zjUI8xSG5EE4LrzfycdOhNqYPWGzBCA0BqtaNy
-         CeMLdFXiZ/3/cePmRPMS2yLbtdNxGJS2jpT6QCZVvrvxZzoyfADq1ZpoyXBqdoi6k1Tw
-         +LM7jBF+9fwRVDTy9hS+TU1nHeiUIadaU++m3rt+XVW1OG7R+cc7vW6GdGiy0ciGNaMe
-         SCW0yUcfWV4UD5TRpwlUOuyi1G6cglHmvZMSyGjj5skix3TxLp/gF9EITY9BiozNFjew
-         A4TqioqTii3RNWogwu2DJXUTKKths8yQN3Fyg67P0YMyBaLNcEMQWr0uiD4iSZCXWMvD
-         ZiAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792046309; x=1792651109;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Vn+PAPU2yd7dK7uPhM98pxh8Uq/TtLrKIIgwoWoqb3U=;
-        b=HL2RQ4swx13M1kooOJzho9NNxlz42ll+1djJGTILPBUX5obDbFGeJPGh8psgK/ij6Y
-         fu4lDgyGxPjMfypj9Sq8DX05pDS1MlCTCt72j0urm1rnOYtgWPzd0MSw27GXcWr0HYhq
-         1+pmoXXUBJUzQEITfxZV+SaAE2E8i7uIY2P47fsRQ52VGZ6opa44ZPM+UA/UDtMpyl4N
-         xy6M0oOIVnXhh4jKiRlJsoDxpJc3fbMWoiR0SpGRPkv/ytkJ1WKQZT1tFO0YBGfi1TF8
-         g1otkHfjVZuNJXfAg5hYomRiddxswvZu1o/gbEpvaruBPe0SH12pIE96OVFaMDvSMW/O
-         OFSg==
-X-Forwarded-Encrypted: i=1; AKwUvBxrw/avRQLWGIhxz6/5g7jwiPSB2G9CLAeemYenFDlJoI7ZWCZnSUASbzQT8OacobZ4q7bM9aaytvVosF4O@vger.kernel.org
-X-Gm-Message-State: AFq9FYL04LnABDqKxXMK+aUGTEPkN6UT7CdVMuXYHp68d2RBJcIvvtw8
-	jCpPvlmng2Pa7CsEW14Qrbryv4kuO0Y8Cfkhi0Mx2TjZhI4DmGfRGoSPpjibm4ivyZgtebmRm8n
-	8Yk3mjLKDQV+Do2Pc6xu9hD7/gVGvRVnnXN2b3gBbHt47l67MXB/Q9ucF2fGY65sZsYw8
-X-Gm-Gg: AYBFou3CkqxWxcJ97ksVIzuiqErBx8LE0tM/ry8Y1sFBY+kYeu6VGU2yUbAKSmEXadr
-	JW3aGUejpNX/7wLAbxBvdE/J+mNf/MAFdptV0V/P3qrqsvaw3sygmoNH8W41PgkOP62LivaFKd7
-	5YUUKoKCEKrDRlCVZKa+DQLN9hulBpK3KAF8EV2W0G+0ePxUKmnuvMsYrO9mBHCnAPMPrYgxl8Z
-	bDFDlEG8kEQaSiCQk/bUuhUmy+sXd8HSQK/a1TDhmzVYSNh79YAbgvyxAKAMfrEMgCURj4X2RyM
-	Uh02/NRXt8KydeSA0wK0xNHLLBiq4lctak94MbmatESrTwr5V6Imt9DKUFotfRkwdWb546BcvZX
-	6YPKxAgw1sxSXQFlXCPumlC6PkmQJj1c+
-X-Received: by 2002:a17:90b:4f4c:b0:3ac:7377:fd48 with SMTP id 98e67ed59e1d1-3ac73780712mr3644501a91.56.1792046309409;
-        Wed, 14 Oct 2026 23:38:29 -0700 (PDT)
-X-Received: by 2002:a17:90b:4f4c:b0:3ac:7377:fd48 with SMTP id 98e67ed59e1d1-3ac73780712mr3644492a91.56.1792046308950;
-        Wed, 14 Oct 2026 23:38:28 -0700 (PDT)
-Received: from hu-kuldsing-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac93ff4474sm2844429a91.0.2026.10.14.23.38.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 23:38:28 -0700 (PDT)
-From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Date: Thu, 15 Oct 2026 12:07:48 +0530
-Subject: [PATCH v3 3/3] MAINTAINERS: Add Qualcomm TPM driver entry
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="edq8GbzZ"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792047434;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PlndOUpPD0rIHOGOOB7+cfhvzEcigQMJ8mrT3merEI0=;
+	b=edq8GbzZ29tiL3jsONaJw83sFge2yuL/GXDD9bpCTL4FNbms9Zv1gVWUej2xFgiT08gxA4
+	Qpwizijq2eZ6YO2HDpBs476riUrawgz/NbI0ZBUGso0KfVefjPaAWrE84zcKsSh68F7uQl
+	sW8Dj4pVgHhoYWQ38AzdZ4pX4/Cy9Nk=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-177-zjakPm4AMKSwoTffPaeZCA-1; Thu,
+ 15 Oct 2026 06:57:11 +0000
+X-MC-Unique: zjakPm4AMKSwoTffPaeZCA-1
+X-Mimecast-MFC-AGG-ID: zjakPm4AMKSwoTffPaeZCA_1792047429
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3B30B1956071;
+	Thu, 15 Oct 2026 06:57:08 +0000 (UTC)
+Received: from jtornosm-thinkpadp1gen7.rmtes.csb (headnet03.pony-001.prod.iad2.dc.redhat.com [10.2.32.114])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id B26353000723;
+	Thu, 15 Oct 2026 06:57:02 +0000 (UTC)
+From: Jose Ignacio Tornos Martinez <jtornosm@redhat.com>
+To: helgaas@kernel.org
+Cc: alex@shazbot.org,
+	ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org,
+	bhelgaas@google.com,
+	jgg@ziepe.ca,
+	jjohnson@kernel.org,
+	johannes@sipsolutions.net,
+	jtornosm@redhat.com,
+	kevin.tian@intel.com,
+	kvm@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
+	mani@kernel.org,
+	skolothumtho@nvidia.com,
+	yishaih@nvidia.com
+Subject: Re: [PATCH 4/7] ath11k: add PCIe link recovery retry
+Date: Thu, 15 Oct 2026 08:57:00 +0200
+Message-ID: <20261015065700.120184-1-jtornosm@redhat.com>
+In-Reply-To: <20261014165829.GA1636877@bhelgaas>
+References: <20261014165829.GA1636877@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-tpm_qcom_driver-v3-3-247c8e50250e@qti.qualcomm.com>
-References: <20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com>
-In-Reply-To: <20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
-        Peter Huewe <peterhuewe@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
-        Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
-        linux-kernel@vger.kernel.org, linux-integrity@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Authority-Analysis: v=2.4 cv=VKpIDNPX c=1 sm=1 tr=0 ts=6ad074e6 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=tHMf5gnvwFDjO4kcr9MA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAyNiBTYWx0ZWRfX8ySN/kzd6RWu
- 9LIAKfDRn9nG58W8I+vk1rjNgzAw26v0jbRIgZVvSfSCX7SNHO/sv3REMYI7jAFQejd4bPK0bVG
- 35HYYQlHrsKf/DF1QUHpVpKTl4qFHUU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAyNiBTYWx0ZWRfXxWxpK3LUv9I8
- 8RK1H/PXCL4FEXzZKf2hDUyBHcbIPqrQDGBm4kPNNS6UEFsQ0PC6Kf4qRK5mojilPVWzzkxHwNm
- OJ20S6SIJNXVXN3mJMKhHwcml3YVhxVPjjxg56SExy1i0cOEk7kbcgNpZb1gFh2AD6vmHvqUi9R
- L9DQvZP6P94JMq97UMVZPb78SEGJ+pePftxlRPse168H70c3+bbk6EBBv3lvhGj3G2TO+l7/0ko
- m0T9JFmJy6vc3LB/EibFJvr6CIODDgEeZqrTu4CyOsSc/ByczNgaSKY5spO+HoUU6qEQjCfu4SC
- NuTDHnLJkeKtfNjzJ8clkHiKIu4IuLN7K8mIGldpUjbOgod6gJrV3O3ZegrL2Osc81eHblAA2M1
- YtnKVQF3MEqDewbzsOvjHqDWr3TElTwDMlDKaOOxwBzm/iZoklsRGXV0cn0KcHS+q1rSpt/eaVl
- FMH7L2exXDnEPdRGICw==
-X-Proofpoint-ORIG-GUID: TsX3Hz5dkP7nGf5Vxlj7QkSJ8cur_Yb9
-X-Proofpoint-GUID: TsX3Hz5dkP7nGf5Vxlj7QkSJ8cur_Yb9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- malwarescore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150026
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 
-Add a dedicated MAINTAINERS entry for the Qualcomm TPM driver, which
-uses the Qualcomm TEE interface (qcomtee) to communicate with a TPM
-Trusted Application running in TrustZone.
+Hi Bjorn,
 
-Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
-Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
----
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
+> Link down is a PCIe reset of the endpoint, which should clear all
+> PCIe-specific state, e.g., BAR values.  Is that restored somewhere?
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0426fc05a66d..618ebcf39ca4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -23124,6 +23124,12 @@ S:	Maintained
- F:	Documentation/tee/qtee.rst
- F:	drivers/tee/qcomtee/
- 
-+QUALCOMM TPM DRIVER
-+M:	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-+L:	linux-arm-msm@vger.kernel.org
-+S:	Maintained
-+F:	drivers/char/tpm/tpm_qcom.c
-+
- QUALCOMM TRUST ZONE MEMORY ALLOCATOR
- M:	Bartosz Golaszewski <brgl@kernel.org>
- L:	linux-arm-msm@vger.kernel.org
+PCIE_SOC_GLOBAL_RESET is a device-internal SoC reset, not a PCIe
+fundamental reset. The link drops transiently but PCI configuration
+space (including BARs) survives. Only a device-specific window
+register needs restoration, handled by ath11k_pci_restore_window()
+right after. Same pattern as ath12k.
 
--- 
-2.34.1
+Thanks
+
+Best regards
+Jose Ignacio
 
