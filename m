@@ -1,163 +1,92 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9310D49A3C2
-	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 08:44:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA71448822C;
+	Thu, 15 Oct 2026 08:44:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792053856; cv=none; b=Iih7JA2AVdTuk5jL1zpxmr3SYz1kiEgfMWEBORo1oScISiFd/CcDFu2xglv8t60yZbxosGc0+Os8K8KGNaVcQBNKdJ3XWsIbcF4BP6V8cinQDNQhOJKsRzCjgqfc0mq1t9icbfjjra8w1oMAs6u7sQoFKBNSisyWHnu8JW2h7x4=
+	t=1792053890; cv=none; b=DB2U4jZOE6qHU63YkkHahZcszg65efaIMbuWcSdGSVIKAYbhyAjWYCoZ/mWZeSd6+q6pZcEQjWVU4u9BIqWngrBCC62UgAaHGlMu4jJmcoiKtcvi51Hy8LRjcvawuY1KjLBXB/GJ35YLfHO/Ok+bsWEJOX3iKabRFiPzf+yqYp8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792053856; c=relaxed/simple;
-	bh=SlB68F3f+BdlirJUEjyixhDsOheZ/zyFCqTY5noaKsY=;
+	s=arc-20240116; t=1792053890; c=relaxed/simple;
+	bh=cXZUFEFqZQRxuLGQs55LcLm/iOg9oZmy60i9XARmd+o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=akA5Sx0eUXIxrAE3XNl4Sv9b0tF6wBZedGptjspITHvGoVpipB4hDtaBrGLKjMa0nTn7qSzl6pDfQjtNOKi/QplQDt9gLtukLA1NBQrbxC31NMfP0E/+t/EJ25Ecki2OZDc+K4ufvP27gDbbGnGxIUmxR1XEmr1Knt1hClkhgxk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=Qu38pjZv; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=YCaI+cJ4zXCWvsLDInO+2Pe3Bk8yFZNvn9CJkGCspE2TpsuV+RJ9KX3G91o/3FGCXBIQrmdvfXOOafH5QgKpeP1TCl6FPNL35to79VmuaNrEBuvLZxyoxSsCpal6Xi7lJ7I+5WT+50FTR1ZF5/lioBVDFHHVkxJp8ai+Cg7rjkI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L1zup2Fo; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Qu38pjZv"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a140e7405dso17799235e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 01:44:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1792053853; x=1792658653; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=7CSJIT17g58+oITTv0q53z5VUcT+bUH2Z8uN5LCucOA=;
-        b=Qu38pjZvJ/9yhCQf/QKDuagSkuepfr5Kk4tIXVsmZhlVJ/NmU/xNH8es5/NAEIsURr
-         yrmv9zxxVdZYiRB2SrFmfZYTl/wvPWUtOWhcyZdQI+x7U3A2zKuZwiWQ6z/t0oDn0xw3
-         nUXE/xKb8VNb9VQF7TLqOuEtHg4nMfke9frKMXzHZLx0M0Y8b4l8Qst9eiJ9uIfrkqVo
-         7SybQMAYfEgETv8MPcq2JMabHLhSg2gR7tpiMCubNSVkLMl5J7vhr9gf5BavxFLBBiog
-         cnLE8Q+afMWLx4G8S2fD59alFjbU2N/25/ZiDwdvWe9CFq4QBDFc40wcELPL/AwHOq2g
-         PcwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792053853; x=1792658653;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7CSJIT17g58+oITTv0q53z5VUcT+bUH2Z8uN5LCucOA=;
-        b=VwgXYEmcr2OV0SAXO3jr6fZPt+U0Ck/aSQhGGP40DmomQ4Y28JLOW2NiWuXNwhIxk+
-         gLsL8we+p9FUI+xNP5L2BZm+XZLelMSfvOeBL9GpLzoOZ+lxTAOjCZEA7mmpmXFvGW4q
-         5GjmQyrUxbPocMtbmpW6phfTo0hJ/c19iWDOYCHl4nI7Uh1BeU5OYhGAm7d3DA/Spm63
-         83xCWX6AizNwyOeD9WHthvLQnPktWE+QJP43ubAaAcJ2FnIXJCVWADNrPwlTiH8I11ps
-         L2iC/m6Jn0vBP/3ssGLrDfzRrG3kiDnhC24EPco8QANmIJ49Qt2UtxYSIqPidgMn21EQ
-         Qhiw==
-X-Forwarded-Encrypted: i=1; AKwUvBx+DHf4Ivig74K/boCdRLwR3HX2xnbkEdPmVrVLpHYHP5kXJTe1YHSGFyg0D6MA4SlRMOcpmXXmFqZOgjb1@vger.kernel.org
-X-Gm-Message-State: AFq9FYLD9Z5NrhW2ZGR1InSPmJH7B0FpUq+8c9rbkz+sqEPsBUEMe2zw
-	LfJxrtyd+tJTpHM2SuHkYz5X1tdIci120THaOefeWUgarLITWBbwG7RuPTUbdO1qcIE=
-X-Gm-Gg: AYBFou1iZ8Mu4fCGMZsGhrsb5enXMFmN9PaB7/aGu+3iT705g6VYBuhst09+CHyEbaE
-	KWTPNqBKk2Ms1xBdn47yV0ulNyz5FGQgvX+SlYOk4PnAUwkeAq9jgCQfX95YA/wFuncy5PnV7as
-	LnTwQbaQlfMAM27s0cgsA7B1DPcBbOV3YYZxepiu4dzKD1kE2aO6woIq/3XR2/Lep/owr4DAKux
-	hTGXWixxeStZCX+y7FB1d7xDr4YJHQ3G6rqKs73jerRW2XDvhtIynk/UjoFMSGQFCctXyBllY4+
-	tVno6YmUraGfTs+IzpBgkH+V1K9bAV3Hci/87IFiLN6Zx8BgcX//mtQC6EsstSM0+OrNd12g6jQ
-	okV1x4P8wo4LbMW57Bnh4DJaOIiEc4EDuQdJggYp+EDiAHbxT5Wf/AODjlW2P/zEqFR2FIF7QSJ
-	D3C8TF+dHLwzIwSJGWwBcs4PzI7cUDz6oRug5IhSh+yT1TtVtYn1quM+Z462DBuMmcncpp+/FS5
-	kPZW7VLsltZDiEBhDDcYmzO1o4wvMy/vaK4HHcKFm3Zfj22C4cPAcoFoE5wUgekFqSigo/4MyQF
-	Ld3+Y4SiOtUxavd34iUotbc8DEFz9YY4RO56lYc9tyI6bGwS/23VpXyH75I=
-X-Received: by 2002:a05:600c:c092:b0:4a1:9831:a69c with SMTP id 5b1f17b1804b1-4a19831a9f7mr220004565e9.30.1792053852671;
-        Thu, 15 Oct 2026 01:44:12 -0700 (PDT)
-Received: from aspen.lan (aztw-33-b2-v4wan-169864-cust3247.vm26.cable.virginm.net. [92.239.204.176])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd993caesm110794555e9.12.2026.10.15.01.44.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 01:44:11 -0700 (PDT)
-Date: Thu, 15 Oct 2026 09:44:09 +0100
-From: Daniel Thompson <daniel@riscstar.com>
-To: Alex Elder <elder@riscstar.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, hkallweit1@gmail.com,
-	linux@armlinux.org.uk, davem@davemloft.net, edumazet@kernel.org,
-	kuba@kernel.org, pabeni@redhat.com, donggeunyoo.kernel@gmail.com,
-	ansuelsmth@gmail.com, mohd.anwar@oss.qualcomm.com,
-	lorenzo.bianconi@oss.qualcomm.com, danielt@kernel.org,
-	netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next] net: phy: qcom: qca808x: Add regulator
- management
-Message-ID: <atCSWZQAyqvz62_K@aspen.lan>
-References: <20261014172300.292324-1-elder@riscstar.com>
- <44a96544-5ed8-4bdc-8757-d7413e221f40@lunn.ch>
- <4c0d9a12-6236-4bc5-949c-62a092edb0bc@riscstar.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L1zup2Fo"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A4511F000C4;
+	Thu, 15 Oct 2026 08:44:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792053889;
+	bh=/+V20DFV5KmqtYyBbhJb85wqCLfg9fnPxzdn/tr5kCo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=L1zup2Foa+qnpqKJYziH6JSt6Q62mAZjn888akXceMvIy/nfa462P73dCgV427kbR
+	 LV2LPCKJ7XoAN2aMJEJqFGoB/tmcZTDUZ/E/l2eilNIuLLNAZl3qr/oLLKod8hlR3g
+	 26IcCFcdJKZz+gSb3h7QF2voeuzPIVAvAj5utOClBDZsL7Q5UJLI895/cYJVG5JUPH
+	 Xa8bJiX7YGban2PEgkYIEEpcK0CuYFym8d00IOPvupYy4yAgLc03/9qabKVH10D3f0
+	 Gw2RQA4egcJeUe8ww1/hZJqvKCgiaOyxzngCvTdLxinA5Q/GfB0XpRqyoK9cnTuAt+
+	 Ixi8ld+Hs3TcQ==
+Date: Thu, 15 Oct 2026 10:44:45 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
+Cc: NXP S32 Linux Team <s32@nxp.com>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Avri Altman <avri.altman@sandisk.com>, 
+	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
+	"Martin K. Petersen" <mkp@kernel.org>, Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>, 
+	Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Pedro Sousa <pedrom.sousa@synopsys.com>, Hannes Reinicke <hare@suse.de>, 
+	Joao Pinto <Joao.Pinto@synopsys.com>, linux-scsi@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, 
+	echanude@redhat.com
+Subject: Re: [PATCH v8 07/12] dt-bindings: ufs: Add NXP S32N79 UFS host
+ controller
+Message-ID: <20261015-observant-nickel-monkey-2a38b7@quoll>
+References: <20261013103003.373156-1-larisa.grigore@oss.nxp.com>
+ <20261013103003.373156-8-larisa.grigore@oss.nxp.com>
+ <20261014-valiant-goose-of-revolution-efec17@quoll>
+ <fa3a025b-0d82-42df-a4cc-e144d6a97b20@oss.nxp.com>
+ <20261015-whimsical-amorphous-squid-6166c5@quoll>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <4c0d9a12-6236-4bc5-949c-62a092edb0bc@riscstar.com>
+In-Reply-To: <20261015-whimsical-amorphous-squid-6166c5@quoll>
 
-On Wed, Oct 14, 2026 at 03:41:20PM -0500, Alex Elder wrote:
-> On 10/14/26 12:36 PM, Andrew Lunn wrote:
-> > On Wed, Oct 14, 2026 at 12:22:59PM -0500, Alex Elder wrote:
-> > > From: Daniel Thompson <daniel@riscstar.com>
-> > >
-> > > QCA8081 appears in embedded board designs paired with GPIO controlled
-> > > regulators for its power rails. Add logic to allow these regulators to
-> > > be turned on during a probe.
-> > >
-> > > In order to avoid the complexity of tracking state for suspend with and
-> > > without WoL we take a tremendously simple "always-on" approach to
-> > > regulator management, essentially relying on BMCR_PDOWN to conserve
-> > > power when the phy device exists.
-> > >
-> > > Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-> > > Co-developed-by: Alex Elder <elder@riscstar.com>
-> > > Signed-off-by: Alex Elder <elder@riscstar.com>
-> > > ---
-> > >   drivers/net/phy/qcom/qca808x.c | 30 ++++++++++++++++++++++++++++++
-> > >   1 file changed, 30 insertions(+)
-> > >
-> > > diff --git a/drivers/net/phy/qcom/qca808x.c b/drivers/net/phy/qcom/qca808x.c
-> > > index bab26e4c61408..6e2bd753257d9 100644
-> > > --- a/drivers/net/phy/qcom/qca808x.c
-> > > +++ b/drivers/net/phy/qcom/qca808x.c
-> > > @@ -1,6 +1,7 @@
-> > >   // SPDX-License-Identifier: GPL-2.0+
-> > >   #include <linux/phy.h>
-> > > +#include <linux/regulator/consumer.h>
-> > >   #include <linux/module.h>
-> > >   #include "qcom.h"
-> > > @@ -181,15 +182,44 @@ static void qca808x_fill_possible_interfaces(struct phy_device *phydev)
-> > >   		__set_bit(PHY_INTERFACE_MODE_2500BASEX, possible);
-> > >   }
-> > > +static int qca808x_power_on(struct phy_device *phydev)
-> > > +{
-> > > +#ifdef CONFIG_OF
-> >
-> > Does this need to be conditional? It seems like
-> > devm_regulator_get_enable_optional() should return ENODEV, which you
-> > already handle.
-> >
-> > Making code this like conditional makes build testing less useful,
-> > more combinations which need testing.
->
-> This is a really good point.
->
-> > Another option is
-> >
-> > 	if (IS_ENABLED(CONFIG_OF)) {
-> >
-> >
-> > 	}
-> >
-> > That at least compiles the code, and then the optimizier throws it
-> > away when it sees  if (0) { }
->
-> Yes I like doing it this way better.  I'll modify it
-> to be similar to this for v2, which I'll plan to send
-> tomorrow.
+On Thu, Oct 15, 2026 at 10:33:25AM +0200, Krzysztof Kozlowski wrote:
+> On Wed, Oct 14, 2026 at 04:58:30PM +0300, Larisa Ileana Grigore wrote:
+> > On 10/14/2026 2:10 PM, Krzysztof Kozlowski wrote:
+> > > On Tue, Oct 13, 2026 at 12:29:58PM +0200, Larisa Grigore wrote:
+> > > > +  clocks:
+> > > > +    maxItems: 1
+> > > > +
+> > > > +  clock-names:
+> > > > +    items:
+> > > > +      - const: core
+> > > 
+> > > I don't get why you added the clock-names.
+> > > 
+> > Hello Krzysztof,
+> > 
+> > The properties, `clock-names` and `operating-points-v2`, are needed to let
+> > the generic UFS platform code discover and manage the controller clock.
+> > 
+> > `ufshcd_parse_operating_points()` uses `clock-names` to create the
+> 
+> You have only one clock, so my point is that UFS code is just poor, but
+> if that's the reason to mention its name, then just say that in commit
+> msg... or probably the ufs-common should be fixed.
 
-Reading things back, I think Andrew's first suggestion of having no
-conditional might be better.
+I see now that ufs-common already requires clock-names and it's needed
+for PM opp, which cannot operate on indices, so it's fine.
 
-devm_regulator_get_enable_optional() is log-silent on failure. I suspect
-the reason this code was conditional is that an early version used
-devm_regulator_get_enable() which is not log-silent when it falls back
-to a dummy reg.
+Best regards,
+Krzysztof
 
-I suspect I was more influenced by the log-silence than the marginal
-code size cost on a CONFIG_REGULATOR && !CONFIG_OF system.
-
-
-Daniel.
