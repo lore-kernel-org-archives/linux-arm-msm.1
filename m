@@ -1,29 +1,87 @@
-Received: from smtpbgjp3.qq.com (smtpbgjp3.qq.com [54.92.39.34])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72EFE2E5B2D;
-	Thu, 15 Oct 2026 13:31:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.92.39.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9A4A30E82B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:32:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792071081; cv=none; b=XDY25/Vya08VnZjGP98/kUfLkprNuBrNSZqknAZxp9xMCU4xDyM77OZ+Zh/ES83hJeojA2R6bu9mjbWl1dU4kh2X8a/wPBzb2UycMWNNZOPMMBzK5l8nB5q+jfxtwqWz97JwQNJlEoHNPOY9Ahf6ttbVaesllsbw+mZaMNGMrU4=
+	t=1792071134; cv=none; b=ICLgE+2CIS3Nv5L3/0D/WhJ1CTD1FrE/9A4ii8CmEQFdmNCGhjEZ9616uyxPiq0vzz5jmSz+cwyzoAeNlPcle/ZFvK6APWWZU7XYNFwIDYdc5gyWVB97zT7vXjuCwbcyj3tydrJYbTrZY44IDtzv16/Cj4t2EzazwYKKAh6TSLk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792071081; c=relaxed/simple;
-	bh=vmA6XUYtlHqFYF1V3I5JQfJJrWaaZuz3a5rJ1xnV/z0=;
+	s=arc-20240116; t=1792071134; c=relaxed/simple;
+	bh=aOh2KbDTODle4grtPE1FVRv20AnwMa9h8HJPe3KDcw8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Pp1bb/6XJMGHlINiVcr5xbeIlvBJluQsrEwRlQkJs9kXKpssNlPp9c8U7GgPCy3oKu0LWqz6uPhm3TrDLW+Co2e8jp0jy2KAFavw/QwAASDPcjhlFS/zDLIb4oktJ8352rt1whTfA8tpPehwXkb5O/+iO2MMvCd+65Th7juO87E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.92.39.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: esmtpsz11t1792071051td5e74615
-X-QQ-Originating-IP: ZY3dpyG3QC+HIamw3iX4CacHKho9duMeYS2GbkIpwjU=
-Received: from [127.0.0.1] ( [180.159.160.209])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Thu, 15 Oct 2026 21:30:48 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 8017279923020972316
-Message-ID: <8E9F476DB51FFE97+cb168190-d184-474a-bec2-91edf7bdd2bb@radxa.com>
-Date: Thu, 15 Oct 2026 21:30:47 +0800
+	 In-Reply-To:Content-Type; b=n2RioSnIal9ngykNIN/YgyMQhivAgSHGfIZoJS3BOLLANXbyt3GswwH0sXpGUqn9cpBR8JzY/6YukYcW0J0213WFUL/q9/TNsJL20JAhxYZq9H39xljqyWTg060X9hx5kregYMYjfyOx9ePUGz0MCybtPru02ghqnjvjXn5ItGg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=K3EH3fVr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NaX/U1U9; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="K3EH3fVr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NaX/U1U9"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F9kEAC2999156
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:32:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	rdX3QCLTENQF6a7iOoH7LlhHEJoWPHuhiEjvLDq2Jqc=; b=K3EH3fVrt6zpt/ia
+	QI5oUNZmUKUO+aT6h5z4UgtvU3WpGypovVVxPUzvwY5IXB3hMZS/vr1WmQ/81456
+	3oD0AgqVqRx3P+OeKrNVcnjzWXE4fusAuaFgpTMQTQa+rkIV+hc41y/v2axMua0g
+	6vF0+4lCQjo88A3Pqjq6EITsRr6yN/Tx6/v7TnXBPK0/3R9ZFI/8FFrBs5scWShI
+	hc9+7Nd/olymOyKpWisS+hRqbThjdIZYEx2uWX3IJzG0Qy36++TdYXWBh5lxsx76
+	9o3IQqxAuCFCJ8rd8bOqS/vj07tZQujr/mATkQ7xHIbQ6+v0e5l7xveezN3Ntt/B
+	vmTyDA==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hausm15cv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 13:32:12 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5e9b3b44aaeso26087e0c.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 06:32:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792071132; x=1792675932; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rdX3QCLTENQF6a7iOoH7LlhHEJoWPHuhiEjvLDq2Jqc=;
+        b=NaX/U1U99vT8SIJGSUy2JAxXlaCKd36wPRz4i1Cs32/vuS2vE7JNZgUntROc3IERv7
+         Gd/vDiRidX1wUcfgCG9s8KY12Dd1mh7FuisJoWwE8i3GW7aEs19lDDltrZUIkkBhfv7r
+         Rh2YTdrTMP3vdGlIWMYR2INE/7klV5035tmO/LQyf9DArB4IJMPRhJfp5r/qWUA7fouh
+         tStdpPFAGU2vchAUP+bhkD0ZA36Jnvac0zoL9sRhIsPe+N66tleVXaEaV0QhGwJcRI7b
+         1o7ecmEPPGK56LYBf3hk2FHe4Kxn/7+OUO7qo3iZuxzgjH+lRGMj021c10frUxxEUbcT
+         RP8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792071132; x=1792675932;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rdX3QCLTENQF6a7iOoH7LlhHEJoWPHuhiEjvLDq2Jqc=;
+        b=1GfghFCCeLR10DsSxRBJe2SPB2lNwsLGWwKdujIvECQjKUAEvlR9FswndHIrrKS3hq
+         FVXUGQg9DOrYjo8FBAWrMlsxqlE/+dmi35AkbzVjl+QQiR3OuRBXFxaWw1lU69uY48ks
+         swz1xRDmFYck7h7VdB5Mlpb61D+1CHlVFQ04ZvDxUj0I7rYRv17OXLj4pepcru8HGpc/
+         NeXQhdPkXhLG0FXvAzngcGdpYRwKJAjxHk7DlJeIOuYqsc6n9qTHGRTBLTEPC7dn03lR
+         n1o39FqKx4pKzA97GIyBppWXkxpLPc+7ru3liMJIveXoebkWvHdctUfk56pkpH68/pSa
+         NVkg==
+X-Forwarded-Encrypted: i=1; AKwUvBxxD1tLZnuAqdpXhO35Xa2GJCGLtkMRn7VnZOHsDhtPjgZYH5NhG3MrqmM1TRcluaAWBBl6oVsX2ns3BpWD@vger.kernel.org
+X-Gm-Message-State: AFq9FYI3UThAUiEYJWaFO0UXsklnp6Jqw8DQnVfS0efM8lgcpUfUKqs/
+	ODFzbgaAjz0ZJkpyYHnUe53/A8kizlClMVK51gLLoz/wkdP/gBZAnsOopAzuVJNZ/hDZ00rlFBZ
+	gW0MQpbVwSP7SZNalk2Crzop40TnL9i0vo5iOEJjmGib4MSdpR2/ijs/ykSG1ZwY1Pr4l
+X-Gm-Gg: AYBFou3r8lRldNPI17eNd0UFQtuNAOMS5oFOrW9YcoJE/0YauKT01TDdS3ntkrxnCSe
+	DmBpis3M/zklpmGQIBlu/pO3tsB4omk9yAFQez6oCP9g4tnlBE//AQZeP0wydvhxz+GPeQ6hTNT
+	eyt57mjNo7Pp9cg7ueV+Sdc7EbAnGWXsaohxZjuqg3ShGlSNLGFqKnw24Hewo+S5Pnb8L5qLyn1
+	ef7IHSLHh/MxTICDFvDhj4+QLByRzPBptVUVJg8x9POZCExQ/NvLlaDy+cHrsei4HMsqbADhf4X
+	ayjxMKK/3XVMxHSE6fpohxE5A0uXXMBMqXRvgv/rwtQmytwbDbFspa0iBCR9moS/xyXhrM8hGRI
+	K1hwQjX7JcBHiUkghNyyLYg==
+X-Received: by 2002:a05:6122:6990:b0:5e9:2e3c:2f5 with SMTP id 71dfb90a1353d-5e92e3c09b0mr5140651e0c.2.1792071131538;
+        Thu, 15 Oct 2026 06:32:11 -0700 (PDT)
+X-Received: by 2002:a05:6122:6990:b0:5e9:2e3c:2f5 with SMTP id 71dfb90a1353d-5e92e3c09b0mr5140566e0c.2.1792071130738;
+        Thu, 15 Oct 2026 06:32:10 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c3ed6be6ddasm129094766b.7.2026.10.15.06.32.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 15 Oct 2026 06:32:07 -0700 (PDT)
+Message-ID: <65f6883d-8ead-4c6e-80f5-81f6857df0b8@oss.qualcomm.com>
+Date: Thu, 15 Oct 2026 15:32:04 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -31,79 +89,100 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Reply-To: sophon@radxa.com
-Subject: Re: [PATCH v2] arm64: dts: qcom: sc8280xp: add missing QUP pinctrl
- states
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260831-sc8280xp-qup-pinctrl-v2-1-a69bbbdb37e8@radxa.com>
- <3d00c7d2-026e-4ce8-bda6-bb2d0f3c3123@oss.qualcomm.com>
-From: Xilin Wu <sophon@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd
-In-Reply-To: <3d00c7d2-026e-4ce8-bda6-bb2d0f3c3123@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: Nc4Sv39/e83WTkWT9LCrG+JtKlGp2is4gTi79+kMOaP/0VXRZmEcXsYc
-	Funsydf1nz+K8V9C8t5dag7jLSZJonpJa5FgjkHLMVrceuV7G12pHAaf682GZKMyXEii4u3
-	tI4TEmErKbYilqM9aLA+0jbYKl12+IN43CJO3m3XcX0bBt+j/3X23xDDw4K/A2XDPr/3f9k
-	zo2kPsFhJGGr+M5YCLEfh6SeARKJ0TvuJHZxhWydm0vPSJ04YDAAAQP/phgNPjPkecYHjex
-	fTUbOBa2IKwxywfNrRDf2THRTWKBrEqGbxC4565oIIQVxVHa95MqmkorzAPlgGd2rWlQn5v
-	E2IpJ70Tg3duQGej4FKsVifOTFCA77M4p+3UgerGYLpIfWZZkzheaVe/ENTf2glynvPdIvx
-	TRTi2M87b+V+o//oH3wNdpaVpQX9hXCul+PI0lYy2QKT1PaCbi/ynDhv+5Tfsk0d5iEWFKz
-	aZOa8NsITHC8eg4jAz//AdYPVJTkBPbck9zF5A5ItSezlLhFTkckXhniKNBvOlM5pt6PnL7
-	t0rst3YTpyYV3lyDZ59NFdEUxXm4Z/vhuN6y38GwluKg7aVVenBAzqAWmRgGpd1l+kCoZF9
-	c82bZfbwPepVxkGK1isNcj1JADjfCs0pBj5UkG8CCMCZsrpwzo71IKfYhbYiGvkkymQD3j1
-	AHBXMORoCuTIZeTnXW7l9FgGHbZFJqt9z/I5V06vkjLv9q9QR0Vx2ubJMqiVQRmbBc+u8ur
-	6FCIPw+Vqo2IoL2YZDGrMzQvLIhqMqzr1qUghvRNeXkSzBfx74lzsROUSIPLmRHEUJcdrQa
-	ru0ZjhkR0IC60wNE3LmaKcAjke76aSfeqRI0qN3Zfm39vBmE1lCOTe2o0+dOx2AmzCtfQH8
-	CNjuK989C7ob0ft7yg9gCHw1KPHc1Aa3wFKbkeZk/zC3XsBESawyyYrErH0DabAUOW5YFxB
-	hIJ3IibatZmUYqUmIgfPBjqu1MWGgX4ehdi/uaMKhDEVwHpM0bPyKESp8nVQXKfiyJwEZOw
-	1Udy4JkUVXFr+7m4kSm4P2M52LTooUoLAYiPh0rTs+HjUSyTv7w6V5zZ/uQD/NtMJXBp345
-	BoTvz0z6UWb
-X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
-X-QQ-RECHKSPAM: 0
+Subject: Re: [PATCH 1/5] dt-bindings: arm: qcom: Document Microsoft Surface
+ Laptop 8th Edition
+To: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Maximilian Luz
+ <luzmaximilian@gmail.com>,
+        Hans de Goede <hansg@kernel.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Douglas Anderson <dianders@chromium.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        dri-devel@lists.freedesktop.org
+References: <20261006-mahua-surface-laptop-v1-0-406fc042162a@oss.qualcomm.com>
+ <20261006-mahua-surface-laptop-v1-1-406fc042162a@oss.qualcomm.com>
+ <245e5eef-e18a-4ec5-b57c-65e561101351@oss.qualcomm.com>
+ <52adff3a-370c-4445-9797-e0b0dde36fab@oss.qualcomm.com>
+ <5568fd0f-e412-4f2a-9f1e-729a469da572@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <5568fd0f-e412-4f2a-9f1e-729a469da572@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: aKwSdnvDlElFkvv7ihGwintdNvz0D2LK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX+sKZ0kc3zPku
+ CIZc2xrMn0u6nslmkB7cn6OpLgOk/Z0nRVDfO4RwEMTrHWmHkjCzQo+LpBB0VPahPi3PKwZmdoD
+ U0uraoWuWXAWXmgSuOiyftSvf0n/kDqlJOm/0hFa/jK1U68GjHEck2lWHwrNgX2ewmvaIMxD6Or
+ StdY8yyjoHXfsnLYEF1qIFiH6bxrO7WvnU0i4ady/pYfmPs7QQqK8Zhk14mzzeFCoXlMsLs1n7K
+ xJ2Ft3iBsdGRwA76581oHzTQcpDRNxKfgDLHAqptM0jOXNnc/mfJvrrXHlSQRRTvffQlyamfdhM
+ +lzsYQGq4xMK3vjJeNVRtdKGcj6pYiwvvEXb+Ag3xK1pBbXtx6YJBOEmHe/9upmP7acsfZDq38z
+ ZwBDcZaDphbH/dK/RtYBMPdeGMq2lQYGzrayYNdviY4kib/nVq0kx7nshjeH2OAIXQc1dpOCirc
+ idlCdARKOgaslpWr7Kg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA1MyBTYWx0ZWRfX3GNvvlCjoZdV
+ T5fEEjSm1w0wlEIAzLtSnnrC/gJ9rVuCEbspbB7p0XzcQrXm2L7F/6rUKhaXQbD40xwA4jkj7tN
+ pzILQQpckYTpvyG1XxiYZbvhLm6UxdY=
+X-Authority-Analysis: v=2.4 cv=Eb5d0/mC c=1 sm=1 tr=0 ts=6ad0d5dc cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=8k6WQxmsAAAA:8 a=4wGxsJ_OTqgDEiZx6fMA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-ORIG-GUID: aKwSdnvDlElFkvv7ihGwintdNvz0D2LK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501
+ clxscore=1015 lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150053
 
-On 10/15/2026 8:18 PM, Konrad Dybcio wrote:
-> On 8/31/26 11:55 AM, Xilin Wu wrote:
->> Add the missing tlmm pinctrl states for the SC8280XP QUP engines so common
->> I2C, SPI and UART pinmux definitions are available from the SoC dtsi.
->> Populate all 24 engines using the SC8280XP lane-to-GPIO mapping, including
->> the non-linear QUP instances, and keep the mux function names aligned with
->> the driver-supported qup0..qup23 names.
+On 10/15/26 2:47 PM, Gopikrishna Garmidi wrote:
+> Hi Konrad,
 > 
-> [...]
-> 
->> +			qup_uart0_default: qup-uart0-default-state {
->> +				cts-pins {
->> +					pins = "gpio135";
->> +					function = "qup0";
->> +					bias-bus-hold;
->> +				};
->> +				rts-pins {
-> 
-> Please keep a \n between each subnode, there's a new tool in town
-> that will be very grumpy if you don't:
-> 
-> https://lore.kernel.org/linux-arm-msm/cover.1790892852.git.waqar.hameed@axis.com/
-> 
-> https://lore.kernel.org/linux-arm-msm/e869c2bb5005830c9ac1d4bf998696ffc4eed335.1790892852.git.waqar.hameed@axis.com/
+> On 10/13/2026 2:09 PM, Konrad Dybcio wrote:
+>> On 10/7/26 9:11 AM, Gopikrishna Garmidi wrote:
+>>>
+>>>
+>>> On 10/6/2026 3:20 PM, Gopikrishna Garmidi wrote:
+>>>> Document the Mahua-based Microsoft Surface Laptop 13.8" 8th Edition.
+>>>>
+>>>> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+>>>> ---
 
-Cool! Thanks for the pointers.
-
-> 
-> with that:
-> 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> Konrad
+[...]
 
 
--- 
-Best regards,
-Xilin Wu <sophon@radxa.com>
+> Thanks for checking. The only matches I see are in the MPTF thermal
+> package, which ships"883ROT13Inch.bin" and "883ROT15Inch.bin". Nothing
+> else mentions ROT.
+> 
+> I also checked all the ACPI tables but didn't find a codename there.
+> The tables are here:
+> 
+>   https://github.com/aarch64-laptops/build/pull/176
+> 
+> Following the Lenovo gen8 naming, would something like
+> "microsoft,surface-laptop-gen8-13p8in"
+> (mahua-microsoft-surface-laptop-gen8-13p8in.dts) work? I'm open to
+> whatever you and Krzysztof prefer.
+
+FWIW the "gen" naming comes directly from Lenovo's product name,
+i.e. if you go on lenovo.com it says "ThinkPad T14s Gen 7".
+
+Konrad
