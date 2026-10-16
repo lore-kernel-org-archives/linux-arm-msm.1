@@ -1,114 +1,112 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56F32445AF2
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 15:54:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C65943F4DDB;
+	Sun, 18 Oct 2026 17:44:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792338869; cv=none; b=fXABvBsIYMT5sF01FaHjQoE3ludHzZsPeKjE3Q6dk4RTtxlGN0Q1wDTYH/XkqmF7ZWT4++FFtkqBvxN6WpoiNgABuGdTv9FEyQxmtyfysbKNgSDclVBZ88cFSn2QfLadIZliHCR0tyMg8eHn/dRwPKj3nFtcfDsg472DpIg3qQY=
+	t=1792345456; cv=none; b=UdBay+TlS7QKTVLeZQWTh5UsxVx1ddYGjvvRr1akQTmAmQLbpdACY10rIoUSne6I/5b+Lb48xsbTmA/ue+dhhXz+9ocA+7UEqx5bVrGF1B134JMaV0/RHabAdlvcJl3Ge1npvGasI/Kwt8NJQki+z3XtYGk/EONAZaowbFj/LG0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792338869; c=relaxed/simple;
-	bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YVUcF7+geKNU3dG8RrZUQsRzibqxsv+9+Mq4etdimwFUg7mn6LCe+woX3hmjrP//Zt+HI5D6uTCeU7e8zjiqaZrkscbljl0DgrVQ5XzxKMPDBrmSQndElUt8e0zWhXecf2+AfEI7hJidom7RRFSYM3KDnYIF3S7yFTCaQ71wbWY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aUa7ebE7; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792345456; c=relaxed/simple;
+	bh=HTgBam/57cwFDyFC9raY1HwslZ/Y36gSS6pch6RineI=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=KYI5PlrGwXDFkkcot+uEYWps3qeq6Mus5nTVEHiSusKGrbAPSdfB8OoKv+CcN8S52mO1lMW2unnahA822g6kQQN0VGQfDAY7mvvpwMCCmj8U6HYaNQD7RMkRX23DNVIAX58svRW8EOYwHySZIgw6DBmhWafRsVxZH5e+nIbF9IU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SIA+fjgY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aUa7ebE7"
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a1dede3c2cso12010775e9.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 08:54:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792338866; x=1792943666; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
-        b=aUa7ebE73UwZVE4PgjDEGUbVxjNzSBL7rA/IBW+retNCeKe4sogMYJ2jIlON+gxWp7
-         2cmBMPFiR9o9QFDyQx2YRh8ueS9mfomjs561Iiry2zkfGnRiJQSPyvQhHBZCLMHSF/vy
-         htZSZM8PYMj9kNw8SDHXwrkVcOJn8SWjwPDexl9QYm4piY7MArp7cVQccnsuhp02cbs6
-         NI5tmn7KUTg9bn5hzAa4VYfmGkjXKoRKkgqpxeUBwjPTIGsgpq8wMJgyG9g7x1rPk8B/
-         d8jHFBbYeWgIMt1QlTYMXtt0hIUVGPm8S7Ld/T+GE4YMZdc4P42ubuQybTkxHjRghxZy
-         cclQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792338866; x=1792943666;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
-        b=TCo0ZonU+sQVhsrdK1yXPHhJvPEKb9gSRnCIfBR6eWl88Zzt0u9Hlwf5Il+XBZMP6y
-         BxN+XSD8LUJ/M0ytBo6kO9a/oUxX0Ty6jiLrJe8FZuZ1aNcJheugtewrVLv1jDR5OZu2
-         +cqQZqwt1KfB2tjTWHef8TfUWgTSKkVz7pnnqa52i2frm5F750mKJ5b9WOLO8nttBvM1
-         J5MWSylL7ekKshbz2Ap3xZkRrN2PKS4f+7JNK1OhMSLlW6r3v2gIP3sVUQwbgE3qL8Wn
-         wZlSZkBJ9LKpBGbgD9dyPjUh9oH8Gn74i/AFiRd7JyNHGqooBX8DsMbvWEE+zss3u/kr
-         7H0g==
-X-Forwarded-Encrypted: i=1; AKwUvBz89j5vMCS7N5qJnhrlAbnfe9xp0e8hFaLpJOtwdSxA1WDI0PwkBwe3WMgxVZru/SuPRPuOYGUS6PTXgluJ@vger.kernel.org
-X-Gm-Message-State: AFq9FYJWsfJEthOWsFdBtBbbtDPBYOn23afbkEN+WCa+Z3DSNqGcFUhM
-	dHodi/75yWegtRvkttkqEwnPLz2OmJlUYleRk9Whjec/ymokL/tyeej/
-X-Gm-Gg: AYBFou2PGJaeqjrT3YTMDpowRE77QGw9leZhjnF3izXHsbF9+jYyZLGIVNWMtnDohq8
-	EMlmoZSnWzNje9em8Vi1+MBWWT2/2Setpe+0Z48hLaN5OTgjnmHj0Pely+o7Y/Iclpqzl30MGv8
-	1vVHXlGdvWehdh9sMBoQ2wh18yimvCvZDM+JBazyq3MMn5C4CcXlseusEJDHTmIL9WWEhbuwc5q
-	HiZC/numy9F0+CtvVQobamah4U576QTNjqofJLA4YFa7dYLZsA+20J/UYQqLbaiA25MxgnGNpoS
-	4hZV6eYI635BhLt9KNgh0oYS4q2/pvqqkFfNpey9Lwg950B4ehUYCYglHs0Fr1Fi6RSDa9zOVCl
-	Ak1IG7YKbDne7QPpUIcO7eMK4ca9VvAwWdGJU+LhslBnn65jkd/jwv3vq70TC+wegX2wD/4Y1AA
-	U0wFQywm7Vrp2hNQBAGTiuN1niV8G4FSGG7Ei/am37U+tWGIolGCu7/+UZ/PgBhApFHndnpqgXt
-	MiQ6pZxogNe11Qu1C1wN/6vXQ5LN3gJtH3ZTiqN7oY308yOJouvaDFzabdzI79gNIWswFymba6w
-	/V+vFr47oS0dIscmZefDZw==
-X-Received: by 2002:a05:600c:3b1e:b0:49f:fdca:c361 with SMTP id 5b1f17b1804b1-4a1d75f9341mr124952765e9.12.1792338866523;
-        Sun, 18 Oct 2026 08:54:26 -0700 (PDT)
-Received: from hermes-agent.lan (228.red-80-29-82.staticip.rima-tde.net. [80.29.82.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1c8af2fcesm227892415e9.8.2026.10.18.08.54.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 08:54:26 -0700 (PDT)
-From: =?UTF-8?q?Ram=C3=B3n=20Jes=C3=BAs=20Miranda?= <ramonjesusmiranda@gmail.com>
-To: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-Cc: Sudeep Holla <sudeep.holla@kernel.org>,
-	Cristian Marussi <cristian.marussi@arm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-	Amir Vajid <amir.vajid@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	arm-scmi@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH RFC 0/10] firmware: arm_scmi: vendors: Qualcomm Generic Vendor Extensions
-Date: Sun, 18 Oct 2026 15:54:25 +0000
-Message-ID: <20261018155425.1299660-1-ramonjesusmiranda@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
-References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SIA+fjgY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 575CF1F000C4;
+	Sun, 18 Oct 2026 17:43:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792345454;
+	bh=4gfnIScozc18XM8zitveza+3VRuR3POnpsiN1zhL9F4=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=SIA+fjgYvDk1MgBwz9nOjF9y0h174BUSLCt3E85aH9M9nEAFM3MMZH0Q+i3p88RKD
+	 SR1TzNlX7G8S/kSKs6zngO1dBrmeM6odtVFjyxk2lopGmdtOtAHBkz8AFZqMiE/14M
+	 VpA0A1u1kWAlkLuJh+dqb3iT2CS9P86A9bA6KgLJBpwGfU4ha4Lcy+d8FHSTw8Vn/y
+	 VOoOHTa5HnMvJhd4Z9V4oknHUWuFaSx2gzcuKSRihXeIlpbcqHkod3W0mIqQ4BJ8SW
+	 UJXJzHf7MZW5xbelE93ORwVzUpK6lK1pO5O/5hGrDZUJSTF1COM5jORXQDGis575F/
+	 NtmDWiVZ3Coig==
+From: Mark Brown <broonie@kernel.org>
+To: Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>, 
+ Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Srinivas Kandagatla <srini@kernel.org>, 
+ Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
+ Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Cc: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+In-Reply-To: <20261009-nord-asoc-driver-support-v3-v3-0-0c1897f21ccf@oss.qualcomm.com>
+References: <20261009-nord-asoc-driver-support-v3-v3-0-0c1897f21ccf@oss.qualcomm.com>
+Subject: Re: [PATCH v3 0/7] ASoC: qcom: Add Nord audio support
+Message-Id: <179218547477.3162228.13366578492097805160.b4-ty@b4>
+Date: Fri, 16 Oct 2026 22:17:54 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2091; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=HTgBam/57cwFDyFC9raY1HwslZ/Y36gSS6pch6RineI=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLKusrq/E0qTYX7oyeK+3+pa4NIL784mhohEVAiov8iZr
+ uHy4FFiRykLgxgXg6yYIktcFvfL+pLXa/gOLmyDmcPKBDKEgYtTACYi3crIcEFygWPVaUfXl7bc
+ kr63m+W7Ws+5pHCsXXK2d6tmndmBpwz/nWY+WXJNx+qIyGYHTqdFyc9fHmdVFTLaf/WBZ8tFvth
+ L/AA=
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Hi,
+On Fri, 09 Oct 2026 18:42:46 +0530, Mohammad Rafi Shaik wrote:
+> ASoC: qcom: Add Nord audio support
+> 
+> This series adds audio support for the Qualcomm Nord Ride and
+> RRD boards and includes the required machine driver, device tree
+> binding updates, and codec improvements needed for the board's
+> external audio codec configuration.
+> 
+> [...]
 
-I tested patches 1-9 of this series on a Microsoft Surface Pro 11
-(X1E80100, "hamoa"), on top of 7.2.8 with Linux booted at EL2.
+Applied to
 
-Without memlat the CPU never raises DDR/LLCC: the cpu-bwmon instances
-stay at their lowest vote (4.8 GB/s) under full load. STREAM triad with
-12 threads gives 38 GB/s at EL2 and 41 GB/s under Gunyah at EL1. With
-the series it reaches 67 GB/s; the ddr/llcc devfreq devices go back to
-547/300 MHz when idle. llama.cpp on the CPU (Qwen3-8B Q4_0) goes from
-7 to 21 tokens/s of generation.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
 
-s2idle is not affected: CXSD + AOSD + DDR stay in their low power modes
-for 99.9% of an 880 s suspend.
+Thanks!
 
-One thing I noticed: the protocol 0x80 module (qcom-generic-ext) does
-not get autoloaded from the protocol@80 node here, so I load it and
-scmi-qcom-memlat-devfreq from a service at boot.
+[1/7] ASoC: dt-bindings: ti,pcm1681: Document the optional SCK clock
+      https://git.kernel.org/broonie/sound/c/8855a9319c18
+[2/7] ASoC: codec: pcm1681: Add optional SCK clock and runtime PM support
+      https://git.kernel.org/broonie/sound/c/8987e9a24f45
+[3/7] ASoC: codec: pcm1681: Add TDM support
+      https://git.kernel.org/broonie/sound/c/a93f77e4187f
+[4/7] ASoC: dt-bindings: ti,pcm1681: Document the PCM1681 supplies
+      https://git.kernel.org/broonie/sound/c/f5f5bfcecf65
+[5/7] ASoC: codec: pcm1681: Enable the PCM1681 supplies
+      https://git.kernel.org/broonie/sound/c/3b953d0e72a1
+[6/7] ASoC: dt-bindings: qcom,sm8250: Add Nord sound card
+      https://git.kernel.org/broonie/sound/c/22a72cf1d60c
+[7/7] ASoC: qcom: sc8280xp: Add Nord sound card support
+      https://git.kernel.org/broonie/sound/c/6e539c02b04b
 
-Tested-by: Ramón Jesús Miranda <ramonjesusmiranda@gmail.com>
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
 Thanks,
-Ramón
+Mark
+
