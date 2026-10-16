@@ -1,88 +1,88 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4718745EF5B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22ED93BB12D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792191659; cv=none; b=qd6WWShQ8VSjUZ1kP4u2thlLYgUOiH2p6q5FW7LB2iquDbvpTETLLpD58Rwu3iYOZKUSDKX4JAlLpuhRAiGMSeAPHtB8T0QNM81VszfdFrkrARFn1ce5PvXJWYoKo26EUhC+ONR8jo7AfU0sgmRSynrUnC9fhnpmeIHsIFF66JY=
+	t=1792191661; cv=none; b=YCMXcAy4nUKgnZV/Nl71c2r98d1a8/gCqJcLfKC1NktguUhLXzr4lkMg/tQsW60Lwghvl8pj1PGJ/Nd0P68HCzR06RMNNN5Oz7DJa/70o8T8dqZwibwQoTlo0uVn9cWFX7iXAv4Z/QXuC7viGYywFfW82fA6/Hhm2rHrj3TAIrc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792191659; c=relaxed/simple;
-	bh=8cliKGujAsEvjvsrbUuExzfZuUK3fVzZza838R+xj44=;
+	s=arc-20240116; t=1792191661; c=relaxed/simple;
+	bh=wyc/gDvdVylTVh/DJplDeByFRAMVZ5kCTDl+3ybDrvI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=KFz4oMgTjz4cmUpcWVLeGfHM+iimaRjpfoNImNzzXshzLdX69VzIqnsFJEnw8HZDMQajXgFdeuo11XzSVfUr7Vl9KDAsiSg1SlrYXy6TqulrnmqsTBw3Ez0crZtOv3SH1fFQx871ZM6rrHVzYuWJi1aEFsy+Od/naeG8vmZqDOU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mbSpk3So; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UabA43N9; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=atmmZjVLKs0qN+VGUVngLccoTltE6P0hUi+h+ErVwjXtdF7nPvSFEi8kOzvGBqlbcA4Qa5wRDU61YmKof+rzPE6w/tQhGkwdHZpQKOI0Ge4o2FuODLl6+sxFTSeSYerSvwkUPI0Yfn5nkraHlm8SEyAGuY1xV9YTmB9SJcPh994=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LCH17X7R; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bG7xg/V1; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mbSpk3So";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UabA43N9"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LCH17X7R";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bG7xg/V1"
 Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GJeX152873543
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:55 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GJeXQb2873531
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nkyE659lzmHmkedIaFTPtXRPbQd0UeH/8KjUFYs797g=; b=mbSpk3Soqa/aD+d3
-	aulHpIgrBsgRWbHsqxuDvfexfRDzJqHnz9s5BcIUMsD4XACpmxytuQM8P/04Fc6x
-	CrY5tLNjqiOkRgXUJhRisCkQdR4L1hSLrBa0UnCRdLYs7rOSYmzuFuiMI6EYTvdI
-	tAeIla5Yrq3z8EINdAtEWnKrLT6P8KJ0sA8x/iKsAEXydlnjXwQO4L5YVzWtaVbC
-	CpR5EDmDh70SnuZyf2Fad8tsfPwf8VtraG7AVTGzvSreGqoHk3pk2ng17fctH7EK
-	Am50nV6Eqd9C3fOJFFzI6KX5Wl25Cj0hEkf/HFQHcHzHa5oCebSAVyzd4uMthArm
-	I/Zf+Q==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhumtnm0-1
+	IdPQaK1IkxsirGKxXTDIUcBt2ycmBMVNDLInrZiqFKQ=; b=LCH17X7RXzrJsmvD
+	mSs70U0PvObfhuOvQlSRuv+ZptozawHd3iR+PXhE9Lm1TJLYzB3RdQ2yAA4zBwMt
+	ksy3R2mu7Y7B+qc6SDlOgHJyMNuK943K8RI41aVEpKBr6wgoRYX/M2KjpECbvyxB
+	Pi4iVbZQ8Tl8qGupphKxy7fSDgFRlQ4GCJNrBcpUlcxjzMAfRlGFBYV+cZiLQ75m
+	KjAg3fE59unCTw7WOY7S2BL1m7pooAzE6/IFcEQpUtOArrk6qRSZTCZEysrVubUW
+	hLz41bEF3Mj3/Hm27IOfFtHcgkl12giR1CECbW9+NZQuIKywxAzETXrVyNsfSPWb
+	NErHIg==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhumtnm5-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:55 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-35ce0b61b43so33402eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 16:00:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:57 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-35c813a2e14so34965eec.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 16:00:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792191654; x=1792796454; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792191657; x=1792796457; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nkyE659lzmHmkedIaFTPtXRPbQd0UeH/8KjUFYs797g=;
-        b=UabA43N9NLzfCxYUyPvgzmuFpOmPmmMdvl5XTdEKpBxtO6CKb91UoVRvlfMkAcVFKs
-         H8dvkAP6japGw5SkF9cXiY6wdYEqA4rQf/GRLqnwJaEhFcHNFyIOrnj/xbh/QDzeN1S5
-         oeS3u1fk78LNmAEpmo8CTNM7OkWaxqS1YbwKsf/Hm3c4FulUIq8R+6WGd0uQ3FTQCah9
-         MIjaxnoexELcTU5BESw1gyTczcOkQvkUkmPE/7nnmIRYagP6lYerJtdqOxyHuBeNUQ60
-         8g1BHiNOxINhFAfnc+CoKhDGAWlB4EnIyDo5P4pnBkcKfm+ki0ou3mQZZFi6L0RxhMDI
-         nUAw==
+        bh=IdPQaK1IkxsirGKxXTDIUcBt2ycmBMVNDLInrZiqFKQ=;
+        b=bG7xg/V1F3soE1KVzKnsN4Tssvz3LTsSgKzFXdcLyOQ3R8l9VHURt1G4qqUFX8N56c
+         g6qB5iaN+IECI7iFnAML+mt5sUHuj8doKfuXo7XvCF+1wsCRFjV7R0ig5EEsmxIQZLim
+         5dTgsj9mPZWdpjgqrjUgq6uPvwNf/vq5K3eb6g/tdSD7ZCNufjttv8Tkwl2Y7qBrVHxF
+         bHfeEOTCY5Yu7oQagqIZuX+uN/VDapQ1KYeRiwn3jguk765Phf3CueRqFNeUMj94FgqZ
+         xUB1jAwx+Mue+Gdw9VVNBvZUG4yqexUn9qJ3t3GiZD4OrSz5bjh1qf8PMvPXV7SqlHb2
+         3NAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792191654; x=1792796454;
+        d=1e100.net; s=20260707; t=1792191657; x=1792796457;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nkyE659lzmHmkedIaFTPtXRPbQd0UeH/8KjUFYs797g=;
-        b=xstR0UYWiXJ8Z9Wa4TC+mhTm+fOgPcAekHShFyIaoRKo1SWmCRpGHkhGycw5WnUviX
-         tMI8JCCGaFIropiDhg9PpMrB7f52Si72I+g2kTiP326coaCO723ftElVxlAITUaNbbwN
-         +UFsKJHYL6zqFoQAi5d7jPRpyy2GBrT88d4uy549WB3LKIjJYkSzRRW81jBsVD9YEsYh
-         ZqEVt1IpCSqAmfqlGraI92W0TFxlmp2Pb+IvJMx2MWwYRPhUJwH7SmwmeZGahX9Alroc
-         sPUSzuKCunHvEkMuikyf/UtafUew3zKfDRk15XrtVr6ClqiUNrZHfjeL7vqTr7clw7Jo
-         sHDA==
-X-Forwarded-Encrypted: i=1; AKwUvBwV+HRJo/RU5JnjeHBI5T0w30sYgA14yfXh1mhPi2I20/OBOVFspOjLCKPRJF1vZTLTEqUusOCr35SN/4On@vger.kernel.org
-X-Gm-Message-State: AFq9FYLttbB06777f5+7GtJvaX42o1rjf546rLSQC0Sc97SgMdrx2r2Q
-	IBhfz+L2KSVqa/j5R+vjXA85GlPSR0BVL03zm/cbhsiiuoObN5dhTZLzo+twYC3r9Q5j7Bcp6pk
-	wPU00sGiOtiUVT3ZQfpX31ZlK4UQO8cESUiMyKk1ujZzBwZ6IFDXJoA1yEpGvXxqqNnhC
-X-Gm-Gg: AYBFou2qDfT0SNieOxHWQVvyADMXRnlTmDirNGCz3x+4sIr1mQUyzCGG5eGuvsaWezl
-	nrlw1EJIZz2N1+e8BpvmebHNTwI4XF8dZu+s3GW+1+73ifgnXnslFQrxa9L2r/EEB3sdnpDLfUS
-	OIEpua0/ezx6T1YRQ6UBPc9Q4KRqhjiesOAVjqH5Aq9+Z5HNvYGZwzjqfAqzvP6xuvGHtnRPN9e
-	NiYIHBgrYzh63kuhqo4CaUFDCYKjbxlrxA02Y2eJyLv287zGRln5v8DJstW0kj5DnJ05uXE/bmL
-	8Y79YzEzZ7oGVraq/rcLs9QKXudIICLOMsUCj2oqaI21p0aHsuNMjpcjECKH8y46mIUKPSXSW3w
-	0fcXUQKG5rAL/NWabdPU/P32SU4oQIubHR0mrnIVeMZDDjMYcwE9GQARZzTw=
-X-Received: by 2002:a05:693c:20d2:10b0:35f:8c5d:5938 with SMTP id 5a478bee46e88-3619ffc5b52mr2422546eec.1.1792191653830;
-        Fri, 16 Oct 2026 16:00:53 -0700 (PDT)
-X-Received: by 2002:a05:693c:20d2:10b0:35f:8c5d:5938 with SMTP id 5a478bee46e88-3619ffc5b52mr2422475eec.1.1792191652973;
-        Fri, 16 Oct 2026 16:00:52 -0700 (PDT)
+        bh=IdPQaK1IkxsirGKxXTDIUcBt2ycmBMVNDLInrZiqFKQ=;
+        b=rrW06q8UEZZxlJ7Xu2FXlFHCUKolasxqpn9sP31FVwV3jBVqFgLR0eSQqBnKmlkAk3
+         GvNJEtQ9RC1GmtwoH0f3llBOJfC8K/+yiNq+L6o0Qvk2V7IXoxDedSFzT7/qjmszhJyV
+         46MjWeRklJxhrH2BiVt9Tr8NJbKFlyL4MpxhMw0dP6x3dVqTnm0uIYzQxcbyr7hHQx+K
+         UnR0RE45y2mtMiNPEccCEyiBumw202bZ5ZZRnNdKsX/uhae2PRIu2yAcn+0uV8YIEKq4
+         GZxIQfPOCNYxUamQ2yRBviScLbo1MhD7mDA21c7niSB7tcbEpRYRtmWlApiVNhus8FxV
+         Tk6w==
+X-Forwarded-Encrypted: i=1; AKwUvBxvEWhUNcAy1FDyOJYR+y+JuLUklND/tU8gY/LISzN1ZMbdgklYecgIep20R1ww16pFhTj6XWSMWPUHNIPW@vger.kernel.org
+X-Gm-Message-State: AFq9FYLRsBgwsJOSSP2ByZ0SbJXfAWR3XSfxbAMzHZ3q0ktDQbOAO49+
+	3cvpHgUKZ8bTZVnIuGCzE4zjw2oa2Kltt4RBzEBEWdKawvbOoU96Ac5s8rniz0m4+5WOoRMAu1c
+	vMRRYj4+1GCKJzgBV0VYdtBh8Kqbsgn1Ukoy1WRTWGGm9EY9q0G2zJrHIvQErygwQKLI0
+X-Gm-Gg: AYBFou0rWcSKTnDQ+wMIdU9W7G/LealHJLjKNQ8IR4boYg1QN2ZkVBHR6NAXc8Wb1mQ
+	jWG9fuFuxErshXW8QAiThi97dboVOpI86tfxjg7qeGs606Xja96XfywvOjaMKQBZq87Qdp5kWDE
+	ZjRbOAgcJ1Ih3L+zbZkElnUUU5vDP04rTx/jssjovYOli/AGGOh06fdgGgVZ7uyrZfyla+0hUR9
+	lPfHLdC09BNqvJ/sWZAoUDbjg1tECxRydxqnjwm8kuxIbTF1CdxKfg+qlwJAr8kxvNRvuAE+97y
+	CfvOpthxSP+UmKMgTebSd+RJbm8MnWsAjsFjMpq7rgnXrVQvQNS5VZSt3pFCWzuWUqOwU3qWUpN
+	soFwDguXSNW9mPI/xy8lw4nNoU/O/gOttly3tQSLTg5OHRlINByXu71MOlNk=
+X-Received: by 2002:a05:7301:da84:b0:351:7e15:9c59 with SMTP id 5a478bee46e88-3619b30919emr2408946eec.0.1792191656840;
+        Fri, 16 Oct 2026 16:00:56 -0700 (PDT)
+X-Received: by 2002:a05:7301:da84:b0:351:7e15:9c59 with SMTP id 5a478bee46e88-3619b30919emr2408889eec.0.1792191656159;
+        Fri, 16 Oct 2026 16:00:56 -0700 (PDT)
 Received: from gu-dmadival-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360820a79c7sm9379101eec.18.2026.10.16.16.00.52
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360820a79c7sm9379101eec.18.2026.10.16.16.00.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 16:00:52 -0700 (PDT)
+        Fri, 16 Oct 2026 16:00:55 -0700 (PDT)
 From: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 16:00:34 -0700
-Subject: [PATCH v10 3/5] media: iris: Add ROI delta QP control support for
- HFI Gen2 encoders
+Date: Fri, 16 Oct 2026 16:00:36 -0700
+Subject: [PATCH v10 5/5] media: iris: Add BUF_ROIMB_DELTAQP metadata buffer
+ for ROI delta QP
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-enc_roi_enable-v10-3-bc5bd37b6f3e@oss.qualcomm.com>
+Message-Id: <20261016-enc_roi_enable-v10-5-bc5bd37b6f3e@oss.qualcomm.com>
 References: <20261016-enc_roi_enable-v10-0-bc5bd37b6f3e@oss.qualcomm.com>
 In-Reply-To: <20261016-enc_roi_enable-v10-0-bc5bd37b6f3e@oss.qualcomm.com>
 To: Mauro Carvalho Chehab <mchehab@kernel.org>,
@@ -105,32 +105,32 @@ Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
         kernel test robot <lkp@intel.com>,
         Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792191637; l=7490;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792191637; l=13526;
  i=deepa.madivalara@oss.qualcomm.com; s=20250814; h=from:subject:message-id;
- bh=8cliKGujAsEvjvsrbUuExzfZuUK3fVzZza838R+xj44=;
- b=xzHwEwdOCMoY8YdH56u/jhRsna4yG9yh8itbo5irs7oA6u8u0P8hJMX5GLOnqfd96zls9p5K8
- qCfq9at9+12DF31kqVWE3JgtRV8k1XBMojKVANul8dDiQ2U6DyBYOWY
+ bh=wyc/gDvdVylTVh/DJplDeByFRAMVZ5kCTDl+3ybDrvI=;
+ b=j4pKd2LVKFx2f79XAsrcqkb1/+r5DbNG8ynh8C0tV/xp2AjUiOn/Eb9OJXRD0c7lKxBmSMxTx
+ Xk2neQr9ExRB/1nDnCb6ooTxwJpsG47y9qOQw9Lx1ro/4C2HdMxhFlv
 X-Developer-Key: i=deepa.madivalara@oss.qualcomm.com; a=ed25519;
  pk=MOEXgyokievn+bgpHdS6Ixh/KQYyS90z2mqIbQ822FQ=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfX/nWWA5apATMj
- +Qfq5c5Mr6AlE61pLiDtp3wH/7BOO64AbhWAj+EHYNUiPmRwLTlWnZDTmR2FUMaiSyhdUuzmfP3
- j7V4lFcwBUumv7ckAThKdUetNwfiwpA=
-X-Authority-Analysis: v=2.4 cv=H+BOUOYi c=1 sm=1 tr=0 ts=6ad2aca7 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfX+YB/b1//ewFG
+ DO/p89qkyI510VUx63V2sgaH5c89rsOUBYB2j57Ft8QIJ5ynUfhYUjWUAy1XtfxdCU4HnGQ9Kzz
+ AxBYhuSMUIGDKMeBzxxJ9zcxzre5GIM=
+X-Authority-Analysis: v=2.4 cv=H+BOUOYi c=1 sm=1 tr=0 ts=6ad2aca9 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=uxVkaJQCnwIzyWVbueAA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: 8q3BJ7CFirYheqe7QwofrCtheXAJyKmg
-X-Proofpoint-ORIG-GUID: 8q3BJ7CFirYheqe7QwofrCtheXAJyKmg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfX0kpGboHtn/Go
- QVQo38M4bUje+EfNi/AS3jd7wHTCBPz38XS1tIiTtQVwf6oMDOy4J3iqAJOsK6kmbe498BaVQGh
- 7riw1cTcnVaAPBYcNoLC6kR0xcudWPo5MzZkz6yqWO3wZeMgcylcn5gQnjzj8AkaPdNfzsZZx8N
- jxuv83LcuBsiVpIOQxEKOdYNWOeb/TPhVO3U6B6X2RWXHmCqXj/oqpRhXh7o4g5GD0HSuXkmT5M
- XIGh1depD0xCcFd4woSn74T8DUClmoOslzX7Q6Kum3/JZb0baintiZZ0riDY3/uH2ZKdR0CFBFN
- 2lQDUKJKgY7xoxj06WhqPABR34rYrhg03sKbDvWR8BpgkHcVFsGVM16Y6D4SsqjZB1vgWsas8Tp
- bWqDWtnzXrxQxoZlETSF2V2SL9Nlba+uJM3Dh1fKg+K83C79l/IKvEnxIOoLccgUJCkRmI5FICl
- Bn0Nd3ORNwcJrWx9bTQ==
+ a=EUspDBNiAAAA:8 a=s8F71vpxD9iY_bj2qIcA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-GUID: yAxltcdBhwqakUdCL7JcvohiSRQdwylX
+X-Proofpoint-ORIG-GUID: yAxltcdBhwqakUdCL7JcvohiSRQdwylX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfXwaAj8LyBKUp1
+ JcsA2euTblYqs06GVkuOU1ImoLyP88cTFYdEVs+uFru5zIAYVuPW+Y/+KMBfz3x8Cm2g5oZWQg9
+ wWsdXoh2vbKTx6DWUfWeK55/Pga7+/kMk9900eXPRmBZoGYA39qAOHi6KKPw17QnCxk5RC9+wIt
+ 6GKjGgJ7WPmY9YRKsYQDsMFlwTnZBZnuK3Sz2ZEcSoAkv1F2IEpGlZk6KUXkkkd5Ai+etpdJlaK
+ HPccyitsomtXwKx0ngM1iny+1sEYdMkyd0Idr3cuBRbVJFiZzE4cuAbCLyiRyHRnQRxwIjeqSLi
+ p9XxXLeaiII3xIvZ+HY1jk633Hk82G8rTtEeL8v00YTfy/Hc801xpy768pwVxa8WXoJPDSE9i75
+ Wh8NektmdB8j6oBOltQjhbC4x+w4egz/kqZDoOAntlJFEVI0v+xGgSiE0Gmu7C3+7lV59Ll756n
+ C/Fr5I3fAquoCJcT8Wg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-16_03,2026-10-14_01,2025-10-01_01
@@ -140,212 +140,347 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160091
 
-Add ROI support to the Iris encoder driver for HFI Gen2 based targets.
+- Introduce BUF_ROIMB_DELTAQP as a new internal buffer type to carry
+  per-macroblock ROI delta QP data to the firmware. This buffer is
+  allocated on demand when the application sets ROI parameters via
+  V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP, and is queued alongside each
+  raw input buffer as an HFI_BUFFER_METADATA packet on HFI_PORT_RAW.
 
-- Add control infrastructure, ROI_PARAMS and MB_SIZE capability IDs to
-  platform_inst_fw_cap_type. Extend struct platform_inst_fw_cap with
-  p_array and elems fields to hold a pointer to the per-frame
-  delta QP array and its element count, set during s_ctrl.
-- Register V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP as a dynamic S8
-  array control (max dims = 139264 entries, supporting resolution of
-  8192x4352 at 16x16 MB granularity).
-  Register V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE as a read-only U8
-  control; g_volatile_ctrl returns 32 for HEVC and 16 for H.264.
-- Define HFI_PROP_ROI_INFO and hook ROI_PARAMS to iris_set_roi_params().
+- The metadata buffer layout follows the firmware-defined metabuf_header
+  and metapayload_header structures. The s8 per-MB delta QP values
+  supplied by userspace are widened to s16 as required by the firmware.
 
 Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/iris/iris_ctrls.c      | 70 +++++++++++++++++++++-
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 13 ++++
- .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  1 +
- .../platform/qcom/iris/iris_platform_common.h      |  5 ++
- 4 files changed, 88 insertions(+), 1 deletion(-)
+ drivers/media/platform/qcom/iris/iris_buffer.c     | 115 +++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_buffer.h     |   4 +
+ drivers/media/platform/qcom/iris/iris_ctrls.c      |  28 +++++
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |   1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   |   1 +
+ .../platform/qcom/iris/iris_hfi_gen2_command.c     |  24 +++++
+ .../platform/qcom/iris/iris_hfi_gen2_response.c    |   2 +
+ drivers/media/platform/qcom/iris/iris_vidc.c       |   2 +
+ 8 files changed, 177 insertions(+)
 
-diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-index 4f2633bbb49f81f080ffbe91569d38e954ad15a1..d97fe50d48860b0f26b71d328a704f3804b1d93d 100644
---- a/drivers/media/platform/qcom/iris/iris_ctrls.c
-+++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-@@ -163,6 +163,10 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
- 		return SLICE_MAX_BYTES;
- 	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB:
- 		return SLICE_MAX_MB;
-+	case V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP:
-+		return ROI_PARAMS;
-+	case V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE:
-+		return MB_SIZE;
- 	default:
- 		return INST_FW_CAP_MAX;
- 	}
-@@ -314,6 +318,10 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
- 		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES;
- 	case SLICE_MAX_MB:
- 		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB;
-+	case ROI_PARAMS:
-+		return V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP;
-+	case MB_SIZE:
-+		return V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE;
- 	default:
- 		return 0;
- 	}
-@@ -340,6 +348,14 @@ static int iris_op_s_ctrl(struct v4l2_ctrl *ctrl)
+diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
+index eb8de60c1177f5e1ab83b90a3c8c80e0b4d1f02e..fa73c382082443b90fbcce4fb955760416331380 100644
+--- a/drivers/media/platform/qcom/iris/iris_buffer.c
++++ b/drivers/media/platform/qcom/iris/iris_buffer.c
+@@ -5,11 +5,13 @@
  
- 	inst->fw_caps[cap_id].value = ctrl->val;
+ #include <media/v4l2-event.h>
+ #include <media/v4l2-mem2mem.h>
++#include <linux/slab.h>
  
-+	if (inst->fw_caps[cap_id].flags & CAP_FLAG_CUSTOM) {
-+		if (cap_id == ROI_PARAMS) {
-+			inst->fw_caps[cap_id].p_array =
-+				(const void *)ctrl->p_new.p;
-+			inst->fw_caps[cap_id].elems = ctrl->new_elems;
-+		}
-+	}
-+
- 	if (vb2_is_streaming(q)) {
- 		if (cap[cap_id].set)
- 			cap[cap_id].set(inst, cap_id);
-@@ -348,8 +364,53 @@ static int iris_op_s_ctrl(struct v4l2_ctrl *ctrl)
- 	return 0;
+ #include "iris_buffer.h"
+ #include "iris_instance.h"
+ #include "iris_power.h"
+ #include "iris_vpu_buffer.h"
++#include "iris_hfi_gen2_defines.h"
+ 
+ #define PIXELS_4K 4096
+ #define MAX_WIDTH 4096
+@@ -705,6 +707,20 @@ int iris_destroy_dequeued_internal_buffers(struct iris_inst *inst, u32 plane)
+ 	return iris_destroy_internal_buffers(inst, plane, false);
  }
  
-+static int iris_get_roi_mb_size(struct iris_inst *inst)
++int iris_destroy_roi_metadata_buffers(struct iris_inst *inst)
 +{
-+	return inst->codec == V4L2_PIX_FMT_HEVC ? 32 : 16;
-+}
++	struct iris_buffer *buf, *next;
++	struct iris_buffers *buffers;
 +
-+static int iris_op_g_ctrl(struct v4l2_ctrl *ctrl)
-+{
-+	struct iris_inst *inst = container_of(ctrl->handler, struct iris_inst, ctrl_handler);
-+	enum platform_inst_fw_cap_type cap_id;
-+
-+	cap_id = iris_get_cap_id(ctrl->id);
-+	if (!iris_valid_cap_id(cap_id))
-+		return -EINVAL;
-+
-+	if (cap_id == MB_SIZE)
-+		ctrl->val = iris_get_roi_mb_size(inst);
++	if (inst->domain == ENCODER) {
++		buffers = &inst->buffers[BUF_ROIMB_DELTAQP];
++		list_for_each_entry_safe(buf, next, &buffers->list, list)
++			iris_destroy_internal_buffer(inst, buf);
++	}
 +
 +	return 0;
 +}
 +
- static const struct v4l2_ctrl_ops iris_ctrl_ops = {
- 	.s_ctrl = iris_op_s_ctrl,
-+	.g_volatile_ctrl = iris_op_g_ctrl,
-+};
+ static int iris_release_internal_buffers(struct iris_inst *inst,
+ 					 enum iris_buffer_type buffer_type)
+ {
+@@ -928,3 +944,102 @@ int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf)
+ 
+ 	return 0;
+ }
 +
-+static const struct v4l2_ctrl_config roi_mbqp_cfg = {
-+	.ops = &iris_ctrl_ops,
-+	.id = V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP,
-+	.name = "Enc Mb ROI Delta QP",
-+	.type = V4L2_CTRL_TYPE_S8,
-+	.dims = {139264}, /* Max MBPF = 8192 * 4352 / 256 */
-+	.min = -31,
-+	.max = 30,
-+	.def = 0,
-+	.step = 1,
-+	.flags = V4L2_CTRL_FLAG_DYNAMIC_ARRAY,
-+};
++static int iris_fill_roi_data(struct iris_inst *inst, struct iris_buffer *buffer)
++{
++	s8 *p_array = (s8 *)inst->fw_caps[ROI_PARAMS].p_array;
++	u32 payload_offset, lcu_width, lcu_height, row_size;
++	u32 array_size = inst->fw_caps[ROI_PARAMS].elems;
++	struct metabuf_header *mbuf_hdr = buffer->kvaddr;
++	struct metapayload_header *mbuf_payload_hdr;
++	struct v4l2_format *f = inst->fmt_src;
++	s16 *p_16, *p_temp;
 +
-+static const struct v4l2_ctrl_config roi_mbqp_size = {
-+	.ops = &iris_ctrl_ops,
-+	.id = V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE,
-+	.name = "ROI Mb size",
-+	.type = V4L2_CTRL_TYPE_U8,
-+	.min = 16,
-+	.max = 32,
-+	.def = 16,
-+	.step = 1,
++	memset(mbuf_hdr, 0, sizeof(struct metabuf_header) +
++		sizeof(struct metapayload_header));
++	mbuf_hdr->count = 1;
++	mbuf_hdr->size = sizeof(struct metabuf_header) +
++			 sizeof(struct metapayload_header);
++	mbuf_hdr->version = BIT(16);
++	mbuf_hdr++;
++	mbuf_payload_hdr = (struct metapayload_header *)(mbuf_hdr);
++	payload_offset = sizeof(struct metabuf_header) +
++			 sizeof(struct metapayload_header);
++
++	mbuf_payload_hdr->type = HFI_PROP_ROI_INFO;
++	mbuf_payload_hdr->version = BIT(16);
++	mbuf_payload_hdr->offset = ALIGN(payload_offset, 256);
++
++	if (inst->codec == V4L2_PIX_FMT_HEVC) {
++		lcu_width = DIV_ROUND_UP(inst->enc_raw_width, 32);
++		lcu_height = DIV_ROUND_UP(inst->enc_raw_height, 32);
++	} else {
++		lcu_width = DIV_ROUND_UP(inst->enc_raw_width, 16);
++		lcu_height = DIV_ROUND_UP(inst->enc_raw_height, 16);
++	}
++	/* Firmware expects each row to align to 8 LCU */
++	row_size = ALIGN(lcu_width, 8);
++	mbuf_payload_hdr->size = row_size * lcu_height * sizeof(s16) + 256;
++
++	if (array_size != (lcu_width * lcu_height))
++		return -EINVAL;
++
++	/* Firmware expects 2bytes of delta_Qp, int16_t */
++	p_16 = buffer->kvaddr + mbuf_payload_hdr->offset;
++	for (int j = 0; j < lcu_height; j++) {
++		p_temp = p_16 + j * row_size;
++		for (int i = 0; i < lcu_width; i++)
++			*p_temp++ = BIT(11) | ((p_array[j * lcu_width + i]
++						   & 0x3F) << 4);
++	}
++
++	return 0;
++}
++
++int iris_hfi_gen2_session_alloc_roi_metadata_buffer(struct iris_inst *inst)
++{
++	struct iris_buffers *buffers = &inst->buffers[BUF_ROIMB_DELTAQP];
++	struct iris_core *core = inst->core;
++	struct iris_buffer *buffer, *next;
++	bool found = false;
++	int ret = 0;
++
++	if (!buffers->size)
++		return 0;
++
++	list_for_each_entry_safe(buffer, next, &buffers->list, list) {
++		if (buffer->attr & BUF_ATTR_DEQUEUED) {
++			buffer->attr &= ~BUF_ATTR_DEQUEUED;
++			list_move(&buffer->list, &buffers->list);
++			found = true;
++			break;
++		}
++	}
++	if (!found) {
++		buffer = kzalloc_obj(*buffer);
++		if (!buffer)
++			return -ENOMEM;
++
++		INIT_LIST_HEAD(&buffer->list);
++		buffer->type = BUF_ROIMB_DELTAQP;
++		buffer->buffer_size = buffers->size;
++		buffer->dma_attrs = DMA_ATTR_WRITE_COMBINE;
++
++		buffer->kvaddr = dma_alloc_attrs(core->dev, buffer->buffer_size,
++						 &buffer->device_addr, GFP_KERNEL,
++						 buffer->dma_attrs);
++
++		if (!buffer->kvaddr) {
++			kfree(buffer);
++			return -ENOMEM;
++		}
++		list_add(&buffer->list, &buffers->list);
++	}
++
++	buffer = list_first_entry(&buffers->list, struct iris_buffer, list);
++	ret = iris_fill_roi_data(inst, buffer);
++	if (ret)
++		return ret;
++
++	return ret;
++}
+diff --git a/drivers/media/platform/qcom/iris/iris_buffer.h b/drivers/media/platform/qcom/iris/iris_buffer.h
+index ee2d24bb69c57220b0a735d9b4aae4434a33daf6..df9d018493f3ec37fd5e6b0ba049dba0b5ae76e9 100644
+--- a/drivers/media/platform/qcom/iris/iris_buffer.h
++++ b/drivers/media/platform/qcom/iris/iris_buffer.h
+@@ -28,6 +28,7 @@ struct iris_inst;
+  * @BUF_SCRATCH_2: buffer to store encoding context data for HW
+  * @BUF_VPSS: buffer to store VPSS context data for HW
+  * @BUF_PARTIAL: buffer for AV1 IBC data
++ * @BUF_ROIMB_DELTAQP: metadata buffer for ROI MB DeltaQp
+  * @BUF_TYPE_MAX: max buffer types
+  */
+ enum iris_buffer_type {
+@@ -44,6 +45,7 @@ enum iris_buffer_type {
+ 	BUF_SCRATCH_2,
+ 	BUF_VPSS,
+ 	BUF_PARTIAL,
++	BUF_ROIMB_DELTAQP,
+ 	BUF_TYPE_MAX,
  };
  
- int iris_ctrls_init(struct iris_inst *inst)
-@@ -374,7 +435,7 @@ int iris_ctrls_init(struct iris_inst *inst)
- 		return ret;
+@@ -139,5 +141,7 @@ int iris_queue_buffer(struct iris_inst *inst, struct iris_buffer *buf);
+ int iris_queue_deferred_buffers(struct iris_inst *inst, enum iris_buffer_type buf_type);
+ int iris_vb2_buffer_done(struct iris_inst *inst, struct iris_buffer *buf);
+ void iris_vb2_queue_error(struct iris_inst *inst);
++int iris_hfi_gen2_session_alloc_roi_metadata_buffer(struct iris_inst *inst);
++int iris_destroy_roi_metadata_buffers(struct iris_inst *inst);
  
- 	for (idx = 1; idx < INST_FW_CAP_MAX; idx++) {
--		struct v4l2_ctrl *ctrl;
-+		struct v4l2_ctrl *ctrl = NULL;
+ #endif
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+index 8c02b4fec93b511d1d9bdd71a9038a7f7be5404f..91a3ec52d299e942fde18eafaf58ea6542afd0ec 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.c
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+@@ -1720,3 +1720,31 @@ int iris_set_metadata_delivery(struct iris_inst *inst, u32 plane)
  
- 		v4l2_id = iris_get_v4l2_id(cap[idx].cap_id);
- 		if (!v4l2_id)
-@@ -392,6 +453,13 @@ int iris_ctrls_init(struct iris_inst *inst)
- 						      cap[idx].max,
- 						      ~(cap[idx].step_or_mask),
- 						      cap[idx].value);
-+		} else if (cap[idx].flags & CAP_FLAG_CUSTOM) {
-+			if (cap[idx].cap_id == ROI_PARAMS)
-+				ctrl = v4l2_ctrl_new_custom(&inst->ctrl_handler,
-+							    &roi_mbqp_cfg, NULL);
-+			if (cap[idx].cap_id == MB_SIZE)
-+				ctrl = v4l2_ctrl_new_custom(&inst->ctrl_handler,
-+							    &roi_mbqp_size, NULL);
- 		} else {
- 			ctrl = v4l2_ctrl_new_std(&inst->ctrl_handler,
- 						 &iris_ctrl_ops,
+ 	return 0;
+ }
++
++int iris_set_roi_params(struct iris_inst *inst, u32 plane)
++{
++	struct iris_buffers *buffers = &inst->buffers[BUF_ROIMB_DELTAQP];
++	u32 height = inst->enc_raw_height;
++	u32 width = inst->enc_raw_width;
++	u32 metadata_header_bytes = 256;
++	u32 lcu_height = 0;
++	u32 lcu_width = 0;
++	u32 lcu_size = 16;
++	u32 n_shift = 0;
++	u32 size = 0;
++
++	if (!inst->fw_caps[ROI_PARAMS].p_array)
++		return -EINVAL;
++
++	if (inst->codec == V4L2_PIX_FMT_HEVC)
++		lcu_size = 32;
++
++	n_shift = ilog2(lcu_size);
++	lcu_width = (width + (lcu_size - 1)) >> n_shift;
++	lcu_height = (height + (lcu_size - 1)) >> n_shift;
++	size = ALIGN(lcu_width, 8) * lcu_height * 2;
++	size += metadata_header_bytes;
++	buffers->size = ALIGN(size, 4096);
++
++	return iris_hfi_gen2_session_alloc_roi_metadata_buffer(inst);
++}
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.h b/drivers/media/platform/qcom/iris/iris_ctrls.h
+index ef2c09485ad93719e4acc7f395899d7f67cb5b2d..d5fb33a8e2a19035a0ff5eb412ffb8167e6098f3 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.h
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.h
+@@ -52,5 +52,6 @@ int iris_set_time_delta_based_rc(struct iris_inst *inst, enum platform_inst_fw_c
+ int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_properties(struct iris_inst *inst, u32 plane);
+ int iris_set_metadata_delivery(struct iris_inst *inst, u32 plane);
++int iris_set_roi_params(struct iris_inst *inst, u32 plane);
+ 
+ #endif
 diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-index 79bbd06ef8d2be11582a6b81da3104b6273f7250..0f4c6f955f4f408c45c50796332b47c116f52982 100644
+index 0f4c6f955f4f408c45c50796332b47c116f52982..36d2517140ce67821962c200093a9887e5b6b392 100644
 --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
 +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-@@ -1815,6 +1815,19 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
- 		.hfi_id = HFI_PROP_MULTI_SLICE_MB_COUNT,
- 		.flags = CAP_FLAG_OUTPUT_PORT,
+@@ -1822,6 +1822,7 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
+ 		.hfi_id = HFI_PROP_ROI_INFO,
+ 		.flags = CAP_FLAG_INPUT_PORT | CAP_FLAG_CUSTOM |
+ 			 CAP_FLAG_DYNAMIC_ALLOWED,
++		.set = iris_set_roi_params,
  	},
-+	{
-+		.cap_id = ROI_PARAMS,
-+		.step_or_mask = 1,
-+		.p_array = NULL,
-+		.hfi_id = HFI_PROP_ROI_INFO,
-+		.flags = CAP_FLAG_INPUT_PORT | CAP_FLAG_CUSTOM |
-+			 CAP_FLAG_DYNAMIC_ALLOWED,
-+	},
-+	{
-+		.cap_id = MB_SIZE,
-+		.step_or_mask = 1,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_CUSTOM,
-+	},
- };
+ 	{
+ 		.cap_id = MB_SIZE,
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
+index cf88dbe11e8e9faef826e661d8e9909fd7f16b94..a1b0c4982f0d789a807f22a1dffdf61decd20d28 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
+@@ -134,6 +134,7 @@ static u32 iris_hfi_gen2_get_port_from_buf_type(struct iris_inst *inst,
+ 		switch (buffer_type) {
+ 		case BUF_INPUT:
+ 		case BUF_VPSS:
++		case BUF_ROIMB_DELTAQP:
+ 			return HFI_PORT_RAW;
+ 		case BUF_OUTPUT:
+ 		case BUF_BIN:
+@@ -1267,6 +1268,8 @@ static u32 iris_hfi_gen2_buf_type_from_driver(u32 domain, enum iris_buffer_type
+ 		return HFI_BUFFER_VPSS;
+ 	case BUF_PARTIAL:
+ 		return HFI_BUFFER_PARTIAL_DATA;
++	case BUF_ROIMB_DELTAQP:
++		return HFI_BUFFER_METADATA;
+ 	default:
+ 		return 0;
+ 	}
+@@ -1328,6 +1331,7 @@ static struct iris_buffer *iris_queue_metadata_buffers(struct iris_inst *inst,
+ static int iris_hfi_gen2_session_queue_buffer(struct iris_inst *inst, struct iris_buffer *buffer)
+ {
+ 	struct iris_inst_hfi_gen2 *inst_hfi_gen2 = to_iris_inst_hfi_gen2(inst);
++	struct iris_hfi_buffer hfi_meta_buffer;
+ 	struct iris_hfi_buffer hfi_buffer;
+ 	u32 port;
+ 	int ret;
+@@ -1349,6 +1353,26 @@ static int iris_hfi_gen2_session_queue_buffer(struct iris_inst *inst, struct iri
+ 					     &hfi_buffer,
+ 					     sizeof(hfi_buffer));
  
- static const u32 sm8550_vdec_input_config_params_default[] = {
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-index 2b8b057d35a9bc4d611fc9251c95762316a21062..2394213d8272b53bf6a1cff9574dc93f6830fc8c 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-@@ -135,6 +135,7 @@ enum hfi_flip {
- #define HFI_PROP_DEC_START_FROM_RAP_FRAME	0x03000169
- #define HFI_PROP_NO_OUTPUT			0x0300016a
- #define HFI_PROP_BUFFER_MARK			0x0300016c
-+#define HFI_PROP_ROI_INFO			0x03000173
- #define HFI_PROP_WORST_COMPRESSION_RATIO	0x03000174
- #define HFI_PROP_WORST_COMPLEXITY_FACTOR	0x03000175
- #define HFI_PROP_RAW_RESOLUTION		0x03000178
-diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-index cddab9a9c375abc6f803f98272619ecde8ea7873..72a7bd5a7570f53a73037d49736e95664af180a5 100644
---- a/drivers/media/platform/qcom/iris/iris_platform_common.h
-+++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
-@@ -211,6 +211,8 @@ enum platform_inst_fw_cap_type {
- 	SLICE_MODE,
- 	SLICE_MAX_BYTES,
- 	SLICE_MAX_MB,
-+	ROI_PARAMS,
-+	MB_SIZE,
- 	INST_FW_CAP_MAX,
- };
++	/* check if any metadata buffer is available not queued, queue it */
++	if (port == HFI_PORT_RAW) {
++		buffer = iris_queue_metadata_buffers(inst, BUF_ROIMB_DELTAQP, buffer->index);
++		if (buffer) {
++			iris_hfi_gen2_get_buffer(inst->domain, buffer, &hfi_meta_buffer);
++			port = iris_hfi_gen2_get_port_from_buf_type(inst, buffer->type);
++			iris_hfi_gen2_create_packet(inst_hfi_gen2->packet,
++						    HFI_CMD_BUFFER,
++						    HFI_HOST_FLAGS_INTR_REQUIRED,
++						    HFI_PAYLOAD_STRUCTURE,
++						    port,
++						    inst->core->packet_id++,
++						    &hfi_meta_buffer,
++						    sizeof(hfi_meta_buffer));
++
++			buffer->attr |= BUF_ATTR_QUEUED;
++			buffer->attr &= ~BUF_ATTR_DEQUEUED;
++		}
++	}
++
+ 	return iris_hfi_queue_cmd_write(inst->core, inst_hfi_gen2->packet,
+ 					inst_hfi_gen2->packet->size);
+ }
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+index ea1fc96077fdce83db9c6a6c1f753ec7978b0673..4f8f0b78f7b7559d985ea627f9a3224f36fb6f18 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+@@ -58,6 +58,8 @@ static u32 iris_hfi_gen2_buf_type_to_driver(struct iris_inst *inst,
+ 		return BUF_PARTIAL;
+ 	case HFI_BUFFER_VPSS:
+ 		return BUF_VPSS;
++	case HFI_BUFFER_METADATA:
++		return BUF_ROIMB_DELTAQP;
+ 	default:
+ 		return 0;
+ 	}
+diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+index 05aab6e3005d5c3788f5dfe5857f2d6b782e7a83..ba56aca5c0d102869dcf7ad6c050579283000cd7 100644
+--- a/drivers/media/platform/qcom/iris/iris_vidc.c
++++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+@@ -199,6 +199,7 @@ int iris_open(struct file *filp)
+ 	INIT_LIST_HEAD(&inst->buffers[BUF_SCRATCH_2].list);
+ 	INIT_LIST_HEAD(&inst->buffers[BUF_VPSS].list);
+ 	INIT_LIST_HEAD(&inst->buffers[BUF_PARTIAL].list);
++	INIT_LIST_HEAD(&inst->buffers[BUF_ROIMB_DELTAQP].list);
+ 	init_completion(&inst->completion);
+ 	init_completion(&inst->flush_completion);
  
-@@ -222,6 +224,7 @@ enum platform_inst_fw_cap_flags {
- 	CAP_FLAG_CLIENT_SET		= BIT(4),
- 	CAP_FLAG_BITMASK		= BIT(5),
- 	CAP_FLAG_VOLATILE		= BIT(6),
-+	CAP_FLAG_CUSTOM			= BIT(7),
- };
- 
- struct platform_inst_fw_cap {
-@@ -231,6 +234,8 @@ struct platform_inst_fw_cap {
- 	s64 step_or_mask;
- 	s64 value;
- 	u32 hfi_id;
-+	const void *p_array;
-+	u32 elems;
- 	enum platform_inst_fw_cap_flags flags;
- 	int (*set)(struct iris_inst *inst,
- 		   enum platform_inst_fw_cap_type cap_id);
+@@ -321,6 +322,7 @@ int iris_close(struct file *filp)
+ 	iris_destroy_all_internal_buffers(inst, V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+ 	iris_check_num_queued_internal_buffers(inst, V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+ 	iris_check_num_queued_internal_buffers(inst, V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++	iris_destroy_roi_metadata_buffers(inst);
+ 	iris_remove_session(inst);
+ 	mutex_unlock(&inst->lock);
+ 	iris_inst_put(inst);
 
 -- 
 2.34.1
