@@ -1,193 +1,82 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C454480DED
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:34:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D02447DD44
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:35:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792154049; cv=none; b=rCMK4e12m5GSrxnUTzo7Iz8gl/eXZdDSiKuTIsO7/qvRemziNgarhaqdsJM4YVxeDerBqFai6msH3pXIxksIme8dB6WnwhCdcsGpd7uKISz0AbzN0jKPggsGlKl0d3xDMzpZhe+lJQ6ck+qN65ekc2A1XtejrFHrjy9+eaT9zE4=
+	t=1792154108; cv=none; b=TDZvRV89DelUDKJ69UIgeDI/NMQ43UjmzeepnZJt8oT0ZmaDjBu3k1NPTdv9XvKSD0+vKJ5grcFfCRT8GlzqxZjg2xwm7vroTxumjsEIO2KAiYV5utKzHQ1i6zBluvqS5G7Bj3Y6hPAr/6RP68S9rmoazjMlgwoQOjsLkjDBjgg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792154049; c=relaxed/simple;
-	bh=hehiMMplNuH1ASVIZKS7JNCOTwicSdsvGPoc5cURypQ=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=BF/LU3bXgvnEDUMcEWtIvxS5p2675gUCwsHMyCDC5U66uu9ecHGYFNQH3OCcLDdLrUeyORKRDlR44UnuVb3dIp2aDdG635Mydg++mMXhxYAvdXm8roDKPFXcwdt73/PPqbML15FQ6QUN/8FZP+u9AMwOj1tjv/KI1ugZz/9WFmU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=rMkvsB+U; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1792154108; c=relaxed/simple;
+	bh=KJMaIRd1Wz2StYLkzuTGe2FFJE4FwOZc/zYJMMrt/Cg=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=i7ZrVj1pal+Y54MjRCbFNWA7cGViW7Tzq0KYcsrVkZw9FZDnaaWo/HQamCa/rAsZV4HHtUv7y2N88mH+cXFIFiND2ia46oDBM5ESd+jMywJgFGe338eRhMSSt8LpjLL581ASK82LA/IiD96wKww3ezDNlMXbWZFq99PWVWCjGlU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=khFz+gPo; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="rMkvsB+U"
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4956869750eso41873015e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:34:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792154046; x=1792758846; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZIpyq+qJUC7i4cP+JzTAwJd0/DwOmvkqZRCfLBzvRJc=;
-        b=rMkvsB+UIzB2KQ00cNXqaxW8hYzJPBkqYUn/tn3zdeyCfPUkl3V0qEvMsbtR1h6z55
-         YBaUC3LDyIJ5wDnZCk2A5uCa4mrqp+ponQ/e4FoHluTXgmpVMz6dOvGrmSGX2zVSqkz4
-         Hu4CPzHd9BlDHCeN9QIArFRxW7p8vTPJf84X6gJS+Lvnx9tT4JEGum/p4JvH6GLZaNi9
-         lNIe5xVrGHEr7niRJGQEZSB+fGtgF1czLyLoGzkQPfKGdloyl/BsjIOeaYefV8IcdjZQ
-         guZL5qo3KSRKnXoMZy8xTsrElD2tuF6Xy+7NVQLnw28qKXPrbaj1Q14CPrIawA/+zkwv
-         VomA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792154046; x=1792758846;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZIpyq+qJUC7i4cP+JzTAwJd0/DwOmvkqZRCfLBzvRJc=;
-        b=tg8QUiHUuOsRBWodLlz07Ph23rGa0UijPwvEZuch5+CZTV07wDvhsVyXysMMn74y+M
-         PeX1ksBkzpBw3zl45ukWkI7RU92X7MIrwsX4LEGMtNLiEay8nZfC73UUyBYC+jmMvqLR
-         B5gcQN8CmH9veAR7uRbpYmnwbYeJw97aD7vIlwwjrUAvtwm36qbtG4+lNQSGf5qnjHsK
-         SIqmwdU+VaGzmOk93H+BWifAK6QioUDNQi2DgbER+y+CQq9EClaYyYiIVOG7Kqs544ef
-         pTgCAJaDqZgvxTSEUNFkNcjflwwJtwJRF1eFkgioMElmiuWIVBZtl6YG34u81bFMN7g/
-         XGkA==
-X-Gm-Message-State: AFq9FYKmAbauMg1cJXeaaRhwXin0EqjfYALEJ75DZHQR4Rlp7zRdEL0o
-	uNba+fHCNknre5/8Q9fJxKgLRPc2WsHeSwFLWDVOcDfZWRvrytfs47IoU8RrejWAor8=
-X-Gm-Gg: AYBFou39BBVhPvNkX3okJ4t+UlptsZ0UA86FL3DhHE48aOD1fmx3bAyA1re8ntsERcw
-	EEmqvmk5CnOfb7U1X5Y33wwLkamhoV5mqjeyHARmICMPdulNaWNfnohfi8/gh3gLLgEsAz45CD4
-	A1iinLrShMCCNdd9ePr0TLv7ar4ovwr7Yf/W1mqh0DFsgju1BU8VctuuQfYFBgWaW1ZAJ5I2HNI
-	MXYSaNgSMnE1vKd1G+OWV58OTfmZTLVbWduXEmyTppRTzdiOxhNfcg0IGExmnL4Ch5TtFKgklRa
-	5RDN28JUZ2VonXXXCrcGq/lW1E0rzRVAKNyfq+ObIulF/71ES0/rTmds3myDO6ca+/WBHFTjs2p
-	qkF6uZC+T1b/JxuqAXkV8OCaWcNgyzlSKM0tlaqBbQPTAjYnZNI24/RE3IjDBSCsWeGUmJ9MDkK
-	sbyIiiBmOQlEDUqlt9q5vUiiP/cNDNs94ooKkO7woRRQ5y0KgWmYVNoDcdOd66qtEgUWaKii1vY
-	aiJPK/xa6LqO3ItKkV4Q7JxiBMNOekpGce+0YDhlyAfNmbOo5LNWw==
-X-Received: by 2002:a05:600c:3494:b0:49c:fa20:cc00 with SMTP id 5b1f17b1804b1-4a18e4c3f24mr492255685e9.23.1792154046355;
-        Fri, 16 Oct 2026 05:34:06 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:9e08:19eb:ca8a:9b73? ([2a01:e0a:106d:1080:9e08:19eb:ca8a:9b73])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd5128f1sm4861952f8f.59.2026.10.16.05.34.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 Oct 2026 05:34:05 -0700 (PDT)
-Message-ID: <c622efa2-df8b-44de-9552-d2b16159a661@linaro.org>
-Date: Fri, 16 Oct 2026 14:34:04 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="khFz+gPo"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 055F81F000C4
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:35:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792154107;
+	bh=KJMaIRd1Wz2StYLkzuTGe2FFJE4FwOZc/zYJMMrt/Cg=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=khFz+gPo7qCZeP2kVfoZGuMuZGpw6va2P1I/L3YDadrvQTzK64qbzTirgQ8v4FO8h
+	 Rou4tXogblJ8kah1yu/duaC1ms5M48Ywla4inUFo8iYi52ehE5G0hiXaJc75Q/D430
+	 77/8vR1XK4GSqt0PdlqJ3I8ExMLuYJ6rhoNWdAwRhRF7BUkbqL7rgxwe1KGaiomQYK
+	 AFu8A6C9VTJCGJWgQJnLQDN265hu9sxxH6ARuuaMVp9JG3LONjhZL1c88nhOcD10Xo
+	 MgzpTEp/UYYYzRjv54oyMGwFPw8T+74r0ivw9NYXS9S30/MU8kAcVC2zb3WlD0Ic85
+	 b2A+V05R+kxmw==
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-3a75f960be3so35603001fa.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:35:06 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzsT7d1EbbgIT5yrBzD0KePnX0eia0AmsijWLHW0MJur2gf0UaQbixUyhLFoi/FRBiP+KsjHUuJ3NW+1lTg@vger.kernel.org
+X-Gm-Message-State: AFq9FYIc/PMeyXlMiepVDyJTRC13jZwJFL56q8029IHcUOzJ5rTk9ce2
+	6DUr3zUfKsB1wJrRxUSBGR4HQUwjSZb6MzrwGqDYQ/1Ialh0OcdjEchBu2HRbGG8OXpbxcRvOOQ
+	6RXknd2FEnqueRpUku/iSSD2P90LfJlkrTmVSkJmzMA==
+X-Received: by 2002:a05:651c:19a7:b0:3a6:6f3d:c804 with SMTP id
+ 38308e7fff4ca-3a9c538bfacmr55474691fa.19.1792154105792; Fri, 16 Oct 2026
+ 05:35:05 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 08:35:03 -0400
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 08:35:03 -0400
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20261014121910.1509541-2-linghui.wu@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] PCI: qcom: Advertise hotplug with no command completion
- support
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260314-hotplug-v1-1-96ac87d93867@oss.qualcomm.com>
- <d709693e-b9ad-4d53-a368-67fbb0cbd601@linaro.org>
- <1ae8d4f0-1c32-4dbd-a18e-7a2ce2627efc@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <1ae8d4f0-1c32-4dbd-a18e-7a2ce2627efc@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20261014121910.1509541-1-linghui.wu@oss.qualcomm.com> <20261014121910.1509541-2-linghui.wu@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 08:35:03 -0400
+X-Gmail-Original-Message-ID: <CAMRc=Mf5fw0+J8uyPgO6j_ooEnB06DoXVRDkpk+JiwcPw2uCFg@mail.gmail.com>
+X-Gm-Features: AclHuK-OTs0buPx-1r5yVX8Ujv5PkAKBIfDAdTiHHnUDkJSI6OM5b9nTO6kfpkY
+Message-ID: <CAMRc=Mf5fw0+J8uyPgO6j_ooEnB06DoXVRDkpk+JiwcPw2uCFg@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/3] dt-bindings: power: sequencing: qcom-wcn:
+ document wakeup-source
+To: Linghui Wu <linghui.wu@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>, 
+	Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+On Wed, 14 Oct 2026 14:19:08 +0200, Linghui Wu
+<linghui.wu@oss.qualcomm.com> said:
+> Some WCN3990-family designs connect SW_CTRL to an interrupt capable of
+> waking the application processor.
+>
+> Document the dedicated "wakeup" interrupt and wakeup-source property for
+> the WCN PMU node.
+>
+> Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
+> ---
 
-On 10/16/26 13:08, Krishna Chaitanya Chundru wrote:
-> 
-> 
-> On 10/16/2026 3:54 PM, Neil Armstrong wrote:
->> Hi,
->>
->> On 3/14/26 02:56, Krishna Chaitanya Chundru wrote:
->>> QCOM PCIe controller advertise hotplug capability in hardware but do not
->>> support hotplug command completion. As a result, the PCI core registers
->>> the pciehp service and issues hotplug commands that never gets completions,
->>> leading to repeated timeout warnings and multi-second delays during boot
->>> and suspend/resume.
->>>
->>> Commit a54db86ddc153 ("PCI: qcom: Do not advertise hotplug capability for
->>> IPs v2.7.0 and v1.9.0") avoided these timeouts by clearing the Hot-Plug
->>> Capability bit entirely, which also disabled all hotplug functionality.
->>>
->>> Instead of disabling hotplug, mark these controllers as not supporting
->>> command completion by setting the No Command Completed Support (NCCS) bit
->>> in the Slot Capabilities register. This prevents the PCI hotplug driver
->>> from waiting for commands completion while still allowing hotplug-related
->>> functionality such as Data Link Layer state change events.
->>
->> I'm a little late to the party, but marking the RC as Hotplus means the bridge
->> is marked as is_pciehp and pci_bridge_d3_possible() returns false.
->>
->> This means this breaks D3Cold support completely since in
->> __pci_host_common_d3cold_possible()
->> we now check all PCI devices, including bridges, and the RC is not set in
->> D3Hot anymore.
->>
->> The only way to enable D3Cold is to pass pcie_port_pm=force to allow D3 on all
->> Hotplug bridges. Which may be wrong on TB bridges.
->>
-> Hi Neil,
-> can you enable hotplug driver and use this patch [1], that should solve the issue.
-> 
-> [1]
-> https://patch.msgid.link/20260729165005.896725-1-manivannan.sadhasivam@oss.qualcomm.com
+The commit subject should say: "dt-bindings: regulator: ...". There's no such
+thing as power sequencing as far as DT bindings are concerned.
 
-Thanks this fixes the issue,
-
-Neil
-
-> 
->> Neil
->>
->>>
->>> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
->>> ---
->>>    drivers/pci/controller/dwc/pcie-qcom.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c
->>> b/drivers/pci/controller/dwc/pcie-qcom.c
->>> index
->>> 67a16af69ddc75fca1b123e70715e692a91a9135..a2924610f3625f2456a491473c135840e31bafb9
->>> 100644
->>> --- a/drivers/pci/controller/dwc/pcie-qcom.c
->>> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
->>> @@ -358,7 +358,7 @@ static void qcom_pcie_clear_hpc(struct dw_pcie *pci)
->>>        dw_pcie_dbi_ro_wr_en(pci);
->>>          val = readl(pci->dbi_base + offset + PCI_EXP_SLTCAP);
->>> -    val &= ~PCI_EXP_SLTCAP_HPC;
->>> +    val |= PCI_EXP_SLTCAP_NCCS;
->>>        writel(val, pci->dbi_base + offset + PCI_EXP_SLTCAP);
->>>          dw_pcie_dbi_ro_wr_dis(pci);
->>>
->>> ---
->>> base-commit: 0257f64bdac7fdca30fa3cae0df8b9ecbec7733a
->>> change-id: 20260313-hotplug-4c296595b5b8
->>>
->>> Best regards,
->>
-> 
-
+Bart
