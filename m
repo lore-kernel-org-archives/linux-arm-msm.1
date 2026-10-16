@@ -1,533 +1,293 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79EBA4CF49F;
-	Fri, 16 Oct 2026 22:47:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9208F30CD81
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792190866; cv=none; b=io6w0HKMjxYoUzG9shk8n9YLfeRmV0Pb8wsnxMx9yW7BKR4cRmxwsdG2bIjFjRVAjiNhwZEzN2cHAFa6gHoDapcDxcw7+QUALYHDRxbsbExlM9p2nMTBxtVBdrHs462jsmSTt+y9hHn/AoAJpatofsqh1HnZV0L0MpbpFDabWEI=
+	t=1792191645; cv=none; b=UvsEVPOcIe3DfMnwpqxsQXZTGikvvnJAsTNwF+3kjPV1Rz7NyaQR118v6SENvCb4ALLHLg/tH79W1/+72liGqOe9ZJ52Ilqr1Lk4GoUQDbrMSQ+Nc35MZzGTOmGAh/jNaxElfclGBZPOBsRMK4EGas3C08EF3KZ5CFoibVFn40g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792190866; c=relaxed/simple;
-	bh=3Hi8dz173ZGlnmfDsdrquBXdTQVu0ci4b93EkwjwZ/I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eeqGJpM/ZdgATirxxrMc/WvqIocNngXpiOqd4Yd31cp6FYhZGHw64yVSUAmc7Uig5DDxoogmW0Iuid2E3vj6aknDXjn04dtQeDYZq0AHscIkGJscQpLcgAA/JaevZGmT1sy/AOxbTeJQCoZiPt6zYKoc6/0zzHCRSVhbnOszyRo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NoG6eksv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792191645; c=relaxed/simple;
+	bh=cfl8DEpfKwiPMHiak1H8w4YF33RiK1XxSavFRvzYmfs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=MK2/VByiyYdOcW6Ov2cPQJxw+fK6WUKmoIjH6D/6iihwH7MXZFraadN+8TrpWMCSya504lam6umbOwQmoAYcLV21UIympYfGbGZ8nYAXe9mJmoIAHNhJ34OeVJTIg5/XYraXhE5EoWOIlYBirNf5xYuDj4Attc2C67ItasuU24k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TTtD13xV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KY0kw677; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NoG6eksv"
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 8646D1F000C4;
-	Fri, 16 Oct 2026 22:47:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792190864;
-	bh=FLVf7khoz+3vyzzDzc5sImmth2IXyhRfmtOS4Gm+9Ko=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=NoG6eksvRmiJcDRpPOgAgw0ApTNhqmMBsYj0RQrZqwtVF496DPM//VdkRld1WJMZE
-	 TfDEPr5CYuFh93NRipPCXpjXSYIgWstomEi1gRTwprQcn5Y8L3BKoQicaewpJ+NWJN
-	 uvblgc9L1WI7b9cXjcqV3JEAyK8f2cgrMlpRzecgjNjHFhVhf+eGR52rU2ukgvfdYf
-	 d96jT6XDMc91ZeVH/JswMsDckRvYQrLLWYh+/eaBZAldjPmzw3V/PPDpPgtiN0gTw2
-	 0VUidwJYlfLuDvuqWO/Ssn54J8UuBz+rOvNIkTbYj0hA7Hty4vDpqV1RzC1hAafcQa
-	 vlhddnnPbUjJQ==
-Date: Sat, 17 Oct 2026 01:47:40 +0300
-From: Jarkko Sakkinen <jarkko@kernel.org>
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jenswi@kernel.org>,
-	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
-	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-integrity@vger.kernel.org
-Subject: Re: [PATCH v3 2/3] tpm: Introduce Qualcomm TPM driver
-Message-ID: <atKpjLYdUuugwAUQ@kernel.org>
-References: <20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com>
- <20261015-tpm_qcom_driver-v3-2-247c8e50250e@qti.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TTtD13xV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KY0kw677"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GJeWX92873501
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=FLeIGjWZXKNkhRdy0r9pd/
+	w8jjv3SA/UcLOzlrw6Eec=; b=TTtD13xVw5W73cNrI5WsDeio8PmtdY2Hyb3FC4
+	L/2vtWr6618pnZP3PJTgHUqjWrQqoyY5hXXWqTXnz/vU2jyOF3HFY/mz9u2j9AUe
+	QPCO6KikGwVkEprnUqfDNrntrvGB0Q+HeNg0jMknc7UFTnWlu6ChVq9fSkHsgtPo
+	C7zeegRH+TWJZbiQRqGphozNg585HukQ4zRfHOFGdEVxJcfefq6JgZ3voEb5GQHC
+	MFu+T0KiHvuITk/8L1OYGCnqpbtChiQfSngAlbe/uDVsFWQfUAyojGo/gP3RRTRZ
+	9H6HOXlkQz3ksQ/ThfUGHLLymiMkaHuAGFPepoDiNc2EbToQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhumtnk2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 23:00:42 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35179e7f081so34602eec.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 16:00:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792191641; x=1792796441; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=FLeIGjWZXKNkhRdy0r9pd/w8jjv3SA/UcLOzlrw6Eec=;
+        b=KY0kw677nWL15FSR31i/pHY4rd0VuNtuZXYW79yzZmMZmR1Idf13HWlgG2UVrVD4V9
+         /0lv79BEpS0+gu23AYUMK/VoumgdOtn3evUPsJ3xJmoTlTSePhHKPNG9MSURZqoluH3W
+         mFWooTlwEfIyrijADPY/yb49I7YJhb2lrDsgSXg5+F3/nXkEsoxMkiyqAnaRF2Qa817L
+         SW0xliD4b+f5PQDk5bkxyejhIinl5qNO39nsM6dl5oxUW3MNSiIDjUxlVNoUBbW/AoJ8
+         8/7zCqoi1yg7I/Jp0zAjsJRwLmUrzO9kU/Bcm2hdrd9gv/kEZxEOOPqRXG3reGYalSxd
+         f1Qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792191641; x=1792796441;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=FLeIGjWZXKNkhRdy0r9pd/w8jjv3SA/UcLOzlrw6Eec=;
+        b=p7itogprgF0AXAQklJqVz4awpVYYVDrTT5u+YKjFcyMt24WvfSBRQkh/3uH8aHlBkN
+         8OfRFrD37En4RxCtijmUGL6Bo2dKw6tIV1JFk1XzOTl95gqhJODaspDQJPTGQe48QNFX
+         bQtwnPNQ5j5V9Bjr2w6g+ev54edpxzTbQefUj9BHiGl80fEvKV757CV00UVNB5gcy391
+         pO4CQELhSRhtxM4PZFvLfpjABDVBwMgpkpy3zNWr8vxXAybvEwOppsMclL6PoHUOr1Yy
+         B3L7XZ80m0edcJf8shxVPpmGhekznoHCXJ0sWJVL0pwhNUMxW2LtJfI7ue8D9Ry+c/yF
+         6gDQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwfR0M3a60JxKybKHC5+ep6X9LAf0Dfw4FlDrtu2caQS0eObOnaeqRXh/HUYduSSsI/D4YJVPQuGfxvFera@vger.kernel.org
+X-Gm-Message-State: AFq9FYLOzVaqeIliC8N7TjsJzvX1+3hmO2W29VRxJIBvKSrUaorFMoS8
+	+HYuusFl6x0GyFppkTM+jV3V7uE0UrSt0GCEUYyCPha/CUWWYOxu+vq8mgaZcXjdT/IlPKBbRW4
+	rYjxK1V2RaIERCmX8gLyfFhnz/pLxWM9a3y/IwcY1G6qfm9miuoNBn9K2bDs4BM9sZKoS0UPrZ9
+	Vo
+X-Gm-Gg: AYBFou2hJ9IYGcRGIZsW/XHMk2hUk+JV/34sEwI9YAe2INfiat33bOwGIQ3azPzmshc
+	ELrl2SWBEQ/xxRFbUD1ZkErqf9zqfKhiKXP3fyBzaKxDErqPOBMdIAFFGTTriSB9DVooUuhaSAa
+	tljZlHI9OdRuQkG3h7rS6sVDzBl74ugBwv/NgtFjgdT5CAaI4N/fUmPKc33gOyP3fPW+4wvV+bk
+	IdlQ+yCB+Zevrla82R7nElbsZ98rOdVmfRSkGvyYGEk4+vfBDFy1BqSPopSUzLwIBdMcuUYv++4
+	SGWIAN/ycKXy7CzJrMGizMYpBbprgPzXY/K0AKoVeCozeC+g0f7llVcuDC3HwVstSO5GGp5325t
+	AucLqSpRJDUCUc1t6flh1s9L4zk9SOdK0EwYFigPHd9iDCablnXz/RZQqIvQ=
+X-Received: by 2002:a05:7301:da84:b0:358:7ed4:a049 with SMTP id 5a478bee46e88-3619b212ef3mr2456382eec.0.1792191641023;
+        Fri, 16 Oct 2026 16:00:41 -0700 (PDT)
+X-Received: by 2002:a05:7301:da84:b0:358:7ed4:a049 with SMTP id 5a478bee46e88-3619b212ef3mr2456277eec.0.1792191640155;
+        Fri, 16 Oct 2026 16:00:40 -0700 (PDT)
+Received: from gu-dmadival-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360820a79c7sm9379101eec.18.2026.10.16.16.00.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 16:00:39 -0700 (PDT)
+From: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+Subject: [PATCH v10 0/5] Implement Region of Interest(ROI) support
+Date: Fri, 16 Oct 2026 16:00:31 -0700
+Message-Id: <20261016-enc_roi_enable-v10-0-bc5bd37b6f3e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261015-tpm_qcom_driver-v3-2-247c8e50250e@qti.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAI+s0moC/3XRzWrDMAwA4FcpPi/Fthz/7LT3GKPYsrwa2mRLt
+ rBR+u5zelgDri8CCfzpxxc205RpZs+7C5toyXMeh5II/rRjePTDO3U5lgKTXGquhe5owMM05gM
+ NPpyoUxFsj8pY8MTKo4+JUv65ia9vJT/m+Wucfm8NFrFWm9QiOt4lSoiKjE4AL+M87z+//QnH8
+ 3lfAlvFRd4VI1SlyKJo0BaSiwEpNRS4K5bXChSFOAQtpZdR2YaiNooQlaKKItCRl4r3IbSUfqv
+ 0ldIXJVJ0SiWe0LQ20nfFPVB0UaSLUaENiKmlmI0i67uY9brJGyXAJwnYUOxGAV4pdp0FHbcJO
+ Dnd+mn3rwjO641cUSwIlGWYHoN4oFyv1z+L263D5AIAAA==
+X-Change-ID: 20260616-enc_roi_enable-4d385c4783ae
+To: Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
+        kernel test robot <lkp@intel.com>,
+        Hans Verkuil <hverkuil+cisco@kernel.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792191637; l=7170;
+ i=deepa.madivalara@oss.qualcomm.com; s=20250814; h=from:subject:message-id;
+ bh=cfl8DEpfKwiPMHiak1H8w4YF33RiK1XxSavFRvzYmfs=;
+ b=ZPGdAXZq+b4ir+dVkDI3Ah55q2Vi4iZP3dnqEv3h4PHXMzAMxKLR73VR1jKC34NUWp3Cnp3cF
+ +18CQQ7icvRBaIvnNhM2mJBYPFzYBx3dwHm1NYqKNolxdeX/OdXTLJB
+X-Developer-Key: i=deepa.madivalara@oss.qualcomm.com; a=ed25519;
+ pk=MOEXgyokievn+bgpHdS6Ixh/KQYyS90z2mqIbQ822FQ=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfX0T5JCisPAPlb
+ o/BmCCsFuwH/srqyauqU+8TH/vSTkeDGZraoytJrtOCr9azjQ/ghq3lODQXnpCMkt5xzD90PzJx
+ AZ30cofw3oQul10ymhLLkMLla8U9EW8=
+X-Authority-Analysis: v=2.4 cv=H+BOUOYi c=1 sm=1 tr=0 ts=6ad2ac9a cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=QyXUC8HyAAAA:8 a=l3oWgaDpQndWrbxot-sA:9
+ a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-GUID: hrlk7ap3wVoos_KOL-pJ6kyKUK9xhKNd
+X-Proofpoint-ORIG-GUID: hrlk7ap3wVoos_KOL-pJ6kyKUK9xhKNd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA5MSBTYWx0ZWRfXxCJmM0ToQegv
+ JCDzyLx6Lueeo9X2x2Z61uDUVnwTSI+DpI4hWnFP1p2IbBF+ZPiCD0C+uKQ79pu4DPDPKhxDT8g
+ PFpf2aiV6tB5QX7GlahCo4a+o0VxcZQg7IF9YTLuZIlzpuj12M75Q31tI+EIVNBzyI3OuGunb5L
+ rzOellvyPZ5G0M/EOsH1cZzVDF41Mgm7AxIRVbrdLjhN2ZaqqDTM+/hGo0WZW3WqKOSnIX6E+qr
+ DY1fM5tbrHAUnYDbfJRW5aEkKPV3UZgYiuY3f1aePTCO8QB1Nd+t0/dA9viV8yr1qioAqtw7Js7
+ 938WdY2hut7HZnGQ8OwLYdw8MFsobRKqWoQOSEGcRpSRsHmyd78eLb24HDdEQQvpYlad3nj8o3j
+ NOF3F9qfyd6ooc1/aypiev5alqHSQXYb4FExkfgUhVTVdrbfCu97LjyrKRE92LoLlw6cG/te4Xu
+ iw4jaCXHu1G5jgKZUkA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_03,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0 bulkscore=0 phishscore=0 priorityscore=1501
+ adultscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160091
 
-On Thu, Oct 15, 2026 at 12:07:47PM +0530, Kuldeep Singh wrote:
-> Add a TPM chip driver for platforms where a TPM 2.0 instance is
-> implemented by a Trusted Application (TA) running in Qualcomm's Trusted
-> Execution Environment (QTEE), reachable over the QCOMTEE object-IPC
-> transport.
-> 
-> The driver discovers the qcom.tz.tpm TEE-bus device, opens a session
-> with the TPM TA, and register with tpm interface. This exposes the TA
-> through the standard /dev/tpm interface and the existing tpm2 command
-> layer. OS need not be aware underlying TPM instance is dTPM or fTPM.
-> 
-> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> ---
->  drivers/char/tpm/Kconfig    |   9 +
->  drivers/char/tpm/Makefile   |   1 +
->  drivers/char/tpm/tpm_qcom.c | 413 ++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 423 insertions(+)
-> 
-> diff --git a/drivers/char/tpm/Kconfig b/drivers/char/tpm/Kconfig
-> index 5f672f2c01b0..05d704ed3632 100644
-> --- a/drivers/char/tpm/Kconfig
-> +++ b/drivers/char/tpm/Kconfig
-> @@ -243,6 +243,15 @@ config TCG_FTPM_TEE
->  	help
->  	  This driver proxies for firmware TPM running in TEE.
->  
-> +config TCG_QCOM
-> +	tristate "Qualcomm TEE based TPM Interface"
-> +	depends on QCOMTEE
-> +	help
-> +	  This driver provides interface to run TPM instances with Trustzone
-> +	  having Qualcomm TPM TA running in Qualcomm TEE.
-> +	  The mechanism uses the object-IPC based transport provided by
-> +	  QCOMTEE.
-> +
->  config TCG_SVSM
->  	tristate "SNP SVSM vTPM interface"
->  	depends on AMD_MEM_ENCRYPT
-> diff --git a/drivers/char/tpm/Makefile b/drivers/char/tpm/Makefile
-> index 5b5cdc0d32e4..471cbf49afd2 100644
-> --- a/drivers/char/tpm/Makefile
-> +++ b/drivers/char/tpm/Makefile
-> @@ -45,5 +45,6 @@ obj-$(CONFIG_TCG_CRB) += tpm_crb.o
->  obj-$(CONFIG_TCG_ARM_CRB_FFA) += tpm_crb_ffa.o
->  obj-$(CONFIG_TCG_VTPM_PROXY) += tpm_vtpm_proxy.o
->  obj-$(CONFIG_TCG_FTPM_TEE) += tpm_ftpm_tee.o
-> +obj-$(CONFIG_TCG_QCOM) += tpm_qcom.o
->  obj-$(CONFIG_TCG_SVSM) += tpm_svsm.o
->  obj-$(CONFIG_TCG_LOONGSON) += tpm_loongson.o
-> diff --git a/drivers/char/tpm/tpm_qcom.c b/drivers/char/tpm/tpm_qcom.c
-> new file mode 100644
-> index 000000000000..0fe0104e8b5a
-> --- /dev/null
-> +++ b/drivers/char/tpm/tpm_qcom.c
-> @@ -0,0 +1,413 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + *
-> + */
-> +
-> +#include <linux/bitfield.h>
-> +#include <linux/mm.h>
-> +#include <linux/slab.h>
-> +#include <linux/tee.h>
-> +#include <linux/tee_drv.h>
-> +#include <linux/tpm.h>
-> +#include <linux/uuid.h>
-> +
-> +#include "tpm.h"
-> +
-> +#define QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS	5
-> +#define QCOMTEE_OP_CLIENT_ENV_OPEN		0
-> +#define QCOMTEE_MSG_OBJECT_OP_MASK		GENMASK(15, 0)
-> +#define QCOMTEE_MSG_OBJECT_OP_RELEASE		(QCOMTEE_MSG_OBJECT_OP_MASK - 0)
-> +
-> +#define QCOMTEE_TPM_OP_SEND_COMMAND	0
-> +
-> +/* UID of the "qcom.tz.tpm" service */
-> +#define QCOMTEE_TPM_UID			81
-> +
-> +/* Max buffer size supported by TPM TA */
-> +#define TPM_QCOM_MAX_COMMAND_SIZE	SZ_4K
-> +#define TPM_QCOM_MAX_RESPONSE_SIZE	SZ_4K
-> +
-> +#define QCOMTEE_TPM_GET_TA_VERSION_ID	0x0001000
-> +#define QCOMTEE_TPM_TA_VERSION_MAJOR	GENMASK(31, 16)
-> +#define QCOMTEE_TPM_TA_VERSION_MINOR	GENMASK(15, 0)
-> +
-> +struct tpm_qcom_ta_version_req {
-> +	u32 command_id;
-> +} __packed;
-> +
-> +struct tpm_qcom_ta_version_resp {
-> +	u32 status;
-> +	u32 command_id;
-> +	u32 version_num;
-> +} __packed;
-> +
-> +#define QCOMTEE_TPM_TYPE_ID		0x0080000
-> +#define QCOMTEE_TPM_TYPE_DTPM		0x6454504dU
-> +#define QCOMTEE_TPM_TYPE_FTPM		0x6654504dU
-> +#define QCOMTEE_TPM_TYPE_NONE		0x4e6f6e65U
-> +
-> +struct tpm_qcom_type_req {
-> +	u32 command_id;
-> +} __packed;
-> +
-> +struct tpm_qcom_type_resp {
-> +	u32 command_id;
-> +	u32 status;
-> +	u32 tpm_type;
-> +} __packed;
-> +
-> +/*
-> + * dTPM SPI transfer optimization:
-> + * TRANSFER_START before a burst of commands, TRANSFER_END once done.
-> + */
-> +#define QCOMTEE_TPM_TRANSFER_ID		0x0000002
-> +#define QCOMTEE_TPM_TRANSFER_END	0
-> +#define QCOMTEE_TPM_TRANSFER_START	1
-> +
-> +struct tpm_qcom_transfer_req {
-> +	u32 command_id;
-> +	u32 transfer_state;
-> +} __packed;
-> +
-> +struct tpm_qcom_transfer_resp {
-> +	u32 command_id;
-> +	u32 status;
-> +} __packed;
-> +
-> +struct tpm_qcom_private {
-> +	struct tpm_chip *chip;
-> +	struct device *dev;
-> +	struct tee_context *ctx;
-> +	struct tee_param_objref tpm_svc_obj;
-> +	bool is_dtpm;
-> +};
-> +
-> +/* UUID of the QTEE-bus device representing the TPM TA. */
-> +static const uuid_t tpm_qcom_uuid =
-> +	UUID_INIT(0xaabcb593, 0x7083, 0x5536,
-> +		  0xac, 0x27, 0x3d, 0x2d, 0x89, 0x41, 0x9d, 0xdb);
-> +
-> +static void tpm_qcom_release_object(struct tee_context *ctx,
-> +				    struct tee_param_objref object)
-> +{
-> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
-> +
-> +	inv_arg.id = object.id;
-> +	inv_arg.op = QCOMTEE_MSG_OBJECT_OP_RELEASE;
-> +	inv_arg.num_params = 0;
-> +
-> +	tee_client_object_invoke_func(ctx, &inv_arg, NULL);
-> +}
-> +
-> +static int tpm_qcom_get_client_env_obj(struct device *dev,
-> +				       struct tee_context *ctx,
-> +				       struct tee_param_objref *client_env_obj)
-> +{
-> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
-> +	struct tee_param param[2] = {};
-> +	int ret;
-> +
-> +	inv_arg.id = TEE_OBJREF_NULL;
-> +	inv_arg.op = QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS;
-> +	inv_arg.num_params = 2;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT;
-> +	param[0].u.objref.id = TEE_OBJREF_NULL;
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
-> +
-> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0) {
-> +		dev_err(dev, "get client env obj failed: ret=%d, invoke_ret=0x%x\n",
-> +			ret, inv_arg.ret);
-> +		return -EINVAL;
-> +	}
-> +
-> +	*client_env_obj = param[1].u.objref;
-> +	return 0;
-> +}
-> +
-> +static int tpm_qcom_get_svc_obj(struct device *dev,
-> +				struct tee_context *ctx,
-> +				struct tee_param_objref client_env_obj,
-> +				struct tee_param_objref *tpm_svc_obj)
-> +{
-> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
-> +	struct tee_param param[2] = {};
-> +	u32 tpm_uid = QCOMTEE_TPM_UID;
-> +	int ret;
-> +
-> +	inv_arg.id = client_env_obj.id;
-> +	inv_arg.op = QCOMTEE_OP_CLIENT_ENV_OPEN;
-> +	inv_arg.num_params = 2;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
-> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &tpm_uid,
-> +						    .size = sizeof(tpm_uid) };
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
-> +
-> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0) {
-> +		dev_err(dev, "get TPM service obj failed: ret=%d, invoke_ret=0x%x\n",
-> +			ret, inv_arg.ret);
-> +		return -EINVAL;
-> +	}
-> +
-> +	*tpm_svc_obj = param[1].u.objref;
-> +	return 0;
-> +}
-> +
-> +static int tpm_qcom_send_command(struct tpm_qcom_private *pvt_data,
-> +				 void *req, size_t req_len, void *resp,
-> +				 size_t *resp_len)
-> +{
-> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
-> +	struct tee_param param[3] = {};
-> +	u8 locality_arg = 0;
-> +	int ret;
-> +
-> +	inv_arg.id = pvt_data->tpm_svc_obj.id;
-> +	inv_arg.op = QCOMTEE_TPM_OP_SEND_COMMAND;
-> +	inv_arg.num_params = 3;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
-> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &locality_arg,
-> +						   .size = sizeof(locality_arg) };
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
-> +	param[1].u.ubuf = (struct tee_param_ubuf){ .addr = req, .size = req_len };
-> +	param[2].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT;
-> +	param[2].u.ubuf = (struct tee_param_ubuf){ .addr = resp, .size = *resp_len };
-> +
-> +	ret = tee_client_object_invoke_func(pvt_data->ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0) {
-> +		dev_err(pvt_data->dev,
-> +			"send_command invoke ret: %d, err: 0x%x\n",
-> +			ret, inv_arg.ret);
-> +		return ret ?: -EINVAL;
-> +	}
-> +
-> +	*resp_len = param[2].u.ubuf.size;
-> +
-> +	return 0;
-> +}
-> +
-> +static int tpm_qcom_get_ta_details(struct tpm_qcom_private *pvt_data)
-> +{
-> +	struct tpm_qcom_ta_version_req ver_req = {
-> +		.command_id = QCOMTEE_TPM_GET_TA_VERSION_ID,
-> +	};
-> +	struct tpm_qcom_ta_version_resp ver_resp;
-> +	size_t resp_len = sizeof(ver_resp);
-> +	struct tpm_qcom_type_req type_req = {
-> +		.command_id = QCOMTEE_TPM_TYPE_ID,
-> +	};
-> +	struct tpm_qcom_type_resp type_resp;
-> +	int ret;
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, &ver_req, sizeof(ver_req),
-> +				    &ver_resp, &resp_len);
-> +	if (ret < 0 || resp_len < sizeof(ver_resp) || ver_resp.status != 0)
-> +		return ret ?: -EIO;
-> +
-> +	dev_info(pvt_data->dev, "TPM TA version %u.%u\n",
-> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MAJOR, ver_resp.version_num),
-> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MINOR, ver_resp.version_num));
-> +
-> +	resp_len = sizeof(type_resp);
-> +	ret = tpm_qcom_send_command(pvt_data, &type_req, sizeof(type_req),
-> +				    &type_resp, &resp_len);
-> +	if (ret < 0 || resp_len < sizeof(type_resp) || type_resp.status != 0)
-> +		return ret ?: -EIO;
-> +
-> +	switch (type_resp.tpm_type) {
-> +	case QCOMTEE_TPM_TYPE_FTPM:
-> +		dev_info(pvt_data->dev, "TPM type: fTPM\n");
-> +		pvt_data->is_dtpm = false;
-> +		break;
-> +	case QCOMTEE_TPM_TYPE_DTPM:
-> +		dev_info(pvt_data->dev, "TPM type: dTPM\n");
-> +		pvt_data->is_dtpm = true;
-> +		break;
-> +	default:
-> +		dev_err(pvt_data->dev, "unsupported TPM type: 0x%08x\n",
-> +			type_resp.tpm_type);
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/* fTPM does not implement this command and to be invoked via dtpm only. */
-> +static void tpm_qcom_transfer(struct tpm_qcom_private *pvt_data,
-> +			      u32 transfer_state)
-> +{
-> +	struct tpm_qcom_transfer_req req = {
-> +		.command_id = QCOMTEE_TPM_TRANSFER_ID,
-> +		.transfer_state = transfer_state,
-> +	};
-> +	struct tpm_qcom_transfer_resp resp;
-> +	size_t resp_len = sizeof(resp);
-> +
-> +	tpm_qcom_send_command(pvt_data, &req, sizeof(req), &resp, &resp_len);
-> +}
-> +
-> +static int tpm_qcom_cmd_ready(struct tpm_chip *chip)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +
-> +	if (pvt_data->is_dtpm)
-> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_START);
-> +
-> +	return 0;
-> +}
-> +
-> +static int tpm_qcom_go_idle(struct tpm_chip *chip)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +
-> +	if (pvt_data->is_dtpm)
-> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_END);
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * The raw TPM2 command in @buf is sent directly as send_command's UBUF-in
-> + * param and the raw TPM2 response is read back from its UBUF-out param.
-> + */
-> +static int tpm_qcom_send(struct tpm_chip *chip, u8 *buf, size_t bufsiz,
-> +			 size_t cmd_len)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +	struct tpm_header *header = (struct tpm_header *)buf;
-> +	size_t resp_len = PAGE_ALIGN(TPM_QCOM_MAX_RESPONSE_SIZE);
-> +	size_t copy_len;
-> +	int ret;
-> +
-> +	if (cmd_len > TPM_QCOM_MAX_COMMAND_SIZE) {
-> +		dev_err(&chip->dev, "len=%zd exceeds TPM_QCOM_MAX_COMMAND_SIZE\n",
-> +			cmd_len);
-> +		return -EIO;
-> +	}
-> +
-> +	u8 *response __free(kfree) = kzalloc(resp_len, GFP_KERNEL);
-> +	if (!response)
-> +		return -ENOMEM;
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, buf, cmd_len, response, &resp_len);
-> +	if (ret < 0) {
-> +		dev_err(&chip->dev, "TPM command failed: cmd_len=%zu, tpm_cc=0x%08x, ret:%d\n",
-> +			cmd_len, be32_to_cpu(header->ordinal), ret);
-> +		return ret;
-> +	}
-> +
-> +	copy_len = min_t(size_t, bufsiz, resp_len);
-> +	memcpy(buf, response, copy_len);
-> +
-> +	return copy_len;
-> +}
-> +
-> +static const struct tpm_class_ops tpm_qcom_ops = {
-> +	.flags = TPM_OPS_AUTO_STARTUP,
-> +	.send = tpm_qcom_send,
-> +	.cmd_ready = tpm_qcom_cmd_ready,
-> +	.go_idle = tpm_qcom_go_idle,
-> +};
-> +
-> +static int tpm_qcom_ctx_match(struct tee_ioctl_version_data *ver,
-> +			      const void *data)
-> +{
-> +	return (ver->impl_id == TEE_IMPL_ID_QTEE);
-> +}
-> +
-> +static int tpm_qcom_probe(struct tee_client_device *tee_dev)
-> +{
-> +	struct device *dev = &tee_dev->dev;
-> +	struct tpm_qcom_private *pvt_data;
-> +	struct tee_param_objref client_env_obj;
-> +	struct tee_param_objref tpm_svc_obj;
-> +	struct tpm_chip *chip;
-> +	int err;
-> +
-> +	pvt_data = devm_kzalloc(dev, sizeof(*pvt_data), GFP_KERNEL);
-> +	if (!pvt_data)
-> +		return -ENOMEM;
-> +
-> +	dev_set_drvdata(dev, pvt_data);
-> +
-> +	pvt_data->ctx = tee_client_open_context(NULL, tpm_qcom_ctx_match, NULL, NULL);
-> +	if (IS_ERR(pvt_data->ctx))
-> +		return -ENODEV;
-> +
-> +	err = tpm_qcom_get_client_env_obj(dev, pvt_data->ctx, &client_env_obj);
-> +	if (err)
-> +		goto out_ctx;
-> +
-> +	err = tpm_qcom_get_svc_obj(dev, pvt_data->ctx, client_env_obj, &tpm_svc_obj);
-> +	/* Release client_env object irrespective of service obj return status */
-> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
-> +	if (err)
-> +		goto out_ctx;
-> +
-> +	pvt_data->tpm_svc_obj = tpm_svc_obj;
-> +	pvt_data->dev = dev;
-> +
-> +	err = tpm_qcom_get_ta_details(pvt_data);
-> +	if (err)
-> +		goto out_svc_obj;
-> +
-> +	chip = tpmm_chip_alloc(dev, &tpm_qcom_ops);
-> +	if (IS_ERR(chip)) {
-> +		dev_err(dev, "tpmm_chip_alloc failed\n");
-> +		err = PTR_ERR(chip);
-> +		goto out_svc_obj;
-> +	}
-> +
-> +	pvt_data->chip = chip;
-> +	dev_set_drvdata(dev, pvt_data);
-> +	pvt_data->chip->flags |= TPM_CHIP_FLAG_TPM2 | TPM_CHIP_FLAG_SYNC;
-> +
-> +	err = tpm_chip_register(pvt_data->chip);
-> +	if (err) {
-> +		dev_err(dev, "tpm_chip_register failed with rc=%d\n", err);
-> +		goto out_svc_obj;
-> +	}
-> +
-> +	return 0;
-> +
-> +out_svc_obj:
-> +	tpm_qcom_release_object(pvt_data->ctx, tpm_svc_obj);
+Hi all,
 
-This is very cleanly laid out driver. This goes perhaps unhealthy
-levels of nitpicking but we usually tend to have newline before
-the next label.
+This patch set implements region of interest(ROI) support for
+video encoder to be configured as a MB based delta_qp for
+the whole frame. Custom controls V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP
+and V4L2_CID_MPEG_VIDEO_ROI_MB_SIZE are implemented to achieve this. 
+Corresponding support is added in iris encoder to implement this
+feature.
 
-I'm sorry but it distracted me and I do hate myself for sending
-this response...
+This submission and design is based on the feedback received
+from community for the RFC[1] series posted earlier. 
+Initial testing is done by adding support to v4l2-ctl[2] to test this
+control setting and its functionality.
 
-> +out_ctx:
-> +	tee_client_close_context(pvt_data->ctx);
-> +	return err;
-> +}
-> +
-> +static void tpm_qcom_remove(struct tee_client_device *tee_dev)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(&tee_dev->dev);
-> +
-> +	tpm_chip_unregister(pvt_data->chip);
-> +	tpm_qcom_release_object(pvt_data->ctx, pvt_data->tpm_svc_obj);
-> +	tee_client_close_context(pvt_data->ctx);
-> +}
-> +
-> +static const struct tee_client_device_id tpm_qcom_id_table[] = {
-> +	{ tpm_qcom_uuid },
-> +	{}
-> +};
-> +MODULE_DEVICE_TABLE(tee, tpm_qcom_id_table);
-> +
-> +static struct tee_client_driver tpm_qcom_driver = {
-> +	.id_table	= tpm_qcom_id_table,
-> +	.probe		= tpm_qcom_probe,
-> +	.remove		= tpm_qcom_remove,
-> +	.driver		= {
-> +		.name	= "tpm_qcom",
-> +	},
-> +};
-> +
-> +module_tee_client_driver(tpm_qcom_driver);
-> +
-> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
-> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
-> +MODULE_LICENSE("GPL");
-> 
-> -- 
-> 2.34.1
-> 
+[1]https://lore.kernel.org/linux-media/20260113-iris_enc_roi-v1-0-6c86eba38587@oss.qualcomm.com
+[2]https://lore.kernel.org/linux-media/20260616-enc_roi_enable-v1-1-252792d27894@oss.qualcomm.com
 
-Br, Jarkko
+Results:
+
+v4l2-ctl -d /dev/video1 --list-ctrls
+...
+enc_mb_roi_delta_qp 0x00990b92 (s8)     : min=-31 max=30 step=1 default=0 dims=[139264] flags=has-payload
+        roi_mb_size 0x00990b93 (u8)     : min=16 max=32 step=1 default=16 value=16 flags=has-payload
+
+v4l2-compliance -d /dev/video1
+...
+Buffer ioctls:
+        test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: OK
+        test CREATE_BUFS maximum buffers: OK
+        test VIDIOC_REMOVE_BUFS: OK
+        test VIDIOC_EXPBUF: OK
+        test Requests: OK (Not Supported)
+        test blocking wait: OK
+
+Total for iris_driver device /dev/video1: 48, Succeeded: 48, Failed: 0, Warnings: 0
+
+./v4l2-ctl --verbose -d /dev/video1 --set-fmt-video-out=width=176,height=144,pixelformat=NV12 --set-fmt-video=pixelformat=H264 --set-ctrl=enc_mb_roi_delta_qp=-20,-2,-22,9,-16,-2,14,-9,-19,3,-26,19,-23,30,1,0,-6,-7,7,2,-2,15,-15,-24,-24,-26,-26,5,-1,-1,9,-11,15,-25,-11,26,-11,7,-26,-27,-8,-18,7,-4,-12,-23,-11,22,-7,7,-14,24,6,-8,-7,2,7,-26,2,-25,-1,-3,-4,-6,-26,-11,7,16,-30,-22,-15,30,-14,-29,-11,-8,8,6,19,15,-17,21,-27,30,-17,-28,-10,-20,1,22,29,-19,-2,28,10,12,-10,7,-4 --stream-mmap --stream-out-mmap --stream-from=/media/foreman_qcif_nv12.yuv --stream-to=roi_try.h264 --stream-count=10
+
+Validated on SM8550 MTP.
+
+Thanks,
+Deepa
+
+Signed-off-by: Deepa Guthyappa Madivalara
+<deepa.madivalara@oss.qualcomm.com>
+
+Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+---
+Changes in v10:
+- Do not enable ROI subscription for unsupported platforms (Bryan)
+- Address comments to use BIT, DIV_ROUND_UP, ALIGN and others for clarity (Bryan)
+- Link to v9: https://lore.kernel.org/r/20261005-enc_roi_enable-v9-0-831c24135cb1@oss.qualcomm.com
+
+Changes in v9:
+- Fix Media CI error.
+- Rebase onto media-committers next
+- Reported-by: kernel test robot <lkp@intel.com>
+  Closes: https://lore.kernel.org/oe-kbuild-all/202610051710.bnOqLkUl-lkp@intel.com/
+- Link to v8:
+  https://lore.kernel.org/r/20260930-enc_roi_enable-v8-0-2c908f30e963@oss.qualcomm.com
+
+Changes in v8:
+- Moved p_s8 below p_u8 (Hans)
+- Update Documentation for V4L2_CID_MPEG_VIDEO_ROI_MB_DELTA_QP (Nicolas)
+- Update returns to a sngle line (Vishnu)
+- Update n_shift calculation logic to ilog2 (Vishnu)
+- Link to v7: https://lore.kernel.org/r/20260924-enc_roi_enable-v7-0-6fa7413af23c@oss.qualcomm.com
+
+Changes in v7:
+- Add V4L2_CTRL_TYPE_S8 to v4l2_ctrl_type_op_validate and check_range (Hans)
+- Rebased onto media-committers next.
+- Link to v6: https://lore.kernel.org/r/20260915-enc_roi_enable-v6-0-29dd4c8bccff@oss.qualcomm.com
+
+Changes in v6:
+- Update documentation from custom to array, __s8 to __s8 array (Hans)
+- Update documentation and handling for non MB Size aligned frame resolution (Hans)
+- Rework patch 1 and 2 to add V4L2_CTRL_TYPE_S8 type first followed by ROI control (Hans)
+- Simplify handling for V4L2_CTRL_TYPE_S8 in v4l2-ctrls-core.c (Hans)  
+- Link to v5: https://lore.kernel.org/r/20260815-enc_roi_enable-v5-0-ded944f0fc7f@oss.qualcomm.com
+
+Changes in v5:
+- Fix Media CI errors.
+- Rebase onto media-committers next.
+- Link to v4: https://lore.kernel.org/r/20260811-enc_roi_enable-v4-0-1c9ea2405bb8@oss.qualcomm.com
+
+Changes in v4:
+
+- Updated Documentaion, clean stray lines (Bryan)
+- Use BIT(16) for header version (Bryan)
+- Split patch3 in the series to reflect enumeration of
+  the platform and adding metadata support and implementation (Bryan)
+- Link to v3: https://lore.kernel.org/r/20260804-enc_roi_enable-v3-0-e03b622a2d48@oss.qualcomm.com
+
+Changes in v3:
+- Updated Documentation (Hans) 
+- Reuse ROUND_TO_RANGE_RANGE for p_s8 (Hans)
+- Rebase onto media-committers next.
+- Link to v2: https://lore.kernel.org/r/20260714-enc_roi_enable-v2-0-63683f9dbcef@oss.qualcomm.com
+
+Changes in v2:
+- Fix issues detected by Media CI robot and kernel test robot.
+  Reported-by: kernel test robot <lkp@intel.com>
+  Closes: https://lore.kernel.org/oe-kbuild-all/202606171554.03yt9utn-lkp@intel.com/
+- Rebase onto media-committers next.
+- Update to handle p_s8 in std_validate_elem correctly. 
+- Link to v1: https://lore.kernel.org/r/20260616-enc_roi_enable-v1-0-fefcc4e76f33@oss.qualcomm.com
+
+---
+Deepa Guthyappa Madivalara (5):
+      media: v4l2-core: add new control type V4L2_CTRL_TYPE_S8
+      media: uapi: Introduce new control for video encoder ROI
+      media: iris: Add ROI delta QP control support for HFI Gen2 encoders
+      media: iris: Add HFI metadata buffer delivery support for Gen2 encoders
+      media: iris: Add BUF_ROIMB_DELTAQP metadata buffer for ROI delta QP
+
+ .../userspace-api/media/v4l/ext-ctrls-codec.rst    |  27 +++++
+ .../media/v4l/videodev2.h.rst.exceptions           |   1 +
+ .../userspace-api/media/v4l/vidioc-g-ext-ctrls.rst |   4 +
+ .../userspace-api/media/v4l/vidioc-queryctrl.rst   |   6 ++
+ drivers/media/platform/qcom/iris/iris_buffer.c     | 115 +++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_buffer.h     |  22 ++++
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 114 +++++++++++++++++++-
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |   2 +
+ drivers/media/platform/qcom/iris/iris_hfi_common.h |   1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   |  14 +++
+ .../platform/qcom/iris/iris_hfi_gen2_command.c     |  63 +++++++++++
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |   3 +
+ .../platform/qcom/iris/iris_hfi_gen2_packet.c      |   6 +-
+ .../platform/qcom/iris/iris_hfi_gen2_packet.h      |   3 +
+ .../platform/qcom/iris/iris_hfi_gen2_response.c    |  29 ++++++
+ .../platform/qcom/iris/iris_platform_common.h      |   5 +
+ drivers/media/platform/qcom/iris/iris_venc.c       |   4 +
+ drivers/media/platform/qcom/iris/iris_vidc.c       |   2 +
+ drivers/media/v4l2-core/v4l2-ctrls-api.c           |   1 +
+ drivers/media/v4l2-core/v4l2-ctrls-core.c          |  19 ++++
+ drivers/media/v4l2-core/v4l2-ctrls-defs.c          |  10 ++
+ include/media/v4l2-ctrls.h                         |   2 +
+ include/uapi/linux/v4l2-controls.h                 |   2 +
+ include/uapi/linux/videodev2.h                     |   2 +
+ 24 files changed, 453 insertions(+), 4 deletions(-)
+---
+base-commit: 64f76d5d9fd17a5661d7e5eab2aa99218db60d0b
+change-id: 20260616-enc_roi_enable-4d385c4783ae
+
+Best regards,
+-- 
+Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+
