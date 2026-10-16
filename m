@@ -1,109 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from rudorff.com (rudorff.com [193.31.26.27])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 559B34DAFB3;
-	Fri, 16 Oct 2026 14:56:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B64EF364EB8;
+	Fri, 16 Oct 2026 14:58:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.31.26.27
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792162573; cv=none; b=byAOyvVl8nrKr8p4otLqnXPXHbhbcO9e2f/VcHCkBosp5+Q98gA0SnaobotLzSgJoVubSo8g0ZgIxc+TIrML5GHeQuj0WPb8WRBpHqRlyEA3eqaZdgtWg44hvH5fwfSFf94MuqNLrJokjGEOx71pPwTgJ9AdhpJcLAZz1aCDGEE=
+	t=1792162690; cv=none; b=B0FEvSTiy9S2MtQ8vwEI7ShoiHk9W6YvHijibvXqTge/MgvvI9Cv6sM4lhI9reCl8T3h0KVsxd2CjOFb52dMGW8icRboNCkLGv7ARy4QzMTODHQnQoxc0nJzb+Vl8cCArYemAxQ+2cTxsnr5HTf4FPJGu36J2kcMQAgV6VAPWl0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792162573; c=relaxed/simple;
-	bh=v0VrKMVD9fdxJiPOnY6hqXtSLPjhyVJ/XO5t9vz1WBc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GLqRxs8ZABrbHgTX5xVxb10Vf51/NfM7bxPC/esn2N8I8Sb38OmJ2WX+3XAq+rGJa8pfr2qB3ErHLHIZqhn7PpZYX4uOjgn/aKRbh9TM6MfX2yhsWwZEpIZtKwB3CfEPHWUyx5LwAnjhRU3rWqATewzpbxVdBXtoJiYNVFZ5dQQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SUlmK3Wb; arc=none smtp.client-ip=10.30.226.201
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SUlmK3Wb"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CCC46C2BCF4;
-	Fri, 16 Oct 2026 14:56:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792162572;
-	bh=v0VrKMVD9fdxJiPOnY6hqXtSLPjhyVJ/XO5t9vz1WBc=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=SUlmK3WbfMdCWw4Pmg+0VYWQCpCPq8g35A07GqlY938phGVVN5RYIxQZ94Bn+Du0u
-	 tknTOtZylgCZ7MwVFBlbDkrzHo09+S2B6brYtWZ4WSl0/zsK7TcYzsVsiNk9mjweDN
-	 Sqlq8FEeY4s9m4gkcfmeK8+aGhQ0giMQZlAOsd9CP3as1QIi5mH10IJ0Gq3kJzjgij
-	 LvHnMernBUosqXffIkmmAn6uyoGLjLFPCPgGQUKFwcK3DIkE3c/3VVG6EmFqsP5kPO
-	 i8vkDTj7WMaWL8y/aSnuiSqAR4r3spMmK6Bqoj2wieIjFgIXijQIesUcFzWN3xtKf/
-	 PkgXWhXbS1xdg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B577DCC6B38;
-	Fri, 16 Oct 2026 14:56:12 +0000 (UTC)
-From: George Neacsu via B4 Relay <devnull+geocausa.gmail.com@kernel.org>
-Date: Fri, 16 Oct 2026 15:56:15 +0100
-Subject: [PATCH v3 5/6] phy: qcom-mipi-csi2: Use fsleep() for init sequence
- delays
+	s=arc-20240116; t=1792162690; c=relaxed/simple;
+	bh=4ztPQJ2JqUS4dKv+CVwf97K2sz0l/OjRQSz5MIU0dic=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VSF3KSvEBcIAJJ7wTxczsd58LKeD9b4B6sXGdi76pjivYy6Q8INb6guWhH9gSqxTyWTUNwjt7GuPoeOdGAwYiidAk1gKMGiDOS9w5KzySnG47tcilEItNacQSbFyjBg0mTHoA2dwSahBZ76d09LfQUzk7NI5V/tg7qFIJzqmy0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com; spf=pass smtp.mailfrom=rudorff.com; arc=none smtp.client-ip=193.31.26.27
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rudorff.com
+Received: from [IPV6:2a02:3102:b60c:d00:92f6:52ff:0:7ae] (dynamic-2a02-3102-b60c-0d00-92f6-52ff-0000-07ae.310.pool.telefonica.de [IPv6:2a02:3102:b60c:d00:92f6:52ff:0:7ae])
+	by rudorff.com (Postfix) with ESMTPSA id 58B0A406C6;
+	Fri, 16 Oct 2026 16:58:06 +0200 (CEST)
+Message-ID: <13c2c5f3-a066-495f-b2da-c764e00a9454@rudorff.com>
+Date: Fri, 16 Oct 2026 16:58:05 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] iio: light: Update DT bindings for GP2AP002
+To: Krzysztof Kozlowski <krzk@kernel.org>, Linus Walleij <linusw@kernel.org>,
+ Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>,
+ =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <20261016-iio-light-gp2ap002-v1-0-7c93312fa8d5@rudorff.com>
+ <20261016-iio-light-gp2ap002-v1-2-7c93312fa8d5@rudorff.com>
+ <97417be4-fc92-4184-b4d1-43482e50983e@kernel.org>
+Content-Language: en-US, de-DE
+From: "chr[]" <chris@rudorff.com>
+In-Reply-To: <97417be4-fc92-4184-b4d1-43482e50983e@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-x1e-cphy-rfc-v3-5-40a346a72153@gmail.com>
-References: <20261016-x1e-cphy-rfc-v3-0-40a346a72153@gmail.com>
-In-Reply-To: <20261016-x1e-cphy-rfc-v3-0-40a346a72153@gmail.com>
-To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
- David Heidelberg <david@ixit.cz>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>, 
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>, 
- Suresh Vankadara <svankada@qti.qualcomm.com>, tjose@qti.qualcomm.com, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org, 
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, George Neacsu <geocausa@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792162570; l=1325;
- i=geocausa@gmail.com; s=20261015; h=from:subject:message-id;
- bh=9kgF6eCoWKoJtXzcHCM7JYWoQiK6MqWjKyWCuLZbYNo=;
- b=MJURgf8PcL2d1vyDxikxUMr1tK+dJRgdnoA1QAvGbpfjfoaSr74WoIqg0h+eUoZLDJNwlmfdv
- 3WkbvGu0E2dAeafzBDOHgziTqZnzU5jtj8You2l1rWxSqY7RvWnwhae
-X-Developer-Key: i=geocausa@gmail.com; a=ed25519;
- pk=KyQk/iWbxsikewDBh0SwlHI51RvAqahD3loqmRp9DVI=
-X-Endpoint-Received: by B4 Relay for geocausa@gmail.com/20261015 with
- auth_id=1199
-X-Original-From: George Neacsu <geocausa@gmail.com>
-Reply-To: geocausa@gmail.com
 
-From: George Neacsu <geocausa@gmail.com>
+Am 16.10.26 um 16:45 schrieb Krzysztof Kozlowski:
+> On 16/10/2026 16:43, Christoph Rudorff wrote:
+>> add missing vled-supply
+> 
+> Please use full sentences.
+> 
+> Why missing? Did you check datasheet?
 
-The init sequence delays are applied with udelay(), which busy-waits.
-That is fine for the 1 us delays in the current D-PHY sequence, but the
-X1E80100 C-PHY sequence added next waits about 3 ms after its reset
-exit, and busy-waiting that long is wasteful. The sequence is written
-from phy_power_on(), in process context, where sleeping is allowed; the
-PHY reset just before it already uses usleep_range().
+Yes, I did. I mentioned that in the patch fixing the driver.
 
-Switch to fsleep(). It still uses udelay() for delays of 10 us or less,
-so the existing D-PHY sequence behaves as before.
+> 
+> Please use subject prefixes matching the subsystem. You can get them for
+> example with `git log --oneline -- DIRECTORY_OR_FILE` on the directory
+> your patch is touching. For bindings, the preferred subjects are
+> explained here:
 
-Suggested-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: George Neacsu <geocausa@gmail.com>
----
- drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Well, I did ... ok, none of the three commit message subjects of that file 
+were well formatted.
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-index a44e104301..84c45f67fd 100644
---- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-+++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-@@ -264,7 +264,7 @@ phy_qcom_mipi_csi2_gen2_config_lanes(struct mipi_csi2phy_device *csi2phy,
- 		}
- 		writel(val, csi2phy->base + r->reg_addr);
- 		if (r->delay_us)
--			udelay(r->delay_us);
-+			fsleep(r->delay_us);
- 	}
- }
- 
+> https://www.kernel.org/doc/html/latest/devicetree/bindings/submitting-patches.html#i-for-patch-submitters
+> 
+> Subject - everything is "update". Be specific. See git history for examples.
+> 
+> Please organize the patch documenting the bindings (DT bindings) before
+> the patch using that ABI.
 
--- 
-2.53.0
+Will do!
 
+regards,
+
+chris
+
+> See also:
+> https://elixir.bootlin.com/linux/v6.14-rc6/source/Documentation/devicetree/bindings/submitting-patches.rst#L46
+> 
+> 
+> Best regards,
+> Krzysztof
 
