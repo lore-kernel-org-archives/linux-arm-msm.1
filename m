@@ -1,64 +1,215 @@
-Received: from 4do.net (4do.net [51.68.154.128])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AE081FE451;
-	Fri, 16 Oct 2026 06:46:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.68.154.128
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B26443BAD88
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:48:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792133170; cv=none; b=XkuI0cCDz/nkrdiGsg7uzbuSSHte6kiwk5Rz804MCoW1yjTDyW0RDul2h1QZ2BroUaZm7gnXXOMwkhwARmY6NeQDplRuXv5L9QaC+A1StfCYIbWdcQzwJXh6M7faZGdkLpjq8k1c44YPW+qqZUmv7+odm+TIhlzrZzv/pFkAhbc=
+	t=1792133288; cv=none; b=dOi1IMWI68GHkRkToVxsNtLmQ6nxxBs/B714v5g4fp0i11rncOklGaVpzVY4AymEzfNfbTP6aY8QPyvZj6ymdy3rVIg//B+/26MhDjl3Wt77PSwL6RTSWDSZj0hYjGZjBtXytmyUfw34A5pBHy26tF4POz7xBrSJGNI79DACwmY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792133170; c=relaxed/simple;
-	bh=TgDyxgu8IDR41V90BIj5qe9X5y5frV/UovMkQLzWCYY=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=AtmGP9QGUel17skJNCQa067+tUv1Q8zocWsVdJAi4vndu8xRwB5xjzfXb+DlZawiRGebXssXB1XdOS9j0CrUEWFmueIj2ghD6q9nmb9BqDZf/oN7Ka4Z+Bju0FZv4Neh0s/u7+xU27IS4yY6uWDfL1Z3AOVkA8PmDpYR71CGFEk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fromdisposition.org; spf=pass smtp.mailfrom=fromdisposition.org; arc=none smtp.client-ip=51.68.154.128
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fromdisposition.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fromdisposition.org
+	s=arc-20240116; t=1792133288; c=relaxed/simple;
+	bh=ArpyCUcdXnNRQly4XkQ4s9u69ZZAMn3+U1oycCt3GcU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hogBEGhXVSQlES00HiJveITSrzPegtvGrGG7AYRxp7y6co4TQ837K4DXfDV1YZnIAG/fRfCB/JMzObY5Y43u83mHB7+E7AGqlVQ2BdOJTQ2B1iQgqAnmomly3Dw7rE8zeGpoal8NA1+UyMR/i1NXO+Ech6XlAcPPW91aO/JmaAo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aMaUenMM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W3lXHios; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aMaUenMM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W3lXHios"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FNDSkZ3492972
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:47:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=; b=aMaUenMM0yE9Z8GD
+	VSilD5dwzySdYN3/WbxhBBK0m8yHCTstbeuzdIElOU7fuLHS63bM4BIXsZrnY7+3
+	aohuNchyVOgWW4shZu2qa6BXe6LV0kSem9A5Lc9yswyBmeJ6nOxDa9Shsne6D/JN
+	X+iGQNoqKzSTIxGf7xVeI5GoAvSdiGnDlj01PNm3AiNa7P4ajFY2EyQ44xkUOguy
+	7rbOL5B1z6aYL0Vd72qrMbwJdlKAyfKxnf7EPLRhkp20fXXEG51g2mEiqQARLbyv
+	NYBtWhWZhg6S4388hHAhUeCZlzu/YTHkf/pAI0lMJyv03Uaq4/GHZY/JNToq2zep
+	f/lOlg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb21wtxym-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:47:59 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ac76132001so2120083a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 23:47:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792133278; x=1792738078; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=;
+        b=W3lXHiosbgUJh9nEiqBuCdR9tz5iX4WNdv/lQBp/zhytqZeADlTOHFqNZDbYq18Wza
+         j+OLoVAITyRzBGUI3Udriv0C2n8SIgzRmdApCc6gC9a3tzgY84YUP7yc9ddSfWfEJRLL
+         dnW0TH+nTsUX+HZ05e7+Ze5vRvkqRnXgvWuEuVXljjZ7388uC8I9cu1h7UUrFk438Sgo
+         kpNRieHXycEtUclmjbYpnVTmy3aOy5pB3YBrbTyDYD03YEWDJ+fi0aZVpJs4Ov4f6Kfn
+         uL1oeOo0kcmG/lNQJIkCuYbIUx3kPmiCu/vaXlIPwYuqCyxlvPEkPZW7RnKjRcz+aY3Y
+         UD9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792133278; x=1792738078;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=;
+        b=hdvPxdRjixwyGu9SJBgKhjY62tG54+4NOS9jKMoJQNW2a1V9T/OLKziCrKANC+d7DH
+         M+R93Q1G033zTHF44PDXR9QEEn+csXx5OL/VNYui7j0De4C2g6nVyf3t1i1Qx9C32ybG
+         g7IvPZDj4+K7a8SlQIB22qlVau23fhr6T6lhi/9s1BlggJKOqat7YUGUYRdwKYE4lLpO
+         jDIeAjLuEuT6ygzYhp9YfL3SAIxBISdIsXA6G1P7wP59+wPSymp9L8l2FwqmUEseBrtV
+         9In8iAX4R5BPT/Bl1oSuGp42okZotv/bcGIQ+70JrkYLvI0/n+8BJsA7mxRV8kGB0eX/
+         TXPw==
+X-Gm-Message-State: AFq9FYJ5L8jhhq4qEW6oveCWcF95qjhbbYqAlCZxNi/jAC5VFmrl9fpd
+	laWKSpGgVeKRprSCXzDf4FQTo2aOqBgqFmwDt0/WwNKUmYE3gGGMVgzZgJR4P4hRwJ0RdYcDfYd
+	xVvtSk6jPNTXhgI4ePROfU3tf9goEgtZsnjdfmCd0vcCAfcIpt0M7J+/DOuvXzUwDvKkC
+X-Gm-Gg: AYBFou14aB8BxemTK0WXnDd1JcMmyqLWWqNgEmymB+U2+xbCNP30XucgH7JieUmZtXT
+	z4ZI8t0FLMjepggNX+O7Rr5k5tf/GUuMmcH7Y14XA7m2UU+z9opx6DB29D5JpxhzL0dNG32TaVh
+	a7TzeM7PlKk2eAfsLVFCdnsboO/D3BCiKrNs8aORA8j6LWKCZj+/XVI5V8D5p1GMzfqePQKmZX6
+	/ucGkgZwhuAZPrMSBq3XtwCVM0gUUdDzoJ9hEYC9ITey7N6r/Vj1DtIVtZRzgLF3bGVoetpGBSK
+	j4sZKsOcrQPBoD72DVRRrSq3ImP5OT0cvPGyBkqoGuBuCJqqI7AVv8WZ19ikdno3H79Jl6k3rpq
+	4wBl3KhfM4xzFF1LMdtLOtslk2MA=
+X-Received: by 2002:a17:90b:4d0f:b0:3ac:97e3:73a3 with SMTP id 98e67ed59e1d1-3ac97e3ca4bmr4148849a91.6.1792133278234;
+        Thu, 15 Oct 2026 23:47:58 -0700 (PDT)
+X-Received: by 2002:a17:90b:4d0f:b0:3ac:97e3:73a3 with SMTP id 98e67ed59e1d1-3ac97e3ca4bmr4148830a91.6.1792133277770;
+        Thu, 15 Oct 2026 23:47:57 -0700 (PDT)
+Received: from [10.218.18.193] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3acc487e509sm2669257a91.9.2026.10.15.23.47.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 15 Oct 2026 23:47:57 -0700 (PDT)
+Message-ID: <b907dea8-d2eb-4237-b316-6d96c81a5b33@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 12:17:50 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Fri, 16 Oct 2026 06:39:31 +0000
-From: Demeter Barna <me@fromdisposition.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, Lorenzo Pieralisi
- <lpieralisi@kernel.org>, =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?=
- <kwilczynski@kernel.org>, Rob Herring <robh@kernel.org>, Bjorn Helgaas
- <bhelgaas@google.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Qiang
- Yu <qiang.yu@oss.qualcomm.com>, Jeff Johnson <jjohnson@kernel.org>, Liam
- Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bartosz
- Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, Luiz
- Augusto von Dentz <luiz.dentz@gmail.com>, Balakrishna Godavarthi
- <quic_bgodavar@quicinc.com>, Rocky Liao <quic_rjliao@quicinc.com>, Bjorn
- Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, devicetree@vger.kernel.org, Bartosz Golaszewski
- <brgl@bgdev.pl>, linux-bluetooth@vger.kernel.org, Bartosz Golaszewski
- <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v2 2/7] wifi: ath11k: enable support for WCN6851
-In-Reply-To: <fiuuh6rwohtlmwdiy7cwqee62e7jrtdgii7fklfy7jkgh25yul@mzlefhqgzo55>
-References: <20260608-sm8350-wifi-v2-0-efb68f1ff04c@oss.qualcomm.com>
- <20260608-sm8350-wifi-v2-2-efb68f1ff04c@oss.qualcomm.com>
- <fiuuh6rwohtlmwdiy7cwqee62e7jrtdgii7fklfy7jkgh25yul@mzlefhqgzo55>
-Message-ID: <850ada71460dc62152218e42e78079c6@fromdisposition.org>
-X-Sender: me@fromdisposition.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/4] ASoC: dt-bindings: qcom,pm4125-codec: Add the MBHC
+ jack properties
+To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Alexey Klimov <alexey.klimov@linaro.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        ajay.nandam@oss.qualcomm.com, ajay.nandam@oss.qualcomm.com
+References: <20261015-pm4125_mbhc_support-v1-0-8bc1212db6f7@oss.qualcomm.com>
+ <20261015-pm4125_mbhc_support-v1-1-8bc1212db6f7@oss.qualcomm.com>
+Content-Language: en-US
+From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+In-Reply-To: <20261015-pm4125_mbhc_support-v1-1-8bc1212db6f7@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: UVCsb-O2s1tQSAY7VqsIGml0MQ6LD0T1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAyNiBTYWx0ZWRfX3Gp9W4pu1tJk
+ fzOGs0HnneHvFMGP+aArqWQehllJgw7Yk6cVYtLFgsvE1AXt1Trsfxy+mrQaBCPvJPogm6S+xL2
+ 98GB5ugLNGX7udO6T5Ve19TY5Ng1v/ah756zgmARIYvAJ0BQWu28XHbyvxGlabbb0nti6O79NLJ
+ qLslJUstOMBaVueTwzWUZ9YmvXKAgiquHP8h/20vDvMXqgPSyyTFl1RwImdvTn2swDadGziSqd1
+ OFWUXH+sAnUpkl9tJaGpVJUcnRH6PrtRR2qcSfWJL/ddQgv1dgweHErkiGVRsEMSFX3zzx1uCty
+ Ti3wajQbqBK+HGHWc8HupxDszBwClh/ih3UEU9doxKJzXFc+eB8Cj9e7Len7lBh7eFba2jnjLUc
+ i7XUrSQfch46vwp+BIjMN93Y2fqJ9tVmqKB1a3kj1cfphGnwFQn3GJsgCyvVBSRuB+c06Pjz9S8
+ Feyq+bpkq1PqRuQ6Y6A==
+X-Proofpoint-GUID: UVCsb-O2s1tQSAY7VqsIGml0MQ6LD0T1
+X-Authority-Analysis: v=2.4 cv=R5qWitRX c=1 sm=1 tr=0 ts=6ad1c89f cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=xz_OTyItpRnlL1KGmssA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAyNiBTYWx0ZWRfX+5nc6l+eEYzi
+ Q4LpJijCbukoD7wW2TWdRbIov+Vf9x23bfWnkd5bUsOOv9mhofdkfiSpRMUy9/qIv5Fd2e6ddOT
+ vBkB+B5Yja3k/Fg8LeOQW0kFhfkqLi8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 adultscore=0
+ malwarescore=0 clxscore=1015 bulkscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610160026
 
-On 2026-06-11 20:05, Dmitry Baryshkov wrote:
-> This crashes with the firmware that came with the board,
-> WLAN.HSP.1.1.c3-00200-QCAHSPSWPL_V1_V2_SILICONZ. I will revert to 3
-> vdevs for v3.
 
-Same here with a newer firmware, WLAN.HSP.1.1-02922 (2021-11-04),
-on a Razer Edge 5G (SM8350, WCN6855 hw1.1; next-20261012 plus a
-board DTS that is not upstream yet). With 4 vdevs the firmware
-crashes (MHI_CB_EE_RDDM, no WMI ready event). With 2 + 1, as in
-v1, Wi-Fi works.
 
-Happy to test v3.
+On 10/15/2026 7:43 PM, Mohammad Rafi Shaik wrote:
+> The binding already describes qcom,mbhc-buttons-vthreshold-microvolt,
+> but not the rest of the data the MBHC block needs to detect a 3.5mm
+> jack, even though wcd_dt_parse_mbhc_data() reads all of it from the
+> codec node and the schema has unevaluatedProperties set to false. A
+> board that describes its jack is therefore rejected by the schema.
+> 
+> Document the remaining four properties, matching the descriptions used
+> for the same properties in qcom,wcd93xx-common.yaml:
+> 
+>   - qcom,hphl-jack-type-normally-closed and
+>     qcom,ground-jack-type-normally-closed describe the board's jack
+>     switches. The MBHC logic has to know the idle state of the HPHL and
+>     ground switches to tell an insertion from a removal.
+>   - qcom,mbhc-headset-vthreshold-microvolt and
+>     qcom,mbhc-headphone-vthreshold-microvolt are the ADC thresholds that
+>     separate a headset from a headphone and a headphone from a floating
+>     jack. They are board specific because they depend on the jack
+>     wiring and on the microphone bias voltage they are measured against.
+> 
+> All four stay optional, as they are for the wcd93xx codecs: the driver
+> derives the thresholds from the microphone bias voltage when they are
+> absent and assumes normally open switches, so existing device trees
+> keep working unchanged.
+> 
+> Assisted-by: Claude Opus 5
+> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+> ---
+>   .../devicetree/bindings/sound/qcom,pm4125-codec.yaml   | 18 ++++++++++++++++++
+>   1 file changed, 18 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml b/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
+> index 6e2f103be..54e5b7607 100644
+> --- a/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
+> +++ b/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
+> @@ -64,6 +64,24 @@ properties:
+>       minimum: 1800000
+>       maximum: 2850000
+>   
+> +  qcom,hphl-jack-type-normally-closed:
+> +    description: Indicates that HPHL jack switch type is normally closed
+> +    type: boolean
+> +
+> +  qcom,ground-jack-type-normally-closed:
+> +    description: Indicates that Headset Ground switch type is normally closed
+> +    type: boolean
+> +
+> +  qcom,mbhc-headset-vthreshold-microvolt:
+> +    description: Voltage threshold value for headset detection
+> +    minimum: 0
+> +    maximum: 2850000
+> +
+> +  qcom,mbhc-headphone-vthreshold-microvolt:
+> +    description: Voltage threshold value for headphone detection
+> +    minimum: 0
+> +    maximum: 2850000
+> +
+>     qcom,mbhc-buttons-vthreshold-microvolt:
+>       description:
+>         Array of 8 Voltage threshold values corresponding to headset
+
+The binding documents 8 button thresholds, but looking at the PM4125
+register definitions I only see threshold registers for BTN0 through 
+BTN4. The following registers are MICB2_RAMP, MBHC_CTL_1 and MBHC_CTL_2.
+
+Am I missing how thresholds for buttons 5-7 are programmed here, or 
+should PM4125 only expose 5 button thresholds?
+
+Thanks & Regards
+Ajay kumar Nandam
+
+> 
+
