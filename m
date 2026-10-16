@@ -1,258 +1,142 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2326F3C8C74;
-	Fri, 16 Oct 2026 21:52:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89D6C2EEE91;
+	Fri, 16 Oct 2026 22:04:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792187548; cv=none; b=QyyHxOqpY1fJf5waALAb5ekQRFjKKZjmWNxxqeYjRIKRaraRpaq1e4/ZyXLuEVKgyZTUyKY1kmeZhbfMmBrHTc6eYwRr/FwsFq9VTh3bvFtU/1eSy98qpUjDbDRxWONyU2PBm+CeyjtcT9Nwa/D5BmJhP3lcP6qyZBIqdfYfW0M=
+	t=1792188255; cv=none; b=jYSsmrduTHfdGuPdIKGHNG1lUr1FbN8wImUwM5tTLj5nMAqw78+FItyLuanY/YWvoSjiMuMwtHrMelZBP0UtcAmPE3sxiQNilFuN9OkAKc8d8GlFi1TUa/EoeXxTGfrBPtgcGUjS7LGWkbIVa34dXAX7TaEeYj455Vfk4xrVtss=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792187548; c=relaxed/simple;
-	bh=/X3zmd/w1MxITRY95sziVrw8/iiMEHN/vWnCVXAZW7s=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=VL9rFtUXd2wLNyYa7FGRcEjyY/a+di7o9wxwJxIGiSeHBqm3lUmvKbHJy4BgpvZgu777YeQv+l2bvif98wBu89LzsfCOAFO70m1HFAzbVfOEF2ZMmYGPisVWS5qBJdl2n/+zZLpmizPe2pCAooOVXVs6HXp1ERXf3twa2cB4AIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C+DCkd1k; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1792188255; c=relaxed/simple;
+	bh=RvR/7ZqtgTCxsEexGbTDIRCSLLTP9gyrMP0MSdfEijU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R3PcZRfBLCG3Yc4XI+IRgufmA1hjlHDV3YkwldU/ZWsYTlG1GLOSJnT8wRXMwKHxwAdxoxEtmdWXI9gxf8r9knGSi9why7rM7O2wTPDF6KdlqM8ELUM2iwLHeJeKciKp7qtnimg56oKA9Xb+r+vCocX9tT25Pw1Tv6OLN+thYkg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=wdhqUlvR; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C+DCkd1k"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D36B7C2BCFA;
-	Fri, 16 Oct 2026 21:52:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792187547;
-	bh=/X3zmd/w1MxITRY95sziVrw8/iiMEHN/vWnCVXAZW7s=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=C+DCkd1kyesT45QauOaLVNmIiuXFvdvMbxIYGmyoZf45bjH2TTfFxfM2dgY3mkjTt
-	 AHI93JB1kjvYILDQCL+YyOlmRQ73gakxtpdA9nUWk4HhfVOFRV3eZDEHR8tl2FkBid
-	 9MBM5ZRS4xHNwYuWZsBAMPaKTNk/oYLbE7tXBhuFZrxz5Lo1Hv25VGvfPkcMFmUz+p
-	 IQ07cE9XuVFKEcMrIMAhRBYK1PycI9Rn1k1KxjbHTUgx5fPCK7ZYTvG93IpL6ukgiM
-	 6NnGTqw3R0Fi1U/CW1Y4WbOAk+ke0UN0JfoGoiltoXshMEk6+vQ9QM/ZOttoRh3qnz
-	 0tZ5AHN5f+QPg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B47F7CCF2C4;
-	Fri, 16 Oct 2026 21:52:27 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Fri, 16 Oct 2026 23:52:21 +0200
-Subject: [PATCH v6 2/2] arm64: dts: qcom: sdm845-google: Add WCD9340 codec
- and microphone capture
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="wdhqUlvR"
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 20BEE53406E9;
+	Sat, 17 Oct 2026 00:04:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1792188251;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=iCWFPnaVwrMEIWega7/YH4kAUFTaczsUzsdN/XgBaqY=;
+	b=wdhqUlvR7bLl1EDZYzg2N+HtKYXZuErYdZ6bFzoVdKXWP77778jmd/6UP/tDan4fF+urZi
+	0kdljkrFBsGLWHi9fZyLOxaGbUBueVTJYoyf5YZZiLebC/wAf0OcDJwRVC6/121z0tOheV
+	8FTID3+7pP7mww1XiYaB7++NQtnlM3Q=
+Message-ID: <09007144-8244-4350-a1a5-bf42162e2f20@ixit.cz>
+Date: Sat, 17 Oct 2026 00:04:10 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-pixel3-audio-v6-2-11c88448b3be@ixit.cz>
-References: <20261016-pixel3-audio-v6-0-11c88448b3be@ixit.cz>
-In-Reply-To: <20261016-pixel3-audio-v6-0-11c88448b3be@ixit.cz>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- David Rhodes <david.rhodes@cirrus.com>, 
- Richard Fitzgerald <rf@opensource.cirrus.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- David Rhodes <drhodes@opensource.cirrus.com>, 
- Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
- devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4188; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=fI7A/5RiukFa0xOXY64dBcvV3k0LObsxRG+TKhW69sM=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq0pya7mNGQmYwuz/Ftu263gZOuTcutmceIt0y7
- Ca5c92tywCJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCatKcmgAKCRBgAj/E00kg
- cjH9EACyuB2RE1aXYBfMTr3qEF7BRp2E8mJ5GB0LswS0VRMqlkgCwEn7wvAVgrzZkSPgOgEJw9S
- v5AnBQva/ezC0qGMkuOdcypNfLWmxtcOOs5o7LVOEEtRDAwO7bY3znJT7E5iSAzEv0F0XT87shC
- h02GjlhCMwV/DrKU16ofUoEieGYH+PwpYRyRpwvk97QdsJ720z7TjNU5dp0X4z8HYqdnXQKWPh+
- WIsZ1LDbo90Iz6jMJqnJ4Ek4BNPl7Wy1GyYttfHObWRgebnxrxolz6WdeAd2CiWQ/m7J408QoPl
- PyJBFdZpLd34N48VU+8zT46ojiFTvDKpUkLFjGqmpjhwuZiHd71BvkT8SXHv0H5gUWyXFATN8SN
- 4rno7o2XeHH1sTXC7J6k3atSbyyxahJlH/5i5T7s2c4zXtwf8DApOrL6Oss5gBdgb170mNQa4Gl
- hX4hkw8MKOFUsJmSuN8cBwRjjEyvxyvBGE79fhCgQ7boj7RVfza7sdO8tppyoorMzvJCMER2rP/
- ZMnmowkN9mo531ozlEoMOUkhQWfbfMkadQWLkKaSAR+UF9hHiMd7T/1t8wiYnm2DyghNyxEbLXE
- cMLV8DVkhmD6nMc4VL8peVNvUb2YaTtd84O1kYXGDMofvHifrDHp2XsfytyNbGdXz+aDkV8xApt
- L/lcU9VGSj2kIpQ==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
-
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/6] phy: qcom-mipi-csi2: C-PHY for X1E80100
+To: George Neacsu <geocausa@gmail.com>, Bryan O'Donoghue <bod@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
+ Suresh Vankadara <svankada@qti.qualcomm.com>, tjose@qti.qualcomm.com,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261016-x1e-cphy-rfc-v3-0-40a346a72153@gmail.com>
+ <5a90fbdc-7106-45e3-8fca-eaf5c60e0337@kernel.org>
+ <20261016214830.967217-1-geocausa@gmail.com>
+Content-Language: en-US, cs-CZ
 From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ xsFNBF5v1x4BEADS3EddwsNsvVAI1XF8uQKbdYPY/GhjaSLziwVnbwv5BGwqB1tfXoHnccoA
+ 9kTgKAbiXG/CiZFhD6l4WCIskQDKzyQN3JhCUIxh16Xyw0lECI7iqoW9LmMoN1dNKcUmCO9g
+ lZxQaOl+1bY/7ttd7DapLh9rmBXJ2lKiMEaIpUwb/Nw0d7Enp4Jy2TpkhPywIpUn8CoJCv3/
+ 61qbvI9y5utB/UhfMAUXsaAgwEJyGPAqHlC0YZjaTwOu+YQUE3AFzhCbksq95CwDz4U4gdls
+ dmv9tkATfu2OmzERZQ6vJTehK0Pu4l5KmCAzYg42I9Dy4E6b17x6NncKbcByQFOXMtG0qVUk
+ F1yeeOQUHwu+8t3ZDMBUhCkRL/juuoqLmyDWKMc0hKNNeZ9BNXgB8fXkRLWEUfgDXsFyEkKp
+ NxUy5bDRlivf6XfExnikk5kj9l2gGlNQwqROti/46bfbmlmc/a2GM4k8ZyalHNEAdwtXYSpP
+ 8JJmlbQ7hNTLkc3HQLRsIocN5th/ur7pPMz1Beyp0gbE9GcOceqmdZQB80vJ01XDyCAihf6l
+ AMnzwpXZsjqIqH9r7T7tM6tVEVbPSwPt4eZYXSoJijEBC/43TBbmxDX+5+3txRaSCRQrG9dY
+ k3mMGM3xJLCps2KnaqMcgUnvb1KdTgEFUZQaItw7HyRd6RppewARAQABzSBEYXZpZCBIZWlk
+ ZWxiZXJnIDxkYXZpZEBpeGl0LmN6PsLBlAQTAQgAPgIbAwULCQgHAgYVCgkICwIEFgIDAQIe
+ AQIXgBYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJl+KksBQkPDaAOAAoJEGACP8TTSSBy6IAQ
+ AMqFqVi9LLxCEcUWBn82ssQGiVSDniKpFE/tp7lMXflwhjD5xoftoWOmMYkiWE86t5x5Fsp7
+ afALx7SEDz599F1K1bLnaga+budu55JEAYGudD2WwpLJ0kPzRhqBwGFIx8k6F+goZJzxPDsf
+ loAtXQE62UvEKa4KRRcZmF0GGoRsgA7vE7OnV8LMeocdD3eb2CuXLzauHAfdvqF50IfPH/sE
+ jbzROiAZU+WgrwU946aOzrN8jVU+Cy8XAccGAZxsmPBfhTY5f2VN1IqvfaRdkKKlmWVJWGw+
+ ycFpAEJKFRdfcc5PSjUJcALn5C+hxzL2hBpIZJdfdfStn+DWHXNgBeRDiZj1x6vvyaC43RAb
+ VXvRzOQfG4EaMVMIOvBjBA/FtIpb1gtXA42ewhvPnd5RVCqD9YYUxsVpJ9d+XsAy7uib3BsV
+ W2idAEsPtoqhVhq8bCUs/G4sC2DdyGZK8MRFDJqciJSUbqA+5z1ZCuE8UOPDpZKiW6H/OuOM
+ zDcjh0lOzr4p+/1TSg1PbUh7fQ+nbMuiT044sC1lLtJK0+Zyn0GwhR82oNM4fldNsaHRW42w
+ QGD35+eNo5Pvb3We5XRMlBdhFnj7Siggp4J8/PJ6MJvRyC+RIJPGtbdMB2/RxWunFLn87e5w
+ UgwR9jPMHAstuTR1yR23c4SIYoQ2fzkrRzuazsFNBF5v1x4BEADnlrbta2WL87BlEOotZUh0
+ zXANMrNV15WxexsirLetfqbs0AGCaTRNj+uWlTUDJRXOVIwzmF76Us3I2796+Od2ocNpLheZ
+ 7EIkq8budtLVd1c06qJ+GMraz51zfgSIazVInNMPk9T6fz0lembji5yEcNPNNBA4sHiFmXfo
+ IhepHFOBApjS0CiOPqowYxSTPe/DLcJ/LDwWpTi37doKPhBwlHev1BwVCbrLEIFjY0MLM0aT
+ jiBBlyLJaTqvE48gblonu2SGaNmGtkC3VoQUQFcVYDXtlL9CVbNo7BAt5gwPcNqEqkUL60Jh
+ FtvVSKyQh6gn7HHsyMtgltjZ3NKjv8S3yQd7zxvCn79tCKwoeNevsvoMq/bzlKxc9QiKaRPO
+ aDj3FtW7R/3XoKJBY8Hckyug6uc2qYWRpnuXc0as6S0wfek6gauExUttBKrtSbPPHiuTeNHt
+ NsT4+dyvaJtQKPBTbPHkXpTO8e1+YAg7kPj3aKFToE/dakIh8iqUHLNxywDAamRVn8Ha67WO
+ AEAA3iklJ49QQk2ZyS1RJ2Ul28ePFDZ3QSr9LoJiOBZv9XkbhXS164iRB7rBZk6ZRVgCz3V6
+ hhhjkipYvpJ/fpjXNsVL8jvel1mYNf0a46T4QQDQx4KQj0zXJbC2fFikAtu1AULktF4iEXEI
+ rSjFoqhd4euZ+QARAQABwsF8BBgBCAAmAhsMFiEE13oJz+7cK71TpwR0YAI/xNNJIHIFAmX4
+ qVAFCQ8NoDIACgkQYAI/xNNJIHKN4A/+Ine2Ii7JiuGITjJkcV6pgKlfwYdEs4eFD1pTRb/K
+ 5dprUz3QSLP41u9OJQ23HnESMvn31UENk9ffebNoW7WxZ/8cTQY0JY/cgTTrlNXtyAlGbR3/
+ 3Q/VBJptf04Er7I6TaKAmqWzdVeKTw33LljpkHp02vrbOdylb4JQG/SginLV9purGAFptYRO
+ 8JNa2J4FAQtQTrfOUjulOWMxy7XRkqK3QqLcPW79/CFn7q1yxamPkpoXUJq9/fVjlhk7P+da
+ NYQpe4WQQnktBY29SkFnvfIAwqIVU8ix5Oz8rghuCcAdR7lEJ7hCX9bR0EE05FOXdZy5FWL9
+ GHvFa/Opkq3DPmFl/0nt4HJqq1Nwrr+WR6d0414oo1n2hPEllge/6iD3ZYwptTvOFKEw/v0A
+ yqOoYSiKX9F7Ko7QO+VnYeVDsDDevKic2T/4GDpcSVd9ipiKxCQvUAzKUH7RUpqDTa+rYurm
+ zRKcgRumz2Tc1ouHj6qINlzEe3a5ldctIn/dvR1l2Ko7GBTG+VGp9U5NOAEkGpxHG9yg6eeY
+ fFYnMme51H/HKiyUlFiE3yd5LSmv8Dhbf+vsI4x6BOOOq4Iyop/Exavj1owGxW0hpdUGcCl1
+ ovlwVPO/6l/XLAmSGwdnGqok5eGZQzSst0tj9RC9O0dXO1TZocOsf0tJ8dR2egX4kxM=
+In-Reply-To: <20261016214830.967217-1-geocausa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The Pixel 3 sound card so far only drove the two CS35L36 speaker
-amplifiers. Wire in the WCD9340 codec , add a SLIMbus capture link
-for it and route the three digital microphones
+On 16/10/2026 23:48, George Neacsu wrote:
+> Hi Bryan,
+> 
+> On 16/10/2026 17:09, Bryan O'Donoghue wrote:
+>> Using drivers/phy means not doing CPHY inline in CAMSS. If you require
+>> patches from the V9 series - you should cherry-pick them - sign off them
+>> and the post them.
+> 
+> Understood. The two CAMSS patches need only three of David's nine
+> patches, and none of his CSIPHY C-PHY tables:
+> 
+> - 2/9, which keeps the endpoint's bus type in the lane configuration;
+> - 4/9, which adds the CSID PHY select for C-PHY;
+> - 8/9, which lets camss_get_link_freq() account for C-PHY symbols.
+> 
+> The other six program C-PHY inline in camss-csiphy-3ph-1-0.c, which the
+> PHY API path does not use.
+> 
+> So the CAMSS side will go out as one series on top of this one: those
+> three, kept under David's authorship with my sign-off added, followed
+> by the two CAMSS patches. David, is that all right with you?
 
-Based on work done by Casey Tunturi.
+Yes, sure. Just 'git commit --amend --sign' :)
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 58 ++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
+I didn't expected these patches will get in (due to PHY rework), so if they do 
+I'll be happy, because I can drop them from sdm845 tree later.
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-index 68d26c1a06d0c..8e303a91bfaa2 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-@@ -4,18 +4,20 @@
- 
- #include <dt-bindings/arm/qcom,ids.h>
- #include <dt-bindings/dma/qcom-gpi.h>
- #include <dt-bindings/input/linux-event-codes.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- #include <dt-bindings/sound/qcom,q6afe.h>
- #include <dt-bindings/sound/qcom,q6asm.h>
-+#include <dt-bindings/sound/qcom,wcd934x.h>
- 
- #include "sdm845.dtsi"
-+#include "sdm845-wcd9340.dtsi"
- #include "pm8998.dtsi"
- #include "pmi8998.dtsi"
- 
- /delete-node/ &mpss_region;
- /delete-node/ &venus_mem;
- /delete-node/ &cdsp_mem;
- /delete-node/ &mba_region;
- /delete-node/ &slpi_mem;
-@@ -512,16 +514,20 @@ dai@72 {
- 		qcom,tdm-data-align = <0>;
- 	};
- };
- 
- &q6asmdai {
- 	dai@0 {
- 		reg = <MSM_FRONTEND_DAI_MULTIMEDIA1>;
- 	};
-+
-+	dai@1 {
-+		reg = <MSM_FRONTEND_DAI_MULTIMEDIA2>;
-+	};
- };
- 
- &qupv3_id_0 {
- 	status = "okay";
- };
- 
- &qupv3_id_1 {
- 	status = "okay";
-@@ -539,40 +545,81 @@ &qup_uart9_tx {
- 
- &sound {
- 	compatible = "qcom,sdm845-sndcard";
- 	model = "Pixel 3";
- 	pinctrl-0 = <&quat_mi2s_active>, <&quat_mi2s_sd0_active>,
- 		    <&quat_mi2s_sd1_active>;
- 	pinctrl-names = "default";
- 
-+	audio-routing = "DMIC0", "MCLK", /* Top mic */
-+			"DMIC0", "MIC BIAS1",
-+			"DMIC3", "MCLK", /* Top-edge mic */
-+			"DMIC3", "MIC BIAS3",
-+			"DMIC4", "MCLK", /* Bottom mic */
-+			"DMIC4", "MIC BIAS4";
-+
- 	/* mm[0-9]-dai-link nodes must be positioned first regardless of sorting */
- 	mm1-dai-link {
- 		link-name = "MultiMedia1";
- 
- 		cpu {
- 			sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
- 		};
- 	};
- 
-+	mm2-dai-link {
-+		link-name = "MultiMedia2";
-+
-+		cpu {
-+			sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA2>;
-+		};
-+	};
-+
- 	cs35l36-dai-link {
- 		link-name = "Speaker Playback";
- 
- 		codec {
- 			sound-dai = <&cs35l36_bottom>, <&cs35l36_top>;
- 		};
- 
- 		cpu {
- 			sound-dai = <&q6afedai QUATERNARY_TDM_RX_0>;
- 		};
- 
- 		platform {
- 			sound-dai = <&q6routing>;
- 		};
- 	};
-+
-+	slimcap-dai-link {
-+		link-name = "SLIM Capture 1";
-+
-+		codec {
-+			sound-dai = <&wcd9340 AIF1_CAP>;
-+		};
-+
-+		cpu {
-+			sound-dai = <&q6afedai SLIMBUS_0_TX>;
-+		};
-+
-+		platform {
-+			sound-dai = <&q6routing>;
-+		};
-+	};
-+};
-+
-+&swm {
-+	/*
-+	 * Nothing hangs off the codec's SoundWire bus on this board: the
-+	 * speakers are CS35L36 amplifiers on QUAT_TDM. With an empty bus the
-+	 * controller reports port mismatches and frame-generator timeouts on
-+	 * every boot.
-+	 */
-+	status = "disabled";
- };
- 
- &tlmm {
- 	gpio-reserved-ranges = < 0 4>, /* SPI (Intel MNH Pixel Visual Core) */
- 			       <81 4>; /* SPI (most likely Fingerprint Cards FPC1075) */
- 
- 	nfc_default: nfc-default-state {
- 		enable-pins {
-@@ -718,16 +765,27 @@ &usb_1_qmpphy {
- };
- 
- &venus {
- 	firmware-name = "qcom/sdm845/Google/blueline/venus.mbn";
- 
- 	status = "okay";
- };
- 
-+&wcd9340 {
-+	/* PM8998 LN_BB_CLK2 feeds the Pixel Visual Core on this board */
-+	clocks = <&rpmhcc RPMH_LN_BB_CLK3>;
-+	reset-gpios = <&tlmm 64 GPIO_ACTIVE_HIGH>;
-+	vdd-buck-supply = <&vreg_s4a_1p8>;
-+	vdd-buck-sido-supply = <&vreg_s4a_1p8>;
-+	vdd-tx-supply = <&vreg_s4a_1p8>;
-+	vdd-rx-supply = <&vreg_s4a_1p8>;
-+	vdd-io-supply = <&vreg_s4a_1p8>;
-+};
-+
- &wifi {
- 	vdd-0.8-cx-mx-supply = <&vreg_l5a_0p8>;
- 	vdd-1.8-xo-supply = <&vreg_pmu_xo>;
- 	vdd-1.3-rfa-supply = <&vreg_pmu_rf>;
- 	vdd-3.3-ch0-supply = <&vreg_pmu_ch0>;
- 
- 	qcom,snoc-host-cap-8bit-quirk;
- 
+David
 
--- 
-2.55.0
-
+> 
+> Thanks,
+> George
 
