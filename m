@@ -1,82 +1,82 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A30F4611C7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:41:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 189A04A49AB
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:46:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792154466; cv=none; b=NIiWAqNcaa8UqxAia0e0TpGwCFh/Z+pYz/TQ/oaLa7onOSO7wHMS6GR7q85QepdkeFF/7CXuMHCpB2QsNEWv+VZ13IKoehcicvZxpqsku/g73oXSwJPhxLRBk3Tue7M0xjMuqn9vNxPrF+PUkhomv9JeyGT3LJ6Icv7nX6yIV1E=
+	t=1792154769; cv=none; b=REOdT08/FUViiURUVNxgBEfrbrLSM5K/ysnPoKPxxm7FzGTKYuE1u5KjqK5/XHFZhaS8QptxlX+dIGVRxrwSMmYP1V2Bc0G0EO58gpqVFdW4W92ZodWErtxc00LWXAbiVudAF77Lrd3tcwEuZSCuPX69OT3AKq4EtVFmLOHAJSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792154466; c=relaxed/simple;
-	bh=C6glWX2uIKdCMrFYP7++oE4vVl/Eo+Hy0RT+CSghy+8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GJ8+iK1ojdQCc8gpbx7iWQzVOCc/HRUnW3GfBzlpgjox/OO9iHcFGWTiihXX5FzmH7J3TzKAMhXEIv9kLxtncEf52oLqXcrSd3oQdIdArUuJZMVU5nMTXK3HTqNHxXe/q9NQ7W+9tsgzYQW3Mb3IaVUlCW7zwcnKTHF96jz75ns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mSkoqAfx; arc=none smtp.client-ip=209.85.216.43
+	s=arc-20240116; t=1792154769; c=relaxed/simple;
+	bh=lKAkidrvbBJ/vTXYNpqVpCG9VNbWjHMk4s8lEayu9QY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=B8hZ+Qb8vjovJ4P3+9oZr2QMY46vKw+Wgq0MyYOT2lEBo8suGZ6wg6dU/UdYhbe5KNLA8rBkCvBlnX4/Hvi4KkXfym6C2HOudiQkMXHnqx8C2O8FVdpmerDVXS62hj9/mNxC6TihhWpKzLL+3pe9yRspb55AWd9oXdYxIrgz0rU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=boDcVw12; arc=none smtp.client-ip=209.85.215.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mSkoqAfx"
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3acdcfa2bd3so287300a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:41:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="boDcVw12"
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cd632f7a4a1so1003482a12.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:46:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792154464; x=1792759264; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0kuUNpKGpHmxXwciJw2YT+q4uhPu0mOIC0xkYVCIOFs=;
-        b=mSkoqAfxTWUpRRhqkydbnqvjNKCetOi771fiWRWDfrfZOUBcNn7tyMk8LPpFXXDFbG
-         M0V70XGdgAzKQ4q/YGhTcYjUjrnwTQFreali5Wl2Z0wkvHXdOiEj7TYyIidnzEAjmHkr
-         0KQdO4SGk32kMsiHIGFgYcMC3zMK7QenvHrEX1GtbjY4Xi6ORwZIiIwBe0J/72oqEI8+
-         UConHhGlfSod45MP2Ev53fRHvZ68QrOA78Cx8Vjqxwzdg2GEaXkvFuYXMIlQcI+D5lHk
-         xLt2faWdsjcBpOgKmMxkUFtkeJs05KFbn0gDLz3FpWEU7h42yQ4SjeVl2WWxXekZCwCs
-         sXAg==
+        d=gmail.com; s=20251104; t=1792154767; x=1792759567; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TrslgNHse2Dg20EAEUVpp54Hl92z5vT+wdBvkKVG3Qo=;
+        b=boDcVw12UrVWhMkX6Y79s5SYBhSnNzOYML/hJzXJsU7wbdaUQYiv9Kfl2zjUzvuZL2
+         tc6Ijo4lF9PJiXKns5vs1ctbNfcC41qzmYtWwg6WhPWjS49NaQCtB3+YfI0YuF9sEOB/
+         mxNeY5YMajRUhe2cePGZPfXmhgijhEfAI+2boCtjKLpXCr6QH+97Ps4dyjaMULOLhcfw
+         wg6wpT4O8OzJaHHrQucvw5kfjXnCKbwcfjGM6G3LXvSEqDLGP95zMcX+qPXawzuUCAiK
+         fQRPIpN/x41dYlp14jtKhUwph1eQy6t1o63dVhOQObxCFHJd6Q1Xzct0zCjrAkcvAmje
+         ypNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792154464; x=1792759264;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0kuUNpKGpHmxXwciJw2YT+q4uhPu0mOIC0xkYVCIOFs=;
-        b=Qo8d2x4E1+4Qr17hWuR946mz1mGL8dTIsD/iBJ17L0OmZJHr68C05edK6EUuhiFzwY
-         DHmEiKF/1DALjKOoksOCVp+pbW9sFWU3UXT6iGcqoMV2LQD6AZspyDF732GMQ8wfeduP
-         6XnQLjPkJ0viuv9jud/f4n9HbMlCN7y0U9FvLnn9A4u5lNikNO2gt5fvCocXhnRr5xo1
-         /L4Twoho6MLZZKLo2iTBGYEFXsa8VSewHBUnO86IxE/jzt1GV27y2kRgCXn9VtL0XPww
-         n/X/sRHHCydIH0r1qVgHI3psKcTtweCpOmwFMAPYzC4MuYLTOjO5cMtwUf7wlrLqHygh
-         1JjQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxVc431zwuLt280KoLMYFdJ2r1qZsFa4Cfl0oQxapbDW0tUYUmp3TUhhw9SSUwpc7LUrft/QqZ4mJdKX0JW@vger.kernel.org
-X-Gm-Message-State: AFq9FYKauFYDH2jSl3UoeQ1JDNKkIDvnz9qIW9iN1EfpWLOu/FcQxZiL
-	HWQQGENK3SK5cHBSu1ctzkaCQI5WMiyW91EJgzWVRD1ii+xmAFnYDYEv
-X-Gm-Gg: AYBFou23d2xpXAzxufoamQVdSUm9IyJOsj1eiEdy04h8Irb33SuhFlaGMAaiB+q8qhY
-	kkFSz5Cy1/JopnWF4rrReHVMM6UC5eZ3XXRIICqbYfeOM6ypc27Ig/hHrgBsWflGpB321Z2hCyW
-	AQ0HQTn8FGZNDKf2lTkVJJTv2AqSYW/7RcZXeiQtEh/kGxbZboKL6JXX6ooq5Kkyes4e07KmK2L
-	Q2JYBJB6XW8oJlPqd3DC0cnc79CkFiBtQhVI9eHz6DSrdIqyCSj2RJ6gXXYAYwMkqsJ6QvW6n05
-	Y9w26UN6X+5YCV8PUh6x9ZDHVu9DGPCP+mc553L5Y2ZSubymsLo87vfDxb7ATif9WW3plKPiXUk
-	eE21v2SPUezsdh+GcR1tbESp5e/OlItwT11jrexlu1tLIhOkJdmcQFOoKTkwyOlGLLLhNFwzLDT
-	7+C8m6qzsIBKUXwbykp3dfGzH3pV/X5q1o33iTdWRGkjqXc0zydUX6Y3icvHdQ0/1YOchwCoJBt
-	d8eXsdsI6WcIA==
-X-Received: by 2002:a17:90b:3b84:b0:3ab:1b19:78f4 with SMTP id 98e67ed59e1d1-3ab3a3a11a1mr21060267a91.6.1792154464234;
-        Fri, 16 Oct 2026 05:41:04 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792154767; x=1792759567;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TrslgNHse2Dg20EAEUVpp54Hl92z5vT+wdBvkKVG3Qo=;
+        b=FEC+7xIfD/S+JqDmZ/goahgNpKzFJcrwSNt8zwEONpQr4vPkh+pBWDG3EXAU6TU7RC
+         7WnMphmafG8fhgpiCWUFPSSs7dS3siFBVpFdl+FKE4NX0XeBgGWedt7bM4BnW6AR3m1g
+         1C23++/+AOqtC8HdUHCXmvtgndX6B0iZYJUE6AF114oEp7Ye1qE3vGJ1L3dlc8XkxLxa
+         e542wwYC4JiMZ9d1l5vCxacps8JaQxADWb+179UtOmYBng80/UeTvTu9kgmdc388K2uG
+         wZ7F7p/IXFiwvmvZt/d3KBlOyL/qKwkFJ5jdV2SFaAJ3XcaGktTOOXq+CLC82EDn23lu
+         G8JA==
+X-Forwarded-Encrypted: i=1; AKwUvBxy6p6F/jtQfaWbf0z+Xak6oHihtnHZUhrAKfUWPTJGWS6rNMAiYUdBbaltrzIBtUrAbEz4sKJX8pTOgI+I@vger.kernel.org
+X-Gm-Message-State: AFq9FYJSZEaauxSAHI5jYeMwSOc5SCCn2L83yQ/xmSVR/bAmAiAqYdaP
+	ZArPHPtOD6I7taQI5pFAa8yWBXMXeYJb4FODFTHQMLEOmQmBIxleDYaO
+X-Gm-Gg: AYBFou1dzIZJid+LGevinCMTxKI19qXfJLeYvrsddtTvWF+8LEuJr5RjGTHLwuUlZJA
+	GKKD/ULlYfl2g0q3jhmV7lIC4i0GrpuCP1WqRKIIDJtV5b9PijZbzbcn4e6lNUcXHfSSZqZ7DY6
+	iWKh+DrpLaxJorTdEFReaFPF/IUA0RB72sYzURfZloqr9I7AKAdSERO+qCAQuOApMuXzfD+gkbw
+	wlO0vs4nTnGAaSK3PAZywJu2+fjIWIsxdiStTK7w9hrBQUp3cFpt20owm1dCxjovtK7XguJIn0C
+	617NE95rcDf/KG8erbPpYdVfTJFmj75lo9VoFa37GNdY5MaYE0yI1ZxSxSWV3aW8oCq/6YwuFpZ
+	BCxhZZATN5LdWyGfGtAJwqlA/Sd2iJzC8LJjNzZZDoLkOyyoNuddtVg/bF10BEydy/8q+nMrZ8T
+	PnxDtUfwEKdxk7hcv0Q9My7HLaxcQ2jV1UjhJtmNTQ+ZhK6zv+XstIjYsqzo5OPIaBrnUwLWlBc
+	/T/BfkgZK7etQ==
+X-Received: by 2002:a17:90a:d604:b0:3ac:8af9:4a6a with SMTP id 98e67ed59e1d1-3ac8af94f17mr5664608a91.42.1792154767359;
+        Fri, 16 Oct 2026 05:46:07 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3acc46ebe40sm4180541a91.6.2026.10.16.05.40.57
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ace34c8d9asm753751a91.5.2026.10.16.05.46.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 05:41:02 -0700 (PDT)
+        Fri, 16 Oct 2026 05:46:06 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
+To: mani@kernel.org,
+	davem@davemloft.net,
+	edumazet@kernel.org,
+	kuba@kernel.org,
+	pabeni@redhat.com
+Cc: horms@kernel.org,
+	christopher.lew@oss.qualcomm.com,
+	deepak.singh@oss.qualcomm.com,
+	pranav.phansalkar@oss.qualcomm.com,
+	andersson@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 09/10] drm/msm/dpu: only reassign resources when the encoder is reprogrammed
-Date: Fri, 16 Oct 2026 21:40:55 +0900
-Message-ID: <20261016124055.1232-1-26rote@gmail.com>
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	regressions@lists.linux.dev,
+	stable@vger.kernel.org
+Subject: [PATCH net] net: qrtr: ns: retry service announcements on -EAGAIN
+Date: Fri, 16 Oct 2026 21:45:59 +0900
+Message-ID: <20261016124600.31-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <20261003-fd-kms-fix-smmu-v4-9-2a44d4d8ac77@oss.qualcomm.com>
-References: <20261003-fd-kms-fix-smmu-v4-0-2a44d4d8ac77@oss.qualcomm.com> <20261003-fd-kms-fix-smmu-v4-9-2a44d4d8ac77@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -85,32 +85,59 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On Sat, 03 Oct 2026 03:30:24 +0300, Dmitry Baryshkov wrote:
-> Reassign only when the encoder is reprogrammed too.  Enabling colour
-> management still needs a modeset, as that is when DSPPs join the
-> topology, so ask for one in dpu_crtc_check_mode_changed() and only there.
+Since commit 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint
+register"), qrtr_node_enqueue() returns -EAGAIN for every packet but
+HELLO until our HELLO has gone out to the node. The HELLO is retried,
+but the NEW_SERVER announcements sent in reply to the remote's HELLO
+are not, so a service registered before the remote came up is never
+announced to it.
 
-Tested with 7/10 and this patch on v7.3-rc4, with out-of-tree support
-for a Lenovo Legion Tab Y700 Gen 5 (SM8850, bonded DSI). A compositor
-sets the CRTC CTM through the legacy property ioctl: NULL -> blob, a
-series of blob -> blob updates, then back to NULL. Over two such
-rounds, counting msm_dsi_host_power_off/on with kprobes: without the
-series every NULL <-> blob change was a full modeset, four in total;
-with it only the first NULL -> blob after boot was, and the blob ->
-blob updates and the clears were plain commits.
+On Kaanapali the modem sends its HELLO before it accepts ours. With
+rmtfs started first, the modem never learns about rmtfs and its
+watchdog resets the SoC about 40 s later.
 
-That tree also carries out-of-tree SPR support, so for the test
-dpu_crtc_needs_dspp() also returned true when SPR is enabled.
+Retry each announcement for up to 10 s while it fails with -EAGAIN.
+announce_servers() runs from the name service worker, which can sleep.
 
-Tested-by: Joonhoe Kim <26rote@gmail.com>
+Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
+Cc: stable@vger.kernel.org
+Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+---
+Tested on a Lenovo Legion Tab Y700 Gen 5 (out-of-tree board support)
+with rmtfs started before the modem: without this patch the SoC resets;
+with it the announcement goes out on the first retry and the modem
+stays up. Starting rmtfs after the modem avoids the problem, but
+distribution units start rmtfs first and let it boot the modem.
 
-W=1 warns about the kernel-doc of dpu_crtc_check_mode_changed(): the
-new helpers sit between that comment and the function.
+ net/qrtr/ns.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-A CRTC now keeps its DSPPs after the CTM is cleared, until its next
-modeset, so on chips with a single DSPP (SC7180, SC7280, ...) another
-CRTC asking for a CTM fails dpu_rm_reserve() in the meantime. Maybe
-worth a line in the commit message.
+diff --git a/net/qrtr/ns.c b/net/qrtr/ns.c
+index bcb090ee79d4..33a9c4449d6f 100644
+--- a/net/qrtr/ns.c
++++ b/net/qrtr/ns.c
+@@ -5,6 +5,7 @@
+  * Copyright (c) 2020, Linaro Ltd.
+  */
+ 
++#include <linux/delay.h>
+ #include <linux/module.h>
+ #include <linux/qrtr.h>
+ #include <linux/workqueue.h>
+@@ -226,7 +227,13 @@ static int announce_servers(struct sockaddr_qrtr *sq)
+ 
+ 	/* Announce the list of servers registered in this node */
+ 	xa_for_each(&node->servers, index, srv) {
++		unsigned long timeout = jiffies + 10 * HZ;
++
+ 		ret = service_announce_new(sq, srv);
++		while (ret == -EAGAIN && time_before(jiffies, timeout)) {
++			msleep(100);
++			ret = service_announce_new(sq, srv);
++		}
+ 		if (ret < 0) {
+ 			if (ret == -ENODEV)
+ 				continue;
+-- 
+2.43.0
 
-Thanks,
-Joonhoe Kim
