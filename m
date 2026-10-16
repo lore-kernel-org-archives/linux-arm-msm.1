@@ -1,145 +1,147 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B3054A4992;
-	Fri, 16 Oct 2026 13:14:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47ACF4AF9E2
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:14:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792156478; cv=none; b=E96vofg3CoYuvj5mtkU9eDpvEUkzdMMHtOIlHiKjSQM4asK3f0liAYD5NlqR2tO6qkbk2AOKe0QxtfUBlv7eejj0bcmCa6duAsMyI4m1kyWAL5yJDmu9lCVSMLEgOLUK0MAkcCWPKPOAvu60/9ZAAFixbJPRJ94aESeNaeEB4Q4=
+	t=1792156492; cv=none; b=hnEmKg+8s6xyORq1kn6ciJ7rxZ+z4CEukVpwWzEmbZQqh2huqUxfX2Lb0rVGxHTDo7zNohOafTkoAk7BdGEkcMPkAediSCQR82wbUxPDgvXl8i7qUZE8bQJoB4Mn77zCxg6s69wtZLDmHzqPnfBUv1xftuSngGvms8VSl5vpvMw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792156478; c=relaxed/simple;
-	bh=0dZw+Fz6MpjSED7gb6bv+mmDYCcc9iUPGgeSpSsajeU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=fuRDIag/tJZ1NLbhv7cT53XvLg/7yjfLGkrMwUooGBdfnwq39kmIIB9LgNTFXrIImSmLCrkDGZuilhsuAZCcQHxTBUmHpb3MfFTdefcM8MfQjJPt0sXFFi9Fc8IilFP4z8QfzdHARXPbjUvceW3qCKEXDybmI5MOyVYZyMFXmh0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gU1avqfF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792156492; c=relaxed/simple;
+	bh=CndP1bLne+UX3AI97tK+HL16zqhF/jGzueNBiUg3cEs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BEYLpDPPpb6SSEPVYSp19g/1AHIIuBNZZcA8JHIXjPkQPaO8hpU2u6VpkC+Q2KGkDO8F9bYGUqxNVdGPUC0XdXjQWAt/jjMpE3WX5Vj2CP6yKJ3w/Fcc+umyjL5Ov/aOaSmVf9TFtias5rLt9lA0ZnfR9IuSfGuW4OGgYW6/Mfg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OfG7Ut8w; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E+YP8q3Y; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gU1avqfF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C89E1F000C7;
-	Fri, 16 Oct 2026 13:14:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792156476;
-	bh=hUtNEh692Ln8xnhPOuaR7A+C/ErZ2D+qn4TDhgjSS0U=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=gU1avqfFPFvBuObpwapYgNb8Y6k+02YUpIah0WpY4+eM/uggWYwEINNEiv1HZDlmz
-	 S2nogPIM334vI1QWdLhJaUUqBDgtjd2BYiOuuyxTmWLFapbsCCluU/3rx8op+rp3i0
-	 7a2POcIpeMykMEEb3PoJi5WX/k9lDbL0t0Z03W1ZSqMN1Nip+y2k1F/gathBNdh9Wh
-	 23eyyJaMYA7gIsWiHyOzujtk54zwISk8UQdd9AYt4biwHDZ2gxrrto0l/fbiEazv+j
-	 217PPoh00f7NTYhS16brkeTd6GUn4VG9sFJhXiAM4vi0VxSdUZu6mS5V2W7llA8PWC
-	 g1eIaT234M+Zw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
- linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Sriram Dash <quic_sriramd@quicinc.com>
-Subject: Re: [PATCH v3 2/2] phy: qcom-snps-femto-v2: Add support for SA8255P
-In-Reply-To: <179214420138.106618.10672928212252943043.b4-reply@b4>
-References: <20261002-phy-qcom-snps-femto-v2-8255-v3-0-342542bd9bc6@kernel.org>
- <20261002-phy-qcom-snps-femto-v2-8255-v3-2-342542bd9bc6@kernel.org>
- <179214420138.106618.10672928212252943043.b4-reply@b4>
-Date: Fri, 16 Oct 2026 15:14:34 +0200
-Message-ID: <xhkdbqzhp6b45.fsf@mkorpers-koolstof.csb>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OfG7Ut8w";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E+YP8q3Y"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAA2vh1945593
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:14:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	KQZsw4ftvBo7+ZjIXx+lUmsyKGeSp9JqGs4axL88zkQ=; b=OfG7Ut8wEH1FASSl
+	NEvHE2n3yl99902oZL5LLaDFq7dvc20v6xIeQzZFh1PncyKohYE+C4nq69HHZKVX
+	WN17GyN8VxxNLmLVPQlWBg1Z9kr8Y7PwSsnkBU6a1pIRiGhRrzAKPZ9SLIk2J2gI
+	7iB2vkAgxufgYPzjoN8VejpzWNDck1fPhA/Bas3u2i7AUwNJKovlEMtVQjmQZkuB
+	HvRiaQf3mWrALcCUAlom2KtqaXKgiLFIyi5LSbRz5r5kcQWo9KX4JZTDBgCbqewl
+	Xwu/Jv9+crSCvZt6lM7CBybKRU86eB+C2DDvsP/IJM1mlbe0NSI1hh6vb1etnrb9
+	++8WHg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbg5ys3kv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:14:48 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93ea6b66e53so102486185a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:14:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792156487; x=1792761287; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KQZsw4ftvBo7+ZjIXx+lUmsyKGeSp9JqGs4axL88zkQ=;
+        b=E+YP8q3YpnzAR1LmVbpfji4+vcTji3bI6ExV+Cda9QNwJz/VA9poOwg1+OpJ3LJoQz
+         ODS4LwNrdDeJt4OyaBq+hL3tUP+eLsdB/NINS4vi91erE5G7HaBZFMvU8FdGcydYnupw
+         40PTJ4l/uIPoHidLCRlybqLXB0wGVTy0IUFmzKZd4boH+KPnCATe3KFqG5UEg91N6aTq
+         xm+9aSGwvRKUXKymJJRu+C/XaZxc+P9ZdRPS46dL4UDaT6zAYkOF+lZ4E4mnfpPG+fFe
+         kJd2X6orW+uaCFo4Ft/fCKc4kdwfvG1cvn3yRq/YMHJ1auUBWGFXyib8PPrSlD/+Hi4P
+         J+vQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792156487; x=1792761287;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KQZsw4ftvBo7+ZjIXx+lUmsyKGeSp9JqGs4axL88zkQ=;
+        b=Ra7YK9x+mq2nKiHX+l1zzqWFRBec/Thny1Ld2qSBS4aNGWPXqjsS+ZfznF+6N/orp8
+         lkKANKKSoQMQ7jxTtADpPog1T4VoSIdRxqG4UxAt46UTz7UQHVefiAF94jieuKCt9rfG
+         lugs7zJQgm6kJ4JbEQL/562IW0vArnWX/BedS/FMCaf+suHrA1MKep/AB2DbXbCHsyvd
+         /9hytim29Zpc0CGekjZWcHN8aeen2avmrE1JROKOktg2D9AXU2lia+diToA+JYn/Yxrc
+         I/pSy2k0fKZ+zQdGcNUH5WL4O0VVkOVFELoXNF95iNEXX5DG38wrMeoO8L3vsr5WzVd8
+         dTvw==
+X-Forwarded-Encrypted: i=1; AKwUvBzJLXuHxsybkP/Mf/FCxnSbZsLZjBKCIoF5NOspV0SRMEA8xJlofi1CUCAfzAy26ztJCblxt3TJrT2dYMXz@vger.kernel.org
+X-Gm-Message-State: AFq9FYJCcmY+W4RnjDoPM4qNqsu8QIzXXWaqyGApM3uCQ36ivusmNpq+
+	mfZSCECZqsOPD/oegU0hJ/bpS9FrNLJ+x8A+o/oXyBW1QyDWJMPNciOhB9HqpPQK5OinYpTHjFF
+	KsKJ5DNfFhjNmVa7vnsxsRoChfVMXfG9UAwm9RiqQHtbQ1uVPqupj3BMLf0JDNO6T+Fz5
+X-Gm-Gg: AYBFou0j2qYFcU8lrGlqY294vD6MopRk3jVZqvQly0rbb3MZSianP3LJAWMCcfNzaSy
+	8SY9FVovTqtYpgMFSbZeToSdGszw8IH7U6T5Wp2kh7zHbv7d2IRU4UWDa5UjL213xJrq/QWMVZn
+	57MZrZqN/+hUesjKkWUCRYkkDR8hdZF1Degoq3fT4EE33k2+i5ZpZtYpBoOwivzQlSg0IayWGff
+	YSyW+uahej6yah/0Kqrbtv+RXM8tPdv30QeURXAQmNpbZWm4C9K3WrSjzYPLB1J9EfqlAdscqzg
+	mQhCGn+HgMbN6vpJWnsux0a8hRmZrHmfJbBNX4KHxOyfD/FkQH0K/YJ0dkGXziW+uI7wyGtcCy3
+	3aIwuZLxc5ZHI/xeyVBXWAw==
+X-Received: by 2002:a05:620a:a43:b0:93f:211f:7ba4 with SMTP id af79cd13be357-93f211f7e97mr152806885a.5.1792156487483;
+        Fri, 16 Oct 2026 06:14:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:a43:b0:93f:211f:7ba4 with SMTP id af79cd13be357-93f211f7e97mr152800585a.5.1792156486768;
+        Fri, 16 Oct 2026 06:14:46 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c408b4a85b8sm71612466b.0.2026.10.16.06.14.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 16 Oct 2026 06:14:45 -0700 (PDT)
+Message-ID: <bbdaabf7-ffdb-433d-91fb-f6ca03b0747c@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 15:14:43 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net] net: qrtr: ns: retry service announcements on -EAGAIN
+To: Joonhoe Kim <26rote@gmail.com>, mani@kernel.org, davem@davemloft.net,
+        edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com
+Cc: horms@kernel.org, christopher.lew@oss.qualcomm.com,
+        deepak.singh@oss.qualcomm.com, pranav.phansalkar@oss.qualcomm.com,
+        andersson@kernel.org, linux-arm-msm@vger.kernel.org,
+        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        regressions@lists.linux.dev, stable@vger.kernel.org
+References: <20261016124600.31-1-26rote@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261016124600.31-1-26rote@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: t2p2pnIlR6s0ztLuJRkfvVa4hVElDOOW
+X-Authority-Analysis: v=2.4 cv=M+HYuCws c=1 sm=1 tr=0 ts=6ad22348 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=tdnHcQlNMze5R78DgzoA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA1MiBTYWx0ZWRfX2Xrb74410uwB
+ GGIQwGsIi+JQBi2O/xY5Tt96NKBJ2GsOkc+Z2iqHJmLvs+NTHS044mvp/fPdvpaCANpBnwqSn+K
+ eoTadGR9kx2GSZTXrhuJjQ8NjegHFuI=
+X-Proofpoint-GUID: t2p2pnIlR6s0ztLuJRkfvVa4hVElDOOW
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA1MiBTYWx0ZWRfX4to3EIL23yFZ
+ cn8tx7JYTUBJt1vk2BZgQgI0253pIUqkPneszbdeBMP+8Ky1XAWTAQgNdgueQb1O4JYTSxpsSz/
+ pljDGu8WqzwrwR3QrK92SUU06QGoabbnQnGDwlLD4qp93zTLPl8wGEwJjtUiKWd8nvqw0LFp6ht
+ vhOJh9Iq8naFadyn6+yXYJk+mMyRuoQQDpSBBcMVX9TvYtgm4dnSvBmu4Tp0nsuv/hKlv7aensH
+ 6YORcGGeNqQgQkfFa6SJF5TePRqrCSKmA9w+sJUnOueGYo2HUSpjcACnrRJCOvNEECbN8VIkRXm
+ AbcpklOcOeMXSBqVpCKpObtWNzDrsLovAYRvKiObNtDWV+vbJu4dH4bBqpqUezR85HBlwPnTS3b
+ H0EmeR5OkzV+uVmF7dyGQNhZ5mCb3e3hqpi+j0Zx55rp/Las22Yixx+9Dv7oCh67BJAork2MEdP
+ FygKh/UNabI4YUd8mPg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160052
 
-Hi Mani,
+On 10/16/26 2:45 PM, Joonhoe Kim wrote:
+> Since commit 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint
+> register"), qrtr_node_enqueue() returns -EAGAIN for every packet but
+> HELLO until our HELLO has gone out to the node. The HELLO is retried,
+> but the NEW_SERVER announcements sent in reply to the remote's HELLO
+> are not, so a service registered before the remote came up is never
+> announced to it.
+> 
+> On Kaanapali the modem sends its HELLO before it accepts ours. With
+> rmtfs started first, the modem never learns about rmtfs and its
+> watchdog resets the SoC about 40 s later.
 
-On Fri, Oct 16, 2026 at 15:20, Manivannan Sadhasivam <mani@kernel.org> wrote:
+Please remember about Assisted-by tags if they apply in your case
 
-> On 2026-10-02 11:41 +0200, Mattijs Korpershoek wrote:
->> From: Sriram Dash <quic_sriramd@quicinc.com>
->> 
->> The Qualcomm automotive SA8255p SoC relies on firmware to configure
->> platform resources, including clocks, interconnects and TLMM.
->> The driver requests resources operations over SCMI using power protocols.
->> 
->> The SCMI power protocol enables or disables resources like clocks,
->> interconnect paths, and TLMM (GPIOs) using runtime PM framework APIs,
->> such as resume/suspend, to control power on/off.
->> 
->> Power domain "core" controls the GDSC, resets, and TLMM (GPIOs)
->> whereas power domain "transfer" controls clocks and interconnects.
->> 
->
-> This is not consistent with other SCMI based drivers. Most of them are using
-> 'power' and 'perf' power domains, not 'core', 'transfer'.
-
-That's correct. Krzysztof had the same concerns [1] in the binding
-reviews. To sum up from that thread:
-
-For usb PHY, 2 SCMI protocols are exposed by the firmware:
-* power domain management protocol (protocol_id=0x11)
-* performance domain management protocol (protocol_id=0x13)
-
-The power domain has 2 indices: 'core' and 'transfer'.
-* core controls the regulators, the clocks and the reset
-* transfer only controls the clocks
-
-The performance domain (0x13) exposes opaques values (0xa to 0x11)
-for which we don't have any information.
-
->
-> Why are these discrete powers domains be required? In my point of view, the PHY
-> should have only one power domain for controlling power and be done with it. If
-> you start having these fine grain controls over the resources from SCMI clients,
-> then it defeats the purpose of the SCMI based firmware abstraction design.
-
-From what I understand, thse fine-grain controls are useful for runtime
-suspend/resume (on the Linux side).
-For example:
-1. Enable 'core' power domain to enable the PHY
-2. Disable 'transfer' to turn of the clocks. PHY is still powered but is
-"idle"
-
-If we look at the patch, we can see that this is what's done in
-qcom_snps_hsphy_suspend().
-
-Does that clarify things?
-
-This is also explained in the binding [2]
-Should I rephrase the commit message here to include that?
-
->
->> In this variant, two disjoint sets of resources are modeled against
->> the power domain suppliers which can be turned on/off to achieve modeled
->> device states. Two modeled low power states d1 and d3 are supported.
->> 
->> transition: d0 <--> d3  :: both core and transfer suppliers
->> transition: d0 <--> d1  :: only transfer supplier
->> 
->
-> What are these transition levels and who defines these? We cannot have different
-> SCMI drivers inventing these kind of independent low power modes.
->
-
-Maybe the naming is not as good as it should be.
-I took this originally from a downstream qcom patch and did not change
-it.
-
-I interpret this as:
-* d3: phy is powered off, before probe (no regulators, no clocks and in reset mode)
-* d1: phy is in lower power mode (regulator on, no clocks, no reset)
-* d0: phy is powered on an operational (after probe)
-
-I see that drivers/tty/serial/qcom_geni_serial.c uses a similar
-mechanism. Should I try to follow that naming convention?
-
-If you have other suggestions, I'm happy to get them.
-
-Note that I can't change the power domains ('core' and 'transfer' since
-those are enforced by the SCMI firmware)
-
-Thanks again for the review
-Mattijs
-
-[1] https://lore.kernel.org/all/877blx2bga.fsf@kernel.org/
-[2] https://lore.kernel.org/all/20261002-phy-qcom-snps-femto-v2-8255-v3-1-342542bd9bc6@kernel.org/
-
-> - Mani
+Konrad
