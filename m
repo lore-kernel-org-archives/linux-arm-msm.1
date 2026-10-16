@@ -1,159 +1,72 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDAD53D9529
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:49:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 756393E834F
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:00:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792133360; cv=none; b=K+/qKrNBqEqcCdupAuTrjit6nnMxCsEr8W/jz0XdQu9u9TiDajGfu9N2sfvoCbh3joVy8F9BbwtjhBAA2BN4pCIArb6Y6XBMaYilmJ8ewSx8IO7taqaTD88Yx5Rp20KVpFk3qKuveb4HTnNx4uwTKPQbHrlqTCP6kPHW97/VXsU=
+	t=1792134029; cv=none; b=bO9+N2KGrLEfBNf/pJnAK8gWTOoagoB1DX9jXOIN6Z4gN2ajL0JxhpHHNuvw3jCvlu+I1RiNdHLePa+mCsiyLuyUKhTYT7eGaXP7pAiiSsV7d9a1t48wmY8cos8QXEIN9D5WJXEl1Oh2pm87I+zFszllIX7c8rlcjKnoD+VhScs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792133360; c=relaxed/simple;
-	bh=s3anJmAF71SGOdbmyGVbZpu/vKmD9EC36nXM/R7mmiM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=udBB0llK1+RcGqVUFHDW/ktiCbytCqVTWGjblUd8mu07U+FXAnSr7REBP8/YoFXPi3ZpeVPId2nqgeU+yNxYkZSu8yfKpnwTuD66NjDPL/jx15YOh5JaVu1rfVAFP/QYetRJuORGN30HzdPRWj42Mihj+OSjEh2rLz34IL/ezJE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PcpeuoIF; arc=none smtp.client-ip=209.85.128.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1792134029; c=relaxed/simple;
+	bh=XczG4FV9MSpDKn/SsVQXz1gX8fELT27eYZyjGxzjG4I=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=gq4/gdmsg1m5kjchhANNIyzTZEx00NQ6nVxCOd7Y5CVBQlHodoQ5VBKxO6OA0MTIiuGcdhX+PS3IOJ6WvWFO9eCgQdFXZqDZpO/Sbz+d7ZxfuCWZ9KGoGz4zy1SN8wJqpVgP44+0GoxpbxxT2wQwgSL0btgfwu0hniOGgeTg16w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=MWGkroIV; arc=none smtp.client-ip=109.224.244.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PcpeuoIF"
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a1635f7c89so27896945e9.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 23:49:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792133348; x=1792738148; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sjYKa8DIKuvjh+VVUAQH4onZZeigp/qLBTebXWbeIHQ=;
-        b=PcpeuoIFPtsRL4dqinUQmmo6dMRrYt2Fgl8fSYal0jWsFGDN01mIMJsKSFkr4FxCzB
-         aXe/Z192qqQ8zD9hDv/6lpYKmqZZUBfqnPVdc931mPvQ/U4x9czwDjDnByiYwqkJ5mQ3
-         IPqsEVX/xUuG2ERYzgWvsSrpn0yfvJGD8ZxAOWP6fxMVDRbuYKfgtggN/eljsLKpaDBw
-         yZjNQZ8HjEPMuTIuxqG3h9YYJ+XBgdKBvcDjb/G473l2GxAEU6InHXAYvbkUp7CJT4pt
-         zFMg/yl0Rk3lfgPCLpXR3Yc3eaDxDp9y3Z0YlIFUlUE3fhA7ir88OuIpoPRKA3EqjrB0
-         QI9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792133348; x=1792738148;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sjYKa8DIKuvjh+VVUAQH4onZZeigp/qLBTebXWbeIHQ=;
-        b=l7kBV5DerUCWI/C9AuwMPflLPbFaZ75apIAYUqmxsoJWeTOBNBvX76y0bE3Iv7xsbU
-         tg8dB4hDbBqSMHNQuoxVBLgyBdCU2eCDBuqQGhg9rDpu2Q7lPd6S1eacZBTX65AjKnAt
-         H9+mIeivgmwJeEeblguKGMWIZ2CSNajXQ4IFWWPqdnA1V3ZXCtfwHHouP8EuRDaSTrlK
-         sddizkHK/6iRjEDS+fziFDdvgXytD8L/aqcfidlv2Pxp1e66Pfw14KaFEpB3Vruj6qjE
-         2pLouZZf8/FQE5JxI8QtStLlnfbsK40cAhUMcQrDHSpA0ShRGqsaQtTxvpyOmaY2zVff
-         nw9g==
-X-Gm-Message-State: AFq9FYJ6o1BDdqe+B8LVrSvQrwhaBpQ7QvrQCMNYde46YxnS+f9pbUvz
-	xtuESXYKrvJhlMA3nUaPY+8Vxn8gfehXYeXFpMEpibPVj8KCZOU2uOI0Fzs1K+ZpRnY=
-X-Gm-Gg: AYBFou3XtU68RcdGkLCOwKOGKjSHNz0/eBz084JuVeO5k4mGkV7kQdpztVQXGtGwaBZ
-	jnTMWe5GLrQoFOxEIBi+k6TtMRltwAsI5V23GJxWfoNaDffiqnn7kiqjwuBWkhWpy0Xlmc9+jM6
-	yilTT9Bes8x7beX2/Hy3d+W8805qiI8rV9b++27u/wrWxXxVLDZnDzzme9BWwOeVG7Gu4kgzhtU
-	b5fyDWFXXZQb2IHl5naO4PMBORq+liMOf1dxXiMOT/oP43ABPJvueXWA7UucjpfenOlGDBmmDq5
-	rBDWbBV6lou4jcSlDyNKmtKWThdQudT9zsBJI/qeA5uRoBFS5KEt+IwWzYqPTxdu33he/8WLXzf
-	aApT+PdGJelQqPyuGLAw5r0PUmX7rl46PvPAxrIgtRXiuYibJeNWP+Ui51QXdifhx7Lk8L1/Zhk
-	2pdZwV2rSifS0wbo1kpkh3rIktHNun+O+ynMOZoKMKAQj7TiVtBmlAYESmqzNstIcIzl0xwer7u
-	HZqekEJWkWv38K0M3/GyK7gn8lLQOCeV72beG1OHmdI4mYkT2TrFw==
-X-Received: by 2002:a05:600c:8106:b0:4a0:c02:938c with SMTP id 5b1f17b1804b1-4a18e4d683dmr439002795e9.25.1792133347816;
-        Thu, 15 Oct 2026 23:49:07 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:3de7:deff:62ea:d0f8? ([2a01:e0a:106d:1080:3de7:deff:62ea:d0f8])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1c8af3f8dsm33220615e9.9.2026.10.15.23.49.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 23:49:07 -0700 (PDT)
-Message-ID: <bdb9fdd8-215d-4220-8275-5fac170ed71f@linaro.org>
-Date: Fri, 16 Oct 2026 08:49:06 +0200
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="MWGkroIV"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1792134015; x=1792393215;
+	bh=XczG4FV9MSpDKn/SsVQXz1gX8fELT27eYZyjGxzjG4I=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=MWGkroIVCIqjLXi2jAk2/G24ds14Etd4N06az1kGD5RIrrhIVsqqD+JBvMSOfXJQT
+	 f+nag5mqOKcxIOKCCKtzMiwRK4uKPpHYuHlMSLS/JYpHAsOSc+i+Agb7PLPr/u30Hl
+	 WQ9HqjHWdNz0eQP2FSbqcsIODbw2O022TvgOsz3k1A1pcRxHgjItb1LEdyjMVFJz11
+	 9jqemDCp344ZHlqq51+/VrXPGjc40weUam+96XvpumpUbUZa23d9BxMDABBHPqCy5b
+	 r2f0XKZ+hsrcjtydv1XiUUneK7hV0e/AVp2a6IMgE+vsByBAE3k2a3HCI60SfCebTL
+	 RKgvnkVYw0Eag==
+Date: Fri, 16 Oct 2026 07:00:00 +0000
+To: George Neacsu <geocausa@gmail.com>, Andre Gilerson <andre.gilerson@gmail.com>
+From: Sergey Lebedev <lsa.uz@pm.me>
+Cc: Sakari Ailus <sakari.ailus@linux.intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>, German Pablo Lindo <germanpapulindez@gmail.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC 0/2] media: imx681: C-PHY for the Surface Pro 11 (Snapdragon)
+Message-ID: <20261016065952.11638-1-lsa.uz@pm.me>
+In-Reply-To: <20261015-imx681-x1e-v1-0-fd22f5f3b0c5@gmail.com>
+References: <20261015-imx681-x1e-v1-0-fd22f5f3b0c5@gmail.com>
+Feedback-ID: 113843758:user:proton
+X-Pm-Message-ID: 9631ddfb1ea563b271d2dfd76ad141b952cd9ab1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3] Bluetooth: hci_qca: disable power control for WCN7850
- when bt_en is not defined
-To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann
- <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
- linux-kernel@vger.kernel.org, cheng.jiang@oss.qualcomm.com,
- quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
- jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com
-References: <20260324023016.3889062-1-shuai.zhang@oss.qualcomm.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260324023016.3889062-1-shuai.zhang@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 3/24/26 03:30, Shuai Zhang wrote:
-> On platforms using an M.2 slot with both UART and USB support, bt_en is
-> pulled high by hardware. In this case, software-based power control
-> should be disabled. The current platforms are Lemans-EVK and Monaco-EVK.
-> 
-> Add QCA_WCN7850 to the existing condition so that power_ctrl_enabled is
-> cleared when bt_en is not software-controlled (or absent), aligning its
-> behavior with WCN6750 and WCN6855
-> 
-> Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-> ---
-> Changes for v3
-> - Add change history.
-> - Link to v2: https://lore.kernel.org/all/20260319075125.76539-1-shuai.zhang@oss.qualcomm.com/
-> 
-> Changes for v2
-> - Expand the commit description to include the affected platforms.
-> - Link to v1: https://lore.kernel.org/all/20260319031040.4096297-1-shuai.zhang@oss.qualcomm.com/
-> ---
->   drivers/bluetooth/hci_qca.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
-> index c17a462aef55..4512ff7cd0c0 100644
-> --- a/drivers/bluetooth/hci_qca.c
-> +++ b/drivers/bluetooth/hci_qca.c
-> @@ -2484,7 +2484,8 @@ static int qca_serdev_probe(struct serdev_device *serdev)
->   
->   		if (!qcadev->bt_en &&
->   		    (data->soc_type == QCA_WCN6750 ||
-> -		     data->soc_type == QCA_WCN6855))
-> +		     data->soc_type == QCA_WCN6855 ||
-> +		     data->soc_type == QCA_WCN7850))
->   			power_ctrl_enabled = false;
+Hi George,
 
-This disables power_ctrl for WCN7850 soldered down on the main board and handled by pwrseq, which is a regression.
+Thank you for this, and for testing it on the Snapdragon model.
 
-When pwrseq handles the QCA_WCN7850 qcadev->bt_en is obviously NULL, but qcadev->bt_power->pwrseq is not.
+The D-PHY path on the Intel model works with 2/2 on top of v8; 1/2 has
+nothing to check on ACPI. On media next with IPU7, the sensor streams
+3844x2640 at 30.01 fps, and v4l2-compliance passes 46 of 46 on the
+subdev and 54 of 54 through the media device. While streaming it reads
+back CSI_SIGNALING_MODE 0x02, CSI_LANE_MODE 0x01 and OP_PLL_MULTIPLIER
+303. CSI_LANE_MODE is 0x01 here without your write too: neither v8 nor
+the driver this machine runs daily writes it, and with the latter it
+reads 0x01 while streaming. So writing it changes nothing on this
+machine.
 
-The test should be `if (!qcadev->bt_en && !qcadev->bt_power && !qcadev->bt_power->pwrseq`
+For 2/2:
+Tested-by: Sergey Lebedev <lsa.uz@pm.me> # Surface Pro 11 (Intel), D-PHY
 
-Neil
+As for how to take them, I would keep v8 as it is, since it has Andre's
+Ack and Krzysztof's review, and have yours follow once it is merged.
+Andre, does that suit you?
 
->   
->   		qcadev->sw_ctrl = devm_gpiod_get_optional(&serdev->dev, "swctrl",
+Sergey
 
