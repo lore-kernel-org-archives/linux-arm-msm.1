@@ -1,131 +1,165 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.fhannenheim.net (mail.fhannenheim.net [188.245.251.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E19D45013AE
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 16:16:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFFCF4C9E01;
+	Fri, 16 Oct 2026 16:38:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.245.251.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792167389; cv=none; b=UMV5nz+nZ9w1YblNf3CCwHOJ395uYUgtXNvc4X9JeAZgfx8GxdbMNdXWhGRm57C7y7un/q2cf+Eti51ktqfg+ck4cZHRdqtQEl0qNWIJbnJbJLnFbV7p4D14f1TAoXCmnWp2rw9Ye42NOofAOia2N/sH7EUM6F5CHXyTjMsXFFE=
+	t=1792168713; cv=none; b=B4Y9KZOlFAB13D6cwFdN1oIsQVdOF43E2gINhlmBeXkGeKIoF+Y1uRUw1691alNHF4KQ6ip5lDnrdW4ByBaH0p9x8QpAUtDQhYPGw94l4sgiPgu+SY5S3llSbyOXhlZ7AB8Hx5a/vmnIijFercAW5kpsZHGASwSrszV/QZ1UjcU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792167389; c=relaxed/simple;
-	bh=7DHGCZatwX7FLNpiqx6l6zSz1iIXAE0Gsx9JKxioU1k=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=pBQnHP84Z+8VuQVBGdmM9LGsxVFsiO0rzrZNdMPPOwUBivRV38ki3KmrBGfPwGSfk4Wa+aNsIS43/uAWXvySQgT66VLlVjCQ5g0/+NYbIrA9EzCO95Fpx7tFxwBopNZ3Yilk29Tq2x8lwxVP/UvSyILa7KeVsCrFQDpExz6/7I4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ceTiwjUX; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792168713; c=relaxed/simple;
+	bh=iy+Huz9CW4T2GWHOcLU7+Fv6hIf4yWIOcMvWFcLWwqo=;
+	h=Message-ID:Date:MIME-Version:Subject:References:To:Cc:From:
+	 In-Reply-To:Content-Type; b=nGi3TaZUepgyof+Co+GuF5HzKpHfImKzW33vQCf4g9uTmLqAxgBZl3+Ayc9IUDuizLD180fMefhJMLfx1CBX7dNDp4lc+dtMGprRUHgSZZrSxjjP6MAIBft70YallFjJxAzLzMM5a4isNCuLuDvtMFooklVvTuN3UbNawc+K0+Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fhannenheim.net; spf=pass smtp.mailfrom=fhannenheim.net; dkim=pass (1024-bit key) header.d=fhannenheim.net header.i=@fhannenheim.net header.b=Qe+B7lgT; arc=none smtp.client-ip=188.245.251.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fhannenheim.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fhannenheim.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ceTiwjUX"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49fbb2acc90so1250765e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 09:16:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792167381; x=1792772181; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7DHGCZatwX7FLNpiqx6l6zSz1iIXAE0Gsx9JKxioU1k=;
-        b=ceTiwjUXQ8TOjcRuS1jy7GEudy2wieSR+3fN8U5c4uDIeK/skbgVstU1CHOSoeoGh3
-         Y9Q72hY3UtxRukdGjUlFbJSPZqciwPFSfZxmUEXm5umscXZX0vNN+2Q/uz2aQ57WmzUv
-         OlKZvzdzytjNZhtOncAmZeoPeOtXmm/QhO+dpEryUmgefRQ8SSLrupe0uGFSDXZErQTd
-         CP1jaHNQ2iHz6CNSq5rLgb5akpDSYxvF+HPH/o8hStyq2j87ghOf0HTc3hF6JeDivAPV
-         NQK/AuD+Vqy8soXfzt6MFA9C54JVdVXD7U0RYDxM5loBnsAE+nEOFTYc7zq0Xg+ViyYx
-         XhAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792167381; x=1792772181;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7DHGCZatwX7FLNpiqx6l6zSz1iIXAE0Gsx9JKxioU1k=;
-        b=L+C6FBg7eWlshttElHBeZsP2y94of01zwzMZR1AuMWz1CQDGrX96aDfXpLkXkCbrO9
-         PutaRXNEgopzOEIrgFHMrhT1MjkaeQLj4K5yTzQXHgcPG7eXtvV5rNy2w1h+j2IXYCKy
-         QvJlYIHhoDI71CqwJKlS1OG994AA3ZkMVZLxHyd24PdP7b2f/feYYGrLStrjfZ3WowKL
-         B7BiayJL2gCdXA53rGu+F8V89ZGAf3WPq72+NJpsncKkS7xAjZj4uXDVh6u7IqxeNFGD
-         5+fTdwJEw0r4FMHL2IERT/mvL5zx30VAcCD3itV9d76XoQRz9EDn/UirZ/I2ty3GfUfW
-         PQdw==
-X-Forwarded-Encrypted: i=1; AKwUvBxx7reIMIFwcJEjD5LTFR3IFvjzKCEb6+iOTV/P68puObzanCH84gwQiGw6Y6dC1+w/eqynLX8WTeuiP4B5@vger.kernel.org
-X-Gm-Message-State: AFq9FYJz7hHsTmcf2ps9svMHr06kwXAn7xgkYOjZI4g5eCsZzUlw0mmr
-	D05V5SDCFAQPx5fOkwK7vf4wdaq1gTyy3ABjSwdpTD5r7DOI4TdsFENe
-X-Gm-Gg: AYBFou1JYlMj2kXYw8nR2M00L2rym1tT6IUAs11v/x3TUgy3UVYK9+u3qB+oS3jFXAw
-	wT06MNoa343Rq3YeaOIsPufz3jhD0ljAdfYNEfHUsaGcKYQ+ICJEbCCPGWuzybHxMLZn71QiA+z
-	j6PqEFfGd/AX05aqdCbQbmAnR12x0RuE21aYLzuC3H9uIOcX4DjcqWVMGsDEqwsyIKKQ3P4hh6Y
-	kkiq9g1ARUTONKA7elMFsGVVjwTn6XX+f4EeFf7NVmolD5bPfsSZA3JFFM0P2bounk/JRsB1coW
-	CS0RohoQzQ8u0k2cnloP7a8fUIr26ZVuoghtu3fiIqiUzELVzC5TV5Fi1kLr3dditTQGcMjzjX3
-	hory7/l2e3PF/Hoqw31Ux84RGjNdkrNpXTJ3gjXCN/XKQIKtSX6RKKUhjauQqkVXdgnjcfGyLdA
-	HDw8g0yxe8lcK1pK8RxWs9Eg4JV8N9/4qi4m5EyNyYl+nqAhI/gyHnQfkEACGWCWbefoz9a0cTo
-	JZHqNBtgFWN4pie08MvM88WTCuSCaZ3IAJmbEs2ZxCs8KQiV8AXegNtwZEAMn5QpSF4BH9k
-X-Received: by 2002:a05:600c:1c07:b0:4a1:8d46:6228 with SMTP id 5b1f17b1804b1-4a1d7613a0emr6883345e9.14.1792167380631;
-        Fri, 16 Oct 2026 09:16:20 -0700 (PDT)
-Received: from SP11X1e.cable.virginm.net (cpc99340-croy26-2-0-cust244.19-2.cable.virginm.net. [80.193.62.245])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1d3e2e602sm32622125e9.5.2026.10.16.09.16.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 09:16:20 -0700 (PDT)
-From: George Neacsu <geocausa@gmail.com>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: Sakari Ailus <sakari.ailus@linux.intel.com>,
-	Sergey Lebedev <lsa.uz@pm.me>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	German Pablo Lindo <germanpapulindez@gmail.com>,
-	linux-media@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] media: i2c: ov13858: Add device tree support
-Date: Fri, 16 Oct 2026 17:16:18 +0100
-Message-ID: <20261016161618.209290-1-geocausa@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <19662dcc-4a25-4d18-a3bc-6b277bd676a6@kernel.org>
-References: <20261015-ov13858-x1e-v1-0-acdd918f4fb6@gmail.com> <20261015-ov13858-x1e-v1-2-acdd918f4fb6@gmail.com> <19662dcc-4a25-4d18-a3bc-6b277bd676a6@kernel.org>
+	dkim=pass (1024-bit key) header.d=fhannenheim.net header.i=@fhannenheim.net header.b="Qe+B7lgT"
+Message-ID: <0ff136f5-5ed7-4fa0-a93a-07c06706273f@fhannenheim.net>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fhannenheim.net;
+	s=mail; t=1792168703;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=e7b24QwjbL5Rp7Pwru68/kBNU3OhYLVXU1CkIm0gP/o=;
+	b=Qe+B7lgT0NrhM0scM6LY/0LOg5xkYe2Qrxt/TSOa27KU3psCxmyIKDgQTeYGFWX3qwoIBi
+	Gy0dllQ6TvSglgLwxbSh86KVNp0awDs2ZESV3KD7HtRNWamDCP14ryMW/tqiXHzUJZCUHZ
+	rktPhncvbvA1fE6rteRVK9PWV1N++vA=
+Date: Fri, 16 Oct 2026 18:38:22 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: oneplus-kebab: new device
+Content-Language: en-US
+References: <c14fe062-2e87-4040-b9a8-7d90a04d7a8c@fhannenheim.net>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Frieder Hannenheim <git@fhannenheim.net>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: Robert Oscilowski <drgitx@gmail.com>,
+ =?UTF-8?Q?Jean-Fran=C3=A7ois_Bobier?= <jf.bobier@gmail.com>,
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+From: Frieder Hannenheim <mail@fhannenheim.net>
+Autocrypt: addr=mail@fhannenheim.net; keydata=
+ xjMEaX+iTBYJKwYBBAHaRw8BAQdAjgnNmu6pLzUJq/DD3ZU3tTbKzC2npfFhEK6NYMLRukrN
+ KUZyaWVkZXIgSGFubmVuaGVpbSA8bWFpbEBmaGFubmVuaGVpbS5uZXQ+wpAEExYKADgWIQRD
+ lxn4P3kTLC9X/iFsAXPIt5MeUwUCaX+iTAIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAK
+ CRBsAXPIt5MeUzNaAP9KklaL+chH1bUa7To1Pn346guR/N/PkMkyvWgKRs+yzwEA6N2E6TZ6
+ CJF8cW6gVaSFmNgGcGZUAw5A5MrUleV5PwPOOARpf6JMEgorBgEEAZdVAQUBAQdA51B2jbQ4
+ iUnmggSYEqwukOYQmjBwsyUpc8Wkk9I8qkYDAQgHwngEGBYKACAWIQRDlxn4P3kTLC9X/iFs
+ AXPIt5MeUwUCaX+iTAIbDAAKCRBsAXPIt5MeU3oKAQDyZDbjdjzNsJdliBQBkZXuaJDAB1Mn
+ 59LycSSRsRVCPQEAmNQIItBArt/kiQFu6vC4mXjtM5LzbPLmj/QA26ee2Qk=
+In-Reply-To: <c14fe062-2e87-4040-b9a8-7d90a04d7a8c@fhannenheim.net>
+X-Forwarded-Message-Id: <c14fe062-2e87-4040-b9a8-7d90a04d7a8c@fhannenheim.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Bryan,
+Hi Konrad, thanks for the review comments. Replies inline.
 
-On 16/10/2026 17:06, Bryan O'Donoghue wrote:
-> You describe regulators, clocks and resets in the yaml file which then
-> don't appear to be supported in this result code ?
->
-> - regulator_bulk_;
-> - clock_bulk_
-> - reset gpio optional
->
-> I don't think this driver would survive suspend/resume.
+On 16.10.26 10:23, Konrad Dybcio wrote:
+> On 10/15/26 2:32 PM, Frieder Hannenheim wrote:
+>> Add initial device-tree for the OnePlus 8T. Downstream reference is [1].
+>>
+>> [1] https://github.com/LineageOS/android_kernel_oneplus_sm8250/blob/lineage-23.2/arch/arm64/boot/dts/vendor/oplus/kona-kebab-overlay.dts
+>>
+>> Signed-off-by: Frieder Hannenheim <git@fhannenheim.net>
+>> Co-developed-by: Robert Oscilowski <drgitx@gmail.com>
+>> Signed-off-by: Robert Oscilowski <drgitx@gmail.com>
+>> ---
+>>   Documentation/devicetree/bindings/arm/qcom.yaml   |   1 +
+>>   arch/arm64/boot/dts/qcom/Makefile                 |   1 +
+>>   arch/arm64/boot/dts/qcom/sm8250-oneplus-kebab.dts | 129 ++++++++++++++++++++++
+> 
+> Better. Please split off the dt-bindings changes to a separate patch,
+> and put it first in the series.
+> 
+> [...]
+> 
+> 
+>> +&framebuffer {
+>> +	width = <1080>;
+>> +	height = <2400>;
+>> +	stride = <(1080 * 4)>;
+> 
+> Does the resolution differ between the two devices?
 
-The power handling comes from a prerequisite: this series applies on
-top of Sergey's "media: i2c: ov13858: add regulator, clock and reset
-GPIO handling" v3, as the cover letter says, but that is easy to miss
-from 2/2 alone:
-https://lore.kernel.org/all/20260831130312.26296-1-lsa.uz@pm.me/
+There's 4 devices: 8 (instantnoodle), 8T (kebab), 8 Pro (instantnoodlep)
+and 9R (lemonades).
 
-With it, the driver gets the three supplies with
-devm_regulator_bulk_get(), enables and disables the clock it already
-takes with devm_v4l2_sensor_clk_get(), and takes an optional reset
-GPIO. Power on and power off are the runtime PM callbacks through
-DEFINE_RUNTIME_DEV_PM_OPS(), which also routes system sleep through
-pm_runtime_force_suspend() and pm_runtime_force_resume(). So the binding
-describes what the driver handles once both are applied. On its own,
-2/2 only adds the OF match and the endpoint checks.
+All except the 8 Pro have a 2400x1080 screen, the 8 Pro has a 3168x1440 
+screen.
 
-I cannot claim it survives system suspend on the Snapdragon model,
-though. System suspend is still an open problem on the Surface Pro 11
-under Linux and has not been validated, so I cannot exercise that path
-here yet. What I can test is the
-runtime PM path, which is where the supplies, clock and reset are
-switched: the sensor powering off between sessions and back on for the
-next stream. I will run repeated open, stream, close cycles and report
-the result. Sergey, if suspend works on the Intel model, a suspend and
-resume test there would cover the rest.
+> 
+>> +};
+>> +
+>> +&i2c2 {
+>> +	status = "okay";
+>> +
+>> +	pm8008: pmic@8 {
+>> +		compatible = "qcom,pm8008";
+> 
+> Is it not present on the other one?
 
-To make the dependency visible, I can carry Sergey's patch as 1/3 of
-the next version, with his authorship. Sergey, would that be all right
-with you, or would you rather post v4 yourself?
+The OnePlus 8 doesn't have this according to the downstream dt. >> +	 
+reg = <0x8>;
+>> +
+>> +		interrupt-parent = <&tlmm>;
+>> +		interrupts = <112 IRQ_TYPE_EDGE_RISING>;
+>> +
+>> +		reset-gpios = <&tlmm 93 GPIO_ACTIVE_LOW>;
+>> +
+>> +		vdd-l1-l2-supply = <&vreg_s8c_1p3>;
+>> +		vdd-l3-l4-supply = <&vreg_bob>;
+>> +		vdd-l5-supply = <&vreg_bob>;
+>> +		vdd-l6-supply = <&vreg_bob>;
+>> +		vdd-l7-supply = <&vreg_bob>;
+>> +
+>> +		pinctrl-names = "default";
+>> +		pinctrl-0 = <&pm8008_default>, <&pm8008_interrupt>;
+> 
+> nit:
+> 
+> property-n
+> property-names
+> 
+> in this order, file-wide, please
 
-Thanks,
-George
+Will fix
+
+> [...]
+> 
+>> +&i2c16 {
+>> +	status = "okay";
+>> +
+>> +	fuel-gauge@55 {
+>> +		compatible = "ti,bq28z610";
+>> +		reg = <0x55>;
+>> +		monitored-battery = <&battery>;
+>> +	};
+> 
+> Likewise, is this absent on the other phone?
+
+Not absent but different. The 8T and 9R use two-cell batteries while the 
+others only have one cell and use a different fuel gauge.
+
+>> +};
+>> +
+>> +&tlmm {
+>> +	pm8008_default: pm8008-default-state {
+>> +		pins = "gpio93";
+>> +		function = "gpio";
+>> +		bias-pull-up;
+>> +		output-high;
+> 
+> Drop the output-high, the driver will set it for you
+
+Will do.
+
+Frieder
