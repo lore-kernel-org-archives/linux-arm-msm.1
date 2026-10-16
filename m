@@ -1,133 +1,141 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mta0.migadu.com (out-12.mta0.migadu.com [91.218.175.12])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 723CF340DB8;
-	Fri, 16 Oct 2026 02:23:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F371129405
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 03:03:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792117394; cv=none; b=ZjA6q9do0jtUPACUe7RJugafd25ytWgm4H7hzT13Wx2uRJRAi6siTJ4Q0Kg4pxO8BiwqfNq0GMklabAkVprvojpEmRJhp3S/ZEVt9V9SabnXf09kWYAfm4uk7ftbRIxW4jPizKFj89ZyoDv49pmfLtZrWPwyKGP+alY84BBgblM=
+	t=1792119794; cv=none; b=ijLH0ni67ctxfXR+M98SzXeu2p856W4pffbo9oN8KtWzZ87yxNyp+X/2alUdiCY+VF3oeAkZb2M81WNHXmBpH0BZBMEfI+5JBeFPPVLQYA0zXlBix2nYVavd0f1a3qSn77We7Lhsach1KT85lQCKi1337+YwPkT0x5IZ9qf+PpY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792117394; c=relaxed/simple;
-	bh=jQV+RVh2Qewbh4Vqk/FeyC0beSCtrHUBkc+3mWD6YIo=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=JTz7SUL7vXJlXNefsCR+4xhYfgHgS4lg8DfeTw/wPbp1FzE1FW6BvcQMaR4Edxzy8XnUuZCE9ntUyu7wWrZtoFlK/+zhuwVG9K8JW95b+dn3RNdAUr3OEs9vlbspXefcadLQk2J88GKNtIJ+N15mRD30L0sVqefogUybZVkZEAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fJ8fWBA+; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1792119794; c=relaxed/simple;
+	bh=4wygRKFSnqgr6PR5rOi3tKEHsDx4IhZAfPvVtWyXV6w=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iUtRxL/0ejINvVqLdrWBd1f4vng1ekgnxplj5o0hDfQpxciGu1U6FanTeAwC79/h5bh409GIFBfwzKgsDXIxTblE2jXY+iAsrP+SfWnsKP5UcDGoCzsw7SH7CBbtu9D+OMEg8m5nNigrus/hB+OJhdq+UuaC/RgcAceyJMykFEM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=XdWiz4y4; arc=none smtp.client-ip=91.218.175.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fJ8fWBA+"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FKKCUM3800036;
-	Fri, 16 Oct 2026 02:23:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=BGJhlOttxqSxiS7YwBNLr3QeGcUiZGXBjL/
-	x70jFWOE=; b=fJ8fWBA+18DXhZmLcNV4v5kymEKZh9gst1Vk/8G6CHZpvwtobCC
-	9nbwt4Ee1kQJ/ICQfl9BCLxakDEMvlCO8nFcFF38SuuI3PIlHq3TWZsRGIj5Q4Em
-	IanywhB0o/l0kWQLt91/O3QLyG5ciNnWwwBo88YLr163nNd/+MyCXEtDgN8T1+wx
-	chfvLdGgLdZzeuq123lIYhUSDhUuQBSeQp3R2ucN3cNcOtT5po2YtGo5sWI/vb88
-	74PUpMRfR9sti8mtp7b0qdRpzi+bYkIN4wD908tpoOzb3okCIE92DrZiJyO+Vati
-	Is/RyBn2rrHjjcuUB3quKodr5DZNk5SLb6Q==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb5se945a-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 16 Oct 2026 02:23:06 +0000 (GMT)
-Received: from pps.filterd (aptaippmta01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69G2N48U2676934;
-	Fri, 16 Oct 2026 02:23:04 GMT
-Received: from shuaz-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 69G2N4dH2676926
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 16 Oct 2026 02:23:04 +0000 (GMT)
-Received: by shuaz-gv.ap.qualcomm.com (Postfix, from userid 4467449)
-	id 4510F644; Fri, 16 Oct 2026 10:23:03 +0800 (CST)
-From: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-To: Bartosz Golaszewski <brgl@kernel.org>,
-        Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chejiang@qti.qualcomm.com,
-        quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
-        jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com,
-        Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-Subject: [PATCH v2] Bluetooth: hci_qca: Reopen port after power on for QCA2066
-Date: Fri, 16 Oct 2026 10:23:02 +0800
-Message-Id: <20261016022302.4003647-1-shuai.zhang@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="XdWiz4y4"
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=4wygRKFSnqgr6PR5rOi3tKEHsDx4IhZAfPvVtWyXV6w=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792119789; v=1; x=1792724589;
+ b=XdWiz4y4Yh92/nh2ACBhIcJk8OSc4CuJR6iRDC2WvVHpY+2vEgX/lzXXw5Fz7coG6GUON8jZ
+ T7QE0svkx8cCLjsofdlW7oLlvtXPBdoSCM3xFCB76MMw41D+W9imCO5Xn5ZshEyu3zhQzoXVgcC
+ FXsP+THXaQUdskChtmO8roZ4/17QsOQwKrC/2A3kYNGd4597yfaL0ju8xzrd4h6FeFKCVubalMy
+ /Cfshl6gexq8mz3jMYy+lvR+gSSJTN9/QcFN/VhIxpDSFbvwVrw9v/FN7xo9ShQozSAiPRi3Ayl
+ 5mvKIbKEP+PP89hmFQbKjDEHW1vTVNgg2SEJ9wOL5WJNQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 0d9d1dbd2876dfe1;
+	Fri, 16 Oct 2026 03:03:09 +0000
+X-Mizu-Trace-ID: 0d9d1dbd2876dfe1
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <5f0ee2bd-1b2b-4745-a547-83708b977544@packett.cool>
+Date: Fri, 16 Oct 2026 00:03:02 -0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/8] PCI/ASPM: Add pci_force_enable_link_state() API
+To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ Bjorn Helgaas <helgaas@kernel.org>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>,
+ Jonathan Derrick <jonathan.derrick@linux.dev>,
+ Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
+ ath11k@lists.infradead.org, ath10k@lists.infradead.org,
+ Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+ Qiang Yu <qiang.yu@oss.qualcomm.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+References: <20261013163107.GA1522779@bhelgaas>
+ <2517d322-9e5d-5b81-aa67-56705879be74@linux.intel.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <2517d322-9e5d-5b81-aa67-56705879be74@linux.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAwOSBTYWx0ZWRfX1TO88fzVepLa
- z7G3pT4oNI8EuRX25A22yYJO9pWZBGMgDjF7D268thPkIrYmm2sFSa/H79D+XAPbnxu61IOI/26
- gQPfFaDZyjlCDc27LO6aAXRdqwiU6AI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAwOSBTYWx0ZWRfX4lp3rOPvlDJU
- 6KTSSSEIM7fnnBVFlQZ3ShngkVYPn22nS29srmTE9SlJtUtKqc/MwDEtPXjGmuuxh3n6jRevl+V
- P2zs1E1MJZcYgFPygw/FHdiLE7gwzQkTHUAfbN5MofJjWLsw6a8+TDYcnkSsGTLHKHcwc4huJfI
- +twOpT+qez8GbgKjURxYTG3J+BA5rkqnlrIuRVGvQuK93Ckgs7h7ZCkFqFsbQoSuWLQsRwFVThz
- sqOnP0TMkBcbf6U8PxXc+FlcxTEcy5HT5SJDEhx2FcTrEYyGVv7WG8fdk5k8gwq88zqnWYUD2sb
- 6dprAlNaihKWdjnTvFfFV4HR08onUCfd+ltg2siebazncO8Z0ewUZ0SoyjRcU/DVXxHiiH1bYLj
- 1Dtll6+aKa2rDhVYzIs6BiE4CgeM9c8nP204DnwaAezPQGITWcYAroCnexNYqbOJQn8k5prOX2T
- VMmdWnq1IVkrHDg1Z5A==
-X-Authority-Analysis: v=2.4 cv=P4yvFSAu c=1 sm=1 tr=0 ts=6ad18a8a cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=i-ZuXnGKmWlNg_lG8XwA:9
-X-Proofpoint-ORIG-GUID: AbYkkqnYVznoksIJ9kCNKD_1eldMWyU1
-X-Proofpoint-GUID: AbYkkqnYVznoksIJ9kCNKD_1eldMWyU1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015
- malwarescore=0 impostorscore=0 bulkscore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160009
 
-QCA2066 needs the serial port reopened after the controller is powered
-on, otherwise the host and the device run into RTS/CTS synchronization
-issues.
 
-Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
----
-Changes for V2
- - Use a separate case for clearer logic.
- - V1 link
-   https://lore.kernel.org/all/20261015092224.262158-1-shuai.zhang@oss.qualcomm.com/
----
- drivers/bluetooth/hci_qca.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+On 10/13/26 2:42 PM, Ilpo Järvinen wrote:
+> On Tue, 13 Oct 2026, Bjorn Helgaas wrote:
+>> On Tue, Oct 13, 2026 at 02:41:32PM +0300, Ilpo Järvinen wrote:
+>>> On Mon, 12 Oct 2026, Bjorn Helgaas wrote:
+>>>> On Wed, Jul 08, 2026 at 04:30:16PM +0200, Manivannan Sadhasivam wrote:
+>>>>> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+>>>>>
+>>>>> pci_enable_link_state() and pci_enable_link_state_locked() APIs only enable
+>>>>> the ASPM states that were not previously disabled via
+>>>>> pci_disable_link_state*() API or blacklisted during init (e.g. the pre-1.1
+>>>>> device blacklist, which is only meant to be overridden with
+>>>>> 'pcie_aspm=force'). This is an intentional behavior as these APIs must not
+>>>>> silently re-enable states that were deliberately disabled, since doing so
+>>>>> could enable ASPM on a link where it is known to be unsafe.
+>>>> I think this is saying that many uses of pci_disable_link_state() are
+>>>> to avoid hardware errata, i.e., these are basically quirks, and we
+>>>> should *never* enable those ASPM states.
+>>>>
+>>>>> However, some drivers (e.g. the atheros WLAN drivers) save the currently
+>>>>> enabled ASPM states, disable all ASPM states before firmware download, and
+>>>>> then try to restore exactly the states that were enabled before. Restoring
+>>>>> those states requires re-enabling states that were just disabled via
+>>>>> pci_disable_link_state() API. But, this cannot be achieved using the
+>>>>> existing APIs.
+>>>> This sounds like it's also for hardware errata: if ASPM works
+>>>> correctly, there's no need to disable it during firmware download.  I
+>>>> think this is *only* the atheros drivers, isn't it?  I didn't see any
+>>>> others.
+>>> There are more that should use disable/enable API. In addition ath*, I had
+>>> also these in my unfinished series:
+>>>
+>>>    brcmfmac
+>>>    ib-hfi1
+>>>    rtlwifi
+>>>    rtsx
+>>>    r8169
+> [..]
+>>>> Instead of adding pci_force_enable_link_state(), I think we should add
+>>>> a new interface for the *quirk* behavior that permanently disables
+>>>> states.  Then pci_enable_link_state() and pci_disable_link_state()
+>>>> could be made symmetric.
+>>> My suggestion is to make the disables/enables counted per state which
+>>> would allow parallel sources of disables to function without clashing.
+>> By parallel sources, are you thinking of sysfs and driver calls?  If
+>> locking would be sufficient I think that would end up being simpler.
+>>
+>> But maybe the issue is these devices where we think ASPM breakage only
+>> happens in certain circumstances, e.g., firmware download, so we want
+>> to keep states disabled for that period.  Then I guess locking inside
+>> the enable/disable doesn't prevent sysfs from enabling those states
+>> during that period.
+> There are (at least) these sources:
+>
+> - quirks (disable only)
+> - hw has ASPM related problem at certain phase of operation
+> [..]
 
-diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
-index 7089e9b63..ee3ccb59e 100644
---- a/drivers/bluetooth/hci_qca.c
-+++ b/drivers/bluetooth/hci_qca.c
-@@ -1867,6 +1867,19 @@ static int qca_power_on(struct hci_dev *hdev)
- 		ret = qca_regulator_init(hu);
- 		break;
- 
-+	case QCA_QCA2066:
-+		qcadev = serdev_device_get_drvdata(hu->serdev);
-+		if (qcadev->bt_en) {
-+			gpiod_set_value_cansleep(qcadev->bt_en, 0);
-+			msleep(50);
-+			gpiod_set_value_cansleep(qcadev->bt_en, 1);
-+			/* Controller needs time to bootup. */
-+			msleep(50);
-+		}
-+
-+		ret = qca_port_reopen(hu);
-+		break;
-+
- 	default:
- 		qcadev = serdev_device_get_drvdata(hu->serdev);
- 		if (qcadev->bt_en) {
--- 
-2.34.1
+FWIW, one not-yet-merged user is this patch that disables ASPM around 
+link retraining for bwctrl on host controllers that do require that:
+
+https://lore.kernel.org/all/20260819-bwscale-v5-1-6dea79786b37@oss.qualcomm.com/
+
+That particular version of the patch was already written assuming 
+symmetric enable/disable and I hit that when testing it, so here's an 
+example of the potential trouble :)
+
+
+Naming suggestion: if it ends up being that counter thing, it should use 
+the verb "inhibit", like idle inhibitors in userspace. Those are 
+commonly understood to be counter-based ("as long as there's at least 
+one inhibitor, the state is disabled") and temporary.
+
+~val
 
