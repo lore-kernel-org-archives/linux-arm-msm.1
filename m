@@ -1,132 +1,147 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50B624EF152;
-	Fri, 16 Oct 2026 16:06:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4106C4FD27D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 16:08:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792166791; cv=none; b=TpQ16YTEIVBuaUMjG0SW4okK+n8W/83n615fKkpV1v32NOJTyPPablIDS2DxKoRPkpqtMO6nnGe0uo0sl9GNC21Oqc21h6bnIDaqT5gdNC5lw/6r03xB+iPLVqxSb/xVOGxOg6mbekoZmKD8yVAwDti86HuOzytDRXMUiyXv03A=
+	t=1792166938; cv=none; b=pGkvw8c8Oq0+pNA3t+MyHWlfHhmBr2KR8pFWXoe4qMOfahaBY+NzCXq1sDF0SwCqbqlN9EwPB1pp6jSvbOxxZ1MTWn4OX6XzuZIhmae4n81aH8PNLiyBDlM+JXYi8DHtmiVC45EU+bJqCHSBcF77k7vLzbrUBx+ejfJu8jmehZ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792166791; c=relaxed/simple;
-	bh=xGAH/cBFGhXa7Lo7BHAcXeIsp2PMt608yLehmEm2dVg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=J1+CqmZxqxqwBOyIQ6j1RrMZevZgvzp+9i70RYnAzAjWU7qUZn05d1Ei4D1E7i4+5dImvnFfd8562WehGKvA4qXNpi/utN/E3VsTMqssGhOgiBS///4xusvZ2whelPkTPsmVFGjlDap2jXv2rVWRpb6cB+7ZG3DaPjGspyJYMXk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f+2IcMch; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792166938; c=relaxed/simple;
+	bh=n1Dj36+CCyvzyVqupK5U7F0BlEQjzHPDpXfS7N5ssjs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=uTKEA5tGvDpyd8wXheHQ2Omspq7wASe/OcXFhjDHuvyHeSu5E/RtMpp9HweLZe1WAUOviOiPZI+INAFYTJEy1SUGqtjFztHfWR15sDM00Nzp/am+tSJcSUXamxQtY6OzL0qTeB4SYsd3ywvdoK0CGZlCFrosJs2LLHlIa3dgNVo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=plBJ3L2c; arc=none smtp.client-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f+2IcMch"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A9A61F000C4;
-	Fri, 16 Oct 2026 16:06:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792166787;
-	bh=eV5kQsVdLEe1z5kkE8u0zgGSCke4UboN4QIxLDplCdQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=f+2IcMchxGrh7hS3ThU9LLLZ9FZrSPqq/uCsdJM/HfJZu582ZheF4CosqLgJVuwpw
-	 5IEorjD4p74ztBkk7Aaq9AIb6lMTuyTyCIwp0GUTSVr42npOf6IeEkfeYuwzdcN3Zx
-	 ypLkcv1u4+UcHJylPNKpdRmzSHFYLSU9iPOrLg48WcCvXubK+aqP/6iD2rkKV/i9B4
-	 EVZzwp+2Su2BBOLwmbF0zJ6/OaOhouOgDC9/w6ewG2uiHTfF4djn/SSkgUv3JD39OM
-	 4wd5KqAbcvJcZhoCHkuWcmUFt5H5+FuIZD0iO/RvdDvSAtQrmWzZn/kMQSwLuWIwCK
-	 4nEoVV72ecmTg==
-Message-ID: <19662dcc-4a25-4d18-a3bc-6b277bd676a6@kernel.org>
-Date: Fri, 16 Oct 2026 17:06:23 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="plBJ3L2c"
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-48e04773687so78663f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 09:08:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792166935; x=1792771735; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Y3yD2VSIymN6B+DlBxpDWOb8du1EZz/KqBX+LpXERvI=;
+        b=plBJ3L2cKz9ck7x8jQY/AJnAoCNaJpqUeraxps9+iq8TyggaQSor+T41+rIo2UpUbl
+         LFzrQ4OwkVQ9X+mAVjoQahekWOgSAHpElKluF9sEiB0Qk4Cr0l6eifAgaSLjRpLsDuYs
+         alPjoHIIC2dEpRPfm3fNtPpXL50C9Jn/xrZj6A7HqsrZEszNd7UvPifLaoB7JlQj4eMz
+         FcNYmQK2hphreYd5h4ecCojoxYF6ScjWYHEFzXuLj2a4M2vUlXB4uLkEI/gya7NF4ugw
+         Oif8oM1Efal/FbnD/SMmEs1UaX2s1Kj+lSgViTuZVM546ORqVIITcjuSPRbuLFmvcTx1
+         WTpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792166935; x=1792771735;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Y3yD2VSIymN6B+DlBxpDWOb8du1EZz/KqBX+LpXERvI=;
+        b=iCwfI2cYm38avXcfvzLQ8Hi4OOceEmuOenHTchCG05w2cQGfEA+dJWoFAnrNsa6Atz
+         QRQ2ICBnovQIr4L2nh0easo7PX05I21VRqOZB7KhwXobvPyGuk+p9wXg71p5PrN0sTeI
+         3F/IV3sOVHBKeHz7IO1+38VVvJC+0o3uSrpeKtm6Nz3sCYlyRxXZMFnkluMPeokhny6U
+         +zTolgXYl+Qce8ZYeQimQwqIQh9Juq3fWHrfj2aSqkutDKZ7MreiLHk8xJmPcY/Wa2LK
+         kEcaRK92RR7lBAZC/rkZL3+zwQ7xVhQWdVc1KUjMQHf9nuEUK3UmGkhcxSJI4Zj4LP4f
+         Qu0Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxJ7AzNPeQwJ/MRYSSug97D8AqZj34dYCMFCNnKMhVNzBGKf3SWRIhZoSsqKr6iQPY8ZuxLgR39BspEXVi4@vger.kernel.org
+X-Gm-Message-State: AFq9FYIZjRRJGaz0FuyxQCvIiX3LCpyEAMKEAh4OSVPeDWfJ6uRyCIJS
+	cK5c0W5cRMCdhNFbXSPF4F7KHSFThQGPz9z6RG2SaXrvlsLQLXmB0Sa8
+X-Gm-Gg: AYBFou38KpOimufpOb7pfUboiUdKYgvAKwfWAUN7cJCLL32VozUPryIzuraqgH4euv1
+	DkxvV86YbOi+wnczs+c8tdvPt11TfATQQW3kkmdRDieVUb28tvxauUDS6umIQl/ItuEQYl1thLy
+	gRzwgNRGeRnxwQMYRfzMH6LiLDpDs/57cJa+Jk3RlW1lX3N1FFp3CH2eUmSdTbqC//z/KvWCI2q
+	7dgzGXvX/LAc+97qGvd4LoU0n5K+1dJapPHBpLWMZWxLgHK9xMAIY1l/kw+o6L/CYXE9Vrz4I67
+	Prckj7+2lvrgge1frU+sUgaCbDdNBMULo6qHU2DVC3uDI+kGXP/yo9nkJuYAnZTWeXExtjxrOJj
+	eCWf7OqrB2A/VuHJXtvgRJR9Gd6gwP++smxwnod9QvOPPVlSm+E29G0dGkfXq70VrLonatN1qeW
+	QCPLrNpRsIJEFRX9228DvmJMvsc43at4HcJZHgRS5fkoHJHyD9cxePGPvAg+qyYUgUnvCanlyuU
+	0A0qJvokOSA72a/DZg4AeeUKncpIu6gdhGIBlPTuyk/yqaAGZijjHHUfE3xiNpq6jtuIY7lqipr
+	7R2uRO4=
+X-Received: by 2002:adf:f491:0:b0:488:7d08:edbc with SMTP id ffacd0b85a97d-48e07bc120cmr65033f8f.24.1792166935169;
+        Fri, 16 Oct 2026 09:08:55 -0700 (PDT)
+Received: from SP11X1e.cable.virginm.net (cpc99340-croy26-2-0-cust244.19-2.cable.virginm.net. [80.193.62.245])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd471b06sm6766200f8f.5.2026.10.16.09.08.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 09:08:54 -0700 (PDT)
+From: George Neacsu <geocausa@gmail.com>
+To: Bryan O'Donoghue <bod@kernel.org>
+Cc: Sergey Lebedev <lsa.uz@pm.me>,
+	Andre Gilerson <andre.gilerson@gmail.com>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	German Pablo Lindo <germanpapulindez@gmail.com>,
+	linux-media@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC 2/2] media: i2c: imx681: Add C-PHY support
+Date: Fri, 16 Oct 2026 17:08:53 +0100
+Message-ID: <20261016160853.193378-1-geocausa@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <11f1a19d-7d57-497f-826e-901f9f88b99b@kernel.org>
+References: <20261015-imx681-x1e-v1-0-fd22f5f3b0c5@gmail.com> <20261015-imx681-x1e-v1-2-fd22f5f3b0c5@gmail.com> <11f1a19d-7d57-497f-826e-901f9f88b99b@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] media: i2c: ov13858: Add device tree support
-To: geocausa@gmail.com, Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Sergey Lebedev <lsa.uz@pm.me>,
- German Pablo Lindo <germanpapulindez@gmail.com>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261015-ov13858-x1e-v1-0-acdd918f4fb6@gmail.com>
- <H_YflrQ_O6i59HAUsnzTG5J8wp_NNMC_tndzgzlbVRUtakJahIzRBeAoMDmm5Uunqwb63UcX4TgUrnSN-rMJOg==@protonmail.internalid>
- <20261015-ov13858-x1e-v1-2-acdd918f4fb6@gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
- jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
- piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
- YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
- B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
- lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
- 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
- MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
- 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
- JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
- bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
- OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
- BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
- VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
- jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
- mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
- 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
- 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
- 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
- kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
- nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
- g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
- dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
- NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
- VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
- Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
- vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
- 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
- ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
- MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
- VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
- NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
- AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
- JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
- 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
- OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
- xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
- t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
- X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
- LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
- 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
- Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
-In-Reply-To: <20261015-ov13858-x1e-v1-2-acdd918f4fb6@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 15/10/2026 22:48, George Neacsu via B4 Relay wrote:
-> From: George Neacsu <geocausa@gmail.com>
-> 
-> The rear camera of the Surface Pro 11 with a Snapdragon X Elite is an
-> OV13858 on a four-lane D-PHY link, described in the device tree. Add an
-> OF match table.
-> 
-> Parse the endpoint as other sensor drivers that serve both ACPI and DT
-> do. Wait for the endpoint if a bridge driver has not created it yet,
-> require four data lanes, and require both link frequencies, since the
-> modes switch between 540 and 270 MHz. The IPU bridge entry for OVTID858
-> lists both, so an ACPI machine with that entry probes as before. Without
-> the entry the sensor now waits for the bridge instead of probing into an
-> empty graph.
-> 
-> Tested on the Surface Pro 11 (X1E80100), with an out-of-tree CAMSS
-> capturing raw frames over CSIPHY1, CSID0 and an RDI interface:
-> 4224x3136 at 29.95 fps at 540 MHz, the colour-bar test pattern intact,
-> and a scene captures.
-> 
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: George Neacsu <geocausa@gmail.com>
-This is a weird change.
+Hi Bryan,
 
-You describe regulators, clocks and resets in the yaml file which then 
-don't appear to be supported in this result code ?
+The values come from two places on this machine: the Windows sensor
+file, and a kernel debugger attached to Windows while it streamed. They
+were then checked against the CCS definitions and on Linux. In detail:
 
-- regulator_bulk_;
-- clock_bulk_
-- reset gpio optional
+1. The Windows sensor file. The Windows install on this Surface Pro 11
+   has a Qualcomm sensor module file for the IMX681 (SONY0681). A script
+   here parses its register tables: an init table of 364 writes and six
+   per-mode tables of 68 writes. Nothing from the file is
+   redistributed; only register values are used.
 
-I don't think this driver would survive suspend/resume.
+2. Windows observed live. With a second machine as kernel debugger, I
+   set a breakpoint in the Windows front sensor driver just before it
+   applies the mode table, started the stock Windows Camera app, and
+   dumped the 68 writes it sent. They match the file's 3840x2160 30 fps
+   mode exactly. That live table includes
 
----
-bod
+     0x0114 = 0x00 (CSI_LANE_MODE),
+     0x0306/0x0307 = 225, 0x030d = 3, 0x030e/0x030f = 375,
+     line length 6752, frame length 3554.
+
+   In separate debugger sessions I read the CSIPHY2 registers while
+   Windows streamed. The receiver was in C-PHY mode, and its settings
+   match Qualcomm's GPL 2.5 Gsps C-PHY table (121 registers, compared
+   from two snapshots).
+
+   CSI_SIGNALING_MODE = 0x03 is in the init table. I have it from the
+   file, but I did not catch Windows writing it live.
+
+3. Why 0x03 means C-PHY. 0x0111 is CSI_SIGNALING_MODE and 0x0114
+   CSI_LANE_MODE in the MIPI CCS register map, as in
+   drivers/media/i2c/ccs/ccs-regs.h: 2 is CSI-2 D-PHY, 3 is CSI-2 C-PHY
+   (0 and 1 are the old CCP2 modes), and the lane mode is the lane or
+   trio count minus one. This agrees with the hardware: Sergey reads
+   back 0x02 and 0x01 on the Intel model while streaming two D-PHY
+   lanes; the Windows receiver here runs C-PHY on one trio; and under
+   Linux, with 0x03 and 0x00, the sensor streams into the PHY in C-PHY
+   mode.
+
+4. The 2.4 Gsym/s is calculated, not measured: 19.2 MHz / 3 * 375 from
+   the OP PLL values Windows writes. The receiver does not report the
+   rate, and it locks over a wide range of settle counts, so a working
+   capture does not prove the exact value. It does fall in the 2.5 Gsps
+   bin that Windows programs into the receiver. Likewise,
+   6752 * 3554 * 30 = 719.9 MHz matches v8's pixel rate, and the pixel
+   PLL (225) is the one v8 already writes.
+
+In the next version the commit message will say which values come from
+the live Windows capture, which come only from the sensor file, which
+are calculated, and what was checked on Linux. The extraction and
+capture process will also be written up in the project repository and
+linked. I will also read the CCS capability register 0x1602 (bit 3 =
+C-PHY) here, and Sergey may be able to read it on the Intel model.
+
+Thanks,
+George
