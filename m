@@ -1,255 +1,211 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5CF2427A04
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:56:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792137381; cv=pass; b=n/Pu1PWsi1o9IYVSUGSaaPMMjxMCxCjjQgRK5TUGQjhhY+tBN1OnC5N8VGtiK863qzPDz22nbltscTFf3oBSrt5WPoor64Q1V9fLMN8CJhwRGswPNzu6HHNaconhdL3YI444nStrF+G1UTYccHWn73liY4UhKtwi6ELNfz3AHD4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792137381; c=relaxed/simple;
-	bh=VxP0hZ31lGhpRchEzyV+aetw22Q2teS81UDVEDMeCsc=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=OaO7hxNv4GoKlVNJy6wh2hOeo4BZ2adoes5lPoZHptTcZCG8cvjw11cRKsfgGCR3qvNHhS4LME5SxqHOjFtwxL2k8S1R8jTTkCmDHbqJm+6slrEiN4yeDn08WYePHq3jxG5C1Oq02mbY4EW2wIYKtlcLYEL+5qWFAbOO8PgIv0s=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hzYyKaVe; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gfMq1sOq; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3AD62DC798
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1792137616; cv=none; b=eqr1v+LJ0OewzecxdeyUIDGk1rkCzs4sHFR/trFXa0Xn2OgCzRenmN2IG3iE+G9vNiJ5iTz0l5w7N4tqQCwqSign9q5EiMT93w1qUrkflMPHozyiHKh2yhzkCYZ1dv7/+xtBWWmMQ4nyix/eDI/5hHSOQEt8cQzq61oPvgWzcBY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1792137616; c=relaxed/simple;
+	bh=Jom/33lMvyROexEXXBka+2wEVnyD992vNREAbJ9xUFw=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Q1win9aWjXswk7ypLOmj1FdGC8pYA9ehLFJSVap7EYSPpfiedhz8vd4jpwmyYJ4b21YF6ifOI37143szGYvbO0KZRsRzZvbPTOkESKBHjcxhsjpZBz1zwasfYDyBnLEsgZ7PI43QVftPErVBBD3Sn7atKWchNST/AWffKomytGI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PDftbMo0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M3ZQglEj; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hzYyKaVe";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gfMq1sOq"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G44InZ3462832
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:56:19 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PDftbMo0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M3ZQglEj"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G2ZY1U406092
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	aKjHJ1pVqYFFJBRsIMQ60p5qHGl1vtujYesr+jTvVXI=; b=hzYyKaVeBM0t6oN4
-	OqbN14OwDGvh7/Gbx8Z6JXtEVWmqZ/V6E02Jytm44sRuu+SYlIYXZgU7tYeeyIWq
-	BewuE2ei2LoXTKh9cydz7afjbXT+jI/rOm9HqUItKCdC9QiIt/2v0VXogxYvHjUE
-	N+z5NR4yoS4L+16yWKBE5ADTaH/GPPppx5PKaSp7wmpRSSckQg/Rk5BC8SCgSEdp
-	kfpBzQAwwtODE3Zt/iVQaqb9Ge2u+IpQKyNpFoNU2JVdoCVvIDqv35G/WFwhNs/q
-	GSkDxzBK4gEG4SksIDGzbE8a3uJAXpSqWylygxkxwSjwix13qtaDykg0Rif+uFbQ
-	4H3Usg==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hayu6btvw-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=evMqfyXWXTJBLIRuZtTEpo
+	fBPLXYO84fBR90qAnHG8I=; b=PDftbMo0OF2PX88jsiOk8q6JCNPYSGHMRXjeNm
+	HZ+FziMYkLRrLfXV/Ighpdwv9h90BCEK0jXVO2s1yDuYaeIiDBlwbjqYu3qTqkgs
+	VLo5uIDIBJD48BxSZIY+vST4UyBM1gTYOkxZeO6zrZjH+OkLrchX+LskQCLxkDvN
+	xAL05Ghmr5lUMIDWvo41+ak7mH8ugtQq1MQqX2LS7tdI1daET8w/SX85vZyG219I
+	LBdIbvuFEvktRPYDLS5GFcJRqac36iicMDAnN+P1ySpFYBpLLRJ1wzVu5yztWoAF
+	5Bj0jrCNNUPfWcJHvXpUQpPoKonPejmv8MBREPOU6UmNtibQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb3sa2psf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:56:19 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93e49a1d3b1so1365730885a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 00:56:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792137378; cv=none;
-        d=google.com; s=arc-20260327;
-        b=d05pCms/F7uYkLu/mFTW0J42P8NV0tes6zGJScxvnkoS7II2GYsSjICbvYOPjAtRk6
-         Z3XJ9qyOs3orvf9jBjbIqZw++eRzczqde4HMfakkXoP6V2nUoSLlse9dCpMBFvUdgGNh
-         SfbjtGOL5EH5JfG+SQp/FHjhr318yXhPlNJtQkJC7dcwrS+CHE04zuOHRWI22arYSNNV
-         wZmiO0n+EGLlzPV8AHETQIIdt+CVThrgBULBbNzJG9SoDnt1B+rsPVNbAV7KFr4gpnVP
-         uIph6T9nw0/zUVyn0vAB+D9mN5KnfAEfmpGj/pPl73oS0BNlsCu3uHmzABby9OBwCkW1
-         C4dA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=aKjHJ1pVqYFFJBRsIMQ60p5qHGl1vtujYesr+jTvVXI=;
-        fh=t5+FN6vV0dNGVLe8PzLa6QCHHWWQ1e4af2aqzlI3pbM=;
-        b=T74c2NNLXl4Ribe4+KzxB//gS24I6bdeRGDXRA16R4gismtaLJa0TdVkK2uHWtqcfJ
-         TKFMIspiwNSjG0vz3CznMdfz9gIiJujXLb1ncdUNFWb2b8aByekeME4/t2x2uO6pP/qA
-         uDhCIpPSSHUvdsrfbfcZOEyP2weH40VJtjzmcdjLHdEDYrYu/iB26fVpkW6mLVdbCfgQ
-         wwWT8aQ1vlfzG0X20Yqd9vpM3fnyHIh/TmI+RclAu7C2sx46Exv3GZ6oRGz6YK2On+yN
-         Js6efDcxRXzPSQKR/WuUpeu9nBmOLt+vANRAxpN/1cjFEoKIOv6ujisXaVRgPHbnov7L
-         F0IA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:13 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93e49a1d3b1so1366229385a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 01:00:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792137378; x=1792742178; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=aKjHJ1pVqYFFJBRsIMQ60p5qHGl1vtujYesr+jTvVXI=;
-        b=gfMq1sOqb8pg2AD55xHEQOts/sz3nW5oKCPLtUh/iZ3QB8AuLI6bDm57bkzhPTluD9
-         Ur3AVRrIo1NcayCfymyt1++c7hXdWwTeSSvoZ1wXH+Qn8qRprB11nckdpkjc3Z13SwsQ
-         1UImJqsonjm/8ikqSUl8IUB8LpCsFv6BUoQcej4MT9/+cPDBtWFoFXPP16ODtS60jWGw
-         UWkjAyKLlXnEO/RPibj1K/27cvdc5/45SiaBrCP3JoeafW2w+zKKqck9EJgN9A9HP/+g
-         3G2TWvUJM4kofH2VTUNExRWRqclP5wGMmnd7xx0rc/3HGUhAcPx6TR0NOsw+nE9hppE/
-         LnYg==
+        d=oss.qualcomm.com; s=google; t=1792137612; x=1792742412; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=evMqfyXWXTJBLIRuZtTEpofBPLXYO84fBR90qAnHG8I=;
+        b=M3ZQglEjFNtDo7M76wZPwGPWE3ojRxncPx1N12wmJN/aqfrZFkbCFS24rRIvQnIN1o
+         jPzDAFCQYcoY5hPDOOzHfn5uZY7Vf6TfbVMaSpeM79iESXe7e7LazOA1Mzfb+1h2tMM7
+         vBTFM2/c7fd8ffcrWCZGRZrqnq0NUZWzd/9NK/mrCATKnoper75KIWB6e/jm20RO/w/Y
+         j4OtQ/4LSt60CkgQWDudL7xsev2mJDG35hlB5RV44e4clV7Ct5x+IrJ+CcTKt4Htz91z
+         9fJdHf2ozz/+8mq0W7oCCPjVjWzpXRsO78Ty4pkIHlKNPy581WQMV7a2ACjnYXIPkWDj
+         0p0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792137378; x=1792742178;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=aKjHJ1pVqYFFJBRsIMQ60p5qHGl1vtujYesr+jTvVXI=;
-        b=oHibUdJkYjZVxz3gANFGDdnAOyZ7Ebfon1dGoMjFh9h/h3GRP2bRUC01S4ByiWTJVq
-         ZF1y25aRV+wG5+/elH7xHkSuPdKa6XBNQyEt9fnyvl7OEEb7fyBYKMwEiP8rSJCNnK7Y
-         cjHFwLW6m7nF9h0Qfb9Zsfys1Qg1IoAzkGjyR5VDd15RKuri6CT5zWoIPELbA17EHnb+
-         ISMWTow6Ca1B2H1iwwvvhs57C0LDXzajMhtSfH89vR+Lhzo6g7lcrWR3tsB6Tudzuo8N
-         +eYC+sjdAc4Nnc1E3h4zcyn1fz/7wzF07/MGrEYTpNpOJ1NPOFjICVdL3vSMnAV7PEZB
-         VoMQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx1XaWVddoA74HC5OwhEMknvzQOnG2/aDjBT1oGmUsj4DJp39+MgNUyLTYG6eZNrBRsPwSr3b7EwBMvBgsz@vger.kernel.org
-X-Gm-Message-State: AFq9FYLUhZKlVzkH47rrHexeEN6a0Iq2oGT29t74m8QBsQ/3Yk0SktRS
-	gqJS0U4BSvZX5OblAUEfUoTOSmmM2Dn24FGhOZwYlTlURsRUWMmnnm+Px7nj1hyK/6JBtFTsOrt
-	v0GwCrvKJXo8dHlqhCAr1Dxbc6AIgNgdwRfz51G2zzKW1P4XAm1wNG79YD1UYoJcAbTKlCj502h
-	g3w+ASDNncaLpYruE/tuVvq8dxV0k0V4tmOBPzm8gG5nZwn4sFKhkyWaYM/pU=
-X-Gm-Gg: AYBFou1BXt7zwzbXGCNS3gSMV52rL4guievTuNmE+svkgoQEWO+M3K9pIKTZSOzh8DX
-	9uM8oXJyTtyYjbmPN7K5kxEs59ljN9n8rXVSAhlyakGvB/QJUOpfOQa1Y4g8DaXXf8chlcRtyDQ
-	iCaAQ9ymijrhpyS4tmuXR24prNDLM9AGIwSynQNu5GF8CFB6ZRm44wDGtfts+ELrMIReDt9x8d5
-	wHIYndXhZM6Ob3xOIzdShKd/dSMtNjl/HNKgaU6JhNzDm2zyEbLRNkdLQx6H7WG6QEr/H/039SH
-X-Received: by 2002:a05:620a:3947:b0:93e:6325:ae6d with SMTP id af79cd13be357-93ebd248dd9mr3909710185a.40.1792137377711;
-        Fri, 16 Oct 2026 00:56:17 -0700 (PDT)
-X-Received: by 2002:a05:620a:3947:b0:93e:6325:ae6d with SMTP id
- af79cd13be357-93ebd248dd9mr3909706785a.40.1792137377058; Fri, 16 Oct 2026
- 00:56:17 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792137612; x=1792742412;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=evMqfyXWXTJBLIRuZtTEpofBPLXYO84fBR90qAnHG8I=;
+        b=N5NZKwRCqUAsb5gDgfzoWCwcWvh61efq83a3R3DThKJz3GL76doMAW1Ul72YHoVEoh
+         46B/zv9yGDNjTNx2TmAFhAkV0I6G4UZxSKnByQEehw3423WgjhTi48TeDO5ci0dlaodz
+         Zgm1Ij1NVhm2tnLFaGbTbGnW84WOMwFf7jNjW/9p+0rmWaQf7BSGee6WG2z5p1wZKoj4
+         RhCk1Hm4EZX4JgI00yr2J8nxdcqjxlPHXBe67PRttvqOnOhbZp6M/xjVTrBn3ke+IiuS
+         Aj99m0kAyNeCQ8RJ5glLvX3iZtA++2J3tK+BCSZDfwyt1BEfX/aKYxegpxrUYvWWzoTn
+         2q4A==
+X-Forwarded-Encrypted: i=1; AKwUvBytRFlIeZDibn1tqOvwJ1XPXynD8QSIJgAUqm3MUGZBhstD/uX3gdGOAJd/oEV/5+5O/Vd7PdWW7H3Ao31e@vger.kernel.org
+X-Gm-Message-State: AFq9FYKOD7FlV60k5A1Vzj/wzn0ncYkeSJ5Op3v/sOyyfWZOyTaD9/QR
+	n04KlvTr9dyUp40mOplh/rZSNxZjYoDU4hDxDp/zxw6AlOV6xiMWdh5VGm2RXMlZKu/bHGII24u
+	q7/DE7J1si473GCtIfBCI71+3Oq/hp3bUZvgeVKi0Hh/ii9TuQbIGQG9nb6osIUbUZnAyB5PO4R
+	ncPSLNEg==
+X-Gm-Gg: AYBFou0UwZvmHjdrIupYLF5DYU49Zm9FtLUzQlSnLTS6bKq9Z174Shd0PGQHv29Ik+E
+	PXVGcSC4EKWVuWlgTWYW8NZjfs19rxDIgloVC5+j8ujBNBLKDxO3NlbZ0dv4zbCESQMMDBzFU3/
+	//w3YA4mEtY7tlW3TjP/7WDfNBOpohWTjtcndCT3wBqsuo26MHiAI+v6ZS096EP2vg6kr8PL8Q/
+	iEM6zJFbgEEjkHYPs5FZFoIbg4oo5bir91P7mvPlOcUDU01TkeBGKp0QDFH/HotiHPXhlyECGms
+	R/fBH/uNtDSgWx3Paq1Ah3Br6pRBfMYjXwFFvWItBqqxR/MJ/djhJiRMx9LAUt1P4Wm/LE6Eva5
+	JBYHrJ8lLnoxaFrvB1znfrp7jMCkwHK2LX0c6O2N83dCPDjbf/y6qNngMGBbDdxNfBUfo0V/DHa
+	VcdbuBAFWkrLdxwpyZ8w6bzcBwVCcZdGX0YlA8suZu972+6GKH9ro=
+X-Received: by 2002:a05:620a:2b42:b0:93c:8e3f:3036 with SMTP id af79cd13be357-93ebd0a1ed0mr3577119485a.4.1792137612496;
+        Fri, 16 Oct 2026 01:00:12 -0700 (PDT)
+X-Received: by 2002:a05:620a:2b42:b0:93c:8e3f:3036 with SMTP id af79cd13be357-93ebd0a1ed0mr3577113085a.4.1792137611802;
+        Fri, 16 Oct 2026 01:00:11 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:5402:5e0b:9ef0:9b5b])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5942sm5471446f8f.16.2026.10.16.01.00.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 01:00:10 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Subject: [PATCH v3 0/7] i2c: qcom-cci: Runtime capability detection and
+ improved read/write
+Date: Fri, 16 Oct 2026 10:00:08 +0200
+Message-Id: <20261016-cci-imp-v3-0-5ee7ec1ea1a1@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com> <20261015-x1e-cphy-rfc-v1-4-1f3fa9af940a@gmail.com>
-In-Reply-To: <20261015-x1e-cphy-rfc-v1-4-1f3fa9af940a@gmail.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 09:56:06 +0200
-X-Gm-Features: AclHuK9EtofJ3KdOY7tsLgDR7QBNZwZtJcvmiZFhadgSBrUvuUDEDEKnQ2RLZCs
-Message-ID: <CAFEp6-0GrFoMFe8kqhkOdvf5_XkuZG_AmrjTMxxfBABda7132A@mail.gmail.com>
-Subject: Re: [PATCH RFC 4/4] media: qcom: camss: Configure C-PHY through the
- PHY API
-To: geocausa@gmail.com
-Cc: "Bryan O'Donoghue" <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        David Heidelberg <david@ixit.cz>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: c7OgemS4iruNxWC291F7TiXkL2MHSv15
-X-Authority-Analysis: v=2.4 cv=ff04WEQF c=1 sm=1 tr=0 ts=6ad1d8a3 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8
- a=jTXrqqeG4OIbzDD8fVYA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-GUID: c7OgemS4iruNxWC291F7TiXkL2MHSv15
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfXyNMP2A5+VPkS
- XNL7vD6kCyLseZjlpJ+SrpAfZP8flMtCKZdz+tPTv7KRJA7sgYM9wSL7wh7Knq1nmbkypjDnOxU
- CW5ImLCi/jAduriefz+qeYH+OizZCu3NUQKHtqsoU4MTr12kTBXSsvELHF/bbeknS1lx/IJtQQM
- hek9iweRveoD6bkP2rhRfkGewMcPyS3LnqDCIgfW+kdnE9xGFHZv2Pe0ztUGm+p+3wu6ulP9ecG
- 1mOrJVKzt7gSDxclgFaIcdW2eIDt5XZYDu2cNt6gG74HYHst9/I0K43EO5ocJm6iq7cRX6po5Qz
- SXeONFENTOruzCQpKA8cRvYeMPsBVEBCl4mqaoW/VQAzD8ELbPV2DNE/3sjzUAyO71wkZebPR21
- jziCNCIaOArWZYeEAfdGOSObNhLfMj0+Y8I1fTo4iykHqMPHQuX6in7VPhKWYohzb+hiZPaKupS
- sxweBfCeMqxzlUz3EFw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfX7DbgXS4MRia5
- agH5A/OnZCIz7fiaq2tCta//q5qeN0cOW13lt34WXmCimsxH2AWqJheKwf+4tM0hxkHJ6123q7u
- EwWG8zBAgXN7F6g2oc31zjADcEHAL3Y=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIjZ0WoC/22Nyw7CIBBFf6VhLQ0MpIIr/8O4oBTtJPYFLdE0/
+ XdpTawLN5Pcm3vOzCQ4jy6QUzYT7yIG7NoUxCEjtjbt3VGsUibAoGAaNLUWKTY9VaURSgqmtQS
+ S1r13N3xupsv1k70bpiQc97LGMHb+tX2LfG03MWdMfsWRU0YBjhUHW0oF+tyFkA+TediuafJ0y
+ KqK8INzseOQ8EIdhYCilNKIP/iyLG85EpEA+QAAAA==
+X-Change-ID: 20260929-cci-imp-8ba384309942
+To: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfX89ky1PCzXBk8
+ fZZEr+jsgFaiBlYDXY8fpVwtCGhe8PcVKicDtyyceIFdBi6QmmJjGkB+fEPDBmMGUC+eo9XYMra
+ EOuyvw01zx7O5aTmWXuQnj2Y86eM6Js=
+X-Proofpoint-ORIG-GUID: n2tmspxJGDdzWPMEsoFwMR9Oj1wiE4A-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfXyBftvnbkZYxZ
+ b915k4jzt8LEEZ432FBMz3Qz/QYyhb1jwR+/f5nrWR/P3osCn/+sVf+uaKbJ8qAKrwnZYYuadnu
+ i3myF13nloJf7g8pA6Q8c0xyhBYtbZv6Qie5SOF/hN1e/1qeYh0V1/SAGoB2Sd/eZHSrI2eWpz1
+ a36icl1YcYtQOQqNtOCavs5HSbc6yMT/3R0scTJKT3l/F1m7G+RdQy6kz21pHAMHWsMJU3quyQl
+ 6mR2eb0PoHSD8AshLZcPltSJX8X7rTR4fHDDNx1Lw4bR0pPtu2+tvX5b1HNRi584wiNUH7sLPyw
+ OEaAXEK+oslT/2+ZvySIi/ECNXwrB3eIpbj5Bot+Pf3MGTGLgcGYwDYvh9uOTlzgNu+dyBi1tCx
+ B2SyeLfd73FFJQ/ObYBIHGGeWv/bvytKdop52T8gsq31E2CuYaxVksyueuaUFYBfZGOzsN2dAdZ
+ d5PWKGf5Q/cQ4TjJttg==
+X-Proofpoint-GUID: n2tmspxJGDdzWPMEsoFwMR9Oj1wiE4A-
+X-Authority-Analysis: v=2.4 cv=AN0XGc5Z c=1 sm=1 tr=0 ts=6ad1d98d cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=YGdjDy1V9CnC6BiKI58A:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0 spamscore=0
- phishscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 adultscore=0
+ lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0 spamscore=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160031
 
-On Fri, Oct 16, 2026 at 12:20=E2=80=AFAM George Neacsu via B4 Relay
-<devnull+geocausa.gmail.com@kernel.org> wrote:
->
-> From: George Neacsu <geocausa@gmail.com>
->
-> With a PHY API CSIPHY, csiphy_stream_on() always asks for D-PHY. Ask for
-> C-PHY when the endpoint is C-PHY, and pass the trio count and the symbol
-> rate, which by the V4L2 convention is twice the link frequency.
->
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: George Neacsu <geocausa@gmail.com>
-> ---
->  drivers/media/platform/qcom/camss/camss-csiphy.c | 35 ++++++++++++++----=
-------
->  1 file changed, 21 insertions(+), 14 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/camss/camss-csiphy.c b/drivers/m=
-edia/platform/qcom/camss/camss-csiphy.c
-> index f44f2aeb9..8e1b4335a 100644
-> --- a/drivers/media/platform/qcom/camss/camss-csiphy.c
-> +++ b/drivers/media/platform/qcom/camss/camss-csiphy.c
-> @@ -329,17 +329,15 @@ static int csiphy_stream_on(struct csiphy_device *c=
-siphy)
->         u8 bpp =3D csiphy_get_bpp(csiphy->res->formats->formats, csiphy->=
-res->formats->nformats,
->                                 csiphy->fmt[MSM_CSIPHY_PAD_SINK].code);
->         struct csiphy_lanes_cfg *lncfg =3D &csiphy->cfg.csi2->lane_cfg;
-> -       struct phy_configure_opts_mipi_dphy *dphy_cfg;
-> -       union phy_configure_opts dphy_opts =3D { 0 };
-> +       const bool cphy =3D lncfg->phy_cfg =3D=3D V4L2_MBUS_CSI2_CPHY;
-> +       union phy_configure_opts opts =3D { 0 };
->         struct device *dev =3D csiphy->camss->dev;
->         u8 num_lanes =3D lncfg->num_data;
->         s64 link_freq;
->         int ret;
->
-> -       dphy_cfg =3D &dphy_opts.mipi_dphy;
-> -
->         link_freq =3D camss_get_link_freq(&csiphy->subdev.entity, bpp, nu=
-m_lanes,
-> -                                       csiphy->cfg.csi2->lane_cfg.phy_cf=
-g =3D=3D V4L2_MBUS_CSI2_CPHY);
-> +                                       cphy);
->
->         if (link_freq <=3D 0) {
->                 dev_err(dev,
-> @@ -347,23 +345,32 @@ static int csiphy_stream_on(struct csiphy_device *c=
-siphy)
->                 return -EINVAL;
->         }
->
-> -       ret =3D phy_mipi_dphy_get_default_config_for_hsclk(link_freq, num=
-_lanes,
-> -                                                        dphy_cfg);
-> -       if (ret < 0) {
-> -               dev_err(dev, "Invalid config for link frequency %lld\n",
-> -                       link_freq);
-> -               return ret;
-> +       if (cphy) {
-> +               /* A C-PHY link frequency is half the symbol rate. */
-> +               opts.mipi_cphy.symbol_rate =3D link_freq * 2;
-> +               opts.mipi_cphy.lanes =3D num_lanes;
+Improves the Qualcomm CCI I2C driver read/write in different ways:
 
-Wouldn't it be cleaner to use a similar helper function as the D-PHY
-driver does:
-Introducing a phy_mipi_cphy_get_default_config_for_hsclk
+- Capabilities (queue sizes, max transfer lengths, supported I2C mode)
+  are currently hardcoded per DT compatible string in a handful of
+  cci_data instances. Replace the static per-compatible structs with a
+  single version-sorted capability catalog resolved at runtime from
+  CCI_HW_VERSION.
 
-> +       } else {
-> +               ret =3D phy_mipi_dphy_get_default_config_for_hsclk(link_f=
-req,
-> +                                                                num_lane=
-s,
-> +                                                                &opts.mi=
-pi_dphy);
-> +               if (ret < 0) {
-> +                       dev_err(dev, "Invalid config for link frequency %=
-lld\n",
-> +                               link_freq);
-> +                       return ret;
-> +               }
->         }
->
-> -       ret =3D phy_set_mode(csiphy->phy, PHY_MODE_MIPI_DPHY);
-> +       ret =3D phy_set_mode(csiphy->phy,
-> +                          cphy ? PHY_MODE_MIPI_CPHY : PHY_MODE_MIPI_DPHY=
-);
->         if (ret) {
->                 dev_err(dev, "Failed to set phy mode\n");
->                 return ret;
->         }
->
-> -       ret =3D phy_configure(csiphy->phy, &dphy_opts);
-> +       ret =3D phy_configure(csiphy->phy, &opts);
->         if (ret) {
-> -               dev_err(dev, "failed to configure MIPI D-PHY\n");
-> +               dev_err(dev, "failed to configure MIPI %s\n",
-> +                       cphy ? "C-PHY" : "D-PHY");
->                 goto error;
->         }
->
->
-> --
-> 2.53.0
->
->
+- The driver only supported single-command writes, capped at 11 bytes
+  regardless of how much space the command queue actually has. Factor
+  out the write-command queueing into a reusable helper and then add
+  burst-write support, chunking longer writes across the whole queue
+  instead of a single command's payload.
+
+- The FIFO read path hardcoded a fixed 12-byte limit unrelated to the
+  actual per-revision FIFO size, with a special-cased drain loop.
+  Simplify the FIFO read/drain loop and derive the read-side limits
+  from each revision's FIFO size.
+
+- Add burst-read support using threshold interrupts, allowing reads of
+  arbitrary size by draining the FIFO incrementally during the transfer.
+
+Also add overflow and underflow IRQ reporting, as queue/fifo limits are
+now derived from the hardware capabilities and exercised more
+aggressively.
+
+Unbounded writes, which refill the command queue while the transfer is
+still in flight and so lift the queue-depth limit on the write side,
+build on this series and will be posted separately.
+
+Reads up to 4 KiB and writes up to the full command queue depth (451
+bytes on this part) were exercised on an imx219 behind CCI v1.8
+(128-word queue, 400 kHz).
+
+Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+---
+Changes in v3:
+- Reject a write longer than the advertised limit with an error rather
+  than ignoring it. (Bryan)
+- Build the command words with FIELD_PREP() instead of open-coded
+  shifts, which also documents the per-opcode field widths (Konrad)
+- Actually program CCI_IRQ_MASK_1, the RD_PAUSE bits were being ORed
+  into the value written to CCI_IRQ_MASK_0 and so never took effect
+- Clear the per-transfer status on entry and stop reinitialising the
+  completion in the read drain loop, as RD_DONE can fire while the
+  fifo is being drained
+- Link to v2: https://lore.kernel.org/r/20261013-cci-imp-v2-0-6873326b44a3@oss.qualcomm.com
+
+Changes in v2:
+- Split the HALT_ACK reset fix out into its own patch (Andi)
+- Fix a typo in the "Detect capabilities from CCI_HW_VERSION" commit
+  message (Andi)
+- Use GENMASK()/FIELD_GET() to decode the CCI_HW_VERSION fields (Konrad)
+- Derive the number of masters from the DT i2c-bus subnodes instead of
+  encoding it per compatible string (Konrad)
+- Add burst read support via RD_THRESHOLD/RD_PAUSE IRQs
+- Link to v1: https://lore.kernel.org/r/20261004-cci-imp-v1-0-227d12cb4829@oss.qualcomm.com
+
+---
+Loic Poulain (7):
+      i2c: qcom-cci: Factor out write command queue programming
+      i2c: qcom-cci: Handle and report queue overflow/underflow interrupts
+      i2c: qcom-cci: Detect capabilities from CCI_HW_VERSION at runtime
+      i2c: qcom-cci: Add burst write support
+      i2c: qcom-cci: Extend i2c read limits based on CCI revision
+      i2c: qcom-cci: Add burst read support
+      i2c: qcom-cci: Build command words with FIELD_PREP()
+
+ drivers/i2c/busses/i2c-qcom-cci.c | 464 +++++++++++++++++++++++++++++---------
+ 1 file changed, 355 insertions(+), 109 deletions(-)
+---
+base-commit: d6dc536a4c8bb99dd822bc349a9e801be7ea81c9
+change-id: 20260929-cci-imp-8ba384309942
+
+Best regards,
+-- 
+Loic Poulain <loic.poulain@oss.qualcomm.com>
+
