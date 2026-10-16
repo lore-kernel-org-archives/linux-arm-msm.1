@@ -1,86 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 378BC175A9D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:07:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D03123ED3BB;
+	Fri, 16 Oct 2026 10:12:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792145251; cv=none; b=nIlp+1g0FMOIRo2k/cXWVdWiTkjBmIj+sQPY+cnG8iiucVGyDB9324VaP3TBq8uEOL4ae0VMY1UdDivrib7RWJTNrE59OTUi/EiAl5+TCxZm9x1adJ4w71/Rc7KGdsPBx8jpwAhNGtVmc2DMXN4DPqH3ut8sGIL1tndc6ucVQdI=
+	t=1792145560; cv=none; b=g+B1gjoExk/HrinG70pUKas945i/9taz6Ijdd3G3gvcjHY/jWRpQPrxfoxto4ylKkxdG6yNnBKMBNTpeXHPW5EN8U2WH7GqnxKZSaPqPOsggTdAD7RrH12QI4At3vaRGCUym1+zFa16dwQyxe+HzHC4KRCLAtngbAJN3R1MqGjc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792145251; c=relaxed/simple;
-	bh=svnknxrvxPFY2XhHHB/7UYk5zvriBKO1HYflPEGoWls=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=YkpAqe5pQTftqwbhW6LfcxjMPgql4ZbqThPx9lZ+fPpQ9sb5sxVfEhilnAthZTJdlNQ5tfoOvIcTbYWObec0EMSh8yysrh4VBovlE+OUwubvQD/pi5GnnqxHQJFPj8iyJvoRAPRIJAqgNN4ZoZzVXItWu+bP+BIKVOXU9+Jv8Q0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kg4flyau; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cZUficEH; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792145560; c=relaxed/simple;
+	bh=idmo1GeyJuJ6N3QJmqPhnGkr7HwQLwgKJovNjaEznRY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=cKQi8N0sbby/7hM4+k7a/7QfY1f/vn28FVdkiOwzLgYKA92EDQxMedBatA2Dk1X3DFXTLQd5oaRvnb2bQSGhVMeEqZRVtFpf+msnSAcIXkbUroKgBGs284Z+ob1LxkFbwLksd9G1L4JBrCron83gaA1GU0fFH9zTyqCju4lWENQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NEMCrwxu; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kg4flyau";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cZUficEH"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G8lfa01218677
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:07:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	pJlytiMq5O9B5oYpwl9msTwHluCBe8tunjW7J/SptPM=; b=kg4flyauA7YvAGA1
-	jUkKTAMXw/CPF+ibJ5mBtCM0lCB3T/mgWwK5NzgGMUod8oXD4S/8hR0yKpDAJTP8
-	xpgKweJVxIggcCVA4eybqjPQJcOb9rGW9ZITVAFSCvCiRnqzNrVRdR9Cg36x0fII
-	AsQI42QBOfQl20qTA852okbLuZxS8Yxa9FqinMVjDi07j9tWzvRd7YGjF1evbqGy
-	Bi/O6ZOoz7atiREFHClHWuPdEpi9V4hhFMFikj5VFCfMv7/Y0y1W4CBZh3DQDtpg
-	epDN4tO0BcHte9qWpflDYaKTepK2pEe29Jeid8l4xAPZoEgyaU1xO8ozeZSuzFnZ
-	MGfWoA==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb5seaqm8-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:07:22 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cc50fb0d2so123222585a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 03:07:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792145241; x=1792750041; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pJlytiMq5O9B5oYpwl9msTwHluCBe8tunjW7J/SptPM=;
-        b=cZUficEHSTOEaqBtnWYbpplQBEw5S1faBKZ1FRccMXLUrykTtaSReci7+2cUVRcjQ1
-         ECmcmcpWZe9kLlGyq+TZvEoDWo2lYARPZ0ATxSkAfZRWC+zKKsL4KX5Xr/nl1I5RXYeb
-         mh/joqrvgJWcUYbYPI7MTUACxvG8jdQEAqeMWUotX9cLhMDZKRVHV9DJgvTP6zcjut4B
-         OVP33O7HtWMMgw/d5quEaGvy9rj7480DpkyWNAfzu8TwxDAAmep4BY9SB5tGeQusEQVP
-         d3Tsu5mYtZ9yQW2iREFXLPsNszO21schIQhsgO/+XwYtO3eWFPUpBbMQLXeU8Yg6hlnH
-         4SVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792145241; x=1792750041;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pJlytiMq5O9B5oYpwl9msTwHluCBe8tunjW7J/SptPM=;
-        b=1CdrQH/3FXXcOQiCVI+f2LPx8b3+bwaYFoeFRSAZ264uZ3T+rl+Szl1Ua0X8rdZYjb
-         VOWxqrcsvGW7tAwH0iSeMU4pr3dCpDGxWH/G4KbJJArnDGdsHUIuMYZ9yF8qLcAYmzy2
-         XqxgBQfkzNytB0841YX/3leFsH6AR1OsQ0bTLy/yqP8m1lXE/VZZ80L4KT/2SdhNyCi7
-         s0beLOXWoJDCKwGmg1uUxGZAxCeFFZpqxwVkY803vbhBTt1mk675cgp/uXJXs07O2F5Y
-         1ZRJcur/qGcwZwQ9C6c01sTO3CZ/kOZwiq0/Bq3MN3nDSHiEgapWCgFycL0g0qJD0xmg
-         p+eg==
-X-Forwarded-Encrypted: i=1; AKwUvBzuMkV09iVFrFC/075/yO/9SwrvqyGvyaJSaa2VY2C4OgPahzYze5lAv2RFs2n1qhAxXhbKz7VeZq2KHTTM@vger.kernel.org
-X-Gm-Message-State: AFq9FYJYdzRgPeIlIYODQxwt5TvnO6DB6iMzMaLDpnV4af71PIrEMEbN
-	jlCe3TGOiqWAXlsm0O4sudo2W/TvryizvX/sTG57OSsO6g0QIguDX8ocppqWJENkma7pKKGIsPr
-	ipqGhYHtd3+hOynndU7xtvYvYDNbgA8uzD16C8PTPSqzvIAgiZPYFfgOLKocXNbr+zs59
-X-Gm-Gg: AYBFou2xPAduq2BygKpt1AohfFd9CV0vp5OZe1MOmkxRMnx4D8gNpAWOBY2EuSZ/lr+
-	cDJ8W5I4Qoq/Z7dWx7zc5UxupEA4V2NvULB/Gwa00O+swN96JzcpjsqUTKijVY14e8mpM1Er0ca
-	nU+SG6CklfP/S9vfT7mjk0Ilze76AuMVvNbmm0x/s0GEbWbKXLE7hNsjjmL1tcTXKVNiiHYt8CM
-	xrwGdHCTpALPh1TaoY05KrMZqR+FAZGZN6lqBpomcY2VVC0rwvFYaFtbEJyADaGHFCBpABl26H6
-	ugzjEQZ87Y8KR318w13xEjQxznnwFU2k3aKetSq74T3oDaRdSNirkScAxhkn+hn/WJoRNXW2DP0
-	EnX1J+vCEea1nPyYT/RTe4g==
-X-Received: by 2002:a05:620a:19a2:b0:93e:54d2:2283 with SMTP id af79cd13be357-93ebd2955edmr3865353785a.6.1792145241153;
-        Fri, 16 Oct 2026 03:07:21 -0700 (PDT)
-X-Received: by 2002:a05:620a:19a2:b0:93e:54d2:2283 with SMTP id af79cd13be357-93ebd2955edmr3865347685a.6.1792145240560;
-        Fri, 16 Oct 2026 03:07:20 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c408b4a85b8sm58824166b.0.2026.10.16.03.07.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 Oct 2026 03:07:19 -0700 (PDT)
-Message-ID: <bf35b332-1d7d-4c1f-9347-dcdc3ae5c7f5@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 12:07:17 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NEMCrwxu"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D12491F000C4;
+	Fri, 16 Oct 2026 10:12:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792145557;
+	bh=75PhmblfKKNm9YT5QCltoh5unVEmTBo+VfQEF4Aeyac=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=NEMCrwxurtStnVI51zk85h1Xn062G8gNb20uB+gBmg8erJwnEIPCRibaJfYQ0uh5P
+	 hkhkWflReftxiBozwZj+Y63Zu6vCQ1abwftzct7a+lVsaYUzJ0AjtLKVAykDH0tR5Y
+	 +m5qN3zPDCn1VUXfOajnGP7SbK3hvH5eJ9q5B2R3fr+30dGlTLZircWZ8ESnEnXvV3
+	 0jbeRWlUHN3cqShxRrGvt1bPaID6CWZLSvvMRv73DGb9En+XzFSJugT4pbKEkja/d4
+	 avjwG3fj2suXE8n7+zQGDGje6t26bOh6LQaELV3Uy2KIaR7BDqnXpuYHIupnlSELGB
+	 QuBx6Ru2dfXwQ==
+Message-ID: <30989671-7159-4b4f-bbf7-29303a9e13ea@kernel.org>
+Date: Fri, 16 Oct 2026 11:12:33 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,85 +35,188 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/11] arm64: dts: qcom: sdm670: add adsp
-To: Richard Acayan <mailingradian@gmail.com>,
-        Jassi Brar <jassisinghbrar@gmail.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Andy Gross <agross@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-sound@vger.kernel.org
-References: <20261003175659.23536-1-mailingradian@gmail.com>
- <20261003175659.23536-8-mailingradian@gmail.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261003175659.23536-8-mailingradian@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA0MCBTYWx0ZWRfXy+lchyswrmmu
- XKKebhgiWgH98NoPKEQCTrOUxkk+oZE8nzGKtLE1gAaQX32BwgIDNgNwKuGyBQ/ooboI7swhv5q
- SBIQ00bxdZjeFRuxdjgrmOQhe8llc3M=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA0MCBTYWx0ZWRfX1a12as32t+dP
- bripOZTsELoK/qHu9xvz3ibVa9jaejNRIT6jwPdnjYbuv5TqeIJSR0iwkhUuv1N6zsUv1lOHbXM
- QKk7TPo4hudwjFdjKk5RopesLhzJvwPLaVN02SdDrCBcXy9Vl/KOQNpXgRyutq7T98ucIV9F5fT
- P6hjcQXmEFDEum+dODc6LI9OkjXojSWLSv8dct/qs3ulf3W/JS/eebxkQGSPpgW1aBopgYVYLQt
- ivEfm1CNoXmtc/yndcxPVqn07P4Qr4MxEy4FRZVWoyhwEateRRGZI4QhJLb7b1lfzzXFavnAr7d
- TE5PWWot89K65yGviDeub5QacLyAD3/7qw6eJCA0e5sD+gP7ex6ElIVaXkquqxrvyP+O/nu5UQR
- bXqNNR+0SrNF7JczC75I1MeKRLDwgkz63W7PTysz7hwgySah3FHIlYuiB/dlh6kHaS6QbPtE/eC
- TYT0hUklZeAVWbLYaFg==
-X-Authority-Analysis: v=2.4 cv=P4yvFSAu c=1 sm=1 tr=0 ts=6ad1f75a cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=pGLkceISAAAA:8 a=UiK73t45R7nl48eyPcwA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-ORIG-GUID: nysWZp1SGd0ZJQui5d0any5FR2f_w1-Q
-X-Proofpoint-GUID: nysWZp1SGd0ZJQui5d0any5FR2f_w1-Q
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015
- malwarescore=0 impostorscore=0 bulkscore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160040
+Subject: Re: [PATCH RFC 2/4] phy: qcom-mipi-csi2: Add C-PHY support for
+ X1E80100
+To: George Neacsu <geocausa@gmail.com>
+Cc: Vinod Koul <vkoul@kernel.org>, David Heidelberg <david@ixit.cz>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com>
+ <20261015-x1e-cphy-rfc-v1-2-1f3fa9af940a@gmail.com>
+ <7aed254e-18c5-481b-a77f-576944fff1d4@kernel.org>
+ <O2OGvixLI-H1FleIR5UiLkxLAN4pfWDm8F8qMBuX6LT1klt688s0GbH-iHKW80Uqs-6zSNWE7ExAXsNHxIwYjQ==@protonmail.internalid>
+ <20261016100621.427612-1-geocausa@gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261016100621.427612-1-geocausa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 10/3/26 7:56 PM, Richard Acayan wrote:
-> The Audio DSP (Digital Signal Processor) is responsible for audio and
-> sensors on SDM670. Add this, along with the SMP2P nodes used to
-> communicate with it.
+On 16/10/2026 11:06, George Neacsu wrote:
+> Hi Bryan,
 > 
-> The sleep state is included to prevent the following crash:
+> Thanks for the reviews, and thanks to Loic as well.
 > 
->     qcom_q6v5_pas remoteproc-adsp: fatal error received: err_qdi.c:450:EF:sensor_process:1:sar.cc:27:chre_utils fatal
-> 
-> Otherwise, it is unused.
-> 
-> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> ---
+> The series is on next-20261015. There, phy-qcom-mipi-csi2-3ph-dphy.c is
+> blob 966d79c98, the same as on the media-committers next branch
+Series doesn't apply to linux-next or phy-next - given we are at -rc7 
+linux-next is probably better, after -rc7 phy-next is best.
 
-[...]
+Either -next:
 
-> +					q6asm: service@7 {
-> +						compatible = "qcom,q6asm";
-> +						reg = <APR_SVC_ASM>;
-> +						qcom,protection-domain = "avs/audio", "msm/adsp/audio_pd";
+[~/Development/worktree/bod-media-committers]$ git fetch linux-next 
+  
+                              *[bod-qcom-media-committers]
+[~/Development/worktree/bod-media-committers]$ git reset --hard 
+linux-next/master 
+                                      *[bod-qcom-media-committers]
+HEAD is now at b810335a0699d Add linux-next specific files for 20261015
+[~/Development/worktree/bod-media-committers]$ b4 shazam 
+20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com 
+                                             *[bod-qcom-media-committers]
+Looking up 
+https://lore.kernel.org/all/20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com/
+Grabbing thread from 
+lore.kernel.org/all/20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com/t.mbox.gz
+Checking for newer revisions
+Grabbing search results from lore.kernel.org
+Analyzing 15 messages in the thread
+Analyzing 0 code-review messages
+Checking attestation on all messages, may take a moment...
+---
+   ✗ [PATCH RFC 1/4] phy: Add MIPI C-PHY mode and configuration options
+     + Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org> (✓ 
+DKIM/linaro.org)
+   ✗ [PATCH RFC 2/4] phy: qcom-mipi-csi2: Add C-PHY support for X1E80100
+   ✗ [PATCH RFC 3/4] media: qcom: camss: csid-680: Select C-PHY in the 
+receiver
+     + Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com> (✓ 
+DKIM/oss.qualcomm.com)
+   ✗ [PATCH RFC 4/4] media: qcom: camss: Configure C-PHY through the PHY API
+   ---
+   ✗ No key: ed25519/geocausa@gmail.com
+---
+Total patches: 4
+---
+Applying: phy: Add MIPI C-PHY mode and configuration options
+Applying: phy: qcom-mipi-csi2: Add C-PHY support for X1E80100
+Applying: media: qcom: camss: csid-680: Select C-PHY in the receiver
+Applying: media: qcom: camss: Configure C-PHY through the PHY API
+Patch failed at 0004 media: qcom: camss: Configure C-PHY through the PHY API
+error: patch failed: drivers/media/platform/qcom/camss/camss-csiphy.c:329
+error: drivers/media/platform/qcom/camss/camss-csiphy.c: patch does not 
+apply
+hint: Use 'git am --show-current-patch=diff' to see the failed patch
+hint: When you have resolved this problem, run "git am --continue".
+hint: If you prefer to skip this patch, run "git am --skip" instead.
+hint: To restore the original branch and stop patching, run "git am 
+--abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
 
-1 a line would be neat
+Or -phy:
 
-> +						q6asmdai: dais {
-
-Please keep a \n between the last property and the following subnode,
-file-wide
-
-otherwise looks good
-
-Konrad
+[~/Development/worktree/bod-media-committers]$ git fetch phy 
+  
+                              *[bod-qcom-media-committers]
+ From git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
+    c7f2322431cb6..8f56fdf3d8cb9  next       -> phy/next
+[~/Development/worktree/bod-media-committers]$ git reset --hard phy/next 
+  
+                              *[bod-qcom-media-committers]
+Updating files: 100% (16814/16814), done.
+HEAD is now at 8f56fdf3d8cb9 phy: tegra: Add support for Tegra238 XUSB 
+pad controller
+[~/Development/worktree/bod-media-committers]$ git am --abort 
+  
+                              *[bod-qcom-media-committers]
+warning: You seem to have moved HEAD since the last 'am' failure.
+Not rewinding to ORIG_HEAD
+[~/Development/worktree/bod-media-committers]$ b4 shazam 
+20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com 
+                                             *[bod-qcom-media-committers]
+Looking up 
+https://lore.kernel.org/all/20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com/
+Grabbing thread from 
+lore.kernel.org/all/20261015-x1e-cphy-rfc-v1-0-1f3fa9af940a@gmail.com/t.mbox.gz
+Checking for newer revisions
+Grabbing search results from lore.kernel.org
+Analyzing 15 messages in the thread
+Analyzing 0 code-review messages
+Checking attestation on all messages, may take a moment...
+---
+   ✗ [PATCH RFC 1/4] phy: Add MIPI C-PHY mode and configuration options
+     + Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org> (✓ 
+DKIM/linaro.org)
+   ✗ [PATCH RFC 2/4] phy: qcom-mipi-csi2: Add C-PHY support for X1E80100
+   ✗ [PATCH RFC 3/4] media: qcom: camss: csid-680: Select C-PHY in the 
+receiver
+     + Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com> (✓ 
+DKIM/oss.qualcomm.com)
+   ✗ [PATCH RFC 4/4] media: qcom: camss: Configure C-PHY through the PHY API
+   ---
+   ✗ No key: ed25519/geocausa@gmail.com
+---
+Total patches: 4
+---
+Applying: phy: Add MIPI C-PHY mode and configuration options
+Applying: phy: qcom-mipi-csi2: Add C-PHY support for X1E80100
+Applying: media: qcom: camss: csid-680: Select C-PHY in the receiver
+Applying: media: qcom: camss: Configure C-PHY through the PHY API
+Patch failed at 0004 media: qcom: camss: Configure C-PHY through the PHY API
+error: patch failed: drivers/media/platform/qcom/camss/camss-csiphy.c:329
+error: drivers/media/platform/qcom/camss/camss-csiphy.c: patch does not 
+apply
+hint: Use 'git am --show-current-patch=diff' to see the failed patch
+hint: When you have resolved this problem, run "git am --continue".
+hint: If you prefer to skip this patch, run "git am --skip" instead.
+hint: To restore the original branch and stop patching, run "git am 
+--abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
