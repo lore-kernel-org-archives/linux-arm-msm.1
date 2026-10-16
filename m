@@ -1,86 +1,67 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34B813DB335
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 11:06:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F671392811
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 11:07:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792148815; cv=none; b=M6mLCrVd4KTFRyHlUVLEZGO7x2bp1OuV5umnbP7ChSxhQybyoVikCwpFIrj0zE6xt0aWeNtWos9T5jr5gmF1t3E1Z4oO2sVELNVN0rheNYu/PhszJR379WlmezZV/Y8gB3gxTcfE6HPlZlPaDS6EF0fkcNB8RoFTo15tTwKsqn4=
+	t=1792148853; cv=none; b=LbSan9n2Q2XFRK6U/o4RThLoHTCneszJKHn7jAMBL+5X7PGBgNEWr2CwMAnFOOiRLE9BQi1jQn/7kVpzkePxmZ5r3xj87qJeMUys5tlIeEpvqCXeyMBDHLbYlTfMhoHr4jmayK9jU3S2bZ+X0vuDKmVRLp2x96fetlISXcD1lCs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792148815; c=relaxed/simple;
-	bh=gCTOUSz6Xj9/k9OuCwCSYnw4OvrWc6XZi9pYFF7Z49M=;
+	s=arc-20240116; t=1792148853; c=relaxed/simple;
+	bh=ZDcMunxd98cuO0F7FMu7fkkixoxvBN1tgMVTeIp/JyA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mzcT7TyKdUiDCIPqCOs8tdrREAGSt7h2c1jOqgsyvZxQmD//W6WMo+lNE3yx5PInyhJvI3p1U+jxRH/iboq+wJFfl+cTqSMtd7DJzIzQE5tTRCpUkWru6t8R+rS8/OkjU3w6mdsJsXIC73ic7T7/ORdA5sgwYI3WPLbej+Tt+Kc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lTveZBb/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jzDugZWj; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=ls3v2QG6mcwy13EdR6wm6kqy9R7LWTTYO0CxuqzMAR+u9oGxruGYhKJiJsCJ9BYB3WYTLb+AcH4LuXzrD8SoL83z9VJuGtyXA+K09hZQ4BFTgQS4Wz88FWGu4iAZ0Li99NO1ZTmBwnhEDfpfHlQ8LNUl3xUeNcihvM0SIWMHzCU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=TEI93Gb2; arc=none smtp.client-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lTveZBb/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jzDugZWj"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAA6jL942713
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 11:06:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	SON5F/DY5kya39+CRJQh/XmORSH0D3r0659aeUKPdBw=; b=lTveZBb/LfwgkhOT
-	nxrVKBzvVO3V7dzy1NukRSDCY3fK4rBaH7IqAF+I+W73hivanGzQ5nK46ejExf3z
-	VRhf3tL07iTmUNJ+whBsZi2WKcUma+I8GN2GV4vblB181oF0L0+z9jPzlMP+NnN3
-	TBQR8U5eDRcoOOGixn6KGwtdGasWbPSTk6wB5cJPk6LCL6DcNU4L+W8cho/eDZ95
-	KxCltqMM+PZCzXxXZ8SCbov7Bm8TzYDlNfovxVmwWmCfcBqPvZ0ktO6WNW+R1JTu
-	hBB/hohAZ5L/khNKvwhrYzN7NmrQTWelWSTiOiHKFWCVxoGBlBGZOClqYG7kLggS
-	1Qef7A==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhur074x-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 11:06:53 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-53630cded29so945211cf.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 04:06:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="TEI93Gb2"
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48df0fa43c5so681276f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 04:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792148812; x=1792753612; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SON5F/DY5kya39+CRJQh/XmORSH0D3r0659aeUKPdBw=;
-        b=jzDugZWjBnJj7sTgg4Zab/cGbY/+anlUC0h7iEkEqOBcocOY0nB4bvXf3rlSwExkFv
-         n6z7GuFQT8+BpzYb/GqSLJ2TurpXY8T0LgY5Cr521cLrt/2QJszQXkk4y8gcaZZtJPDf
-         jrmq+AQSlRdn4Fb50hBym0t+X1L3cFePpF0iNUZSr4OooXAWy+opg04Wa5Jwjar/DNWJ
-         7QyocpCLHqIxt0U4MzOkWzG3jHVkbbzY5QLpe1BAYD7cMgssJDuzwrY2kHXxFaiEkkRg
-         tYiA/6E/AA2Sr8qx7ZhJC5MlqDRKvwX6Y24YkntZ6XQLOyK4HDMW7tajoiwiJVO0rIGb
-         bSqg==
+        d=linaro.org; s=google; t=1792148847; x=1792753647; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cJqf2rITdCzziip2V1CcQ4gA2chUDN+IaUybbZl++MI=;
+        b=TEI93Gb2ZyoBvpdGFTOblgsStFhAC3JSuO97n0HpNO3ASPk97RzKADz1fxDZMZjSwy
+         oXajyXzKpXsvMoDo9X2smFfQDWnqOHsZcYB8BuNlD6AUonngN+ogpKKmhAbMq/gkA1e0
+         kK5LUn2U/rnz3ItwL7QYKna+6PkvH+eSzBEL4D0WczrHs8jnA9Uwfk+qPbtBte7KH6lp
+         9LvRkS1V0tzOjX3WHtj4pegDx4fDF+xo6axfPp5UjkvfCLriBAb39Fj9k1Zp7Xm43O2J
+         S+Vwzaf9yLluE1ML4v9cY3hnj/T7mXw24h7+eZJZHr0rh7FHlitUBWOLwhFxo/3NYr+u
+         UdSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792148812; x=1792753612;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1792148847; x=1792753647;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SON5F/DY5kya39+CRJQh/XmORSH0D3r0659aeUKPdBw=;
-        b=KvKEDs7eoCpssxHXmat8qKyoOB5WvLup0rNX/acyKKU+9N8Wwo3obxtnuVhFkHCIa8
-         PHdbcfLeihQpElV5YpcXv/sOMcAThZsTtIU5cqIQDNs3DKh8CgeRMPuYmGPnpWpOmuMu
-         0nLbfxjrU/3raP9pov72EdfeYFGEAAiiKvZNUZpAcQmZa0n52NEiRn/rwhOzg3nNrIi8
-         lz4Gs5rJXBnJ7Tq+zxigKvPQp8lrs2ReiqRtWzfJQM70HAIRPdcdZeRcYGB51Xo51As7
-         TN8fnfYkcYHUp6TJlC2koakOzaUqeRCHlehpGMv6lZ73Q8KTxD9zyu5+pdRlEpAWBLsg
-         F+CA==
-X-Gm-Message-State: AFq9FYI6tV1LI/Dp1tWu2JPYqli9yd9lrYopCYg0C5uUz+Dld/H0k/1l
-	Iu9DYoM9YokpJH1C1Fi+9C+W9R6eIRENDIdfTKTWIZlVderXK0rqgR1UDugoq1zIZ8nR0iJpmiP
-	HIAILoiC0miSL8pj8eE4PUiiat3Xd4Va0DUtoERcjxPpVzSbMet8QWNCZDExaNKv8GNJU
-X-Gm-Gg: AYBFou2BRg66+eLKmGhS42FwTUha5zM4cj0kooy08JiHBFpxMaWz36+jHlCS6Rg4hp6
-	84N1d5z394810Pq3/CKrKJwq/ITVc0UOKKjgmaxJ8K3n2M2UUz+STB+Li4t2DP5pOpXBEQJp2qs
-	aM+i1rf3pUaxuh43oa4CBmAeG9PmHGVbcY8ee7Kb+JZumfNVhvNrnqzNgSUVfjnZli2/KD+1APG
-	q39F7I0WEH6U9j4QZjqEVBsc42unad0+R1xXjUGfi13RuUnHibmiPDNhFoesWuGBrqJeEufgQGn
-	1j1D9c20dTK/Fsjc3+khkAO6peUHVXxscguTatqJjs5+ir9I+QGCaGXPFUef+u+wwLrTFdwlRLz
-	KcEscv0Ryqq54rjXKdnyYdw==
-X-Received: by 2002:a05:622a:586:b0:533:96b4:8dd4 with SMTP id d75a77b69052e-5359f4965eamr428930871cf.1.1792148812404;
-        Fri, 16 Oct 2026 04:06:52 -0700 (PDT)
-X-Received: by 2002:a05:622a:586:b0:533:96b4:8dd4 with SMTP id d75a77b69052e-5359f4965eamr428930121cf.1.1792148811681;
-        Fri, 16 Oct 2026 04:06:51 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4091eb4ba6sm59964966b.75.2026.10.16.04.06.49
+        bh=cJqf2rITdCzziip2V1CcQ4gA2chUDN+IaUybbZl++MI=;
+        b=uzK31XY3GmNFA2uVO6M4zpk4IUjhSDl8G0Fv15uXaK9HSf68ZKjRjgl8SwbVU2Y4Bz
+         1c2zCL8lpoWhxxhaHgHovQF6tAqPi/blrOnmVcgP+z0luihGy2G2H1axEk/kHcHUW35N
+         o/PvR+XSm1mHOS9ki9gOvYmL9rAIC4mppoicz509gPpXMd01nYLNf9mneJ/aSYu8Rcff
+         7/XJDVFSbvoN4JZqvqPoA2o6vz+NMV/W6nNwubM4xD8wJrvXA9BZ/ghnmbJlgO+ZkNPf
+         PaqzXXFZTMPVklVOJarsyFq5nHyy2z+jsE8/elkZGaWhFmyfstu85821QCCAtm0LI1HD
+         qkrQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzDtJc4OdTbkkl5a1VHVo1Lf07Vtsn7UcWm127vqUrPZ8Zm+8Zi+mGKgufmgydeYJ7P3sgBv5WOUwkrShxP@vger.kernel.org
+X-Gm-Message-State: AFq9FYI/qz0KI1b4y0FlMLLM00KFhLnXnRfDEXQ/g6JB/T0doMrAdn8Z
+	CdcjBvoDX/OKrI8Eaz6CL4GfkDIoijFPFo/GISo+UmXu6Fh2rclaeKQ4vRNjLo+8sl0=
+X-Gm-Gg: AYBFou0MxtivBO/qfOi2IiCrOMsPyDSinF13Tb88TEw1HJZP06TDvlvezmNpBGTU61D
+	1FjQLxxYOE7985JFXpXBZevm2BCEE1f7y5xED0CtBOC0QOCi0dwSSpG5nC+QhMrEXfBGuKO+4Rp
+	03S14DPePGvKPVmljXDWIYp2s4Ja5/kFsAo99e80wPmAjQwEZYU5c7rJV8/A6A9ioXeiDFJmvl6
+	xPNtw7xKloRusOohlHtC2zXIO5UmVKZXlODuxYkTYCyno3vAf8YczyL6TdX9LlIvhsH1POiA9QA
+	CyCwswKjsNwlsy95EgTYMOKHg2sP97YCAUY69dG5aBoHsiOhCH8fIHQn32/37lVFJs7QuPHFqbS
+	ZQlv2AVlLQnRQhYygGUJzgoKGTY4BX2lLMy0+ydwtxvbsPY2XWdhl4SIUFHIZvfdc0N2PIkqJGs
+	Z1bhMuZFPjEYZAy1IXe8CogKBZrmkf7XSBpFlHFN4hj7Mt5Ui2oaj+V0ef57ms9z/575BOAsQZV
+	czC5S4KAB8=
+X-Received: by 2002:a5d:6750:0:b0:48d:ed2e:6f3a with SMTP id ffacd0b85a97d-48dfacf53edmr4363835f8f.5.1792148847254;
+        Fri, 16 Oct 2026 04:07:27 -0700 (PDT)
+Received: from [192.168.0.167] ([109.78.92.136])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd503a0dsm4468353f8f.47.2026.10.16.04.07.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 Oct 2026 04:06:50 -0700 (PDT)
-Message-ID: <cd2318b8-7619-4885-bde7-5ec6961ac5fa@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 13:06:48 +0200
+        Fri, 16 Oct 2026 04:07:26 -0700 (PDT)
+Message-ID: <27382104-14f0-4721-8d76-03fe9f2c1ba5@linaro.org>
+Date: Fri, 16 Oct 2026 12:07:24 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,110 +69,89 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] remoteproc: qcom: pas: pass no resource table when the
- firmware has none
-To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, andersson@kernel.org,
-        mathieu.poirier@linaro.org, mukesh.ojha@oss.qualcomm.com,
-        sumit.garg@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261005125411.2151326-1-jorge.ramirez@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261005125411.2151326-1-jorge.ramirez@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH RFC v2 3/4] phy: qcom-mipi-csi2: Rename the D-PHY init
+ sequence
+To: geocausa@gmail.com, Vinod Koul <vkoul@kernel.org>,
+ David Heidelberg <david@ixit.cz>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
+ Suresh Vankadara <svankada@qti.qualcomm.com>, tjose@qti.qualcomm.com,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20261016-x1e-cphy-rfc-v2-0-377654253193@gmail.com>
+ <0mIVMmu2iTCn5IeBYzGgIAH1kG2MFMNadT3axJ3D5fX-n2f-sXxmZeicphrhRwRt4YUTZBY-4uEATZz7IiQEGQ==@protonmail.internalid>
+ <20261016-x1e-cphy-rfc-v2-3-377654253193@gmail.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261016-x1e-cphy-rfc-v2-3-377654253193@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA0NCBTYWx0ZWRfXx76WGDvAQMpa
- yJegNtgP7ZBJ0RGfzsYDDilSKo3/a73jz7CqzqDeKcnnTbz8ZAmciEYeCNVSc1QFr0PJPGmFsIc
- eGQgFdnGuV8kXcl3Z2hmysKBsrMO1L6GB4BSRhu8KCW2U2sVVYPY08Zpdv6VB9qr5MftFvxvGJi
- FJPyCykoXIHaGEuiwU/XgXd6+7DG9ahahpySjbROZDCOrappLt02ENpfceKEcTsCANr3xOOIw/E
- I3rfOoSRxUX6NMk5mjwL4ra3ExSdGeb8cLN3yXxDTzg8fdeon88Ego6NGdqL5QkSSy/uiXs6oHe
- ++1NcX08ZoZdY4JS6kYHsy5vhji+ZMMm6z5A5OvtAAMMBmV5cKjfuAYuD3DzNsii4ISgb9qpHEq
- 4IU1W7d55IB86CW5OGx3W7qK9/Vao+hbBHZWOyz/v1TUC4+R5+mfSFODEIUHGZt5Jj4NKWb1WlC
- 239XaRaH51+AOkvQtYQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA0NCBTYWx0ZWRfX8AhEnGTqX1uM
- xK2zyVJvRmlQRLl8Y2JSyplFotMqrbGCQoCAsRqZSAzuQPp4a5ICLT/qxpyq//GG+puQ8+1MzBT
- Fc34X9kr/td8yaY0tq1TB5zDXgZ0wZw=
-X-Authority-Analysis: v=2.4 cv=PqsG/AM3 c=1 sm=1 tr=0 ts=6ad2054d cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=nURcFc7YoTJHLg9ZjdYA:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: x_xh0SYuele3XE6yohPpuhrB2fKCsB3Z
-X-Proofpoint-GUID: x_xh0SYuele3XE6yohPpuhrB2fKCsB3Z
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
- phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160044
 
-On 10/5/26 2:54 PM, Jorge Ramirez-Ortiz wrote:
-> The firmware resource table is passed to the PAS backend even when the
-> firmware carries none. This only works on the first boot, while the
-> cached pointer and its size are both zero.
+On 16/10/2026 11:57, George Neacsu via B4 Relay wrote:
+> From: George Neacsu <geocausa@gmail.com>
 > 
-> Stopping the remote processor, or failing to start it, frees the cached
-> table and clears the pointer but leaves the size set. The next start
-> then pairs a NULL table with a non-zero size.
+> The init sequence and its size describe the D-PHY mode only. Call them
+> dphy_init_seq and dphy_lane_array_size, so that a C-PHY sequence can sit
+> next to them under matching names.
 > 
-> The SCM backend substitutes an empty table and hides the problem. The
-> TEE backend copies from the NULL pointer:
+> No functional change.
 > 
->   remoteproc remoteproc2: powering up cdsp
->   pc : __pi_memcpy_generic+0x110/0x22c
->   lr : qcom_pas_tee_get_rsc_table+0xf4/0x25c
->   Call trace:
->    __pi_memcpy_generic+0x110/0x22c (P)
->    qcom_pas_get_rsc_table+0x38/0x60
->    qcom_pas_parse_firmware+0xa0/0x100
->    rproc_boot+0x2d4/0x380
->    state_store+0x40/0x100
-> 
-> Fixes: a4584bff63c8 ("remoteproc: pas: Extend parse_fw callback to fetch resources via SMC call")
-> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> Suggested-by: Bryan O'Donoghue <bod@kernel.org>
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: George Neacsu <geocausa@gmail.com>
 > ---
-
-To my understanding, this patch is right
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-As an additional safeguard, we should probably drop the stale table
-size whenever the pointer is reset to null:
-
-diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
---- a/drivers/remoteproc/remoteproc_core.c
-+++ b/drivers/remoteproc/remoteproc_core.c
-@@
- clean_up_resources:
-        rproc_resource_cleanup(rproc);
-        kfree(rproc->cached_table);
-        rproc->cached_table = NULL;
-        rproc->table_ptr = NULL;
-+       rproc->table_sz = 0;
- unprepare_rproc:
-@@
-        kfree(rproc->cached_table);
-        rproc->cached_table = NULL;
-        rproc->table_ptr = NULL;
-+       rproc->table_sz = 0;
-
-        return rproc_attach(rproc);
-@@
-        kfree(rproc->cached_table);
-        rproc->cached_table = NULL;
-        rproc->table_ptr = NULL;
-+       rproc->table_sz = 0;
- out:
-@@
-        kfree(rproc->cached_table);
-        rproc->cached_table = NULL;
-        rproc->table_ptr = NULL;
-+       rproc->table_sz = 0;
- out:
-
-
-Konrad
+>   drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 8 ++++----
+>   drivers/phy/qualcomm/phy-qcom-mipi-csi2.h          | 4 ++--
+>   2 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> index 966d79c98..b2d4ec3e8 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> @@ -246,8 +246,8 @@ phy_qcom_mipi_csi2_gen2_config_lanes(struct mipi_csi2phy_device *csi2phy,
+>   				     u8 settle_cnt)
+>   {
+>   	const struct mipi_csi2phy_device_regs *regs = csi2phy_dev_to_regs(csi2phy);
+> -	const struct mipi_csi2phy_lane_regs *r = regs->init_seq;
+> -	int i, array_size = regs->lane_array_size;
+> +	const struct mipi_csi2phy_lane_regs *r = regs->dphy_init_seq;
+> +	int i, array_size = regs->dphy_lane_array_size;
+>   	u32 val;
+> 
+>   	for (i = 0; i < array_size; i++, r++) {
+> @@ -372,8 +372,8 @@ static struct mipi_csi2_genpd x1e_genpds[] = {
+>   const struct mipi_csi2phy_soc_cfg mipi_csi2_dphy_4nm_x1e = {
+>   	.ops = &phy_qcom_mipi_csi2_ops_3ph_1_0,
+>   	.reg_info = {
+> -		.init_seq = lane_regs_x1e80100,
+> -		.lane_array_size = ARRAY_SIZE(lane_regs_x1e80100),
+> +		.dphy_init_seq = lane_regs_x1e80100,
+> +		.dphy_lane_array_size = ARRAY_SIZE(lane_regs_x1e80100),
+>   		.common_regs_offset = 0x1000,
+>   	},
+>   	.supply_names = (const char **)x1e_supplies,
+> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h b/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h
+> index 7e55ae007..0d6031a4d 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h
+> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h
+> @@ -48,8 +48,8 @@ struct mipi_csi2phy_lane_regs {
+>   };
+> 
+>   struct mipi_csi2phy_device_regs {
+> -	const struct mipi_csi2phy_lane_regs *init_seq;
+> -	const int lane_array_size;
+> +	const struct mipi_csi2phy_lane_regs *dphy_init_seq;
+> +	const int dphy_lane_array_size;
+>   	const u32 common_regs_offset;
+>   };
+> 
+> 
+> --
+> 2.53.0
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
