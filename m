@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEBB04E1C7F;
-	Fri, 16 Oct 2026 15:59:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50B624EF152;
+	Fri, 16 Oct 2026 16:06:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792166350; cv=none; b=uXhGnr9IDTRUWe59SLTT9WUy5QuelQlQJ/eyAxm67UoFk6U7IiOH0oFnTCmFSfM61fc77O4hjxgAY6xmIjpChpdBEDJGwcYMRZJpXtn+iiOA/HkK3jur1Ni1wt7GlpFcqov1coqf5wXa/i9k0rj7eqd/BdPJH8l311CLeQcOkN4=
+	t=1792166791; cv=none; b=TpQ16YTEIVBuaUMjG0SW4okK+n8W/83n615fKkpV1v32NOJTyPPablIDS2DxKoRPkpqtMO6nnGe0uo0sl9GNC21Oqc21h6bnIDaqT5gdNC5lw/6r03xB+iPLVqxSb/xVOGxOg6mbekoZmKD8yVAwDti86HuOzytDRXMUiyXv03A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792166350; c=relaxed/simple;
-	bh=JZkCUaYNbTjvJWnmmtv9H9MNAuE+gT+Yyx0xOr1Z3h0=;
+	s=arc-20240116; t=1792166791; c=relaxed/simple;
+	bh=xGAH/cBFGhXa7Lo7BHAcXeIsp2PMt608yLehmEm2dVg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KxMDYskhOKGdbAJEJGHgC2VIg3DxsLDMUC5AeBjkn7YGTASLaeAlE+GPpdQmbDLJY/BH1pwMGDKWjSJV7c4msdtBDUvpk0Fdosn/+8uzvVyhqVULJSvDzpmiwp5bP+HyOi02HlnPSUKQQdNiNA5dcTqnnJtmTF3JlxW/2DPG1Oo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HCPYR1rf; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=J1+CqmZxqxqwBOyIQ6j1RrMZevZgvzp+9i70RYnAzAjWU7qUZn05d1Ei4D1E7i4+5dImvnFfd8562WehGKvA4qXNpi/utN/E3VsTMqssGhOgiBS///4xusvZ2whelPkTPsmVFGjlDap2jXv2rVWRpb6cB+7ZG3DaPjGspyJYMXk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f+2IcMch; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HCPYR1rf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48B8F1F000C4;
-	Fri, 16 Oct 2026 15:59:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f+2IcMch"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A9A61F000C4;
+	Fri, 16 Oct 2026 16:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792166349;
-	bh=YHSmvSRoGh4J5BvFL3E9o6lG/BagsB6+05cLPaRYUy8=;
+	s=k20260515; t=1792166787;
+	bh=eV5kQsVdLEe1z5kkE8u0zgGSCke4UboN4QIxLDplCdQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=HCPYR1rfQwKKl+OfX65tFRzcJC75Wb6PDIe6djP3MycwDxWp1rbve0D4LF4OrQ98Y
-	 vCZZj2IEwb5k+e+tejxlHvUdSp32BJYDltdAgAAXBhjJjqhneK/hSDYXpRS4lKRev0
-	 Hgoa4FDsA1LwwyRIUnz94caDEBAG9PtKJ2FpkjPUJafzRSdzwZ3XpSrsVpvTkVz91i
-	 85hb3MU0JiQXNz1KEyE36pjk4WqdoMM2BEg0XksXD9oGxWGO+lJf9J9kDZLPS+VwR6
-	 yxX4WCEMu3RPf+C4mTDeHxBxCwwnhdfmSvmj9fzj5sd/LTz4AgrhNZfzexncsA8tTm
-	 iSWpMxU89Ogeg==
-Message-ID: <e5d75c47-2051-4b09-9d33-d2eb64a141f5@kernel.org>
-Date: Fri, 16 Oct 2026 16:59:05 +0100
+	b=f+2IcMchxGrh7hS3ThU9LLLZ9FZrSPqq/uCsdJM/HfJZu582ZheF4CosqLgJVuwpw
+	 5IEorjD4p74ztBkk7Aaq9AIb6lMTuyTyCIwp0GUTSVr42npOf6IeEkfeYuwzdcN3Zx
+	 ypLkcv1u4+UcHJylPNKpdRmzSHFYLSU9iPOrLg48WcCvXubK+aqP/6iD2rkKV/i9B4
+	 EVZzwp+2Su2BBOLwmbF0zJ6/OaOhouOgDC9/w6ewG2uiHTfF4djn/SSkgUv3JD39OM
+	 4wd5KqAbcvJcZhoCHkuWcmUFt5H5+FuIZD0iO/RvdDvSAtQrmWzZn/kMQSwLuWIwCK
+	 4nEoVV72ecmTg==
+Message-ID: <19662dcc-4a25-4d18-a3bc-6b277bd676a6@kernel.org>
+Date: Fri, 16 Oct 2026 17:06:23 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,19 +35,17 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 1/2] dt-bindings: media: sony,imx681: Allow a C-PHY
- bus
-To: geocausa@gmail.com, Sergey Lebedev <lsa.uz@pm.me>,
- Andre Gilerson <andre.gilerson@gmail.com>
-Cc: Sakari Ailus <sakari.ailus@linux.intel.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, German Pablo Lindo <germanpapulindez@gmail.com>,
+Subject: Re: [PATCH 2/2] media: i2c: ov13858: Add device tree support
+To: geocausa@gmail.com, Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Sergey Lebedev <lsa.uz@pm.me>,
+ German Pablo Lindo <germanpapulindez@gmail.com>,
  linux-media@vger.kernel.org, devicetree@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261015-imx681-x1e-v1-0-fd22f5f3b0c5@gmail.com>
- <tP5-ts7J2p2uA3eoaiQwwAt4gozW7_GQiAxznsXqqGXZ8LQ95eM_ulaspPz3EoTdN6kIUbHAio3TI31qbvjukg==@protonmail.internalid>
- <20261015-imx681-x1e-v1-1-fd22f5f3b0c5@gmail.com>
+References: <20261015-ov13858-x1e-v1-0-acdd918f4fb6@gmail.com>
+ <H_YflrQ_O6i59HAUsnzTG5J8wp_NNMC_tndzgzlbVRUtakJahIzRBeAoMDmm5Uunqwb63UcX4TgUrnSN-rMJOg==@protonmail.internalid>
+ <20261015-ov13858-x1e-v1-2-acdd918f4fb6@gmail.com>
 From: Bryan O'Donoghue <bod@kernel.org>
 Content-Language: en-GB
 Autocrypt: addr=bod@kernel.org; keydata=
@@ -93,88 +91,42 @@ Autocrypt: addr=bod@kernel.org; keydata=
  LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
  3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
  Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
-In-Reply-To: <20261015-imx681-x1e-v1-1-fd22f5f3b0c5@gmail.com>
+In-Reply-To: <20261015-ov13858-x1e-v1-2-acdd918f4fb6@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 15/10/2026 22:25, George Neacsu via B4 Relay wrote:
+On 15/10/2026 22:48, George Neacsu via B4 Relay wrote:
 > From: George Neacsu <geocausa@gmail.com>
 > 
-> On the Surface Pro 11 with a Snapdragon X Elite, the IMX681 reaches the
-> CAMSS CSIPHY over one MIPI C-PHY trio rather than over the two D-PHY
-> lanes of the Intel model. Let bus-type select C-PHY, and with it a single
-> data lane, keeping two D-PHY lanes as the default.
+> The rear camera of the Surface Pro 11 with a Snapdragon X Elite is an
+> OV13858 on a four-lane D-PHY link, described in the device tree. Add an
+> OF match table.
+> 
+> Parse the endpoint as other sensor drivers that serve both ACPI and DT
+> do. Wait for the endpoint if a bridge driver has not created it yet,
+> require four data lanes, and require both link frequencies, since the
+> modes switch between 540 and 270 MHz. The IPU bridge entry for OVTID858
+> lists both, so an ACPI machine with that entry probes as before. Without
+> the entry the sensor now waits for the bridge instead of probing into an
+> empty graph.
+> 
+> Tested on the Surface Pro 11 (X1E80100), with an out-of-tree CAMSS
+> capturing raw frames over CSIPHY1, CSID0 and an RDI interface:
+> 4224x3136 at 29.95 fps at 540 MHz, the colour-bar test pattern intact,
+> and a scene captures.
 > 
 > Assisted-by: Claude:claude-opus-5-5
 > Signed-off-by: George Neacsu <geocausa@gmail.com>
-> ---
->   .../devicetree/bindings/media/i2c/sony,imx681.yaml | 26 ++++++++++++++++++++--
->   1 file changed, 24 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/media/i2c/sony,imx681.yaml b/Documentation/devicetree/bindings/media/i2c/sony,imx681.yaml
-> index 62e7eae..51256a7 100644
-> --- a/Documentation/devicetree/bindings/media/i2c/sony,imx681.yaml
-> +++ b/Documentation/devicetree/bindings/media/i2c/sony,imx681.yaml
-> @@ -14,8 +14,8 @@ description:
->     The Sony IMX681 is a CMOS active pixel image sensor with a square pixel
->     array, used as the user-facing camera on several Microsoft Surface devices.
->     It operates from analog 2.8 V, digital 1.05 V and interface 1.8 V supplies,
-> -  is programmable over I2C, and outputs 10-bit Bayer data over a two-lane
-> -  MIPI CSI-2 D-PHY interface.
-> +  is programmable over I2C, and outputs 10-bit Bayer data over MIPI CSI-2,
-> +  either on two D-PHY lanes or on one C-PHY trio.
-> 
->   allOf:
->     - $ref: /schemas/media/video-interface-devices.yaml#
-> @@ -54,7 +54,14 @@ properties:
->           unevaluatedProperties: false
-> 
->           properties:
-> +          bus-type:
-> +            enum:
-> +              - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
-> +              - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
-> +            default: 4
-> +
->             data-lanes:
-> +            minItems: 1
->               items:
->                 - const: 1
->                 - const: 2
-> @@ -63,6 +70,21 @@ properties:
->             - data-lanes
->             - link-frequencies
-> 
-> +        if:
-> +          properties:
-> +            bus-type:
-> +              const: 1
-> +          required:
-> +            - bus-type
-> +        then:
-> +          properties:
-> +            data-lanes:
-> +              maxItems: 1
-> +        else:
-> +          properties:
-> +            data-lanes:
-> +              minItems: 2
-> +
+This is a weird change.
 
-I think you should constrain the existing minItems for DPHY mode and 
-then add CPHY on top of it.
+You describe regulators, clocks and resets in the yaml file which then 
+don't appear to be supported in this result code ?
 
-Your commit log says Add CPHY mode but then it goes on to do other 
-things like this.
+- regulator_bulk_;
+- clock_bulk_
+- reset gpio optional
 
-Break the two things up into different patches.
-
->       required:
->         - endpoint
-> 
-> 
-> --
-> 2.53.0
+I don't think this driver would survive suspend/resume.
 
 ---
 bod
