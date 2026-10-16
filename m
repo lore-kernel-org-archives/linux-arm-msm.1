@@ -1,95 +1,112 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp10.goneo.de (smtp10.goneo.de [85.220.189.106])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 754153769E7;
-	Fri, 16 Oct 2026 15:46:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7EBE257845;
+	Fri, 16 Oct 2026 15:50:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.220.189.106
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792165613; cv=none; b=nyMRvpnDrqCn79VvxZ5+hfEL3XM+dWU9z/H/LOgdU/QGhcYoWirgIMkFK+lPP8ZR0RccBDF5GHcTSdfct01ys6xgF4n76lyU6D/QBOf3kc1c4vEXNl0vAciwBNb+q7NXx9LeO4dS3sSJKRLhEERE5/w5CAj8ghGt8Un8fU4UXjU=
+	t=1792165837; cv=none; b=KXQy9KKWBnFkzeF3vpiUAvEIcD6zpLt1iipnGSSZ5ZR9Bc6Dm7qI3XPGpXFzoYASqx7Hl8Zn3rOA1N1RHZaw1GHIUdJkHwD0Y4Ifq/i6F2OnKsVX3UvBPMaBoTFeENwEwDWFnR7CnNR8szYNyQ9z6A7vBHfz8ccNx4sKKav1NFE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792165613; c=relaxed/simple;
-	bh=39d/ZxYD0bbaGA0M0Iy3I0tQEqqeeJZ5A8f9xu4V1FM=;
-	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=GDvBReJ50N+bJmPgzGXCbsUJWG/P675DfYxPd3iVtVCx+atTfojB7X6Wbg0zp+wkcIsuJ1mMVttjWCl05ffyWznNGw/JOemgWiXI0riDY998KJmVYh9v8yGo315Zl2GGH8VlhWTanqh3jSkaU/P0EeyEWRbqFkFmgGAhfIGNgpo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I6k7Rj1H; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792165837; c=relaxed/simple;
+	bh=EQRmU6Sr5j4REVMWye23mnyXQcCCUDct+ihHbCHqm80=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=c+aDFcXSU+vX/ATQZ6I9zd/8RPiGbPEU1z4itodS7CtzvDxoWMQJSLelGhcruLUPYKGwX8Ka+EEbDLamZJHgAymCTozGz29dLrBQZcH5eF8LfSK3Z4kOzAoe2NwNFmxB8A7x51RAP30Q784PR7Xu6XURsMj1ip0naIsDCzJ8mN8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tk154.de; spf=pass smtp.mailfrom=tk154.de; dkim=pass (2048-bit key) header.d=tk154.de header.i=@tk154.de header.b=F+c7Ty5M; arc=none smtp.client-ip=85.220.189.106
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tk154.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tk154.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I6k7Rj1H"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FD1C1F000C4;
-	Fri, 16 Oct 2026 15:46:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792165612;
-	bh=If7ZWty3DdHB9qswMusYmZ+neRbnI323tcCym/gq4kg=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=I6k7Rj1HIU+J8R6x3LyV2dDi24lLIQMFpaXflXjPt/NczPRwr6Ub/kwTYoXMNTKUP
-	 Y7bWnmMqFhmtDcrTP7ZzuXD1hgCbI3vDam6P5ZPQHrtSubIDh4TjIC+7xnfD4E//xm
-	 1hvWjan2A3duqeUrTJNpFufbq7PRb9gRdPhNkS3oZBTwEpo+lLS3gcy1tK7/GywzFQ
-	 qnDXGXwb44WkZSzYCV36fas1gbNqJzDvL36Dm5dgreHV3QQ2ejkUu06BR6VcF4/JLV
-	 tovTYXlCaFR4riy+ccNn1oaChlP+/CZUZtHteAZmzAfKxP9zXOBtq3psEsIwAO9XaD
-	 EzbiyXW2hbAxg==
+	dkim=pass (2048-bit key) header.d=tk154.de header.i=@tk154.de header.b="F+c7Ty5M"
+Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519)
+	(No client certificate requested)
+	by smtp10.goneo.de (Postfix) with ESMTPS id 811F32404D2;
+	Fri, 16 Oct 2026 17:50:30 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519)
+	(No client certificate requested)
+	by hub1.goneo.de (Postfix) with ESMTPS id 46D052407E1;
+	Fri, 16 Oct 2026 17:50:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tk154.de; s=DKIM001;
+	t=1792165828;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d8YCP5jGBgTmgTQAyniXagzF04gSlvO3R6wmBiiY5pM=;
+	b=F+c7Ty5MHDd0atKwWzhDfKWcJntgAtNzQsV77d0FIqrMPpMEUlNoPio5SEyFjS5eG6BwL3
+	hgVggcRgjThz3bFX5nV0bRGYNIYYKOyq2kZ0B2+8jvzWULCzIGRMx1PdIEPYUKsVEp1IR/
+	ZJ7vgR6uAgNl0dNDhjw5Bzrj2XrpbkkfQzOfmjw90+lbixQzPLUxtP9jp5Ju+MqaEzKAXp
+	i2U3kCPtyjbDJmv3AkhdeuONzShZLu3TRJ9Ui9HO+bszoB/LOa53oXNG40wFF0sRq4DzYP
+	fugPIrPWNadO3CLvWlGgyXaTDDpMLY3d5J5RwH7bzB7gM0Rc2E2JGvpDwElZLg==
+Received: from [10.35.35.107] (unknown [195.37.88.189])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by hub1.goneo.de (Postfix) with ESMTPSA id 7066E2404EF;
+	Fri, 16 Oct 2026 17:50:25 +0200 (CEST)
+Message-ID: <892399f9-0fcf-47e6-b07e-434410afc694@tk154.de>
+Date: Fri, 16 Oct 2026 17:50:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v6 2/2] phy: qcom: qmp-usb: Add support for SA8255P
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
- Maxime Ripard <mripard@kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Sriram Dash <quic_sriramd@quicinc.com>, 
- Shazad Hussain <quic_shazhuss@quicinc.com>
-In-Reply-To: <20261002-phy-qcom-qmp-usb-8255-v6-2-bb7dfc5636b4@kernel.org>
-References: <20261002-phy-qcom-qmp-usb-8255-v6-0-bb7dfc5636b4@kernel.org>
- <20261002-phy-qcom-qmp-usb-8255-v6-2-bb7dfc5636b4@kernel.org>
-Date: Fri, 16 Oct 2026 21:16:42 +0530
-Message-Id: <179216560275.106618.16177081518764116321.b4-reply@b4>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1295; i=mani@kernel.org;
- h=from:subject:message-id; bh=39d/ZxYD0bbaGA0M0Iy3I0tQEqqeeJZ5A8f9xu4V1FM=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBq0kbmvMusR9n0mghwLveYw1lbJdBCT8O6y5M3Z
- sih39C4KYuJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCatJG5gAKCRBVnxHm/pHO
- 9WLyCACf7YRv/dpx+v20K+xr+u8B/wC2DANLyWkHq16GwjKPIIns3VXzBmOQzaleVRzhBaCqf4J
- IJYuUintNq+8qW5anoq5Lo6oNKE016IFYirC0NIe1zI4SZ0QX4c3ycIgD5sS1YO05JyV+Pw9o04
- RX65ulZR+KZ5HIev5UgDrACGTomThhZxt5ShKhTZZzitqn4wdGxC4zBlc6h7jR0hmQ4Pd9WyOAv
- auXPJ9+8a27m+JZnvejoLomZrVslsIsdh44DMwDkqLTaCFdzRjc4xGXhs6WKUACFrVAj3NQX+KN
- dYNYlVpcwHQwfoskMX6ru0Jg2Sw1z3/NTC2CGfBLLu6Z3K5P
-X-Developer-Key: i=mani@kernel.org; a=openpgp;
- fpr=C668AEC3C3188E4C611465E7488550E901166008
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net 0/2] net: ethernet: qualcomm: ppe: Fix queue access
+ and port validation
+To: netdev-bot+sinfo@kernel.org
+Cc: netdev@vger.kernel.org, jie.luo@oss.qualcomm.com, andrew+netdev@lunn.ch,
+ davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
+ pabeni@redhat.com, linux-kernel@vger.kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, quic_leiwei@quicinc.com,
+ quic_suruchia@quicinc.com, quic_pavir@quicinc.com,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+References: <20261016150140.929729-1-mail@tk154.de>
+ <179216336717.408196.3512649985663407159@kernel.org>
+Content-Language: en-US, de-DE
+From: Til Kaiser <mail@tk154.de>
+In-Reply-To: <179216336717.408196.3512649985663407159@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Rspamd-UID: 88f7fa
+X-Rspamd-UID: 6224de
 
-On 2026-10-02 11:39 +0200, Mattijs Korpershoek wrote:
-> From: Sriram Dash <quic_sriramd@quicinc.com>
+On 10/16/26 5:09 PM, netdev-bot+sinfo@kernel.org wrote:
+> Hi!
 > 
-> The Qualcomm automotive SA8255p SoC relies on firmware to configure
-> platform resources, including clocks, interconnects and TLMM.
-> The driver requests resources operations over SCMI using power protocols.
+> This is an automated message. This series looks like a fix, but its
+> commit messages seem to be missing some information:
 > 
-> The SCMI power protocol enables or disables resources like clocks,
-> interconnect paths, and TLMM (GPIOs) using runtime PM framework APIs,
-> such as resume/suspend, to control power on/off.
+>  - Whether the issue was actually triggered, or is only theoretical
+>    (e.g. found by code inspection). If it was triggered please include
+>    the symptoms, like the stack trace or error messages.
 > 
-> Power domain "core" controls the GDSC, resets, and TLMM (GPIOs)
-> whereas power domain "transfer" controls clocks and interconnects.
+>  - What hardware the change was tested on. For driver fixes please
+>    mention the device (and if relevant firmware version) used for
+>    testing, or say that the change was not tested on real hardware.
 > 
-> In this variant, two disjoint sets of resources are modeled against
-> the power domain suppliers which can be turned on/off to achieve modeled
-> device states. Two modeled low power states d1 and d3 are supported.
+> Please do not repost the series just to address the above. Instead,
+> reply to this email with the missing information, so that reviewers
+> can take it into account. If the series needs another revision for
+> other reasons, please include the information in the commit messages
+> then.
 > 
-> transition: d0 <--> d3  :: both core and transfer suppliers
-> transition: d0 <--> d1  :: only transfer supplier
-> 
-> Signed-off-by: Sriram Dash <quic_sriramd@quicinc.com>
-> Signed-off-by: Shazad Hussain <quic_shazhuss@quicinc.com>
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> The evaluation is done by an LLM so it may be wrong, if you think
+> that is the case please reply and explain.
 
-Same comment as the other series.
+Hi,
 
-- Mani
+The multicast indexing issue was reported by Sashiko. The oversized
+bulk access was found during follow-up code inspection. These issues
+were identified through review, rather than an observed hardware
+failure. The register layout was checked against Qualcomm’s QSDK.
 
+The binding issue was reproduced with compiled example DTBs and
+dt-validate. I tested the fixes on the Ubiquiti UniFi 7 Pro XGS
+access point (IPQ5332).
+
+Thanks,
+Til
