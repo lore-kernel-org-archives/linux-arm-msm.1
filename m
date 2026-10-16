@@ -1,158 +1,123 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0367E550DB4
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 17:07:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABA2E5304C1;
+	Fri, 16 Oct 2026 17:20:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792170448; cv=none; b=TOAf60tVpDqIlzfBx0/zHcJy7iTNepm2OZHk7Ent0j8OhAYFjiwSFL/EbhztNqBo4ggYrhwAB9+1UVXQYf/kYEHA5p70XHeckf0zRuGQGkJRrLwcsDSB9piDPS/zq3fEHeufH0hmIspPCqU97ArRJhcaq6WOz5jy83tkLRz4NmY=
+	t=1792171221; cv=none; b=UTJPenKl+49W6bNNEElRq7LEulY5aZEor5vNCD89NQbRs2YxVY/amz36WH2WSuo/Tgj4ltu8+ACDTiGrMlJv7+VEFEe9Sdzh4hfO8zKJW7ZCh2etLgH/0YvjOeaeR87pHmuAKSepo3Xi4z1PAJMwWWmlokH7ZyVFSvX2ludqAcQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792170448; c=relaxed/simple;
-	bh=0KwjSoWukgYqAq90gzgdo8eC+3oMOgU4b4WGUOqDh40=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=EUjE3jEjzIhV/yQYha8bzzPcbhTppuJsIyscaeYPUOs9GJHFKZfK6O931dHBPmfVAweR49aYEG9n5xs8WiCpW1P5hE51Ks8os1NmawAsnw5JpONg3zS44306oxmg7x+2VD0VJKEHguwVBy1e73QMru11n4tf7TbAIQFCduC1jTM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NWvzoSh1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jVwyF8Hu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792171221; c=relaxed/simple;
+	bh=1qLqgUK3O0JJhHLhaf7ZLoaVvBVeWeJEIM055yE2WPk=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=KATsVPDbOUR+cRePWYlXXgMQIgnapdrubKmhxkIsm3R5DqstAyspNdLFtXavUgzp/x3zxLvaqNaNtfDULr6mtGpW3maCRO1ONFLaOwztIUrTnO0vVPOTTzmYol+vyu7bne83cqyN2LrpzEO7GjB70rzhYiAHa4WPULHSZIDtYRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I7ALYj3F; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NWvzoSh1";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jVwyF8Hu"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GE6LfV2494804
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 17:07:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=ImWkS2heDc2
-	Mx/x5aRQGs9bDAjmLZqH7xoOSJfYrzZo=; b=NWvzoSh1p62XSEgmMB/HEKXEtO6
-	sAe/MuUxPyfdVmDwHf2dzxakqobVi0zjc7rvkIqR3Jn7LyFEwCrLARGRqGvyj5uN
-	mSpdGzrpf69drK4dTgN3eFcFQ6WtrHqBjjLbt2Gd4CCDAEti/4iQxc+cGePfqILP
-	DC4No4Zj85+aCgJo4n9ipVj6Ri4bThQRCPJPZk6KcNoggudGkSr3UuVN8Z9YVyAb
-	tXQ+DhDPbdG6JFY9bGhVjOE/ExIxI8CgOkrdrHbv/2D/0P7kWcAfxNm5LQ8TaqHe
-	OPXOmZ5G+o+dkj4dpyTWEFeexsMSPcokf9O9RpT2lF44rhKt5B8P7Ff5kkQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb8a8bpyp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 17:07:25 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93909014c85so32449885a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:07:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792170444; x=1792775244; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ImWkS2heDc2Mx/x5aRQGs9bDAjmLZqH7xoOSJfYrzZo=;
-        b=jVwyF8HuYFFwSpvDUQ9MHOqWYqZzt7CI2rlFuiOPpuThK51SmNu2AToEW9qoAdjBOY
-         q+PN4SMYspTxia7MgtcKjjuHAujgsEeoK5VAaDgU/UHYhShLoT4FSLxeniSvr/t30PUb
-         PiXQjVvtwwh4pzqOV3sWcJEXpu/ak8Od+8DXncy/oOW93zALDYQ1YztIC+jD9fALHczB
-         OCsodbavBB41rDkTRlgXW45OraY/+FJnmm23xSD0dyZSE2Wyh2MKwIVhXffUMNNxcNW4
-         2YW3gyu5NEUsdqVVgnYxNzdrePqAFRqwwTvPXmNvZo1qK/6rWF+QTKx6pM4yXdyWw7gG
-         AqUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792170444; x=1792775244;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ImWkS2heDc2Mx/x5aRQGs9bDAjmLZqH7xoOSJfYrzZo=;
-        b=a+M/gP7gD8pHWabEgvfiHANRDtqx55ixm3Kkwx4D655z9sD4vo8fpBVEajMX4638Dx
-         0xIXuszMj/k5YLy1ktpDbkXTOxL+wo3juSHLHqH7WNUPlpscKlZM6n9wWsSdYCXLNZM7
-         dEorxlCUJ1Z0f+SC1eRNZ9MFkqH7X3enTNW5iIsoll6800nA4RGIX7X/Kra7cnbkLxq9
-         ITFO0DVUYIy/sRTTbbscpP0mxt8yV+T50JW4cuR6hWrxQkl8XDMkcuRg0XvQ1uXwj/n9
-         vcQ2ehHlbdiiNJwfxNNOMpYxVzI11CZVJgsDjWtIbZcOIm/qvRFrJ65OjxP/xACRnApk
-         aWbw==
-X-Forwarded-Encrypted: i=1; AKwUvByf0XgqKSUSUo/0+2I2hrP1SPtMqUmdC1GUqxm22bST1HXrjJPghEnQwmpwpTMwvZYTL3hqMotkRH8+oQWp@vger.kernel.org
-X-Gm-Message-State: AFq9FYIQYmyRdnhx1UtW1NcWuRBqZ2YYRA5xnYK4sLRWVni4Ww1HzByS
-	bA7N0fgYgj8BegE5GpVczAxz9dU1+wln8jhKccoS6SQUN3BaEFSy2eYyFrly8HTT35OuFP+aIwA
-	3O+yHzcOUvqtxhaAC4WLkZbYEW6VDozS4NLYU2m6P0npDyzIXFdgukJHHiOPQXAr54NcK
-X-Gm-Gg: AYBFou1eaJrv2GrJU4z7yZw5pK7SL/sUUXpBR+WHb6CMgS2XuFP9fFt3VtDWggmxhNz
-	N7ti0zZUD3Cy8s38NDWMiiu7YK+DukxX9mIe7jl/MCG30OU+xt7h06c6+tSMvMkLmE0l6/ky8KC
-	4be0dZG1dKwA67DXbhF4EerD7uuiwQPT4FMHeRJs6gUdEy4unqhdSHhl5nysFc+PAy6HpyXodzK
-	9GvBxJJkvqBvIFlxQsFHa5Z2aX0i9/ddHytVZP9stkSAD9AkGmRnang7IVzSzKMcpU/2m89gmuc
-	RfVDnOXsS3T89tjROn1IMdI85OW5GZ5YsM6INFBo3mjRWGRBwl4kRLPvZnzd3lT9c5Q8F0EM4/3
-	GbhL02byKA3CwmSPjm+WgohR2
-X-Received: by 2002:a05:620a:8811:b0:93e:6ee0:c074 with SMTP id af79cd13be357-93f29ce767bmr84846985a.38.1792170444190;
-        Fri, 16 Oct 2026 10:07:24 -0700 (PDT)
-X-Received: by 2002:a05:620a:8811:b0:93e:6ee0:c074 with SMTP id af79cd13be357-93f29ce767bmr84841885a.38.1792170443651;
-        Fri, 16 Oct 2026 10:07:23 -0700 (PDT)
-Received: from lin-0772.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4f5b2dsm6630571f8f.31.2026.10.16.10.07.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 10:07:20 -0700 (PDT)
-From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Georgi Djakov <djakov@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Jonathan Marek <jonathan@marek.ca>, Bryan O'Donoghue <bod@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, atanas.filipov@oss.qualcomm.com
-Subject: [PATCH v3 3/3] arm64: dts: qcom: sm8250: add camcc interconnect cells
-Date: Fri, 16 Oct 2026 20:07:01 +0300
-Message-Id: <20261016170701.1504338-4-atanas.filipov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261016170701.1504338-1-atanas.filipov@oss.qualcomm.com>
-References: <20261016170701.1504338-1-atanas.filipov@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I7ALYj3F"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3280E1F000C6;
+	Fri, 16 Oct 2026 17:20:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792171220;
+	bh=xD3yRsvoIFwL/JZOKynIA6QUqNyu8SGGZTONrw/z9U8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=I7ALYj3Fi/lEtMpo8+EeCt4CJ84OF0OUGVAAszi/qL9LDCsN59Sro0hqbPrUY2nB+
+	 Xk3sKpfAuQofcEExNilFlFX7NUYwfJ/tQn27vKQ3NIOOJ6HF6IOmENAYgHrDLSa5qM
+	 tnnS0scAKEKhMXDyF8T0ZFiAjGNb2YtxWZix4gEhU6ysTduzeoJsSj3rM3hzqayyYi
+	 vctMZs5IIDkfHuM8GS1IMXgRW65eV66UhjmhmlLRTIJqulH/d9UgsQbtzJar1oWXIW
+	 T0rig6mzNB+3Mykwuxw29Hm5t3RSyZO7nZW6ME+f4OJpQ6DZAbuvCPEDv7OxYSU1w7
+	 bnCHK+iP+Z+ig==
+Date: Fri, 16 Oct 2026 18:20:14 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Faiyaz Mohammed <faiyaz.mohammed@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
+ <konradybcio@kernel.org>, Conor Dooley <conor@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Manivannan
+ Sadhasivam <mani@kernel.org>, Borislav Petkov <bp@alien8.de>, Tony Luck
+ <tony.luck@intel.com>, Conor Dooley <conor+dt@kernel.org>, Abel Vesa
+ <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-edac@vger.kernel.org
+Subject: Re: [PATCH 2/4] soc: qcom: llcc: add LCP/SRP DDR DRAM ECC register
+ offsets
+Message-ID: <20261016182014.7d2d8bbe@jic23-hlaptop>
+In-Reply-To: <20261014-master-v1-2-aba3cfcfbac9@oss.qualcomm.com>
+References: <20261014-master-v1-0-aba3cfcfbac9@oss.qualcomm.com>
+	<20261014-master-v1-2-aba3cfcfbac9@oss.qualcomm.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA2OCBTYWx0ZWRfX5Qukz+W6U2ne
- Tc5ZaNk3uyxo812a0WD/k5dY4tg3OSghbdJSDk3tHH87rMqwnGmL5sfKMwvOgp/gvlBUxYfPoPv
- xWawIdxQU1DkAJ2TXLnatq5yjjfSePk=
-X-Proofpoint-ORIG-GUID: gaYZyGDrlcuhy5zRWtgPfuwv7WBMn-Gg
-X-Authority-Analysis: v=2.4 cv=GJadgeNK c=1 sm=1 tr=0 ts=6ad259cd cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=UCxR3cWr3m5Lf22CgesA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA2OCBTYWx0ZWRfX/UkhdNglxhRh
- zLKaCbl9GVjVVGHfmhtTD9prplVc7wj6IKoqpxZOdQpGqOKWXGwFSvFXhh7aMq7BNL7URLpozNQ
- F2T+PabrSPDTerybh0L3r7gkNHiubSMgWpB04xT4rljjApNWU+BfmHVwXwcb/2u3lNCLDmPxCnI
- gHWCioc+kBW+eMGzPQAtFQ5BzgNgmyxerRutoSTAh3cxiMRrJ5lglUB0F5W7X/84o/LfUsnfHlZ
- EZQdzv/LYkRB63i9eN5J49SXJtmTRZNYSdkocNm+vUgUAY0BuLIuq3/aS/us4UAOXg4RtjasMU4
- AwBI4r4vYhmtUopnNkpBJ81ODsZC3RKANz8o3Xo7ojTyQq3Q8hLmQ+S/5pDTpUVaUSPKyms39HD
- CRyWfhJPDdbOK3reIjhBNORk7sZQgTib1zi5SLmXD10iwbfLNRTYi85M6sYf7I1hjgRea/r/rCN
- iQD19iYrM5oU2U+0Mcw==
-X-Proofpoint-GUID: gaYZyGDrlcuhy5zRWtgPfuwv7WBMn-Gg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-16_02,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160068
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Add #interconnect-cells to the camera clock controller so camera
-consumers can request camera NoC AXI bandwidth through the
-interconnect framework.
+On Wed, 14 Oct 2026 21:26:17 +0530
+Faiyaz Mohammed <faiyaz.mohammed@oss.qualcomm.com> wrote:
 
-Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/sm8250.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+> Add LCP/SRP ECC register offsets to struct llcc_edac_reg_offset and
+> create llcc_lcp_srp_edac_reg_offset for QCM2390, leaving the shared
+> llcc_v2_1_edac_reg_offset table unchanged. Switch shikra_cfg to the
+> new table so other platforms with the same block can reuse it.
+> 
+> Add lcp_irq to struct llcc_drv_data and retrieve the optional second
+> interrupt in qcom_llcc_probe(), propagating non-absence errors so the
+> driver defers correctly.
+> 
+> Signed-off-by: Faiyaz Mohammed <faiyaz.mohammed@oss.qualcomm.com>
+Hi Faiyaz,
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250.dtsi b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-index f975c2183269a..e923c74dc1435 100644
---- a/arch/arm64/boot/dts/qcom/sm8250.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-@@ -4675,6 +4675,7 @@ camcc: clock-controller@ad00000 {
- 			#clock-cells = <1>;
- 			#reset-cells = <1>;
- 			#power-domain-cells = <1>;
-+			#interconnect-cells = <1>;
- 		};
- 
- 		mdss: display-subsystem@ae00000 {
--- 
-2.34.1
+One comment on existing code + a suggestion to tidy the new stuff
+up a little.
+
+That global for drv_data is less than ideal, but given you are touching
+the driver please tidy up initial assignment to use INIT_ERR_PTR()
+
+
+>  static const struct llcc_edac_reg_offset llcc_v6_edac_reg_offset = {
+>  	.trp_ecc_error_status0 = 0x47448,
+>  	.trp_ecc_error_status1 = 0x47450,
+> @@ -4767,7 +4802,7 @@ static const struct qcom_llcc_config shikra_cfg[] = {
+>  		.sct_data	= shikra_data,
+>  		.size		= ARRAY_SIZE(shikra_data),
+>  		.reg_offset	= llcc_v2_1_reg_offset,
+> -		.edac_reg_offset = &llcc_v2_1_edac_reg_offset,
+> +		.edac_reg_offset = &llcc_lcp_srp_edac_reg_offset,
+>  		.irq_configured = true,
+>  	},
+>  };
+> @@ -5798,7 +5833,13 @@ static int qcom_llcc_probe(struct platform_device *pdev)
+>  	if (drv_data->ecc_irq < 0 && drv_data->ecc_irq != -ENXIO)
+>  		return dev_err_probe(&pdev->dev, drv_data->ecc_irq,
+>  				     "failed to get IRQ resource\n");
+
+Unrelated to your patch, but why don't we need that tiny bit of error cleanup under
+goto err for this path?  That use of a global is not the best anyway, but none
+the less I'd expect either some consistency or a comment on why not in the above
+path.
+
+> -
+> +	if (cfg->edac_reg_offset && cfg->edac_reg_offset->lcp_srp_interrupt_enable) {
+> +		drv_data->lcp_irq = platform_get_irq_optional(pdev, 1);
+> +		if (drv_data->lcp_irq < 0 && drv_data->lcp_irq != -ENXIO) {
+> +			ret = drv_data->lcp_irq;
+> +			goto err;
+> +		}
+
+Maybe it's local style, but generally I'd put the value in ret until you've checked validty
+then copy it to the good location.
+
+		ret = platform_get_irq_optional(pdev, 1);
+		if (ret < 0 && ret != -ENXIO)
+			goto err;
+		drv_data->lcp_irq = ret;
+Both more compact and obvious when we trust the value to be good.
+
+		
+> +	}
+>  	drv_data->edac_reg_offset = cfg->edac_reg_offset;
+>  	drv_data->ecc_irq_configured = cfg->irq_configured;
+>  	drv_data->dev = dev;
+
 
