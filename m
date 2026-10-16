@@ -1,86 +1,67 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B26443BAD88
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:48:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDAD53D9529
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:49:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792133288; cv=none; b=dOi1IMWI68GHkRkToVxsNtLmQ6nxxBs/B714v5g4fp0i11rncOklGaVpzVY4AymEzfNfbTP6aY8QPyvZj6ymdy3rVIg//B+/26MhDjl3Wt77PSwL6RTSWDSZj0hYjGZjBtXytmyUfw34A5pBHy26tF4POz7xBrSJGNI79DACwmY=
+	t=1792133360; cv=none; b=K+/qKrNBqEqcCdupAuTrjit6nnMxCsEr8W/jz0XdQu9u9TiDajGfu9N2sfvoCbh3joVy8F9BbwtjhBAA2BN4pCIArb6Y6XBMaYilmJ8ewSx8IO7taqaTD88Yx5Rp20KVpFk3qKuveb4HTnNx4uwTKPQbHrlqTCP6kPHW97/VXsU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792133288; c=relaxed/simple;
-	bh=ArpyCUcdXnNRQly4XkQ4s9u69ZZAMn3+U1oycCt3GcU=;
+	s=arc-20240116; t=1792133360; c=relaxed/simple;
+	bh=s3anJmAF71SGOdbmyGVbZpu/vKmD9EC36nXM/R7mmiM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hogBEGhXVSQlES00HiJveITSrzPegtvGrGG7AYRxp7y6co4TQ837K4DXfDV1YZnIAG/fRfCB/JMzObY5Y43u83mHB7+E7AGqlVQ2BdOJTQ2B1iQgqAnmomly3Dw7rE8zeGpoal8NA1+UyMR/i1NXO+Ech6XlAcPPW91aO/JmaAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aMaUenMM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W3lXHios; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=udBB0llK1+RcGqVUFHDW/ktiCbytCqVTWGjblUd8mu07U+FXAnSr7REBP8/YoFXPi3ZpeVPId2nqgeU+yNxYkZSu8yfKpnwTuD66NjDPL/jx15YOh5JaVu1rfVAFP/QYetRJuORGN30HzdPRWj42Mihj+OSjEh2rLz34IL/ezJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PcpeuoIF; arc=none smtp.client-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aMaUenMM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W3lXHios"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69FNDSkZ3492972
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:47:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=; b=aMaUenMM0yE9Z8GD
-	VSilD5dwzySdYN3/WbxhBBK0m8yHCTstbeuzdIElOU7fuLHS63bM4BIXsZrnY7+3
-	aohuNchyVOgWW4shZu2qa6BXe6LV0kSem9A5Lc9yswyBmeJ6nOxDa9Shsne6D/JN
-	X+iGQNoqKzSTIxGf7xVeI5GoAvSdiGnDlj01PNm3AiNa7P4ajFY2EyQ44xkUOguy
-	7rbOL5B1z6aYL0Vd72qrMbwJdlKAyfKxnf7EPLRhkp20fXXEG51g2mEiqQARLbyv
-	NYBtWhWZhg6S4388hHAhUeCZlzu/YTHkf/pAI0lMJyv03Uaq4/GHZY/JNToq2zep
-	f/lOlg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb21wtxym-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:47:59 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ac76132001so2120083a91.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 23:47:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PcpeuoIF"
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a1635f7c89so27896945e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 15 Oct 2026 23:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792133278; x=1792738078; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=;
-        b=W3lXHiosbgUJh9nEiqBuCdR9tz5iX4WNdv/lQBp/zhytqZeADlTOHFqNZDbYq18Wza
-         j+OLoVAITyRzBGUI3Udriv0C2n8SIgzRmdApCc6gC9a3tzgY84YUP7yc9ddSfWfEJRLL
-         dnW0TH+nTsUX+HZ05e7+Ze5vRvkqRnXgvWuEuVXljjZ7388uC8I9cu1h7UUrFk438Sgo
-         kpNRieHXycEtUclmjbYpnVTmy3aOy5pB3YBrbTyDYD03YEWDJ+fi0aZVpJs4Ov4f6Kfn
-         uL1oeOo0kcmG/lNQJIkCuYbIUx3kPmiCu/vaXlIPwYuqCyxlvPEkPZW7RnKjRcz+aY3Y
-         UD9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792133278; x=1792738078;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1792133348; x=1792738148; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:from:references:cc:to:subject:reply-to
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Pz0Akbts6DsXYURHmG6DvfbIIYwLAa3UJO6NTzI6f+0=;
-        b=hdvPxdRjixwyGu9SJBgKhjY62tG54+4NOS9jKMoJQNW2a1V9T/OLKziCrKANC+d7DH
-         M+R93Q1G033zTHF44PDXR9QEEn+csXx5OL/VNYui7j0De4C2g6nVyf3t1i1Qx9C32ybG
-         g7IvPZDj4+K7a8SlQIB22qlVau23fhr6T6lhi/9s1BlggJKOqat7YUGUYRdwKYE4lLpO
-         jDIeAjLuEuT6ygzYhp9YfL3SAIxBISdIsXA6G1P7wP59+wPSymp9L8l2FwqmUEseBrtV
-         9In8iAX4R5BPT/Bl1oSuGp42okZotv/bcGIQ+70JrkYLvI0/n+8BJsA7mxRV8kGB0eX/
-         TXPw==
-X-Gm-Message-State: AFq9FYJ5L8jhhq4qEW6oveCWcF95qjhbbYqAlCZxNi/jAC5VFmrl9fpd
-	laWKSpGgVeKRprSCXzDf4FQTo2aOqBgqFmwDt0/WwNKUmYE3gGGMVgzZgJR4P4hRwJ0RdYcDfYd
-	xVvtSk6jPNTXhgI4ePROfU3tf9goEgtZsnjdfmCd0vcCAfcIpt0M7J+/DOuvXzUwDvKkC
-X-Gm-Gg: AYBFou14aB8BxemTK0WXnDd1JcMmyqLWWqNgEmymB+U2+xbCNP30XucgH7JieUmZtXT
-	z4ZI8t0FLMjepggNX+O7Rr5k5tf/GUuMmcH7Y14XA7m2UU+z9opx6DB29D5JpxhzL0dNG32TaVh
-	a7TzeM7PlKk2eAfsLVFCdnsboO/D3BCiKrNs8aORA8j6LWKCZj+/XVI5V8D5p1GMzfqePQKmZX6
-	/ucGkgZwhuAZPrMSBq3XtwCVM0gUUdDzoJ9hEYC9ITey7N6r/Vj1DtIVtZRzgLF3bGVoetpGBSK
-	j4sZKsOcrQPBoD72DVRRrSq3ImP5OT0cvPGyBkqoGuBuCJqqI7AVv8WZ19ikdno3H79Jl6k3rpq
-	4wBl3KhfM4xzFF1LMdtLOtslk2MA=
-X-Received: by 2002:a17:90b:4d0f:b0:3ac:97e3:73a3 with SMTP id 98e67ed59e1d1-3ac97e3ca4bmr4148849a91.6.1792133278234;
-        Thu, 15 Oct 2026 23:47:58 -0700 (PDT)
-X-Received: by 2002:a17:90b:4d0f:b0:3ac:97e3:73a3 with SMTP id 98e67ed59e1d1-3ac97e3ca4bmr4148830a91.6.1792133277770;
-        Thu, 15 Oct 2026 23:47:57 -0700 (PDT)
-Received: from [10.218.18.193] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3acc487e509sm2669257a91.9.2026.10.15.23.47.52
+        bh=sjYKa8DIKuvjh+VVUAQH4onZZeigp/qLBTebXWbeIHQ=;
+        b=PcpeuoIFPtsRL4dqinUQmmo6dMRrYt2Fgl8fSYal0jWsFGDN01mIMJsKSFkr4FxCzB
+         aXe/Z192qqQ8zD9hDv/6lpYKmqZZUBfqnPVdc931mPvQ/U4x9czwDjDnByiYwqkJ5mQ3
+         IPqsEVX/xUuG2ERYzgWvsSrpn0yfvJGD8ZxAOWP6fxMVDRbuYKfgtggN/eljsLKpaDBw
+         yZjNQZ8HjEPMuTIuxqG3h9YYJ+XBgdKBvcDjb/G473l2GxAEU6InHXAYvbkUp7CJT4pt
+         zFMg/yl0Rk3lfgPCLpXR3Yc3eaDxDp9y3Z0YlIFUlUE3fhA7ir88OuIpoPRKA3EqjrB0
+         QI9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792133348; x=1792738148;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:from:references:cc:to:subject:reply-to
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=sjYKa8DIKuvjh+VVUAQH4onZZeigp/qLBTebXWbeIHQ=;
+        b=l7kBV5DerUCWI/C9AuwMPflLPbFaZ75apIAYUqmxsoJWeTOBNBvX76y0bE3Iv7xsbU
+         tg8dB4hDbBqSMHNQuoxVBLgyBdCU2eCDBuqQGhg9rDpu2Q7lPd6S1eacZBTX65AjKnAt
+         H9+mIeivgmwJeEeblguKGMWIZ2CSNajXQ4IFWWPqdnA1V3ZXCtfwHHouP8EuRDaSTrlK
+         sddizkHK/6iRjEDS+fziFDdvgXytD8L/aqcfidlv2Pxp1e66Pfw14KaFEpB3Vruj6qjE
+         2pLouZZf8/FQE5JxI8QtStLlnfbsK40cAhUMcQrDHSpA0ShRGqsaQtTxvpyOmaY2zVff
+         nw9g==
+X-Gm-Message-State: AFq9FYJ6o1BDdqe+B8LVrSvQrwhaBpQ7QvrQCMNYde46YxnS+f9pbUvz
+	xtuESXYKrvJhlMA3nUaPY+8Vxn8gfehXYeXFpMEpibPVj8KCZOU2uOI0Fzs1K+ZpRnY=
+X-Gm-Gg: AYBFou3XtU68RcdGkLCOwKOGKjSHNz0/eBz084JuVeO5k4mGkV7kQdpztVQXGtGwaBZ
+	jnTMWe5GLrQoFOxEIBi+k6TtMRltwAsI5V23GJxWfoNaDffiqnn7kiqjwuBWkhWpy0Xlmc9+jM6
+	yilTT9Bes8x7beX2/Hy3d+W8805qiI8rV9b++27u/wrWxXxVLDZnDzzme9BWwOeVG7Gu4kgzhtU
+	b5fyDWFXXZQb2IHl5naO4PMBORq+liMOf1dxXiMOT/oP43ABPJvueXWA7UucjpfenOlGDBmmDq5
+	rBDWbBV6lou4jcSlDyNKmtKWThdQudT9zsBJI/qeA5uRoBFS5KEt+IwWzYqPTxdu33he/8WLXzf
+	aApT+PdGJelQqPyuGLAw5r0PUmX7rl46PvPAxrIgtRXiuYibJeNWP+Ui51QXdifhx7Lk8L1/Zhk
+	2pdZwV2rSifS0wbo1kpkh3rIktHNun+O+ynMOZoKMKAQj7TiVtBmlAYESmqzNstIcIzl0xwer7u
+	HZqekEJWkWv38K0M3/GyK7gn8lLQOCeV72beG1OHmdI4mYkT2TrFw==
+X-Received: by 2002:a05:600c:8106:b0:4a0:c02:938c with SMTP id 5b1f17b1804b1-4a18e4d683dmr439002795e9.25.1792133347816;
+        Thu, 15 Oct 2026 23:49:07 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:3de7:deff:62ea:d0f8? ([2a01:e0a:106d:1080:3de7:deff:62ea:d0f8])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1c8af3f8dsm33220615e9.9.2026.10.15.23.49.07
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Oct 2026 23:47:57 -0700 (PDT)
-Message-ID: <b907dea8-d2eb-4237-b316-6d96c81a5b33@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 12:17:50 +0530
+        Thu, 15 Oct 2026 23:49:07 -0700 (PDT)
+Message-ID: <bdb9fdd8-215d-4220-8275-5fac170ed71f@linaro.org>
+Date: Fri, 16 Oct 2026 08:49:06 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,128 +69,91 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] ASoC: dt-bindings: qcom,pm4125-codec: Add the MBHC
- jack properties
-To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Alexey Klimov <alexey.klimov@linaro.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        ajay.nandam@oss.qualcomm.com, ajay.nandam@oss.qualcomm.com
-References: <20261015-pm4125_mbhc_support-v1-0-8bc1212db6f7@oss.qualcomm.com>
- <20261015-pm4125_mbhc_support-v1-1-8bc1212db6f7@oss.qualcomm.com>
-Content-Language: en-US
-From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-In-Reply-To: <20261015-pm4125_mbhc_support-v1-1-8bc1212db6f7@oss.qualcomm.com>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v3] Bluetooth: hci_qca: disable power control for WCN7850
+ when bt_en is not defined
+To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>,
+ Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann
+ <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+ linux-kernel@vger.kernel.org, cheng.jiang@oss.qualcomm.com,
+ quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
+ jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com
+References: <20260324023016.3889062-1-shuai.zhang@oss.qualcomm.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260324023016.3889062-1-shuai.zhang@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: UVCsb-O2s1tQSAY7VqsIGml0MQ6LD0T1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAyNiBTYWx0ZWRfX3Gp9W4pu1tJk
- fzOGs0HnneHvFMGP+aArqWQehllJgw7Yk6cVYtLFgsvE1AXt1Trsfxy+mrQaBCPvJPogm6S+xL2
- 98GB5ugLNGX7udO6T5Ve19TY5Ng1v/ah756zgmARIYvAJ0BQWu28XHbyvxGlabbb0nti6O79NLJ
- qLslJUstOMBaVueTwzWUZ9YmvXKAgiquHP8h/20vDvMXqgPSyyTFl1RwImdvTn2swDadGziSqd1
- OFWUXH+sAnUpkl9tJaGpVJUcnRH6PrtRR2qcSfWJL/ddQgv1dgweHErkiGVRsEMSFX3zzx1uCty
- Ti3wajQbqBK+HGHWc8HupxDszBwClh/ih3UEU9doxKJzXFc+eB8Cj9e7Len7lBh7eFba2jnjLUc
- i7XUrSQfch46vwp+BIjMN93Y2fqJ9tVmqKB1a3kj1cfphGnwFQn3GJsgCyvVBSRuB+c06Pjz9S8
- Feyq+bpkq1PqRuQ6Y6A==
-X-Proofpoint-GUID: UVCsb-O2s1tQSAY7VqsIGml0MQ6LD0T1
-X-Authority-Analysis: v=2.4 cv=R5qWitRX c=1 sm=1 tr=0 ts=6ad1c89f cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=xz_OTyItpRnlL1KGmssA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAyNiBTYWx0ZWRfX+5nc6l+eEYzi
- Q4LpJijCbukoD7wW2TWdRbIov+Vf9x23bfWnkd5bUsOOv9mhofdkfiSpRMUy9/qIv5Fd2e6ddOT
- vBkB+B5Yja3k/Fg8LeOQW0kFhfkqLi8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 adultscore=0
- malwarescore=0 clxscore=1015 bulkscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610160026
 
-
-
-On 10/15/2026 7:43 PM, Mohammad Rafi Shaik wrote:
-> The binding already describes qcom,mbhc-buttons-vthreshold-microvolt,
-> but not the rest of the data the MBHC block needs to detect a 3.5mm
-> jack, even though wcd_dt_parse_mbhc_data() reads all of it from the
-> codec node and the schema has unevaluatedProperties set to false. A
-> board that describes its jack is therefore rejected by the schema.
+On 3/24/26 03:30, Shuai Zhang wrote:
+> On platforms using an M.2 slot with both UART and USB support, bt_en is
+> pulled high by hardware. In this case, software-based power control
+> should be disabled. The current platforms are Lemans-EVK and Monaco-EVK.
 > 
-> Document the remaining four properties, matching the descriptions used
-> for the same properties in qcom,wcd93xx-common.yaml:
+> Add QCA_WCN7850 to the existing condition so that power_ctrl_enabled is
+> cleared when bt_en is not software-controlled (or absent), aligning its
+> behavior with WCN6750 and WCN6855
 > 
->   - qcom,hphl-jack-type-normally-closed and
->     qcom,ground-jack-type-normally-closed describe the board's jack
->     switches. The MBHC logic has to know the idle state of the HPHL and
->     ground switches to tell an insertion from a removal.
->   - qcom,mbhc-headset-vthreshold-microvolt and
->     qcom,mbhc-headphone-vthreshold-microvolt are the ADC thresholds that
->     separate a headset from a headphone and a headphone from a floating
->     jack. They are board specific because they depend on the jack
->     wiring and on the microphone bias voltage they are measured against.
-> 
-> All four stay optional, as they are for the wcd93xx codecs: the driver
-> derives the thresholds from the microphone bias voltage when they are
-> absent and assumes normally open switches, so existing device trees
-> keep working unchanged.
-> 
-> Assisted-by: Claude Opus 5
-> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+> Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
 > ---
->   .../devicetree/bindings/sound/qcom,pm4125-codec.yaml   | 18 ++++++++++++++++++
->   1 file changed, 18 insertions(+)
+> Changes for v3
+> - Add change history.
+> - Link to v2: https://lore.kernel.org/all/20260319075125.76539-1-shuai.zhang@oss.qualcomm.com/
 > 
-> diff --git a/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml b/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
-> index 6e2f103be..54e5b7607 100644
-> --- a/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
-> +++ b/Documentation/devicetree/bindings/sound/qcom,pm4125-codec.yaml
-> @@ -64,6 +64,24 @@ properties:
->       minimum: 1800000
->       maximum: 2850000
+> Changes for v2
+> - Expand the commit description to include the affected platforms.
+> - Link to v1: https://lore.kernel.org/all/20260319031040.4096297-1-shuai.zhang@oss.qualcomm.com/
+> ---
+>   drivers/bluetooth/hci_qca.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+> index c17a462aef55..4512ff7cd0c0 100644
+> --- a/drivers/bluetooth/hci_qca.c
+> +++ b/drivers/bluetooth/hci_qca.c
+> @@ -2484,7 +2484,8 @@ static int qca_serdev_probe(struct serdev_device *serdev)
 >   
-> +  qcom,hphl-jack-type-normally-closed:
-> +    description: Indicates that HPHL jack switch type is normally closed
-> +    type: boolean
-> +
-> +  qcom,ground-jack-type-normally-closed:
-> +    description: Indicates that Headset Ground switch type is normally closed
-> +    type: boolean
-> +
-> +  qcom,mbhc-headset-vthreshold-microvolt:
-> +    description: Voltage threshold value for headset detection
-> +    minimum: 0
-> +    maximum: 2850000
-> +
-> +  qcom,mbhc-headphone-vthreshold-microvolt:
-> +    description: Voltage threshold value for headphone detection
-> +    minimum: 0
-> +    maximum: 2850000
-> +
->     qcom,mbhc-buttons-vthreshold-microvolt:
->       description:
->         Array of 8 Voltage threshold values corresponding to headset
+>   		if (!qcadev->bt_en &&
+>   		    (data->soc_type == QCA_WCN6750 ||
+> -		     data->soc_type == QCA_WCN6855))
+> +		     data->soc_type == QCA_WCN6855 ||
+> +		     data->soc_type == QCA_WCN7850))
+>   			power_ctrl_enabled = false;
 
-The binding documents 8 button thresholds, but looking at the PM4125
-register definitions I only see threshold registers for BTN0 through 
-BTN4. The following registers are MICB2_RAMP, MBHC_CTL_1 and MBHC_CTL_2.
+This disables power_ctrl for WCN7850 soldered down on the main board and handled by pwrseq, which is a regression.
 
-Am I missing how thresholds for buttons 5-7 are programmed here, or 
-should PM4125 only expose 5 button thresholds?
+When pwrseq handles the QCA_WCN7850 qcadev->bt_en is obviously NULL, but qcadev->bt_power->pwrseq is not.
 
-Thanks & Regards
-Ajay kumar Nandam
+The test should be `if (!qcadev->bt_en && !qcadev->bt_power && !qcadev->bt_power->pwrseq`
 
-> 
+Neil
+
+>   
+>   		qcadev->sw_ctrl = devm_gpiod_get_optional(&serdev->dev, "swctrl",
 
