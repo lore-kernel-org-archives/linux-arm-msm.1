@@ -1,88 +1,67 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 759EA287247
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:31:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C454480DED
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:34:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792153892; cv=none; b=H08qEwNNIsKvn896u/ulUNaEh8MeEyuFkU+br9Cg45XrI2Ztg4TdbTFav6FC3dLssTA7IpcsSxozanXspUKbBAD09gJMeeIvaxdd1wmpL5G1jcZsnzTCt99BITuJiSzbLqLt9rNKdiRH5pEiQIEaTFYegBxqMdfu4PUDn7QNAb8=
+	t=1792154049; cv=none; b=rCMK4e12m5GSrxnUTzo7Iz8gl/eXZdDSiKuTIsO7/qvRemziNgarhaqdsJM4YVxeDerBqFai6msH3pXIxksIme8dB6WnwhCdcsGpd7uKISz0AbzN0jKPggsGlKl0d3xDMzpZhe+lJQ6ck+qN65ekc2A1XtejrFHrjy9+eaT9zE4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792153892; c=relaxed/simple;
-	bh=uvzCRxGuooRqn7FD6epZqB7NmrfzTcjHnLeWzrz4Tzo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fjSaNPsiUtM/RSfU0CUaZR1e0rwXn3hLRMBSn/+9rLSgXKiHjzAZM4XyZTnphJN/txzG7uSwtYpLwQh6mw9W1WCaoTezW5lrE/detjwg1Prm6ebm4p9TgRcSTaRz5TwBU0OfXQtgmh3QBrk9maCmLCTk2OLmGQVOHrXhslhkE7I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jZ96fk2D; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=knqCZro/; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792154049; c=relaxed/simple;
+	bh=hehiMMplNuH1ASVIZKS7JNCOTwicSdsvGPoc5cURypQ=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=BF/LU3bXgvnEDUMcEWtIvxS5p2675gUCwsHMyCDC5U66uu9ecHGYFNQH3OCcLDdLrUeyORKRDlR44UnuVb3dIp2aDdG635Mydg++mMXhxYAvdXm8roDKPFXcwdt73/PPqbML15FQ6QUN/8FZP+u9AMwOj1tjv/KI1ugZz/9WFmU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=rMkvsB+U; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jZ96fk2D";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="knqCZro/"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAA3EO942684
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:31:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uvzCRxGuooRqn7FD6epZqB7NmrfzTcjHnLeWzrz4Tzo=; b=jZ96fk2DZK99DMCG
-	2dbDYX+BmrDRCFD0Aii09w4b6OMRgmd5fkhApbmSOWDxLv39fkkPuRGhiSCo/ftL
-	XxsqZYpP6AqzXGObAe1I9d1L3DJ5W4tbrCwQTizZLKYSoebm3mpiCUgs11va9bip
-	aRa5M5m5y37xd/SdwFa3qx0akBGSguwF9nGPbTX875amUYd5B/OlVJLEKy4XQkpr
-	ZazKoRztkvKZEn8BX1JMVSN/iD842raDeOfenO2LHX1WZb19iSxlvCFiWxKVPaOR
-	Yv1N/KprMYZ1qgngnUbIVB7fKOz+wBAoj9bq7nTO0tLhX1lteDZXbCdX846SUqI0
-	OLiVRw==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhur0fmh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:31:30 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-77f133855b9so238629137.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:31:30 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="rMkvsB+U"
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4956869750eso41873015e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 05:34:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792153889; x=1792758689; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=uvzCRxGuooRqn7FD6epZqB7NmrfzTcjHnLeWzrz4Tzo=;
-        b=knqCZro/K1iErJk95NWa552BYNt0A3r6eB5uQ7D2+zg/AwvKkwlkwHKobnQKpY/3RT
-         n85R6BpdgiaXQbI3iU5smHsZQEZ5Ewe/agky9gt/h0CSoPbY7XsrMAuA+DMnuwZcqrq4
-         Qx1Ce3vw7jWESkBaW7qRtEu4YEyyzfGNUT1KUyK+XkxD8m0+MVp+B/UkFtkYnhBx3r1w
-         lo69Qa8cN6IxqPNRNeqj98BLGOPG5ijEX514GnzwG7Y+VRDoOAiGr4KvDX9hDKTSPeNK
-         q9W4pd/ruS6hOVXPjzDkxVuTYrvgVTXLROr6CkYZxPgC27DtoEK/T7dmUVkeKKQ9UY8t
-         fZhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792153889; x=1792758689;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1792154046; x=1792758846; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uvzCRxGuooRqn7FD6epZqB7NmrfzTcjHnLeWzrz4Tzo=;
-        b=bQHNqUiYbk/RQJKbSB4QszyM6QOerU6B2SlpyDSuLLAmb5g9oe6eYLVZYLmv6vUYZO
-         q/GyWnNLrqYsUX7PGbVgRGWTMo1q+8vbEwX1AQQpqqt6Ts+6G3NfaFUIwJ8HUALt3CeG
-         YUSrsSV85dXymbzSYRmQPdbfp4RKyGwN8QAwe5p0t/ohjkgqc/Pgj7aLWfjWFn8CrRPZ
-         S384SJGRjk3jZonCzSxYhOHGf4n1s/qfXlz0p3fH1JFKCXDv8LOm2kOeu5he8ucS8tTO
-         SzMvyXJoFbO/W63+0gDT8UBh1reD9xT0TJWYe3tdEERVFuvzylV+M4GNkteSpKDuCARI
-         0QzA==
-X-Forwarded-Encrypted: i=1; AKwUvBxJF9RHv5LEl++N1EHAv8WPWNtLsy5QxbjMZdtqmwk1QM3E2dorCXU57Zqlh4cRnF+OZdRFkIwlC75HaYrw@vger.kernel.org
-X-Gm-Message-State: AFq9FYJhJAO6pUt202s9h8NQRqli/e+FWhOdoySTNWMmCsK4SXE9Ab9g
-	R16v/FEeloEbDmZVINX3eL9BSKLdRGFl8Ow893LGQ4Ht2YAt80cTQoAfBdHqcOpiic0Fq44ZIhh
-	4MOrG3q1uyIlunAXFTPlTB5GC/tOxqO+gPxwe+PC3tz7EQ8JNCBnJWYQIUVW7anU3poItwo0TpR
-	eS
-X-Gm-Gg: AYBFou3S/vvC1gASMU2/fE/tLgE/0ca7c2dyymve68WXvcA1Vle/IjJoZjh9KBqTQ2J
-	x5vTWBd5W2Mkhp2VynprB+gxzXSqDwjkmLtRLOKvjkwyvEEWm1sGjKFF4CmAwb0ZU7qnSGMN3Gk
-	fVfosF/gyLOmbnXcghEQp6Pxh9ynVZuxtUSzgv2i+S1js+WYdy+smF6b20BvQPo4fiXBUOOxAQC
-	40gKplgMf83Kjbvc4dpYkaGB6S37bY59Sfe+px9Y8bI6OA0Tq3qJfO1YeP9MpajaTCKkcFSxNPB
-	fxp4SZ50TcNh8PZRSMMUxQ5z8zkNom5L7NABeWinn/HHAabwfxh95P29MgjuGxAMxoRbEwpC99Z
-	OSXquHq4cmFf0K6fkQ0EhEg==
-X-Received: by 2002:a05:6122:4650:10b0:5d4:41cb:8936 with SMTP id 71dfb90a1353d-5e91f4ba58fmr5094033e0c.4.1792153889493;
-        Fri, 16 Oct 2026 05:31:29 -0700 (PDT)
-X-Received: by 2002:a05:6122:4650:10b0:5d4:41cb:8936 with SMTP id 71dfb90a1353d-5e91f4ba58fmr5093981e0c.4.1792153888906;
-        Fri, 16 Oct 2026 05:31:28 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c40919bc742sm66813966b.54.2026.10.16.05.31.25
+        bh=ZIpyq+qJUC7i4cP+JzTAwJd0/DwOmvkqZRCfLBzvRJc=;
+        b=rMkvsB+UIzB2KQ00cNXqaxW8hYzJPBkqYUn/tn3zdeyCfPUkl3V0qEvMsbtR1h6z55
+         YBaUC3LDyIJ5wDnZCk2A5uCa4mrqp+ponQ/e4FoHluTXgmpVMz6dOvGrmSGX2zVSqkz4
+         Hu4CPzHd9BlDHCeN9QIArFRxW7p8vTPJf84X6gJS+Lvnx9tT4JEGum/p4JvH6GLZaNi9
+         lNIe5xVrGHEr7niRJGQEZSB+fGtgF1czLyLoGzkQPfKGdloyl/BsjIOeaYefV8IcdjZQ
+         guZL5qo3KSRKnXoMZy8xTsrElD2tuF6Xy+7NVQLnw28qKXPrbaj1Q14CPrIawA/+zkwv
+         VomA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792154046; x=1792758846;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZIpyq+qJUC7i4cP+JzTAwJd0/DwOmvkqZRCfLBzvRJc=;
+        b=tg8QUiHUuOsRBWodLlz07Ph23rGa0UijPwvEZuch5+CZTV07wDvhsVyXysMMn74y+M
+         PeX1ksBkzpBw3zl45ukWkI7RU92X7MIrwsX4LEGMtNLiEay8nZfC73UUyBYC+jmMvqLR
+         B5gcQN8CmH9veAR7uRbpYmnwbYeJw97aD7vIlwwjrUAvtwm36qbtG4+lNQSGf5qnjHsK
+         SIqmwdU+VaGzmOk93H+BWifAK6QioUDNQi2DgbER+y+CQq9EClaYyYiIVOG7Kqs544ef
+         pTgCAJaDqZgvxTSEUNFkNcjflwwJtwJRF1eFkgioMElmiuWIVBZtl6YG34u81bFMN7g/
+         XGkA==
+X-Gm-Message-State: AFq9FYKmAbauMg1cJXeaaRhwXin0EqjfYALEJ75DZHQR4Rlp7zRdEL0o
+	uNba+fHCNknre5/8Q9fJxKgLRPc2WsHeSwFLWDVOcDfZWRvrytfs47IoU8RrejWAor8=
+X-Gm-Gg: AYBFou39BBVhPvNkX3okJ4t+UlptsZ0UA86FL3DhHE48aOD1fmx3bAyA1re8ntsERcw
+	EEmqvmk5CnOfb7U1X5Y33wwLkamhoV5mqjeyHARmICMPdulNaWNfnohfi8/gh3gLLgEsAz45CD4
+	A1iinLrShMCCNdd9ePr0TLv7ar4ovwr7Yf/W1mqh0DFsgju1BU8VctuuQfYFBgWaW1ZAJ5I2HNI
+	MXYSaNgSMnE1vKd1G+OWV58OTfmZTLVbWduXEmyTppRTzdiOxhNfcg0IGExmnL4Ch5TtFKgklRa
+	5RDN28JUZ2VonXXXCrcGq/lW1E0rzRVAKNyfq+ObIulF/71ES0/rTmds3myDO6ca+/WBHFTjs2p
+	qkF6uZC+T1b/JxuqAXkV8OCaWcNgyzlSKM0tlaqBbQPTAjYnZNI24/RE3IjDBSCsWeGUmJ9MDkK
+	sbyIiiBmOQlEDUqlt9q5vUiiP/cNDNs94ooKkO7woRRQ5y0KgWmYVNoDcdOd66qtEgUWaKii1vY
+	aiJPK/xa6LqO3ItKkV4Q7JxiBMNOekpGce+0YDhlyAfNmbOo5LNWw==
+X-Received: by 2002:a05:600c:3494:b0:49c:fa20:cc00 with SMTP id 5b1f17b1804b1-4a18e4c3f24mr492255685e9.23.1792154046355;
+        Fri, 16 Oct 2026 05:34:06 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:9e08:19eb:ca8a:9b73? ([2a01:e0a:106d:1080:9e08:19eb:ca8a:9b73])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd5128f1sm4861952f8f.59.2026.10.16.05.34.05
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 Oct 2026 05:31:27 -0700 (PDT)
-Message-ID: <18d6a6ce-afc6-4590-ac26-0aca6dfafae7@oss.qualcomm.com>
-Date: Fri, 16 Oct 2026 14:31:24 +0200
+        Fri, 16 Oct 2026 05:34:05 -0700 (PDT)
+Message-ID: <c622efa2-df8b-44de-9552-d2b16159a661@linaro.org>
+Date: Fri, 16 Oct 2026 14:34:04 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,71 +69,125 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: shikra: Correct QCE node
- configuration
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Wenjia Zhang <wenjia.zhang@oss.qualcomm.com>
-References: <20261006-shikra_qce_fix-v1-0-8ac54d81edb4@oss.qualcomm.com>
- <20261006-shikra_qce_fix-v1-2-8ac54d81edb4@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261006-shikra_qce_fix-v1-2-8ac54d81edb4@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA0OSBTYWx0ZWRfX9dzKnUnTICxX
- IWryBT7HUIbLd7Ce+wB/NlIJ5TUxRNVikDcMFy8/fRsp+rdvCJiUSYh/EZpU/FF6lz/bkHop+7T
- q11T52Ria0/481BH20/l1G+9XbyPL/DTNu7pLnRXkfgrUzFWFD+Zp9tDpBu8I7qXi46f9p1RSGZ
- HmgcKsqow/bCFmtdHY3YeXn4qa6jWzFy8JSIBTptPaKh0SaPptgu/PsELQ2FT0jX8xwIZ3kkMH8
- 9ggKPP/f7nZ7KTjZ92DI5X74S7KiVCZZOWu05dJglykjwSMn4JsVMQacpvWBc1huxLnxsfZ+YlN
- D5z3ykOk7oxMtxY6JOBr5xif6peunaTJ5YlsQW3QkvUAg3+ODUcod5GpJYga3BTQCBOgjzJwAyl
- VYQIirT2/2aT11xHD0HCdkYbW6kNPBeLJf1G1ymOzxFvgwOMOZfl0s2mo/UFXnl3IR7bXo+xM8M
- Wplf8pZlLurbil0DW2A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA0OSBTYWx0ZWRfX9BAnDhSnMOfp
- OhtncK9YG8c0OGzYVyu74/WrRqCAbnUrt/WE0+HNGbQt5X0rTFdyfzSNeNy9E2uFdQkWkO+TANy
- 1ELgYBl4x4RVm0jWE4VMKGEXotDvy8E=
-X-Authority-Analysis: v=2.4 cv=PqsG/AM3 c=1 sm=1 tr=0 ts=6ad21922 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=mSLAci9PSNYu4dxlomoA:9 a=QEXdDO2ut3YA:10 a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-ORIG-GUID: yXuutkXTHdXVW_nlBsta98oR6ooczNX6
-X-Proofpoint-GUID: yXuutkXTHdXVW_nlBsta98oR6ooczNX6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
- phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160049
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] PCI: qcom: Advertise hotplug with no command completion
+ support
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260314-hotplug-v1-1-96ac87d93867@oss.qualcomm.com>
+ <d709693e-b9ad-4d53-a368-67fbb0cbd601@linaro.org>
+ <1ae8d4f0-1c32-4dbd-a18e-7a2ce2627efc@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <1ae8d4f0-1c32-4dbd-a18e-7a2ce2627efc@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 10/6/26 1:14 PM, Kuldeep Singh wrote:
-> Shikra is derived from Agatti and uses the same QCE integration.
+Hi,
 
-This is useful, but..
+On 10/16/26 13:08, Krishna Chaitanya Chundru wrote:
+> 
+> 
+> On 10/16/2026 3:54 PM, Neil Armstrong wrote:
+>> Hi,
+>>
+>> On 3/14/26 02:56, Krishna Chaitanya Chundru wrote:
+>>> QCOM PCIe controller advertise hotplug capability in hardware but do not
+>>> support hotplug command completion. As a result, the PCI core registers
+>>> the pciehp service and issues hotplug commands that never gets completions,
+>>> leading to repeated timeout warnings and multi-second delays during boot
+>>> and suspend/resume.
+>>>
+>>> Commit a54db86ddc153 ("PCI: qcom: Do not advertise hotplug capability for
+>>> IPs v2.7.0 and v1.9.0") avoided these timeouts by clearing the Hot-Plug
+>>> Capability bit entirely, which also disabled all hotplug functionality.
+>>>
+>>> Instead of disabling hotplug, mark these controllers as not supporting
+>>> command completion by setting the No Command Completed Support (NCCS) bit
+>>> in the Slot Capabilities register. This prevents the PCI hotplug driver
+>>> from waiting for commands completion while still allowing hotplug-related
+>>> functionality such as Data Link Layer state change events.
+>>
+>> I'm a little late to the party, but marking the RC as Hotplus means the bridge
+>> is marked as is_pciehp and pci_bridge_d3_possible() returns false.
+>>
+>> This means this breaks D3Cold support completely since in
+>> __pci_host_common_d3cold_possible()
+>> we now check all PCI devices, including bridges, and the RC is not set in
+>> D3Hot anymore.
+>>
+>> The only way to enable D3Cold is to pass pcie_port_pm=force to allow D3 on all
+>> Hotplug bridges. Which may be wrong on TB bridges.
+>>
+> Hi Neil,
+> can you enable hotplug driver and use this patch [1], that should solve the issue.
+> 
+> [1]
+> https://patch.msgid.link/20260729165005.896725-1-manivannan.sadhasivam@oss.qualcomm.com
 
-> Update the QCE node to match the underlying hardware implementation by
-> adjusting the fallback compatible and related properties, including
-> clocks and clock-names.
+Thanks this fixes the issue,
 
-because the compatible you switch to says ipq4019 and not "agatti" or
-"qcm2290", the argument falls apart.
+Neil
 
-The real problem here is "the hardware needs a clock and it's currently
-missing". The similarity to Agatti is irrelevant in this context, even
-if true.
+> 
+>> Neil
+>>
+>>>
+>>> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+>>> ---
+>>>    drivers/pci/controller/dwc/pcie-qcom.c | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c
+>>> b/drivers/pci/controller/dwc/pcie-qcom.c
+>>> index
+>>> 67a16af69ddc75fca1b123e70715e692a91a9135..a2924610f3625f2456a491473c135840e31bafb9
+>>> 100644
+>>> --- a/drivers/pci/controller/dwc/pcie-qcom.c
+>>> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
+>>> @@ -358,7 +358,7 @@ static void qcom_pcie_clear_hpc(struct dw_pcie *pci)
+>>>        dw_pcie_dbi_ro_wr_en(pci);
+>>>          val = readl(pci->dbi_base + offset + PCI_EXP_SLTCAP);
+>>> -    val &= ~PCI_EXP_SLTCAP_HPC;
+>>> +    val |= PCI_EXP_SLTCAP_NCCS;
+>>>        writel(val, pci->dbi_base + offset + PCI_EXP_SLTCAP);
+>>>          dw_pcie_dbi_ro_wr_dis(pci);
+>>>
+>>> ---
+>>> base-commit: 0257f64bdac7fdca30fa3cae0df8b9ecbec7733a
+>>> change-id: 20260313-hotplug-4c296595b5b8
+>>>
+>>> Best regards,
+>>
+> 
 
-Konrad
