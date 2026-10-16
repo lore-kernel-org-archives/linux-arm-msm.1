@@ -1,88 +1,90 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3AD62DC798
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C45CD43F4C2
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792137616; cv=none; b=eqr1v+LJ0OewzecxdeyUIDGk1rkCzs4sHFR/trFXa0Xn2OgCzRenmN2IG3iE+G9vNiJ5iTz0l5w7N4tqQCwqSign9q5EiMT93w1qUrkflMPHozyiHKh2yhzkCYZ1dv7/+xtBWWmMQ4nyix/eDI/5hHSOQEt8cQzq61oPvgWzcBY=
+	t=1792137617; cv=none; b=c7/JqXNPx64XIQIUxIuxFp4THjxJh6dMu/PE2DGOXP0ppTk06GeBU9WJ7qIeb9MRiLV5z9csr4JaVnzETHlFf7acHNqVhUdBHuKHvqXoFUtb+lnTZ3KpUH5nIDdNoZCEGcZreZlvheaoFuK+q2doO15a5GboKqg1cEUPGeqUrkk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792137616; c=relaxed/simple;
-	bh=Jom/33lMvyROexEXXBka+2wEVnyD992vNREAbJ9xUFw=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Q1win9aWjXswk7ypLOmj1FdGC8pYA9ehLFJSVap7EYSPpfiedhz8vd4jpwmyYJ4b21YF6ifOI37143szGYvbO0KZRsRzZvbPTOkESKBHjcxhsjpZBz1zwasfYDyBnLEsgZ7PI43QVftPErVBBD3Sn7atKWchNST/AWffKomytGI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PDftbMo0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M3ZQglEj; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1792137617; c=relaxed/simple;
+	bh=bECPWxoCFafbgoF9TAu/YDGGMEKWZCvp7v83ZSvz6Wc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=T2wrndhIwiQFGeUy0JFRYPKNjgNSKiVG60NP0gEHxH+XkPLvj7QObjdNc2bFkThx6JtalpSlkfWMpOiXLLDhCCi7qaWgkUFw2m6YMjQBiQUXFm7qDV1M3lIF5Seu2xxQJ+w0ylROFIicEX20u2wZjks2PEscaVMvefrg1wjUOaE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GjideLDA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HJpiv3Yv; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PDftbMo0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M3ZQglEj"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G2ZY1U406092
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GjideLDA";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HJpiv3Yv"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69G7wMrk1890497
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=evMqfyXWXTJBLIRuZtTEpo
-	fBPLXYO84fBR90qAnHG8I=; b=PDftbMo0OF2PX88jsiOk8q6JCNPYSGHMRXjeNm
-	HZ+FziMYkLRrLfXV/Ighpdwv9h90BCEK0jXVO2s1yDuYaeIiDBlwbjqYu3qTqkgs
-	VLo5uIDIBJD48BxSZIY+vST4UyBM1gTYOkxZeO6zrZjH+OkLrchX+LskQCLxkDvN
-	xAL05Ghmr5lUMIDWvo41+ak7mH8ugtQq1MQqX2LS7tdI1daET8w/SX85vZyG219I
-	LBdIbvuFEvktRPYDLS5GFcJRqac36iicMDAnN+P1ySpFYBpLLRJ1wzVu5yztWoAF
-	5Bj0jrCNNUPfWcJHvXpUQpPoKonPejmv8MBREPOU6UmNtibQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb3sa2psf-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	9tl4MJhCIYy+CUFhOuWvdVaA0oMfwH+iUrIWo6Ztr7M=; b=GjideLDAvPWKCpk9
+	bThI1RVEsYMrohefnx2ACr21kduM9MY5+LLlNSeytRzVbgIuMHH7+tYtcCbvYvBu
+	yBz+MqtpiuKgk7cZ6RgymDi7xpLMqw7dCV3lDhaxnMhFtB1fmlQ4LWEw+g22sY7w
+	d1CPvJ6wm6UPMg4/APzV44X0imS1VP/ZaDWvT+/C0Hgp2ftD7UuG4Wf9vQxhg60R
+	eK9ZLqlfl3jlpP8Y9bPgkNcZxUzyzTZScgbXXLMBbEEL3LUsPrlWYohQthsk+Nyc
+	toU7XaXvasDEeSlIDvOAFiQMRCQSC8d9SMvMHDFzGJcAACaymQpJ8XBlMcHbLsV9
+	FJgjJQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hba2619wj-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:13 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93e49a1d3b1so1366229385a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 01:00:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 08:00:14 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-53397b6e05aso128091211cf.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 01:00:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792137612; x=1792742412; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=evMqfyXWXTJBLIRuZtTEpofBPLXYO84fBR90qAnHG8I=;
-        b=M3ZQglEjFNtDo7M76wZPwGPWE3ojRxncPx1N12wmJN/aqfrZFkbCFS24rRIvQnIN1o
-         jPzDAFCQYcoY5hPDOOzHfn5uZY7Vf6TfbVMaSpeM79iESXe7e7LazOA1Mzfb+1h2tMM7
-         vBTFM2/c7fd8ffcrWCZGRZrqnq0NUZWzd/9NK/mrCATKnoper75KIWB6e/jm20RO/w/Y
-         j4OtQ/4LSt60CkgQWDudL7xsev2mJDG35hlB5RV44e4clV7Ct5x+IrJ+CcTKt4Htz91z
-         9fJdHf2ozz/+8mq0W7oCCPjVjWzpXRsO78Ty4pkIHlKNPy581WQMV7a2ACjnYXIPkWDj
-         0p0g==
+        d=oss.qualcomm.com; s=google; t=1792137614; x=1792742414; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9tl4MJhCIYy+CUFhOuWvdVaA0oMfwH+iUrIWo6Ztr7M=;
+        b=HJpiv3YvlHT3vrtUxwk8Kpcf42iVGVAT3SAe/4QmNMWw6JntV7GLy28dqn/WIIDvxe
+         iRgUGG9VyUuzGIkDYFPMDKLciAvANdEEBvu81blt8UUqWWzq1mGSHXsyDc91WIswSdCa
+         aenV/vrbeO05RuMfgR7o5Yv8odMxVc6v3323mgZnTzeZUBG100zUuAicxgoz9D0yGvkN
+         PMSiFP89k4gQgIkZQJTbzefkdVE7lDU57L6Qs9T/5cmuzcMafJ4S7erbjBQ+mfn8jikl
+         7jFq18Ntz30xaiD6+n5LrfAiNYZiFcv0ZuoT7CHb599KlqoEWzUo4AraMSqLDakm1LTw
+         e2bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792137612; x=1792742412;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=evMqfyXWXTJBLIRuZtTEpofBPLXYO84fBR90qAnHG8I=;
-        b=N5NZKwRCqUAsb5gDgfzoWCwcWvh61efq83a3R3DThKJz3GL76doMAW1Ul72YHoVEoh
-         46B/zv9yGDNjTNx2TmAFhAkV0I6G4UZxSKnByQEehw3423WgjhTi48TeDO5ci0dlaodz
-         Zgm1Ij1NVhm2tnLFaGbTbGnW84WOMwFf7jNjW/9p+0rmWaQf7BSGee6WG2z5p1wZKoj4
-         RhCk1Hm4EZX4JgI00yr2J8nxdcqjxlPHXBe67PRttvqOnOhbZp6M/xjVTrBn3ke+IiuS
-         Aj99m0kAyNeCQ8RJ5glLvX3iZtA++2J3tK+BCSZDfwyt1BEfX/aKYxegpxrUYvWWzoTn
-         2q4A==
-X-Forwarded-Encrypted: i=1; AKwUvBytRFlIeZDibn1tqOvwJ1XPXynD8QSIJgAUqm3MUGZBhstD/uX3gdGOAJd/oEV/5+5O/Vd7PdWW7H3Ao31e@vger.kernel.org
-X-Gm-Message-State: AFq9FYKOD7FlV60k5A1Vzj/wzn0ncYkeSJ5Op3v/sOyyfWZOyTaD9/QR
-	n04KlvTr9dyUp40mOplh/rZSNxZjYoDU4hDxDp/zxw6AlOV6xiMWdh5VGm2RXMlZKu/bHGII24u
-	q7/DE7J1si473GCtIfBCI71+3Oq/hp3bUZvgeVKi0Hh/ii9TuQbIGQG9nb6osIUbUZnAyB5PO4R
-	ncPSLNEg==
-X-Gm-Gg: AYBFou0UwZvmHjdrIupYLF5DYU49Zm9FtLUzQlSnLTS6bKq9Z174Shd0PGQHv29Ik+E
-	PXVGcSC4EKWVuWlgTWYW8NZjfs19rxDIgloVC5+j8ujBNBLKDxO3NlbZ0dv4zbCESQMMDBzFU3/
-	//w3YA4mEtY7tlW3TjP/7WDfNBOpohWTjtcndCT3wBqsuo26MHiAI+v6ZS096EP2vg6kr8PL8Q/
-	iEM6zJFbgEEjkHYPs5FZFoIbg4oo5bir91P7mvPlOcUDU01TkeBGKp0QDFH/HotiHPXhlyECGms
-	R/fBH/uNtDSgWx3Paq1Ah3Br6pRBfMYjXwFFvWItBqqxR/MJ/djhJiRMx9LAUt1P4Wm/LE6Eva5
-	JBYHrJ8lLnoxaFrvB1znfrp7jMCkwHK2LX0c6O2N83dCPDjbf/y6qNngMGBbDdxNfBUfo0V/DHa
-	VcdbuBAFWkrLdxwpyZ8w6bzcBwVCcZdGX0YlA8suZu972+6GKH9ro=
-X-Received: by 2002:a05:620a:2b42:b0:93c:8e3f:3036 with SMTP id af79cd13be357-93ebd0a1ed0mr3577119485a.4.1792137612496;
-        Fri, 16 Oct 2026 01:00:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b42:b0:93c:8e3f:3036 with SMTP id af79cd13be357-93ebd0a1ed0mr3577113085a.4.1792137611802;
-        Fri, 16 Oct 2026 01:00:11 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792137614; x=1792742414;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9tl4MJhCIYy+CUFhOuWvdVaA0oMfwH+iUrIWo6Ztr7M=;
+        b=WdXEAOgYFA1Fp9pZytvG5/e0Q/h+p5KnGgvG/wgckWP6/mh5/qt7yH79cJ/Ym+HdQw
+         si5HBueSybJS8yAXFA68imZP1LpPN5SQDJxAikzZSYPmtJ5uvmTjC8xL1NobWpTACP8M
+         zq9IHuHs5qGU/RcB3HeJC9bDaIUwqrVf8ZNLPdqlT2myy3L6OixLwK1gs4+X2xibouFr
+         Rr4rU5MncSN83jZyYc+yfsmK7K48+Ru8dQci3x6SIShnaZjsif5wUNpgGRGggMSzrjWI
+         PlBgpvSoq860huUs7DrI8ZGb0TDncaFp1WwAmHwHp9kLJfbdGZbRJvrwDGtlVFWAtzmw
+         ZO/A==
+X-Forwarded-Encrypted: i=1; AKwUvBxVLcLNwFWJOEgEkxnSF4I3RVKNFMZjYY0RmEJ/VK9rcyl59tO5axzP0B2BpdUhOk7keCdiCjDnUlI3El+j@vger.kernel.org
+X-Gm-Message-State: AFq9FYITB1DnQB7G+T5FUQMAYK8nyAWBoC527CKyU/WBSI1n1uQTL/Tu
+	WFnbiMbjTyhYTy7yzbtA76uKriVHoEYYY1ZPBNvK5wq6oLBFKMpkVkYhABXATmZhbW4vNO7WrYJ
+	NTiTvQDTLFxditPRbBTA8qtlrg55qr/HUIba17D+eojhGQHVpAYZ6QO7eBuSb6w52zcvVXGn+OS
+	Z8FJTAuw==
+X-Gm-Gg: AYBFou2R/dz9pGbv6M+5irIrNqClLbtMhaFtCx5F4nlv0Rl+hvH0orCZ/I7o3EnDPS0
+	BN2gBKmggONNs5TTi75Dp/srDkO75GfkeoMq5meaIMMOJkVkEfBcv65dXUwCXFQeEqGRdaURzKC
+	7jZU6q9UUqlkqNpfq1Bz48X9/48wisJ4VRTZ0berjrGbXllkla1PjsxKzM7/W488xhhPBHy9yHu
+	XDYL2ZTeR+yFHfpdlSVqf3I/cyz092tZmi7qNi6SFgXAAxi/VFvXIPqXC/4kcMjqMQAWm9viguD
+	xquFWW3ao88bUV2l3Me/wZFJkL+lzH/FZ4cmogWmxmpNWfqLimeutO4KYqGaNTbSPwHX/HsiLLa
+	oEEqnuT4JujUsRyz2Nj0ywYYN6k0NlbPE/nV8YOgHdqHH9CCYoKb/Pe9UlTASrWfQE/djInonsV
+	qOSFzRV8gIl8oce3b7wHk1aJz/wF20cj/Raj+AcHUQItiEX2vxP/U=
+X-Received: by 2002:a05:620a:6883:b0:93e:6c77:6fc7 with SMTP id af79cd13be357-93ebd20afebmr3480328885a.42.1792137613659;
+        Fri, 16 Oct 2026 01:00:13 -0700 (PDT)
+X-Received: by 2002:a05:620a:6883:b0:93e:6c77:6fc7 with SMTP id af79cd13be357-93ebd20afebmr3480323585a.42.1792137613076;
+        Fri, 16 Oct 2026 01:00:13 -0700 (PDT)
 Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:5402:5e0b:9ef0:9b5b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5942sm5471446f8f.16.2026.10.16.01.00.10
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5942sm5471446f8f.16.2026.10.16.01.00.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 01:00:10 -0700 (PDT)
+        Fri, 16 Oct 2026 01:00:12 -0700 (PDT)
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Subject: [PATCH v3 0/7] i2c: qcom-cci: Runtime capability detection and
- improved read/write
-Date: Fri, 16 Oct 2026 10:00:08 +0200
-Message-Id: <20261016-cci-imp-v3-0-5ee7ec1ea1a1@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 10:00:09 +0200
+Subject: [PATCH v3 1/7] i2c: qcom-cci: Factor out write command queue
+ programming
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,121 +93,139 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIjZ0WoC/22Nyw7CIBBFf6VhLQ0MpIIr/8O4oBTtJPYFLdE0/
- XdpTawLN5Pcm3vOzCQ4jy6QUzYT7yIG7NoUxCEjtjbt3VGsUibAoGAaNLUWKTY9VaURSgqmtQS
- S1r13N3xupsv1k70bpiQc97LGMHb+tX2LfG03MWdMfsWRU0YBjhUHW0oF+tyFkA+TediuafJ0y
- KqK8INzseOQ8EIdhYCilNKIP/iyLG85EpEA+QAAAA==
-X-Change-ID: 20260929-cci-imp-8ba384309942
+Message-Id: <20261016-cci-imp-v3-1-5ee7ec1ea1a1@oss.qualcomm.com>
+References: <20261016-cci-imp-v3-0-5ee7ec1ea1a1@oss.qualcomm.com>
+In-Reply-To: <20261016-cci-imp-v3-0-5ee7ec1ea1a1@oss.qualcomm.com>
 To: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+        Loic Poulain <loic.poulain@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfX89ky1PCzXBk8
- fZZEr+jsgFaiBlYDXY8fpVwtCGhe8PcVKicDtyyceIFdBi6QmmJjGkB+fEPDBmMGUC+eo9XYMra
- EOuyvw01zx7O5aTmWXuQnj2Y86eM6Js=
-X-Proofpoint-ORIG-GUID: n2tmspxJGDdzWPMEsoFwMR9Oj1wiE4A-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfXyBftvnbkZYxZ
- b915k4jzt8LEEZ432FBMz3Qz/QYyhb1jwR+/f5nrWR/P3osCn/+sVf+uaKbJ8qAKrwnZYYuadnu
- i3myF13nloJf7g8pA6Q8c0xyhBYtbZv6Qie5SOF/hN1e/1qeYh0V1/SAGoB2Sd/eZHSrI2eWpz1
- a36icl1YcYtQOQqNtOCavs5HSbc6yMT/3R0scTJKT3l/F1m7G+RdQy6kz21pHAMHWsMJU3quyQl
- 6mR2eb0PoHSD8AshLZcPltSJX8X7rTR4fHDDNx1Lw4bR0pPtu2+tvX5b1HNRi584wiNUH7sLPyw
- OEaAXEK+oslT/2+ZvySIi/ECNXwrB3eIpbj5Bot+Pf3MGTGLgcGYwDYvh9uOTlzgNu+dyBi1tCx
- B2SyeLfd73FFJQ/ObYBIHGGeWv/bvytKdop52T8gsq31E2CuYaxVksyueuaUFYBfZGOzsN2dAdZ
- d5PWKGf5Q/cQ4TjJttg==
-X-Proofpoint-GUID: n2tmspxJGDdzWPMEsoFwMR9Oj1wiE4A-
-X-Authority-Analysis: v=2.4 cv=AN0XGc5Z c=1 sm=1 tr=0 ts=6ad1d98d cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Authority-Analysis: v=2.4 cv=bsHZl0ai c=1 sm=1 tr=0 ts=6ad1d98f cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=YGdjDy1V9CnC6BiKI58A:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=EKMQ_w68-2WzcSmJptwA:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfX+zfMYFrwpQov
+ E46OZ0hwyBxLbft1za2LFaS2tIpnlYIu9IXOtqE7zbyZ9nk3umNUxlUvgEJobIdro/r4ypkl/FO
+ rkGLCRAxWNKgny8GwVbtd9xa2PCFBwUrwzElHRMpyhroerLoC4CXTGdhp86v/pnN/cLENRLQgwF
+ 4vC7C4hHga2GRQimByweuQtShDjGRIJo/sdekdishhyk1AVEXhMotikj0rR1QB86rBiVjUsg91j
+ 9RHHDoFDxpvIHeNfjrLl8LwAwTyN+vBqdlntGXfPo9MHTHQEEMoOfIEDli2sXntu6jIWFry5e7A
+ qw0+lO2hGpfNVUee+2QYyqUB5hOA48RgrL6iEPqNNIu42ljKJNIw9YTu/wIYMQsDI2Fh8HFzmTf
+ einAqhggxnGCgdbVAnAvlYVyWprZrXRbmTNMH2WsBAOQOEqSiinJ624Bm53NMHigO7mYr9uf171
+ TZQ7e+Mp/ZQ6QeZ4Xiw==
+X-Proofpoint-ORIG-GUID: hfQaddmkSLEtkHgIPef3EYtP-eZNV78v
+X-Proofpoint-GUID: hfQaddmkSLEtkHgIPef3EYtP-eZNV78v
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAzMSBTYWx0ZWRfXwtpz2MWCGFtR
+ +r6XfZLd6XT/e+RREvPRyX4IegOGU6yO/phTtuJo7OjAVQbls70ICuVGTaMKAKmIO1HVgkJfxLt
+ vP0vzYuLWEJyG7iBo8IaVHw4BxBezZk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0 spamscore=0
- clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 impostorscore=0
+ clxscore=1015 lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ suspectscore=0 phishscore=0 spamscore=0 priorityscore=1501 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160031
 
-Improves the Qualcomm CCI I2C driver read/write in different ways:
+Factor out write-command queueing into a dedicated helper and replace
+the manual byte-to-word packing code with iowrite32_rep().
 
-- Capabilities (queue sizes, max transfer lengths, supported I2C mode)
-  are currently hardcoded per DT compatible string in a handful of
-  cci_data instances. Replace the static per-compatible structs with a
-  single version-sorted capability catalog resolved at runtime from
-  CCI_HW_VERSION.
+The resulting code is easier to follow and will be reused by
+upcoming burst-write support.
 
-- The driver only supported single-command writes, capped at 11 bytes
-  regardless of how much space the command queue actually has. Factor
-  out the write-command queueing into a reusable helper and then add
-  burst-write support, chunking longer writes across the whole queue
-  instead of a single command's payload.
-
-- The FIFO read path hardcoded a fixed 12-byte limit unrelated to the
-  actual per-revision FIFO size, with a special-cased drain loop.
-  Simplify the FIFO read/drain loop and derive the read-side limits
-  from each revision's FIFO size.
-
-- Add burst-read support using threshold interrupts, allowing reads of
-  arbitrary size by draining the FIFO incrementally during the transfer.
-
-Also add overflow and underflow IRQ reporting, as queue/fifo limits are
-now derived from the hardware capabilities and exercised more
-aggressively.
-
-Unbounded writes, which refill the command queue while the transfer is
-still in flight and so lift the queue-depth limit on the write side,
-build on this series and will be posted separately.
-
-Reads up to 4 KiB and writes up to the full command queue depth (451
-bytes on this part) were exercised on an imx219 behind CCI v1.8
-(128-word queue, 400 kHz).
+A command can only carry as many data bytes as fit in its words, so
+validate the length before building one, and do so where an error can
+still be returned. The I2C core already rejects a transfer longer than
+the limit advertised through the adapter quirks, so this is only a
+guard against building a command that would corrupt the queue.
 
 Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 ---
-Changes in v3:
-- Reject a write longer than the advertised limit with an error rather
-  than ignoring it. (Bryan)
-- Build the command words with FIELD_PREP() instead of open-coded
-  shifts, which also documents the per-opcode field widths (Konrad)
-- Actually program CCI_IRQ_MASK_1, the RD_PAUSE bits were being ORed
-  into the value written to CCI_IRQ_MASK_0 and so never took effect
-- Clear the per-transfer status on entry and stop reinitialising the
-  completion in the read drain loop, as RD_DONE can fire while the
-  fifo is being drained
-- Link to v2: https://lore.kernel.org/r/20261013-cci-imp-v2-0-6873326b44a3@oss.qualcomm.com
+ drivers/i2c/busses/i2c-qcom-cci.c | 44 ++++++++++++++++++++++-----------------
+ 1 file changed, 25 insertions(+), 19 deletions(-)
 
-Changes in v2:
-- Split the HALT_ACK reset fix out into its own patch (Andi)
-- Fix a typo in the "Detect capabilities from CCI_HW_VERSION" commit
-  message (Andi)
-- Use GENMASK()/FIELD_GET() to decode the CCI_HW_VERSION fields (Konrad)
-- Derive the number of masters from the DT i2c-bus subnodes instead of
-  encoding it per compatible string (Konrad)
-- Add burst read support via RD_THRESHOLD/RD_PAUSE IRQs
-- Link to v1: https://lore.kernel.org/r/20261004-cci-imp-v1-0-227d12cb4829@oss.qualcomm.com
+diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
+index d509dc1c14700d9c199d67df19082bae4f1ae470..5bec317c15deddc01d3f3a6418af4164c0d56fd9 100644
+--- a/drivers/i2c/busses/i2c-qcom-cci.c
++++ b/drivers/i2c/busses/i2c-qcom-cci.c
+@@ -77,6 +77,9 @@
+ #define CCI_I2C_WRITE		9
+ #define CCI_I2C_READ		10
+ 
++#define CCI_I2C_WRITE_WC	3
++#define CCI_I2C_WRITE_NWORDS(len) DIV_ROUND_UP((len) + 1, sizeof(u32))
++
+ #define CCI_I2C_REPORT_IRQ_EN	BIT(8)
+ 
+ enum {
+@@ -485,42 +488,45 @@ static int cci_i2c_read(struct cci *cci, u16 master,
+ 	return 0;
+ }
+ 
++static void cci_i2c_load_write(u8 *buf, u16 len, void __iomem *loadq)
++{
++	u32 cmd[CCI_I2C_WRITE_WC] = { };
++
++	cmd[0] = CCI_I2C_WRITE | len << 4;
++	memcpy((u8 *)cmd + 1, buf, len);
++	iowrite32_rep(loadq, cmd, CCI_I2C_WRITE_NWORDS(len));
++}
++
+ static int cci_i2c_write(struct cci *cci, u16 master,
+ 			 u16 addr, u8 *buf, u16 len)
+ {
+-	u8 queue = QUEUE_0;
+-	u8 load[12] = { 0 };
+-	int i = 0, j, ret;
++	void __iomem *loadq = cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, QUEUE_0);
++	int ret;
+ 	u32 val;
+ 
++	dev_dbg(cci->dev, "master %d write: len=%u\n", master, len);
++
++	/* This condition should be guaranteed by the caller (i2c core) */
++	if (WARN_ON(len > cci->data->quirks.max_write_len))
++		return -EOPNOTSUPP;
++
+ 	/*
+ 	 * Call validate queue to make sure queue is empty before starting.
+ 	 * This is to avoid overflow / underflow of queue.
+ 	 */
+-	ret = cci_validate_queue(cci, master, queue);
++	ret = cci_validate_queue(cci, master, QUEUE_0);
+ 	if (ret < 0)
+ 		return ret;
+ 
+ 	val = CCI_I2C_SET_PARAM | (addr & 0x7f) << 4;
+-	writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
++	writel(val, loadq);
+ 
+-	load[i++] = CCI_I2C_WRITE | len << 4;
+-
+-	for (j = 0; j < len; j++)
+-		load[i++] = buf[j];
+-
+-	for (j = 0; j < i; j += 4) {
+-		val = load[j];
+-		val |= load[j + 1] << 8;
+-		val |= load[j + 2] << 16;
+-		val |= load[j + 3] << 24;
+-		writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
+-	}
++	cci_i2c_load_write(buf, len, loadq);
+ 
+ 	val = CCI_I2C_REPORT | CCI_I2C_REPORT_IRQ_EN;
+-	writel(val, cci->base + CCI_I2C_Mm_Qn_LOAD_DATA(master, queue));
++	writel(val, loadq);
+ 
+-	return cci_run_queue(cci, master, queue);
++	return cci_run_queue(cci, master, QUEUE_0);
+ }
+ 
+ static int cci_xfer(struct i2c_adapter *adap, struct i2c_msg msgs[], int num)
 
----
-Loic Poulain (7):
-      i2c: qcom-cci: Factor out write command queue programming
-      i2c: qcom-cci: Handle and report queue overflow/underflow interrupts
-      i2c: qcom-cci: Detect capabilities from CCI_HW_VERSION at runtime
-      i2c: qcom-cci: Add burst write support
-      i2c: qcom-cci: Extend i2c read limits based on CCI revision
-      i2c: qcom-cci: Add burst read support
-      i2c: qcom-cci: Build command words with FIELD_PREP()
-
- drivers/i2c/busses/i2c-qcom-cci.c | 464 +++++++++++++++++++++++++++++---------
- 1 file changed, 355 insertions(+), 109 deletions(-)
----
-base-commit: d6dc536a4c8bb99dd822bc349a9e801be7ea81c9
-change-id: 20260929-cci-imp-8ba384309942
-
-Best regards,
 -- 
-Loic Poulain <loic.poulain@oss.qualcomm.com>
+2.34.1
 
