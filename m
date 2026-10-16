@@ -1,152 +1,221 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CA873B95E9;
-	Fri, 16 Oct 2026 19:37:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09A003CA4AB
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 19:38:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792179462; cv=none; b=nL7nyqGxcGs8b5/i3zFcMoCLy1QOfqO8oreg4wc8DFx74mSbjb1Mfpq4XXo5QxzunuQahsW9V6LNqbv4YHq/6nxONb0xPYgElEfIFoqvE2dKOGscEPRHxAyl18y2OxV7bf2vozDeT5DowhMUWyLH420fBeMGIPABWS/GjoCxOyY=
+	t=1792179513; cv=none; b=MnCvyJXt9QC5ZvbBSYojN5rnQ4E3t4ZWAesY8e1tyLu0BNMd/bI4JzIwF1rYPbmCVSA2FEZsfVH9cpuvUQXXQ8DHMX5EeOKSA0HPkBYFNE3lrS0v1VnMeciiOW7wsBcl8lFqsn6uHzyOBrNlhLrP+dx04tHCBW//9u3mwYyMmdc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792179462; c=relaxed/simple;
-	bh=RAFhKdwU/ZLZZ4wlCCnNdhreSddlf7qDekDinE6g4aA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=CifQcELTtTHjFvF7koNoR1lXum7XnToofip+4ORfrK8swEqKdyj0LzVmOJImBBbC9xQ5MRmBfDQHWN5zaimWREXuJROGv0Kw+B+GEoTmX3Qcd6rgF4jRZwL3zImd8GjRC7U4i/u3zdO+6hCC9lug1d4jwepZi8LZCnlZEGOipe8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LX267mri; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1792179513; c=relaxed/simple;
+	bh=369BcXlwouHKov14aSY209TKJH58jvqib+z/yvVhBgc=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=TJlnzxUEQfbEBjTHR0t/RlpBdfm5DO2cxyvtgk0OIaChQePzNRWfmmxdOJRX0MjHpy6gPPwO9YA78Xkd8qr8rNQMrot8bIjPCZ42O5vuFzAx7j52aNEgvN/cWx/MLOmidGWor0XZsSf7FAIj/qTokye4O2sjy+phsm30S3uo1qk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d2BVoisP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=R7BrVbjT; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LX267mri"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E0012C2BCF5;
-	Fri, 16 Oct 2026 19:37:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792179462;
-	bh=RAFhKdwU/ZLZZ4wlCCnNdhreSddlf7qDekDinE6g4aA=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=LX267mriyyLVVedgpNqnkUXj7lZS7YLLGVpCKGtC9ligGMgIBKfU+9dUCxXvE2tIf
-	 ryiPCnhavYcRwPs4ggrAml9aRfkUrFd7ISbeWzeo74RgYMv53rQflYy4544ObGa8iB
-	 +4h7gIDrpQo9E7wLAQLpQmtgCCmayMNAOtaM3UUYLO4GaqWbZ30fCqSTQywpH7vs3D
-	 luI8511448wWgpyjiEMeV398gx2jWkiFSbGwdTjSEW2CVGMQLjPTQ2rJV6vHlcvf1i
-	 FTiATz+d/MzwsqZvDpm4s2B0gI0Kog0ShIec1UdNIhqLge7WPdEFhiUM32XruL39JZ
-	 KCiVqzJzBkiYQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA739CCF2C4;
-	Fri, 16 Oct 2026 19:37:41 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Fri, 16 Oct 2026 21:37:39 +0200
-Subject: [PATCH] arm64: dts: qcom: sdm845-google: Configure qup_i2c2 pins
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d2BVoisP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="R7BrVbjT"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GE5aVC1613244
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 19:38:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=saxkIlCiRm98oCdv5a136rITpS+jtk+TC4p
+	NKPpq7zU=; b=d2BVoisPlOZmnH6iLwLwxW7VAC7W3ceH0VXWd4e69HaMaMRqp2I
+	mx5V5RNM0BPiaesoWwMd8/Uew4tqIe1UNKiVVu7VNLjNPw8PPHWtENow6ei7hSXU
+	VFOaZoJMQl0DfRsndwgZKr/Gp1mdU1vPPZws/taJ434nK/N683EPHIJGQ8ejQnj5
+	xigJNhQVaTDzTj3io9yLMvU8azSrDwba+occTC5CuvdiAsq4+EA4VCiKclLu2e65
+	U3tpFn1SKwHbfOcjnkdHmQ1aLn0lleOcimoN6CgUXaZIXx1kcseRwoJtPD61206C
+	e+SNhZUhBZ9az3hdB9QyCsrfkxbyyPmsgJQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbk3v1tev-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 19:38:27 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-30bcb065bfdso310281eec.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 12:38:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792179507; x=1792784307; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=saxkIlCiRm98oCdv5a136rITpS+jtk+TC4pNKPpq7zU=;
+        b=R7BrVbjTpNRJZFe5dFtVahY92NkoP1RM5Gqx8aglDw9mQXSAYXGkuwmf7aPFgnQD1C
+         WigmSWOBU5IJr1+2949BqUx3Ab8vIR8XfG3AaayAWnxAhGBP9ErR60z6OSn01v4zKUkC
+         yV0DfFo6wQ2AovBf8oBZlG81eDZZr0zTVygReaAaNNCqfBcLokbHIo+833BwNj1YHhcp
+         PvlINt+R3GuJAN+Lw343RIJOnTrZ69xmKh0KwUVFCKo8AfTduMw+wflafYn61R//v6/D
+         iQMNYf/+asJ71x3VH225rrE24Ln+0yYvYB4UxQ1RW1qtVmL1qFl3BvncrVfvySPG9GYd
+         g9pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792179507; x=1792784307;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=saxkIlCiRm98oCdv5a136rITpS+jtk+TC4pNKPpq7zU=;
+        b=YLkf5XDeGHIYBL+//1eRz4dJ77FwOO8Kz7Hj2ywzR3Sd3poPiX+ZiPeCZyNwsGFEul
+         2sAzcvdzyES7rM1+aFg+5CqDWwhRgj5olQ1QPlGPXds2W9tMn/XrHvThPCz5AfuNUN5v
+         ofL6cMze9WNXAuYZguPYEJJWKlnoKxjghhruSmI5aASvwEVo3S6dn8mMKTsHv6fkEyBE
+         YBp0foej+JNfDN8m2h9O1AsYKtCeq3xjHKnocnYJgPiqqF6fBKJX2ISItC87hjJqsGtH
+         irR9xR1ho2LdqbbgOuosP5zZeP1iq+MfK+6L4/Kv34FvMTof1CUcJtXa96JfbBU7vvcj
+         mR7g==
+X-Forwarded-Encrypted: i=1; AKwUvBxYIIH3+34qHe8WWeXB5Km/i9/1HFTYh0FxP0v10XP0L7y9wUvylrkSAyV8DCBa0n/p8etBTWbg/knUX/Mg@vger.kernel.org
+X-Gm-Message-State: AFq9FYLyhL2Uv9M884IDwbx+HoWrsvZytxf9pa748mzfuhhvU296orHv
+	U9/PakJ/b0aFkugMcY0BKygWXzBUQaMLOz/Utbaee8SFBYzq9SPFoO8NTE2FzldsXZuoIn3MPhI
+	f2YlGbZyiKGbw4cp2oS4eE+4I44WU2ugB5qtibwa4LogyfyfNUT0z5mRIiyeKNAGpeNqL
+X-Gm-Gg: AYBFou1w4XJOTBEO/wGz9cpC+55jQD2hAhLVfnqbz1niyH6kAPo94sqJpyQf+YcLmfP
+	qtIpPH3XERLcOsS9mX5ncsGLPb3UNLbZtfTyt48Yk2aVUbMS8tp+H3Kwk1bnOrfhjn8+X+4oNFP
+	r3PPJdwwoiG52O3UNOF853Qmt3HZby9qL3+0I5WJThmbD9Nu5SvPqJOP3GHepgpbbWpYbWEdYiA
+	64ePxxHYuIZdwd7UGYgajnM+WVnF7kDWgxCszW3qJD/gyCiqPA37eFnmLuVRX9c4aE2jweflu4D
+	i52OnErqfxnpOaZgtj9szsaVnpStzo/ImtYLHnXalr3whKf+oi+inI/0BhGuvEgNjsCJJyVei76
+	ljvCeAx4aO+aIEqTui47uSUkyQdNAJBkydYqw4972M7tLWH678RnsPG0ynK/YJgM=
+X-Received: by 2002:a05:693c:6311:b0:35c:9631:f389 with SMTP id 5a478bee46e88-361a136acadmr995299eec.17.1792179507197;
+        Fri, 16 Oct 2026 12:38:27 -0700 (PDT)
+X-Received: by 2002:a05:693c:6311:b0:35c:9631:f389 with SMTP id 5a478bee46e88-361a136acadmr995136eec.17.1792179504724;
+        Fri, 16 Oct 2026 12:38:24 -0700 (PDT)
+Received: from hu-scheluve-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3607ee0d391sm8960205eec.4.2026.10.16.12.38.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 12:38:24 -0700 (PDT)
+From: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
+To: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
+        edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+        mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com
+Cc: netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, j.raczynski@samsung.com,
+        k.domagalski@samsung.com, k.tegowski@samsung.com,
+        cs0617.lee@samsung.com, abhishek.chauhan@oss.qualcomm.com,
+        lorenzo.bianconi@oss.qualcomm.com, sarosh.hasan@oss.qualcomm.com,
+        hongmei.xu@oss.qualcomm.com,
+        Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
+Subject: [PATCH net-next] net/stmmac/dwxgmac: Extend MTL/DMA support to 16 queues
+Date: Fri, 16 Oct 2026 12:38:23 -0700
+Message-Id: <20261016193823.2711773-1-sagar.cheluvegowda@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-pixel3-i2c2-fix-v1-1-6a527d52c865@ixit.cz>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBCF4auEWTuQmUDQXqV0UeOoIyUNSVsE8
- e7GuvwevH+DIlmlwM1skOWnRd+xghoDYX7GSVCHamDLnix5TLrKy6FyYBx1RWc7ZqG2Jd9DfaU
- sdf4X74/L5dsvEj5nBvb9ABWz7ENzAAAA
-X-Change-ID: 20261016-pixel3-i2c2-fix-30922e18816b
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Joel Selvaraj <foss@joelselvaraj.com>, 
- Vinod Koul <vkoul@kernel.org>, Amit Pundir <amit.pundir@linaro.org>
-Cc: Sumit Semwal <sumit.semwal@linaro.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- phone-devel@vger.kernel.org, Marco Mattiolo <marco.mattiolo@hotmail.it>, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1863; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=8F2FDAtyMGjBlCfXnVch0dchQePJ+YFwNeu8d37XgO0=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBq0n0Ejd6G2KZGoA5pQ/H8YhwgaKY6lt5YR78vk
- 35DF/EHVAqJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCatJ9BAAKCRBgAj/E00kg
- cn8OEACZ5vPBQ90lPLqneAwW0b9lvU/3btUX4VBUkbHDBDHSCoJMZ4yMiTPq9/6EiPT17yg95je
- VrEkfFZWpmC7s8YUd5uTEgVzFivHDhHGlm/gxhIFKrX1dlEUTsPRGn13m4kztbv6FDrVW5yFge/
- 9B6iH6WD9+MKCeXZCaAs0acqp5pdyizySj14BA2KGtZyCfdEXdqOAXYDT8RqAbefTBuTc6nXKQZ
- iU2fpPDBV4G3Rq9QiKS8I3LrNku155wRgWwhBwS5w6neAgm2JqF4UN7egPUA9VrOdkt7zMKnmS1
- 8zggGXujDwrVf0GzYNyciMO0Nr62aJ4zZbCAg4pEQpwNY0AZUm7bkoKraLLg5rOF/XVtq4CHDvv
- 5F8SCL8FobVN5yobyE4xJS2CjGMI0QPswjc1AhyyRJ4cMIKP//hh4EmqjLHkXDjHTuhJLwqAS95
- 9HjlwHfk7LHoQUgpDeAVHlQ/XCAn9WWkFMZ6l8d32mJcsS+skvqCf6OXh5b8VwfTB+Bd3TGcqMX
- wbk7kqw365OJ0dGvaMJdOz7IOmqQ1waexhAOpT2BcOPw3dHHWq75vinpjEDmi/+l8gGE81kGR8Q
- VQs+Cu/+hShwwgxUtXv3Z7o12tQIX9TaQ9/x6zHrwVMTeTWrNMRgmhqyKc8u8v+LquHaC0Rc4F2
- 8h+cKqpenjnJkrg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: jwL-6hfC2k7vuPVoC08LDk6lu9ll2aMH
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA3OCBTYWx0ZWRfXw+bsKLXfR4zi
+ cEEAfumDjRHPmME15ch+ahGDuF6+QCBk+6HlDGY9L0HjgdRIrcxxdqJdIhqZF8qvQLK1+JZPoP6
+ OCc+60F859B9s5XyIz1AeJTH157HVio=
+X-Authority-Analysis: v=2.4 cv=BZdNQbt2 c=1 sm=1 tr=0 ts=6ad27d33 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
+ a=hD80L64hAAAA:8 a=EUspDBNiAAAA:8 a=x3-vh77kN9uJXWvyjNsA:9
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA3OCBTYWx0ZWRfX7J56u4xaXx/O
+ YOtD7Ckx26ZPrII069jueQMMsWj3kADgiitsc0vo9F86jO+fpbrrZeqaYuAS4lwhyA0xFYOq5/o
+ 3TjjjXJgWbo2M7PZ/qAstS6xPKMUYlW9Zj8V0kL1ooDqpqu1mBWL81daHDbYVHr5362GIQ+40hT
+ Oxa5iGGRAl2XzDXOppbXxd64CuEUAvIpKNxs6+qXhRVH5EstqRxblWPRMyjbydfAf+4zL+G8dRY
+ IdMlDgTUT4GPJk/VKldd34vrdMgAhNpE6k61OrPHw1emELoht1yhkVj+F+DiybAOHa3vH/TyY0o
+ dlpNO/lhgkvUYOsntG2pARhDO//bJOmVBYmD/OSTzqh5m4wrb4H5NbgaUM1xndL/ku8HfMx/ELd
+ 6BWmqAxkd8E5rHp4ZpxF5ro162CJnWryQ0kwKZ4BEnlaNXnt6LR2LWD7gc+XIIOJMydpfNNZ9Bx
+ T5E6IIqw6NxYFicuPAg==
+X-Proofpoint-ORIG-GUID: jwL-6hfC2k7vuPVoC08LDk6lu9ll2aMH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_02,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 impostorscore=0 priorityscore=1501 phishscore=0
+ malwarescore=0 adultscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160078
 
-From: Marco Mattiolo <marco.mattiolo@hotmail.it>
+From: Jakub Raczynski <j.raczynski@samsung.com>
 
-Set drive strength and disable the pull on the touchscreen i2c pins by
-amending the qup_i2c2_default state from sdm845.dtsi, as the other QUP
-users on this board do, and drop the unused touchscreen_i2c_pins state
-that duplicated the pins with the gpio function.
+New datasheets for XGMAC (3.20a and 3.40a, depending on product)
+support up to 16 MTL/DMA queues. Before we increase max amount
+through macro, prepare dwxgmac functions to handle that.
 
-Fixes: a678adbf2d22 ("arm64: dts: qcom: Add support for Pixel 3 and Pixel 3 XL")
-Suggested-by: David Heidelberg <david@ixit.cz>
-Signed-off-by: Marco Mattiolo <marco.mattiolo@hotmail.it>
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Queue numbers above 15 are not valid for this hardware. Callers are
+expected to bound them, so reaching the default case is a programming
+error rather than a runtime condition. Use WARN_ON() for it instead
+of a netdev_err() message: the callback has no net_device of its own,
+and a message-only failure in a void callback is easy to miss, while a
+warning with a backtrace points straight at the offending caller.
+
+Co-developed-by: Chang-Sub Lee <cs0617.lee@samsung.com>
+Signed-off-by: Chang-Sub Lee <cs0617.lee@samsung.com>
+Signed-off-by: Jakub Raczynski <j.raczynski@samsung.com>
+Co-developed-by: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
+Signed-off-by: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+Patch 2/3 of Jakub's v2 series:
+https://lore.kernel.org/netdev/20260601162537.553512-3-j.raczynski@samsung.com/
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-index f1379857e2742..b019b57502a1a 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-@@ -459,16 +459,21 @@ &pmi8998_charger {
- &qupv3_id_0 {
- 	status = "okay";
- };
- 
- &qupv3_id_1 {
- 	status = "okay";
- };
- 
-+&qup_i2c2_default {
-+	drive-strength = <2>;
-+	bias-disable;
-+};
-+
- &qup_uart9_rx {
- 	drive-strength = <2>;
- 	bias-pull-up;
- };
- 
- &qup_uart9_tx {
- 	drive-strength = <2>;
- 	bias-disable;
-@@ -510,23 +515,16 @@ touchscreen_reset: ts-reset-state {
- 	};
- 
- 	touchscreen_pins: ts-pins-gpio-state {
- 		pins = "gpio125";
- 		function = "gpio";
- 		drive-strength = <2>;
- 		bias-disable;
- 	};
--
--	touchscreen_i2c_pins: qup-i2c2-gpio-state {
--		pins = "gpio27", "gpio28";
--		function = "gpio";
--		drive-strength = <2>;
--		bias-disable;
--	};
- };
- 
- &uart6 {
- 	pinctrl-0 = <&qup_uart6_4pin>;
- 
- 	status = "okay";
- 
- 	bluetooth {
+Jakub has confirmed he will not be continuing this series, so we are
+posting this patch on its own. We need it for Qualcomm Nord, a
+25GMAC-based SoC that implements 12 MTL/DMA queues. Jakub's authorship
+and sign-offs are kept.
 
----
-base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-change-id: 20261016-pixel3-i2c2-fix-30922e18816b
+Changes vs v2 2/3:
+- Replace the netdev_err() + return in the default case with
+  WARN_ON() + return, following the review feedback on 1/3 against
+  message-only failures in void callbacks.
 
-Best regards,
---  
-David Heidelberg <david@ixit.cz>
+Tested on Qualcomm Nord with 12 queues: the MAP0..MAP2 registers were
+checked to hold the expected RX queue to DMA channel mapping. The MAP3
+register (queues 12-15) is carried over unchanged from v2 and is not
+exercised on that hardware.
 
+This is needed for XGMAC-based hardware with more than 8 MTL/DMA
+queues (Qualcomm Nord has 12).
+
+ .../net/ethernet/stmicro/stmmac/dwxgmac2.h    |  2 ++
+ .../ethernet/stmicro/stmmac/dwxgmac2_core.c   | 21 +++++++++++++++++--
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
+index f8ab347f7b5b..6d4affbd34a1 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
++++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h
+@@ -257,6 +257,8 @@
+ #define XGMAC_MTL_INT_STATUS		0x00001020
+ #define XGMAC_MTL_RXQ_DMA_MAP0		0x00001030
+ #define XGMAC_MTL_RXQ_DMA_MAP1		0x00001034
++#define XGMAC_MTL_RXQ_DMA_MAP2		0x00001038
++#define XGMAC_MTL_RXQ_DMA_MAP3		0x0000103c
+ #define XGMAC_QxMDMACH(x)		GENMASK((x) * 8 + 7, (x) * 8)
+ #define XGMAC_QxMDMACH_SHIFT(x)		((x) * 8)
+ #define XGMAC_QDDMACH			BIT(7)
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
+index 1a88cbaed70c..563d29d72543 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
+@@ -257,9 +257,26 @@ static void dwxgmac2_map_mtl_to_dma(struct mac_device_info *hw, u32 queue,
+ 	void __iomem *ioaddr = hw->pcsr;
+ 	u32 value, reg;
+ 
+-	reg = (queue < 4) ? XGMAC_MTL_RXQ_DMA_MAP0 : XGMAC_MTL_RXQ_DMA_MAP1;
+-	if (queue >= 4)
++	switch (queue) {
++	case 0 ... 3:
++		reg = XGMAC_MTL_RXQ_DMA_MAP0;
++		break;
++	case 4 ... 7:
++		reg = XGMAC_MTL_RXQ_DMA_MAP1;
+ 		queue -= 4;
++		break;
++	case 8 ... 11:
++		reg = XGMAC_MTL_RXQ_DMA_MAP2;
++		queue -= 8;
++		break;
++	case 12 ... 15:
++		reg = XGMAC_MTL_RXQ_DMA_MAP3;
++		queue -= 12;
++		break;
++	default:
++		WARN_ON(1);
++		return;
++	}
+ 
+ 	value = readl(ioaddr + reg);
+ 	value &= ~XGMAC_QxMDMACH(queue);
+-- 
+2.34.1
 
