@@ -1,84 +1,84 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A80944AF66B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 14:55:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AEC7497B71
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 14:55:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792162534; cv=none; b=Ben+33T1hzey064CwYj5MkJZsv1CbQi3lIYLgAQ04/gDBuNeIsARuVXlfuBS/g/3n92EUZIlDmZJeBLvJ03RukxsnVllldByhCByMfI4eqErW0Qa0ieaDVHAJy6sTyZPH1vE1H71jtatY/sIS1JyEHgtQqEDdmqQrH2/DKDCe74=
+	t=1792162543; cv=none; b=lB5FNV1C+vKp8RHMkyz8/TPHKtly+o1liA4ctDz7v/tJVOdSjBl7/T9eF2Bv4WvB5V/KRn1f8CxR4sL9M6Tq43trbz7rGtIjdcbfd558YCcBdkkZJf5lV/j3q0Yl1LGvUq3yIr5wnflOFHmNoilGPG0Wo8k/CW0qTL+p1hul11g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792162534; c=relaxed/simple;
-	bh=Y3d45SEYh6OWjaKY76Wdm/h0py2ZzLBTvjB7clZ6LC0=;
+	s=arc-20240116; t=1792162543; c=relaxed/simple;
+	bh=XK7vv/04wyL0TWzlH7GP/CnUNFZcElOqGx+KF54CsWs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GYpeHMeYP5+VUK0EZscJGajmaIonGtHoQU7BFoVemPnNoi96jnhzj/3ZwvS1s8ccWWatAUqUus1SF0T9BHCJJXvS2iCCAh7y3y9yKcVvc/zoDysypVd0jei6BN6738xfdIH5p2z1ilAg/OSifCUsLrSAsM256zmzCVBhAL6Vtlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=azeUESbq; arc=none smtp.client-ip=209.85.128.50
+	 MIME-Version; b=UTxE1G78VeRcyheZw9592sZ7bcAEcwlR8qA1BUb+z0fSFIH6MMcFWGmYIajS9dl+Md9Y67uollb2ozLeET6uYWhNaBvuLUHjIcbhXCXexQmYlOqGH2imTLIhpvXPfi3o1VIS9bI8ziyOPb+WXpY8jDg1xaRONq8rRj2tg9sYeu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Wu1myAz6; arc=none smtp.client-ip=209.85.128.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="azeUESbq"
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a0e1b0681bso250185e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:55:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Wu1myAz6"
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4980fe6b3beso7056975e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:55:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792162531; x=1792767331; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792162540; x=1792767340; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Y3d45SEYh6OWjaKY76Wdm/h0py2ZzLBTvjB7clZ6LC0=;
-        b=azeUESbqOBkDCpB8Ky0uytp01D9QkVAe6Ab4e/Ah1T+BBUuzuQ8UQkJFiztpQcR6b2
-         U4UQ8giy2ElHxqgO5vQ9/GUyQY34xHj/TgsIzPMMGnH5yoZi9zCqLYqHQFdFgGRQhhUn
-         bKurq1chu3Bo9AwGSxRGgmalbZT47XBG1k5LkfVPuK+mtv2vAcyamAb/kaYDY3pzkdZ7
-         en+w6JNs9SL1T4f7cgoKprq23cyP9Tfn+AqOp9ShkeVWaJuxQaxmBf1yO8uO7yZTpvGZ
-         Rd+7bvdiWdK/iURLnTYkhm9mrzYWp/DwutewQK6ldVGpif/5IhSgYDliFekEcm0knlVa
-         356g==
+        bh=XK7vv/04wyL0TWzlH7GP/CnUNFZcElOqGx+KF54CsWs=;
+        b=Wu1myAz6QJi4oUMo44ab12nQprIAITpLsiWvKBDPgzLsgsLlwYPyvWZE7SW0+qEGe/
+         KNwtNSSWJwXDc/vqVQB9PL+gmzTC/e0imDS6McI4/TR2MdgpyO2izJP5ehxqkULfSyd8
+         NodQ8U9oumLNTcf/a5QjPWqOQb/Oq5OHvwtHOhrCto5L6Qr17xdMdsT85Z9Ktj40CrRB
+         Mz6qeJ0nLMnXtf/5sSJyZyjqFZ56C3/HUc9OMGnDXFXKDc0MJu+YdPy3Cp86t6xX+x/U
+         iWCHYottR73mSvzKSDLaKrUf/p8+YlmERmQbDPi6xBqEqzlAqlHJghfaRztB1q3U2wXt
+         D5og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792162531; x=1792767331;
+        d=1e100.net; s=20260707; t=1792162540; x=1792767340;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Y3d45SEYh6OWjaKY76Wdm/h0py2ZzLBTvjB7clZ6LC0=;
-        b=PyG2dFp97TIh3zdH7M7ZaWjo9cwX1Qjz30WieERaRIKLNv19jIA0a7la3nNpSLl7KT
-         aM2/UVq9RRBct76V0cklkeJS6jBuffm624JJYp3lMjLLhEKfStZr6pu2z+YVKMXn4gAd
-         XIga2vh78LMAbqHovxXZqEKX6AU01oJdTFepiElpK5xTGAQOrFcQdYNuLS5/CXHdMg28
-         csdLj0PHUSokwij8WvljkjgP0fx/P7yJC6jG+z5qhhje3xq/+GtmAVF2arbnPXBGZm4C
-         8zn+emALQSQ1G0TGvycECuZhQfrH0gWqKOVaLmU+ruIPNLLiKtY2UBT7p4BrJF5DhgT1
-         OoEg==
-X-Forwarded-Encrypted: i=1; AKwUvBx2N3M8dIAEse/o/SpAwgbfB1n9cdqnEhF3f966m8yZQxFK31BRRDfpIK9mDgRxb9q+s+WiI5PMPxmlCYhp@vger.kernel.org
-X-Gm-Message-State: AFq9FYKKRalWyzBi9GvmMj1XenFptL1vg26FhzVLYwdsQkNOdFmJNN1D
-	Glb0NNS33UsUCozBe/gCoJ1ejfO32uGpmZp0n6AMjYhTJsMK3Jl1df7y
-X-Gm-Gg: AYBFou0ehTxDps6NZeZkhHRevRwhidLBuPkq4E9o646NbxLQxK9VZMzBVEptCzyWSfY
-	KMCfYgNhjjtmEsVYhajDFXnIrBo+Uv0bBElaqOGjcAwXuTFMC+ynIQVhzUEhRWJ0cHqRgXXXeOM
-	NtE4m8oxufRp+QrSwD481PQPLZbQ0WZP1GFwoJ8vnV8APrE7LQQj+8QSi3doHLYBhIYTPeHtfNO
-	tk+UkaHO4hZMImY4YMq+RPP0UAhGGKUY96vRrGg4qBbzm7SXARC1Y7MzoCUGD5VwGHKZk4tiGqI
-	Mnk8Atyh8vcb8PTSbR1u62ZJNWP1LIw1nHqS4umL1N9+P52AWEFIB6AXFJFydG9dlpC5C2XPw0L
-	vcJukin6YJZUcG5jLxy6crnyRyoMhJfnsjs2gfMf2RmFa1quB3SIFZBDmgCKodyv4ezKmdekX2A
-	d07qWlX6W2AKpGhcGfC4FPzgatuefvOZUPGb4VGn2WspNThu3j/o3/wHZvSlpWgiUVnZc7ovNIj
-	VfJlrRzmS+FMi7fagje8WivO9odoIeyUfARkptuW2qj6N6Jo7KT7h9mpXHaZ/JWqXJTzn6OcRp4
-	Rv2wy7w=
-X-Received: by 2002:a05:600c:8519:b0:4a1:722a:d2a3 with SMTP id 5b1f17b1804b1-4a1d760d830mr1162945e9.23.1792162530858;
-        Fri, 16 Oct 2026 07:55:30 -0700 (PDT)
+        bh=XK7vv/04wyL0TWzlH7GP/CnUNFZcElOqGx+KF54CsWs=;
+        b=lj11+DqJZh21M6qSf4QW6hu07A1b+jqBabjXvVhpdcl+EuEvONIaE55OZ00dHekaIE
+         1cAkfBG11Lmy+mCeKiCgtI0cH4YCuT6egD5MpfMC4KoGsLVhhG1OdTp0Vj1OaBjlli7O
+         Ro/wob3toBtCsKLHmRPZYRSkWSxX/CUYgrzWtoPtb0XdWoZezXg1f+hNaxH7+IP86WTT
+         GRo2T2ODHPkZY/uG3b7+kIeBZu02cgKu1H9d92Uvpn4XBZH953kY9xgbG5VVwec+Ld9G
+         NlZo7vuYtdc5wQmSt7ZWSZ4A0qRCN741jcVmy+Gv8S8qrSTxehqL0xesW3rB9C/Avu5a
+         zqyg==
+X-Forwarded-Encrypted: i=1; AKwUvBwYOTbT6okR92+mdR+n4Wt0B7QB4VQYj8Sht4QULzxr5FA9vKMZHPL82Rq7levUk6EUwEOJDcWv/STEIwwQ@vger.kernel.org
+X-Gm-Message-State: AFq9FYK6KXRmUysOlAgz8YMl5yn8upUdBI407OqBLt+7BoLvLmBQ4P3N
+	Go+ICOYRn6VqyzJrhGktwvjZfuO26xU8t3oyIjCG7uyDgqfqlZT5BdNT
+X-Gm-Gg: AYBFou2SHWfr8b6GB07B5v137kOBfhA4ywsZh63CKtl9CT/PDIY6I3e8vhZWw9ILwuj
+	OHnlZWTf9bwo6Ch8Hz4bpPtIsDJ1JGTVPiFr8hCQQcKyjyQ5tHrtFMezTO6BHrxeuh9P0QYtC3a
+	8cKojlQ55trO4J3NKDmihrRkzrhnmgaujy4Mso4D7hau//YqcPlOQxZq3rXzN+LhYy4kScnCQ2R
+	P3klI9A7SqnfzW4f3lWjpapfxKVOb1IFYR2/mHgxbwwgSNzTEMLfhVBUhlGRGVzqDQc5Zz/KVfj
+	KrGsqRjmd5kT03In2Ar0jj64PluO9ISFSjpctXwqkTACNZPiUf0MH7DCCc+ukSt7C5rXPdijo6f
+	h3fMMonp7o7/hgNB+6w/R3IIJmenRRTXWk6eKuCD2K7CJ7Tsq1K0hUqCML5TC4WMLPh1f8ohB8D
+	PK6bZEHw+jkXA280YdqKScMdLGoVLcX5A0iZR37kHxhr+EitSzQjArZT48RCS4e4uP8UCGTKtq6
+	UvfXRdt8E5PItTYZBBfMs9LfJ0ic7G5maqThKT8ahKrXcotrfZvUqNUnF/09tRcKfvVjx3a
+X-Received: by 2002:a05:600c:468e:b0:49f:ffa2:1c72 with SMTP id 5b1f17b1804b1-4a1d7605110mr875865e9.11.1792162540534;
+        Fri, 16 Oct 2026 07:55:40 -0700 (PDT)
 Received: from SP11X1e.cable.virginm.net (cpc99340-croy26-2-0-cust244.19-2.cable.virginm.net. [80.193.62.245])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd471b06sm6324206f8f.5.2026.10.16.07.55.29
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1c8ad6252sm90481395e9.5.2026.10.16.07.55.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 07:55:30 -0700 (PDT)
+        Fri, 16 Oct 2026 07:55:40 -0700 (PDT)
 From: George Neacsu <geocausa@gmail.com>
-To: Sergey Lebedev <lsa.uz@pm.me>
+To: Sergey Lebedev <lsa.uz@pm.me>,
+	Andre Gilerson <andre.gilerson@gmail.com>
 Cc: Sakari Ailus <sakari.ailus@linux.intel.com>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	German Pablo Lindo <germanpapulindez@gmail.com>,
 	Bryan O'Donoghue <bod@kernel.org>,
+	German Pablo Lindo <germanpapulindez@gmail.com>,
 	linux-media@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] media: ov13858: device tree support for the Surface Pro 11 (Snapdragon)
-Date: Fri, 16 Oct 2026 15:55:29 +0100
-Message-ID: <20261016145529.36811-1-geocausa@gmail.com>
+Subject: Re: [PATCH RFC 0/2] media: imx681: C-PHY for the Surface Pro 11 (Snapdragon)
+Date: Fri, 16 Oct 2026 15:55:38 +0100
+Message-ID: <20261016145538.37162-1-geocausa@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261016070018.11932-1-lsa.uz@pm.me>
-References: <20261015-ov13858-x1e-v1-0-acdd918f4fb6@gmail.com> <20261016070018.11932-1-lsa.uz@pm.me>
+In-Reply-To: <20261016065952.11638-1-lsa.uz@pm.me>
+References: <20261015-imx681-x1e-v1-0-fd22f5f3b0c5@gmail.com> <20261016065952.11638-1-lsa.uz@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,15 +89,18 @@ Content-Transfer-Encoding: 8bit
 
 Hi Sergey,
 
-On 16/10/2026 08:01, Sergey Lebedev wrote:
-> Through the media device
-> one test fails, Active VIDIOC_SUBDEV_S_FMT, because
-> ov13858_update_pad_format() never sets the colorspace. That is in media
-> next's driver already, not in these patches.
+Thank you for testing 2/2 on the Intel model, and for the register
+readbacks.
 
-Thank you for testing. That failure is fixed by "media: i2c: ov13858:
-Set the colorspace in the pad format", which you have since tested
-separately.
+On 16/10/2026 08:00, Sergey Lebedev wrote:
+> As for how to take them, I would keep v8 as it is, since it has Andre's
+> Ack and Krzysztof's review, and have yours follow once it is merged.
+
+Agreed. I will resend these two on top of v8 once it is merged.
+
+On CSI_LANE_MODE: since it reads 0x01 on your machine without the
+write, I will check whether C-PHY on the Snapdragon model streams
+without it as well, and drop the write from 2/2 if it does.
 
 Thanks,
 George
