@@ -1,39 +1,87 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28C214A482A;
-	Fri, 16 Oct 2026 13:34:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE9DA4DD3C0
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:35:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792157659; cv=none; b=a7lJdBgmNj67opHAm5khsfN7daWtGac/z+Uzug9Oiw9fvgzbym297zpD3qbqbDyt72hMNUubvVqBDIITeP6018HuguZhSSurReePjXz9bVaDLYKsO504Dp1+NX1Sz1Wh0svicL/NpyaxlgxlZW0j+3n9TjT6KYSDOmhZfIWHMXs=
+	t=1792157706; cv=none; b=CPZ+PChtmCMtxC0nSziMQxyckzFscnYgFbOd4DisHSAd0J3+FgNiQ3tgE68oRhZK/Vv4sDMi+j2epoPs6/p+U1SgN1pRiBsknYzOdcPxkwr53stahwvc+Ufxk1T0qO3i7M8Kq1HOHTBDp3KHXhVNQTEzfEc8bJGPHfKabYWqaFI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792157659; c=relaxed/simple;
-	bh=v0S7OMtfIQMRk7b2oIxSR2ytHrZYdcAZ++SvR3brDG8=;
+	s=arc-20240116; t=1792157706; c=relaxed/simple;
+	bh=dRZedsXewJ7k0dyhzhYnHamgKjexRp9Kdmjv0oGUStA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aOrsQWjZO3zq2QoJtZ2giJmtofV1Eu8IssJkTpZewWzmxIP6q0dNgsu7TwIyaTSKQO6PACYRtFF2tmi6DluMTCj9nLa5Mduw1ZRe8T8IT4eGQ+FbO4W/I4EgmbnUsSkyBKiZY9xEwpXPOUUftKig3ZLD/0urigXbx8uAzktDynE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=HaRVlNAc; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	 In-Reply-To:Content-Type; b=dcoIZDnMA3EZSDxaXZHA8chmRL0+SPuMMsLNgjri4pazz2L7oOBnKFRDZSbeSZbHQv1NQg7kDplqDKYQuXTlzaf3MA7ebE72/nfPsH02dcxyvXv1DZ4U+XZV8f1boDR8iGP71RC/fnmaA9Nd8UEZwHpS7/UWQ6eKQ7uwwQn4h4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nKIsq1Yt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KFb5WlY3; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="HaRVlNAc"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 7611F53409C5;
-	Fri, 16 Oct 2026 15:34:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1792157655;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=qz0uIt0JoDi/U/kIDMlrnV9+4lj5sArbrddXLpcGclM=;
-	b=HaRVlNAcbOPiCVn0q6SO9KEdqt6DKRZzafkIeiQs6u3wkCqYjGdIn0P53JhMDAPZtq2amR
-	I9P+BJYvfEDNmv8DTdA4slFPkBiSTktkS5kLWLRcebsHS9Lp1hN7kfHGQd8jtaA6y18pUN
-	IZ45rAhjHcCe+gsPosBLlYn7emykwRU=
-Message-ID: <da8b6a26-334d-461d-b0a6-8c38161e5e12@ixit.cz>
-Date: Fri, 16 Oct 2026 15:34:15 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nKIsq1Yt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KFb5WlY3"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAAGWI1983368
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:35:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	njwMX125nYX7Y7esAb3jpSpeXBBuKrFsO53FPtwpfrk=; b=nKIsq1Ytw8tE6UbQ
+	rxgaLGfpqwjy8DGVazmvj4GzP7oq4Lz7JoePkCzfJ16uoPx5TSGQ/b2gPuXOU69O
+	M5CQRRknKY479QI3FXU6TOAVecZkAtsJnuqoPdzX4DYc2JerXeHheLe18/P4iM3A
+	fwCJATRY0sC9QBLNbHLBvSdEX6K9qGUtGnKfLQIEu9u6z9Atl0USZiwhHox4xzhy
+	Io2T2cDn8OdCKMjdvbgT80iw570HRmI1NHXLu/5HKTxRKCiUIDAqyJlTJ2jaIzEa
+	htUOlkbWbeexhENDXlGSFsl8UsHCMSrnxH9ohSc/kKrZ16dEKlHMp6yaZV5r2eBr
+	HmGhDg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb8a8au9t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:35:01 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-53389750985so13536421cf.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:35:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792157701; x=1792762501; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=njwMX125nYX7Y7esAb3jpSpeXBBuKrFsO53FPtwpfrk=;
+        b=KFb5WlY3UjzpDXOgsWFmoNZfiXHN/fz9/C92jS27oqt4v2PF32kIUIJMx0V7D6mROd
+         WmqT9rsXOcGiHe1CAIKMx2cVBbESq9SWXIfbS7MH2+TS9pwsV0n9kHjkXKEnlHDweWJ5
+         mSY113bpHB7oulB3mcA/yxyH5rA61SVpd+ujlyiZTECf9geSfiTZghllB7BrMN2wjXl0
+         hG7KiYijdVUaP+R1zcxSe7ksU7EWoAWCoSjv5yxTRF2mIc74Nbl4QNL7NouOsXKhU22k
+         SzdSHMXQVRne3CuULk/iETGIaf00ETc4SsaNSM3e+7nZFWqRmkvEQE/jRRTGzp+NyVPr
+         iwvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792157701; x=1792762501;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=njwMX125nYX7Y7esAb3jpSpeXBBuKrFsO53FPtwpfrk=;
+        b=eSZh+zIndQYChIVt8hRK/XWz4kHqCI+H+lBcq9rCepg0gs+37YIN0pmN975G5oSkm4
+         mLeq1cdJWj47X4bPY+aUDtFVaP7367QTHdOOWli7dtRSZj//+70NuMHqmiLKqHuLpsIK
+         ePGBqoRE1gtxKQl1qcn76ZnSrW2D42B86JAy028ekUe81EnsPvZ2+Y2AchlHKu2hef3g
+         A0ERGOX4jY3Ot2/3f0s4nK0spu2VNfpBbHVFisV8y1VKm1bzpQN+lQE4x0h0VTVhnyM+
+         2Hq5R5+tw7yKhhjQ82lr8dj2hcdinlwsFXT1jA3CeCUeNkLh+P00Lr+ly9SD/CyJbN6m
+         QO4g==
+X-Forwarded-Encrypted: i=1; AKwUvBzoVmcCfRTsLLks3AlFU6Gf076mzVeBI3Q7NPGlyjVOOG0kMxA9vsp+839XDE9/5rWqiHFEn6ui7VlU6V0S@vger.kernel.org
+X-Gm-Message-State: AFq9FYIQclBwKzH0a9YEGxUMvlEoQNK3szrEqFQB7Z0F5j9VXkauCAMZ
+	E6bHU2Awfe3+1JLVYSUsXaNx7Y+u6S9u1QrJ94BoTiE7hzMktyR4ODTDyEwKiofbQTU918impCZ
+	K2CdfONIsQ+k2ltIhNda/ywZ1cEgEQLO39I8gk6A+88GJKMm3ov/LBUjEFP7KqarJdPZN
+X-Gm-Gg: AYBFou0dw5lK4laOEkYE9wuKY+slmlCdl7GxQ3fPu1PVv+/TuP2Z5HX9LkWiqp6pzpj
+	QUBk4mX8ySqRhPW7pPLiys+Qx/nuNGwII7p9WbeRzLEJzNBSJ12NN9nPtd7cAymrB0rRUr27uDO
+	RB/VlgByKVEEWmziV8SvjSGA2Vd8opu6BzzrnS/wRqH69vUcfdc5ryYWpaVrOWOEvkDAXbrK4Ft
+	NFaSFctbf2pSBYHe+6jeOFfWFvKYTXQ6SSZfv9KlqsWYUILfafhk27ZNiHbCrgCUlgSyUcDM7hE
+	AucteUrQTak/YW3LXxa+2DyIjO9NR7wsWgxPwBOuDU5k0vfPh+/Hxk+l0/iJ+qiyZGQbgLU4dPr
+	MYQd12k2WIvxHrgDoB/CV3g==
+X-Received: by 2002:a05:622a:1791:b0:535:162c:2e81 with SMTP id d75a77b69052e-535a014c6c7mr430286071cf.5.1792157700707;
+        Fri, 16 Oct 2026 06:35:00 -0700 (PDT)
+X-Received: by 2002:a05:622a:1791:b0:535:162c:2e81 with SMTP id d75a77b69052e-535a014c6c7mr430285181cf.5.1792157700035;
+        Fri, 16 Oct 2026 06:35:00 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4091eb14a7sm73711666b.76.2026.10.16.06.34.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 16 Oct 2026 06:34:59 -0700 (PDT)
+Message-ID: <0e5b7d2e-e141-4ce4-a873-b65bd9ef3c4a@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 15:34:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,109 +89,106 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] media: venus: vdec: signal EOS with a real buffer
-To: bod@kernel.org
-Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260928-venus-vdec-eos-v1-0-6e9eb3ce9849@ixit.cz>
- <20260928-venus-vdec-eos-v1-1-6e9eb3ce9849@ixit.cz>
- <179153733762.2596899.11570084120645960007.b4-reply@b4>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <179153733762.2596899.11570084120645960007.b4-reply@b4>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH 1/2] power: supply: qcom_battmgr: fix the battery current
+ sign on Kaanapali
+To: Joonhoe Kim <26rote@gmail.com>, sre@kernel.org,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+Cc: kamal.wadhwa@oss.qualcomm.com, anjelique.melendez@oss.qualcomm.com,
+        dhruvin.rajpura@oss.qualcomm.com, andersson@kernel.org,
+        dmitry.baryshkov@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261016124806.1789-1-26rote@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261016124806.1789-1-26rote@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA1NCBTYWx0ZWRfX317lFg51Yuz/
+ alWV6e6wiCUjYYeXd9RAjMpE9r6Lkh0TbH9Sleafi1792XMa0CdeyxSmc0MnKn9zeV8oKvVAN97
+ QyAhJm/HRbqVZxejqkv2HTRgwtlVp3o=
+X-Proofpoint-ORIG-GUID: _ou_IiS1ZgKhxQYRh5QwwOJhTxBAgDEZ
+X-Authority-Analysis: v=2.4 cv=GJadgeNK c=1 sm=1 tr=0 ts=6ad22805 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=gZfuR-GZJQvasSKj:21 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=DYa_1O34AAAA:8 a=pGLkceISAAAA:8 a=nbsK_V1Wq9JmJ-PpB0gA:9
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22 a=piCpHeHFVjWJlYWd443B:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA1NCBTYWx0ZWRfX4UGCwGPrOAXF
+ JMhhUc1JamQ7rqw3ZiWBBcEao5NABneEiqdimLN4hFLrlQjPETyT1V5rQIUgkS/TwhF8AOAmEHh
+ N9/BVOHPvBHDeXXd5ddFqzC6ORb9QTwX1RJd1bAK8i33R/Xw90Y6ZiRya70K5XwhgyWWUlfyNZM
+ Lr9LA5obGHRROUh4cu77rdZc+NX0aSK1tnSbId6OiS52DPGwQaa+rJXmZdRy3azgLyKk3w+ss1s
+ 6gFyg5T2F1e0RX7p5UPE8r/swNqHD97MLTats74ZzRSA9+FPolZ3xRCknxkZXB7HRatFaUrldiV
+ 1gwD0TM7SjqAlY5UkH5dhvelVR+yriJY2N8q2lVspt0LByUy93VMAcg/iRinIbncb/rGRvXpMO+
+ bq6MsQLxLDXmeFnPwarkvXgpX1GfPiK8fQjR+4/RIc6hk4SmHF5Q0gsQYMXXdA2FtB/tdThaJSm
+ g93JJo4oKsu2h55wjPw==
+X-Proofpoint-GUID: _ou_IiS1ZgKhxQYRh5QwwOJhTxBAgDEZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160054
 
-On 09/10/2026 11:15, bod@kernel.org wrote:
-> On 2026-09-28 23:40 +0200, David Heidelberg wrote:
->> The decoder tells the firmware about the end of the stream with an empty
->> buffer command whose address is a dummy (0xdeadb000), because the host
->> has no input buffer to name. The SDM845 (Venus v4) firmware validates
->> that address and rejects it:
->>
->>    IsBufferProtected(1087): VenusCoreCtrl: CP_UNKNOWN, buffer straddles
->>    CP & non-CP regions
->>    vDec_EmptyBuffer(1932): Invalidate buffer in ETB
->>
->> and raises HFI_ERR_SESSION_FATAL, reported by the driver as
->>
->>    qcom-venus aa00000.video-codec: session error: event id:1001 (deadb000)
->>
->> Both queues are then put into an error state, so the drain never
->> completes and every V4L2_DEC_CMD_STOP ends the stream with an error:
->> GStreamer's poll() fails at end of file, ffmpeg aborts.
->>
->> Allocate a small buffer the first time a decoder instance is drained and
->> use its device address for the EOS command, so the firmware gets an
->> address that is mapped and outside the protected regions. The firmware
->> then drains normally: all frames are returned and the last capture
->> buffer carries V4L2_BUF_FLAG_LAST. The NULL address used by old IRIS2
->> firmware is left alone.
->>
->> Assisted-by: LLM
->> Fixes: beac82904a87 ("media: venus: make decoder compliant with stateful codec API")
->> Signed-off-by: David Heidelberg <david@ixit.cz>
+On 10/16/26 2:48 PM, Joonhoe Kim wrote:
+> The Kaanapali battery firmware reports the battery current with
+> discharge positive: on a Lenovo Legion Tab Y700 Gen 5 current_now reads
+> -9.1 A while charging and +0.57 A on battery. The power_supply ABI has
+> charging positive, and upower reports such a charging battery as
+> discharging.
 > 
-> The logic stacks up as I read it but, I want to see this a) work on sdm845
-> and b) not break on sm8250 before applying.
-
-On sdm845 it works great (tested multiple sdm845 phones with `livi --demo-h264` 
-and loop enabled. I don't have sm8250, thus that's up to someone with the device :)
-
-David
-
+> Other firmware behind the same callback uses the ABI sign [1], so
+> negate the value only for qcom,kaanapali-pmic-glink.
 > 
-> 
-> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> Fixes: 16a7c32e586e ("power: supply: qcom_battmgr: Add support for Glymur and Kaanapali")
+> Link: https://lore.kernel.org/all/20260829054546.86210-1-jan.brummer@tabos.org/ [1]
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 > ---
-> bod
+> I could only check this on one device, not on MTP or QRD firmware.
+> Anjelique, could you confirm the sign there?
 > 
+> Both patches apply before or after my two battmgr patches still under
+> review (USB_ADAP_TYPE v2 and the USB input current limit).
 
++Jingyi could you please check if this applies to QRD/MTP?
+
+Konrad
+
+> 
+>  drivers/power/supply/qcom_battmgr.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
+> diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
+> index a7237ba09be1..0d55458b2881 100644
+> --- a/drivers/power/supply/qcom_battmgr.c
+> +++ b/drivers/power/supply/qcom_battmgr.c
+> @@ -313,6 +313,7 @@ struct qcom_battmgr {
+>  	struct pmic_glink_client *client;
+>  
+>  	enum qcom_battmgr_variant variant;
+> +	bool current_inverted;
+>  
+>  	struct power_supply *ac_psy;
+>  	struct power_supply *bat_psy;
+> @@ -1435,6 +1436,8 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
+>  			break;
+>  		case BATT_CURR_NOW:
+>  			battmgr->status.current_now = le32_to_cpu(resp->intval.value);
+> +			if (battmgr->current_inverted)
+> +				battmgr->status.current_now = -battmgr->status.current_now;
+>  			break;
+>  		case BATT_TEMP:
+>  			val = le32_to_cpu(resp->intval.value);
+> @@ -1659,6 +1662,9 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
+>  	else
+>  		battmgr->variant = QCOM_BATTMGR_SM8350;
+>  
+> +	battmgr->current_inverted = device_is_compatible(dev->parent,
+> +							 "qcom,kaanapali-pmic-glink");
+> +
+>  	ret = qcom_battmgr_charge_control_thresholds_init(battmgr);
+>  	if (ret < 0)
+>  		return dev_err_probe(dev, ret,
+> 
+> base-commit: b810335a0699d1810683796b0e3ffe8827ddfe6c
