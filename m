@@ -1,217 +1,349 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1114481241
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:53:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E24E03DFC7B;
+	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792158784; cv=none; b=JXL2B29Iv+MIc4V7WD/EH9/UVGav69pU+W1Vtz+u5QLDmUi8f+GJV/ptyYFzr+ZrCjYJNnVYIOY7zQYe4tmD1Xv9z16VKdgxBd9v2foEIp4RTf0OtQ+9qi3DZq2jSaJanvuXHVIb8QeQxlDqe7wMxjak1+9UxAPpvNhGkOQC7KM=
+	t=1792159039; cv=none; b=THMDjjYxLH4gtPDeq1cL/12KWGCnynsqwcWSAVThA09ys+Pix0IFJ8cC2lW9TnGFM/t7+E2kAYGFnseFR3HnZIxP32fe6magW6cyuNIq8WB3fJIzrmu6p0vrkkKtt1szl4MyBuWnp3vbMQPWDn+NK9xkmshupoxnksAKtdIZE/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792158784; c=relaxed/simple;
-	bh=U0EjRnJ7O91eyrTP0SL3rD7Ce0W12U3x1008UEL9d0M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BPLvJA3mC/LgWwWYo/2PW6PHPswQGX9DmfJsqbInlrrivLPlC0cfIUO5PgipgnWeIN/s0RP6XpVrLaPuAa74iwuxWtOOMM9nrcpbRr4w2hgMpYGK7gSNfD/1LrIDgU0xiXkwZWBm84LMyYipd416em1ik/EQz2/w4AXnEt3pKOA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nZF3QtJ5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IUNVXnXj; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792159039; c=relaxed/simple;
+	bh=bWJ6GpVkJ5f0cCSpMNIzTrqipg1uURSdKwE/IVmYeIM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=C3881TbqZ0h9ZJ0f+NDKVvzxdt9mJZc61K6v4htDr4i6xXQPNjkrOI9hARGU2dpxkluO/rYdKtgPKuP2aPoLubAsXmYS+YLqTdSSjVcmRCtJ1+MTgqWSZMuQp9h7kWsJQjYe7Dr3fEi5Dpeatt6CAtBCy9QazIxU3Opl1dEGwqo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cwQp5o0S; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nZF3QtJ5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IUNVXnXj"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAA6Cg1946118
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:53:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	t69VHD7sGoDlppOxgJRzOZSxfsDyrUH5v3Tk7eTBBuo=; b=nZF3QtJ5AIFa8E6U
-	1/BWz9fTbA3CJOUJ5D8F4A4IvfeAXV7HpZ2uKV/EKvjdbjwvEj4jqwIYUVb7DowA
-	Fi9/GBO0GUxkHrFGRnb9lBWr4wN59/LEjQAeUZ1wXzSA/DxDlly6DrhB65skyq36
-	wC6QpoRbXfqcuSi+PUXuIDGI7L5OZxHoRJQdfWfmZ2aUDo2x6xu/OWwo9q49G1nr
-	0VUrCGpxVdB6sv6vrGyEyNLABc1lNfLNKKwQ00c7ehdqkXLg73/prOk2geuOu516
-	pbaY6xPmxUc7I8jZZJSYh0OFSGfAKmlZy2pufIpbANGdKwg+WCepepNTUlBlwYXQ
-	bs/pJg==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbg5ys8hu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 13:53:01 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso13038284eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 06:53:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792158781; x=1792763581; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t69VHD7sGoDlppOxgJRzOZSxfsDyrUH5v3Tk7eTBBuo=;
-        b=IUNVXnXjZuvmQ0WOPICBLk3yhb6HF37diyRlPBPLueSh+iAjcmBGZVqX3KbncU54N0
-         bQXQ9la8Wydh85YmWjtx1AnGvL24OIMQG/KsElixI/W1FzNQjGQ81PYUwyMd9VJcAV/b
-         MXJYSLC1CQHhBmUUw4FT65WEud+E4YMBI8XT2FqukVfj0hO6LOn3s7yepKLzVjD77Z74
-         QuvvpmTxcFsZncoYSjW5wfLRniJQy+8peVjlFkAWH+cmDyXLgF3i+xvcGVy0PF9Ouh8i
-         75GeYB1rHcIKRsxnLwKYPSyn1X+fXtqLJ54+XoYXrZ8hX7X66Xx4jMPomFomPKAt4FIr
-         9SYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792158781; x=1792763581;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=t69VHD7sGoDlppOxgJRzOZSxfsDyrUH5v3Tk7eTBBuo=;
-        b=ZV9tBGJRA/6oK4ULt7KZuzlITUzbFk4YRutSQ0uwOUC5dp5KBpmy+EEecr4BhnB5XY
-         oSwW8BFGTh/d9zjl1thTB5cWUS9soJh4sSEfLDSQBaxVv2QNcHrUlF7rGlaeflKuCmPY
-         cHDqHiDd2JYnuDc3EueCSC6Bmx4U/rQ+7NCmvTdlJyqcclZvza4iCV+bC1y5SRWR0A74
-         tniJrl5oILT2lRuSn6TepyAyjFdUn4iLY16/wIxyPQe+k63NfGRouN6lvnQaxEtVi9cs
-         5g+v82SdXnZHBBlFZOg6/8hrZBzCW5Tuatmzwka/ZY7R51uWcBy5I90eYV22M9qrF2zU
-         3obA==
-X-Forwarded-Encrypted: i=1; AKwUvBxVAV9HR5QN457D5SkakLYM7f0hOYo2EZj184Gv0oChuCYbKawGuAwNQjTkxz/Tmyijt9TA5XyM9nztR8bU@vger.kernel.org
-X-Gm-Message-State: AFq9FYJSb1neXLYb4Sba7ZppLwEWsLp0E+DPvZYo4k3RY+9eZRlhqinq
-	g0dD0cxroePIxVmIzNZDRWeQynAVAyprOtnGxWWYpBu6xB+m+0nPp40pLa2cDLGIKeYYoXy9lOg
-	Jp6uZcxYOo2A1sfAYeGyYI72gwQXRPHcQwJK5klKqtfq33TYTbiUdLcbBO8aTHrRFTBBZ
-X-Gm-Gg: AYBFou3Pshvv/VcZwVypILPYE4VhYOjzH6CH+wwE3dZQMYEaGFlmpYNLmKdIHR7RKOz
-	Eh7b8l+WJBUEBnFPD4EsNA2GXn4rRxNAqZFGjq+ijIct+Ke7jjoAI00ioNGlE/nITueCzBmplEB
-	+aoz0UqW3d0STZhTflANdrOEwtpWwaMHTsTIpHqsddHAj2Ml0MZpYqnVZit4uPs/0CnBEZE5YlM
-	qU0Q+ZexQNj+p+QBQ6IK55Q+wUpN883cm4MJQEuoM/KJ8ptIOgTtfkpF1rUrXTuyKtRjeqi23Ap
-	an2vwATyxsBy/JZJu9ekcZFtx8oI3bVI6oYHG9sWoK9xmucCyRNg51Hys5K2gN+D40jLXpGbiAe
-	Djv8UHWn+rs6wO92htlAzSZx3VGNaPgrZjI3OUrbPvg==
-X-Received: by 2002:a05:7301:540b:b0:355:fdc0:a811 with SMTP id 5a478bee46e88-355fdd012f1mr27879694eec.37.1792158780661;
-        Fri, 16 Oct 2026 06:53:00 -0700 (PDT)
-X-Received: by 2002:a05:7301:540b:b0:355:fdc0:a811 with SMTP id 5a478bee46e88-355fdd012f1mr27879632eec.37.1792158779825;
-        Fri, 16 Oct 2026 06:52:59 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360813b63e1sm8146987eec.8.2026.10.16.06.52.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 06:52:59 -0700 (PDT)
-Date: Fri, 16 Oct 2026 21:52:52 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>,
-        Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, Srinivas Kandagatla <srini@kernel.org>,
-        linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 2/7] ASoC: codec: pcm1681: Add optional SCK clock and
- runtime PM support
-Message-ID: <atIsNLNBT11XWtRV@QCOM-aGQu4IUr3Y>
-References: <20261009-nord-asoc-driver-support-v3-v3-0-0c1897f21ccf@oss.qualcomm.com>
- <20261009-nord-asoc-driver-support-v3-v3-2-0c1897f21ccf@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cwQp5o0S"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 66C7AC2BCF4;
+	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1792159038;
+	bh=bWJ6GpVkJ5f0cCSpMNIzTrqipg1uURSdKwE/IVmYeIM=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=cwQp5o0SvOBb/GbwIyNmnK5znayb1y5jQZrn+PYfO6DFA10IdP7XhLt9iCY9np266
+	 PxwYbGzu608yKDhfgGE7mLJg9H6hL4r3nX+2iCaFYP+H8mvFfjmedpP7ADFMAnhnuZ
+	 NQJB2WcdqkhRz4jCBZFHF6ylQSDBMU5KRHsSgNUpAzcBmU1rZCw7n+/ca6bGAIHO29
+	 GmjtFGZwftLEBTo3lVif+8vi06SamB2Plixf9VDpuQOd7g6A1wjvcwajRQpRxSNFTQ
+	 UtXM3szR3SSWkdDLEgKBzNeES7RaAKtuIyQMWfQ6J0kDl2g8NkdsuuDyL9ou88Fyaq
+	 dqVW4HBaLIgBA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D6E4CCA462;
+	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
+From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
+Date: Fri, 16 Oct 2026 13:57:09 +0000
+Subject: [PATCH] arm64: dts: qcom: sm8350: Flatten USB controller nodes
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261009-nord-asoc-driver-support-v3-v3-2-0c1897f21ccf@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: 0QHJtMbT15L5Q0S37iDcKD2WP5x59dl7
-X-Authority-Analysis: v=2.4 cv=M+HYuCws c=1 sm=1 tr=0 ts=6ad22c3d cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=8nJEP1OIZ-IA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=hIk10_Rze-2l0Qr3NckA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA1NSBTYWx0ZWRfX3IfMfOJLXsHr
- 2VApYLwVr10PvDGbjI1o8v3QRiq2ujV+cuj6eH7vlr5MgXuShe7dRbA8XsarwZuGbldeb3Jn2GA
- XCEQIgBSt12tQoSP1lpsKSwgi8HFSRw=
-X-Proofpoint-GUID: 0QHJtMbT15L5Q0S37iDcKD2WP5x59dl7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA1NSBTYWx0ZWRfXyLgQ+hlAXPST
- 8CjDEJXz0kGSk+xSkGC/LItYBXUcyyvlJeKb/jpqxfvA2m3sqG73+oWIB1eVp0vZSx3JiP/BpUh
- iYxiJxQejSn42pb35F5wm1xq0M3mS2gXSnTPgUcFjlQoP62EU4O/0Gaja++HtDu1ekrAVLrvnEG
- 8r9JMpmIeRi1RwEylafINCHaXU/Q78pAHJ0Qmra5erXbjr1+a0i5FDBerDEyYJsQmM/dRFag/SV
- 943Ez8KDfgtbu7nkQ5/VLknz0Vpld3sewnIA/ukj7H//Lzu5/Bk3MuPXFAtLEFExUF91iIvZIqy
- 2DUcLv0RWDqKGzIQs6tzm0k1MnOka+H0NUPAGsF4HJeA1HUkQyZZF/yDt5Opa4FflNdT/k/KGWX
- jI0ePFtrDRwkf07uxIKWXwD8D7pwmzIwf1tDsCJFQdQOb8J/Ow5wOrXiBd6DRDqb9Rf9wRtRmAm
- lLsRIhWnhtgAwvcWlkg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 clxscore=1015
- priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160055
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261016-sm8350-usb-flatten-v1-1-22a2ca3e642f@fromdisposition.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ6CMBBA4auQWTtJh5+KXsWwKDjAGKimU4gJ4
+ e5WWH6L9zZQDsIK92yDwKuovH0CXTLoRucHRnkmQ25yS4Ys6lwXlcFFW+wnFyN7tHVF7lpauhU
+ lpPATuJfvMX00p3VpX9zF/wn2/QfO7r2LdgAAAA==
+X-Change-ID: 20261016-sm8350-usb-flatten-6851a7461934
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, Demeter Barna <me@fromdisposition.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792159042; l=8406;
+ i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
+ bh=4PeNvpz5gpApVBXDzwm7sndi++evymHPK2bxZ29Wsto=;
+ b=0njUvmb7SVmJ422XS7gYC8RsVTfO//QrL1015R5XwLDZZ3I/jscNl+TMiteV7vZPocpG71WXX
+ 1iP76AtG22yCGtWDr1XYSpYjyYjcfnl2QFSRzdMPfSdQh2ST+Iavjvf
+X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
+ pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
+X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
+ auth_id=1163
+X-Original-From: Demeter Barna <me@fromdisposition.org>
+Reply-To: me@fromdisposition.org
 
-On Fri, Oct 09, 2026 at 06:42:48PM +0530, Mohammad Rafi Shaik wrote:
-> The PCM1681 requires its SCK system clock to be running before register
-> access. On platforms where SCK is provided by a gateable clock, register
-> access may fail when the clock is disabled.
->  
-> Add support for an optional "sck" clock and enable it before accessing the
-> device. After enabling SCK, wait for the required 65536 system clock cycles
-> to allow the device to complete its internal reset sequence.
->  
-> Use runtime PM to manage SCK instead of keeping it enabled for the lifetime
-> of the device. Disable the clock during runtime suspend and restore it on
-> runtime resume. Use autosuspend to avoid unnecessary clock toggling between
-> closely spaced accesses.
->  
-> Since the device register state may be lost when SCK is disabled, enable
-> the regmap cache. Switch regmap to cache-only mode and mark the cache
-> dirty on runtime suspend, then synchronize the cached register state after
-> SCK is restored on runtime resume. Mark the zero-detect status register
-> volatile since it is updated by hardware.
->  
-> Drop idle_bias_on so that the component can reach SND_SOC_BIAS_OFF and
-> runtime suspend can gate SCK.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+From: Demeter Barna <me@fromdisposition.org>
 
-[...]
+The USB controllers still use the legacy two-node layout, which binds
+dwc3-qcom-legacy. That driver updates the QSCRATCH VBUS valid override
+only through extcon, so with usb-role-switch the controller does not see
+the cable being pulled and does not enumerate again when it comes back.
 
-> @@ -304,34 +335,128 @@ MODULE_DEVICE_TABLE(i2c, pcm1681_i2c_id);
->  
->  static int pcm1681_i2c_probe(struct i2c_client *client)
->  {
-> +	struct device *dev = &client->dev;
->  	int ret;
->  	struct pcm1681_private *priv;
->  
-> -	priv = devm_kzalloc(&client->dev, sizeof(*priv), GFP_KERNEL);
-> +	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
->  	if (!priv)
->  		return -ENOMEM;
->  
-> +	priv->sck = devm_clk_get_optional(dev, "sck");
-> +	if (IS_ERR(priv->sck))
-> +		return dev_err_probe(dev, PTR_ERR(priv->sck),
-> +				     "Failed to get sck\n");
+Flatten both controllers as on SM8450, so that dwc3-qcom updates the
+override with the role, and move the board properties from &usb_N_dwc3
+to &usb_N.
 
-Holding sck from i2c probe for the lifetime of the device breaks audio
-after an ADSP restart on Nord.
+Signed-off-by: Demeter Barna <me@fromdisposition.org>
+---
+Tested on a Razer Edge 5G (SM8350, board not upstream yet; Type-C
+through pmic-glink): without this patch USB does not enumerate again
+after the first unplug; with it, it does on every re-plug, after deep
+sleep (5/5) and across reboots (3/3). The other boards are only
+build-tested; dtbs_check is clean for all.
 
-There sck is LPASS_CLK_ID_MCLK_1 from q6prmcc, a clock controller that
-lives under the ADSP GPR service. Stopping the ADSP removes q6prm and
-unregisters its clocks; starting it again registers new ones. pcm1681
-is not unbound in between: fw_devlink can't link it to q6prmcc, since
-that node has no device until the DSP is up, so the supplier link goes
-to the remoteproc device, which stays bound across the restart.
+Prepared with an LLM coding assistant; tested on my device.
+---
+ arch/arm64/boot/dts/qcom/sm8350-hdk.dts            | 12 +--
+ .../dts/qcom/sm8350-microsoft-surface-duo2.dts     |  6 +-
+ arch/arm64/boot/dts/qcom/sm8350-mtp.dts            |  6 +-
+ .../boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi   |  6 +-
+ arch/arm64/boot/dts/qcom/sm8350.dtsi               | 94 ++++++++++------------
+ 5 files changed, 51 insertions(+), 73 deletions(-)
 
-pcm1681 is left with a handle to the orphaned clk, and the first runtime
-resume after the restart fails:
+diff --git a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
+index 24ad073b4143..47519654640a 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
++++ b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
+@@ -847,12 +847,10 @@ &ufs_mem_phy {
+ };
+ 
+ &usb_1 {
+-	status = "okay";
+-};
+-
+-&usb_1_dwc3 {
+ 	dr_mode = "otg";
+ 	usb-role-switch;
++
++	status = "okay";
+ };
+ 
+ &usb_1_dwc3_hs {
+@@ -879,14 +877,12 @@ &usb_1_qmpphy_out {
+ };
+ 
+ &usb_2 {
+-	status = "okay";
+-};
+-
+-&usb_2_dwc3 {
+ 	dr_mode = "host";
+ 
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&usb_hub_enabled_state>;
++
++	status = "okay";
+ };
+ 
+ &usb_2_hsphy {
+diff --git a/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts b/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
+index 442405ba5f6a..01e39565c68f 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
++++ b/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
+@@ -338,11 +338,9 @@ &ufs_mem_phy {
+ };
+ 
+ &usb_1 {
+-	status = "okay";
+-};
+-
+-&usb_1_dwc3 {
+ 	dr_mode = "peripheral";
++
++	status = "okay";
+ };
+ 
+ &usb_1_hsphy {
+diff --git a/arch/arm64/boot/dts/qcom/sm8350-mtp.dts b/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
+index 410bb0befeea..a282e6d2007e 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
++++ b/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
+@@ -336,11 +336,9 @@ &ufs_mem_phy {
+ };
+ 
+ &usb_1 {
+-	status = "okay";
+-};
+-
+-&usb_1_dwc3 {
+ 	dr_mode = "peripheral";
++
++	status = "okay";
+ };
+ 
+ &usb_1_hsphy {
+diff --git a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
+index 969c8cb31df9..6e26aa3590b5 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
+@@ -909,11 +909,9 @@ &ufs_mem_phy {
+ };
+ 
+ &usb_1 {
+-	status = "okay";
+-};
+-
+-&usb_1_dwc3 {
+ 	dr_mode = "peripheral";
++
++	status = "okay";
+ };
+ 
+ &usb_1_hsphy {
+diff --git a/arch/arm64/boot/dts/qcom/sm8350.dtsi b/arch/arm64/boot/dts/qcom/sm8350.dtsi
+index 55b32050ce9c..21863ba00d17 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
+@@ -2615,13 +2615,10 @@ compute-cb@8 {
+ 			};
+ 		};
+ 
+-		usb_1: usb@a6f8800 {
+-			compatible = "qcom,sm8350-dwc3", "qcom,dwc3";
+-			reg = <0 0x0a6f8800 0 0x400>;
++		usb_1: usb@a600000 {
++			compatible = "qcom,sm8350-dwc3", "qcom,snps-dwc3";
++			reg = <0 0x0a600000 0 0xfc100>;
+ 			status = "disabled";
+-			#address-cells = <2>;
+-			#size-cells = <2>;
+-			ranges;
+ 
+ 			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
+ 				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
+@@ -2638,12 +2635,14 @@ usb_1: usb@a6f8800 {
+ 					  <&gcc GCC_USB30_PRIM_MASTER_CLK>;
+ 			assigned-clock-rates = <19200000>, <200000000>;
+ 
+-			interrupts-extended = <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
++			interrupts-extended = <&intc GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&intc GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&pdc 14 IRQ_TYPE_EDGE_BOTH>,
+ 					      <&pdc 15 IRQ_TYPE_EDGE_BOTH>,
+ 					      <&pdc 17 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "pwr_event",
++			interrupt-names = "dwc_usb3",
++					  "pwr_event",
+ 					  "hs_phy_irq",
+ 					  "dp_hs_phy_irq",
+ 					  "dm_hs_phy_irq",
+@@ -2657,48 +2656,40 @@ usb_1: usb@a6f8800 {
+ 					<&gem_noc MASTER_APPSS_PROC 0 &config_noc SLAVE_USB3_0 0>;
+ 			interconnect-names = "usb-ddr", "apps-usb";
+ 
+-			usb_1_dwc3: usb@a600000 {
+-				compatible = "snps,dwc3";
+-				reg = <0 0x0a600000 0 0xcd00>;
+-				interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
+-				iommus = <&apps_smmu 0x0 0x0>;
+-				snps,dis_u2_susphy_quirk;
+-				snps,dis_u3_susphy_quirk;
+-				snps,dis_enblslpm_quirk;
+-				snps,dis-u1-entry-quirk;
+-				snps,dis-u2-entry-quirk;
+-				phys = <&usb_1_hsphy>, <&usb_1_qmpphy QMP_USB43DP_USB3_PHY>;
+-				phy-names = "usb2-phy", "usb3-phy";
++			iommus = <&apps_smmu 0x0 0x0>;
++			snps,dis_u2_susphy_quirk;
++			snps,dis_u3_susphy_quirk;
++			snps,dis_enblslpm_quirk;
++			snps,dis-u1-entry-quirk;
++			snps,dis-u2-entry-quirk;
++			phys = <&usb_1_hsphy>, <&usb_1_qmpphy QMP_USB43DP_USB3_PHY>;
++			phy-names = "usb2-phy", "usb3-phy";
+ 
+-				ports {
+-					#address-cells = <1>;
+-					#size-cells = <0>;
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
+ 
+-					port@0 {
+-						reg = <0>;
++				port@0 {
++					reg = <0>;
+ 
+-						usb_1_dwc3_hs: endpoint {
+-						};
++					usb_1_dwc3_hs: endpoint {
+ 					};
++				};
+ 
+-					port@1 {
+-						reg = <1>;
++				port@1 {
++					reg = <1>;
+ 
+-						usb_1_dwc3_ss: endpoint {
+-							remote-endpoint = <&usb_1_qmpphy_usb_ss_in>;
+-						};
++					usb_1_dwc3_ss: endpoint {
++						remote-endpoint = <&usb_1_qmpphy_usb_ss_in>;
+ 					};
+ 				};
+ 			};
+ 		};
+ 
+-		usb_2: usb@a8f8800 {
+-			compatible = "qcom,sm8350-dwc3", "qcom,dwc3";
+-			reg = <0 0x0a8f8800 0 0x400>;
++		usb_2: usb@a800000 {
++			compatible = "qcom,sm8350-dwc3", "qcom,snps-dwc3";
++			reg = <0 0x0a800000 0 0xfc100>;
+ 			status = "disabled";
+-			#address-cells = <2>;
+-			#size-cells = <2>;
+-			ranges;
+ 
+ 			clocks = <&gcc GCC_CFG_NOC_USB3_SEC_AXI_CLK>,
+ 				 <&gcc GCC_USB30_SEC_MASTER_CLK>,
+@@ -2717,12 +2708,14 @@ usb_2: usb@a8f8800 {
+ 					  <&gcc GCC_USB30_SEC_MASTER_CLK>;
+ 			assigned-clock-rates = <19200000>, <200000000>;
+ 
+-			interrupts-extended = <&intc GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH>,
++			interrupts-extended = <&intc GIC_SPI 138 IRQ_TYPE_LEVEL_HIGH>,
++					      <&intc GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&intc GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>,
+ 					      <&pdc 12 IRQ_TYPE_EDGE_BOTH>,
+ 					      <&pdc 13 IRQ_TYPE_EDGE_BOTH>,
+ 					      <&pdc 16 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "pwr_event",
++			interrupt-names = "dwc_usb3",
++					  "pwr_event",
+ 					  "hs_phy_irq",
+ 					  "dp_hs_phy_irq",
+ 					  "dm_hs_phy_irq",
+@@ -2736,19 +2729,14 @@ usb_2: usb@a8f8800 {
+ 					<&gem_noc MASTER_APPSS_PROC 0 &config_noc SLAVE_USB3_1 0>;
+ 			interconnect-names = "usb-ddr", "apps-usb";
+ 
+-			usb_2_dwc3: usb@a800000 {
+-				compatible = "snps,dwc3";
+-				reg = <0 0x0a800000 0 0xcd00>;
+-				interrupts = <GIC_SPI 138 IRQ_TYPE_LEVEL_HIGH>;
+-				iommus = <&apps_smmu 0x20 0x0>;
+-				snps,dis_u2_susphy_quirk;
+-				snps,dis_u3_susphy_quirk;
+-				snps,dis_enblslpm_quirk;
+-				snps,dis-u1-entry-quirk;
+-				snps,dis-u2-entry-quirk;
+-				phys = <&usb_2_hsphy>, <&usb_2_qmpphy>;
+-				phy-names = "usb2-phy", "usb3-phy";
+-			};
++			iommus = <&apps_smmu 0x20 0x0>;
++			snps,dis_u2_susphy_quirk;
++			snps,dis_u3_susphy_quirk;
++			snps,dis_enblslpm_quirk;
++			snps,dis-u1-entry-quirk;
++			snps,dis-u2-entry-quirk;
++			phys = <&usb_2_hsphy>, <&usb_2_qmpphy>;
++			phy-names = "usb2-phy", "usb3-phy";
+ 		};
+ 
+ 		iris: video-codec@aa00000 {
 
-  pcm1681 0-004c: Failed to enable sck: -6
+---
+base-commit: 4eb2586bd40db27d77cc5b724ca9386ed0c71d53
+change-id: 20261016-sm8350-usb-flatten-6851a7461934
 
-Reproduce with:
+Best regards,
+--  
+Demeter Barna <me@fromdisposition.org>
 
-  echo stop > /sys/class/remoteproc/remoteproc1/state
-  echo start > /sys/class/remoteproc/remoteproc1/state
-  speaker-test -D plughw:0,0 -t sine -l 1
 
-Even with a fresh handle the DAC stays silent, because the
-assigned-clock-rates (12.288 MHz) are applied by the i2c core only once,
-before probe, and the re-registered provider comes back at its default
-19.2 MHz.
-
-The sound card, on the other hand, is torn down and re-created on an
-ADSP restart. So what works for me is to move the clock handling into
-the component .probe/.remove callbacks: clk_get_optional(), then
-of_clk_set_defaults() to re-apply the assigned rate, enable, settle,
-regcache_sync() and enable runtime PM in .probe; and the reverse plus
-clk_put() in .remove. The i2c probe then only creates the regmap, in
-cache-only mode until sck is running, and registers the component.
-
-Shawn
