@@ -1,36 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E24E03DFC7B;
-	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBE8C4A3D40
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 14:11:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792159039; cv=none; b=THMDjjYxLH4gtPDeq1cL/12KWGCnynsqwcWSAVThA09ys+Pix0IFJ8cC2lW9TnGFM/t7+E2kAYGFnseFR3HnZIxP32fe6magW6cyuNIq8WB3fJIzrmu6p0vrkkKtt1szl4MyBuWnp3vbMQPWDn+NK9xkmshupoxnksAKtdIZE/Y=
+	t=1792159920; cv=none; b=OXXKNoaJ6lANWNkFJPIwsHTszl4jgmFk7b9rx0fo3nq33BSNYLwXfOo1pvTupYnS2aEh+0ca+iy9fdqke5LKNo9SXWo8+SOQlq4i1yfx1jNNM/aGCxz7jbKOtmE39i2k6PgmOmr7W0cnlaqv9D0WfAU2hL1Uxn97Gx1iW4SBqOo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792159039; c=relaxed/simple;
-	bh=bWJ6GpVkJ5f0cCSpMNIzTrqipg1uURSdKwE/IVmYeIM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=C3881TbqZ0h9ZJ0f+NDKVvzxdt9mJZc61K6v4htDr4i6xXQPNjkrOI9hARGU2dpxkluO/rYdKtgPKuP2aPoLubAsXmYS+YLqTdSSjVcmRCtJ1+MTgqWSZMuQp9h7kWsJQjYe7Dr3fEi5Dpeatt6CAtBCy9QazIxU3Opl1dEGwqo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cwQp5o0S; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1792159920; c=relaxed/simple;
+	bh=AjOlvVJQS//DsvCuefdKjOocvAsT0+tW+iqMVZga33c=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=FJK6ZlryTSp0O80o63KYCbaZ9BHZv51BMtKudjIBRFXUkoxaFQFA+xtNGezwauGSrJXwgiK+7puje+8qOJ9kRXncfRQVt8AnJjo6XYK4noWXY05Abeq9wzft9pQntSPOO+pHItB10G1EpnCp6+Pbav2cEnzYFPNZI+51Ohwiljs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eXadYWpf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QTmg5NJW; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cwQp5o0S"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 66C7AC2BCF4;
-	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792159038;
-	bh=bWJ6GpVkJ5f0cCSpMNIzTrqipg1uURSdKwE/IVmYeIM=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=cwQp5o0SvOBb/GbwIyNmnK5znayb1y5jQZrn+PYfO6DFA10IdP7XhLt9iCY9np266
-	 PxwYbGzu608yKDhfgGE7mLJg9H6hL4r3nX+2iCaFYP+H8mvFfjmedpP7ADFMAnhnuZ
-	 NQJB2WcdqkhRz4jCBZFHF6ylQSDBMU5KRHsSgNUpAzcBmU1rZCw7n+/ca6bGAIHO29
-	 GmjtFGZwftLEBTo3lVif+8vi06SamB2Plixf9VDpuQOd7g6A1wjvcwajRQpRxSNFTQ
-	 UtXM3szR3SSWkdDLEgKBzNeES7RaAKtuIyQMWfQ6J0kDl2g8NkdsuuDyL9ou88Fyaq
-	 dqVW4HBaLIgBA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D6E4CCA462;
-	Fri, 16 Oct 2026 13:57:18 +0000 (UTC)
-From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
-Date: Fri, 16 Oct 2026 13:57:09 +0000
-Subject: [PATCH] arm64: dts: qcom: sm8350: Flatten USB controller nodes
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eXadYWpf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QTmg5NJW"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GE5rVS1450559
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 14:11:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=1byDc83PlgEFqClSIW/YQ5
+	2JFlcU14c6UW3k5RoQVkU=; b=eXadYWpfZjCOh9tyzIyF85QCi/uAkszfnQNy0y
+	WbRalV7RNTdNotgEzIp0dP1ujsCFotN+xS131Sf7Yl8H+unBT1BRdNHC3iPS7HSA
+	DzaOhpo7rXtNSekyh0f1wwA9wHyj6NhGFKFpLbqGsnMJEww9HSkKu2Nve3S+Ckfp
+	WZEy5n1kzH341POhgm6ObeUjiScWDy/KMo48QwUdAcUqn66DasQlhlvt8tCZhk3u
+	+7pjmsc3k80HXUOQKkbhejQHxchYphxCzP6n8Y2bwc3tgM+EGvmeva/bCGe5XX7z
+	w5aefN0Otlni1jt5PmJZugMMMPehrSk0dPz5OLmCx5ITO/Fg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhur0ux7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 14:11:56 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cb6391e89so1370560485a.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 07:11:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792159916; x=1792764716; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=1byDc83PlgEFqClSIW/YQ52JFlcU14c6UW3k5RoQVkU=;
+        b=QTmg5NJWG6+kExiAjg/CX3bgTkP+0LLwDRbLAHTJoYnMef3VQaVIy0QF0TqqDOaNrp
+         riVgD21n4sTcKg3hDE/+TsWrNUfkzFO/n9ck32YRbiQSbcZiUKxzncPIrxnjwI61IUKe
+         OC2Vqe1uIybkALQn8UrCgckfESeUW+VQIXA/yiWr+EPCHGz796fIb6A91hDdGXx4O0W7
+         DBsJ7o/Fz7wFW8vyasqCPCwjK1GJiWloABmNesy2tcEjXg/tIUJyJcz/AqfHkOfUD92g
+         OgHwbPcVuXtoyhtcys2+Pup99s/ECd2nw9vpKRy1EbYbGlp7FiQHdua4DJatNMtKu3fF
+         t6fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792159916; x=1792764716;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=1byDc83PlgEFqClSIW/YQ52JFlcU14c6UW3k5RoQVkU=;
+        b=LhH32a+j0ORp8+i/DlXqmuXjl0wcGONI8Vl/DYPiwhN/R1jQRmc6njNbabjvCWCBTt
+         2gUKpJzfRC1rCZJnvEA9i3+SJ6V9gCk9I2jVjeRzHNQ4/hTmuvAdW2LlJqmh72GFfkZ9
+         IauSaTgauRHNlWeHU2ucflcbduN3QqAvZTPnKGrMeBTBcqu8psEgB2vKegr96+oPqnqZ
+         OR9NtfdEPDhndKwrxgyaff3d/mTSqlxA8StOj9skCNPaynMBQkiLx7KtQqk8b6RIWe0T
+         1pOVA7Z2FJsHJH/J2iZj0LKk6FbLPFGuFv82qMl27b4ETohfeLRGrpg1vkosqV/iW5sK
+         g4yw==
+X-Forwarded-Encrypted: i=1; AKwUvBylonw8K0lZF110DdMZFu649DAluF2/45xmSJmd44h4CH+7mc1VWwfNZ7uT0jNQ+Fcq9exA5whRMEiVbqky@vger.kernel.org
+X-Gm-Message-State: AFq9FYJQni/cPdbFBuoQ/+HSh28YKUIGR5BuHoJmp7u7BwCNaQPfih+T
+	MPfnRBFv6VGYgiunUxZPwmw9IzdFReR7kExflPXhxkDVgLY3rDkX2WwuhIC2TkkzXQ1lSaFdjpj
+	x4eLZScJFDzHVm8LzpDb8LLa+fbmPrTc04AQabv3AETEO8BYlbbyjrTM6JpZNuvg12bZEw5MMFv
+	0v
+X-Gm-Gg: AYBFou2bOiHLTVb95QhK7gheIyCvK3Qye0N496r0kxTqTTukmWhdqCXP073dkuwBvjY
+	gZSxhLTXHPtxHkS00x2NQJsYWKjuK9ZcJ/AtfSqZCtokHiHSXnIcd4UnwZfV7csJUJh0h6VUkEA
+	m0PGNv3AIIOzN+fCyIfIE5j70w8ZzPYyDabTuF/et86rWHTXjKXeMffNpfoRO1oMGlTe0Rbl2iV
+	POb6rgzCigC9dZyp3sgKDmge/yZ3oW6UtWsVnhLEgSDIh4kxGHVM89kWhaT5a4mOI2Q+X5Y6cSU
+	obXRFRxQuT2JsNxICAA29dXeiVYG0JYvDlM5X8trlYn/SgClMqPijiYvc8UkIEX1F7gS51Yzlin
+	1vFjtoWcBYVmM8Y5eZcw9N8yiTAYm
+X-Received: by 2002:a05:620a:4411:b0:93e:7ec5:2d65 with SMTP id af79cd13be357-93ebd20b8f0mr3679550485a.31.1792159915855;
+        Fri, 16 Oct 2026 07:11:55 -0700 (PDT)
+X-Received: by 2002:a05:620a:4411:b0:93e:7ec5:2d65 with SMTP id af79cd13be357-93ebd20b8f0mr3679541585a.31.1792159915227;
+        Fri, 16 Oct 2026 07:11:55 -0700 (PDT)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4f8babsm5760145f8f.33.2026.10.16.07.11.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2026 07:11:54 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [PATCH v11 0/4] crypto: qce - fix self-test issues in skcipher
+Date: Fri, 16 Oct 2026 16:11:45 +0200
+Message-Id: <20261016-qce-fixes-skcipher-v11-0-d13ddfe609a4@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -39,311 +89,158 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-sm8350-usb-flatten-v1-1-22a2ca3e642f@fromdisposition.org>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ6CMBBA4auQWTtJh5+KXsWwKDjAGKimU4gJ4
- e5WWH6L9zZQDsIK92yDwKuovH0CXTLoRucHRnkmQ25yS4Ys6lwXlcFFW+wnFyN7tHVF7lpauhU
- lpPATuJfvMX00p3VpX9zF/wn2/QfO7r2LdgAAAA==
-X-Change-ID: 20261016-sm8350-usb-flatten-6851a7461934
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, Demeter Barna <me@fromdisposition.org>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792159042; l=8406;
- i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
- bh=4PeNvpz5gpApVBXDzwm7sndi++evymHPK2bxZ29Wsto=;
- b=0njUvmb7SVmJ422XS7gYC8RsVTfO//QrL1015R5XwLDZZ3I/jscNl+TMiteV7vZPocpG71WXX
- 1iP76AtG22yCGtWDr1XYSpYjyYjcfnl2QFSRzdMPfSdQh2ST+Iavjvf
-X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
- pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
-X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
- auth_id=1163
-X-Original-From: Demeter Barna <me@fromdisposition.org>
-Reply-To: me@fromdisposition.org
+X-B4-Tracking: v=1; b=H4sIAKEw0moC/x2LSwqAMBDFriKzdqCtWsSriItSnzoIfjoggnh3i
+ 8uE5CFFEih1xUMJl6jsWwZry4LiErYZLGMW5Izz1ljPZwRPckNZ1yjHgsQwVVsH3xi4hvJ4JPx
+ F/vrhfT/jvXubZQAAAA==
+X-Change-ID: 20261016-qce-fixes-skcipher-e0384a650e25
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eneas U de Queiroz <cotequeiroz@gmail.com>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Demi Marie Obenour <demiobenour@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Russell King <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        stable@vger.kernel.org, Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4065;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=AjOlvVJQS//DsvCuefdKjOocvAsT0+tW+iqMVZga33c=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBq0jCjF/ApNt06fNbT487zzn+mpbTpLSUYBXIDt
+ 3o4ikMWHe+JAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCatIwowAKCRAFnS7L/zaE
+ wxFVD/4/b2oyMXUj5o7TwUpj5efwfrLwfZGI0ImidbuoLepHmnJ7t1hxoPEohtNIsASNq78tx8k
+ /dwm7rmYalGwJJBb/7iyUS7Kwr1UqVdxI/T3iub0EBIpTXJPfcaL5PA8pwjj+cR2Y9/+gi/B8ME
+ 8lvluOQiuH8BWKq0yQPVnfh4pZ7/HQUOOLwpVwHwoKPT68S+l8X28Tw4DdjGWcjB9//QIIOhiNY
+ shFPTujfUvYtkVBF41NJ0hGNY3Po9jME3FoiCAN/3Crx5VmXHDM9i0b471cSozyh3vP0u25mJ7x
+ 6H43PxiO4A1mJPZlYB+jKuetKoqZNIjPxZXBmnmfM+m5wPqSh5OYF3NB6DADFimiA8E/7zCiPdo
+ LAVZZk+N1lYt9zwlFxAJz82MPpKkvh3wUE7QtACO9gAZ8hvr8xJW2F7pwSssn9wNWdNjAjC4ucd
+ Kvvmz6HoTs4BB421h101YgsBXwBEsvOfzoLm5wulPVwBNdlc28V1ilH4cBAgtB970o93IPmbfst
+ Hhp307G3WUiVvDXIBQ5oMkBHzpFpNZCbqxvh7Qn3IymrFzNam/BBeZjBS4yCB5Ddzrij8LvmTPk
+ gwDPdxXyH0q/xRycT4hn9F5t45zP4rRDamv9eB+VCt4IVtvZaTlx6zz+/+2fTHHXSIrJ4fOG++j
+ zgmyUqACLb2MY+Q==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA1NiBTYWx0ZWRfX6FVd/Srp7BWI
+ KyuV86qL3wVFE6Zm3fGQ/1FU6AHDnYmvnFzAe/+wxZP8uvIgqem8elRulm1VsfbhYql7YCQUx0e
+ +gdKZ8+tlTn3vCEteKPJ+aX5SZ2L6oOntOoY2wLbprKvgThgTthOcG5JVt65sSzlxHgEApKbJXF
+ C3UAD7rVf6fMiqnhW5wo0YlTh43Rt4G+neKnLCjqaeycW+g2kqKdSy07K5O94RmaSXpWx2/uO1i
+ DfyG92/U1x120G1gUYyHE5z+QHhxM89fWu5FB7maxX60jo5HRKpXDaI9ve2Y6R5ATceSC3SqC3X
+ UzE71LSdx+2mCWgEt+SOOk/SHTQEh56ofvvhLhPOaJ7EbXrSgGyDT5l994vY6I52h5L6a7voR+W
+ 3sFKGDt9Yyg45LChRYbj3SHtxjQHv9DT0ce/WlgJYuCVPPf7bETaYXBCUp8o0Bdf+ycVfvVejkZ
+ 5kjOgRwdnqb3/jC3Cpw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA1NiBTYWx0ZWRfXwgqOzICk0T7p
+ 7bf9E9SP2TiaWnu9jbp3fy0SjQE5IX2bqiLc79a5TgYJmisU+oySqrMnmZw+ll4WIrH4DO0hX+R
+ vR1stjDL2l1zANSotDshnyw0gMUI56I=
+X-Authority-Analysis: v=2.4 cv=PqsG/AM3 c=1 sm=1 tr=0 ts=6ad230ac cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=iK5QPMNa_E_FA8V_BHUA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: oV4aymb5qbfETncNd_1WmdSXp-8lypDZ
+X-Proofpoint-GUID: oV4aymb5qbfETncNd_1WmdSXp-8lypDZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_02,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160056
 
-From: Demeter Barna <me@fromdisposition.org>
+As requested by Herbert: this is the first of smaller series wits fixes
+for QCE. This one contains the patches addressing issues in skcipher.c.
 
-The USB controllers still use the legacy two-node layout, which binds
-dwc3-qcom-legacy. That driver updates the QSCRATCH VBUS valid override
-only through extcon, so with usb-role-switch the controller does not see
-the cable being pulled and does not enumerate again when it comes back.
-
-Flatten both controllers as on SM8450, so that dwc3-qcom updates the
-override with the role, and move the board properties from &usb_N_dwc3
-to &usb_N.
-
-Signed-off-by: Demeter Barna <me@fromdisposition.org>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
-Tested on a Razer Edge 5G (SM8350, board not upstream yet; Type-C
-through pmic-glink): without this patch USB does not enumerate again
-after the first unplug; with it, it does on every re-plug, after deep
-sleep (5/5) and across reboots (3/3). The other boards are only
-build-tested; dtbs_check is clean for all.
+Changes in v11:
+- Split out the skcipher patches into a smaller series for easier review
+- Drop patch "crypto: qce - Fix CTR-AES for partial block requests" as a
+  subsequent commit makes this adjustment effectively dead code
+- Fix a mid-series build failure due to an earlier bad rebase
+- Link to v10: https://patch.msgid.link/20261013-qce-fix-self-tests-v10-0-57162a38a554@oss.qualcomm.com
 
-Prepared with an LLM coding assistant; tested on my device.
----
- arch/arm64/boot/dts/qcom/sm8350-hdk.dts            | 12 +--
- .../dts/qcom/sm8350-microsoft-surface-duo2.dts     |  6 +-
- arch/arm64/boot/dts/qcom/sm8350-mtp.dts            |  6 +-
- .../boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi   |  6 +-
- arch/arm64/boot/dts/qcom/sm8350.dtsi               | 94 ++++++++++------------
- 5 files changed, 51 insertions(+), 73 deletions(-)
+Changes in v10:
+- don't pass a NULL buffer to sg_init_one()
+- fix byte order of the imported hash state on empty finalization
+- don't recompute the CTR counter in software for every request
+- reject skcipher requests with a too short scatterlist
+- check fragmentation for empty CCM decryption requests too
+- don't use a static loop iterator (duh...)
+- initialize the return value in qce_handle_queue()
+- Link to v9: https://patch.msgid.link/20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
-index 24ad073b4143..47519654640a 100644
---- a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
-@@ -847,12 +847,10 @@ &ufs_mem_phy {
- };
- 
- &usb_1 {
--	status = "okay";
--};
--
--&usb_1_dwc3 {
- 	dr_mode = "otg";
- 	usb-role-switch;
-+
-+	status = "okay";
- };
- 
- &usb_1_dwc3_hs {
-@@ -879,14 +877,12 @@ &usb_1_qmpphy_out {
- };
- 
- &usb_2 {
--	status = "okay";
--};
--
--&usb_2_dwc3 {
- 	dr_mode = "host";
- 
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&usb_hub_enabled_state>;
-+
-+	status = "okay";
- };
- 
- &usb_2_hsphy {
-diff --git a/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts b/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
-index 442405ba5f6a..01e39565c68f 100644
---- a/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8350-microsoft-surface-duo2.dts
-@@ -338,11 +338,9 @@ &ufs_mem_phy {
- };
- 
- &usb_1 {
--	status = "okay";
--};
--
--&usb_1_dwc3 {
- 	dr_mode = "peripheral";
-+
-+	status = "okay";
- };
- 
- &usb_1_hsphy {
-diff --git a/arch/arm64/boot/dts/qcom/sm8350-mtp.dts b/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
-index 410bb0befeea..a282e6d2007e 100644
---- a/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8350-mtp.dts
-@@ -336,11 +336,9 @@ &ufs_mem_phy {
- };
- 
- &usb_1 {
--	status = "okay";
--};
--
--&usb_1_dwc3 {
- 	dr_mode = "peripheral";
-+
-+	status = "okay";
- };
- 
- &usb_1_hsphy {
-diff --git a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-index 969c8cb31df9..6e26aa3590b5 100644
---- a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-@@ -909,11 +909,9 @@ &ufs_mem_phy {
- };
- 
- &usb_1 {
--	status = "okay";
--};
--
--&usb_1_dwc3 {
- 	dr_mode = "peripheral";
-+
-+	status = "okay";
- };
- 
- &usb_1_hsphy {
-diff --git a/arch/arm64/boot/dts/qcom/sm8350.dtsi b/arch/arm64/boot/dts/qcom/sm8350.dtsi
-index 55b32050ce9c..21863ba00d17 100644
---- a/arch/arm64/boot/dts/qcom/sm8350.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8350.dtsi
-@@ -2615,13 +2615,10 @@ compute-cb@8 {
- 			};
- 		};
- 
--		usb_1: usb@a6f8800 {
--			compatible = "qcom,sm8350-dwc3", "qcom,dwc3";
--			reg = <0 0x0a6f8800 0 0x400>;
-+		usb_1: usb@a600000 {
-+			compatible = "qcom,sm8350-dwc3", "qcom,snps-dwc3";
-+			reg = <0 0x0a600000 0 0xfc100>;
- 			status = "disabled";
--			#address-cells = <2>;
--			#size-cells = <2>;
--			ranges;
- 
- 			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
- 				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
-@@ -2638,12 +2635,14 @@ usb_1: usb@a6f8800 {
- 					  <&gcc GCC_USB30_PRIM_MASTER_CLK>;
- 			assigned-clock-rates = <19200000>, <200000000>;
- 
--			interrupts-extended = <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
-+			interrupts-extended = <&intc GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 14 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 15 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 17 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "pwr_event",
-+			interrupt-names = "dwc_usb3",
-+					  "pwr_event",
- 					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
- 					  "dm_hs_phy_irq",
-@@ -2657,48 +2656,40 @@ usb_1: usb@a6f8800 {
- 					<&gem_noc MASTER_APPSS_PROC 0 &config_noc SLAVE_USB3_0 0>;
- 			interconnect-names = "usb-ddr", "apps-usb";
- 
--			usb_1_dwc3: usb@a600000 {
--				compatible = "snps,dwc3";
--				reg = <0 0x0a600000 0 0xcd00>;
--				interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
--				iommus = <&apps_smmu 0x0 0x0>;
--				snps,dis_u2_susphy_quirk;
--				snps,dis_u3_susphy_quirk;
--				snps,dis_enblslpm_quirk;
--				snps,dis-u1-entry-quirk;
--				snps,dis-u2-entry-quirk;
--				phys = <&usb_1_hsphy>, <&usb_1_qmpphy QMP_USB43DP_USB3_PHY>;
--				phy-names = "usb2-phy", "usb3-phy";
-+			iommus = <&apps_smmu 0x0 0x0>;
-+			snps,dis_u2_susphy_quirk;
-+			snps,dis_u3_susphy_quirk;
-+			snps,dis_enblslpm_quirk;
-+			snps,dis-u1-entry-quirk;
-+			snps,dis-u2-entry-quirk;
-+			phys = <&usb_1_hsphy>, <&usb_1_qmpphy QMP_USB43DP_USB3_PHY>;
-+			phy-names = "usb2-phy", "usb3-phy";
- 
--				ports {
--					#address-cells = <1>;
--					#size-cells = <0>;
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
- 
--					port@0 {
--						reg = <0>;
-+				port@0 {
-+					reg = <0>;
- 
--						usb_1_dwc3_hs: endpoint {
--						};
-+					usb_1_dwc3_hs: endpoint {
- 					};
-+				};
- 
--					port@1 {
--						reg = <1>;
-+				port@1 {
-+					reg = <1>;
- 
--						usb_1_dwc3_ss: endpoint {
--							remote-endpoint = <&usb_1_qmpphy_usb_ss_in>;
--						};
-+					usb_1_dwc3_ss: endpoint {
-+						remote-endpoint = <&usb_1_qmpphy_usb_ss_in>;
- 					};
- 				};
- 			};
- 		};
- 
--		usb_2: usb@a8f8800 {
--			compatible = "qcom,sm8350-dwc3", "qcom,dwc3";
--			reg = <0 0x0a8f8800 0 0x400>;
-+		usb_2: usb@a800000 {
-+			compatible = "qcom,sm8350-dwc3", "qcom,snps-dwc3";
-+			reg = <0 0x0a800000 0 0xfc100>;
- 			status = "disabled";
--			#address-cells = <2>;
--			#size-cells = <2>;
--			ranges;
- 
- 			clocks = <&gcc GCC_CFG_NOC_USB3_SEC_AXI_CLK>,
- 				 <&gcc GCC_USB30_SEC_MASTER_CLK>,
-@@ -2717,12 +2708,14 @@ usb_2: usb@a8f8800 {
- 					  <&gcc GCC_USB30_SEC_MASTER_CLK>;
- 			assigned-clock-rates = <19200000>, <200000000>;
- 
--			interrupts-extended = <&intc GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH>,
-+			interrupts-extended = <&intc GIC_SPI 138 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 12 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 13 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 16 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "pwr_event",
-+			interrupt-names = "dwc_usb3",
-+					  "pwr_event",
- 					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
- 					  "dm_hs_phy_irq",
-@@ -2736,19 +2729,14 @@ usb_2: usb@a8f8800 {
- 					<&gem_noc MASTER_APPSS_PROC 0 &config_noc SLAVE_USB3_1 0>;
- 			interconnect-names = "usb-ddr", "apps-usb";
- 
--			usb_2_dwc3: usb@a800000 {
--				compatible = "snps,dwc3";
--				reg = <0 0x0a800000 0 0xcd00>;
--				interrupts = <GIC_SPI 138 IRQ_TYPE_LEVEL_HIGH>;
--				iommus = <&apps_smmu 0x20 0x0>;
--				snps,dis_u2_susphy_quirk;
--				snps,dis_u3_susphy_quirk;
--				snps,dis_enblslpm_quirk;
--				snps,dis-u1-entry-quirk;
--				snps,dis-u2-entry-quirk;
--				phys = <&usb_2_hsphy>, <&usb_2_qmpphy>;
--				phy-names = "usb2-phy", "usb3-phy";
--			};
-+			iommus = <&apps_smmu 0x20 0x0>;
-+			snps,dis_u2_susphy_quirk;
-+			snps,dis_u3_susphy_quirk;
-+			snps,dis_enblslpm_quirk;
-+			snps,dis-u1-entry-quirk;
-+			snps,dis-u2-entry-quirk;
-+			phys = <&usb_2_hsphy>, <&usb_2_qmpphy>;
-+			phy-names = "usb2-phy", "usb3-phy";
- 		};
- 
- 		iris: video-codec@aa00000 {
+Changes in v9:
+- Rebase on top of cryptodev/master
+- Rephrase Kconfig help text changes
+- Link to v8: https://patch.msgid.link/20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com
+
+Changes in v8:
+- Add a patch making the crypto driver *not* register algos by default
+  but only if the user explicitly requests it with the provided module
+  parameter
+- Use the "offloader" name for the crypto IP instead of "accelerator"
+- Fix device module table issues
+- Make the core driver use a list (despite it only having a single
+  member now) of child auxiliary devices to register to make it clear we
+  have the intention of extending this once we start the work on secure
+  media playback
+- Link to v7: https://patch.msgid.link/20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com
+
+Changes in v7:
+- Add follow-up changes converting the QCE crypto driver to auxiliary
+  bus, adding the core QCE driver under drivers/soc/ registering the
+  auxiliary device and removing the BROKEN Kconfig label
+- Link to v6: https://patch.msgid.link/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com
+
+Changes in v6:
+- Handle all zero-length HMAC finalizations (like imported state with
+  data already hashed), not only the genuinely empty message case
+- Add an additional patch addressing the fragmented skcipher payload
+  issue
+- Link to v5: https://patch.msgid.link/20260706-qce-fix-self-tests-v5-0-86f461ff1829@oss.qualcomm.com
+
+Changes in v5:
+- Dropped patch 1/8 that's already queued
+- Use the pre-allocated fallback ahash for HMAC transforms (Herbert)
+- Link to v4: https://patch.msgid.link/20260622-qce-fix-self-tests-v4-0-4f82ffa716c6@oss.qualcomm.com
+
+Changes in v4:
+- Remove remaining ECB and DES3 bits
+- Pick up tags
+- Link to v3: https://patch.msgid.link/20260617-qce-fix-self-tests-v3-0-ecc2b4dedcfd@oss.qualcomm.com
+
+Changes in v3:
+- Remove even more algorithms and dead code in patch 1/8
+- Link to v2: https://patch.msgid.link/20260615-qce-fix-self-tests-v2-0-dc911f1aad42@oss.qualcomm.com
+
+Changes in v2:
+- Add fixes for the full suite of crypto self-tests
+- Add Fixes and Cc tags
+- Link to v1: https://patch.msgid.link/20260610-qce_selftest_fix-v1-0-1b0504783a46@oss.qualcomm.com/
 
 ---
-base-commit: 4eb2586bd40db27d77cc5b724ca9386ed0c71d53
-change-id: 20261016-sm8350-usb-flatten-6851a7461934
+Bartosz Golaszewski (3):
+      crypto: qce - Reject empty messages for AES-XTS
+      crypto: qce - Use a fallback for AES-CTR with a partial final block
+      crypto: qce - Use fallback for fragmented skcipher payloads
+
+Kuldeep Singh (1):
+      crypto: qce - Fix xts-aes-qce for weak keys
+
+ drivers/crypto/qce/cipher.h   |  1 +
+ drivers/crypto/qce/skcipher.c | 39 ++++++++++++++++++++++++++++++---------
+ 2 files changed, 31 insertions(+), 9 deletions(-)
+---
+base-commit: f0f20b900bbb8bdcfaf6cb282787854067d8eec8
+change-id: 20261016-qce-fixes-skcipher-e0384a650e25
 
 Best regards,
---  
-Demeter Barna <me@fromdisposition.org>
-
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
