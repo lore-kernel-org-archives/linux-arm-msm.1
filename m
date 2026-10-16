@@ -1,165 +1,168 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EE90471408;
-	Fri, 16 Oct 2026 10:50:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A251A3E8331
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:56:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792147834; cv=none; b=tlvmIU5Eu/PTo7XbReoCXXGW5W9goL1Ukvm7t/RKNrR5xmFQsNTne6faKNKaDCUYadjG99hg6aQhaBqBi4KTwO5r5FlpitUzdPJX6Sb7/wpROVVdRuf2gG3VPhnvuRle9NCkRZCS9ZyV51BwJ5cKXlE+G3vMjJmzXw7cofS7JkY=
+	t=1792148211; cv=none; b=rVBLCxCG5e8q2pqYK7fxVHcB/nNWtesN5zhTw6sghKO1OyPtj/Nw0g6bMnQOhF8gKR1ZOyh6+3jRvRlf9rmBPPhdoZSkIwxF/cKOh1nV9m8d2MPQ+qN5zbaWbDrtKmuPV2ECOZ6HytdTlyzQyII1VJKZt9NSGVEVVFBRHWnmNg0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792147834; c=relaxed/simple;
-	bh=QuTUpXOUCaUuBOC1UbPUqse6N0EFcQRqSPKqz3NAqFs=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=o9UF5AM4TQ70PEN7VLkhdw5E2Rt+7CHpiZiKSZVQUDCvu2+w5RsM08srpkKhDCwy7ll7wf+Y7/TxvJG6/8MNfIc/ACNSbZLQKvGsw3KH3+ri76T16VLxqKQgxpT8LpFr31p1Ch83HJRS5oPa0oN2qz5bv7SHOGrTtiPYBZXH6QA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Se2sqRSe; arc=none smtp.client-ip=198.175.65.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1792148211; c=relaxed/simple;
+	bh=JdVdjnikGKi5Gvt+6lL8Ht9yPDN07pXQJkC104IlcQU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=f5lHpatJ5pnJKs2evX1F8Y5mGVwCOgEAbKEluJQHkLpSioe65UtVwoR3R/6WyNKjCPd1rZEKFVvz1PZJPoNHGWqKFlRhm0VmvbW1mt2qkV61wdy97z8K3+5L9yCrLv7S5awzQ17GYfUQA6gZ0kg+BKdBZvDqA1gi8c7PN50yFds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QfUVxblh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MMFCox5K; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Se2sqRSe"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792147832; x=1823683832;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=QuTUpXOUCaUuBOC1UbPUqse6N0EFcQRqSPKqz3NAqFs=;
-  b=Se2sqRSeb2FgWNQgLKfCR6Q1N2Zv2ZBvezWG1F3VD7YpQrVzNOzXtD0b
-   xsHK0wwXxVX3mzlre/W0WREwRhoDvDMau1OMdwb8tuJtHSuwXzoffzazP
-   0QoOnqSIiZK6wLMz8sf0i7FxiYeJPM8+3sqvNEaktF5FvvAHCcSUbBBUw
-   2g18eSwv21wIxG1b5Z4buOvArsIVFyp2akKwARqi4h965lDGphZEPsSVZ
-   N6UMfw25cnqXgXe5UW+idQz1oWa35E+Vk/tXzZpaouHfMdRjFtc2DAbDW
-   lUzWL7DJ9gR4BA19c0HdIENCt1gCG+oiebiPBkNpkz7GjW0YPe2B/q4I9
-   w==;
-X-CSE-ConnectionGUID: frXJgo58RfqbbVGv8D4peg==
-X-CSE-MsgGUID: HdbjNfjcQU+Ml49qUCZ1MA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11936"; a="813144"
-X-IronPort-AV: E=Sophos;i="6.27,161,1787036400"; 
-   d="scan'208";a="813144"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2026 03:50:30 -0700
-X-CSE-ConnectionGUID: tS1l6KnoTtyw9/CX2dJCKg==
-X-CSE-MsgGUID: Okq7koC+Ti6Lzl5JCFYy8g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,161,1787036400"; 
-   d="scan'208";a="1991378"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.34])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2026 03:50:26 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Fri, 16 Oct 2026 13:50:21 +0300 (EEST)
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-    Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-    Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
-    Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
-    Guenter Roeck <linux@roeck-us.net>, Bjorn Andersson <andersson@kernel.org>, 
-    Abel Vesa <abelvesa@kernel.org>, devicetree@vger.kernel.org, 
-    LKML <linux-kernel@vger.kernel.org>, platform-driver-x86@vger.kernel.org, 
-    linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v4 2/4] platform: arm64: Add a driver for the EC found
- on ASUS Glymur machines
-In-Reply-To: <e4cec04d-2c66-4900-940c-d7d3d245cc64@oss.qualcomm.com>
-Message-ID: <f97000c4-496d-0ce1-318a-1df5c0de804b@linux.intel.com>
-References: <20261015-topic-asus_ec-v4-0-af6305ffcb10@oss.qualcomm.com> <20261015-topic-asus_ec-v4-2-af6305ffcb10@oss.qualcomm.com> <ba7830c7-9ad8-6695-f543-c4c419aa9133@linux.intel.com> <e4cec04d-2c66-4900-940c-d7d3d245cc64@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QfUVxblh";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MMFCox5K"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GAADHk1104740
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:56:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	b7uUsi3m05Q14nZCoKuKl+bouK7Huw2yq6Mvx0jQTmM=; b=QfUVxblhl+b3cs3G
+	iSzF/bLQ9EY3kfWIITCyNWk556Eq+OeW4EvhS3RkCb8s48nBwl0965GdVJKy7QRl
+	wvarpKMMhzZOmIB3NNDzjANryhs5MEOkTjXmMEGGTIuHKMZ0cGba7fWV4L+fctjZ
+	lrpcaUHxhBJo2ol8E5JzlEQGP5siYIMY7eBM37LNpCju9cUiFlMzkbqmF+Uox7Q6
+	HlkcaVuJvv6J5g8GFSpD6G5hiV2JDAYp5E0yznW6hxPWvbWxU37Yza2EpRzVfEL9
+	GfnPA5GnnDs3bdmPn5b52NG53R/uMmUeZ35LSPkAUwN1a+RtQJuJen7R9P6qMbDG
+	Sg8QuQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb3r3bf1q-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 10:56:41 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-934a8cd3a8bso95911285a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 03:56:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792148201; x=1792753001; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=b7uUsi3m05Q14nZCoKuKl+bouK7Huw2yq6Mvx0jQTmM=;
+        b=MMFCox5KYukrxdB22k+9bFXeOyumaM6cDjg+QxtwOxR2ubU8TX61NoiNhrRnaj+vCQ
+         1xh/0wAAF1f01vyZtCpEJh4Z6Qc6L4JgrFc0FuLlOaXcCpFcd5p9n7QMsCgfCKgXMq5k
+         uXS9uyVDuWrIgjeinLPJJudd3FoJ1H1hEW07IPJNafQeolg1omrL/eeekVZ5iK15el/W
+         jdG8Ym/NxyZ4e2ZuvKE+NAd/JfLPdCHAG0hvY0q6UYTCDq8zOfhXM4Ru0Pl24nNq9t2k
+         mFm6bsEVUO0sw5YVDoup1eZ53/zIRvuiDSnqmWJy7qkeYN559eFl+kWZwuH4cXZBWRHw
+         oj+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792148201; x=1792753001;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=b7uUsi3m05Q14nZCoKuKl+bouK7Huw2yq6Mvx0jQTmM=;
+        b=p80cerTfwzEzZF+ERtMekNwSFKEi3rL+0ZN8OKkB/03jq9L7qtfevPzIl5tgqLsXeo
+         z1tE2qWE5KoIN6vFkPj0bpfnawBZurm1RIZpa5nrJGS2VQkMWQuNitfPnwda+iKKxsuO
+         MZpj3dKvTZw9RSkg25+nMDo1u5Oz8OAJx4HU3rhTvZXM2T7bF3rNmEtjIDWg5ahSV4fI
+         /ykzCyp3vwKTzsLscHOYahaZRicJbEesaAk0Mc60JiAwj8G+SyO6e7PhE6P6kUwp7v1L
+         cc0+Jrjor1+pDnfzaE5AtV3ZAY/kUp52Rezx8yzXh4KC1TerV0zdCSdb1M+BTKF3XXXw
+         DoqQ==
+X-Gm-Message-State: AFq9FYJP3BDmLBqwvs2o3kX1FX+2cIgDOAMWSlvST0H6KXa1V6AqWYB1
+	2ceIn519Sbkaa+6hUY7ga+xAmBnfnVJTQcxWq6u2PX1G3opcgcMxSfup/njDwkBi7TX89dPKP1o
+	4lp2MPf121X1ugQrFMU4IfAvevYRqw0c4uQwzyNOcVonOfFk34LEefBTOAxjASHm8AOt4
+X-Gm-Gg: AYBFou1CeXxK42fK6uz2QaHIvV1JXzVL8hvfNbPWE8wYIz6hC74AcqSQq93aXpnRhh9
+	u9fQU8zcyx/Rg3DdxDwrVzwcMZ9W3pKh2J60j8KeRj3rJxOuE8VzIsgnqe1kMv+1zN62foumirK
+	iOeYfcYCQ0YX8xhC9pbNMRPnXNXHbii+7FbDX05GX0nXoxAXhSE/7jlx09rdpmpIHmOOmTkk/Z0
+	WkcW1RzoawHIRCiIOBypN8hI0nUkBZTsbQWbOE5TvEy5vX1DdJm4iciWsFflrsk75NTvtXvpq9J
+	aVNBi/+t0Y/TQ0rqvoNIiDRqLt9GajkYcDMaHd6wlElJKdB5Q414PZgTlXxIlfo3qYThTUgpkdj
+	U8tVmrWrOlqqm5GcZLUnqrA==
+X-Received: by 2002:a05:620a:3186:b0:939:8bc:8826 with SMTP id af79cd13be357-93ebd10c0e2mr4141212485a.2.1792148200806;
+        Fri, 16 Oct 2026 03:56:40 -0700 (PDT)
+X-Received: by 2002:a05:620a:3186:b0:939:8bc:8826 with SMTP id af79cd13be357-93ebd10c0e2mr4141209885a.2.1792148200359;
+        Fri, 16 Oct 2026 03:56:40 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b38a1dacb6sm780437a12.28.2026.10.16.03.56.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 16 Oct 2026 03:56:38 -0700 (PDT)
+Message-ID: <5fb086d1-7725-4d8b-a2c9-7627f6da7cd9@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 12:56:35 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323328-1896846893-1792147821=:1180"
-
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323328-1896846893-1792147821=:1180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] arm64: dts: qcom: sm7125-samsung: add initial device
+ tree
+To: Erikas Bitovtas <xerikasxx@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>, Kees Cook <kees@kernel.org>,
+        Tony Luck <tony.luck@intel.com>,
+        "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Stefan Hansson <newbyte@postmarketos.org>,
+        ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
+        David Heidelberg <david@ixit.cz>, Abel Vesa <abelvesa@kernel.org>
+References: <20261013-sm7125-samsung-v4-1-3233901b48bb@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261013-sm7125-samsung-v4-1-3233901b48bb@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA0MyBTYWx0ZWRfX2LH11npDbAcq
+ R1IpI4CF4G/INtXNo2GHFVx8Y0U1XSBbON+Mycsz26bDDrxtOsvibsEoq0qM+7MBpimmK4Pnr/7
+ uuYyNXNdFN3dMonrocSLZW7+Xqv8oIVBMia+lD0fukSUc41NxATyII13Zj1Jx/LnvV399tdtwDC
+ oeRj7Xi1kgTHTraO1jPqizCFypI2+XqYgsJ2Dkc0O4w3ZHSnjBg3+q7JPMcHNxcAUv/AwNC5e6g
+ AwvXxGBjoEo8WrBfjFdb1E5HdcixUZLYTQaISkmM69rijQHhAsKRTsRQnCrtJxjMuCpgBax60Et
+ 4CkDrTkOg+T670A4hEq9SKSJmflnGzeMtVginUkTd3WDv3Xhi0Y5OGM7v9DUTOumzhL45pP1cmx
+ eL1yvUiWeZpZ5fMBcJ1DVneaXDojQwUjm2QsX599UY9QDideL9mdblK3lOhN/xPGlmDC7xF4beW
+ tZvEq62sOXK7PkqtxqA==
+X-Proofpoint-GUID: CNBAcKhjJFaYbSBqg_6nvCBYcIY-qf9a
+X-Proofpoint-ORIG-GUID: CNBAcKhjJFaYbSBqg_6nvCBYcIY-qf9a
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA0MyBTYWx0ZWRfX0WdE+eykk4G5
+ /xI51MpQ4v8gEvNirt8JMXt+Z7BKc54FyfBzc5qQM5aArBWBuQcmt41PY3OkROV33InePhQ3i7/
+ mXgkIQvvKd0R6RjUbmqf06IqEsLoB8Y=
+X-Authority-Analysis: v=2.4 cv=INGXmQvG c=1 sm=1 tr=0 ts=6ad202e9 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=2OUG9Xaq2iMWKi4sypAA:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 clxscore=1015 spamscore=0 adultscore=0 priorityscore=1501
+ malwarescore=0 suspectscore=0 bulkscore=0 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160043
 
-On Thu, 15 Oct 2026, Konrad Dybcio wrote:
+On 10/13/26 3:58 PM, Erikas Bitovtas wrote:
+> Samsung Galaxy A52/A72 are devices released on atoll (SM7125) platform
+> in 2021. Add initial device tree for SM7125 Samsung platform with
 
-> On 10/15/26 4:24 PM, Ilpo J=C3=A4rvinen wrote:
-> > On Thu, 15 Oct 2026, Konrad Dybcio wrote:
-> >=20
-> >> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> >>
-> >> Some Qualcomm Snapdragon X2 Elite (Extreme)-based ASUS laptops (at
-> >> least the Zenbook A14 and A16) expose a custom, somewhat
-> >> Qualcomm reference-derived EC interface. Introduce a driver to
-> >> communicate with said EC, allowing for fan speed reporting, keyboard
-> >> backlight setting and receiving of a number of miscellaneous sideband
-> >> events.
->=20
-> [...]
->=20
-> >> +/* RAM addresses are sent MSB first, while returned data is LSB first=
-=2E */
-> >> +struct asus_qcom_ec_ram_request {
-> >> +=09__be16 addr;
-> >> +=09u8 count;
-> >> +=09u8 reserved[2];
-> >> +} __packed;
-> >> +
-> >> +struct asus_qcom_ec_ram_response {
-> >> +=09__le16 data;
-> >> +=09u8 unused[3];
-> >> +} __packed;
-> >=20
-> > Endianness stuff looks sane now but __packed also needs an include.
->=20
-> Some fun statistics:
->=20
-> $ rg compiler_attributes.h drivers -l | wc -l
-> 30
+[...]
 
-You didn't consider compiler.h -> compiler_types.h ->=20
-compiler_attributes.h that seems a guaranteed include path to me. The=20
-numbers would be slightly better with that.
+> +&soc {
+> +	i2c_17: i2c-17 {
 
-> $ rg __packed drivers -l | wc -l
-> 1228
->=20
-> [...]
+This is not a MMIO device, so it doesn't belong under /soc
 
-So lets not add another mine to what is already a scary minefield. :-)
+Have you tried using the bus through the normal QUP driver path?
 
-The indirect include paths are a minefield if somebody ever wants to=20
-refactor a header. I know some maintainers may be more lax on this but=20
-here we try to follow include-what-you-use principle to extent that is=20
-reasonable (when the include path is guaranteed such as=20
-platform_device.h -> device.h or linux/x.h -> asm.h you can only include=20
-the former ones).
+> +		compatible = "i2c-gpio";
+> +		sda-gpios = <&tlmm 51 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
+> +		scl-gpios = <&tlmm 52 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
 
-> >> +static int asus_qcom_ec_read_ram(struct asus_ec *ec, u16 addr, u8 cou=
-nt, u16 *out)
-> >> +{
-> >> +=09struct asus_qcom_ec_ram_request req =3D {
-> >> +=09=09.addr =3D cpu_to_be16(addr),
-> >> +=09=09.count =3D count,
-> >> +=09=09.reserved =3D { 0 },
-> >=20
-> > 0 is the default init value so generally =3D {} should be enough but I =
-think=20
-> > it's not necessary to add the reserved member at all because the entire=
-=20
-> > struct should be initialized anyway by the surrounding construct.
-> >=20
-> > With these fixed,
-> >=20
-> > Reviewed-by: Ilpo J=C3=A4rvinen <ilpo.jarvinen@linux.intel.com>
->=20
-> Yeah I know. I still left it in deliberately so that in case anyone
-> wants to audit the format here and compare it to the DSDT it's more
-> obvious that this wasn't an oversight. Do you still prefer I resend
-> (or maybe you'd like to fix that up while applying, which I don't
-> mind either)?
+style nit: (foo | bar) instead of (foor|bar), please
 
-We can keep the member there but I'll change it to {}.
 
-I can try to remember to fix these while applying (I'm good in=20
-forgetting though :-)). But I at least try to check all the comments made=
-=20
-to the last version.
+[...]
 
---=20
- i.
 
---8323328-1896846893-1792147821=:1180--
+> +&usb_1 {
+> +	qcom,select-utmi-as-pipe-clk;
+
+Is there no superspeed / DP altmode?
+
+Konrad
