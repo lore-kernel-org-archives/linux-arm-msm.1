@@ -1,37 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 296FD4A64DB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 295A74A4F08;
 	Fri, 16 Oct 2026 12:55:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792155304; cv=none; b=uRjLKqlOa2kT34b7vVT4V/QbvYc77Z6NVs3lcnhcrx69+TJj8Lvhbc/RR8NSFbooDZ1YvD8IzcfbzwnkAPI7OBijS6LWQojjn7p1dlbTpBu+BeLnYiGjQ3CfU5Vtn9eStw8xtrrAbqSoWLDUyxZZ/mYh9kHL266XQx75j+1h+dw=
+	t=1792155304; cv=none; b=fX1IU+yIYWsmdqAyLu3i8mPc5NpH008ecB/DtJTgo2nZwYLJdLlPRll080ZaqZefAC+F0+joggoZnfbHN/8MF2AbbVLDmmBEMkO2ykCzhjicc7TZC6+f+dbBUWCHD/U27OQy9wKuMjgQFv175WU6ZfFrbyaNe/xQ14jUK3WlQ5k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1792155304; c=relaxed/simple;
-	bh=o6J5i2u49YowKa18Af6jXb6RXCYP7we3Zmk8baG15Nw=;
+	bh=Qi17AilogyYjfb7IaUw9hyywG+v6NW/1FEa0Q4Jp+2w=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Iw6rAzJdwMEPJlZeu/SuOU82W8DoQJ+C9ADqJP4pAm/KHgLY3wf4HfpQ7nz18Hcefi2U4sy7FSp42rlJispKKnvfOME7QcY5dxw4mEMWklPRevS2HOcX6kAQf6hVgZbcJ5vuvC+FZlDzFMahUMl08R4bOvjbn4J/CPECnx9ffGM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IRFLj9MZ; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=X5xRu5Kc4LTbJuxGWkbHSbgtbwJodeQURkco/ofTPCSFB/xX8DTBIhBKpMKe8MrCLTO8eKrfJOHRHxhgQQDW+X/O1tGpzZMsleU/IcIkSWhnjsLW0PHZcZyvh/VQyxmwkViAcgQ90hJDOkoyyBcfFT9/leU9dt3CH7ui8+YJGPg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XneTzLFV; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IRFLj9MZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E942FC2BCF4;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XneTzLFV"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C4AB4C2BCFB;
 	Fri, 16 Oct 2026 12:55:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792155304;
-	bh=o6J5i2u49YowKa18Af6jXb6RXCYP7we3Zmk8baG15Nw=;
+	s=k20201202; t=1792155303;
+	bh=Qi17AilogyYjfb7IaUw9hyywG+v6NW/1FEa0Q4Jp+2w=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=IRFLj9MZ7YJf63ldWKLNU2X0NQHURQ2Ig8ZAxhaIAe5lFKHyUpjU/i0PtlD8QT9US
-	 bM+ffq6N/KNFgIKK7n9fJ3r4tF48QISztMT4AP1Wvpzvh9tYDBMF21ZTHCchiJE3eR
-	 mlJj8YH52vuNWkvViM0+xmG2htHffUopCMckKonxFbrxZJ6NeLlihD/w+aoHGS3Vuc
-	 iNa+QmQnrz4wWOy5A7pkjwJbJLvGqRGDm2BZisATeWVVOB2sdm8MUvN1klrCSQ4ctw
-	 1Bb9/MuOZTF/j0H+4nXOIQ3oRrx0zeZLiqCNOmtVJc3rEAUGLBLW/FxNCIsUDNWpZs
-	 klyysyRR7DGRA==
+	b=XneTzLFVWLy0MUG2C5l23O357VpuYSAoigTzVAoenOs8plAVoL16WZMZ2GyKbY0T6
+	 4tE/c4dal1IykdwZW1Ir4je6EJZLDxDzAmy1iqv5x8jSph+G9mNc1ojkRClhlTz79O
+	 b1p6ME+6LN3uoRPIeGt7jjclOAqDB0fMtaJ7heLXyFbm/JabbX7g8aR0vRoPn3HEbr
+	 nKf+UVD75c2e4rsXp6O4O1R0hDwp268JVBDBuSmq9effe8RboBHuqyPbwOUlsWgz7+
+	 /ZS2eHFAyIAbNUXKqYAQjmKxFMniTQZk2/qTFfbhGDX6xch7O/OFQIqpNdOxu+An9d
+	 QKkRCIOEZSvSg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D60D1CCF2C2;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABAD8CCF2C1;
 	Fri, 16 Oct 2026 12:55:03 +0000 (UTC)
 From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Date: Fri, 16 Oct 2026 18:23:13 +0530
-Subject: [PATCH 3/4] drm/msm/a6xx: Program the PDC sequencer on Adreno 620
+Date: Fri, 16 Oct 2026 18:23:11 +0530
+Subject: [PATCH 1/4] dt-bindings: display: msm: Document Adreno 620 and its
+ GMU
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-adreno-a620-v1-3-4a7ed6210d7d@brar.si>
+Message-Id: <20261016-adreno-a620-v1-1-4a7ed6210d7d@brar.si>
 References: <20261016-adreno-a620-v1-0-4a7ed6210d7d@brar.si>
 In-Reply-To: <20261016-adreno-a620-v1-0-4a7ed6210d7d@brar.si>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -58,11 +59,11 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, Ishu Brar <patches@brar.si>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792155300; l=3539;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792155300; l=1758;
  i=patches@brar.si; h=from:subject:message-id;
- bh=Ysw8EJ3fjj06d5areFyTNj9oO7rlFN0mqP5y7DWvPYM=;
- b=2wLz7ueVtHuJYtf3X4PO2TO7TcGCaLsgfFcbS63waQlpqkuN5WeC4UK3ikI0Q32Jom1skzupF
- Lhrrnt+n/keAVZpWP5ONtE8s9yc0mHxW6I8lQ1oTmI9nJvnH0BaUxMz
+ bh=8eTnNvhKpEjMR4UE06ag4D//fKmp89dOdFVVH07JhJ0=;
+ b=lCY1uQGiarE2Uo5RWJbJwgfPoMTT+DEl4959T6O/cuNT8183u47wn9n4TMVRYQOfwUkw0cR+Q
+ vd1Jsuf5TvyDJg5SO18Wcgqj2xhStecnYTPm6GiiBjXfRhh32xXlyFK
 X-Developer-Key: i=patches@brar.si; a=ed25519;
  pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
 X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
@@ -72,79 +73,49 @@ Reply-To: patches@brar.si
 
 From: Ishu Brar <patches@brar.si>
 
-Unlike the rest of the A650 family, the A620 does not get its PDC set up
-by AOP (the downstream devicetree has no pdc_in_aop for it). Without the
-sequence, the RSC never acks the second power-up ("Unable to power on
-the GPU RSC") and the device hangs.
+Add the Adreno 620 found in the Qualcomm SM7250 and its GMU. The GMU
+has the same registers, clocks, interrupts and power domains as the
+650.2 one. As on the other A6xx parts, the GPU clocks are defined in
+the GMU node, so the GPU node has none.
 
-Program the sequence from the driver, taking the xo, mx and cx resource
-addresses from cmd-db instead of the hardcoded ones.
-
-Assisted-by: Claude
 Signed-off-by: Ishu Brar <patches@brar.si>
 ---
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+ Documentation/devicetree/bindings/display/msm/gmu.yaml | 2 ++
+ Documentation/devicetree/bindings/display/msm/gpu.yaml | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-index 662f09bec..e567e8027 100644
---- a/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-+++ b/drivers/gpu/drm/msm/adreno/a6xx_gmu.c
-@@ -686,6 +686,7 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
- 	u32 seqmem0_drv0_reg = REG_A6XX_RSCC_SEQ_MEM_0_DRV0;
- 	void __iomem *seqptr = NULL;
- 	uint32_t pdc_address_offset;
-+	u32 mx_addr = 0x30010, cx_addr = 0x30000;
- 	void __iomem *pdcptr;
- 	bool pdc_in_aop = false;
- 
-@@ -697,8 +698,17 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
- 	if (IS_ERR(pdcptr))
- 		return;
- 
--	if (adreno_is_a650_family(adreno_gpu) ||
--	    adreno_is_a7xx(adreno_gpu))
-+	/* Unlike the rest of the A650 family, A620 has no PDC setup from AOP */
-+	if (adreno_is_a620(adreno_gpu)) {
-+		pdc_address_offset = cmd_db_read_addr("xo.lvl");
-+		mx_addr = cmd_db_read_addr("mx.lvl");
-+		cx_addr = cmd_db_read_addr("cx.lvl");
-+		if (!pdc_address_offset || !mx_addr || !cx_addr) {
-+			DRM_DEV_ERROR(gmu->dev, "No PDC resource addresses in cmd-db\n");
-+			return;
-+		}
-+	} else if (adreno_is_a650_family(adreno_gpu) ||
-+		 adreno_is_a7xx(adreno_gpu))
- 		pdc_in_aop = true;
- 	else if (adreno_is_a618(adreno_gpu) || adreno_is_a640_family(adreno_gpu))
- 		pdc_address_offset = 0x30090;
-@@ -766,10 +776,10 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD_WAIT_FOR_CMPL_BANK, 0);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CONTROL, 0);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_MSGID, 0x10108);
--	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_ADDR, 0x30010);
-+	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_ADDR, mx_addr);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_DATA, 1);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_MSGID + 4, 0x10108);
--	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_ADDR + 4, 0x30000);
-+	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_ADDR + 4, cx_addr);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_DATA + 4, 0x0);
- 
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS1_CMD0_MSGID + 8, 0x10108);
-@@ -780,11 +790,11 @@ static void a6xx_gmu_rpmh_init(struct a6xx_gmu *gmu)
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD_WAIT_FOR_CMPL_BANK, 0);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CONTROL, 0);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_MSGID, 0x10108);
--	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_ADDR, 0x30010);
-+	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_ADDR, mx_addr);
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_DATA, 2);
- 
- 	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_MSGID + 4, 0x10108);
--	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_ADDR + 4, 0x30000);
-+	pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_ADDR + 4, cx_addr);
- 	if (adreno_is_a618(adreno_gpu) || adreno_is_a619(adreno_gpu) ||
- 			adreno_is_a650_family(adreno_gpu))
- 		pdc_write(pdcptr, REG_A6XX_PDC_GPU_TCS3_CMD0_DATA + 4, 0x2);
+diff --git a/Documentation/devicetree/bindings/display/msm/gmu.yaml b/Documentation/devicetree/bindings/display/msm/gmu.yaml
+index 07f0e547b..3478adebd 100644
+--- a/Documentation/devicetree/bindings/display/msm/gmu.yaml
++++ b/Documentation/devicetree/bindings/display/msm/gmu.yaml
+@@ -217,6 +217,7 @@ allOf:
+         compatible:
+           contains:
+             enum:
++              - qcom,adreno-gmu-620.0
+               - qcom,adreno-gmu-650.2
+     then:
+       properties:
+@@ -238,6 +239,7 @@ allOf:
+         compatible:
+           contains:
+             enum:
++              - qcom,adreno-gmu-620.0
+               - qcom,adreno-gmu-640.1
+               - qcom,adreno-gmu-650.2
+     then:
+diff --git a/Documentation/devicetree/bindings/display/msm/gpu.yaml b/Documentation/devicetree/bindings/display/msm/gpu.yaml
+index c30de7feb..cf015fdee 100644
+--- a/Documentation/devicetree/bindings/display/msm/gpu.yaml
++++ b/Documentation/devicetree/bindings/display/msm/gpu.yaml
+@@ -435,6 +435,7 @@ allOf:
+               - qcom,adreno-615.0
+               - qcom,adreno-618.0
+               - qcom,adreno-619.0
++              - qcom,adreno-620.0
+               - qcom,adreno-621.0
+               - qcom,adreno-623.0
+               - qcom,adreno-630.2
 
 -- 
 2.56.0
