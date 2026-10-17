@@ -1,36 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A923484252;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AA49484253;
 	Sat, 17 Oct 2026 19:59:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792267192; cv=none; b=obwV4FKTOdxZZqP87zOLCCZcIx1BqzwtfX+F+XdHhQ7nf8aX0PbrZjN5ZodYvHJUft6IRQeY4Ah7C4LEddt6lOAmjcjhO1BEWFvsIz6oYx0+pDVP48bwpaxwktdR0DEeSluWt4NkObfxLkrZb72ueN/pgtWkovQJaOviEF0zQmA=
+	t=1792267193; cv=none; b=a+Vsgz11/F7ViDv+M6rj5U5kvPKL55VKQRpWccjUJcgUnZ5EQGtV0w3+0iiopska04+/meVQ8Qd0PIFzHdhMeIEjt2tgKAY5RS0qTq2MR5t4JC+6xurSPMkdqmlTgVbRjelETpYE+DRkFeuIrG9yqLHU7lQkES4qo7R3shdWV1w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792267192; c=relaxed/simple;
-	bh=Sc3cP9kKOv7GW9mgEP+3BYagORk3SW2FzOyBgfC7dUw=;
+	s=arc-20240116; t=1792267193; c=relaxed/simple;
+	bh=I3FdlyeG4hO208P4EB5mq8shh+TK5zUhVSedS3ejpSw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=iDSioA9M/vOgKBQibgkHw+SsrFz8SNNeSwO5ttUzvTi1anhT2qGo4dlx7Ud7Mr/9zxpmb+ArASlmgfbF+SESMT6u/XuPmZew/QIvnzLASTc9siIT89RO8hl+PJuPcIqwk6/knkuvoaQoPtT4dS75EE1iE1OKvKChQZwS9p6b4jw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PqkznLIJ; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=GXsWscl9PCdZ4cpvbWiAO1CW9RzUlckDaBesiqgLxJCaiIrMt/gU9m21bu6Zl9GorIjZxAeCm84sTe8ZkspnEgdkl2Nez/XbVGpvsnbMIuc9SwCnTM9KYklaAaV1bTX8HCf3MCjDSqAfLsFpdc/uutuPjqLKmMYB9SBJWOYKLd8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I3Z9AJwl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PqkznLIJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB1F21F000C5;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I3Z9AJwl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF6071F000C6;
 	Sat, 17 Oct 2026 19:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792267190;
-	bh=DbUAi5s/epbEJq7KS/lY4NQVfKPrOJvYNdVByS66PKY=;
+	s=k20260515; t=1792267191;
+	bh=Z6VTzkNz3lljWq1ttScTRs6n3O7AGKj08rTBFz2E/vc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=PqkznLIJCUf3aiCsH3od2cjrFcuYF1sKoNM0n3y+p5Vn59j3DhF1bQJN722hEz1hm
-	 scD72/3W3DbXFCr/KB1DQE/f8VVCimE1brZFEToNbxeMXaqounRRaZpYtMnzekNbZ+
-	 qiHkhSWn/aerE6aGVNIn1HqZJOAeGq2usBGjDIXwn/hnNstcMI2xDPi9SCTV8wJ0jP
-	 UpBudZnnOvnVc4s8TgNZHLD25k/BPhrEcvp0WVfTskQmknCTlkwVMfnIkkpWuvYvvW
-	 ZFV+KU/JB0OLHwV6U/vKUxf4wGtlO7BmfiZLS1MFlT0rhT9JKqfa6TSCjX5y9W46tL
-	 tEw5CIxQqCD8w==
+	b=I3Z9AJwlEDJ3hEEbUpZgPu5mDx2UniT1FMTwNIrV39TPl9YB6mBOTcmdvOM5PoEty
+	 Gd8bfKrIsLNYecEDsEAppsAtEI46+IT4e7W22nenqied6QoTTucs1S957XqdHSw2Jp
+	 tfoLwogxvnc9NZXpyZTNyYoycrnxC68k/sn7DNKPJKKS6lX2RHiCh2ggQLDH+uv5Tw
+	 Y8ZyebOlJUb9gwApXPZyVAIaLsIUoSPmRRyGJ8BGyAp5hRUoy8A9stJ7WMTxPFwoG6
+	 JGDaXfEm7wNrE+gUjqSkD2VY9/EehNAWh1j13G5ueXQB043L7AGAe6EIg4YSy/neh3
+	 KhmpHW/QN+9Xw==
 Received: by venus (Postfix, from userid 1000)
-	id E9D19182317; Sat, 17 Oct 2026 21:59:47 +0200 (CEST)
+	id E5332182303; Sat, 17 Oct 2026 21:59:47 +0200 (CEST)
 From: Sebastian Reichel <sre@kernel.org>
-Date: Sat, 17 Oct 2026 21:59:32 +0200
-Subject: [PATCH v2 3/4] arm64: dts: mediatek: Use DP AltMode defines
+Date: Sat, 17 Oct 2026 21:59:30 +0200
+Subject: [PATCH v2 1/4] dt-bindings: connector: Add DP AltMode VDO
+ definitions
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -39,7 +40,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-dp-altmode-dt-defines-v2-3-7ab3d93553dd@collabora.com>
+Message-Id: <20261017-dp-altmode-dt-defines-v2-1-7ab3d93553dd@collabora.com>
 References: <20261017-dp-altmode-dt-defines-v2-0-7ab3d93553dd@collabora.com>
 In-Reply-To: <20261017-dp-altmode-dt-defines-v2-0-7ab3d93553dd@collabora.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
@@ -56,78 +57,127 @@ Cc: linux-usb@vger.kernel.org, devicetree@vger.kernel.org,
  Sebastian Reichel <sebastian.reichel@collabora.com>, 
  Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2181;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3086;
  i=sebastian.reichel@collabora.com; h=from:subject:message-id;
- bh=lUWUiSLI+YaFT7aEtcEk5a+91BYCmCkb6yEWgXVYoFs=;
- b=owEBbQKS/ZANAwAKAdju1/PIO/qaAcsmYgBq09OzU56kAruS6XH0jeUVOAsXX0VLgpNj5JSHK
- TZVTFgyYnyJAjMEAAEKAB0WIQTvZg0HRj+Lcmp5VBPY7tfzyDv6mgUCatPTswAKCRDY7tfzyDv6
- mkXlEACmVA3ZqhwfxxThU1282lKcVyJooXjrqqZrIx0zBsXregypnVdsN3QUWXo9WGQBLkWAqBH
- 9n9T3BxGtf0ivOuNYjGq3qetzjqqxGxZm+pN1bdkIQShZ7NhQMvNWekSTQc7ZQezfYjeapFir2E
- 6NS9jLOYn05IMOZrqX2ZrhcUXaJyarHB5aW9lUyMm0UM1MXMif/G6TUuAE+4PbtSaoU00g1YdsU
- JUDaP4flajSKmAeTjIOIkny2vO/S1JP4kWrtKzx42aCU7mlSMNQyyn195f1M9ov8FiJAoUhu7qP
- b8e2ivINP7lvRdvOgRK6N4unwuWueKZDg2+xHnZBvgIGDylH6ttfi94CrnNdOVUUUYGH5VsqX62
- Dc4KxKXqPXsIx4KxasHkd8JrCxm5DoPBVLsugYDOk740Lta0J1LfjA4xRLqj7cznWfpujDooZFI
- gfGazSbrWiQcyfCjXuHv0jdXOPzGx9yxRIb4esu1kSd55sYsVSbFe7WZUZ3p6V5c5RIZF1/Q8T+
- aca8E5j0hhsS0Vd6B8jiIsFks9MKgkS9Te/6KsirWmAVMUdIosNrJxTe4J4z6gjpioYc0GPAy1H
- bKok3pp7VEjpQuzzjmI+zEzmXkUk5rscgZigP5CS88XaHWZvil/6rcBlRPYHuHvlPn8BcgWUXKo
- AtooJmxK93tXGtA==
+ bh=DdeBUOCYvUk0SPwWOcib78tj6lKNiGNHfOqgeC+j5L4=;
+ b=owEBbQKS/ZANAwAKAdju1/PIO/qaAcsmYgBq09Oy99LFXrodoWSUSElKdFj7JV5R+WhvMznjr
+ 0MlWUnuiI+JAjMEAAEKAB0WIQTvZg0HRj+Lcmp5VBPY7tfzyDv6mgUCatPTsgAKCRDY7tfzyDv6
+ mrMdD/9+HvJ6ObmxML/8/RtfTM84m2rQCM5E6/R/Ld0ZEWuHbER6ldNPo9wkIjrxoaAKTG2S7y5
+ nuSH+2p8bvyNiBwYSXEQhP0MHUDDzPPceuX1wvrC9n9yNieBCd8N2grQbImRxvJs8jVvMvMKD9+
+ OKfMq3RZWDpjBx4FlK+6Blp1sgYuTINewZ58Gpg1CqT1nEojJXiKY3JP+OTWVcD+R4j2DKrtHrq
+ 8flld79PIHY9PM0aVPdAAdCrkGq5S+oRJGfadQ7pbXPEZKM7aSL83RUc0l1ojU9iRTFZjGR5Stk
+ b39hRBuU/Gq5SKVe6R7h5Nf4KP81ga6fr7lRB8wTbHL4aiplpa5VzsGxDAFKgn8S0I5sL3wFr/N
+ pxr2uVdqLAuVjXPlFCzgcAQxnlWdM7TaOaMK4MMfCpfYJos3jg8L4bCik5q5wYFHo0rFIfWvhe7
+ bwGdhdLFPC3xwpunNDQdp+GNYeXCACUbSo9riyP1AvQwNav6wMceQmLNP6GHXutLhfrecjMAt4L
+ hb8o/c38BitSnqWW7Wc3hgOnzK9Gz66wmAWeCXfE+xloEtWV45ZRy4CpSASogTA1BHxLdhWQGo3
+ LxpufGx5QeseQlvJ2mqfAlVS4zVStFaZ6j/AJAiF1I+Oyorb6goyMI6bcYd1aA7TKKQ13xi5Ue5
+ 6FOD58lIg/lebew==
 X-Developer-Key: i=sebastian.reichel@collabora.com; a=openpgp;
  fpr=EF660D07463F8B726A795413D8EED7F3C83BFA9A
 
 From: Sebastian Reichel <sebastian.reichel@collabora.com>
 
-Use the new USB-C DP AltMode defines for the SVID and the capabilities
-VDO to make the DTs more readable. This also fixes up mt8390 Genio
-platform incorrectly announcing UFP_D (upwards facing) support. This
-feature is unfortunately not supported by the SoC.
+The typical USB-C DisplayPort AltMode capabilities for a down facing
+port (i.e. sending out video data) looks like this:
+
+altmodes {
+	displayport {
+		svid = /bits/ 16 <0xff01>;
+		vdo = <0x00001c46>;
+	};
+};
+
+Improve the readability by adding defines for the numbers, so that
+the above instead looks like this:
+
+altmodes {
+	displayport {
+		svid = /bits/ 16 <USB_SVID_DP_ALTMODE>;
+		vdo = <VDO_DP(DP_CAP_DPAM_V2_0, DP_CAP_CABLE_TYPE_PASSIVE,
+			      DP_CAP_UHBR_13_5_UNSUPPORTED,
+			      DP_PIN_UFP_NONE, DP_PIN_DFP_C_D_E,
+			      DP_CAP_USB2_USED, DP_CAP_RECEPTACLE,
+			      DP_CAP_SIGNALLING_HBR3, DP_CAP_DFP_D)>;
+	};
+};
+
+The generated DT binary will stay unchanged.
 
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
 ---
- arch/arm64/boot/dts/mediatek/mt8390-genio-common.dtsi |  8 ++++++--
- arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi | 10 ++++++++--
- 2 files changed, 14 insertions(+), 4 deletions(-)
+ include/dt-bindings/usb/pd.h | 58 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt8390-genio-common.dtsi b/arch/arm64/boot/dts/mediatek/mt8390-genio-common.dtsi
-index 669eaec662f3..9f75ae3c32d2 100644
---- a/arch/arm64/boot/dts/mediatek/mt8390-genio-common.dtsi
-+++ b/arch/arm64/boot/dts/mediatek/mt8390-genio-common.dtsi
-@@ -527,8 +527,12 @@ PDO_FIXED_DUAL_ROLE |
+diff --git a/include/dt-bindings/usb/pd.h b/include/dt-bindings/usb/pd.h
+index 1e64a1f563f9..6cea6165fc0f 100644
+--- a/include/dt-bindings/usb/pd.h
++++ b/include/dt-bindings/usb/pd.h
+@@ -483,6 +483,64 @@
+ 	 | ((vbm) & 0x3) << 15 | (curr) << 14 | ((vbi) & 0x3f) << 7	\
+ 	 | ((gi) & 0x3f) << 1 | (ct))
  
- 			altmodes {
- 				displayport {
--					svid = /bits/ 16 <0xff01>;
--					vdo = <0x001c1c47>;
-+					svid = /bits/ 16 <USB_SVID_DP_ALTMODE>;
-+					vdo = <VDO_DP(DP_CAP_DPAM_V2_0, DP_CAP_CABLE_TYPE_PASSIVE,
-+						      DP_CAP_UHBR_13_5_UNSUPPORTED,
-+						      DP_PIN_UFP_NONE, DP_PIN_DFP_C_D_E,
-+						      DP_CAP_USB2_USED, DP_CAP_RECEPTACLE,
-+						      DP_CAP_SIGNALLING_HBR3, DP_CAP_DFP_D)>;
- 				};
- 			};
- 
-diff --git a/arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi b/arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi
-index aef908df530e..d41638e74291 100644
---- a/arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi
-+++ b/arch/arm64/boot/dts/mediatek/mt8395-genio-common.dtsi
-@@ -597,8 +597,14 @@ PDO_FIXED_DUAL_ROLE |
- 
- 				altmodes {
- 					displayport {
--						svid = /bits/ 16 <0xff01>;
--						vdo = <0x00001c46>;
-+						svid = /bits/ 16 <USB_SVID_DP_ALTMODE>;
-+						vdo = <VDO_DP(DP_CAP_DPAM_V2_0,
-+							      DP_CAP_CABLE_TYPE_PASSIVE,
-+							      DP_CAP_UHBR_13_5_UNSUPPORTED,
-+							      DP_PIN_UFP_NONE, DP_PIN_DFP_C_D_E,
-+							      DP_CAP_USB2_USED, DP_CAP_RECEPTACLE,
-+							      DP_CAP_SIGNALLING_HBR3,
-+							      DP_CAP_DFP_D)>;
- 					};
- 				};
- 
++/*
++ * Displayport AltMode VDO
++ * -----------------------
++ * <30>    :: DPAM version
++ * <29:28> :: Cable type
++ * <26>    :: UHBR 13.5 support
++ * <23:16> :: UFP Pin assignment
++ * <15:8>  :: DFP Pin assignment
++ * <7>     :: USB
++ * <6>     :: Receptacle
++ * <5:2>   :: Signalling
++ * <1:0>   :: Capabilities
++ */
++#define DP_CAP_UFP_D			1
++#define DP_CAP_DFP_D			2
++#define DP_CAP_DFP_D_AND_UFP_D		3
++
++#define DP_CAP_SIGNALLING_HBR3		1
++#define DP_CAP_SIGNALLING_UHBR10	2
++#define DP_CAP_SIGNALLING_UHBR20	3
++
++#define DP_CAP_PLUG			0
++#define DP_CAP_RECEPTACLE		1
++
++#define DP_CAP_USB2_USED		0
++#define DP_CAP_USB2_UNUSED		1
++
++#define DP_PIN_ASSIGN_A			0x01 /* Not supported after v1.0b */
++#define DP_PIN_ASSIGN_B			0x02 /* Not supported after v1.0b */
++#define DP_PIN_ASSIGN_C			0x04
++#define DP_PIN_ASSIGN_D			0x08
++#define DP_PIN_ASSIGN_E			0x10
++#define DP_PIN_ASSIGN_F			0x20 /* Not supported after v1.0b */
++
++#define DP_PIN_UFP_NONE		0x00
++#define DP_PIN_DFP_C_D_E	(DP_PIN_ASSIGN_C | \
++				DP_PIN_ASSIGN_D | \
++				DP_PIN_ASSIGN_E)
++
++#define DP_CAP_UHBR_13_5_UNSUPPORTED	0
++#define DP_CAP_UHBR_13_5_SUPPORTED	1
++
++#define DP_CAP_CABLE_TYPE_PASSIVE	0
++#define DP_CAP_CABLE_TYPE_RE_TIMER	1
++#define DP_CAP_CABLE_TYPE_RE_DRIVER	2
++#define DP_CAP_CABLE_TYPE_OPTICAL	3
++
++#define DP_CAP_DPAM_V2_0		0
++#define DP_CAP_DPAM_V2_1		1
++
++#define VDO_DP(dpam, cable, uhbr, ufp_pins, dfp_pins, usb, rcpt, sig, caps)	\
++	(((dpam) & 1) << 30 | ((cable) & 3) << 28 | ((uhbr) & 1) << 26		\
++	 | ((ufp_pins) & 0xff) << 16 | ((dfp_pins) & 0xff) << 8			\
++	 | ((usb) & 1) << 7 | ((rcpt) & 1) << 6 | ((sig) & 0xf) << 2		\
++	 | ((caps) & 3))
++
++#define USB_SVID_DP_ALTMODE		0xff01
++
+ /*
+  * Sink Load Characteristics
+  * -------------------------
 
 -- 
 2.53.0
