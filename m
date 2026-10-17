@@ -1,90 +1,90 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72BD03C9897
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5985130C631
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792211801; cv=none; b=gGVChWI97qdaek9364NEJM8QCkKO2bje2MsfGnHbMfDQYBHpbVeMiqtVoaUuCTocQ6yDk0a+NfpHV9flbd9wcyl29Hs79sL6WV2VExsQC7FRY2daiS82nBk5mlMKDGP7eNO2fflSXWZnv8QgfQr1M5h2tHxEPuuKRjXwmQoeIRg=
+	t=1792211804; cv=none; b=BYvOaxFc0dbfEYdgUmbILhg0T/Z+lnWC50frOL4/YhbT5KN6fMjgwfTqpNx+d3uIBJX0QXP8FN7mo1pN6BfdmFx2pvvGwVgGJb1Frl7IXBuzhAddCNVghOCq3GObkb890dljj2VG9Fu+tMrx+qWUwJzmIKjCV1k7zbWHii/mkOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792211801; c=relaxed/simple;
-	bh=/6F/aLJSv5Q7HhM5eYJG9nxGTi2Lx3k7CUsBksszwKY=;
+	s=arc-20240116; t=1792211804; c=relaxed/simple;
+	bh=5l1nBiMrrlpH9xRvkKTMAQq8v5Drf3+dS399wlPjZOw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jsjpjGhGG9N1HlhTdYXfJLfYPKpB43tEeiZRkwl4D1xYUQxgsNwv7nVmV22GcsU1tI/wFMnukQJX5NgI80Z/WnYUPlP7TDjNQzN288W6HDY+RXk3Z6MOve3Ggd/LmwAJ89wdpaQI/7wKqt2cgRykWCnss0tsA46gpWaXB+4rAeY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=C9j0PdVj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GMsRmxxA; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=BFgMewS2pxynFMzxXGxJwltPSE+/iVD1qf2lI/9fnLjBSz/ALHZYQq82NzjJ7jEXTxp3r+edaurMnSlAqS8fJos3p+5DdFmYrp3pO+Al1NEymWfE9DfzPfEWCigd3+J+llj6pHiveDmK9bvWAqB0d2UI7Q0t2ocPH+fF4+sjIFE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jSITMKMs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=arvQb5rS; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="C9j0PdVj";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GMsRmxxA"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69H3Z4ts4189823
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:40 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jSITMKMs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="arvQb5rS"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69H30pKg2625329
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=GEJSdsCp3bn
-	OA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=; b=C9j0PdVjDvzVFl500gqyuPZytfA
-	J++L3ztimkGl3FCp7C9v/hmMCMfexHvFJJ5Q/3cT1YKHTGyULaNUpCB41m5mEnPp
-	UcJ2atP0U4mu+G6cRkWDdMX3yni+eV0tMzdV59pwFGcz0Y2OpeW2EPpx7hLH/tJm
-	zzYAZ73kD4ZD0D7iX1oeO58wyj2QjlYRaObdjTtOTMwhkotOIzAJmq5GKsDZThT9
-	WVigPQ++/HejlIXbq1i4pz/Pxx7QwSAE91ZEDCoLn9oLqa2F7yKwNUpCmg/5ljqv
-	JElJU1coiURT54rs8T453lTYnXakpJrsVdlgp9laUYM5HwW7ENiQwb+J6ug==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hc18383mx-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=gxPBCeMFHgD
+	gqMuwuN8DaktXA+k3btEseEDMM1YN4ds=; b=jSITMKMs84tmfODWSv6h8eWQGuB
+	3V6QZUwKpgTwWf5LuW4DZhQ69KUHojrTmBUpnYJ8byu4a8s9+OWbQyX+eqpNrqDC
+	+maNuFDeTj19+FA9YD6vOiAUm2TdaUDG+hUBMXxmsNVbWOKeFmP1DKcVrMbIltg0
+	klXQqPU2FdjKoOoVgl/8jM+mmkKEBri6Qd/EsRNE7tacriAQ0sNxtB0oBQnfHhNJ
+	hdTdk9oY3S0qdcMWYsIZmtK2Szk7ads+2JIaRFh15L9jSfu6bZXIZ9UUfnhhlcez
+	XlLc27HBDtDcjSazD3KJSo0iMlbM8TKyd//DVpY6UvsIFmdO1CjNdJeqFEA==
+Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbcjtcq11-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:39 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3552883bd19so1870443eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 21:36:39 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 04:36:42 +0000 (GMT)
+Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-16bc6f3fdb1so165511c88.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 21:36:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792211799; x=1792816599; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792211802; x=1792816602; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GEJSdsCp3bnOA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=;
-        b=GMsRmxxAuTjURYtDX6iHu9IgxczP1OD5YMS6kRtQvxIVX73QP7UXxv17MqBWm1mIF+
-         LeHZUjlKOQfIrFraYVpzaZ5Hm7x0qyhy3Kd9D4rs+TRfv2sY4sd/StTFq8EMg9VOKpQG
-         XmOnK9MQJQ0nLLSwpQLm5uxxCFy3D9XJI+Px2zThilMClZeTXg2ddtZhfm9zd//Xldsp
-         9Xz1EcgM1BOKm0N9zEFTQ3QOnRdOsACsf3oG+mbtrFyyrrVjkIdR+wAPs8F8ojGxBxqK
-         eC3m4by2RYbAJ0ELrC6AzUuoRtb4juPDifCkfG3qtoaMkzsqdk+8e78v6Hpb7Gp/Zv1H
-         6qeA==
+        bh=gxPBCeMFHgDgqMuwuN8DaktXA+k3btEseEDMM1YN4ds=;
+        b=arvQb5rSkbyuFJC9Vjv1birH8Y3NZEuc0MMzwL5/bRxX/w7f6Wctgl31bnWg/Jc97+
+         C/PLmxE0W2JlIMcCNXKVK3vImG/Tb/e/VE+XdHS1WzgqiBPGzaRMGoGON94EyQC3sxbw
+         mB9Ezw16GOrnD85Qatfsu2dwKg59URlEq9q2pNhYj2/OFHsNr8F4XdGoYgYVRVWGakmK
+         SzulBX4E6wlFyecji8aO5ob0JtBmRogpjTKNgV+ZY+U6GqKyfekEk8va2sg/zjFWFjWl
+         mYd7AnmO65GBnS4JrYUnb5zk+iqHwYFgv11it1Una2PH2PbLzDfYqzTWfskl1a9gsvgq
+         Q2Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792211799; x=1792816599;
+        d=1e100.net; s=20260707; t=1792211802; x=1792816602;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GEJSdsCp3bnOA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=;
-        b=XomZcdMOuVicJLTbNPIsp/EkfsT5bCZZ+1sTs7wKrSosrYjzhKobUZQDuyLFIE3tBY
-         crolVM7d3xrZ6X4I2TU3cDrlpNfHCom4d4wJwsN1ZZaVi6hPpgFOG88W1x85MymMt4Bi
-         Rm27xXvmBdctS9ZT1kxToK2zujgEOQGBBCdmbqc+u8FgkoZfCsLL2VzyK+RWr++ijeDY
-         l9B9O6qV4juBffSh+HP5T4LvY9t4WwtoZmN3OioLlE5SjxCOZDFPS8DQumP2QX9uGLuK
-         dZqin3K+tPJUEtB0snZv7mV/NTdk1/60C8xOmnRDNWN9OPwLIakDZ7vcUGyLQ8N8Ngww
-         /1NA==
-X-Forwarded-Encrypted: i=1; AKwUvBwFVwnjhv4tgz7SPS7WPge/uoNffwoH2LHHA1Nudmy0uEmLV3eFHRSvekj6lijNwvdK/Z2Y7a7DKIlhMl/O@vger.kernel.org
-X-Gm-Message-State: AFq9FYLG2bHt3MWunL7e9uNV/q1BIxBuQF89ILGxAtCcuXIFaEt8B/C5
-	90G0Iu1LOeY8r1XsYTA3TucdVC4NjPiyW4TtY8CmjW/XHSOJz3zKabrVrFnnTRfrC2lJJdT1heX
-	CyT9jV4CF6HqHpLbIt80WA+dFLVfRIQ5TB49IHIRgQ21X32R6lSNZng0Ja3wcS+w2U/ch
-X-Gm-Gg: AYBFou2GrT2yN+R2847jynfujrq5sFY3vptw3owuGKZgkQbWX85BXAtR+AW9T1GhwfP
-	8tCPYI4Iido9qRT7d13p6W3R2/qDLb1W7cAqRLNAys902rc4biAdRnLqej6IILvaCZgYVMf8TXw
-	btPFAG98bfGKBfJ6CovMI8iqj3btegQn8sSFhqY2lEkeBaMGC/vv+o4C2iWP9PvkAJ4z9xbbH2J
-	EFkMTBDU7SVA0zVwOFSSSezBqOGBSULfwXLu+oDzPlha6o1tfMl7D6vAfQDmpPo0e0P62GFXoBH
-	8m81QTwMQ9NqxDFIE5J4AgJu6Z9cx1IdBRMC5cDJ1dEDVPY/+ujjrohQ9g4rPpgajInUJ7ymf71
-	0V3vmwF6RKrZqdCTbYZVFCGVQJ/nxLx+K/d+PFvM0b1hwVk7A3i0IaOPd1Ew=
-X-Received: by 2002:a05:7022:7e83:b0:144:c12b:dfc6 with SMTP id a92af1059eb24-18514a0bc6amr3147173c88.44.1792211799102;
-        Fri, 16 Oct 2026 21:36:39 -0700 (PDT)
-X-Received: by 2002:a05:7022:7e83:b0:144:c12b:dfc6 with SMTP id a92af1059eb24-18514a0bc6amr3147132c88.44.1792211798526;
-        Fri, 16 Oct 2026 21:36:38 -0700 (PDT)
+        bh=gxPBCeMFHgDgqMuwuN8DaktXA+k3btEseEDMM1YN4ds=;
+        b=Pvx9UKiG6x5N0Dpjqz+/XACz8K1EHSar8qqVo6V/jHmFHieuoO0an1xV0dksljdMmi
+         oss4r/k6SSaS+g4jHmI3tROoUpbo2wMRzdLjbpZYFkDyGapCdxkQ3ZH1asnfNgBsbJnv
+         hnueinM/gowIMK8maGo3jvA2UcHilQTHNuu+maLeH7jDtqkSRYkzcpuWngTzfhElnhku
+         FvKioZ3HxjXTXCkETPD/gZ+pHDztk5PN5JVaO5SUMVL1Yo7XNA727Dz5bVo4rucReRJy
+         ELNI4Hi9IABHrEc0jNYxzsMTeNejj5Iow1hogIGtScKAl+o0ZCSappVha+RAf7t54Aeu
+         1xFg==
+X-Forwarded-Encrypted: i=1; AKwUvBzpYbyRvRJ/yoYNNPII+of4OC99+Oe1gPMRoGjYuzdocFmrVjJ18cIkNEtDO4LXuxCH4z+Iz+vRB9eUfEnr@vger.kernel.org
+X-Gm-Message-State: AFq9FYIHn224cn9/RansIjYd1zKl9QeamnANKugxT7LD+W1r+z+fd9wk
+	dV2NT2iDW4Wcwq4VAjCk1wi74N2lzf/JcTavbO4JYVRSdGk+1cRrjDmu+yWx5P/HCtiQuXASdUT
+	5wF0Cub/Pa4C7KX+XoNQhMBZbDkPDFZa0B0WOBWZeKhlNsQtNV9A3jYtqNAeoX0BZXKDs
+X-Gm-Gg: AYBFou0iWcoXiKaFg1ARpBgfoPph21QlyaT3ee11z8I65Y+UFbdLZ7IY1F7d6s/3v4q
+	gzVWLGaAO+d9w4UTmlyPsNGw4Lcy3lO9ab5MQOspnx3sv2UcZVsAA2H8v0yWfikdhRcjXrsYmsJ
+	WY9YF7qKpXOUIJBcrgIDaDNexuQVNKawadij212O+RHMoQsE8ZowsyU6LkVYTplq9rW5zRnQmS3
+	rbFmErvcM7a18yBdT8ymysL1Xo72HwvzYPz1Op+XS0UtjSVR0xbTHWkt7xAC1CZ2grbGCAfcauR
+	sfgPn/W1W7K0jjRmQt0SwRuul+4o/T4t9hBQkyEBmq6lQhF167qpWAWbkivH0vqUjudjVVrZUgN
+	lo8BuRWww2xWlopMJQbM3W63SzJIC8QlxonZInjEefZpQY06XpzXlJ/5EbjI=
+X-Received: by 2002:a05:701b:2047:b0:143:72b1:9004 with SMTP id a92af1059eb24-18514633f89mr2154560c88.45.1792211801771;
+        Fri, 16 Oct 2026 21:36:41 -0700 (PDT)
+X-Received: by 2002:a05:701b:2047:b0:143:72b1:9004 with SMTP id a92af1059eb24-18514633f89mr2154539c88.45.1792211801206;
+        Fri, 16 Oct 2026 21:36:41 -0700 (PDT)
 Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-183190aa7bbsm9771425c88.5.2026.10.16.21.36.36
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-183190aa7bbsm9771425c88.5.2026.10.16.21.36.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 21:36:38 -0700 (PDT)
+        Fri, 16 Oct 2026 21:36:40 -0700 (PDT)
 From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
 Cc: linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v4 2/4] gpio: shared-proxy: Drop the vote of a released proxy on write failure
-Date: Sat, 17 Oct 2026 12:36:03 +0800
-Message-ID: <20261017043605.1503563-3-shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v4 3/4] gpio: shared-proxy: Drive the default value when no votes are cast
+Date: Sat, 17 Oct 2026 12:36:04 +0800
+Message-ID: <20261017043605.1503563-4-shengchao.guo@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261017043605.1503563-1-shengchao.guo@oss.qualcomm.com>
 References: <20261017043605.1503563-1-shengchao.guo@oss.qualcomm.com>
@@ -95,75 +95,81 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE3MDAxOCBTYWx0ZWRfX7Ti50H/ewYJI
- ZSwPrTqFtSX3LqNPu3UBeGRy474TiqxIX01dOs2w4VisXaVo7fXQa3QsiOcoK9rZj1lxnX4CGrk
- Gwy05gFKeWjCGdeEawlVp+wEFIoLKoA=
-X-Proofpoint-GUID: Odar7Y-RQHn0qU3AUk1S2G5FEznSrnY5
-X-Authority-Analysis: v=2.4 cv=Bu8IUoX5 c=1 sm=1 tr=0 ts=6ad2fb57 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE3MDAxOCBTYWx0ZWRfXwNs5ZrPJ+zaf
+ okpEkPCnpwaUB/74qHobdF/ngwS65oRGBOTl4MkVTitw5nvRYzlZ0WjQX6aECz7oErib23Ihjzc
+ NZhk5jd7W2TPt8f0V8HLzpSEABZTeTBrOiUAxGorq3/GpAGxb7TnVqpu2Q+HO5eAtWaXU5dhdIA
+ oZhLkkluYm497EcBGfoqR5FpKlMDTd57kxnJN2mz+lJGAFyWFdS4CnAcR1AWvmcWROHv8wy33t1
+ E605wXCkqyNzeQGhQlFnNv2V+c1I6eH0XVbEpUOYn6LqYYOj8eDzTqWezl6rhRXlcHwxj/U+/ER
+ uFagGuUhRSx20/lFIb6wQHyATLSSJhXwD8o94KVy/bgasWQyniiPwDezHPtHRUDakNrA214jWBB
+ H3/4ybfveNmkBrPzXdi514TtcE7QOUUOCRT55ekgquOCUrfuZpwlppc5KhBG204iED+fEPLKBd3
+ pgyp6WkMGZuh3RNu4FA==
+X-Proofpoint-ORIG-GUID: Bev4WRqrcdMG7Fzi88XwPpkdSJNzd6Av
+X-Proofpoint-GUID: Bev4WRqrcdMG7Fzi88XwPpkdSJNzd6Av
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE3MDAxOCBTYWx0ZWRfX2UCQS4FLEIaj
+ 8AjNKndKFISZKOHKLMOGuuh0kumCnINfBXdlmms+Td/0GZ+ruHOlE+A3iZaDVbab0PpjPWLDxpo
+ OXv0ajJmyzoHxse2E1snp9lVXriWao0=
+X-Authority-Analysis: v=2.4 cv=VpS2kO2n c=1 sm=1 tr=0 ts=6ad2fb5a cx=c_pps
+ a=JYo30EpNSr/tUYqK9jHPoA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=Vq87VKjZgZ7Zzh4gvRcA:9 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE3MDAxOCBTYWx0ZWRfX7TG1vLxnpg+v
- 3sXxDgTw5h5KgSKCX/5uoykKywdUYJyV6LNBlf363O73H7jPHaBuDv0TbvwrO9LsqcUE3ljqs40
- w9Iub5zyLLGx9WNiTYGNZh2OyjaBj2LAl9uuKSnsVv+iCKWI8+A/QerngHg1xQDorEbIMZnWu5B
- Ebt4ognMK86aCJelZGJORE8L0fPsomxCQ97Hx5ik8yEItS0Vep/25QRKUihYNTIfi8CtjzFpJXB
- f8ylN4clhcvwnxeWSyexdbo0M4xcLNyscT8YGohqyJQ/h+9Lqd8rPo4j/QCzyFRJAPsDOfIs93y
- yCXjgJ1/lhtGAtXjpSX+VRsDPQi3abA9nGw+Mk3Vj+tv8ie33gsh3SfSPMWPsZq5bEuC2Mav34N
- vOnD9CN9mi4J9pWskfnIpbs5yDROqnTy0Y59SmVsMPFf5f8cZfi7kWswSZuPI1cS0iVxVyim7+T
- a0uLOZMCXLPcXnxvARA==
-X-Proofpoint-ORIG-GUID: Odar7Y-RQHn0qU3AUk1S2G5FEznSrnY5
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=7Xd5iGn_hkjN9V8jMBAA:9 a=Fk4IpSoW4aLDllm1B1p-:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-17_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015
- adultscore=0 priorityscore=1501 phishscore=0 spamscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610170018
+ suspectscore=0 bulkscore=0 adultscore=0 phishscore=0 clxscore=1015
+ malwarescore=0 lowpriorityscore=0 priorityscore=1501 impostorscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610170018
 
-When a proxy that voted for a value change frees the line, it calls
-gpio_shared_proxy_set_unlocked() to withdraw its vote. If it is the
-last voter and restoring the default value fails, that function
-returns early, leaving votecnt incremented and voted_change set.
+A consumer that requests a shared line with GPIOD_ASIS never calls
+direction_output(), so def_val keeps its initial value of 0. If the
+line was left high, for instance by the bootloader, a later
+gpiod_set_value(0) from that consumer matches def_val and the proxy
+treats it as withdrawing a vote it never cast. It returns success
+without writing the hardware, and the line stays high.
 
-The consumer is gone, but its vote is not. The line is held at the
-non-default value for all remaining users, since votecnt can never
-drop to zero again. And the proxy data outlives the request, so
-voted_change is still set when the line is requested again. If
-another user has reinitialized the line in between, resetting
-votecnt to 0, the stale proxy's next vote for the default value
-decrements votecnt from 0 and underflows it.
+The consumer has no way to tell. Its request to drive the line low is
+silently ignored until it first votes for high and then withdraws
+that vote.
 
-Drop the vote unconditionally on release, after reporting the
-failure, since the consumer is going away regardless.
+When the requested value is the default and no votes are
+outstanding, write it to the hardware instead of returning early.
+For lines configured via direction_output() this is a redundant
+write of the value the line already has. With votes outstanding the
+request remains a no-op, as the line must stay at the voted value.
 
 Fixes: e992d54c6f97 ("gpio: shared-proxy: implement the shared GPIO proxy driver")
 Assisted-by: LLM
 Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 ---
- drivers/gpio/gpio-shared-proxy.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/gpio/gpio-shared-proxy.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpio/gpio-shared-proxy.c b/drivers/gpio/gpio-shared-proxy.c
-index 0d1d724a6a37..24241c981df1 100644
+index 24241c981df1..456a3c3dbf71 100644
 --- a/drivers/gpio/gpio-shared-proxy.c
 +++ b/drivers/gpio/gpio-shared-proxy.c
-@@ -134,9 +134,13 @@ static void gpio_shared_proxy_free(struct gpio_chip *gc, unsigned int offset)
- 
- 	if (proxy->voted_change) {
- 		ret = gpio_shared_proxy_set_unlocked(proxy, shared_desc->def_val);
--		if (ret)
-+		if (ret) {
- 			dev_err(proxy->dev,
- 				"Failed to unset the shared GPIO value on release: %d\n", ret);
-+			/* The consumer is going away regardless, drop its vote */
-+			shared_desc->votecnt--;
-+			proxy->voted_change = false;
-+		}
+@@ -81,9 +81,16 @@ gpio_shared_proxy_set_unlocked(struct gpio_shared_proxy_data *proxy, int value)
  	}
  
- 	proxy->shared_desc->usecnt--;
+ 	/* Desired value is the default. */
+-	if (!proxy->voted_change)
+-		/* We didn't vote for change previously, nothing to do. */
++	if (!proxy->voted_change) {
++		/*
++		 * With no votes outstanding the line should be at the
++		 * default, but a GPIOD_ASIS line may have been left at the
++		 * opposite value. Drive it there.
++		 */
++		if (!shared_desc->votecnt)
++			ret = gpiod_set_value_cansleep(desc, shared_desc->def_val);
+ 		goto out;
++	}
+ 
+ 	/* We previously voted for change. */
+ 	if (shared_desc->votecnt == 1) {
 -- 
 2.43.0
 
