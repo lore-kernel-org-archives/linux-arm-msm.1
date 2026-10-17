@@ -1,118 +1,131 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA2F2480DEB;
-	Sat, 17 Oct 2026 19:45:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55E2B48425A;
+	Sat, 17 Oct 2026 19:59:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792266338; cv=none; b=W7mCGvKNxyrQWHHf1C4KDh5RK9TjUAe1QOaYTuGTWzr1Vz67hoUN6bEG2mEEgaonrD6AKA5dZVbFiA5M46YWM6qBJnnTpnBRl48nSchYddojtFyN8R6iXngvBEMqrzWGg2tw5JIEWqDuvpOiIYu7kJwq3rsunlTgUhpl0e9cRg4=
+	t=1792267192; cv=none; b=Ulyn5gBDEA6PSmFbza0n73qxZPUXM7BwW2cXp5u+eXdNqxEgLnFJgOSYiEoEPDZoCGJ0qovZptA9fubSd3fROThXZDxgVt26VQvz6/Koirt4uaq0fsveNhANc4qIOVOSGCpLOG84/OJTVVzZtQ3eGJzP0NNC/8OXs7w87yRlsIU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792266338; c=relaxed/simple;
-	bh=BZcI6/T8K2XM+gDjhbVCYRN04u9p1Eu3pbdoSkiEfb8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lUqnnWMAPo+37sgipuNz9sOGfYZzoopILLDF3CD79HqDTLxkHHnMxgNnDnoDA0WwVmz2jTt04CBKB+sd8UV8zkFfIOxOzntnvKByJPoVGN09MrvJe4tNdA483GEbAgzloPe+O2qhtupU3EpUYV6GJ8wliqPjA9sHz6cZSViN6PI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bwi+SiYb; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792267192; c=relaxed/simple;
+	bh=mwp4zgB1iRyZrU7JV8hwJjGSEtWrTQwRtuJeoxXyuEs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=gu+/u2EIzCe3SwWNL4M015/PekJFbJJcK96Z83+/30WeXwyskGqBsfWGeXroKz7A+rcd+XuswDez6IAYWkPibekhN8yI/IHiMeX2LP7DRZ8O2SYxOFxP4JDQCRc6LyQeYhJus6YHesqwTcMk3aE627whh5CikVwd3mIl2PjWbZ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IViVtIB6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bwi+SiYb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F15EA1F000C4;
-	Sat, 17 Oct 2026 19:45:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IViVtIB6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B65641F000C7;
+	Sat, 17 Oct 2026 19:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792266336;
-	bh=5GflxBgAWbS+Fj6Ge52Dypki/HERxr5qLRgmLPB9EYk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Bwi+SiYbdCeQJ5hSig15CcBvXE8sMk6Y5pOY800bn2LzOW8ymC2q7DW2dhCfs5KI3
-	 OvADrKP52OS4/ZGFUdgOzrEzheb9rUlPgco115TvCTfTxApEN2rCenbrv10nKU7tgn
-	 wUoM2jOLL8JKFzDHDpgDrsDVg7VVzAVtUR2H2T6L974Dy0PG7Ox1M3LIgtPFdC0+dJ
-	 vRPTA/B0yaSxy12JdorQkCtzLiapQOxv4jIS37tX0z16QPzjJEej1kLHrmevqs1sqm
-	 oxyqkRzWCrP8zAHi8S0KcEChbhCSpYPoCPH97ezO4Rq0FwzYQpdvG4//1eK2qKgdRd
-	 gQFy6kns0E8eA==
+	s=k20260515; t=1792267191;
+	bh=AzsjAJLSMbqP0OWa/Og73hOrqbs4CbC/H/k67zY6YX8=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=IViVtIB6fS6PgOtde+PE6phuQ+al9/A6MBl8k5GKye4NypQpgaYB55Nnb2uyrz7W0
+	 vAt7GRQPUWP4bzjKTbxknO8j8lVLYnbz8Al3CQdA+e8/12iTlYFKtLhHAulYd/jlyL
+	 +iAayzJpCZmTjfBo37Ahu5wXcc9KLxqeF2V2RYqqt8BzynvZsPwgBi3hy1I4v5BTkd
+	 TbmOXINcsMK6o3bBnKQ0TUUab59alrbPQ9YThWFtuvyygfuaPUsypRu7lgkZESfQGa
+	 IxT/LgoHJge+9vr2qsBd+Bn8L/rczjM7QNDJxlqF3cTw6Ea3Lr6qJgjgc3cnwfObB5
+	 0GcA6nToJhYCQ==
 Received: by venus (Postfix, from userid 1000)
-	id B573C182304; Sat, 17 Oct 2026 21:45:33 +0200 (CEST)
-Date: Sat, 17 Oct 2026 21:45:33 +0200
+	id EC05F18233B; Sat, 17 Oct 2026 21:59:47 +0200 (CEST)
 From: Sebastian Reichel <sre@kernel.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] ASoC: codecs: wsa884x: Add mute control knob
-Message-ID: <atPPpADkwx_5BeVf@venus>
-References: <20261014-wsa884x-mute-support-v1-1-74d98d79e635@collabora.com>
- <55831eb0-b7b0-43f3-8c03-4d1029ea97a2@sirena.org.uk>
+Date: Sat, 17 Oct 2026 21:59:33 +0200
+Subject: [PATCH v2 4/4] arm64: dts: qcom: Use DP AltMode defines
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="pawwmm3ux5cvrbm5"
-Content-Disposition: inline
-In-Reply-To: <55831eb0-b7b0-43f3-8c03-4d1029ea97a2@sirena.org.uk>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261017-dp-altmode-dt-defines-v2-4-7ab3d93553dd@collabora.com>
+References: <20261017-dp-altmode-dt-defines-v2-0-7ab3d93553dd@collabora.com>
+In-Reply-To: <20261017-dp-altmode-dt-defines-v2-0-7ab3d93553dd@collabora.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-usb@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, kernel@collabora.com, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1821;
+ i=sebastian.reichel@collabora.com; h=from:subject:message-id;
+ bh=Mbe8q1nkDjmosaXf28gnB/0wu9TXydaiw4sb5pG7aJw=;
+ b=owEBbQKS/ZANAwAKAdju1/PIO/qaAcsmYgBq09OzEy0QR3DwW4U/lOHcZKbXdOIuoDbknrL+s
+ E8OgJPabl2JAjMEAAEKAB0WIQTvZg0HRj+Lcmp5VBPY7tfzyDv6mgUCatPTswAKCRDY7tfzyDv6
+ mmnhD/46pwI6Dx9obSflwg3FPG6c/7bMYXaYcJBnO/w8Z4jhcMGGCaZ886wY4CIIbhFVYa3V13G
+ QNU/Xagrz4Xl5ZFE1nD2D27SJlGUy8vHWjADhT4pXIey3Nap76RnKksPHp1CbfnMC04KOFjwXfI
+ 5ZXwC1JMtWWUpX+RMHzmzyExW8YeqEKSaWN2e4zXbxJjCISlH6xVcaKYTDvkMo/cCDg7Iut6SkN
+ uRvaysNN0Wsli1FE+vvnyUoeNE69tVPAj51OOXKwkqytsJn6KyS9rxWdiI5ADKCTQT6pr8R6am+
+ XI5uxyAD4TL3AXdn47xQvvvmmAm+7sqrjd5KDtX1tVgyQtW66pwP93Y0BsMhPb/0bn9QGstW5I5
+ tsE0qIA+Z1OuskyAU4tvucBPI872/wt6UuC2VSsv5HxbmILuo0rHO8vyi8yyuqTk7hgh9KmQDJ8
+ znjPfOWAUD09YNk2bHf1NPx4tL2taYNcYf3f+tA+9iz8ErDxd/OcIvUqafpJeF6zjYnoME7gAfv
+ /KWJZt5EUyUkaC1VgNf7aPLyKIIPNDIW3AB2qKVG+0CoNNhcKt2X4hqRA0lD60auzkB3IzD51zd
+ +5CxnGfkUqome1VEzEyZxJyVJUXZrNZVZYWTlcsOWgV5Eim8xURVZ3I+XpGNhkeOVLmmLxLGxTk
+ 2vA0QyUSck+53HA==
+X-Developer-Key: i=sebastian.reichel@collabora.com; a=openpgp;
+ fpr=EF660D07463F8B726A795413D8EED7F3C83BFA9A
 
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
 
---pawwmm3ux5cvrbm5
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH] ASoC: codecs: wsa884x: Add mute control knob
-MIME-Version: 1.0
+Use the new USB-C DP AltMode defines for the SVID and the capabilities
+VDO to make the DTs more readable.
 
-Hello Mark,
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+---
+ arch/arm64/boot/dts/qcom/qrb5165-rb5.dts | 8 ++++++--
+ arch/arm64/boot/dts/qcom/sm8150-hdk.dts  | 9 +++++++--
+ 2 files changed, 13 insertions(+), 4 deletions(-)
 
-On Thu, Oct 15, 2026 at 07:10:58PM +0100, Mark Brown wrote:
-> On Wed, Oct 14, 2026 at 07:02:54PM +0200, Sebastian Reichel wrote:
->=20
-> > This codec is typically used with ALSA UCM, which right now falls back
-> > to handling mute in software. Expose proper hardware mute control
-> > considering the driver already handles it internally anyways, which
-> > allows UCM to bind speaker mute LED to the new control knob.
->=20
-> > +	wsa884x->user_mute =3D mute;
-> > +	if (wsa884x->pa_on)
-> > +		wsa884x_set_mute(component, mute || wsa884x->trigger_mute);
->=20
-> This is checking for pa_on but...
->=20
-> >  static int wsa884x_mute_stream(struct snd_soc_dai *dai, int mute, int =
-stream)
-> >  {
->=20
-> > +	guard(mutex)(&wsa884x->sp_lock);
-> > +	wsa884x->trigger_mute =3D mute;
-> > +	wsa884x_set_mute(component, mute || wsa884x->user_mute);
->=20
-> ...I can't see what guarantees that pa_on is set here.  It looks like
-> these are mono speakers with multiple speakers connected to a stream,
-> someone could fiddle with the routing on an active stream and power up a
-> speaker.  We should probably recheck in the speaker event.
+diff --git a/arch/arm64/boot/dts/qcom/qrb5165-rb5.dts b/arch/arm64/boot/dts/qcom/qrb5165-rb5.dts
+index d6af679abe1a..d21b94e872ce 100644
+--- a/arch/arm64/boot/dts/qcom/qrb5165-rb5.dts
++++ b/arch/arm64/boot/dts/qcom/qrb5165-rb5.dts
+@@ -1508,8 +1508,12 @@ PDO_FIXED_USB_COMM |
+ 
+ 		altmodes {
+ 			displayport {
+-				svid = /bits/ 16 <0xff01>;
+-				vdo = <0x00001c46>;
++				svid = /bits/ 16 <USB_SVID_DP_ALTMODE>;
++				vdo = <VDO_DP(DP_CAP_DPAM_V2_0, DP_CAP_CABLE_TYPE_PASSIVE,
++					      DP_CAP_UHBR_13_5_UNSUPPORTED,
++					      DP_PIN_UFP_NONE, DP_PIN_DFP_C_D_E,
++					      DP_CAP_USB2_USED, DP_CAP_RECEPTACLE,
++					      DP_CAP_SIGNALLING_HBR3, DP_CAP_DFP_D)>;
+ 			};
+ 		};
+ 
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-hdk.dts b/arch/arm64/boot/dts/qcom/sm8150-hdk.dts
+index cdced5c848d3..3d83dd305954 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-hdk.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-hdk.dts
+@@ -581,8 +581,13 @@ PDO_FIXED_USB_COMM |
+ 
+ 		altmodes {
+ 			displayport {
+-				svid = /bits/ 16 <0xff01>;
+-				vdo = <0x00001c46>;
++				svid = /bits/ 16 <USB_SVID_DP_ALTMODE>;
++				vdo = <VDO_DP(DP_CAP_DPAM_V2_0, DP_CAP_CABLE_TYPE_PASSIVE,
++					      DP_CAP_UHBR_13_5_UNSUPPORTED,
++					      DP_PIN_UFP_NONE, DP_PIN_DFP_C_D_E,
++					      DP_CAP_USB2_USED, DP_CAP_RECEPTACLE,
++					      DP_CAP_SIGNALLING_HBR3, DP_CAP_DFP_D)>;
++
+ 			};
+ 		};
+ 
 
-pa_on is set via SND_SOC_DAPM_POST_PMU/SND_SOC_DAPM_PRE_PMD. My
-rationale was, that mute update is not needed with the widget
-powered down and at startup the .mute_stream handler will update
-the mute state automatically.
+-- 
+2.53.0
 
-Greetings,
-
--- Sebastian
-
---pawwmm3ux5cvrbm5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmrT0F0ACgkQ2O7X88g7
-+ppFdhAAp+0fdJMAITu4L4LpMZ/PQtRcbXejA96Hp7rwtNQD4zHoOWWC/kzKksKh
-/xG7ylk7TxMLXCMsf8w1wrgArcKjCP8LrwsUZtkXV6n3qslEw/3KV9+OHf6HqUs0
-WV0nbMHLjt17KCa3NiDtOWM/wgY8CIP1eXntNocGjYKrQddhccrNbKNAHgV1oCdh
-9R6ZJBfzOalf+sHk0HmaitUS6YsoxKxLQbj0a441x9rAKYQoZm0xATWfTWb267Bd
-sjk1QiPB39yX3AKLMcfolzXcN/soTQ65ILYw8iwN1NI/2qLxh5WpqEgMR5phdC+A
-QnlI4tEYCCZzzrZhwTv1F2gEIbCDzXWtLfnwGjfmW/ylZOp/XeXIarDzYH6Tpset
-zraOqhhU1p0740ZJ2AOFcz8jEQaUzxGkjEpnrrqcMOA26inW9I+6ZnIr76UlFRLq
-5PdXgDsdsCYX6gXA7fKUuCOKgJ4fK4PiqLxpUZqB3Mg8bTrZ6lVON3c0aLI9ERhK
-h9aip+CQuFB8Snu3SsVlZCGv7/+C9B2mAW+0Zy6UvIVgdqkYbS4yy9qS9YVa3E82
-UzhEfomB7/1fJBCyO6whufZ4/3QaVs/d0+qTNYAF2j8weRff+C0UQrnWqvyDsRXF
-yx394ZspinpDkgL/4m9awWjfNooi7iT0SPMR91Httl9zwlfSOac=
-=3sBP
------END PGP SIGNATURE-----
-
---pawwmm3ux5cvrbm5--
