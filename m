@@ -1,93 +1,62 @@
-Received: from mta1.migadu.com (out-101.mta1.migadu.com [95.215.58.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B0B74CF489
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 21:51:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38801342151;
+	Sat, 17 Oct 2026 21:56:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792273881; cv=none; b=gMY704eO3KF7VD1CKuEI+blZ8ZE+DuKlkfpZD3yD4Ag2Gk7KcrxKMF0pUv4dAkHypxyx/1MAxvu+U+MtvLQMHkRihBJIcj7sDy0fmlGpREpDwk3+QbYXDaefVY1ejmWlk+1TQGCIVwktOCnZM8s+0uWyEhPn3R9o8pd8vv+YQMY=
+	t=1792274196; cv=none; b=JGKI/zMHYMVLOZK7JNGK5NViaWsydbhpa9U8EmC3GgsGNEqg+/9ub5Men5+KWWLfJd1HPW+afm7Q619tahc87NqhoTW0i1cx/iag0FlR0WAz3Ate2eVW9M0u0DI/ODJ5RmAC/jWEmwSEje7ituPcdDsDx0LdcIqn9vQebWQ2ZwY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792273881; c=relaxed/simple;
-	bh=8AhvBjG7HuXqA4N9ExrRQYOsSpS2IM4/UU/7cUM6Thw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=R5ETFFu6THYxpvkDFV/DA7d6zG+NlVfIIlkBu/opn/c6j/r61RCK2JM+flANRJEd2apUjFmNG+iA3ecR9PAUzs1tFolvr7Rr03wv/P7apjSj/XinOdmapbwTHFUvCT4iVeZfNCx0LWSTkP4LBQNuA9pMZdA7v5inOflV3T3xoa4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=u52TLMY9; arc=none smtp.client-ip=95.215.58.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="u52TLMY9"
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=8AhvBjG7HuXqA4N9ExrRQYOsSpS2IM4/UU/7cUM6Thw=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792273877; v=1; x=1792878677;
- b=u52TLMY9AOh4q1pD8o6hKpo18LXx8su7DuzCH9ti6s0pvC2sxFA7P4rf6YZxFChhE9GaiRbQ
- kfuNfzBSHTMxPdZy5ojEU77z9Xq0Ymtu+bCId3m11Kp1YgrjqMRk4LhsGpnRjQMrsyYWnP+3Mhv
- r68UwQqHHPfKwOFvf6feMEuZG6Rj0AmasWB2pqH5PVOF5zp6FBHYJZtFVG6lt0nbJHYu2sBcBdT
- oGYk/zTzOg+iPIm5nPzv1K7oZ9pMlgLCTtr3rKki13TbuGmhoszZ4xo/JbiwVFjpYHHgHvIyLMM
- gaIWtVZIU+t47EcxDKdDza22xBj6BBoCtjkN+wZ1M/+Xg==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id c017e02178789539;
-	Sat, 17 Oct 2026 21:51:16 +0000
-X-Mizu-Trace-ID: c017e02178789539
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <ce5a17da-7202-4903-8101-97f012a67055@packett.cool>
-Date: Sat, 17 Oct 2026 18:51:10 -0300
+	s=arc-20240116; t=1792274196; c=relaxed/simple;
+	bh=5ZPsLoEJodQ3pwl9rPZZQdVSfFrzD2H4J67Pnm3gOT4=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=PzXbF//uWOYn81sRFNHqwlzJkAik+I7O0VXz9jMbvnMxkMNHPSchaD4QZajQCNCAi0IM9LxKccoSf9WpT4zqyof5Leq9pS1YPtwt6WAtBpP9OBMRNSMYsLUfGEyxGpAXJdwUAhtknKU2C2v6zqbVV/qQ0hj0NHA6Pdu/HgfTshY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D491E1F000C5;
+	Sat, 17 Oct 2026 21:56:34 +0000 (UTC)
+Received: by venus (Postfix, from userid 1000)
+	id 61A4418233B; Sat, 17 Oct 2026 23:56:33 +0200 (CEST)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Casey Connolly <casey.connolly@linaro.org>, 
+ Sebastian Reichel <sre@kernel.org>, Fabricio Akio <fabricioakio@gmail.com>
+Cc: Robin Snyders <robin@snyders.xyz>, David Heidelberg <david@ixit.cz>, 
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20261002-qcom-smbx-enable-order-v1-1-7df92bd809db@gmail.com>
+References: <20261002-qcom-smbx-enable-order-v1-1-7df92bd809db@gmail.com>
+Subject: Re: [PATCH] power: supply: qcom_smbx: set the charge enable after
+ software control
+Message-Id: <179227419338.76434.14581539706136595064.b4-ty@b4>
+Date: Sat, 17 Oct 2026 23:56:33 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFT 0/5] drm/msm: Attach a driver to GMU
-To: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <20260513-gmu-sync-state-fix-v1-0-6e33e6aa9b4f@oss.qualcomm.com>
- <1118d9c2-4efd-48fc-8a3e-c2cc3eddc940@packett.cool>
- <bc2ed82d-0d91-4683-b9ae-cb4299636c2e@oss.qualcomm.com>
- <20261017100324.1104-1-tvlad744@gmail.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261017100324.1104-1-tvlad744@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16.0
 
 
-On 10/17/26 7:03 AM, Vladyslav Tymoshchuk wrote:
-> Hi Akhil,
->
-> On Sun, 26 Jul 2026 21:35:35 +0530, Akhil P Oommen wrote:
->> I didn't get a chance to revisit this series after my vacation. I am too
->> not aware of any impact outside of those dmesg warnings. Any chance this
->> recent rpmh related fix is helping with the deep sleep instead of this
->> series:
->>
->> https://lore.kernel.org/lkml/20260605-assorted-fixes-june-v1-1-2caa04f7287c@oss.qualcomm.com/
+On Fri, 02 Oct 2026 22:29:32 -0300, Fabricio Akio wrote:
+> The init sequence sets CHARGING_ENABLE_CMD before CHGR_CFG2 selects
+> software control of the charge enable.
+> 
+> The Motorola Moto X4's bootloader leaves the charger watchdog armed to
+> disable charging when it bites, which it does after a few minutes in
+> fastboot. Charging then stays disabled in the next boot until the cable
+> is replugged. Setting the command after CHGR_CFG2 re-enables it.
+> 
+> [...]
 
-Update: the "deep" suspend bounce back was a red herring, it's actually 
-related to EL2 timer nonsense btw.
+Applied, thanks!
 
-In terms of actually reaching AOSD/CXSD states though, new community 
-research has been happening recently (on hamoa laptops), and some people 
-have gotten to CXSD buuuuut, with CONFIG_FW_DEVLINK_SYNC_STATE_TIMEOUT=y 
-(aka fw_devlink.sync_state=timeout at cmdline).
+[1/1] power: supply: qcom_smbx: set the charge enable after software control
+      commit: 1fba787142011145e1071cee9448b3677fb2323d
 
-It's not good to require timeouts, there should not be any sync_state 
-warnings. With QCE solved now in the "Fix crypto self-test failures" 
-series, the *only* sync_state timeouts are the GMU (on gcc and gpucc) 
-and CoreSight stuff (on qcom_aoss_qmp). These can, and should, be resolved!
-
-
-Thanks,
-~val
+Best regards,
+-- 
+Sebastian Reichel <sebastian.reichel@collabora.com>
 
