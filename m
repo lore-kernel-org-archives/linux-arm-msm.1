@@ -1,88 +1,96 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40CB618E025
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:03:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32436270552
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:12:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792231437; cv=none; b=DDG05ZUIz6854TpdVuf2iUMlYXZ72SxUh4bAmK3bi801+dutbOKUlpP9l1y8ofbcLBwrGsf6nwn45bZJy6oN5XlkvGo1pdf4EOSwiuuRu/5VjQbjBH2w6DT6+R2SYg0tZUMTq8gxEIhmj0rmr56443HzErr6YRimoRcjNJJKfnE=
+	t=1792231952; cv=none; b=EWePjyGpps4JbDoRLDRGz5i72YJnsY8c6BeOGlBhJZbNTRs3IZp12t8ZVsNZ+gyORHNj+u8pMJojagtpHNMl8DLY7s1+Im76ScbfVsXRmQ/jh3hL3X/4pSGk7ZU8e9klHHzxpk3PlDdH02Wknn/Pu4pQPIpIa4GXz2f3/2JhUGI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792231437; c=relaxed/simple;
-	bh=PSyh/HeHvk/7F6f70gDMunY5gYvNfc4K4B4wBP6/ojI=;
+	s=arc-20240116; t=1792231952; c=relaxed/simple;
+	bh=qzvrrLy2qj+cZQoZi4u9ExBicE4rIpxnRBO9CfMg51g=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=l4VTUcgh4NwfwXUEZLS+EX0qlKBjsgKNesNjJYsIxUsl7EpruKmA6lmjplP/js5URTL9lUw3Q1R9jj3FGlZRIjv9PRLNxPFGeNXf9RO0H+jp+OtUnJc79tnGvz1ia+4bUh301aMTT+fQDD1IdWtmNtMWYBTHA1FA04wAmkgh1Go=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PqowJNyz; arc=none smtp.client-ip=209.85.128.53
+	 MIME-Version; b=WNHzGxKbDqwmL2hQV12EUMWdeRu8Xj/kEfnGfvTE9e44lkOjTP9jo52fqbXwUhhcMFGHOl/G7aAamNhe6pIsxkAxnbnxN3HQR9krgEmDxgGCePnF6mt7rfdATq//v9PHLQPPGL0bCoSHlbqSeSQequVOKOtA7MT/j6p74JBfdts=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NC4AEspa; arc=none smtp.client-ip=209.85.221.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PqowJNyz"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49e73611928so10552975e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:03:56 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NC4AEspa"
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48c4be28b82so526474f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792231434; x=1792836234; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792231949; x=1792836749; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fVgSD0Xq5YBvEBtVW7e3rRpcg9mWVhgCoVE9HSYJhNk=;
-        b=PqowJNyzpBR2FDzdx60N/uSto6wBiiR+emdK+WrE1RzaVVALzjNDFq/Vk0Q47BBEy4
-         d+hayA0dp5MEMLoboA2iJ30zNGXjGyuM30TYUFmb9CpFzgWjJl9mDpSaLfhtNvrUlOMU
-         Xv2vNzHfE+VSS1lp30QiGhD4ssY6GdEuw9Om6VuVhaZkHhPAJcqD8rjgbaYKZxPXXcvB
-         G7c/c4SbTuM9a6ZJrkbZfBZ8m2uGCksxeMOGrmbVxEDBhfrfDyQzNtfJab/LiUqehRxT
-         2K4tHAHGX3cRx3UYFmKvDAKxJPmghk7svMybL4V8NuH91SbtGbgdpJWFaapTtnS6HAo4
-         aGnQ==
+        bh=dKoUY67/0brH9PfrEtDz8lEuDjVGpCp9GkyhQChz7oI=;
+        b=NC4AEspaLZ0jkCIpN6Uk3ZRdt+4i7DlqAmAQ1r0JyKUZlNTH/uOHj8hWMewDJt57s+
+         xwrGpxlFXIc5l+wn7Wf8AvsKPKzg/qvKGzAQ4jXGV3FWAT2RxJTdSBtjYTjTcoCBW+FC
+         eESeNMxGDzKm7iMAs6FlcbrHNQWJKcAfX8Vu1IGwG9JDgCiBbI576vCnt8RLjp3t2bXu
+         xJfvGBrm+VMUozelVlQHpHoQJl0KayFgD3PdozYphwRjGjQd6o4SszLT62/FphvkN4wX
+         Z7/I8m2pmvDlrAsjzcbVJl1XH8jcUad7XuappsZG6R6okSZFYyvj9CVfpQnHYtY3HTaj
+         XIvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792231434; x=1792836234;
+        d=1e100.net; s=20260707; t=1792231949; x=1792836749;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fVgSD0Xq5YBvEBtVW7e3rRpcg9mWVhgCoVE9HSYJhNk=;
-        b=YbwZhLjeKu0LZlkuXQKz+PHk+XeSEgsqrq6ZTgi5WM05enytonnWPcVCMb/xUJ0Szw
-         kuBtxEu7oSUggADzYqGQSYYaywxvNFwhJnGlpKSxFfVu4Gp8qbWPddKAlIlAuF3JlA23
-         8yKsu+sZGZO3LTdQE1vj2H+FVjfnZmuDeLl+W2JT4IaP8jXRI9+6uZpSml6M2pd79V7d
-         Z4JU5DM3/KAG3bB/w2PVkplIcNB7xPJdLQADIrcZimIlHexPOuV8TmfFeObiauviG19y
-         kqh1A7Afm886D9gMHKZzW2Sr1rOjtIoxGGbPlJrdW6amsDUBawca7K2MFeYGgX1SzbNU
-         Bjrw==
-X-Forwarded-Encrypted: i=1; AKwUvBxzPRhnq9mROklQCpSj/s081JGdFH+dpGWUEIe54u0JQDhdctzjbnQoCvccyQA6myPSW38LMUETTaWjTXk8@vger.kernel.org
-X-Gm-Message-State: AFq9FYJe73KXJqTF+NMy78uDl/SG9bS3hI7WobrezGC2Fh/R3/4nhFNl
-	KGvrmH2MS5tC8Oxtiu6TyiC5zfFdL1D/Q34frH+9BTPn0P3UmkNwkjBb
-X-Gm-Gg: AYBFou3JVAWwR2QaNC+0FQyQI4yTdFA88BIYKT5Q66QEnnA6CsQL5Fi0oK+ILgL3tnB
-	fAmKpV32kkXmBihec2xeZE27b3ziM541lafqO7X+c3cBbIzDslNI0MHLGKbY4JHWsWN72JwMoi3
-	X9KoPsoHZoyrnWIJe6YyKEbu/CFx0FTPL3UlROB8xQmrXoUOnWT8u/xr2eyg8/rlB7AAdp542B3
-	cXdE6n0C0oYFhVYmeQBFAin1gpN1FgMX4BQlxep35+6VpgjasQWOAKsOTgDZ0JwN1R3kSIEOl1B
-	qg053ntXkWaEmfebFRHW3jcFVCRjm7lB6ZWeeZz2rhjmyaPjfAq0Upevd+4hAUPrR8O6SoNSZt2
-	+u7MIgnbKoDMIpi9c1DvAixg7mnqL8B8+jFUjuE8qft6kiLxvlOGBDuw9NA9EBER1QdBaQg0vEU
-	n1NeSaNvbmJqEv+rnEahR/nozR/ykkFDM0mOmOBvwjoyV0L45kYq7SnhrA4iwH2QoYOYQNeeS14
-	af86lrYqO53tN9iWlr6iQoaDw==
-X-Received: by 2002:a05:600c:1910:b0:4a1:7a1e:6910 with SMTP id 5b1f17b1804b1-4a1d75f2afbmr50724785e9.4.1792231434278;
-        Sat, 17 Oct 2026 03:03:54 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1dc952d63sm36984135e9.2.2026.10.17.03.03.52
+        bh=dKoUY67/0brH9PfrEtDz8lEuDjVGpCp9GkyhQChz7oI=;
+        b=iyCrK42je61dnsAztFOo+VZjbJntPk/BNOnFP58Fv9EQBjnocCkHUO0ygraJg5xTbd
+         MvMHSqslHc0YlFx3Dd9ngtRtjh1nJ6ket6IkScVjXkn3ZC4U/K0vf7y3GTTsArQy9+FK
+         qEQ2NEcuF7d5tY6C4uHxngqeqdQj5/LbEBuJPXFQ1q5kP5tC/U19YhhFSudCjva4KpPp
+         thldUeDkdsewdJ2Vey8D9uQt7fqxPzzVL30DjcY+3/BXfCG39CktnOh8IX7iaOJoaxqT
+         u5GEERkLzoISMsYZKYtxrNYGBb+ssL/PxJ+hgIM/Ar6jZ1r79GlRSwu0MqqORkH7aTbY
+         jHEw==
+X-Forwarded-Encrypted: i=1; AKwUvBx3aFe0y3fl49/v1xxfarQXEFBuYOeSaDsqm2gm8ebVPsz11ciupmv/m18pN7HR6MkurP68zylGpcvg26m2@vger.kernel.org
+X-Gm-Message-State: AFq9FYJhHYjo1c6Yqq5xfWAyA1CC1ZgmTymEr07G+XTiwO/s3FV8Tqty
+	d6gnkZ2hrbfXux8+pQaOG1Wc8kC95MKzYYMs8+l8gSB3CBVCaHsU2mev
+X-Gm-Gg: AYBFou2+lGp1huEuO1Y6nnfBXAXdluQHEp30Q14BTnejHoY+wV0K3TZ8PS9Rj5uHdFl
+	3Q3oxUGZAmZkk+h1nJYD7Po3tO2O/w49JqqijrXynLy0e3nLSHJRIJaXmXlip5ykD8WiHG29L5o
+	BpeZh1Fs0AeMkdaaWVLYDnlKoKG4+MMc7+xbQrEf+o2IDU5cPykkolPlpnny/4VHwhxRkDkRMq4
+	4RtNgDwdjtCYcvgfFclNOfDunJjfNbE1TCMSYrEiaSIxvFKTphBjV3Fp/5nJBe9cuMRGQvogY4d
+	Aslq66zBykdbqga/B+YRqwZJDxAvbaGizLe5wMFbfFx5Fg9ge3dSIeWN0R3T6NvVcgRm2gPcbn3
+	RHf8LCeppLWgbHgyYgsK2HnaW54GwXaN6Jit5pio2zc9H9/7U0N2twdI2OLNUYykpeePX3LrRwJ
+	VCgD6SLCTcGhkTdzr2/DJAAGVxxgJRY8eGa2mFxfvci3L2asjW63Py0IC3C4/1wNw5FRWZ5r5kc
+	2KkhuOUuBSH7vteJnye/aughFcIp6H7hXROCCON1OwVbPPjXS27TwUjaSVENV+AGxw2C2/W
+X-Received: by 2002:a05:6000:14b:b0:488:8525:4979 with SMTP id ffacd0b85a97d-48e07fb5261mr2934328f8f.45.1792231949280;
+        Sat, 17 Oct 2026 03:12:29 -0700 (PDT)
+Received: from SP11X1e.cable.virginm.net (cpc99340-croy26-2-0-cust244.19-2.cable.virginm.net. [80.193.62.245])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5957sm10183948f8f.9.2026.10.17.03.12.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 03:03:53 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
-	Val Packett <val@packett.cool>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sean Paul <sean@poorly.run>,
+        Sat, 17 Oct 2026 03:12:28 -0700 (PDT)
+From: George Neacsu <geocausa@gmail.com>
+To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
+Cc: David Heidelberg <david@ixit.cz>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH RFT 0/5] drm/msm: Attach a driver to GMU
-Date: Sat, 17 Oct 2026 13:03:24 +0300
-Message-ID: <20261017100324.1104-1-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <bc2ed82d-0d91-4683-b9ae-cb4299636c2e@oss.qualcomm.com>
-References: <20260513-gmu-sync-state-fix-v1-0-6e33e6aa9b4f@oss.qualcomm.com> <1118d9c2-4efd-48fc-8a3e-c2cc3eddc940@packett.cool> <bc2ed82d-0d91-4683-b9ae-cb4299636c2e@oss.qualcomm.com>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	gjorgji.rosikopulos@oss.qualcomm.com,
+	jigarkumar.zala@oss.qualcomm.com,
+	hariram.purushothaman@oss.qualcomm.com,
+	akapatra@quicinc.com,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	linux-media@vger.kernel.org,
+	krzysztof.kozlowski@oss.qualcomm.com,
+	daniel@quora.org,
+	konrad.dybcio@oss.qualcomm.com,
+	christopher.obbard@linaro.org,
+	alex.vinarskis@gmail.com
+Subject: Re: [PATCH 2/2] media: qcom: camss: account for C-PHY when calculating link frequency
+Date: Sat, 17 Oct 2026 11:12:27 +0100
+Message-ID: <20261017101227.61271-1-geocausa@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261017035221.3816464-3-anusha.nandi@oss.qualcomm.com>
+References: <20261017035221.3816464-1-anusha.nandi@oss.qualcomm.com> <20261017035221.3816464-3-anusha.nandi@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,46 +99,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi Akhil,
+Hi Anusha,
 
-On Sun, 26 Jul 2026 21:35:35 +0530, Akhil P Oommen wrote:
-> I didn't get a chance to revisit this series after my vacation. I am too
-> not aware of any impact outside of those dmesg warnings. Any chance this
-> recent rpmh related fix is helping with the deep sleep instead of this
-> series:
->
-> https://lore.kernel.org/lkml/20260605-assorted-fixes-june-v1-1-2caa04f7287c@oss.qualcomm.com/
+I tested the CAMSS pieces on X1E80100 and found one extra receiver path
+that needs the C-PHY select.
 
-A data point from SM8750 (OnePlus Pad 3; the board DT is still local).
-My tree is v7.3-rc5 plus board patches, so that fix is already in it
-as d9108bfdb746 ("drm/msm/a6xx: Fix stale rpmh votes after suspend").
-Without this series the clock controllers still wait for the GMU:
+X1E80100 uses csid_ops_680, not the gen3 CSID path changed here. The
+C-PHY flag reaches struct csid_phy_config correctly, but
+camss-csid-680.c leaves CSI2_RX_CFG0.PHY_TYPE_SEL clear, so the front
+IMX681 stream is decoded as D-PHY and capture times out with a zero-byte
+buffer.
 
-  gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
-  gcc-sm8750 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
-  sm8750-gpucc 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+The equivalent change for CSID 680 is just:
 
-With the series applied these lines are gone, adreno_gmu binds
-3d6c000.gmu, the GMU firmware loads, and KWin runs with OpenGL
-compositing. I saw no new adreno or GMU errors, including across two
-s2idle cycles.
+    val |= phy->cphy << CSI2_RX_CFG0_PHY_TYPE_SEL;
 
-I can't say what the series alone does for suspend on this board: the
-interconnect providers here are also held by 1dfa000.crypto (QCE is
-BROKEN, the issue Konrad raised in the "crypto: qce - Remove driver"
-thread), and I only measured with both resolved.
+before writing CSID_CSI2_RX_CFG0. With that line, the register reads
+back 0x01300000 on CSID1 and 3844x2640 RAW10 capture succeeds from the
+IMX681 over one C-PHY trio. The rear OV13858 still captures over four
+D-PHY lanes.
 
-One note for v2: 5/5 did not apply to a6xx_gpu.c on v7.3-rc5, because
-a6xx_gpu_init() there already holds the GMU node with
-__free(device_node). I ported that hunk by hand and dropped the
-of_node_put().
+I also ran a control with your posted CAMSS/qcom-mipi-csi2 module code,
+plus only the X1E PHY table and this CSID-680 select: both front and rear
+capture successfully.
 
-For the series:
-
-Tested-by: Vladyslav Tymoshchuk <tvlad744@gmail.com> # sm8750-oneplus-erhai
+Would you prefer to fold the CSID-680 line into this patch? I have a
+clean follow-up commit ready if you would rather I send it separately.
 
 Thanks,
-Vladyslav
-
-(I used an AI assistant, Claude, for the analysis and to draft this
-mail; the tests ran on my device.)
+George
