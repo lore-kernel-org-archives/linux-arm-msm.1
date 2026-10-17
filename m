@@ -1,90 +1,90 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1681394470
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 210B023EAAD
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792205032; cv=none; b=TK7igfYbOFRtNa//TCHAWPUKbscD4antW3Lke/PXHVug0TtcBnlb2ag+tZ4fkZdxVexHAg9ylIf3f72eBaed7xdneRO60Hfyl+qloOm8eR3f13UMtO1eX8O+FUSBKwYu4xLD+X622naa3DdeOsoRoSO5ymyaWR7UdO9PHfKoReY=
+	t=1792205033; cv=none; b=A/+VM3KH3fE5S4MbPfam70Icj5iiXrMUuEsiR2ok2fp1lQfPzZzARoEgj5EPRF18xfgXMR5IcjLmJCuBL+WLNznHmGj+v7m1OEgTavp1Ej2JaXdd0baQ4foFz1Gh88fw5g9c+tpxo0vWfcgejPflcSqv+7+LpfSnJHRtK/ShP9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792205032; c=relaxed/simple;
-	bh=T05qU3QP38O2C/gkrcm6SRVlPYdACpGqdMD1WnF8jI0=;
+	s=arc-20240116; t=1792205033; c=relaxed/simple;
+	bh=/6F/aLJSv5Q7HhM5eYJG9nxGTi2Lx3k7CUsBksszwKY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=kIHcD+m8wfZbPFSbDOjxzqiLEkznzh+7DeIlcpymEyL6iBCgIqTQ7MAQFBFSj82BwTwwPkthj7czBOK/JSLLpbwuAyBwo+0vef501qkGoz+Vb4JvQ03sX0ar+pMSBRpIMz0EkUI7sS2FLwBwdrPS+H5GkoM8uzZbrrCkeDPEBJw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c7rsUPdD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cY95WotD; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=dwGvvGITROIdZnzXnLu7jDJgrixSjbmmElfEN50WMEcezzmGQ/wW/nQGIChtoy98RkFXsmDkgFjq5aTsxBBYkokwq9ujvnHjaFmbSqJl2ZpEFolwXsn7kQiVtSzSW2tOxo6MWHrO3xItrOV61Q6Lb8TIdKSu9S4yECT+Nxl4+P8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Aq+PHhQV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ig8HvGn5; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c7rsUPdD";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cY95WotD"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GNGFuw2618289
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Aq+PHhQV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ig8HvGn5"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69GNFxjb4175252
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=ApuLXzOKhLv
-	eYlVUddCl2eITtzV0C5lAoBiRTgJqkhY=; b=c7rsUPdDBlW95UGFIAPOMyK3TS2
-	wd5CIPLG7EWXxibnODp7PNWgkcv6tDlFmVfPFetwY7WljcIaVm9lMEdtjYZ6iV0k
-	TI9B1F8FIp4Wvx6JZtKxmnXu4d/tAablJYh4HD3O/609ZMNzoPs+6eggHSp/WTHp
-	WdNQEjYCm4hV+FRdCGLn7/iIwi1dInFAmWQXeN4oA4hyO/DADQmxZYJMn7XAR0Sg
-	gUetp0T3GTLa4Bxm/T5YpKMfzbobDniSh+45luO++Q+7boXgahv9Tv4JkTD7Nqfl
-	Kf1Vu4WjwTIt0fjhQJSE7cq6ejVdogUj8jCEMDhBvdeNYVEBNdy6uUDe9gg==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=GEJSdsCp3bn
+	OA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=; b=Aq+PHhQVatdfGXF2DYv9hs2Lokl
+	ehZgGqYubAheic4HFlRbtzsRhO9czNSy/La/3YbMgdY3EnEvHFDW6FcC/GM+FtPl
+	pNJucagIpVf3kDjKtTKb443VYPQ3B4P9KSHNVGF8IJz7JHWVhh/b38l15Fh98OmD
+	6BS7PKL0tiHFcrMWxOD521nCZOwNL4ZJQlDySYa05wOZkEZD15HLiVok56lgA7DA
+	OLwcAHhhQOI/L09HFw+AOr6HUHHQ9u9mc3VFCkpTzEWn7V0g/8m26zaoeNQC8Agk
+	rrDcsYjwa3sj33V0aAl1afkwVIHbEkqVqK6A8+FNMTPjfi9ospaPvzrF/2w==
 Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbhur347k-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbq451t82-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:48 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3552883bd19so1621655eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 19:43:48 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:43:50 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30c0d568830so813367eec.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 16 Oct 2026 19:43:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792205028; x=1792809828; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792205030; x=1792809830; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ApuLXzOKhLveYlVUddCl2eITtzV0C5lAoBiRTgJqkhY=;
-        b=cY95WotD/kRsnE/lyCRv34ApBBXMvMLqntcqinHIgTsaTAaHG91lr6od3LP62gUo9g
-         7jWbgAU4nNJI3FeYD/cj2ABR1xhA+B2YFvR6DgFoLdVHxXAJUTB5Jf9yr0gX+wXnuJAQ
-         VDswZaqq196Azzm2fuNPN9J34WQDE4YW62B8z+S1aZDKhvt8pnlCmqlBaHNtfmsX40J6
-         W22TofxQLcidvl72m1qq+3BOSvTjso8Bv6djz5hK8nQxV291PoVFzmeXxjHvpp/gGAGB
-         QpodSAdTaTD4NgCmcsM6pEoYEtyt6GFNEDKjo43VC3ATmsn0T5OuWPXamX44f1IK3+KM
-         pzFA==
+        bh=GEJSdsCp3bnOA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=;
+        b=ig8HvGn52H0RvT8sCt60O0utggXP8pizPp17UCsYld91HWiKhSaBQ/BuvWrD/rn8Ld
+         FfK0NG3vUnCQc7t2PLH9A9LgtCmZFG1FMmEYrbuVO/XZ8nQcMy0MBfVgTJ201qPQbbVf
+         zyEDv2vv7mZrXq4WQA5nRG/u3lVhSkF3pxwAvF1QivehBpan3m9ZkkF+aJczrd0+2qRV
+         ht/ITftuvzcQR5wxV2ij8YPdsJpKJw+M6l5PuGYPRk36ysDb/wn6IRC4RNTOjIza+V54
+         wJpfPETk3LLSZhTKCkg3cPcE1t95wwDK5xZIcmx/d6Nwj7wxYB6nI/gtsdx8R6FyScNN
+         WxNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792205028; x=1792809828;
+        d=1e100.net; s=20260707; t=1792205030; x=1792809830;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ApuLXzOKhLveYlVUddCl2eITtzV0C5lAoBiRTgJqkhY=;
-        b=y8A4glLBiQ2PfXmX1vkef7GER9FotTD8eftLXvCJBGrWDyDpLcwRlgghwk3EZ1sVB1
-         yEaOW/WqSsmff7gZoFEMtnlkcCT6GDMkEimLB629EdypZO2hiIsimjA9YRnLZBSH9zii
-         Ek0TReosOW8tRDWG2bPhmlSbZ4mG4eDdb5LkR0sffKh+9MqUnagEyXQXlDCTVg/TCU//
-         KLRFI9ANI5j+zsGKrlJaBD26yDe/iKBXAduaBMjcgPs1UcKC1zXMa6vRvLlaftXZB88G
-         caDW9DYTaVGN6JtRggF18mDO7GaVWRnCCaFRa4TFSzd31QsQ26S3WDXYAAL5dkW3SOgK
-         DsSQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwGYG/A0HxxK13an0IYHPWbL+mURCMlQTnGXXoL6VUU7PyS28bz7Zm34VRCEQM+Fd54LCXOzxgE2pkc6TZk@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ83tLceWZPWRqbmoVWTCPa6MVkiXYYcJDT+N2nuP/ett/STcL+
-	lZ6SlEKeKTuAdDEAozHXs3agRuD3Lu+HeVDYR6UpSb7twynJkG66htGitVaUuVG8kVGrgacDbTR
-	6FqrjAmhkKaWSguwkNKG3SG+6VGomwjamE8TrIJR+g9uGEL1fo+13S/WPLXhXLt6Yh/GF
-X-Gm-Gg: AYBFou1//6I4jCnxS/LwuMD4sMeD0JEtmnPDktc693B23ceIRHNiQhouD5uA2lTxDv3
-	Gfcs8M92Y1nyC1/UJ1lH8xKxpEdUN01gm7U5Mhl3HJAngy7iIu2EjOxFDH93VNimm6EzkOApDTf
-	FfTcQzWS2KLlCb+CIhz6M8RdxLG1GtvuyYOqoZGq3CF8Yo7ErGNdu6s6SPCbGRPW2i4GMoeHhHk
-	F+C4xKqJPMHOTKkj4Yy415Zh44/T4663HZPyPHgo67AYNqvBLBbxP84leX0Jn2ikjwsMoOoFmXv
-	kQX/RYclKN0jSTISu0RdwcC+D91bKkLX1VJRDhYoEsh8f8Jmo3t5SE9TxuxkVxvo95kcdpkp9So
-	035Diw4vbGUvKjsYlcIvFF+tmEAlJhB0BFJ1dBm6JzJ1Ay+W1dWvN9Z9gTgE=
-X-Received: by 2002:a05:7300:8187:b0:351:6f5c:5d16 with SMTP id 5a478bee46e88-361a1e4e978mr2582283eec.22.1792205027387;
-        Fri, 16 Oct 2026 19:43:47 -0700 (PDT)
-X-Received: by 2002:a05:7300:8187:b0:351:6f5c:5d16 with SMTP id 5a478bee46e88-361a1e4e978mr2582247eec.22.1792205026737;
-        Fri, 16 Oct 2026 19:43:46 -0700 (PDT)
+        bh=GEJSdsCp3bnOA3Rmz28fYbHxbHs4bqwNwIhoTb11yWk=;
+        b=CNr7/YYgjwgNrRDfgT3eztexwrT5YiAkwg4zd8zx25Bd61eXO+l1rqS1q2qVk1gBsk
+         aZ3f6kmp9xwZakCrO9PRdEUF4dnj0OApnUV4kU/mLR76c+YTTggI9O9eUf8vnvmcnPwL
+         xc2hopPHkZS/gcz7xBh12Gnydu4iH3nRCtt7qOe1ETVDZdZiJUs5iubE43t+G8DJqpbv
+         7leF+xXbH4Yaz9srzU0/tOrUb6gd4uoKBbG8WLjcFhj0FI0v72H0dkHsMEM1wA2PncyI
+         HDommV9SfHRY6Xf/d1QDt86YdrfQfpJ06qlIGUNK2GBieC6jI4MgtrowgIdypxi9vSMa
+         oZ5w==
+X-Forwarded-Encrypted: i=1; AKwUvBzF8jerfokWtSI2Mmvv2EYcpy7javPVqmD0IwdVpq3rDiofZXu/WDapOdOAPOWkhV/5Zs7WAun42KVdlYHJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYIXIIr7OMOBgnRlaN8B22JBrckwY0L/UXaRs1rNW/doty7r7wqq
+	d1/mrn0qiUNkp3kfiojaN+v1D7t+IXkAMIg4okD64a6KSNcFDZtz+bWqCLayyX3hixWBM9YSKct
+	Y8MKdEvqZATY4lMLZAMhp+pksPYoviYHZ8EDdCnm21RYwi5fQEG+6jIo+SQSSvA+rzpV/
+X-Gm-Gg: AYBFou264LVC43CIPq9XEasqhzBl08xv1KZKL8R9kEPC7UguIyKk7P2G6cnGDEydsYI
+	vRkvnMRGV4HTUnAfNEXjrO6D3CmWflGZANtBSrpBG+S4nHWyyB7vbfmy2dAuCvt0efipRvRgP5Q
+	woQJSrD1YPeQiqRkNEVEw5MmI87D+25tPMl300RSBZ8j0w+wat/J6H9e+icOXEvWDVLfNxiQv+I
+	o39nXg5JkQz7s32uptzrVfDyVen3lgmj/io6zOfJ4C7bvarl1Ql2vW2fbeu2BZBI4XY3Vga5ccs
+	gxcvOPpKqryBkt4zHbScqlu25/qGCvLDBxP9wKkGFIKWiKIlCe3TGmZhJrSm6/EI5VCx3Dj0pfd
+	WCrr0Q8PfVU9s02NpQdNsBDRLtbji89VOyxaJypdZG24Ofg8i5hK4bu0P+nA=
+X-Received: by 2002:a05:7300:8284:b0:358:bbb7:88da with SMTP id 5a478bee46e88-361a234c05emr1958388eec.32.1792205029857;
+        Fri, 16 Oct 2026 19:43:49 -0700 (PDT)
+X-Received: by 2002:a05:7300:8284:b0:358:bbb7:88da with SMTP id 5a478bee46e88-361a234c05emr1958361eec.32.1792205029308;
+        Fri, 16 Oct 2026 19:43:49 -0700 (PDT)
 Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3607ee0cab0sm13066829eec.3.2026.10.16.19.43.44
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3607ee0cab0sm13066829eec.3.2026.10.16.19.43.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 19:43:46 -0700 (PDT)
+        Fri, 16 Oct 2026 19:43:48 -0700 (PDT)
 From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
 Cc: linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v3 1/3] gpio: shared-proxy: Fix race between concurrent first users
-Date: Sat, 17 Oct 2026 10:43:33 +0800
-Message-ID: <20261017024335.1432020-2-shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v3 2/3] gpio: shared-proxy: Drop the vote of a released proxy on write failure
+Date: Sat, 17 Oct 2026 10:43:34 +0800
+Message-ID: <20261017024335.1432020-3-shengchao.guo@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261017024335.1432020-1-shengchao.guo@oss.qualcomm.com>
 References: <20261017024335.1432020-1-shengchao.guo@oss.qualcomm.com>
@@ -95,232 +95,75 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE3MDAxMCBTYWx0ZWRfX0U0pAIdc5TeB
- d/s+Zacr07bgc5bpDwF09BUgboyS48/FY6usrQe8i/NW/6z6bDIE6oSHO4m602HnM9B3ddymt2N
- 7flwy4O/zAefPDdvwJZXkeiecxRJE22WrxfGW45msyj4teVMvyrS0oB9lc4RRUOiB4VFPfX/e4Y
- bTO1nsNFyZBnjuWZAV8fxRTayFXzmIzm0oEh/Ul0efO2sfg1+3WvS78+ZUbxG0U0QoAptpnMxsF
- U+kZchV9GiexkYjsqEq9yJoXZAOS5hBhUO0sbBjAZWY6dnNxz7D/0TaqZkrl1jr0lckoEhlcUSM
- Jb7HWxPr+9G9O5Z1ua/l/14aCGFZMoRAQMbmwTfPOyxaeMY7mmLvKARfbY1UZSNzUGQ4bRvAne8
- e+qVy5BcM2W5JFPiXmfWeYk6GOm1AgSsPqKWMi8pD8N+KmoklyI3sJsXPSTnMM3BQ1eVaOtWILq
- LhRs33lSzlNWeQXwC+A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE3MDAxMCBTYWx0ZWRfX1Cg8iB5jIYY6
- MudBFGYpwwG3VUciE38OX+Yu0B4inEw14hL+CpzOZEKi9dQEP4KANfMzstRRdAxAbE0qeIiJs7b
- fjzFNOs+fXKUCaD+r2fSxL9UNnSjSEo=
-X-Authority-Analysis: v=2.4 cv=PqsG/AM3 c=1 sm=1 tr=0 ts=6ad2e0e4 cx=c_pps
+X-Proofpoint-ORIG-GUID: DGR9GF0QGa_VVyKxKGw8JwK2KKlfKQo2
+X-Proofpoint-GUID: DGR9GF0QGa_VVyKxKGw8JwK2KKlfKQo2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE3MDAxMCBTYWx0ZWRfX/IJu8Bog8ueo
+ Je7qWiiuo+AKOF1JDwEeBXBif5Y/BrerAs9I5fa/41K5+z8blJBQtjlRVh83uW/QGA6L4wD6+nR
+ C+/ZMkMleMad3QY++jL+GO5+aCsM9i0LEzlZuUAy9FlT02RVnNftXT2jT47nObhmQ6UdnbDvBfD
+ 4jSYO9eZUvhqfN/iPeLdGJREqRejOEEVlYSzeOewxHxLE7R97YDHTkC3Vnepms4hEHbtGcmI9Qa
+ vlPc80B8dkPaO0muENUMq93B48q2PeuWTXxfGNKDxpBOvQ+M90A+pzh5Ko2jW8S8BEasOotCG9d
+ TJjpneSG8xoQtt9Ei7oe1ZbiF7mlOcd1z9IuohmqMwy3QIWZi90nL86QnX5nbykJu6Kbn6P0gT5
+ sv4ac59Uig2belOVWpBONbEwoLqKwQ5txc3Zxt9lWIEIak+ewxNOVEkdOqA9Et7DhrGVHqoaYYS
+ Z8GrYQHpNPAF6X2n4sQ==
+X-Authority-Analysis: v=2.4 cv=e4GT2qp/ c=1 sm=1 tr=0 ts=6ad2e0e6 cx=c_pps
  a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=Sp4Y3lbv4_CS8mIV0RQA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-ORIG-GUID: uiqwYN1TL5cXbEU3_uwquvCopL6caM_o
-X-Proofpoint-GUID: uiqwYN1TL5cXbEU3_uwquvCopL6caM_o
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=Vq87VKjZgZ7Zzh4gvRcA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE3MDAxMCBTYWx0ZWRfX9Y4z/L3GAQKw
+ mvccDApqcIUDMn4iwRTvVDm86+ygV1iromPSYg1CjFCDBsNJ+nvYFILB30K44fITVTpyr904KSn
+ YhU/p142G+x7uX23qV1WXLqXz2E+AUI=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-16_04,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
- phishscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
+ phishscore=0 adultscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ suspectscore=0 malwarescore=0 spamscore=0 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610170010
 
-The proxy lets a consumer set the line direction and reset the
-default value and vote tally only when usecnt == 1, i.e. when it is
-the sole requester. But request() and direction_output() take the
-descriptor mutex separately. When two consumers probe concurrently,
-both request the line before either configures it, both see
-usecnt == 2, both fall into the shared path, read back the still
-unconfigured direction (input) and fail with -EPERM.
+When a proxy that voted for a value change frees the line, it calls
+gpio_shared_proxy_set_unlocked() to withdraw its vote. If it is the
+last voter and restoring the default value fails, that function
+returns early, leaving votecnt incremented and voted_change set.
 
-On Nord RRD the two DAC supplies are reg-fixed-voltage regulators
-sharing tlmm GPIO 41. They probe asynchronously and intermittently
-both fail, leaving the codecs without supplies:
+The consumer is gone, but its vote is not. The line is held at the
+non-default value for all remaining users, since votecnt can never
+drop to zero again. And the proxy data outlives the request, so
+voted_change is still set when the line is requested again. If
+another user has reinitialized the line in between, resetting
+votecnt to 0, the stale proxy's next vote for the default value
+decrements votecnt from 0 and underflows it.
 
-  reg-fixed-voltage regulator-3p3-dac: setup of GPIO (default) failed: -1
-  reg-fixed-voltage regulator-5p0-dac: setup of GPIO (default) failed: -1
-
-Requesting the line is not evidence that a consumer has claimed it.
-Instead, count proxies that have actually configured the line (set its
-direction or voted for a value) in a new cfgcnt, with a per-proxy
-configured flag, and allow (re)initialization only while no other
-proxy has done so. A consumer obtained with GPIOD_ASIS that votes via
-gpiod_set_value() without ever setting the direction counts as
-configured, so a later user can never reset def_val/votecnt behind its
-vote. The count is dropped when the proxy frees the line.
+Drop the vote unconditionally on release, after reporting the
+failure, since the consumer is going away regardless.
 
 Fixes: e992d54c6f97 ("gpio: shared-proxy: implement the shared GPIO proxy driver")
 Assisted-by: LLM
 Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 ---
- drivers/gpio/gpio-shared-proxy.c | 74 ++++++++++++++++++++++++++++----
- drivers/gpio/gpiolib-shared.h    |  1 +
- 2 files changed, 66 insertions(+), 9 deletions(-)
+ drivers/gpio/gpio-shared-proxy.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpio/gpio-shared-proxy.c b/drivers/gpio/gpio-shared-proxy.c
-index bc69b8729d19..0d1d724a6a37 100644
+index 0d1d724a6a37..24241c981df1 100644
 --- a/drivers/gpio/gpio-shared-proxy.c
 +++ b/drivers/gpio/gpio-shared-proxy.c
-@@ -21,9 +21,33 @@ struct gpio_shared_proxy_data {
- 	struct gpio_chip gc;
- 	struct gpio_shared_desc *shared_desc;
- 	struct device *dev;
-+	bool configured;
- 	bool voted_change;
- };
+@@ -134,9 +134,13 @@ static void gpio_shared_proxy_free(struct gpio_chip *gc, unsigned int offset)
  
-+/*
-+ * A proxy may (re)initialize the line - set its direction and reset the
-+ * default value and the vote tally - only while no other proxy has set the
-+ * direction or voted for a value. Requesting the line is not enough: consumers
-+ * may request concurrently, so counting requests lets every one of them
-+ * conclude that it is not first.
-+ */
-+static bool gpio_shared_proxy_may_init(struct gpio_shared_proxy_data *proxy)
-+{
-+	unsigned int cfgcnt = proxy->shared_desc->cfgcnt;
-+
-+	return !cfgcnt || (cfgcnt == 1 && proxy->configured);
-+}
-+
-+static void gpio_shared_proxy_mark_configured(struct gpio_shared_proxy_data *proxy)
-+{
-+	if (proxy->configured)
-+		return;
-+
-+	proxy->configured = true;
-+	proxy->shared_desc->cfgcnt++;
-+}
-+
- static int
- gpio_shared_proxy_set_unlocked(struct gpio_shared_proxy_data *proxy, int value)
- {
-@@ -117,6 +141,11 @@ static void gpio_shared_proxy_free(struct gpio_chip *gc, unsigned int offset)
+ 	if (proxy->voted_change) {
+ 		ret = gpio_shared_proxy_set_unlocked(proxy, shared_desc->def_val);
+-		if (ret)
++		if (ret) {
+ 			dev_err(proxy->dev,
+ 				"Failed to unset the shared GPIO value on release: %d\n", ret);
++			/* The consumer is going away regardless, drop its vote */
++			shared_desc->votecnt--;
++			proxy->voted_change = false;
++		}
+ 	}
  
  	proxy->shared_desc->usecnt--;
- 
-+	if (proxy->configured) {
-+		proxy->configured = false;
-+		shared_desc->cfgcnt--;
-+	}
-+
- 	dev_dbg(proxy->dev, "Shared GPIO freed, number of users: %u\n",
- 		proxy->shared_desc->usecnt);
- }
-@@ -131,7 +160,7 @@ static int gpio_shared_proxy_set_config(struct gpio_chip *gc,
- 
- 	guard(mutex)(&shared_desc->mutex);
- 
--	if (shared_desc->usecnt > 1) {
-+	if (!gpio_shared_proxy_may_init(proxy)) {
- 		if (shared_desc->cfg != cfg) {
- 			dev_dbg(proxy->dev,
- 				"Shared GPIO's configuration already set, accepting changes but users may conflict!!\n");
-@@ -155,15 +184,21 @@ static int gpio_shared_proxy_direction_input(struct gpio_chip *gc,
- 	struct gpio_shared_proxy_data *proxy = gpiochip_get_data(gc);
- 	struct gpio_shared_desc *shared_desc = proxy->shared_desc;
- 	struct gpio_desc *desc = shared_desc->desc;
--	int dir;
-+	int ret, dir;
- 
- 	guard(mutex)(&shared_desc->mutex);
- 
--	if (shared_desc->usecnt == 1) {
-+	if (gpio_shared_proxy_may_init(proxy)) {
- 		dev_dbg(proxy->dev,
--			"Only one user of this shared GPIO, allowing to set direction to input\n");
-+			"No other user configured this shared GPIO, allowing to set direction to input\n");
- 
--		return gpiod_direction_input(desc);
-+		ret = gpiod_direction_input(desc);
-+		if (ret)
-+			return ret;
-+
-+		gpio_shared_proxy_mark_configured(proxy);
-+
-+		return 0;
- 	}
- 
- 	dir = gpiod_get_direction(desc);
-@@ -176,6 +211,8 @@ static int gpio_shared_proxy_direction_input(struct gpio_chip *gc,
- 		return -EPERM;
- 	}
- 
-+	gpio_shared_proxy_mark_configured(proxy);
-+
- 	return 0;
- }
- 
-@@ -189,18 +226,20 @@ static int gpio_shared_proxy_direction_output(struct gpio_chip *gc,
- 
- 	guard(mutex)(&shared_desc->mutex);
- 
--	if (shared_desc->usecnt == 1) {
-+	if (gpio_shared_proxy_may_init(proxy)) {
- 		dev_dbg(proxy->dev,
--			"Only one user of this shared GPIO, allowing to set direction to output with value '%s'\n",
-+			"No other user configured this shared GPIO, allowing to set direction to output with value '%s'\n",
- 			str_high_low(value));
- 
- 		ret = gpiod_direction_output(desc, value);
- 		if (ret)
- 			return ret;
- 
-+		/* Only this proxy can have voted, so the tally is ours to reset */
- 		shared_desc->def_val = value;
- 		shared_desc->votecnt = 0;
- 		proxy->voted_change = false;
-+		gpio_shared_proxy_mark_configured(proxy);
- 
- 		return 0;
- 	}
-@@ -215,7 +254,13 @@ static int gpio_shared_proxy_direction_output(struct gpio_chip *gc,
- 		return -EPERM;
- 	}
- 
--	return gpio_shared_proxy_set_unlocked(proxy, value);
-+	ret = gpio_shared_proxy_set_unlocked(proxy, value);
-+	if (ret)
-+		return ret;
-+
-+	gpio_shared_proxy_mark_configured(proxy);
-+
-+	return 0;
- }
- 
- static int gpio_shared_proxy_get_cansleep(struct gpio_chip *gc,
-@@ -230,10 +275,21 @@ static int gpio_shared_proxy_set_cansleep(struct gpio_chip *gc,
- 					  unsigned int offset, int value)
- {
- 	struct gpio_shared_proxy_data *proxy = gpiochip_get_data(gc);
-+	int ret;
- 
- 	guard(mutex)(&proxy->shared_desc->mutex);
- 
--	return gpio_shared_proxy_set_unlocked(proxy, value);
-+	/*
-+	 * A GPIOD_ASIS consumer may vote without ever setting the direction;
-+	 * count it as configured so a later user can't reset its vote.
-+	 */
-+	ret = gpio_shared_proxy_set_unlocked(proxy, value);
-+	if (ret)
-+		return ret;
-+
-+	gpio_shared_proxy_mark_configured(proxy);
-+
-+	return 0;
- }
- 
- static int gpio_shared_proxy_get_direction(struct gpio_chip *gc,
-diff --git a/drivers/gpio/gpiolib-shared.h b/drivers/gpio/gpiolib-shared.h
-index 618756f6c6aa..ae10506b7029 100644
---- a/drivers/gpio/gpiolib-shared.h
-+++ b/drivers/gpio/gpiolib-shared.h
-@@ -41,6 +41,7 @@ struct gpio_shared_desc {
- 	struct gpio_desc *desc;
- 	unsigned long cfg;
- 	unsigned int usecnt;
-+	unsigned int cfgcnt;
- 	unsigned int votecnt;
- 	int def_val;
- 	struct mutex mutex; /* serializes all proxy operations on this descriptor */
 -- 
 2.43.0
 
