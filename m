@@ -1,165 +1,518 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B19EF47C0FE
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 09:53:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D754B1FE451
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:01:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792230807; cv=none; b=dDthhPDzKy9bScqhsuqgSncgZ9E2hDnfUzZqY61BE+48lzYhtDxzaqOhBbFIiHeBt/SmOw3Rur8ImGwY37wOp3onRAnC6wwJoILuRZ70SeJBSHg9BYoe4V9acevBoqdJ0+r3R271EEJuXmHOgSvO04/XD0qe/RM+AbaZUWtOQBM=
+	t=1792231277; cv=none; b=kZTsZD3BNPDUcrEhkjf1wW80FYx4aM5scM/DpVeU/W+En6cLhmWjgTHFHpOWDVf/pQp4Ijh4gFJvZYCA/fY7qdrbQZR6m58XxjgBzKinWNSnCAgG42ifqZ0SOCUDovErBVuE3QWCSv/Da2SB+xFoCpvzJ3dG2zp5OKDS9m8DOp0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792230807; c=relaxed/simple;
-	bh=j58n6xlP1WdLlmhvGi/Za3kYOwUNNCElJDpoHZoH8UE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GXNiYdeXjZtY66DoI5FRr/LRBYwB1uewe7F92tlgdidvQnWkBmMhnhdXrxfVzPVJGZWRfIw5k4NjmQqnvZjqE0cBDKfk8YCIyHVjrxetUEhqOaVHwUJ8CoiY8OqYA33+j7LbTqrq8yGuDglUr/TalW6V8J86P3TkqP7YM+/ghss=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X62dA5hr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f2Nbn+Yf; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792231277; c=relaxed/simple;
+	bh=LVhunIGi+1kymI40gl1s+wmjtCY7K/lv3AXeNGSKWKs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iOOKKVivMTNNQ0ANmK13KNslbwJ53b/8xXNw2fJC+IxBmu/BaQ8d+Mxmn40ZgK2JvOtChIFV8iqT52XX6GkTHDHHb/63yHqYqQpHfBJ8tXgrMxpCOXGj9TfPf81FgdxBc4TGqwWrJCGHg1sVfkiRuQUDnyB8nAtU3iQDcmMvq6E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ML4bog11; arc=none smtp.client-ip=209.85.221.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X62dA5hr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f2Nbn+Yf"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69H6o3lh900565
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 09:53:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=XtXS4yD9Try/qCHd07nuVF72
-	fRP9oxFrjzBY101VuBE=; b=X62dA5hrbOOwcSzXIK8DZjEgKA5+PWQ5ybpWnqa1
-	8yqIdGl7fAX+uVEehWCiT85sopw3Mf8a0BJLphDpWhJISrG4OpDzE8A/v+WorWyV
-	yIZjMnqVqyPo/Lc2cLQrEI2Hf1eirStcsENm2ZfyCU5nikmbUYW7ADHR932Klq3G
-	TgHFR3n7vLI5AI6CXDuD+aB8prHUGlhHpCxYQ91uNwoiVIc3Xk530e2pPy6QE0d+
-	8fbwAJu2Q/RHRf6nLmV7Rcsgey2CNvY67Iib5dF7dcAi0NRJMiUL4oh4x6xu8uGl
-	EiJYSTp3kQMXWKGrm8ptLfW5khDdZU5kaEzcLAX3Abau7g==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hc0kxgnxk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 09:53:25 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35cbea41088so1014898eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 02:53:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ML4bog11"
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48b001cd92bso312704f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:01:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792230805; x=1792835605; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XtXS4yD9Try/qCHd07nuVF72fRP9oxFrjzBY101VuBE=;
-        b=f2Nbn+YfcxWc+G01pO7YN1volimu8ngylIALdY1HnQ3vEVNvLX33a1PQJZgX0O+kWv
-         ufebQwT3L3IlRPpcMBlWR0lbdTRqE/UwWcrVugUvo0oWle1gSSVk/cud39ISgGgcRGxx
-         W3hOVr2FIi8aqo9HqKxbcPOISN+QQprFMbTgzXJlnqUOXlrYU8V4QPgmQd0fNJMFEPtk
-         2jhDiIv/sh15YMV364M2MvYGSVEy8An6ZYAkzPHvwywQ2G7DyNLYlYCmOiEExiZYWbJN
-         NClSxG/rNSfUnmRqhGbykWCUXl3Vsf3QbPBdV4oJ0O9D+NpTV1lF/YpNRNwbomv0u0/v
-         WXnQ==
+        d=gmail.com; s=20251104; t=1792231273; x=1792836073; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=AEW+uW8P27My+8CTtMqBOat+Y6bq8IsOAnfriF6HTc0=;
+        b=ML4bog11GkKrVujiJwAhrHBmy0XJjlgaikuRyBOSOUHazkzz1e79LbP8L9ajslFm5v
+         tGfg6tmwzPfY3d5yJZUk7sZchyAwSqMSTMJb60X+ClzGgaQB4Stvu+g5sshWO+m+WEOR
+         pPJLSUeocatNmdhqQfnOp71j3nzsiJUC01c49ZQLNjVREUNZpA44VUysOrCrVhYQAm7C
+         o4ZZSq7mG7LuOa+rz/g3gkdbkadbwUD5VnGn2oeocre+SZOHGvjMcrWZQ6HaDWdwUApy
+         X84+/viveKuKeMdcB7NKVEMYVWU+PUSrnlBzH4/pzvr6IUlxj1kymVao4jwUcRWO0PaS
+         9KvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792230805; x=1792835605;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XtXS4yD9Try/qCHd07nuVF72fRP9oxFrjzBY101VuBE=;
-        b=oO/cRAbvXpWQuZrjcby7hHmqYfVFMqM/CpbVxhulDMwqmJyxz0LnQNh3uENpJHug7c
-         0+FILvWqcsnfcVt6O14NB9bVhX+BOBVwgx+2BbUDOK6S9iEhN1TdZX0VyuVBnfUuqger
-         6RxwjmJzljP237j8++mkQRmMZyGDMukbLWctmIM3k55DvvRCfG9EMRpMJxRYXGdihS8C
-         xM3+tC5/CzhFrNE0MkXylAiNKHo74Ux1qEQlRpqydh1CzHuySoV1N9+4An8Ip3DjeNji
-         mCMhX4TSGDjKBS5JZCSd9dGQ9L2x2Xtda04VDvsR4u+ygzS0Mp9vQ6sWpZxyaYmW0Se+
-         pBxQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxEpp5ooEAuZdT9wBpGbeZe7urrdIhv2UDXuF3OI7j8Nr4xIHtsVhhE2Q0W/q4J30gDGb26lCwyVbxyImmk@vger.kernel.org
-X-Gm-Message-State: AFq9FYIHMEo6LXRZzsIo4i61irG+k+Q+wr2tacYtiMQDbzuim725Bq5A
-	cw+43CjkhdfaLC7pyRuKQFRp7TlNal3CUGripJJg9vMEUNcvVyY/YqZcCbngmkVW+SN9annhwOl
-	YTc7vU8jHxGb/UAE9awKQgWne9cxTaDY0GjyGUCDzT+q0o53swR2dC4NqBhWoiwfBZrzm
-X-Gm-Gg: AYBFou1bvOUQJZvxH/x1/6DWGYueG9c/uQ+sWoly27FE2JL16XFkPFQjdd0hXL6Ce5N
-	06E9yb78CGN+fpeNhESwgzfo/vUBdQz8t9DjMOcqGCgOnRbLaB6zfG8RNfFZrCampgq6FueGpak
-	Y5AnG/ijmvOlk+4l+Gxh8wQv5pZSupAlbuO+QpZpoTfQmPuBFw0WUHP72jRxImObeGmjFVsCN9Z
-	hjBiGnCCcyWaOklorFB8N23tFMDSxZBcIXiNzwZlK/f8O1Nhoau65h3opDlo5315ra84gHvf8VL
-	2PGiz5lNaUtEtQmgEqoszDJTERemx4lhdwPcEwT0TUzzH0Cj4W3nD09SzxhL/EYYgBoMUoxV6sx
-	/eTTk8Fgrk4Jg
-X-Received: by 2002:a05:693c:881b:10b0:35a:47ed:c39a with SMTP id 5a478bee46e88-361a2f333b2mr2990933eec.37.1792230804200;
-        Sat, 17 Oct 2026 02:53:24 -0700 (PDT)
-X-Received: by 2002:a05:693c:881b:10b0:35a:47ed:c39a with SMTP id 5a478bee46e88-361a2f333b2mr2990870eec.37.1792230803002;
-        Sat, 17 Oct 2026 02:53:23 -0700 (PDT)
-Received: from oss.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36083283478sm13189465eec.29.2026.10.17.02.53.15
+        d=1e100.net; s=20260707; t=1792231273; x=1792836073;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AEW+uW8P27My+8CTtMqBOat+Y6bq8IsOAnfriF6HTc0=;
+        b=U/gRB5F7CSPMYweGMVIzhf+bnIn7lyecPYameSL42EOkxpgkis5GXCGaJf6wvDsuxE
+         KxmOtpK1KfPiek6xpnSZtI1DAVvlSBMf8OzqP/wfopEsLJFs3awObs5vSwtU2O8OFowh
+         wMIuz5CUBOHMsvhoOGsTtZH4/IAYtNUPvT6EHAHfxuAvxr9ZTvXDARqplqYUL9ZwP9ua
+         0DPPNtXtwug/ZdnWoeI+3TpB1attXR5Nzs5hUesnM9qtQMiIcHLrdygNIUjIua2ybIxG
+         t8j3Xyz9As7iWY4YBgkUdWjNURLyGQyrLf5MxEHHBKH6rQvE95EDMwDOhBLuQrlDiY+8
+         +BGQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxh+T41pBg9ywKWWrnbkliKQd/1RIl7OvnKKXKKj60pgalYr0H1me0GsS7FDO8vvbMz9nI6uus3LbfEhj/L@vger.kernel.org
+X-Gm-Message-State: AFq9FYI3Mb4iochhzqDBJgPej+OToLtPx881RqpTcdNqOVjJ4oGcgNmc
+	uhTsjp5e6gyMbXf9PfhgpWtO3iVObooFWfRraxdNIEN/cwh0o3Q9wcFC
+X-Gm-Gg: AYBFou1aM3NrE1+wYE5omdeFQjtMexvhXFAhjHAIH/f93QcyXldXo8BdWqT9v+XdPHW
+	9QmGffEGfiPOmZVl9STzLk4yD4RmXDkkFwOwRKIVJdQ16NSntHr8c6ogE6UbRqzR5fEGG5hWoy7
+	kUu/0WcsQBwqwNx9etmkl1I+VlC+dHIFLekEeMzpUak+CkAvY4/HO8VNvrtisrKP3+TWieS0rnh
+	qP36NMsNzNXDwdLUu/IPBqo8hiDk+Kl3CemBWSedvy3d7mg0EoGb9IVnB69gHBY/Yje8e8mgFg5
+	WE8QcS9mrYQmSwZ28GpEEMfoOTyf2vMINxM5DR03+aWkM416jLS2s2ISYOB2IErUKsT0jMgp+Zc
+	Bs5ww315CMvNpi0bY8OdH6mvAMl61OXvBJFCBFCdLIMgdVDaYTLo/xpfHUdeH9/c/MpD49uBRfm
+	FKsNyIHU6yClRQVLu4m3uFDPJqzhZUJBi4MC0xHs7cyphLon19GV3zO6vmxmHEYP/E2aTpNyarx
+	31bN/CIMeP7WDOV6YlLleQk2A==
+X-Received: by 2002:a05:6000:298d:20b0:48c:43a4:37f2 with SMTP id ffacd0b85a97d-48e07bbe81fmr2929017f8f.17.1792231272677;
+        Sat, 17 Oct 2026 03:01:12 -0700 (PDT)
+Received: from localhost.localdomain ([188.190.249.216])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd471a64sm11176218f8f.6.2026.10.17.03.01.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 02:53:22 -0700 (PDT)
-Date: Sat, 17 Oct 2026 15:23:12 +0530
-From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Andrew Davis <afd@ti.com>,
-        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH net-next v3 0/9] net: stmmac: qcom-ethqos: add Shikra
- EMAC support
-Message-ID: <atNFiFvIeecfcgAX@oss.qualcomm.com>
-References: <20261017-shikra_ethernet-v3-0-26a8beb44b8f@oss.qualcomm.com>
+        Sat, 17 Oct 2026 03:01:12 -0700 (PDT)
+From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+To: Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>
+Cc: Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Val Packett <val@packett.cool>,
+	Federico Amedeo Izzo <federico@izzo.pro>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	phone-devel@vger.kernel.org,
+	~postmarketos/upstreaming@lists.sr.ht,
+	Vladyslav Tymoshchuk <tvlad744@gmail.com>
+Subject: [PATCH v2] ASoC: codecs: aw88261: complete the start at trigger time
+Date: Sat, 17 Oct 2026 13:00:40 +0300
+Message-ID: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
+X-Mailer: git-send-email 2.45.1.windows.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261017-shikra_ethernet-v3-0-26a8beb44b8f@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE3MDAzOSBTYWx0ZWRfX0EIwytAdXOpn
- 1Ee7MRoaaHGcm+pqjYLR2lxiVwewO953GDFH/BL8IgFI/XOoj08dKoqWbri9sMrW44VjAEuy77m
- 3LKqBIiT5MDKqzcJfaTsEEP/ze+ckS4=
-X-Authority-Analysis: v=2.4 cv=JpZkP84C c=1 sm=1 tr=0 ts=6ad34595 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=3MThnnmduzqR5zQ_0GUA:9 a=CjuIK1q_8ugA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE3MDAzOSBTYWx0ZWRfX9GRYRGhzZ4tY
- QcHqYZQ98UKDqJPXP0vEXlbxoCcOsCfmr3FdFf8VVhyQdWboW84BIecz5nvc+QsxOqXG9v1vTic
- m/REbHETP/tj68U3s9qW161DwNR08har5t/Qt+BClPpYh8qBuZSXxIa/qQ8sodN+wtc+b88Cy99
- LHi+w+p4rDArG6IirPOqoXcl1jYDhhu5FkcF0t9mj4rLllX9+/45+hsZh3SmqFWp+YIWR4uX2J4
- hJ2CJ/ysW80nzA8lScbv7WRg0wsObbacm2/+JodPOpehgnUTC/FLcQBGsoWZdYGMpZwoC4n+9KM
- 5ZDLp+SlF09vvF6bDNzkv02myekk6Lufe0wrNLXc26ipzKK3L0illi0MTwZ8DC9lEnitYrWTmpC
- tK++MZJ/IU9W5LcToWaOkn7YDbnzHkXF9k+NrkjCrdnZcLLmrSRC9p/vjuhRRX05uiu95mdDwzB
- IL1F/35/pVN5wb6t9iw==
-X-Proofpoint-ORIG-GUID: OCj1WXjnlXEouK-VsVJszODIPAxAwHpC
-X-Proofpoint-GUID: OCj1WXjnlXEouK-VsVJszODIPAxAwHpC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-17_02,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 phishscore=0 suspectscore=0 malwarescore=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610170039
+Content-Transfer-Encoding: 8bit
 
-On Sat, Oct 17, 2026 at 03:15:11PM +0530, Mohd Ayaan Anwar wrote:
-> 
->       net: phy: dp83867: add regulator supply management
->       dt-bindings: net: qcom,ethqos: add qcom,shikra-ethqos compatible
->       net: stmmac: qcom-ethqos: convert ethqos_rgmii_macro_init() to void
->       net: stmmac: qcom-ethqos: fix RGMII_ID mode to use DLL bypass
->       net: stmmac: qcom-ethqos: warn about legacy RGMII PHY modes
->       net: stmmac: qcom-ethqos: set initial RGMII link clock to lowest speed
->       net: stmmac: qcom-ethqos: share common GMAC4 address table
->       net: stmmac: qcom-ethqos: add per-platform NOC clock voting
->       net: stmmac: qcom-ethqos: add Shikra EMAC support
+The amplifier is started from the PRE_PMU event of its AIF widget, that
+is from DAPM in prepare. aw88261_dev_start() waits up to 20 ms there for
+the PLL to lock to the bit clock and powers the amplifier down again if
+it does not.
 
-There should be 10 patches, not 9.
-Looks like I messed up some b4 setting and it dropped the bindings
-change for dp83867. It is the same as v2:
-https://lore.kernel.org/all/20260908-shikra_ethernet-v2-1-bbe3389d0652@oss.qualcomm.com/
+The Qualcomm AudioReach backends only start their graph, and with it
+the I2S/TDM clocks, in trigger since commit b54a38af7138 ("ASoC: qcom:
+q6apm-lpass-dai: move graph start to trigger"). There every start fails
+with "start failure (-1)" and the speaker stays silent for the whole
+stream, as seen with six AW88261 on a TDM link of SM8750.
 
-I hope I can resend the series after 24 hours.
+Split the start at the first step that needs the bit clock, the PLL
+lock check, whatever the host does:
 
-	Ayaan
+ - PRE_PMU clears power down (PWDN), configures the I2S interface and
+   the PLL and writes the boost settings of aw88261_reg_force_set().
+   The amplifier stays powered down (AMPPD) and muted.
+ - The unmute, called after the trigger of the CPU DAI with
+   .mute_unmute_on_trigger, does the rest: it checks the PLL lock,
+   clears AMPPD, checks SYSST, enables the feedback and unmutes. If the
+   PLL does not lock, "start failure" is logged, the amplifier is left
+   as PRE_PMU left it and the next trigger start tries again.
+ - The mute in trigger undoes the unmute (mute, feedback off, AMPPD),
+   and POST_PMD sets PWDN as before.
+
+So only the steps that need the clock run in trigger: 14 register
+accesses and 1 ms per amplifier for the unmute when the PLL has locked,
+12 and 1 ms for the mute. The same steps run there on hosts that have
+the clock running from prepare. aw88261_reg_force_set() only writes
+boost settings and now runs before AMPPD is cleared rather than right
+after.
+
+wsa883x and wsa884x split their start the same way, with the
+configuration in DAPM and GLOBAL_PA_EN in the trigger-time mute. The
+vendor driver of this amplifier family (aw882xx) also starts the
+amplifier from .mute_stream, with the same sequence.
+
+The register accesses go over I2C and sleep, so they need a nonatomic
+trigger, which the Qualcomm DPCM links using this codec have. On an
+atomic PCM, as seen from substream->pcm->nonatomic in .startup, PRE_PMU
+does the whole start as before and the mute callback does nothing.
+
+POST_PMD can also run for an amplifier that was never powered up, as
+seen when the card is registered, so make "already power off" a debug
+message.
+
+Assisted-by: LLM
+Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+---
+Changes in v2:
+- Do not move the whole start into trigger (Mark). PRE_PMU keeps what
+  does not need the bit clock (PWDN, I2S and PLL setup, boost
+  settings); only the PLL lock check, AMPPD, the SYSST check, TX and
+  the unmute run at trigger, and the mute at trigger undoes them.
+- Keep the old behaviour on atomic PCMs (Mark: "Are we *sure* there are
+  no other users out there?"): the driver checks
+  substream->pcm->nonatomic in .startup and then does the whole start in
+  PRE_PMU and nothing in the trigger-time mute.
+- One attempt at trigger, no retries there: if the PLL does not lock,
+  "start failure" is logged, the amplifier stays powered up and muted
+  and the next trigger start tries again. The retries of the register
+  update stay in PRE_PMU.
+- "already power off" is a dev_dbg as in v1, now for another reason:
+  POST_PMD runs for amplifiers that were never powered up when the card
+  is registered (six times at boot here).
+- Rebased on sound/for-next with "ASoC: codecs: aw88261: expose
+  hardware mute control"; the unmute honours its mute_st as before.
+- v1: https://lore.kernel.org/r/20261014120000.aw88261-trigger-v1-1-tvlad744@gmail.com
+
+On the users: in mainline, linux-next and sound/for-next the only one
+is the Fairphone 5 (qcm6490-fairphone-fp5.dts, "fairphone,fp5-sndcard"
+in sm8250.c), whose links qcom_snd_parse_of() makes nonatomic. Out of
+tree I know of the Fairphone 6, motorola-dubai (Federico's patch) and
+the OnePlus Pad 3, all Qualcomm. A user with an atomic link keeps the
+current behaviour with this version.
+
+The vendor driver (aw882xx, checked in the module shipped on the
+OnePlus Pad 3) starts the amplifier from .mute_stream with the same
+sequence (PWDN, PLL check, AMPPD, SYSST check, TX, unmute) and stops
+it fully on mute; it does not set .mute_unmute_on_trigger, so there
+the mute callbacks run from prepare and hw_free.
+
+Tested on a OnePlus Pad 3 (SM8750, six AW88261 on two I2C buses, TDM
+from the AudioReach DSP) with the same change on our v7.3-rc5 based
+tree, with PipeWire and with a small ALSA test program. That tree also
+has a battery monitor and a 10 ms sleep after the mute in the stop
+sequence, which mainline does not have. Times were taken with ktime
+around the work under the lock (test-only instrumentation); the six
+amplifiers run one after the other.
+
+ - Unmute at trigger: 4.3 to 7.3 ms per amplifier, 26 to 38 ms for
+   all six (9 starts; an earlier series of 5 starts: 4.1 to 9.1 ms,
+   25 to 46 ms).
+ - Mute at trigger: 13.9 to 17.6 ms per amplifier, 88 to 101 ms for
+   six (10 stops), including the local 10 ms sleep. Without it, as in
+   this patch, that is about 4 to 7.5 ms per amplifier and 27 to 41 ms
+   for six (not measured on its own).
+ - Prepare part in PRE_PMU: 4.5 to 6.2 ms per amplifier, 28 to 35 ms
+   for six (up to 8.7 and 47 ms when the device is reopened back to
+   back). This is where every start failed before.
+ - The write that starts the stream (graph start plus the six unmutes,
+   test program, 3 runs): 28 to 36 ms, against 52 to 57 ms with v1 in
+   the same test.
+ - No "start failure" at all. SYSST reads 0x0311 on all six during
+   playback, also after two PipeWire restarts. After a prepare without
+   trigger all six are powered up with AMPPD and HMUTE set and SYSST
+   reads 0x0000; after close they are off.
+ - Listening: two series of six PipeWire playbacks of five 40 ms pips
+   100 ms apart followed by a tone, nine of them started with the
+   device closed and three with the PCM already running. All five pips
+   were heard every time, and in the second series also found in a
+   recording by a phone next to the tablet and by the tablet's own
+   microphone, the first pip as long as the others. No clicks were
+   heard; the tablet's microphone shows a short transient in the unmute
+   window that the phone recording does not.
+
+As with v1, a stream started with only one period of data can underrun
+while the trigger runs: the test program, which starts on its first
+10 ms period, got -EPIPE on its second write in 3 of 3 runs. The
+trigger is shorter than with v1 but still longer than one period.
+PipeWire, which fills the buffer before it starts, never underran.
+
+The analysis, the change and this text were drafted with an AI
+assistant (see Assisted-by); I reviewed them and ran the tests above.
+
+ sound/soc/codecs/aw88261.c | 161 ++++++++++++++++++++++++++++---------
+ sound/soc/codecs/aw88261.h |   4 +
+ 2 files changed, 126 insertions(+), 39 deletions(-)
+
+diff --git a/sound/soc/codecs/aw88261.c b/sound/soc/codecs/aw88261.c
+index 7303dc9eb4e0..0c4e3c54773c 100644
+--- a/sound/soc/codecs/aw88261.c
++++ b/sound/soc/codecs/aw88261.c
+@@ -187,12 +187,8 @@ static int aw88261_dev_configure_syspll(struct aw88261 *aw88261)
+ 		return ret;
+ 
+ 	/* The polarity of the bit clock (BCK) */
+-	ret = regmap_update_bits(aw_dev->regmap, AW88261_SYSCTRL_REG,
++	return regmap_update_bits(aw_dev->regmap, AW88261_SYSCTRL_REG,
+ 			~AW88261_BCKINV_MASK, aw88261->bck_inv_value);
+-	if (ret)
+-		return ret;
+-
+-	return aw88261_dev_check_pll(aw_dev);
+ }
+ 
+ static int aw88261_dev_check_sysst(struct aw_device *aw_dev)
+@@ -497,24 +493,47 @@ static int aw88261_dev_fw_update(struct aw88261 *aw88261)
+ 	return ret;
+ }
+ 
+-static int aw88261_dev_start(struct aw88261 *aw88261)
++/*
++ * First part of the start, which does not need the bit clock: power up and
++ * configure the I2S interface and the PLL. The amplifier stays powered down
++ * (AMPPD) and muted.
++ */
++static int aw88261_dev_power_up(struct aw88261 *aw88261)
+ {
+ 	struct aw_device *aw_dev = aw88261->aw_pa;
+ 	int ret;
+ 
+-	if (aw_dev->status == AW88261_DEV_PW_ON) {
+-		dev_dbg(aw_dev->dev, "already power on");
+-		return 0;
+-	}
+-
+ 	/* power on */
+ 	aw88261_dev_pwd(aw_dev, false);
+ 	usleep_range(AW88261_2000_US, AW88261_2000_US + 10);
+ 
+ 	ret = aw88261_dev_configure_syspll(aw88261);
++	if (ret) {
++		aw88261_dev_pwd(aw_dev, true);
++		return ret;
++	}
++
++	aw88261_reg_force_set(aw88261);
++
++	aw_dev->status = AW88261_DEV_PW_READY;
++
++	return 0;
++}
++
++/*
++ * Second part of the start, which needs the bit clock as the PLL locks to
++ * it: check the lock, enable the amplifier and the feedback, and unmute.
++ * On failure the device is left as aw88261_dev_power_up() left it.
++ */
++static int aw88261_dev_enable(struct aw88261 *aw88261)
++{
++	struct aw_device *aw_dev = aw88261->aw_pa;
++	int ret;
++
++	ret = aw88261_dev_check_pll(aw_dev);
+ 	if (ret) {
+ 		dev_dbg(aw_dev->dev, "pll check failed");
+-		goto pll_check_fail;
++		return ret;
+ 	}
+ 
+ 	/* amppd on */
+@@ -525,7 +544,10 @@ static int aw88261_dev_start(struct aw88261 *aw88261)
+ 	ret = aw88261_dev_check_sysst(aw_dev);
+ 	if (ret) {
+ 		dev_dbg(aw_dev->dev, "sysst check failed");
+-		goto sysst_check_fail;
++		aw88261_dev_i2s_tx_enable(aw_dev, false);
++		aw88261_dev_clear_int_status(aw_dev);
++		aw88261_dev_amppd(aw_dev, true);
++		return ret;
+ 	}
+ 
+ 	/* enable tx feedback */
+@@ -534,8 +556,6 @@ static int aw88261_dev_start(struct aw88261 *aw88261)
+ 	if (aw88261->amppd_st)
+ 		aw88261_dev_amppd(aw_dev, true);
+ 
+-	aw88261_reg_force_set(aw88261);
+-
+ 	/* close uls mute */
+ 	aw88261_dev_uls_hmute(aw_dev, false);
+ 
+@@ -548,26 +568,12 @@ static int aw88261_dev_start(struct aw88261 *aw88261)
+ 	aw_dev->status = AW88261_DEV_PW_ON;
+ 
+ 	return 0;
+-
+-sysst_check_fail:
+-	aw88261_dev_i2s_tx_enable(aw_dev, false);
+-	aw88261_dev_clear_int_status(aw_dev);
+-	aw88261_dev_amppd(aw_dev, true);
+-pll_check_fail:
+-	aw88261_dev_pwd(aw_dev, true);
+-	aw_dev->status = AW88261_DEV_PW_OFF;
+-
+-	return ret;
+ }
+ 
+-static int aw88261_dev_stop(struct aw_device *aw_dev)
++/* Undo aw88261_dev_enable() */
++static void aw88261_dev_disable(struct aw_device *aw_dev)
+ {
+-	if (aw_dev->status == AW88261_DEV_PW_OFF) {
+-		dev_info(aw_dev->dev, "already power off");
+-		return 0;
+-	}
+-
+-	aw_dev->status = AW88261_DEV_PW_OFF;
++	aw_dev->status = AW88261_DEV_PW_READY;
+ 
+ 	/* clear inturrupt */
+ 	aw88261_dev_clear_int_status(aw_dev);
+@@ -582,6 +588,37 @@ static int aw88261_dev_stop(struct aw_device *aw_dev)
+ 
+ 	/* enable amppd */
+ 	aw88261_dev_amppd(aw_dev, true);
++}
++
++static int aw88261_dev_start(struct aw88261 *aw88261, bool enable)
++{
++	struct aw_device *aw_dev = aw88261->aw_pa;
++	int ret;
++
++	ret = aw88261_dev_power_up(aw88261);
++	if (ret || !enable)
++		return ret;
++
++	ret = aw88261_dev_enable(aw88261);
++	if (ret) {
++		aw88261_dev_pwd(aw_dev, true);
++		aw_dev->status = AW88261_DEV_PW_OFF;
++	}
++
++	return ret;
++}
++
++static int aw88261_dev_stop(struct aw_device *aw_dev)
++{
++	if (aw_dev->status == AW88261_DEV_PW_OFF) {
++		dev_dbg(aw_dev->dev, "already power off");
++		return 0;
++	}
++
++	if (aw_dev->status == AW88261_DEV_PW_ON)
++		aw88261_dev_disable(aw_dev);
++
++	aw_dev->status = AW88261_DEV_PW_OFF;
+ 
+ 	/* set power down */
+ 	aw88261_dev_pwd(aw_dev, true);
+@@ -618,7 +655,7 @@ static int aw88261_reg_update(struct aw88261 *aw88261, bool force)
+ 	return ret;
+ }
+ 
+-static void aw88261_start_pa(struct aw88261 *aw88261)
++static void aw88261_start_pa(struct aw88261 *aw88261, bool enable)
+ {
+ 	int ret, i;
+ 
+@@ -629,7 +666,7 @@ static void aw88261_start_pa(struct aw88261 *aw88261)
+ 				"aw88261_reg_update failed, cnt:%d, ret:%d\n", i, ret);
+ 			continue;
+ 		}
+-		ret = aw88261_dev_start(aw88261);
++		ret = aw88261_dev_start(aw88261, enable);
+ 		if (ret) {
+ 			dev_dbg(aw88261->aw_pa->dev,
+ 				"aw88261_dev_start failed, cnt:%d, ret:%d\n", i, ret);
+@@ -643,15 +680,15 @@ static void aw88261_start_pa(struct aw88261 *aw88261)
+ 		dev_err(aw88261->aw_pa->dev, "start failure (%d)\n", ret);
+ }
+ 
+-static void aw88261_start(struct aw88261 *aw88261)
++static void aw88261_start(struct aw88261 *aw88261, bool enable)
+ {
+ 	if (aw88261->aw_pa->fw_status != AW88261_DEV_FW_OK)
+ 		return;
+ 
+-	if (aw88261->aw_pa->status == AW88261_DEV_PW_ON)
++	if (aw88261->aw_pa->status != AW88261_DEV_PW_OFF)
+ 		return;
+ 
+-	aw88261_start_pa(aw88261);
++	aw88261_start_pa(aw88261, enable);
+ }
+ 
+ static int aw88261_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
+@@ -865,10 +902,50 @@ static int aw88261_set_tdm_slot(struct snd_soc_dai *dai,
+ 	return 0;
+ }
+ 
++static int aw88261_startup(struct snd_pcm_substream *substream,
++			   struct snd_soc_dai *dai)
++{
++	struct aw88261 *aw88261 = snd_soc_component_get_drvdata(dai->component);
++
++	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
++		aw88261->nonatomic = substream->pcm->nonatomic;
++
++	return 0;
++}
++
++static int aw88261_mute_stream(struct snd_soc_dai *dai, int mute, int stream)
++{
++	struct aw88261 *aw88261 = snd_soc_component_get_drvdata(dai->component);
++	struct aw_device *aw_dev = aw88261->aw_pa;
++	int ret;
++
++	/* No I2C in an atomic trigger: the start was completed from DAPM */
++	if (!aw88261->nonatomic)
++		return 0;
++
++	guard(mutex)(&aw88261->lock);
++
++	if (mute) {
++		if (aw_dev->status == AW88261_DEV_PW_ON)
++			aw88261_dev_disable(aw_dev);
++	} else if (aw_dev->status == AW88261_DEV_PW_READY) {
++		ret = aw88261_dev_enable(aw88261);
++		if (ret)
++			dev_err(aw_dev->dev, "start failure (%d)\n", ret);
++	}
++
++	return 0;
++}
++
+ static const struct snd_soc_dai_ops aw88261_dai_ops = {
++	.startup = aw88261_startup,
+ 	.set_fmt = aw88261_set_fmt,
+ 	.hw_params = aw88261_hw_params,
+ 	.set_tdm_slot = aw88261_set_tdm_slot,
++	.mute_stream = aw88261_mute_stream,
++	/* unmuted after the trigger of the CPU DAI, which may start the BCK */
++	.mute_unmute_on_trigger = true,
++	.no_capture_mute = 1,
+ };
+ 
+ static struct snd_soc_dai_driver aw88261_dai[] = {
+@@ -969,8 +1046,10 @@ static int aw88261_profile_set(struct snd_kcontrol *kcontrol,
+ 	}
+ 
+ 	if (aw88261->aw_pa->status) {
++		bool enable = aw88261->aw_pa->status == AW88261_DEV_PW_ON;
++
+ 		aw88261_dev_stop(aw88261->aw_pa);
+-		aw88261_start(aw88261);
++		aw88261_start(aw88261, enable);
+ 	}
+ 
+ 	return 1;
+@@ -1068,7 +1147,11 @@ static int aw88261_playback_event(struct snd_soc_dapm_widget *w,
+ 	guard(mutex)(&aw88261->lock);
+ 	switch (event) {
+ 	case SND_SOC_DAPM_PRE_PMU:
+-		aw88261_start(aw88261);
++		/*
++		 * Some hosts only start the bit clock in their trigger: when
++		 * the trigger may sleep, the unmute completes the start there.
++		 */
++		aw88261_start(aw88261, !aw88261->nonatomic);
+ 		break;
+ 	case SND_SOC_DAPM_POST_PMD:
+ 		aw88261_dev_stop(aw88261->aw_pa);
+diff --git a/sound/soc/codecs/aw88261.h b/sound/soc/codecs/aw88261.h
+index f16f9f8c40a2..eb366f1dde58 100644
+--- a/sound/soc/codecs/aw88261.h
++++ b/sound/soc/codecs/aw88261.h
+@@ -564,6 +564,8 @@ enum {
+ enum {
+ 	AW88261_DEV_PW_OFF = 0,
+ 	AW88261_DEV_PW_ON,
++	/* powered up and configured, amplifier off: waits for the bit clock */
++	AW88261_DEV_PW_READY,
+ };
+ 
+ enum {
+@@ -607,6 +609,8 @@ struct aw88261 {
+ 	unsigned int rxr_slotvld_mask;
+ 
+ 	bool phase_sync;
++	/* the trigger may sleep: the start is split between DAPM and unmute */
++	bool nonatomic;
+ };
+ 
+ #endif
+
+base-commit: 0f8bc3b93b76d16682a4d4999f9559b1e18016f9
+-- 
+2.43.0
+
