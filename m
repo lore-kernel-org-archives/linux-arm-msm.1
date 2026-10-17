@@ -1,64 +1,64 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32436270552
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:12:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4760481FDD
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:48:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792231952; cv=none; b=EWePjyGpps4JbDoRLDRGz5i72YJnsY8c6BeOGlBhJZbNTRs3IZp12t8ZVsNZ+gyORHNj+u8pMJojagtpHNMl8DLY7s1+Im76ScbfVsXRmQ/jh3hL3X/4pSGk7ZU8e9klHHzxpk3PlDdH02Wknn/Pu4pQPIpIa4GXz2f3/2JhUGI=
+	t=1792234140; cv=none; b=qRjiF7bytIIneUdAa3Rc6FkxpKn/2LnL3qvUcQ6vaLy3AZW4TK7OVxi5QlaFGbmgVVvhcpYOdTSX7M0nP/qQpMKfiiiCrKG7eQrO0I/OHaH98sUT9fQCH1qoGQpecNGAx3TRSclM11q1ttcP2wfPUr2w5GGPQX78igF3McJjpmE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792231952; c=relaxed/simple;
-	bh=qzvrrLy2qj+cZQoZi4u9ExBicE4rIpxnRBO9CfMg51g=;
+	s=arc-20240116; t=1792234140; c=relaxed/simple;
+	bh=A20xBO7QgEsrNOrczTNQE5uRJSnt+znmLpzvUhIEckI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=WNHzGxKbDqwmL2hQV12EUMWdeRu8Xj/kEfnGfvTE9e44lkOjTP9jo52fqbXwUhhcMFGHOl/G7aAamNhe6pIsxkAxnbnxN3HQR9krgEmDxgGCePnF6mt7rfdATq//v9PHLQPPGL0bCoSHlbqSeSQequVOKOtA7MT/j6p74JBfdts=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NC4AEspa; arc=none smtp.client-ip=209.85.221.47
+	 MIME-Version; b=MCP7wSstxcJknzGFd2Ii1khx2NzXoDJ2u7mzZ9bWT2Hd4dxo/mpTgQC5RcUypiT4IuEIbGTa04Y11zEMbOfkl/nmnnwDllWbuyAL4MBaycs/LPDPg/iMQd9rqs6wuvAykAUfonYSoEyQnMFLxR8+7bOX6sRC/VSa2ZIVl+34PBY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lJsUYk97; arc=none smtp.client-ip=209.85.128.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NC4AEspa"
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48c4be28b82so526474f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:12:31 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lJsUYk97"
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4a1ddc7c9beso1065765e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792231949; x=1792836749; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792234136; x=1792838936; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dKoUY67/0brH9PfrEtDz8lEuDjVGpCp9GkyhQChz7oI=;
-        b=NC4AEspaLZ0jkCIpN6Uk3ZRdt+4i7DlqAmAQ1r0JyKUZlNTH/uOHj8hWMewDJt57s+
-         xwrGpxlFXIc5l+wn7Wf8AvsKPKzg/qvKGzAQ4jXGV3FWAT2RxJTdSBtjYTjTcoCBW+FC
-         eESeNMxGDzKm7iMAs6FlcbrHNQWJKcAfX8Vu1IGwG9JDgCiBbI576vCnt8RLjp3t2bXu
-         xJfvGBrm+VMUozelVlQHpHoQJl0KayFgD3PdozYphwRjGjQd6o4SszLT62/FphvkN4wX
-         Z7/I8m2pmvDlrAsjzcbVJl1XH8jcUad7XuappsZG6R6okSZFYyvj9CVfpQnHYtY3HTaj
-         XIvg==
+        bh=ceNAXnEsJQILkHO89D/yuhjMt2LxJXSg5m/0dNM+wvE=;
+        b=lJsUYk97DqZJ8K/VOGGIolhyxLmRFg0LGhqFDmUsnjynV7QC8picgWfwjfy1oOjXs2
+         0OlZNTg3tQXg9nRF/MIdKq4KYThvBW0XQqXkAM1DQNbPYN5JbyOuErPCgvM9rnnIBnX8
+         zpwRMV4Nbqj2l3nWrC4A6XsEFUpnIsRztd2ar2xTXc+R++U563LZXl+wA/Wdx3YJjLBt
+         X6sBWmvjpMnFL4+1e+wqcbigadKj1FVdaTNjh1P+4oQHBRVg6S6zlaw9xjYSeGBV0Dkq
+         l4zIQRrZS+cPOJ5zR+acwpyujp7x22W9TTI2mJfaZeQGM++fThYnOgGggXNGwWpKRddf
+         r2aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792231949; x=1792836749;
+        d=1e100.net; s=20260707; t=1792234136; x=1792838936;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dKoUY67/0brH9PfrEtDz8lEuDjVGpCp9GkyhQChz7oI=;
-        b=iyCrK42je61dnsAztFOo+VZjbJntPk/BNOnFP58Fv9EQBjnocCkHUO0ygraJg5xTbd
-         MvMHSqslHc0YlFx3Dd9ngtRtjh1nJ6ket6IkScVjXkn3ZC4U/K0vf7y3GTTsArQy9+FK
-         qEQ2NEcuF7d5tY6C4uHxngqeqdQj5/LbEBuJPXFQ1q5kP5tC/U19YhhFSudCjva4KpPp
-         thldUeDkdsewdJ2Vey8D9uQt7fqxPzzVL30DjcY+3/BXfCG39CktnOh8IX7iaOJoaxqT
-         u5GEERkLzoISMsYZKYtxrNYGBb+ssL/PxJ+hgIM/Ar6jZ1r79GlRSwu0MqqORkH7aTbY
-         jHEw==
-X-Forwarded-Encrypted: i=1; AKwUvBx3aFe0y3fl49/v1xxfarQXEFBuYOeSaDsqm2gm8ebVPsz11ciupmv/m18pN7HR6MkurP68zylGpcvg26m2@vger.kernel.org
-X-Gm-Message-State: AFq9FYJhHYjo1c6Yqq5xfWAyA1CC1ZgmTymEr07G+XTiwO/s3FV8Tqty
-	d6gnkZ2hrbfXux8+pQaOG1Wc8kC95MKzYYMs8+l8gSB3CBVCaHsU2mev
-X-Gm-Gg: AYBFou2+lGp1huEuO1Y6nnfBXAXdluQHEp30Q14BTnejHoY+wV0K3TZ8PS9Rj5uHdFl
-	3Q3oxUGZAmZkk+h1nJYD7Po3tO2O/w49JqqijrXynLy0e3nLSHJRIJaXmXlip5ykD8WiHG29L5o
-	BpeZh1Fs0AeMkdaaWVLYDnlKoKG4+MMc7+xbQrEf+o2IDU5cPykkolPlpnny/4VHwhxRkDkRMq4
-	4RtNgDwdjtCYcvgfFclNOfDunJjfNbE1TCMSYrEiaSIxvFKTphBjV3Fp/5nJBe9cuMRGQvogY4d
-	Aslq66zBykdbqga/B+YRqwZJDxAvbaGizLe5wMFbfFx5Fg9ge3dSIeWN0R3T6NvVcgRm2gPcbn3
-	RHf8LCeppLWgbHgyYgsK2HnaW54GwXaN6Jit5pio2zc9H9/7U0N2twdI2OLNUYykpeePX3LrRwJ
-	VCgD6SLCTcGhkTdzr2/DJAAGVxxgJRY8eGa2mFxfvci3L2asjW63Py0IC3C4/1wNw5FRWZ5r5kc
-	2KkhuOUuBSH7vteJnye/aughFcIp6H7hXROCCON1OwVbPPjXS27TwUjaSVENV+AGxw2C2/W
-X-Received: by 2002:a05:6000:14b:b0:488:8525:4979 with SMTP id ffacd0b85a97d-48e07fb5261mr2934328f8f.45.1792231949280;
-        Sat, 17 Oct 2026 03:12:29 -0700 (PDT)
+        bh=ceNAXnEsJQILkHO89D/yuhjMt2LxJXSg5m/0dNM+wvE=;
+        b=VzGlM1W4xgIHilt0lXl5A6jWc4hXqXTtWFEFst6PGh9FQFYke+BtFRlWKqyWQ80fF6
+         WqQiJBDmDqFLZ1+psq9r5ZJRdMHobAkqkOEi/DQlD8tNoE+7s4wPLrviaYvLLTjXplt3
+         MazWtgoK4hznD354CbWYiEHbH7hQ1Bb67FTUdOVXR6V+AGDF/rXDBA5+0KKqA81n7cXE
+         K76PY5Y0eUK+WN/xat+HxHMtKQw5ejUeQ8zJqL+kcvXr/Ldima1rpfdyYAVrDC+Vv/Uq
+         izRhp789c7HO0riZlv9b+eekfIVWJLlldA27lVr/sf3lVTBTIayUpCXryo313pYdF+sK
+         7AHg==
+X-Forwarded-Encrypted: i=1; AKwUvBxw9CBr2HZ2BnrxXzO4SgWX93Hdxx7OzVgmRPO266RE39BVenE+IZJpESLO7CiXmT9wm/YDqsFw8bxuS+mO@vger.kernel.org
+X-Gm-Message-State: AFq9FYJAhqJxeicKE1hy+BHyR7uyMgelsbc9rCR2SmCZzrZth8IjyDKT
+	T0G6hKJo3AYI3w6T7tB4iEgUn/jNIGpFHOzqXW0OnE8MY0pVF4g8CSGN
+X-Gm-Gg: AYBFou0QmG0K9q1a36GIEn/IIPQ3s0nI7c8B574v68FtgsPd5XwJfveTiMaGB5gy2CS
+	Tway1Jgz1NhsQ1t3DtIdVQydzZBOcYusmuHzlRdlaFah+fdN6iIWiijrU/s75Kih0NjgErrna+U
+	PDZoFXkj+Qrdtf6OJuQgshbKw+wbUzvdJLDmX68DyuxaDnPI3WBka2Hw3I4q/5+pyArZgCed8vL
+	K4bj3sAe0ug5uTkMQExfn76dHb+o9MPlexZ6LHwurI1Z6HcH7s+utgbtbR9ADLbjKZ1Q7HP/xP0
+	gwbtpdOySwf1o4g9KyklCPqYHsRXYx3sEMavUgP4hFyegQwM3SSUu5mIehY8o7uyUdjS+vVHtXu
+	EWRG7Yxh80I6YB0UDTz2pxCwU13e0PsZjrXhwNDzPGuorvpb5Nk1fQaMWR4t0kmMioVbnFR5XDe
+	XtbRR6qYZAzyzCZlDJbAYxnm4gmfeQHFjjFCVS5jHj9jHpTnwRzD0YajWjP0Aeujbd2JgTNZKLq
+	SsL0shPtALTn2zVPVW0HAQOfHwMk79w168v/Xkdz15ybaA879ih5z2f+7Ti+Gj+pezsYrJi
+X-Received: by 2002:a05:600c:a4e:b0:4a1:80d8:aed5 with SMTP id 5b1f17b1804b1-4a1d75e39b9mr45674975e9.6.1792234135774;
+        Sat, 17 Oct 2026 03:48:55 -0700 (PDT)
 Received: from SP11X1e.cable.virginm.net (cpc99340-croy26-2-0-cust244.19-2.cable.virginm.net. [80.193.62.245])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5957sm10183948f8f.9.2026.10.17.03.12.27
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4fe9d9sm10039464f8f.40.2026.10.17.03.48.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 03:12:28 -0700 (PDT)
+        Sat, 17 Oct 2026 03:48:55 -0700 (PDT)
 From: George Neacsu <geocausa@gmail.com>
 To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>
 Cc: David Heidelberg <david@ixit.cz>,
@@ -83,14 +83,13 @@ Cc: David Heidelberg <david@ixit.cz>,
 	krzysztof.kozlowski@oss.qualcomm.com,
 	daniel@quora.org,
 	konrad.dybcio@oss.qualcomm.com,
-	christopher.obbard@linaro.org,
 	alex.vinarskis@gmail.com
-Subject: Re: [PATCH 2/2] media: qcom: camss: account for C-PHY when calculating link frequency
-Date: Sat, 17 Oct 2026 11:12:27 +0100
-Message-ID: <20261017101227.61271-1-geocausa@gmail.com>
+Subject: Re: [PATCH] media: qcom: camss: configure C-PHY in the new csiphy_stream_on()
+Date: Sat, 17 Oct 2026 11:48:53 +0100
+Message-ID: <20261017104853.148839-1-geocausa@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261017035221.3816464-3-anusha.nandi@oss.qualcomm.com>
-References: <20261017035221.3816464-1-anusha.nandi@oss.qualcomm.com> <20261017035221.3816464-3-anusha.nandi@oss.qualcomm.com>
+In-Reply-To: <20261017040529.3832120-1-anusha.nandi@oss.qualcomm.com>
+References: <20261017040529.3832120-1-anusha.nandi@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -101,30 +100,32 @@ Content-Transfer-Encoding: 8bit
 
 Hi Anusha,
 
-I tested the CAMSS pieces on X1E80100 and found one extra receiver path
-that needs the C-PHY select.
+One units issue showed up while testing this on X1E80100.
 
-X1E80100 uses csid_ops_680, not the gen3 CSID path changed here. The
-C-PHY flag reaches struct csid_phy_config correctly, but
-camss-csid-680.c leaves CSI2_RX_CFG0.PHY_TYPE_SEL clear, so the front
-IMX681 stream is decoded as D-PHY and capture times out with a zero-byte
-buffer.
+camss_get_link_freq(..., cphy=true) returns the V4L2 C-PHY link
+frequency. The media documentation defines link frequency as the bus
+frequency, explicitly not the symbol rate; its C-PHY pixel-rate formula
+also has the factor of two that makes the C-PHY symbol rate twice the
+V4L2 link frequency.
 
-The equivalent change for CSID 680 is just:
+For the SP11 IMX681, the exact Windows/QTI sensor mode programs PLL2
+for a 2.400 Gsym/s C-PHY rate (19.2 MHz * 375 / 3). The same 68-write
+mode programming was also observed live under KD on this machine.
+camss_get_link_freq() returns the corresponding 1.200 GHz V4L2 link
+frequency.
 
-    val |= phy->cphy << CSI2_RX_CFG0_PHY_TYPE_SEL;
+phy_mipi_cphy_get_default_config_for_hsclk() takes the high-speed symbol
+rate, so passing link_freq directly here fills hs_clk_rate with
+1.2 Gsym/s rather than 2.4 Gsym/s. I think this wants:
 
-before writing CSID_CSI2_RX_CFG0. With that line, the register reads
-back 0x01300000 on CSID1 and 3844x2640 RAW10 capture succeeds from the
-IMX681 over one C-PHY trio. The rear OV13858 still captures over four
-D-PHY lanes.
+    phy_mipi_cphy_get_default_config_for_hsclk((u64)link_freq * 2,
+                                                num_lanes, cphy_cfg);
 
-I also ran a control with your posted CAMSS/qcom-mipi-csi2 module code,
-plus only the X1E PHY table and this CSID-680 select: both front and rear
-capture successfully.
+I instrumented that path on X1E and get link=1200000000 Hz and
+symbol=2400000000 sym/s. Capture succeeds with those values.
 
-Would you prefer to fold the CSID-680 line into this patch? I have a
-clean follow-up commit ready if you would rather I send it separately.
+The qcom provider then needs to keep those units distinct too; I have a
+separate comment on that patch.
 
 Thanks,
 George
