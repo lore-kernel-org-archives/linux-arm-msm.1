@@ -1,86 +1,88 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B2E39460
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:02:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40CB618E025
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:03:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792231369; cv=none; b=RMI1dEfsuJJaxki8n6lkmMwN6csrBIWNmzZWV1DLnE2nh78ZqOEHJzmovO2seK6Tcu/6SjSrZ6cxt+CXInKxGedvknk7zxdh1K/Yat0j+eb4hv5nGeQ4a0E+noqeJXiyEGCTtnXgffqy4xaE3qa1i1WPOkP9eim8LC7Mkps2fzM=
+	t=1792231437; cv=none; b=DDG05ZUIz6854TpdVuf2iUMlYXZ72SxUh4bAmK3bi801+dutbOKUlpP9l1y8ofbcLBwrGsf6nwn45bZJy6oN5XlkvGo1pdf4EOSwiuuRu/5VjQbjBH2w6DT6+R2SYg0tZUMTq8gxEIhmj0rmr56443HzErr6YRimoRcjNJJKfnE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792231369; c=relaxed/simple;
-	bh=EBSVCbO8V4DqQ9rlO4rqunERlK9URPSb++T/jRHaW8g=;
+	s=arc-20240116; t=1792231437; c=relaxed/simple;
+	bh=PSyh/HeHvk/7F6f70gDMunY5gYvNfc4K4B4wBP6/ojI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=oMTp7TSG989EqzOx1ITlS6JI3lQJubY6LjSOAaww49u9UJDEjTRgh2p87vpwZCYJXSQHeIf9pplqm9G4pKn4yUDNelQcJssMRsH0dikI7mWilJKETVb5CmqybG7uOBpg62wCTKM2wMSs4rOVnq7Qi6NbArdim33EaUjlQ2GyUEs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GyiIIEdP; arc=none smtp.client-ip=209.85.128.48
+	 MIME-Version; b=l4VTUcgh4NwfwXUEZLS+EX0qlKBjsgKNesNjJYsIxUsl7EpruKmA6lmjplP/js5URTL9lUw3Q1R9jj3FGlZRIjv9PRLNxPFGeNXf9RO0H+jp+OtUnJc79tnGvz1ia+4bUh301aMTT+fQDD1IdWtmNtMWYBTHA1FA04wAmkgh1Go=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PqowJNyz; arc=none smtp.client-ip=209.85.128.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GyiIIEdP"
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a1682bff3cso3076655e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:02:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PqowJNyz"
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49e73611928so10552975e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 03:03:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792231367; x=1792836167; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792231434; x=1792836234; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZXVGu8tiuXcZRPdD2PY21S3+U4/Hc9jvW4sjeujnkZg=;
-        b=GyiIIEdPueQV/svSuYejsCyWN0Ej4XqmdCrYeAH3N+Q5vrWgBpxxaqS/64ox5XVKKe
-         dk5VfDfzUJaCN/l1c81wv1aUFZqD/NjT6BQl85KjnGAnKTG+VKMc65Wt3dcFwpUbDLEU
-         S1bXIP1/K9zht/5GTz3wisrOmtjnjmyg5i5T65vRD7uhe1AtMLMfYLMv9TS9J6+2cOu5
-         Do0VJ34me95DJyPRIxcJLAKoeZlBfrj7l0b7dsQPs53gvsXbNOXYdpMAEUMw6SJnZ9E0
-         9cqMzL3kLORVq3ZvEB50Ep8bNpDpzKwVfsI3/09H8Ghdq+9+xDeN0ca8gqgqMVRBwuwg
-         WBRg==
+        bh=fVgSD0Xq5YBvEBtVW7e3rRpcg9mWVhgCoVE9HSYJhNk=;
+        b=PqowJNyzpBR2FDzdx60N/uSto6wBiiR+emdK+WrE1RzaVVALzjNDFq/Vk0Q47BBEy4
+         d+hayA0dp5MEMLoboA2iJ30zNGXjGyuM30TYUFmb9CpFzgWjJl9mDpSaLfhtNvrUlOMU
+         Xv2vNzHfE+VSS1lp30QiGhD4ssY6GdEuw9Om6VuVhaZkHhPAJcqD8rjgbaYKZxPXXcvB
+         G7c/c4SbTuM9a6ZJrkbZfBZ8m2uGCksxeMOGrmbVxEDBhfrfDyQzNtfJab/LiUqehRxT
+         2K4tHAHGX3cRx3UYFmKvDAKxJPmghk7svMybL4V8NuH91SbtGbgdpJWFaapTtnS6HAo4
+         aGnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792231367; x=1792836167;
+        d=1e100.net; s=20260707; t=1792231434; x=1792836234;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZXVGu8tiuXcZRPdD2PY21S3+U4/Hc9jvW4sjeujnkZg=;
-        b=XwRtsfbRNV2Q4L30bLT7uBQ3R6sWGf7xaLxybJn6yhVxoOmlCXVTiHpMdSAY6SuSA2
-         c0J4ApblXIqCSbOZwdY7YMFkq/3BILo+Frb3UqtDpjClDXXnVmIIgW3cy0pNGr/5MHIx
-         21jaWib5cv8GyBRgFQkHqv1d56abYMK+Rs3kMycpm2eN/AF6Rx87HyPCEKkqWGcOQ+Mj
-         qzkPg5Er7ZMJaZ0xehDGnTlIFv3E+qstSJewfN4DVExzUa3dX0OB766MxDdPsMZdH+B9
-         t6YjyZqMKOipqjpciqu3Te0FbG5L9bD1rJE785YAqMJFTrrb+uOPro/gjfiBdmWom9F7
-         VRJw==
-X-Forwarded-Encrypted: i=1; AKwUvBy8WD4jErJrnD/VVEByBgXyyBZmrgcRRl4zAn+qcwYcvjdm6d4dPDTiYOSMb5qCBHdtj2BxSehZGghbomGq@vger.kernel.org
-X-Gm-Message-State: AFq9FYKLnUsNqgWPSlK+4e5frAuFgT/cIO7kzVOvxVRjALPy3Q1izGJd
-	6bA9sKBDyve/sTVqQ3sX9WRyu1uI40ZqU4PDsl24zgTv6bn7JdPCOGCx
-X-Gm-Gg: AYBFou3VUcHEFqWAXj2yGouXf4QQjObs7RN9lAKpSnM3jMggMiKMOaY0sxpeqzk2LpS
-	di8NhF5g8sZZiPnWdGArkSmwLbp20r9U9GC47TYjDZ/Et6MXKpv5ZZz+BJakdIH0E3XEs1Td7Ea
-	ggTmSF6N1bAK7XcdN0wueQstEDwTPWb/MV2nnAhDSBammlzQv+Q2IhHFRzzY7uVW8sVq5YoqxzL
-	DlKNbiedyJp+vejxGBh1zQXirEZrLvpg9mYJyGswMAkj4O7UjHhYMCp5V5+Gkp+OAdVCbkiCEZ+
-	YFAUvxWz0GkdEMn7LuqDO5UK9MxUvchI2rL1XjZUB1mj6CKio3dNF6n88gI+lXANBHbQh2u9qK5
-	LNyPN/T4GvO3o4lK/Jy2LXiZ24TlaMkt11l0b2LQD/SXSDznMMBtLZ+1edmnozw7oTdcH3nrWuW
-	AUCj4/jN6+7YKc54EYB4VdvRjgNiBIIXvDDV4SMczf/9PkcZksh7oJF7mjvS9PDoh3Si8m9dljv
-	hLhqtFkwzw2j13lRoR0HV+qkQ==
-X-Received: by 2002:a05:600c:5251:b0:4a1:9663:7639 with SMTP id 5b1f17b1804b1-4a1d76315acmr46037375e9.34.1792231366607;
-        Sat, 17 Oct 2026 03:02:46 -0700 (PDT)
+        bh=fVgSD0Xq5YBvEBtVW7e3rRpcg9mWVhgCoVE9HSYJhNk=;
+        b=YbwZhLjeKu0LZlkuXQKz+PHk+XeSEgsqrq6ZTgi5WM05enytonnWPcVCMb/xUJ0Szw
+         kuBtxEu7oSUggADzYqGQSYYaywxvNFwhJnGlpKSxFfVu4Gp8qbWPddKAlIlAuF3JlA23
+         8yKsu+sZGZO3LTdQE1vj2H+FVjfnZmuDeLl+W2JT4IaP8jXRI9+6uZpSml6M2pd79V7d
+         Z4JU5DM3/KAG3bB/w2PVkplIcNB7xPJdLQADIrcZimIlHexPOuV8TmfFeObiauviG19y
+         kqh1A7Afm886D9gMHKZzW2Sr1rOjtIoxGGbPlJrdW6amsDUBawca7K2MFeYGgX1SzbNU
+         Bjrw==
+X-Forwarded-Encrypted: i=1; AKwUvBxzPRhnq9mROklQCpSj/s081JGdFH+dpGWUEIe54u0JQDhdctzjbnQoCvccyQA6myPSW38LMUETTaWjTXk8@vger.kernel.org
+X-Gm-Message-State: AFq9FYJe73KXJqTF+NMy78uDl/SG9bS3hI7WobrezGC2Fh/R3/4nhFNl
+	KGvrmH2MS5tC8Oxtiu6TyiC5zfFdL1D/Q34frH+9BTPn0P3UmkNwkjBb
+X-Gm-Gg: AYBFou3JVAWwR2QaNC+0FQyQI4yTdFA88BIYKT5Q66QEnnA6CsQL5Fi0oK+ILgL3tnB
+	fAmKpV32kkXmBihec2xeZE27b3ziM541lafqO7X+c3cBbIzDslNI0MHLGKbY4JHWsWN72JwMoi3
+	X9KoPsoHZoyrnWIJe6YyKEbu/CFx0FTPL3UlROB8xQmrXoUOnWT8u/xr2eyg8/rlB7AAdp542B3
+	cXdE6n0C0oYFhVYmeQBFAin1gpN1FgMX4BQlxep35+6VpgjasQWOAKsOTgDZ0JwN1R3kSIEOl1B
+	qg053ntXkWaEmfebFRHW3jcFVCRjm7lB6ZWeeZz2rhjmyaPjfAq0Upevd+4hAUPrR8O6SoNSZt2
+	+u7MIgnbKoDMIpi9c1DvAixg7mnqL8B8+jFUjuE8qft6kiLxvlOGBDuw9NA9EBER1QdBaQg0vEU
+	n1NeSaNvbmJqEv+rnEahR/nozR/ykkFDM0mOmOBvwjoyV0L45kYq7SnhrA4iwH2QoYOYQNeeS14
+	af86lrYqO53tN9iWlr6iQoaDw==
+X-Received: by 2002:a05:600c:1910:b0:4a1:7a1e:6910 with SMTP id 5b1f17b1804b1-4a1d75f2afbmr50724785e9.4.1792231434278;
+        Sat, 17 Oct 2026 03:03:54 -0700 (PDT)
 Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1ccc15aa1sm117773395e9.14.2026.10.17.03.02.45
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1dc952d63sm36984135e9.2.2026.10.17.03.03.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 03:02:46 -0700 (PDT)
+        Sat, 17 Oct 2026 03:03:53 -0700 (PDT)
 From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Mark Brown <broonie@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Vladyslav Tymoshchuk <tvlad744@gmail.com>,
 	Val Packett <val@packett.cool>,
-	Federico Amedeo Izzo <federico@izzo.pro>,
-	linux-sound@vger.kernel.org,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	phone-devel@vger.kernel.org,
-	~postmarketos/upstreaming@lists.sr.ht,
-	Vladyslav Tymoshchuk <tvlad744@gmail.com>
-Subject: Re: [PATCH] ASoC: codecs: aw88261: start the amplifier on unmute at trigger time
-Date: Sat, 17 Oct 2026 13:02:16 +0300
-Message-ID: <20261017100217.1451-1-tvlad744@gmail.com>
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFT 0/5] drm/msm: Attach a driver to GMU
+Date: Sat, 17 Oct 2026 13:03:24 +0300
+Message-ID: <20261017100324.1104-1-tvlad744@gmail.com>
 X-Mailer: git-send-email 2.45.1.windows.1
-In-Reply-To: <bf823f3b-f064-4dd7-acfd-4136efd090de@sirena.org.uk>
-References: <20261014120000.aw88261-trigger-v1-1-tvlad744@gmail.com> <bf823f3b-f064-4dd7-acfd-4136efd090de@sirena.org.uk>
+In-Reply-To: <bc2ed82d-0d91-4683-b9ae-cb4299636c2e@oss.qualcomm.com>
+References: <20260513-gmu-sync-state-fix-v1-0-6e33e6aa9b4f@oss.qualcomm.com> <1118d9c2-4efd-48fc-8a3e-c2cc3eddc940@packett.cool> <bc2ed82d-0d91-4683-b9ae-cb4299636c2e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,42 +91,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 15, 2026 at 06:50:39PM +0100, Mark Brown wrote:
-> OTOH some hosts presumably do have the clock running earlier and will
-> now get delays added in trigger which isn't ideal.  I'm not sure we have
-> good solutions here given that this is all system dependent.
+Hi Akhil,
 
-Right, v1 moved the whole start into trigger. v2 [1] splits it at the
-PLL lock check, the first step that needs the bit clock: PWDN, the
-I2S/PLL setup and the boost settings stay in DAPM, and only the lock
-check, AMPPD, the SYSST check, the feedback and the unmute run in the
-trigger-time unmute, which the mute undoes. That is the split wsa883x
-and wsa884x make with GLOBAL_PA_EN (the vendor aw882xx driver also
-starts the amplifier from .mute_stream). It does not depend on the
-host: one with the clock running from prepare gets the same few steps
-in trigger and nothing more.
-
-Measured here with six amplifiers on two I2C buses: the unmute takes
-4.3 to 7.3 ms per amplifier (26 to 38 ms for all six), the mute about
-4 to 7.5 ms (estimated, see the v2 notes), and the write that starts
-the stream went from 52-57 ms with v1 to 28-36 ms. With two
-amplifiers, as on the Fairphone 5, it should be a third of that if the
-I2C is as fast.
-
-> > The trigger has to be nonatomic for the I2C accesses, which the
-> > Qualcomm DPCM links using this codec are.
+On Sun, 26 Jul 2026 21:35:35 +0530, Akhil P Oommen wrote:
+> I didn't get a chance to revisit this series after my vacation. I am too
+> not aware of any impact outside of those dmesg warnings. Any chance this
+> recent rpmh related fix is helping with the deep sleep instead of this
+> series:
 >
-> Are we *sure* there are no other users out there?
+> https://lore.kernel.org/lkml/20260605-assorted-fixes-june-v1-1-2caa04f7287c@oss.qualcomm.com/
 
-In mainline, linux-next and your for-next the only user is the
-Fairphone 5 ("fairphone,fp5-sndcard" in sm8250.c), whose DPCM links
-qcom_snd_parse_of() makes nonatomic; the driver has no ACPI IDs. The
-out-of-tree users I know of (Fairphone 6, OnePlus Pad 3,
-motorola-dubai) are Qualcomm too. But v2 no longer relies on that: it
-reads substream->pcm->nonatomic in .startup, and on an atomic PCM it
-does the whole start from DAPM as now and nothing in the trigger.
+A data point from SM8750 (OnePlus Pad 3; the board DT is still local).
+My tree is v7.3-rc5 plus board patches, so that fix is already in it
+as d9108bfdb746 ("drm/msm/a6xx: Fix stale rpmh votes after suspend").
+Without this series the clock controllers still wait for the GMU:
 
-[1] https://lore.kernel.org/r/20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com
+  gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+  gcc-sm8750 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+  sm8750-gpucc 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+
+With the series applied these lines are gone, adreno_gmu binds
+3d6c000.gmu, the GMU firmware loads, and KWin runs with OpenGL
+compositing. I saw no new adreno or GMU errors, including across two
+s2idle cycles.
+
+I can't say what the series alone does for suspend on this board: the
+interconnect providers here are also held by 1dfa000.crypto (QCE is
+BROKEN, the issue Konrad raised in the "crypto: qce - Remove driver"
+thread), and I only measured with both resolved.
+
+One note for v2: 5/5 did not apply to a6xx_gpu.c on v7.3-rc5, because
+a6xx_gpu_init() there already holds the GMU node with
+__free(device_node). I ported that hunk by hand and dropped the
+of_node_put().
+
+For the series:
+
+Tested-by: Vladyslav Tymoshchuk <tvlad744@gmail.com> # sm8750-oneplus-erhai
 
 Thanks,
 Vladyslav
