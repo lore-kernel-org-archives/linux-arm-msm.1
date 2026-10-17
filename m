@@ -1,68 +1,67 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 064173C6A56
-	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 17:52:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5344D3C9896
+	for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 17:52:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792259553; cv=none; b=gYl2KNwoJh4fOHeAIgUgO8ZMlQocSj6bF5Arh1RV6nnlosIxYVtMcWPZPtvSW1nX1r3JKQ6ER2luOFsvzsbYVyBq2A7uGYAslk7h/kbwfz6U1I3WTwcx+HRKF3MEfNVKhKOcOy0v/l790x3s80ESAdGrc6tutdfQxNE0zoOuz/s=
+	t=1792259554; cv=none; b=BAwuPshvzHYb+lJXNQqTd+tFZlA7XXM/XVVUPL/OsIK5nPhXf1bLD0Sktp0DAhnZldr9SCZEHNlGZkcujptzU9HoOoGnXy4RpxR9HRKAM2w44iLEJpZXyvUubhHJTsVhJ6IpMC0veuCI71fzodXTNi4HpeLixn3FMM8DnMZ7+CQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792259553; c=relaxed/simple;
-	bh=r+ZyeqRq4hr1l/v11neFzMiPd1gUhiZKSKrRDT5o3tA=;
+	s=arc-20240116; t=1792259554; c=relaxed/simple;
+	bh=/MXkxzMgXZS7Xg8ZQdwRCV2X8M23mZIrEcttHXF0jmc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=jvuE4KTWRdeY//Nxay2WAsITGr50Ckv1GzPfAbWVgQDn5WH8YjPUm2DVfWIikCjGx2rhIS1WJG15PO16hwe4BRnu5LEbHYBJBNRNy8oWLwT6fnMZi0GByQ+4eBiYy4mzGg6BciBrVfaRT77kzRc3UnNfApGsVnihMTh0QAevZFg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WiurdITI; arc=none smtp.client-ip=209.85.221.45
+	 In-Reply-To:To:Cc; b=OlXT9Fye49w08vg+uuvPdhY5gjZ8aWd+P4vW/cSgjQhzdiRPvWGBWxTJDJ1mxyuDPUQiW1ELU3+bTVGh2+3S0/k3RV1jNsZoERAyidXar5MSOP6Jyu4rmHaMvdbHyoW9T1N3XFEkyU4A+p77D+idDJDZKA5OYW45+pY1ZMKxLp4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LJyfVYny; arc=none smtp.client-ip=209.85.128.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WiurdITI"
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48df4e9d2d4so448440f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:52:31 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LJyfVYny"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-49fbb2acc90so10395925e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 10:52:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792259550; x=1792864350; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792259551; x=1792864351; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=69tZwWkK9tX5KcNiATY2wgE5iwPkgXeDVM/0B88knb0=;
-        b=WiurdITIDgXb5J3TPDoaXrL2JQe/bj5O3iS0gpWzkEuXohLp6w2BpE9T8W4cS+Lk8o
-         nCl7FMKV6ECwGjPvEx+4Mglu4f0Yh5FuNtZdWC/4p4G26Vthb+sZyU14uug/mE6brq7Y
-         X8ejWy9tV8UnTRB84DbRIS5V8nkbP6wSgYOPuEurmEd+X3ElnzDIDYYRcYsVsoDALdJJ
-         qJT69MVScqqeB5+QXfxihrRkBWCDnYsWqF2NmthfeNotlKeoDs2eRZ7rI33DUe0n7mim
-         C8J+gvbzIErQgPBrQL+ufTtra3i3dt5vuibb2FTba+IHHGqcpxS9Qhzwn7eu3MxXoIYV
-         /kuA==
+        bh=0P2zCxKCOBoWhr8KYHU/t0ggH/tWLmugYEQRfJLO4Ks=;
+        b=LJyfVYnyQ4X08e//1UyyaLa7N9DhRGSljbu6OTLypUdvtMTYyYpUjGtLL2nUyDT1TD
+         3zLTF9hKmIeQ5ycfm3rOmUf4Vlap6sVzh8nLOFjCzoMpAOes3q+dAX3mF7hS7qzqJDSr
+         YSPkAKyakSGOCnNRlWaW8TnvykluvwQyTrvG6mL6sWO7Uc5ZGDVtXAYG2vVX6Fe8dkN3
+         K5xZyGtUghQNp/7y4aDK3XtXoE7XA+wpybwbOsa5NpOYWpImnI6KxRwI0MQDCQzlmWZR
+         7RuJ3ill7WrTUCDwbK3av8cl7D1uNx8NhkbiDcfKAVqhl/g8LPfDivk+lpleQ7CWw4pl
+         Vexw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792259550; x=1792864350;
+        d=1e100.net; s=20260707; t=1792259551; x=1792864351;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=69tZwWkK9tX5KcNiATY2wgE5iwPkgXeDVM/0B88knb0=;
-        b=sr6sDupxiZs0NhjAb5LaeP0JsLT6cTQOmvKOU0/ALAw6bHXXU5DoPGGMYn/t1ZWw7d
-         OgXZwj5RZ4+xpEr7F1hdf/0O7efCUeJMEUAF+n7vc0KDvDYHIRjbXgwtSIQp3yBBOhix
-         RY/mYTS02bvV75VokOwlM+PVl1sIffcwM6VrPUmSu4RLdhlCLQ17zlxwVJxN2PEpzMpQ
-         +LlKevoy2QNHTwbG1YZLGh5ZdY7zoC+U7XEE3sOnwgTGMpXF5ltjXnQW+Lcd1lMQGLVa
-         PXup+7Z9XPhI6DSY20OcHyL/Cfdg33c08DZuhjoiRAEMjgVxquFmp3PWfBck5xJ8p0YO
-         4U0Q==
-X-Gm-Message-State: AFq9FYIk+RW43l7LDth1oh5ij6p1MOvFnUJEmBmbADMtIAaTOOAFPUh9
-	mc65P0LsDXcNssRMWOmNx+N6Yad6IGOZeIC2nT8zYYVf+/8UTzSffAhd
-X-Gm-Gg: AYBFou0Gl3rlQiboVJPB5/pMD3VuPmT4lNd87PXRagObf/xlaEORMkvANIbljGPjJgZ
-	bnBd431ha2aqVnPwA0KcwTFtrULPZ0RRleE8YsIEgarSrJMx16pOzCpDEufCnh2h/TWvfk5IYJy
-	jP7QOnPos8J0e3Y9pMLHrw+ghjtNV4REhHCfeV5X8fdu/PwNs5eAyC3bZts7hE9NbsNj6HWOX0Q
-	UnELtatElZX0gtY1SaL+n/qLKErmuHvzOcsXi444BYnEKnjltJhV9XniB3b+qsl3tbo3A3IENAy
-	NXCuJ1+QImfmTTgAU7aOIiBNL0tJwi23kZZopsZ63YTJZn180weMUwM+ACX5dyrMLskU4mlBT7b
-	m1/nkFcNk+wPAstAE1/CABPXA6HRO9KoX6gMsQYHmIGzHAvVvoaophG24X28VDviVHJ1wPVS34T
-	ne+m0K05h2IGmO7C/8+7G/Ki5WLtYUsJUVld3VZp9+BBOUavL2TMtQygfvThXOArZYU7UvZOdwq
-	Q94vKPobvqcej4AUZum7x4q/nrAJQ==
-X-Received: by 2002:a05:600c:8b6f:b0:4a1:ce33:1536 with SMTP id 5b1f17b1804b1-4a1d75e37ecmr56865265e9.9.1792259550149;
-        Sat, 17 Oct 2026 10:52:30 -0700 (PDT)
+        bh=0P2zCxKCOBoWhr8KYHU/t0ggH/tWLmugYEQRfJLO4Ks=;
+        b=iuhHWUwqCGMot5mSipAkntlkVHCXWJNy9ohgHfotyTUGQ7Zqa59XDTpBT/HBmgK76r
+         timljxyAVC8xLosiNe+3t6fFrNOAjirTDKAhUOhF/rbfRJLtjd7dFVVZ1TqrQBcIqqWR
+         tvi3Ujd/MqWNgAP8EKsUUEzlxIadxv7S7CXpnQlfzQZSCRZt97cbNgPUeEYRBvQt+HJE
+         gXLROHXLsFdmqhJ0in7gfV3cUizE2LqWXMYXLcFMRnMHSwdVuGtTW52aJ8Hs8D3ue+je
+         S8r6TGAFbeIS6dDu5vWuAsJsi/qE8XwEOYh+GML45OXrOSJw6Jy6OVU9iRYS5I3aRq+4
+         ebyQ==
+X-Gm-Message-State: AFq9FYLYxrvSvfVSpazceUyZYCvDfWcQ/NSxuodxoVtpRQEjppA+4uiI
+	HRRX9VzuJ2bwlBb5+DrnGekmYdFuyHpaCLgznGSH94WHNpv2E1xBYhqc
+X-Gm-Gg: AYBFou1anN8X3vTTYlpHKuAr6a1FYFE4sHnCUKiT20U2At0JSyC7KDcbfJzthKAQ8+x
+	gZDsgQNAYt1vKkYKnXiKOFJC+1MLXTqrQW/+QjGpQSKFOeJnb1iVDaZVA7qkktN4mAoVrZSvvSJ
+	VNhwhqu8WUzIB+VQZPpg3QC9IhGoFrFQ/09e5L9RHrwQBaYQJf6fvX8tPLT7zQFM30zYC1w2aan
+	0U+uO9IQSaNPKhLjZKrRrzOZgTWo6RpSgqqkwbv+LRcS2hBA1AHS/JZmxPQhfAJ9yraveYHqMeq
+	GvqspU3D4Zjl8uTzd4CQMo3A1DRdYUj80gRLkBumxiW6gt8Y6pmTLa+RlOTNLpycYWDOa01lgnO
+	8U+4dsJqbUpL4ua9DG69YYbw/VWckGmcwHz5eulEHnCz/EkU6lvrqLVJjQAmQGCaPp3BsJ7C9S0
+	YUe0r5DoPR/OADCHJtyCsOmKaxsYY7Gc5TnEeUxVgV9X1r42xs//rSdlTiendX7dcRj8xqrm3V8
+	Jm+sxRxB7E0/+pMsNtGp59Dh1o+Ig==
+X-Received: by 2002:a05:6000:178a:b0:48b:e50:714e with SMTP id ffacd0b85a97d-48e07f9801bmr5319052f8f.36.1792259551511;
+        Sat, 17 Oct 2026 10:52:31 -0700 (PDT)
 Received: from [192.168.1.3] ([148.252.146.238])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5942sm18263626f8f.16.2026.10.17.10.52.28
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c5942sm18263626f8f.16.2026.10.17.10.52.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Oct 2026 10:52:28 -0700 (PDT)
+        Sat, 17 Oct 2026 10:52:31 -0700 (PDT)
 From: Dale Whinham <daleyo@gmail.com>
-Date: Sat, 17 Oct 2026 18:52:25 +0100
-Subject: [PATCH 1/2] arm64: dts: qcom: x1-denali: Add missing pinctrl for
- eDP HPD
+Date: Sat, 17 Oct 2026 18:52:26 +0100
+Subject: [PATCH 2/2] arm64: dts: qcom: x1-denali: Add PWM backlight for LCD
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,7 +70,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-sp11-lcd-fixes-v1-1-0eb916c01a3d@gmail.com>
+Message-Id: <20261017-sp11-lcd-fixes-v1-2-0eb916c01a3d@gmail.com>
 References: <20261017-sp11-lcd-fixes-v1-0-0eb916c01a3d@gmail.com>
 In-Reply-To: <20261017-sp11-lcd-fixes-v1-0-0eb916c01a3d@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -84,38 +83,117 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
  Haipeng Lin <jimmie.lin@gmail.com>, Dale Whinham <daleyo@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792259546; l=886;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792259546; l=3288;
  i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
- bh=r+ZyeqRq4hr1l/v11neFzMiPd1gUhiZKSKrRDT5o3tA=;
- b=ukOzpCkiL1Sx6fO3DAq7gYBVMV0W6zozax1nilINnVPiGHmAwFlbEQaw2YaM9ECjGnfYUQsfT
- 18mv0X/6n0sB3758WNmf9yTnXgSgSlnTdfMSvsScEHRYhHjGG6wLCkc
+ bh=/MXkxzMgXZS7Xg8ZQdwRCV2X8M23mZIrEcttHXF0jmc=;
+ b=kHD+q+obpKV0XEX9dCkeIxuxnTz8F0Vl3faCQTG+rPRMBE5hh8fbJ7PSwS9x+R8Bhnlm3oSRc
+ r6jO7u61kbtCNSjd2+pG3vD2TikwTugE7Bn/9gXOspmOuusaDSS6F8B
 X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
  pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
 
-The Windows ACPI muxes gpio119 to edp0_hot for both panels. Describe
-it rather than relying on UEFI.
+The LCD variant's backlight is PWM from the PMK8550 LPG on gpio5, with
+pmc8380_3 gpio10 enabling the supply and gpio4 the backlight, as on the
+T14s LCD and Surface Laptop 7.
+
+On OLED gpio4 is the panel enable, so move it and the panel compatible
+out of the common dtsi.
 
 Fixes: 0d72ccaa1e84 ("arm64: dts: qcom: Add support for X1-based Surface Pro 11")
 Signed-off-by: Dale Whinham <daleyo@gmail.com>
 Tested-by: Haipeng Lin <jimmie.lin@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi  |  5 ---
+ .../dts/qcom/x1e80100-microsoft-denali-oled.dts    |  4 ++
+ .../boot/dts/qcom/x1p64100-microsoft-denali.dts    | 47 ++++++++++++++++++++++
+ 3 files changed, 51 insertions(+), 5 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index e3a53b8930d9..332189839606 100644
+index 332189839606..4bce2f202fcc 100644
 --- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
 +++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -894,6 +894,9 @@ &mdss_dp3 {
- 	compatible = "qcom,x1e80100-dp";
- 	/delete-property/ #sound-dai-cells;
- 
-+	pinctrl-0 = <&edp0_hpd_default>;
-+	pinctrl-names = "default";
-+
- 	status = "okay";
+@@ -901,13 +901,8 @@ &mdss_dp3 {
  
  	aux-bus {
+ 		panel: panel {
+-			compatible = "edp-panel";
+-			enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
+ 			power-supply = <&vreg_edp_3p3>;
+ 
+-			pinctrl-0 = <&edp_bl_en>;
+-			pinctrl-names = "default";
+-
+ 			port {
+ 				edp_panel_in: endpoint {
+ 					remote-endpoint = <&mdss_dp3_out>;
+diff --git a/arch/arm64/boot/dts/qcom/x1e80100-microsoft-denali-oled.dts b/arch/arm64/boot/dts/qcom/x1e80100-microsoft-denali-oled.dts
+index 07ce43ccf394..a42298865dd3 100644
+--- a/arch/arm64/boot/dts/qcom/x1e80100-microsoft-denali-oled.dts
++++ b/arch/arm64/boot/dts/qcom/x1e80100-microsoft-denali-oled.dts
+@@ -16,4 +16,8 @@ / {
+ 
+ &panel {
+ 	compatible = "samsung,atna30dw01", "samsung,atna33xc20";
++	enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
++
++	pinctrl-0 = <&edp_bl_en>;
++	pinctrl-names = "default";
+ };
+diff --git a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
+index d96202e2afc6..68e68ca14ab1 100644
+--- a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
++++ b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
+@@ -12,4 +12,51 @@ / {
+ 	model = "Microsoft Surface Pro 11th Edition (LCD)";
+ 	compatible = "microsoft,denali-lcd", "microsoft,denali",
+ 		     "qcom,x1p64100", "qcom,x1e80100";
++
++	backlight: backlight {
++		compatible = "pwm-backlight";
++		pwms = <&pmk8550_pwm 0 5000000>;
++		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
++		power-supply = <&vreg_edp_bl>;
++
++		pinctrl-0 = <&edp_bl_en>, <&edp_bl_pwm>;
++		pinctrl-names = "default";
++	};
++
++	vreg_edp_bl: regulator-edp-bl {
++		compatible = "regulator-fixed";
++
++		regulator-name = "VREG_EDP_BL";
++
++		gpio = <&pmc8380_3_gpios 10 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&edp_bl_reg_en>;
++		pinctrl-names = "default";
++
++		regulator-boot-on;
++	};
++};
++
++&panel {
++	compatible = "edp-panel";
++	backlight = <&backlight>;
++};
++
++&pmc8380_3_gpios {
++	edp_bl_reg_en: edp-bl-reg-en-state {
++		pins = "gpio10";
++		function = "normal";
++	};
++};
++
++&pmk8550_gpios {
++	edp_bl_pwm: edp-bl-pwm-state {
++		pins = "gpio5";
++		function = "func3";
++	};
++};
++
++&pmk8550_pwm {
++	status = "okay";
+ };
 
 -- 
 2.56.0
