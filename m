@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7D344AB1AA;
-	Sun, 18 Oct 2026 21:10:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 247BE320CD3;
+	Sun, 18 Oct 2026 21:15:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792357823; cv=none; b=NvxJ8s2TS47EByPuOxYc4GXBih3lur+pvnTHIRibzd0ZjPqPPJjmV5ZJLjZbFkQM44gBeIIyaoiIQuKubPeVQHMoEtMlO1mgbyvXGYKenxwjD6GFOkdJfpa/V2SCOKcYmgR6ELsGXXKz6ejwmzJckCqkxSB1KumSJvU7JcuT9+I=
+	t=1792358155; cv=none; b=e/eYPFn5q9T+hunovi4mk4TrKxXe9BVuslTaxCzVxPIjB3AxZ8l9w9zGGTumRefiwJcyzHAAmzW8JsOUvs9MJnXuD3QfroMGrrQmygUa9tL2xj0d1ux6sX6V2NuInkLj9plukV2f7WOl7NVV54n+0Jc8OpzmxKRI6OdtfyQn4Oo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792357823; c=relaxed/simple;
-	bh=bS/6/i6Fqjy0XUY7goCfpZnpjhJR3lPocnmskSL3GX4=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=bp6+Qr+aInqzCDpzTynoLJGsW+tdcFoSjT5DHVMEnQ1+NWXCXy8Pz3ZAxx8sD26dI+MpRuo4aqsP0VJBy/VjMg/uRXS9YtdUaLComMKtCDmFvl6JKmBqreqGav7FH8Vq7XjI3CDgd1mIZRPhUqB6KKtf4+EV5f0lXvrk6CuBw2M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EuBxa6E4; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1792358155; c=relaxed/simple;
+	bh=SGfNfIbXDV5poBCxPEVtJwdyIWlBIUfO05lhjNt71rg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=YYGT0vSRhp6KWjzWnKrRFOfIDXT1MqdSxS5V0Wr/4ybABKXIK3M92ramc6zkima3KsfQr8pnAP1Yv92kYrRBJjkaBjrmCkfIO8ngI4ARalGG0cZIOBWlJcXPdK0EXgR2b4WDBrb5Ib2NzOKtZnYGs3JVkwcZVUL6r+ndm+QBaQQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OFe5GbUS; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EuBxa6E4"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 48677C2BCC7;
-	Sun, 18 Oct 2026 21:10:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OFe5GbUS"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 99268C2BCF7;
+	Sun, 18 Oct 2026 21:15:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1792357823;
-	bh=bS/6/i6Fqjy0XUY7goCfpZnpjhJR3lPocnmskSL3GX4=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=EuBxa6E4hefm/9BJy5qFqk8xx7vJ7GrhSntk/X3RhHjj3BB8LvXVsc3PG6+0CmYPd
-	 VRuJEg1XAMOn/GY0d7LrLhzHGelSK5f7aPOnUt0QmO5pxxcPMyTFm7STsrPeE0xvAY
-	 UvSvul7KkA6cTJ3Vdu9faY9NsROTNPaJ4/Nt+f0Ncn6+/YLuD4eoPIfzsctHg6pbuF
-	 vgrEYPi0p1pT+HSmCQmGl1y9NnnzpcYdVfX7J8pqTgz+97+YtdmQtJPTamJsbmP0FS
-	 AQQBD7UQmD7ieIlCPrD6bROjq/KJSl6JyKDRUV8QVnsLWFaJcMK0eV9Rp3M034817O
-	 SXAJzA0X80wrQ==
+	s=k20201202; t=1792358154;
+	bh=SGfNfIbXDV5poBCxPEVtJwdyIWlBIUfO05lhjNt71rg=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=OFe5GbUSRQ56PbwnR1x1+Qy1BOSZ0GKT1W7RTN/Xu3JvBlMW3NnjVZxsnClUJthya
+	 +DO0jG9fcj8e1orvRaJhqvmpFuDM5/dBQZ2cgGWbw1EBt5gqJLD3DVluL3LdrZKP+n
+	 2nMLN7flPVYlvTuX4Ds7ngRX6Lq4lP0C07s+HisaH2NdCzI6kdYYqFAr27Bj2XMZUB
+	 3oP6n/7lAxjZxu/53bdSZ1SkKKSbibX8HCu7+pnXi5lCUCGnDP8DuI9QBxsHWlF4lz
+	 2ckT/b/vzIy0F6r6xQDSrv1I6+JQHKWMJelabeeX9kqNrNezgPvU/VvxkjPAB7XCxm
+	 ALSifxkpKHq/A==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 225ACCCF2C9;
-	Sun, 18 Oct 2026 21:10:23 +0000 (UTC)
-From: George Neacsu via B4 Relay <devnull+geocausa.gmail.com@kernel.org>
-Subject: [PATCH v2 0/2] media: ov13858: device tree support for the Surface
- Pro 11 (Snapdragon)
-Date: Sun, 18 Oct 2026 22:10:20 +0100
-Message-Id: <20261018-ov13858-x1e-v2-0-cd35434cfcfe@gmail.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AEE7CCF2C4;
+	Sun, 18 Oct 2026 21:15:54 +0000 (UTC)
+From: Rinat Muhamedgaliev via B4 Relay <devnull+rinat.muhamedgaliev.gmail.com@kernel.org>
+Date: Mon, 19 Oct 2026 00:15:54 +0300
+Subject: [PATCH v6] power: supply: bq27xxx: detect bq27541 behind bq27411
+ compatible
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,93 +41,132 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23OTW7DIBCG4atYrEvFDAbGXvUeVRb8DDFSHafGt
- VJFuXtxsu3yG2kevXdReS1cxdjdxcp7qWW5tIFvnYiTv5xZltS2QIUWFBi57KDJkLwBS6IcUiD
- qM6FoH9eVc7k9tc9T21Op27L+PvEdjuv/zg5SSR9TGoByn4P9OM++fL3HZRanxwte+fun1W0vX
- Vz9FqfWNnax98FFBQmZYWCbko2AGYEHw8oadJ4jaj4Cg68smzqXbeySYxeid2AHcjr0lsk0CE0
- ElbXWB2MoUUt4/AERhAU3KAEAAA==
-X-Change-ID: 20261015-ov13858-x1e-88fbdb884f82
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Sergey Lebedev <lsa.uz@pm.me>, 
- German Pablo Lindo <germanpapulindez@gmail.com>, 
- Bryan O'Donoghue <bod@kernel.org>, linux-media@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, George Neacsu <geocausa@gmail.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792357821; l=2545;
- i=geocausa@gmail.com; s=20261015; h=from:subject:message-id;
- bh=bS/6/i6Fqjy0XUY7goCfpZnpjhJR3lPocnmskSL3GX4=;
- b=rDqpoMN+J33AG8ak1CbPrKpqfBHtykw9PbGFurFmqhyZYHn/qtZXGfZFv170VjJX43IwSp/mj
- YcupXwAb/ZsDj/wPUjJB6Zsfdrxutj25jCOx0yPmhDLzfZtUdzFWz7Y
-X-Developer-Key: i=geocausa@gmail.com; a=ed25519;
- pk=KyQk/iWbxsikewDBh0SwlHI51RvAqahD3loqmRp9DVI=
-X-Endpoint-Received: by B4 Relay for geocausa@gmail.com/20261015 with
- auth_id=1199
-X-Original-From: George Neacsu <geocausa@gmail.com>
-Reply-To: geocausa@gmail.com
+Message-Id: <20261019-master-v6-1-c4b36129721e@gmail.com>
+References: <20261019-master-v6-0-c4b36129721e@gmail.com>
+In-Reply-To: <20261019-master-v6-0-c4b36129721e@gmail.com>
+To: linux-pm@vger.kernel.org
+Cc: pali@kernel.org, sre@kernel.org, afd@ti.com, 
+ konrad.dybcio@oss.qualcomm.com, david@ixit.cz, krzk@kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792358153; l=3244;
+ i=rinat.muhamedgaliev@gmail.com; s=default; h=from:subject:message-id;
+ bh=dnSe8ElLLTi2cXIlSrqfQn/BXIYt61P1i6EIAmfkKr8=;
+ b=/ST+FNyeZG01G+kV01s7Im7B+oRn2yOXN6CpWOAVIHy0oGmRrpBYE2GaLOyvqv2qUzCd9DZvA
+ ej56nyWnGxVACFTtwpDPi73XzotMWN+jR9NVOwCTIyZWd9cKy/mRVi6
+X-Developer-Key: i=rinat.muhamedgaliev@gmail.com; a=ed25519;
+ pk=qkYQO8LRlRErWiLzlpK8jHbRIxv8+7v06+ytcxX8mec=
+X-Endpoint-Received: by B4 Relay for rinat.muhamedgaliev@gmail.com/default
+ with auth_id=1072
+X-Original-From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Reply-To: rinat.muhamedgaliev@gmail.com
 
-Hi Sakari,
+From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
 
-The Surface Pro 11 with a Snapdragon X Elite (X1E80100) has an OV13858
-rear camera on Qualcomm CAMSS over four D-PHY lanes. This two-patch
-series adds the DT binding and the OF/endpoint support for the existing
-sensor driver.
+OnePlus 6 and 6T replacement battery packs may contain either a bq27411
+or a bq27541 fuel gauge at I2C address 0x55. The device tree currently
+identifies the gauge as bq27411, but a bq27541 uses a different register
+map and then reports invalid battery values.
 
-v2 keeps Sergey's power-management work as a prerequisite, updated to
-his v4:
-<20261016210246.58562-1-lsa.uz@pm.me>
+Read the DeviceType control subcommand when probing a bq27411. Keep the
+existing profile for DeviceType 0x0421, but select the bq27541 profile
+for DeviceType 0x0541. This retains the established DT ABI and supports
+replacement packs without introducing a generic compatible.
 
-On the Snapdragon model, the v4 runtime-PM callbacks are equivalent to
-the v3 callbacks used for the hardware test. I ran 20 open/stream/close
-cycles on the rear sensor; it runtime-suspended between every cycle and
-streamed again each time. Three additional cycles saved complete
-4224x3136 RAW10 frames. The camera rails were enabled while streaming
-and disabled between sessions.
+Tested on OnePlus 6T (fajita) with DeviceType 0x0541: voltage, state of
+charge, and temperature were reported correctly. Testing on hardware with
+DeviceType 0x0421 would be appreciated.
 
-System suspend has not yet been tested on the Snapdragon model.
-Suspend/resume support for this platform is currently being brought up
-separately, and I plan to include the camera in that testing once it is
-ready. This series therefore makes no suspend/resume claim.
-
-Sergey tested the DT patches on the Intel Surface Pro 11: the endpoint
-check passes, 4224x3136 streams at 29.95 fps, and v4l2-compliance passes
-46/46 on the subdev. His Tested-by is carried on both patches.
-
-Thanks to Sakari, Krzysztof and Bryan for the review and guidance.
-Krzysztof's Reviewed-by is carried on the binding, and Sakari's latest
-review feedback is folded into v2.
-
-Changes in v2:
-- update the prerequisite from Sergey's v3 to v4;
-- carry Sergey's Tested-by on both patches;
-- remove the fixed 19.2 MHz claim from the binding description;
-- let v4l2_fwnode_endpoint_alloc_parse() handle missing-endpoint deferral;
-- trim the driver commit message to the implementation change;
-- document the Snapdragon runtime-PM cycle results.
-
-Link to v1:
-https://lore.kernel.org/r/20261015-ov13858-x1e-v1-0-acdd918f4fb6@gmail.com
-
-Signed-off-by: George Neacsu <geocausa@gmail.com>
+Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
 ---
-George Neacsu (2):
-      dt-bindings: media: i2c: Add OmniVision OV13858
-      media: i2c: ov13858: Add device tree support
+ drivers/power/supply/bq27xxx_battery_i2c.c | 57 ++++++++++++++++++++++++++++++
+ 1 file changed, 57 insertions(+)
 
- .../bindings/media/i2c/ovti,ov13858.yaml           | 113 +++++++++++++++++++++
- MAINTAINERS                                        |   1 +
- drivers/media/i2c/ov13858.c                        |  54 ++++++++++
- 3 files changed, 168 insertions(+)
----
-base-commit: d7e7bca7169873b46e857c025c10f3336c1258d8
-change-id: 20261015-ov13858-x1e-88fbdb884f82
-prerequisite-patch-id: c4ab7c01d2ee19e6dd6c12f21e95e06527aec23e
+diff --git a/drivers/power/supply/bq27xxx_battery_i2c.c b/drivers/power/supply/bq27xxx_battery_i2c.c
+index 94b00bb89c17..0b957888ad2b 100644
+--- a/drivers/power/supply/bq27xxx_battery_i2c.c
++++ b/drivers/power/supply/bq27xxx_battery_i2c.c
+@@ -16,6 +16,11 @@
+ static DEFINE_IDR(battery_id);
+ static DEFINE_MUTEX(battery_mutex);
+ 
++#define BQ27XXX_REG_CTRL		0x00
++#define BQ27XXX_DEVICE_TYPE		0x0001
++#define BQ27411_DEVICE_TYPE		0x0421
++#define BQ27541_DEVICE_TYPE		0x0541
++
+ static irqreturn_t bq27xxx_battery_irq_handler_thread(int irq, void *data)
+ {
+ 	struct bq27xxx_device_info *di = data;
+@@ -136,6 +141,46 @@ static int bq27xxx_battery_i2c_bulk_write(struct bq27xxx_device_info *di,
+ 	return 0;
+ }
+ 
++static int bq27xxx_battery_i2c_check_device_type(struct bq27xxx_device_info *di)
++{
++	enum bq27xxx_chip detected_chip;
++	int expected_type;
++	int ret;
++
++	ret = di->bus.write(di, BQ27XXX_REG_CTRL, BQ27XXX_DEVICE_TYPE,
++			    false);
++	if (ret < 0)
++		return ret;
++
++	ret = di->bus.read(di, BQ27XXX_REG_CTRL, false);
++	if (ret < 0)
++		return ret;
++
++	switch (ret) {
++	case BQ27411_DEVICE_TYPE:
++		detected_chip = BQ27411;
++		break;
++	case BQ27541_DEVICE_TYPE:
++		detected_chip = BQ27541;
++		break;
++	default:
++		dev_err(di->dev, "unrecognized DeviceType 0x%04x\n", ret);
++		return -ENODEV;
++	}
++
++	if (detected_chip == di->chip)
++		return 0;
++
++	expected_type = di->chip == BQ27411 ? BQ27411_DEVICE_TYPE :
++		BQ27541_DEVICE_TYPE;
++	dev_warn(di->dev,
++		 "detected DeviceType 0x%04x instead of expected 0x%04x\n",
++		 ret, expected_type);
++	di->chip = detected_chip;
++
++	return 0;
++}
++
+ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 				     const struct i2c_device_id *id)
+ {
+@@ -169,6 +214,18 @@ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 	di->bus.read_bulk = bq27xxx_battery_i2c_bulk_read;
+ 	di->bus.write_bulk = bq27xxx_battery_i2c_bulk_write;
+ 
++	/* BQ27411 and BQ27541 may be interchanged in replacement battery packs. */
++	switch (di->chip) {
++	case BQ27411:
++	case BQ27541:
++		ret = bq27xxx_battery_i2c_check_device_type(di);
++		if (ret)
++			goto err_failed;
++		break;
++	default:
++		break;
++	}
++
+ 	ret = bq27xxx_battery_setup(di);
+ 	if (ret)
+ 		goto err_failed;
 
-Best regards,
 -- 
-George Neacsu <geocausa@gmail.com>
+2.56.0
 
 
