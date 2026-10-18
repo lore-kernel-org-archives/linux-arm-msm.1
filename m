@@ -1,214 +1,112 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DF0147043B;
-	Sun, 18 Oct 2026 10:47:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67A4A3A4F47;
+	Sun, 18 Oct 2026 11:13:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792320470; cv=none; b=EynzYpbiYdOWf+uuc88U9WQVRQRHHQ2dfwExPUbwNqZDfPfBlSM7x0hPykYu7iaKwajrW+Cid/u+gDrPbEgNLH86+OH/Rm0VKZf6arBYSWrqlCuLpxV+GoNwVqhqFdyUQE2M11Ydl/YvM5/SwvN8URAQYcsQjM271TK7mevSnuM=
+	t=1792321996; cv=none; b=KgqArX7K6tBKcJlkgX3OCDVmEeaGcxV/n1nlnpXGcGGloetUmRqVoCLGQAv9u0iFzzFBdM2hzBCqearvN85kdaVqK0hhod//HxhswaYvlssXqSYQoszinyBtSOyCMC7hWNzMiJcS61cidheGt3QO6rxatZcyTxyNGIlbtV7BxrU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792320470; c=relaxed/simple;
-	bh=V+rXxFkcbfLrBeLA5fvqUz+Qp6bbOIoDFzKYc+vp8Bk=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=JWWYQfAX/SJjW8RPdKYmdwjLQUkoRdRQ5LFtXK6hfebaCuhQJ+0T61hn7/BSapicEAdW30lO0SN6A7S6jvo4osZ102lE0sML9lBhpoTPYDYuXJbWUMcCVrX8zlPnD4F2iBvRHAHZH6j1mj6HT2YgI4Ta4Sw924Msi6Rqts7MK6U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fPEalO6x; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792321996; c=relaxed/simple;
+	bh=qL2vJezNst1d9AIBguuaHF0y6iGaD5IjydIXXTAj/pw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=K0+/Ib8U6tt+ULpvYQDXDWGRHvMsRvAP3BuKo91MMKoFP9tojDrTAdKAqfcp2dy5CrxDrlsinqaTwRNJaFVSHl1x2/MfFWMIlYiffBSQLLDoERHX7O+Karf6w4SMiVKxu3RE2ra+oXAy3NZaZ7kli4mf+7Fo4lAuqK/lQDLJCE0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=h4nizfKd; arc=none smtp.client-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fPEalO6x"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 593231F000C8;
-	Sun, 18 Oct 2026 10:47:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792320462;
-	bh=5hab7+141CDQa1JBhM1GvMqH/8AaEC11ek9yvkq2uC0=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=fPEalO6xUETTCLQJJT/mlPgbrqyjtJydGt/bhAGwWsovPYXyOkOBp4aaRwFA4Wo8J
-	 G+WrRulRhyNHpDMuKhugSKWtS9L/y8oim7tjcaIUrhjO/kzgtMbu9dMh7RnNCDxz9a
-	 9OL5c4OaKmBifWcbRriSd3wJHKG690aw2VpOP8Ooe+J1V7vdqKprEoqkVpyiiWs0ks
-	 b78MlsSO+NX30tWF2BJQCY4u5mLfPx8hq1qEAwZ17C38W/VaYKK6uln33+Mdcv3d3R
-	 I3id92GQj9ydDLczlg8VjW5T4bqhF/WSThBfDhURcgEn1GqlUYJSkkQ6XEoxlDDmPX
-	 762ZrJEuMzB9A==
-Subject:
- Re: [PATCH net-next v3 9/9] net: stmmac: qcom-ethqos: add Shikra EMAC support
-From: netdev-bot+sashiko@kernel.org
-To: mohd.anwar@oss.qualcomm.com
-Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@kernel.org,
- kuba@kernel.org, pabeni@redhat.com, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, afd@ti.com, andrew@lunn.ch, hkallweit1@gmail.com,
- linux@armlinux.org.uk, richardcochran@gmail.com, andersson@kernel.org,
- konradybcio@kernel.org, alexandre.torgue@foss.st.com, peppe.cavallaro@st.com,
- joabreu@synopsys.com, maxime.chevallier@bootlin.com,
- mcoquelin.stm32@gmail.com, lorenzo.bianconi@oss.qualcomm.com,
- netdev@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org
-Date: Sun, 18 Oct 2026 10:47:40 +0000
-Message-ID: <179232046091.3135.7041326304068020426@kernel.org>
-In-Reply-To: <20261017-shikra_ethernet-v3-9-26a8beb44b8f@oss.qualcomm.com>
-References: <20261017-shikra_ethernet-v3-9-26a8beb44b8f@oss.qualcomm.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="h4nizfKd"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=qL2vJezNst1d9AIBguuaHF0y6iGaD5IjydIXXTAj/pw=; b=h
+	4nizfKdOaYAfzIZ/UsM2m/u8UbPhTU0MfDEteegYmGTvHXXAuJ1CjNTR5Y6VBH/f
+	fEGX/quorq43GkZxjcoJ8AGmgH385vu7H9+xXkRkRvKMiQqEa+v/r3wZbXe1qOKj
+	CtB5D0GJxDsCSCdVKCKbgsiE3Rrx2AxsbHvbrfDCcw=
+Date: Sun, 18 Oct 2026 19:12:39 +0800 (CST)
+From: "jiale yao" <19888972804@163.com>
+To: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>
+Cc: "Manivannan Sadhasivam" <mani@kernel.org>,
+	"Jeff Hugo" <jeff.hugo@oss.qualcomm.com>,
+	"Alex Elder" <elder@kernel.org>, mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re:Re: [PATCH] bus: mhi: ep: cancel reset work during controller
+ teardown
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <2026101841-unroasted-carbon-e514@gregkh>
+References: <20261018040614.533366-1-yaojiale02@163.com>
+ <2026101841-unroasted-carbon-e514@gregkh>
+X-NTES-SC: AL_Qu2SAP+ZvkEu7yCQbOkdnEkQgO0/WsS1vfQu2Y5Wc+wGmz/80BwQf1tMBVrcwvyrATGTrTGyeR9D4eBRZrRh77rVKppFCSTQgwERDsYyQg==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=GBK
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Message-ID: <74679635.183c.1a14eb6b4b9.Coremail.19888972804@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:kCgvCgD336inqdRq1FRbAA--.719W
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbC8AdjnWrUqacuhAAA3T
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider.
-
-Critical: 0 · High: 0 · Medium: 2 · Low: 0
-
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
-
-- [Medium] The new shikra_data descriptor
-  (drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c:317-324) has…
-- [Medium] The commit message justifies taking a second enable reference
-  on 'stmmaceth' (by putting it in shikra_noc_clk_names, so it goes…
-
---
-
-net: stmmac: qcom-ethqos: add Shikra EMAC support
-
-This patch adds Shikra EMAC support. It registers the qcom,shikra-ethqos
-compatible with a new shikra_data descriptor. The descriptor enables three
-NOC clocks (stmmaceth, axi-noc, pcie-tile-axi-noc), whose rates are set
-through an OPP table, and sets a 36-bit DMA address width.
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> index 9c602755532e1..a4e083a8517d0 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> @@ -307,6 +307,22 @@ static const struct ethqos_emac_driver_data emac_v4_0_0_data = {
->  	.dwmac4_addrs = &ethqos_dwmac4_addrs,
->  };
->  
-> +static const char * const shikra_noc_clk_names[] = {
-> +	"stmmaceth",
-
-[Severity: Medium]
-The commit message says that managing "stmmaceth" through the same
-clk_bulk path:
-
-  keeps the rate-setting and enable/disable together.
-
-Is that accurate? The stmmac core still enables stmmac_clk by itself,
-before the OPP vote is applied.
-
-At probe, stmmac_probe_config_dt() calls
-clk_prepare_enable(plat->stmmac_clk). That happens well before
-qcom_ethqos_init_noc_clks() and ethqos_clks_config(ethqos, true) set up
-the OPP.
-
-On runtime resume and noirq system resume, stmmac_bus_clks_config()
-enables stmmac_clk first, and only then calls the glue clks_config():
-
-drivers/net/ethernet/stmicro/stmmac/stmmac_platform.c:stmmac_bus_clks_config() {
-    ...
-	if (enabled) {
-		ret = clk_prepare_enable(plat_dat->stmmac_clk);
-		...
-		ret = clk_prepare_enable(plat_dat->pclk);
-		...
-		if (plat_dat->clks_config) {
-			ret = plat_dat->clks_config(plat_dat->bsp_priv, enabled);
-    ...
-}
-
-On suspend, ethqos_clks_config(false) calls dev_pm_opp_set_rate(dev, 0).
-That reaches _disable_opp_table(), which drops the bandwidth, level and
-required-opps votes but does not change clock rates. So stmmaceth stays at
-120 MHz.
-
-On the next resume, is stmmaceth then enabled at 120 MHz before
-qcom_ethqos_set_opp() restores the VDD_CX required-opps vote? The binding
-commit says that vote is needed when the NOC clocks are enabled.
-
-If so, the second enable reference doesn't keep rate-setting and
-enable/disable together. Should the commit message rationale be updated?
-
-> +	"axi-noc",
-> +	"pcie-tile-axi-noc",
-> +	NULL,
-> +};
-> +
-> +static const struct ethqos_emac_driver_data shikra_data = {
-> +	.dma_addr_width = 36,
-> +	.has_emac_ge_3 = true,
-> +	.noc_clk_names = shikra_noc_clk_names,
-> +	.num_noc_clks = ARRAY_SIZE(shikra_noc_clk_names) - 1,
-> +	.rgmii_config_loopback_en = false,
-> +	.dwmac4_addrs = &ethqos_dwmac4_addrs,
-> +};
-
-[Severity: Medium]
-Is it intentional that shikra_data has no .rgmii_por and .num_rgmii_por?
-
-Every other descriptor has a POR table. That includes the other
-has_emac_ge_3 descriptors, emac_v3_0_0_data and emac_v4_0_0_data.
-
-Shikra still uses the RGMII path. qcom_ethqos_probe() installs
-ethqos_fix_mac_speed_rgmii() for every RGMII phy-mode, and the binding
-requires the "rgmii" link clock for Shikra.
-
-With num_rgmii_por == 0, the reset loop in ethqos_fix_mac_speed_rgmii()
-does nothing:
-
-	/* Reset to POR values and enable clk */
-	for (i = 0; i < ethqos->num_rgmii_por; i++)
-		rgmii_writel(ethqos, ethqos->rgmii_por[i].value,
-			     ethqos->rgmii_por[i].offset);
-
-Most of the programming after this loop is read-modify-write. It seems to
-rely on the POR rewrite to clear bits left over from an earlier speed.
-
-For example, in ethqos_rgmii_macro_init(), the 10/100 branch sets
-SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN. The 1G branch only sets
-PRG_RCLK_DLY and PRG_DLY_EN:
-
-	if (speed != SPEED_1000) {
-		...
-		rgmii_setmask(ethqos, SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN,
-			      SDCC_HC_REG_DDR_CONFIG);
-	} else {
-		...
-		rgmii_setmask(ethqos, SDCC_DDR_CONFIG_PRG_DLY_EN,
-			      SDCC_HC_REG_DDR_CONFIG);
-	}
-
-On v3/v4, the POR value 0x80040800 for SDCC_HC_REG_DDR_CONFIG clears this
-bit first. After a 10/100 to 1G renegotiation on Shikra, would the external
-RX clock delay stay enabled along with the 1G programmed delay?
-
-The reverse case has the same problem. The 1G path and
-ethqos_dll_configure() set DLL_EN, CK_OUT_EN, CDR_EN and CDR_EXT_EN in
-SDCC_HC_REG_DLL_CONFIG. After a 1G to 10/100 change, nothing clears them,
-even though the 10/100 path deliberately skips enabling the DLL:
-
-	if (speed != SPEED_100 && speed != SPEED_10) {
-		/* Set DLL_EN */
-		rgmii_setmask(ethqos, SDCC_DLL_CONFIG_DLL_EN,
-			      SDCC_HC_REG_DLL_CONFIG);
-
-On v3/v4, the POR value 0x2004642c clears these bits.
-
-The driver also never programs some fields itself.
-SDCC_DDR_CONFIG_TCXO_CYCLES_CNT is one: the v3/v4 POR sets it to 4, which
-matches the "52 * 4" comment in the PRG_RCLK_DLY calculation.
-
-In rgmii-id mode, SDCC_HC_REG_DDR_CONFIG and SDCC_HC_REG_DLL_CONFIG2 are not
-touched at all. On Shikra they keep whatever the hardware reset or the
-bootloader left there.
-
-Could Shikra get its own POR table? If skipping it is safe, could the
-commit message explain why?
-
-[ ... ]
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261017-shikra_ethernet-v3-0-26a8beb44b8f%40oss.qualcomm.com
+QXQgMjAyNi0xMC0xOCAxNDozNDowNiwgIkdyZWcgS3JvYWgtSGFydG1hbiIgPGdyZWdraEBsaW51
+eGZvdW5kYXRpb24ub3JnPiB3cm90ZToKPk9uIFN1biwgT2N0IDE4LCAyMDI2IGF0IDEyOjA2OjE0
+UE0gKzA4MDAsIEppYWxlIFlhbyB3cm90ZToKPj4gVGhlIGRvb3JiZWxsIElSUSBzY2hlZHVsZXMg
+cmVzZXRfd29yayBvbiB0aGUgc3lzdGVtIHdvcmtxdWV1ZSB3aGVuIHRoZQo+PiBob3N0IHJlcXVl
+c3RzIGFuIE1ISSByZXNldC4gVGhlIGNvbnRyb2xsZXIgdGVhcmRvd24gb25seSBkcmFpbnMgdGhl
+Cj4+IHByaXZhdGUgTUhJIHdvcmtxdWV1ZSBiZWZvcmUgcmVsZWFzaW5nIHRoZSBjb250cm9sbGVy
+IHN0YXRlLCBzbwo+PiByZXNldF93b3JrIGNhbiBzdGlsbCBydW4gYWZ0ZXIgdGhhdCBzdGF0ZSBo
+YXMgYmVlbiBmcmVlZC4KPj4gCj4+IENhbmNlbCByZXNldF93b3JrIGJlZm9yZSBkZXN0cm95aW5n
+IHRoZSBwcml2YXRlIHdvcmtxdWV1ZSBhbmQgcmVsZWFzaW5nCj4+IHRoZSBjb250cm9sbGVyIHJl
+c291cmNlcy4gVGhlIGNhbGxlciBpcyByZXF1aXJlZCB0byBwb3dlciBkb3duIHRoZQo+PiBjb250
+cm9sbGVyIGZpcnN0LCBzbyB0aGUgSVJRIGNhbiBubyBsb25nZXIgcXVldWUgdGhlIHdvcmsgYXQg
+dGhpcyBwb2ludC4KPj4gCj4+IEZpeGVzOiA3YTk3YjZiNDczNTMgKCJidXM6IG1oaTogZXA6IEFk
+ZCBzdXBwb3J0IGZvciBoYW5kbGluZyBNSElfUkVTRVQiKQo+PiBTaWduZWQtb2ZmLWJ5OiBKaWFs
+ZSBZYW8gPHlhb2ppYWxlMDJAMTYzLmNvbT4KPj4gLS0tCj4+ICBkcml2ZXJzL2J1cy9taGkvZXAv
+bWFpbi5jIHwgMSArCj4+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKPgo+SG93IHdh
+cyB0aGlzIGZvdW5kIGFuZCB0ZXN0ZWQ/ICBXaGF0IGFib3V0IGEgY2M6IHN0YWJsZT8KCmNjOnN0
+YWJsZSBpcyBuZWNlc3NvcnkuIFRoZSBidWcgd2FzIGZvdW5kIGJ5IG15IHN0YXRpYyBhbmFseXNp
+cyB0b29scy4KClRvIHRlc3QgaXQsIEkgcmVnaXN0ZXJlZCBhIHJlYWwgbWhpX2VwX2NudHJsIGZy
+b20gYSBzbWFsbCBvdXQtb2YtdHJlZSBtb2R1bGUoc29mdHdhcmUgSVJRICsgZmFrZSByZWdpc3Rl
+ciBmaWxlKSwKZHJvdmUgdGhlIHJlYWwgbWhpX2VwX2lycSgpIGFuZCB0aGUgcmVhbCBtaGlfZXBf
+dW5yZWdpc3Rlcl9jb250cm9sbGVyKCksIGFuZCBvcmRlcmVkIHRoZSB3b3JrZXIgdG8gcnVuIGFm
+dGVyCnRoZSBmcmVlcy4gTm8ga2VybmVsIHNvdXJjZSBjaGFuZ2VzLgoKS0FTQU46CgpCVUc6IEtB
+U0FOOiBzbGFiLXVzZS1hZnRlci1mcmVlIGluIG1oaV9lcF9yaW5nX2luaXQrMHgxOTIvMHgyNDAK
+V3JpdGUgb2Ygc2l6ZSA0IGF0IGFkZHIgZmZmZjg4ODEwNDI1NzExOCBieSB0YXNrIGt3b3JrZXIv
+MDoxLzExCgpDUFU6IDAgVUlEOiAwIFBJRDogMTEgQ29tbToga3dvcmtlci8wOjEgVGFpbnRlZDog
+RyAgICAgICAgVyAgTyAgICAgICAgNy4zLjAtcmM0ICMzIFBSRUVNUFQobGF6eSkKVGFpbnRlZDog
+W1ddPVdBUk4sIFtPXT1PT1RfTU9EVUxFCkhhcmR3YXJlIG5hbWU6IFFFTVUgU3RhbmRhcmQgUEMg
+KGk0NDBGWCArIFBJSVgsIDE5OTYpLCBCSU9TIDEuMTUuMC0xIDA0LzAxLzIwMTQKV29ya3F1ZXVl
+OiBldmVudHMgbWhpX2VwX3Jlc2V0X3dvcmtlcgpDYWxsIFRyYWNlOgogPFRBU0s+CiBkdW1wX3N0
+YWNrX2x2bCsweDJkLzB4NzAKIHByaW50X3JlcG9ydCsweDE3NS8weDdkMAogPyBtaGlfZXBfcmlu
+Z19pbml0KzB4MTkyLzB4MjQwCiBrYXNhbl9yZXBvcnQrMHgxMzkvMHgxNzAKID8gbWhpX2VwX3Jp
+bmdfaW5pdCsweDE5Mi8weDI0MAogbWhpX2VwX3JpbmdfaW5pdCsweDE5Mi8weDI0MAogbWhpX2Vw
+X3Bvd2VyX3VwKzB4MTBlLzB4YTcwCiA/IG11dGV4X3VubG9jaysweDZiLzB4YzAKIHByb2Nlc3Nf
+c2NoZWR1bGVkX3dvcmtzKzB4N2MwLzB4ZjEwCiB3b3JrZXJfdGhyZWFkKzB4ODk4LzB4YzUwCiA/
+IF9yYXdfc3Bpbl9sb2NrX2lycXNhdmUrMHg2Zi8weDEzMAoga3RocmVhZCsweDJlOS8weDNjMAog
+PyBfX3BmeF93b3JrZXJfdGhyZWFkKzB4MTAvMHgxMAogPyBfX3BmeF9rdGhyZWFkKzB4MTAvMHgx
+MAogcmV0X2Zyb21fZm9yaysweDE4OC8weDRmMAogPyBfX3BmeF9rdGhyZWFkKzB4MTAvMHgxMAog
+cmV0X2Zyb21fZm9ya19hc20rMHgxYS8weDMwCiA8L1RBU0s+CgpBbGxvY2F0ZWQgYnkgdGFzayA4
+MToKIGthc2FuX3NhdmVfdHJhY2srMHgzZi8weDgwCiBfX2thc2FuX2ttYWxsb2MrMHg3Mi8weDkw
+CiBtaGlfZXBfcmVnaXN0ZXJfY29udHJvbGxlcisweDU5My8weDEwNDAKCkZyZWVkIGJ5IHRhc2sg
+ODI6CiBrYXNhbl9zYXZlX3RyYWNrKzB4M2YvMHg4MAoga2FzYW5fc2F2ZV9mcmVlX2luZm8rMHg0
+MC8weDUwCiBfX2thc2FuX3NsYWJfZnJlZSsweDNhLzB4NjAKIGtmcmVlKzB4MTBkLzB4M2IwCiBt
+aGlfZXBfdW5yZWdpc3Rlcl9jb250cm9sbGVyKzB4MTEyLzB4MWEwCgpUaGUgYnVnZ3kgYWRkcmVz
+cyBiZWxvbmdzIHRvIHRoZSBvYmplY3QgYXQgZmZmZjg4ODEwNDI1NzEwMAogd2hpY2ggYmVsb25n
+cyB0byB0aGUgY2FjaGUga21hbGxvYy0xOTIgb2Ygc2l6ZSAxOTIKVGhlIGJ1Z2d5IGFkZHJlc3Mg
+aXMgbG9jYXRlZCAyNCBieXRlcyBpbnNpZGUgb2YKIGZyZWVkIDE5Mi1ieXRlIHJlZ2lvbiBbZmZm
+Zjg4ODEwNDI1NzEwMCwgZmZmZjg4ODEwNDI1NzFjMCkKCk1lbW9yeSBzdGF0ZSBhcm91bmQgdGhl
+IGJ1Z2d5IGFkZHJlc3M6CiBmZmZmODg4MTA0MjU3MDAwOiBmYSBmYiBmYiBmYiBmYiBmYiBmYiBm
+YiBmYiBmYiBmYiBmYiBmYiBmYiBmYiBmYgogZmZmZjg4ODEwNDI1NzA4MDogZmIgZmIgZmIgZmIg
+ZmIgZmIgZmIgZmIgZmMgZmMgZmMgZmMgZmMgZmMgZmMgZmMKPmZmZmY4ODgxMDQyNTcxMDA6IGZh
+IGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiIGZiCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBeCiBmZmZmODg4MTA0MjU3MTgwOiBmYiBmYiBmYiBmYiBmYiBmYiBm
+YiBmYiBmYyBmYyBmYyBmYyBmYyBmYyBmYyBmYwogZmZmZjg4ODEwNDI1NzIwMDogMDAgMDAgMDAg
+MDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAKPT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgpBbGxvY2F0
+aW9uIGluIG1oaV9lcF9yZWdpc3Rlcl9jb250cm9sbGVyKCksIGZyZWUgaW4gbWhpX2VwX3VucmVn
+aXN0ZXJfY29udHJvbGxlcigpLAphY2Nlc3Mgb24gV29ya3F1ZXVlOiBldmVudHMgbWhpX2VwX3Jl
+c2V0X3dvcmtlci4KCj4KPnRoYW5rcywKPgo+Z3JlZyBrLWgK
