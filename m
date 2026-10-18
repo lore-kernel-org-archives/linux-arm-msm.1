@@ -1,279 +1,125 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+Received: from rudorff.com (rudorff.com [193.31.26.27])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 358F83DB63D
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 14:31:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAAA2395AE9;
+	Sun, 18 Oct 2026 14:41:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.31.26.27
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792333918; cv=none; b=rnLAwA8DA+xuoVIDZo+k07zPI2FKKaIQJmTpguVl/G19LSqN6bMRBLQ5eloRhNPdzYkS9pNIXWnY+zzW9cLHyv6XmW0NdK/zbXTxlZs7okkFcEZQ9BRQKu5iKG/WkwH8WaLSUjCxFfdHm/Oxq+QPo7HlxZBElhLt3whu6wVfcIE=
+	t=1792334514; cv=none; b=VTHqzJiXewdSvCcx7Fqcd2qqyESe+ES6pkReM8/Zyak5BjK2o6Gm8cxFCkZd+4d9VHHxwJdaALNZLNBNQZO3ZwaftwFSgDAWFoePf+h0Oq4cPnyzlTAgmNr96ycJA6DG+75Esx/qu+xNoM8dKJeTjXXRmA3tXnAJaWzjbES2AEQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792333918; c=relaxed/simple;
-	bh=NzNRVwVjsWTD8UVC1actwGWsyViFrlnqg11fylj0BqM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=faWzAyPs28Kf+aFjes9rwJz4dtO8TOwFWl9N2icED1/Barc7Qujx3KS1cRrm9V1pR07FpSyD6rvjpgLM+PE97bFBZEj9GOKEHxhNn6hbM0r+X11bXw76g5s+OXAZuxiN2eAQ0TwNaTyFmYrtZoD/kTF11IbmP6zuCWx1cqF50cY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iCh44ljl; arc=none smtp.client-ip=209.85.221.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iCh44ljl"
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-48af4d4e61fso712762f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 07:31:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792333915; x=1792938715; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Z4DinWw4y4cul7vchZoeDhjRTd9lXiDvj9Lx77xpfpw=;
-        b=iCh44ljl9foPqJFmFdKS+4TuNkz5IRohceZN/58qzCgfoYFv9PfHTqv16BCzAFGDm3
-         lGgQgSIy2UJ9wOjWuy0It3ogudT4zGH+JE0AyHPEAokdV7hLwerYodSfyz3KEaUl+cBB
-         u4hK7L/z1Usbz4xxh+ymmofBWdQ6BVhplSqPo2wiABCqlOQWOjUzNA4W/nHh5x5nrgbJ
-         twoXL9Vw7HtbbqWjS9ZMOZbeoZQHLbIAyn8kHN5kg95xsLW83nXcXaIG/qarHS3iecdO
-         6DQ3qkLKKhHXJnh2Y+SjQ0zhJwvLwnbTgreb9ktPgio+Ahu2yeHxoqVBIr876ton6IJe
-         XVIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792333915; x=1792938715;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Z4DinWw4y4cul7vchZoeDhjRTd9lXiDvj9Lx77xpfpw=;
-        b=o6d+KtPB4Vx+qv78P3ZvL2a1n2mOcFVf9DzbyybF2DauFgjbTrquTU/fvN4VY8KZdP
-         zMEnne+Nj33F0tgVZyHqSkAwZA04VwGp01ZsBkWQgEgbNBUAj2xPfVFkFcCzUgiC/XpA
-         WmmLgpB5VbR8CzN7t9uVSHKSKEBnxiSTv3gDaGBPTK6VlR2P/0O+YNTSC80r78jgDZxN
-         bjtG+Y3zrrnYDQVIHqLjH8b8x7TEE+Qpl+HfI28MrfDChQ8Q3KjQXGHMD623gMrW7E/I
-         y2z6b+ALCPg4sMn1HEa+Wljb6xII/oPBfMp2vS3n9hGHsr7ZXiiBzE6WTjBuAWeJ/CiJ
-         AIwQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzW0dA8cgPch816te4CHkCrAOBxKt+XxjF+WJqU9YYFsaG2Y9ywn0dflALI2KtMplhaFBBWbGLyodA1hby6@vger.kernel.org
-X-Gm-Message-State: AFq9FYLCRnqbOYAq1tl4L4BxKg3muWyYWwyYbqzenmwLxpzrBqfFoauP
-	iU+26zNbXC6j0Zi7zzwNzYv8vD2D44IfHj6veP1n4meImCdqi4R/n86N
-X-Gm-Gg: AYBFou14pu2xP8BCb1AKQglfrFVDwmmIh7+2ZY+hPQ1/XNGfBE5iurutjXND4p1QPDf
-	aoP5rHuTjOEhR/X1AU5f/f/4kkjsXvsqDZeWh/U2LR/vbaFiOe1SPBNVihoe2r5c9B5LaOyCkoZ
-	jnAGLDnZVOMYcMpAKXoxRuy0SFRfWEBGln5X02aOEQElJMh25JV4k7nOpFn5G0vkx2ow+4GYo2o
-	THyvSckn4dc6GKd3l3YB9J7sLvZLk9hAlRisFhhHNWp7GQhRsBrz9MnQJJbbzwPlCHNDU7KD0aB
-	VW7uVN182Y/tHu2SVAOPXR6a/+u1gqhQJnDt2lLHazUFLjPF0zEf7hUxuYuKSzgaVzvbTArF/bb
-	pEJCxRu26YiGC/GTh5RvtV/4aOyGUbCXJADD2Sa00lSVhOrlkGvYzgKi1Mj6SsEUiqNNP7FDdWp
-	+mGGEGNr142qoi8rpY8J7uRWAlvDDkIS42MAHIzjWE9MmOl2PpO3H6TAIoxWUieI4LL7mIXHT9b
-	81VR0yDftr0qAKpnDmlYhfdE+Fg24VD+aq6
-X-Received: by 2002:adf:f28a:0:b0:48d:ffe7:e883 with SMTP id ffacd0b85a97d-48e07fab956mr7309333f8f.46.1792333915122;
-        Sun, 18 Oct 2026 07:31:55 -0700 (PDT)
-Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd471a72sm18823645f8f.4.2026.10.18.07.31.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 07:31:54 -0700 (PDT)
-From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-	Faisal Hassan <faisal.hassan@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Vladyslav Tymoshchuk <tvlad744@gmail.com>
-Subject: [PATCH] usb: dwc3: qcom: Defer VBUS override update during system suspend
-Date: Sun, 18 Oct 2026 17:31:26 +0300
-Message-ID: <20261018143126.3978-1-tvlad744@gmail.com>
-X-Mailer: git-send-email 2.45.1.windows.1
+	s=arc-20240116; t=1792334514; c=relaxed/simple;
+	bh=I8YIf9ANv7QI9uSBcR+pF8moTHqSyO/0vMnlBczzJpE=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=WwhASvNdxi5ObdLfTFbjUR05aG/RkrEMIdeuDcXqVgESiC6zAkIv1F8dTbkCfRWstdsb63+1Noq4nqHm+KNZwNyInH9KnTk+WXMeAYxGLo2zocd7C54D2puUpT9zKIOJPy7r578NYBpZDFcMLk3pCS2Z1nAeAX08+e93ZshkSF4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com; spf=pass smtp.mailfrom=rudorff.com; arc=none smtp.client-ip=193.31.26.27
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rudorff.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rudorff.com
+Received: from [IPV6:2a02:3102:b60c:d00:92f6:52ff:0:bd0] (dynamic-2a02-3102-b60c-0d00-92f6-52ff-0000-0bd0.310.pool.telefonica.de [IPv6:2a02:3102:b60c:d00:92f6:52ff:0:bd0])
+	by rudorff.com (Postfix) with ESMTPSA id 1BD87402D1;
+	Sun, 18 Oct 2026 16:41:49 +0200 (CEST)
+Message-ID: <d06d51cf-a53d-4bef-881e-cdcb4925a316@rudorff.com>
+Date: Sun, 18 Oct 2026 16:41:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: "chr[]" <chris@rudorff.com>
+Subject: Re: [PATCH v2 2/3] iio: light: gp2ap002: add led power supply
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: Linus Walleij <linusw@kernel.org>, David Lechner <dlechner@baylibre.com>,
+ =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20261017-iio-light-gp2ap002-v2-0-d6879767a446@rudorff.com>
+ <20261017-iio-light-gp2ap002-v2-2-d6879767a446@rudorff.com>
+ <20261017190006.224b73e7@jic23-hlaptop>
+Content-Language: en-US, de-DE
+In-Reply-To: <20261017190006.224b73e7@jic23-hlaptop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-dwc3_qcom_set_role_notifier() updates the VBUS override in QSCRATCH
-synchronously, from the context of the usb_role_switch_set_role()
-caller. The glue assumes that role switches only happen from a
-freezable workqueue, but that holds for the dwc3 core's mode switch,
-not for this notifier: the UCSI connector work, for one, runs on the
-non-freezable system workqueue.
+Hi,
 
-On SM8750, when the USB cable is unplugged while the system is in
-s2idle, the UCSI connector work for the change runs before the devices
-have resumed. It switches the role to USB_ROLE_NONE, and the notifier
-accesses QSCRATCH while the glue clocks are still off, before
-dwc3_qcom_pm_resume() turns them back on. The access does not complete
-and the SoC resets. pm_runtime_resume_and_get() does not prevent this:
-runtime PM is disabled at that point and the device is still marked
-active, so it returns success without resuming anything.
+In preparation of v3:
 
-While the glue is suspended for system sleep, only record the VBUS
-override update and apply it from dwc3_qcom_pm_resume() once the
-clocks are on. Apply it after the core has resumed, since resuming the
-gadget enables the override and the role switch is the more recent
-event. Serialize the notifier against system suspend and resume with a
-mutex, so that a role switch can't race with the clocks being turned
-off.
+Am 17.10.26 um 20:00 schrieb Jonathan Cameron:
+> On Sat, 17 Oct 2026 19:27:42 +0200
+> Christoph Rudorff <chris@rudorff.com> wrote:
+> 
+>>   	/* VIO should be between 1.65V and VDD */
+>> -	ret = regulator_get_voltage(gp2ap002->vdd);
+>> +	ret = regulator_get_voltage(gp2ap002->supplies[SUPPLY_VDD].consumer);
+> 
+> Ah. I'd failed to register the voltages were being manually set (generally
+> we leave that to firmware in more modern drivers).
+> That rather reduces the advantage in using bulk regulators.  Probably
+> still just about worth doing.
+>
 
-Fixes: 21188e8d6d75 ("usb: dwc3: qcom: Implement glue callbacks to facilitate runtime suspend")
-Cc: stable@vger.kernel.org
-Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
----
-Tested on SM8750 (OnePlus Pad 3; the board DT is not upstream yet),
-v7.3-rc5 plus board patches, with the UCSI connector work still on
-system_wq. The test kernel also has local ucsi_glink and qcom_battmgr
-changes that make a cable plug or unplug wake the system from s2idle,
-similar to Jishnu Prakash's ucsi_glink patch [3]:
-- cable unplugged during s2idle: resumed in 2 of 2 runs; without this
-  patch the SoC reset in all 6 earlier runs. The switch to
-  USB_ROLE_NONE came 14-17 ms after the start of the resume, during
-  the noirq phase, and was only recorded; dwc3_qcom_pm_resume()
-  cleared the override about a second later.
-- cable plugged in during s2idle, s2idle with the cable connected,
-  and unplug/replug while awake: no change in behaviour.
+Yes, this is why I didn't made it in v1.
 
-I have not tested this patch without the wakeup changes.
+> 
+>>   	if (ret < 0) {
+>>   		dev_err(dev, "failed to get VDD voltage\n");
+>>   		return ret;
+>>   	}
+>> -	ret = regulator_set_voltage(gp2ap002->vio, 1650000, ret);
+>> +	ret = regulator_set_voltage(gp2ap002->supplies[SUPPLY_VIO].consumer, 1650000, ret);
+>>   	if (ret) {
+>>   		dev_err(dev, "failed to set VIO voltage\n");
+>>   		return ret;
+>>   	}
+>> +	/* LED voltage 2.4V .. 3.6V according to datasheet */
+>> +	/* We need to check this, as dummy or fixed controllers trigger an error. */
+> I'd make that a multiline comment and say what 'this' is.
+> 	/*
+> 	 * LED voltage 2.4V .. 3.6V according to datasheet
+> 	 * We need to check control is supported, as controlling dummy or fixed
+> 	 * controllers results in an error.
+> 	 */
+> 
+> Do you actually need to control this for your board?  I'm not that
+> keen to replicate the controlling of voltages if we don't have
+> to.  We can't drop existing code as maybe a board is relying on it
+> but we can avoid adding new examples!
+> 
 
-The UCSI side is discussed in Abel Vesa's RFC to queue the connector
-work on system_freezable_wq [1]. This patch is needed either way, as
-not every caller of usb_role_switch_set_role() is frozen during system
-sleep.
+So we don't want to drop all the set_voltage code in general.
+My board does not need that at all, all voltages are already set
+to valid values in DT, ... I hope ... I check downstream ...
 
-Faisal Hassan's SA8255P series [2] also changes dwc3_qcom_pm_suspend()
-and dwc3_qcom_pm_resume() (the wakeup argument becomes a pm_message_t);
-whichever goes in second needs a small rebase.
+So I skip the "example" for set_voltage(vled)?!
 
-I used an AI assistant (Claude) for the analysis and to draft this
-patch and its description; I reviewed the result and ran the tests on
-my device.
+And thanks for the advice to pretty up the code!
 
-[1] https://lore.kernel.org/all/20250205-ucsi-schedule-conn-worker-on-freezable-wq-v1-1-107d1356b77b@linaro.org/
-[2] https://lore.kernel.org/all/20261010053246.2991984-3-faisal.hassan@oss.qualcomm.com/
-[3] https://lore.kernel.org/all/20260722-ucsi_glink_wakeup-v2-1-b43dee56df24@oss.qualcomm.com/
+chr[]
 
- drivers/usb/dwc3/dwc3-qcom.c | 67 ++++++++++++++++++++++++++++--------
- 1 file changed, 52 insertions(+), 15 deletions(-)
+>> @@ -632,9 +650,8 @@ static void gp2ap002_remove(struct i2c_client 
+*client)>>   	pm_runtime_get_sync(dev);
+>>   	pm_runtime_put_noidle(dev);
+>>   	pm_runtime_disable(dev);
+>> +	regulator_bulk_disable(NUM_SUPPLIES, gp2ap002->supplies);
+> 
+> Why at that point in sequence?  You are turning the power off
+> before removing the userspace interfaces which seems unlikely to
+> be race free. More generally it is no longer reverse of probe
+> order. If that is necessary for some reason I'd expect a comment
+> to say why.
+>
 
-diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
-index ac68b4218b56..2997479988c7 100644
---- a/drivers/usb/dwc3/dwc3-qcom.c
-+++ b/drivers/usb/dwc3/dwc3-qcom.c
-@@ -10,6 +10,7 @@
- #include <linux/irq.h>
- #include <linux/of_clk.h>
- #include <linux/module.h>
-+#include <linux/mutex.h>
- #include <linux/kernel.h>
- #include <linux/interconnect.h>
- #include <linux/platform_device.h>
-@@ -85,6 +86,11 @@ struct dwc3_qcom {
- 	struct icc_path		*icc_path_apps;
- 
- 	enum usb_role		current_role;
-+
-+	/* Serializes the role notifier against system suspend and resume */
-+	struct mutex		role_lock;
-+	bool			vbus_override_pending;
-+	bool			vbus_override;
- };
- 
- #define to_dwc3_qcom(d) container_of((d), struct dwc3_qcom, dwc)
-@@ -561,27 +567,40 @@ static int dwc3_qcom_setup_irq(struct dwc3_qcom *qcom, struct platform_device *p
- static void dwc3_qcom_set_role_notifier(struct dwc3 *dwc, enum usb_role next_role)
- {
- 	struct dwc3_qcom *qcom = to_dwc3_qcom(dwc);
-+	bool enable;
-+
-+	guard(mutex)(&qcom->role_lock);
- 
- 	if (qcom->current_role == next_role)
- 		return;
- 
-+	enable = qcom->current_role != USB_ROLE_DEVICE;
-+
-+	/*
-+	 * Not every caller of usb_role_switch_set_role() is frozen during
-+	 * system sleep, e.g. the UCSI connector work can run in the noirq
-+	 * resume phase. The glue clocks are off then and runtime PM can't
-+	 * turn them on, so leave QSCRATCH alone and let
-+	 * dwc3_qcom_pm_resume() apply the update.
-+	 */
-+	if (qcom->pm_suspended) {
-+		qcom->vbus_override_pending = true;
-+		qcom->vbus_override = enable;
-+		qcom->current_role = next_role;
-+		return;
-+	}
-+
- 	if (pm_runtime_resume_and_get(qcom->dev)) {
- 		dev_dbg(qcom->dev, "Failed to resume device\n");
- 		return;
- 	}
- 
--	if (qcom->current_role == USB_ROLE_DEVICE)
--		dwc3_qcom_vbus_override_enable(qcom, false);
--	else if (qcom->current_role != USB_ROLE_DEVICE)
--		dwc3_qcom_vbus_override_enable(qcom, true);
-+	qcom->vbus_override_pending = false;
-+	dwc3_qcom_vbus_override_enable(qcom, enable);
- 
- 	pm_runtime_mark_last_busy(qcom->dev);
- 	pm_runtime_put_sync(qcom->dev);
- 
--	/*
--	 * Current role changes via usb_role_switch_set_role callback protected
--	 * internally by mutex lock.
--	 */
- 	qcom->current_role = next_role;
- }
- 
-@@ -624,6 +643,10 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
- 
- 	qcom->dev = &pdev->dev;
- 
-+	ret = devm_mutex_init(dev, &qcom->role_lock);
-+	if (ret)
-+		return ret;
-+
- 	qcom->resets = devm_reset_control_array_get_optional_exclusive(dev);
- 	if (IS_ERR(qcom->resets)) {
- 		return dev_err_probe(&pdev->dev, PTR_ERR(qcom->resets),
-@@ -756,6 +779,8 @@ static int dwc3_qcom_pm_suspend(struct device *dev)
- 	if (ret)
- 		return ret;
- 
-+	guard(mutex)(&qcom->role_lock);
-+
- 	ret = dwc3_qcom_suspend(qcom, wakeup);
- 	if (ret)
- 		return ret;
-@@ -772,17 +797,29 @@ static int dwc3_qcom_pm_resume(struct device *dev)
- 	bool wakeup = device_may_wakeup(dev);
- 	int ret;
- 
--	ret = dwc3_qcom_resume(qcom, wakeup);
--	if (ret)
--		return ret;
-+	scoped_guard(mutex, &qcom->role_lock) {
-+		ret = dwc3_qcom_resume(qcom, wakeup);
-+		if (ret)
-+			return ret;
- 
--	qcom->pm_suspended = false;
-+		qcom->pm_suspended = false;
-+	}
- 
- 	ret = dwc3_pm_resume(&qcom->dwc);
--	if (ret)
--		return ret;
- 
--	return 0;
-+	/*
-+	 * Apply a VBUS override update from a role switch that came in while
-+	 * suspended. Do it after the core has resumed, as resuming the gadget
-+	 * enables the override and the role switch is the more recent event.
-+	 */
-+	scoped_guard(mutex, &qcom->role_lock) {
-+		if (qcom->vbus_override_pending) {
-+			dwc3_qcom_vbus_override_enable(qcom, qcom->vbus_override);
-+			qcom->vbus_override_pending = false;
-+		}
-+	}
-+
-+	return ret;
- }
- 
- static void dwc3_qcom_complete(struct device *dev)
+Sorry, just a stupid mistake.
 
-base-commit: a90ee4305c4a5df72c11b31dacfdc76e00fcf78a
--- 
-2.43.0
+>>   	iio_device_unregister(indio_dev);
+>> -	regulator_disable(gp2ap002->vio);
+>> -	regulator_disable(gp2ap002->vdd);
+>>   }
+> 
+> 
 
