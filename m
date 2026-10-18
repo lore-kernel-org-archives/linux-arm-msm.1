@@ -1,180 +1,182 @@
-Received: from mta1.migadu.com (out-22.mta1.migadu.com [95.215.58.22])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 702494DD3B9
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 22:44:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.22
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CC2439447C;
+	Sun, 18 Oct 2026 23:03:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792363487; cv=none; b=PYfkXJttRMA/gS0FnFX5nMQ0NW4aVmlkyu6gvCfDG0qXF1+MuAPP1X5NVubgg3QjukX32+pjSpf6nsHHWGABhPSeVjnMQwWET72aJFz39piFBxrLCT8Z9I3FEvb4EI2bUaH9c60tSxLTtOS8nLGyqlbCY7KBZl6XdfIV5+5bK4E=
+	t=1792364620; cv=none; b=eNj4wcikIjhDx8ZtHZwU6CaABnV3T//PUizBpqJjKyCdwBECzcdmYKr5sk0Ih/eVUaO6GDN8mgLBzHubG6QQsnq0yZ6FbXs9HtNwJ9ioY5f5yLyL0jvIi0epNtB5aEUK3dbSTXKfBgTWYRiG3IPyt03XL1/nnE2EB3yTzW5lTiI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792363487; c=relaxed/simple;
-	bh=zWR5OAyWdhXmhQvTQixGFKFnKfWZir2Dn2fJQFSHfXI=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=ggb6t6Hjsz1TGYjgsieI4KiGxjM3ewJantj7XSBBvyxztObSNCG3jiAd3eNXTn2TcjLkth/krOtUIw8KW0d7JeVvR0wq9QAT931YYkb66yKkaBGUAzt3cw7gIYE8D5/iKcPgj7RimbEzInuk/atMiVQtH6LMIKi1CHcZBWYweVY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=AQHcW6GB; arc=none smtp.client-ip=95.215.58.22
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	s=arc-20240116; t=1792364620; c=relaxed/simple;
+	bh=NvIjxg/fWYFUncGbu5m+1h4xWTuPzwp7dT1mrszFrq0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=ZljCe14GxGYe8avLZHxUeSflz0RUOQcLnuppz+sNltK2rXT0w1XYOj4HaWJnaWbEK5R1mX7O8kENdvGWsP9Zp10EC4U2i3CyuVbBrQHNMKGytutac+1R6jiHtmZxeJzY8YpISg8o5Mdo7GSo/hVsiEP5Yn7Venz506XSDDQglMw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=br/t0mJ2; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="AQHcW6GB"
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=zWR5OAyWdhXmhQvTQixGFKFnKfWZir2Dn2fJQFSHfXI=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792363481; v=1; x=1792968281;
- b=AQHcW6GBj/etZQqq+KWhh5fyqPXpAbgNPHRzDTfotoqmQP8EbpDKlkt8uB1o/+nDdMVvJYfx
- aNa5qeVovowbD3fhKRJ0XXJ3AwP9XLNweRM/FpOqxRSqOc61zLENRXILoFo3rfLp99O/M9UtRQ4
- Y95+3oFjHWCE/FaTGfQXArwHWeoP0xj5bKTwmvd7SKRHmD3KehRnWvRofgEqWzdQipwPYihzZq1
- jfZJ2+n74InJDX00ejhSFDgBTFnq/hC8fEmtIwOqhS7ciCO0K18d3Y4XhP4mB4R9DLkDDC75NKw
- VqXT/nnNGsNdHfcZ20wDzvlLZgw6YxNUtmaKDLj1WUWXQ==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 2579d1d25b7eaed8;
-	Sun, 18 Oct 2026 22:44:41 +0000
-X-Mizu-Trace-ID: 2579d1d25b7eaed8
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <7d1fd5e4-a35a-4675-8b0c-005e9f022646@packett.cool>
-Date: Sun, 18 Oct 2026 19:44:31 -0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="br/t0mJ2"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 23BC3C2BCF7;
+	Sun, 18 Oct 2026 23:03:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1792364620;
+	bh=NvIjxg/fWYFUncGbu5m+1h4xWTuPzwp7dT1mrszFrq0=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=br/t0mJ2jCBR1hCwRRhSyjL+TfNLmuf8SBeZoHRb2GslshwTU/atUIH/GeV1ASK/Y
+	 1fXhZtO1gMcofawPIntLLEdNGyM3aW9Y/cx/XeNHj/4yP0ZyEBb+g0HVbT2Xe6E2xs
+	 Wmi3m6qmRH6r/2AoPg06ezTSY5OwDAgN9Y2uaSjpz0EEy9Yq8lDsxQ+/M9eZ/ILwkL
+	 yTFEK96l20wUZb+2su8sn0Qwjc0Ln8eoBmSAO0ADNsykpq5uRfcBsvyj0p3p2OzRp/
+	 Waz66nq7QNonKNdbRHjQxK6Kcv95X2+9WK8HEAIzce6sViQUf9sCU4MgiIMLrXYDDM
+	 nYSjSFmR9qbUA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05713CCA490;
+	Sun, 18 Oct 2026 23:03:40 +0000 (UTC)
+From: Rinat Muhamedgaliev via B4 Relay <devnull+rinat.muhamedgaliev.gmail.com@kernel.org>
+Date: Mon, 19 Oct 2026 02:03:39 +0300
+Subject: [PATCH v7] power: supply: bq27xxx: detect bq27541 behind bq27411
+ compatible
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ASoC: codecs: aw88261: complete the start at trigger
- time
-From: Val Packett <val@packett.cool>
-To: Vladyslav Tymoshchuk <tvlad744@gmail.com>, Mark Brown
- <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
-Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Srinivas Kandagatla <srini@kernel.org>, Luca Weiss
- <luca.weiss@fairphone.com>,
- Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
- Federico Amedeo Izzo <federico@izzo.pro>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
-References: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
- <58c229e2-ee81-4b75-92e9-1eaee2d19d0b@packett.cool>
-Content-Language: en-US
-In-Reply-To: <58c229e2-ee81-4b75-92e9-1eaee2d19d0b@packett.cool>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261019-master-v7-1-a1fc488d9c77@gmail.com>
+References: <20261019-master-v7-0-a1fc488d9c77@gmail.com>
+In-Reply-To: <20261019-master-v7-0-a1fc488d9c77@gmail.com>
+To: linux-pm@vger.kernel.org
+Cc: pali@kernel.org, sre@kernel.org, afd@ti.com, 
+ konrad.dybcio@oss.qualcomm.com, david@ixit.cz, krzk@kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792364618; l=3405;
+ i=rinat.muhamedgaliev@gmail.com; s=default; h=from:subject:message-id;
+ bh=u6AybZx90IGQ0lK+NcGvrAL8vA4kcBYcEKv9GZFRxvU=;
+ b=Rj7mh+r7Fgm4ai3tRsy/ikhnOQvtT0L9fdt2i+andL5pq+MUibtwVXMc7mNX0ASKsWqSzamJ4
+ uiDy6cWkBgiBSuBPltqeWP5XUvKxMq/Xtz1/YBYddmmmebvu1qwnHGN
+X-Developer-Key: i=rinat.muhamedgaliev@gmail.com; a=ed25519;
+ pk=qkYQO8LRlRErWiLzlpK8jHbRIxv8+7v06+ytcxX8mec=
+X-Endpoint-Received: by B4 Relay for rinat.muhamedgaliev@gmail.com/default
+ with auth_id=1072
+X-Original-From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Reply-To: rinat.muhamedgaliev@gmail.com
+
+From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+
+OnePlus 6 and 6T replacement battery packs may contain either a bq27411
+or a bq27541 fuel gauge at I2C address 0x55. The device tree currently
+identifies the gauge as bq27411, but a bq27541 uses a different register
+map and then reports invalid battery values.
+
+Read the DeviceType control subcommand when probing a bq27411. Keep the
+existing profile for DeviceType 0x0421, but select the bq27541 profile
+for DeviceType 0x0541. This retains the established DT ABI and supports
+replacement packs without introducing a generic compatible.
+
+Tested on OnePlus 6T (fajita) with DeviceType 0x0541: voltage, state of
+charge, and temperature were reported correctly. Testing on hardware with
+DeviceType 0x0421 would be appreciated.
+
+Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+---
+ drivers/power/supply/bq27xxx_battery_i2c.c | 67 ++++++++++++++++++++++++++++++
+ 1 file changed, 67 insertions(+)
+
+diff --git a/drivers/power/supply/bq27xxx_battery_i2c.c b/drivers/power/supply/bq27xxx_battery_i2c.c
+index 94b00bb89c17..a9982953e4f2 100644
+--- a/drivers/power/supply/bq27xxx_battery_i2c.c
++++ b/drivers/power/supply/bq27xxx_battery_i2c.c
+@@ -16,6 +16,11 @@
+ static DEFINE_IDR(battery_id);
+ static DEFINE_MUTEX(battery_mutex);
+ 
++#define BQ27XXX_REG_CTRL		0x00
++#define BQ27XXX_DEVICE_TYPE		0x0001
++#define BQ27411_DEVICE_TYPE		0x0421
++#define BQ27541_DEVICE_TYPE		0x0541
++
+ static irqreturn_t bq27xxx_battery_irq_handler_thread(int irq, void *data)
+ {
+ 	struct bq27xxx_device_info *di = data;
+@@ -136,6 +141,56 @@ static int bq27xxx_battery_i2c_bulk_write(struct bq27xxx_device_info *di,
+ 	return 0;
+ }
+ 
++static int bq27xxx_battery_i2c_check_device_type(struct bq27xxx_device_info *di)
++{
++	enum bq27xxx_chip detected_chip;
++	int expected_type;
++	int ret;
++
++	switch (di->chip) {
++	case BQ27411:
++		expected_type = BQ27411_DEVICE_TYPE;
++		break;
++	case BQ27541:
++		expected_type = BQ27541_DEVICE_TYPE;
++		break;
++	default:
++		dev_warn(di->dev, "expected DeviceType undefined\n");
++		return 0;
++	}
++
++	ret = di->bus.write(di, BQ27XXX_REG_CTRL, BQ27XXX_DEVICE_TYPE,
++			    false);
++	if (ret < 0)
++		return ret;
++
++	ret = di->bus.read(di, BQ27XXX_REG_CTRL, false);
++	if (ret < 0)
++		return ret;
++
++	switch (ret) {
++	case BQ27411_DEVICE_TYPE:
++		detected_chip = BQ27411;
++		break;
++	case BQ27541_DEVICE_TYPE:
++		detected_chip = BQ27541;
++		break;
++	default:
++		dev_err(di->dev, "unrecognized DeviceType 0x%04x\n", ret);
++		return -ENODEV;
++	}
++
++	if (detected_chip == di->chip)
++		return 0;
++
++	dev_warn(di->dev,
++		 "detected DeviceType 0x%04x instead of expected 0x%04x\n",
++		 ret, expected_type);
++	di->chip = detected_chip;
++
++	return 0;
++}
++
+ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 				     const struct i2c_device_id *id)
+ {
+@@ -169,6 +224,18 @@ static int bq27xxx_battery_i2c_probe(struct i2c_client *client,
+ 	di->bus.read_bulk = bq27xxx_battery_i2c_bulk_read;
+ 	di->bus.write_bulk = bq27xxx_battery_i2c_bulk_write;
+ 
++	/* Add fuel gauges with supported DeviceType reporting to this list. */
++	switch (di->chip) {
++	case BQ27411:
++	case BQ27541:
++		ret = bq27xxx_battery_i2c_check_device_type(di);
++		if (ret)
++			goto err_failed;
++		break;
++	default:
++		break;
++	}
++
+ 	ret = bq27xxx_battery_setup(di);
+ 	if (ret)
+ 		goto err_failed;
+
+-- 
+2.56.0
 
 
-On 10/18/26 4:20 PM, Val Packett wrote:
->
-> On 10/17/26 7:00 AM, Vladyslav Tymoshchuk wrote:
->> The amplifier is started from the PRE_PMU event of its AIF widget, that
->> is from DAPM in prepare. aw88261_dev_start() waits up to 20 ms there for
->> the PLL to lock to the bit clock and powers the amplifier down again if
->> it does not.
->>
->> The Qualcomm AudioReach backends only start their graph, and with it
->> the I2S/TDM clocks, in trigger since commit b54a38af7138 ("ASoC: qcom:
->> q6apm-lpass-dai: move graph start to trigger"). There every start fails
->> with "start failure (-1)" and the speaker stays silent for the whole
->> stream, as seen with six AW88261 on a TDM link of SM8750.
->>
->> Split the start at the first step that needs the bit clock, the PLL
->> lock check, whatever the host does:
->>
->>   - PRE_PMU clears power down (PWDN), configures the I2S interface and
->>     the PLL and writes the boost settings of aw88261_reg_force_set().
->>     The amplifier stays powered down (AMPPD) and muted.
->>   - The unmute, called after the trigger of the CPU DAI with
->>     .mute_unmute_on_trigger, does the rest: it checks the PLL lock,
->>     clears AMPPD, checks SYSST, enables the feedback and unmutes. If the
->>     PLL does not lock, "start failure" is logged, the amplifier is left
->>     as PRE_PMU left it and the next trigger start tries again.
->>   - The mute in trigger undoes the unmute (mute, feedback off, AMPPD),
->>     and POST_PMD sets PWDN as before.
->>
->> So only the steps that need the clock run in trigger: 14 register
->> accesses and 1 ms per amplifier for the unmute when the PLL has locked,
->> 12 and 1 ms for the mute. The same steps run there on hosts that have
->> the clock running from prepare. aw88261_reg_force_set() only writes
->> boost settings and now runs before AMPPD is cleared rather than right
->> after.
->>
->> wsa883x and wsa884x split their start the same way, with the
->> configuration in DAPM and GLOBAL_PA_EN in the trigger-time mute. The
->> vendor driver of this amplifier family (aw882xx) also starts the
->> amplifier from .mute_stream, with the same sequence.
->>
->> The register accesses go over I2C and sleep, so they need a nonatomic
->> trigger, which the Qualcomm DPCM links using this codec have. On an
->> atomic PCM, as seen from substream->pcm->nonatomic in .startup, PRE_PMU
->> does the whole start as before and the mute callback does nothing.
->>
->> POST_PMD can also run for an amplifier that was never powered up, as
->> seen when the card is registered, so make "already power off" a debug
->> message.
->>
->> Assisted-by: LLM
->> Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
->> ---
->> [..]
->> +/*
->> + * First part of the start, which does not need the bit clock: power 
->> up and
->> + * configure the I2S interface and the PLL. The amplifier stays 
->> powered down
->> + * (AMPPD) and muted.
->> + */
->> +static int aw88261_dev_power_up(struct aw88261 *aw88261)
->> [..]
->> +/*
->> + * Second part of the start, which needs the bit clock as the PLL 
->> locks to
->> + * it: check the lock, enable the amplifier and the feedback, and 
->> unmute.
->> + * On failure the device is left as aw88261_dev_power_up() left it.
->> + */
->> +static int aw88261_dev_enable(struct aw88261 *aw88261)
->> [..]
->> +/* Undo aw88261_dev_enable() */
->> +static void aw88261_dev_disable(struct aw_device *aw_dev)
->> [..]
->> +static int aw88261_dev_start(struct aw88261 *aw88261, bool enable)
->
-> "power_up", "start", *and* "enable".. this naming is a mess now.
->
-> Would be nicer to make the *names* more descriptive of what's actually 
-> being turned on/off.
->
->> [..]
->> --- a/sound/soc/codecs/aw88261.h
->> +++ b/sound/soc/codecs/aw88261.h
->> @@ -564,6 +564,8 @@ enum {
->>   enum {
->>       AW88261_DEV_PW_OFF = 0,
->>       AW88261_DEV_PW_ON,
->> +    /* powered up and configured, amplifier off: waits for the bit 
->> clock */
->> +    AW88261_DEV_PW_READY,
->
-> Would make more sense to stick the intermediate state in the, well, 
-> middle. And rename the states to something that makes sense like { 
-> OFF, WAITING_FOR_BIT_CLOCK, RUNNING } instead of making everything a 
-> comment like the slop machine left it.
->
->> [..]
->> base-commit: 0f8bc3b93b76d16682a4d4999f9559b1e18016f9
->
->
-> It does work here, anyhow, so
->
-> Tested-by: Val Packett <val@packett.cool> # sm7325-motorola-dubai 
-
-
-Though after this last reboot now, it's weirdly stuck when on the 
-speaker profile, changing the volume did not play the "boop" sounds.. 
-(nothing appearing in dmesg).. until I switched to the earpiece profile, 
-when a big bunch of those played in a row!
-
-Not guaranteed that this is related to these driver changes, but 
-suspicious..
-
-
-> Thanks,
-> ~val
->
