@@ -1,110 +1,102 @@
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8D2E4DE717
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 21:38:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F178B4D4873
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 21:56:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792359498; cv=none; b=lf1iuzP8P8SP5XRgCKzBPLMj0Gm/VHZnEoCBwTAws4f7pm3Oegk3Pkv1ey3aAaI3KNpsYjk0WJyQrZumzxPoMMKbEYGf4i3aKc9Kfogud2mCpOPmHlq5D0+lynpnWG1NYNPC+kHJLSD0tQtnHhq9sl8DZHfVTI7LRm9qUZnwxlo=
+	t=1792360613; cv=none; b=Ezn3ums21dhhGpVmRR0xk58UOBg6nTB5xSNxkovPjcaIFP1uPped+GbwguIna/YJ/pyO/SjjN/5LBah69/cufxettS9ZYv7SN9GSNc7sayA0ubFcEDgoUf58sm39nX4HkfCK/ZwN5ZaOX26APuBvRsi+j0qLSaM9Lx6oaBZgJMw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792359498; c=relaxed/simple;
-	bh=r75zBVmugnnLzV+NcNmRfpcT5eTmGOYD4BVPBqzaA/A=;
+	s=arc-20240116; t=1792360613; c=relaxed/simple;
+	bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=oddL2Wysz4tGuTuSnJAGv+WAt3BNth4HM/d4tUwWflNfUcQ3uoWES2fGVF+14vB9GMvvBdTUUt+ExmldfOyvphxu+Ps32bcBJX1csXOgssXVKwk+4Hz6vYQPXJ3zyXXpesXrfDCLwrGBtEFlVGB5bXf/AdMZMGUB/vhay67RqNI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UZ4IuHny; arc=none smtp.client-ip=209.85.167.49
+	 MIME-Version:Content-Type; b=p7flKNoAFqCXmxSakM3TaqkVSRT0MbOeFce/jtaZleS1dgBjCpiaA6ae+tP4JlhuEblVIKgH92rg6nvMK+0k1QRNIyktS6Ft4Pf6xbAFfOGGpRJej0II5IrSLGuwFjaVxqhfj4vTx2IaTR9AUJvT0D+yVL/FzeOiER89jgZT6j8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dkuZ9Q/5; arc=none smtp.client-ip=209.85.128.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UZ4IuHny"
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5ba35c0df4fso1494331e87.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 14:38:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dkuZ9Q/5"
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a1d293b293so8144725e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 14:56:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792359495; x=1792964295; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eqnHzvfmWXKTXBUOY4n+0mAVt82slF3AITsKMweBycc=;
-        b=UZ4IuHnyZc4V19WnHhuuEaIecdmf1ikMb9OBxJVAMjgLQUpYPbyFr19LqPvE7DMtwe
-         Jq1TzK+CMyiQCJdbuedDJVXSNCzB+c1UH1Ion1TmL8TKkSavhwPjJa+UKU3wYOnowgSz
-         uKiJ/2vCpvUc1Ez/PnUQ9Y9g30bWDKTvJIawwcB5PdvGvqvmc048c1G3sECIZ1WjRolH
-         6vent1xicYEozZtYwvvR+Iryaaa8blZCrzJ9vwbRlajTLteNJlnGZjwxICbjRM1MRPOt
-         Ejj0Rt2AfkyqaWkzoZnAeoMBXnavjBTEBb4Nt8VNXGrirglkozKv3fjjTKyc24i5twfe
-         fSvA==
+        d=gmail.com; s=20251104; t=1792360610; x=1792965410; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
+        b=dkuZ9Q/5Ru9bka7HA3KLJEWF1aipaZIimkgOkFJAHjH3/wRansfkWLXR+GfG6o2faA
+         gCBad3VKmOXsdjqj4Cyn1Yp2BjDUynf2fBU5TWQGf8YY45MJeXmJqbduXQ7vkWzVdwe9
+         /eOZSB/E6iYJLNdvHpSK5zagER5QSOGnhftVvZUnE/0UsBoyX07A53aaOUjxes7mtqzO
+         LNo908+YVCyRSGtkPeT1H1WfY6XZxuz7+04u1mow0sBwM2FxktdqZaLX7UPGaNbKU2x2
+         Uqw4XlK7DKTKHF5tMH2f7UuCpKzKtRCNuafVCSzPVxZd/Xh8wC2VuzyRheZIB2fVlvUx
+         LFbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792359495; x=1792964295;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eqnHzvfmWXKTXBUOY4n+0mAVt82slF3AITsKMweBycc=;
-        b=NUpVjxbxcDneZODZ/qzg77gL3imCK04T/A4iPD/StAt60XvQOOowVuNuBIQwPeQdbt
-         mMg9iBn5eV/HqVXRaEIsW9bQnMqDddcoVfr8FsIFU4hEx+K1dJiJ7eCqsFT3Cd+5SNh2
-         uWeRVZNm3CZ9doVc4ffi4op1xDPlfKnCPs2pH2uIegNeyhAk3wtEW+Kbfe8wTSLJjCe1
-         LWURGeB67by8VDRRw8UJLZ5hZpTjGieP8rnFdGRd3g5sAko60jm2vFvhzLIKSAo8+ZYJ
-         CycagCFglGETK/RGBNzUET48jGvlC1xiyqKhaFzQSYzqZKQuUYDPp2mUmFA/H12b+Y7O
-         bdiQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwwuKw5vqWppIZlsPmS8KkuLHtJWRoqhwLCG6Jl77t/+Ji4QL5OudWE3IYQzSFV+hW5gyGeQh1qHfh80w5D@vger.kernel.org
-X-Gm-Message-State: AFq9FYLvmx9m+6xYAd/Ju5Mpr473AsB2Od5kTonr9vbaA8MbNeMaUy/v
-	NeQB3/lLIvL7nulMLQ2XSJsP99QoOmiADtpkzsnEAQkBnSlwInNK9oZR
-X-Gm-Gg: AYBFou1xrmDGgitU6vRsHVsPqy2xn9zrLGsTz9G9PmML0GCKrbGfjIM0O2FzBGjQW7F
-	ay7d1gWVQkjhzpdopiFDgpfH+Q6Ks49ZTpCYc/mfL+OP2++JkKNkCRhUdmWSvHdOvUIutDtMkOM
-	NM34kWwmt+cR8S+HWJtLcueJdyz7friIAZh5NBgb45Qtu0v6vLTDROsSGXwAjv22u8F6zBIjxBw
-	+XvTpJhbaVQ9Jxc4q+SKwU4ASnMGhVlcEzp5f1GCWB1+Pez/JX1Bp2Mu0ZqRUyoX4Kjp3xjZwJa
-	750I1tIg6FLwcLwuoFzZuzhoN+i0wz62RlcQM23UH6wOEFDq3JHEp6P6BYccAKu9UvIrexNHWwV
-	e3b/ZSzkHc86z6sI5B6Hgp5SzlaDREVu+e+UZBNbC8aGLKi1zWM3ow0aEzzNK/oTyBwrnpY668m
-	pc2k79kOkh3oacmKWNdcWxMsuOA+OIitEGkuHGfc+l7Oi39hFZjLLeB4mLDJUQoIsieRux2u/5n
-	h5LGGbXw54OySgj5Llyp32pNhJqkGqYKtJczVqJh5wEbtSzg/SG6cwDhR8+rCAgj54f2CddKwiT
-	rU+10O4=
-X-Received: by 2002:a05:6512:2349:b0:5be:58ad:1b93 with SMTP id 2adb3069b0e04-5be58ad1d08mr677208e87.15.1792359494523;
-        Sun, 18 Oct 2026 14:38:14 -0700 (PDT)
-Received: from yantra.. (nekmmqtaaozvmkd1587-1.v6.elisa-laajakaista.fi. [2001:99a:d7d:c300:5185:c9b3:741a:edb7])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a3fcf07sm1584244e87.3.2026.10.18.14.38.13
+        d=1e100.net; s=20260707; t=1792360610; x=1792965410;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
+        b=dg3H+q3IcKuAk7hBAkmUxeKU465fgT2ApLSByGWF7Gedap0wE9p8bTMkc6xACwh6lE
+         lS1g4PlKU8rU1AgqvLrnCiBGvhqXwS1gErCqnbCyw//Q6fGNTpcLf3Ffy2ZIC9ZlDSJZ
+         88cllgjgwp9yyVwP5mmDY/gOQuOnrETINDZ9by4/Kl7w7xxf1BlGYIdLahTRz1E3GXda
+         Bvc5PGE/4XoJHdwuJiiAE32uvc3DH4bcz0DNl+/PqkX1AmNGYmdT4WIAt7WhC1h3mDAM
+         dWdMEMbhM4idzFO0qMoMmxYvCafw+1KZCZ00U6cE88BDs1bvU/va2HW1AXoR3ji2K593
+         jmSg==
+X-Forwarded-Encrypted: i=1; AKwUvBwCBCTSbWbkwnfC51g5FkpFC4Nf/DMfSA5TJ6XyHvnezrt3vCMKk4G1kDciUT8iTrFfL9ey+lvlYqg8FI/u@vger.kernel.org
+X-Gm-Message-State: AFq9FYKZmKeizEYqNxP6BG3ebihmB+1wd2hOF8bN/yLPUvKDhzrBcd62
+	SGLvaDmXbHZ/cNGPpp56mC5kMHvAu7zMua+O8agFsmj302J01uc+VA+D
+X-Gm-Gg: AYBFou2UxLiZ4LFQoO2279EbZN1kB4OGc+W/RhVZifUs8O5YNhy6zlBqzBZMSgg0mIW
+	kVoHNCUSsBipEvZFO4VaIvCcJduyJlqVDFk84pA8uStaQktGlGgRRuDmlb0JjnSJm4UHSOtvl66
+	c2XRDsGfhoRIBO7zGbr/Lln6MXNrTyXf0uEP59UnWMRiagZoLfhiyDKOUA27BTmHR7cNH5jQpF4
+	YwH8a4RTf0YsXVMPBU5SluNXqnNISmuEjOfzwPjr9hHoHXf1ew2PCt3b3ryztmMXnUuV/vegm/0
+	RCtXmBUfAW2lIVx0zkPa0Eyy8IPY4Tk6Ga2JWNNU0/evu7qM/P5XLuhUaw2gcWBHRnfr5kh8Cho
+	0Q5EOmPSPOyyhp6JMcqZp4m8rA4RZ//Ehic986EmjhepsTN2s5MXS2/6HhSdjziwOfyJa3stwQw
+	QWwIjkPMINtX1OsQlUi9kX02z9EWjk0YlIbaCQWOGD30nOobAEeZhYgUA4f4i1WQX6cStevCiYe
+	SQK5GclZO05siiaZZOKiHwlyaiMEyROnT+uTLGg7Zc2a/ytR/HkBvfmfM+HzClGQCWinNSnzE2u
+	nMraOlJdReg=
+X-Received: by 2002:a05:600c:190e:b0:4a1:90d7:88a8 with SMTP id 5b1f17b1804b1-4a1d76106c0mr131795365e9.25.1792360609943;
+        Sun, 18 Oct 2026 14:56:49 -0700 (PDT)
+Received: from hermes-agent.lan (228.red-80-29-82.staticip.rima-tde.net. [80.29.82.228])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd91c55bsm278449055e9.0.2026.10.18.14.56.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 14:38:13 -0700 (PDT)
-From: Rupesh Majhi <zoone.rupert@gmail.com>
-To: andriy.shevchenko@intel.com
-Cc: Andy Shevchenko <andy@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+        Sun, 18 Oct 2026 14:56:49 -0700 (PDT)
+From: =?UTF-8?q?Ram=C3=B3n=20Jes=C3=BAs=20Miranda?= <ramonjesusmiranda@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>
+Cc: sashiko-bot@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-iio@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on mutex helpers
-Date: Mon, 19 Oct 2026 00:38:12 +0300
-Message-ID: <20261018213812.56858-1-zoone.rupert@gmail.com>
+Subject: Re: [PATCH] drm/msm/dpu: keep vblank enabled when entering self refresh
+Date: Sun, 18 Oct 2026 21:56:48 +0000
+Message-ID: <20261018215648.1329624-1-ramonjesusmiranda@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <asIRkK-uUz4FKQBN@ashevche-desk.local>
-References: <20261003214516.128573-1-zoone.rupert@gmail.com> <asIRkK-uUz4FKQBN@ashevche-desk.local>
+In-Reply-To: <sashiko-outbox-176261@kernel.org>
+References: <sashiko-outbox-176261@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On Sun, Oct 04, 2026 at 11:42:56AM +0300, Andy Shevchenko wrote:
-> On Sun, Oct 04, 2026 at 12:45:16AM +0300, Rupesh Majhi wrote:
-> > The __acquires() and __releases() on adc5_gen3_mutex_lock() and
-> > adc5_gen3_mutex_unlock() name adc, a local declared in the body. With
-> > context analysis enabled for this file, the build fails:
-> >
-> >   error: use of undeclared identifier 'adc'
-> >
-> > The lock and unlock are split across these two helpers for the ADC_TM
-> > driver, so mark them __context_unsafe() instead.
->
-> Doesn't sound right to me. The __acquires() and __releases() IIRC are sparse
-> annotations. If clang has something special, it needs to be addressed in
-> the compiler-clang.h, no?
+Thanks for the review. Both points look right to me: the self refresh
+exit path in dpu_crtc_disable() returns early without
+drm_crtc_vblank_off(), and with vblank_disable_immediate the vblank
+worker can end up touching DPU interrupt registers after the last
+runtime PM reference is gone.
 
-Sparse support for them went away in v7.0 with 5b63d0ae94cc
-("compiler-context-analysis: Remove Sparse support"). They are now
-defined in compiler-context-analysis.h and expand to clang's
-acquire_capability() and release_capability(), or to nothing.
+Please consider this patch withdrawn. I will look at keeping the vblank
+IRQ path consistent with the self refresh entry/exit (and the runtime PM
+reference) and send a v2 if I get it right.
 
-The argument is parsed at the declaration, where only dev is in scope,
-so no header change can make adc visible there.
-
-Sorry for the slow reply.
+Thanks,
+Ramón
