@@ -1,73 +1,85 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 299A1435EF0
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 15:54:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56F32445AF2
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 15:54:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792338868; cv=none; b=K/uEF5Lh/m1F8n6RYhMLL71tHZNq0jdU0skwMW65evu5YwktPZ/4hnBMulgIvU0g26lWlYSIvhZJDfIDj3deVSxP9hlqZYQGtoFn+t4GhQHejoKTVWmnZzvvXEGvVWNR80exnG9rX2pbx6Z9v4J6HZ+PEpvaaT8DUKUMgolH8HM=
+	t=1792338869; cv=none; b=fXABvBsIYMT5sF01FaHjQoE3ludHzZsPeKjE3Q6dk4RTtxlGN0Q1wDTYH/XkqmF7ZWT4++FFtkqBvxN6WpoiNgABuGdTv9FEyQxmtyfysbKNgSDclVBZ88cFSn2QfLadIZliHCR0tyMg8eHn/dRwPKj3nFtcfDsg472DpIg3qQY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792338868; c=relaxed/simple;
-	bh=Npwl5Y4BXmuE1JUaZbnqNFF0MT50x/Td5idKQKTMGV4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=G2cHHx6Qvb/XU6PxZQpiEvqX+5p4uI3kzvpoFAp/2VO5Y8zY0iQ0q2VCaTa7r7hVuE5GgDg8o0adK7a/UP1/V1aELNZjsYfQQA94qX9cqU+pkIYVN87nQmfAfRv/ICijI6AolgAl2B/fhLZpvt+sJMCVWLK+TypG9ql5jb/k4Ts=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aJzQuluI; arc=none smtp.client-ip=209.85.221.49
+	s=arc-20240116; t=1792338869; c=relaxed/simple;
+	bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=YVUcF7+geKNU3dG8RrZUQsRzibqxsv+9+Mq4etdimwFUg7mn6LCe+woX3hmjrP//Zt+HI5D6uTCeU7e8zjiqaZrkscbljl0DgrVQ5XzxKMPDBrmSQndElUt8e0zWhXecf2+AfEI7hJidom7RRFSYM3KDnYIF3S7yFTCaQ71wbWY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aUa7ebE7; arc=none smtp.client-ip=209.85.128.41
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aJzQuluI"
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48441a2ba1bso676358f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 08:54:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aUa7ebE7"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a1dede3c2cso12010775e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 08:54:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792338865; x=1792943665; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0f6IrbN8Z9V/G/koB8npxGiR7EDYYZa+mjR6E8dRjX8=;
-        b=aJzQuluI+7mGAvh2MNDqVnSBpZRAboWk1jLYuZVyIC5MtU1rtJEqxWrLnln0xHyg0V
-         nzdCl1kJc6ENvjVNu+r0ru84BbGBEtulEnzVV7pIsNkxkNTLYLDHgmn/adTM8Wxci4bQ
-         aXmRxPZCcs2BkKbNk9iMnJYcHNiVr2E8+oi8RFvs7PoMSiVd+G1JzhV71SpfKv2KHOiA
-         rqZvBFeNaHWwlzuJ5/a094I9Y26kiCJJNE4/NJQ5yaNWFgnf/tf5fG1p02AehRH2A9ec
-         232kJLLDiZeBE1/RPYwvwroYa9Hn0mPAFpGLbIQ8LqCuR364qIJdZKc/MhG5QFgwNPmw
-         3Qag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792338865; x=1792943665;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1792338866; x=1792943666; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=0f6IrbN8Z9V/G/koB8npxGiR7EDYYZa+mjR6E8dRjX8=;
-        b=M2CWA66hjUAcflWJiO9tIH7AgMG2Sy2byuKLMsTbBk1HOSSxPQFZPGHAT3cNQPLmqG
-         BdCkE4dmEJsT0PEtOwKMGieGq48kJHj5HdxNlEzzL4bmseZxncOGaQZz9Zw1zrKo4AkC
-         10ptXFwiYsWpvcz8fGU4LtX2exM7/Mo8E74lsPqI7Ldn1izwch68/ZcB4rKBC0Bq0h4D
-         fGVQHM3k1i1ZElzBUR2AGLkQCv+QPfA3A8t/lO4/0wlM4uEl6tsBIovFJwmE8Fgmrghs
-         LucDRQ5kvFm4fg7cH6kkzIp4nGI98O/+utwdeR85gk2ugk77PMTC0SUsqgcOtwlBvLax
-         11uw==
-X-Gm-Message-State: AFq9FYL3pAMczUUfzMXmFwJk1GFd2ndhDbo3NL7D2VNAZcJHY/mgehyq
-	2yhXri3x7IakQBEvcRNVsHoa5T0SyFcS0S74YDocfW8bkd1crTndXQAj
-X-Gm-Gg: AYBFou2ayfc20pirJK2nzz4A4HedRHVREZrMYw9wkL6LFinRKzpBvEpbVCKoAPbg6Kl
-	C4cXpCVmLb9NFbgBA5aX/VV5gS5IWCQHfuY1VpbbvcXvOwH6hBOXH30oXApo69It0jOFlnTvvV+
-	lobfZqBrR8h47FTl6YiucIqF8Mph+oaXQfDCr0QXUhrgyL02uw3bPej5pPy/obMf7r3FAWihdVG
-	9aNUypzM4tzbFbzDkyJdcpxkAP9CIZy6rasCKddmM+rm1S8KRU2WCG680zYyLwrCGGALXJ0emM5
-	9WKRNFQ7EDeE9Z0UyMrTX/K+Msl+nzwZq9L6Op9kdG2F2BvgSg8McKQ+oP1L5bVjHMEAuNhg/sH
-	qF4FLxilZcJdYhaCBb9F50AGw/bvvWjsU2jQUtVuLoNAIHf92WO/dTfXX9WuGpdn0THehJQCyK8
-	FmX3lQ7SOvCDHLtrI8taDQpU+WeZ/O/EW4W2My6rquUPeJBin8PgUKhv1YXnEXxJ8rzOThCiH7/
-	cKI8Dad8Df3YFGvH5TSd3WZ0x1XNG+7XQ/dCdnjQOJAJ04KVPIsmY61PjWEtBrojG0J2oqKt38e
-	DwnqzfWpmuI=
-X-Received: by 2002:a05:600c:620d:b0:4a1:946c:953d with SMTP id 5b1f17b1804b1-4a1d76254eemr133559565e9.27.1792338865269;
-        Sun, 18 Oct 2026 08:54:25 -0700 (PDT)
+        bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
+        b=aUa7ebE73UwZVE4PgjDEGUbVxjNzSBL7rA/IBW+retNCeKe4sogMYJ2jIlON+gxWp7
+         2cmBMPFiR9o9QFDyQx2YRh8ueS9mfomjs561Iiry2zkfGnRiJQSPyvQhHBZCLMHSF/vy
+         htZSZM8PYMj9kNw8SDHXwrkVcOJn8SWjwPDexl9QYm4piY7MArp7cVQccnsuhp02cbs6
+         NI5tmn7KUTg9bn5hzAa4VYfmGkjXKoRKkgqpxeUBwjPTIGsgpq8wMJgyG9g7x1rPk8B/
+         d8jHFBbYeWgIMt1QlTYMXtt0hIUVGPm8S7Ld/T+GE4YMZdc4P42ubuQybTkxHjRghxZy
+         cclQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792338866; x=1792943666;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=TN0F72Od49q/9VsV0FPLYXRT8mvo8Ym05QTkvme9qKI=;
+        b=TCo0ZonU+sQVhsrdK1yXPHhJvPEKb9gSRnCIfBR6eWl88Zzt0u9Hlwf5Il+XBZMP6y
+         BxN+XSD8LUJ/M0ytBo6kO9a/oUxX0Ty6jiLrJe8FZuZ1aNcJheugtewrVLv1jDR5OZu2
+         +cqQZqwt1KfB2tjTWHef8TfUWgTSKkVz7pnnqa52i2frm5F750mKJ5b9WOLO8nttBvM1
+         J5MWSylL7ekKshbz2Ap3xZkRrN2PKS4f+7JNK1OhMSLlW6r3v2gIP3sVUQwbgE3qL8Wn
+         wZlSZkBJ9LKpBGbgD9dyPjUh9oH8Gn74i/AFiRd7JyNHGqooBX8DsMbvWEE+zss3u/kr
+         7H0g==
+X-Forwarded-Encrypted: i=1; AKwUvBz89j5vMCS7N5qJnhrlAbnfe9xp0e8hFaLpJOtwdSxA1WDI0PwkBwe3WMgxVZru/SuPRPuOYGUS6PTXgluJ@vger.kernel.org
+X-Gm-Message-State: AFq9FYJWsfJEthOWsFdBtBbbtDPBYOn23afbkEN+WCa+Z3DSNqGcFUhM
+	dHodi/75yWegtRvkttkqEwnPLz2OmJlUYleRk9Whjec/ymokL/tyeej/
+X-Gm-Gg: AYBFou2PGJaeqjrT3YTMDpowRE77QGw9leZhjnF3izXHsbF9+jYyZLGIVNWMtnDohq8
+	EMlmoZSnWzNje9em8Vi1+MBWWT2/2Setpe+0Z48hLaN5OTgjnmHj0Pely+o7Y/Iclpqzl30MGv8
+	1vVHXlGdvWehdh9sMBoQ2wh18yimvCvZDM+JBazyq3MMn5C4CcXlseusEJDHTmIL9WWEhbuwc5q
+	HiZC/numy9F0+CtvVQobamah4U576QTNjqofJLA4YFa7dYLZsA+20J/UYQqLbaiA25MxgnGNpoS
+	4hZV6eYI635BhLt9KNgh0oYS4q2/pvqqkFfNpey9Lwg950B4ehUYCYglHs0Fr1Fi6RSDa9zOVCl
+	Ak1IG7YKbDne7QPpUIcO7eMK4ca9VvAwWdGJU+LhslBnn65jkd/jwv3vq70TC+wegX2wD/4Y1AA
+	U0wFQywm7Vrp2hNQBAGTiuN1niV8G4FSGG7Ei/am37U+tWGIolGCu7/+UZ/PgBhApFHndnpqgXt
+	MiQ6pZxogNe11Qu1C1wN/6vXQ5LN3gJtH3ZTiqN7oY308yOJouvaDFzabdzI79gNIWswFymba6w
+	/V+vFr47oS0dIscmZefDZw==
+X-Received: by 2002:a05:600c:3b1e:b0:49f:fdca:c361 with SMTP id 5b1f17b1804b1-4a1d75f9341mr124952765e9.12.1792338866523;
+        Sun, 18 Oct 2026 08:54:26 -0700 (PDT)
 Received: from hermes-agent.lan (228.red-80-29-82.staticip.rima-tde.net. [80.29.82.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1df164777sm118044645e9.5.2026.10.18.08.54.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1c8af2fcesm227892415e9.8.2026.10.18.08.54.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 08:54:25 -0700 (PDT)
+        Sun, 18 Oct 2026 08:54:26 -0700 (PDT)
 From: =?UTF-8?q?Ram=C3=B3n=20Jes=C3=BAs=20Miranda?= <ramonjesusmiranda@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
+To: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Cc: Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
+	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+	Amir Vajid <amir.vajid@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	arm-scmi@vger.kernel.org,
+	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] soc: qcom: icc-bwmon: drop the bandwidth vote across system suspend
-Date: Sun, 18 Oct 2026 15:54:24 +0000
-Message-ID: <20261018155424.1299645-1-ramonjesusmiranda@gmail.com>
+Subject: Re: [PATCH RFC 0/10] firmware: arm_scmi: vendors: Qualcomm Generic Vendor Extensions
+Date: Sun, 18 Oct 2026 15:54:25 +0000
+Message-ID: <20261018155425.1299660-1-ramonjesusmiranda@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
+References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -77,63 +89,26 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-icc-bwmon has no PM ops: the interconnect vote derived from the last
-sample stays in place while the system is suspended. On X1E80100 the CPU
-bwmon was left voting 800 MB/s peak on the DDR path during s2idle, which
-keeps DDR out of its low power modes (the qcom_stats "ddr" counter never
-advances).
+Hi,
 
-Disable the monitor, drop the OPP vote on suspend and restart monitoring
-on resume. With this change DDR reaches its low power mode for >99% of
-s2idle on a Microsoft Surface Pro 11 (X1E80100).
+I tested patches 1-9 of this series on a Microsoft Surface Pro 11
+(X1E80100, "hamoa"), on top of 7.2.8 with Linux booted at EL2.
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Ramón Jesús Miranda <ramonjesusmiranda@gmail.com>
----
-diff --git a/drivers/soc/qcom/icc-bwmon.c b/drivers/soc/qcom/icc-bwmon.c
---- a/drivers/soc/qcom/icc-bwmon.c
-+++ b/drivers/soc/qcom/icc-bwmon.c
-@@ -815,6 +815,35 @@
- 	free_irq(bwmon->irq, bwmon);
- }
- 
-+/*
-+ * The bandwidth vote of the last sample stays in place across system
-+ * suspend and keeps DDR out of its low power modes. Drop it while
-+ * suspended and restart monitoring on resume.
-+ */
-+static int bwmon_suspend(struct device *dev)
-+{
-+	struct icc_bwmon *bwmon = dev_get_drvdata(dev);
-+
-+	disable_irq(bwmon->irq);
-+	bwmon_disable(bwmon);
-+	dev_pm_opp_set_opp(dev, NULL);
-+	bwmon->current_kbps = 0;
-+
-+	return 0;
-+}
-+
-+static int bwmon_resume(struct device *dev)
-+{
-+	struct icc_bwmon *bwmon = dev_get_drvdata(dev);
-+
-+	bwmon_start(bwmon);
-+	enable_irq(bwmon->irq);
-+
-+	return 0;
-+}
-+
-+static DEFINE_SIMPLE_DEV_PM_OPS(bwmon_pm_ops, bwmon_suspend, bwmon_resume);
-+
- static const struct icc_bwmon_data msm8998_bwmon_data = {
- 	.sample_ms = 4,
- 	.count_unit_kb = 1024,
-@@ -879,6 +907,7 @@
- 	.driver = {
- 		.name = "qcom-bwmon",
- 		.of_match_table = bwmon_of_match,
-+		.pm = pm_sleep_ptr(&bwmon_pm_ops),
- 	},
- };
- module_platform_driver(bwmon_driver);
+Without memlat the CPU never raises DDR/LLCC: the cpu-bwmon instances
+stay at their lowest vote (4.8 GB/s) under full load. STREAM triad with
+12 threads gives 38 GB/s at EL2 and 41 GB/s under Gunyah at EL1. With
+the series it reaches 67 GB/s; the ddr/llcc devfreq devices go back to
+547/300 MHz when idle. llama.cpp on the CPU (Qwen3-8B Q4_0) goes from
+7 to 21 tokens/s of generation.
+
+s2idle is not affected: CXSD + AOSD + DDR stay in their low power modes
+for 99.9% of an 880 s suspend.
+
+One thing I noticed: the protocol 0x80 module (qcom-generic-ext) does
+not get autoloaded from the protocol@80 node here, so I load it and
+scmi-qcom-memlat-devfreq from a service at boot.
+
+Tested-by: Ramón Jesús Miranda <ramonjesusmiranda@gmail.com>
+
+Thanks,
+Ramón
