@@ -1,163 +1,196 @@
-Received: from mta1.migadu.com (out-142.mta1.migadu.com [95.215.58.142])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15973FD132
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 19:20:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.142
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ECE44D37B8
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 20:04:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792351240; cv=none; b=uAD5zjVN6PijOQ+5aab1J2+hYksIpMkEkr0XpeSXy2y6FXUs1+TmTkdYwIrtcY661hwsk6u9XKh1v508bEqvX8yv9yBu/NOJBQJseW4shWgSmncg+qw4KmHVB7bb5o8lLRQdMK4MOSfsbqEKIuc+Vc44NNVOndtzhuANin4gbAY=
+	t=1792353869; cv=none; b=Y32Ea3coIpYy/5e97h+SQV2qRbYUP7b0wY7fCqlbuthKy7k+/4oVKFbYIL5ayuy5CBNaq67ZKDI/w7YELZEAa2iPmELLaYrQ+FqFc7cDyXwDVwb68UwGunCN3o8elCyeqwl/NT0FALVVcM6YeHu95gJ0mnN48a9F6iWz9kdt5hc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792351240; c=relaxed/simple;
-	bh=iiW1cpkkxTodBSKiwX66uDEJjEpsAttD/hVeIXrp0zs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=H/BiKyqRwGCtix+zii8lE83x2NveainAZQM2yutDMWNcxmB+yLav2d0EcdzBunzR/GkGuew14QlCK++iPiRXaXfCiVOZfZ9D3vqxs3Vuarj8LrbBX7ffT6uJwFgaUYbsYszdk1+buAIU/SVkl+CE2AOCMSWLQSneatj0pQ/qLJk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=qXqXNzL+; arc=none smtp.client-ip=95.215.58.142
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	s=arc-20240116; t=1792353869; c=relaxed/simple;
+	bh=DBE/gCmfuhXwykxDQWOrWz7lluxwth9kB66PmzDn3lo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ru8SdiQY8sTcNMkmU0BnWjNhs9W/wHnLH3j5ZNDTXJpcxtC5fHyRxRwJfCKiyaUyx9jdpJqy8AcmYyBanAFp73qPc9Bv+MAcvq6XufBurCSpbV6OfaBJIZh3elK5ygk42z6jcHJFo5Cp8YsJSLMWen9JLq8p9wSP0i3bD8FNm3o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WyPRuKrB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IxQAsvwk; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="qXqXNzL+"
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=iiW1cpkkxTodBSKiwX66uDEJjEpsAttD/hVeIXrp0zs=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792351235; v=1; x=1792956035;
- b=qXqXNzL+oS2/nPGDKtzbcpN/3JpG0X0ambzqNxpYL7pW7xzHmF+tHMOi3RhqJuKboIf4yjgN
- Kz4rv4/40Fyukl9WQudE9P9THmzc6sGgenwoDn54k9Rd2Z0nvWvD3lHiEiNupA5t6L0vo3K7BBb
- 3aP0M1m47JP2GbjcJ27dS50gkWzZ6+uFiBdp73rCOzh4kHk7nWHf3ulpxrzCAVBb1aEs3GIo34Q
- BHEOToKHBz/oddocpvNe/64EiJQN6OUkFbQegud0O2WJP9sLZh0gYwiB/JHB7mkqPD9CGeoM24D
- 2sjI2xI4n66jZeklFIg5zN64PNdszjFcNYS+zw5IbMhJQ==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 4f31773a1836853f;
-	Sun, 18 Oct 2026 19:20:21 +0000
-X-Mizu-Trace-ID: 4f31773a1836853f
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <58c229e2-ee81-4b75-92e9-1eaee2d19d0b@packett.cool>
-Date: Sun, 18 Oct 2026 16:20:12 -0300
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WyPRuKrB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IxQAsvwk"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69IIU9ei151946
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 20:04:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	i3xZ9op9l58SU7/YC9N8juWPncXRu5l0tsz+cj5uvOA=; b=WyPRuKrB37c3X8Aj
+	Jp1pnZjXYlcnbxq3+u/w3d3++aibxFILsd6NSKt2kKMMLfKBy0C9F7ZDVN39I2/6
+	GEYgtKgKXtFHt8jjiekUKZlIYcHY3Nno0Ktq55Q1kJho3VB1L9JjRMILTuqTOl91
+	HAf2eceZEQyEVOzL4oUWFwg8LK94sm4qc8CN2aSAClMZprJI4YJVhcm3zRfIJsh5
+	qSs6w+gsL5GRyZJBHbGXPXcGRDEyVHZO2OfgVbqRzuX3DGVB/Mn05xcaM5C5JaXf
+	vGuWsAejptzO0/oJ6k29Tn5OpUL8zjRbqrfIVFyunI7YWBBA8FXS8dazKbvTSICj
+	fsfmUQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hc0bgkxrj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 20:04:26 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3580c07911eso4596946eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 13:04:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792353865; x=1792958665; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=i3xZ9op9l58SU7/YC9N8juWPncXRu5l0tsz+cj5uvOA=;
+        b=IxQAsvwkiYO2d2BJQ26kzK6tcB+v69N1psTXDuYxol+bUfq3CI3nCoQuJr3OZEcJV/
+         +9wXEkMyy9c3gRcLhkWCFljr2yF1vpKUJgRLJuTGqdfjLXw6/jgGcUtLwwRIzRPca79y
+         Lj9kU8SO23EHEZnuzE6/r/rxvdONErq5DcAEY4fyI3co9R7Rv0T4uy6z6lE2Z4mnDWGp
+         4KpGeIbNovSIRLBhck3QQUJvhgEDvZlqNwnbQOPcts0o3vetCyRHf0tn90Y2IuXGCEHO
+         QxueUfKx0QdmnAD/JnmO1C8A5hnHMdApItlGJUmd+syXkNduqQPCJDVzh6a3nzEZmFye
+         QRkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792353865; x=1792958665;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=i3xZ9op9l58SU7/YC9N8juWPncXRu5l0tsz+cj5uvOA=;
+        b=AtoY+7vMSAf56y++YkmZ/J7S5KZBThyDXzd+doRKa+kUaASvfBzvcJpU8iGalxpiKl
+         i3x9Z9+5/UWRrXmuKgpRCuew77kNQsE/p4M8iubY+hNBZC2ErRmP2nNNvHSxpstmoWhz
+         DjEVYu0WAiQFhmjWSJir5QaBX/6D4t5sZ2dw6pct09wMPE4w95iBUaxvmk5RwjYrmTF9
+         n9TAlShTgnFPcC3SLY5AEOf5UxajV0V0iuK3H0hA9+2PhISMT/eh9hgWyWB2DoKB1+OT
+         npdgTC6L3Bin1pD2kfXFHE1EftjxhY2mgYY7I+bciLmxWvsmAwTlLcEvyy9FsCNtkApB
+         57cw==
+X-Forwarded-Encrypted: i=1; AKwUvBzRnHMVkbwd0sDKAiNjedOp46Fkc1tqHQ5AVq+zrBTLUpcq4UMc0WofWFKilOyh/huBqYQQi8IGoxgKW0Y2@vger.kernel.org
+X-Gm-Message-State: AFq9FYLL9D+pIm/QZKiLyycZYV4Jrk/J68r4XTIpegIFgv9C+zkaz7iI
+	RKQ3sqQmNoboLtyvInJZ2bN5YKQnZcOo8KLOGfFIkpyQ0u7l0uqHaIxgt3CovWL1QyZc1xecjex
+	VgFK/STG85a1Lebku3E0yeqPDh7DVeKJIazlrmDidR9QmRMbXL/ghnXHlfiTapGLvQRE8
+X-Gm-Gg: AYBFou28w1aUnVSJhFZYUjEKQZQMsDG2dAz5mx9LcgpEgLtxZQo9WHRVM59QOyBXeRc
+	DapIFpvKJjMojM+KDz8diSlISra6ikFHE3eQMVa1LNgevcaCm5XMEfDa/hx4OqrxbM77FjWWRuW
+	SxUj9V7pLlm+y5r7KNUFvx5WbEmEGq/AbNYK9SMxG6zXJgRHL01Eg/PExBETZHl2GFIuUQYmdw4
+	Lbaj/nU2EOFGQCpqpEXGxdusdMEf8J1qBWWEFHgfiG7XM4QSegAKkJvCVykPNiGaBdLj5UQ+VmQ
+	h6KhBfUF9tQO/1YBF/OOKcfPR84zdaYdTQC0u2C3JWD8l/fkL1FKfgwnHU8tvebpUiok1QxRXi/
+	OywiIxD5hPnyR
+X-Received: by 2002:a05:693c:4003:b0:351:6409:25c9 with SMTP id 5a478bee46e88-361a2942adbmr9329021eec.35.1792353864878;
+        Sun, 18 Oct 2026 13:04:24 -0700 (PDT)
+X-Received: by 2002:a05:693c:4003:b0:351:6409:25c9 with SMTP id 5a478bee46e88-361a2942adbmr9328972eec.35.1792353864174;
+        Sun, 18 Oct 2026 13:04:24 -0700 (PDT)
+Received: from oss.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3608308a87csm43680240eec.28.2026.10.18.13.04.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 18 Oct 2026 13:04:23 -0700 (PDT)
+Date: Mon, 19 Oct 2026 01:34:11 +0530
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+To: netdev-bot+sashiko@kernel.org
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@kernel.org,
+        kuba@kernel.org, pabeni@redhat.com, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, afd@ti.com, andrew@lunn.ch,
+        hkallweit1@gmail.com, linux@armlinux.org.uk, richardcochran@gmail.com,
+        andersson@kernel.org, konradybcio@kernel.org,
+        alexandre.torgue@foss.st.com, peppe.cavallaro@st.com,
+        joabreu@synopsys.com, maxime.chevallier@bootlin.com,
+        mcoquelin.stm32@gmail.com, lorenzo.bianconi@oss.qualcomm.com,
+        netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH net-next v3 4/9] net: stmmac: qcom-ethqos: fix RGMII_ID
+ mode to use DLL bypass
+Message-ID: <atUmOyPnBUipmr55@oss.qualcomm.com>
+References: <20261017-shikra_ethernet-v3-4-26a8beb44b8f@oss.qualcomm.com>
+ <179232045490.3135.14337314664378256554@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ASoC: codecs: aw88261: complete the start at trigger
- time
-To: Vladyslav Tymoshchuk <tvlad744@gmail.com>, Mark Brown
- <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
-Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Srinivas Kandagatla <srini@kernel.org>, Luca Weiss
- <luca.weiss@fairphone.com>,
- Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
- Federico Amedeo Izzo <federico@izzo.pro>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
-References: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <179232045490.3135.14337314664378256554@kernel.org>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE4MDA3OSBTYWx0ZWRfX296U8/2vXBow
+ xeL99EOvMg3DWVlPztlTRATHt7ETWRBUPGcW0256bAxGaiMLX9/OssBpxPniZgVpW0dmzpEXY4g
+ el4Z7cyvI6YeN5u0feMUXEsV64EeoYw=
+X-Authority-Analysis: v=2.4 cv=FayiV5+6 c=1 sm=1 tr=0 ts=6ad5264a cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=rVh5EO9gQq6FD6a5X-wA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE4MDA3OSBTYWx0ZWRfX3nnE/o0D6jUX
+ 8XH4W/1TzJDk3VFghqo5QfW2oT+8ZaN4DM83LsOG8I9M2TonGekC0uVgDAj1xz7nih80onJkZga
+ nBfvJcVG9iqzwJmo+HeJbC8aiharQfyqJYd89+esD4JsVTvw2oARlKM3Lzgn/Oh0zP4P8S26Chw
+ bZaSZW/lQEyHfQJ8hTZ/a2GlowkQ+7fnpYAzNwB14gnyFMXlN0xVa6UD89vRuHz/WHqr7foHgMN
+ tpbhSubA4e5TCbDfwHs3sX8bPAQqXsh6hgSRjnmIHpQ9dEX4TfYHxDYiD0B9+VSAEYj5QlaotFM
+ 8OHzcapnO+P4dDjLmohBWI1Mjg0WxiEihuFLKW34zRPjkl0kjC7nc6mk4U5TyQH02ne290uAqAF
+ oQG80nVEdF5qSzUZ6XhSSTUoW5LcdPnfqwSUWC0e5KhYikMt9M48PgN5qpsmzuMIlZm2qAWKkLj
+ ofr97Ii6QDHQexKby6A==
+X-Proofpoint-ORIG-GUID: br2qi7qyUh8-SLBsVRThMGbAqWmaXjQB
+X-Proofpoint-GUID: br2qi7qyUh8-SLBsVRThMGbAqWmaXjQB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-18_04,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610180079
 
+On Sun, Oct 18, 2026 at 10:47:34AM +0000, netdev-bot+sashiko@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 3 potential
+> issue(s) to consider.
+> 
+> Critical: 0 · High: 0 · Medium: 2 · Low: 1
+> 
+> If you believe none of the issues are legitimate, please reply to each
+> issue of Medium severity or higher and explain why the AI is wrong.
+> If any of them are legitimate and you plan to respin, please let patchwork
+> know by including "pw-bot: cr" as a separate line at the end of your reply
+> (one such reply per series is enough).
+> 
+> - [Medium] In rgmii-id mode at 100M and 10M, ethqos_set_clk_tx_rate() now
+>   calls clk_set_rate(link_clk, 25000000) or clk_set_rate(link_clk,…
+> - [Medium] net: stmmac: qcom-ethqos: rgmii_setmask() on multi-bit
+>   RGMII_CONFIG2_RSVD_CONFIG15
+> - [Low] The commit is titled and described as a fix for a defect in the
+>   current tree, but it has no Fixes: tag.
+> 
+> --
+> 
+> 
+> [Severity: Medium]
+> Can qcs404 and sc8280xp actually produce 25 MHz and 2.5 MHz on the link
+> clock?
+> 
+> On qcs404 the "rgmii" link clock is GCC_ETH_RGMII_CLK. Its parent's
+> frequency table only has these entries:
+> 
+> drivers/clk/qcom/gcc-qcs404.c:ftbl_emac_clk_src
+>     5 MHz, 50 MHz, 125 MHz, 250 MHz
+> 
+> On sc8280xp it is GCC_EMAC0_RGMII_CLK, and the lowest entry is 50 MHz:
+> 
+> drivers/clk/qcom/gcc-sc8280xp.c:ftbl_gcc_emac0_rgmii_clk_src
+>     50 MHz, 125 MHz, 250 MHz
+> 
+> Both branch clocks have CLK_SET_RATE_PARENT. The parent RCGs round up
+> rather than fail:
+> 
+> drivers/clk/qcom/clk-rcg2.c:clk_rcg2_determine_rate() {
+> 	...
+> 	return _freq_tbl_determine_rate(hw, rcg->freq_tbl, req, CEIL);
+> }
+> 
+> So in rgmii-id mode at 100M/10M, the request would silently become 50 MHz
+> or 5 MHz on qcs404, and 50 MHz on sc8280xp. clk_set_rate() would still
+> return 0.
+> 
 
-On 10/17/26 7:00 AM, Vladyslav Tymoshchuk wrote:
-> The amplifier is started from the PRE_PMU event of its AIF widget, that
-> is from DAPM in prepare. aw88261_dev_start() waits up to 20 ms there for
-> the PLL to lock to the bit clock and powers the amplifier down again if
-> it does not.
->
-> The Qualcomm AudioReach backends only start their graph, and with it
-> the I2S/TDM clocks, in trigger since commit b54a38af7138 ("ASoC: qcom:
-> q6apm-lpass-dai: move graph start to trigger"). There every start fails
-> with "start failure (-1)" and the speaker stays silent for the whole
-> stream, as seen with six AW88261 on a TDM link of SM8750.
->
-> Split the start at the first step that needs the bit clock, the PLL
-> lock check, whatever the host does:
->
->   - PRE_PMU clears power down (PWDN), configures the I2S interface and
->     the PLL and writes the boost settings of aw88261_reg_force_set().
->     The amplifier stays powered down (AMPPD) and muted.
->   - The unmute, called after the trigger of the CPU DAI with
->     .mute_unmute_on_trigger, does the rest: it checks the PLL lock,
->     clears AMPPD, checks SYSST, enables the feedback and unmutes. If the
->     PLL does not lock, "start failure" is logged, the amplifier is left
->     as PRE_PMU left it and the next trigger start tries again.
->   - The mute in trigger undoes the unmute (mute, feedback off, AMPPD),
->     and POST_PMD sets PWDN as before.
->
-> So only the steps that need the clock run in trigger: 14 register
-> accesses and 1 ms per amplifier for the unmute when the PLL has locked,
-> 12 and 1 ms for the mute. The same steps run there on hosts that have
-> the clock running from prepare. aw88261_reg_force_set() only writes
-> boost settings and now runs before AMPPD is cleared rather than right
-> after.
->
-> wsa883x and wsa884x split their start the same way, with the
-> configuration in DAPM and GLOBAL_PA_EN in the trigger-time mute. The
-> vendor driver of this amplifier family (aw882xx) also starts the
-> amplifier from .mute_stream, with the same sequence.
->
-> The register accesses go over I2C and sleep, so they need a nonatomic
-> trigger, which the Qualcomm DPCM links using this codec have. On an
-> atomic PCM, as seen from substream->pcm->nonatomic in .startup, PRE_PMU
-> does the whole start as before and the mute callback does nothing.
->
-> POST_PMD can also run for an amplifier that was never powered up, as
-> seen when the card is registered, so make "already power off" a debug
-> message.
->
-> Assisted-by: LLM
-> Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
-> ---
-> [..]
-> +/*
-> + * First part of the start, which does not need the bit clock: power up and
-> + * configure the I2S interface and the PLL. The amplifier stays powered down
-> + * (AMPPD) and muted.
-> + */
-> +static int aw88261_dev_power_up(struct aw88261 *aw88261)
-> [..]
-> +/*
-> + * Second part of the start, which needs the bit clock as the PLL locks to
-> + * it: check the lock, enable the amplifier and the feedback, and unmute.
-> + * On failure the device is left as aw88261_dev_power_up() left it.
-> + */
-> +static int aw88261_dev_enable(struct aw88261 *aw88261)
-> [..]
-> +/* Undo aw88261_dev_enable() */
-> +static void aw88261_dev_disable(struct aw_device *aw_dev)
-> [..]
-> +static int aw88261_dev_start(struct aw88261 *aw88261, bool enable)
+As mentioned in another reply, I will update the series to use this new
+flow for PHY managed RGMII delay for only SoCs that could be validated,
+i.e. shikra and qcs615.
 
-"power_up", "start", *and* "enable".. this naming is a mess now.
+	Ayaan
 
-Would be nicer to make the *names* more descriptive of what's actually 
-being turned on/off.
-
-> [..]
-> --- a/sound/soc/codecs/aw88261.h
-> +++ b/sound/soc/codecs/aw88261.h
-> @@ -564,6 +564,8 @@ enum {
->   enum {
->   	AW88261_DEV_PW_OFF = 0,
->   	AW88261_DEV_PW_ON,
-> +	/* powered up and configured, amplifier off: waits for the bit clock */
-> +	AW88261_DEV_PW_READY,
-
-Would make more sense to stick the intermediate state in the, well, 
-middle. And rename the states to something that makes sense like { OFF, 
-WAITING_FOR_BIT_CLOCK, RUNNING } instead of making everything a comment 
-like the slop machine left it.
-
-> [..]
-> base-commit: 0f8bc3b93b76d16682a4d4999f9559b1e18016f9
-
-
-It does work here, anyhow, so
-
-Tested-by: Val Packett <val@packett.cool> # sm7325-motorola-dubai
-
-
-Thanks,
-~val
-
+pw-bot: cr
