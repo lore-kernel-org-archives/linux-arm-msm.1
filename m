@@ -1,111 +1,163 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mta1.migadu.com (out-142.mta1.migadu.com [95.215.58.142])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F23373F23C0;
-	Sun, 18 Oct 2026 18:50:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15973FD132
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 19:20:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.142
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792349437; cv=none; b=Jd7byMCWSh/7XYI7PKQCKd5SspqLe1/RctVSDg0Hczd8RvGU4cLA1PipAL2HAO76PW6rWIoFmhh8vUwM16Si/I83l7DRZ+euGOsEHxaur1Zp4Hss6pdYyvd6ABPESbMUB/cFUJuQPtix3RV3SbDIEBKY9PJ6EE6BwMMclGPhlPw=
+	t=1792351240; cv=none; b=uAD5zjVN6PijOQ+5aab1J2+hYksIpMkEkr0XpeSXy2y6FXUs1+TmTkdYwIrtcY661hwsk6u9XKh1v508bEqvX8yv9yBu/NOJBQJseW4shWgSmncg+qw4KmHVB7bb5o8lLRQdMK4MOSfsbqEKIuc+Vc44NNVOndtzhuANin4gbAY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792349437; c=relaxed/simple;
-	bh=ujufb1hsN+idDb+vBcB3cB6Jxmd7uHUq8KKZNzTcgc4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=N3jmyuWHan1nfaH0Y26l4ACJGMpaQDA7gYL6/KfcdHfyVz40am7jQ+f9Fbi74+HihabYdbdVKIonOsfs900fagWNBFYklVqERfc1xLZ3aw7EjICngtwi3okCOrQx7vScjcBEbmKRqqwq8htyYn4LSUcbKKB+43B2QYift4YG9Ks=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nZHEI+AC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792351240; c=relaxed/simple;
+	bh=iiW1cpkkxTodBSKiwX66uDEJjEpsAttD/hVeIXrp0zs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=H/BiKyqRwGCtix+zii8lE83x2NveainAZQM2yutDMWNcxmB+yLav2d0EcdzBunzR/GkGuew14QlCK++iPiRXaXfCiVOZfZ9D3vqxs3Vuarj8LrbBX7ffT6uJwFgaUYbsYszdk1+buAIU/SVkl+CE2AOCMSWLQSneatj0pQ/qLJk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool; spf=pass smtp.mailfrom=packett.cool; dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b=qXqXNzL+; arc=none smtp.client-ip=95.215.58.142
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nZHEI+AC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD2B91F000C4;
-	Sun, 18 Oct 2026 18:50:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792349436;
-	bh=RMwpf0KMhGlsmAsma1velbB+PsLjkn1Z8ybJYZMeYUo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=nZHEI+ACoaQ1CoG7DYretXyau9ldDUaNwf9AvT8S/+O6GrHSSahpvqSRzLG6eYDYT
-	 IXvU0/qf/1NakNt1XnIiw0ivgCIvwIMoyVpCjYBB2+thB7luJTDmaomq7TA7bwyT16
-	 Pzhd4EsqMckE7zianpkD8fcjfHswtgO6DqI3Sz7wLgHbISIgT5JZS/lclhHbAl0J5s
-	 ZuBWgiTvydWn4gfri9wmv44VEkUK1anBc/MtP/x+b1RHfddxrV7gF0K5dPzf8tCICY
-	 IaK247G8YcK2LQIodU0FE0L0Z17rRwbXOMkqth9TAub5TUout6ynDTfSXSIDTRz9m9
-	 4+9RrVHoZEToA==
-Date: Sun, 18 Oct 2026 19:50:31 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Christoph Rudorff <chris@rudorff.com>
-Cc: Linus Walleij <linusw@kernel.org>, Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: iio: light: gp2ap002: add vled
-Message-ID: <20261018-giggly-reminder-4404507f3f23@spud>
-References: <20261017-iio-light-gp2ap002-v2-0-d6879767a446@rudorff.com>
- <20261017-iio-light-gp2ap002-v2-1-d6879767a446@rudorff.com>
+	dkim=pass (2048-bit key) header.d=packett.cool header.i=@packett.cool header.b="qXqXNzL+"
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=iiW1cpkkxTodBSKiwX66uDEJjEpsAttD/hVeIXrp0zs=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792351235; v=1; x=1792956035;
+ b=qXqXNzL+oS2/nPGDKtzbcpN/3JpG0X0ambzqNxpYL7pW7xzHmF+tHMOi3RhqJuKboIf4yjgN
+ Kz4rv4/40Fyukl9WQudE9P9THmzc6sGgenwoDn54k9Rd2Z0nvWvD3lHiEiNupA5t6L0vo3K7BBb
+ 3aP0M1m47JP2GbjcJ27dS50gkWzZ6+uFiBdp73rCOzh4kHk7nWHf3ulpxrzCAVBb1aEs3GIo34Q
+ BHEOToKHBz/oddocpvNe/64EiJQN6OUkFbQegud0O2WJP9sLZh0gYwiB/JHB7mkqPD9CGeoM24D
+ 2sjI2xI4n66jZeklFIg5zN64PNdszjFcNYS+zw5IbMhJQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 4f31773a1836853f;
+	Sun, 18 Oct 2026 19:20:21 +0000
+X-Mizu-Trace-ID: 4f31773a1836853f
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <58c229e2-ee81-4b75-92e9-1eaee2d19d0b@packett.cool>
+Date: Sun, 18 Oct 2026 16:20:12 -0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="+Mn879I/TmKW1p6b"
-Content-Disposition: inline
-In-Reply-To: <20261017-iio-light-gp2ap002-v2-1-d6879767a446@rudorff.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] ASoC: codecs: aw88261: complete the start at trigger
+ time
+To: Vladyslav Tymoshchuk <tvlad744@gmail.com>, Mark Brown
+ <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>
+Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Luca Weiss
+ <luca.weiss@fairphone.com>,
+ Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+ Federico Amedeo Izzo <federico@izzo.pro>, linux-sound@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ phone-devel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht
+References: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261016120000.aw88261-trigger-v2-1-tvlad744@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---+Mn879I/TmKW1p6b
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 17, 2026 at 07:27:41PM +0200, Christoph Rudorff wrote:
-> According to datasheet page 8 "Recommended external circuit",
-> it can have tree supplies: vio, vdd and vled. As vdd and vled wants the
-> same voltage, they may be connected to a single supply.
->=20
-> Signed-off-by: Christoph Rudorff <chris@rudorff.com>
+On 10/17/26 7:00 AM, Vladyslav Tymoshchuk wrote:
+> The amplifier is started from the PRE_PMU event of its AIF widget, that
+> is from DAPM in prepare. aw88261_dev_start() waits up to 20 ms there for
+> the PLL to lock to the bit clock and powers the amplifier down again if
+> it does not.
+>
+> The Qualcomm AudioReach backends only start their graph, and with it
+> the I2S/TDM clocks, in trigger since commit b54a38af7138 ("ASoC: qcom:
+> q6apm-lpass-dai: move graph start to trigger"). There every start fails
+> with "start failure (-1)" and the speaker stays silent for the whole
+> stream, as seen with six AW88261 on a TDM link of SM8750.
+>
+> Split the start at the first step that needs the bit clock, the PLL
+> lock check, whatever the host does:
+>
+>   - PRE_PMU clears power down (PWDN), configures the I2S interface and
+>     the PLL and writes the boost settings of aw88261_reg_force_set().
+>     The amplifier stays powered down (AMPPD) and muted.
+>   - The unmute, called after the trigger of the CPU DAI with
+>     .mute_unmute_on_trigger, does the rest: it checks the PLL lock,
+>     clears AMPPD, checks SYSST, enables the feedback and unmutes. If the
+>     PLL does not lock, "start failure" is logged, the amplifier is left
+>     as PRE_PMU left it and the next trigger start tries again.
+>   - The mute in trigger undoes the unmute (mute, feedback off, AMPPD),
+>     and POST_PMD sets PWDN as before.
+>
+> So only the steps that need the clock run in trigger: 14 register
+> accesses and 1 ms per amplifier for the unmute when the PLL has locked,
+> 12 and 1 ms for the mute. The same steps run there on hosts that have
+> the clock running from prepare. aw88261_reg_force_set() only writes
+> boost settings and now runs before AMPPD is cleared rather than right
+> after.
+>
+> wsa883x and wsa884x split their start the same way, with the
+> configuration in DAPM and GLOBAL_PA_EN in the trigger-time mute. The
+> vendor driver of this amplifier family (aw882xx) also starts the
+> amplifier from .mute_stream, with the same sequence.
+>
+> The register accesses go over I2C and sleep, so they need a nonatomic
+> trigger, which the Qualcomm DPCM links using this codec have. On an
+> atomic PCM, as seen from substream->pcm->nonatomic in .startup, PRE_PMU
+> does the whole start as before and the mute callback does nothing.
+>
+> POST_PMD can also run for an amplifier that was never powered up, as
+> seen when the card is registered, so make "already power off" a debug
+> message.
+>
+> Assisted-by: LLM
+> Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+> ---
+> [..]
+> +/*
+> + * First part of the start, which does not need the bit clock: power up and
+> + * configure the I2S interface and the PLL. The amplifier stays powered down
+> + * (AMPPD) and muted.
+> + */
+> +static int aw88261_dev_power_up(struct aw88261 *aw88261)
+> [..]
+> +/*
+> + * Second part of the start, which needs the bit clock as the PLL locks to
+> + * it: check the lock, enable the amplifier and the feedback, and unmute.
+> + * On failure the device is left as aw88261_dev_power_up() left it.
+> + */
+> +static int aw88261_dev_enable(struct aw88261 *aw88261)
+> [..]
+> +/* Undo aw88261_dev_enable() */
+> +static void aw88261_dev_disable(struct aw_device *aw_dev)
+> [..]
+> +static int aw88261_dev_start(struct aw88261 *aw88261, bool enable)
 
-Valid comments from Jonathan here,
-pw-bot: changes-requested
+"power_up", "start", *and* "enable".. this naming is a mess now.
+
+Would be nicer to make the *names* more descriptive of what's actually 
+being turned on/off.
+
+> [..]
+> --- a/sound/soc/codecs/aw88261.h
+> +++ b/sound/soc/codecs/aw88261.h
+> @@ -564,6 +564,8 @@ enum {
+>   enum {
+>   	AW88261_DEV_PW_OFF = 0,
+>   	AW88261_DEV_PW_ON,
+> +	/* powered up and configured, amplifier off: waits for the bit clock */
+> +	AW88261_DEV_PW_READY,
+
+Would make more sense to stick the intermediate state in the, well, 
+middle. And rename the states to something that makes sense like { OFF, 
+WAITING_FOR_BIT_CLOCK, RUNNING } instead of making everything a comment 
+like the slop machine left it.
+
+> [..]
+> base-commit: 0f8bc3b93b76d16682a4d4999f9559b1e18016f9
+
+
+It does work here, anyhow, so
+
+Tested-by: Val Packett <val@packett.cool> # sm7325-motorola-dubai
+
 
 Thanks,
-COnor.
+~val
 
-> ---
->  Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.y=
-aml b/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
-> index 99bddf31cbed..f5b2c6a4d7e3 100644
-> --- a/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
-> +++ b/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
-> @@ -33,6 +33,10 @@ properties:
->    vio-supply:
->      description: VIO power supply a phandle to a regulator
-> =20
-> +  vled-supply:
-> +    description: LED power supply a phandle to a regulator
-> +      Optional. It may already be connected to VDD.
-> +
->    io-channels:
->      maxItems: 1
->      description: ALSOUT ADC channel to read the ambient light
->=20
-> --=20
-> 2.39.5
->=20
-
---+Mn879I/TmKW1p6b
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCatUU8gAKCRB4tDGHoIJi
-0ublAQDq52TunNmV5wm29HeKs/ujJmoXxHkPditf6vJE+X+6xgEAoWmSd8+sREvm
-zoS7VRUp+0o9gvF5GqtidQdz3M0TxQk=
-=hIke
------END PGP SIGNATURE-----
-
---+Mn879I/TmKW1p6b--
