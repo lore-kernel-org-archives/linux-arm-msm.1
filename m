@@ -1,203 +1,143 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD581320CD3;
-	Sun, 18 Oct 2026 04:10:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30B1A41D23C
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 04:29:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792296627; cv=none; b=NKYRjWNED/hDuCJlJRYd9xKA/Uy5gtzFxyzNbk9fp7H/Mh6Ag9FTjabkdrQtllUanyI4eE8F+2QN445Qnb9Y3JWOTW4m43+Gi5XwADtUcRJIZlcru40ioJkPKgYdTTxr/7az1RNFxntYh4k+DsW659tWRYwBXOwcFUFMHQjZhzc=
+	t=1792297804; cv=none; b=Hrco/D+s7zm51/tAkyBL9GMaiDqT1nYUaPGnfHPG1ojKrKvoDmL0LTkGj9bllPYQxDKGtFa0o/Bqdvt6yWDEuEVJDUbGUkZARzaZrIanutJOv5EYSZsIBTc2ok/a4DqU0/KwPLRceZOz3+2ZRzSy8Pkg/u5ZpBkokZb4KV/FjoM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792296627; c=relaxed/simple;
-	bh=27Z+U02hpliMaolKcuVpPjxRrO4I8fXKkEvzjHMY6wI=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=F3RYKzHjODNc1g3ilndY9hf9yQhbJYSGV+qHLW8Z7XiNiN+A/ZGH/KEXXxim/k3ozS57Zqoc8wTgPUYPjpYVqi5D15385bdh2CatuYLnzbUwA1Ks3Kft+aJyD25i0zxECO6XEYb4m73ULAVUmJz7pHP265/fIyA/1pt/4hqroaU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VyLC9hcl; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792297804; c=relaxed/simple;
+	bh=Anss7133/aANMPtcn5QRXQaxDH/4VeyG3Fgcsy6YMc4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Seh0UDWH3pHoiSYgap7INRtcSrzHqqHR1turpcZUgJuIvlHeO6gZl/Qdvw7cU5hXTxSzlhLJrCnp24h8cynzx7wX6sG+eUr0qENdUhHr+EgICR1qGItG/Q84nkJUsjOUeG4cF2fb8YRXoQgnVYYTjyD4t88iqwtxXnuKzsVCnsM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bbJtyab6; arc=none smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VyLC9hcl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 697EC1F000C4;
-	Sun, 18 Oct 2026 04:10:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792296626;
-	bh=0/lCwDL+RkZmZOjl0EPkil75EaPPColZ+i98IbOeoEU=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=VyLC9hclj4XB4Ar2w/Sdp7x/T8XDkFCxin/WNd28ooOcI6FaPTszdeqcliWb1Ayfq
-	 ly4MXrAwDPGJVwspDrLWz/kApDQq99i2XCFaCSpnas/0uHnfch49gro3ao1au2SwXB
-	 FxaZuyULnHXsVrW9tJXvNhe218dQsmSMg4+rXo0Dw9go2B79SdPXwjLLVy5vNI+AL3
-	 jzJw+XjAKOtLHd1sKu+EFxsh7kGrpfLMqj79EHg5GqbCtJ0o3tlWzcEmoPSmetzE5k
-	 uzslpOiGuYL4PWYftgFXQtHR1iD7RD+diPD+dEj7ByaXNvk84I4OW4VcuOJ0VIoiHT
-	 y61vY1qZ7vaZQ==
-Subject:
- Re: [PATCH net-next] net: phy: qcom: qca808x: Add regulator management
-From: netdev-bot+sashiko@kernel.org
-To: elder@riscstar.com
-Cc: andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk,
- davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
- daniel@riscstar.com, donggeunyoo.kernel@gmail.com, ansuelsmth@gmail.com,
- mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
- danielt@kernel.org, netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Sun, 18 Oct 2026 04:10:24 +0000
-Message-ID: <179229662495.3135.13650075640347971471@kernel.org>
-In-Reply-To: <20261014172300.292324-1-elder@riscstar.com>
-References: <20261014172300.292324-1-elder@riscstar.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bbJtyab6"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3ace1f3897cso662771a91.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 17 Oct 2026 21:29:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792297797; x=1792902597; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=VWSV2lYeWe6uhtDKhgh0Nkoh2az0FS4A25FIOTm7cLg=;
+        b=bbJtyab60pRpfxg2B0XuPjmJrIruUt6Dq3k25lsiQSFIjD5OaOQTdlME1k67VsWjho
+         +kj7ftF8WBjhxabYEodLwoPGSZnRYLm5aZstMbMhxCLyHYebf3Sp0eTNYGqohVEHmzWo
+         trVh5sjLSBoTYSgMjy3mo2tCnTv3OzqF+oL0R4sXKTFI94F4sb75bCOcrrXGCKv5Usmd
+         CmUwk/acpeF7KwjCBbxD8Qi2UxA5L9+Wbe+DKBgf5yKCMuohpEfQFTlGZh4Adty2d8xj
+         JSAmU9mVqech7nH08lWEMfGxVk96sXSmX15b4f2+CFMr2G4C5wsndrxlmAZPikfb7ugj
+         Ul9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792297797; x=1792902597;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=VWSV2lYeWe6uhtDKhgh0Nkoh2az0FS4A25FIOTm7cLg=;
+        b=LJoiTTU/hhnn1COiy7rLuO+1nHZOoiFdGqvdsBsugvOyMkp5wlXpK3X553yStzzrI7
+         R2OCqo6hnKkUw+XTD1DHPj7bWJ7YQNb3eSVe/qhYZ7HE/uHeHHh9pll8wvySom86ayPD
+         ORsXzHeX7zScXeJgtaE9va0hKzwipjb9lTQmZa2kyKApdX9OEJp8WoeU919T6XuDX7gZ
+         Ux+GK2mhfDE66TgcoEoHcWX1x5tTE/SCQAnqMl0NpG3M0c7IYjYiZxTTy8fsukayuAJI
+         RAqV2exk+LLAM89yYK8jVEEOd9C21yldzrbc/QeOzhGTFFYvgZ/E4Od+39F32a/oJejH
+         l9YA==
+X-Forwarded-Encrypted: i=1; AKwUvBzk5EWPoeYPZm+nmtgdlo1Ysry9as/8rPnHEh7kdQc1sQK3YFPj7bzxyICUg7I0BOtiFAPQ3GQxt31qQqA9@vger.kernel.org
+X-Gm-Message-State: AFq9FYJlKgbDit61NQE4qKbGgb1SAWogXwB/ow3xkiDzrgWqJhfNZ0zU
+	BCOR3g7TBLnOPEv/R1UQtnVMem/stt6tz53/H42Z/enGEbW1RAYAh1jm
+X-Gm-Gg: AYBFou2/kp955xyKYWNmOhIoDzby2NO92sP32Nr7e4shFQvWDg0LGyAzqhSLLTaT/JM
+	QYPfI4Kt7goesfjxm6d1ylNS9a2NiB/daHRtWZ/T2kpOkX18TZF/HDYMfyy2m6Yz9RKqptYZBOX
+	j7SvNToDCswXcYY3mnlAesajrwrkmGsfeQ373dVY9mtCKpqtkpofU6sePwWyMCAjGLbcRmWGJS/
+	Qrgj2ofK3T2ouwrifC31KiSmVIZdKtrvPEU7nDBy0mUmO8E7BRMy2TUAipMFoRtWT/mIlirljQs
+	j3SRPZiKCIFpnormH6riL6UeSKeQa3X9E1aaPaEVAPjjSsvgjlGEm0SMHKxNr/XwSWAkmTlQ5lP
+	viL2xtMCtcKaRBVGcSmSMK97GUl+XVd36uubc1797THAChQh0lWo10xWVDfk4FK3EEPtHdZUTVA
+	uHrP6elq93ROKIJe4gkTJgicllZLVU2bfw/fO7tmhjR49nU8JGE3FhZ4IElcQf4R0=
+X-Received: by 2002:a17:90b:5610:b0:3ac:8897:7b88 with SMTP id 98e67ed59e1d1-3acef5f43f0mr3344212a91.58.1792297797308;
+        Sat, 17 Oct 2026 21:29:57 -0700 (PDT)
+Received: from [127.0.0.2] ([2404:c0:7618:4e1c:8841:a092:12c2:47d7])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3acc9e47588sm5885369a91.1.2026.10.17.21.29.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 17 Oct 2026 21:29:56 -0700 (PDT)
+From: Reza Kurniawan <imkyufie@gmail.com>
+Subject: [PATCH v2 0/4] Fix PSCI on MSM8917 and MSM8937
+Date: Sun, 18 Oct 2026 04:29:20 +0000
+Message-Id: <20261018-psci-fix-v2-0-35f65b59eb9a@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/0WNQQ7CIBBFr9LMWgxQQ40r79F0gTBtx9jSQCWah
+ rsLNcblm7z/ZoOAnjDApdrAY6RAbs4gDxWYUc8DMrKZQXKpBBc1W4Ih1tOLnbU03CqpVK8h64v
+ HfN5Tbffl8Lzd0axlX4yRwur8e/8VRfF+2eafjYJxZtFqlA2edC2uw6TpcTRugi6l9AH3CMdds
+ gAAAA==
+X-Change-ID: 20261013-psci-fix-8a2c0d6266fa
+To: Mark Rutland <mark.rutland@arm.com>, 
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, 
+ Christian Loehle <christian.loehle@arm.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Val Packett <val@packett.cool>
+Cc: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, Alejandro Tafalla <atafalla@dnyon.com>, 
+ Reza Kurniawan <imkyufie@gmail.com>
+X-Mailer: b4 0.15.2
 
-Thank you for your contribution! Sashiko AI review found 3 potential
-issue(s) to consider.
+PSCI on Qualcomm MSM8917 and MSM8937 advertises support for OS-initiated
+mode through PSCI_FEATURES, but rejects every PSCI_SET_SUSPEND_MODE call
+with NOT_SUPPORTED. The cpuidle-psci-domain driver treats this as a
+fatal error, so probe fails and the CPU PM domain topology is never
+registered:
 
-Critical: 0 · High: 0 · Medium: 2 · Low: 1
+  psci-cpuidle-domain psci: probe with driver psci-cpuidle-domain failed
+  with error -95
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+This series adds a "skip-suspend-mode-switch" property to the PSCI node.
+When present, cpuidle-psci-domain does not call psci_set_osi_mode() and
+continues with the topology it has already built.
 
-- [Medium] qca808x_power_on() in drivers/net/phy/qcom/qca808x.c adds four
-  new DT supply properties: avdd18-supply, vdd-supply, vdd18-supply and…
-- [Medium] The power-up sequence in qca808x_power_on()
-  (drivers/net/phy/qcom/qca808x.c) is wrong in two ways.
-- [Low] qca808x_power_on() counts a return value of 0 from
-  devm_regulator_get_enable_optional() as "a regulator was found and…
+Skipping the switch is expected to be safe on these platforms since it
+matches the behavior of the downstream kernel, which manages the
+cluster power level in addition to the CPU power level, just as Linux
+does when OSI is supported.
 
---
+Additionally, it also adds the property to the PSCI node for both
+platforms. For MSM8917, additional change is added to fix the system
+being unresponsive at idle.
 
-net: phy: qcom: qca808x: Add regulator management
+---
+Changes in v2:
+- Small phrase change in the property description
+- Added property check in psci_1_0_init()
+- Link to v1: https://patch.msgid.link/20261017-psci-fix-v1-0-dedae27e4a31@gmail.com
 
-This commit makes qca808x_probe() enable up to four optional supplies
-(avdd18, vdd, vdd18, vdd125). If any supply is found, it then sleeps for
-reset_assert_delay. The supplies stay on for as long as the PHY device
-exists.
+---
+Alejandro Tafalla (2):
+      dt-bindings: arm: psci: Add skip-suspend-mode-switch property
+      cpuidle: psci: Allow skipping the suspend mode switch
 
-> diff --git a/drivers/net/phy/qcom/qca808x.c b/drivers/net/phy/qcom/qca808x.c
-> index bab26e4c61408..6e2bd753257d9 100644
-> --- a/drivers/net/phy/qcom/qca808x.c
-> +++ b/drivers/net/phy/qcom/qca808x.c
+Reza Kurniawan (2):
+      arm64: dts: qcom: Skip suspend mode switch on MSM8917 and MSM8937
+      arm64: dts: qcom: msm8917: Use a shallower cluster state to fix unresponsive idle
 
-[ ... ]
+ Documentation/devicetree/bindings/arm/psci.yaml | 13 +++++++++++++
+ arch/arm64/boot/dts/qcom/msm8917.dtsi           |  9 +++++----
+ arch/arm64/boot/dts/qcom/msm8937.dtsi           |  1 +
+ drivers/cpuidle/cpuidle-psci-domain.c           | 16 ++++++++++------
+ drivers/firmware/psci/psci.c                    |  6 ++++--
+ 5 files changed, 33 insertions(+), 12 deletions(-)
+---
+base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+change-id: 20261013-psci-fix-8a2c0d6266fa
 
-> @@ -181,15 +182,44 @@ static void qca808x_fill_possible_interfaces(struct phy_device *phydev)
->  		__set_bit(PHY_INTERFACE_MODE_2500BASEX, possible);
->  }
->  
-> +static int qca808x_power_on(struct phy_device *phydev)
-> +{
-> +#ifdef CONFIG_OF
-> +	static const char * const regulator_names[] = {
-> +		"avdd18", "vdd", "vdd18", "vdd125"
-> +	};
+Best regards,
+--  
+Reza Kurniawan <imkyufie@gmail.com>
 
-[Severity: Medium]
-These names add new DT properties on the PHY node: avdd18-supply,
-vdd-supply, vdd18-supply and vdd125-supply. Are they documented in a
-binding anywhere?
-
-Documentation/devicetree/bindings/net/qca,qca808x.yaml declares only
-compatible, and it ends with:
-
-  unevaluatedProperties: false
-
-The common ethernet-phy.yaml schema doesn't define any supply properties
-either. Wouldn't any board DTS that uses these supplies fail dtbs_check
-with "Unevaluated properties are not allowed"?
-
-Could this series include a binding update that describes each rail?
-That would also make clear what "vdd" means next to "vdd18" and
-"avdd18".
-
-> +	struct device *dev = &phydev->mdio.dev;
-> +	u32 count = 0;
-> +	int i, ret;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(regulator_names); i++) {
-> +		ret = devm_regulator_get_enable_optional(dev, regulator_names[i]);
-> +		if (!ret)
-> +			count++;
-> +		else if (ret != -ENODEV)
-> +			return ret;
-> +	}
-
-[Severity: Low]
-What happens here with CONFIG_OF=y and CONFIG_REGULATOR=n? In that case
-the stub in include/linux/regulator/consumer.h always returns 0:
-
-static inline int devm_regulator_get_enable_optional(struct device *dev,
-						     const char *id)
-{
-	return 0;
-}
-
-All four lookups would count as present (count == 4), even though
-nothing was powered on, and the fsleep() below would run for no reason.
-QCA808X_PHY doesn't depend on or select REGULATOR, so this configuration
-can be built.
-
-Would it be better to guard on CONFIG_REGULATOR, or to stop treating
-ret == 0 as proof that the supply exists?
-
-> +
-> +	if (count)
-> +		fsleep(phydev->mdio.reset_assert_delay);
-
-[Severity: Medium]
-Is reset_assert_delay the right delay to use after powering up the
-rails?
-
-This value comes only from the optional reset-assert-us property.
-ethernet-phy.yaml describes that property as "Delay after the reset was
-asserted in microseconds". When the property is missing the value is 0,
-so boards without reset-assert-us get no wait at all after the supplies
-are enabled.
-
-The ordering also looks off. mdio_device_register_reset() requests the
-reset GPIO as GPIOD_OUT_LOW. So by the time drv->probe() runs, reset has
-already been deasserted and reset_deassert_delay has already been spent:
-
-phy_device_register()
-    phy_device_reset(phydev, 0);
-...
-phy_probe()
-    phy_device_reset(phydev, 0);
-    phydev->drv->probe(phydev)
-        qca808x_probe()
-            qca808x_power_on()
-                devm_regulator_get_enable_optional() ...
-                fsleep(phydev->mdio.reset_assert_delay);
-    phy_disable_interrupts(phydev);
-    ...
-
-This means the rails come up while reset is already released, and reset
-is never pulsed once the supplies are stable. A later
-phy_init_hw()->phy_device_reset(phydev, 0) does nothing, because
-reset_state is already 0.
-
-Can the MDIO accesses that phy_probe() makes right after drv->probe()
-returns, such as phy_disable_interrupts() and the get_features path,
-reach a PHY that isn't ready yet?
-
-Existing QCA8081 users such as arch/arm64/boot/dts/qcom/lemans-evk.dts
-have:
-
-    reset-assert-us = <11000>;
-    reset-deassert-us = <70000>;
-
-So even on those boards, the PHY gets only the 11ms assert time after
-power-up, not the 70ms post-deassert time. The commit message doesn't
-explain why this delay was chosen.
-
-> +#endif
-> +	return 0;
-> +}
-
-[ ... ]
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261014172300.292324-1-elder%40riscstar.com
