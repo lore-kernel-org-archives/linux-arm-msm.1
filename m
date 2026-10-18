@@ -1,220 +1,196 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3930541A547;
-	Sat, 17 Oct 2026 23:39:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792280391; cv=none; b=TDzcpXAKTfhIr6WK8P2MwsGNPWCa8n6Sg/AkMTfsvuIeVWABzQI7cUKVce76Iv5PGGkLCsjecrAZXUWc6CZZhZaDQlcVqyjiNdD/V8bu/BZZdNZrB3M5PkfqS+gVTKiwRfaQFe8UBcQ2QK7+iOA+G/+lQ3+rjQoZDjGPCbQwEew=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792280391; c=relaxed/simple;
-	bh=15/DpY4+f5RaGBS7HqIDpDjfB6P/78pr5hig3CPkuYg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=REJbS8gj0WMPQWQ56lYCgSWH4aCvOQfhDR0Di0IgyRhucEYZfMInfnQKpTKl7ymR1suJF5Xe7ae8CroHMbrnxXQm91IlAn45jvDjCd/0bZEPJqNiD99FZUhLZn0gHkiI7BUIzJhtwOOnn2fDBuIVjSUQc6lrfKaSVhD5+XIWd6U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iToMp5fx; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E1EF1A6834
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 00:47:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.9
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1792284477; cv=fail; b=DEk9i18LBOoUle/ChI0lr8xAFFHmVLP/NQq3VeaSQjjxkPK+AhwM59n/+JJlBN2fi901KSVDjW9J0zngBnY4SAkMxeZyx5jV43KEFiyE1hBTxJWmqDClpXXt04EXablVx0tS9mxAp0OTusr88jJEVwgroJsEYppy2RZUlLPa8jQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1792284477; c=relaxed/simple;
+	bh=DLMKKdqQ3+PYn59wMhxdtIqr7C+TlMV9VIM+g58sMPs=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=dv60GO4U8RpTNC9Xoj86Iq0o7l+Ta+wZ2qW8qt8OGaqkRJJskYW329ZYcqQyOThOLGwFjbkBgtph0FyRBYK/uv2I/7MFIgSqEy9ZuZlT6v2t/D5qgOYnocyakHzwJzHMOqWrBepuiHLWFnnH2hxk87TdWwLz/CYnsxwnApE8Ie8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bKPCYTM4; arc=fail smtp.client-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iToMp5fx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 035EB1F000C4;
-	Sat, 17 Oct 2026 23:39:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792280389;
-	bh=IOaIHN9koYBp4/y2xYG+zvcLw+InozkSxxmt+Azkxmo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=iToMp5fxLcQH7IgAb1ab5ZzA/49xSXrKI2GQNqawjAqYIk/zQdilaZchaGpGUXlpv
-	 iYVY2foBiUqm6ppbXT44B155SUq/sfsyHOI2IF2uhXX8DaSWqzvA5NpAoeY7pH/MIq
-	 hBRSPbNlhDPGyFPnn2tDPuud6lnp834DxZWuA2jiuMctz9Hfp/cfxDH6O2oLVNS7+z
-	 Ae5vhLDhY2NiNdvzMT2VmN0PkXCAguJTTt0tiGa7NnW5otNE3k8r/TXQfcVMnnWXK2
-	 SuKA7ZILgPurFQT2VsS6CM8lMMXpplyliduQaufxE+dmoIl684vGIpQxlxz/GSh26E
-	 0RxHFbBLFfw/Q==
-Message-ID: <141c5032-1915-4dac-bbcf-e697b762ae40@kernel.org>
-Date: Sun, 18 Oct 2026 00:39:45 +0100
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bKPCYTM4"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792284477; x=1823820477;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=DLMKKdqQ3+PYn59wMhxdtIqr7C+TlMV9VIM+g58sMPs=;
+  b=bKPCYTM4Fhyy3jlW/3CUScIOU0ATqCBeRPrYxKDhlPD4h5EnI+E5lsMk
+   pDPipVToXXKqcANLRKhNbge3cIu6nUj2090qmVRSMFRWZ7J8b6TBqX+RB
+   IpS8kE9kvKVH4wTzRDq2CG3n60KN3yZhTVoqQzCKexXTQSR1iGjlH14jc
+   xETbttue+UET7ZxyLbYDcSoCgR4mzLaWEpNdO37xAN6N6D6AylvwPxwkJ
+   mtSPuf/YOPTQzwzzY9xlUYefusK6O36mhBbGQBE2VUh3VyWc01D4zS8wo
+   oUWF0Wb7DFNzndlIwXfw31CbG8pfNPn9XzTaDmX4H5dHz2xbLA7GGDpX6
+   w==;
+X-CSE-ConnectionGUID: hkGlPe8/SeaP1JPU/zQHBQ==
+X-CSE-MsgGUID: 5N6/uEmQTfma9Db49z55KQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11938"; a="908959"
+X-IronPort-AV: E=Sophos;i="6.27,163,1787036400"; 
+   d="scan'208";a="908959"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Oct 2026 17:47:56 -0700
+X-CSE-ConnectionGUID: 5jEVI9G0Tv+BDUAaF9qgug==
+X-CSE-MsgGUID: PeJmPVV6TaiOu6HSvD/uNw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,163,1787036400"; 
+   d="scan'208";a="2289992"
+Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
+  by orviesa006.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Oct 2026 17:47:55 -0700
+Received: from ORSMSX902.amr.corp.intel.com (10.22.229.24) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Sat, 17 Oct 2026 17:47:54 -0700
+Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
+ ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49 via Frontend Transport; Sat, 17 Oct 2026 17:47:54 -0700
+Received: from BN1PR04CU002.outbound.protection.outlook.com (52.101.56.32) by
+ edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Sat, 17 Oct 2026 17:47:54 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dGPY/Q1keeXIddmktHYjlGHsLxyXaVLED1vTeKABqKcZv79btA75ASOOhf4C2H9XkA+nF/Udblnuz+OUHTy/tfEESnp4aY2ODZ1/smnJ/tM3GLtHfbUe6Pn7v504wYuLd5N11F6z48urMgQEHPLacvnc3GrfBsmhDLpLyocj8cdR+nY5aKlypF/jb6unOmOrMfPnf1BS2b6CS6uc0e1WHiM7g7ZACrn7LuCnkH5s5o9EsGDJnVt1GrhGwfa+4UsbuwlXCFcd5sg/LMYy/NDHTXWeBOlkKzSNmuPtwqBzF/no6zwi28GVTisLLdHg6G6H+6yRBMWua4O5jzPIGJdlbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HYpdoBz2Xr9otcyjWuBng+kQ/qyWyrfdZEV5OAUmT38=;
+ b=uK8CFpfwIFhxjVmpnbvpT+D+AiUhyykXIVzQ82s6ysz3B9SmftIRDnQGvPptBjpUs5Wc3uQ9nS3b0pVzFn1VSHy10X8xtKSy1Y0y3+y1MmgILGfucKW0fZedCJZSAhOMaQN8KFz87bytiDUZ7KmLnW8GLtpFdELH4z+1lgDcqBjyqnb6sM3JczOlBuaToHSP/ef/4Ll55KvVA5F3xuYwn1lk476CQA6FW33q3sqwNihku9GRswqFPJSzuCCouhrUQMIkjzWmiNnf/O6IVi/HywaolCocagFn0bNxYGS5urS5UkstibR7d7YCQ+WkADoQTmiuNiBHMdseExIupTd5AA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from PH0PR11MB4792.namprd11.prod.outlook.com (2603:10b6:510:32::11)
+ by MN0PR11MB6058.namprd11.prod.outlook.com (2603:10b6:208:376::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.17; Sun, 18 Oct
+ 2026 00:47:48 +0000
+Received: from PH0PR11MB4792.namprd11.prod.outlook.com
+ ([fe80::fec9:8db4:c768:8289]) by PH0PR11MB4792.namprd11.prod.outlook.com
+ ([fe80::fec9:8db4:c768:8289%6]) with mapi id 15.21.0522.017; Sun, 18 Oct 2026
+ 00:47:48 +0000
+Date: Sat, 17 Oct 2026 17:47:44 -0700
+From: Matthew Brost <matthew.brost@intel.com>
+To: Danilo Krummrich <dakr@kernel.org>
+CC: <intel-xe@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+	<freedreno@lists.freedesktop.org>, <linux-arm-msm@vger.kernel.org>, "Abhinav
+ Kumar" <abhinav.kumar@linux.dev>, Alice Ryhl <aliceryhl@google.com>, "Anna
+ Maniscalco" <anna.maniscalco2000@gmail.com>, Antonino Maniscalco
+	<antomani103@gmail.com>, Boris Brezillon <boris.brezillon@collabora.com>,
+	David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+	Liviu Dudau <liviu.dudau@arm.com>, Lyude Paul <lyude@redhat.com>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, Marijn Suijten
+	<marijn.suijten@somainline.org>, Maxime Ripard <mripard@kernel.org>, "Randy
+ Dunlap" <rdunlap@infradead.org>, Rob Clark <robin.clark@oss.qualcomm.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <sean@poorly.run>, "Shuah
+ Khan" <skhan@linuxfoundation.org>, Simona Vetter <simona@ffwll.ch>, "Steven
+ Price" <steven.price@arm.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?=
+	<thomas.hellstrom@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: Re: (subset) [PATCH v3 0/8] drm/gpuvm: two pass locking for exec
+Message-ID: <atQXMJxbahzKbQLr@gsse-cloud1.jf.intel.com>
+References: <20261001220632.3190896-1-matthew.brost@intel.com>
+ <20261017212357.99295-1-dakr@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20261017212357.99295-1-dakr@kernel.org>
+X-ClientProxiedBy: PH7P222CA0028.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:510:33a::11) To PH0PR11MB4792.namprd11.prod.outlook.com
+ (2603:10b6:510:32::11)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 0/6] phy/media: Add generic MIPI C-PHY support to
- CSI-2 stack
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
- linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <pFAaFSKH8thStYg6_Ew1gWdIvj5lbNBF36QKdamV1cU1Nc73wEZfM_KdQWL2NmB5fvaUpMPen7qMOzjHZ9ROIQ==@protonmail.internalid>
- <20261017-cphy_support-v1-0-8b0e1237ce95@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20261017-cphy_support-v1-0-8b0e1237ce95@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR11MB4792:EE_|MN0PR11MB6058:EE_
+X-MS-Office365-Filtering-Correlation-Id: 67da5677-0e89-43b9-769a-08df2cb16e21
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|23010399003|376014|366016|56012099006|4143699003|11063799006|261009223027099003|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: Amwn2cUBxvZAUi0moiah0VvZt7HdYvVY5O8iAr9t8l3ksdNNyrOvzI4ns9xk7PfeqL6xUdIyZpVUPfJiC+nIFOl59luDle0lhWs/bwBdKaAoqxG+aWAVFhIABeoDistL/j0n8FC4kWrAXwXt73+nVMRnshpVXr1Zgx5zL58GBntbo1WKnY8puu3a3W9fD4ibXyoe4Nmplm2OQiaA6MjGHXqVndW/aONm56BmV0/AB/SMCQkJMX4Ol7WK0hOuBSjVJQi3b7lQkfoOR1vmlUmpdd6I/g7SvsrG4nmu2wslRsGYzZFvMEjXQEhxrvMydcJ0sTMsNFZ0oIK9AZVsgSV6//AWxxm3GHkNdLFkVd4Ix8p87c/H4P3q2EJbHYFFLr7TkQAnZ9mM5oBb5yUCsh5XTzK3AMoRCL60cDMGgyWHQ4JlOepWCxXqp+NBF5MZrrJvVh77ieIsmPUTg5o7dGPtHDADwKhsUcSEcD6eRqq4pM6vBWtvVBCoYaQFYo0cLfvPIBt/AqXePSI7hAAJV9a3WZ3acBTfmjbLOu2UIxBMv8aZo4D29HHy0DVPO8s244MKO9NX6QeYpGzZKy/yKCDXuKIDcdki0LXKB6120YmFOfHjK84Cxr33hIJYPsAlC26/
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB4792.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(23010399003)(376014)(366016)(56012099006)(4143699003)(11063799006)(261009223027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?heI4nLp3fLWdrj9qVksrZp8MuHukRpMIb0m60Z+6dVv7YAt4XPVVEpt5szZq?=
+ =?us-ascii?Q?hCAXPuVr/DPhCjz2NiVKio3PYhph4tKrL3XhjCem94CYFDSMnhoaKZjOV6mc?=
+ =?us-ascii?Q?GzuEXAEu8kcFkamVzKnzKyvtYU9C/lOk/w0TKAO9QJU+8GhXiolpI/w63pVa?=
+ =?us-ascii?Q?vbBmA6gMx0VwHg6739RjkupXiRRCbfgruEW9yGxE5nP7+gD1zqef8k74EPaR?=
+ =?us-ascii?Q?vovxTjZvBMFjMusbcYefamqY9t9dDC5tTR3hhqB9qPdN2rv2VcUARhptsPgL?=
+ =?us-ascii?Q?dX81K2xhQ5ED33C538wDKiMGfnafvWVfNFr7BHxVbolgoonhZ2DD4EsRaE8G?=
+ =?us-ascii?Q?wtb27aHu7XzgzrrD5MJMqPjdM6p9UGS7sKat7a1oNEGDIbZGmzcAP6Wf14a3?=
+ =?us-ascii?Q?96Zn8rZ4yN48wYL4vkhcyO+p+MIyBiS9HTez2KsnIGwDPvzuKu7DJuA1RMLr?=
+ =?us-ascii?Q?TdALlEnm1l26rWQN4Ci79aEnK9IeN8DMT+ndD6E1lACY6yotHXS9FKgHaDji?=
+ =?us-ascii?Q?eOz3BO3pMiXp7cVkik+TikG2yk5l6lZ8F6Lw/T3IJAX2+6z7Q6xiZ/Xcfihu?=
+ =?us-ascii?Q?Q5xyTVy4oCWVTh6cJFg2mwl0MPuAIYL8G4yo7LaOzLTItPcK7zSWIHgq5lM/?=
+ =?us-ascii?Q?rBHbQ7xMWESRlDLMmph+VBXswPxkmsl2qyo6mF+eVDHwH8gONFyeDscWAHFS?=
+ =?us-ascii?Q?i9Ih21Pe2h59FjXNJi6OnpAe4MY4oetjPc6fVctkHwcpdhap31v4HVQMqwR1?=
+ =?us-ascii?Q?z7Osb0pvEBBp/IDo/6CgzMyx5qgGE2XDvtqlmfks8Q9XyBDHmYVcnOUBgsAN?=
+ =?us-ascii?Q?Nia28PWjCFgKkCv+yyrAGXnKgAQVLQQbx+eU8ZlJ/Xp+gd7EbZJiWr9HOCyq?=
+ =?us-ascii?Q?SLA72WuQAvY9vSM55jQq3TraMxcasZ2VxMrSGR16xNaCt0i3js9Woqorse4W?=
+ =?us-ascii?Q?W3Z6oS2X5YD1f2Q9cabtMTgsfVRHpsnIlOFdGSwpS/Sy1ha2QyBSfYN00sGW?=
+ =?us-ascii?Q?7UJy4ZNvNJVsvjqosb5NCb9zTboLD3lb4q6Ugjziit200hXkOaoJwLoJ5P1O?=
+ =?us-ascii?Q?2hdoS6duGAdNm1+CU5CWk+z1SftY9PiNOEdfgGDDMMiLIDYtOnX2ZpRJj31t?=
+ =?us-ascii?Q?VVZeTz8z+TKjU9s10lY8VNDkW6SWm4YiwxleJRkM9/zHTfUPhLhRW6tO9Z4F?=
+ =?us-ascii?Q?YXWGe1gA4NIxV2F8EKV38h3tKbXLC7UlAXvGBD82yq8cgnqwZX/h/XPuInBL?=
+ =?us-ascii?Q?B6wPhQjmflm+3yOSVgHdJ0trDEfXoqN2HXLSjIdRbQceJZhjHrFeQuCRLohE?=
+ =?us-ascii?Q?ZtXwUs8V8WvQHbRKFoxqdZ551vyGzbxcbFD7CJZF0xo7Mp4jSx3qIKOO99nV?=
+ =?us-ascii?Q?1R06hqxAocYMj8h2FNFmP0imk6piSet7NaKMi7czhPKW5Ybi4dj8ZGk3bW9i?=
+ =?us-ascii?Q?AWO5AXTxhjW/Qzg75FY3NZqJZDyqROYgiAuO6klmzSRm3ZVAuXbyBiczEtqt?=
+ =?us-ascii?Q?0cZsL+KnhNtltdUMFj4dlWdO7y8A+YJIk1v+Ms+v6oU21G/0XA4Oe7t98T0J?=
+ =?us-ascii?Q?M4scADMo6ohhRCiJrOnO14YLSLFC+8vf9KD47BwuhfNbo6ZKi4kqWHEosd4v?=
+ =?us-ascii?Q?akInwPqWxzcw/6/RLkkllx+IfeyaXlMitTwiKVXyPM6jpCe0NtSeZowf26uy?=
+ =?us-ascii?Q?O13XO5xe/8N8JPNGzF5CCdamSXAanmB7TaDWP9jVUIf0bMoZJ/Ntp6gF9cg0?=
+ =?us-ascii?Q?0uvwOjy/yA=3D=3D?=
+X-Exchange-RoutingPolicyChecked: jw5jU4EX3Fgw6hMQ+QZOK47dOV+HQ9H0eyLTq7HfFh5HbxuRA1n5wXJiPPPxZsmHbvd1ZCwBaZht1x9ybobqvvOHYzgUJD3PAA2Sd6VvDIyhSSTdukuxIOzSYCn2ENPeupVQ7gWs3Wniins9CZpZCXEYsuRd15ANIV0mT5gKL4JVWyQJVikbcYQlgMG+M+tqJ+9xLDQa3rk+59Oo5FEWTr/Yma+qqFy4FLJl3lRC9PDfl//i8VFwHUbfmKH6jo1P6LPAKBz1O6tM6twFAwl6NyHkXHmRhNMKJqZ27sLoVxIezCbzKShKlZ7WoCOB07/rNw5K36goK9+j+jbdQ1Luag==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 67da5677-0e89-43b9-769a-08df2cb16e21
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB4792.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2026 00:47:48.4765
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Z0LWSrLZVSjjdngUMeRTYvU6JZFIGat1cZ4QtxwbCqKkQ3KxGIL5YEWOpJsya9eIb7Kce/puNno0QnspEP4kVw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR11MB6058
+X-OriginatorOrg: intel.com
 
-On 17/10/2026 18:13, Nihal Kumar Gupta wrote:
-> George posted a C-PHY series [1] which we are currently reviewing.
-> As discussed with Bryan, this series shares our independent
-> implementation so the approaches can be compared.
+On Sat, Oct 17, 2026 at 11:23:57PM +0200, Danilo Krummrich wrote:
+> On Thu,  1 Oct 2026 15:06:24 -0700, Matthew Brost wrote:
+> > [PATCH v3 0/8] drm/gpuvm: two pass locking for exec
 > 
-> Two aspects covered here are not in [1]:
-> 
-> - Settle count calculation derived from sensor-reported T_PREPARE and
->    T_PREAMBLE timing via get_mbus_config(). [1] left this as an open
->    question.
-> 
-> - Data rate based register sequence selection using effective bit
->    rate (link_freq * 32 / 7). [1] noted downstream does this but
->    deferred it; this series implements it.
-> 
-> MIPI CSI-2 operates over two physical layer variants. D-PHY uses a
-> dedicated differential clock lane with up to four data lanes. C-PHY
-> encodes the clock within the data stream across up to three wire
-> trios, eliminating the dedicated clock lane.
-> 
-> Patch 1 extends the generic PHY framework with PHY_MODE_MIPI_CPHY
-> and struct phy_configure_opts_mipi_cphy.
-> 
-> Patch 2 adds t_prepare_ns and t_preamble_ns fields to the CSI-2
-> media bus configuration and extends CAMSS to forward them to the PHY
-> provider for settle count calculation. Sensor drivers must implement
-> get_mbus_config() and return non-zero values in nanoseconds; stream-on
-> returns -EINVAL otherwise. The strictness is deliberate: C-PHY settle
-> timing is symbol-rate-range specific and no safe value can be derived
-> from link frequency alone. A conservative fallback could be added if
-> reviewers prefer.
-> 
-> Patches 3-6 extend the Qualcomm CSIPHY driver: refactor D-PHY
-> register storage to accommodate C-PHY, accept C-PHY mode with
-> multiple data rate table selection, compute settle count, and add
-> lane power mask support for C-PHY trios.
-> 
-> C-PHY encodes 16 bits per 7 symbols, so the effective bit rate is:
-> 
->    bit_rate = link_freq * 2 * 16 / 7 = link_freq * 32 / 7
-> 
-> where link_freq is symbol_rate / 2 as reported by the sensor via
-> get_mbus_config(). The rate-table entry whose bandwidth first meets
-> or exceeds bit_rate is selected.
-> 
-> The settle count defines how many timer clock cycles the CSIPHY
-> receiver waits before scanning for C-PHY sync. It is computed from
-> the sensor's T_PREPARE and T_PREAMBLE timing. The /3 factor reflects
-> that C-PHY distributes the preamble sequence across three trios:
-> 
->    settle_cnt = (t_prepare_ns + t_preamble_ns / 3) * timer_clk_rate / 1e9
-> 
-> D-PHY settle count is unchanged from before this series.
-> 
-> [1] https://lore.kernel.org/all/20261016-x1e-cphy-rfc-v3-0-40a346a72153@gmail.com/
-> 
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-> ---
-> Nihal Kumar Gupta (6):
->        phy: core: Add MIPI C-PHY configurations
->        media: qcom: camss: Add C-PHY timing fields and get config from sensor
->        phy: qcom: mipi-csi2: Split D-PHY register settings
->        phy: qcom: mipi-csi2: Accept C-PHY mode and add register sequence
->        phy: qcom: mipi-csi2: Add C-PHY settle calculation
->        phy: qcom: mipi-csi2: Add lane mask calculation for C-PHY
-> 
->   drivers/media/platform/qcom/camss/camss-csiphy.c   |  90 +++++++++---
->   drivers/media/platform/qcom/camss/camss-csiphy.h   |   2 +
->   drivers/media/platform/qcom/camss/camss.c          |   8 +-
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 159 +++++++++++++++++----
+> Applied, thanks!
 
-So on thing I notice about this series and like is that there's a small 
-change to the existing 3ph-dphy.c
+Awesome - thank you.
 
-- Since it supports 3ph-cphy the file should be renamed
-   3ph-cphy-dphy.c (or something)
-- I like the progressive nature of he changes in this series
-   as structurally the right way to add stuff in. Small digestable
-   commits
-- I think the missing piece here is data_lanes[] and lane_polarities[]
-   per the other series from Qcom
-- Another thing is the other series from Anusha has
-   a more advanced mipi_ops data-structure for CPHY.
+Matt
 
-Basically I like the approach taken in this series for a smaller change 
-to the phy-qcom-mipi-csi2-3ph-dphy.c file.
-
-I'd like the best of both series - I think there is alot to resolve on 
-lanes, data-lanes and lane-polarities in the other series and looking at 
-this series, it seems to me we don't need a separate 
-phy-qcom-mipi-csi2-3ph-cphy.c, I think Konrad observed in George's 
-series that really the file deals with 3-phase PHYs and that seems true 
-enough.
-
-Please work out between yourself and Anusha what's next.
-
-If possible I would prefer to contain 3ph CPHY and DPHY to one file as 
-is done here - at the same time the definition of CPHY ops and lane 
-mappings is closer to the spec in the other series.
-
-I think either you should take Anusha's structs and lane definitions or 
-Anusha should take your approach to minimal change to the 
-phy-qcom-mipi-csi2-3ph-dphy.c renaming it.
-
-One of you needs to pick up the patches from the other one.
-
-George can land his stuff on top then.
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c     |  51 +++++--
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2.h          |  25 +++-
->   include/linux/phy/phy.h                            |  47 ++++++
->   include/media/v4l2-mediabus.h                      |   2 +
->   8 files changed, 315 insertions(+), 69 deletions(-)
-> ---
-> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-> change-id: 20261017-cphy_support-2ce4d656e631
 > 
-> Best regards,
-> --
-> Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-
+>   Branch: drm-misc-next
+>   Tree:   https://gitlab.freedesktop.org/drm/misc/kernel.git
+> 
+> [1/8] drm/gpuvm: allow locking external objects in two passes
+>       commit: bdb1dfac34bd
+> [2/8] drm/xe: lock the resident BOs of an exec last
+>       commit: d420ec95e4b8
+> [3/8] drm/panthor: lock the resident BOs of a submit last
+>       commit: 13b7dc3f89ca
+> [4/8] drm/msm: reject a submit_bo table on VM_BIND contexts
+>       commit: 222f78f461cb
+> [5/8] drm/msm: use DRM_GPUVM_RESV_PROTECTED for VM_BIND VMs
+>       commit: 872403c67851
+> [6/8] drm/msm: lock the resident BOs of a VM_BIND submit last
+>       commit: f3473658eda3
+> 
+> The patches will appear in the next linux-next integration (typically within 24
+> hours on weekdays).
+> 
+> The patches are queued up for the upcoming merge window for the next major
+> kernel release.
