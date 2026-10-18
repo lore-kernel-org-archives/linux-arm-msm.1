@@ -1,102 +1,102 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F178B4D4873
-	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 21:56:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EFA04D7974
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 22:07:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792360613; cv=none; b=Ezn3ums21dhhGpVmRR0xk58UOBg6nTB5xSNxkovPjcaIFP1uPped+GbwguIna/YJ/pyO/SjjN/5LBah69/cufxettS9ZYv7SN9GSNc7sayA0ubFcEDgoUf58sm39nX4HkfCK/ZwN5ZaOX26APuBvRsi+j0qLSaM9Lx6oaBZgJMw=
+	t=1792361254; cv=none; b=hY1ViNNBB4ZFnCCgMFPPEKlFjz8xbNMkrccpGHXf/gXv5VWzCd6yqd/ubOu0iUA1OLN+EK54ED28n8e63CPzWhChGaPu4NxXG4R0SgHoDsMmJLHhqR8K/iX1wQLnAwOASS/ZYu9vZxD9Tv7fUuS4SmKbeKJhPUlh6weJ+rlFMwg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792360613; c=relaxed/simple;
-	bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=p7flKNoAFqCXmxSakM3TaqkVSRT0MbOeFce/jtaZleS1dgBjCpiaA6ae+tP4JlhuEblVIKgH92rg6nvMK+0k1QRNIyktS6Ft4Pf6xbAFfOGGpRJej0II5IrSLGuwFjaVxqhfj4vTx2IaTR9AUJvT0D+yVL/FzeOiER89jgZT6j8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dkuZ9Q/5; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792361254; c=relaxed/simple;
+	bh=F9xbwsOGYhZLxeYQhkkpp+B03a+2047+e+nLiVBNWDk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=MsRxHPc5wPGxIdkCogN6kU7zKutPebyU8E85fubUFczyVQOuwqFUR7U8oEetj1OvXgO9k+Zh9QCt95LDF0HXqtc8oJlk33/Hc0BbT2+Hl+DktgEISUKzsKVKMzz9N0MWnsTABt0PbgpmUw/tg1Q1SV1Kzd65dA5ykPQBxyCyrPY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aRpH5Lad; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dkuZ9Q/5"
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a1d293b293so8144725e9.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 14:56:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792360610; x=1792965410; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
-        b=dkuZ9Q/5Ru9bka7HA3KLJEWF1aipaZIimkgOkFJAHjH3/wRansfkWLXR+GfG6o2faA
-         gCBad3VKmOXsdjqj4Cyn1Yp2BjDUynf2fBU5TWQGf8YY45MJeXmJqbduXQ7vkWzVdwe9
-         /eOZSB/E6iYJLNdvHpSK5zagER5QSOGnhftVvZUnE/0UsBoyX07A53aaOUjxes7mtqzO
-         LNo908+YVCyRSGtkPeT1H1WfY6XZxuz7+04u1mow0sBwM2FxktdqZaLX7UPGaNbKU2x2
-         Uqw4XlK7DKTKHF5tMH2f7UuCpKzKtRCNuafVCSzPVxZd/Xh8wC2VuzyRheZIB2fVlvUx
-         LFbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792360610; x=1792965410;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GPuST2lg0n0E0s++DBETZe7atvtvRXP9mMNzFPHYaTs=;
-        b=dg3H+q3IcKuAk7hBAkmUxeKU465fgT2ApLSByGWF7Gedap0wE9p8bTMkc6xACwh6lE
-         lS1g4PlKU8rU1AgqvLrnCiBGvhqXwS1gErCqnbCyw//Q6fGNTpcLf3Ffy2ZIC9ZlDSJZ
-         88cllgjgwp9yyVwP5mmDY/gOQuOnrETINDZ9by4/Kl7w7xxf1BlGYIdLahTRz1E3GXda
-         Bvc5PGE/4XoJHdwuJiiAE32uvc3DH4bcz0DNl+/PqkX1AmNGYmdT4WIAt7WhC1h3mDAM
-         dWdMEMbhM4idzFO0qMoMmxYvCafw+1KZCZ00U6cE88BDs1bvU/va2HW1AXoR3ji2K593
-         jmSg==
-X-Forwarded-Encrypted: i=1; AKwUvBwCBCTSbWbkwnfC51g5FkpFC4Nf/DMfSA5TJ6XyHvnezrt3vCMKk4G1kDciUT8iTrFfL9ey+lvlYqg8FI/u@vger.kernel.org
-X-Gm-Message-State: AFq9FYKZmKeizEYqNxP6BG3ebihmB+1wd2hOF8bN/yLPUvKDhzrBcd62
-	SGLvaDmXbHZ/cNGPpp56mC5kMHvAu7zMua+O8agFsmj302J01uc+VA+D
-X-Gm-Gg: AYBFou2UxLiZ4LFQoO2279EbZN1kB4OGc+W/RhVZifUs8O5YNhy6zlBqzBZMSgg0mIW
-	kVoHNCUSsBipEvZFO4VaIvCcJduyJlqVDFk84pA8uStaQktGlGgRRuDmlb0JjnSJm4UHSOtvl66
-	c2XRDsGfhoRIBO7zGbr/Lln6MXNrTyXf0uEP59UnWMRiagZoLfhiyDKOUA27BTmHR7cNH5jQpF4
-	YwH8a4RTf0YsXVMPBU5SluNXqnNISmuEjOfzwPjr9hHoHXf1ew2PCt3b3ryztmMXnUuV/vegm/0
-	RCtXmBUfAW2lIVx0zkPa0Eyy8IPY4Tk6Ga2JWNNU0/evu7qM/P5XLuhUaw2gcWBHRnfr5kh8Cho
-	0Q5EOmPSPOyyhp6JMcqZp4m8rA4RZ//Ehic986EmjhepsTN2s5MXS2/6HhSdjziwOfyJa3stwQw
-	QWwIjkPMINtX1OsQlUi9kX02z9EWjk0YlIbaCQWOGD30nOobAEeZhYgUA4f4i1WQX6cStevCiYe
-	SQK5GclZO05siiaZZOKiHwlyaiMEyROnT+uTLGg7Zc2a/ytR/HkBvfmfM+HzClGQCWinNSnzE2u
-	nMraOlJdReg=
-X-Received: by 2002:a05:600c:190e:b0:4a1:90d7:88a8 with SMTP id 5b1f17b1804b1-4a1d76106c0mr131795365e9.25.1792360609943;
-        Sun, 18 Oct 2026 14:56:49 -0700 (PDT)
-Received: from hermes-agent.lan (228.red-80-29-82.staticip.rima-tde.net. [80.29.82.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1bd91c55bsm278449055e9.0.2026.10.18.14.56.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 14:56:49 -0700 (PDT)
-From: =?UTF-8?q?Ram=C3=B3n=20Jes=C3=BAs=20Miranda?= <ramonjesusmiranda@gmail.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>
-Cc: sashiko-bot@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/dpu: keep vblank enabled when entering self refresh
-Date: Sun, 18 Oct 2026 21:56:48 +0000
-Message-ID: <20261018215648.1329624-1-ramonjesusmiranda@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <sashiko-outbox-176261@kernel.org>
-References: <sashiko-outbox-176261@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aRpH5Lad"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C6411F000C6
+	for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 22:07:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792361252;
+	bh=CWdO1KyORGSqm7uhLPCSusKj/IGXrx0602wzuxRWapI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=aRpH5LadcvD9j+QI5en9zFrZ1rw5eyWXbD7KE93jHW6YBtemaVpgklxxQvhxlgolO
+	 qS8hQ6V2BRnOrk46qwAjdqTJOjzKZVn7K7huCu8Z0xuKsXGKp1kSY27A/4vaXh+K/D
+	 ooAOdkjoB1zKMJMrYiys2UAx/yMYSxmBtnMN+HWVK883Mjcp6qFxh7CVOAIsgEsf37
+	 J8gGK54yuXAji9W9BuNereDgAJds8F+sLlwEiflqxQ0haHhQnZqipoxAOme/QXIoWQ
+	 Y1x2My6UO3PmLhrwjdG464dznAYtzSdsOjvWhe+/9L2zdDHoqKOiF3Mm+I6yizLASp
+	 RupLCaCaW8yRA==
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5ba3ec92031so1880129e87.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 15:07:32 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBx7XSMuv4t675BG8U2qeEPXgG4YLx2/BEPRMC8QmPH9sRvDktZelNgUNMGQYT2/GAURn9l56Oz5qb724oXk@vger.kernel.org
+X-Gm-Message-State: AFq9FYIZlJV3/HAzs25P6rD9HUSa+XukGxutvwtvtyT6FcLuMqoKjGuK
+	9XtQkigNe8kFU4/bUIGftFv8PFmXATnY6RTbAwxdT6s3V4HZBCrHgxo0ydbgPTgFVH7U79MKPlO
+	7GTqw48LtKVaf9cPnRnxsOCrXkvBNUII=
+X-Received: by 2002:a05:6512:10c1:b0:5b8:f4d4:7ff4 with SMTP id
+ 2adb3069b0e04-5be50a74cc6mr1663573e87.53.1792361250883; Sun, 18 Oct 2026
+ 15:07:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20261017-iio-light-gp2ap002-v2-0-d6879767a446@rudorff.com> <20261017-iio-light-gp2ap002-v2-1-d6879767a446@rudorff.com>
+In-Reply-To: <20261017-iio-light-gp2ap002-v2-1-d6879767a446@rudorff.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Mon, 19 Oct 2026 00:07:18 +0200
+X-Gmail-Original-Message-ID: <CAD++jLn92F+pt3TjBpZYJGa_yJc_vO6SNN4UQ7cQicr5303Z8Q@mail.gmail.com>
+X-Gm-Features: AclHuK-c09UZJfrcHpK9Gk0C-hPkHJfmtbKsGalJ_K_1dxEP5I0KdV6EMn4_rI4
+Message-ID: <CAD++jLn92F+pt3TjBpZYJGa_yJc_vO6SNN4UQ7cQicr5303Z8Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: iio: light: gp2ap002: add vled
+To: Christoph Rudorff <chris@rudorff.com>
+Cc: Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+	=?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for the review. Both points look right to me: the self refresh
-exit path in dpu_crtc_disable() returns early without
-drm_crtc_vblank_off(), and with vblank_disable_immediate the vblank
-worker can end up touching DPU interrupt registers after the last
-runtime PM reference is gone.
+On Sat, Oct 17, 2026 at 7:28=E2=80=AFPM Christoph Rudorff <chris@rudorff.co=
+m> wrote:
 
-Please consider this patch withdrawn. I will look at keeping the vblank
-IRQ path consistent with the self refresh entry/exit (and the runtime PM
-reference) and send a v2 if I get it right.
+> According to datasheet page 8 "Recommended external circuit",
+> it can have tree supplies: vio, vdd and vled. As vdd and vled wants the
+> same voltage, they may be connected to a single supply.
+>
+> Signed-off-by: Christoph Rudorff <chris@rudorff.com>
+> ---
+>  Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.y=
+aml b/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
+> index 99bddf31cbed..f5b2c6a4d7e3 100644
+> --- a/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
+> +++ b/Documentation/devicetree/bindings/iio/light/sharp,gp2ap002.yaml
+> @@ -33,6 +33,10 @@ properties:
+>    vio-supply:
+>      description: VIO power supply a phandle to a regulator
+>
+> +  vled-supply:
 
-Thanks,
-Ramón
+So this should be named leda-supply like the pin on the component.
+
+> +    description: LED power supply a phandle to a regulator
+> +      Optional. It may already be connected to VDD.
+
+Description should say "LED anode power supply" as that is what the
+"A" means in leda.
+
+I'm not sure it should be optional really as it technically *must*
+be connected but the diplomatic solution is to not make it
+required so we don't break a ton of device trees.
+
+If we wanna be really detail oriented, add it optional, fix all
+device trees, make it non-optional.
+
+Yours,
+Linus Walleij
