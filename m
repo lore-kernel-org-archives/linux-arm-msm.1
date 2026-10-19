@@ -1,50 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=34.202.193.197
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792424878;
-	b=Q0KgrKDfn6a4Xm19ZTocCO0CPzShUkxbeHB7o6OVjoBuiwF6DT0al+cNd1zY9d/Vw603
-	 qR6aiBKacOLKlJFiI+znBtTw2eggix8lqNTYbTdb2ahLZhSETef1y0EPUR7UCR24lvwQN
-	 bxoDpXMd54sPDYI7wP69eczpSk+2+xJ7d3ZHWuD/RF29Mhdiwgm+bVbZHyTDM0R1c/OXB
-	 +YnUQNu2jYuGIox3k5Uaur9S8JSV/fmdVfAavNP7uvN/vAxi3D6bgDhaq2Wd65HspuNDO
-	 eUWfFldF3OWAJ9yuwVLcyY+tyeYT417mturSCfoHWL0CbRamPSpwfwsi6cF1Zz8iDnw==
+	t=1792424998;
+	b=CHiWlSj68eeeLefC+fa7vjOvYqqRKl5iKhAaXtqYkbkCqSXobmGvxs9V9PEC4T2Ccg/I
+	 fZSFKP+cayDyjcJmNCtaKNSP5JyK1T5wVksIvMPywfqaiEZ69Wt4fu1x04jE/yjxBuz9g
+	 27QSgf7CR371BWSiLrJFzTTEks8zn4DY4bBiC0LHh0pI5YpkmhK+W4ERjka06LRTIYw6E
+	 gYBDGK3aYAvfgXiU1g3cWzkfiHGkS+Xhz5w4y/Xl8hI98YASvzPwcTtzBBIMgzDFwDBaO
+	 6v2ZC6kie0y3jzp85t4orX4duyejEb9lpItyBeMfzaYIfTQCSIExTXBee3VBlLBqXoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792424878;
-	h=DMARC-Filter:DKIM-Signature:Feedback-ID:X-Pm-Original-To:Received:
-	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=7tPh6GWQw5c6/gfSTX6alIzycN3uKF0Q8KzYpVwjSkw=;
-	b=dwnKMOlxaBmtYVKNgJoJZEcK6/lTttg0tg+LF1PxO8X/aniMQgiFHV3/CA2+Wnj6UMAZ
-	 wMgAndTgQhDmJHVNCkA9s/cP1k5JShkkMNfUghNPCxkyB85Zx76EnSO/IDCnwCfR426p4
-	 6We4ZO0lCsosfz23t2tX/gIMwem0VBjdAiHwcedUwAHeb9JMdzZEWtziKpJc3StLSpd+Z
-	 Nrv8fnnAszCqrbfng7Rx0CGdBNatkpG38OosPFXMRooWQ/pgiCGGNfGTsO4zk0xBVTQZM
-	 xOOxABvCn6/45ZUCYO91bNav8o03NhUggA1UObHWma82DSDwkLrLQmfyj4TraE+QTsg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792424998;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=DswmWj38SvF+mrDzPS0ddFSFW59m+8lcqwF1axXK7uE=;
+	b=FIthKKywzm/7amvn3XHBY05U3HhdXHNZTGGni8EE8i7j44JQVYv5guLRLrkte56mDuN+
+	 nZv4F1kIRbYYaVigQACwY2UtNdgPEH/IVwyHeSKclB/dOJE/wuIVjS0XDWP13+bCibVYU
+	 aJ94jBAaFQGoUbRaLQfnpxG/6uHkfaTLkXYFmulP7msnticuJ4k10ZjaIrdftqGbaHrk4
+	 kjd1RK35iBRa6y+HGUpcClQh5ClR0nZWlSKpds+zDT7ftbcqD6gTO07ml5arTAANgOAjd
+	 1j4DnSUcmhmr1uUJUwG09QTI9F5hgKMlYfF/1IOhfAx8sIdVoKEaiuNzApz/3w2lLug==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=mentallysanemainliners.org;
-	spf=pass smtp.mailfrom=mentallysanemainliners.org;
-	dkim=pass header.d=purelymail.com header.i=@purelymail.com header.a=rsa-sha256 header.s=purelymail3 header.b=GISDp+cY;
-	arc=none smtp.remote-ip=34.202.193.197
-Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SpiZoUWw;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 775B3606AF97
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:47:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 775B3606AF97
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mentallysanemainliners.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mentallysanemainliners.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14DD6609A544;
+	Mon, 19 Oct 2026 15:49:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=purelymail.com header.i=@purelymail.com header.a=rsa-sha256 header.s=purelymail3 header.b=GISDp+cY
-DKIM-Signature: a=rsa-sha256; b=GISDp+cYU4FLfC+6ZSnHmq5k98brcvwdlpLNM1wSz+GuHF4xEYkDEquymv8NLLolMCTOum+bzfD6uOfNqcoJDPyjxKtu+vuw4Kb9JR0eNrdFbjz8MK+3ND6vqvAnVr/MuMNZD6WHDKN2ryfXSGdaVmUz2rL0qsPrv9VflOwSqh20VWDvUSpc2Xqp24dr0yXuUgcpzC/vX6SVDQEpKM6FKvClsEi21VocUos/VZeYAW8BFd/8HV4vIDsi2ynT64gx4vUsjHxu7Jj3vLujNo4K3gwFDxybcpUe5cFDZmquSs/YSTFGL+Bsvso5m0CXb2ZlNAkLzHmWc/a6/nrAlgfl8A==; s=purelymail3; d=purelymail.com; v=1; bh=cDFlomIYJQCW3qVXwHNJiROIVrpTLbegfOydCms9BQQ=; h=Feedback-ID:Received:From:Date:Subject:To;
-Feedback-ID: 68247:10037:null:purelymail
-X-Pm-Original-To: linux-arm-msm@vger.kernel.org
-Authentication-Results: purelymail.com; auth=pass
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -415248943;
-          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
-          Mon, 19 Oct 2026 15:47:35 +0000 (UTC)
-From: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Date: Mon, 19 Oct 2026 17:47:23 +0200
-Subject: [PATCH v4 2/2] arm64: dts: qcom: Add support for Xiaomi 17 Ultra
- phones
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SpiZoUWw
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44D621F000C4;
+	Mon, 19 Oct 2026 15:49:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792424997;
+	bh=DswmWj38SvF+mrDzPS0ddFSFW59m+8lcqwF1axXK7uE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=SpiZoUWw4IGZ95ffvLaDNVUnyWsXcPywK8C9pJ5isYTZJVdILSf+d4xCESFM1I7QQ
+	 JAqqux0YR9YNH2Zo0u4Ep49YjvmPvP1IENosFxWqJm0fMXqCYzm+OwpEKfSYNH44nc
+	 cR0Axr/8VKD751zi6R4/s6LJfpGPPkZTnxbkIT35z5cKZU7/hlKGnGRmAX6WwlG81s
+	 krgwmf4bv/J50svJMUx9/B8viF3Y36JSg1jHg/0Mt/NORCn5x8Aj/FIMmMwPNn8Q4t
+	 FEae+1Bh5wCEhk4ZjPh454f+n/kPbphFo+04yg+XHvMSEv6PcIgD4mqETWRNgkLw9G
+	 3XuA3taa3AA3w==
+Message-ID: <791c7eed-f0c2-47c3-9595-77be72f29771@kernel.org>
+Date: Mon, 19 Oct 2026 16:49:54 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -54,1010 +51,95 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2] phy: qcom-mipi-csi2: round the requested settle
+ interval up
+To: Jizhou Tong <fqwqf@fqwqf.xyz>
+Cc: vkoul@kernel.org, neil.armstrong@linaro.org, olteanv@gmail.com,
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, sashiko-reviews@lists.linux.dev
+References: <sashiko-outbox-168888@kernel.org>
+ <gq57UstyL5YYIJxiym8K0_j1cLrB6u3f908v8Ar3hgadrJwRuof5w5VUh4zR_xQKTGHIPadU-wb7lFoMzWYsZA==@protonmail.internalid>
+ <010601a154d83d84-0b2dea8c-14b7-477b-b1ec-3f44b0b55ad4-000000@ap-northeast-1.amazonses.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <010601a154d83d84-0b2dea8c-14b7-477b-b1ec-3f44b0b55ad4-000000@ap-northeast-1.amazonses.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-nezha-v4-2-19c1e31eb255@mentallysanemainliners.org>
-References: <20261019-nezha-v4-0-19c1e31eb255@mentallysanemainliners.org>
-In-Reply-To: <20261019-nezha-v4-0-19c1e31eb255@mentallysanemainliners.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792424849; l=29299;
- i=igor.belwon@mentallysanemainliners.org; s=20251104;
- h=from:subject:message-id; bh=cDFlomIYJQCW3qVXwHNJiROIVrpTLbegfOydCms9BQQ=;
- b=ZpSyl10kTRrOauaeowOnGfbWXV9j99roIAUZSGf4AllqTr0YpOjtcf5hQhQS7e8x9TlL8p8N2
- rHZZ+yyyyRuB8uTdJo/wXnlawpx1KL5pE8fNqVRzotYnIczae+TXkU6
-X-Developer-Key: i=igor.belwon@mentallysanemainliners.org; a=ed25519;
- pk=i9++1bbnBwoyc3uhTaetGXS1TbBJoS0mcxT59GrpYh0=
 
-The Xiaomi 17 Ultra device, codenamed 'nezha', is a flagship mobile
-phone released by Xiaomi in 2025 (China)/2026 (EEA). It uses the
-Qualcomm Kaanapali SoC.
+On 19/10/2026 16:47, Jizhou Tong wrote:
+> Hi Bryan,
+> 
+> I checked the zero-count case raised by Sashiko against media-next
+> (d7e7bca71698) and the rounding patch. Both the base driver and the
+> patched driver return zero when the calculated interval is exactly
+> six integer timer periods, and lanes_enable() rejects it with -ENODEV.
+> 
+> For example, link_freq = 600000000 Hz and timer_clk_rate = 66666666 Hz
+> produce a 90000 ps interval and a 15000 ps integer timer period. The
+> helper returns zero before and after the patch. This is a software
+> boundary case, not a clock configuration I have tested on hardware.
+> 
+> Is a programmed settle count of zero valid on the supported PHYs, or
+> is rejecting it intentional? If it is valid, the helper would need to
+> distinguish it from an unrepresentable interval, with the caller checking
+> for an error separately.
+> 
+> The rounding RFC preserves the existing zero-count handling. I would
+> keep any change to that hardware policy separate from the rounding fix.
+> 
+> Best regards,
+> Jizhou Tong
 
-This device's configuration is based on the 'MTP' from Qualcomm,
-as is also referenced in the downstream sources. Apart from the
-usual differences (i.e. codecs, panel), it also uses the newer
-WCN7860 (peach) connectivity chip, which is why WiFi/BT are not
-brought up.
+Zero is not a valid settle count so we should just pick a minimum value. 
+For historical reasons six counts is it.
 
-The difference between the EEA and the Chinese model is the battery
-capacity, notably, the EEA model has a smaller 6000 mAh battery when
-compared to the CN 6800 mAh SiC battery.
+If the calculated settle_cnt < 6 => settle_cnt = 6;
 
-Currently implemented features are:
- - Booting
- - Power and volume keys
- - Storage (UFS)
- - USB-C Peripheral and Host modes
- - GPU
- - Fuel gauge
- - ADSP, CDSP, SoCCP remote processors
+I realise the LLM is in paroxysms about that but...
 
-Signed-off-by: Igor Belwon <igor.belwon@mentallysanemainliners.org>
 ---
- arch/arm64/boot/dts/qcom/Makefile                  |   1 +
- .../boot/dts/qcom/kaanapali-xiaomi-nezha-cn.dts    |  20 +
- .../dts/qcom/kaanapali-xiaomi-nezha-common.dtsi    | 881 +++++++++++++++++++++
- .../boot/dts/qcom/kaanapali-xiaomi-nezha-eea.dts   |  20 +
- 4 files changed, 922 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 88230c4e00ea..a00871781c8f 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -50,6 +50,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= ipq9574-rdp454.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq9650-rdp488.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= kaanapali-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= kaanapali-qrd.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= kaanapali-xiaomi-nezha-cn.dtb kaanapali-xiaomi-nezha-eea.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk.dtb
- 
- lemans-evk-camera-csi1-imx577-dtbs	:= lemans-evk.dtb lemans-evk-camera-csi1-imx577.dtbo
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-cn.dts b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-cn.dts
-new file mode 100644
-index 000000000000..7e93adcdb83f
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-cn.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2026, Igor Belwon <igor.belwon@mentallysanemainliners.org>
-+ */
-+
-+/dts-v1/;
-+
-+#include "kaanapali-xiaomi-nezha-common.dtsi"
-+
-+/ {
-+	model = "Xiaomi 17 Ultra (China)";
-+	compatible = "xiaomi,nezha-cn", "xiaomi,nezha", "qcom,kaanapali";
-+};
-+
-+/* Battery model: BM6N */
-+&battery {
-+	voltage-min-design-microvolt = <3200000>;
-+	energy-full-design-microwatt-hours = <25840000>;
-+	charge-full-design-microamp-hours = <6800000>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-common.dtsi b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-common.dtsi
-new file mode 100644
-index 000000000000..301211b76cfe
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-common.dtsi
-@@ -0,0 +1,881 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * Copyright (c) 2026, Igor Belwon <igor.belwon@mentallysanemainliners.org>
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/linux-event-codes.h>
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include "kaanapali.dtsi"
-+
-+#include "pm8010-kaanapali.dtsi"     /* SPMI1: SID-12/13   */
-+#include "pmd8028-kaanapali.dtsi"    /* SPMI1: SID-4       */
-+#include "pmh0101.dtsi"              /* SPMI0: SID-1       */
-+#include "pmh0104-kaanapali.dtsi"    /* SPMI1: SID-9       */
-+#include "pmh0110-kaanapali.dtsi"    /* SPMI0: SID-3/5/6/8 */
-+#include "pmih0108-kaanapali.dtsi"   /* SPMI1: SID-7       */
-+#include "pmk8850.dtsi"              /* SPMI0: SID-0       */
-+#include "pmr735d-kaanapali.dtsi"    /* SPMI1: SID-10      */
-+
-+/ {
-+	chassis-type = "handset";
-+
-+	battery: battery {
-+		compatible = "simple-battery";
-+	};
-+
-+	/* Without this node, the bootloader will reject our dtb. */
-+	chosen {};
-+
-+	clocks {
-+		xo_board: xo-board {
-+			compatible = "fixed-clock";
-+			clock-frequency = <76800000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		sleep_clk: sleep-clk {
-+			compatible = "fixed-clock";
-+			clock-frequency = <32000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		bi_tcxo_div2: bi-tcxo-div2-clk {
-+			compatible = "fixed-factor-clock";
-+			#clock-cells = <0>;
-+
-+			clocks = <&rpmhcc RPMH_CXO_CLK>;
-+			clock-mult = <1>;
-+			clock-div = <2>;
-+		};
-+
-+		bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
-+			compatible = "fixed-factor-clock";
-+			#clock-cells = <0>;
-+
-+			clocks = <&rpmhcc RPMH_CXO_CLK_A>;
-+			clock-mult = <1>;
-+			clock-div = <2>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&key_vol_up_default>;
-+		pinctrl-names = "default";
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			gpios = <&tlmm 101 GPIO_ACTIVE_LOW>;
-+			debounce-interval = <15>;
-+			linux,can-disable;
-+			wakeup-source;
-+		};
-+	};
-+
-+	pmic-glink {
-+		compatible = "qcom,kaanapali-pmic-glink",
-+			     "qcom,pmic-glink";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+
-+			power-role = "dual";
-+			data-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					pmic_glink_hs_in: endpoint {
-+						remote-endpoint = <&usb_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					pmic_glink_ss_in: endpoint {
-+						remote-endpoint = <&usb_dp_qmpphy_out>;
-+					};
-+				};
-+
-+				port@2 {
-+					reg = <2>;
-+
-+					pmic_glink_sbu: endpoint {
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	reserved-memory {
-+		/*
-+		 * If we do not have this exact region with this exact name
-+		 * present, the bootloader disables the display panel and
-+		 * for some reason it cannot be re-enabled.
-+		 */
-+		splash_region@fc800000 {
-+			reg = <0x0 0xfc800000 0x0 0x2b00000>;
-+			no-map;
-+		};
-+
-+		/delete-node/ pdp@81300000;
-+		pdp_mem: pdp@81200000 {
-+			reg = <0x0 0x81200000 0x0 0x200000>;
-+			no-map;
-+		};
-+	};
-+};
-+
-+&adspslpi_mem {
-+	reg = <0x0 0xa1400000 0x0 0x5580000>;
-+};
-+
-+&apps_rsc {
-+	regulators-0 {
-+		compatible = "qcom,pmh0101-rpmh-regulators";
-+		qcom,pmic-id = "B_E0";
-+
-+		vreg_bob1: bob1 {
-+			regulator-name = "vreg_bob1";
-+			regulator-min-microvolt = <3008000>;
-+			regulator-max-microvolt = <4000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_bob2: bob2 {
-+			regulator-name = "vreg_bob2";
-+			regulator-min-microvolt = <2704000>;
-+			regulator-max-microvolt = <3552000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1b_1p8: ldo1 {
-+			regulator-name = "vreg_l1b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l2b_3p0: ldo2 {
-+			regulator-name = "vreg_l2b_3p0";
-+			regulator-min-microvolt = <3008000>;
-+			regulator-max-microvolt = <3048000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l4b_1p8: ldo4 {
-+			regulator-name = "vreg_l4b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l5b_3p1: ldo5 {
-+			regulator-name = "vreg_l5b_3p1";
-+			regulator-min-microvolt = <3100000>;
-+			regulator-max-microvolt = <3148000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l6b_1p8: ldo6 {
-+			regulator-name = "vreg_l6b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <3008000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l7b_1p8: ldo7 {
-+			regulator-name = "vreg_l7b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <3008000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l8b_1p8: ldo8 {
-+			regulator-name = "vreg_l8b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <3008000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l9b_3p3: ldo9 {
-+			regulator-name = "vreg_l9b_3p3";
-+			regulator-min-microvolt = <3008000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l10b_1p8: ldo10 {
-+			regulator-name = "vreg_l10b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l11b_1p0: ldo11 {
-+			regulator-name = "vreg_l11b_1p0";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1292000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l12b_1p8: ldo12 {
-+			regulator-name = "vreg_l12b_1p8";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l13b_3p0: ldo13 {
-+			regulator-name = "vreg_l13b_3p0";
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l14b_3p2: ldo14 {
-+			regulator-name = "vreg_l14b_3p2";
-+			regulator-min-microvolt = <3200000>;
-+			regulator-max-microvolt = <3200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l15b_1p8: ldo15 {
-+			regulator-name = "vreg_l15b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l17b_2p5: ldo17 {
-+			regulator-name = "vreg_l17b_2p5";
-+			regulator-min-microvolt = <2504000>;
-+			regulator-max-microvolt = <2504000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l18b_1p2: ldo18 {
-+			regulator-name = "vreg_l18b_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+
-+	regulators-1 {
-+		compatible = "qcom,pmh0110-rpmh-regulators";
-+		qcom,pmic-id = "D_E0";
-+
-+		vreg_s10d_1p0: smps10 {
-+			regulator-name = "vreg_s10d_1p0";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1d_1p2: ldo1 {
-+			regulator-name = "vreg_l1d_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1256000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l2d_0p9: ldo2 {
-+			regulator-name = "vreg_l2d_0p9";
-+			regulator-min-microvolt = <912000>;
-+			regulator-max-microvolt = <958000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l3d_0p8: ldo3 {
-+			regulator-name = "vreg_l3d_0p8";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <880000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l4d_1p2: ldo4 {
-+			regulator-name = "vreg_l4d_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+
-+	regulators-2 {
-+		compatible = "qcom,pmh0110-rpmh-regulators";
-+		qcom,pmic-id = "F_E0";
-+
-+		vreg_s6f_0p5: smps6 {
-+			regulator-name = "vreg_s6f_0p5";
-+			regulator-min-microvolt = <300000>;
-+			regulator-max-microvolt = <570000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s7f_1p2: smps7 {
-+			regulator-name = "vreg_s7f_1p2";
-+			regulator-min-microvolt = <1224000>;
-+			regulator-max-microvolt = <1372000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s8f_1p8: smps8 {
-+			regulator-name = "vreg_s8f_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1f_1p2: ldo1 {
-+			regulator-name = "vreg_l1f_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l2f_1p2: ldo2 {
-+			regulator-name = "vreg_l2f_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l3f_0p8: ldo3 {
-+			regulator-name = "vreg_l3f_0p8";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <936000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l4f_0p8: ldo4 {
-+			regulator-name = "vreg_l4f_0p8";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <912000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+
-+	regulators-3 {
-+		compatible = "qcom,pmh0110-rpmh-regulators";
-+		qcom,pmic-id = "G_E0";
-+
-+		vreg_s7g_0p9: smps7 {
-+			regulator-name = "vreg_s7g_0p9";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s9g_1p0: smps9 {
-+			regulator-name = "vreg_s9g_1p0";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1g_1p2: ldo1 {
-+			regulator-name = "vreg_l1g_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l2g_1p8: ldo2 {
-+			regulator-name = "vreg_l2g_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l3g_1p2: ldo3 {
-+			regulator-name = "vreg_l3g_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l4g_0p9: ldo4 {
-+			regulator-name = "vreg_l4g_0p9";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <920000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+
-+	regulators-4 {
-+		compatible = "qcom,pmh0110-rpmh-regulators";
-+		qcom,pmic-id = "I_E0";
-+
-+		vreg_s7i_0p9: smps7 {
-+			regulator-name = "vreg_s7i_0p9";
-+			regulator-min-microvolt = <900000>;
-+			regulator-max-microvolt = <972000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2i_1p2: ldo2 {
-+			regulator-name = "vreg_l2i_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l3i_0p8: ldo3 {
-+			regulator-name = "vreg_l3i_0p8";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <920000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+
-+		vreg_l4i_1p8: ldo4 {
-+			regulator-name = "vreg_l4i_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+
-+	regulators-5 {
-+		compatible = "qcom,pmh0104-rpmh-regulators";
-+		qcom,pmic-id = "J_E1";
-+
-+		vreg_s1j_0p8: smps1 {
-+			regulator-name = "vreg_s1j_0p8";
-+			regulator-min-microvolt = <400000>;
-+			regulator-max-microvolt = <1000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s2j_0p8: smps2 {
-+			regulator-name = "vreg_s2j_0p8";
-+			regulator-min-microvolt = <500000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s3j_1p2: smps3 {
-+			regulator-name = "vreg_s3j_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s4j_0p7: smps4 {
-+			regulator-name = "vreg_s4j_0p7";
-+			regulator-min-microvolt = <300000>;
-+			regulator-max-microvolt = <1000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-6 {
-+		compatible = "qcom,pmr735d-rpmh-regulators";
-+		qcom,pmic-id = "K_E1";
-+
-+		vreg_l1k_0p8: ldo1 {
-+			regulator-name = "vreg_l1k_0p8";
-+			regulator-min-microvolt = <300000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2k_0p7: ldo2 {
-+			regulator-name = "vreg_l2k_0p7";
-+			regulator-min-microvolt = <700000>;
-+			regulator-max-microvolt = <1000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3k_1p2: ldo3 {
-+			regulator-name = "vreg_l3k_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l4k_1p0: ldo4 {
-+			regulator-name = "vreg_l4k_1p0";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5k_0p7: ldo5 {
-+			regulator-name = "vreg_l5k_0p7";
-+			regulator-min-microvolt = <700000>;
-+			regulator-max-microvolt = <1000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6k_1p7: ldo6 {
-+			regulator-name = "vreg_l6k_1p7";
-+			regulator-min-microvolt = <1700000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7k_0p7: ldo7 {
-+			regulator-name = "vreg_l7k_0p7";
-+			regulator-min-microvolt = <700000>;
-+			regulator-max-microvolt = <848000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-7 {
-+		compatible = "qcom,pm8010-rpmh-regulators";
-+		qcom,pmic-id = "M_E1";
-+
-+		vreg_l1m_1p0: ldo1 {
-+			regulator-name = "vreg_l1m_1p0";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2m_1p0: ldo2 {
-+			regulator-name = "vreg_l2m_1p0";
-+			regulator-min-microvolt = <1096000>;
-+			regulator-max-microvolt = <1104000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3m_2p8: ldo3 {
-+			regulator-name = "vreg_l3m_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2900000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l4m_2p2: ldo4 {
-+			regulator-name = "vreg_l4m_2p2";
-+			regulator-min-microvolt = <2200000>;
-+			regulator-max-microvolt = <2200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6m_2p8: ldo6 {
-+			regulator-name = "vreg_l6m_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7m_2p8: ldo7 {
-+			regulator-name = "vreg_l7m_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-8 {
-+		compatible = "qcom,pm8010-rpmh-regulators";
-+		qcom,pmic-id = "N_E1";
-+
-+		vreg_l1n_1p1: ldo1 {
-+			regulator-name = "vreg_l1n_1p1";
-+			regulator-min-microvolt = <1096000>;
-+			regulator-max-microvolt = <1104000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2n_1p2: ldo2 {
-+			regulator-name = "vreg_l2n_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3n_1p8: ldo3 {
-+			regulator-name = "vreg_l3n_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l4n_1p8: ldo4 {
-+			regulator-name = "vreg_l4n_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5n_2p8: ldo5 {
-+			regulator-name = "vreg_l5n_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6n_2p8: ldo6 {
-+			regulator-name = "vreg_l6n_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7n_3p3: ldo7 {
-+			regulator-name = "vreg_l7n_3p3";
-+			regulator-min-microvolt = <3304000>;
-+			regulator-max-microvolt = <3304000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/kaanapali/Xiaomi/nezha/gen80200_zap.mbn";
-+};
-+
-+&i2c5 {
-+	status = "okay";
-+
-+	bq27z561: fuel-gauge@55 {
-+		compatible = "ti,bq27z561";
-+		reg = <0x55>;
-+		monitored-battery = <&battery>;
-+	};
-+};
-+
-+&pmih0108_e1_eusb2_repeater {
-+	qcom,tune-usb2-amplitude = /bits/ 8 <0x1>;
-+	qcom,tune-usb2-disc-thres = /bits/ 8 <0x3>;
-+	qcom,tune-usb2-preem = /bits/ 8 <0x2>;
-+	qcom,tune-res-fsdif = /bits/ 8 <0x7>;
-+	qcom,squelch-detector-bp = <0>;
-+
-+	vdd18-supply = <&vreg_l15b_1p8>;
-+	vdd3-supply = <&vreg_l5b_3p1>;
-+};
-+
-+&pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/kaanapali/Xiaomi/nezha/adsp.mbn",
-+			"qcom/kaanapali/Xiaomi/nezha/adsp_dtb.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/kaanapali/Xiaomi/nezha/cdsp.mbn",
-+			"qcom/kaanapali/Xiaomi/nezha/cdsp_dtb.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_soccp {
-+	firmware-name = "qcom/kaanapali/Xiaomi/nezha/soccp.mbn",
-+			"qcom/kaanapali/Xiaomi/nezha/soccp_dtb.mbn";
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <28 4>,  /* Unknown */
-+			       <36 8>,  /* Secure NFC */
-+			       <74 1>,  /* eSE */
-+			       <119 1>, /* SoCCP */
-+			       <144 4>; /* CXM UART */
-+
-+	key_vol_up_default: key-vol-up-default-state {
-+		pins = "gpio101";
-+		function = "gpio";
-+		output-disable;
-+		bias-pull-up;
-+	};
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 217 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l17b_2p5>;
-+	vcc-max-microamp = <1200000>;
-+	vccq-supply = <&vreg_l4d_1p2>;
-+	vccq-max-microamp = <1200000>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l4g_0p9>;
-+	vdda-pll-supply = <&vreg_l1d_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb {
-+	status = "okay";
-+};
-+
-+&usb_hsphy {
-+	vdd-supply = <&vreg_l4f_0p8>;
-+	vdda12-supply = <&vreg_l1d_1p2>;
-+
-+	phys = <&pmih0108_e1_eusb2_repeater>;
-+
-+	status = "okay";
-+};
-+
-+&usb_dp_qmpphy {
-+	vdda-phy-supply = <&vreg_l4f_0p8>;
-+	vdda-pll-supply = <&vreg_l1d_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_dp_qmpphy_out {
-+	remote-endpoint = <&pmic_glink_ss_in>;
-+};
-+
-+&usb_dwc3_hs {
-+	remote-endpoint = <&pmic_glink_hs_in>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-eea.dts b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-eea.dts
-new file mode 100644
-index 000000000000..59316963d6da
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/kaanapali-xiaomi-nezha-eea.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2026, Igor Belwon <igor.belwon@mentallysanemainliners.org>
-+ */
-+
-+/dts-v1/;
-+
-+#include "kaanapali-xiaomi-nezha-common.dtsi"
-+
-+/ {
-+	model = "Xiaomi 17 Ultra (EU)";
-+	compatible = "xiaomi,nezha-eea", "xiaomi,nezha", "qcom,kaanapali";
-+};
-+
-+/* Battery model: BM6P */
-+&battery {
-+	voltage-min-design-microvolt = <3200000>;
-+	energy-full-design-microwatt-hours = <22860000>;
-+	charge-full-design-microamp-hours = <6000000>;
-+};
-
--- 
-2.56.0
-
+bod
