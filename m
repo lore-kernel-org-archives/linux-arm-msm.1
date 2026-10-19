@@ -1,220 +1,251 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C466145041C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 05:02:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A81163B442F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 05:15:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792386132; cv=none; b=e/Ebstbh3aZlIL8q08nKx9aUJz5qhVxkFf8HjwUc5EPOxTUpqpiLIPEM7taKomK9DSKUrGxAsy1/MK4JqB5/bepjjq8LkkWUcQU/z2rV7H+XDBivMEoZO5VyR181Tbjm1oEJ0jmJKBA9RYF709bgZGXuReWRLWSejR0E/j30034=
+	t=1792386916; cv=none; b=Uc1vYVxz1zdExBvGGIqT3504jpDgk7/tEn+qUw7HU/qEGihxJjgSUNABV34AIrmTU3watzdQnWv5d6Q8M07xtjWvHIZ/tOsmzN8wQeU3JnUL/k8UQ6DRAGrkrYCB+tMYk1rIbw7jnkNFXKc9BZdNsJhkrc0eZ+mHlLVp4TZo+0o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792386132; c=relaxed/simple;
-	bh=kn+5ESPtj0RJi5bfjx0hmp39+NNbUKQWRWiWu6lWa/A=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=pr5hEAIIG/HYxQiqnO/XkhILdTthDxq1YS3qSIQaUT5x+qesXcR5mQBWBWv/0yiSDCklvt4SHuisNqW9aCmxjFPBBjQ5xtmgF1UtoPnBgGAXfuLM662SER3RMRhbMYXIj9gaL/svnDk6GV2Flj49ZdIP8cY8RS0r19A//dGZ+JA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GsxGsQ3Z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VeVhDwuz; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792386916; c=relaxed/simple;
+	bh=yKBiV2TVmIrIrto1nX+VHaD3QQAFX1+y3fbKBijLtFk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=D/aW36RkO4OTSP/9OzRx85hQO+7dDptLxpZzsyTc4+PVGGiJtwIWPhTctkfUaQ7QF5zgQjkCAQ4pa3/qNxPDlaGPzGJk2oAT7PEHwfGtsptyX0HIqdmio2RGUKPW2YVDVjFjnnlAfaddQFw/8eI+YfYeh+2GTQ98IscsuvGAiEU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=S3GkocEZ; arc=none smtp.client-ip=74.125.82.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GsxGsQ3Z";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VeVhDwuz"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J4j7xT683670
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 05:01:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Or4asT3KXALdKFQAYnB0KiA0P++DP8jjRqXZ1+HPl+w=; b=GsxGsQ3ZT2d72ntA
-	vOk5NPWBt31GRMqA0xsZeC9RYAz9haqBlKgYh/M/xN46UgSqdVQkmHPro1UsZZV9
-	ihIsdPlDpDCuIXXSIadLIGd1PhTZ7QEiGd1jjmtw/PIeSQ3VWAWn8QkWYeGT0uCV
-	986bCuOSyFiQTgz526cb6J2ONVNr7SfM64Gh8GWbCHpHAjD7ZAMcLKmiTlSGr2na
-	3KBOS7qzAjlx+Jo9mvKmH3DzyIzhBMlV0NzvjsCqD+CfjtyG7Q+cfSUP4d7e/IAz
-	QIT2z1Q5kfowxVFcGNXca7cv51P5gqpaNNeln6SiDAWHRv08M1BT/X1kgrlKdvpU
-	G9l23Q==
-Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hc1d7vw89-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 05:01:59 +0000 (GMT)
-Received: by mail-dl1-f70.google.com with SMTP id a92af1059eb24-1383723dfddso3507081c88.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 22:01:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S3GkocEZ"
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-35943f55c06so2538441eec.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 22:15:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792386118; x=1792990918; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Or4asT3KXALdKFQAYnB0KiA0P++DP8jjRqXZ1+HPl+w=;
-        b=VeVhDwuz++H5IGv8o+D+SJppodlwZQgNWNbSB623enXkLIqwLO27XTI9O7IT7Jnwxk
-         ADl2rLBz5PACockZn2VMMH1dAD+h5yE2Vl+nUkxX8Cw+pOdQm5YOtteLa8BCRJRXPqhy
-         8yxsYnE5+F2gA/1ktx8kgvuV7m5oeDzZ7JgdasNahovKq4e/+jUt8j2ZtS7w2DV+G8FH
-         qdaYFR0keAQkVXu8HmAP8VsK1qpmX9iAEPCnyOAxq4RIluKQiQemOKjXUcJyQPjuhlG1
-         u5H44E/SaDZyjCCxExl1yfiHGARCNETdOksdkaXSOMCKm8CPIK15teCn7+uA8Y2zFHXA
-         PEGg==
+        d=gmail.com; s=20251104; t=1792386912; x=1792991712; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LHIoBpNvmoiyE7kQhE8I3uJMHpFmjXu6J3zrCSHKMP8=;
+        b=S3GkocEZQIloiestPJSmOvSFrAx/orijOrO2lzdmkVBKLiTxaoZhsmGfdJS2hq/tbX
+         d4RhO2K7dEVIyjlCuCiITjdYAiLaw9oYHTbsCkeqwZPtRlZROg/SR3Rlplq9U/LWKaBl
+         dFr/Mvo9lNJZDYUk0tD6yPwgmmpqYV4JMBd9eDQbaKDs0iEQ+DVHgSmHQZfonkNysAbE
+         vHm869iPaveBQcYWZI6RYvWHy3socBOBWjBc71vl+Zt02QlSw0P5Z/a1i7TmgcjOta35
+         vnPYO0uTS/bb5J5p6AoXz0cTVIP6sKiY8JsNDmrhXd1WvEV2rnFY7N1p3l5pg6vON9HQ
+         yrZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792386118; x=1792990918;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1792386912; x=1792991712;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Or4asT3KXALdKFQAYnB0KiA0P++DP8jjRqXZ1+HPl+w=;
-        b=c8oeABm/uqUJabhqzJQPnO1/IfYmH+dOniNxD5/XHVTI+/Ck8rjInAunYCNPjmu/kb
-         H8Yqvz+q3gDchqD1MDskPoI3vP6LQMn0dLCu0U+EcNDy7hyiFTQ3ztZgisYbJTwT6QmX
-         03h1axjydGF8IvOHFiFssvcvK4zyMyUglQl59FddAyUwJBHP5SAaYQhpL+1vDszAE3L+
-         pLaCulDCwK3EC3PCE59rcFq3OzgkMWQauErxyAHJA6/Z7hdGMnPlUMmZ/6SR1u5ICeH6
-         +LvZ0YD7E4Vo8ugxtjOigiekHjgI7FZv3qQl1ZRG5R8/SK7MZ0Z0W2DH10b7NOEoF3Hu
-         AvYw==
-X-Gm-Message-State: AFq9FYJDkRB+SOmKgp50e9rVXCQaP9ni1yM4slYnCP7QTP4lFmvMRBRM
-	Hc0HrjuDmR0b7QYQLnGm6NxQDRjJJ/dVyA+58sH9WeFvCfqKEQkTbSgNyYQc27oxtbSeUI/3p6/
-	qGexTdHMIY0Fuuk4mZ+uKd6+ZROBnil7PF9OvBlWGvAgJbH5vIx9CgeNGj7Y2k1QQ1XkP
-X-Gm-Gg: AYBFou2uR8Q6xe3HhZIYOcTCsOkvZ4kdpKi5hAJFonGc27um0THnYwVrhdfaVwyFiEZ
-	jUa5aLXdiDmRLOiKIhjrNXGNGot/KpCNrMZPXmS1mhhJ7i0WfnhTU4gSPr/lvz6qNaLEM49kysE
-	JDlwnhOBbnJeYxLnMdlPqFI7fTv8KMOL+G5ZgiYr7NswoEIwjn0hsjutiqR7PSxD28LIPwv5LdU
-	EDVbB3KC8jP367sbgZA0BmgRJfp8NOKJXht3a7dZwzbkSb4v7iZ9mtueuyErlvCxHd58v9sclVL
-	7inhxlKKs6okajj5uUF4NzeMs4s0WzY0jcwde4i0fUjGVi51a4LYGGZ26+HiYX7OOMroMsF2sY2
-	Ym4GmTu8gMrfOfc+HnLJN5MKgRVOo
-X-Received: by 2002:a05:7022:28b:10b0:16f:c9db:c5af with SMTP id a92af1059eb24-185118eded7mr10365898c88.11.1792386118094;
-        Sun, 18 Oct 2026 22:01:58 -0700 (PDT)
-X-Received: by 2002:a05:7022:28b:10b0:16f:c9db:c5af with SMTP id a92af1059eb24-185118eded7mr10365874c88.11.1792386117582;
-        Sun, 18 Oct 2026 22:01:57 -0700 (PDT)
-Received: from [10.218.7.34] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831a6f58c2sm38132385c88.11.2026.10.18.22.01.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 18 Oct 2026 22:01:57 -0700 (PDT)
-Message-ID: <ddefe6d9-1a75-46f0-9ccb-10766729e04c@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 10:31:50 +0530
+        bh=LHIoBpNvmoiyE7kQhE8I3uJMHpFmjXu6J3zrCSHKMP8=;
+        b=M5KiBf6QHhADJF+EyLZYPqXGTAtBYW6F2NajPpgMxOs7sCTeJzm3ODJKxG75rdYK6Y
+         daQfhYT6rBWyayuteCYk8C1O8uZBmpUGuAzYdwMgyrfaHp3fCD3lUZfzIoIh1QSL9GPp
+         ndawehWVFpdnlbWQoRPYTwhihcJ0wCkN//vdoTA4KlWgSujl/VRmzOnCRf0+5IM8uOrv
+         vwaNNbpbKGJsv6PdI6CpKwJnfEC7lXcL92g6/1qCCXt0rYpDcwW4C9MvcmRX3oRc4QZP
+         OrclhFIa/gaE0meFDTUNrMpGAiv+4eh+j0XIGOl+zHnVuG+p21zmiDXOOD+XzpYtkXob
+         rkiQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxGNsUWVAcPTpa1Sxy/8DPuZjS991CAquahO0ZokonJQq+9CCzEbooIHJ48hTekE/WVp5QTIebfJrbufAD6@vger.kernel.org
+X-Gm-Message-State: AFq9FYK7I4ZnSFNujDtTI7UUi5I94LGXnnrfyjosisAbPzdo2Cx0sjye
+	6Vz6tndcHaE3wEWe7gdtQc6mJ6zC+UKu/lyaWUGyy3j0aLMPFPPzc5X6
+X-Gm-Gg: AYBFou0vPLqL/i6ewEgs0vDGx0qRthxnGxWUZL9sooSb3T1ymqemfuYhT6VZXGYFvyE
+	eQOv4q9y6vbCDYz96ypSU4CvvtwqUdsCiaDTsL0ejYzEeJCzEInaQJ/sxLcr981k8GFd9gAVDzJ
+	ZhchC/0oVHG6QxkWM3tciub1Uqt+SsqfDcJLZ9koHY6RJ9IXpHmyg6z+YEdvGm92enLQV+V5j4Z
+	DNAWnLUPpSwOUWFSCuyVtmlzfq83r+Oc++hUXukhDUb3Tb1tUwB+pvL0Dt/sZi24eqeQ4lj3qvD
+	dy4kqKt4CdD3kiQNUAoO04Nlhyz7BTypFOPo/Fgvw88FyfzcuB0d010idjvCMWZWgC2Z7nyZqRB
+	XIUF82w9N/VRWxVQn1hRSUgoW+KVl4CMD9oi2wolXpUKnkf2a99PA+6hWPeaQNETE6sFoGbw1Li
+	J9GBuLlktueb8hGklabKjTw15kPqsrBFXhhfgE0XEjAAbMCRLJLkC9/2P4/bqpAuTfag8GT/YBm
+	ArtPCA068C1ykkDxUaslNks4yRi5T9Ep47O0ULshG9xv/9CnUkvhW1k2LFN0vgwNgRCqEq7D0Ia
+	usQkcFIaYmyZYncSPxl2lnGoDVbGMbBctPBD6mta
+X-Received: by 2002:a05:7301:2710:b0:35e:af84:bf1e with SMTP id 5a478bee46e88-361a2053227mr9965350eec.7.1792386912356;
+        Sun, 18 Oct 2026 22:15:12 -0700 (PDT)
+Received: from flyingfox.tail3d542a.ts.net ([2402:a00:163:2ce9:6c87:7904:21fa:8675])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3608308a87csm47588803eec.28.2026.10.18.22.15.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 18 Oct 2026 22:15:11 -0700 (PDT)
+From: Vivek Kumar <vk092kumar@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+	Xiangxu Yin <xiangxu.yin@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Vivek Kumar <vk092kumar@gmail.com>
+Subject: [PATCH v4] drm/msm/dp: allow eDP sinks without DP_SINK_COUNT
+Date: Mon, 19 Oct 2026 10:44:41 +0530
+Message-ID: <20261019051441.2835682-1-vk092kumar@gmail.com>
+X-Mailer: git-send-email 2.56.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Subject: Re: [PATCH v2 7/7] mfd: qcom-pm8008: Tolerate missing interrupt
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Oleg Keri <okerixx@gmail.com>, Lee Jones <lee@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
-References: <20261014-pm8010_i2c_support-v2-0-b395d2b3f668@oss.qualcomm.com>
- <20261014-pm8010_i2c_support-v2-7-b395d2b3f668@oss.qualcomm.com>
- <e68177a7-f2ef-46ed-a468-15d0d9421d98@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <e68177a7-f2ef-46ed-a468-15d0d9421d98@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAxOSBTYWx0ZWRfX3mpTWAFGftyb
- vkhETyqu9DjohDunx0mNFt1WjEgn65xDGx0EE/IsV/E/Jp38A4+svRDrle+QVwBPhsIZSm5jSkB
- kfzEPzzLVofP07gOum4Ep+t3htP3Qos=
-X-Proofpoint-ORIG-GUID: g-O3jJGNI_7dsQ2hg6IW6FNJjF6HIIw_
-X-Proofpoint-GUID: g-O3jJGNI_7dsQ2hg6IW6FNJjF6HIIw_
-X-Authority-Analysis: v=2.4 cv=K4O3jCWI c=1 sm=1 tr=0 ts=6ad5a447 cx=c_pps
- a=SvEPeNj+VMjHSW//kvnxuw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=FgZ6Ug7uWDD4XhXpjZ0A:9 a=QEXdDO2ut3YA:10
- a=Kq8ClHjjuc5pcCNDwlU0:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAxOSBTYWx0ZWRfXw/imkzo/PPMo
- eLUjdJJxLvq2AhUpo34W7uOrRjhrJOS7b243JkrcFVHGphnqsLChCUY+YdQ37sukVwO4h/MKLWT
- 5f03waH6pZSzldRZf1z3P6ZA3RJ+OygQfO4/vVigMhPI/PlOOKMM/PVGT6JWqCQ1aMc6IaM+yl4
- DoRdTsbumdfWHvXqrRQ4hn+nemqZO4QX3fx1Vlt1SyEdclGG+k3nGSPUCclbjhdLbQPOljJCqpj
- XCtdq+8l5WZo025bbnNakwTv3lYR7w1Ucb5nGplOBnQ6OMeeJAhJH/xa9pTGGcvVEUGhOWNmuyv
- 98wltpm1QKvSTSQWw8EvvrrpsfMUTMJZnJYdub08F24vSh0cgJM/Pl+fZSLl1M0NJeB18x4hVyz
- gV+Azci7EheF64rZxm/IdXxBXaDwFD72waVdlF1wOAi6Em8Prqb7MQggX7r5Q+OtmXAB1om+ykX
- XvY3cOME4eEnX5u+xrQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_02,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 clxscore=1015
- adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190019
+Content-Transfer-Encoding: 8bit
 
-Hi Konrad,
+Some eDP sinks, especially fixed-format eDP-to-HDMI bridge chips with
+no downstream AUX-capable panel behind them, do not report a non-zero
+DP_SINK_COUNT even though they participate normally in DPCD capability
+exchange and link training.
 
-On 10/15/2026 5:35 PM, Konrad Dybcio wrote:
-> On 10/14/26 12:32 PM, Jishnu Prakash wrote:
->> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->>
->> PM8010 is often wired up with the interrupt pin tied to ground. Only
->> register the IRQ infrastructure if we have a parent irq.
->>
->> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->> Co-developed-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
->> Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
->> Co-developed-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
->> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
->> ---
->>  drivers/mfd/qcom-pm8008.c | 82 ++++++++++++++++++++++++++++++++++-------------
->>  1 file changed, 60 insertions(+), 22 deletions(-)
->>
->> diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
->> index 4179427f3891..8b1bbb4052a7 100644
->> --- a/drivers/mfd/qcom-pm8008.c
->> +++ b/drivers/mfd/qcom-pm8008.c
->> @@ -208,6 +208,14 @@ static const struct mfd_cell pm8010_cells[] = {
->>  	MFD_CELL_RES("qpnp-temp-alarm", pm8008_temp_res),
->>  };
->>  
->> +static const struct mfd_cell pm8008_no_irq_cells[] = {
->> +	MFD_CELL_NAME("pm8008-regulator"),
-> 
-> There's no reason to not register the temperature alarm driver
-> if we don't have an irq. It will not be able to carry out the
-> "alarm" part, but one can still poll on it.
-> 
+Treating sink_count == 0 as a permanent disconnect is valid for external
+DisplayPort, but it breaks eDP probe/enable paths in
+msm_dp_display_prepare_link().
 
-That suggestion does make sense, but I think it would not
-work, for multiple reasons. Let me explain them here.
+Use drm_dp_read_sink_count_cap() in msm_dp_link_parse_sink_status_field()
+and set link->sink_count to 1 when the capability is not available.
 
+In dp_panel.c, msm_dp_panel_read_link_caps() still reads DP_SINK_COUNT
+for branch devices. That read is left unchanged here: the sink on the
+tested board reports DPCD 1.4 and does not advertise a downstream port,
+so that path is not taken.
 
-If we are talking about using drivers/thermal/qcom/qcom-spmi-temp-alarm.c,
-the driver has this check in the probe:
+Signed-off-by: Vivek Kumar <vk092kumar@gmail.com>
+Assisted-by : LLM
+---
+ drivers/gpu/drm/msm/dp/dp_display.c |  6 ++++--
+ drivers/gpu/drm/msm/dp/dp_link.c    | 30 +++++++++++++++++++++--------
+ drivers/gpu/drm/msm/dp/dp_link.h    |  5 ++++-
+ drivers/gpu/drm/msm/dp/dp_panel.c   |  5 +++++
+ drivers/gpu/drm/msm/dp/dp_panel.h   |  1 +
+ 5 files changed, 36 insertions(+), 11 deletions(-)
 
-  irq = platform_get_irq(pdev, 0);
-  if (irq < 0)
-        return irq;
-
-So its probe would fail right now if it does not have
-an IRQ specified.
-
-
-
-Another point is, PM8010 does not have an ADC peripheral.
-Without an ADC channel to read from, temperature read from
-this temp-alarm driver would show a constant value most of
-the time (37000, for stage 0) and this would be updated only
-if a high temperature stage (possibly around 90-100 degC)
-is crossed, so it may not be very useful for polling without
-interrupts either.
-
-
-
-And another point we should note is, the MFD cell name
-"qpnp-temp-alarm" used right now does not bind to our temp-alarm
-driver and this was intentional, as explained by Johan Hovold
-in his change (mfd: pm8008: Rework to match new DT binding),
-in the last paragraph of the commit message:
-
-    Finally, note that the temperature alarm and GPIO subdrivers need some
-    minor rework before they can be used with non-SPMI devices like the
-    PM8008. The temperature alarm MFD cell name specifically uses a "qpnp"
-    rather than "spmi" prefix to prevent binding until the driver has been
-    updated.
-
-Since these changes are not yet done, we cannot use
-temp-alarm for PM8008 or PM8010 over I2C for now.
-
-Thanks,
-Jishnu
-
-
-> Konrad
+diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+index 4dcbd9b99d06..2ae4dafd755f 100644
+--- a/drivers/gpu/drm/msm/dp/dp_display.c
++++ b/drivers/gpu/drm/msm/dp/dp_display.c
+@@ -290,7 +290,8 @@ static int msm_dp_display_process_hpd_high(struct msm_dp_display_private *dp)
+ 			return -ETIMEDOUT;
+ 	}
+ 
+-	msm_dp_link_process_request(dp->link);
++	msm_dp_link_process_request(dp->link, connector, dp->panel->dpcd,
++					 &dp->panel->desc);
+ 
+ 	if (!dp->msm_dp_display.is_edp)
+ 		drm_dp_set_subconnector_property(connector,
+@@ -506,7 +507,8 @@ static int msm_dp_irq_hpd_handle(struct msm_dp_display_private *dp)
+ 			dp->link->sink_count);
+ 
+ 	/* check for any test request issued by sink */
+-	rc = msm_dp_link_process_request(dp->link);
++	rc = msm_dp_link_process_request(dp->link, dp->msm_dp_display.connector,
++					 dp->panel->dpcd, &dp->panel->desc);
+ 	if (!rc) {
+ 		sink_request = dp->link->sink_request;
+ 		drm_dbg_dp(dp->drm_dev, "sink_request=%d\n", sink_request);
+diff --git a/drivers/gpu/drm/msm/dp/dp_link.c b/drivers/gpu/drm/msm/dp/dp_link.c
+index 34a91e194a12..f7f25020cacb 100644
+--- a/drivers/gpu/drm/msm/dp/dp_link.c
++++ b/drivers/gpu/drm/msm/dp/dp_link.c
+@@ -715,17 +715,25 @@ static int msm_dp_link_parse_request(struct msm_dp_link_private *link)
+ 	return ret;
+ }
+ 
+-static int msm_dp_link_parse_sink_status_field(struct msm_dp_link_private *link)
++static int msm_dp_link_parse_sink_status_field(struct msm_dp_link_private *link,
++						      struct drm_connector *connector,
++						      const u8 *dpcd,
++						      const struct drm_dp_desc *desc)
+ {
+ 	int ret;
+ 
+ 	link->prev_sink_count = link->msm_dp_link.sink_count;
+-	ret = drm_dp_read_sink_count(link->aux);
+-	if (ret < 0) {
+-		DRM_ERROR("DP parse sink count failed\n");
+-		return ret;
++
++	if (drm_dp_read_sink_count_cap(connector, dpcd, desc)) {
++		ret = drm_dp_read_sink_count(link->aux);
++		if (ret < 0) {
++			DRM_ERROR("DP parse sink count failed\n");
++			return ret;
++		}
++		link->msm_dp_link.sink_count = ret;
++	} else {
++		link->msm_dp_link.sink_count = 1;
+ 	}
+-	link->msm_dp_link.sink_count = ret;
+ 
+ 	ret = drm_dp_dpcd_read_link_status(link->aux,
+ 					   link->link_status);
+@@ -1025,12 +1033,18 @@ static void msm_dp_link_reset_data(struct msm_dp_link_private *link)
+ /**
+  * msm_dp_link_process_request() - handle HPD IRQ transition to HIGH
+  * @msm_dp_link: pointer to link module data
++ * @connector: connector the sink is attached to
++ * @dpcd: receiver capability DPCD of the sink
++ * @desc: DP descriptor of the sink
+  *
+  * This function will handle the HPD IRQ state transitions from LOW to HIGH
+  * (including cases when there are back to back HPD IRQ HIGH) indicating
+  * the start of a new link training request or sink status update.
+  */
+-int msm_dp_link_process_request(struct msm_dp_link *msm_dp_link)
++int msm_dp_link_process_request(struct msm_dp_link *msm_dp_link,
++				       struct drm_connector *connector,
++				       const u8 *dpcd,
++				       const struct drm_dp_desc *desc)
+ {
+ 	int ret = 0;
+ 	struct msm_dp_link_private *link;
+@@ -1044,7 +1058,7 @@ int msm_dp_link_process_request(struct msm_dp_link *msm_dp_link)
+ 
+ 	msm_dp_link_reset_data(link);
+ 
+-	ret = msm_dp_link_parse_sink_status_field(link);
++	ret = msm_dp_link_parse_sink_status_field(link, connector, dpcd, desc);
+ 	if (ret)
+ 		return ret;
+ 
+diff --git a/drivers/gpu/drm/msm/dp/dp_link.h b/drivers/gpu/drm/msm/dp/dp_link.h
+index 76125e9c07e9..217fc5eb0a68 100644
+--- a/drivers/gpu/drm/msm/dp/dp_link.h
++++ b/drivers/gpu/drm/msm/dp/dp_link.h
+@@ -113,7 +113,10 @@ static inline u32 msm_dp_link_bit_depth_to_bpp(u32 tbd)
+ 
+ void msm_dp_link_reset_phy_params_vx_px(struct msm_dp_link *msm_dp_link);
+ u32 msm_dp_link_get_test_bits_depth(struct msm_dp_link *msm_dp_link, u32 bpp);
+-int msm_dp_link_process_request(struct msm_dp_link *msm_dp_link);
++int msm_dp_link_process_request(struct msm_dp_link *msm_dp_link,
++				       struct drm_connector *connector,
++				       const u8 *dpcd,
++				       const struct drm_dp_desc *desc);
+ int msm_dp_link_get_colorimetry_config(struct msm_dp_link *msm_dp_link);
+ int msm_dp_link_adjust_levels(struct msm_dp_link *msm_dp_link, u8 *link_status);
+ bool msm_dp_link_send_test_response(struct msm_dp_link *msm_dp_link);
+diff --git a/drivers/gpu/drm/msm/dp/dp_panel.c b/drivers/gpu/drm/msm/dp/dp_panel.c
+index e76dad0f6663..50e278286e09 100644
+--- a/drivers/gpu/drm/msm/dp/dp_panel.c
++++ b/drivers/gpu/drm/msm/dp/dp_panel.c
+@@ -252,6 +252,11 @@ int msm_dp_panel_read_link_caps(struct msm_dp_panel *msm_dp_panel,
+ 		return rc;
+ 	}
+ 
++	rc = drm_dp_read_desc(panel->aux, &msm_dp_panel->desc,
++				 drm_dp_is_branch(msm_dp_panel->dpcd));
++	if (rc)
++		memset(&msm_dp_panel->desc, 0, sizeof(msm_dp_panel->desc));
++
+ 	bw_code = drm_dp_link_rate_to_bw_code(msm_dp_panel->link_info.rate);
+ 	if (!is_link_rate_valid(bw_code) ||
+ 			!is_lane_count_valid(msm_dp_panel->link_info.num_lanes) ||
+diff --git a/drivers/gpu/drm/msm/dp/dp_panel.h b/drivers/gpu/drm/msm/dp/dp_panel.h
+index 4519ac374220..e52847474f16 100644
+--- a/drivers/gpu/drm/msm/dp/dp_panel.h
++++ b/drivers/gpu/drm/msm/dp/dp_panel.h
+@@ -31,6 +31,7 @@ struct msm_dp_panel {
+ 	/* dpcd raw data */
+ 	u8 dpcd[DP_RECEIVER_CAP_SIZE];
+ 	u8 downstream_ports[DP_MAX_DOWNSTREAM_PORTS];
++	struct drm_dp_desc desc;
+ 
+ 	struct msm_dp_link_info link_info;
+ 	struct drm_connector *connector;
+-- 
+2.56.0
 
