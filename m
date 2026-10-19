@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792450716;
-	b=Oxz+N1Uun+d6Sfwa0nDWzN0a45gIrYwn0N4ZKD3d8KucT2+DAQF07kLXwRaS3g/Qejo8
-	 F3jNGTDMsjlSRxVfkGjLJ5/C4CS+/ZaSDyqc8B9TnjvJ0r0FpHYt/QJVpwG1Sk/sfCqvS
-	 3wjzi7sXJl5SqXTLH8XEe6+55r9yfwc3qdxVZ64KkTwsep557Ixgdnyl2eQdBc1Qf13im
-	 cqUHIXPiQAwmSYvtmZbHd5Yq9RHFjBkBiBMrxGoZNlYDMeHcUqRCxSMc9owseQyEu5i8T
-	 8wJO079i+6k0KPeSBMN1aIoXj8He6ZcU9CiZ2UadYcKy20memn5cKZbgDWKUor+h+Bg==
+	t=1792450717;
+	b=FmeLuiijr6YtL5c6OWTNr+u/E7f0cWgUJPXg6p4RCvJyQT/wjnyxziXmXdncHzhx5zym
+	 O8S8+8bEI1apoR8Yxqadln/cFiP8uiIwK8gGSudsqx2wUW0KkGn3x8NhUQngo3uf6qHfL
+	 4ro6EY8OkZ03ChHdxgJn1BpTPzgxN+AD6pytv1+WC+3TtOYKnxG4TJaugIwXryFUxkP9L
+	 +0FiLNN0jEn1S16/m0Zx4k2TQ2kkXNQoGDvfZfl3g8hRV5UxWJvabCzo7sc98LPfc2Tru
+	 mqQxhVInaiSpf4O0K7MDMPsmvicOm8SDZO4ygnwPPWxF+X4V6QgO0adS5ii8+FiEl4Q==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792450716;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=j8jVLN5GJ3ygVod+jOB8l7G2EGInzMBRKDpZ4K9mplM=;
-	b=uDj9mQXMMwyaP7GuftZCnK0akcSr/gMqT8yIrnVpaydqmKMzmiY6RxywUMZmzYj79/0z
-	 9oz4pv9vE933IkELEE27JAU4DNs04H15UQV818rSA4DRtTaEwU0FPYd7rUqaP6ObsUqvn
-	 DD1qxmGB+htqRkVT9958PCg9Y56f9GAC2i0lYUJvffRKSrsO6eg+pEw23RNHzkfUqbqLn
-	 pPF9aGrkswLIA7t5FuBtWCtc4dnpWeH+fyQzYMII8Ts1tBvAAyZ/1L5j6LR94V2bECF2g
-	 LkLRoA2FKIk+LE+YLgYKFrALk/mQ/QVGtfxdJMR2jT+Rl2FEj0GpexCs3aXY0/pW9EA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792450717;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=oF9kbE4FrJc4QoCAxoJUWmZExOmATfW1i/TN5X5k38o=;
+	b=J0bxzszPDkgSseHpTxdpcYQRxDyxZVsrZ8I8m6+onIoBzQTxAI/gnAW49lQJkBHlvg4N
+	 9+Bzo2izPmkb0VmzlTviom9sgAAzELibhvSuTUmd7JJnPK4YYySPIy6LjDG4smNpdelXW
+	 n1qwRNxLwNEoriWApcuts6LrMuqvNfUxdG4/hTz2Wrq0TpNcQZYEwXPHcnVD1eeoY46oK
+	 8kmA9VJ5JM698UYFBioqxChxk7epsprK3jn9tsdU7mEtF99EmcFzejjLeb7PoudagWYEQ
+	 OyfgOt47SMJvRdDKl+HsYbNBG33tqP4J/oPqtksq6iBLTXuo9h+Z/BZGbHQut/ozEvg==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l7MAbSiq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="XlbW/zGR";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94157606A31B;
-	Mon, 19 Oct 2026 22:58:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84358606A322;
+	Mon, 19 Oct 2026 22:58:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l7MAbSiq
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XlbW/zGR
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792450716;
-	b=jJAnKVzM2NHB/SrrvUhtry/FMyxW+EI1n8uuWdEnJz0ui0LycKZ6sovoba763oZ6veZq
-	 R+JcEcbiKJ5CxjiyIBBdcJX51ejmVE/9LgovqGZwNm4PdDcFKZkse5z9kytFvhZFEslfP
-	 0QIJ/NilfQ+5uMdRWkLHxbpVqUNPzmCxx/eaJQfJZFpGymNx5hJli/rSMSQK6md8AWg0B
-	 eluA57LtFRYFBj0XFhWENXiU2Wg9hLOT7P5s6svrAh+McVKMr1vTLUL+T2htIwYgb8gO3
-	 +LoK2UawIjv56pBKBB1c+IX5GY7f9UWN7u8OHkPKwF2sTF+F+uQ6ZzWM4Yre2NzNrjg==
+	t=1792450717;
+	b=pKTDPYMJ/ql56a/MtRYK11k2B4HhcehWb3Lkd5xQqbUGjzuJf2M1vmCc3JE04mOz24I3
+	 CNVIq+11U3evo82WhKWlNQE1/xxWU95JeHsZ2J94EJGrZ3mqyZIUQmh4d3qDhiSwYuZ1s
+	 89EEqsK4zNDGVWBPJri19NYt1u+0tZZrUov9rn1HcBD1BvrP9esZBCnQQyBqAJPzVk4wf
+	 lq4bZDLjy+NR5hKZhSDxyVp+w37397Wj5PSBr3FQaNADNMVCzkWUTp4FLsMzf7RCS3k5V
+	 SljNXGpE7FQuvM7/sT9nJPmShafvDuTsK1eD3hP9Vx05IR+iAbAeKr60uM5AXYb7Jlw==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792450716;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=j8jVLN5GJ3ygVod+jOB8l7G2EGInzMBRKDpZ4K9mplM=;
-	b=O1fhHLcG9eOjqZQBM9FKA1/DxOD1akrTjil+EyPpXg6ZbPd/uKKHGkLKl4U/NJfSgBGU
-	 QMwGNHON+8akt8gOhkKcxzhHWXMKL3rD889aRvowp/LNnJkPoY7Z64JX/P/7FHzK15byC
-	 KJ5+Pa6L/XqyEomhmT6sXsxT7o/jqUk1ChzxXP0SpQiPE98iVZhAKvIcUCFuvps9ObkJS
-	 dos3jShzTbvwU86KwGWERaRhFXsTT66Qx+FIORLTqDv0Sya16jBRXoFHAM4IJOQ8t1P8O
-	 afK2N800DJZVk5xBPL81x2ACDYx4bIAWpTSaTiT5s01WZEoKw8k0uJ+5Jvwu5SAhysw==
+	c=relaxed/relaxed; t=1792450717;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=oF9kbE4FrJc4QoCAxoJUWmZExOmATfW1i/TN5X5k38o=;
+	b=0Drl8Brxq3QDh3wDFm312EeetPzj7UWAdGyeKvSD1WbYVK0siGj/HQXdtQT5LNKPeXSX
+	 TFk6ldSdL+rdY/TrlQZm3oE4H7VgpTQ00JhiOofdDZ4NgXEs8QY6eCrJ9KVUspsiuGI0y
+	 VRBrTQ4rFQjzzxT4T1aPqntR+4ZDv42Wao8N/GTiMrxdhRIPsvVOIjpHtCMphlzPJTlvs
+	 6nzsBjEUx28NalnsS4xGHKUT78Ee9HzxwJv2PgjKP/SOtx6YAvAQ+eVGy7NbtuDvnaVrA
+	 /P9VQ9EU1h+XqeQPSV7ukflZerHXTnQajiQrdSz7c48QgQ5umCJVVhLr+BgTD0s6w3A==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id AD1C91F000C5;
+	by smtp.kernel.org (Postfix) with ESMTPS id AD0881F000C4;
 	Mon, 19 Oct 2026 22:58:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792450716;
-	bh=j8jVLN5GJ3ygVod+jOB8l7G2EGInzMBRKDpZ4K9mplM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=l7MAbSiq6kMwkEpP8oWqCol031iUhy9PzC5I8eRhuCT3WQvdFs4M4Q89vYTkkcL45
-	 I/uOAlfsqnTNcozCq32HFN3JysLnrGW3LF+uRVGmtEfm6uKfTGzPqn8B5FX3BYeWD9
-	 BMcJUAkC/5tuxWY9vlhbp2gROAEdGwM+wLKCjC1r2oqHboPqeQFB1zJXfuh7C/2UHs
-	 SWPYy3eS3UCHTwD/RoTNgCdWjadh9wuCp+QN8IBpzFMhdVMTbefrEW09oJiqu+dItb
-	 m+TF8WxwiQaUthZC/kSJLXZ0vBwiHcgL/yaKkFyptIZPQ80JO9hLGrB7WEM/Pxak0v
-	 4Y9MeU1kqBUUA==
+	s=k20260515; t=1792450717;
+	bh=oF9kbE4FrJc4QoCAxoJUWmZExOmATfW1i/TN5X5k38o=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=XlbW/zGRmyihaPd/rTmlWRKzXbFwx/l98R9HmCdAy30LdiN/nTYOs9uOBTcUiz8/4
+	 V1lFDIs/fYsbbkFKQdMGhSTkr1pfDvlAdkczdRdSpSTPhKbHNI0JdcL27EtPHs/K/w
+	 0I9WlCyFZt4tYsMBimvchTNapwytZOEaszRDbbMWV0V4smsxnbHTBkB2iKJcd11RhS
+	 hzKsKMowCb0zCz8sqzhF0ePeb4mL/cZQoyMPCB3qOHWDkUQNwO9j1aD/dOdmnEpJg8
+	 v9yihi3NPbC1rqIe1bc/9hCXeGqLvzNIt7hYIrZLMsJLh8Y0CnGEysWRKL3m2ai5UE
+	 PZJhGMR8QvTjA==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 1A01B40696;
+	by lkml.kernel.org (Postfix) with ESMTP id 122684066C;
 	Mon, 19 Oct 2026 22:58:35 +0000 (UTC)
 From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Mon, 19 Oct 2026 19:58:30 -0300
-Subject: [PATCH 1/3] drm/msm/a5xx: Reset the GPU when resuming it
+Subject: [PATCH 0/3] drm/msm/a5xx: Fix GPU stalls on A508, A509 and A512
+Date: Mon, 19 Oct 2026 19:58:29 -0300
+Message-Id: <20261019-a5xx-gpu-pm-v1-0-1d0c313a1412@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,9 +84,11 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261019-a5xx-gpu-pm-v1-1-1d0c313a1412@gmail.com>
-References: <20261019-a5xx-gpu-pm-v1-0-1d0c313a1412@gmail.com>
-In-Reply-To: <20261019-a5xx-gpu-pm-v1-0-1d0c313a1412@gmail.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5AMBBA4avIrE2i9e8qYkENRoKmRZqIuyuW3
+ +K9CywZJgtVcIGhky1vq4cIA1BTu46E3HuDjGQmIlFimzqHoz5QLzikRacSIhkXOfhCGxrYfbe
+ 6+W2Pbia1vwu47wdObs2ZbwAAAA==
+X-Change-ID: 20261019-a5xx-gpu-pm-f58bc4ee2387
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
  Konrad Dybcio <konradybcio@kernel.org>, 
  Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
@@ -99,73 +102,55 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Paul Sajna <sajattack@postmarketos.org>, 
  Fabricio Akio <fabricioakio@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792450714; l=2441;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792450714; l=1795;
  i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=pgmuJr74vl5DdcyIRaMFMXExHYM4RMyzyaatxZzA9fI=;
- b=Gv9+hl0G1oNlCSAMQZdDBTQPLlTR8N5rRKLdE6TIr3kf5oEw6KcNRUnIJ3AFXmW3Uz837tCrw
- Q4l+CQpQpJ2BiXcPolL0CUo0PGxBE6G5MuyEnA7VWLhkE1ekD8UlFzH
+ bh=us9I1iHzLIQSmFdFtzb+mI4Kq6bVZAX/0wRFxM1gxEU=;
+ b=yBtZ31JfvvOQiXGu0NMVYS4PaAwEKsTNMRr2L2tg0S3tDPCX9z2RvBfBUtFfF2lXzZEhnWkSA
+ F4ysQyEpiWnAaEx6ZZTUVdmtUr7Tf9MB8Aj/FL3CtWzI3NrS+96Z+eT
 X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
  pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
 X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
  auth_id=1076
 X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
 Reply-To: fabricioakio@gmail.com
-Content-Transfer-Encoding: 7bit
 
-From: Fabricio Akio <fabricioakio@gmail.com>
+Three changes to how the A508, A509 and A512 power up and down, found
+running a phone shell on an SDM630 phone. The first resets the GPU on
+every resume: on SDM630, SDM660 and MSM8998 the GPU's GX power domain
+belongs to its SMMU, so a GPU resumed soon after suspending keeps its
+state, and its CP runs stale ringbuffer contents and hangs. The second
+holds a CPU latency request while the GPU is powered, as the
+downstream driver does: on SDM630 the GPU stops executing while the
+SoC is in system-level power collapse, so a submission overlapping
+such a state would stall and trip the hang detector. The third powers
+these GPUs down after downstream's 80 ms idle instead of the A530's
+250 ms, so the request is released when downstream releases it.
 
-On SDM630, SDM660 and MSM8998 the GPU's GX power domain belongs to its
-SMMU, not to the GPU, so GX switches off only once the SMMU suspends as
-well. A GPU resumed with GX still on keeps its state, and the CP keeps
-its ringbuffer read pointer. a5xx_hw_init() then rewinds the ringbuffer
-and writes CP_ME_INIT at its start, while the CP goes on from its old
-position, executes stale ringbuffer contents and hangs:
+The second patch adds code next to the first's, and the third sits on
+the second.
 
-  timeout waiting to drain ringbuffer 0 rptr/wptr = 23/C
+Tested on a Motorola Moto X4 (SDM630, A508), whose board file is not
+in mainline yet, on sdm660-mainline's 7.2 kernel. The stall the second
+patch prevents was measured with an SDM630 system-level idle state
+that is not in mainline.
 
-Soft reset the GPU in a5xx_pm_resume() once it is powered, so that
-every resume starts from the reset state. The downstream driver resets
-only when it finds the GPU's power left on; resetting a GPU that was
-powered off changes nothing, and on A508 the reset takes about 2 us of
-a resume of about 1.5 ms, so do it every time.
-
-Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
 ---
-Tested on A508 only; the reset runs on every A5xx.
+Fabricio Akio (3):
+      drm/msm/a5xx: Reset the GPU when resuming it
+      drm/msm/a5xx: Hold a CPU latency request while the GPU is powered
+      drm/msm/a5xx: Use the downstream GPU idle timeout on A508, A509 and A512
 
-A stall with the same signature, the CP's read pointer past the write
-pointer just after CP_ME_INIT, was reported on an A509:
-https://lore.kernel.org/linux-arm-msm/20260308-adreno-ringbuffer-drain-timeout-recovery-v1-1-985a33faf108@postmarketos.org/
-This may be the root cause of the A509 stall Paul Sajna reported there.
+ drivers/gpu/drm/msm/adreno/a5xx_catalog.c | 21 ++++++---------------
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c     | 25 +++++++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.h     |  4 ++++
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h   |  5 +++++
+ 4 files changed, 40 insertions(+), 15 deletions(-)
 ---
- drivers/gpu/drm/msm/adreno/a5xx_gpu.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+change-id: 20261019-a5xx-gpu-pm-f58bc4ee2387
 
-diff --git a/drivers/gpu/drm/msm/adreno/a5xx_gpu.c b/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-index 16c7335c4b1f..dd0d731df138 100644
---- a/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/a5xx_gpu.c
-@@ -1367,6 +1367,18 @@ static int a5xx_pm_resume(struct msm_gpu *gpu)
- 	if (ret)
- 		return ret;
- 
-+	/*
-+	 * The GX power domain is not necessarily switched off while we are
-+	 * suspended: on SDM630, SDM660 and MSM8998 it follows the GPU's SMMU
-+	 * rather than the GPU. If it stayed on, the CP still holds its old
-+	 * ringbuffer read pointer and would execute stale ringbuffer contents
-+	 * once hw_init restarts it. Soft reset the GPU so that it always
-+	 * resumes from its reset state.
-+	 */
-+	gpu_write(gpu, REG_A5XX_RBBM_SW_RESET_CMD, 1);
-+	gpu_read(gpu, REG_A5XX_RBBM_SW_RESET_CMD);
-+	gpu_write(gpu, REG_A5XX_RBBM_SW_RESET_CMD, 0);
-+
- 	/* Adreno 505, 506, 508, 509, 510, 512 needs manual RBBM sus/res control */
- 	if (!(adreno_is_a530(adreno_gpu) || adreno_is_a540(adreno_gpu))) {
- 		/* Halt the sp_input_clk at HM level */
-
--- 
-2.56.0
+Best regards,
+--  
+Fabricio Akio <fabricioakio@gmail.com>
 
 
