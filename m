@@ -1,44 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B552B57DF56;
-	Mon, 19 Oct 2026 13:58:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6D55500A99;
+	Mon, 19 Oct 2026 13:58:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418318; cv=none; b=FtB9s/1G5AWISae9FaCsYg/HoYRcf9aa0d4DRca+6zeSE+G+g9Dt+er8Cwu8Ob348SME5S2QmvumfzJ5gn2RpdDLleuOdRIfNdFrNgucnrNdsOuA0FJhTZg51DhvrAM0gXw8RqWn08C7EZtEU73TFQ1idv6uwLg3IuyufMWpoyk=
+	t=1792418324; cv=none; b=JLX9j7c2fcJE/dNoaR5oBfsRRhT3XWM8ku5IXjFoZusiq6yRn5txJ4RvFlmL2sKyWusJH/D0TnT0gRTmWyVYzleMP4szBGqsASZaVFivzj4pku8Rv2e3AG3KEEJBSaexD3dyFjnWx9ktNB+gDd6/Lysh4KvpBzs5VFDl9Nw0HLI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418318; c=relaxed/simple;
-	bh=TByxiAa87WS+0dfP+PTPC56jYerIQi/Vl0JP/+iO7Q8=;
+	s=arc-20240116; t=1792418324; c=relaxed/simple;
+	bh=v4i/sp+jK+cJnVRz6+KH9dDUSk7IzusOS5QKSQau6JI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=sBT5sycsG/ywQAPts898othtfomvaIoTOH/R5kDrT68MmwiV4nkPfnSyKuGpzJUo6remHQ3vpmfIIBM1m4qepJksWINScWzSXzSOfEk5nCf0dRriRmj7OE4MO8E2oF2TIHiPUSepUBhAHygh4rBFotHv/dyUj3QjkYhL1S4Tdgg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RDpzZOoE; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=B/q9rLbXB3LdYqzLW/qn4Saj5C2WwC2Ws8VAqrrW/+jZqRPNF5MGhYhgFmwySJO8PDFN+5e/ifJ2uVeZg9vBQtSDwYmynzfG6SpKTtH+ReulP/fv4aF4mrJ4AnB2OQ1lL07Ztxq/cgDyFIOAENZrZVxS/A2U4DXvdVcNj+0BTvY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OkGp9nNX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RDpzZOoE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A24F61F000C7;
-	Mon, 19 Oct 2026 13:58:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OkGp9nNX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5ED561F000C8;
+	Mon, 19 Oct 2026 13:58:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418314;
-	bh=KRme9n4h5hg79JHHCTeZvcrZGH9RVtyMTsRB4ixU1CU=;
+	s=k20260515; t=1792418319;
+	bh=W8xraFxeoKo68zra+pQGrg4F7KTb70uKCPQvmJEHKpA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=RDpzZOoEiEg5UpIcJYyJkc3nrFP8G80fs3fwW709N7RM2ikjFSF/P0CYcCYflqp1V
-	 Fizs6amBwHIMsMynUKg144eiN9cH9qq6CbNZ33AzFivkkq1KX1rpiSEMWBeMYH0yRd
-	 ihPOtmj9dz+eZRW/+UOJTCYHm165SAux9SKt8h/wEp31mQfHq7B8xVQMryPhZIKxlG
-	 aO4NbcuXLmvX/iUvIvSDA8FZcEKAXTw1UCA8WUzv7jI1RSqMi8fLA9Uja+K4vZ84oj
-	 iv4lrXOYbcdzizGHZAqBp+yKdlMLIT8Et7HxjyP6VnVAdKDKGY5eaC7G4Nq8j1LeTX
-	 knZM4G9QH/twg==
+	b=OkGp9nNXkKiP5UoxzypzfMQj1L0W/aqWbfVNF9khX2RG7VQxtpLjLpmQOrLnNvEwX
+	 bbqlCLPGBN3w1oBGIDGodzQBXPbuCcNVsxlKuXOsrfGTVwGEDKoaFvKuiOJDFChxcK
+	 uG81L9ZCvd4/hBISzxvjUSYcGaXSU0RZoHjUgcsXSOt8VA2pO8iI+AdtaHaqMGQ57q
+	 6XL/ypzqcf/s+QSgQ5DiU2SUTl5gm/ewxxj1M5OlPA3P/c2DfSoop+DVsSH76BbQ9y
+	 6KIkNnp4nV5H7Uf6ilKFpWBLGCMxDfqZpUNPDwYrHsOlFYKUDKcIuHD/HSBW1mlAlO
+	 yCRSdkJC/7Qxg==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Qingtao Cao <qingtao.cao.au@gmail.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sashiko <sashiko-bot@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
-	mhi@lists.linux.dev,
+	lumag@kernel.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
 	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-6.12] bus: mhi: core: Fix sys error transition latency
-Date: Mon, 19 Oct 2026 09:47:31 -0400
-Message-ID: <20261019135441.1420968-160-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18] drm/msm: Move nr_cmds initialization
+Date: Mon, 19 Oct 2026 09:47:34 -0400
+Message-ID: <20261019135441.1420968-163-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -54,455 +57,401 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Qingtao Cao <qingtao.cao.au@gmail.com>
+From: Rob Clark <robin.clark@oss.qualcomm.com>
 
-[ Upstream commit 22568e8f13a42ab69b7d624741768cbf15dded74 ]
+[ Upstream commit 9ee2884ed58e6b39da35732146446d5930e4746b ]
 
-Bring forward the idea to fix the power down latency in
-mhi_pm_disable_transition() further to mhi_pm_sys_error_transition()
-so that the transition into system error (triggered by AT!RESET) in the
-modems won't have to return only after the timeout of up to 24 seconds.
+Previously if we entered an error path between these two points, we
+could leak the relocs tables due to submit->nr_cmds still being zero.
 
-Once the device gets reset, there is no guarantee that it will send an
-interrupt to indicate the state transition. So polling is the sensible
-option here.
+In practice, relocs are disallowed on a6xx+, and non-ancient userspace
+will not use relocs on earlier gens unless running on an ancient kernel.
+But userspace could use this to trigger a memory leak.
 
-Signed-off-by: Qingtao Cao <qingtao.cao.au@gmail.com>
-[mani: commit log]
-Signed-off-by: Manivannan Sadhasivam <mani@kernel.org>
-Reviewed-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Link: https://patch.msgid.link/20260603011333.3306102-2-qingtao.cao.au@gmail.com
+Reported-by: Sashiko <sashiko-bot@kernel.org>
+Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+Patchwork: https://patchwork.freedesktop.org/patch/743085/
+Message-ID: <20260729155609.20190-6-robin.clark@oss.qualcomm.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-I have the mailing-list thread, the 2021 sibling fix, and the local
-7.3-rc4 code. Next I’ll write the full nine-phase verdict.
+The local checkout is mainline **v7.3-rc4**. The change is a real, user-
+triggerable reloc-table leak in `MSM_GEM_SUBMIT`; it is small, correct,
+and belongs in this tree.
 
-## Phase 1: Commit message forensics
+===============================================================
+PHASE 1: COMMIT MESSAGE FORENSICS
+===============================================================
 
 **Step 1.1: PARSE THE SUBJECT LINE**
-
-Record: `[bus: mhi: core:]` `[Fix]` `[sys error transition latency]` —
-MHI host power-management: after a device SYSERR/RESET, the host was
-waiting on an interrupt-driven event that may never arrive, so recovery
-sat until `timeout_ms` (up to 24s).
+Record: **[drm/msm] [Move] [initialize `submit->nr_cmds` earlier so
+error-path cleanup can free reloc tables]**
 
 **Step 1.2: PARSE ALL COMMIT MESSAGE TAGS**
-
 Record:
-- `Signed-off-by: Qingtao Cao <qingtao.cao.au@gmail.com>` (author)
-- `[mani: commit log]` then `Signed-off-by: Manivannan Sadhasivam
-  <mani@kernel.org>` (MHI maintainer applied it and rewrote the log)
-- `Reviewed-by: Krishna Chaitanya Chundru
-  <krishna.chundru@oss.qualcomm.com>` (Qualcomm MHI reviewer)
-- `Link: https://patch.msgid.link/20260603011333.3306102-2-
-  qingtao.cao.au@gmail.com`
-- No `Fixes:`, `Reported-by:`, `Tested-by:`, `Cc:
-  stable@vger.kernel.org`, or syzbot tags (absence of Fixes/Cc:stable is
-  expected here)
+- `Reported-by: Sashiko <sashiko-bot@kernel.org>` — static-analysis bot,
+  not syzbot
+- `Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>` — msm
+  maintainer / author (ignore any pipeline SOB)
+- `Patchwork: https://patchwork.freedesktop.org/patch/743085/`
+- `Message-ID: <20260729155609.20190-6-robin.clark@oss.qualcomm.com>` —
+  v7 series, this is patch 5/17 (msgid -6 because -1 is the cover)
+- No `Fixes:` tag (expected)
+- No `Cc: stable` (expected)
+- No `Tested-by` / `Reviewed-by` / `Acked-by` on the committed message
 
 **Step 1.3: ANALYZE THE COMMIT BODY TEXT**
-
 Record:
-- **Bug:** `mhi_pm_sys_error_transition()` waits with
-  `wait_event_timeout()` for the MHI RESET bit to clear. After RESET,
-  the device is not guaranteed to raise an interrupt, so the wait often
-  runs to the full controller timeout.
-- **Symptom:** SYSERR handling triggered by modem `AT!RESET` does not
-  finish until timeout (commit text: up to 24 seconds).
-- **Root cause:** interrupt-driven wait is the wrong primitive after
-  RESET; polling the RESET bit is the correct approach (already used in
-  `mhi_pm_disable_transition()`).
-- **Version info in the message:** none. Thread later names a 5.17 test
-  kernel and Sierra EM9291; the same wait lives in this tree.
+- **Bug:** If submit hits an error between reloc `kmalloc` in
+  `submit_lookup_cmds()` and the late `submit->nr_cmds = args->nr_cmds`,
+  destroy walks `nr_cmds == 0` and skips `kfree(relocs)`.
+- **Symptom:** Kernel memory leak; userspace can trigger it via
+  `DRM_IOCTL_MSM_GEM_SUBMIT`.
+- **Author’s caveat:** Relocs are disallowed on a6xx+; modern userspace
+  does not use them on older gens. The author still states userspace can
+  force the leak.
+- **Version info:** None in the message. Introduced with reloc buffering
+  in v5.11-rc1.
 
 **Step 1.4: DETECT HIDDEN BUG FIXES**
+Record: Not disguised. It is an explicit error-path resource-leak fix
+(delayed counter vs allocated objects).
 
-Record: Not a disguised cleanup. Subject and body both say “Fix”. It is
-a real timeout/hang-style bug, the same class as `44b1eba44dc53` (“Fix
-power down latency”), which had `Cc: stable`.
-
-## Phase 2: Diff analysis
+===============================================================
+PHASE 2: DIFF ANALYSIS
+===============================================================
 
 **Step 2.1: INVENTORY THE CHANGES**
-
 Record:
-- File: `drivers/bus/mhi/host/pm.c` — 3 insertions, 11 deletions (net
-  −8)
-- Function: `mhi_pm_sys_error_transition()`
-- Scope: single-file surgical wait-primitive swap; error-path structure
-  (`MHI_PM_SYS_ERR_FAIL`, `BHI_INTVEC` reprogram) unchanged
+- File: `drivers/gpu/drm/msm/msm_gem_submit.c` (+3 / −2)
+- Functions: `submit_lookup_cmds()`, `msm_ioctl_gem_submit()`
+- Scope: single-file surgical fix
 
 **Step 2.2: UNDERSTAND THE CODE FLOW CHANGE**
-
-Record: Inside `if (reset_device)` after `mhi_set_mhi_state(...,
-MHI_STATE_RESET)`:
-
-- **Before:** `wait_event_timeout(state_event, mhi_read_reg_field(...)
-  || !in_reset, timeout)`. `wait_event_timeout()` only rechecks on
-  wakeup or timeout. After RESET, MSI is not expected, so the wait
-  typically sleeps the full `timeout_ms`.
-- **After:** `mhi_poll_reg_field(..., MHICTRL_RESET_MASK, 0, 25000,
-  mhi_cntrl->timeout_ms)` — poll every 25ms until RESET clears or
-  timeout. Failure still uses `if (ret)` → `MHI_PM_SYS_ERR_FAIL`.
-
-Path: SYSERR recovery / RESET, not probe init.
+Record:
+- **Before:** `submit_lookup_cmds()` `kmalloc`s `cmd[i].relocs` then
+  `copy_from_user`. `nr_cmds` stays 0 (kzalloc) until after pin/reloc
+  parsing, then `submit->nr_cmds = args->nr_cmds`. Any `goto out` in
+  between skips that store. `__msm_gem_submit_destroy()` only frees `i <
+  nr_cmds`.
+- **After:** `submit->nr_cmds = i + 1` immediately after a successful
+  `kmalloc`, before `copy_from_user`. The late assignment is removed.
+  Failed `kmalloc` does not bump the counter.
 
 **Step 2.3: IDENTIFY THE BUG MECHANISM**
+Record:
+- **Category:** error-path resource leak (ioctl-reachable, repeatable)
+- **Mechanism:** counter used as the free loop bound is updated after
+  the allocations. Verified destroy path:
 
-Record: **Logic / correctness (wrong wait primitive after hardware
-RESET)** — not UAF/leak/race.
+```121:122:drivers/gpu/drm/msm/msm_gem_submit.c
+        for (i = 0; i < submit->nr_cmds; i++)
+                kfree(submit->cmd[i].relocs);
+```
 
-Mechanism: RESET drops device interrupt context; host waited for
-`state_event`. Nobody wakes it, so SYSERR recovery is delayed by the
-full timeout even though the device already cleared RESET. Polling
-matches power-down and power-up.
+`allow_relocs` is false on a6xx+ (`adreno_gpu.c`: `gpu->allow_relocs =
+family < ADRENO_6XX_GEN1`), but that check runs **after** lookup
+allocates. Userspace with `nr_relocs > 0` allocates, then hits `EINVAL`
+“relocs not allowed” and (before this fix) leaked.
 
 **Step 2.4: ASSESS THE FIX QUALITY**
-
 Record:
-- Obviously correct: same helper/interval already used in
-  `mhi_pm_disable_transition()` and `mhi_ready_state_transition()` in
-  this tree.
-- Minimal: only the wait is replaced.
-- Regression risk: low. Polling `fsleep(25000)` on a workqueue is the
-  established pattern. Worst case is still `timeout_ms`, same as before.
-  Does not change APIs or PM state machine.
+- Obviously correct: free bound tracks allocated slots.
+- Minimal; no API/data-structure change.
+- Regression risk is low. Mid-ioctl code uses `args->nr_cmds` /
+  `cmds_to_parse`, not `submit->nr_cmds`. `msm_job_run()` / GPU submit
+  run only after a successful job push, when `nr_cmds` already equaled
+  `args->nr_cmds`.
+- Failed `kmalloc` still does not increment, so a NULL slot is not
+  `kfree`d.
 
-## Phase 3: Git history
+===============================================================
+PHASE 3: GIT HISTORY INVESTIGATION
+===============================================================
 
 **Step 3.1: BLAME THE CHANGED LINES**
-
-Record: Pre-fix `wait_event_timeout` block blamed to `556bbb442bbb44`
-(“Separate system error and power down handling”, 2020-11-18, first in
-**v5.11-rc1**). That split copied the wait into the new
-`mhi_pm_sys_error_transition()`. Surrounding reset-decision code later
-touched by `4d92e7c5ccadc` (2025) and `bce3f770684cc`
-(`MHI_PM_SYS_ERR_FAIL`, 2024); those are not required for this hunk.
+Record:
+- Reloc `kmalloc` + destroy `kfree` loop: `20224d715a882`
+  (“drm/msm/submit: Move copy_from_user ahead of locking bos”),
+  **2020-10-23**, in **v5.11-rc1** (`git merge-base --is-ancestor` vs
+  v5.10 failed, vs v5.11-rc1 succeeded).
+- Late `submit->nr_cmds = args->nr_cmds`: `2e6a8a1fe2b262` (“drm/msm:
+  Add VM_BIND ioctl”, 2025-06-29). Before that it was `submit->nr_cmds =
+  i` **after** the parse loop; `goto out` inside that loop still skipped
+  the store. The leak is older than VM_BIND.
 
 **Step 3.2: FOLLOW THE FIXES: TAG**
-
-Record: No `Fixes:` tag. The incomplete sibling is `44b1eba44dc53`
-(2021-06-24, “Fix power down latency”) with `Cc: stable` and `Fixes:
-a6e2e3522f29`. That commit converted **disable/power-down** to
-`mhi_poll_reg_field` and left **sys_error** on `wait_event_timeout`.
-This commit finishes that leftover.
+Record: No `Fixes:` tag. Buggy pattern starts at `20224d715a882`
+(v5.11). That commit is an ancestor of this tree.
 
 **Step 3.3: CHECK FILE HISTORY**
-
-Record: Recent `pm.c` commits (`753aa72545ce0` no-M3, `aa1a0e93ed21a`
-SYS_ERR power-up, `4d92e7c5ccadc` power_up vs SYSERR) are unrelated.
-Standalone; not patch 2/N of a functional series.
+Record:
+- Same-day series: `0369a2619c50b` SIZE_MAX cleanup, `7aeada642ebfd`
+  overflow check — independent, not required for this leak fix.
+- Related but different: `ad70e46e130a7` submit error-path unpin order.
+- Standalone for the leak; bundled as v7 05/17 “lazy-vm fixes” for
+  convenience.
 
 **Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS**
+Record: Rob Clark is the msm GEM/submit maintainer. Nearby work is other
+submit/VM fixes in the same series.
 
-Record: Qingtao Cao has this single MHI commit in this tree. Applied by
-maintainer Manivannan Sadhasivam; reviewed by Krishna Chaitanya Chundru
-(Qualcomm).
+**Step 3.5: DEPENDENT/PREREQUISITE COMMITS**
+Record: None for this hunk. It only moves an existing store. Applies
+standalone on this tree (already applied as `9ee2884ed58e6`).
 
-**Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS**
-
-Record: Needs `mhi_poll_reg_field(..., delayus, timeout_ms)` as in
-`drivers/bus/mhi/host/main.c` (this tree). Signature came from
-`1a42aef258805` plus later bitfield/timeout updates (`d28cab4d4aa06`,
-`6ab3d50b106c9`). All present here. Applies standalone.
-
-## Phase 4: Mailing list and external research
+===============================================================
+PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+===============================================================
 
 **Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION**
-
 Record:
-- `b4 dig -c 22568e8f13a42`: https://patch.msgid.link/20260603011333.330
-  6102-2-qingtao.cao.au@gmail.com
-- `b4 dig -a`: single **v1**, subject `[v1 PATCH 1/1] bus: mhi: core:
-  fix sys error handling latency` (msgid `-2` is numbering, not a
-  2-patch series)
-- Thread (5 messages via `b4 mbox`):
-  1. Qingtao: 24s SYSERR wait on `AT!RESET`
-  2. Krishna: initially “we should not see this delay”
-  3. Qingtao: Sierra Wireless EM9291, reused EM919x config (`timeout_ms
-     = 24000`); without patch ~24s, with patch ~11s; 5.17 test kernel
-  4. Krishna: device **does** clear RESET; **MSI is not expected after
-     MHI RESET**; `Reviewed-by`
-  5. Qingtao: same issue as `44b1eba44dc53`
-  6. Mani: applied as `22568e8f13a42`
-- No NAK. No reviewer `Cc: stable`. Maintainer improved the commit log
-  (polling rationale).
+- `b4 dig -c 9ee2884ed58e6`: https://patch.msgid.link/20260729155609.201
+  90-6-robin.clark@oss.qualcomm.com
+- `[PATCH v7 05/17] drm/msm: Move nr_cmds initialization`
+- Cover: `[PATCH v7 00/17] drm/msm: A couple lazy-vm fixes`
+- Revisions v1–v7 of a growing msm series; this leak fix is in v7.
+  Applied version is latest.
+- Lore HTTP fetch returned 403; full thread read from `b4 dig -m` mbox.
+- Sashiko reply on this patch: only **pre-existing** issues (SIZE_MAX in
+  `submit_create`, lazy `ctx->vm` NULL). No NAK of the nr_cmds move.
+  Those other bugs are other patches in the same series.
+- No reviewer `Cc: stable` in the thread.
 
 **Step 4.2: CHECK WHO REVIEWED THE PATCH**
-
-Record: `b4 dig -w`: To/Cc included `mani@kernel.org` (maintainer),
-`mhi@lists.linux.dev`, `linux-arm-msm@vger.kernel.org`, `linux-
-kernel@vger.kernel.org`, Krishna (review), Vivek Pernamitta. Right lists
-and maintainer.
+Record (`b4 dig -w`): To dri-devel; Cc linux-arm-msm, freedreno,
+Sashiko, Dmitry Baryshkov, Abhinav Kumar, Jessica Zhang, Sean Paul,
+Marijn Suijten, David Airlie, Simona Vetter. Subsystem maintainers were
+on the original mail. No human Reviewed-by on the git commit.
 
 **Step 4.3: SEARCH FOR THE BUG REPORT**
-
-Record: No bugzilla/syzbot. Report is the patch author on real hardware
-(EM9291 / `AT!RESET`). Krishna confirmed it is generic MHI RESET
-behavior, not one broken device.
+Record: Reporter is Sashiko (automated). No syzbot/bugzilla. Author
+independently describes a userspace-triggerable leak. That description
+matches the code.
 
 **Step 4.4: CHECK FOR RELATED PATCHES AND SERIES**
-
-Record: Standalone 1/1. Related historical fix `44b1eba44dc53` already
-in this tree.
+Record: 17-patch lazy-VM series. This patch does not need 01–04
+(ctxlock/queuelock) or 06+ (SIZE_MAX / VM helpers). Standalone leak fix.
 
 **Step 4.5: CHECK STABLE MAILING LIST HISTORY**
+Record: Web search of lore.kernel.org/stable for this subject found no
+relevant thread.
 
-Record: **UNVERIFIED** — lore.kernel.org WebFetch returned 403; no
-stable@ discussion in the mbox. No evidence it was NAK’d for stable.
+===============================================================
+PHASE 5: CODE SEMANTIC ANALYSIS
+===============================================================
 
-## Phase 5: Code semantic analysis
-
-**Step 5.1: IDENTIFY KEY FUNCTIONS**
-
-Record: `mhi_pm_sys_error_transition()`; helper `mhi_poll_reg_field()`.
+**Step 5.1: KEY FUNCTIONS**
+Record: `submit_lookup_cmds`, `msm_ioctl_gem_submit`; cleanup via
+`__msm_gem_submit_destroy`.
 
 **Step 5.2: TRACE CALLERS**
-
 Record:
-- `mhi_pm_st_worker()` → `DEV_ST_TRANSITION_SYS_ERR` →
-  `mhi_pm_sys_error_transition()`
-- `mhi_pm_sys_err_handler()` queues that transition
-- `mhi_pm_sys_err_handler()` from `drivers/bus/mhi/host/main.c`: SYSERR
-  in intvec, ctrl event ring `MHI_STATE_SYS_ERR`, IRQ with no events
-
-Call path: device SYSERR / host RESET processing on the MHI high-prio
-workqueue. Reachable when a WWAN modem hits SYSERR or `AT!RESET`.
+- `msm_ioctl_gem_submit` registered with `DRM_RENDER_ALLOW` in
+  `msm_drv.c` (`DRM_IOCTL_MSM_GEM_SUBMIT`).
+- Reachable from render-node ioctl; not irq, not module init.
 
 **Step 5.3: TRACE CALLEES**
-
-Record: `mhi_set_mhi_state(RESET)`, `mhi_poll_reg_field` →
-`mhi_read_reg_field` + `fsleep`, `mhi_tryset_pm_state`,
-`mhi_write_reg(BHI_INTVEC)`. No new locks or allocations.
+Record: `kmalloc`, `copy_from_user`, later `submit_reloc` /
+`allow_relocs` check. Destroy: `kfree(relocs)` gated by `nr_cmds`.
 
 **Step 5.4: FOLLOW THE CALL CHAIN**
+Record: userspace ioctl → `drm_ioctl` → `msm_ioctl_gem_submit` →
+`submit_lookup_cmds` → error `goto out` → `submit_cleanup` →
+`msm_gem_submit_put` → `__msm_gem_submit_destroy`. Unprivileged GPU
+clients (render node) can trigger it.
 
-Record: Userspace (`AT!RESET` or modem crash) → device SYSERR → host
-IRQ/event → workqueue → this function. Unprivileged users typically
-cannot issue `AT!RESET` without modem access; operators and WWAN stacks
-can. Not a theoretical path.
+**Step 5.5: SIMILAR PATTERNS**
+Record: `submit_lookup_objects()` already does `submit->nr_bos = i` on
+the way out so partial BO lookups are cleaned. Cmds did not have the
+analogous update. No sibling drivers with the same bug in this file.
 
-**Step 5.5: SEARCH FOR SIMILAR PATTERNS**
-
-Record: Same poll already in `mhi_pm_disable_transition()`,
-`mhi_ready_state_transition()`, and `mhi_async_power_up()` SYS_ERR
-reset. Remaining `wait_event_timeout()` uses are M0/M2/M3-style waits
-that still get IRQs — correctly left alone.
-
-## Phase 6: Cross-referencing against the local tree
+===============================================================
+PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+===============================================================
 
 **Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?**
+Record: Yes, in this lineage. `git describe HEAD` =
+`v7.3-rc4-27-gf0100363d8c37`, `make kernelversion` = `7.3.0-rc4`. Parent
+of `9ee2884ed58e6` still has the late assignment and zero `nr_cmds`
+during lookup. Bug present since v5.11; this fix is already an ancestor
+of HEAD (`git merge-base --is-ancestor 9ee2884ed58e6 HEAD` succeeded).
+Decision is still whether the fix has technical merit for this tree, not
+whether a pipeline tag exists.
 
+**Step 6.2: BACKPORT COMPLICATIONS**
+Record: On this tree the hunk matches current `msm_gem_submit.c`
+(VM_BIND-era `args->nr_cmds` store). Clean apply. (Older pre-VM_BIND
+trees would delete `submit->nr_cmds = i` instead; that is not this
+checkout.)
+
+**Step 6.3: RELATED FIXES ALREADY HERE**
+Record: No earlier equivalent. Follow-ups `0369a2619c50b` /
+`7aeada642ebfd` are overflow cleanups, not another leak fix.
+
+===============================================================
+PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
+===============================================================
+
+**Step 7.1: SUBSYSTEM AND CRITICALITY**
+Record: **drm/msm GEM submit**. **IMPORTANT** (Qualcomm Adreno; Android
+phones and Snapdragon laptops). Not mm/core, but a common production GPU
+driver.
+
+**Step 7.2: SUBSYSTEM ACTIVITY**
+Record: Actively developed (VM_BIND, lazy VM, submit locking). Submit
+ioctl itself is old and long-lived.
+
+===============================================================
+PHASE 8: IMPACT AND RISK ASSESSMENT
+===============================================================
+
+**Step 8.1: WHO IS AFFECTED**
+Record: Driver-specific (`CONFIG_DRM_MSM`). Anyone who can open the msm
+render node.
+
+**Step 8.2: TRIGGER CONDITIONS**
 Record:
-- Local tree: **v7.3-rc4** (`VERSION=7 PATCHLEVEL=3 SUBLEVEL=0
-  EXTRAVERSION=-rc4`, `HEAD` `f0100363d8c37`)
-- File `drivers/bus/mhi/host/pm.c` exists;
-  `mhi_pm_sys_error_transition()` exists
-- Buggy `wait_event_timeout` present from v5.11 through parent of
-  `22568e8f13a42`; this commit is already on `HEAD` as a mainline merge
-  (`git merge-base --is-ancestor 22568e8f13a42 HEAD` succeeded)
-- EM929x uses `modem_sierra_em919x_config` with `.timeout_ms = 24000` in
-  `pci_generic.c` — same 24s the reporter hit
+- Normal submits with `nr_relocs == 0`: `kmalloc(0)` is not a real leak.
+- Trigger: `nr_relocs > 0`, then any error after allocation (bad copy,
+  lock fail, invalid cmd size, **relocs not allowed on a6xx+**).
+- Easy on modern Adreno: pass nonzero relocs; kernel allocates then
+  rejects.
+- Unprivileged with render-node access. Repeatable; size chosen by
+  userspace.
 
-**Step 6.2: CHECK FOR BACKPORT COMPLICATIONS**
+**Step 8.3: FAILURE MODE SEVERITY**
+Record: Kernel memory leak in a hot ioctl, unbounded. **HIGH** (DoS /
+memory exhaustion). Not panic/UAF/corruption.
 
-Record: Clean apply on this tree. `mhi_poll_reg_field()` 6-argument form
-matches. No conflicting refactor of this hunk.
-
-**Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE**
-
-Record: Power-down poll fix `44b1eba44dc53` is here. No other equivalent
-sys_error poll fix besides this commit.
-
-## Phase 7: Subsystem and maintainer context
-
-**Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY**
-
-Record: `drivers/bus/mhi/host/` — MHI host bus for Qualcomm/Sierra/Telit
-WWAN modems. **IMPORTANT** (not core mm/VFS): common on laptops,
-embedded, Android with WWAN. Maintainer: Manivannan Sadhasivam.
-
-**Step 7.2: ASSESS SUBSYSTEM ACTIVITY**
-
-Record: Actively maintained (recent no-M3, SYSERR/power_up, tracing,
-pci_generic). The wait itself is old (2020); this is a long-standing
-leftover, not churn in new code.
-
-## Phase 8: Impact and risk
-
-**Step 8.1: DETERMINE WHO IS AFFECTED**
-
-Record: Driver-specific: MHI host users (WWAN PCI modems). EM919x/EM929x
-and any controller that takes SYSERR + RESET. RDDM controllers skip
-`mhi_pm_sys_err_handler()`, so they are not on this path.
-
-**Step 8.2: DETERMINE THE TRIGGER CONDITIONS**
-
-Record: Modem SYSERR or `AT!RESET`. Not every boot; common for modem
-recovery/reset. Krishna: **no MSI after RESET is expected** — so the
-full-timeout wait is the normal case, not a rare race. Unprivileged
-trigger only with modem AT access.
-
-**Step 8.3: DETERMINE THE FAILURE MODE SEVERITY**
-
-Record: Host sleeps in SYSERR recovery until `timeout_ms` (8s–24s
-typical, 50s–120s on some `pci_generic` configs) even after RESET has
-cleared. Not oops/corruption/UAF. User-visible: WWAN reset/recovery
-stalled for tens of seconds. **Severity: MEDIUM-HIGH** (hang-like
-timeout on a real device path). Measured: 24s → ~11s on EM9291.
-
-**Step 8.4: CALCULATE RISK-BENEFIT RATIO**
-
+**Step 8.4: RISK-BENEFIT RATIO**
 Record:
-- **Benefit:** high for MHI modem users — removes a systematic multi-
-  second stall on SYSERR/RESET. Same class as the 2021 stable-bound
-  power-down fix.
-- **Risk:** very low — 3 lines added / 11 removed, proven helper, error
-  handling unchanged.
-- **Ratio:** benefit ≫ risk.
+- **Benefit:** Stops a userspace-triggerable leak on a widely used GPU
+  ioctl. High for msm users.
+- **Risk:** Very low (3 insertions, 2 deletions; error/cleanup
+  accounting only).
+- **Ratio:** Strongly favors applying.
 
-## Phase 9: Final synthesis
+===============================================================
+PHASE 9: FINAL SYNTHESIS
+===============================================================
 
 **Step 9.1: COMPILE THE EVIDENCE**
 
-**FOR:**
-- Real, user-reported stall (Sierra EM9291 `AT!RESET`, 24s vs ~11s)
-- Qualcomm reviewer: MSI after RESET is not expected — generic protocol
-  bug
-- Identical 2021 power-down fix (`44b1eba44dc53`) was `Cc: stable`
-- Small, obviously correct, already used on the disable path in this
-  tree
-- Maintainer applied; Reviewed-by from Qualcomm
-- Buggy wait present since v5.11; EM929x + 24000ms timeout exist in this
-  tree
-- `mhi_poll_reg_field` already here; applies cleanly
+FOR:
+- Real leak: destroy uses `nr_cmds` as the free count; that count was
+  updated too late.
+- User-triggerable via `DRM_IOCTL_MSM_GEM_SUBMIT` (`DRM_RENDER_ALLOW`).
+- On a6xx+ the “relocs not allowed” path is after allocation, so modern
+  hardware is included.
+- Present since v5.11; still the same mechanism here until this commit.
+- 5-line, obviously correct; msm maintainer authored it.
+- Matches the common stable class of ioctl error-path leaks.
 
-**AGAINST:**
-- Not oops/UAF/corruption/security
-- No `Fixes:` / `Cc: stable` (not a negative per the review rules)
-- Author’s measurements were on 5.17; logic is unchanged in this tree
-- Krishna first questioned the delay, then agreed and reviewed
+AGAINST:
+- Not a crash/UAF; “only” a leak.
+- Honest userspace rarely uses relocs on current gens.
+- Found by Sashiko, not a user oops/syzbot.
+- Shipped in a 17-patch series (but this patch is independent).
+- No `Fixes:` / `Cc: stable` (not a negative per the rules).
 
-**UNRESOLVED:**
-- Whether stable@ ever discussed this (lore 403)
-- Cover letter `3306102-1` body not fetched; series is 1/1 from b4
+UNRESOLVED:
+- Lore.kernel.org HTTP 403; discussion recovered via `b4 dig -m`.
+- Patchwork HTML was a bot-check page.
+- No stable-list thread found.
 
-**Step 9.2: APPLY THE STABLE RULES CHECKLIST**
+**Step 9.2: STABLE RULES CHECKLIST**
+1. Obviously correct and tested? **PASS** — maintains allocated-vs-freed
+   invariant; maintainer-authored; in mainline since v7.3-rc1.
+2. Fixes a real bug that affects users? **PASS** — ioctl-reachable leak.
+3. Important (crash/security/corruption/deadlock)? **PASS** at HIGH —
+   repeatable kernel memory leak / DoS, not CRITICAL crash.
+4. Small and contained? **PASS** — +3/−2, one file.
+5. No new features or APIs? **PASS**.
+6. Can apply to the local tree? **PASS** — already the code in this
+   checkout.
 
-1. Obviously correct and tested? **PASS** — copies existing poll; author
-   measured; maintainer + Qualcomm review
-2. Fixes a real bug that affects users? **PASS** — 24s SYSERR recovery
-   on real modem hardware
-3. Important issue (crash, security, corruption, deadlock)? **PASS** —
-   hang-like timeout on RESET; stable rules also cover hangs and “oh,
-   that’s not good”; sibling fix was stable material
-4. Small and contained? **PASS** — 14-line hunk, one function
-5. No new features or APIs? **PASS**
-6. Can apply to the local tree? **PASS** — code, helper, and signature
-   all present
+**Step 9.3: EXCEPTION CATEGORIES**
+Record: None (not an ID/quirk/DT/build/doc exception). It qualifies as a
+normal leak fix.
 
-**Step 9.3: CHECK FOR EXCEPTION CATEGORIES**
+**Step 9.4: DECISION**
+This is a small, correct fix for a long-standing, userspace-triggerable
+kernel memory leak in msm GEM submit. It meets stable rules for this
+tree. Risk is negligible versus the DoS benefit.
 
-Record: None (not a device ID, quirk table, DT, build, or docs patch).
-Qualifies as a normal bugfix.
+------------------------------------------------
+What the commit solves for this tree
+------------------------------------------------
+`submit_lookup_cmds()` allocated per-cmd reloc arrays while
+`submit->nr_cmds` stayed 0 until much later in `msm_ioctl_gem_submit()`.
+Destroy only frees `cmd[0..nr_cmds)`. Any error in that window leaked
+those allocations. Moving `nr_cmds = i + 1` to right after `kmalloc`
+makes cleanup free what was allocated, including the common a6xx+
+“relocs not allowed” failure.
 
-**Step 9.4: MAKE YOUR DECISION**
-
-This tree is v7.3-rc4. The SYSERR path still used interrupt wait after
-RESET until this change. That wait is wrong for MHI RESET, stalls
-recovery for the full controller timeout, and was already fixed the same
-way for power-down in 2021 (and sent to stable). The leftover in
-`mhi_pm_sys_error_transition()` is a small, proven, user-visible fix and
-belongs in this tree.
-
-### What the commit solves for this tree
-
-`mhi_pm_sys_error_transition()` issued MHI RESET then used
-`wait_event_timeout()` on `state_event`. After RESET the device drops
-interrupt context and does not send MSI, so the host slept until
-`timeout_ms` (24s on EM919x/EM929x). Switching to `mhi_poll_reg_field()`
-watches the RESET bit directly, which is what disable/power-up already
-do here.
-
-### Stable rules / risk
-
-Meets the rules: real hang-style bug, tiny, no new API, applies cleanly.
-Risk is a 25ms poll loop already used on adjacent paths. Benefit is much
-shorter modem SYSERR/`AT!RESET` recovery.
-
-### Concerns
-
-None that block this tree: helper signature matches; no series deps. Not
-a crash/CVE, but a systematic tens-of-seconds stall on a production WWAN
-path.
-
-Verification:
-- [Phase 1] Tags: SOB Qingtao + Mani, R-b Krishna, Link msgid; no
-  Fixes/Cc:stable/syzbot
-- [Phase 2] Diff: `pm.c` `mhi_pm_sys_error_transition()`,
-  `wait_event_timeout` → `mhi_poll_reg_field`, 3+/11-
-- [Phase 3] blame: `556bbb442bbb44` (v5.11-rc1) introduced the wait;
-  `44b1eba44dc53` (2021, Cc:stable) fixed only disable
-- [Phase 3] `git merge-base --is-ancestor 22568e8f13a42 HEAD`: yes;
-  `44b1eba44dc53` and `556bbb442bbb44` also ancestors
-- [Phase 3] `mhi_poll_reg_field` in `main.c` takes `(mask, val, delayus,
-  timeout_ms)` matching the patch
-- [Phase 4] `b4 dig -c 22568e8f13a42`: lore msgid
-  `20260603011333.3306102-2`; v1 only
-- [Phase 4] `b4 dig -a`: 1/1 series; `b4 dig -w`: maintainer +
-  mhi/linux-arm-msm lists
-- [Phase 4] `b4 mbox`: Krishna confirmed no MSI after RESET; EM9291
-  24s→11s; Mani applied
-- [Phase 4] WebFetch lore/patch.msgid.link: 403 — thread recovered via
-  b4
-- [Phase 5] callers: `mhi_pm_st_worker` / `mhi_pm_sys_err_handler` from
-  SYSERR IRQ/event in `main.c`
-- [Phase 6] `git describe HEAD`: v7.3-rc4-27-gf0100363d8c37; `make
-  kernelversion`: 7.3.0-rc4
-- [Phase 6] `pci_generic.c`: EM929x shares EM919x config, `timeout_ms =
-  24000`
-- [Phase 8] Failure: SYSERR recovery blocked until timeout; severity
-  hang-like, not oops
-- UNVERIFIED: stable@ lore discussion (HTTP 403)
-- UNVERIFIED: cover letter body `3306102-1`
+------------------------------------------------
+Verification
+------------------------------------------------
+- [Phase 1] Parsed tags: Sashiko Reported-by; Rob Clark SOB; Patchwork
+  743085; msgid 20190-6; no Fixes/Cc-stable
+- [Phase 2] Diff: +3/−2 in `msm_gem_submit.c`; `nr_cmds = i+1` after
+  kmalloc; removed late `nr_cmds = args->nr_cmds`
+- [Phase 2] Destroy loop confirmed at lines 121–122; `allow_relocs` set
+  false for a6xx+ at `adreno_gpu.c:1209`; check is after lookup
+- [Phase 3] `git blame` on parent: reloc alloc from `20224d715a882`
+  (v5.11-rc1); late assign from VM_BIND `2e6a8a1fe2b262`
+- [Phase 3] `git merge-base --is-ancestor 20224d715a882 v5.11-rc1` yes;
+  vs v5.10 no
+- [Phase 3] No Fixes: tag to follow
+- [Phase 4] `b4 dig -c 9ee2884ed58e6`: lore msgid.link
+  20260729155609.20190-6; v7 05/17
+- [Phase 4] `b4 dig -a`: v1–v7 series; applied = v7
+- [Phase 4] `b4 dig -w`: dri-devel + msm maintainers CC’d
+- [Phase 4] mbox: Sashiko comments were pre-existing issues, not a NAK
+  of this change; no stable nomination
+- [Phase 4] lore WebFetch 403; patchwork served bot-check; stable search
+  found nothing relevant
+- [Phase 5] Caller: `DRM_IOCTL_DEF_DRV(..., DRM_RENDER_ALLOW)` in
+  `msm_drv.c:804`
+- [Phase 6] `git describe HEAD` = v7.3-rc4-27-gf0100363d8c37; `make
+  kernelversion` = 7.3.0-rc4
+- [Phase 6] `git merge-base --is-ancestor 9ee2884ed58e6 HEAD` succeeded;
+  parent still has the leak
+- [Phase 8] Failure mode: ioctl-triggered kmalloc leak, severity HIGH
+- UNVERIFIED: live lore.kernel.org HTML (403); patchwork page body;
+  whether any human mailing-list Reviewed-by was dropped on commit
 
 **YES**
 
- drivers/bus/mhi/host/pm.c | 14 +++-----------
- 1 file changed, 3 insertions(+), 11 deletions(-)
+ drivers/gpu/drm/msm/msm_gem_submit.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/bus/mhi/host/pm.c b/drivers/bus/mhi/host/pm.c
-index b4ef115189b50..71bcb0f98ce6a 100644
---- a/drivers/bus/mhi/host/pm.c
-+++ b/drivers/bus/mhi/host/pm.c
-@@ -651,21 +651,13 @@ static void mhi_pm_sys_error_transition(struct mhi_controller *mhi_cntrl)
+diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
+index 75d9f35743700..2b6b5297f0592 100644
+--- a/drivers/gpu/drm/msm/msm_gem_submit.c
++++ b/drivers/gpu/drm/msm/msm_gem_submit.c
+@@ -260,6 +260,9 @@ static int submit_lookup_cmds(struct msm_gem_submit *submit,
+ 			ret = -ENOMEM;
+ 			goto out;
+ 		}
++
++		submit->nr_cmds = i + 1;
++
+ 		ret = copy_from_user(submit->cmd[i].relocs, userptr, sz);
+ 		if (ret) {
+ 			ret = -EFAULT;
+@@ -717,8 +720,6 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
+ 			goto out;
+ 	}
  
- 	/* Trigger MHI RESET so that the device will not access host memory */
- 	if (reset_device) {
--		u32 in_reset = -1;
--		unsigned long timeout = msecs_to_jiffies(mhi_cntrl->timeout_ms);
+-	submit->nr_cmds = args->nr_cmds;
 -
- 		dev_dbg(dev, "Triggering MHI Reset in device\n");
- 		mhi_set_mhi_state(mhi_cntrl, MHI_STATE_RESET);
+ 	idr_preload(GFP_KERNEL);
  
- 		/* Wait for the reset bit to be cleared by the device */
--		ret = wait_event_timeout(mhi_cntrl->state_event,
--					 mhi_read_reg_field(mhi_cntrl,
--							    mhi_cntrl->regs,
--							    MHICTRL,
--							    MHICTRL_RESET_MASK,
--							    &in_reset) ||
--					!in_reset, timeout);
--		if (!ret || in_reset) {
-+		ret = mhi_poll_reg_field(mhi_cntrl, mhi_cntrl->regs, MHICTRL,
-+				 MHICTRL_RESET_MASK, 0, 25000, mhi_cntrl->timeout_ms);
-+		if (ret) {
- 			dev_err(dev, "Device failed to exit MHI Reset state\n");
- 			write_lock_irq(&mhi_cntrl->pm_lock);
- 			cur_state = mhi_tryset_pm_state(mhi_cntrl,
+ 	spin_lock(&queue->idr_lock);
 -- 
 2.53.0
 
