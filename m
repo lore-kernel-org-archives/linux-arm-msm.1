@@ -1,47 +1,49 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6D55500A99;
-	Mon, 19 Oct 2026 13:58:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D1485A357D;
+	Mon, 19 Oct 2026 13:59:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418324; cv=none; b=JLX9j7c2fcJE/dNoaR5oBfsRRhT3XWM8ku5IXjFoZusiq6yRn5txJ4RvFlmL2sKyWusJH/D0TnT0gRTmWyVYzleMP4szBGqsASZaVFivzj4pku8Rv2e3AG3KEEJBSaexD3dyFjnWx9ktNB+gDd6/Lysh4KvpBzs5VFDl9Nw0HLI=
+	t=1792418380; cv=none; b=lwJ9EudzmswszsHK0P1BwyLlGHoLHyGwvAGAA/oDfiiWMeDoIGOItxTltxLVlAsCEstNXjqB7V3ytnJ2hQDjrizvMu6SLTlQvfLkZtbdoZcOo3gnFp1Xm948cTM/gIvo94COGsZE5kSYRYaBCYE7QNojefPMghxRyNtICKqjY0o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418324; c=relaxed/simple;
-	bh=v4i/sp+jK+cJnVRz6+KH9dDUSk7IzusOS5QKSQau6JI=;
+	s=arc-20240116; t=1792418380; c=relaxed/simple;
+	bh=AFavnNKiE/dT91FsRoj+3tVmR6btbub310B8fkTNg5I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=B/q9rLbXB3LdYqzLW/qn4Saj5C2WwC2Ws8VAqrrW/+jZqRPNF5MGhYhgFmwySJO8PDFN+5e/ifJ2uVeZg9vBQtSDwYmynzfG6SpKTtH+ReulP/fv4aF4mrJ4AnB2OQ1lL07Ztxq/cgDyFIOAENZrZVxS/A2U4DXvdVcNj+0BTvY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OkGp9nNX; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=ALjrabjXUPg8uxres/gjLiEOxkRzgloSzK7nw7f4UbdiqOsKrBz26irX3oEVhh5dlbfJ+WJezADlgSndjbABjIXU2+pddybDcW2PPOBMQKsZRfKtuX+3H23SaVIwPfAXvgKLn56mAwja2SfacEepEKYdyyaBui+ORmmloKeAA3o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DxkSZGg4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OkGp9nNX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5ED561F000C8;
-	Mon, 19 Oct 2026 13:58:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DxkSZGg4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E85271F000C8;
+	Mon, 19 Oct 2026 13:59:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418319;
-	bh=W8xraFxeoKo68zra+pQGrg4F7KTb70uKCPQvmJEHKpA=;
+	s=k20260515; t=1792418378;
+	bh=H8JoCC7gt7zCEQqk2PYvewP91xC+JRFcbOfWCI7/0xk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=OkGp9nNXkKiP5UoxzypzfMQj1L0W/aqWbfVNF9khX2RG7VQxtpLjLpmQOrLnNvEwX
-	 bbqlCLPGBN3w1oBGIDGodzQBXPbuCcNVsxlKuXOsrfGTVwGEDKoaFvKuiOJDFChxcK
-	 uG81L9ZCvd4/hBISzxvjUSYcGaXSU0RZoHjUgcsXSOt8VA2pO8iI+AdtaHaqMGQ57q
-	 6XL/ypzqcf/s+QSgQ5DiU2SUTl5gm/ewxxj1M5OlPA3P/c2DfSoop+DVsSH76BbQ9y
-	 6KIkNnp4nV5H7Uf6ilKFpWBLGCMxDfqZpUNPDwYrHsOlFYKUDKcIuHD/HSBW1mlAlO
-	 yCRSdkJC/7Qxg==
+	b=DxkSZGg4aFXpMSC4NSqPbytnUE2siPcxnGqkWtpEXPqpoGv4MhFSEvw7hrmWVmkZT
+	 unqg0tArBSqV5p1ypi465v1gim9fYhacIS4h+StdEnt/0AJzMTkNZLIiLMo/cUT2q9
+	 sMFoMSRAvezRz7POsVuE/DhFNk+3uxZjvcIYbvrYq8aogv64F0E5sRZ35CbcgzcAkr
+	 AEQu3Iqn7diodfeQeFxGC9uTr5n4sf57bONg+RvCT5gjM/ff01PTI1gcGjJaSQ/Bbr
+	 JeUW16+YUVwR8S+fjhLgSHAwxkH0+owbuTDB90wP9cGGADrqj3tGgEcnDWEdJJGspj
+	 ejZnHSDKn07SQ==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sashiko <sashiko-bot@kernel.org>,
+Cc: David Heidelberg <david@ixit.cz>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
-	lumag@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
+	konradybcio@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18] drm/msm: Move nr_cmds initialization
-Date: Mon, 19 Oct 2026 09:47:34 -0400
-Message-ID: <20261019135441.1420968-163-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18-6.6] dt-bindings: arm: qcom,ids: Add SoC ID for Snapdragon SDM 850
+Date: Mon, 19 Oct 2026 09:48:17 -0400
+Message-ID: <20261019135441.1420968-206-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -57,282 +59,313 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Rob Clark <robin.clark@oss.qualcomm.com>
+From: David Heidelberg <david@ixit.cz>
 
-[ Upstream commit 9ee2884ed58e6b39da35732146446d5930e4746b ]
+[ Upstream commit d529495c991a2b7d07c01622e8b3cb5ec066acee ]
 
-Previously if we entered an error path between these two points, we
-could leak the relocs tables due to submit->nr_cmds still being zero.
+Add SoC ID for Qualcomm Snapdragon SDM850.
 
-In practice, relocs are disallowed on a6xx+, and non-ancient userspace
-will not use relocs on earlier gens unless running on an ancient kernel.
-But userspace could use this to trigger a memory leak.
-
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-Patchwork: https://patchwork.freedesktop.org/patch/743085/
-Message-ID: <20260729155609.20190-6-robin.clark@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-The local checkout is mainline **v7.3-rc4**. The change is a real, user-
-triggerable reloc-table leak in `MSM_GEM_SUBMIT`; it is small, correct,
-and belongs in this tree.
+This tree is **Linux 7.3.0-rc4** (`v7.3-rc4-27-gf0100363d8c37`). The
+commit adds one Qualcomm SoC ID constant. That is a device-ID / DT-
+binding addition for hardware that is already in this tree, and it
+matches the stable exception for new IDs.
 
 ===============================================================
 PHASE 1: COMMIT MESSAGE FORENSICS
 ===============================================================
 
 **Step 1.1: PARSE THE SUBJECT LINE**
-Record: **[drm/msm] [Move] [initialize `submit->nr_cmds` earlier so
-error-path cleanup can free reloc tables]**
+- Subsystem prefix: `dt-bindings: arm: qcom,ids:`
+- Action verb: **Add**
+- Claimed intent: add the numeric SoC ID for Snapdragon SDM850
+
+Record: [dt-bindings/arm/qcom,ids] [add] [define QCOM_ID_SDM850 = 348]
 
 **Step 1.2: PARSE ALL COMMIT MESSAGE TAGS**
-Record:
-- `Reported-by: Sashiko <sashiko-bot@kernel.org>` — static-analysis bot,
-  not syzbot
-- `Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>` — msm
-  maintainer / author (ignore any pipeline SOB)
-- `Patchwork: https://patchwork.freedesktop.org/patch/743085/`
-- `Message-ID: <20260729155609.20190-6-robin.clark@oss.qualcomm.com>` —
-  v7 series, this is patch 5/17 (msgid -6 because -1 is the cover)
-- No `Fixes:` tag (expected)
-- No `Cc: stable` (expected)
-- No `Tested-by` / `Reviewed-by` / `Acked-by` on the committed message
+- Fixes: none (expected)
+- Reported-by: none
+- Tested-by: none
+- Reviewed-by: Konrad Dybcio `<konrad.dybcio@oss.qualcomm.com>`
+  (Qualcomm SoC maintainer)
+- Acked-by: Krzysztof Kozlowski `<krzysztof.kozlowski@oss.qualcomm.com>`
+  (DT maintainer)
+- Link:
+  `https://lore.kernel.org/r/20260627-sda850-v2-1-44bf46ade42e@ixit.cz`
+- Cc: stable: none (expected)
+- Signed-off-by: David Heidelberg (author); Bjorn Andersson
+  (Qualcomm/SoC maintainer, applied it)
+
+Record: Device-ID addition reviewed by the Qualcomm and DT maintainers;
+no syzbot/bugzilla report; Message-ID shows this is **v2 1/2**.
 
 **Step 1.3: ANALYZE THE COMMIT BODY TEXT**
-Record:
-- **Bug:** If submit hits an error between reloc `kmalloc` in
-  `submit_lookup_cmds()` and the late `submit->nr_cmds = args->nr_cmds`,
-  destroy walks `nr_cmds == 0` and skips `kfree(relocs)`.
-- **Symptom:** Kernel memory leak; userspace can trigger it via
-  `DRM_IOCTL_MSM_GEM_SUBMIT`.
-- **Author’s caveat:** Relocs are disallowed on a6xx+; modern userspace
-  does not use them on older gens. The author still states userspace can
-  force the leak.
-- **Version info:** None in the message. Introduced with reloc buffering
-  in v5.11-rc1.
+Body is one sentence: “Add SoC ID for Qualcomm Snapdragon SDM850.” No
+stack trace, no crash, no version range.
+
+The cover letter (from b4, not the commit body) states the series is
+“Useful for sdm850 devices in tree and also will be used by Comma AI
+comma three.”
+
+Record: [Bug: missing SoC ID 348 in the Qualcomm ID table] [Symptom:
+socinfo cannot name SDM850] [No version info in the commit] [Root cause:
+ID 348 was never added when qcom,ids.h was created]
 
 **Step 1.4: DETECT HIDDEN BUG FIXES**
-Record: Not disguised. It is an explicit error-path resource-leak fix
-(delayed counter vs allocated objects).
+This is not a hidden crash/UAF/leak fix. It is an explicit ID addition.
+That is the documented stable exception for device IDs, not a disguised
+memory-safety patch.
+
+Record: [Not a hidden memory/locking bug] [It is a device-ID / DT-
+binding addition]
 
 ===============================================================
-PHASE 2: DIFF ANALYSIS
+PHASE 2: DIFF ANALYSIS - LINE BY LINE
 ===============================================================
 
 **Step 2.1: INVENTORY THE CHANGES**
-Record:
-- File: `drivers/gpu/drm/msm/msm_gem_submit.c` (+3 / −2)
-- Functions: `submit_lookup_cmds()`, `msm_ioctl_gem_submit()`
-- Scope: single-file surgical fix
+- File: `include/dt-bindings/arm/qcom,ids.h`
+- +1 / −0
+- No C function changed; one preprocessor define inserted in numeric
+  order between `QCOM_ID_SDA636` (346) and `QCOM_ID_SDM632` (349)
+- Scope: single-file, one-line addition
+
+Record: [1 file, +1 line] [no functions] [surgical ID add]
 
 **Step 2.2: UNDERSTAND THE CODE FLOW CHANGE**
-Record:
-- **Before:** `submit_lookup_cmds()` `kmalloc`s `cmd[i].relocs` then
-  `copy_from_user`. `nr_cmds` stays 0 (kzalloc) until after pin/reloc
-  parsing, then `submit->nr_cmds = args->nr_cmds`. Any `goto out` in
-  between skips that store. `__msm_gem_submit_destroy()` only frees `i <
-  nr_cmds`.
-- **After:** `submit->nr_cmds = i + 1` immediately after a successful
-  `kmalloc`, before `copy_from_user`. The late assignment is removed.
-  Failed `kmalloc` does not bump the counter.
+Before: the header jumped from 346 to 349; firmware SoC ID 348 had no
+`QCOM_ID_*` name.
+After: `#define QCOM_ID_SDM850 348` so `qcom_board_id(SDM850)` in
+socinfo can compile and match.
+
+Record: [header lacked ID 348 → ID 348 named SDM850]
 
 **Step 2.3: IDENTIFY THE BUG MECHANISM**
-Record:
-- **Category:** error-path resource leak (ioctl-reachable, repeatable)
-- **Mechanism:** counter used as the free loop bound is updated after
-  the allocations. Verified destroy path:
+Category **(h) Hardware / device ID**.
+Without the define, `socinfo_machine()` cannot map SMEM id 348 to
+`"SDM850"`. Probe still succeeds; `qs->attr.machine` stays NULL and
+`/sys/devices/soc0/machine` is hidden (`soc_attribute_mode` returns 0
+when machine is NULL). Numeric `soc_id` sysfs (`"348"`) still works. No
+driver in this tree switches on `QCOM_ID_SDM850` except the socinfo
+table (companion commit).
 
-```121:122:drivers/gpu/drm/msm/msm_gem_submit.c
-        for (i = 0; i < submit->nr_cmds; i++)
-                kfree(submit->cmd[i].relocs);
-```
-
-`allow_relocs` is false on a6xx+ (`adreno_gpu.c`: `gpu->allow_relocs =
-family < ADRENO_6XX_GEN1`), but that check runs **after** lookup
-allocates. Userspace with `nr_relocs > 0` allocates, then hits `EINVAL`
-“relocs not allowed” and (before this fix) leaked.
+Record: [device ID] [missing SoC identity mapping; not a crash]
 
 **Step 2.4: ASSESS THE FIX QUALITY**
-Record:
-- Obviously correct: free bound tracks allocated slots.
-- Minimal; no API/data-structure change.
-- Regression risk is low. Mid-ioctl code uses `args->nr_cmds` /
-  `cmds_to_parse`, not `submit->nr_cmds`. `msm_job_run()` / GPU submit
-  run only after a successful job push, when `nr_cmds` already equaled
-  `args->nr_cmds`.
-- Failed `kmalloc` still does not increment, so a NULL slot is not
-  `kfree`d.
+Obviously correct: one define, numeric order preserved, value 348 does
+not collide with neighbors. No API, no locking, no alloc. Regression
+risk is negligible. Companion patch 2/2 (`soc: qcom: socinfo: Add SoC ID
+for SDM850`) is the consumer; this patch alone is an unused define but
+is required for 2/2 to build.
+
+Record: [minimal and correct] [near-zero regression risk]
 
 ===============================================================
 PHASE 3: GIT HISTORY INVESTIGATION
 ===============================================================
 
 **Step 3.1: BLAME THE CHANGED LINES**
-Record:
-- Reloc `kmalloc` + destroy `kfree` loop: `20224d715a882`
-  (“drm/msm/submit: Move copy_from_user ahead of locking bos”),
-  **2020-10-23**, in **v5.11-rc1** (`git merge-base --is-ancestor` vs
-  v5.10 failed, vs v5.11-rc1 succeeded).
-- Late `submit->nr_cmds = args->nr_cmds`: `2e6a8a1fe2b262` (“drm/msm:
-  Add VM_BIND ioctl”, 2025-06-29). Before that it was `submit->nr_cmds =
-  i` **after** the parse loop; `goto out` inside that loop still skipped
-  the store. The leak is older than VM_BIND.
+Surrounding IDs come from `a79a4b3097bc2` (Krzysztof Kozlowski,
+2022-08-30; merged 2022-10-17): “dt-bindings: arm: qcom: document
+qcom,msm-id and qcom,board-id”. SDM850 was omitted then. In-tree SDM850
+DTS exists since `44acee2078447` (2019-09-05, Lenovo Yoga C630).
+
+Record: [gap introduced with qcom,ids.h in 2022] [SDM850 boards present
+since 2019]
 
 **Step 3.2: FOLLOW THE FIXES: TAG**
-Record: No `Fixes:` tag. Buggy pattern starts at `20224d715a882`
-(v5.11). That commit is an ancestor of this tree.
+No Fixes: tag.
 
-**Step 3.3: CHECK FILE HISTORY**
-Record:
-- Same-day series: `0369a2619c50b` SIZE_MAX cleanup, `7aeada642ebfd`
-  overflow check — independent, not required for this leak fix.
-- Related but different: `ad70e46e130a7` submit error-path unpin order.
-- Standalone for the leak; bundled as v7 05/17 “lazy-vm fixes” for
-  convenience.
+Record: [N/A — no Fixes: tag]
+
+**Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES**
+This is **v2 1/2** of “Recognize Snapdragon SDM850”:
+- 1/2: `d529495c991a2` this define
+- 2/2: `743af1d6a8b4b` socinfo table entry `{ qcom_board_id(SDM850) }`
+
+v1 was named SDA850; v2 renamed to SDM850 (Konrad) and added the socinfo
+consumer (Krzysztof).
+
+Record: [two-patch series; this is the ID, 2/2 is the table] [standalone
+apply is clean; useful with 2/2]
 
 **Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS**
-Record: Rob Clark is the msm GEM/submit maintainer. Nearby work is other
-submit/VM fixes in the same series.
+David Heidelberg is a board/DT contributor, not the subsystem
+maintainer. Applied by Bjorn Andersson. Konrad reviewed; Krzysztof
+acked.
 
-**Step 3.5: DEPENDENT/PREREQUISITE COMMITS**
-Record: None for this hunk. It only moves an existing store. Applies
-standalone on this tree (already applied as `9ee2884ed58e6`).
+Record: [author is a contributor; Qualcomm/DT maintainers reviewed and
+applied]
+
+**Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS**
+Needs `include/dt-bindings/arm/qcom,ids.h` (present since 2022 in this
+tree) and, for a user-visible effect, the socinfo consumer. No new
+helper, struct, or API.
+
+Record: [depends on existing qcom,ids.h] [can apply standalone] [pairs
+with socinfo 2/2]
 
 ===============================================================
 PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
 ===============================================================
 
 **Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION**
-Record:
-- `b4 dig -c 9ee2884ed58e6`: https://patch.msgid.link/20260729155609.201
-  90-6-robin.clark@oss.qualcomm.com
-- `[PATCH v7 05/17] drm/msm: Move nr_cmds initialization`
-- Cover: `[PATCH v7 00/17] drm/msm: A couple lazy-vm fixes`
-- Revisions v1–v7 of a growing msm series; this leak fix is in v7.
-  Applied version is latest.
-- Lore HTTP fetch returned 403; full thread read from `b4 dig -m` mbox.
-- Sashiko reply on this patch: only **pre-existing** issues (SIZE_MAX in
-  `submit_create`, lazy `ctx->vm` NULL). No NAK of the nr_cmds move.
-  Those other bugs are other patches in the same series.
-- No reviewer `Cc: stable` in the thread.
+`b4 dig -c d529495c991a2` matched:
+- v1: SDA 850 (2026-06-23)
+- v2: `[PATCH v2 0/2] Recognize Snapdragon SDM850` (2026-06-27)
+- URL:
+  https://patch.msgid.link/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
+
+Thread (saved via `b4 dig -m`): no NAKs, no stable discussion. Krzysztof
+Acked-by; Konrad Reviewed-by; Bjorn applied both patches.
+
+lore.kernel.org HTTP fetches returned 403; b4/mbox is the verified
+source.
+
+Record: [v1→v2 naming + consumer] [no NAK] [no Cc: stable in review]
 
 **Step 4.2: CHECK WHO REVIEWED THE PATCH**
-Record (`b4 dig -w`): To dri-devel; Cc linux-arm-msm, freedreno,
-Sashiko, Dmitry Baryshkov, Abhinav Kumar, Jessica Zhang, Sean Paul,
-Marijn Suijten, David Airlie, Simona Vetter. Subsystem maintainers were
-on the original mail. No human Reviewed-by on the git commit.
+`b4 dig -w` original To/Cc: Bjorn Andersson, Konrad Dybcio, Rob Herring,
+Krzysztof Kozlowski, Conor Dooley, linux-arm-msm, devicetree, linux-
+kernel.
+
+Record: [right maintainers and lists]
 
 **Step 4.3: SEARCH FOR THE BUG REPORT**
-Record: Reporter is Sashiko (automated). No syzbot/bugzilla. Author
-independently describes a userspace-triggerable leak. That description
-matches the code.
+No Reported-by / bugzilla / syzbot. Motivation is identification of in-
+tree SDM850 machines and Comma 3.
+
+Record: [no crash report; hardware-identification request]
 
 **Step 4.4: CHECK FOR RELATED PATCHES AND SERIES**
-Record: 17-patch lazy-VM series. This patch does not need 01–04
-(ctxlock/queuelock) or 06+ (SIZE_MAX / VM helpers). Standalone leak fix.
+Series is 2/2. 2/2 is the one-line socinfo entry that uses this define.
+
+Record: [companion 743af1d6a8b4b] [both one-liners]
 
 **Step 4.5: CHECK STABLE MAILING LIST HISTORY**
-Record: Web search of lore.kernel.org/stable for this subject found no
-relevant thread.
+lore.kernel.org/stable search returned 403. No evidence in the patch
+thread that stable was discussed.
+
+Record: [UNVERIFIED: no stable-list thread retrieved due to 403]
 
 ===============================================================
 PHASE 5: CODE SEMANTIC ANALYSIS
 ===============================================================
 
-**Step 5.1: KEY FUNCTIONS**
-Record: `submit_lookup_cmds`, `msm_ioctl_gem_submit`; cleanup via
-`__msm_gem_submit_destroy`.
+**Step 5.1: IDENTIFY KEY FUNCTIONS**
+No function edited. Consumer is `socinfo_machine()` via
+`qcom_board_id(SDM850)` → `QCOM_ID_SDM850`.
+
+Record: [define only; consumer socinfo_machine()]
 
 **Step 5.2: TRACE CALLERS**
-Record:
-- `msm_ioctl_gem_submit` registered with `DRM_RENDER_ALLOW` in
-  `msm_drv.c` (`DRM_IOCTL_MSM_GEM_SUBMIT`).
-- Reachable from render-node ioctl; not irq, not module init.
+`socinfo_machine()` is called from `qcom_socinfo_probe()` when reading
+SMEM `SMEM_HW_SW_BUILD_ID`. That runs on Qualcomm platforms with
+socinfo. `QCOM_ID_SDM850` is not used in `qcom-cpufreq-nvmem.c` or clk
+drivers.
+
+Record: [socinfo probe on SDM850; naming only]
 
 **Step 5.3: TRACE CALLEES**
-Record: `kmalloc`, `copy_from_user`, later `submit_reloc` /
-`allow_relocs` check. Destroy: `kfree(relocs)` gated by `nr_cmds`.
+`socinfo_machine()` walks `soc_id[]` and returns the name or NULL. Probe
+does not fail on NULL machine.
+
+Record: [lookup table; NULL = unnamed SoC]
 
 **Step 5.4: FOLLOW THE CALL CHAIN**
-Record: userspace ioctl → `drm_ioctl` → `msm_ioctl_gem_submit` →
-`submit_lookup_cmds` → error `goto out` → `submit_cleanup` →
-`msm_gem_submit_put` → `__msm_gem_submit_destroy`. Unprivileged GPU
-clients (render node) can trigger it.
+Boot on SDM850 (Yoga C630, Galaxy Book S / w737, MateBook E 2019, Comma
+3) → qcom_socinfo_probe → socinfo_machine(348). Reachable on those
+machines, not from a generic syscall on unrelated hardware.
 
-**Step 5.5: SIMILAR PATTERNS**
-Record: `submit_lookup_objects()` already does `submit->nr_bos = i` on
-the way out so partial BO lookups are cleaned. Cmds did not have the
-analogous update. No sibling drivers with the same bug in this file.
+Record: [reachable on SDM850 boots] [not a core/universal path]
+
+**Step 5.5: SEARCH FOR SIMILAR PATTERNS**
+The same file is a long list of `QCOM_ID_*` defines; socinfo.c has
+matching `qcom_board_id(*)` rows. This follows that pattern.
+
+Record: [standard qcom SoC-ID add]
 
 ===============================================================
 PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
 ===============================================================
 
 **Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?**
-Record: Yes, in this lineage. `git describe HEAD` =
-`v7.3-rc4-27-gf0100363d8c37`, `make kernelversion` = `7.3.0-rc4`. Parent
-of `9ee2884ed58e6` still has the late assignment and zero `nr_cmds`
-during lookup. Bug present since v5.11; this fix is already an ancestor
-of HEAD (`git merge-base --is-ancestor 9ee2884ed58e6 HEAD` succeeded).
-Decision is still whether the fix has technical merit for this tree, not
-whether a pipeline tag exists.
+Yes. `include/dt-bindings/arm/qcom,ids.h` exists. Surrounding IDs 346
+and 349 match the hunk. SDM850 DTS and socinfo exist. The define is
+already present at line 187 (`git merge-base --is-ancestor d529495c991a2
+HEAD` is true). That is because this checkout **is 7.3-rc4**, which is
+the series that merged the ID; it is not used as “already selected for
+stable.”
 
-**Step 6.2: BACKPORT COMPLICATIONS**
-Record: On this tree the hunk matches current `msm_gem_submit.c`
-(VM_BIND-era `args->nr_cmds` store). Clean apply. (Older pre-VM_BIND
-trees would delete `submit->nr_cmds = i` instead; that is not this
-checkout.)
+Record: [qcom,ids.h and socinfo present] [gap existed from 2022 until
+this 7.3 change]
 
-**Step 6.3: RELATED FIXES ALREADY HERE**
-Record: No earlier equivalent. Follow-ups `0369a2619c50b` /
-`7aeada642ebfd` are overflow cleanups, not another leak fix.
+**Step 6.2: CHECK FOR BACKPORT COMPLICATIONS**
+Hunk context matches this tree. One-line insert. Clean apply.
+
+Record: [clean apply]
+
+**Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE**
+No earlier equivalent SDM850 ID. Companion socinfo commit is also in
+this 7.3 tree.
+
+Record: [no prior substitute fix]
 
 ===============================================================
 PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
 ===============================================================
 
-**Step 7.1: SUBSYSTEM AND CRITICALITY**
-Record: **drm/msm GEM submit**. **IMPORTANT** (Qualcomm Adreno; Android
-phones and Snapdragon laptops). Not mm/core, but a common production GPU
-driver.
+**Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY**
+Qualcomm DT bindings + socinfo. Platform-specific identification, not
+mm/VFS/net core.
 
-**Step 7.2: SUBSYSTEM ACTIVITY**
-Record: Actively developed (VM_BIND, lazy VM, submit locking). Submit
-ioctl itself is old and long-lived.
+Record: [drivers/soc/qcom + dt-bindings] [PERIPHERAL / platform-
+specific, but in-tree laptops/boards]
+
+**Step 7.2: ASSESS SUBSYSTEM ACTIVITY**
+`qcom,ids.h` still receives regular new-ID commits (SM7750, IPQ9650,
+SA8797P, …). Mature table, ongoing ID adds.
+
+Record: [active, table-driven ID file]
 
 ===============================================================
 PHASE 8: IMPACT AND RISK ASSESSMENT
 ===============================================================
 
-**Step 8.1: WHO IS AFFECTED**
-Record: Driver-specific (`CONFIG_DRM_MSM`). Anyone who can open the msm
-render node.
+**Step 8.1: DETERMINE WHO IS AFFECTED**
+Users of SDM850 (Lenovo Yoga C630, Samsung w737, Huawei MateBook E 2019,
+Comma 3). CONFIG_QCOM_SOCINFO.
 
-**Step 8.2: TRIGGER CONDITIONS**
-Record:
-- Normal submits with `nr_relocs == 0`: `kmalloc(0)` is not a real leak.
-- Trigger: `nr_relocs > 0`, then any error after allocation (bad copy,
-  lock fail, invalid cmd size, **relocs not allowed on a6xx+**).
-- Easy on modern Adreno: pass nonzero relocs; kernel allocates then
-  rejects.
-- Unprivileged with render-node access. Repeatable; size chosen by
-  userspace.
+Record: [platform-specific Qualcomm SDM850]
 
-**Step 8.3: FAILURE MODE SEVERITY**
-Record: Kernel memory leak in a hot ioctl, unbounded. **HIGH** (DoS /
-memory exhaustion). Not panic/UAF/corruption.
+**Step 8.2: DETERMINE THE TRIGGER CONDITIONS**
+Every boot on SDM850 when socinfo probes. Not unprivileged-exploit;
+firmware reports id 348.
 
-**Step 8.4: RISK-BENEFIT RATIO**
-Record:
-- **Benefit:** Stops a userspace-triggerable leak on a widely used GPU
-  ioctl. High for msm users.
-- **Risk:** Very low (3 insertions, 2 deletions; error/cleanup
-  accounting only).
-- **Ratio:** Strongly favors applying.
+Record: [every SDM850 boot] [not a security trigger]
+
+**Step 8.3: DETERMINE THE FAILURE MODE SEVERITY**
+Without the ID (and 2/2): SoC not named; sysfs `machine` hidden;
+hardware still boots via existing DTS. Not oops/deadlock/corruption.
+
+Record: [wrong/missing SoC name] [LOW functional severity; still a real
+ID gap]
+
+**Step 8.4: CALCULATE RISK-BENEFIT RATIO**
+Benefit: SDM850 identified in socinfo/sysfs, same class as adding a
+device ID to an existing driver.
+Risk: one `#define`, no runtime logic.
+
+Record: [moderate benefit for those boards] [very low risk] [favorable]
 
 ===============================================================
 PHASE 9: FINAL SYNTHESIS
@@ -341,117 +374,102 @@ PHASE 9: FINAL SYNTHESIS
 **Step 9.1: COMPILE THE EVIDENCE**
 
 FOR:
-- Real leak: destroy uses `nr_cmds` as the free count; that count was
-  updated too late.
-- User-triggerable via `DRM_IOCTL_MSM_GEM_SUBMIT` (`DRM_RENDER_ALLOW`).
-- On a6xx+ the “relocs not allowed” path is after allocation, so modern
-  hardware is included.
-- Present since v5.11; still the same mechanism here until this commit.
-- 5-line, obviously correct; msm maintainer authored it.
-- Matches the common stable class of ioctl error-path leaks.
+- Official `Documentation/process/stable-kernel-rules.rst`: “It must
+  either fix a real bug that bothers people **or just add a device
+  ID**.”
+- User-facing exception: new IDs on an existing driver/table, and DT
+  binding for existing hardware.
+- 1 line, obviously correct, reviewed by Konrad Dybcio and Krzysztof
+  Kozlowski, applied by Bjorn Andersson.
+- In-tree SDM850 machines since 2019; this fills the 2022 ID-table gap.
+- This tree has `qcom,ids.h`, socinfo, and SDM850 DTS; the hunk matches.
 
 AGAINST:
-- Not a crash/UAF; “only” a leak.
-- Honest userspace rarely uses relocs on current gens.
-- Found by Sashiko, not a user oops/syzbot.
-- Shipped in a 17-patch series (but this patch is independent).
-- No `Fixes:` / `Cc: stable` (not a negative per the rules).
+- Not a crash/UAF/corruption fix.
+- Patch 1/2; user-visible naming needs 2/2.
+- No user crash report.
 
 UNRESOLVED:
-- Lore.kernel.org HTTP 403; discussion recovered via `b4 dig -m`.
-- Patchwork HTML was a bot-check page.
-- No stable-list thread found.
+- Could not read lore.kernel.org/stable (HTTP 403). Unlikely to change
+  the ID-exception reading.
 
-**Step 9.2: STABLE RULES CHECKLIST**
-1. Obviously correct and tested? **PASS** — maintains allocated-vs-freed
-   invariant; maintainer-authored; in mainline since v7.3-rc1.
-2. Fixes a real bug that affects users? **PASS** — ioctl-reachable leak.
-3. Important (crash/security/corruption/deadlock)? **PASS** at HIGH —
-   repeatable kernel memory leak / DoS, not CRITICAL crash.
-4. Small and contained? **PASS** — +3/−2, one file.
-5. No new features or APIs? **PASS**.
-6. Can apply to the local tree? **PASS** — already the code in this
-   checkout.
+**Step 9.2: APPLY THE STABLE RULES CHECKLIST**
+1. Obviously correct and tested? **PASS** — one define, maintainer
+   review/ack/apply.
+2. Fixes a real bug that affects users? **PASS** under the written “or
+   just add a device ID” clause (identification of in-tree SDM850).
+3. Important issue (crash, security, corruption, deadlock)? **PASS** as
+   the device-ID exception, not as a crash fix.
+4. Small and contained? **PASS** — +1 line, one header.
+5. No new features or APIs? **PASS** — no new uAPI; existing ID table.
+6. Can apply to the local tree? **PASS** — file and context exist in
+   7.3-rc4.
 
-**Step 9.3: EXCEPTION CATEGORIES**
-Record: None (not an ID/quirk/DT/build/doc exception). It qualifies as a
-normal leak fix.
+**Step 9.3: CHECK FOR EXCEPTION CATEGORIES**
+Yes: **new device ID** on the existing Qualcomm ID/socinfo tables, and a
+**DT binding addition** for hardware already described in this tree.
 
-**Step 9.4: DECISION**
-This is a small, correct fix for a long-standing, userspace-triggerable
-kernel memory leak in msm GEM submit. It meets stable rules for this
-tree. Risk is negligible versus the DoS benefit.
+**Step 9.4: MAKE YOUR DECISION**
+Backport. It is the documented device-ID exception, not a refactor or
+new driver. Pairing with `743af1d6a8b4b` is the complete recognition,
+but this patch is the ID itself and is appropriate for this tree.
 
-------------------------------------------------
-What the commit solves for this tree
-------------------------------------------------
-`submit_lookup_cmds()` allocated per-cmd reloc arrays while
-`submit->nr_cmds` stayed 0 until much later in `msm_ioctl_gem_submit()`.
-Destroy only frees `cmd[0..nr_cmds)`. Any error in that window leaked
-those allocations. Moving `nr_cmds = i + 1` to right after `kmalloc`
-makes cleanup free what was allocated, including the common a6xx+
-“relocs not allowed” failure.
+What it solves for this tree: SDM850 (id 348) was missing from
+`qcom,ids.h`, so socinfo could not name boards that have been in the
+kernel since 2019. That is exactly the “add a device ID” case in stable-
+kernel-rules, with essentially no regression risk.
 
-------------------------------------------------
-Verification
-------------------------------------------------
-- [Phase 1] Parsed tags: Sashiko Reported-by; Rob Clark SOB; Patchwork
-  743085; msgid 20190-6; no Fixes/Cc-stable
-- [Phase 2] Diff: +3/−2 in `msm_gem_submit.c`; `nr_cmds = i+1` after
-  kmalloc; removed late `nr_cmds = args->nr_cmds`
-- [Phase 2] Destroy loop confirmed at lines 121–122; `allow_relocs` set
-  false for a6xx+ at `adreno_gpu.c:1209`; check is after lookup
-- [Phase 3] `git blame` on parent: reloc alloc from `20224d715a882`
-  (v5.11-rc1); late assign from VM_BIND `2e6a8a1fe2b262`
-- [Phase 3] `git merge-base --is-ancestor 20224d715a882 v5.11-rc1` yes;
-  vs v5.10 no
-- [Phase 3] No Fixes: tag to follow
-- [Phase 4] `b4 dig -c 9ee2884ed58e6`: lore msgid.link
-  20260729155609.20190-6; v7 05/17
-- [Phase 4] `b4 dig -a`: v1–v7 series; applied = v7
-- [Phase 4] `b4 dig -w`: dri-devel + msm maintainers CC’d
-- [Phase 4] mbox: Sashiko comments were pre-existing issues, not a NAK
-  of this change; no stable nomination
-- [Phase 4] lore WebFetch 403; patchwork served bot-check; stable search
-  found nothing relevant
-- [Phase 5] Caller: `DRM_IOCTL_DEF_DRV(..., DRM_RENDER_ALLOW)` in
-  `msm_drv.c:804`
-- [Phase 6] `git describe HEAD` = v7.3-rc4-27-gf0100363d8c37; `make
-  kernelversion` = 7.3.0-rc4
-- [Phase 6] `git merge-base --is-ancestor 9ee2884ed58e6 HEAD` succeeded;
-  parent still has the leak
-- [Phase 8] Failure mode: ioctl-triggered kmalloc leak, severity HIGH
-- UNVERIFIED: live lore.kernel.org HTML (403); patchwork page body;
-  whether any human mailing-list Reviewed-by was dropped on commit
+Verification:
+- [Phase 1] Parsed tags: Reviewed-by Konrad Dybcio, Acked-by Krzysztof
+  Kozlowski, Link to v2 1/2; no Fixes/Reported-by/Cc:stable
+- [Phase 2] Diff: +1 `#define QCOM_ID_SDM850 348` in `include/dt-
+  bindings/arm/qcom,ids.h`
+- [Phase 3] git blame: neighbors from a79a4b3097bc2 (2022); this line
+  from d529495c991a2
+- [Phase 3] No Fixes: tag
+- [Phase 3] Companion 743af1d6a8b4b adds socinfo `{
+  qcom_board_id(SDM850) }`
+- [Phase 3] git merge-base --is-ancestor d529495c991a2 HEAD: yes (7.3
+  origin, not used as “already selected”)
+- [Phase 4] b4 dig -c d529495c991a2:
+  https://patch.msgid.link/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
+- [Phase 4] b4 dig -a: v1 SDA850 → v2 SDM850 + socinfo consumer
+- [Phase 4] b4 dig -w: Bjorn, Konrad, Rob, Krzysztof, Conor, linux-arm-
+  msm, devicetree
+- [Phase 4] mbox: Acked-by Krzysztof, Reviewed-by Konrad, Applied-by
+  Bjorn; cover letter names in-tree SDM850 and Comma 3
+- [Phase 4] lore.kernel.org WebFetch/curl: 403
+- [Phase 5] grep: only socinfo.c uses QCOM_ID_SDM850 among C files;
+  cpufreq/clk do not
+- [Phase 5] socinfo_machine() returns NULL for unknown ids; probe still
+  succeeds; machine sysfs hidden if NULL
+- [Phase 6] git describe HEAD: v7.3-rc4-27-gf0100363d8c37; Makefile
+  7.3.0-rc4
+- [Phase 6] ids.h context matches; SDM850 DTS present (sdm850.dtsi
+  includes sdm845.dtsi; no qcom,msm-id in those files)
+- [Phase 7] subsystem qcom dt-bindings/socinfo
+- [Phase 8] failure mode: unnamed SoC in sysfs, not oops
+- [Phase 9] Documentation/process/stable-kernel-rules.rst line 15: “or
+  just add a device ID”
+- UNVERIFIED: stable@ mailing-list archive (HTTP 403)
 
 **YES**
 
- drivers/gpu/drm/msm/msm_gem_submit.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ include/dt-bindings/arm/qcom,ids.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
-index 75d9f35743700..2b6b5297f0592 100644
---- a/drivers/gpu/drm/msm/msm_gem_submit.c
-+++ b/drivers/gpu/drm/msm/msm_gem_submit.c
-@@ -260,6 +260,9 @@ static int submit_lookup_cmds(struct msm_gem_submit *submit,
- 			ret = -ENOMEM;
- 			goto out;
- 		}
-+
-+		submit->nr_cmds = i + 1;
-+
- 		ret = copy_from_user(submit->cmd[i].relocs, userptr, sz);
- 		if (ret) {
- 			ret = -EFAULT;
-@@ -717,8 +720,6 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
- 			goto out;
- 	}
- 
--	submit->nr_cmds = args->nr_cmds;
--
- 	idr_preload(GFP_KERNEL);
- 
- 	spin_lock(&queue->idr_lock);
+diff --git a/include/dt-bindings/arm/qcom,ids.h b/include/dt-bindings/arm/qcom,ids.h
+index cb8ce53146f0c..b7ff78cbaa8db 100644
+--- a/include/dt-bindings/arm/qcom,ids.h
++++ b/include/dt-bindings/arm/qcom,ids.h
+@@ -184,6 +184,7 @@
+ #define QCOM_ID_IPQ8078			344
+ #define QCOM_ID_SDM636			345
+ #define QCOM_ID_SDA636			346
++#define QCOM_ID_SDM850			348
+ #define QCOM_ID_SDM632			349
+ #define QCOM_ID_SDA632			350
+ #define QCOM_ID_SDA450			351
 -- 
 2.53.0
 
