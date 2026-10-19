@@ -1,88 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 560914B1486
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:25:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B1594A5C3C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:26:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792401957; cv=none; b=KhNYaz4xGOijnOajZ3eeqL8ntnrq66fSa7Kn2vqH8KJZU1glzZ+C/5LJCXUUUyuhjkh8r1fZ+CEaRqP+SFmNMkrGhXqnRYbGr4RLeg4crIwQ1V+PktGctPm1C6B+7BlxkFwR2sfe0HCfAVZtFIqeoovVuZSxwnuBIz01azNsduk=
+	t=1792401965; cv=none; b=FyrlRDbP/Y5zISuRqDWEOSZ2YTq3h6AKn8cRieCRUs2k2Sr/ohVZwguXruiKH7tZ0UuTfhn/RhMof3p4R5FKp6wg/huYNLlI4sUjUDO8Gmi+uWVLEn/s+uQi0hqFwzCoB/JpJvwtyk0FupEv2yQteBJbEt+9P047T2TXloaElw0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792401957; c=relaxed/simple;
-	bh=lXeO7bP7idTFtUBzuKbosYtATj9Ndsw4dWgt9vtKsn0=;
+	s=arc-20240116; t=1792401965; c=relaxed/simple;
+	bh=QQjgZjODuP7hhVx8o8nUzoend12S7wxNrmIDVLN6/EI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SGtGp01IhD6G4K+d/dhzyTS2eHXKMdY+UG5UxJOdlITX7A7gBpeODEhi8qXIPT5qpHhZNmHpiz59aur1TdRO1t0LzFz5KxdrZzPg6VKENyuNhb/yWnhAloPq/LcxudCfSt6uxzofebSrwYTbjhIFtRyEh3xtRFgq+b/spWxwM+E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d2FkTV8U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UJanArfc; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=VRXZ/3NMMHiPL6E4IM24QHj/xTAzg65z7/Uv6JhstTRhi58bfPsVohAxknsN9uwIfFYp+JSjdBJIIOEcRfJKmRwKWQYFV5wInSX4hJ7LZRAyz6lzITpL1S/aGDNsi/+kz81t6Cv7oKclHDPFkIqPVQ021DTejYORioq/z3uXLzo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VfNpL+Sq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gNJ1pKom; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d2FkTV8U";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UJanArfc"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8OrXJ3256601
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:25:55 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VfNpL+Sq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gNJ1pKom"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8Oq6R3305491
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:26:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZqNPgcDIDE6Bp0KwMFBvoaExUNRvYuzoKfkIwpxCEXY=; b=d2FkTV8UHXYJiKNw
-	Ic9Nf4JeODiAasoFzuWwMZ2q8POGB2MzoXGNxB2LPYUEOcr4YLnaGALtx4pcLPkN
-	RtHQiq/SG4xwaloHlwNIRjB68NhAs56o7/1RUAoW2mGs8mtSU8JnPkTARPN9vmjO
-	UcvO4SuZHcXwkRDGanA+2h7XFjbIp8qVRWAaOKzfK2vwNj22ILXzmGBz3n2KfMtb
-	EBColTIxKBUewnNOgrbMuBbWA8aP6VY6wmYNik4x+zydgu6hMEWfVH74Wme61ZM+
-	x8inA8KSoQsiv5k/j/zb9O7klTm/OKORiVzSppyClc9dsofQHonk9WKoGqb2Js6Z
-	n1PQww==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf3f8cbf-1
+	yneraFtfNzmUal/3Wx1LaAn1j7QA6EjbSSPtCDfhHdY=; b=VfNpL+SqHCFLgkZU
+	/nmhS3Kb8XV0caCFlh2txOAWseHatOGnSrL5nsmmh2qSnyybsDytTlit/Y+CNxdm
+	Q26Yj1yKbOphmNzi5mTCh/kk6542yOctWKu71fynKGtVfosdU/lhYGyA32aKDqnJ
+	x4OgEd/lmQaUb5o2MwgTz/8fuD5CLHchB42DybbHbQm9YkEpQtrTroDey7sYoNuT
+	xY0MFh1hpCN5q6SVygbMOm7q9gvQzIUdkECB6l3xp6256cvxcJ+l79CrrmnFRxAZ
+	+ZID16IFc7B765Nu0yftEj3Ab6ZZ4Gzin7+9vJOG53InxC1nuXAZkbqjGfG/9nb4
+	ajJuwg==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf47gcqe-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:25:55 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3548cdfd2fbso3037964eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 02:25:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:26:01 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-3552883bd19so5135611eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 02:26:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792401955; x=1793006755; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792401961; x=1793006761; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZqNPgcDIDE6Bp0KwMFBvoaExUNRvYuzoKfkIwpxCEXY=;
-        b=UJanArfcctal/2vnX5XxgRfKPjC786lNL+H479l1RmwhfRAFtvWqr02swC39XrKasq
-         rjFqf0KrPruLNWxWxzt6crURX9nPIDjDZWHSZf7kOtKKHHNGJVrMYtAGJvj3ydpKFmSx
-         WwsSi5aIwLdQdIaAcFmmhpl6BFrphKa02TVgFiLcHOoxwwqijCZ6CHu2mOvhPF/J6Ufx
-         jVpRj2n8J9V7c+JfxCUhgbcVcD+nXB66K5AogURo6BcT4U6h34lCJoyV/9gHNt2mUC8R
-         enZU+PjOefS8JvIgqtuM1EgRWxVkgEIuMitVNGzN586vfsqo+4Tnb+khUap+1FOM7P8u
-         P9FA==
+        bh=yneraFtfNzmUal/3Wx1LaAn1j7QA6EjbSSPtCDfhHdY=;
+        b=gNJ1pKomRchF5EOhrk9q1HpSe+DP5FQB7GT0K7HIQXEszdm7ucaVun4I7VbylJimA4
+         ROmIRm9tXrdZZuOB90HJCRt4Ri2/qGO2xLMcOf1T4I3DcoUL7v91yO9nMG2mQhODBkeB
+         PfNnj1U9ob1RsT1Gm/aUHWoDSxlm1d5KelENjr3/8ifxP3nyQ2QqJ2mgWi+XRzsMt0Ig
+         H2SMaB0THfl14SLEeURwW/xnxxubu6aVVkg7bsVOcPHFnVPDUzdmCSjV7m3iXLkGmC7q
+         +Wr0lEtAz1ReGlJFtUe3hAcujwbD42n5tJAtv3X4CMtKks/3F/qRO8KypaBJDO5CeFMZ
+         c+tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792401955; x=1793006755;
+        d=1e100.net; s=20260707; t=1792401961; x=1793006761;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZqNPgcDIDE6Bp0KwMFBvoaExUNRvYuzoKfkIwpxCEXY=;
-        b=sKZrcxBxxbzN58fmiYczBpagxFkNp2cW/Ll52tTibp10URhi/NrvVT6S7rsNxi1qoH
-         4Mi4Oz40VXejM4ZPK+LHnyQryGnPlN/62/jNU+YWKe2G6V8SeC+G1bXNEiTEo2OXteqi
-         DjNVkdMDRr774K6sG3wEbvAEfwklkwnlCdpsnnngezfhPZzZ+FD8EbM8G6szxt1bvMwI
-         mOqBHeau4I4w3mzOgQBwUhu6Nd80sIxbXRjOQ+KwoEIQJ+2bQSUwtDgjDqclIyTTSAqb
-         vOyjcFWnnQoyWLD1kOCBNtPQ3iU1XB+cK9TMiRNuzYepjj5NRk6Ks/uTmztThmG+kLw3
-         ThBA==
-X-Gm-Message-State: AFq9FYKt14J3u5K6ngtHvYHcMe1HieHmLLXj2lmlrVq7LTy1Zs4lIj8B
-	0M2bSdI/JJH7+5aPppS4RQmhFRI5DoQv9pQiFslKt9GUGl/6a2NVpbP7ukaMqXQZMJkFJOiO0/9
-	0dow9PuT3x51O0pVy1L/uhKpSw3Kd6a+UDXVzEF+Teym2tt/CCdElHN+84s7ZiwzTL5iqD5WyJZ
-	jI
-X-Gm-Gg: AYBFou0wiKHG/YX+gqlkvAevYxRSmGRQvgTV8tcSeUfqFf7QfJRDsugRzuftdd6691z
-	AA69yn1QjvhSqtGDNyfFgZ2pGedCX1s8lDKK634OIUs8hvhiWloyII96DYZtyUCwDrshkk1AAvt
-	lcJTPWugK6sy+01YPcFxK6J1xrUrhA2R7ZL+l3iOkpCSK0NWb9Jj3qd9UZmrZBEUrGf7WAq6Duv
-	/jr4T4fqvE3Hoaw50BwtAjFdKCO5BUx9y/hnCAJSU9IHUkAABG5gjiMsMmW26l22507Pt7tj4s6
-	zUSE4xwzjpERuzoDKik57Pa8fQd/hsWRtB6zt6iHLU/aer7m9ZbJsOAtkKGoDV9/4Lox50s5fn8
-	ko8j8HXS4gyhuPtVcyjcT9HDJbNc8/7fisg==
-X-Received: by 2002:a05:7022:170d:b0:154:d06c:e70a with SMTP id a92af1059eb24-1851285ca17mr9769408c88.23.1792401954798;
-        Mon, 19 Oct 2026 02:25:54 -0700 (PDT)
-X-Received: by 2002:a05:7022:170d:b0:154:d06c:e70a with SMTP id a92af1059eb24-1851285ca17mr9769372c88.23.1792401954201;
-        Mon, 19 Oct 2026 02:25:54 -0700 (PDT)
+        bh=yneraFtfNzmUal/3Wx1LaAn1j7QA6EjbSSPtCDfhHdY=;
+        b=h1A97WR07H17g/IAWM0764Y0Mhi2wOoRjonGDLlceiSwLj+/65MpAFBcdD5ItfaLtx
+         HoJKHYIFbgS8c+uNmYj4MObaAFvBvNSKnYiox+kKGD6W0K4y0fRUBkTwfaZ3viyCnV1R
+         yJjIbWnv9P0h0xpzKpdq/geeoUPRYMqzOGlZOw7z/+aqqWiAu9nNF3WnFsxFxlHJ4aaI
+         9I7NBOUgw2MhgbB2R6Hglu3C4TlncDM2nrGTf1cRjPUl1mraZTwPTIp1oG+A62v6hrfm
+         Mr64aKwlHEQ6+PhVerGHa9kGshQuqf0hEjrx9esE53Pf1dUcbelnAn6mgZMppjRPuKsG
+         I6pw==
+X-Gm-Message-State: AFq9FYI9c3t2i+DFLcC9BsNT6u7/75teymDX2v+pMxD8mOi5o60JspLT
+	TtarC0dR+9RNPT5tnBe4OOETHpmeB9u6IV8nPJq0YrVSMu65GAxWlKcXYvwmMcMwoweXjxlSBrd
+	LmPNxbRSG+TFt1od/Gezl1MWMGLojx6PT6l1vDZWhSq256wICRyCHJHxRajyifdID/wW/
+X-Gm-Gg: AYBFou0P3FrlT16Yi+1v8YQa1xTs8Wmk239pWKRdg1Azfc4juOboYkoZlm6tMmULxwL
+	mJnz7Jy9uHeUSPd8XmDPrk+anzB112Y2oH7Fqpb7LQWMn6LMKwSWYoeOY5AuEOWt8Nl+C0GH4v9
+	jKtpCKMeaAkgsq3Rmo0p9x3eaDm78tEIOz8AKwHdTg0kTr/hUh797YSLmF6ykC/P2Dk5rRBKgln
+	zRTca2vyRni4yEqT2oStNRH/sKztSGCXlwvjT9sjmOKPtkxnuDvWA/3two2XG76ZXjuVzms/hdO
+	ejnFzjWV7EKcDGO5DXNURLOp3brzDDhSJIQqvU+Gyqk/JAV1wRjrvSD6/+fbOABfwKuy53X3wta
+	6d9v64Cucj94vVeUnKNly7e8ysYa2Ql94QA==
+X-Received: by 2002:a05:701b:4559:20b0:185:1640:5536 with SMTP id a92af1059eb24-18516405571mr10494507c88.19.1792401961006;
+        Mon, 19 Oct 2026 02:26:01 -0700 (PDT)
+X-Received: by 2002:a05:701b:4559:20b0:185:1640:5536 with SMTP id a92af1059eb24-18516405571mr10494480c88.19.1792401960341;
+        Mon, 19 Oct 2026 02:26:00 -0700 (PDT)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c4d4675sm26682584c88.21.2026.10.19.02.25.48
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1831c4d4675sm26682584c88.21.2026.10.19.02.25.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 02:25:53 -0700 (PDT)
+        Mon, 19 Oct 2026 02:26:00 -0700 (PDT)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 14:55:13 +0530
-Subject: [PATCH v2 5/6] arm64: qcom: monaco: Fix pcie1_phy compatible to
- list qcs8300 first
+Date: Mon, 19 Oct 2026 14:55:14 +0530
+Subject: [PATCH v2 6/6] arm64: qcom: monaco: Add PCIe Endpoint nodes
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +89,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-monaco_ep-v2-5-852cb9f5d012@oss.qualcomm.com>
+Message-Id: <20261019-monaco_ep-v2-6-852cb9f5d012@oss.qualcomm.com>
 References: <20261019-monaco_ep-v2-0-852cb9f5d012@oss.qualcomm.com>
 In-Reply-To: <20261019-monaco_ep-v2-0-852cb9f5d012@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -106,73 +104,233 @@ To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
 Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-pci@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792401919; l=1159;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792401919; l=6008;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=lXeO7bP7idTFtUBzuKbosYtATj9Ndsw4dWgt9vtKsn0=;
- b=sjm+65Ib8YrCBQPt2R/Zbrm5GYLWerivul8CnzzIcez5z+2TGxqbmoQ+cWL8+ZPUBvyxNeUU0
- zbxSJSxjNTFCH4PTwZyc3qwws3KG0sTG5DvGKJYveBomSlQsGmUVvcH
+ bh=QQjgZjODuP7hhVx8o8nUzoend12S7wxNrmIDVLN6/EI=;
+ b=z7m+XMbkt21+9eCzUZdH8SNmIbKm1ID5BOSHcoGEu4MtxC8Uj1JLiy6MSJOugr0gHZZu0Svve
+ tNU62Bi80yeD9PQ2GbM7QoiThZ211AYgC6UNdnsX6GVqfvwMPvo3GJ6
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-ORIG-GUID: bHray2HA9EeQl5SLvj04vELKPXwIOHAV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfX8Gy7HMFf58H2
- aon3UHl/1RasK8pySW02UOnA8D71Cadd/w1pbzK2/S5FtSU7GYeFhooWzmXqwDGota/o2NUPkU5
- U8nZPNWjq4NCqmN5ysdlBXJw01sKWYgHP90l8o8HabKPT1wKhTt3SKXYzG8gNuNoQZgWEHMpBr9
- DIlT71AJbAUAtr2O7WBnw81DQGg08vlXwTk2U3m6ieQ8ZrGR/9alXZlLNy4GxyZcIQCozYTb/Lt
- Y62HyY6TB+MKk109rw/o3RBHxZZnGHsn5BR4jJc4yHPvUl3mVZZ2JP8P4k88rEqAL74z9Pm+RJj
- FUeh7mSHnFaIv904ySwddHm0F002v0KeIePcKkt8NVPTx8Z9zIzKcA0w6uIrd3Mp6jo+btpixRs
- BMZGlthyQYQPdG3zSRbo8u+mWPbk+Skgu+PyHBwrf2Cz29UTUxhGs+f4xfLKBl8UHX1K/14IdjE
- jISnRpqlpVIavBIcEgQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfXydU5mmcKQ0u/
- 7A7B0SPdsiX5NiDsvDzkqS7ufSOoCdIh8COn72PGdkOufeZxWCSaUIFxFsGI5wfXSzwlkW2lXDc
- hZp3txxKXU8N0aAJ4Tg/P2x4x1ZnmfE=
-X-Proofpoint-GUID: bHray2HA9EeQl5SLvj04vELKPXwIOHAV
-X-Authority-Analysis: v=2.4 cv=OaANnRTY c=1 sm=1 tr=0 ts=6ad5e223 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-ORIG-GUID: tRPmljdW_edox8VT2MvLZKlUVNsE_eIq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfX9cq+a+V5wCBW
+ qKd2BgqW2ZimyKt/3RfHT5epKhr3wX31fTyc0/5fqQk/q1rUYOc6mdPKkJah/zz6z0Ki1HbMBzv
+ Cim0DfZ8Zbf0+jKUZnzGQOjkz8Ha838Zw3KqdXZ14CNkPH1IwcnPNmnLnuUPJsTZnLOYeMHBzmb
+ 7ePGjQEByEajYVOJQafxnBXL0JHB+zbg7N/Qe3emJIdMeoYUSg0lfcNG6Sp/f44sjVuDx9Ru75s
+ 4cTUqngEVPBAXOQ5oNdxPF13DDAJ0dnUt3GCFnOF9V/n/LOx8EWNXK5sPcqxyK/1fHYLO07F1G6
+ rt3rRaumz7YooxnZOqE7awXBCCcVL7uoBVttX/Y9nQSV8LzVfEtpizB8iLdLAbzjYzo1lb3PmGe
+ oBtcMqoyHKvuCoyLiMDdiJU3SaLqitBIwPYwhIKkOBMQrCJIpVgvDlhARgdl/BHS4GBxzqQ/Qio
+ gUFfjq3TKhK6pw0XoYA==
+X-Proofpoint-GUID: tRPmljdW_edox8VT2MvLZKlUVNsE_eIq
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfX0fEXOLFnL9xY
+ z9tBHmqjfFI768M/UNA1/49bK0QdVeF7h3B8Hfr+hVdYjaPPJfUQVosc4+uYBVV27QXX8gUxSwt
+ IrBEOe+T1PPty/BYt92XJaHkWdSr1v8=
+X-Authority-Analysis: v=2.4 cv=cLt1IVeN c=1 sm=1 tr=0 ts=6ad5e229 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=_k9ig2nQFDp-gxZIyLcA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=hNZP5i6h11z2s_4BSHIA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 bulkscore=0 adultscore=0 clxscore=1015
- malwarescore=0 suspectscore=0 spamscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ adultscore=0 malwarescore=0 phishscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
  definitions=main-2610190037
 
-The existing pcie1_phy node only listed qcom,sa8775p-qmp-gen4x4-pcie-phy
-compatible, since no QCS8300-specific compatible was documented for this
-PHY at the time.
+Monaco has two PCIe controllers that can operate in Endpoint mode.
+Describe the Endpoint nodes for both controllers, including their
+register regions, clocks, interrupts, interconnects, IOMMU mappings,
+resets, power domains, and PHY connections etc.
 
-Now that qcom,qcs8300-qmp-gen4x4-pcie-phy is documented, list it first
-with qcom,sa8775p-qmp-gen4x4-pcie-phy as its fallback, matching the
-order used by the pcie0_ep and pcie1_ep nodes.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/monaco.dtsi | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/monaco.dtsi | 147 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 147 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/monaco.dtsi b/arch/arm64/boot/dts/qcom/monaco.dtsi
-index cfe39f923224..d7d135e87a8c 100644
+index d7d135e87a8c..12cd7d5f37a3 100644
 --- a/arch/arm64/boot/dts/qcom/monaco.dtsi
 +++ b/arch/arm64/boot/dts/qcom/monaco.dtsi
-@@ -2597,7 +2597,8 @@ pcieport1: pcie@0 {
+@@ -12,6 +12,7 @@
+ #include <dt-bindings/clock/qcom,sa8775p-videocc.h>
+ #include <dt-bindings/dma/qcom-gpi.h>
+ #include <dt-bindings/firmware/qcom,scm.h>
++#include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/interconnect/qcom,icc.h>
+ #include <dt-bindings/interconnect/qcom,osm-l3.h>
+ #include <dt-bindings/interconnect/qcom,qcs8300-rpmh.h>
+@@ -2405,6 +2406,57 @@ pcieport0: pcie@0 {
+ 			};
  		};
  
- 		pcie1_phy: phy@1c14000 {
--			compatible = "qcom,sa8775p-qmp-gen4x4-pcie-phy";
-+			compatible = "qcom,qcs8300-qmp-gen4x4-pcie-phy",
-+				     "qcom,sa8775p-qmp-gen4x4-pcie-phy";
- 			reg = <0x0 0x01c14000 0x0 0x4000>;
++		pcie0_ep: pcie-ep@1c00000 {
++			compatible = "qcom,qcs8300-pcie-ep", "qcom,sa8775p-pcie-ep";
++			reg = <0x0 0x01c00000 0x0 0x3000>,
++			      <0x0 0x40000000 0x0 0xf20>,
++			      <0x0 0x40000f20 0x0 0xa8>,
++			      <0x0 0x40001000 0x0 0x4000>,
++			      <0x0 0x40200000 0x0 0x1fe00000>,
++			      <0x0 0x01c03000 0x0 0x1000>,
++			      <0x0 0x40005000 0x0 0x2000>;
++			reg-names = "parf", "dbi", "elbi", "atu", "addr_space",
++				    "mmio", "dma";
++
++			clocks = <&gcc GCC_PCIE_0_AUX_CLK>,
++				 <&gcc GCC_PCIE_0_CFG_AHB_CLK>,
++				 <&gcc GCC_PCIE_0_MSTR_AXI_CLK>,
++				 <&gcc GCC_PCIE_0_SLV_AXI_CLK>,
++				 <&gcc GCC_PCIE_0_SLV_Q2A_AXI_CLK>;
++			clock-names = "aux",
++				      "cfg",
++				      "bus_master",
++				      "bus_slave",
++				      "slave_q2a";
++
++			interrupts = <GIC_SPI 306 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 147 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 630 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "global", "doorbell", "dma";
++
++			interconnects = <&pcie_anoc MASTER_PCIE_0 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_PCIE_0 QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "pcie-mem", "cpu-pcie";
++
++			dma-coherent;
++			iommus = <&pcie_smmu 0x0000 0x7f>;
++			resets = <&gcc GCC_PCIE_0_BCR>;
++			reset-names = "core";
++			power-domains = <&gcc GCC_PCIE_0_GDSC>;
++			phys = <&pcie0_phy>;
++			phy-names = "pciephy";
++			reset-gpios = <&tlmm 2 GPIO_ACTIVE_LOW>;
++			wake-gpios = <&tlmm 0 GPIO_ACTIVE_LOW>;
++			pinctrl-0 = <&pcie0_ep_default_state>;
++			pinctrl-names = "default";
++			num-lanes = <2>;
++			linux,pci-domain = <0>;
++
++			status = "disabled";
++		};
++
+ 		pcie0_phy: phy@1c04000 {
+ 			compatible = "qcom,qcs8300-qmp-gen4x2-pcie-phy";
+ 			reg = <0x0 0x01c04000 0x0 0x2000>;
+@@ -2596,6 +2648,57 @@ pcieport1: pcie@0 {
+ 			};
+ 		};
  
- 			clocks = <&gcc GCC_PCIE_1_PHY_AUX_CLK>,
++		pcie1_ep: pcie-ep@1c10000 {
++			compatible = "qcom,qcs8300-pcie-ep", "qcom,sa8775p-pcie-ep";
++			reg = <0x0 0x01c10000 0x0 0x3000>,
++			      <0x0 0x60000000 0x0 0xf20>,
++			      <0x0 0x60000f20 0x0 0xa8>,
++			      <0x0 0x60001000 0x0 0x4000>,
++			      <0x0 0x60200000 0x0 0x1fe00000>,
++			      <0x0 0x01c13000 0x0 0x1000>,
++			      <0x0 0x60005000 0x0 0x2000>;
++			reg-names = "parf", "dbi", "elbi", "atu", "addr_space",
++				    "mmio", "dma";
++
++			clocks = <&gcc GCC_PCIE_1_AUX_CLK>,
++				 <&gcc GCC_PCIE_1_CFG_AHB_CLK>,
++				 <&gcc GCC_PCIE_1_MSTR_AXI_CLK>,
++				 <&gcc GCC_PCIE_1_SLV_AXI_CLK>,
++				 <&gcc GCC_PCIE_1_SLV_Q2A_AXI_CLK>;
++			clock-names = "aux",
++				      "cfg",
++				      "bus_master",
++				      "bus_slave",
++				      "slave_q2a";
++
++			interrupts = <GIC_SPI 518 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 152 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 474 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "global", "doorbell", "dma";
++
++			interconnects = <&pcie_anoc MASTER_PCIE_1 QCOM_ICC_TAG_ALWAYS
++					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
++					<&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
++					 &config_noc SLAVE_PCIE_1 QCOM_ICC_TAG_ACTIVE_ONLY>;
++			interconnect-names = "pcie-mem", "cpu-pcie";
++
++			dma-coherent;
++			iommus = <&pcie_smmu 0x0080 0x7f>;
++			resets = <&gcc GCC_PCIE_1_BCR>;
++			reset-names = "core";
++			power-domains = <&gcc GCC_PCIE_1_GDSC>;
++			phys = <&pcie1_phy>;
++			phy-names = "pciephy";
++			reset-gpios = <&tlmm 23 GPIO_ACTIVE_LOW>;
++			wake-gpios = <&tlmm 21 GPIO_ACTIVE_LOW>;
++			pinctrl-0 = <&pcie1_ep_default_state>;
++			pinctrl-names = "default";
++			num-lanes = <4>;
++			linux,pci-domain = <1>;
++
++			status = "disabled";
++		};
++
+ 		pcie1_phy: phy@1c14000 {
+ 			compatible = "qcom,qcs8300-qmp-gen4x4-pcie-phy",
+ 				     "qcom,sa8775p-qmp-gen4x4-pcie-phy";
+@@ -6225,6 +6328,50 @@ tlmm: pinctrl@f100000 {
+ 			#interrupt-cells = <2>;
+ 			wakeup-parent = <&pdc>;
+ 
++			pcie0_ep_default_state: pcie0-ep-default-state {
++				wake-pins {
++					pins = "gpio0";
++					function = "gpio";
++					drive-strength = <2>;
++				};
++
++				clkreq-pins {
++					pins = "gpio1";
++					function = "pcie0_clkreq";
++					drive-strength = <2>;
++					bias-pull-up;
++				};
++
++				perst-pins {
++					pins = "gpio2";
++					function = "gpio";
++					input-enable;
++					bias-pull-up;
++				};
++			};
++
++			pcie1_ep_default_state: pcie1-ep-default-state {
++				wake-pins {
++					pins = "gpio21";
++					function = "gpio";
++					drive-strength = <2>;
++				};
++
++				clkreq-pins {
++					pins = "gpio22";
++					function = "pcie1_clkreq";
++					drive-strength = <2>;
++					bias-pull-up;
++				};
++
++				perst-pins {
++					pins = "gpio23";
++					function = "gpio";
++					input-enable;
++					bias-pull-up;
++				};
++			};
++
+ 			cam0_default: cam0-default-state {
+ 				pins = "gpio67";
+ 				function = "cam_mclk";
 
 -- 
 2.34.1
