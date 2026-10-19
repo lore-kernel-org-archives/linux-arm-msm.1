@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1D3D4C14F3
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:00:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE0C74D597F;
+	Mon, 19 Oct 2026 10:01:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792404051; cv=none; b=bnr5T68emtuj6k5YqR6bF2B4M8/4iSB1VedjQ2CxZlpTzx0Rfak+QexOr3s7mR8lkQW+e1Gjzze9x0Szr3a0YJYo1k2qj/IUCaidQpYSQGmUfPoG8EKl9CRvirfOYdoCJ/ZMXEqS/LXweXqRAGvZQGH5a4hrtBQI/6N/jcjE5Sw=
+	t=1792404072; cv=none; b=pGxXWbsko+zsxeQchpF9ZFjs4xL5SrgA1SAYOTTKZto3UneistRGA1qZeghoZYjAu8dGf6tErwpVzUzVH+JZyF3JxOsHJzPnexiTNAGwha4L2Wt3j8Wd2EQL+4ica0CvVGT2E9FXZwhcljAq2g/nERMr2AlfGSTVET+2bRoX4eQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792404051; c=relaxed/simple;
-	bh=R70oW8LwphJ/NTsHnZ5ZKcGx+X10RwjkMGHl54tVw0w=;
+	s=arc-20240116; t=1792404072; c=relaxed/simple;
+	bh=EKWfrIRBQN/A0hWazzILMvN+1tgZIZ4mudS5/pWSEPY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PFjgYg/+QS/4e4SlzFbWyDBbGsqaRcdrGiWY8b+HGnKQHq0+Vh7Rmu92rddjw/clNYBJM9ZqTBI3n4XPL195/cw4MGpvPTEe16Ju4nXvVTwH/f6AQA9/dVp1J5teMCTcWurDM6mI3BVQlSPJc5HgaYlv5Z9s+C9u+5uSxTjduys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MGh/M4oI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Wr4xnlGf; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=aQhSbxhuXi2Am7BovJpxoj1i0jMh7SfmXY/orXYaKpt2e2ZuEQwRbTf7t6wAsi/OrgdDfLVoHARkLxGlnhEaWdFKyH+ICzMwtwfFBt/4QXzBKCj7gNDZygIsVJCcsZOtQ9THDO/0gEAAmSEAT7nQwdY3MADXffdofR7sUpdEQoU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YOOlmR99; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MGh/M4oI";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Wr4xnlGf"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8OsUs3305548
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:00:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	n6CDwyChsU7mTTcnFRr5rj7l7/nx8KuKNscWAipG89Q=; b=MGh/M4oIvCZ0mjOk
-	TfZSJb3b4L/Su0I113ZdT499+I57TqD/QGvNtLzYywPwHc7zsBDRrj4KlRt6JOV/
-	sIec8yTHi7DrZdGUpq2mBKPFdQN53ASkWeUuWM6/WR6A84ttl3d1Z4w47+BC2oIO
-	2e1fNPD16VAAYN7I70WXXMgaV1OqtGZYDk2G74d4uoAbyJNrdxpePhCnHaTZvoRm
-	L8AiPFy/by5pgDPtDaOoVvTeD6QLKs3LnTszOiK96521Bf9A2DFfleLOO8NX5MEz
-	QPnfblTJcfyLzxFWy6j/wQGYxTGhy0gMRH7ipiWI4X4nXfPA2Rtqjqw58mge/AUb
-	UaGHOg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf47ggua-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:00:48 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f1f1f2ecfso69575985a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 03:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792404048; x=1793008848; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=n6CDwyChsU7mTTcnFRr5rj7l7/nx8KuKNscWAipG89Q=;
-        b=Wr4xnlGfUzUYAgtJ4vFb1CsSDKlZW6EB2pZPd6QXVLxB+Qv1wQCc3OCI6sKSb5VFnL
-         UnoBuPfP4aQdkD3ZXQ68Y2Q7MSOQR4OPmmGH21j7Muj1Sehm9aPoOramBaH1gN30rCxm
-         bZ+WRY/esJvsnPgJ8aeSIVXTuzPeSYVzSaz9f503sWCDT5thrSNT4cL745fhBnGguRWi
-         FYWkslWGspHcKn1nihZ+F2gZ/HJ/84t7dTG2lmBSHs5YYz3uhH7JJx0/qDGGoYJyYq3d
-         lG/leLjCgjs9oS4vIPhitVNnwcz7zS+N2mMi2h9ThXCE2221PzUIvjRvKSsN/7jOIyAB
-         0zvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792404048; x=1793008848;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=n6CDwyChsU7mTTcnFRr5rj7l7/nx8KuKNscWAipG89Q=;
-        b=KslYW79jQiytMvRiIxJc8+2+SAhLWJZy1R/quWiuLW7Asm8RhOzSnFbFA9q4+2d6ok
-         zmKJLmKth/jLD5lINinT0+dII4k1mGZz3BkY3Xr9dhANQM3OKX88xrkKJvfafucA+EO4
-         eCRzloU8K7OZjJSaIStqejC8YZoU3j9P7LMH7GbDzln4K3xgfJm/g0uZP4syePIcrXqU
-         FxYbSzWEHI1iehOIBDW/3pUeQED3HW0KNV/1ut2k0Ga2O9xzxrTP5gvBo33Twrk7c2eh
-         Wr88XyARgFtOrZM8Smkmon0TRxXsE3oAc3cICxEwMUSctrxLlZf7cdYjZamUhVH4mEeN
-         v6FQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzFLaZGxOxDyoZsSsLd2vjZ1HT1xgtNjNkdT/uoo8YCLifx3iz2Mo7MP8gk88vyUHI7QFSYYkUB74AAyZUk@vger.kernel.org
-X-Gm-Message-State: AFq9FYJOFWua2KHATR3rpXxRsFAi6FnT56EwCT9GC9UDehYOI0YOOTHr
-	4ddOPFm0+wW/uv7ut+C4ziRhyck7ELDUH07DdWwxEwVxIP3MnoJ90Sceqoar9WsoNIXQK2LK4Wg
-	U8MgZSUHpAX23rfKf57IJmDLSxdxmp94wtgkwmqgbzmjMqM6nmiqd5estV4rf1NTH2cOl
-X-Gm-Gg: AYBFou3bNVdkUTBKN09Q1jGIhYjotr25nScJV5P00T7Ix+SstHonv+GI/5+l3o4dJAk
-	K05Of0fY/GCjarWy6vYhMfwb/QkPUt6ml9egpoKS2ta545D6+M+IMRIPr/AV7v/iLMrfjz+UG72
-	w6CBFCPO8LXsPh2lYx9UAL47GHjecV/2i9yAJxvJpJT1cDpNP+bA9VdNa+sg1UFNtXcrXrZtqD1
-	w1/XSB3EHgwTB3OkS8HJeht/gFNSxMV+0SeJ7S3bAvJNWw3EqTELOAM174aMDGB9zFsPpH2TVVI
-	xoWDELKxHOYc4UqgL2QAyg8Jcz0CLndmk8MHBYXJLO6h2686RRMJXUdwjB6TQ91WAFLiwpdBQB4
-	QF0VktuRXboH78Jnt3dQwsA==
-X-Received: by 2002:a05:620a:414b:b0:93f:a34:d9fa with SMTP id af79cd13be357-93f29b98f5bmr1435655985a.1.1792404046791;
-        Mon, 19 Oct 2026 03:00:46 -0700 (PDT)
-X-Received: by 2002:a05:620a:414b:b0:93f:a34:d9fa with SMTP id af79cd13be357-93f29b98f5bmr1435619285a.1.1792404044185;
-        Mon, 19 Oct 2026 03:00:44 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b38a1d6280sm3556395a12.24.2026.10.19.03.00.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Oct 2026 03:00:41 -0700 (PDT)
-Message-ID: <226826ef-0cf2-4147-9256-d257c8272883@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 12:00:38 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YOOlmR99"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97A1C1F000C4;
+	Mon, 19 Oct 2026 10:01:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792404070;
+	bh=6HDV2HcLkfwQjSgKzpnVgoK+4ivvoEHdz75ohcQoHhk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=YOOlmR992iCkxzo8lLqrfm6QBsTap8iuF1rxQ7iZ7zCq94SxSviXJ4s0jj5xMgN1y
+	 u3ecZrigLfaBBcyhIz5vjV60zaZ8SofK/7xpiH/LxFUDiFMl70Z6IAyeGo93P8Mj57
+	 VtUvig875jusO7GHu1mfiqf/vuzWfdqtG9MKdA9KZGR3YNJ7/8mmKDF8NzsV0/VSvl
+	 XZFWML62NHsQJGTCNgmCw50qX7m6CKAfRJm7AibA0nhiEyYGiANTE6Uj0/HYm0EMrs
+	 ZhQkKsBMkT1XLi6zAjSXSrNOJv2P2x5IYi0De3vs4hhiZcW+YxkElKcvRSg4jkTtOw
+	 E6yHw9RxSV/Rw==
+Message-ID: <392642ad-3bac-48bc-9199-8c3923c588c2@kernel.org>
+Date: Mon, 19 Oct 2026 11:01:05 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,60 +35,120 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: gcc-qcs615: Add additional frequencies for GP
- clocks
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261016-talos-gp-clk-freqs-update-v1-1-17c9a095063c@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH 4/7] phy: qcom-mipi-csi2: Add sa8775p D-PHY support
+To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>, vkoul@kernel.org,
+ kishon@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ neil.armstrong@linaro.org, mani@kernel.org
+Cc: gjorgji.rosikopulos@oss.qualcomm.com,
+ hariram.purushothaman@oss.qualcomm.com, akapatra@quicinc.com,
+ jigarkumar.zala@oss.qualcomm.com, loic.poulain@oss.qualcomm.com,
+ vladimir.zapolskiy@linaro.org, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261016235502.2274268-1-anusha.nandi@oss.qualcomm.com>
+ <EKfYfLCfqnEg_PLe_TsBkAGryJgP_tA140u-0ZYSL9q5kInrAtoRCiugYV3C2PDDvYjxaeejuYK3gqzAT4FMXQ==@protonmail.internalid>
+ <20261016235502.2274268-5-anusha.nandi@oss.qualcomm.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261016235502.2274268-5-anusha.nandi@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: ElgmnWUVkt8aoIoGNIrbqPbAFvkowyqJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAzOSBTYWx0ZWRfXw2hfRolgGwmr
- 5RkL/R2Q4j8wWV+O7UDzB+tXS8+jpG8IhuYmuJUvggA/92ZX64w/YrMvhdzOnirzQxV5y5Kc9MM
- 9NTkBf+S4j26O5vTHhONJ179HiMgNAyfvxXB07L6u58m/5FtyVbzDVPY3eqJnKN3WUitLyEHJjo
- tDZKUraAqefqknUbPYUgd5aatZohFKzaLkB7KxnouIvUb95iDovquwMJMIdrWke+PlYrymTumoL
- XMVuoW1Og2hOnhftBlKQOyja7EdzXFhQpqiTkwj8U2FnUaC6xq9I+rTdlinxJA6WEgj1m6reN5Q
- TFX5VvLr38E8uEARxgvjA7XBq62y0oUZE/PiKS/j0ozVaGdqjJd8YUCed8h9Q6AODmZRYXoHMqd
- u1qvnc+QnZmXbgZEutQX97flLWZLH4dpZQvG+6OQGm3ctRxgzIFcejWxEtXR6MyZOODwTjiVS4t
- XjrjsYmYpQZSoV5Pccw==
-X-Proofpoint-GUID: ElgmnWUVkt8aoIoGNIrbqPbAFvkowyqJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAzOSBTYWx0ZWRfX/7IRG9b0debn
- GLNVfR93PnQqaB5zhFDYHiYtNOOSujeejy4JyVhDhWGd8xRdHCAqYN7XTlyhuecOsSzhAG0Xra7
- M+4USMptPCNabD2dVsUzsoxdVaoWxIU=
-X-Authority-Analysis: v=2.4 cv=cLt1IVeN c=1 sm=1 tr=0 ts=6ad5ea50 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=r3KDiPLWR5a1ZHJE9ToA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0 phishscore=0 spamscore=0 clxscore=1015
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610190039
 
-On 10/16/26 11:12 AM, Imran Shaik wrote:
-> Add support for 10kHz and 100kHz GCC GP clock frequencies required for
-> display backlight PWM functionality on Qualcomm QCS615 (Talos) SoC.
+On 17/10/2026 00:54, Anusha Arun Nandi wrote:
+> The timer-clock lookup in phy_qcom_mipi_csi2_probe() and the OPP
+> clkname passed to devm_pm_opp_set_clkname() were both hardcoded
+> string literals sized to x1e80100 ("timer"/"core"). Add
+> timer_clk_name/opp_clk_name to struct mipi_csi2phy_soc_cfg so each
+> SoC can declare its own clock-name strings; x1e80100's soc_cfg now
+> declares "timer"/"core" explicitly, with no behaviour change.
+> SA8775P reuses the same "timer"/"core" names as x1e80100 for this
+> pair of clocks.
+
+LoL I had that in the last design and review said "hard code it" happy 
+to agree with myself in the past, however this change should be 
+standalone and precede the Lemans work.
+
+> SA8775P's CSIPHY has a single power-domain, the Titan Top GDSC,
+> matching the legacy in-tree CAMSS driver's sa8775p_resources.pd_name
+> = "top" and the existing lemans.dtsi camss node. Like x1e80100's own
+> "top" domain, it is not OPP-scaled, only kept enabled.
 > 
-> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
+> Signed-off-by: Anusha Arun Nandi<anusha.nandi@oss.qualcomm.com>
 > ---
+>   .../qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c    | 112 ++++++++++++++++++
+>   .../phy/qualcomm/phy-qcom-mipi-csi2-core.c    |   5 +-
+>   drivers/phy/qualcomm/phy-qcom-mipi-csi2.h     |   4 +
+>   3 files changed, 119 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> index 966d79c98f9b..85e89235f7c9 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
+> @@ -380,6 +380,118 @@ const struct mipi_csi2phy_soc_cfg mipi_csi2_dphy_4nm_x1e = {
+>   	.num_supplies = ARRAY_SIZE(x1e_supplies),
+>   	.clk_names = (const char **)x1e_clks,
+>   	.num_clk = ARRAY_SIZE(x1e_clks),
+> +	.timer_clk_name = "timer",
+> +	.opp_clk_name = "core",
+>   	.genpds = x1e_genpds,
+>   	.num_genpds = ARRAY_SIZE(x1e_genpds),
+>   };
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Yes but split it up - "remove hard coded timer and opp names" - actually 
+you want to make the OPP optional no ? In which case you'd expect to see 
+a patch to make OPPs optional - instead of folding that into a 
+functionality drop.
 
-Konrad
+Because say we want to revert or re-order the addition of Lemans in the 
+git log - we then have the problem of mixed functionality.
+
+Or say I want to cherry-pick a backport - I don't necessarily want to 
+include lots of SoC specific stuff that doesn't affect my part.
+
+=> More granular patches.
+
+---
+bod
