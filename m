@@ -1,86 +1,33 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6AD44C6520
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 11:19:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E24733D4E9;
+	Mon, 19 Oct 2026 11:24:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792408761; cv=none; b=kb2lpy2ELfcMYf0TQTqIT7SnVl/+idhKiYZYIqSI3N4zul05qaFhOJJYt17khxNFE+zTwUELCWS+pk/eJNB0VS3y6sIrr73eHnAinkZyuE/YH5f5RQow31Ox4VO/TMMxv/MRGIzvxLiKOy1D9e+jwMLsqX/UOKOz218AT/YBfK4=
+	t=1792409063; cv=none; b=YjFC8mSXPfCMT4T47rpw9cET/8J5kyur+HnVA7Bbfi7BMUrfCZsc+p2bHMF28UNlr00gRGttFXQvYXuQVN5nV3wLINBQaGgABnfDdsTXgo7InnIPXkDe/Op+3Xz1jYWKL09kJhefRDQuFy0wPUV3eqAykycyZkHSLAAsm9LicbA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792408761; c=relaxed/simple;
-	bh=hicWBf/nVrO2B5eYi9m4lI3Q4TQg11SfjA+n7D5Muxc=;
+	s=arc-20240116; t=1792409063; c=relaxed/simple;
+	bh=mK5//vkxGCMjGmgSS0WchDdkPqMImf50AUAtxpkkxxM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VyC1cE9jIT1jsR2mZOHyQWuY5rG2eeao7D0lQi9jZlHzkA7DKaW9A6l9GzPnPb8V86FIqqFrnRt/ZbcLpGw0LqYm0K+UfA3Ztdblr3bIaSt/xnss5bLnB2EQPbkuzV/fl853uCgdPNGf3IcwlR20q9Ff9Un8n6Vncoi19iMWRAw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aqaz8iOU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dlfP6Nq5; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=JTQC0BNdkfXV2mEi9YdjH+XVbvBlmjVlZ7koTb5OS+PdRH7wEcc3CMR2vxuXwPwBU4493tiil3THC5G9Ki6A5EQMRk8F8vUJzgdDfXb4Dobrb1iDedkBoEjiG5F3fMSCfx+aTZyIS21oPW+nxe1qqY9x8zcFVVGZ8Hwl5wHI3Eo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eUIhvj9k; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aqaz8iOU";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dlfP6Nq5"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8Os8n2752268
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 11:19:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	VJwQ3LmwPXa1BUiwGt4fvNRB7J3oUm4v+8tRT0WON2s=; b=aqaz8iOU66AOsySE
-	3bxvHMMq1Y3zs/8NhvncfI8jRm9FB+fixr1QBQo/JwC0L13/5QYH96xi0ABqUb1K
-	gFzNpXV6yuL4gb4ThW0ufT5xXu4bCGkc9dXypvzolNN+15RAK0zJcyoaH01jGSIq
-	PLwa5s3zWSmDFEZ4Ktn0L4imOQHMsDqqcKglaT+vuAp6iA/LuJeMRSUH7Hj7NkZ0
-	FHmySMftoSkEDSaOowMpBb+OWesW50ipy98tsT3E8k/c3hzSwgUfxvv3h6lTGjf3
-	8oFpZhFItHAVpKWAD98bzYTTQKaLMU+8uLGdc+c1AJr3G91lUTZ7uKo/oGalGBKG
-	AzHPew==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf48gsme-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 11:19:15 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f3960dca5so20964685a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 04:19:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792408754; x=1793013554; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VJwQ3LmwPXa1BUiwGt4fvNRB7J3oUm4v+8tRT0WON2s=;
-        b=dlfP6Nq5iMSFWE8XHX+JL6JLcXnnxdGra2J5vKF2IGk5wAZkVAvOm5nGxCowLx3RYw
-         oXTfla1ZmgM5EYQIl3T1xB6FS7FRnOmqH4HlULO0utQuQNnuhxIugxz95miCyRMCvcAy
-         dR7WEKkzhse+pGzfwt3WMVa7rz5X716LNSetqWtWAk/iIic8j+6UxgQ1oHGUuoTu2NGT
-         ZtUTUvmnIb+ejuizcFNVUkycbyVRiUWzmJtHLhuvkVHUowO+p9UzDm1WkEXiJZMADO75
-         ck0H45Qex/UstxRzcziXZdyoWyCG7ZtRRVHq2fzu9ZItA1eMMsh+w5Yi/cVtEmLv7qIr
-         E7cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792408754; x=1793013554;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VJwQ3LmwPXa1BUiwGt4fvNRB7J3oUm4v+8tRT0WON2s=;
-        b=yOOlwA/TR3MaC5bERrFWhFIQzWJ9GILpNJ6xD0ls/E2oHTkbFs8OiTR4kxrEil1sEQ
-         CiWoD/NmFQpqw76838mmYjhE81GXSEO2Vm43IDrlZQX5SBU3ROIzlKekjYB1fss3y5J0
-         Yfb/jUErKhKgWuBCFVJqnl9Fo00zc8hnQvQuOFWrK1+WB4PYkPv8hW6+VlqxZbmUAzEc
-         lD3vAgOXh3a+aIYL9rug2LjD1H3g+wzCXQ92M26Wi94uwPp3bSuo/IX6sLgVdugR0prw
-         e0IL5217AtSJU9Ux8Lg9cgHezWnNJknBLms3i2JLwE4YtOTBz1I5iOQO8ayuMFeS9bgY
-         bZxg==
-X-Gm-Message-State: AFq9FYIdouRWInXvs3k7W0Jgsib2umPR6kPvZpVNSGjhxG3quMnnROrq
-	0Pbt48NrcZQCIRqKCv5wcWBStu3gCzJXJJyBcHShcw11pO/7uJIJJfTCSUQ5iaezo1xDHgtC49W
-	Bau/yWQaXt8CrUVkVHtfeK+TbNlF9LXBc+TmYDBhXxbMtlmmxCo/PaW22dAWaGBm96+El
-X-Gm-Gg: AYBFou2r5YTtnTYZE5yKmJL6/mMMZ9az8CqTE6jBcMwrD2Sxc5BqsdeAYQCJj7mHyRM
-	/1LiUe7Wki+iX2AhmC9i9ZLbV+7Pth3/kEB0EvIaOctiIpdcnqc5UhdnaJ9J64On2AO2iQnlyPJ
-	+T5HGa3e5cl+6+0UOw4zonUsoM5CZgU9JES+zUVkZg4wt7+NqnUaT+WbomdzA9qIT5Lx+Ucz4Nq
-	zKHtn3n+WrXMoQC/dhkh+oIt0tx1KaIsF5lECg9sS0mB+TXoRLgO88V/4LnPgtoo2KlxCyaWSW9
-	zyES0GDMzZjaM4TVankiy/RfAv2kkxXyHpVvW2IZiO32aQAwJLXuTPophfqi6Hln8CQpvdCv0NC
-	taSBB610FDVKJmHz8himH+g==
-X-Received: by 2002:a05:620a:2948:b0:93a:1312:ff19 with SMTP id af79cd13be357-93f29dcd9cdmr1236981785a.5.1792408754596;
-        Mon, 19 Oct 2026 04:19:14 -0700 (PDT)
-X-Received: by 2002:a05:620a:2948:b0:93a:1312:ff19 with SMTP id af79cd13be357-93f29dcd9cdmr1236977885a.5.1792408754046;
-        Mon, 19 Oct 2026 04:19:14 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6b38a1eb8dbsm3646220a12.37.2026.10.19.04.19.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Oct 2026 04:19:12 -0700 (PDT)
-Message-ID: <d4e2fcfb-856c-4fe9-b0e7-fb8df4dbbc15@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 13:19:09 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eUIhvj9k"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AEB7D1F000C4;
+	Mon, 19 Oct 2026 11:24:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792409060;
+	bh=PKWuic2G/HGRtF1u1BPrf6xxiud57cUAtpu/hY9Z7zk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=eUIhvj9kR4RHH88tNnYvfd3YtdegYy5pr8/ExGG5M+QAXa89Wu/VHIOMqDkGNH5H7
+	 Su0qNxZAcoI4sPOCDTf/PxiY0LWkfd5KW+Cc3JbPG1rGUfm5zPuV4leWABc5ubUKLJ
+	 91De2w4+/1D8uoMlBbI7QoAMER/bPzXrPY7+u3zvxD+mqHuR3wocWgpsxYSQej76vJ
+	 vuxn5SnlroL+QW3ysz/ffBbngUvWCwDvJAqN5E9rFl5Z13cDFOuhnFrprJK6vHHR+9
+	 dTEul+HkEyG/A9RKrMkn1PUnkYMNR8uH6xXx1f5JXgB5uvKApIr1RBcedX4DhDUhhR
+	 cRJXNcZzXIRDQ==
+Message-ID: <324dcc61-6085-446c-8bf7-564486f319bd@kernel.org>
+Date: Mon, 19 Oct 2026 12:24:13 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,71 +35,156 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/9] irqchip/irq-qcom-mpm: Prepare common access path
- for timer and pin regs
-To: Sneh Mankad <sneh.mankad@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-        Shawn Guo <shawn.guo@linaro.org>, Marc Zyngier <maz@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Anna-Maria Behnsen <anna-maria@linutronix.de>,
-        Frederic Weisbecker <frederic@kernel.org>
+Subject: Re: [PATCH 1/3] phy: core: add generic MIPI C-PHY configuration API
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>, david@ixit.cz,
+ andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, vladimir.zapolskiy@linaro.org,
+ loic.poulain@oss.qualcomm.com, mchehab@kernel.org
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-References: <20261015-b4-shikra_lpm_addition-v2-0-ac7f1a0d5638@oss.qualcomm.com>
- <20261015-b4-shikra_lpm_addition-v2-4-ac7f1a0d5638@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261015-b4-shikra_lpm_addition-v2-4-ac7f1a0d5638@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0NCBTYWx0ZWRfX2OhL+rD3KlPR
- Omoje8lZSMnJAf193oOBVn8Oce0+sJDY1Jmoq6jkwGq27p3sMrIytoCz0rj4vDJuXMn1iAgP/ra
- dtAUN7RwEg1h1j+p/uYtZrg2ubUq3UctwaE7dLPP8+rWpMlCMvXudtrHSszWippRH5kgRS4cngC
- allJxD+RND7N+OI17ggKzUclJEVPzwpzVlb6XBHQd8VVUJ95ZuordURw6PULCYL8ndCyiVN2yUR
- gIRfsqyJDbVDwptFYeN3F83M5VOKvHlUqeJMt3F6O3Wkhtps0xgm2CA1av0oYm+V0ik0guJAUwy
- WPIBshRLm170FIsOLG8MKSDRMRSFhKMZavS5KUw1yVwc9pVhwaaNzuBv6xRsXEtS9O/v6GlmGk2
- aLgmzhddq76r2g/KA9G1HmN3s5XNnly3av3w9tVO0GAElvW+YQFIiUMsKspYFyceuwPNqTlNDG5
- IM4wkP0B4XAHhX8CoZg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0NCBTYWx0ZWRfX+PjOUA27jn1R
- Es8AzABS3IYqne1N+/bupGSTdTQaEtmhGRMqEsfvR21rU1L7a/CQOAiHw7gX3X1W9O02hXinL76
- A9M3PSvqCNw7ZbeyBDwqJWBbFqUCOEo=
-X-Proofpoint-ORIG-GUID: ghdz0sn7GLKi2CG_ePupU2Jh6g0tw0tP
-X-Authority-Analysis: v=2.4 cv=Qr/LTlyd c=1 sm=1 tr=0 ts=6ad5fcb3 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=_QkEx9C7_NLcMqeofcYA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: ghdz0sn7GLKi2CG_ePupU2Jh6g0tw0tP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0
- impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190044
+ linux-kernel@vger.kernel.org, gjorgji.rosikopulos@oss.qualcomm.com,
+ jigarkumar.zala@oss.qualcomm.com, hariram.purushothaman@oss.qualcomm.com,
+ akapatra@quicinc.com, linux-media@vger.kernel.org,
+ krzysztof.kozlowski@oss.qualcomm.com, daniel@quora.org,
+ konrad.dybcio@oss.qualcomm.com, christopher.obbard@linaro.org,
+ alex.vinarskis@gmail.com
+References: <20261017041733.3946816-1-anusha.nandi@oss.qualcomm.com>
+ <20261017041733.3946816-2-anusha.nandi@oss.qualcomm.com>
+ <a6d8514b-269c-441d-b280-4895b5f21fac@linaro.org>
+ <xGBkVr2J5eTHzEO_i4LTjdWGRO1MXGiIijMf1PGUbQ2gEYqffgMDMtx4uiNyBldbbiW13zmcxMWZYYjJ1s--Vw==@protonmail.internalid>
+ <c6d963f5-a57e-4086-972a-4f04af2c5b42@linaro.org>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
+ jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
+ piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
+ YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
+ B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
+ lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
+ 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
+ MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
+ 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
+ JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
+ bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
+ OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
+ BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
+ VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
+ jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
+ mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
+ 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
+ 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
+ 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
+ kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
+ nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
+ g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
+ dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
+ NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
+ VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
+ Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
+ vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
+ 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
+ ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
+ MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
+ VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
+ NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
+ AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
+ JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
+ 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
+ OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
+ xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
+ t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
+ X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
+ LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
+ 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
+ Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
+In-Reply-To: <c6d963f5-a57e-4086-972a-4f04af2c5b42@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 10/15/26 11:55 AM, Sneh Mankad wrote:
-> The vMPM layout starts with two timer registers followed by pin register
-> banks (ENABLE/FALLING/RISING/POLARITY/STATUS), each with reg_stride
-> number of entries.
+On 19/10/2026 11:24, Bryan O'Donoghue wrote:
+> On 18/10/2026 00:00, Bryan O'Donoghue wrote:
+>>> +    unsigned int        lanes;
+>>
+>> This statement and how you go about using the data aren't consistent.
 > 
-> Use qcom_mpm_offset() as the common addressing helper for both timer and
-> pin register accesses based on that layout.
+> Re-reading this.
 > 
-> vMPM has MPM_REG_* values represented as contiguous register IDs,
-> hence replace the macros with enum qcom_mpm_reg and modify the accessor
-> helpers accordingly.
+> unsigned int trios; would be fine too => data_lanes and lane_polarities
+> is a multiple of trios - always three - does it imply that the first
+> three entries in data-lanes == the first trio ?
 > 
-> Signed-off-by: Sneh Mankad <sneh.mankad@oss.qualcomm.com>
+> Presumably.
+> 
+> That would work too.
+> 
+> data-lanes = <4 5 6 1 2 3>;
+> 
+> =>
+> 
+> trios = 2
+> 
+> =>
+> 
+> data_lanes[4, 5, 6, 1, 2, 3];
+> 
+> trio[0]:lanes == [4, 5, 6];
+> trio[1]:lanes == [1, 2, 3];
+> 
+> Probably "trios" instead of "lanes" makes more sense here and the driver
+> just always validates that count(data_lanes) % 3 is always false.
+> 
 > ---
+> bod
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+I'm going to argue with myself.
 
-Konrad
+data-lanes = <1>
+
+=>
+
+lanes = 1; // not trios no need to introduce a new term
+
+=>
+
+three pads on the Soc
+
+=>
+
+The question is - is data_lanes required for the CPHY opts struct ? For 
+the qcom CAMSS case the answer ~ always no - we will be attaching a 
+sensor and will read-back the positions from that endpoint.
+
+It is conceivable that other systems may want to pass data-lanes down to 
+the driver because they won't have a media-graph but, I'd say we should 
+arbitrate that then - leave it up to someone who needs the fields to add 
+them.
+
+=>
+
+lanes // the CSID and PHY should agree
+symbol_rate // so both the CSID and phy agree on symbols per second
+
+Remove:
+
+- lane_positions
+- lane_polarities
+
+Since at least for this series, they won't be needed.
+
+The CSID still needs to know the number of lanes and how many symbols so 
+that it can calculate bandwidth so .... lets just include the data we 
+know we need.
+
+struct cphy_opts {lanes; rate/symbols}; dropping lane_positions and 
+lane_polarities.
+
+I've no objection to the low-level timing variables myself but OTOH we 
+don't require them at this point in time.
+
+Perhaps drop unless/until someone can show a need for them.
+
+Excellent bod, agree with you now.
+
+---
+bod
