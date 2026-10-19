@@ -1,44 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8797358B6CE;
-	Mon, 19 Oct 2026 13:59:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 757AF4C7B2B;
+	Mon, 19 Oct 2026 14:01:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418386; cv=none; b=NGUl353MognCx2mGUiwszckl3OqY7/V/rYynJhQbD0/ktWsHHzCIVgp7w4R4rwLb1W4ONwYAFz1oqqnAdYP+TL7jLUsZtwEVkm/euIn9k+7XRDAic/0QZohXmRxSCTSfQfWFL924LFHWeoDIG6yS9uvOWSmmC0KaakJFxorrbIo=
+	t=1792418479; cv=none; b=o1miuxC2BO68x2LMJ+EcDS1BOwVRSHdcMf2fFZd6W13P8h+/4oabhX8XO8LnX6CygcnjA1kSvIHB6I/1fIUQchPOpLc4vdY7ChWjK8fDD1gedw7gQdzg7SXzCBKG3U+e/UMvSvBCqL2ypW/bk9fuNFgNcbwHYxAJvYPmtGqVivQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418386; c=relaxed/simple;
-	bh=XZPghCTjb1jX+Q7cqp8MHf8/5S+roAFYzazEhZS/viw=;
+	s=arc-20240116; t=1792418479; c=relaxed/simple;
+	bh=y19LUGr+JeffvcKDFmlOmdu8xFQuQYqw+9nWGjlKoEs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZLn3BBUTvKEoVPSHe2/2zWk29uI5Jv8rSen/nPPB8nr0vyOqoegDkalIe0UXtL8D8YgIMRVqtQxFa+X0s1cVSp0qbikbjBUH1x2X9blBq5QhVxDivPXjXgCYheCHLSIUdENh75NyyajMDHZ0tF+wQ+14Zhk5LAxRsmHevTskm3k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZBDC7KCX; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=fIuazZiftgY8ryjT7FCdxxzaA6MKY2Ivpv2TPgJ/SmrlOIUlr+LIuawtCyca38Bsn8y6BmwfVJSoLtx7r3vTHxhyHzM6PHP1XAxVyDOL+YfDXECUmlzK/8DiiUC0BigFF37JE/2UurfQ2lgmC+iimqsgoMeJMDvEgSC2/qzz4d4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ef3uNpXF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZBDC7KCX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DF6C1F000CA;
-	Mon, 19 Oct 2026 13:59:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ef3uNpXF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 270A11F000C7;
+	Mon, 19 Oct 2026 14:01:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418383;
-	bh=D1aPOgBERGuCo14oNo+vtfsa1n/bJR50FBv53Np1Kr8=;
+	s=k20260515; t=1792418477;
+	bh=hA8suylLM7JDukhpE4JXYMIspGye87RnTv0rkAgekpY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ZBDC7KCX6j3nXvNmoW/nF3EUWlcoopMnzFDY9eDQU4e31bvGb4nWvPwQrali/yyaS
-	 VTfQcGekeFvvXEf8b+XYacwm5yEjpy/xGk0dSqivLjVxfB3xpWGc0y5WMv8r9k+Pwj
-	 jYyY14a2rbeCRQIpEg61fwR2hwxyVn//wSiKfgix/0wBcZX7E+A2EMBKpCy+EGLFQ+
-	 sG7j1H27cMRxrUglCcp8S8mhQNzackUMmLFNdv0xZTVvNZ3ERpQd2ahZCB+GiSEFEg
-	 aWzKdgrJyarbGSeTBrFQsy6ziikn6P/yKYatjWo9K0ttl4nwBnN7LezJOFZ+FV5uf4
-	 IEzx0Kb4MXPaQ==
+	b=ef3uNpXF8qZpWK3rJH6c9Ugbas23wWmawVcnCcJqOjjt+nVR2NWD68yv5ByZ1fZkG
+	 LllREKpbRGdpb9rlK6TVcd0IXKyKBUx8fe7Np+lFVYFIK21FgFqTYiHpowKhU83v11
+	 u//sm8LmtGDWL0U0S67KAAvBtJOcAy1yMs58xe3XPSCnAYjtz7GECh7aM7qT/bwa1M
+	 QlQYX3Q2usKDB+dyqbY0tF219jlndOWeX609bzsJhkooJNs3b1wqSyeiqCm6pItdV3
+	 6ACsTPvLT+Z/rsd7g+X8OGlES0SH4GauNvxTlryudbfZsmaGG1n1ndCPbxrtfBQC8W
+	 /doTRvBABTJ3w==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Mike Tipton <mike.tipton@oss.qualcomm.com>,
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Ulf Hansson <ulfh@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
+	robin.clark@oss.qualcomm.com,
+	lumag@kernel.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
 	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-6.6] pmdomain: qcom: rpmhpd: Skip retention by default
-Date: Mon, 19 Oct 2026 09:48:21 -0400
-Message-ID: <20261019135441.1420968-210-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18] drm/msm: detach the ARM DMA mapping before attaching our own domain
+Date: Mon, 19 Oct 2026 09:49:27 -0400
+Message-ID: <20261019135441.1420968-276-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -54,422 +58,347 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Mike Tipton <mike.tipton@oss.qualcomm.com>
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
-[ Upstream commit 7178817f190496f2bfdec181fb4aa72832448468 ]
+[ Upstream commit 140b13475302601368c0cf4e193e66126a49feb3 ]
 
-Retention is very rarely an operational corner. In the majority of
-cases, HW cannot operate properly at Retention levels and so the minimum
-operational level when enabling a rail is the first corner above
-Retention. A small subset of always-on use cases can operate at
-Retention, but those aren't controlled from HLOS.
+On ARM32 with CONFIG_ARM_DMA_USE_IOMMU, arch_setup_dma_ops() creates a
+dma_iommu_mapping for every IOMMU-backed device and attaches its domain
+to the device's IOMMU group. That domain is neither the group's default
+nor its blocking domain, so when msm_iommu_new() later attaches the
+domain the driver manages itself, __iommu_attach_group() refuses it:
 
-Currently, we allow Retention by default and only disallow it special
-cases. But this leaves us open to various failures when the PD is
-enabled without first being voted to an OPP above Retention. Such as
-when a child GDSC PD requests to enable its parent RPMh PD. In this
-case, the GDSC would get stuck powering on.
+	if (group->domain && group->domain != group->default_domain &&
+	    group->domain != group->blocking_domain)
+		return -EBUSY;
 
-Newer chips have started supporting Retention on rails that didn't
-previously (such as for MMCX). Instead of adding more special cases to
-skip Retention on MMCX, start skipping Retention by default since it's
-almost never desired from an HLOS perspective.
+Both the GPU and the display controller are hit by this on apq8064
+(IFC6410), leaving the board with no GPU and no display:
 
-Signed-off-by: Mike Tipton <mike.tipton@oss.qualcomm.com>
+  adreno 4300000.gpu: failed to load adreno gpu
+  adreno 4300000.gpu: probe with driver adreno failed with error -16
+  mdp4 5100000.display-controller: [drm:msm_drm_kms_init] *ERROR* failed to load kms
+  mdp4 5100000.display-controller: adev bind failed: -16
+
+Other ARM32 DRM drivers that manage their own domains (tegra, rockchip,
+exynos) drop the arch mapping first. Do the same in msm_iommu_new(),
+which both the display and the GPU paths go through.
+
+With this the GPU and the KMS device both initialise:
+
+  [drm] Initialized msm 1.13.0 for 4300000.gpu on minor 0
+  [drm] Initialized msm-kms 1.13.0 for 5100000.display-controller on minor 1
+
+Assisted-by: Claude:claude-opus-5
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Ulf Hansson <ulfh@kernel.org>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Patchwork: https://patchwork.freedesktop.org/patch/743333/
+Link: https://lore.kernel.org/r/20260730-fix-qcom-smmu-v2-3-18e0daf2d836@oss.qualcomm.com
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
+I have the 6.1.188 picture: the -EBUSY attach path is present,
+`qcom_defconfig` hits it, and the companion series crashes are not
+reachable here. Writing up the full analysis.
+
 ## Phase 1: Commit message forensics
 
-**Step 1.1: Subject line**
-- Record: `[pmdomain/qcom/rpmhpd] [Skip] Skip Retention voltage as the
-  default enable corner`
+**Step 1.1:** Record: `[drm/msm] [detach] Drop the ARM32 DMA IOMMU
+mapping so msm can attach its own domain`
 
-**Step 1.2: Tags**
-- Record:
-  - `Signed-off-by: Mike Tipton <mike.tipton@oss.qualcomm.com>` (author,
-    Qualcomm)
-  - `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
-    (Qualcomm SoC reviewer)
-  - `Signed-off-by: Ulf Hansson <ulfh@kernel.org>` (GENERIC PM DOMAINS
-    maintainer)
-  - No `Fixes:` tag (expected)
-  - No `Cc: stable` (expected)
-  - No `Reported-by`, `Tested-by`, `Link`, or syzbot tags
-- Notable: Qualcomm author + Qualcomm reviewer + subsystem maintainer
-  SOB. No user/syzbot report.
+**Step 1.2:** Record: Tags present:
+- `Assisted-by: Claude:claude-opus-5`
+- `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
+- `Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>`
+  (author; ignore pipeline SOBs)
+- `Patchwork: https://patchwork.freedesktop.org/patch/743333/`
+- `Link: https://lore.kernel.org/r/20260730-fix-qcom-
+  smmu-v2-3-18e0daf2d836@oss.qualcomm.com`
+- No `Fixes:`, no `Cc: stable` (expected for this review)
+- No `Reported-by` / `Tested-by` / syzbot
 
-**Step 1.3: Body**
-- Record:
-  - **Bug:** HLOS enable of an RPMh PD without an OPP above Retention
-    can vote Retention. Most hardware cannot run at Retention.
-  - **Symptom:** Child GDSC enable of a parent RPMh PD leaves the GDSC
-    stuck powering on (hardware hang, not a kernel oops).
-  - **Root cause:** Retention is allowed by default; only MXC opted out
-    via `skip_retention_level`. Newer chips now expose Retention on
-    rails that previously did not (e.g. MMCX).
-  - **Fix approach:** Skip Retention for every rail when building the
-    cmd-db mapping, instead of adding more per-rail flags.
-  - **Version info:** None in the message. “Newer chips” / MMCX is the
-    motivation.
+**Step 1.3:** Record: On ARM32 with `CONFIG_ARM_DMA_USE_IOMMU`,
+`arch_setup_dma_ops()` attaches a `dma_iommu_mapping` domain that is
+neither the group default nor blocking domain. `msm_iommu_new()` then
+`iommu_attach_device()`s the driver-owned domain and
+`__iommu_attach_group()` returns `-EBUSY`. Symptom on apq8064/IFC6410:
+GPU probe fails with `-16`, MDP4 KMS fails with `-16`, no GPU and no
+display. Author reports both devices initialise after the change.
 
-**Step 1.4: Hidden bug fix?**
-- Record: Not hidden. It is a real hardware-failure fix described as a
-  default-policy change. Skipping Retention is the workaround, not a
-  cleanup.
+**Step 1.4:** Record: Not a disguised cleanup. Explicit probe-failure
+fix, matching tegra/rockchip/exynos.
 
 ## Phase 2: Diff analysis
 
-**Step 2.1: Inventory**
-- Record:
-  - File: `drivers/pmdomain/qcom/rpmhpd.c` (+9 / −5)
-  - Functions/data: `struct rpmhpd` (drop `skip_retention_level`), `mxc`
-    / `mxc_ao` initializers, `rpmhpd_update_level_mapping()`
-  - Scope: single-file surgical change
+**Step 2.1:** Record: One file, `drivers/gpu/drm/msm/msm_iommu.c`, +22
+lines. Functions: file-scope includes; `msm_iommu_new()`. Surgical,
+single-file.
 
-**Step 2.2: Code flow**
-- Record:
-  - **Before:** `rpmhpd_update_level_mapping()` copied cmd-db aux levels
-    into `rpmhpd->level[]`. Retention (vlvl 16) was skipped only if
-    `skip_retention_level` was set. That flag was true only on `mxc` /
-    `mxc_ao`. `enable_corner` became the first non-zero mapped corner,
-    which could be Retention.
-  - **`rpmhpd_power_on()`:** `corner = max(pd->corner,
-    pd->enable_corner)` then aggregate. Enable without an OPP uses
-    `enable_corner`.
-  - **After:** Retention is always skipped. `enable_corner` is the first
-    corner above Retention. MXC’s flag is redundant and removed.
-  - Path affected: probe-time mapping, then every power-on that does not
-    already have a higher OPP (including parent enable from a child
-    GDSC).
+**Step 2.2:** Record: Before: `msm_iommu_new()` attaches its domain
+immediately. After: if `CONFIG_ARM_DMA_USE_IOMMU` and a mapping exists,
+`arm_iommu_detach_device()` + `arm_iommu_release_mapping()`, then
+attach. Probe/init path only; no-ops when the config is off.
 
-**Step 2.3: Bug mechanism**
-- Record: **Hardware workaround / logic fix.** Retention as min enable
-  corner is not a valid operational vote for HLOS. Child GDSC parent-on
-  uses that corner and the GDSC never completes power-on.
-- Verified path: `gdsc_register()` attaches GDSCs as genpd subdomains of
-  the clock-controller’s `dev->pm_domain` (`drivers/clk/qcom/gdsc.c`).
-  `genpd_power_on()` walks parents and calls `rpmhpd_power_on()` with no
-  performance state. DT has many `power-domains = <&rpmhpd RPMHPD_MMCX>`
-  nodes (sm8450/sm8550/sm8650/sm8750 and others).
+**Step 2.3:** Record: `[Hardware workaround / logic] ARM DMA domain
+occupies the group → EBUSY. Same detach-before-attach used by
+rockchip/exynos in this tree.`
 
-**Step 2.4: Fix quality**
-- Record: Obviously correct given the existing skip logic. Minimal. If
-  cmd-db has no Retention entry, the new `if` never matches (no-op on
-  older rails). Regression risk is a slightly higher min vote (Retention
-  16 → typically MIN_SVS 48) on rails that advertised Retention; the
-  author states HLOS must not use Retention. No API/ABI change.
+**Step 2.4:** Record: Obviously correct; copies an in-tree pattern.
+Gated so ARM64/non-IOMMU is unchanged. Regression risk is low if the
+companion iommu/msm crash is not reachable here (verified below).
+`msm_iommu_new()` signature differs in 6.1, so the backport is a small
+contextual insert, not a clean cherry-pick.
 
 ## Phase 3: Git history
 
-**Step 3.1: Blame**
-- Record:
-  - Mapping loop: `279b7e8a62cc` (“soc: qcom: rpmhpd: Add RPMh power
-    domain driver”, 2019)
-  - `enable_corner`: `e3e56c050ab6` (“soc: qcom: rpmhpd: Make power_on
-    actually enable the domain”, 2021) — this is what makes Retention
-    reachable as the enable vote
-  - Opt-in skip: `ddab91f4b2de5` (“Skip retention level for Power
-    Domains”, 2024), MXC only, `Cc: stable@vger.kernel.org # v5.17`
-  - This change: `7178817f19049` (2026-07-13)
+**Step 3.1:** Record: `iommu_attach_device()` in `msm_iommu_new()` is
+from `52da6d513183cf` (Jordan Crouse, 2020). Function exists since
+`871d812aa43e6` (2013). EBUSY check in this tree is `0286300e604555`
+(Jason Gunthorpe, 2022-05-09), in 6.1. Rockchip equivalent:
+`8490cad4dc4e2`, also in this tree.
 
-**Step 3.2: Fixes tag**
-- Record: None. Closest predecessor is `ddab91f4b2de5` (MXC-only skip).
-  Both `ddab91f4b2de5` and `e3e56c050ab6` are ancestors of this HEAD.
+**Step 3.2:** Record: No `Fixes:` tag. Bug is the interaction of ARM DMA
+attach + msm attaching its own domain + the 6.1 EBUSY check.
 
-**Step 3.3: File history**
-- Record: Recent work is mostly new SoC tables. No later revert of
-  default-skip. Eliza MXC/MMCX add was reverted for unrelated reasons
-  (`9fca7779ad185`). Standalone v1 patch, not part of a numbered series.
+**Step 3.3:** Record: Recent `msm_iommu.c` churn in this tree is
+unrelated (sgtable WARN, tlb ops). No prior msm ARM-DMA detach. Patch is
+`3/3` of “Fix GPU and display on ARM32 platforms using the MSM IOMMU”:
+1. `iommu/msm: track a context master per device and IOMMU`
+2. `iommu/msm: use the IOMMU device for page table allocation`
+3. this commit
 
-**Step 3.4: Author**
-- Record: Mike Tipton (Qualcomm); this is his only recent commit on
-  `drivers/pmdomain/qcom/`. Konrad reviews rpmhpd regularly. Ulf is the
-  pmdomain maintainer.
+Cover letter: all three needed on **mainline**; patches are independent
+for different maintainers.
 
-**Step 3.5: Dependencies**
-- Record: Needs `enable_corner` + Retention skip `continue` in
-  `rpmhpd_update_level_mapping()`. Both exist here. Applies standalone
-  on a tree that still has `skip_retention_level`. No other patches
-  required.
+**Step 3.4:** Record: Dmitry Baryshkov is a Qualcomm/msm DRM maintainer;
+many msm commits in this tree. Konrad reviewed this patch.
 
-## Phase 4: Mailing list / external
+**Step 3.5:** Record: Applies standalone to 6.1’s attach site. Patch 1’s
+fatal NULL deref is blamed on `da33e87bd2bf` (“iommu: Handle yet another
+race around registration”) — **not** in this tree (`git merge-base --is-
+ancestor` → no). Patch 2’s crash stack uses `msm_iommu_identity_attach`,
+which **does not exist** in 6.1 `drivers/iommu/msm_iommu.c`. Those two
+are not prerequisites for this -EBUSY fix here.
 
-**Step 4.1: Original discussion**
-- Record: `b4 dig -c 7178817f19049` →
-  https://patch.msgid.link/20260629-rpmhpd-skip-
-  ret-v1-1-d94180ad9a29@oss.qualcomm.com
-- Series: **v1 only** (no v2/v3).
-- Thread (mbox): Ulf Hansson: “Applied for next, thanks!” No NAKs, no
-  stable nomination, no reviewer risk flags.
+## Phase 4: Mailing list
 
-**Step 4.2: Recipients (`b4 dig -w`)**
-- Record: Ulf Hansson, linux-arm-msm, linux-pm, linux-kernel, Bjorn
-  Andersson, Konrad Dybcio, Taniya Das (author of the MXC skip), Fenglin
-  Wu. Right lists and people.
+**Step 4.1:** Record: `b4 dig -c 140b134753026` →
+https://patch.msgid.link/20260730-fix-qcom-
+smmu-v2-3-18e0daf2d836@oss.qualcomm.com
+v1 and v2 same day. v2: dropped a `dev_warn` tweak (Konrad); rewrote
+patch 2 (Robin Murphy). Applied version is v2 3/3. Lore HTTP 403/503;
+thread recovered via `b4 dig -m`. No NAKs in the saved mbox. No reviewer
+`Cc: stable`.
 
-**Step 4.3: Bug report**
-- Record: No public user/syzbot/bugzilla report. Failure mode is
-  described by the Qualcomm author from platform bring-up.
+**Step 4.2:** Record: To/Cc included Rob Clark, Will Deacon, Joerg
+Roedel, Robin Murphy, dri-devel, iommu, linux-arm-msm, freedreno. Konrad
+Reviewed-by on this patch.
 
-**Step 4.4: Related series**
-- Record: Standalone. Extends `ddab91f4b2de5` rather than depending on a
-  multi-patch series.
+**Step 4.3:** Record: Author is the reporter; tested on IFC6410.
+Concrete dmesg for GPU and KMS probe `-16`.
 
-**Step 4.5: Stable list**
-- Record: lore.kernel.org/stable fetch returned 403. UNVERIFIED whether
-  stable@ discussed this subject. The 2024 MXC skip *was* Cc:stable.
+**Step 4.4:** Record: Series of three; this patch is drm/msm-only. Cover
+letter: “only fixing all of them makes the board usable” on mainline.
+For 6.1, the other two fix post-6.1 IOMMU-core behavior.
 
-## Phase 5: Semantic / call graph
+**Step 4.5:** Record: No stable@ discussion found
+(lore.kernel.org/stable search not usable here; mbox has no stable
+nomination).
 
-**Step 5.1: Functions**
-- Record: `rpmhpd_update_level_mapping()` (changed), `rpmhpd_power_on()`
-  / `rpmhpd_set_performance_state()` (consumers of `enable_corner`,
-  unchanged).
+## Phase 5: Code semantics
 
-**Step 5.2: Callers**
-- Record: `rpmhpd_update_level_mapping()` ← `rpmhpd_probe()` only.
-  `rpmhpd_power_on()` is `generic_pm_domain.power_on`, called from genpd
-  (including parent-on for child GDSCs). Probe + device/runtime PM, not
-  a syscall-only path.
+**Step 5.1:** Record: `msm_iommu_new()`.
 
-**Step 5.3: Callees**
-- Record: `cmd_db_read_aux_data()`, then later
-  `rpmhpd_aggregate_corner()` → `rpmhpd_send_corner()` (RPMh votes).
+**Step 5.2:** Record: Callers in this tree:
+- `adreno_iommu_create_address_space()` → GPU probe (`adreno_gpu.c`)
+- `mdp4_kms` init (`mdp4_kms.c`) → display
+- `msm_kms_init_aspace()` (`msm_drv.c`) → MDP/DPU
+- `a6xx_gmu.c` (a6xx; not apq8064)
 
-**Step 5.4: Reachability**
-- Record: Yes, from normal Qualcomm device probe. Clock-controller GDSCs
-  are subdomains of rpmhpd (often MMCX). Userspace does not need a
-  special trigger; enabling display/video/camera clocks is enough.
+Probe-time, not IRQ/hot path.
 
-**Step 5.5: Similar patterns**
-- Record: Only MXC used `skip_retention_level`. MMCX/`mmcx_w_cx_parent`
-  did not. That matches “instead of adding more special cases for MMCX.”
+**Step 5.3:** Record: After the new detach: `iommu_attach_device()`.
+Detach uses `arm_iommu_detach_device` / `arm_iommu_release_mapping`
+(exported in this tree).
 
-## Phase 6: This tree only
+**Step 5.4:** Record: Reachable from platform probe of adreno/mdp4 when
+the device is IOMMU-mapped. Userspace is not needed; boot on apq8064
+with `qcom_defconfig` is enough.
 
-**Step 6.1: Does the buggy code exist here?**
-- Record:
-  - Local tree: **Linux 7.3.0-rc4** (`v7.3-rc4-27-gf0100363d8c37`,
-    Makefile `VERSION=7 PATCHLEVEL=3`).
-  - `drivers/pmdomain/qcom/rpmhpd.c` is present. Pre-commit code had
-    `skip_retention_level` only on MXC.
-  - `7178817f19049` is already an ancestor of HEAD (in v7.3-rc1; **not**
-    in v7.2). Current file already skips Retention unconditionally.
-  - Bug class (Retention as `enable_corner`) dates to `e3e56c050ab6`
-    (2021) whenever cmd-db lists Retention; MMCX Retention on newer
-    chips is why this default change was made. That hardware **is**
-    represented in this 7.3 tree.
+**Step 5.5:** Record: Same pattern in this tree:
+`rockchip_drm_dma_attach_device()`, `exynos_drm_dma.c`.
 
-**Step 6.2: Backport difficulty**
-- Record: Against current HEAD the patch is already applied (forward
-  apply would fail). Against 7.3 immediately before this commit it is a
-  clean apply (same file layout, `skip_retention_level` present). No
-  extra backport rework for this tree’s rpmhpd.c.
+## Phase 6: This checkout (6.1.188)
 
-**Step 6.3: Related fixes already here**
-- Record: MXC-only skip (`ddab91f4b2de5`) is here; it does **not** cover
-  MMCX/CX/etc. `2a93c6cbd5a70` (enabled_corner aggregation) is a
-  different bug (peer off during sync_state). No substitute for this
-  commit.
+**Step 6.1:** Record: Tree is **6.1.188** (`pending-6.1`,
+`p-6.1-11-gffee1c0de6cf2`). Candidate `140b134753026` is **not** an
+ancestor of HEAD (`name-rev`: `tags/next-20260821~61^2`).
 
-## Phase 7: Subsystem context
+Buggy code is here:
 
-**Step 7.1**
-- Record: `drivers/pmdomain/qcom/` — Qualcomm RPMh power domains.
-  **IMPORTANT** (not core mm/fs, but used on a large set of Snapdragon
-  phones, laptops, and embedded boards). Maintainer: Ulf Hansson
-  (`GENERIC PM DOMAINS`).
+```402:425:drivers/gpu/drm/msm/msm_iommu.c
+struct msm_mmu *msm_iommu_new(struct device *dev, struct iommu_domain
+*domain)
+{
+        ...
+        ret = iommu_attach_device(iommu->domain, dev);
+        if (ret) {
+                kfree(iommu);
+                return ERR_PTR(ret);
+        }
+        return &iommu->base;
+}
+```
 
-**Step 7.2**
-- Record: Active (new SoC tables: Nord, Hawi, Eliza, Kaanapali, Glymur,
-  etc.). The Retention default is independent of those tables.
+Same EBUSY test in `drivers/iommu/iommu.c` `__iommu_attach_group()`.
+`arch_setup_dma_ops()` → `arm_setup_iommu_dma_ops()` attaches the ARM
+mapping. `arch/arm/configs/qcom_defconfig` has `CONFIG_MSM_IOMMU=y`,
+`CONFIG_ARM_SMMU=y` (selects `ARM_DMA_USE_IOMMU`),
+`CONFIG_ARCH_MSM8960=y`, `CONFIG_DRM_MSM=m`. DT: `qcom-
+apq8064-ifc6410.dts`, GPU `adreno-3xx@4300000`, MDP `mdp@5100000`.
+
+**Step 6.2:** Record: Minor backport. 6.1 `msm_iommu_new(dev, domain)`
+vs later `msm_iommu_new(dev, quirks)` with `iommu_paging_domain_alloc` /
+`kzalloc_obj`. Insert the detach block before the existing
+`iommu_attach_device()` and add the same `#if CONFIG_ARM_DMA_USE_IOMMU`
+stubs rockchip already uses.
+
+**Step 6.3:** Record: No msm ARM-DMA detach in this tree.
+
+## Phase 7: Subsystem
+
+**Step 7.1:** Record: `[drm/msm IOMMU] [IMPORTANT]` — not core mm/net,
+but GPU+display on Qualcomm ARM32. Official `qcom_defconfig`.
+
+**Step 7.2:** Record: msm DRM is active; this ARM32 IOMMU attach path is
+old and stable.
 
 ## Phase 8: Impact and risk
 
-**Step 8.1: Who is affected**
-- Record: Qualcomm rpmhpd platforms (`CONFIG_QCOM_RPMHPD`), especially
-  SoCs whose cmd-db advertises Retention on MMCX or other non-MXC rails.
-  Not universal; not staging.
+**Step 8.1:** Record: ARM32 Qualcomm with `CONFIG_ARM_DMA_USE_IOMMU` and
+msm DRM+IOMMU — `qcom_defconfig`, apq8064 (IFC6410, Nexus 7 flo, etc.).
 
-**Step 8.2: Trigger**
-- Record: Common: child GDSC on, parent rpmhpd has no OPP. Happens at
-  probe/runtime PM. Unprivileged userspace can cause it indirectly by
-  using multimedia devices; it also happens at boot when those
-  controllers probe.
+**Step 8.2:** Record: Every boot/probe of GPU and display. Not a race.
+Unprivileged userspace not required.
 
-**Step 8.3: Failure mode**
-- Record: GDSC stuck powering on → device/controller hang, probe
-  failure, missing display/video/camera (or boot issues if that path is
-  on the critical path). Severity: **HIGH** (hardware hang), not a
-  KASAN/UAF class crash.
+**Step 8.3:** Record: Probe `-EBUSY` → no GPU, no display. Severity
+**HIGH** for those boards (board graphics unusable). Not a generic
+panic.
 
-**Step 8.4: Risk-benefit**
-- Record:
-  - **Benefit:** Prevents GDSC/parent-rail hangs on Qualcomm platforms
-    in this tree, including MMCX without extending a per-rail flag list.
-  - **Risk:** Low. 14-line change; no-op if Retention is absent from
-    cmd-db; MXC behavior unchanged; Qualcomm + maintainer reviewed.
-  - **Ratio:** Benefit > risk.
+**Step 8.4:** Record: Benefit high for affected ARM32 qcom; risk low
+(config-gated, copies in-tree pattern, ~15 lines in one function).
+Companion mainline crashes are not the 6.1 detach path
+(`msm_iommu_identity_attach` missing; 6.1 `arm_iommu_detach_device`
+NULLs `dma_ops` after detach, and this patch’s extra `release_mapping`
+runs with `dma_ops` already NULL).
 
 ## Phase 9: Synthesis
 
-**Step 9.1: Evidence**
+**Evidence FOR:**
+- Real, tested probe failure: GPU+KMS `-EBUSY` on IFC6410
+- Mechanism present in 6.1 (attach + EBUSY check + ARM DMA mapping)
+- Official `qcom_defconfig` enables the triggering config
+- Small, matches rockchip/exynos already in this tree
+- Reviewed by Konrad Dybcio; msm maintainer author
+- Hardware-workaround class (existing driver, existing boards)
 
-For:
-- Concrete hang: parent RPMh PD at Retention → child GDSC stuck on.
-- Call path and DT consumers verified in this tree.
-- Small, obviously correct extension of an existing skip that was
-  already Cc:stable for MXC.
-- Safe no-op when Retention is not in cmd-db.
-- Reviewed by Konrad, applied by Ulf; Taniya Das (original skip author)
-  was on Cc.
-- This 7.3 tree has rpmhpd, `enable_corner`, `skip_retention_level`, and
-  MMCX users.
+**Evidence AGAINST:**
+- Cherry-pick does not apply cleanly (`msm_iommu_new` signature)
+- Series 3/3; cover letter says all three needed on mainline
+- ARM32 / older SoCs only
+- Not a UAF/security/panic by itself
 
-Against:
-- No `Fixes:` / public reproducer / syzbot (not a negative per rules).
-- Default change for all rails, not only MMCX (mitigated: Retention skip
-  is a no-op where unused).
-- lore.kernel.org/stable search could not be fetched (403).
+**Unresolved:** Whether incomplete multi-IOMMU stream-ID programming
+(patch 1, “wrong for years”) still limits display/GPU quality after
+attach succeeds. That did not block probe; this patch fixes the probe
+blocker.
 
-**Step 9.2: Stable rules**
-1. Obviously correct and tested? **PASS** — v1 accepted, maintainer
-   applied, Qualcomm review.
-2. Real user-visible bug? **PASS** — GDSC stuck on parent enable.
-3. Important (hang/corruption/security)? **PASS** — hardware hang on a
-   widely used SoC family; HIGH, not a panic.
-4. Small and contained? **PASS** — +9/−5, one file.
-5. No new features/APIs? **PASS** — same skip, defaulted; no userspace
-   API.
-6. Can apply to this tree? **PASS** — 7.3 has the pre-image; the commit
-   is in 7.3-rc1.
+**Stable rules:**
+1. Obviously correct and tested? **PASS** (in-tree pattern; IFC6410)
+2. Real bug affecting users? **PASS** (`qcom_defconfig` apq8064)
+3. Important? **PASS** (complete GPU+display failure; quirk/enablement
+   exception)
+4. Small? **PASS** (+22 lines, one file; small 6.1 adapt)
+5. No new features/APIs? **PASS**
+6. Can apply to this tree? **PASS** (minor context adapt)
 
-**Step 9.3: Exception category**
-- Record: Hardware workaround (skip a non-operational corner), same
-  class as the 2024 MXC Retention skip.
+**Exception:** Hardware workaround for ARM32 IOMMU vs driver-managed
+domain, same class as existing DRM ARM DMA detach.
 
-**Step 9.4: Decision**
-This tree is 7.3.0-rc4. The rpmhpd driver, the Retention-
-as-`enable_corner` bug, and MMCX parent-GDSC consumers are all here. The
-change is a small, correct hang fix, not a feature. It should be in this
-tree.
+This tree is 6.1.188. The attach/`-EBUSY` bug is here, the devices and
+defconfig are here, and the mainline series mates that crash on later
+IOMMU core behavior are not required for this fix.
 
----
-
-### What it solves for users of this tree
-
-Without it, enabling a Qualcomm GDSC whose parent RPMh rail (often MMCX)
-has no OPP votes Retention. That rail cannot actually run there, so the
-GDSC never finishes power-on. Display, video, camera, and similar
-controllers that list `power-domains = <&rpmhpd RPMHPD_MMCX>` hit this
-on probe or runtime PM. Skipping Retention when building the cmd-db map
-makes the min enable corner the first real operational level.
-
-### Risk vs benefit
-
-Benefit is avoiding a platform hang on common Qualcomm PM paths. Risk is
-low: SoCs without Retention in cmd-db are unchanged; MXC already skipped
-Retention; HLOS is not supposed to use Retention.
-
-### Concerns
-
-No public reproducer. Stable-list discussion unverified (HTTP 403).
-Slightly higher min vote on rails that listed Retention is intended, not
-a silent functional change for rails that never had it.
-
-### Verification
-- [Phase 1] Parsed tags: author/reviewer/maintainer SOBs only; no
+Verification:
+- [Phase 1] Parsed tags: Reviewed-by Konrad; lore/patchwork links; no
   Fixes/stable/syzbot
-- [Phase 2] Diff: +9/−5 in `rpmhpd.c`; drop `skip_retention_level`;
-  always skip `RPMH_REGULATOR_LEVEL_RETENTION` (16)
-- [Phase 2] `rpmhpd_power_on()` uses `max(pd->corner,
-  pd->enable_corner)` — verified in file
-- [Phase 2] GDSC subdomain attach in `gdsc_register()` — verified
-- [Phase 2] DT MMCX consumers in sm8450/sm8550/sm8650/sm8750 dtsi —
-  verified
-- [Phase 3] `git describe HEAD` / `make kernelversion`: v7.3-rc4 /
-  7.3.0-rc4
-- [Phase 3] `git merge-base --is-ancestor 7178817f19049 HEAD`: yes; not
-  in v7.2; in v7.3-rc1
-- [Phase 3] Blame: mapping 279b7e8a62cc (2019); enable_corner
-  e3e56c050ab6 (2021); MXC skip ddab91f4b2de5 (2024)
-- [Phase 3] Pre-image: `skip_retention_level` only on mxc/mxc_ao; mmcx
-  had no flag
-- [Phase 4] `b4 dig -c 7178817f19049`: lore/msgid `20260629-rpmhpd-skip-
-  ret-v1-1-d94180ad9a29@oss.qualcomm.com`
-- [Phase 4] `b4 dig -a`: v1 only; Ulf “Applied for next”; no NAK
-- [Phase 4] `b4 dig -w`: Ulf, Bjorn, Konrad, Taniya Das, linux-arm-msm,
-  linux-pm
-- [Phase 4] UNVERIFIED: lore.kernel.org/stable (403)
-- [Phase 5] `rpmhpd_update_level_mapping()` called only from
-  `rpmhpd_probe`
-- [Phase 6] Post-fix code already in this checkout; related MXC skip
-  present and insufficient
-- [Phase 8] Failure mode: GDSC stuck on — HIGH hang, Qualcomm-specific
+- [Phase 2] Diff: +22 in `msm_iommu_new()`, detach ARM mapping then
+  `iommu_attach_device()`
+- [Phase 3] Blame: attach from `52da6d513183cf` (2020); EBUSY
+  `0286300e604555` in this tree; rockchip detach `8490cad4dc4e2` in this
+  tree
+- [Phase 3] `git merge-base --is-ancestor 140b134753026 HEAD` → no
+  (commit is linux-next, not 6.1)
+- [Phase 3] Companion Fixes `da33e87bd2bf` not in 6.1; no
+  `identity_attach` in 6.1 msm IOMMU
+- [Phase 4] `b4 dig -c 140b134753026` / `-a` / `-w` / `-m`: v2 3/3,
+  cover letter, Konrad R-b, Robin feedback on patch 2
+- [Phase 5] Callers: adreno, mdp4, `msm_kms_init_aspace` at probe
+- [Phase 6] `git describe HEAD` / Makefile: 6.1.188 pending-6.1; buggy
+  `msm_iommu_new()` at line 419
+- [Phase 6] `qcom_defconfig`: MSM_IOMMU=y, ARM_SMMU=y, DRM_MSM=m,
+  ARCH_MSM8960=y
+- [Phase 8] Failure: GPU/KMS probe `-16`/`-EBUSY`, no display; HIGH for
+  those boards
+- UNVERIFIED: live IFC6410 boot on 6.1.188 (author tested mainline)
 
 **YES**
 
- drivers/pmdomain/qcom/rpmhpd.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/msm/msm_iommu.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
-index 4c3cbf3abc750..fc61ec45755c3 100644
---- a/drivers/pmdomain/qcom/rpmhpd.c
-+++ b/drivers/pmdomain/qcom/rpmhpd.c
-@@ -41,7 +41,6 @@
-  * @addr:		Resource address as looped up using resource name from
-  *			cmd-db
-  * @state_synced:	Indicator that sync_state has been invoked for the rpmhpd resource
-- * @skip_retention_level: Indicate that retention level should not be used for the power domain
-  */
- struct rpmhpd {
- 	struct device	*dev;
-@@ -58,7 +57,6 @@ struct rpmhpd {
- 	const char	*res_name;
- 	u32		addr;
- 	bool		state_synced;
--	bool            skip_retention_level;
- };
+diff --git a/drivers/gpu/drm/msm/msm_iommu.c b/drivers/gpu/drm/msm/msm_iommu.c
+index 82a172f21a3ec..41a4eaa1b8fd9 100644
+--- a/drivers/gpu/drm/msm/msm_iommu.c
++++ b/drivers/gpu/drm/msm/msm_iommu.c
+@@ -7,6 +7,15 @@
+ #include <linux/adreno-smmu-priv.h>
+ #include <linux/io-pgtable.h>
+ #include <linux/kmemleak.h>
++
++#if defined(CONFIG_ARM_DMA_USE_IOMMU)
++#include <asm/dma-iommu.h>
++#else
++#define arm_iommu_detach_device(...)	({ })
++#define arm_iommu_release_mapping(...)	({ })
++#define to_dma_iommu_mapping(dev)	NULL
++#endif
++
+ #include "msm_drv.h"
+ #include "msm_gpu_trace.h"
+ #include "msm_mmu.h"
+@@ -746,6 +755,19 @@ struct msm_mmu *msm_iommu_new(struct device *dev, unsigned long quirks)
  
- struct rpmhpd_desc {
-@@ -176,7 +174,6 @@ static struct rpmhpd mxc = {
- 	.pd = { .name = "mxc", },
- 	.peer = &mxc_ao,
- 	.res_name = "mxc.lvl",
--	.skip_retention_level = true,
- };
+ 	mutex_init(&iommu->init_lock);
  
- static struct rpmhpd mxc_ao = {
-@@ -184,7 +181,6 @@ static struct rpmhpd mxc_ao = {
- 	.active_only = true,
- 	.peer = &mxc,
- 	.res_name = "mxc.lvl",
--	.skip_retention_level = true,
- };
- 
- static struct rpmhpd nsp = {
-@@ -974,7 +970,15 @@ static int rpmhpd_update_level_mapping(struct rpmhpd *rpmhpd)
- 		return -EINVAL;
- 
- 	for (i = 0; i < rpmhpd->level_count; i++) {
--		if (rpmhpd->skip_retention_level && buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
-+		/*
-+		 * Most HW won't function properly at Retention. The minimum
-+		 * operational level is the first level above Retention. The
-+		 * small subset of HW that can operate at Retention isn't
-+		 * controlled by HLOS. Skip the Retention level to avoid HW
-+		 * failures when the PD is enabled without first having an
-+		 * explicit OPP level set.
-+		 */
-+		if (buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
- 			continue;
- 
- 		rpmhpd->level[i] = buf[i];
++	/*
++	 * ARM32 attaches a DMA mapping domain to every IOMMU-backed device,
++	 * which would make attaching our own domain fail with -EBUSY.
++	 */
++	if (IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)) {
++		struct dma_iommu_mapping *mapping = to_dma_iommu_mapping(dev);
++
++		if (mapping) {
++			arm_iommu_detach_device(dev);
++			arm_iommu_release_mapping(mapping);
++		}
++	}
++
+ 	ret = iommu_attach_device(iommu->domain, dev);
+ 	if (ret) {
+ 		iommu_domain_free(domain);
 -- 
 2.53.0
 
