@@ -1,99 +1,122 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.49
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792448159;
-	b=Rjvsi3oJHcKl5+ojyCUzGyrRJgdVCqYe0lngdiEfnmZeBxo65fwiJ8pjXe8tZ2pw1w2M
-	 HidQJeEMx68pO2K38MZ2DkjirPqKYgAWUx2kej3aaTXzicQItEELSForU1XLq38r6yeLh
-	 cjiOpFj7Wpl+tEF8ZASEVdkdZhZnh22aWoo2bVmO+lhv+yYjohkEOJkTWZPwGceHfz0gP
-	 Rwg7AYqnaELFC9VPjuVIrOq2H7xQN6276dWQHNZXDWOJw0btQJsRJzlkZ5HFom8xxe51E
-	 ABq/cJh4j73pJWSk9oxK/Y3lgnoAUiqxMfhqZx4O7U/fsViA8anyVNhVipJMRmM1E/w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792448159;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type;
-	bh=rdyNMiM+XBlxdbJkKkHd/PYJIa4td4GcgNTCZeLOXak=;
-	b=d1NQazOPDB1Ir0zBq3ph40DFZ+VGahy8Q7Nrk6HVA7LcVh1NBx6p8Egoft8j+Jz19Jbj
-	 3EIMFrgw+BQq+KB92l1ZVuS0ZKMfk+PYZi9/GSoZsbGZflOyHRSNTcQ/i9vJ2Wro31Dar
-	 nE8N7Te0WqTMo2TjtdpXv6cnE7uppBcvod0M91B2/ZpjFNQ7F3MjIBEzXRXOwsIjUfqtH
-	 LHr2JGzKjg+kiHtHSO/P/v59xBEnQwQf7BSpf4kAcIZhsUpqz920qvYv3xjA5al0ubDrT
-	 WgxCiZdKFFlA4f/gcZjI2A561UZY6ebQxSMtXLMVohW0lr5FX0jbdmWKW8ovytwAELQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=google.com;
-	spf=pass smtp.mailfrom=google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=Z+jFQGuM;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.49
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792448622;
+	b=RBbjUaPXMR5i0jRrUv4ThLzT+/1THnWaK9mLxMcjOJLjFAlTgjo/hD6tTG9Tp/lw9o7n
+	 Zm1g7BZRdurKQtE20x3cseuhE5D4kSaTv1EVDxW6vTGbwGKMKNrmYXJul7vNCoMVmnblS
+	 0O4Kw7Yxc/tE7Z5Fvhix31tyh+7JJNWEoKYMWwL5r/d0QtMwFMIuc/dUNMaHb2BNEOsCo
+	 QHMGTnvH4o1eNWtJHkvfiQ2RxadlIEtxcOpgQg2PnI908hI15DVQSprn3a9X36b2fCcDK
+	 jDPwJqkHKAG0hzUPVtKzR8hWLeeoVn9HChr2bwA85l42twz+7potvD3BTTd7kWSCWtw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792448622;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=USQtrcdyhKNaGhzibqLvfNZ+j6mKmvxo61o+NFYHEyQ=;
+	b=x8MQyteSHSM+OOcXU+nS5VecnaxvxHHsHg1A5/nxavxKqpPxjda2CksiVygKiPAdKt5v
+	 hOTCEIk2ilgs8PajymHJWqlCswjEyJvvfKL+pz7XXDOBCbLygASNkVmAya1XOTCCXK3U9
+	 WkeBA2hS590cw7zSAKHNRheM2GlB10hm1rXp3GgOQa4zBjrO+jXG1lXtd3t2lZD3ZwND1
+	 rlvs3Tl+4RvD6ZznckysdVaRH9L1/jP0oaHcrkgWa8npDD1B2C6m0MCXPiSUhQsQB+Qo+
+	 LzWk1EoZdFD8XcxVEh9+Z+P+K0b+Fm3SpA8W3twBROJHU6zFaZ8S+Sut/UrHCDQOtiQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MOyG8FNL;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=G3Ch11jV;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8789C60A3813
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 22:15:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8789C60A3813
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E1A1606A31B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 22:23:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E1A1606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=Z+jFQGuM
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-18cdcfc05ffso1193798c88.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:15:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792448159; cv=none;
-        d=google.com; s=arc-20260327;
-        b=PCtzigqnAAmawZllv5bW5WfannB9BU2AqUcqNldJ0eaJHZXMiKSvlHOC/ecu3Jxci3
-         rtgGJ2OfzcXoRGU354Aww2OBWHYHjw6bCumpKB8pNmTp7+wBs9DRNyANMCBEGgMEDAEd
-         IT+0UxA0xNAtaHzuuWGB2qiulEVQGjZPl439oj0duC0uwPbO9GZW9s5TgzBN8o/xHwrB
-         MhNkIK+9CGzjzEuZQyEKrE8jLRxjHDwojZU7duObkvKVoBVnXl0n3H95ozG3Cj0IB1En
-         58SVtGemj0xTXaYvaNoeNwrs3C2/1CrbWvizgGOA70uHwi4LnTEtLy2/eWJaxf9/Lki8
-         qiUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=rdyNMiM+XBlxdbJkKkHd/PYJIa4td4GcgNTCZeLOXak=;
-        fh=+EtqxphG5xULjuDBaNTevsnneZ32TmMyZZ8dsy0IAPs=;
-        b=mDV4pkTV5wvBL9XbrRJ5WNoa6/7mKPspsldOvOg6vfSANXxmeVtAjfes06htW3WJNZ
-         yh/k6zRFm8PW4He2P6tkIADPLLK84L72rnri68wbN2W2O711LaR57RVFqD4hBLwn2g4Y
-         UMyaZ8rADWDihu/7N8Mxi/SwUb7y42is5dK9AEFSSDgrkwbcrK7i6p5/xHfgqRVchsdu
-         fYC1xJCEXLWj7wyDvjofu8F+RQk6RsgGUqWnum0tvT9OcixUbss31HcZi2PrMrl6+Xpb
-         uzJYn71CEZ+pnuCvC98AsPDHBsCD9YzoTu/tXPiBtOg5hpiJmXvzwiNSlBrg4yXv76hO
-         7d/Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MOyG8FNL;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=G3Ch11jV
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JLZf4C282809
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 22:23:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=USQtrcdyhKNaGhzibqLvfNZ+
+	j6mKmvxo61o+NFYHEyQ=; b=MOyG8FNLdkS0Bbku7VH4ETh2pCTkCzyCkkWzZB8l
+	0FCqOw1AqQOaSFp50KSRa5tW4dSwmgVbYPN0rMsqBDSnqYC1/3yYUFzFdmwzY5Se
+	BItn7HP7rNqabDAl+PZz2HXugJGtHwne6GxBine9emJQ1wKhTW/eO+9hsyuouCHS
+	+yFYL9ScyQw6wGX+9ognJ1Gy0DO2+ePmY3N5X3aQzGUgbH8fqJk3td7KxYMWW3Qh
+	WI7XA5ojY1EIHMpzRzWWjgV41SeJgNgswMKPtRGJQHgILDS5aiAYpdHx2l45nJns
+	ik1ygQbqKV5xTeoQoKkGyGyTN64570Iuzgx9IOUmuHEzXw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf48kes5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 22:23:40 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9308eafb465so801303085a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1792448159; x=1793052959; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rdyNMiM+XBlxdbJkKkHd/PYJIa4td4GcgNTCZeLOXak=;
-        b=Z+jFQGuM+R8S6JsKAZwv6LyJH/Y9IcZLAIfMG9qO65yJSvvkJip1WU0/fePsvMvrdM
-         yYvyExnOZ/UDbo7f5/ZNZaPmFvXELK/csgabOGxEJuKLv3eMRHi0j8pbMorAeDeWXPy6
-         if+FoWjEM68ZMFBEzCawUsBFbTdl1flplJBqveirwOvMyeYZfPexKkwMexScRX+ZMfIr
-         Ox3ItrAbZ0kYTh5IhPqoMCvUaY/xYlw4WvIn+vC4GqdKa9wnrVccc6+xEDQgnJXnzfr7
-         XOxauoWlOliEqhaFDaUzCO1Lwi3uB1phcKCIy2wQzogQzIQowzJ6dIzbRPaDUO00JOoX
-         JcKA==
+        d=oss.qualcomm.com; s=google; t=1792448620; x=1793053420; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=USQtrcdyhKNaGhzibqLvfNZ+j6mKmvxo61o+NFYHEyQ=;
+        b=G3Ch11jVMYTumPM2Je6+cRZCSheOmVMh6AqdOMwUdbwxlZCYxLTwoT+ZEKHuZvAXvC
+         OOquaUMAhpLpZ+0JytryzB+Q4e+nNKpvVTQQDm47/6IaIbM9y+4b0GIB+QInnqFC95Iq
+         l5iZ14bTock+BFMHlUy8jbBMS3AmpgopsicOS6LA99N97hP+W1BKR9K63GZTloq6wCsb
+         k19vRRG7Yy4e+lrFd1Au82JbAvzYQYTwrr4qqx61XJfaXbPIpxanLeqsmt7wf/iaLcb2
+         wFrKBbtq8LnPD6rCUoWH/xNpNvDPvnW0oCT2DR+jpiIM4ZgNMFRXgmG2yA//9ncbVUkg
+         R+Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792448159; x=1793052959;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=rdyNMiM+XBlxdbJkKkHd/PYJIa4td4GcgNTCZeLOXak=;
-        b=1tKf7SGFs4NbHKMA0sal2TNU8O4REHm+l/lDycjMfYC0qQI4xZkrMIIgBSr9rz1wWP
-         wgrbwJBXm2KUbwmDYh720XlhkQFVrM6VhWq/AAFtqsghzsm8VVwrpwhAnB2NmdXUfJyY
-         R2OACgbsoD8fcz7P4g0BR4V6xXEjYWCCxqhNnJpJERswegbOyx8K4VwewQdOakLaGVCR
-         oRb2ySes9XHOyHUtXJg4NnZtkxXWHN0r2wO/haBU/6d+C9O7gwrWIvCipY7RquU1YhnJ
-         /0zwDz7BNjtXu339sLfjWechBTysoI0fIzzpI2aNPQBpwTiJYXCpls58A89w2VrAUZsy
-         8Hbg==
-X-Forwarded-Encrypted: i=1; AKwUvBxWjLc16LRamU0j5jkfzEcuOAdMJYlvqr26vC0p63QOCtnGaPxIX/8y0qIywjmCyCH+UdgWwzfXpcf99K7A@vger.kernel.org
-X-Gm-Message-State: AFq9FYJb4DEPw1wLU12zuA8vvQr+TbzOBJoi6on0E+6DxR6WybV1wzYu
-	HA6AYTCZyelw+NFctcrXiK++G3SR6J6xNJtz3XD7uwaIn8L2ync1wDJRmK/KNy+HRTa5yzHvbB6
-	2LyHE8wdfCG88zvoO8Gh6RoLRt1E39Yu/uYBL7rnx
-X-Gm-Gg: AYBFou3yop7UILQlQPYesMz+AQOK3a759AewJeqtuNENYx3o53DA1h5wxYt5GVX8Agu
-	LPy30WThfL2S9FybIXkyi5+vQGjUEG4Qu/GFEg/hrHLRtTqrcfkIe3kyD+aySXqF4QCITRulLvp
-	GsA74lnJy8FTB2iVrFrdz7mpKNLkXNt7tuXIoFz+CpiEkrAqFeuVkQtO5QcSiHZMffAyqulPNDK
-	5x1nokaqZCD9mcLHT7tHSfh8GZQCUAbZwTOUFkRaIxG5V18QghSJakV6LmWczuCajsgcqzlwa0C
-	nEspO17KRh2vReRyNJ71TbRIhARc/pvUlCM5ksm+cdZQQ89n13A2vy+mGql4B+9O2lHN5atE2It
-	217bECdFYmb0=
-X-Received: by 2002:a05:7022:7e8d:b0:151:2e62:fe8a with SMTP id
- a92af1059eb24-18514256ee0mr13912895c88.40.1792448157775; Mon, 19 Oct 2026
- 15:15:57 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792448620; x=1793053420;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=USQtrcdyhKNaGhzibqLvfNZ+j6mKmvxo61o+NFYHEyQ=;
+        b=E0zkMN65FcRvtaYgkFR83keUX1/qziNuGccz7GZuoodFfyI7+A9FxJgo1kcB6JEwfg
+         YbScdwh7wmGM2K3k7R7S4vwnaCR8JhBUswRUd5ShsGmfw+/HRN4Z5CIKAD6qJk7hAlNt
+         4foLJcTASOjD2uSh6Z11XcTL9YQOzqD0TnMfRrETb4QInlCEnGC7kbg6tIFXDLiedL+P
+         YYOuatc2r8ZJWGcRAIZb5fOEau/8znZSph3s2QnNy1nZMVWd1da23rkpDvpedGdIEv+s
+         dKB9wZHw3LktISPVXnXB5O15DZW74yCHhg16sziQBhSOqgrfNNagsOF83gB9+D3YujLw
+         6Yww==
+X-Gm-Message-State: AFq9FYICZ3/u1G2O1fz5NoUqulWX8Ym02C9mWnhOu0qxT9ZG6BT4zk/g
+	wvuZMOTnxtSVFISXqXRV29+3Pj9YRR8vVCvBDsSnva6JXVl6pyw2d70JfujyO6aCknWBGAOL0Vi
+	OLmVfNa+PAgnQqs7Lb6GVTjhgAtTMvVHD9SaZvqhzRMnD8qBHo5Y/s+P3WfauDhTlyHtp
+X-Gm-Gg: AYBFou0/bWfDyp6VZZ/a0TR1lQuc9UhH3/SecYrmJ8YF/JewVjLnq0hGEXMfmslUjBj
+	zvCl8ZO7arcD4kP4u/OFPL+wmKSTU4sBRJvn+nLEruFAmSdyvGP9yxlxLLaRPhzWk7/Utvb4o4M
+	DBCKHKJo/WQpDUg40ihc9vp6SASr/kFfO4Huv4V8EjNJjfPakbN2jTCqtxFWCufNtDVEGI/+d5J
+	AzHhwcFknEFwASlVxbKuuXzGpmQiQJmTXeU7f74rJALtwp7lvteERKkXyxODgoyMdLjqJfacn1W
+	K2feJvOXEYDKZ1HQUJpu9r1OyWot0q7fDnoRLK1jJtkafXHgSbzqyoT8+MqRzAOYaze4ZzTwsiz
+	BmF9wcBi2qPnqZOLprihaUHeR0ttoWBYMYpjPFzgRwniQiTk1faYC1EyoYIyr7r4Op7CXOTnhNs
+	Uxzm+fawo5JNQs
+X-Received: by 2002:a05:620a:4456:b0:93c:5951:38e9 with SMTP id af79cd13be357-93f29d5e01dmr1497003885a.52.1792448619787;
+        Mon, 19 Oct 2026 15:23:39 -0700 (PDT)
+X-Received: by 2002:a05:620a:4456:b0:93c:5951:38e9 with SMTP id af79cd13be357-93f29d5e01dmr1496999585a.52.1792448619273;
+        Mon, 19 Oct 2026 15:23:39 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a3fd03dsm2279048e87.11.2026.10.19.15.23.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 15:23:37 -0700 (PDT)
+Date: Tue, 20 Oct 2026 01:23:35 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Linus Walleij <linusw@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Dmitry Baryshkov <lumag@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: Re: [PATCH v2] arm64: dts: qcom: sda660-inforce-ifc6560: fix ADV7535
+ interrupt pin
+Message-ID: <3g6yjybhsqzedb7q3ygpf3ej3btyap6y3dqpqcnh7ghhwduwre@gzl2kqc4o4x7>
+References: <20261019-ifc6560-adv-v2-1-ade625df3fe3@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,79 +126,70 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261003214516.128573-1-zoone.rupert@gmail.com>
- <asIRkK-uUz4FKQBN@ashevche-desk.local> <20261019004509.68409863@jic23-hlaptop>
-In-Reply-To: <20261019004509.68409863@jic23-hlaptop>
-From: Marco Elver <elver@google.com>
-Date: Tue, 20 Oct 2026 00:15:20 +0200
-X-Gm-Features: AclHuK_a0n-l-qngv8FVuS94ECxKd9nndQfPACOvwyf1hlN0WIx1_aiPJEfhYO8
-Message-ID: <CANpmjNOY2=M_G4uaRe+QENQRaet342UZDfXVkh3=gLaVBwW+Wg@mail.gmail.com>
-Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on
- mutex helpers
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: Andy Shevchenko <andriy.shevchenko@intel.com>, Rupesh Majhi <zoone.rupert@gmail.com>, 
-	Andy Shevchenko <andy@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Bart Van Assche <bvanassche@acm.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261019-ifc6560-adv-v2-1-ade625df3fe3@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA4OSBTYWx0ZWRfX83kmWGq4oeto
+ VrJIuZciQGjAECILJj2V/Cr/QC9WctPklICWhwAq/HJ01dtFtrju7Ccvi0pqsIYdp0AwYUMfWBz
+ ItoYV52OTnV8wbHCqvluaJUnucc22XCWAel8+OsWmGwib4n+0lxiw5yTHm1t1pkGWN7s4vIHr7i
+ n94qyhR3o7AE9f2JKWWPHuXWDXEp+1nwOCYgjZv+J9JVu99h4QuQabsfwLGThau86MvT3Z0oW2l
+ A4CGVoSq8h3vhxtIILx+DhchSPirq/+Ehdl9JEBHPVCIzRMa4Y+Xkrl08K3s7juO/rUU5Up7YDI
+ efQd7FlPC0QfJGaFgLid3RoxXXcLZk6h6hKrhUIVsFuPilQH7pvePZOaek3CEGyIENPAXUvt2h2
+ 1zhOWbbg2rgZX/2LCOEjteIHCy/50nhLqvwwW49KpV6gauncpOKi6ErFXG1NMKLc64grt0QM/bD
+ rVcMjkUjIvBLh4bc5/g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA4OSBTYWx0ZWRfX54oV22ZGcPmB
+ 7sFbRnK3kfjE1hldWoMWhNWumSD0o9Jy5sVuCLuun4HCW3dBDoOi6JfcLV/3zkihSQu853J5O9F
+ rL4343sXtcAgwTGAKQckZtAmYDiz8/4=
+X-Proofpoint-ORIG-GUID: qUbR0XT-OVPVnJ4fQiycwUiesObseeRI
+X-Authority-Analysis: v=2.4 cv=Qr/LTlyd c=1 sm=1 tr=0 ts=6ad6986c cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=ajiliMmGaEjDzu8pHK0A:9 a=CjuIK1q_8ugA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: qUbR0XT-OVPVnJ4fQiycwUiesObseeRI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-19_06,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190089
 
-On Mon, 19 Oct 2026 at 01:45, Jonathan Cameron <jic23@kernel.org> wrote:
->
-> On Sun, 4 Oct 2026 11:42:56 +0300
-> Andy Shevchenko <andriy.shevchenko@intel.com> wrote:
->
-> > On Sun, Oct 04, 2026 at 12:45:16AM +0300, Rupesh Majhi wrote:
-> > > The __acquires() and __releases() on adc5_gen3_mutex_lock() and
-> > > adc5_gen3_mutex_unlock() name adc, a local declared in the body. With
-> > > context analysis enabled for this file, the build fails:
-> > >
-> > >   error: use of undeclared identifier 'adc'
-> > >
-> > > The lock and unlock are split across these two helpers for the ADC_TM
-> > > driver, so mark them __context_unsafe() instead.
-> >
-> > Doesn't sound right to me. The __acquires() and __releases() IIRC are sparse
-> > annotations. If clang has something special, it needs to be addressed in
-> > the compiler-clang.h, no?
-> >
-> It's in compiler-context-analysis.h and for now I believe is clang
-> only.  Reuses the older sparse definitions. I think the intent is to avoid
-> churn.
->
-> I currently have no idea if this is the right fix. The only users
-> today are places where a lock is intentionally skipped.
->
-> +CC Marco and Bart and putting back the patch content for context.
->
-> > diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> > index c68c6c5f6aca..6a3cabedf4e8 100644
-> > --- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> > +++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-> > @@ -663,7 +663,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
-> >  }
-> >
-> >  void adc5_gen3_mutex_lock(struct device *dev)
-> > -     __acquires(&adc->lock)
-> > +     __context_unsafe(/* returns with adc->lock held */)
-> >  {
-> >       struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
-> >       struct adc5_chip *adc = iio_priv(indio_dev);
-> > @@ -673,7 +673,7 @@ void adc5_gen3_mutex_lock(struct device *dev)
-> >  EXPORT_SYMBOL_NS_GPL(adc5_gen3_mutex_lock, "QCOM_SPMI_ADC5_GEN3");
-> >
-> >  void adc5_gen3_mutex_unlock(struct device *dev)
-> > -     __releases(&adc->lock)
-> > +     __context_unsafe(/* releases adc->lock */)
-> >  {
-> >       struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
-> >       struct adc5_chip *adc = iio_priv(indio_dev);
+On Mon, Oct 19, 2026 at 05:30:08PM +0300, Dmitry Baryshkov wrote:
+> Probing the ADV7535 HDMI bridge fails on the IFC6560:
+> 
+>   gpio gpiochip3: (800f000.spmi:pmic@2:gpio@c000): gpiochip_lock_as_irq: tried to flag a GPIO set as output for IRQ
+>   gpio gpiochip3: (800f000.spmi:pmic@2:gpio@c000): unable to lock HW IRQ 10 for IRQ
+> 
+> The bridge's interrupt line is PM660L GPIO11, but the board never
+> configures that pad. pmic_gpio_populate() reads back the state left by
+> the bootloader, which is PMIC_GPIO_MODE_DIGITAL_OUTPUT, so
+> pmic_gpio_get_direction() reports GPIO_LINE_DIRECTION_OUT and
+> gpiochip_lock_as_irq() refuses the line. Requesting the interrupt then
+> fails and the bridge does not probe.
+> 
+> Add a default pinctrl state switching the pad to digital input, applied
+> by pinctrl_bind_pins() before the driver requests the interrupt. The
+> ADV7535 INT pin is open-drain and pulled up on the board, so leave the
+> internal bias disabled.
+> 
+> Fixes: 34279d6e3f32 ("arm64: dts: qcom: sdm660: Add initial Inforce IFC6560 board support")
+> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Dropped extra empty line (Konrad)
+> - Added a note about pull-up for the IRQ line present on the PCB.
+> - Link to v1: https://patch.msgid.link/20260920-ifc6560-adv-v1-1-89b1435d00c2@oss.qualcomm.com
+> ---
+>  arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+> 
+Other than Sashiko's mention of output-disable, I'd also need to correct
+the PMIC that provides a GPIO, so there will be a v3.
 
-You could probably stick the whole
-iio_priv(dev_get_drvdata(dev->parent)) expression into a helper
-get_adc5_chip(...), and then
-__acquires/__releases(&get_adc5_chip(dev)->lock) should work. But
-that's only worth it if the declarations get the annotations, because
-if only the definitions have the annotation, any calls outside this
-particular TU ignore the annotations anyway, so __context_unsafe is
-reasonable if you don't want to do a larger change.
+-- 
+With best wishes
+Dmitry
