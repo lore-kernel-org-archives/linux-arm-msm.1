@@ -1,47 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95573633FFC;
-	Mon, 19 Oct 2026 14:05:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A86A064C3E8;
+	Mon, 19 Oct 2026 14:06:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418740; cv=none; b=BDPDBk02cOICmOAReUS+7QO1JEKy8OcXrNKotv5wYhqQ0xoa910LON8HtaGiQ8+IoZ9quTh2oQXhmSewe4ULi55ijJ+W+jW5rcCyrfE/6YQjESxlm4pcWk+pn/nCBHpdtSR4z4cKSn4nUA5XLU4d/QlFUh2YOy7IbIDQsAyx+Ys=
+	t=1792418819; cv=none; b=BgwcuSm9joGWBiVWrzbuZxOUNChGrrqb145rFpjUvNO228LKrV0nXHAaIvPUKTPxq38TbdpSOravy/tn7GGT9paOutjPFbshnMYRSFRgwKuwgDdZhG384rGWEM8nlVCTu7Yao3TiB0O9N7Fe0q5FCyh2qi3TAEkPqFrR68BejdA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418740; c=relaxed/simple;
-	bh=YLEW8b9yzMQh23dskidj1VjEIgIpLbNfFgxFzUnHCx0=;
+	s=arc-20240116; t=1792418819; c=relaxed/simple;
+	bh=5kkmdwrMH/wmy6jpesq6gVlly04q2jPYFmDF5eOpHuQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=D2kDTgCZQZW/SVr5eJPyr2XCMWR627tsveajIwfW5N8TdqVmMfSdfkUHV4bPHPVyRGQcmL8t1g4PrOZdBH/w31r7RAA1cYLbEYnVO5h+EZUjQpRXEGOMo5EeT4ayt50qmT2tf4SSQsaUh871NasoqrRyoJkxOQwQ8ruSnP+f9Go=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wu2GkV8J; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=ehMIvbZgd49hA4FLKrrOAddUqF8lITTqMr5dNCy6vLz9Ew8g0nSLqXEUWU2gZZta8DdcPCfSO9nCPZs9e07KeScUfLUaAdAMiE6z7TOn9sobLDoKyU6mSolD+CqWBbbXYHH8coP/j1s36eD0OT+c3v++sATOEf2bpQQmc7nZfxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jm50UZU4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wu2GkV8J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5157D1F000C4;
-	Mon, 19 Oct 2026 14:05:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jm50UZU4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9905D1F000C5;
+	Mon, 19 Oct 2026 14:06:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418737;
-	bh=/jENeapoUpAI6q7vl04UYeMepe/HJl9hNAbGI/jzFjc=;
+	s=k20260515; t=1792418813;
+	bh=/Mc3j2iQZfPdOdiww2LD2SO549DpyjThkyyyKQ+ulRc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Wu2GkV8JyU/ge3t50zLChNMSpvHxcEHrufNR5Y70i7RGRwmE5MLlbud3AI1JZcNZR
-	 Agv3rKc/gkGyyW5zU4TdOtUwW0GyngW2bNtvutonAJKuOfrX+uo6AAGz+pFaKUDwkV
-	 A00f4MmLVHa0HXVCo7dwq2jk/g8y8NHO6E7DCnDbyCyGtr8+iEAuBxikD6b2Sls0He
-	 vFLYpkqP3xXUAn1UOOKIomQiomhi4Yr+odMGlArkWdzzcEHD3G+5XmUIDHFysT68ES
-	 q8Ae8bTUHC7eR/NRZIYw9khGUZsDzRyKV88oMon571leh8SyFRfleRpAdS94NdfVt2
-	 sdDT3OuQ22OPw==
+	b=jm50UZU4Ye2HI3mIozRfXbPz6uyb3YsA5amyKgDeC9u01kG1dgKHNnGPPgML5GnGk
+	 WdMkF0WWORPZpvjv51/SiPUV4YtRsm4nyRWtKAo5YZ+0LrKjkphouf6x0OL2KjjScA
+	 zFCk214Nmc3QWywp3kzOakvdRbCBzx4ZSIiKMkaVUVLn6LBlIPV0KYubne/MnZ2/pM
+	 M1M6aVL6MM17HItKf0NbfadI8WHWKjmhn81IoHnJy7Obg/Om+5NNe5E6cTKe8IA5/L
+	 qeD4QHNrTrLhAFEgaD0G3/8iL90l8Yz5A4uPem+0OE7blnaaAlP4UfmmJr+TT+HXGc
+	 A/t136Hd7djJw==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sashiko <sashiko-bot@kernel.org>,
+Cc: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Sasha Levin <sashal@kernel.org>,
-	lumag@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
+	jirislaby@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18] drm/msm: Fix barriers accessing ctx vm
-Date: Mon, 19 Oct 2026 09:52:31 -0400
-Message-ID: <20261019135441.1420968-460-sashal@kernel.org>
+	linux-kernel@vger.kernel.org,
+	linux-serial@vger.kernel.org
+Subject: [PATCH AUTOSEL 6.18-6.6] serial: qcom_geni: Disable closing_wait for console to prevent shutdown timeout
+Date: Mon, 19 Oct 2026 09:53:26 -0400
+Message-ID: <20261019135441.1420968-515-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -57,434 +54,426 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Rob Clark <robin.clark@oss.qualcomm.com>
+From: Aniket Randive <aniket.randive@oss.qualcomm.com>
 
-[ Upstream commit ae88499d71ce80ecd25c055eddddace108266321 ]
+[ Upstream commit acba38e675dd66f52925cb9edf9ed8db16335875 ]
 
-Don't rely on store ordering to protect us from caller seeing a
-partially initialized vm.
+During system power-off, systemd closes the console UART and blocks in
+tty_wait_until_sent() waiting for pending TX completion before
+uart_shutdown() can cancel pending TX operations. With the default
+closing_wait of 30s, this causes a watchdog reset when systemd is
+responsible for watchdog feeding.
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-Patchwork: https://patchwork.freedesktop.org/patch/743079/
-Message-ID: <20260729155609.20190-2-robin.clark@oss.qualcomm.com>
+Set closing_wait to ASYNC_CLOSING_WAIT_NONE in startup() for console
+ports to bypass tty_wait_until_sent() on close, allowing uart_shutdown()
+to cancel TX commands cleanly. This change doesn't impact regular ports
+functionality.
+
+Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+Link: https://patch.msgid.link/20260706093749.836121-1-aniket.randive@oss.qualcomm.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-The local tree is **v7.3-rc4** (mainline `7.3.0-rc4`). This commit is a
-real ARM memory-ordering fix in lazy GPU VM creation: without
-acquire/release, a concurrent ioctl can observe a partially initialized
-VM. The change is small, already in this 7.3 lineage, and is appropriate
-to keep here.
+This checkout is **v7.3-rc4** (`7.3.0-rc4`). The candidate is a small
+Qualcomm GENI UART console workaround for a 30s close-time TX drain that
+can watchdog-reset the box on power-off. The driver, `startup()`, and
+`closing_wait` path are all present here.
 
----
-
-## PHASE 1: COMMIT MESSAGE FORENSICS
+===============================================================
+PHASE 1: COMMIT MESSAGE FORENSICS
+===============================================================
 
 **Step 1.1: PARSE THE SUBJECT LINE**
-Record: **[drm/msm] [Fix] [barriers when publishing the lazily created
-context VM]**
+Record: **[serial/qcom_geni] [Disable] [skip console `closing_wait` so
+UART close does not stall shutdown]**
 
 **Step 1.2: PARSE ALL COMMIT MESSAGE TAGS**
 Record:
-- `Reported-by: Sashiko <sashiko-bot@kernel.org>` — AI review bot
-  (sashiko.dev), **not** syzbot; static/review finding, no reproducer
-- `Signed-off-by: Rob Clark` — MSM Adreno GPU maintainer (ignore any
-  Sasha Levin SOB)
-- `Patchwork: https://patchwork.freedesktop.org/patch/743079/`
-- `Message-ID: <20260729155609.20190-2-robin.clark@oss.qualcomm.com>` —
-  **patch 01/17** of a series (msgid `-2` after cover `-1`)
-- **No** `Fixes:`, **no** `Cc: stable`, **no** `Reviewed-by` / `Tested-
-  by` / `Acked-by` on the committed message (absence of stable tags is
-  expected)
+- **Fixes:** none (expected for this review pipeline)
+- **Reported-by / Tested-by / Reviewed-by / Acked-by:** none
+- **Cc: stable:** none (expected)
+- **Link:** https://patch.msgid.link/20260706093749.836121-1-
+  aniket.randive@oss.qualcomm.com
+- **Signed-off-by:** Aniket Randive (author); Greg Kroah-Hartman (TTY
+  maintainer). Ignore any Sasha Levin SOB — not on this commit.
 
 **Step 1.3: ANALYZE THE COMMIT BODY TEXT**
 Record:
-- **Bug:** lazy `ctx->vm` publication used a plain store; a concurrent
-  reader could see a non-NULL pointer before VM fields were visible
-- **Symptom:** caller observes a **partially initialized VM** (GPU
-  IOVA/page-table garbage, kernel deref of uninitialized `drm_gpuvm`
-  fields)
-- **Version info:** none in the message
-- **Root cause (author):** “Don't rely on store ordering” — classic
-  double-checked locking without acquire/release. MSM runs on ARM64,
-  where that ordering is **not** guaranteed
+- **Bug:** On power-off, systemd closes the console UART. Close blocks
+  in `tty_wait_until_sent()` for pending TX before the UART can cancel
+  that TX.
+- **Symptom:** Default `closing_wait` is 30s (`tty_port_init`: `(3000 *
+  HZ) / 100`). If systemd is the watchdog feeder, that stall causes a
+  **watchdog reset** instead of a clean power-off.
+- **Root cause (author):** GENI TX is command-based; drain waits for
+  completion, but cancel happens only later in `uart_shutdown()` /
+  driver shutdown. Chicken-and-egg.
+- **Fix:** In `qcom_geni_serial_startup()`, if `uart_console(uport)`,
+  set `tport->closing_wait = ASYNC_CLOSING_WAIT_NONE`. Regular UARTs
+  unchanged.
+- **Versions:** none named.
 
 **Step 1.4: DETECT HIDDEN BUG FIXES**
-Record: **Not hidden.** Explicit “Fix” plus a documented memory-ordering
-hole. The `mutex_lock` → `guard(mutex)` swap is incidental cleanup
-around the real barrier change.
+Record: Not a disguised cleanup. It is an explicit hang/watchdog fix
+using an existing tty_port flag.
 
----
-
-## PHASE 2: DIFF ANALYSIS
+===============================================================
+PHASE 2: DIFF ANALYSIS - LINE BY LINE
+===============================================================
 
 **Step 2.1: INVENTORY THE CHANGES**
 Record:
-- File: `drivers/gpu/drm/msm/msm_drv.c` — **+7 / -6** (13-line hunk)
-- Function: `msm_context_vm()`
-- Scope: **single-file surgical fix**
+- File: `drivers/tty/serial/qcom_geni_serial.c` — **+8 / −0**
+- Function: `qcom_geni_serial_startup()`
+- Scope: single-file, surgical, console-only
 
 **Step 2.2: UNDERSTAND THE CODE FLOW CHANGE**
-Record (before → after):
-- Fast path: plain `if (ctx->vm) return ctx->vm` → `vm =
-  smp_load_acquire(&ctx->vm); if (vm) return vm`
-- Slow path: `mutex_lock` / assign `ctx->vm` / `mutex_unlock` →
-  `guard(mutex)` then `smp_store_release(&ctx->vm, vm)`
-- Path: concurrent first-use of a DRM context (ioctl), not init-only and
-  not an error path
+Record:
+- **Before:** Console ports keep default 30s `closing_wait`. Last close
+  → `tty_port_close_start()` → `tty_wait_until_sent(tty, 30s)` if the
+  software TX buffer or UART FIFO is not empty.
+- **After:** Console ports skip that drain. Close proceeds immediately
+  so shutdown can continue.
+- **Path:** close/power-off of the console tty, not the hot TX path, not
+  non-console ports.
+
+Verified close chain:
+1. `tty_release()` → `uart_close()` → `tty_port_close()`
+2. `tty_port_close_start()` (tty_port.c:638-643) waits if `closing_wait
+   != ASYNC_CLOSING_WAIT_NONE`
+3. `tty_wait_until_sent()` waits on `!tty_chars_in_buffer(tty)`, then
+   `uart_wait_until_sent()` polls `ops->tx_empty`
 
 **Step 2.3: IDENTIFY THE BUG MECHANISM**
-Record: **[Synchronization / memory ordering + KCSAN-class data race]**
-- Double-checked locking: unlocked read of `ctx->vm` vs locked write
-- Broken mechanism: pointer published with a plain store; reader can use
-  the object before initialization is visible
-- Fix: standard publication pattern (`smp_store_release` /
-  `smp_load_acquire`)
+Record: **[Logic / hardware workaround]** GENI TX uses a sequencer
+command (`UART_START_TX`). If that command is still active, `tx_empty`
+(`SE_GENI_TX_FIFO_STATUS`) and the xmit fifo stay non-empty, so close
+waits the full 30s. Setting `ASYNC_CLOSING_WAIT_NONE` is the documented
+way to skip that wait (`tty_port.c:642-643`).
+
+Nuance (verified, not assumed): `tty_port_shutdown()` returns
+immediately when `port->console` is set, so **console close does not
+call driver `shutdown()`**. Hangup (`uart_hangup()` → `uart_shutdown()`)
+*does* shut the port down and does *not* use `closing_wait`. The 30s
+stall is the close-time wait itself. Skipping it still fixes the
+watchdog; the “so shutdown can cancel TX” wording is only partly
+accurate for the close path.
 
 **Step 2.4: ASSESS THE FIX QUALITY**
 Record:
-- **Obviously correct** DCL publication
-- Mutex still serializes creation; acquire/release only publishes the
-  pointer
-- `guard(mutex)` is equivalent to lock/unlock (cleanup.h)
-- Regression risk: **low**. Inner `if (!ctx->vm)` remains a plain load
-  **under the mutex** (fine). Return after the slow path is also under
-  the mutex, so mutex acquire pairs with the other thread’s
-  `smp_store_release`
-- Pre-existing issue **not** introduced here:
-  `msm_gpu_create_private_vm()` can return `ERR_PTR`/`NULL` and that
-  value was already stored; later `00dfa76bdfc2f` added `IS_ERR_OR_NULL`
-  before the release store
+- Quality: **obviously correct** for the stated goal.
+  `ASYNC_CLOSING_WAIT_NONE` is the uapi sentinel (`65535`).
+  `uport->state` is valid in `startup()` because `uart_port_startup()`
+  calls `ops->startup()` only after the port is bound.
+- Risk: last few console bytes on last close may not drain. That is
+  acceptable at power-off versus a watchdog reboot. Non-console ports
+  unchanged. No API/ABI change. Userspace can still override via
+  `TIOCSSERIAL`.
 
----
-
-## PHASE 3: GIT HISTORY INVESTIGATION
+===============================================================
+PHASE 3: GIT HISTORY INVESTIGATION
+===============================================================
 
 **Step 3.1: BLAME THE CHANGED LINES**
 Record:
-- Lazy VM helper: `6bf32afd37eb6` (“drm/msm: Lazily create context VM”,
-  2025-06-29)
-- Unlocked DCL + `init_lock`: `feb8ef4636a457` (“drm/msm: Add opt-in for
-  VM_BIND”, same day)
-- **First appeared:** **v6.17-rc1** (`git describe --contains` / `git
-  merge-base --is-ancestor 6bf32afd37eb6 v6.17`)
-- Present for many releases before 7.3
+- `qcom_geni_serial_startup()` introduced in **c4f528795d1ad**
+  (2018-03-20, “Add serial driver support for GENI based QUP”).
+- Default 30s `closing_wait` is in `tty_port_init()` and is old.
+- Bug is long-standing in this driver, not a last-month regression.
 
 **Step 3.2: FOLLOW THE FIXES: TAG**
-Record: **No `Fixes:` tag.** Buggy code is the lazy-VM DCL above.
-Confirmed ancestor of this HEAD.
+Record: No `Fixes:` tag. Not applicable.
 
 **Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES**
-Record (same series, after this commit):
-- `ea69d489d3a68` — queuelock → `ctxlock` (patch 02/17)
-- `2c26f9e46d395` — VM creation on `ctxlock` instead of static
-  `init_lock` (patch 03/17); **keeps** the acquire/release from this
-  patch
-- `00dfa76bdfc2f` — don’t cache `ERR_PTR` in `ctx->vm` (patch 14/17)
-This patch is **standalone**. Later patches refine locking/errors; they
-are not prerequisites for the barriers.
+Record: Standalone, not “patch X/Y”. Nearby later work (`dbe2afb952bdb`
+reboot quiesce, panic notifier) is a different problem (DMA/SMMU on
+reboot/panic), not a prerequisite. `a699213d4e6ef` “Fix blocked task” is
+an unrelated PM-runtime hang revert.
 
 **Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS**
-Record: **Rob Clark is the Qualcomm Adreno GPU maintainer**
-(`MAINTAINERS`: “DRM DRIVER for Qualcomm Adreno GPUs”). He authored the
-buggy lazy-VM code and this fix.
+Record: Aniket Randive has a few qcom-geni commits (this one; debug-
+console probe). Qualcomm platform engineer, not the TTY maintainer. Greg
+KH applied it.
 
 **Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS**
-Record: Needs `msm_context_vm()` / lazy `ctx->vm` (in this tree since
-6.17). Uses `guard(mutex)` and `smp_load_acquire`/`smp_store_release`
-(present in 7.3). **Can apply standalone.**
+Record: **None.** Uses `uart_console()`, `tty_port.closing_wait`, and
+`ASYNC_CLOSING_WAIT_NONE`, all older than this driver. Applies
+standalone. In this tree, later PM-runtime lines sit around the same
+function; the closing_wait hunk does not depend on them.
 
----
-
-## PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+===============================================================
+PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+===============================================================
 
 **Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION**
 Record:
-- `b4 dig -c ae88499d71ce8` matched patch-id; lore URL `https://patch.ms
-  gid.link/20260729155609.20190-2-robin.clark@oss.qualcomm.com`
-- `b4 dig -a` revisions: v1 (different subject) → **v2–v7 this
-  subject**; applied version is **v7 01/17** (latest)
-- Cover (v7 00/17): *“The VM is created lazily to give userspace a
-  chance to opt-in to VM_BIND. But Sashiko noticed a couple paths that
-  were not handling this properly.”*
-- **No NAK** in the saved thread. No human reviewer replies in that mbox
-  (only Sashiko)
-- Sashiko on this patch: called remaining `ctx->vm` plain reads /
-  `ERR_PTR` caching **pre-existing**, not regressions from this hunk
-- Direct lore/WebFetch: **403 (Anubis)**; used `b4 dig -m` instead
+- `b4 dig -c acba38e675dd`: **[PATCH V1]** https://patch.msgid.link/2026
+  0706093749.836121-1-aniket.randive@oss.qualcomm.com
+- `b4 dig -a`: **v1 only**; that is what was applied (2026-07-06 submit,
+  2026-07-10 by Greg).
+- Saved mbox: **patch only, no replies, no NAK, no Cc: stable from
+  reviewers.**
+- lore.kernel.org fetches returned 403; thread confirmed via b4 mbox +
+  Openwall/LKML mirrors.
 
 **Step 4.2: CHECK WHO REVIEWED THE PATCH**
-Record (`b4 dig -w`): To/Cc included `dri-devel`, `linux-arm-msm`,
-`freedreno`, Sashiko, **Dmitry Baryshkov, Abhinav Kumar, Jessica Zhang,
-Sean Paul, Marijn Suijten, David Airlie, Simona Vetter**. Right
-lists/maintainers; **no `Reviewed-by` on the commit**.
+Record (`b4 dig -w`): To Greg Kroah-Hartman, Jiri Slaby (TTY
+maintainers). Cc: linux-serial, linux-arm-msm, Krzysztof Kozlowski,
+Qualcomm/Linaro GENI people. No extra Reviewed-by; maintainer SOB is the
+review signal.
 
 **Step 4.3: SEARCH FOR THE BUG REPORT**
-Record: Sashiko is an **AI review bot**, not a fuzzer with a crash log.
-Cover letter confirms it flagged lazy-VM handling. Severity comes from
-the **code**, not a user bugzilla.
+Record: No syzbot, bugzilla, or public user report. Description matches
+an internal Qualcomm power-off/watchdog failure. No independent repro in
+the thread.
 
 **Step 4.4: CHECK FOR RELATED PATCHES AND SERIES**
-Record: Started as a small lazy-VM series, grew to **17 patches**. This
-one stayed patch 1 from v2 onward and does not depend on 02–17.
+Record: Single patch, not a series. Later “quiesce on reboot/panic”
+series is independent.
 
 **Step 4.5: CHECK STABLE MAILING LIST HISTORY**
-Record: lore.kernel.org/stable search **blocked (403)**. **UNVERIFIED**
-whether stable@ discussed this. No `Cc: stable` on the patch.
+Record: lore.kernel.org/stable search returned 403. No stable discussion
+found via web search. **UNVERIFIED** whether anyone already requested or
+rejected this for -stable.
 
----
+===============================================================
+PHASE 5: CODE SEMANTIC ANALYSIS
+===============================================================
 
-## PHASE 5: CODE SEMANTIC ANALYSIS
+semcode MCP is not available (only the `cursor` namespace).
+Callers/callees traced with grep/read.
 
 **Step 5.1: IDENTIFY KEY FUNCTIONS**
-Record: `msm_context_vm()`; callee `msm_gpu_create_private_vm()`.
+Record: `qcom_geni_serial_startup` (modified). Related:
+`tty_port_close_start`, `tty_wait_until_sent`, `uart_wait_until_sent`,
+`qcom_geni_serial_tx_empty`, `qcom_geni_serial_shutdown`.
 
 **Step 5.2: TRACE CALLERS**
-Record (this tree):
-- `msm_ioctl_gem_info_iova` / `msm_ioctl_gem_info_set_iova` — GEM ioctls
-- `msm_ioctl_gem_submit` — GPU submit (hot path)
-- `msm_ioctl_vm_bind` — VM_BIND ioctl
-- `msm_gem_new_handle` — `MSM_BO_NO_SHARE` GEM_NEW
-- `msm_submitqueue_create` — VM_BIND submitqueue
-- `adreno_get_param` — GET_PARAM
-All are **userspace ioctl paths** except destroy/close helpers that read
-`ctx->vm` after lifetime rules.
+Record: `.startup = qcom_geni_serial_startup` is in both FIFO and DMA
+`uart_ops`. Called from `uart_port_startup()` on open (and
+`uart_set_info` / console re-init). Reachable from userspace open of the
+console tty and from console registration.
 
 **Step 5.3: TRACE CALLEES**
-Record: `msm_gpu_create_private_vm()` may call
-`gpu->funcs->create_private_vm`, take a pid ref, or fall back to the
-global VM. Returned object is expected to be fully set up **before** the
-pointer is published — that is exactly what `smp_store_release` is for.
+Record: `uart_console()`, assignment to `tport->closing_wait`. No
+alloc/lock in the new code.
 
 **Step 5.4: FOLLOW THE CALL CHAIN**
-Record: Unprivileged GPU client (Mesa/VK) opens `/dev/dri/renderD*`,
-then two threads hit GEM_SUBMIT/GEM_NEW/GET_IOVA before VM exists.
-**Reachable from userspace. Common** for multi-threaded GL/Vulkan.
+Record: Userspace (systemd) close of `/dev/ttyMSM*` / console →
+`tty_release` → `uart_close` → `tty_port_close_start` → 30s wait. **Yes,
+reachable from userspace.** Trigger is power-off/getty stop with GENI as
+console, not an obscure debug path.
 
 **Step 5.5: SEARCH FOR SIMILAR PATTERNS**
-Record: Other `ctx->vm` reads still exist (`msm_gem_close`,
-`a6xx_set_pagetable`, `msm_submitqueue` destroy, `EN_VM_BIND`).
-Close/destroy/submit-pagetable run after VM exists or on teardown.
-Sashiko noted `msm_gem_close` still uses a plain load; that does not
-make **this** publication barrier wrong.
+Record: No other serial driver sets `closing_wait =
+ASYNC_CLOSING_WAIT_NONE` at startup. USB-serial/cdc-acm/mxser only
+expose it via ioctl. This is GENI-specific policy, not a tree-wide tty
+change.
 
----
-
-## PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+===============================================================
+PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+===============================================================
 
 **Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?**
-Record:
-- `git describe HEAD` → **v7.3-rc4-27-gf0100363d8c37**; `make
-  kernelversion` → **7.3.0-rc4**
-- Buggy DCL **did exist** here (6.17 through 7.2); this commit is
-  **already an ancestor of HEAD** and is in **v7.3-rc1** (`git merge-
-  base --is-ancestor ae88499d71ce8 v7.3-rc1`; **not** in v7.2)
-- Current `msm_context_vm()` still uses `smp_load_acquire` /
-  `smp_store_release` (later switched lock to `ctxlock`)
+Record: **Yes.**
+- Tree: `v7.3-rc4-27-gf0100363d8c37`, Makefile `VERSION=7 PATCHLEVEL=3
+  SUBLEVEL=0 EXTRAVERSION=-rc4`
+- Driver: `drivers/tty/serial/qcom_geni_serial.c` since 2018
+- `qcom_geni_serial_startup()` present
+- `tty_port_close_start()` still waits on `closing_wait`
+- Commit **acba38e675dd** is an ancestor of HEAD (already applied here).
+  That is not used as “already selected”; it confirms the surrounding
+  code matches.
 
 **Step 6.2: CHECK FOR BACKPORT COMPLICATIONS**
-Record: Against **current HEAD**, this exact diff would **not** apply
-(lock is `ctxlock`, plus `IS_ERR_OR_NULL`). Against the **pre-fix**
-`msm_context_vm()` that this 7.3 series actually shipped from, it
-applied cleanly (that is how it landed). Difficulty for this series:
-**clean when needed; already present now**.
+Record: **Clean in this tree** (already applied). Context in this tree
+has later PM-runtime/`tx_kick_enabled` lines around startup; the hunk
+itself is still the same 8 lines.
 
 **Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE**
-Record: This fix plus later series commits (`2c26f9e46d395`,
-`00dfa76bdfc2f`, …) are already in this checkout. No alternate older
-barrier fix.
+Record: This *is* the fix. No alternate fix for console `closing_wait`.
+Reboot/panic quiesce commits do not replace it.
 
----
-
-## PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
+===============================================================
+PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
+===============================================================
 
 **Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY**
-Record: **drm/msm (Qualcomm Adreno GPU)** — **IMPORTANT** (phones,
-Chromebooks, embedded), not core mm/vfs, not staging.
+Record: **serial / qcom_geni** (`CONFIG_SERIAL_QCOM_GENI`, optional
+`CONFIG_SERIAL_QCOM_GENI_CONSOLE`). **IMPORTANT** (not core mm/VFS):
+Snapdragon phones, laptops, and embedded boards. Console + watchdog is a
+production path on those platforms.
 
 **Step 7.2: ASSESS SUBSYSTEM ACTIVITY**
-Record: **Active** (Rob Clark still landing msm fixes on this tree). Bug
-is in relatively new (6.17) VM_BIND/lazy-VM code, not ancient dead code.
+Record: Actively developed in 7.x (DMA, nbcon, runtime PM, SA8255p). The
+wait-on-close bug is still in the old 2018 startup/close design, not a
+new-feature-only issue.
 
----
-
-## PHASE 8: IMPACT AND RISK ASSESSMENT
+===============================================================
+PHASE 8: IMPACT AND RISK ASSESSMENT
+===============================================================
 
 **Step 8.1: DETERMINE WHO IS AFFECTED**
-Record: **Driver-specific / config-specific** (`CONFIG_DRM_MSM`),
-Qualcomm Adreno users. Large production population, not a toy driver.
+Record: **Driver-specific + config-specific:** `ARCH_QCOM` (or
+`COMPILE_TEST`) with GENI UART used as **console**. Non-console GENI
+ports unchanged.
 
 **Step 8.2: DETERMINE THE TRIGGER CONDITIONS**
-Record:
-- Trigger: two threads racing first `msm_context_vm()` on the same
-  `drm_file`
-- Likelihood: **realistic** for multi-threaded GPU clients; first
-  submit/new/iova after open
-- Unprivileged: **yes** (render node ioctls)
+Record: Power-off/reboot (or last close of the console tty) while TX is
+still pending. Common on Android/embedded with systemd feeding the
+watchdog. Unprivileged users do not typically close the system console;
+**root/systemd** does. Not a local-priv-esc, still a production shutdown
+failure.
 
 **Step 8.3: DETERMINE THE FAILURE MODE SEVERITY**
-Record: Partially initialized `drm_gpuvm` → kernel oops on VM field
-access and/or bad GPU pagetable/IOVA programming. **HIGH** (crash and
-possible GPU mapping corruption). Not a panic in every case, but not
-cosmetic.
+Record: **Watchdog reset / failed power-off.** **HIGH** (hang then
+reset). Can interrupt an otherwise orderly shutdown (unmount/sync still
+in progress). Not a KASAN/UAF class bug.
 
 **Step 8.4: CALCULATE RISK-BENEFIT RATIO**
 Record:
-- **Benefit: high** — closes a real ARM publication race on a hot ioctl
-  path
-- **Risk: very low** — ~13 lines, standard barriers, no API/ABI change
-- **Ratio: strongly favors including the fix**
+- **Benefit:** High for GENI-console devices: avoids 30s stall /
+  watchdog reboot on power-off.
+- **Risk:** Very low: 8 lines, console-only, existing flag, no locking
+  change.
+- **Ratio:** Benefit clearly outweighs risk.
 
----
-
-## PHASE 9: FINAL SYNTHESIS
+===============================================================
+PHASE 9: FINAL SYNTHESIS
+===============================================================
 
 **Step 9.1: COMPILE THE EVIDENCE**
 
-**FOR backporting:**
-- Real double-checked-locking / weak-memory bug on ARM64 (this driver’s
-  CPU)
-- Userspace-reachable concurrent ioctl path
-- Small, obviously correct acquire/release
-- Maintainer-authored; series reviewed on dri-devel / freedreno
-- Sashiko flagged the class of lazy-VM mistakes (even though it is not
-  syzbot)
-- Buggy code existed in this lineage from **v6.17**; 7.3 includes that
-  code
-- No new feature or uAPI
+FOR:
+- Real user-visible failure: shutdown blocked 30s → watchdog reset on
+  Qualcomm GENI console.
+- Small, obviously correct use of `ASYNC_CLOSING_WAIT_NONE`.
+- Console-only; non-console ports unchanged.
+- No new APIs/features.
+- Driver and bug path exist in this tree since the 2018 GENI UART
+  driver.
+- Applied by TTY maintainer (Greg KH) as v1 with no NAK.
+- Matches stable “hardware workaround / hang fix” practice.
 
-**AGAINST:**
-- No `Reviewed-by`; no runtime reproducer (AI bot, not syzbot)
-- Later series patches still touch the same function (not required for
-  this hunk)
-- Other `ctx->vm` readers still use plain loads (incomplete coverage,
-  not a wrong fix)
-- lore.kernel.org/stable discussion **unverified** (HTTP 403)
+AGAINST:
+- No public Reported-by / Tested-by / syzbot.
+- Workaround, not a hardware TX-stuck root-cause fix; last console bytes
+  on close may be dropped.
+- Author’s “shutdown can cancel TX” claim is imprecise for console
+  *close* (`tty_port_shutdown` skips consoles).
+- Affects one SoC UART family, not all machines.
 
-**UNRESOLVED:**
-- Whether anyone nominated this on stable@ (could not fetch lore/stable)
-- No public crash log; impact inferred from the race, not a filed user
-  report
+UNRESOLVED:
+- Stable list discussion (lore.kernel.org/stable 403).
+- Independent reproducer beyond the commit text.
 
 **Step 9.2: APPLY THE STABLE RULES CHECKLIST**
-1. Obviously correct and tested? **PASS** — textbook publication
-   barriers; in mainline 7.3; maintainer-authored
-2. Fixes a real bug that affects users? **PASS** — concurrent first-use
-   of per-context GPU VM
-3. Important issue (crash/security/corruption/deadlock)? **PASS** —
-   **HIGH**: crash and/or GPU mapping corruption on ARM
-4. Small and contained? **PASS** — one function, ~13 lines
-5. No new features or APIs? **PASS**
-6. Can apply to the local tree? **PASS** — `msm_context_vm()` exists
-   here; this is the 7.3 tree the fix landed in
+1. Obviously correct and tested? **PASS** — mechanism matches tty_port;
+   merged by maintainer. Internal Qualcomm testing implied, not
+   independently reproduced here.
+2. Fixes a real bug that affects users? **PASS** — power-off
+   hang/watchdog on GENI console.
+3. Important (crash/security/corruption/deadlock)? **PASS** — watchdog
+   reset / failed shutdown is a serious hang/reset, not cosmetic.
+4. Small and contained? **PASS** — +8 lines, one function, one file.
+5. No new features or APIs? **PASS**.
+6. Can apply to the local tree? **PASS** — `startup()`,
+   `uart_console()`, `tty_port`, `ASYNC_CLOSING_WAIT_NONE` all exist
+   here.
 
 **Step 9.3: CHECK FOR EXCEPTION CATEGORIES**
-Record: **None** (not an ID/quirk/DT/build/docs exception). It qualifies
-as a normal important bugfix.
+Record: Not a device-ID/DT/build/docs exception. It is a
+**hardware/driver workaround** for a shutdown hang, which stable
+routinely takes.
 
 **Step 9.4: MAKE YOUR DECISION**
-This tree is **7.3.0-rc4**. The lazy VM and the DCL race are in this
-series. The patch is a contained memory-ordering fix on a userspace GPU
-ioctl path. Risk is low; skipping it would leave Qualcomm GPU users
-exposed to a partially initialized VM. It belongs in this tree’s stable
-lineage.
+This tree has the GENI serial driver and the 30s close-wait path. The
+patch is a small, console-only workaround that prevents a production
+watchdog reset on power-off. That is within stable rules for this
+checkout.
 
----
+===============================================================
+What the commit solves for this tree
+===============================================================
+Without the change, closing the GENI console tty waits up to 30s for TX
+to drain. GENI TX can sit in an unfinished sequencer command, so the
+wait often runs to the timeout. If systemd feeds the watchdog, the
+machine resets instead of powering off. Setting `closing_wait` to
+`ASYNC_CLOSING_WAIT_NONE` only for console ports skips that drain. Cost
+is possible loss of the last console bytes on close; that is preferable
+to a watchdog reboot.
 
-### What the commit solves for this tree
-`msm_context_vm()` creates the per-process GPU VM on first use so
-userspace can opt into VM_BIND. Two threads can hit that helper at once.
-The fast path used a plain load of `ctx->vm` and the creator used a
-plain store. On ARM64 that can make a reader see the pointer before the
-VM object is initialized. `smp_store_release` / `smp_load_acquire` close
-that hole.
-
-### Stable rules / risk
-Meets the stable criteria: real, important, small, no new API. Benefit
-(avoid crash/bad GPU mappings) dwarfs the risk of a 13-line barrier
-change.
-
-### Concerns
-- Follow-ups in the same series change the lock and error handling; they
-  are **not** required for this barrier fix to be correct.
-- Sashiko is an AI reviewer, not syzbot; the race is still real on this
-  hardware.
-- Applying **this exact diff** to current HEAD would conflict because
-  later 7.3 commits already evolved the function — that is expected; the
-  fix is already in v7.3-rc1.
-
----
-
-Verification:
-- [Phase 1] Parsed tags: `Reported-by: Sashiko`, Patchwork 743079, msgid
-  `20190-2` (01/17); no Fixes/Cc:stable/Reviewed-by
-- [Phase 2] Diff: +7/-6 in `msm_context_vm()`; acquire on read, release
-  on publish, `guard(mutex)`
-- [Phase 2] Compared `git show ae88499d71ce8^` vs `ae88499d71ce8` for
-  that function
-- [Phase 3] `git blame` on parent: DCL from `feb8ef4636a457` /
-  `6bf32afd37eb6` (2025-06-29)
-- [Phase 3] `git merge-base --is-ancestor 6bf32afd37eb6 v6.17` → yes;
-  `ae88499d71ce8` in v7.3-rc1, **not** in v7.2
-- [Phase 3] Follow-ups `2c26f9e46d395` / `00dfa76bdfc2f` confirmed; they
-  keep/extend barriers, not replace the need for them
-- [Phase 4] `b4 dig -c ae88499d71ce8` →
-  patch.msgid.link/20260729155609.20190-2-…
-- [Phase 4] `b4 dig -a`: v2–v7; applied = v7 01/17
-- [Phase 4] `b4 dig -w`: MSM maintainers + dri-devel/freedreno CC’d
-- [Phase 4] `b4 dig -m`: cover letter + Sashiko reply; no NAK; Sashiko
-  issues labeled pre-existing
-- [Phase 4] WebFetch lore/stable/patchwork: **403 Anubis** — UNVERIFIED
-  via HTTP
-- [Phase 5] `git grep msm_context_vm`: ioctl callers in msm_drv,
-  msm_gem, msm_gem_submit, msm_gem_vma, msm_submitqueue, adreno_gpu
-- [Phase 6] `git describe HEAD` = v7.3-rc4-27-gf0100363d8c37; `make
-  kernelversion` = 7.3.0-rc4
-- [Phase 6] Current `msm_context_vm()` still has
-  smp_load_acquire/smp_store_release
-- [Phase 7] MAINTAINERS: Rob Clark maintains drm/msm Adreno
-- [Phase 8] Failure mode: partially initialized VM → oops / bad GPU
-  maps; severity HIGH
-- UNVERIFIED: stable@ mailing list discussion (lore 403)
+===============================================================
+Verification
+===============================================================
+- **[Phase 1]** Parsed tags: Link to msgid `20260706093749.836121-1`;
+  SOB Aniket Randive + Greg KH; no Fixes/Reported-by/Cc:stable.
+- **[Phase 2]** Diff: +8 in `qcom_geni_serial_startup()`; sets
+  `tport->closing_wait` for `uart_console()`.
+- **[Phase 2]** `tty_port_init`: default `closing_wait = (3000 * HZ) /
+  100` (30s). `tty_port_close_start` waits unless
+  `ASYNC_CLOSING_WAIT_NONE`.
+- **[Phase 2]** `tty_port_shutdown`: returns early if `port->console` —
+  console close does not call driver shutdown. Hangup *does* call
+  `uart_shutdown()`.
+- **[Phase 2]** `qcom_geni_serial_tx_empty` reads
+  `SE_GENI_TX_FIFO_STATUS`; stuck TX keeps wait alive.
+- **[Phase 3]** `git describe HEAD` → `v7.3-rc4-27-gf0100363d8c37`;
+  `make kernelversion` → `7.3.0-rc4`.
+- **[Phase 3]** `git merge-base --is-ancestor acba38e675dd HEAD` → yes
+  (present; not used as “already selected”).
+- **[Phase 3]** Blame: startup from c4f528795d1ad (2018); closing_wait
+  lines from acba38e675dd.
+- **[Phase 3]** `git merge-base --is-ancestor acba38e675dd v7.3-rc1` →
+  yes; not in v7.2.
+- **[Phase 4]** `b4 dig -c` → v1 lore URL; `-a` → only v1; `-w` →
+  gregkh, jirislaby, linux-serial, linux-arm-msm; `-m` → no review
+  replies.
+- **[Phase 4]** WebFetch lore → 403; Openwall/LKML mirrors match the
+  committed patch.
+- **[Phase 5]** Callers: `uart_port_startup` → `ops->startup`; userspace
+  close path confirmed.
+- **[Phase 6]** File and `startup()` exist; Kconfig `SERIAL_QCOM_GENI` /
+  `SERIAL_QCOM_GENI_CONSOLE`.
+- **[Phase 8]** Failure: watchdog reset on power-off, severity HIGH,
+  risk of fix very low.
+- **UNVERIFIED:** stable@ discussion (lore/stable 403). Independent
+  public reproducer.
 
 **YES**
 
- drivers/gpu/drm/msm/msm_drv.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ drivers/tty/serial/qcom_geni_serial.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
-index c2a8aaa33f84a..8094e5e7e9a54 100644
---- a/drivers/gpu/drm/msm/msm_drv.c
-+++ b/drivers/gpu/drm/msm/msm_drv.c
-@@ -226,18 +226,19 @@ struct drm_gpuvm *msm_context_vm(struct drm_device *dev, struct msm_context *ctx
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+index 5d59a2cfab3e2..0807ca83d8078 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -1244,6 +1244,7 @@ static int qcom_geni_serial_startup(struct uart_port *uport)
  {
- 	static DEFINE_MUTEX(init_lock);
- 	struct msm_drm_private *priv = dev->dev_private;
-+	struct drm_gpuvm *vm = smp_load_acquire(&ctx->vm);
+ 	int ret;
+ 	struct qcom_geni_serial_port *port = to_dev_port(uport);
++	struct tty_port *tport = &uport->state->port;
  
- 	/* Once ctx->vm is created it is valid for the lifetime of the context: */
--	if (ctx->vm)
--		return ctx->vm;
-+	if (vm)
-+		return vm;
-+
-+	guard(mutex)(&init_lock);
- 
--	mutex_lock(&init_lock);
- 	if (!ctx->vm) {
--		ctx->vm = msm_gpu_create_private_vm(
-+		vm = msm_gpu_create_private_vm(
- 			priv->gpu, current, !ctx->userspace_managed_vm);
--
-+		smp_store_release(&ctx->vm, vm);
+ 	if (!port->setup) {
+ 		ret = qcom_geni_serial_port_setup(uport);
+@@ -1251,6 +1252,13 @@ static int qcom_geni_serial_startup(struct uart_port *uport)
+ 			return ret;
  	}
--	mutex_unlock(&init_lock);
  
- 	return ctx->vm;
- }
++	/*
++	 * Skip the close-time transmit drain for console ports so that
++	 * shutdown can proceed without waiting for pending TX completion.
++	 */
++	if (uart_console(uport))
++		tport->closing_wait = ASYNC_CLOSING_WAIT_NONE;
++
+ 	uart_port_lock_irq(uport);
+ 	qcom_geni_serial_start_rx(uport);
+ 	uart_port_unlock_irq(uport);
 -- 
 2.53.0
 
