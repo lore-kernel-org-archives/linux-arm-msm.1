@@ -1,176 +1,127 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CF194A8A11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F4C4AA033
 	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:22:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792401743; cv=none; b=VTAOuLqjrThMjcGYP7I/t8IW36YOdtLCuhR7d5r9KUX/Uskd7WlzqRRwuT+FsTYu1p8XK+snLrmxOm6Hlwvx1DROMD0x7usTxPhIpfbt/8nW3Evc8GinwGe2k5Yo4tG/jgv56z7I6KQ7W3ctBrUcEQ/oE1W/5KsA1UE98MngfFw=
+	t=1792401745; cv=none; b=cYMx2UhuEstFKs21JbPc+k1i7UpMu+Qqz7GfLUB2G5ny6Ndo3OumA2l/9wKSMzbliOJ2aCN88sNayjZD+SaFuJRaKBAhmzgoFNW1eJyEqIENulvlXEwbbJbOiR5PY8/eGxyjVR9ve0gAWyLZraNFVYyexeV9YAhcfNR8kKd2LOI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792401743; c=relaxed/simple;
-	bh=vYqwUH50+liD1PmBF9/X9YCEu7jl4gq4F7J7KhijndQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cLL1tBOk2k5HbpICtDxQNnX/ecVi6yqcyP/rXgqsTSdUgtSmqLWemSvWy98HVaFCOKSnDi8BhDw3efJw7QrpMF8P65K6V3S4GG7S0XM+pZk/rAz4qUrnTecLOyNZCnyCtOb7m5I8MOgiXYCVzs4IpFg1QChv3GZFpo6ucHfSIGk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kipViJoV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i0yY/aVO; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792401745; c=relaxed/simple;
+	bh=J5u6sWaFs1aIdBznEzlz0gzVqKHDPrr3ucBX/oe3SKg=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:In-Reply-To:
+	 Content-Type:References; b=jPN3rHUmX7m9LLCpwu8UO3gDKJn72jubOryHXZ418HX2zYzR2HXUy3Cn7liEBRAAVgEogyyVxZAXc1BR8Wp5jTEcJyOYGPuG0/iwPuZdq7/dFNikv6DXDdxHbCfY77GfeDZpnKoa464he/LBujhZSAtwzz6wwIxV2F23oGW7pIw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=pWpArA8a; arc=none smtp.client-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kipViJoV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i0yY/aVO"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8PEn12193438
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:22:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	DA8hRxQNCcV+MK/4Ku6+FpMKSJpiHNgidK9cjVvcI9g=; b=kipViJoVFRHbN7mn
-	fpPvCb/q4MdK2JDt1cKrrfh0N4wSagRlRr4E6ZdEqgO6MdKI5Gp7lYtBnC4W2zMc
-	axi+k3OOFqvlPg3M27XuBbb3rAkEZpcScxu6FijrQOeQaNOdguYbDDPbnlXDsUMI
-	TEiBFOgBNu11/FQSJKRsaZqe1WyQ25jBDtv6fHto85tEom1ZOarSjOqf9DuD6NWy
-	c/0V37S20ctBVRjcLDlxddQ2THFxjPp0yvOVbKbfQe69oYZ4INy7yprbrpdo0wy7
-	/c8Wa5NG8VceVvSYhJeOObCC1YmL8QL0zaPMcrz1ahpTiu/hmKwnCzhdzAbfLoX8
-	8psR1w==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hd5w1a0s2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="pWpArA8a"
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261019092220euoutp02acbd3b6f366b78ff94e04bdf1616474f~f4_LkCUXB0663006630euoutp02e
 	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:22:20 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30bcb065bfdso3844598eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 02:22:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792401740; x=1793006540; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DA8hRxQNCcV+MK/4Ku6+FpMKSJpiHNgidK9cjVvcI9g=;
-        b=i0yY/aVO6h437DpobogQOKgkhV3X1lsAmCDxuCOtOFphJvmoHIOfwLdjnkkwsDE7vc
-         Hc0SwN9QO0k8RwE+g+zTccTHYz3doQdO9L6VhDsR9mNqZ4L97eAu3HYc06QAU+Umqm/u
-         aIuLW6yMc4xvGF2cvOwjxfk32WKbqpEW3BMedlxPcxqp0xG5ROYHFJQng8XuqwJsBS0j
-         kORwPjtCu3y6JVkxC10+bdd7tD03WO01k5F4o3vOCjEGeY8ir1nHonZvcCpdxOWFOnkS
-         20nPLJmQELIVzijXopsmhgvV3GqVKYTyG/f/KeQmIE7joV/yYkD5+WFXUCxiNd/EL1La
-         ebZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792401740; x=1793006540;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DA8hRxQNCcV+MK/4Ku6+FpMKSJpiHNgidK9cjVvcI9g=;
-        b=mR38cUTuMEwSicoTtX3VvSGWDyO+/lMws2yaTIUx5mxlo5NVcR6LkUMFeQqfvAnGdl
-         v08Rk6PuLkeY0Yqd9X5wFrKQYn1leGTbREn5MpkXMI4CFTejhp7Hg+wEr1IETckaqrS0
-         SpTyoBrxjYNjeeCIAUuZ3MLhZIU7R1jyO+qH7Wd4dRbfRqiZQTSPDUYbhwZhWp7a8SbS
-         PCkPxemUncjkC4/BsvF5PPHfn0RJWcKRkLg66V5LLSzVtFOAog+zBN9T7pAZUMFHQcED
-         68Rg0baz+UwjveM8iksFn0rUpe5hH+2kd11sRwlwDY8wTafKFHNVQ+PEhPq3oQdP8g0s
-         7GYg==
-X-Forwarded-Encrypted: i=1; AKwUvBwRJaxXOT55K6kEGrRqejSpQqh/y20RpYSDNYaHj2JPdzE+7fm2Y2ADxdjK37rd+vgqWmvgWk8s3UacenSr@vger.kernel.org
-X-Gm-Message-State: AFq9FYJyCVUtdgCWsgT1FBOL6oU8uYDO/c30hK5XSyYIkwbhmoMEQ9Ze
-	KdpZvmi3bue3F7cQKw4lgNUEL0hiucII+G1O+wmO7tVOFvqge0Lf6n7AuZwO6riSmu5MtFE8NdG
-	QFyUYsvAy9wGc7Jg8WpSeiw4x0Gocgnt9ajzhzI3cOHxpIRrutT/3OZUHLhln1sRLSiDXxKRxr+
-	26
-X-Gm-Gg: AYBFou1z9Yh/7iWm3/2sQJOvlWvtpbdUiOmyPxscoSpPoS1QSoWY8pLm/fldVMlWZjx
-	0SFwob+KMM0ZcLb2TeBO5mlyqSHzmidsrQ0sAd9upz7ObMAQ905TjKFOd1AT2LwB8gH1iqhdNcm
-	prSnVmWQDdC5/Cj7gqAlFG48MAtFk1U9X+cJJRsUdBky9+Htwa07y8RepLntFeE/BtCIQEQ5M9k
-	VRQGwyl76FQZLa33EIC7TJxuXWRZ/YjNTr1uboqEy4puHXriinlWWdjX7Y8qBInXT00RsSTPVca
-	bTLSmmrvWm6cQiVxEgyrZICDWpFchOpf9eV+tCnF2Wah3+L4uRwLQ9kF/HimszudHfzz+LDlgoB
-	KwdXtnZK0OJT/JxpGTM7Bk4wrhec9aU54
-X-Received: by 2002:a05:7301:430b:b0:359:2433:2717 with SMTP id 5a478bee46e88-361a136ac68mr10442005eec.20.1792401739763;
-        Mon, 19 Oct 2026 02:22:19 -0700 (PDT)
-X-Received: by 2002:a05:7301:430b:b0:359:2433:2717 with SMTP id 5a478bee46e88-361a136ac68mr10441965eec.20.1792401739127;
-        Mon, 19 Oct 2026 02:22:19 -0700 (PDT)
-Received: from hu-kuldsing-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36082a7b33bsm56225094eec.24.2026.10.19.02.22.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 02:22:18 -0700 (PDT)
-From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 14:51:46 +0530
-Subject: [PATCH v4 1/3] tee: qcomtee: Register qcom.tz.tpm service for
- discovery
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261019092220euoutp02acbd3b6f366b78ff94e04bdf1616474f~f4_LkCUXB0663006630euoutp02e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1792401740;
+	bh=v2HVMRDXjkeD++qT8O5sU//IhqXywOmYn/Fh/Fdivpg=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=pWpArA8adCY0weZo06h5l7f+VKdwx4bquomWpvYh9iJveXLQISPiB1M5/C0fPFs6P
+	 zdzEWpmLaORbBtXLFjLaDxDEA04nZJi4Yk7HAE6TuCAlSRgCBkpQZdQyYANL4aH+M0
+	 UutmKxFlA9EDm9mTYWRYD4ByP24c0ZYOlr5oTAYo=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20261019092219eucas1p22ca50383cc0e4c3f1eb14d4d334983b4~f4_K8T5X92231722317eucas1p2L;
+	Mon, 19 Oct 2026 09:22:19 +0000 (GMT)
+Received: from AMDC4622.eu.corp.samsungelectronics.net (unknown
+	[106.120.77.34]) by eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261019092218eusmtip2172e5354d5c27789ffe4a60232b45023~f4_KBOKXV2833928339eusmtip27;
+	Mon, 19 Oct 2026 09:22:18 +0000 (GMT)
+Date: Mon, 19 Oct 2026 11:22:15 +0200
+From: Jakub Raczynski <j.raczynski@samsung.com>
+To: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
+Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch,
+	davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+	pabeni@redhat.com, mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
+	netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, k.domagalski@samsung.com,
+	k.tegowski@samsung.com, cs0617.lee@samsung.com,
+	abhishek.chauhan@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
+	sarosh.hasan@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com
+Subject: Re: [PATCH net-next] net/stmmac/dwxgmac: Extend MTL/DMA support to
+ 16 queues
+Message-ID: <atXhR0sgdW84YxcQ@AMDC4622.eu.corp.samsungelectronics.net>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+In-Reply-To: <20261016193823.2711773-1-sagar.cheluvegowda@oss.qualcomm.com>
+X-CMS-MailID: 20261019092219eucas1p22ca50383cc0e4c3f1eb14d4d334983b4
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+	boundary="----6Yzir0.DT2R1UiBbNh0_rPWXcRyD2CU8yss_stBlwropLZCy=_18d29d_"
+X-RootMTR: 20261016193835eucas1p128cb1712afce0314b1ecb65b0c0fc841
+X-EPHeader: CA
+X-CMS-RootMailID: 20261016193835eucas1p128cb1712afce0314b1ecb65b0c0fc841
+References: <CGME20261016193835eucas1p128cb1712afce0314b1ecb65b0c0fc841@eucas1p1.samsung.com>
+	<20261016193823.2711773-1-sagar.cheluvegowda@oss.qualcomm.com>
+
+------6Yzir0.DT2R1UiBbNh0_rPWXcRyD2CU8yss_stBlwropLZCy=_18d29d_
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+
+On Fri, Oct 16, 2026 at 12:38:23PM -0700, Sagar Cheluvegowda wrote:
+> From: Jakub Raczynski <j.raczynski@samsung.com>
+> 
+> Patch 2/3 of Jakub's v2 series:
+> https://lore.kernel.org/netdev/20260601162537.553512-3-j.raczynski@samsung.com/
+> 
+> Jakub has confirmed he will not be continuing this series, so we are
+> posting this patch on its own. We need it for Qualcomm Nord, a
+> 25GMAC-based SoC that implements 12 MTL/DMA queues. Jakub's authorship
+> and sign-offs are kept.
+> 
+> Changes vs v2 2/3:
+> - Replace the netdev_err() + return in the default case with
+>   WARN_ON() + return, following the review feedback on 1/3 against
+>   message-only failures in void callbacks.
+> 
+> Tested on Qualcomm Nord with 12 queues: the MAP0..MAP2 registers were
+> checked to hold the expected RX queue to DMA channel mapping. The MAP3
+> register (queues 12-15) is carried over unchanged from v2 and is not
+> exercised on that hardware.
+> 
+> This is needed for XGMAC-based hardware with more than 8 MTL/DMA
+> queues (Qualcomm Nord has 12).
+> 
+>  .../net/ethernet/stmicro/stmmac/dwxgmac2.h    |  2 ++
+
+Thanks for including me as signed-off.
+
+But I am not sure I like this patch being sent on its own. I checked Sashiko
+review on patchwork and there are no comments and that is actually (not)
+impressive by Sashiko.
+Issues I have are:
+- Does it work if macro MTL_MAX_{TX/RX}_QUEUES is not increased?
+- My patch 1/3 was doing some prep since new XGMAC have unique setup where
+  number of DMA channels differ from number of TC's.
+
+  How does it look like in your hardware? 12 DMA and (8 or 12) TC's?
+
+  I agree with comment by Jakub Kicinski on my patchset 1/3 that I should have
+  implemented it better, but never finally did. Issue is, stmmac driver
+  assumes number of DMA = TC and uses {tx/rx}_queues_to_use everywhere.
+  So proper implementation would be spliting DMA count and TC count,
+  where both can be verified by stmmac_get_hw_features().
+
+  Of course, above applies if DMA!=TC in your hardware.
+
+BR
+Jakub Raczynski
+
+------6Yzir0.DT2R1UiBbNh0_rPWXcRyD2CU8yss_stBlwropLZCy=_18d29d_
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-tpm_qcom_driver-v4-1-6889b9804ba7@oss.qualcomm.com>
-References: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
-In-Reply-To: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
-        Peter Huewe <peterhuewe@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
-        Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
-        linux-kernel@vger.kernel.org, linux-integrity@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfX9JeByOq13KFh
- MDmvAQXqjdcFzhnV7AfhsPafZq21Rom6rBwNx90Tg0Rl4iQUGqHuDO55OudbzmKicGVCgDBfXWV
- b0PIqzyClkdV884UTfnD02F3Lou3Tf0=
-X-Authority-Analysis: v=2.4 cv=KuPYSmWN c=1 sm=1 tr=0 ts=6ad5e14c cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=cMdrFq0U01fV1n6vpx4A:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAzNyBTYWx0ZWRfX9ikDFQaKnyTD
- q5fM9tjqb8bK5YaVWbmeoVJuZa2Kx276mndHHBHoe7gdlaQBV0S/MXok127KGSYA3OU1pmyYvSn
- 0nNAjDe7Ihg+wMmepH/ObxKEDOtRsadmVUp+n09oX9hqZmpFC9O5VHlVOHBndC8ua4YUDLBiRGV
- viAcdBgZFkbCO9J1fe9Cc6aCySb2uN1I96Ges/dTIedj8rx62tPonhHZLVzI1yRr3hrIvYtmU3w
- xb81ea5DGqoYhAaArtYbbaggo1PD8CEwjkbIdxgxP+Y7+rU19coZeMTjtG4HRE6ScKGA/ewIjKV
- wdph3137xqZ9hnk7M6lzj4WTwyXlg3AfLZlN/iT1ZSP/hpIzLSaWxXZFHyYOWBXnwYLTYFv2n+a
- YSdIqequk2h42v0pIMkMxF4vre/cRm/U2sc6jS3IBp2asTJAIRSj8D5rmYnXIlcsoiTuzrbP1P2
- BDgmbLque5zDslXqJ/Q==
-X-Proofpoint-ORIG-GUID: DfzWNPFW8TwXPKap6rIG6o_mfgZfu7UA
-X-Proofpoint-GUID: DfzWNPFW8TwXPKap6rIG6o_mfgZfu7UA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
- spamscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190037
 
-Add "qcom.tz.tpm" (QCOMTEE_TPM_UID) to qtee_services[] so the TPM TA
-is enumerated as a TEE-bus device, allowing a client driver to bind to
-it via its generated UUID.
 
-Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
-Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
----
- drivers/tee/qcomtee/call.c        | 4 +++-
- drivers/tee/qcomtee/qcomtee_msg.h | 2 ++
- 2 files changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
-index 47d8a4f9a159..1b887da83341 100644
---- a/drivers/tee/qcomtee/call.c
-+++ b/drivers/tee/qcomtee/call.c
-@@ -747,7 +747,9 @@ static const uuid_t qtee_service_uuid_ns = UUID_INIT(0xe1b48857, 0x6154, 0x49f9,
- 
- static const struct qtee_service qtee_services[] = {
- 	{ "qcom.tz.uefisecapp",
--	   QCOMTEE_UEFI_SEC_UID }
-+	   QCOMTEE_UEFI_SEC_UID },
-+	{ "qcom.tz.tpm",
-+	   QCOMTEE_TPM_UID }
- };
- 
- static void qtee_release_service(struct device *dev)
-diff --git a/drivers/tee/qcomtee/qcomtee_msg.h b/drivers/tee/qcomtee/qcomtee_msg.h
-index 9278a361dc70..9fff9dc5fffb 100644
---- a/drivers/tee/qcomtee/qcomtee_msg.h
-+++ b/drivers/tee/qcomtee/qcomtee_msg.h
-@@ -106,6 +106,8 @@ union qcomtee_msg_arg {
- #define QTEE_VERSION_GET_PATCH(x) ((x) >> 0 & 0xfffU)
- 
- #define QCOMTEE_UEFI_SEC_UID            413
-+#define QCOMTEE_TPM_UID			81
-+
- /* Response types as returned from qcomtee_object_invoke_ctx_invoke(). */
- 
- /* The message contains a callback request. */
-
--- 
-2.34.1
-
+------6Yzir0.DT2R1UiBbNh0_rPWXcRyD2CU8yss_stBlwropLZCy=_18d29d_--
