@@ -1,82 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792429336;
-	b=ImvZjsKLEyVQzvfxGiKYa8Ays6iXHleUbNG8upm1+1EjtahYQD0+KLQmMMF6qTmPIHIs
-	 f6M8zqW2UsToQLG2kpiafRiRfi0CzTR/DWEA5m9c1AOiyevUeDsYQ9VCGP3Pqdytsi1mQ
-	 T2Uv+VLgX1ab/3r+6R3tzjAwnG5LxBFL8SW5udTx7+1MaINC/jYqG9eq453SaUvq3rg6m
-	 1Pz0P+a7riTHkX9Fw8S8zMJa0UNXd07Dk8TNdrTQFzP05C0/jTuGMwLiJGkhmjPyaSC8+
-	 B0scYrojp263D3WOmEm4fJ/NRPaoWIZpWWMaym1iEegwvI5xCYzOORWO1Qt4QtxdE8Q==
+	t=1792429394;
+	b=M7hMiPXE9aBux5lc+PZdUGkhRtxCJOkMy4V1UfXKRfB8FtrnPLkBr3fwTOeCCMRIk++B
+	 FLStCvfGSWH3Qe7Ko5Tf0QrSKbmXZkNLeOZjyZWxyggsQRf/XIpvFgg338eb7VT5/2i2v
+	 QrNdeLdbhsCroZnEC6rUiSbSCbY/iHva1FwtG9AlN5+znbHRt/lNsXZG/pA9CvQw9Bu86
+	 Favrcedjnc3P889gafBZj1dHZnMp229p0fTsC9jId02At3fo7uzrhWCkZNhAgE8jqfBlY
+	 iyk3/taZWlx4pMk5mtixw3GDJr566qroZIQYi8zL4Lgtl7rYtSMCzXOroBqIo8aJ43w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792429336;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792429394;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=TwE1xwzI4l9LNBlDuaYDfYmR+sqYQzsBcgO6n3dFT9o=;
-	b=nJLTJPLpskTqqeDvfzFo3Bg4Z8CYJWEqvCCZ8rdn5vEPwWbZNKgRtHGhH2u5FfCJuV1S
-	 KbMEI9QvPORL8UAHNg4l9ASoOdVhYVgELfKyfI+kDIUt0tEjNF+ZDf19z1F1lObKxeuhc
-	 bVp99y/rL+PJoiKoojtkqZX1ovi1rXM1TxC2J9bIltS4wyjbFZUOeYL1VeH3ClIXVxCDU
-	 cgvht1Z3tio2EXUZvvdsBto22Ew2whg5ACMokhsPQNEZ9OESzff2OJv2BNuM4bzUF18Hm
-	 mEu0XrFZa2weRGThm/Oz+je02lyPSD7kSHxddT8Hv/teLwUK4EiZavx0jdnuh+tq8BA==
+	bh=aE/ApdweHqbDn8tPYpZEvkT83zo8gImkOax/EesADG0=;
+	b=M8eRRcTeNkcmIyp4r7tXwRw7lqNx4VHnB3wwD8p6x1+aGM6uS7AuEGl1oOByUcf7hWFy
+	 vrdDqNb7bKB//v4JoJ57BXhuPHCkLj4xA4vx+9Pus7RqOCpkiZ+wjB+0Ein+Ccc5mNjE6
+	 5uZ6a481XsYROyp4qUff15SKJAwF3L2nAaUXPv849vzoZIW+E+mzZmJCPK3qRtoePFg86
+	 GM9hfPKGD0Om7k3mw9ruidWS+SaE15LjyB+pRwtmmlVGR09JSpqlelU6Ex67d9GzTqTvS
+	 6w0jzfRFEOY8mt6X6bfVhfzg2DHjZOf09IdQQu8h2dHW/8DnNgsirCxyi0wne5svOhA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=enOso1oj;
-	arc=none smtp.remote-ip=209.85.210.171
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=pZME4in2;
+	arc=none smtp.remote-ip=209.85.210.170
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABEA260A260E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 17:02:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org ABEA260A260E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F4DF606A31C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 17:03:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F4DF606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=enOso1oj
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-8a05da1cc1fso639854b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:02:15 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=pZME4in2
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-886e61fa30fso762140b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792429335; x=1793034135; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792429393; x=1793034193; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TwE1xwzI4l9LNBlDuaYDfYmR+sqYQzsBcgO6n3dFT9o=;
-        b=enOso1ojX2tSHPebycBzttzjr0VJ5iwktTMN6MYFMil62CKWQg2KMNDZhhLlwe3Ce5
-         qL6qAogwVBWD+DVRHRVCyZ4nf14NqOMg396UMfkZBx4NVQecQ7IHN9uA6FtDVCtlwMmQ
-         woviTmFUiHVxCV8/Gy23vKIMAU5VElaDrFxu15qv+O6hNDcgHHyY6aghKIK7fHB2klcl
-         gP1EAwWo3e4VellR0fkoDLupyyw6jYjcvac5zsyIxPC29yaPAeYQb8gzO89nZqoNU2Ym
-         LZHSYb8U0XCrg5e/tn7BmKCHoKVxK+7773r0SNLTLF8UKQuIIFROeYYGUWyU/l0eEj+X
-         2O1Q==
+        bh=aE/ApdweHqbDn8tPYpZEvkT83zo8gImkOax/EesADG0=;
+        b=pZME4in2/dovMnIJC1alUj04UbIDFKIvNIIUQzlCLJRJQ1igaXXGunRER55yDQ/h9+
+         q+PWrDGkI0JrvmvTFD3Okb7MAOw2zCCWgU8QzfMIQ1/eQQq6en9WrkC8QRhtaHMGzRuF
+         K7N7K+1D566unZhGmpvSjbpmRRWFVcmysqvp4VquNqD2W3bAFP4M+pzzr5UenjVzap8L
+         kQ9rxmmv9qr0A6Yem9CJrpH6vU58MQlvn8BrmeBUC2xPkRLyFsMAhVHM90HfxvKzzp6D
+         cwt+I7BKTjCKAxMaAKV1jF0nIkUWRvDHXZCtWkOzhrYqcObEm6OfMkKYthMjqlS4YrwQ
+         WecA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792429335; x=1793034135;
+        d=1e100.net; s=20260707; t=1792429393; x=1793034193;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TwE1xwzI4l9LNBlDuaYDfYmR+sqYQzsBcgO6n3dFT9o=;
-        b=SNpo1Qmy4mw5hg/9t5B+PH+YXUfphPja3HaxynHBn3t/JhUpWQbCrHnyL7n6ewZkk1
-         GjtLHoUxyuPgx+z9iBZf0gkihxwy5KJlcY7SkBxbcEwMUe+Oy34K8EtVFFNrUJT/WV0i
-         h2ngF3N5bPqvT7D97oED3iWxYjoqzttWX+u5RbCrIpJ8h3K8MAtmm32e5VIAbHIekq4k
-         57s1L7wjTvc1Pg56j+iWt/X2PV+2EXwTyQmw3m9NxeG0NtonCLswtZYYngaFu/LQss0u
-         Jj5RbZxO3ZSWIAijjnAOgwnn27U7G0A5q/B7oV8kvXhSD+OMtHMCp+0KnYiYynTNE0hp
-         9ZFg==
-X-Forwarded-Encrypted: i=1; AKwUvBz+Odr+aqcWI7F0GaN1IZf3T3EVlVq6s/ikCXpZbk6OTmwxT8NHnhgtmaGez46d6fNMc0P42/Qo7RBkguSz@vger.kernel.org
-X-Gm-Message-State: AFq9FYKRBnZP9PsMYV98gnmpqUGHD6JnQzpUZt3CGgRwut8cS3g2MH5Y
-	MYkeYtDcNtyl5fT1jY7jQbchZ+00jwcD1Rkkf0IsiZ7vq4fsiQC0c2II
-X-Gm-Gg: AYBFou3hRc5ItsvheHEexL/5VbzkA5uQBnhdN7em+w42xzRsWI7ON/aJ7On+PCSz8M/
-	p9q4JatYl0bTDat35xbaPNnWgYvKBMRC7FdTm56lRkLFcmAfWUE6DbaOsxGSHLiTceMfCkp5H4g
-	xKbPgP/CWZj8jigNe/dKmzCeorX7NBBwb4HGrWWKtxPv9gSywcJNCAO/ILllfbutF+ezcXxCOW4
-	yObM5ImYWAf1+pbsRwHtobveL/0d1XjDorm/yr9c46nV8irU/jUGaMWVEmZtMhv8m9THLNbpZ3T
-	a4gkvkAEyId1PC3osRquiCWzglJMsJZrUIylntpzTwPcybl+n/bIIAOkEttBNw3d1ZtH56AYgFT
-	LPvH6WjZOjPfFsYDKW73ztyo7SuWe6QvLWmQp+EC5sLleWaO7q+wZGDWmyrswD4K7EDhuL7jBXb
-	DJ+ByskgCtgd+mtCtScYQI+aoegRXr+SbLzxSjYlE2xM7RWkswNtSxiZTkimfExYSOGrni31zNO
-	lNE9lnQqKlHQWU=
-X-Received: by 2002:a05:6a20:9883:b0:3db:3d0b:31fd with SMTP id adf61e73a8af0-3e225d390e7mr4343208637.1.1792429334850;
-        Mon, 19 Oct 2026 10:02:14 -0700 (PDT)
+        bh=aE/ApdweHqbDn8tPYpZEvkT83zo8gImkOax/EesADG0=;
+        b=PxwxPvJVN6P2OdeThzyDdW43IuOcBz2pVF6sVLDn/DW8nhFudziNvNMZd5CJCYPQyQ
+         ZLAeDwbtvOVPCNYfrqchJMLzMzyX88HrxwfspFznt9WQqzejNiEcs1uERZlUpeu4vCaR
+         FIDnEmYjov8xu14lvwmh8oeHqL36QRU32ogKlVnOE/wOLxj5B2b/XlzYutGbYkAgWEyR
+         YT5XEwSF7wxShbBiR1s3j3KJWlrKiRFTZur4d6HjQxiy/GK6L6mM7es7AW9W8AUh0LCH
+         ydBMxROIjpO/OgUCfLYiPtfkLjzAcd2Q8Y85UOQz2YQQHZJLm2WP43Im47bDzyvjrX7Z
+         mvQg==
+X-Forwarded-Encrypted: i=1; AKwUvBwwp6VF0CKnmvvHnH7YJWvoZO+Pul7L5J5KHawA1YHlIehahrGWcnkKuaDETImM/JZP3OdY5mxbDTml/snN@vger.kernel.org
+X-Gm-Message-State: AFq9FYKj/PXv6/Seg7BAj+LaIwMaeA8UaYvH148kJfe6j1YpG0h8/5eu
+	q7liaCQ0G0eVlqRYX8yUrxIhkOQRBUy9Aezqs+JtSG828KLC2H3/ig70
+X-Gm-Gg: AYBFou0rSmNjJurKY++ZUuPH5l6DA/xwIfXFvsS7K8UZuKPl/JgltC/B1dpaoWoHQrS
+	AD/7cTGhcg1tJ1U+PB1jm5Bjauuym61a+hvwHdz2XMym1nUzDBBmBQT+uDOOBYPwJVwmCceWWOk
+	veOYt7mgxELN6u8iYccp85EfTkLz4Yo5Nxqa6i6Ro09rOd2DbKk9XuNHCWcFHYqBvfZ/7vpaZ5v
+	APirqOAElgRn7ofvoJzvT6bl9K5qRuJBhSYfoVHOxmXKH8KF+g31PuS8dQgaq5IyQGJuHuIb0O2
+	uALqA2KXmQ7CHdBr6/R3HXJDLgfr5TSSq4KYT/UMm+Kkx68w/8zKNb4BwTupgFJ9N4faeWRj0BF
+	caE2HrgKA0D99YvB2AJNGq3dbwyiBfuHKX10AWkmzPL4dkAAKwnyPUNEO5EMy8AyrvhDO2S66H5
+	uuwV8vqeaBLTD+wiusJi4eajclOpK/nBKFHLrjoTj7FlBiLutAA026nfZa955aSaO3AAW4jm8c7
+	XkjrZJg7Ti0KrE=
+X-Received: by 2002:a05:6a21:9147:b0:3e0:dbf5:59f1 with SMTP id adf61e73a8af0-3e226435453mr6238043637.91.1792429393230;
+        Mon, 19 Oct 2026 10:03:13 -0700 (PDT)
 Received: from asahi.tail4da9e3.ts.net ([218.48.198.193])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549c5621sm4317511a12.17.2026.10.19.10.02.10
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd6549c5621sm4317511a12.17.2026.10.19.10.03.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 10:02:12 -0700 (PDT)
+        Mon, 19 Oct 2026 10:03:10 -0700 (PDT)
 From: "Baek Kyu, Kim" <pocj8ur4in@gmail.com>
 To: Vinod Koul <vkoul@kernel.org>,
 	Bard Liao <yung-chuan.liao@linux.intel.com>
@@ -85,9 +85,9 @@ Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
 	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] soundwire: stream: roll back failed master registration
-Date: Tue, 20 Oct 2026 02:02:02 +0900
-Message-ID: <20261019170203.2533974-2-pocj8ur4in@gmail.com>
+Subject: [PATCH 2/2] soundwire: qcom: restore port reservations on registration failure
+Date: Tue, 20 Oct 2026 02:02:03 +0900
+Message-ID: <20261019170203.2533974-3-pocj8ur4in@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261019170203.2533974-1-pocj8ur4in@gmail.com>
 References: <20261019170203.2533974-1-pocj8ur4in@gmail.com>
@@ -102,115 +102,103 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When slaves have already created a master runtime, a failed master port
-allocation leaves earlier allocations on its port list. If the second of
-two port allocations fails, a retry sees a nonempty list and succeeds with
-only one port and without incrementing m_rt_count.
+qcom_swrm_stream_alloc_ports() ignores sdw_stream_add_master() errors and
+returns success after master registration fails. Reservations made before
+registration, or before discovering that all ports are busy, also remain
+set in the controller bitmap.
 
-Allocate master ports on a temporary list and publish them only after all
-allocations succeed. On configuration failure, release ports allocated by
-this call, balance m_rt_count, and restore the previous channel count and
-direction. Preserve an existing slave-first runtime and its slaves, while
-freeing a runtime created by the failed call. This lets a retry register
-the complete set of ports instead of reusing a partial registration.
+For example, failing the second of two master port allocations returns
+-ENOMEM from the core, but hw_params reports success and retains the new
+port reservations. The stream is marked as configured despite incomplete
+master registration.
 
-Fixes: ac3bc88cc56e ("soundwire: stream: separate alloc and config within sdw_stream_add_xxx()")
-Fixes: f3016b891c8c ("soundwire: stream: sdw_stream_add_ functions can be called multiple times")
+Save the bitmap under port_lock and restore it on either failure, then
+return the original error. This preserves earlier reservations and allows
+a failed stream to retry. Remove the hw_params error cleanup that walks
+master runtime ports: that list does not reliably describe reservations
+made by the failed attempt. The allocation helper now restores its own
+reservations before returning.
+
+This patch depends on patch 1/2, which rolls back partial master port
+allocation and failed stream configuration in the SoundWire core.
+
+Fixes: 02efb49aa805 ("soundwire: qcom: add support for SoundWire controller")
+Fixes: 5c68b66d4d7e ("soundwire: qcom: drop unneeded qcom_swrm_stream_alloc_ports() cleanup")
 Signed-off-by: Baek Kyu, Kim <pocj8ur4in@gmail.com>
 ---
-Tested with ARM64 QEMU KUnit using the real SoundWire registration APIs
-and synthetic slave capabilities. Register a slave with two ports, fail
-the second master port allocation, then disable fault injection and retry.
-Before the fix the retry succeeds with one port and m_rt_count == 0;
-afterwards it succeeds with two ports and m_rt_count == 1. Configuration
-failure and existing/new runtime cases were also checked with KASAN and
-lockdep enabled. No physical SoundWire hardware was tested.
+Tested with ARM64 QEMU KUnit using synthetic devices. Failing the second
+master port allocation made hw_params return success and retain
+reservations before the fix. With both patches, it returns -ENOMEM,
+restores the original bitmap, and allows a successful retry. No physical
+Qualcomm audio hardware was tested.
 
- drivers/soundwire/stream.c | 35 +++++++++++++++++++++++++++++------
- 1 file changed, 29 insertions(+), 6 deletions(-)
+ drivers/soundwire/qcom.c | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/soundwire/stream.c b/drivers/soundwire/stream.c
-index f106a877d7b2..8e94dcaf3784 100644
---- a/drivers/soundwire/stream.c
-+++ b/drivers/soundwire/stream.c
-@@ -1107,17 +1107,24 @@ static void sdw_master_port_free(struct sdw_master_runtime *m_rt)
- static int sdw_master_port_alloc(struct sdw_master_runtime *m_rt,
- 				 unsigned int num_ports)
- {
--	struct sdw_port_runtime *p_rt;
-+	struct sdw_port_runtime *p_rt, *tmp;
-+	LIST_HEAD(port_list);
- 	int i;
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 55678a30cd4a..586bdd17171a 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -1241,7 +1241,8 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 	struct sdw_port_runtime *p_rt;
+ 	struct sdw_slave *slave;
+ 	unsigned long *port_mask;
+-	int maxport, pn, nports = 0;
++	int maxport, pn, nports = 0, ret;
++	unsigned long saved_port_mask;
+ 	unsigned int m_port;
+ 	struct sdw_port_config *pconfig __free(kfree) = kzalloc_objs(*pconfig,
+ 								     ctrl->nports);
+@@ -1260,6 +1261,7 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 	sconfig.bps = 1;
  
--	/* Iterate for number of ports to perform initialization */
-+	/* Publish the ports only after the entire allocation succeeds. */
- 	for (i = 0; i < num_ports; i++) {
--		p_rt = sdw_port_alloc(&m_rt->port_list);
-+		p_rt = sdw_port_alloc(&port_list);
- 		if (!p_rt)
--			return -ENOMEM;
-+			goto free_ports;
+ 	guard(mutex)(&ctrl->port_lock);
++	saved_port_mask = ctrl->port_mask;
+ 
+ 	list_for_each_entry(m_rt, &stream->master_list, stream_node) {
+ 		/*
+@@ -1286,7 +1288,8 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 
+ 				if (pn >= maxport) {
+ 					dev_err(ctrl->dev, "All ports busy\n");
+-					return -EBUSY;
++					ret = -EBUSY;
++					goto restore_mask;
+ 				}
+ 				set_bit(pn, port_mask);
+ 				pconfig[nports].num = pn;
+@@ -1296,10 +1299,14 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 		}
  	}
  
-+	list_splice_tail_init(&port_list, &m_rt->port_list);
- 	return 0;
-+
-+free_ports:
-+	list_for_each_entry_safe(p_rt, tmp, &port_list, port_node)
-+		sdw_port_free(p_rt);
-+	return -ENOMEM;
+-	sdw_stream_add_master(&ctrl->bus, &sconfig, pconfig,
+-			      nports, stream);
++	ret = sdw_stream_add_master(&ctrl->bus, &sconfig, pconfig,
++				    nports, stream);
++	if (!ret)
++		return 0;
+ 
+-	return 0;
++restore_mask:
++	ctrl->port_mask = saved_port_mask;
++	return ret;
  }
  
- static int sdw_master_port_config(struct sdw_master_runtime *m_rt,
-@@ -2017,6 +2024,9 @@ int sdw_stream_add_master(struct sdw_bus *bus,
+ static int qcom_swrm_hw_params(struct snd_pcm_substream *substream,
+@@ -1308,14 +1315,9 @@ static int qcom_swrm_hw_params(struct snd_pcm_substream *substream,
  {
- 	struct sdw_master_runtime *m_rt;
- 	bool alloc_master_rt = false;
-+	bool alloc_master_ports = false;
-+	unsigned int old_ch_count;
-+	enum sdw_data_direction old_direction;
- 	int ret;
+ 	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(dai->dev);
+ 	struct sdw_stream_runtime *sruntime = ctrl->sruntime[dai->id];
+-	int ret;
  
- 	mutex_lock(&bus->bus_lock);
-@@ -2056,26 +2066,39 @@ int sdw_stream_add_master(struct sdw_bus *bus,
- 		alloc_master_rt = true;
- 	}
+-	ret = qcom_swrm_stream_alloc_ports(ctrl, sruntime, params,
+-					   substream->stream);
+-	if (ret)
+-		qcom_swrm_stream_free_ports(ctrl, sruntime);
+-
+-	return ret;
++	return qcom_swrm_stream_alloc_ports(ctrl, sruntime, params,
++					    substream->stream);
+ }
  
-+	old_ch_count = m_rt->ch_count;
-+	old_direction = m_rt->direction;
-+
- 	if (!sdw_master_port_allocated(m_rt)) {
- 		ret = sdw_master_port_alloc(m_rt, num_ports);
- 		if (ret)
- 			goto alloc_error;
- 
- 		stream->m_rt_count++;
-+		alloc_master_ports = true;
- 	}
- 
- 	ret = sdw_master_rt_config(m_rt, stream_config);
- 	if (ret < 0)
--		goto unlock;
-+		goto config_error;
- 
- 	ret = sdw_config_stream(bus->dev, stream, stream_config, false);
- 	if (ret)
--		goto unlock;
-+		goto config_error;
- 
- 	ret = sdw_master_port_config(m_rt, port_config);
-+	if (ret)
-+		goto config_error;
- 
- 	goto unlock;
- 
-+config_error:
-+	m_rt->ch_count = old_ch_count;
-+	m_rt->direction = old_direction;
-+	if (alloc_master_ports) {
-+		sdw_master_port_free(m_rt);
-+		stream->m_rt_count--;
-+	}
- alloc_error:
- 	/*
- 	 * we only cleanup what was allocated in this routine
+ static int qcom_swrm_hw_free(struct snd_pcm_substream *substream,
