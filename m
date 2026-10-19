@@ -1,44 +1,47 @@
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7AB24F3EC3;
-	Mon, 19 Oct 2026 13:01:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47B714F68A4;
+	Mon, 19 Oct 2026 13:10:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792414871; cv=none; b=RajFm43zRzyumbvgyUq6v4379eErTrqDHhA1mpwO8zvdGBVhuicxgQaSuUYDvoUMVIcfhvAEkauiVGFapH2UdCHEDezQ/FsCTJPs64UY1o4DaHlqK3AphtdjHUqzy75PNnK591EEyCOkUcnoPn2kPQ2zU1LZwhK6gOBmBn+fSYY=
+	t=1792415426; cv=none; b=b9yJfsv8R1WnM9hsK/PEfMusJGpXqT/zW3NtaVh5TWUNk4A65H7toVY6Av//3TTafuSxgipFcL8XN9kgWYC4ng65E+fPMKYp2IR2nbJz23AmPUzC+kI5FPvTN1753R/FWzxuSEi7jqL4E6ZTQgIahkoF9j9WzGGcbeLdi9U7bOs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792414871; c=relaxed/simple;
-	bh=O+9eheaozFJ2m16+ao20wGbH7TUqgRimVoU3HjavFnI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=hejjfTIjZ+Oe53zshhZJHafteoDYm+mnEn0ftm4xiQYdtsXvINUzx5M0tmOPeyzrczgbDfG7pgMsv6INlCj9sgaDq/xXuiUkehMW2lqz2o/ZCZTE9BZqhkw2tvBwZrse9Ep2eM/VlCYv1Z6cOnDpB/JgI0badrEkaTkTm4qOVg0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=Y6coNM1c; arc=none smtp.client-ip=202.38.64.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	s=arc-20240116; t=1792415426; c=relaxed/simple;
+	bh=6wjPecFOYgbfniQRz9KJ0Qq/PrKRtzqKxanlTh49Nxw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=c/iTzy8bANnfS04iGbfblEt1VAHXt+74bhvhnia/flKLyI/d6ip91ODLmZuhFucVYBNKC+LWLVe1ydJGKCdViHBVtA0pVT4bved8d6d1Vz+YEeZ0NFuanHxZUTsdhw+JHqGt/s4ufG+9bL80et4PqP/sr4jNp8RHykRwWiZttdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wc/7iJYr; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="Y6coNM1c"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=u2IjnYIDDi
-	u7hQFqJnH/vzZi0teIPxpv85YUHU1FWF4=; b=Y6coNM1c6ii0PC9lsqoZPghE00
-	fqn3Uf682TMpYk7GmFWgoFUolPGG/cBGJ/GEGdv9OBHSc8jhQtrRCOJuhs0Eq8oZ
-	mOgtrmNUSpNDVzhC/UWX6C2Ayg+puWFymqTN8IXDzUelzo4dnaHw9fDC43BAcEPo
-	VcNcP15HM04Xq9qNE=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.183.93])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgBHzUF5FNZqAAITAA--.1067S2;
-	Mon, 19 Oct 2026 21:00:41 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
-Subject: [PATCH] drm/msm/dsi/phy: program PLL_SYSTEM_MUXES on the first PHY enable
-Date: Mon, 19 Oct 2026 21:00:41 +0800
-Message-ID: <20261019130041.305805-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wc/7iJYr"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66B921F000C4;
+	Mon, 19 Oct 2026 13:10:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792415425;
+	bh=bknp2wfAkS2dNeolascWv95/7LUnc3K7PUmC5V2GAoM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=Wc/7iJYrGG72BcnCJdIMDOU/NOvvFp7cYg12KDvfReURrWLvG8Bdm+pftywwvGogU
+	 Fd+RmR6l9tuKF0Ahy+InjzUywHL1CGLIEsmcvF+qS8ivxVD2fdnthYQ6v1lPJZREuJ
+	 Khqg/6WZVascXlShUpUcVJ0aNwxuQSxBR8SJ1681gv4kmZkYX+LUH66KrgGCZJgewf
+	 GBle/GCODv9BiXBYG78NNHe4OcyHR1My4s0Z36wsTeeLqepRfrqfgh1ybIMwRE1NxU
+	 t3x12jyNB9fa76K+ZpDXF/QH2VIhmVOB+jAMHIzCzDH+UJVUbDX/Tut6SiwfL340qt
+	 9Eqz20KB74ZTQ==
+From: Frederic Weisbecker <frederic@kernel.org>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: Frederic Weisbecker <frederic@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Marco Crivellari <marco.crivellari@suse.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Phil Auld <pauld@redhat.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Waiman Long <longman@redhat.com>,
+	linux-arm-msm@vger.kernel.org
+Subject: [RFC PATCH 28/49] clocksource/drivers/qcom: Move CPUHP_AP_QCOM_TIMER_STARTING post stop_machine()
+Date: Mon, 19 Oct 2026 15:08:35 +0200
+Message-ID: <20261019130856.49711-29-frederic@kernel.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261019130856.49711-1-frederic@kernel.org>
+References: <20261019130856.49711-1-frederic@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,63 +49,49 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgBHzUF5FNZqAAITAA--.1067S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7tFyftF1rGw4UCFWrAFWxtFb_yoW8Cry5pr
-	45ta40kryUAFZ7GwsrZ3W5Cw15Ca1Sgr93tFnrKas8u3Z0y348WF9YkF40gFyj9FnrJFWY
-	qrn7KFyUWr1FyrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUU9E14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
-	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
-	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-	2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
-	W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
-	Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6ry8MxAIw28IcxkI7VAKI4
-	8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
-	wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
-	v20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20E
-	Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
-	AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjQJ57UUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREFB2rVHlSR7AA2ss
 
-From: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Between CPUHP_TEARDOWN_CPU and CPUHP_AP_OFFLINE, stop_machine executes
+all the teardown callbacks while stopping all CPUs in the system. This
+doesn't mix-up well with running RT or isolated tasks.
 
-dsi_7nm_phy_enable() pre-seeds pll_enable_cnt = 1 before calling
-dsi_pll_enable_pll_bias().  That makes the bias helper take its
-early-return path, so its PLL_SYSTEM_MUXES = 0xc0 write is skipped on the
-first (bonded) bring-up and the register is left at 0x0.  Panels wired
-for bonded DSI then come up with a blank display.
+In order to transition smoothly from global stop_machine to finer
+grained synchronization between teardown callbacks and the other CPUs,
+a new stop machine post function has been introduced to be executed
+after the main one with IRQs still disabled while other CPUs can exit
+stop_machine().
 
-Write PLL_SYSTEM_MUXES in dsi_7nm_phy_enable() as well.  The write in
-dsi_pll_enable_pll_bias() is kept for the warm re-enable path where
-pll_enable_cnt is 0.
+The teardown callback here simply performs IRQ disablement, which can
+run concurrently with other CPUs.
 
-Fixes: 44784327815b ("drm/msm/dsi: phy: rework PLL bias enable/disable")
-Signed-off-by: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Move it to post stop_machine() accordingly.
+
+Signed-off-by: Frederic Weisbecker <frederic@kernel.org>
 ---
- drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ kernel/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
-index 1fc3b4f0c..5dd4830a1 100644
---- a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
-+++ b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
-@@ -1144,6 +1144,15 @@ static int dsi_7nm_phy_enable(struct msm_dsi_phy *phy,
- 	data = DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
- 	       DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
- 	writel(data, base + REG_DSI_7nm_PHY_CMN_CTRL_0);
-+	/*
-+	 * Program the PLL output muxes here as well.  The pll_enable_cnt
-+	 * pre-seed above makes dsi_pll_enable_pll_bias() take its early-return
-+	 * path, so on the first (bonded) bring-up PLL_SYSTEM_MUXES would
-+	 * otherwise never be written and the panel would stay dark.  The bias
-+	 * function keeps its own write for the warm re-enable path
-+	 * (pll_enable_cnt == 0).
-+	 */
-+	writel(0xc0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
- 	spin_unlock_irqrestore(&pll->pll_enable_lock, flags);
+diff --git a/kernel/cpu.c b/kernel/cpu.c
+index 1a98d05c7f55..ba90e385d31f 100644
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -1275,7 +1275,7 @@ void clear_tasks_mm_cpumask(int cpu)
+ static int take_cpu_down(void *_param)
+ {
+ 	struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
+-	enum cpuhp_state target = max((int)st->target, CPUHP_AP_ARM_TWD_STARTING);
++	enum cpuhp_state target = max((int)st->target, CPUHP_AP_QCOM_TIMER_STARTING);
+ 	int err, cpu = smp_processor_id();
  
- 	/* Assert PLL core reset */
+ 	/* Ensure this CPU doesn't handle any more interrupts. */
+@@ -1303,7 +1303,7 @@ static int take_cpu_down_post(void *_param)
+ 	enum cpuhp_state target = max((int)st->target, CPUHP_AP_OFFLINE);
+ 	int cpu = smp_processor_id();
+ 
+-	WARN_ON(st->state != CPUHP_AP_ARM_TWD_STARTING);
++	WARN_ON(st->state != CPUHP_AP_QCOM_TIMER_STARTING);
+ 	/*
+ 	 * Invoke the former CPU_DYING callbacks. DYING must not fail!
+ 	 */
 -- 
 2.53.0
 
