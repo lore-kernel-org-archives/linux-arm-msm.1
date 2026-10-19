@@ -1,177 +1,352 @@
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60C3C3A7193;
-	Mon, 19 Oct 2026 07:02:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.126.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6201E418A58
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:02:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792393327; cv=none; b=dZg8Is2DUA2987e8lfxNdf24pg2a+kmkB6+Nj0ecx5PLI2KYJwJuNJ5FnkFfE6vlWX0blvwGLFYh4C7KkMX9bJLgp8217MWNJRO+SMV+S9s0OFfaWxGCImBtde2T68DR78Fsf67Uo82HZiLlnbzi1NjppsEQT7yHmz5dCmO86EM=
+	t=1792393380; cv=none; b=DRq0QrA7wYpxSZ8B8IdJmwsNzePdKXvYoYl1zHfPhEL7CpfEnv0svfSXGTY5SJW7R6OHihbR5IdcUIHoeDlaXeoO2WFOhrUn4Z7v42eA9MfvsgOQdEC9pC/mATFoDNQBDQ2CLXGjVjfpzSn9F4/ylRCJn6mtJPHJjINfKL8CvQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792393327; c=relaxed/simple;
-	bh=IWJHYQT5csf1bfxQNDgJxGfQE4utAXU++e6Y38iDegs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=N2D8a3Udmi32XasK3Xqvdyz5xj4kjMgy9AJ+JeiPiK0coXJpAohbL2vFOR+FxLvwLHNpaljFfwApSJZwnPfgc+QTLZqR1BeKdALW2QaY/tiJS3FW9nOj3JnlEAVIFTerg/aDHffrOSTUVf06TFzVn/yrHj7PeLG6rZ+nUnqvlPA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz; spf=pass smtp.mailfrom=oldschoolsolutions.biz; dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b=D86rDiSK; arc=none smtp.client-ip=212.227.126.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oldschoolsolutions.biz
+	s=arc-20240116; t=1792393380; c=relaxed/simple;
+	bh=qslubZxap2r5UmNKQQJ203JBKOTySnI5k3hp7eb7gM8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=YXWZyHWBY0rTRbs0ayV1GxZyJ0UGaWpafvr9NqrhhNvAUzwjH10FI5lhJMgDs/ZnarUGm5W4lXW/mRa3dWWGkcQdE7qVE9P1eAEaCGchOqoA9OJ6d9WoavScCCVVDDScyh4NdZ/JM2DFDp9eg9IVGJ/HmapYIX9+4JuBV+QSwWU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NqmZjdcQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QXdw3saE; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b="D86rDiSK"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NqmZjdcQ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QXdw3saE"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J4jDqe2267336
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:02:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=2lqgHK1HHpbuHLS+1fJ6Fv
+	6nS/oflbvo0nKVIWjUje0=; b=NqmZjdcQkXjMHFo+EQZ9KScjw8GNTqLs9n3oTW
+	T7ph/hykaQg7sC3/cm/H7GACX+uUi2NH9DniaT6SS4pgooWh677wfVwo0gdW4Gv3
+	yMRqujHHyBy74eQfqBW6b+N0oBdIfGCX1G80tpy62w6XrkAB6kE69w0Wz8lsTFRf
+	Pp4hQGHp35KmuOFLwdiz8T+tckne+ZP5od0Jqgmnj9Zz8q9kYGcwv4OML2Y/VtTW
+	Q7pWNWeoraxuGziKGpNNiHAzP05VRLww8JyDrHqz7l0NbIx4hcaXgrTOVvY+rcNN
+	ALwt3sVtiMLe6W4qypTo5nfGpITLhhfn0UEWSI/CMIDABhiw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hc0kxneew-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:02:56 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cec4226c70so16630245ad.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 00:02:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oldschoolsolutions.biz; s=s1-ionos; t=1792393322; x=1792998122;
-	i=jens.glathe@oldschoolsolutions.biz;
-	bh=jFT100uFamP5A1+7t6kGUO077SA2VYn6gbrf7ueKwUk=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
-	 References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:cc:content-transfer-encoding:
-	 content-type:date:from:message-id:mime-version:reply-to:subject:
-	 to;
-	b=D86rDiSK53/c8EqF8EV5bBNI94+AELUVcujuucYh5wfEs+ixHbLXss3b+tzBjeTe
-	 kYN3GlLqrJExRRCGqBV0KZse0JE8KHQ4J3+Zz2U7J8iL6yxrBsFxQ/hqTMUDJZBVE
-	 jHdlgoCMkto4deqgXphL/KSe2MXAGduckHVTq5GnlsdYTiGHFyLFxXcxBV0eNTEQo
-	 Kl2eD09nZ8J3oy9Gg9duy6LleEGmuUn1asCYmtXrKEFREGOem0mOIDcyYwbZwhbco
-	 I72c/CMH4jyWjhPhmH0aekMvPfhv1oO29D2sbBs01MYVLOAY7xMpSIJPyEeMcuzLE
-	 GExRgoyuG+bbydOYXw==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue010
- [212.227.15.167]) with ESMTPSA (Nemesis) id 1Mzydy-1wMrLN0CZi-0130v9; Mon, 19
- Oct 2026 08:56:07 +0200
-Message-ID: <40a18909-4a96-4bfd-924a-c62658f26de9@oldschoolsolutions.biz>
-Date: Mon, 19 Oct 2026 08:56:04 +0200
+        d=oss.qualcomm.com; s=google; t=1792393375; x=1792998175; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=2lqgHK1HHpbuHLS+1fJ6Fv6nS/oflbvo0nKVIWjUje0=;
+        b=QXdw3saEV62LGsGhQ8B8yNXuAMLYdbAwNXWTxTX0Mz2ZRQSJufAbTOxVMlYLwIJwKg
+         1MnRbxuG+G7s4SNQKICh0a95ZGlbk1bklL88PQSu6qWSrroVt/9+XiVT0KH6x/joQJDb
+         Bf0bW5FjfjcJEBfMJpqciknzHlMxt1bbsnClgLsED6jk9cpb9KmEZ3IlJgQ6VlSZel0t
+         I1VHbct2guX4jrz3U16bhtOTqoN7olv/orlJ4cM9As+HENhqN8HY4AS1f0/pZBQLCRm/
+         tQxhjyUFqqwgtfgL/jsmJIJ7BbZ/zuV7CWwE8mJq3RP/7FO76rG3muLCixqF46WMtGD3
+         LcGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792393375; x=1792998175;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=2lqgHK1HHpbuHLS+1fJ6Fv6nS/oflbvo0nKVIWjUje0=;
+        b=BEi9gA9BwKnVWlej01qmurMqHxWCUOyLGAjP0ukAaGfVpa+RB409ALf0sdtY6qiIwA
+         XxN/iJam4C3gjXLFb5MxyPCo4McVG0D54LxEYiqJBoidD3+QgokGBbOU1xQFb/gd5d8I
+         m5YQcYO6sChd/+werJSlqU3+hIcUgQKoIDfkZf5ZWFbTHP1EvI2GIoOIN0+JoMERxkov
+         7sDn9dSJVtlIRx9IZ4jRpECvhir1ryEV7Zc8Cf02CvI3VAECcRv1UPmZCce744GQUWTP
+         bpeHHVY46RZy4MpNYWhloR50GqFS8L0+G6UyXuLQ2Ns3b8xqz0ufEHfevW7RfqaxH76d
+         P+Pg==
+X-Forwarded-Encrypted: i=1; AKwUvBzHhGdZS3jaBmH25X1msXazF6+hQN2j75DensI3ftiz4Js+6+fDogWmblZnNyzCEtaJ/BJnGxTbQexwcKRE@vger.kernel.org
+X-Gm-Message-State: AFq9FYI69Ifj6nPmXw1BR6RpNZauH/m1oPRUskU4JsnURvRsE8qNtaZa
+	9UoKXG/9gJ7+UVf85BXBVktCx2QCegDmeF4YeIVdzVOw1+G+NgkSIzKM60YuikP3X0BOq2NH+mB
+	vop7XLgGD1H0eUrzGyLDeUHgb6B5Yx32ET8dSCp/Ybi25a4aBj52fvj0fpo9bf8ODhjSy
+X-Gm-Gg: AYBFou2xHhffmWpkLcnBAJwXo7dTM+7sTcrLL6LAgCdW9MfySWj8ZYhVy3mYOho7e60
+	JojWS4F6Gw96crFVaoG6pwCbFcLqaGcEiH4A5LAbsiNuvG0sh334s3mrr/j39z9LpmOQRyQEQNf
+	fHTfwDvRnL1aE0Pdb6oOA29z19tHo/C7zz26NnPnxZ7anyjRqUE9055NoYrpLJK8Gz5HCNxXg10
+	kxCYaHbgj2HDlD/eOjnqwfCAdktFYlkF3B598NJ8InP3ACdskz4MJbg03Yb12kyu3h4Jdl2YBaj
+	R8BMBIaVgBIaIa/6yzu0A8hYRq53EjDoEOPAAru8K5NYsV4E7bQbqtOWsAmXKp/kh4gat9RXYw2
+	bzuK9PvBPuw8usW3J6cIi7ZbcKNchsqSXkQwH0kNedLZn6JumPSTLPe4k3pLMnA==
+X-Received: by 2002:a17:903:244b:b0:2e9:6be2:1296 with SMTP id d9443c01a7336-2e9a6c14af2mr45690715ad.56.1792393375097;
+        Mon, 19 Oct 2026 00:02:55 -0700 (PDT)
+X-Received: by 2002:a17:903:244b:b0:2e9:6be2:1296 with SMTP id d9443c01a7336-2e9a6c14af2mr45690485ad.56.1792393374446;
+        Mon, 19 Oct 2026 00:02:54 -0700 (PDT)
+Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e97e8353b1sm35310935ad.39.2026.10.19.00.02.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 00:02:53 -0700 (PDT)
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+Date: Mon, 19 Oct 2026 14:58:34 +0800
+Subject: [PATCH v2] arm64: dts: qcom: shikra: Switch CPU ETMs to MMIO-based
+ probing
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] clk: implement sync_state support
-To: Brian Masney <bmasney@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Russell King <linux@armlinux.org.uk>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Xuyang Dong <dongxuyang@eswincomputing.com>,
- Hans de Goede <johannes.goede@oss.qualcomm.com>,
- Maxime Ripard <mripard@kernel.org>, Saravana Kannan <saravanak@kernel.org>,
- Abel Vesa <abelvesa@kernel.org>
-Cc: driver-core@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org
-References: <20260626-clk-sync-state-v1-0-4156d8196dc8@redhat.com>
-Content-Language: en-US
-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-In-Reply-To: <20260626-clk-sync-state-v1-0-4156d8196dc8@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cUfu78x5LyhcERPtQ6iwVQ5kI6C3XoSd1pBuP6ROLgNSa4/agon
- FvZ0YKQO6mfr/Sg7+0bu9OskZeYf2YuUxDfo6uq8TiQWFoLDehyThCJYfmz+gVN4Cse07aN
- 28sr3qdO9jnKUq57QZ30FZG6Nex4llIVlER07gNrWsUKGLTDGzzzBTP8oAE4PFTQhn+eywg
- lVcgRDQMkot7htJGzZY+A==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:3BQIcOkyU9E=;1VRc6H53xJxw7cN2b6FIjo5a0yq
- 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
- ZCqqQJCvVFkXzZtIM8iD9KEKA3R+jmnWdFXTQ==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261019-fix-etm-probe-issue-on-shikra-v2-1-b2eaed0fffaf@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAJq/1WoC/42NQQ6CMBBFr0K6dgitFsSV9zAsCgwyUVrsANEQ7
+ u7ICdxM8v7Pf7MqxkjI6pKsKuJCTMELmEOimt75OwK1wspkJs9KY6CjN+A0wBhDLSXzjBA8cE+
+ P6MC63Jw6ez6WhVXiGCPKYPffKuGeeArxs79b9C/917xo0GDz1lgs6xp1cQ3M6Wt2zyYMQypHV
+ du2fQFDxRjp0QAAAA==
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jie Gan <jie.gan@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792393370; l=5221;
+ i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
+ bh=qslubZxap2r5UmNKQQJ203JBKOTySnI5k3hp7eb7gM8=;
+ b=EzTwBYMKBFVlQf0nz4yDDaerd43tbpqKqy0qIv3g8I9GW49Y6mmhToCuWBGK2uu6+yeO3bhIS
+ FXYANxY6bK6AeLBleYV5wunIW7f1KZIQopKJcBS1kKxARTtmSLlp0Yr
+X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
+ pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAyNyBTYWx0ZWRfX6HbRn9B1E1Gu
+ /x68hvcWtOtl05w00h/d8HNHwYOQoZLmiPhwDhQgVhVgrfqX8UAH/6oCFh6N8IMggf2EaCpPPHc
+ c6h0iVeKplKdywSAsN8G66HO0P1aaIU=
+X-Authority-Analysis: v=2.4 cv=JpZkP84C c=1 sm=1 tr=0 ts=6ad5c0a0 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ucFWaANPfWH9jnj5dtQA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAyNyBTYWx0ZWRfXypCgcHYGdJC7
+ PzDl3ic0DQyYJMamkGLuUR6qvQfbim//bcW2I68hpkHrsc/PS3Yl+Zy2B1BdtakPFtHxXR4TY5i
+ MLCjtYotwu8MQSYiYJsVoC/wmkLmBjBBonLo65MXLKoc7To0AIWyzkuLAbVmN/3YCb8meDU7xuH
+ uQOQHiJcPW5Glg87SHa1s+lpfS26SHIr3ompg3WvI0AdNlNWkxM2yaApmj81kg6ZtZim3HvoXuV
+ bI2MFZMSyIxwEbmeNAuzvGAPKKVBzPwPsYGJ+ozyviIViw7UUnxNNwxY2DTL9Tnv4lCqte7svfK
+ vTOsKe+n34kaQYVZH9lDmxjLVOPKfzs/EvnC6iJOeiuwZvmTqldHRGBwV5B36GYW8GQvVFb6pL8
+ UW3vGaELONzdkmMx8FAcVFDkSS3icCOf31FIV9OpRkQdJmScdP1BsWGCU1ThmII6iOHiT3qhE9V
+ 8GE7XuQPau/69tO+pwQ==
+X-Proofpoint-ORIG-GUID: vc9pZyeWI9RcfTAmFVjVwicpnqT7i9VT
+X-Proofpoint-GUID: vc9pZyeWI9RcfTAmFVjVwicpnqT7i9VT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-19_02,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 phishscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610190027
 
-Hi there,
+The etm0-etm3 nodes are declared with "arm,coresight-etm4x-sysreg"
+but do not implement self-hosted system-register trace access on
+this SoC: ID_AA64DFR0_EL1.TraceVer reads as 0 on the affected CPUs,
+so etm4_init_sysreg_access() correctly reports the access mechanism
+as unavailable and the ETMv4 driver fails to probe with -EINVAL.
 
-On 6/26/26 18:32, Brian Masney wrote:
-> The existing support for disabling unused clks runs in the late initcall
-> stage, and it has been known for a long time that this is broken since
-> it runs too early in the boot up process. It doesn't work for kernel
-> modules, and it also doesn't work if all of the consumers haven't fully
-> probed yet. Folks have long recommended to boot certain platforms with
-> clk_ignore_unused to work around issues with disabling unused clks.
->
-> This series fixes this by adding support for sync_state to the clk
-> subsystem.
->
-> Changes in v3:
-> - Allow multiple sync_state callbacks in the driver core via a new
->    helper dev_add_sync_state(). This allows dropping changes to the QC
->    drivers that already have a sync_state callback since everything can
->    coexist without changes. This also makes it so that this can coexist
->    with the pmdomain subsystem.
-> - Only show "clk: Not disabling unused clocks" message once.
-> - Add Tested-by from Neil and Xuyang
-> - Link to v2: https://lore.kernel.org/linux-clk/20260616-clk-sync-state-=
-v2-0-15f82c64d95c@redhat.com/
->
-> Changes in v2:
-> - Split out clk-cbf-8996.c into it's own patch, and don't call
->    qcom_cc_sync_state().
-> - Clarify comment above call to dev_set_drv_sync_state() about
->    the -EBUSY.
-> - Added Tested-by from Jens
-> - Link to v1: https://lore.kernel.org/r/20260603-clk-sync-state-v1-0-457=
-120eed200@redhat.com
->
-> Signed-off-by: Brian Masney <bmasney@redhat.com>
-> ---
-> Brian Masney (4):
->        driver: core: introduce dev_add_sync_state()
->        pmdomain: core: migrate to dev_add_sync_state()
->        driver: core: remove dev_set_drv_sync_state()
->        clk: implement sync_state support
->
->   drivers/base/base.h     |  7 +++++
->   drivers/base/core.c     | 29 ++++++++++++++++++
->   drivers/clk/clk.c       | 78 ++++++++++++++++++++++++++++++++++++++++-=
-=2D-------
->   drivers/pmdomain/core.c |  4 +--
->   include/linux/clk.h     | 14 +++++++++
->   include/linux/device.h  | 21 +++++++------
->   6 files changed, 127 insertions(+), 26 deletions(-)
-> ---
-> base-commit: 6c94b38b83a04c43ea49004275f0391404051093
-> change-id: 20260626-clk-sync-state-ad008829a689
->
-> Best regards,
+The CPU ETMs have a memory-mapped aperture, so switch each node to
+the standard "arm,coresight-etm4x", "arm,primecell" compatible with
+its MMIO reg range.
 
-Tested the whole series on several sc8280xp and x1 devices. Appears to=20
-work well.
+Fixes: eed738c6dd0c ("arm64: dts: qcom: shikra: Add coresight nodes")
+Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+---
+Changes in v2:
+- add arm,coresight-loses-context-with-cpu property for ETM nodes.
+- Link to v1: https://lore.kernel.org/r/20260922-fix-etm-probe-issue-on-shikra-v1-1-56d25e9bbe17@oss.qualcomm.com
+---
+ arch/arm64/boot/dts/qcom/shikra.dtsi | 144 ++++++++++++++++++-----------------
+ 1 file changed, 76 insertions(+), 68 deletions(-)
 
-Tested-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+diff --git a/arch/arm64/boot/dts/qcom/shikra.dtsi b/arch/arm64/boot/dts/qcom/shikra.dtsi
+index 2623e139196f..2ddbd61567d8 100644
+--- a/arch/arm64/boot/dts/qcom/shikra.dtsi
++++ b/arch/arm64/boot/dts/qcom/shikra.dtsi
+@@ -166,74 +166,6 @@ eud_in: endpoint {
+ 		};
+ 	};
+ 
+-	etm0 {
+-		compatible = "arm,coresight-etm4x-sysreg";
+-
+-		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
+-		clock-names = "apb_pclk";
+-		cpu = <&cpu0>;
+-		qcom,skip-power-up;
+-
+-		out-ports {
+-			port {
+-				etm0_out: endpoint {
+-					remote-endpoint = <&funnel_cpuss0_in0>;
+-				};
+-			};
+-		};
+-	};
+-
+-	etm1 {
+-		compatible = "arm,coresight-etm4x-sysreg";
+-
+-		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
+-		clock-names = "apb_pclk";
+-		cpu = <&cpu1>;
+-		qcom,skip-power-up;
+-
+-		out-ports {
+-			port {
+-				etm1_out: endpoint {
+-					remote-endpoint = <&funnel_cpuss0_in1>;
+-				};
+-			};
+-		};
+-	};
+-
+-	etm2 {
+-		compatible = "arm,coresight-etm4x-sysreg";
+-
+-		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
+-		clock-names = "apb_pclk";
+-		cpu = <&cpu2>;
+-		qcom,skip-power-up;
+-
+-		out-ports {
+-			port {
+-				etm2_out: endpoint {
+-					remote-endpoint = <&funnel_cpuss0_in2>;
+-				};
+-			};
+-		};
+-	};
+-
+-	etm3 {
+-		compatible = "arm,coresight-etm4x-sysreg";
+-
+-		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
+-		clock-names = "apb_pclk";
+-		cpu = <&cpu3>;
+-		qcom,skip-power-up;
+-
+-		out-ports {
+-			port {
+-				etm3_out: endpoint {
+-					remote-endpoint = <&funnel_cpuss0_in3>;
+-				};
+-			};
+-		};
+-	};
+-
+ 	firmware {
+ 		scm {
+ 			compatible = "qcom,scm-shikra", "qcom,scm";
+@@ -3740,6 +3672,25 @@ cti@9020000 {
+ 			label = "cti_apss_pe0";
+ 		};
+ 
++		etm@9040000 {
++			compatible = "arm,coresight-etm4x", "arm,primecell";
++			reg = <0x0 0x09040000 0x0 0x1000>;
++
++			clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
++			clock-names = "apb_pclk";
++			cpu = <&cpu0>;
++			arm,coresight-loses-context-with-cpu;
++			qcom,skip-power-up;
++
++			out-ports {
++				port {
++					etm0_out: endpoint {
++						remote-endpoint = <&funnel_cpuss0_in0>;
++					};
++				};
++			};
++		};
++
+ 		cti@90e0000 {
+ 			compatible = "arm,coresight-cti", "arm,primecell";
+ 			reg = <0x0 0x090e0000 0x0 0x1000>;
+@@ -3758,6 +3709,25 @@ cti@9120000 {
+ 			label = "cti_apss_pe1";
+ 		};
+ 
++		etm@9140000 {
++			compatible = "arm,coresight-etm4x", "arm,primecell";
++			reg = <0x0 0x09140000 0x0 0x1000>;
++
++			clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
++			clock-names = "apb_pclk";
++			cpu = <&cpu1>;
++			arm,coresight-loses-context-with-cpu;
++			qcom,skip-power-up;
++
++			out-ports {
++				port {
++					etm1_out: endpoint {
++						remote-endpoint = <&funnel_cpuss0_in1>;
++					};
++				};
++			};
++		};
++
+ 		cti@9220000 {
+ 			compatible = "arm,coresight-cti", "arm,primecell";
+ 			reg = <0x0 0x09220000 0x0 0x1000>;
+@@ -3767,6 +3737,25 @@ cti@9220000 {
+ 			label = "cti_apss_pe2";
+ 		};
+ 
++		etm@9240000 {
++			compatible = "arm,coresight-etm4x", "arm,primecell";
++			reg = <0x0 0x09240000 0x0 0x1000>;
++
++			clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
++			clock-names = "apb_pclk";
++			cpu = <&cpu2>;
++			arm,coresight-loses-context-with-cpu;
++			qcom,skip-power-up;
++
++			out-ports {
++				port {
++					etm2_out: endpoint {
++						remote-endpoint = <&funnel_cpuss0_in2>;
++					};
++				};
++			};
++		};
++
+ 		cti@9320000 {
+ 			compatible = "arm,coresight-cti", "arm,primecell";
+ 			reg = <0x0 0x09320000 0x0 0x1000>;
+@@ -3776,6 +3765,25 @@ cti@9320000 {
+ 			label = "cti_apss_pe3";
+ 		};
+ 
++		etm@9340000 {
++			compatible = "arm,coresight-etm4x", "arm,primecell";
++			reg = <0x0 0x09340000 0x0 0x1000>;
++
++			clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
++			clock-names = "apb_pclk";
++			cpu = <&cpu3>;
++			arm,coresight-loses-context-with-cpu;
++			qcom,skip-power-up;
++
++			out-ports {
++				port {
++					etm3_out: endpoint {
++						remote-endpoint = <&funnel_cpuss0_in3>;
++					};
++				};
++			};
++		};
++
+ 		funnel@9800000 {
+ 			compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+ 			reg = <0x0 0x09800000 0x0 0x1000>;
 
-with best regards
+---
+base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+change-id: 20260922-fix-etm-probe-issue-on-shikra-5a624f583975
 
-Jens
+Best regards,
+-- 
+Jie Gan <jie.gan@oss.qualcomm.com>
 
