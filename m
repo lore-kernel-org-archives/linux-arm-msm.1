@@ -1,16 +1,16 @@
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org [185.142.180.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF5053A1A5D;
-	Mon, 19 Oct 2026 09:27:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE5AC424D57;
+	Mon, 19 Oct 2026 09:30:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.142.180.65
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792402034; cv=none; b=BKcp2rxh/pFM9uSORJs4iN2cd89SsGjCM4zxvpxuQ98f8TbnbZMtSIWuspmvAJ9AgejbsewKmoOH7sJ7SzbbsVSjSzwgnsnUSKaM24K5JfmHPpUmYSLdCTJK20KkSu4pFm7txnB3epvzXLha23hzaDgjyeAiAb43DQOeCHMhga0=
+	t=1792402214; cv=none; b=ez20cYLQkZyUtBLkvQ8p2ioLTMzSHZAaRsDOBbT7EHyY1n8ZxJHwkjAk82SPZmjwPIs2AWkmhLsvp1xwyN0cZYzHuGCWg6ps4zEBck5VzUMyXyAa+yvPR6C+n6tEcVHehSnZQQNXoF8bvNW+Pnzs+lrBcIPIIhB6kLN6tD6Ceto=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792402034; c=relaxed/simple;
+	s=arc-20240116; t=1792402214; c=relaxed/simple;
 	bh=8fBAGo4l/9XbYvwi9LyJpj3fBw8t2XOPo3O+d8F89k4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uMxyL4aSUzObz1F1SwucAMFPcdLUcbCWZW7wnd8X4hiC1FJ/OfooeWCJni3nH6NFaF+mJQgOM0RH4PH8GQ2gAqa24zmvjyLku9UIbNql4Ui53Eu+BC1B6kvtZ6X6h15DS/iy5jV1StIpfEb3g6H+u+S5CQv1hTvOSTF6EZoLn9I=
+	 Content-Type:Content-Disposition:In-Reply-To; b=rQKVrw8XdpvwwEGTabsJchKNt2zWbmLs1GP6ajZ75gotPh02K869IZqseiw5inkFQY3VJTHA360RyBcvXg1IFozEzRcmFEsZyiqNEXA1BwUUTzL4P7LYHoJjRjK0ZAmZ67dRmi+W9MgYFQS7op1r/41zAwVObEJP2F0aBiskifE=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=makrotopia.org; spf=pass smtp.mailfrom=makrotopia.org; arc=none smtp.client-ip=185.142.180.65
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=makrotopia.org
@@ -18,9 +18,9 @@ Received: from local
 	by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768)
 	 (Exim 4.100.1)
 	(envelope-from <daniel@makrotopia.org>)
-	id 1xIje2-000000007Fd-2D3o;
-	Mon, 19 Oct 2026 09:27:02 +0000
-Date: Mon, 19 Oct 2026 10:26:59 +0100
+	id 1xIjh3-000000007Hk-0bIc;
+	Mon, 19 Oct 2026 09:30:09 +0000
+Date: Mon, 19 Oct 2026 10:30:06 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Nikolay Bryskin <nbryskin@gmail.com>
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -28,7 +28,7 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Danilo Krummrich <dakr@kernel.org>,
 	Miri Korenblit <miriam.rachel.korenblit@intel.com>,
 	Emmanuel Grumbach <emmanuel.grumbach@intel.com>,
-	Hans de Goede <hansg@kernel.org>, linux-buetooth@vger.kernel.org,
+	Hans de Goede <hansg@kernel.org>, linux-bluetooth@vger.kernel.org,
 	Bartosz Golaszewski <brgl@kernel.org>,
 	Marcel Holtmann <marcel@holtmann.org>,
 	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
@@ -46,6 +46,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20261017174310.22484-1-nbryskin@gmail.com>
+Message-ID: <20261019093006._EIRqxxG2QL6346pWuLUGExx1XFcdANoG7Qqv-wEZMI@z>
 
 Hi Nikolay,
 
