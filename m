@@ -1,195 +1,216 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD4EF484247
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:37:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCDC53DCD85;
+	Mon, 19 Oct 2026 13:39:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792417068; cv=none; b=U6Sx/YnYYGDvrcj8n2Sbxx/GojTQ3XLn6i2aVGfEzf+EcBd69JpK36Vq9D6rTBzJ9Y1dQUW/0Tm/AvaV01HnndmWF7SdNe57Ocj1w0jpntqi0A3pElENufAJ08x8vMS0flEdIyruD9csYXYuAnfk6Cc4Xyowrwp0rKxlsLUQgJg=
+	t=1792417163; cv=none; b=oXpVihr1L2kH62+sBsvABEkXn8vC3lJtrRmjhZKMcIOhtyF3C4EXWW4zEY734fyosT5484iWEb4UzlclWZ68hlrf+hG+50BxzaugszpHqfnE97/+plgOkpG2IdTLVkYGIwnzy7AcfW5lOlaTKS0y+FoSBBWdRDpaC7HO9ktxbi8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792417068; c=relaxed/simple;
-	bh=Ukli6ucL89G8zs1MgqQcxYZZM3R/1OcrT5RWWqvjlxE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=s3SnrWnBYOAXHif6ITKCNxhEGpkK1oacL4vw+oBdWvkErkkiKDvZf6qjFYQkpelNVgQy713S2pyvfjGX8KBkKh6lMHg8kB1Fcsz21zTvuMccRodJr44aa2HeEDA/80MyakBzc/FccGi049hzRJx2/HTp6K5GuXXO8ehEM8bPE6k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EKjOJi1R; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ftcF1unV; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792417163; c=relaxed/simple;
+	bh=slYxthp496E4xcRQzJ2OurTUqSc5h7per4A8X+sBkMc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=kM/mwmBVy8G4hGeca70jguPCfGFYCZ3hwj9adT9rFznTsSNpcEceJUnQVyMz2qmq/Af1CmxqrE7ZLqEHhnqh6KElVXuOzsqoHxun8k3wuNftw3P8ZVx3jKWusPWKZvmVU3HdCcDZV6VABY2n1Y88vxPYmScVOOgyc69ZoziY54U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ooQ1JabA; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EKjOJi1R";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ftcF1unV"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8YmiM2688810
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:37:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	k1ygSxBiLlTu9L2AA8BzlaX12ReaTq3+7SIiiPvR+UE=; b=EKjOJi1RwNNtvrJv
-	Bn8lt1TeCU6cUV5yyv6FZPOoNn77WGCxpeB0i8mA9iXZH21NYDBlgM+Qr/wQBi/M
-	lEMbD3dbXyOtzsyEABW6WuPb3W7gEg/kbq6DSfaa0F0iJtNxjf5PJm2w6y9uuA1l
-	ztaJzzbQyy7IB9a7JSAOOhPZHKtGe+YWfz3UjuUOswbpDjP4/x5bT5xtOBIVsiRD
-	gzCFLN4a2gjzuexBjDFj9Xw9UyzkmMcp9NYgeiRsIEjp5wS3wLj5CkL3FtjNQ0xR
-	d9upfGbA1EvRbuDXpbHs9MC5QZUDp9dFtrm/exfTl8UrBY+4MblRWUUyiuObsUU6
-	SfjicQ==
-Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com [209.85.167.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdftn14p6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:37:45 +0000 (GMT)
-Received: by mail-oi1-f198.google.com with SMTP id 5614622812f47-4ab260600easo4736107b6e.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 06:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792417065; x=1793021865; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=k1ygSxBiLlTu9L2AA8BzlaX12ReaTq3+7SIiiPvR+UE=;
-        b=ftcF1unVVwvNcPWtE0zAofs8gAD3WzdlRCht/aHo1jFj/tFcvH92T9X3tiQYz0a/K3
-         Hwv8tnM+I6omu+zvuxluiNXCxO3DFBk1914IQgfAxJ4GthZwhlYzvf44iykdVN41K1oS
-         U+TZ9RjNFZgWSRbypwFIXrf0O0sXbmuApJq21GpalXJoWQ5Xruh3xBlZ8RqgfWV8RuP3
-         YOE6ddFWUBbRfM8VCcr1t2ReT2+rAxqqABZONjKF9uHmP9GaCT7OnPIsk1CpvwyqTRgx
-         +Wpt0cX1UFsnQzvbGAvhZ0sst2a/558PWZ1yMXyOj4opZOuM+2xFdRNTLsC7V+DP1YZL
-         q3Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792417065; x=1793021865;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=k1ygSxBiLlTu9L2AA8BzlaX12ReaTq3+7SIiiPvR+UE=;
-        b=GtQ9rNaNE1Sv1+bdwEximTs2r12V980YAatnNnalkIC11kzYbFXEMRb26inFDyPJIO
-         m7TEg/FjnUPs19UfLfm0Lrn4Z/yWKlXGKJzu04oLPaXHQZRl/eyQJvbuMMTdTxG3diQT
-         qu7jW6w6aNEXcGfCeoSIWVeE4OOarXNWwqdTiMUGJp2TmNgMimjfjwlJUVQWNuU6qsJh
-         nRC7p3BJVERHy2Gq61QrWB6xF/d7htzH1haPQebUcHgzBfQPL/LPaqYJPCH157mJkcNi
-         DZvlqhEsPx9tXTYOAoWUUW6X6FUzcopSXFayDxLuGMN9IrN9MDo2BLBum4Fc8d1+CFJH
-         1ycw==
-X-Forwarded-Encrypted: i=1; AKwUvByFRBp5yWZ1qnlfMfbgN04DqJoHnBAx0rUJWCjdIQsMz2fX71dLkRpCwEqdGIYuak+yP7s2K3ZwWZeySzm6@vger.kernel.org
-X-Gm-Message-State: AFq9FYIi0inZ760er2W8uaATUmgcQGQPvIaFn0oXPRtWN5rQEuDhXbIe
-	07vYe3zsWRZ+ekjuQR1WFPRMy+KKpoA/a8RSfBlU4hdd7+2jZdygQXUpK8hpHSjNi2kOAkJWOFW
-	EQmujI3lSvbc6m0rpu4A6OzGQTuiMfXIfNAknxlE/f1eT0wKdPT4LdOjK9Zj/4+o1tctJoCoF8s
-	RC
-X-Gm-Gg: AYBFou1XxgxhW9uJ2ktBpHVVMnpAm+ZTILQSRAGOx1Nas0m5jJfvBKV1UsGbCAelAtB
-	1COoIwcee2PzxirteRUQW3WrupPFXLxJCo5awap5p2owRGjwZWf9QQqPDrVtGI7LZw0V+TnIV46
-	i0f2b/MUPwMuNjfkYZ0ltoRX44rBo+DkWHnQALJ3THD47EW3dgVd8F49S4SDBcaOkWJmYWp5i76
-	h71w4KEXg3docR1e/10M5zJ92NRuA5T8GJqCBilDbF+kQ53mMROIg7B2EMPwjf2mitu+yWamVct
-	FqglWh4yR7GsSH12K2yLelSAH2gG7Ifdfz08OH/ch2m2BaSVKLA+Zz7t2qw8wRKgvWCI0lziyKL
-	UTtvL+A4j3cKSfUrgLb5LIlhv9edPLiHEsBA=
-X-Received: by 2002:a05:6808:221f:b0:4e7:f052:460c with SMTP id 5614622812f47-53cd39d6a26mr4945071b6e.23.1792417064945;
-        Mon, 19 Oct 2026 06:37:44 -0700 (PDT)
-X-Received: by 2002:a05:6808:221f:b0:4e7:f052:460c with SMTP id 5614622812f47-53cd39d6a26mr4944995b6e.23.1792417061644;
-        Mon, 19 Oct 2026 06:37:41 -0700 (PDT)
-Received: from [192.168.0.103] ([124.123.193.51])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-5388dd87607sm7601048b6e.13.2026.10.19.06.37.33
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Oct 2026 06:37:40 -0700 (PDT)
-Message-ID: <6680c20a-59f5-4da4-a389-e80b22830ded@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 19:07:30 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ooQ1JabA"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7B87AC2BCFC;
+	Mon, 19 Oct 2026 13:39:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1792417162;
+	bh=slYxthp496E4xcRQzJ2OurTUqSc5h7per4A8X+sBkMc=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=ooQ1JabA+OKT/VV/Ola+j8K5TW/1zqY49k4ymYvOnOaFuUUozVqQ0QrOQFb4j/3c2
+	 iR8z2/7xXv8ZeGANB3t6nVpErxwppOf1KpXzkIbjr9+1nmhZVKO0vKgawzcQnw/qWa
+	 vz0PflMFYx+uPgYPT3b3lUfwOkDF2i73tGQSg8rEuIKrHh7Aro0uwK+BcPMaAXez0W
+	 k1ZMNlBcD82416yrUo5u+1s7yaYbYeMyoMtOEh/FBUPYF+YxYm4Rl0yClj5wx6KBwg
+	 iIyRP6HxZjUkEIj4yVWesIx2fam3Tk6tiJ5IbT6+/4xbHZ2q0KqZqDpmWCszrGakHY
+	 CaWCCIO7gG7tw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B4C2CCF2E3;
+	Mon, 19 Oct 2026 13:39:22 +0000 (UTC)
+From: Mohammed AlHashim via B4 Relay <devnull+eng.m7mdhashim.1.gmail.com@kernel.org>
+Date: Mon, 19 Oct 2026 16:38:55 +0300
+Subject: [PATCH v2] drm/msm/adreno: Register devfreq after the GPU-specific
+ init
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 6/9] ASoC: dt-bindings: qcom: Add Hawi LPASS macro
- codecs
-To: Krzysztof Kozlowski <krzk@kernel.org>,
-        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, linux-arm-msm@vger.kernel.org,
-        linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261014-add_shikra_support_v5-v5-0-fb9f0667e613@oss.qualcomm.com>
- <20261014-add_shikra_support_v5-v5-6-fb9f0667e613@oss.qualcomm.com>
- <20261015-grumpy-salmon-of-holiness-b6e9f4@quoll>
- <9a12fc9c-e766-45d3-a6f8-eb6ff3332434@oss.qualcomm.com>
- <cd256380-fdfd-4359-8611-0901045f66df@kernel.org>
-Content-Language: en-US
-From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-In-Reply-To: <cd256380-fdfd-4359-8611-0901045f66df@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1NCBTYWx0ZWRfX3Ilc/L4oMGfe
- hjpSQlyL8y0nNc1UhpxlNK6a9PNrO4bYiutA65Zw1VoqO0hIZ69PzGIXbCR+Ef7KB852E6mnTHu
- V2+jg31CLdlzVH70Be0F2IfImRTRl7U=
-X-Proofpoint-GUID: SfEr1iO8LI_VxAy3qDZemrIf-DujKwFk
-X-Proofpoint-ORIG-GUID: SfEr1iO8LI_VxAy3qDZemrIf-DujKwFk
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1NCBTYWx0ZWRfX9PcUcRDbvT9p
- LTDIEoWGi6R7Kb5L9qosgTYdy9DfTcvIi86w4/SmWi0EfumxNPEGRsa/AwzmoKqkIsNwJYZiG9p
- JKT9Fvr0BENpB1GrxNsIpBI1KKHr0Vk1A9FeCq2AWf3dxeZd3Z+xU9enQtbxgEdvrm63FN09hPR
- UyL44O2sE7tsNlWb13/LR8VSQmcDvdhfSGqCaJ81KgTJS17Ixg8WxbSRa+1xzC5mvg0jMZGmfty
- NZCJWunBvwMgPFEbKIiHFkKORP5cqLua6YodNXsM1XRFsf8GtR5/7p4YQmgwU4R3XnjAQfiMCpE
- ToNJuz1yQxzDiLtraUCZS2EylCuzFDvV9G5VihkB/gnP988Yi+smqXldvD0Ja6JhiHSSWdsQInM
- YSAke3ydrePU9ss1HyJQEST85CZyHa33aM8zSTkV2PeVp+ggoLCdV6R7mcvosZRkcY+SjdcxEJT
- gyRRLNJtR80inXEf/Fg==
-X-Authority-Analysis: v=2.4 cv=OvTaWC/t c=1 sm=1 tr=0 ts=6ad61d29 cx=c_pps
- a=4ztaESFFfuz8Af0l9swBwA==:117 a=BrlcFtHvR1PXzI/wv7BzPw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=4TWVGNFFVB-82TrN4G0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=TPnrazJqx2CeVZ-ItzZ-:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 adultscore=0 lowpriorityscore=0
- priorityscore=1501 malwarescore=0 bulkscore=0 impostorscore=0 spamscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610190054
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261019-msm-gmu-freq-guard-v2-1-799eb15890ba@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NQQ6CMBBFr0Jm7RhaA6muvIdhUaZDGWNBWyAaw
+ t0F3Lt8yfvvz5A4Cie4ZDNEniRJ362gDxlQazvPKG5l0LkuVa4MhhTQhxGbyC/0o40OubBkToV
+ RTV3AOnxGbuS9R2/Vj9NY35mGrbQZraShj5/9dVKb9/dgUqjQubN2RMRsyqsPVh5H6gNUy7J8A
+ cCu7pbGAAAA
+X-Change-ID: 20261018-msm-gmu-freq-guard-e5ac83581fb5
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Mohammed AlHashim <eng.m7mdhashim.1@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792417161; l=6463;
+ i=eng.m7mdhashim.1@gmail.com; s=20261018; h=from:subject:message-id;
+ bh=r8SfK/Iz/wVLnIplhj+V3MUujIzOEzMTsriA+q8roW4=;
+ b=loEzTtjSzd0LghPPlDggXNMIcuYnZGEFrwTAxA0TB7rMZD0/qmxz2e5HNpxS0/wFLX9gzxI30
+ l6uInSRHW73A5aMS4YIeT3LYrcoRHIcQfEipypSRSt7Q5RAuj81yrwr
+X-Developer-Key: i=eng.m7mdhashim.1@gmail.com; a=ed25519;
+ pk=nadicxm5lJrpr6u2tkxbYV+wi8bWOYqheGU3HolXoXA=
+X-Endpoint-Received: by B4 Relay for eng.m7mdhashim.1@gmail.com/20261018
+ with auth_id=1228
+X-Original-From: Mohammed AlHashim <eng.m7mdhashim.1@gmail.com>
+Reply-To: eng.m7mdhashim.1@gmail.com
+
+From: Mohammed AlHashim <eng.m7mdhashim.1@gmail.com>
+
+a6xx_gpu_init() registers devfreq through adreno_gpu_init() ->
+msm_gpu_init() -> msm_devfreq_init(), and only afterwards calls
+a6xx_gmu_init(), which fills gmu->gpu_freqs[] and sets
+gmu->nr_gpu_freqs. The devfreq sysfs node and the cooling device are
+live in that window, so a write to min_freq or max_freq, or a thermal
+QoS update, can reach a6xx_gmu_set_freq() while nr_gpu_freqs is still
+0.
+
+The lookup loop then compares a u32 perf_index against
+gmu->nr_gpu_freqs - 1. With a count of 0 the bound converts to
+UINT_MAX, so the loop reads past the end of gpu_freqs[] until it hits
+unmapped memory. It faults with devfreq's lock held, so every later
+GPU user blocks and the machine hangs.
+
+This was hit at boot on an X1P42100 (Adreno X1-45) laptop, where a udev
+rule wrote min_freq as soon as the devfreq device appeared:
+
+  Unable to handle kernel paging request at virtual address ffff000b80000000
+  Internal error: Oops: 0000000096000005 [#1]  SMP
+  CPU: 0 UID: 0 PID: 487 Comm: (udev-worker) Tainted: G        W  O
+  Hardware name: SAMSUNG ELECTRONICS CO., LTD. Galaxy Book4 Edge/NP750XQA-KB2US
+  pc : a6xx_gmu_set_freq+0x74/0x2a0 [msm]
+  lr : a6xx_gmu_set_freq+0x3c/0x2a0 [msm]
+  ...
+  x4 : 00000000ffffffff ...
+
+x4 holds the wrapped loop bound. The faulting address is 1 GiB
+aligned, which matches a linear read running off the end of the
+linear map.
+
+Move msm_devfreq_init() out of msm_gpu_init() and call it last in
+adreno_bind(), once the generation's init function has returned, so
+devfreq only appears after the freq and bandwidth tables are complete.
+Do it after dev_pm_opp_of_find_icc_paths() so a deferral there does not
+leave a devfreq or cooling device behind.
+This also closes the narrower race where a6xx_gmu_pwrlevels_probe()
+writes the tables and counts while a6xx_gmu_set_freq() may already be
+running, and it does not drop a frequency request the way an early
+return in a6xx_gmu_set_freq() would.
+
+a2xx has no gpu_busy() and never registers devfreq. a3xx, a4xx and
+a5xx build nothing after msm_gpu_init() that the devfreq callbacks
+read, and a6xx parts with a GMU wrapper or RGMU set the rate through
+the OPP core, so for all of them devfreq simply appears a little later
+in the same bind. GPU runtime PM is only enabled on first open, in
+adreno_load_gpu(), so no resume or suspend can reach
+msm_devfreq_resume() or msm_devfreq_suspend() during bind, and both
+return early through has_devfreq() in any case.
+
+Fixes: a2c3c0a54d4c ("drm/msm/a6xx: Add devfreq support for a6xx")
+Cc: stable@vger.kernel.org
+Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Assisted-by: LLM
+Signed-off-by: Mohammed AlHashim <eng.m7mdhashim.1@gmail.com>
+---
+How this was found and tested:
+
+- Seen twice at boot (2026-10-03 and 2026-10-05) on a Samsung Galaxy
+  Book4 Edge 15" (NP750XQA, X1P42100 / Adreno X1-45) running a
+  downstream 7.2.7 tree with an out-of-tree device tree. Both oopses
+  were at a6xx_gmu_set_freq+0x74, about 9 s after power-on, from a udev
+  rule writing min_freq when the devfreq device appeared. The log ends
+  at "Call trace:" because the machine hung.
+- With v1's guard applied to the same downstream tree, the laptop has
+  booted 20 times since 2026-10-14 with no oops. That only shows the
+  guard did no harm. It does not prove the race was closed, because the
+  udev rule was moved to a delayed systemd unit on 2026-10-06 and the
+  window is narrow.
+- v2, backported to the same downstream tree in place of v1's guard,
+  booted 5 times with the original udev rule restored, so min_freq was
+  written the moment the devfreq device appeared. All 5 boots were
+  clean and the floor was applied (min_freq and cur_freq read back as
+  requested). Suspend/resume could not be tested: s2idle does not yet
+  resume on this machine for an unrelated reason.
+- On v7.3-rc7 v2 is only build-tested (arm64 defconfig, W=1, all of
+  drivers/gpu/drm/msm/). It has not been run on mainline or msm-next,
+  and I could only reason about a3xx-a5xx from the source.
+
+AI disclosure: an LLM coding assistant helped read the oops, trace the
+init ordering, check the other GPU generations and draft this commit
+message. I reviewed the result, tested it as described above, and take
+responsibility for it.
+---
+Changes in v2:
+- Register devfreq from adreno_bind() after the GPU-specific init,
+  instead of returning early in a6xx_gmu_set_freq() (Konrad).
+- This also addresses the two Sashiko findings on v1: the residual
+  race with a6xx_gmu_pwrlevels_probe() and the dropped frequency
+  request on resume.
+- Register devfreq after dev_pm_opp_of_find_icc_paths(), so a probe
+  deferral there does not leave a devfreq or cooling device behind.
+- Retitled from "drm/msm/a6xx: Don't set GPU freq before the GMU freq
+  table is built", since the change now touches common adreno code.
+- Link to v1: https://patch.msgid.link/20261018-msm-gmu-freq-guard-v1-1-dd92dcccee86@gmail.com
+---
+ drivers/gpu/drm/msm/adreno/adreno_device.c | 8 ++++++++
+ drivers/gpu/drm/msm/msm_gpu.c              | 2 --
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_device.c b/drivers/gpu/drm/msm/adreno/adreno_device.c
+index 05c77fe27..52d90e1d1 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_device.c
++++ b/drivers/gpu/drm/msm/adreno/adreno_device.c
+@@ -247,6 +247,14 @@ static int adreno_bind(struct device *dev, struct device *master, void *data)
+ 	if (ret)
+ 		return ret;
+ 
++	/*
++	 * Register devfreq last: its sysfs, QoS and cooling device can reach
++	 * gpu_set_freq() as soon as it exists, and on a6xx the GMU freq and
++	 * bandwidth tables are only built by a6xx_gmu_init(), after
++	 * msm_gpu_init().
++	 */
++	msm_devfreq_init(gpu);
++
+ 	return 0;
+ }
+ 
+diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
+index 0c2c35636..452da9272 100644
+--- a/drivers/gpu/drm/msm/msm_gpu.c
++++ b/drivers/gpu/drm/msm/msm_gpu.c
+@@ -968,8 +968,6 @@ int msm_gpu_init(struct drm_device *drm, struct platform_device *pdev,
+ 
+ 	platform_set_drvdata(pdev, &gpu->adreno_smmu);
+ 
+-	msm_devfreq_init(gpu);
+-
+ 	gpu->vm = gpu->funcs->create_vm(gpu, pdev);
+ 	if (IS_ERR(gpu->vm)) {
+ 		ret = PTR_ERR(gpu->vm);
+
+---
+base-commit: 24a19b953e2a3d0ea5a8c4951a0ab8f32720c907
+change-id: 20261018-msm-gmu-freq-guard-e5ac83581fb5
+
+Best regards,
+--  
+Mohammed AlHashim <eng.m7mdhashim.1@gmail.com>
 
 
-On 10/16/2026 7:21 PM, Krzysztof Kozlowski wrote:
-> On 16/10/2026 10:14, Prasad Kumpatla wrote:
->> On 10/15/2026 3:08 PM, Krzysztof Kozlowski wrote:
->>> Are you sure you are not using source clock names?
->> On Hawi this RX input is sourced from the LPR vote (LPASS_HW_LPR_VOTE)
-> That the source clock name. Look, where LPASS_HW_LPR_VOTE is used:
->
->> instead of the MACRO vote used on sm8550:
->>
->>       clocks = <&q6prmcc LPASS_CLK_ID_RX_CORE_TX_MCLK ...>,
->>                <&q6prmcc*LPASS_HW_LPR_VOTE* ...>,
-> Here.  LPASS_HW_LPR_VOTE is the name in q6prmcc.
->
->>                <&q6prmcc LPASS_HW_DCODEC_VOTE ...>,
->>                <&lpass_vamacro>;
->>       clock-names = "mclk",*"lpr"*, "dcodec", "fsgen";
->>
->> "lpr" is the same style of name as the existing "macro"/"dcodec" entries,
-> That's the same vote as here, no? Vote for main block (macro)?
-
-No, LPR and MACRO are different votes - they request different param_ids:
-
-     bool lpr_req = (hw_block_id == Q6PRM_HW_LPR_VOTE);
-     param_data->param_id = lpr_req ? PARAM_ID_RSC_CPU_LPR
-                                    : PARAM_ID_RSC_HW_CORE;
-     if (lpr_req)
-             req->lpr_state = LPR_CPU_SS_SLEEP_DISABLE;
-     else
-             req->hw_clk_id = hw_block_id;
-
-It's not the macro vote. LPR is the vote to put the LPASS block into
-sleep-disable before accessing the LPAIF registers, so the name reflects
-that different vote rather than the macro one.
-
-This LPR Vote is common accross all the LPASS macros to use for Hawi and Maili LPASS versions .
-I will reframe the commit message to reflect same in next revision.
-
-Thanks,
-Prasad
-
->
->> not a parent/source name. An sm8550 fallback can't be used here because it
->> pins input #2 to "macro", which no longer matches the LPR source on Hawi;
->> the other three inputs are unchanged, so RX gets its own clock-names.
->>
->> Thanks,
->> Prasad
->>
->
-> Best regards,
-> Krzysztof
