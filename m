@@ -1,48 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 757AF4C7B2B;
-	Mon, 19 Oct 2026 14:01:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 831565D5D9C;
+	Mon, 19 Oct 2026 14:01:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418479; cv=none; b=o1miuxC2BO68x2LMJ+EcDS1BOwVRSHdcMf2fFZd6W13P8h+/4oabhX8XO8LnX6CygcnjA1kSvIHB6I/1fIUQchPOpLc4vdY7ChWjK8fDD1gedw7gQdzg7SXzCBKG3U+e/UMvSvBCqL2ypW/bk9fuNFgNcbwHYxAJvYPmtGqVivQ=
+	t=1792418507; cv=none; b=DUuUfd4uqHXYP3K/mHWKqyXxNzAtB38uZFPf0taE49mj/JHcb1oKIq/6O0WnqjfXEGfwshUirxtOLqQo4azV1LKaP2rbwIv+gTM/s0yAjFd6mqDlmZpX/xYXfgkuIjwg5enOKgx5FurSd2Ir6xzeiRcmvKyYJoJfKNr8TFpjprs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418479; c=relaxed/simple;
-	bh=y19LUGr+JeffvcKDFmlOmdu8xFQuQYqw+9nWGjlKoEs=;
+	s=arc-20240116; t=1792418507; c=relaxed/simple;
+	bh=9mzw2mITOQXRw81kHHL08Ce4CnHAtf2EjIxCfonuETY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fIuazZiftgY8ryjT7FCdxxzaA6MKY2Ivpv2TPgJ/SmrlOIUlr+LIuawtCyca38Bsn8y6BmwfVJSoLtx7r3vTHxhyHzM6PHP1XAxVyDOL+YfDXECUmlzK/8DiiUC0BigFF37JE/2UurfQ2lgmC+iimqsgoMeJMDvEgSC2/qzz4d4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ef3uNpXF; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=Jr72uf6UznGON+xepysOSsPrXcxfiY7XSGYY3h8rqS5RM/McaHk8NTnXxCsSqL276knzWHSWTAND8J0XCYkB1ik6aS4meUHRJ2vbR8pQfR3nkEETV8P37I6NSkhsD545SQPyhN2W/CVUwsl0CYJRlGeSmR+UvN9ZG0dWFrLZw9E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NWd5iT2J; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ef3uNpXF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 270A11F000C7;
-	Mon, 19 Oct 2026 14:01:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NWd5iT2J"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9DDE1F000CA;
+	Mon, 19 Oct 2026 14:01:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418477;
-	bh=hA8suylLM7JDukhpE4JXYMIspGye87RnTv0rkAgekpY=;
+	s=k20260515; t=1792418505;
+	bh=av2i/a27mFO35q2gQgrs5PYUW708u+igcVfoCp20+Is=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=ef3uNpXF8qZpWK3rJH6c9Ugbas23wWmawVcnCcJqOjjt+nVR2NWD68yv5ByZ1fZkG
-	 LllREKpbRGdpb9rlK6TVcd0IXKyKBUx8fe7Np+lFVYFIK21FgFqTYiHpowKhU83v11
-	 u//sm8LmtGDWL0U0S67KAAvBtJOcAy1yMs58xe3XPSCnAYjtz7GECh7aM7qT/bwa1M
-	 QlQYX3Q2usKDB+dyqbY0tF219jlndOWeX609bzsJhkooJNs3b1wqSyeiqCm6pItdV3
-	 6ACsTPvLT+Z/rsd7g+X8OGlES0SH4GauNvxTlryudbfZsmaGG1n1ndCPbxrtfBQC8W
-	 /doTRvBABTJ3w==
+	b=NWd5iT2JmLsYfhiq+yCC8rgx8ZJrJWcIpnqGhXWv+ZT4VvsWPzcPGQXoxkATlRgtL
+	 qxoosAtayMUDLHosAJpj5ZVUI1EcwnRlsSpR18hdV49HEyIhLWk9tGxo6DeTYWj0+m
+	 B7JNkIZdzJ05Q8/8tcRvBre+RZGRVmqYh/LHD8Nl2vXWfbSZYEf2bBcSaGTuizx24b
+	 Z7evQ+M99HefDDHe81oVS37zYN55M1w2/qIAme+SwvZ+OOebWwmoxMDFu6TVhjy6Vt
+	 7nXPKwgq0KiuxHWCACqjZpeiwLc9QFfbaycqaSgouSQzbYPe6zz8owwEXgupef+FQ/
+	 vlLgUwwU0FY6g==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+Cc: Esteban Urrutia <esteuwu@proton.me>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Will Deacon <will@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
 	robin.clark@oss.qualcomm.com,
-	lumag@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
+	joro@8bytes.org,
+	iommu@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
+	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18] drm/msm: detach the ARM DMA mapping before attaching our own domain
-Date: Mon, 19 Oct 2026 09:49:27 -0400
-Message-ID: <20261019135441.1420968-276-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18-6.12] iommu/arm-smmu-qcom: Add SM8450 MDSS compatible
+Date: Mon, 19 Oct 2026 09:49:47 -0400
+Message-ID: <20261019135441.1420968-296-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -58,347 +57,332 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+From: Esteban Urrutia <esteuwu@proton.me>
 
-[ Upstream commit 140b13475302601368c0cf4e193e66126a49feb3 ]
+[ Upstream commit d149c8b2c0146a01f1be326ddb1e182b55aee638 ]
 
-On ARM32 with CONFIG_ARM_DMA_USE_IOMMU, arch_setup_dma_ops() creates a
-dma_iommu_mapping for every IOMMU-backed device and attaches its domain
-to the device's IOMMU group. That domain is neither the group's default
-nor its blocking domain, so when msm_iommu_new() later attaches the
-domain the driver manages itself, __iommu_attach_group() refuses it:
+Add the compatible for the MDSS client on the Snapdragon 8 Gen 1 so it can
+be properly configured by the IOMMU driver.
 
-	if (group->domain && group->domain != group->default_domain &&
-	    group->domain != group->blocking_domain)
-		return -EBUSY;
+Otherwise, there is an unhandled context fault, because the framebuffer is
+already configured in UEFI.
 
-Both the GPU and the display controller are hit by this on apq8064
-(IFC6410), leaving the board with no GPU and no display:
-
-  adreno 4300000.gpu: failed to load adreno gpu
-  adreno 4300000.gpu: probe with driver adreno failed with error -16
-  mdp4 5100000.display-controller: [drm:msm_drm_kms_init] *ERROR* failed to load kms
-  mdp4 5100000.display-controller: adev bind failed: -16
-
-Other ARM32 DRM drivers that manage their own domains (tegra, rockchip,
-exynos) drop the arch mapping first. Do the same in msm_iommu_new(),
-which both the display and the GPU paths go through.
-
-With this the GPU and the KMS device both initialise:
-
-  [drm] Initialized msm 1.13.0 for 4300000.gpu on minor 0
-  [drm] Initialized msm-kms 1.13.0 for 5100000.display-controller on minor 1
-
-Assisted-by: Claude:claude-opus-5
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Patchwork: https://patchwork.freedesktop.org/patch/743333/
-Link: https://lore.kernel.org/r/20260730-fix-qcom-smmu-v2-3-18e0daf2d836@oss.qualcomm.com
+Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
+Signed-off-by: Will Deacon <will@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-I have the 6.1.188 picture: the -EBUSY attach path is present,
-`qcom_defconfig` hits it, and the companion series crashes are not
-reachable here. Writing up the full analysis.
-
 ## Phase 1: Commit message forensics
 
-**Step 1.1:** Record: `[drm/msm] [detach] Drop the ARM32 DMA IOMMU
-mapping so msm can attach its own domain`
+**Step 1.1: Subject line**
+Record: `[iommu/arm-smmu-qcom] [Add] SM8450 MDSS compatible so the
+Qualcomm SMMU driver can configure that display client`
 
-**Step 1.2:** Record: Tags present:
-- `Assisted-by: Claude:claude-opus-5`
+**Step 1.2: Tags**
+Record:
 - `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
-- `Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>`
-  (author; ignore pipeline SOBs)
-- `Patchwork: https://patchwork.freedesktop.org/patch/743333/`
-- `Link: https://lore.kernel.org/r/20260730-fix-qcom-
-  smmu-v2-3-18e0daf2d836@oss.qualcomm.com`
-- No `Fixes:`, no `Cc: stable` (expected for this review)
-- No `Reported-by` / `Tested-by` / syzbot
+  (Qualcomm SoC/display maintainer)
+- `Signed-off-by: Esteban Urrutia <esteuwu@proton.me>` (author)
+- `Signed-off-by: Will Deacon <will@kernel.org>` (IOMMU/arm-smmu
+  maintainer)
+- No `Fixes:`, `Reported-by:`, `Tested-by:`, `Link:`, or `Cc:
+  stable@vger.kernel.org` (absence is expected for this review)
 
-**Step 1.3:** Record: On ARM32 with `CONFIG_ARM_DMA_USE_IOMMU`,
-`arch_setup_dma_ops()` attaches a `dma_iommu_mapping` domain that is
-neither the group default nor blocking domain. `msm_iommu_new()` then
-`iommu_attach_device()`s the driver-owned domain and
-`__iommu_attach_group()` returns `-EBUSY`. Symptom on apq8064/IFC6410:
-GPU probe fails with `-16`, MDP4 KMS fails with `-16`, no GPU and no
-display. Author reports both devices initialise after the change.
+**Step 1.3: Body**
+Record:
+- Bug: SM8450 MDSS is missing from `qcom_smmu_client_of_match`, so it
+  does not get the identity-domain workaround.
+- Symptom: unhandled ARM SMMU context fault because UEFI already
+  programmed the framebuffer with physical addresses.
+- Root cause: without a match, `qcom_smmu_def_domain_type()` returns 0
+  and the IOMMU uses a translated DMA domain instead of identity
+  mapping.
+- Version info: none in the message. SM8450 display support has been in
+  this tree since v6.3 (`drm/msm: mdss add support for SM8450`).
 
-**Step 1.4:** Record: Not a disguised cleanup. Explicit probe-failure
-fix, matching tegra/rockchip/exynos.
+**Step 1.4: Hidden bug fix?**
+Record: Not hidden. The subject says “Add”, but the body describes a
+real hardware workaround (IOMMU identity domain for a bootloader-
+configured display), not a new feature.
 
 ## Phase 2: Diff analysis
 
-**Step 2.1:** Record: One file, `drivers/gpu/drm/msm/msm_iommu.c`, +22
-lines. Functions: file-scope includes; `msm_iommu_new()`. Surgical,
-single-file.
+**Step 2.1: Inventory**
+Record:
+- File: `drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c` (+1 / −0)
+- Function: static table `qcom_smmu_client_of_match[]`
+- Scope: single-file, one-line compatible addition
 
-**Step 2.2:** Record: Before: `msm_iommu_new()` attaches its domain
-immediately. After: if `CONFIG_ARM_DMA_USE_IOMMU` and a mapping exists,
-`arm_iommu_detach_device()` + `arm_iommu_release_mapping()`, then
-attach. Probe/init path only; no-ops when the config is off.
+**Step 2.2: Code flow**
+Record: Before, `of_match_device(qcom_smmu_client_of_match, dev)` misses
+`qcom,sm8450-mdss`, so `qcom_smmu_def_domain_type()` returns 0. After,
+that compatible matches and the function returns
+`IOMMU_DOMAIN_IDENTITY`. Path: IOMMU default-domain selection at MDSS
+probe, not an error path.
 
-**Step 2.3:** Record: `[Hardware workaround / logic] ARM DMA domain
-occupies the group → EBUSY. Same detach-before-attach used by
-rockchip/exynos in this tree.`
+**Step 2.3: Bug mechanism**
+Record: Hardware workaround / device-ID (compatible) addition. MDSS
+streams keep using the UEFI framebuffer mapping. Without identity domain
+those accesses translation-fault (`arm-smmu: Unhandled context fault`).
+Same pattern as SM6115, SDM670, X1E80100, QCM2290, SC8280XP.
 
-**Step 2.4:** Record: Obviously correct; copies an in-tree pattern.
-Gated so ARM64/non-IOMMU is unchanged. Regression risk is low if the
-companion iommu/msm crash is not reachable here (verified below).
-`msm_iommu_new()` signature differs in 6.1, so the backport is a small
-contextual insert, not a clean cherry-pick.
+**Step 2.4: Fix quality**
+Record: Obviously correct and minimal. Only devices with
+`qcom,sm8450-mdss` change behavior. Regression risk is very low;
+neighboring SoCs already use this table the same way. ACTLR table
+already listed `qcom,sm8450-mdss`; the client table was the omission.
 
 ## Phase 3: Git history
 
-**Step 3.1:** Record: `iommu_attach_device()` in `msm_iommu_new()` is
-from `52da6d513183cf` (Jordan Crouse, 2020). Function exists since
-`871d812aa43e6` (2013). EBUSY check in this tree is `0286300e604555`
-(Jason Gunthorpe, 2022-05-09), in 6.1. Rockchip equivalent:
-`8490cad4dc4e2`, also in this tree.
+**Step 3.1: Blame**
+Record:
+- Table introduced in `0e764a01015df` (2020, “Allow client devices to
+  select direct mapping”).
+- This line added by `d149c8b2c0146` (2026-07-22).
+- SM8450 MDSS driver: `80056d9ac47ab` (2023-01-12, v6.3-rc1).
+- SM8450 DT: `a6dd1206e45a4` (2022-12-28).
+- Bug window: from v6.3 until this commit (about three years).
 
-**Step 3.2:** Record: No `Fixes:` tag. Bug is the interaction of ARM DMA
-attach + msm attaching its own domain + the 6.1 EBUSY check.
+**Step 3.2: Fixes: tag**
+Record: No `Fixes:` tag. Implicit introducer is `80056d9ac47ab` adding
+SM8450 MDSS without the IOMMU match. That driver and DT are in this
+tree.
 
-**Step 3.3:** Record: Recent `msm_iommu.c` churn in this tree is
-unrelated (sgtable WARN, tlb ops). No prior msm ARM-DMA detach. Patch is
-`3/3` of “Fix GPU and display on ARM32 platforms using the MSM IOMMU”:
-1. `iommu/msm: track a context master per device and IOMMU`
-2. `iommu/msm: use the IOMMU device for page table allocation`
-3. this commit
+**Step 3.3: File history**
+Record: Several sibling “Add … MDSS compatible” commits (`f7fa8520f3037`
+SM6115, `12721e6600579` X1E80100, `28af105cb6504` QCM2290,
+`270a1470408e4` SDM670, `617937d4d5533` Glymur). Standalone one-line
+table entries; SM6115 even had `Cc: stable` and crash logs. No extra
+prerequisite beyond the existing match table.
 
-Cover letter: all three needed on **mainline**; patches are independent
-for different maintainers.
+**Step 3.4: Author**
+Record: Esteban Urrutia has only this IOMMU commit here. Reviewed by
+Konrad Dybcio; applied by Will Deacon. Not a drive-by unreviewed change.
 
-**Step 3.4:** Record: Dmitry Baryshkov is a Qualcomm/msm DRM maintainer;
-many msm commits in this tree. Konrad reviewed this patch.
+**Step 3.5: Dependencies**
+Record: Needs `qcom_smmu_client_of_match` /
+`qcom_smmu_def_domain_type()` and a `qcom,sm8450-mdss` client. All
+present. No new APIs. Applies as a one-line insert next to
+`qcom,sm8250-mdss`.
 
-**Step 3.5:** Record: Applies standalone to 6.1’s attach site. Patch 1’s
-fatal NULL deref is blamed on `da33e87bd2bf` (“iommu: Handle yet another
-race around registration”) — **not** in this tree (`git merge-base --is-
-ancestor` → no). Patch 2’s crash stack uses `msm_iommu_identity_attach`,
-which **does not exist** in 6.1 `drivers/iommu/msm_iommu.c`. Those two
-are not prerequisites for this -EBUSY fix here.
+## Phase 4: Mailing list / external research
 
-## Phase 4: Mailing list
+**Step 4.1: Original discussion**
+Record:
+- `b4 dig -c d149c8b2c0146` →
+  https://patch.msgid.link/20260711-sm8450-qol-
+  smmu-v2-1-41a6fba41c3e@proton.me
+- v1: 8-patch “sm8450-qol” series (2026-06-22)
+- v2: this patch split out alone (2026-07-11)
+- Will Deacon: “Applied to iommu (arm/smmu/updates), thanks!” — no NAK
+- Cover note: “This patch allows the MDSS driver to properly function on
+  SM8450 based devices.”
+- lore.kernel.org fetches returned 403; content confirmed via patchew
+  and LKML mirror.
 
-**Step 4.1:** Record: `b4 dig -c 140b134753026` →
-https://patch.msgid.link/20260730-fix-qcom-
-smmu-v2-3-18e0daf2d836@oss.qualcomm.com
-v1 and v2 same day. v2: dropped a `dev_warn` tweak (Konrad); rewrote
-patch 2 (Robin Murphy). Applied version is v2 3/3. Lore HTTP 403/503;
-thread recovered via `b4 dig -m`. No NAKs in the saved mbox. No reviewer
-`Cc: stable`.
+**Step 4.2: Recipients (`b4 dig -w`)**
+Record: Will Deacon, Robin Murphy, Joerg Roedel, Rob Clark, Konrad
+Dybcio; lists `iommu@`, `linux-arm-msm@`, `linux-arm-kernel@`, `phone-
+devel@`. Right maintainers and lists.
 
-**Step 4.2:** Record: To/Cc included Rob Clark, Will Deacon, Joerg
-Roedel, Robin Murphy, dri-devel, iommu, linux-arm-msm, freedreno. Konrad
-Reviewed-by on this patch.
+**Step 4.3: Bug report**
+Record: No syzbot/bugzilla. Author describes the UEFI framebuffer
+context-fault. Same failure as SM6115 (`f7fa8520f3037`): flood of
+`Unhandled context fault` and failed DPU/GPU bind.
 
-**Step 4.3:** Record: Author is the reporter; tested on IFC6410.
-Concrete dmesg for GPU and KMS probe `-16`.
+**Step 4.4: Series**
+Record: v2 is standalone. Other v1 QoL patches (dispcc, dts, qmp) are
+not required for this one-line match.
 
-**Step 4.4:** Record: Series of three; this patch is drm/msm-only. Cover
-letter: “only fixing all of them makes the board usable” on mainline.
-For 6.1, the other two fix post-6.1 IOMMU-core behavior.
+**Step 4.5: Stable list**
+Record: No stable-thread hit for this subject. Precedent: SM6115
+equivalent was `Cc: stable`.
 
-**Step 4.5:** Record: No stable@ discussion found
-(lore.kernel.org/stable search not usable here; mbox has no stable
-nomination).
+## Phase 5: Semantic analysis
 
-## Phase 5: Code semantics
+**Step 5.1: Functions**
+Record: Table `qcom_smmu_client_of_match[]` only. Consumer:
+`qcom_smmu_def_domain_type()`.
 
-**Step 5.1:** Record: `msm_iommu_new()`.
-
-**Step 5.2:** Record: Callers in this tree:
-- `adreno_iommu_create_address_space()` → GPU probe (`adreno_gpu.c`)
-- `mdp4_kms` init (`mdp4_kms.c`) → display
-- `msm_kms_init_aspace()` (`msm_drv.c`) → MDP/DPU
-- `a6xx_gmu.c` (a6xx; not apq8064)
-
+**Step 5.2: Callers**
+Record: `qcom_smmu_def_domain_type` is `.def_domain_type` on the
+Qualcomm SMMU impls. `arm_smmu_def_domain_type()` in `arm-smmu.c` calls
+it; IOMMU core `iommu_get_def_domain_type()` uses that at device attach.
 Probe-time, not IRQ/hot path.
 
-**Step 5.3:** Record: After the new detach: `iommu_attach_device()`.
-Detach uses `arm_iommu_detach_device` / `arm_iommu_release_mapping`
-(exported in this tree).
+**Step 5.3: Callees**
+Record: `of_match_device()` only.
 
-**Step 5.4:** Record: Reachable from platform probe of adreno/mdp4 when
-the device is IOMMU-mapped. Userspace is not needed; boot on apq8064
-with `qcom_defconfig` is enough.
+**Step 5.4: Reachability**
+Record: Yes, on Qualcomm SM8450 with MDSS enabled (`iommus` in
+`sm8450.dtsi`; `&mdss { status = "okay"; }` in `sm8450-hdk.dts`).
+Userspace does not need to do anything; boot + display probe is enough.
 
-**Step 5.5:** Record: Same pattern in this tree:
-`rockchip_drm_dma_attach_device()`, `exynos_drm_dma.c`.
+**Step 5.5: Similar patterns**
+Record: Same omission pattern for many MDSS SoCs; several already
+patched. SM8450 was the gap between sm8250 and x1e80100.
 
-## Phase 6: This checkout (6.1.188)
+## Phase 6: Local tree (this checkout)
 
-**Step 6.1:** Record: Tree is **6.1.188** (`pending-6.1`,
-`p-6.1-11-gffee1c0de6cf2`). Candidate `140b134753026` is **not** an
-ancestor of HEAD (`name-rev`: `tags/next-20260821~61^2`).
+**Step 6.1: Does the buggy code exist here?**
+Record:
+- `git describe HEAD`: `v7.3-rc4-27-gf0100363d8c37`
+- `make kernelversion`: `7.3.0-rc4`
+- This is the 7.3-rc4 mainline checkout, not an older LTS branch.
+- Match table, `qcom_smmu_def_domain_type()`, DRM `qcom,sm8450-mdss`,
+  and DT node all exist.
+- `git merge-base --is-ancestor d149c8b2c0146 HEAD` succeeded (commit is
+  already in HEAD). That is ignored as “already selected”; it does not
+  change technical merit.
+- Without this line, SM8450 MDSS would still take a translated domain on
+  this tree’s code.
 
-Buggy code is here:
+**Step 6.2: Backport difficulty**
+Record: Clean one-line apply against this file. Context around
+`sm8250-mdss` / `x1e80100-mdss` is stable.
 
-```402:425:drivers/gpu/drm/msm/msm_iommu.c
-struct msm_mmu *msm_iommu_new(struct device *dev, struct iommu_domain
-*domain)
-{
-        ...
-        ret = iommu_attach_device(iommu->domain, dev);
-        if (ret) {
-                kfree(iommu);
-                return ERR_PTR(ret);
-        }
-        return &iommu->base;
-}
-```
+**Step 6.3: Related fixes already here?**
+Record: ACTLR prefetch entry for `qcom,sm8450-mdss` is already present
+(`f91879fdf70bd`). That does not set identity domain. No other fix
+covers this bug.
 
-Same EBUSY test in `drivers/iommu/iommu.c` `__iommu_attach_group()`.
-`arch_setup_dma_ops()` → `arm_setup_iommu_dma_ops()` attaches the ARM
-mapping. `arch/arm/configs/qcom_defconfig` has `CONFIG_MSM_IOMMU=y`,
-`CONFIG_ARM_SMMU=y` (selects `ARM_DMA_USE_IOMMU`),
-`CONFIG_ARCH_MSM8960=y`, `CONFIG_DRM_MSM=m`. DT: `qcom-
-apq8064-ifc6410.dts`, GPU `adreno-3xx@4300000`, MDP `mdp@5100000`.
+## Phase 7: Subsystem context
 
-**Step 6.2:** Record: Minor backport. 6.1 `msm_iommu_new(dev, domain)`
-vs later `msm_iommu_new(dev, quirks)` with `iommu_paging_domain_alloc` /
-`kzalloc_obj`. Insert the detach block before the existing
-`iommu_attach_device()` and add the same `#if CONFIG_ARM_DMA_USE_IOMMU`
-stubs rockchip already uses.
+**Step 7.1**
+Record: `drivers/iommu/arm/arm-smmu/` Qualcomm implementation. IMPORTANT
+for ARM64 Qualcomm devices; not core mm/VFS, but IOMMU misconfig breaks
+display on those boards.
 
-**Step 6.3:** Record: No msm ARM-DMA detach in this tree.
-
-## Phase 7: Subsystem
-
-**Step 7.1:** Record: `[drm/msm IOMMU] [IMPORTANT]` — not core mm/net,
-but GPU+display on Qualcomm ARM32. Official `qcom_defconfig`.
-
-**Step 7.2:** Record: msm DRM is active; this ARM32 IOMMU attach path is
-old and stable.
+**Step 7.2**
+Record: Actively maintained (recent Glymur, ACTLR, fastrpc fixes). The
+match-table mechanism itself dates to 2020 and is mature.
 
 ## Phase 8: Impact and risk
 
-**Step 8.1:** Record: ARM32 Qualcomm with `CONFIG_ARM_DMA_USE_IOMMU` and
-msm DRM+IOMMU — `qcom_defconfig`, apq8064 (IFC6410, Nexus 7 flo, etc.).
+**Step 8.1: Who is affected**
+Record: SM8450 (Snapdragon 8 Gen 1) boards with MDSS, e.g.
+`sm8450-hdk.dts` (`status = "okay"`). Config: `CONFIG_ARM_SMMU` +
+`CONFIG_ARM_SMMU_QCOM` (default y on `ARCH_QCOM`).
 
-**Step 8.2:** Record: Every boot/probe of GPU and display. Not a race.
-Unprivileged userspace not required.
+**Step 8.2: Trigger**
+Record: Boot when UEFI left the framebuffer mapped and MDSS probes.
+Common on these phones/HDKs, not a rare race. Unprivileged userspace is
+not required.
 
-**Step 8.3:** Record: Probe `-EBUSY` → no GPU, no display. Severity
-**HIGH** for those boards (board graphics unusable). Not a generic
-panic.
+**Step 8.3: Failure mode**
+Record: Unhandled SMMU context faults; display init can fail (same class
+as SM6115: DPU/GPU bind errors). Severity: HIGH for those devices
+(broken display, fault spam). Not a universal panic.
 
-**Step 8.4:** Record: Benefit high for affected ARM32 qcom; risk low
-(config-gated, copies in-tree pattern, ~15 lines in one function).
-Companion mainline crashes are not the 6.1 detach path
-(`msm_iommu_identity_attach` missing; 6.1 `arm_iommu_detach_device`
-NULLs `dma_ops` after detach, and this patch’s extra `release_mapping`
-runs with `dma_ops` already NULL).
+**Step 8.4: Risk–benefit**
+Record: Benefit high for SM8450 display. Risk very low (one compatible,
+existing quirk table). Ratio strongly favors backport.
 
 ## Phase 9: Synthesis
 
-**Evidence FOR:**
-- Real, tested probe failure: GPU+KMS `-EBUSY` on IFC6410
-- Mechanism present in 6.1 (attach + EBUSY check + ARM DMA mapping)
-- Official `qcom_defconfig` enables the triggering config
-- Small, matches rockchip/exynos already in this tree
-- Reviewed by Konrad Dybcio; msm maintainer author
-- Hardware-workaround class (existing driver, existing boards)
+**Step 9.1: Evidence**
 
-**Evidence AGAINST:**
-- Cherry-pick does not apply cleanly (`msm_iommu_new` signature)
-- Series 3/3; cover letter says all three needed on mainline
-- ARM32 / older SoCs only
-- Not a UAF/security/panic by itself
+For:
+- Real bug: missing identity-domain quirk → SMMU context faults / non-
+  working MDSS
+- Hardware quirk / compatible addition (stable exception)
+- 1 line, obviously correct
+- Reviewed by Konrad Dybcio, applied by Will Deacon
+- Same class as SM6115, which was `Cc: stable`
+- SM8450 MDSS has been in this lineage since v6.3
+- No new API, no refactor, no extra dependencies
 
-**Unresolved:** Whether incomplete multi-IOMMU stream-ID programming
-(patch 1, “wrong for years”) still limits display/GPU quality after
-attach succeeds. That did not block probe; this patch fixes the probe
-blocker.
+Against:
+- No `Fixes:` / `Cc: stable` (expected here, not a negative)
+- Affects one SoC family, not all machines
+- Originally in a “QoL” series (v2 is a standalone bugfix)
 
-**Stable rules:**
-1. Obviously correct and tested? **PASS** (in-tree pattern; IFC6410)
-2. Real bug affecting users? **PASS** (`qcom_defconfig` apq8064)
-3. Important? **PASS** (complete GPU+display failure; quirk/enablement
-   exception)
-4. Small? **PASS** (+22 lines, one file; small 6.1 adapt)
-5. No new features/APIs? **PASS**
-6. Can apply to this tree? **PASS** (minor context adapt)
+Unresolved: lore.kernel.org 403 prevented reading every v1 reply; v2
+application and Konrad’s Reviewed-by are verified via patchew/LKML/`b4
+dig`.
 
-**Exception:** Hardware workaround for ARM32 IOMMU vs driver-managed
-domain, same class as existing DRM ARM DMA detach.
+**Step 9.2: Stable rules**
+1. Obviously correct and tested? **PASS** — one-line OF match;
+   maintainer review/apply
+2. Real user bug? **PASS** — context faults / MDSS broken on SM8450 with
+   UEFI FB
+3. Important (crash/security/corruption/deadlock)? **PASS** — unhandled
+   SMMU faults and failed display; HIGH for that hardware
+4. Small and contained? **PASS** — +1 line, one file
+5. No new features/APIs? **PASS** — existing quirk table only
+6. Can apply to this tree? **PASS** — table, MDSS driver, and DT are
+   here
 
-This tree is 6.1.188. The attach/`-EBUSY` bug is here, the devices and
-defconfig are here, and the mainline series mates that crash on later
-IOMMU core behavior are not required for this fix.
+**Step 9.3: Exception**
+Record: Device ID / hardware quirk on an existing driver. Automatic YES
+class.
+
+**Step 9.4: Decision**
+This tree (`v7.3-rc4`) has SM8450 MDSS and the Qualcomm SMMU client
+table. The patch is the standard identity-domain compatible for a
+bootloader-configured display. It should be treated as stable material.
+
+Explanation: Without `qcom,sm8450-mdss` in `qcom_smmu_client_of_match`,
+MDSS is attached to a translated IOMMU domain while UEFI still owns a
+physically addressed framebuffer, which produces unhandled context
+faults and can prevent the display stack from coming up. Adding the
+compatible selects `IOMMU_DOMAIN_IDENTITY`, matching every other
+Qualcomm MDSS entry in that table. Benefit is working display on SM8450;
+risk is a single OF match that cannot affect other hardware.
 
 Verification:
-- [Phase 1] Parsed tags: Reviewed-by Konrad; lore/patchwork links; no
-  Fixes/stable/syzbot
-- [Phase 2] Diff: +22 in `msm_iommu_new()`, detach ARM mapping then
-  `iommu_attach_device()`
-- [Phase 3] Blame: attach from `52da6d513183cf` (2020); EBUSY
-  `0286300e604555` in this tree; rockchip detach `8490cad4dc4e2` in this
-  tree
-- [Phase 3] `git merge-base --is-ancestor 140b134753026 HEAD` → no
-  (commit is linux-next, not 6.1)
-- [Phase 3] Companion Fixes `da33e87bd2bf` not in 6.1; no
-  `identity_attach` in 6.1 msm IOMMU
-- [Phase 4] `b4 dig -c 140b134753026` / `-a` / `-w` / `-m`: v2 3/3,
-  cover letter, Konrad R-b, Robin feedback on patch 2
-- [Phase 5] Callers: adreno, mdp4, `msm_kms_init_aspace` at probe
-- [Phase 6] `git describe HEAD` / Makefile: 6.1.188 pending-6.1; buggy
-  `msm_iommu_new()` at line 419
-- [Phase 6] `qcom_defconfig`: MSM_IOMMU=y, ARM_SMMU=y, DRM_MSM=m,
-  ARCH_MSM8960=y
-- [Phase 8] Failure: GPU/KMS probe `-16`/`-EBUSY`, no display; HIGH for
-  those boards
-- UNVERIFIED: live IFC6410 boot on 6.1.188 (author tested mainline)
+- [Phase 1] Parsed tags: Reviewed-by Konrad Dybcio; SOB Esteban Urrutia,
+  Will Deacon; no Fixes/Cc stable
+- [Phase 2] Diff: +1 line in `qcom_smmu_client_of_match[]`;
+  `qcom_smmu_def_domain_type()` returns `IOMMU_DOMAIN_IDENTITY` on match
+- [Phase 3] `git log`/`git blame`: table from `0e764a01015df` (2020);
+  SM8450 DRM `80056d9ac47ab` (v6.3-rc1); this commit `d149c8b2c0146`
+- [Phase 3] Sibling SM6115 commit `f7fa8520f3037` had `Cc: stable` and
+  context-fault logs
+- [Phase 3] `git merge-base --is-ancestor d149c8b2c0146 HEAD` → yes
+  (already in this checkout)
+- [Phase 4] `b4 dig -c d149c8b2c0146`: v2 at
+  patch.msgid.link/20260711-sm8450-qol-smmu-v2-1-41a6fba41c3e@proton.me
+- [Phase 4] `b4 dig -a`: v1 8-patch QoL series → v2 standalone SMMU
+  patch
+- [Phase 4] `b4 dig -w`: Will Deacon, Robin Murphy, Rob Clark, Konrad
+  Dybcio, iommu@ and linux-arm-msm@
+- [Phase 4] patchew: Will Deacon applied; no NAK
+- [Phase 4] lore.kernel.org WebFetch: 403 — UNVERIFIED full v1 reply
+  text; v2 content verified via patchew/LKML
+- [Phase 5] Callers: `arm_smmu_def_domain_type` → IOMMU default domain
+  at probe
+- [Phase 6] `git describe HEAD`: v7.3-rc4-27-gf0100363d8c37; `make
+  kernelversion`: 7.3.0-rc4
+- [Phase 6] Confirmed `qcom,sm8450-mdss` in `msm_mdss.c`, `sm8450.dtsi`,
+  HDK `&mdss { status = "okay"; }`
+- [Phase 6] Pre-commit file still had ACTLR `sm8450-mdss` only; client
+  table lacked it
+- [Phase 7] `CONFIG_ARM_SMMU_QCOM` default y on `ARCH_QCOM`
+- [Phase 8] Failure mode: unhandled SMMU context fault / broken MDSS on
+  SM8450, severity HIGH for that platform
+- [Phase 4.5] No stable-list discussion found for this specific commit
 
 **YES**
 
- drivers/gpu/drm/msm/msm_iommu.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/msm/msm_iommu.c b/drivers/gpu/drm/msm/msm_iommu.c
-index 82a172f21a3ec..41a4eaa1b8fd9 100644
---- a/drivers/gpu/drm/msm/msm_iommu.c
-+++ b/drivers/gpu/drm/msm/msm_iommu.c
-@@ -7,6 +7,15 @@
- #include <linux/adreno-smmu-priv.h>
- #include <linux/io-pgtable.h>
- #include <linux/kmemleak.h>
-+
-+#if defined(CONFIG_ARM_DMA_USE_IOMMU)
-+#include <asm/dma-iommu.h>
-+#else
-+#define arm_iommu_detach_device(...)	({ })
-+#define arm_iommu_release_mapping(...)	({ })
-+#define to_dma_iommu_mapping(dev)	NULL
-+#endif
-+
- #include "msm_drv.h"
- #include "msm_gpu_trace.h"
- #include "msm_mmu.h"
-@@ -746,6 +755,19 @@ struct msm_mmu *msm_iommu_new(struct device *dev, unsigned long quirks)
- 
- 	mutex_init(&iommu->init_lock);
- 
-+	/*
-+	 * ARM32 attaches a DMA mapping domain to every IOMMU-backed device,
-+	 * which would make attaching our own domain fail with -EBUSY.
-+	 */
-+	if (IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)) {
-+		struct dma_iommu_mapping *mapping = to_dma_iommu_mapping(dev);
-+
-+		if (mapping) {
-+			arm_iommu_detach_device(dev);
-+			arm_iommu_release_mapping(mapping);
-+		}
-+	}
-+
- 	ret = iommu_attach_device(iommu->domain, dev);
- 	if (ret) {
- 		iommu_domain_free(domain);
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+index f7cb7de80cfb9..b6493e92343be 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+@@ -394,6 +394,7 @@ static const struct of_device_id qcom_smmu_client_of_match[] __maybe_unused = {
+ 	{ .compatible = "qcom,sm6375-mdss" },
+ 	{ .compatible = "qcom,sm8150-mdss" },
+ 	{ .compatible = "qcom,sm8250-mdss" },
++	{ .compatible = "qcom,sm8450-mdss" },
+ 	{ .compatible = "qcom,x1e80100-mdss" },
+ 	{ }
+ };
 -- 
 2.53.0
 
