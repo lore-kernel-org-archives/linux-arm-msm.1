@@ -1,49 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D1485A357D;
-	Mon, 19 Oct 2026 13:59:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8797358B6CE;
+	Mon, 19 Oct 2026 13:59:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418380; cv=none; b=lwJ9EudzmswszsHK0P1BwyLlGHoLHyGwvAGAA/oDfiiWMeDoIGOItxTltxLVlAsCEstNXjqB7V3ytnJ2hQDjrizvMu6SLTlQvfLkZtbdoZcOo3gnFp1Xm948cTM/gIvo94COGsZE5kSYRYaBCYE7QNojefPMghxRyNtICKqjY0o=
+	t=1792418386; cv=none; b=NGUl353MognCx2mGUiwszckl3OqY7/V/rYynJhQbD0/ktWsHHzCIVgp7w4R4rwLb1W4ONwYAFz1oqqnAdYP+TL7jLUsZtwEVkm/euIn9k+7XRDAic/0QZohXmRxSCTSfQfWFL924LFHWeoDIG6yS9uvOWSmmC0KaakJFxorrbIo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418380; c=relaxed/simple;
-	bh=AFavnNKiE/dT91FsRoj+3tVmR6btbub310B8fkTNg5I=;
+	s=arc-20240116; t=1792418386; c=relaxed/simple;
+	bh=XZPghCTjb1jX+Q7cqp8MHf8/5S+roAFYzazEhZS/viw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ALjrabjXUPg8uxres/gjLiEOxkRzgloSzK7nw7f4UbdiqOsKrBz26irX3oEVhh5dlbfJ+WJezADlgSndjbABjIXU2+pddybDcW2PPOBMQKsZRfKtuX+3H23SaVIwPfAXvgKLn56mAwja2SfacEepEKYdyyaBui+ORmmloKeAA3o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DxkSZGg4; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=ZLn3BBUTvKEoVPSHe2/2zWk29uI5Jv8rSen/nPPB8nr0vyOqoegDkalIe0UXtL8D8YgIMRVqtQxFa+X0s1cVSp0qbikbjBUH1x2X9blBq5QhVxDivPXjXgCYheCHLSIUdENh75NyyajMDHZ0tF+wQ+14Zhk5LAxRsmHevTskm3k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZBDC7KCX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DxkSZGg4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E85271F000C8;
-	Mon, 19 Oct 2026 13:59:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZBDC7KCX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DF6C1F000CA;
+	Mon, 19 Oct 2026 13:59:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418378;
-	bh=H8JoCC7gt7zCEQqk2PYvewP91xC+JRFcbOfWCI7/0xk=;
+	s=k20260515; t=1792418383;
+	bh=D1aPOgBERGuCo14oNo+vtfsa1n/bJR50FBv53Np1Kr8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=DxkSZGg4aFXpMSC4NSqPbytnUE2siPcxnGqkWtpEXPqpoGv4MhFSEvw7hrmWVmkZT
-	 unqg0tArBSqV5p1ypi465v1gim9fYhacIS4h+StdEnt/0AJzMTkNZLIiLMo/cUT2q9
-	 sMFoMSRAvezRz7POsVuE/DhFNk+3uxZjvcIYbvrYq8aogv64F0E5sRZ35CbcgzcAkr
-	 AEQu3Iqn7diodfeQeFxGC9uTr5n4sf57bONg+RvCT5gjM/ff01PTI1gcGjJaSQ/Bbr
-	 JeUW16+YUVwR8S+fjhLgSHAwxkH0+owbuTDB90wP9cGGADrqj3tGgEcnDWEdJJGspj
-	 ejZnHSDKn07SQ==
+	b=ZBDC7KCX6j3nXvNmoW/nF3EUWlcoopMnzFDY9eDQU4e31bvGb4nWvPwQrali/yyaS
+	 VTfQcGekeFvvXEf8b+XYacwm5yEjpy/xGk0dSqivLjVxfB3xpWGc0y5WMv8r9k+Pwj
+	 jYyY14a2rbeCRQIpEg61fwR2hwxyVn//wSiKfgix/0wBcZX7E+A2EMBKpCy+EGLFQ+
+	 sG7j1H27cMRxrUglCcp8S8mhQNzackUMmLFNdv0xZTVvNZ3ERpQd2ahZCB+GiSEFEg
+	 aWzKdgrJyarbGSeTBrFQsy6ziikn6P/yKYatjWo9K0ttl4nwBnN7LezJOFZ+FV5uf4
+	 IEzx0Kb4MXPaQ==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: David Heidelberg <david@ixit.cz>,
+Cc: Mike Tipton <mike.tipton@oss.qualcomm.com>,
 	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
+	Ulf Hansson <ulfh@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
-	konradybcio@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-6.6] dt-bindings: arm: qcom,ids: Add SoC ID for Snapdragon SDM 850
-Date: Mon, 19 Oct 2026 09:48:17 -0400
-Message-ID: <20261019135441.1420968-206-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18-6.6] pmdomain: qcom: rpmhpd: Skip retention by default
+Date: Mon, 19 Oct 2026 09:48:21 -0400
+Message-ID: <20261019135441.1420968-210-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -59,417 +54,422 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: David Heidelberg <david@ixit.cz>
+From: Mike Tipton <mike.tipton@oss.qualcomm.com>
 
-[ Upstream commit d529495c991a2b7d07c01622e8b3cb5ec066acee ]
+[ Upstream commit 7178817f190496f2bfdec181fb4aa72832448468 ]
 
-Add SoC ID for Qualcomm Snapdragon SDM850.
+Retention is very rarely an operational corner. In the majority of
+cases, HW cannot operate properly at Retention levels and so the minimum
+operational level when enabling a rail is the first corner above
+Retention. A small subset of always-on use cases can operate at
+Retention, but those aren't controlled from HLOS.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Currently, we allow Retention by default and only disallow it special
+cases. But this leaves us open to various failures when the PD is
+enabled without first being voted to an OPP above Retention. Such as
+when a child GDSC PD requests to enable its parent RPMh PD. In this
+case, the GDSC would get stuck powering on.
+
+Newer chips have started supporting Retention on rails that didn't
+previously (such as for MMCX). Instead of adding more special cases to
+skip Retention on MMCX, start skipping Retention by default since it's
+almost never desired from an HLOS perspective.
+
+Signed-off-by: Mike Tipton <mike.tipton@oss.qualcomm.com>
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Link: https://lore.kernel.org/r/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
-Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+Signed-off-by: Ulf Hansson <ulfh@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-This tree is **Linux 7.3.0-rc4** (`v7.3-rc4-27-gf0100363d8c37`). The
-commit adds one Qualcomm SoC ID constant. That is a device-ID / DT-
-binding addition for hardware that is already in this tree, and it
-matches the stable exception for new IDs.
-
-===============================================================
-PHASE 1: COMMIT MESSAGE FORENSICS
-===============================================================
-
-**Step 1.1: PARSE THE SUBJECT LINE**
-- Subsystem prefix: `dt-bindings: arm: qcom,ids:`
-- Action verb: **Add**
-- Claimed intent: add the numeric SoC ID for Snapdragon SDM850
-
-Record: [dt-bindings/arm/qcom,ids] [add] [define QCOM_ID_SDM850 = 348]
-
-**Step 1.2: PARSE ALL COMMIT MESSAGE TAGS**
-- Fixes: none (expected)
-- Reported-by: none
-- Tested-by: none
-- Reviewed-by: Konrad Dybcio `<konrad.dybcio@oss.qualcomm.com>`
-  (Qualcomm SoC maintainer)
-- Acked-by: Krzysztof Kozlowski `<krzysztof.kozlowski@oss.qualcomm.com>`
-  (DT maintainer)
-- Link:
-  `https://lore.kernel.org/r/20260627-sda850-v2-1-44bf46ade42e@ixit.cz`
-- Cc: stable: none (expected)
-- Signed-off-by: David Heidelberg (author); Bjorn Andersson
-  (Qualcomm/SoC maintainer, applied it)
-
-Record: Device-ID addition reviewed by the Qualcomm and DT maintainers;
-no syzbot/bugzilla report; Message-ID shows this is **v2 1/2**.
-
-**Step 1.3: ANALYZE THE COMMIT BODY TEXT**
-Body is one sentence: “Add SoC ID for Qualcomm Snapdragon SDM850.” No
-stack trace, no crash, no version range.
-
-The cover letter (from b4, not the commit body) states the series is
-“Useful for sdm850 devices in tree and also will be used by Comma AI
-comma three.”
-
-Record: [Bug: missing SoC ID 348 in the Qualcomm ID table] [Symptom:
-socinfo cannot name SDM850] [No version info in the commit] [Root cause:
-ID 348 was never added when qcom,ids.h was created]
-
-**Step 1.4: DETECT HIDDEN BUG FIXES**
-This is not a hidden crash/UAF/leak fix. It is an explicit ID addition.
-That is the documented stable exception for device IDs, not a disguised
-memory-safety patch.
-
-Record: [Not a hidden memory/locking bug] [It is a device-ID / DT-
-binding addition]
-
-===============================================================
-PHASE 2: DIFF ANALYSIS - LINE BY LINE
-===============================================================
-
-**Step 2.1: INVENTORY THE CHANGES**
-- File: `include/dt-bindings/arm/qcom,ids.h`
-- +1 / −0
-- No C function changed; one preprocessor define inserted in numeric
-  order between `QCOM_ID_SDA636` (346) and `QCOM_ID_SDM632` (349)
-- Scope: single-file, one-line addition
-
-Record: [1 file, +1 line] [no functions] [surgical ID add]
-
-**Step 2.2: UNDERSTAND THE CODE FLOW CHANGE**
-Before: the header jumped from 346 to 349; firmware SoC ID 348 had no
-`QCOM_ID_*` name.
-After: `#define QCOM_ID_SDM850 348` so `qcom_board_id(SDM850)` in
-socinfo can compile and match.
-
-Record: [header lacked ID 348 → ID 348 named SDM850]
-
-**Step 2.3: IDENTIFY THE BUG MECHANISM**
-Category **(h) Hardware / device ID**.
-Without the define, `socinfo_machine()` cannot map SMEM id 348 to
-`"SDM850"`. Probe still succeeds; `qs->attr.machine` stays NULL and
-`/sys/devices/soc0/machine` is hidden (`soc_attribute_mode` returns 0
-when machine is NULL). Numeric `soc_id` sysfs (`"348"`) still works. No
-driver in this tree switches on `QCOM_ID_SDM850` except the socinfo
-table (companion commit).
-
-Record: [device ID] [missing SoC identity mapping; not a crash]
-
-**Step 2.4: ASSESS THE FIX QUALITY**
-Obviously correct: one define, numeric order preserved, value 348 does
-not collide with neighbors. No API, no locking, no alloc. Regression
-risk is negligible. Companion patch 2/2 (`soc: qcom: socinfo: Add SoC ID
-for SDM850`) is the consumer; this patch alone is an unused define but
-is required for 2/2 to build.
-
-Record: [minimal and correct] [near-zero regression risk]
-
-===============================================================
-PHASE 3: GIT HISTORY INVESTIGATION
-===============================================================
-
-**Step 3.1: BLAME THE CHANGED LINES**
-Surrounding IDs come from `a79a4b3097bc2` (Krzysztof Kozlowski,
-2022-08-30; merged 2022-10-17): “dt-bindings: arm: qcom: document
-qcom,msm-id and qcom,board-id”. SDM850 was omitted then. In-tree SDM850
-DTS exists since `44acee2078447` (2019-09-05, Lenovo Yoga C630).
-
-Record: [gap introduced with qcom,ids.h in 2022] [SDM850 boards present
-since 2019]
-
-**Step 3.2: FOLLOW THE FIXES: TAG**
-No Fixes: tag.
-
-Record: [N/A — no Fixes: tag]
-
-**Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES**
-This is **v2 1/2** of “Recognize Snapdragon SDM850”:
-- 1/2: `d529495c991a2` this define
-- 2/2: `743af1d6a8b4b` socinfo table entry `{ qcom_board_id(SDM850) }`
-
-v1 was named SDA850; v2 renamed to SDM850 (Konrad) and added the socinfo
-consumer (Krzysztof).
-
-Record: [two-patch series; this is the ID, 2/2 is the table] [standalone
-apply is clean; useful with 2/2]
-
-**Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS**
-David Heidelberg is a board/DT contributor, not the subsystem
-maintainer. Applied by Bjorn Andersson. Konrad reviewed; Krzysztof
-acked.
-
-Record: [author is a contributor; Qualcomm/DT maintainers reviewed and
-applied]
-
-**Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS**
-Needs `include/dt-bindings/arm/qcom,ids.h` (present since 2022 in this
-tree) and, for a user-visible effect, the socinfo consumer. No new
-helper, struct, or API.
-
-Record: [depends on existing qcom,ids.h] [can apply standalone] [pairs
-with socinfo 2/2]
-
-===============================================================
-PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
-===============================================================
-
-**Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION**
-`b4 dig -c d529495c991a2` matched:
-- v1: SDA 850 (2026-06-23)
-- v2: `[PATCH v2 0/2] Recognize Snapdragon SDM850` (2026-06-27)
-- URL:
-  https://patch.msgid.link/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
-
-Thread (saved via `b4 dig -m`): no NAKs, no stable discussion. Krzysztof
-Acked-by; Konrad Reviewed-by; Bjorn applied both patches.
-
-lore.kernel.org HTTP fetches returned 403; b4/mbox is the verified
-source.
-
-Record: [v1→v2 naming + consumer] [no NAK] [no Cc: stable in review]
-
-**Step 4.2: CHECK WHO REVIEWED THE PATCH**
-`b4 dig -w` original To/Cc: Bjorn Andersson, Konrad Dybcio, Rob Herring,
-Krzysztof Kozlowski, Conor Dooley, linux-arm-msm, devicetree, linux-
-kernel.
-
-Record: [right maintainers and lists]
-
-**Step 4.3: SEARCH FOR THE BUG REPORT**
-No Reported-by / bugzilla / syzbot. Motivation is identification of in-
-tree SDM850 machines and Comma 3.
-
-Record: [no crash report; hardware-identification request]
-
-**Step 4.4: CHECK FOR RELATED PATCHES AND SERIES**
-Series is 2/2. 2/2 is the one-line socinfo entry that uses this define.
-
-Record: [companion 743af1d6a8b4b] [both one-liners]
-
-**Step 4.5: CHECK STABLE MAILING LIST HISTORY**
-lore.kernel.org/stable search returned 403. No evidence in the patch
-thread that stable was discussed.
-
-Record: [UNVERIFIED: no stable-list thread retrieved due to 403]
-
-===============================================================
-PHASE 5: CODE SEMANTIC ANALYSIS
-===============================================================
-
-**Step 5.1: IDENTIFY KEY FUNCTIONS**
-No function edited. Consumer is `socinfo_machine()` via
-`qcom_board_id(SDM850)` → `QCOM_ID_SDM850`.
-
-Record: [define only; consumer socinfo_machine()]
-
-**Step 5.2: TRACE CALLERS**
-`socinfo_machine()` is called from `qcom_socinfo_probe()` when reading
-SMEM `SMEM_HW_SW_BUILD_ID`. That runs on Qualcomm platforms with
-socinfo. `QCOM_ID_SDM850` is not used in `qcom-cpufreq-nvmem.c` or clk
-drivers.
-
-Record: [socinfo probe on SDM850; naming only]
-
-**Step 5.3: TRACE CALLEES**
-`socinfo_machine()` walks `soc_id[]` and returns the name or NULL. Probe
-does not fail on NULL machine.
-
-Record: [lookup table; NULL = unnamed SoC]
-
-**Step 5.4: FOLLOW THE CALL CHAIN**
-Boot on SDM850 (Yoga C630, Galaxy Book S / w737, MateBook E 2019, Comma
-3) → qcom_socinfo_probe → socinfo_machine(348). Reachable on those
-machines, not from a generic syscall on unrelated hardware.
-
-Record: [reachable on SDM850 boots] [not a core/universal path]
-
-**Step 5.5: SEARCH FOR SIMILAR PATTERNS**
-The same file is a long list of `QCOM_ID_*` defines; socinfo.c has
-matching `qcom_board_id(*)` rows. This follows that pattern.
-
-Record: [standard qcom SoC-ID add]
-
-===============================================================
-PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
-===============================================================
-
-**Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?**
-Yes. `include/dt-bindings/arm/qcom,ids.h` exists. Surrounding IDs 346
-and 349 match the hunk. SDM850 DTS and socinfo exist. The define is
-already present at line 187 (`git merge-base --is-ancestor d529495c991a2
-HEAD` is true). That is because this checkout **is 7.3-rc4**, which is
-the series that merged the ID; it is not used as “already selected for
-stable.”
-
-Record: [qcom,ids.h and socinfo present] [gap existed from 2022 until
-this 7.3 change]
-
-**Step 6.2: CHECK FOR BACKPORT COMPLICATIONS**
-Hunk context matches this tree. One-line insert. Clean apply.
-
-Record: [clean apply]
-
-**Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE**
-No earlier equivalent SDM850 ID. Companion socinfo commit is also in
-this 7.3 tree.
-
-Record: [no prior substitute fix]
-
-===============================================================
-PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
-===============================================================
-
-**Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY**
-Qualcomm DT bindings + socinfo. Platform-specific identification, not
-mm/VFS/net core.
-
-Record: [drivers/soc/qcom + dt-bindings] [PERIPHERAL / platform-
-specific, but in-tree laptops/boards]
-
-**Step 7.2: ASSESS SUBSYSTEM ACTIVITY**
-`qcom,ids.h` still receives regular new-ID commits (SM7750, IPQ9650,
-SA8797P, …). Mature table, ongoing ID adds.
-
-Record: [active, table-driven ID file]
-
-===============================================================
-PHASE 8: IMPACT AND RISK ASSESSMENT
-===============================================================
-
-**Step 8.1: DETERMINE WHO IS AFFECTED**
-Users of SDM850 (Lenovo Yoga C630, Samsung w737, Huawei MateBook E 2019,
-Comma 3). CONFIG_QCOM_SOCINFO.
-
-Record: [platform-specific Qualcomm SDM850]
-
-**Step 8.2: DETERMINE THE TRIGGER CONDITIONS**
-Every boot on SDM850 when socinfo probes. Not unprivileged-exploit;
-firmware reports id 348.
-
-Record: [every SDM850 boot] [not a security trigger]
-
-**Step 8.3: DETERMINE THE FAILURE MODE SEVERITY**
-Without the ID (and 2/2): SoC not named; sysfs `machine` hidden;
-hardware still boots via existing DTS. Not oops/deadlock/corruption.
-
-Record: [wrong/missing SoC name] [LOW functional severity; still a real
-ID gap]
-
-**Step 8.4: CALCULATE RISK-BENEFIT RATIO**
-Benefit: SDM850 identified in socinfo/sysfs, same class as adding a
-device ID to an existing driver.
-Risk: one `#define`, no runtime logic.
-
-Record: [moderate benefit for those boards] [very low risk] [favorable]
-
-===============================================================
-PHASE 9: FINAL SYNTHESIS
-===============================================================
-
-**Step 9.1: COMPILE THE EVIDENCE**
-
-FOR:
-- Official `Documentation/process/stable-kernel-rules.rst`: “It must
-  either fix a real bug that bothers people **or just add a device
-  ID**.”
-- User-facing exception: new IDs on an existing driver/table, and DT
-  binding for existing hardware.
-- 1 line, obviously correct, reviewed by Konrad Dybcio and Krzysztof
-  Kozlowski, applied by Bjorn Andersson.
-- In-tree SDM850 machines since 2019; this fills the 2022 ID-table gap.
-- This tree has `qcom,ids.h`, socinfo, and SDM850 DTS; the hunk matches.
-
-AGAINST:
-- Not a crash/UAF/corruption fix.
-- Patch 1/2; user-visible naming needs 2/2.
-- No user crash report.
-
-UNRESOLVED:
-- Could not read lore.kernel.org/stable (HTTP 403). Unlikely to change
-  the ID-exception reading.
-
-**Step 9.2: APPLY THE STABLE RULES CHECKLIST**
-1. Obviously correct and tested? **PASS** — one define, maintainer
-   review/ack/apply.
-2. Fixes a real bug that affects users? **PASS** under the written “or
-   just add a device ID” clause (identification of in-tree SDM850).
-3. Important issue (crash, security, corruption, deadlock)? **PASS** as
-   the device-ID exception, not as a crash fix.
-4. Small and contained? **PASS** — +1 line, one header.
-5. No new features or APIs? **PASS** — no new uAPI; existing ID table.
-6. Can apply to the local tree? **PASS** — file and context exist in
-   7.3-rc4.
-
-**Step 9.3: CHECK FOR EXCEPTION CATEGORIES**
-Yes: **new device ID** on the existing Qualcomm ID/socinfo tables, and a
-**DT binding addition** for hardware already described in this tree.
-
-**Step 9.4: MAKE YOUR DECISION**
-Backport. It is the documented device-ID exception, not a refactor or
-new driver. Pairing with `743af1d6a8b4b` is the complete recognition,
-but this patch is the ID itself and is appropriate for this tree.
-
-What it solves for this tree: SDM850 (id 348) was missing from
-`qcom,ids.h`, so socinfo could not name boards that have been in the
-kernel since 2019. That is exactly the “add a device ID” case in stable-
-kernel-rules, with essentially no regression risk.
-
-Verification:
-- [Phase 1] Parsed tags: Reviewed-by Konrad Dybcio, Acked-by Krzysztof
-  Kozlowski, Link to v2 1/2; no Fixes/Reported-by/Cc:stable
-- [Phase 2] Diff: +1 `#define QCOM_ID_SDM850 348` in `include/dt-
-  bindings/arm/qcom,ids.h`
-- [Phase 3] git blame: neighbors from a79a4b3097bc2 (2022); this line
-  from d529495c991a2
-- [Phase 3] No Fixes: tag
-- [Phase 3] Companion 743af1d6a8b4b adds socinfo `{
-  qcom_board_id(SDM850) }`
-- [Phase 3] git merge-base --is-ancestor d529495c991a2 HEAD: yes (7.3
-  origin, not used as “already selected”)
-- [Phase 4] b4 dig -c d529495c991a2:
-  https://patch.msgid.link/20260627-sda850-v2-1-44bf46ade42e@ixit.cz
-- [Phase 4] b4 dig -a: v1 SDA850 → v2 SDM850 + socinfo consumer
-- [Phase 4] b4 dig -w: Bjorn, Konrad, Rob, Krzysztof, Conor, linux-arm-
-  msm, devicetree
-- [Phase 4] mbox: Acked-by Krzysztof, Reviewed-by Konrad, Applied-by
-  Bjorn; cover letter names in-tree SDM850 and Comma 3
-- [Phase 4] lore.kernel.org WebFetch/curl: 403
-- [Phase 5] grep: only socinfo.c uses QCOM_ID_SDM850 among C files;
-  cpufreq/clk do not
-- [Phase 5] socinfo_machine() returns NULL for unknown ids; probe still
-  succeeds; machine sysfs hidden if NULL
-- [Phase 6] git describe HEAD: v7.3-rc4-27-gf0100363d8c37; Makefile
+## Phase 1: Commit message forensics
+
+**Step 1.1: Subject line**
+- Record: `[pmdomain/qcom/rpmhpd] [Skip] Skip Retention voltage as the
+  default enable corner`
+
+**Step 1.2: Tags**
+- Record:
+  - `Signed-off-by: Mike Tipton <mike.tipton@oss.qualcomm.com>` (author,
+    Qualcomm)
+  - `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
+    (Qualcomm SoC reviewer)
+  - `Signed-off-by: Ulf Hansson <ulfh@kernel.org>` (GENERIC PM DOMAINS
+    maintainer)
+  - No `Fixes:` tag (expected)
+  - No `Cc: stable` (expected)
+  - No `Reported-by`, `Tested-by`, `Link`, or syzbot tags
+- Notable: Qualcomm author + Qualcomm reviewer + subsystem maintainer
+  SOB. No user/syzbot report.
+
+**Step 1.3: Body**
+- Record:
+  - **Bug:** HLOS enable of an RPMh PD without an OPP above Retention
+    can vote Retention. Most hardware cannot run at Retention.
+  - **Symptom:** Child GDSC enable of a parent RPMh PD leaves the GDSC
+    stuck powering on (hardware hang, not a kernel oops).
+  - **Root cause:** Retention is allowed by default; only MXC opted out
+    via `skip_retention_level`. Newer chips now expose Retention on
+    rails that previously did not (e.g. MMCX).
+  - **Fix approach:** Skip Retention for every rail when building the
+    cmd-db mapping, instead of adding more per-rail flags.
+  - **Version info:** None in the message. “Newer chips” / MMCX is the
+    motivation.
+
+**Step 1.4: Hidden bug fix?**
+- Record: Not hidden. It is a real hardware-failure fix described as a
+  default-policy change. Skipping Retention is the workaround, not a
+  cleanup.
+
+## Phase 2: Diff analysis
+
+**Step 2.1: Inventory**
+- Record:
+  - File: `drivers/pmdomain/qcom/rpmhpd.c` (+9 / −5)
+  - Functions/data: `struct rpmhpd` (drop `skip_retention_level`), `mxc`
+    / `mxc_ao` initializers, `rpmhpd_update_level_mapping()`
+  - Scope: single-file surgical change
+
+**Step 2.2: Code flow**
+- Record:
+  - **Before:** `rpmhpd_update_level_mapping()` copied cmd-db aux levels
+    into `rpmhpd->level[]`. Retention (vlvl 16) was skipped only if
+    `skip_retention_level` was set. That flag was true only on `mxc` /
+    `mxc_ao`. `enable_corner` became the first non-zero mapped corner,
+    which could be Retention.
+  - **`rpmhpd_power_on()`:** `corner = max(pd->corner,
+    pd->enable_corner)` then aggregate. Enable without an OPP uses
+    `enable_corner`.
+  - **After:** Retention is always skipped. `enable_corner` is the first
+    corner above Retention. MXC’s flag is redundant and removed.
+  - Path affected: probe-time mapping, then every power-on that does not
+    already have a higher OPP (including parent enable from a child
+    GDSC).
+
+**Step 2.3: Bug mechanism**
+- Record: **Hardware workaround / logic fix.** Retention as min enable
+  corner is not a valid operational vote for HLOS. Child GDSC parent-on
+  uses that corner and the GDSC never completes power-on.
+- Verified path: `gdsc_register()` attaches GDSCs as genpd subdomains of
+  the clock-controller’s `dev->pm_domain` (`drivers/clk/qcom/gdsc.c`).
+  `genpd_power_on()` walks parents and calls `rpmhpd_power_on()` with no
+  performance state. DT has many `power-domains = <&rpmhpd RPMHPD_MMCX>`
+  nodes (sm8450/sm8550/sm8650/sm8750 and others).
+
+**Step 2.4: Fix quality**
+- Record: Obviously correct given the existing skip logic. Minimal. If
+  cmd-db has no Retention entry, the new `if` never matches (no-op on
+  older rails). Regression risk is a slightly higher min vote (Retention
+  16 → typically MIN_SVS 48) on rails that advertised Retention; the
+  author states HLOS must not use Retention. No API/ABI change.
+
+## Phase 3: Git history
+
+**Step 3.1: Blame**
+- Record:
+  - Mapping loop: `279b7e8a62cc` (“soc: qcom: rpmhpd: Add RPMh power
+    domain driver”, 2019)
+  - `enable_corner`: `e3e56c050ab6` (“soc: qcom: rpmhpd: Make power_on
+    actually enable the domain”, 2021) — this is what makes Retention
+    reachable as the enable vote
+  - Opt-in skip: `ddab91f4b2de5` (“Skip retention level for Power
+    Domains”, 2024), MXC only, `Cc: stable@vger.kernel.org # v5.17`
+  - This change: `7178817f19049` (2026-07-13)
+
+**Step 3.2: Fixes tag**
+- Record: None. Closest predecessor is `ddab91f4b2de5` (MXC-only skip).
+  Both `ddab91f4b2de5` and `e3e56c050ab6` are ancestors of this HEAD.
+
+**Step 3.3: File history**
+- Record: Recent work is mostly new SoC tables. No later revert of
+  default-skip. Eliza MXC/MMCX add was reverted for unrelated reasons
+  (`9fca7779ad185`). Standalone v1 patch, not part of a numbered series.
+
+**Step 3.4: Author**
+- Record: Mike Tipton (Qualcomm); this is his only recent commit on
+  `drivers/pmdomain/qcom/`. Konrad reviews rpmhpd regularly. Ulf is the
+  pmdomain maintainer.
+
+**Step 3.5: Dependencies**
+- Record: Needs `enable_corner` + Retention skip `continue` in
+  `rpmhpd_update_level_mapping()`. Both exist here. Applies standalone
+  on a tree that still has `skip_retention_level`. No other patches
+  required.
+
+## Phase 4: Mailing list / external
+
+**Step 4.1: Original discussion**
+- Record: `b4 dig -c 7178817f19049` →
+  https://patch.msgid.link/20260629-rpmhpd-skip-
+  ret-v1-1-d94180ad9a29@oss.qualcomm.com
+- Series: **v1 only** (no v2/v3).
+- Thread (mbox): Ulf Hansson: “Applied for next, thanks!” No NAKs, no
+  stable nomination, no reviewer risk flags.
+
+**Step 4.2: Recipients (`b4 dig -w`)**
+- Record: Ulf Hansson, linux-arm-msm, linux-pm, linux-kernel, Bjorn
+  Andersson, Konrad Dybcio, Taniya Das (author of the MXC skip), Fenglin
+  Wu. Right lists and people.
+
+**Step 4.3: Bug report**
+- Record: No public user/syzbot/bugzilla report. Failure mode is
+  described by the Qualcomm author from platform bring-up.
+
+**Step 4.4: Related series**
+- Record: Standalone. Extends `ddab91f4b2de5` rather than depending on a
+  multi-patch series.
+
+**Step 4.5: Stable list**
+- Record: lore.kernel.org/stable fetch returned 403. UNVERIFIED whether
+  stable@ discussed this subject. The 2024 MXC skip *was* Cc:stable.
+
+## Phase 5: Semantic / call graph
+
+**Step 5.1: Functions**
+- Record: `rpmhpd_update_level_mapping()` (changed), `rpmhpd_power_on()`
+  / `rpmhpd_set_performance_state()` (consumers of `enable_corner`,
+  unchanged).
+
+**Step 5.2: Callers**
+- Record: `rpmhpd_update_level_mapping()` ← `rpmhpd_probe()` only.
+  `rpmhpd_power_on()` is `generic_pm_domain.power_on`, called from genpd
+  (including parent-on for child GDSCs). Probe + device/runtime PM, not
+  a syscall-only path.
+
+**Step 5.3: Callees**
+- Record: `cmd_db_read_aux_data()`, then later
+  `rpmhpd_aggregate_corner()` → `rpmhpd_send_corner()` (RPMh votes).
+
+**Step 5.4: Reachability**
+- Record: Yes, from normal Qualcomm device probe. Clock-controller GDSCs
+  are subdomains of rpmhpd (often MMCX). Userspace does not need a
+  special trigger; enabling display/video/camera clocks is enough.
+
+**Step 5.5: Similar patterns**
+- Record: Only MXC used `skip_retention_level`. MMCX/`mmcx_w_cx_parent`
+  did not. That matches “instead of adding more special cases for MMCX.”
+
+## Phase 6: This tree only
+
+**Step 6.1: Does the buggy code exist here?**
+- Record:
+  - Local tree: **Linux 7.3.0-rc4** (`v7.3-rc4-27-gf0100363d8c37`,
+    Makefile `VERSION=7 PATCHLEVEL=3`).
+  - `drivers/pmdomain/qcom/rpmhpd.c` is present. Pre-commit code had
+    `skip_retention_level` only on MXC.
+  - `7178817f19049` is already an ancestor of HEAD (in v7.3-rc1; **not**
+    in v7.2). Current file already skips Retention unconditionally.
+  - Bug class (Retention as `enable_corner`) dates to `e3e56c050ab6`
+    (2021) whenever cmd-db lists Retention; MMCX Retention on newer
+    chips is why this default change was made. That hardware **is**
+    represented in this 7.3 tree.
+
+**Step 6.2: Backport difficulty**
+- Record: Against current HEAD the patch is already applied (forward
+  apply would fail). Against 7.3 immediately before this commit it is a
+  clean apply (same file layout, `skip_retention_level` present). No
+  extra backport rework for this tree’s rpmhpd.c.
+
+**Step 6.3: Related fixes already here**
+- Record: MXC-only skip (`ddab91f4b2de5`) is here; it does **not** cover
+  MMCX/CX/etc. `2a93c6cbd5a70` (enabled_corner aggregation) is a
+  different bug (peer off during sync_state). No substitute for this
+  commit.
+
+## Phase 7: Subsystem context
+
+**Step 7.1**
+- Record: `drivers/pmdomain/qcom/` — Qualcomm RPMh power domains.
+  **IMPORTANT** (not core mm/fs, but used on a large set of Snapdragon
+  phones, laptops, and embedded boards). Maintainer: Ulf Hansson
+  (`GENERIC PM DOMAINS`).
+
+**Step 7.2**
+- Record: Active (new SoC tables: Nord, Hawi, Eliza, Kaanapali, Glymur,
+  etc.). The Retention default is independent of those tables.
+
+## Phase 8: Impact and risk
+
+**Step 8.1: Who is affected**
+- Record: Qualcomm rpmhpd platforms (`CONFIG_QCOM_RPMHPD`), especially
+  SoCs whose cmd-db advertises Retention on MMCX or other non-MXC rails.
+  Not universal; not staging.
+
+**Step 8.2: Trigger**
+- Record: Common: child GDSC on, parent rpmhpd has no OPP. Happens at
+  probe/runtime PM. Unprivileged userspace can cause it indirectly by
+  using multimedia devices; it also happens at boot when those
+  controllers probe.
+
+**Step 8.3: Failure mode**
+- Record: GDSC stuck powering on → device/controller hang, probe
+  failure, missing display/video/camera (or boot issues if that path is
+  on the critical path). Severity: **HIGH** (hardware hang), not a
+  KASAN/UAF class crash.
+
+**Step 8.4: Risk-benefit**
+- Record:
+  - **Benefit:** Prevents GDSC/parent-rail hangs on Qualcomm platforms
+    in this tree, including MMCX without extending a per-rail flag list.
+  - **Risk:** Low. 14-line change; no-op if Retention is absent from
+    cmd-db; MXC behavior unchanged; Qualcomm + maintainer reviewed.
+  - **Ratio:** Benefit > risk.
+
+## Phase 9: Synthesis
+
+**Step 9.1: Evidence**
+
+For:
+- Concrete hang: parent RPMh PD at Retention → child GDSC stuck on.
+- Call path and DT consumers verified in this tree.
+- Small, obviously correct extension of an existing skip that was
+  already Cc:stable for MXC.
+- Safe no-op when Retention is not in cmd-db.
+- Reviewed by Konrad, applied by Ulf; Taniya Das (original skip author)
+  was on Cc.
+- This 7.3 tree has rpmhpd, `enable_corner`, `skip_retention_level`, and
+  MMCX users.
+
+Against:
+- No `Fixes:` / public reproducer / syzbot (not a negative per rules).
+- Default change for all rails, not only MMCX (mitigated: Retention skip
+  is a no-op where unused).
+- lore.kernel.org/stable search could not be fetched (403).
+
+**Step 9.2: Stable rules**
+1. Obviously correct and tested? **PASS** — v1 accepted, maintainer
+   applied, Qualcomm review.
+2. Real user-visible bug? **PASS** — GDSC stuck on parent enable.
+3. Important (hang/corruption/security)? **PASS** — hardware hang on a
+   widely used SoC family; HIGH, not a panic.
+4. Small and contained? **PASS** — +9/−5, one file.
+5. No new features/APIs? **PASS** — same skip, defaulted; no userspace
+   API.
+6. Can apply to this tree? **PASS** — 7.3 has the pre-image; the commit
+   is in 7.3-rc1.
+
+**Step 9.3: Exception category**
+- Record: Hardware workaround (skip a non-operational corner), same
+  class as the 2024 MXC Retention skip.
+
+**Step 9.4: Decision**
+This tree is 7.3.0-rc4. The rpmhpd driver, the Retention-
+as-`enable_corner` bug, and MMCX parent-GDSC consumers are all here. The
+change is a small, correct hang fix, not a feature. It should be in this
+tree.
+
+---
+
+### What it solves for users of this tree
+
+Without it, enabling a Qualcomm GDSC whose parent RPMh rail (often MMCX)
+has no OPP votes Retention. That rail cannot actually run there, so the
+GDSC never finishes power-on. Display, video, camera, and similar
+controllers that list `power-domains = <&rpmhpd RPMHPD_MMCX>` hit this
+on probe or runtime PM. Skipping Retention when building the cmd-db map
+makes the min enable corner the first real operational level.
+
+### Risk vs benefit
+
+Benefit is avoiding a platform hang on common Qualcomm PM paths. Risk is
+low: SoCs without Retention in cmd-db are unchanged; MXC already skipped
+Retention; HLOS is not supposed to use Retention.
+
+### Concerns
+
+No public reproducer. Stable-list discussion unverified (HTTP 403).
+Slightly higher min vote on rails that listed Retention is intended, not
+a silent functional change for rails that never had it.
+
+### Verification
+- [Phase 1] Parsed tags: author/reviewer/maintainer SOBs only; no
+  Fixes/stable/syzbot
+- [Phase 2] Diff: +9/−5 in `rpmhpd.c`; drop `skip_retention_level`;
+  always skip `RPMH_REGULATOR_LEVEL_RETENTION` (16)
+- [Phase 2] `rpmhpd_power_on()` uses `max(pd->corner,
+  pd->enable_corner)` — verified in file
+- [Phase 2] GDSC subdomain attach in `gdsc_register()` — verified
+- [Phase 2] DT MMCX consumers in sm8450/sm8550/sm8650/sm8750 dtsi —
+  verified
+- [Phase 3] `git describe HEAD` / `make kernelversion`: v7.3-rc4 /
   7.3.0-rc4
-- [Phase 6] ids.h context matches; SDM850 DTS present (sdm850.dtsi
-  includes sdm845.dtsi; no qcom,msm-id in those files)
-- [Phase 7] subsystem qcom dt-bindings/socinfo
-- [Phase 8] failure mode: unnamed SoC in sysfs, not oops
-- [Phase 9] Documentation/process/stable-kernel-rules.rst line 15: “or
-  just add a device ID”
-- UNVERIFIED: stable@ mailing-list archive (HTTP 403)
+- [Phase 3] `git merge-base --is-ancestor 7178817f19049 HEAD`: yes; not
+  in v7.2; in v7.3-rc1
+- [Phase 3] Blame: mapping 279b7e8a62cc (2019); enable_corner
+  e3e56c050ab6 (2021); MXC skip ddab91f4b2de5 (2024)
+- [Phase 3] Pre-image: `skip_retention_level` only on mxc/mxc_ao; mmcx
+  had no flag
+- [Phase 4] `b4 dig -c 7178817f19049`: lore/msgid `20260629-rpmhpd-skip-
+  ret-v1-1-d94180ad9a29@oss.qualcomm.com`
+- [Phase 4] `b4 dig -a`: v1 only; Ulf “Applied for next”; no NAK
+- [Phase 4] `b4 dig -w`: Ulf, Bjorn, Konrad, Taniya Das, linux-arm-msm,
+  linux-pm
+- [Phase 4] UNVERIFIED: lore.kernel.org/stable (403)
+- [Phase 5] `rpmhpd_update_level_mapping()` called only from
+  `rpmhpd_probe`
+- [Phase 6] Post-fix code already in this checkout; related MXC skip
+  present and insufficient
+- [Phase 8] Failure mode: GDSC stuck on — HIGH hang, Qualcomm-specific
 
 **YES**
 
- include/dt-bindings/arm/qcom,ids.h | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/pmdomain/qcom/rpmhpd.c | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/include/dt-bindings/arm/qcom,ids.h b/include/dt-bindings/arm/qcom,ids.h
-index cb8ce53146f0c..b7ff78cbaa8db 100644
---- a/include/dt-bindings/arm/qcom,ids.h
-+++ b/include/dt-bindings/arm/qcom,ids.h
-@@ -184,6 +184,7 @@
- #define QCOM_ID_IPQ8078			344
- #define QCOM_ID_SDM636			345
- #define QCOM_ID_SDA636			346
-+#define QCOM_ID_SDM850			348
- #define QCOM_ID_SDM632			349
- #define QCOM_ID_SDA632			350
- #define QCOM_ID_SDA450			351
+diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
+index 4c3cbf3abc750..fc61ec45755c3 100644
+--- a/drivers/pmdomain/qcom/rpmhpd.c
++++ b/drivers/pmdomain/qcom/rpmhpd.c
+@@ -41,7 +41,6 @@
+  * @addr:		Resource address as looped up using resource name from
+  *			cmd-db
+  * @state_synced:	Indicator that sync_state has been invoked for the rpmhpd resource
+- * @skip_retention_level: Indicate that retention level should not be used for the power domain
+  */
+ struct rpmhpd {
+ 	struct device	*dev;
+@@ -58,7 +57,6 @@ struct rpmhpd {
+ 	const char	*res_name;
+ 	u32		addr;
+ 	bool		state_synced;
+-	bool            skip_retention_level;
+ };
+ 
+ struct rpmhpd_desc {
+@@ -176,7 +174,6 @@ static struct rpmhpd mxc = {
+ 	.pd = { .name = "mxc", },
+ 	.peer = &mxc_ao,
+ 	.res_name = "mxc.lvl",
+-	.skip_retention_level = true,
+ };
+ 
+ static struct rpmhpd mxc_ao = {
+@@ -184,7 +181,6 @@ static struct rpmhpd mxc_ao = {
+ 	.active_only = true,
+ 	.peer = &mxc,
+ 	.res_name = "mxc.lvl",
+-	.skip_retention_level = true,
+ };
+ 
+ static struct rpmhpd nsp = {
+@@ -974,7 +970,15 @@ static int rpmhpd_update_level_mapping(struct rpmhpd *rpmhpd)
+ 		return -EINVAL;
+ 
+ 	for (i = 0; i < rpmhpd->level_count; i++) {
+-		if (rpmhpd->skip_retention_level && buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
++		/*
++		 * Most HW won't function properly at Retention. The minimum
++		 * operational level is the first level above Retention. The
++		 * small subset of HW that can operate at Retention isn't
++		 * controlled by HLOS. Skip the Retention level to avoid HW
++		 * failures when the PD is enabled without first having an
++		 * explicit OPP level set.
++		 */
++		if (buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
+ 			continue;
+ 
+ 		rpmhpd->level[i] = buf[i];
 -- 
 2.53.0
 
