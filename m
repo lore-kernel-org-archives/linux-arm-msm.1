@@ -1,67 +1,51 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=34.202.193.197
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792424822;
-	b=Wux6/bDs2LNMa19TQQWcdlghaHR6sHCBrweMvFDIdZjkgD/p0+nBNPGXeS8hTrB3XeOr
-	 7GwT/R9snXYN8oqqT8OXxjq7vyvSqRMKyl7Y2U58MN/NaSsw/SEgeeAFvF47WHQyZxrdA
-	 Ag4RyEO9hN9PWwTtdNJE5ot4Es7OhzXHZwFH62Ymq65WNwwHSwVu8LQ/l5umK/Q84CMum
-	 iVQandYwLB6C3s7cnHK7i7SeM9DD0I1jP8Z5tH3LIHafB40ucRiLVUsTL4+s9imEZWnUe
-	 zk8uysxkd5kDDPT5shQM0sbUkpnkPEohBbmVWy15gZOnFAJcqTSHQizukvZtardhepw==
+	t=1792424869;
+	b=c9MnmbF7kW+5SMetd6igLhlPtdY0Vh+KiPNBLyXYscMJKCrXi/a6z638qWqXnyv+RhjI
+	 gj9qA0m+Gc+VLWxjxHwCl0aIrYShi55cvUYeKOrGsjFoCGYau3DLlUUfggamWdxsQS3jY
+	 arw53ZQuyy8oR/LH0se4oGx6/CsGJ7yBBAIYBJKZu4APGDZ7oG/LCVNEDu+ldX9h8RyCf
+	 rZMoUGXU65hT6ThpQUORL28Wef3J8lVadwtMtft6UZ0FZMsqrXY1GMME8aCysXcO79E1+
+	 g7GX+Cej16PKlQ3cOC/gMstDZEBcNHDZKkkpUOD4mMCr0bbB+mC2VqwFWd1v19cjOnQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792424822;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:References:
-	 X-Mailer:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:
-	 MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=bA82C24dkHYIS6f3OgsgzKwCX4C0TKB5nurDcZQs6BU=;
-	b=5d8zyns66f0dPGOkYK7jlPqdUniBMz6ksfhX4C5TaEVAZbflOi+5flkEYwvcCrNQzQrb
-	 4THm+5AEj4xgrqyfKjOcLP/p5g1VJ9EbWm/ubg8avNKwLAAqtWjE/Fq8RxQBklXVoAph5
-	 wNl8PoV6hs3iAIsImc8Ad7Z9udYS0+ycwH3XWDB3dSmMP2g6EeuYmDWio1xZk4kfxcEjI
-	 AOaDAeCiShM3UMJrW40NmFyz5NfIUEv7m08tuOPMjKEFesS+xTJtZhdPdYP8qmRJaBlbV
-	 gb54zcwjAluTHBJ0o2/pNM6byiGnaYBNUtMa0OcRrR7Wj2g7o+o5LuGVAYRnR9cY+jA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792424869;
+	h=DMARC-Filter:DKIM-Signature:Feedback-ID:X-Pm-Original-To:Received:
+	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=deYXOdM/XtLg2+bTzxjhtT1cAJxB9Z80aNaEhDFbctA=;
+	b=qdANGA13QHCaQEBvMSpJcJK6oHN9+gddWRW7Cw0tRtx+Xk38m/5PFolPZRmaAbTZQfao
+	 RggWvuLDnfIlUGAzf5ngNd0c1iO4oZfauR81bEiSIN7yBBWOJBw3OaJ0E2YJHfQiC8tiU
+	 ctSjhhTGJMOWll8GbMYFX/KnqDL2L0CCZhie3vD73mx5lX9pswwrDULzMXcNZWB1p6AXi
+	 MCkNUC4aBB2ye76xKMYn326r7NiNqC1syTc/16ldUpn2u9kMGAcgEUvKyuxA+nMFjIpp9
+	 vqeOmY5BnvLECLOFRccStUCHWleEDcbHr4UPepueR5Z+nP0Qh1WRYMIG8tcgmU1TiVg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fqwqf.xyz;
-	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=WkEAmPbB;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=r0zLaYPc;
-	arc=none smtp.remote-ip=23.251.234.56
-Received: from e234-56.smtp-out.ap-northeast-1.amazonses.com (e234-56.smtp-out.ap-northeast-1.amazonses.com [23.251.234.56])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=none header.from=mentallysanemainliners.org;
+	spf=pass smtp.mailfrom=mentallysanemainliners.org;
+	dkim=pass header.d=purelymail.com header.i=@purelymail.com header.a=rsa-sha256 header.s=purelymail3 header.b=FjGncOqM;
+	arc=none smtp.remote-ip=34.202.193.197
+Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B8926078871;
-	Mon, 19 Oct 2026 15:47:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8B8926078871
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B914B60820CF
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:47:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B914B60820CF
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mentallysanemainliners.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mentallysanemainliners.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=WkEAmPbB;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=r0zLaYPc
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1792424820;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=bA82C24dkHYIS6f3OgsgzKwCX4C0TKB5nurDcZQs6BU=;
-	b=WkEAmPbBXn5sincNaWpZ/EZwEzUK+EcbGbNyd1y+nZU4XVBOqYdvhwo9HV0IWMvx
-	UMgihLiP7BnYazFYubdP2oCExJp/LcdIRasW21YyEsMRZtqEt0brygiFc80Z9AJUD0u
-	UZ2+FAv3azWXhEWg8HOlbzkN99i7ELMi1ct/L1hs=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1792424820;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=bA82C24dkHYIS6f3OgsgzKwCX4C0TKB5nurDcZQs6BU=;
-	b=r0zLaYPcueOoQaA6xyNudF62tLU7HfLnOZlty4CbcAd+oI+hqN8aLMLW+RBjxI2k
-	WEyicS8Nweq2nNV1YCkBOawh9wOzJBp5TmJydCAI/IUR/fIi1aWwnJsH0hCD4FaJ+Cd
-	EDS+qJYWjdHcB0vEFy4fPu1Uejqs9xpTb54G2JWc=
-In-Reply-To: <sashiko-outbox-168888@kernel.org>
-References: <sashiko-outbox-168888@kernel.org>
-X-Mailer: git-send-email 2.53.0
-From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: vkoul@kernel.org, neil.armstrong@linaro.org, olteanv@gmail.com, 
-	linux-phy@lists.infradead.org, linux-media@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, sashiko-reviews@lists.linux.dev
-Subject: Re: [RFC PATCH v2] phy: qcom-mipi-csi2: round the requested settle
-  interval up
-Message-ID: <010601a154d83d84-0b2dea8c-14b7-477b-b1ec-3f44b0b55ad4-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: 7bit
-Date: Mon, 19 Oct 2026 15:47:00 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=purelymail.com header.i=@purelymail.com header.a=rsa-sha256 header.s=purelymail3 header.b=FjGncOqM
+DKIM-Signature: a=rsa-sha256; b=FjGncOqMStEErEo7Z0/BgmgF4gjIhZli79ar6lwoO++2J4zbplvl1rH3s2VbdsrhY1DkL/SJSYf0VtCfDJM7VFGgwry/Ya2Zuggl1J5JqbZ+cQjqJ/+c4OlXAgI7VAqYQ0hJjd2gxY0sQDHRRLPanmV+fjbZjieXZNhVCBgFdnBAQ1FidpCKsGDq8sl0yL0tc5jWYyqccose/g3RA36ltF3SzawVI3IEzqDhc5yrMoTPlr+ZyfXlKKBxgRVVX8iZfeKUZeVe2ZZZSK/HLf7ALYa1SQPDN2fm7lUWo64+chJeJa9LDbEHgnMauw/byi+TQPjbiSyqWOGlzzWqe3Lnew==; s=purelymail3; d=purelymail.com; v=1; bh=pMT1kLgMULpsfP5MHHVrAosWw+0Eg3VWq1PDfl234AA=; h=Feedback-ID:Received:From:Subject:Date:To;
+Feedback-ID: 68247:10037:null:purelymail
+X-Pm-Original-To: linux-arm-msm@vger.kernel.org
+Authentication-Results: purelymail.com; auth=pass
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -415248943;
+          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+          Mon, 19 Oct 2026 15:47:31 +0000 (UTC)
+From: Igor Belwon <igor.belwon@mentallysanemainliners.org>
+Subject: [PATCH v4 0/2] arm64: dts: qcom: Add support for the Xiaomi 17
+ Ultra series of devices
+Date: Mon, 19 Oct 2026 17:47:21 +0200
+Message-Id: <20261019-nezha-v4-0-19c1e31eb255@mentallysanemainliners.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,29 +55,89 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.10.19-23.251.234.56
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XNzQ6CMBAE4FcxPVuzbfmrJ9/DeFjpIjVYTItEJ
+ by7BUNiPOhxkplvBhbIWwpsuxqYp94G27oYkvWKlTW6E3FrYmYSZCZAZNzRs0YOQPqoVSpFJVn
+ sXj1V9j47+8M7h9vxTGU3jadGbUPX+sd81Iup9232ggNHpTWAqRCN2V3Iddg0j4COLmhdYx35s
+ Gn9iU0nvfxk8oWRkUmSUqckUJsM/zLqkykWRkUmp6LMlAYlNfxkxnF8ARYU/cBLAQAA
+X-Change-ID: 20261016-nezha-00e9b93521f2
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792424849; l=2504;
+ i=igor.belwon@mentallysanemainliners.org; s=20251104;
+ h=from:subject:message-id; bh=pMT1kLgMULpsfP5MHHVrAosWw+0Eg3VWq1PDfl234AA=;
+ b=ssLyCMQ6fobl3Ecs/d++RzpryQ6XL8ENyn2s5qiEeafIL1FsoILylGIzby/+aiAjXRO2QxcH1
+ lSRAPm+/5FhBbYHVD/wNQxrxnH1Joa40/SU54sDh5vUOYdJKK/EvrwA
+X-Developer-Key: i=igor.belwon@mentallysanemainliners.org; a=ed25519;
+ pk=i9++1bbnBwoyc3uhTaetGXS1TbBJoS0mcxT59GrpYh0=
 
-Hi Bryan,
+Hi,
 
-I checked the zero-count case raised by Sashiko against media-next
-(d7e7bca71698) and the rounding patch. Both the base driver and the
-patched driver return zero when the calculated interval is exactly
-six integer timer periods, and lanes_enable() rejects it with -ENODEV.
+This series adds support for the Xiaomi 17 Ultra series of devices,
+consisting of the Chinese domestic region version of the device as well
+as the EEA version. The only real difference in the devices is the 
+battery capacity.
 
-For example, link_freq = 600000000 Hz and timer_clk_rate = 66666666 Hz
-produce a 90000 ps interval and a 15000 ps integer timer period. The
-helper returns zero before and after the patch. This is a software
-boundary case, not a clock configuration I have tested on hardware.
+Currently only basic devicetree support is added, with driver support
+for the display panel as well as other hardware blocks to be added in
+future patch series.
 
-Is a programmed settle count of zero valid on the supported PHYs, or
-is rejecting it intentional? If it is valid, the helper would need to
-distinguish it from an unrepresentable interval, with the caller checking
-for an error separately.
+Signed-off-by: Igor Belwon <igor.belwon@mentallysanemainliners.org>
+---
+Changes in v4:
+- Fixed indentation in apps_rsc node [Abel]
+- Used block comments everywhere [Abel]
+- Fixed eUSB2 repeater squelch detector value [Abel]
+- Dropped removing adspslpi region and used reg value override [Abel]
+- Added the unit address to splash_region [Abel]
+- Removed the splash_region alias as it wasn't being used anywhere [Myself]
+- Link to v3: https://patch.msgid.link/20261018-nezha-v3-0-7e8c63903290@mentallysanemainliners.org
 
-The rounding RFC preserves the existing zero-count handling. I would
-keep any change to that hardware policy separate from the rounding fix.
+Changes in v3:
+- Fixed two mishaps that occured because of me not saving the correct file. [both sashiko]
+- Link to v2: https://patch.msgid.link/20261017-nezha-v2-0-44c95e1a9d6a@mentallysanemainliners.org
+
+Changes in v2:
+- Fixed a duplicate compatible match [sashiko]
+- Fixed firmware names [sashiko]
+- Removed synaptics dep nodes whilst the driver is not merged [sashiko]
+- Fixed unit-address-matching-reg [sashiko]
+- Link to v1: https://patch.msgid.link/20261016-nezha-v1-0-a39900dfaadd@mentallysanemainliners.org
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Abel Vesa <abelvesa@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+Igor Belwon (2):
+      dt-bindings: arm: qcom: Document Xiaomi 17 Ultra devices
+      arm64: dts: qcom: Add support for Xiaomi 17 Ultra phones
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   8 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ .../boot/dts/qcom/kaanapali-xiaomi-nezha-cn.dts    |  20 +
+ .../dts/qcom/kaanapali-xiaomi-nezha-common.dtsi    | 881 +++++++++++++++++++++
+ .../boot/dts/qcom/kaanapali-xiaomi-nezha-eea.dts   |  20 +
+ 5 files changed, 930 insertions(+)
+---
+base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+change-id: 20261016-nezha-00e9b93521f2
 
 Best regards,
-Jizhou Tong
+--  
+Igor Belwon <igor.belwon@mentallysanemainliners.org>
+
