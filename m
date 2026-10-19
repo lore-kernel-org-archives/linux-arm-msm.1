@@ -1,158 +1,150 @@
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B4AC4EF153;
-	Mon, 19 Oct 2026 13:18:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.38.64.46
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 389CF305E1F;
+	Mon, 19 Oct 2026 13:21:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792415938; cv=none; b=XS6rj0Ohl+6EspGlS6IBcEfw8lybZ6WqsI1wO9cTQgapRf7omBu6UEQHxzD2TXcYVJklDWKgwZmJqdxwdwnuI+qx/8/8VgXj1FDpNnfeFod3TYKkv9iBywibrB+4aP07wxt8nfUHP2TiwODXcbKjWoPUBbNj0z/yiShxuSnS7hA=
+	t=1792416098; cv=none; b=AHZ5Ze8j0NzWVHgwoTEcpcCjgS9M7KSheVrps7JU+2xWOqMYAlpzDtTbVpEAgqQBMsvdHlGKvUQ5jXaqR6Uneu8KKeny9IAWgJhQ6qinU3RygMruuA53AEZ5gNklVhNOD60fnVmO1uqM3L3WJtPmfkTybdxMUV6vAX9HPJKDrTw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792415938; c=relaxed/simple;
-	bh=5mFlWAfOPXaKw3l/GjzOwU1MP+KF/U0CJAJyCBxnt5Y=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=nQGHyZaEmX9YlDtftFshXaHarq46660DxpoqZ80QEgdfDsTchv/bkYmMHuHNN0PF+1bg87y8rYfKrjaGnTbq8B6DuoXW4jyz+nN0F7hT5nu5CPei4sbSv4jjiBgaR4BYoLs3znbl+7I5a+aIjvkRbcREOsKDWOooJ88N17GfzhY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn; spf=pass smtp.mailfrom=mail.ustc.edu.cn; dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b=c1ElGuA7; arc=none smtp.client-ip=202.38.64.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	s=arc-20240116; t=1792416098; c=relaxed/simple;
+	bh=t4RaAAhNDQW3GB2qxUGxvNCOVBzhA7WxA8Ad4wHd6Hk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qhTJNUDnD+PlEkxhUfssnOqzAqIu0UrIp6EGDeZrmNaw1TxJcxjsHqPB6rz+WJaxiuKbaxchneE95WkljfmKfE/K9GK3tP2jQ56MKiuIU6dIGlHS+8xUIdHkFXF59vJmNoySxAbdAr0UIVFQ4HD/euGCX2Pk8l1pgNVtOMJ1mkI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=df9wefRH; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.b="c1ElGuA7"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=IQ2Lf8p5pqLRj3pA0/+h9WhzznV9xdbRRx
-	dezV9hPTk=; b=c1ElGuA7GXadIaaEjL8lNbcM5GnL1R9wbjA4jBOUVxDy+ElKt3
-	UZWmjQ3lbn6bSomaaS7ar6ltouMNRfE70/nnr+pMlS6H1V54penwxf3QGG+I6np5
-	R4bk5YkaPmeWr84I608/hBOyWO0CIJIgd515wfDEXieLvVWT0OFqFQEa4=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.183.93])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgAnoze4GNZquR0TAA--.3173S4;
-	Mon, 19 Oct 2026 21:18:50 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: linux-usb@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v3 2/2] usb: roles: look up role switches attached to a graph endpoint
-Date: Mon, 19 Oct 2026 21:18:48 +0800
-Message-ID: <20261019131848.344689-3-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261019131848.344689-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261017081320.220525-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261019131848.344689-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="df9wefRH"
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 4F7201F000C4;
+	Mon, 19 Oct 2026 13:21:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792416096;
+	bh=MXOM9p/pv64oF7UY6qVlVeA0Fpe+myj4kNdbvKDYSSY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=df9wefRHKN7HcsxehaBfVkpCllAkofbk31C7StyYCzJCTtEvn+OEDvuskhLBPC3O8
+	 mCeq5bIAvLJ6C32izh2R0tGtBKZStfA0M4T4pOR0F0nezQ7UjeZATLCA0ucyD0MnsH
+	 M8oz5YIetuxAVGR33ZOWeq724veYJMzh+0EdpGZLnhb9MPBU62XjTfGBPVr7fMoulw
+	 iU9Ho6lGYus8cNwtmQ9VhAxsNzmfNMAcOpGfDefWpScyna0kUHkReIdvC3EUfbezjI
+	 98po9zaNuMCKNWlr3inxT0a3J6X0Z/OwhKCO7PgvT7qpESBbQ0FXEZ2ABUmn979mMY
+	 HptIF3N6caM2Q==
+Date: Mon, 19 Oct 2026 16:21:33 +0300
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Jens Wiklander <jenswi@kernel.org>,
+	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
+	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
+	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+	linux-integrity@vger.kernel.org
+Subject: Re: [PATCH v4 0/3] Add TPM support via Qualcomm TEE TPM TA
+Message-ID: <atYZXRLf3YPZhiNB@kernel.org>
+References: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgAnoze4GNZquR0TAA--.3173S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fZFy3ury5AFyktr4Dtwb_yoW5Zr47pr
-	yakF4Fqr4UJFya9w4fGan8CFyrWr4fGF4UJF4xt3Wfu3Zaq3yrJr18Ja4ayr1UCanxW34Y
-	vw18A3409asrJ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUP2b7Iv0xC_tr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUXwA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4
-	AK67AK6ry8MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
-	rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
-	CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
-	0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0VM
-	KJUUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREFB2rVHlSR7ABKsQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
 
-usb_role_switch_get() and fwnode_usb_role_switch_get() look for a switch
-on the caller's parent device node or through device_connection.  That
-does not work when one controller exposes a role switch per connector
-endpoint: the switch is registered against the remote graph endpoint and
-the consumer (the connector) has no phandle to it.
+On Mon, Oct 19, 2026 at 02:51:45PM +0530, Kuldeep Singh wrote:
+> Qualcomm platforms with a discrete TPM (dTPM) talked to it directly over
+> a non-secure SPI channel from the kernel. Arm's Base Boot Security
+> Requirements (BBSR) v1.4 require that access to go through TrustZone
+> instead, so on affected Qualcomm platforms the TPM 2.0 instance is now
+> fronted by a Trusted Application (TA) running inside Qualcomm's Trusted
+> Execution Environment (QTEE), which talks to the dTPM (or implements an
+> fTPM) on the kernel's behalf.
+> 
+> This series adds a kernel driver for that TA, built on the QCOMTEE
+> object-IPC transport (drivers/tee/qcomtee/) already used to reach other
+> QTEE services.
+> 
+> This patch series functionally depends on below(first 5 changes specially)
+> for qtee service discovery.
+> - https://lore.kernel.org/lkml/20261015-qcom_uefisecapp_migrate_qcomtee-v5-0-1460691b35d3@oss.qualcomm.com/
+> 
+> Tested on Glymur-crd target with tpm2-tools utility.
+> 
+> Validations:
+> - Get capabilities
+> - Random number generator
+> - RSA key creation, encryption and decryption.
+> 
+> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> ---
+> Changes in v4:
+> - Add new line before goto label(Jarkko).
+> - Link to v3: https://patch.msgid.link/20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com
+> 
+> Changes in v3:
+> - Merge tpm_qcom.h into tpm_qcom.c(Amir comments)
+> - Update return values of functions and drop certain error prints.
+> - Define locality_arg as default value.
+> - Add Jarkko's tag on all but drop from 2/3 as significant changes done.
+> - Link to v2: https://patch.msgid.link/20260907-tpm_qcom_driver-v2-0-71a6b1752da8@oss.qualcomm.com
+> 
+> Changes in v2:
+> - Use QCOMTEE_TPM_UID as 81 for service discovery in patch 1.
+> - Use FIELD_GET, zero initialised array and log improvement (Konrad)
+> - Improve commit title and other fixes (Jarkko)
+> - Split MAINTAINERS entry as separate patch.
+> - Link to v1: https://patch.msgid.link/20260831-tpm_qcom_driver-v1-0-6f16fa6924fa@oss.qualcomm.com
+> 
+> To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+> To: Jens Wiklander <jenswi@kernel.org>
+> To: Sumit Garg <sumit.garg@kernel.org>
+> To: Peter Huewe <peterhuewe@gmx.de>
+> To: Jarkko Sakkinen <jarkko@kernel.org>
+> To: Jason Gunthorpe <jgg@ziepe.ca>
+> To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Cc: linux-arm-msm@vger.kernel.org
+> Cc: op-tee@lists.trustedfirmware.org
+> Cc: linux-kernel@vger.kernel.org
+> Cc: linux-integrity@vger.kernel.org
+> 
+> ---
+> Kuldeep Singh (3):
+>       tee: qcomtee: Register qcom.tz.tpm service for discovery
+>       tpm: Introduce Qualcomm TPM driver
+>       MAINTAINERS: Add Qualcomm TPM driver entry
+> 
+>  MAINTAINERS                       |   6 +
+>  drivers/char/tpm/Kconfig          |   9 +
+>  drivers/char/tpm/Makefile         |   1 +
+>  drivers/char/tpm/tpm_qcom.c       | 414 ++++++++++++++++++++++++++++++++++++++
+>  drivers/tee/qcomtee/call.c        |   4 +-
+>  drivers/tee/qcomtee/qcomtee_msg.h |   2 +
+>  6 files changed, 435 insertions(+), 1 deletion(-)
+> ---
+> base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
+> change-id: 20260831-tpm_qcom_driver-d21c720e73b2
+> prerequisite-change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014:v5
+> prerequisite-patch-id: faf4520d818abf0d7533f71d9c8b9a8aade34626
+> prerequisite-patch-id: b487dfe2fbc076f4815dc6c73b9e68b0b78c961f
+> prerequisite-patch-id: 9f2c4ee37ba173bdc860f253d44974379f2cf125
+> prerequisite-patch-id: e86905ac6289821db30fd9a17f73e276e0a88363
+> prerequisite-patch-id: 8777bfa2ef8344715bf972d049acb0a6ef49b136
+> prerequisite-patch-id: 1c7f946e770a1cbc1599f9571282c9265a6af9cd
+> prerequisite-patch-id: 7be993abea2ca36057d9352381a5890f50996dda
+> 
+> Best regards,
+> --  
+> Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> 
 
-Add usb_role_switch_at_endpoint(), which walks the caller's OF graph
-endpoints and matches a switch registered on the remote endpoint, and try
-it after the existing parent lookup.  There is no behaviour change for
-existing users: if nothing is registered against an endpoint the lookup
-falls through to the previous paths.
+Applying this pulls tons of TEE patches:
 
-This is needed by DWC3 designs where two Type-C receptacles share one
-High Speed data bus.
+Applying: tee: qcomtee: Track the object invocation context
+Applying: tee: Add kernel client object invoke helper
+Applying: tee: qcomtee: Allow object invokes from kernel clients
+Applying: tee: Export uuidv5 generation for TEE backends
+Applying: tee: qcomtee: Add support for registering QTEE services on TEE bus
+Applying: firmware: qcom: Add support for TEE based EFI-var client driver
+Applying: arm64: defconfig: Enable UefiSecApp TEE client driver for Qualcomm SoCs
+Applying: tee: qcomtee: Register qcom.tz.tpm service for discovery
+Applying: tpm: Introduce Qualcomm TPM driver
+Applying: MAINTAINERS: Add Qualcomm TPM driver entry
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- drivers/usb/roles/class.c | 40 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
-
-diff --git a/drivers/usb/roles/class.c b/drivers/usb/roles/class.c
-index edec139b6..fc739fd61 100644
---- a/drivers/usb/roles/class.c
-+++ b/drivers/usb/roles/class.c
-@@ -157,6 +157,42 @@ usb_role_switch_is_parent(struct fwnode_handle *fwnode)
- 	return dev ? to_role_switch(dev) : ERR_PTR(-EPROBE_DEFER);
- }
- 
-+/*
-+ * Look up a role switch registered against the remote endpoint of one of the
-+ * caller's OF graph endpoints.  This is how a connector endpoint that shares a
-+ * USB data bus with another connector (for example two Type-C receptacles on a
-+ * single DWC3 controller, selected by a GPIO mux) finds its own role switch.
-+ */
-+static struct usb_role_switch *
-+usb_role_switch_at_endpoint(struct fwnode_handle *fwnode)
-+{
-+	struct fwnode_handle *ep, *remote, *parent;
-+	struct usb_role_switch *sw;
-+	bool available;
-+
-+	fwnode_graph_for_each_endpoint(fwnode, ep) {
-+		parent = fwnode_graph_get_remote_port_parent(ep);
-+		if (!parent)
-+			continue;
-+		available = fwnode_device_is_available(parent);
-+		fwnode_handle_put(parent);
-+		if (!available)
-+			continue;
-+
-+		remote = fwnode_graph_get_remote_endpoint(ep);
-+		if (!remote)
-+			continue;
-+		sw = usb_role_switch_match(remote, "usb-role-switch", NULL);
-+		fwnode_handle_put(remote);
-+		if (!IS_ERR_OR_NULL(sw)) {
-+			fwnode_handle_put(ep);
-+			return sw;
-+		}
-+	}
-+
-+	return NULL;
-+}
-+
- /**
-  * usb_role_switch_get - Find USB role switch linked with the caller
-  * @dev: The caller device
-@@ -169,6 +205,8 @@ struct usb_role_switch *usb_role_switch_get(struct device *dev)
- 	struct usb_role_switch *sw;
- 
- 	sw = usb_role_switch_is_parent(dev_fwnode(dev));
-+	if (!sw)
-+		sw = usb_role_switch_at_endpoint(dev_fwnode(dev));
- 	if (!sw)
- 		sw = device_connection_find_match(dev, "usb-role-switch", NULL,
- 						  usb_role_switch_match);
-@@ -192,6 +230,8 @@ struct usb_role_switch *fwnode_usb_role_switch_get(struct fwnode_handle *fwnode)
- 	struct usb_role_switch *sw;
- 
- 	sw = usb_role_switch_is_parent(fwnode);
-+	if (!sw)
-+		sw = usb_role_switch_at_endpoint(fwnode);
- 	if (!sw)
- 		sw = fwnode_connection_find_match(fwnode, "usb-role-switch",
- 						  NULL, usb_role_switch_match);
--- 
-2.53.0
-
+Br, Jarkko
