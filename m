@@ -1,123 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792425222;
-	b=ge6XYvVzG2zZXmtC9VMpAn1Dovz4x1ITPlMr0cxEzzGpHlV1QpszIUDV1cICtwG4sWMM
-	 aOlvzjsFfRwOZC1Y5l2djl333Bn23HMgJF6iLqyZ7mDXHBs7ZqR3+ahsVbw5DRueaOOWe
-	 WqKsjjtc3K1M6qdeyU4NDTXHNQxRWkvWgJNhpDok7fOY5TF5TQ4CyU+nBBHZdp8gTNwxl
-	 Q+2dw2cMEB2pA5nKGD/xyNqiy8d1B5T0LRLdFxK4eHrKOQBWfN3jidtWnS/v/LNkI45mW
-	 c/9Yc/0Ro+mW1AS9v2qh1TZyUibyPZF83oAHIYdcYB2/xKCQeH/SuV/WMJ4O8DRkKOA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792425222;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=WkXGpXOWiBs24ppXgXlnDUbNGC4cGBni/AXZNpiz1hc=;
-	b=kkfdgWRb6E4Kfi6447rlX2B1FYLWSK8ckanly78q+/YxoRXuSzIBG+XbcpWYwlOsKee2
-	 N3jomg1MeqDi55ZO0A6rCG40TO1SC3b+NMVf52k7iyODaKtm+LVoFhnr3iaNVWCQ75OfL
-	 ZdabMrVOOmwxFA7SdNWOPZ0TOT555DZ3MKtyrz6rBFdla20u707syFDAUhpuhfqezHxw3
-	 QnlWsA/+3wN0L6bJWjAJoKZ+o48bQibpqjqGx7aaX9q46s+xlh5MYtOqE5+hXj8E1RRyM
-	 JVlc/6WTOrWb5P/8X1tpuVXj+fo8YtfXIkf80JdCnwk7f84Y20A/Rp8Cg4gkZXhgtyg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Rd412vdY;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cOrP7WIu;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.174
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792426668;
+	b=pHfFFYCUNK2l+58E+kNpZZy9NsNGYRLgMpZ1YYmMFiR7oh1s7yexKtQP2lE320IvxEyu
+	 jxJOAiu6hrLk9mHgzzaWcz+wfHPCmtXHAZT3B7+mD0TTj8yxImYya8j0WEqty20lWavPf
+	 kNv3DWhXQk9uPl1LOCFxFJeVLneDYVpsw+zIdhgPrXVWZ2ov41rKgMFtzxtz9s9UXDAXJ
+	 E91eycwPT4tfHjdIpAUCQG7jax8pkDgADOnbtyx72HOUfFtOCRIKd2OasIxcv801E5A9X
+	 gmgKuPch25eAZ4QcRb55ix8pXv4DanL9eUnCMiUHwXzpZMqt+e+xYhx5uonJQSkQXuA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792426668;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=pPq1j1hzuHov4jzp9iCFcS5dfiTFka8+sOkQmid/D4s=;
+	b=FP0apubAQfeoGuX4uxS+OYn5yFD2S7R2MbHJEo52n26b0kDEUZbNrMfR9UmBaDbCTWen
+	 FiHJfr+9nJwOCNUX6TQ2IXNbsHoamqXJhuU1wGvRgZpwe8BWSwPguLXGfcR8VOeM8w+D/
+	 98xAQWilJoGKjuSC1Ic/ll8DJawpAr0Yp7A/mYO7WgSJR+WqfqVXkxT8Ta2kDAhpWh5OP
+	 i4jtmEbgzJEVT+ouM4V8/iMz3f8gTTRZYxAaCTDvl9navYzm4ry64I8x4prnCT9/L2fuv
+	 vGliyQWJRsIYZWR/NBE2NgkyKPp1I3KmrFOk8NVfxGpz6bKJw0LcgAkpcE0w8MmCBtQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=K7VaRv01;
+	arc=none smtp.remote-ip=74.125.82.174
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2A8B606A335
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:53:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C2A8B606A335
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A76C606A31B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 16:17:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3A76C606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Rd412vdY;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cOrP7WIu
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JFOukm3158931
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:53:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=WkXGpXOWiBs24ppXgXlnDUbNGC4cGBni/AXZNpiz1hc=; b=Rd
-	412vdYZ6pr+FIF/LqCVeE65wVB2AaKvNCcSUOW3Ygrv2XQ1O8BxNWia0WShOYeFg
-	TH5bNmIi5IQe4w/0dWJoYBxI/cnkulrBv3h/HX+thbMY+N1VEEG5tiZ2FeQF1/Rg
-	6WJ8nvgBbbetfszsB9KU8lqRAw7RBWjt1ASWAsJGENN3xSqwLjTa5bb6buJA8Tgk
-	EmRY2GXxOsaAUjiQp/dFxxBIzcm/IdIxcPh8K7wnAbQCl9kOIXEeT9GA7ckii7i1
-	PFuHmlJi7x1qUOiGInfJQzoy0uRP5ovpfqJEpFor3F3LP8AHWXilAeTSowP0M8FW
-	FIlrgi2j/xaJ7bNJUT7Q==
-Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com [209.85.160.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf3xa1rp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 15:53:36 +0000 (GMT)
-Received: by mail-oa1-f72.google.com with SMTP id 586e51a60fabf-45e83fd0663so2641612fac.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 08:53:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792425215; cv=none;
-        d=google.com; s=arc-20260327;
-        b=pZwRsCBMwflw/GjIXQLdNk7i8JLLaLAPKN9vPRUBEDiOs2g7i536xnUiTWa+W6OTz4
-         1gowSyj0p+xpa96bPoeDU/9cQfIHonDxC6FBBinspBc2oZ3Kb3KLeRsPA2GJCvu8LWNQ
-         M1WqUIanDmltYTjnrfudI/g3IJEJdL6shvzTXJ4wICgrUgGTjHLaeVCcPjKz8HvBc7zB
-         DHAVVn8pG/VSTEFF847mpcJn7Ds3OJZcJEgcIulx2dXUSoqjhuxKVR5gYAEMnmBLafej
-         zd6XWB9qLI2hBFuw2Xf9m/sqqgo0vZkM6N4D44QSR7PHngLG03EPmuDG5bOIV+XGKVPT
-         j/BA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=WkXGpXOWiBs24ppXgXlnDUbNGC4cGBni/AXZNpiz1hc=;
-        fh=qL9vOQ++o6Ptw2oZK3aWEtwKPbxbVWoxfDqZiS0ALKo=;
-        b=WlSS90U5MKyh6nF0AUN7sgYByZA8u8nd1wagQlCC9SkLfkr5fKlC/qvpyKshjjFCDl
-         TGm12jGghZajKUAMoyW4CaBcQ/J+oifbqSrDz5S9LlwLpMJEwKBumsg2opPfEOcZjsC+
-         JMgwPiml0q8pDV8K3y4gQsu7Qvmc6eWSp+eZ1wvTcRutw9Z1gJsp2rzPtjXwEcUGNoHi
-         VoVJfxr92mFsx3PwP6e3cixai5nOtKsgPpKHYm5WfH30gxGnxTziOwNLPEM0D0uNiGI/
-         tOuNuGL9z8k8jEJm/yI7/I2mnc3Wm76q8fQf3Wx2D/2Rztodary0YsA45FeCXhr43643
-         ZwgA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=K7VaRv01
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-3282db206d3so3751183eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:17:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792425215; x=1793030015; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=WkXGpXOWiBs24ppXgXlnDUbNGC4cGBni/AXZNpiz1hc=;
-        b=cOrP7WIuPnYqu1jjsW1sPuxPSccLrPEQlccMvUwcENIlbmoUISqs3PCoOk3YWx6Ba9
-         3xGA/eT57Lc8lpjmp/3wf56ZXfMHbdBzmnoYHgD6Rb4LuuRUumFPN+UGstcCw79BYLox
-         yFYTP4BdUoYEigJ6TEjGDEwgd+wTjSQVOFT97/YxD+AbwIzD6wU7rJTyOuk3z4PX7irF
-         Au9pxhtT7ciM9o3ld/eokDmS6/HCz/NbedybSeJSSyJjPqiYSNxM9iqOSpTCG4XutP7F
-         of34yvj4NezuugUQUqwLS2NbrOH1XrKD9XUrbUKJMn+fWuCZDiEvSj3uiTgRWUlW1BE6
-         a5YA==
+        d=gmail.com; s=20251104; t=1792426667; x=1793031467; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=pPq1j1hzuHov4jzp9iCFcS5dfiTFka8+sOkQmid/D4s=;
+        b=K7VaRv01AhlvkuBbDOCGUqbBkt/N3HMy4qyjvMzbld+rjLvgJIUdgHygzIULhKMqjK
+         BkfpKhx7wE5iahfhA45h0klxGuhGmXiN71rjRGuH/ynWvzWQE4vUgucdbtjz14JXPnR/
+         vC42iWhgpsIyfYjanqmqNmSsrrclT58wpIbuGikOQUGz48A59cqVCn5J5aO/EydepZ3S
+         YOcYUrXfp6Na6c1yhj6vzeQu2BlCJBmATxwUWGFaNFroW61Jx808XkArogBDutixHacw
+         8EtK23UKT+QpsNgb58gFh+pKRq7CehUHT11OlOOFhHTPW3vSIB+FNSh5uYlhn7LUzREV
+         qkoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792425215; x=1793030015;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WkXGpXOWiBs24ppXgXlnDUbNGC4cGBni/AXZNpiz1hc=;
-        b=XhWp0bC0CL6D5PW3Z5FN0iYWPm3qRMAZJ3QpjhAPIfz/6KQRKNYDeCsinnXIwQo9Tj
-         RXTBqlBW7Qq7/H97PS9G1uOH6dTmfprs+X/aJ5DFmHalJRQqO4lNNWxmPc4DDmIDT6S2
-         QBCnzuuXF82xbbA5ulf/Y+9/npIb8pX9LY3EwIUfuCZMVS4UVpeF35JNjYTni2QN+bsd
-         LdiU+PwvhHhI2gSMn5+3SpBraQo0+SVs4tipLlPYFvVhZcPvhn2KoIIlpbXtXATz3CH2
-         F3qi0pB9BfJJL8Bt+NAnwXVotFvJpIcrCHzhenSpZTEpoaz7xpreolPpPnsbNG6q+47L
-         MauA==
-X-Forwarded-Encrypted: i=1; AKwUvBxNaLI/hp2qgCRKFoGxwplIC7wUFLKQ/YTvdI6ZESvY724m06Sy1kEnnvU3mNRUR8WLEpGMiQ4MVEtsS8La@vger.kernel.org
-X-Gm-Message-State: AFq9FYKee40WBl9eYNDIgoe+bjDKO9kEHgayKB29dS8AE/wsXW9AbmZU
-	IVK0+diE56SKfMmA5Qjl7VsmhL4J01PRpva2ZOMcOpKoWWqF2mVM6KhHYRXI60//yq1gX/R4OjU
-	K77QCJ0tzzYdVMHiriApuFHdh2A4wXSggFHJoIDnCHb1qQYOvG1zGppBzp2pL4T4oki6zLy8rUy
-	KkzkT5ztjF4XzbmkSbkqIh6lnVV5Vpc6MX6oEsF1/4fEw=
-X-Gm-Gg: AYBFou3pLYyowH3ptB84ANPNT22si/mdTmsrvCvFBKto9IyynUlb4Vik+9YzQ7z5yWM
-	wa1fBzz/DLeYgVk/wE2ANWK40/mVLhJ6OToTDFVoOoye1zjXJBqeweMXal1BwiFnKbRCqNCco/D
-	aviFGCjNgbNyZKXEZivBvTrw7x8v832XynQMYgi6WHsKU11iUhA2850cpzJg==
-X-Received: by 2002:a05:6871:2ea5:b0:492:d8bd:949d with SMTP id 586e51a60fabf-4a7575b6d76mr5836599fac.2.1792425214120;
-        Mon, 19 Oct 2026 08:53:34 -0700 (PDT)
-X-Received: by 2002:a05:6871:2ea5:b0:492:d8bd:949d with SMTP id
- 586e51a60fabf-4a7575b6d76mr5836575fac.2.1792425213472; Mon, 19 Oct 2026
- 08:53:33 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792426667; x=1793031467;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pPq1j1hzuHov4jzp9iCFcS5dfiTFka8+sOkQmid/D4s=;
+        b=a6pqv5u5Vc0j18/uVXTw5ojX0+PKSrseoiXZXzOf/njbohWN8tE0dWRLAGSrc27RHO
+         oENSJxB4dfmBdnnZ63mBdjY9MABTBIpuXJtBjBTEAHq3AQaHhk+QNiw4MYsi5r8nQJeU
+         IEiMy1RpSUBKR+pI0WQ/4flCH0LAI4Ys6WxsVFHfkUF6Q+LNkykv1p3o5fRDB2cr1Ywk
+         WugJhN1M2WOb3h1Da8/rGoM4H0tBMqLy47lqjQexaMWN6NzyQGnY2tyD3/Gd4tdl490n
+         w9oxhdo/UUukJIKHEMCsp00NfrVI2IKE+02cRRt0XKphM7Hw+4D6LKEzNUJdZF0okF1W
+         iJAw==
+X-Gm-Message-State: AFq9FYL3+gdCVxuNXh3oKuaq+iJGugCDMfMsW0Dn8rYJ3LdqfdDjmE1c
+	E439t0uNIEVILIOy8suEDRizrCeNKsHgdmiwkvO4l3rairn8U7vBN/tl
+X-Gm-Gg: AYBFou2WPv/aiDx8NB6VCurSHWN5YYSqTOPBVOwlbOqgwxjMKEItRPueozlUbVSiAA2
+	6jyKlGf1KL8CX7Ly3CoGNZ/PIJpEGf18eI5HBRFig9FrlhuxO1D/UVxRsRiUKF3DMKnt8T6Uxn7
+	hyfUmi93YfnptGDxQ5LZ/Etsak6+InwjO4Idqr01xaPsXDrvx62zC1Im166hrvbHKIwJ7gV+Vnx
+	owA+o6PBuT/7EuYcNns2iG92A4wTSAn+CAR+cs1vBxuCSN/2f0Dsp2ZZ7UT/o1Hn1VFZFO41X6T
+	IDCGDPriMesJ64a80qjr8FCgwn9tS5F3TY4U3l+d6mMrsb0RW3jRcGShxDEUgGcD2gPcjOBu1Zj
+	FtUr0FTmzA1xZLVJDtH2DEDQ6/6vbM5tplx06+zInH6LN5th5yAx4mJZ9HccZdnFT3wHxhrn6jw
+	9L2O8AV7WZDQAG1GOCuW20DTOVm9Ekr+gMGREUfzCUxcQ0b/XatlM7w+Ew+mq96GGJtmDIiXsT5
+	N6BDUCCtuG0U1gXGBW7Hw==
+X-Received: by 2002:a05:693c:8955:20b0:35c:707b:acba with SMTP id 5a478bee46e88-3619f1fd96dmr12005989eec.3.1792426666488;
+        Mon, 19 Oct 2026 09:17:46 -0700 (PDT)
+Received: from redducc.localdomain ([183.83.156.125])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm33410985eec.13.2026.10.19.09.17.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 09:17:45 -0700 (PDT)
+From: redducc <sushmit718@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] clk: qcom: sm8450: Fix eUSB3 clkref rate and camera power collapse
+Date: Mon, 19 Oct 2026 16:17:37 +0000
+Message-ID: <20261019161740.2384-1-sushmit718@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,94 +98,38 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <ar_AuRr1eaZzOfw9@baldur> <179096320161.1973.2852858792260211089@gmail.com>
- <c3c4d140-07ec-4402-a18b-389520df188e@leemhuis.info>
-In-Reply-To: <c3c4d140-07ec-4402-a18b-389520df188e@leemhuis.info>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 08:53:21 -0700
-X-Gm-Features: AclHuK8lwhBc9o-AjMwe7IooeXr_cgpIgGqUVsN4bF6VjxH_2L_fx0Hz7Wqdu8M
-Message-ID: <CACSVV00x091i7BKW+bj0RUnkd4rOrHXbhZ4zF6SuTU1NAqsFTA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] drm/msm/a8xx: Enable CLX feature on Adreno X2-85
-To: Thorsten Leemhuis <regressions@leemhuis.info>
-Cc: Oleg Keri <okerixx@gmail.com>, Bjorn Andersson <andersson@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        regressions@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: RZFLMVdFHGPwqqH238jMDHYYOaZpKmFa
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA2MyBTYWx0ZWRfX585ebkJnRoxf
- DRs6mT1HxHHBEgJLgN1YnucspWPvvxPDzkpWjC/Ekli2iseLIW0WZylAyxAUVcOY2580dPTAFn7
- G992X+knXEBZar3mk0CF4klG9hjD/Uo=
-X-Authority-Analysis: v=2.4 cv=XPOl2ghE c=1 sm=1 tr=0 ts=6ad63d00 cx=c_pps
- a=Z3eh007fzM5o9awBa1HkYQ==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=lAgNKBcoAAAA:8 a=7w3WoVYdraEV06504AMA:9
- a=QEXdDO2ut3YA:10 a=eBU8X_Hb5SQ8N-bgNfv4:22 a=drE6d5tx1tjNRBs8zHOc:22
-X-Proofpoint-GUID: RZFLMVdFHGPwqqH238jMDHYYOaZpKmFa
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA2MyBTYWx0ZWRfX6NJrz4dEwNCW
- u2A8u0oIq5fPdAnAOHZIBjUOIgVZ5ed4SfZPI+fKa855rJhQDRYITqQ280BeQjQXWLEpGsHdT9K
- bXmOfI2JviSyrX6k1p0pPyAmpvAtsppoOcaNKDXIxzET1UfNbgVEVIEFi0p8Y9radwQU/+BOQsq
- ZE6FdwLdGMB7sAK8f4JQyXvfM5N/Y04PoamRrHmFuHS2K6E3oKJlrtELnVIAJDfIGHuSi4iZ3/0
- xqUhXpL4XKAmC6A8TEqDe5sqjSs40WTkypCxWKPCySo013PtZlySDqb/O4tfnL5HlqI7KM6ra0M
- hE/H3YGFjtkK1kV6dRDfVy65X1Fb6V+Gm2wKJX9h+MIzNaSGoeT55+dYPDoaWfulZc2xaHYPqD7
- JjReOEejq5Zja4SxaV0Gw5dy20yv36tBa0sjvp0PyyrSiaYVKqtWEpno9JwiEdcmHDk+fO3Ml7k
- QVypGfHTIR3tQzKGsZQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_05,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 adultscore=0 phishscore=0 suspectscore=0
- clxscore=1015 priorityscore=1501 bulkscore=0 lowpriorityscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610190063
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 19, 2026 at 6:47=E2=80=AFAM Thorsten Leemhuis
-<regressions@leemhuis.info> wrote:
->
-> On 10/2/26 19:47, Oleg Keri wrote:
-> >> This patch landed in next-20261001 and while it works on my Glymur CRD
-> >> (COB), on the Asus Zenbook A14 I see the following failure during boot=
-:
-> >
-> > Same on a Lenovo Yoga Slim 7x Gen 11 (Glymur) with next-20261001, GMU
-> > firmware v5.2.38:
-> >
-> > [    1.632277] platform 3d6c000.gmu: [drm:a6xx_hfi_wait_for_msg_interru=
-pt] *ERROR* Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 11 timed out waiting for=
- response
-> > [    1.642345] platform 3d6c000.gmu: [drm:a6xx_gmu_set_oob] *ERROR* Tim=
-eout waiting for GMU OOB set GPU_SET: 0x4
-> > [    1.642360] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu=
-] *ERROR* gpu hw init failed: -110
-> > [    8.053367] platform 3d6c000.gmu: [drm:a6xx_gmu_resume] *ERROR* GMU =
-firmware initialization timed out
-> > [    8.053584] msm_dpu ae01000.display-controller: [drm:adreno_load_gpu=
-] *ERROR* Couldn't power up the GPU: -110
-> >
-> > Compositor fails on the first start and works on the second.
-> >
-> > Reverting this patch fixes it here as well.
-> What's the status here? Was this fixed meanwhile? Or is this regression
-> how heading towards mainline now that the merge window is open?
+Three fixes for the SM8450 clock controllers, found while bringing up
+the Nothing Phone (2), which uses the SM8450 derivative SM8475.
 
-AFAIU this is still open.. but seems to be contained to a non-typical
-config (modules + fw built-in).  It seems to be caused by trying to
-initialize the GPU (and send the CLX tables to the GMU) before
-_something_ else is ready.  Tracking down what that _something_ is is
-still ongoing.
+Patch 1 parents gcc_eusb3_0_clkref_en to bi_tcxo. Without a parent its
+rate reads as 0, and the SNPS eUSB2 PHY rejects it as its reference
+clock, so USB doesn't come up on SM8475.
 
-OTOH not having CLX could lead to problems exceeding hw current
-limits, which itself is a problem.  And why I did not revert CLX.
+Patches 2 and 3 fix camera power collapse in camcc-sm8450, matching
+what camcc-sm8550 already does:
+ - set RETAIN_FF_ENABLE and the GDSC wait values, so the IFE GDSC
+   doesn't get stuck off when powered up for the next session
+ - park the camera RCGs on XO while disabled (clk_rcg2_shared_ops), so
+   the Titan top GDSC doesn't hang the SoC when it collapses after a
+   camera session
 
-BR,
--R
+Tested on the Nothing Phone (2) (SM8475). The patches apply to
+next-20261016 and build without warnings at W=1.
+
+redducc (3):
+  clk: qcom: gcc-sm8450: Parent the eUSB3 clkref to bi_tcxo
+  clk: qcom: camcc-sm8450: Retain flops across camera GDSC collapse
+  clk: qcom: camcc-sm8450: Park the camera RCGs when they are disabled
+
+ drivers/clk/qcom/camcc-sm8450.c | 113 ++++++++++++++++++++------------
+ drivers/clk/qcom/gcc-sm8450.c   |   4 ++
+ 2 files changed, 74 insertions(+), 43 deletions(-)
+
+
+base-commit: 6a56f4f29711dd2da49f03a5b99ce53779e638d7
+prerequisite-patch-id: 154550924ab1d2c1bc95517c058aaee0bb242f92
+-- 
+2.43.0
+
