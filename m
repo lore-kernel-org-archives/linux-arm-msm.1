@@ -1,147 +1,103 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 626654CCDD3
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:33:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B85B4AA033;
+	Mon, 19 Oct 2026 10:46:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=60.244.123.138
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792406006; cv=none; b=ftju08EjQMJz5FPmQGu8FhJL4NcCJ0TRufNCzRTGV2Md6rGzgTamcaMrg0ssp+rkWpsuDCekTNnCLNqVKJUtxKMfsRSs4wp8rZ7HGbeMED2h8F+J9UeaCH7B46jfpIrPNYvyk40QnO6WtP6UEK3qawg5/tZkyTyayp3oRkkmVJ4=
+	t=1792406804; cv=none; b=A4JTygeK3lllGMwdEqIRD3Nudmr1jupXma03lwI5YPOyFrp0YDkDf+O3eaKlbGzjRt25itXSE40uMv6o8bC/SpPywKaF68g3htfnM9Ik3DxHAFEVTdavg4ZkY5c5amgkSdOawxLQX+TdfI2LuLXbIXmwM6vWYintthtqMpvnGSU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792406006; c=relaxed/simple;
-	bh=Qzb3HHEtxPgHJGqlijd2TCpD+/VFd/BWXBo9naFVqAE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DTlTZtZUFBWEU5z+uFcoZl6nGICuYH3gIUXLNa+B7JdqZI92U853ggYMGOnNzHLlBhFXNjDdzySiNciBxNccLpxShXHaskhBtSkKMX3nTZ4XVlw+nrMsGVQWDUn8OqmJSBhzHqmBUE+j3iLSFxJjJqFokCb+RGQ02+pLD+RY1ZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nOgTJjEm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C1cIzuFc; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792406804; c=relaxed/simple;
+	bh=v9hN0A8v08b17DVuo8+TNcKTWdv0a+uo2yFMOkDVRCI=;
+	h=Message-ID:Subject:From:To:CC:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=KKxhlJMFRpE2yOI/zu8P7Ti1qfywQ9vCoDeESiVpgeI9290eNn+gZfjs66B+nQ2SeV8ToA2D+VmqwLq5q13Q5h7/XcBRYUPXqCOj1df0nlgaUpRHO0ohVRgTsAG7BNhTk1hCP7iwnPx9HD7bW4DhPYwCPZl/ntRqQgUzQg5f3L0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com; spf=pass smtp.mailfrom=mediatek.com; dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b=KuZKpwqJ; arc=none smtp.client-ip=60.244.123.138
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mediatek.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nOgTJjEm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C1cIzuFc"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8P5cl1896537
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:33:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=uYJLay0WDfuP6LrjHm7Y5hKU
-	02X1f9DjWzZc3tzDB44=; b=nOgTJjEmKAIJ/toFGoThy2BnuvhlsCchi2Zc/cPp
-	26vbNcZ0q+nbwCJu9aJpPs2WrIIWE31MqbiZKgrmJfKSrVjeraDu67VZhXDmcO8F
-	gxPsHa7hE4G8lj38Sn4cgfi/zhkVcO7/TeUAOnPaSJAmky96Gh1K+2gxt2NeB8Nv
-	UWLbXuCSW3xFz3U8rnneK4JstKIJM6iKekp7z1JIoD1Ilaa3WvPWmdafnbib9dLv
-	Fvd3setCOLLxTcQ/f6QixCkdnqYB/nkpDKOgAtIPWuSICKG2TvP0B0wLrNdBgPNQ
-	w9P5FyUTB7QlcYGMWod9ExUZrblO2nkJkwclMFKspofzzA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdbvr9eew-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 10:33:23 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93c5ab5c136so329253085a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 03:33:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792406003; x=1793010803; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=uYJLay0WDfuP6LrjHm7Y5hKU02X1f9DjWzZc3tzDB44=;
-        b=C1cIzuFcifjA4PxFWzinpfivujRE9mb/sraIa7R9rzC5YBlqXNdPlmosjYd3sz4Rzw
-         vQZEX+7mPIb1EO+ZUiLKhsgB2yoG6lZIRhAuOL7zPs9YNXi4qWp9a1wFRQRi4FPGKgoz
-         XS+RWzSZEU4PGi6hCxvDiIq9fx9t2ZgP3rAdpFF196+R+RPTuYVDCDlOwvkbW0z2/fcW
-         VKp7OnVsm8CvC6py2vrqon3q68IXnISLGaiKXKawDEbOoMwmWhZb3UgEdMGc33YJbarO
-         fnUnHYK1YTbGR15+PSoZdf7h0zlIWc7l2hDKDHspq9GZ4MDBhaAwRN/RAYQGj3sxvjtm
-         A6ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792406003; x=1793010803;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=uYJLay0WDfuP6LrjHm7Y5hKU02X1f9DjWzZc3tzDB44=;
-        b=cPyiDYqE5bWkS3sEow6qcRRuT+Uyx39paBL6Ci7b0f8bK/lWtRm9v1Lxnt9zKgHHsq
-         XN0vTmOuFqk6t0467meycJcoW467gwYE2n02ozoC6FELjd2sjvyyhrAH6l77kUTIj6vE
-         iMl2kIExrTuxpzKbbT0h2M8zNuQc7DQsAkEjMM+wn1WArxMwkw2tZBcBU6rGro+pHP4Y
-         CUG02k2ZyqhQ523pjk4JK0dnFBVoj7twS/0TKswp/6J0UIpunibsNagNahUjG8UEuh1b
-         CcVl9NDUfrs59sXuIGVjzFS0kEBvbPGY2gM94zFbf45D3r1mtKKDFDa2pYSXFHT0LL1g
-         Qd9w==
-X-Forwarded-Encrypted: i=1; AKwUvByJVQB/pMxcwZ2GaGCQTPK1MYTijNkYAUGz3p2ZE4I/h9SJWzCFDkFsPG7QpmNM33oJlHfLBHmqNCr9n6L9@vger.kernel.org
-X-Gm-Message-State: AFq9FYIhbjOt0SblrfEm/1LtOgg6nswIZuZWuZ64pnE5ULu1MV8tWl1M
-	a3Fj9k+mxXY0zJfYAYJZqlCbT41WYzUZoAvG3P5JauOkscC71Yh8gN6SoeOxn+PNZP0vZn7cRoI
-	o9Cb78l0fL9BKTNHbWOuxvlse5U5XvCO17ZnbOyzyyVbsjt0BniII1Myg4L9Fn9Lyfsp8
-X-Gm-Gg: AYBFou2dNKEtH0BKuhWKZ71WBpkQXu2f7DMLdxDdN/pb6tDMx+HqVtAwPhvZjHovlh5
-	3k3jKnuzi9Tv8/P6LQ1TzvbqyU0zhHVn3k5t7684ypSwea0S3PyiLmtdI+ce6N/BfsLMaf3WJgp
-	7N6qPd7MFKqxaH9MpGYTNggt3EXHxybZ3U7iDKUkHqs4FUDDipUp4My6l5AGmWp3Lp/aJDj/Wsp
-	L2E3+1hu8NTuT1IGGH5xkZblzBjPNemypxR/sR14AbOcI8ROkM2InGm7Z07WHME/qdN6RmgAnnf
-	Q+S2ny7kby5IghoWhhsSAGyTGk39OsknThD2iDVS2USxn2WLoDsf894dluhYRKANiRbwn9FauAi
-	zqgP4quIeue2HgHsd
-X-Received: by 2002:a05:620a:468f:b0:93f:242c:f4e3 with SMTP id af79cd13be357-93f29d2cea2mr1163420285a.32.1792406002632;
-        Mon, 19 Oct 2026 03:33:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:468f:b0:93f:242c:f4e3 with SMTP id af79cd13be357-93f29d2cea2mr1163414985a.32.1792406001910;
-        Mon, 19 Oct 2026 03:33:21 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.187])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd5038b8sm22852542f8f.48.2026.10.19.03.33.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 03:33:21 -0700 (PDT)
-Date: Mon, 19 Oct 2026 13:33:19 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Dale Whinham <daleyo@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        =?utf-8?B?SsOpcsO0bWU=?= de Bretagne <jerome.debretagne@gmail.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Haipeng Lin <jimmie.lin@gmail.com>
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: x1-denali: Add PWM backlight for
- LCD
-Message-ID: <maiifisui7aqt4xfc3mzulavhbxmjzmvdspy3fzjbjf22fgmir@durcnc3kia7f>
-References: <20261017-sp11-lcd-fixes-v1-0-0eb916c01a3d@gmail.com>
- <20261017-sp11-lcd-fixes-v1-2-0eb916c01a3d@gmail.com>
+	dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b="KuZKpwqJ"
+X-UUID: 54c71a74cbaa11f1b1788b6acf885367-20261019
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID; bh=v9hN0A8v08b17DVuo8+TNcKTWdv0a+uo2yFMOkDVRCI=;
+	b=KuZKpwqJg5W0SLJWF1CLePl2X4wlmdvL5ijOskpIU6mpqAueKCj+xyjduEJ9ukaxyVyvzYrLqQQlKjNYjyJjsrAKjzUmjV3Wg/ogUr7JjpsmCd8yxvVmsoLBBKCZPJU4qDZi+2a7Xl4LnA6yZIqWAmB8LLmpJ1CvXJc2dEUAXg4=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.20,REQID:d89370bd-90c8-41cc-989b-d24dbc365bce,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:291e20b,CLOUDID:ef32d7de-9ead-4216-888d-582ad3e48a93,B
+	ulkID:nil,BulkQuantity:0,SF:80|81|82|83|102|836|865|888|898,TC:-5,Content:
+	0|15|50|99,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,
+	OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 54c71a74cbaa11f1b1788b6acf885367-20261019
+Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by mailgw01.mediatek.com
+	(envelope-from <peter.wang@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 144132532; Mon, 19 Oct 2026 18:46:25 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 19 Oct 2026 18:46:23 +0800
+Received: from [10.233.130.16] (10.233.130.16) by mtkmbs13n1.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.2.2562.29 via Frontend
+ Transport; Mon, 19 Oct 2026 18:46:23 +0800
+Message-ID: <6d48b76c0df0db18e43ae637ab1fd79b48dc643d.camel@mediatek.com>
+Subject: Re: [PATCH] scsi: ufs: core: Fix a deadlock between clock scaling
+ and device commands
+From: Peter Wang <peter.wang@mediatek.com>
+To: Joonhoe Kim <26rote@gmail.com>, <James.Bottomley@HansenPartnership.com>,
+	<mkp@kernel.org>
+CC: <alim.akhtar@samsung.com>, <bvanassche@acm.org>, <beanhuo@micron.com>,
+	<stanleyjhu@google.com>, <can.guo@oss.qualcomm.com>, <mani@kernel.org>,
+	<linux-scsi@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <stable@vger.kernel.org>
+Date: Mon, 19 Oct 2026 18:46:23 +0800
+In-Reply-To: <20261016124608.46-1-26rote@gmail.com>
+References: <20261016124608.46-1-26rote@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261017-sp11-lcd-fixes-v1-2-0eb916c01a3d@gmail.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX6hgXDoJjGCXu
- 73JoJU/XYKZjaehD4avk0AaNw/zBf/47qSyQ6wf2cX46N6tW1eYW0ZrFIqypLFVEJenYRnOBAXY
- hd3d8BosHUG2wPU1OuBrCfbXeKMYJouOHZeQB34nyxcLokpbLBOaMsswaCqLe4RyFFeZtuag+OE
- 3RbFHR8CprCwlTXftXKXhP5ID4PwObhGtD2E08TOT/NNeSSPk+S8Y2giz5dn5TCQ/uknCMavzFc
- tnmI5xkdXxXD+W5qvtx+2PQrEeFOdbTy0QuLEL363p0PHiunHX/1Br5+TYaDRkHyj376aXpuiNq
- hDjeK5z5oT61NvuSN98mGvDDEJwWnr0ymxh3PgvFej4MaBjsFyyYceMQ9x/HOHfn4v3LGlLE5uk
- tYdH4J+6mTW/Xp/JF7hmxtW9dN+wLI9a/dTZdXQ3W1wAxD3A7sLfwIq7A3U/tqPpouiPkr8znQ+
- DZixwmYVi23ytuclYBw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX37xfrPOvuheM
- TGQqFwtC5yimdo1v6XEvqyv7exTFtte8dqzEkEH2GjLAKiL8g65ZLUWtvmPure4UPUFjT5XNYfY
- 6q1WRibGhp6YMZhO3q3fadmOo/ffgUo=
-X-Proofpoint-GUID: 2DCyBxQUMT2HYbT81LXW8WvBOvOg3Ins
-X-Authority-Analysis: v=2.4 cv=K/+3jCWI c=1 sm=1 tr=0 ts=6ad5f1f3 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fqw9755z8sLMpkJnvnUA:9 a=CjuIK1q_8ugA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: 2DCyBxQUMT2HYbT81LXW8WvBOvOg3Ins
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 spamscore=0 suspectscore=0 adultscore=0
- impostorscore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190041
+X-MTK: N
 
-On 26-10-17 18:52:26, Dale Whinham wrote:
-> The LCD variant's backlight is PWM from the PMK8550 LPG on gpio5, with
-> pmc8380_3 gpio10 enabling the supply and gpio4 the backlight, as on the
-> T14s LCD and Surface Laptop 7.
-> 
-> On OLED gpio4 is the panel enable, so move it and the panel compatible
-> out of the common dtsi.
-> 
-> Fixes: 0d72ccaa1e84 ("arm64: dts: qcom: Add support for X1-based Surface Pro 11")
-> Signed-off-by: Dale Whinham <daleyo@gmail.com>
-> Tested-by: Haipeng Lin <jimmie.lin@gmail.com>
+On Fri, 2026-10-16 at 21:46 +0900, Joonhoe Kim wrote
+> Since commit 08b12cda6c44 ("scsi: ufs: core: Switch to
+> scsi_get_internal_cmd()"), device management commands go through
+> blk_execute_rq() on the pseudo SCSI device, which shares the tagset
+> with the logical units, while ufshcd_dev_man_lock() holds
+> clk_scaling_lock for reading.
+>=20
+> ufshcd_clock_scaling_prepare() and ufshcd_pause_command_processing()
+> quiesce the tagset before taking clk_scaling_lock for writing. A
+> device
+> management command holding the lock for reading at that point is
+> never
+> dispatched and never times out, so the writer waits forever with all
+> logical units quiesced. On a Lenovo Legion Tab Y700 Gen 5 this ended
+> in
+> a hung task panic.
+>=20
+> Take clk_scaling_lock before quiescing the tagset, and in
+> ufshcd_clock_scaling_prepare() also wb_mutex, which is always taken
+> before clk_scaling_lock. Release them in the reverse order. Commit
+> b52d695d0620 ("scsi: ufs: core: Keep internal commands dispatchable
+> during error handling") fixed the same problem in the error handler.
+>=20
+> Fixes: 08b12cda6c44 ("scsi: ufs: core: Switch to
+> scsi_get_internal_cmd()")
+> Fixes: dc5dcac53278 ("scsi: ufs: core: Add helpers to pause and
+> resume command processing")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+> ---
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Peter Wang <peter.wang@mediatek.com>
+
