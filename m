@@ -1,47 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 831565D5D9C;
-	Mon, 19 Oct 2026 14:01:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8AE15DE9B6;
+	Mon, 19 Oct 2026 14:02:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792418507; cv=none; b=DUuUfd4uqHXYP3K/mHWKqyXxNzAtB38uZFPf0taE49mj/JHcb1oKIq/6O0WnqjfXEGfwshUirxtOLqQo4azV1LKaP2rbwIv+gTM/s0yAjFd6mqDlmZpX/xYXfgkuIjwg5enOKgx5FurSd2Ir6xzeiRcmvKyYJoJfKNr8TFpjprs=
+	t=1792418538; cv=none; b=VrBXJ4i//Pu9qcKfg5eWsAmxwUzm4oifQZXkM3LqI93xwaVDllO9qZoscaLlVss4rC2g1MIvkg0drb2318gOmiYyXsyF86pZipaCknAqDivoheMik7jKht0GGytM3KJCJlkyHOuIfinWo6MVaHezdFQ0MHlvvEOOcfLQZTAP/EY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792418507; c=relaxed/simple;
-	bh=9mzw2mITOQXRw81kHHL08Ce4CnHAtf2EjIxCfonuETY=;
+	s=arc-20240116; t=1792418538; c=relaxed/simple;
+	bh=wYz2ykWVtMcmbYXF98u+dcQ2DEnpsBrSBPHeuumRTNc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Jr72uf6UznGON+xepysOSsPrXcxfiY7XSGYY3h8rqS5RM/McaHk8NTnXxCsSqL276knzWHSWTAND8J0XCYkB1ik6aS4meUHRJ2vbR8pQfR3nkEETV8P37I6NSkhsD545SQPyhN2W/CVUwsl0CYJRlGeSmR+UvN9ZG0dWFrLZw9E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NWd5iT2J; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=bdY131atQg1LGpBTWvEKupM/K557L1WLaKaV47jkpWhXe4sZFXPAgTx86lUiC7ie/OVsm34ycoiGvrbbxM2ife2bVwqaOaipGrTju864X6tSjI/F7wlq9VOL8eRV4vkVYyuGXM7mEpqa5Qmlypztn3sJkoWlIwEHh/5foGgNYLI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BGT/9LEi; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NWd5iT2J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9DDE1F000CA;
-	Mon, 19 Oct 2026 14:01:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BGT/9LEi"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF3B01F000C6;
+	Mon, 19 Oct 2026 14:02:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792418505;
-	bh=av2i/a27mFO35q2gQgrs5PYUW708u+igcVfoCp20+Is=;
+	s=k20260515; t=1792418536;
+	bh=lnmMdiRihI7doar/6y0AnWxtq+WHN77C7jiP0sBXVD4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=NWd5iT2JmLsYfhiq+yCC8rgx8ZJrJWcIpnqGhXWv+ZT4VvsWPzcPGQXoxkATlRgtL
-	 qxoosAtayMUDLHosAJpj5ZVUI1EcwnRlsSpR18hdV49HEyIhLWk9tGxo6DeTYWj0+m
-	 B7JNkIZdzJ05Q8/8tcRvBre+RZGRVmqYh/LHD8Nl2vXWfbSZYEf2bBcSaGTuizx24b
-	 Z7evQ+M99HefDDHe81oVS37zYN55M1w2/qIAme+SwvZ+OOebWwmoxMDFu6TVhjy6Vt
-	 7nXPKwgq0KiuxHWCACqjZpeiwLc9QFfbaycqaSgouSQzbYPe6zz8owwEXgupef+FQ/
-	 vlLgUwwU0FY6g==
+	b=BGT/9LEiZkP3EIftAR+QPOL4gp09fbxsejQKh6y1FEU1oOrE5R8+sW8DmFql2ort3
+	 7V/JufhzJPmUMmC3wkrYQaARLuN+bHJJORl7yPZrOXnIKyDFbve2rhRvBmO9hEuVCX
+	 lVlKTI6EDWEbIi+YeXDleAQ0QFlJjdU7RUx9XUVBx7EKYzbGOCaDeqJW7tBkBaCIfW
+	 UqEOSDgyqTTCLhuIm56MdhPnVZg0wksj0jpck/lmIk/awHeMp9DzNNj5G5+ioUvj07
+	 EYMTSGcy6wC93xVMtxg9xgSygxgjQ50dYeCaWMhIl1bwH/gXoQtsODu1hhPPAKEvQ1
+	 K64+DPXXGJoDA==
 From: Sasha Levin <sashal@kernel.org>
 To: patches@lists.linux.dev,
 	stable@vger.kernel.org
-Cc: Esteban Urrutia <esteuwu@proton.me>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Will Deacon <will@kernel.org>,
+Cc: David Heidelberg <david@ixit.cz>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
-	robin.clark@oss.qualcomm.com,
-	joro@8bytes.org,
-	iommu@lists.linux.dev,
+	konradybcio@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.18-6.12] iommu/arm-smmu-qcom: Add SM8450 MDSS compatible
-Date: Mon, 19 Oct 2026 09:49:47 -0400
-Message-ID: <20261019135441.1420968-296-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.18-6.6] soc: qcom: socinfo: Add SoC ID for SDM850
+Date: Mon, 19 Oct 2026 09:50:09 -0400
+Message-ID: <20261019135441.1420968-318-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
 References: <20261019135441.1420968-1-sashal@kernel.org>
@@ -57,332 +54,369 @@ X-stable-base: Linux 6.18.57
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Esteban Urrutia <esteuwu@proton.me>
+From: David Heidelberg <david@ixit.cz>
 
-[ Upstream commit d149c8b2c0146a01f1be326ddb1e182b55aee638 ]
+[ Upstream commit 743af1d6a8b4bfa62dd01b5c2d81b1c62ea597f7 ]
 
-Add the compatible for the MDSS client on the Snapdragon 8 Gen 1 so it can
-be properly configured by the IOMMU driver.
+Recognize the SDM850 SoC.
 
-Otherwise, there is an unhandled context fault, because the framebuffer is
-already configured in UEFI.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
-Signed-off-by: Will Deacon <will@kernel.org>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260627-sda850-v2-2-44bf46ade42e@ixit.cz
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
 
 LLM Generated explanations, may be completely bogus:
 
-## Phase 1: Commit message forensics
+This tree is **Linux 7.3.0-rc4** (`v7.3-rc4-27-gf0100363d8c37`). The
+verdict below is only for this checkout: the socinfo table and
+`QCOM_ID_SDM850` are present here, so the one-line SoC ID addition is a
+valid hardware-ID backport.
 
-**Step 1.1: Subject line**
-Record: `[iommu/arm-smmu-qcom] [Add] SM8450 MDSS compatible so the
-Qualcomm SMMU driver can configure that display client`
+===============================================================
+PHASE 1: COMMIT MESSAGE FORENSICS
+===============================================================
 
-**Step 1.2: Tags**
+Step 1.1: PARSE THE SUBJECT LINE
+Record: **[soc: qcom: socinfo]** **[Add]** **SoC ID table entry so
+SDM850 is recognized by qcom-socinfo**
+
+Step 1.2: PARSE ALL COMMIT MESSAGE TAGS
 Record:
-- `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
-  (Qualcomm SoC/display maintainer)
-- `Signed-off-by: Esteban Urrutia <esteuwu@proton.me>` (author)
-- `Signed-off-by: Will Deacon <will@kernel.org>` (IOMMU/arm-smmu
-  maintainer)
-- No `Fixes:`, `Reported-by:`, `Tested-by:`, `Link:`, or `Cc:
-  stable@vger.kernel.org` (absence is expected for this review)
+- Fixes: none (expected for this review)
+- Reported-by: none
+- Tested-by: none
+- Reviewed-by: none on this commit (patch 1 of the series has Reviewed-
+  by Konrad Dybcio)
+- Acked-by: Krzysztof Kozlowski \<krzysztof.kozlowski@oss.qualcomm.com\>
+- Link:
+  https://lore.kernel.org/r/20260627-sda850-v2-2-44bf46ade42e@ixit.cz
+- Cc: stable: none (expected)
+- Signed-off-by: David Heidelberg \<david@ixit.cz\> (author); Bjorn
+  Andersson \<andersson@kernel.org\> (qcom SoC maintainer). Ignored: any
+  Sasha Levin SOB (none in the provided message)
 
-**Step 1.3: Body**
+Step 1.3: ANALYZE THE COMMIT BODY TEXT
 Record:
-- Bug: SM8450 MDSS is missing from `qcom_smmu_client_of_match`, so it
-  does not get the identity-domain workaround.
-- Symptom: unhandled ARM SMMU context fault because UEFI already
-  programmed the framebuffer with physical addresses.
-- Root cause: without a match, `qcom_smmu_def_domain_type()` returns 0
-  and the IOMMU uses a translated DMA domain instead of identity
-  mapping.
-- Version info: none in the message. SM8450 display support has been in
-  this tree since v6.3 (`drm/msm: mdss add support for SM8450`).
+- Bug description: SDM850 (numeric SMEM id 348) is not in the socinfo
+  `soc_id[]` table, so the driver cannot map it to a name.
+- Symptom/failure mode: `/sys/devices/soc0/machine` is omitted (NULL
+  machine name). Numeric `soc_id` still works. Not a crash.
+- Version information: none in the message. Cover letter (from the lore
+  mbox): “Useful for sdm850 devices in tree and also will be used by
+  Comma AI comma three.”
+- Root cause: missing table entry, not a logic bug.
 
-**Step 1.4: Hidden bug fix?**
-Record: Not hidden. The subject says “Add”, but the body describes a
-real hardware workaround (IOMMU identity domain for a bootloader-
-configured display), not a new feature.
+Step 1.4: DETECT HIDDEN BUG FIXES
+Record: Not a hidden crash/UAF/leak fix. It is an explicit **missing
+hardware ID**. That is the documented stable exception for new device
+IDs on an existing driver.
 
-## Phase 2: Diff analysis
+===============================================================
+PHASE 2: DIFF ANALYSIS - LINE BY LINE
+===============================================================
 
-**Step 2.1: Inventory**
+Step 2.1: INVENTORY THE CHANGES
 Record:
-- File: `drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c` (+1 / −0)
-- Function: static table `qcom_smmu_client_of_match[]`
-- Scope: single-file, one-line compatible addition
+- File: `drivers/soc/qcom/socinfo.c` — **+1 / −0**
+- Function: static table `soc_id[]` (not a function body)
+- Scope: **single-file surgical ID addition**
 
-**Step 2.2: Code flow**
-Record: Before, `of_match_device(qcom_smmu_client_of_match, dev)` misses
-`qcom,sm8450-mdss`, so `qcom_smmu_def_domain_type()` returns 0. After,
-that compatible matches and the function returns
-`IOMMU_DOMAIN_IDENTITY`. Path: IOMMU default-domain selection at MDSS
-probe, not an error path.
+Step 2.2: UNDERSTAND THE CODE FLOW CHANGE
+Record: Before, `socinfo_machine()` walked `soc_id[]` and returned NULL
+for id 348. After, id 348 matches `QCOM_ID_SDM850` and returns
+`"SDM850"`. Path: `qcom_socinfo_probe()` → `socinfo_machine()` →
+`soc_device_register()`. Normal probe path only; no error-path or
+locking change.
 
-**Step 2.3: Bug mechanism**
-Record: Hardware workaround / device-ID (compatible) addition. MDSS
-streams keep using the UEFI framebuffer mapping. Without identity domain
-those accesses translation-fault (`arm-smmu: Unhandled context fault`).
-Same pattern as SM6115, SDM670, X1E80100, QCM2290, SC8280XP.
+Step 2.3: IDENTIFY THE BUG MECHANISM
+Record: **[Hardware ID / device-ID table]** Missing
+`qcom_board_id(SDM850)` so SMEM id 348 is unnamed. Macro expands to
+`QCOM_ID_SDM850, "SDM850"` via `qcom_board_id()`.
 
-**Step 2.4: Fix quality**
-Record: Obviously correct and minimal. Only devices with
-`qcom,sm8450-mdss` change behavior. Regression risk is very low;
-neighboring SoCs already use this table the same way. ACTLR table
-already listed `qcom,sm8450-mdss`; the client table was the omission.
+Step 2.4: ASSESS THE FIX QUALITY
+Record: Obviously correct one-liner, same pattern as neighboring IDs
+(SDM636/SDM632). Regression risk is very low: table is append-only
+lookup; no lock, alloc, or API change. Compile dependency:
+`QCOM_ID_SDM850` must exist in `include/dt-bindings/arm/qcom,ids.h` (it
+does in this tree).
 
-## Phase 3: Git history
+===============================================================
+PHASE 3: GIT HISTORY INVESTIGATION
+===============================================================
 
-**Step 3.1: Blame**
+Step 3.1: BLAME THE CHANGED LINES
+Record: Insertion sits between SDA636 and SDM632, both from
+`34ec89e68db26` (2022-10-17, “soc: qcom: socinfo: create soc_id table
+from bindings”). The table format has been stable since then. SDM850 DT
+has been in tree much longer (`44acee2078447` Yoga C630, 2019-09-05;
+`6be4ba5467bed` sdm850.dtsi, 2021-01-15).
+
+Step 3.2: FOLLOW THE FIXES: TAG
+Record: No Fixes: tag. Not applicable. This fills a gap for hardware
+whose DT was added years ago, not a regression from a specific commit.
+
+Step 3.3: CHECK FILE HISTORY FOR RELATED CHANGES
+Record: This is **patch 2/2** of “Recognize Snapdragon SDM850”. Patch 1:
+`dt-bindings: arm: qcom,ids: Add SoC ID for Snapdragon SDM 850`
+(`d529495c991a2b` in the qcom tree; also `4e926dc3d6ad3` via arm-soc).
+Recent socinfo history is mostly other SoC/PMIC ID adds. Standalone on
+this tree because the `#define` is already here.
+
+Step 3.4: CHECK THE AUTHOR'S OTHER COMMITS
+Record: David Heidelberg authored both series patches on these paths.
+Not the subsystem maintainer. Maintainer path: Ack from Krzysztof
+Kozlowski, merge by Bjorn Andersson.
+
+Step 3.5: CHECK FOR DEPENDENT/PREREQUISITE COMMITS
+Record: **Depends on `QCOM_ID_SDM850` (348)** in `qcom,ids.h`. Verified
+present at `include/dt-bindings/arm/qcom,ids.h:187`. `git merge-base
+--is-ancestor` confirms both the socinfo commit `743af1d6a8b4b` and the
+header commit are ancestors of HEAD. Can apply standalone **on this
+tree**. Applying only socinfo without the define would not compile
+(`QCOM_ID_SDM850` undeclared). Parent of `743af1d6a8b4b` did **not**
+have the define (header landed on a different path/timing).
+
+===============================================================
+PHASE 4: MAILING LIST AND EXTERNAL RESEARCH
+===============================================================
+
+Step 4.1: FIND THE ORIGINAL PATCH DISCUSSION
 Record:
-- Table introduced in `0e764a01015df` (2020, “Allow client devices to
-  select direct mapping”).
-- This line added by `d149c8b2c0146` (2026-07-22).
-- SM8450 MDSS driver: `80056d9ac47ab` (2023-01-12, v6.3-rc1).
-- SM8450 DT: `a6dd1206e45a4` (2022-12-28).
-- Bug window: from v6.3 until this commit (about three years).
+- Lore/msgid:
+  https://patch.msgid.link/20260627-sda850-v2-2-44bf46ade42e@ixit.cz
+- Direct lore.kernel.org fetch: **403** (could not read HTML); full
+  thread saved via `b4 dig -m` to `/tmp/sdm850-thread.mbox`
+- Revisions: **v1** (2026-06-23) was only the dt-bindings patch, titled
+  SDA 850; **v2** (2026-06-27) renamed to SDM850 (Konrad) and added this
+  socinfo consumer (Krzysztof). Applied version is v2/2, the latest.
+- Reviewer feedback: Ack from Krzysztof on both patches; Reviewed-by
+  Konrad on patch 1; Bjorn Andersson applied both on 2026-07-05. No
+  NAKs. No reviewer `Cc: stable`.
+- Cover letter: in-tree SDM850 devices + Comma AI comma three.
 
-**Step 3.2: Fixes: tag**
-Record: No `Fixes:` tag. Implicit introducer is `80056d9ac47ab` adding
-SM8450 MDSS without the IOMMU match. That driver and DT are in this
-tree.
+Step 4.2: CHECK WHO REVIEWED THE PATCH
+Record (`b4 dig -w`): To/Cc included Bjorn Andersson, Konrad Dybcio, Rob
+Herring, Krzysztof Kozlowski, Conor Dooley, linux-arm-msm, devicetree,
+linux-kernel. Right maintainers were on the thread.
 
-**Step 3.3: File history**
-Record: Several sibling “Add … MDSS compatible” commits (`f7fa8520f3037`
-SM6115, `12721e6600579` X1E80100, `28af105cb6504` QCM2290,
-`270a1470408e4` SDM670, `617937d4d5533` Glymur). Standalone one-line
-table entries; SM6115 even had `Cc: stable` and crash logs. No extra
-prerequisite beyond the existing match table.
+Step 4.3: SEARCH FOR THE BUG REPORT
+Record: No syzbot/bugzilla. Motivation is missing ID for already-
+supported boards, not a crash report.
 
-**Step 3.4: Author**
-Record: Esteban Urrutia has only this IOMMU commit here. Reviewed by
-Konrad Dybcio; applied by Will Deacon. Not a drive-by unreviewed change.
+Step 4.4: CHECK FOR RELATED PATCHES AND SERIES
+Record: Two-patch series only. No further enablement patches in the
+thread. Patch 1 is the header define (already in this tree).
 
-**Step 3.5: Dependencies**
-Record: Needs `qcom_smmu_client_of_match` /
-`qcom_smmu_def_domain_type()` and a `qcom,sm8450-mdss` client. All
-present. No new APIs. Applies as a one-line insert next to
-`qcom,sm8250-mdss`.
+Step 4.5: CHECK STABLE MAILING LIST HISTORY
+Record: **UNVERIFIED** — lore.kernel.org/stable search and WebSearch
+both failed (403 / tool error). No stable discussion in the captured
+msm/devicetree thread.
 
-## Phase 4: Mailing list / external research
+===============================================================
+PHASE 5: CODE SEMANTIC ANALYSIS
+===============================================================
 
-**Step 4.1: Original discussion**
-Record:
-- `b4 dig -c d149c8b2c0146` →
-  https://patch.msgid.link/20260711-sm8450-qol-
-  smmu-v2-1-41a6fba41c3e@proton.me
-- v1: 8-patch “sm8450-qol” series (2026-06-22)
-- v2: this patch split out alone (2026-07-11)
-- Will Deacon: “Applied to iommu (arm/smmu/updates), thanks!” — no NAK
-- Cover note: “This patch allows the MDSS driver to properly function on
-  SM8450 based devices.”
-- lore.kernel.org fetches returned 403; content confirmed via patchew
-  and LKML mirror.
+Step 5.1: IDENTIFY KEY FUNCTIONS IN THE DIFF
+Record: Table `soc_id[]` only. Consumers: `socinfo_machine()`, called
+from `qcom_socinfo_probe()`.
 
-**Step 4.2: Recipients (`b4 dig -w`)**
-Record: Will Deacon, Robin Murphy, Joerg Roedel, Rob Clark, Konrad
-Dybcio; lists `iommu@`, `linux-arm-msm@`, `linux-arm-kernel@`, `phone-
-devel@`. Right maintainers and lists.
+Step 5.2: TRACE CALLERS
+Record: `socinfo_machine()` is static, one caller:
+`qcom_socinfo_probe()`. Platform driver `qcom-socinfo`
+(`CONFIG_QCOM_SOCINFO`, default `m` if `ARCH_QCOM`). Probe at Qualcomm
+SoC boot via SMEM `SMEM_HW_SW_BUILD_ID`. Not IRQ/hot-path. Userspace-
+visible via soc bus sysfs.
 
-**Step 4.3: Bug report**
-Record: No syzbot/bugzilla. Author describes the UEFI framebuffer
-context-fault. Same failure as SM6115 (`f7fa8520f3037`): flood of
-`Unhandled context fault` and failed DPU/GPU bind.
+Step 5.3: TRACE CALLEES
+Record: Probe uses `qcom_smem_get()`, `soc_device_register()`, debugfs
+init, `add_device_randomness()`. This patch does not change those calls.
 
-**Step 4.4: Series**
-Record: v2 is standalone. Other v1 QoL patches (dispcc, dts, qmp) are
-not required for this one-line match.
+Step 5.4: FOLLOW THE CALL CHAIN
+Record: Boot on SDM850 (Yoga C630, Samsung W737, Huawei Matebook E,
+etc.) → qcom-socinfo probe → SMEM id 348 → name lookup. Reachable on
+real shipped ARM64 laptops already described in this tree’s DT. Not a
+syscall fuzzer path.
 
-**Step 4.5: Stable list**
-Record: No stable-thread hit for this subject. Precedent: SM6115
-equivalent was `Cc: stable`.
+Step 5.5: SEARCH FOR SIMILAR PATTERNS
+Record: Many sibling “Add SoC ID for …” commits in the same table. No
+in-tree `soc_device_match()` on `"SDM850"` / `"SDM845"` (grep of
+drivers). Impact is sysfs/userspace identification, not in-kernel quirk
+matching.
 
-## Phase 5: Semantic analysis
+===============================================================
+PHASE 6: CROSS-REFERENCING AGAINST THE LOCAL TREE
+===============================================================
 
-**Step 5.1: Functions**
-Record: Table `qcom_smmu_client_of_match[]` only. Consumer:
-`qcom_smmu_def_domain_type()`.
+Step 6.1: DOES THE BUGGY CODE EXIST IN THIS TREE?
+Record: Yes. `drivers/soc/qcom/socinfo.c` `soc_id[]` and
+`socinfo_machine()` exist. Header define exists. SDM850 DT:
+`arch/arm64/boot/dts/qcom/sdm850.dtsi` plus board files. Without this
+line, id 348 stays unnamed. The gap existed from the 2022 table
+conversion until this 2026 add; hardware DT is from 2019–2021.
 
-**Step 5.2: Callers**
-Record: `qcom_smmu_def_domain_type` is `.def_domain_type` on the
-Qualcomm SMMU impls. `arm_smmu_def_domain_type()` in `arm-smmu.c` calls
-it; IOMMU core `iommu_get_def_domain_type()` uses that at device attach.
-Probe-time, not IRQ/hot path.
+Step 6.2: CHECK FOR BACKPORT COMPLICATIONS
+Record: **Clean apply** on this tree: neighbors SDA636/SDM632 match the
+hunk. Same `qcom_board_id()` helper. Prerequisite `#define
+QCOM_ID_SDM850 348` is present.
 
-**Step 5.3: Callees**
-Record: `of_match_device()` only.
+Step 6.3: CHECK IF RELATED FIXES ARE ALREADY HERE
+Record: This exact line is already in HEAD (`git merge-base --is-
+ancestor 743af1d6a8b4b HEAD` succeeded; blame line 428 is that commit).
+Per instructions that is **not** used as a “already selected” veto; it
+confirms the change is valid in this codebase. No alternate fix for id
+348.
 
-**Step 5.4: Reachability**
-Record: Yes, on Qualcomm SM8450 with MDSS enabled (`iommus` in
-`sm8450.dtsi`; `&mdss { status = "okay"; }` in `sm8450-hdk.dts`).
-Userspace does not need to do anything; boot + display probe is enough.
+===============================================================
+PHASE 7: SUBSYSTEM AND MAINTAINER CONTEXT
+===============================================================
 
-**Step 5.5: Similar patterns**
-Record: Same omission pattern for many MDSS SoCs; several already
-patched. SM8450 was the gap between sm8250 and x1e80100.
+Step 7.1: IDENTIFY THE SUBSYSTEM AND ITS CRITICALITY
+Record: **drivers/soc/qcom** (Qualcomm socinfo). **IMPORTANT** for
+ARCH_QCOM users, not core mm/net. Identification only; does not bind a
+new driver.
 
-## Phase 6: Local tree (this checkout)
+Step 7.2: ASSESS SUBSYSTEM ACTIVITY
+Record: Actively updated (many recent SoC/PMIC ID commits). Table-add
+pattern is mature and repetitive.
 
-**Step 6.1: Does the buggy code exist here?**
-Record:
-- `git describe HEAD`: `v7.3-rc4-27-gf0100363d8c37`
-- `make kernelversion`: `7.3.0-rc4`
-- This is the 7.3-rc4 mainline checkout, not an older LTS branch.
-- Match table, `qcom_smmu_def_domain_type()`, DRM `qcom,sm8450-mdss`,
-  and DT node all exist.
-- `git merge-base --is-ancestor d149c8b2c0146 HEAD` succeeded (commit is
-  already in HEAD). That is ignored as “already selected”; it does not
-  change technical merit.
-- Without this line, SM8450 MDSS would still take a translated domain on
-  this tree’s code.
+===============================================================
+PHASE 8: IMPACT AND RISK ASSESSMENT
+===============================================================
 
-**Step 6.2: Backport difficulty**
-Record: Clean one-line apply against this file. Context around
-`sm8250-mdss` / `x1e80100-mdss` is stable.
+Step 8.1: DETERMINE WHO IS AFFECTED
+Record: **Platform-specific** — Qualcomm SDM850 boards (in-tree: Lenovo
+Yoga C630, Samsung Galaxy Book2 / w737, Huawei Matebook E 2019). Cover
+letter also cites Comma three. Only if `CONFIG_QCOM_SOCINFO` is enabled
+(default on ARCH_QCOM).
 
-**Step 6.3: Related fixes already here?**
-Record: ACTLR prefetch entry for `qcom,sm8450-mdss` is already present
-(`f91879fdf70bd`). That does not set identity domain. No other fix
-covers this bug.
+Step 8.2: DETERMINE THE TRIGGER CONDITIONS
+Record: Every boot on SDM850 once socinfo probes. Not a race.
+Unprivileged users only observe sysfs; they cannot trigger a crash with
+this bug.
 
-## Phase 7: Subsystem context
+Step 8.3: DETERMINE THE FAILURE MODE SEVERITY
+Record: Missing `/sys/devices/soc0/machine` (attribute mode 0 when
+`machine` is NULL in `soc_attribute_mode()`). Numeric soc_id still
+exported. **Severity: LOW** as a crash/corruption issue; **hardware
+identification** as a device-ID exception.
 
-**Step 7.1**
-Record: `drivers/iommu/arm/arm-smmu/` Qualcomm implementation. IMPORTANT
-for ARM64 Qualcomm devices; not core mm/VFS, but IOMMU misconfig breaks
-display on those boards.
+Step 8.4: CALCULATE RISK-BENEFIT RATIO
+Record: Benefit: correct SoC name for real shipping devices already
+supported by this tree. Risk: **very low** (1 line, data-only). Ratio:
+favorable under the device-ID exception.
 
-**Step 7.2**
-Record: Actively maintained (recent Glymur, ACTLR, fastrpc fixes). The
-match-table mechanism itself dates to 2020 and is mature.
+===============================================================
+PHASE 9: FINAL SYNTHESIS
+===============================================================
 
-## Phase 8: Impact and risk
+Step 9.1: COMPILE THE EVIDENCE
+FOR:
+- Documented stable exception: new device/SoC ID on an existing driver
+- One line, same idiom as the rest of `soc_id[]`
+- Real hardware: in-tree SDM850 DTs since 2019–2021
+- Acked by Krzysztof Kozlowski; applied by Bjorn Andersson
+- Prerequisite `QCOM_ID_SDM850` is in this 7.3-rc4 tree
+- No locking/API/behavior change for other SoCs
 
-**Step 8.1: Who is affected**
-Record: SM8450 (Snapdragon 8 Gen 1) boards with MDSS, e.g.
-`sm8450-hdk.dts` (`status = "okay"`). Config: `CONFIG_ARM_SMMU` +
-`CONFIG_ARM_SMMU_QCOM` (default y on `ARCH_QCOM`).
+AGAINST:
+- Not a crash, UAF, deadlock, or data-corruption fix
+- No Cc: stable / Fixes (expected; not a negative)
+- Userspace-visible name fill-in, not driver probe
 
-**Step 8.2: Trigger**
-Record: Boot when UEFI left the framebuffer mapped and MDSS probes.
-Common on these phones/HDKs, not a rare race. Unprivileged userspace is
-not required.
+UNRESOLVED:
+- Could not query lore.kernel.org/stable (HTTP 403 / search failure)
 
-**Step 8.3: Failure mode**
-Record: Unhandled SMMU context faults; display init can fail (same class
-as SM6115: DPU/GPU bind errors). Severity: HIGH for those devices
-(broken display, fault spam). Not a universal panic.
-
-**Step 8.4: Risk–benefit**
-Record: Benefit high for SM8450 display. Risk very low (one compatible,
-existing quirk table). Ratio strongly favors backport.
-
-## Phase 9: Synthesis
-
-**Step 9.1: Evidence**
-
-For:
-- Real bug: missing identity-domain quirk → SMMU context faults / non-
-  working MDSS
-- Hardware quirk / compatible addition (stable exception)
-- 1 line, obviously correct
-- Reviewed by Konrad Dybcio, applied by Will Deacon
-- Same class as SM6115, which was `Cc: stable`
-- SM8450 MDSS has been in this lineage since v6.3
-- No new API, no refactor, no extra dependencies
-
-Against:
-- No `Fixes:` / `Cc: stable` (expected here, not a negative)
-- Affects one SoC family, not all machines
-- Originally in a “QoL” series (v2 is a standalone bugfix)
-
-Unresolved: lore.kernel.org 403 prevented reading every v1 reply; v2
-application and Konrad’s Reviewed-by are verified via patchew/LKML/`b4
-dig`.
-
-**Step 9.2: Stable rules**
-1. Obviously correct and tested? **PASS** — one-line OF match;
-   maintainer review/apply
-2. Real user bug? **PASS** — context faults / MDSS broken on SM8450 with
-   UEFI FB
-3. Important (crash/security/corruption/deadlock)? **PASS** — unhandled
-   SMMU faults and failed display; HIGH for that hardware
+Step 9.2: APPLY THE STABLE RULES CHECKLIST
+1. Obviously correct and tested? **PASS** — one table entry; maintainer
+   ack; merged to qcom/arm-soc
+2. Fixes a real bug that affects users? **PASS** — missing ID for
+   shipping SDM850 machines (Yoga C630 and others)
+3. Important issue (crash, security, corruption, deadlock)? **FAIL** as
+   those classes; **PASS** via device-ID exception
 4. Small and contained? **PASS** — +1 line, one file
-5. No new features/APIs? **PASS** — existing quirk table only
-6. Can apply to this tree? **PASS** — table, MDSS driver, and DT are
-   here
+5. No new features or APIs? **PASS** — no new syscall/sysfs ABI; fills
+   existing soc bus `machine` attribute
+6. Can apply to the local tree? **PASS** — table and `QCOM_ID_SDM850`
+   exist here
 
-**Step 9.3: Exception**
-Record: Device ID / hardware quirk on an existing driver. Automatic YES
-class.
+Step 9.3: CHECK FOR EXCEPTION CATEGORIES
+Record: **NEW DEVICE ID** on an existing driver (`qcom-socinfo`).
+Analogous to adding a PCI/USB ID.
 
-**Step 9.4: Decision**
-This tree (`v7.3-rc4`) has SM8450 MDSS and the Qualcomm SMMU client
-table. The patch is the standard identity-domain compatible for a
-bootloader-configured display. It should be treated as stable material.
+Step 9.4: MAKE YOUR DECISION
+This is a one-line SoC ID for hardware this tree already describes. It
+does not add a driver or API. Benefit is correct identification on
+SDM850; risk is negligible. That matches the stable device-ID exception,
+so it should be backported to this tree.
 
-Explanation: Without `qcom,sm8450-mdss` in `qcom_smmu_client_of_match`,
-MDSS is attached to a translated IOMMU domain while UEFI still owns a
-physically addressed framebuffer, which produces unhandled context
-faults and can prevent the display stack from coming up. Adding the
-compatible selects `IOMMU_DOMAIN_IDENTITY`, matching every other
-Qualcomm MDSS entry in that table. Benefit is working display on SM8450;
-risk is a single OF match that cannot affect other hardware.
+**What it solves for stable users:** SDM850 reports as an
+unknown/unnamed SoC in socinfo sysfs. Users of Yoga C630-class machines
+and similar need the name for inventory/userspace matching.
+
+**Risk vs benefit:** Data-only lookup add; no runtime regression path
+identified.
+
+**Concerns:** Must keep the header define (`QCOM_ID_SDM850` / 348). That
+define is already in this checkout, so this commit is self-contained
+here.
 
 Verification:
-- [Phase 1] Parsed tags: Reviewed-by Konrad Dybcio; SOB Esteban Urrutia,
-  Will Deacon; no Fixes/Cc stable
-- [Phase 2] Diff: +1 line in `qcom_smmu_client_of_match[]`;
-  `qcom_smmu_def_domain_type()` returns `IOMMU_DOMAIN_IDENTITY` on match
-- [Phase 3] `git log`/`git blame`: table from `0e764a01015df` (2020);
-  SM8450 DRM `80056d9ac47ab` (v6.3-rc1); this commit `d149c8b2c0146`
-- [Phase 3] Sibling SM6115 commit `f7fa8520f3037` had `Cc: stable` and
-  context-fault logs
-- [Phase 3] `git merge-base --is-ancestor d149c8b2c0146 HEAD` → yes
-  (already in this checkout)
-- [Phase 4] `b4 dig -c d149c8b2c0146`: v2 at
-  patch.msgid.link/20260711-sm8450-qol-smmu-v2-1-41a6fba41c3e@proton.me
-- [Phase 4] `b4 dig -a`: v1 8-patch QoL series → v2 standalone SMMU
-  patch
-- [Phase 4] `b4 dig -w`: Will Deacon, Robin Murphy, Rob Clark, Konrad
-  Dybcio, iommu@ and linux-arm-msm@
-- [Phase 4] patchew: Will Deacon applied; no NAK
-- [Phase 4] lore.kernel.org WebFetch: 403 — UNVERIFIED full v1 reply
-  text; v2 content verified via patchew/LKML
-- [Phase 5] Callers: `arm_smmu_def_domain_type` → IOMMU default domain
-  at probe
-- [Phase 6] `git describe HEAD`: v7.3-rc4-27-gf0100363d8c37; `make
-  kernelversion`: 7.3.0-rc4
-- [Phase 6] Confirmed `qcom,sm8450-mdss` in `msm_mdss.c`, `sm8450.dtsi`,
-  HDK `&mdss { status = "okay"; }`
-- [Phase 6] Pre-commit file still had ACTLR `sm8450-mdss` only; client
-  table lacked it
-- [Phase 7] `CONFIG_ARM_SMMU_QCOM` default y on `ARCH_QCOM`
-- [Phase 8] Failure mode: unhandled SMMU context fault / broken MDSS on
-  SM8450, severity HIGH for that platform
-- [Phase 4.5] No stable-list discussion found for this specific commit
+- [Phase 1] Subject/tags: Add SoC ID; Acked-by Krzysztof Kozlowski; Link
+  msgid 20260627-sda850-v2-2; no Fixes/Reported-by/Cc: stable
+- [Phase 1] Cover letter from mbox: in-tree sdm850 devices + Comma AI
+  comma three; v2 renamed SDA850→SDM850
+- [Phase 2] Diff: +1 line `{ qcom_board_id(SDM850) }` in `soc_id[]` of
+  `drivers/soc/qcom/socinfo.c`
+- [Phase 2] `qcom_board_id(id)` → `QCOM_ID_ ## id, __stringify(id)` at
+  socinfo.c:25
+- [Phase 2] `socinfo_machine()` returns NULL if no match (lines
+  562–571); probe sets `qs->attr.machine` (913–914)
+- [Phase 2] `soc_attribute_mode()` hides machine sysfs when machine is
+  NULL (drivers/base/soc.c:54–55)
+- [Phase 3] `git describe HEAD` / `make kernelversion`: v7.3-rc4-27 /
+  7.3.0-rc4
+- [Phase 3] `git merge-base --is-ancestor 743af1d6a8b4b HEAD`: yes; also
+  in v7.3-rc1
+- [Phase 3] Prerequisite header commits `d529495c991a2b` and
+  `4e926dc3d6ad3` are ancestors of HEAD; `#define QCOM_ID_SDM850 348` at
+  qcom,ids.h:187
+- [Phase 3] Parent of socinfo commit lacked the define (would not
+  compile alone against that parent)
+- [Phase 3] Blame: neighbors from 34ec89e68db26 (2022); this line from
+  743af1d6a8b4b
+- [Phase 3] SDM850 DT: `git log --diff-filter=A` → 44acee2078447 (2019),
+  6be4ba5467bed (2021)
+- [Phase 4] `b4 dig -c 743af1d6a8b4b`: matched v2 2/2; `-a` showed v1
+  then v2; `-w` listed qcom/dt maintainers; `-m` saved thread
+- [Phase 4] mbox: Krzysztof Ack both; Konrad Reviewed-by on patch 1;
+  Bjorn “Applied, thanks!”; no NAK, no Cc: stable
+- [Phase 4] lore.kernel.org WebFetch 403; stable list search UNVERIFIED
+- [Phase 5] Only caller of `socinfo_machine` is `qcom_socinfo_probe`; no
+  in-tree `soc_device_match` on SDM850
+- [Phase 6] Local files exist; insertion context matches;
+  `CONFIG_QCOM_SOCINFO` in drivers/soc/qcom/Kconfig
+- [Phase 8] Failure mode: missing sysfs machine name, not oops; SDM850
+  boards listed under arch/arm64/boot/dts/qcom/
 
 **YES**
 
- drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 1 +
+ drivers/soc/qcom/socinfo.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-index f7cb7de80cfb9..b6493e92343be 100644
---- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-+++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-@@ -394,6 +394,7 @@ static const struct of_device_id qcom_smmu_client_of_match[] __maybe_unused = {
- 	{ .compatible = "qcom,sm6375-mdss" },
- 	{ .compatible = "qcom,sm8150-mdss" },
- 	{ .compatible = "qcom,sm8250-mdss" },
-+	{ .compatible = "qcom,sm8450-mdss" },
- 	{ .compatible = "qcom,x1e80100-mdss" },
- 	{ }
- };
+diff --git a/drivers/soc/qcom/socinfo.c b/drivers/soc/qcom/socinfo.c
+index 963772f45489d..79a0defe73227 100644
+--- a/drivers/soc/qcom/socinfo.c
++++ b/drivers/soc/qcom/socinfo.c
+@@ -359,6 +359,7 @@ static const struct soc_id soc_id[] = {
+ 	{ qcom_board_id(IPQ8078) },
+ 	{ qcom_board_id(SDM636) },
+ 	{ qcom_board_id(SDA636) },
++	{ qcom_board_id(SDM850) },
+ 	{ qcom_board_id(SDM632) },
+ 	{ qcom_board_id(SDA632) },
+ 	{ qcom_board_id(SDA450) },
 -- 
 2.53.0
 
