@@ -1,121 +1,301 @@
-Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C37B485502;
-	Mon, 19 Oct 2026 06:42:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.19.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E1AC44F558
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 06:45:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792392165; cv=none; b=jEvdAxPuXIFjRDGehiIGuTFSaidS79PV4ZYE7kn8l++aL2JNt6cSBK3InbB6wcqgWIV8hWm/Y3Ki9Mz2ScDxfFCDEbJCgu06LmHa3YHNtpk8ptGW1te3ECea7YEICw4jBQSf8L/GKTbVP+/Vcx0/llC6O6mSYC7o6YlzHU68YHY=
+	t=1792392346; cv=none; b=ZKJlzaEZSByohkPHi3QM3kYiVXD1bQBLz1vualwU6EX4NIHoyEI2XVI1pKNIn7SJG1qDaJUjUuTl0qsehFYF+TA70o+e+vrSFvICbgnt0lBgQ83x4/Z8g1XcEtlygf0OiUVgQ+qJY+kS212yqhuSZvSH0ERkLIz7AP0l1+nOPfw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792392165; c=relaxed/simple;
-	bh=mG0ssjMFAqzBF8Nmuf2BLS/qbjtCpjzqJbiwQCoLYB8=;
-	h=Date:From:To:Cc:Subject:References:Mime-Version:Message-ID:
-	 Content-Type; b=Dg9b+YqaXz6iODHFYol/KS5Cs15inMsU5ItQY5KLJYPo0ch/uRPsZy89JHPLnYivfZXWnmltnndffv6fK9SCsKEICQYSdFu+oi7mD/cQE2zVnQrVg2s8CrL/4+8GoW0JP4oJA+fmM9DtwgPauNFzwDy9YBMM7lmoUzwETrh8REM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=iqxCGKaQ; arc=none smtp.client-ip=54.207.19.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+	s=arc-20240116; t=1792392346; c=relaxed/simple;
+	bh=pfPZE1oNbQbujg70mqVq+VNEU8XoDctbzzic/gjTn/I=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Oq6gOYYn/FJsxXR1yTEcERZfDmhkDMTHQg87zLl8z/JMN1bFJY4P/F27E38rXtXO3Z+4+9Mj9K+0ZqeJIIL6kKqRjtsNM6BCgKAGYfzldxU64JasIx+ZEgVs9hone7MgkeRPHXoA9aEJEqGBKkvWZZvMy5mbiKrMzNUkm8qlg0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hn/J+RbS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iWhWJ9P4; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="iqxCGKaQ"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1792392110;
-	bh=mG0ssjMFAqzBF8Nmuf2BLS/qbjtCpjzqJbiwQCoLYB8=;
-	h=Date:From:To:Subject:Mime-Version:Message-ID;
-	b=iqxCGKaQ+kEKq3DeKjS7A37YJuOoPKMFc67+kcwN+T1C6S4+9s7ZMuJp/3AVWhFBP
-	 sgayQYJlEzHl82rIRIsKAR+uQXL5dOnTed0scLUt+Eku9HOV4bgmcrVeY+8r0pgY2I
-	 Rmpg2H8Lq4GDo0jN26CatkmpLQ76UTtc+QOoiGgE=
-X-QQ-mid: esmtpsz19t1792392103t79caaa3a
-X-QQ-Originating-IP: 4FLorRqvu9ksBRu2FZoUp74sIwk0o+b3lTnhR8E8luQ=
-Received: from PEN002676 ( [1.202.39.170])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Mon, 19 Oct 2026 14:41:40 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 18404627450710380155
-Date: Mon, 19 Oct 2026 14:41:41 +0800
-From: =?GB2312?B?1dS98MP3?= <zhaojinming@uniontech.com>
-To: "Eric Biggers" <ebiggers@kernel.org>
-Cc: brgl <brgl@kernel.org>, 
-	herbert <herbert@gondor.apana.org.au>, 
-	davem <davem@davemloft.net>, 
-	thara.gopinath <thara.gopinath@linaro.org>, 
-	linux-crypto <linux-crypto@vger.kernel.org>, 
-	linux-arm-msm <linux-arm-msm@vger.kernel.org>, 
-	linux-kernel <linux-kernel@vger.kernel.org>, 
-	stable <stable@vger.kernel.org>
-Subject: Re: [PATCH 0/3] crypto: qce - fix CCM AAD buffer leak and the AEAD error paths
-References: <20261016-fix-qce-ccm-adata-leak-v1-0-f54a82af2de0@uniontech.com>, 
-	<20261016155628.GA3947801@google.com>
-X-Priority: 3
-X-GUID: 9191DB10-C88B-4DAC-A051-F800609F7DC6
-X-Has-Attach: no
-X-Mailer: Foxmail 7.2.25.375[cn]
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hn/J+RbS";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iWhWJ9P4"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J4iqx32818412
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 06:45:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	DVmSeay1XTMpEpXgY2Y5H3fL3jFlEFcncLH042xWGNk=; b=hn/J+RbS23AsOvR8
+	TedeY3Bsg0NhTf5sRVzf+0mHzJ8qwP9oCzAtTS5o7lwEbYW5mo2dL5nVcMjRYW4K
+	zYy2DwuKF5pwxaHk4uyyie5gEDyvAlIo6TFc5Ml65qQrP7jOW03pcY5YoHp08Ook
+	/ssC941oX/sC71PYIrM6SvTaH9SThaoeaueI1RXHU0QbUkM1Tfxdw3PM+9IDhQrC
+	bKTrn+jrlI/a5CpFoKv8BtZA4C8Cy7PeHmtMupCvsyr/rirrsmrvi8LTYgMAfZyx
+	y8eZag+4Jq3Xsi9eFTfuP81Yg2hrQCjZw/SQqRSiY3o9FvvzXuQFxrTy7FfqqTgV
+	Cc2n3w==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hbxqfwhyr-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 06:45:44 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2e869e00005so17993325ad.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 18 Oct 2026 23:45:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792392344; x=1792997144; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DVmSeay1XTMpEpXgY2Y5H3fL3jFlEFcncLH042xWGNk=;
+        b=iWhWJ9P4a4y6hp0IyIx7dQQVhhOcMyzF1hszxb9hNF9lkDjhW518gurXxYVy6zRGEu
+         DaidBQAUgLGccMOfhfFhLedt4O3duWEs+tPl/LcNINlxmSqwEQp35BXuivnBhl0YZ+mP
+         CEFxfHi2mEq6a+hq2BbwSLvkp9zTxCTcNfbccKC9LGSQZ8+e25xutVfXl6CbX8PXbhCh
+         ibIZiYf4m+ghAvSuFArKGk8seWNG44Vwywv9CVVkOVFcbcIuJ8QxOjGrQvHqdK9dHEPw
+         RG7XmjsPHCgPiZdFKlAYpcEtyx007wQSfCehz5hD1JYDdWLU3ei1PosOUSb6dFIerMlj
+         6H7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792392344; x=1792997144;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DVmSeay1XTMpEpXgY2Y5H3fL3jFlEFcncLH042xWGNk=;
+        b=BwJB23A/MsPfV+WzTs5ufJDGdZQZR5+JjS/4rxI+HdTC9+JXDGqYAL80HPN5wjKnXn
+         gjjc6gp3OY3EbHU2ImcV7lNfEkW/V1hyorTI4twAfrPKw73dxDU1F7BwlrWcX1Qd5fX1
+         gIKIGUcsEsjCtqbJVHSHpfFOoOBfjY4K94zhuIDnMh8bY2nuGgCvNFjOSq2ortkkwFm7
+         G3Gr57QEk9qumuaRLZVSY57O00HxsAHdh3DAauGE57tMAUuxGgiON6qUfvnYhkMJN/jk
+         Gx6+1kMhudO33QmZYBr2QEqZILxA8h3zH9+/YuhfAlcJNVlEswfND5sNDJ4T3gt5QoPQ
+         ijJw==
+X-Forwarded-Encrypted: i=1; AKwUvBwzYUVCKDPaXMfsNKmlU4RLWFAzbBUB/xLWuj+LeXCf/v5IruRwxwvEjbb8T2ICt7pShLQgSo/IC25PYRt2@vger.kernel.org
+X-Gm-Message-State: AFq9FYLcA9R1xYn0qTVt9cSFnojheGK8iugx8Ak7fsJ73iZ19F3tM/dk
+	iL1n/UTlPEfNN+yxaCSGuLW3D+++fjTMk2U6COtwnPBa+k1ge/kbpk8eI7zHbmtgxU1q67xfMUg
+	H5Db4yo5ttncHCxoRk2dR4HDAb3/OMV5Pqnvi8OVdz0GvLVzfj0lEa40suFhtKyboSOVC
+X-Gm-Gg: AYBFou3WC60avxZ08+4pvl8k7UeOCSlj5q5S2VxFIzoG7vXuI9CMXKbKkGP2PIzPBYa
+	MWc+z1j4Ze6NSso7TiR1nakEV4Bz8pXCpFS2eeXKAaZtSZTcWgI6bR/aCFTfYLCO33MFUXDClnk
+	tB7SBKXkr/tn2pj88iOR3MhOn8O/2rTUNMlS5q4ly8IXwxFlCOLJUXPNSABTh4DPedIadUeyJnh
+	v0ELnxvYV2AiLFXfUcEQ0FvLC94YIl1jc0QojPajpslqMC2H6SFJMw2UzQTWRJNnVg2AJlD4jLy
+	udrOilQfICY76VziAo95kZb3W2stP+ruVM06NthlQXHmUhutmLipst2zuLa5AKaggPR4Yobk5Jx
+	CBlsRejM3zof6fyX/m701VzfmQ6ciYc92oeQpOdKKlR16sNXyNt8Vdvnc7gyz
+X-Received: by 2002:a17:902:f686:b0:2e9:a090:dd80 with SMTP id d9443c01a7336-2e9a6d25346mr62369955ad.22.1792392343750;
+        Sun, 18 Oct 2026 23:45:43 -0700 (PDT)
+X-Received: by 2002:a17:902:f686:b0:2e9:a090:dd80 with SMTP id d9443c01a7336-2e9a6d25346mr62369505ad.22.1792392343154;
+        Sun, 18 Oct 2026 23:45:43 -0700 (PDT)
+Received: from [10.133.33.6] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea0cda9d8fsm731205ad.14.2026.10.18.23.45.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 18 Oct 2026 23:45:42 -0700 (PDT)
+Message-ID: <2bb63bef-b1b5-487c-98de-7cb5fa9b6758@oss.qualcomm.com>
+Date: Mon, 19 Oct 2026 14:45:34 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Message-ID: <CA7A5103C91FA945+2026101914414023542111@uniontech.com>
-Content-Type: text/plain;
-	charset="GB2312"
-Content-Transfer-Encoding: base64
-X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpsz:uniontech.com:qybglogicsvrsz:qybglogicsvrsz4b-0
-X-QQ-XMAILINFO: NWLpwLZrMWrIHCw6m4REeHpuAj5h5Im2QmkeMWqQjSWN/KQwphzej+Vc
-	LikyNJdugrwl9xe+YTFW1lh9h2oR7yTvSq8bZTW/77ultkE2XsO2ep6PDGPKs20drYR5jno
-	VkVYxX5KdULe+u4b2AhnxtuoZanFcM4dvhgbYCdpQXBRO+GC+bmfFZ/FaKJoKwByPyIOUr8
-	GymCAeQchuRp+DfgtofuZvP5CZ4modil+TCKy1AnfaVQhKT+4VrgddGFNrzWFbY+ztgya4d
-	NT3cdh6G5BxIG02+xmUQ2QspAGh/MkxCyxNIRnzpCXv1u/m3w6xTb5zca5QVTr7sacXwFYS
-	vyqtydrJHjBOGBpuRhbCamFWI3d6XmrdAKCKqOF0jwXk62Vnoh0+eM0sap5hvcs+UI5mcMe
-	D0YLUtIR39gklHpjVSrkM8hpucEe02It616RoFlLEF4NBVeh3MkdeOmaQDueJoOwMiB542G
-	nZCsTaDwVRI5scrEQa+QeFpWpvAY5cK2n6yqQ7Gkf+41eoe3KoOSrQDyJvpw5jr7V44Lpw2
-	V3DE2x1k1etGcgZosu8BtlgkB3afAgfliMYpsQkroNnuvg4wsMAnxT6KiJxZurTzByTwxbE
-	ul0wylheGEzlPlLxydSLg8Tz7rAiTYV2i09jt0+rDCvSzniJVw5Zw99W8fx7q5DyoM6IIsL
-	mqxOC+c7SjdvuwJgjEjGjonngrz40cMcBDUn83Hgv7niXDkh+ujFtF4L0J97stsdzG69nE7
-	SDzHNqkoSQsJJnUkBhPO7lnjwNkNlhtQDpyL7mUXBGoU85IATorcbCveQjrTqlJr7rkLaiU
-	bDdCf69lRqWxLiEJ5HDWyXuxGAWZtsxLAlVyegDEnRsVPblEwnyfP2eB5MbyGMTSIynLXOD
-	Qmvqveaa2mxHpX9dR+MFZle7qXI2FxG+HHdWFLEMKwRWxIkwjVfzJu5zBEq+ub5AoPg4j2L
-	Zc8HR1QdO+FvHKzRlZB3GnBBC+SNcBIXzEg6DULqWsROxWKGlRCPdOux/wz0pC/licVS1RN
-	emDIOzBvzJcOLu72d89yUaUcThoQTsBK5ISkTw84VA1+LXJnXA2v6VNpiyKCY=
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
-X-QQ-RECHKSPAM: 0
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/8] dt-bindings: arm: Add MPAM MSC binding
+To: Rob Herring <robh@kernel.org>
+Cc: James Morse <james.morse@arm.com>,
+        Shanker Donthineni <sdonthineni@nvidia.com>,
+        Ben Horgan
+ <ben.horgan@arm.com>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Catalin Marinas
+ <catalin.marinas@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Danilo Krummrich <dakr@kernel.org>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Fenghua Yu
+ <fenghuay@nvidia.com>, Jonathan Cameron <jic23@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Gavin Shan <gshan@redhat.com>,
+        Andre Przywara <andre.przywara@arm.com>,
+        Drew Fustini <fustini@kernel.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
+        trilok.soni@oss.qualcomm.com, aiqun.yu@oss.qualcomm.com,
+        ganapatrao.kulkarni@oss.qualcomm.com,
+        Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>,
+        Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
+        devicetree@vger.kernel.org
+References: <20261008-mpam-resctrl-dt-knp-support-v3-0-35196c2b43bf@oss.qualcomm.com>
+ <20261008-mpam-resctrl-dt-knp-support-v3-3-35196c2b43bf@oss.qualcomm.com>
+ <20261008212736.GB1318789-robh@kernel.org>
+ <2eddfb6d-c622-4d72-827e-aed685e72b9c@oss.qualcomm.com>
+ <51bc6576-7e52-4685-b7b2-a355c2b7e1ae@oss.qualcomm.com>
+ <20261015193639.GE5059-robh@kernel.org>
+Content-Language: en-US
+From: Yin Li <yin.li@oss.qualcomm.com>
+In-Reply-To: <20261015193639.GE5059-robh@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDAyNiBTYWx0ZWRfX6t4iu5QkT7S8
+ FejdmNnUYeXUvn7YyOFM3fVScKZ8nyDYOyRzD3WQ9EUzYBKu6ZR2PYFPDGsRWBLdlHfofaG1ht/
+ 9mWl3hKVMIPk8WQt+Es9EMRwiXbp+7E=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDAyNiBTYWx0ZWRfX3BvVV1Qk7/mj
+ 9Poy4b5bW+JN/7y2FkAwKKmYPqikVF/GEFepvKGTQQOeNMLxbn7jODdqoaV4sQbu/ieFdBWLlg1
+ blyfMVnb+t+Klde4VPh5cg7pEAAne5rZ0+XN2DO2VEcY5/eJcui/3On1XXHxk8bat31j/MT7z9K
+ KCMYmx4Pq5xfx9W8oaAdDZQbh5T6UkuigUWbG1NqKmW+a3JN9offGjM8V+NfcVJ6zM9BbL5v5lU
+ 2B6D1NPzU3+/LFRTvH4WEXMFQjoACrQ9YT5IMDFxzueQq+KQN+G7HlIo+Ua+65T0aEBvoXpM2Uu
+ FgXQIgmzw7+DeOVpqzbsvOZ1VCDxYG2eTL9957HZwX401xIhHvDkhhXX9H4ode3IGn/+CritZ8H
+ beh70AyYzMZyayB2leeDDUv+9ViRVE5yPfidqQOQYc4mWkKF8uBF23bD+zFHlMtX4ZrAtj9NskG
+ cbDeNGVVzBRcjh5w8RQ==
+X-Proofpoint-ORIG-GUID: UWMD-2DZYEjk21w8nGod6pbadPoe1A6M
+X-Proofpoint-GUID: UWMD-2DZYEjk21w8nGod6pbadPoe1A6M
+X-Authority-Analysis: v=2.4 cv=RYMFmFtv c=1 sm=1 tr=0 ts=6ad5bc98 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=gEfo2CItAAAA:8 a=7CQSdrXTAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=2vh7TcXBQbIRG-HjRUIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22 a=sptkURWiP4Gy88Gu7hUp:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-19_02,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 spamscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 bulkscore=0 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610190026
 
-CkhpIEVyaWMsCgpUaGFua3MgLSB5b3UncmUgcmlnaHQsIGFuZCBJIHNob3VsZCBoYXZlIGR1ZyB1
-cCB0aGUgb3JpZ2luYWwgdGhyZWFkCmZpcnN0LiBUaGUgU2FzaGlrbyByZXZpZXcgb25seSBmbGFn
-Z2VkIHRoZXNlIGFzIHByZS1leGlzdGluZzsgeW91CnJlcG9ydGVkIHRoZW0gZmlyc3QuIEknbGwg
-Y3JlZGl0IHRoYXQgcHJvcGVybHkgYW5kIHJlc2VuZDoKCiAgICBSZXBvcnRlZC1ieTogRXJpYyBC
-aWdnZXJzIDxlYmlnZ2Vyc0BrZXJuZWwub3JnPgogICAgTGluazogaHR0cHM6Ly9sb3JlLmtlcm5l
-bC5vcmcvbGludXgtY3J5cHRvLzIwMjYwNzIzMTgzNDM4LkdCOTM1MzRAcXVhcmsvCgpJJ2xsIGZv
-bGQgdGhvc2UgdHJhaWxlcnMgaW4gYW5kIHNlbmQgYSB2MiBzaG9ydGx5LgoKVGhlIHJlbWFpbmlu
-ZyBidWdzIHlvdSBsaXN0ZWQgYXJlIG9uIG15IHJhZGFyOyBJIGNhbiB0YWtlIHRoZW0gYXMKc2Vw
-YXJhdGUgZm9sbG93LXVwcyB1bmxlc3MgeW91J2QgcHJlZmVyIG90aGVyd2lzZS4KClRoYW5rcywK
-Wmhhb0ppbm1pbmcKCgoKPk9uIEZyaSwgT2N0IDE2LCAyMDI2IGF0IDEwOjA5OjQyQU0gKzA4MDAs
-IFpoYW9KaW5taW5nIHdyb3RlOgoKCgo+PiBUaGlzIHNlcmllcyBmaXhlcyBhIG1lbW9yeSBsZWFr
-IGluIHRoZSBRQ0UgQUVBRCBkcml2ZXIgdG9nZXRoZXIgd2l0aCB0d28KCgoKPj4gYnVncyBpbiB0
-aGUgZXJyb3IgaGFuZGxpbmcgYXJvdW5kIGl0LgoKCgo+PiAKCgoKPj4gcWNlX2FlYWRfY2NtX3By
-ZXBhcmVfYnVmX2Fzc29jbGVuKCkgYWxsb2NhdGVzIHJjdHgtPmFkYXRhIGZvciBldmVyeSBDQ00K
-CgoKPj4gcmVxdWVzdCB0aGF0IGNhcnJpZXMgYXNzb2NpYXRlZCBkYXRhLCBidXQgdGhlIGJ1ZmZl
-ciBpcyBuZXZlciBmcmVlZC4KCgoKPj4gCgoKCj4+IFdoaWxlIHByZXBhcmluZyB0aGF0IGZpeCwg
-dHdvIHByb2JsZW1zIGluIHRoZSBlcnJvciBwYXRoIG9mCgoKCj4+IHFjZV9hZWFkX2FzeW5jX3Jl
-cV9oYW5kbGUoKSB0dXJuZWQgb3V0IHRvIG1hdHRlcjoKCgoKPj4gCgoKCj4+Pz8gLSBJdCB1bm1h
-cHMgcmVxLT5zcmMgYWx0aG91Z2ggcmN0eC0+c3JjX3NnIGlzIHRoZSBzY2F0dGVybGlzdCB0aGF0
-IHdhcwoKCgo+Pj8/Pz8gcGFzc2VkIHRvIGRtYV9tYXBfc2coKS4/IEZvciBDQ00gcmVxdWVzdHMg
-d2l0aCBhc3NvY2lhdGVkIGRhdGEsCgoKCj4+Pz8/PyByY3R4LT5zcmNfc2cgY2FycmllcyB0aGUg
-QUFEIGJ1ZmZlciwgc28gaXRzIG1hcHBpbmcgaXMgbGVha2VkLCBhbmQKCgoKPj4/Pz8/IGZyZWVp
-bmcgcmN0eC0+YWRhdGEgdGhlcmUgd291bGQgZnJlZSBtZW1vcnkgdGhhdCBpcyBzdGlsbCBETUEt
-bWFwcGVkLgoKCgo+PiAKCgoKPj4/PyAtIEEgZG1hX21hcF9zZygpIGZhaWx1cmUgZm9yIHRoZSBz
-b3VyY2Ugc2NhdHRlcmxpc3QgaXMgbm90IGRldGVjdGVkLAoKCgo+Pj8/Pz8gYmVjYXVzZSB0aGUg
-cmVzdWx0IGlzIGNoZWNrZWQgZm9yIGEgbmVnYXRpdmUgdmFsdWUgd2hpbGUKCgoKPj4/Pz8/IGRt
-YV9tYXBfc2coKSByZXR1cm5zIDAgb24gZmFpbHVyZS4/IFRoZSBlcnJvciBwYXRoIHRoZW4gdW5t
-YXBzIGEKCgoKPj4/Pz8/IHNjYXR0ZXJsaXN0IHRoYXQgd2FzIG5ldmVyIG1hcHBlZC4KCgoKPj4g
-CgoKCj4+IFBhdGNoIDEgdW5tYXBzIHRoZSBjb3JyZWN0IHNjYXR0ZXJsaXN0LCBwYXRjaCAyIGFk
-ZHMgdGhlIG1pc3NpbmcgZnJlZXMKCgoKPj4gYW5kIHBhdGNoIDMgZml4ZXMgdGhlIGRtYV9tYXBf
-c2coKSBjaGVjay4KCgoKPj4gCgoKCj4+IEFsbCB0aHJlZSB3ZXJlIHJlcG9ydGVkIGFzIHByZS1l
-eGlzdGluZyBpbiB0aGUgU2FzaGlrbyByZXZpZXcgb2YgdGhlIFFDRQoKCgo+PiBCQU0gbG9ja2lu
-ZyBzZXJpZXMuPyBUaGV5IHRvdWNoIHRoZSBzYW1lIGZ1bmN0aW9uIHRoYXQgd2FzIHJlY2VudGx5
-IGZpeGVkCgoKCj4+IGJ5IGNvbW1pdCA3ZjIzNDVmNDdkZDEgKCJjcnlwdG86IHFjZSAtIGZpeCBD
-Q00gQUFEIGJ1ZmZlcgoKCgo+PiB1bmRlcmFsbG9jYXRpb24iKS4KCgoKPgoKCgo+Tm90ZSB0aGF0
-IEkgcmVwb3J0ZWQgdGhlc2UgYnVncyAoYW5kIG90aGVycyBzdGlsbCB1bmZpeGVkKSAzIG1vbnRo
-cyBhZ286CgoKCj5odHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1jcnlwdG8vMjAyNjA3MjMx
-ODM0MzguR0I5MzUzNEBxdWFyay8KCgoKPgoKCgo+LSBFcmljCgoKCj4KCgo=
+
+
+On 10/16/2026 3:36 AM, Rob Herring wrote:
+> On Mon, Oct 12, 2026 at 06:24:06PM +0800, Yin Li wrote:
+>>
+>>
+>> On 10/12/2026 3:05 PM, Yin Li wrote:
+>>>
+>>>
+>>> On 10/9/2026 5:27 AM, Rob Herring wrote:
+>>>> On Thu, Oct 08, 2026 at 02:41:12PM +0800, Yin Li wrote:
+>>>>> From: Rob Herring <robh@kernel.org>
+>>>>>
+>>>>> The binding is designed around the assumption that an MSC will be a
+>>>>> sub-block of something else such as a memory controller, cache
+>>>>> controller,
+>>>>> or IOMMU. However, it's certainly possible a design does not have that
+>>>>> association or has a mixture of both, so the binding illustrates
+>>>>> how we can
+>>>>> support that with RIS child nodes.
+>>>>>
+>>>>> A key part of MPAM is we need to know about all of the MSCs in
+>>>>> the system
+>>>>> before it can be enabled. This drives the need for the genericish
+>>>>> 'arm,mpam-msc' compatible. Though we can't assume an MSC is accessible
+>>>>> until a h/w specific driver potentially enables the h/w.
+>>>>>
+>>>>> Cc: James Morse <james.morse@arm.com>
+>>>>> Signed-off-by: Rob Herring <robh@kernel.org>
+>>>>> Signed-off-by: James Morse <james.morse@arm.com>
+>>>>> [ Yin Li and Huang Yiwei: use oneOf for the compatible to allow both
+>>>>>     standalone arm,mpam-msc and the two-item combination; fix
+>>>>> schema field
+>>>>>     order, type constraints and yamllint spacing; fix example reg
+>>>>> addresses,
+>>>>>     add arm,mpam-device phandle and remove TODO comment ]
+>>>>> Co-developed-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+>>>>> Signed-off-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
+>>>>> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
+>>>>> ---
+>>>>>    .../devicetree/bindings/arm/arm,mpam-msc.yaml      | 202
+>>>>> ++++++++++ +++++++++++
+>>>>>    1 file changed, 202 insertions(+)
+>>>>>
+>>>>> diff --git
+>>>>> a/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+>>>>> b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+>>>>> new file mode 100644
+>>>>> index 000000000000..3c7b13a23ff2
+>>>>> --- /dev/null
+>>>>> +++ b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+>>>>> @@ -0,0 +1,202 @@
+>>>>> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+>>>>> +%YAML 1.2
+>>>>> +---
+>>>>> +$id: http://devicetree.org/schemas/arm/arm,mpam-msc.yaml#
+>>>>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>>>>> +
+>>>>> +title: Arm Memory System Resource Partitioning and Monitoring (MPAM)
+>>>>> +
+>>>>> +maintainers:
+>>>>> +  - Rob Herring <robh@kernel.org>
+>>>>> +
+>>>>> +description: |
+>>>>> +  The Arm MPAM specification can be found here:
+>>>>> +
+>>>>> +  https://developer.arm.com/documentation/ddi0598/latest
+>>>>> +
+>>>>> +properties:
+>>>>> +  compatible:
+>>>>> +    oneOf:
+>>>>> +      - const: arm,mpam-msc                   # Further details
+>>>>> are discoverable
+>>>>> +      - items:
+>>>>> +          - const: arm,mpam-memory-controller-msc
+>>>>
+>>>> Why do we need this?
+>>>>
+>>>
+>>> Hi Rob,
+>>>
+>>> Thanks for the review.
+>>>
+>>> The 'arm,mpam-memory-controller-msc' compatible is needed because,
+>>> unlike cache MSCs, memory controller MSCs cannot rely on the parent node
+>>> to identify the resource type.
+>>>
+>>> Cache controllers universally carry a 'cache' compatible, so the driver
+>>> can recognise any cache parent and derive the cache ID from standard
+>>> properties. No equivalent convention exists for memory controllers, and
+>>> the component ID comes from the MSC's own 'numa-node-id' rather than the
+>>> parent, so there is no parent attribute to rely on.
+>>>
+>>
+>> Hi Rob,
+>>
+>> As a follow-up to my previous reply:
+>> Whatever the outcome of the discussion on "arm_mpam: Add support for
+>> memory controller MSC on DT platforms", we will keep the binding and
+>> driver support consistent. If it's dropped, the
+>> 'arm,mpam-memory-controller-msc' compatible, 'numa-node-id' property, and
+>> the memory controller example will be removed together.
+> 
+> Which parts are you actually using/needing and not using? If you don't
+> need RIS support, for example, we should drop it.
+> 
+
+Hi Rob,
+
+The Kaanapali DTS only uses 'arm,mpam-msc' nested under a cache node,
+deriving type and affinity from the parent — following your earlier
+suggestion. No RIS child nodes are used. However, this is not 
+universally applicable. On most platforms, L2 cache nodes sit under CPU 
+nodes, which do not provide an MMIO address space. Nesting an MSC there 
+causes address translation failures. The Kaanapali DNM patch moves the 
+cache nodes out of the CPU to work around this, which also has the 
+benefit of making the MSC-cache parent relationship explicit in the 
+device tree — though this is still an artificial arrangement for 
+demonstration purposes.
+
+In fact, if Kaanapali supported direct MMIO access to the MPAM
+registers, it would also need to place the MSC independently and use
+RIS with 'arm,mpam-device' to point to the L2 cache node under the
+CPU — the same approach required on any platform where the cache
+topology cannot be modified.
+
+Therefore, apart from the memory controller MSC support, we believe
+the remaining parts — including RIS — are needed on the Kaanapali
+platform.
+
+Thanks,
+Yin
+
+
+> Rob
+
+-- 
+Thx and BRs,
+Yin
 
