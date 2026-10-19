@@ -1,98 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.181
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792426682;
-	b=aVTjDU19gYMFW1w/5ukT2gVqc0SXzkSFKdmJvqCefz+lToEOP6WNAgt9vaHy33wcCQqn
-	 A0rZUptn01/qffpyHIA+M5xUG03TmWp3BFAJ/rjWfTYXa00k+T9oTfv/D5O/JLQCfnRmh
-	 YvjhR5wfS8nwEyQuy9hpWnXYbCC8WsGuSQNQEN6eDo94tyN0YAXNraXI0OzknKOeuD6PZ
-	 WhrXLIm9Y2hWI8BH/aPP/KzP31Cd0qFvdjFY2KlooBvlMQTd33DbN29IXKbHMrM4wVRYF
-	 tI5mo/9eBUUDZ+yP7xcAi7NpBLvoLDKUYY2xOSXVCQJ0qg0ar16uB5e8wIoi+P6qvkw==
+	t=1792426694;
+	b=SpLeyA5u/xdK2HmVi7YY0iN5mtxN6BUa7cssi0NZLv9njBg9pW+420wA9tAvWK0gL03X
+	 QyNz/aktuCpIDHeFiQX58OsQluwb5Bod0eqAyvIRoiIFUWwXxMuTKHht6ZuaPtwl469ss
+	 hoCLh5IHUab9Ni3jrvs2LOfiJJ/CblAY3exoJFspPmsBRRKk348GwhyUjGBhy3HdtZMJM
+	 9eCRHwBrVhk2d1co1bZ8i+UKZwdLSu3h79Zk8SE+qa8OlzkcIbr+m21YVtFcTL34i/zwV
+	 xbbT+C8jN/+MGZ9Fxnq5JxCmOnXBcmN3G+acGM7x9TLeQlbMeh4q1TKNRffy82DUvPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792426682;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792426694;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=DXtMdBajp2aV+I9O1IycmvhTJ3P4GuSEtRtN8YcfKOk=;
-	b=ahEkhu/bAw9Kv1wYRjsSUeV9W4u6wKz/AMoM5QaePek1SozoyK4impBI1/NJs8ab3fGg
-	 3sOrVeyBnVRKw+NgqTjf/gTVQWjUsvrs9W7ZAcJy8H3l3zvHYWVckpNsS+9uhIMunwKmO
-	 YRXC373wykzf+MKYG837nEZd8mlkAvO2Y1XCggAg+dRwOhg6HepwryN1pTM5fymwcL9kH
-	 DtyEbGnGaPNvIkAXu38B/1JEjQIl3/I3ha2y6lcfs/5PoTpkh8anVeHguugj2TXuMQnjx
-	 a3/jGx6jreaXs9i10qByrFnoVsaZg8q1QXfZXV6muks0AV+59/56Et5EYorcysdV3Bg==
+	bh=cdJPCWnGkorpLO32ktzbPWjsu9IZRJbbXQIGeOMqDBs=;
+	b=ZsEjYlWsxcA5twWPYN3mXDQa3BebJthrgEdShSbRkZv1FOsokvZTjPJMvzje1esTuRBy
+	 XgXsJ8KuNa6DAjN9+XcyGDDoC9p3GNlmoo2ovmJFwHoKXE7UAj6n0JSlYur3nEaATbf/t
+	 aZI+oHP6VJs8nHq/Lm+GUXeaLJYHxUmbX56UFf+3z0JmmzZW8GFiu3AQ0svlpVU5YJFpD
+	 ga51nCxlu7+zCOx29qpeDgiKOi1cUZZO8rb+RqHSaK1ZPDnRfKL0wAu2YFKUcySSNqBTo
+	 hA2DRkzppEZt697DIa+2yIbHmKdOfhLBvytoiwie+bWcxFmdoYPv0cBxqV1YsaSFizA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=X6utE1Mi;
-	arc=none smtp.remote-ip=74.125.82.182
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=NlghLLUF;
+	arc=none smtp.remote-ip=74.125.82.181
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 345D660A260D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 16:18:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 345D660A260D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E14660A2615
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 16:18:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4E14660A2615
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=X6utE1Mi
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-35f1f76ea84so4221592eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:18:01 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=NlghLLUF
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-35c76e9614aso4427033eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:18:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792426680; x=1793031480; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DXtMdBajp2aV+I9O1IycmvhTJ3P4GuSEtRtN8YcfKOk=;
-        b=X6utE1MiMIBEcibYl326t/RLYXFKYrBr8JeJjXi72kPdntNkeFbGsKzNZPkJvwtVvY
-         72eoHC41r1x6Hwl8+seNa2qyLfdqWTtqfj0nPArZKR048dhOmVo0dJxXzqVhw/QxVKjG
-         R5I+7PfmuObo8GTkWSn9FhfOudVRRTPKmM+zYVDdWz4mlwadjU8dHFkejd4ZB541CvTL
-         obzT+hAn8hUmV6Bme4c3/jyv03eQcpChj0oS9IbplhuBMQH2DfWPANFjOmAX23TDKXYx
-         nL3lZ/Mua3TfkORjou+Ep/AN24BWjv+MQo9XBdw3loAPX0j60AqvoKBpo0s4MSmdx92d
-         5BtQ==
+        d=gmail.com; s=20251104; t=1792426692; x=1793031492; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cdJPCWnGkorpLO32ktzbPWjsu9IZRJbbXQIGeOMqDBs=;
+        b=NlghLLUF2FbNboWwLud4VJ9BQloVK1P5Z2CdqbcQVhDho2r5kJ6nuKmYD2aZL9lSgs
+         XUyzYjjjAJWcpCFbC2L7wWmGJ1bFk7fZtKpmansYVFVyVdjhcuxFTq6Crym1jiqGsQ9J
+         FQBjTcuqfrizyKhzORa8P4iWbh9/Y7y/7IVE5ay/ZGzQri8bQfODzav9KGpIwmSlWGLR
+         RyuVHwcQKGhVzV5SQ61QFz7pE8CfLm2JeaT8beVGh6vi6F2qSlanO2cXcbAOFYavlFT4
+         bz32NgQe6uyP+9PGDwiSYq0APKnYZsxSvyKkH0fE8hwEJg7LgbQD8CANBFqDMHZFpSgd
+         Mm3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792426680; x=1793031480;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DXtMdBajp2aV+I9O1IycmvhTJ3P4GuSEtRtN8YcfKOk=;
-        b=BNotp3/h8VpVdmTirJ17c+cGz4u7tx7QnpDtRNxXi2bci61MbAxT8/oqCjQh0xKc9n
-         BrpE6hWcnQAT/OZb2BO0dScO4kXtwOqYj4rpm/Nu9Vmfq9/9KgZblwfT9yZBvL8FUYdV
-         QhzzEPoh2YDMNcE8/ehCNWAFWONDPilT2zj2cpmJX4tL0GSw2ysvJRTgQOJqLnVhkOS1
-         niNoYo4HAFNUUE/b6q+qOmdxzT12OsMIGZYXFROLDRXkH8JMV7TuORnhrZOsV8lNM3YV
-         tgRZ2k/8bBZbQq0VFM2ZRON5Sn2V6c6W79F9HdxEHaBT54R4imEh/FYJd0uvh4dRohgG
-         QJWA==
-X-Gm-Message-State: AFq9FYJXTquiZ9d8RJAvDqanYMtSEHZqUmF2y2O2qxMRPpHVRRrQAh7E
-	L+5wnVXfNBLLPeili5gAbndSS+IzCvZlAKDCIiBR4yFFYJJ7N5qf3o4Z
-X-Gm-Gg: AYBFou3zRaGt3SJ/NsifZTpVLI78seLz3XN8AGY3Vzx+GdNuGSHeHusZbbJd41dHDQT
-	vWmbe/JpZoXgv+OQLjGTOwUvGylGssVsKDkFWnG+t7JTsSW5idvGs13Wa82s4Ee0sI1tWsWtcy4
-	wD4e0OYK7Eaf8DNfYB5AB4EDSHo1fhlCM1y1OF/LyqdGYWrjsjbYHmWt4zxjL94mx/M3183hAta
-	IO6bsNcd28r4PfXs+dSzQS6l7gd8cZcsaQ9hnEDiatH/GJCx3FBLafiox3zXjhBRapDXZS4iLt0
-	W+nXXbWkp9hpKA6wBYNCXiNUoh3wf6mB5rozQ68jyMpqICK/ybEG/+l8b+b68+DNheK+IDE1W5L
-	J9Zd1e6b0kVe/6lB0VshNV+fKVd5TBcyhhP3YmZwGW7jT9rpJI+JbuyS+DZuHGgrJBarXEfe2HM
-	hyB2BlrJLDE6YxKuWo/GinCS/oLIhCl0mWV+1tptfBjwltWXwlcbbFEyNP1WnvxS6eg+7GruK/1
-	IUP2A7CpZw=
-X-Received: by 2002:a05:693c:88c6:20b0:35d:19d7:84c with SMTP id 5a478bee46e88-3619ea20ddemr11526918eec.3.1792426679694;
-        Mon, 19 Oct 2026 09:17:59 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792426692; x=1793031492;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cdJPCWnGkorpLO32ktzbPWjsu9IZRJbbXQIGeOMqDBs=;
+        b=KTDevx+ymWzStt25PlzmcTAR55gScX2OJzkwOq92slZRea9vDn+XWkbksuOsJXTYh5
+         NI87rUOqi0cVSn7Hq8/3kT873yiaz/dGh7DpvpTL8HLybXh7NZAMZh5Zibe94CwjnsGc
+         Xp6DKGctXG9kUENmJL6QOqkZUCoxTZseWgpr150WwJo+2zItAKUFHTsDSp9IWQDu8GBt
+         99A1L0khgWDMTtFDJ3A+8voN7iqhR+Yk7su0KKduz5Ayw9q+NFtU9odVc/KVhwMSolsc
+         PNtfXDAvJz7lJYxzW0a4hGjavF1CXsd4z/TI2f5IT508iWNDK6dgvCT5mLNum4M3C9+g
+         sBDg==
+X-Forwarded-Encrypted: i=1; AKwUvBy6U2jrw/bNQulHSnzLYtZtCwTXc5MMsk8IE5mn76hMavfkwbIpoNWZB97q6hsO3BbAuNp50yklgGfRtlAT@vger.kernel.org
+X-Gm-Message-State: AFq9FYIMZ+hVRpAan5Izg6UR7FM1ybTd5qrmmaP7YS0zEmRil2dhCCj2
+	h2vHfT1GdOp2wJ9Gpm7fa9jyJlYpZLGufouXFJC81EOKPtzAB6FkjxYt
+X-Gm-Gg: AYBFou2SesBO9w7FFRF63WMpex2oZNtvqi38sk4XfMM6o5ftOK/mvgpFATBHEDQYGvH
+	VpXv3lvN2rIxBsuHcayXsMGI/1Cr4q/AbV4v7yheDvN6ppHJh2q1wNwYt6TFZVD/sjDtUNRVrAv
+	nyF1n/Imbu4paSi5QVmJhKZ0sPfK0aLIM0O9KUTy/DaCobBviQswpAcFHNPxu0fo3DWx7XbbR60
+	1xWxSRw14q+2xZs9gjeKw7nqELnlUAy8V8boS+NY/59gHWjT+oPoDwcvUay08Pihq1FO9EkTLbm
+	DPO2k+bQo7coVoDQD310iQXTl/NVIOR763Q46iokq65TW+YQuHVNXKbHqADALSDGZnsw8NiKa6C
+	33XfpuERnFd5qZW6sCRdcRbwneNgB/rwSgRoG8HX4eDrGvAQ8QrqXmgNbLkypYKe+DAkh1LmG71
+	lGScBo33/tiMsqRr4NQwpS0EOsxE1O0LRkLLeroSMHwtTx6LlsUt0nXvAEvGHbSVDf2mqOySPAC
+	FD95iZdRGUqqsyv0amA3A==
+X-Received: by 2002:a05:7301:4305:b0:35f:227b:f8bc with SMTP id 5a478bee46e88-361a1465355mr10294813eec.11.1792426692027;
+        Mon, 19 Oct 2026 09:18:12 -0700 (PDT)
 Received: from redducc.localdomain ([183.83.156.125])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm33410985eec.13.2026.10.19.09.17.55
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36082b8573dsm33412914eec.25.2026.10.19.09.18.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 09:17:59 -0700 (PDT)
+        Mon, 19 Oct 2026 09:18:11 -0700 (PDT)
 From: redducc <sushmit718@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
+To: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 3/3] clk: qcom: camcc-sm8450: Park the camera RCGs when they are disabled
-Date: Mon, 19 Oct 2026 16:17:40 +0000
-Message-ID: <20261019161740.2384-4-sushmit718@gmail.com>
+Subject: [PATCH] ASoC: qcom: q6apm: Fix the wait for SHARED_MEM_UNMAP_REGIONS
+Date: Mon, 19 Oct 2026 16:18:05 +0000
+Message-ID: <20261019161805.2427-1-sushmit718@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261019161740.2384-1-sushmit718@gmail.com>
-References: <20261019161740.2384-1-sushmit718@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,333 +103,43 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The camera RCGs use clk_rcg2_ops, so a disabled RCG stays configured
-on whichever PLL it last ran from. When that PLL is turned off and the
-Titan top GDSC then collapses after a camera session, the SoC hangs.
+The DSP acknowledges APM_CMD_SHARED_MEM_UNMAP_REGIONS with a
+GPR_BASIC_RSP_RESULT packet. apm_callback() stores the packet opcode,
+GPR_BASIC_RSP_RESULT, as the result opcode, but
+audioreach_send_cmd_sync() waits for the result opcode to match the
+command, APM_CMD_SHARED_MEM_UNMAP_REGIONS. The wait never completes,
+so every unmap blocks for the full 5 s timeout and logs
+"CMD timeout".
 
-Switch them to clk_rcg2_shared_ops so they park on the XO while
-disabled, as camcc-sm8550 does. cam_cc_sleep_clk_src runs from the
-always-on sleep clock and is left alone.
+Store the opcode of the command being acknowledged, as the other
+GPR_BASIC_RSP_RESULT cases already do.
 
-Tested on the Nothing Phone (2) (SM8475).
-
-Fixes: 6082037fe62e ("clk: qcom: add camera clock controller driver for SM8450 SoC")
+Fixes: 8ea6e25c8536 ("ASoC: qcom: q6apm: Add support for early buffer mapping on DSP")
 Assisted-by: LLM
 Signed-off-by: redducc <sushmit718@gmail.com>
 ---
- drivers/clk/qcom/camcc-sm8450.c | 68 ++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 34 deletions(-)
+ sound/soc/qcom/qdsp6/q6apm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/camcc-sm8450.c b/drivers/clk/qcom/camcc-sm8450.c
-index 9f1dd51db0d5..77b9d7efe390 100644
---- a/drivers/clk/qcom/camcc-sm8450.c
-+++ b/drivers/clk/qcom/camcc-sm8450.c
-@@ -834,7 +834,7 @@ static struct clk_rcg2 cam_cc_bps_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
+diff --git a/sound/soc/qcom/qdsp6/q6apm.c b/sound/soc/qcom/qdsp6/q6apm.c
+index b6b1ef6833b3..379b15b7e503 100644
+--- a/sound/soc/qcom/qdsp6/q6apm.c
++++ b/sound/soc/qcom/qdsp6/q6apm.c
+@@ -960,7 +960,7 @@ static int apm_callback(const struct gpr_resp_pkt *data, void *priv, int op)
+ 			wake_up(&apm->wait);
+ 			break;
+ 		case APM_CMD_SHARED_MEM_UNMAP_REGIONS:
+-			apm->result.opcode = hdr->opcode;
++			apm->result.opcode = result->opcode;
+ 			apm->result.status = 0;
+ 			rsp = data->payload;
  
-@@ -856,7 +856,7 @@ static struct clk_rcg2 cam_cc_camnoc_axi_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -877,7 +877,7 @@ static struct clk_rcg2 cam_cc_cci_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -892,7 +892,7 @@ static struct clk_rcg2 cam_cc_cci_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -914,7 +914,7 @@ static struct clk_rcg2 cam_cc_cphy_rx_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -935,7 +935,7 @@ static struct clk_rcg2 cam_cc_csi0phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -950,7 +950,7 @@ static struct clk_rcg2 cam_cc_csi1phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -965,7 +965,7 @@ static struct clk_rcg2 cam_cc_csi2phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -980,7 +980,7 @@ static struct clk_rcg2 cam_cc_csi3phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -995,7 +995,7 @@ static struct clk_rcg2 cam_cc_csi4phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1010,7 +1010,7 @@ static struct clk_rcg2 cam_cc_csi5phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1031,7 +1031,7 @@ static struct clk_rcg2 cam_cc_csid_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1055,7 +1055,7 @@ static struct clk_rcg2 cam_cc_fast_ahb_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1078,7 +1078,7 @@ static struct clk_rcg2 cam_cc_icp_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1102,7 +1102,7 @@ static struct clk_rcg2 cam_cc_ife_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_2,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_2),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1126,7 +1126,7 @@ static struct clk_rcg2 cam_cc_ife_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_3,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_3),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1149,7 +1149,7 @@ static struct clk_rcg2 cam_cc_ife_2_clk_src = {
- 		.parent_data = cam_cc_parent_data_4,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_4),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1170,7 +1170,7 @@ static struct clk_rcg2 cam_cc_ife_lite_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1185,7 +1185,7 @@ static struct clk_rcg2 cam_cc_ife_lite_csid_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1208,7 +1208,7 @@ static struct clk_rcg2 cam_cc_ipe_nps_clk_src = {
- 		.parent_data = cam_cc_parent_data_5,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_5),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1223,7 +1223,7 @@ static struct clk_rcg2 cam_cc_jpeg_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1245,7 +1245,7 @@ static struct clk_rcg2 cam_cc_mclk0_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1260,7 +1260,7 @@ static struct clk_rcg2 cam_cc_mclk1_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1275,7 +1275,7 @@ static struct clk_rcg2 cam_cc_mclk2_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1290,7 +1290,7 @@ static struct clk_rcg2 cam_cc_mclk3_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1305,7 +1305,7 @@ static struct clk_rcg2 cam_cc_mclk4_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1320,7 +1320,7 @@ static struct clk_rcg2 cam_cc_mclk5_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1335,7 +1335,7 @@ static struct clk_rcg2 cam_cc_mclk6_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1350,7 +1350,7 @@ static struct clk_rcg2 cam_cc_mclk7_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1373,7 +1373,7 @@ static struct clk_rcg2 cam_cc_qdss_debug_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1396,7 +1396,7 @@ static struct clk_rcg2 cam_cc_sfe_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_6,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_6),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1419,7 +1419,7 @@ static struct clk_rcg2 cam_cc_sfe_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_7,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_7),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1460,7 +1460,7 @@ static struct clk_rcg2 cam_cc_slow_ahb_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1480,7 +1480,7 @@ static struct clk_rcg2 cam_cc_xo_clk_src = {
- 		.parent_data = cam_cc_parent_data_9_ao,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_9_ao),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
+
+base-commit: 6a56f4f29711dd2da49f03a5b99ce53779e638d7
+prerequisite-patch-id: 154550924ab1d2c1bc95517c058aaee0bb242f92
+prerequisite-patch-id: 22bca48e48813fb55976db043f9c35c926c61e3d
+prerequisite-patch-id: cd21b1ff6a4fef14c706cea97fc906d7a0331b5c
+prerequisite-patch-id: ce4057205dd2c2a6650c3a36c60664bd2737e202
 -- 
 2.43.0
 
