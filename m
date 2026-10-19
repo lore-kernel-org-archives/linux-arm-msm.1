@@ -1,81 +1,81 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792426672;
-	b=U+lxcIq9TUQpyMD6BAJi8F2lKx5hI4vd5cWZ8SXm28HbsWXH/U00NfXsdsRLZj6M1gff
-	 mVJvHiZ/7OTSBnrMCvk2DwlvE8NhIGJnfhBBmAokLYPc2Lvbp79UYHfnAcJj+4Zxl4ecF
-	 Jlx9XLnLCBADJFkKD8hB2XUpzzRjdRLfGF8mR3wPws8oSvx/eZxcEdG25daRO2Lc4XvMa
-	 shwWumh4rnjQgtWF6OvBrmGXSwhCw/7s1MWgbfHHDWmB2X6rha3Nif5tw7dP+ffALqIZT
-	 O0Dkr6Enu9LobmPH5O0VSlgjAkN5aVD7DhQFbn1ycR6ygmAOP49Ijh3ktWf3yfEejhQ==
+	t=1792426677;
+	b=X2n3JokfsJJ1hy+LQiD4XXumiJrNGxXtLOmYal6nEuAwEX2gZVcDp148AVD5zJszTIO3
+	 TO21+Cxw1JcEMKI900P0HWlsD3ODnwwU9MaTjzGoEXjq9Z54gC4NtyyaNIXva0sI5Y3A+
+	 jQX6a9rmakkX/Sj4OAAPr8hQIeUCEWtVBjBC+1TLMWxPvQ5ND0aVqhC88YlirozFdla7W
+	 ykHj6+G7NDck9OvEeWLkkHDe/JhXftCf8Lg04peLJ7tfrG/MTnlsURWjKAIAYg02k4AjX
+	 0n6+MnqpymCfPHOdR7Vs/rVVKdaRaowa5GHwRYy4G+JT+SqyyYEvQSmxWOssG/0Fk7w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792426672;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792426677;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=hsDZepg8xw8s3IYf2oycHDXOymRS04NCMJOXtFzaXpU=;
-	b=DeKYpF5pRqhMihsvgt37krupaAi+kZsVaUTBD9Ye8yTkeKKoLpoCEfChzA/rt4OldDed
-	 OwvyoE4LJYw34B0SuH0le/FJ1/A31yEwcArFansTPk3t8Jg5oGi+YLhB/lKbsikbtLrQm
-	 /URqIZ3C8S94RS/A+RAuor8MtN0Tq20zIQdNCup0/JXVlEbgi9t45g+arh0Hp0rlKJZaN
-	 4lUD48/w00ZvnBQJ4f+ebbFb2USjFq9HiGM5xsqYFkdYAR4BRe5lcbZ0LazaK7HQ1/MHG
-	 fUCCWJSLjxEsmfJMDO3q/2vonLsKyKnt0TPI9Qtvgjd4N4Inz3+7R5m/OnKeMjHAe5g==
+	bh=j9/YY5ZYigZ1aqT0I55Hlkm3+bQMNT99YHPRJIImTVQ=;
+	b=3UMY1pkXqzSm+Vdd2WUqp4/lbZcTGuKmF8LO8jCFFSlbh9Vtt0inEmvWUlRU1abHLY0H
+	 CJSdZqKnls3pQrgCdAjvM6ibnm2wAVODQoEwpBOGhtwNZGuwTRGYuUNHuSIWIZirw347p
+	 Sof0W9jTiROW1/3sPFI5aAyUsPnukbbG330wXIW4/99RS3UJcziDcvZSw7prKpX0IB4LX
+	 sni/OQBdthLRjS+WYBur+WH5UJ4BKDjJdqN6SpDKm8yO2V9yJeDl0zxdpF4lZCvJaesAt
+	 yMCb2kJ85jUy1ecKBBkTPCO6uKe6zY1Q3CXhiyLnEE5PbXrt7O9ewBXQGJQsZymiwXQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=doGmmNKp;
-	arc=none smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="qDF/voXd";
+	arc=none smtp.remote-ip=74.125.82.182
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F97960A2611
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 16:17:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5F97960A2611
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3F80606A31A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 16:17:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E3F80606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=doGmmNKp
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-35f1f76ea84so4221273eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:17:52 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=qDF/voXd
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-353804b591eso4394327eec.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 09:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792426671; x=1793031471; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792426676; x=1793031476; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hsDZepg8xw8s3IYf2oycHDXOymRS04NCMJOXtFzaXpU=;
-        b=doGmmNKpO+KfJJ5r3TqqgIGoAZlAoA5zWP58ZbmjTfmUxdXoID7DGxLinQE7EMeZ0O
-         k9RkEadNnUmUZxuvIqmh6AfCOkYozgubS359fVQAqAp/H8yUyFsXOi0ITaqwnZhvkTS4
-         agRblBsa7sJRq2n0ttcUqzGBTESAHWjnNm2wUE0yBVBVQUZtzpalG0IPZ1g2JZoRdD5g
-         a2+YI5pbIQO5opBwzO38VgLgqvS0RqRpvUrV9BxZMNrJ3HUOi1avl5ogaNlhjnm86NMe
-         lsbCdr7DF6tXxzK3Uwg6girjlbNJHcAc/TsDlZxiG91e7Ofl/9PbZ98DR99UNFwVphHb
-         YCfQ==
+        bh=j9/YY5ZYigZ1aqT0I55Hlkm3+bQMNT99YHPRJIImTVQ=;
+        b=qDF/voXdFABxdK5aqc6szv0m6DU68u4FnQLKltgfFFS9FTwVcQUs5mpmv1ar6qArnv
+         EBAcMNZLwr7QOzfMGz0obGeBaSWYonpdRy10XrrpBY0DDamcAQfFKjtJHYfwDpfUzHVM
+         JkGbBeEjtS0MwWX6GhHuZVqQTWpb1a7HwJhP3WqZGzT9gH6+zphy3AujM3rdT3SvqIAA
+         9ZrtZjvxtQSAkbKFQSdJlguPJZdG7NR0tW/ppWdUaauv5s81lcVehkNTjn0Hb3Zd3c29
+         j3ZesgtL1gOVmOrqVXSP/mWCbWh2aWyTL2unyetNjHOL3oSBwmHPGyRAXuZYLBDJuLWv
+         WrXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792426671; x=1793031471;
+        d=1e100.net; s=20260707; t=1792426676; x=1793031476;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hsDZepg8xw8s3IYf2oycHDXOymRS04NCMJOXtFzaXpU=;
-        b=E1v34miLYzZYG2sBrcr6Ql5FCvHlPIZG9OI67IQ29niOrTlgcxJI2sRSyGwqdHr/yA
-         AbXaLkE+3R4LIHBD6P3KNMGsBqdr3t84xWliFX2aUU27bNFKEUSnA9n5pRONtkfgAlV1
-         hHDlzkutgBzEgC3HCKsEupdfoS5rJk/Wb0z2GZSf0ecCdq2vYQqMVtHcms5Ug92WajFy
-         LBvF7r6v1/+Q6ZlBaIqkQDdl9QNoGcy/MzdZsXNJJnqGBT5IvQJpnuZEGetj7rl5gZVA
-         CEFScggywU8ukObGt1noOM2qzWmvSQkCSoRkCSOi5Z3Nw44Xx8R80uXWbmI183JUEA5x
-         dETQ==
-X-Gm-Message-State: AFq9FYKircrLf7ENrf5FYX7y3oU7B632Lyx8+o86V3qf+R87g0c9HMIf
-	gDUc6/JgNlU2XG9Sk6biUHWjbpXBymTrdGgZiAtrRw8i50e4e/7xWQ/u
-X-Gm-Gg: AYBFou2eyANVweDUvaIEJw8B3ariZLzux0Zozs0thse3l8sYS5G+Fgbup+VWxJAnZj5
-	Wu1wgxACB4jOKQIHgdDsP+MF4DW10QJUKqg1WQXLQPnNb7+t8ct93tO1tUqSNtYl9aewA06E9O0
-	qTZ+/siA0mBGdmTv0Jk/EuOqqEBVQXaCtjGVpMbcL2n2ZPnHB4WvMdQDc/ylzNkQlCvzC66Yl9y
-	2iO0G+sofwnC6FELGsLKlnUYi8fo0htUR33gphsrgqiK7ULo1hKasIXX9sb8wuJ7IeUCW2Z2QPS
-	sCoYtrrK3xKYpoP2kO3KNju/yRDukWKcHGGA/7/nEHbfyOp3+q0LWH6Jw5ESshnl8AMdqQeLedK
-	vNhkRhHh0Mo4Gg6jNbdVZa5zXBvb8WcYJlzGgaicS+sexgFvyqwRDIeAGtaycvNC3XNWRvvE0jO
-	Ik6/QIkOYffIMyA1nSs/V3l9Hl+HiY/T7kMC/H8u50Et+wOErRx+iseEFwi+G7lyyXVtaUs9cXm
-	vO3z9T5wMg=
-X-Received: by 2002:a05:693c:8353:b0:34d:2c1a:9892 with SMTP id 5a478bee46e88-361a274b361mr11482466eec.40.1792426670942;
-        Mon, 19 Oct 2026 09:17:50 -0700 (PDT)
+        bh=j9/YY5ZYigZ1aqT0I55Hlkm3+bQMNT99YHPRJIImTVQ=;
+        b=NfKePHB+flpPOsebzZIG/Go2yNd5Xa3NdG53bcaJ3kaiPZVcJcK0VspabpCCNcRuqF
+         i01WapK2H844w0XI7iu6ns/f+TkdD86aMBl8tz248C3cqvO0uu/iv+GF4QCcbdD8kJuU
+         f/ZLY2wR3IlK547eJS9dUlvLbujWoQlFgugb3zciTqZn+VMcbvvnSPpRsZxAOpcacm/A
+         M4PjOlfynbZJ9T3smPkM/M3HqQFZlKdA2NTO+O0NKcKrnoe71l0x3kXeviBnJTun2nqP
+         lOOET0DaZTZZri11NzJTTpph8m7qXCwzFjfuldCnS5mOz401g+q4ncGgfuLo0LTOYczY
+         4Nfg==
+X-Gm-Message-State: AFq9FYJOn/eAetECUylR2Lx7CQxTg03eizqYfJNj+6wYgRIkUuP6/D/0
+	LfBHvwnM+2f9qBxhHrowf0n+k54sgC9C07imQmGUAZDt1p+s0VSfQlkW
+X-Gm-Gg: AYBFou3/6THsreJaE/NRhGQNGRkCEi8JMsBWkt4NviYwnzSD+Cd2y6agVzRmRpzwqVL
+	e1j9IwD4l/UaibteFb2rKtHMx36pC3fQznwUoiRZuWPPvq0oYpXtnrJMQX/1gKdmlHVU7cEZ9uI
+	zneXoGJ8YrfTD4vPlFcFc0rdYStzDAeNTJswePWpUzWyFO3DbbWprA69i8YBsmccGn2pEWPp0Wm
+	Vwg/rm7n5VvFtFJkQzUi6hlGjdO/4Fgu416Tw5echU5G510hXI1NGef9Ur1Ct/xzWpr618X5Stl
+	EJmG+wn+6m+gD9suR0Fcxw79IPoetg1GJ/KEPjKfFC7rEOucxsGqCTNf+ghNs4BtphVrCpklPpp
+	SovgIMNeC4CLhX+wzoTWMIfdr4QmqFDHrlCJsRPC+8H7ZilSceLm+gXdrxkV8yPjB9iYKU1udSG
+	nzzmSTx6krRO0EV9hGM0EV87YgQbhslqL12l+qfOAvGB0/sC+itX8bUj2uBd9rB6yX9pcIV/Rpl
+	NQJ0gvzT7o=
+X-Received: by 2002:a05:7301:4614:b0:35b:3181:80e9 with SMTP id 5a478bee46e88-361a185eba9mr9880037eec.20.1792426675354;
+        Mon, 19 Oct 2026 09:17:55 -0700 (PDT)
 Received: from redducc.localdomain ([183.83.156.125])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm33410985eec.13.2026.10.19.09.17.46
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-360819be413sm33410985eec.13.2026.10.19.09.17.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 09:17:50 -0700 (PDT)
+        Mon, 19 Oct 2026 09:17:54 -0700 (PDT)
 From: redducc <sushmit718@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Abel Vesa <abelvesa@kernel.org>,
@@ -87,9 +87,9 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org,
 	linux-clk@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/3] clk: qcom: gcc-sm8450: Parent the eUSB3 clkref to bi_tcxo
-Date: Mon, 19 Oct 2026 16:17:38 +0000
-Message-ID: <20261019161740.2384-2-sushmit718@gmail.com>
+Subject: [PATCH 2/3] clk: qcom: camcc-sm8450: Retain flops across camera GDSC collapse
+Date: Mon, 19 Oct 2026 16:17:39 +0000
+Message-ID: <20261019161740.2384-3-sushmit718@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261019161740.2384-1-sushmit718@gmail.com>
 References: <20261019161740.2384-1-sushmit718@gmail.com>
@@ -104,35 +104,154 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-gcc_eusb3_0_clkref_en gates the XO reference to the eUSB2 PHY, but it
-has no parent, so its rate reads as 0. On SM8475 the SNPS eUSB2 PHY
-takes this clock as its reference and rejects a 0 Hz rate as
-unsupported, so USB doesn't probe.
+The camera GDSCs are collapsed between camera sessions. Without flop
+retention and with the default clock-disable wait, the IFE GDSC can
+stay stuck off when it is powered up for the next session.
 
-Parent it to bi_tcxo, as tcsrcc-sm8550 does for its clkref branches.
+Program the same wait values and set RETAIN_FF_ENABLE as camcc-sm8550
+and the downstream camera clock controller driver do for these GDSCs.
 
-Fixes: db0c944ee92b ("clk: qcom: Add clock driver for SM8450")
+Tested on the Nothing Phone (2) (SM8475) by running repeated camera
+sessions.
+
+Fixes: 6082037fe62e ("clk: qcom: add camera clock controller driver for SM8450 SoC")
 Assisted-by: LLM
 Signed-off-by: redducc <sushmit718@gmail.com>
 ---
- drivers/clk/qcom/gcc-sm8450.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/clk/qcom/camcc-sm8450.c | 45 ++++++++++++++++++++++++++-------
+ 1 file changed, 36 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-sm8450.c b/drivers/clk/qcom/gcc-sm8450.c
-index cdae5d9c8aec..56503a45b64e 100644
---- a/drivers/clk/qcom/gcc-sm8450.c
-+++ b/drivers/clk/qcom/gcc-sm8450.c
-@@ -1500,6 +1500,10 @@ static struct clk_branch gcc_eusb3_0_clkref_en = {
- 		.enable_mask = BIT(0),
- 		.hw.init = &(struct clk_init_data){
- 			.name = "gcc_eusb3_0_clkref_en",
-+			.parent_data = &(const struct clk_parent_data){
-+				.fw_name = "bi_tcxo",
-+			},
-+			.num_parents = 1,
- 			.ops = &clk_branch2_ops,
- 		},
+diff --git a/drivers/clk/qcom/camcc-sm8450.c b/drivers/clk/qcom/camcc-sm8450.c
+index 4025db23d1a9..9f1dd51db0d5 100644
+--- a/drivers/clk/qcom/camcc-sm8450.c
++++ b/drivers/clk/qcom/camcc-sm8450.c
+@@ -2930,90 +2930,117 @@ static struct gdsc titan_top_gdsc;
+ 
+ static struct gdsc bps_gdsc = {
+ 	.gdscr = 0x10004,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "bps_gdsc",
  	},
+-	.flags = HW_CTRL | POLL_CFG_GDSCR,
++	.flags = HW_CTRL | POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc ipe_0_gdsc = {
+ 	.gdscr = 0x10078,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "ipe_0_gdsc",
+ 	},
+-	.flags = HW_CTRL | POLL_CFG_GDSCR,
++	.flags = HW_CTRL | POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc sbi_gdsc = {
+ 	.gdscr = 0x100d0,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "sbi_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc ife_0_gdsc = {
+ 	.gdscr = 0x11004,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "ife_0_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc ife_1_gdsc = {
+ 	.gdscr = 0x12004,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "ife_1_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc ife_2_gdsc = {
+ 	.gdscr = 0x12050,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "ife_2_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc sfe_0_gdsc = {
+ 	.gdscr = 0x13050,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "sfe_0_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc sfe_1_gdsc = {
+ 	.gdscr = 0x13098,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "sfe_1_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.parent = &titan_top_gdsc.pd,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
+ static struct gdsc titan_top_gdsc = {
+ 	.gdscr = 0x131dc,
++	.en_rest_wait_val = 0x2,
++	.en_few_wait_val = 0x2,
++	.clk_dis_wait_val = 0xf,
+ 	.pd = {
+ 		.name = "titan_top_gdsc",
+ 	},
+-	.flags = POLL_CFG_GDSCR,
++	.flags = POLL_CFG_GDSCR | RETAIN_FF_ENABLE,
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+ 
 -- 
 2.43.0
 
