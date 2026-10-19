@@ -1,223 +1,417 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 065164FC356
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:48:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9235C4FDE7B;
+	Mon, 19 Oct 2026 13:54:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792417716; cv=none; b=ee1mnMKr3cYGPmTMgiaeh/Mvci3+nUMJVrU0PPhRfJOUPmcKbwW1/IPR8C2MHg61Ua9YihaZagGtQdzVJH8AOy1eESYlaV4n4PEdn0t2TNotfHarPszO9pZChe0zSeJRVXV77P1ctu7cGcXTWlOgX6qDo/f6I8/jbubCgujDfqo=
+	t=1792418095; cv=none; b=JF5QAXclqmIzPozsAHqlojv8VaiBQ/Srebj+2z8bxvZz1r5gdvKIchfcPt3gBb6S0tGx3EuN9qSVkk+9SyBq3gLyCvKp90BSVZ/GaErPu55gTyQASEUnHaIMfHhUDs7y7GONzeT0pkX248e3LjncmFdq0o/WQUdiTQwmgdcZR+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792417716; c=relaxed/simple;
-	bh=1hMzuROJV8vdtq+SPxtxFWcFHZLQfN64YbfzueOmtbk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hi+MvFF56tuT6mhl5C4+WHUWRBXZWzi1aicv8xEWMWkinzgLXG14SRX2yZugWCUSqwyNtze7V2IPs/DnDCXZ55EiQDRt1lCmL5sOOY5e6EZKcW7Rziv86ZHDR7TC8CrqDMLwxEu9KeIJC7NXRXaNrFMQLzLh1H//Q0sCiOQOP4M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=octoAkzr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iG1MxK0j; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792418095; c=relaxed/simple;
+	bh=CNGcuDcuFu2sOpq87WN9xTRDO6jdOapeJEMmwh+6JLs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=qGFysl7Zw705X5esfweqv1OUBJNbQjJtENUsSKfIHoi9khmNg7Cvsd3uYBZ4pCihVzyziWrozdb00I8MJTz4OIf+BVuQGtL0CJVd1+7OkrSvNN5PuMyNUyFwjwzPtspzRhqiLIavHMfpQSP0YeV7356FhtehjKZzfRbT3yrJEi8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I/j8LvVp; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="octoAkzr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iG1MxK0j"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69J8Oucq1168055
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:48:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8MQmVTCoCCyaLYdia8eZ2MhXz2oL4yullhOBRKIMS4s=; b=octoAkzrATYM594x
-	o5fjh6aHB0CI/s39uHHJs9XbOBIVK8vV6w7rNiibtcg3KYz6uu25AB5rdz+6Kprf
-	iTDfSeo9ez1vmy7KiWpRHsvwucFQayCYNu9JGCJObHBUM/T66iz2YYQZ7vE09Mpu
-	M8/NAOfTcj0IYsz94xfUun1rMxiwearodti69J316yyXicsXuLFKmJ1SJqHQqKmd
-	42XNZ1lXgS1oFKDSK4oAHK4lt8ewwCKcvO8vKgOhmczNtWSoezwDOcw8l1QzdNhF
-	GUF/jkHvtkOxqFVu2pygBHEeocYA5pgoj0AQcm9Sp6ZduKuaCZqTd/VGlirO7O6x
-	WAYHFg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf5c9byc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 13:48:27 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f322ef7d3so352950085a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 06:48:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792417707; x=1793022507; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8MQmVTCoCCyaLYdia8eZ2MhXz2oL4yullhOBRKIMS4s=;
-        b=iG1MxK0jY3Pn0m+QBM0VBeyuqeNvBJQGMqw5aymdGBKdcUKRomRYzr6HX3QoNaEyB3
-         oGX8i57DWjZrRZ1dFD2AiHBIL7Wlsfcw8Whd/NokQNerSiG0lN/caAouUaA7lLp/24+X
-         vm7yEfhUlIckp/+Rm/G9Qd19YJNnq8ImGBfWrjqTGYi6z3rYPmZbQBcpLLu5qiI1Irth
-         KDNSTbJ6zTTqfM+mTP/fFcOY9OsZ38sJcLEj64QEaLly35eHg5s21NsGBuhNuDO2WN1v
-         oBhV4sHs/2+JdJJsMTlRfu7u0BH6l4f09F0aOzX08pzpbM83Bw+ragHYn1/V2SFH5JoW
-         Df0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792417707; x=1793022507;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8MQmVTCoCCyaLYdia8eZ2MhXz2oL4yullhOBRKIMS4s=;
-        b=HZRBSShU/XmpCe9YBVuYru9NLnVHZmEX5vJSJK7jdh+2OGH058Wes82hq4BUhF2CYi
-         IbVl8EKX2Ro8OZpBqXsJviRXBDVo6STSzEfi/DfpAXsvi27016j0YGCoHNF9HO1JpTIL
-         Uk9frTEnSUh6vbYcICoOhJnKqPlc5g3vFxOsh1mOvipxcgY4YMTIXdD0P+TgEMNLzny2
-         j940JMODwNjX42YQI5YFuJxZ88s5fqwZMxImJAQ4XX1faZFUMIv2cNvn4g3RsuSiYhab
-         w++yDwZ8i1oP+ZZhtMUHUT0ynKdgjTi81gDwlIdalxAqNl2DsVsFikGpmqQ2ANOW6sMr
-         YZkA==
-X-Forwarded-Encrypted: i=1; AKwUvByemiyTkgETD71hhsDivNtMp72lQbXQxFh1+n7dHWYG0IP63alDRmUgbsWRsg+mxXpXWa6nbHIAyU3LAr4P@vger.kernel.org
-X-Gm-Message-State: AFq9FYIZm/+IDwVM2bIFksuPGi6Uq1qctffq4mMiLZRfdnSTUASZDHwW
-	OqTLD8HLYImIGVdB1CyPPSKrkRnC+VF8nHrg4e7XlVIIoC4x6s4jeKk+vbzb6BuY4Tova/eWNn+
-	IbhP8nPsmBxX+483NPGc/rdCa6V/NJMvDyhyiiaK2mT7J8i1mvWuv7ebRe+JQh6Z8tYLV
-X-Gm-Gg: AYBFou3Ma7WObWYjrjgTVjcJT0evXKcC0xJYiraynJxYagAONVth259vGHfcLSVGAio
-	V/oouvq8HPGZPyrXkfF9WASX1fBXOHOdx0qhthLTy/h3+DIozCF6eZt+R7dFZQNQ9KbcHD/9qOa
-	hlgTf11bEsgbGhrHkL+ruY8ABYu7wYWGt8JJbAFDYWPsRTcRnGetCWze6vJ1Q0dwThjFyEJCsoG
-	uubOyfmJUxhRQXeXuzuGpMQpZLcz073ORoMq/dtcuIL72uzgTMmhooNY9pOw2MnhyZXdHPfJvaH
-	ySwP9JUDiYwLN6InDdf/FalH/9gDs10OKK5yhKMNI4WGQkZKk7siktBxgIGsyfMuMgtn+A6JB7s
-	rwLzJxnLDPUaGIQfKIQMgOMJEDm0O
-X-Received: by 2002:a05:620a:708d:b0:93e:96e0:25b8 with SMTP id af79cd13be357-93f29d3983bmr1284664985a.42.1792417706909;
-        Mon, 19 Oct 2026 06:48:26 -0700 (PDT)
-X-Received: by 2002:a05:620a:708d:b0:93e:96e0:25b8 with SMTP id af79cd13be357-93f29d3983bmr1284659685a.42.1792417706244;
-        Mon, 19 Oct 2026 06:48:26 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4c4fc4sm20595574f8f.15.2026.10.19.06.48.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 06:48:25 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 15:48:10 +0200
-Subject: [PATCH v11 3/3] crypto: qce - Use fallback for CCM with a
- fragmented payload
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I/j8LvVp"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 498271F000C7;
+	Mon, 19 Oct 2026 13:54:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792418092;
+	bh=+ttW6Xwu84Ja9gEy06XJgOr5fUPFdW2KSIAQeSluxBk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=I/j8LvVprINv46Kx5a6228wHfi/w2wdUqH2bdbMc5zzuri8OGvcvT4U0wz213ZDlR
+	 9cywME0UJ0uPQ5o2h0ZT9OtQSbSm+b7kiJ5APQ2J3StgKAwAvCRNoZ7Y6rhrJybuAd
+	 H0Jh14Visy5+3hGn9UFdoGEsxErvWFFRrn0vx3Rdwv1MQWI5zHxR1gI1thLoB+eOmr
+	 DD1vlRwBe5GCTVxnHZomYt6Ev1UCXfoOxCqmKVzXj2fSoDc3nLgyG/2tVnkHYvpzNW
+	 6V7QuklJumEOP1uRzhahwknV5/2aox10+kZE4RD3y1WtkcBulcw0VrK7oH5fibFqph
+	 qB/RJDo63hXWw==
+From: Sasha Levin <sashal@kernel.org>
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Cc: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Will Deacon <will@kernel.org>,
+	Sasha Levin <sashal@kernel.org>,
+	robin.clark@oss.qualcomm.com,
+	joro@8bytes.org,
+	iommu@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH AUTOSEL 6.18-6.6] iommu/qcom: Enable clocks before hardware access in qcom_iommu_ctx_probe()
+Date: Mon, 19 Oct 2026 09:44:58 -0400
+Message-ID: <20261019135441.1420968-7-sashal@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261019135441.1420968-1-sashal@kernel.org>
+References: <20261019135441.1420968-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-qce-fixes-aead-v11-3-11c55cc7a695@oss.qualcomm.com>
-References: <20261019-qce-fixes-aead-v11-0-11c55cc7a695@oss.qualcomm.com>
-In-Reply-To: <20261019-qce-fixes-aead-v11-0-11c55cc7a695@oss.qualcomm.com>
-To: Bartosz Golaszewski <brgl@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eneas U de Queiroz <cotequeiroz@gmail.com>,
-        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Eric Biggers <ebiggers@kernel.org>,
-        Demi Marie Obenour <demiobenour@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Russell King <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        stable@vger.kernel.org, Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2870;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=1hMzuROJV8vdtq+SPxtxFWcFHZLQfN64YbfzueOmtbk=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBq1h+hpWfGBIuia6d4nh65sDa9I1HnX7UAYTmxX
- Qm8J54iRtaJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCatYfoQAKCRAFnS7L/zaE
- w/PGEACl3i46kg1CwlzXm6p0G837vMiZAHNmWcJ9otgezPC7qpCJS5XVeo59XpfZ+0VoHuRAZUs
- lVlhL7+Mzj8AoNHkdaLRkKuxHIRNt2nQNmZd0OnMXBHHceMcvrQmFYak5xuE0/dfT5ac+A5bZSs
- 5O8t8r9itJ4ozXLrUpwyiieTp7yb/LZ86a5PGx42L/deEhWkB/UWNN3y3dy53v+BVqSLUjsWjIJ
- ahIP7a3rCfbUHW91vuQ7kdcoLH7WVmlkOyL9Cxd+nGqUzqT/WQJy/0UYBWkKPTOrIh/RZ4GeVe0
- HUy4Yii9pS2xuDJKk8cboV7BaE6lBRaoYnhqzoyqgy1sA2K8836OcYP9QzQBEGi7R3BMlewL0GH
- mBXfFwzavEeOqY2JRsvjeDVWqOa5e4CAt05ghZe6OPeN6RTJM4kCfpUrMkLxoTJ8TcPN0BzfLjc
- gsx86zQHV9YBgH9vp4TdSUA9sBbEfvughVTYc1PN69bpUwFiOm0Hqux945Q12ZbK0EoOtm62Hwk
- IIgFQKPv7/dceFXCJzW28u2i7d+X1fk+rqG5hYCdMv/iPI4ZzCoc4pEjazfJYojoZG6OYrakz6Q
- D2gA8CT6L+JiVHJ50WkekWRAWAcuV/I/weDSjFDpbcrBLApNQwaiHX5I9uxEoHyl6zoaCI15CTI
- pAKLwAIQIRk4IzA==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1NCBTYWx0ZWRfX+IW18obznY0i
- wXVS9GWrhA3FWd+fW/Jt79CSgv+c2HYmm4wSC9UWlfZvoBHe7DF7UAVidsmYOEUZlCukFAdoAv5
- u8sI4NomQL3eTxPvW00l/FbMfboWezw=
-X-Proofpoint-ORIG-GUID: OHHDJypu84usy0bXFDTpEEDRea9vxl9m
-X-Proofpoint-GUID: OHHDJypu84usy0bXFDTpEEDRea9vxl9m
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1NCBTYWx0ZWRfXwRnwUH/JPtyL
- po90Wg0p+H/H1XPhnVjtwnQ/fCoHbdSMLteMGLhgUB6njGVIuQs8dbY8ALgH/lRBZAaTl4hMzjR
- YZCIu1qcr+1tFyQyxKvDBZmLR5JpsmACLLW6tqDnSg8RcQBg+wNCsXYllCeB1GS3j5va/62iPPs
- wwxkHzWgeBuiSWwYgwR7Pekv0l1d6lzRDZ81nSoNbLX6n/dRygijMjHKyTLztPxxMihM/9ZP4a1
- i8YBTirxCifAKGkowAuLhCEVL6gNqoC/ZV9pqC6qfh4HjHKbst4hzrzidTDoCkaxsJWc4uG1Fs/
- 32vwYrtGyoRkyfrnC07FF6q6qDksGiHfT5czNZwR0z2JZA6DsM4Wgnj+ucAVqPyadyqL1JLvL1j
- K2uX5Eq4McCo9VczmFkEzkTc1Tni37CWny91UiIgxDQItr7ZMCvrwhicd6qiR1/eaiwW+8ZreuS
- zbFDXt4aiUcVFdQiQmw==
-X-Authority-Analysis: v=2.4 cv=K6O3jCWI c=1 sm=1 tr=0 ts=6ad61fab cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=phyxH6jkQibGXiXynFEA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 bulkscore=0 impostorscore=0 malwarescore=0
- adultscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190054
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.18.57
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The crypto engine reliably processes CCM only when the message payload
-is a single contiguous buffer. The associated data is already linearized
-into a bounce buffer before being submitted, but when the payload itself
-is split across multiple scatterlist entries the engine stalls waiting
-for input and the request fails with a hardware operation error. This
-was uncovered by the crypto self-tests, which feed the algorithms
-randomly fragmented buffers.
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 
-Detect a payload that spans more than one scatterlist entry (in either
-the source or the destination, skipping past the associated data) and
-route the request to the software fallback.
+[ Upstream commit cb776a03a53429aa59e25a8cbc3d1a48bd11afdb ]
 
-Cc: stable@vger.kernel.org
-Fixes: 9363efb4181c ("crypto: qce - Add support for AEAD algorithms")
-Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Tested-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+qcom_iommu_ctx_probe() reads and writes the CB_FSR register to clear any
+stale IRQ left by the bootloader. This happens during
+devm_of_platform_populate() which is called from the parent device's
+probe before any pm_runtime_get(). The parent's clocks (iface, bus, tbu)
+are therefore not guaranteed to be on, making the register access
+unreliable on rebind or after a suspend cycle.
+
+Use pm_runtime_resume_and_get() on the parent device to ensure clocks
+are enabled before the register access, and release the reference
+immediately after.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Signed-off-by: Will Deacon <will@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/crypto/qce/aead.c | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
-index f34e4feb3004d9bf63c2c8b2aeb3975d86ac486b..ecc33570804fa435db9ec9fd6fbf38c3c8708e2e 100644
---- a/drivers/crypto/qce/aead.c
-+++ b/drivers/crypto/qce/aead.c
-@@ -498,7 +498,8 @@ static int qce_aead_crypt(struct aead_request *req, int encrypt)
- 	struct qce_aead_reqctx *rctx = aead_request_ctx_dma(req);
- 	struct qce_aead_ctx *ctx = crypto_aead_ctx(tfm);
- 	struct qce_alg_template *tmpl = to_aead_tmpl(tfm);
--	unsigned int blocksize = crypto_aead_blocksize(tfm);
-+	unsigned int blocksize = crypto_aead_blocksize(tfm), authsize;
-+	struct scatterlist __sg[2], *msg_sg;
- 	bool fallback = ctx->need_fallback;
- 
- 	rctx->flags  = tmpl->alg_flags;
-@@ -523,6 +524,27 @@ static int qce_aead_crypt(struct aead_request *req, int encrypt)
- 	if (IS_CCM(rctx->flags) && !IS_ALIGNED(rctx->cryptlen, AES_BLOCK_SIZE))
- 		fallback = true;
- 
-+	/*
-+	 * The CE reliably processes CCM only when the message payload is a
-+	 * single contiguous buffer. The associated data is linearized into a
-+	 * bounce buffer before being handed to the engine, but a fragmented
-+	 * payload makes the engine stall waiting for input, so route those
-+	 * requests to the fallback.
-+	 */
-+	if (IS_CCM(rctx->flags)) {
-+		authsize = ctx->authsize;
-+
-+		msg_sg = scatterwalk_ffwd(__sg, req->src, req->assoclen);
-+		if (sg_nents_for_len(msg_sg, rctx->cryptlen +
-+				     (encrypt ? 0 : authsize)) > 1)
-+			fallback = true;
-+
-+		msg_sg = scatterwalk_ffwd(__sg, req->dst, req->assoclen);
-+		if (sg_nents_for_len(msg_sg, rctx->cryptlen +
-+				     (encrypt ? authsize : 0)) > 1)
-+			fallback = true;
+LLM Generated explanations, may be completely bogus:
+
+## Phase 1: Commit message forensics
+
+**Step 1.1: Subject line**
+Record: **[iommu/qcom] [Enable] clocks before hardware access in
+`qcom_iommu_ctx_probe()`**
+“Enable” here is a missing power/clock step before MMIO, not a new
+feature.
+
+**Step 1.2: Tags**
+Record:
+- `Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>`
+- `Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>` (author)
+- `Signed-off-by: Will Deacon <will@kernel.org>` (IOMMU/SMMU maintainer)
+- No `Fixes:`, `Reported-by:`, `Tested-by:`, `Acked-by:`, `Link:`, or
+  `Cc: stable` (absence is expected)
+
+**Step 1.3: Body**
+Record:
+- **Bug:** `qcom_iommu_ctx_probe()` reads/writes `CB_FSR` to clear a
+  stale bootloader IRQ during `devm_of_platform_populate()`, which runs
+  from the parent probe **before** any `pm_runtime_get()`. Parent clocks
+  (`iface`, `bus`, `tbu`) may be off.
+- **Symptom:** Register access is **unreliable on rebind or after a
+  suspend cycle**.
+- **Root cause:** Child MMIO without a runtime-PM resume of the parent
+  that actually enables the clocks.
+- **Fix:** `pm_runtime_resume_and_get(dev->parent)` around the FSR
+  access, then `pm_runtime_put_sync()`.
+- No stack trace, syzbot, or version range in the message.
+
+**Step 1.4: Hidden bug fix?**
+Record: Yes. The subject sounds like enablement, but this is a
+correctness fix for MMIO with clocks gated.
+
+---
+
+## Phase 2: Diff analysis
+
+**Step 2.1: Inventory**
+Record:
+- File: `drivers/iommu/arm/arm-smmu/qcom_iommu.c` (+6 / −1)
+- Function: `qcom_iommu_ctx_probe()`
+- Scope: single-file, surgical
+
+**Step 2.2: Flow change**
+Record: **Before:** if the context is not secure, immediately
+`readl`/`writel` `ARM_SMMU_CB_FSR`. **After:** same access, but only
+after a successful parent `pm_runtime_resume_and_get()`, then
+`pm_runtime_put_sync()`. Resume failure fails probe. This is the child
+probe path invoked from parent `devm_of_platform_populate()`.
+
+**Step 2.3: Bug mechanism**
+Record: **Hardware access / PM correctness.** Clocks are enabled only in
+`qcom_iommu_resume()` via `clk_bulk_prepare_enable()`. Parent probe
+order is `devm_pm_runtime_enable()` then `devm_of_platform_populate()` —
+RPM enable does not turn clocks on. The parent already wraps its own
+`SMMU_INTR_SEL_NS` write with resume/get; the child FSR access did not.
+
+**Step 2.4: Fix quality**
+Record: Obviously correct and matches the parent’s existing pattern.
+`pm_runtime_resume_and_get()` drops the usage count on failure, so there
+is no extra `put` needed. Regression risk is low: resume runs after
+clocks/drvdata are set; multiple context banks each get/put
+independently. No API or data-structure change.
+
+---
+
+## Phase 3: Git history
+
+**Step 3.1: Blame**
+Record: FSR-clear comment and access come from **`0ae349a0f33fb0`
+(“iommu/qcom: Add qcom_iommu”, Rob Clark, 2017-08-09)**, first in
+**v4.14-rc1**. Secure-ctx skip is from `e30c960d3f44b7` (2023). The bug
+is old, not recent.
+
+**Step 3.2: Fixes: tag**
+Record: None. The introducing commit is `0ae349a0f33fb0`, present in
+this tree (`git merge-base --is-ancestor` succeeded).
+
+**Step 3.3: Related file history**
+Record: Same-day series by Mukesh Ojha (v2 6/6 “Misc Fixes”):
+1. `1f33b8208a197` inverted fault report
+2. `bf69e515b1802` `devm_pm_runtime_enable()` (cleanup)
+3. `e910315ae08a2` check RPM return on parent `SMMU_INTR_SEL_NS` write
+4. `3c748a5554f96` pgtbl_ops leak
+5. `a05b67cd45ad0` pgtbl_ops publish vs mutex
+6. **this commit** `cb776a03a5342`
+
+This patch does not need 2–5. It only uses
+`pm_runtime_resume_and_get()`, present since `dd8088d5a8969`.
+
+**Step 3.4: Author**
+Record: Qualcomm engineer; series reviewed by Konrad Dybcio (Qualcomm)
+and applied by Will Deacon. Not a drive-by.
+
+**Step 3.5: Dependencies**
+Record: Standalone. Applies to the pre-commit `ctx_probe` body in this
+tree. No new helpers.
+
+---
+
+## Phase 4: Mailing list
+
+**Step 4.1: Original discussion**
+Record:
+- Lore/msgid: https://patch.msgid.link/20260717144608.3216274-7-
+  mukesh.ojha@oss.qualcomm.com
+- v1: `[PATCH 7/8]` 2026-06-23, same diff
+- v2: `[PATCH v2 6/6]` 2026-07-17 (dropped unrelated 6/8 and 8/8)
+- Cover: “Series to address fixes in legacy qcom_iommu driver”
+- Konrad Reviewed-by on v1 7/8 with no requested changes; v2 unchanged
+- Will: “Applied to iommu (arm/smmu/updates)”
+- No NAK, no `Cc: stable` request
+
+**Step 4.2: Recipients (`b4 dig -w`)**
+Record: Will Deacon, Joerg Roedel, Robin Murphy, Rob Clark, Konrad
+Dybcio, iommu@lists.linux.dev, linux-arm-msm, linux-arm-kernel.
+
+**Step 4.3: Bug report**
+Record: No external bugzilla/syzbot. Qualcomm-authored; trigger
+described as rebind / post-suspend.
+
+**Step 4.4: Series**
+Record: Independent of the other five patches. Same pattern as patch 3/6
+on the parent.
+
+**Step 4.5: Stable list**
+Record: **UNVERIFIED** — lore.kernel.org returned 403; no stable thread
+in the saved mbox.
+
+---
+
+## Phase 5: Code semantics
+
+**Step 5.1: Functions**
+Record: `qcom_iommu_ctx_probe()` only.
+
+**Step 5.2: Callers**
+Record: Sole caller is `.probe = qcom_iommu_ctx_probe` on
+`qcom_iommu_ctx_driver`. Invoked from `qcom_iommu_device_probe()` →
+`devm_of_platform_populate()`. Device-init / bind path, not a syscall
+hot path.
+
+**Step 5.3: Callees**
+Record: `pm_runtime_resume_and_get(parent)` → `qcom_iommu_resume()` →
+`clk_bulk_prepare_enable()` (and optional `qcom_scm_restore_sec_cfg`);
+then `iommu_readl`/`iommu_writel` `ARM_SMMU_CB_FSR`; then
+`pm_runtime_put_sync()`.
+
+**Step 5.4: Reachability**
+Record: Yes, on every non-secure context probe for `qcom,msm-iommu-v1` /
+`v2`. DT users include MSM8916/8917/8937/8939/8953/8976. First boot
+often still has bootloader clocks; **rebind, deferred probe after
+`clk_disable_unused`, and probe after suspend/remove** can have clocks
+off. Unprivileged users do not trigger this directly; driver
+bind/suspend does.
+
+**Step 5.5: Similar patterns**
+Record: Parent already does resume/get around `SMMU_INTR_SEL_NS`
+(`e910315ae08a2`). This is the matching child-side hole.
+
+---
+
+## Phase 6: This checkout
+
+**Step 6.1: Buggy code in this tree?**
+Record: **Yes.** Tree is **v7.3-rc4** (`VERSION=7 PATCHLEVEL=3
+SUBLEVEL=0 EXTRAVERSION=-rc4`, `git describe`:
+`v7.3-rc4-27-gf0100363d8c37`). Driver and FSR-clear exist since v4.14.
+Candidate `cb776a03a5342` is already an ancestor of HEAD (merged via
+`iommu-updates-v7.3`, in v7.3-rc1). Pre-commit code still has the
+unguarded FSR access.
+
+**Step 6.2: Backport difficulty**
+Record: Clean apply on this file’s `ctx_probe`. Needs
+`linux/pm_runtime.h` (already included) and
+`pm_runtime_resume_and_get()` (in this tree).
+
+**Step 6.3: Related fixes already here**
+Record: The candidate itself is already in this 7.3-rc4 tree. No
+alternate FSR-clock fix besides this commit.
+
+---
+
+## Phase 7: Subsystem
+
+**Step 7.1**
+Record: **iommu / Qualcomm legacy SMMU** (`drivers/iommu/arm/arm-
+smmu/qcom_iommu.c`). **IMPORTANT** for those SoCs (DMA/IOMMU), not core-
+mm/VFS. `CONFIG_QCOM_IOMMU`, `depends on ARCH_QCOM`.
+
+**Step 7.2**
+Record: Mature “legacy qcom_iommu” driver; low churn except this 2026
+fix series.
+
+---
+
+## Phase 8: Impact and risk
+
+**Step 8.1: Who**
+Record: Qualcomm MSM IOMMU v1/v2 platforms (older/mid-range SoCs still
+in LTS images), not all machines.
+
+**Step 8.2: Trigger**
+Record: Child probe with parent clocks off: driver rebind, probe after
+`pm_runtime_force_suspend` on remove, deferred probe after unused clocks
+are gated. Not every boot. Not a userspace exploit path.
+
+**Step 8.3: Failure mode**
+Record: MMIO to a clock-gated SMMU context bank. On these platforms that
+is typically a **bus timeout / NOC hang / SError**, or a failed FSR
+clear so a bootloader IRQ fires as soon as `devm_request_irq()` runs.
+Severity: **HIGH** (probe hang/abort), not a confirmed UAF/CVE.
+
+**Step 8.4: Risk-benefit**
+Record: **Benefit: medium-high** for affected hardware (prevents bad
+MMIO during probe). **Risk: low** (6 lines, existing RPM API, same
+pattern as parent). Ratio favors backport.
+
+---
+
+## Phase 9: Synthesis
+
+**For:**
+- Real bug: FSR MMIO before parent clocks are enabled; present since
+  v4.14.
+- Can hang or fail IRQ clear on rebind / post-suspend / deferred probe.
+- 6-line, obviously correct; reviewed by Konrad, applied by Will.
+- Standalone; no new API.
+- Same RPM wrap the parent already uses for `SMMU_INTR_SEL_NS`.
+- Driver still used (MSM8916-class DT).
+
+**Against:**
+- No `Reported-by` / syzbot / crash log.
+- Message says “unreliable”, not “panic”.
+- Not a universal hot path.
+- Lore stable search could not be fetched (403).
+
+**Unresolved:** Exact production crash vs silent bad read on every SoC
+variant — not verified beyond Qualcomm’s description.
+
+**Stable rules:**
+1. Obviously correct and tested? **PASS** (review + maintainer apply;
+   pattern already in-tree)
+2. Real user-facing bug? **PASS** (clock-gated MMIO on probe/rebind)
+3. Important (crash/hang/corruption)? **PASS** (HIGH: interconnect hang
+   / SError / stale IOMMU IRQ)
+4. Small and contained? **PASS** (6 lines, one function)
+5. No new features/APIs? **PASS**
+6. Applies to this tree? **PASS** (driver and RPM API present)
+
+**Exception category:** none (not an ID/quirk/DT/build/doc add). It is a
+normal small driver bugfix.
+
+This tree is v7.3-rc4 and already contains `cb776a03a5342`; that is the
+upstream commit, not a reason to reject on merit. The buggy FSR-without-
+clocks path is in this driver and has been since v4.14. The fix is
+small, local, and prevents a real probe-time hardware access failure on
+Qualcomm IOMMU platforms.
+
+### What it solves for stable users
+Without the RPM get, context-bank probe can touch `CB_FSR` while
+iface/bus/tbu clocks are off. That is the same class of bug the parent
+already fixed for `SMMU_INTR_SEL_NS`. On rebind or after suspend/remove
+(and on deferred probe after unused clocks are disabled), that access is
+a hang or a missed IRQ clear, then a surprise fault IRQ.
+
+### Risk vs benefit
+Benefit is avoiding probe-time MMIO with clocks gated on still-shipping
+MSM IOMMU v1/v2 boards. Risk is a few lines of standard
+`resume_and_get`/`put_sync` around an existing register poke. No locking
+or API change.
+
+### Concerns
+No public reproducer. Independent of the rest of the “Misc Fixes”
+series. `pm_runtime_resume_and_get()` is already in this tree.
+
+Verification:
+- [Phase 1] Tags: Reviewed-by Konrad Dybcio; SOBs Mukesh Ojha, Will
+  Deacon; no Fixes/Reported-by/Cc-stable
+- [Phase 2] Diff: +6/−1 in `qcom_iommu_ctx_probe()` wrapping FSR MMIO
+  with parent RPM get/put
+- [Phase 3] Blame: FSR clear from `0ae349a0f33fb0` (v4.14-rc1); ancestor
+  of HEAD
+- [Phase 3] Series mates `bf69e515b1802` / `e910315ae08a2` are not
+  prerequisites
+- [Phase 3] `pm_runtime_resume_and_get` from `dd8088d5a8969`; ancestor
+  of HEAD
+- [Phase 4] `b4 dig -c cb776a03a5342`: https://patch.msgid.link/20260717
+  144608.3216274-7-mukesh.ojha@oss.qualcomm.com
+- [Phase 4] `b4 dig -a`: v1 7/8 identical diff; Konrad R-b; v2 applied
+  by Will; no NAK
+- [Phase 4] Cover letter: “fixes in legacy qcom_iommu driver”
+- [Phase 4] UNVERIFIED: lore.kernel.org/stable HTTP 403
+- [Phase 5] Only caller: platform `.probe` via
+  `devm_of_platform_populate()` from parent probe
+- [Phase 5] Resume path enables clocks in `qcom_iommu_resume()` →
+  `clk_bulk_prepare_enable()`
+- [Phase 6] `git describe HEAD` = v7.3-rc4-27-gf0100363d8c37; `make
+  kernelversion` = 7.3.0-rc4
+- [Phase 6] `git merge-base --is-ancestor cb776a03a5342 HEAD` succeeded
+  (fix already in this 7.3 tree)
+- [Phase 6] Pre-image of the commit still has unguarded
+  `iommu_writel`/`iommu_readl` on `ARM_SMMU_CB_FSR`
+- [Phase 8] Failure mode: clock-gated SMMU MMIO → hang/SError or stale
+  fault IRQ; severity HIGH
+- UNVERIFIED: no captured oops from a reporter
+
+**YES**
+
+ drivers/iommu/arm/arm-smmu/qcom_iommu.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+index fbe4bd3ec0c42..792585321bd11 100644
+--- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
++++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+@@ -704,8 +704,13 @@ static int qcom_iommu_ctx_probe(struct platform_device *pdev)
+ 	/* clear IRQs before registering fault handler, just in case the
+ 	 * boot-loader left us a surprise:
+ 	 */
+-	if (!ctx->secured_ctx)
++	if (!ctx->secured_ctx) {
++		ret = pm_runtime_resume_and_get(dev->parent);
++		if (ret)
++			return ret;
+ 		iommu_writel(ctx, ARM_SMMU_CB_FSR, iommu_readl(ctx, ARM_SMMU_CB_FSR));
++		pm_runtime_put_sync(dev->parent);
 +	}
-+
- 	/* If fallback is needed, schedule and exit */
- 	if (fallback) {
- 		aead_request_set_tfm(&rctx->fallback_req, ctx->fallback);
-
+ 
+ 	ret = devm_request_irq(dev, irq,
+ 			       qcom_iommu_fault,
 -- 
-2.47.3
+2.53.0
 
