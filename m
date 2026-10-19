@@ -1,214 +1,219 @@
-Received: from mail-244122.protonmail.ch (mail-244122.protonmail.ch [109.224.244.122])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91F2051E456;
-	Mon, 19 Oct 2026 14:18:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.122
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3DE34DEC05
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:30:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792419500; cv=none; b=D+dzAa3q/19L/jD3fprz2vkmPaPA2/t6fq4TzWL8u15cguzMz1XnrVzusxer70kqPbMevvzYt61jF9eUIUp4VrvjgKpdkKekKZiV/CK6EpYRmM93s7nNjqcwJi/izfmHMNFDpzhZjI9wZ5mo7a1YTriLgn+7+8wIB66Dfc0VILM=
+	t=1792420222; cv=none; b=DzBkBqYRUoYtOp1Y7ndbf3C+b/VM65mE+lx/e5f0rIhLQaXirtwuZHYgevohAZIx0D51MtZJ93xItUQRBMmJ2co5zSaxbLTJ79GrpC5bNiykcI0zhqB7UH+ndK7b34V9Bnb9V8xJ3QKHZZ3CeR3VyVwuKEihY1XKbBpviGycBdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792419500; c=relaxed/simple;
-	bh=o1LIOxVpr/1oZ+zQn/5uQ24QCB9UMm5+1Q0bvlvsIM8=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=O82lckyepfyBLheY2qVgX6MBC2DX+3Y+AohYmeOcigQqcifMNjtmKl3PtyTjKF6S0sd2Yz8SZSuyv4lMT+J4PMFVnVhFI2pRSLgg2ccEkViqIE1rXFXM0cCsULlUQ7W3kr2rXjv/26gChHW/btE2hhNqHbgQtgRVS2+lWb4xL2M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=ngXmdZJj; arc=none smtp.client-ip=109.224.244.122
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1792420222; c=relaxed/simple;
+	bh=mLKnD6F7P/KVdV48EhUstdthV0Z+5LNyadUX7Ky+DkQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=mTfAp9uq35XJFULAbrjBmdtMmyipAJvG1t28gB6F16JDfkFuXKBpre0befXa5n8uFfM36q7Liv+an8Lc8CseUZCWzpv2EmIBlVfx4lYAuixhnr4bbnvXIGgsNneGtARpWtsJjGcet1HOidHPU6WwMogqjwnNbnE/9HDJ+FfIq+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jN8BjKSj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=J660YCC9; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="ngXmdZJj"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1792419489; x=1792678689;
-	bh=vfhb/pw7ZRssM1iSnmUYJHw+k4HI9miwD0VnZdHZ0vw=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=ngXmdZJjjwxURfClkly1Om92g5hGnWIfdUkG2j5zwqw7Uh9/4UnURQMZE/16Dc6jD
-	 Wb64qEFH4D+PbcJW7YQz2Ul8GfvaKWEizKAvkXx7RM3pIbeSqrIDx0lU4w7rlTxFlx
-	 gv+vjoOLEWtV5VD5GS82xKmTmvSaNAKSZZ5mU7+w4L6QOEm2QIULXsWjIJDjPzOhqf
-	 SRFsRfaHKXTWMB6gmRaqnjDMFhlowSSWXSA1xhto709pylV3tXZ4Yiem4QACXDXukU
-	 B/oH+HrMKOPWVwzPkCDBlgZjdfGArUhyynbpOKuhjRRNgPqYnuA6JphuUMins3fqTm
-	 H/92m2YglBa6w==
-Date: Mon, 19 Oct 2026 14:18:04 +0000
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Alexander Koskovich <akoskovich@pm.me>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-From: Alexander Koskovich <akoskovich@pm.me>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>
-Subject: [PATCH v5] arm64: dts: qcom: milos: Add Iris VPU v2.0
-Message-ID: <20261019-milos-iris-v5-1-2b3181876b2f@pm.me>
-Feedback-ID: 37836894:user:proton
-X-Pm-Message-ID: a1d94aa0b0875273cccb46d6216dff97cefabfd1
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jN8BjKSj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="J660YCC9"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JE0GRU2629256
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:30:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=9hb//hYgrxgYhQ/JjWESlh
+	7cLZSKlG04cGHqK3c8yCw=; b=jN8BjKSjmbFtSl58H1sPA3QASOXaYNh9DacLSF
+	bl1QHGa0byHIXpyyQe5+1l9cYBUJnsyhI5XV4t22JhNqUKHjsJfRFq+QFDdyw2F/
+	T+tDx2li3+Ah2m1uK0Dhb4w+XBaSCiHJRlXWn9dFpxUojktL5MTjftCTz5IR04Jm
+	+k38Y5B7+I6BRaAmH1RRHrYKgGDLFF2o7k5rYXvTYP7Qc38AIBOkXE/vVS4W234e
+	jW4GcY6kX4wyPNCuLdSm+v6gDi7AMJZf/rOgYCwoxoNZjNJrfvPMjuSOI380ZEsE
+	yMEege1yhkBy/3IWUlXyv0ynwM7poHwXE16TObvaUyYbXGqg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdkmfgfgf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:30:19 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-934956beec8so470276985a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792420219; x=1793025019; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=9hb//hYgrxgYhQ/JjWESlh7cLZSKlG04cGHqK3c8yCw=;
+        b=J660YCC9fvRA/K+NZKgy0KReTFTZzFUj82M2Z0wCGH2TNQHE9qzT9lD9aYvYd2sbMZ
+         iGr0MK8QBR9emQoBJo4TMW+7kNJu1ZuW5+L4C16WbZoq1Gc6IKunpRntbxgVSZ9zleyF
+         GYQgRBnA3JWRJZErF2S13XABSugH0IT4U/cNp68jjBtA15cuCLLnuI0yVBp1oHTqgQS/
+         p+rXT+xeNSwehxAsnVoDRAjd6+dhEUfwnarXdA1cjFmZ/LkScqpQMmtEZoGV/Ji3syDh
+         njuPzpnXCuMgTaK5wMsSxj5ddhpmLpvjW47wj0rpRh1WG5KOsRpzziu8mV5AmF1cDBku
+         0YWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792420219; x=1793025019;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=9hb//hYgrxgYhQ/JjWESlh7cLZSKlG04cGHqK3c8yCw=;
+        b=jKs78p1cp/lOGQ87OndB9ggsz5ndbXWh0Z+hGsRrC5RWaSuT5FF4vmjBgQL3jvfAvp
+         41WFQlQnqhSSnbXEe5gsBJRqW/q5c3OMUpo6VPXNBzqfjuicQJrGM82IWTwtX1NVVLPH
+         takL/P3gfYGtCdd/x+6nrwQECikec9g3cNskAx4AaeULK2YKw8H+Jm8hHW9VW//OuLWJ
+         ewxMmVzODekrfei3LSE+qQM5a5tlSKhTEfclHMDKAS/vGmOAi5BhaPUyMss61ot/rVQi
+         tNr1juIbc02LXfPqZj2AMaWP8LEpHJmHKsTLLhVdLubjJDPzstID4L10dpzxvrA6edM9
+         61Fg==
+X-Gm-Message-State: AFq9FYL3DIo0JqJXw6fNEqKsNU+Z23mI7NblRILc4qhB0PZ7cIWxeikL
+	ju2EL9TnurWT+Un+160eJGNrDBehwij/xjq28GASICtTuqLKZ/viKJxeiVwR4lanOFyra3OR7x4
+	nH4fEteIVunwcQYylxsKKdqK5guMVMZ5rneSlDYDU0deeQW0mijpoYFGU8GWNq7JY+Q7v
+X-Gm-Gg: AYBFou3Mr1zcXSdyk5B3T8DOUE+mROi6I7wHiMDLYajdT+0+RCilhXLEZtXBqypWkJk
+	ZG6Cjk7jUIMXsCjbhLRB4kn6giS14mitnyh2Bg6kR9l7CFn/BJhqtafvuKcTNqCqR0aa4cbgEfV
+	0oQL+xThh2evefrbJPwGsrMSV4odI8bxBBIYfbjH853/vSCB2Y3+dPLkdapmYAM8ewcKAscIYBI
+	8lZuNqoikR/cyBsvNUKAHuaZv/vVQJlBmsPbMDL3acCV2CU+DDLvfU95LG1+JbSi9aDDRGo2As0
+	oade6+Q3GjIKbbBSJI9hSZzKbwSFqQUsJ6f5kzRzq94sSdNtndvAYmvE2VhpmIPinwF9nYxN/wL
+	Th60Ezu974SrqqZhjC5aTAHfXGgkOUQdT70dNfXKJYiAkqn4fo2Bu6o9TBGuQHZOjRllAt5l3is
+	g+48cDGHlBTL/Z
+X-Received: by 2002:a05:620a:2948:b0:93f:1445:82a5 with SMTP id af79cd13be357-93f29dd2334mr1348142485a.79.1792420219103;
+        Mon, 19 Oct 2026 07:30:19 -0700 (PDT)
+X-Received: by 2002:a05:620a:2948:b0:93f:1445:82a5 with SMTP id af79cd13be357-93f29dd2334mr1348134785a.79.1792420218519;
+        Mon, 19 Oct 2026 07:30:18 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ab4a0e0ce3sm2853281fa.29.2026.10.19.07.30.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 07:30:17 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Date: Mon, 19 Oct 2026 17:30:08 +0300
+Subject: [PATCH v2] arm64: dts: qcom: sda660-inforce-ifc6560: fix ADV7535
+ interrupt pin
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261019-ifc6560-adv-v2-1-ade625df3fe3@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAG8p1moC/22NwQ6CMBBEf4X0bMm2AgFP/ofhQNtF1ojVLjQaw
+ r9b8OplkpfMvFkEYyBkccoWETASk38k0IdM2KF7XFGSSyw06AoaDZJ6W5UVyM5FaWp0ShcaoDY
+ iLZ4Be3rvtkv7Y57NDe20KbbGQDz58Nnvotp6/81RSSXrxqjiWDoAq8+eOX/N3d36ccxTiHZd1
+ y8tCPG9vwAAAA==
+X-Change-ID: 20260920-ifc6560-adv-b8ed1242008b
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Linus Walleij <linusw@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Dmitry Baryshkov <lumag@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2445;
+ i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
+ bh=mLKnD6F7P/KVdV48EhUstdthV0Z+5LNyadUX7Ky+DkQ=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq1il2JoQahRfzHUgLgv7KEv3FJrhsijqdsunsm
+ pRdFqyVNI2JATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCatYpdgAKCRCLPIo+Aiko
+ 1fhtB/4uaOqlVFP+zAVuZV8xqtzJ6slk1bWrWeFV2UY3LDJtfQNpV2PYy3VfQWuCYLGfn8azcFq
+ jbH52tseycU1pUSslnA5LV6E8AUg4Er3QU3uhS5cVPRl+GJ23h+EnZ045WpmNCR1e4nJ7UiD8ed
+ ec/w7/xRbF99b6kO8QhJsl+6nIZQlo2sDGt5FOq026uFACnG8ucEjkFA3fYuN0aJZZtSJ+tBcHo
+ JbqndGlTVE/QIEBIbLPkwxFpadAYfKkNVw4aQl192csEV4RkUHye48XZ0rtGjoq8Gd6ucmVxgpK
+ EuzAPeQeJErMwSRsBCRKi8HCGETtZdQzcfVH8vwLK+W2dmPI
+X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
+ fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
+X-Proofpoint-GUID: Vo9L-M3_BNsblaK3ER7Gh_2kxePe4qGf
+X-Authority-Analysis: v=2.4 cv=O+isLx9W c=1 sm=1 tr=0 ts=6ad6297b cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=JDyqL9-wDnDoAeLICTYA:9 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1NyBTYWx0ZWRfX09Mqfw9RxTDE
+ 3e9WVHSCkSIJ+GAje6kIX3X5aN64L07WpFsTE+eCO1EnQJrIkFKAYM5suLrYRsotqpH/Kc78qjw
+ nbKN7LAIoLOkD6Awgvg5zRAy3T3F4jUaPzgTXTa3k6PN88TbuxWHLTktMoJ9YifTjEHLaR04WcU
+ thGHt+zzCULHZFgLWr6qqHALiEMX4FClidVBXg6nqPPpZTizCnwcLmnNMbZVoxclLwgmXXb4TdO
+ NQkSp2WlSppkCW+eF4sqqKnjdQmDshIkYQGZKUS7twNXrJcWeDgAr3R0ashCoPLgXhd57LExvF5
+ 7/+d6dV1+S4+87Aof/Sm2FT8yrT4ToD/zKsUOQyuWGy57bP6sgZoPZ6o6q44t074ksO1XoIJv77
+ cMgVwAAPo9oH1Mgn70wCojN9+JwALUz6p3/23Kb9rwTvB3//2D0ePQqNEdiTMK2sjXFViBk/HUo
+ BE4A6vMCqyXAclVV33w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1NyBTYWx0ZWRfX2oba8HXO3pdu
+ JuVZcF4d6k1TLx9Vj4AnCZBiwUBjMZ2Kr4i/nFxasShcOgo6ga0aKKFiYLDE9qumEN8vnfTM7Zw
+ 2o/hNodHIjBXzrGY4ZxUap9uL4FBEx4=
+X-Proofpoint-ORIG-GUID: Vo9L-M3_BNsblaK3ER7Gh_2kxePe4qGf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-19_04,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 lowpriorityscore=0
+ bulkscore=0 suspectscore=0 spamscore=0 clxscore=1015 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610190057
 
-Add devicetree nodes for the Iris codec (VPU 2.0) found on the Milos
-platform.
+Probing the ADV7535 HDMI bridge fails on the IFC6560:
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Alexander Koskovich <akoskovich@pm.me>
+  gpio gpiochip3: (800f000.spmi:pmic@2:gpio@c000): gpiochip_lock_as_irq: tried to flag a GPIO set as output for IRQ
+  gpio gpiochip3: (800f000.spmi:pmic@2:gpio@c000): unable to lock HW IRQ 10 for IRQ
+
+The bridge's interrupt line is PM660L GPIO11, but the board never
+configures that pad. pmic_gpio_populate() reads back the state left by
+the bootloader, which is PMIC_GPIO_MODE_DIGITAL_OUTPUT, so
+pmic_gpio_get_direction() reports GPIO_LINE_DIRECTION_OUT and
+gpiochip_lock_as_irq() refuses the line. Requesting the interrupt then
+fails and the bridge does not probe.
+
+Add a default pinctrl state switching the pad to digital input, applied
+by pinctrl_bind_pins() before the driver requests the interrupt. The
+ADV7535 INT pin is open-drain and pulled up on the board, so leave the
+internal bias disabled.
+
+Fixes: 34279d6e3f32 ("arm64: dts: qcom: sdm660: Add initial Inforce IFC6560 board support")
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
-Changes in v5:
-- Rebase onto next-20261016
-- Link to v4: https://lore.kernel.org/r/20260706-milos-iris-v4-0-119cbe0a72=
-62@pm.me
-
-Changes in v4:
-- Update firmware name to vpu20_p2_gen2_s7.mbn
-- Drop mb_cycles_fw[_vpp], unused on vpu2
-- Add mb_cycles_vsp
-- Use hex for iommus
-- Link to v3: https://lore.kernel.org/r/20260705-milos-iris-v3-0-8c1353530f=
-24@pm.me
-
-Changes in v3:
-- Rebase onto next-20260703
-- Switched fluster tests to use gstreamer, ffmpeg ones not reproducible run=
- to run?
-- Update milos caps to include caps introduced in tree after v2
-- Correct iris opp table to only update the MX rail values
-- Link to v2: https://lore.kernel.org/r/20260529-milos-iris-v2-0-7a763d7195=
-ae@pm.me
-
 Changes in v2:
-- Rebase onto 7.1.0-rc5
-- Change firmware name to vpu20_p2.mbn
-- Change iris reg to hex
-- Correct iris opp table
-- Update cover letter with new test run on 7.1.0-rc5, add -s arg to v4l2-co=
-mpliance
-- Link to v1: https://lore.kernel.org/r/20260406-milos-iris-v1-0-17ed0167ba=
-6f@pm.me
-
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Abel Vesa <abelvesa@kernel.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
+- Dropped extra empty line (Konrad)
+- Added a note about pull-up for the IRQ line present on the PCB.
+- Link to v1: https://patch.msgid.link/20260920-ifc6560-adv-v1-1-89b1435d00c2@oss.qualcomm.com
 ---
- arch/arm64/boot/dts/qcom/milos.dtsi | 85 +++++++++++++++++++++++++++++++++=
-++++
- 1 file changed, 85 insertions(+)
+ arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/milos.dtsi b/arch/arm64/boot/dts/qcom=
-/milos.dtsi
-index ed994c2170af..51c7d3a06957 100644
---- a/arch/arm64/boot/dts/qcom/milos.dtsi
-+++ b/arch/arm64/boot/dts/qcom/milos.dtsi
-@@ -8,6 +8,7 @@
- #include <dt-bindings/clock/qcom,milos-dispcc.h>
- #include <dt-bindings/clock/qcom,milos-gcc.h>
- #include <dt-bindings/clock/qcom,milos-gpucc.h>
-+#include <dt-bindings/clock/qcom,milos-videocc.h>
- #include <dt-bindings/clock/qcom,rpmh.h>
- #include <dt-bindings/clock/qcom,sm8650-tcsr.h>
- #include <dt-bindings/dma/qcom-gpi.h>
-@@ -2271,6 +2272,90 @@ usb_1_dwc3_hs: endpoint {
- =09=09=09};
- =09=09};
-=20
-+=09=09iris: video-codec@aa00000 {
-+=09=09=09compatible =3D "qcom,milos-iris";
-+=09=09=09reg =3D <0x0 0x0aa00000 0x0 0xf0000>;
+diff --git a/arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts b/arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts
+index 9e14f53b552e..10b454cc4218 100644
+--- a/arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts
++++ b/arch/arm64/boot/dts/qcom/sda660-inforce-ifc6560.dts
+@@ -170,6 +170,9 @@ adv7533: hdmi@39 {
+ 		interrupt-parent = <&pm660l_gpios>;
+ 		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
+ 
++		pinctrl-0 = <&adv7533_int_default>;
++		pinctrl-names = "default";
 +
-+=09=09=09interrupts =3D <GIC_SPI 174 IRQ_TYPE_LEVEL_HIGH 0>;
+ 		clocks = <&rpmcc RPM_SMD_BB_CLK2>;
+ 		clock-names = "cec";
+ 		/*
+@@ -285,6 +288,16 @@ sw_ctrl_default: sw-ctrl-default-state {
+ 	};
+ };
+ 
++&pm660l_gpios {
++	adv7533_int_default: adv7533-int-default-state {
++		pins = "gpio11";
++		function = "normal";
++		input-enable;
++		/* pull-up on board */
++		bias-disable;
++	};
++};
 +
-+=09=09=09power-domains =3D <&videocc VIDEO_CC_MVS0C_GDSC>,
-+=09=09=09=09=09<&videocc VIDEO_CC_MVS0_GDSC>,
-+=09=09=09=09=09<&rpmhpd RPMHPD_CX>,
-+=09=09=09=09=09<&rpmhpd RPMHPD_MX>;
-+=09=09=09power-domain-names =3D "venus",
-+=09=09=09=09=09     "vcodec0",
-+=09=09=09=09=09     "cx",
-+=09=09=09=09=09     "mx";
-+
-+=09=09=09operating-points-v2 =3D <&iris_opp_table>;
-+
-+=09=09=09clocks =3D <&gcc GCC_VIDEO_AXI0_CLK>,
-+=09=09=09=09 <&videocc VIDEO_CC_MVS0C_CLK>,
-+=09=09=09=09 <&videocc VIDEO_CC_MVS0_CLK>;
-+=09=09=09clock-names =3D "iface",
-+=09=09=09=09      "core",
-+=09=09=09=09      "vcodec0_core";
-+
-+=09=09=09interconnects =3D <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE=
-_ONLY
-+=09=09=09=09=09 &cnoc_cfg SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
-+=09=09=09=09=09<&mmss_noc MASTER_VIDEO QCOM_ICC_TAG_ALWAYS
-+=09=09=09=09=09 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
-+=09=09=09interconnect-names =3D "cpu-cfg",
-+=09=09=09=09=09     "video-mem";
-+
-+=09=09=09memory-region =3D <&video_mem>;
-+
-+=09=09=09resets =3D <&gcc GCC_VIDEO_AXI0_CLK_ARES>,
-+=09=09=09=09 <&videocc VIDEO_CC_MVS0C_CLK_ARES>;
-+=09=09=09reset-names =3D "bus",
-+=09=09=09=09      "core";
-+
-+=09=09=09iommus =3D <&apps_smmu 0x1960 0x0>,
-+=09=09=09=09 <&apps_smmu 0x1967 0x0>;
-+
-+=09=09=09dma-coherent;
-+
-+=09=09=09/*
-+=09=09=09 * IRIS firmware is signed by vendors, only enable on
-+=09=09=09 * boards where the proper signed firmware is available.
-+=09=09=09 */
-+=09=09=09status =3D "disabled";
-+
-+=09=09=09iris_opp_table: opp-table {
-+=09=09=09=09compatible =3D "operating-points-v2";
-+
-+=09=09=09=09opp-240000000 {
-+=09=09=09=09=09opp-hz =3D /bits/ 64 <240000000>;
-+=09=09=09=09=09required-opps =3D <&rpmhpd_opp_low_svs>,
-+=09=09=09=09=09=09=09<&rpmhpd_opp_svs>;
-+=09=09=09=09};
-+
-+=09=09=09=09opp-338000000 {
-+=09=09=09=09=09opp-hz =3D /bits/ 64 <338000000>;
-+=09=09=09=09=09required-opps =3D <&rpmhpd_opp_svs>,
-+=09=09=09=09=09=09=09<&rpmhpd_opp_svs>;
-+=09=09=09=09};
-+
-+=09=09=09=09opp-366000000 {
-+=09=09=09=09=09opp-hz =3D /bits/ 64 <366000000>;
-+=09=09=09=09=09required-opps =3D <&rpmhpd_opp_svs_l1>,
-+=09=09=09=09=09=09=09<&rpmhpd_opp_svs>;
-+=09=09=09=09};
-+
-+=09=09=09=09opp-444000000 {
-+=09=09=09=09=09opp-hz =3D /bits/ 64 <444000000>;
-+=09=09=09=09=09required-opps =3D <&rpmhpd_opp_nom>,
-+=09=09=09=09=09=09=09<&rpmhpd_opp_svs_l1>;
-+=09=09=09=09};
-+
-+=09=09=09=09opp-552000000 {
-+=09=09=09=09=09opp-hz =3D /bits/ 64 <552000000>;
-+=09=09=09=09=09required-opps =3D <&rpmhpd_opp_turbo>,
-+=09=09=09=09=09=09=09<&rpmhpd_opp_nom>;
-+=09=09=09=09};
-+=09=09=09};
-+=09=09};
-+
- =09=09videocc: clock-controller@aaf0000 {
- =09=09=09compatible =3D "qcom,milos-videocc";
- =09=09=09reg =3D <0x0 0x0aaf0000 0x0 0x10000>;
+ &qusb2phy0 {
+ 	status = "okay";
+ 
 
 ---
 base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-change-id: 20260406-milos-iris-d1a854e4cb75
+change-id: 20260920-ifc6560-adv-b8ed1242008b
 
 Best regards,
--- =20
-Alexander Koskovich <akoskovich@pm.me>
-
+--  
+With best wishes
+Dmitry
 
