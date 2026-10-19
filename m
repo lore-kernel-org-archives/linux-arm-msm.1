@@ -1,169 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792422957;
-	b=jHW0zORP5iA4+UEc5f6YJIS7ZLD8DK2yMd0+6CQ1q7slJGd8eXIGczdaIpXP5dBkzZK4
-	 suzgLKjTgGTvbe9jS2XqWCcFHBtaEAoivcF2NviJE2EOTorgQdCYvESa76RtFymgP6mn8
-	 VZhb3BHCc6vcRw0QM5oJXNEpGZemsduNfXUxKlqF73EUeniL92ZvNqJ1mFlDgs3ayKmjk
-	 k88+zg4LjGM6dwjqFjZ1BdOtTwzAbh0QJCf/zu8wvhoeU7d2tyDYkKq7w7PFAXT2RyW4Z
-	 qm43Qo4yMio2n8/yM7y6cXWkLBKnV10mhqBwaRukAbe3He9zZQKp3sWFvwDAFu83OOA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792422957;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=rY7NXz2qfQQtnIEL3eObvxvEOIQ+EeZp99ff3bsp5sk=;
-	b=LfprZZ+hHgUJwDXm+0KS8UOXDah5T4D73bKccUFteS+a45T7K/Lg5yg0xNa86gz/XbXT
-	 Q40udK7liYfEKHxUKKCYfH4t3qwYWMYl76A6tMaR6U5cjVbcPyNM/jsb4HWrCWGtRAI5A
-	 SGt1DSDV1zrAKgB4b/mrGOxD4FgTjgbAITi0XLCYS8CyTad+yzHu321V202WI9EpgJn/9
-	 dRcPfqggG1yc7uu5EhoYcT8vZH1TFeCyFAcfipK0Zr/3q6n0Z5icIcGycvgbJL8RNZIFF
-	 mKY2cSp88gOUY9uwmpl2sArQ7trKK9nNJIfPy/jmGFKRz8K4ffG/G8rBWhT6cPIEU/g==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CnpQzRLX;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCA27609DCFA;
-	Mon, 19 Oct 2026 15:15:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=10.30.226.211
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792421575;
+	b=5iDhKlq1Oe85dR0B1r2ColqdzdbRJK7kpgXJqyuHdHlamoSx5IojudyBwNqvF/WFy0Rm
+	 +Y4qDPptaXvmIWmazbSydkZpYiH+AXKhHVnNjldJgUDO6PzgoG4DesvuMP1XQpQhFXWAk
+	 4FO6qDSGkCUYy+Cx0HUvsCYIbO6kyoE+GkQdqMSgAhftKDoAGxT160gFnHsABae8eHcRr
+	 geQVk38jVJUNHUiunXNiSaGW/lRKNodqEQoDa96m5FutFni+qltcsP4UC2jg9/ByYG866
+	 m/3L/DH1OoJ/0K942ktP5ILp0iyQRgtIDxzHrR7yY/RQl/p6O+1umPNhOz5r76HyJ5w==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792421575;
+	h=Received:Received:DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
+	b=dsOthqCjXLt0XlzTpwyfAJ9NaYUDV9nr6CSX8iHIDWfBLDKykZBdjaA7ol8/gbrfaxh3
+	 rXOFUshSxqmUfEm252dtIh8rbS0w/uIoKdxqdIAao0OxV/ecIGnaN8tgWoTZdCMqFt7EX
+	 HHRsoh4cb94l04+RfKVQ38vO2U4HJT40agkA6+DWP75GOE/56LBwgxQkFHGPkGIlxX7Xn
+	 qAVW0QKIzrVOIR03K6Svfj86ebIdAfkpUix1oiJTUM1Ha7tRXrZRldNRwRYuSwywiWpHF
+	 l4upxS69uWxwUVvcVrdU5IaQu3WkhHjI6QgZLskbY/hsVsOJiYmRKVMi9dsFdVWgx3A==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="o0H/27FL";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WmzJtK5+;
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=10.30.226.211
+Received: from aws-us-west-2-korg-listserv-1.web.codeaurora.org (ip-10-30-226-211.us-west-2.compute.internal [10.30.226.211])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63931606A33B
+	for <linux-arm-msm.vger.kernel.org@localhost.mlmmj>; Mon, 19 Oct 2026 14:52:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CnpQzRLX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 269E71F000C4;
-	Mon, 19 Oct 2026 15:15:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792422956;
-	bh=rY7NXz2qfQQtnIEL3eObvxvEOIQ+EeZp99ff3bsp5sk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=CnpQzRLX3TYf8k0qu6IYpaMq62MrzgVnzWtCBEbdnX0IUPXFCp6FFVhb6e/W37EY7
-	 oQdkTxuZitFSXzUqh8YM+LI6hW4HWoVv72MiRtWfb/iuVaWOGKHt2j8Piy3XsHY4bv
-	 HfJH5x277Hg+W3vBh+BKJcUHigFzcPtKnByrkz6Qw0vZi1heWwAKuKjDH8y9RjWbAw
-	 ZWzbQHvwqs0XljbKJDetYNNwEqmAYS1SizYC8c9PQJ/+yV3C9kQ+UX6IhimWK6Szh4
-	 MliM2s0jWJxjgBc2N8LAVJSnUAeqxo/k14Kw0U606JcTDsTXyg4NEZpgxA/P9PGn8a
-	 a/NOnXhhwsAXA==
-From: Maxime Ripard <mripard@kernel.org>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Maxime Ripard <mripard@kernel.org>
-Cc: dri-devel@lists.freedesktop.org,
-	Aun-Ali Zaidi <admin@kodeit.net>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	amd-gfx@lists.freedesktop.org,
-	Harry Wentland <harry.wentland@amd.com>,
-	Leo Li <sunpeng.li@amd.com>,
-	Rodrigo Siqueira <siqueira@igalia.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Andrew Jeffery <andrew@codeconstruct.com.au>,
-	Joel Stanley <joel@jms.id.au>,
-	Dave Airlie <airlied@redhat.com>,
-	Jocelyn Falempe <jfalempe@redhat.com>,
-	Francesco Dolcini <francesco@dolcini.it>,
-	Ian Ray <ian.ray@gehealthcare.com>,
-	Martyn Welch <martyn.welch@collabora.co.uk>,
-	Peter Senna Tschudin <peter.senna@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Inki Dae <inki.dae@samsung.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Kyungmin Park <kyungmin.park@samsung.com>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Seung-Woo Kim <sw0312.kim@samsung.com>,
-	linux-samsung-soc@vger.kernel.org,
-	Alison Wang <alison.wang@nxp.com>,
-	Stefan Agner <stefan@agner.ch>,
-	Tian Tao <tiantao6@hisilicon.com>,
-	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
-	Yongbang Shi <shiyongbang@huawei.com>,
-	Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>,
-	Saurabh Sengar <ssengar@linux.microsoft.com>,
-	linux-hyperv@vger.kernel.org,
-	Fabio Estevam <festevam@gmail.com>,
-	Frank Li <Frank.Li@nxp.com>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	imx@lists.linux.dev,
-	Paul Kocialkowski <paulk@sys-base.io>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
-	Jianmin Lv <lvjianmin@loongson.cn>,
-	Mingcong Bai <jeffbai@aosc.io>,
-	Qianhai Wu <wuqianhai@loongson.cn>,
-	Xi Ruoyao <xry111@xry111.site>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sean Paul <sean@poorly.run>,
-	freedreno@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	spice-devel@lists.freedesktop.org,
-	virtualization@lists.linux.dev,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	linux-renesas-soc@vger.kernel.org,
-	Marcus Folkesson <marcus.folkesson@gmail.com>,
-	Iker Pedrosa <ikerpedrosam@gmail.com>,
-	Javier Martinez Canillas <javierm@redhat.com>,
-	Alain Volmat <alain.volmat@foss.st.com>,
-	Raphael Gallais-Pou <rgallaispou@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Philippe Cornu <philippe.cornu@foss.st.com>,
-	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
-	Yannick Fertre <yannick.fertre@foss.st.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Samuel Holland <samuel@sholland.org>,
-	linux-sunxi@lists.linux.dev,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Mikko Perttunen <mperttunen@nvidia.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	linux-tegra@vger.kernel.org,
-	Alexey Brodkin <abrodkin@synopsys.com>,
-	Hans de Goede <hansg@kernel.org>,
-	LiangCheng Wang <zaq14760@gmail.com>,
-	Alex Lanzano <lanzano.alex@gmail.com>,
-	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
-	Dave Stevenson <dave.stevenson@raspberrypi.com>,
-	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
-	Chia-I Wu <olvaffe@gmail.com>,
-	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Haneen Mohammed <hamohammed.sa@gmail.com>,
-	Louis Chauvet <louis.chauvet@bootlin.com>,
-	Melissa Wen <melissa.srw@gmail.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Ruben Wauters <rubenru09@aol.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	linux-amlogic@lists.infradead.org,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	Danilo Krummrich <dakr@kernel.org>,
-	Lyude Paul <lyude@redhat.com>,
-	nouveau@lists.freedesktop.org,
-	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
-	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
-	Magnus Damm <magnus.damm@gmail.com>,
-	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Zack Rusin <zack.rusin@broadcom.com>,
-	Aditya Garg <aditya.garg@linux.dev>
-Subject: Re: (subset) [PATCH 00/75] drm/connector: Convert all drivers to atomic_create_state and remove reset
-Date: Mon, 19 Oct 2026 17:15:50 +0200
-Message-ID: <179242294379.2822300.2839114266297465713.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261014-drm-no-more-connector-reset-v1-0-586c9c026823@kernel.org>
-References: <20261014-drm-no-more-connector-reset-v1-0-586c9c026823@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=o0H/27FL;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WmzJtK5+
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8E55008D8
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:52:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1792421575; cv=none; b=NtdKwJnDkyhOoGzd94C7w7NCZT/L636ZnnOqyt16Y8PDmsAqr/SEYdcKZR1KbPWAA+4FWiJ1hfQQcfD7hKa2f83B59aAXTgT79q1zbGaoSm6Qfh65n7nbSj7LhIGjMAjVe0h3cGa4TDj53YfeDO35xUEdU2T+HTrI47SyxauWhA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1792421575; c=relaxed/simple;
+	bh=orrAvnQKodrO0KGN/q1mi3EWkwR/z2Dn0RbWC+AZp4g=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=bb88yRXUara6zRZ9LWErEJGGLhD+gL+zYKsVyMkvgX/TEPwDU38r6Yryf9+J/2u+GJFt/VSFhr5IHHAR9zEQA4ViU26X9cIulHqVouIMdSJOzjdZxwRDNRoLkbn+uTHjHpl3ILCRjxklqwadUQEzpnrxxsZlUWRWfFBoplyOhes=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=o0H/27FL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WmzJtK5+; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JE05hD2626610
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:52:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=; b=o0H/27FLsKCbcENd
+	zuuZBR/4NyfyMNXLYkNG7wfXWl9TJQc5wQtIiqdnMyD4LVcYUO/4FGlBTHEoFGCn
+	0mphYX1DZ4I3PFbjQD7EWFndAtFiXABmnzyH52QPRkSUWDYyh5DwbV3k13KMCwT2
+	3WcoPqGuke8/owFkINPYH+7vF/NzXVuUx0IMwlkS3cbRZ89zwqbOvvEE3uSr3XBS
+	nMV113UEy8Z+di+Z+3/ftstE2Wx5BXjBwzEaAV69Cahegn8ggIN0zO2Ydk8+nuJ+
+	SRGSUyi3yQXU7aWoYyqXPX1e8+GoPOO4jyLalOeZ76xjuCEdaBILAyMIhgOwm6Nf
+	KkOWpQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdkmfgje7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:52:52 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93edac5877bso40202185a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:52:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792421572; x=1793026372; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
+        b=WmzJtK5+FB09lwKb27nYOHSRSUtjfmqrIx8F0G05H23MR1+CBMa70H/joJslgaLq9P
+         aLr8Pe3svLcfbj7SizNhs8UOVQxsohGzym50rQ+2zO4izV046jjOkdYwepG+wB4X5mch
+         IUJigmalNJWqPP1mDKzr/xS5dvGA8cOlHcQ5Pir3HmbGUeoloTrXkKy5UFgIDlDWyRx1
+         dnKGPG4lh4DF0bYzr8+T2tOpnY2SdDXEGy3Ilm30075tZYdFxtRJXwzKb++vTcQp3sxU
+         nCuA/4IKP8E9zEzRYR226IaX6mqm3vFToRN9fySm2pBpjkNvaPOXNXSLlAh4/prAFJ09
+         GRfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792421572; x=1793026372;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
+        b=W77ggo/DToKFITaliUodi+joVmwykj1aQ1HNfHeNv3aRfvfq+66Uc/nisP0YZ6Jo12
+         +Hw0WeFt7xKEXcFTRiL2Ym05kZ2R9xNadITSSP2ZxoqdhXrTooYjzpVQJn2PGpxBiGmX
+         Ur1POjRx7NdCSIRif/TVvma4dr23NJvL2oeHeJqSeNuCEZlh1xwQZkI9guzLjNaaHH5v
+         ag03RF6ChC+BKwJTCclYIIR5+6dCLdCUKOblAnFlDuklvo3PO+BVU9/ry0tNE49ZeAp1
+         rAA5hKVM/v1l4Pfsb6FOce6XtzvEAFCJychKi2N0OaubTXEB0CciBjbewf5swY1cFpCf
+         klgg==
+X-Forwarded-Encrypted: i=1; AKwUvByd1mHR3sdhFJBmk++vH7KDNRCWi6LbISeBIsvp2CuXepWHNCXDDNV2RcV8Gu7KNZmAtDHjKRSCfMVjF9dd@vger.kernel.org
+X-Gm-Message-State: AFq9FYI/iFedtjO4G2ZKWMKSGqNHOyGeXJWVvgHS5GrR3xsy+w4TTX/H
+	J60gNnmjR3uXIvgcoiZV6Zyv4EjJ0lpusf5/MaqQDfsUFfrCLUD6I2JCWqJkVPoPuKD/oqE3K0v
+	/nL2UniUZL05E3uK6LdWZE2XM44iOoLB4zfosSscb/5zAhTThmnCt4AHO0KTKO5UShgBr
+X-Gm-Gg: AYBFou30ZsxBQ9nqRN36j7G4nx8/qqEL4Yny8V88hPSLQaY3/AeXzYui50H8TSAxnbX
+	0+QtR+YyLmLRJL1vkfyKUd3+aXiEkNfA0WyYxQv4Q0v9MDP88COPifI9BAvYi8okE3ZgGM7st/8
+	zHXmTjrTXZwplcZowPa8rBN9oAXy776QmTHcTbkBBSd0RtldO4uEwQh8+5dYaiZd/F96IM96IFv
+	QD7NnxBjJK6+JXI0yPYdvtEa0PyJvR9vBO1rRWxXkaJWNKgGeCEop7vFxjJNZn8FvZ85FYI3vPa
+	o2g+jHKRujDjB9Pzj0QfT50/OoejBowHTsYWC4kYyyUHuqpJJO79OHer0BLq86WymI069lbBIvp
+	mnLV5bEzAFH27NAvo4POdKQ==
+X-Received: by 2002:a05:620a:17a2:b0:93f:1a1a:2974 with SMTP id af79cd13be357-93f29e1748emr1420800185a.6.1792421572200;
+        Mon, 19 Oct 2026 07:52:52 -0700 (PDT)
+X-Received: by 2002:a05:620a:17a2:b0:93f:1a1a:2974 with SMTP id af79cd13be357-93f29e1748emr1420796285a.6.1792421571699;
+        Mon, 19 Oct 2026 07:52:51 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c408e32c075sm380967066b.11.2026.10.19.07.52.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 19 Oct 2026 07:52:50 -0700 (PDT)
+Message-ID: <40bdd031-1d56-45ef-905c-32e706376d01@oss.qualcomm.com>
+Date: Mon, 19 Oct 2026 16:52:48 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -173,25 +124,68 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/12] arm64: dts: qcom: pm7550-eliza: Enable BCL
+ sensor node
+To: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
+        Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20261005-qcom-bcl-hwmon-v4-0-50b9a8c730b7@oss.qualcomm.com>
+ <20261005-qcom-bcl-hwmon-v4-5-50b9a8c730b7@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261005-qcom-bcl-hwmon-v4-5-50b9a8c730b7@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: CGYUcjIMSpSvlVhFpCTjMeOSCUKRa7_l
+X-Authority-Analysis: v=2.4 cv=O+isLx9W c=1 sm=1 tr=0 ts=6ad62ec4 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=GBzGvGGi_yB6IOxyoawA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1OSBTYWx0ZWRfXzUrq7AL8MaZV
+ sfvuOse3qKhblVo9+eQnxrFjnxyhK1iDVLspuHDt3DCuJHX4mcc0bSMhG7lYcvd3wbOQZuf+Cst
+ oTafSQ3E90piYN7NTldM7nfh6gsHMGL+f6s8y041XFoFe3Fsy635fsuxaAtKja7ph7MDg5wXhJi
+ ArcGBQ/gUGABl3XHAMUjQrJ1HCH5Rmufd8Mi7T2VG0LV03XdGL1v+QOmAfyEEfLDOpUIw0SEd0p
+ YhKFAZUGR665eNSuQnWXoTg4WHeZ9gC8JbpUt+x7pTtX9JgW47VfR3Qfo/a4DSZqt/99j4o7T8X
+ 1Ut4Wg6eXdoKGv/pflleCzkFRZyCFxJ/P/7WMQKrEX6G+HIqHh76SvktilI9ATxeXQ64f3DWFpg
+ Pa3j3RKl8AS6T1QFX+0GSujQX69msXQ9GeJ8eo9VzI6JTiDKBg95C7s6cFySY+b2jrPxc5GeuF6
+ DRZxdc7q3t9LaYsNw/g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1OSBTYWx0ZWRfX0gCXR+H7Ui44
+ hCzubfsS40CfNfnCPfMpGQas1MrBrOCCtJGru3qjOCkUZxuKd+jQ7HDOuQi2VAb3yESd5vmg2En
+ +mxfnk4/WsYbX/wJe6WbG88ftIL2m54=
+X-Proofpoint-ORIG-GUID: CGYUcjIMSpSvlVhFpCTjMeOSCUKRa7_l
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-19_04,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 lowpriorityscore=0
+ bulkscore=0 suspectscore=0 spamscore=0 clxscore=1015 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610190059
 
-On Wed, 14 Oct 2026 19:26:23 +0200, Maxime Ripard wrote:
-> This is a follow-up to the plane and CRTC reset removal series, and
-> part of a larger effort to remove the reset hook from all KMS objects.
+On 10/5/26 2:24 PM, Manaf Meethalavalappu Pallikunhi wrote:
+> Add Battery Current Limiting (BCL) hardware monitor node for
+> pm7550-eliza. The BCL monitors battery voltage and current, providing
+> hardware interrupts when configurable thresholds are violated.
 > 
-> The connector reset hook is overloaded: it is called both at probe
-> time to create the initial software state and during suspend/resume to
-> reset hardware and software state. These two roles have different
-> requirements, and the reset hook is not fallible, making error
-> handling difficult for the initial state allocation path.
-> 
-> [...]
+> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+> ---
 
-Applied to misc/kernel.git (drm-misc-next)
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-[73/75] drm/vmwgfx: Convert to atomic_create_state
-        commit: e6bb593b800813788dc16179d1305747ff974d00
-
-Thanks!
-Maxime
+Konrad
