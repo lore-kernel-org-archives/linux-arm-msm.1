@@ -1,87 +1,87 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E92315166C6
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:12:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2640546267
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:13:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792419181; cv=none; b=UhVtxWMvLyDcrc7gQ4CkKxDJFSp3ySH3HqEuLA4IexM8wCTtAeUGsVT0x8+84uD4hgkSXTow+xqGtlkMO+Gl5AcSlF3BzKb8H4o95QvPTCVk2wf+68pts5lF4VnFXEFQkZjPMXZR0BLztAQJ0Q5jKDXMl7HY/O9UGIcMOuDb9II=
+	t=1792419182; cv=none; b=eByUDjvaty7mItsRUsu/P9qMwE0LaPXDc25SQkip44/mp9KtGndeuIJRoN7blKPkw8EkEjjKnYXqVCS0+4a+kkqCF6DzR3XTevhWMigtoEQoMLXYMaThs/uUGM8OULsUqO66LCuIofGaO5CWz2FtBArF/QCbTPCRwXFRJ8Dhs58=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792419181; c=relaxed/simple;
-	bh=ONPu0LSZgxyp9psRZyyn8XpJ1SMTJpbgpn4VSE9H4+0=;
+	s=arc-20240116; t=1792419182; c=relaxed/simple;
+	bh=4evihIn0bxYc63GN9wtAllcv7hZd50BO23q7/zc5e48=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hvar8bC8pAeTK1sQy3xB4UfPTaeLtj0LIlFXjkRt76o3sQAssX6paceWxAVPsZUbvjuH2NEb0dM9QVjUSG0qMeOTEcCCfsh+D5wvY0JWXcZTu+Vok2msSkYvdqGPGVEKXTwDwfzgfcCwzwh9Iytu5TfiVrsymnGvqc3T2ZyIHwQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QaiJDf49; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MlrUfrsg; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=Z+cNoBlrgv4xI5c9f19fsb84BxrVrCG1DPiO3kC+Zx8ulRHtI20dTfJxaKWCIUqdsoovAlw8FktLFEz2T1guPJV0aWMuE7/sVQmNc597YUb/41qo/Ggp2xjBgulxWw2pj/aojW/d2srIZGvgQkOHYB1g2yefVeK0utbdr1/7kUk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VU83J1dg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ur5lCiOc; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QaiJDf49";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MlrUfrsg"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JE09Io3485662
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:12:58 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VU83J1dg";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ur5lCiOc"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JE0Vsx2401764
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:13:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	tWGWXMtOvG27GNt7xGpQwwrvj+GUUH/RacL4BSQYFIE=; b=QaiJDf49e//iZOQn
-	Iwuvf0sq3rziCnKjuyATzR8sZiSXuFNEhPC7jHeDVonMGJoaRGa5mnoxuf49pAy0
-	Z97k+eiCru6zhzH8UI5e0c3AZ0CWunssCV3SLSwatEvPSYTM7Je7AxmFr1iP2bAS
-	tfgBFr/JQFB9X594DFSvAhYQNzpB80kj97u/zskuGmh4JeqhQzCqBQvv31LmHQtM
-	2JEk1vADoTNM/JcfRezpDykabTrfaN7Vne6mW17+nPSRh6v9hYsJh35eeIrMhJeB
-	PfGdBz2LuhTgwa8hjBco4wRdGERbHQez6xA9s/NWL8c+bITbCAsqJBy+/2ktEXCs
-	3hAoqg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf48hhqs-1
+	Py9TTClt1j/q/B9ZyzNORZhfawN+TfEcfI3tLiHzs2w=; b=VU83J1dgHrtZ5lK7
+	NUT+WvVVFlySonV6oqM2NCK61qBB7XJGgFaLfwjpp8eo+Wvne4Lh1yroXBMTotVg
+	QL8OPH/BM5o4+jf4qPpEv8ZUdlj13ZmS3Zk3GMKYUG+kUA1uS7+ksyo//aACxi3+
+	ctsa5CQJTk+SuIOFNdORTX/rSTIFieAL+CkEtp6fIMnztjgXlK11uWLgxYR3qgF5
+	efItTDI5yrYbh8+9i8adyk4h7lfA4H8AugRI39ymz1xDGSZJXE9v2RfhyWvY8RDk
+	5nj0ZO9NzfROT/rEP6dR1kXbpT8umGvnwzudOyxzyJSdDN18h0rpn7cjVU52YLma
+	BshKjg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf3n1jfc-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:12:57 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f26dd2165so753707285a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:12:57 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 14:13:00 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93a1de6d5c3so525542985a.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 19 Oct 2026 07:12:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792419177; x=1793023977; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792419179; x=1793023979; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tWGWXMtOvG27GNt7xGpQwwrvj+GUUH/RacL4BSQYFIE=;
-        b=MlrUfrsg+c1uTp/ldfmxSKzugodfNG0vYYxwuZz2fMZ5E76rahspj574o4d9/merjB
-         xV14bDIXMszPRgyrMr0qgOUz9UaBDNIJf1VkjcID+q0A6aRgauyZMoWFRITMItvlu8ll
-         HjZbG/jiVSXf7S2LqGOz5mMcwlrOu5X/Ky1ORTmEQF6DivTwZwQSWRoNKVoDSLz6mJkp
-         Rvh8N1gQDrVC6g26SCCETPBP4aheJNegpmmn+MbEF+c67QFuM8xlIrZvqETpCWe+d/8O
-         DWOoawx3I95eYT2BrHoQZdG7pGGwIwCefG6yucAvoYI+a0uOF+LSJoVrp2umRBbrDEuL
-         GrUQ==
+        bh=Py9TTClt1j/q/B9ZyzNORZhfawN+TfEcfI3tLiHzs2w=;
+        b=Ur5lCiOc3ATy9dPGIrY5boTXr13h1+rFsPUP1A9+T6BuMDxKgGtXywp/zKSmsCmEuW
+         Bw9S9ZJaB+3L4kWUNd7pT7xqUVqmxd0gZqcvlP8GiowSUemd/GNCDnKN1u4rFvYX/cpi
+         aOFdRxbYiErKxuQGexC7g+0e6xWXpYSf3niT2rcx8wsNZaFEv5KArA4kUC5tZwOZ40eP
+         Xw22SAAFg1fOx8mt+2wlYWej3ZkeZwUxy3mI4F68w4xNRxph8ccM94MmXN4h0hHDfBpK
+         aK/pSy5Tdse1XPWolln7DIxeNqwcf5DRA6Ha7MHop03Cdppk0+RUwORPzDistyX6DWln
+         DGrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792419177; x=1793023977;
+        d=1e100.net; s=20260707; t=1792419179; x=1793023979;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tWGWXMtOvG27GNt7xGpQwwrvj+GUUH/RacL4BSQYFIE=;
-        b=y3Nzip6UZJZsDDU4vkzlEHezNQ5ugLk7XpEJYIlUZH6awrVjpxpy5DPWXaReCM3i8D
-         dWUh2f9z7240OwgUdARL/7/o9ZOIfSHV7WGBPErkfBSqFAFJOnfykxu8Aqm55xPbXh0y
-         D4TIePCqhBpun2EHgL9yqiFG32lM3l7ZDLnJ/eLxSzmIu2s6tKRZAXHRA722VvoKCrMm
-         v9uhy1EeYSSrylVZ/5X4avwDysoNHQ7Z8ke6162pmnx0IO+WSyHX3cwk7/OQbqkfgNKI
-         peZ2HgMwKkxz4Evnn2wKr66Bp1hezhkMDjL04ScmZ6djBk6tjV4brheU7AWTvWPiiwfz
-         p6/Q==
-X-Gm-Message-State: AFq9FYLYkIAuNdmLRkirYrkAAonUmpU4UXJ4SmaLB3zpvdZDqOsG1yIS
-	IePC0jmMMJQoPKCR51qRh3YCWfWZ9Hp3kU1NnezA9PNrTGXZvYQVt90HzUNPFwLu0Y9N8NDzoy6
-	SDsqq2gXJ/IiDDwOGPDBwlIQb7ZpLRNDAqQG4h638vvEdnZMWAIOdI7KpEHKb5k7hO+Zv
-X-Gm-Gg: AYBFou0CqQWvG6BOyYMAcLkrKIF9Buwln4jyK7SKhK9ceNK8tUQcVXxxeUFJCUk5zSm
-	NqBKw8gTwh/nQM/BxHVJ8toniYh2VMky7NXZYooNAqFPf8QZizFuXr7ZIPUj5Tddcmlz+pd8dBQ
-	KpgFKJ45J6ecbs1um704dGPWX4LO2uv7P5e1rNOJLCA7QxhLzpnmktoHNmtoVaLzXtE+jvl/CrX
-	n/I9RytzCBaO5Pp0V/4iz28+gI9fm+ITo/k5l0mlHZ88BsET9IwycI2OkapacGtkhy2fYVovZxE
-	kYY2CCwp1Of8G7p96jdH4xUW7z7YVjRIyzgrON98Mm1DcCsACEI2kE7pfHBnO6r7AfpnX011Gq5
-	2IXhc1Fn6uswQlKJE5QhaHuKFRsjx47h4uh9q9fUEx9/LKtMd5JIEax/0N7YA2rGzTMqV+WFU+k
-	IMqN+azoSaVwL4
-X-Received: by 2002:a05:620a:4153:b0:93e:6100:6c1e with SMTP id af79cd13be357-93f29cf7a21mr1330367385a.30.1792419176989;
-        Mon, 19 Oct 2026 07:12:56 -0700 (PDT)
-X-Received: by 2002:a05:620a:4153:b0:93e:6100:6c1e with SMTP id af79cd13be357-93f29cf7a21mr1330359985a.30.1792419176280;
-        Mon, 19 Oct 2026 07:12:56 -0700 (PDT)
+        bh=Py9TTClt1j/q/B9ZyzNORZhfawN+TfEcfI3tLiHzs2w=;
+        b=bLupTSLTp7fMTlsaDWtJJdYVh82ZgoFX9D3JqNbxwTif6nqc5BEZnbyPeXipylRbdS
+         mlpazwNhytWzvPxtgzHiQ4/7Qy23oCVNkX4Nh+I1nkMZYSEkJndxE56D+zbkZlsLETmZ
+         IuY3tCTcF7z5twQdv8PD61e02gGWS8/VGAwVW7ExsreAfNmRI675ddhH9YUGmGpTu7Qh
+         +wh571Qf43+ulKq5de8os/a9JnbWjzWE4hlZBA2rFnEG3Ru7yA+LRQ99uC4Lu4zNkfHS
+         5UH7tbcMvEuD/Lh3D6g7rh6pdFFn4m8h6yi2YzeRNiiw36wvyAWgX86zWvoMKP0xVIm2
+         KgUw==
+X-Gm-Message-State: AFq9FYKTkk9s4L/05NEZftneu+sGh1JRHxMQd6fsD0aT9XCE9ITGtLH+
+	P1vmb9NBxJSaOZ7Ujqtxd7lDlTGJO3bTMEMnJg5xfyfIQB3wbvHXsSxs2chN29JsnDV2N4uEz7j
+	Za6wdtB3yR6tk3nlsDTP5+QBg3kVsTXVOpRD41KrRfq5GZ/nXV5IPcYdT8m0tEUmw/7e+
+X-Gm-Gg: AYBFou3epjZ+HboX0RHp6XaFRwYzTjE19DU54ku1XjxRGVN38qfngVHubSaDsqL+sHr
+	hOWfcglL9tTdwBPP1hHKlc3s7yabBAzO6IOswQVBNpnncP7CIdLgPqhhzVPVnrC7RvfTMJ7CC7V
+	fWUtIFUcmYVKv98ixY01ORCjyaQFo6ndfo5wP+RCx6yooszfq9Z0bKZbZgKlPpTzOsOen7F6smC
+	KyiCciqiWKG6zQEf/SmJMrRgOkhGD10vAqo8YopWddY+qDfzCq1/9x2rLdY1q9FXrIQsWff1dW7
+	2UWcAaIJK5kd+74aNUwd5LKfVdWRf8wkcNKFndTaMYmojTT9YyKk+YkW5MVPRy96r/UoRkKrsHn
+	RjOWNXeJ+BnvSOZHrH970JhGbv3ReH/Oz79tSQvZRE4iv2jQ7xi0I/jpD+BNNDCGUdG56trZH7B
+	dcHJVsQk3Z3nT7
+X-Received: by 2002:a05:620a:40d2:b0:93c:720c:94e0 with SMTP id af79cd13be357-93f29d36396mr1213844585a.30.1792419179151;
+        Mon, 19 Oct 2026 07:12:59 -0700 (PDT)
+X-Received: by 2002:a05:620a:40d2:b0:93c:720c:94e0 with SMTP id af79cd13be357-93f29d36396mr1213839785a.30.1792419178603;
+        Mon, 19 Oct 2026 07:12:58 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a42ade9sm2015922e87.14.2026.10.19.07.12.54
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a42ade9sm2015922e87.14.2026.10.19.07.12.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2026 07:12:54 -0700 (PDT)
+        Mon, 19 Oct 2026 07:12:56 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 17:12:39 +0300
-Subject: [PATCH 1/8] dt-bindings: interconnect: add Qualcomm MSM8998 NoC
+Date: Mon, 19 Oct 2026 17:12:40 +0300
+Subject: [PATCH 2/8] soc: qcom: smd-rpm: Handle zero-length errors
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-msm8998-icc-v1-1-c2da3934b6c8@oss.qualcomm.com>
+Message-Id: <20261019-msm8998-icc-v1-2-c2da3934b6c8@oss.qualcomm.com>
 References: <20261019-msm8998-icc-v1-0-c2da3934b6c8@oss.qualcomm.com>
 In-Reply-To: <20261019-msm8998-icc-v1-0-c2da3934b6c8@oss.qualcomm.com>
 To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -104,404 +104,77 @@ To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
         Shawn Guo <shawn.guo@linaro.org>
 Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konradybcio@kernel.org>
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9681;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1088;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=ONPu0LSZgxyp9psRZyyn8XpJ1SMTJpbgpn4VSE9H4+0=;
- b=owGbwMvMwMXYbdNlx6SpcZXxtFoSQ9Y11fh10WLzDUx1nOMiNfZte2Mr1/n4Cg9Pu88svfoJ7
- R+1vs7qZDRmYWDkYpAVU2TxKWiZGrMpOezDjqn1MINYmUCmMHBxCsBE3jiy/1OpD41+f/73yzYB
- y5ytFx6wFYZ721wpf9E99Um84pJ+42c+3JuSFb1iLiR5HzvR1cNa8HRzlJivnZBXctjKB0eK+bj
- 57zd/EGapYq6waOa7qyXXKv3lwMzlM37tj1PvjKx/yt/VU/HXQ/lWR+ZHbd5jU9nqah/vmLnF3j
- IysDtd+j5DeH6O8mv17eUbCvYq7fF+3xu5JuXPrpMlkV+f1/7+2/wqVCSL9/CsnOqtv05ZRRUdC
- bETea1ZFP1mY0LKC87ysMMWkw+qSG3edW3yyind886wPxQwZSi9uW7tav/zt2O0Wi/ZHVlZ4CFW
- cTrHrKriyU21znXzQuocEu0V4vfcrb50vej6XHGzgPA3AA==
+ bh=FlXx0Df31B57IuZnrZTPHJb3Vqd4TKJsFeozt5W+WzM=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq1iVfEts7JDn9h1Zeppli16gelEutWsW1DQk0v
+ j3ZDi9UG+mJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCatYlXwAKCRCLPIo+Aiko
+ 1RppCACQqFAKdIN4mv7EkhRGPMsQzpnv8AESfhKraF7PSwebpe9pFTPEMXFr3rSc7EibVfDq/6h
+ njJ1SJbVgwIXbWCI2aCBv+3/GiBLgwm7kdV5ZDuUQ7/ktbaX3NvpnOLj7yYrXgzOwRLW0LlU3Cl
+ 1zGsJ40L8qc8iUUdC8UfE+LRfNvyS9pOyXJ/jMIE7pMl0J666Ulu8pr81/yoAyyKwBgfYZJjpdq
+ /U2T9epu98qDN3mb2wT0g2Kn31eDKYxjEU1rqvTUEp4exQWl4qlMaeHwgCzvKCl2isKBcCXRVOQ
+ RjEy5PNFMeOQhLjjf71gISMRwAizsOgUw46OF6aG6PjtUwzr
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1NiBTYWx0ZWRfXwKQ1TYFGmkh8
- 1nauWOZqNzo/gntC+lrdtY8ynxlC7bbDaycHbwcuDk1km/1zCPBRuTcKh0euxCEBjJETDVEjj1H
- Sa18QQ6Q4j8e9k+88FKB3AzWvwejZzWwxHC1Hev3ljQ2bQYw2SbPvMgI7B8EdUms+WwTBDRKFs4
- GgjQ4oxaFtfQeqgBYISu1p/VFhX1XlED3YV20JsTJsHIBDcxUqG53+sCLaMa2pfGDBKMsehCYIO
- Om9+Ekv9DM3kmMjHf0beuaOMIpzAuESiHULjZ5Z+Hr2wdXDg30DIT/XnT0SsAwe5IEivDuG8zaZ
- whi6O0O/CH5vQtrzxFK3IpAI+FsHLPDbwlmTwk92PypV6JwbXH1w/7ahL6ZI1GxLTYNASYZyeEh
- Nvab+P01mjW4AvhxeIHdOQ46WbpR/ybw8d38aUPbcWofMxf4uTbOpgJMySvU+gxen0t5ExJU/UF
- gkfs9p2VYyfDGT7/0Sg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1NiBTYWx0ZWRfX3kWXYuvsf4cT
- Y8QGeJdqqXJBk+WaOGLQEgRgrwUn7Cpd0nYE/mf/vglJB+3XvVVbLhzX2oce+If5vrF+2Xl1jM3
- GhC2PMlNX597ZEnGsl2xRzUy5aRqSvw=
-X-Proofpoint-ORIG-GUID: MSbKw-QASNg-KxlSwFuEf6MZwD4kbZox
-X-Authority-Analysis: v=2.4 cv=Qr/LTlyd c=1 sm=1 tr=0 ts=6ad62569 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1NiBTYWx0ZWRfX7aiY0N6PzD/M
+ vGy5Aj95Dwh0J2cQ7D5gWbj1DgfYvsrF2bxwqgwCag0fd+OYFA3ygRwXA/ciltDxvSvBDHMXsmP
+ CgoQDSSIb+NyRPLnTn46k7E6EpgRHmg=
+X-Proofpoint-ORIG-GUID: ecfe1GExu9w8p38GayOZ73yRLQ_NSyiM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1NiBTYWx0ZWRfX96uUXlk69xxs
+ GOYwEXnE2H4CH5tJ7M7KTm4b+ujZOs1AL4hjMvljQhZEXsXTK3y7//JQXapZ2tnWNOmK7hJ1pQ7
+ KiIZgayvihZAhpiIBMXI43rKgqjEY7edhP1H7ItEN89hc0DJr0WdGCw8TFqIjouQ/ak+iTgCXFE
+ 18msZRwq2awz5MpjHSkbvZCcBh4C9+3rAXD6JUMfPu4OgURfSoc+us9XMwPthT8jsf5/zcVEqkW
+ MzNI7CqG9+hflaDbBT1/kuWiC/aitSixsMLsAqoIEUROOpBXMFDKLdp/HVLSQeeZJppjzrni0jb
+ H0OdVbg9hR/Fb4wyuBoiQef2CR7G4E6y42OKN1C1QcuNW6dGC+fIY9HQlp18po8gZkU5lyu+6/1
+ 8IOon+F0UgU4/0vtBLA6XAeQea9yu0QTGazlmFIXavGiBhli39Q76eCc4gHm7sEENktVHlEu33/
+ jwTbxXa5KibKOQhWLLg==
+X-Proofpoint-GUID: ecfe1GExu9w8p38GayOZ73yRLQ_NSyiM
+X-Authority-Analysis: v=2.4 cv=Zf2IpcVA c=1 sm=1 tr=0 ts=6ad6256c cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=gEfo2CItAAAA:8
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=tVI0ZWmoAAAA:8 a=VwQbUJbxAAAA:8
- a=VEq_dQRechr_YiBZk3UA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
- a=sptkURWiP4Gy88Gu7hUp:22 a=cvBusfyB2V15izCimMoJ:22 a=-BPWgnxRz2uhmvdm1NTO:22
-X-Proofpoint-GUID: MSbKw-QASNg-KxlSwFuEf6MZwD4kbZox
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=CuedHqBScD5EtFMGVU8A:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-19_04,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0
- impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ spamscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190056
 
-The MSM8998 interconnect provider driver has no device tree schema, so
-the provider nodes it binds to can neither be described nor validated.
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Document the eight MSM8998 NoC devices.  Unlike the older RPM
-interconnect bindings, the bus clocks of these providers are RPM
-resources handled by the driver itself, so only the interface clocks
-appear in the device tree.  The MMSS AHB NoC has no register range of
-its own - it shares the register space of the MMSS NoC - and is
-therefore described as a child of the latter.
+Prevent a potential underflow as the code below uses 'ALIGN(n, 4) - 1'
+as an index into an array. For n=0, that ends up as '-1U'.
 
-Co-developed-by: Konrad Dybcio <konrad.dybcio@linaro.org>
-Signed-off-by: Konrad Dybcio <konrad.dybcio@linaro.org>
+Fixes: 936f14cf4e67 ("soc: qcom: Driver for the Qualcomm RPM over SMD")
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+[db: report the empty error as -EINVAL instead of a success]
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- .../bindings/interconnect/qcom,msm8998.yaml        | 192 +++++++++++++++++++++
- include/dt-bindings/interconnect/qcom,msm8998.h    | 133 ++++++++++++++
- 2 files changed, 325 insertions(+)
+ drivers/soc/qcom/smd-rpm.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/interconnect/qcom,msm8998.yaml b/Documentation/devicetree/bindings/interconnect/qcom,msm8998.yaml
-new file mode 100644
-index 000000000000..0a05dc620cfd
---- /dev/null
-+++ b/Documentation/devicetree/bindings/interconnect/qcom,msm8998.yaml
-@@ -0,0 +1,192 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/interconnect/qcom,msm8998.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/drivers/soc/qcom/smd-rpm.c b/drivers/soc/qcom/smd-rpm.c
+index f2b3e02abdf1..3677c645edfa 100644
+--- a/drivers/soc/qcom/smd-rpm.c
++++ b/drivers/soc/qcom/smd-rpm.c
+@@ -173,6 +173,12 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
+ 		case RPM_MSG_TYPE_MSG_ID:
+ 			break;
+ 		case RPM_MSG_TYPE_ERR:
++			if (!msg_length) {
++				dev_err(&rpdev->dev, "Got unknown RPM error\n");
++				status = -EINVAL;
++				break;
++			}
 +
-+title: Qualcomm MSM8998 Network-On-Chip interconnect
-+
-+maintainers:
-+  - AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>
-+  - Konrad Dybcio <konradybcio@kernel.org>
-+
-+description: |
-+  The Qualcomm MSM8998 interconnect providers support adjusting the
-+  bandwidth requirements between the various NoC fabrics.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,msm8998-a1noc
-+      - qcom,msm8998-a2noc
-+      - qcom,msm8998-bimc
-+      - qcom,msm8998-cnoc
-+      - qcom,msm8998-gnoc
-+      - qcom,msm8998-mnoc
-+      - qcom,msm8998-mnoc-ahb
-+      - qcom,msm8998-snoc
-+
-+  reg:
-+    maxItems: 1
-+
-+  clocks:
-+    minItems: 1
-+    maxItems: 4
-+
-+  clock-names:
-+    minItems: 1
-+    maxItems: 4
-+
-+required:
-+  - compatible
-+
-+unevaluatedProperties: false
-+
-+allOf:
-+  - $ref: qcom,rpm-common.yaml#
-+  - if:
-+      properties:
-+        compatible:
-+          const: qcom,msm8998-a1noc
-+
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: Aggregate1 NoC UFS AXI Clock
-+            - description: UFS AXI Clock
-+            - description: Aggregate1 NoC USB3 AXI Clock
-+            - description: BLSP2 AHB Clock
-+
-+        clock-names:
-+          items:
-+            - const: aggre1_ufs_axi
-+            - const: ufs_axi
-+            - const: usb_axi
-+            - const: blsp2_ahb
-+
-+  - if:
-+      properties:
-+        compatible:
-+          const: qcom,msm8998-a2noc
-+
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: SDCC2 AHB Clock
-+            - description: SDCC4 AHB Clock
-+            - description: BLSP1 AHB Clock
-+            - description: IPA Clock
-+
-+        clock-names:
-+          items:
-+            - const: sdcc2_ahb
-+            - const: sdcc4_ahb
-+            - const: blsp1_ahb
-+            - const: ipa
-+
-+  - if:
-+      properties:
-+        compatible:
-+          enum:
-+            - qcom,msm8998-cnoc
-+            - qcom,msm8998-snoc
-+
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: CPU-NoC High-performance Bus Clock
-+
-+        clock-names:
-+          const: iface
-+
-+  - if:
-+      properties:
-+        compatible:
-+          const: qcom,msm8998-mnoc
-+
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: CPU-NoC High-performance Bus Clock
-+            - description: MMSS NoC AXI Clock
-+
-+        clock-names:
-+          items:
-+            - const: iface
-+            - const: mnoc_bus
-+
-+        interconnect-mnoc-ahb:
-+          type: object
-+          additionalProperties: true
-+
-+          properties:
-+            compatible:
-+              const: qcom,msm8998-mnoc-ahb
-+
-+  - if:
-+      properties:
-+        compatible:
-+          const: qcom,msm8998-mnoc-ahb
-+
-+    then:
-+      description:
-+        The MMSS AHB NoC shares its register space with the MMSS NoC, so it is
-+        described as a child of the latter and has no register range of its own.
-+
-+      properties:
-+        clocks:
-+          items:
-+            - description: MMSS AHB Clock
-+
-+        clock-names:
-+          const: bus
-+
-+      required:
-+        - clocks
-+        - clock-names
-+
-+    else:
-+      required:
-+        - reg
-+
-+  - if:
-+      properties:
-+        compatible:
-+          enum:
-+            - qcom,msm8998-bimc
-+            - qcom,msm8998-gnoc
-+
-+    then:
-+      properties:
-+        clocks: false
-+        clock-names: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,gcc-msm8998.h>
-+    #include <dt-bindings/clock/qcom,mmcc-msm8998.h>
-+
-+    interconnect@1008300 {
-+        compatible = "qcom,msm8998-bimc";
-+        reg = <0x01008300 0x77d00>;
-+        #interconnect-cells = <2>;
-+    };
-+
-+    interconnect@1740000 {
-+        compatible = "qcom,msm8998-mnoc";
-+        reg = <0x01740000 0x10000>;
-+        clocks = <&mmcc MNOC_AHB_CLK>, <&mmcc MNOC_MAXI_CLK>;
-+        clock-names = "iface", "mnoc_bus";
-+        #interconnect-cells = <2>;
-+
-+        interconnect-mnoc-ahb {
-+            compatible = "qcom,msm8998-mnoc-ahb";
-+            clocks = <&mmcc AHB_CLK_SRC>;
-+            clock-names = "bus";
-+            #interconnect-cells = <2>;
-+        };
-+    };
-diff --git a/include/dt-bindings/interconnect/qcom,msm8998.h b/include/dt-bindings/interconnect/qcom,msm8998.h
-new file mode 100644
-index 000000000000..3eb571e65554
---- /dev/null
-+++ b/include/dt-bindings/interconnect/qcom,msm8998.h
-@@ -0,0 +1,133 @@
-+/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-+/*
-+ * Copyright (c) 2020, Konrad Dybcio <konrad.dybcio@somainline.org>
-+ * Copyright (c) 2022, Linaro Limited
-+ */
-+
-+#ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8998_H
-+#define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8998_H
-+
-+/* A1NOC */
-+#define MASTER_PCIE_0			0
-+#define MASTER_USB3			1
-+#define MASTER_UFS			2
-+#define MASTER_BLSP_2			3
-+#define SLAVE_A1NOC_SNOC		4
-+
-+/* A2NOC */
-+#define MASTER_IPA			0
-+#define MASTER_CNOC_A2NOC		1
-+#define MASTER_SDCC_2			2
-+#define MASTER_SDCC_4			3
-+#define MASTER_TSIF			4
-+#define MASTER_BLSP_1			5
-+#define MASTER_CRVIRT_A2NOC		6
-+#define MASTER_CRYPTO_C0		7
-+#define SLAVE_A2NOC_SNOC		8
-+#define SLAVE_CRVIRT_A2NOC		9
-+
-+/* BIMC */
-+#define MASTER_GNOC_BIMC		0
-+#define MASTER_OXILI			1
-+#define MASTER_MNOC_BIMC		2
-+#define MASTER_SNOC_BIMC		3
-+#define SLAVE_EBI			4
-+#define SLAVE_HMSS_L3			5
-+#define SLAVE_BIMC_SNOC_0		6
-+#define SLAVE_BIMC_SNOC_1		7
-+
-+/* CNOC */
-+#define MASTER_SNOC_CNOC		0
-+#define MASTER_QDSS_DAP			1
-+#define SLAVE_CNOC_A2NOC		2
-+#define SLAVE_SSC_CFG			3
-+#define SLAVE_MPM			4
-+#define SLAVE_PMIC_ARB			5
-+#define SLAVE_TLMM_NORTH		6
-+#define SLAVE_PIMEM_CFG			7
-+#define SLAVE_IMEM_CFG			8
-+#define SLAVE_MESSAGE_RAM		9
-+#define SLAVE_SKL			10
-+#define SLAVE_BIMC_CFG			11
-+#define SLAVE_PRNG			12
-+#define SLAVE_A2NOC_CFG			13
-+#define SLAVE_IPA			14
-+#define SLAVE_TCSR			15
-+#define SLAVE_SNOC_CFG			16
-+#define SLAVE_CLK_CTL			17
-+#define SLAVE_GLM			18
-+#define SLAVE_SPDM			19
-+#define SLAVE_GPUSS_CFG			20
-+#define SLAVE_CNOC_MNOC_CFG		21
-+#define SLAVE_QM_CFG			22
-+#define SLAVE_MSS_CFG			23
-+#define SLAVE_UFS_CFG			24
-+#define SLAVE_TLMM_WEST			25
-+#define SLAVE_A1NOC_CFG			26
-+#define SLAVE_AHB2PHY			27
-+#define SLAVE_BLSP_2			28
-+#define SLAVE_PDM			29
-+#define SLAVE_USB3_0			30
-+#define SLAVE_A1NOC_SMMU_CFG		31
-+#define SLAVE_BLSP_1			32
-+#define SLAVE_SDCC_2			33
-+#define SLAVE_SDCC_4			34
-+#define SLAVE_TSIF			35
-+#define SLAVE_QDSS_CFG			36
-+#define SLAVE_TLMM_EAST			37
-+#define SLAVE_CNOC_MNOC_MMSS_CFG	38
-+#define SLAVE_SRVC_CNOC			39
-+
-+/* GNOC */
-+#define MASTER_APSS_PROC		0
-+#define SLAVE_GNOC_BIMC			1
-+
-+/* MNOC */
-+#define MASTER_CNOC_MNOC_CFG		0
-+#define MASTER_CPP			1
-+#define MASTER_JPEG			2
-+#define MASTER_MDP_P0			3
-+#define MASTER_MDP_P1			4
-+#define MASTER_ROTATOR			5
-+#define MASTER_VENUS			6
-+#define MASTER_VFE			7
-+#define MASTER_VENUS_VMEM		8
-+#define SLAVE_MNOC_BIMC			9
-+#define SLAVE_VMEM			10
-+#define SLAVE_SRVC_MNOC			11
-+
-+/* MNOC_AHB */
-+#define MASTER_CNOC_MNOC_MMSS_CFG	0
-+#define SLAVE_CAMERA_CFG		1
-+#define SLAVE_CAMERA_THROTTLE_CFG	2
-+#define SLAVE_MISC_CFG			3
-+#define SLAVE_VENUS_THROTTLE_CFG	4
-+#define SLAVE_VENUS_CFG			5
-+#define SLAVE_VMEM_CFG			6
-+#define SLAVE_MMSS_CLK_XPU_CFG		7
-+#define SLAVE_MMSS_CLK_CFG		8
-+#define SLAVE_DISPLAY_CFG		9
-+#define SLAVE_DISPLAY_THROTTLE_CFG	10
-+#define SLAVE_SMMU_CFG			11
-+
-+/* SNOC */
-+#define MASTER_HMSS			0
-+#define MASTER_QDSS_BAM			1
-+#define MASTER_SNOC_CFG			2
-+#define MASTER_BIMC_SNOC_0		3
-+#define MASTER_BIMC_SNOC_1		4
-+#define MASTER_A1NOC_SNOC		5
-+#define MASTER_A2NOC_SNOC		6
-+#define MASTER_QDSS_ETR			7
-+#define SLAVE_HMSS			8
-+#define SLAVE_LPASS			9
-+#define SLAVE_WLAN			10
-+#define SLAVE_SNOC_BIMC			11
-+#define SLAVE_SNOC_CNOC			12
-+#define SLAVE_IMEM			13
-+#define SLAVE_PIMEM			14
-+#define SLAVE_QDSS_STM			15
-+#define SLAVE_PCIE_0			16
-+#define SLAVE_SRVC_SNOC			17
-+
-+#endif
+ 			len = min_t(u32, ALIGN(msg_length, 4), sizeof(msgbuf));
+ 			memcpy_fromio(msgbuf, msg->message, len);
+ 			msgbuf[len - 1] = 0;
 
 -- 
 2.47.3
