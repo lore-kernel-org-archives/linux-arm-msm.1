@@ -1,60 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.123
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792525204;
-	b=iG5l+Ay7Czjv5fr82bgADxysZhQ2XruPitjeFZebt005pHQuRQYhMXFxIOSjcouUlq4G
-	 Tv1M772bVIKu8y9tPDdLDx/j3xNxKagUFwBi/9NFdnjxg7HijcOrrGwPXTXs/cN58Zu5Y
-	 1RGJUc26Pc1IJuf1tZonOGSbijmL1jaaH4cP3u2gsmYwZzrY9qvWxtVbJX9DHOj9+1UBY
-	 AogfvHSbbH4R2cFjLtAcFBdi/+B8ccsEdHn3uC+9cRZlW9UGuD9BEXaXcV2ttYhd6JvmW
-	 t40VuCy7dY1y2LZCOO+y0VbfjFT0c4RKr7WjnohRVSg4VLT/OITyRMw91s/GecZw+tA==
+	t=1792525829;
+	b=BiEqW4eSBixxvS/JCZkUpaeXuDqViujB6TfUW16QjwZRzzWyvbSIlJad1O5NHgCMXd+f
+	 ZIRXkwWJ+hhsZ74n+men+uRFPU8JQcyZlPDYZiuhwNOlc70B5PQ28HsvG+o3LX4ng2/kJ
+	 R9YvjMZ2UuRZTBxp7dURs0mFiDFXJzVSvy77YGORN66Xw3idum0C1kgSFVxA7Psd9ChoT
+	 o+bHEh4w1gTqFxtL/421qje1unr+PLlbWQIulZQzd6xaFld/iNAGw8lMjwOmTK9L6xQve
+	 cW0BVjz8Cm8bxrwd1zOD+gFpJczf81u/hNVL6yCYxFRdeN1C9mMGOvPF6lc70BSj4vA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792525204;
-	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=0J82ilsu6p4jQx6bNN1P2jhf4sWBs+ejJtb6PInrdyk=;
-	b=ArAcHTIrYhYgymZ11mcudLHcnX0UFqZ7xp9c5Y2Mf/dmPYeto+54r/UOSVp/boTtxA/D
-	 SeEM0ZtUW6ZQ86QPPS6ZCVvzC3eFggSBI6Hd77uRcVJQy8d8YHPXow6tFahCPeWW1pzZT
-	 Ou7QA8m9J+vJD4I2oASyECMd8M/0VsHZ5jFUd0hmuNFmPrbt7TGzHsa/soxizwWwKd18w
-	 3def5YjKRWk8u4w4NLTNXYCyQGJAhZqK1BNf60MSNxCBz1y+4osIqzZ1AYmdC7tN6YYpL
-	 rlJxVXsk7BaKdgBasqHVIsE6zbeldmiX/bsI9Qr/ymlx46xT/LzHtUZiSGGXSlGHd5Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792525829;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=hPa4PG254yePdehpmJWqML5hqKXw+sws5WB7y+lwM98=;
+	b=Xe04XYEsO5wSaz4yCySIVBud91HifCOiaa7KjswH8qKuBOiLwu8wk/YY3gCrkVGdAo+S
+	 8oSe+DbNo87No2vfr2cfLnMWxd1mPilbBvA1FY0XjzYjYa1d7NMdIpyNsC61QrhZ/+vyh
+	 ccSptXO/PP1TIuS5BIMkjH4sVtVb+YofFtpAxyHD96r115IdQeAMxZWT3aDZMXpv42hVj
+	 Ky3bLS3oUgBUGBuxWQlUM/C8tstwRGxi3Kuz9oX7gt9sbfjEbhrbDW9FuKsFlfxmboiKf
+	 Qr4cGNFCKioL3R0Q/9oCaM8OnzIW1A0+BDL3rxWjodlszAreJ1V6oqWcux1lkAnDcEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=pm.me;
-	spf=pass smtp.mailfrom=pm.me;
-	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=YnwXXM1R;
-	arc=none smtp.remote-ip=109.224.244.123
-Received: from mail-244123.protonmail.ch (mail-244123.protonmail.ch [109.224.244.123])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=NuIBbCyO;
+	arc=none smtp.remote-ip=209.85.167.52
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E37E2606A31F;
-	Tue, 20 Oct 2026 19:40:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E37E2606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAF8A606A31C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 19:50:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BAF8A606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=YnwXXM1R
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1792525201; x=1792784401;
-	bh=0J82ilsu6p4jQx6bNN1P2jhf4sWBs+ejJtb6PInrdyk=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=YnwXXM1R1o72AyqcGodC9/QC0VYSkG8kIn1qeetODGW/DoLrRjB4Xf7T6YzUflAwO
-	 goxi4CQpcYCsP1me0B0p4ZUSfW4GQQ60GSreB9sJx75CeLHIB6cSLedyu7VSWMwbkq
-	 DD+1SG/4/WH/cHUfCqGmiWXM9wf6yVuqb/KTesA5TX4T43gSQoWcUNty/qgfslA6Ht
-	 lrG0XbVbhoFkduYfoLcQ7LAPwqCBxOk3AsiPhlDjpNOhkP3BNEJZddYzBjrcEqoWol
-	 d+PFWZmOqWzbzcdTkXBDLAkkQoqpEta9TWfJMkTdhFJifdIMhZ57PAMjALTqaisWQg
-	 zykkJJQbE33og==
-Date: Tue, 20 Oct 2026 19:39:57 +0000
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, Saikiran <bjsaikiran@gmail.com>, Mark Brown <broonie@kernel.org>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] i2c: qcom-cci: Suspend the controller 50 ms after the last transfer
-Message-ID: <20261020193946.51478-3-birk.skyum@pm.me>
-In-Reply-To: <20261020193946.51478-1-birk.skyum@pm.me>
-References: <20261020193946.51478-1-birk.skyum@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 54af0124be2d0c181593aec4593450dce63b1f11
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=NuIBbCyO
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5bccb867d6fso3324667e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:50:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792525827; x=1793130627; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hPa4PG254yePdehpmJWqML5hqKXw+sws5WB7y+lwM98=;
+        b=NuIBbCyOHLjMgBRgN0U2pccaR1TZLAsQhr1eI7b9dpYjk5TlNnN94DdOAXN19YkR7D
+         FAf8nTaWqBcQbkylIxVI5KyXHkXknkDYt7DbtIn1A08do1AD1oVysJRCpy81PHz37BEm
+         x014kEN3iJ04lFyi8hElEoVGeEPXX/8cBi5LcFdm5PQXylCE54Y2pr0yKGA4R6VQAHdi
+         /HLYIHUAF/4tIGEKKW05bLQEnDiGo1snPRRas0w4qeATPZuUYn9RTZssEOckbbc6bnQ0
+         pDMMs1XJUDvJJslhQxV2fG2OAscyUOSOnaNVGwJjLjWHyWx9fVUSKYloowuqwMfn+P9z
+         ydRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792525827; x=1793130627;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hPa4PG254yePdehpmJWqML5hqKXw+sws5WB7y+lwM98=;
+        b=VL2PjVdZOd4OU7qJD1rbvdt0nG5Gq3uNMOTzmVPwpgwCJP1JEJ81+GcIg5AhYAsQff
+         7YyayfN3YlF5sukArwU7yNyEhRN9mYJiMxOjLNA9ik4FuVkuxXy9+f9O/cEnSek7gyze
+         gIOvxWC2PFydQCYo8aD7GWNrQ0X+q5r6g2yhgfdy/0GPdDIw3lXJC0Zu647whquw8t+P
+         yv+fli8mbK0qUB/Ycr2Ctm/7ZwTIIpjX6YqLupl15ld+62RGeFjNHQTTNcxNer+B9ODX
+         k73frYjAKd8sFDstBO2Lg2dfvEoRoXLbdy9E5ZVipkloql1LAqfSmk2dN9J2KE6G8iCz
+         4+7w==
+X-Forwarded-Encrypted: i=1; AKwUvBzpMnBYUzYRn3+J4sNVQxXem5Fqo6KkwrpbnWME2AnWspUOgbQuGajs9iFn9TZY+FJsFKMl45oHeQOe7nBw@vger.kernel.org
+X-Gm-Message-State: AFq9FYLj5RwCwkfRcot+Zy5IYwSBVZTQmfagrQTPHgTTHXKWiRqzxsxr
+	hrTwLtVKyu4PqSxLPTXbWPWXRrFCQaYS2LoYy8RjPIbADMtJWIHzxwtQ
+X-Gm-Gg: AYBFou3x9bp8Gy1Lzr3BEqrN3vW1ZzN4fG6tTmahMyim9zQDu7d4Q7PR6+ZBo6dUUl/
+	JPN4mF/ckpuXpMfE+fvCbP8ii7daGn2zPGS41MnKByRYLmVKvvysdXNPIvAzJO3T/sG4sHTmgwV
+	qF8UEPlccvtHbs5t47VJBPBVdX4VypwU+7Tw7Hut/Ec8h0gqqr14sSfLt5uMXADwD7jQjKuOpOV
+	6fjSm7WbjuTc3nx3KEQ1cbfhsS5fV6fLLTNSi85omFEWH1kxWF9rXxsrIjIDdwg8tIoWeC11q0m
+	Zs7GYJoCy1uUuPU2Z74QXnfnBN/31dpbR9+CQda5bbzv/0anfrba5LzOUfQMIyPBP6j5jfOHes0
+	A2x5WvOPPlxh+vUL47rRP+u5vdsEaeAMwxgyLEjczCZC8ogUv3VQ6fHPxih4wK5ivEUZjajjeyo
+	s792JVqeaFemfrNfnsEUCGTrOs9F66mwjrtx0Fgg+ADAtWrfMMDQhEjdfthk1etl/QWYaWsuFX2
+	GOKpgNS3sYrDdHtB1p0KlSW9krPW+UiQTu0o+RWSt9C1Wvv8FsTq4AdTRC99puU/peBotG2RC5l
+	RolTxNkMrIkXw/S1uAEKW5CXo7BNTKMPQEJyDtqV32szVEEefJglM6aYtyYySTvviM5NtlxE1Az
+	MDw==
+X-Received: by 2002:a05:6512:3a8a:b0:5b8:bc5e:b57f with SMTP id 2adb3069b0e04-5bfa1c1fb76mr4379e87.55.1792525826617;
+        Tue, 20 Oct 2026 12:50:26 -0700 (PDT)
+Received: from kompukter-Systems ([83.142.235.16])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfa11a8caesm75345e87.5.2026.10.20.12.50.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Oct 2026 12:50:26 -0700 (PDT)
+From: Andrey Derkach <gabin278@gmail.com>
+To: David Heidelberg <david@ixit.cz>
+Cc: Jeff Johnson <jjohnson@kernel.org>,
+	Johannes Berg <johannes.berg@intel.com>,
+	Kalle Valo <kvalo@qca.qualcomm.com>,
+	Michal Kazior <michal.kazior@tieto.com>,
+	Richard Acayan <mailingradian@gmail.com>,
+	linux-wireless@vger.kernel.org,
+	ath10k@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	phone-devel@vger.kernel.org
+Subject: Re: [PATCH v4] wifi: ath10k: make in-order rx amsdu buffers persistent
+Date: Tue, 20 Oct 2026 22:50:20 +0300
+Message-ID: <20261020195021.1133728-1-gabin278@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261020-ath10k-a-msdu-v4-1-670b69d39059@ixit.cz>
+References: <20261020-ath10k-a-msdu-v4-1-670b69d39059@ixit.cz>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,46 +106,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-With a 1 s autosuspend delay the controller stays clocked across any
-power cycle of a target that is shorter than a second, so the reset on
-resume never runs in between and the first transfer after the target
-comes back stalls until the 100 ms timeout. Camera sensors are powered
-down when they stop streaming and up again when they start, so closing
-and reopening a camera quickly hits this.
+On Tue, 20 Oct 2026 20:52:07 +0200, David Heidelberg wrote:
+> The WCN3990 firmware may split an A-MSDU across multiple HTT "in-order"
+> indications. Mainline drops these ("failed to extract amsdu: -11",
+> rx_confused, recovery), collapsing throughput under load on affected
+> devices. Stash the MSDUs of an incomplete MPDU in the driver state so
+> it can be completed by the next indication instead of being dropped.
 
-On the Lenovo Yoga Slim 7x (X1E80100), restarting the OV02C10 with
-v4l2-ctl after pauses of 0.05, 0.1, 0.2 and 0.5 s failed in 19 of 20
-cycles each, and in 16 of 20 after 1 s pauses. With this change and the
-reset on resume, all 100 cycles started, and so did 150 of 150
-libcamera starts back to back.
+Tested on a Lenovo S5 Pro (SDM636) with a 7.2.3-based tree, on top of
+"wifi: ath10k: trigger hardware recovery upon rx failures", replacing
+the older out-of-tree version of this patch we carried before.
 
-Transfers come in bursts (a sensor mode alone is a few hundred register
-writes), so suspending 50 ms after the last one costs one reset per
-burst.
+During TCP downloads the firmware split an A-MSDU across two in-order
+indications (once in about 39,000 indications so far, counted with
+kprobes on the stash and resume paths). The patch stashed the MSDUs and
+the next indication completed the MPDU, with no warning and no
+recovery. Throughput is the same as with the old version, about
+60 Mbit/s here.
 
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
----
- drivers/i2c/busses/i2c-qcom-cci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Tested-on: WCN3990 hw1.0 SNOC WLAN.HL.1.0.1.c2-00455-QCAHLSWMTPLZ-1
 
-diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qco=
-m-cci.c
-index 51ce174..62b0fcb 100644
---- a/drivers/i2c/busses/i2c-qcom-cci.c
-+++ b/drivers/i2c/busses/i2c-qcom-cci.c
-@@ -794,7 +794,7 @@ static int cci_probe(struct platform_device *pdev)
- =09if (ret < 0)
- =09=09goto disable_clocks;
-=20
--=09pm_runtime_set_autosuspend_delay(dev, MSEC_PER_SEC);
-+=09pm_runtime_set_autosuspend_delay(dev, 50);
- =09ret =3D devm_pm_runtime_set_active_enabled(dev);
- =09if (ret)
- =09=09goto disable_clocks;
---=20
-2.53.0
-
-
+Tested-by: Andrey Derkach <gabin278@gmail.com>
