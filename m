@@ -1,62 +1,62 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.111
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.110
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792515853;
-	b=1Kozfi9b6hDFTQNwEHw7WQaE3Kz72r+nMZiQRdiZ3iqGcou/Y+/TQx1RuNUy9Ub6kqjX
-	 5/TqlUcjXLOqhy/o3Oep0qEBb0+Oj14Opz0ULY+bl7DRw/iuckyGd0PZF4WiXwTbxsZnP
-	 y1cy5KKkHefbDqgEz//HnQWZ7m3Ii8Iu4dqc3qzpE/HGtfggEKYZxMQVmDtyG5UerZOIT
-	 07WR/uSRitjI4QV1Aq0vorDeIbQGjKNdb6rWcSMFGeh0L9/T8TWn78wPg5vjxQDoDJTTk
-	 ifqGazngOeGZETovvYS25WIOYNMGCVuhnpFMa7D7FmHwSWIFlkCsR4umuZNCpr9jFEQ==
+	t=1792515862;
+	b=yFEIgHFvTPk26J0KHHppWw3SPXBfO5cQLoFldSbxGSmtZtiqQP8cxxBlKAG6rJxFBozH
+	 Sf7jv0178Duvv417CHmrYmKY6cPz8hQkNV8Ghs2HgiqXICdNBRjRM+EIKq/EWIrNiYmBx
+	 LroGMhMPqN38Sfb9OfCcqevb5vo8FVFNfZ0E9wmis4jQH4hVQtFpXA9B6mtca9/mCGVCt
+	 6Aam3sdP3panmQ+xGSTL34ENJqpM5Hk3BCyki8hgwHOCogn8N0zTSdsZNrMlf//nB3q5O
+	 tKKRwvBuPCS3r8gcOVd8kDrCv/6DixOUMcqrvQ2cQ/BA7hJpEJzrDXaJgycuCMvizPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792515853;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792515862;
 	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
 	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=ilOCs9JW1eswWZldgI01PyWwMif6Q2IZWcYqSQMNIxA=;
-	b=uOgMjJUeHRxK5+zyDEKjlsPKl05oQtEwNEpfiMLAGxF3asU2JFYZK1XaZPH9ds/R3MAu
-	 nY69i9sBMpWGgPFI+nIdTcK0ZEHVp7Wm12McsrIM3O7H91tLi3N1h6Hn4EOSg5xigqFI8
-	 CesRkn3wmFri9eJombTMFqIIvekLfITcEXiYk59Rnj4oxv7WvS8wrJh0VGL4xHQSBkcDx
-	 cDiqr92U6wYKStm4d4jqSygY0o8JCAti6B1T7U91YzWOG+Ygt/Twge5chspSCaWpBK3z+
-	 5H0e76ZBhhHa2xFPUNA8og+52QeMF/kQKQ6HbWLp41VW/TUpJlz+fuvYysqbcQtMv0w==
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=8sR+zDzMi9HFrsdnqSgy6DAeaNbWllNx84H/JCpIZzw=;
+	b=fpHt9nPB6iJC0LE1Q8MjsjmlLyKtZm+f7WpfVPTdWZm/Rx8Ry+4YgSd88xUtbGo9hOs0
+	 nlixzJJIh2CwIO6bdg7E8waS06srHIms4HcZ1/jEnXPev5iJdc5erzm+VbZ5Bljd6Ho1w
+	 hX8/aMcK/q7tq2mj2GpdqLFmKzvbrhLCtUclXzcni0DOC5nH5NU9VicULJEVMMNB4EXK3
+	 7RnK0Rf5hVSS5Z74bdsVC8uWi1X7L2O5J79R0gDDWyFA8LNFePJCu/O15ne8rMVK732uA
+	 7FJsB45/Tqy4RFzRSEHXdHBJFctLVAIFyMzo22FUpzGBEawdjzNqq1c5JwfKxvoAT1Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=packett.cool;
 	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=vVVPW8rl;
-	arc=none smtp.remote-ip=95.215.58.111
-Received: from mta1.migadu.com (out-111.mta1.migadu.com [95.215.58.111])
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=F+6g9+a6;
+	arc=none smtp.remote-ip=91.218.175.110
+Received: from mta0.migadu.com (out-110.mta0.migadu.com [91.218.175.110])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760CD606A326
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:04:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 760CD606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAC3D606A31A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:04:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EAC3D606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=vVVPW8rl
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=F+6g9+a6
 X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=V6YUdxWoTDNnXagrWvpsYWqhtgXuh09OxHBYpt8V1OY=;
+DKIM-Signature: a=rsa-sha256; bh=h7y1OEuGysqMDVk0RdcCkB7ieMe6BbeWyLj9fbcPZIY=;
  c=simple/simple; d=packett.cool;
  h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792515848; v=1; x=1793120648;
- b=vVVPW8rlAWtGlBcXnOSiY1L+7yxBfBgbWoHTFjuvyT4G8C4CkoIoQeuebeLr8HWfC2tcdBoK
- utm2tY11sqh4t3QLCXRI+wYV08ojAWkdAJ2gfB/p0rOjfisK+fJsqBrJx40P0CCfqyusA9gOZlT
- 4dTYMDtu09Ne+W+crI0ivq+VBuVsL+INHvSJLo7CNbNQyT4xVpmlgyW/ES2SBxTnTctCFhNpRSO
- zkpIY5ORVO4Mv95s5VdSkovA/MXV8jn4wpq53Vmj/zmY/wgMN2N6EwELSrle+/3UETVawwT2hV/
- Cd96HEmKpmzVi3x6r5Gdn1NprW7XPkVI5MJqrbn7z7Low==
+ t=1792515860; v=1; x=1793120660;
+ b=F+6g9+a62CwMiy7K+Blyc3Im53Bi8PCt8BDwigujfXrnpSgOkNxLC8V9CIbvD9g1D9oLb75T
+ tAh71WQMyKnsmaDEf5ZVtPeHmWbJ8l/T259KY0v93f0VdzCs36hpm3Iwla5Q+8TAlrwpS+uEJpW
+ cxzHded2KGcPDLaAib3HyFjLq54pLz98GWG31fjUxHWsmMpzV8iiZk9RdGVy+2fgqL2UmLjtaAu
+ Me5TrJpebsNDEN37J+chFLXDLse8CHkXhyBhyKGtWoqiHrCoEENBuzeU2GXu65UNsKiifvsPKga
+ BIppkm+bIDaOrbDZZs6rXiCuiRxsFyFciQClVbK4mhqoA==
 X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id 22d13bc26f5e4975;
-	Tue, 20 Oct 2026 17:04:07 +0000
-X-Mizu-Trace-ID: 22d13bc26f5e4975
+Received: by smtp.migadu.com with ESMTPS id 28b23032f6087e65;
+	Tue, 20 Oct 2026 17:04:20 +0000
+X-Mizu-Trace-ID: 28b23032f6087e65
 X-Migadu-Flow: FLOW_OUT
 From: Val Packett <val@packett.cool>
-To: 
-Cc: Val Packett <val@packett.cool>,
-	Srinivas Kandagatla <srini@kernel.org>,
+To: Srinivas Kandagatla <srini@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
 	Mark Brown <broonie@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: Val Packett <val@packett.cool>,
 	Jaroslav Kysela <perex@perex.cz>,
 	Takashi Iwai <tiwai@suse.com>,
 	~postmarketos/upstreaming@lists.sr.ht,
@@ -64,11 +64,14 @@ Cc: Val Packett <val@packett.cool>,
 	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 0/4] ASoC: codecs: wcd937x: add USB Type-C analog audio mux support
-Date: Tue, 20 Oct 2026 14:03:24 -0300
-Message-ID: <20261020170341.1641325-1-val@packett.cool>
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v3 1/4] ASoC: dt-bindings: qcom,wcd937x: Add USB-C graph properties
+Date: Tue, 20 Oct 2026 14:03:25 -0300
+Message-ID: <20261020170341.1641325-2-val@packett.cool>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261020170341.1641325-1-val@packett.cool>
+References: <20261020170341.1641325-1-val@packett.cool>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -80,45 +83,42 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently only wcd939x has support for USB-C SBU audio in mainline, but the
-older WCD codecs can do the same thing 939x does with USBSS, with an
-external 3rd party mux instead. This series adds support for that based on
-wcd939x code.
+This codec can be used with a USB-C SBU mux to support analog headphone
+adapters. Describe the mode-switch, orientation-switch and port
+properties similarly to wcd939x.
 
-Tested on sm7325-motorola-dubai.
-
-v3:
-  * Zero initialize the device_node with the __free, oops (sashiko-bot)
-  * Clear the pointer in wcd93[79]x_mbhc_deinit before tearing down the
-    actual wcd_mbhc object (sashiko-bot)
-    * Hopefully this is good enough to satisfy the concern about
-      getting a typec notification *while removing the codec* which is
-      something that has an extremely low chance of ever happening in
-      practice anyway. I'm not adding an extra mutex for this. I'm tired.
-  * Pull R-b for the commit in the middle but not for the other ones
-    because of the changes above.. (prooobably would've been ok but well)
-v2: https://lore.kernel.org/all/20261020082631.1509275-1-val@packett.cool/
-v1: https://lore.kernel.org/all/20261018231244.1266926-1-val@packett.cool/
-
-Thanks,
-~val
-
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Val Packett <val@packett.cool>
 ---
+ .../devicetree/bindings/sound/qcom,wcd937x.yaml   | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Val Packett (4):
-  ASoC: dt-bindings: qcom,wcd937x: Add USB-C graph properties
-  ASoC: codecs: wcd937x: add USB Type-C analog audio mux support
-  ASoC: codecs: wcd-mbhc: guard against NULL cfg in
-    typec_report_(un)plug
-  ASoC: codecs: wcd939x: fix ref leak and NULL deref with USB-C audio
-
- .../bindings/sound/qcom,wcd937x.yaml          |  15 ++
- sound/soc/codecs/Kconfig                      |   2 +
- sound/soc/codecs/wcd-mbhc-v2.c                |   4 +-
- sound/soc/codecs/wcd937x.c                    | 170 +++++++++++++++++-
- sound/soc/codecs/wcd939x.c                    |  21 ++-
- 5 files changed, 198 insertions(+), 14 deletions(-)
-
+diff --git a/Documentation/devicetree/bindings/sound/qcom,wcd937x.yaml b/Documentation/devicetree/bindings/sound/qcom,wcd937x.yaml
+index f94203798f24..f15b9a9d90b1 100644
+--- a/Documentation/devicetree/bindings/sound/qcom,wcd937x.yaml
++++ b/Documentation/devicetree/bindings/sound/qcom,wcd937x.yaml
+@@ -25,6 +25,21 @@ properties:
+           - const: qcom,wcd9375-codec
+           - const: qcom,wcd9370-codec
+ 
++  mode-switch:
++    description: Flag the port as possible handler of altmode switching
++    type: boolean
++
++  orientation-switch:
++    description: Flag the port as possible handler of orientation switching
++    type: boolean
++
++  port:
++    $ref: /schemas/graph.yaml#/properties/port
++    description:
++      A port node to link the WCD937x Codec node to an external USB-C MUX IC for
++      handling altmode muxing and orientation switching to detect and enable
++      Audio Accessory Mode.
++
+   vdd-px-supply:
+     description: A reference to the 1.8V I/O supply
+ 
 -- 
 2.55.0
 
