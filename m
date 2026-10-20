@@ -1,118 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792501379;
-	b=XSpttfrMKG26xuTFjWPYJ7aO7PLKXZ53z2Gy29oIIC93iFesOG0iYa5zPZRFWfFuM2pF
-	 gxuvttqocZ21N7bUmYuKSPISCRL+wY5kDQ4ZAPIp2QxWmz1xuIjMYvWGVuSRnap6PtKkI
-	 1R28en5vaXN9BOm6eKDAweejp42D5VZN+Tz6feaLd6IOhpCJzSU1pKuYWMcFBVMfe+7aq
-	 VXdcRXq+C/wRk1vqndIZsowRTvTgDAXG7sJAP+eLU2wcf9G+4cOtbWpt9WkgBL/RrngXo
-	 DPlpayx8HOBsaEUFSZqzPVAknCTX9mR7PDEfcM0XYAqUKXti3Oqoi0+2Wqyb4d7iUMw==
+	t=1792501530;
+	b=4wZ4cWzFoHBC55CZSNx0j9fKhlCoQise35VRUeDK2XN5Q2jL0WttmZDbZ0UcT5SMyoaK
+	 6af4KyF7pOhRxpkL+KLIoKApVbSuY+7n0Wt/uX6d9Ez4pp07LB7JikO8wVqjrkZjz17Af
+	 L6gD/n5xBK+0vfsvo+p+dWp5uy5oED9F4FOffpNdGweGTUANAF7FTM6rOJ71+dfEyHNsU
+	 Uus4UrTGqIxXxHODtDUbD+hget1g+Hxf9c2VGqw/X+4US8nIxf3ioA47FFBTkGJ8JPA1q
+	 qeX0Uilpqvhh2edcYaa9vz1y/jQJXNDK4X82pC0ndwcF+Y6FJr6C7AUtbI0Bsjydrew==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792501379;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=px4pRxwPG0kCk7ZExiNp1R8AgRsYjY9bdnbQlLC4dRw=;
-	b=lZtlCG8rCt2n+PvkZJVPpLb3/nfJWVH7PUVvbQLpYHGuEk6W3v4WF+rvo2Dg5ZA51mLm
-	 93kLqi59IR69jWPDWpIGLUu5xNyaU4dI4KVl/FNpS8j3qmxTMRQiHK1GEMu6kt5DbhpZG
-	 hGve44qAuHpTGFMRNgmrZP0/oCIkPXbREvV0J7kkMhKexO1E+0nl0a/mijPHGwE5jI9/U
-	 6yO383VG34Jn/oDeyp1YA/MtLJPAhkdwTfUhPmgWZqdqtgzjN/HLhjSrJkvJRrCHfmVyB
-	 5fknSug4DSwueLYnv54mFFs0/jPAEGi/Y1RyjNUMyoFwo5P2qnu33skEq7YMaACzUXg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792501530;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type;
+	bh=YDc06yRlsSNlXEmulUrV+Mwea5zL3HsZI3CQkUjyJAw=;
+	b=smrln1i7vBzz2g6coSgvY54alQfmsBpcNf13oHnAXMkAWmbRaHhjFcR17tPtipyh4R0D
+	 GcTfSNcW1wvzZqUvvCbva5P9pdhhP4mNSNnyuJ6+1sf2jLVC2jPZpXKgq+JBoXopMvun4
+	 cpofIAOLEJG5XpBEF53DVymFG6Q5SgixfEXuRwB/BgOIvUCcbFz4YZEMvUw4BAwvuiXeM
+	 J7oFz4BybPp28tHpXLHBEOVGCsO9O46BzWfJ0Y28pjUGj+QWu2AMNouiPHSiOhUV4H1mn
+	 c/ttX4ZJabTnxdNBpMEqHqFZ0pgYkbPnVe2i4m+BmEqUwlz5vmFdHKBfG8734MTjK9w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XrtP91GN;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VfL7W+H6;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=myqh4M6I;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B3DE60A3810
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:02:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9B3DE60A3810
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B883606A31A;
+	Tue, 20 Oct 2026 13:05:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XrtP91GN;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VfL7W+H6
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69KAx66c2524247
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:02:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=px4pRxwPG0kCk7ZExiNp1R8A
-	gRsYjY9bdnbQlLC4dRw=; b=XrtP91GN1YmA1JntTWsZNBgEH9FPP6raZCo7X4DF
-	qiN25o8diN9ekcIMUCjA7esWlm1+AA/vVP1KSguAz4uyeWfIJQEVAL9fyxp9VUZg
-	wfehte0qA+RYS0wzkSDWLuylZWsG8AmMK+SD4IfL9UPZeJBQwckWSlHaqEeTTFzS
-	mZjzRUGJcXC12mq1ueTpuwdvmQUeo+t2fkfNP0eMUfQYoXZPcmH6FBJyc5MiknzW
-	CA0sQPsaLAuuiBSMvEoXmM3CXxSKukDeAtaFfD62LVug/W+tUASeZHd0nyJNc+Wb
-	ajDJXojgAFcTTSMxCaPqWe9hdpsV57xk/2fIi323lyB3vg==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5p2jxj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:02:57 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5ea71263f4dso582696e0c.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 06:02:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792501377; x=1793106177; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=px4pRxwPG0kCk7ZExiNp1R8AgRsYjY9bdnbQlLC4dRw=;
-        b=VfL7W+H6/39ZjUqtvmvLnG4f3PYJNs3YHcHJQ8CrcgpmCbadEKosqtB6QEKN3N1GSA
-         IF8wheBOE5MmQGQDuHW8xzdF/MF0UTBLWchkmj9NvY+dGRBdKZGSeNzCdbdXvHnOleTk
-         zZYhnkXzRtsv1RVmgWOXqRapg7Ri3nzdQGZLkQzyuaJamQoylOSdVsCoIyKqlNkssYbd
-         Lu6skJQJNjMYc0vHWbXmEg6J9OocUmG11QmzR0wBsZwdCs1/qTqYX1uHZ+mHDmS6JO4B
-         7jaVuxltNuOfNzO5qlN7LHHI62USx9Yg6kKzXX+hymsqP6PhMvkVD3oLSWlvvx9pZHdz
-         yjkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792501377; x=1793106177;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=px4pRxwPG0kCk7ZExiNp1R8AgRsYjY9bdnbQlLC4dRw=;
-        b=ldsPQVoGDQEsav+zN7domGsItihWqod6Q8YR4a6yAbGv4wapEVXBwI/nVNGVqpEwv4
-         PKIKVz/6BUfn4QdwI3JesIAz47gvLyLFjtC7pBY0PxqUTjPCzFDklQDjCiqc9ii23W9B
-         VW6yxBDU1+lZg4A4MjKGoCGbAxRARDBsIJ8sx40ok5/KKsfsQB2cOmuJ4+woZkhnG7Gj
-         PcieGLsIsHnHHF0hrqbJN+G7MaznEewYw7pjetOE4c6GIQ7EIedcsFbh5oCuJxcD7vCn
-         lPov3TCHOEWkXxNaaoSK34c76JkHcWtQHxTL8ZC3Bviv+nZUwn2ifT/qsKapkyXRPjD0
-         50bw==
-X-Forwarded-Encrypted: i=1; AKwUvBwenwkjqnadrY4pWU1uWIt3els+Rr4zAfj0VDg1Sp1mgzqVg0HPKQQ3QruVSE2oeBOMRWyY9uFXuRSRYB4k@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ81wRTecBGpTQ1BuZuz+SQHxVS2w6XeJW5XLteljc9YtNCXVt9
-	t0JeQ70UGKaF+a6xqujDLr+R2L2ZeUaUf+6or2tyhxZ5PFqGzVgYHlZER+JW24ZoNMceSs2frvZ
-	0/lKSSheIJxZJDvKkqh5kklEgnCF8vQDsVt6Q2ox+FBrNf6CjQyjc9NNEYeE5ZoNUVste
-X-Gm-Gg: AYBFou3QKW4u/BS0z5KL7bqKL4RCe0xRuOnwIckF6WO+g9rLYMnqOyBjnKAmHYDeEuH
-	BPMM9bnmZjdmvI4D5Oc8n+elSi6kjFJkj0LrtTGRXB0zWdXYWqcqwdPSwBPvj5fobHnsVcndxzM
-	VfwNyCqpr+WEWnxdqXdhM24mxKWQsfU1eyfeR8PLbSa0cc8yjRYx3U+5Q0uCClcpGBBSSbUJhEK
-	RFdLvJWcntXsqBGoPf2eZ0Nsbmn/DTTqLDw5RsRaQd1pEv0mPp4P5c73QFOaeShwbyAHRyj3HO7
-	a05zTB2vnEPKU5Gd88+OaifCQCCWTSOw1b3kLNvzUy7qUxT54IUZX1sb6Q8J+vH20hjn5uxz1hx
-	o8tkJSvgACSQ8K1Y7
-X-Received: by 2002:a05:6122:1b82:b0:5ea:dbae:3cbc with SMTP id 71dfb90a1353d-5eadbae3f05mr663485e0c.19.1792501376573;
-        Tue, 20 Oct 2026 06:02:56 -0700 (PDT)
-X-Received: by 2002:a05:6122:1b82:b0:5ea:dbae:3cbc with SMTP id 71dfb90a1353d-5eadbae3f05mr663468e0c.19.1792501375911;
-        Tue, 20 Oct 2026 06:02:55 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.187])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1cf04ffe9sm253748145e9.0.2026.10.20.06.02.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 06:02:54 -0700 (PDT)
-Date: Tue, 20 Oct 2026 16:02:52 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Xin Liu <xin.liu@oss.qualcomm.com>
-Cc: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, tingwei.zhang@oss.qualcomm.com,
-        jie.gan@oss.qualcomm.com
-Subject: Re: [PATCH v1] arm64: dts: qcom: kaanapali: Split cluster power
- domains
-Message-ID: <c7kpksiq6y3riziq27gogegfcybzhaxa5v5d5z5ajc2m3o2dwf@eebruydbwutk>
-References: <20261020063721.2306679-1-xin.liu@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=myqh4M6I
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A33321F000C4;
+	Tue, 20 Oct 2026 13:05:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792501530;
+	bh=YDc06yRlsSNlXEmulUrV+Mwea5zL3HsZI3CQkUjyJAw=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=myqh4M6IAWFmqgXG16kpxErWnj01CbEjVgU4LBAptO3UADlbU19+sv6x/B9PEc7Cb
+	 3jSgOY1ApBSFT+V0uFzp8vLOZZOTiX/r7JyoRKr+ZGHP9ygA8E7K3CZuOR+ycWE4F7
+	 zKbY3RaYPCERlVReQav5DTgE9UYK35x5N+9oQ3jjRjOe70WtIFo/8ASpiIvcce6gVb
+	 tUkQ59WcDlectF6R7qse4nYQqlrrAVqXBS4h8ATJW5VlrtDbnt24YpY5b8CKbdwbqo
+	 oRL5B6DHok1P3BHrNkdtMKx0y6MoRA5Eka8x7ireF5vEFmQNDppxKYmj2FFSCu7T7K
+	 q2L//gCDcU27g==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Sriram Dash <quic_sriramd@quicinc.com>
+Subject: Re: [PATCH v3 2/2] phy: qcom-snps-femto-v2: Add support for SA8255P
+In-Reply-To: <179216548965.106618.12539639688235621089.b4-reply@b4>
+References: <20261002-phy-qcom-snps-femto-v2-8255-v3-0-342542bd9bc6@kernel.org>
+ <20261002-phy-qcom-snps-femto-v2-8255-v3-2-342542bd9bc6@kernel.org>
+ <179216548965.106618.12539639688235621089.b4-reply@b4>
+Date: Tue, 20 Oct 2026 15:05:27 +0200
+Message-ID: <xhkdbzew834ko.fsf@mkorpers-koolstof.csb>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -122,49 +63,192 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261020063721.2306679-1-xin.liu@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: Ni1nTn9Wn_LcCV4Of6f2R1FRnf8u2W9A
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfX7dKcfo2EDMAG
- /jyR4Jmq8Xjq3g58kyIg9qJyNFXIrCHWh46O2vfVvpSLlj0v0Gm9cGJPfUM8tDWwL0t4ybibPkA
- +3StVESD+dDD/7HDEjhZ+JukGrUmKwI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfXzhhVdZK3/nyN
- 0csa03V4dgQfsvIbHYY0oSkPlUIQLZlc1pNtl3RrtNFIxnd5IUn4tfE3JycXq2knOhl8Qn14rOV
- zLCo9hoGllmxMmi75Hy5bNjmeQ6OxB32KnhmWgypYSruflQhYio1qXVbFvrEhFuq2VU04SxKPkf
- vogecrdABA/OdUeKMz5f09Y0KfTiOpwIXkIKnJQt1nBqvSKgsoOpHgzpvf7Nq4CF5HHorh5/YUS
- /X7rNLxQLdOMog+KjMnRZvRlngSUqpcu5xrf4hNf7hXWrV9sbved4nQS929QiDszlm1TcnSoM2a
- 1ucPvNCk9x9Mpp2CzpTHN3iKUWFUdOyk36HXpgpPukDikLJONW5qMHbn54KbKWHrDbjaFuz+E0y
- dTks6NqWqxCDjJeC+lo+Bh6oPalWkTnVmmFInPNBbwAaPoJMwLdTq/qycc0oLj+QMCEl1mpOfia
- 16KDrv4gtOX30vibHBw==
-X-Proofpoint-GUID: Ni1nTn9Wn_LcCV4Of6f2R1FRnf8u2W9A
-X-Authority-Analysis: v=2.4 cv=crUOAF4i c=1 sm=1 tr=0 ts=6ad76681 cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=tEwKlQtQ9BOrozrowe8A:9 a=CjuIK1q_8ugA:10
- a=tNoRWFLymzeba-QzToBc:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 malwarescore=0 bulkscore=0 adultscore=0
- impostorscore=0 priorityscore=1501 phishscore=0 spamscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610200051
+Content-Type: text/plain
 
-On 26-10-19 23:37:18, Xin Liu wrote:
-> KNP has two CPU clusters (cluster0: cpu0-cpu5, cluster1: cpu6-cpu7),
-> but both share a single cluster_pd. Even though their domain-idle-state
-> configurations are identical, sharing one power-domain node means the
-> kernel's PSCI domain idle refcounting merges both clusters together,
-> preventing either cluster from entering idle independently.
-> 
-> Split cluster_pd into cluster0_pd and cluster1_pd so each cluster is
-> tracked separately by the PSCI domain idle logic.
-> 
-> Link: https://lore.kernel.org/linux-arm-msm/1ee9b624-4580-4650-8e48-d517ce9eee3d@oss.qualcomm.com/
-> Signed-off-by: Xin Liu <xin.liu@oss.qualcomm.com>
+On Fri, Oct 16, 2026 at 21:14, Manivannan Sadhasivam <mani@kernel.org> wrote:
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> On 2026-10-02 11:41 +0200, Mattijs Korpershoek wrote:
+>> From: Sriram Dash <quic_sriramd@quicinc.com>
+>> 
+>> The Qualcomm automotive SA8255p SoC relies on firmware to configure
+>> platform resources, including clocks, interconnects and TLMM.
+>> The driver requests resources operations over SCMI using power protocols.
+>> 
+>> The SCMI power protocol enables or disables resources like clocks,
+>> interconnect paths, and TLMM (GPIOs) using runtime PM framework APIs,
+>> such as resume/suspend, to control power on/off.
+>> 
+>> Power domain "core" controls the GDSC, resets, and TLMM (GPIOs)
+>> whereas power domain "transfer" controls clocks and interconnects.
+>> 
+>> In this variant, two disjoint sets of resources are modeled against
+>> the power domain suppliers which can be turned on/off to achieve modeled
+>> device states. Two modeled low power states d1 and d3 are supported.
+>> 
+>> transition: d0 <--> d3  :: both core and transfer suppliers
+>> transition: d0 <--> d1  :: only transfer supplier
+>> 
+>> Signed-off-by: Sriram Dash <quic_sriramd@quicinc.com>
+>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> ---
+>>  drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 127 ++++++++++++++++++++++++--
+>>  1 file changed, 118 insertions(+), 9 deletions(-)
+>> 
+>> diff --git a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
+>> index 980ad1fb1e2e..9fdf7ae681b6 100644
+>> --- a/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
+>> +++ b/drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c
+>> @@ -12,6 +12,7 @@
+>>  #include <linux/of.h>
+>>  #include <linux/phy/phy.h>
+>>  #include <linux/platform_device.h>
+>> +#include <linux/pm_domain.h>
+>>  #include <linux/regmap.h>
+>>  #include <linux/regulator/consumer.h>
+>>  #include <linux/reset.h>
+>> @@ -95,6 +96,7 @@ struct override_param_map {
+>>  	u8 table_size;
+>>  	u8 reg_offset;
+>>  	u8 param_mask;
+>> +	bool fw_managed;
+>>  };
+>>  
+>>  struct phy_override_seq {
+>> @@ -121,6 +123,7 @@ struct phy_override_seq {
+>>   * @phy_initialized: if PHY has been initialized correctly
+>>   * @mode: contains the current mode the PHY is in
+>>   * @update_seq_cfg: tuning parameters for phy init
+>> + * @pd_list: list of power domains associated with the device
+>>   */
+>>  struct qcom_snps_hsphy {
+>>  	struct device *dev;
+>> @@ -136,8 +139,81 @@ struct qcom_snps_hsphy {
+>>  	bool phy_initialized;
+>>  	enum phy_mode mode;
+>>  	struct phy_override_seq update_seq_cfg[NUM_HSPHY_TUNING_PARAMS];
+>> +
+>> +	struct dev_pm_domain_list *pd_list;
+>>  };
+>>  
+>> +static void qcom_snps_domain_detach(void *data)
+>> +{
+>> +	struct qcom_snps_hsphy *hsphy = data;
+>> +
+>> +	dev_pm_domain_detach_list(hsphy->pd_list);
+>> +}
+>> +
+>> +static int qcom_snps_domain_attach(struct qcom_snps_hsphy *hsphy)
+>> +{
+>> +	struct dev_pm_domain_attach_data pd_data = {
+>> +		.pd_flags       = PD_FLAG_NO_DEV_LINK,
+>> +		.pd_names       = (const char*[]) { "core", "transfer" },
+>> +		.num_pd_names   = 2,
+>> +	};
+>> +	struct device *dev = hsphy->dev;
+>> +	int ret;
+>> +
+>> +	ret = dev_pm_domain_attach_list(dev, &pd_data, &hsphy->pd_list);
+>> +	if (ret < 0)
+>> +		return dev_err_probe(dev, ret, "domain attach failed\n");
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/* d3_to_d0 transition by turning on all the suppliers */
+>> +static int qcom_snps_d3_to_d0(struct qcom_snps_hsphy *hsphy)
+>> +{
+>> +	int ret;
+>> +
+>> +	if (!hsphy->pd_list)
+>> +		return 0;
+>> +
+>> +	ret = pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[0]);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	ret = pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[1]);
+>> +	if (ret)
+>> +		pm_runtime_put_sync(hsphy->pd_list->pd_devs[0]);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +/* d0_to_d3 transition by turning off all the suppliers */
+>> +static void qcom_snps_d0_to_d3(struct qcom_snps_hsphy *hsphy)
+>> +{
+>> +	if (!hsphy->pd_list)
+>> +		return;
+>> +
+>> +	pm_runtime_put_sync(hsphy->pd_list->pd_devs[1]);
+>> +	pm_runtime_put_sync(hsphy->pd_list->pd_devs[0]);
+>> +}
+>> +
+>> +/* d1_to_d0 transition by turning on the 'transfer' supplier */
+>> +static int qcom_snps_d1_to_d0(struct qcom_snps_hsphy *hsphy)
+>> +{
+>> +	if (!hsphy->pd_list)
+>> +		return 0;
+>> +
+>> +	return pm_runtime_resume_and_get(hsphy->pd_list->pd_devs[1]);
+>> +}
+>> +
+>> +/* d0_to_d1 transition by turning off the 'transfer' supplier */
+>> +static void qcom_snps_d0_to_d1(struct qcom_snps_hsphy *hsphy)
+>> +{
+>> +	if (!hsphy->pd_list)
+>> +		return;
+>> +
+>> +	pm_runtime_put_sync(hsphy->pd_list->pd_devs[1]);
+>> +}
+>> +
+>>  static int qcom_snps_hsphy_clk_init(struct qcom_snps_hsphy *hsphy)
+>>  {
+>>  	struct device *dev = hsphy->dev;
+>> @@ -196,6 +272,8 @@ static int qcom_snps_hsphy_suspend(struct qcom_snps_hsphy *hsphy)
+>>  					   0, USB2_AUTO_RESUME);
+>>  	}
+>>  
+>> +	qcom_snps_d0_to_d1(hsphy);
+>> +
+>>  	return 0;
+>>  }
+>>  
+>> @@ -203,7 +281,7 @@ static int qcom_snps_hsphy_resume(struct qcom_snps_hsphy *hsphy)
+>>  {
+>>  	dev_dbg(&hsphy->phy->dev, "Resume QCOM SNPS PHY, mode\n");
+>>  
+>> -	return 0;
+>> +	return qcom_snps_d1_to_d0(hsphy);
+>>  }
+>>  
+>>  static int __maybe_unused qcom_snps_hsphy_runtime_suspend(struct device *dev)
+>> @@ -316,6 +394,10 @@ static const struct override_param ls_fs_output_impedance_sc7280[] = {
+>>  	{ 1310, 0 },
+>>  };
+>>  
+>> +static const struct override_param_map sa8255p_snps_hs_phy = {
+>> +	.fw_managed = true,
+>> +};
+>> +
+>>  static const struct override_param_map sc7280_snps_7nm_phy[] = {
+>>  	{
+>>  		"qcom,hs-disconnect-bp",
+>> @@ -390,9 +472,15 @@ static int qcom_snps_hsphy_init(struct phy *phy)
+>>  
+>>  	dev_vdbg(&phy->dev, "%s(): Initializing SNPS HS phy\n", __func__);
+>>  
+>> +	ret = qcom_snps_d3_to_d0(hsphy);
+>> +	if (ret < 0) {
+>> +		dev_err(hsphy->dev, "Failed to transition to d0 state\n");
+>> +		return ret;
+>> +	}
+>> +
+>>  	ret = regulator_bulk_enable(ARRAY_SIZE(hsphy->vregs), hsphy->vregs);
+>
+> Why do you still control regulator natively in the SCMI path?
+
+That's an oversight on my end. Thank you for catching it. I will fix for v4.
+
+>
+> - Mani
