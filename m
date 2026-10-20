@@ -1,101 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=46.235.229.95
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792506194;
-	b=yXAhqFF+e1/THu9lStdhE8f+kqvuDrmf4vjH4vccz3ClK0inVRMWGWXpYlXvBVZ8KEiu
-	 6zvMDx4BiybQDGEu9isAN+v9C/7e1cTWjyxmI+YXpu/WOdNNM1JHVc+qxXrSWs8bx+UKO
-	 VUJ7HxsE5EbahLuyWiFRe70uVrz5zAVW5B6w0+4M8If60Azv0V81txvDCefdUkf5OTQbC
-	 rgA2eE0vBJ0vnJD7fcBGfjnFfxDlLw5L40Bv1tu2JeQENe+Mt5Ef7JrkbTyYNIblHQTbb
-	 7CbXJNZ5fUBe5DLwRZbPUXpEytzMTLshNkYGx2CoXSAAGyWoQ0FGXWs/7w2QHc30RLA==
+	t=1792506454;
+	b=IRMMbOqPYdYuOZ9rqv/tFpKa+HowaAl4G4PpqyQhGS8DaZkKk0eDfg5kEeZgn4pv99FH
+	 rQirBvEklOLHV6BLzZNSt4g3w4dz7nDZ115B9/ZjlIkf/L6diN9DyC+/gk932mpZtmmrD
+	 X6evpD3Lapy2J0p01qflgzav2ucfzngzwIQKQsDvHSb+CTCiXEwlXDLd3+40I5iJ7BsNW
+	 CdYTU2UOIVw/v0v0xb5TWdQLFLG2q9LsBJNlvw3KkaFng8GvPnGF2qinr51kWSF8J5KpN
+	 tCsv61hHKr54qiEAnuuzryP6xmpjt+4nwKJjh03HKu4rLaUksBy7cbc5EveCGd/QuvQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792506194;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=gYzXGRMxaGIQDWBnwBff6sLwaQBKmwfDNbBfvOOwBxY=;
-	b=A4vhFpSPVA36EE1eRZwlcSsbXX4250h1YfYPOLtMoRC4eknmXh8eQe+hYGgRBIKFeXlc
-	 rPcHm58KQCu0qvtR2wX44kj44CAMglD5+iFUHxyJYl17yWKq0UB7CZmFTlsY6XiOE7chJ
-	 RAqe+vmOSKOdlSspUm+B82r0cP7j5T/6rFrm/z2tU4nqiOEG8QHqOopuv4mEV7iCRN/ym
-	 hlLitWrwErSNGBS/R/qtWPjT+2VisqvFLAN9VWERm6WpXdpXQFJ044ASGX0qptpXMGWZN
-	 K4zFdeE7+4XbU/WyKK/LSc3zvCrqenshCZYsWZrXgAl8GaEQ0p7a1E0/6nqDTVJdMng==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792506454;
+	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+	 Message-ID:MIME-Version:Content-Type:Content-Disposition:X-Chocolate:
+	 X-Operating-System:X-Uptime:User-Agent;
+	bh=FDLsMiFxoa207fgd2lstXLYT1Z99qsdirxj6+VkwRPQ=;
+	b=BkMVpLmGwhcTpwMFVMGu/HpU6doJwJMXrLkgqYENQQVSU6vrFpDAeGtYmO9lmrNWDQhc
+	 6i/TWsMqPSVTxVeQSU/Pm0ZdJyjGGBqzg9e0HKK51oPyaEeytaRT85k7eL2DyT80v8r7B
+	 EQIez/L67LsD4lWfQ16f5xBI4uTPlEvwO5waglxGg1mKfJ1OqE1cFerLP8Jgkyy+XrC68
+	 phboQ/xe1b9kHZVsmXCo9/IQqYmEGRSIVUSWeg52t0abBLQJWwYjoRRs3Udi5A0wf7T86
+	 Df7PwbzF5kNwvwi46fONOv9qIGBMw+Jz1SPEF/EJm6s1yPvD53EaTPS5DXiCumEkL8w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=OjuSNhyU;
-	arc=none smtp.remote-ip=74.125.82.171
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=treblig.org;
+	spf=pass smtp.mailfrom=treblig.org;
+	dkim=pass header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=VA4disuJ;
+	arc=none smtp.remote-ip=46.235.229.95
+Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DF3060A3813
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 14:23:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0DF3060A3813
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15A70606A320
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 14:27:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 15A70606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=OjuSNhyU
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-3514b90bb89so8811539eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 07:23:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792506193; x=1793110993; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gYzXGRMxaGIQDWBnwBff6sLwaQBKmwfDNbBfvOOwBxY=;
-        b=OjuSNhyU77n6qmXyPE8r/uWx0E1NsGXH2d/hXFDxbBgKG5/e/eg0iqkcqa510LDch/
-         AGEys9lg/gB20lzReede3+jXBKLMPjck6c072yGWAEhAp1oX1tgpd7/OJ51wEZMOQ4tB
-         jvX/YgJX29/2LggZVCM1k731HvZ6nuG6NlzgLMSbAQ9OnTkAXegpI/PsJ8prEBpkKk1X
-         y34tU2ZKR/4CMpWU/8TCQrl2goy7SjRDjS6NdykMEQOaGYOWgNXF6ou5dmjvIcWosxsf
-         l7fT49luASW/dtGadWPQeYtoITRhLfH0uqSV/qsvk3K4i489n8JD5yddzZc619JjyJ7g
-         Hlqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792506193; x=1793110993;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gYzXGRMxaGIQDWBnwBff6sLwaQBKmwfDNbBfvOOwBxY=;
-        b=2lGnuOPIc0pge/hRI5FgI+VDNCZem9UYvuUyQ9DIRQCw/6bECx0zvCUHNcUJtmqeSt
-         BpQK3P57wwwoztivNEWMEcqPk/QkmMt35Ju+qW1g6OeIlVDMmKTRiXEknCI4DlgnNFgu
-         fvKBGNKP01RZyuibPZDWVJJ34HJKT6S0xKLcAPcFC4CWRN2UMJlTHsASbAyEvMmsaHmn
-         gUCgbqw49VSB0+QuzVWBhAGc458BvuNU38uhJiVEyOrrn5forH8mM9gzEZsQGF59OVJ7
-         vGjFUSo6A6dGbUyscWaCNrbDdjawl1gRsB5g5/FxRKXJtJd/HBqVgh1rxw2oHJWzbQpu
-         dv1A==
-X-Forwarded-Encrypted: i=1; AKwUvBz3sIqWi9+b346CYMYa4VrTFQ/sNqDmUVEju8XJVziC+NXJmsCwM4skIpU0KraogV5XO51u/nfigTmpvtgH@vger.kernel.org
-X-Gm-Message-State: AFq9FYJemkrdQlA1DmgfwJmiuN7k9h27HI15xs7BoZS9AFzdBT7uATgV
-	88p3YPRmijHe0ygV0otQIytw1m+5qjQQWVttp7v+8P3lchEIXG7VJOT+
-X-Gm-Gg: AYBFou1N5dwqYa4QlcF3Ja1upmPXZZ3UbOzmbrEUcZLT5VGT89AyhGoff5/N2mDCZRj
-	wZz2FGqdox1IPfKxSW7u3/ncqUlOHz3Z6Ak03ON7Vp1e7R4udynHYEZEhfBL0D863z5owvdxGiF
-	/KDO1oD+ejeSWjsIEeMewGYOidM2sLLwfJtsOu/IH2+j9i5TUZ4Z3SPd63WA0DCF19wXQkfa72S
-	h8ps4CMy/F/j8R02keKkRM55cbSWWZ7ySnGlcfOJtZzl0X2O1AV3UjDZv6D0rndd4Y0uqfAZh1O
-	AFp+SnuVQXvNGp48nDb3TUjUtAR9Hx3cx1zTI8v9M1QxmKb/mut/d4L7wRKBt6Q8/bfx3XhbDlq
-	QyTNR9w8w+UU9zB6d1cy5ov+Gp4qm2V9VUPbjnNFcr1EOuLmR13+Qg+YZn9Yx3G1OOGKgD9V0W1
-	4PPZDOBvjqtUtdagnd0vh9Z7BMTJhIg+rhlwWP3r0j/dqAcjtbUIF8fpGNKNVE24hPFdSi3vN01
-	nyJ0FbNROGE8DGhqY5U3Q==
-X-Received: by 2002:a05:693c:6390:10b0:35d:95e4:267d with SMTP id 5a478bee46e88-361a2645788mr15761590eec.27.1792506192581;
-        Tue, 20 Oct 2026 07:23:12 -0700 (PDT)
-Received: from redducc.localdomain ([183.83.156.125])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36081ab80f9sm66917444eec.12.2026.10.20.07.23.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 07:23:11 -0700 (PDT)
-From: Sushmit Singh Rathore <sushmit718@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>
-Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sushmit Singh Rathore <sushmit718@gmail.com>
-Subject: [PATCH v2 3/3] clk: qcom: camcc-sm8450: Park the camera RCGs when they are disabled
-Date: Tue, 20 Oct 2026 14:21:31 +0000
-Message-ID: <20261020142157.1749-4-sushmit718@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261020142157.1749-1-sushmit718@gmail.com>
-References: <20261020142157.1749-1-sushmit718@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=VA4disuJ
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+	:Subject; bh=FDLsMiFxoa207fgd2lstXLYT1Z99qsdirxj6+VkwRPQ=; b=VA4disuJDbzyg2Sl
+	1YtH4mNyM/v5ojItu+Pt311M4zS/uXF5z7JJBVYukP0QZTi/MJeIYyK94eYoFcGgiLgJwa/qt2FxD
+	PLPsj3yEfSFZuUyY5YUhPXFO2THt4vgsiZi3UACk6CMGbYXttwvbL0FNmlLmUnP8odlbaaBxTv/+8
+	Aw6VE6XKrpjisPfVETn3bqUX3L0BeD4o60hNbcM/Qz09OQE1CuC9ltsnHg0Ic00oLakxsS+Ivcm5b
+	arDrI052AJOogIcXdRPNod5Dc+d7KQ4j2E1QID2xig/iX3pEirwFjcT8hXU6+8vDPwFmh7t0ea1iM
+	D7PXxvUXS1g26BXbfA==;
+Received: from dg by mx.treblig.org with local (Exim 4.98.2)
+	(envelope-from <dg@treblig.org>)
+	id 1xJAoH-0000000181u-3h0H;
+	Tue, 20 Oct 2026 14:27:25 +0000
+Date: Tue, 20 Oct 2026 14:27:25 +0000
+From: "Dr. David Alan Gilbert" <dave@treblig.org>
+To: krzk@kernel.org, andersson@kernel.org, konradybcio@kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+Subject: Tips on tracing bwmon?
+Message-ID: <atd6TRv4HQApcPvY@gallifrey>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -105,338 +60,98 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.12.113+deb13-amd64 (x86_64)
+X-Uptime: 14:08:46 up 3 days, 23:29,  2 users,  load average: 0.08, 0.08, 0.03
+User-Agent: Mutt/2.2.13 (2024-03-09)
 
-The camera RCGs use clk_rcg2_ops, so a disabled RCG stays configured
-on whichever PLL it last ran from. When that PLL is turned off and the
-Titan top GDSC then collapses after a camera session, the SoC hangs.
+Hi all,
+  I was looking for some tips on if I can use bwmon to see what interconnect
+bandwidth is going through the dwc3 usb controllers on my x1 based Asus Zenbook A14.
 
-Switch them to clk_rcg2_shared_ops so they park on the XO while
-disabled, as camcc-sm8550 does. cam_cc_sleep_clk_src runs from the
-always-on sleep clock and is left alone.
+  I've got usb-ncm gadget wired between a pair of them and I'd
+like to see what stats are available;
+(See details of my gadget stuff setup in
+ https://lore.kernel.org/linux-arm-msm/atJn2jfI_cZy3UMo@gallifrey/T/#u )
+And that's struggling to get much over 4Gbit/s over the network interface.
 
-Tested on the Nothing Phone (2) (SM8475).
+One reason I'm curious is because the dwc3-qcom glue sets an average
+and a peak icc limit, and I wanted to know what the difference was and
+what the type of timescales were for how long it allowed a peak.
 
-Fixes: 6082037fe62e ("clk: qcom: add camera clock controller driver for SM8450 SoC")
-Assisted-by: LLM
-Signed-off-by: Sushmit Singh Rathore <sushmit718@gmail.com>
----
-Changes in v2:
-- Use full name in From and Signed-off-by.
+Are there any docs I should look at?
 
- drivers/clk/qcom/camcc-sm8450.c | 68 ++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 34 deletions(-)
+I did:
+   trace-cmd stream -e icc_bwmon:qcom_bwmon_update > log
+on both machines and during the run I'm seeing events on exactly 3 of the
+monitors;
+24091000.pmu, 240b5400.pmu, 240b6400.pmu
 
-diff --git a/drivers/clk/qcom/camcc-sm8450.c b/drivers/clk/qcom/camcc-sm8450.c
-index 9f1dd51db0d5..77b9d7efe390 100644
---- a/drivers/clk/qcom/camcc-sm8450.c
-+++ b/drivers/clk/qcom/camcc-sm8450.c
-@@ -834,7 +834,7 @@ static struct clk_rcg2 cam_cc_bps_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -856,7 +856,7 @@ static struct clk_rcg2 cam_cc_camnoc_axi_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -877,7 +877,7 @@ static struct clk_rcg2 cam_cc_cci_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -892,7 +892,7 @@ static struct clk_rcg2 cam_cc_cci_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -914,7 +914,7 @@ static struct clk_rcg2 cam_cc_cphy_rx_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -935,7 +935,7 @@ static struct clk_rcg2 cam_cc_csi0phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -950,7 +950,7 @@ static struct clk_rcg2 cam_cc_csi1phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -965,7 +965,7 @@ static struct clk_rcg2 cam_cc_csi2phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -980,7 +980,7 @@ static struct clk_rcg2 cam_cc_csi3phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -995,7 +995,7 @@ static struct clk_rcg2 cam_cc_csi4phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1010,7 +1010,7 @@ static struct clk_rcg2 cam_cc_csi5phytimer_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1031,7 +1031,7 @@ static struct clk_rcg2 cam_cc_csid_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1055,7 +1055,7 @@ static struct clk_rcg2 cam_cc_fast_ahb_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1078,7 +1078,7 @@ static struct clk_rcg2 cam_cc_icp_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1102,7 +1102,7 @@ static struct clk_rcg2 cam_cc_ife_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_2,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_2),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1126,7 +1126,7 @@ static struct clk_rcg2 cam_cc_ife_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_3,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_3),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1149,7 +1149,7 @@ static struct clk_rcg2 cam_cc_ife_2_clk_src = {
- 		.parent_data = cam_cc_parent_data_4,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_4),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1170,7 +1170,7 @@ static struct clk_rcg2 cam_cc_ife_lite_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1185,7 +1185,7 @@ static struct clk_rcg2 cam_cc_ife_lite_csid_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1208,7 +1208,7 @@ static struct clk_rcg2 cam_cc_ipe_nps_clk_src = {
- 		.parent_data = cam_cc_parent_data_5,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_5),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1223,7 +1223,7 @@ static struct clk_rcg2 cam_cc_jpeg_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1245,7 +1245,7 @@ static struct clk_rcg2 cam_cc_mclk0_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1260,7 +1260,7 @@ static struct clk_rcg2 cam_cc_mclk1_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1275,7 +1275,7 @@ static struct clk_rcg2 cam_cc_mclk2_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1290,7 +1290,7 @@ static struct clk_rcg2 cam_cc_mclk3_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1305,7 +1305,7 @@ static struct clk_rcg2 cam_cc_mclk4_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1320,7 +1320,7 @@ static struct clk_rcg2 cam_cc_mclk5_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1335,7 +1335,7 @@ static struct clk_rcg2 cam_cc_mclk6_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1350,7 +1350,7 @@ static struct clk_rcg2 cam_cc_mclk7_clk_src = {
- 		.parent_data = cam_cc_parent_data_1,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_1),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1373,7 +1373,7 @@ static struct clk_rcg2 cam_cc_qdss_debug_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1396,7 +1396,7 @@ static struct clk_rcg2 cam_cc_sfe_0_clk_src = {
- 		.parent_data = cam_cc_parent_data_6,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_6),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1419,7 +1419,7 @@ static struct clk_rcg2 cam_cc_sfe_1_clk_src = {
- 		.parent_data = cam_cc_parent_data_7,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_7),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1460,7 +1460,7 @@ static struct clk_rcg2 cam_cc_slow_ahb_clk_src = {
- 		.parent_data = cam_cc_parent_data_0,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_0),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
-@@ -1480,7 +1480,7 @@ static struct clk_rcg2 cam_cc_xo_clk_src = {
- 		.parent_data = cam_cc_parent_data_9_ao,
- 		.num_parents = ARRAY_SIZE(cam_cc_parent_data_9_ao),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_ops,
-+		.ops = &clk_rcg2_shared_ops,
- 	},
- };
- 
+(In the numbers below I've grepped for that monitor and sed'ed out
+upto the 'measu_kbps=' part so I can then sort on the meas_kbps)
+
+My reading of the interconnects_summary is these PMUs are
+somewhere under the llcc_mc@interconnect-1, and in some
+cases under both chm_apps@  and qns_llcc
+
+So how do I interpret these - can I infer the bandwidth the usb controller
+is using or just have a feel for the level above?
+(Here the iperf -s server is running on 'dragon' and the client is
+running on 'soup' - I find the partial symmetry between 240b[56]400.pmu
+on the two machines promising it's measuring something useful!)
+
+This is running a 7.30-rc6 with a bunch of stuff from Jens Glathe
+on top.
+
+Thanks in advance,
+
+Dave (numbers below)
+
+24091000.pmu
+  on the llcc_mc@interconnect-1 (which also has the a400000.usb)
+  
+   dragon/server:
+        lowest:    16000 up_kbps=800001 down_kbps=800000
+       heighest: 2816000 up_kbps=3072001 down_kbps=2188000
+        h-l:     2800000         2272000           1388000
+
+   soup/client:
+         lowest: 160000 up_kbps=800001 down_kbps=800000
+        highest: 6256000 up_kbps=6835201 down_kbps=6220800               
+        h-l      6096000         6035200           5420800
+
+
+240b5400.pmu
+  on the chm_apps@26400000.interconnect (which also has the a400000.usb)
+        also under qns_llcc@26400000.interconnect
+  
+    dragon/server:
+         lowest: 1328000 up_kbps=4800001 down_kbps=4800000
+       heighest: 5616000 up_kbps=7464001 down_kbps=4800000 
+            h-l  4288000         2664000                 0
+
+    soup/client:
+         lowest: 1440000 up_kbps=4800001 down_kbps=4800000
+        highest: 4480000 up_kbps=4800001 down_kbps=4800000
+            h-l  3040000               0                 0
+                                                          
+240b6400.pmu
+  same as for 240b5400
+  
+    dragon/server:
+         lowest:  352000 up_kbps=4800001 down_kbps=4800000
+        highest: 3568000 up_kbps=4800001 down_kbps=4800000
+            h-l  3216000               0                 0
+
+    soup/client:
+         lowest: 3216000 up_kbps=4800001 down_kbps=4800000
+       heighest: 8736000 up_kbps=9600001 down_kbps=7464000
+           h-l   5520000         4800000           2664000
+
 -- 
-2.43.0
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
