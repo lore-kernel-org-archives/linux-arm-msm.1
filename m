@@ -1,62 +1,121 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792500698;
-	b=k5b/taMNmnIeGV5L15uYjo6gFS0z4vVDQqMoqEV3kzRCUME6os00RC8cyzbJg9BCAwXh
-	 jLNK1IeTXc0ccv3EiKvedXINDmWV9hyWHbDmPWgDJ2jZCg/k7Kq+U6gKk6PZQFJfykAGq
-	 FeivrPACb8wVPR5CrlMD/Ru5QjMttnAJ41b8RP+Q5yt9v032NpJG1ayxc+KFIt+j6plru
-	 tUEa/vUl2AbEMQr4bzBQfkZhgG8dp5pvuy+cJJaNW8vJ6929/9vRGiveFGHF2YkZGNhjP
-	 o6P2iiL+6CZOF1aFbNHYAR2q32QF0zIrhXQLVfL+tqj5UJRcrTFE04WfXuQ/EsKJo5w==
+	t=1792500748;
+	b=g/WMTRuJlRQgi3UuWg6kRXB0g+8aHEXqHAMUz6QfewAtQ7Vk1OArmPGrUGfoc2hI1R2C
+	 +Zhs2Gtxyiq1vGlGf2Dlfi9/vWT9+AA/lGC5huxNaVd7ecs39N24P9O92RZQYVqhBmAEw
+	 JKQfx8qxtI6IKz/EO9Uchs4vRqxChr68cZ4fjiuJnSYfk4azFBr3x/jUaUWXkVl6QsIEf
+	 swCs4g4Pmgnd8K3CT0aEVQ1LigCMKa5woeRY4fD850q2NHWBfeLSruf1PHjUqML/upekD
+	 HC5yWulR/fwxduD9+0wkCidoJRawQkR0K6fr7sgq9UJd+0wkE6mRQ/uEIoETMjQwpFQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792500698;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type;
-	bh=x3rNaEw4bb0F59BHqC8y3vlRCTw1eqgsEtWAFR2oJbo=;
-	b=kgcVpuColpJsRtlqzcErdXN+0XutLZ7fLDq8+nhqvTI8x7TxvWh/Z2W4QYl8TLhe/+NN
-	 2ATuI4fHF2Q7ooPhQdl42nRA+8pSpd8Xxgd729HWYC7RF6sNtQX31ie+20Qua0mmL/THX
-	 JsUBYYslvwY8Ts6ht+NIz1kamkTCGOC4Dx+F+jW+Bz5pUkrP+sr030WMDwtHmULHHKUTT
-	 QxVTBJ4F0qsjsFd/pscrYom08sYXJpl1NE1znq7bPuhn81f+Nb1z74dhZ/yWCsr6S6d5W
-	 Qy2HQTFli852URNwRDLePhEf0bChRebr6tjXsUSmQXRGKXqQdUeXxSPaepy+flpuLkA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792500748;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
+	b=x0M/+DCLXQkcogCszgR97dswsdC/HPOUH2R3diCm0AaqE0wTj18jz6YYFN2NGyAFq/eh
+	 DpfF8dv0IEBLpKj8Y+oApa9eLoYeAglZQ0U3a4PA0AdSsufeIAi/99VYpbgqejMbNTRrs
+	 ZAOCq/FLz6JBQjfPCQdDLMbD+DGy+m09H6AqBpq/hPWSXuY+3cpRw/TJgGir/fldbjCQu
+	 oxXpKog2EeiapsA+rxHgIe3BnqHBcB3CGOBfhTSH1/lnFTi4392il2T0fiszLpNmRgdtc
+	 5W+HIsGyMqcXQYUgoV18qkZNGFRO2KL6OxQITOsnUpeBHYUsiN1N14zypqbGevvm2Pg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CroLdk3a;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JUvMggwp;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NKvotkgg;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB2FD606A319;
-	Tue, 20 Oct 2026 12:51:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D685606A31C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D685606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CroLdk3a
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 095361F000C5;
-	Tue, 20 Oct 2026 12:51:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792500697;
-	bh=x3rNaEw4bb0F59BHqC8y3vlRCTw1eqgsEtWAFR2oJbo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=CroLdk3aX/LyfcTC78K/qTH53xmd99zahtClfoiyQcLcI3Qba+7/XzYe24MOA429f
-	 fNNJHEpVLo9PyFZ4d70zErMqFPc7/uyq4eLu2QE3KsUjDRSbb9xkBCQNB9HB/fm1Ms
-	 lxIrnbOJZ/IUYej81JJVPXnyAMh9doxnIYM7G7zBaVwsk4l4d1dMuqfn0a4ijbwXBW
-	 c8nV8+7LGQe1bteFkFdRt+9KYBJl3WJ+rGiZOw+AqxvmlRbkLyrcA4EyndavD6iG2r
-	 xzO06SuZV++VGT/3b9O8V6UvfB1HMi/81aPK58g9cZ6+nvynPydCIwCD7wTwygD0/W
-	 1XE6KGTHe1qpg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, Sriram Dash
- <quic_sriramd@quicinc.com>
-Subject: Re: [PATCH v3 2/2] phy: qcom-snps-femto-v2: Add support for SA8255P
-In-Reply-To: <179216539953.106618.14570496753417806206.b4-reply@b4>
-References: <20261002-phy-qcom-snps-femto-v2-8255-v3-0-342542bd9bc6@kernel.org>
- <20261002-phy-qcom-snps-femto-v2-8255-v3-2-342542bd9bc6@kernel.org>
- <179214420138.106618.10672928212252943043.b4-reply@b4>
- <xhkdbqzhp6b45.fsf@mkorpers-koolstof.csb>
- <179216539953.106618.14570496753417806206.b4-reply@b4>
-Date: Tue, 20 Oct 2026 14:51:35 +0200
-Message-ID: <xhkdb33u04js8.fsf@mkorpers-koolstof.csb>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JUvMggwp;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NKvotkgg
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69KAxLUb600166
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=; b=JUvMggwpxL3toZgH
+	hutbs4SCJOrpTKJft8P68vKHx/tLNum5fkeLv26k2g6LlQNPIks0jXoou2PGtzXj
+	FEn8IO/EqIVxK6mgqQHSvuwr37HqFEyzmm5RVdR2s0n+9QpIISgqI38Tw91G8MIC
+	NeE/E6XEeN/T8bk6fYiwDJ3KPRRi96tkKqCFPpim1d1OB62AZclx4QbvKa5TqeQY
+	DJVu77NwPGTVxKvRjGM71WjITDk47YQvxwj/Yt0564H6gk+Hg8g1dtgBiMECM4My
+	un7NWuvVIkyeFkb6gMunwPXCEeS1OHqadnZlQNiNVZwr6pRdXKq8zZbdmxE+n7ka
+	CDzlPw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n2gg4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:26 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2005ce21so559476285a.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 05:52:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792500746; x=1793105546; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
+        b=NKvotkggs/uunAeiSyukUFvAIPFkm7QjTKUiPq2/ujqpm9Q++FBmTYDWmM43BoYahy
+         w3fq8mapMbmjQYBp26KjPg0XFYdjWLE/aIBEFfi2GszvLwRqZNl17Xuod9dJPFPp4MfL
+         81QduXHIOJFXgbucnMr8HM5K+Vi7ZYhcp9QHd2QU8SGUMoy3wD2x757DIpXpnP4I3WzC
+         ky8RGJBs9+MZk1IZ3Gh4Tdmc4cy6f2yNw3CWHLRJ0sbcFPfC92Xs/rhUednqjp6YRoGQ
+         TZtO8IkrVxZgUFHvFlRxwby+bfP86uB28g/Nz1PrO/JHiTsXqkI875TH01QDJs5jW58R
+         QQng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792500746; x=1793105546;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
+        b=l3+0d5nLcJj6DtgGilXWr6AzhBu9ouGX1aNmvthIO+t8bzLFLBiy9DQVDxeQ7dMHte
+         rE6jyUgYIx2WR1611brjCk2cmld2Tadawje5OzuDo5etXNj8G5IVg26AsWR4cdnaNFb2
+         MrY0xF1x9IEcrH0NCdqsRKZg67EbQqEn2pnxBXRi6RnYgjup0szKs/+HkxQx6pit22A1
+         IMEeIvzGm3tNA98FS2MkEe0l1Xnsh0/W6ZwqZemQL5I2M1EkhMMqerjSK0zm1fFSH7kf
+         Y7DulV0MeXT2rkisEcIFUDHOJNnoRK8xiPqLfHTGdfRlvoyL4/2um83/SMW06Iv86RdA
+         dDtw==
+X-Forwarded-Encrypted: i=1; AKwUvBzmubkC6w+Srv5fUkcnZdTURM74poPc9Cik1kS9VbljPjvIcLGxuCNzhJxmzjKgv8SpjD3oqGW4CHO7N7a3@vger.kernel.org
+X-Gm-Message-State: AFq9FYI+QnY4LKaQYqOSDAO4JVna+BMGrMh/BVxIjK4rjxCrSilJa452
+	MZ8tDLw/sk1Vst01PPusV97LJ0XCT+UXuKpt/SF+wZXjOYM0odsrQs8Us0rUt64npdmg05LGAbX
+	f8Fz9bJWc9mujEpYY8i01nKP201oU3vPPx3Wm0JZpua/gP+AWZKLu9UiDkm2Pt3YNR9w/
+X-Gm-Gg: AYBFou1f5KY/OapTjSQbJeYS5X6sXfURyBi3YRnEzFtjRHyrJGXZIPb421I1J/Zjm1w
+	Qo5yKLeKnznbKvEkIyYRUsUBuqbR/zC8C0hTIV37GFmKQV1HT/p0rZMPB9pUNgcll12bVjTMgp0
+	VFhV4kwGdB84+Yz2ZA2/Fl4DMHmBln4kPIyNVuQQITX+/oTlnBWgZEVGSjluoX1W7WtT1yFn25H
+	Cr0HACKwKiAngHd+7WtQG9IwkGNg5uMol1IDH0gjB1RLhEmYNbm1u3GG83NgrzrbNwFPsjt0iDc
+	hZ21yJem67LEsNbL2PbxHACtiuibYQ7ro7m+rzbmAHBNlBP7rH9plK+8T8iae9gEdD73FQObS36
+	hd2DTfBVf1lxDj9fS
+X-Received: by 2002:a05:620a:2948:b0:93e:d364:c9ee with SMTP id af79cd13be357-93f29dd495bmr1630744085a.74.1792500745881;
+        Tue, 20 Oct 2026 05:52:25 -0700 (PDT)
+X-Received: by 2002:a05:620a:2948:b0:93e:d364:c9ee with SMTP id af79cd13be357-93f29dd495bmr1630737985a.74.1792500745230;
+        Tue, 20 Oct 2026 05:52:25 -0700 (PDT)
+Received: from oss.qualcomm.com ([188.27.161.187])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e1d80f9b3sm5714688f8f.20.2026.10.20.05.52.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Oct 2026 05:52:24 -0700 (PDT)
+Date: Tue, 20 Oct 2026 15:52:23 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, gaurav.kohli@oss.qualcomm.com
+Subject: Re: [PATCH 2/2] arm64: dts: qcom: shikra: Enable CDSP & Modem cooling
+Message-ID: <isldc3mvcyqj3o6dzndztlobwft76zkph2lmlryki3qkpoxset@izxcyvx623vp>
+References: <20260911-shikra_qmi_tmd-v1-0-96c1cca82f30@oss.qualcomm.com>
+ <20260911-shikra_qmi_tmd-v1-2-96c1cca82f30@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,148 +125,45 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260911-shikra_qmi_tmd-v1-2-96c1cca82f30@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=aIplOr9m c=1 sm=1 tr=0 ts=6ad7640a cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
+ a=8nJEP1OIZ-IA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=WKeXBwMsz3nlfjH64nsA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfX+wuvSU2jwjAQ
+ vREeVPO8hF+Rs1aSOsFewLDwMGzgolFzM/bzPlXwMZgngQehZRNEXClWQSSbgUOH7kuGvSxrPTH
+ i+0D1Y/nRZVJisXzHhN9LlFrCOmOBgA=
+X-Proofpoint-GUID: BwJnWwkkwsFGBHDrWegGc3SpRBqAMy7Z
+X-Proofpoint-ORIG-GUID: BwJnWwkkwsFGBHDrWegGc3SpRBqAMy7Z
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfX2AwhR4VFqrjK
+ 1Nq3G8aoezIOP1HdoS+8IaCePz6ZFxqYEwiX1rZhJHmQ3um34+kOXGTO7i9uR2yPN9ftIlPrDrB
+ OKhBgRfqL7X2QyIj8siUeC96iHDVqs8OXpPC+RYm70LCrpaskUTlK6KkOt1qEnF1GAJxh4wWOS2
+ 8Kw/DoOBCvyGpDdu+BbFPkxz8/5ppA3mCYWir1xy+Gt9/yB2RyXm1YyYuhtxgJjdnaRRpwQuR6L
+ AS2dJ2PL/JxtR17It8wx1Ny1rnBQsdQZoRDCzY+bUUCcUJ1y1LuecSZdMVp/+H6Fg+n6ec76HLd
+ 8xovcj69iD7Y3mdDnGNDPEvtBrQidfGF/Hmhu1iX1TwWS996Z4gxT14l7eTNu6dTIMB0qSMuuwR
+ uPGMaDauCAFz9rIjRqH+RiKfw9w8ossr+zAh5rXIzdJGuA2Zs+GOgi6FDN8cMDwJtQ3dx53YXEU
+ qUBku6BABpvUgOYHalw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200051
 
-On Fri, Oct 16, 2026 at 21:13, Manivannan Sadhasivam <mani@kernel.org> wrote:
+On 26-09-11 10:33:04, Dipa Ramesh Mantre wrote:
+> Unlike the CPU, the CDSP/Modem does not throttle its speed automatically
+> when it reaches high temperatures in shikra.
+> 
+> Set up CDSP/Modem cooling by throttling the CDSP and modem when they
+> reach 115°C using the QMI TMD cooling device framework.
+> 
+> Signed-off-by: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
 
-> On 2026-10-16 15:14 +0200, Mattijs Korpershoek wrote:
->> Hi Mani,
->> 
->> On Fri, Oct 16, 2026 at 15:20, Manivannan Sadhasivam <mani@kernel.org> wrote:
->> 
->> > On 2026-10-02 11:41 +0200, Mattijs Korpershoek wrote:
->> >> From: Sriram Dash <quic_sriramd@quicinc.com>
->> >> 
->> >> The Qualcomm automotive SA8255p SoC relies on firmware to configure
->> >> platform resources, including clocks, interconnects and TLMM.
->> >> The driver requests resources operations over SCMI using power protocols.
->> >> 
->> >> The SCMI power protocol enables or disables resources like clocks,
->> >> interconnect paths, and TLMM (GPIOs) using runtime PM framework APIs,
->> >> such as resume/suspend, to control power on/off.
->> >> 
->> >> Power domain "core" controls the GDSC, resets, and TLMM (GPIOs)
->> >> whereas power domain "transfer" controls clocks and interconnects.
->> >> 
->> >
->> > This is not consistent with other SCMI based drivers. Most of them are using
->> > 'power' and 'perf' power domains, not 'core', 'transfer'.
->> 
->> That's correct. Krzysztof had the same concerns [1] in the binding
->> reviews. To sum up from that thread:
->> 
->> For usb PHY, 2 SCMI protocols are exposed by the firmware:
->> * power domain management protocol (protocol_id=0x11)
->> * performance domain management protocol (protocol_id=0x13)
->> 
->> The power domain has 2 indices: 'core' and 'transfer'.
->> * core controls the regulators, the clocks and the reset
->> * transfer only controls the clocks
->> 
->
-> But this contradicts with your commit message:
->
-> "Power domain "core" controls the GDSC, resets, and TLMM (GPIOs)
-> whereas power domain "transfer" controls clocks and interconnects."
-
-Yes, I need to update the commit message here. I should have done that
-when updating the binding commit. Sorry about that.
-
->
->> The performance domain (0x13) exposes opaques values (0xa to 0x11)
->> for which we don't have any information.
->> 
->
-> It is a shame that it is being defined as opaque values, but as long as you
-> don't define it in the binding and not use it in the driver, I'm OK with it.
-
-Ack. It's not defined in the binding and I won't use it in the driver.
-
->
->> >
->> > Why are these discrete powers domains be required? In my point of view, the PHY
->> > should have only one power domain for controlling power and be done with it. If
->> > you start having these fine grain controls over the resources from SCMI clients,
->> > then it defeats the purpose of the SCMI based firmware abstraction design.
->> 
->> From what I understand, thse fine-grain controls are useful for runtime
->> suspend/resume (on the Linux side).
->> For example:
->> 1. Enable 'core' power domain to enable the PHY
->> 2. Disable 'transfer' to turn of the clocks. PHY is still powered but is
->> "idle"
->> 
->> If we look at the patch, we can see that this is what's done in
->> qcom_snps_hsphy_suspend().
->> 
->> Does that clarify things?
->> 
->
-> Even though the SCMI spec allows defining multiple sub-domains inside a
-> protocol, I'd argue that there should only be one power domain 'power'
-> controlling all resources such as clock, icc, resets etc... But in this case,
-> that ship has already sailed.
-
-I agree. Unfortunately, I can't change what the SCMI firmware exposes to me.
-
->
->> This is also explained in the binding [2]
->> Should I rephrase the commit message here to include that?
->> 
->
-> Yes, please. Driver commit message should be independent.
-
-Ok, will do.
-
->
->> >
->> >> In this variant, two disjoint sets of resources are modeled against
->> >> the power domain suppliers which can be turned on/off to achieve modeled
->> >> device states. Two modeled low power states d1 and d3 are supported.
->> >> 
->> >> transition: d0 <--> d3  :: both core and transfer suppliers
->> >> transition: d0 <--> d1  :: only transfer supplier
->> >> 
->> >
->> > What are these transition levels and who defines these? We cannot have different
->> > SCMI drivers inventing these kind of independent low power modes.
->> >
->> 
->> Maybe the naming is not as good as it should be.
->> I took this originally from a downstream qcom patch and did not change
->> it.
->> 
->> I interpret this as:
->> * d3: phy is powered off, before probe (no regulators, no clocks and in reset mode)
->> * d1: phy is in lower power mode (regulator on, no clocks, no reset)
->> * d0: phy is powered on an operational (after probe)
->> 
->
-> These looks like ACPI D-states, which are neither defined in the SCMI spec, nor
-> used by any other Qcom SCMI drivers. So this driver cannot just invent these
-> states on its own. Just use plain wording for the function names based on the
-> indices.
-
-Ok, will do. Thank you for the suggestion.
-
->
->> I see that drivers/tty/serial/qcom_geni_serial.c uses a similar
->> mechanism. Should I try to follow that naming convention?
->> 
->> If you have other suggestions, I'm happy to get them.
->> 
->> Note that I can't change the power domains ('core' and 'transfer' since
->> those are enforced by the SCMI firmware)
->> 
->
-> SCMI firmware don't define the power domain names, isn't it? They just define
-> indices and it is up to the OS to name it however it wants.
-
-That's correct. It's been a while I looked into it so I got confused.
-However, I'd like the names to stay like this since it's how they are
-defined in the binding.
-
->
-> But if it is defined in any of the internal doc, then it is fine.
->
-> - Mani
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
