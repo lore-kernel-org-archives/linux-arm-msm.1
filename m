@@ -1,112 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792512541;
-	b=X/mtm/O2vWO6Z4hfb1xdGIz67VMH546raXyrnShWlsWY5S/rJtyXHdvaJ8cEYtM/rZl5
-	 G6ov1dYTvWGuf/VrVvyo1OK4V9v9QWHXEpDclZP6iWwMkBguss2lKfwcemRhnQ9IRuMQD
-	 qr33G0LkZJcHSB2GXHsixoM/AjwlRkAcNFkEjAUSQdK8XMrcl36/DyPUI0wg50On0bq7H
-	 hxfQBRe9Pe6VogwJVcX5F5hEkN9gERAP5oZisyArPuCe0BQBXsEs54QA2aotHEvEyQ9oT
-	 fQDFqOQ7rjAoBJn0fbMmZ4xnkuZpnhYnOdu53J++hz73DM5p9aZ4FFAfIacBdAluSSw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792512541;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=dGBOooh6yznjMWE+A5X7fdt4uXbCVA3oHqWYs1djhQY=;
-	b=GmeEWueLhf+WBds4yRQZYnntHXNVk4ezkTBSjOgoO5YzyvSApyGgV5JOaKO6Id5FZgDV
-	 gPcCdWdcMDBZ7ztGhu6gHvg0f5BSNrx+dJUK2I4SkaESrmC+c6tb5z53LoZwQdyKMFQnQ
-	 +ph4sZRHlI4VeeaxNyPKzaUZjuAkOUuXZwTpaGb1m2slfP5M51HwyF3+9yxV7qkLHYAbw
-	 v1VLd6Mq2FTm3Asal6d0oHxAkMKlMNu4R15XwhC9qySTnlFc0V7pjjwCy2ga3TY4ZrFSQ
-	 Umbn36SiyZkPSdB++ijJPRCn65O/zvspUwlitKQEIo2JH+z9CAwcPY7lwqRpv98FCKA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WnI7EJLE;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AhD1ouOq;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.45
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792512944;
+	b=J3WFw1Xa+V01dm93sUVRxgrw+kc6cKw214T/g/jyEliJyjcj2kTqbPkYCED17kDL8kFp
+	 2QAAR+85H7835WkRvt1JUvA5tL2B3vZMLEQBt++4axEZvzlhVagx+Ah/aMBt0+DNNjIE2
+	 UKrqpsJfylHve4hnB6BFrqKl7AVDXzlaNxk+TjMwlmDYTWbtvVUqGBa5ZWjBCj5mw3j+b
+	 Y/01bJiFwYSgDN9UTS/bUOlAMjUlZanMUi96Jh06uzRSZtOKTJWxvVFNCg+OO37++RIff
+	 t30MNCSwTIV3c586h9JX9phlE/9wBja03/6gUa0xqmrnnsvIppiE5MlaBQdPSuI0Fow==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792512944;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=WQHzKVqYaZwJZUC5Pb2xzxfXVpRRuYjJWgJcr6l3L5Y=;
+	b=GBTn7KbY+B34AjzgDhPld5AMqPVXGDeEHreL7hZKulq+sAaey0yP061+8NsEWq7Skrma
+	 gyBkFWLku9sUeUgjJJ+X4ZloBpxDDd6clXPfYoCHBHkNM9Ku7yTAjRd5EUZoPy8XTsQkf
+	 5fKHIFoOuGd/ot4dLcM4EcWcw91L3O56SyKgMyprzsmAl6Vy7j5thvnOrp450ngAdJpmG
+	 V5sPHLMOjwweikIAkXVhV76KKVHz4E/Kqkkv9odHyn5BBNKqQ94X1DbeRQQ8hjH/PKKjv
+	 /nbTE9fEWzuSuYbewTTk0Qa815shGcAIbEG5SoflxnAxqAi3a6QDX+lI9VB2P+dTDSw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aPwbeMPz;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.167.45
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACE1C606A320
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 16:09:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org ACE1C606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92150606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 16:15:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92150606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WnI7EJLE;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AhD1ouOq
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69KF3cPQ2548403
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 16:08:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	dGBOooh6yznjMWE+A5X7fdt4uXbCVA3oHqWYs1djhQY=; b=WnI7EJLEhLpgenKR
-	TSc5pJdCe7p7f6C49vSEMAegR4pqJemkIS/5FZ6I7FY7cjN/WsUjUCdmxw1EwY6a
-	5ibpygdhlRjIkVOQZfntu789v5VsaNppxtQbJjrUoyDIPtmRbNZJjs8uPTwNNepQ
-	ty6/ox738Ul/pUZ1uEd2KNRE99NxdlKMOgQfrmmziMG5Gc6eV58ELGoF9RFrzGtp
-	9DVcN8Q1oWpBAYbAo2cI0hBhTZl/234ZtBdsWt0V7cC9S++EPODIyPkf69KxFUFi
-	imXGO2yTCqnKyL7SA2WUcNRpMSuVBQK+Z98FkHhUZdrVxya4NecMwHwbnPOUPi6j
-	jLNKTg==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5pkb43-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 16:08:59 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-7c124d17880so715680137.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 09:08:59 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aPwbeMPz
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5be3db57938so2933737e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 09:15:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792512943; cv=none;
+        d=google.com; s=arc-20260327;
+        b=N08WPDH7N210BU1y9vW4jPlDao/QbdEvgvQ1odSo+Ot128INL9W7x6co211D7M0OlU
+         xVJ/0Cn8ah7DLizhQpM5Z3Un7w29a296wN3MGyHTH/DHrBoiwwLxoJ8Ut9jJYtWHxAso
+         /c6li1i5iOs8ix4TKGJbFlXuv9A9/O4biLsHfDYavQ9V9PLLwQpyFar0szSAjSN0I/wm
+         bSZGcqnHdAlgHbnViN1RDMPVNbLyPYoZ+jyb2wWmVILeZyzk/d4/4zUqhtgWVKvMiHVn
+         Ce0XGes53rGsqNYI2KK/qzTYWHIVMZPyKKwWF3FraY/sw/l6w3RcbMu7EEI5mjMZR6Uf
+         Klqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=WQHzKVqYaZwJZUC5Pb2xzxfXVpRRuYjJWgJcr6l3L5Y=;
+        fh=hUAiZ8nzcF5Vqyvz11+pNlINmg3ltvHj1zCCf3CH4ik=;
+        b=Jzb8Db6TwBVQZnYyxlju+k2CUdEINKaNogCAMp2prNKlf+yI3TvQL76KGA/xrhq5RQ
+         qi62u5YXraIN2wC/ITS5FxJ2PLNcEpKjeRma9/uBqPrbV2VjFZXhZs40pPM6xObuCfxG
+         zxPj0ElzGNeTzzE2/5BHDODwLhaWBwgV380+mwJBh+R8E+Z9VG3PlOlAwiZoCSxLI+yk
+         XsHpRR3C/2tJn26NVFuUQsYrvq9DnWsYt3UYVcZNbsmM8HOV95aoPfgRzKZ7sve85r3N
+         mT6WGUjsh/SzmahgaM2h22KETe5PoGEUlQxb9T+vnQ0u21DQbiloGfnn4pCoPgKgXMCZ
+         objw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792512539; x=1793117339; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1792512943; x=1793117743; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=dGBOooh6yznjMWE+A5X7fdt4uXbCVA3oHqWYs1djhQY=;
-        b=AhD1ouOqAyyz/xHSFKdKiise2ee3PssdUrpc99D05Yr9pUYtsHG6m58WDYwl2c7aXr
-         qGBE87vGQZE/QFOZVUo5PgnCva/OXnpSIWiVUmzxpKwzI9SdFFXdYs8OFW3ouIkJBSe3
-         if/rww19RfqWjKFnH3O/qWLOtPA6V+HB0gTYcLB46phD56X/7p5X7MSyn7oxnHkgGi3f
-         ccnp0HQa2rnRdHiTyju5WAsHmTmjgaxk/aXA4VQo5M+Vr15ndV/azzY+H2i1AwcSLjv8
-         vJXauOArJFzswj4MLWQkREFA+VXMAGIWWbVDWXr2aSGfP0FK2TNH5CXel7f7+fY+WlyM
-         cTXQ==
+        bh=WQHzKVqYaZwJZUC5Pb2xzxfXVpRRuYjJWgJcr6l3L5Y=;
+        b=aPwbeMPzAdLLeNAORWON295qh9yETXyJc5a/Id43rICPN6Spi03PNjK9LcYxQJBDdB
+         IrZrzj8BxqqZrDjlCJpTkSD5UTyM/53aZvsftbz7fUYKor2pNOyBIFKdFhCXP8wMnUbV
+         QvsxtYuhE/JIVqy9XioMAOfY6L9gjyOxqXj8ALZXcU5bg+T3YUubiCqjlTiLVZpGxaY0
+         ZzlHMlQVRJ9EbI7JOgh720G1k1xuodMFKrj5hMYsfbU4zt7L6wc8wLrIeCgFGNMzPsHg
+         EqG+OmqbSuDt2Vj/ZNLsMsS0F3yTzXI/LoT/r11AcyBrGUuF5h0S6OP0W0aUeYkDUEIn
+         QYKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792512539; x=1793117339;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dGBOooh6yznjMWE+A5X7fdt4uXbCVA3oHqWYs1djhQY=;
-        b=lPv1AB7jvJ2ZG4NbEqBBRGZ+oFm/bG+izaBFGXrbcJ1Ikgy5TgRWzQhLop3g7uS601
-         h/UtW5gperlcw1J6Ei+rkkxjDDaHEfQJqwLGT0xfayRWi6KmaJoPcUpIkEunCBQlZN9n
-         /kSkT9M0N5s98wyUDOCrqKF1Jy5yKQherdxuFnAxvUYfh/IHahhRDZ6lMiNMfzgAmPYw
-         QtNJneKcmkkVoGWQ1SxPUft6cTQHvCrUGkl5yiyRTlNbtVhJGJJQbRS5rSh6mrcjcTrm
-         ZA09oqGgRhbuB0DSWjWkrOP3lIFD6Q5ieL9Fm3bIOrvWKxJ7QJnYpXGcvbw8Mnc/WsMr
-         OuQA==
-X-Forwarded-Encrypted: i=1; AKwUvByKv97zImG5BErTMSVOSPIcF5Y/7peFcNTh0ZRRN8dcITaepmvfTb8xNIdkQLj0SWuPC9yc1iLQXNfeaWie@vger.kernel.org
-X-Gm-Message-State: AFq9FYKtPVl6J9sX1bI41rtwgtxPl3CpFey0lBxxE22nRRdpprhVcgTa
-	qWik47Ml+0p0nSBXsWPtFwJktn9AS8VY4exBtfLkWHvAWR7ZD33PZknXYrNVoxD2/11nHSiWM9c
-	OODK6NIrbQ2t0rGxnPPREvZZj66DqJtuBNLje6x6NCTCeNo0YRL/tzTMDKkURUHFOjVMDF0kaJ+
-	+I
-X-Gm-Gg: AYBFou1ACEjuC13nUtK6BY9MSiwa/Y7WLvvdHcij0HkICp+Af/YV8JHyeVQn9f6LvX1
-	HC0RSw8jcZRL08gIoUj/G1+Sho0b0s95FBoo0/9cq1t++NZTVRYR9zvfI8JSKPHmMjpJegov00o
-	y9t7o+i3N5E6wPoiPc1pIGP20nCFoT+BaxuOV7g5LJZ6oA9Fb3XaXzm9l5DpAgR8dW4IqoWDoyJ
-	mPAhPaTjRbRERmcV52DM4LDaKtuPXsHVpDcVI65a8iQP4+uZFQclcvKtR0fJGADWnTqqtZhwebw
-	B/Qaz6LWemgZtuf06UcV2OYCA2kGmKdP0ojt+h4m9JdoT1X3eByfTjHaCOFCb/2ySlr6ZqSGKKT
-	yrSf0a600exn4YMMBTyc5UeHvJwOBirQP+4Xlvk6t8ZFX+W/afKpm83Ln6Ws=
-X-Received: by 2002:a05:6102:f0c:b0:7cc:26e4:1943 with SMTP id ada2fe7eead31-7cc36acba14mr2586620137.28.1792512538835;
-        Tue, 20 Oct 2026 09:08:58 -0700 (PDT)
-X-Received: by 2002:a05:6102:f0c:b0:7cc:26e4:1943 with SMTP id ada2fe7eead31-7cc36acba14mr2586602137.28.1792512538216;
-        Tue, 20 Oct 2026 09:08:58 -0700 (PDT)
-Received: from ?IPV6:2a05:6e02:1041:c10:8d9e:b00d:491:1503? ([2a05:6e02:1041:c10:8d9e:b00d:491:1503])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1fb859326sm7011895e9.10.2026.10.20.09.08.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 20 Oct 2026 09:08:57 -0700 (PDT)
-Message-ID: <aca2cd5d-18e1-406d-a062-e219478b243c@oss.qualcomm.com>
-Date: Tue, 20 Oct 2026 18:08:56 +0200
+        d=1e100.net; s=20260707; t=1792512943; x=1793117743;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=WQHzKVqYaZwJZUC5Pb2xzxfXVpRRuYjJWgJcr6l3L5Y=;
+        b=rd8QSbEYi4nuCP+d9HrCAR0Y6PnCPjsPHkz37aNeOsaeO8oCP93NEJvmJeg0zJtuqp
+         5O9ynawCGoeFCy+/Ya1f9NarsG6WMcKyvROwa7gq6lkScFaqBMpKVzfUvriRyoBYq/jH
+         pV8VBy6f6/9duGWiQwy0HBf9rL6U26CeAgTw2B9hTRPT3aZ9ZjgOCCbDd/DamO1G7SAH
+         Qv1ox2ibZBq1tnUwAn0kTpkQluHmHylRCFOyG5SUlpOUm9ghrgn7VUNW8DI7zowY5ka9
+         WUHXIRWB3X7C4pAdJpO7CKpCP/J3IdCGJVoYrnsZNY9AMurvxPfRTSVx+PYPO3959BqE
+         gLgg==
+X-Forwarded-Encrypted: i=1; AKwUvBy8cQhXFHfG88CblG1qUsYJVn8TnYYFM0Tuje9E0Ss2SAS9cVJeB/rdz2duGX1NOo+pugGx+Jq35y2VBArL@vger.kernel.org
+X-Gm-Message-State: AFq9FYIDyiK2BES+8ZK002jAhpMCVOvW/qGEizoCrhJm1B/1gx2eL6y2
+	tTU+g+AgerlcISLSRd+Zcv1rWQntaiNaY/qk3AVJplsGXenMB0z8VF/HYUGA2MyVw9mGYxjQIAt
+	12CZwgN6x57YHOxxW2MCW1XukY9A2e8Q=
+X-Gm-Gg: AYBFou0nloXw1x9mI94XrnNxNEsgdhJQ0l+H8WKof+L2xJO9zB0xIbkpUZVG9em24Ow
+	jbb6kqjmqe+mArlFKZMUEKrICBaeXKa0xEETMtsmOx6IUIhZ8cx2rOu5AP5IeJbCc0xfokjVmwD
+	f5zfKlsHw3VmnlAW4h/TLw1UeQAik/bumqQnEbChvcTrXFBplTXE5d+e0L39uaRERTh+z54jns+
+	AxD8heelb67TS7YGhrDdN99TpXO5vfxTPurmNPnrP9/NQYgp+0V9uqls/zbLKRLlTKtIvbepKdg
+	LwVUA8xaWZoZMRPr9VHggoK18VikrtKsge8UD4TvAT93BHmBZXHkNNhscAGZ7Z3TNNQLXJpgAA/
+	Z1eonSyGMNwo=
+X-Received: by 2002:a05:6512:1289:b0:5bc:b375:9dbe with SMTP id
+ 2adb3069b0e04-5be50a6b0d2mr3742796e87.45.1792512942267; Tue, 20 Oct 2026
+ 09:15:42 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,254 +103,56 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal
- zones for PMICs
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
-        krzk+dt@kernel.org, johannes.goede@oss.qualcomm.com,
-        conor+dt@kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mark Pearson <mpearson-lenovo@squebb.ca>
-References: <20261014193524.5590-1-daniel.lezcano@oss.qualcomm.com>
- <atH0oW5j9pxsTty4@linaro.org>
-Content-Language: en-US
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-In-Reply-To: <atH0oW5j9pxsTty4@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=a7WlZkSF c=1 sm=1 tr=0 ts=6ad7921b cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=yw9hh2pf6h8ebXW9gWMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-ORIG-GUID: jlXR6VT2JIsZoB5N0x73_CFOch7zpMOm
-X-Proofpoint-GUID: jlXR6VT2JIsZoB5N0x73_CFOch7zpMOm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA2NCBTYWx0ZWRfX9rv6JbcaszMk
- Gz8vwrb8iVSLystGdfn849tpIkquSRpYh6zuJydI3OIphDaZgz5ndeS5krB2vkA0pa6wLKUE2MJ
- gy8GbNYoH93ddzUmnoOkYujEuIogXg1+I+lBxhgtgTB/p03vONgFigkxe4CpTGRrIKtwQ9qv4go
- ZF/Xgyo4AYbNVQnLjZCxOIlCsBhCO33vcU4Deh6Pzl8GkuHIP3ifs6LuoY6mcRSFxOGrIm9BS9l
- 1TiwbpZ7wKbjWKSgx7sGcc5ZEaVVydzHLFv4H4yAmdCG/n4JgZfOyIZiS0us8LaOI/xPDoADVpl
- m3rIPzfZUf5bZ5LCOKZkYTlcRuWjLRDO4nnq/lstjUbMkGMRugFPC9J2nqkugXSY2FxBB6R4BAo
- P3qSJVrS1seOVkHxtUQAe26GeRWPvmFzOAyEGUtgkn0PcL5fxg4kWsAvy6UiFee1j3/0FjGdyXZ
- umzi1V2BDeVxdVqFiaQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA2NCBTYWx0ZWRfX+v6KqKw/WTfs
- 7O+QiZJixn1rMQQAz4z5YHyJYU/qlHGG9Lu1fx/4RjPL1siNGKvVh9EF48amRwLyyo27MJQ/Lj2
- G3hiCOgxM4wCUoGapEhFYSzXV1l/s08=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_02,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015
- malwarescore=0 priorityscore=1501 adultscore=0 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200064
+References: <20261011-sdm630-idle-states-v1-0-3181d488dc0f@gmail.com>
+ <20261011-sdm630-idle-states-v1-1-3181d488dc0f@gmail.com> <2e5bfe2f-f639-4c55-bb4e-e8893e9f098d@oss.qualcomm.com>
+In-Reply-To: <2e5bfe2f-f639-4c55-bb4e-e8893e9f098d@oss.qualcomm.com>
+From: Fabricio Akio <fabricioakio@gmail.com>
+Date: Tue, 20 Oct 2026 13:15:02 -0300
+X-Gm-Features: AclHuK_1LQ0hgYaSfB-TfSrT7gWRZXqvLPPkmi6DcPVVcEYrpgEnBAEw1acmmg8
+Message-ID: <CANxzQdH3eC97bb+eef=wizrxoB4XfvROzg8iHFxCrN_a+TZiSg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm64: dts: qcom: sdm630: Drop the cluster idle states
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Alexey Minnekhanov <alexeymin@postmarketos.org>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Martin Botka <martin.botka@somainline.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
+On 10/15/26 3:51 PM, Konrad Dybcio wrote:
+> I threw an LLM at the downstream tree and it decoded the states to:
+>
+> C2D, no cluster state    2        0x00000002
+> C3, no cluster state    3        0x40000003
+> pwr/perf L2 D2D + C2D    L2 2        0x01000022
+> pwr/perf L2 D2D + C3    L2 2        0x41000023
+> pwr/perf L2 D2E + C3    L2 3        0x41000033
+> pwr/perf L2 D4 + C3    L2 4        0x41000043
+> System PC + L2 D4 + C3    sys3, L2 4    0x42000343
+>
+> sorry for getting it wrong years ago!
 
-Thanks Stephan for the additional information, that's very helpful.
+Thanks! I had decoded the same values, but I didn't just put them in
+place of the old ones. This firmware supports OS-initiated mode and
+refuses platform-coordinated mode ("psci: [Firmware Bug]: failed to
+set PC mode: -3", PSCI DENIED). In OS-initiated mode a cluster state
+may only be requested by the last running CPU of the cluster, which a
+flat cpu-idle-states list cannot express. I tried it: with 0x41000043
+in the flat list the firmware returns DENIED to nearly every request,
+accepting only the few that come from a cluster's last running CPU,
+and the idle CPUs spin on it again, at about twice the battery current.
+Linux runs OSI only with the CPUs described as PSCI power domains,
+with 0x41000043 as each cluster's domain-idle-state and 0x42000343 for
+system power collapse above them. I'm working on that, but I'm not
+sure yet when it will be ready, so this is not a placeholder for a
+replacement coming right behind it.
 
-We currently have an urgent thermal issue on this platform, and getting 
-this thermal mitigation upstream is important to prevent overheating 
-under sustained workloads.
+Dropping the states is not the complete fix, but it helps now, because
+as they are they do harm: cpuidle records no successful entry into any
+of them, and since the deepest of them is what an idle CPU picks, each
+failed request is retried instead of sleeping. On the Moto X4
+that is about 133,000 failed entries per second with the screen off,
+and the battery current goes from 277 mA to about 115 mA without them.
 
-Would it be acceptable to address the sensor naming and description 
-improvements in a follow-up patch, so that we can get the thermal 
-protection in place first?
-
-Of course, if any of these changes are critical for the correctness of 
-the thermal mitigation, we should address them now.
-
-
-
-On 10/16/26 11:56, Stephan Gerhold wrote:
-> On Wed, Oct 14, 2026 at 09:35:24PM +0200, Daniel Lezcano wrote:
->> Add thermal zones for the ThinkPad T14s and describe the board
->> temperature sensors exposed through the PMK8550 VADC.
->>
->> Add a passive thermal zone for the keyboard area, which is the main
->> thermal constraint under sustained load. The EC reports a thermal alert
->> at 57.85°C, so use this value as the passive trip point and allow the
->> thermal framework to throttle all CPUs and the GPU when the threshold is
->> reached. Use a 1000 m°C hysteresis and a 500 ms passive polling interval.
->>
->> An earlier approach used staged CPU cluster throttling in an attempt to
->> start thermal mitigation before reaching the target temperature. Testing
->> did not show a significant improvement compared to throttling all CPUs at
->> the EC thermal alert threshold. It also introduced a latency imbalance
->> between the different CPU clusters, which could negatively affect
->> workloads depending on where tasks are scheduled.
->>
->> A more optimal solution would require a significantly more complex,
->> system-wide approach, accounting for the workload distribution and the
->> available power and thermal headroom across the CPU clusters and other
->> devices. Such an approach would also require kernel mechanisms which are
->> not currently available. Keep the thermal policy simple here and use a
->> single passive trip, which at least ensures that the system is actively
->> mitigated before reaching temperatures that could ultimately lead to a
->> thermal shutdown.
->>
->> The mitigation temperature is derived from the platform behaviour when
->> using the balanced power profile available under Windows. A separate
->> change will adjust this trip point dynamically according to events
->> reported by the embedded controller. Name the trip
->> "keyboard-ec-alert" so that the EC driver can identify the corresponding
->> trip point in the device tree.
->>
->> Also add a 73°C critical trip to shut the system down if the keyboard
->> temperature reaches an unsafe level.
->>
->> Add a thermal zone for the back cover with a 73°C critical shutdown
->> trip.
->>
->> Describe the SoC, SMB, SDX, east and west board temperature sensors as
->> monitoring-only thermal zones.
->>
->> Thermal camera measurements were also used to compare the reported
->> temperatures with the physical temperature of the chassis. The measured
->> values appear to primarily represent temperatures inside the enclosure
->> rather than the user-contact surface temperature. No unsafe external
->> surface temperature was observed during these tests, although this should
->> not be considered a substitute for formal platform thermal qualification.
->>
-> Thanks to Mark, I was able to get some info on the location/purpose of
-> the thermal sensors in the T14s. As you noted already here, the sensors
-> are primarily focused on specific components inside the enclosure rather
-> than user-contact surface temperatures. Below I added some suggestions
-> for more accurate names for the thermal zones. Perhaps that helps to
-> optimize the thermal control further.
-> 
->> Finally, enable ADC thermal monitoring on the corresponding PMK8550 VADC
->> channels used by these thermal zones.
->>
->> Signed-off-by: Daniel Lezcano<daniel.lezcano@oss.qualcomm.com>
->> ---
->>   .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   | 105 ++++++++++++++++++
->>   1 file changed, 105 insertions(+)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
->> index 75ad74bcb042..2d0a434d2248 100644
->> --- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
->> @@ -502,6 +502,81 @@ platform {
->>   			};
->>   		};
->>   	};
->> +
->> +	thermal-zones {
->> +		backcover-thermal {
->> +			critical-action = "shutdown";
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-> dram-thermal or memory-thermal (or maybe keyboard-thermal if you want to
-> give it a user-surface name, although that purpose seems to be
-> secondary).
-> 
-> Next to DRAM memory, on the top part of the mainboard, facing upwards to
-> the keyboard. Unrelated to the backcover.
-> 
->> +
->> +			trips {
->> +				backcover-critical {
->> +					temperature = <73000>;
->> +					hysteresis = <1000>;
->> +					type = "critical";
->> +				};
-> Is this critical temperature is appropriate for the DRAM temperature?
-> Windows seems to have 115°C here as critical trip point which is maybe a
-> bit too high.
-> 
->> +			};
->> +		};
->> +
->> +		east-thermal {
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-> gpu-pmic-thermal (next to GPU-related PMICs close to the SoC)
-> 
->> +		};
->> +
->> +		keyboard-thermal {
->> +			critical-action = "shutdown";
->> +			polling-delay-passive = <500>;
->> +
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-> fan-thermal or heatpipe-thermal (or maybe backcover-thermal if you want
-> to give it a user-surface name, although that purpose seems to be
-> secondary).
-> 
-> Next to fan/heat pipe, on the bottom part of the mainboard, facing
-> downwards to the back cover. Unrelated to the keyboard.
-> 
->> +
->> +			trips {
->> +				keyboard_ec_alert: keyboard-ec-alert {
->> +					temperature = <57850>;
->> +					hysteresis = <1000>;
->> +					type = "passive";
->> +				};
->> +
->> +				keyboard-critical {
->> +					temperature = <73000>;
->> +					hysteresis = <1000>;
->> +					type = "critical";
->> +				};
->> +			};
->> +
->> +			cooling-maps {
->> +				map0 {
->> +					trip = <&keyboard_ec_alert>;
->> +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
->> +							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
->> +				};
->> +			};
->> +		};
->> +
->> +		sdx-thermal {
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-> wwan-thermal
-> 
->> +		};
->> +
->> +		smb-thermal {
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-> charger-thermal
-> 
->> +		};
->> +
->> +		soc-thermal {
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-> cpu-pmic-thermal (next to CPU-related PMICs close to SoC)
-> 
->> +		};
->> +
->> +		west-thermal {
->> +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-> typec-thermal or usbc-thermal
-> 
-> Next to USB-C ports, bottom part of mainboard, facing towards the back
-> cover.
-> 
->> +		};
->> +	};
-> There is also ssd-thermal @ SYS_THERM7
-> thermal-sensors = <&pmk8550_adc_tm ADC5_GEN3_AMUX6_THM_100K_PU(1)>;
-> as I mentioned before.
-> 
-> Windows uses the EC sensors for throttling, although given that we don't
-> have interrupt support for the EC yet, I think it is fine to initially
-> use the PMIC sensors.
-> 
-> Thanks,
-> Stephan
-> 
-
+Is dropping them first OK with you?
