@@ -1,49 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792502901;
-	b=dD/qtLfJtBH/nAiicnV9f9kkBLQUY+ToGD88gaNE/ctcWKCWbUeiNdBResjn9PDpcMaF
-	 AzFZ6nL5hUag/9yi6yaXf8cciSv3U8psaPcnaPUImNCI/RsVI6HDBgsJI0fsmG/97dtjZ
-	 8uLvVmpqO/AStK5Xi+L83vO99P7nY5JkPNeJ86RcdibOYRclVbRujunKqCgnsrRiobeLv
-	 8XmhNbIjhLU1TyGN4T+cAq8p4xCs6SWEMjrivZc1RCMKyapTozaCguD2FlGxAYCHxyFXh
-	 Sf1SAbIVubGgZ9vyU3e5OBsaWKohflCC8HdXd6QfaW2kp1LLw6BxqLtXNnHsUNP/a7A==
+	t=1792503064;
+	b=j595vn3Sp8MKnaTwMVrURkbthe5SpZY5j0jqoHVI4SxLLsWslfs4Mc+laI64zgKQ9Q7m
+	 0rSRtxumEK1vNDNMRdOnITDEHd6Qi2IYkni+glGNXRUwxZceIjTr6GoGtYt3623nXnvhV
+	 SId7bCXK+NOvg52++tR/bsOf849tYAny5j3UTcTbq0Um7GGLapQbnqy8M/IkW8tNUt843
+	 /Li7Rs/TQ6b0cCIn2ZDTmO6SIgJ9/UY35PzJeo5gXxG16R0T2zNdqzhAONSiZjnjLuW/I
+	 nJVO9biSa5iQ5oFBSAFLx+doPCrYFi/1+uJ4ny+aWV+1gTlRiqiMarYzo4MDvLfSr3Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792502901;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=RORxRwb5/DmurP0FfkMtcwvXHMALG7NTq8gSS0b/OHo=;
-	b=JO+zc2LqTV0lRXNnePk/Id5AqF33+ETZHJQIsMPW27Oze+I2D4kvri+z+b8oyHVOVG0F
-	 y8Fm7O00cIY+Ao2Hc7zCcpiAjeRzGNXkL6C0phgwyignHkOySCtaJ91jhhM7w2Ql17QdS
-	 3EOWPLMMZfFG1Uk8LPW3ATpaTImsJ4V/N8u9DW9xkvmGQi3EPvoDRpkKy9MXSZw/ArEdj
-	 OpGlGJmmX2C2AldsYVoVepvDlHi9ZwMokUBA/LE/JQL1JGPRRgh+9PuuMXVRoTjsV9N/x
-	 47ofyNe1o3i/pAkgafjB+75pZpp8ApDD3c1gYckt4Yh5YIFeOoEJFRnPA/+iL3cTqHg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792503064;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:Received:Received:From:In-Reply-To:
+	 MIME-Version:References:Date:X-Gmail-Original-Message-ID:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
+	bh=fgA/Zhp68dHEavBmIayWw25ZtfdqSPSrDKUimhdzG9U=;
+	b=M+GHHLytO5DEZzySxhCuPu76zg8/nHtQFJDwgl2lQQxXIE9h0yx1oc3wiDds02F2xElt
+	 Z8siQJ1ONjp//tbu7oBALNS2l92qCKzd8uAogxZ9lSqGonHRqDk7kkzAJ00A7x6VnjHYY
+	 4qvHqmYU9NsjicJqm9WDzsIrCZqk3d4eTCepqSVndrDtz1UEbPYHFHfdPzTkhX+m2FbLY
+	 Ftd1tMwwupSq029LXeXwFEHMIN4e8Cd3O50T7jTVG98CZUdnUCO/qUltuJMLJ5EkV/AdN
+	 opefeWG0KuZeu+UqIGY+R2lp+LCHwWNvPkjf4OQPhF3k3qdM2XyTtqs3xKl40vl/G6g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D7HSAaVq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XPlXry69;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9267F606A31C;
-	Tue, 20 Oct 2026 13:28:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5550560A4AF7
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:31:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D7HSAaVq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25A351F000C4;
-	Tue, 20 Oct 2026 13:28:19 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XPlXry69
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 288B01F0180F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:31:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792502901;
-	bh=RORxRwb5/DmurP0FfkMtcwvXHMALG7NTq8gSS0b/OHo=;
-	h=From:Date:Subject:To:Cc;
-	b=D7HSAaVqgjBc6JoobJSjHQ7U9G7aLvwZ0sdmzZGqSAw7AB+1GR/G5rjn570vgqe6s
-	 EnncGnjovpeeHPkUTiatxOxtTU4c9VUU6oEJVdNn7Eeaffpn0QXDl5ooOQ7Z4ajHsf
-	 QWgZ0tuH2DjzhqlMyA55B3o/bgIhGOMBL+KvDYfo5OW1+/QReyjfFwa5jQIx1ZI+qe
-	 ZjrU9LN8mWY2kv6bKFCxSaI7WVv3jI8TTwtS29Nc7dNYDLUk5Py1BH6b4viYqPs+8h
-	 XWzM5+aBu/mYzKOsJxqjtjVIdRHDORB2S2My6WHgvxgGisMcEejw+pPv9R3P1ONmPO
-	 uQdyqPVEb0syw==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Tue, 20 Oct 2026 15:28:08 +0200
-Subject: [PATCH] power: supply: qcom_battmgr: Expose USB connector
- temperature
+	s=k20260515; t=1792503064;
+	bh=fgA/Zhp68dHEavBmIayWw25ZtfdqSPSrDKUimhdzG9U=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=XPlXry69G9PQ7JreqGMjCzfXo64H9ICYp6PlqLMX0ix32KcTuDYm2tuMdXcm5Qjyi
+	 zYoriCeI0+5/z1j+sKSkuvAjOfgF8XeRblPHFUEO/CdCInOwcerSMJ/qsnWeGQFnDc
+	 GQxTf5z2YtpsvOg1M8lIQxy75AHfYysuQs9Sa6PYHm331QEwgrU61uzytC4nyr8TCE
+	 LWpIjQGGGGqBjcg9ns5JxToqxheR2rcwME2ZspJuYEntTA2J3wnArW8Q95tN/oTbqZ
+	 T8tMxvuGj3DHuw1aLTLncnomdJyqybOYENU+iPec7w9Tt7vu5GJAtlJMuKHrDVQaiN
+	 iZ8yN98+El6sw==
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3ab01c46697so24429391fa.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 06:31:04 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxTcgC/O/NZgtIcTzof8+9tcUtdom7K52u5coAlQxxoYdBSL/U233+iD+oeDRGu3oE8G/PnPjc/sC9oFAyQ@vger.kernel.org
+X-Gm-Message-State: AFq9FYKfWhpZ5VktvZK2kZWipa0jkPyhEEeKxjVJiFY61lKCJuOnu2sq
+	q052TUz0i8iVPxSd1ZTsDzTDNbqBkRim25N5baQfgvFRBOAQr3HhyF2jMQRAwGRlVnz8xNLV8UL
+	BwRMGt5yKeNvRbRhmYDVjWlpNEJRyRHBfhDX+JilFxQ==
+X-Received: by 2002:a05:651c:2111:b0:3ac:41ca:1104 with SMTP id
+ 38308e7fff4ca-3ac41ca13e1mr919641fa.0.1792503062833; Tue, 20 Oct 2026
+ 06:31:02 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 20 Oct 2026 06:31:01 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 20 Oct 2026 06:31:01 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20261020-qce-fixes-aead-v12-0-77a2e09abd0c@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,101 +65,34 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261020-topic-usb_temp-v1-1-3dbe390f9834@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBBA0auEWRtIIw3qVUSKmYw6hTYhkxSh5
- O5GXb7F/zsIZSaBi9oh08bCce0YDgrwdV+fpDl0gzXWDcYaXWJi1FX8VGhJ+hhGR4hndOMJepQ
- yPfj9G15vf0v1M2H5XqC1D+a4RNByAAAA
-X-Change-ID: 20261020-topic-usb_temp-3d56ecc9c658
-To: Sebastian Reichel <sre@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792502899; l=2480;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=NOvsQD5Wge0yLCLmWzofS9BLUycIquob+kT0cCuiLOs=;
- b=whqhvGQXbTHW3n6wd8GD4AReivFj2fNJbmJnhWUx88LNbU56YztVfDeY/y50y+37bVOzb3xA4
- fX9vOHltITlB7YfK/OoFvBQD0nYG8mRw0llvYZAGuqi/HtPZwtPN8Mt
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+References: <20261020-qce-fixes-aead-v12-0-77a2e09abd0c@oss.qualcomm.com>
+Date: Tue, 20 Oct 2026 06:31:01 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Md+y1SRft0+qWpy2Pj=ZK6TL1hmBWCq0jnVBxYDmQnu_w@mail.gmail.com>
+X-Gm-Features: AclHuK8JpK4nWSYDUH42Iv3zGzmNhtB0xqKaw0hDbR_OOIMnU3XpnrmRoofeLP8
+Message-ID: <CAMRc=Md+y1SRft0+qWpy2Pj=ZK6TL1hmBWCq0jnVBxYDmQnu_w@mail.gmail.com>
+Subject: Re: [PATCH v12 0/3] crypto - qce: fix self-test issues in aead
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Herbert Xu <herbert@gondor.apana.org.au>, 
+	"David S. Miller" <davem@davemloft.net>, Eneas U de Queiroz <cotequeiroz@gmail.com>, 
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, 
+	Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Russell King <linux@armlinux.org.uk>, 
+	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	stable@vger.kernel.org, Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+On Tue, 20 Oct 2026 14:47:00 +0200, Bartosz Golaszewski
+<bartosz.golaszewski@oss.qualcomm.com> said:
+> As requested by Herbert: this is the aead part of the QCE fixes sent
+> separately for easier review.
+>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-The firmware is capable of reporting the temperature of the connector.
-Expose it at the USB supply.
+Ok, looks like there are no more sashiko comments on this one as well. Could we
+get the three separate series with fixes upstream before v7.4-rc1 to enable
+further rework of the driver? Once in linux-next, I'll also resend the driver
+adding the new module parameter and removing the BROKEN label.
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
-Tested on Kodiak/FP5
----
- drivers/power/supply/qcom_battmgr.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
-
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index a7237ba09be1..9410a4a1387c 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -87,6 +87,7 @@ enum qcom_battmgr_variant {
- #define USB_ADAP_TYPE			7
- #define USB_MOISTURE_DET_EN		8
- #define USB_MOISTURE_DET_STS		9
-+#define USB_TEMP			10
- 
- #define BATTMGR_WLS_PROPERTY_GET	0x34
- #define BATTMGR_WLS_PROPERTY_SET	0x35
-@@ -298,6 +299,7 @@ struct qcom_battmgr_usb {
- 	unsigned int current_max;
- 	unsigned int current_limit;
- 	unsigned int usb_type;
-+	int temperature;
- };
- 
- struct qcom_battmgr_wireless {
-@@ -977,6 +979,7 @@ static const u8 sm8350_usb_prop_map[] = {
- 	[POWER_SUPPLY_PROP_CURRENT_MAX] = USB_CURR_MAX,
- 	[POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT] = USB_INPUT_CURR_LIMIT,
- 	[POWER_SUPPLY_PROP_USB_TYPE] = USB_TYPE,
-+	[POWER_SUPPLY_PROP_TEMP] = USB_TEMP,
- };
- 
- static int qcom_battmgr_usb_sm8350_update(struct qcom_battmgr *battmgr,
-@@ -1037,6 +1040,9 @@ static int qcom_battmgr_usb_get_property(struct power_supply *psy,
- 	case POWER_SUPPLY_PROP_USB_TYPE:
- 		val->intval = battmgr->usb.usb_type;
- 		break;
-+	case POWER_SUPPLY_PROP_TEMP:
-+		val->intval = battmgr->usb.temperature;
-+		break;
- 	default:
- 		return -EINVAL;
- 	}
-@@ -1074,6 +1080,7 @@ static const enum power_supply_property sm8350_usb_props[] = {
- 	POWER_SUPPLY_PROP_CURRENT_MAX,
- 	POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT,
- 	POWER_SUPPLY_PROP_USB_TYPE,
-+	POWER_SUPPLY_PROP_TEMP,
- };
- 
- static const struct power_supply_desc sm8350_usb_psy_desc = {
-@@ -1517,6 +1524,10 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
- 		case USB_TYPE:
- 			battmgr->usb.usb_type = le32_to_cpu(resp->intval.value);
- 			break;
-+		case USB_TEMP:
-+			battmgr->usb.temperature =
-+				DIV_ROUND_CLOSEST((int)le32_to_cpu(resp->intval.value), 10);
-+			break;
- 		default:
- 			dev_warn(battmgr->dev, "unknown property %#x\n", property);
- 			break;
-
----
-base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
-change-id: 20261020-topic-usb_temp-3d56ecc9c658
-
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
+Bart
