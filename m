@@ -1,105 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792502653;
-	b=jgYkyZ2Pmljt28UyMaTmsoxdSS/YAS7Gde2VeH3f9te3wgRvuUa4xcli4WkVJyOQEc03
-	 UINxhsxR5LqYJdOGsrw6eZSct3igxY35SbZW17klfMRSwoQMaojU6GmbKE8vGrtWm7JvV
-	 OmOHvRphjJXLHhE2JGrzNHlA9AQO74FcIDeeMfXYKsWfdJe14anvCOMbxWkzVSbJf0roR
-	 OplV2ZDNQKXF2wMbPxXj1U+oNwT5yUKjnbfNkb9JAkSMVOzLJLRh5sJM0Va0zAY6hB2ez
-	 xAvAlYpe8PCNVfFzXA1hvyf4PVNZJgbaWxLMtY+67jTyW6/HzTZ3GpYp7XjT7XVTPMg==
+	t=1792502669;
+	b=WdlLMUnQmp4tAU5XU2RaF0oqVwCFr3/EO4bO3/s77IVrLYaAomP6Z2CndgeQ9hgtYKm+
+	 NZTF4HGhBE999tl3QueFmi7w3/JvCze0w/dOvDkjLprb0OF1caiC3OyCbmAamkm41mWNQ
+	 NQCcCOOOUgWGg+/OEgfQjAtJ78UEmHTeMTDyqAlf+5ZOX/w1+xQDDWkkLY5FiyE3MUA2w
+	 W7+2AAJ83DgCd4aZkwyOmxapISfi4FO3ifwlQVzbi6PqdfXSeMT+RWpKJGLQXr6HWDswq
+	 G3HRmple1kZKpv7IYvAiyXuArs8M4ldmyGMc2N5cG/ypn8j0/WVksuBDGHKVvI25xpw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792502653;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792502669;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=XRtR/3LEKCT96Cn332o020ioqbbOJSAYNYdI1pf8JNI=;
-	b=ksP+GujwH8DE4Bcd9SOmSG6VnBSOZMGjU7pAZOj45t/TuP03mNOLcnDTjqLEU476F4TW
-	 Kt3bKEDTWuGtaY7aaqOc9JlwSlxdLPg7mX//fhMDnIuuePXlGxHqE5pftGxIAUhXFlyr2
-	 jZzAgCVDuHpiY77iL9OcjG3X5MSjDgqrpkbsh7SUBm4JEdpg91I3OLDYx/HpdIPnr6nCN
-	 GZRSxb+g5r+fv9x8cBJYNQSOF42E8Ng3yfHl/i6mfATLxdpRmBjhaTGr9eCk/vvHTW+Va
-	 jN6YyyPCGHNqfUZQYXAQO4WSeDL8cJXKPPU223rVh1CAm6PuPCorFMOjYp8Cu8B3pqw==
+	bh=98Oxvm3jikEXsJUM/zp3eKNHFF44g7Q5zCxMHJr/tPw=;
+	b=xQkAa73+8DxuIRyOAPVtClGcUIDlCP8tD/eLU1JhacvfbL0P/IBqzPYS8m/aM+KjZpht
+	 UcEwfGNasYHVJucSHmbINe2oIHHtEm53abkDEsOYuAknmHIOsXm3Cj1PX53t4UU3CS/R/
+	 bM/JM+Iijlewgg8UWU8rSzKHaN+qVl6+FRTPOjjFYKVedlN/+TtvIsE4/4Bf99Z7olyDx
+	 u7mQkMmS9+omigg7l9odDtqVYX7JvN3a5tccFUlB8kE/QK9963QHYuopJgJNEUS2EVXIE
+	 C1Z8QNUsSw/eyrXq18YbJRAqZMf5dqGX/vZeiqygK6vkHoeSaQ7KC7odO8IH+GctOfg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=EWJBmoPi;
-	arc=none smtp.remote-ip=209.85.216.54
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Dh5dAH96;
+	arc=none smtp.remote-ip=209.85.216.42
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 937A0606A31D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:24:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 937A0606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D31B606A31A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 13:24:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D31B606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=EWJBmoPi
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3ab60ff4273so2831534a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 06:24:13 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Dh5dAH96
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-3ac451e128cso1992105a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 06:24:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792502653; x=1793107453; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792502669; x=1793107469; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XRtR/3LEKCT96Cn332o020ioqbbOJSAYNYdI1pf8JNI=;
-        b=EWJBmoPiTzgM6kfVEl+EtqoPCzocUVxgwjVlaA9tBeRdOEyfbSlWaNCHaymhCC7hm9
-         NNAwloBqdpuX2iRcQvH8EPAUjQix3RolaxQ9KYXKNvACAg2VaeOKy2DMg9FENftE/PCG
-         UoCnA5vpsfMfL3G0dO9R7pGOCb5m2tulus4DHYsvrYFcuFOh6E4PFEh/WX5OhgOm7fLj
-         M3YveFmIqZ5mvjjh26FdsZBGx0o6t0RcIz7IboKGT0ccfIsh8zSQBimMVjQ28glI4sSC
-         riAyJ/C+tcb85fiNGCNlmlht+s6OH97nSzoe3ih8jTP19629AfQ2wV+wzsTOjNHfXJQS
-         kv4g==
+        bh=98Oxvm3jikEXsJUM/zp3eKNHFF44g7Q5zCxMHJr/tPw=;
+        b=Dh5dAH96qDSLKgNW1cNMLv58m5QcNBer0LAwRdDu5V1GMrUo/j4SAzWA95GosfdHHP
+         z55zXCYJ4jhT/w+jQgVs+OtTdNoobFK9/s9PVHDSPPAv8zj1V/nSK8Rui78dcTPYOHex
+         yzjVQP+hYUQHPc/NxABf0/vguiNvRkAmU15PGa3W33ADeENUJWzl1byXm+X2VtnDxLiw
+         RV2kQT9CNs/jFXGCmOIEi6T2hM8g4zt0KHo5ZyyxJeW+QN/KBBhz2fQRCAnMU3snsJHv
+         7mK+QWUoNTdk424A+gj6pSPyq5nu8JdnSnUkb8TAZFUoT1G+YzZfkgjHsiwEu6hgXHpy
+         SxsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792502653; x=1793107453;
+        d=1e100.net; s=20260707; t=1792502669; x=1793107469;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XRtR/3LEKCT96Cn332o020ioqbbOJSAYNYdI1pf8JNI=;
-        b=hjbKsX73qwbuHUt0GUp+GweLJD6azKxNqSFLsd9eVAXI08JHvBunwt1dPgylMyTw+x
-         j343xfS6B8P/ognVP2x2ZAxPdsOxmjxpyo0yUJ9OlwLtPDbX7oXDtGWggXLDMJRmzfjw
-         k0qk8MKaabV8CO1OE88HSNBq7SxW1b5p/ag4ce8WvqMovu1/4tUuVpX0F4+r36mqUzDs
-         xhgGDVMGQcXCI0cTDtjxCUZFsQK9KkPbG6A/UOf4BKZ53d0K7b7Kg41oHtUbHNhxRa0X
-         UK7v3XAXvvikLACEPTjRMeVLTBw92AOPDqbNKgsbypWyvfWWrheTLQNJSixEpYOeDU7h
-         RCEA==
-X-Forwarded-Encrypted: i=1; AKwUvBzBEQyFL5uE2729jttMI0Bu4j5B2OM93CArKz1539UT4+KneeucNYz8iFbu1fvCPuVFVJ4h1qRKgFab3okS@vger.kernel.org
-X-Gm-Message-State: AFq9FYLoNPO4BlGfGszuzKXHnCM5IHhxI8T05Meg+cBXjSfQEnqjrwG/
-	f3ymlRPDjwkowex8H4ePw57m3xVFPFhhfoHO+spIa/UnnbJ8H1i0I3Eg
-X-Gm-Gg: AYBFou0BgQZfcblyMGnckzvzpdx5tm51AN5r1GJIDpPZFade4+VkvXej5lyTBVQyoce
-	k16jSuJVzNDKp7E43WnubWNM4jny3RMXOYBk3GMHovYeCW+3Jf8IUmb5z7nB4RgqEX+62PfGN/r
-	KQEcRfI+W3R/NnD/5WqOX3EE0rtGDsOyUiRgFGUqGf2CSmEtTTvn7hwpHprQwDR1YGW/nPgCi7A
-	tdog42QkB2Dn4pA1G4NMpLUpgr+Cq5R5FURmxdxxJwpo3AqkT5T7c7DcgolQJRGyudu8Bn3ccsH
-	qBiiOapQPUj+LOvJlBFaL2fKAMB5yK4BJBK9BgHmUQRRzn0vNI+R3j6tfQFvBx6IqxbavjWXtaj
-	AGqrZNE7OpmBzpOxfFhr5Yp5FViidvCxLwFqq8Cij7kAzlp3McoHRdz2mv2Rkz+aV5F8bX9Yxs6
-	thhxIW+sfJoB2OeS4rL7yZsjhUhsW74UEqD3y7GLAgurhi/CZPIkyQ5EU5arqdSj7zDWah2Gcu4
-	jOo7uVTm4S2uP8=
-X-Received: by 2002:a17:90b:4fc2:b0:3ab:f2a9:cacd with SMTP id 98e67ed59e1d1-3acef5700abmr10872896a91.49.1792502652945;
-        Tue, 20 Oct 2026 06:24:12 -0700 (PDT)
+        bh=98Oxvm3jikEXsJUM/zp3eKNHFF44g7Q5zCxMHJr/tPw=;
+        b=cLDRR/UCAuCT1sOjK2TXnLNyX+Xk4z5gCZfJYZqhBx71hSNYGOPTeL1IZoOVzeKAP4
+         e4boQXDLm4OZg9J42YyXO/xGo2MPL6oxMsIx+jqkhaORtAxhq7hWwmO2fhLbZOjIq1ix
+         zDpslpK+Y6fqMr4WKP2VQDH/2BbAGnmSj46JLAmlDN1L6qoXnY5jZY6EHekw/VcIqlCH
+         j1aYZ2Gu206cLanLjPc3vi2Q660I1ya5XM4+FpvEX4Gx3O9+wliw8qYvCoZxp3L5YOzw
+         vVyY6I38Ve1uScB5rpAaBeDnIm0jTZ2LZ3O+KEi4QO6yppcepxC+iv/ei4U2e6Ko7G4Q
+         Z+7g==
+X-Forwarded-Encrypted: i=1; AKwUvBw8XIungvfRJvIO1HL9RbtkVKzip+Jtf9we9HTnI+L6dRNQfCFrgfjSKma/lyXxhwpfOm8YSbllqRD81hTm@vger.kernel.org
+X-Gm-Message-State: AFq9FYJg99xJKBM3At12bDkTFrcdEJMuaWy7PjASFsvy72hz/e2GOxSY
+	DWtSvTW5zHRDWae87X4DQKl67mkS6Pni6PGV69WgtsqJ1wunTvJVP2PZ
+X-Gm-Gg: AYBFou2YAaK4fVxk7eKjR+kW/mhvPoh9Xf4lHsWigT3GH5S1xQ9XbqeRVCy8kyVTxNu
+	qy5BEB3daCWvp9ms+gq/O1tCGO7dEAk5cl+gmmx8iOzjK7bOfZ2K+6RyHcIFrcsj1Mj0wnmp5T+
+	0mZ16w3FXFl06J96lpIN2HJf7NlGfRZs69QNZd9PoFWs5Pg8WOqZ4XKMKWt5qVtjDOI5gAr9rKx
+	332bnA/KRImqjByvOA64sdATDLQYdEe2CiFbI9/cEFiMsDWgi3WPA26Q/018XZQ/iN2iyRMf0xB
+	kRDHZO0DQneBEtB1YZ/PFN+cNkU0NWu0wQxebgVcUoBtVdQ6HD5dJOIhOO/hwbrYEGaE1TlZkCj
+	dNkFYHa0qvFzOaVnwGsEp3w4wH2l79VlYrC0P+BdI4y07U/KEFYRX3K9dyN6XGuGO8BlouZ6cUf
+	CK56vy1ByKjBeZrlS8/nWMTwh71hMoQ0xePEzPhk3qa7VBldGJ6tcYxT3/808NFKCf2+68w5n/i
+	9sCnsKEnHmYos0bH3zTkeGR
+X-Received: by 2002:a17:903:3585:b0:2e2:e0f8:e57c with SMTP id d9443c01a7336-2e9a6d2b9a8mr88276605ad.70.1792502668600;
+        Tue, 20 Oct 2026 06:24:28 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ad60be992dsm3550434a91.2.2026.10.20.06.24.09
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea1fd8a55asm7010935ad.29.2026.10.20.06.24.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 06:24:12 -0700 (PDT)
+        Tue, 20 Oct 2026 06:24:27 -0700 (PDT)
 From: joonhoekim <26rote@gmail.com>
-To: Manivannan Sadhasivam <mani@kernel.org>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 Cc: Joonhoe Kim <26rote@gmail.com>,
-	davem@davemloft.net,
-	edumazet@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	christopher.lew@oss.qualcomm.com,
-	deepak.singh@oss.qualcomm.com,
-	pranav.phansalkar@oss.qualcomm.com,
-	andersson@kernel.org,
+	Arpit Saini <arpit.saini@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	regressions@lists.linux.dev,
-	stable@vger.kernel.org
-Subject: Re: [PATCH net] net: qrtr: ns: retry service announcements on -EAGAIN
-Date: Tue, 20 Oct 2026 22:23:58 +0900
-Message-ID: <20261020132407.968-1-26rote@gmail.com>
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org
+Subject: Re: [PATCH] drm/msm/dsi: fix AHB clock staying enabled across suspend
+Date: Tue, 20 Oct 2026 22:24:14 +0900
+Message-ID: <20261020132424.983-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <atLkH_D2JrYdzacx@debian>
-References: <20261016124600.31-1-26rote@gmail.com> <atLkH_D2JrYdzacx@debian>
+In-Reply-To: <179241542813.315541.11037007061803544238@mail.ustc.edu.cn>
+References: <20261006-dsi-ahb-clk-suspend-fix-v1-1-67da848e1b0a@oss.qualcomm.com> <20261016125036.1069-1-26rote@gmail.com> <179241542813.315541.11037007061803544238@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,20 +103,41 @@ Content-Transfer-Encoding: 8bit
 
 From: Joonhoe Kim <26rote@gmail.com>
 
-On Sat, Oct 17, 2026 at 09:24:38AM +0530, Manivannan Sadhasivam wrote:
-> This loop is going to block other nodes. announce_servers() is called from
-> ordered workqueue which only executes atmost one work item at any point of time.
-> So if any other node queues command while this loop is running, it will get
-> blocked.
+On Mon, Oct 19, 2026 at 09:10:28PM +0800, Qianhui Xu wrote:
+> Question: with your runtime-callback variant, does dispcc end up suspended
+> after DPMS off, and does the panel still come back on DPMS on?
 
-Right, the loop holds the ordered workqueue for up to 10 s.
+Yes to both, on SM8850 with v7.3-rc4. With the display off and the
+system awake:
 
-For v2 I'll drop the loop and retry from a delayed work on
-qrtr_ns.workqueue, requeued every 100 ms while the announcement still
-gets -EAGAIN. I'm thinking of keeping a time limit like the 10 s in
-v1 and cancelling the retry when the node says BYE, but the details
-may change once I test it with rmtfs started before the modem. I'll
-post it as a new thread.
+  current code and Arpit's patch: disp_cc_mdss_ahb_clk prepared twice,
+                                  dispcc runtime active, MMCX on
+  prepare only in the PHY runtime callbacks: prepare count 0,
+                                  dispcc runtime suspended, MMCX off
+
+The panel came back on every one of 30 DPMS off/on cycles with that
+variant. I repeated it today with the same variant on v7.3-rc4,
+blanking both outputs from the compositor, with nothing on
+DisplayPort and with four different sinks (a 4K TV and monitors at
+5120x2160, 2560x1600 and 1920x2400):
+
+  nothing on DP: DPU, both DSI and their PHYs, the DP controller, MDSS
+                 and dispcc all runtime suspended,
+                 disp_cc_mdss_ahb_clk enable=0 prepare=0
+  sink on DP:    DPU, DSI and PHYs suspended, but the DP controller,
+                 MDSS and dispcc stay runtime active,
+                 disp_cc_mdss_ahb_clk enable=2 prepare=2
+
+So here the remaining dispcc reference comes from the DP side while a
+sink is connected, and the display controller does not keep the MDP
+clock when blanked. This tree carries my DP patch that holds one
+runtime PM reference per plugged sink, so the DP part may differ from
+mainline.
+
+Arpit, thanks for confirming it is prepare=1 with enable=0 on your
+board during s2idle; that matches what I see. I could not measure a
+difference from it in s2idle (CX collapse counts were the same in all
+three cases), only in the display-off, system-awake case above.
 
 Thanks,
 Joonhoe Kim
