@@ -1,78 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.158
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792484855;
-	b=cxMkIj4tEtLOkQMeAhzY9q1e0319tEqTY1eBji80x1JGGKleotariyfxkNVDMPbKfBjh
-	 4pCLi2dS8Y02/SYJjfj6MZDLYyT/vsqcrnpypW2D5KoXbRWr0gNcSn6NKFXixXoTodrr7
-	 sAPxEePLc85EjwqHAit5qbWYT81cPU4mTLE9+eGzmUwXtNxir2bI4pe7KiVWUAP5UxoAf
-	 BVSw76Kq99uMczZHhz+qwqvdJ11WezuJAIls7hvxdVN/GfsDyUlhYOf3Os5gGbA/AFwqY
-	 zm88BX/rgQe9uNy71CQAdsDcgz2vWy1fu7a7x4zTa4FKw7CM7bysiW79TUiLu0NR5gg==
+	t=1792484883;
+	b=NA0kM8Mhql1tbDpBQdn4Z/3gLj/IYf4tqLeohqjQuEL/AvmSZGIx+fdQknrq2x9NaBU1
+	 MUSzcobvKkXWqEshPsKYyZtwaMmFpWcXZ6eIEAVCowa1rAlldmmT1ywiUCMBsTJO4+3jH
+	 H8L8CaPOIdr8cQd8rTWY6ABo0ipQXdI1Cy3OnZ5VWIU7r6aZ2jNL3cKH1RZ0Z3QKIZBYm
+	 ZTvV7sAw/bAC1D10dLOXK14SB2UV7/ALVwVIz7uhHxt1ZmZtSFh2ECpU9ND6E+GkTquAD
+	 I79ggNBg2Kik8Re+0vS24DHvwL6jT3Lpc4A/ygE4rJdHBliOEp4Dr67I0j3DcNq+Urg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792484855;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=guE7ZJZ3qLp7RsghCUoXrScsS8RkMWxfffDe/dOb2Ac=;
-	b=r1ek94aziiIHHeAeNQ4XAR+oTfPptr42soZktEujk4E7vdinoU+Ih5bFfhhMcovKSFxx
-	 gNV6Sr+m2ZqpJPXhWkgC+Rn1s6pY43sBrfg8JdkkIodhKY/d6wBYj9Vlrgn6kobk8rgcJ
-	 Kd4qsm/qZdUC3abVY/RSAx+DqxEPOzlCOmmgYjlnex7T3KCsO1kT35bV3PZmznYl5dwUz
-	 litlLa6h5/mzGWoZYBKbph+QPTF/MKHGgLBODOZlAPG3PxIgkcILlmzeZCSg1ZG1Sn5N4
-	 H3dAH0mqfT52MXEHmZe+pYbL7JFt+zii7J7fXSLKnaMmtdcOEzra+vEQ26hzFGvu0tg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792484883;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=rvYWJFWcgvZUYKe8TM7FfKWltCT1YcCtXDDqW7fUltc=;
+	b=WyeOX3yVSQOFJPryRUSFC2+1smYnVKcLrAtT6Ry7cmUOk6EK003Gc1oR9d/DEnn7Ezv1
+	 mS6hT+RzCnHyNCQ4V+R33RvF7jwSNGWeobMN0dnHaCQ3MyCmwh6+5khPbxdzTgwGQ5PI3
+	 pV9t18qkLXilMbV4ASReZzlcMW1HgLj3RtyvVG+WKOMA27GWMFgb9xfbFOExEFuZBxk+5
+	 u6Rgx4LEzjJrmFccnMHPRiHncGRTUHmY2qF1eMcq65SQVkjiN89fzYulBtMUimkBn7REG
+	 v82nPHgUvOoJ69xFmpj0VnZUtPbK4L7k+C6LhCyYRZaAaRZ3j0qFaHnpbZBLVyKBkLQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=AGFUYe9G;
-	arc=none smtp.remote-ip=95.215.58.158
-Received: from mta1.migadu.com (out-158.mta1.migadu.com [95.215.58.158])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="WT/u5oY4";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GzcXqymI;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E3B60A261A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:27:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 01E3B60A261A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77586606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:28:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 77586606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=AGFUYe9G
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=1VR5x+ugKPEt0b9SEHSYjBwUNYlANCVfeg67lrVVgdg=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792484853; v=1; x=1793089653;
- b=AGFUYe9GpRlVhE9nlzvo13UF5KTU2V93loI0eYip8n/rMyuIbHaqkW3ByvxxiuVH/JVBq/5X
- FisurBgG15DkPS14VlE6r86cz+kSinJqGl9XwlOovTS//67zN5EtDnt/hGrwIXjaEGiubWJd/qy
- h5kNakn76vKOEpavUP115DMk1v2BNy7GV1LuxAHl1vrYdlhAJ8CAr5t3utJf41xmgGqeoSi5Am0
- kDvkI8kFktUCi5CMSYDJMX6ncmsIqbSNVxMEwv41AlOVIM8OvBqBgzD7NGYoriy/GbLQrIau8yr
- IPqpWsjBB9wsN4voyB260+AvYa89M499upDFKz5F2FNbg==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id bf7a3a9bbbdbd63e;
-	Tue, 20 Oct 2026 08:27:32 +0000
-X-Mizu-Trace-ID: bf7a3a9bbbdbd63e
-X-Migadu-Flow: FLOW_OUT
-From: Val Packett <val@packett.cool>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Val Packett <val@packett.cool>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	~postmarketos/upstreaming@lists.sr.ht,
-	phone-devel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH v2 4/4] ASoC: codecs: wcd939x: fix ref leak and NULL deref with USB-C audio
-Date: Tue, 20 Oct 2026 05:26:26 -0300
-Message-ID: <20261020082631.1509275-5-val@packett.cool>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261020082631.1509275-1-val@packett.cool>
-References: <20261020082631.1509275-1-val@packett.cool>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WT/u5oY4;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GzcXqymI
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69K8ChPx186498
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:28:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	rvYWJFWcgvZUYKe8TM7FfKWltCT1YcCtXDDqW7fUltc=; b=WT/u5oY4quedgaYW
+	sNkGzWJBXrGFl58suco6iOTM/CvDjTLebyfUUMjQd3LPvnBUhFAJU66cgBrgsg2X
+	JZZyIFO5K9HmA/krlRozcBrmZn/r6kqRh68dgE7YbYLVsQHHWey4l3RpljtWcll1
+	U0Dh55ii337z4yqu93Td6M7ZFJshHFAXtOG6Th5fW7lLD5dNppk9rbsjkcKPfc0+
+	GZmSE6hXCG5PM/wYBchkExPQff+fwu4YRWYLX7MAB1Oob4lNGJrwz8sWglNKDR5l
+	G81za669iwQOjSBwQkhTvGESG6Uz+qxUIRa7HHe4lrr3t9+1e9jl3gD/CnMauaag
+	oT9xdA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5nsmdf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:28:02 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93e58614290so45880585a.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 01:28:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792484882; x=1793089682; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rvYWJFWcgvZUYKe8TM7FfKWltCT1YcCtXDDqW7fUltc=;
+        b=GzcXqymIWI+SKVdL/V0UPbFaK4oHd7Zdq5/vCJtBTu/t0ZaUuBKgrLmou/Kw/cjMHJ
+         4ob7odx2U69tAp/OuKB0EJRooZ8jBQG0/Zav1oPLy0Ji8ImphyruGKwi3m02H982x9o3
+         cwdUpU8O+laxzVbfg1+kPKnmA4OcCUNRyrSialruOkHeoEKclhYIUJrBChtMMTI/wmLD
+         7CHvJTBlA4MxFQzTur987COlxTN0Shu17Swg72QnGGWPMWUn6IBm6ZMhpvg3NM2suR5V
+         aje1nIYw96V6G1DlRkeTyabVONc1zlTOmsX0ldchljRDvT/wuebM1PM3hRp6bWegNKhB
+         HROg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792484882; x=1793089682;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rvYWJFWcgvZUYKe8TM7FfKWltCT1YcCtXDDqW7fUltc=;
+        b=xGEo8NyiXflSqkkQ/nxMs4NKQeigs47lun5/9ib/Z7evct5cevg3QYB5KpLEOvoi2L
+         HelOfTVUpOGCV4sJLd0wSyylWSxg0liv+xOgGhip9TdHFC/V7wCKFGMnoLkW6StwFPm+
+         GHBV8JeNw3+XpwEojtqo7B3ep2JcIVg2H/eDwcCIibZIDAmFzaCEjfSdGWoqH+e9mNh/
+         F8FkmszDTJDjkrLP+I0g9B0nlCjlSTLpRhAYgOccau11xDhOINv0D77jW8YMbSU3mXxB
+         ZuCXg/Dk9/VtnfN0uS8KFrXCMTi1d5UVc1N1jeZVP8bB0vdrYgdWbHV8wsA9ZTCOFlBC
+         y71Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxl0bK+9Zjlu7+kMGXYM4NFs/e+TtdWOO9PxD02VMZh3m2tTop23BRoBDt6p9U4h8UlA4LXX2JLUU2bVcqf@vger.kernel.org
+X-Gm-Message-State: AFq9FYIl3HFbatG98VDAOGwt3czz0ASn2vgMMJSAeT4Hv7x4QpLGnxtS
+	wI5SNPQ2z768SUn7CSfeXolEGQXa+jAY6sw4hYSEByDNTT89FBh1jyTskwY/PJXa4A81MXhbRkI
+	ExvQJz4x0jGACQkR8CefyaYV98aSpLS4YfO7CnCYISPLro9nBQV5ed+lyJG/3VPQdBPNb
+X-Gm-Gg: AYBFou1j8M82rUCIRukixdmNmTEsGUbkIMVxsL801VJNE3PzH6v1X8PDbqhVF9QB93/
+	ZHVZmLJahLKsvffk/rb+sk4HUZ+fjFNnDSOaqE7MYozRjgNm8XQi8+WRNrxEqFYR/VoXj8ha6rj
+	9bAxBQBRGjNKfl+/3E2uVzZoZFAHwcL9vcAoz4D7ndQOoep4z77vyX5wTGGoRiC75SjA3gDV2C8
+	kFu3WL051cgt+nRuoa033KE0bAG81FsFLJlbw5MQNUtx1Ddhv0JHF4iE3IoJCnDrrrizPa8Z9BE
+	4JOzBbSLUAEH+Z6tnxuaKTmEJMnTNolEq/oWMATDIyRBq+FccWqovnIvpOIT1udgTIn5W7H1zi5
+	VIoO2kzwdB/BvD2lswBiOug==
+X-Received: by 2002:a05:620a:c55:b0:939:9205:4d78 with SMTP id af79cd13be357-93f29d39ad8mr1871582785a.3.1792484881678;
+        Tue, 20 Oct 2026 01:28:01 -0700 (PDT)
+X-Received: by 2002:a05:620a:c55:b0:939:9205:4d78 with SMTP id af79cd13be357-93f29d39ad8mr1871579585a.3.1792484881209;
+        Tue, 20 Oct 2026 01:28:01 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4091eb165bsm451124266b.71.2026.10.20.01.27.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Oct 2026 01:27:59 -0700 (PDT)
+Message-ID: <3bb9a390-3b5e-4321-a25f-77e4f5c88f9a@oss.qualcomm.com>
+Date: Tue, 20 Oct 2026 10:27:54 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,83 +115,200 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/4] arm64: dts: qcom: sc8280xp: add Radxa Dragon Q8B
+To: Xilin Wu <sophon@radxa.com>, Bjorn Helgaas <bhelgaas@google.com>,
+        Andrzej Hajda <andrzej.hajda@intel.com>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Robert Foss <rfoss@kernel.org>,
+        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+        Jonas Karlman <jonas@kwiboo.se>,
+        Jernej Skrabec <jernej.skrabec@gmail.com>,
+        Luca Ceresoli <luca.ceresoli@bootlin.com>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Bartosz Golaszewski
+ <brgl@kernel.org>,
+        Linus Walleij <linusw@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>,
+        dragon@radxa.com, Daniele Briguglio <hello@superkali.me>
+References: <20261009-q8b-dts-v2-0-eda11e5dea8b@radxa.com>
+ <20261009-q8b-dts-v2-4-eda11e5dea8b@radxa.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261009-q8b-dts-v2-4-eda11e5dea8b@radxa.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: dmdMu9ZojCvhv4-cP4r6_VSkt2Mo4_7P
+X-Authority-Analysis: v=2.4 cv=DZOCOftW c=1 sm=1 tr=0 ts=6ad72612 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=u2Fyij-s7XdpVA4p1MkA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: dmdMu9ZojCvhv4-cP4r6_VSkt2Mo4_7P
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDAzMyBTYWx0ZWRfX7aKEeCqkOJrD
+ tfuZgAUKiZj4q4PDr7Bi+09CGm+6saYHdMYHRrmnSWWw22cltSVMvZygG3KvVHQmfg+6RRV9TD2
+ bV5ozjofcMYqsP0lXnXFBf9GazJSsLMqkyk6NFSN4YQJDnlUy72RK5IA5tbvBNasPvwNhzIvHeM
+ NRSCAISdeZQBdycHEZ4ryU8KYN/FLeRHa+pK9MQQ4Lpn3UR6Rg9MqkGfVKouGuffk5ue4MJrYFa
+ bQFGe/zBvt335J6nYV9Ti95I/DruIW+FUWpOtqYkUzOddFuj8gdEe+OjirBlMK0j3YFMl/tcSTO
+ bQEmfK2gsL+9I/TJ3qzOVQVP5lblgwLeIA6u3mITRuUDgzH6rZFjSNXabSaCmCn+fezS8hlKN71
+ /bfMeckuzEk33U6+gSVBD9DZPRtue42+i7Wyym5m+zoTqKoqmKoZaulOm3VzPGuCa0h/cxneiNW
+ IuH57b4lUZ1ftQuUCqg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDAzMyBTYWx0ZWRfX9Mg7Bpmw6dGi
+ Y73ZTIHoamEgIn3k8OUbW8C/PlqjHiXYyQFoMSOgjTqxltUTBM6o0xiRbVqQbMFGB54AuP62i+A
+ Be60T7RGUISncsBANt1HdumTflnc22A=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 phishscore=0 priorityscore=1501 bulkscore=0
+ adultscore=0 lowpriorityscore=0 spamscore=0 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200033
 
-Some code issues were found during review of a port of typec code from
-wcd939x to wcd937x, pointed out by sashiko-bot:
+On 10/9/26 9:55 AM, Xilin Wu wrote:
+> Add initial device tree support for the Radxa Dragon Q8B,
+> a single-board computer based on the Qualcomm Snapdragon 8cx Gen 3
+> SC8280XP platform.
 
-* wcd939x->wcd_mbhc may be accessed by the typec callbacks which are
-  independent of the ASoC codec lifecycle, don't leave it as NULL/PTR_ERR;
-* wcd939x->typec_switch reference was leaked on unbind, put it there;
-* the device_node reference returned by of_graph_get_remote_node() was
-  being leaked, add a __free annotation to the declaration.
+[...]
 
-Fix them in wcd939x as well.
+> +	pmic-glink {
+> +		compatible = "qcom,sc8280xp-pmic-glink", "qcom,pmic-glink";
+> +
+> +		#address-cells = <1>;
+> +		#size-cells = <0>;
+> +		orientation-gpios = <&tlmm 166 GPIO_ACTIVE_HIGH>,
+> +					<&tlmm 49 GPIO_ACTIVE_HIGH>;
 
-Cc: stable@vger.kernel.org
-Fixes: 10f514bd172a ("ASoC: codecs: Add WCD939x Codec driver")
-Signed-off-by: Val Packett <val@packett.cool>
----
- sound/soc/codecs/wcd939x.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+Please align the '<'s
 
-diff --git a/sound/soc/codecs/wcd939x.c b/sound/soc/codecs/wcd939x.c
-index 26fe0b6313cd..56e041e70fd4 100644
---- a/sound/soc/codecs/wcd939x.c
-+++ b/sound/soc/codecs/wcd939x.c
-@@ -2466,6 +2466,7 @@ static int wcd939x_mbhc_init(struct snd_soc_component *component)
- {
- 	struct wcd939x_priv *wcd939x = snd_soc_component_get_drvdata(component);
- 	struct wcd_mbhc_intr *intr_ids = &wcd939x->intr_ids;
-+	struct wcd_mbhc *mbhc;
- 
- 	intr_ids->mbhc_sw_intr = regmap_irq_get_virq(wcd939x->irq_chip,
- 						     WCD939X_IRQ_MBHC_SW_DET);
-@@ -2482,9 +2483,12 @@ static int wcd939x_mbhc_init(struct snd_soc_component *component)
- 	intr_ids->hph_right_ocp = regmap_irq_get_virq(wcd939x->irq_chip,
- 						      WCD939X_IRQ_HPHR_OCP_INT);
- 
--	wcd939x->wcd_mbhc = wcd_mbhc_init(component, &mbhc_cb, intr_ids, wcd_mbhc_fields, true);
--	if (IS_ERR(wcd939x->wcd_mbhc))
--		return PTR_ERR(wcd939x->wcd_mbhc);
-+	mbhc = wcd_mbhc_init(component, &mbhc_cb, intr_ids, wcd_mbhc_fields, true);
-+	if (IS_ERR(mbhc))
-+		return PTR_ERR(mbhc);
-+
-+	/* May be accessed by platform dev typec callbacks, only set if valid */
-+	wcd939x->wcd_mbhc = mbhc;
- 
- 	snd_soc_add_component_controls(component, impedance_detect_controls,
- 				       ARRAY_SIZE(impedance_detect_controls));
-@@ -2499,6 +2503,8 @@ static void wcd939x_mbhc_deinit(struct snd_soc_component *component)
- 	struct wcd939x_priv *wcd939x = snd_soc_component_get_drvdata(component);
- 
- 	wcd_mbhc_deinit(wcd939x->wcd_mbhc);
-+	/* May be accessed by platform dev typec callbacks, clear */
-+	wcd939x->wcd_mbhc = NULL;
- }
- 
- /* END MBHC */
-@@ -3171,7 +3177,7 @@ static int wcd939x_populate_dt_data(struct wcd939x_priv *wcd939x, struct device
- {
- 	struct wcd_mbhc_config *cfg = &wcd939x->mbhc_cfg;
- #if IS_ENABLED(CONFIG_TYPEC)
--	struct device_node *np;
-+	struct device_node *np __free(device_node);
- #endif /* CONFIG_TYPEC */
- 	int ret;
- 
-@@ -3434,6 +3440,10 @@ static void wcd939x_unbind(struct device *dev)
- 	put_device(wcd939x->txdev);
- 	put_device(wcd939x->rxdev);
- 	component_unbind_all(dev, wcd939x);
-+#if IS_ENABLED(CONFIG_TYPEC)
-+	if (wcd939x->typec_analog_mux)
-+		typec_switch_put(wcd939x->typec_switch);
-+#endif /* CONFIG_TYPEC */
- }
- 
- static const struct component_master_ops wcd939x_comp_ops = {
--- 
-2.55.0
 
+> +			ports {
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +				port@0 {
+
+Please add a \n before the subnode
+
+[...]
+
+> +	vcc_5v_s: regulator-vcc-5v-s {
+> +		compatible = "regulator-fixed";
+> +
+> +		regulator-name = "vcc_5v_s";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +
+> +		gpio = <&tlmm 159 GPIO_ACTIVE_HIGH>;
+> +		enable-active-high;
+> +		startup-delay-us = <250000>;
+> +		off-on-delay-us = <150000>;
+> +
+> +		pinctrl-0 = <&vcc_5v_s_reg_en>;
+> +		pinctrl-names = "default";
+> +
+> +		/* CH7218A needs to be powered on for HPD logic to work */
+> +		regulator-always-on;
+
+Does the power supply reference at the connector node not handle this?
+
+[...]
+
+> +&gpu_zap_shader {
+> +	/* Reuse firmware from x13s as the SoC is unfused */
+> +	firmware-name = "qcom/sc8280xp/LENOVO/21BX/qcdxkmsuc8280.mbn";
+> +};
+
+Other than the signature, the zap firmware is wholly generic.. I wonder
+if we can just add a symlink in l-f to get a generic path..
+
+WDYT +Dmitry?
+
+[...]
+
+> +/* M-key Gen3 x4 */
+> +&pcie2a {
+> +	/* Place ECAM and BAR space above 4 GiB to accommodate large BARs. */
+> +	reg = <0x0 0x01c20000 0x0 0x3000>,
+> +	      <0x0 0x3c000000 0x0 0xf1d>,
+> +	      <0x0 0x3c000f20 0x0 0xa8>,
+> +	      <0x0 0x3c001000 0x0 0x1000>,
+> +	      <0x5 0x00000000 0x0 0x10000000>, /* ECAM config */
+> +	      <0x0 0x01c23000 0x0 0x1000>;
+> +
+> +	ranges = /* IO (1 MiB) */
+> +		 <0x01000000 0x0 0x00000000 0x0 0x3c200000 0x0 0x100000>,
+> +		 /* 32-bit non-prefetchable memory (256 MiB) */
+> +		 <0x02000000 0x0 0x40000000 0x5 0x10000000 0x0 0x10000000>,
+> +		 /* 64-bit non-prefetchable memory (3.5 GiB) */
+> +		 <0x03000000 0x5 0x20000000 0x5 0x20000000 0x0 0xe0000000>;
+
+Please drop this change on the board side, this is SoC-specific.
+Likewise for the other ports.
+
+[...]
+
+> +&pmk8280_pon_pwrkey {
+> +	status = "okay";
+> +};
+
+I am confused why this isn't enabled by deafult but that's of course
+not your fault
+
+[...]
+
+
+> +&sdc2 {
+> +	pinctrl-0 = <&sdc2_default_state>;
+> +	pinctrl-1 = <&sdc2_sleep_state>;
+> +	pinctrl-names = "default", "sleep";
+> +
+> +	full-pwr-cycle;
+
+Hm, is that something that comes from the controller itself? Should
+we advertise it on other SoCs too?
+
+[...]
+
+> +
+> +	vmmc-supply = <&vreg_l9c>;
+> +	vqmmc-supply = <&vreg_l6c>;
+> +
+> +	cd-gpios = <&tlmm 131 GPIO_ACTIVE_LOW>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&sound {
+> +	compatible = "qcom,sc8280xp-sndcard";
+> +	model = "SC8280XP-Radxa-Dragon-Q8B";
+> +
+> +	audio-routing =
+> +		"IN1_HPHL", "HPHL_OUT",
+
+Please don't break the line here, start right after the '='
+
+[...]
+
+> +	usb0_sbu_default: usb0-sbu-state {
+> +		oe-n-pins {
+> +			pins = "gpio101";
+> +			function = "gpio";
+> +			bias-disable;
+> +			drive-strength = <16>;
+> +			output-high;
+
+Drop the forced output state from both SBU pin states
+
+Konrad
