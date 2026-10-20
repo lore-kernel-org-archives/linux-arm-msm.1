@@ -1,58 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792484668;
-	b=2ZSujgtxoCewGhwOpHs1UPwJRA1jYZoY3T12drcFC9/Uuf+PiqRjGztKaxIc+ay5MA8N
-	 v948g59JwIfNE4Pjnvfi5fIXEJ7bjW2ml+v9QxOoEXoVRgqy3yBVnsC7iUVxjdZZEuB+a
-	 TM5bKQRCdO/oJT/I/QK73d0IEXkCdqs4RGkXeRIk5jxSnCiQtJ9GoFZ8WI2KzWOrmRBAn
-	 Tzb2cuPj7SY6NwEvl0LkhuUkCcGMXybh0fwP3nVQiPfnwc6tpXnzd/1dEnf/6sWJD2JR6
-	 k3R9nT53a3XOtad4681tv451i0j6H70iE4MD0UyCJU2Mo1OLrIQN8zuf57t141tAsNQ==
+	t=1792484809;
+	b=BGQ4Lxj4l648j2wmV88OU1JmYFsKjV9pSAVmK5+7XD2wolp4Jwuyrwyyw7JpOZ25zSc2
+	 anxJ+ixwlGBkfZDDA2z2HLph0Jqlt7qhafFqp29goJfmJkvEUGOGpVCE0kunwAMulYcyR
+	 Xmwja0AV2Bses51T+lnUXlUri/3yNmhSnR+ZyTmWsVVfCw4Um85ZBhS3AvdBRok3r5g/U
+	 Oeq2O2J7bvOunDKcUacJ3qAgb+uR1255kdt2YZuTUWsN5F65TdTpQ8/X/2cF9YFOiJ8+N
+	 K7ihN5qs0Srn9OS9YNtfuZWmg+dUQ3R/29+7hCt7z4i40cLRt2TRY+8Dr8mrbGvyrcA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792484668;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=BDH66iwqkRgJj4e6eKiX9PI9QDXAkvZBEmj4POr6C3A=;
-	b=WlrSJeT/bZJ5qxgtRkpBxVBH5EiYNZb2A3R2QzbWTeBz4kYmg4kqMhTVaF8PIvqCbCFo
-	 6NAq9NGy5tQpVxxyp+KlkW/Onf+C6qpSJ8itNczQe854DjPlrtMsGVd8a8yfShz8PrKIA
-	 fgs4eEnNaO3nza1t8t2m3VILlBSAwSLvc9t8woQFH+WQfaM+e+/2igav8KwKFPdODji2f
-	 Vw1wK852gfxtNKOnXQGOxPpUEMF0JtsYAi/zT//Xl3e9rE39QzR0jQgcyKa/bEpX9NuoH
-	 RQVeMeAdyFaJ3fWUgAjDZT0UPhuABu7cSeheXBz7ZvpJQVIy3VkMrfbXps/9n9EbhzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792484809;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=CFtFxHbDFiRPlcasZEvlvzwpY6ZQE81kNWfCGg2zSH8=;
+	b=zit5H7JJn18vTpm3Os2SmT2VyTl+AcP/rqAF7UgXPIEVC0OfJkpDV303+3Otvd1Avg1W
+	 rMc3yMmuoPEw3dyJBZpIs6oHEI/8iNmxWcM4aPM3GBpZ6C2cT4uww+ktU14zznGgJS8Zt
+	 1HoefjqvykCmYbxXLs5+V6aMgdgsNDvAqQgky+ZYeQ2YGxW9rMAAp30edVeG+nS8Q38WU
+	 p1G7UsVtCmPWxBH5SS/QtrxQf4iH9QsSkaYPqyCr/vPW3DKvaCFtTNGAnF/4TcWBM6Sni
+	 a4CNlo5IayXmsX/1+SAs9XunjEhwr0upOvrHZrGusufOBFpWJ16Yr7SmhfgZZ0L7lvg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JUD3yD46;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Hg1K+ht4;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ylx+hLwn;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8D87606A319;
-	Tue, 20 Oct 2026 08:24:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC479606A320
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:26:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC479606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JUD3yD46
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C2DA1F000C4;
-	Tue, 20 Oct 2026 08:24:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792484667;
-	bh=BDH66iwqkRgJj4e6eKiX9PI9QDXAkvZBEmj4POr6C3A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JUD3yD46BE6lkiwuLD7Yk5HVWwsxin/8xL49ESTfGpBixMfITVs3BDxjqIK7GLKYx
-	 41uHhW6rmVkvDz+cR1pN15TqnOgKBseRYj4gviCWlpMl7DHk+u9z8+97H/D2c1sGmD
-	 HNXmODdkDtZOM55q0G/P5CRZoE55NzcUyoN/6Gqn+j+14gY/P6VLca3NsXwXSzMXw+
-	 xWZzcWxLx3Db59fOiBxExqva0X3zJS9qbvIeCl2CAstYf3Uk1h5Tf/Ct+KTevUF/H0
-	 ivoSfCK/sx9DDavmKJ5ibaaOBNr0u3B1FcjIHH+8e5lG1LA/x2Vz2Q4kFPkJDkl+Ri
-	 5u99tVlYBxuEg==
-Date: Tue, 20 Oct 2026 10:24:24 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Del Regno <angelogioacchino.delregno@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-	Andy Gross <agross@codeaurora.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
-	Shawn Guo <shawn.guo@linaro.org>, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/8] dt-bindings: interconnect: add Qualcomm MSM8998 NoC
-Message-ID: <20261020-daft-competent-saluki-a080c7@quoll>
-References: <20261019-msm8998-icc-v1-0-c2da3934b6c8@oss.qualcomm.com>
- <20261019-msm8998-icc-v1-1-c2da3934b6c8@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Hg1K+ht4;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ylx+hLwn
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69K0tDCj2877763
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:26:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	CFtFxHbDFiRPlcasZEvlvzwpY6ZQE81kNWfCGg2zSH8=; b=Hg1K+ht4nvw/TKTR
+	9pcR4obxqTpo2pNkEVYwC2lCCsWlKZMnbinoxHKeE0L+Ocnw0HbuSECOW9RUMO1W
+	Lo2EnUmLxiu1Sb5adHWt3+h4dMcWjBUx4TVetLZxdxHHDysJ51cqn2jXZuI2tKWV
+	wvbjrRkiv0XAyHKaf/CWOmyqJGymABRY7UEbcjGi7AFwliLYwa+0GTtkhjJw+tNT
+	MPVAv5fwRJKdMl1ucb9NsnGk4PTuJybr+8iYHsFzECBl214JdED5Nb0pJuBiM0S6
+	MmE5iunWmRQ/JlKSgC7WOQv3Cpt3EdMIkkyT91olpkWsd3ritEiKBNUH4fOgaraT
+	NqlhWg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5psmj9-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 08:26:48 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb6391e89so671346085a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 01:26:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792484807; x=1793089607; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=CFtFxHbDFiRPlcasZEvlvzwpY6ZQE81kNWfCGg2zSH8=;
+        b=Ylx+hLwnCgHlPUu+q+hmV4ugx0Q1UkGFoA+aPNCvwSHk7C8zwk+yJ6+4jCYKDheVc5
+         pCghVfweQxZHYGFdZK2dBu0BIYHzyq5yBnJiRbq3MikSeEmnd9T5yFkF2f5wWt0ylKjR
+         BPAd939X/76paGsuilMfqwdgeVYzDOhFs8Mx/KVbpSx3hhcwpFn8a74AGNao1C5SQd0J
+         Y0fLn+lxH0EGMVf5Y41x0+ybLpCXJ/nXqxAe7nFBHZESkKbvJSw15nyoxZJuxHik5elr
+         VKUUGxeNMKSxDuwe+mxewA/Y2/pgHg7OHeQDcrjh1MJfQvmfPP/xMHx6Ct9KQv/OFQGH
+         mPCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792484807; x=1793089607;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CFtFxHbDFiRPlcasZEvlvzwpY6ZQE81kNWfCGg2zSH8=;
+        b=r55qAuMcu+OABtx1Gc+KwCGcjEBokVWpOKAZa2vKAtLJMaCDbOaVRO5FWrz8yeUThr
+         5Ufu/IOZ6Xe8WIOkY0fvmbLPAuJ1hvEQK1kgmDOn9xA8A2jYW+9BGjQe93PAmWfCrOGw
+         6UUXPjb6/IJaMRAH/u2ZE1IPA6PaaDAzhtxcRvJZuvFyYJm56QDLGqfaC/15gzyjvUZm
+         au+vXXnwNiFpeDb/0hSpqS0ToWokpUUlBvTD6Ua5p6iVEP6GvujAxAc6CFqZs72vxrN2
+         TSHitnhYl1QKh5/D4scAEuLKAhN6ekp0Y761GSH2/jF56E1Do4hnA7XqIcDpXAHMGyKe
+         +fWg==
+X-Forwarded-Encrypted: i=1; AKwUvBxgkvacglzBhGAjvBAMhhf6pUeFbIk7gUKtHJkkmFlZmdIUs1bp9svxBzMzwgfwMYU9K+PZgbHzW+Z8uC6E@vger.kernel.org
+X-Gm-Message-State: AFq9FYKYrCzwI1YFuWJ1tovLKU/Ifli/roJQJgPaXbKJTE5FA9O1WFsh
+	Py+p/BxLZc+cYnlzyoJ12GTOjQuqRr9XQQhHuXv3fu5vo4EotZ5gc7kHFbgABa5hVLSZKL4aPii
+	piI3cTfxdCDf/0barr3yxGfLh8wVOPzu6Uo87w1WAasMKuNjSGd+55/abEGa/mItDVng2
+X-Gm-Gg: AYBFou1YGbJf5UJCF/X07Q+4dPvZf1L747INOlpbk0ZhgJ0k5NW79YaYAzjw6GLtMFO
+	nOxYmF8eok2MRLmkFtnpe/RRlTv8goJqe4E5XADsWZ8rYJsRMJ++Ml29npSm4bShXami4w5PqML
+	QGNtvBsXqoEZf4EVZFyC4omuKTwkHzvm+1uedpbPCUl2mKLh2rOiO+YJvXTGE971YGfTlkVMde/
+	X0ynn2Su+x/0vn9NEjf7vwNYJUdaSG6W9S5GSQtM12qDDyE0rdMVJOUxFtb5kw49SU5MgFde8K5
+	l3M/XKbVrjynAkDhopeMGG2ZTJG8x13Zy14PikmagKdgSrR1FEafqfkXrFcc8/goInAueUtkmbl
+	pzaD7QZn+BbNRQ8mhZ0xWlxHj4RAsAZ0=
+X-Received: by 2002:a05:620a:6310:10b0:93f:2ab9:729e with SMTP id af79cd13be357-93f2ab978b8mr1099293985a.21.1792484807252;
+        Tue, 20 Oct 2026 01:26:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:6310:10b0:93f:2ab9:729e with SMTP id af79cd13be357-93f2ab978b8mr1099289685a.21.1792484806024;
+        Tue, 20 Oct 2026 01:26:46 -0700 (PDT)
+Received: from [192.168.1.73] ([92.247.57.178])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2cd348asm57085425e9.11.2026.10.20.01.26.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Oct 2026 01:26:44 -0700 (PDT)
+Message-ID: <3e5b7781-20ef-4e84-bb62-29a081c26d8f@oss.qualcomm.com>
+Date: Tue, 20 Oct 2026 11:26:42 +0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,108 +115,126 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261019-msm8998-icc-v1-1-c2da3934b6c8@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] arm64: dts: qcom: sm8250: add camcc interconnect
+ cells
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd
+ <sboyd@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Jonathan Marek <jonathan@marek.ca>, Bryan O'Donoghue <bod@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261016170701.1504338-1-atanas.filipov@oss.qualcomm.com>
+ <20261016170701.1504338-4-atanas.filipov@oss.qualcomm.com>
+ <usade5zkrncpry4ufbdtaahoa2zyd5hx7tjgfvzfte2aqbkgs7@t3mej4maj6za>
+Content-Language: en-US
+From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+In-Reply-To: <usade5zkrncpry4ufbdtaahoa2zyd5hx7tjgfvzfte2aqbkgs7@t3mej4maj6za>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=DrrDa2/+ c=1 sm=1 tr=0 ts=6ad725c8 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ybD9qRDIDfZaXNPQ7Ca20A==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=r4jdIUCLbnRwEHhwRoYA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDAzMyBTYWx0ZWRfXxrj8GYGJT6RG
+ 9T7gsxGa+kUpXP7cUREwOsZsj4UHy4hrsU+6ccxlZ8d73B1wcqwHUL3I+CCUhJdOGIWibfpE+o0
+ ywBYQqh2kHceCDO2mHEiei/bxnOybFOmkyvigK4ufVA+/rNl4fhNwK+tP/8Uo6mlP8/cPtJ+KVC
+ y70lYrGIHh5YBmmEQjaSdChXubijZEhYHaNdb8OyV3uxF74pgKOfUBnndtAzwqxKhbbdKtVY3RH
+ VWje8KbfLsSm1vzcCBh5lsBfIYgWRccEdq4vOi9KS2cD+JAFr8cX4eNSzSn9edYa1x/tygnvfX1
+ kGkFF/LLWMPCCDR1nYM/3qWNBsIxt+ZP2j2mhjryPgF/2BDVJVZsnmoZwXQy2VKICrj7sD/xqQp
+ PNxn2l+WoTKLe9+tqyVcFL8QuULNj8+IUko+nZG8Gzz3Pexc7lRhBe1mXlSTXCguXQV3lH4Bcbs
+ KFDr/xKylAWkXy+pTNg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDAzMyBTYWx0ZWRfX5AMh2PcW+1T7
+ xoUr8SNykiPVtKjgh1Rqxni4PvQZg9OEuepOSMipClf2kZu0bVnOKWwdxjwpM1DcmeKJgT3KARs
+ ljP+LDYLQnMiNoLXKK/HA1Em1LK3X+E=
+X-Proofpoint-GUID: H-Ck1-xFAlptJJvWySft-8QSCtjiPdR-
+X-Proofpoint-ORIG-GUID: H-Ck1-xFAlptJJvWySft-8QSCtjiPdR-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 phishscore=0 spamscore=0 adultscore=0
+ suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200033
 
-On Mon, Oct 19, 2026 at 05:12:39PM +0300, Dmitry Baryshkov wrote:
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - qcom,msm8998-a1noc
-> +      - qcom,msm8998-a2noc
-> +      - qcom,msm8998-bimc
-> +      - qcom,msm8998-cnoc
-> +      - qcom,msm8998-gnoc
-> +      - qcom,msm8998-mnoc
-> +      - qcom,msm8998-mnoc-ahb
-> +      - qcom,msm8998-snoc
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  clocks:
-> +    minItems: 1
-> +    maxItems: 4
-> +
-> +  clock-names:
-> +    minItems: 1
-> +    maxItems: 4
+On 10/19/2026 5:50 PM, Dmitry Baryshkov wrote:
+> On Fri, Oct 16, 2026 at 08:07:01PM +0300, Atanas Filipov wrote:
+>> Add #interconnect-cells to the camera clock controller so camera
+>> consumers can request camera NoC AXI bandwidth through the
+>> interconnect framework.
+> 
+> I guess currently we have only one consumer, camss. Could you please
+> include patches converting it to the bus voting? Be sure to retain
+> compatibility with older DTs, which don't have ICC provided by the camcc
+> node.
+>
 
-...
+Before converting CAMSS I would like to agree on the approach, since it
+cannot simply follow JPEG. In either case the camcc path would be
+optional, so older DTs keep working as before.
 
+OPP is per device, and CAMSS is a single device containing several VFEs, 
+each with its own core clock and its own load. If CAMSS used 
+dev_pm_opp_set_opp() on its device like JPEG does, every VFE would 
+overwrite the clock and bandwidth votes of the others, which is the same 
+last-writer-wins problem in a different place.
 
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          const: qcom,msm8998-mnoc-ahb
-> +
-> +    then:
-> +      description:
-> +        The MMSS AHB NoC shares its register space with the MMSS NoC, so it is
-> +        described as a child of the latter and has no register range of its own.
-> +
-> +      properties:
+I see two ways to keep the VFEs independent:
 
-reg: false
+1. One OPP table in the CAMSS node, used only as a lookup. Each VFE
+    finds the OPP for its own required rate, sets its own clock and
+    votes the bandwidth from that OPP on its own ICC path. The driver
+    requests a separate path per VFE from the same "interconnects"
+    entry, so DT describes the hardware connection once and the
+    interconnect core aggregates the VFE requests with the other
+    consumers. The rail level is not applied by the OPP core in this
+    case, so CAMSS keeps handling it as today.
 
-> +        clocks:
-> +          items:
-> +            - description: MMSS AHB Clock
-> +
-> +        clock-names:
-> +          const: bus
-> +
-> +      required:
-> +        - clocks
-> +        - clock-names
-> +
-> +    else:
-> +      required:
-> +        - reg
-> +
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          enum:
-> +            - qcom,msm8998-bimc
-> +            - qcom,msm8998-gnoc
-> +
-> +    then:
-> +      properties:
-> +        clocks: false
-> +        clock-names: false
-> +
+2. An OPP table per VFE, attached to the per-VFE power domain device
+    that CAMSS already creates, so each VFE calls dev_pm_opp_set_opp()
+    on its own device. This applies the rail level as well, but the
+    virtual device shares the CAMSS of_node, so it would pick up all
+    CAMSS interconnect paths and need indexed OPP tables in DT, which I
+    have not seen used for such devices.
 
-unevaluatedProperties should go here, just before the example
-
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/qcom,gcc-msm8998.h>
-> +    #include <dt-bindings/clock/qcom,mmcc-msm8998.h>
-> +
-> +    interconnect@1008300 {
-> +        compatible = "qcom,msm8998-bimc";
-> +        reg = <0x01008300 0x77d00>;
-> +        #interconnect-cells = <2>;
-> +    };
-> +
-> +    interconnect@1740000 {
-> +        compatible = "qcom,msm8998-mnoc";
-> +        reg = <0x01740000 0x10000>;
-> +        clocks = <&mmcc MNOC_AHB_CLK>, <&mmcc MNOC_MAXI_CLK>;
-> +        clock-names = "iface", "mnoc_bus";
-> +        #interconnect-cells = <2>;
-> +
-> +        interconnect-mnoc-ahb {
-
-I do not see how this can validate. You do not allow any children in
-your binding. Your tpo-level properties should define all possible
-properties and nodes.
-
-also, name should be just "interconnect"
-
+Which one would you prefer, or do you see a better way?
 
 Best regards,
-Krzysztof
+Atanas
+
+>>
+>> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+>> ---
+>>   arch/arm64/boot/dts/qcom/sm8250.dtsi | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/arch/arm64/boot/dts/qcom/sm8250.dtsi b/arch/arm64/boot/dts/qcom/sm8250.dtsi
+>> index f975c2183269a..e923c74dc1435 100644
+>> --- a/arch/arm64/boot/dts/qcom/sm8250.dtsi
+>> +++ b/arch/arm64/boot/dts/qcom/sm8250.dtsi
+>> @@ -4675,6 +4675,7 @@ camcc: clock-controller@ad00000 {
+>>   			#clock-cells = <1>;
+>>   			#reset-cells = <1>;
+>>   			#power-domain-cells = <1>;
+>> +			#interconnect-cells = <1>;
+>>   		};
+>>   
+>>   		mdss: display-subsystem@ae00000 {
+>> -- 
+>> 2.34.1
+>>
+> 
 
