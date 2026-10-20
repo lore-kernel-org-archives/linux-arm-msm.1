@@ -1,57 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.31
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792525197;
-	b=n43qGMMVLRS3OlllutnUjZQ3DiQfFmR8bYtYJ9zudi6pwM7q65X6BtDrbkXQ54dXgnHQ
-	 PhpyD8m7rIbzSg+9AvJ+4yhdkgtt+pb0r+WiTaYpY6kD2dqpohBN7DmPy49K3KFXXCQCT
-	 kbcKqEJ1STa81HXU8hYkMyS0KMAR1X6slKhowz1qbdjT8k5ZHR3iMm+F4hODIWtwWt36a
-	 3yZlU64WzJq/QOSy7/eit9vqSD++t24qroHHTsbb/YLvaO+LyDGmJasqslbu+xgXDQ3Y/
-	 47TGCbx+gjP5K7jPIe4/SHrOeyiBbrOD4/oZ/8g05bRyiZSjLLwMO5BDO0DjK8EQjcQ==
+	t=1792525200;
+	b=BhJGP1G4C2Ym2JScqJqEtwMNcXd6MlQ6bmepiwfnrXE7MKVEsOmQjRcnZBczQ2qU3jkv
+	 omc1djk0Hs0d9O2da4xyhOzUQRB0i0t1pRoIaqsNdlkfi0chMDjEO9jT2c7HnETJ4Hveh
+	 NTzrTA8dvAadNPHpL+o22OuB2B+g4j0a2XPhpR12MM0bwFlaWF66BBI3P9U1yvkYFPQkC
+	 RzSt5hHX+Gv7dxzT70HplnBSfWGmDsrZko7i4+r+iVoQg4Fh0vBmWeE+kiAy4oVgzL5yU
+	 vIcHr3OFSJT8R5jYdkogI+bwNUTk1DMkkMd7Oj+jQTuaiuyUVgATxN14A3EmYXLsvTQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792525197;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792525200;
 	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=39Jv+kqfa1W32Czq7DzcERVJw1tDLMb9xcUQlCNYUDA=;
-	b=kr01Dij/RY5H1BSncxOZ4evvx+/oWK5DI6yowlnbY8Ww4F3Xva8S5M9Vi/mfjYVLjxPZ
-	 kJA1qJEzEgE+qkFttAYY9njpcnZNgkPhyDvXQVWDZFa2RddYFJvwF0Vjry2u8vA21RUY7
-	 fM75Gj/X4zWL/LZpsOOZj87xZt44bjAIlLakJO3LPJIEY2MljpcSB55Tov9xDGpiSzPU4
-	 J9Op8850IyvZW3mhKBa0KjuiLpugstF9ezCbXU3xZBVPLwCAvs1Eue0Wp/5+i/ptGjuoJ
-	 Iui4JFqKORoi5RN4y6b7u1OgiQ/1ipP4Fs0VAyjSleFLulcomiaJ1aa532WtohGS1YA==
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=qEfgzdCa/IDx24/x+dDWecgbPq23qJT6V4/xf2GkPtk=;
+	b=Cxoswk1QWt07m0f9VzGnQIYspnjI13gHmwmDk4sgqZKMO3LOZx/5FHbn3v08/HbPEizs
+	 bTeDoqP4dZgPkelLtW4oQmUZfF99Vh//mYV3Ojf0Zqk7waPMsac4erMHxe9E27p29GVhs
+	 nthk/GQPYmwM5R0+JdM1jntXOurkaskgcRgWbXtDzjFcvDkTTxfAvqBOKZIK6AjK7DCVe
+	 hKOsRisNjYzUAzDIWHZ9T3hsVKCAnpCKKI+bJVjSyrLkym5T+f1DI6FT4QcLVWYPeuAM/
+	 5MSuIGQpv/OeEamkarOyHEKXOI7N5tpQXFoTG6+6n5Yqc+luuPAL9vjf9K+17J+GSyA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=pm.me;
 	spf=pass smtp.mailfrom=pm.me;
-	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=OF0OjImZ;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=ch3gBHCG;
 	arc=none smtp.remote-ip=79.135.106.31
 Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch [79.135.106.31])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 330DD606A31A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 19:39:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 330DD606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56614606A324;
+	Tue, 20 Oct 2026 19:40:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56614606A324
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=OF0OjImZ
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=ch3gBHCG
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1792525193; x=1792784393;
-	bh=39Jv+kqfa1W32Czq7DzcERVJw1tDLMb9xcUQlCNYUDA=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=OF0OjImZDwAsauYZbPVrHaaLs+pBj5Lbp5aWbOtvqEU4FcaWQKBxiBIzpkEpyJPaJ
-	 59cphzhKV4nKT5rfEWzlGrO5aB6JcS94XoYcJRj5Wd1fVWkHwNTZxwXkohoa89ImFU
-	 1pUPVrashP3er3tWCHfTIYzyBUEBxMxi7i8D/0g2+L6uFc2/qY7eAEPHlZrOgeWLnB
-	 TzHU7KMCGQr3ikEZOQKM246X3t/wkDseBqA65i0fuG4SvIFUJmiv459R0YptWXsFxe
-	 ACsHGLy4oAeTcTJhwfVt+wfPhtTEPmawOCUHVkrxg0FEDOUVYXU+csm/d0dmH22May
-	 G1hyxevuqRU/w==
-Date: Tue, 20 Oct 2026 19:39:49 +0000
+	s=protonmail3; t=1792525198; x=1792784398;
+	bh=qEfgzdCa/IDx24/x+dDWecgbPq23qJT6V4/xf2GkPtk=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=ch3gBHCGWlcEgyN6KxjQZ81KFymOaINZEpX31PHsKFc6y4KWiVIdXw+0ac+2xY/4E
+	 5g1T3Vw7Npzknn6nUAKekmbBvsWqZJk5HKvMTY3aMaA1Bk4IqkjLP11GjzA3uRNr7u
+	 A4gB7q16UOUfNvjq8KtBHYP+tipKpQ+1y8Mwm7lGqAyBsqklseTsPjSTCFnVZ/AouO
+	 4mca+EAGjhW5Ma3Jqa87kSvrsoY10PfkhkeeXYtbXL1Vnx7GhHibHnY16EMIhqr+tb
+	 kmL7EBoXYc2Lef7X4qCxQwFLcvnD0yfVOdUty2kl8yo84unmm74WLso6Nb3NZHlquH
+	 5FyMXQJV/RfLA==
+Date: Tue, 20 Oct 2026 19:39:53 +0000
 To: Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
 From: Birk Skyum <birk.skyum@pm.me>
 Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, Saikiran <bjsaikiran@gmail.com>, Mark Brown <broonie@kernel.org>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 0/2] i2c: qcom-cci: Recover after a target powers down under a running controller
-Message-ID: <20261020193946.51478-1-birk.skyum@pm.me>
+Subject: [PATCH 1/2] i2c: qcom-cci: Reset the controller when it resumes
+Message-ID: <20261020193946.51478-2-birk.skyum@pm.me>
+In-Reply-To: <20261020193946.51478-1-birk.skyum@pm.me>
+References: <20261020193946.51478-1-birk.skyum@pm.me>
 Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 119cb6a596ebf28c973df8dc27618c54b90a8d4e
+X-Pm-Message-ID: f20e7bec206ef0b4f778bf80e001fa4845b9a58c
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,50 +67,62 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On the Lenovo Yoga Slim 7x (X1E80100) the OV02C10 front camera on CCI1
-master 1 fails to start whenever it is opened again within about a
-second of being closed. The first register write times out ("master 1
-queue 0 timeout") and the stream does not start. Two attempts so far
-treated this as a sensor power-up problem. One gave the ov02c10 driver a
-longer settle time, the other a minimum off time for the camera rails
-through regulator-off-on-delay-us [1]. Neither is needed.
+A CCI master can stop starting transfers after a target on its bus was
+powered down and up again while the controller kept its clocks running.
+The next transfer's queue then stays on its first command, neither
+CCI_IRQ_STATUS_0 nor the queue's report status changes, and
+cci_run_queue() times out after 100 ms ("master 1 queue 0 timeout").
+Only the controller reset in that error path, or the controller's power
+domain collapsing while it is runtime suspended, brings it back.
 
-The sensor holds SCL and SDA low while it is powered down. If the CCI
-controller stays clocked from then until its next transfer, the master
-no longer starts transfers. The queue stays on its first command, no
-interrupt arrives, and only the reset in cci_run_queue()'s timeout path
-brings it back. A runtime suspend clears the state too, but only when
-the power domain collapses, because cci_resume_runtime() does not reset
-the controller. With the 1 s autosuspend delay, any power cycle of a
-target that is shorter than a second runs into it.
+On the Lenovo Yoga Slim 7x (X1E80100) the OV02C10 front camera is
+powered down whenever it stops streaming, and the unpowered sensor
+holds SCL and SDA low: both read low at the TLMM pins with the internal
+pull-ups enabled. The queue registers at the timeout show the stuck
+first command (CUR_CMD 0x08010339, a write of 03 01 08) with the bus
+timing registers intact and no error or halt interrupt before it.
 
-Patch 1 resets the controller on every runtime resume. Patch 2 suspends
-it 50 ms after its last transfer.
+cci_resume_runtime() only programs the interrupt mask and the bus timing
+again, so a controller that was runtime suspended without its power
+domain collapsing keeps the stuck state. With the camera's TITAN_TOP
+GDSC held on and the controller suspended between camera starts, 3 of
+40 starts failed this way; with a reset on resume, 0 of 40.
 
-Tested on the Yoga with the driver from i2c/i2c-next, built as a module
-for a 7.2.8-based kernel whose device tree has no off-on delay for the
-camera rails. The CCI clock runs at 37.5 MHz there. Starting the camera
-with v4l2-ctl after a pause:
+Reset the controller on every runtime resume, as the timeout path does.
 
-  pause          0.05 s  0.1 s  0.2 s  0.5 s  1 s
-  failed before   19/20  19/20  19/20  19/20  16/20
-  failed after     0/20   0/20   0/20   0/20   0/20
+Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+---
+ drivers/i2c/busses/i2c-qcom-cci.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-With the series, 150 libcamera starts back to back all started, so the
-sensor itself starts fine after a 50 ms pause. The same two changes on
-7.2.8's driver, with the CCI clock at 19.2 MHz, gave the same result.
-
-[1] https://lore.kernel.org/all/20261001-regulator-off-on-delay-v4-0-258ba9=
-612da8@oss.qualcomm.com/
-
-Birk Skyum (2):
-  i2c: qcom-cci: Reset the controller when it resumes
-  i2c: qcom-cci: Suspend the controller 50 ms after the last transfer
-
- drivers/i2c/busses/i2c-qcom-cci.c | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
-
-base-commit: bd4a545e4f5dbd5e4dd0064777429813516b8784
+diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qco=
+m-cci.c
+index 76a5ded..51ce174 100644
+--- a/drivers/i2c/busses/i2c-qcom-cci.c
++++ b/drivers/i2c/busses/i2c-qcom-cci.c
+@@ -651,7 +651,20 @@ static int __maybe_unused cci_resume_runtime(struct de=
+vice *dev)
+ =09if (ret)
+ =09=09return ret;
+=20
+-=09return cci_init(cci);
++=09/*
++=09 * A master can stop starting transfers after a target was powered
++=09 * down and up again while the controller ran, and keeps that state
++=09 * over a runtime suspend unless the power domain collapsed. Reset
++=09 * the controller, with the interrupt mask set first so that the
++=09 * reset-done interrupt also arrives after a power collapse.
++=09 */
++=09ret =3D cci_init(cci);
++=09if (!ret)
++=09=09ret =3D cci_reset(cci);
++=09if (ret)
++=09=09cci_disable_clocks(cci);
++
++=09return ret;
+ }
+=20
+ static const struct dev_pm_ops qcom_cci_pm =3D {
 --=20
 2.53.0
 
