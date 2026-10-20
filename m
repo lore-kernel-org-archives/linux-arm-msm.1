@@ -1,121 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792500748;
-	b=g/WMTRuJlRQgi3UuWg6kRXB0g+8aHEXqHAMUz6QfewAtQ7Vk1OArmPGrUGfoc2hI1R2C
-	 +Zhs2Gtxyiq1vGlGf2Dlfi9/vWT9+AA/lGC5huxNaVd7ecs39N24P9O92RZQYVqhBmAEw
-	 JKQfx8qxtI6IKz/EO9Uchs4vRqxChr68cZ4fjiuJnSYfk4azFBr3x/jUaUWXkVl6QsIEf
-	 swCs4g4Pmgnd8K3CT0aEVQ1LigCMKa5woeRY4fD850q2NHWBfeLSruf1PHjUqML/upekD
-	 HC5yWulR/fwxduD9+0wkCidoJRawQkR0K6fr7sgq9UJd+0wkE6mRQ/uEIoETMjQwpFQ==
+	t=1792500771;
+	b=aGZQyvj/NyuqBUQPhE0Kews9rr2X0QHJyzNGdghE7E4pRN0s4b8691MdQfzooY2w/MCm
+	 pbJL+At4SdHtD4rYEaEfj3UBboNTZ53yWor35CNO0TjcW0qaUi97b9NdTLxLnU6HtXkoA
+	 DjDaQVNAxOkiHQumMRa2pLuADB/h+Kd2qz4rOXks8yzzxPjDT6iYDtYic0A6UrTB2S3Jl
+	 UzX5/CvJbcilZ3hbXm6l46gTg3Hu0FfpGNmsr1G/tTkAajeiihyerDgqBXL0tGV8C977I
+	 TOz76kIfcchhuiNbjz7ATDF7UZlE1/eYY8eKLRS/Wwzu21Z1MaBBhThmIxidwbjr2qg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792500748;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
-	b=x0M/+DCLXQkcogCszgR97dswsdC/HPOUH2R3diCm0AaqE0wTj18jz6YYFN2NGyAFq/eh
-	 DpfF8dv0IEBLpKj8Y+oApa9eLoYeAglZQ0U3a4PA0AdSsufeIAi/99VYpbgqejMbNTRrs
-	 ZAOCq/FLz6JBQjfPCQdDLMbD+DGy+m09H6AqBpq/hPWSXuY+3cpRw/TJgGir/fldbjCQu
-	 oxXpKog2EeiapsA+rxHgIe3BnqHBcB3CGOBfhTSH1/lnFTi4392il2T0fiszLpNmRgdtc
-	 5W+HIsGyMqcXQYUgoV18qkZNGFRO2KL6OxQITOsnUpeBHYUsiN1N14zypqbGevvm2Pg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792500771;
+	h=Received:DKIM-Signature:Received:X-Gm-Message-State:X-Received:
+	 Received:Received:From:In-Reply-To:MIME-Version:References:Date:
+	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type;
+	bh=Iog5cj9gQ1VLcQX/ZJ4/JUmApqIRY63Pzim15xBJZA4=;
+	b=Y0s3fIi5Qfxkk4qOIud0Apyrcjh0QEwn2nZsX3Eb+clLwwqzArSE44F4cDo1DCfWHZJH
+	 t+tck90eIHUWeLjquJgezOBwAccanpqOOJudeoyKKJg/rYQPaa/uaMikRawuow24Eslnr
+	 bWdPol6nRgoNv8sQWy9QyJuhkrUFAHAoAW+MOAyTwiwaa+Z8S22knyoOsCrEVXZHGWoSt
+	 GOWH2pqpaRMXoBe+OaBrMFZQUlqoOC4ICow1JLwjIjhIxMH+vP47tZOLdeplDdWwSJDaJ
+	 uSCASwfILMBx47Xaz9x0pXB5lKrAHNmxg8HC4qBphJp58lWJCnNXmpDKF5tZfv3XwlA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JUvMggwp;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NKvotkgg;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Tcl8IopX;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D685606A31C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D685606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BDE360A260C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JUvMggwp;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NKvotkgg
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69KAxLUb600166
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=; b=JUvMggwpxL3toZgH
-	hutbs4SCJOrpTKJft8P68vKHx/tLNum5fkeLv26k2g6LlQNPIks0jXoou2PGtzXj
-	FEn8IO/EqIVxK6mgqQHSvuwr37HqFEyzmm5RVdR2s0n+9QpIISgqI38Tw91G8MIC
-	NeE/E6XEeN/T8bk6fYiwDJ3KPRRi96tkKqCFPpim1d1OB62AZclx4QbvKa5TqeQY
-	DJVu77NwPGTVxKvRjGM71WjITDk47YQvxwj/Yt0564H6gk+Hg8g1dtgBiMECM4My
-	un7NWuvVIkyeFkb6gMunwPXCEeS1OHqadnZlQNiNVZwr6pRdXKq8zZbdmxE+n7ka
-	CDzlPw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n2gg4-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:26 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f2005ce21so559476285a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 05:52:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792500746; x=1793105546; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
-        b=NKvotkggs/uunAeiSyukUFvAIPFkm7QjTKUiPq2/ujqpm9Q++FBmTYDWmM43BoYahy
-         w3fq8mapMbmjQYBp26KjPg0XFYdjWLE/aIBEFfi2GszvLwRqZNl17Xuod9dJPFPp4MfL
-         81QduXHIOJFXgbucnMr8HM5K+Vi7ZYhcp9QHd2QU8SGUMoy3wD2x757DIpXpnP4I3WzC
-         ky8RGJBs9+MZk1IZ3Gh4Tdmc4cy6f2yNw3CWHLRJ0sbcFPfC92Xs/rhUednqjp6YRoGQ
-         TZtO8IkrVxZgUFHvFlRxwby+bfP86uB28g/Nz1PrO/JHiTsXqkI875TH01QDJs5jW58R
-         QQng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792500746; x=1793105546;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=xdCT9mPPml0Q8wxCTcyjG2nS4+iWw9bwXUbx6nWuof0=;
-        b=l3+0d5nLcJj6DtgGilXWr6AzhBu9ouGX1aNmvthIO+t8bzLFLBiy9DQVDxeQ7dMHte
-         rE6jyUgYIx2WR1611brjCk2cmld2Tadawje5OzuDo5etXNj8G5IVg26AsWR4cdnaNFb2
-         MrY0xF1x9IEcrH0NCdqsRKZg67EbQqEn2pnxBXRi6RnYgjup0szKs/+HkxQx6pit22A1
-         IMEeIvzGm3tNA98FS2MkEe0l1Xnsh0/W6ZwqZemQL5I2M1EkhMMqerjSK0zm1fFSH7kf
-         Y7DulV0MeXT2rkisEcIFUDHOJNnoRK8xiPqLfHTGdfRlvoyL4/2um83/SMW06Iv86RdA
-         dDtw==
-X-Forwarded-Encrypted: i=1; AKwUvBzmubkC6w+Srv5fUkcnZdTURM74poPc9Cik1kS9VbljPjvIcLGxuCNzhJxmzjKgv8SpjD3oqGW4CHO7N7a3@vger.kernel.org
-X-Gm-Message-State: AFq9FYI+QnY4LKaQYqOSDAO4JVna+BMGrMh/BVxIjK4rjxCrSilJa452
-	MZ8tDLw/sk1Vst01PPusV97LJ0XCT+UXuKpt/SF+wZXjOYM0odsrQs8Us0rUt64npdmg05LGAbX
-	f8Fz9bJWc9mujEpYY8i01nKP201oU3vPPx3Wm0JZpua/gP+AWZKLu9UiDkm2Pt3YNR9w/
-X-Gm-Gg: AYBFou1f5KY/OapTjSQbJeYS5X6sXfURyBi3YRnEzFtjRHyrJGXZIPb421I1J/Zjm1w
-	Qo5yKLeKnznbKvEkIyYRUsUBuqbR/zC8C0hTIV37GFmKQV1HT/p0rZMPB9pUNgcll12bVjTMgp0
-	VFhV4kwGdB84+Yz2ZA2/Fl4DMHmBln4kPIyNVuQQITX+/oTlnBWgZEVGSjluoX1W7WtT1yFn25H
-	Cr0HACKwKiAngHd+7WtQG9IwkGNg5uMol1IDH0gjB1RLhEmYNbm1u3GG83NgrzrbNwFPsjt0iDc
-	hZ21yJem67LEsNbL2PbxHACtiuibYQ7ro7m+rzbmAHBNlBP7rH9plK+8T8iae9gEdD73FQObS36
-	hd2DTfBVf1lxDj9fS
-X-Received: by 2002:a05:620a:2948:b0:93e:d364:c9ee with SMTP id af79cd13be357-93f29dd495bmr1630744085a.74.1792500745881;
-        Tue, 20 Oct 2026 05:52:25 -0700 (PDT)
-X-Received: by 2002:a05:620a:2948:b0:93e:d364:c9ee with SMTP id af79cd13be357-93f29dd495bmr1630737985a.74.1792500745230;
-        Tue, 20 Oct 2026 05:52:25 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.187])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e1d80f9b3sm5714688f8f.20.2026.10.20.05.52.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 05:52:24 -0700 (PDT)
-Date: Tue, 20 Oct 2026 15:52:23 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree@vger.kernel.org, gaurav.kohli@oss.qualcomm.com
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: shikra: Enable CDSP & Modem cooling
-Message-ID: <isldc3mvcyqj3o6dzndztlobwft76zkph2lmlryki3qkpoxset@izxcyvx623vp>
-References: <20260911-shikra_qmi_tmd-v1-0-96c1cca82f30@oss.qualcomm.com>
- <20260911-shikra_qmi_tmd-v1-2-96c1cca82f30@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Tcl8IopX
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 321BE1F0157C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 12:52:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792500771;
+	bh=Iog5cj9gQ1VLcQX/ZJ4/JUmApqIRY63Pzim15xBJZA4=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=Tcl8IopX5XfgaCedFUCGnnX0qpLjXEfggFrl4g6uF0J9pj2ZByCxfjOKZhvjf29OT
+	 jyRZuEMaP+YsyaKXuH7/hX/aY07mqXNVV4LO8+f4vrcvMJBaBHK/vgvD6bqnZQoggG
+	 QmsW3kbSDYN4OLZz6SprO/PkstsWSmGXjHfa96tybNAqxlgR6r68ILHZyG8U3skR5p
+	 iZfHum1fWwYY7PCqVKD0/TqkffuGi8ZQN9TWachUoSMbvG1ruVtWESZ29ZpqRwRhP/
+	 s94Ge/xbVFsRNjGzYNFfkQVJ+9mlgllQjFQLQMDnF++TXXYNRy8qMtFagnQRiqbRW5
+	 d1Gt1sKrWNd1Q==
+Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-3ab27e45e7cso21082161fa.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 05:52:51 -0700 (PDT)
+X-Gm-Message-State: AFq9FYL2/4naTwtRSMWxtAkYBxA71CdDgQpHlreLUxiMeNju4o11MhIX
+	1iwq1+UTBbxbbms/2rN1K452nJG7v9ZfkoMP7cxXfQr9jJorztHSS8C0xhLXl/Qvg43aGTEkONu
+	SVWQUXndkGAk7rpoSEbqbqzi+wMfODKd2MAzsJab3bA==
+X-Received: by 2002:a05:651c:a214:20b0:3a8:d9d5:f9d3 with SMTP id
+ 38308e7fff4ca-3ab29175de5mr15085321fa.16.1792500769655; Tue, 20 Oct 2026
+ 05:52:49 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 20 Oct 2026 13:52:48 +0100
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 20 Oct 2026 13:52:48 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <179206391202.36987.1416057976823693032@pm.me>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,45 +64,314 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260911-shikra_qmi_tmd-v1-2-96c1cca82f30@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=aIplOr9m c=1 sm=1 tr=0 ts=6ad7640a cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
- a=8nJEP1OIZ-IA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=WKeXBwMsz3nlfjH64nsA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfX+wuvSU2jwjAQ
- vREeVPO8hF+Rs1aSOsFewLDwMGzgolFzM/bzPlXwMZgngQehZRNEXClWQSSbgUOH7kuGvSxrPTH
- i+0D1Y/nRZVJisXzHhN9LlFrCOmOBgA=
-X-Proofpoint-GUID: BwJnWwkkwsFGBHDrWegGc3SpRBqAMy7Z
-X-Proofpoint-ORIG-GUID: BwJnWwkkwsFGBHDrWegGc3SpRBqAMy7Z
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA1MSBTYWx0ZWRfX2AwhR4VFqrjK
- 1Nq3G8aoezIOP1HdoS+8IaCePz6ZFxqYEwiX1rZhJHmQ3um34+kOXGTO7i9uR2yPN9ftIlPrDrB
- OKhBgRfqL7X2QyIj8siUeC96iHDVqs8OXpPC+RYm70LCrpaskUTlK6KkOt1qEnF1GAJxh4wWOS2
- 8Kw/DoOBCvyGpDdu+BbFPkxz8/5ppA3mCYWir1xy+Gt9/yB2RyXm1YyYuhtxgJjdnaRRpwQuR6L
- AS2dJ2PL/JxtR17It8wx1Ny1rnBQsdQZoRDCzY+bUUCcUJ1y1LuecSZdMVp/+H6Fg+n6ec76HLd
- 8xovcj69iD7Y3mdDnGNDPEvtBrQidfGF/Hmhu1iX1TwWS996Z4gxT14l7eTNu6dTIMB0qSMuuwR
- uPGMaDauCAFz9rIjRqH+RiKfw9w8ossr+zAh5rXIzdJGuA2Zs+GOgi6FDN8cMDwJtQ3dx53YXEU
- qUBku6BABpvUgOYHalw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 suspectscore=0
- spamscore=0 impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200051
+References: <179206391202.36987.1416057976823693032@pm.me>
+Date: Tue, 20 Oct 2026 13:52:48 +0100
+X-Gmail-Original-Message-ID: <CAMRc=Mf_93HM8RFq3i3Cuy1_L=VFskt6NcgkcwsyZVH7ymO1Yw@mail.gmail.com>
+X-Gm-Features: AclHuK_FLO2OQBomfcZDzAChpS6bYz-U0182uXSwbxihEnP3jdGgRRa6mwaU0dc
+Message-ID: <CAMRc=Mf_93HM8RFq3i3Cuy1_L=VFskt6NcgkcwsyZVH7ymO1Yw@mail.gmail.com>
+Subject: Re: [PATCH v2] pinctrl: qcom: Restore the pin configuration after hibernation
+To: Birk Skyum <birk.skyum@pm.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On 26-09-11 10:33:04, Dipa Ramesh Mantre wrote:
-> Unlike the CPU, the CDSP/Modem does not throttle its speed automatically
-> when it reaches high temperatures in shikra.
-> 
-> Set up CDSP/Modem cooling by throttling the CDSP and modem when they
-> reach 115°C using the QMI TMD cooling device framework.
-> 
-> Signed-off-by: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
+On Thu, 15 Oct 2026 13:31:54 +0200, Birk Skyum <birk.skyum@pm.me> said:
+> A hibernation image is restored after a power cycle. The TLMM registers
+> then hold what the boot firmware and the kernel that loaded the image
+> made of them. The restored kernel has the configuration it applied in
+> memory only, and nothing writes it to the hardware again, so every pin
+> that the loading kernel did not set up the same way stays wrong.
+>
+> On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
+> are two of them. Their drivers are loaded from the root file system, so
+> the kernel that loads the image never touches the pins. This is
+> /sys/kernel/debug/gpio before the hibernation and after the resume:
+>
+>   gpio116 : out low  func0 2mA no pull
+>   gpio117 : out high func0 2mA no pull
+>
+>   gpio116 : in  low  func0 2mA pull down
+>   gpio117 : out high func0 16mA no pull
+>
+> The driver that owns gpio116 still believes it drives the line.
+>
+> Save the control, output and interrupt configuration registers in
+> freeze_noirq and write them back in restore_noirq, the output level
+> first, so that a pin drives the right level from the moment it becomes
+> an output. Changing the interrupt configuration can latch an interrupt,
+> so the status is cleared where the register changed, as
+> msm_gpio_irq_set_type() does.
+>
+> Only the GPIOs the kernel uses are put back: those requested as a GPIO,
+> muxed to a function or used as an interrupt, as pinctrl-intel does. A
+> valid GPIO without an owner may be in use by firmware. The SDC pads
+> after the GPIOs are configured without a mux function, so they never
+> have an owner, and their control register is always put back.
+>
+> msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
+> these ops. With that x1e80100 also gets their suspend and resume
+> callbacks, which apply the sleep and default state of the controller's
+> own pins where a board defines them.
+>
+> Signed-off-by: Birk Skyum <birk.skyum@pm.me>
+> ---
+> Changes since the RFC:
+> - Put a GPIO back only when the kernel uses it, as a GPIO, through a
+>   mux function or as an interrupt, as pinctrl-intel does (Bartosz).
+> - Save and restore the SDC pads after the GPIOs as well (Bartosz).
+> - Allocate the save area under the same option as the callbacks,
+>   CONFIG_HIBERNATE_CALLBACKS (Sashiko).
+> - Clear the interrupt status only where the restore changed the
+>   interrupt configuration (Sashiko).
+> - Say in a comment that a both-edge interrupt emulated by flipping the
+>   polarity is not primed again. No SoC with such pins uses these ops.
+> - Rebased on pinctrl-qcom/for-next.
+> - Link to the RFC: https://lore.kernel.org/r/179163141354.18006.80461347454353634@pm.me
+>
+> Tested on a Lenovo Yoga Slim 7x with v7.2 plus this patch. The kernel
+> also carried the PCI change in [1], without which this machine does
+> not resume at all, the smp2p change in [2] and a GENI serial change
+> that is not posted. The Bluetooth driver had [3] applied. On
+> pinctrl-qcom/for-next the patch builds without warnings with W=1 and
+> sparse, with hibernation on, off and without sleep support.
+>
+> - Before the hibernation 45 TLMM pins have an owner, gpio116 and
+>   gpio117 among them (wcn7850-pmu), and four are interrupts.
+> - pm_test=core and test_resume pass.
+> - After a hibernation with a real power-off the TLMM part of
+>   /sys/kernel/debug/gpio differs only in the level read on two inputs
+>   (gpio93 and gpio153), as it did with the RFC.
+> - A suspend (deep) and wake still works.
+>
+> The Yoga has no SD card slot and its SDC2 pads have no owner, so this
+> only shows that putting them back does no harm. I did not read them
+> back.
+>
+> Not covered here: the LPASS LPI pin controller, whose pins also come
+> back at their reset values after a hibernation.
+>
+> [1] https://lore.kernel.org/r/179181074907.22199.10556821368232442334@pm.me
+> [2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
+> [3] https://lore.kernel.org/r/179163212446.46972.2306254853726299632@pm.me
+>
+>  drivers/pinctrl/qcom/pinctrl-msm.c      | 147 +++++++++++++++++++++++-
+>  drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
+>  2 files changed, 146 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+> index 27f06bbc113c..0dd478e80e30 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-msm.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+> @@ -39,6 +39,15 @@
+>  #define MAX_NR_TILES 4
+>  #define PS_HOLD_OFFSET 0x820
+>
+> +/* Register values of one pin group, kept across a hibernation. */
+> +struct msm_pin_state {
+> +	u32 ctl;
+> +	u32 io;
+> +	u32 intr_cfg;
+> +	u32 intr_target;
+> +	bool saved;
+> +};
+> +
+>  /**
+>   * struct msm_pinctrl - state for a pinctrl-msm device
+>   * @dev:            device handle.
+> @@ -58,6 +67,7 @@
+>   * @soc:            Reference to soc_data of platform specific data.
+>   * @regs:           Base addresses for the TLMM tiles.
+>   * @phys_base:      Physical base address
+> + * @saved:          Pin registers kept while a hibernation image is taken.
+>   */
+>  struct msm_pinctrl {
+>  	struct device *dev;
+> @@ -80,6 +90,8 @@ struct msm_pinctrl {
+>  	const struct msm_pinctrl_soc_data *soc;
+>  	void __iomem *regs[MAX_NR_TILES];
+>  	u32 phys_base[MAX_NR_TILES];
+> +
+> +	struct msm_pin_state *saved;
+>  };
+>
+>  #define MSM_ACCESSOR(name) \
+> @@ -1583,9 +1595,133 @@ static __maybe_unused int msm_pinctrl_resume(struct device *dev)
+>  	return pinctrl_force_default(pctrl->pctrl);
+>  }
+>
+> -SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
+> -		  msm_pinctrl_resume);
+> +static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
+> +					const struct msm_pingroup *g)
+> +{
+> +	return !pctrl->intr_target_use_scm && g->intr_target_reg &&
+> +	       g->intr_target_reg != g->intr_cfg_reg;
+> +}
+> +
+> +/*
+> + * A GPIO is only put back when the kernel uses it, as a GPIO, through a mux
+> + * function or as an interrupt. Other valid pins may be in use by firmware.
+> + * The pads after the GPIOs (SDC) have no GPIO and are configured without a
+> + * mux function, so they never have an owner and are always put back.
+> + */
+> +static bool msm_pin_in_use(struct msm_pinctrl *pctrl, unsigned int i)
+> +{
+> +	const struct pin_desc *desc;
+> +
+> +	if (i >= pctrl->chip.ngpio)
+> +		return true;
+> +
+> +	if (!gpiochip_line_is_valid(&pctrl->chip, i))
+> +		return false;
+> +
+> +	desc = pin_desc_get(pctrl->pctrl, i);
+> +
+> +	return desc && (desc->mux_owner || desc->gpio_owner ||
+> +			gpiochip_line_is_irq(&pctrl->chip, i));
+> +}
+> +
+> +/* Remember how the pins are set up when a hibernation image is taken. */
+> +static int msm_pinctrl_freeze_noirq(struct device *dev)
+> +{
+> +	struct msm_pinctrl *pctrl = dev_get_drvdata(dev);
+> +	const struct msm_pingroup *g;
+> +	struct msm_pin_state *s;
+> +	unsigned long flags;
+> +	unsigned int i;
+>
+> +	raw_spin_lock_irqsave(&pctrl->lock, flags);
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Sorry I didn't point it out earlier but can you use a lock guard here?
+
+> +	for (i = 0; i < pctrl->soc->ngroups; i++) {
+> +		g = &pctrl->soc->groups[i];
+> +		s = &pctrl->saved[i];
+> +		s->saved = msm_pin_in_use(pctrl, i);
+> +		if (!s->saved)
+> +			continue;
+> +
+> +		s->ctl = msm_readl_ctl(pctrl, g);
+> +		if (i >= pctrl->chip.ngpio)
+> +			continue;
+> +
+> +		s->io = msm_readl_io(pctrl, g);
+> +		if (!g->intr_cfg_reg)
+> +			continue;
+> +
+> +		s->intr_cfg = msm_readl_intr_cfg(pctrl, g);
+> +		if (msm_pin_has_own_intr_target(pctrl, g))
+> +			s->intr_target = msm_readl_intr_target(pctrl, g);
+> +	}
+> +	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+> +
+> +	return 0;
+> +}
+> +
+> +/*
+> + * The image is restored after a power cycle, when the pins are back at what
+> + * the firmware and the kernel that loaded the image made of them. Nothing else
+> + * writes the configuration again, so put back what was there.
+> + *
+> + * A both-edge interrupt that is emulated by flipping the polarity gets the
+> + * polarity it had, which is not primed for a line that changed meanwhile. No
+> + * SoC with such pins (one-bit detection) uses these callbacks.
+> + */
+> +static int msm_pinctrl_restore_noirq(struct device *dev)
+> +{
+> +	struct msm_pinctrl *pctrl = dev_get_drvdata(dev);
+> +	const struct msm_pingroup *g;
+> +	struct msm_pin_state *s;
+> +	unsigned long flags;
+> +	unsigned int i;
+> +	u32 val;
+> +
+> +	raw_spin_lock_irqsave(&pctrl->lock, flags);
+
+And here?
+
+> +	for (i = 0; i < pctrl->soc->ngroups; i++) {
+> +		g = &pctrl->soc->groups[i];
+> +		s = &pctrl->saved[i];
+> +		if (!s->saved)
+> +			continue;
+> +
+> +		if (i >= pctrl->chip.ngpio) {
+> +			msm_writel_ctl(s->ctl, pctrl, g);
+> +			continue;
+> +		}
+> +
+> +		/* Set the level before the pin starts driving it. */
+> +		val = msm_readl_io(pctrl, g);
+> +		val &= ~BIT(g->out_bit);
+> +		val |= s->io & BIT(g->out_bit);
+> +		msm_writel_io(val, pctrl, g);
+> +
+> +		msm_writel_ctl(s->ctl, pctrl, g);
+> +		if (!g->intr_cfg_reg)
+> +			continue;
+> +
+> +		if (msm_pin_has_own_intr_target(pctrl, g))
+> +			msm_writel_intr_target(s->intr_target, pctrl, g);
+> +		val = msm_readl_intr_cfg(pctrl, g);
+> +		msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
+> +
+> +		/*
+> +		 * Changing the configuration can latch an interrupt. One that
+> +		 * is latched with the configuration unchanged is a real one.
+> +		 */
+> +		if (val != s->intr_cfg)
+> +			msm_ack_intr_status(pctrl, g);
+> +	}
+> +	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+> +
+> +	return 0;
+> +}
+> +
+> +const struct dev_pm_ops msm_pinctrl_dev_pm_ops = {
+> +	SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
+> +	.freeze_noirq = PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
+> +			       msm_pinctrl_freeze_noirq),
+> +	.restore_noirq = PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
+> +				msm_pinctrl_restore_noirq),
+> +};
+>  EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
+>
+>  int msm_pinctrl_probe(struct platform_device *pdev,
+> @@ -1663,6 +1799,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+>  	if (ret)
+>  		return ret;
+>
+> +	if (IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS)) {
+> +		pctrl->saved = devm_kcalloc(&pdev->dev, pctrl->soc->ngroups,
+> +					    sizeof(*pctrl->saved), GFP_KERNEL);
+> +		if (!pctrl->saved)
+> +			return -ENOMEM;
+> +	}
+> +
+>  	platform_set_drvdata(pdev, pctrl);
+>
+>  	dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
+> diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> index e4c0abcd95b9..bfe122fc7e79 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+> @@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver = {
+>  	.driver = {
+>  		.name = "x1e80100-tlmm",
+>  		.of_match_table = x1e80100_pinctrl_of_match,
+> +		.pm = &msm_pinctrl_dev_pm_ops,
+>  	},
+>  	.probe = x1e80100_pinctrl_probe,
+>  };
+> --
+> 2.55.0
+>
+>
+>
+
+Otherwise looks good to me so if there are no objections, I intend to queue
+it for v7.5 with guards added.
+
+Bart
