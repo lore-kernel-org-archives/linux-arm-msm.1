@@ -1,137 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.204.34.129
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792487054;
-	b=JGyMY7zKdICSzKrLqwiQOFczDFsi0nPB/q+3fXOnV6QrE8H5leRa4qqpwOgpEiQ0F4OH
-	 2RWFlx7duZX/J5wb5Foallg2M6rTcNVZJ54eaLREjxMKa5DkGYp7L1ogkMCDKCwOlCwru
-	 8RZXc2z6k1/3poFL0bTE9jAhYx1++lTfQ3XZEDgZ4+XnC8WBhmkQrt+yB052HVgzIoL2C
-	 kJB7+cwi5Gx2UKDgyOPLXVjEK280G06o6NLGlMXn/sVrlrcBREJvmQrrdKmQPyYLKx34L
-	 D0UNCEHwnAJ/zv6paJQeuJzazbdZNEipo/QkJd58WujhemvNreQ4o+v56/Qqq2xIgNQ==
+	t=1792487572;
+	b=y0ImsnAidx0WWwUjWEpQhr8kJ8bwysRCGfgSk5CUEXlh6jc+PZc3FpEanKR9NCdyyuEd
+	 5hj/p5Tlq128mNxw+YTPq7nK+YVj3oRL+rSE1iBD+3RSsDm/X1CGa2oUlfQOHhHwD8Ije
+	 5yyXkhyLWaYu75rM69H+UTMsFCl4zqtXjQa4o0zv6aeaqPt18K5M7VPYnDM55sBbCZALG
+	 Rz/dtxia3xxF2/YJMAeXhuN/nMt32CTfD3shZ2hYeAQvR9fCUNCkPi4DcDpodYICd0Sl/
+	 tzswN5ntsjAhkY4klFUUdpznGic5PNpiPQ1VVnYE23D8d4BXEm7frnrbkd+nGzrC8eQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792487054;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=wzX1TW2NwI+yWssGoHbGc+/K6ykZuk0NhVu5SB7QmUk=;
-	b=biJ/RCa3Y/C7ygJNaOGIEl6q9ZZ7H4tTR+HHC96ECaM22OmR8RgS0fFOyWo8+6C5rzsu
-	 icmD8UY/yzJWrJHr9vzHxBO6+6CViW1kspomxIE90Dzpybaid0Ab2XXbnhpaGebEi0zaA
-	 eoM9FRIyo9rn1W/RNUaGIF1A2Vi6tB2PrF6gkAKUSsAE7svwhyK3ApeoVZDQCX5kKPf/E
-	 yvjPqJA4m6T1YqVE1453PaG+GtDTzNEFHF/OhXD8PEgmqJXu2i/KQwxVpyx+tLJIIV2bd
-	 xsIsM1NBB64oAOAQWfEG9TSCXSZqKGgGeqeajrwNL8lLVh5i3czeWfqyUZH3JvEMDHw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792487572;
+	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
+	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:Message-ID:Date:
+	 MIME-Version:User-Agent:Reply-To:Subject:To:Cc:References:From:
+	 Organization:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM;
+	bh=vU+z02vLYKXPdaAV10b8G93MI5kusn0c4HjxHq8ujnM=;
+	b=baYD2oIOWGJp6C4sr6sNI82QiWp4iu3LP9PL9GbX1yw6vWOSfRo4/XY+iK4IRKoNLU9u
+	 7rxOpBAim7x3WO0+GuHFc+izWhwyqdGMEOuh2oTHlywMrdfW+a2RUPeTYbWNhaC0LtSyU
+	 k/MNACZLXADJ4dar8RBY+XimqLapEGrWw0vdrW4m0Y7c8tsxuqWI5gYHEsH7Ch/aJpNQT
+	 g/SZuv0aNkiQt8HyslOewpk5ExXgObcd6tI7ilgglBczRbqjBFYo0/7vPEBQBwzNTX5Zd
+	 4jhax+cBP6SENY1cDPtpDydGnCOBKsm9Ft3sNMMvNZONr8L5mgIEA37JOedLi1itGew==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CP0BhtAm;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bSpvEH87;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=radxa.com;
+	spf=pass smtp.mailfrom=radxa.com;
+	arc=none smtp.remote-ip=54.204.34.129
+Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C81F3606A31D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 09:04:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C81F3606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=CP0BhtAm;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bSpvEH87
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69K8NLtj2877952
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 09:04:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=wzX1TW2NwI+yWssGoHbGc+/K
-	6ykZuk0NhVu5SB7QmUk=; b=CP0BhtAmyCT6JyLAkmqWdyIfIqbOfM4Nfxl5Nrdu
-	KmRJTmyZosrBtw/iaRX1wdVgSBjVPmUIMVhWovX6ncpqb9k9WXXADINBVivRrH0q
-	TbLtJ84eSTo0UiODkhGpq4usdA8zwPF8z83+bxw26VUz8YVWBXoT4OUEyYGJV6Hy
-	OgFc1mR7lwPS/vEnfHXLIdHIAO3H+a5M657e0Cav7BGQx7B6qT0TPsmMJxpLhtty
-	uuZHLlvmiZB+dNueEAJs3pxrSQyBMvj80JBx9FHzhsiKpg8dHXXPrNyE39DliMTJ
-	Z3DLcT0g7H9c2ntNhXDqgb+0OGyskd802zcs65EcThsnsA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5pss5v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 09:04:13 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb6391e89so676230485a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 02:04:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792487052; x=1793091852; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=wzX1TW2NwI+yWssGoHbGc+/K6ykZuk0NhVu5SB7QmUk=;
-        b=bSpvEH87sYF5X9Do9f74ghqyunqFSAT5x2b5vT7JYTeuCIK4yND76EmlHKuX1E2t1W
-         zdLOmCaCEg3BctVhP6zkJ9NubH8p07JZ9b2DYi0qkUr/GjauUelho4ssezuiIst0asKW
-         AyqeSqy+e6mGg+vjewwHEEH3igSEFtLtgvRwEBRnckY9aC2P13f1QywEVoQZlAWJToZF
-         Uat9pTO+aVyo+JvJxYMkiHXYZw9F/qYijHVa9nfwZc0FWs0001yyhPS6evjhaLX94B9c
-         nwG4AtYlpOachqr4KjTuycuMZTyZY2eKMz8/qUnZmZGWMfv0Y8MIoPoahAGcKQNZkrJC
-         CWJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792487052; x=1793091852;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=wzX1TW2NwI+yWssGoHbGc+/K6ykZuk0NhVu5SB7QmUk=;
-        b=0BsoBW12PkinMcJ2M0megkpZmAffWQAIY1FFhr6Zaz3PoyHRxrmrM9njstMh5qQEx4
-         osIPu/e/XqapYsT6XAndIi1y5V/mpkxBTi0B9Wf0JYreAWzaNkgMzr4FAkJQKunyJ2wU
-         G/oyAbi+YEjCeOOyJPZvw++ThTwbFROHxbg6IhTmHkbVaoHNTvwRYFu06UQfTVOjARnH
-         B/zGEYSK/EmogUD1dGI7ER3haxLovCwn80kpeEJpGRuqjVTKxQT0DMV7JDu1kuwUQzPU
-         2UAKUvJFNMq+jwo89JMmRK4r/kmzKV3ULlZm+tFovqfP0FJSgyoKPb0WaIQZaT8BfaFN
-         PKUw==
-X-Forwarded-Encrypted: i=1; AKwUvByMu3GV3TFrFC0eozR7+ngHIox1RBvb39ooEi9IqfLUlEweNFW/gJezxe76p0Sc5wHrBAxOQrktRX8St1WU@vger.kernel.org
-X-Gm-Message-State: AFq9FYJY6zDgBPEhoNg3khiLhniNjg9dgKvlzcRMMmMtRFUNIkd4g7/3
-	iH8LkfoyMsViUj8iKE089VfXO0TM+CMLOnUkMDiqX0B1YMuCg+oMtdgj+Il3IYTEHCHVFmAT7rJ
-	W96JbqqmyBxEUH032qHPiQwc2P5BzlT3vWh43IqZxWVrzd/xomJulI17xyShGnWQcwBht
-X-Gm-Gg: AYBFou3VAF0O86ytV5sDNDUP2lo12c+dNHQ8nj0sKVO4K9oXtluqHOD1t5m+FEgRgF3
-	43hHpA2zjl+T8voSkCSK3gTqKNIeIkoNgUfVowBBzlzu8TvA3G1+sqGAm238LY9EM4OSOq18+Ai
-	t3/sqLrXZVAZDvMZDIq1Rsq5xZK5eWimdnmXjRCvFWvqmQ7a6NJFMM78SzqDhpeBowjr804jhzi
-	ZdswbVaFOXSuUa9tXU+X/lt3T6a9atwN0Z3+yO3T8FQNWIU3luYiMC6FbAL07JD6UpBLApDg2eI
-	YbkYoypor3CE90sRpQLcVvBR+PSJM67mlABUd8v6NLc/lfAulsg+F4wFXpbqOx9BUPG2c4Kgisu
-	OGD6bJtlJko0H2TmqwvWG3/M7lSIhRnz7S4a4j9LZ8yEfk8KPiEhmVjYGa4/qke734s2o9RoWCF
-	jFrsOh8gwaVyA0
-X-Received: by 2002:a05:620a:17aa:b0:93f:277b:313d with SMTP id af79cd13be357-93f29b9742bmr1724720885a.2.1792487052049;
-        Tue, 20 Oct 2026 02:04:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:17aa:b0:93f:277b:313d with SMTP id af79cd13be357-93f29b9742bmr1724715685a.2.1792487051406;
-        Tue, 20 Oct 2026 02:04:11 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a434e4csm2531830e87.42.2026.10.20.02.04.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 02:04:07 -0700 (PDT)
-Date: Tue, 20 Oct 2026 12:04:06 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Joonwoo Park <joonwoop@codeaurora.org>,
-        Imran Khan <kimran@codeaurora.org>,
-        Rajendra Nayak <quic_rjendra@quicinc.com>,
-        Jeffrey Hugo <jeffrey.l.hugo@gmail.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Ilia Lin <ilialin@codeaurora.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Yassine Oudjana <y.oudjana@protonmail.com>,
-        Dmitry Baryshkov <lumag@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH 06/10] clk: qcom: mmcc-msm8996: keep mmss_mmagic_maxi_clk
- always enabled
-Message-ID: <vs77pfhgismmyrx4ftmsrl5hylwcjpxirnjdw46c6wu2jcvczl@4wbizp5p247u>
-References: <20261019-msm8998-fix-clocks-v1-0-370949e4d8a0@oss.qualcomm.com>
- <20261019-msm8998-fix-clocks-v1-6-370949e4d8a0@oss.qualcomm.com>
- <3de40458-7d7e-4cd8-a200-746e4c2adb13@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C00C606A331;
+	Tue, 20 Oct 2026 09:12:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9C00C606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpgz6t1792487489t04aa9426
+X-QQ-Originating-IP: xblyLXtYUkaN+mcRUZlY6MFFt1npan14bWp9+SQNemM=
+Received: from [127.0.0.1] ( [180.159.160.209])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Tue, 20 Oct 2026 17:11:25 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 10771054805953698164
+EX-QQ-RecipientCnt: 32
+Message-ID: <C782C697D7D26A70+05200ff5-c7c6-4425-ad15-67222a2ebacc@radxa.com>
+Date: Tue, 20 Oct 2026 17:11:23 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -141,67 +51,226 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3de40458-7d7e-4cd8-a200-746e4c2adb13@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=DrrDa2/+ c=1 sm=1 tr=0 ts=6ad72e8d cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=_XvO8LXBJ3Q0iDersrIA:9 a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDAzNSBTYWx0ZWRfX/RdGlNpTsjZX
- nKaKguCIAnqXawAxK1CiYOE20VZUFdgNbs8vdZGVAB2syqhATE3gH65EFkuB6iDuwWwXX/QHxQl
- b5im/dLLTZ12GExUKx8LzHOjKOfHHYd5kD788lHN11KD11A5WDum3M2qr9iZO43J7CsST7nm1qS
- fLzU1i0b8aUlrYsobPHbtsrszzP6ufcEgy+tPRW8dIu6LXJt2DgbDC2ifOFcLVDl0G5PQzAoooM
- 2ns1jr8PdZZ2zyFZ3QcoXRHgAzpi8m4r4+L0yK+CqY4vFhW1WCMdPhBErA6wPvgd5aw6UP8avKJ
- nznc19SK4h5O/vH8UCUMfVYQrqryFex0e3sKwCKO3U2j8kOi6ijX/lPzP05pX7+cZTG1WQQOZgy
- wXc21c8qlDltv2HFiahFRU3SRPBn0cmHftHbchLm74Qzzyd+BnWwhx5pcx4hDA+avPD1qs+YJbo
- c49uyacFVsKXYXroezg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDAzNSBTYWx0ZWRfX/UnA0J8wtiqW
- dFQWvFNodp1YHuCfbzOfr/me9GgQssUrxrvBk+i0f9fJot9P4QovNW4b2CKtfKCij3PKj6uw5M7
- MO7oWIs5zcolR+zVJvCh7JpeJ87YJXY=
-X-Proofpoint-GUID: AtsVAe46H02PPCKhu8uwnVeXueOHTP5V
-X-Proofpoint-ORIG-GUID: AtsVAe46H02PPCKhu8uwnVeXueOHTP5V
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 phishscore=0 spamscore=0 adultscore=0
- suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200035
+User-Agent: Mozilla Thunderbird
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH v2 4/4] arm64: dts: qcom: sc8280xp: add Radxa Dragon Q8B
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Bjorn Helgaas <bhelgaas@google.com>, Andrzej Hajda
+ <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Bartosz Golaszewski
+ <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+ Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>,
+ dragon@radxa.com, Daniele Briguglio <hello@superkali.me>
+References: <20261009-q8b-dts-v2-0-eda11e5dea8b@radxa.com>
+ <20261009-q8b-dts-v2-4-eda11e5dea8b@radxa.com>
+ <3bb9a390-3b5e-4321-a25f-77e4f5c88f9a@oss.qualcomm.com>
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <3bb9a390-3b5e-4321-a25f-77e4f5c88f9a@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: M44gPKlhuS3s9ib/HF+x2es0LH39PYX+RI5y1uBElRr3DpD4G/LYBV9+
+	jCwpMftPGiziUbPpTd+j9gQgRiapMghIYmKDzE6rZ+emvpDK4sryt5l1Vr1x7GnDaRf4Giy
+	6kRo7t+rbhCppjloVej8SJdVh7dZhBPZLnNDReUd3xH38qvJDvP3Zu8vBOF4+Xqh1z2MpQr
+	TEr+yXAoLfRD2D0/TX2CEhWVcCfsjRwVFPbIAXFqAZ8soenRlLVIl+kDkHklxvuLdEwdp52
+	xmZSGIDpYNz6iNfc2sj2BVAnzfXO3RduVWhtYsjMx8xdBHIryzWZ9xashH7riJoCFaOWU7Y
+	uH/MuT7iy7GZ6y0V+9VhMxFRvDy7Q86k6ktS8kXdwm4m1WhBdS76Tm7HLOFk9wsx5nY/jNv
+	XG1TcOeom9Ig9qGjywkpBgeFY//LZB+7+6du9UM7U1CZdtapjGFj7ozPR9kq90otC61yNky
+	cSi7mJQbBxCzGvxYA9psf6pXP9VWjoIHC55fRbUQOvugvBWlqgchMzsTKFWJDDl4CoJ8Kmz
+	RnS/R2QJ44O9KD2zCLiQDFxCWamVW4JPqTKUR31ryViJJW42o5ltGJCk7VUaxCJw3syEdeE
+	iSTgkvruCd098ui4vI/OSOCVd+DnZ5zPRturB5+oOYfi466aTwJfNmGAVULCpdBweOuA9gH
+	1QZnL74yd3SSak72Ldr1d1oF7kl36vbSb6a69TKsHfllgIC05ZwEJ7O7Nzt6bKYbo18Fkd5
+	OLcRT6VHUW7QHw0kK+c4DN9X0xrPWm+7/7Rc5n4KEh6r0mtMYPsmgbymvw7jwjG+7uByIle
+	53en9gbGG3vF/yKB4iSMuY+Cou/vPigx5rrnAe43MXjQ7sUg8scmJtAOgkJvXpvo3y/bbXn
+	kcoj+ht0rHlOJMDb8K68yrR3+IHkQ3YLu5HP+N2NRvIdVvB/yyV7hMvq9H1BquUyRHnH0jk
+	XV1IPRP3I947nL3Pwh1rMFJosTgts4mckeTVv1zjKuVJIcD4baGRvZcBVdyzFmXyuhVdsij
+	kV9lo/jIuZlgh10IQe7Srrp20BDgSQJhCGaciICyLmJzWLL1tTWO53T/GgGKLykd/MscYbX
+	CTPxSS4Y9QRhMifeGj2iwc/2GsfleKL1iwzv1/Ky4xr
+X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+X-QQ-RECHKSPAM: 0
 
-On Tue, Oct 20, 2026 at 10:35:36AM +0200, Konrad Dybcio wrote:
-> On 10/19/26 3:41 PM, Dmitry Baryshkov wrote:
-> > Enabling vmem_maxi_clk fails with -EBUSY, the branch never leaving halt
-> > ("vmem_maxi_clk status stuck at 'off'"), which makes the VMEM block
-> > unusable. The MAXI branches sit behind the MMAGIC aggregator, so they
-> > cannot leave halt unless mmss_mmagic_maxi_clk is running.
-> > 
-> > Commit 7705bb7176b9 ("clk: qcom: mmcc-msm8996: leave all mmagic gdscs
-> > and clocks always enabled") marked the MMAGIC clocks CLK_IS_CRITICAL
-> > because there is no bus driver to manage them, but missed this one: its
-> > siblings mmss_mmagic_ahb_clk, mmagic_video_axi_clk and
-> > mmagic_video_noc_cfg_ahb_clk all carry the flag while
-> > mmss_mmagic_maxi_clk does not.
-> > 
-> > Mark it CLK_IS_CRITICAL as well.
-> > 
-> > Note that the halt bit is truthful here and must not be papered over
-> > with BRANCH_HALT_SKIP: touching the block while its AXI clock is off
-> > silently resets the SoC.
+On 10/20/2026 4:27 PM, Konrad Dybcio wrote:
+> On 10/9/26 9:55 AM, Xilin Wu wrote:
+>> Add initial device tree support for the Radxa Dragon Q8B,
+>> a single-board computer based on the Qualcomm Snapdragon 8cx Gen 3
+>> SC8280XP platform.
 > 
-> Will the right fix forward be to grab a handle to all of mmagic
-> for MNoC and activate them as needed? CLK_IS_CRITICAL is obviously
-> a workaround
+> [...]
+> 
+>> +	pmic-glink {
+>> +		compatible = "qcom,sc8280xp-pmic-glink", "qcom,pmic-glink";
+>> +
+>> +		#address-cells = <1>;
+>> +		#size-cells = <0>;
+>> +		orientation-gpios = <&tlmm 166 GPIO_ACTIVE_HIGH>,
+>> +					<&tlmm 49 GPIO_ACTIVE_HIGH>;
+> 
+> Please align the '<'s
+> 
 
-Most likely. Some of the clocks might need to be removed from the voting
-model at all. I'd say that it's a separate set of fixes, possibly
-affecting other platforms too. I have it on my todo list, but it's
-long...
+Ack.
 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
+>> +			ports {
+>> +				#address-cells = <1>;
+>> +				#size-cells = <0>;
+>> +				port@0 {
+> 
+> Please add a \n before the subnode
+> 
+
+Ack.
+
+> [...]
+> 
+>> +	vcc_5v_s: regulator-vcc-5v-s {
+>> +		compatible = "regulator-fixed";
+>> +
+>> +		regulator-name = "vcc_5v_s";
+>> +		regulator-min-microvolt = <5000000>;
+>> +		regulator-max-microvolt = <5000000>;
+>> +
+>> +		gpio = <&tlmm 159 GPIO_ACTIVE_HIGH>;
+>> +		enable-active-high;
+>> +		startup-delay-us = <250000>;
+>> +		off-on-delay-us = <150000>;
+>> +
+>> +		pinctrl-0 = <&vcc_5v_s_reg_en>;
+>> +		pinctrl-names = "default";
+>> +
+>> +		/* CH7218A needs to be powered on for HPD logic to work */
+>> +		regulator-always-on;
+> 
+> Does the power supply reference at the connector node not handle this?
+> 
+
+No, the regulator will be turned off if there's no active display.
+
+> [...]
+> 
+>> +&gpu_zap_shader {
+>> +	/* Reuse firmware from x13s as the SoC is unfused */
+>> +	firmware-name = "qcom/sc8280xp/LENOVO/21BX/qcdxkmsuc8280.mbn";
+>> +};
+> 
+> Other than the signature, the zap firmware is wholly generic.. I wonder
+> if we can just add a symlink in l-f to get a generic path..
+> 
+> WDYT +Dmitry?
+> 
+
+I would prefer that indeed.
+
+> [...]
+> 
+>> +/* M-key Gen3 x4 */
+>> +&pcie2a {
+>> +	/* Place ECAM and BAR space above 4 GiB to accommodate large BARs. */
+>> +	reg = <0x0 0x01c20000 0x0 0x3000>,
+>> +	      <0x0 0x3c000000 0x0 0xf1d>,
+>> +	      <0x0 0x3c000f20 0x0 0xa8>,
+>> +	      <0x0 0x3c001000 0x0 0x1000>,
+>> +	      <0x5 0x00000000 0x0 0x10000000>, /* ECAM config */
+>> +	      <0x0 0x01c23000 0x0 0x1000>;
+>> +
+>> +	ranges = /* IO (1 MiB) */
+>> +		 <0x01000000 0x0 0x00000000 0x0 0x3c200000 0x0 0x100000>,
+>> +		 /* 32-bit non-prefetchable memory (256 MiB) */
+>> +		 <0x02000000 0x0 0x40000000 0x5 0x10000000 0x0 0x10000000>,
+>> +		 /* 64-bit non-prefetchable memory (3.5 GiB) */
+>> +		 <0x03000000 0x5 0x20000000 0x5 0x20000000 0x0 0xe0000000>;
+> 
+> Please drop this change on the board side, this is SoC-specific.
+> Likewise for the other ports.
+> 
+
+Ack. Do you think this change can be applied to SoC DTSI?
+
+> [...]
+> 
+>> +&pmk8280_pon_pwrkey {
+>> +	status = "okay";
+>> +};
+> 
+> I am confused why this isn't enabled by deafult but that's of course
+> not your fault
+> 
+> [...]
+> 
+> 
+>> +&sdc2 {
+>> +	pinctrl-0 = <&sdc2_default_state>;
+>> +	pinctrl-1 = <&sdc2_sleep_state>;
+>> +	pinctrl-names = "default", "sleep";
+>> +
+>> +	full-pwr-cycle;
+> 
+> Hm, is that something that comes from the controller itself? Should
+> we advertise it on other SoCs too?
+> 
+
+It is observed that the boot firmware can leave an inserted SD card in a 
+state that makes the first Linux enumeration fall back to 50 MHz 
+high-speed mode. This property allows the MMC core to fully cycle the 
+controllable card supply after voltage selection so UHS-I voltage 
+switching succeeds reliably.
+
+> [...]
+> 
+>> +
+>> +	vmmc-supply = <&vreg_l9c>;
+>> +	vqmmc-supply = <&vreg_l6c>;
+>> +
+>> +	cd-gpios = <&tlmm 131 GPIO_ACTIVE_LOW>;
+>> +
+>> +	status = "okay";
+>> +};
+>> +
+>> +&sound {
+>> +	compatible = "qcom,sc8280xp-sndcard";
+>> +	model = "SC8280XP-Radxa-Dragon-Q8B";
+>> +
+>> +	audio-routing =
+>> +		"IN1_HPHL", "HPHL_OUT",
+> 
+> Please don't break the line here, start right after the '='
+> 
+
+Ack.
+
+> [...]
+> 
+>> +	usb0_sbu_default: usb0-sbu-state {
+>> +		oe-n-pins {
+>> +			pins = "gpio101";
+>> +			function = "gpio";
+>> +			bias-disable;
+>> +			drive-strength = <16>;
+>> +			output-high;
+> 
+> Drop the forced output state from both SBU pin states
+> 
+
+Ack. Thank you for the review.
+
+> Konrad
+
 
 -- 
-With best wishes
-Dmitry
+Best regards,
+Xilin Wu <sophon@radxa.com>
