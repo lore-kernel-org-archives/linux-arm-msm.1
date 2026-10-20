@@ -1,42 +1,42 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792516533;
-	b=NRo9eRlGbR4GD1SHDIgUbMtKOgE2nNR0EOmE0+ppFCkMBMOuQ0bH22IvLQT4z3jVxYE7
-	 nEHKDOzr7KW6tddOqnxMi7AIhPmeRfhy3f8NdO+IOJjyhdrOfwCWaVaOxU3JlXZc2DktM
-	 Jv0azvw2uWExxynl07zZSQhfTBv8K66NSWXwTk3L5/N5N6LWgUznxjeVqAISfTMh72L3K
-	 RBTiKStj7BuESrk2X2V8ZYjXUB0OqK0mYYi8OXzcruNHp3S4DmlFYBi3teyS3DKAA/Axy
-	 PGpG5MJzJGoNYJM+LWfTj9MVt0pVFbiyaTb5KbaoHC5uYE4XMD4J9G6pgWVJFGDwXYA==
+	t=1792516593;
+	b=4EY4hG7QV/TZKQ2knvvuT4/HWM3rU18UTH7xrBm2kR1IgUkBbxkFHQvQ6W5X5iAlEIJA
+	 HRD9lYczXJomyrRfmywwvXNh4XVqzD32XaVyXMonf9/bd85XRmHIoxD9P88IVnVtHVL4z
+	 xBn8mLfhR48O8Klu/6P8FAYiStJOGcrwMRBE0ezjf2ybyjq4qoyg2YMo3YmGSWNYomt9A
+	 5whvYtUu7HPdZLB4DiiVLTjRqwDUsbmjXy07cYFYXRXRZlXRYTFQiRpLxu2XOUxini7sF
+	 ERTZIh3Mqe5k3IaXMJL/n+lNK2KuXYjiMZuf8GL9X8VEuDRZgIYIb/hcdcIPHG+A1Uw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792516533;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792516593;
 	h=Received:Received:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
 	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=+7AvEO87agVesSj9EpGksF6DuYMEbv0EchchTnG8b/k=;
-	b=qkWILJjfImY6yL1fgMMENJv3J61EzTRoQSdUPyByfJPMdTFhu+3y1Jmp8wX3YG3iRWmy
-	 Op99c+NqOr9zcUn5GRB5jNVJ8dHG++yhbze0H+wKLidT+fjD64UDD+o0FjX1avd5kxISi
-	 ltO/3dTHuPKN9KfUfhkf097pOjEKyo8Et6iYARzr5/DWCEWLjNBoB48mOUgTSgwtxd/e7
-	 E2h0HTKaEV3oUpQuANZN/oD1sofhkUJDudaL3LrzfTtYU0fDBFO6R26M3tlwz4ILu2wxa
-	 tsY7eQR8hbnOdioMNxiUI3ffaK/5afKZ78Cf87ayIaRFznXTB0VBRegu576SygAptYQ==
+	bh=8JgZTskEhAe6xxV6x68aEhfu2INYkml8PjbzJi5N0lU=;
+	b=ufYTRy63KZqKydDbE3uKz0NtIYw6zaiAmZQ2q8neiHI0bxEPKob7IlcnVBGYFKAk0IyE
+	 qs8ctvE+aOTVFmWpoB8KCSdYegkvX+DiatJREWFL2cAjELSA2Caxxzod8kPbs1XMLikDx
+	 Cl3p2QetHF0ntmUe8Zqkh4Xe+LSIU+36+oLZtKfSPzT0KENK2wAgo1bsUdHAgBqovTjIl
+	 2mZ4zD2WiFLdQAdhX+y8+hCnDMTn3n8ChTJGqLL39Z//3Y5gZQI+Q8lcJWwUFzUiVoio6
+	 3opP1JPReXmj/+/kwgOAsnv/HowQNQ3R4c7s9sUQUgPtt33rKzMPP/2JbF+KuiTugYQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 120DB606A319
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:15:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B65E21F000CA
-	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:15:32 +0000 (UTC)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5ba36cc21cdso616198e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 10:15:32 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBz2F4wXAg7iwxc4bJpmotgUU6d4eX7eYwlp5qv/nJLzIcMGAwDNLcwWREhHfeqK0l8AiB281moAXcIUXnbZ@vger.kernel.org
-X-Gm-Message-State: AFq9FYKtPmyyCDSNDsHaZKGXlgG9mGRqCVG27vrDoSUIDvCqUGXpzkeU
-	zydJvTEBSMX61DPxUp/4xiZUo0iDHnLrK9bQ8l3pN4RkSEyycfm+AdT4xBWuSpOHCiehkWb9iEr
-	sNO0hX3D/5Z0Row9ea3j3LSlDu0oGROw=
-X-Received: by 2002:a05:6512:33cc:b0:5bc:b0f3:8a4e with SMTP id
- 2adb3069b0e04-5be50a62a31mr3833052e87.43.1792516501664; Tue, 20 Oct 2026
- 10:15:01 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95FBE606B518
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:16:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DD7F1F000CA
+	for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 17:16:33 +0000 (UTC)
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5be4a2d94adso2872885e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 10:16:33 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBz1Ye4MHAUxWj5ow75KfTEYdvQeXd6bMIIwC5pHp4eeWNyYWZqEcYG7A6HWVEvTasFCTHEIFo8jUcz2mvvU@vger.kernel.org
+X-Gm-Message-State: AFq9FYJpdLzrTAxuFaQFQVXuU8gMBSyOuyPFHzKUTauIdauVvRI2vS5Y
+	ZnC+2lh7Yl8cpNEeVamaTqx02mh0/lQ70+geZ6ddQbM1CfU+IKiJnBVybgDndFgYUXo1GPmQs0K
+	0znJuVealhkjGXx4POni9aAFJ665u/io=
+X-Received: by 2002:a05:6512:114c:b0:5be:4d37:3bc0 with SMTP id
+ 2adb3069b0e04-5be50a9dbd8mr4119073e87.62.1792516566187; Tue, 20 Oct 2026
+ 10:16:06 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -46,14 +46,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261020-iio-light-gp2ap002-v3-0-b7e0946c9e79@rudorff.com> <20261020-iio-light-gp2ap002-v3-1-b7e0946c9e79@rudorff.com>
-In-Reply-To: <20261020-iio-light-gp2ap002-v3-1-b7e0946c9e79@rudorff.com>
+References: <20261020-iio-light-gp2ap002-v3-0-b7e0946c9e79@rudorff.com> <20261020-iio-light-gp2ap002-v3-2-b7e0946c9e79@rudorff.com>
+In-Reply-To: <20261020-iio-light-gp2ap002-v3-2-b7e0946c9e79@rudorff.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 20 Oct 2026 19:14:49 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmA_CAJi31OJe19A1H316XfigAKy5XbGcpvj1CYzPYY2A@mail.gmail.com>
-X-Gm-Features: AclHuK9Cj5HfENDrz3fDPSLBKmxyGLPpayybWidXDJBEn6zBCvvY9bndZC-YM6k
-Message-ID: <CAD++jLmA_CAJi31OJe19A1H316XfigAKy5XbGcpvj1CYzPYY2A@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] dt-bindings: iio: light: gp2ap002: add leda power supply
+Date: Tue, 20 Oct 2026 19:15:53 +0200
+X-Gmail-Original-Message-ID: <CAD++jLmCo8tnG5vp4Qv=6rDG3nob25LHELretdu7t3_SLxQASQ@mail.gmail.com>
+X-Gm-Features: AclHuK9jGkoAjznqQZwxFsnHN6Zr-n0TfSZfEnfEZkRBZOBxywfmSrVOcQu4ooA
+Message-ID: <CAD++jLmCo8tnG5vp4Qv=6rDG3nob25LHELretdu7t3_SLxQASQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] iio: light: gp2ap002: add led power supply
 To: Christoph Rudorff <chris@rudorff.com>
 Cc: Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
 	=?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
@@ -68,12 +68,16 @@ Content-Transfer-Encoding: quoted-printable
 On Tue, Oct 20, 2026 at 1:36=E2=80=AFPM Christoph Rudorff <chris@rudorff.co=
 m> wrote:
 
-> According to datasheet page 8 "Recommended external circuit",
-> it has tree pins that need power: vio, vdd and leda ("vled" !)
+> tested on samsung-j5
+>
+> v2: Use regulator bulk api.
+> v3: pretty up, rename vled to leda
 >
 > Signed-off-by: Christoph Rudorff <chris@rudorff.com>
 
-Looking good!
+I think that commit message needs a bit of elaboration ;)
+
+With that fixed:
 Reviewed-by: Linus Walleij <linusw@kernel.org>
 
 Yours,
