@@ -1,108 +1,108 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792604554;
-	b=VcNsP1sY2MVnOb0CWDaOYaKhqRCyZvQB+Ke45Rp6vj3He0RVy/yrhZy5GgQLQBuDZYBH
-	 KLayP6Dc+R6nCZYYz0UdYGYdbuAIxqiuzwL5/kft+7uutk8kcfVTRFJXv7lfSipRVD5Yy
-	 KPJpH1c4ENx3/7vSZyQq0gvx21OWGpTBs7fHs/YGTtcA8Q+XeT2TuW+CghsZXoYQMEIw5
-	 fIWtdNVh0HR8/5phN2vKHPsxpvEdLqy2SsF2f+3M5SCzJUmHqhTzjb1uHINKUNSEGZ8tz
-	 KuZKXbgbIZLvQyTdjoP8jsNPWUfkKI5cTLsMUVkAzypSCTPpRbakTno5fiKDJvMlFmA==
+	t=1792604574;
+	b=pi2obZbUTr9U/64gq/bEGdGp8xqlSPd8NaQDyCpQsDW0LAvhxmt3cL8oOD5BJNNIhDjg
+	 kcvzVcG76YNZF+a0Ns6OI/YjZaM4h5cjPySBmvIlxmpUUOZ/a2nZJgTIwfI1lV+HSrwZB
+	 xVk4CT/iY6ZG9sO2sYQmWSevY5NVUSKKlti5BVqHHa/ujfOAuNyyIj4GMSc6Q4Sw3qEWv
+	 XQDjPMcE9QwBBUpHOHCv79xLPl6rFydUhGehI3799Kc/dGkX53K46jVoZw8oXGzocrXZ0
+	 XVBGStjr6rZyD+J4CBvYfzIR5NmPYxGdKsI5/HpY1aOOwizKIGWtbYtuSGfVoAjZZ6g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792604554;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792604574;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
 	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=KN+PgTF350Bf5Q08x7ilqI8W/r74ND/C/koqFQV5cX4=;
-	b=BVeW1ST9unIPDPUgkE5LsE70fR6CKgzrFyVZORA6cK37MIknFkrsgN6C6mTmOGe1ew3s
-	 DvA4b3ryjmjNSGZXPT0Fe5D4Tn6wrN9OOCdsw9iZI9Oix4i6GXRWm9nE/8M1BXUVGCDtF
-	 GC3QMB6ibg5SCkQ1rSig/4tu5cSUsEYc9V5/r9r/ubGOrN02Mwl0vVyrCL6BZDxt9Cs91
-	 W0D0UQL8+tdCnlwr+vAUrJpPCzj9HO6dEEdB60ACFCv2WSrEOzmazxuvKkjsp4JJUKKTc
-	 jZ1ISV6j3tuziVX2KwMniX5/7tjDIowT6bWW5xO2i/ueZOzhvFWr4FrdaHDh7nhWh7w==
+	bh=J6uuKNtXeb4uetwD4PZfD6MtJhK9RufAjFZJblRiWyQ=;
+	b=qVcGor243sQrz7h1Y1K0q1nmsIKR0dJXQzVHHMHe1IbAd4eEr16l9ZuV9r2FQEAzv+5r
+	 iBklj+OAJFgg1JPnQaGUfhl/4RisYhOMr2tMR/5FrOZWb4s8nOIH45M8HKdK1NEkyK02P
+	 zAEPAXJ8cMs6ZQI8MJSasOyOXfYrf1vkvJ5Fw99iG+M+3S7vh2sdKPNs0OPArCEDqqTVX
+	 gt3b45woEfOEsEaAcIjJ4GLw+P8Dy0d2txHSW1fvwg7p4/6AonT7GjxrLdLVgz6euaTPT
+	 ew/dIYazVP72T4wtvyFSpW79VHv6R8SJle7u1iIRuO8Ep7ql76r2ZmoBmRtD3BqaZfQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gR8dQDXv;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OCDYZvc6;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=b5UJc61l;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NW+OdVzU;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 473B7606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 473B7606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 208DF606A31B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 208DF606A31B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gR8dQDXv;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OCDYZvc6
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LG4BhC2149265
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:33 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=b5UJc61l;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NW+OdVzU
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFTpHD141155
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=KN+PgTF350Bf5Q08x7ilqI8W
-	/r74ND/C/koqFQV5cX4=; b=gR8dQDXvW6Egwe+DwHNnTIKewLTe2ebFyOreWuTt
-	rCDnG26YKc65toONtrrne0r+HBq2kkeEabnxnxFE0XK6HN4HioijCvS3iK74SIhl
-	YysrV+4UcoY0GeGUvWcLHU8rJiWj7ON9asLO1T67AJ2wLEcX8v+jj0mqZWRfT/UD
-	NFNc9Cev2ZIdWZGb2xd6s/AYam2ZODJdKG1x6sjGCIOQkXIdJMwnCjSY3a64CIYJ
-	sembuh7p7snPwPKouv4Lq2zLCEA+Bs99/NgTtFPqOGV2OJ7s/u55H9GuieKallEm
-	BpO1rTlSqXkdvSDEVBLXAPRSzrIeky2INjhy+6d0755fPQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf0ke0eyp-1
+	:references:subject:to; s=qcppdkim1; bh=J6uuKNtXeb4uetwD4PZfD6Mt
+	JhK9RufAjFZJblRiWyQ=; b=b5UJc61lKCk10wRlwwdluLhM8Oh0cHeTXdtRbdLw
+	de5nxnODD42+dQF+Npftyjw2cbnPLTVyDsg7LVJ0Jw6V/mXEzm3UiTLnfgSu80mb
+	i4yR57yXplDSr3fsm+VRFL6DsXDodLxYNIpQhHGgA4w2XT3cWH74iG4tQtke32rD
+	Xl4zXJ/BJWLdxqM2iOQLUNlkhHHRMDvY/7WDZJnOL5RRMLsV08v5/zQJi75TXgFC
+	1/tapy//63912OrCpVEYL08LMFAA5FsJjnfCXwtYuX9uWZjze5j3Jl92Mv4qwIOK
+	S7OspoUnFSdLOgAnXKZPmMOC0AlPx91HLrx0DgxglQlyEQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex58983s-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:33 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f13c143c8so184762985a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 10:42:33 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:42:53 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb6391e89so224253385a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 10:42:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792604552; x=1793209352; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792604572; x=1793209372; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=KN+PgTF350Bf5Q08x7ilqI8W/r74ND/C/koqFQV5cX4=;
-        b=OCDYZvc6lNe4IalN3A92rXJU17UpILv0iTOnPOeIWFz3tFv7J2vZBqlO4cp3ymMT7T
-         hg4t610U8eWvUnAgBVhYOf9TH2RaZQU93uyG7Wk/bi8CBtc1zCmSDZFFsHx+snyH0YSL
-         lKcdiQE6QMlDtnc1SpOFgbebaejz0LpKcvmOM87SA9OKAt3I6sMU08tUEeSwnbLnpng7
-         uAPJTbvspGEgfQ+eC43zELtB0K5LoUCVR3JRonp2o87QjOxPqqi9fNT2Agr2ddbdaLHu
-         23X60MBYnRrEzwkpd7kX+ZfandcAjfndXRggoY6uzlJxOHI+0c7GuJuvFLbRCuZe6dJp
-         Bw8Q==
+        bh=J6uuKNtXeb4uetwD4PZfD6MtJhK9RufAjFZJblRiWyQ=;
+        b=NW+OdVzUEUQEv/RcIJERWMhfZNFKRj9kZ9lQHNRnTNYaHcBvgKm4y75lH07/TJxCyB
+         aJrp60lp3i2TuBWjJbTb7+ap84CajzpTcGdx8uzJLG69iI2GVwZLLUh4YDDKsheVkJza
+         bUWYNebMvp/vXr5fQWoPxAmwgVHiYcpFzSD/7B8CrU1Ttm6Tmy9SLCF2wl3SI27kPrkS
+         pLqR2eyXdaMdbaQF6RTPw03SxByMc7dDDWmRFXfJiJP5n7cf4t5aQTxMIqrEqFateibl
+         UkHLrHo3+hZcdlKO6te5f1gEIglJJhLVV5eprPLclE8AeWYbDIkhDR33qhi5UMszbBKA
+         bMxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792604552; x=1793209352;
+        d=1e100.net; s=20260707; t=1792604572; x=1793209372;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=KN+PgTF350Bf5Q08x7ilqI8W/r74ND/C/koqFQV5cX4=;
-        b=H32uPTcWFtSubHYBAybBIXM16v4s/YW5iKgINfoq7whe7qvDyofYxFeDKGqV8Advli
-         Jfu6e+1f4Ol8kdR88qSpKNZmpKZl8Xf8SAz9F4fsRSW3kKkUUpoA5Ozlr/r79xmFWLey
-         G/cFAOOQAbxZ2tW8DORoQtT8lKAgXIZ6R6ZijONGuI9JYpWgHa5rUNRKPWgrtU+HcKv+
-         Bj3QHyLuvgKX1BscOn1mXjToa3X2AN3yx6htCnrhxyc/7nssAPXBbtBpdeGAgjnZmWyG
-         un069+wAp+Ob6Jx5c6qjw0tMXolMP/g60mK8xfF4vP4B6+x0Vo/SIG/9WJEl4LEuJs7Y
-         kuKA==
-X-Forwarded-Encrypted: i=1; AKwUvBzNYQuDR4TTeAdIeKmmPdnX+XTST4odemEEN9Kgs82YIOfsVCJomVz+hhsvPykDf7UbBc2BbjSlfoTUJtmX@vger.kernel.org
-X-Gm-Message-State: AFq9FYL8xCXFbeHlcOhRO8kdBic6drRjbMxzOK0IoZlutvpmK9KxFVUj
-	4ZZyyDQGcgJzxFz2sTFZJ3RPNdd2sSp7Gw5DdKk4dCwB9bLEjF9N5j4h7hgpqCSP8Uu8FVqt+Dt
-	z+fpK4GafXPAcx8L0eHLzHNCYW58YZraeDl273HtItFIYmr/VdqH8wGIoHbeymrNuZjgJ
-X-Gm-Gg: AYBFou2C7I/lrOqrqfYTCAWjWjBVu/2yeot0JEdugI1gVtU6xHMxVInvKOUaJg5BRG0
-	henBQELi0yl+iE90arMyB5P8rRAXONPDfBT0Hs8n32fTP6E0G64ZqgccqcCIUhMOrwK4tgEVmlU
-	6x1hM8EsiiImoDpia+cCZN9zez91tYGS9IHqtQ1ocT3X/KB5ezedjecmbnpulC6rx7uSdVWKzV+
-	fhGawWjhjABLFp1mN3H8cK0bKs6Kr8W7AlatJLZnOzChAkdz8nhD9318FAIn1+jJc+c0hGVDfPJ
-	BLwZn5Qb05mmYc/gLlKJSOFqh5m0ttOjXlOMaS2Svu3Pl7kAovqxYXUcQmH1A0kl0FXNU/eJ6BE
-	2OjfSNR/8ZePkq1SnBMRma55dHznVcsvWG1NjkkVMsaNOD0H8SC5uAvYKTJfRwmXRUZf7Ez2ngF
-	kIdTZmNkTywEOA
-X-Received: by 2002:a05:620a:4493:b0:93e:d364:c9fc with SMTP id af79cd13be357-93f57e5e30emr518393685a.5.1792604552190;
-        Wed, 21 Oct 2026 10:42:32 -0700 (PDT)
-X-Received: by 2002:a05:620a:4493:b0:93e:d364:c9fc with SMTP id af79cd13be357-93f57e5e30emr518389585a.5.1792604551742;
-        Wed, 21 Oct 2026 10:42:31 -0700 (PDT)
+        bh=J6uuKNtXeb4uetwD4PZfD6MtJhK9RufAjFZJblRiWyQ=;
+        b=ki0rgy4GXGN0dwdqDX4vwPceJRX029TfAgaoEPBtNFLUTmKJq6gO5/lNzFLWPTWh5X
+         Oq+ITwPkNB5WUF0k1/d0uOgm9j8rpbx0S58F6BICeF/PWv+U2y7al+E+BU/Sd1RMERoT
+         0Z8CPzMDljhFmO1J/GneInseJ4EFSpTHwxTPfWkFJGVdlhP/XsK/61w3+oYh867jC9mj
+         njHNq/L8kvIeXX/5RbxJ6FrlaLD8fmwavQ3BeVxh9cxTokkc5YIL/9/nnXYO9PzlwuqP
+         m4vrozpj3jQgBpgq7Qxnd1vAfnCHy0LOFXc3zBlduJLmKcelppBVor0bHr8Iu7U3MlDw
+         mwmg==
+X-Forwarded-Encrypted: i=1; AKwUvBymIqkO4DQAzGzaedNclMezI9ZZjJP2BXVP6VApnMAT4N+gjU7815Ei4iY0qzi6HNgwZvE6U2wpFUCDLG1B@vger.kernel.org
+X-Gm-Message-State: AFq9FYKEf/PJ1gjATd+fkHlF4fw3pq3c8aG/AGTcvN4CIZSxWvPMxnCa
+	4OhD0mQ+lfNp87s6Tx+9kmNWQT1d4L2OuaL2zQQkFGA0cpmlceCkJVrq2m5FdIUDniErZfUkCbn
+	7iIUGibfDOQdXyDIhg1sWrJPEgWiEJr1XvT3cAbKdO7gijZZOi+fwshhQb+W5tAaSt4Mn
+X-Gm-Gg: AYBFou1hqqdW+D+eL00fk1SdM6g6FcKIo2uAgfpHOy5AMtpEyeEshaRSARHs8uwwj17
+	j4P3uyLFi3kFx8ynFGT4XxRzZhDhGu4YHWjoRSG6RVb0FNdg8fyx8a9lSpE/n9NxEbyuepCL7Gj
+	TXbhAxBJuUolTz+UY5cbecJdTMi2IS2I7zq9/GiYHMLsQI8OYkZWIlq9hO+USNQblLrR0snUd32
+	BsA3h/wLRYDqaQ30OhvcStnCTOJZmGFEOzcxHbtUvBrqtK1CfActP80/Nec91l8/jwF3ncckfIO
+	zEKTYudQ+siMQ9d1iqMwX5TGQY7iEfdZ8gsJdlj0/dOE+DCscWpvgSNF2URGY9enPq2rSuyFFiF
+	D4FWWBD9/dICTvaTuOmzBcYG+xOyztlXM3475zILEeQUL7twSCDi5B+lskbzs1QGn4yIm5i89j5
+	bP2bCUtpAWdZK4
+X-Received: by 2002:a05:620a:690d:b0:93b:d79a:c463 with SMTP id af79cd13be357-93f57f5ec48mr547613285a.59.1792604572221;
+        Wed, 21 Oct 2026 10:42:52 -0700 (PDT)
+X-Received: by 2002:a05:620a:690d:b0:93b:d79a:c463 with SMTP id af79cd13be357-93f57f5ec48mr547607985a.59.1792604571628;
+        Wed, 21 Oct 2026 10:42:51 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfa4962a59sm231037e87.4.2026.10.21.10.42.28
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ac4f4df0c9sm1729191fa.4.2026.10.21.10.42.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 10:42:28 -0700 (PDT)
-Date: Wed, 21 Oct 2026 20:42:26 +0300
+        Wed, 21 Oct 2026 10:42:50 -0700 (PDT)
+Date: Wed, 21 Oct 2026 20:42:48 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Fabricio Akio <fabricioakio@gmail.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
@@ -116,11 +116,11 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
         linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
         Paul Sajna <sajattack@postmarketos.org>
-Subject: Re: [PATCH v2 2/3] drm/msm/a5xx: Hold a CPU latency request while
- the GPU is powered
-Message-ID: <54itft4rw53zcxoyx5vhxz3zfenxgooorp6lo44vbsdayrq4yi@3f4btdyicop6>
+Subject: Re: [PATCH v2 3/3] drm/msm/a5xx: Use the downstream GPU idle timeout
+ on A508, A509 and A512
+Message-ID: <s5qnjxh7sj4rtzwg46oeeukeg3exjxjxnlp53c7ldyi7edpau2@sf6wt5xdw2q5>
 References: <20261019-a5xx-gpu-pm-v2-0-457aafbb28da@gmail.com>
- <20261019-a5xx-gpu-pm-v2-2-457aafbb28da@gmail.com>
+ <20261019-a5xx-gpu-pm-v2-3-457aafbb28da@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -132,70 +132,72 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261019-a5xx-gpu-pm-v2-2-457aafbb28da@gmail.com>
-X-Proofpoint-GUID: 0jx4WC70DdG_eas2ZdLJO0UIVkzhqOOl
-X-Proofpoint-ORIG-GUID: 0jx4WC70DdG_eas2ZdLJO0UIVkzhqOOl
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA3MCBTYWx0ZWRfX2vVZNzky/vUj
- CKrd/zlgpf81lxyJDfn5ezi/iKIIl0TG7tn4Kgw0gCGwMXCJMHsgbGsETZ2f2i1iiIK7qcT4Ygy
- sG75LAjc1ru7cL2byN8zIBFTwyt7lBE=
-X-Authority-Analysis: v=2.4 cv=KOzPn1Fo c=1 sm=1 tr=0 ts=6ad8f989 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=pGLkceISAAAA:8
- a=j5_2AGnEbwvZtjme2gsA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA3MCBTYWx0ZWRfXxRDPjK8iQ9UD
- Z3XcYBdcmhPAt4W1LCHaU5cTXyPOkrRhFES/MYT9LbFxuJRf5zAyELHh1KVFNckRKZsvwg8LObL
- roIn27cpv+28o7xsSNA7k9ITlz9BMlJ14GV4IEujaaufXaBu8H3Ld0E6UZ+t6gDqF0RiA5kWMzi
- poKS8T/Ri3kAnVb5sWlHQWy27uvIDrmJ4MmWiucrkEEXSa70nCkyx4hXGdeCgnCEzZ5+Kzltal8
- YDsDwD2R/hyA8HAnSQPsiggm6eesdR2IqUv4lsx5aHajEnsh4DXvjsWVWShRV0DxyZO1yvmXtWP
- oVpZVqRYq3MkXpTOvviHmmhWiBXEG6kdy8qR0pRxCkYmpOnnnI0p2BNLBshyMCG+7H/fmdqRmrO
- nVxpdkNlASLGSmw8UI4bEWA4djjavQsrxvfgVOZYAyLEWkRguHwt+aRgsdAdQnvnXHEazXleidX
- W5TnJdVjRGFN0kFo6GA==
+In-Reply-To: <20261019-a5xx-gpu-pm-v2-3-457aafbb28da@gmail.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA3MCBTYWx0ZWRfX6BzBCMs0pGur
+ XkFaijW8eztpJwOJxtz1mZYHrp+Yf7LHDadGc5a8mcEihF4ELmo1xsXV2WKU9/oKJpXzAIgFDTL
+ 02VcdcThc9a7Y/03Qnk3QQrc5ef7ckA=
+X-Proofpoint-GUID: p2TwGo0BXvzAKNTg3-ZsrEaJv8_3L8Dq
+X-Proofpoint-ORIG-GUID: p2TwGo0BXvzAKNTg3-ZsrEaJv8_3L8Dq
+X-Authority-Analysis: v=2.4 cv=Ku7YSmWN c=1 sm=1 tr=0 ts=6ad8f99d cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ajoyPTHG4wiO7EjX:21 a=xqWC_Br6kY4A:10
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=OQN141zOAAAA:20 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=VJCrZHs55krGogs9KgYA:9
+ a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA3MCBTYWx0ZWRfX9W4RuZ7Cxjik
+ XZGKGi9eliloadsfg/MOmtFzOjMFKXTL31DiwdahOciAFfcIS0hbItVJD0JnXju2fC4sqIPgkgN
+ K5rj+vkgEJ053BM0sWXdBcvDtoN2TR+oLxRhDbohIdxuR8LQssiMVZl9mSOdgZXzu7qXTg30SKG
+ NQu5WzAkxU3WhtfA9oDoko82esKUHIIxfOSn+sLnAIwNTPk0UpU/WJoes8mIB9OoYE6+65vb4N2
+ pjhVW9+Esn6x/2jL8R+aJpL5pjCXeOsfPX4LxZMhCEIwyqDf9KB8eU3UPxtbnQOrDWxk+HYm/ii
+ pi8Gng3ujRL10SSgbj7YnwiFvQimYnCm+IjBVfZ9EAQ3groeUw8DadhtPHGjdDxRmmPfgAFMZWi
+ EqYg3Ji2HmVjxmSzUeKNCV8290XnpmYCMC/vuoPC18KICrNETIWaSyp+HTXY4tQglKcUGsP4c0i
+ 7YH5zRslSC2UKG1KrcQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610210070
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210070
 
-On Mon, Oct 19, 2026 at 11:05:09PM -0300, Fabricio Akio wrote:
-> On SDM630 the GPU was observed to stop executing while the SoC is in
-> system-level power collapse, and to continue once the SoC wakes. Its
-> interrupts have no wakeup route through the MPM, so it cannot wake the
-> SoC itself. A submission overlapping such a state would stall until a
-> CPU wakes, and a stall longer than the hang detector's threshold makes
-> the driver recover the GPU, which can lose a frame.
-
-Do you have any extra patches that you are running with? I don't think
-that currently Linux can hit system power collapse with the GPU still
-running.
-
-On SDM630 the GPU is running from the CX, but we don't vote on it (yet).
-With the CPUs awake we keep a vote on CX. With the cores going to the
-deep sleep, the CX might drop below the required leven, causing GPU to
-die.
-
-> Qualcomm's downstream driver holds a CPU latency request while the GPU
-> is active, qcom,pm-qos-active-latency, which keeps the CPU idle
-> governors out of cluster and system-level power collapse. Do the same:
-
-Could you please check what actually stops in your setup (CX corner, the
-BIMC vote, XO)? I think the proper fix is for the GPU to vote its real
-rail, scaled per OPP, in both RPM sets, rather than keeping the CPUs out
-of their idle states. I'll have it as a part of the CPR series, but it
-needs a bit more of the cleanup and polishing.
-
-> take the request when the GPU resumes and drop it when it suspends, so
-> those states remain available once the GPU has gone idle, and on
-> destroy, which unbind reaches even when suspending the GPU failed. The
-> limit is a per-GPU catalog value, downstream's for each SoC: 424 us
-> for the A508 in SDM630, and 518 us for the A509 in SDM636 and the A512
-> in SDM660.
+On Mon, Oct 19, 2026 at 11:05:10PM -0300, Fabricio Akio wrote:
+> The A508, A509 and A512 took the 250 ms runtime-PM autosuspend delay
+> of the A530, raised there because quickly cycling that GPU's power
+> hung the system. Qualcomm's downstream driver powers these GPUs down
+> after 80 ms idle, qcom,idle-timeout, on SDM630, SDM636 and SDM660
+> alike.
+> 
+> Use 80 ms for these three, so the GPU powers down, and releases its
+> CPU latency request, sooner after its last work.
 > 
 > Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
+> ---
+> The value is downstream's idle timeout for these SoCs:
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/arch/arm/boot/dts/qcom/sdm630-gpu.dtsi#L71
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/arch/arm/boot/dts/qcom/sdm660-gpu.dtsi#L73
+> SDM636 includes sdm660.dtsi:
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/arch/arm/boot/dts/qcom/sdm636.dtsi#L13
+> Downstream reads it at probe, restarts the idle timer when the last
+> work completes, and slumbers the GPU when it fires, dropping its CPU
+> latency request:
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/adreno.c#L901
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/kgsl_pwrctrl.c#L2981
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/kgsl_pwrctrl.c#L2467
+> https://github.com/LineageOS/android_kernel_motorola_msm8998/blob/ce9ea8f125c7302ae9b2fec84f23a69271e957c3/drivers/gpu/msm/kgsl_pwrctrl.c#L2753
+> 
+> Tested on an A508 with the previous patch: 1381 GPU power cycles at
+> gaps from 50 ms to 3 s without a fault. The A509 and A512 values are
+> downstream's for SDM636 and SDM660; tested on an A508 only.
+> ---
+>  drivers/gpu/drm/msm/adreno/a5xx_catalog.c | 18 +++---------------
+>  1 file changed, 3 insertions(+), 15 deletions(-)
+> 
+
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
+Tested-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
 
 -- 
 With best wishes
