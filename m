@@ -1,110 +1,111 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792595893;
-	b=zkX2NC0W2MA+SJVTRFQw4/jJln/tL0Dgk72OcEsgVSy/8/MozDZNlBBTkXWZzYweW19c
-	 2VR8DBP2Hz91MhTp9manR+vtd9CYsfbvHwzSEyOTOXqiuF5tq0NufbJONEZ55kZHlQfcv
-	 d/ZbvhwvZreBXTZ214D1FYZkV0VCptZpUWxcV3TY1EqXMG7QodIt0cmEofgbRD17V+qUq
-	 BzKtx4VP97+BXNjw8A78ZOhRhFA4rcfX8oAtOJs3LtvgUCD84+ieVgJYIg81ueNKHunIs
-	 jUMPjtU2SJda1O0yOUVqxeiDEjZ54g5br8pT4sMmzUYJsNstuRl2I+VNAnejQWJThGQ==
+	t=1792597411;
+	b=kvdOLYyvFbTtU2PBUF8l0/xx61Uh1Xf2U5CKVuSuwTIn8fOV+hAHJzr4eCHP4yCzlkPs
+	 zxQnZChcapONA74K26SS8YUXjmUD8B90hGqVFUd46rXriVIffVuyhZJBHOkQSYnaKLI8w
+	 LdiC4lM969N1FFjnKjLCQHdOnqf2rvsG5pnk0Ttyfk5FWNqKeSs/4E3oyUrwX9Usmfsty
+	 SL0WjKBbYYYYRNtQpnAPfO4x292HIypp73Rljomqx7md+5Lnas/AH5MsFBqC0hN2kjjRY
+	 K3Yj98tyHSNFgMxcj8T8et8zP44OOI95TDLqmvKbRGqOgKiOtCrz8JtZMFNAJmmLDoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792595893;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792597411;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=2/Y1qpBLY6fko34laYatPIwnPDHGmqYN6KVu8T65y1g=;
-	b=o4LNBBJv4u4ZbGFwcIgCChJahGCEpRIDkicpVBE2hkUCI5oxKXZBfixxUbf4Nd02gYLe
-	 RDxlRLyKsgxqbhSt7F1I/Jhdw7kIcwHtj824c9nagAFIgRm0APOYgjr/pAltITT0TFGqY
-	 ganchfMbKVRfFo8deFJ50Zjj9GPHym2eCYln3smxmHwhOy4uVIo635LeH4TA9Xs2cI9gC
-	 boc7akH/12k2Y17H95XBlegmuC5GFIQ8kxthHVYp029pv8wnbUEotSYR9bdx6epxGUXeC
-	 S5RXHv9Xi6z6pYExsMzpWzuvPG0vlDaGy8dBhV+FOpjN0Z3zHxUkJ5C5m/IcnttgpRA==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
+	b=fl1jRvGxwJCuBO36qy2CRhRHs4Uec8Fg+bRyI3ceOw1YKUG1UK5r7ZENya7vBLtL6KKX
+	 d8REYOq2utUdXDO/FLui3hZqephhgkfWFmNl0ooyQrSe/yyyzqdRA80DaF1dLhM4peH19
+	 UIIJnl0bM7KQPXXtjW/3mfVHjFkg8b+GNMkyxWpwqF9qJGDy5LgfQ6tCw6ijWVyq2nyqs
+	 ZIGh+cFMbkYalllqtTSsBLm2Atj9t2CKB6mNGvMDUhmBW5AZjcK3ebsF1rKD5lR+5LhOn
+	 bv1e8AIWAwep8dmsB8ilmDlX4ujhJ96Hvq4dSZYRaXMJSlZT+5HLiTOyKlpvbD4FlFg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VCT7th2c;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V+RFShZk;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7uIaIrF;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CrEbv59z;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 129A8606A33D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:18:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 129A8606A33D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ECA460A2616
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6ECA460A2616
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VCT7th2c;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V+RFShZk
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LEF6Ui1389731
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:18:12 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7uIaIrF;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CrEbv59z
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFTxic1481037
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	2/Y1qpBLY6fko34laYatPIwnPDHGmqYN6KVu8T65y1g=; b=VCT7th2cma/uVca/
-	uojpbudS4KLgTuvw7R5iopML3QM7QRwHtf8I6Ykd84Pn4qC09tGEfgfHMwP2qcli
-	QMdZ1eIDvq9SdQP7wbVCRX1pRADJZh2BNMSrAFKBOX/OO2hVw0a2P45RwPxDdhAC
-	Mw94LACE9fis3ZKWXaM9M1ljFG8OMfklBpmxiUtUxOat6uH2ATTXFpUiSQUV8nVQ
-	9LjV4kNh1a3YoCjQxytKFMPcmX4+JPjx+rsLKamIUeuEea1weRYmUh6a7LNZulbi
-	V0Y5v+T5JhMPGqNLhiolFD2C/52TxULFuM8ETENnsWcIyF6esV5eNdPpM/NIsz/5
-	HRNYQA==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajmksj-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=OsgokzbRwDMcoDaL2XCATM
+	4Rc4G+bTJ2AfnLyP/Jpt0=; b=N7uIaIrFZmqFsyEPzm8aAunfH0UjtfnSpF+zRD
+	h46/qOIEs7MHA9JRpCZ4M9bCDAM2YW6NbXUzFmAuuH3yLRZfN9u+zDx7YCwQEPxs
+	9wWpc/kTtsAJ4JvZG7+RhcuTeJo/Su8SBWr8u6qIyE8CqfLp4SubkBx+XrODtAc0
+	ftKFLqRiPfAxhr03yfgSBZ6XHBBeKqYkwgcQDLouxq/OAQi1MOkO56qofYukOIHr
+	Xh++zZZExLZFFx+n80YzpEHs+OyiWjCBp1qTinGVwbCND7d0fiNh1l3wriwOWdkD
+	9Oo8SLWdBTkC4XjO/UAx8Nq7o+9GdCzdVWKm9PeEFt8W/EUA==
+Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hegs0400c-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:18:11 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-366c279b454so1697101eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:18:11 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:29 +0000 (GMT)
+Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-151ba226e1bso1548106c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792595890; x=1793200690; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2/Y1qpBLY6fko34laYatPIwnPDHGmqYN6KVu8T65y1g=;
-        b=V+RFShZk+jNzA8VMCm6yyy5Tg8QkHVsgEuyrMlvajhDqPN4xNUf6hqw0tkUMZwDP9e
-         9kWoNlg3iGnqrFl2xphONoOVNQoRXqT8o4J141MIov/Rx7U4hm4APLZlJ+YlcToY2Ew7
-         9o5+1kUSLVErbFBNIs8a3DqxTIGiY8/0LxodzWNvhqfAHwzk7h5vbTz7DtZczzqWoQWh
-         YhCrkqh9pdpY45IULrpN26FeUK9gVfIPN3stvXqPVwOfDC0wHQkQe0DhloMlCX3u0guG
-         cQEvL9nRqiMG2YHym96LWJYuMsnMFhfVhXH7dEsGtwQuFMJoKrfctAN8gVy/2wpLsVA1
-         9juQ==
+        d=oss.qualcomm.com; s=google; t=1792597407; x=1793202207; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
+        b=CrEbv59zuRz1wtUBRdjbFgumpQwO8VsxJR0FalsoPvBCC/9XPFQOKXsJDgizT7cQ3U
+         Z7zflqcNWdw3ijHcXUBlXmfUTyI34bf0j9CmqVMJmFkW3IhUEd4OPNyA/DYNm+cLP/Br
+         +YXXsUGWfEhXK85RO6p6w50cKEt2SdF4uZPIPUTfPou7CuCRpV4CzmZptXZY2ohJxNId
+         HZRII47mNJlITGMvGbxW+qUGw+AZqZGbNw9FxIE6qk+walftgWorsks16eSxG/I99JpT
+         qLZ6Ur0ZcYxHrKt0rfNAKgEgup86Zgp0WuSFG/DrTks0m7jlkLV1xVUEXlJz7ZoYJ3Y1
+         VVIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792595890; x=1793200690;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2/Y1qpBLY6fko34laYatPIwnPDHGmqYN6KVu8T65y1g=;
-        b=vOjyznH/XFHoU6OiQvJ/h7ffMUOUSA1XRgeA6WfG0l0+tB9z8nKVbRjAvKGi/S20D1
-         LzTH9zahFZBjLpvmUASm+8ClMFNCGV/BV/3vGB2b4EWzg/7EguS1+0mqlXBWw5WcN82F
-         MKcc9iqDs2Y5MgY5pzobM3Pd2JPMbFwV/Zx7rOAGWfl4RgbrZOuznnTTvGCKdHv3AoUg
-         087xJfaeRG3wDpw+is0nKCyKfyZrHt2wg4trdbwaj3PHwKsOUlUH5tqkw2+VQ7Eu5hVP
-         eTXRPYoAgUMgnN/py4SK6ozkA48MzZmxc3VexkFK8IwcGOWQaLRjIMfrGQIYdK44TSg6
-         3oSg==
-X-Gm-Message-State: AFq9FYJ7lAIzoAaIuCjKOsQTD+9AMcw46xVSCcXVkpkIpHBFYY8PLKOo
-	UlsS6O72ECMREQ8HijKIOeAuBdaOjcfIPYbJHbRlOAAIjW+2nltHOzOGkRshq5v8pykD9kRhCO1
-	PIU2SkISyuZ1PDRX6rWd0F8pGBzi58MjEoUT7tia18Z55mNyd/EY9MYpM29zNGLOC5X3I
-X-Gm-Gg: AYBFou1yZHXH2ISWsHnU5F9e09Zps3JNwZEO+zBGMsskvaif4EWLAzSqJIH5bNEMPGF
-	oHonG1GIdgRdlrnJ+WXRO7q3KiBP6g9u6QhVR0/Jkg1dWP/5Bd2+AC/or4qExZrDCLBi/uqdXDZ
-	vDAqEWkmLlXwj3B/aoBwoGt8lqDCelpblp6Wh8msn+YJe0Y5OCbakBB/wBwh2g6aDoAPJy5MNoU
-	IePjsxAEjFo8jZIsIgeImm+fgZYU5NrbAoBlKMzoeTcOM8jRS+5mlvuXkBjNTEq7mrgDt2EXCLX
-	tzHDqaxwJGrf7QRXUu7nzbVpxBWWjPG/i+c1ae36iSbEXM17IERDCctUwRA0dxF55fBFq+2bh1f
-	rT98FysR72ruQLIrXc0LuMdgsQo0omBWl
-X-Received: by 2002:a05:693c:864e:20b0:351:1e2e:da4d with SMTP id 5a478bee46e88-3674d047ca9mr4050827eec.23.1792595889876;
-        Wed, 21 Oct 2026 08:18:09 -0700 (PDT)
-X-Received: by 2002:a05:693c:864e:20b0:351:1e2e:da4d with SMTP id 5a478bee46e88-3674d047ca9mr4050779eec.23.1792595889325;
-        Wed, 21 Oct 2026 08:18:09 -0700 (PDT)
-Received: from hu-anantiwa-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36740cc8c6dsm9142117eec.12.2026.10.21.08.18.04
+        d=1e100.net; s=20260707; t=1792597407; x=1793202207;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
+        b=LVa5TabAgo8Na+PlmEYOIaDWC6rFa39GGxQ9KXQI6zTBhGH7ls1mdc+POy5DEah3mz
+         q1p6WNUc+/cb33Un7ATt0bEf5pmNm39FX8RSFUCUprI+ZKoUIFPtEfuM+rMSY5IQw5FK
+         86cuokHsZPnwNgn1P3hJsy27w8J3wvUocFOApKfN6cgjurfw7APErqrWlbtTZ4WJtwEW
+         eqV/bag4DxvYykVwpABq2JhEp12TXnshpTVGNn1Tmc2MKw1kCtmwHzCGELdevRk1FCpa
+         0hvXzJzyiEy3hn/5UjQS2bd9wk6cjMa74wWbEM0j2Hc0bUwXfqnmfzmwvuit7IZdmNg3
+         9A5Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzfRVyy5+CCj1aew9AETTAIQG+J9SaNZXQX9oG8jYI/AOh+Z0VZnPZ0+rVVUqruhqK//Jn5OXW6o5aYfzVy@vger.kernel.org
+X-Gm-Message-State: AFq9FYKo03x6xVejzN9zgWBNzbECVM2uyJDp7R67vlRPNJA37d2SKtlR
+	LO9R1/TKPtnlefLgeLNseOCYpJW/akx38p49L3dPapA8QV3nJSprBZlfG91tv27DcGsCEUq5LcF
+	xnX9+p0LvetF9y0OodVckCLj9u78i5WXL0ujMcOko7ArmSfdmhMP4CfiDGHbfYrljbSLY
+X-Gm-Gg: AYBFou1SONWO0sW6GBTuy5sV1C5FdjGlyAI+5zl0tBweh4dJVbXUqGhRL9kxMOkkHlD
+	P6tPsJyGkbA//ZkJDCvYPxpZHFXRMazoaz+NBBTeGmQzdVYFGmSkrajUCYAF41MnhYP0C9NrGwZ
+	gFiL3mpxC92aMcqr9k9XRS03vLJT8qTggQTSzFUA0ZnsEgSx0nDAw8toPAqtlfLRew8w83/CE9i
+	EsiQDJrK1hbuXE0rnXG9Vu6oj8gDgafo8Wtj6DIbfks6UsvVs2w4JkpFKc0csFXYiEWY7CLchiu
+	eCs4IMH3ov4q6KiE2J0IjOXx1wsk2iEWYL9ZT+mxTbBp4MMa1jdSWUDe76HWOhc1kgOurRmC9O5
+	5w1u7VuSikOov82IE5Mx9IopV
+X-Received: by 2002:a05:7022:1715:b0:18b:ca6a:5e70 with SMTP id a92af1059eb24-190a0428c8bmr2011278c88.6.1792597406852;
+        Wed, 21 Oct 2026 08:43:26 -0700 (PDT)
+X-Received: by 2002:a05:7022:1715:b0:18b:ca6a:5e70 with SMTP id a92af1059eb24-190a0428c8bmr2011231c88.6.1792597405969;
+        Wed, 21 Oct 2026 08:43:25 -0700 (PDT)
+Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 08:18:08 -0700 (PDT)
-From: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 20:47:30 +0530
-Subject: [PATCH 6/6] arm64: dts: qcom: talos-lyra-evk: Add AUO G133HAN01
- LVDS panel overlay
+        Wed, 21 Oct 2026 08:43:25 -0700 (PDT)
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Subject: [PATCH 0/5] Add support for a TEE agnostic Inline Crypto Engine
+ service
+Date: Wed, 21 Oct 2026 21:13:06 +0530
+Message-Id: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,245 +116,121 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261021-lyra-display-upstream-post-v1-6-585caa39cd7c@oss.qualcomm.com>
-References: <20261021-lyra-display-upstream-post-v1-0-585caa39cd7c@oss.qualcomm.com>
-In-Reply-To: <20261021-lyra-display-upstream-post-v1-0-585caa39cd7c@oss.qualcomm.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIrd2GoC/x3MOwqAMBBF0a3I1A6YiAHdiliE8alT+CEREUL2b
+ rA8xb2JIoIi0lAlCng06nkUmLoi2fyxgnUuJttYZxprWAW86xr8Db4Bjo+w72R2fdd7tI5KeQU
+ s+v7Xccr5A8s/HX9lAAAA
+X-Change-ID: 20261021-ice-migrate-tee-svc-a5cd6959ae36
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org,
-        Anand Tiwari <anand.tiwari@oss.qualcomm.com>,
-        venkata.valluru@oss.qualcomm.com
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792595849; l=5076;
- i=anand.tiwari@oss.qualcomm.com; s=20260717; h=from:subject:message-id;
- bh=H8TzP8Dj675+nLSJdklFvA6bI8Vose0C+tpoATsgYZ0=;
- b=gjweYPGF24ry4jA6y8Z6u1TL36AQ/mMo/BMNOi42WJjw+p+cvuBIIelhqWQc4yeMFToRPzINU
- 5h0j+QlRai6CLulxPqZaUoBOOZQB63dTFto5IYfcjf/nAdXTKISvadr
-X-Developer-Key: i=anand.tiwari@oss.qualcomm.com; a=ed25519;
- pk=ygURjl6LxwG8EhgPNHYYgCZLsaXFgWZZoHRRyud5B40=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MCBTYWx0ZWRfXw2+tlA/FC7qX
- veZaUdmwqcZrjSg1w7j4t9GgrhZTLeLiulsm5smH/z1Eke+hXgIqV3upSJYBbiwj4y9YNsdrx95
- ZfLAo0cE8gKp31QwtIIolcDbVXL9EmMRaGgb7hnoxEvXzhwZ23iLyUFoZHipOjm6iDA0XYqGWQ/
- LKPVWVZFcystvvxQnIuJEe3Dc3ms3mxZAVeyFGKOj96R88bao56wBstJ0fTlxjL4NCUVy50iBss
- k7eJMmukAwQYF4emVeCUAIUNWhrtvOzZeAtblHbj3DQfNK81a/GvEjO/27xGqF246xKPsztdFJN
- MHCkjHAkOKJNMBOrpz6MRIZtcWpEoe9ddrBLoDOYdFSjOJfLBPk7dP9BxOD6hjoKqspiXt4R0KE
- MH6Md6YLmHxm8BiOeECKfFc9dv3ZE0icu6bE6hFnEn8N29pOurh7BazgY0YRYFCzOLEWGKNuDgN
- Xp01TpoivuBmNupCeSw==
-X-Proofpoint-GUID: c5U1HXhh-2LRMSceFMSAfmiXX16TrEpa
-X-Proofpoint-ORIG-GUID: c5U1HXhh-2LRMSceFMSAfmiXX16TrEpa
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MCBTYWx0ZWRfX8eKbSFIdwK2G
- xQuIhDtFmeLW2gBcrkv4Zz9gi1R9ePDHSMozIw+oaLFNZc3mz2b0zjHUgFi2B32f93+aust4Xhy
- LmdT3Qy1ZVbqbCjch3CQyzNYfauLYGQ=
-X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad8d7b3 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+        Abel Vesa <abelvesa@kernel.org>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>,
+        Selvam Sathappan Periakaruppan <selvam.periakaruppan@oss.qualcomm.com>
+Cc: Basant Kumar <basantk@qti.qualcomm.com>, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+        Harshal Dev <harshal.dev@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=3080;
+ i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
+ bh=TqA5QywZy39ISB88OCbEFOFyAshkmR9jiy1pUVRDiFg=;
+ b=Qka6Kp4DJqzvVn1Xvt08pcN7UqBDMqNuYV69QEUE4yRIdKP7epI7w+nupFNyK0NzDLMPA2R3e
+ BNY3TqyHmjrDo5Q72PR9B1jv3KOihg7odXqtp7VNq7ZzdRHPZ88gAmb
+X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
+ pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
+X-Authority-Analysis: v=2.4 cv=S/NMU4sP c=1 sm=1 tr=0 ts=6ad8dda1 cx=c_pps
+ a=JYo30EpNSr/tUYqK9jHPoA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=IIR7FofeaqIF4eDoK2QA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=_EMmJvYMAAAA:8 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=4CWejXOLIFnvMk5dGHAA:9 a=qcg49hLlgF0N60+LroqrWnV/Vu4=:19 a=QEXdDO2ut3YA:10
+ a=Fk4IpSoW4aLDllm1B1p-:22 a=emCv1hD2LFd8cNRmW21v:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX684M5j+CzKT+
+ kppJtjhnMgnswil7O7czcC093agrtsPxEKMcrZUoZH1ztVz0d1wkUvyUp8GMlBHdI2CGvWUQWDx
+ U/ezCLmifGmYSE1Z8appVwj1DG6DThsJPwqWnxvnhIuUr6ZeFhWw6+LgyUETjCQl1++vyGwOfyk
+ mcSjvKSpJBGw9D1+aJUVHsR0jVQxgOl5ArNCwmB3+E6/vCTuzmzGCGIsB5ia5t1KmvOx1UZt33t
+ tU7WPc8UjrUSj1cSVMoPaRO+0qqNGdfGGP3VBfUXeXEA5qQ8o7uaQ4Vvc3n/GRmJ11iqgNUhWaw
+ 01wdS//R58ElqWU1s+DSyWVC6GKOLesF2YneLDVq466QRvVxP4dddlTn1mI+l9UF9AESzUFe4SG
+ FpgimFItuYfV1LMuGg3yWJsiElCvPeviu3lTusP3RVJZ3SsjA3iFus2u9IV2NfWhqrvP9tiUqG3
+ 3YTFlt0tM7x5hk3r9uw==
+X-Proofpoint-ORIG-GUID: L3hIaC0hAJ5M9e0SQkVcNkEXff50TVYW
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX5EitwLd10Pe5
+ 4A/bhuJBEjGMTOBmp2ItUFdzI1bix1o1j50RTN4g6cXGDv18vH+7q5YyFV3egmMYdVZfIqqYRQz
+ BMe3sSV0W/bweGOqUStZdVSd5lsL/BY=
+X-Proofpoint-GUID: L3hIaC0hAJ5M9e0SQkVcNkEXff50TVYW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-21_04,2026-10-21_01,2025-10-01_01
+ definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
+ adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0 bulkscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210060
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210062
 
-Add a DT overlay for Talos Lyra EVK, to enable LVDS interface when
-LVDS daughter card is connected to DSI0_B2B on carrier card.
+Qualcomm platforms such as the IQ-9075 EVK now boot with both Qualcomm
+Trusted Execution Environment (QTEE) and OP-TEE [1]. However, the Qualcomm
+Inline Crypto Engine (ICE) driver currently only makes SCM calls into QTEE.
+With the arrival of ICE support on OPTEE [2,3] for Qualcomm platforms,
+there is a need for a generic layer which re-directs the call to the correct
+TEE at runtime.
+    
+This patch series adds a generic ICE service which provides TEE agnostic
+APIs to the ICE driver for requesting secure services from either QTEE
+or OP-TEE depending on whether an SCM driver back-end or a TEE driver
+back-end is registered with it at runtime. This series is logically similar
+to the one introduced for Peripheral Authentication Service (PAS) [3]
+which was recently merged to provide a generic PAS service for both QTEE
+and OP-TEE.
 
-There is SN65DSI84 DSI-to-LVDS bridge on the daughter card which is
-connected through I2C5 with reset and interrupt connected to
-GPIO61 and GPIO60. Backlight is driven by a generic clock-based PWM
-using GCC_GP3 on TLMM GPIO59, with an additional backlight enable
-GPIO on TLMM GPIO2.
+The TEE bus based client driver introduced in this series which registers
+with the ICE service has an ABI with OP-TEE that is 1-1 identical with the
+SCM driver's ICE ABI with QTEE. This is because both TEEs implement logically
+similar drivers with the exception that OP-TEE currently does not have
+Hardware Key Manager v2 support and so the inline encryption functionality
+with OP-TEE is currently limited to Qualcomm platforms with only Hardware
+Key Manager v1.
 
-Disable the default HDMI bridge and connector in favour of the LVDS
-panel.
+Validation:
+This series has been validated on a LeMans IQ-9075 EVK device by attempting
+file system encryption via the fscrypt tool.
 
-Signed-off-by: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
+Merge Strategy:
+All patches in this series touch Qualcomm firmware and soc drivers. Hence,
+it should go via the QCOM-SoC tree.
+
+[1] https://ldts.github.io/qcom-buildroot/index.html
+[2] https://github.com/OP-TEE/optee_os/pull/7906 (In review)
+[3] https://github.com/OP-TEE/optee_os/pull/8137 (Draft, depends on PR#7906)
+[4] https://lore.kernel.org/all/20260702115835.167602-1-sumit.garg@kernel.org/
+
+Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile                  |   4 +
- .../qcom/talos-lyra-evk-lvds-auo,g133han01.dtso    | 134 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/talos-lyra-evk.dts        |   1 +
- 3 files changed, 139 insertions(+)
+Harshal Dev (5):
+      firmware: qcom: Add a generic ICE service
+      firmware: qcom_scm: Transition to the generic ICE service
+      firmware: qcom: Add an TEE bus based ICE back-end
+      soc: qcom: ice: Migrate to the generic ICE service
+      firmware: qcom: scm: Drop exported ICE wrapper functions
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 614152913cbb..f0551bd2d8e2 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -473,6 +473,10 @@ dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk-camera-imx577.dtb
- talos-evk-lvds-auo,g133han01-dtbs	:= \
- 	talos-evk.dtb talos-evk-lvds-auo,g133han01.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk-lvds-auo,g133han01.dtb
-+talos-lyra-evk-lvds-auo,g133han01-dtbs := \
-+	talos-lyra-evk.dtb talos-lyra-evk-lvds-auo,g133han01.dtbo
-+dtb-$(CONFIG_ARCH_QCOM) += talos-lyra-evk-lvds-auo,g133han01.dtb
-+dtb-$(CONFIG_ARCH_QCOM) += talos-lyra-evk-lvds-auo,g133han01.dtbo
- talos-evk-rpi-display-2-5in-dtbs	:= \
- 	talos-evk.dtb talos-evk-rpi-display-2-5in.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk-rpi-display-2-5in.dtb
-diff --git a/arch/arm64/boot/dts/qcom/talos-lyra-evk-lvds-auo,g133han01.dtso b/arch/arm64/boot/dts/qcom/talos-lyra-evk-lvds-auo,g133han01.dtso
-new file mode 100644
-index 000000000000..3edb56937446
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/talos-lyra-evk-lvds-auo,g133han01.dtso
-@@ -0,0 +1,134 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/clock/qcom,qcs615-gcc.h>
-+#include <dt-bindings/clock/qcom,rpmh.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+
-+&{/} {
-+	bklt_pwm: pwm {
-+		compatible = "clk-pwm";
-+		#pwm-cells = <2>;
-+		assigned-clock-parents = <&rpmhcc RPMH_CXO_CLK>;
-+		assigned-clocks = <&gcc GCC_GP3_CLK_SRC>;
-+		clocks = <&gcc GCC_GP3_CLK>;
-+		pinctrl-0 = <&bklt_pwm_default>;
-+		pinctrl-names = "default";
-+	};
-+
-+	backlight: backlight {
-+		compatible = "pwm-backlight";
-+		pwms = <&bklt_pwm 0 100000>;
-+		power-supply = <&vreg_disp_3p3>;
-+		enable-gpios = <&tlmm 2 GPIO_ACTIVE_HIGH>;
-+		brightness-levels = <0 255>;
-+		num-interpolated-steps = <255>;
-+		default-brightness-level = <128>;
-+	};
-+
-+	panel-lvds {
-+		compatible = "auo,g133han01";
-+		power-supply = <&vreg_disp_3p3>;
-+		backlight = <&backlight>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			/* LVDS Channel A — odd pixels */
-+			port@0 {
-+				reg = <0>;
-+				dual-lvds-odd-pixels;
-+
-+				lvds_panel_out_a: endpoint {
-+					remote-endpoint = <&sn65dsi84_out_a>;
-+				};
-+			};
-+
-+			/* LVDS Channel B — even pixels */
-+			port@1 {
-+				reg = <1>;
-+				dual-lvds-even-pixels;
-+
-+				lvds_panel_out_b: endpoint {
-+					remote-endpoint = <&sn65dsi84_out_b>;
-+				};
-+			};
-+		};
-+	};
-+
-+};
-+
-+&hdmi_connector {
-+	status = "disabled";
-+};
-+
-+&i2c5 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	bridge@2c {
-+		compatible = "ti,sn65dsi84";
-+		reg = <0x2c>;
-+		enable-gpios = <&tlmm 61 GPIO_ACTIVE_HIGH>;
-+		interrupts-extended = <&tlmm 60 IRQ_TYPE_EDGE_FALLING>;
-+		vcc-supply = <&vreg_s4a>;
-+
-+		pinctrl-0 = <&bridge_irq_pin &bridge_rst_pin>;
-+		pinctrl-names = "default";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+
-+				sn65dsi84_in: endpoint {
-+					remote-endpoint = <&mdss_dsi0_out>;
-+					data-lanes = <1 2 3 4>;
-+				};
-+			};
-+
-+			port@2 {
-+				reg = <2>;
-+
-+				sn65dsi84_out_a: endpoint {
-+					data-lanes = <1 2 3 4>;
-+					remote-endpoint = <&lvds_panel_out_a>;
-+				};
-+			};
-+
-+			port@3 {
-+				reg = <3>;
-+
-+				sn65dsi84_out_b: endpoint {
-+					data-lanes = <1 2 3 4>;
-+					remote-endpoint = <&lvds_panel_out_b>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&hdmi_bridge {
-+	status = "disabled";
-+};
-+
-+&tlmm {
-+	bklt_pwm_default: bklt-pwm-default-state {
-+		pins = "gpio59";
-+		function = "gcc_gp";
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&sn65dsi84_in>;
-+	data-lanes = <0 1 2 3>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts b/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-index ec5c10a40521..20967c294543 100644
---- a/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/talos-lyra-evk.dts
-@@ -15,6 +15,7 @@ / {
- 
- 	aliases {
- 		i2c2 = &i2c2;
-+		i2c5 = &i2c5;
- 	};
- 
- 	dp0-connector {
+ MAINTAINERS                            |  10 +
+ drivers/firmware/qcom/Kconfig          |  19 ++
+ drivers/firmware/qcom/Makefile         |   2 +
+ drivers/firmware/qcom/qcom_ice.c       | 125 +++++++++++
+ drivers/firmware/qcom/qcom_ice.h       |  51 +++++
+ drivers/firmware/qcom/qcom_ice_tee.c   | 384 +++++++++++++++++++++++++++++++++
+ drivers/firmware/qcom/qcom_scm.c       |  83 ++++---
+ drivers/soc/qcom/Kconfig               |   2 +-
+ drivers/soc/qcom/ice.c                 |  30 +--
+ include/linux/firmware/qcom/qcom_ice.h |  32 +++
+ include/linux/firmware/qcom/qcom_scm.h |  20 --
+ 11 files changed, 690 insertions(+), 68 deletions(-)
+---
+base-commit: 8f7df005a7564bd7ffa75da9c3085d5b996f1e16
+change-id: 20261021-ice-migrate-tee-svc-a5cd6959ae36
 
+Best regards,
 -- 
-2.55.0
+Harshal Dev <harshal.dev@oss.qualcomm.com>
 
