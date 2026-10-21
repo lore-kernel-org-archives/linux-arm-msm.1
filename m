@@ -1,75 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=148.251.105.195
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.229
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792559789;
-	b=4II/0iOYEAuxr29Abcb1dCjdqGQumRH6XvPoGx3jKYvm996WXGiauKyfU+IsHrS/Po51
-	 9RsmzM02t+ql9kTIe6xd1LUc+EWApty44SUzdm2soKBC47G/3U3wGdb6Rappa/Lx5W1Jr
-	 7sHSH7bRhiySrxaWmHCWHm6j36iZHQM5129N8nUpE0vKxq3qlUqiuXHos3FLjoRRVwx61
-	 seTkqyz5EQM0/pQ9IbQSjQ10tXnhecQFg0ppQxdSJf0zpHhRpRzkLP7y3pwtnP24THKKe
-	 66XLBgh4g4N+tnUMjPdNQ3houUTZYJUrKVhJZUaWOC8ecPIzzRbhVUNYf9gOHJ2t8IQ==
+	t=1792560176;
+	b=4BSHzMLdRsttfOMzzJzOcIqdmSHFWFAcZqN3I1fexFGRfYVSglC18+Kux3T4cTqoomD8
+	 +PDMcbqmNupW+olbMR/jmEP8uurcqFeRAMPVrANodqNPz4DOioew/xmiToY7M12T3eFkN
+	 XNPm9QCXXR/MDc4V3zX5ziwtkG35pBO37PYatwDNN01bwD4v+L2dgcGd8FsBPd+jk3CWF
+	 PiE+WRmLoI2KTtartqfi/vw242m4pipDFE1ZZw4Kccq77p8Apfxga2QixGKgJfczg1SKP
+	 wUKgaFOlEiK8jwKWOvoWMrgDroPCV1/CZFbkGGchQXYgNfajBHfWZChhfUt+Hh12Vmg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792559789;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=Jwo5sz/tBtLbI2Uv00DIF9t3b00XSGJggTsCmZnslnE=;
-	b=R3+/1X2l4Qz0HL2NdEKWiJmNUnGGUvMwNOoV+jZTH6WdF70LdVFOpGo6+FAcvG314b1x
-	 +lf1hC4eGhkdmuMDhxU2k1rtXzQinsu76InKxwjiOWKNo2hTYO4ikJ7iPgdttxhllBz1B
-	 Du0Mdb5CmxnOJxACSHEJHDueK8z9YsFTUajay9HBBkAbGClAhYR4Eyamr7rDEaaPPu61E
-	 Hfkum+BVn7o+exAOfBoQzw/CZrIEMR8+uUv/DRUaKADF+6HdMuG6H8Ev2EKU79ibBtDuP
-	 T8uiGgZIU+l+5YqmOQjBjEqGAD3BTtf009BVqvdnrPqZSvsNYFUCwZ0JCGPIsQrCTrg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792560176;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=Swfs28hXtM8sdZG1SyRpeTzhFRqeD6kprzmA4qDc3ps=;
+	b=zuFThUgR5sRalh25pyAZ9YaWlBBPAy1oK+AGzZ+zBa+qgEdB0zApeheCl7QlnkRMF/Ir
+	 JJKlTZ8Eb0Pd1tihqnANydRYdF4Jntl9BcRrDo/cUuq6fivjHRfcFiLiZD64ehTALcZ3A
+	 72vpinUgInXZfrl4sAAkaXWHdU3EwDSDgJ1Z7ADPfdmA933gOOkL4PTvWCPveINUOYoQc
+	 s61yvs2O9dJMYPKTcjh/4gFIFN90HmzUwnAyKYOi4tlcvCstgu4EzzGZUqlvNXXSWTg1w
+	 bF8MYp3y5nk44AXaodMlK/ZMmq27BIkIMAVelV1IgE8yGNoC0exWeK0JD9PQvPmmB4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=collabora.com;
-	spf=pass smtp.mailfrom=collabora.com;
-	dkim=pass header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b=BP523HED;
-	arc=none smtp.remote-ip=148.251.105.195
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=RaXdLKKd;
+	arc=none smtp.remote-ip=91.218.175.229
+Received: from mta0.migadu.com (out-229.mta0.migadu.com [91.218.175.229])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC502606A31D;
-	Wed, 21 Oct 2026 05:16:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BC502606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE946606A31D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 05:22:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE946606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b=BP523HED
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1792559787;
-	bh=UtaOkbC6oXF9PskgOOgEz+UJHHl5feMuA4mZgvwvzBM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BP523HEDNrJsiOVl2bsRi8tXl2BwI1YXjPDFHRr7aRMYeeyjCG3qwDlPR21Eo+ghD
-	 B5yevWX+hUpQnGX0kSsyt9uUyEgBdpqSLBQkciS9oZ7EvIgK0aW+yaOPYl4uWPZXSI
-	 ZswhaSoV2QYV/P+JRCLZ4CkaZqK5TQNFnTq4JgUdDAmPrvd036tRfuK8rB9brLLBkV
-	 Uo0JOyLgnpSQJsoQESQ8K+zGheit6g4m9bJJRafCRUtAZTBbH8IEF1nGrVn0IJfy/i
-	 ii6ZAH/B2OJEgfetM1hfHTzV7t8mACrQVF4fMxgz9Y37nQlFTz0OEahi8dkkjBOnsc
-	 SdzOxcm6GrYsA==
-Received: from vignesh-thinkpad.. (unknown [100.64.0.157])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: vignesh)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id E97C017E0EBF;
-	Wed, 21 Oct 2026 07:16:24 +0200 (CEST)
-From: Vignesh Raman <vignesh.raman@collabora.com>
-To: dri-devel@lists.freedesktop.org
-Cc: daniels@collabora.com,
-	helen.fornazier@gmail.com,
-	airlied@gmail.com,
-	simona.vetter@ffwll.ch,
-	dmitry.baryshkov@oss.qualcomm.com,
-	lumag@kernel.org,
-	robdclark@gmail.com,
-	robin.clark@oss.qualcomm.com,
-	valentine.burley@collabora.com,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v4 2/3] drm/ci: update xfails for sc7180 trogdor devices
-Date: Wed, 21 Oct 2026 10:46:07 +0530
-Message-ID: <20261021051611.3328351-3-vignesh.raman@collabora.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261021051611.3328351-1-vignesh.raman@collabora.com>
-References: <20261021051611.3328351-1-vignesh.raman@collabora.com>
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=RaXdLKKd
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=TCPeloyadGAu87uW5ws1DgAebc3Cc2vxp0sBhDg8za0=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1792560174; v=1; x=1793164974;
+ b=RaXdLKKdviumWYiwGHPMbHseCFipUyls44pXG9jgvwNjPZtgZSZkzZ+Zg/K95zd/1lU3pQPZ
+ 7SlMiZ2+AdaKI8CPgfiLnmWFekeWzqsa9242nEAX0Wpmd5luBK3/HLFQW49AzXTW5PGjklRH+SD
+ I5BdvNneDv3Jv+RcoCo5VnfUbod+tVHKKaAfMQGqbkhJPtZMMH0sAFcNsqQIhsEuGcCcc97637L
+ BIVMJ8IKp4JD8JPubtiINSpI1qtx5gQg1Kr7NOkxeyPOQuA0C+F5iSgMRvglcBnUvwNRRN6ReYm
+ a9PLQ0rURddlF6KK/JF74grExaAk3MOBpilL0Eo13pYLQ==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id effd227a1c24da30;
+	Wed, 21 Oct 2026 05:22:53 +0000
+X-Mizu-Trace-ID: effd227a1c24da30
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <bfc5414e-5616-4a64-becc-d16c2b01ecf4@packett.cool>
+Date: Wed, 21 Oct 2026 02:22:48 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -79,75 +60,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] bus: mhi: host: pci_generic: Update the default
+ autosuspend_delay_ms as 5000ms
+To: Slark Xiao <slark_xiao@163.com>, mani@kernel.org,
+ jeff.hugo@oss.qualcomm.com, krishna.chundru@oss.qualcomm.com
+Cc: loic.poulain@oss.qualcomm.com, mhi@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20261021024038.17127-1-slark_xiao@163.com>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <20261021024038.17127-1-slark_xiao@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Some tests were skipped on sc7180-trogdor-kingoftown because
-they hung, timed out or broke other tests.
 
-Suspend tests now pass, and the other tests no longer hang or
-affect other tests. So drop those skips and update the expected
-failures.
+On 10/20/26 11:40 PM, Slark Xiao wrote:
+> For some MHI devices in some specific scenario, the default value
+> of autosuspend_delay_ms may not enough to handle last wake event.
+Missing verb.. may not *be* enough
+> This may lead to some unexpected problems.
+Sounds vague, are there any examples of the problems? A short 
+description of a concrete error message or something would be nice.
+> Refer to the Qualcomm's Windows settings and we checked this with
+> Quaclomm over case, Qualcomm recommend us to set this as 5000ms.
 
-Signed-off-by: Vignesh Raman <vignesh.raman@collabora.com>
----
+spelliiiiing. Quaclomm? :)
 
-v1:
-  - New patch in the series
+(also "over case" sounds odd)
 
----
- drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt       | 12 ------------
- .../xfails/msm-sc7180-trogdor-kingoftown-fails.txt   |  2 ++
- 2 files changed, 2 insertions(+), 12 deletions(-)
+> Qualcomm also suggests us to update this for all MHI devices.
+> Since this setting has affected some existed kernel versions, it's
+> better to be applied to stable version.
+Please leave the "meta" stuff about where the commit applies outside of 
+the commit message.
+> Fixes: d3800c1dce24 ("bus: mhi: pci_generic: Add support for runtime PM")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Slark Xiao <slark_xiao@163.com>
+> ---
+> v2: define a autosuspend delay timeout and explain the reason
+> ---
+>   drivers/bus/mhi/host/pci_generic.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
+> index 7193a384cca4..1f52542794d7 100644
+> --- a/drivers/bus/mhi/host/pci_generic.c
+> +++ b/drivers/bus/mhi/host/pci_generic.c
+> @@ -21,6 +21,9 @@
+>   
+>   #define MHI_POST_RESET_DELAY_MS 2000
+>   
+> +/* Add define of  initial autosuspend_delay_ms to accommodate a potential 'late wake-event' issue */
 
-diff --git a/drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt b/drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt
-index 154b047787b2..8d1768de90cc 100644
---- a/drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt
-+++ b/drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt
-@@ -1,6 +1,3 @@
--# Suspend to RAM seems to be broken on this machine
--.*suspend.*
--
- # Skip driver specific tests
- ^amdgpu.*
- nouveau_.*
-@@ -19,20 +16,11 @@ kms_dp_link_training.*
- # since core_getversion also fails.
- core_hotunplug.*
- 
--# Timeout occurs
--kms_flip@2x-wf_vblank-ts-check
--
--# Hangs the machine
--kms_cursor_crc@cursor-random-max-size
--
- # IGT issue. is_joiner_mode() should return false for non-Intel hardware.
- # https://gitlab.freedesktop.org/drm/igt-gpu-tools/-/issues/162
- kms_display_modes@extended-mode-basic
- kms_display_modes@mst-extended-mode-negative
- 
--# It causes other tests to fail, so skip it.
--kms_invalid_mode@overflow-vrefresh
--
- # sc7180 does not have APRIV, so memptrs is not protected.
- # (Preemption is not supported on devices that do not have
- # APRIV, so this is ok)
-diff --git a/drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-kingoftown-fails.txt b/drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-kingoftown-fails.txt
-index 2daf4ab879a9..96743acc399d 100644
---- a/drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-kingoftown-fails.txt
-+++ b/drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-kingoftown-fails.txt
-@@ -9,10 +9,12 @@ kms_color@ctm-red-to-blue,Fail
- kms_color@ctm-signed,Fail
- kms_color@gamma,Fail
- kms_color@legacy-gamma,Fail
-+kms_cursor_edge_walk@256x256-right-edge,Fail
- kms_cursor_legacy@cursor-vs-flip-toggle,Fail
- kms_cursor_legacy@cursor-vs-flip-varying-size,Fail
- kms_flip@flip-vs-modeset-vs-hang,Fail
- kms_flip@flip-vs-panning-vs-hang,Fail
-+kms_invalid_mode@overflow-vrefresh,Fail
- kms_lease@lease-uevent,Fail
- kms_pipe_crc_basic@compare-crc-sanitycheck-nv12,Fail
- kms_plane_alpha_blend@alpha-7efc,Fail
--- 
-2.47.3
+Not a very necessary comment, but if you do add it, please don't write 
+things like "Add define of". This *is* the define, we're looking at it..
+
+Also, it's not "initial" if it's not a tunable or anything, it's just 
+*the* delay value.
+
+> +#define MHI_AUTOSUSPEND_DELAY_MS 5000
+> +
+>   #define HEALTH_CHECK_PERIOD (HZ * 2)
+>   
+>   /* PCI VID definitions */
+> @@ -1483,7 +1486,7 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+>   
+>   	/* Allow runtime suspend only if both PME from D3Hot and M3 are supported */
+>   	if (pci_pme_capable(pdev, PCI_D3hot) && !(info->no_m3)) {
+> -		pm_runtime_set_autosuspend_delay(&pdev->dev, 2000);
+> +		pm_runtime_set_autosuspend_delay(&pdev->dev, MHI_AUTOSUSPEND_DELAY_MS);
+>   		pm_runtime_use_autosuspend(&pdev->dev);
+>   		pm_runtime_mark_last_busy(&pdev->dev);
+>   		pm_runtime_put_noidle(&pdev->dev);
+
+
+Thanks,
+~val
 
