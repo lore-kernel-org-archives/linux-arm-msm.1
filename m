@@ -1,98 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.66.21
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792559311;
-	b=UqyeXPaDQtcSJZ1PvR7vOapAE2Q5Isemyvd63WndBDpV3lvejwQe02hLgU0bDBISKE9D
-	 f8rmss1pV1kL7O/OOqbQ93qsCrWyfZ/NINAOlpM1ftXFA2+LfLHx56eyLhzCveBedV2hf
-	 17KsXgSwXQ1sT8iowlxXsvwlbWnSaIqr6mzD63M+6bS8iO+sQ9Xz00HFT8zArdS9weF55
-	 Nmg9HvDwq6tinxW/714bmToPkS2aUNvBYFP1EvALGGXkx8gpp9o6iEZKSXFQMoklYOiP2
-	 p+T/6RLKKo6SPL5WOED/OCiLLkYT7Gr0pBJ24Tq495/jb41zhkHz/zltRhyEpNUnQiw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792559311;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 Content-Transfer-Encoding:Content-Type:X-ClientProxiedBy:
-	 X-Microsoft-Original-Message-ID:MIME-Version:
-	 X-MS-Exchange-MessageSentRepresentingType:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=EEG0F5trYOJiwaMt9GICUjoHMyqUp8+rnYGkifHjDUs=;
-	b=syaU6FD4G4Pirg+uJrbvc5WchqHOzafMsuYo0R5da6P+fc4tNxu8ND7SUwa5494+2SS1
-	 2AFcI2Quq02bNVQft04qpm562g01TAsb7kZStGtFshd3pO10dmT6Khm/72DwTbwQgiulh
-	 Uy7wt9fzXSM1eyfRZKE/hfo+R8VzOjOO53Tr1TsQtvSsg9MfqAjnXh501cJXRiYQdG7u2
-	 s5rtIvG/p4osKOMJjNWVRpjF+fYnXo6ch63q4/z3jHdz0mg54XQBlHDUvw0Ayk6XrqEvc
-	 /JCGogl5ucBUvRwM4GgIaVOWw/jjDK/sX9gW9y+s5IZ4xgesmD2C1QEcPtsS2XK+ljQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=hotmail.com;
-	spf=pass smtp.mailfrom=hotmail.com;
-	dkim=pass header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=NWURVYwC;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.66.21
-Received: from OS0P286CU011.outbound.protection.outlook.com (mail-japanwestazolkn19010021.outbound.protection.outlook.com [52.103.66.21])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792559316;
+	b=P1iC0B/0RdGJ5vwC/StLF9oqy0Mf3pg64GPoaC4WoDKq3V6hkNPO+WMssOuExMZwcDmP
+	 UDv4ihrP+Dus1QPdH5VNiTAKyGMNvYW86357+WQipMKC3iCfJoJeL7e7GNpIQagDINuO1
+	 DP6PvqDYuSuimxgKhweh05hkB2y06G3lJaOSVUZZbLVqdskbGtMeHN7+wtJGZE4EXNcjp
+	 /CD3lx7FuokQ61RcTWmWCLM0H8nd5SEhHtXi3LodOKxEmOXf+o4ui8rUAE9ukMkdv0wxV
+	 Ug/0bhSOOEYZiQi94of2ZU8uqKl/u+g/IiiDH/PIuN+C6Xa1hSDKWKqqb4rNYaoswWA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792559316;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=QkX0db4m40DGwuOP5Wxaheolr6mMnrhzfPJ3IEdQt68=;
+	b=0GNXXZ5PypdV9nKqzlwmT3YXy/oCe+4+V76sJMpF2zS0vGRqi6jnG2doDxtyIujL0cO3
+	 dursTQwVSpGKq1kAFF0OJd2d5H2WoduK42SxO/Y+LJb0k8ReyiYHsc7KQrI/TVIwQSvDC
+	 5u7TCGZJsmACoflHmCX+zPbbIvqeIio6UqFRfCkrL4+5DQ7Rb9gSODskYLNvLjUqW6zkD
+	 xhS903GmxuWE94USm4Z+/3q3ILN0raMLdMosQgERLxVhRXm1nDwkTEv3w/PjQwoVXKJ+f
+	 YsUzqNiBehrhIhVmOMYO94f8MGOjre5SxTKrNYsYCvk3R+mEK9V7kiMd0kzN9PKwWqw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cAuON3Sh;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78CD6606A319
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 05:08:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 78CD6606A319
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=hotmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hotmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3087B606A319;
+	Wed, 21 Oct 2026 05:08:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=NWURVYwC
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UhaXXA2rvvTICbaFzsVmS9vp0cguKM/SR0UMhcEyWEfGpFAVhK7lmjRlDPLVY828+x3v7J9CscPpLAAsILX0pH+q7bfP8PtszdJtpjQg3FAHYFftFY9xjD/FnmnvaH63DnGCkiJwWkvahR50WEHXSSJMro/LsQwqurpI3ROjexXq69kKKBu6drLe005CjqHEyk+4jgd4G534izkvuH+SOks8GEcfe/VT+H1ctu0vygfnWmqMUKs9ZgsQLPbxWTh1jO3JHWKHHroh0QPaRqw7qjZHpnNL73GYtZB1NJxk+DZ18nKh+JOB+mAT2aBSw0DICNNsTyBXMiOj3TDLppj/SQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EEG0F5trYOJiwaMt9GICUjoHMyqUp8+rnYGkifHjDUs=;
- b=R7rjRCEG2JkAm4tsnh20oQzppygxCZlqd56bzDcD3inJHCvXFnVfpqLXeZ68OZr86moTBySFWqoZQ5cwDRlZB3PHR1JPxURai6pTyJIWAnzXZ29NRngvmCbEh48YlBvcrCHiWgztcdGTSrmDLB4Gk9YZOPanFOVDJvS9oA6RHPXOah/NXDyhU73aA3pgP/FXaI7/m0ojpIXDVYcO8aNca5JtPWcgGtNHLCOMTks9Xxt2h6wAsK+aZpgADWhedthuNRn67jWcLw/LgkXxwYS2gOLJFkFZBiNkzq8ddIwIO90VP4v+UNIcq4LT5Hq0yG6EnolgRUZK3ULI6/3d1d+sYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EEG0F5trYOJiwaMt9GICUjoHMyqUp8+rnYGkifHjDUs=;
- b=NWURVYwCvZbXIinSlTIGqiDNHcXz9w8QnRE692Q/boEtCOgqIywmL2lCUOEkY9iwgu2trj6rqzJUJGirGCorElvGIAmyiNlJvpyxuqoXX+J2J+tBVtSWGklMP7Bv1zZ3f1F2J7PPIKEZbaoafvBVYqLHVsuWIPFqtuJGg8SBjVLG2Hh5dYXYjnqEsk5EoOGce8sNkrkR1qqG84u17C6RlHpaS/67+ytJOE8W4dYKvlXnqLQsxtjal9K5wKWk7OP2CxcRhw4XtYbOE1f6xqEQwDlLMGwICrlvLXoa5AoNGcrLm0859mocgnV5nk4nPmRDDjoplYOlaTmrqv7ngdb8Bg==
-Received: from TYCPR01MB11847.jpnprd01.prod.outlook.com
- (2603:1096:400:37f::11) by OS3PR01MB9737.jpnprd01.prod.outlook.com
- (2603:1096:604:1eb::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Wed, 21 Oct
- 2026 05:08:27 +0000
-Received: from TYCPR01MB11847.jpnprd01.prod.outlook.com
- ([fe80::f2a5:bc4e:c886:2688]) by TYCPR01MB11847.jpnprd01.prod.outlook.com
- ([fe80::f2a5:bc4e:c886:2688%5]) with mapi id 15.21.0546.012; Wed, 21 Oct 2026
- 05:08:27 +0000
-From: Venkat Yadlapati <venkat.yadlapati@hotmail.com>
-To: sumit.garg@kernel.org,
-	rob.clark@oss.qualcomm.com
-Cc: akhilpo@oss.qualcomm.com,
-	andersson@kernel.org,
-	freedreno@lists.freedesktop.org,
-	konradybcio@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	lumag@kernel.org,
-	venkat.yadlapati@hotmail.com
-Subject: Re: Adreno 829 (SM8845) zap shader: PAS init rejected by TZ under Gunyah
-Date: Wed, 21 Oct 2026 10:38:17 +0530
-Message-ID:
- <TYCPR01MB11847A5E995747FEC1D8050B89F662@TYCPR01MB11847.jpnprd01.prod.outlook.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <OS7PR01MB11853CE810810E80B3AE708AA9F9C2@OS7PR01MB11853.jpnprd01.prod.outlook.com>
-References: <OS7PR01MB11853CE810810E80B3AE708AA9F9C2@OS7PR01MB11853.jpnprd01.prod.outlook.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MA0PR01CA0102.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:af::18) To TYCPR01MB11847.jpnprd01.prod.outlook.com
- (2603:1096:400:37f::11)
-X-Microsoft-Original-Message-ID:
- <20261021050817.60985-1-venkat.yadlapati@hotmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cAuON3Sh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97D111F000CE;
+	Wed, 21 Oct 2026 05:08:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792559316;
+	bh=QkX0db4m40DGwuOP5Wxaheolr6mMnrhzfPJ3IEdQt68=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cAuON3ShW2wBA2gcnkl7H4wIdlmQH0gfJo8zFiGjopvTEQF0v4/2jKDmQmvvU1Ywu
+	 gGc5fVTJoSUrA733BvZsMnAM+Lmt4LpCW4OHoCNVM/OQPw90v/9c2F25Dn1xNN7fSl
+	 Gfk7ZjX+bttaxZlGhiEojpJlrc1udHDC8i9mMnAiGqpP40GhW5ih+HLMRNPqUbRoVz
+	 XHL2EkDcQaIXl6GQxM1mXGmYo/TUnPtruTkrCnYc2qtzWu6iTAC3Mfp5n9PPmvjPiu
+	 KbkMzgXVHCYRGXVrQ8bUnnHxss7C06HvmWHzTHhYHnUz303empsFAUUkr4iQQ7GjSa
+	 JonhXcFMqk7NA==
+Date: Wed, 21 Oct 2026 07:08:19 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
+	Yingying Tang <yingying.tang@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, ath12k@lists.infradead.org, 
+	linux-wireless@vger.kernel.org, yintang@qti.qualcomm.com
+Subject: Re: [PATCH ath-next] wifi: ath12k: change MAC buffer ring size to
+ 4096
+Message-ID: <5ygj4wgwd7tvuma4f4cmvc46cw2lhabmruk2nxeh44iktn3owg@cxzsmik52fh2>
+References: <20260610031358.2043716-1-yingying.tang@oss.qualcomm.com>
+ <atcr70WFLxp8zreK@QCOM-aGQu4IUr3Y>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,93 +60,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYCPR01MB11847:EE_|OS3PR01MB9737:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3766eb00-4d3c-4faf-0f8b-08df2f3156f5
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|24021099003|25010399006|260925184616899003|51005399006|5072599009|23021999003|8060799015|15080799012|19110799012|40105399003|440099028|3412199025|1710799026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?tH9b5QqHZ0FrWqcLyAnglKQqpUNJmwyfEL2sDeumRev12Y/NwqfECMM0ZX7q?=
- =?us-ascii?Q?1dYZCfWQgIOaYMbW3mjKrMzdGuQqL7dubStMb7HtPr8bSz7FUSYpkSWZ6tao?=
- =?us-ascii?Q?ZBhJW5W7QrzwTkei8eWuE2TTYN4pQFg6PoXTl3KdROGV1vXsx7YdtOC188Ry?=
- =?us-ascii?Q?txqgkuf449lwdTvihaGY0il+WotnuYxalAjvE6B7Lml36CbD6VO9CRq3a9B8?=
- =?us-ascii?Q?NI58+1N+nwoPsSdVU5sKTEysWy9jw9psh1OLbQo9t8nDonJgyuwvVI+qbU4C?=
- =?us-ascii?Q?cQoWwMhlyX/UgCZhqH+DSnDc7X8fnC3O8jPc1zU8fe/LxbdkxgVKboEPHE2F?=
- =?us-ascii?Q?zkmMAZ53Yxmp2FwZy38X1GBD2h4O3VEYtdqthY1K85YEiDrahQIA5oXsobrt?=
- =?us-ascii?Q?l/rRyO/tUgYiYbNDa7CFZ225yHwtE2iQaaxIPrebJLLBM546R8tipNHyOvHq?=
- =?us-ascii?Q?2VSOfOKQb665yLxa2G7Fi7b2MRJTF4RWrCCPX9k9KFtxFW/viWegjLrNeya4?=
- =?us-ascii?Q?kdsmUutKy4yabsF6lcRKkFCT/SKZem+qB9ySUoIS6PnJozh1+Qb/2I78t5cR?=
- =?us-ascii?Q?9w0cpvYwog7jp13kQjJn1OzGJSl1PyyT1qZvfVwPmCEhEbH4sQaX+fyeR+Sc?=
- =?us-ascii?Q?6xwacU9ZKaG3JGdJv0OnCI6kxMl1Lkglt0p944AT+AG2mgcldOeiiJKSmiIB?=
- =?us-ascii?Q?QvdC8ZV7RAGL8ksSJhngwnMZegy56jGOfSLUOpS6DCov1nmx7sRW9E1WXnHm?=
- =?us-ascii?Q?bMnza5Hm7oBH8PXuKYnocvC46kD4q+78VTnSxxLxOdEezWQZIs4j5gHk9rGT?=
- =?us-ascii?Q?e0rQyCjlUrdQRZTxdv08c6O3ZB2qCyqV6rABNyEXjWORMb/ByKrauGE4GILr?=
- =?us-ascii?Q?DuZCwc2DXK7u1xfwMQzcy/rIUIV4Tc9h9rcBIdJuk+UxuBfqF42xxcw4JBy1?=
- =?us-ascii?Q?KDxIQpdiaMrxXXObINCgtg=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?fXCk3iJEeNNPJTXBY0vHAuQF4yur5IeOUtYW+eRfq0fiLPn2+SwCJJlCOQ0o?=
- =?us-ascii?Q?MVDoqe2/nu09xnVK61XG1c76g/VRDHt1ooVARrhi4Zqnm15ta7hC89o4MVfo?=
- =?us-ascii?Q?fBe2QvHzPgTJG5XhezWdxyw3t1UOom0d5msMzssKrjJmjYYeiGrtnfE4uCbm?=
- =?us-ascii?Q?adE9LhrNLIqUTyhu4yb8Ro2HptGteyHBlcn40nyjVxdhveEEzOYlEg+L2iBV?=
- =?us-ascii?Q?YkzF2mb7OQnQr6sikWnUTFowonA3zQtAjLbAdcThOz8FVD8oe3TkhJT+jgKf?=
- =?us-ascii?Q?m2IN4blxVQ7l26z828ucySb2AopHyMOsmWi8NIi5vT1qBz+BudOZfBaSXJja?=
- =?us-ascii?Q?3vpUJ7GV5inV2+jL+MwAb+RN7bNIfdd+FgNh5/NMidH22Z3ttwEnsIaNyZOl?=
- =?us-ascii?Q?dyGhORkMcPJ1bVakv5nPdttPQSuSsUnVp0WZmvZn36EjBXCBpyKruFS532av?=
- =?us-ascii?Q?Dt+w/K2/qP4MEpUDjeavv4ONbe93K074rhF1NBr2jHUEVhTL079qeyNzi1hv?=
- =?us-ascii?Q?i2vfQJUoGHRYNTL3o9tts2Fedfsm87bV5Rp5RxMze6CwM3Gbsxq/+moh6Gyl?=
- =?us-ascii?Q?uhoYvy7Qz7ksc3HjjoNoxce+V2kUcpnbvLE4hbnjhZGb7GEY1SL0UdOUquIN?=
- =?us-ascii?Q?1bR4N0A6o7oq/7IOkzOr4EfKQX5btPLoOws1BWGFJeUUCuF4P5uz/6ua+IBg?=
- =?us-ascii?Q?l7iOpxfEVAu2Es+KZH0NXCpyhybJYtLCgCLTHZOfD5qkP3zPCYzfO39kcgGk?=
- =?us-ascii?Q?KzQDvYi3w9Z5BZS2yPl0XuTFDoOCIRgUaEFVQzED+hiIBFiuc4NbtJwEo1Hm?=
- =?us-ascii?Q?Z1N9pJFh4+nPEfsr5E7S5kGx/klfVbesRTR5rZak1G3UwMiv0SKKQu/ZPEbn?=
- =?us-ascii?Q?Lai5BrGnRQdK1L4APkhDwhjbur6GFXPTTjIhkP1mGWVkpdlzNBwYWBP12WTE?=
- =?us-ascii?Q?O0+iRTuF61HgAs5lSeP0u+cji+NE+VhxyhoQBtJz7qqNG+rU5anZrnsMOVcM?=
- =?us-ascii?Q?IcM5W8O4p3Z7XgoCXhIQazuWCjIan01bmAXR4g12bNiLC5iGRdSQT2G0OJzV?=
- =?us-ascii?Q?GgpvEOhXrE0xikMp9DKHgGjxvWEctpTzuen/DVtXWbDWGq5ni0nCL4ZSIp0V?=
- =?us-ascii?Q?QU+xLtf1UZeLODIO11jC691IPiIRRJjlnG40pPXiO1gJ005ZYbm933O1MhFg?=
- =?us-ascii?Q?fv9zqQC0w2hy1s0mJmeq2reupZc7rvGjcpcX9FYk+05s2K3uBNbBfqhnLZVN?=
- =?us-ascii?Q?Fx5Xwx5eRJpImZ894DkealqVvxylCM/3weSo19dk79b/LAwW567goPc81ZS7?=
- =?us-ascii?Q?EMP2xd8UsY3zqrqND3uBpyMx/6tdEwv2CA/mpJxmfJ54LOfOxNkwDkawA7+X?=
- =?us-ascii?Q?U1y6H83ClE0GNwEcv+uFGykHD+FA?=
-X-OriginatorOrg: sct-15-20-9412-3-msonline-outlook-b83fc.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3766eb00-4d3c-4faf-0f8b-08df2f3156f5
-X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB11847.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 05:08:27.3945
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3PR01MB9737
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <atcr70WFLxp8zreK@QCOM-aGQu4IUr3Y>
 
-Venkat Yadlapati wrote:
-> Which listener or QTEE state does PIL init depend on for these
-> subsystems, and is there a way to provide it from mainline?
++ Jeff
 
-Hi Sumit, Rob,
+On Tue, Oct 20, 2026 at 04:53:03PM +0800, Shawn Guo wrote:
+> + linux-arm-msm
+> 
+> On Tue, Jun 09, 2026 at 08:13:58PM -0700, Yingying Tang wrote:
+> > For WCN7850, MAC buffer ring size is updated to 2048 in
+> > 955df16f2a4c3 ("wifi: ath12k: change MAC buffer ring size to 2048")
+> > to increase peak throughput.
+> > 
+> > But during the RX process, a phenomenon can still be observed where
+> > the throughput drops by about 30% from its peak value and then recovers,
+> > and this behavior repeats during RX.
+> > 
+> > After increasing MAC buffer ring size to 4096, the data rate drop has
+> > gone.
+> > 
+> > Tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.1.c5-00302-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1.115823.3
+> > 
+> > Signed-off-by: Yingying Tang <yingying.tang@oss.qualcomm.com>
+> 
+> FYI, in case someone else runs into this: with this change (merged in
+> v7.3), WiFi on my Lenovo Yoga Slim 7x (X1E80100, WCN7850 hw2.0) stopped
+> working with the older firmware that Debian trixie still ships
+> (firmware-atheros 20250410-2):
+> 
+>   WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
+> 
+> Probe and firmware download succeed, but every WMI command times out
+> once the interface is brought up:
+> 
+>   ath12k_wifi7_pci 0004:01:00.0: wmi command 16387 timeout
+>   ath12k_wifi7_pci 0004:01:00.0: failed to send WMI_PDEV_SET_PARAM cmd
+>   ath12k_wifi7_pci 0004:01:00.0: failed to enable PMF QOS: -11
+>   ath12k_wifi7_pci 0004:01:00.0: fail to start mac operations in pdev idx 0 ret -11
+> 
+> Bisecting ath12k between v7.2 and v7.3 lands on this commit, and
+> reverting it on v7.3 brings WiFi back with the old firmware.
+> 
+> Unmodified v7.3 works fine after updating to the current linux-firmware
+> image:
+> 
+>   WLAN.HMT.1.1.c7-00108-QCAHMTSWPL_V1.0_V2.0_SILICONZ_UPSTREAM-3
+> 
+> On Debian trixie that one is available from trixie-backports
+> (firmware-atheros 20260916-1~bpo13+1).
+> 
+> So nothing needs fixing on the driver side. I'm just leaving this here
+> so that anyone who sees "wmi command ... timeout" on WCN7850 after a
+> kernel upgrade knows to update the firmware first.
+> 
 
-Please disregard my question, it was my mistake: the zap shader I
-loaded was signed with the wrong key.
+Thanks Shawn for reporting this regression!
 
-The stock vendor partition carries two copies of the GPU firmware.
-/vendor/firmware/gen80900_zap.mbn is signed with the Qualcomm
-"SECTOOLS SECP384R1 CURVE TEST ROOT". Android loads the copy from the
-modem partition (/vendor/firmware_mnt/image/gen80900_zap.mbn), which is
-signed by the OEM. I had packaged the first one, and the production TZ
-rejects it with 0x300045.
+Jeff, this is unacceptable in two grounds:
 
-The early Android failure I described was the same thing: the video
-driver probed before the modem partition was mounted and picked up
-the test-signed /vendor/firmware/vpu40_1v.mbn. The later successes
-after qseecomd started were a coincidence, PAS loads keep working on
-Android with qseecomd and keymint stopped.
+1. Driver change *must not* break userspace, in this case the old firmware. The
+driver must maintain backwards compatibility even if the data rate drops with
+the old firmware. This is the promise, kernel strives to keep up from the
+start.
 
-With the OEM-signed zap, PAS init for 13 succeeds on mainline without
-any QTEE listener.
+2. The offending patch didn't mention anything about the firmware
+incompatibility, which is too bad. How does the users be notified of needing a
+firmware update?
 
-Sorry for the noise, and thanks for looking.
+So I'd suggest reverting this commit and come up with a new change that
+preserves the backwards compatibility with the old firmware while fixing the
+throughput issue.
 
-Venkat
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
