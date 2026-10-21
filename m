@@ -1,56 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.229
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792560176;
-	b=4BSHzMLdRsttfOMzzJzOcIqdmSHFWFAcZqN3I1fexFGRfYVSglC18+Kux3T4cTqoomD8
-	 +PDMcbqmNupW+olbMR/jmEP8uurcqFeRAMPVrANodqNPz4DOioew/xmiToY7M12T3eFkN
-	 XNPm9QCXXR/MDc4V3zX5ziwtkG35pBO37PYatwDNN01bwD4v+L2dgcGd8FsBPd+jk3CWF
-	 PiE+WRmLoI2KTtartqfi/vw242m4pipDFE1ZZw4Kccq77p8Apfxga2QixGKgJfczg1SKP
-	 wUKgaFOlEiK8jwKWOvoWMrgDroPCV1/CZFbkGGchQXYgNfajBHfWZChhfUt+Hh12Vmg==
+	t=1792560305;
+	b=n4i9FQkXXoexmrkGd1/nAv9e5Un1vIhNnVPN3vY8SmyNY7OMn8lP85u6VWhud2DGvgHe
+	 aI0cIlalafK0SDjuC21uWzavGeF0lAcNCdKnJYUYlv9DaVZUe3DqKrBsI6G5qYzU4YPip
+	 thQbP9YdLdwTc7DLbcjyTJDzNKn/bghpspsAoNnnPVIXaPcMHLUn3GiWPkZW1n6HcLQYK
+	 Ub38J7ZDf0u5UCqkXcrFKn6ySdty6v/pT36Z85Ram7Q0j2zn6PWYx30QTrBWdRjfN1vps
+	 xjiVe5OoF287srS7kySudGXLIwc43wfduLyEpOZUP63OIu8UMY1QLxFnu4PBLw5UvpA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792560176;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=Swfs28hXtM8sdZG1SyRpeTzhFRqeD6kprzmA4qDc3ps=;
-	b=zuFThUgR5sRalh25pyAZ9YaWlBBPAy1oK+AGzZ+zBa+qgEdB0zApeheCl7QlnkRMF/Ir
-	 JJKlTZ8Eb0Pd1tihqnANydRYdF4Jntl9BcRrDo/cUuq6fivjHRfcFiLiZD64ehTALcZ3A
-	 72vpinUgInXZfrl4sAAkaXWHdU3EwDSDgJ1Z7ADPfdmA933gOOkL4PTvWCPveINUOYoQc
-	 s61yvs2O9dJMYPKTcjh/4gFIFN90HmzUwnAyKYOi4tlcvCstgu4EzzGZUqlvNXXSWTg1w
-	 bF8MYp3y5nk44AXaodMlK/ZMmq27BIkIMAVelV1IgE8yGNoC0exWeK0JD9PQvPmmB4w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792560305;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=QO11p1cdvBfNgfWBeER77MVqw8qS2d4+wBk/vDSDlTM=;
+	b=v9cbhpfuyKt8vjyObKCjNtZPTod8Ek3y+raNye4XC0W+qx7ApdRsLKnM8vDopVM/IsZw
+	 sH1+V1JMLokfF4uchdfu62WSuRpYgAfJA/ptcoFjSVdhYITCHcQSWB8i5sBcQCznzSEeq
+	 W3XAuXUnLdsJZvlYNoYZpN6oy7RkV8j7qcoWXXBInhf82YhnM9Z4W8ro/0HpqQEx66RpT
+	 wl6q1DByRjaN4nov9ravt26lmtFLaX8TpSbwJgWLjmLcc3oZ/+sB20UUM1iRdAMhvyV2Q
+	 laxyAyedsm9aJ2oDsmJKCoN0MK4GY2JwSnOLF6z5lcaEHc2YQX7pMdIqlKcDg5B21Fw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=RaXdLKKd;
-	arc=none smtp.remote-ip=91.218.175.229
-Received: from mta0.migadu.com (out-229.mta0.migadu.com [91.218.175.229])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gExZuUhk;
+	arc=none smtp.remote-ip=209.85.167.44
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE946606A31D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 05:22:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE946606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D05E3606A31A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 05:25:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D05E3606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=RaXdLKKd
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=TCPeloyadGAu87uW5ws1DgAebc3Cc2vxp0sBhDg8za0=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1792560174; v=1; x=1793164974;
- b=RaXdLKKdviumWYiwGHPMbHseCFipUyls44pXG9jgvwNjPZtgZSZkzZ+Zg/K95zd/1lU3pQPZ
- 7SlMiZ2+AdaKI8CPgfiLnmWFekeWzqsa9242nEAX0Wpmd5luBK3/HLFQW49AzXTW5PGjklRH+SD
- I5BdvNneDv3Jv+RcoCo5VnfUbod+tVHKKaAfMQGqbkhJPtZMMH0sAFcNsqQIhsEuGcCcc97637L
- BIVMJ8IKp4JD8JPubtiINSpI1qtx5gQg1Kr7NOkxeyPOQuA0C+F5iSgMRvglcBnUvwNRRN6ReYm
- a9PLQ0rURddlF6KK/JF74grExaAk3MOBpilL0Eo13pYLQ==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id effd227a1c24da30;
-	Wed, 21 Oct 2026 05:22:53 +0000
-X-Mizu-Trace-ID: effd227a1c24da30
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <bfc5414e-5616-4a64-becc-d16c2b01ecf4@packett.cool>
-Date: Wed, 21 Oct 2026 02:22:48 -0300
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gExZuUhk
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5be4a2d94adso268628e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 20 Oct 2026 22:25:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792560303; x=1793165103; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=QO11p1cdvBfNgfWBeER77MVqw8qS2d4+wBk/vDSDlTM=;
+        b=gExZuUhkSHZ8RiSOZBDjxhHa6r4jx4Y4hhffO2HQqZCp2azJr/32CTUe+2ixB/ngsB
+         l6nIgYyhfn+N1GQPLcSJUwmK4VGvOcG6SP/WfxqGuVjADDPIA6dScBH78LLRk+YalCk9
+         d0U8oIdYI8kCZUclwapRe6Tqes48kUpKNhEQwRd8jCUW5NW/1FeIUzGDDDc23NLjg16D
+         amdTdepRbt+fO8zyhfAyVofoJ+ncQVyCsTNyFv0M0+DgRaR/lPXQESqcDTcqFe+BF3mR
+         83cuVQy/WWMmsToaMZluNvmr9LHjhC+hBm0zPdQiqzbcJriPKalP35h2uPcjWITcyAvV
+         7aYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792560303; x=1793165103;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QO11p1cdvBfNgfWBeER77MVqw8qS2d4+wBk/vDSDlTM=;
+        b=txHSptfcjWVrjYM7TBEJFiq40ElFfyubvy4DvdAAIo6Z0FWTFRvxUBAZmQLMp/BFnK
+         gJ/IjJd07lLeIz4o55JvDJLA6y9vSFdC4jELKTYLSrC0hoWfigkIBGXRjV0jk/kfMefj
+         Oq0iVl0Ug2BHJNjE5KVmja1pJO5qUUGsJwBBR2Xhjd4SUSAbVb1Sp3VpXRk9gzKEOmI0
+         2yiW0jp5Y7welxjhihjFQ/sBLted72DNzDmvabTbf9Qh0aQtNxUcFadIR6fMdE6NsXW6
+         pGZnHfwzElSJd0y/Ctrbs10pxlBS5FpDwqogz2/HtsfbQ6VTUQbJPbgcF4E3SXT9REFc
+         ma1w==
+X-Gm-Message-State: AFq9FYKvhm0/H+Fj/PnBfTovZnqh/GMXqlFBZ+JlCA7TYb1tq1fImQBK
+	ydk0rtXSYoMLJmy6VxpI8y51v/hHpzzdFuFQfMGTanZ8xu/DGwmkiHjm
+X-Gm-Gg: AYBFou3ZU+yJ8t42Gf8K5A0rhhgBPPEwEw10j2ikMkgG2gn3uTKqXaxGfCOAfm/VoWb
+	fNqUYRnZY1oVbno+Pn+LjQZT+mNKu4DN5j1mS9KWARnAtUJFg/8B8tGLftlgwrBAb25lklqc0m6
+	xjfarm1Lb5r5DE2m38KcsSnOGqVg4pWeuvBcUh2hR3dv1DPq5mHtJPkYZprpdnjNvGu+dpAZTL6
+	PH4Yn5OtAI0FDpxvoLWozWVhqaW6MM7sTy+xaWxZYKYLVVjVuGRIz8/jYyKUkhtkTIAKwG2ITAR
+	h3p2yMyZLurFd9eGaQpizQZFL95gEPZCzRNQh1bai15e3/LGsOza9xoWNRxyVsQnbazgBzejv+P
+	R6fYergcOjsoSOzYu5PQ/aPbK5EzmnaoXp/pceYhPDH5yaqsY5XQVjO8XTpvclFc8SGZxa/CyUY
+	9eZmeYB8rZ+bSWfi6S34nx5fjwKXimoqK0M+BNJ6MYmX9O8JnEJhSmV1HzSOQg4muFI4ceadRcc
+	UXxSyv4gkoxhfacw5y+8bBUUFHcZndNVYjE5tgcQwjwQvnxq6bSzqKFbc3KgoQVRfvlzPfOBXio
+	bcb2nWfz3ac2oTRKhj0eGcRiRu1DIqHjnvnI+C2u9afGMaAUhYCmDRM3ATArLhxp
+X-Received: by 2002:a05:6512:6686:10b0:5bf:a2b5:b1f8 with SMTP id 2adb3069b0e04-5bfa2b5c70emr124342e87.0.1792560302719;
+        Tue, 20 Oct 2026 22:25:02 -0700 (PDT)
+Received: from yantra.. (nekmmqvnobjree8k203-1.v6.elisa-laajakaista.fi. [2001:99a:d7d:c300:ed79:febf:8fd2:e723])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfa11f6dddsm284385e87.18.2026.10.20.22.25.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Oct 2026 22:25:02 -0700 (PDT)
+From: Rupesh Majhi <zoone.rupert@gmail.com>
+To: Andy Shevchenko <andy@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Rupesh Majhi <zoone.rupert@gmail.com>,
+	Marco Elver <elver@google.com>,
+	Bart Van Assche <bvanassche@acm.org>
+Subject: [PATCH v2] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on mutex helpers
+Date: Wed, 21 Oct 2026 08:24:35 +0300
+Message-ID: <20261021052435.112686-1-zoone.rupert@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,82 +100,59 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] bus: mhi: host: pci_generic: Update the default
- autosuspend_delay_ms as 5000ms
-To: Slark Xiao <slark_xiao@163.com>, mani@kernel.org,
- jeff.hugo@oss.qualcomm.com, krishna.chundru@oss.qualcomm.com
-Cc: loic.poulain@oss.qualcomm.com, mhi@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org
-References: <20261021024038.17127-1-slark_xiao@163.com>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <20261021024038.17127-1-slark_xiao@163.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+Since commit 5b63d0ae94cc ("compiler-context-analysis: Remove Sparse
+support"), __acquires() and __releases() only feed context analysis.
+Their argument is parsed before the function body, where only dev is in
+scope, so with analysis enabled for this file the build fails:
 
-On 10/20/26 11:40 PM, Slark Xiao wrote:
-> For some MHI devices in some specific scenario, the default value
-> of autosuspend_delay_ms may not enough to handle last wake event.
-Missing verb.. may not *be* enough
-> This may lead to some unexpected problems.
-Sounds vague, are there any examples of the problems? A short 
-description of a concrete error message or something would be nice.
-> Refer to the Qualcomm's Windows settings and we checked this with
-> Quaclomm over case, Qualcomm recommend us to set this as 5000ms.
+  error: use of undeclared identifier 'adc'
 
-spelliiiiing. Quaclomm? :)
+These helpers take and drop the lock for the ADC_TM driver, which only
+sees their declarations in the header. Naming the lock there would
+mean exposing struct adc5_chip, and with no annotation at all the
+analysis flags the unbalanced locking. Mark both __context_unsafe().
 
-(also "over case" sounds odd)
+Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
+Cc: Marco Elver <elver@google.com>
+Cc: Bart Van Assche <bvanassche@acm.org>
+Assisted-by: LLM
+Signed-off-by: Rupesh Majhi <zoone.rupert@gmail.com>
+---
+v2: explain __context_unsafe() in commit message (Andy)
+v1: https://lore.kernel.org/linux-iio/20261003214516.128573-1-zoone.rupert@gmail.com/
 
-> Qualcomm also suggests us to update this for all MHI devices.
-> Since this setting has affected some existed kernel versions, it's
-> better to be applied to stable version.
-Please leave the "meta" stuff about where the commit applies outside of 
-the commit message.
-> Fixes: d3800c1dce24 ("bus: mhi: pci_generic: Add support for runtime PM")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Slark Xiao <slark_xiao@163.com>
-> ---
-> v2: define a autosuspend delay timeout and explain the reason
-> ---
->   drivers/bus/mhi/host/pci_generic.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-> index 7193a384cca4..1f52542794d7 100644
-> --- a/drivers/bus/mhi/host/pci_generic.c
-> +++ b/drivers/bus/mhi/host/pci_generic.c
-> @@ -21,6 +21,9 @@
->   
->   #define MHI_POST_RESET_DELAY_MS 2000
->   
-> +/* Add define of  initial autosuspend_delay_ms to accommodate a potential 'late wake-event' issue */
+Found by building with CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y, which the
+driver does not set today. Build tested only, no hardware here.
 
-Not a very necessary comment, but if you do add it, please don't write 
-things like "Add define of". This *is* the define, we're looking at it..
+ drivers/iio/adc/qcom-spmi-adc5-gen3.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Also, it's not "initial" if it's not a tunable or anything, it's just 
-*the* delay value.
+diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+index c68c6c5f6aca..6a3cabedf4e8 100644
+--- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
++++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
+@@ -663,7 +663,7 @@ static int adc5_gen3_add_aux_tm_device(struct adc5_chip *adc)
+ }
+ 
+ void adc5_gen3_mutex_lock(struct device *dev)
+-	__acquires(&adc->lock)
++	__context_unsafe(/* returns with adc->lock held */)
+ {
+ 	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
+ 	struct adc5_chip *adc = iio_priv(indio_dev);
+@@ -673,7 +673,7 @@ void adc5_gen3_mutex_lock(struct device *dev)
+ EXPORT_SYMBOL_NS_GPL(adc5_gen3_mutex_lock, "QCOM_SPMI_ADC5_GEN3");
+ 
+ void adc5_gen3_mutex_unlock(struct device *dev)
+-	__releases(&adc->lock)
++	__context_unsafe(/* releases adc->lock */)
+ {
+ 	struct iio_dev *indio_dev = dev_get_drvdata(dev->parent);
+ 	struct adc5_chip *adc = iio_priv(indio_dev);
 
-> +#define MHI_AUTOSUSPEND_DELAY_MS 5000
-> +
->   #define HEALTH_CHECK_PERIOD (HZ * 2)
->   
->   /* PCI VID definitions */
-> @@ -1483,7 +1486,7 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
->   
->   	/* Allow runtime suspend only if both PME from D3Hot and M3 are supported */
->   	if (pci_pme_capable(pdev, PCI_D3hot) && !(info->no_m3)) {
-> -		pm_runtime_set_autosuspend_delay(&pdev->dev, 2000);
-> +		pm_runtime_set_autosuspend_delay(&pdev->dev, MHI_AUTOSUSPEND_DELAY_MS);
->   		pm_runtime_use_autosuspend(&pdev->dev);
->   		pm_runtime_mark_last_busy(&pdev->dev);
->   		pm_runtime_put_noidle(&pdev->dev);
-
-
-Thanks,
-~val
+base-commit: 43ffda3c7f8456bbe641ae8249a077a361b97880
+-- 
+2.43.0
 
