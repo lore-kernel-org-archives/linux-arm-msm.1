@@ -1,111 +1,111 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792597411;
-	b=kvdOLYyvFbTtU2PBUF8l0/xx61Uh1Xf2U5CKVuSuwTIn8fOV+hAHJzr4eCHP4yCzlkPs
-	 zxQnZChcapONA74K26SS8YUXjmUD8B90hGqVFUd46rXriVIffVuyhZJBHOkQSYnaKLI8w
-	 LdiC4lM969N1FFjnKjLCQHdOnqf2rvsG5pnk0Ttyfk5FWNqKeSs/4E3oyUrwX9Usmfsty
-	 SL0WjKBbYYYYRNtQpnAPfO4x292HIypp73Rljomqx7md+5Lnas/AH5MsFBqC0hN2kjjRY
-	 K3Yj98tyHSNFgMxcj8T8et8zP44OOI95TDLqmvKbRGqOgKiOtCrz8JtZMFNAJmmLDoA==
+	t=1792597415;
+	b=IyXYVGCAxKxD/CM3MrdgvQTK09P0sjwDyrkrdM6fbpo5N0sqKXlzT06F4HsCoWc/4+/F
+	 DJmrIq9l7t8nLWhWas3TPMVlVo8avbychKQxuxsHMfzfzrUhSY8Mtsl+i9R6p1M2j2okM
+	 4LRc1X8lSlL0NcdOwSEuDWsBVq4IXwOoQaNxl0bAIWO/wBcpjq7Y6gLU5Np9Ox+EJtJUi
+	 egyfTb38ulio5Zikkh3yo1U2STWeCq+NZ2QlR39CgSYQqdyfRuwNxwRe6QJbbQTE5XxNA
+	 kMS1dqIDQZbmJ8UQSBIKlLLT8IMijrVkl92V5sXSfB7eF+DfEjZBe4wW/+5rfurFzPQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792597411;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792597415;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
-	b=fl1jRvGxwJCuBO36qy2CRhRHs4Uec8Fg+bRyI3ceOw1YKUG1UK5r7ZENya7vBLtL6KKX
-	 d8REYOq2utUdXDO/FLui3hZqephhgkfWFmNl0ooyQrSe/yyyzqdRA80DaF1dLhM4peH19
-	 UIIJnl0bM7KQPXXtjW/3mfVHjFkg8b+GNMkyxWpwqF9qJGDy5LgfQ6tCw6ijWVyq2nyqs
-	 ZIGh+cFMbkYalllqtTSsBLm2Atj9t2CKB6mNGvMDUhmBW5AZjcK3ebsF1rKD5lR+5LhOn
-	 bv1e8AIWAwep8dmsB8ilmDlX4ujhJ96Hvq4dSZYRaXMJSlZT+5HLiTOyKlpvbD4FlFg==
+	bh=PK1O9DLe2zPgJMY35B/jdWprIHSb/6My/ydSWK7Ng1I=;
+	b=eoDE/KNn2lHUeXe2Vca9B12a9N4OCzcYdDv4I15WU4L2B3QioGJJm2eQUYb4tOIST/NX
+	 ENRERyEY4skVneMTjSP3NPJDaExVE9B41EgV6A3Zo8gsBl/6QDAbHjphl5+7DYoTcO0Pp
+	 OgffyZ1mx5m6Z+grGUY4Rl7prjAYPEjEJ3t1DCF+S+PL+efBBuUormMn1LPf91aDZ2UX0
+	 UPPdUQNNv4RTKSiG7+t5NjVV8l1zCmoTTbEpH6uW12EyloWzU1cA8oBJZJv0BOwglkE86
+	 gCVmQIok0jy+mhKszihXVMsYjAyPqwx93TAIQfkq0gaKUWuHWaz4bYVjc+Andk7Fprw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7uIaIrF;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CrEbv59z;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SJzcbxrk;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hkhICCtZ;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ECA460A2616
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6ECA460A2616
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C30260A382B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C30260A382B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N7uIaIrF;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CrEbv59z
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFTxic1481037
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:29 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SJzcbxrk;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hkhICCtZ
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFU7fM1558030
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=OsgokzbRwDMcoDaL2XCATM
-	4Rc4G+bTJ2AfnLyP/Jpt0=; b=N7uIaIrFZmqFsyEPzm8aAunfH0UjtfnSpF+zRD
-	h46/qOIEs7MHA9JRpCZ4M9bCDAM2YW6NbXUzFmAuuH3yLRZfN9u+zDx7YCwQEPxs
-	9wWpc/kTtsAJ4JvZG7+RhcuTeJo/Su8SBWr8u6qIyE8CqfLp4SubkBx+XrODtAc0
-	ftKFLqRiPfAxhr03yfgSBZ6XHBBeKqYkwgcQDLouxq/OAQi1MOkO56qofYukOIHr
-	Xh++zZZExLZFFx+n80YzpEHs+OyiWjCBp1qTinGVwbCND7d0fiNh1l3wriwOWdkD
-	9Oo8SLWdBTkC4XjO/UAx8Nq7o+9GdCzdVWKm9PeEFt8W/EUA==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hegs0400c-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	PK1O9DLe2zPgJMY35B/jdWprIHSb/6My/ydSWK7Ng1I=; b=SJzcbxrkM9dqPxpy
+	57+YC7/Xz9kpNJ5h4KxPyJ4aD6jOQzcdFfQey3hRod0Yz42koCI8F0F+apUF+ZsS
+	whocLkc6Hwa2GJKJ/glI1fVW9PBF7Q9Vc8JXKTSBeRghuZ566/1orctL99QRdrcz
+	gklYN3s4kvoyyctMLBLyPD41/DANaHvohY1eTq52nVaN4LU1QIgwC3z/MeFX2BfC
+	v0C58rhi0xAsdQ4wcy2vRqWmjE5b/iEwK01x8D9GZl879bynldhVtaxzcUqT+eWV
+	huS2VYe+S33fQwcx5emaLVzx9N0qBDHUSGGaiKYOBHvwLeIzilGK40yD8lL6GqZ0
+	caUHAQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajmq5q-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:29 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-151ba226e1bso1548106c88.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:28 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:33 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-3425098ae4bso40709eec.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792597407; x=1793202207; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
-        b=CrEbv59zuRz1wtUBRdjbFgumpQwO8VsxJR0FalsoPvBCC/9XPFQOKXsJDgizT7cQ3U
-         Z7zflqcNWdw3ijHcXUBlXmfUTyI34bf0j9CmqVMJmFkW3IhUEd4OPNyA/DYNm+cLP/Br
-         +YXXsUGWfEhXK85RO6p6w50cKEt2SdF4uZPIPUTfPou7CuCRpV4CzmZptXZY2ohJxNId
-         HZRII47mNJlITGMvGbxW+qUGw+AZqZGbNw9FxIE6qk+walftgWorsks16eSxG/I99JpT
-         qLZ6Ur0ZcYxHrKt0rfNAKgEgup86Zgp0WuSFG/DrTks0m7jlkLV1xVUEXlJz7ZoYJ3Y1
-         VVIA==
+        d=oss.qualcomm.com; s=google; t=1792597412; x=1793202212; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PK1O9DLe2zPgJMY35B/jdWprIHSb/6My/ydSWK7Ng1I=;
+        b=hkhICCtZ2okWYFEAo/477yTp8ZZdECyuLAXYE/TGV66orjwVf6OP7H2TJR+9haVKim
+         BKkdOb3PKfhkYdAc02PXzwM32ACPhEsqv0qfhc9DOrTxyG0VKpAoaygBRlBwr3C4pPQp
+         G/M5rjRi8QO8k4PMXkKyzSdS/lzDCytt5pEAtzWzni/05o8tlR+6CPc/lmkFYNkoe8PG
+         toXmayPajDsrA7uxHCsyR1XNJp9VVSuG4PNSWWCiwNnK21s8PHaCFNsJxZldFLnf7rH9
+         8zbNHDAm0FwkNdsC1lGcn7y4XG5Y/UV24pdOiFzgRs7Rvpm85EOsCEPIoBfB+gWWzBxw
+         R5Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792597407; x=1793202207;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=OsgokzbRwDMcoDaL2XCATM4Rc4G+bTJ2AfnLyP/Jpt0=;
-        b=LVa5TabAgo8Na+PlmEYOIaDWC6rFa39GGxQ9KXQI6zTBhGH7ls1mdc+POy5DEah3mz
-         q1p6WNUc+/cb33Un7ATt0bEf5pmNm39FX8RSFUCUprI+ZKoUIFPtEfuM+rMSY5IQw5FK
-         86cuokHsZPnwNgn1P3hJsy27w8J3wvUocFOApKfN6cgjurfw7APErqrWlbtTZ4WJtwEW
-         eqV/bag4DxvYykVwpABq2JhEp12TXnshpTVGNn1Tmc2MKw1kCtmwHzCGELdevRk1FCpa
-         0hvXzJzyiEy3hn/5UjQS2bd9wk6cjMa74wWbEM0j2Hc0bUwXfqnmfzmwvuit7IZdmNg3
-         9A5Q==
-X-Forwarded-Encrypted: i=1; AKwUvBzfRVyy5+CCj1aew9AETTAIQG+J9SaNZXQX9oG8jYI/AOh+Z0VZnPZ0+rVVUqruhqK//Jn5OXW6o5aYfzVy@vger.kernel.org
-X-Gm-Message-State: AFq9FYKo03x6xVejzN9zgWBNzbECVM2uyJDp7R67vlRPNJA37d2SKtlR
-	LO9R1/TKPtnlefLgeLNseOCYpJW/akx38p49L3dPapA8QV3nJSprBZlfG91tv27DcGsCEUq5LcF
-	xnX9+p0LvetF9y0OodVckCLj9u78i5WXL0ujMcOko7ArmSfdmhMP4CfiDGHbfYrljbSLY
-X-Gm-Gg: AYBFou1SONWO0sW6GBTuy5sV1C5FdjGlyAI+5zl0tBweh4dJVbXUqGhRL9kxMOkkHlD
-	P6tPsJyGkbA//ZkJDCvYPxpZHFXRMazoaz+NBBTeGmQzdVYFGmSkrajUCYAF41MnhYP0C9NrGwZ
-	gFiL3mpxC92aMcqr9k9XRS03vLJT8qTggQTSzFUA0ZnsEgSx0nDAw8toPAqtlfLRew8w83/CE9i
-	EsiQDJrK1hbuXE0rnXG9Vu6oj8gDgafo8Wtj6DIbfks6UsvVs2w4JkpFKc0csFXYiEWY7CLchiu
-	eCs4IMH3ov4q6KiE2J0IjOXx1wsk2iEWYL9ZT+mxTbBp4MMa1jdSWUDe76HWOhc1kgOurRmC9O5
-	5w1u7VuSikOov82IE5Mx9IopV
-X-Received: by 2002:a05:7022:1715:b0:18b:ca6a:5e70 with SMTP id a92af1059eb24-190a0428c8bmr2011278c88.6.1792597406852;
-        Wed, 21 Oct 2026 08:43:26 -0700 (PDT)
-X-Received: by 2002:a05:7022:1715:b0:18b:ca6a:5e70 with SMTP id a92af1059eb24-190a0428c8bmr2011231c88.6.1792597405969;
-        Wed, 21 Oct 2026 08:43:25 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792597412; x=1793202212;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PK1O9DLe2zPgJMY35B/jdWprIHSb/6My/ydSWK7Ng1I=;
+        b=YWSYwn7OTIFqD4n3iIMzKO5nvTdvt/WR0i9KntSpcIXmNvL4uzwBdyoDb/maDUzfcj
+         x7Mi3ofTUJ0IGSvdtJos6igj8VVjMMjpMwAKh0xa5cSj4z72+mfEyF6alM14lLYqdzLI
+         /k3vKPyFVgFdLvVr+1yiSehOYeami5invOtsR+FCloIwtsEKOaG86n+x8k6z9IisFv05
+         SLsa7dnG9DDzOdzL1YRIHgLIYfR/UhLU+LfcZNsYL6HaFkRByGflVHUoRK+/0yNPsJEx
+         hBh4la5wpvXSb27EkCA6KPL9DSF+/AA5fVF6BfnrQN5ThkeP8B2W11udLDwX5eOrGQsn
+         hCtw==
+X-Forwarded-Encrypted: i=1; AKwUvBx67Djtp8OGgh3lC4YrYLD602wwBcT5vC0aj19gpvdsqLPnI6XkYdM6Spg1RteBKoQdKp5+Mn5a5rCRDbQd@vger.kernel.org
+X-Gm-Message-State: AFq9FYJya/R44AxEO9air/7x72Cm8xXSXWHIj0QmY22943a/v84wJoUv
+	/EZjsbP8r7LQFQ4XQGPehKBWw7VGREPjARhouFTAO1XqAF9wja+1rVZB1VAt1FGHHfHxfjS7mq+
+	Vx08uiJFXuFocoq6xbc+o33Uiys91prVnTuz6hho9Bg7XnISTORcJj0V51feHLS0YxVfP
+X-Gm-Gg: AYBFou1xWUSQslyjgKxjIIIklsSwdNy33Sfp1DZ84xMV+QGwlcLXz+E0n2CLwjkVLV4
+	JhskMfrbruhnMx8LXCS1UYxN2oraaqFjws6Sa4djmB6c/lgAaGNNX707X/CBXIZ41eDDGrJEoFC
+	vnkQ4zueeihOqO6NBHnv2si+9s+rtVbaAbbzMXtps1SZcKWKfgx6beFOu4HCX/MV9yuopPxVDGb
+	3bNWoX6UlRI1L9iu2HFLFwY+OfSg4cR3Be82fP712Ht+WjmcYTkbLC+AF1siwYC8QfqCxghLAzK
+	5ZmHvs/UoetqQubV0nftx4dqgk6yzlObm4e1UXfJam510Wer7AahzkEbYh8ug8Pu5WTsC1jSSsQ
+	Gy0N6N5e/SHUpr7CmYJkAk8ks
+X-Received: by 2002:a05:7022:419e:b0:185:e68c:904c with SMTP id a92af1059eb24-18dbe2af64bmr10406235c88.7.1792597411400;
+        Wed, 21 Oct 2026 08:43:31 -0700 (PDT)
+X-Received: by 2002:a05:7022:419e:b0:185:e68c:904c with SMTP id a92af1059eb24-18dbe2af64bmr10406192c88.7.1792597410688;
+        Wed, 21 Oct 2026 08:43:30 -0700 (PDT)
 Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.21
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 08:43:25 -0700 (PDT)
+        Wed, 21 Oct 2026 08:43:30 -0700 (PDT)
 From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Subject: [PATCH 0/5] Add support for a TEE agnostic Inline Crypto Engine
- service
-Date: Wed, 21 Oct 2026 21:13:06 +0530
-Message-Id: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 21:13:07 +0530
+Subject: [PATCH 1/5] firmware: qcom: Add a generic ICE service
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,10 +117,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIrd2GoC/x3MOwqAMBBF0a3I1A6YiAHdiliE8alT+CEREUL2b
- rA8xb2JIoIi0lAlCng06nkUmLoi2fyxgnUuJttYZxprWAW86xr8Db4Bjo+w72R2fdd7tI5KeQU
- s+v7Xccr5A8s/HX9lAAAA
-X-Change-ID: 20261021-ice-migrate-tee-svc-a5cd6959ae36
+Message-Id: <20261021-ice-migrate-tee-svc-v1-1-b035be7aab0a@oss.qualcomm.com>
+References: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
+In-Reply-To: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
         Abel Vesa <abelvesa@kernel.org>,
@@ -133,104 +132,336 @@ Cc: Basant Kumar <basantk@qti.qualcomm.com>, linux-kernel@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
         Harshal Dev <harshal.dev@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=3080;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=10247;
  i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
- bh=TqA5QywZy39ISB88OCbEFOFyAshkmR9jiy1pUVRDiFg=;
- b=Qka6Kp4DJqzvVn1Xvt08pcN7UqBDMqNuYV69QEUE4yRIdKP7epI7w+nupFNyK0NzDLMPA2R3e
- BNY3TqyHmjrDo5Q72PR9B1jv3KOihg7odXqtp7VNq7ZzdRHPZ88gAmb
+ bh=vfJmdr9eEKYwCZJp3EElKbzW79+lSOJNHBy6jnHe668=;
+ b=dchV6/8fR7XW9p5INJZThG4HdgkSgTl2oUaBFr/zI8OKdt+qkGcKrVlO9KFygRmC3YThiKue0
+ lps8+4IHKq6DcsZvuuMrJzJfS0MWmSrPThT0C7EXKOYB8I4aS8vxEUH
 X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
  pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
-X-Authority-Analysis: v=2.4 cv=S/NMU4sP c=1 sm=1 tr=0 ts=6ad8dda1 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX3Bxm2Hd6f5ZL
+ jXW8Qssp/xz+QWmEeZsleKBNUzIs7uHWAsgVvSowI1lwwXDxO9qfMDbWA4Hu/AHROhJNLY2GXX0
+ ZGqyOIjNMH7nzkF9Y7ENRZzi1y928edjm1PwWH9MEUFYdC6vT42KdyjXKf6thYWQD0hXxL4wrY7
+ i8VIzkJ9Yv7wiVDQAPgdv4IZ1Cw/tDDQoIRNHeMeTO8woiqb0ErUk+t4fTK95COdh/cVe/aGvz1
+ Y7+qkILLg8jA4K/nyZnRkEq2Ev9hlxxfhohHg1h7+0kDXYH2mTUUih98BCjZBBKoYCfyyD3BlZ/
+ YfvS8YmNapJqxWXj36CPmOGx2u95bI/j2zc745vjyxDLp0EUKa4zfMKyOApKZ+hzp9nLF8jlhXg
+ b87UspQPMRmP9r/Y9H8OErWvD0sTyjpGh4qZ28MvTcg/XRHtnwLcGlBnV4FpJ0hcYQMcwROvqi5
+ 9O8+6Gd2llot6bXYfGw==
+X-Proofpoint-GUID: STpAvtR7yZ-t7OyXCJTImbbOERMnPHFn
+X-Proofpoint-ORIG-GUID: STpAvtR7yZ-t7OyXCJTImbbOERMnPHFn
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX3fiJIjgqEa/r
+ 5nPBUJTL2pYgajo1aI4OadAP73a2JxcroUJoSdg9n+x5o/LI+7u4aY5ZdEam+Ao2vsAjKQLnKzD
+ tK7fuSDpKo9X2KNHpI7oym7mdr0dyZw=
+X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad8dda5 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=_EMmJvYMAAAA:8 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=4CWejXOLIFnvMk5dGHAA:9 a=qcg49hLlgF0N60+LroqrWnV/Vu4=:19 a=QEXdDO2ut3YA:10
- a=Fk4IpSoW4aLDllm1B1p-:22 a=emCv1hD2LFd8cNRmW21v:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX684M5j+CzKT+
- kppJtjhnMgnswil7O7czcC093agrtsPxEKMcrZUoZH1ztVz0d1wkUvyUp8GMlBHdI2CGvWUQWDx
- U/ezCLmifGmYSE1Z8appVwj1DG6DThsJPwqWnxvnhIuUr6ZeFhWw6+LgyUETjCQl1++vyGwOfyk
- mcSjvKSpJBGw9D1+aJUVHsR0jVQxgOl5ArNCwmB3+E6/vCTuzmzGCGIsB5ia5t1KmvOx1UZt33t
- tU7WPc8UjrUSj1cSVMoPaRO+0qqNGdfGGP3VBfUXeXEA5qQ8o7uaQ4Vvc3n/GRmJ11iqgNUhWaw
- 01wdS//R58ElqWU1s+DSyWVC6GKOLesF2YneLDVq466QRvVxP4dddlTn1mI+l9UF9AESzUFe4SG
- FpgimFItuYfV1LMuGg3yWJsiElCvPeviu3lTusP3RVJZ3SsjA3iFus2u9IV2NfWhqrvP9tiUqG3
- 3YTFlt0tM7x5hk3r9uw==
-X-Proofpoint-ORIG-GUID: L3hIaC0hAJ5M9e0SQkVcNkEXff50TVYW
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX5EitwLd10Pe5
- 4A/bhuJBEjGMTOBmp2ItUFdzI1bix1o1j50RTN4g6cXGDv18vH+7q5YyFV3egmMYdVZfIqqYRQz
- BMe3sSV0W/bweGOqUStZdVSd5lsL/BY=
-X-Proofpoint-GUID: L3hIaC0hAJ5M9e0SQkVcNkEXff50TVYW
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=FunFjVdMjTOM9eWGH8wA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0 bulkscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0 suspectscore=0
+ phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210062
 
-Qualcomm platforms such as the IQ-9075 EVK now boot with both Qualcomm
-Trusted Execution Environment (QTEE) and OP-TEE [1]. However, the Qualcomm
-Inline Crypto Engine (ICE) driver currently only makes SCM calls into QTEE.
-With the arrival of ICE support on OPTEE [2,3] for Qualcomm platforms,
-there is a need for a generic layer which re-directs the call to the correct
-TEE at runtime.
-    
-This patch series adds a generic ICE service which provides TEE agnostic
-APIs to the ICE driver for requesting secure services from either QTEE
-or OP-TEE depending on whether an SCM driver back-end or a TEE driver
-back-end is registered with it at runtime. This series is logically similar
-to the one introduced for Peripheral Authentication Service (PAS) [3]
-which was recently merged to provide a generic PAS service for both QTEE
-and OP-TEE.
+Qualcomm platforms such as the IQ-9075 EVK now boot with both QTEE and
+OPTEE. However, the Qualcomm Inline Crypto Engine (ICE) driver
+currently only makes SCM calls into QTEE. With the arrival of ICE
+support on OPTEE for Qualcomm platforms, there is a need for a generic
+layer which re-directs the call to the correct TEE at runtime.
 
-The TEE bus based client driver introduced in this series which registers
-with the ICE service has an ABI with OP-TEE that is 1-1 identical with the
-SCM driver's ICE ABI with QTEE. This is because both TEEs implement logically
-similar drivers with the exception that OP-TEE currently does not have
-Hardware Key Manager v2 support and so the inline encryption functionality
-with OP-TEE is currently limited to Qualcomm platforms with only Hardware
-Key Manager v1.
-
-Validation:
-This series has been validated on a LeMans IQ-9075 EVK device by attempting
-file system encryption via the fscrypt tool.
-
-Merge Strategy:
-All patches in this series touch Qualcomm firmware and soc drivers. Hence,
-it should go via the QCOM-SoC tree.
-
-[1] https://ldts.github.io/qcom-buildroot/index.html
-[2] https://github.com/OP-TEE/optee_os/pull/7906 (In review)
-[3] https://github.com/OP-TEE/optee_os/pull/8137 (Draft, depends on PR#7906)
-[4] https://lore.kernel.org/all/20260702115835.167602-1-sumit.garg@kernel.org/
+Add a generic ICE service which acts as a common layer with different
+TEE backends plugged in whether it's an SCM implementation or a proper
+TEE bus based implementation (such as for OPTEE).
 
 Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
 ---
-Harshal Dev (5):
-      firmware: qcom: Add a generic ICE service
-      firmware: qcom_scm: Transition to the generic ICE service
-      firmware: qcom: Add an TEE bus based ICE back-end
-      soc: qcom: ice: Migrate to the generic ICE service
-      firmware: qcom: scm: Drop exported ICE wrapper functions
+ MAINTAINERS                            |   9 +++
+ drivers/firmware/qcom/Kconfig          |   8 +++
+ drivers/firmware/qcom/Makefile         |   1 +
+ drivers/firmware/qcom/qcom_ice.c       | 125 +++++++++++++++++++++++++++++++++
+ drivers/firmware/qcom/qcom_ice.h       |  51 ++++++++++++++
+ include/linux/firmware/qcom/qcom_ice.h |  32 +++++++++
+ 6 files changed, 226 insertions(+)
 
- MAINTAINERS                            |  10 +
- drivers/firmware/qcom/Kconfig          |  19 ++
- drivers/firmware/qcom/Makefile         |   2 +
- drivers/firmware/qcom/qcom_ice.c       | 125 +++++++++++
- drivers/firmware/qcom/qcom_ice.h       |  51 +++++
- drivers/firmware/qcom/qcom_ice_tee.c   | 384 +++++++++++++++++++++++++++++++++
- drivers/firmware/qcom/qcom_scm.c       |  83 ++++---
- drivers/soc/qcom/Kconfig               |   2 +-
- drivers/soc/qcom/ice.c                 |  30 +--
- include/linux/firmware/qcom/qcom_ice.h |  32 +++
- include/linux/firmware/qcom/qcom_scm.h |  20 --
- 11 files changed, 690 insertions(+), 68 deletions(-)
----
-base-commit: 8f7df005a7564bd7ffa75da9c3085d5b996f1e16
-change-id: 20261021-ice-migrate-tee-svc-a5cd6959ae36
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f58a305de664..7a80b776896c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -23007,6 +23007,15 @@ F:	Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
+ F:	drivers/soc/qcom/ice.c
+ F:	include/soc/qcom/ice.h
+ 
++QUALCOMM INLINE CRYPTO ENGINE TZ SERVICE
++M:	Harshal Dev <harshal.dev@oss.qualcomm.com>
++L:	linux-arm-msm@vger.kernel.org
++L:	linux-crypto@vger.kernel.org
++S:	Maintained
++F:	drivers/firmware/qcom/qcom_ice.c
++F:	drivers/firmware/qcom/qcom_ice.h
++F:	include/linux/firmware/qcom/qcom_ice.h
++
+ QUALCOMM INTERCONNECT BWMON DRIVER
+ M:	Krzysztof Kozlowski <krzk@kernel.org>
+ L:	linux-arm-msm@vger.kernel.org
+diff --git a/drivers/firmware/qcom/Kconfig b/drivers/firmware/qcom/Kconfig
+index 3ad22f8fc3e5..e2d1c17296c2 100644
+--- a/drivers/firmware/qcom/Kconfig
++++ b/drivers/firmware/qcom/Kconfig
+@@ -25,6 +25,14 @@ config QCOM_PAS_TEE
+ 	  Enable the generic Peripheral Authentication Service (PAS) provided
+ 	  by the firmware TEE implementation as the backend.
+ 
++config QCOM_ICE_SERVICE
++	tristate
++	help
++	  Enable the generic Inline Crypto Engine (ICE) service provided by
++	  firmware. It acts as a common layer with different TZ backends
++	  plugged in whether it's an SCM implementation or a TEE bus based
++	  ICE service implementation.
++
+ config QCOM_SCM
+ 	tristate "Qualcomm PAS SCM interface driver" if ARCH_QCOM || COMPILE_TEST
+ 	select QCOM_PAS
+diff --git a/drivers/firmware/qcom/Makefile b/drivers/firmware/qcom/Makefile
+index 88ce74d74c3e..6403e8a17249 100644
+--- a/drivers/firmware/qcom/Makefile
++++ b/drivers/firmware/qcom/Makefile
+@@ -11,3 +11,4 @@ obj-$(CONFIG_QCOM_QSEECOM)	+= qcom_qseecom.o
+ obj-$(CONFIG_QCOM_QSEECOM_UEFISECAPP) += qcom_qseecom_uefisecapp.o
+ obj-$(CONFIG_QCOM_PAS)		+= qcom_pas.o
+ obj-$(CONFIG_QCOM_PAS_TEE)	+= qcom_pas_tee.o
++obj-$(CONFIG_QCOM_ICE_SERVICE)	+= qcom_ice.o
+diff --git a/drivers/firmware/qcom/qcom_ice.c b/drivers/firmware/qcom/qcom_ice.c
+new file mode 100644
+index 000000000000..2e42d70c855a
+--- /dev/null
++++ b/drivers/firmware/qcom/qcom_ice.c
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <linux/firmware/qcom/qcom_ice.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++
++#include "qcom_ice.h"
++
++static struct qcom_ice_ops *ops_ptr;
++
++bool qcom_ice_svc_ops_registered(void)
++{
++	/*
++	 * The barrier for ops_ptr is intended to synchronize the data stores
++	 * for the ops data structure when client drivers are in parallel
++	 * checking for ICE service availability.
++	 */
++	return !!smp_load_acquire(&ops_ptr);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_ops_registered);
++
++bool qcom_ice_svc_available(void)
++{
++	if (!ops_ptr)
++		return false;
++
++	return ops_ptr->is_ice_available(ops_ptr->dev);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_available);
++
++int qcom_ice_svc_invalidate_key(u32 index)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_invalidate_key(ops_ptr->dev, index);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_invalidate_key);
++
++int qcom_ice_svc_set_key(u32 index, const u8 *key, u32 key_size,
++			 enum qcom_ice_cipher cipher, u32 data_unit_size)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_set_key(ops_ptr->dev, index, key, key_size,
++					cipher, data_unit_size);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_set_key);
++
++bool qcom_ice_svc_has_wrapped_key_support(void)
++{
++	if (!ops_ptr)
++		return false;
++
++	return ops_ptr->ice_has_wrapped_key_support(ops_ptr->dev);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_has_wrapped_key_support);
++
++int qcom_ice_svc_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
++				  u8 *sw_secret, size_t sw_secret_size)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_derive_sw_secret(ops_ptr->dev, eph_key, eph_key_size,
++					 sw_secret, sw_secret_size);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_derive_sw_secret);
++
++int qcom_ice_svc_generate_key(u8 *lt_key, size_t lt_key_size)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_generate_key(ops_ptr->dev, lt_key, lt_key_size);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_generate_key);
++
++int qcom_ice_svc_prepare_key(const u8 *lt_key, size_t lt_key_size,
++			     u8 *eph_key, size_t eph_key_size)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_prepare_key(ops_ptr->dev, lt_key, lt_key_size,
++				    eph_key, eph_key_size);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_prepare_key);
++
++int qcom_ice_svc_import_key(const u8 *raw_key, size_t raw_key_size,
++			    u8 *lt_key, size_t lt_key_size)
++{
++	if (!ops_ptr)
++		return -ENODEV;
++
++	return ops_ptr->ice_import_key(ops_ptr->dev, raw_key, raw_key_size,
++				   lt_key, lt_key_size);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_import_key);
++
++void qcom_ice_svc_ops_register(struct qcom_ice_ops *ops)
++{
++	if (!qcom_ice_svc_ops_registered())
++		/* Paired with smp_load_acquire() in qcom_ice_svc_ops_registered() */
++		smp_store_release(&ops_ptr, ops);
++	else
++		pr_err("qcom_ice: ops already registered (%s), rejecting %s\n",
++		       ops_ptr->drv_name, ops->drv_name);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_ops_register);
++
++void qcom_ice_svc_ops_unregister(struct qcom_ice_ops *ops)
++{
++	if (READ_ONCE(ops_ptr) == ops)
++		/* Paired with smp_load_acquire() in qcom_ice_svc_ops_registered() */
++		smp_store_release(&ops_ptr, NULL);
++}
++EXPORT_SYMBOL_GPL(qcom_ice_svc_ops_unregister);
++
++MODULE_LICENSE("GPL");
++MODULE_DESCRIPTION("Qualcomm ICE service");
+diff --git a/drivers/firmware/qcom/qcom_ice.h b/drivers/firmware/qcom/qcom_ice.h
+new file mode 100644
+index 000000000000..aefaf1ecc3df
+--- /dev/null
++++ b/drivers/firmware/qcom/qcom_ice.h
+@@ -0,0 +1,51 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef __QCOM_ICE_INT_H
++#define __QCOM_ICE_INT_H
++
++#include <linux/firmware/qcom/qcom_ice.h>
++
++struct device;
++
++/**
++ * struct qcom_ice_ops - Qcom ICE service backend ops
++ * @drv_name:                    ICE backend driver name.
++ * @dev:                         ICE backend device pointer.
++ * @is_ice_available:            ICE service available callback.
++ * @ice_invalidate_key:          Invalidate keyslot callback.
++ * @ice_set_key:                 Program keyslot callback.
++ * @ice_has_wrapped_key_support: Wrapped-key support callback.
++ * @ice_derive_sw_secret:        Derive software secret callback.
++ * @ice_generate_key:            Generate wrapped key callback.
++ * @ice_prepare_key:             Prepare wrapped key callback.
++ * @ice_import_key:              Import wrapped key callback.
++ */
++struct qcom_ice_ops {
++	const char *drv_name;
++	struct device *dev;
++	bool (*is_ice_available)(struct device *dev);
++	int (*ice_invalidate_key)(struct device *dev, u32 index);
++	int (*ice_set_key)(struct device *dev, u32 index, const u8 *key,
++			   u32 key_size, enum qcom_ice_cipher cipher,
++			   u32 data_unit_size);
++	bool (*ice_has_wrapped_key_support)(struct device *dev);
++	int (*ice_derive_sw_secret)(struct device *dev, const u8 *eph_key,
++				    size_t eph_key_size, u8 *sw_secret,
++				    size_t sw_secret_size);
++	int (*ice_generate_key)(struct device *dev, u8 *lt_key,
++				size_t lt_key_size);
++	int (*ice_prepare_key)(struct device *dev, const u8 *lt_key,
++			       size_t lt_key_size, u8 *eph_key,
++			       size_t eph_key_size);
++	int (*ice_import_key)(struct device *dev, const u8 *raw_key,
++			      size_t raw_key_size, u8 *lt_key,
++			      size_t lt_key_size);
++};
++
++void qcom_ice_svc_ops_register(struct qcom_ice_ops *ops);
++void qcom_ice_svc_ops_unregister(struct qcom_ice_ops *ops);
++
++#endif /* __QCOM_ICE_INT_H */
+diff --git a/include/linux/firmware/qcom/qcom_ice.h b/include/linux/firmware/qcom/qcom_ice.h
+new file mode 100644
+index 000000000000..c3d93259c72a
+--- /dev/null
++++ b/include/linux/firmware/qcom/qcom_ice.h
+@@ -0,0 +1,32 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef __QCOM_TZ_ICE_H
++#define __QCOM_TZ_ICE_H
++
++#include <linux/types.h>
++
++enum qcom_ice_cipher {
++	QCOM_ICE_CIPHER_AES_128_XTS = 0,
++	QCOM_ICE_CIPHER_AES_128_CBC = 1,
++	QCOM_ICE_CIPHER_AES_256_XTS = 3,
++	QCOM_ICE_CIPHER_AES_256_CBC = 4,
++};
++
++bool qcom_ice_svc_ops_registered(void);
++bool qcom_ice_svc_available(void);
++int qcom_ice_svc_invalidate_key(u32 index);
++int qcom_ice_svc_set_key(u32 index, const u8 *key, u32 key_size,
++			 enum qcom_ice_cipher cipher, u32 data_unit_size);
++bool qcom_ice_svc_has_wrapped_key_support(void);
++int qcom_ice_svc_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
++				  u8 *sw_secret, size_t sw_secret_size);
++int qcom_ice_svc_generate_key(u8 *lt_key, size_t lt_key_size);
++int qcom_ice_svc_prepare_key(const u8 *lt_key, size_t lt_key_size,
++			     u8 *eph_key, size_t eph_key_size);
++int qcom_ice_svc_import_key(const u8 *raw_key, size_t raw_key_size,
++			    u8 *lt_key, size_t lt_key_size);
++
++#endif /* __QCOM_TZ_ICE_H */
 
-Best regards,
 -- 
-Harshal Dev <harshal.dev@oss.qualcomm.com>
+2.34.1
 
