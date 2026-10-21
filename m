@@ -1,68 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792574202;
-	b=e4lasm5UrlPW6aJil55X92kgcPuMrqIAtB/ZEd2eT0DZh3KKKCTG6/KGgomD2pkn7tSo
-	 ylur0eJi88EoHMzGkWhAgwR3Saxcs3fDn8sBEO63sc5cRGi1XG0S+4T/+ULE1zSZ8i6tP
-	 e7hSjr5kkwu9FX3NzeWIw4PbejVBB/xnzvPxEKedr5LDk1vfOq61edeHTYJuPO9zqNC31
-	 0DPRAzjFJQsvcy16QhsuX+T7r47ffJ4c3NQKKEn65tgOJhPfVuUYnj5uZdwwMmLLeG8KL
-	 yOWx9P34+slsDj7T9H3E9Rqwlsyl2R3UHPEJhvJaj6q8YTMGskNsbR2xz0Mg4biMpqA==
+	t=1792574572;
+	b=N70WmwSugaDozgfN0DCaUGDY6n0EeyVHertsqZ2/e+jT6iTstlSgrRmAdV+74Jb4aWPJ
+	 RHosW6P1I8562G94e86PIhlsc9zMQR1fFEASFWAvjO2l1w98Rc8LNk1yjQWu7FWdp9+Ds
+	 Z623Avf+GuQKTehfLSmsZk1cNVnlekUECWlED7YI4c8x9JvO954TAfuTiVfI/qjfX+11F
+	 Tt0hmHndP2VJboG+KF/3+IT98HIxD2INm7kWfc2PMdGLknti0VUEw45IwjDMRL5nq2q7h
+	 2Ij0bPiCo8HFSFFUvU8hX9PJyHdzZJmAcSDjZPdAPXeU6pXTumgwslfFPmQ2C5Hn5oQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792574202;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:Sender:
-	 X-CM-SenderInfo;
-	bh=RrMjYnMi8ktHxiTV2sSqusS5AhFq1o0nr7mByeFZK6Q=;
-	b=HDJYIQcDYhz/3ryiZFp/3Cbdw3xUCFKj92J8dlUBC9xI5BemVZmtvT1DvJ2j2SY4nM5l
-	 ZfH4zc16DlIAvpJR5Llwv3pcNuPGlFh8QGu9WJ005gMQkiFCFm9g3RPDDbJE7Zs7e81XC
-	 LDuBEVAeYsFaunW+dMkOWaadv63iQxJZZ8f0gize21SZwiQQ7mbSihwC2woAKW6w7q0MI
-	 7llFJqssbSRd4KNfiBfeYeShBBIAuBycv7ezI/YTk+hhyTHOEpfa1KS8mM+aDK/opkKSf
-	 1GQy3ar0xZWmsaNklVSbCxF9/G+rOcftxBgUMb1JVW60fPv/12UuqOu9u+q1/kiLJhw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792574572;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=1qyY9vNJg35boytlmY8FgdP9XXj7oos7HKLsMRF6CNI=;
+	b=lJ/N8uMSYzqRrnzk4g9T3HyFsPF8tSVGLXUZZD8ds9cUAh4ANA14iHGFNDzFnuoz/rfy
+	 oFsbWGd1BWkpgBsfhvtxWsw7HE7g4616m42CCwkqFP9qetfRuThKnhqTyayy3yMWM0l06
+	 4B+jYWyO5VGnRuMy+KPIFj5+xV5ch0hFMCyHT6Z+xCujt9tuBEK6oGfTiXZ82Wwq+GhDN
+	 a6PX/cXbqkx2r3n9Ju8bLQ3Qn/eZqXRN6dkriG1Vw79mYGQ0R0H5JOtrwUPWmBzAB4jNx
+	 kWeLOJ+vqB3gJPbJeC9mm1x6Gb/V/rnYvIv0+kR5C66URecIwZInSyEWuatrTXmiS5g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=fail header.from=fibocom.com;
-	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=ZOUVZ7Me;
-	arc=none smtp.remote-ip=220.197.31.4
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Gp2PkA6G;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ewmEhvw3;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDF53606A31D;
-	Wed, 21 Oct 2026 09:16:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDF53606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=fibocom.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA097606A31B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 09:22:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DA097606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=ZOUVZ7Me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Rr
-	MjYnMi8ktHxiTV2sSqusS5AhFq1o0nr7mByeFZK6Q=; b=ZOUVZ7Metyj3KKF7Qj
-	p4zjj7bNpa+z5XXRlAoRZ+BdX0DqpxjyYE3mQhJu18rbz37zLOY4//svu5CEoelf
-	mjAyJzF7yhdYX/jbgG7RwBt8SIX80mhsHv/3LE1k8ZW0/SH9g+HwrDwEh/WJFUa/
-	VsOEuv76ZvqAYr8JA/qJk/Hgw=
-Received: from GHT-5854251031.localdomain (unknown [])
-	by gzga-smtp-mtada-g1-4 (Coremail) with SMTP id _____wDnr9PGgthqi5y2BQ--.62596S3;
-	Wed, 21 Oct 2026 17:15:58 +0800 (CST)
-From: Wanquan Zhong <wanquan.zhong@fibocom.com>
-To: mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org
-Cc: Wanquan Zhong <wanquan.zhong@fibocom.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S . Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH v6 1/2] bus: mhi: pci_generic: add Rolling Wireless RW135R-GL and RW151 support
-Date: Wed, 21 Oct 2026 17:15:47 +0800
-Message-ID: <7079b32572647d64207ce3f354ce63bbe481071c.1792573876.git.zwq2226404116@163.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1792573876.git.zwq2226404116@163.com>
-References: <cover.1792573876.git.zwq2226404116@163.com>
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Gp2PkA6G;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ewmEhvw3
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69L5j9HN3711582
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 09:22:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=1qyY9vNJg35boytlmY8FgdP9
+	XXj7oos7HKLsMRF6CNI=; b=Gp2PkA6Gay0NWw4nWoX7LGy3qwnvVM1dhbgzqwA+
+	OfbLIc70GMCuhPmIM6qldxx3yr72RFKnKJeNFRkCt9aCB7bu9vne1Ix9b5mbfzVZ
+	YBinjI4QoLYiXs07x4MQUt271rjCH/QYPcpmUXTD8vrKxGXOkA4rctJtM8g+J8lE
+	oBsiPVTeB6KNh7OThcV3Q75DfGYRpyaUIfhAfGbefL8KRMDLNK+FVge906XXOkQb
+	ZNSyIiwpvMZi18xhrhS7XCc7ZHYFqzbx6Vc8Mh7G8OwzveJutLHAyigIRtlZ/V4g
+	4Au35tOcXVkCTfkMNGap91FXPFfbidf8mHq6ufHr+YqACA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hed9v39cq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 09:22:50 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93caa0ce0cdso68815585a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 02:22:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792574570; x=1793179370; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1qyY9vNJg35boytlmY8FgdP9XXj7oos7HKLsMRF6CNI=;
+        b=ewmEhvw3IfGKeS9mWlYQJjMzCCKzoi9oPEIk3J5OlddzJuP6XsOJr5gycVakjogfpN
+         tIuUoKzl1MkeNUlFRsAceEfW67xN5KF0tNoppfUsRgywv/A8LbfDDh6yXM/LCQCnvV6u
+         qwGkh5gFIjuyuB6Fc/PG0urC1zWAHv3ZTj0HDiQgoQ++2LKlFsCP5rBgvI07PugVjjpn
+         C9j6EMXYWaG/EannrkguZrkurYvH/IjG9mcoSLD3b/tXHEGhUKD0Sqs4V3lB4KSoffVI
+         yiopzJjMBjNi2ptuaGOq2iB1BIvBqlvQIZLZnCmjpVgXj/BqXH+axwHgLnA6UiMulfb8
+         LyWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792574570; x=1793179370;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1qyY9vNJg35boytlmY8FgdP9XXj7oos7HKLsMRF6CNI=;
+        b=l+GnC8T7YZnnrX98bBS7BWUUeQE2pA7HEqOqQwfTGBpkyjI3WdNXIMb4iNsfmYp1h7
+         tdAdYTvlrFVNErrU0kAcXLqN2D/OuyKLH/T6esrf+wDQF4XiH9q7CYE8a6B9pM8RY0Mq
+         802cepFHKSd6/Jlcd1SGdzWoG93Tou+VOgdRET4Ywxai8OTPf/+jeDkkbWZm/ygViTG5
+         Rz/6I7bYU5t+zfHm4HLHssUvruPiMt2pqmp6dAmCsv57M16HvTUA/53a+5dWXRjP5w9f
+         tfQUhPZTiNmMS/8yxcllKKNybWlOquN0hszcIMtvybpGHapmlCo+3AjEMk8ZBPqVorH0
+         KJag==
+X-Forwarded-Encrypted: i=1; AKwUvBxHHGo2W5SVnrhM4xYrPjUM9nHfeeeNSNpjNOsud6xrzXFe7cGGhVX0Q/FIyDNXrZOFlsKd82BHM7G69ifu@vger.kernel.org
+X-Gm-Message-State: AFq9FYJv8pdKLiSLfmNunrLvVY/icdvgkcopt9aCcDFLs9P1+zsQ0XmH
+	nlNUxmNvaCPaoJOkLIWY+yy7YIIpiFwBLLkGU5bqTTeXa7paPJni9SmUJ9TqMXOVXzZpsWSLoM5
+	2ASTmPN4WTmZHFP6GJF/2aBvzm9zlWSFzgKVOKCa7TyHKJl5ATjJgIXA1Nlvnwb1a6Fjo
+X-Gm-Gg: AYBFou0oNCqNMuyFO9+BVofl6lnN6CQ5Ijvk3+7XyXw+oEYp1Ic4LE9c8caEgpbVMfH
+	mPagYHlLFY20sVyJqDwN6bUmy9uwCBYv72yywA7AYguu+h+XPJLiJx1+4GRFkBaeJsN6aApR7A5
+	RHcjGOW0nS2Rh3CsXsVBJp/yxfEHfDwCHg8KRzQAAhPpap6R33cFg7ccOaYE4WyDsTlSfBpfnLj
+	uvqE23dMdoObGok4xaIaygK/v/ExvP/u+0FUXlNkZKfasiK5XISBFVQIhSkw2V6Pqkd7UEgc5km
+	LcSgp4ocvk7baSx2QsI4ewxNVUz+FLhsFYmbAFu3ebOACEsrCeR46u8gC/BnfZS8gZMduUSUeHT
+	CNXa82ouG5oH/LD9E
+X-Received: by 2002:a05:620a:448e:b0:93b:d7a2:dd32 with SMTP id af79cd13be357-93f57faaa9bmr326673485a.66.1792574569769;
+        Wed, 21 Oct 2026 02:22:49 -0700 (PDT)
+X-Received: by 2002:a05:620a:448e:b0:93b:d7a2:dd32 with SMTP id af79cd13be357-93f57faaa9bmr326669885a.66.1792574569184;
+        Wed, 21 Oct 2026 02:22:49 -0700 (PDT)
+Received: from oss.qualcomm.com ([188.27.161.187])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2581f412sm4446654f8f.16.2026.10.21.02.22.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2026 02:22:48 -0700 (PDT)
+Date: Wed, 21 Oct 2026 12:22:47 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] arm64: dts: qcom: eliza: Add FastRPC support
+Message-ID: <k4sf6tipaehtllokqlunyocxuecttbitewgzjzgbl5mdz22jfd@p4svha4g2vvm>
+References: <20261016-dts-qcom-eliza-add-fastrpc-v3-1-4e3fb632300b@oss.qualcomm.com>
+ <ec2vb232k5u6w4pqoiqc5lhq2zj3xuf6yaifpiyzjjgaffpcih@ulainigpj4l6>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,209 +124,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wDnr9PGgthqi5y2BQ--.62596S3
-X-Coremail-Antispam: 1Uf129KBjvJXoWxtr45Cw1Utw1xCF17Xw47Arb_yoW3ZF4fpF
-	WSyrZ5tr4kJw15uFW8Ary8GF9Yvan5GryUKrsrKw1Ig3W0ya10qay8K347trWYvw4vgr1F
-	9Fn8Cr1xuanrJrUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UiTmDUUUUU=
-Sender: zwq2226404116@163.com
-X-CM-SenderInfo: h2ztjjaswuikqrrwqiywtou0bp/xtbC0Q+k+2rYgs8LWQAA3s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ec2vb232k5u6w4pqoiqc5lhq2zj3xuf6yaifpiyzjjgaffpcih@ulainigpj4l6>
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDAzNyBTYWx0ZWRfX/lcHeyim9Sqf
+ /CA8IBFunP+l6y52fPdoLUE6mzWBqK0+GhFsJ2xSbY2CjY9+JQealLsytFIQ+aeu6HU3zYg8pxC
+ 7lg9tC9HFKuduxxqhgcWA/1j6U7oyQM=
+X-Proofpoint-ORIG-GUID: t__g_Jg0hXSx6Lq49F2xcmrJqOdnHgxM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDAzNyBTYWx0ZWRfX2GnxlytJrisA
+ FR+vYS5/IQ8aiZSPtkvPUEg6dFYNmo194JtKawVq83VUjiqnZsfvzvUTPXnDk3gtuB+mEQSsG8D
+ iqQw7cugdhOvfST8W/qo+PUa5psonx6qAW8ulrqAfhWqs1Obna1L8x0c5+QAxwFmgFmomubEHD2
+ nRR0xV/EUFQiuHZLY7FKhaKJXDnUOjEECAKlKAp5DE+fVW23rzQoZu6mvjQxp256JT1j6vJcnjW
+ okkgwA7f8UItWP8Tg12MEEsy84mYMVXpUFae3tWHVBbRlgT6i+N7miH/u/cULwaVx8ydKw3NDYN
+ snaLzcezrShnNLt/WhwC2tRtCAzLUtLdnj/LwCY2rdnMlzsVbAXv7BkUQsnFRZkkp3kK9yq8aHo
+ NzZhGm46/ZgD537+VgMdjzSGhFYl22kVCwi5rUy1c7g5j9MTMAUx2t/PMO6yoscI33NFjr+CCiD
+ RGAeXAS9jm4U2i9QbjA==
+X-Authority-Analysis: v=2.4 cv=I6zw19gg c=1 sm=1 tr=0 ts=6ad8846a cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Qvngrl3H0rQgGg+94q4QgA==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=eVJ3CmYOr2qKXInMw8AA:9 a=CjuIK1q_8ugA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: t__g_Jg0hXSx6Lq49F2xcmrJqOdnHgxM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-21_02,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 suspectscore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210037
 
-Add MHI PCIe device configuration for Rolling Wireless modules:
+On 26-10-20 11:49:10, Dmitry Baryshkov wrote:
+> On Fri, Oct 16, 2026 at 02:17:10PM +0300, Abel Vesa wrote:
+> > Describe the FastRPC nodes for both ADSP and CDSP remoteprocs, along with
+> > the ADSP remote heap memory region needed by the Audio PD.
+> > 
+> > Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> > ---
+> > Changes in v3:
+> > - Rebase onto next-20261015.
+> > - Add the ADSP remote heap memory region (no-map) and VMIDs.
+> > - Link to v2: https://patch.msgid.link/20260916-dts-qcom-eliza-add-fastrpc-v2-1-95ed704ff268@oss.qualcomm.com
+> > 
+> > Changes in v2:
+> > - Rebase onto next-20260915.
+> > - Drop the CDSP glink-edge description, as it was merged with the
+> >   CDSP remoteproc support.
+> > - Use the documented 0x1063-0x1066 secondary ADSP SID values.
+> > - Drop the undocumented tertiary ADSP CB7 stream (0x1087).
+> 
+> Hmm, you still have this in place.
 
-- RW135R-GL (Qualcomm sdx35): SAHARA, DIAG, MBIM, DUN, FIREHOSE, ADB,
-  NMEA and IP_HW0
-- RW151 (Qualcomm sdx75): the same channel layout
+The tertiary stream that was dropped in v2 is 0x1087.
 
-Register PCI_DEVICE_SUB entries per chipset:
+The 0x1067 one on CB7 is the documented secondary stream.
 
-- RW135R-GL on QCOM 0x011a (sdx35): sub-vendor 0x2099, sub-device
-  0x1300/0x1301
-- RW151 on QCOM 0x0309 (sdx75): sub-vendor 0x2099, sub-device
-  0x1500/0x1501/0x1502; HP OEM sub-vendor 0x103c, sub-device
-  0x8fb8/0x8fb4
-
-Use Rolling-specific EDL firmware paths under qcom/sdx35/rolling/ and
-qcom/sdx75/rolling/.
-
-Tested suspend-to-RAM (mem) on Rolling RW135R-GL and RW151 hardware: MHI
-resumes cleanly and MBIM/wwan function after wake. Hibernate (disk) could
-not be tested on this platform (/sys/power/state lacks "disk", ENODEV).
-
-Tested-on: Rolling RW135R-GL hardware (MHI probe, MBIM, DIAG, ADB,
-suspend-to-RAM)
-Tested-on: Rolling RW151 hardware (MHI probe, MBIM, DIAG, ADB,
-suspend-to-RAM)
-
-Signed-off-by: Wanquan Zhong <wanquan.zhong@fibocom.com>
----
-Changes in v6:
-- Resend as a standalone series against current mhi-next; v3-v5 were
-  incremental on an unmerged local tree
-- Include full RW135R-GL and RW151 channel/event config (never merged)
-- Add RW151 PCI IDs 2099:1501 and 2099:1502
-- Drop no_m3
-- Set RW151 MBIM ring size to 32 to match firmware
-- Add SAHARA SBL channels for EDL
-- Move NMEA from channels 14/15 to 60/61
-- Align RW151 DIAG ring (64) and timeout (8000 ms) with RW135R-GL
-
-Changes in v5:
-- Add RW151 PCI IDs 2099:1501 and 2099:1502
-
-Changes in v4:
-- Drop no_m3 quirk per review; keep RW151 MBIM ring size fix only
-
-Changes in v3:
-- Increase RW151 MBIM ring size from 4 to 32
-
-Changes in v2:
-- Correct Rolling EDL firmware paths
-- Fix RW151 PCI subsystem IDs
-- Document suspend-to-RAM testing
-
- drivers/bus/mhi/host/pci_generic.c | 113 +++++++++++++++++++++++++++++
- 1 file changed, 113 insertions(+)
-
-diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-index b636e2c23b4d..353e3a2c954c 100644
---- a/drivers/bus/mhi/host/pci_generic.c
-+++ b/drivers/bus/mhi/host/pci_generic.c
-@@ -948,6 +948,98 @@ static const struct mhi_pci_dev_info mhi_netprisma_fcun69_info = {
- 	.sideband_wake = true,
- };
- 
-+static const struct mhi_channel_config mhi_rolling_rw135r_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(36, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(37, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(60, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(61, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 128, 2),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 128, 3),
-+};
-+
-+static struct mhi_event_config mhi_rolling_rw135r_events[] = {
-+	MHI_EVENT_CONFIG_CTRL(0, 128),
-+	MHI_EVENT_CONFIG_DATA(1, 128),
-+	MHI_EVENT_CONFIG_HW_DATA(2, 1024, 100),
-+	MHI_EVENT_CONFIG_HW_DATA(3, 2048, 101),
-+};
-+
-+static const struct mhi_controller_config modem_rolling_rw135r_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(mhi_rolling_rw135r_channels),
-+	.ch_cfg = mhi_rolling_rw135r_channels,
-+	.num_events = ARRAY_SIZE(mhi_rolling_rw135r_events),
-+	.event_cfg = mhi_rolling_rw135r_events,
-+};
-+
-+static const struct mhi_pci_dev_info mhi_rolling_rw135r_info = {
-+	.name = "rolling-rw135r",
-+	.edl = "qcom/sdx35/rolling/prog_firehose_ddr.elf",
-+	.config = &modem_rolling_rw135r_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+	.edl_trigger = true,
-+};
-+
-+static const struct mhi_channel_config mhi_rolling_rw151_channels[] = {
-+	MHI_CHANNEL_CONFIG_UL_SBL(2, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_SBL(3, "SAHARA", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(4, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_DL(5, "DIAG", 64, 1),
-+	MHI_CHANNEL_CONFIG_UL(12, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL_FP(34, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL_FP(35, "FIREHOSE", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(36, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(37, "ADB", 32, 0),
-+	MHI_CHANNEL_CONFIG_UL(60, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_DL(61, "NMEA", 32, 0),
-+	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 128, 2),
-+	MHI_CHANNEL_CONFIG_HW_DL(101, "IP_HW0", 128, 3),
-+};
-+
-+static struct mhi_event_config mhi_rolling_rw151_events[] = {
-+	MHI_EVENT_CONFIG_CTRL(0, 128),
-+	MHI_EVENT_CONFIG_DATA(1, 128),
-+	MHI_EVENT_CONFIG_HW_DATA(2, 1024, 100),
-+	MHI_EVENT_CONFIG_HW_DATA(3, 2048, 101),
-+};
-+
-+static const struct mhi_controller_config modem_rolling_rw151_config = {
-+	.max_channels = 128,
-+	.timeout_ms = 8000,
-+	.num_channels = ARRAY_SIZE(mhi_rolling_rw151_channels),
-+	.ch_cfg = mhi_rolling_rw151_channels,
-+	.num_events = ARRAY_SIZE(mhi_rolling_rw151_events),
-+	.event_cfg = mhi_rolling_rw151_events,
-+};
-+
-+static const struct mhi_pci_dev_info mhi_rolling_rw151_info = {
-+	.name = "rolling-rw151",
-+	.edl = "qcom/sdx75/rolling/prog_firehose_lite.elf",
-+	.config = &modem_rolling_rw151_config,
-+	.bar_num = MHI_PCI_DEFAULT_BAR_NUM,
-+	.dma_data_width = 32,
-+	.mru_default = 32768,
-+	.sideband_wake = false,
-+	.edl_trigger = true,
-+};
-+
- /* Keep the list sorted based on the PID. New VID should be added as the last entry */
- static const struct pci_device_id mhi_pci_id_table[] = {
- 	{PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0116),
-@@ -961,6 +1053,12 @@ static const struct pci_device_id mhi_pci_id_table[] = {
- 	/* Telit FE912C04 (sdx35) */
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x1c5d, 0x2045),
- 		.driver_data = (kernel_ulong_t) &mhi_telit_fe912c04_info },
-+	/* Rolling RW135R-GL (sdx35) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x2099, 0x1300),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw135r_info },
-+	/* Rolling RW135R-GL (sdx35) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x011a, 0x2099, 0x1301),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw135r_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x011a),
- 		.driver_data = (kernel_ulong_t) &mhi_qcom_sdx35_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0304),
-@@ -995,6 +1093,21 @@ static const struct pci_device_id mhi_pci_id_table[] = {
- 	/* Telit FE990B40 (sdx72) */
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x1c5d, 0x2025),
- 		.driver_data = (kernel_ulong_t) &mhi_telit_fe990b40_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1500),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1501),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1502),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x103c, 0x8fb8),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x103c, 0x8fb4),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
- 	{ PCI_DEVICE(PCI_VENDOR_ID_QCOM, 0x0309),
- 		.driver_data = (kernel_ulong_t) &mhi_qcom_sdx75_info },
- 	/* QDU100, x100-DU */
--- 
-2.53.0
-
+> 
+> > - Link to v1: https://patch.msgid.link/20260721-dts-qcom-eliza-add-fastrpc-v1-1-cbea68d8e01b@oss.qualcomm.com
+> > ---
+> >  arch/arm64/boot/dts/qcom/eliza.dtsi | 160 ++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 160 insertions(+)
+> > 
+> > +					compute-cb@7 {
+> > +						compatible = "qcom,fastrpc-compute-cb";
+> > +						reg = <7>;
+> > +
+> > +						iommus = <&apps_smmu 0x1007 0x40>,
+> > +							 <&apps_smmu 0x1067 0x0>;
+> > +						dma-coherent;
+> > +					};
+> > +				};
+> > +
+> >  				gpr {
+> >  					compatible = "qcom,gpr";
+> >  					qcom,glink-channels = "adsp_apps";
+> 
+> -- 
+> With best wishes
+> Dmitry
