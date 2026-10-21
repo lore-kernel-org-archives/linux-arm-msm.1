@@ -1,100 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792602874;
-	b=pE6tmTIm+nG2k4lxPgf8HtdrISjNuG/yRK9ZUBcL+CPug7JmGhIKw48yE1WvwkycGpzg
-	 cY9phoSfLuZMItnil3Bajhv4KxKiUbaZOBlDC6+YtewHhlyYoGPH6VXHBen2Ch2zFPUoa
-	 IPn7jBXBnCR5lbr4ak6e6AGgM0spEN3qMXFaUOS34eJlI2twBcCTVqpLH02POctgv99WC
-	 foSvYvzdi9TzHFXwQe9/7EeqfMu1YDYc0JW1h5auCg3KA0JOrx0ngIxLlwc4xPeRdam3J
-	 FM9XAODlNiVkXZk9z9O2byW1ZNIcLP2MSe0eHfJFMMr2FM4AQQ1vhrrdx7yrU8M2n2Q==
+	t=1792603138;
+	b=kGoJRJws0ES4vxPCQF11gkF2dCShdgd+NSdhkE0lxOSjzksOYIthd9MTc8YLjEXGbJse
+	 s7hdSo/qSvM8pkuh2DF7VG55sykHJoN0PhGxOLNn8YMk02c+SY3kQp1Tav4O7UjeLmT+L
+	 UO/f5nehO0cE2OJCWJjwPeLlo6IFLuzEaOyXVmhjDD0gnrC4XU4vVjCpM27EqL3T983Br
+	 m12miDgSVYkBw+rtpTO+3O1fKiBsHup22TBvgcnJrpudqjQVlcyOPul0RgYNduYYX8p38
+	 SXntGRpOomUBKF2pi+ltrlK0xMCjZyWFW0SZac/8AO2JC2hN7yfJzjFolEkS3Y7Qx8g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792602874;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=IIEwmheUGWh0VnqKa35MN/XtrDI3rgz5r0klSZQPba8=;
-	b=SRFNA2vm57Ank6e9L8kwBfh02x1T2edq1ykMbR+XUHASILvbItnMpFGb1oh+WvoHTlBC
-	 Hy9458p0THh9fgV7hWU5qfCrjtpVpiRr5OBy6Oh6NdLM5sMRqJLoesXzwNWl210dCM5MY
-	 NyJBsGRsxRJR8bIPSxHFM4AoiFrF5izp5HKI23xJRl9+Jpeu1xUW0lN+i9gKaJOYViKNk
-	 vraTubB1Yu2VrGs1SgApjsAxh4QOTETnYtSAOUW1ToLLddOmMv3cxsDvsnkA4FhMiT8I/
-	 HlZa8fSzfKdfrr05OUi/MilYV0zhhukCUnS8ze45q9o9nV6Z5Xhb/YkeU1QgJC7BHvQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792603138;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=eHS7j7tEkMzKHHd3S/aSdSM+T1e5fkH/o/+WRgKeMBg=;
+	b=T7bVas2Of75ZjnCyKPfO5sc5VJy2F46U13yh7omtQ6KoxItinlTjUitzKIHw21kaypom
+	 EDSCQEhOeiLtn0hp3rLQvg2sI2OtxqZ7tFNGIpHL5U5I2g+RbCwtaIbu4qKA+rAY7QxQR
+	 gAkeUsX2Vjwnsk8a/BLzJfj7e5CCw+HerWo96v1JUyp6Mcye7Hbp4K615F35mgnsdjFOP
+	 uwALSJWYiWAoHmtg51xikwhNQJkfb3xPcYU4X9nooq3E9ZSklzAd7JsNiQw1dvKDMismF
+	 LnF50k31mS+h5jn/nN2nZUxHYwBE8kemF5VT0OhAnATV8CSZixERNtEPCWU//0jsbwQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=MV+0efPP;
-	arc=none smtp.remote-ip=209.85.128.44
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TEPfKrU3;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE23B606A31D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:14:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BE23B606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D186606A31B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:18:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=MV+0efPP
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4a1dec056ddso6377485e9.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 10:14:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792602872; x=1793207672; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=IIEwmheUGWh0VnqKa35MN/XtrDI3rgz5r0klSZQPba8=;
-        b=MV+0efPPjre42SVRq3x08Nqwaif8RbXYpP/8z4IZC9aOkuID0XUwy/drnZy+oc2V7U
-         +x6j6MDkKPPCHgEtU/icfbi5YZkSM/4pmVt5kAgka6sSoh8m2MuL9dJTd33xZ+FSW3XF
-         M8/3m2BYNewTj5uqB9hTQ9xHHXtulTbRx55m0lgFdEHMP1PhhaUJzLEfeWYtVMVApNsy
-         +oRxH3bKVcRA1xc0HEFKiywzEspm3OzT9qmr/DFyMVDx7U8rgA+cGB/oXvHezl025tOC
-         s3IGb7yrvmwgqvg0P3/bFgd7xrwZT8KWG38ToEYi8hdgDilPMoZqn8/a/avR2AW9C1c0
-         erQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792602872; x=1793207672;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IIEwmheUGWh0VnqKa35MN/XtrDI3rgz5r0klSZQPba8=;
-        b=nYCFvIzflmcedXnqW8qoyfmkPiQ2sm4+Ec0ySnzkq1+ZVRFZeFN0TSQKWQto/YU0ME
-         i0/biYLcANcj0r7EdiJYoU2BbOgkz5A7NyioYpNi83dT4YtWClYp8mEhLzT+97Mzi0TM
-         bwzaYGT+R4ml4hihNSm8W3DWLhBMB4Ri/Tn4fTu98jClnDzgATV1GKfoY5ihNPhQEXCv
-         tf/4N7PpTj2vNopfr7Al17yTqxFE4ZXQa0pUEWpMUdJ61UJKLRsY2bc9izmyXp1q2fFf
-         4F8Quaqbb8NMn+cqYJPIRmjKF1epJPteQxa+OY6pxdnywB4gAqeLjDu6asDugmddXnlD
-         gv4w==
-X-Forwarded-Encrypted: i=1; AKwUvBzNoUTXVMTz2lVKntTqodQiUvCU49oJ1K4MSgxBl6kEYHfR5ntwJt3zKtzSqZcNq+5BqBaX/brXmczbDw0W@vger.kernel.org
-X-Gm-Message-State: AFq9FYKY+vyd3NTxpfTABEbMMvJ6Tte/eQW/1CRBGmGvXxPu6R1iwP1N
-	ZNpsQFiEuzuI4Uyfp8tSiZ6oi1Yj8YhqLlyr0ggL/buyciDi/gi+N2ES4j1A9MqQQlg=
-X-Gm-Gg: AYBFou1JPVTB5u0UjXOMqiyXl5jasMxTeFyE7W0eHU6zEjQMkdbzDMLqfkFJRLNgI2e
-	Uy1/AOBCeBWFsN7I1ftztuz5hMlVJAYsh2Qv8AUKFm5tT0CSoVXUaqm74TNAmYUHs0SusHgYpQg
-	T2aQzstyqiNb8cUE7f6otu03IkU/RP0qRyBOMU0c3jltShWK0vsi4IikTws8mDe//Y4bjg2p3O1
-	8buLnsu0A0PbzhMNuS2OtpXY5e6RuidWNzUR8TIQIX4aAx5kQzeg+isMOtSzzcQIiZd9vAsnkhY
-	WrX7NrUrivFhmMqNGKWbQeXdWESO7pSlQHCOiycoRyJa65cUkhmJX9FBVIGcYwZulbklcHp8ZRA
-	3mPMNeTwuBw13ytqutc5kqw1IULt+J33XKav2YZcxWBhnPytwQgK6RXKUNlbFfLporsqQTiPWoa
-	GmarnDhtsuYTCYnLX41yxSM/yaXWlfbQpBn2vcfLPGGuqCJspdFXLiELYkOYIG9MKZnJXEgNP+O
-	j0rVv2fVFAiQWPrMvX+H9h8lYUI2CjanHrTbS9fGSVsuhClBUKIJB1Ogy3YD4soGjo=
-X-Received: by 2002:a05:600c:628e:b0:4a1:83f0:7c91 with SMTP id 5b1f17b1804b1-4a1fdb0a346mr56541315e9.18.1792602871904;
-        Wed, 21 Oct 2026 10:14:31 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff25:4f10:9608:8385:755e:e1cc])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a203b42befsm4715775e9.8.2026.10.21.10.14.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 10:14:31 -0700 (PDT)
-Date: Wed, 21 Oct 2026 19:14:25 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-	konradybcio@kernel.org
-Cc: andersson@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
-	johannes.goede@oss.qualcomm.com, conor+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Mark Pearson <mpearson-lenovo@squebb.ca>
-Subject: Re: [PATCH v3] arm64: dts: qcom: x1e78100-thinkpad-t14s: Add thermal
- zones for PMICs
-Message-ID: <atjy8ZVUW61VBa26@linaro.org>
-References: <20261014193524.5590-1-daniel.lezcano@oss.qualcomm.com>
- <atH0oW5j9pxsTty4@linaro.org>
- <aca2cd5d-18e1-406d-a062-e219478b243c@oss.qualcomm.com>
- <ath8tHxHOdA7G-Bx@linaro.org>
- <2d885d41-7d05-458c-8364-e206dab12792@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TEPfKrU3
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B1A51F000C7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 17:18:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792603138;
+	bh=eHS7j7tEkMzKHHd3S/aSdSM+T1e5fkH/o/+WRgKeMBg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=TEPfKrU3hWePATfMd7gCWyCVuy1tt+lYkTRB4rJ/AY7VrSNGHjyKsbjk0FpOqRSw5
+	 yy1ie1wOqOUPCRLbKCS6fO0e+rDPAOIb6M77fzZfnwbb7UQqqhafWYN9E74/FfXfbK
+	 VaK+SM3oir5d03zGU9Q32k+u6Jzq5arpuBmxPInwYkTYdu/jogH+SpoZhkxcPi5Hfs
+	 cm7+5cHCDYpKv9cBgvMiuQXce2heg0mfSdJAOjN4FWVMdfl3z4qMGoc2Z+LeslTuBY
+	 8G+wXEGVXmurGiX6tCEbvdki2trIDijvQgrDtDXQ8qP2TFOMPIAUo8iVdTWIcJp2ft
+	 BBO9r0aPjm1GA==
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c423b145922so125736266b.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 10:18:58 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxXsU1T76WAooKzwFUbts5vxosRINKG5vsUvO38B2kkV5YV8OvRFqp3ZsZP4DikjtSDnifeab5azv83ZKlG@vger.kernel.org
+X-Gm-Message-State: AFq9FYLTBn/FBJsF2PwtYy7cbeMCKginpGa9kAslBC0p4yOAAuslWd4R
+	Zi4i407cE6UrVVB0vGRgBbaDf8VRyBFDeFvWJA+IwMgrBb3MlWNV+mQYu3CDS2NI95twmS6JH93
+	2iQfv8L/DpCUlwL2swOWm0etBQO+gVA==
+X-Received: by 2002:a17:907:934b:b0:c40:f296:4d43 with SMTP id
+ a640c23a62f3a-c46791a9767mr233352666b.3.1792603136742; Wed, 21 Oct 2026
+ 10:18:56 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,63 +59,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2d885d41-7d05-458c-8364-e206dab12792@oss.qualcomm.com>
+References: <20261012122934.3240030-1-linghui.wu@oss.qualcomm.com> <20261020020925.3915548-1-linghui.wu@oss.qualcomm.com>
+In-Reply-To: <20261020020925.3915548-1-linghui.wu@oss.qualcomm.com>
+From: Rob Herring <robh@kernel.org>
+Date: Wed, 21 Oct 2026 12:18:44 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLyhWzPRq6MmPJedbzVi6xLFS3zDMsnCt088jU1y0aZ6A@mail.gmail.com>
+X-Gm-Features: AclHuK_dG54Pev4-B1b3uTdIw19XkA7kcf20B4_quMyapQcVcceloVU4nu1v890
+Message-ID: <CAL_JsqLyhWzPRq6MmPJedbzVi6xLFS3zDMsnCt088jU1y0aZ6A@mail.gmail.com>
+Subject: Re: [PATCH v3] arm64: dts: qcom: shikra-iqs: add M.2 Wi-Fi and
+ Bluetooth overlay
+To: Linghui Wu <linghui.wu@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	kernel@oss.qualcomm.com, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>, 
+	Hangtian Zhu <hangtian.zhu@oss.qualcomm.com>, Cheng Jiang <cheng.jiang@oss.qualcomm.com>, 
+	Wei Deng <wei.deng@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 21, 2026 at 06:20:55PM +0200, Daniel Lezcano wrote:
-> On 10/21/26 10:49, Stephan Gerhold wrote:
-> > On Tue, Oct 20, 2026 at 06:08:56PM +0200, Daniel Lezcano wrote:
-> > > 
-> > > Thanks Stephan for the additional information, that's very helpful.
-> > > 
-> > > We currently have an urgent thermal issue on this platform, and getting this
-> > > thermal mitigation upstream is important to prevent overheating under
-> > > sustained workloads.
-> > > 
-> > > Would it be acceptable to address the sensor naming and description
-> > > improvements in a follow-up patch, so that we can get the thermal protection
-> > > in place first?
-> > > 
-> > > Of course, if any of these changes are critical for the correctness of the
-> > > thermal mitigation, we should address them now.
-> > > 
-> > 
-> > I have no intention to delay this patch. In fact, since I'm using the
-> > latest unmodified stable kernel on my T14s, I'm also suffering from
-> > these thermal issues. :-)
-> > 
-> > On the other hand, we are at the beginning of the merge window and Bjorn
-> > is unlikely to queue patches until that ends. The changes that
-> > I suggested are purely cosmetic (the names of the thermal zones), there
-> > is no need to repeat the thermal validation. The throttling behavior
-> > will be identical no matter which name is used for the thermal zones.
-> > 
-> > IMO we should use the remaining time until the merge window ends to
-> > correct the naming to avoid any confusion for people reading the patch
-> > once it lands.
-> 
-> Ok, fair enough
-> 
-> I propose the following names for the thermal zone:
-> 
->  dram-board-thermal
->  gpu-board-thermal
->  fan-board-thermal
->  wwan-board-thermal
->  chg-board-thermal
->  cpu-board-thermal
->  typec-board-thermal
-> 
-> so we can capture with the name the ones related to the non-on-die sensors
-> 
-> Sounds good ?
+On Mon, Oct 19, 2026 at 9:09=E2=80=AFPM Linghui Wu <linghui.wu@oss.qualcomm=
+.com> wrote:
+>
+> Add an overlay for M.2 Key-E Wi-Fi and Bluetooth modules on the Qualcomm
+> Shikra IQS EVK.
+>
+> The M.2 variant uses the external module connected through the Key-E
+> connector instead of the onboard WCN3988 devices. Disable the onboard
+> Wi-Fi and Bluetooth nodes when the overlay is selected so the device tree
+> matches the hardware variant and does not probe the unavailable onboard
+> connectivity path.
+>
+> Describe the PCIe and UART connections through the M.2 connector, the
+> 3.3 V supply, the W_DISABLE signals and the PCIe reset signal.
+>
+> The Wi-Fi PCIe path was tested on a Shikra IQS EVK with a QCC2072
+> module. The overlay was applied, the link trained at Gen2 x1 and the
+> endpoint enumerated. Bluetooth UART and HCI runtime validation is
+> pending.
+>
+> Co-developed-by: Wei Deng <wei.deng@oss.qualcomm.com>
+> Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
+> Signed-off-by: Linghui Wu <linghui.wu@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Drop regulator-boot-on and startup-delay-us from the 3.3 V regulator.
+>
+> Changes in v3:
+> - Drop the unused reg override from the disabled TC9563 node.
+>
+>  arch/arm64/boot/dts/qcom/Makefile             |   1 +
+>  .../dts/qcom/shikra-iqs-evk-m2-wifi-bt.dtso   | 105 +++++++++++++++++
+>  2 files changed, 106 insertions(+)
+>  create mode 100644 arch/arm64/boot/dts/qcom/shikra-iqs-evk-m2-wifi-bt.dt=
+so
+>
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom=
+/Makefile
+> index 1c86e7e98f55..799faa32e2d9 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -339,6 +339,7 @@ dtb-$(CONFIG_ARCH_QCOM)     +=3D sdx75-idp.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)        +=3D shikra-cqm-evk.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)        +=3D shikra-cqs-evk.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)        +=3D shikra-iqs-evk.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)        +=3D shikra-iqs-evk-m2-wifi-bt.dtbo
 
-That works for me, I don't have a strong opinion about the naming (maybe
-@Konrad has?). I guess people reading this might mistakenly assume that
-these refer to separate "sub-boards" in the sense that there is a
-"mainboard", a "Type-C board", a "DRAM board", a "GPU board", etc.
-But I can't think of a better name either. :-)
+Overlays must be applied to a base DT to test that they apply. Sashiko
+has pointed out that this doesn't apply on every version you've sent
+and you've not replied to the report. Please reply on the other
+issues.
 
-Thanks,
-Stephan
+Rob
