@@ -1,112 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792597434;
-	b=VTvUFthNpzynpjfInF4AozXN2ckv4j5Mz6hIP4Ydg7pbTYPZoJnKIaAX2+rCdOMbwrsP
-	 1IV25k1r5nlqwRmJWmpAuHZOKB3Jhe0CXVed7z49HA6EufnBitl2nZsrHD4o/VXP1xmV9
-	 KHqA/kF6BfgY3mIEEdUOB6f0CaO/KBvgCio41iOyBpedgIxYF9qVBxsbx5JwI2BWT6afy
-	 lY5niq7sNcW44N0JukGcouK1D6tJByYz3Ym982/4fDd0/DWkZWi7j+4dE9yRkH6RMODBS
-	 E6heQbtUDye1CQkffXX+d+kYOk5+LRXZP29lAfjEfI50g0OHymKPxNbL33K1Z5/AI8A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792597434;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
-	b=H5wieG6q2U9l6MhwoPxvMCBOtIOvsD3a2eaWsHEaNyMZrs3bxPMWd+Nrw0PAG72r18UL
-	 d4vtFkDq9feFED4aqcKiZZKHUSznkMvwsTDp0UrRAjwXpN/uAD3LWRW3lhR6oVJ/SiM3N
-	 HHPm7J63EY+zs8Famw26H61+MDW3Kze/YI86lnfSe9FeAaP+8drJj1rd86Iky4yynk93v
-	 jJPy7KDfLk+jO4086L8ncBFooFpCXDwloq0mW1wGsY4j/TsuGaPORUIGiB0Rpu7HHSzoJ
-	 RHQ8Dk/Ky5B1h5xCQCqYIv9XPPwEP2L5hP65hGSyc3z7aezwqMlC9sPm07PzdVH3fCg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BegaPk5m;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OdJfXM9q;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.54
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792597473;
+	b=nE8MH++EB1mZMGQUWSBbW3oeRbeha92bjQYUcKMtOF5Di62SFAwwFS2aEhrh4Yxz+f1Q
+	 X5hdCZZmx0Ym02plJR+p8kB5MFmT7aeZOdTPCc5B4Iv+aPkc3TwlNHa8tqdTmJCATZgrD
+	 G9ngKm5RAr6ymlpnTkIu26JjyV2yrt00RcWGafFS8TJnEAst0VNGgXhgf8eOvjD8Zte1L
+	 3RBUgzusVcSN8oAtlXzP+jd3INyEj8oIONshURHxlMnnZ/ZD8dQhoSG8IRgJlPLNsQHTO
+	 glnpr3+jry2XOmElD0/p7UBMQyMHGlBljJTPDV+edodu/8+ygUlZvR3fuxgSXtqtRqw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792597473;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=JP3isnTjkGCFTemUyIlLVxDc+jortqiyhczyp4kIfzM=;
+	b=4Ol//0UTjQO3T6B8diVc5IznrsyWdkndmChKcpehO08AdfhnDfvfdgaIfgqnUI8WfLMd
+	 dV+DkI8naV8KZJJpNSAtbZeTmuCd0cYp02nIBLVWP+EacdjI0xwjebW3rXCcCoTidt8Fv
+	 yI+WD2JKf+wFyTi2xBO6+IOXpHZWNcpLm6XE5C+VamhB77ypZjGdSIJdRe/79UuwL3YLV
+	 W145w6AAElEtcy3i0f4D12mBzmceqrmkdxXkNC1T/qINleYaPLhWLN3HVYDgHnUB2FTMu
+	 2pSGiEGFqGvjOdZTpI73vXWQgz4px5wf1jt2G0aKvOSbL+dIXRDMKy+EcPmBTrta0Jw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=flipper.net;
+	spf=pass smtp.mailfrom=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b="fT1Ejq+/";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.54
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAED606C06A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3AAED606C06A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDFDA60A2628
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:44:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CDFDA60A2628
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flipper.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BegaPk5m;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OdJfXM9q
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFU42l1557963
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=; b=BegaPk5mCznUwGbK
-	URIVes/UB0VI1nKH97RcBzjxTWA4Ma27Q6abc/xNRLxwSqJrb4Q7QEPVhnrFXtDm
-	fAQmn+/NG/rA/5aQcfiKm5wqfm5Hi4+VP5F0oiZxCsj8rW1//UewQELaPIO/jU6T
-	LbvATSTvAz/+PC8XcbJzGSR85/su63ERJAAo3vS7d0Bg+7XxHO16DgBj4GhU9Rop
-	YPlJ8TL435w3mB+P3QTLamJ5T5jZbhsgCgk7/+LU8wrC8YuRQD+FG94d8/hZ+WeC
-	JxJtrNdKBp0sFLMOdLuuRpl5gBD6vgIKBJ9oRO0sudXWudGSvW7SJgTOoGnVQaCE
-	21m4xQ==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajmq70-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:52 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-155a75f91e1so1102752c88.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:52 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=fT1Ejq+/
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c4677aad67bso97909866b.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:44:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792597471; cv=none;
+        d=google.com; s=arc-20260327;
+        b=q/XMPU2FrH97tuliUaISOG+5eO1TWI7bnNj5UWjFIDARWcHkGmvcLYX3NtcAm51C+8
+         2KfU4Hd4rg/lRJPY61/65N0xq5hOx2X+njyBrvEm4vQsyTIBl+ZL4VTD1WvLTzav861E
+         zg5o6eDZNX90esCNF7eml+E9wOkgjGlNEIsNUIPTZ2UnemtW4O/Tm/+KHWy25blCq6Xq
+         3EMVQbWzY4V1r5HHaG43fQhHA8yJ//nE5L5Yjr/xnBUextOwqG5xbUTj/a+qtWT9v1us
+         j/J3kwWXNaGgcQDRHARxPufUVAt3ljqKjAunh5KXBDXLb3qxVv/j/WRxsf+4URE5014c
+         pjNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=JP3isnTjkGCFTemUyIlLVxDc+jortqiyhczyp4kIfzM=;
+        fh=GbPHSe1UpyMqPOkftt9mTSdV1vzLIbuehDQaVjexvFg=;
+        b=pGClZZJvpRU58we1osEAVLrPwLbqSFlfYmIA1iP5VAFxQ+CdK6L8swYB/sC+06gq43
+         +gARrdTVIbxnia5eO2FYGdp0pB9xLwRM52/QGSaU53EoWE1A7BPSBdqXoWdIXCfYd5MX
+         h6GIj8384zPsfhOMg8sqmQmce3pnCaRz1e6pI0ojhWfqvuLt+N4SxuBDO4JbqpzCNzLV
+         ZyRuDr1os6nRfm3IHpT6YTXKpTbHz4+dpa72j9h0td7KoMjZTRJSX+XLRkNV6RualNlE
+         vYBA1uk4h8yp8N8xGYEd1MiTR0s9Y6YxNr38DHhv3dDV8UWbQt7V5C4Bqxg4FbKfYtTC
+         SYDw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792597431; x=1793202231; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
-        b=OdJfXM9qwKdOogQZugI9qeSgybxnMtCvBj2gzU75B36HUhMzW3FU6qaS2bZMgZcw3t
-         EmdvxIp3kSO2D3hAUZmKtMIfbws/sTfMrliEkcERPmbzI6mXnC7MkG6PWH8xP5Dky+Mz
-         y9npqd5Y7S0WLjG6LNWFsQnw0GoV+bDNhp/aeqEa9LdF4URZJp/zhOgh0RWr5Gx1zUc0
-         Rvh4U7vSguuSElbqOmCL9+DbI7b3CnyKNDIBPMxSeMx2eUjQzcKo6b5wfYE6J1GM2Js8
-         9ONDWEnYFYhhlF/tveyUqkwwYPWiLC1A1Bws1uoFgwtT+Xxne4CR/uCdb4UyXulFYuNK
-         gMvQ==
+        d=flipper.net; s=google; t=1792597471; x=1793202271; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=JP3isnTjkGCFTemUyIlLVxDc+jortqiyhczyp4kIfzM=;
+        b=fT1Ejq+/L56l79ie+PNmdQbxUE9/wPpsUh5WzFCARRIo7DhXjRMQdSMvNzHnT/eXUK
+         U1uG49UybtIek/3tGTHsFnortB7I2Ud3eqM90D/fcwX2ZoNpWpLOYqIySWj5tZGiVmo5
+         A8c4weGoCSi9qGxJAFMQK7fltmLgJitKz6b5FZvPv8IhrMLbQUQ3XkwLPLN4X5zIAw7V
+         jDdMr7FQo9B1Jxu6a/lEtrZm7yUThf57nza2x9rNdhhjVZ2bCwn+ycLxa1LDU2+7gAwM
+         c4w3om4KynnPQ8oVYNL8wqUCw1p0MtaOC4BAZXAZdu98lWHTUOJYF6I9QRNLwZnlW/9S
+         b/bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792597431; x=1793202231;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1792597471; x=1793202271;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
-        b=I048Y28NKQp+w0CESmCbw6253Nkp/mHqFnQAyFGiNqcIEhAss7zZng84nr3cWfHVrb
-         RpcNeEOlt24W4A4Z6YSNHsWp/EmMZcEXpCfADWCeauAxSR6LUb8eb6ED4B7CgFqyD6I5
-         kNFtC4l4dDB2C4VLmyw5+CfrEFc6l8ZRbczB9vKYHWV981SvSWzQLOg/QfYl4iR6IapK
-         UhyzWh/ITrW5Ox23wwk/JgUkv8ambRJGsazCgMmwL9gHSMUTSvvmSocavNLZuGnL/lqe
-         vERHajLUrP3c1KwkuH2YMIIcSm9i1Sg+ZN1q484BvY4uQT0oHesejBarjG+exa2NDUEa
-         jplg==
-X-Forwarded-Encrypted: i=1; AKwUvBzXOEai6aub/2ZYMDeTuakfPTyaT7eko5kjxeekChWJP8E4ZITufHij2U8dU+gVAJ/08PzdB0LEApel7Cqr@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ+/FYzWCWi5OuWUNk6OBZXolpUp01qq9l9o0NHhEZEmMXCQSwf
-	T4kzqAji7O7OQ+4yv1mcakvsL1ByekN1G9Kjcz4YrFyqdaX1/NyBHBYIYankrZ/CIH+wXExcfHX
-	cNBNKpOmDmvQG09Z3CoOdjvSThhFEk0H/9ugVzot5s+5DOw8DI/mmgYlvzk1XemZn1yqA
-X-Gm-Gg: AYBFou2fxEIHYS4bMoASnN09iHwCRA/m4emVoo2n1OBthQHuU2zKXgA2mQ4ZaOtLIgC
-	j+lBzQLupDnlKRndfTj7DW1RneEjgEmN+EzoTxg4tl9ENWXmOO+rGW43kgPxynQKYhUuMPTv+Fy
-	aAqSKzR7wp/ReiFrGy3Inyf7tUSrWyCUAstldIEfCndK2ElQfBXllW3vx1cfQQcenZPDBBW9iAc
-	a99vI3cqG2bY7WsMe+GMPtpmDpmIdgpfmCWPNEMesj4KVpEe/fcpVGI0iMIAK1JqE9oTZqe4t4+
-	VT+fveL6S0HSJNaOWh3WhR/84MpxbcXawUkwGN2I6uHk4qzVw7BgbeYf4qDIXXpLgyo4f+6iGa5
-	eOv/0Ka8TzNw8xgcRSNj6UHhQ
-X-Received: by 2002:a05:701b:4210:20b0:159:f192:5290 with SMTP id a92af1059eb24-18dbf218391mr6806052c88.13.1792597430846;
-        Wed, 21 Oct 2026 08:43:50 -0700 (PDT)
-X-Received: by 2002:a05:701b:4210:20b0:159:f192:5290 with SMTP id a92af1059eb24-18dbf218391mr6806031c88.13.1792597430250;
-        Wed, 21 Oct 2026 08:43:50 -0700 (PDT)
-Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 08:43:49 -0700 (PDT)
-From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 21:13:11 +0530
-Subject: [PATCH 5/5] firmware: qcom: scm: Drop exported ICE wrapper
- functions
+        bh=JP3isnTjkGCFTemUyIlLVxDc+jortqiyhczyp4kIfzM=;
+        b=FjXd66XTe6lYS+hpqJCBhuHHtcfKy0cmjYQpaXZy1tytMZnZmP3i3qfH5lIBrdGABf
+         /JO8LPpGfjfXxHmGlH19CAXELnOuGU+2BAzyMHwrjWFW+Aq6DGRss4QZu/Zei1Pwm55+
+         3gv3Iscu7cqFweYAmXCcdJxLP+iPboUCcPybRn+m4lEGPUcIK3H6oSX4YCbzlFEQ9/CK
+         ty+WlIrEzkjTRnZLz8aJW4z5kM/T5fkZ/cK5kJkbR+zwGuVeFp+d+tR83Fxs+4t/TgJv
+         0wLIQbOEyZW7/LgY5B1mErp3txeEgzx7WBRxjlfyDcPHmr+EaRIi+Ms2NeIkpMILysRA
+         vbYA==
+X-Forwarded-Encrypted: i=1; AKwUvBy18nooR0KEx9cRxiXuNMvQhiu7Y9/PwtkXIQ1biahjYAeqZOr9LITbiXUC1CWzeJvghU9PtxuD2R6RgQB+@vger.kernel.org
+X-Gm-Message-State: AFq9FYI78WnY/QWgvSyXjS1k8aVTWoAcgekMZgahOkFY8YJTKZQEwwa/
+	SFfEOXBSTrvV+EgjcBtw7QZ5pVxjlqQVnxnN5PpXsi/zj0o/yxQXw9gruEXeGeW/crcCXapRpHe
+	29FA5YS1si+2TeLL+N2JpNPSF4KC+EMRrTrJP0lZLvQ==
+X-Gm-Gg: AYBFou3u8fgX+TrFGTKmWlR9o0kF91u4hjrR9sPGuKoc9/01Zl+Cca+VVbj7+lWMLZp
+	xO0MfZ38nEoeHNZwivkPZyUikHywM+PDNC0vDr31hybgo93HQbh5vOm1K+u638Ftybq1V2KOkoX
+	Dl/rQkY0yu5F8UZmCi15h1bCq6jDrHr9fC7YepLEael5cvlWnRMpcyFjR1wO1GP1RAQ7OG3YQcs
+	e8b4bpDvrZ59jrlvZ4R9LHtQ3uI8ALJVxC1KREu1gL5WNA1YpV8KM4dTOPrlvcrTOuileIvSj08
+	gMsZJV5cT9fI4z6u7NwFitYijZZBQf86xQnUto/tGuj1lSDRbZbBDNQEMb5iE2kU7OFniJJLfeM
+	Bk6HmkaEzmPWs9aydt/C1IBdSVpngBV/Pz/GPAe4aEmALHlRnzCuwKphDJdHRMaz00X3pcw==
+X-Received: by 2002:a17:906:4fc8:b0:c2d:ca32:2176 with SMTP id
+ a640c23a62f3a-c467961d9f7mr245660266b.8.1792597471151; Wed, 21 Oct 2026
+ 08:44:31 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,336 +104,187 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-ice-migrate-tee-svc-v1-5-b035be7aab0a@oss.qualcomm.com>
-References: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
-In-Reply-To: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Selvam Sathappan Periakaruppan <selvam.periakaruppan@oss.qualcomm.com>
-Cc: Basant Kumar <basantk@qti.qualcomm.com>, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
-        Harshal Dev <harshal.dev@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=10444;
- i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
- bh=vaZC/5EUswfLlBTapWjQ/fqR5EMZBzDkoGZAoqbtT8o=;
- b=al1RIRAzrlNsUBRsfVI8KChV9dCMpvFmWrcivh2ByRKvHkcb+VaXcduD5qPhnvKQWZfSpL5jL
- eihRtkRMr7/Bdp2+VgBRKL+lU62Nl1ScdwAk7VF5/X1LNkEgkWLEQVA
-X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
- pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX0KmhVIyo6B0N
- dBy1qxnC/yeXSwyA3rFKHZTSDBRHa2Tx5scLassB7y1v1/PxmIsfHDrl8uXmAbQmDmK6TZH2O7H
- NHH+R57WpVQNpkBxBV4dBFx2OsMr4ZQbchag+N36LruZ2cMxxO/zNiHPHsQnUngewGdmLlnRw0q
- Z2hMnYVRR0o1efOxtRAC0IG7OosW1WVrAiKZp8WJTZWBfb3OzvMFQuDkcrFOK4PDHFCaJxkIqYo
- 7b2UUbWlruSyRQrbqYNXnxRNwRiYKjT7UDvjrsmoIOH94cqWYFyGpso/iV4ebSu4lklBIZsF5XV
- qolxQf6CdoBaQhvOVgfPr6qS9KKIh7hRyCIlLBwr7hGVZlNtwisxaVDPW95sBRlDa3yEsdp7wQ4
- PUUT7uLKjXP8RKDxWJYDcdm0nWKCf9dv6VzehlgwhIKDppesdq+td80hg27Wn/cLzKz9BxWRyIk
- 2lnjoWWZsAamOBcv5Wg==
-X-Proofpoint-GUID: n_F8ZvJ-Y9CFtjP-YH9CiAdS7RBhuGGA
-X-Proofpoint-ORIG-GUID: n_F8ZvJ-Y9CFtjP-YH9CiAdS7RBhuGGA
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfXw0lefflQkGTA
- 2sk88ItwKHJnDQr2OvGgHzuWJtYhW92yC4MBYiJxYys3rcsIBTmfNR23iDTRdurthSRXQe7BuDg
- QB6FA1Utl5XLy6czfB2AKOy3pUfygIQ=
-X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad8ddb8 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=F3QbZBHQcOWnaqSeXxkA:9 a=QEXdDO2ut3YA:10
- a=Fk4IpSoW4aLDllm1B1p-:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210062
+References: <20261021-pcie6_fix-v1-0-ad37134c35a3@oss.qualcomm.com> <20261021-pcie6_fix-v1-1-ad37134c35a3@oss.qualcomm.com>
+In-Reply-To: <20261021-pcie6_fix-v1-1-ad37134c35a3@oss.qualcomm.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Wed, 21 Oct 2026 19:44:20 +0400
+X-Gm-Features: AclHuK_OzLUc98RwVb-VyZ4la1jnJworigni-GUiOSt1W-ytIr-eQQIArUmgwS4
+Message-ID: <CAKTNdwG5XA_chr2ZM9qTnr2RaDMzOjdb85bRdCr4aJCr1EGy7Q@mail.gmail.com>
+Subject: Re: [PATCH 1/3] dt-bindings: connector: Add PCIe M.2 Mechanical Key B connector
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-pci@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Drop the exported ICE wrapper functions from the SCM driver since the ICE
-driver has now migrated to generic ICE service which allows re-direction of
-of ICE secure service calls to the appropriate TEE (QTEE or OPTEE) at
-runtime.
+Hi Krishna,
 
-Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
----
- drivers/firmware/qcom/qcom_scm.c       | 110 ++++++++-------------------------
- include/linux/firmware/qcom/qcom_scm.h |  20 ------
- 2 files changed, 27 insertions(+), 103 deletions(-)
+On Wed, Oct 21, 2026 at 5:51=E2=80=AFPM Krishna Chaitanya Chundru
+<krishna.chundru@oss.qualcomm.com> wrote:
+>
+> Add the devicetree binding for PCIe M.2 Mechanical Key B connector
+> defined in the PCI Express M.2 Specification, r4.2, sec 3.2.19.1. This
+> connector is used to attach WWAN Adapters to the host machine over
+> interfaces such as PCIe, USB3.1 Gen1, SSIC, or USB 2.0, selected by the
+> Adapter's configuration pins.
+>
+> The connector provides a primary power supply of 3.3V/VBAT, along with
+> optional GPIO signals for WWAN-specific power/radio control:
+> FULL_CARD_POWER_OFF#, RESET#, W_DISABLE1#/2#, WAKE_ON_WWAN#, and DPR.
+>
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.co=
+m>
+> ---
+>  .../bindings/connector/pcie-m2-b-connector.yaml    | 146 +++++++++++++++=
+++++++
+>  MAINTAINERS                                        |   1 +
+>  2 files changed, 147 insertions(+)
+>
+> diff --git a/Documentation/devicetree/bindings/connector/pcie-m2-b-connec=
+tor.yaml b/Documentation/devicetree/bindings/connector/pcie-m2-b-connector.=
+yaml
+> new file mode 100644
+> index 000000000000..a7f4bcbc5119
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/connector/pcie-m2-b-connector.yam=
+l
+> @@ -0,0 +1,146 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/connector/pcie-m2-b-connector.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: PCIe M.2 Mechanical Key B Connector
+> +
+> +maintainers:
+> +  - Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> +
+> +description:
+> +  A PCIe M.2 B connector node represents a physical PCIe M.2 Mechanical =
+Key B
+> +  connector. Mechanical Key B connectors are used to connect WWAN device=
+s to
+> +  the host machine over interfaces like PCIe, USB3.1 Gen1, SSIC, or USB =
+2.0,
+> +  selected by the Adapter's configuration pins.
+> +
+> +properties:
+> +  compatible:
+> +    const: pcie-m2-b-connector
+> +
+> +  vpcie3v3-supply:
+> +    description: A phandle to the regulator for the 3.3v/VBAT supply.
+> +
+> +  full-card-power-off-gpios:
+> +    description: GPIO output to FULL_CARD_POWER_OFF# signal. This signal=
+ is
+> +      used by the host system to turn off the entire Adapter. Refer, PCI
+> +      Express M.2 Specification r4.0, sec 3.2.13.1 for more details.
+> +    maxItems: 1
+> +
+> +  reset-gpios:
+> +    description: GPIO output to RESET# signal. This signal is used by th=
+e
+> +      host system to place the WWAN Adapter into a power-on reset condit=
+ion.
+> +      Refer, PCI Express M.2 Specification r4.0, sec 3.2.13.2 for more
+> +      details.
+> +    maxItems: 1
+> +
+> +  w-disable1-gpios:
+> +    description: GPIO output to W_DISABLE1# signal. This signal is used =
+by
+> +      the host system to disable the WWAN radio on the Adapter. Refer, P=
+CI
+> +      Express M.2 Specification r4.0, sec 3.1.12.3 for more details.
+> +    maxItems: 1
+> +
+> +  w-disable2-gpios:
+> +    description: GPIO output to W_DISABLE2# signal (default function of
+> +      GPIO_10). This signal is used by the host system to disable a seco=
+nd
+> +      radio on the Adapter. Refer, PCI Express M.2 Specification r4.0,
+> +      sec 3.1.12.3 for more details.
+> +    maxItems: 1
+> +
+> +  wowwan-gpios:
+> +    description: GPIO input to WAKE_ON_WWAN# (WoWWAN#) signal. The Adapt=
+er
+> +      asserts this signal to wake up the host system. Refer, PCI Express=
+ M.2
+> +      Specification r4.0, sec 3.2.13.3.6 for more details.
+> +    maxItems: 1
+> +
+> +  dpr-gpios:
+> +    description: GPIO output to the Dynamic Power Reduction (DPR) signal=
+.
+> +      This signal is provided by a host system proximity sensor to the
+> +      Adapter to trigger a reduction in the radio transmit output power =
+to
+> +      meet regulatory SAR requirements. Refer, PCI Express M.2 Specifica=
+tion
+> +      r4.0, sec 3.2.13.4 for more details.
+> +    maxItems: 1
 
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 9aeb2cefa77a..2d2a4715a0c7 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -1405,7 +1405,7 @@ EXPORT_SYMBOL_GPL(qcom_scm_ocmem_unlock);
-  * Return: true iff the SCM calls wrapped by qcom_scm_ice_invalidate_key() and
-  *	   qcom_scm_ice_set_key() are available.
-  */
--static bool __qcom_scm_ice_available(struct device *dev)
-+static bool qcom_scm_ice_available(struct device *dev)
- {
- 	return __qcom_scm_is_call_available(dev, QCOM_SCM_SVC_ES,
- 					    QCOM_SCM_ES_INVALIDATE_ICE_KEY) &&
-@@ -1413,12 +1413,6 @@ static bool __qcom_scm_ice_available(struct device *dev)
- 					     QCOM_SCM_ES_CONFIG_SET_ICE_KEY);
- }
- 
--bool qcom_scm_ice_available(void)
--{
--	return __qcom_scm_ice_available(__scm->dev);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_ice_available);
--
- /**
-  * qcom_scm_ice_invalidate_key() - Invalidate an inline encryption key
-  * @index: the keyslot to invalidate
-@@ -1431,7 +1425,7 @@ EXPORT_SYMBOL_GPL(qcom_scm_ice_available);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
-+static int qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1444,12 +1438,6 @@ static int __qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
- 	return qcom_scm_call(dev, &desc, NULL);
- }
- 
--int qcom_scm_ice_invalidate_key(u32 index)
--{
--	return __qcom_scm_ice_invalidate_key(__scm->dev, index);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_ice_invalidate_key);
--
- /**
-  * qcom_scm_ice_set_key() - Set an inline encryption key
-  * @index: the keyslot into which to set the key
-@@ -1471,10 +1459,10 @@ EXPORT_SYMBOL_GPL(qcom_scm_ice_invalidate_key);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_ice_set_key(struct device *dev, u32 index,
--				  const u8 *key, u32 key_size,
--				  enum qcom_ice_cipher cipher,
--				  u32 data_unit_size)
-+static int qcom_scm_ice_set_key(struct device *dev, u32 index,
-+				const u8 *key, u32 key_size,
-+				enum qcom_ice_cipher cipher,
-+				u32 data_unit_size)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1506,16 +1494,7 @@ static int __qcom_scm_ice_set_key(struct device *dev, u32 index,
- 	return ret;
- }
- 
--int qcom_scm_ice_set_key(u32 index, const u8 *key, u32 key_size,
--			 enum qcom_scm_ice_cipher cipher, u32 data_unit_size)
--{
--	return __qcom_scm_ice_set_key(__scm->dev, index, key, key_size,
--				      (enum qcom_ice_cipher)cipher,
--				      data_unit_size);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_ice_set_key);
--
--static bool __qcom_scm_has_wrapped_key_support(struct device *dev)
-+static bool qcom_scm_has_wrapped_key_support(struct device *dev)
- {
- 	return __qcom_scm_is_call_available(dev, QCOM_SCM_SVC_ES,
- 					    QCOM_SCM_ES_DERIVE_SW_SECRET) &&
-@@ -1527,12 +1506,6 @@ static bool __qcom_scm_has_wrapped_key_support(struct device *dev)
- 					    QCOM_SCM_ES_IMPORT_ICE_KEY);
- }
- 
--bool qcom_scm_has_wrapped_key_support(void)
--{
--	return __qcom_scm_has_wrapped_key_support(__scm->dev);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_has_wrapped_key_support);
--
- /**
-  * qcom_scm_derive_sw_secret() - Derive software secret from wrapped key
-  * @eph_key: an ephemerally-wrapped key
-@@ -1549,9 +1522,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_has_wrapped_key_support);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_derive_sw_secret(struct device *dev,
--				       const u8 *eph_key, size_t eph_key_size,
--				       u8 *sw_secret, size_t sw_secret_size)
-+static int qcom_scm_derive_sw_secret(struct device *dev,
-+				     const u8 *eph_key, size_t eph_key_size,
-+				     u8 *sw_secret, size_t sw_secret_size)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1589,13 +1562,6 @@ static int __qcom_scm_derive_sw_secret(struct device *dev,
- 	return ret;
- }
- 
--int qcom_scm_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
--			      u8 *sw_secret, size_t sw_secret_size)
--{
--	return __qcom_scm_derive_sw_secret(__scm->dev, eph_key, eph_key_size,
--				   sw_secret, sw_secret_size);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_derive_sw_secret);
- 
- /**
-  * qcom_scm_generate_ice_key() - Generate a wrapped key for storage encryption
-@@ -1608,8 +1574,8 @@ EXPORT_SYMBOL_GPL(qcom_scm_derive_sw_secret);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_generate_ice_key(struct device *dev,
--				       u8 *lt_key, size_t lt_key_size)
-+static int qcom_scm_generate_ice_key(struct device *dev,
-+				     u8 *lt_key, size_t lt_key_size)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1636,12 +1602,6 @@ static int __qcom_scm_generate_ice_key(struct device *dev,
- 	return ret;
- }
- 
--int qcom_scm_generate_ice_key(u8 *lt_key, size_t lt_key_size)
--{
--	return __qcom_scm_generate_ice_key(__scm->dev, lt_key, lt_key_size);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_generate_ice_key);
--
- /**
-  * qcom_scm_prepare_ice_key() - Re-wrap a key with the per-boot ephemeral key
-  * @lt_key: a long-term wrapped key
-@@ -1655,9 +1615,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_generate_ice_key);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_prepare_ice_key(struct device *dev,
--				      const u8 *lt_key, size_t lt_key_size,
--				      u8 *eph_key, size_t eph_key_size)
-+static int qcom_scm_prepare_ice_key(struct device *dev,
-+				    const u8 *lt_key, size_t lt_key_size,
-+				    u8 *eph_key, size_t eph_key_size)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1695,14 +1655,6 @@ static int __qcom_scm_prepare_ice_key(struct device *dev,
- 	return ret;
- }
- 
--int qcom_scm_prepare_ice_key(const u8 *lt_key, size_t lt_key_size,
--			     u8 *eph_key, size_t eph_key_size)
--{
--	return __qcom_scm_prepare_ice_key(__scm->dev, lt_key, lt_key_size,
--				  eph_key, eph_key_size);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_prepare_ice_key);
--
- /**
-  * qcom_scm_import_ice_key() - Import key for storage encryption
-  * @raw_key: the raw key to import
-@@ -1716,9 +1668,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_prepare_ice_key);
-  *
-  * Return: 0 on success; -errno on failure.
-  */
--static int __qcom_scm_import_ice_key(struct device *dev,
--				     const u8 *raw_key, size_t raw_key_size,
--				     u8 *lt_key, size_t lt_key_size)
-+static int qcom_scm_import_ice_key(struct device *dev,
-+				   const u8 *raw_key, size_t raw_key_size,
-+				   u8 *lt_key, size_t lt_key_size)
- {
- 	struct qcom_scm_desc desc = {
- 		.svc = QCOM_SCM_SVC_ES,
-@@ -1756,24 +1708,16 @@ static int __qcom_scm_import_ice_key(struct device *dev,
- 	return ret;
- }
- 
--int qcom_scm_import_ice_key(const u8 *raw_key, size_t raw_key_size,
--			    u8 *lt_key, size_t lt_key_size)
--{
--	return __qcom_scm_import_ice_key(__scm->dev, raw_key, raw_key_size,
--				 lt_key, lt_key_size);
--}
--EXPORT_SYMBOL_GPL(qcom_scm_import_ice_key);
--
- static struct qcom_ice_ops qcom_ice_ops_scm = {
- 	.drv_name = "qcom_scm",
--	.is_ice_available = __qcom_scm_ice_available,
--	.ice_invalidate_key	= __qcom_scm_ice_invalidate_key,
--	.ice_set_key = __qcom_scm_ice_set_key,
--	.ice_has_wrapped_key_support = __qcom_scm_has_wrapped_key_support,
--	.ice_derive_sw_secret = __qcom_scm_derive_sw_secret,
--	.ice_generate_key = __qcom_scm_generate_ice_key,
--	.ice_prepare_key = __qcom_scm_prepare_ice_key,
--	.ice_import_key	= __qcom_scm_import_ice_key,
-+	.is_ice_available = qcom_scm_ice_available,
-+	.ice_invalidate_key	= qcom_scm_ice_invalidate_key,
-+	.ice_set_key = qcom_scm_ice_set_key,
-+	.ice_has_wrapped_key_support = qcom_scm_has_wrapped_key_support,
-+	.ice_derive_sw_secret = qcom_scm_derive_sw_secret,
-+	.ice_generate_key = qcom_scm_generate_ice_key,
-+	.ice_prepare_key = qcom_scm_prepare_ice_key,
-+	.ice_import_key = qcom_scm_import_ice_key,
- };
- 
- /**
-@@ -2905,7 +2849,7 @@ static int qcom_scm_probe(struct platform_device *pdev)
- 		qcom_pas_ops_register(&qcom_pas_ops_scm);
- 	}
- 
--	if (__qcom_scm_ice_available(scm->dev)) {
-+	if (qcom_scm_ice_available(scm->dev)) {
- 		qcom_ice_ops_scm.dev = scm->dev;
- 		qcom_ice_svc_ops_register(&qcom_ice_ops_scm);
- 	}
-diff --git a/include/linux/firmware/qcom/qcom_scm.h b/include/linux/firmware/qcom/qcom_scm.h
-index a0a6bc0229c4..36b87be82804 100644
---- a/include/linux/firmware/qcom/qcom_scm.h
-+++ b/include/linux/firmware/qcom/qcom_scm.h
-@@ -46,13 +46,6 @@ enum qcom_scm_sec_dev_id {
- 	QCOM_SCM_ICE_DEV_ID     = 20,
- };
- 
--enum qcom_scm_ice_cipher {
--	QCOM_SCM_ICE_CIPHER_AES_128_XTS = 0,
--	QCOM_SCM_ICE_CIPHER_AES_128_CBC = 1,
--	QCOM_SCM_ICE_CIPHER_AES_256_XTS = 3,
--	QCOM_SCM_ICE_CIPHER_AES_256_CBC = 4,
--};
--
- #define QCOM_SCM_PERM_READ       0x4
- #define QCOM_SCM_PERM_WRITE      0x2
- #define QCOM_SCM_PERM_EXEC       0x1
-@@ -86,19 +79,6 @@ int qcom_scm_ocmem_lock(enum qcom_scm_ocmem_client id, u32 offset, u32 size,
- 			u32 mode);
- int qcom_scm_ocmem_unlock(enum qcom_scm_ocmem_client id, u32 offset, u32 size);
- 
--bool qcom_scm_ice_available(void);
--int qcom_scm_ice_invalidate_key(u32 index);
--int qcom_scm_ice_set_key(u32 index, const u8 *key, u32 key_size,
--			 enum qcom_scm_ice_cipher cipher, u32 data_unit_size);
--bool qcom_scm_has_wrapped_key_support(void);
--int qcom_scm_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
--			      u8 *sw_secret, size_t sw_secret_size);
--int qcom_scm_generate_ice_key(u8 *lt_key, size_t lt_key_size);
--int qcom_scm_prepare_ice_key(const u8 *lt_key, size_t lt_key_size,
--			     u8 *eph_key, size_t eph_key_size);
--int qcom_scm_import_ice_key(const u8 *raw_key, size_t raw_key_size,
--			    u8 *lt_key, size_t lt_key_size);
--
- bool qcom_scm_hdcp_available(void);
- int qcom_scm_hdcp_req(struct qcom_scm_hdcp_req *req, u32 req_cnt, u32 *resp);
- 
+This seems to be missing the four CONFIG_* pins, which are quite
+crucial in these connectors, as they define which interfaces the
+module asks the host to provide on the respective pins. Without those
+module type detection is impossible.
 
--- 
-2.34.1
+> +  clocks:
+> +    description: 32.768 KHz Suspend Clock (SUSCLK) input from the host s=
+ystem to
+> +      the M.2 card. Refer, PCI Express M.2 Specification r4.0, sec 3.1.1=
+2.1 for
+> +      more details.
+> +    maxItems: 1
+> +
+> +  ports:
+> +    $ref: /schemas/graph.yaml#/properties/ports
+> +    description: OF graph bindings modeling the interfaces exposed on th=
+e
+> +      connector. Since a single connector can have multiple interfaces, =
+every
+> +      interface has an assigned OF graph port number as described below.
+> +
+> +    properties:
+> +      port@0:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: PCIe interface for WWAN
+> +
+> +      port@1:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: SSIC interface for WWAN
+> +
+> +      port@2:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: USB 2.0 interface for WWAN
+> +
+> +      port@3:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: USB3.1 Gen1 interface for WWAN
+> +
+> +    anyOf:
+> +      - required:
+> +          - port@0
+> +      - required:
+> +          - port@1
+> +      - required:
+> +          - port@3
 
+This misses SATA which shares pins with PCIe. PCIe second lane also
+conflicts with USB 3.1/SSIC, which isn't captured here. Should it be?
+
+Should the graph also envisage connections for the I2C bus (GNSS),
+audio (2 or 4 wire), re-muxing of W_DISABLE2# and WAKE_ON_WWAN# into
+HSIC functions in Port Config_3, GNSS interrupt line and the such?
+Should the connector node also define pinctrl configurations for each
+of the 15 interface configurations?
+
+Best regards,
+Alexey
