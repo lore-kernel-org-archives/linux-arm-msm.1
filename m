@@ -1,61 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.112
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=79.135.106.31
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792613096;
-	b=ue/EUwdBVEsisfiXThsG8TPzG8JgpyaeMOPvP4gqVqqPuId/nWLHASp/G1Ns7dWXXdAg
-	 i/YJlUgD5Rwqp3BbPnycvSAtH058rYt/xXUe4H1PxmZoiLJK24m8h+D0LmiPwlZvJArBR
-	 K68eyq57hpA57u/IUjImOxKWp9HTkxpmgXiqatHFS4eSHxEUf1rrPrqJdlkTCMtqynU+V
-	 yUNUVWQmWz2fF7RWNbX1bN3pbrJ8/qRuEzMrN+tGvlzl4zfckw/ini2p1SLgUnRRBZj1M
-	 7wdbLwjS/SAeLxoD26epGnaom8YJ4U6J6Q56tlDQUdV6pnIX+Idn+cfzWNA57KqbiSA==
+	t=1792614394;
+	b=h2Ubxwlkr+dJ0pYQrVXfQP44MgO67y5qlCRkPJQMau4ETHjrgD6ZR1fUP2KCM+MyH0wP
+	 M15DED1xaAikRxEAV/r3SqMmplbu8DrJfqJCgy+RIv0iCdBJhWGxqjRUhq+OHiHjoibWK
+	 Jx6Fpywfwj2TGMWQ3sxKkKgw2oRpjiM9yYNi8SNy5gg4JtyBMtZcJiGnHl8PIOXxJnRWE
+	 yopPC2FWUDdpXzceYuKUbBZOzAXi9GO6jThqDq9JwvJk7fldh9kPKEzhKhxKyQOlA7UB6
+	 vPq9ok6bVip/D4s+iVA3sv+pWINSq304DiDrJPq6qvK25Q66fLU5shyfJIFMfI0g/CQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792613096;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=7CSBl7GBrRosc5SfEFBaD29IOE+r3Frq6wKHsp5DwGA=;
-	b=tZu/lIdX9gUdHTaoulJubEau8fZcDfRc7oi3RLikNr26Yte+soJ27CEd2/UYgD5dtBb0
-	 DtyvDH102K3e9X6QF/nX4NDHjf8hc580DG2Se6QoMihyR5Hkqzs8vJA0KWK2h+qRxaXaw
-	 Xgf4RcwL1b9PdJ2pCQLB9XGDoEFTTXhtxARsLAG4tRmsgVZ+ozSKo5zUYnh1TkJzgMmxF
-	 6kfFXxIsmKjnQwPocmta0hOnLWke/sNyifNUZBTowNhA6bLJGsiRMfDl8xr/zqHJzlHQJ
-	 eIpBkyMwmiegrxRGiZcWX8eMq3QOskCbadkmiZ/3gzWG4ZNOPZEklInAG6LPAomP9Nw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792614394;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=yMaByKpIrW0LSyYgQK6ZFp9Smoe+FCDXKYUFjdBbhF0=;
+	b=KS1iARm/vl4p+VrMevC0qtON50yCWnq+ZhEOCW7HmJP6YEup+QSZPT9raUwvJUCuOLDF
+	 ZrkHQWgLqR+R3L6swC3yrtpw0kXKy2hXFwJC60snr78A8CmKdtRnY7vPeV6hwLocOKQOy
+	 KXv4V/lvvSs/8ixuBIviOB9b22S1TlGXW1xTBEj5ddx6+PREAMQmWa75b5rkq5SRmqROU
+	 dDcFEVFkFOCPUBVUExA7uZVHi74Tn9Oq9x9w9GSTv1gsLEU01hFBx32fHTohpSpA9s5c7
+	 pJ3mLaClP6ZILDuAtiT4Z0xC5EaUvRRssUe9hBd6fVeJHqanZpacYuslO3dO0cgZmpw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=Ti6wWXhy;
-	arc=none smtp.remote-ip=79.135.106.112
-Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=B9dG5wGE;
+	arc=none smtp.remote-ip=79.135.106.31
+Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch [79.135.106.31])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30BBF606A319
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 20:04:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 30BBF606A319
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69CFB606A31D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 20:26:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69CFB606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=Ti6wWXhy
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1792613091; x=1792872291;
-	bh=7CSBl7GBrRosc5SfEFBaD29IOE+r3Frq6wKHsp5DwGA=;
-	h=From:To:Cc:Subject:Date:Message-ID:From:To:Cc:Date:Subject:
-	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Ti6wWXhyqUya4ufLtUyzksctzGd79BIsLlXvnU+uRvs8Tu0qJCaBg20ZAQshl4Gau
-	 Kclqa07zPzIWx0A6R+a0KOa9HEa/+SbQelSaN8Q+H4KOYlhL+h3Jcotu1QN4CtZbiA
-	 v8QqZT40q8yVcJwMe1Dn+/YXdA21wVbwmzXYWRNjRp/6uKn2qb8wLkupkxVJwO4pN1
-	 aRxw1PG+f68y2+oAyTJYZhuortrn4Y9rx0WRtR+vD8afLahSR4wwharYgH06SrF0ep
-	 WjjQEmKHcX9S6W9Ml9++7mASsgIESF/9QSTQcQ7M/KxuoESvqvqEoG9HV0UqBEwtQ3
-	 mrzHa1IwwaLyA==
-X-Pm-Submission-Id: 4j90cd1jw7z1DDrD
-From: Michael McAllister <me@michaelmcallister.org>
-To: linux-bluetooth@vger.kernel.org
-Cc: brgl@kernel.org,
-	marcel@holtmann.org,
-	luiz.dentz@gmail.com,
-	lumag@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH bluetooth] Bluetooth: qca: Fix the WCN3950 NVM baud rate offset
-Date: Wed, 21 Oct 2026 20:51:12 +0100
-Message-ID: <20261021195112.41138-1-me@michaelmcallister.org>
-X-Mailer: git-send-email 2.50.1
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=B9dG5wGE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1792614391; x=1792873591;
+	bh=yMaByKpIrW0LSyYgQK6ZFp9Smoe+FCDXKYUFjdBbhF0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=B9dG5wGEQtC0HV+f+BE0KkdleNJlL7wLJR0n+SpH9ZopIwYCweo7qAU3OzkHFbeU6
+	 ytYuEZK/8iYUOSK6mPffyJ326ARGSvvjL1GQoZR+Ayo5aD8gct6hHfIh+HB44d9ul6
+	 JnVDHqSmOxnTVY9m8oLxaP0AsytHcQKbTKLpUORshFSXdb3xfg5RxZoxdbvNecx8hY
+	 V/I8Y4x5B6zprJMhT4oOdjzxAU32aT4/X2TgiCg/CZkSkkM0xOPsz5NXDDltXrDuO0
+	 WDkEgVhlPBh10rPedVuJirjuF/z709EE/hhKHnoXGy6MUpkg4esxXPT5jVhBc8b0Y8
+	 Y2v3jjSJw833w==
+Date: Wed, 21 Oct 2026 20:26:23 +0000
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, Stanimir Varbanov <svarbanov@mm-sol.com>, Eneas U de Queiroz <cotequeiroz@gmail.com>, Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Russell King <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, brgl@kernel.org, linux-arm-kernel@lists.infradead.org, Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Subject: Re: [PATCH v10 10/14] Revert "crypto: qce - Mark QCE as BROKEN"
+Message-ID: <179261435862.92690.4559755086697722828@pm.me>
+In-Reply-To: <20261013-qce-fix-self-tests-v10-10-57162a38a554@oss.qualcomm.com>
+References: <20261013-qce-fix-self-tests-v10-0-57162a38a554@oss.qualcomm.com> <20261013-qce-fix-self-tests-v10-10-57162a38a554@oss.qualcomm.com>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 26a209665153582a3536c663df4ec6c159407ded
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,62 +64,34 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-WCN3950 uses the HCI transport tag layout that stores the UART baud rate
-at byte 1, like WCN3991. However, QCA_WCN3950 precedes QCA_WCN3991 in
-qca_btsoc_type, so qca_tlv_check_data() writes the baud rate to byte 2
-instead.
+On Tue, 13 Oct 2026 11:57:39 +0200, Bartosz Golaszewski <bartosz.golaszewsk=
+i@oss.qualcomm.com> wrote:
+> The self-tests for this driver have been fixed. The crypto algorithms
+> are only registered if the user explicitly requests it with the provided
+> module parameter defaulting to false. There's no reason to further keep
+> it unbuildable with the BROKEN label.
 
-On a Motorola Moto G10 with WCN3950 and cmnv12.bin, configuring a 3 Mbps
-UART therefore leaves the NVM baud rate at its default 3.2 Mbps and
-overwrites the following byte. Firmware download completes, but the
-subsequent HCI_RESET times out and Bluetooth initialization fails.
+On X1E80100 the BROKEN label also costs deep sleep in suspend. With
+nothing bound to the crypto node, aggre2_noc and mc_virt never reach
+sync_state() ("sync_state() pending due to 1dfa000.crypto"), and on a
+Lenovo Yoga Slim 7x a deep suspend on 7.3 never counts aosd, cxsd or
+ddr in qcom_stats.
 
-Include WCN3950 in the byte-1 case so the NVM baud rate matches the host
-UART without altering the following transport parameter.
+I built qcrypto out of tree from 7.3 with 09 applied, which is what
+this patch makes possible in tree, and loaded it on 7.3 (with distro
+patches, none in QCE, the interconnect drivers or the driver core) and
+the crypto node as in mainline, with ALWAYS tags on its paths. It bound
+without registering any algorithms, went to runtime suspend with both
+crypto paths at 0, and both providers synced. The next deep suspend
+counted aosd, cxsd and ddr, with about 13.7 s in them during an 18 s
+suspend.
 
-Fixes: d5712c511cb3 ("Bluetooth: qca: add WCN3950 support")
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Signed-off-by: Michael McAllister <me@michaelmcallister.org>
----
-Tested on a Motorola Moto G10 (SM4250/WCN3950) with cmnv12.bin and a
-3 Mbps UART, using the same change on a local Linux 7.2.9 kernel:
+Herbert asked for the series to be split, and the resends since then
+don't carry 09 and this one. Both should come back as fixes, for 7.3.y
+as well.
 
-  NVM tag 17 before: 95 11 0e 00 2e 00
-  NVM tag 17 after:  95 0e 22 00 2e 00
+Tested-by: Birk Skyum <birk.skyum@pm.me> # X1E80100, Lenovo Yoga Slim 7x
 
-Before the change, HCI_RESET after the NVM download times out (-110).
-After the change, controller setup, discovery and controller power
-cycling succeed. Other QCA controller variants were not hardware-tested.
-
-Built drivers/bluetooth/btqca.o for arm64 with W=1 against the base below.
-The current maintainer-tree build has not been booted on the phone.
-
-AI assistance: Codex helped analyze the saved UART traces and kernel
-source, prepare this change and commit message, and run the build and
-style checks. The task was to fix the observed WCN3950 initialization
-failure and prepare it for upstream submission.
-
- drivers/bluetooth/btqca.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/bluetooth/btqca.c b/drivers/bluetooth/btqca.c
-index 22b08ab05..002307000 100644
---- a/drivers/bluetooth/btqca.c
-+++ b/drivers/bluetooth/btqca.c
-@@ -426,7 +426,8 @@ static int qca_tlv_check_data(struct hci_dev *hdev,
- 				tlv_nvm->data[0] |= 0x80;
- 
- 				/* UART Baud Rate */
--				if (soc_type >= QCA_WCN3991)
-+				if (soc_type == QCA_WCN3950 ||
-+				    soc_type >= QCA_WCN3991)
- 					tlv_nvm->data[1] = nvm_baud_rate;
- 				else
- 					tlv_nvm->data[2] = nvm_baud_rate;
-
-base-commit: 9b3b269829faa3a6264588cff6ef28da0ca5cee5
--- 
-2.50.1 (Apple Git-155)
