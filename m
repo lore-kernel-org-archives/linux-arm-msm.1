@@ -1,60 +1,92 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792590563;
-	b=kRNq5QhvVKf6uh4d1CnDS8MYOhknjjPhiKuCXOyPmq0Qym3EuLYRdy/7kXdMMg/F6R0K
-	 lIPCjKS2n/TBavY72eYS58QRyhGZ2RjWdUrTFxQB3UMdO4hUzKy+lWnz6FiJ7X7H8zKqS
-	 NqeTo5jq1sdAWDgfpETDcjYxuCVL9G56RZloCmZULOkJpv9YxwipFZA9TfcwN3SoIC2mZ
-	 J5z446z8ZjBn4ua/MFHninUMPgQPGcar2K4gS/e1R9ZGBXKFaVBsnm6OauMuKLL3lx9Kc
-	 9VW/dHATQ9N9ElKsWOs8dLRpOgSR3DNuj1dQzl8afH0GWfdxE5iuNb5HY1z0JaRyPHA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792590563;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
-	 X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=uZg4BKspB/y+CooZbsgJ6fLMCO5/PIy2LqC7iUq3yNk=;
-	b=kXEeHMRCc4PNZNi8GLSpVh1Wwmy/tkfDqbOCV7LVppGwsJPzguvgSo2io4JS1SbJH3sT
-	 AOO/fCgzvBMYgQHqPZxEJnkqftxPag074cafZ9Mn0l6FII8D/78CEMnKwYhGc8ATzPnej
-	 b030FeMPnZIIC12YslAC/9dPlAoX3RuqWbbJdederBW95Ibq1IEFJ5HdTqCIbt09PK0BN
-	 ZNuIBvOqBz9k3QTCtfebaX9hKF8PhWKTIAhAEgUo+xTUVmt356vWGEtbdEnF2tmmlJUnG
-	 sPFwMHpC+lUiM6wuHZkHoG12OD4WP3I4cGh2S2W1BnfOGPGgiiix90jGARYaZnnREUw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=PrElQ2nI;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A6EA3606A319;
-	Wed, 21 Oct 2026 13:49:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A6EA3606A319
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=PrElQ2nI
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:Content-Type:
-	Content-Transfer-Encoding:MIME-Version; bh=uZg4BKspB/y+CooZbsgJ6
-	fLMCO5/PIy2LqC7iUq3yNk=; b=PrElQ2nIsm9MEcoRGnwjnvUBJBgamTyjrOg/v
-	/hoK8j+AT8UKFPEtKlmMWh3LM0Xbzhzs/CpMHfmLVdtzjwi5lFd/45SfMuFUWKrD
-	6vm1Pzo72ZY+9T+LfFJmlRpSd+HR4vPXMtMmuUNNAiLylMd8siATq6lTjo/uG6Ah
-	hfqHvs=
-Received: from [127.0.1.1] (unknown [114.214.181.25])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgAHfzPNwthqAOokAA--.948S2;
-	Wed, 21 Oct 2026 21:49:01 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-pm@vger.kernel.org
-Cc: Sebastian Reichel <sre@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject:
- Re: [PATCH] power: supply: qcom_battmgr: do not report power_now on SM8750
-Date: Wed, 21 Oct 2026 21:49:01 +0800
-Message-ID: <179259054168.209323.8102186130128474174@mail.ustc.edu.cn>
-In-Reply-To: <5bf3636d-be7a-4800-9914-808d2fc5ebd9@oss.qualcomm.com>
-References: <20261013002124.332111-1-xiaqinghuan@mail.ustc.edu.cn>
- <5bf3636d-be7a-4800-9914-808d2fc5ebd9@oss.qualcomm.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.57.95
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792590617;
+	b=40I3W1QJUBSMJobqMvRSYg+BDt4HyQl3h3Ypx7hd2qm3wUVoIompwG36IX6ghxux0bKa
+	 682Yvtzq3t6xH67VL+OkBg0aVkQIYhGXuupGDhgVj4nkK+AawG3WW8PbYAc5qH4DaYdqQ
+	 KLosQQmjBUhQtI56CMEatAlW+2IQsq8Zf+rCsZp8AE4of1lWCqLoFHJmmyGdgcrAb/B2N
+	 riIe0kpa7s2SFu7G3Oy2crTo1YEnbA06GMd2UfEjY7amOn7Ld+W5PM9ihBJK3NNMoxWwJ
+	 kZKBn4S+iaNNt/p25e0KzbDe7kRtAj30/y/fyHlP7ROoQY526WFh/m5P0BKE1MyeAIA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792590617;
+	h=DMARC-Filter:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:Content-Transfer-Encoding:
+	 Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=5VLb85Zp+0SvZAEfBkvRfWsgYSdgnnGuOmsQuh5eAmg=;
+	b=ISUFXDnSEl+dwLc0yh8OYUPG+AG0dHx3SQVN00Shc1HHjvDKFgnMD3RMo0PBt1R7ZdKP
+	 ovJkbwBrVgfOU7SoP75vbBDFGC91IAsdaX4yPqe9fZGeefOgCsXbKh7SCi7JVk8ykKa78
+	 slTqmHP5WbeXUzHaKCfhDz4hcgFMTonMMuUhsdyu7CwC4sxalzdDPDQu1U9cC2X4DBBZX
+	 QWPLnUsG1CdqOefHrwW2h8+96/C0Kp+jb3owclLi+KpW2C03nedArnXGAtTa8yo45DE27
+	 asytV8AW2a5oZ9dUw88XaHwhU7LkPBlatHk+kvRnevdjEoyAs+k8WYIh5m4LeAwRwKw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=none header.from=ebytelogic.com;
+	spf=pass smtp.mailfrom=ebytelogic.com;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.57.95
+Received: from MA0PR01CU012.outbound.protection.outlook.com (mail-southindiaazon11021095.outbound.protection.outlook.com [40.107.57.95])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F09A606A322;
+	Wed, 21 Oct 2026 13:50:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8F09A606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=S/Ko+fmKWSv34qPLTazr1B21B3dDw6yfu3ev35pgXVRjeXsBaILy0Ojcx2bwnlbUbNrcut9M8rDaU7mpr1TqApGvj+FXqKFJVhUTPn5eomqPg2yGmXu7VAmBMblMjVBKiRHSi4wwW7KCSVQSrd4s0ttT52FNXXx19YdW6inrmjggYRPIzk0RtXO9e+zrug+QGEi2F2MMjnx/WR8nJb90XoDz4Mz0g/jKLWQQdjn+nSMvK8B4bAXJCr7ZBafR7j/ZdRX6nsRFROZRrb+P83cCUWCizVNDjNMnDpoLQ8rRxz1fQvdQY8KDqZ6A22LNiuuu3YFC48Ksa6UlUQ/zDPP70Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5VLb85Zp+0SvZAEfBkvRfWsgYSdgnnGuOmsQuh5eAmg=;
+ b=RplQ+fJEt05VHcxyPu5/CCuNXlsBwdQ7hvnKlf6g/GlS7w8JFI0qugbza/yBu/O+YmBG92iiEGV7NJnLA9n0fGy7u9nfhcDu+/mr2BNyXRu4Vo0BpQaUTwAyfzKR0vduHDwDQrCjqfmEJ5wcxi7hbF//0uvATWojMCr0C65zMhtGiHbOC8PUS6z6Kgf/N7yZads+eo7dCZzo5vUSNptTXAtmIgFF7u+j8q5UUuMn2XFhCJSkou3kq2TNCEz99A0bIjtKBd0SThn0y8+vqX5zAP15VW1RTkBOy6NwFfLDwz62fPMCQgLrKktc9koBBZ1otyYkS/PI1bYZw4f6gNBfzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by MA5P287MB4699.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:196::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.20; Wed, 21 Oct
+ 2026 13:50:14 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::4cf2:bb74:999f:d6b8]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::4cf2:bb74:999f:d6b8%8]) with mapi id 15.21.0546.012; Wed, 21 Oct 2026
+ 13:50:14 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: linux-media@vger.kernel.org
+Cc: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	ravi@ebytelogic.com,
+	Hitesh Patel <hitesh@ebytelogic.com>
+Subject: [PATCH v6 1/4] media: qcom: camss: csid: Match the current set_fmt pad op signature
+Date: Wed, 21 Oct 2026 19:19:56 +0530
+Message-ID: <20261021134959.2599575-2-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261021134959.2599575-1-hitesh@ebytelogic.com>
+References: <20261021134959.2599575-1-hitesh@ebytelogic.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN3PR01CA0030.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:97::21) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,78 +96,84 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgAHfzPNwthqAOokAA--.948S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZrW5ZrW5Jw1xCF18uw1rJFb_yoW5Gr4rpF
-	Z0qF4DGw1DJFyfZryvv3yDCanYvrZ5X3yjkFy8GrnrZayDKrn7Xr9Ikr1agFy8Cr1rWFW0
-	kFs8K3W5CF1DCaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvjb7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
-	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
-	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
-	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1lc2xS
-	Y4AK67AK6ry8MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
-	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWU
-	twCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUI7
-	5rUUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREHB2rXwVRrvQAqsE
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MA5P287MB4699:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8062a2e4-88c9-4209-d8d1-08df2f7a3b5b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|10070799003|52116014|376014|56012099006|261009223027099003|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	NmcYhL6S9wu5fU5OeIml4Lx0jxDOA9G9tmoLpadCKyDMm5LvagAXKShqJHfuaFTsvOtb0lvjdJkDDTul2mEMQd7KgESHjsOzBD/0iydd77PrcSqjEuGdZRQH8trW45oKH8OUhs7yZtdlSkzz75NiM61jgCMcqpdXYMRFZYosy0UM8VpZcqHWwMtRsbpfRvjutlO2HuclyWJSvtVdRz6zgeAaGmFZfivgWcCwrY9C3exVc7QOBLU/p+Y2JjNPpGoZ8HHpewv0MXtlMkEEajfXllZiUOoj/9XFtZ9s9zQfccFLXc+6ksGkOaG8c9oP0T6MQY1NGqvO2BVmOzD4iKCzZ6hs50DmbkH1EvzzzxnjYziqcM8frbz8Lz00nclWw5EiL+xupJ63G2vG5cAfTJeMxTHQ/Z9JTNlIemqsA9z0cxgVZodCoZYOFAWpGOoVs/osI1BDWgnTs7s/8xe3D0/tNZhg6XJH/HQmutWNsYVOnfersEqd7o5004ac3gYvoH6fPYP0WNGmEBgmbBO/jh00upaWUMiPXApyD9kky8Gpi2/nNBieXW/OSHjRXMi1q3cXk8P+gTm6ZCSJjVZ1JoyRGP3bE6etvrvKsSYjE6R1DY5Jq3SZC+MYDwcwy0ZCAmZHTQUdYX7hiwry+/LPtekSQ829wAHeEu/OPNsap7VKP/M=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(10070799003)(52116014)(376014)(56012099006)(261009223027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?zlSZXE3pF/xd9KvO86NAD/Vl9TPTn3bZZk0J7UIngEgPaQo36PsBKtfTnHR+?=
+ =?us-ascii?Q?JAAuCgNOxmyiDHli87mVb4JNus7txWHK1x1pDXY34Q6rQOMUnMgwePYbgppK?=
+ =?us-ascii?Q?NcPnv8xHnvrC8KSFXaFhZyiI1ZrIKpGl8oCpWGSvXRdoPppWhI5xQxsOpMma?=
+ =?us-ascii?Q?EB7MPde+yEAF6+QVJparoqsNUfxY661Li6spbiJ8v4zvkCy7B1/RE+36wpkJ?=
+ =?us-ascii?Q?qT7GYHjuSwrWDUY8hi5SNuUq9mp08xkIRbWLqoloQ9dsxNku50Y8DZbgnxsq?=
+ =?us-ascii?Q?UsFcNnjOoUzWCO8gPAL21kM91SomgauIKOkTDsnOxOoq5yEw6FFvssOcraA3?=
+ =?us-ascii?Q?zEbx14U32waIDcjK1GZ5adFreMTCLUBriNNcoC8mZI86szKoI7GseAxs2aUp?=
+ =?us-ascii?Q?vF4DxCzbUAi3TIaE28lVVU30fn7jCFLDVyNhAi9DqzHSrLO3j3ucZVCibM34?=
+ =?us-ascii?Q?SiWKokHrh5R7SeFGnZ2+XtAUAWYxZ4WxHepYrq/Rf5oboCcEXxOyyl78qLaY?=
+ =?us-ascii?Q?Up//tXKqBEZskUmm5QqeUTf+5DOABAGAcBB74PCrEjGnZuUc4/siHMmkbrEW?=
+ =?us-ascii?Q?FyrIS8c235g3e4fljXTADzk4MPDGoO/cyKis3RC/I7r4XFBSXibn7m6yEvkb?=
+ =?us-ascii?Q?hEF+CH27RwzKLjlLsDidVMisd0zUUYUCE2JdHJSqqDV8FD+/9C5gXzNoeG3U?=
+ =?us-ascii?Q?vZWkTlb1ZTWdgkupd3RqOZtra+GO5NcC+CGMCWPD/ZKqO0zZ6UrPkwGKqBO3?=
+ =?us-ascii?Q?nlW+lpnB9DZp8XWCIQHkGbF3kL6fYgHzw8CF6U7O3cGMSlfedqWetN9WZ1TO?=
+ =?us-ascii?Q?x/KA61zOdaEmskUvOYKw002FPgdwU54jzJaKxuqy+Obt1nlOJ+BhRqngI/6x?=
+ =?us-ascii?Q?h4I9AFLNyL81RU47zwWQKqbFqM+bmmYL2pBeMF1QrU3qQHU5XAlqL64uObN2?=
+ =?us-ascii?Q?ySnoQ3eL2QsTeoVGpzwt/7DPy4yb3rxLXaLTZxQabkslHDcu/qRLC0Ab0ymP?=
+ =?us-ascii?Q?uNveeXhtZN/cYEw4RmYmj3Pxcilc67LGYXwMg2Ey9xIyi55k9gHEYYPGy15g?=
+ =?us-ascii?Q?7RuINuJecfLotO5ev9Vrc/2KLhVQlgauRHmS5xAkGYHpEKyACOlg4H/XyoUp?=
+ =?us-ascii?Q?cHi4dNQJEtkbE/nyGihYV3viXWf1zex1RVtoCcCz0Hh/pz6HlL/LkMIEb0b4?=
+ =?us-ascii?Q?fYGDg7jlqR8yK1mPHplF9z8gaLVy17L90hkvr0x2lnL7FPHeSJevkgs5Gqow?=
+ =?us-ascii?Q?9lPvtK3TJ5gDI0l5vOYeWb4AGxXYWI5tKp87h77DEPofytA9s9gJ7j8VAITB?=
+ =?us-ascii?Q?HMoJevGIs07Cx7oQXgQluUOl2JuXvnhAK6lgya+IwWXAwHCb3V551kc0GIRF?=
+ =?us-ascii?Q?DXXjrk4g3Uc1bm6qTuexClgAKZK1FKzQUaoE8LPRYR3EdchgjIyKoE3Lm0Pn?=
+ =?us-ascii?Q?GZD4wHp0qxQC/AEZQoiW7l/xdyCd94HUyX7YWjz80awgeZg3RXJU4PFK3rBA?=
+ =?us-ascii?Q?YwXMYHmszLl43KuqY2Vk1q0ew0LNqoXBQ1dT+OvQj/1Z2SRaZAMp0BALC7R/?=
+ =?us-ascii?Q?er7f4WnA35+fpUGPaBUX0AbcJmD2ti9PrqhQLFmsl8IjdrjONXYVbM6z+Oh5?=
+ =?us-ascii?Q?IH8yB1T8sFQA34fg+DnWTsOjLAXcUVl/XN5o1nk5U78AV3Zd6f6T+w+NqGtd?=
+ =?us-ascii?Q?PRv8IbMCZdmVJ53ZYcmPelb/CPPBNXlrk7cPcpRbKubM/vP2dL6SPedQy9hG?=
+ =?us-ascii?Q?4AtHdUd0Ca8fyl85GZEiPOFtO1zk0Bezjyl0X6iOcIJ89Gld1aO9nlUQcd4L?=
+X-MS-Exchange-AntiSpam-MessageData-1: g+b6RDAvX8paKg==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8062a2e4-88c9-4209-d8d1-08df2f7a3b5b
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 13:50:14.0516
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: am+Vskz8ANMFBVnwPDzOKJBZNrNYKiv4Dww4Wr5vBST40dnAlnBu2+kjsAER5u9x29V/Xlxk9HLtihQMR9m+Ww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA5P287MB4699
 
-Hi Konrad,
+v4l2_subdev_pad_ops::set_fmt gained a
+const struct v4l2_subdev_client_info * parameter, so
+csid_streams_set_format() no longer matches the op it is assigned to
+and the driver fails to build with -Werror=incompatible-pointer-types.
 
-You are right, and thanks for stopping on that sentence.  "Maximum-load
-updater" is a phrase I invented; it is not a QBG or battmgr term from any
-document, so I should not have used it in a commit message.  Let me
-restate what I actually observed and what I am and am not claiming.
+Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
+---
+ drivers/media/platform/qcom/camss/camss-csid.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-What the driver does (no bug here)
-
-qcom_battmgr_bat_get_property() does not sample anything.  For a given
-power_supply property N it reads the 32-bit slot that the QBG
-notification buffer reserves for that property (in the SM8750 variant the
-battery property array starts at context + 0x6a8 and is indexed by
-property id, so BATT_POWER_NOW, id 22, is context + 0x6a8 + 4 * 22).
-The driver faithfully returns whatever firmware left there.
-
-What I observed on the unit
-
-  - charging, actual input well under 1 W: power_now reported ~89 W
-  - discharging, actual draw ~4 W:           power_now reported >100 W
-  - current_now * voltage_now in the same samples stays in the expected
-    magnitude range, i.e. the other battery properties are consistent
-
-So on this platform the BATT_POWER_NOW slot does not hold a measurement of
-present power; it holds something closer to a configured/estimated ceiling.
-That is a statement about the value, and it is reproducible on my unit.
-
-What I do not have
-
-QBG firmware sources, or a public document describing the semantics of the
-BATT_POWER_NOW slot.  The "it is a maximum-load figure" reading is my
-inference from the two facts above plus the vendor battery property
-interface, not something I can cite.  I also cannot yet say whether this
-is a property of the SM8750 firmware build, of this OEM's configuration,
-or of the slot in general: Fenglin's earlier reply (default supported,
-OEM can customize) would predict the latter, and confirming it needs
-power_now/BATT_POWER_NOW readouts from the stock Android build on the
-same unit, which I have not done.
-
-Proposed wording
-
-I will resend the patch with the firmware-semantics sentence removed.  The
-commit message will keep only what is verifiable: on SM8750 the reported
-POWER_NOW is not a present-power reading (with the two counterexamples),
-the driver returns the slot as-is, and therefore this platform should not
-advertise POWER_NOW.  The code change is unaffected: add the SM8750
-variant and reuse the SM8550 property list without POWER_NOW.
-
-If you happen to know the intended semantics of that slot, or know of a
-QBG interface document that defines it, I would rather cite that than
-describe it in my own words.  Otherwise the factual version is what I will
-send.
-
-Thanks,
-Qianhui
+diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/drivers/media/platform/qcom/camss/camss-csid.c
+index 2559ebe9839b..991275398091 100644
+--- a/drivers/media/platform/qcom/camss/camss-csid.c
++++ b/drivers/media/platform/qcom/camss/camss-csid.c
+@@ -1696,6 +1696,7 @@ static int csid_streams_get_format(struct v4l2_subdev *sd,
+  * Return -EINVAL or zero on success
+  */
+ static int csid_streams_set_format(struct v4l2_subdev *sd,
++				   const struct v4l2_subdev_client_info *ci,
+ 				   struct v4l2_subdev_state *sd_state,
+ 				   struct v4l2_subdev_format *fmt)
+ {
+-- 
+2.43.0
 
