@@ -1,56 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=148.251.105.195
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792559316;
-	b=P1iC0B/0RdGJ5vwC/StLF9oqy0Mf3pg64GPoaC4WoDKq3V6hkNPO+WMssOuExMZwcDmP
-	 UDv4ihrP+Dus1QPdH5VNiTAKyGMNvYW86357+WQipMKC3iCfJoJeL7e7GNpIQagDINuO1
-	 DP6PvqDYuSuimxgKhweh05hkB2y06G3lJaOSVUZZbLVqdskbGtMeHN7+wtJGZE4EXNcjp
-	 /CD3lx7FuokQ61RcTWmWCLM0H8nd5SEhHtXi3LodOKxEmOXf+o4ui8rUAE9ukMkdv0wxV
-	 Ug/0bhSOOEYZiQi94of2ZU8uqKl/u+g/IiiDH/PIuN+C6Xa1hSDKWKqqb4rNYaoswWA==
+	t=1792559784;
+	b=ldIM8kVU9YmiQFKE8whYIhJJiK1DhH2VJs4gXR1A99BucjYP66bJFrYquSXDA2AMkS6D
+	 zG2zeHtcrzEg31KQi42t9A0oOSroAuw+OFHXYcRe/vPfNQBh57PE/j4Ak1ZS/5StZr3Yb
+	 DJZUsLxD8yCb6i7jueesOVvJz8V/+3NJyfi8jEH3xWHz92fUWBgP1yv5a5w7D4WUsxZP0
+	 LvNCzKHMTfz+p9oiv6rX4WUuVkTm93rAnLjtz9QRfcza1IhNn35I4TJfKN3xVTsGbN+kJ
+	 ooaIjUfaK6oothAJYw4EZ7LlNDJwmXy4qEZWku1PFSkZZ30nKf4YMTUBJOgZefWtJJw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792559316;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=QkX0db4m40DGwuOP5Wxaheolr6mMnrhzfPJ3IEdQt68=;
-	b=0GNXXZ5PypdV9nKqzlwmT3YXy/oCe+4+V76sJMpF2zS0vGRqi6jnG2doDxtyIujL0cO3
-	 dursTQwVSpGKq1kAFF0OJd2d5H2WoduK42SxO/Y+LJb0k8ReyiYHsc7KQrI/TVIwQSvDC
-	 5u7TCGZJsmACoflHmCX+zPbbIvqeIio6UqFRfCkrL4+5DQ7Rb9gSODskYLNvLjUqW6zkD
-	 xhS903GmxuWE94USm4Z+/3q3ILN0raMLdMosQgERLxVhRXm1nDwkTEv3w/PjQwoVXKJ+f
-	 YsUzqNiBehrhIhVmOMYO94f8MGOjre5SxTKrNYsYCvk3R+mEK9V7kiMd0kzN9PKwWqw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792559784;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=vihUp5mhWdX2dD92pMR/JK2e9ZBoj7RAhe0QgrJLRa0=;
+	b=l3wpT2vwQKN5WQccn0W8lp77nMeHJZF4FagrYLLZau4faduv6jQo+5cC5ejg/5qWSj/2
+	 0Y3c37P3H1PYLSUt3yE2NHKy8KAt0Mrka/mk3fA11rSbOw42qiwPKrQ4bmsojQEAkPXO6
+	 kSTv0EsenWCGtzEY9y1+lhjJCjFb4c5TMTk0PyjWLLUSLLri85S+lbLrkE6Y97j6MlY4r
+	 Aw18pbaH7/7IVVVvblodvvrrOjFaJ/4iLpYmOKL3EPgPo2B4MivGLROWYhdRv0USnvgua
+	 5U8VxSseL215YEqFYwP1WXYh/eJgb1K7zWwoAAjr9J6t0hSJEexQSfdcqDZBi2UAHsQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cAuON3Sh;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=collabora.com;
+	spf=pass smtp.mailfrom=collabora.com;
+	dkim=pass header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b=XYgbU6hD;
+	arc=none smtp.remote-ip=148.251.105.195
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3087B606A319;
-	Wed, 21 Oct 2026 05:08:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9AEB606A319;
+	Wed, 21 Oct 2026 05:16:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B9AEB606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cAuON3Sh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97D111F000CE;
-	Wed, 21 Oct 2026 05:08:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792559316;
-	bh=QkX0db4m40DGwuOP5Wxaheolr6mMnrhzfPJ3IEdQt68=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cAuON3ShW2wBA2gcnkl7H4wIdlmQH0gfJo8zFiGjopvTEQF0v4/2jKDmQmvvU1Ywu
-	 gGc5fVTJoSUrA733BvZsMnAM+Lmt4LpCW4OHoCNVM/OQPw90v/9c2F25Dn1xNN7fSl
-	 Gfk7ZjX+bttaxZlGhiEojpJlrc1udHDC8i9mMnAiGqpP40GhW5ih+HLMRNPqUbRoVz
-	 XHL2EkDcQaIXl6GQxM1mXGmYo/TUnPtruTkrCnYc2qtzWu6iTAC3Mfp5n9PPmvjPiu
-	 KbkMzgXVHCYRGXVrQ8bUnnHxss7C06HvmWHzTHhYHnUz303empsFAUUkr4iQQ7GjSa
-	 JonhXcFMqk7NA==
-Date: Wed, 21 Oct 2026 07:08:19 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
-	Yingying Tang <yingying.tang@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, ath12k@lists.infradead.org, 
-	linux-wireless@vger.kernel.org, yintang@qti.qualcomm.com
-Subject: Re: [PATCH ath-next] wifi: ath12k: change MAC buffer ring size to
- 4096
-Message-ID: <5ygj4wgwd7tvuma4f4cmvc46cw2lhabmruk2nxeh44iktn3owg@cxzsmik52fh2>
-References: <20260610031358.2043716-1-yingying.tang@oss.qualcomm.com>
- <atcr70WFLxp8zreK@QCOM-aGQu4IUr3Y>
+	dkim=pass (2048-bit key, unprotected) header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=mail header.b=XYgbU6hD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1792559782;
+	bh=vH/deR0JSzYFm4T2YD9XaVz6Lo2iuDgXVRLekxxaOkA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=XYgbU6hD6to6lDq8iRczJ+b0yYEjo6AU1UrzXFAOH3Lh7pDKfbHFxGNFZgtQ6yC0X
+	 WJDYoXShjE7N/RBzMRh8PlL/QtvbtV0CxMpeKcYhJ4lHk88eX5zsMM2Awtled27+wR
+	 QRvhYfPW/vl1AB/UyWKrJGZEsdNF52wmU7j7M4PS8TptsElIuS8xZFV3kD9a9hUFSH
+	 IP3BSaQbG8mv2cSXJ6B4mR1Dkc/5MHo5HkinjQMxeCNSlJjVJ1dejYr7npya3aNUkq
+	 94bL6vvRTWSndCN4Hb4S7vkKzR6ajSIfSXoVO6uOmtCalv0FBNfeECmQ8o9souQr1i
+	 5e5ED474ORkAQ==
+Received: from vignesh-thinkpad.. (unknown [100.64.0.157])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: vignesh)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id C0E0717E05F3;
+	Wed, 21 Oct 2026 07:16:19 +0200 (CEST)
+From: Vignesh Raman <vignesh.raman@collabora.com>
+To: dri-devel@lists.freedesktop.org
+Cc: daniels@collabora.com,
+	helen.fornazier@gmail.com,
+	airlied@gmail.com,
+	simona.vetter@ffwll.ch,
+	dmitry.baryshkov@oss.qualcomm.com,
+	lumag@kernel.org,
+	robdclark@gmail.com,
+	robin.clark@oss.qualcomm.com,
+	valentine.burley@collabora.com,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v4 0/3] drm/ci: add wormdingler-rev1-boe
+Date: Wed, 21 Oct 2026 10:46:05 +0530
+Message-ID: <20261021051611.3328351-1-vignesh.raman@collabora.com>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,81 +76,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <atcr70WFLxp8zreK@QCOM-aGQu4IUr3Y>
 
-+ Jeff
+This series updates CI coverage for trogdor-based sc7180 devices by,
 
-On Tue, Oct 20, 2026 at 04:53:03PM +0800, Shawn Guo wrote:
-> + linux-arm-msm
-> 
-> On Tue, Jun 09, 2026 at 08:13:58PM -0700, Yingying Tang wrote:
-> > For WCN7850, MAC buffer ring size is updated to 2048 in
-> > 955df16f2a4c3 ("wifi: ath12k: change MAC buffer ring size to 2048")
-> > to increase peak throughput.
-> > 
-> > But during the RX process, a phenomenon can still be observed where
-> > the throughput drops by about 30% from its peak value and then recovers,
-> > and this behavior repeats during RX.
-> > 
-> > After increasing MAC buffer ring size to 4096, the data rate drop has
-> > gone.
-> > 
-> > Tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.1.c5-00302-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1.115823.3
-> > 
-> > Signed-off-by: Yingying Tang <yingying.tang@oss.qualcomm.com>
-> 
-> FYI, in case someone else runs into this: with this change (merged in
-> v7.3), WiFi on my Lenovo Yoga Slim 7x (X1E80100, WCN7850 hw2.0) stopped
-> working with the older firmware that Debian trixie still ships
-> (firmware-atheros 20250410-2):
-> 
->   WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
-> 
-> Probe and firmware download succeed, but every WMI command times out
-> once the interface is brought up:
-> 
->   ath12k_wifi7_pci 0004:01:00.0: wmi command 16387 timeout
->   ath12k_wifi7_pci 0004:01:00.0: failed to send WMI_PDEV_SET_PARAM cmd
->   ath12k_wifi7_pci 0004:01:00.0: failed to enable PMF QOS: -11
->   ath12k_wifi7_pci 0004:01:00.0: fail to start mac operations in pdev idx 0 ret -11
-> 
-> Bisecting ath12k between v7.2 and v7.3 lands on this commit, and
-> reverting it on v7.3 brings WiFi back with the old firmware.
-> 
-> Unmodified v7.3 works fine after updating to the current linux-firmware
-> image:
-> 
->   WLAN.HMT.1.1.c7-00108-QCAHMTSWPL_V1.0_V2.0_SILICONZ_UPSTREAM-3
-> 
-> On Debian trixie that one is available from trixie-backports
-> (firmware-atheros 20260916-1~bpo13+1).
-> 
-> So nothing needs fixing on the driver side. I'm just leaving this here
-> so that anyone who sees "wmi command ... timeout" on WCN7850 after a
-> kernel upgrade knows to update the firmware first.
-> 
+- Share skips between sc7180 trogdor devices
+- Update xfails for sc7180 trogdor devices
+- Adding a new sc7180-trogdor-wormdingler-rev1-boe job.
 
-Thanks Shawn for reporting this regression!
+MR: https://gitlab.freedesktop.org/drm/msm/-/merge_requests/252
+Pipeline: https://gitlab.freedesktop.org/vigneshraman/msm/-/pipelines/1771349
 
-Jeff, this is unacceptable in two grounds:
+Vignesh Raman (3):
+  drm/ci: share skips between sc7180 trogdor devices
+  drm/ci: update xfails for sc7180 trogdor devices
+  drm/ci: add sc7180-trogdor-wormdingler-rev1-boe
 
-1. Driver change *must not* break userspace, in this case the old firmware. The
-driver must maintain backwards compatibility even if the data rate drops with
-the old firmware. This is the promise, kernel strives to keep up from the
-start.
-
-2. The offending patch didn't mention anything about the firmware
-incompatibility, which is too bad. How does the users be notified of needing a
-firmware update?
-
-So I'd suggest reverting this commit and come up with a new change that
-preserves the backwards compatibility with the old firmware while fixing the
-throughput issue.
-
-- Mani
+ drivers/gpu/drm/ci/arm64.config               |  4 ++++
+ drivers/gpu/drm/ci/build.sh                   |  1 +
+ drivers/gpu/drm/ci/igt_runner.sh              |  6 +++--
+ drivers/gpu/drm/ci/test.yml                   | 13 +++++++++++
+ ...goftown-skips.txt => msm-sc7180-skips.txt} | 12 ----------
+ .../msm-sc7180-trogdor-kingoftown-fails.txt   |  2 ++
+ ...180-trogdor-wormdingler-rev1-boe-fails.txt | 23 +++++++++++++++++++
+ 7 files changed, 47 insertions(+), 14 deletions(-)
+ rename drivers/gpu/drm/ci/xfails/{msm-sc7180-trogdor-kingoftown-skips.txt => msm-sc7180-skips.txt} (72%)
+ create mode 100644 drivers/gpu/drm/ci/xfails/msm-sc7180-trogdor-wormdingler-rev1-boe-fails.txt
 
 -- 
-மணிவண்ணன் சதாசிவம்
+2.47.3
+
