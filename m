@@ -1,124 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792568694;
-	b=KmhpxsaOLgrLi4bN1hZl9MCTAcp3vA146bfHymvQz6gYP9uI9tRn/QIp2qiWh6h/F5P7
-	 DizNQBnwPWhSfXN8Y2GV9i/qtIHdUM2Rt054eERrq1VyisnsP6KhLn2f6J9s5QVo2mPBD
-	 P6efi+8eSgDwEt65w3UJwEZ6y1Fqz52t+eJTQVZzGwIurK8IuSsX5Q54qsior4GfQio9H
-	 LEYUZTaMxUdJXvI8gV3St5pwHr3msyoYW/JZLpKbbBX5eQgZJOzZVqlSM4BYPMIOas6G8
-	 1kN0NgsOYilMEjx1heA5pBxVVQSzY3gNKLnJbeXe5LhdzVdvJ0X/YsZQhRGVhMQJBWw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792568694;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=rUepUBVvZqTH1fHQ+aT3wHsXwm6+pjQiNT04ccwpTr0=;
-	b=T58PyRK3STj35tNMmq0XQOigxnqF6r3hecd9U6AUDQywUjnfqlu4gZQoexYK6G2/RPyb
-	 SK2zT1OhM5hQ+7PxwgXLQe/S/D2RZnOzLnXwcwx+BmMOTZkx+yJZYiuLUUwoikyd4P+fn
-	 o5/yuhnKk5kQkLUU1ImBlQ91jaOCvreBYFnJ3hq1CTqm4sSolVjMpZTH75JYp5C+gp7QW
-	 XTFKvwYqHG7frtsFmgfpNigHWQ2GgxzdgnsOI5pGr27AVCADZ1Yu2+Jt3k78VeMeSloTH
-	 2+IC7yoI2fze86plGk/7qVk1p+V+o6KyaS1iaH0wQas8Mu/5U+upfm3ygArNzeWj1CQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jdxo1FD5;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JmwWMyb0;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792568970;
+	b=Zyhw7kZa/o5cNUx7vGJNIWhRUEkdy+fFRAkxrftdMKsXlozPRzxq+7KZhpFF4Ju1R9/+
+	 0QFhc9PmiunKUY4yYB2By24kKNB1V9JNc/PXcZVndw703D80OLIgtOCiOYifQEpb/bB1c
+	 zaFaFLD2TrDtAJVLWwdrPmnkowVXJf0xejJ5Gb5ucaxyFKXwSPD+9C6yqCiQLzhKtlfHY
+	 PAFLCSQpVU52Fb4r7bU4gL5qgtZAZAtwAju0+rA+z9reBEqaRtq/BmrrGBD3t0P1hRrzq
+	 IOXQ5pHRV7r9FevGM9U4veHnK3vlPatpQCa9nACL3cZcWEF1IEBuk7K70MO8cX0rLDg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792568970;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Mw9ALp5m6wk+v40aZBRs95cwBAwuR1QaIazcbE7LyXQ=;
+	b=xPDdJsEQ/V0Yo9UHHI5nBvw5+odlz8yW+pgxXZG8ekmqYeCLPgPKKemilCpy9rsrPWtM
+	 mL7Y5zq/98yABdb4QJzKqdyTw/0x+EXrHwA2khSVYuqsyoeSp7BVEz3PMeafa4sgEzw1Y
+	 pw0TbZaBLijojI1kIrd+9VdcDGzZIkKmw1ham2Sdeg4mPMga/2w5rAoci2zStBR8V4g2M
+	 U1J3yJ01nrR3DRI/I/YEMiaiAi/nM9NNDzrdKEU0Du6/aXL495SjVs0jnH9c70985YL0i
+	 AUNypS28FRnVkYEOf/NLcnS+4fFvWkNrheE7XqvFsPPy8kSd2DcJGnJcGcijaoadg/w==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MTpDnlQO;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96DAA606A31A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 07:44:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 96DAA606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 0B9F2606A31A;
+	Wed, 21 Oct 2026 07:49:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jdxo1FD5;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JmwWMyb0
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69L5j27x3355926
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 07:44:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rUepUBVvZqTH1fHQ+aT3wHsXwm6+pjQiNT04ccwpTr0=; b=jdxo1FD5E9Y1CbK8
-	wJBF3T7px8WGG3gXrO963dXhMxvwAJS8yx9tXnrCwq/OaFfc+2aqeJ9re5lH8yJm
-	2FAjfPD+Oc0TY8kifDBMwzPhN2/r9RrGOqTwwsdu8SLmqBtjrkqTs82W34gjXcb/
-	rdEUsc6ANKPtkjcaJs6I0opoOzqyRxj7eZzlVr9skQYeQ0XTnzAJHnrVwUguJOxs
-	Wb1rKqEqJSUe04ovRZfTWcfKeDBK6PIv44wnmTv6uFeaxa9PQnzFg7tduJfzp+fo
-	U8i3HX93Sl6MoK/lLpZrEszvHUEaa0BMpcoZZv3IVeTXK73B3GZDQSsK3AxVnwt/
-	5Z3C4Q==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heda0jm15-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 07:44:52 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-9308eafb465so143280385a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 00:44:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792568692; cv=none;
-        d=google.com; s=arc-20260327;
-        b=m2rpumBz+RwWaFF60sMam238ZRK1hPbsVvOcGfCCehs0AHA2U5nFRTA18MoOITBxIm
-         03QvbyZ32BAYyFm+5CA0F5r96SVv5J8V4LCv0/tnPDdMHBQXE7S6hx8LrLjvIwN0QAfJ
-         ajFec1QnxdBxBaL9F7I2Uv7dQ+GVu2uUwHPWU3OIQKpYKszXs+7FdJaa6nrsprCVrLr9
-         s4TulY7Ls5+VYe8riiLpRF+eVu3+LbEEd7ihMaLqhFajkJG8TJAVPv0BGidMmSVa9wee
-         VKTh6iaikHmA5tZfoR0sQdlpPeWPdn5HekpzVvjto1fgnDqzOxGQCuOWmvP1te1US+h6
-         FxwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=rUepUBVvZqTH1fHQ+aT3wHsXwm6+pjQiNT04ccwpTr0=;
-        fh=h5/QjYSrG4DNrAa9T1WiSaMMJ4woSkwgK5XDjPihisE=;
-        b=kgAdHoG7esZkhpFZpyWMrIKSIFui/MyaFCWhXuOIjttRUU1M8CtfhejFbOD2riTHKb
-         k0IUokXfZXq/emg3Wdyh/kLK48I/Cj4bFCzTdO1VeGRQamH2vDfcKoeB/YnNzsGCUYjg
-         bOsY/aRm9FDzS3FyhH6kHqRjqxwl+bM2sGIUNXAJB/VNHWsuwScPvg4iMEb5GRtvlFqW
-         D4gN1+N9R8YK0LSmDPGJEx5xhUptBi5rcikxqot24678Q7rUTWeil3vNzp5hysGuvnqS
-         ciDRe+sSj1CRJxsMAYwsc9DqOOZw4Up7bOUxHjMTTERxrfS980fOlGK1QiCjG56uE+l3
-         nt8A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792568692; x=1793173492; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=rUepUBVvZqTH1fHQ+aT3wHsXwm6+pjQiNT04ccwpTr0=;
-        b=JmwWMyb022VDqs2dVvgQPo2irMuTnmV6fLk8pAuN/vZGs4lhWpsd3UaPdet2pXrCOI
-         s1NpjLlLr5CWAczCdVhggYP2P3vVB/aJGm3h9qjQ4dkiMeC8alqwLvlWWFVO/zCuncZ8
-         I/noH2qpVA8I6zYbJGykmUBtJ787jgrQgT6OQTXt6+SiJp6mn7vUYaA/4iZjAVuy0YPd
-         aU0B+2cNPk7dCHc4jxT1BPVVJsaU2tqAhYeC2dc63h1lzTg1p9Usgue5YzYI46XhkfWz
-         /x7LUuS8mm02/djjUANHaXBjaKZ3jG2eunC/0lfe+Vy8L7BMv1T7/kyRhJbQ9Zv5wmzd
-         THGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792568692; x=1793173492;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rUepUBVvZqTH1fHQ+aT3wHsXwm6+pjQiNT04ccwpTr0=;
-        b=i9bN/RkMVUgB544YqIuNoGoUZCeotwFN6GWsU4kYzTrtARpf0XxTVAYYJXIbXzBe64
-         mumnS8axqv90OHBPUBZYI2Emq6eSz8ZlsfhmRw7mqEh+EsH2nY3eLi5hyIqVAjs/44ue
-         zAwOEZ1LSL5w5VspTu6mgOgmTeXH7BTF9xVLFJn1HUHbd43EdO29IdED1mNJHdERN+rV
-         iMcf3MQY0ktmjb0s5gCiyp1YnsvgaNOB0PjfxMIW/csv2+eFcPb+KXinPA9HcgvvBX0z
-         Ul2q5xXhq0RHmRpx3B5crcurb+GGdme1/GFgB5VcMZBZUz+ZFfM5l1zZ834FggzGloqp
-         Fe5w==
-X-Forwarded-Encrypted: i=1; AKwUvBx9KHWzmRsI3V7eHlrHgEXtkhaI99HmgMougqi4dFAE9zO5eFGjkRfvo/UJ+DrXGJ8L6dC/1oswoTw9dPEZ@vger.kernel.org
-X-Gm-Message-State: AFq9FYI7jct1ePODnCc9dO2ymMxcgXrTcxtqzbq3nbXB88n3XiL5PLfT
-	EJxrmFciM0GSVSZoReQk2oqOLXk1mAi17lmQtXECMNF8n6plp/rn6ZglAQGtVt+NzJuHe2JCnF2
-	xZA4PSsf2LQRbJeoh7ptqkoVkSJlGCJu83WyWzP1OZaYZM6VHN/JqYfqnlilVTjn4nRy5VgfZWV
-	7EtwZPc8Sh2pOdMXxMl2dgPkFWqOWCBDQsZDQIXyefSAM=
-X-Gm-Gg: AYBFou3RdoLfGtKlIasmLwf19owSQhUVNSzEeBhNc77HE4azKRFE3/AHtb0A8Mrv5BB
-	hMEYzfW/xSdaoG5VgefLQw7fTIfIOZtdE88O5tKDMAAHnIzeXY9Nbga82n9QUjKvIzmxwUbSkwg
-	N1CBGZN/Z0W0pfcIL9BnWGt3FVpN55I1S1gBpK2ifE+ReXv0Grd6VKI7GVt85OqpLJibzpG2lny
-	/amN1FVXfMe04alT+bIH6wDiH+pDaFN9p2hQuGV6EGWAnd0TfrKF+OOH4V2dJ2j61Qvf58Vz9c=
-X-Received: by 2002:a05:620a:4452:b0:939:de48:e41f with SMTP id af79cd13be357-93f57f4a770mr277892085a.31.1792568691708;
-        Wed, 21 Oct 2026 00:44:51 -0700 (PDT)
-X-Received: by 2002:a05:620a:4452:b0:939:de48:e41f with SMTP id
- af79cd13be357-93f57f4a770mr277889085a.31.1792568691247; Wed, 21 Oct 2026
- 00:44:51 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MTpDnlQO
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 086E41F000C9;
+	Wed, 21 Oct 2026 07:49:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792568969;
+	bh=Mw9ALp5m6wk+v40aZBRs95cwBAwuR1QaIazcbE7LyXQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=MTpDnlQOpJ5O/IXlzsIQN/HhAQvO4OdgtMBaN6SEtfIfE1hth364NrneDgPzjmPDj
+	 JpCJ2l1A2vjS86ClRaG79NTWDYxEKx01PxJRrDR6/+Gu0fbVwK+QlWw3Z7MX+yxNFf
+	 s1gew//0fW9SahPGm3lipgOyxGZDA91358P3XTKyTGHY9WMDrJjHCLLVZ1ETap5/4C
+	 XEthzrj2YmVP05kACZxHr0uEaxpK8tMEXtn6VVqqH439EnKWmLPOssbrprGYdScp/I
+	 Fh9rVEYIoK/ZrGVV+j8Q6ixWQsoZVOIVIhZmu4jlPGBycL/9PC8SERkoiUmzTtH+nM
+	 WIj5MHMcTo2Ww==
+Date: Wed, 21 Oct 2026 10:49:25 +0300
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Jens Wiklander <jenswi@kernel.org>,
+	Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
+	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
+	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+	linux-integrity@vger.kernel.org
+Subject: Re: [PATCH v4 0/3] Add TPM support via Qualcomm TEE TPM TA
+Message-ID: <athuhfkfGPZp_YXT@kernel.org>
+References: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
+ <atYZXRLf3YPZhiNB@kernel.org>
+ <8896d867-dfba-4d63-a0f0-5686c572b262@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,113 +63,43 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261020193946.51478-1-birk.skyum@pm.me> <20261020193946.51478-3-birk.skyum@pm.me>
-In-Reply-To: <20261020193946.51478-3-birk.skyum@pm.me>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 09:44:39 +0200
-X-Gm-Features: AclHuK-A2tHFi1BbsII8WbD0jiKjbsnoXE2GHZ86KIPcCe_VjivQo4KKDrbb9oI
-Message-ID: <CAFEp6-0wmUYhcF+_nv8U3WovxyHVJJFs1FWfN8xb9ogMOxpBRg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] i2c: qcom-cci: Suspend the controller 50 ms after the
- last transfer
-To: Birk Skyum <birk.skyum@pm.me>
-Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-        Saikiran <bjsaikiran@gmail.com>, Mark Brown <broonie@kernel.org>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDAzMCBTYWx0ZWRfX5bvgM0fh1KMa
- 9d8AFl0aic5HqMVY7W+lM6hUHrR9f9eu4z7j1gOqTu2cwGb5Sfdkct8uFshDZsT+G6sP/ckH4NN
- BKvNzUhGq02B7gcEox0mklIXwYwCtGXOBuW+5AY0Gl6dcx5RE5xywYY55CaHuQRz5Wi+9AXUEHK
- YrJiCicdFDJ3Xp+wj/GZXeOKGi/nfJu1TPr+cqe4l/14hBFEOM+BgjqhCxviV18CXRu3DARKUXe
- tRbCEZgCLTvgZQvhDX+QSr5dwxEya6ybR92NHmQ+X5FLegtJ96Iurnd/snQllRqrjdz9TuZWWX3
- cikLR09wV9zbXNVDELElIL+zXgMAE5cfB2H2/l4xY/6NB2cQsg5uZsqCSMVy850jY4Ty4jy7ktW
- fLuCc1veNPmrKpB1m6lqwmsih0jf4/y2l4ri9eJ9KvDWwIH2jLDmjOagVTYMBUvz/FHkz/c1l1x
- 1llotyy673MZQ95LbGg==
-X-Proofpoint-ORIG-GUID: FguzCosYBPDvJCkhz9KXfbjKFMqNpREH
-X-Proofpoint-GUID: FguzCosYBPDvJCkhz9KXfbjKFMqNpREH
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDAzMCBTYWx0ZWRfX9yAcVB9GZEE9
- WlUCEcHaAPGIdauyByUISGtxUmnAKvThuTNDmADNjPKd0Dni1sw6uVmFhBxa2NOXFWVpFmVipsG
- eYslgwmMvTL4QA3SW/tEdFJdmR0xNgI=
-X-Authority-Analysis: v=2.4 cv=HL5WhYtv c=1 sm=1 tr=0 ts=6ad86d74 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8 a=ZovgdgjKAAAA:8
- a=Bu-N7aw3tzf4DBNc8b0A:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
- a=VOxKbm1zgHvARWIDjr3b:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-21_02,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 impostorscore=0
- clxscore=1015 phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610210030
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8896d867-dfba-4d63-a0f0-5686c572b262@oss.qualcomm.com>
 
-Hi Birk,
+On Wed, Oct 21, 2026 at 11:21:33AM +0530, Kuldeep Singh wrote:
+> > Applying this pulls tons of TEE patches:
+> > 
+> > Applying: tee: qcomtee: Track the object invocation context
+> > Applying: tee: Add kernel client object invoke helper
+> > Applying: tee: qcomtee: Allow object invokes from kernel clients
+> > Applying: tee: Export uuidv5 generation for TEE backends
+> > Applying: tee: qcomtee: Add support for registering QTEE services on TEE bus
+> > Applying: firmware: qcom: Add support for TEE based EFI-var client driver
+> > Applying: arm64: defconfig: Enable UefiSecApp TEE client driver for Qualcomm SoCs
+> > Applying: tee: qcomtee: Register qcom.tz.tpm service for discovery
+> > Applying: tpm: Introduce Qualcomm TPM driver
+> > Applying: MAINTAINERS: Add Qualcomm TPM driver entry
+> 
+> Yes, first 5 are tee patches prerequisite for tpm series as mentioned in
+> cover letter too and this series can only be merged once Jens can pick
+> dependent series[1] in linux-next.
+> 
+> Since, v7.4 merge window going to start soon so i doubt Jens can pick
+> for v7.4.
+> 
+> Jens, Any plan/timeline you are aiming to pick series[1]?
+> I see it's mostly reviewed with no other relevant feedback to be addressed.
 
-On Tue, Oct 20, 2026 at 9:40=E2=80=AFPM Birk Skyum <birk.skyum@pm.me> wrote=
-:
->
-> With a 1 s autosuspend delay the controller stays clocked across any
-> power cycle of a target that is shorter than a second, so the reset on
-> resume never runs in between and the first transfer after the target
-> comes back stalls until the 100 ms timeout. Camera sensors are powered
-> down when they stop streaming and up again when they start, so closing
-> and reopening a camera quickly hits this.
->
-> On the Lenovo Yoga Slim 7x (X1E80100), restarting the OV02C10 with
-> v4l2-ctl after pauses of 0.05, 0.1, 0.2 and 0.5 s failed in 19 of 20
-> cycles each, and in 16 of 20 after 1 s pauses. With this change and the
-> reset on resume, all 100 cycles started, and so did 150 of 150
-> libcamera starts back to back.
->
-> Transfers come in bursts (a sensor mode alone is a few hundred register
-> writes), so suspending 50 ms after the last one costs one reset per
-> burst.
+Maybe it is better to pick also TPM patches through your tree when
+you choose to so that this will go in-sync.
 
-So, no, we should not rely on runtime suspend/resume timing as a
-workaround for this. That approach is inherently bad and fragile.
+> 
+> [1]
+> https://lore.kernel.org/lkml/20261015-qcom_uefisecapp_migrate_qcomtee-v5-0-1460691b35d3@oss.qualcomm.com/
+> 
+> -- 
+> Regards
+> Kuldeep
 
-Have you been able to probe the CCI I2C bus during resume? It would be
-useful to see whether there is any activity on SCL/SDA and, in
-particular, whether either line is being held low.
-
-I wonder if enabling SCL stretching support could help here. One
-possibility is that the sensor (or another I2C slave) is not yet ready
-when the transfer is initiated and therefore holds SCL low. If that's
-the case, have you tried the change below?
-https://lore.kernel.org/all/20261007050147.274096-1-hitesh@ebytelogic.com/#=
-t
-
-Regards,
-Loic
-
->
-> Signed-off-by: Birk Skyum <birk.skyum@pm.me>
-> ---
->  drivers/i2c/busses/i2c-qcom-cci.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-q=
-com-cci.c
-> index 51ce174..62b0fcb 100644
-> --- a/drivers/i2c/busses/i2c-qcom-cci.c
-> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
-> @@ -794,7 +794,7 @@ static int cci_probe(struct platform_device *pdev)
->         if (ret < 0)
->                 goto disable_clocks;
->
-> -       pm_runtime_set_autosuspend_delay(dev, MSEC_PER_SEC);
-> +       pm_runtime_set_autosuspend_delay(dev, 50);
->         ret =3D devm_pm_runtime_set_active_enabled(dev);
->         if (ret)
->                 goto disable_clocks;
-> --
-> 2.53.0
->
->
+Br, Jarkko
