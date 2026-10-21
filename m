@@ -1,111 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792597428;
-	b=dbtvgO6Gtn2Bhl/xVuxjIz3+TqTMJffLpJX9HNE+7G78oGmxkSb0j2jZpQtOsNf53CHZ
-	 ycAwSIGkL25E8csLwAPiRln7JssCZGe1BgIjetGu1KWKqch/fJZDEKsspqQZ036toyrZK
-	 H3zg/ghtVyAbw4fhiP8FUTwhJXoPHPPbFM7lE+aWIl5WDEXmiD1ZRHgerp9YpZZL4K7hy
-	 OqVNLZIiy1uUD17P+qSsmnQawxwj5lnmDkpObylTThcls1GHws27PwWTuojGQFXgn+Dm3
-	 XGQoclS5j1o5Dg1sFOkjOpCxZdwWxw1pD4oslHvyqGp9KLLxqJ4WvGkHk6fGcrVvi5A==
+	t=1792597434;
+	b=VTvUFthNpzynpjfInF4AozXN2ckv4j5Mz6hIP4Ydg7pbTYPZoJnKIaAX2+rCdOMbwrsP
+	 1IV25k1r5nlqwRmJWmpAuHZOKB3Jhe0CXVed7z49HA6EufnBitl2nZsrHD4o/VXP1xmV9
+	 KHqA/kF6BfgY3mIEEdUOB6f0CaO/KBvgCio41iOyBpedgIxYF9qVBxsbx5JwI2BWT6afy
+	 lY5niq7sNcW44N0JukGcouK1D6tJByYz3Ym982/4fDd0/DWkZWi7j+4dE9yRkH6RMODBS
+	 E6heQbtUDye1CQkffXX+d+kYOk5+LRXZP29lAfjEfI50g0OHymKPxNbL33K1Z5/AI8A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792597428;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792597434;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
 	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=ZLWd/oX18V9jLjSX18NKFAoygb2L++PIgsVFAZj+Sws=;
-	b=FOiiPIMqFVMpKFvCxShRQl7dkupgL+oQbiI+VtYbLGh6Y205yAm9eWS3CjdHyCMZQsCG
-	 3PVd/jIPMthMNAAfIzCh6AdM89l/cZvcHWTHHDSFy712S/1BoXJ8rfyv/UF690q/YXtL2
-	 fmRogJhv82ntF+YFByZCeKjCesKO9cVAhiI50Pehbl3ypEmhq3Cf0DXfDkevn+M/GhwSE
-	 JWWQkpvZrb7twLFjHbhNXjrFZjdGIKAcHLu5OhyxccpYyyF69nOMc7fKkNotpTbApqpCf
-	 hurqhRXyQ2/df4h6m1LxwivrhLXTVgIRxoD5mjSj4vOuTqRrA2fX4QFsYxqOOmWFmfA==
+	bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
+	b=H5wieG6q2U9l6MhwoPxvMCBOtIOvsD3a2eaWsHEaNyMZrs3bxPMWd+Nrw0PAG72r18UL
+	 d4vtFkDq9feFED4aqcKiZZKHUSznkMvwsTDp0UrRAjwXpN/uAD3LWRW3lhR6oVJ/SiM3N
+	 HHPm7J63EY+zs8Famw26H61+MDW3Kze/YI86lnfSe9FeAaP+8drJj1rd86Iky4yynk93v
+	 jJPy7KDfLk+jO4086L8ncBFooFpCXDwloq0mW1wGsY4j/TsuGaPORUIGiB0Rpu7HHSzoJ
+	 RHQ8Dk/Ky5B1h5xCQCqYIv9XPPwEP2L5hP65hGSyc3z7aezwqMlC9sPm07PzdVH3fCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="MOJoRxa/";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ERvtbX17;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BegaPk5m;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OdJfXM9q;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC8D960A2637
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC8D960A2637
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAED606C06A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3AAED606C06A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MOJoRxa/;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ERvtbX17
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFU86U479884
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:47 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=BegaPk5m;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OdJfXM9q
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LFU42l1557963
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZLWd/oX18V9jLjSX18NKFAoygb2L++PIgsVFAZj+Sws=; b=MOJoRxa/gFS9MKEO
-	Q6ZlB+mB/8FFJTi9hgIjaiykmuEAU8n8T1ZUU+60omqyF8OShj2cZUZM+77e0H9R
-	Bfy7OVtN6UctT2RPCsbIm9wQfTP6vf4HNF3DMHWEZ2O39IaR8lLoEAay5EhiLn6E
-	Y9pYOAkbHS3jNuCoesjjOd1EFqcAxMbJZ88PfYq9iJLIOZJ50WViMsTu9mqVYQ1L
-	1YlV45ACaF4v1DMVk2mOo6P+s7xb8pYfNTRlZ9ZfjlwkbJ3j2kBdE/B7at0pz3Is
-	4IWns6PeVDUUNNxoH2gBvjr0AeMSzOUZyLNgL2ybeHbrqDK9yDV21mE90BV15ELT
-	Uk52pQ==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heda0mqx7-1
+	e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=; b=BegaPk5mCznUwGbK
+	URIVes/UB0VI1nKH97RcBzjxTWA4Ma27Q6abc/xNRLxwSqJrb4Q7QEPVhnrFXtDm
+	fAQmn+/NG/rA/5aQcfiKm5wqfm5Hi4+VP5F0oiZxCsj8rW1//UewQELaPIO/jU6T
+	LbvATSTvAz/+PC8XcbJzGSR85/su63ERJAAo3vS7d0Bg+7XxHO16DgBj4GhU9Rop
+	YPlJ8TL435w3mB+P3QTLamJ5T5jZbhsgCgk7/+LU8wrC8YuRQD+FG94d8/hZ+WeC
+	JxJtrNdKBp0sFLMOdLuuRpl5gBD6vgIKBJ9oRO0sudXWudGSvW7SJgTOoGnVQaCE
+	21m4xQ==
+Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajmq70-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:47 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-35a04491c56so23921eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 15:43:52 +0000 (GMT)
+Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-155a75f91e1so1102752c88.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 08:43:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792597426; x=1793202226; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792597431; x=1793202231; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZLWd/oX18V9jLjSX18NKFAoygb2L++PIgsVFAZj+Sws=;
-        b=ERvtbX17av2gSYEKCenvZowLkSPL5JjX2+2jo7cRI0Qg3zlmBqb4DgVZi4cU85lvsD
-         01nSRi8+9jaq/2Pb08H7keuFuUHgYbBlij1I1rMGOfJmOF8VgfmnUrvnZ9eQvUe8T6gw
-         zzCONaABhE010zXRbJRXJbAd6TR/2pHqXyyhABdOjn0sDAfocc3wop2gIKOgvG2vXR1H
-         nNhFTLu5s6yZ7vD3MKc5kVCDqN3Lm0A4zSIQ+1DvAhWGwsB63NUuKbHB4LAbCCXUQn/y
-         fdbtnNkHkoxAv8UuSHjw7TNEShLz42ua8yB7l2+MiAc+AjDNvO+VPTXVDqDah/Mk9r3r
-         Eycw==
+        bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
+        b=OdJfXM9qwKdOogQZugI9qeSgybxnMtCvBj2gzU75B36HUhMzW3FU6qaS2bZMgZcw3t
+         EmdvxIp3kSO2D3hAUZmKtMIfbws/sTfMrliEkcERPmbzI6mXnC7MkG6PWH8xP5Dky+Mz
+         y9npqd5Y7S0WLjG6LNWFsQnw0GoV+bDNhp/aeqEa9LdF4URZJp/zhOgh0RWr5Gx1zUc0
+         Rvh4U7vSguuSElbqOmCL9+DbI7b3CnyKNDIBPMxSeMx2eUjQzcKo6b5wfYE6J1GM2Js8
+         9ONDWEnYFYhhlF/tveyUqkwwYPWiLC1A1Bws1uoFgwtT+Xxne4CR/uCdb4UyXulFYuNK
+         gMvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792597426; x=1793202226;
+        d=1e100.net; s=20260707; t=1792597431; x=1793202231;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZLWd/oX18V9jLjSX18NKFAoygb2L++PIgsVFAZj+Sws=;
-        b=PRjXmKV0DlVpY4if4jYB2osRh0CUpEa10Cod5bucxeHZ6qlCnkWeNz/qtTV23MUl7W
-         NsAj/gKxqIl0WTNpBG9nujUDNrqfYWBeQHJIeWG0W1xRRdMiCNFvJTZvpDx2GVi3BQQg
-         bQPJDoPf8OwAitNemCzaaAVj3FzXfb0soKNDy9SjEMaYHfqcJ+FYlYwXPDE6Wvu+0BWU
-         caegxb727OpVB2ODkGvyFcWu49zIt013Swnq2onL5Y41WolCF43sag3q/SGWtZspO22c
-         8o8UwOK6CycKw80KJQ/Ha72yTrUUBS2tAg/rqLrVSNv9mS+rdYatnF7yAW46+FY737rw
-         5aNw==
-X-Forwarded-Encrypted: i=1; AKwUvBylIl/R4nHJBqIqNpu6TNtRN7Odxg4PxULBOyymfbuhqkCU8h4+32jqwmhIxY9B7Hl8uoAZ3i4jeh8lNK2u@vger.kernel.org
-X-Gm-Message-State: AFq9FYJXHz9VP/+YTK7JeHkawoxl900wA7wtPQmNN6VXxl3ixJkOVCtE
-	fybb2l4/z8ghHbdVaIlpQCr9f4RO91R3rkoowAR/yZxBMfjMaEcJnV6WVaiFn8i1xsM33yVnjB7
-	WhplHxNphU54f4abLhHkKTjYjL2zjuoUNX0wrSXIokog1v7voCcM4hwySRhvP9tSZlFNl
-X-Gm-Gg: AYBFou3W3xiTEv+3cDl/1VMGIfi+VwJyOUyUN09TRhNfs0chetv9vGkJPWOaNhjuwAl
-	9c+xwqbpBu97eI0loqH79KkYuEVklDWP5hxLFV9lOqJOjGzvnpyjOhy4i2keVJM4C6f1ScYQS/T
-	ZavxAxmv6D7M2Bjg/+x7BI61NBkGsEd+QkPBXVcSKXjghyhwuHbLjPdlG0IFYjiNVVsBRhsS9WJ
-	XZW9DrjLoFbtUYFaIunioQNvYtzSb5Bdg+95eQUi228sDZnl9aPJnq5EpfOAe5GZ3RfSPlq4MZW
-	PqCh2s/beVS0z7s/hgdso8+4fJc+VaJnBXYAMZ61PlDJgfZgY4rtu5Y1ZZRl3nKX0jLpm422gh1
-	QQCLuVhDKwQMRfNEnt/UFuCzk
-X-Received: by 2002:a05:701b:2802:b0:166:f097:6f10 with SMTP id a92af1059eb24-18dbed4c47cmr5963936c88.11.1792597426304;
-        Wed, 21 Oct 2026 08:43:46 -0700 (PDT)
-X-Received: by 2002:a05:701b:2802:b0:166:f097:6f10 with SMTP id a92af1059eb24-18dbed4c47cmr5963882c88.11.1792597425270;
-        Wed, 21 Oct 2026 08:43:45 -0700 (PDT)
+        bh=e7HiGSi+eBAKzHRlGvLoZKtK+8pEADviMUVKI4usKj0=;
+        b=I048Y28NKQp+w0CESmCbw6253Nkp/mHqFnQAyFGiNqcIEhAss7zZng84nr3cWfHVrb
+         RpcNeEOlt24W4A4Z6YSNHsWp/EmMZcEXpCfADWCeauAxSR6LUb8eb6ED4B7CgFqyD6I5
+         kNFtC4l4dDB2C4VLmyw5+CfrEFc6l8ZRbczB9vKYHWV981SvSWzQLOg/QfYl4iR6IapK
+         UhyzWh/ITrW5Ox23wwk/JgUkv8ambRJGsazCgMmwL9gHSMUTSvvmSocavNLZuGnL/lqe
+         vERHajLUrP3c1KwkuH2YMIIcSm9i1Sg+ZN1q484BvY4uQT0oHesejBarjG+exa2NDUEa
+         jplg==
+X-Forwarded-Encrypted: i=1; AKwUvBzXOEai6aub/2ZYMDeTuakfPTyaT7eko5kjxeekChWJP8E4ZITufHij2U8dU+gVAJ/08PzdB0LEApel7Cqr@vger.kernel.org
+X-Gm-Message-State: AFq9FYJ+/FYzWCWi5OuWUNk6OBZXolpUp01qq9l9o0NHhEZEmMXCQSwf
+	T4kzqAji7O7OQ+4yv1mcakvsL1ByekN1G9Kjcz4YrFyqdaX1/NyBHBYIYankrZ/CIH+wXExcfHX
+	cNBNKpOmDmvQG09Z3CoOdjvSThhFEk0H/9ugVzot5s+5DOw8DI/mmgYlvzk1XemZn1yqA
+X-Gm-Gg: AYBFou2fxEIHYS4bMoASnN09iHwCRA/m4emVoo2n1OBthQHuU2zKXgA2mQ4ZaOtLIgC
+	j+lBzQLupDnlKRndfTj7DW1RneEjgEmN+EzoTxg4tl9ENWXmOO+rGW43kgPxynQKYhUuMPTv+Fy
+	aAqSKzR7wp/ReiFrGy3Inyf7tUSrWyCUAstldIEfCndK2ElQfBXllW3vx1cfQQcenZPDBBW9iAc
+	a99vI3cqG2bY7WsMe+GMPtpmDpmIdgpfmCWPNEMesj4KVpEe/fcpVGI0iMIAK1JqE9oTZqe4t4+
+	VT+fveL6S0HSJNaOWh3WhR/84MpxbcXawUkwGN2I6uHk4qzVw7BgbeYf4qDIXXpLgyo4f+6iGa5
+	eOv/0Ka8TzNw8xgcRSNj6UHhQ
+X-Received: by 2002:a05:701b:4210:20b0:159:f192:5290 with SMTP id a92af1059eb24-18dbf218391mr6806052c88.13.1792597430846;
+        Wed, 21 Oct 2026 08:43:50 -0700 (PDT)
+X-Received: by 2002:a05:701b:4210:20b0:159:f192:5290 with SMTP id a92af1059eb24-18dbf218391mr6806031c88.13.1792597430250;
+        Wed, 21 Oct 2026 08:43:50 -0700 (PDT)
 Received: from hu-hdev-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.40
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1902f96dc4bsm7937768c88.0.2026.10.21.08.43.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 08:43:44 -0700 (PDT)
+        Wed, 21 Oct 2026 08:43:49 -0700 (PDT)
 From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 21:13:10 +0530
-Subject: [PATCH 4/5] soc: qcom: ice: Migrate to the generic ICE service
+Date: Wed, 21 Oct 2026 21:13:11 +0530
+Subject: [PATCH 5/5] firmware: qcom: scm: Drop exported ICE wrapper
+ functions
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-ice-migrate-tee-svc-v1-4-b035be7aab0a@oss.qualcomm.com>
+Message-Id: <20261021-ice-migrate-tee-svc-v1-5-b035be7aab0a@oss.qualcomm.com>
 References: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
 In-Reply-To: <20261021-ice-migrate-tee-svc-v1-0-b035be7aab0a@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -132,183 +133,317 @@ Cc: Basant Kumar <basantk@qti.qualcomm.com>, linux-kernel@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
         Harshal Dev <harshal.dev@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=5281;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792597401; l=10444;
  i=harshal.dev@oss.qualcomm.com; s=20251124; h=from:subject:message-id;
- bh=+jNoF4nSNn7Yf6UxxTwa2YXwE8gWaW0+Cv1ap5fH/wQ=;
- b=Bz4X6vlOflWQsqEMHIZ+6+71ELhtmKTb4xX9ZL7PtoeTcrbbPN/rBptEqXWLrPhwgM46yjRtQ
- whk++DOpC2JBavv3FIN7kko7Y4o3NtoRuDSvRhB11mUWYOp+o7YQjub
+ bh=vaZC/5EUswfLlBTapWjQ/fqR5EMZBzDkoGZAoqbtT8o=;
+ b=al1RIRAzrlNsUBRsfVI8KChV9dCMpvFmWrcivh2ByRKvHkcb+VaXcduD5qPhnvKQWZfSpL5jL
+ eihRtkRMr7/Bdp2+VgBRKL+lU62Nl1ScdwAk7VF5/X1LNkEgkWLEQVA
 X-Developer-Key: i=harshal.dev@oss.qualcomm.com; a=ed25519;
  pk=SHJ8K4SglF5t7KmfMKXl6Mby40WczSeLs4Qus7yFO7c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX7O8r/T7fevbj
- PcbLYstvoENgx8uBDpKb5ESv2JLov2orcmT+UAf9Gav5N+UWTwoIjKHY9hHS5lH2ypZHGLmj4I3
- /R0soayd2LErrOJHmlab0C6C/HNMUglNiZbZK5m0tb130h24J0xyHraz2ciZ1Zy/N+/yVhSaAcz
- lJs6RbEeujeiRYptHmaxPXsquWxsA2AnUjx7fxIhxXW8def4xqwZw4/Md4OSe0PPCM4fRKfaY8f
- b2oaL+F+keP7h0vHlIDjrRgNiZgaHVf9Wjjjpv38LXpnhD4I4FRfTAbj85Ageqw2e1PC94azSI0
- 1LMyZ6xGmYLw65yOj0/YLsyTKn4lUxc/21zqyr/0lMimlx62UB/LLFV1czeBRXQleQz/MrKDi3n
- zKU3IKYGAxx8n0JfUlsRztf0nAq6McZLjMgDq5hHchJveJVeTng0/U9N3sa1qqtmGiMyZJLxZbE
- DN5Tu1j3BqpAbkfU9Hw==
-X-Proofpoint-ORIG-GUID: YGRzB7vicTbdbju6SUDC3O8cmNOe6ASh
-X-Proofpoint-GUID: YGRzB7vicTbdbju6SUDC3O8cmNOe6ASh
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfXz8nRVzat3U01
- TKH2k3dsTFZ66nyttDSL8ABnTty3YdSlMgnrclhfEFG+7o+F4smFqPsPov7jkCGBFskKUdgYXI7
- A/WJj3LaKAkopunL92B+mX69JN5LMKU=
-X-Authority-Analysis: v=2.4 cv=HL5WhYtv c=1 sm=1 tr=0 ts=6ad8ddb3 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfX0KmhVIyo6B0N
+ dBy1qxnC/yeXSwyA3rFKHZTSDBRHa2Tx5scLassB7y1v1/PxmIsfHDrl8uXmAbQmDmK6TZH2O7H
+ NHH+R57WpVQNpkBxBV4dBFx2OsMr4ZQbchag+N36LruZ2cMxxO/zNiHPHsQnUngewGdmLlnRw0q
+ Z2hMnYVRR0o1efOxtRAC0IG7OosW1WVrAiKZp8WJTZWBfb3OzvMFQuDkcrFOK4PDHFCaJxkIqYo
+ 7b2UUbWlruSyRQrbqYNXnxRNwRiYKjT7UDvjrsmoIOH94cqWYFyGpso/iV4ebSu4lklBIZsF5XV
+ qolxQf6CdoBaQhvOVgfPr6qS9KKIh7hRyCIlLBwr7hGVZlNtwisxaVDPW95sBRlDa3yEsdp7wQ4
+ PUUT7uLKjXP8RKDxWJYDcdm0nWKCf9dv6VzehlgwhIKDppesdq+td80hg27Wn/cLzKz9BxWRyIk
+ 2lnjoWWZsAamOBcv5Wg==
+X-Proofpoint-GUID: n_F8ZvJ-Y9CFtjP-YH9CiAdS7RBhuGGA
+X-Proofpoint-ORIG-GUID: n_F8ZvJ-Y9CFtjP-YH9CiAdS7RBhuGGA
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MiBTYWx0ZWRfXw0lefflQkGTA
+ 2sk88ItwKHJnDQr2OvGgHzuWJtYhW92yC4MBYiJxYys3rcsIBTmfNR23iDTRdurthSRXQe7BuDg
+ QB6FA1Utl5XLy6czfB2AKOy3pUfygIQ=
+X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad8ddb8 cx=c_pps
+ a=JYo30EpNSr/tUYqK9jHPoA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=zftoU6j5KQ9PehORJHMA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=F3QbZBHQcOWnaqSeXxkA:9 a=QEXdDO2ut3YA:10
+ a=Fk4IpSoW4aLDllm1B1p-:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 impostorscore=0
- clxscore=1015 phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610210062
+ phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210062
 
-Migrate the Inline Crypto Engine (ICE) driver to the generic ICE service
-which re-directs calls from the driver to either the SCM or the TEE bus
-based back-end driver at runtime.
-
-This makes the ICE driver agnostic of the TEE firmware running on the
-Qualcomm platform.
+Drop the exported ICE wrapper functions from the SCM driver since the ICE
+driver has now migrated to generic ICE service which allows re-direction of
+of ICE secure service calls to the appropriate TEE (QTEE or OPTEE) at
+runtime.
 
 Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
 ---
- drivers/soc/qcom/Kconfig |  2 +-
- drivers/soc/qcom/ice.c   | 30 +++++++++++++++---------------
- 2 files changed, 16 insertions(+), 16 deletions(-)
+ drivers/firmware/qcom/qcom_scm.c       | 110 ++++++++-------------------------
+ include/linux/firmware/qcom/qcom_scm.h |  20 ------
+ 2 files changed, 27 insertions(+), 103 deletions(-)
 
-diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-index 535c8619197b..f68973efcabb 100644
---- a/drivers/soc/qcom/Kconfig
-+++ b/drivers/soc/qcom/Kconfig
-@@ -295,7 +295,7 @@ endif
- 
- config QCOM_INLINE_CRYPTO_ENGINE
- 	tristate
--	select QCOM_SCM
-+	select QCOM_ICE_SERVICE
- 
- config QCOM_KRYO_L2_ACCESSORS
- 	bool
-diff --git a/drivers/soc/qcom/ice.c b/drivers/soc/qcom/ice.c
-index e256595b9826..c075cab6f7fd 100644
---- a/drivers/soc/qcom/ice.c
-+++ b/drivers/soc/qcom/ice.c
-@@ -18,7 +18,7 @@
- #include <linux/platform_device.h>
- #include <linux/xarray.h>
- 
--#include <linux/firmware/qcom/qcom_scm.h>
-+#include <linux/firmware/qcom/qcom_ice.h>
- 
- #include <soc/qcom/ice.h>
- 
-@@ -176,7 +176,7 @@ static bool qcom_ice_check_supported(struct qcom_ice *ice)
- 	 * advertise support for raw keys or wrapped keys, HWKM cannot be used
- 	 * unconditionally.  A module parameter is used to opt into using it.
- 	 */
--	if (ice->hwkm_version && qcom_scm_has_wrapped_key_support()) {
-+	if (ice->hwkm_version && qcom_ice_svc_has_wrapped_key_support()) {
- 		if (qcom_ice_use_wrapped_keys) {
- 			dev_info(dev, "Using HWKM. Supporting wrapped keys only.\n");
- 			ice->use_hwkm = true;
-@@ -352,7 +352,7 @@ static int qcom_ice_program_wrapped_key(struct qcom_ice *ice, unsigned int slot,
- 	struct device *dev = ice->dev;
- 	union crypto_cfg cfg = {
- 		.dusize = bkey->crypto_cfg.data_unit_size / 512,
--		.capidx = QCOM_SCM_ICE_CIPHER_AES_256_XTS,
-+		.capidx = QCOM_ICE_CIPHER_AES_256_XTS,
- 		.cfge = QCOM_ICE_HWKM_CFG_ENABLE_VAL,
- 	};
- 	int err;
-@@ -370,11 +370,11 @@ static int qcom_ice_program_wrapped_key(struct qcom_ice *ice, unsigned int slot,
- 	qcom_ice_writel(ice, 0x0, QCOM_ICE_REG_CRYPTOCFG(slot));
- 
- 	/* Call into TrustZone to program the wrapped key using HWKM. */
--	err = qcom_scm_ice_set_key(translate_hwkm_slot(ice, slot), bkey->bytes,
-+	err = qcom_ice_svc_set_key(translate_hwkm_slot(ice, slot), bkey->bytes,
- 				   bkey->size, cfg.capidx, cfg.dusize);
- 	if (err) {
- 		dev_err_ratelimited(dev,
--				    "qcom_scm_ice_set_key failed; err=%d, slot=%u\n",
-+				    "qcom_ice_svc_set_key failed; err=%d, slot=%u\n",
- 				    err, slot);
- 		return err;
- 	}
-@@ -422,8 +422,8 @@ int qcom_ice_program_key(struct qcom_ice *ice, unsigned int slot,
- 	for (i = 0; i < ARRAY_SIZE(key.words); i++)
- 		__cpu_to_be32s(&key.words[i]);
- 
--	err = qcom_scm_ice_set_key(slot, key.bytes, AES_256_XTS_KEY_SIZE,
--				   QCOM_SCM_ICE_CIPHER_AES_256_XTS,
-+	err = qcom_ice_svc_set_key(slot, key.bytes, AES_256_XTS_KEY_SIZE,
-+				   QCOM_ICE_CIPHER_AES_256_XTS,
- 				   blk_key->crypto_cfg.data_unit_size / 512);
- 
- 	memzero_explicit(&key, sizeof(key));
-@@ -436,7 +436,7 @@ int qcom_ice_evict_key(struct qcom_ice *ice, int slot)
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 9aeb2cefa77a..2d2a4715a0c7 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -1405,7 +1405,7 @@ EXPORT_SYMBOL_GPL(qcom_scm_ocmem_unlock);
+  * Return: true iff the SCM calls wrapped by qcom_scm_ice_invalidate_key() and
+  *	   qcom_scm_ice_set_key() are available.
+  */
+-static bool __qcom_scm_ice_available(struct device *dev)
++static bool qcom_scm_ice_available(struct device *dev)
  {
- 	if (ice->hwkm_init_complete)
- 		slot = translate_hwkm_slot(ice, slot);
--	return qcom_scm_ice_invalidate_key(slot);
-+	return qcom_ice_svc_invalidate_key(slot);
+ 	return __qcom_scm_is_call_available(dev, QCOM_SCM_SVC_ES,
+ 					    QCOM_SCM_ES_INVALIDATE_ICE_KEY) &&
+@@ -1413,12 +1413,6 @@ static bool __qcom_scm_ice_available(struct device *dev)
+ 					     QCOM_SCM_ES_CONFIG_SET_ICE_KEY);
  }
- EXPORT_SYMBOL_GPL(qcom_ice_evict_key);
  
-@@ -473,7 +473,7 @@ int qcom_ice_derive_sw_secret(struct qcom_ice *ice,
- 			      const u8 *eph_key, size_t eph_key_size,
- 			      u8 sw_secret[BLK_CRYPTO_SW_SECRET_SIZE])
+-bool qcom_scm_ice_available(void)
+-{
+-	return __qcom_scm_ice_available(__scm->dev);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_ice_available);
+-
+ /**
+  * qcom_scm_ice_invalidate_key() - Invalidate an inline encryption key
+  * @index: the keyslot to invalidate
+@@ -1431,7 +1425,7 @@ EXPORT_SYMBOL_GPL(qcom_scm_ice_available);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
++static int qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
  {
--	int err = qcom_scm_derive_sw_secret(eph_key, eph_key_size,
-+	int err = qcom_ice_svc_derive_sw_secret(eph_key, eph_key_size,
- 					    sw_secret,
- 					    BLK_CRYPTO_SW_SECRET_SIZE);
- 	if (err == -EIO || err == -EINVAL)
-@@ -496,7 +496,7 @@ int qcom_ice_generate_key(struct qcom_ice *ice,
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1444,12 +1438,6 @@ static int __qcom_scm_ice_invalidate_key(struct device *dev, u32 index)
+ 	return qcom_scm_call(dev, &desc, NULL);
+ }
+ 
+-int qcom_scm_ice_invalidate_key(u32 index)
+-{
+-	return __qcom_scm_ice_invalidate_key(__scm->dev, index);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_ice_invalidate_key);
+-
+ /**
+  * qcom_scm_ice_set_key() - Set an inline encryption key
+  * @index: the keyslot into which to set the key
+@@ -1471,10 +1459,10 @@ EXPORT_SYMBOL_GPL(qcom_scm_ice_invalidate_key);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_ice_set_key(struct device *dev, u32 index,
+-				  const u8 *key, u32 key_size,
+-				  enum qcom_ice_cipher cipher,
+-				  u32 data_unit_size)
++static int qcom_scm_ice_set_key(struct device *dev, u32 index,
++				const u8 *key, u32 key_size,
++				enum qcom_ice_cipher cipher,
++				u32 data_unit_size)
  {
- 	int err;
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1506,16 +1494,7 @@ static int __qcom_scm_ice_set_key(struct device *dev, u32 index,
+ 	return ret;
+ }
  
--	err = qcom_scm_generate_ice_key(lt_key,
-+	err = qcom_ice_svc_generate_key(lt_key,
- 					QCOM_ICE_HWKM_WRAPPED_KEY_SIZE(ice->hwkm_version));
- 	if (err)
- 		return err;
-@@ -523,7 +523,7 @@ int qcom_ice_prepare_key(struct qcom_ice *ice,
+-int qcom_scm_ice_set_key(u32 index, const u8 *key, u32 key_size,
+-			 enum qcom_scm_ice_cipher cipher, u32 data_unit_size)
+-{
+-	return __qcom_scm_ice_set_key(__scm->dev, index, key, key_size,
+-				      (enum qcom_ice_cipher)cipher,
+-				      data_unit_size);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_ice_set_key);
+-
+-static bool __qcom_scm_has_wrapped_key_support(struct device *dev)
++static bool qcom_scm_has_wrapped_key_support(struct device *dev)
  {
- 	int err;
+ 	return __qcom_scm_is_call_available(dev, QCOM_SCM_SVC_ES,
+ 					    QCOM_SCM_ES_DERIVE_SW_SECRET) &&
+@@ -1527,12 +1506,6 @@ static bool __qcom_scm_has_wrapped_key_support(struct device *dev)
+ 					    QCOM_SCM_ES_IMPORT_ICE_KEY);
+ }
  
--	err = qcom_scm_prepare_ice_key(lt_key, lt_key_size,
-+	err = qcom_ice_svc_prepare_key(lt_key, lt_key_size,
- 				       eph_key, QCOM_ICE_HWKM_WRAPPED_KEY_SIZE(ice->hwkm_version));
- 	if (err == -EIO || err == -EINVAL)
- 		err = -EBADMSG; /* probably invalid key */
-@@ -551,7 +551,7 @@ int qcom_ice_import_key(struct qcom_ice *ice,
+-bool qcom_scm_has_wrapped_key_support(void)
+-{
+-	return __qcom_scm_has_wrapped_key_support(__scm->dev);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_has_wrapped_key_support);
+-
+ /**
+  * qcom_scm_derive_sw_secret() - Derive software secret from wrapped key
+  * @eph_key: an ephemerally-wrapped key
+@@ -1549,9 +1522,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_has_wrapped_key_support);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_derive_sw_secret(struct device *dev,
+-				       const u8 *eph_key, size_t eph_key_size,
+-				       u8 *sw_secret, size_t sw_secret_size)
++static int qcom_scm_derive_sw_secret(struct device *dev,
++				     const u8 *eph_key, size_t eph_key_size,
++				     u8 *sw_secret, size_t sw_secret_size)
  {
- 	int err;
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1589,13 +1562,6 @@ static int __qcom_scm_derive_sw_secret(struct device *dev,
+ 	return ret;
+ }
  
--	err = qcom_scm_import_ice_key(raw_key, raw_key_size,
-+	err = qcom_ice_svc_import_key(raw_key, raw_key_size,
- 				      lt_key, QCOM_ICE_HWKM_WRAPPED_KEY_SIZE(ice->hwkm_version));
- 	if (err)
- 		return err;
-@@ -565,11 +565,11 @@ static struct qcom_ice *qcom_ice_create(struct device *dev,
+-int qcom_scm_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
+-			      u8 *sw_secret, size_t sw_secret_size)
+-{
+-	return __qcom_scm_derive_sw_secret(__scm->dev, eph_key, eph_key_size,
+-				   sw_secret, sw_secret_size);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_derive_sw_secret);
+ 
+ /**
+  * qcom_scm_generate_ice_key() - Generate a wrapped key for storage encryption
+@@ -1608,8 +1574,8 @@ EXPORT_SYMBOL_GPL(qcom_scm_derive_sw_secret);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_generate_ice_key(struct device *dev,
+-				       u8 *lt_key, size_t lt_key_size)
++static int qcom_scm_generate_ice_key(struct device *dev,
++				     u8 *lt_key, size_t lt_key_size)
  {
- 	struct qcom_ice *engine;
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1636,12 +1602,6 @@ static int __qcom_scm_generate_ice_key(struct device *dev,
+ 	return ret;
+ }
  
--	if (!qcom_scm_is_available())
-+	if (!qcom_ice_svc_ops_registered())
- 		return ERR_PTR(-EPROBE_DEFER);
+-int qcom_scm_generate_ice_key(u8 *lt_key, size_t lt_key_size)
+-{
+-	return __qcom_scm_generate_ice_key(__scm->dev, lt_key, lt_key_size);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_generate_ice_key);
+-
+ /**
+  * qcom_scm_prepare_ice_key() - Re-wrap a key with the per-boot ephemeral key
+  * @lt_key: a long-term wrapped key
+@@ -1655,9 +1615,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_generate_ice_key);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_prepare_ice_key(struct device *dev,
+-				      const u8 *lt_key, size_t lt_key_size,
+-				      u8 *eph_key, size_t eph_key_size)
++static int qcom_scm_prepare_ice_key(struct device *dev,
++				    const u8 *lt_key, size_t lt_key_size,
++				    u8 *eph_key, size_t eph_key_size)
+ {
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1695,14 +1655,6 @@ static int __qcom_scm_prepare_ice_key(struct device *dev,
+ 	return ret;
+ }
  
--	if (!qcom_scm_ice_available()) {
--		dev_warn(dev, "ICE SCM interface not found\n");
-+	if (!qcom_ice_svc_available()) {
-+		dev_warn(dev, "ICE firmware service interface not found\n");
- 		return ERR_PTR(-EOPNOTSUPP);
+-int qcom_scm_prepare_ice_key(const u8 *lt_key, size_t lt_key_size,
+-			     u8 *eph_key, size_t eph_key_size)
+-{
+-	return __qcom_scm_prepare_ice_key(__scm->dev, lt_key, lt_key_size,
+-				  eph_key, eph_key_size);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_prepare_ice_key);
+-
+ /**
+  * qcom_scm_import_ice_key() - Import key for storage encryption
+  * @raw_key: the raw key to import
+@@ -1716,9 +1668,9 @@ EXPORT_SYMBOL_GPL(qcom_scm_prepare_ice_key);
+  *
+  * Return: 0 on success; -errno on failure.
+  */
+-static int __qcom_scm_import_ice_key(struct device *dev,
+-				     const u8 *raw_key, size_t raw_key_size,
+-				     u8 *lt_key, size_t lt_key_size)
++static int qcom_scm_import_ice_key(struct device *dev,
++				   const u8 *raw_key, size_t raw_key_size,
++				   u8 *lt_key, size_t lt_key_size)
+ {
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_ES,
+@@ -1756,24 +1708,16 @@ static int __qcom_scm_import_ice_key(struct device *dev,
+ 	return ret;
+ }
+ 
+-int qcom_scm_import_ice_key(const u8 *raw_key, size_t raw_key_size,
+-			    u8 *lt_key, size_t lt_key_size)
+-{
+-	return __qcom_scm_import_ice_key(__scm->dev, raw_key, raw_key_size,
+-				 lt_key, lt_key_size);
+-}
+-EXPORT_SYMBOL_GPL(qcom_scm_import_ice_key);
+-
+ static struct qcom_ice_ops qcom_ice_ops_scm = {
+ 	.drv_name = "qcom_scm",
+-	.is_ice_available = __qcom_scm_ice_available,
+-	.ice_invalidate_key	= __qcom_scm_ice_invalidate_key,
+-	.ice_set_key = __qcom_scm_ice_set_key,
+-	.ice_has_wrapped_key_support = __qcom_scm_has_wrapped_key_support,
+-	.ice_derive_sw_secret = __qcom_scm_derive_sw_secret,
+-	.ice_generate_key = __qcom_scm_generate_ice_key,
+-	.ice_prepare_key = __qcom_scm_prepare_ice_key,
+-	.ice_import_key	= __qcom_scm_import_ice_key,
++	.is_ice_available = qcom_scm_ice_available,
++	.ice_invalidate_key	= qcom_scm_ice_invalidate_key,
++	.ice_set_key = qcom_scm_ice_set_key,
++	.ice_has_wrapped_key_support = qcom_scm_has_wrapped_key_support,
++	.ice_derive_sw_secret = qcom_scm_derive_sw_secret,
++	.ice_generate_key = qcom_scm_generate_ice_key,
++	.ice_prepare_key = qcom_scm_prepare_ice_key,
++	.ice_import_key = qcom_scm_import_ice_key,
+ };
+ 
+ /**
+@@ -2905,7 +2849,7 @@ static int qcom_scm_probe(struct platform_device *pdev)
+ 		qcom_pas_ops_register(&qcom_pas_ops_scm);
  	}
+ 
+-	if (__qcom_scm_ice_available(scm->dev)) {
++	if (qcom_scm_ice_available(scm->dev)) {
+ 		qcom_ice_ops_scm.dev = scm->dev;
+ 		qcom_ice_svc_ops_register(&qcom_ice_ops_scm);
+ 	}
+diff --git a/include/linux/firmware/qcom/qcom_scm.h b/include/linux/firmware/qcom/qcom_scm.h
+index a0a6bc0229c4..36b87be82804 100644
+--- a/include/linux/firmware/qcom/qcom_scm.h
++++ b/include/linux/firmware/qcom/qcom_scm.h
+@@ -46,13 +46,6 @@ enum qcom_scm_sec_dev_id {
+ 	QCOM_SCM_ICE_DEV_ID     = 20,
+ };
+ 
+-enum qcom_scm_ice_cipher {
+-	QCOM_SCM_ICE_CIPHER_AES_128_XTS = 0,
+-	QCOM_SCM_ICE_CIPHER_AES_128_CBC = 1,
+-	QCOM_SCM_ICE_CIPHER_AES_256_XTS = 3,
+-	QCOM_SCM_ICE_CIPHER_AES_256_CBC = 4,
+-};
+-
+ #define QCOM_SCM_PERM_READ       0x4
+ #define QCOM_SCM_PERM_WRITE      0x2
+ #define QCOM_SCM_PERM_EXEC       0x1
+@@ -86,19 +79,6 @@ int qcom_scm_ocmem_lock(enum qcom_scm_ocmem_client id, u32 offset, u32 size,
+ 			u32 mode);
+ int qcom_scm_ocmem_unlock(enum qcom_scm_ocmem_client id, u32 offset, u32 size);
+ 
+-bool qcom_scm_ice_available(void);
+-int qcom_scm_ice_invalidate_key(u32 index);
+-int qcom_scm_ice_set_key(u32 index, const u8 *key, u32 key_size,
+-			 enum qcom_scm_ice_cipher cipher, u32 data_unit_size);
+-bool qcom_scm_has_wrapped_key_support(void);
+-int qcom_scm_derive_sw_secret(const u8 *eph_key, size_t eph_key_size,
+-			      u8 *sw_secret, size_t sw_secret_size);
+-int qcom_scm_generate_ice_key(u8 *lt_key, size_t lt_key_size);
+-int qcom_scm_prepare_ice_key(const u8 *lt_key, size_t lt_key_size,
+-			     u8 *eph_key, size_t eph_key_size);
+-int qcom_scm_import_ice_key(const u8 *raw_key, size_t raw_key_size,
+-			    u8 *lt_key, size_t lt_key_size);
+-
+ bool qcom_scm_hdcp_available(void);
+ int qcom_scm_hdcp_req(struct qcom_scm_hdcp_req *req, u32 req_cnt, u32 *resp);
  
 
 -- 
