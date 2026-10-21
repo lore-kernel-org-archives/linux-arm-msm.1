@@ -1,100 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792606788;
-	b=NRWpHUOuWlvuxKD1Fzl4+lSm28wcJUyNGkN5EbJQwkfIRCFQAHuRmMKNVim6RPMHODlH
-	 F0w2tnQnmf6jsNzzODvJGUDpTgA7zjfZwbe3Cij2vMeHKVIX4dgfzKYuM7AVjLFmPmI+s
-	 GnoqGr/n31lSA7q9GIStzuVLDVANh9omM7LJHklZMtI5SHMdWneJogxQwFJReuCK3yOdY
-	 EvlxgZPMyyPQEkBU7/gLEQJYQUQUVtTSxEzV1/k49eU6TGoF8FQ0WJAg/hKQGn9XWHeqz
-	 ifq3kCOvYn22dkfqxEGdTd9UNzTIPU6xQQjMS1YtGP0fRjAzzmWTEGSHg1zN+J9SvFg==
+	t=1792608849;
+	b=eltztFDggjLMmxk13Z06LCFPA6x384vjmqZ8XwQ18VnU8GTR4zIqGwAYul2qJ0LdJvXF
+	 LH576k3RcJKqd0vzq+0cExeXg2MvZ0GeQZYmuUDtBTs99N0aHhL1a+qPpO2CZX/KpFuCL
+	 +XcxXmvPDBGprgovr8nr4bpEPtbSfVP3RuHVUICxk8w+tCQx3G6WnAtl7XQmERoBvzXsf
+	 j5YWZlmHQlhoFkvLpQLk5iGiI+YrE2yy0Q9eA4H5PsMBQ69tsC8hqjtc+FZ276RmwGveP
+	 9D6srqg04Uf9Fvg8D0IaP5maT1CRoRjxDhWXarPR+qJdmGflmI4sJHTwQRWB8IxMrAg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792606788;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=Nco9E6pnxf1U90wQWWUGgERQdyljr6gpJ4DY5U+hjP0=;
-	b=ezdaA98KinbGgn8gpoxMvLezh/ktWUfQfzWHVC1EAtllQ/8WFxEFW44YgyDOjBP1txOx
-	 HBkZDIMeH8OgIY586rO5quH1lYS+ywuOqAqqNKvW4GvWfZYzuOsje9ELMveX7xEgOphZk
-	 Yj18n3oKF4B8V2MLVVWCH17rUDrS+p5+fTBlFEwAMvr5lCGQn7rIqO/MIFeXSEmZERmUe
-	 JKIdwVePta4//JdGwpmQ9Gzaw1kOTGbkB2GIX9bzkH/eK9XeCmIb1PcpgbniATwSFtuWE
-	 4HfVmm27hq4PzH5mcRmQeOf4u7TgvkaDu/MY5kJ3jAvWEHtaf7ac2jG8IfeiYMZl3Fw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792608849;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=fHFDa/JKnVWZak8pH/341HZ4XAyUaMxgOSi8VNpe7Dw=;
+	b=WlxSxVjtIbAfWBWrV2AhzO0Vj+gpGTmQVN4m7WlUIiGbTEDkjx1Ztshwoo2wT5gRsmPr
+	 8Y9c6nkkyLYOKmQvfRMmxh17AP6r4HLOWiMr3E1d91KFYAFuZsYfheHAWwuE78S8CSTVp
+	 5rv8AnZVQV119eZuqh45syV4wUcYx7eUYjkHaBBUjBYwsayhWxyIZCCKqxt23p5VmNtwn
+	 wS3UIZYKBLyqmB27Kt/6ZtOa4uaftzz8sKk+WT3FhI2UqCG9v1r+JH7+Ri80sUIChlUvA
+	 A4Juf6ud0lS0tQCrPgCeWy+ksgK4Faq5PaWZJV2Nxce6Hu4FCi8csXSytWJ6dsXvoAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=qAGpfHyV;
-	arc=none smtp.remote-ip=209.85.167.43
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RujC+YWn;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2240E606A31B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 18:19:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2240E606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48A5D606A319;
+	Wed, 21 Oct 2026 18:54:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=qAGpfHyV
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5be3ed646a5so814437e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:19:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792606786; x=1793211586; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Nco9E6pnxf1U90wQWWUGgERQdyljr6gpJ4DY5U+hjP0=;
-        b=qAGpfHyVfaMIH7CJNiBwxj9rv0Qe6qb2Bz8HH8EBd7DU/Gjg/s5+p/zxDysVJdoVt6
-         gHm750RlBqNpmLp3R2mVgZtSwqCnC0mWd5rSRkHqtSt84k55Wem2s13Y8Tqt9qR2pvTc
-         amDxGM37Q1biWEVVa3KpRTDLEvBhyEsuBj1Wu+N/uzl3RODyG/at0S/jTNUmGum9GgqG
-         yFqFiS8iKcOn1B0og2Q6mWoyM7sF1uBmIH4fPOrt23TZadX2ELc2fy3pYnR0e9VRRekp
-         9aQUnX2VNlMqn6+hspMHTJwFuaPFnV0IqTAxeQ2RZGFtN/tP1+FnB7Ra0ekHtOztob7u
-         4QAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792606786; x=1793211586;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Nco9E6pnxf1U90wQWWUGgERQdyljr6gpJ4DY5U+hjP0=;
-        b=IZ4KsGGO9wuLAiMIeKd9GvkpwVYy2nMeIBseyFiobk+jfhcsPGby4LB8TS89gJsG/X
-         fvUvJhb+gnito/M08KikoQg9oDI+0TWmE5pji/0Q8nqbD80sVR7KjjecH/u9lTxh3wPG
-         a1nJIeaDX0kmEsiYCC0bE2+no9zBu1n/jR4OywG6Ef6BxutFNJjsd3JH983c66ViwqzX
-         BJyo6wUFy68H368WXEseyi7dDvM/bjSoGPwaHHNelA6w7qdJTVSttzi8M2wCucybhT82
-         2UywRILy8zFHVrEvCA2qDkWDyXknGR+Z6G7kyv+hjf2PkkiieH35e7E7q2sYd5SUcM8U
-         6zgg==
-X-Forwarded-Encrypted: i=1; AKwUvBz0S41lUqlKy+7Byc+I2L0Q7sDWTfTdB+bUTg/UwyT1gSbDujK4kthZ5SpdytI6WMSe7o208Ka8PQf1/BTn@vger.kernel.org
-X-Gm-Message-State: AFq9FYLOW4Suf9R5nPcyrCKUVkyMU7LdUz/P8H9S/bUIOhneCTvURwgB
-	X/ew//bgWrmPx+Itt6EvMFiRFLCisNKcLZ8PVE5z/OqmmQZTcj9obPt8
-X-Gm-Gg: AYBFou0Z7icai8Vz3u3nZYq8q9nac5iV0JE81iJUTuUPpuoFCmYnOkUIvB9KXp3dk0r
-	VJOj1ixyyzdRUgSRGR7ib0FqbXrcpKstk+Fuo5SDR4ww+m75YbVXHvzwtDXThgw45s3gCGcsDEY
-	PhFurDMZ0kHDIyM1UEYxySO1gXwntQ55eKu6s+DXTYnkv8Yh5z+iGIIVvLfZUk6cDXYfCefnjyg
-	NX1L2g7JtNOfTxyCp0ZEoVm7MgaYSydrYEfCn2ER6e8Vr1sf1s2YCXGOX2MzKJG69QA1vkZgorn
-	9ubSxzL/QAEdaNpp0xpYwFWA0MZOLYgt4ytYZOj+IRGDOXgI/TvzWXSW64h2ajD1NfcOBzCTsa1
-	EJqtbrvi2RbBe2zHMun+mzgw/5BvvsOwhxRUYtrMUQcNqHlhHxKWsCkjgvNnymbcFDXNeNeO3xv
-	E92Vu8knu/ll4w656mQKtIhedNwZ2hkEivurbR7wmXaUbubnOQTR+eiUV/EWUXqoO601gLCYxqo
-	ePg20TjecWEF4FZzMW4ZuMlngRGyymmTyf8AA48jUitnmW5uENJCgrPTva4NTmkVXCAEsSNupeU
-	0wDjOWbEpzoQPTkJBP+TbTS2SjO96kYTqipohfXKvC41rLfpJGCEuIbkbL6tOUI=
-X-Received: by 2002:a05:6512:3e0e:b0:5be:488f:6008 with SMTP id 2adb3069b0e04-5bfa1ccefb3mr1270192e87.15.1792606786005;
-        Wed, 21 Oct 2026 11:19:46 -0700 (PDT)
-Received: from yantra.. (nekmmqsaylkikwvppw8-1.v6.elisa-laajakaista.fi. [2001:99a:d7d:c300:10fa:2e9e:78b7:e58])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfa123120asm649718e87.69.2026.10.21.11.19.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 11:19:45 -0700 (PDT)
-From: Rupesh Majhi <zoone.rupert@gmail.com>
-To: Bart Van Assche <bvanassche@acm.org>
-Cc: Andy Shevchenko <andy@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Marco Elver <elver@google.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations on mutex helpers
-Date: Wed, 21 Oct 2026 21:19:44 +0300
-Message-ID: <20261021181944.14272-1-zoone.rupert@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <3f41338e-fc47-4306-b68b-5a81c26027fe@acm.org>
-References: <20261021052435.112686-1-zoone.rupert@gmail.com> <3f41338e-fc47-4306-b68b-5a81c26027fe@acm.org>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RujC+YWn
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 909551F000C1;
+	Wed, 21 Oct 2026 18:54:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792608849;
+	bh=fHFDa/JKnVWZak8pH/341HZ4XAyUaMxgOSi8VNpe7Dw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=RujC+YWnXVwKQIHx6ps5vOEIyyBjw7qen//E6KbtHV1Ur6xSWTAUof4Cqs7btdedi
+	 6HNFe/hC2ka1myqeWW6tunyjS7kiPODZ5r/OWSu8eMDkEo7+2xaqRefvAZfHE8V3qY
+	 pVNR3o/XvLzz7GRUK2SUyIZlnmHzLpjNLL+YqSuCqGIUDWy4eHeJYNiwu8Gbm7BvpL
+	 eWCKCsGEedpz1bCtREayZrwDeW2sP1GeSZMnm/mzZ7MDRf/7OnmX5wobB0AvQbkNZM
+	 niHYqvI5ayMYy5ejb77l7hng8S4sdOK0GGlAXZScIznsq+yNZPMEqld9+BJjXVqlL9
+	 +l9Y6yKJFPUdA==
+Date: Wed, 21 Oct 2026 19:54:01 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Jishnu Prakash
+ <jishnu.prakash@oss.qualcomm.com>, Daniel Lezcano
+ <daniel.lezcano@kernel.org>, Danilo Krummrich <dakr@kernel.org>, Dan
+ Carpenter <error27@gmail.com>, Uwe =?UTF-8?B?S2xlaW5lLUvDtm5pZw==?=
+ <u.kleine-koenig@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>,
+ Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Allocate unique ADC_TM
+ aux device IDs
+Message-ID: <20261021195401.6a70fe6a@jic23-hlaptop>
+In-Reply-To: <atWzFlOgRICAGM-R@QCOM-aGQu4IUr3Y>
+References: <20261008031154.3440632-1-shengchao.guo@oss.qualcomm.com>
+	<atWzFlOgRICAGM-R@QCOM-aGQu4IUr3Y>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,11 +68,39 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 21, 2026 at 08:15:20AM -0700, Bart Van Assche wrote:
-> Why doesn't this patch set CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y?
-> Shouldn't that change be included in this patch?
+On Mon, 19 Oct 2026 14:05:10 +0800
+Shawn Guo <shengchao.guo@oss.qualcomm.com> wrote:
 
-Fair point, without it nothing checks these annotations. v3 will enable
-it as a separate patch, so the fix can still be backported on its own.
+> On Thu, Oct 08, 2026 at 11:11:54AM +0800, Shawn Guo wrote:
+> > adc5_gen3_add_aux_tm_device() never sets the auxiliary device id, so
+> > every ADC5 Gen3 instance with at least one qcom,adc-tm channel tries
+> > to register the same device name. With ADC_TM channels on more than
+> > one PMIC, the second instance to probe fails:
+> > 
+> >   sysfs: cannot create duplicate filename '/bus/auxiliary/devices/qcom_spmi_adc5_gen3.adc5_tm_gen3.0'
+> >   ...
+> >   auxiliary qcom_spmi_adc5_gen3.adc5_tm_gen3.0: adding auxiliary device failed!: -17
+> >   qcom-spmi-adc5-gen3 c400000.spmi:pmic@8:adc@7200: error -EEXIST: Failed to add auxiliary TM device
+> > 
+> > The ADC probe then fails as a whole, so that PMIC loses both its IIO
+> > channels and its thermal zones. This shows up on Nord, which has
+> > thermistor channels on two PMAU0102 PMICs.
+> > 
+> > Allocate the id from a driver-wide IDA and release it from the
+> > auxiliary device release callback. The ADC_TM driver matches on the
+> > device name only, so the instance number does not affect binding.
+> >   
+> 
+> Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
+> 
+> > Assisted-by: LLM
+> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>  
+
+Applied to the fixes-togreg branch of iio.git and marked for stable.
+
+Thanks,
+
+Jonathan
