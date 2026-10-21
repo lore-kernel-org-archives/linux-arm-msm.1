@@ -1,110 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792592661;
-	b=ITR4I669vO5Jm3UKelYH54GR3g/BgNeAc49GK1/yCq7CXPuwDzCkHo+WU/yb12v8EtJG
-	 hPSW0uiikNnxGo993enxTt7iBobBcyqKy0KfAE7NyfeiYYqysB/KMTmvukHiPl066blQ6
-	 iPLpUbbWpPpNyZtd+IH5U3FY0Wl5AQaaNnZytTv4fVX2eTDdZyBOT4w+TgSyV+04JdDQG
-	 Wg6L5BGTS6tBwUxbLy3Eqh+rFZRdp7zTOAM8a6N4hfPyRtjPMKoeLTZjD8VmQG3zaf8Bo
-	 /PEWgmmcK/rXCe3J6YUnhFBrzQKqhFz1cHJmqQSmEUNVYDvqqJvLDQxo4lZmYmCSWyA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792592661;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792594272;
+	b=ydvyZ5wOghvjxks76Qfv7QRpA23fOTrg9e6kNLLmfiyr6apKt3wySHWJA5KWnTPnVMue
+	 kXG0P4MEaUHOoMmTJgQt9dnDe72VetoQsZjr7U/NLevXljGxuzY6Si3OhlkAo8MOAgy1U
+	 y0gJpRfa0fghFSwPPP9fblnBpQCsLW/6SOJenen3b4edQ6JWJO9XAYqmnqJdJ7uv4abfP
+	 tt4rwoQsWBF7/se9bgXN5mZkttkSktvWHkAiB+ZmijqJTB3bo5ZRCLnMviKP9NpnyTFLH
+	 aNPMfyj85JidlguqNVU7tPK+CL73YIVowazR8Q1TN8RpCRjaPw0dzp8DdvX6e1CkSlA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792594272;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=oG64eRPJEYRajEC4lpOk1RNn9L1w8FWzIvlc34ouUYc=;
-	b=XGoT2Iz4WfV1u5E88OSQ1yKY9pSK1p6X0M8t/XBOmEam/oor+M+yIVDsCTfqWztnhhro
-	 puTUM+sMEB71GI1zu2zDCgy3fmOL49ykiKHudVCgMqTnwdaznK6agJeKT//4sjsqbFE+F
-	 NQgOBLJWrNYrDkKqCQhhFvuJEi/rJEKnx1Zj6vo6d48Akdv6Bblyq1gitqANmupKpTXBJ
-	 xXshhbqORGxm57rM947MvMAszm15dZJPxbwPf8TcvNvJyHtwgL14ZNqlyG/XCuLbi79FK
-	 q5QIUGVF0YoxF1RqSZCf0oO/soRDF+fNxziNL3PCTU+AQOrVBeodfT3DrkUdbcqPXuA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	bh=5p9qlTx8BOaAdi//0zTq3lrbyfHYbM3+Yp/X8xSSIKw=;
+	b=Og4ynLT7aS0mk00oujJ/Hgm5CiaSCO26to2qdMyQxgf8t1Eski013sPq68ckTTUEOPoH
+	 jGQT/8RSTjWvAxEy+Yyt7EAbK1+S0nHYBaNsafb9h570Rlqma7tEHWWEgfMlWjHXXnM1a
+	 Lll9ScbMVxrMAcI7L1pN7/6PtQyjqdTZL1yY9tGXMa/vAMmCE3q903GHF4Wlo136GG0X6
+	 JqWwM/fAUQ70L9xPiz1O5nQ4GlBt8qY35QbPzCAheIrswIvNbj1cDyfMrqnQhnJ1w80+L
+	 DurNlrhfwjHtVaKXX7fbw3iAKBC1l++fuWRX2Qagrk5pwJq5UF/FIjpaPCjPZoKrN+Q==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eI2Ha+Cm;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WSKzzYeK;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OdAfWAAx;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="Oy/jMqUw";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C77BA60A381B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:24:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C77BA60A381B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C539D606A31A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:51:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C539D606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eI2Ha+Cm;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WSKzzYeK
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LEF8Pi1389759
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:24:19 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OdAfWAAx;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Oy/jMqUw
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LEFPKP309928
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:51:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	oG64eRPJEYRajEC4lpOk1RNn9L1w8FWzIvlc34ouUYc=; b=eI2Ha+CmZEn8QD+D
-	r0jpfGYfaGqkDJqfD8MzMm6HOZZsVxzxsKRrQrE8I4CX+ng9N5SlP3oMnHHCtO44
-	Mfw3+3NKEbcLPUkOQPi7vS6HDgwSG+LXMDiPhoLf+XssKF1P8XnP5vGpuIl+LYxJ
-	QPygkMDmvtnhfVC4GXkdJiQaXVCD5wcRJF+XJj2cH47uunqdZcWjQ20pNlt3V8up
-	1eGIef9CMu+ao4+UiH46uK/Co3p5CfI4stKhnWpXn8D5pqwJ9duoF7ai9Wfy7bsE
-	bu/j9T5wCkTABF9m8JoYUb+uNWZo9zWtHllspMA23TUhR/ISyryg6BXg+SYXMXJG
-	mtJSIA==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajmapf-1
+	:message-id:mime-version:references:reply-to:subject:to; s=
+	qcppdkim1; bh=5p9qlTx8BOaAdi//0zTq3lrbyfHYbM3+Yp/X8xSSIKw=; b=Od
+	AfWAAxGtG6LOeHQ2KO538LPP0mZuIUNVNfnGBrB6gzHMJLRmNNyvSk/+WWJytfb7
+	KnolhRZf88/aNE6u03wyIDQ+U3X1kV1dRc80M4DiLttfCB2KyN/agwO4Bci+kPJ4
+	P8VA4c8aaJmbDA4NlFlF8j6kPwNwDBZocH0MNRWnHHzHOUbFvagn1A2sjgEF9Bxq
+	MH8doGnDWhOHT/ltI6eKRb0O2LCteAUDHLrD13vt2kiMAO3Cl4OJDJjV6+UdSARs
+	aD0eXd+ndv9DvV9z8Ivigc5DKauI5wtuOTJG0Nke8LN6+HAoSk41Rkr+HD0t3mhB
+	S2u2HYqB2UTd+bO3w9vw==
+Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com [209.85.160.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heda0mg6b-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:24:19 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-988c7363ee1so635789241.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 07:24:19 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:51:10 +0000 (GMT)
+Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-451d80641efso1107661fac.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 07:51:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792594270; cv=none;
+        d=google.com; s=arc-20260327;
+        b=siIkrIMkkUdmSsZrnLu5eD16ay0KD1ogYUtQ9iTQnM0ML2n3lLGiZeCtG/8fnvjj6g
+         SAq706wmpXsNA51Q1Z9SvdZ7M9XbD2EshjDdsaFhtrp5Cd9vXmdfiaqdT07xKA77nchF
+         99LmvMCEy/Gd93eAs5jM5p3E9/Sqm00Yp55ZSL7hceY4ToHNXIE2o8+z+Ej4fUg9qzpB
+         2rwuzHOe/Y0yOuQeIxg+7TbIbmuHaWjxQs5GspKezOsSBhLSLxLDhhMLKVeITqfvgyjC
+         hSHyPu6ytpjvCnfo+S8MQCLxcGt4Pe8PIVvxl5qfUHEXm95ceYcFGHboKYFstZOsN6vk
+         euFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=5p9qlTx8BOaAdi//0zTq3lrbyfHYbM3+Yp/X8xSSIKw=;
+        fh=u1JaZNcfsjQcztTu3iOiyqERhZ4Ul2p6uaFukGKY7fU=;
+        b=NM/vJUVrEX1ubLisdujfE6vGNaoDQYoO154txxIM4GRaVWPziWYexoGVCpAO6M1Uke
+         bsTCHEyH1SglmuT9hlvt12DudMRSj+h78PBuuz4anEB3IHGCBKTBY/KAFUs6mVDsXTzX
+         Mr2jrCvgDInqP0yn24gn8ZX1hQp/n7TSXae8zMz3uamceuBJueFLfwCd7WgjqVxqn5nn
+         21IcDZyXKStRRNUIMOUPj+id80PzFZ0XGwky7sGxsC4WSvBPQ2UngxEbfbZAdHAkdOu8
+         SGNKBmzxOmFWPn2BtnkjtyV+YIBJjV6MzQ64rz+edEy/9vbc/mRTMok3FKFCp/3LZErW
+         N5ew==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792592659; x=1793197459; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oG64eRPJEYRajEC4lpOk1RNn9L1w8FWzIvlc34ouUYc=;
-        b=WSKzzYeKFFT2BWoOeW7H8MnPIYIEBo1/Y0Ap+z5gqbQNv+9hvVda3GVVIiwcwKh8CF
-         TXtDUjsExp9XuIkAsWTMO8QJgjoQ1CgwrqjRqrHHjfBfR5yAUFHQONbgEH0Qp8VyBUjg
-         tpYGDPC2hxNU42U6GXhli9Jj9m9nwFwwwi5AR1rjU99/8FStw1D7r0TKPv14BDEfexPm
-         Ypl3c2vRNNZtZK/27OHS6FcAu6QexsA2JzC0wzfPW3F91udXBawwGF9XFb7uOnGIr8vt
-         7wdZ5LwYZdAE8JOJnCGTXNhp14yCFOr9gjq975P8Hu5tMZPMuQ/3HSEa9jvGRBoAsEPF
-         XfKg==
+        d=oss.qualcomm.com; s=google; t=1792594270; x=1793199070; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5p9qlTx8BOaAdi//0zTq3lrbyfHYbM3+Yp/X8xSSIKw=;
+        b=Oy/jMqUwlUJvrxYI1whh1d9hZ4e/nTPlj1WnJfVT0+Vn59KY6WS8zeaENyXyylNRB2
+         oJzGRi+H2rX2L6gu41BFaNI4lZ//2eEOEx0Sdg6smrclQSxLF7zi/dkgQ0gC4rawZKaI
+         hDdUrxsYbOAeC67m2gHXet6ksqyvgKgeVXHfjMqN7esGd8SUfarZP8JNjbOzzeumI5aZ
+         oFHL6YXn3VeMWoz5OfJbRoGt0wp9sYnnhonC1FqBwvt6Ejq5m0Zr6MWMtd0vv0CvaqXj
+         7xy7m/TF/vz2VG/KBGBEJS9aWwp+Gf9LNxi7K5q/Dc1rsCjMp66FzKjVYR9Xr2QhvJhF
+         koqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792592659; x=1793197459;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1792594270; x=1793199070;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oG64eRPJEYRajEC4lpOk1RNn9L1w8FWzIvlc34ouUYc=;
-        b=yUBMYbbrYPlH/uEfdxu3oatIsheif69+/j3DcCvCtStlWIy4B1EOfFa1byeHX7b3Di
-         pEPjE34satIjyefP21bp9Iv+vifUuH9stbE6lm99+Fp2ujQ3s5cIuL06vk/SDpDQwrmc
-         u0xwka6WFC1RxaqKtChSk3yeIE8Gh/QRy6MuCikl36hAIMb6GL2d9HQYhdA1zcxqqsou
-         aroF9qfjxUgWr3gX9iE5aQoVVLGDcaVtZLBcZMNpKpuWN3WS7KK2ZqHeHmotMTnMXchY
-         qGmf2tKpkB/OnPz5AbImwvv2qb3lG+wXzrtboNr56ViCxk/SqGq6BNQg+bBf3pL0UeYe
-         y7oQ==
-X-Gm-Message-State: AFq9FYKo1idIgUrvyoU+vA9pjjidukb5BwKnv7aFWdDewGp2sAW/HkdJ
-	9i0OYuGq4z8SWq0Gk4ByscgS/JC/gQ0X7dvWylruOk2Y3UWUjdFAHfiBFiop7pywTzIVlhQtYhs
-	I+5fkrc4h53jQ7MUEaSP1ybdUfXlo9+UOMtp4Efj/AnY6DU/zOJnmF1D+YLMKWCoudzWC
-X-Gm-Gg: AYBFou1CLB4ApmbwiQ4dB3ssRPkg+cGfDTrV0Y8t6bi8jpSGrvnABKOiTLqGPMzkHKG
-	bXgTITdsgBmSQghEOV0UFe4SvFC2rdbKNrx2wG5oVyhuJi5d8Oh328oKAiN1g/KUuOZC0FEly5j
-	hoS3715TRKu6/HGVyTJgEzd6Qv/2yHa9gXfD9nVDeqIFFytcFxYnErgZoQGCxGzdnWVi+zI2dYh
-	nV9Q46s5xdLFGFmjuVM8rV/Va5XGSKtZWoUzpawpMxARpOO/3G0PL9g+iDRI1VUal1TF8xWlPTc
-	yIHrwhDit0Ghf24es9Nyje2ik635So3IU0J5dEnjjSEgghbMOxEo964jvlfUgbbZRl4UL1cqE6Y
-	WInhXO0ykG06JWb9+aDQKXSCqxZtu
-X-Received: by 2002:a05:6102:1626:b0:7c3:c0b9:9028 with SMTP id ada2fe7eead31-7cc926e0308mr852465137.24.1792592658682;
-        Wed, 21 Oct 2026 07:24:18 -0700 (PDT)
-X-Received: by 2002:a05:6102:1626:b0:7c3:c0b9:9028 with SMTP id ada2fe7eead31-7cc926e0308mr852441137.24.1792592658138;
-        Wed, 21 Oct 2026 07:24:18 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1fb83ff0dsm103760055e9.7.2026.10.21.07.24.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 07:24:17 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 16:24:03 +0200
-Subject: [PATCH v6 5/5] gpio: shared: convert to using software nodes for
- GPIO shared proxy lookup
+        bh=5p9qlTx8BOaAdi//0zTq3lrbyfHYbM3+Yp/X8xSSIKw=;
+        b=h/P4KyOhYuscDDS5EWMsMGJXrWyZmiO9tCFrUcYV/VYPrLNahcDG6OmUwr6hkeNC8W
+         Am22ra7ZTtiQ+yJpPP6mHdfEi3EieqBBDaki9mc5EsCuB8rRFfWkjfjDEKX08A0UtRW+
+         2vppaHDaP7Q9bGKt7ebXoMiP6sCLamSH0NX2X0oJldV613+dksNFCGotdzeC2HBgkdMZ
+         +1+9xmVgwJa80V4fEa6ivz737Ls9vO7Yf50AqwJW6w8c8f90P+pZYYIJu7yCSGwkpErm
+         ImWZb6oGOzwPCc209aLabNzUB34ixVhlgD21uOGlRFlRdXEZz4TvtZFcsVmUkS7bNB3T
+         /fbA==
+X-Forwarded-Encrypted: i=1; AKwUvBzu0Rc9iThTvenXHMKGlrqFz5hzABvbGqp7d/3U5tGMuCdkw3WtrUMru1eWTRogl/rv0XyqhZo49E+zTJSY@vger.kernel.org
+X-Gm-Message-State: AFq9FYLBMCQ6YaEOPQappd/3JB3crX7aPbjGepw/dOesO7AMA1HjKUFl
+	2K6xyTl5rultUiHP3LvS16nA80SXf+YjP5cx0nHUZlH2Z9phTRXzhzwIdsybpGq2ypTqby0uYvX
+	/ZANvFJ8EI7e7qBHd4s4TcWHQxjSaTM1vBJAqmnm3omjg8gHpNVyZvVcaIjrU51CeOiA1yQHXoI
+	rcQlY6IG3ImlNBWQh00p7BP3fY7e4kBMSri+vGq0+AdgY=
+X-Gm-Gg: AYBFou1HMsH31ke8GZUgZJ68/vfjLnnspV/OJJI4pS0/EQzb++qK15R4V6FYYwpfBmp
+	bADQq5KbO8XE5mn3cbaI99KWA009IhFdoa3Nwt8DFpQBMyIjsF7kjpuKsTJnalj5X5d96GLoXHX
+	HQa3ZaUuHZJJV/O4g4p68ASfSaDJfhU07LzuWT+7tnZkmZ9DTi16F+aP84xQ==
+X-Received: by 2002:a05:6870:4e88:b0:494:b8f4:9a22 with SMTP id 586e51a60fabf-4a7dc1f1813mr1321146fac.28.1792594270136;
+        Wed, 21 Oct 2026 07:51:10 -0700 (PDT)
+X-Received: by 2002:a05:6870:4e88:b0:494:b8f4:9a22 with SMTP id
+ 586e51a60fabf-4a7dc1f1813mr1321121fac.28.1792594269645; Wed, 21 Oct 2026
+ 07:51:09 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,355 +127,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-gpio-shared-fwnode-lookup-v6-5-6af7d8eefd25@oss.qualcomm.com>
-References: <20261021-gpio-shared-fwnode-lookup-v6-0-6af7d8eefd25@oss.qualcomm.com>
-In-Reply-To: <20261021-gpio-shared-fwnode-lookup-v6-0-6af7d8eefd25@oss.qualcomm.com>
-To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9524;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=scLUAn/ep1C6d0V3Axg23aTkzIxRrtg6lQigrnX0Yo8=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBq2MsHLi6UAyMc2D95CxnU9SoJMxgr/bbXgh2Ew
- jcw3BBbLtOJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCatjLBwAKCRAFnS7L/zaE
- w9hCD/9RcEUPMskpY0GadkQS6wGxLtwbTTMMREVaz1PuOg7jVdJz1eLBXOMhgsCFl5cBYneZyIz
- eSOjNcC35A9s9mqGVQ5ve6Lb3gWCLtDAEYaeYHvwwsbO8s8vr41oV0SVYltFuxwhnbLPOajl5cO
- 7YwYJ+osNzW7lbiXgtxAL1/2LdWmoSVk4atdYVpgga9xGjiym9ZB9DaMAQABQo9fmZ1e7ktYB1/
- 7GJw9P2seIY2bxOqFXpYIxOP4VPgpo1ejXjRZ9mOCEeoetwsmIlfRyQKZg+Us/5CQvL9o8ubrey
- nCS6aWKufPqYkqORWnqZbyMkbF1mokCqbE8xj2EHHxRO72NxFTILUNBeeSRZNXpx47dSEHknLqn
- RuD94SBXIPkjuXwlURPme+QCcuWBcwl2n3lDpG9BALizWD009SK6ugzIexq5QZTEMrwKca4Udc0
- dqUzY3zwzB8lm/lrcHrTUxV/Gk2cgIBWPS5W4VAU90KXq4hHgfLaO4qT91fpbRld6BuQTV0IP3f
- +DJw7B+43CIaKEkiRn8L3auXoUpLpZDmjADLeQ9xRi1yS0fD6bM0ZGd72+hdvfhscynsZcvEKK5
- tbIz1zptmLWegCmA95qDAz8AfWJskFx8alRo8jcifgwJUrQnAgeO6Nagb2rN/ZIhWD3ydHXRy2i
- bohbQt4geZY7MEg==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA1NyBTYWx0ZWRfX3szLCAwwoDAF
- o0a9iLmpO7O/CQzdkAlEaAjm44bRbR6hslGfytyTx4huWwEQsLgDKiJh0VxDfNLpCglN8CdwdGe
- spHsuAHGZ8EFXkjyNmUqhFei59GcubsDBGxKoy5/c2OTdq43UdZ88jevkaCKwQdvUvJQcv2gd/A
- OirXp/z9eusjyERPgZ607J3ir90ORuKTv/yRbkiMGpsNwx8IRPLO/ryZo+OYk4TYcg+v22S4dm9
- pX2g0HI92ENk99U9qzUJ+47STU044abxN4P9qV4hge+fHn/UYQoYV/ZOdbB6rFEb+7ikyxZdXXo
- j30LR3NMsyYz+Q4sq7mTZXK3DbYtuMyuU8WpptBHk0G5eBPFzyRmfOD7pU48OGRnMVkGfslrwmS
- OtKxYXYm4eXaz8m7eTSV+4rNsQWcjn2tZ+xymEi+l0PdaTYzEWfjwT24uFurzggwlbmaJs/c2kF
- L2VF3acXs1nrxLFnNzw==
-X-Proofpoint-GUID: GfMcXcNmMAqPwD8svBfBWqJbRlxDr10f
-X-Proofpoint-ORIG-GUID: GfMcXcNmMAqPwD8svBfBWqJbRlxDr10f
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA1NyBTYWx0ZWRfX1b8HdTkVy8Vn
- 0mLmKSW/8FJL8bDQFdgtAvLLQHPhIxvRJSt93ve766lPDHceHwS9OqPnLih4d1GqQ9xJP9EGUdm
- pXXuNErhkdFB/3aweFXCr4VEgmgiXok=
-X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad8cb13 cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=-KlJ1dLh0LyCFQG1QjkA:9 a=QEXdDO2ut3YA:10 a=TOPH6uDL9cOC6tEoww4z:22
+References: <20261020204728.28844-1-robin.clark@oss.qualcomm.com>
+ <20261020204728.28844-7-robin.clark@oss.qualcomm.com> <daed5a07-7d4c-4597-bec9-7a537d0af4a9@oss.qualcomm.com>
+In-Reply-To: <daed5a07-7d4c-4597-bec9-7a537d0af4a9@oss.qualcomm.com>
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 07:50:58 -0700
+X-Gm-Features: AclHuK_273K7JWxAwm9ju6BwL2RphOQ69uYzozmpnUfx_cbgda8C-aejWgJFIyU
+Message-ID: <CACSVV01Kd10wFrPKaG2GgcFoTuCXT6imthSUbbtBZ--zQszxtQ@mail.gmail.com>
+Subject: Re: [PATCH 06/12] drm/msm/adreno: Fix PROTECT span length
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+        freedreno@lists.freedesktop.org,
+        Alexander Koskovich <akoskovich@pm.me>,
+        Jie Zhang <jie.zhang@oss.qualcomm.com>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>,
+        Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        open list <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA1OSBTYWx0ZWRfX1yLqy8TC0iwz
+ E2+URHfSz6hs7ElOqcdyJHaPvC/28dXp5CIYU+TXa9XnFLIjktpGrqBcioKNaGQUzIiduFUd3uY
+ bgc7vUNP8+xpRjR5fyKcInDYdc/uTvKViFq0egOC0JS9JnQgUI/DfFbLMCM+5trjd5upMyJQibF
+ p6RHdvo53YtzIrkVMMkRq/BTAt4FO+tf3NjMESj2QdP7mk7H/8oQJQ3oGspHIusKv02+Z1/rvX5
+ 10Ou4ArOJ8JQt88qqcRqQ1jnMYbLxG4uAXZmYhGWyJNffLYQ7KhtZEVjgCJJXvHItU+hmTSAUDA
+ ngKlWNylcQhIo/zD78cf5QtEIjblax+aWj6mc4MKz72jG7mnpHoFRfF4R5vGrd5V9u8YL7/dqB+
+ EyWZdnJ4SI1UDAAiV2c1TUKqATPhPJx+rIhYV6wDYhyH0IN4TMs+dF2I/yXoy1SGe7qXLwMYKdU
+ qm353KX4+YNpcgvcbtw==
+X-Proofpoint-ORIG-GUID: PorzImVYFKK3sXoLJar0-iRqUoYZAcxC
+X-Proofpoint-GUID: PorzImVYFKK3sXoLJar0-iRqUoYZAcxC
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA1OSBTYWx0ZWRfX9x9Wo3ylPtEU
+ ssGF4KoFipJAixXU6QggGboQSxQcF8+0h3E0vkcCRWQWbPgGeX+cvr4SN6Mt59vvHuhvuj/dS5c
+ xgk8GlZN8rpDRBos4iF+2ouHBoXHeQo=
+X-Authority-Analysis: v=2.4 cv=HL5WhYtv c=1 sm=1 tr=0 ts=6ad8d15f cx=c_pps
+ a=zPxD6eHSjdtQ/OcAcrOFGw==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8 a=A5R5xhKYohY9jtTwzVoA:9
+ a=QEXdDO2ut3YA:10 a=y8BKWJGFn5sdPF1Y92-H:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_04,2026-10-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210057
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 impostorscore=0
+ clxscore=1015 phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610210059
 
-Automated management of shared GPIOs only allows to request shared pins
-when they're assigned to a real struct device. Firmware node, no-device
-lookup currently isn't supported and can't be because we're using
-platform lookup tables to point the callers to the shared proxy GPIO
-controllers.
+On Wed, Oct 21, 2026 at 1:40=E2=80=AFAM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> On 10/20/26 10:46 PM, Rob Clark wrote:
+> > Don't let the length bleed into b31.
+> >
+> > Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+> > ---
+> >  drivers/gpu/drm/msm/adreno/a6xx_gpu.h | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h b/drivers/gpu/drm/ms=
+m/adreno/a6xx_gpu.h
+> > index d60cbfaa0d8e..5e1f35c83d63 100644
+> > --- a/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+> > +++ b/drivers/gpu/drm/msm/adreno/a6xx_gpu.h
+> > @@ -244,7 +244,7 @@ struct a7xx_cp_smmu_info {
+> >   */
+> >  #define A6XX_PROTECT_NORDWR(_reg, _len) \
+> >       ((1 << 31) | \
+> > -     (((_len) & 0x3FFF) << 18) | ((_reg) & 0x3FFFF))
+> > +     (((_len) & 0x1FFF) << 18) | ((_reg) & 0x3FFFF))
+>
+> Time for FIELD_PREP()?
 
-Rework the GPIO sharing by using dummy software nodes assigned to the
-proxy devices and stored in the reference structures which allow us -
-once the correct struct gpio_shared_ref is found - to find the correct
-target GPIO device by its firmware node.
+We have generated builders, ie. A6XX_CP_PROTECT_REG_BASE_ADDR()/etc..
+which would be better but they don't play nicely with tables..
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
----
- drivers/gpio/gpiolib-shared.c | 117 ++++++++++++++++++++----------------------
- drivers/gpio/gpiolib-shared.h |  15 +++---
- drivers/gpio/gpiolib.c        |  20 +-------
- 3 files changed, 65 insertions(+), 87 deletions(-)
+BR,
+-R
 
-diff --git a/drivers/gpio/gpiolib-shared.c b/drivers/gpio/gpiolib-shared.c
-index 3ed25609cae10081a0ab5276ebcd47aa3c49f76a..71f16105f7a5c51f657ccf60569209b3d819ade2 100644
---- a/drivers/gpio/gpiolib-shared.c
-+++ b/drivers/gpio/gpiolib-shared.c
-@@ -35,11 +35,12 @@ struct gpio_shared_ref {
- 	/* GPIO flags this consumer uses for the request. */
- 	enum gpiod_flags flags;
- 	char *con_id;
--	/* Protects the auxiliary device struct and the lookup table. */
-+	/* Protects the auxiliary device struct and fwnode. */
- 	struct mutex lock;
- 	struct lock_class_key lock_key;
- 	struct auxiliary_device *proxy_dev;
--	struct gpiod_lookup_table *lookup;
-+	struct software_node proxy_swnode;
-+	struct fwnode_handle *proxy_fwnode;
- 	bool is_reset_gpio;
- };
- 
-@@ -313,35 +314,50 @@ static int gpio_shared_make_proxy_dev(struct gpio_device *gdev,
- 				      struct gpio_shared_entry *entry,
- 				      struct gpio_shared_ref *ref)
- {
-+	struct software_node *swnode = &ref->proxy_swnode;
- 	struct auxiliary_device *adev;
-+	struct fwnode_handle *fwnode;
-+	struct device *dev;
- 	int ret, id;
- 
- 	adev = kzalloc_obj(*adev);
- 	if (!adev)
- 		return -ENOMEM;
- 
-+
- 	id = ida_alloc(&gpio_shared_ida, GFP_KERNEL);
- 	if (id < 0) {
--		kfree(adev);
--		return id;
-+		ret = id;
-+		goto err_free_adev;
- 	}
- 
-+	ret = software_node_register(swnode);
-+	if (ret)
-+		goto err_free_ida;
-+
-+	fwnode = software_node_fwnode(swnode);
-+	if (!fwnode) {
-+		ret = -ENODEV;
-+		goto err_swnode_unreg;
-+	}
-+
-+	dev = &adev->dev;
- 	adev->id = id;
- 	adev->name = "proxy";
--	adev->dev.parent = gdev->dev.parent;
--	adev->dev.platform_data = entry;
--	adev->dev.release = gpio_shared_proxy_dev_release;
-+	dev->parent = gdev->dev.parent;
-+	dev->platform_data = entry;
-+	dev->release = gpio_shared_proxy_dev_release;
-+
-+	device_set_node(dev, software_node_fwnode(swnode));
- 
- 	ret = auxiliary_device_init(adev);
--	if (ret) {
--		ida_free(&gpio_shared_ida, id);
--		kfree(adev);
--		return ret;
--	}
-+	if (ret)
-+		goto err_swnode_unreg;
- 
- 	ret = auxiliary_device_add(adev);
- 	if (ret) {
- 		auxiliary_device_uninit(adev);
-+		software_node_unregister(swnode);
- 		return ret;
- 	}
- 
-@@ -350,9 +366,19 @@ static int gpio_shared_make_proxy_dev(struct gpio_device *gdev,
- 
- 	scoped_guard(mutex, &ref->lock) {
- 		ref->proxy_dev = adev;
-+		ref->proxy_fwnode = fwnode;
- 	}
- 
- 	return 0;
-+
-+err_swnode_unreg:
-+	software_node_unregister(swnode);
-+err_free_ida:
-+	ida_free(&gpio_shared_ida, id);
-+err_free_adev:
-+	kfree(adev);
-+
-+	return ret;
- }
- 
- #if IS_ENABLED(CONFIG_RESET_GPIO)
-@@ -457,23 +483,19 @@ static bool gpio_shared_dev_is_reset_gpio(struct device *consumer,
- }
- #endif /* CONFIG_RESET_GPIO */
- 
--int gpio_shared_add_proxy_lookup(struct device *consumer, struct fwnode_handle *fwnode,
--				 const char *con_id, unsigned long lflags)
-+struct gpio_desc *
-+gpio_shared_get_proxy(struct device *consumer, struct fwnode_handle *fwnode,
-+		      const char *con_id)
- {
- 	struct gpio_shared_entry *entry;
- 	struct gpio_shared_ref *ref;
--	const char *dev_id;
--
--	if (!consumer)
--		return -EOPNOTSUPP;
--
--	dev_id = dev_name(consumer);
- 
- 	list_for_each_entry(entry, &gpio_shared_list, list) {
- 		list_for_each_entry(ref, &entry->refs, list) {
- 			guard(mutex)(&ref->lock);
- 
--			if (!ref->fwnode && device_is_compatible(consumer, "reset-gpio")) {
-+			if (!ref->fwnode && consumer &&
-+			    device_is_compatible(consumer, "reset-gpio")) {
- 				if (!gpio_shared_dev_is_reset_gpio(consumer, entry, ref))
- 					continue;
- 			} else if (fwnode != ref->fwnode) {
-@@ -484,49 +506,31 @@ int gpio_shared_add_proxy_lookup(struct device *consumer, struct fwnode_handle *
- 			    (con_id && ref->con_id && strcmp(con_id, ref->con_id) != 0))
- 				continue;
- 
--			/* We've already done that on a previous request. */
--			if (ref->lookup)
--				return 0;
--
--			char *key __free(kfree) =
--				kasprintf(GFP_KERNEL,
--					  KBUILD_MODNAME ".proxy.%u",
--					  ref->proxy_dev->id);
--			if (!key)
--				return -ENOMEM;
--
--			struct gpiod_lookup_table *lookup __free(kfree) =
--				kzalloc_flex(*lookup, table, 2);
--			if (!lookup)
--				return -ENOMEM;
--
--			pr_debug("Adding machine lookup entry for a shared GPIO for consumer %s, with key '%s' and con_id '%s'\n",
--				 dev_id, key, ref->con_id ?: "none");
--
--			lookup->dev_id = kstrdup(dev_id, GFP_KERNEL);
--			if (!lookup->dev_id)
--				return -ENOMEM;
--
--			lookup->table[0] = GPIO_LOOKUP(no_free_ptr(key), 0,
--						       ref->con_id, lflags);
--
--			ref->lookup = no_free_ptr(lookup);
--			gpiod_add_lookup_table(ref->lookup);
-+			struct gpio_device *gdev __free(gpio_device_put) =
-+					gpio_device_find_by_fwnode(ref->proxy_fwnode);
-+			if (!gdev)
-+				/*
-+				 * A matching entry is there but the associated
-+				 * controller has not been registered yet.
-+				 */
-+				return ERR_PTR(-EPROBE_DEFER);
- 
--			return 0;
-+			return gpio_device_get_desc(gdev, 0);
- 		}
- 	}
- 
- 	/* We warn here because this can only happen if the programmer borked. */
- 	WARN_ON(1);
--	return -ENOENT;
-+	return ERR_PTR(-ENOENT);
- }
- 
- static void gpio_shared_remove_proxy_dev(struct gpio_shared_ref *ref)
- {
- 	auxiliary_device_delete(ref->proxy_dev);
- 	auxiliary_device_uninit(ref->proxy_dev);
-+	software_node_unregister(&ref->proxy_swnode);
- 	ref->proxy_dev = NULL;
-+	ref->proxy_fwnode = NULL;
- }
- 
- static void gpio_shared_teardown_entry(struct gpio_device *gdev,
-@@ -537,17 +541,8 @@ static void gpio_shared_teardown_entry(struct gpio_device *gdev,
- 	scoped_guard(mutex, &entry->lock)
- 		gpiod_free_commit(&gdev->descs[entry->offset]);
- 
--	list_for_each_entry(ref, &entry->refs, list) {
--		if (ref->lookup) {
--			gpiod_remove_lookup_table(ref->lookup);
--			kfree(ref->lookup->table[0].key);
--			kfree(ref->lookup->dev_id);
--			kfree(ref->lookup);
--			ref->lookup = NULL;
--		}
--
-+	list_for_each_entry(ref, &entry->refs, list)
- 		gpio_shared_remove_proxy_dev(ref);
--	}
- }
- 
- static int gpio_shared_setup_entry(struct gpio_chip *gc,
-diff --git a/drivers/gpio/gpiolib-shared.h b/drivers/gpio/gpiolib-shared.h
-index 618756f6c6aafd087df267a4a32732ccc03af38e..27fd2a40c5cb77a19c258e3fbf429d3f6e7d4b32 100644
---- a/drivers/gpio/gpiolib-shared.h
-+++ b/drivers/gpio/gpiolib-shared.h
-@@ -14,9 +14,9 @@ struct fwnode_handle;
- 
- int gpiochip_setup_shared(struct gpio_chip *gc);
- void gpio_device_teardown_shared(struct gpio_device *gdev);
--int gpio_shared_add_proxy_lookup(struct device *consumer,
--				 struct fwnode_handle *fwnode,
--				 const char *con_id, unsigned long lflags);
-+struct gpio_desc *
-+gpio_shared_get_proxy(struct device *consumer, struct fwnode_handle *fwnode,
-+		      const char *con_id);
- 
- #else
- 
-@@ -27,12 +27,11 @@ static inline int gpiochip_setup_shared(struct gpio_chip *gc)
- 
- static inline void gpio_device_teardown_shared(struct gpio_device *gdev) { }
- 
--static inline int gpio_shared_add_proxy_lookup(struct device *consumer,
--					       struct fwnode_handle *fwnode,
--					       const char *con_id,
--					       unsigned long lflags)
-+static inline struct gpio_desc *
-+gpio_shared_get_proxy(struct device *consumer, struct fwnode_handle *fwnode,
-+		      const char *con_id)
- {
--	return 0;
-+	return NULL;
- }
- 
- #endif /* CONFIG_GPIO_SHARED */
-diff --git a/drivers/gpio/gpiolib.c b/drivers/gpio/gpiolib.c
-index c7f6e4c4055f405562fa1d0dbad181af508273da..409fea3720a6e6c7f173b835f1aa5b747a4495b0 100644
---- a/drivers/gpio/gpiolib.c
-+++ b/drivers/gpio/gpiolib.c
-@@ -4832,24 +4832,8 @@ struct gpio_desc *gpiod_find_and_request(struct device *consumer,
- 	scoped_guard(srcu, &gpio_devices_srcu) {
- 		desc = gpiod_fwnode_lookup(fwnode, consumer, con_id, idx,
- 					   &flags, &lookupflags);
--		if (!IS_ERR_OR_NULL(desc) &&
--		    test_bit(GPIOD_FLAG_SHARED, &desc->flags)) {
--			/*
--			 * We're dealing with a GPIO shared by multiple
--			 * consumers. This is the moment to add the machine
--			 * lookup table for the proxy device as previously
--			 * we only knew the consumer's fwnode.
--			 */
--			ret = gpio_shared_add_proxy_lookup(consumer, fwnode,
--							   con_id, lookupflags);
--			if (ret)
--				return ERR_PTR(ret);
--
--			/* Trigger platform lookup for shared GPIO proxy. */
--			desc = ERR_PTR(-ENOENT);
--			/* Trigger it even for fwnode-only gpiod_get(). */
--			platform_lookup_allowed = true;
--		}
-+		if (!IS_ERR_OR_NULL(desc) && test_bit(GPIOD_FLAG_SHARED, &desc->flags))
-+			desc = gpio_shared_get_proxy(consumer, fwnode, con_id);
- 
- 		if (gpiod_not_found(desc) && platform_lookup_allowed) {
- 			/*
-
--- 
-2.47.3
-
+> Konrad
+>
+> >
+> >  /*
+> >   * Same as above, but allow reads over the range. For areas of mixed u=
+se (such
+> > @@ -252,7 +252,7 @@ struct a7xx_cp_smmu_info {
+> >   * single register
+> >   */
+> >  #define A6XX_PROTECT_RDONLY(_reg, _len) \
+> > -     ((((_len) & 0x3FFF) << 18) | ((_reg) & 0x3FFFF))
+> > +     ((((_len) & 0x1FFF) << 18) | ((_reg) & 0x3FFFF))
+> >
+> >  extern const struct adreno_gpu_funcs a6xx_gpu_funcs;
+> >  extern const struct adreno_gpu_funcs a6xx_gmuwrapper_funcs;
