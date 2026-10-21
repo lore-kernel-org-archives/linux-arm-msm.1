@@ -1,57 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.121
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792616683;
-	b=a3ixubI6fSs9160OlFQAX8L2lDOMBUWmsCHBR5qlugmol3lE9j9piwCBqM2sTjSgUDCy
-	 IgsTbW+FDa65JXAPEsvNfWZNYpcfw0QAn3bvfSWG4TVam5pZY3dQMUS58Mhy2rdBt6xA3
-	 pvde4xEV379EH/vFAZ7xA0chOFO/Mysqn0QO5S8Px+BO2w16LqXvuvqP5M9wMhcF7T8zL
-	 EWhoc5HMJVZ+TSPVzf9iABpxzzPwAfIg2yugJQ2I8EYH8dC3IsRTQQaF/40SZ5gcCVTvb
-	 i7OhgP5RB+ef74JIDY1K1yFHyZDUFAFyDmK2sL6WcssGEIn/bU/hlm1PuBf6oDwG5Fw==
+	t=1792617310;
+	b=YaxyAxALmHV25ZgQVQ3xK39gdXG3KIEdFSdUtRKWhGVU3ucnad+autzKMypwyIZmwaRv
+	 XVVOoqrZgSQzA+YRDiGH5x0lhKjhE5PICcBMME5BfO3p1qI1mwn606F575sDMYkCKOJdq
+	 qowIvrVQs9ku0GCmxa8UrydNJSpwT2SFw6noIwO+T2vLvIczGhFGSAzS4Lpn9jXa7i8+G
+	 vnDCxYSFLvT+BTwknIl03hGde3Yw2CGuBrNi4kPkJaxMWHbkZ7CPFDmNJgumv5zKfdZc5
+	 Z7fcw4qWqywvPoIT1uLV9bjc7KUnLjkvtB5F+FdN3gHSWakuTz7A+dE2newqaBKjTbA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792616683;
-	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=xn1uSgbiYXIquVNS5gJlnahF7mH3rI4fg0oKctmsVQk=;
-	b=SxGvWLg39Gkqk16Iqo5DEqvbr/PQbO5/Qzx2WBZhqzOfi55pgbAckVYeb+rRbFgWui8R
-	 QAFch7/fFPZ0s2nEOkKxskf+Ywi8Rybec+GRxGZ5rskh7oB2qa8Zw7DiQ/mffXGvoKz4w
-	 V5MrWeZ1vRSim7xmm65VtP4HrlA6q9RF884WVJYtkCRUUT5BpEIiEezyq8RhyvznaXogC
-	 WIqDwVusYGbRwbaDn3fbdJBLAHcKE+0RPWKbZbmXRFzkx66LMrsrafNzA798hH73rrq2G
-	 EOvuwfXIHVaA/dJYlhZQLYR2HbRKkSw8vFoEFPrC+WAdXMSa3zvuDEtr71tVTA117aA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792617310;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=QE0XwmxxYjyh72q5hRFKajNE0rpJOhIYUg/y5GFoYyY=;
+	b=IsYqE5AWiltAIpunGO2sfSYHtKJH9oKgHvQoVIWHBC3q6UjWqUCv+ceChLBVtBGNbNCI
+	 nB6Z/PKq8d9qSW/wC1QZi226GYYlirleSBo0ssn9qYPfNjdp0sZf1j90cFWBq4hLpuGBW
+	 BWA6Soiy5LoMRIi+n8toa83l/DQFGqtVjsiAXAf8xMxZiOvPei9Dv5KTnwePBy1OxxOi+
+	 9dyTcTg9wnw+ATPuYjZ2FmrA1iCrH9b19KCM+BajhStAeVgnHejyZSREcRgciqNRd3OAL
+	 bZVp8dnKM4+5vdAi8qTyxEqxBwmw0ydTgOFvMnnxYXRrgoejaf6fCUTXV0bQ8KfOd1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=pm.me;
-	spf=pass smtp.mailfrom=pm.me;
-	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=Y+JZkAkH;
-	arc=none smtp.remote-ip=109.224.244.121
-Received: from mail-244121.protonmail.ch (mail-244121.protonmail.ch [109.224.244.121])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Nc2TihsH;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="BW1/+y/H";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A991B606A31B;
-	Wed, 21 Oct 2026 21:04:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A991B606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8038606A320
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 21:15:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A8038606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=Y+JZkAkH
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1792616679; x=1792875879;
-	bh=xn1uSgbiYXIquVNS5gJlnahF7mH3rI4fg0oKctmsVQk=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Y+JZkAkHH+S01QhJzlv4kxPK1gcVoovi45c7gFYSS285Ft6jmm2faGzAkDyqQ8hP7
-	 z7L8ccajq2PoitlrdpV8PGs9psXx7V6IAg8l66dCqq7G6qAwSbByd8b9IKAy3kDFBw
-	 LLroiEjTNXn2DBypVEsFezQ8esrAexkDluDZSn6H9mtY5m0GLi6qyjjBOpCjin482x
-	 /cKEL6zUwcz0jIuh8BGEzZrc45yaxK2YtpjOYfL25YdWXGRWcqz+O23WeXV8DOxtpX
-	 CE/Pgh10RjCpiLYQ1Ly39nveF8ravK1rSW1s9myw39a7XGqx8wts1XxwODo+N7xO3S
-	 /9im1QxIWP+pw==
-Date: Wed, 21 Oct 2026 21:04:35 +0000
-To: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4] pinctrl: qcom: Restore the pin configuration after hibernation
-Message-ID: <20261021210425.57066-1-birk.skyum@pm.me>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 31568ca8d183b74c37eaf16e14835d84c0f7e1e6
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Nc2TihsH;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BW1/+y/H
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LKeQYr2748612
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 21:15:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	QE0XwmxxYjyh72q5hRFKajNE0rpJOhIYUg/y5GFoYyY=; b=Nc2TihsHmmQu++9i
+	ZyuB/etfWO9U6CbJ8XVCh9ArX/7OZG0+NyqE+tCIHSbZ+cH7JqF+zEqF+5RHaFar
+	0N1OS7SWijfwJEnnd8HbNlwP4biTfFxrEF2lr5tt5DI3E+NMWlazrBahJdE7+x/N
+	YOxNbhSWM0pJ7K5kA7gMB42byh8TNhdRYSeYFNdjL6pK3RXTUwNB8xO/ifSsqqiG
+	BIS/7pe70WuD9LtF+6MWQ8YWtUgEjtAae1+QWYrnJqKWXXI0Sf+08CHRTX+5Zj7/
+	gcxFmAAQBDqhmF6nm4bBHFosdDqL6i+l1cRF2Lv+2DZuB+eHDnpLhy2+rsFuzW3l
+	3d2GYg==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf0ke16js-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 21:15:08 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-35a04491c56so238707eec.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 14:15:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792617308; x=1793222108; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QE0XwmxxYjyh72q5hRFKajNE0rpJOhIYUg/y5GFoYyY=;
+        b=BW1/+y/He2ZSHsIWZDvI6bGIT+OSZq1PJPeYDcAdLMJC8rQEonnwpVDTMtH2eeyUip
+         PqqlublejoCfg8OYlXfbls6HezKy0gBt21/ygLUj/w+z3hdniL9X33X2lSH+6zCAvoue
+         BM0qfBDD6pDxWgBB7R/rf+Eq2uifrzpeFq9DmAJxTbEXzYJS/gfFhV+yc/85spSQYfnV
+         3WrlIi1B4TILxyMYZX28xf1nKGJPW57c2qosx4OZfuXRpgRVbzT/GtevfOdVA5SvAVoD
+         4DxV8XgP7do8T14w53Ecr0Mr22IqWvf9NbC8GmiWVhkYwyGvPN2jKfQYD/jAKCHPGFdu
+         MZ6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792617308; x=1793222108;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QE0XwmxxYjyh72q5hRFKajNE0rpJOhIYUg/y5GFoYyY=;
+        b=L4rdBOmZubrBjDxJoLZsMc+QZa1B6/AuDLJ4Akai/IKCZjAbuBWI6JME7ITqgteDbU
+         MZUKfoz7UgiTnz4ecVRcJ2plqmC0DikhTmfF5Q57F0JyiTDc9iYk2C0eyXaYqAPrgnNk
+         fDag5AUFFNl0O5uCTFEH1tPx52e8CEFbOTx4n2yRFJLP6j+ptW1r1mYqjNJ2guV6emH4
+         wUW9KKGRYxI0sJNf2vuHr3B9g8UYJzygU6PZzNZxEDSDTYsREWNhrZfgg/pHO28W5mkB
+         cMCB7EYm1KhJiMdwcgfKbhzxhdSdAFADThJljRb1E+OkCyGSTf8KthShH9ytguf8WOBH
+         rwIQ==
+X-Gm-Message-State: AFq9FYJY40vsWr+byEYJ4b+vDo339TQ2V5zFUSjcmv0LL9zWM2A3I5rt
+	576Us0Fmq2t71ZgPb6xWhGpeFP5Y3+jnZCeRs3V3qiNrlmi2df7S3b2H7Vtj2yn+HCztsZfa61P
+	4Z0d4PdzXa4p04VbWHqq1rklyVEjDU6oxC1S6BU7MSHfh5lRm/F2vBc40py8i8l7oQ4k=
+X-Gm-Gg: AYBFou1eVPWsEy/78hkSbGXKKK+ur6UJRwvJY6GR7LsW1sYJ7cGDYrX/X++CIuLi0ss
+	XGSllpfYeJ3Dois/RGj7g41qe755Ae3rB0Yhn+uqhCiLjZ0WD5xICjPW9YUJnkq1ESrl1SVqEjh
+	euFiLrLHCZmVCdgWJZow9MS1BQO2BhbCNkj/gFCIDg11JwimdtAstNAtf3Bc/qbEAe4cjxQ42GN
+	EERrHr+Om1c50rUOixfquRcXsyRdaKIodEiDdsj1cyOuQHBDQtj9X1DJ7VdsyDxXDMbzqV9IXlh
+	B0ICjeWNjHSW3NUCtwcgET3w+OGPwWBC9JoxgwQPtJsAmwORsfUtmcc82mbnLEnULyXXEdJxLRy
+	cPvXzR3zF/9oMDM3ubEtDk2pIpwT5+zc=
+X-Received: by 2002:a05:7301:5f0b:b0:359:27e6:b684 with SMTP id 5a478bee46e88-368adfddd63mr583222eec.3.1792617306854;
+        Wed, 21 Oct 2026 14:15:06 -0700 (PDT)
+X-Received: by 2002:a05:7301:5f0b:b0:359:27e6:b684 with SMTP id 5a478bee46e88-368adfddd63mr583185eec.3.1792617306025;
+        Wed, 21 Oct 2026 14:15:06 -0700 (PDT)
+Received: from [192.168.1.86] ([65.181.13.88])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36740cc8439sm10631970eec.11.2026.10.21.14.15.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 21 Oct 2026 14:15:05 -0700 (PDT)
+Message-ID: <672d7be2-072d-424a-80f7-025c70440b08@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 08:14:59 +1100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,325 +113,552 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] tpm: Introduce Qualcomm TPM driver
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+        Peter Huewe <peterhuewe@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
+        Jason Gunthorpe <jgg@ziepe.ca>
+Cc: linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+        linux-kernel@vger.kernel.org, linux-integrity@vger.kernel.org
+References: <20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com>
+ <20261019-tpm_qcom_driver-v4-2-6889b9804ba7@oss.qualcomm.com>
+Content-Language: en-US
+From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+In-Reply-To: <20261019-tpm_qcom_driver-v4-2-6889b9804ba7@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: sgptzR7E7Kejz2Xd0GXe2GPZwN966TZG
+X-Proofpoint-ORIG-GUID: sgptzR7E7Kejz2Xd0GXe2GPZwN966TZG
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA4NCBTYWx0ZWRfXz4QmcqznYIbc
+ ak8E4OSc8xVpvIw9mDCRg3jbaLU0A0T8cP5hx2Zi+CiFGZJcwrAxWSlsPl7Evl1Kh/wNOaLbjN7
+ DyabavK4sRtgvjiyd6h8ysMq3bUXE7U=
+X-Authority-Analysis: v=2.4 cv=KOzPn1Fo c=1 sm=1 tr=0 ts=6ad92b5c cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=DFNpOA17G2bluAzxCnbuxw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=uY2erOa96md1tqpinVYA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA4NCBTYWx0ZWRfX2onvilUme5s1
+ paUPgtQ7j5IGdzZSrkxVzXf4nXQfbYnd1k8xIoScRPUQK8UclXfyBwvtwa+4YZ6snAyuDJ5R6p5
+ n+OnUJvEhdQUuQ5eWsEqmon0xJENxbNFza8OE+LiEvOIWMv5FOts1buKw51QgTcgJoEcz5bc2x3
+ NRGeTkGylxS0a1X/gMiO+6ggq5/NBTnpnHVGpcvkpLnIM9iIGyOqXyu1IpYh4es3xJVX4OcuRrp
+ rlCbtSIPD28v54SJ6mfdCX5M/0rZmaT4pLijO65PJOyz8nL9FY+X6ryAcPUmKVBHGsVW8e7CWxh
+ t9vJTj6yGfguiEXdIIVIYVCaqTxYng2ZE+WbhY2YY4d4/OCcGM7FrK+1SsPQRlOYi2jWX0DpgSb
+ JU8u8w7f05BUVggrCsm1TK6kyQLwo+xfnkOQAjqEyMH4myxMmqJHXkQsPrzKYNn29syhUgyWk6e
+ etZ8762zIlN4trznDag==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-21_06,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 bulkscore=0
+ lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610210084
 
-A hibernation image is restored after a power cycle. The TLMM registers
-then hold what the boot firmware and the kernel that loaded the image
-made of them. The restored kernel has the configuration it applied in
-memory only, and nothing writes it to the hardware again, so every pin
-that the loading kernel did not set up the same way stays wrong.
+Hi Kuldeep,
 
-On a Lenovo Yoga Slim 7x (X1E80100) the Bluetooth and Wi-Fi enable lines
-are two of them. Their drivers are loaded from the root file system, so
-the kernel that loads the image never touches the pins. This is
-/sys/kernel/debug/gpio before the hibernation and after the resume:
+On 10/19/2026 8:21 PM, Kuldeep Singh wrote:
+> Add a TPM chip driver for platforms where a TPM 2.0 instance is
+> implemented by a Trusted Application (TA) running in Qualcomm's Trusted
+> Execution Environment (QTEE), reachable over the QCOMTEE object-IPC
+> transport.
+> 
+> The driver discovers the qcom.tz.tpm TEE-bus device, opens a session
+> with the TPM TA, and register with tpm interface. This exposes the TA
+> through the standard /dev/tpm interface and the existing tpm2 command
+> layer. OS need not be aware underlying TPM instance is dTPM or fTPM.
+> 
+> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> ---
+>  drivers/char/tpm/Kconfig    |   9 +
+>  drivers/char/tpm/Makefile   |   1 +
+>  drivers/char/tpm/tpm_qcom.c | 414 ++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 424 insertions(+)
+> 
+> diff --git a/drivers/char/tpm/Kconfig b/drivers/char/tpm/Kconfig
+> index 5f672f2c01b0..05d704ed3632 100644
+> --- a/drivers/char/tpm/Kconfig
+> +++ b/drivers/char/tpm/Kconfig
+> @@ -243,6 +243,15 @@ config TCG_FTPM_TEE
+>  	help
+>  	  This driver proxies for firmware TPM running in TEE.
+>  
+> +config TCG_QCOM
+> +	tristate "Qualcomm TEE based TPM Interface"
+> +	depends on QCOMTEE
+> +	help
+> +	  This driver provides interface to run TPM instances with Trustzone
+> +	  having Qualcomm TPM TA running in Qualcomm TEE.
+> +	  The mechanism uses the object-IPC based transport provided by
+> +	  QCOMTEE.
+> +
+>  config TCG_SVSM
+>  	tristate "SNP SVSM vTPM interface"
+>  	depends on AMD_MEM_ENCRYPT
+> diff --git a/drivers/char/tpm/Makefile b/drivers/char/tpm/Makefile
+> index 5b5cdc0d32e4..471cbf49afd2 100644
+> --- a/drivers/char/tpm/Makefile
+> +++ b/drivers/char/tpm/Makefile
+> @@ -45,5 +45,6 @@ obj-$(CONFIG_TCG_CRB) += tpm_crb.o
+>  obj-$(CONFIG_TCG_ARM_CRB_FFA) += tpm_crb_ffa.o
+>  obj-$(CONFIG_TCG_VTPM_PROXY) += tpm_vtpm_proxy.o
+>  obj-$(CONFIG_TCG_FTPM_TEE) += tpm_ftpm_tee.o
+> +obj-$(CONFIG_TCG_QCOM) += tpm_qcom.o
+>  obj-$(CONFIG_TCG_SVSM) += tpm_svsm.o
+>  obj-$(CONFIG_TCG_LOONGSON) += tpm_loongson.o
+> diff --git a/drivers/char/tpm/tpm_qcom.c b/drivers/char/tpm/tpm_qcom.c
+> new file mode 100644
+> index 000000000000..e9e4746f0004
+> --- /dev/null
+> +++ b/drivers/char/tpm/tpm_qcom.c
+> @@ -0,0 +1,414 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + *
+> + */
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/mm.h>
+> +#include <linux/slab.h>
+> +#include <linux/tee.h>
+> +#include <linux/tee_drv.h>
+> +#include <linux/tpm.h>
+> +#include <linux/uuid.h>
+> +
+> +#include "tpm.h"
+> +
+> +#define QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS	5
+> +#define QCOMTEE_OP_CLIENT_ENV_OPEN		0
+> +#define QCOMTEE_MSG_OBJECT_OP_MASK		GENMASK(15, 0)
+> +#define QCOMTEE_MSG_OBJECT_OP_RELEASE		(QCOMTEE_MSG_OBJECT_OP_MASK - 0)
+> +
+> +#define QCOMTEE_TPM_OP_SEND_COMMAND	0
+> +
+> +/* UID of the "qcom.tz.tpm" service */
+> +#define QCOMTEE_TPM_UID			81
+> +
+> +/* Max buffer size supported by TPM TA */
+> +#define TPM_QCOM_MAX_COMMAND_SIZE	SZ_4K
+> +#define TPM_QCOM_MAX_RESPONSE_SIZE	SZ_4K
+> +
 
-  gpio116 : out low  func0 2mA no pull
-  gpio117 : out high func0 2mA no pull
+I also mentioned it in V2, why using different naming convention across different macros.
+Why not QCOMTEE_TPM_MAX_COMMAND_SIZE?
 
-  gpio116 : in  low  func0 2mA pull down
-  gpio117 : out high func0 16mA no pull
+> +#define QCOMTEE_TPM_GET_TA_VERSION_ID	0x0001000
 
-The driver that owns gpio116 still believes it drives the line.
+nipik: For constant either use 0x00001000 or 0x1000. not 28-bit.
+Why not U like others just for consistency.
 
-Save the control, output and interrupt configuration registers in
-freeze_noirq and write them back in restore_noirq, the output level
-first, so that a pin drives the right level from the moment it becomes
-an output. Changing the interrupt configuration can latch an interrupt,
-so the configuration is written with the interrupt disabled, the status
-is cleared where the register changed, as msm_gpio_irq_set_type() does
-with the interrupt masked, and only then is the interrupt enabled again.
+> +#define QCOMTEE_TPM_TA_VERSION_MAJOR	GENMASK(31, 16)
+> +#define QCOMTEE_TPM_TA_VERSION_MINOR	GENMASK(15, 0)
+> +
+> +struct tpm_qcom_ta_version_req {
+> +	u32 command_id;
+> +} __packed;
+> +
+> +struct tpm_qcom_ta_version_resp {
+> +	u32 status;
+> +	u32 command_id;
+> +	u32 version_num;
+> +} __packed;
+> +
+> +#define QCOMTEE_TPM_TYPE_ID		0x0080000
+> +#define QCOMTEE_TPM_TYPE_DTPM		0x6454504dU
+> +#define QCOMTEE_TPM_TYPE_FTPM		0x6654504dU
+> +#define QCOMTEE_TPM_TYPE_NONE		0x4e6f6e65U
 
-Only the GPIOs the kernel uses are put back: those requested as a GPIO,
-muxed to a function or used as an interrupt, as pinctrl-intel does. A
-valid GPIO without an owner may be in use by firmware. The SDC pads
-after the GPIOs are configured without a mux function, so they never
-have an owner, and their control register is always put back.
+This is an unused macro.
 
-msm_pinctrl_dev_pm_ops gets the two callbacks and x1e80100 starts using
-these ops. With that x1e80100 also gets their suspend and resume
-callbacks, which apply the sleep and default state of the controller's
-own pins where a board defines them.
+> +
+> +struct tpm_qcom_type_req {
+> +	u32 command_id;
+> +} __packed;
+> +
+> +struct tpm_qcom_type_resp {
+> +	u32 command_id;
+> +	u32 status;
+> +	u32 tpm_type;
+> +} __packed;
+> +
+> +/*
+> + * dTPM SPI transfer optimization:
+> + * TRANSFER_START before a burst of commands, TRANSFER_END once done.
+> + */
+> +#define QCOMTEE_TPM_TRANSFER_ID		0x0000002
+> +#define QCOMTEE_TPM_TRANSFER_END	0
+> +#define QCOMTEE_TPM_TRANSFER_START	1
+> +
+> +struct tpm_qcom_transfer_req {
+> +	u32 command_id;
+> +	u32 transfer_state;
+> +} __packed;
+> +
+> +struct tpm_qcom_transfer_resp {
+> +	u32 command_id;
+> +	u32 status;
+> +} __packed;
+> +
+> +struct tpm_qcom_private {
+> +	struct tpm_chip *chip;
+> +	struct device *dev;
+> +	struct tee_context *ctx;
+> +	struct tee_param_objref tpm_svc_obj;
+> +	bool is_dtpm;
+> +};
+> +
+> +/* UUID of the QTEE-bus device representing the TPM TA. */
+> +static const uuid_t tpm_qcom_uuid =
+> +	UUID_INIT(0xaabcb593, 0x7083, 0x5536,
+> +		  0xac, 0x27, 0x3d, 0x2d, 0x89, 0x41, 0x9d, 0xdb);
+> +
+> +static void tpm_qcom_release_object(struct tee_context *ctx,
+> +				    struct tee_param_objref object)
+> +{
+> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+> +
+> +	inv_arg.id = object.id;
+> +	inv_arg.op = QCOMTEE_MSG_OBJECT_OP_RELEASE;
+> +	inv_arg.num_params = 0;
+> +
+> +	tee_client_object_invoke_func(ctx, &inv_arg, NULL);
+> +}
+> +
+> +static int tpm_qcom_get_client_env_obj(struct device *dev,
+> +				       struct tee_context *ctx,
+> +				       struct tee_param_objref *client_env_obj)
+> +{
+> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+> +	struct tee_param param[2] = {};
+> +	int ret;
+> +
+> +	inv_arg.id = TEE_OBJREF_NULL;
+> +	inv_arg.op = QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS;
+> +	inv_arg.num_params = 2;
+> +
+> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT;
+> +	param[0].u.objref.id = TEE_OBJREF_NULL;
+> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
+> +
+> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+> +	if (ret < 0 || inv_arg.ret != 0) {
+> +		dev_err(dev, "get client env obj failed: ret=%d, invoke_ret=0x%x\n",
+> +			ret, inv_arg.ret);
+> +		return -EINVAL;
+> +	}
+> +
+> +	*client_env_obj = param[1].u.objref;
+> +	return 0;
+> +}
+> +
+> +static int tpm_qcom_get_svc_obj(struct device *dev,
+> +				struct tee_context *ctx,
+> +				struct tee_param_objref client_env_obj,
+> +				struct tee_param_objref *tpm_svc_obj)
+> +{
+> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+> +	struct tee_param param[2] = {};
+> +	u32 tpm_uid = QCOMTEE_TPM_UID;
+> +	int ret;
+> +
+> +	inv_arg.id = client_env_obj.id;
+> +	inv_arg.op = QCOMTEE_OP_CLIENT_ENV_OPEN;
+> +	inv_arg.num_params = 2;
+> +
+> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &tpm_uid,
+> +						    .size = sizeof(tpm_uid) };
+> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
+> +
+> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
+> +	if (ret < 0 || inv_arg.ret != 0) {
+> +		dev_err(dev, "get TPM service obj failed: ret=%d, invoke_ret=0x%x\n",
+> +			ret, inv_arg.ret);
+> +		return -EINVAL;
+> +	}
+> +
+> +	*tpm_svc_obj = param[1].u.objref;
+> +	return 0;
+> +}
+> +
+> +static int tpm_qcom_send_command(struct tpm_qcom_private *pvt_data,
+> +				 void *req, size_t req_len, void *resp,
+> +				 size_t *resp_len)
+> +{
+> +	struct tee_ioctl_object_invoke_arg inv_arg = {};
+> +	struct tee_param param[3] = {};
+> +	u8 locality_arg = 0;
+> +	int ret;
+> +
+> +	inv_arg.id = pvt_data->tpm_svc_obj.id;
+> +	inv_arg.op = QCOMTEE_TPM_OP_SEND_COMMAND;
+> +	inv_arg.num_params = 3;
+> +
+> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &locality_arg,
+> +						   .size = sizeof(locality_arg) };
+> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
+> +	param[1].u.ubuf = (struct tee_param_ubuf){ .addr = req, .size = req_len };
+> +	param[2].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT;
+> +	param[2].u.ubuf = (struct tee_param_ubuf){ .addr = resp, .size = *resp_len };
+> +
+> +	ret = tee_client_object_invoke_func(pvt_data->ctx, &inv_arg, param);
+> +	if (ret < 0 || inv_arg.ret != 0) {
+> +		dev_err(pvt_data->dev,
+> +			"send_command invoke ret: %d, err: 0x%x\n",
+> +			ret, inv_arg.ret);
+> +		return ret ?: -EINVAL;
+> +	}
+> +
+> +	*resp_len = param[2].u.ubuf.size;
+> +
+> +	return 0;
+> +}
+> +
+> +static int tpm_qcom_get_ta_details(struct tpm_qcom_private *pvt_data)
+> +{
+> +	struct tpm_qcom_ta_version_req ver_req = {
+> +		.command_id = QCOMTEE_TPM_GET_TA_VERSION_ID,
+> +	};
+> +	struct tpm_qcom_ta_version_resp ver_resp;
+> +	size_t resp_len = sizeof(ver_resp);
+> +	struct tpm_qcom_type_req type_req = {
+> +		.command_id = QCOMTEE_TPM_TYPE_ID,
+> +	};
+> +	struct tpm_qcom_type_resp type_resp;
+> +	int ret;
+> +
+> +	ret = tpm_qcom_send_command(pvt_data, &ver_req, sizeof(ver_req),
+> +				    &ver_resp, &resp_len);
+> +	if (ret < 0 || resp_len < sizeof(ver_resp) || ver_resp.status != 0)
+> +		return ret ?: -EIO;
+> +
+> +	dev_info(pvt_data->dev, "TPM TA version %u.%u\n",
+> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MAJOR, ver_resp.version_num),
+> +		 FIELD_GET(QCOMTEE_TPM_TA_VERSION_MINOR, ver_resp.version_num));
+> +
 
-Signed-off-by: Birk Skyum <birk.skyum@pm.me>
----
-Changes in v4:
-- Write the interrupt configuration with the interrupt disabled, clear
-  the status where the configuration changed, and only then enable the
-  interrupt again. The TLMM summary interrupt is chained and stays
-  enabled while the other CPUs run during restore_noirq, so a status
-  latched by the restore could reach them before it was cleared
-  (Sashiko).
-- Link to v3: https://lore.kernel.org/r/20261021195250.83540-1-birk.skyum@p=
-m.me
+Just to confirm, Are you sure this does not produce compile time warning. Check it.
+I belive GENMASK generate "unsigned long" and %u is not correct?
 
-Changes in v3:
-- Take the lock with guard() in both callbacks (Bartosz).
-- Link to v2: https://lore.kernel.org/r/179206391202.36987.1416057976823693=
-032@pm.me
+> +	resp_len = sizeof(type_resp);
+> +	ret = tpm_qcom_send_command(pvt_data, &type_req, sizeof(type_req),
+> +				    &type_resp, &resp_len);
+> +	if (ret < 0 || resp_len < sizeof(type_resp) || type_resp.status != 0)
+> +		return ret ?: -EIO;
+> +
+> +	switch (type_resp.tpm_type) {
+> +	case QCOMTEE_TPM_TYPE_FTPM:
+> +		dev_info(pvt_data->dev, "TPM type: fTPM\n");
+> +		pvt_data->is_dtpm = false;
+> +		break;
+> +	case QCOMTEE_TPM_TYPE_DTPM:
+> +		dev_info(pvt_data->dev, "TPM type: dTPM\n");
+> +		pvt_data->is_dtpm = true;
+> +		break;
+> +	default:
+> +		dev_err(pvt_data->dev, "unsupported TPM type: 0x%08x\n",
+> +			type_resp.tpm_type);
+> +		return -EIO;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/* fTPM does not implement this command and to be invoked via dtpm only. */
+> +static void tpm_qcom_transfer(struct tpm_qcom_private *pvt_data,
+> +			      u32 transfer_state)
+> +{
+> +	struct tpm_qcom_transfer_req req = {
+> +		.command_id = QCOMTEE_TPM_TRANSFER_ID,
+> +		.transfer_state = transfer_state,
+> +	};
+> +	struct tpm_qcom_transfer_resp resp;
+> +	size_t resp_len = sizeof(resp);
+> +
+> +	tpm_qcom_send_command(pvt_data, &req, sizeof(req), &resp, &resp_len);
+> +}
+> +
+> +static int tpm_qcom_cmd_ready(struct tpm_chip *chip)
+> +{
+> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+> +
+> +	if (pvt_data->is_dtpm)
+> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_START);
+> +
+> +	return 0;
+> +}
+> +
+> +static int tpm_qcom_go_idle(struct tpm_chip *chip)
+> +{
+> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+> +
+> +	if (pvt_data->is_dtpm)
+> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_END);
+> +
+> +	return 0;
+> +}
+> +
+> +/*
+> + * The raw TPM2 command in @buf is sent directly as send_command's UBUF-in
+> + * param and the raw TPM2 response is read back from its UBUF-out param.
+> + */
+> +static int tpm_qcom_send(struct tpm_chip *chip, u8 *buf, size_t bufsiz,
+> +			 size_t cmd_len)
+> +{
+> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
+> +	struct tpm_header *header = (struct tpm_header *)buf;
+> +	size_t resp_len = PAGE_ALIGN(TPM_QCOM_MAX_RESPONSE_SIZE);
 
-Changes in v2:
-- Put a GPIO back only when the kernel uses it, as a GPIO, through a
-  mux function or as an interrupt, as pinctrl-intel does (Bartosz).
-- Save and restore the SDC pads after the GPIOs as well (Bartosz).
-- Allocate the save area under the same option as the callbacks,
-  CONFIG_HIBERNATE_CALLBACKS (Sashiko).
-- Clear the interrupt status only where the restore changed the
-  interrupt configuration (Sashiko).
-- Say in a comment that a both-edge interrupt emulated by flipping the
-  polarity is not primed again. No SoC with such pins uses these ops.
-- Rebased on pinctrl-qcom/for-next.
-- Link to the RFC: https://lore.kernel.org/r/179163141354.18006.80461347454=
-353634@pm.me
+Why PAGE_ALIGN? Why not using TPM_QCOM_MAX_RESPONSE_SIZE directly?
+In 16K page, it increases the size to 16K, is it what you want?
 
-Tested with v4 on a Lenovo Yoga Slim 7x with v7.2 plus the patch. The
-kernel also carried the PCI change in [1], without which this machine
-does not resume at all, the smp2p change in [2] and a GENI serial
-change that is not posted. The Bluetooth driver had [3] applied. On
-pinctrl-qcom/for-next v4 builds without warnings with W=3D1 and sparse,
-with hibernation on, off and without sleep support.
 
-- Before the hibernation 45 TLMM pins have an owner, gpio116 and
-  gpio117 among them (wcn7850-pmu), and four are interrupts.
-- pm_test=3Dcore and test_resume pass.
-- After a hibernation with a real power-off the TLMM part of
-  /sys/kernel/debug/gpio differs only in the level read on two inputs
-  (gpio93 and gpio153), as it did with v2. The counts of the four TLMM
-  interrupts are the same before and after, and no unhandled interrupt
-  is logged.
-- A suspend (deep) and wake worked with v2. v4 does not change that
-  path.
+> +	size_t copy_len;
+> +	int ret;
+> +
+> +	if (cmd_len > TPM_QCOM_MAX_COMMAND_SIZE) {
+> +		dev_err(&chip->dev, "len=%zd exceeds TPM_QCOM_MAX_COMMAND_SIZE\n",
+> +			cmd_len);
+> +		return -EIO;
+> +	}
+> +
+> +	u8 *response __free(kfree) = kzalloc(resp_len, GFP_KERNEL);
+> +	if (!response)
+> +		return -ENOMEM;
+> +
+> +	ret = tpm_qcom_send_command(pvt_data, buf, cmd_len, response, &resp_len);
+> +	if (ret < 0) {
+> +		dev_err(&chip->dev, "TPM command failed: cmd_len=%zu, tpm_cc=0x%08x, ret:%d\n",
+> +			cmd_len, be32_to_cpu(header->ordinal), ret);
+> +		return ret;
+> +	}
+> +
+> +	copy_len = min_t(size_t, bufsiz, resp_len);
 
-The Yoga has no SD card slot and its SDC2 pads have no owner, so this
-only shows that putting them back does no harm. I did not read them
-back.
+Does this min_t means the result turncation and discarding is acceptable!?
+Should not we do the min_t at the allocation time:
 
-Not covered here: the LPASS LPI pin controller, whose pins also come
-back at their reset values after a hibernation.
+size_t resp_len = min_t(TPM_QCOM_MAX_RESPONSE_SIZE, bufsiz);
 
-[1] https://lore.kernel.org/r/179181074907.22199.10556821368232442334@pm.me
-[2] https://lore.kernel.org/r/179158127177.70185.5691100900886332545@pm.me
-[3] https://lore.kernel.org/r/179163212446.46972.2306254853726299632@pm.me
 
- drivers/pinctrl/qcom/pinctrl-msm.c      | 150 +++++++++++++++++++++++-
- drivers/pinctrl/qcom/pinctrl-x1e80100.c |   1 +
- 2 files changed, 149 insertions(+), 2 deletions(-)
+> +	memcpy(buf, response, copy_len);
+> +
+> +	return copy_len;
+> +}
+> +
+> +static const struct tpm_class_ops tpm_qcom_ops = {
+> +	.flags = TPM_OPS_AUTO_STARTUP,
+> +	.send = tpm_qcom_send,
+> +	.cmd_ready = tpm_qcom_cmd_ready,
+> +	.go_idle = tpm_qcom_go_idle,
+> +};
+> +
+> +static int tpm_qcom_ctx_match(struct tee_ioctl_version_data *ver,
+> +			      const void *data)
+> +{
+> +	return (ver->impl_id == TEE_IMPL_ID_QTEE);
+> +}
+> +
+> +static int tpm_qcom_probe(struct tee_client_device *tee_dev)
+> +{
+> +	struct device *dev = &tee_dev->dev;
+> +	struct tpm_qcom_private *pvt_data;
+> +	struct tee_param_objref client_env_obj;
+> +	struct tee_param_objref tpm_svc_obj;
+> +	struct tpm_chip *chip;
+> +	int err;
+> +
+> +	pvt_data = devm_kzalloc(dev, sizeof(*pvt_data), GFP_KERNEL);
+> +	if (!pvt_data)
+> +		return -ENOMEM;
+> +
+> +	dev_set_drvdata(dev, pvt_data);
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinc=
-trl-msm.c
-index 27f06bbc113c..32aa7b919e24 100644
---- a/drivers/pinctrl/qcom/pinctrl-msm.c
-+++ b/drivers/pinctrl/qcom/pinctrl-msm.c
-@@ -39,6 +39,15 @@
- #define MAX_NR_TILES 4
- #define PS_HOLD_OFFSET 0x820
-=20
-+/* Register values of one pin group, kept across a hibernation. */
-+struct msm_pin_state {
-+=09u32 ctl;
-+=09u32 io;
-+=09u32 intr_cfg;
-+=09u32 intr_target;
-+=09bool saved;
-+};
-+
- /**
-  * struct msm_pinctrl - state for a pinctrl-msm device
-  * @dev:            device handle.
-@@ -58,6 +67,7 @@
-  * @soc:            Reference to soc_data of platform specific data.
-  * @regs:           Base addresses for the TLMM tiles.
-  * @phys_base:      Physical base address
-+ * @saved:          Pin registers kept while a hibernation image is taken.
-  */
- struct msm_pinctrl {
- =09struct device *dev;
-@@ -80,6 +90,8 @@ struct msm_pinctrl {
- =09const struct msm_pinctrl_soc_data *soc;
- =09void __iomem *regs[MAX_NR_TILES];
- =09u32 phys_base[MAX_NR_TILES];
-+
-+=09struct msm_pin_state *saved;
- };
-=20
- #define MSM_ACCESSOR(name) \
-@@ -1583,9 +1595,136 @@ static __maybe_unused int msm_pinctrl_resume(struct=
- device *dev)
- =09return pinctrl_force_default(pctrl->pctrl);
- }
-=20
--SIMPLE_DEV_PM_OPS(msm_pinctrl_dev_pm_ops, msm_pinctrl_suspend,
--=09=09  msm_pinctrl_resume);
-+static bool msm_pin_has_own_intr_target(struct msm_pinctrl *pctrl,
-+=09=09=09=09=09const struct msm_pingroup *g)
-+{
-+=09return !pctrl->intr_target_use_scm && g->intr_target_reg &&
-+=09       g->intr_target_reg !=3D g->intr_cfg_reg;
-+}
-+
-+/*
-+ * A GPIO is only put back when the kernel uses it, as a GPIO, through a m=
-ux
-+ * function or as an interrupt. Other valid pins may be in use by firmware=
-.
-+ * The pads after the GPIOs (SDC) have no GPIO and are configured without =
-a
-+ * mux function, so they never have an owner and are always put back.
-+ */
-+static bool msm_pin_in_use(struct msm_pinctrl *pctrl, unsigned int i)
-+{
-+=09const struct pin_desc *desc;
-+
-+=09if (i >=3D pctrl->chip.ngpio)
-+=09=09return true;
-+
-+=09if (!gpiochip_line_is_valid(&pctrl->chip, i))
-+=09=09return false;
-+
-+=09desc =3D pin_desc_get(pctrl->pctrl, i);
-+
-+=09return desc && (desc->mux_owner || desc->gpio_owner ||
-+=09=09=09gpiochip_line_is_irq(&pctrl->chip, i));
-+}
-+
-+/* Remember how the pins are set up when a hibernation image is taken. */
-+static int msm_pinctrl_freeze_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned int i;
-+
-+=09guard(raw_spinlock_irqsave)(&pctrl->lock);
-+
-+=09for (i =3D 0; i < pctrl->soc->ngroups; i++) {
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+=09=09s->saved =3D msm_pin_in_use(pctrl, i);
-+=09=09if (!s->saved)
-+=09=09=09continue;
-+
-+=09=09s->ctl =3D msm_readl_ctl(pctrl, g);
-+=09=09if (i >=3D pctrl->chip.ngpio)
-+=09=09=09continue;
-+
-+=09=09s->io =3D msm_readl_io(pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-+
-+=09=09s->intr_cfg =3D msm_readl_intr_cfg(pctrl, g);
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09s->intr_target =3D msm_readl_intr_target(pctrl, g);
-+=09}
-=20
-+=09return 0;
-+}
-+
-+/*
-+ * The image is restored after a power cycle, when the pins are back at wh=
-at
-+ * the firmware and the kernel that loaded the image made of them. Nothing=
- else
-+ * writes the configuration again, so put back what was there.
-+ *
-+ * A both-edge interrupt that is emulated by flipping the polarity gets th=
-e
-+ * polarity it had, which is not primed for a line that changed meanwhile.=
- No
-+ * SoC with such pins (one-bit detection) uses these callbacks.
-+ */
-+static int msm_pinctrl_restore_noirq(struct device *dev)
-+{
-+=09struct msm_pinctrl *pctrl =3D dev_get_drvdata(dev);
-+=09const struct msm_pingroup *g;
-+=09struct msm_pin_state *s;
-+=09unsigned int i;
-+=09u32 val;
-+
-+=09guard(raw_spinlock_irqsave)(&pctrl->lock);
-+
-+=09for (i =3D 0; i < pctrl->soc->ngroups; i++) {
-+=09=09g =3D &pctrl->soc->groups[i];
-+=09=09s =3D &pctrl->saved[i];
-+=09=09if (!s->saved)
-+=09=09=09continue;
-+
-+=09=09if (i >=3D pctrl->chip.ngpio) {
-+=09=09=09msm_writel_ctl(s->ctl, pctrl, g);
-+=09=09=09continue;
-+=09=09}
-+
-+=09=09/* Set the level before the pin starts driving it. */
-+=09=09val =3D msm_readl_io(pctrl, g);
-+=09=09val &=3D ~BIT(g->out_bit);
-+=09=09val |=3D s->io & BIT(g->out_bit);
-+=09=09msm_writel_io(val, pctrl, g);
-+
-+=09=09msm_writel_ctl(s->ctl, pctrl, g);
-+=09=09if (!g->intr_cfg_reg)
-+=09=09=09continue;
-+
-+=09=09if (msm_pin_has_own_intr_target(pctrl, g))
-+=09=09=09msm_writel_intr_target(s->intr_target, pctrl, g);
-+
-+=09=09/*
-+=09=09 * Changing the configuration can latch an interrupt, so write it
-+=09=09 * with the interrupt disabled and clear the status before the
-+=09=09 * interrupt is enabled again. One that is latched with the
-+=09=09 * configuration unchanged is a real one.
-+=09=09 */
-+=09=09val =3D msm_readl_intr_cfg(pctrl, g);
-+=09=09msm_writel_intr_cfg(s->intr_cfg & ~BIT(g->intr_enable_bit),
-+=09=09=09=09    pctrl, g);
-+=09=09if (val !=3D s->intr_cfg)
-+=09=09=09msm_ack_intr_status(pctrl, g);
-+=09=09if (s->intr_cfg & BIT(g->intr_enable_bit))
-+=09=09=09msm_writel_intr_cfg(s->intr_cfg, pctrl, g);
-+=09}
-+
-+=09return 0;
-+}
-+
-+const struct dev_pm_ops msm_pinctrl_dev_pm_ops =3D {
-+=09SYSTEM_SLEEP_PM_OPS(msm_pinctrl_suspend, msm_pinctrl_resume)
-+=09.freeze_noirq =3D PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
-+=09=09=09       msm_pinctrl_freeze_noirq),
-+=09.restore_noirq =3D PTR_IF(IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS),
-+=09=09=09=09msm_pinctrl_restore_noirq),
-+};
- EXPORT_SYMBOL(msm_pinctrl_dev_pm_ops);
-=20
- int msm_pinctrl_probe(struct platform_device *pdev,
-@@ -1663,6 +1802,13 @@ int msm_pinctrl_probe(struct platform_device *pdev,
- =09if (ret)
- =09=09return ret;
-=20
-+=09if (IS_ENABLED(CONFIG_HIBERNATE_CALLBACKS)) {
-+=09=09pctrl->saved =3D devm_kcalloc(&pdev->dev, pctrl->soc->ngroups,
-+=09=09=09=09=09    sizeof(*pctrl->saved), GFP_KERNEL);
-+=09=09if (!pctrl->saved)
-+=09=09=09return -ENOMEM;
-+=09}
-+
- =09platform_set_drvdata(pdev, pctrl);
-=20
- =09dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
-diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom=
-/pinctrl-x1e80100.c
-index e4c0abcd95b9..bfe122fc7e79 100644
---- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-+++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-@@ -1855,6 +1855,7 @@ static struct platform_driver x1e80100_pinctrl_driver=
- =3D {
- =09.driver =3D {
- =09=09.name =3D "x1e80100-tlmm",
- =09=09.of_match_table =3D x1e80100_pinctrl_of_match,
-+=09=09.pm =3D &msm_pinctrl_dev_pm_ops,
- =09},
- =09.probe =3D x1e80100_pinctrl_probe,
- };
---=20
-2.55.0
+This line is duplicated!? It is also bellow.
 
+- Amir
+
+> +
+> +	pvt_data->ctx = tee_client_open_context(NULL, tpm_qcom_ctx_match, NULL, NULL);
+> +	if (IS_ERR(pvt_data->ctx))
+> +		return -ENODEV;
+> +
+> +	err = tpm_qcom_get_client_env_obj(dev, pvt_data->ctx, &client_env_obj);
+> +	if (err)
+> +		goto out_ctx;
+> +
+> +	err = tpm_qcom_get_svc_obj(dev, pvt_data->ctx, client_env_obj, &tpm_svc_obj);
+> +	/* Release client_env object irrespective of service obj return status */
+> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
+> +	if (err)
+> +		goto out_ctx;
+> +
+> +	pvt_data->tpm_svc_obj = tpm_svc_obj;
+> +	pvt_data->dev = dev;
+> +
+> +	err = tpm_qcom_get_ta_details(pvt_data);
+> +	if (err)
+> +		goto out_svc_obj;
+> +
+> +	chip = tpmm_chip_alloc(dev, &tpm_qcom_ops);
+> +	if (IS_ERR(chip)) {
+> +		dev_err(dev, "tpmm_chip_alloc failed\n");
+> +		err = PTR_ERR(chip);
+> +		goto out_svc_obj;
+> +	}
+> +
+> +	pvt_data->chip = chip;
+> +	dev_set_drvdata(dev, pvt_data);
+> +	pvt_data->chip->flags |= TPM_CHIP_FLAG_TPM2 | TPM_CHIP_FLAG_SYNC;
+> +
+> +	err = tpm_chip_register(pvt_data->chip);
+> +	if (err) {
+> +		dev_err(dev, "tpm_chip_register failed with rc=%d\n", err);
+> +		goto out_svc_obj;
+> +	}
+> +
+> +	return 0;
+> +
+> +out_svc_obj:
+> +	tpm_qcom_release_object(pvt_data->ctx, tpm_svc_obj);
+> +
+> +out_ctx:
+> +	tee_client_close_context(pvt_data->ctx);
+> +	return err;
+> +}
+> +
+> +static void tpm_qcom_remove(struct tee_client_device *tee_dev)
+> +{
+> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(&tee_dev->dev);
+> +
+> +	tpm_chip_unregister(pvt_data->chip);
+> +	tpm_qcom_release_object(pvt_data->ctx, pvt_data->tpm_svc_obj);
+> +	tee_client_close_context(pvt_data->ctx);
+> +}
+> +
+> +static const struct tee_client_device_id tpm_qcom_id_table[] = {
+> +	{ tpm_qcom_uuid },
+> +	{}
+> +};
+> +MODULE_DEVICE_TABLE(tee, tpm_qcom_id_table);
+> +
+> +static struct tee_client_driver tpm_qcom_driver = {
+> +	.id_table	= tpm_qcom_id_table,
+> +	.probe		= tpm_qcom_probe,
+> +	.remove		= tpm_qcom_remove,
+> +	.driver		= {
+> +		.name	= "tpm_qcom",
+> +	},
+> +};
+> +
+> +module_tee_client_driver(tpm_qcom_driver);
+> +
+> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
+> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
+> +MODULE_LICENSE("GPL");
+> 
 
