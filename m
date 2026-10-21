@@ -1,88 +1,62 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792609398;
-	b=UTknLShHafM6PVK9aqjQvVDKho4gDs5aOj6RdDCobqsjR4rXuouNZqpEucMUgOm8NuwX
-	 XMYAecSgxGieo1u+wsnCd0fS1ixRknXJGquAzh2MTI4GnIHrkeWJFXoVZYhrybM4X7W4v
-	 KWesV5X+Ok65p0AbNmtW/GJz/mUiVlV+a0Hg9WAVQH55lquSUT5oZkdETTHzkbRm7JhKZ
-	 UF9GFhznAC3fsGgAGFlFqlvskVS1AkJWbkZueXYtYqnFOOxZdqns+TLyGaUoiI234dWKL
-	 nMLsIFF7RRsVW7W5FVWj4q78TyFm63biC5rIhtc3EclK7iBQfG2rZw/MSb6Qqz06ofA==
+	t=1792610679;
+	b=3d2TUnXfxBqeAOfJbzFuHkyGKojIBTnURgKgEmx0o8N0sSaKlUwxB0cDTdCIig7ckbYw
+	 b+bF58PLK+hrdHbL+8rgQ0ai9yJQGgrUyQnZJrOT3fgTiiQH9cGkNDauz0VcLgc1PWW+p
+	 w0X//b/1eoc7IE5ft7p+i9AaujUBVC6sMHbWOwjEtvy+o0QiBLUVRb5QoMOCYZE/hPloA
+	 8MhJvKFqz9b6j4koFUwmU2VMsLywag0hZa2g9kA1Ib0JRWtB7FrcanI095FNjLVUurZUC
+	 GI58V7yesUKG0AZdenJDCnuikFlWze9MJXVrixd5qNcgsp7UxBMjoq6uZ/Bh7lL8Nxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792609398;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=vrSJU4GgBQ150PF99g7M45HkRrI5pLJYV4NvvKGCVjQ=;
-	b=Fc1ZeWLmP8U8cedLiv9YOq/7JJtn+wWnFqZmj1EBGOvQvwRow7N/dnCnmAMG3k2xre+1
-	 3TCnQetsWjQePRs6niGWKG3qxrLs1BduIpM6OWip8aGVEqoGEBDExYJaLuSkB3ZIJLU4c
-	 FL0VUCgYoG6brU7J5o035AL0+kVkAYb5+hxlgq86vaFT4NFtjBtcbJ9IMIglBD54PBdl+
-	 fbJ2FpkCUK9JabXp8Vy+OhDpe2tTk0Q/K6qre2NrZMGdl9fDjJCYgxvwPYe7HseuKKR3W
-	 51RORuNIkp1F9N/v0Cxgr9j+R8cO7japIduaWjxUHpsTin9H2aH0pOGnyutIi9cpsGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792610679;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=b+WKeq5+AMB5ERi4rfdmh8S8vs/usV+GK7ZBlaPdQlY=;
+	b=My1+QflzoM5iNDDKgmnCFctp0SaHxQRmGfBJubPtP3TrPfiGdndzR6GubYNvC78MRj8R
+	 rns5zO49mUK38KQSrdgYNKLCF/ZR2z5C+/kb0EbyKjh0goK7P5hwQPE8lU975BSnnTJjX
+	 rkFp2I0YDAe6ThEbOYRPWKg1oDxKc6x9/z5hGSZ1e1IDg736HD6v57JJvI/E4OY8D+w9/
+	 m2SZfPvJ9goZWAcJZv5iY1NR9TTJOlfXgA9yFivrKEyNnt3Ui8GxpAG0VnOp+h0CY2sI6
+	 NLWOVfYM1F/aMB6umP7k1eKSBid9JkU3gcArqIKdkT1i5vkuD7EIfwyVsOcS0m/N5sQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b="e/KEu2Dl";
-	arc=none smtp.remote-ip=198.175.65.10
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcfNXyY4;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E6C1606A320;
-	Wed, 21 Oct 2026 19:03:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1E6C1606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A62606A320;
+	Wed, 21 Oct 2026 19:24:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=e/KEu2Dl
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792609398; x=1824145398;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=4h3cHqTXriG4rqXH/umCjPSbZXlkjNMeDELIzfETGqg=;
-  b=e/KEu2Dl08ReNUoKAeP6Ki5hRucwV2EtgzCzTYlm2GKMtxl8sCI4m3SG
-   7F9L3+TsPdLvn56zlIkVnhhRZgfxM6lwYxRYtBm//ea2dYdIb1UpHLCDo
-   3UYP7h5iK+Kdj4QxxbpS0TEOTWxsrlMsMSeSAEq0CkFk/kQf06WwhhGSS
-   i2/BL+3/g0QRWabpJLVgMvKMPg5MBdcCxP9QnZwXY68NIzQ6FRTsTrTqc
-   4MNVzYNkzpQSGkpPTZCmszwo3Q9Yld01H/06fZCiztM97SnYjZZLbARCE
-   KXjRjEQQeD3rcUM2PSFgUHiogdGbtf4xLy5YWJbMeaEShJ9cjkRnVEKPc
-   Q==;
-X-CSE-ConnectionGUID: JD8IOpq7Say2tkZ8PnysBg==
-X-CSE-MsgGUID: uw+R8yX8Q+OrlhAI/j36uw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1236242"
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="1236242"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 12:03:18 -0700
-X-CSE-ConnectionGUID: trES0lCxSlKF23Su1cy7Ew==
-X-CSE-MsgGUID: gEt0x1TAQ/iMhUVCFp6H8A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="3237846"
-Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 12:03:09 -0700
-Date: Wed, 21 Oct 2026 22:03:06 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Dan Carpenter <error27@gmail.com>,
-	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] iio: adc: qcom-spmi-adc5-gen3: Allocate unique ADC_TM
- aux device IDs
-Message-ID: <atkMam-XiXcrUOFB@ashevche-desk.local>
-References: <20261008031154.3440632-1-shengchao.guo@oss.qualcomm.com>
- <atWzFlOgRICAGM-R@QCOM-aGQu4IUr3Y>
- <20261021195401.6a70fe6a@jic23-hlaptop>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcfNXyY4
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C04541F000C1;
+	Wed, 21 Oct 2026 19:24:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792610678;
+	bh=b+WKeq5+AMB5ERi4rfdmh8S8vs/usV+GK7ZBlaPdQlY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=gcfNXyY4ZizdPocCqPHm3/oMOnsISZfhFts0SZgim2bOxAeo/C2Okc7ka978tS5Jk
+	 mO3+NWwbP9vYTP+onXAbz+DIVIEW7+zaZP30oici90uApWG5QE22NqKBQ7iYC197Nx
+	 tb9y3ntJUR8+jEVMM6E/XsNHRWe+n7pIZ6RvtxBzJ9TjZS6NF1rcTIeVnFAxJ6m7fW
+	 g3yYwGIX74ctfoTeBffHsU4xdyXKZ8cM4U5V58hpqJitwdsTDgNW7D6uX2FKv5bXP+
+	 0gZhMyMNFHMk54cuTTtp2G8gcbgpeOl79HOFhoLGLsxj0df0FH8MB5kpLd6JDAzb80
+	 +jCLlKeyQB/Wg==
+Date: Wed, 21 Oct 2026 20:24:33 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Rupesh Majhi <zoone.rupert@gmail.com>
+Cc: Bart Van Assche <bvanassche@acm.org>, Andy Shevchenko <andy@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, Jishnu Prakash
+ <jishnu.prakash@oss.qualcomm.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Marco Elver <elver@google.com>,
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations
+ on mutex helpers
+Message-ID: <20261021202433.0efc7979@jic23-hlaptop>
+In-Reply-To: <20261021181944.14272-1-zoone.rupert@gmail.com>
+References: <20261021052435.112686-1-zoone.rupert@gmail.com>
+	<3f41338e-fc47-4306-b68b-5a81c26027fe@acm.org>
+	<20261021181944.14272-1-zoone.rupert@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -92,28 +66,25 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261021195401.6a70fe6a@jic23-hlaptop>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 21, 2026 at 07:54:01PM +0100, Jonathan Cameron wrote:
-> On Mon, 19 Oct 2026 14:05:10 +0800
-> Shawn Guo <shengchao.guo@oss.qualcomm.com> wrote:
-> > On Thu, Oct 08, 2026 at 11:11:54AM +0800, Shawn Guo wrote:
+On Wed, 21 Oct 2026 21:19:44 +0300
+Rupesh Majhi <zoone.rupert@gmail.com> wrote:
 
-...
-
-> > > Assisted-by: LLM
+> On Wed, Oct 21, 2026 at 08:15:20AM -0700, Bart Van Assche wrote:
+> > Why doesn't this patch set CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y?
+> > Shouldn't that change be included in this patch?  
 > 
-> Applied to the fixes-togreg branch of iio.git and marked for stable.
+> Fair point, without it nothing checks these annotations. v3 will enable
+> it as a separate patch, so the fix can still be backported on its own.
 
-JFYI, this tag now is killed from documentation. The idea that the use of AI is
-described in the comments block or so.
+I think it's unlikely an generic subsystem wide (or broader)
+enablement of this will get back ported, so instead
+let us treat this as a forwards looking move.
+Drop the fixes tag and perhaps include a second patch enabling
+the context analysis much more broadly.
 
--- 
-With Best Regards,
-Andy Shevchenko
+I haven't tried yet, but I think you said not much broke?
 
-
+Jonathan
