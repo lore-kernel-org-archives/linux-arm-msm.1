@@ -1,111 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792580474;
-	b=h5myPKWp7krtCYzGJm1AF/I+espy8k42VBE1/edUyoOQrC0u7BjR/NK6aLnyHtctRiID
-	 ftEo4sv087h/KYr0u171ov0cLpitPIBZnpLhiQ8rSuS5jXIpMoL36wGyBAT7veTLYSD7W
-	 HY3xJFdvaPHHzG2Y1EUQcCB7BlafDkYj8SWlObnRGHqI/W49Geu/eab7c0lNNCzN6wHwk
-	 QuugXbgKZElB8rxuuWL9mF7OyxL2Eirl6HqhmfNRkpj2sHNTVzN9UMNanKISUwocBSwsn
-	 Cw6eTfh0Iqu+U+7s8m5hB4UZZc9oEMjQ7/u3Lz4RGBcFRhYGqpNpwZyiJKihOMlfAxA==
+	t=1792580610;
+	b=QMv+5JU7y7eh7agbqG+prsx2nR9LZEEJtl9r506OTJCaAw9e7JkA7YbqqRY3UCmAC0PA
+	 U+9zZ4gOETT82FdJVaIq7vMvdxKE7qUZtsoIrbTgBQPlbKjaiK02D75UikWtT1f2WqaiC
+	 NsbGnkZYxlL/xxvrA0JH4ytsJCdyJgYzdUXVRqpc7JBXk0G0DWPZAfstOseJ/16RzMwS7
+	 1HoV+3QV1jwpaX7IGn6XifPvmCayaDTyuZE858Trt3hhMTAavSovYqzGjkMT1VmO/rPpn
+	 BSX1Wt7mL9ti/gSpvoQjirTXCHC+ItTvo8yoG+yIX8qKsERGWRQUwJLKJfRBrKpsQPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792580474;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792580610;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
 	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=ieHFy23q8nzXaZ195Z0A67B/EMZuqN8/BFlEEwpO4ek=;
-	b=e2Bl6HSOvuy2FAsr4I+KP0JwQgGcomJvKTEJyvZ47eUHN84Qd62UioIU5Wh0YZLmCa6T
-	 A/T7eOwag5SU0O85DoCPiHF8/r8GQDWYntzSTmyGAZXE3H9X2oHJ8VW+lsBFgzNHBil1Q
-	 4QutP3f4FOEkJRW0s762k5BzO6TF0bP+dEAB+28PgxKmu+HSKs++mtgJa9o3Gi7056Bye
-	 ZaGcLxO2siTJ+eiBNMrKS2K+nmeMZY1fDCVF/31FJS125YK2lJNH5AZL2/fvGrIQAeLS2
-	 AR6y4ik6aElsZ9kEzJg7YfhuPUC3jpduzZFK3+R7XAZdiOS6/GsJta98dzR8wJIUDNg==
+	bh=Uxja2CBhb1mW7NZElmgfeGuVVftU5XvBGnIy3eg6OFg=;
+	b=IGo+KqRCI2DuvkaxNaOaRS4knAEuTMbCvPwKm+XFU0+2mtrbbmbTGd+GVysmXoNecQhN
+	 UzhHZ5yIK/04nHvxdovEt2ZH9rwhoXfBF7CinX4OQ5ME3/FG8cWR6eGgLjfQwByd0iukS
+	 O+uVwOA7LYdcCu0iYEFlB+6C6Us0pXn1ccMuG5sFGzSZ/efrFwnGNGUpBT8VAiDgFl1TI
+	 U0w0vHDc7Pk4pxTq40F67WRM7i258DXyctlSkqQMuVxlw/Onz/Eaa654HZmaVfouSjXAY
+	 kQosP5/xUkVSGNKgT8oRKUd3qb/lJ8o8BNTX0DLD0YhxNCKjdOBayx4Y1jBGskG0ukg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MBhgXHq8;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eBM2B50P;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jtZ1u0Me;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kIF3rYd7;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EF89606A319
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:01:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5EF89606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F3F6606A319
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:03:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1F3F6606A319
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MBhgXHq8;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eBM2B50P
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LA5YKX335076
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:01:12 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jtZ1u0Me;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kIF3rYd7
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69LA69HU117878
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:03:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ieHFy23q8nzXaZ195Z0A67B/EMZuqN8/BFlEEwpO4ek=; b=MBhgXHq83hx5GCDn
-	HWm/hqW7klNivdA3DkC75vnc7ODYHVPpIzCBPR//FxMDvtE1VO5nFQGB53GlcDtl
-	s+ekgbYqcSvnZKF2rHhdp9JJ5Kcgtm3I+0pi6ljMBL8aAPDhQALTAWV3P5Q9wUGx
-	qW9DskDF2rzKgr9BKqyZ6zbpLCfmqOieAduixM3Zxqjo8oEwiptAtBuDmybUajnw
-	rbLXmEQmfdriUHKkDWhaNb29mZxwocQBjxWOpZdaPe8MXJabsXqq5vxMIFLVDFIC
-	XweuuU6SP1wGYCN7ZeJaM594PK2pl1C2AhBmMD6ayWf37jwj+Ejv9h3SNQ7NYcLV
-	lY9+Vw==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hetj48cnk-1
+	Uxja2CBhb1mW7NZElmgfeGuVVftU5XvBGnIy3eg6OFg=; b=jtZ1u0MeTrjqFU8c
+	IzBl+Y+eSRCLuajfmBB0P8Ae1BXi0OKaPZjAcTxYqMPTya75nAk/x1yJVvCJQeog
+	f7OHeSSuqJHol2BUalk53HaZWPOT7b7RwbGUA4G8BCdfMlmvA+RMgAeOG9fCCN4/
+	KxbCbu1C5QWJrKQYFDFmso7AF4pm7fR+MOGlBl/mPD2UsfOMriOAWsWa+hNvgSrq
+	6c+DZpk+GcPZou9bnH5cnyxInjnM8mg6RA51jPs137BuiagQ07d0mdddZ/kTf+D0
+	7lpR8bnqqQkfWX1Eaqf5QRa+Pgt4YmXkaRjrqKlR04EMm4hAOdwX4XhzBF7n/4Eq
+	h2SMGg==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hed9v3mvt-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:01:12 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-91795e52969so1946296d6.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 04:01:12 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 11:03:28 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5eac78dbbe7so8701e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 04:03:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792580471; x=1793185271; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1792580603; x=1793185403; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ieHFy23q8nzXaZ195Z0A67B/EMZuqN8/BFlEEwpO4ek=;
-        b=eBM2B50P/giQiuDncRDVjUSMeCu1JA89HGBAFL6L944rkksBwfKr0hGMCpP65aHKV+
-         MEQ1sCu9kXiQz7W4rpwmRA+UGCwailiqsYY+ici6AnBQqhC9WuJay4se81L1zEGq4s0c
-         Tveg0NkjGMV9wt6VctI/2GBjdnmDQjAbiB/mTsq0sxKjuKd5t+2gDdUh0iXjraNcvAke
-         97bO3iLtwVvfKQjpdE29brD67UIZnXWau9cGXM8aajBxK4V/WK8hoUxhZ5BGhIwOmqgi
-         uXuPCwCbItCUHIPt4U4TjPe1EvkVygk4QZpFO/bgOJBbDOcFwZM/XLbxifhXQkQfTVUb
-         //yg==
+        bh=Uxja2CBhb1mW7NZElmgfeGuVVftU5XvBGnIy3eg6OFg=;
+        b=kIF3rYd7X2vaNTSo6aH1LWwTeHK3ZIMtr+cNOHG2iGyZ4R+6yqsdcMYL1IseBfLCTG
+         9u28SsLYgRRDXeF9NtVdF7gn/zYH9TnMtKQ036C9/qTMVkH2ph+3Hg3/FLVtSWom3hRy
+         FRuSt1NTrI7MALlGEoT1nfagPh+ogrpLF20Z8bezrCoIXSf4Mx64SNYzJlvu3R9vhM/o
+         1+NUE1f8bss4dyoh501+B9pTQmOYJrVjpLl/8bvk01UFAUTbSuW6SRiZgnEZjMKo5yoF
+         JTI/17NyYaWc8smB05fAy6WBxSSgzjqy/VheYBca6O96I896f1jQTGfUOs6u9Sr2z/1k
+         VxAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792580471; x=1793185271;
+        d=1e100.net; s=20260707; t=1792580603; x=1793185403;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ieHFy23q8nzXaZ195Z0A67B/EMZuqN8/BFlEEwpO4ek=;
-        b=jw4T47OWSGVO7u9jYMfnI3fxE50xY75sVljCPdQ2VEVrUhOgMpuTxk2P3RjL+2wKuW
-         FE10qImOS2GahfC+UK5L5s08o6B8vkPYMaBOeVlps8RfHih55pnoG9SRhIsPn9w3UEOs
-         osnAIk4wkBYrpeQ6ftxCQWJZd3bqFMpDI3ne43InSlAZCX2d+do3IIEz8Udbc4eHXyKW
-         BKq9wFbn/x8FAlL3S8BNS8eyuD+YcT4ngwg+Rhz3EhkpLv+WYDHgmy9sgF50Xf4stP5d
-         gRyTphF6yNDwXu1f2hAjcU7m1ryoMJGQDGME9AdKCT362pSTDLiYj8u/xPSGXNZv0Kf7
-         MEjQ==
-X-Forwarded-Encrypted: i=1; AKwUvBytLyaTBa/191/ZmRGhmYoh/TyOyGizpHsPnJK1gjPoYnFcndq9CkYK9beYBsQzyWUGzV8tdtTe+iXJd2Uj@vger.kernel.org
-X-Gm-Message-State: AFq9FYLA3P6AVbw75tZ2BepQN3KqKDoeWZ0Q9nO/dd82dGjSK6irQLGq
-	h0XjP5oG+f7t3oT8CTbxOonfhvTmJVkY8QlWDp2LIHP/6a7kGzzfD9X/+4qWOPdi5GF7ckpXY/l
-	43CuzU2OAfkexJFJvQflgxoC6QnZvo+y8E/69Eu0Nr+x3XLPddOp/wzQbwMiA9+6Nd9Iy
-X-Gm-Gg: AYBFou0x8hVkTJoF9tzYHqboa8Ll1XZsUOyCBlx/UD12aGcZgOSGQC76DI/8oFGECaN
-	TcdZK/85Sd9Yw9vg8hPf2f0Yh+UwYSEtDgS50d1Eg/2jaQ5jwgzcPylBcuWcKNKKnd7+n/wzz2n
-	+zA0+QEaXBKc1mX8+jTf0UxL7lpnpskZPZOZQmOGvTDYriaYkPUPvak7yOBMDfHMpMhXC7X0Vov
-	1KBcWrwzR+kcRgqfjuEGKKWa+yI570CRmjAaYqm3eZZSYGzRPJy0+2j8TGxWlR8+AeXDyEzMslU
-	Ryu28WxURJYVHWRrLgXkPZph9PP9l9uQMeXn6pVebODmoO4GAhy6qqizgK1ZpfZBxQjA3KL2w11
-	/aa6GVuMVGdPCTe9WuDk2pg==
-X-Received: by 2002:a05:622a:1aa5:b0:52e:3991:84c8 with SMTP id d75a77b69052e-5369b5536dfmr28197731cf.2.1792580471107;
-        Wed, 21 Oct 2026 04:01:11 -0700 (PDT)
-X-Received: by 2002:a05:622a:1aa5:b0:52e:3991:84c8 with SMTP id d75a77b69052e-5369b5536dfmr28197021cf.2.1792580470613;
-        Wed, 21 Oct 2026 04:01:10 -0700 (PDT)
+        bh=Uxja2CBhb1mW7NZElmgfeGuVVftU5XvBGnIy3eg6OFg=;
+        b=dcv8gmtTu05iJAxiWDghTLbgzZuV9U4dpELPZnNxFkVeVEj2nLtF2SbiojpMjx+mE0
+         KW0ZfS0BU0w4x+AW0X1oshQEjRtLZQ6ghAiV5YeCtSv2bpUh+5c+aT+Qdeu4QXjlAsOo
+         YDJC9I007eGTp956vXiOgHg8BCZfx5MB1oIvT9DBFhUSj6eF+exNhPatHSUtR6jPDot9
+         V66LIu/htBjzWE9ZyD4dSgAXbz8S9IqqUC0IFRjxbw3XS4M3rLTtH2QDZgA4PrF2Ox+3
+         rueqrcmzt67Tvo/sCUkE9ng4Xg9QaXmZePMzPWHYLgL8iBJO7yVNKKvbrvG4madOhtEd
+         iQ2g==
+X-Forwarded-Encrypted: i=1; AKwUvBwwtB8R449u48eM+4or3pTWTfTk4dJbhp3/+Mk+SogGvWp4JlO0k314+5LONnASRCOn5yX9aEHk765LbrOP@vger.kernel.org
+X-Gm-Message-State: AFq9FYJAgOpLPM9o48wfMwWsMDuXA08nF8gRdlIhs8TLJq1Nvmx4wlcJ
+	Qcb0Q1W85k3/4LoCNAM1K08fSm0weEva/ESzORahGw1IM70/bVi0/xry5iRLZ+F+cJpmHMqoig5
+	3EkaL2+WKGv3biMJ/lOpkWBYc39B+DiwfWDAHfiGBDXUOtC+xIcp1jURXQwjl+/VPz96V
+X-Gm-Gg: AYBFou2PSzoQVZejG0I8/EG5UHZ75y1tP9G+/+6fS8NtWOdTBv8KPK03jCD2ueBgGeR
+	iaCvD+tntxI4xEAxJKeDRuhA03RZeICeUz75kNX9Y3+4nzKtebusnW/HtGKCbn7KMtnL6c4UYZG
+	C0eiIK4yqyfqen3M89OGT8OkT1bTTnazx2zg66Ft4T6pHxPKQkaCEIB4cYmo9+z9x0srzDN3K8R
+	lN5ekJQMgnzd9jOwMbi8FFH9OHHeseNjdBV0Dw0ReR/ZfWA7fA/VEyYvP944UzgN/vDPpSdHjTv
+	YeXeQgUFAUxZyTcfkTJhXCjV0YgVBhRWb96A4vFyPiquqlP+wX4CUt6QfP+0rdGG5ehH9fl+rva
+	Xg4v1V/+DO2HBBrnqPc3NSw==
+X-Received: by 2002:a05:6102:3c92:b0:7cc:174b:f7b7 with SMTP id ada2fe7eead31-7cc922532e5mr441380137.0.1792580603015;
+        Wed, 21 Oct 2026 04:03:23 -0700 (PDT)
+X-Received: by 2002:a05:6102:3c92:b0:7cc:174b:f7b7 with SMTP id ada2fe7eead31-7cc922532e5mr441345137.0.1792580602582;
+        Wed, 21 Oct 2026 04:03:22 -0700 (PDT)
 Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4678e5b763sm66072366b.2.2026.10.21.04.01.08
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4678f78660sm65165466b.17.2026.10.21.04.03.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 21 Oct 2026 04:01:09 -0700 (PDT)
-Message-ID: <59888512-9938-4982-9869-5f1d0e3770be@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 13:01:07 +0200
+        Wed, 21 Oct 2026 04:03:21 -0700 (PDT)
+Message-ID: <42b2b13f-5d56-4668-bb26-c4623617f4bc@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 13:03:19 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,122 +116,59 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/7] i2c: qcom-cci: Add burst read support
+Subject: Re: [PATCH v3 7/7] i2c: qcom-cci: Build command words with
+ FIELD_PREP()
 To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
         Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
 Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org
 References: <20261016-cci-imp-v3-0-5ee7ec1ea1a1@oss.qualcomm.com>
- <20261016-cci-imp-v3-6-5ee7ec1ea1a1@oss.qualcomm.com>
+ <20261016-cci-imp-v3-7-5ee7ec1ea1a1@oss.qualcomm.com>
 Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261016-cci-imp-v3-6-5ee7ec1ea1a1@oss.qualcomm.com>
+In-Reply-To: <20261016-cci-imp-v3-7-5ee7ec1ea1a1@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: siZW9kD2yyka_nJBzdBfJnDC7mrz6Z6L
-X-Proofpoint-GUID: siZW9kD2yyka_nJBzdBfJnDC7mrz6Z6L
-X-Authority-Analysis: v=2.4 cv=N768hG9B c=1 sm=1 tr=0 ts=6ad89b78 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA0MyBTYWx0ZWRfX4hG0GWrHQgOk
+ XxRkZzL7CsskmMoRXGzkKyPwGEpBq4cAXo4EBzKZt8rguFaJkre1V87HsoTey/pzL5+kEhYTUk6
+ M9Gq9m/3sE3sOrCjw5fgd1kBPE+knPk=
+X-Proofpoint-ORIG-GUID: F9Fs3JR75v0G9YTS_q0narQ2swDZ9qsp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA0MyBTYWx0ZWRfXxqmsPekE/Gfw
+ x+n7OB912i8HQFj9YC5D8ecyswnJUfiwdem0nbj7Qb4LEkajXUnlkIwlGzfwrQqQIC7K+CCcVCf
+ llayThZ9+sSFJLWgtCwmTxycgU5V5Q9REOII80OJFSXC4Nt5R10UwYM7WijMX/CDVKRFCcSDOxh
+ UIb6/jfHODZliUQbxA1fKC+/wWlnk/2nBtY0zHqTFzgWVuOxPjAUQ9hANmBJMHJoSRHrRgQJKpu
+ vtFakJ9EKsdEoT1UWgU8pgM8zD2alYYGKsYYWE8Xi/1jJXe73+NnDNb7rreDZw4lD9FgZRiNrcq
+ TVZsAwE8QEQTqX5UVYEygWIVhHcd6j55gkX75UeomjJCP94YVbGjzCwtnd10fJRkBdwtVUBeDLa
+ 26apmhRou4Aa5YvgRvTrWQ9r+2wicJD7UlNyodQnJ0aObjeUrQZSpnaGRyaMZTNm8+ARba1F/EP
+ KzbcdJpUkD1wAUyXibA==
+X-Authority-Analysis: v=2.4 cv=I6zw19gg c=1 sm=1 tr=0 ts=6ad89c00 cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=EWxcpF3ALA2S2w6I5qsA:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA0MyBTYWx0ZWRfX6sgO7kp38VVb
- wnVk4SEq9NgGvGbqXIxB3oVE0QrVpDKGOO1tLSIfTqHJPWnOOjmnNOnLnwRR55ND0t+wvYoQJ8V
- W8YMYGMQ2AwWOopNrn4LQJ08Nj0yTPMtagsrYqA79Q4EoDakS5tSdkaPcc2w0kthBqVP7/M+Wyi
- EUZqQI6KeruPoCaJ55U9eb9tmTdJ/pKUhAciVgdbds0MYbzis6Ec+1hf+ss8/XAy5kLfZXJlJqI
- vg0ad6W3J8VvavhkC3099OVTXKs0ptAiyG3vAW9+pBOFVQMHclb1Wqj2gO+qZp7A/QsrApUUX8D
- uEyp2ZhOEzvZL0QUkfRvHgmrBQRr62YaA/7Z55hTYgt8J1p2qwEK+hEIAjjdQg7FXqhGaPKLoxy
- dokFaCsFkw69RPic0o+MovNn5r8HkZInARnWY2g29ytwg8/pCn3oUgTZNbCLcxP1DRX09O1p2go
- SwdY++ME8T6UfvVP3BA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA0MyBTYWx0ZWRfXwFo/IybgmSbe
- H1HHVdBrN11nIKUqyzU9CxE2Tq0U0Pp4QcILXaBWrVSwacmFCXKAXPgrmPeEADfKUVGHQFj/oP7
- 5H3uas8aL/P/daXuyBfDrSmUFaGOKtg=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=vtxEUVkT7waMBiOsAPUA:9 a=QEXdDO2ut3YA:10
+ a=tNoRWFLymzeba-QzToBc:22
+X-Proofpoint-GUID: F9Fs3JR75v0G9YTS_q0narQ2swDZ9qsp
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-21_03,2026-10-19_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 malwarescore=0 suspectscore=0 phishscore=0
- bulkscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0
+ adultscore=0 suspectscore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 malwarescore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210043
 
 On 10/16/26 10:00 AM, Loic Poulain wrote:
-> CCI_I2C_READ transfers are currently limited by max_read_len to the
-> amount of data that fits in the read FIFO, as the driver only drains
-> the FIFO once after receiving RD_DONE. On current hardware this limits
-> reads to at most 254 bytes.
+> Every command loaded into the CCI command queue has the same shape: a
+> 4-bit opcode in the low nibble followed by an opcode specific payload.
+> That payload was open-coded as a bare shift at each site, which hides
+> how wide the fields actually are.
 > 
-> CCI v1.7 and later support reads larger than the FIFO depth by
-> generating RD_THRESHOLD interrupts as the FIFO fills, allowing software
-> to drain data while the transfer is still in progress. When the FIFO
-> becomes full, the hardware can also apply backpressure by stretching
-> SCL and reports this condition through RD_PAUSE_IRQ.
+> Describe the fields and use FIELD_PREP() instead. No functional change.
 > 
-> Program CCI_I2C_Mm_RD_THRESHOLD to half the FIFO depth on hardware that
-> supports RD_THRESHOLD and update the read path to drain the FIFO on
-> each threshold interrupt until the final RD_DONE event is received.
-> 
-> Older hardware revisions do not support RD_THRESHOLD, keep their read
-> size limited to the FIFO depth and continue relying solely on RD_DONE
-> for completion.
-> 
-> Also emit a warning when RD_PAUSE_IRQ is observed, as FIFO backpressure
-> is unexpected under normal conditions and may indicate that software is
-> not draining the FIFO quickly enough.
-> 
+> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > ---
 
-[...]
-
-> +#define CCI_IRQ_MASK_1				0xc10
-
-This exists all the way back to 8974, nice
-
-[...]
-
-> -	ret = cci_run_queue(cci, master, queue);
-> -	if (ret < 0)
-> -		return ret;
-> +	val = readl(cci->base + CCI_I2C_Mm_Qn_CUR_WORD_CNT(master, queue));
-> +	writel(val, cci->base + CCI_I2C_Mm_Qn_EXEC_WORD_CNT(master, queue));
->  
-> -	words_read = readl(cci->base + CCI_I2C_Mm_READ_BUF_LEVEL(master));
-> -	words_exp = len / 4 + 1;
-
-GPT says: can we keep this check for the legacy case?
-
-> -	if (words_read != words_exp) {
-> -		dev_err(cci->dev, "words read = %d, words expected = %d\n",
-> -			words_read, words_exp);
-> -		return -EIO;
-> -	}
-> +	reinit_completion(&cci->master[master].irq_complete);
-> +
-> +	cci_set_rd_threshold_irq(cci, master, true);
-> +
-> +	val = BIT(master * 2 + queue);
-> +	writel(val, cci->base + CCI_QUEUE_START);
-> +
-> +	/*
-> +	 * Hardware supporting RD_THRESHOLD can handle reads larger than the FIFO size.
-> +	 * The FIFO is drained each time an RD_THRESHOLD interrupt is received, until
-> +	 * the final RD_DONE interrupt completes the transfer.
-> +	 * On hardware lacking RD_THRESHOLD support, reads are limited to the FIFO
-> +	 * size and only one completion (RD_DONE interrupt) is expected.
-> +	 */
-> +	while (index < len) {
-
-GPT says: the last transfer isn't waiting for RD_DONE
-
-> +		if (!wait_for_completion_timeout(&cci->master[master].irq_complete,
-> +						 CCI_TIMEOUT)) {
-> +			dev_err(cci->dev, "master %d queue %d read timeout\n",
-> +				master, queue);
-> +			cci_reset(cci);
-> +			return -ETIMEDOUT;
-
-GPT says: disable the threshold irq here?
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
 Konrad
