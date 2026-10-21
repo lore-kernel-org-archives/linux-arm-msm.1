@@ -1,62 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.16
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792610679;
-	b=3d2TUnXfxBqeAOfJbzFuHkyGKojIBTnURgKgEmx0o8N0sSaKlUwxB0cDTdCIig7ckbYw
-	 b+bF58PLK+hrdHbL+8rgQ0ai9yJQGgrUyQnZJrOT3fgTiiQH9cGkNDauz0VcLgc1PWW+p
-	 w0X//b/1eoc7IE5ft7p+i9AaujUBVC6sMHbWOwjEtvy+o0QiBLUVRb5QoMOCYZE/hPloA
-	 8MhJvKFqz9b6j4koFUwmU2VMsLywag0hZa2g9kA1Ib0JRWtB7FrcanI095FNjLVUurZUC
-	 GI58V7yesUKG0AZdenJDCnuikFlWze9MJXVrixd5qNcgsp7UxBMjoq6uZ/Bh7lL8Nxg==
+	t=1792611470;
+	b=eyMZP5iuLuWUxX8WzOndwNqbxWWnBMAj74mjsddiDQAKxx+0XzdCb+p6Fl0Aig8SHkR7
+	 wuHHe8zl5xhsPf4KL9//E18QxMbtr3j50YKRoaQJRrs3b+R7jeLWH7aP+edew+XYsIODm
+	 5Gk43XUzkg8MRK4+sFTDLxfzYJQydxiv4VPly2wXE0WENYFLOTIe2dLNx1gYbL25d/Fyn
+	 MnYe5tJg/24goUsGyZ0OQtqPEKMVHfrB0s5aQVAjHfLVNaEMEmxI8TkrfzEGDuTiAS8lv
+	 DjZItFVPmjqsFzsmrCfmID4UA59ICsFWzMbXFWOzau49/ghoZQ+Whq/CKkZPdz6xDKA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792610679;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=b+WKeq5+AMB5ERi4rfdmh8S8vs/usV+GK7ZBlaPdQlY=;
-	b=My1+QflzoM5iNDDKgmnCFctp0SaHxQRmGfBJubPtP3TrPfiGdndzR6GubYNvC78MRj8R
-	 rns5zO49mUK38KQSrdgYNKLCF/ZR2z5C+/kb0EbyKjh0goK7P5hwQPE8lU975BSnnTJjX
-	 rkFp2I0YDAe6ThEbOYRPWKg1oDxKc6x9/z5hGSZ1e1IDg736HD6v57JJvI/E4OY8D+w9/
-	 m2SZfPvJ9goZWAcJZv5iY1NR9TTJOlfXgA9yFivrKEyNnt3Ui8GxpAG0VnOp+h0CY2sI6
-	 NLWOVfYM1F/aMB6umP7k1eKSBid9JkU3gcArqIKdkT1i5vkuD7EIfwyVsOcS0m/N5sQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792611470;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=nPHHZPY8cs0Vhp5/Lv8tY1EjZTLznrizvwr8rpho+S0=;
+	b=2oFJ2E8twzc8IovhqjjclD+koSd55KZmc6LqX1LQdBUUz2tyOD/wLq+mdk8GumOgLRUp
+	 SdbSicbTm5wDFkYb9roc3LqcVzNrQ8Via7Mvyyie0cIc+2gO7CsQx65wsD4NsRhPtJj9I
+	 DU5Oi6kyXcQRu2khZ5jBNqzCp4Y0oLu0CbFVOTeugLW7qh9s1wa2z0xPYFahfrcJb2pa6
+	 zZ7CC5lzBpVNRh+DXxHhY5R4eTwCIf/9NDvjxkxs7N22tbs9lm3mNeCs+lJO1KnOVeJAC
+	 tXtHJ75miBA8oNyzJL+X25mh1nAZfsRG5O8kt3GzvxXurz6reMJLhoLuBmKxJ4eoWMw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcfNXyY4;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=SbHt+epP;
+	arc=none smtp.remote-ip=109.224.244.16
+Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A62606A320;
-	Wed, 21 Oct 2026 19:24:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C499C606A320;
+	Wed, 21 Oct 2026 19:37:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C499C606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcfNXyY4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C04541F000C1;
-	Wed, 21 Oct 2026 19:24:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792610678;
-	bh=b+WKeq5+AMB5ERi4rfdmh8S8vs/usV+GK7ZBlaPdQlY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=gcfNXyY4ZizdPocCqPHm3/oMOnsISZfhFts0SZgim2bOxAeo/C2Okc7ka978tS5Jk
-	 mO3+NWwbP9vYTP+onXAbz+DIVIEW7+zaZP30oici90uApWG5QE22NqKBQ7iYC197Nx
-	 tb9y3ntJUR8+jEVMM6E/XsNHRWe+n7pIZ6RvtxBzJ9TjZS6NF1rcTIeVnFAxJ6m7fW
-	 g3yYwGIX74ctfoTeBffHsU4xdyXKZ8cM4U5V58hpqJitwdsTDgNW7D6uX2FKv5bXP+
-	 0gZhMyMNFHMk54cuTTtp2G8gcbgpeOl79HOFhoLGLsxj0df0FH8MB5kpLd6JDAzb80
-	 +jCLlKeyQB/Wg==
-Date: Wed, 21 Oct 2026 20:24:33 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Rupesh Majhi <zoone.rupert@gmail.com>
-Cc: Bart Van Assche <bvanassche@acm.org>, Andy Shevchenko <andy@kernel.org>,
- David Lechner <dlechner@baylibre.com>, Jishnu Prakash
- <jishnu.prakash@oss.qualcomm.com>, Nuno =?UTF-8?B?U8Oh?=
- <nuno.sa@analog.com>, Marco Elver <elver@google.com>,
- linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] iio: adc: qcom-spmi-adc5-gen3: fix lock annotations
- on mutex helpers
-Message-ID: <20261021202433.0efc7979@jic23-hlaptop>
-In-Reply-To: <20261021181944.14272-1-zoone.rupert@gmail.com>
-References: <20261021052435.112686-1-zoone.rupert@gmail.com>
-	<3f41338e-fc47-4306-b68b-5a81c26027fe@acm.org>
-	<20261021181944.14272-1-zoone.rupert@gmail.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=SbHt+epP
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1792611467; x=1792870667;
+	bh=nPHHZPY8cs0Vhp5/Lv8tY1EjZTLznrizvwr8rpho+S0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=SbHt+epPrJL4kZHSHMCppDe1r+sHIzSjP1VvW0OpukPvht1DclKmq12otuLuHR041
+	 0RknQE8evxIKsn5MJifTVpKns/WOFvkdwWqSBxsTdYHu0tQGT16hcJCtwgjDzTYYuR
+	 WvWfaJACJ74kU8Ql9tGDRFGp27dI+uSlk+1N17EOn5tY+tguP4w3s653zrmefLbzba
+	 2V8/6uWQZX9lI0hEmmoX0v8hX5tpT2B62RxI9T/1aBZ4QQk89akhvnd3FcYb0fjfYG
+	 hYG8+0tV3WlfZlFYzZ4zNy0ba/YTwOyZQkQvsfGUdQ5XUALHimN5bhqbAEbUvqPjDQ
+	 gbVx3umMmHIIw==
+Date: Wed, 21 Oct 2026 19:37:45 +0000
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, Saikiran <bjsaikiran@gmail.com>, Mark Brown <broonie@kernel.org>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] i2c: qcom-cci: Suspend the controller 50 ms after the last transfer
+Message-ID: <179261145907.36927.5158021314822941179@pm.me>
+In-Reply-To: <CAFEp6-0wmUYhcF+_nv8U3WovxyHVJJFs1FWfN8xb9ogMOxpBRg@mail.gmail.com>
+References: <20261020193946.51478-1-birk.skyum@pm.me> <20261020193946.51478-3-birk.skyum@pm.me> <CAFEp6-0wmUYhcF+_nv8U3WovxyHVJJFs1FWfN8xb9ogMOxpBRg@mail.gmail.com>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 36a95b9b0d8e66052e09ef6d37b56decf1c0c559
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,25 +64,51 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 21 Oct 2026 21:19:44 +0300
-Rupesh Majhi <zoone.rupert@gmail.com> wrote:
+On Wed, Oct 21, 2026 at 9:44 AM Loic Poulain <loic.poulain@oss.qualcomm.com=
+> wrote:
+> So, no, we should not rely on runtime suspend/resume timing as a
+> workaround for this. That approach is inherently bad and fragile.
 
-> On Wed, Oct 21, 2026 at 08:15:20AM -0700, Bart Van Assche wrote:
-> > Why doesn't this patch set CONTEXT_ANALYSIS_qcom-spmi-adc5-gen3.o=y?
-> > Shouldn't that change be included in this patch?  
-> 
-> Fair point, without it nothing checks these annotations. v3 will enable
-> it as a separate patch, so the fix can still be backported on its own.
+Agreed, I'll drop this patch.
 
-I think it's unlikely an generic subsystem wide (or broader)
-enablement of this will get back ported, so instead
-let us treat this as a forwards looking move.
-Drop the fixes tag and perhaps include a second patch enabling
-the context analysis much more broadly.
+> Have you been able to probe the CCI I2C bus during resume? It would be
+> useful to see whether there is any activity on SCL/SDA and, in
+> particular, whether either line is being held low.
 
-I haven't tried yet, but I think you said not much broke?
+I don't have a scope on these pins, so I read the pad levels from the
+TLMM (gpio235/236, aon_cci) in the driver, on 7.3 without this series
+and with SCL stretching on (MISC_CTL 0x133):
 
-Jonathan
+- When the controller suspends after the sensor powered off, both
+  lines read low (13 of 13). The unpowered OV02C10 clamps them.
+- At the first transfer after the sensor powered on again, both read
+  high (114 of 114).
+- At the 100 ms queue timeout both still read high (86 of 86), with the
+  queue on its first command (CUR_CMD 0x08010339, CUR_WORD_CNT 1,
+  EXEC_WORD_CNT 3, REPORT_STATUS 0) and IRQ_STATUS_0 at 0.
+- After cci_reset() the next transfers go through.
+
+So nothing holds SCL or SDA low when the transfer should start. The
+master doesn't start until it is reset.
+
+> I wonder if enabling SCL stretching support could help here.
+
+It doesn't change it. Restarting the camera after pauses of 0.05, 0.1,
+0.2 and 0.5 s failed in 19 of 20 cycles each with 7.3 as released, and
+the same with Hitesh's change applied. After 1 s pauses it was 13 of 20
+without it and 15 of 20 with it.
+
+What works without depending on the autosuspend delay is retrying a
+message once when it times out, since cci_run_queue() has reset the
+controller by then. With that retry in cci_xfer(), the reset on resume
+and the 1 s autosuspend unchanged, all 120 camera restarts started
+(pauses of 0.05 to 2 s, 20 each). 91 of them hit the stall, and every
+retry went through. The cost is the 100 ms timeout, so a restart took
+about 500 ms instead of about 400 ms with this patch.
+
+Unless you'd rather see it handled elsewhere, v2 replaces this patch
+with that retry.
+
