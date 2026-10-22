@@ -1,69 +1,69 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.133.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792662467;
-	b=a6G0AfUEdySFU1JhRDgrUwQmi7YJag3PdZOWH9nkwsOiJm8OZGYRB9RAczV2jGH5Ichy
-	 qqQheCwkhje6KhsWC9w/Wx6kyXmpzmttSSyM0xG/GuL2hbJ6OQbtON8RQD1lgKmnbSQhz
-	 UscElFXj9TX2Ta7hvplZB0jWZ4X5mxEelfVGzIclGsi3xGUoKvXQcAGU6GfOA7vJWXrGC
-	 rjqXYmRWENtgb+4lYnltcigrLeJaTwe5TGes6oQHHt1V16uLl4Euhrt7WG+mMf/JE4lBH
-	 u4Nr0gggNOn6zCt28HqLxsoT2fXfbsIJwIw7hmPLP+3cqcptMaufJum4v1KpFTI/3Zw==
+	t=1792662471;
+	b=n7j2X29yBO9rd3ERmCbmm5CBQ7OJgZNPiUkVLzGHoxRvqz4h8VoQcKsrQnT0DQm5BFjO
+	 zkAhLWl2xpI6CJCK0UBBHxY781WO0ZcscOcmaRTyXRRUcLSoH9amqW5pXOJJarppBs/fd
+	 ijbDttaVm8vwZD3Lz+OnVUlsPlZKacz5ovXqMXQ3P0/QU59BMWh80NV6LqpatFzAw7QIV
+	 msegQ0UiAR5k06E62n2oarC12nG5Asca4cnbPOE5GAYpuaSUrkgxbkHveFFIcK9/6uC4v
+	 bzr+8jgYzaP4lu7noVOYuFL/LVt0ShsGhcWzkfSsqn7f+78jYjxgIgmEb9TVvQ0WGxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792662467;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792662471;
 	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
-	 X-Mimecast-MFC-AGG-ID:Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Developer-Signature:X-Developer-Key:X-Scanned-By;
-	bh=B5BT9RkKuWGlJFAd06bfGaLdbPk5O7hiPF7RMVoDruw=;
-	b=hIDi4qJhwU1N62bfprYWJCDnI4QKldffwzacZPedz22zDtkNq7VMccUrW8YF6dlI9+HK
-	 ipG+JKnIQgoWtV56+yd5WISLyG3mg8oQFY71XzWRgumGVxEBE1nop9ch2uQ6lF53J2rAE
-	 v0+sMryv/fkLHdR8eAi9POS0U0Y1/367oaAh0qfIylxghwhnHehoJKl8xLq/OE3qm62H2
-	 1+WeiFQYDUHYbSZT19QRKxZWIQ53Yp133VoQP42s7WaHj0voN62KQToHy2DX+OpY78U11
-	 GSI7KxPmn/++vsbKgTHaDb+g1Q5QqBDJQy8hn2mBLwq1RdHtmAqICOuI47Jx3DCq7YQ==
+	 X-Mimecast-MFC-AGG-ID:Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key:
+	 X-Scanned-By;
+	bh=2DRAmGofNeMfLXcJ+mf9ngVH2HMiQRfIyCAaYakYw/8=;
+	b=UtMDEyfF0I2mZeupf+QG+ynam211WIeCQpTn04Cf5gSlydixazKs/dlN0Fcr/enVDmBa
+	 MB/G+p56qx3CHaflDAKno7Iy1Y9LIwmzPQ2WzbS5c+Zl2jwM9qq8ZhVdiYj3qA3652AJk
+	 svq9S/WHltl2Ifk09s1bHaHzSUZ2FROB+fmGRLMfhwLx/gK6tJzzTxiKOcPwIiB2Av2FC
+	 Ogukz0nU0RQt/OetbRTzRno4jfwU5F9K9Udv1ZxCoXYUVPThgGeDsfPIL5KEZE/56GK0w
+	 a9jiTgqGRosHwUkEPxrqYSJ2hXnrsZlu0TUsoMEqVsmKStEYWlXM3/PGuSJ0YB/5y1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=redhat.com;
 	spf=pass smtp.mailfrom=redhat.com;
-	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=V9wtUbJ7;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WDJYMDJq;
 	arc=none smtp.remote-ip=170.10.133.124
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4632B606A329
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:47:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4632B606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47005606A337
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:47:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47005606A337
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=V9wtUbJ7
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WDJYMDJq
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792662466;
+	s=mimecast20190719; t=1792662470;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=B5BT9RkKuWGlJFAd06bfGaLdbPk5O7hiPF7RMVoDruw=;
-	b=V9wtUbJ7zwKsADa7g05xVVhleb8lAyK5sZN9s+GG2wdXkAG7MR65Yagc39j965Pi2LcH+o
-	VLcv6NCXiQZ9j5LgpWrgrGchG1Jg5R9Tzv1ZjBbfAr3RHujetzehpo/Y4jpj5WHd3E2Eyc
-	94nKSOOuL63I63jq2bFi/PtP0AUUwp0=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2DRAmGofNeMfLXcJ+mf9ngVH2HMiQRfIyCAaYakYw/8=;
+	b=WDJYMDJqhujvhYhwLk29oIBvQ38QDGJIwteE4Z8LqGdp96NMi4x06KOwk8P+QSEY+UZudL
+	MgcRFSqCnhMM955AnDHtCGoI8LN/jPk5ygAABWbgt9TkGoQ4bz/9mE6aluiNd11EYGExfN
+	q1t7WDUa7BUitjQMjrCo3uAFUV8Ew/I=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-216-BhjNJxLeO_eH0z9Jzr2VMA-1; Thu,
- 22 Oct 2026 05:47:40 -0400
-X-MC-Unique: BhjNJxLeO_eH0z9Jzr2VMA-1
-X-Mimecast-MFC-AGG-ID: BhjNJxLeO_eH0z9Jzr2VMA_1792662459
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-668-hZsH7lK-M2qV3CGJC6vNLQ-1; Thu,
+ 22 Oct 2026 09:47:45 +0000
+X-MC-Unique: hZsH7lK-M2qV3CGJC6vNLQ-1
+X-Mimecast-MFC-AGG-ID: hZsH7lK-M2qV3CGJC6vNLQ_1792662463
 Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 4A0AC1955E87;
-	Thu, 22 Oct 2026 09:47:39 +0000 (UTC)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id AF2931944B07;
+	Thu, 22 Oct 2026 09:47:43 +0000 (UTC)
 Received: from aesteve-thinkpadp1gen8.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 23B7746C;
-	Thu, 22 Oct 2026 09:47:36 +0000 (UTC)
+	by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id D52D646C;
+	Thu, 22 Oct 2026 09:47:41 +0000 (UTC)
 From: Albert Esteve <aesteve@redhat.com>
-Subject: [PATCH v4 0/4] Add automotive SMEM hardening for Qualcomm
- platforms
-Date: Thu, 22 Oct 2026 11:47:20 +0200
-Message-Id: <20261022-port-smem-v4-0-b0baf39c6e01@redhat.com>
+Date: Thu, 22 Oct 2026 11:47:22 +0200
+Subject: [PATCH v4 2/4] soc: qcom: smem: validate private entry list walks
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,103 +75,163 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2XMSw6CMBSF4a2Qjq3pk7aO3Idx0Kd0gJCWNBrC3
- i3ERIjDc3O/fwbZp+gzuDQzSL7EHIdnHezUANvp58PD6OoGBJEWSazgOKQJ5t73UHAsrRBWMcx
- B/R+TD/G1tW73uruYpyG9t3TB6/VbIWhXKRgi6LDSjAcuqQnX5F2np7MderBmCvlRhdiekkqNY
- Uo4Ry2T5o/SHSUHSisNxhKvJdYtZwe6LMsHNmhY4xkBAAA=
-X-Change-ID: 20260819-port-smem-7518c77c9415
+Message-Id: <20261022-port-smem-v4-2-b0baf39c6e01@redhat.com>
+References: <20261022-port-smem-v4-0-b0baf39c6e01@redhat.com>
+In-Reply-To: <20261022-port-smem-v4-0-b0baf39c6e01@redhat.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>
 Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
  Albert Esteve <aesteve@redhat.com>, 
  Sarannya S <sarannya.s@oss.qualcomm.com>, 
  Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>, 
- Sudeepgoud Patil <sudeep.patil@oss.qualcomm.com>, 
- Tony Truong <tony.truong@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792662456; l=3065;
+ Sudeepgoud Patil <sudeep.patil@oss.qualcomm.com>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792662456; l=4316;
  i=aesteve@redhat.com; s=20260827; h=from:subject:message-id;
- bh=HkznHTYzrDwmySwFPgBC3n2BHVdhiWisXElpepb444Q=;
- b=kRYveuH2OUaGhkE/IeyLny8F5eX4Or9g177lUEReoZitbghA7mDVNqQuWrbHZG6gdV8u0sI0y
- YJrFsi4x/g1D3RuqKmxMshBwNpMq3OblzZKpr9N1jxA5vfP6TIydwTx
+ bh=mE91XEcqtFNyJt+Ikaa133Ok/DmRK1QvrgI3AdRArv0=;
+ b=+H/ylY8IBC1ejcjNzjdM9fK1rnNUWbpmijO0Op2ti01/5cMjJCZAF9WL9/ioCdzQUlsm+nCe6
+ U+dbWr1DvXbCKrPBOCSL+TvvsHg29f73W+KiHe4fnWCtSMO+3TvrRX9
 X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
  pk=zI2RBeZgocwYm3AkJW4CtjoJnKoDZrfBl1xe5Ed6h+U=
 X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
 
-The Qualcomm SMEM driver manages shared memory partitions used for
-inter-processor communication on Qualcomm SoCs, including the
-automotive SA8775P platform. Vendor trees carry additional validation
-and partition-enumeration logic that is not yet present in master.
+From: Sarannya S <sarannya.s@oss.qualcomm.com>
 
-Patch 1 adds IN_PARTITION_RANGE() for pointer+size checks against a region.
+When walking private entries, use the uncached/cached free offsets as
+the list bounds, require room for a header before dereferencing, and
+reject a next pointer that does not advance.
 
-Patch 2 adds bounds checks when walking private uncached and cached
-entry lists.
+Skip the cached list when the cached free offset is at the partition
+end.
 
-Patch 3 validates item payload size and pointer once a matching entry is
-found.
-
-Patch 4 skips multi-remote-host partitions during enumeration. SMEM
-now supports partitions involving more than one remote host, but the
-driver does not implement that case yet.
-
-The first three patches split the original vendor boundary-check change
-so each class of condition can be reviewed on its own. All four are
-based on public vendor patches from Qualcomm [1][2]. Adapted for
-master. In particular:
-
- - Dropped the xarray partition rework, which is already present in
-   master (79602b750b96c, "soc: qcom: smem: Switch partitions to
-   xarray")
-
-Built on master (Linux 7.3-rc7), and tested on Qualcomm SA8775P Ride V3
-board. SMEM platform device binds successfully, socinfo reads (soc_id,
-revision) return valid values. No WARN or canary errors observed.
-
-[1] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/3e521f2641c8f01f00fd74a088206942ce23d6d4
-[2] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/842dd28b0276b3824a607e067b3c20e266bcf230
-
+Signed-off-by: Sarannya S <sarannya.s@oss.qualcomm.com>
+Signed-off-by: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+Signed-off-by: Sudeepgoud Patil <sudeep.patil@oss.qualcomm.com>
 Signed-off-by: Albert Esteve <aesteve@redhat.com>
 ---
-Changes in v4:
-- Updated email addresses in SoB and authorship
-- Updated IN_PARTITION_RANGE definition to use uintptr_t
-- Changed while loop conditions  to `<= end` to avoid
-  rejecting headers at the boundary
-- Fixed post-loop sanity check to use cached_end instead of phdr
-- Rebased to v7.3-rc7
-- Link to v3: https://lore.kernel.org/r/20260924-port-smem-v3-0-fbc2ea81a654@redhat.com
+ drivers/soc/qcom/smem.c | 52 ++++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 38 insertions(+), 14 deletions(-)
 
-Changes in v3:
-- Rebased to v7.3-rc4
-- Split the overflow/boundary patch into helper, list-walk, and payload
-  validation patches
-- Fixed qcom_smem_get_private() while loop condition
-- Fixed indentations
-- Link to v2: https://lore.kernel.org/r/20260904-port-smem-v2-0-bb497dd3c48b@redhat.com
+diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
+index 36a4a10f3aec..a6732832e2c5 100644
+--- a/drivers/soc/qcom/smem.c
++++ b/drivers/soc/qcom/smem.c
+@@ -422,6 +422,7 @@ static int qcom_smem_alloc_private(struct qcom_smem *smem,
+ 				   size_t size)
+ {
+ 	struct smem_private_entry *hdr, *end;
++	struct smem_private_entry *next_hdr;
+ 	struct smem_partition_header *phdr;
+ 	size_t alloc_size;
+ 	void *cached;
+@@ -434,19 +435,25 @@ static int qcom_smem_alloc_private(struct qcom_smem *smem,
+ 	end = phdr_to_last_uncached_entry(phdr);
+ 	cached = phdr_to_last_cached_entry(phdr);
+ 
+-	if (WARN_ON((void *)end > p_end || cached > p_end))
++	if (WARN_ON(!IN_PARTITION_RANGE(end, 0, phdr, cached) ||
++			cached > p_end))
+ 		return -EINVAL;
+ 
+-	while (hdr < end) {
++	while ((hdr + 1) <= end) {
+ 		if (hdr->canary != SMEM_PRIVATE_CANARY)
+ 			goto bad_canary;
+ 		if (le16_to_cpu(hdr->item) == item)
+ 			return -EEXIST;
+ 
+-		hdr = uncached_entry_next(hdr);
++		next_hdr = uncached_entry_next(hdr);
++
++		if (WARN_ON(next_hdr <= hdr))
++			return -EINVAL;
++
++		hdr = next_hdr;
+ 	}
+ 
+-	if (WARN_ON((void *)hdr > p_end))
++	if (WARN_ON((void *)hdr > (void *)end))
+ 		return -EINVAL;
+ 
+ 	/* Check that we don't grow into the cached region */
+@@ -605,7 +612,8 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+ 				   unsigned int item,
+ 				   size_t *size)
+ {
+-	struct smem_private_entry *e, *end;
++	struct smem_private_entry *e, *uncached_end, *cached_end;
++	struct smem_private_entry *next_e;
+ 	struct smem_partition_header *phdr;
+ 	void *item_ptr, *p_end;
+ 	u32 padding_data;
+@@ -615,9 +623,14 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+ 	p_end = (void *)phdr + part->size;
+ 
+ 	e = phdr_to_first_uncached_entry(phdr);
+-	end = phdr_to_last_uncached_entry(phdr);
++	uncached_end = phdr_to_last_uncached_entry(phdr);
++	cached_end = phdr_to_last_cached_entry(phdr);
++
++	if (WARN_ON(!IN_PARTITION_RANGE(uncached_end, 0, phdr, cached_end) ||
++			(void *)cached_end > p_end))
++		return ERR_PTR(-EINVAL);
+ 
+-	while (e < end) {
++	while ((e + 1) <= uncached_end) {
+ 		if (e->canary != SMEM_PRIVATE_CANARY)
+ 			goto invalid_canary;
+ 
+@@ -639,21 +652,28 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+ 			return item_ptr;
+ 		}
+ 
+-		e = uncached_entry_next(e);
++		next_e = uncached_entry_next(e);
++		if (WARN_ON(next_e <= e))
++			return ERR_PTR(-EINVAL);
++
++		e = next_e;
+ 	}
+ 
+-	if (WARN_ON((void *)e > p_end))
++	if (WARN_ON((void *)e > (void *)uncached_end))
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	/* Item was not found in the uncached list, search the cached list */
+ 
++	if (cached_end == p_end)
++		return ERR_PTR(-ENOENT);
++
+ 	e = phdr_to_first_cached_entry(phdr, part->cacheline);
+-	end = phdr_to_last_cached_entry(phdr);
+ 
+-	if (WARN_ON((void *)e < (void *)phdr || (void *)end > p_end))
++	if (WARN_ON(!IN_PARTITION_RANGE(cached_end, 0, uncached_end, p_end) ||
++			!IN_PARTITION_RANGE(e, sizeof(*e), cached_end, p_end)))
+ 		return ERR_PTR(-EINVAL);
+ 
+-	while (e > end) {
++	while (e > cached_end) {
+ 		if (e->canary != SMEM_PRIVATE_CANARY)
+ 			goto invalid_canary;
+ 
+@@ -675,10 +695,14 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+ 			return item_ptr;
+ 		}
+ 
+-		e = cached_entry_next(e, part->cacheline);
++		next_e = cached_entry_next(e, part->cacheline);
++		if (WARN_ON(next_e >= e))
++			return ERR_PTR(-EINVAL);
++
++		e = next_e;
+ 	}
+ 
+-	if (WARN_ON((void *)e < (void *)phdr))
++	if (WARN_ON((void *)e < (void *)cached_end))
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	return ERR_PTR(-ENOENT);
 
-Changes in v2:
-- Update patch 1 authorship to Sarannya
-- Update all emails from @quicinc.com to @oss.qualcomm.com
-- Make smem.c copyright yearless
-- Link to v1: https://lore.kernel.org/r/20260820-port-smem-v1-0-d19a45f583bf@redhat.com
-
----
-Sarannya S (3):
-      soc: qcom: smem: add IN_PARTITION_RANGE helper
-      soc: qcom: smem: validate private entry list walks
-      soc: qcom: smem: validate private item payloads
-
-Tony Truong (1):
-      soc: qcom: smem: ignore multi remote host partitions
-
- drivers/soc/qcom/smem.c | 110 ++++++++++++++++++++++++++++++++++--------------
- 1 file changed, 78 insertions(+), 32 deletions(-)
----
-base-commit: 7be4bc52fd9e0e55dc9a2e0232b89427d2c4b614
-change-id: 20260819-port-smem-7518c77c9415
-
-Best regards,
 -- 
-Albert Esteve <aesteve@redhat.com>
+2.55.0
 
