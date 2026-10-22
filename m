@@ -1,88 +1,144 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792673700;
-	b=yPDB1sG+i3X3NMvoAvJJt2NGtlr4IKnikTLB7H+125siXWcGV7BaNZBnZG0U93PO7adx
-	 rYVI53Mf4U2C6JXmLxMmfgGcW6+C4aKD+scWzST2oRr96mmyH4kLRaHOApJaB5oxXNmlI
-	 iMMVMUSlCknAn01IZLpzlxyO14MZDziDHiAYgo6bRsbfKJOWFGL5fE51C4u8diSyxSvLW
-	 biw7sowzcWURnZPlFALxMsspDsMlxcqcThTjVl5y/+gwUyZELRL1Gg1vDBPGYV7EC44Nj
-	 Jre6C0roPBlpvNvWd4d6zL0Fib4SZjGZdQv+v7/2JXnxSgsrV3PXzOCWFNLnhpdpsyQ==
+	t=1792673736;
+	b=udQ08XQODVPer6AssDzy2JuWj7e83ID8ZA98f19RYACLoCCfEgQFRS7evEh32L/iXP95
+	 tThz/ERZLgqB9zrLtJhmDfVQC2qk0bbJmm5VoNsFP9aMoj6CyC0TUA5WghDLhXYTy6IkL
+	 tL2qNlrSQizjN4T51IZTJXdP2B3OhOQdfX7NpD6Sg9pqouJYWbsiC6LaRWA4/97kgylPW
+	 30kk5bB2gYz4FNgFkQZMzkr0Al+WQNQ4XiFicTfQQPSz3Smt+flFE0TT2nxr6WTO/9lrP
+	 9BGs6P1K81CqbhXnbrLKvj+hjg+zNNiaohTfPyYo7ZtzKVECOtHt8gz5fVLBe5IvN/Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792673700;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=jYF7S1s7Ov9hCjAhKpbMqkQvqhCJSe4k6JebACUrQ0U=;
-	b=NdHyud+WCBroyXHPHxXPgnyTtTV59LhBHm7hGyOsZFH52KKXo07tksE7sp5Fn4DVOBhD
-	 kZywOHK9rRMAz60kXnygkfgdyPS5rMtAcZuJPrJN2WWTAjRkFU5JWOMCo4BG0zRSlbtVw
-	 dwZxzzwLL2J6upnlWOS1KAV6NR98TxCZCxsOkU6JNXE1eoiyleVXWUaXplL+O3MkMvx0Z
-	 xZj5OJ/UbN1zEA5xkUTnmGWi9j0FpI8/YXl09bMOZIuFUTsCQuREhBSFvVYRYH8TjNpZW
-	 uG1fa/VDPSKKOzRTCyGKh22CaCkI5SVI+Y9kkLu4wD1dX4fEDdPrqeZ0zH3jCakDkAA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792673736;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=leDyTJY9NS6Z1+Njn4Gg8waWet+YoE03GVarnhfMHY8=;
+	b=4zYW5l7jsEqj2WVV75+MJ+KASdVRkvgqDaDsxvFCKHgwts2JfbmLDzyrieSb4Ca0mbIA
+	 ucbz2pNZrLKAJiJ+AEd6i22ilXaayFpv+771fB+I5jNzCUK13hEUrNbN2taOeWODt6HUk
+	 RsctuL3UO8D8b7rZsj1TTYP/N6YBr1zU9OAMLGRNEAV3qwJvq5yPDlX7iojLlAqyBoPfJ
+	 i1Xvkj0TL3zqxy1JhbcFL80DXJcQS1fskBQWSbVaCKzLAo0oG05W7BDf8m/lAH1CwbLSH
+	 RmttJKFVtaElSOBooaKlDT7v9Niy9VtjCQwrzBEb0Zxe9dbiiG+wDe6Syx7t0gZnD3A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="Tf/UrPXS";
-	arc=none smtp.remote-ip=209.85.128.50
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ewbtfGhy;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TAAE2GqQ;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BFC7606A31A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:54:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9BFC7606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14153606A31A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:55:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 14153606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Tf/UrPXS
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a20bde60a0so3824325e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 05:54:59 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ewbtfGhy;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TAAE2GqQ
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M9xxXY1962207
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:55:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	leDyTJY9NS6Z1+Njn4Gg8waWet+YoE03GVarnhfMHY8=; b=ewbtfGhyd7uCDjsG
+	8gynG80J5ZuMmR+WohY/K1VLHL9vQryvjtE7EMyqMJk+UA1FEQ/AfDCY46e0Dwou
+	T4pD5E4yBgLXRj+w/kt9SYkJeUwuND4LE6WsFq2gtcEc5XaXewfc+7nSJeLuHczi
+	Im1ZbgE5JM9T1q98t2be0vbpCy/YKzMhbd6/BpfT3wlo545HgUGouS6IXdhgV8pb
+	i3VyUjaLtkWc9WwDAgvxGVPNkHx1+Ua4+oy0RHGDsQsxuwp2dhQbXQz9Uw/1Rp9S
+	qwOm1ieJRfE+UaR4tDky7FazqQti4xZVVZMdtJ2YtkimqwXvatji3BgL+xP0mX0N
+	dg5EzA==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93ake4n-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:55:29 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e82060977so202419785a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 05:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792673698; x=1793278498; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jYF7S1s7Ov9hCjAhKpbMqkQvqhCJSe4k6JebACUrQ0U=;
-        b=Tf/UrPXS6OMKvW6NT4sd1MVRCIhvkTZbkk2B3znuVBpcASONX6lht3nvJq94UwT9cp
-         U1gdOal3613SHEmj2uMk/aymgbYEYU/YtNQASzO0343AxXAoKuM0vSBu0Xsc5RnXUHcU
-         /mX0yZTImozVkLJ49VAm1wXxUCIYAHAbu54l7CtCPHdeXYFsIKuAO3E3hxL2lgh2AF57
-         hqpO1MCoO49LUQy1LYqJ/MKZ/SlkdI8/P2ul9BdL6l6FF+RPw4SvxY9FGG3v8ABwJHZ3
-         eM0W2VqBDwul+r7UiaASn6iGxOVU48cYXVgvfC1Six3ivjbvA2ShQPM/d9+dU6fAlmux
-         5zYA==
+        d=oss.qualcomm.com; s=google; t=1792673728; x=1793278528; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=leDyTJY9NS6Z1+Njn4Gg8waWet+YoE03GVarnhfMHY8=;
+        b=TAAE2GqQzoniE4biKzCA9XkoX7xLXJAacobrlWkoyXuMeVZ12SoO8Hj+UqBB4mYSSd
+         JTv38fWH2YeyxrGs5ZAmGREkOusXR9OXxmw4OeGMT90Zm0kYpc+IBtz1jtQTM5KmN0h6
+         V3XXGvel5cI1l3jz1zgeu+DCgMSlC2adxCEBO4ZRxtw8cx1VJ9kwP9B667jez2tuLG6J
+         lyvr6EO51AndiXovFGbljebBIiW1rEvmXySWGcuEU6T97zY6YGa2M+mxmHZ7puFGnkgA
+         bN3xjMfQUmODD5uXSj0LB6XOF6EPXmA/sWRXzwbXcuQGkWfYZH7x+vkHKUBcK9zMkZ9b
+         WEiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792673698; x=1793278498;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jYF7S1s7Ov9hCjAhKpbMqkQvqhCJSe4k6JebACUrQ0U=;
-        b=MfPurMlVOftWe+gap+E8+3M3ojJc6+CnTbje8dYi+cNwSqSBsAblv7Osjh/It+6IlE
-         GF2+PleGxdngOhwJDUBbAd2RMDVno+wwyhKdKldgQhboAlSgdoUTCAemb+ruwvF5Bwn1
-         nPl21VEy8U5w0F126V9Dxe9EmDch5S9kDl/ylmvGZsBd1nJbsGNjbXDdSIMEADzjrHjc
-         RY3lKHs6+t8Y0GuaFzfsA27iWZEQPnvvR/mdojMKBoTljrFT5S9X3j/KRzWy7FtmIhTG
-         wqqwaCW1DBHBTrPv1C99F5W3wcIBZmNhhn8oCc9eB+0V/shaq/hIEGxtJrx0KUnZBkAT
-         aXyQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx1EKdiNUj2/EcW3d0e4XlgGt3kCOnGpq0jnM/vLGnvW1zh+rz23Savf+rF+5G8Tk7HEBz+QpqYOlFWncaQ@vger.kernel.org
-X-Gm-Message-State: AFq9FYJQJY1curhSmt9PE0OuWc2qZNx9+06jDTpmbxD30G0CW12Wc3ql
-	whPkLPVolwVFpsXiFEiYQQ8WORF132jecuq58czusVCk497xiV2FaYc=
-X-Gm-Gg: AYBFou3XwU5KkqGhziqB7lfLAfUvbVg2W9gNwrPYe7uHee4tcyDiU3tQMFNez0S7MYi
-	6XPI7N+wvLO1j16llVJgOk5gcadl35+9r98vEZpOCvsBXyurhwZg+O7dhdSqVcqYEcyiQwsfcZz
-	me7wTaXFmx11+zAYxHnYCrbQW3ty/8ksNauZGTzdDTBLOfjfs5iSg2ioczjloOd3wHd00P60ATM
-	KB5F3Wasb3Tvw3/JTYzK1+GEk9+kdDaLNktG5z4XOvxOh6/2KDCiZt1SVuHT7xfL+c+XEAaOdlK
-	NXm5fLHmVbe4QLf0v0SaZNtXCdjuJUCMB56xQx78WfZ6G+rKZkJDL9d8/8qL8H7sLE90XEdOMGB
-	7PvZ/9dUAbKbQ1cKGiwUxRFbpa9/lJHFYWOb25om4JZEzImuznXx+gG/Gf+IpXfQ+enf273vu3X
-	IV+frRgsXFHlF8pM8UJb95/7w8aIzTRdxDrEbvpMhIOpGx9l7Sn7J2qm3idiOF+O+0HzRTCGAcy
-	S4t6iZd+WVpTsUD2eufBBsQPSkjFe+yg6FpSR7N1EYmQqr4IsDH1olf7PGFwasmqdYj7257bVUs
-	kpJT93WkSjcY7jwNbrZjTlo2NZo1VOw8Ca85
-X-Received: by 2002:a05:600c:1c2a:b0:4a1:e57b:667c with SMTP id 5b1f17b1804b1-4a1fdd4fe80mr121774905e9.26.1792673697832;
-        Thu, 22 Oct 2026 05:54:57 -0700 (PDT)
-Received: from ?IPV6:2001:b07:2ec:601d:4b26:1672:75c7:805a? ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a203a447c8sm68550055e9.12.2026.10.22.05.54.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Oct 2026 05:54:57 -0700 (PDT)
-Message-ID: <1f6db59c-b7a9-41a1-8022-6713365fa09e@gmail.com>
-Date: Thu, 22 Oct 2026 14:54:53 +0200
+        d=1e100.net; s=20260707; t=1792673728; x=1793278528;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=leDyTJY9NS6Z1+Njn4Gg8waWet+YoE03GVarnhfMHY8=;
+        b=oMEm+QjI6KC984BCDJWk+CFQUKmB6oT3ZzqmnUbjZKaWEo+tf2U2g9PFKfQBF7anfl
+         3/hJykWERKp0pJowxKlqnPbjLsNNW9Nx3NsWeB56p0IOVm70IbB4vmYg82lxIMXPcxUh
+         6v1vNMXIDuayhwSV3ukihuOvTtzMUue01pUAigbmXjUSI2aPqsGojR9XyDr2FoqJyNuR
+         HobNiy4Ad+m/6IxJjuPVTFl9OFLXJxlqEakuaEca5d4QYmF5k7/F7L1cX5gyMtr/Lbuh
+         PvFd/IHsC2E7U3Fgq1e7e1wXLF9+QqaNgXV7uCi1/YhzVE20vKaQbTZEX1zKbeQ1koka
+         ZWtQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxDrS4VoAxhSu0ShYd+DXz5lzBRXDXbbIjKNtyy0CUtPHaQI/6XQkcLNXAiatkQx8Gkt8W8zA7pLqdiM+OX@vger.kernel.org
+X-Gm-Message-State: AFq9FYLjeJZdT6SZ/ZGIuzNfGleQs76gdtTqDsgJSCcqHtcdu3qHvLmR
+	7ytPMwPodGrI7vaqZQh2IoKdXPXIM/4HzeWfCyFtvKi5ODlJDwpTPRhBzjrjodCAUwSOFG52NGr
+	5MIAoxwP8y1ZhWM13Qlg3s41dYxTvNfNAt4GsscJEbW9ND8a3qnOjKbr8M2Lp+RSrdyij
+X-Gm-Gg: AYBFou2D9RJDBIiv3RmtDMMNFLQVbw3q8DLGS/5v1WrOm+a0QkOjzQEKjTnsarw7G7S
+	88lTUgeasdvT3ajFsyKacyrEQi5q1MPQmj9DwesFgQpEuEbXIWDhK/Cu0JsUVJD356I4XqjEQzQ
+	xby9PMuWTnNtQdNi5Jq6pnXMxPb+SE8iS063NubpFhULiQSjAojgI6Dl4pyKVF5noGDN2ToFrKt
+	rgtDkfpkaS0G5VbfYyMinMkTbKViLKC8vEfd/VEUyKlWnguQOTAFI5jwpH66eDYijzlDIbPkdJ2
+	2nmbpklykF6SYeRzyyCMoveLAxmnumT6WWvd/YimK+aarDMT5ehdzxzyPK4P3ZkOaHxNkClbmeV
+	cXRf0chATrAKJu8L+eb/Nw7AV+2fVhDSozG13gKgzBp7HTba+zNEzRhGrKXzGiPz2midrnG2Thp
+	wo+rgMvI3rM4rI
+X-Received: by 2002:a05:620a:25c7:b0:93c:3863:ff7f with SMTP id af79cd13be357-93f6235c83dmr372219785a.0.1792673728114;
+        Thu, 22 Oct 2026 05:55:28 -0700 (PDT)
+X-Received: by 2002:a05:620a:25c7:b0:93c:3863:ff7f with SMTP id af79cd13be357-93f6235c83dmr372215685a.0.1792673727448;
+        Thu, 22 Oct 2026 05:55:27 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ac4f68f317sm7839961fa.38.2026.10.22.05.55.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Oct 2026 05:55:26 -0700 (PDT)
+Date: Thu, 22 Oct 2026 15:55:24 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+        Philipp Stanner <phasta@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+        iommu@lists.linux.dev
+Subject: Re: [PATCH 01/13] dt-bindings: display: msm: Add Qualcomm DCP
+ bindings
+Message-ID: <jv334lyhqugggwmagmcsygmymzpb4aa5lncmwl2aosvpe54yr3@do4dp4dztogt>
+References: <20261015-jshekhar-drm-msm-dcp-v1-v1-0-48aad0fe4f72@oss.qualcomm.com>
+ <20261015-jshekhar-drm-msm-dcp-v1-v1-1-48aad0fe4f72@oss.qualcomm.com>
+ <hprf3vrsveovq3hwcgjrfj6uhmlxlq5u5bx4lkbswgxe476qwz@pacalsdgrjx7>
+ <ea81fcc1-c7e4-4b80-b65e-f483487bd1a1@oss.qualcomm.com>
+ <f7926ef7-1edf-4d74-9758-2ee0c8a795bc@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -92,86 +148,334 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 03/13] drm/msm: look for lpac from dts
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
- Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, iommu@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, devicetree@vger.kernel.org
-References: <20260705-descriptive-name-lpac-upstream-v1-0-01d50c3e0c99@gmail.com>
- <20260705-descriptive-name-lpac-upstream-v1-3-01d50c3e0c99@gmail.com>
- <rwohvfbsw2brpxrfg26egu5arwe6g7n2etelo33eegmu5cz65k@3syofuxzsjrc>
- <dc5aef2e-600e-4e97-b76b-dcc8bd72c709@gmail.com>
- <m4vwrqt6yyaawpvkyrqfzs3kbipbhygmtrhphuthl2gmjvkgyt@u2d3dnvl2phy>
- <54cb37bb-aaa5-4c5d-a563-acca4822dd35@oss.qualcomm.com>
- <t5gu6ciwmxdb2jghc44gtixdsbedkgy4yzke5sgawjrr2h362u@ahvhh3yfe6lx>
- <wtun2cfukyzxlsfiz2izsejd33k4jpapwqa3uqih5drcsrkff5@e6llkke5dayw>
-Content-Language: en-US
-From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-In-Reply-To: <wtun2cfukyzxlsfiz2izsejd33k4jpapwqa3uqih5drcsrkff5@e6llkke5dayw>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <f7926ef7-1edf-4d74-9758-2ee0c8a795bc@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA1MSBTYWx0ZWRfXx9O7mkKpFoN1
+ IrtHWhhL6PnXgmRHJn6i+KTqcTT912zPRbG+UxZhAsxobN0pPaCjZlPBhH5CM7McjVA0afJhNuv
+ GwIwAlHuEZO4sNX+taJho8NZFadMPWFqtn6N1DbMNotMbJiY5Ao0ls7dMfHz2Q8O0NxXLcjYZFN
+ Oth4TTqKwtwzU42OkNifqdZWt6l5bAjjUE5uVB3bH6qhC0pxfREL8J5mWRChlvBsqfzJsE8bmD+
+ VH6HWoGATWSNHfSJ373xfaRl/a8VPNR8C6Z5kbZ22ngupRH3jnS7b6zm5dVeEBZ71Ea//UZyUzT
+ t7kIkJ5/L+KwWuCh4SZdbs+GySrmmx87lvJP1EXgKOHwbyJVE9cRsMtQYTFihxYrl1iGcykD1Cn
+ Gl3YvFnb2zha6d3L919fkkQyyNqCMzLIBcuiDXlg+0UI4g94PthOuc5F4R1cwYoV6JOZcxunYyU
+ 5+39yVdzsgg3vEX/IzA==
+X-Proofpoint-GUID: dMXUQ8D_QDXajLoliCObOuPVgMiRMrQ0
+X-Authority-Analysis: v=2.4 cv=feg4WEQF c=1 sm=1 tr=0 ts=6ada07c1 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=gEfo2CItAAAA:8
+ a=EUspDBNiAAAA:8 a=SZj5_u6oW2rcZsOVINQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-ORIG-GUID: dMXUQ8D_QDXajLoliCObOuPVgMiRMrQ0
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA1MSBTYWx0ZWRfX7YLEFLp/FcXF
+ yB9sTVc8BvGGf2aiuOhVrOy/3ISTZVUW52xzyf5pT/OXvZ78msdwOZ/4KjytZz5Mwcb8BfuqRxM
+ twM231/Uk1Zf/ei6J5Ejx4a5CwyM+mM=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 adultscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220051
 
-On 7/9/26 9:39 PM, Dmitry Baryshkov wrote:
-> On Thu, Jul 09, 2026 at 05:54:23PM +0300, Dmitry Baryshkov wrote:
->> On Thu, Jul 09, 2026 at 07:12:39PM +0530, Akhil P Oommen wrote:
->>> On 7/7/2026 10:09 PM, Dmitry Baryshkov wrote:
->>>> On Tue, Jul 07, 2026 at 05:02:43PM +0200, Anna Maniscalco wrote:
->>>>> On 7/6/26 5:04 PM, Dmitry Baryshkov wrote:
->>>>>> On Sun, Jul 05, 2026 at 09:13:37PM +0200, Anna Maniscalco wrote:
->>>>>>> In order to associate the SID used by LPAC to it's own domain and
->>>>>>> context bank we need a separate node on the DTS.
->>>>>> Can we use iommu-map instead of adding a new device using the same
->>>>>> addresses? You provide zero explanations, but it seems like you are
->>>>>> trying to separate a part of the GPU into a separate device, but it's
->>>>>> unnecessary.
->>>>> What I was trying to say is that we need to map sid0 and sid1 to different
->>>>> context banks.
->>>>>
->>>>>  From what I recall, so long as we use the same dt node, the iommu drivert
->>>>> provides no way of doing this.
->>>>>
->>>>> What kgsl does is having a node for the iommu and then subnodes for gfx lpac
->>>>> and secure.
->>>>>
->>>>> The address on the lpac device doesn't really matter. I have very limted
->>>>> knowledge of DTSs but I think we could just leave it out altogether?
->>>> I think, you were poined to the Glymur Iris patches. Another option is
->>>> the QDA driver being submitted too. Both ot them use iommu-map to
->>>> describe the same usecase - a set of SIDs which are used by the device
->>>> but which should not be a part of the defaut set. With it in place you
->>>> don't need to have separate qcom,lpac devices, no additional properties,
->>>> etc.
->>>>
->>>> I'd recommend following the same approach.
->>> iiuc, the conclusion in this recent thread is to use child nodes for a
->>> similar case:
->>> https://lore.kernel.org/all/20260618151745.GD231643@ziepe.ca/
->> Let me check internally.
-> After a brief discussion: it can be either, depending on what suites
-> better (and if you can persuade DMA / IOMMU maintainers to let one extra
-> bus or not).
->
-One thing sashiko is pointing out is that new dt should work with hold 
-kernel so, in general moving sid1 from there would break it since old 
-kernels don't know how to handle them separately.
+On Wed, Oct 21, 2026 at 05:09:15PM +0530, Jayant Shekhar wrote:
+> 
+> On 21-10-2026 14:15, Jayant Shekhar wrote:
+> > 
+> > On 15-10-2026 17:47, Dmitry Baryshkov wrote:
+> > > On Thu, Oct 15, 2026 at 01:08:21PM +0530, Jayant Shekhar wrote:
+> > > > DCP platforms place the display pipeline under firmware control,
+> > > > so Linux
+> > > > cannot discover display resources through direct register
+> > > > access. The DRM
+> > > > driver therefore needs device-tree descriptions of the firmware
+> > > > transport,
+> > > > display topology, IOMMU contexts, and panel connections.
+> > > > 
+> > > > Add bindings for the Qualcomm DCP VirtIO display function,
+> > > > including the
+> > > > INTF graph and DSI host outputs. Document the framebuffer IOMMU
+> > > > context,
+> > > > IPCC power-notify mailbox and interrupts, firmware display
+> > > > topology, and
+> > > > firmware-visible IOVA window supplied by the parent VirtIO-MMIO
+> > > > transport.
+> > > > 
+> > > > Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+> > > > Assisted-by: LLM
+> > > > ---
+> > > >   .../bindings/display/msm/qcom,dcp-dsi.yaml         |  75
+> > > > +++++++++++++
+> > > >   .../bindings/display/msm/qcom,dcp-virtio.yaml      | 113
+> > > > +++++++++++++++++++
+> > > >   .../devicetree/bindings/display/msm/qcom,dcp.yaml  | 119
+> > > > +++++++++++++++++++++
+> > > >   3 files changed, 307 insertions(+)
+> > > > 
+> > > > diff --git
+> > > > a/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml
+> > > > b/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml
+> > > > new file mode 100644
+> > > > index 000000000000..f7178c66c09e
+> > > > --- /dev/null
+> > > > +++ b/Documentation/devicetree/bindings/display/msm/qcom,dcp-dsi.yaml
+> > > > @@ -0,0 +1,75 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > > +%YAML 1.2
+> > > > +---
+> > > > +$id: http://devicetree.org/schemas/display/msm/qcom,dcp-dsi.yaml#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Qualcomm DCP DSI host
+> > > > +
+> > > > +maintainers:
+> > > > +  - Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+> > > > +
+> > > > +description: |
+> > > > +  A MIPI DSI host exposed by the Qualcomm DCP VirtIO device (see
+> > > > +  qcom,dcp.yaml). DCP is a firmware protocol shared across multiple
+> > > > +  Qualcomm SoCs, not specific to any one of them; Hawi is its first
+> > > > +  platform. The DSI host and its connection to a panel are described
+> > > > +  using the standard DSI controller and OF graph properties.
+> > > > +
+> > > > +allOf:
+> > > > +  - $ref: /schemas/display/dsi-controller.yaml#
+> > > > +
+> > > > +properties:
+> > > > +  reg:
+> > > > +    maxItems: 1
+> > > > +    description: Index of this DSI host among its siblings.
+> > > > +
+> > > > +  status: true
+> > > > +
+> > > > +  ports:
+> > > > +    $ref: /schemas/graph.yaml#/properties/ports
+> > > > +    description: |
+> > > > +      port@0: Input from the DCP virtio device's DPU INTF output port.
+> > > > +      port@1: Output to the attached panel.
+> > > > +    properties:
+> > > > +      port@0:
+> > > > +        $ref: /schemas/graph.yaml#/properties/port
+> > > > +      port@1:
+> > > > +        $ref: /schemas/graph.yaml#/$defs/port-base
+> > > > +        unevaluatedProperties: false
+> > > > +        properties:
+> > > > +          endpoint:
+> > > > +            $ref: /schemas/media/video-interfaces.yaml#
+> > > > +            unevaluatedProperties: false
+> > > Why do we need OF graph here? Would it be enough to link one of the
+> > > ports of the root node with the panel's input?
+> > > 
+> > > > +
+> > > > +required:
+> > > > +  - reg
+> > > > +  - ports
+> > > > +
+> > > > +unevaluatedProperties: false
+> > > > +
+> > > > +examples:
+> > > > +  - |
+> > > > +    dcp-subsystem {
+> > > > +        #address-cells = <1>;
+> > > > +        #size-cells = <0>;
+> > > > +
+> > > > +        dsi@0 {
+> > > > +            reg = <0>;
+> > > > +            #address-cells = <1>;
+> > > > +            #size-cells = <0>;
+> > > > +
+> > > > +            ports {
+> > > > +                #address-cells = <1>;
+> > > > +                #size-cells = <0>;
+> > > > +
+> > > > +                port@0 {
+> > > > +                    reg = <0>;
+> > > > +                    dcp_dsi0_in: endpoint {
+> > > > +                        remote-endpoint = <&dcp_intf1_out>;
+> > > > +                    };
+> > > > +                };
+> > > > +
+> > > > +            };
+> > > > +        };
+> > > > +    };
+> > > > diff --git
+> > > > a/Documentation/devicetree/bindings/display/msm/qcom,dcp-virtio.yaml
+> > > > b/Documentation/devicetree/bindings/display/msm/qcom,dcp-virtio.yaml
+> > > > new file mode 100644
+> > > > index 000000000000..018694310dfb
+> > > > --- /dev/null
+> > > > +++
+> > > > b/Documentation/devicetree/bindings/display/msm/qcom,dcp-virtio.yaml
+> > > > @@ -0,0 +1,113 @@
+> > > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> > > > +%YAML 1.2
+> > > > +---
+> > > > +$id: http://devicetree.org/schemas/display/msm/qcom,dcp-virtio.yaml#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Qualcomm DCP VirtIO host
+> > > > +
+> > > > +maintainers:
+> > > > +  - Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+> > > > +
+> > > > +description: |
+> > > > +  Qualcomm's DCP VirtIO host provides the generic VirtIO-MMIO
+> > > > transport and
+> > > > +  the host-side IPCC channel used to wake the DCP firmware.
+> > > > +
+> > > > +properties:
+> > > > +  compatible:
+> > > > +    contains:
+> > > > +      const: qcom,dcp-virtio
+> > > > +
+> > > > +  reg:
+> > > > +    maxItems: 1
+> > > > +
+> > > > +  iommus:
+> > > > +    maxItems: 1
+> > > > +
+> > > > +  iommu-ranges:
+> > > > +    $ref: /schemas/types.yaml#/definitions/uint32-array
+> > > > +
+> > > > +  interrupts-extended:
+> > > > +    minItems: 2
+> > > > +
+> > > > +  interrupt-names:
+> > > > +    items:
+> > > > +      - const: virtio
+> > > > +      - const: dcp_power_notify_irq
+> > > > +
+> > > > +  dma-coherent: true
+> > > > +
+> > > > +  mboxes:
+> > > > +    maxItems: 1
+> > > > +
+> > > > +  mbox-names:
+> > > > +    const: dcp-power-tx
+> > > > +
+> > > > +  dcp-subsystem:
+> > > > +    $ref: qcom,dcp.yaml#
+> > > > +
+> > > > +required:
+> > > > +  - compatible
+> > > > +  - reg
+> > > > +  - interrupts-extended
+> > > > +  - interrupt-names
+> > > > +  - iommus
+> > > > +  - dcp-subsystem
+> > > > +
+> > > > +additionalProperties: false
+> > > > +
+> > > > +examples:
+> > > > +  - |
+> > > > +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> > > > +    #include <dt-bindings/mailbox/qcom-ipcc.h>
+> > > > +
+> > > > +    virtio@9be8000 {
+> > > > +        compatible = "qcom,dcp-virtio", "virtio,mmio";
+> > > Is it really compatible with virtio,mmio? Can it be handled completely
+> > > by virtio,mmio?
+> > 
+> > 
+> > There are two possible approaches:
+> > 
+> > Option 1 — Use the standard VirtIO-MMIO parent (preferred)
+> > 
+> > Keep the parent as:
+> > 
+> > compatible = "virtio,mmio";
+> > reg = <...>;
+> > interrupts = <...>;
+> > iommus = <...>;
+> > iommu-ranges = <...>;
+> > dma-coherent;
+> > 
+> > The generic virtio/mmio.yaml binding would be extended only to document
+> > the generic iommu-ranges property.
+> > 
+> > The DCP-specific resources would be placed on the virtio,deviceXX child:
+> > 
+> > dcp-subsystem {
+> >     compatible = "virtio,deviceXX";
+> >     iommus = <...>;
+> >     interrupts-extended = <&ipcc ...>;
+> >     mboxes = <&ipcc ...>;
+> >     mbox-names = "dcp-power-tx";
+> > };
+> > 
+> > The parent uses the standard VirtIO-MMIO interrupts property. The child
+> > has one DCP-specific interrupt, so interrupt-names is unnecessary and
+> > the driver uses interrupt index 0.
+> > 
+> > Option 2 — Add a Qualcomm-specific VirtIO-MMIO parent binding
+> > 
+> > Keep a Qualcomm-specific compatible such as:
+> > 
+> > compatible = "qcom,dcp-virtio", "virtio,mmio";
+> > 
+> > and extend the parent binding to describe iommu-ranges, the additional
+> > IPCC interrupt, mailbox, and related DCP resources.
+> > 
+> > However, this approach duplicates the generic VirtIO-MMIO binding and is
+> > only justified if the transport requires Qualcomm-specific handling.
+> > Since the DCP transport is handled completely by the standard
+> > VirtIO-MMIO driver.
+> > 
+> > Which one do you prefer?
+> > 
+> > I will be addressing other comments in v2.
+> > 
+> > 
+> > Thanks
+> > 
+> > Jayant
+> > 
+> > 
+> 
+> I think Option 1 is not suitable because the IPCC power-notify sequence is
+> required before the first VirtIO-MMIO register access. The standard
+> VirtIO-MMIO driver would otherwise probe the DT node directly and access the
+> registers before Qualcomm-specific initialization is complete.
+> 
+>   Would the following Qualcomm-specific transport approach be acceptable?
+> 
+>   - qcom,dcp-virtio is the DT-compatible Qualcomm wrapper. It initializes
+> IPCC and sends the required power notification before creating a synthetic
+> virtio-mmio platform device.
+>   - The unchanged generic VirtIO-MMIO driver probes the synthetic child,
+> accesses the MMIO registers, creates the VirtIO queues, and registers the
+> VirtIO device.
+>   - The DCP VirtIO driver binds to the resulting VirtIO device through its
+> VirtIO device/vendor ID table and initializes HFI, firmware capabilities,
+> and DRM/KMS.
+>   - The virtio,deviceXX DT child is discovered by the VirtIO core and
+> describes the DCP-specific IOMMU context, DSI hosts, display graph, and
+> panels.
 
-Not sure how to address this.
+Anyway, for the next iteration of the patches please be sure to CC
+VirtIO maintainers and virtio-related mailing lists.
 
-Best regards,
+> 
+>   The flow is:
+> 
+>   qcom,dcp-virtio
+>       → IPCC power-up
+>       → synthetic virtio-mmio device
+>       → generic VirtIO-MMIO driver
+>       → virtio,deviceXX DT child
+>       → DCP HFI/DRM driver
+> 
+>   Since the Qualcomm wrapper creates and owns the synthetic VirtIO-MMIO
+> device, the parent node uses only:
+> 
+>   compatible = "qcom,dcp-virtio";
+> 
+>   It should not also advertise "virtio,mmio", because the generic driver
+> must not probe the parent directly before IPCC initialization.
+> 
+
 -- 
-Anna Maniscalco <anna.maniscalco2000@gmail.com>
-
+With best wishes
+Dmitry
