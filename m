@@ -1,71 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792659537;
-	b=wUmSurPyXM10zJMcDypXyL+NrRBoVjZGThF1RFKs+UlAzLurxEk3M175+Myl0a7IP5zY
-	 wEuEhfD1acQ6eqqfc5NRs74TeuOZI5/QprKUIf3r2Z+xbpvnprCO8pFh754Q7FrkUhryc
-	 1AnJzGPHAaaUE1k9gMiP11ta8Qtn7yLGek3KtzYT4oxqZs+YyunNn1yoilgrVNPt916it
-	 esMOimmZPIZNuFGMNftrEa73WDNz+dM8BSW3dCllFNXV59xitdw7+/w5O1EDt3onYMmgt
-	 /9m8VVZSsTXgOo+3tRlagUInEp1qRk+v36KOkAys27ProRjzh8BkzVH+KNCvcb9XEmA==
+	t=1792659674;
+	b=XPVQzFI/R7woMbOkE8ZzOsmxt51U1D09BMyO4fzOCHzU8fqBI05ByA8d9Q+XYIZjZhsa
+	 htFfS9ufp1xVfU5ZH2z7MFKYTDudyfwqlpbhLgs6INfLFmGSjAWXkvUdIkR8FPddaX0rh
+	 dYviB0Hxz/7IGIJWBle9i0tu0NmuI0cdzoek+4l+F2Smh8Dkxgl6WRIMrEI9qFusQFyxN
+	 +Xd/jZcr1dfvADa/MPHrdPLCZv+IC/He3kj9mZ3E1lrgDzcZPRNGGu5rHHJhKjlG+mDtp
+	 7UszywO8pS7SEfx6VFWkpfiQdpo7/dVvVHsClT4Uuv9imS6R9OiJy0Km7O45Hg6uq0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792659537;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
-	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
-	bh=ytAPM9y1CIH6yDKXPJOIKHUT5JjG90HVhV6QaIOwpZA=;
-	b=j3TymJEpaBbxnmSr8hWitayLrNAdgcI3yp1tRk94rbBavuQkwykL/aCH1uhF5NvkSJ8h
-	 hJqsDtM7pArohaDHLHL6VVATdesOi6B9Z+X5a2FP70/oO2mhy35J36ltYpXII6wVMANa5
-	 NEOQDcFjrA5o52ZrnGzL1exCTfe8m/8gbHllHp2I4c4aLAJvPRmUnVEA5iUpcQw7YmEvO
-	 DcZI6SErUrdFclkDt1+1ABwKDwpZFbPSguIvdqo+JF2Uw/4yB5SNHJgGa9bkEn6nYJh5n
-	 c7QM1ymFD0BbQxrDtrK5Qu28I1z6fqXgFcS4kO/Gh0q650itGw7EDVWZPfZE2oXUx7A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792659674;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=UTRFPblkLPdvoWYM9/wAHuv2GDi6sap0sAr/jdJeU4c=;
+	b=3TVZy95o7rzIVQPqIgsftXUKj1p8OBpnryXZa8NjL1FLXNT5rZBUCyIbrV4xh4nGj/Lf
+	 n6layEsR/JxwIf1Nxfs69hFEWRaGL0HTr5mtPjllfntW3mNu04M8M+2h/fDSABCUKfv/u
+	 1LkH2mMAbn4WnXWGh/lr3ktYiIwV9OH2ZYaC4G/dqpbnH0TEOzUlw9CxoXFFUdzy5aYfi
+	 i9dW17Of8u64m7L/ldnrQignQ8JYPcs4vqsZ9gBWedg+UGVEPqim5TsD4dM7/iy86aEFo
+	 hcd6CGwmUymZNR1/Vig/LLnWv+x7Z+W8cPNNwtSBmg6lYIja7RnYN3+GdMHLe2Q2oCA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=DYm+47g9;
-	arc=none smtp.remote-ip=210.118.77.12
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A4GcoDsQ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=I01lsz4S;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2A36606A31B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F2A36606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15283606A31B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:01:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 15283606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=DYm+47g9
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261022085854euoutp0258f2b0349e09760d2f5ea6ab9e4a952c~gzlkwvTut2936429364euoutp02F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:54 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261022085854euoutp0258f2b0349e09760d2f5ea6ab9e4a952c~gzlkwvTut2936429364euoutp02F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1792659534;
-	bh=ytAPM9y1CIH6yDKXPJOIKHUT5JjG90HVhV6QaIOwpZA=;
-	h=From:To:Cc:Subject:Date:References:From;
-	b=DYm+47g9DsDETL+FhGLFw3NW7kAlwz8apTEl9+bGvJvMZBFbmrqC5vrNOKgPIP/El
-	 7szmisKTI0M1A0itVtWye9bINCHl5Z7sZCCS3z6Ef7Sk4MY6EDXmJfUKM2X9+zb4gm
-	 f7+AiV2RejC+vCTCgZLh5zNhy41C9DvmLmhwMLOs=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97~gzlkeZ2-41811318113eucas1p1U;
-	Thu, 22 Oct 2026 08:58:53 +0000 (GMT)
-Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261022085853eusmtip22f10b685962fdaf49e7f0a2128385306~gzljwo2IO0965409654eusmtip2O;
-	Thu, 22 Oct 2026 08:58:53 +0000 (GMT)
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Bjorn Andersson
-	<andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa
-	<abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
-	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Roger Shimizu
-	<rosh@debian.org>, Hongyang Zhao <hongyang.zhao@thundersoft.com>,
-	Christopher Obbard <chris.obbard@oss.qualcomm.com>, Dmitry Baryshkov
-	<dmitry.baryshkov@oss.qualcomm.com>
-Subject: [PATCH] arm64: dts: qcom: qcs6490-rubikpi3: Keep WLAN firmware
- memory reserved
-Date: Thu, 22 Oct 2026 10:58:43 +0200
-Message-ID: <20261022085844.768508-1-m.szyprowski@samsung.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=A4GcoDsQ;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=I01lsz4S
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M8Ln1o3194744
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:01:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	UTRFPblkLPdvoWYM9/wAHuv2GDi6sap0sAr/jdJeU4c=; b=A4GcoDsQ3s1tLMOD
+	93C9vquARc5OZFaKq6iSUo39AkrKSiLRQJl0ASUrpurgKJT2EXSCdBcxmc7bfgo5
+	hgWrzVI9CK0P8ShQdwpezUPELk7RoqBpxpLdMEAEZZJHDmsUeV/693eIrvLOWZdD
+	pyNbAdgrHeNRVqV3FTTn3DK9NtiRBi8pW2QryzxJjGKJF7KIeMjQQndxon4edAJE
+	fk+dRl9VMn6XgAEfkYaFiUvgcs79+wdpBkM+HzCSqbyhkLfjIrA0Pl121T+ZN7pp
+	HRwzH7FWIK0VJHojiy73L0ie33Un9mKRH6c7YPV81rmbbVeD539OvuJQAfa1Odp3
+	nQCs9A==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfewq06f4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:01:13 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93ea8a9cfe6so43712285a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 02:01:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792659672; x=1793264472; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UTRFPblkLPdvoWYM9/wAHuv2GDi6sap0sAr/jdJeU4c=;
+        b=I01lsz4S6k1C/fgiDZ6qSLL39pagh7fCsa5rxqlwyEeQq3EAA+JznN1DDduVNp+OzB
+         0J0Sr2OfJL8wNo7P1YdjB/I4bax8FeSQRxY8oU98/Gct0LTSaxN5PQXcZNm+DsRZzmyD
+         tm/tEIEdOqFrCObLjhJoFGzgXDHka88OUBXbbZYG1xIgJErKi6gVjnZIcCLVtsTb9eXl
+         WRsZ4DcWBMJUqpQXCbxsBI5cpevkZuhCbTFLEhHbV7MVzz6qBfSTegYJyXfessEJhGdJ
+         YDfJiHetQhIEX6TKgmlZURdH2e/MP14HAIGBUfFfY6d4zGbfy/rsdrheOB9Onr2AsURv
+         Jpqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792659672; x=1793264472;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=UTRFPblkLPdvoWYM9/wAHuv2GDi6sap0sAr/jdJeU4c=;
+        b=JOgbBh5Wjrx5wI9M4p4e696209h/IiXqxIe9+MWXL56QDnzK2hs97/jCg2UhHvUDAx
+         LdsPmAKvsaDI8IIZ8MSCeML6NfV10wuQhr2mgHSo3Zk8dJND4nFVnSAj7BM1Mw9PAfQG
+         C/lu96VSbBiHjLOwgrtwbKIxFDstdfIzIcykt6Y2STEk+Y1PRdH3QDFm1rB5qiSAbcE5
+         gEeZO6Li4UijLY3bE2MAPK+q6TBWcgf9FHkcfIyHBcK5wni+bYDAlZGz0RBfQH64dqip
+         jYSJlc3BT/eFubikcBu4jpeGU0y6KmWH7xNZE4JLGC1ma2aw68V+SI3ol5IRFcPrltBr
+         YZAw==
+X-Forwarded-Encrypted: i=1; AKwUvBxcL0zOnLfjJj2ondRO249f3kB36FJrydeARe4pqD/zx9RfKn3jveAxS0TVzpeBBj9l+qA78ru3O1Nt0bIZ@vger.kernel.org
+X-Gm-Message-State: AFq9FYLEK5291JAhYsDubIeNkfNLJnFqqUt7Q3+QnVbrD9ihuzAQOZ2i
+	pbTASEF1YZ/IkCSksFi54fUkgH/YKr7Bl3mSryQAkaK8aiP2PnB742rItI7GkzaPJ2bFhb0UhEw
+	eH75s0yEPSqDhidwCbWF5fcTLpgxv0Bpq52OaGfNAVspXjAGAWSArTOEwD1zkxhvE6KUT
+X-Gm-Gg: AYBFou3NNalGXVFR2RDXcr782JZh3/g1o2Gtqrwghs0lHfYs8D8HSezxCNazfVNWMWI
+	2p5bw+p/0Dke/rr8WI/CgvwpMIdMnm1DXCdMkniEw3pPAxZAcMHo+qevz5if0L3u+nq9Uso19Og
+	8mbc5h8DzI2IvniLt1WB7z1ojf2nvFUr+w118s2HI+cVv58Wd3HKVdbwpI2OkHho1rG2tRRgVBi
+	O+Nx7J7V/jAsikytW60FQF/thrJQgpWeqlnAViwLuXeQoudRRrnZebDwaCO0vwvH+Of4wZLg798
+	LlF7B6y5SmseMcDlbICo0vvl7m3tGGufmjx7W6uDAjmTgzZ4BT+S/bSfj2UWbJ8rvJvsJoO/iqT
+	FrpWzZOk3nF1oYkx3lHInHw==
+X-Received: by 2002:a05:620a:2b91:b0:93e:e111:2771 with SMTP id af79cd13be357-93f57e9331fmr984417985a.2.1792659672287;
+        Thu, 22 Oct 2026 02:01:12 -0700 (PDT)
+X-Received: by 2002:a05:620a:2b91:b0:93e:e111:2771 with SMTP id af79cd13be357-93f57e9331fmr984409085a.2.1792659671687;
+        Thu, 22 Oct 2026 02:01:11 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c468a4ffcebsm83458666b.30.2026.10.22.02.01.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Oct 2026 02:01:10 -0700 (PDT)
+Message-ID: <6da23245-ce68-4b61-8eba-323102a5b9fa@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 11:01:07 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -75,70 +115,57 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
-X-EPHeader: CA
-X-CMS-RootMailID: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
-References: <CGME20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97@eucas1p1.samsung.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/5] arm64: dts: qcom: Introduce Maili SoC
+To: Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: aiqun.yu@oss.qualcomm.com, tingwei.zhang@oss.qualcomm.com,
+        trilok.soni@oss.qualcomm.com, yijie.yang@oss.qualcomm.com,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261012-maili-dts-v3-0-8b499e7b9a52@oss.qualcomm.com>
+ <20261012-maili-dts-v3-3-8b499e7b9a52@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261012-maili-dts-v3-3-8b499e7b9a52@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: VHTkCG9rTyXvZScIm3S4aF9quFqC-iDT
+X-Proofpoint-ORIG-GUID: VHTkCG9rTyXvZScIm3S4aF9quFqC-iDT
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzNSBTYWx0ZWRfX8JIm+qGA8zFP
+ BNXZouOnsCrLlGJ3JSXxdMmBYrKsFBfjW6wUDwG6V/Tm8Jz1ijm/akPOh55GL6EKrt3YmIkrv92
+ quNmBDHTIsz0IieZFmhhvFASQhIchk8=
+X-Authority-Analysis: v=2.4 cv=G4OJgNk5 c=1 sm=1 tr=0 ts=6ad9d0d9 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=1qrlJkut239GXpouHx0A:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzNSBTYWx0ZWRfXxyGlkHXeViy3
+ 8y2nyt6kHOQydz0qtR4rdsNFauLZMmAUP/Ag+Lmt9gOBTlMca9I4OnxxMae9FiNubcdk6v7l7n1
+ ZG9uV5lZp52OrveQGIDflqv9InncLlEYb7nvAzeT9PbaZ0e+kZ/qig7mTsp+TnQg/J31dry38Hz
+ UCEIKWO2tij1RLS/lNO0ayOz918byBhH2Dbd3j3haTeQLMtjv6UoXOvGipQ1h8EKc2+joD1dyMV
+ dvIXwc2mN9ww6LNx1xKNwTqXWX8RMaLCD/w2WPCia6mO5F35rJRdBRnexQDm+5uIvE/GzKou4Ur
+ tteA9U8+4unxtv7pFaLOeBVRQ1oD12aMON9Io2q2z5wfWHwHnA3IaPP7wL2fu7bKB3dpeFdiSQh
+ xwdek/cnT9kH5szGLqff3mhKJmxafBGaNUdg6DQcWXyIiJyMgjlo82fKdIFkWITMIIsPAMm8PCA
+ 6RA3QknvP8IHvG2cItg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220035
 
-The board dts deletes the wlan_fw_mem reserved-memory node inherited from
-kodiak.dtsi, because RUBIK Pi 3 has no WPSS and uses an external WLAN
-chip. However the firmware still keeps the 0x80c00000-0x817fffff carve-out
-protected. Linux treats that range as ordinary System RAM and the first
-access to any page from it triggers a synchronous external abort.
+On 10/12/26 10:32 AM, Jingyi Wang wrote:
+> Maili is Snapdragon SoC from Qualcomm.
 
-This has been observed when the dynamically placed adsp-rpc-remote-heap
-CMA pool ended up at 0x80c00000 and the remaining 4 MiB of the carve-out
-was given to the page allocator. The first allocation from that part
-(a qcom_tzmem pool page at 0x81400000, allocated during fastrpc probe)
-faulted on the initial memset:
 
-  Internal error: synchronous external abort: 0000000096000010 [#1]  SMP
-  pc : __pi_memset_generic+0x16c/0x188
-  lr : dma_direct_alloc+0x190/0x434
-  Call trace:
-   __pi_memset_generic+0x16c/0x188 (P)
-   dma_alloc_attrs+0xac/0x1ec
-   qcom_tzmem_pool_add_memory+0x90/0x1b4
-   qcom_tzmem_alloc+0xd4/0x1a0
-   qcom_scm_assign_mem+0x74/0x18c
-   fastrpc_init_reserved_mem+0xd8/0xe0 [fastrpc]
-   fastrpc_rpmsg_probe+0x17c/0x3d4 [fastrpc]
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Keep the wlan_fw_mem reserved region, so it is never used by Linux.
-With this change the adsp-rpc-remote-heap pool is placed at 0x83800000
-and the board boots without the abort.
-
-Fixes: f055a39f6874 ("arm64: dts: qcom: Add qcs6490-rubikpi3 board dts")
-Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
----
-The issue was analyzed and the patch has been prepared with LLM
-assistance. The change was then tested on the real RUBIK Pi 3 board. LLM
-suggests that Radxa Dragon Q6A, Vicharak Axon Mini and Thundercomm
-minipc-g1iot might be also affected by this bug.
-
-Best regards
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
----
- arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-index c98e910ee398..843c90ddb4bb 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-@@ -31,7 +31,6 @@
- /delete-node/ &video_mem;
- /delete-node/ &wifi;
- /delete-node/ &wlan_ce_mem;
--/delete-node/ &wlan_fw_mem;
- /delete-node/ &wpss_mem;
- /delete-node/ &xbl_mem;
- 
--- 
-2.43.0
-
+Konrad
