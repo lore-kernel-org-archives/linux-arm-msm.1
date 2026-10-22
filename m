@@ -1,98 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.53
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792700289;
-	b=MpgLnuCgZyiFcuiBRv8jQv56KFJx4/Kx0ApNeu8QS93qWq9ypxonROt+vIrSbors8kUs
-	 zwd9Orb51NbGyBbPKMFrz+Y9SnOPnWg2aO8nKzNItTHEUCml9+U/qJyyaV6IlNF6JZg8z
-	 JVPdAMptYVGropSFIwL2N0IHlHujyE2iWBFRiFPw150twkquxIam3gyU8ki1DqM1+jfOo
-	 7Ou6Eib7AXL4mxr0MZlG31P6Q5q0TsW7XOswB9qgo94dpXMpa2U0B113uhkBmiVWe96aO
-	 mFdz0/DNcAD5A+hTIZ/Ui/6EvbIsVUOx4VewpzgFiQ9l2Qfm0XFTktZ3VCHwIBmIzPA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792700289;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792701359;
+	b=VCcWA+rmbX8vuIaExC+wsGqZfk5qRETHKAc+V0eNF3LTuzqwcKhCuf+CMfRIn3ny+9Ds
+	 njjCKhEo1bDyAW2ErQuWYsnAsYyg0Yan7uM7+4z5YYJ0oGnxVOLrjKVP1Tnj+nxRwocRo
+	 rcn1Nt6bnYabdqkKQA1baJKVOGlybzpZ2Ra5CZRufss96tpD7xlLJmZjiQArr+P9c9AB0
+	 bDS+WNCswgbldRKyJaGvkjHvUvWw6rZ+2Xv0P8Ic17U+l/5flgYTbNa9Ox51c2iDg5QPz
+	 fHQmEcJ08juhWeefwIcL02ffNO5bYFFE5UlzFV7KqZKa5C0GtL/+TpzsGuniBJeudXA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792701359;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=JiA4JitzQw/4MC5Swl9tbuEHHH6EIhc5VkOsXaDCmnU=;
-	b=uxStSZkJ4suYHla6dUtSM3YNqvZhnhhs67APWVNNhlHsy1CdZFBpiP0vzltA5Ro/K0Dd
-	 ag0gr/2axqutZusPysr3q6xPFTuqjEopWz/ebaFG+4h04u1hcq+MbN2h06PPGoAq+EW67
-	 AxhFcGjjb4FRS82gfpI75NTIluaYcFRu1DwwVolvOoHNxW4LJLDIQ5bGw4WZmmShUt9w2
-	 tqrg0uNNu5IEPSNfwjJ3shmNO11ftPTVnU7d+NFZqOctvcZdBQKWucbtO1lZsNAf2GViV
-	 lpV4/nES45KurULNqFRXW6ONssbPqG8GZOLH6sftwiVSgSkWwM5TCQ2x0GvwbnTT0Og==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=thinkoid.org;
-	spf=none smtp.mailfrom=thinkoid.org;
-	dkim=pass header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=pO7LUnRQ;
-	arc=none smtp.remote-ip=209.85.219.53
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
+	b=Kz1xou3p2pZvt5CFRTRWQk+22mPq9cb5v4K3AAQGBpTBsZDGh+JJAzYhg7a4as02L4Tz
+	 3DJ6RZIJihz/t8aAnavfkwA6Vq76yt9UN1hLiO0icEk2QF+f1saYfxzkF44FbNE5RLyru
+	 0W4Dz6JhL9bQ1V4xt+rfZCZIHd3KOo5O/nVPJBpS9V7zez8gEbilIwU7E/s3ad2FE3BwD
+	 iyzrJ8wwAinFXTdArO63i/Un0FRt+x7vFh8FMGmx+lW41kHxUQNv+tO9aers4Y5TUFEYv
+	 BcYpoXF2pke0R+3Y+xqakzirrBBwmU3wd6evgLRlK9sonvoqsLCXUVjiev1zFfoNoKQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cIydL7QE;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DABE3606A321
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 20:18:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DABE3606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1995606A320
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 20:35:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1995606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=pO7LUnRQ
-Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-91c1f548f87so3842036d6.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 13:18:08 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cIydL7QE
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-8b0dba37a7fso2531937b3.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 13:35:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792701358; cv=none;
+        d=google.com; s=arc-20260327;
+        b=SHAby8Ns2QTyq6XWO0YkeFKBV8aDreiWYIpcpYgfSuH32o5G7IueqtRjRJR00Zno9u
+         uf9N3/EcfF6Dh/FRPWqnHtN5gsyEbfKjK1RcqP1W06561z6KL4LzLErs3XtMbo56eRnr
+         MqSjNEliW/rh5iq/03cg5u4KWPwG3DIikEncMHVBfGpIx4jD1uxjLbhVtQlbKD+tn0qi
+         hrE6Qn6c8kBGOIq6T6TCtrg8eN1R7AcA0rp5mvrztfRfL1qCwKCSdUcEfSdZYMttuD5c
+         j7KZ4sTeyTF+vxa8Sx+Lpa6Hk7V41nyOf8MlaztSAONgGH1KnN9Os+3vGAJSr6Zchbr2
+         qIMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
+        fh=QMHcqEJR9ethHbXf5ME9F58li0chVxDK9sX8SnFo5FY=;
+        b=d/JIgRbR6J3+mgx0hn+uPJIyjazHEP3nSupj+GJ9ze9DOgPsUV+74vFZGiC0nCNf3K
+         hmVQpYpnTwJVTIUQutAqQRftyT6ZIUN5t7VZ7K3fsgncbnYJmSPiZF6KlbvBQQCYQVXz
+         WGyLD9VJHwEf1V8w7f3Xq45USEwOFRejBCvJD8jgj4ZlTUF9Q9TCfbf3DrzLYtw9hB6D
+         RkOCYRINzSbJEccYAkHubLAvYC9RNWKjxPSB1X2qHTNZyZatuQmekKDYCZal0wJHQQAn
+         B5jBSd4kTcg4fMR2JK/dwmZOz3GE4df+r4jYuFgS1N1bdD/ytUhn12J9Hsd+/djq8/ad
+         TRUw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1792700288; x=1793305088; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JiA4JitzQw/4MC5Swl9tbuEHHH6EIhc5VkOsXaDCmnU=;
-        b=pO7LUnRQ4y0gsifPlHbVeHgo0B2aVNrLqimoypSRAc02oswTWnhI/rV4zy2VmiDoth
-         SqTk3b4Yk4rLKWk3abA/o+rNOFwulUIUZDNgWx17LwKGillB2OXUXsmRqbE6hsDZs7cU
-         r5eg6rijI+acq80iSsBj82bHRToLvuPr/KI1llQyUZNV03MTjxgxnm6gVzLm4fwoTNXw
-         OVSf39/B4FpbstOtrSDH1BemBYs49B0y7TlXXp+oOWNTwUmgcLNStgNBDGh3ehp9yb9I
-         nwWZcimMAT7QdKn5e4P9uiSa/+rGX31to8dCgIOor+DbVIdzMZb4MK4KWMn1sUkvwpfM
-         70+g==
+        d=gmail.com; s=20251104; t=1792701358; x=1793306158; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
+        b=cIydL7QEMmCY8flsUamB32fs05+2ptLxtZZLT6mz28i3jQanOo20QchRyKcMSNhGCh
+         vfWHoa/dBxcWaWx4BjUJN9Xb9C1it5yllobIaf6gnLBvxu5wtgY8g6w14mQFoVKxND0B
+         nesCOq3x54OSB3glP1RztVydcHrgelrf3MsWaQA6zLz2GX3MBM+5+ZSIYx4Ybhe62iQo
+         EbDuuyvtXVbP04VzAgX/Dv6F4xMpujQDxP3qCAVF8eSvzJHvmux20sAVhuOjFXNdhqak
+         qWWBt/vPdTf9wJupcgaLPagwRyhIWSphjTg+MrI4IAmtVTgQKQ4jXiGL8x6l81CVCu4V
+         ytCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792700288; x=1793305088;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JiA4JitzQw/4MC5Swl9tbuEHHH6EIhc5VkOsXaDCmnU=;
-        b=KoSiGJkQ1tkmlWXKCfhS0js0XLU3lYsy62aj9lMEn623qZHERopvoIxWYjlf87ryhK
-         7IHyX2N/xiyNG3Udd4/xgWFtF/ADZ2JPLPlFb8ENqi65th1TXjLH4jN31YJ1HKcR0hms
-         x3gyE6cpfiejy65JH+Aqcbw6SL2p/2tbpKEHDmRhLgryDFOLURGFuATfHjifE+p2oMGa
-         MeVI6OqmoO1vMl++zbYGGgj/EYAu79z139RUkOMtYInzmsMg9Dhmyv0DIGDLZEUKwaVC
-         zb25JZwLY0hUdaKFDJT07MFLJh2DS+XOJWKD9ZOcOYMwmOxqOpef8OQLCRVIIDLeTDAT
-         6UNA==
-X-Forwarded-Encrypted: i=1; AKwUvBynz61gmn1OvUHTVHNSmgma3ApXNa8cWaW0NQAUT6/Jz0lOnCSU+7ZaAzEIZr07+wcMp5qPzKzODyAfPXFb@vger.kernel.org
-X-Gm-Message-State: AFq9FYLIY4nSmyK8Wm3p20mKUuFIIbkUevp8fRaswAoTnOq0bRP76YDm
-	7XZW9xU5znHxEYZBdDM9S2Nz5CWBWAeV+NYMaBFvhdoMXOyMOrRrKuQcucQu1aq4+nY=
-X-Gm-Gg: AYBFou1Vy3SVQfrDswHopKbUedBcR0JuOtMEOMVp7oWgtq15dSxrK1yy4IC058oRIlH
-	5fU3JeInNbjKrycVMhRvBM32XO3giCOtDKdSVK/JD3kwdlNPLtgomRPyILEXChbVJzalOfBEk9o
-	xuKJ3ZKFrqUJzzAGGeg/aBckLpghogL6fcz+fBDsuIA8AXmpxjL2bq8QclhGUwT7hAvYfVg59XF
-	thxRssacumQbz+pQrV2pLOMAjfbmOKA/k/OFo7yPrNHvC+Elw0F1Krl1BIhjKtGBGAg0aOCIFZI
-	W1RBZIvnVvgD7IK5pAJexJGFa5D7SpLv3fdEzX9+msbeLavNoTWjQ4C1DKqXrpOarX08Vpt+dZs
-	IvfqbBfDFBkX4mT+5l8stI+w6Uyb3IM1F5u7tNNZlmm+t8blL1vV5Yz5j87fw0ZE0gMdFKn/iPw
-	DLDe5ypMrokD21qtNTzjF0WWYu21UpHI2ah0XHqzWB9febHsOqhbFKm6SD0UnxkMDZZR4kH2mRl
-	NtyweKt9BTua9WC6sHodQqNFLCR/YN0EBf38N3u/ttKgsSnrCuuyA==
-X-Received: by 2002:a05:6214:468b:b0:91b:5d39:e127 with SMTP id 6a1803df08f44-91c12f1f445mr103449156d6.48.1792700287610;
-        Thu, 22 Oct 2026 13:18:07 -0700 (PDT)
-Received: from armok ([2605:a601:9b7d:cc00::8])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91c39507ff0sm1638386d6.4.2026.10.22.13.18.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 13:18:07 -0700 (PDT)
-From: Liviu Nicoara <lnicoara@thinkoid.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Aleksandrs Vinarskis <alex@vinarskis.com>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] arm64: dts: qcom: x1e80100-dell-xps13-9345: Add thermal zones
-Date: Thu, 22 Oct 2026 16:18:03 -0400
-Message-ID: <20261022201803.22530-1-lnicoara@thinkoid.org>
-X-Mailer: git-send-email 2.56.0
+        d=1e100.net; s=20260707; t=1792701358; x=1793306158;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
+        b=CT5T8feYh0khoduI0srCRqyf8JnPV5PI1+pZjSMRV42A3DzOXejFCRi9tDGijvhoTs
+         LqUEOjHQ2YtRCHTXRtNV9i57Q4Z5ri5cDcT3NMMZSpme7j5k7X54i11vAS31R895pwXk
+         mMygqUgr+9nH7ND0iaxw8/O4QPxHNAzvIQKWFrZuOFjbKrYvyN/pRIT1CkaAo3BeE64M
+         4gcjhYfNdRpTaFV1BGkUIyXRM7+3vrxe9zfNSGteNVVzCayV6LdUYln52rtC0/VZdTv8
+         Bl8fZlbONHH6OaBXPDOnxfoVEvVGt0Gxg+xp61obT/NaIUmvVM/d+SkgKqLqkU2+O5z2
+         IybA==
+X-Gm-Message-State: AFq9FYKcd5uUwvoONZZgrX/XrhqNyHMRH6jAhwAgYf/IjrEEwpDtqCVv
+	FXWYYMePOacOtiRLYtU5rTf8eNOLYZQ4J+Ff4hSXX0UlNWrtgVR/0d84gfFzPmtETxATDgPpq6p
+	kmttkybDZ2WOKbXyRAK+9zo7j+tZStH9J7qKOqk/Pmg==
+X-Gm-Gg: AYBFou1zqh2mfKjpTdso++NyTOSVTAXuhPRuI4aVnZ7q+UCK1ipo+12KEu1ncNHG1mo
+	Q8LfHYDWIllhikTpFWozDHiU3b3azwB3sEunE6beQHXBTpgmMq4Q+Gt5oOocHqFhRskxFEiZ24q
+	tfpL5rhH9ZgZk9gWjy9fkVaVEbbeJj7lRNISp5LU+kIbd96dXdeITPzt2yrTTco7ZOTPk6XGt4t
+	XraZINwdUw34HiEixr+u7+wyfpoXvMnSnyDMRCsr/f07qlTDIpwRGoJgxyNxsmJXB7B2nzxkJ3O
+	d2bJrRHNFBUQFZYLgIcqA6lHLahFjALpTb0nq6NECkgCYvsiMk1yR0tZ/catuDSA+ZkSeR9NIYl
+	c9QEUg1BGBh6paYfPI1cpuUicwqvJnmq1hwPeRA==
+X-Received: by 2002:a05:690e:14c6:b0:679:abf5:1478 with SMTP id
+ 956f58d0204a3-67a35b1015amr75503d50.50.1792701357664; Thu, 22 Oct 2026
+ 13:35:57 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -102,248 +103,142 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
+In-Reply-To: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
+From: Jeff Roach <jeff.roach0@gmail.com>
+Date: Thu, 22 Oct 2026 15:35:46 -0500
+X-Gm-Features: AclHuK8BQZdV2f1iffSFbYwwrKQTOhYGtR91ViuizkGRA5Tky2cU2koe5WWRIn4
+Message-ID: <CAAnD8RZKDiv7eW=63HP+obgwXEUCvoQLNzC+xa3quy3P=PT-QA@mail.gmail.com>
+Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
+To: linux-arm-msm@vger.kernel.org, pankaj.patil@oss.qualcomm.com
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+	"jagadeesh.kona@oss.qualcomm.com" <jagadeesh.kona@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The XPS 13 9345 has seven board thermistors on the PMK8550 VADC: AMUX1
-to AMUX5 THM and AMUX1 and AMUX2 GPIO, each with a 100k pull-up. The
-ADC configuration in Dell's Windows driver package lists the same seven
-channels as SYS_THERM1 to SYS_THERM7, the two GPIO channels first and
-the five THM channels after them. Name the zones after that list: where
-each thermistor sits on the board is not established, and a name that
-guesses a location misleads whoever reads it next.
+> +Abel is the fix for that out now?
+>
+>The fix was posted for usb gdsc but wider discussion is pending which
+>might make the patch obsolete
+>https://lore.kernel.org/all/20261016-glymur-usb-ret-on-v1-1->1790a523fd9c@=
+oss.qualcomm.com/
+>Use this series for the usb context fault
 
-The ACPI tables define seven ADC thermal zones, TZ31 to TZ37. Three of
-them, TZ32 to TZ34, carry passive trips that throttle all CPUs and the
-GPU; the other four sit at 100 C. The tables do not name a zone's
-channel. Taken in SYS_THERM order, TZ32 to TZ34 are SYS_THERM2 to
-SYS_THERM4. Heating the board supports that order at one point: a
-charger on the right USB-C port warms SYS_THERM4 well ahead of every
-other channel.
+Thanks, that fixes it. I applied "clk: qcom: gcc-glymur: Use
+PWRSTS_RET_ON flag for USB" (20261016-glymur-usb-ret-on-v1-1-
+1790a523fd9c@oss.qualcomm.com) to the Ubuntu 7.3 kernel (gcc-glymur.ko
+built out of tree) and disabled my workaround (unbinding the usb_hs
+controller before suspend) for the test.
 
-The passive trips follow the thermal mode chosen in the BIOS setup
-(Thermal Management: Optimized, Cool, Quiet or Ultra Performance),
-which the EC reports and which cannot be read without an EC driver.
-Use the values of Optimized, the default: 53.8 C on SYS_THERM2, 62.8 C
-on SYS_THERM3, 61.8 C on SYS_THERM4. The critical trips are the tables'
-114.8 C. The other four channels get report-only zones, as on the CRD,
-and all seven are put in thermal-monitor mode.
+Result over two s2idle suspend/resume cycles:
+- No arm-smmu context fault for SID 0xce0 and no "xHCI host not
+  responding / HC died" on resume.
+- The webcam on usb_hs (HP True Vision FHD Camera) stays connected
+  (only the normal "reset high-speed USB device" on resume) and gives a
+  picture in the camera app after resume.
+- Resume no longer has the ~10 s xHCI timeout, and the second suspend
+  succeeds (before, it failed with -22 from xhci-hcd once usb_hs had
+  died).
+- The other USB controllers, NVMe and Wi-Fi resume as before.
 
-Assisted-by: LLM
-Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Tested-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
+Deep (PSCI SYSTEM_SUSPEND) is still refused by the firmware here
+(-EOPNOTSUPP), so this is s2idle only.
 
-Notes:
-    v2: name the zones SYS_THERM1 to SYS_THERM7 after the ADC configuration
-    instead of guessed board locations, and order them the same way. The
-    "left charger" placement of AMUX2 GPIO did not hold up against a second
-    owner's ten-second measurements, and the SSD one is uncertain:
-    https://lore.kernel.org/all/NCQ5O8k2_GpmJZBjDzgZL67uwdiYmmuSudO9VmdRaFTDq0u7aec6at00VYbzdwwSVvgJnLnGxewwp_TVO9oTjM2pAjP_LoiURf9JCIKXB-w=@vinarskis.com/
-    Channels, trips and cooling maps are unchanged; the v1 tags are kept
-    for what is a rename.
-    
-    Tested on v7.2.6 with the ADC_TM driver (7.3-rc1) and aac6b2ca472e
-    backported: the seven zones read within 0.01 C of their IIO channels.
-    With SYS_THERM2's passive trip moved just above the zone and a
-    single-core load, the crossing throttled all three CPU clusters and the
-    GPU through the ADC_TM threshold interrupt, and the throttle released
-    at the trip less its hysteresis. The v2 rename was built and checked
-    with W=1 dtbs_check on qcom arm64-for-7.4; no warnings.
+Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (X2
+Elite, Mahua)
 
- .../dts/qcom/x1e80100-dell-xps13-9345.dts     | 169 ++++++++++++++++++
- 1 file changed, 169 insertions(+)
+Since this is outside the patch thread, please feel free to carry the
+tag over by hand.
 
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-index f48e6bc35006..bb7d91ed08ba 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-@@ -326,6 +326,145 @@ vreg_wcn_3p3: regulator-wcn-3p3 {
- 		regulator-boot-on;
- 	};
- 
-+	thermal-zones {
-+		sys-therm1-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-+		};
-+
-+		sys-therm2-thermal {
-+			critical-action = "shutdown";
-+			polling-delay-passive = <1000>;
-+
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-+
-+			trips {
-+				sys_therm2_alert0: trip-point0 {
-+					temperature = <53800>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+
-+				sys-therm2-critical {
-+					temperature = <114800>;
-+					hysteresis = <1000>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&sys_therm2_alert0>;
-+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		sys-therm3-thermal {
-+			critical-action = "shutdown";
-+			polling-delay-passive = <1000>;
-+
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+
-+			trips {
-+				sys_therm3_alert0: trip-point0 {
-+					temperature = <62800>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+
-+				sys-therm3-critical {
-+					temperature = <114800>;
-+					hysteresis = <1000>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&sys_therm3_alert0>;
-+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		/* Warms with a charger on the right USB-C port */
-+		sys-therm4-thermal {
-+			critical-action = "shutdown";
-+			polling-delay-passive = <1000>;
-+
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+
-+			trips {
-+				sys_therm4_alert0: trip-point0 {
-+					temperature = <61800>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+
-+				sys-therm4-critical {
-+					temperature = <114800>;
-+					hysteresis = <1000>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&sys_therm4_alert0>;
-+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		sys-therm5-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+		};
-+
-+		sys-therm6-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+		};
-+
-+		sys-therm7-thermal {
-+			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		};
-+	};
-+
- 	wcn7850-pmu {
- 		compatible = "qcom,wcn7850-pmu";
- 
-@@ -1025,6 +1164,36 @@ rtmr0_1p8_reg_en: rtmr0-1p8-reg-en-state {
- 	};
- };
- 
-+&pmk8550_vadc {
-+	channel@144 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@145 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@146 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@147 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@148 {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@14a {
-+		qcom,adc-tm;
-+	};
-+
-+	channel@14b {
-+		qcom,adc-tm;
-+	};
-+};
-+
- &qupv3_0 {
- 	status = "okay";
- };
+Thanks,
+Jeff Roach
 
-base-commit: d053e38e614fb2e383b298ce8fc308a780d7f209
--- 
-2.56.0
-
+On Wed, Oct 21, 2026 at 5:34=E2=80=AFPM Jeff Roach <jeff.roach0@gmail.com> =
+wrote:
+>
+> Hi all,
+>
+> I have a device tree for the HP OmniBook X Laptop 16-cp1xxx (board
+> 8F46, Snapdragon X2 Elite 12-core, "qcom,mahua") that boots and runs a
+> full desktop. This is a bring-up report, not a patch: the DTS is
+> currently based on the Ubuntu linux-qcom-x1e 7.3 tree and still
+> carries my verification notes. I'd like to rebase it and send it
+> properly, and would welcome advice before I do.
+>
+> The DTS sits on mahua.dtsi, uses the same PMIC deletions as
+> mahua-crd.dts, and copies board wiring from
+> glymur-hp-elitebook-x-g2q.dts. I checked it against this laptop's ACPI
+> tables where I could. DTS, notes and test results:
+>
+>   https://github.com/jeffroach0/omnibook-x16-linux
+>
+> Disclosure: I'm not a kernel developer. Most of the analysis and the
+> DTS were done with an AI coding assistant (Claude); I did the testing
+> on the hardware and checked the results. I'll do my best to answer
+> questions and test things, but please be patient with me.
+>
+> Working (kernel 7.3.0-21-qcom-x1e, Mesa 26.2.4):
+> - eDP OLED panel via msm (samsung,atna33xc20), DP-AUX backlight
+> - GPU (Adreno X2-85), with the workaround in (1) below
+> - Keyboard and touchpad (i2c-hid), lid, power key
+> - NVMe on pcie5; Wi-Fi QCC2072 on pcie4 (ath12k, modelled as a
+>   pcie-m2-e-connector)
+> - Bluetooth QCC2072 on uart14, using the posted QCC2072 UART series
+>   (btqca/hci_qca and pwrseq-pcie-m2 patches) built out of tree
+> - usb_0/usb_1 Type-C (SuperSpeed in both orientations, PD charging
+>   through pmic-glink), usb_2 USB-A (no repeater node needed, UEFI leaves
+>   it set up), usb_hs (webcam)
+> - ADSP/CDSP with OEM firmware from the Windows install; battery through
+>   qcom_battmgr
+> - 2x WSA884x speakers on swr0 plus VA DMICs
+> - s2idle suspend
+>
+> Issues and questions:
+>
+> 1. GPU GMEM size on 3-slice Mahua. MSM_PARAM_GMEM_SIZE reports the
+>    catalog's full (4-slice) GMEM, so Mesa's tiled rendering corrupts
+>    the screen (garbage bands, diagonal half-drawn quads, and CCU write
+>    translation faults from WebKit's Skia GPU raster). FD_MESA_DEBUG=3Dsys=
+mem
+>    and TU_DEBUG=3Dsysmem make it clean. I think the a8xx slice-info chang=
+e
+>    in linux-next ("report the active share" of GMEM) fixes this. Is it
+>    going to be backported to stable?
+>
+> 2. CPU frequency. scmi_cpufreq fails: "timed out in resp" and "Failed
+>    to query supported version for protocol 0x13", probe -110. The SCMI
+>    base protocol answers at boot ("Qualcomm:PDP0"). The perf
+>    protocol never does. The clocks stay where UEFI left them (about 3.5
+>    and 3.9 GHz). Is perf over SCMI expected to work on Mahua with
+>    production firmware, or is something else needed?
+>
+> 3. Suspend. PSCI SYSTEM_SUSPEND (deep) returns -EOPNOTSUPP, so s2idle
+>    only. On resume from s2idle, usb_hs (a200000) gets an arm-smmu context
+>    fault for SID 0xce0, then "xHCI host not responding ... HC died", and
+>    every later suspend fails until reboot. Unbinding dwc3-qcom before
+>    suspend and rebinding it after works around it. pcie4 also logs
+>    "Timeout waiting for L2 entry! LTSSM 0x11" on suspend, but the link
+>    recovers.
+>
+> 4. Smaller things:
+>    - "GICv3: SPI 4115 out of range (use ESPI?)" right after the SPMI
+>      arbiter probes. I haven't tracked down which node causes it.
+>    - The pm8xxx RTC probe fails with -ENOENT because this machine has no
+>      RTCInfo UEFI variable (qcom,uefi-rtc-info).
+>    - The headphone jack is a Qualcomm SoundWire SDCA codec (only in ACPI,
+>      \_SB.ADSP.ADCM). I didn't try it.
+>
+> For an upstream submission I assume the right base is the qcom
+> for-next tree, with a dt-bindings patch for "hp,omnibook-x16". Please
+> tell me if anything in the approach above (for example the /chosen
+> simple-framebuffer that keeps MMCX/MXC on before msm probes, or
+> dropping usb-role-switch while running host-only) shouldn't go
+> upstream as it is.
+>
+> I'm happy to test patches and other things mentioned in this post on
+> this machine to the best of my and Claude's ability (mine being fairly
+> meager).
+>
+> Thanks,
+> Jeff
