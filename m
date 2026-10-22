@@ -1,106 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.44
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792686757;
-	b=v9UyUAFzV8FRNGV2zEvsGB3szWn8bGwBh4REFi+Oi4cjQMTFW1GLZzs+cGSnp9qemyzm
-	 leIX9fNddw2lfdCUBII9nCgsj1BQ70x8h+cU2d4XAFk7RQm/CpGmY7L8w8/WQPRTOKgRg
-	 9hM5xPkWXC9mHpuweFuuxmHULtMozS4ULFYr+NtahEirje557CIU973YvH8cVLCsm5ee7
-	 WfzWsmaWiz1C1smvIC5c9IIBRnNx5T3Ziau6UJ1IStij7pHZWUq6oekV3yMqnaiHlTiLW
-	 wKeOI/KimdJ/5QdCM9X8TVVfT1//HDdbAaCnBqt0Jzgt8Kv2M8l/fWlxSWmoypNyKSQ==
+	t=1792687343;
+	b=QkLFbroZTSNnuvB0YGOg5QvOMMRZf+IYlXDZZq8M5A+1V5C3H71tfYDzvC9+HkwyeRny
+	 xqoRAhtR+KveCbXenLb7gSFMUm2fAIlvQOibJq3rwflGK4qfpDgOc9UH2Euz5maahjFkV
+	 ghCTJK50EC6ETmeEbtXZOyWQWEiO6Mpe36H27yU6u1p4FqqZx7o8gBJ3oa3IvQMZZ1FZk
+	 ZQuKcLXPJFYqlK1ZG1/DyZYyrs9yfk/efsQggMV7ibXohRk/rFqgV9ru+ssmN8SUllFKn
+	 N55dM8gXAIyQ4OhsqbByZK2YqKoPSzgwe7/guOPdtYkINtHX9SfOTxFGvXHyxXv+TZg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792686757;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792687343;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
-	b=shiH0AyfXcShKRqGUftHUx1e/Vc2fuWk0Huk7p9AcH0ZJ0JCmVEj99kUVrjOe6QRxQ9O
-	 O4m8/T7O/NgZoOMRVxEddJ3SfoZRHzMIIFOdinCyZgKwVLfptVGEg9Yd7Kf874ntwV+j7
-	 DvyAw0vmnasQgRe6RvfulZXJY5swVlxr18xDE7/btM7ruaVZ6Ajx2PIYW1DQlTBjShQPM
-	 Se0M2GEK+5MKLOcJN5oN7Tj48UGYTA+THXsJndJmKs95+ErTDC0XqWkywBJFWXU4/G6Is
-	 diiN/pgAgXrMYNjDFxMaa8+VjVXwwKA5LvhvDv4GbTOpMBtkecZzNmllzEKlEXWupNQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
+	b=IAktrEk83uVm2YF4pWOVcOf/cOzaau0DdGYG/t/8rd0Z30wL15ylBgocQTdL1McghxEm
+	 EiBAKmy1xhalxjJkk8pQHwQmIDXI0+JRIfzOFJuN4/8IfQqecTYF67xRg8Ce0hTOIXd94
+	 +XilmPqOU4lBA8LqUOF5y5EfOyDzNpQJ7tn5Z6NrxUuV+6O0JKNtNWFHr2nU6vzg64IPY
+	 Hi5kF/s0HSmpsNOJmvV/aHbvjY7x5kG/Ap+AroxaHfy/6BPnJ8r3RbwathnaTPTiqhgzM
+	 U+ZSD9S7iaa2xjHJfI6loBL3/RdOolgObcqH0eW1JrmimR8CvCc3SQjTxWKKwfi/NNQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=nlgT2q1R;
-	arc=none smtp.remote-ip=74.125.82.170
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="Zly/bhuk";
+	arc=none smtp.remote-ip=209.85.221.44
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 450A0606A31F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:32:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 450A0606A31F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C86D606A320
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:42:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C86D606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=nlgT2q1R
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-33fb4680717so4965518eec.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:32:32 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Zly/bhuk
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48dfdd0678dso8666f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:42:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792686751; x=1793291551; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
-        b=nlgT2q1RTU0EH+YxL4z+hsL4T+7TlQvAkGhXm/A3gBiBq1OjpdykFD0p79P+2QHVXp
-         rrRmUnE13x6JIjeqAVMN86RahXl7yQZrxVVvmdH/h3z701xAU3dJkZMO16qz1XzHWXwb
-         yvWxB5Dz/qX8uF52sjXSeZYPJDeDbcgeZU1+MUNol869hzum1Olo40CBOrZyYUs873o1
-         d2JfUi0Atheb1KdNQAd4ROzSnSe9hAl6UfeSPcuJai48Apf3no8HkCxQgOWlYtlUSBsd
-         BQlVpeu2F6rRyR4+kHtPpl0iu72eMIo1cY+IV1lD/TqySeNzClg2LJWDXn8biN9HVq8N
-         Px3g==
+        d=gmail.com; s=20251104; t=1792687341; x=1793292141; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
+        b=Zly/bhukMS6FJUjJfT1eSqtaTbkAgukn20PNTV+vr3KX4kG2j6DGVJa+PChtvWhfPj
+         cdXq80B0ssJ8Ip3qy11meFWs6jY7RkF8Q3FGJs5gDYEdqQkMSSk1U1wVUxeRl+ftO1Tq
+         nRm0yyPMkb7PklYx0RwaGNe9HE7sn30WOkLhrgixmaTTKwS3TtkE4wVzTZ4SKrZAWMq0
+         eUsrqrd0Poi1f29mM47ne04K55Z1jqBV6MAsAJqLEwAvSK0FBd0e9sBxl4q6jgKUpl2D
+         BXHLa7GhF1owwciNJ9qIyfOxGvc90wf5zKVlJfOGde0GUKoIW7KJFz6j4uXKmyIVj+xd
+         nJ6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792686751; x=1793291551;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
-        b=OH4SwilqQNPwGjZi5SXwa9FOCGeWbkMUAdA6xTeGN2Jr/tTkYvP6P1mDhqY1eFFrqT
-         kvTb/aju9LfVXbJ07DatmcWEVCHtNMIk96QtEsfJCIC7R6Pp3Cgbg7ropCgqcN1wOKBy
-         Yz4jSAJyvAUPVcaV356XNBM1MrVk8lWKOHZZEvuYXBvAbeImnQFfWoINAuBGX+KeZnc0
-         7dw32GrREZ0VnwtTdacjMS5/WbMK2/Rh7q/150dQ210B/e1gRGi6Wm8oL7fF+Q/TGaQb
-         qPOG73RTrQIleRDjFOtHb15V7hwF2OA7NASPaFKMHLq9nF8lAT9jsY8LZAMjYyQA/YaF
-         oUtg==
-X-Forwarded-Encrypted: i=1; AKwUvBzwvmA+TJyFp4UCtT9qiXwA7faDR5DX5y3Qwj70wh5HSADZ6wsXwgcuGqDP30Lk/5D76Qp1KwHPrYZejqhF@vger.kernel.org
-X-Gm-Message-State: AFq9FYI8M8nNv3Q1sO4b7PceIGelh2GhPqSRCu4SwjOzY8/oZUkh1mFb
-	vAmhrE23KArDzsZhYTHX7Y8YDdYsD8j69oBbv3niR00aqZnz11SREYzl
-X-Gm-Gg: AYBFou1W2JahIhPWi1j2LUB58+GrOtP9oBk3u6hOKGDKYHHGxFoX4HnLmyvVCYg7N2F
-	VzjF6o6KodmSp+fKc9jT2XpE/MZYHCAKZJeXTyR/Nu0oHIK1uYtrktEAsbqNWhp4xzBjKSm/IQM
-	j+LS8R4O0ZdgwCvXE4nWFEoVD/Wd1WDL9qwW/+0K4uxMHoFMS7cYXHT1nsuagXSjrzJE8q8rHam
-	Fv6x3bpsVXD45So43swxGUcD/kJlT93bPybf7rJhC4mJfovG7gZT6f6BWTgg3l765eu49ig/TzM
-	8cIvdeSPvfqN4Dsoq0yAZ6f6NlkBDmuB4ol5c3HqswzB5r1Y/5/Hj6XgkRA1WhykkRS5xQ+nRdu
-	lqGFUud5XI8HiV1lLG1IV/MOJEwkb2ITtWJEcCTjq6OKW9/pzpwYvl3aJ17Orcd6v2sJ06DoJFi
-	eT3vhNRDoj4zoE1JJJqxcXfw+nX3SnjpxsTYdPx1MD0y6m6i5ZUy4yquy0n/WPVu75GqEh+S4nS
-	l/TPSxCSyUjCKuUpNWw1ZEVZ/u39VWBy+yHJisKH/QLgss1Pdf5/35Wjb0FbTQRyd9JsbvhR/jy
-	5pbz1MmpX7IKTGEQ
-X-Received: by 2002:a05:7301:18a1:b0:359:9302:a526 with SMTP id 5a478bee46e88-3674c93ba42mr7166066eec.7.1792686751237;
-        Thu, 22 Oct 2026 09:32:31 -0700 (PDT)
-Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36741e71eaesm37214243eec.26.2026.10.22.09.32.27
+        d=1e100.net; s=20260707; t=1792687341; x=1793292141;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
+        b=fIXC/vybFY7Wn1JyvLieDeVSu11EgBjHZ9/9tku3sbi0JjBTwcOoJbqCIFXnq++8sX
+         QXEcRWaFaHtQPskrXgQBHkhbdPWiD0NIBj6/FCFyrpsEPCvamArnxJySi5wH6RNRn80S
+         PLB4uTBPbM4+fNl+1zOABFdDgsIxHMBLQCQnaOkZ9IIQ3QXvw3VZhu1LpIe0U59EPWN8
+         /+Vjf7/AUTpt82QxOvEk4PONCbqzEU4zQqb8yf/OqfJTdfm2wC1slDIrWHQ8vBxMy1Iy
+         q1LTjo5sk409GzXcpMQOtju5lFbvWjmAkEqIqZQ6190mYsluRw11Y60NtU+zm3Tv9bno
+         ek5A==
+X-Forwarded-Encrypted: i=1; AKwUvBy5HiPLQDMJ2I2M3W0Ux1t3+CPz2QD33mUx95RyokfHWupk8VNITs1V3iGvDpluGMDNohctv3Rh231zV6AU@vger.kernel.org
+X-Gm-Message-State: AFq9FYLwvod+AahobB3Ax5KnXoFRbOOcqLNz1jZ1ixaOVQbQRRZT6Ja/
+	vNemHct05WzriODFpkdC/J32b3mJ2CgW0QYpddnl42a992ZIWrZW5rRw
+X-Gm-Gg: AYBFou3WyXuta6tkXKRN2c3J7aBA9hjCG2FX8E7nwf4g5CxeDtm8gyERjRM9wHK/JZj
+	OYSxbVPz621PDkcyldFJ9kjiCmfqbkZLa0pJbxpSgip8S5/5gywD9ifHu+NHbBinjvrBZ+aAd8n
+	zwunPVfUTqckY0i30ZoVH1G1Whd13yU2j27LqmGcj4EwHyiOSalgO1+wgd8qDkZ5DNf58q2dewX
+	9F72CsMVPngOi+mXIGalcpBaUz+sDtiFOcTTBhq8WlI1lkfaD6mEkWCz3teomZT7E6whArQAFm1
+	v0ar1Cx8X6vQI5nFo0sghO9pVvyM3BOjNUPCOcdNYMF1Wx9YEYhZ/H8gBDnMF1KsBpRjCufW6iX
+	Z39x2rPC98EoauvDoJVHUFEvTnM86QOpM4VHtrzRKgUSVxKzTKvfPU+TBWJZojmmV1oHt4JIVjU
+	g5ck8BI4dg8j1YVEzt1UonlDAjo2elbRcKJiwEQGUtaZOu/k9jVi2lSCkjzIbgWQAgmzcXYt3eB
+	GegcfzfFU0k9GkYLUoMXomMn2n6Rphn0xn3iL8a353t5ArNck5FbTk23xWph0cGyK6g28pxKvkV
+	lUJw7A==
+X-Received: by 2002:a05:6000:50:b0:48d:e696:8a65 with SMTP id ffacd0b85a97d-48e264db1a1mr8359382f8f.46.1792687341082;
+        Thu, 22 Oct 2026 09:42:21 -0700 (PDT)
+Received: from localhost.localdomain ([188.190.249.216])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2584c3b0sm15040175f8f.57.2026.10.22.09.42.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 09:32:30 -0700 (PDT)
-From: Joonhoe Kim <26rote@gmail.com>
-To: netdev-bot+sashiko@kernel.org
-Cc: mani@kernel.org,
-	davem@davemloft.net,
-	edumazet@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	christopher.lew@oss.qualcomm.com,
-	deepak.singh@oss.qualcomm.com,
-	pranav.phansalkar@oss.qualcomm.com,
-	andersson@kernel.org,
+        Thu, 22 Oct 2026 09:42:20 -0700 (PDT)
+From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Sebastian Reichel <sre@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Casey Connolly <casey.connolly@linaro.org>,
+	Johan Hovold <johan@kernel.org>,
+	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Joonhoe Kim <26rote@gmail.com>,
+	Daniel J Blueman <daniel@quora.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kees Cook <kees@kernel.org>,
+	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org,
+	linux-usb@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	regressions@lists.linux.dev,
-	stable@vger.kernel.org
-Subject: Re: [PATCH net] net: qrtr: ns: retry service announcements on -EAGAIN
-Date: Fri, 23 Oct 2026 01:32:23 +0900
-Message-ID: <20261022163226.1091-1-26rote@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.5
-In-Reply-To: <179250109438.3135.5278679700614096504@kernel.org>
-References: <20261016124600.31-1-26rote@gmail.com> <179250109438.3135.5278679700614096504@kernel.org>
+	Vladyslav Tymoshchuk <tvlad744@gmail.com>
+Subject: [RFC PATCH 0/4] soc: qcom: pmic_glink: Hold back notifications over system sleep
+Date: Thu, 22 Oct 2026 19:41:47 +0300
+Message-ID: <20261022164151.592-1-tvlad744@gmail.com>
+X-Mailer: git-send-email 2.45.1.windows.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -112,69 +116,174 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On Tue, 20 Oct 2026 12:58:14 +0000, Sashiko AI review wrote:
-> - [High] The fix only covers one of the two paths that send NEW_SERVER.
+The GLINK interrupt that delivers the PMIC GLINK messages is requested
+with IRQF_NO_SUSPEND, so the clients get notifications during system
+suspend and resume and in suspend-to-idle, and the work they schedule
+for them can run while devices are suspended. Commit c7c56b6ec077
+("soc: qcom: pmic_glink: Fix device access from worker during
+suspend") moved the altmode worker to system_freezable_wq as a
+stop-gap, and left the proper fix for later:
 
-Agreed. A service registered after the remote's HELLO has been handled
-but before our HELLO goes out is broadcast from ctrl_cmd_new_server(),
-and qrtr_bcast_enqueue() drops it without telling the caller. If the
-local node had no services when the HELLO was handled, v1 has nothing
-to retry.
+  The final shape of the rework of the pmic glink driver in order to
+  fulfill both the filtering of the messages that need to be able to
+  wake-up the system and the queueing of these messages until the
+  system has properly resumed is still being discussed and it is
+  planned as a future effort.
 
-> Could this be handled in the core instead of by polling in one caller?
-> For example, packets could be queued in qrtr_node_enqueue(), or the
-> announcements replayed once hello_sent becomes true.
+This series is a proposal for that shape, to have something concrete
+to discuss:
 
-v2 does the second, as you suggested: the core records that the remote
-has sent a HELLO, and when our HELLO has been sent to such a node, it
-passes a HELLO from that node to the local name service again. The name
-service then announces every service it has at that point, which also
-covers the dropped NEW_SERVER broadcasts.
+- Patch 1 does the queueing: from ->prepare() on, pmic_glink holds the
+  notifications back, and passes them on from system_freezable_wq once
+  the system has resumed, in order, without duplicates, at most 64.
+  Responses are passed on right away. The service UP is held back as
+  well and passed on after the notifications, DOWN is passed on right
+  away.
 
-> The same window opens again after qrtr_endpoint_hello() clears hello_sent
-> on resume, because the nid stays assigned.
+- Patch 2 does the filtering: a notification is a wakeup event if the
+  client's device may wake up the system, see device_may_wakeup(), and
+  the client's optional wakeup filter accepts it, which is the
+  callback that Casey suggested [1]. pmic_glink reports the event when
+  the notification arrives, and keeps the client's wakeup source
+  active until the notification is delivered.
 
-The flag is not cleared on resume, so the replay also happens after the
-HELLO that qrtr_endpoint_hello() schedules.
+- Patch 3 enables wakeup for ucsi_glink, as Jishnu Prakash proposed
+  [5], without the event in the callback.
 
-> DEL_SERVER broadcasts from
-> server_del() are dropped the same way.
+- Patch 4 makes qcom_battmgr wakeup capable, with a filter for the
+  charger notifications, but leaves wakeup disabled: Bjorn does not
+  want a laptop to wake up in a backpack [9], and a battery charging
+  state notification woke up Abel's laptop with some chargers [10].
 
-v2 does not replay these. A service that is removed before our HELLO
-goes out has not been announced to the remote either, and on resume the
-remote has been reset, so it has no entry to remove.
+The UCSI connector work running before the devices it uses have
+resumed has been hit on three boards so far [3]: on X Elite with a
+PS8830 retimer [2], on SM8850 with an FSA4480 switch, and on SM8750
+with the dwc3-qcom role switch, where the register access with the
+clocks off resets the SoC [4]. With patch 1, the clients don't have to
+keep the work for their notifications off the system workqueue: Abel's
+UCSI RFC [2] would not be needed, and the altmode stop-gap can stay or
+go.
 
-> - [Medium] The new retry loop in announce_servers() (ns.c:232-236) can
->   stall the whole name service for about 10 s per remote HELLO.
+The earlier discussion is in the thread of the first version of the
+altmode fix [1]. Krzysztof:
 
-Agreed, this is the same problem Mani pointed out. Nothing sleeps in
-the name service worker in v2.
+  Regardless whether we call pmic_glink a bus or some sort of
+  transport mechanism, the users of its interface should not be
+  called after they are suspended.
 
-> A HELLO that fails with -ETIMEDOUT or -ENOMEM leaves hello_sent false
-> for good.
+Bjorn asked whether a bus would mean "some mechanism for pmic_glink to
+defer these messages until resume has happened". Abel found queueing
+the messages fine, but noted that it does not decide when to wake up.
+On the UCSI RFC, Dmitry asked to fix PMIC GLINK instead [2].
 
-That is a separate issue in the core, and v2 does not change it. With
-hello_sent false nothing but HELLO reaches the node, so the replay
-would not help there.
+Why not in GLINK: dropping IRQF_NO_SUSPEND would break the other users
+of the interrupt, as the description of c7c56b6ec077 says, and would
+not close the race [6].
 
-> - [Medium] The NS side gives up after a fixed 10 s, but the core keeps
->   retrying our HELLO with no limit.
+Why not a bus: patch 1 gives the guarantee Krzysztof asks for from the
+pm callbacks of the pmic_glink device, and the wakeup policy stays
+with the client devices, which reviewers preferred, according to [5],
+over making the GLINK interrupt a wakeup interrupt [8]. cros_ec does
+much the same: it passes the events that came during suspend on to its
+clients in ->complete(), and decides whether an event wakes up the
+system by its type and device_may_wakeup(). Its default wake mask
+leaves out the battery events and the AC disconnect as "not actionable
+wake events".
 
-Agreed. Any limit in the name service can expire before the core gets
-our HELLO out. v2 has no limit: the replay follows whenever our HELLO
-is sent.
+Open questions:
 
-> - [Medium] A retry can re-advertise a service that was closed during the
->   retry window, and the remote then keeps the stale entry.
+- ucsi_glink wakes the system up on a cable change by default, as in
+  [5]. Should it only be wakeup capable, like qcom_battmgr?
 
-v2 has no retry window, but the replay is one more HELLO for the name
-service to handle, and the ordering race you describe applies to it
-too: a port closed after the replay is queued but before the name
-service handles it is still announced. v2 does not fix that race.
+- pmic_glink does not wait for the work that a client queues for a
+  notification, so if a suspend starts right after a notification was
+  passed on, the work can still overlap the suspend of devices. Should
+  ucsi_glink cancel the UCSI work in its ->suspend() with
+  ucsi_suspend(), like ucsi_acpi, or should a wakeup notification keep
+  the system awake for a while, like the timeout in [5]?
 
-v2: https://lore.kernel.org/all/20261022163116.1042-1-26rote@gmail.com/
+- Only the latest of identical notifications is kept. That relies on
+  the clients treating a notification as state, or as a hint to read
+  the state, which holds for the in-tree ones. Should a client be able
+  to opt out?
 
-pw-bot: cr
+- qcom_battmgr notifications no longer reach power_supply_changed()
+  during a suspend, so its wakeup source no longer aborts a suspend
+  started through /sys/power/wakeup_count. Does anything rely on that?
 
-Thanks,
-Joonhoe Kim
+- Patches 3 and 4 depend on the API added in patch 2. Should the whole
+  series go through the Qualcomm SoC tree, with acks for those two?
+
+Tested with suspend-to-idle on SM8750 (OnePlus Pad 3): the series on
+top of the v7.3-rc5 based kernel that the device runs, with debug
+prints added. That kernel does not have the dwc3-qcom fix [4].
+
+- Awake, with qcom_battmgr wakeup enabled: of the 23 qcom_battmgr
+  notifications for an unplug and replug, only the four USB property
+  notifications were wakeup events.
+
+- Cable plugged in (one run) or unplugged (two runs) during
+  suspend-to-idle, with the default wakeup settings: the held-back UCSI
+  notification woke the system up. 10 to 13 notifications were held
+  back and 6 to 8 passed on after resume, none dropped. The wakeup
+  source of ucsi_glink stayed active until they were passed on, about
+  1.5 s. The UCSI work and the role switch ran only after that, and the
+  SoC did not reset.
+
+- With only qcom_battmgr wakeup enabled, a plug-in during
+  suspend-to-idle woke the system up with the USB property
+  notification. The UCSI notification before it was held back without
+  a wakeup.
+
+- With wakeup disabled for both clients, an unplug during
+  suspend-to-idle did not wake the system up. The 11 notifications were
+  held back until the RTC alarm 55 s later, and the SoC did not reset,
+  so the queueing of patch 1 is enough to avoid the reset.
+
+- 25 minutes of suspend-to-idle while charging: one qcom_battmgr
+  notification came, was held back without a wakeup, and was passed on
+  after resume, with the battery state updated right after.
+
+Not tested: PDR during suspend, more than 64 notifications held back,
+hibernation.
+
+Kamal Wadhwa's PMIC GLINK RTC series [7] also changes pmic_glink.c, so
+whichever goes in second needs a rebase. Its driver enables wakeup on
+its device, so with patch 2 its notifications would become wakeup
+events without further changes; today, the alarm only reports a soft
+wakeup event through rtc_update_irq(), which does not end
+suspend-to-idle.
+
+I used an AI assistant (Claude) for the analysis and to draft these
+patches and their descriptions; I reviewed the result and ran the
+tests on my device.
+
+[1] https://lore.kernel.org/all/20250110-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v1-1-e32fd6bf322e@linaro.org/
+[2] https://lore.kernel.org/all/20250205-ucsi-schedule-conn-worker-on-freezable-wq-v1-1-107d1356b77b@linaro.org/
+[3] https://lore.kernel.org/all/20261020132432.998-1-26rote@gmail.com/
+[4] https://lore.kernel.org/all/20261018143126.3978-1-tvlad744@gmail.com/
+[5] https://lore.kernel.org/all/20260722-ucsi_glink_wakeup-v2-1-b43dee56df24@oss.qualcomm.com/
+[6] https://lore.kernel.org/all/CAMVG2ssS4=Kb=OxuVXb_062fgvBfKz+X0q1N2rFob0TH6JypYg@mail.gmail.com/
+[7] https://lore.kernel.org/all/20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com/
+[8] https://lore.kernel.org/all/20240603073648.3475123-1-quic_deesin@quicinc.com/
+[9] https://lore.kernel.org/all/ZnIe2hjPgWipDfgG@hu-bjorande-lv.qualcomm.com/
+[10] https://lore.kernel.org/all/Z5taRZ0om5y%2FDJ69@linaro.org/
+
+Vladyslav Tymoshchuk (4):
+  soc: qcom: pmic_glink: Hold back notifications over system sleep
+  soc: qcom: pmic_glink: Report wakeup events on behalf of clients
+  usb: typec: ucsi: glink: Wake up the system on connector changes
+  power: supply: qcom_battmgr: Allow charger changes to wake up the
+    system
+
+ drivers/power/supply/qcom_battmgr.c |  19 ++
+ drivers/soc/qcom/pmic_glink.c       | 257 +++++++++++++++++++++++++++-
+ drivers/usb/typec/ucsi/ucsi_glink.c |   6 +
+ include/linux/soc/qcom/pmic_glink.h |   2 +
+ 4 files changed, 281 insertions(+), 3 deletions(-)
+
+
+base-commit: 9a482184d910775cf648863148944945b74e2815
+-- 
+2.43.0
+
