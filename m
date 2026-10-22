@@ -1,100 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.46
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792695809;
-	b=uxtwXyDa1KVBJlAZYdwZPfmlmKvUtyUmDtBWBF7C+lbK759vaLoVAZiSH9Gvg40Yn/7e
-	 YH1jKSnE8vThZ+lQ3FA0BLYGtiM8pYpHwLt+FdxWmhkmkmn80jgwwR5nTyH0yDbcWLrRn
-	 0NEGxpDNeC6mv+5cVQR95xlSvGSWIV1Tmcf2FMcUOKV6Kz+YTWKrSIBNv2BIBW9TjOlI7
-	 oK0HmFtpBVWajpdeHi+zQz0puPWkGK4SucNluaDyJo4yV+791y59rh2kEVnEgyjLNNaFX
-	 5py8elWo8jzA12VXECgCL7NfNfVdgojeoopBuKRg2+97QLF9VcYE0tXJgaZE/ZERmfw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792695809;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=YFlP3FccQeszqXuZ0Z7/akOSPtoAt88BpigY0WGGEQI=;
-	b=etX0UAaEjdvdBdO82gv2l26aIobCSkaq4O8DIMPWH2PkVYaSqFyhjOeLWoNHedUGh3/2
-	 b2xo2jZzzwPIm2NEioiEdic+1FI1A2yCW0hVU045o8G1RBrlZzOWsTPQtoIZRGMAwAVcV
-	 fPUiCfOPfDzp2W6PrvvxIWfKEzg69PC7EUia3zAE7dP0UMAplhwwTYBExxOLzi9hmyoME
-	 v5rGADnehDgIgM7hHFewu0JHKA3QKCMEnGY3MfS8hI0Z6No+bXZp6+8ycdqMFw8Y5YeLL
-	 gCSCPwggQZlOwG4QSGSqANY6/yQvApWmD/M0z9DSoMFz4XeiJRoUDBPYbXFlSugFvXg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=hedWKjzr;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.46
-Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792696159;
+	b=bCxpqc3b6HKdKnsoyowphmMmLod2K114iMc9V1ahIB/GA4AMHOgVnM3gUD2Fqa9kaGaG
+	 1+qP7ZYDVdH/c1Pv1QE1Hmmav1IoxTv1l6bAoc5Cy19r+VxcsnXgvI7KSZTVl71sDyxqm
+	 rR/NAjnx4B0/oD9xciO98XUfiRVB9zpyFRgyxkWYlRyBrcxniaKkUA7K9OUdxPkQllPiz
+	 RhhTjsoRyLF9J6RgsE924XIHz5spZCJxdRNcfs5e0HGFejhqTNGyfGeEXkV8BjtxwgaF6
+	 L93fhwsVIeXGrz1BqYqH+Nz9O8LW1vIFtJwy6cr3WMWYXipIeYbZjkRNJvlElVtA1iw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792696159;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=pPtOarc+/Pj81jSX9HNNfT9z9z/i6TL+1wTNdbkyejY=;
+	b=FGX5/QoNhk9QqJM93iz/Rrlfa1iIyEZSikpQ+7XHIzGudIFpk1n3p/MmQb2LSKlw9gV0
+	 C0hsEC09xzJjsSOnpIbbZwy9dvtDsdt9bEU0oKmroBiQxouJtp+/iTGIHsRjz7EWfhnsP
+	 CADBaKGA88eD0CiSMDaFudpHbEsThypjnRDzD7MkgRw+YJSEO3bsiwMDMUE3VHQAdWckg
+	 hF3qZIR5L5wBqZNXXtKa01rI816Up7UPJzR9Nb3TPiYEFGBxZKrjZDsQZ7xnb13qKcO0Y
+	 mhPlQHjA6E8t+ZUtparDPvKDpT33/7RVaByoQAA15pegj96tvfKGJc6C7MtpZbxjyNA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=gIPnZ1g5;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AF59606A320
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:03:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0AF59606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7783606A319;
+	Thu, 22 Oct 2026 19:09:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B7783606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=hedWKjzr
-Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-676804a3a22so220057d50.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:03:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792695808; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Zq8YdPzl/Snt++YvmApN+PcEOUN6PfMOM5InYSEwj1hqNN8nZgcxI+3lR6ZlXWE/MK
-         QolicoWwM8GG79EMQ+DxukP7HzGG8RxRr5zZ5JWeH+Lrud9vQsVFPJm/ixEDkIvTQNIa
-         oB8cl9FuGdx1etFW9awXiMMIcQrjlFDnWCkCjIovaEM+2W/pMYBrFYkuJzPTIJQ3ZDj4
-         QWphPP2NP6mHqO+cb/iECZMb37GFL/IDapzdX9Ovt3yIuwQoF/ri8QXk219qRpueMNMs
-         w4ENuHYMIQsloUNF9aYMgQvQiwXqV0HLgG3PGIM7PzfI+L97+SOPmUXp19FO0HZsvMV9
-         QOjg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=YFlP3FccQeszqXuZ0Z7/akOSPtoAt88BpigY0WGGEQI=;
-        fh=vfZkaP6t8JDES5/f3SJ3RFR9815t+IKWBRxLybUOQN0=;
-        b=Dc6z9kGFCDA6KSQh6iNaJ5i8BYynnT7f59A0MbFr7B94dYRYSWAkX/0/z65ETNZrYd
-         UP/TE2fAxmuj3lE5vkMHsS1YyatVex6xmxe/SNzxIGbiGTTA+YrZobkniIcqOSHsK0r+
-         MOnmc0Wc1ZUAYHxyThGrHxD3Qy3Jv3sw6y8fxiOurqVUEvUd3SfMWz4Kd0jEn8km0uqL
-         bAlMa5Ag/29WbwDmU565LAKsIdCqT5RhXF/woBScU6rPoRW1fUfbUUlfhNH3zff6AVpF
-         CopWAoUqHD2P2SCgdPAA1Koh8tDqombAURvRgLS2L/lhSzOfQJZTMxNXU5J7te4J+LXD
-         F2Kw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792695808; x=1793300608; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YFlP3FccQeszqXuZ0Z7/akOSPtoAt88BpigY0WGGEQI=;
-        b=hedWKjzr6n8Cnn/i7BU0iiSXpmZfhleP7MCu+ncjReECnpMy6jBAzMDWRwK/Qubhps
-         P7Y/G/SJNfqXR3ySYac29R2v2CmZav8jwKSNcayqnJbbDXaKINoMMDiiDAGsmD3E4Cv5
-         i81ebc5DTqlH2pQ2Godk/+vuD5tDFk/m5fQ/IUiGksywS4s9i2w0Ra0a869R/BwwmAbN
-         AmJF4ieku4X6nFr4QzUSydbCkZYRRc5nvBItIvUR8yq2E23vHk4JQo210AFwm0QXzru1
-         bSpUiGwyI6uys2SNdYAuYGW+DkUuRnW+WZSqoJhestETBpw2tDCfISGAuhprxb49zy4V
-         HiSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792695808; x=1793300608;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YFlP3FccQeszqXuZ0Z7/akOSPtoAt88BpigY0WGGEQI=;
-        b=kghkXvBT2ITU3pbCbTirxrEw+A2HLM5lPpcO/x2Qea9mAdUtPouqtR89DVB3lHexSj
-         qbTE3CHaIeOMlQLzMta+oHEd5RBmkU8Rb8JwMlkljAUWJjQA+/1E55iyT4+hTMy0pytu
-         m4sRctf9HmhmB6WrCywD1OHNtL2jNvk3b4CEtcOp9aB6qdZnMKdqAwe3nE4MHIc4wmN9
-         AKMpmUsfCNX0clg01gFg5qh3n9eJCAojVkeDbvGClSoKGCPmv8fumKz0HiIQHItOteqU
-         j93O7aT9sLmNbmURHmAqDb1+q7jG48dHgPwGBlM0DnH1wD0fjdc1nKJZGprpPpOmScK/
-         UzGQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzW5GqdyHqxEFFryk3jLc+WIjJ/q4SMeFCTzCCKt/D4GhckFdd8J8Jhe6UjCzWiJM0S4tsTNqql8aNavrzt@vger.kernel.org
-X-Gm-Message-State: AFq9FYJ46zcuhwXoN6hC9gdrrguNOD0oxZz4G4l4o0Gl1fxgSFe236cQ
-	ANADz6xL7+0koa/ZajhUIrF+ISpkj39W6shpO+X+BC0Ybas9HxAC0lBb/BQuw572213PpIvii2U
-	OyHJBI/rORRSFPojECSWmhU4UrVVL1tI=
-X-Gm-Gg: AYBFou3ObgAWZZLqJhInFgGaLldEiHkcVKbsfYU+bFFjUfDfVUiP1UTReXzVWqTn500
-	iBDgdfmqk1UG9DMTzqs7lHwlOYJgbHxN1/Mn7eWYY7Xl2GYxuwiXnIfbG4x6j9mv/hv6d/CNn1U
-	VqpCOGFjjzOGo9SkE3nPg4tghxxeyRWTMQl0XrZpCrfk7ahiKR38pvSa3GvZZqzrchnHgRcd+5u
-	VZUv1REOxoMqDB9lnbowfN0actOUtYY7EJJtvE7cYoI2fLd8WVKvfnWdobJmdkmK7zUocLo5w2Z
-	38kpOJ4Uq5KnN6+tbW+1eHvetc94m2c6KSbU1YM0rBp1KLZBpueSIdtlaRukfjZrIycDNMe7iUI
-	763GX8DPvjbwGyoMvuZVOUTF0kvWN7AhcMwE1TIQ=
-X-Received: by 2002:a05:690e:1388:b0:674:1576:d1a0 with SMTP id
- 956f58d0204a3-67a0e581177mr3680100d50.76.1792695807788; Thu, 22 Oct 2026
- 12:03:27 -0700 (PDT)
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=gIPnZ1g5
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 38F8153400AE;
+	Thu, 22 Oct 2026 21:09:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1792696156;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=pPtOarc+/Pj81jSX9HNNfT9z9z/i6TL+1wTNdbkyejY=;
+	b=gIPnZ1g5wYFqPKHjd3+wKw7Y3RIXcpxXV9CNE4OVDt6Ettkg4+fGlaSJqN6RnmiGMvgBBj
+	sGYFz9vCfAWs73C+uBKYUQAl/u4aj7Kuc2nZmAPUVrTLyFjUJwsdVYQZltoF3+wJ7Bl74W
+	u6od9W9dHI794LTp8RBtUYHaEP1x8+o=
+Message-ID: <9833cca3-710e-41ca-baad-1e8d15ccc0bc@ixit.cz>
+Date: Thu, 22 Oct 2026 21:09:15 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,61 +60,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
- <4e031de2-6564-4e63-9102-799a0b435689@oss.qualcomm.com>
-In-Reply-To: <4e031de2-6564-4e63-9102-799a0b435689@oss.qualcomm.com>
-From: Jeff Roach <jeff.roach0@gmail.com>
-Date: Thu, 22 Oct 2026 14:03:17 -0500
-X-Gm-Features: AclHuK-mi8DArQXBK3M6EzMjpoBut2i6CrlCmiOb4h8BnDGm1iNpr1qwnqLyRxo
-Message-ID: <CAAnD8RZtjvwOAfRWGyQzaVqPepozCWOkRiP9F-eiG2=E0QKXrA@mail.gmail.com>
-Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
-To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/3] dt-bindings: arm: qcom: Document OnePlus 8T
+To: Krzysztof Kozlowski <krzk@kernel.org>,
+ Frieder Hannenheim <git@fhannenheim.net>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Oscilowski <drgitx@gmail.com>,
+ =?UTF-8?Q?Jean-Fran=C3=A7ois_Bobier?= <jf.bobier@gmail.com>,
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261019-kebab_dts-v4-0-bb6db87ff15f@fhannenheim.net>
+ <20261019-kebab_dts-v4-1-bb6db87ff15f@fhannenheim.net>
+ <20261020-musical-merciful-nautilus-aea420@quoll>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20261020-musical-merciful-nautilus-aea420@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 22, 2026 at 3:17=E2=80=AFAM Akhil P Oommen <akhilpo@oss.qualcom=
-m.com> wrote:
->
-> https://lore.kernel.org/lkml/20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qua=
-lcomm.com/
->
-> Please check this series for Mahua support, especially the DT patch.
->
-> -Akhil.
+On 20/10/2026 09:50, Krzysztof Kozlowski wrote:
+> On Mon, Oct 19, 2026 at 12:18:08PM +0200, Frieder Hannenheim wrote:
+>> Add compatible for OnePlus 8T
+>>
+>> Signed-off-by: Frieder Hannenheim <git@fhannenheim.net>
+>> ---
+>>   Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+>>   1 file changed, 1 insertion(+)
+> 
+> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
+> Best regards,
+> Krzysztof
+> 
 
+Heya,
 
-Thanks, that was it. I applied patch 3 (drm/msm/a8xx: Add Mahua GPU
-support) and patch 5 (arm64: dts: qcom: mahua: Support GPU and GMU) on
-top of the Ubuntu 7.3 kernel (msm.ko built out of tree), and the
-rendering corruption is gone.
+on one hand you push for 'xiaomi,dipper' -> 'xiaomi,mi8' which seems reasonable.
 
-Details:
-- The GPU binds, the GMU firmware loads, and there are no faults or
-  hangs in the kernel log.
-- MSM_PARAM_GMEM_SIZE now reports 0xfc0000 (15.75 MiB) instead of the
-  full Glymur size.
-- gnome-shell (freedreno GL), a GTK4 Vulkan app (turnip) and WebKitGTK
-  with GPU raster all render cleanly without the FD_MESA_DEBUG=3Dsysmem /
-  TU_DEBUG=3Dsysmem workaround. The WebKit case used to cause CCU write
-  translation faults and hangcheck recoveries; it doesn't anymore.
-- GMU firmware v5.2.38, Mesa 26.2.4.
+What we can't have 'oneplus,8t', so we keep consistent real names?
 
-One caveat: the newest released Mesa (26.2.x, 26.2.4 here) does not know
-chip id 0x44060030, so I added a local hack in MSM_PARAM_CHIP_ID that
-reports it as 0x44070031 (Glymur's 3-slice X2-85, which Mesa main treats
-as the same GPU). Is there a plan to get the new id into a Mesa stable
-release? Until then, users on released Mesa won't get a working GPU from
-these patches alone.
-
-For patches 3 and 5, with the above caveat:
-
-Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (X2
-Elite, Mahua)
-
-Since this is outside the series thread, please feel free to carry
-the tag into v2 by hand.
-
-Thanks,
-Jeff Roach
+David
