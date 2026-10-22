@@ -1,58 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.16
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792677700;
-	b=tXfLFQQ9wkmeADfKrO8PjW7AGZsugjdQu0R9+O/Iqrdmwa3I449+0tIs8QQkz427c/P7
-	 KqZZBJVmfLhTsmzIs/ew9s/VjEh7jqLQfsEqGtnDqBvxC9qyjmGxLCOZgXiAS6wBxHKu6
-	 9R+LtqSe1o8r+hLVIopmT4R8jDFalnapr0a88kualBB8KC26MlF4TXYvDwAD61oo+U6tw
-	 oj14E7tGJSMPPlGRApOPqv9S+2aU5XZl0mZXVQCrHEx2s/JOIxpyXL7QXuQ4n2+IfBXhi
-	 VggrENAKcr8uJ7bKMDJOVwx/az11rSAmeyrRb5Ju4JjCoM9YcWdSuddWyuOv6fQRjQw==
+	t=1792678018;
+	b=zy0mRrmrJMLGGDcexIroO+mCOX2Gh1wyWHx9csUScSKvI0ReJ6+LVCm/9oGJuzmmGOFO
+	 XakIBGtb3sA+jwvyLPaBYmllNSCFooNEC86TuIOOam0SgfzJMdK7pHuUvgZMSZcjq+wo8
+	 wbmeJi9Kwsyj1bqtjGhwbKakLJWx66mT9TJ6K29sTeVJEslJi7Q+1gBH/39dwP8cZYU7A
+	 YgWO5FbKEg7xRbhCLHSjvTg7En9KDAybC6g5HPRsPI0huHaQqt2Qyu7k/m5yKIHA9xLEa
+	 OBMxgyP8/FQrqXxeg5Twb9Ub0CNhtIsbBOVKp8bHIcHbG9qr0y6zosckUW+RfhmrC/g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792677700;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=5ZojtnmsIc3/F6yRUC+D32/HMvjsgQALAlW7R9xX2fo=;
-	b=pWvEC4KK21LNO6Wi7Z40WjRPfnKVg69hGqS1YFHI8uPXvMUW4rBVw2EoLlFM+iR/qmIo
-	 8lsRIQWYLaSxpRgnr52bA0iYXdzDDA/DUGSZ3JpXpJWyGzKNsoZW3d8X02QyJMVkA16TG
-	 uAsH8+jQ/MZZKnJ1BEYU36+yo5F6ESrMeLoFim6uoMk9HZcsf3WDZxR/CpjNzr3ZVo3mo
-	 v13GKgYnib3W3ZM6jRhOwa7kEpm4O0pHk4Lmx8iXir8/ZM+G16Nmv/7HtsfKTWxevkBs9
-	 PQ3JXjdyrvnYevYRPuxD78caqHi3G94ZIauG8/afa+WNhqDDB5+SljSAXcnwsw3gzEg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792678018;
+	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=bSoNGmXPBRRo+noUCmFIwPwAoqGkwANsbZ73sxEJJ8M=;
+	b=mFs8R6QY2KnoPgOOcCAvSzanrAduADh4U6ln9FNXo22R1KNqKKAC8p08bLFBjiiAT+je
+	 AVCD7kmkFo62Lh+LBF1r6GtL1C3hIfX+vrgVcQab9LuiCrnBUYeB7pq21Ikxa+Yf0ls6b
+	 B1I25xpXvqCNAwwLRmDsAVjn7Fwc5gnS+a/kF1B3W57IHHPsBbWGNlSX2g2iBc0EUBhvg
+	 MjR9aTWB/KHGiOYdgdPsZNa5Mh0qA/GUUASGY6Onh0KD/97blcs6GNbR9hLF5VkoIoxIt
+	 nCjcyURptlEv7IxVXeHXw39zDXoEA/s4dULWk8erdGp+feEtCcAHzXRkvZd8Ffx8sww==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="O/HS6Z6y";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=pm.me;
+	spf=pass smtp.mailfrom=pm.me;
+	dkim=pass header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=N6GO6fC5;
+	arc=none smtp.remote-ip=185.70.43.16
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77DCA606A31E;
-	Thu, 22 Oct 2026 14:01:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B102A606A31B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 14:06:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B102A606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O/HS6Z6y
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D65D01F000C1;
-	Thu, 22 Oct 2026 14:01:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792677700;
-	bh=5ZojtnmsIc3/F6yRUC+D32/HMvjsgQALAlW7R9xX2fo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=O/HS6Z6yOiWqf7fg0SZopYIagYjHfvssuDMpBMP1zBjpLfFkmXF69avT6vj9Mn3MZ
-	 URCiHONgUaNvmyMAwTenU3WHsJeYE6yApsPsHMigA6BBeu/TKsdiDjcZWgtQec1WWB
-	 BsqJmPNVAuhkb7TrhBFWvnfAOhn1FLqLTY1zYZXx6/CMKhYn80mfFj5RTXP+sxXAyK
-	 mI9088pBA5dYPqJe202R1hmka1t8eFoOwrqTqeWlD1do9tvyudvBFIZu7TQO4y4M8q
-	 m9m6EEYtchqMvEtSiLVT5wPbyr43QQsQ1x+5Gwk/gfRfx2vjlihP3SwyR6LxN1E+Eb
-	 7SFKbg04ESzoA==
-Date: Thu, 22 Oct 2026 09:01:39 -0500
-From: Rob Herring <robh@kernel.org>
-To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Subject: Re: [PATCH v3] dt-bindings: dma: qcom,bam-dma: Allow memory-region
- property
-Message-ID: <20261022140139.GA952798-robh@kernel.org>
-References: <20261021-qcom-bam-dma-vmid-ext-v3-1-299355e8dd3b@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=pm.me header.i=@pm.me header.a=rsa-sha256 header.s=protonmail3 header.b=N6GO6fC5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1792678015; x=1792937215;
+	bh=bSoNGmXPBRRo+noUCmFIwPwAoqGkwANsbZ73sxEJJ8M=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=N6GO6fC5YJyu9hXqSYZAUjUND7FvAoLmBHPd+E4PocKvT1wl6owBueJgMt93BLPqW
+	 Pn5iqpA4Sp7/qhlP0mPcgEoHMhCbZ2b4c+kRuOGSF5L40APaq7RIsXP7wIaIuZPDc/
+	 qcpdVRuXPwdoKKF8qo3GeFvKfYS5hU4zc1BzyK7tep2k/YOlA+u5RjTfDvtCKusAGR
+	 l5Cv5UYjiZ9zB7hUca4zb3SWrnkx/ERIEg+l34wlu66nGJntDa0p3haaHHLTTZ2XT5
+	 I4cN9RJ2I1Ku/PwU4xtzdBsf7kHgLWTRflu62fdNBcQsBRCa5FuMYdzG30iGA6kp6d
+	 jBJylDj+1nC2g==
+Date: Thu, 22 Oct 2026 14:06:48 +0000
+To: Saikiran <bjsaikiran@gmail.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: loic.poulain@oss.qualcomm.com, rfoss@kernel.org, andi.shyti@kernel.org, sakari.ailus@linux.intel.com, hansg@kernel.org, bod@kernel.org, mchehab@kernel.org, vladimir.zapolskiy@linaro.org, jishnu.prakash@oss.qualcomm.com, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Subject: Re: [PATCH v1 0/2] i2c: qcom-cci, media: ov02c10: Fix camera power cycling
+Message-ID: <179267799926.41892.11536083985254052619@pm.me>
+In-Reply-To: <20261022071418.26895-1-bjsaikiran@gmail.com>
+References: <20261022071418.26895-1-bjsaikiran@gmail.com>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 62f161cdaa6666d8a4f2478d20e4dbdeeb7c22db
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -62,20 +64,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261021-qcom-bam-dma-vmid-ext-v3-1-299355e8dd3b@oss.qualcomm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 21, 2026 at 11:22:35AM +0530, Vishnu Santhosh wrote:
-> Some Qualcomm SoCs, such as Shikra, run the modem in a separate security
-> domain, preventing it from accessing BAM descriptor FIFOs allocated from
-> arbitrary host memory.
-> 
-> Add an optional memory-region property to constrain DMA allocations made
-> by the BAM DMA controller to a restricted DMA pool. Access permissions
-> for the remote execution environment are managed separately.
+On Thu, 22 Oct 2026 12:44:16 +0530, Saikiran <bjsaikiran@gmail.com> wrote:
+> Tested on Lenovo Yoga Slim 7x (Snapdragon X Elite): 20 consecutive Kamoso
+> camera open/close cycles. The sensor entered runtime-active on each open =
+and
+> returned to runtime-suspended on each close.
 
-dma-ranges is normally how address restrictions for a device are 
-defined. Why can't that be used here?
+I ran this series through the restart test from my CCI series [1] on a
+Yoga Slim 7x with 7.3. 1/2 applies as posted. 2/2 is against a tree
+with an extra delay at the top of ov02c10_power_on(), so I made its
+three changes on 7.3 by hand. Each cycle streams five frames with
+v4l2-ctl, waits, and starts again, 20 cycles per pause:
 
-Rob
+  pause        0.05 s  0.1 s  0.2 s  0.5 s  1 s    2 s
+  7.3          19/20   19/20  19/20  19/20  15/20  0/20
+  + 1/2        19/20   19/20  19/20  19/20  12/20  0/20
+  + 1/2, 2/2   18/20   19/20  18/20  19/20  17/20  0/20
+
+Every failure is the first CCI write timing out ("master 1 queue 0
+timeout"). 1/2 does select the sleep state while the controller is
+runtime suspended (pinctrl-handles shows "sleep", and "default" once it
+resumes), but with the 1 s autosuspend the controller never suspends
+when the camera is closed and opened again within a second. After a
+longer pause the restart works without the series as well, which is
+the case 20 Kamoso cycles cover.
+
+On this machine both bus lines read low while the sensor is off, with
+the pull-ups on, so the unpowered sensor clamps them, and both read
+high once it is powered again. The CCI queue still stays on its first
+command until cci_reset(). The pin levels and queue registers are in
+my reply to Loic [2], where a reset on resume plus one retry of a
+message after a timeout made 120 of 120 restarts work.
+
+[1] https://lore.kernel.org/r/20261020193946.51478-1-birk.skyum@pm.me
+[2] https://lore.kernel.org/r/179261145907.36927.5158021314822941179@pm.me
+
