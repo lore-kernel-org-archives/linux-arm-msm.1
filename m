@@ -1,111 +1,71 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792659521;
-	b=ZWEn+ARqnKtK12J/2UYtG/Ew5cT2P+c+Qxhl7x3isSh4OvdP52fv049A5dBavpSipu9e
-	 /xJIIxbFw7XlU1kDotjbnqiakVi/XMQMhlLB7kVKglQKbgvuNG/SVSOOXImNLeqoYlEV5
-	 GpRAjY6Ucv0X+4L4Aje38IkuT4TuyeeO8bKjiEPNER8V9OBO7kc+QSIuWyvMZ1y769i6i
-	 EQm0Y6KjidpMl5YyeTJjXea8vIAH40kWURNMDMA8R5w8vRpnrEQQenlqt2H7AtC3Gvymn
-	 YhHihmrw8OabDPpMDZvKSP+8z2Wk84c+Ku52xf+pa+/jtereBVgSY2siHEmsQPE7zdw==
+	t=1792659537;
+	b=wUmSurPyXM10zJMcDypXyL+NrRBoVjZGThF1RFKs+UlAzLurxEk3M175+Myl0a7IP5zY
+	 wEuEhfD1acQ6eqqfc5NRs74TeuOZI5/QprKUIf3r2Z+xbpvnprCO8pFh754Q7FrkUhryc
+	 1AnJzGPHAaaUE1k9gMiP11ta8Qtn7yLGek3KtzYT4oxqZs+YyunNn1yoilgrVNPt916it
+	 esMOimmZPIZNuFGMNftrEa73WDNz+dM8BSW3dCllFNXV59xitdw7+/w5O1EDt3onYMmgt
+	 /9m8VVZSsTXgOo+3tRlagUInEp1qRk+v36KOkAys27ProRjzh8BkzVH+KNCvcb9XEmA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792659521;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=uwjdmy4HQ8RIpiCkzz5vSQlEwh/mqQ3eZpqMOnYJBN8=;
-	b=OZMtNalBIWUsK++2JeDvGacx6XLpTUm3CtICS8ooEWTJrD8c/FJKm0Yj+uKBP/ZRspIc
-	 l19EEoSKSpicG1iMTuSdX9mobT1ZtxTZliCJ8MxFKL7YdRaBVQz8s7SyGW3Lq4BcYqwnW
-	 alIFWhvNEqYYw8xOXlYiLBvtvpyCIBpamQgJGZht+6sziLEBLKCHMTscmtMu134OoeIJ0
-	 s+1s0AcFfE2WcgvRyNn/P7vNUQ901SMskbAbIWR/FAOU6PjJ7jpTaK760C96uLOFIP3Da
-	 mIAb21veDuOo55Cp8M+7Q2QRZgyHnS+S2221PkPUIPRBqY1DRq0h7FIspYbWBcq+JkQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792659537;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
+	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
+	bh=ytAPM9y1CIH6yDKXPJOIKHUT5JjG90HVhV6QaIOwpZA=;
+	b=j3TymJEpaBbxnmSr8hWitayLrNAdgcI3yp1tRk94rbBavuQkwykL/aCH1uhF5NvkSJ8h
+	 hJqsDtM7pArohaDHLHL6VVATdesOi6B9Z+X5a2FP70/oO2mhy35J36ltYpXII6wVMANa5
+	 NEOQDcFjrA5o52ZrnGzL1exCTfe8m/8gbHllHp2I4c4aLAJvPRmUnVEA5iUpcQw7YmEvO
+	 DcZI6SErUrdFclkDt1+1ABwKDwpZFbPSguIvdqo+JF2Uw/4yB5SNHJgGa9bkEn6nYJh5n
+	 c7QM1ymFD0BbQxrDtrK5Qu28I1z6fqXgFcS4kO/Gh0q650itGw7EDVWZPfZE2oXUx7A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e4OfLAR0;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jnh87nLP;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=samsung.com;
+	spf=pass smtp.mailfrom=samsung.com;
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=DYm+47g9;
+	arc=none smtp.remote-ip=210.118.77.12
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78323606A31B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 78323606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2A36606A31B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F2A36606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e4OfLAR0;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jnh87nLP
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M70Fjl2516224
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uwjdmy4HQ8RIpiCkzz5vSQlEwh/mqQ3eZpqMOnYJBN8=; b=e4OfLAR0dHMk5Y7m
-	9vy3FmunungJ3vq/maAunsEkz1mlHYpsZ04UCZp0PnPEzRsYZJ2jKlpVn9SC7rm2
-	FHd311KK6+gmuF1d5+Kv7t11ZYq4wFcB61uD4D9YqyGRzyAwDupJbbmHtaPy5Zm2
-	6H/n3g0fcT6E2T1QFLyk4tjLy1BGfK3hqPpl7rhdewM9JIjyb01dH37I4JmYVsG2
-	Y38DhuRCnKLu3eak1Nv90+Y4Al/kvpSVHGHPN1ZSD5oARl7Ftr32jrgwA3PYn0YN
-	8X5/Yq2zguHH35spgXhxxZJ64YNV4exxNUuj3X60ZuetgHLnWWD72xmTF1EdZkOp
-	cb16eQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93a9k0k-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:39 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-92eebb130dcso28699485a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 01:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792659519; x=1793264319; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=uwjdmy4HQ8RIpiCkzz5vSQlEwh/mqQ3eZpqMOnYJBN8=;
-        b=jnh87nLPjAwofu9zX9OE3+i6nCcEQwlylDaq9IlriJwBfGDNvDBD054oR4uGe2XW6g
-         3btP2BjCOZwqgWFTi2STOrUzcfS0EO2Uy/5aIRku6EdYVSIzVuOP37Q5icfeAR1n+8L2
-         r18VsYzKqEfv+asc5Btbjl51ZikA/OTNY5SxgJsplmWi+8SW0Rop57AWSCMY7oeg1mBI
-         ngjOZ/LnZ0VaZxAqCe7+ti3t/DYOGH15DvLwxCkQiMrUQc45V+eijDUQFmmsnwAJ02uf
-         w8K1HkORyAwPi2BCBxVGDD8gDN6ChR3ZoSENk3t8BEzs0unNvutTGLBeBiiRDWNqsd6q
-         Oowg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792659519; x=1793264319;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=uwjdmy4HQ8RIpiCkzz5vSQlEwh/mqQ3eZpqMOnYJBN8=;
-        b=i+FQg5SOX5wRol2M40DClcgBTx4d0X5uTC+g3SY/AtY0LFuJNkYuBrZAtQIxiGyQWW
-         qT/rNj3QBgSiYLYBYhtbT4k5nTaKvuzNpAlHMeRyLTxdqFJ/0lxupFramzCplQq38P25
-         rIoYFmUdCyP2NArFhsTjhHupBQyICnIoTFljyYSDMDF7/QRTJ/n2mA8OuJo4482WbRBV
-         +LzmnGBSNsN9mR7PiCK0NVYyQgXFM+oC97+9BoOqLkwJkeOOv+Syj17SQheR8gi/9xA/
-         erHH8c3ip4WQxiUufW4cKyePhf9CeopBgL+PrAkTd9PGIZf0WD9pIcVqJBaWTOWc3i4l
-         vBlw==
-X-Forwarded-Encrypted: i=1; AKwUvBxML26zYD4M1THvBhFwfHTibjP6WZRT7l5MG7yPe8jYeP1/o3vycNJ/AqcLTxi55wCNWD60MFV7V+HPlNmS@vger.kernel.org
-X-Gm-Message-State: AFq9FYIhyHgh7abkulkPJkdmO4Oyd8ODpldbqGiW2P+O+KYespoz45BK
-	BrcCNtsU2p4rCfbjyqcM4VtSf952mcmVPs4FbPVDBeQRVo0M6Ac1hOuSGxfr7xQSSgbFecTZx0m
-	OhLfckSuZUFEfxyPUBFfd9+LNGMHnk+omGGz81Ybiowj6nIqt5xKYw+3WiLFg10H9zCPw
-X-Gm-Gg: AYBFou2SMhcj4/QOyx+Cz0euu+L5Q+QKuuYf+pdglSKnj9yk2+oxlGhHx8r5s/ylXgF
-	9NRtuVxdKjlt1mJZFXa80b3XxLYSb00AfLgPYH5OPTqZM9OchHlrQgPG9uazlvota0GKhsUZ+Z+
-	KWKUm3rgA97RZd1QsiulIKm3iGC2l77tZFK8+ZRtDiqNXyCa6F6YNtymhJiLwPE62yBt+5rWyh3
-	Bfq0p5jGo4Wp00vaALzmKprlsHvgukvVvqfdpPPTI2qamZ4OvydJR6NA74n8Nc5jFHmmNBO7R8y
-	IAMHCHUKWHERKCXbhB/hjmbZWs6Namz0ngpiGXU8KJlOpXd8TOd7OmbTa0zQnS8G6Srzj28dWTy
-	LxtnrrGfH/iQ3kkQINIF/oA==
-X-Received: by 2002:a05:620a:4511:b0:93e:6d87:4f69 with SMTP id af79cd13be357-93f57f3bf10mr980828585a.3.1792659518678;
-        Thu, 22 Oct 2026 01:58:38 -0700 (PDT)
-X-Received: by 2002:a05:620a:4511:b0:93e:6d87:4f69 with SMTP id af79cd13be357-93f57f3bf10mr980827185a.3.1792659518213;
-        Thu, 22 Oct 2026 01:58:38 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c468a59d641sm84471066b.60.2026.10.22.01.58.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Oct 2026 01:58:37 -0700 (PDT)
-Message-ID: <58080b02-5c0b-458d-90fa-a135cc79b847@oss.qualcomm.com>
-Date: Thu, 22 Oct 2026 10:58:34 +0200
+	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=DYm+47g9
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261022085854euoutp0258f2b0349e09760d2f5ea6ab9e4a952c~gzlkwvTut2936429364euoutp02F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:58:54 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261022085854euoutp0258f2b0349e09760d2f5ea6ab9e4a952c~gzlkwvTut2936429364euoutp02F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1792659534;
+	bh=ytAPM9y1CIH6yDKXPJOIKHUT5JjG90HVhV6QaIOwpZA=;
+	h=From:To:Cc:Subject:Date:References:From;
+	b=DYm+47g9DsDETL+FhGLFw3NW7kAlwz8apTEl9+bGvJvMZBFbmrqC5vrNOKgPIP/El
+	 7szmisKTI0M1A0itVtWye9bINCHl5Z7sZCCS3z6Ef7Sk4MY6EDXmJfUKM2X9+zb4gm
+	 f7+AiV2RejC+vCTCgZLh5zNhy41C9DvmLmhwMLOs=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97~gzlkeZ2-41811318113eucas1p1U;
+	Thu, 22 Oct 2026 08:58:53 +0000 (GMT)
+Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261022085853eusmtip22f10b685962fdaf49e7f0a2128385306~gzljwo2IO0965409654eusmtip2O;
+	Thu, 22 Oct 2026 08:58:53 +0000 (GMT)
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+To: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Bjorn Andersson
+	<andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa
+	<abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
+	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Roger Shimizu
+	<rosh@debian.org>, Hongyang Zhao <hongyang.zhao@thundersoft.com>,
+	Christopher Obbard <chris.obbard@oss.qualcomm.com>, Dmitry Baryshkov
+	<dmitry.baryshkov@oss.qualcomm.com>
+Subject: [PATCH] arm64: dts: qcom: qcs6490-rubikpi3: Keep WLAN firmware
+ memory reserved
+Date: Thu, 22 Oct 2026 10:58:43 +0200
+Message-ID: <20261022085844.768508-1-m.szyprowski@samsung.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,67 +75,70 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] arm64: dts: qcom: Add PMIC support for Maili
- platforms
-To: Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: aiqun.yu@oss.qualcomm.com, tingwei.zhang@oss.qualcomm.com,
-        trilok.soni@oss.qualcomm.com, yijie.yang@oss.qualcomm.com,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-References: <20261012-maili-dts-v3-0-8b499e7b9a52@oss.qualcomm.com>
- <20261012-maili-dts-v3-4-8b499e7b9a52@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261012-maili-dts-v3-4-8b499e7b9a52@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=JudkP84C c=1 sm=1 tr=0 ts=6ad9d03f cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=dlizgmcMvvRP8E2Vd-MA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: KivoBc-brCAL04j8RDvJ46EPNVXQwMef
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzNSBTYWx0ZWRfX84Yedefy6FTn
- 1rgiglpncAbJcfV6Sb2VgOmS1UmySqftMqLOXrhKYpTTS+KVFSzw8rm9GT0ICYCrQhgILOT8CU3
- GUobux2azscfWwCaieTytdWbn2JgtWw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzNSBTYWx0ZWRfX9el87hFaltW1
- huYWUAv90sVAAqeUdUDiqX5NeEjNeix9wbl01vAEXibSg2lGfbCZhnSWSRNyZYe0sHQDz/Fl4KQ
- iyJjGqB4quA3XfOgYEoBRMxrPS2c6VIYE9mrWzOsGPOtukjitDAG60AY2qULnLVe2ZEV4WkSSmD
- u6BGbb533Fsb2PtZ92lwldOBeeWgdZjkySuhQ4iPCkKUMhxRfASPW2ARkgToZWO2aKj4kfL+LR9
- LwpwvdFgbhldPiaSMnypQPJp0q24qW392awIN2ULnsCb9UxfLYUhVcokuWut9LPxn6kR+jfP9kb
- NISBEF7e3tKnys7KW/tzWdPVfLZQiNnhf0Qsd38c759BDyrJdWI9yX817drGIbwol4FLPqiu+vr
- 8gbvofpUmVibixIkULfW5yItf0mUtuv5vutiPxk1vNWzyKOl7HGe5W9x8GjmhQ0nDBa/dXT3FQ6
- Uhr15rWnDNZqQklnqpQ==
-X-Proofpoint-GUID: KivoBc-brCAL04j8RDvJ46EPNVXQwMef
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 malwarescore=0 impostorscore=0
- suspectscore=0 spamscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610220035
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
+X-EPHeader: CA
+X-CMS-RootMailID: 20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97
+References: <CGME20261022085853eucas1p1204878da3c0f519bcb39bf11ad84bd97@eucas1p1.samsung.com>
 
-On 10/12/26 10:32 AM, Jingyi Wang wrote:
-> From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-> 
-> Add PMIC files for pmic-arbiter device used on Maili QRD and MTP boards.
-> Only one PMH0104 chip is used on SPMI bus-0 with SID 0x2 which is a new
-> usage, hence add a new pmh0104-maili.dtsi. Also, add a new pmg1110.dtsi
-> to support PMG1110 usage.
-> 
-> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-> Signed-off-by: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
-> ---
+The board dts deletes the wlan_fw_mem reserved-memory node inherited from
+kodiak.dtsi, because RUBIK Pi 3 has no WPSS and uses an external WLAN
+chip. However the firmware still keeps the 0x80c00000-0x817fffff carve-out
+protected. Linux treats that range as ordinary System RAM and the first
+access to any page from it triggers a synchronous external abort.
 
-Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+This has been observed when the dynamically placed adsp-rpc-remote-heap
+CMA pool ended up at 0x80c00000 and the remaining 4 MiB of the carve-out
+was given to the page allocator. The first allocation from that part
+(a qcom_tzmem pool page at 0x81400000, allocated during fastrpc probe)
+faulted on the initial memset:
 
-Konrad
+  Internal error: synchronous external abort: 0000000096000010 [#1]  SMP
+  pc : __pi_memset_generic+0x16c/0x188
+  lr : dma_direct_alloc+0x190/0x434
+  Call trace:
+   __pi_memset_generic+0x16c/0x188 (P)
+   dma_alloc_attrs+0xac/0x1ec
+   qcom_tzmem_pool_add_memory+0x90/0x1b4
+   qcom_tzmem_alloc+0xd4/0x1a0
+   qcom_scm_assign_mem+0x74/0x18c
+   fastrpc_init_reserved_mem+0xd8/0xe0 [fastrpc]
+   fastrpc_rpmsg_probe+0x17c/0x3d4 [fastrpc]
+
+Keep the wlan_fw_mem reserved region, so it is never used by Linux.
+With this change the adsp-rpc-remote-heap pool is placed at 0x83800000
+and the board boots without the abort.
+
+Fixes: f055a39f6874 ("arm64: dts: qcom: Add qcs6490-rubikpi3 board dts")
+Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
+---
+The issue was analyzed and the patch has been prepared with LLM
+assistance. The change was then tested on the real RUBIK Pi 3 board. LLM
+suggests that Radxa Dragon Q6A, Vicharak Axon Mini and Thundercomm
+minipc-g1iot might be also affected by this bug.
+
+Best regards
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
+---
+ arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+index c98e910ee398..843c90ddb4bb 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+@@ -31,7 +31,6 @@
+ /delete-node/ &video_mem;
+ /delete-node/ &wifi;
+ /delete-node/ &wlan_ce_mem;
+-/delete-node/ &wlan_fw_mem;
+ /delete-node/ &wpss_mem;
+ /delete-node/ &xbl_mem;
+ 
+-- 
+2.43.0
+
