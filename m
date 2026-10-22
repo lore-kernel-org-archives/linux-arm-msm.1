@@ -1,68 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792660180;
-	b=b4pIIfNPp5crYs9fghMkkP5Y7gYrOZI2GNacgqk+w3bQIo7vkJK9IIUrSl3FspWN30kH
-	 xh0seDZo0hyFuDTDHyUZ3OVYuwDfVJ/ghxEF+/OQmlARSYhN05fes9hZpxflsuxBRlnTQ
-	 +JPtM3HFdz/N/uLAiKfu9+eXAJqrjC/h/I1tuQnrNBc1M/Riic1fxOUpusYh5ZQOGDV9n
-	 l2xc40MrpSgqhG+HVEmOQWd58VeSLFhR8gEYxiYG5PAGOfTI6tz2ACbZwVFEOre65rC4H
-	 00m3f1vufE/1tYrgm2QRtyAXKT3Yi829VoRD0TJS/sbU1aFhpbZXzUeh9rmnnOpH5hg==
+	t=1792660200;
+	b=44duAEpLnVGU3horkz48TJGBdrwWW/P2cF7kUjUr4jAFHMGLP+vsmMmj50IewfmeJp6n
+	 5IfLF/5B53ybVZCNfuDLCiwhhKH5kT45jl14dkGsPhOrdE11D6vM019yWF0pKAXBvAGZq
+	 jaYbfp5Wc40+KkRBN6frfeCo0K7Ufvd6FfbHA04bgQw/vSjNKkk1p1TOcOhHYIIUn3NJk
+	 g27uq3/H1DAX7nvQize/uDb3izbulsNhOFgWAoZKcz2lQvV9L/Ao94Gmq0vcYc2P/WELN
+	 +jNphAK66AZWOj5BggEDROlGBaD4CF+6N0MIgzt3nm4AjSItiOcNFyw7TSsRIlBhmmw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792660180;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
-	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
-	bh=B+avzulW9R4prrOP717hMzLFT626LlwP3IQu+hV7beU=;
-	b=s0PW20FxuI0ghD8HzeKKuNu2aW1lML5flPIToacWDnm+RYzh9o32nE3glBTTZenQmbGp
-	 ePP6d5aP89qlNvEuEEXSNbWmiQY0NBHbZfEOcYnBEGJhFc33we1rMofFBdhqnEgf7RLc9
-	 efgOdjfX9f80XpHxzhll0f+NpZ4dlgD7kL2TX1KlRm16XenRvjbU7Bn/F/Im5dNCJhNAt
-	 U35wxlERBplfRnFC2AubZX7ok5XjadU08Y2xXWO+Al+9BJy2j/vZueNjWU/rSWHCHVOho
-	 zPxkdZgKces4sVFctce67cFe4tYEEU8wNAsg72gz2Ht03fp8Qk5ZvPhRMTMNj6xshyg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792660200;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=MuprgGBEIk8/OmsFZVmehe89ddAzvU7HKkgdbnCsQyI=;
+	b=Rv2VYH5cHNHsDs/yqEIHMzKCvTI6m89IFpg5UG4V+5YUHAZ/FIwOinGVh7iC4TvO0z9x
+	 o6qUrfdbv4FDNb0xaN8xJ3/qqwQY28CBsyf6o6T9v6xtMxO9BV+wLA2lsx/o0W7+ZfKSi
+	 QupkRyg/gIrBICM4cbQWImPs1Kvf+X40hJtlLo1hyRIFK1avF43bAR8f26911ESV3cMjS
+	 JLT8LpMPjlxUn+jEjpo7BKchhvniKpl8uqjBT+lfz9G537GxrrShHjd/7ojx38H8mUkA4
+	 4WNB3rBrwRdIFIMb1ebFMEBNYNTNWQS2worcZ7wed+eLTz9lzoLVOHJPNqPrDWwPq8g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b="nCw7ayW/";
-	arc=none smtp.remote-ip=210.118.77.11
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cokJDPuq;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="RJCm/ytu";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9A0860A260C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:09:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C9A0860A260C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8D32606A32E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:09:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B8D32606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=nCw7ayW/
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261022090936euoutp011f75c5ac39a0aceb24158f7dda143787~gzu7Es-YD2768227682euoutp01w
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:09:36 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261022090936euoutp011f75c5ac39a0aceb24158f7dda143787~gzu7Es-YD2768227682euoutp01w
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1792660176;
-	bh=B+avzulW9R4prrOP717hMzLFT626LlwP3IQu+hV7beU=;
-	h=From:To:Cc:Subject:Date:References:From;
-	b=nCw7ayW/aMRNiOI4VJGzl0O/pQvOZgPSvR9s8dLwKoCu35jbGWQO170o95eIGdYkS
-	 NtFXWHsQwxrwUrjnu86VrwnNrn5JSXZMUQnDRSk1A7Ui375EcFUnWYHVOD5Io/T31w
-	 ugFSW2I4r0Us2sKYxXKz6o8Y4nfKG+sMi/CJg4rw=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20261022090935eucas1p2d0d630d442257b6c6e92cd5a46d72e5a~gzu6giERh0750807508eucas1p2e;
-	Thu, 22 Oct 2026 09:09:35 +0000 (GMT)
-Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20261022090935eusmtip1a96a52af195831af9d9ea4b6034c9413~gzu6DkAYd1570615706eusmtip1P;
-	Thu, 22 Oct 2026 09:09:35 +0000 (GMT)
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Srinivas Kandagatla
-	<srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
-	<broonie@kernel.org>, Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski
-	<bartosz.golaszewski@oss.qualcomm.com>
-Subject: [PATCH] ASoC: codecs: wsa881x: Fix shared powerdown GPIO handling
-Date: Thu, 22 Oct 2026 11:09:22 +0200
-Message-ID: <20261022090923.769464-1-m.szyprowski@samsung.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cokJDPuq;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RJCm/ytu
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M70EHV2516128
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:09:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	MuprgGBEIk8/OmsFZVmehe89ddAzvU7HKkgdbnCsQyI=; b=cokJDPuqF+Vy0B54
+	oofPLXV1SNCp2af/gPNdNs16tsHZSPlzLzk5vR7WPz6H9IFjTpTID3B+LBfPvt01
+	YB+iCNeeQYoywYV1hO08RgGendxYh698aDt3sXVqlOZhfcKx+TclNwxLk4GRY38L
+	4bOvopEKuswG00Gm3ayQ8MIp8/si5626dbbV+dASRCQrPzPegiyKymUXKeiYb9wI
+	hiN0SPAoojQo8BZk0tAsl3YVsMWMxxIRIxbHiC8vJci80SYPC9g7UKQ5N79gz73b
+	qQdR3SIOS0oL4W7zbueaR9ArbM06lBh5dMEerFjQlyWMHzJQNwtcAVLa82L29A0I
+	/jc80Q==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93a9mmw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:09:58 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93df7a9466bso18272685a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 02:09:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792660198; x=1793264998; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MuprgGBEIk8/OmsFZVmehe89ddAzvU7HKkgdbnCsQyI=;
+        b=RJCm/ytuCwgsjLgToibkZVvgT5eseFiQ9DtpCotzXIWhu0av5GyvP9yTE+ggQ7XL0D
+         cX4pLiABHInNMJ3s1g/clL8ZfttxKURkTVoobzFieCeG9n9jNGd3tkweWSJ15ozCpcrV
+         EaVZ/e+a8Zl+UWtg+ZXquAbNAHv+mF06f/x2LclgHHtIircb2oraiy2B2QTRjjkf0VNu
+         KDgV2/Mdo5eVkMpa8fZuQLfImv0EeD/SWS6H8RxqApDR5EJIGgvLaGKy/EjA+dN8/oXx
+         T3dGOZJyDHHJKdlznnaYn0YrxO9HCQrtt0rkdVJ4u538ulwVMs9WQ/xnel4EUOuOkI61
+         7yqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792660198; x=1793264998;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MuprgGBEIk8/OmsFZVmehe89ddAzvU7HKkgdbnCsQyI=;
+        b=biryqodo6NjaPNiepl7a9QF4WQTVKgR4axPbkHWnrI0/y9ywK8AJDbEYs0iUBr/MER
+         WDeijs0zl3ERqkLFD25Tq7uqGxtrSVC9gGI+f3MtQ3nNh2dW7Z6+m6bCHdyk7ptV0C6/
+         5inGfk1CRKoSPgmX/V0yCDLgyJ4eZgwsK0PtjUQPVWcPPvCwfoH4NIdxeIgMWAMODWpL
+         zc7yy00M6OShen44xI07R1JOAFfgO/RverqnzwMSFULDvJlf7eXmkAG5z/tGZd0+9Wf8
+         kP7sa5lvzis5dCycCLSx8RUvgocWs0FGCz25Wi++xJw9EQIu6x0HgtgSKEJ1FWbjpHDA
+         8qdQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzgJmYZMYlYzKT/yfyUyH5YpzNxiyYsJSwosYkbEF/XR5wOAExRkupTv9Gd9qvzx/ma3/ZhVfIceN8dPdzV@vger.kernel.org
+X-Gm-Message-State: AFq9FYJF6ZQjvlgOJEtn+nmzmSBgnMdpJyyNIRjMziBnIMFxUzDJfXxg
+	708tWTZ9aiEw4GvmPUDsqhYaz6ozdUybLTL+gN17asg2HqLmNYiAHYvfZxoYUITJKmGY3t7Wfv7
+	6K/WYiM3p0xzerLRINdR8w3ivOkL5w9ok6wE5oN20IXB8eq/b8U3hGzAdRzqwsxW1+FHx
+X-Gm-Gg: AYBFou1Ilm2+mdIouCB81q6nIXC4lL686YTKtygmJXqzCZ1whwV08kKSS/U5APmJB/M
+	naJEf902ZCwGaaVvCsszzyzQXAFcScxZSm0InCM7Z+r4C7sNIIi9sA4hWtYyR3uSJs//RWuKpms
+	OyV9YyRwkWuicNRwRqa+WbsgFuewNjhEk689dPagFkrOfQoqQltLs8Zi5TnydOzu6SpYdvGkpxd
+	Ww1xY2kdj2Xch7shTFor1G4/DyFxIA7jr6Ykvl0e4hvKXTbkioEdGXZupvrmQT41LIuCdY2SBZ+
+	2VbLxTW0ls1i6KT2V3IKUrKszXbj4g10DNM+b0OtnI1cRKl2Mp2pa+i0nelTiGWgibQjj8yTOFy
+	K5smolZjiVDNDyDzPiVSOAw==
+X-Received: by 2002:a05:620a:4511:b0:93e:6d87:4f69 with SMTP id af79cd13be357-93f57f3bf10mr985405985a.3.1792660197988;
+        Thu, 22 Oct 2026 02:09:57 -0700 (PDT)
+X-Received: by 2002:a05:620a:4511:b0:93e:6d87:4f69 with SMTP id af79cd13be357-93f57f3bf10mr985403385a.3.1792660197581;
+        Thu, 22 Oct 2026 02:09:57 -0700 (PDT)
+Received: from [192.168.226.26] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c468a55ccabsm82839466b.33.2026.10.22.02.09.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Oct 2026 02:09:56 -0700 (PDT)
+Message-ID: <9800eb77-0188-4b16-a672-adb7ee1a603c@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 11:09:53 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -72,113 +115,112 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261022090935eucas1p2d0d630d442257b6c6e92cd5a46d72e5a
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261022090935eucas1p2d0d630d442257b6c6e92cd5a46d72e5a
-X-EPHeader: CA
-X-CMS-RootMailID: 20261022090935eucas1p2d0d630d442257b6c6e92cd5a46d72e5a
-References: <CGME20261022090935eucas1p2d0d630d442257b6c6e92cd5a46d72e5a@eucas1p2.samsung.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] arm64: dts: qcom: kodiak: use thermal hw-bin trips
+To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+References: <20261002-thermal_bin-v1-0-5a29be7e8ec5@oss.qualcomm.com>
+ <20261002-thermal_bin-v1-5-5a29be7e8ec5@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261002-thermal_bin-v1-5-5a29be7e8ec5@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=JudkP84C c=1 sm=1 tr=0 ts=6ad9d2e6 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=pjWewQ9WiOT9jlYbxO0A:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: e68tE-1mYH38zw1gOR3a2NLtg4utALRk
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzNiBTYWx0ZWRfXxW59Mf0TGp8Z
+ chgFFtQ7liiYq6Bxy7fXgk+c5qM2gCRNgnZat4XwLm5inxRvsQ6HpKqZpgvTnel41Ak6IESXtoZ
+ q0B6mtZzz+sVWB2K2tSHtAiHo2pKpmo=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzNiBTYWx0ZWRfX7t1ZHQhisoHs
+ kuBPBTfWyw30aMKxmKl2ZAmZ4RppJ4AsY/iFs7YVGvix9Ug+YExqLUBptcZLdVfnTVC7sdPO+Pf
+ v/kzdsB5/ZUUMvkqC77cvkB7uV1T9i432Zu/kxG9XFLhz8XGBc2ntM6n1YuaxAxT7nfXVi6c+98
+ b6Cla9c4NGVZVbbLJjvAeDs8LZpG/B6UCkerkW94ciObgkyekFNMa1EXNtVRYAx5BkjzGCJIHAN
+ bLIZ29ewm7+kJ9YyvRAdMjuSWCQIH7T1basEVF4aHC1iTP0reRaBKKc3EkIagcJ9V/ZgFsR4twh
+ uHpCY1uD4s6hMjmU4zX0yi3DwlfRuj4pDFTv/RvLs7ekVDcvVQYp7cKrx5Qfnxey1BmuVRKKoMH
+ vZBOGnqR7XwkCdZmuROiLPtv2oHlYREwI9NdhKhX90DajWTDthU8CGgqZUunuMDkQsSDNHgjP37
+ tTIalmAmu7MbRLxwb+Q==
+X-Proofpoint-GUID: e68tE-1mYH38zw1gOR3a2NLtg4utALRk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 malwarescore=0 impostorscore=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610220036
 
-On Qualcomm RB5 both WSA8815 speaker amplifiers share a single powerdown
-GPIO (TLMM 130), which is handled by the shared GPIO proxy. Since commit
-b30973e8c392 ("gpio: shared: make the voting mechanism adaptable") the
-proxy treats the value set by the first user on request as the default
-and lets any single user vote for the opposite value.
+On 10/2/26 12:47 PM, Gaurav Kohli wrote:
+> From: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+> 
+> kodiak-based SoCs are binned at manufacturing time, with the bin
+> computed from the jtag-id and feat-id qfprom fuses.  The tsens driver
+> now reads these and feeds the resulting bin to the thermal core, which
+> selects per-bin trip temperatures.
+> 
+> Add the jtag-id and feat-id nvmem cells to the tsens nodes and convert
+> the passive mitigation trip points from a fixed 95C to per-bin values
+> (95C for bin 0x1, 105C for bin 0x2) using the new
+> temperature-bin/thermal-hw-bin properties.
+> 
+> Signed-off-by: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+> Co-developed-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> ---
+>  arch/arm64/boot/dts/qcom/kodiak.dtsi | 56 +++++++++++++++++++++++++++---------
+>  1 file changed, 42 insertions(+), 14 deletions(-)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/kodiak.dtsi b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+> index 347815e5983e..f3bb9cd8f393 100644
+> --- a/arch/arm64/boot/dts/qcom/kodiak.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+> @@ -1019,6 +1019,16 @@ gpu_speed_bin: gpu-speed-bin@1e9 {
+>  				reg = <0x1e9 0x2>;
+>  				bits = <5 8>;
+>  			};
+> +			jtag_id: jtag-id@180 {
+> +				reg = <0x180 0x4>;
+> +				/* bits = <offset width>: 20 bits at offset 0 */
+> +				bits = <0 20>;
+> +			};
+> +			feat_id: feat-id@180 {
+> +				reg = <0x180 0x4>;
+> +				/* bits = <offset width>: 8 bits at offset 20 */
+> +				bits = <20 8>;
+> +			};
 
-The driver requests the GPIO de-asserted (GPIOD_OUT_LOW), so powering the
-amplifier up became the default and asserting powerdown became the
-winning vote. Once both amplifiers are runtime suspended, resuming them
-deadlocks: the first one releases its powerdown vote and waits for
-SoundWire enumeration, but the line stays asserted, because the second
-amplifier is still suspended and votes for powerdown. The wait times out
-and playback fails:
+Couple nits: please keep a \n between each subnode
 
-  wsa881x-codec sdw:1:0:0217:2110:00:3: Initialization not complete
-  wsa881x-codec sdw:1:0:0217:2110:00:3: ASoC error (-110): at snd_soc_pcm_component_pm_runtime_get() on sdw:1:0:0217:2110:00:3
 
-Request the GPIO asserted, so that powerdown is the default state and
-the line is de-asserted as long as any amplifier needs to be powered,
-then de-assert it to power up the amplifier as before.
+[...]
 
-Also use gpiod_set_value_cansleep() instead of gpiod_direction_output()
-in the runtime PM callbacks. The line is already configured as an output
-and the proxy resets its default value when the direction is set while
-it has only a single user, which can happen if the other amplifiers have
-not been probed yet.
+>  				cpu0_alert1: trip-point1 {
+> -					temperature = <95000>;
+> +					temperature-bin = <95000 105000>;
 
-Fixes: bfa336cee332 ("ASoC: wsa881x: Move custom workaround to gpiolib-of")
-Fixes: b30973e8c392 ("gpio: shared: make the voting mechanism adaptable")
-Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
----
-The patch has been prepared with LLM assistance and tested on the real
-Qualcomm RB5 board.
+Please do <foo>, <bar> instead of <foo bar>
 
-Best regards
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
----
- sound/soc/codecs/wsa881x.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
-
-diff --git a/sound/soc/codecs/wsa881x.c b/sound/soc/codecs/wsa881x.c
-index 47ac3e4985a5..4f3e6bc29c7e 100644
---- a/sound/soc/codecs/wsa881x.c
-+++ b/sound/soc/codecs/wsa881x.c
-@@ -1115,11 +1115,19 @@ static int wsa881x_probe(struct sdw_slave *pdev,
- 	if (!wsa881x)
- 		return -ENOMEM;
- 
--	wsa881x->sd_n = devm_gpiod_get_optional(dev, "powerdown", GPIOD_OUT_LOW);
-+	/*
-+	 * The powerdown GPIO may be shared between several amplifiers. Request
-+	 * it asserted, so the shared GPIO proxy treats powerdown as the default
-+	 * state and keeps the line de-asserted as long as any amplifier needs
-+	 * it, then power up this amplifier.
-+	 */
-+	wsa881x->sd_n = devm_gpiod_get_optional(dev, "powerdown", GPIOD_OUT_HIGH);
- 	if (IS_ERR(wsa881x->sd_n))
- 		return dev_err_probe(dev, PTR_ERR(wsa881x->sd_n),
- 				     "Shutdown Control GPIO not found\n");
- 
-+	gpiod_set_value_cansleep(wsa881x->sd_n, 0);
-+
- 	dev_set_drvdata(dev, wsa881x);
- 	wsa881x->slave = pdev;
- 	wsa881x->dev = dev;
-@@ -1154,7 +1162,7 @@ static int wsa881x_runtime_suspend(struct device *dev)
- 	struct regmap *regmap = dev_get_regmap(dev, NULL);
- 	struct wsa881x_priv *wsa881x = dev_get_drvdata(dev);
- 
--	gpiod_direction_output(wsa881x->sd_n, 1);
-+	gpiod_set_value_cansleep(wsa881x->sd_n, 1);
- 
- 	regcache_cache_only(regmap, true);
- 	regcache_mark_dirty(regmap);
-@@ -1169,11 +1177,11 @@ static int wsa881x_runtime_resume(struct device *dev)
- 	struct wsa881x_priv *wsa881x = dev_get_drvdata(dev);
- 	int ret;
- 
--	gpiod_direction_output(wsa881x->sd_n, 0);
-+	gpiod_set_value_cansleep(wsa881x->sd_n, 0);
- 
- 	ret = sdw_slave_wait_for_init(slave, WSA881X_PROBE_TIMEOUT);
- 	if (ret) {
--		gpiod_direction_output(wsa881x->sd_n, 1);
-+		gpiod_set_value_cansleep(wsa881x->sd_n, 1);
- 		return ret;
- 	}
- 
-@@ -1182,7 +1190,7 @@ static int wsa881x_runtime_resume(struct device *dev)
- 	if (ret) {
- 		regcache_cache_only(regmap, true);
- 		regcache_mark_dirty(regmap);
--		gpiod_direction_output(wsa881x->sd_n, 1);
-+		gpiod_set_value_cansleep(wsa881x->sd_n, 1);
- 		return ret;
- 	}
- 
--- 
-2.43.0
-
+Konrad
