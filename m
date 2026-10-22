@@ -1,88 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792686683;
-	b=szBRhUdGzyOtSgPrisxVyPmIQ0yleOeKTWPFyc5rVxaXXd7NUlt0aEJ0DQXXKNwF5kC1
-	 Fe9YKwxpqx60oY0/P0R6Tovl8nef8VHGfRqb3et0//+SQ8y7+m5gMpVlvDkZEnH/3xZA3
-	 elw4atQf6WP41mTEB0X1mdJrhXjeXfb3GMSFJfUIm81L4SH9tHPr0TBYrj/eNE7i0xmjO
-	 qM0JMD6ND43AnUu++Vn/4YxfhMaojjH09fCezZoQOcOMsXaHMhq03K/dkTiyFQYYdcB+O
-	 Q9tOA0GucKnuDiH6icwEPwKultAO0m9kvHnPjJhgpUHALiXHXnDpBOBcrfJsmi9wzng==
+	t=1792686757;
+	b=v9UyUAFzV8FRNGV2zEvsGB3szWn8bGwBh4REFi+Oi4cjQMTFW1GLZzs+cGSnp9qemyzm
+	 leIX9fNddw2lfdCUBII9nCgsj1BQ70x8h+cU2d4XAFk7RQm/CpGmY7L8w8/WQPRTOKgRg
+	 9hM5xPkWXC9mHpuweFuuxmHULtMozS4ULFYr+NtahEirje557CIU973YvH8cVLCsm5ee7
+	 WfzWsmaWiz1C1smvIC5c9IIBRnNx5T3Ziau6UJ1IStij7pHZWUq6oekV3yMqnaiHlTiLW
+	 wKeOI/KimdJ/5QdCM9X8TVVfT1//HDdbAaCnBqt0Jzgt8Kv2M8l/fWlxSWmoypNyKSQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792686683;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792686757;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=aleyTKbyUPwkKdibUq3IwvSz2dQSx+D+0Ibacr1mokc=;
-	b=cXaiwXhHkxQxDlgi5kYj25TP07HRCSeP5+KlrdlfQzXSP2OIlHauvGGuc/aDFhk3WxSS
-	 oGv6kuxGdRl+bdxKyWYwF4lEr0D1IAunF4IYdxwzmrB7s4YJLXkldTTgXU8hdJjPtLkLK
-	 nkvm84o2jof/mYI7IFDgIosnQwvM4a/ycmPwM3+b2teMB5LlP/f0IVwJIsmyck+hjTCa6
-	 SXJunBT6mmFuRazBXThaBc7m7B6dRQG9wSnNx4fPxIAVEFmaHObxfUWwbkkAcUJTVr+oN
-	 rZSUQPAPAw1m05eUOb4n8OYTSMQ1Uvoj8w8FyhP25mEqO2EqCCDttvBlXg9g75XBPBw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
+	b=shiH0AyfXcShKRqGUftHUx1e/Vc2fuWk0Huk7p9AcH0ZJ0JCmVEj99kUVrjOe6QRxQ9O
+	 O4m8/T7O/NgZoOMRVxEddJ3SfoZRHzMIIFOdinCyZgKwVLfptVGEg9Yd7Kf874ntwV+j7
+	 DvyAw0vmnasQgRe6RvfulZXJY5swVlxr18xDE7/btM7ruaVZ6Ajx2PIYW1DQlTBjShQPM
+	 Se0M2GEK+5MKLOcJN5oN7Tj48UGYTA+THXsJndJmKs95+ErTDC0XqWkywBJFWXU4/G6Is
+	 diiN/pgAgXrMYNjDFxMaa8+VjVXwwKA5LvhvDv4GbTOpMBtkecZzNmllzEKlEXWupNQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=qxpOClJj;
-	arc=none smtp.remote-ip=74.125.82.177
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=nlgT2q1R;
+	arc=none smtp.remote-ip=74.125.82.170
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99A29606A321
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:31:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 99A29606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 450A0606A31F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:32:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 450A0606A31F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=qxpOClJj
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-3535bf8b3e0so6140eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:31:22 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=nlgT2q1R
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-33fb4680717so4965518eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792686682; x=1793291482; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aleyTKbyUPwkKdibUq3IwvSz2dQSx+D+0Ibacr1mokc=;
-        b=qxpOClJjtfeOQfM044rAVrZ8LpRzlycX9HpUGrUusQc3d6Jrn+XIsSWVsOGux2SBaH
-         b8LZaKGD3dnhMoeCA3rch0Q91EpYMlq8uUtE7pCBcZ2pp1gllF4irMGlmR8Xh9ZuSY3y
-         71BdHuYB4qT/a8JcMytVm80z2vSTcEXxnxerXiE6MV+MmR+Gc385HsLfmC/6n+iKE3mg
-         y0jIq2I6DH6QjXvrzbprSEVsFQJ6Jz5EYl3LZ6FjnGb3cUjCxiP2DrsYtF/mi9+MeAQm
-         L0M2NuH+dQox3obSqNWDZ6pcckmCC1QAXqVis53tmJ1NzVNUC+shLbSu0QX7d0xk19VU
-         jTjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792686682; x=1793291482;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792686751; x=1793291551; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aleyTKbyUPwkKdibUq3IwvSz2dQSx+D+0Ibacr1mokc=;
-        b=gOwAW9hp99amAbmiaGGjKlZNk1fLTpBkJrxv3bwcirrKVO+TRJ3MRnBeF+kK6qnPXO
-         eUIhAws8O2JwWkERMxBZTf9aP6dLuKrLkhj3+DwxH5ko9dR6pnlv3bdvQVaqu2AD4jbP
-         Imcz/5WDKinPcOUyciF96gbzUeGqNJLp2WZ9cqMDmUY9UuwqgJLqAS68UtGxsM0BIIaq
-         yZ0vWpup26pe3sip6oo6dWlhi3FYaovH4KtdqAXvX4GNplzjqzyJSvSihi9gPpc8NCOj
-         be/rAJ/ltMKAyzlrIaJekaYDMGrQFYCprQbTbVpHSdnM2xjAIIBVnfGnSas9CggmtsIX
-         oo1A==
-X-Forwarded-Encrypted: i=1; AKwUvBzswqyrJAjgkK9vziwFzI/egBdDo8tQabVf2/Xg6aHusb8KMvr0dLMqzSYwIHQ92GvRsrHee2YvN5tzb1Zl@vger.kernel.org
-X-Gm-Message-State: AFq9FYIQ1lLbnCcXPsZMO4dNaDl1JBPsWxonC+75UbzgBWvm75IJvx5Z
-	Sw1PGAUnlVO9A3bt1BQyyo7G/PLmPVuAQ5FutwNVyXkuS+6S0ZJ+r70U
-X-Gm-Gg: AYBFou0jMmv+nfzjh4pEpZ0m2Y480u2NUTt+W2iCAheCuP88iiLNq5sNwgV5/hQYwCd
-	o1ukF9FgZ4oPC4GiOWlOV1CM8fGGpHrTReUSeaHTiXEWXK6qVIM7WNVkG5enMeIod7JJEAvU96x
-	YBaI7tFxa7j1nbGIyuq6MrCnUtwmlpB+qZoFsi4abAU2e9xKyeoW47Ii1KbQ7pbfLjmuFHJuws0
-	qhG6NyOcce+3cl8v5f6uvgqBeF4F9fNDLtTJsUaCa2+pl65ychcZYrryh/o16D/MBr0AlPotWjl
-	V234wSS0lJgao2eQky0uUTmMQzTTy6jeB7qcjTvPMF2vq4ASvvLwCsXHI6cOba6FsLIQt7tYkF7
-	ne9YpCB+tRfYFSv9sruzC5WtZzLolFxJLpVWRuAWP8M+m9Xi26dd1sJm4QBZe69NrttG/1bBysE
-	0dRbPBydMSmgax7QTFf06+CDza9mTIT3A+lyNdBwWO36c4QzzbFn+3ht1XpfWZEdYRJZ1bINtTN
-	8aO0IGAHyeYFlfOiCBXrYY69P7RpJOYxrR/V8jkX8KJsU1x5WowzM9l6wWVFpCRld3FmtY=
-X-Received: by 2002:a05:701b:260d:b0:14a:8df8:56c5 with SMTP id a92af1059eb24-190a599a5admr5852299c88.26.1792686680599;
-        Thu, 22 Oct 2026 09:31:20 -0700 (PDT)
+        bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
+        b=nlgT2q1RTU0EH+YxL4z+hsL4T+7TlQvAkGhXm/A3gBiBq1OjpdykFD0p79P+2QHVXp
+         rrRmUnE13x6JIjeqAVMN86RahXl7yQZrxVVvmdH/h3z701xAU3dJkZMO16qz1XzHWXwb
+         yvWxB5Dz/qX8uF52sjXSeZYPJDeDbcgeZU1+MUNol869hzum1Olo40CBOrZyYUs873o1
+         d2JfUi0Atheb1KdNQAd4ROzSnSe9hAl6UfeSPcuJai48Apf3no8HkCxQgOWlYtlUSBsd
+         BQlVpeu2F6rRyR4+kHtPpl0iu72eMIo1cY+IV1lD/TqySeNzClg2LJWDXn8biN9HVq8N
+         Px3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792686751; x=1793291551;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=dyDoCHAK3x3k2IkUzfNota+vU5adkAbdwanSXQJIy3c=;
+        b=OH4SwilqQNPwGjZi5SXwa9FOCGeWbkMUAdA6xTeGN2Jr/tTkYvP6P1mDhqY1eFFrqT
+         kvTb/aju9LfVXbJ07DatmcWEVCHtNMIk96QtEsfJCIC7R6Pp3Cgbg7ropCgqcN1wOKBy
+         Yz4jSAJyvAUPVcaV356XNBM1MrVk8lWKOHZZEvuYXBvAbeImnQFfWoINAuBGX+KeZnc0
+         7dw32GrREZ0VnwtTdacjMS5/WbMK2/Rh7q/150dQ210B/e1gRGi6Wm8oL7fF+Q/TGaQb
+         qPOG73RTrQIleRDjFOtHb15V7hwF2OA7NASPaFKMHLq9nF8lAT9jsY8LZAMjYyQA/YaF
+         oUtg==
+X-Forwarded-Encrypted: i=1; AKwUvBzwvmA+TJyFp4UCtT9qiXwA7faDR5DX5y3Qwj70wh5HSADZ6wsXwgcuGqDP30Lk/5D76Qp1KwHPrYZejqhF@vger.kernel.org
+X-Gm-Message-State: AFq9FYI8M8nNv3Q1sO4b7PceIGelh2GhPqSRCu4SwjOzY8/oZUkh1mFb
+	vAmhrE23KArDzsZhYTHX7Y8YDdYsD8j69oBbv3niR00aqZnz11SREYzl
+X-Gm-Gg: AYBFou1W2JahIhPWi1j2LUB58+GrOtP9oBk3u6hOKGDKYHHGxFoX4HnLmyvVCYg7N2F
+	VzjF6o6KodmSp+fKc9jT2XpE/MZYHCAKZJeXTyR/Nu0oHIK1uYtrktEAsbqNWhp4xzBjKSm/IQM
+	j+LS8R4O0ZdgwCvXE4nWFEoVD/Wd1WDL9qwW/+0K4uxMHoFMS7cYXHT1nsuagXSjrzJE8q8rHam
+	Fv6x3bpsVXD45So43swxGUcD/kJlT93bPybf7rJhC4mJfovG7gZT6f6BWTgg3l765eu49ig/TzM
+	8cIvdeSPvfqN4Dsoq0yAZ6f6NlkBDmuB4ol5c3HqswzB5r1Y/5/Hj6XgkRA1WhykkRS5xQ+nRdu
+	lqGFUud5XI8HiV1lLG1IV/MOJEwkb2ITtWJEcCTjq6OKW9/pzpwYvl3aJ17Orcd6v2sJ06DoJFi
+	eT3vhNRDoj4zoE1JJJqxcXfw+nX3SnjpxsTYdPx1MD0y6m6i5ZUy4yquy0n/WPVu75GqEh+S4nS
+	l/TPSxCSyUjCKuUpNWw1ZEVZ/u39VWBy+yHJisKH/QLgss1Pdf5/35Wjb0FbTQRyd9JsbvhR/jy
+	5pbz1MmpX7IKTGEQ
+X-Received: by 2002:a05:7301:18a1:b0:359:9302:a526 with SMTP id 5a478bee46e88-3674c93ba42mr7166066eec.7.1792686751237;
+        Thu, 22 Oct 2026 09:32:31 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1903d87ab1bsm17079981c88.21.2026.10.22.09.31.17
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36741e71eaesm37214243eec.26.2026.10.22.09.32.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 09:31:20 -0700 (PDT)
+        Thu, 22 Oct 2026 09:32:30 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
-To: mani@kernel.org,
+To: netdev-bot+sashiko@kernel.org
+Cc: mani@kernel.org,
 	davem@davemloft.net,
 	edumazet@kernel.org,
 	kuba@kernel.org,
-	pabeni@redhat.com
-Cc: horms@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
 	christopher.lew@oss.qualcomm.com,
 	deepak.singh@oss.qualcomm.com,
 	pranav.phansalkar@oss.qualcomm.com,
@@ -92,10 +95,12 @@ Cc: horms@kernel.org,
 	linux-kernel@vger.kernel.org,
 	regressions@lists.linux.dev,
 	stable@vger.kernel.org
-Subject: [PATCH net v2] net: qrtr: announce local services again once our HELLO is sent
-Date: Fri, 23 Oct 2026 01:31:16 +0900
-Message-ID: <20261022163116.1042-1-26rote@gmail.com>
+Subject: Re: [PATCH net] net: qrtr: ns: retry service announcements on -EAGAIN
+Date: Fri, 23 Oct 2026 01:32:23 +0900
+Message-ID: <20261022163226.1091-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
+In-Reply-To: <179250109438.3135.5278679700614096504@kernel.org>
+References: <20261016124600.31-1-26rote@gmail.com> <179250109438.3135.5278679700614096504@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -107,107 +112,69 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since commit 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint
-register"), qrtr_node_enqueue() drops every packet but HELLO with
--EAGAIN until our HELLO has gone out to the node. When the remote's
-HELLO arrives first, the NEW_SERVER replies from the name service are
-dropped, and so are the broadcasts for services registered before our
-HELLO goes out. Nothing announces these services again, so the remote
-never learns about them.
+On Tue, 20 Oct 2026 12:58:14 +0000, Sashiko AI review wrote:
+> - [High] The fix only covers one of the two paths that send NEW_SERVER.
 
-On Kaanapali the modem sends its HELLO before it accepts ours. With
-rmtfs started first, the modem never learns about rmtfs and its
-watchdog resets the SoC about 40 s later.
+Agreed. A service registered after the remote's HELLO has been handled
+but before our HELLO goes out is broadcast from ctrl_cmd_new_server(),
+and qrtr_bcast_enqueue() drops it without telling the caller. If the
+local node had no services when the HELLO was handled, v1 has nothing
+to retry.
 
-Remember that the remote has sent a HELLO. Once our HELLO has been
-sent to such a node, pass a HELLO from it to the local name service
-again, so that it announces the services it has at that point.
+> Could this be handled in the core instead of by polling in one caller?
+> For example, packets could be queued in qrtr_node_enqueue(), or the
+> announcements replayed once hello_sent becomes true.
 
-The flag is not cleared when qrtr_endpoint_hello() restarts the
-handshake on resume, so a HELLO that the remote sent before then is
-not lost. The cost is that the remote gets the same NEW_SERVER
-announcements twice when its HELLO arrives before ours goes out but
-the name service handles it after, and on every resume.
+v2 does the second, as you suggested: the core records that the remote
+has sent a HELLO, and when our HELLO has been sent to such a node, it
+passes a HELLO from that node to the local name service again. The name
+service then announces every service it has at that point, which also
+covers the dropped NEW_SERVER broadcasts.
 
-Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
-Cc: stable@vger.kernel.org
-Signed-off-by: Joonhoe Kim <26rote@gmail.com>
----
-Changes in v2:
-- Replay the remote's HELLO to the name service from the core once our
-  HELLO is out, instead of retrying in announce_servers(). Replaying
-  the announcements once hello_sent is set was suggested in the Sashiko
-  review of v1. This is also not the delayed work in the name service
-  that I mentioned to Mani: that would still miss the broadcasts
-  dropped before our HELLO. Nothing sleeps in the name service worker
-  and there is no time limit.
-- v1: https://lore.kernel.org/all/20261016124600.31-1-26rote@gmail.com/
+> The same window opens again after qrtr_endpoint_hello() clears hello_sent
+> on resume, because the nid stays assigned.
 
-Tested on a Lenovo Legion Tab Y700 Gen 5 (out-of-tree board support)
-with rmtfs started before the modem: the modem's HELLO is still handled
-before ours is out ("failed to announce new service"), the replayed
-HELLO follows right after, rmtfs gets the modem_fs1/2 opens, and the
-modem stays up.
+The flag is not cleared on resume, so the replay also happens after the
+HELLO that qrtr_endpoint_hello() schedules.
 
- net/qrtr/af_qrtr.c | 22 +++++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+> DEL_SERVER broadcasts from
+> server_del() are dropped the same way.
 
-diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
-index e7b364742..508a2dd2d 100644
---- a/net/qrtr/af_qrtr.c
-+++ b/net/qrtr/af_qrtr.c
-@@ -122,6 +122,7 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
-  * @qrtr_tx_flow: xarray of qrtr_tx_flow, keyed by node << 32 | port
-  * @qrtr_tx_lock: lock for qrtr_tx_flow inserts
-  * @hello_sent: hello packet send successful
-+ * @hello_rcvd: remote has sent a hello packet
-  * @rx_queue: receive queue
-  * @item: list item for broadcast list
-  * @say_hello: delayed work for sending hello packet
-@@ -136,6 +137,7 @@ struct qrtr_node {
- 	struct mutex qrtr_tx_lock; /* for qrtr_tx_flow */
- 
- 	bool hello_sent;
-+	bool hello_rcvd;
- 
- 	struct sk_buff_head rx_queue;
- 	struct list_head item;
-@@ -541,6 +543,11 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
- 		qrtr_node_assign(node, le32_to_cpu(pkt->server.node));
- 	}
- 
-+	if (cb->type == QRTR_TYPE_HELLO) {
-+		/* Pairs with smp_load_acquire() in qrtr_hello_work() */
-+		smp_store_release(&node->hello_rcvd, true);
-+	}
-+
- 	if (cb->type == QRTR_TYPE_RESUME_TX) {
- 		qrtr_tx_resume(node, skb);
- 	} else {
-@@ -619,7 +626,20 @@ static void qrtr_hello_work(struct work_struct *work)
- 	pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
- 	from.sq_node = qrtr_local_nid;
- 	to.sq_node = node->nid;
--	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to);
-+	if (qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to))
-+		goto out;
-+
-+	/* Pairs with smp_store_release() in qrtr_endpoint_post() */
-+	if (!smp_load_acquire(&node->hello_rcvd))
-+		goto out;
-+
-+	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
-+	if (skb) {
-+		pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
-+		to.sq_node = READ_ONCE(node->nid);
-+		qrtr_local_enqueue(NULL, skb, QRTR_TYPE_HELLO, &to, &from);
-+	}
-+out:
- 	qrtr_port_put(ctrl);
- }
- 
+v2 does not replay these. A service that is removed before our HELLO
+goes out has not been announced to the remote either, and on resume the
+remote has been reset, so it has no entry to remove.
 
-base-commit: abeacca61eea4f6803df4a595b656ea45c2d3249
--- 
-2.43.0
+> - [Medium] The new retry loop in announce_servers() (ns.c:232-236) can
+>   stall the whole name service for about 10 s per remote HELLO.
 
+Agreed, this is the same problem Mani pointed out. Nothing sleeps in
+the name service worker in v2.
+
+> A HELLO that fails with -ETIMEDOUT or -ENOMEM leaves hello_sent false
+> for good.
+
+That is a separate issue in the core, and v2 does not change it. With
+hello_sent false nothing but HELLO reaches the node, so the replay
+would not help there.
+
+> - [Medium] The NS side gives up after a fixed 10 s, but the core keeps
+>   retrying our HELLO with no limit.
+
+Agreed. Any limit in the name service can expire before the core gets
+our HELLO out. v2 has no limit: the replay follows whenever our HELLO
+is sent.
+
+> - [Medium] A retry can re-advertise a service that was closed during the
+>   retry window, and the remote then keeps the stale entry.
+
+v2 has no retry window, but the replay is one more HELLO for the name
+service to handle, and the ordering race you describe applies to it
+too: a port closed after the replay is queued but before the name
+service handles it is still announced. v2 does not fix that race.
+
+v2: https://lore.kernel.org/all/20261022163116.1042-1-26rote@gmail.com/
+
+pw-bot: cr
+
+Thanks,
+Joonhoe Kim
