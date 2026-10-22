@@ -1,108 +1,83 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792680874;
-	b=GWutvW3+COI3WKLJTP3QMZEnrHF6i5Kvf3ooXqyLtwu/M31LI2N7rHm4IaTYHCPB6Nnv
-	 Zt0KRmPFUxrKE1nOAEgfGqRFFaOiW1RPlOT29QcPQQO/R5SPpB3eYthRVDHV5q4naHiG4
-	 Iqiq2oH8xHg+eACm0hzCIxBPa5oB98woz/5thX5PoGRLS1oXV5AsBu+XeIkzDm+06rPCE
-	 DuSRuK7Dd+lc51L2RXSBjyjQHUOzZfdHX68+dVfwQqbe78bCowfQhZu6UwXvWGu+EMaWg
-	 sONQo3RDrNVRq+mDverkcWp9xvHdWf+1J+XnTY40f4hBzoPRGxHWkbxD6WbWcq5FAug==
+	t=1792681072;
+	b=mE2kAF0sA/gnqrG8v5QD3r/dsDtOFADl8UTPgZE2cu+biltFfjDQsfOzqyfr3tJ7mkEw
+	 gq99vZSuiFkQ5brEJ4+DzYXLUTE9LGObZh8TeI38VOPgUE3lH0WI18zbd3Kej9JvsfYJx
+	 OUJF/LMQf9EvFg4Iy+TQ7RpJ3WIDENw7Mwcj+Fbrq0nyXMVBcFMtja0NfIw7deY2Ts1Ah
+	 I8Qed7qMaq2mDHlU3C3tNFQ3/XTqhRYGCyz6ih7xvxSgpGGXT980UDsRKl/tXQp+APpEp
+	 sOrDfEgAK0DZ55ZZ6gSXpuXqpKcx1HhxYVrpc6NW0UZFkzlyEy650TY1Zibr+/Pee0Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792680874;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=LeyVFsqCqVWi/yTiZu/t1rp7LlLuz+7A3YoONaVMHFI=;
-	b=UX0lOJJm1anUf1TaohRUPZhSHB5rxWDfOWG1nHs4XAxJx4JlnhwUZKfezTKnY6fYrXmx
-	 kOddM3PUFcQJinhDaOntzQRv5jR4GkJDY+RyLb6UUjFL6hNe3VrdqLHyKFdd1Rl4rhHv1
-	 cClgMjAaHBkMEyNDc59aAHWpbSD1qwRSRxj/Gx/I9IDJn9bAIcMa3FWFz4HJq95LazYfu
-	 ykPY+ibbr6DJqK7oUc4x+fUpFjLhm3txYaEHWYpp1uS4eRY3AKu1IaLgLXCCZUV/27KEz
-	 lTyQtV7U9j8jcbbVz6iSRAusnWfb8qoYWRuzIWL9L7iZ3lpGXW3kzJEw9F1RFOXhsbQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792681072;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
+	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
+	 X-QCInternal:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=IJs45fFUDJNNiewh1g9rjIHPssvqt7O5EgXXxQLLM8M=;
+	b=OZhK+jUsOVr3AVtd8cHieR5+NB3XnTmIA5kHxb8goagTmQx9iLF6hLle0o8IgdOO2/OB
+	 2fj7IpH+owSt0tnfTnpinEWC1OiB/U6bNa3yRWERXDBlqjX5b5ud2qFCvXtPiig+sfe9G
+	 H7MXxsT4EwdMa9TOXeYIZQL7jRNI2pa6d/OahazB8CI1eiJTQhJrkxLBJ67+tZt4dlSiM
+	 oZNHU+tJYcdTsslEsatzJWfNGc/d37AzFxYTwKn8DyRzcLa/VNFJwIEgY1bGCEZCnL+FG
+	 IpzamQnyzpDD5xydWZ4UNeWepp/cCK5OeURlUAGVQNh8CSzdCSqQlyTwFVFAqFd2qKg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="FNu/nGsG";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U1e6LBUz;
+	spf=pass smtp.mailfrom=qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HVWyfJNR;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3FCC606A320
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 14:54:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A3FCC606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFF5B606A319;
+	Thu, 22 Oct 2026 14:57:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AFF5B606A319
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=FNu/nGsG;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=U1e6LBUz
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69MEFD083048117
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 14:54:32 GMT
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HVWyfJNR
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69MEFXQK4098577;
+	Thu, 22 Oct 2026 14:57:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=LeyVFsqCqVWi/yTiZu/t1r
-	p7LlLuz+7A3YoONaVMHFI=; b=FNu/nGsGUGijxpOunvpAFg313nntuufV14mIIT
-	limhirkmXmrBmRiwMvw88X0yLt8F3mvnvnMn7CGMJIS+DqODnB4qclY7195jk+Nd
-	pX2tCdXY9juGiSVl9+xBVskQIpSN3mF0GCoHK3lhc1S/1gwlf10hpmcJXAA7KWjK
-	kpcVpTskb1YQ9gzGVFlCRERPzQ69inOCwCpzrjTGZ5HxPF0zxyon0x69U0Wx6UnF
-	5FkR0UAgWNCVxTdyeqvuuRl3ItquW0v6dNmHjNsBv5uo0cxj9OyF6ozYDeWf2fBd
-	D2mJrINo9nwDH7SaTv+YThP1Jtm57LzImeRMatAIFS/A8aEA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93bv9wt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 14:54:32 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-36998507c13so378619eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 07:54:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792680872; x=1793285672; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=LeyVFsqCqVWi/yTiZu/t1rp7LlLuz+7A3YoONaVMHFI=;
-        b=U1e6LBUz0vYNgvi01E3wOd3GQxVmW806KeGOQroELH4ui18WSPYG7mUwlluqia4lgg
-         INPszpMI9kYMXordzyfQ17RjY4Ra4UNHynAa2BTfsHt20YqcEpKF3rM5xiE2sVvptCGD
-         MGsGH7jrTijmXV1tUVfnDdv2/5w7SfxeWUt70nAro724BdH5BnYkN07XH/4zuJdySpPE
-         B9QxHo9qa2clAU0Fm2I96HLOwHDllsSeGVxxus6RJog+GVOcucZedokFYP4M47ewymfW
-         AYe9V5l81xg1Pcc42XLWWA59+Ijj/d2v1Wxwu3gYuiehfoqAbqdT2JKKAs459XQLXBwc
-         OyRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792680872; x=1793285672;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=LeyVFsqCqVWi/yTiZu/t1rp7LlLuz+7A3YoONaVMHFI=;
-        b=VERYhkOX5za1t+3APG9IJUw+indPSHX+S21HNR0A/S1BzcVobBDwGckcfDbbG38sYs
-         gEnRaY3CME6/61ozZrxDdcsAFdraaCgWSgd64PiadrmX+zanMRgLQnzvKFafhZ4W2WAU
-         cp+KO1NMeIntCLzB3ChyNvgg1lxH+xCRQstdS2buen+mP4s+fe1QX0DGKwpiuq3UKSRD
-         CKFz9PWaeuRNnpikoBgaXkyHK3ypFUoDDqCJMurfNYhpnflCDLSmnPxNmSQMCv0DLqY2
-         1rexrhLVToHFF+vcR5K8FYbkr61lz/YBXmk8rs6MUjPVKUU5a+uLJ3MKJVuzdWIwktog
-         3vHA==
-X-Gm-Message-State: AFq9FYJpBTXpB7E2dSpYLRA+d736b3WUf2/lIYgBtlFz4Ib4eEedgszs
-	MpfMBlV4oqGbh4DUMWs4ZdJ34Cl2pG97Ed/KKK6ZtY/Q6o3gO0GsYoFcr7Hb4APTGxKyiJ1rp4U
-	B6dyF0qcgL60eP4ygotcmHuvdecUYTOkS81s5rcNr8VTO3WAtyNhcaA9PPkorM/tXsK4iCRckfd
-	sF
-X-Gm-Gg: AYBFou2t4HW1GvDpAeSbDw9E4sRwf9N8mM6l6DluI8+NrDoQCmvasPXrSa58K/bUkZh
-	Dy6lzw8RR6GTpWt8x1emiuk83WjGGDpbfY07OObHAvo+7Fh2AKrD5pyjRhvsF1DD0dJGl5BUVAM
-	MdN4wNMgqtlM4houY8PL8PmWmKUOZuiMrqcn4acShrKhtfHcsmnXUfCBS0hMkwZrblPZDaCQo+5
-	0ewc5v/QCy/Ut9oIANwqpbPlMrxqonSah0F/BSyPEFHBDsbLUS9U0LsHMO5cUUtLC0ishQEGZUV
-	GjHs8V6w6BG390MUSFmNQjZkY+Ertqss2Y7pQtKn3vU1F574THHCpdsJTolF4NPIW1CNHXQtPMq
-	CkwF+IYQr8idcJM+rUAozdTnQcJG/pMDsn4+C
-X-Received: by 2002:a05:7301:8615:b0:359:8492:20ff with SMTP id 5a478bee46e88-3674c43a7a8mr6978997eec.12.1792680871419;
-        Thu, 22 Oct 2026 07:54:31 -0700 (PDT)
-X-Received: by 2002:a05:7301:8615:b0:359:8492:20ff with SMTP id 5a478bee46e88-3674c43a7a8mr6978969eec.12.1792680870900;
-        Thu, 22 Oct 2026 07:54:30 -0700 (PDT)
-Received: from hu-anupvish-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-367411bd2a6sm26250257eec.18.2026.10.22.07.54.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 07:54:30 -0700 (PDT)
-From: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
-Date: Thu, 22 Oct 2026 20:24:25 +0530
-Subject: [PATCH] remoteproc: qcom: pas: Release DTB firmware after load
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=IJs45fFUDJNNiewh1g9rjIHPssvqt7O5EgX
+	XxQLLM8M=; b=HVWyfJNRENZ0zXBaKsk5f9NF/S9fUirVuhYn/AuzkQrtKR0NCmL
+	EtVKk8FnCQgNsV8HlSGiCB+mCwy4F8nrWuAZp8L7vPtXWFQPqIpqVjFWQ0o+lzgN
+	vVBXQAQOj89InxDZWwhtyQA/s2wWZV8mgFup6vIhgAN37CtybRlMD1k1W8hiV98i
+	AEE0c6SaSCEe5uR3Tzwy/u2UGDEL+nwi7XSTuhohbfHzY10i6o8jxaOwzzh5ZG6r
+	F4v0sVic/YiSeUOPGDyAO8irxTTz9o2lEYcZ820234Uljx9w/GLvd33XDnoixHhV
+	Hob+POz8sjnNgXp5IdqfWDvxD+qG8taRgdA==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfewq35dj-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 22 Oct 2026 14:57:43 +0000 (GMT)
+Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69MEfW421932679;
+	Thu, 22 Oct 2026 14:41:32 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-mohis-hyd.qualcomm.com [10.147.253.64])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 69MEfV601932659
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 22 Oct 2026 14:41:31 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4840500)
+	id D1E3A66C; Thu, 22 Oct 2026 20:11:30 +0530 (+0530)
+From: Mohit Sharma <mohit.sharma@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mark Brown <broonie@kernel.org>
+Cc: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Mohit Sharma <mohit.sharma@oss.qualcomm.com>
+Subject: [PATCH 0/2] Fix GPR callback registration race during probe
+Date: Thu, 22 Oct 2026 20:11:28 +0530
+Message-Id: <20261022144130.2443667-1-mohit.sharma@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -112,93 +87,63 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261022-b4-qcom_pas_dtb_fw_release-v1-1-d92d84a05544@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAKAj2moC/yXM0QqCMBQG4FeRc91gG1OoV4kY2/G3FqW2oyWI7
- +6qy+/mW0mQE4RO1UoZ7yRp6AvMoSK+hf4Kldpisto2RlurolMvHp5+DOLbKfru4zMeCAJ1rNk
- 43biawVSCMaNLyy8/X/6WOd7B03ekbdsBhcScl34AAAA=
-X-Change-ID: 20261022-b4-qcom_pas_dtb_fw_release-95c140645cec
-To: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-        Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792680867; l=1584;
- i=anup.vishwakarma@oss.qualcomm.com; s=20260805; h=from:subject:message-id;
- bh=40dojUEYiTck5avIuh4BZLBGj7u3joSJCzFWspEillw=;
- b=HMYQhkmCsBufTsqpejcDU81i+XJ/9B031qiPCSbjZs8maM+zPlzrmJBFmkfKc+l0CN3jB4U1m
- iGFeS0C3y5/BwCarm9Ozo6DDo2U4cHbU3laE3PXpypjuIp5xiJveJQz
-X-Developer-Key: i=anup.vishwakarma@oss.qualcomm.com; a=ed25519;
- pk=Y9ilCu91UQrzHOM14SG2IjnmQ1QSroH5uVeBSWEmEDM=
-X-Proofpoint-GUID: WqZYJSpD6QWKFRjRc7BD_K1xDTk_mHXY
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfX6qJ5AfpwrQUj
- h7lrzeNWkHG7z2dQDAVrPTYHq1XS79wUoo2qFHx+nZ8a/6M65UadW4CugRbQzSfNmj8kzvDWOjT
- AzpJykzohmMeMbJFSb8ZqarvWGYGCww=
-X-Authority-Analysis: v=2.4 cv=F4fC5ahN c=1 sm=1 tr=0 ts=6ada23a8 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Y1IhKJFcC3I6eYhxwIsA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-ORIG-GUID: WqZYJSpD6QWKFRjRc7BD_K1xDTk_mHXY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfXwt59iWIeuqgN
- iVCSgza5kp1EBRzMA7u1sJ7XqKEowGu9uBUxqXi/And3u9VAcDJX0DHvTBq/XlybClzFzI5DQ65
- m5TwSrqzd8UgAUoOtrHzD5Wun8J9e3gyjiOhtq5/Nm+nUQko5TiEf+f4uPySOWa2JzO1CiPz1Af
- 4uNE/qQmLj7YMuTGLomYIJkGXr5kIeggb9Y1VNacQe/QUbg74dgJEZyrFerN8GUIQ4aSQyxBhAm
- dS/1rlAax0K/Q3ORBhQeKpHtpKf0V1xuA/vh77RwXxJxWKiH9JwvGLq4NWGzGycQvo33au4EoKi
- TT0NPVbhPlCf1tgwXVxXq0+hCL4eclomXpXYo0CaVNs3fHoU5QUfuaV8/3RMMjw1ayPxDnIwqtM
- diCUhxIGlNx6Wd6Dcr6nZ7OuHx09PqqarEUCFX1oUxdVNtEWTMBUPyWusLNtV5rE3vOOP2w6KRo
- Kwu8p4kKXbDrO+dRXSA==
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-GUID: hlmCAZDTC2JUn2_LZQ8k27SXRjdGrUdr
+X-Proofpoint-ORIG-GUID: hlmCAZDTC2JUn2_LZQ8k27SXRjdGrUdr
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfX4u0f8ISkhA5d
+ tisCRZmYem9ITX1SX3R+7k325PJHQ1on4RYR5kR7NZ0r1c2QRvygSKH2D8dWh/kwaDe9mFApBIl
+ 0icnuG19n+WyckTMiHgEx6vA0F8By4k=
+X-Authority-Analysis: v=2.4 cv=G4OJgNk5 c=1 sm=1 tr=0 ts=6ada2467 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=SdEKr03YgSq6kbhPS0kA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfX+q9j3IMNLh/U
+ 3eOGRr+A6Ow7s2mBGtzs+pjR/jh6gLHHmzVpQ7OU0x8IspCcVjQ6rdpx8xXZvQseW1ruP6qvJ1q
+ SGml5n8fYz0Uth8H0i7ntUN/pUN1lYmAnX58WVbfjlIVZbnGlw4U1W5mzN0Jk4u6HU5mUNBSBAq
+ M4Fib1hFFc/GtUad5vE6cNoRIszILkPdEUTBoNKrKomE2fhbnsVbH8hUQGpPEUtpC1g44kD/kAk
+ 3/6TYtbsnVhFeJcszxDnEY3gSMMUsy32wJOGT68CMCulzJSsIMb3NDnQcFVUpxr6XDO7HKR5n8g
+ /UekM0ZRhUFus+PuLmdHxfo5E3te3WOgtiMiKw4B4RNI7ABEXOZNse16M71vNDJwFo3P99ngH65
+ GhPbEZucuD5RNJqd0LnUI/w8HdjEsuXQPIh8xCR3BR4qqDmlx6bdW3kkMD46E4//QYNQCAOEEaq
+ euKvEoTXzUcADthiW5A==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-22_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 malwarescore=0 priorityscore=1501 adultscore=0
- phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ suspectscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220059
 
-qcom_pas_load() releases the DTB firmware only when
-qcom_mdt_pas_load() fails. On success the firmware is never released,
-so the DTB image stays allocated, and each later load leaks another
-struct firmware and an extra reference to the shared firmware buffer.
+GPR service drivers can issue synchronous commands directly from their
+probe callbacks or indirectly while populating child devices. The GPR
+bus currently publishes the service callback only after the client probe
+returns. Consequently, a DSP response received during probe cannot be
+dispatched and the command times out.
 
-The firmware is not needed once qcom_mdt_pas_load() returns, since the
-metadata and segments have already been copied. Release it right after
-the call, on both paths, and clear the pointer.
+This was observed intermittently on Qualcomm Lemans and Monaco platforms
+while q6apm child probing issued an APM shared-memory map command. The DSP
+response reached the GPR receive path, but was discarded because the
+service callback had not yet been installed.
 
-Fixes: 29814986b82e ("remoteproc: qcom_q6v5_pas: add support for dtb co-firmware loading")
-Cc: stable@vger.kernel.org
-Signed-off-by: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+The first patch prepares q6apm and q6prm for early callback publication by
+ensuring callback-visible state is initialized before driver data is
+published and safely ignoring packets received before that point. The
+second patch publishes GPR callbacks before invoking client probes and
+clears them again when probing fails. Existing APR callback ordering is
+left unchanged.
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 2e1e39826ffa..2ac21c502d35 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -279,9 +279,10 @@ static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
- 
- 		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
- 					pas->dtb_firmware_name, &pas->dtb_mem_reloc);
-+		release_firmware(pas->dtb_firmware);
-+		pas->dtb_firmware = NULL;
- 		if (ret) {
- 			qcom_pas_metadata_release(pas->dtb_pas_ctx);
--			release_firmware(pas->dtb_firmware);
- 			return ret;
- 		}
- 	}
+Mohit Sharma (2):
+  ASoC: qcom: q6apm: Guard callbacks until probe data is ready
+  soc: qcom: apr: Publish GPR callback before client probe
 
----
-base-commit: 9a482184d910775cf648863148944945b74e2815
-change-id: 20261022-b4-qcom_pas_dtb_fw_release-95c140645cec
+ drivers/soc/qcom/apr.c          | 15 +++++++++++++--
+ sound/soc/qcom/qdsp6/q6apm.c   |  6 ++++--
+ sound/soc/qcom/qdsp6/q6prm.c   |  3 +++
+ 3 files changed, 20 insertions(+), 4 deletions(-)
 
-Best regards,
---  
-Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+-- 
+2.34.1
 
