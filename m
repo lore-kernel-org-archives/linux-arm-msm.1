@@ -1,88 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792661791;
-	b=tlVgQx/quaOpkba92/ZARZwh/FBJ70wWlLqe0ARY6S9bRuxIl2oyVO9QBlXug9anbqM9
-	 qSjItX9UFMVk9W8o2DccRyReiuSHV6RiZu+Oje5ChKYceSqUh1RHv6UQ5QVSre8fHMek1
-	 PCJmRsECZ0cVoUeuXWdV+LSi5SgMSRRBjn0Fzf5DJssUCAb8kBdJioM3OvPXfwDmdXv3Z
-	 h06lBKy0i0xRuz2hyt5wJtCzahqXhfWQxmFfXBksSReoNyEohs3YrxgUAxZDl8GJvlS4H
-	 uEKtBYaOtanC+pE5R77CWzJue68RGx3z4gQ+VrPiLamK0FU+dfGvnerZaRDeUS2TG3w==
+	t=1792662103;
+	b=jdVYdok9vGamojgB1sjuhFZ79xzu/ujsy30tiNtSZRkltSmFwm6hJ6arGy//1hQ5iMj9
+	 1BDugifzZYIQOZUQXsY2pLb/sYzBQMisSO2xqLZyaEXmoLYhbdrYQ/iSWNU7VNJgVnt/Q
+	 lCxHOzS8vEv6eaeKMI/muD1+l8nWFmE8ikj6PNEpomOa+F9D8iXHP7J1lg8U4dqtitKRW
+	 aMfmXHuIUEtbYhdcBTRmqmdC5oQsAbHi1M+NBaEb+KIN5DbyfTkzmgO4daEihM5IjFiTN
+	 Z9gUTBUpGPqynDFz0XvCNhJNOfKaP9NlKyuOi/5gRU8fjflZDbtSHxujx+vnWFQPHeg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792661791;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792662103;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=TeRZMXuej1vip+D/LnUqBGpOH5R2x+fKEjyc2dQze2I=;
-	b=xbI9+xDif+ZjTk+IyL4rHIF/+uN5JzCuesJ7R164GwYEMVY5SI2KazpJBpQ2s0zFTUft
-	 hrAa4B3w3srAOnCyOvrhUvpWoGAVUi5qdgukBhnVK6pldS6clzlxtILh0JFn9OofEynzG
-	 OvZivic6HAOOccAg8xZ1tXaWx8syO1TZI4P8rz9zB4yDmdDIXBqKysNQBBXxbLO7bA+Ob
-	 9se7kNnWLo/kOoGnIXWxUfsoIpCtOyWHg/9p7nseCeo511mJBBjsoVcbnSZ5gJq6HHCS0
-	 kPIEYnPs9JBC3XpEQV9Rl285xbMVPWASKKiMPqf6CfEG1GXbxOo8NX7X0hu+yvQ0/9A==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
+	bh=OYDgm4R1tjaY+JvgEyu2MMXdyhh68gFfDYeaLIp9hAE=;
+	b=Pk1LsnLtwzrr4/LTRY5cBsPPrbWnXg6+6vxqBdecYatqq+LT6oWXp9JF0DnKz3GMSUZu
+	 ORUsgqUcdg7xWqZDohvbtl4apU67j+/KDSP145DQVCSIlqMi0Wyfw/n001mtPB45eMw1r
+	 FlaZvSv1IKdZgRYYTazZ3AUUY3SCXqG0sQIThKtBucxTEGGDD5jPwE5QwXQhLgVAWrhzc
+	 vpDttNDyl8PLmQa2pfI1HMXBswU178T974RNzKV8A76YccGgESBZIA7PtyIBFCypL4Luf
+	 t6uOmnuCWAtjeDDHK3RYbuQMJNo7hzP3lO0r3YisNIlee54f2qmvLWpjaioXvkC/S/A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=b6b73ZRy;
-	arc=none smtp.remote-ip=209.85.128.43
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Ft85iyEp;
+	arc=none smtp.remote-ip=209.85.214.176
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E98F60A263F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:36:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E98F60A263F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C7F7606A323
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:41:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3C7F7606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=b6b73ZRy
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4a1ec92f655so8180035e9.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 02:36:30 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Ft85iyEp
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2e9d7791b00so7405225ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 02:41:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792661789; x=1793266589; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792662102; x=1793266902; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TeRZMXuej1vip+D/LnUqBGpOH5R2x+fKEjyc2dQze2I=;
-        b=b6b73ZRyxrybytJWvg9Gt+ZEM6ida9EMY8QbPkHfRjXge9jB2CaVy1nBOLIw0L6n64
-         mdFADsjiPvEmIP2sDeMSqLDr2vCLq15xSLVzZkorVGTV5YCZ0boHzADnzP2sbkJ6j4IL
-         dCCQmbEuwxmobeu5A2OAxUAEOp1ANOlYajWPNRHJLY4HMN0KrMyWmU0x1zj1NJVqLqYe
-         SrcxUxrOObJlyvsUxpyD61N2ygXhpchdXLkdw588YQ1qkXi5x+3DxY/Y5WyGXW1zMptL
-         xKUqhYRpYDc1hhtMzg6d4io2wFuSzndnC8bwvePFHJMvDQjlFPmQ3yQ4FfWjiu34NXhY
-         jK9g==
+        bh=OYDgm4R1tjaY+JvgEyu2MMXdyhh68gFfDYeaLIp9hAE=;
+        b=Ft85iyEp/12SfLEwAij9mE92Qr0ZiQXzSmTKtFfmLaSrmJxg1uOe4AbPE77e1Efbza
+         WlbgZCwprEcvIugCo3kFPmDksaKpGt05pcesVs+k5n2Qarm/yYZkLa+R1KhJXOlFsQMW
+         2pZYasxHMnAIPQsFFEQ7SxM5pU39s8R8rEw3PAPDt80ATC+3qvJHWeov/M0NBoGUAgMn
+         9OjDc8Dbd5x1jP3dkG61kmki85Vrn3IfBSKbHNghQVJD6ZM7tOISdEKQcgI3UyC09lLP
+         X36CYvLY2uTLdDnutUqm7V9mvt+FSIWsf2nVyk8i5Lh/sxNiPn81hIdU5SuAmalUX/cY
+         S2Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792661789; x=1793266589;
+        d=1e100.net; s=20260707; t=1792662102; x=1793266902;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=TeRZMXuej1vip+D/LnUqBGpOH5R2x+fKEjyc2dQze2I=;
-        b=Qh5n6N1pSMevEIjixqFSuIlt/ai/zNPceTasV1VaXB/8H6NFKLBaEeX6tQkyqi1o4m
-         G4++Tq/sX95irJT7uHCf5qdkGwn0ChAmQKGPrnhuUgbBp7ytEhKC+C9RVkaMZvRpwVsC
-         tbS3lcX6tIY8C4FFV8efsO16Ui0I5+7ESol7aeXz6rRd65xlOMJDQwi1l6+q/i75BmRQ
-         rJwFtoE+ibB9byLzyLK0dYeXRq+tNSXvmyjkUU4nQibphygZdQ/ClFC9KOmD9SCYaIe2
-         vqOweSFxfwiGBmaaD2jUD7NE9wAZ9/xL+W7SDh8Q5875Qnpb0Hczz9MKVQW2OWBPwhDh
-         IQlg==
-X-Gm-Message-State: AFq9FYLvUaQTVol7aHCF2qsUVzWh5IaubcK1enJINjptvG/QBPqxuAzG
-	zAbZs2WgIdKH5mauS0mpda3nRYVdHuhLpp1yRTe5+l7jnMVZFRKU03CCqDzB0rTbVR0NabFRxG3
-	axQlb
-X-Gm-Gg: AYBFou3CrhewxSp5V5AGGYXeseDddcW9VsWDQ8RNSCp/erTddDstOmrLs1r3azZuiLH
-	6VdyAaqPPcMLRu7urfGTYfK6dfrBsn3oCmTMU1yU0sPRIRlErigYloGuq4H2egtVZzrQKYyCWrC
-	MWUVssRgL585RP87JsewbBaao4V7vejfyAf2/RxM21aR2tIO6n5o+WN9FhZPG4hRQ/yUMobN8TR
-	/2CSIYVKpYWr4jGjksw8moH1agEWk6lnFrxAv4leDRQwIW9GM9qqjk26HjwfEPhOXMpzbdLyxec
-	7CYM90yr/5/4zkv6Jtqxyy8duxf+0tAD7W6Jw1bGRbFx7LgCz1oHKVQcasUi5h7VRyknVQjoKZd
-	DP9y9EbLkkg+ygu5QYO3xzBlFusPUSSRUh44bHjdWBFzfOWmpIrRnIzPJLH1E9+bI16H8whqiOu
-	hc1zS4/Qw0xnYiNIKRrtYVOJijFIcfw1cZbXTsPwYF+ti/irYkb+JqXnuqsRHrlYnf30OL51U+z
-	qbBPgNnIhvnT+n+JAG9bhpHHJDgdku0a2v5G+WPqacOSjk0F31QUdaCPNIhgAa2cmnUJI8=
-X-Received: by 2002:a05:600c:34d6:b0:4a2:bbd:ea3a with SMTP id 5b1f17b1804b1-4a20bbdea84mr8960065e9.6.1792661788705;
-        Thu, 22 Oct 2026 02:36:28 -0700 (PDT)
-Received: from arrakeen-2.home ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a2038ddb20sm53299485e9.0.2026.10.22.02.36.28
+        bh=OYDgm4R1tjaY+JvgEyu2MMXdyhh68gFfDYeaLIp9hAE=;
+        b=kgYPcFnLIMC/j7TllIp/CA5ZgAfB7HNoaG2KwgJPO3UlUq2W+dABvvQghK/m1mc/fY
+         2BgypcxY9cSdj4xcTgblJW2SdTBDLTJ2OH/uEhUjjuwiuMeaS2eAbe+RThurZ4N8ktW8
+         HKDKO1nsGUsK0l0cLS1e/vrZnQLkgTpy3GuxEKB6aYLTwiUqd0xzIaez7Z9xft9Ekz19
+         ee5wEKP0UpDUsu9D5+FgOUTDBGbttW1io7pJ8pj5X6utbXAubEBEQgiwpsEpjtKbplnS
+         ZKpwXrArAVDA+Lg1mvKtmmIoEdwg6OFDj2r35B+3XelFXURpgang0aPRebPwZRCPC6p3
+         OX3w==
+X-Forwarded-Encrypted: i=1; AKwUvBzHLw2Qjx9o2PCmA1JqXUq76rOHf9PydzGf979KopOE6RclnKNJCxQIkjMRo7D2oEDH4GqF+2XGVW7KD6Go@vger.kernel.org
+X-Gm-Message-State: AFq9FYKu56axBm1foBAVgww9KTaD+0MTiFwxN+OrY0S/GiqnSWPSpytc
+	O9gZkZPJr41uXhnFTMVXKA7wcDaDT0LshXsKSKOTU5sIIR2gw8dX2LyP
+X-Gm-Gg: AYBFou1eScWH+bYA5yLRTIstCbCbpXdItF+RsdtNYzPB/IC4QnqFHIyErLI2UR8YZcx
+	derQ2SiyQ4t+TFLm3GcmmwvMHxZIuNxTj4zxbDmRVQOdnT9R8j2ZgfSmd29FO1xAXuzx3riXPLY
+	uP4z6c+b+XkSpLcSJBLL9FnTAFkSybEtkrMmMpxEZT5/8wuopYIgh2L3Ni7CUmG2dcjIMWoWPdI
+	I4Z3931SJAIDzX//Pmh5fk2vRjyQdEl6QCdMa333oZg6KkpVZ/DQ+ANSI+iq5coSnCRRsl/wLzd
+	4L7xqqa/Ov7WmkhZ3xMUBg+OYUaKtNWxzYyUNsFlizWgNDHrD1PoN4TUHhwIpm4uoGOD53tOEMG
+	ZEAj1/W9Vg3s9tTPTo2VzBxHxYUilgVkSALYCPFNak4ZTs5KVYnqzKUDab/bIhB/S1l+a2qawnI
+	s7lPC1ayi7keTRQvlcncbvqP8Njghki0Fw5gCmQrdntmrnpJG6zqCmc7Ckvnqhru8G5I5RTASiR
+	+nDekw4HL3qwR+IuNBf6rwuNNvQPhkhbMoZ2HQzrLShoI+1
+X-Received: by 2002:a17:902:da8a:b0:2e9:660b:35a with SMTP id d9443c01a7336-2ea437b199fmr37175735ad.3.1792662102554;
+        Thu, 22 Oct 2026 02:41:42 -0700 (PDT)
+Received: from [127.0.0.2] ([2404:c0:701f:d27a:ab05:82e0:7670:1951])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ea3b4356c1sm21483075ad.38.2026.10.22.02.41.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 02:36:28 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 22 Oct 2026 11:36:25 +0200
-Subject: [PATCH 5/5] arm64: dts: qcom: sm8650-qrd: add DisplayPort audio
- playback support
+        Thu, 22 Oct 2026 02:41:42 -0700 (PDT)
+From: Reza Kurniawan <imkyufie@gmail.com>
+Date: Thu, 22 Oct 2026 09:41:10 +0000
+Subject: [PATCH v3 1/4] dt-bindings: arm: psci: Add
+ skip-suspend-mode-switch property
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -94,69 +93,72 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261022-topic-sm8x50-upstream-dp-altmode-playback-v1-5-8a189c71938c@linaro.org>
-References: <20261022-topic-sm8x50-upstream-dp-altmode-playback-v1-0-8a189c71938c@linaro.org>
-In-Reply-To: <20261022-topic-sm8x50-upstream-dp-altmode-playback-v1-0-8a189c71938c@linaro.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
+Message-Id: <20261022-psci-fix-v3-1-9ce2133c5659@gmail.com>
+References: <20261022-psci-fix-v3-0-9ce2133c5659@gmail.com>
+In-Reply-To: <20261022-psci-fix-v3-0-9ce2133c5659@gmail.com>
+To: Mark Rutland <mark.rutland@arm.com>, 
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, 
+ Christian Loehle <christian.loehle@arm.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
+ Val Packett <val@packett.cool>
+Cc: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, Alejandro Tafalla <atafalla@dnyon.com>, 
+ Reza Kurniawan <imkyufie@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=857;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=h5ekk/v8cfSdkNpefv9/IcGORcNHW38c+dJwzsUJ6fw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBq2dkYrcPOhObJb97sLE1075e3wXJZZjVJ46O4pBAb
- Qs7LfrWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCatnZGAAKCRB33NvayMhJ0VQCEA
- DFz8j9yfd8BLHUk329queLQf3+BCEPHHk359q4pNIpE+OI64CbupPPlZyD0ddtksqEAz2eYNyVald2
- IIn21v3Sv54VpYwvuNGWBZbbQKTKJEYjlJgy/aG423Jr2Xu6ErZ9w2BAJ1EePM1k3Pr+ejt2ELAoac
- sALJrGn/2JSnA6sdROpGc3VB2C8QLrj75DZdKqSA3/YLkNcf8SY0UQNbqbSoVLGv8hscH76Hb44d+q
- Ju7IZmG1AbvMxwuKMFg56atfLk/qoTqEYPoWi4T3BifKwT+V0IKwnt/V14sGqB1NMPmwssf14FJSuU
- 3dLhFvMwYLbv/qFQezvPht2RbxsCxeVSmR/hXJC5zN4tk0etsas2SvNaTfuPjQgPIUZph4W1IPnLeD
- Bsvp6KRCKYbkXxhFqoED4AhbufuqY6BVc1W5mDoTBSqNYrfHE0KKxTHmLVq7vKnsDLYZ2oVTy+WmVr
- 2y4wtRLFx8mDzZ58huJmKLnufKj0fSsEvHSTVGNB38eVm2hLghinLr/3hUI2TZb2BW4wDtaoVaGMED
- gskIllnCXvtcysXZ4ZAmsE5iiPmDkvBleI92NP7NwP/2YsXVeY0nXFjgnB6SsHXRCIdQTCxdHRWKth
- 75HmA4iS+of3tKB4ICkxsSjHHlk8OW5J3CMrFir6mzUxKMZ6Zn4oRv5AE6iQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Add the DAI link needed to enable audio playback over the
-DisplayPort altmode output.
+From: Alejandro Tafalla <atafalla@dnyon.com>
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+On some SoCs (e.g. Qualcomm MSM8917 and MSM8937), PSCI_FEATURES reports
+that OS-initiated mode is supported, but every PSCI_SET_SUSPEND_MODE
+call is rejected with NOT_SUPPORTED.
+
+PSCI provides no call to read back the current suspend mode, so the OS
+cannot tell which mode the firmware is operating in or why the switch
+is rejected.
+
+Add an optional flag that tells the OS not to issue
+PSCI_SET_SUSPEND_MODE on such firmware.
+
+Signed-off-by: Alejandro Tafalla <atafalla@dnyon.com>
+[Reza Kurniawan: split out the patch, rewrote the property description,
+ renamed the property]
+Co-developed-by: Reza Kurniawan <imkyufie@gmail.com>
+Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/sm8650-qrd.dts | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ Documentation/devicetree/bindings/arm/psci.yaml | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650-qrd.dts b/arch/arm64/boot/dts/qcom/sm8650-qrd.dts
-index f693ea6a5461..11c58a4aba5c 100644
---- a/arch/arm64/boot/dts/qcom/sm8650-qrd.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8650-qrd.dts
-@@ -156,6 +156,22 @@ platform {
- 				sound-dai = <&q6apm>;
- 			};
- 		};
-+
-+		dp-dai-link {
-+			link-name = "DisplayPort Playback";
-+
-+			codec {
-+				sound-dai = <&mdss_dp0>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
- 	};
+diff --git a/Documentation/devicetree/bindings/arm/psci.yaml b/Documentation/devicetree/bindings/arm/psci.yaml
+index 0d04389c81..2eee38d155 100644
+--- a/Documentation/devicetree/bindings/arm/psci.yaml
++++ b/Documentation/devicetree/bindings/arm/psci.yaml
+@@ -98,6 +98,19 @@ properties:
+       [1] Kernel documentation - ARM idle states bindings
+         Documentation/devicetree/bindings/cpu/idle-states.yaml
  
- 	thermal-zones {
++  skip-suspend-mode-switch:
++    $ref: /schemas/types.yaml#/definitions/flag
++    description: |
++      Do not issue PSCI_SET_SUSPEND_MODE.
++
++      Some firmware advertises support for OS-initiated mode but rejects
++      every suspend mode switch with NOT_SUPPORTED. Since PSCI cannot report
++      the current mode, the OS cannot verify the state the firmware is in.
++
++      This property is an assertion that the firmware works correctly without
++      a mode switch. This is a workaround for non-compliant firmware, only set
++      it for devices that ship with firmware known to behave this way.
++
+ patternProperties:
+   "^power-domain-":
+     $ref: /schemas/power/power-domain.yaml#
 
 -- 
-2.34.1
+2.56.0
 
