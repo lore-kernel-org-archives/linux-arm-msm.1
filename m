@@ -1,96 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=46.235.229.95
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792668986;
-	b=HfaYh1sNOpGh1LPc5GgYonLxETwfE2H3PRfhN0KNWflIE+42iaxxM0/sEIk7AuvUOU3/
-	 eXm3UV4yVsE2VefNtJ2+vYySMeSZijHSv2tfNN9Bq1RQ/WClDUhkNrkqkIKy9M7AmK9Ed
-	 cCfwRYJN+wNa/NTtgnKRVF5PV6qDgGN9ytmFVQWu2ySSMcimHgGaqd/4bo3M9cF4uDdgp
-	 kxUqKHCGIHEJyne473vrdnX3OgGLWbiv0Cqwwk9P7QtdDthdU7I/N5K8PRKhjGI7RN0zC
-	 Cqp2PbOCl/f9F2g+W+GqW2bEhyHKGHQOSvRmQFZcqKS80nsLecG2eGXQpgqhMDNfLnA==
+	t=1792669476;
+	b=2AHUVc1H/23bN+OiW8MsopckYPG/PyHDc9LBmD0ODtubi46rpV7EA9LaWr8qMnIGc0xK
+	 GMYTe0Wt9JQ3+TDLFpxp8bUCnz5bpIzT+IBAh3RIRTcRXqvPTKEOQR7DvMLyi0wFCs5j6
+	 JXnAqmzpP8uIV5YJXmyKGew6XtdcKyZ4ijt2d1Rr5GksCRR0jAt7dtmiLV0vEt6JwW7/Q
+	 Pgg8BnBjcQZi8vfZJUtm0Q/1SKuqjvvUQUZ2aY6g0xMHMVSZH7XLvJiUw5s+JDjqxi+Lv
+	 5tpFVs3oWAWp2La4UiIt16eAI2uK7MWVFg5cDQQez+pk/GZ7XaFBomGBKU3lq/V63TA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792668986;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:
-	 X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=yV/zmmEJwq4vtEwn6ex+r18U2+3GRtp17gkWW7wfd10=;
-	b=USEh2UyLn6Eh5bytm7jNB4xupvQgvxAUvpT6q6f4Od6kGwifyTjzwLaDj5TB4UzNUnmN
-	 zlaXLuMBmwjFbGxyVjNZDiNjuwWsAxUjiR0xPCB/29WBIyxPi0TFz2HncAqesasM67dlj
-	 uQaZ/vOhrRyLN6c2s9i03bIE/z+KjupKLHeTPoWMQwA2zV4OE7h8dnI3X+41UR3TbzmLg
-	 QObCu0nY9vXMhBDKpa4ppYrXbCH7lt1tTMqd2NIDBqftoEKYoJyBsU4ifZ+/PmvwdSF1s
-	 BwV1R7AfsPowcRo0BSqCTdGIOZ8k7PdUHNKN3ZeOkcXuNyEq3JdXOP5nh6dqFs2WZjg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792669476;
+	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To:X-Chocolate:X-Operating-System:X-Uptime:User-Agent;
+	bh=Xx0vuwoyKXtL+A6hjP1zK1dBEnmM8aLhFfYqcJNrzE8=;
+	b=Lw8FAppVMWkbmqVWHRyVyzoglvfqQQFk7/3ZKsN93LjKAyKUWR7kHAX6fDwQ4fUtwJEe
+	 MvXAsMYu+53y/MMGUZJaRFPmbkyJld4IUIQHA1GncSsZ5kCkJ2i5pE8zjkmqxAvuy0Irv
+	 OXYMbfck95aLIzWweLfRH3Zon42KPVyHME33KortukRRr129fJKfZagRDdQyO3k/Z/kLW
+	 9frmk7P33bxnVzdYxYOjsydDWVaGXJgtipz/qLTymbIcs2EtQK+LOA3njbQns5bdEZlvu
+	 bVthD389PxWH3giU3Yrq8Asx8p9OGTY1eQTIn1bwnmpFdEj/C1nUmQQJTJNqEZn8zrg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MmCte4xa;
-	arc=none smtp.remote-ip=209.85.216.54
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=treblig.org;
+	spf=pass smtp.mailfrom=treblig.org;
+	dkim=pass header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=hyBJ85BH;
+	arc=none smtp.remote-ip=46.235.229.95
+Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EC26606A31E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:36:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1EC26606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C43FF606A319
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:44:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C43FF606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MmCte4xa
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3ab2cb8d577so1531051a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 04:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792668985; x=1793273785; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=yV/zmmEJwq4vtEwn6ex+r18U2+3GRtp17gkWW7wfd10=;
-        b=MmCte4xa2xHtjhMNMZ1MKy38Wy/mSYhv6OUk7HlfW4NB9ylifhGdFwRoTvXJFfLHLB
-         8keaUIZ9+PtLQctAaN/YcisjapTgSuzy+TiQ6EzwFetWDo3j4vvLqg2sgqEziQSbY81B
-         xqqhqiQ9rQCjMx1qXFKxaqoI3hXIticovMcJ3+/fVzkkIvzOZur7SngOBAD8zQ0jlhpf
-         mXBzqto/8/LkqLPEfinoZuATeltfLuSGcexDxYB7d2oGt8xULv3D41DuWTvGk3b8l6MM
-         AIMZxeCIFRYakj1kH2ecTchh3ido+5KQcQQZ9JqfULK9ULO5B9frP4gBune15u4ahZL2
-         IAPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792668985; x=1793273785;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=yV/zmmEJwq4vtEwn6ex+r18U2+3GRtp17gkWW7wfd10=;
-        b=arm0QjIdNn7+TSLtWi8Bcbse7g2TqCekztGtDFKyXf/AG03aGX17o3EHIfvtg2Y6AF
-         8guKCczyjkUDkHoD5XNPda3CQNA+px38No80sRUzyWOAfL3DUFjUEPuBHc4jQhz4UN0a
-         X9G8lL6kYexcWOnUkwGelDr61gQfPjAzRXSkNlA/J+lsUn5JUCBbuQQeE/MPGLwhzGKr
-         2kqAnAi2Gh/ND+g9PCgxXVCA5zNgALJtBToaEFdmux44JKkjWMkWQtXhFSEvjUitvli+
-         Ig7zTHQ2+XIx8ePOHBHEefngJjogcOweOpYarWgs1IyzVE2xUguUsg4YbOxvB98lV8oz
-         ZPAA==
-X-Gm-Message-State: AFq9FYLo/7JSrXbeYAAjC6Yx9zPkFEulJbhibFej7e5SgXSVDnfqssVm
-	hi2B+u7IoxSED6sgKTEwOiSQSNprOTrEYBSeTwVqFakL3yZHUXCSL/K8
-X-Gm-Gg: AYBFou0h144DDkVijMdHqVDkgppkCMAp5nVZPEcM0TBWmKdeKcxx/4Y5g9WrCYdT2Ry
-	V5iGWKzzBkbSlBm/M+RcKzR7592/TWzHogUvp8OlV+XU4GktRdH+KUEvzKt8S3dqDeimmdkhQUN
-	L2ILmAkre/ed8wMwZPZ8cFOQJUGuMLdMPvXJEZhHNuN9GqJcFcUXcBR8raZGwrdMkTvBwOxtXcN
-	giLlLUIyiECaEGx/3X60fu0BMfzsV9jWc8icWpR84q2mE/dqWGtCygqlq6qWMC5OoLriAeV7FiG
-	uUqSaA/CRvVytUkujvdnouRQg7hIE3/gD7bAyD6nxptlPyl4nqDFR9L0KCN1IZeI+THxatavo0F
-	loxTwe8+kaJu0oS6lNeL4m0q3z7d9/g28tSkbriRsrADvcDYugkbXRHQtfW1gyJGpW4TjOvAk/i
-	9rxEeIzy8og/ATITe9fDXQuHPjWSrbh4d0zwHtQ7RTAbi+d318xz196MYbeHkyzeZh93ZiYh69N
-	UsQwA78XsOQHN//Hji6JmAcPF/wPqhnnEq567KYn+PdgXDUWbmzPQFwhcbNkwtbJ6Krq/pK1w==
-X-Received: by 2002:a17:90b:2805:b0:3ac:97bc:4c7b with SMTP id 98e67ed59e1d1-3ad86f44843mr4190640a91.14.1792668985330;
-        Thu, 22 Oct 2026 04:36:25 -0700 (PDT)
-Received: from localhost.localdomain ([218.194.41.155])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ada490e5edsm3997668a91.8.2026.10.22.04.36.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 04:36:24 -0700 (PDT)
-From: ShiTou Hong <redstone.dcity@gmail.com>
-X-Google-Original-From: ShiTou Hong <dc_redstone@outlook.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org,
-	conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	redstonee <1516235445@qq.com>,
-	ShiTou Hong <dc_redstone@outlook.com>
-Subject: [PATCH 6/6] arm64: dts: qcom: sm8250-hdk: Add the 2 LEDs of PM8150b
-Date: Thu, 22 Oct 2026 19:36:01 +0800
-Message-ID: <20261022113601.2320940-6-dc_redstone@outlook.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261022113601.2320940-1-dc_redstone@outlook.com>
-References: <20261022113601.2320940-1-dc_redstone@outlook.com>
+	dkim=pass (2048-bit key, unprotected) header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=hyBJ85BH
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+	:Subject; bh=Xx0vuwoyKXtL+A6hjP1zK1dBEnmM8aLhFfYqcJNrzE8=; b=hyBJ85BHzGoqQ6hF
+	subakjfYsb5BRQQMWy9gEExcZbUXF1W/EzF6OGFl/YOcD/IbGzK3xB2wX362UGYI52jVEjxK6CBU+
+	SCKZsaQqiTk8Sq6hPc/qsyt2vCQtO5Sn7wfo9qPAdQM+WvFCE1tUxqbPWVjI/jWbyESBudgKB2/Fj
+	mMYvTbVOScBSVgYOzhUD/uunfwuXriEv014kbNrWrztt8IR/N+GH//z88h7/DtQmRVlyoASs1TjPP
+	cQZB02bUDJgcM++e6c0gj57n/Eu8bEyEUoxJmTqy2XEH6Gd/P0tEzlTvpmaA4nVvNuO8/3NQ9Fpge
+	2n7ZZ3iuFTWlbcCy7A==;
+Received: from dg by mx.treblig.org with local (Exim 4.98.2)
+	(envelope-from <dg@treblig.org>)
+	id 1xJrDY-00000001ocC-2SfS;
+	Thu, 22 Oct 2026 11:44:20 +0000
+Date: Thu, 22 Oct 2026 11:44:20 +0000
+From: "Dr. David Alan Gilbert" <dave@treblig.org>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: krzk@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: Tips on tracing bwmon?
+Message-ID: <atn3FAF-3GHPgvad@gallifrey>
+References: <atd6TRv4HQApcPvY@gallifrey>
+ <87e38bda-7ec2-4b7f-84c9-29a837696572@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -100,55 +63,59 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <87e38bda-7ec2-4b7f-84c9-29a837696572@oss.qualcomm.com>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.12.113+deb13-amd64 (x86_64)
+X-Uptime: 11:43:27 up 5 days, 21:03,  2 users,  load average: 0.02, 0.03, 0.00
+User-Agent: Mutt/2.2.13 (2024-03-09)
 
-From: redstonee <1516235445@qq.com>
+* Konrad Dybcio (konrad.dybcio@oss.qualcomm.com) wrote:
+> On 10/20/26 4:27 PM, Dr. David Alan Gilbert wrote:
+> > Hi all,
+> >   I was looking for some tips on if I can use bwmon to see what interconnect
+> > bandwidth is going through the dwc3 usb controllers on my x1 based Asus Zenbook A14.
+> > 
+> >   I've got usb-ncm gadget wired between a pair of them and I'd
+> > like to see what stats are available;
+> > (See details of my gadget stuff setup in
+> >  https://lore.kernel.org/linux-arm-msm/atJn2jfI_cZy3UMo@gallifrey/T/#u )
+> > And that's struggling to get much over 4Gbit/s over the network interface.
+> > 
+> > One reason I'm curious is because the dwc3-qcom glue sets an average
+> > and a peak icc limit, and I wanted to know what the difference was and
+> > what the type of timescales were for how long it allowed a peak.
+> > 
+> > Are there any docs I should look at?
+> > 
+> > I did:
+> >    trace-cmd stream -e icc_bwmon:qcom_bwmon_update > log
+> > on both machines and during the run I'm seeing events on exactly 3 of the
+> > monitors;
+> > 24091000.pmu, 240b5400.pmu, 240b6400.pmu
+> > 
+> > (In the numbers below I've grepped for that monitor and sed'ed out
+> > upto the 'measu_kbps=' part so I can then sort on the meas_kbps)
+> > 
+> > My reading of the interconnects_summary is these PMUs are
+> > somewhere under the llcc_mc@interconnect-1, and in some
+> > cases under both chm_apps@  and qns_llcc
+> 
+> These BWMONs only monitor the CPU-DRAM paths
 
-Enable the LED controller of PM8150b, add the LED nodes into it.
+Thanks for the reply and explanation.
 
-Signed-off-by: ShiTou Hong <dc_redstone@outlook.com>
----
- arch/arm64/boot/dts/qcom/sm8250-hdk.dts | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+Are there other BWMONs that should show the USB path bandwidth,
+and if so how would I watch them?
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-index eb899c92f..d15e75a4a 100644
---- a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
-@@ -7,6 +7,7 @@
- 
- #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
- #include <dt-bindings/usb/pd.h>
-+#include <dt-bindings/leds/common.h>
- #include "sm8250.dtsi"
- #include "pm8150.dtsi"
- #include "pm8150b.dtsi"
-@@ -157,6 +158,25 @@ vreg_pmu_pcie_1p8: ldo9 {
- 	};
- };
- 
-+&pm8150b_lpg {
-+	status = "okay";
-+
-+	led@1 {
-+		reg = <1>;
-+		label = "led-heartbeat";
-+		linux,default-trigger = "heartbeat";
-+		color = <LED_COLOR_ID_GREEN>;
-+	};
-+
-+	led@2 {
-+		reg = <2>;
-+		label = "led-wlan";
-+		linux,default-trigger = "none";
-+		default-state = "off";
-+		color = <LED_COLOR_ID_RED>;
-+	};
-+};
-+
- &apps_rsc {
- 	regulators-0 {
- 		compatible = "qcom,pm8150-rpmh-regulators";
+Thanks again,
+
+> Konrad
+
+Dave
 -- 
-2.47.3
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
