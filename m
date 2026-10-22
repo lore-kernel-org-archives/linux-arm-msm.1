@@ -1,99 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.50
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792691184;
-	b=MB8W32iwfPHy+pEiuE2j6eaN1IEqxLvZa23q14kLCjM7G7VkCdus1wN0myMhl/fGiIb3
-	 HngrESleoVfr38wgmF2zhWDLbgCDy2F7OhaK5M3tvhm5/hfO5h/7F9quigYntk3j/A//f
-	 jcGyr7x2KNWJ/xch+9+etsYQnsDvvvTrMEJvTTKVYiD5YTxfDGHyhpP4G2zRe12lusGEe
-	 +YXamP+s/ufMXLYFcfkJJtU6tnq0KYrZBnK/Ikzg6db8FZYOwt43C5Qr1hYulonzH7z5m
-	 VGZYmuAXns7qXaGFGy5JTJqesK7cTuBCD8f0NSbCs+7I2G5OWpTq7wlOg7U3B0b3NWg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792691184;
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792692343;
+	b=rlM1Mq+jgA/YMjj6ZHUFEzSCcCk6iVCqqG4ooFNQvVKpNbafQiyuhunXOIh2+Di7qxPK
+	 kmRUP1v39qDsKvzk4vEHpN5CAs2WbLYnromcBEYopGgilA/adDZ0JtTW5R/yHTrxz2Bs1
+	 7zQa6uNrSzyd375jemrxxPI4LSJZ6o3CzZ38Qju06c0NcpwT6pAT2gU58gPuvMvqyYGoR
+	 yQfGS1h7906AhfS/Igfgf3CBLulGz5DDyQuXkCzTITFcfqJMRftVRH/McTJMTqpjQV/h9
+	 m2lus/mMRnZkvUtt42rkDM51jstZRSH7s4UqHTkiSUDv3tcidYam/4cPRPSqiqiOTLw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792692343;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=KcxnS2rO3PjTrZzlNqZ6wvXV+cdtsvmn8hmZkoyfpCo=;
-	b=VXbcMFMhlxbfz9hLAYR3szayTBlsq5r/fIiitf0O/HXc8VjtoKf9vdWMtZ/tRO2VINhz
-	 JYQLyXkTlOhvQFlqHWKsZhDN4g5gppcXRGQlNVoLSEkLer0zZTZxlPQYC9I3iqUZBAz0U
-	 sgojm1d7+G0586AZcJVVTZZUm60NwxfcyGbSl7X24YsNDC+WLwn+8Ik+ufF0XxGcWY0a8
-	 eFsOGbkV6HcQ2JzuYiidfCpRkd/P/ZmUQlX03QqH2qOAdGtSPvYUX9ctr08qpsU+iFohY
-	 jDpvh30wOWHbJmlq/4nSqidTFguDzBwsQN0ZLWg68WPo3MPjcH5LzeIdYNrCbxO4pIQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=JY/kgswJkw3rC1uB03Rt3fXoWelWaBya4FySXulL7N8=;
+	b=ZEiU+4sGuEwF2UOdy9zuzt1DSZO391ghr/xVdhHnhCGcKwalcxpKwSxP+FVyPlMgV5fb
+	 VWwHURycOgIaxlJ0ZcyBOUMdXGwrtU2DoCR8sRM7nH/jiFk/DFoxxPog8pfgl4Z4gRumz
+	 UwMwEdAOJppYa0UzY2gG5CeB3Whd8HyVUj/DQvYPQ84VSx49m6B7XF8TjiP9F3cYHcO9I
+	 pmrur8jVNiwuZTbzVD4Ne/PSnWTplNjwDow8X3yRnK5iAkFt7Vuqb6C4FPlZppBMIK8Ye
+	 nL7bv+0CHkXpc+ppnvms/zD9GF3ds203czwVlY0rDYncIj8nSSjGG/LwtfyGoyjMniw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=sY7uQlNA;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.224.50
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ENiGG3gy;
+	arc=none smtp.remote-ip=209.85.128.50
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81C78606A319
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 17:46:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 81C78606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB46F606A31E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 18:05:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DB46F606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=sY7uQlNA
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-679aeeddc6bso169531d50.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 10:46:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792691183; cv=none;
-        d=google.com; s=arc-20260327;
-        b=HJuiBQqQGJIc9G7TdyYnX6KBTrf7KWwzdaWG4AtnZ0xe3Sp4HxnYxrmZ+8VEIPUrP4
-         lZ341jh5f7v+RJfI5+TSqdoaU02cwbU+Bg0nZKdlteUBDLlnDO/9GBZZjrn5FWT2oyAV
-         Khv4LwCpcklhIzp+BnDMpHOkT2t2YMQ4vu3vE3DIHpJuxeJ5AdEeiWGpblTMcKp8Hhy7
-         E6IbC9GsLbIhoxNPx3MOoNN5QNoLkRMU845UAF0J9K3ceO9DeCHCkl9jPf2XT9avIpee
-         Y9tEKIFncmIaeMDU0HDCYsCSgNPk9oiX3uXIiIgMxsE5R0ScwbKZKvKLvBOGz387qpuq
-         aOFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=KcxnS2rO3PjTrZzlNqZ6wvXV+cdtsvmn8hmZkoyfpCo=;
-        fh=hQ/e9OUkbGt1jBhTAVf90xCqKqNIXmGvzcp0rT/6lig=;
-        b=Jp93NJuTaIz1bDKSywjce1/VRP2KqlLx1/7Y4tOWHW1OLu2YeFFtCpx4//dLB2FmQz
-         FGM3tCmwuGNXqWTjXqbsaYHe6D0riISlloTI+GNGxW6CjFpubLgsj+O5JInco4GhbLwa
-         c5eYBiX8B+M4NbAzpCjnfrMRXoOBHfkPCriG4gmGX980g/VoGQCjBkL95nRgy0GtUbbS
-         anEfyKbFasJaSet9dn+iPeZV79CmH2mDFKypKQ1mIhy534lQHmqLV7rKpPJLr89i+K6Y
-         tD5t10k55MNzjLBX+1C7mev7Z6VzBDA8R1ghlAhwOCPnrV8y3e9hpAT0ySXarYpiCFzh
-         Qllg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ENiGG3gy
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a1d75f2f11so681835e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:05:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792691183; x=1793295983; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=KcxnS2rO3PjTrZzlNqZ6wvXV+cdtsvmn8hmZkoyfpCo=;
-        b=sY7uQlNAAy+0iIFRfIGhlQ2TTLeUwlzZZ286y52XInH7gKXjiSngaTFqTvn/9IM+sh
-         XZbRWWZApeRLuOP2qgyIyjw+qgVNFGHCU2HqT+kuwS06ZsoBp++N2sWl2sMeOgnXBMbO
-         ojPp0WQbBrIA4cfxKBPMPznqHxKK3WFW3/DbzAuJpbUFC9SqoTervl/a2W17XsS0icOo
-         qxraqB0egp9e+wm6p6OG6s+3JWKE/T+H8451BZTDbnQCqVDCPJVy5oKvFGXLUE4FK/Rm
-         OF8pHSMLDrzRsSSAKIfWjN+73kBhGy/uosMibQX8dNzQf97v+CXtOqWJrdzDYXf5HVAK
-         IA5Q==
+        d=gmail.com; s=20251104; t=1792692341; x=1793297141; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=JY/kgswJkw3rC1uB03Rt3fXoWelWaBya4FySXulL7N8=;
+        b=ENiGG3gyyAuVeWIKa4LSnuOTEfgIAnd+HliVCcVvSd97dGwI6+bb0LpYPHo6PkUhTh
+         cXLAv7cMZKpMSaKp1xlOAHaQrEPRp+Qqcvvu9jMexARfKbIFjlgs7TPyJI6ptY4sRcJ7
+         pnHKxke6wzEvPe0C+4sWoOS7fNm1Hz7UeYddytJeKWtdBlr1pXgF3JsLtc0Qbk71FO1A
+         zNwpb+ECp6OuM+oqFq6mdi4sEC6XQ9NfaU+4A3Q5dKnFNQ/P7cxSZJ2On8cNhfa/UoE7
+         PVqbFHyi73gJU57gv2Sb1YRRm5dqOLgZR11k9/R4jd4q+y4oM4XJqk+7Gz7ys1NviWvz
+         a7sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792691183; x=1793295983;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KcxnS2rO3PjTrZzlNqZ6wvXV+cdtsvmn8hmZkoyfpCo=;
-        b=U8kv1fd9r9qEm4teuPnA5U5UVO3sXHaPDygjBkvzAxmfwx/NX/eIM3VKbn6r8o6ieu
-         JFxDQlJy3EQFwGio6yzFPs9gSMDfR9ifp6pDOUXbSOtO4wLhtMqDFvSNZjLdzKV2L8aa
-         yFLDnpZzpTE89N6WHYmh9ZNFMMGRRA/qgdYDEwgkmrRQNtbaqI094UZCpUg5cD/fRHx4
-         Se5LVVxETN+EqjLgocpRLk/+5GxY7YuA/ib6v82ml6qe625DjkAFRcdXQbA9gToFpqf0
-         C//5s4puHPc3q+2946GHr5/ZnUhPsAiCZlUML8z+9DjMUBXCn0GEhvMxpq01qCGiKf9H
-         QRWg==
-X-Gm-Message-State: AFq9FYLS/hNNHCr8BJOPA0JacUaefUAGzqwhzSn3JfjYCO/KmktLj7zh
-	ySXAjz9SwfZc6km5k+3StGF2y45bUZEGjaIM8cksK2SJqEPAW+8ZYdtpwijwiXrF5RzsRf3MZuV
-	DrSiIvB6FEMvMjPKUTMRQASIY72lfEeU=
-X-Gm-Gg: AYBFou3rQQ9rkOsmCFmjHBdeSF2uZvH5veNdn9jDL8Tf82W59uNsLlbwSIn5mNErPIO
-	DP0KUJHeVxP7UugQLQ0tVDyTcyA0LvJPxT7jkgSlXDBgezgSlQOmva2tUKveS5wt7tF3NrAvSRD
-	D90Glnj0PXlTOl4sNXCpfoxzxU3MtNVE7FGe1t+Hv7CV1e6uYgQo9CaAL0862xyqMRbsGSD8K5b
-	ugvRSVUcqi8qQBWZeWcMpLni81TUZrhFHExCpWxIhk/kEqgiUIwlwpWByr7aB5j6W3EfeMY1SLg
-	5HvT+iSkk32fv/bPb97kVY0ffUTUU2ET5ImhGpR3jQN31Z0BdYwmoI6Xoj//H6aW3OpLqxMHBLg
-	Z+bOcYpsU6+W2OTo1lEooNMw4U+vfGbrEJ0pcIA==
-X-Received: by 2002:a05:690e:108a:10b0:679:af57:d19e with SMTP id
- 956f58d0204a3-67a0e48803cmr1504815d50.45.1792691183482; Thu, 22 Oct 2026
- 10:46:23 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792692341; x=1793297141;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JY/kgswJkw3rC1uB03Rt3fXoWelWaBya4FySXulL7N8=;
+        b=GE7JesOY1rUMKhentUbpfERE2rQqp9vWCRzJ02fOtzEp3NSZSRj31GylUssIjfQmVw
+         NhMV5a16iExxw5UIatHHkiPszexm6ex4GPdCi8ieY5bBiReGSGiwylgClwkeZKrvqN5U
+         KqUBmVy3KJYUsj9qtA40DJ9PRCFmb2bK6N3ukzFe2II+/9OSvEpM5ncY9Yfoj4Jyo+0X
+         /4Rv5UMDwyU+gkCDMuCBtiygQA2aHM42rI5VN6xz8Wpy/9hEGhSl+X0F5asz9H1cSOUZ
+         DRkvsQgPhd1dYkmW1OceDqg56URBFlfJpjxuSYo5wMBfWxS8szEWxS82IOJ4nsiuq27Z
+         Em0A==
+X-Forwarded-Encrypted: i=1; AKwUvBw1YnYhStfsAXaDNpeY5QOhLbSDI1t/zPHEFxtJt27kLIFrwLI5Dmi0iBbk3r8XZ9MXQ8mC4TutwB4xwb5h@vger.kernel.org
+X-Gm-Message-State: AFq9FYJtIIa+32237B/nkNoQN+3L+W4ThTB1q2uUtU0X2XjCg146s9wC
+	6Z6oOHBfvR3RH5bq/mQM/ieSX1Pl7bvG9prTgLX00oWES2V1FajCgNw=
+X-Gm-Gg: AYBFou1lvBlg+AgX5zOncg1cGOhHvRbhm+99RtRaDlAOK3x3UixpYARUiYXtCCWgV3L
+	K+6LYfW1PP2DKAiaJd07tY3kHw6gsUTUrNssu8erZkw/Rm8CjcE6oRwDscfO5x+FSJrywY98GSH
+	/+64gmRCdJ+aGFNnMzRFxPdGNJ+q8a/bZRT8XsTUKb7EX6kcwoXKoYA2cYSJM/fz0fAyNGrOMTM
+	fHxwXLIbn4fBrziKmeef9dNhqrlKaHSl4tsD2dS3GsYyG61z3PhKx3ufN1fKijemxKQJDSHgk0z
+	SQ0Ax/i44AsBSrx1+qiXQHZOLHLb4uOzV3VmL4SNsmFEZm21gBEcyQ3tf3iRyykNgTbyb8zr62K
+	tCd+fFWtJitsW7blKfgZsK/AgXBuZVTu1W0Yw011BurEg5Ik9b6H0rEAMUBjlEiWIn02cCO8toc
+	AwCBcJ2DKOdeTEXWJ+fUzTU2fN7/8pyxujmREaYUQG7oVo0pdFrsII7d2KgVARcD7FkS5WB5+Fh
+	YKZ9tUGmTrmFJeoF/O9RQQOMz28P6QiYgOgiNa1/ai7HVA1KE3Le8qq/x2wnsVgRzzTBopc5TXl
+	PveWAxg4Uo3C9iWjbFyHy9sD7Xlu61g1rHcl
+X-Received: by 2002:a05:600c:46d3:b0:4a1:acaa:c355 with SMTP id 5b1f17b1804b1-4a1fdd0b191mr127111405e9.10.1792692340943;
+        Thu, 22 Oct 2026 11:05:40 -0700 (PDT)
+Received: from ?IPV6:2001:b07:2ec:601d:4b26:1672:75c7:805a? ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a2104627e0sm14106125e9.9.2026.10.22.11.05.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Oct 2026 11:05:40 -0700 (PDT)
+Message-ID: <31970f28-5415-4e78-aa0f-51f15d779e1b@gmail.com>
+Date: Thu, 22 Oct 2026 20:05:38 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,49 +90,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
- <0e5df58a-e97f-474b-bd3b-9b1a24ae0c03@oss.qualcomm.com>
-In-Reply-To: <0e5df58a-e97f-474b-bd3b-9b1a24ae0c03@oss.qualcomm.com>
-From: Jeff Roach <jeff.roach0@gmail.com>
-Date: Thu, 22 Oct 2026 12:46:12 -0500
-X-Gm-Features: AclHuK-1tPswR_MEEVFFZpsW45xvCgAhx1gXNNVF6lrKgi8e5Ie2wvHW3NWPcds
-Message-ID: <CAAnD8RZ4+BFkE_dubDr7cj14wUaOfYUYWMw3_cwS5G0SrTsU-g@mail.gmail.com>
-Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 03/13] drm/msm: look for lpac from dts
+From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+ Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, iommu@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, devicetree@vger.kernel.org
+References: <20260705-descriptive-name-lpac-upstream-v1-0-01d50c3e0c99@gmail.com>
+ <20260705-descriptive-name-lpac-upstream-v1-3-01d50c3e0c99@gmail.com>
+ <rwohvfbsw2brpxrfg26egu5arwe6g7n2etelo33eegmu5cz65k@3syofuxzsjrc>
+ <dc5aef2e-600e-4e97-b76b-dcc8bd72c709@gmail.com>
+ <m4vwrqt6yyaawpvkyrqfzs3kbipbhygmtrhphuthl2gmjvkgyt@u2d3dnvl2phy>
+ <54cb37bb-aaa5-4c5d-a563-acca4822dd35@oss.qualcomm.com>
+ <t5gu6ciwmxdb2jghc44gtixdsbedkgy4yzke5sgawjrr2h362u@ahvhh3yfe6lx>
+ <wtun2cfukyzxlsfiz2izsejd33k4jpapwqa3uqih5drcsrkff5@e6llkke5dayw>
+ <1f6db59c-b7a9-41a1-8022-6713365fa09e@gmail.com>
+Content-Language: en-US
+In-Reply-To: <1f6db59c-b7a9-41a1-8022-6713365fa09e@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 22, 2026 at 3:30=E2=80=AFAM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
-
-> >    - The pm8xxx RTC probe fails with -ENOENT because this machine has n=
-o
-> >      RTCInfo UEFI variable (qcom,uefi-rtc-info).
+On 10/22/26 2:54 PM, Anna Maniscalco wrote:
+> On 7/9/26 9:39 PM, Dmitry Baryshkov wrote:
+>> On Thu, Jul 09, 2026 at 05:54:23PM +0300, Dmitry Baryshkov wrote:
+>>> On Thu, Jul 09, 2026 at 07:12:39PM +0530, Akhil P Oommen wrote:
+>>>> On 7/7/2026 10:09 PM, Dmitry Baryshkov wrote:
+>>>>> On Tue, Jul 07, 2026 at 05:02:43PM +0200, Anna Maniscalco wrote:
+>>>>>> On 7/6/26 5:04 PM, Dmitry Baryshkov wrote:
+>>>>>>> On Sun, Jul 05, 2026 at 09:13:37PM +0200, Anna Maniscalco wrote:
+>>>>>>>> In order to associate the SID used by LPAC to it's own domain and
+>>>>>>>> context bank we need a separate node on the DTS.
+>>>>>>> Can we use iommu-map instead of adding a new device using the same
+>>>>>>> addresses? You provide zero explanations, but it seems like you are
+>>>>>>> trying to separate a part of the GPU into a separate device, but 
+>>>>>>> it's
+>>>>>>> unnecessary.
+>>>>>> What I was trying to say is that we need to map sid0 and sid1 to 
+>>>>>> different
+>>>>>> context banks.
+>>>>>>
+>>>>>>  From what I recall, so long as we use the same dt node, the 
+>>>>>> iommu drivert
+>>>>>> provides no way of doing this.
+>>>>>>
+>>>>>> What kgsl does is having a node for the iommu and then subnodes 
+>>>>>> for gfx lpac
+>>>>>> and secure.
+>>>>>>
+>>>>>> The address on the lpac device doesn't really matter. I have very 
+>>>>>> limted
+>>>>>> knowledge of DTSs but I think we could just leave it out altogether?
+>>>>> I think, you were poined to the Glymur Iris patches. Another 
+>>>>> option is
+>>>>> the QDA driver being submitted too. Both ot them use iommu-map to
+>>>>> describe the same usecase - a set of SIDs which are used by the 
+>>>>> device
+>>>>> but which should not be a part of the defaut set. With it in place 
+>>>>> you
+>>>>> don't need to have separate qcom,lpac devices, no additional 
+>>>>> properties,
+>>>>> etc.
+>>>>>
+>>>>> I'd recommend following the same approach.
+>>>> iiuc, the conclusion in this recent thread is to use child nodes for a
+>>>> similar case:
+>>>> https://lore.kernel.org/all/20260618151745.GD231643@ziepe.ca/
+>>> Let me check internally.
+>> After a brief discussion: it can be either, depending on what suites
+>> better (and if you can persuade DMA / IOMMU maintainers to let one extra
+>> bus or not).
+>>
+> One thing sashiko is pointing out is that new dt should work with hold 
+> kernel so, in general moving sid1 from there would break it since old 
+> kernels don't know how to handle them separately.
 >
-> Remove the property.
+> Not sure how to address this.
+>
+> Best regards,
 
-Thanks, I tried that. With qcom,uefi-rtc-info removed from the
-pmk8850 RTC node, rtc-pm8xxx probes fine and registers rtc0 (no more
--ENOENT), read-only as expected.
+Also, looking into iommu-map, it seems like I would ultimately still 
+need to add a child device.
 
-But the raw counter is not wall-clock time on this machine. At boot it
-read 16385826 s, i.e. 1970-07-09, roughly 190 days of uptime since
-some earlier power event, and it ticks at 1 Hz. Since
-CONFIG_RTC_HCTOSYS=3Dy runs at registration, the kernel sets the system
-clock to 1970-07-09 early in boot; NTP corrects it later once the
-network is up.
+Best regards,
+-- 
+Anna Maniscalco <anna.maniscalco2000@gmail.com>
 
-So whatever the firmware/Windows use to turn the counter into real
-time, it is not the RTCInfo variable: that variable does not exist in
-UEFI on this laptop (checked via efivarfs in DT mode).
-
-Do you know where else the offset could be kept on these HP machines?
-If there is no known location, would you rather the board DTS keep
-qcom,uefi-rtc-info (probe fails until something creates RTCInfo) or
-drop it (working but read-only rtc0 that reads 1970)?
-
-Thanks,
-Jeff
