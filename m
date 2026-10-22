@@ -1,123 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.44
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792697903;
-	b=zoW4tlONMx4ksZ1zojw1wkN+AdkOITOjJKaAjm+OKHhDr8y/rlB69f/gCbTIPBDYlTIj
-	 vi8KGMfnFb5UTdncqo4Y2a/x5HkifKrq/qfVhIPL0yobef9UwKL5oYoHEHGO2ihRdGVXb
-	 aUVUZ6iPB1iZnUClamX1XDDorGei2pXXNwTr3WepGlxDQQrR25rOr8RL431ZuwVz9t6mJ
-	 Nat/AxyvCsLgpbtOn5mfvObOWliGPl/+8OD2OcOv/SyJlOx7CuzQhyfGrLbKLA9Af9pye
-	 asqvrZT8XNCOW3H3JJOo/zroLPJzmjZAYT4SfXbiKIIdcbY6Y6t6gfrO4pakxAnTspA==
+	t=1792698082;
+	b=PVnV2CSCQlI0aUtIgsz5K3I6Y+uKDngwE0jvR0HYz6nHqalBtD4rAh3Ti0tpkBr0UGsy
+	 eTtJYp+3qQ5T/kPQzQRXbFO/DXtNhDTczQ9YnC/BR2CRNI1uQ5WVU9rsejDkeQ0FBFbtu
+	 JsAN2Wq6dwJY6Fm47uOn26yOhNJYPHdUnXP8qxSqkP3NchjfAU5IHKPJg/gLmSSL+FVo9
+	 oS2qi7cS6nrUwCRPmx1SMRbBdnHnUv0EJdNTRy0bI2e2vSBLXxZYPBp8i6tAkZASKawCO
+	 HVU+Lcpf531WlX5CvbuRfF6EHViBO8UfQtsNBdJhk385QeIfbxCyQCHvG2ejvpfLNzw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792697903;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=dt/bdjqHlPNBH58AQVAdoaHpPHuiz9/xzEYV3zXl6U4=;
-	b=A2gvywqeGHMsSf4IQvlXBhglJtrvwa1Yi4JX/KjgsXL+RDxf9fhaSvAoyiT9CN3aWhPf
-	 v/f+btP4pSNyXl8jcWoPL98tjBob5ThY/QFHx9XSMt7xVgCVhg2AmuOpES2YlC34Rla7L
-	 7TlRQ3ppEl8iHEoZb5dmzRT9UYbhwcD+YQFhP8w3REuwItLkU9E35RRRaTdr97KJecVFr
-	 aDPwUxl97bKaph/R9X7Dheip47i1ypeAqpG5mdDBCPW9PLX44KLwHDzWg3FJ6RxB05PNY
-	 ugw/tvVWI+xi7Zso8Fni4QiXU/GLUNuzKozYWkXDkvSpTim1eOy49aLeuuXORRPRjyw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792698082;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=/uPf7O7mV3UVcLoPpg1h7SlQrq05lwr9QUgDlZZcEx4=;
+	b=XquwZPVppNhWMFUB5WEIZPsG9rqjhfMRD7rVqDRI8q7sa4HCJAdclPhG4HnHR0c3iHfd
+	 qPVyTj69Ykgl7ojw9QsncxJ5p6DtZg2hTKmS8xM7+oBZHW+LrzklgOBFMa8Q3zsOAe+FU
+	 dl7THR3DH54Eqx7F10qrDWobTw6+/Wey46SBTE8Ps+zn2nkZ+R5dKLmQP5PJ5orBRRAJi
+	 JP6s0NyFxQwlbi6QuSM+WD7Kn1Gu7eDQBxSc7RxzoGoytB5AUaNHCadvKon27G0jZvMxG
+	 hC0T4NYdlahsEtXntsOkSi2e+wz/fTz3y54PijjB3oULu/KNbFkZiN6mxzyTp8LReAw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=esaUbQa7;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dh3lxGbO;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=eGuW2GMh;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.44
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D39B606A33B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:38:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D39B606A33B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96A46606A328
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:41:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 96A46606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=esaUbQa7;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dh3lxGbO
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69MHtVdH3078101
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:38:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=dt/bdjqHlPNBH58AQVAdoaHpPHuiz9/xzEYV3zXl6U4=; b=es
-	aUbQa7SYKipjzavHOhhtKzNNpPlAQz4xTmckVL+SayRudtiwWxtE2QdOoMBcTyv+
-	V0zjxI8pYdmukxE28AWYLfoYznf0x0jdAmvkKL4SL36vMhZFYbgdqGfxAukpbg/h
-	xz01RmMYYJiLT6ofRg4LKumx7D5qX2reIp+jnpj79Az3pxob4A+TeFfpOcKY14kn
-	U9/nOd78sM88MT17ep2c4xnrm/63cVdRBqX5OC9pKbMBuz9LvUXTo7Q3h3fQNqbx
-	PtqbxoNMABQvLX35ErcFfZ4riXUyu8w0GrSAHad+SqgX0kWkhf+2x+0YZVsjyhGb
-	MJgFN6jttQa2mbeQYb+w==
-Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com [209.85.161.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93an7nu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:38:21 +0000 (GMT)
-Received: by mail-oo1-f72.google.com with SMTP id 006d021491bc7-702e606a3abso146077eaf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:38:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792697901; cv=none;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=eGuW2GMh
+Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-91b8306b9f8so3710056d6.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:41:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792698080; cv=none;
         d=google.com; s=arc-20260327;
-        b=bZ8x73f5X/HbpFq7B3q7lFEHkYd5vtfKQJOUTT4rEC2a9pu0dILPjPQyZr5CbRD4fm
-         9661p/DKjShBkb270yOWcvaFGw4EPkb8ijLJwPj/6wEz4ftpt+VO2tj/Zn8eSdVDGWIS
-         4Esdy1RP2qMWFiH8txU0H/fSE/iiTsBw83lAJTGaSqvyaVEjovLUA0/idq+F0kkkp31o
-         gDXeRw4GH0zEA4xkaeMKUQJuSuNulSVTZUMFg1nQDb4seTjJPTyetXUdkqNvaQXxN7Di
-         vwAmaXAzO/7hZ2gxLg5/hfgDIptAQwokA3/z0kJWjl30bwMZ/KlSRWy9ZQHY2ZpCspaf
-         HvGQ==
+        b=iHk6IXtC5T7d/lwgiAzvgvVwZMYcWs6X/0OqAm5dpycrC+ZmcoDlME4GEDmRhXsvNX
+         1uPLoSU9XDG8mwzlb94VCH7XAkDeqUaAzF9ClsO+7rnCiobI9w6YdCPNvpTp08Sw8c/v
+         t8y6oUCDttqqh/9N++6kN8ui2DJtHtgIpv+5WZCtDBQzjt1oy4ydX0uXYErtZAnGGGOE
+         SxrtV8lgh7wutwH/T5kR1fT0r29KeYar6JMRebNO3DQs1Y3Szxp37DxzMTzGDirWze43
+         QTnJUgPIYhruVZeoGxNTuoYX91EiyQlFpjCKzZEvY+ASmUUhN/JdPxVG+5spr+fNTgYt
+         rwNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=dt/bdjqHlPNBH58AQVAdoaHpPHuiz9/xzEYV3zXl6U4=;
-        fh=GxKgeSj6ETnhnjXAJa6obCWdjl8C7TEQ23Sdh3n2hBY=;
-        b=Qd2MdtwduSRLxasJOHO+zihUV93U7svF2lTPkm3uduK+JmxP8QVdGXxDni8soKx3Ge
-         goifWW+5QNYb5xk2jSK7iU7zuEXGVNv3iOdaHLrCO5tCZoElQbbFMgitQus+fVEYXKvc
-         0eUhXDAEs10oa1yfilSdadtxgEnZyt77R6RB8FtqVFQy0HkcgLHBNPMe6qpRlTQl0FQp
-         e+XWXJ8jCDcmPjiOK0lDB0q8CWu3kayo80c2xNDI8uMcnylcgYNgD3hk4fZ+pojS/umM
-         fqAEobpIpI2SWFvQWFTngbIEXJclKet4VJBROXCXnTd7ALW+xbJctcN55uQe1OE1olgj
-         cifA==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=/uPf7O7mV3UVcLoPpg1h7SlQrq05lwr9QUgDlZZcEx4=;
+        fh=rCso7/xi99v9e0M2XNkzhjLOcDdF6DQxyTM3FHByzWY=;
+        b=VpbtNSBwiEFmng0SMq/hynZ/5yp3qfK7zAFlu0hxiJr6vXrZy1XWZJOIdGDdJbqeCO
+         SO2e3Vc6Zl7D5BYiDRCEDM7ndddg/aXuHbwyK4Itkubctq9VBme728bwl1idLv61+69Y
+         CJ6B+oATcINMwfA4s1YvssnOj7WrWVdvfKspWeviiwxjQnSMh9w1NyYCniI1xOm185uD
+         SfR0gFBCqWwH5DiygsX68rm3+NKGzfqq+FXHZk5ALQJ4d00iWjnuat8vFGdKvdMwSBUm
+         W+m4j4HB3z0Fgfq+1+bMFS69f+I8b7hlW1JZyIrCtF2AOPr/ggP/C3w6VwAhjBxrtSzc
+         yKTw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792697901; x=1793302701; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=dt/bdjqHlPNBH58AQVAdoaHpPHuiz9/xzEYV3zXl6U4=;
-        b=dh3lxGbO1dghKejnlHZeW3/WRe464CIyq+ABvXlqF9FtobzLfBDIalWNopG7ULK+LE
-         bm4WV7WxJc/vZNT8O2/H+lbrj6lVAQXiV026WPUSTehLets1vT4/6U/9Q40D1n2+2H3c
-         9pL6bSAaPd03eX4ROOMlCSL1nkk4vqANbykpHblvYnmZAKshN78b54dRBrEL1ctq5/gm
-         rjudrSKyToN8l1f6LkY2B39asqcRcLYB5tiA1VOyRPVuj8T27gp4enDN6E72orCzPdA4
-         V3TltKgBjrGFf0+q6XqULBH0IwiIL2JPjR4TZotkRmChbK1hyzRO2ENxA+8RN1Loa0bq
-         oP6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792697901; x=1793302701;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1792698080; x=1793302880; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=dt/bdjqHlPNBH58AQVAdoaHpPHuiz9/xzEYV3zXl6U4=;
-        b=wvDwMeKLmvooguu9P//SAV2gDrFN50wrvMbPjwMihSzfNDdTry2z0vp/4Epmw+NAug
-         FNEbsn0/E9Co8CAI4kCoYC0rbf3IpM0D3ZG/BcNE9ZkS0eLVNXeiLt/LTFgTTT2s5KBD
-         Aa8FtEHwXDD5UvGGkCqBIfJlJhjSQqoDdRKJqbcVjBwhFU9aYnHQvrocI0list55GW+y
-         TLE1fpX82AFtNp7AxFWFW6xx5jZljDw+xowhAK9U1rWKGtYQZgTKDCFK5DCeD4+nf+yR
-         HzyDoUw2WMeOkTBz4CBRLmgbf3Z4hiaE04fOyU5b2hmPi3h+V40R+wlLN+jogDvv9XfK
-         zQVQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwsHFVF50qmN99tktkly2Q+xFnf1YEKJzWr2xvAQ4YfUQnouDdA8kcxEJsiSfbFzlrcw2NVqXjF8H/1DKxH@vger.kernel.org
-X-Gm-Message-State: AFq9FYIANXgZEvgLN4AwzAY8ytjwGNsp16Khz1HIPAbzWBb1zz2uiwAC
-	YW77s93MRyQweqIWqTw2bKOwdoSs/f8XGVh9jGak+gVyOvi7RSJgsu4rFbdNvrEbRqOoVTrNuFO
-	VC+LCQEL9ofwL/zfm07H44+pVIPmoUC8m63yp5IuZKZdZRBuSltTbPnenHoHXwXQkUOCnypoopI
-	264Puaq04TMeX/oJwD99rfrYSYRpI4S47xrfr3TAwFuOg=
-X-Gm-Gg: AYBFou2iAHt+f6TfWWS4VY1zsQrEaqIdpInZew5Imf49jYmL1D1Vk17rB0dVRUZ8wfV
-	VGtkc/iWi9g17Nt8nlESJeTSypVU0SuLQGrVyuggBsPXPHyz2jGEC3uEdpRg4oSTMf3b2oUDqvu
-	I5vmUr1JD4cqKOPlpofm/JhfIGapZ7f0zYhGcKuUB3jPzmjChEbqGhYDTXtA==
-X-Received: by 2002:a05:6820:1381:b0:707:7495:9458 with SMTP id 006d021491bc7-70b889a0262mr296312eaf.16.1792697900888;
-        Thu, 22 Oct 2026 12:38:20 -0700 (PDT)
-X-Received: by 2002:a05:6820:1381:b0:707:7495:9458 with SMTP id
- 006d021491bc7-70b889a0262mr296293eaf.16.1792697900408; Thu, 22 Oct 2026
- 12:38:20 -0700 (PDT)
+        bh=/uPf7O7mV3UVcLoPpg1h7SlQrq05lwr9QUgDlZZcEx4=;
+        b=eGuW2GMhQSUXWyk5IeInmdud2HJMQfOnVPXJmOeMh6VxFknNuNoa+qkDlXNZeYEkHh
+         GihGP4ebcfdPfN4VzbHut5Yjoa6IcOBeMy9rnplGsEWi9IuRHabuVA7BBjEyG75zGxKY
+         ELkZwKuLUwjWElR8OJSrpVhetC5zDhZsJ3kOQf8gEdEsM9T/Ubax3hCr6oCIkXp/jDBR
+         6DMtOBdOyD6Z6vKAMC++ATPdyDAAsFGJAcRengfX9XrZfxpmTXMeJA4bnOXXgeSmAbTy
+         ANdKXuIkPnv4E6ycQtPA7DstjA5ZpLHYHAOWY45xmxWGB8saWofUe8lrvcSH5cSwZlDz
+         +4Dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792698080; x=1793302880;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=/uPf7O7mV3UVcLoPpg1h7SlQrq05lwr9QUgDlZZcEx4=;
+        b=sdpkejC1PxOjDppuxR0GZzO465jKAa05Hups6gJEvvrtCsPFy2jXGqH01uCmsOj1fy
+         fNJ/AkBSkvMMlfrP4rW46kx4tPuLcWro8LLVUjy/zXrsHmy6q11UkMmnA+HTbU5fZ8/h
+         M/teqJkeZtbXfh2wpOVaPcRZFuM6Y/SBUot/aPYQW0gWq8Rok23VU9tvRyHCl404Jm2i
+         4nGGoRrz583NEdIvPIYpJpDEfaauqNdtM/FKCgT3aGmQq3/1wKAedwVL3aGxxs+FoaRt
+         5hHz13MIU4jdwniWyulAKYVYzJeaatj62iW8mJZ+b0QgEUPrPtuRbmeJlkmSeStMXVlT
+         URKw==
+X-Forwarded-Encrypted: i=1; AKwUvByogx8qnCNlBP8r6A/Sxb3bnYjTcwCABKjLSfxv5o7dZrczo+vgMtytpOrBe4njHTGSKrKlyO7Ip2mrZhN8@vger.kernel.org
+X-Gm-Message-State: AFq9FYKu113wrwPwRQYcGM5sKNUlH83Fu+wUs+JZQm+Ann2MshtOJMYS
+	Ur3nHq0oC6s25mE8gZ3Iez0hVy9RxH4X2/oZpcLFTDSnxdBa+bqB8I2JQu7og+kp1+dBRrCp4f1
+	Y1KBIvXqpym9C/nkdJh9vHyYVkJ4QevI=
+X-Gm-Gg: AYBFou0RoXvT08L4xlxOjkBOWwjuQi1AJJpvgIBcT76IwIpPqfeoO0y77VNIrPHazie
+	NWQCiS2R2F9L5X0dJs251sE2C5AED8KzdkWTVo6blFoAcfisvkm40ASS0r3iOMJtu87AVpa8CCO
+	vzaaimv2V3RrKJJwa5OqIh0buP4xMczs+WAV2vK/qVkChxBnsH+LyTwwOcbSmLRQqCxuBduLzjw
+	TxqD/F0SazdZecr49/O2yCOXSao1Y9BGeczY3tMMSFUYFDzmAGpPUxknTfD4C+5YkFt8ktSQJC2
+	jOX+PZYmEhwAREPOxRMwJmaF4g3/1qh54R3LmceROaa1k6YMwPU596f32epgiNPJZBOeQBU8F9q
+	8NWKclKq9sL987sNo/T1/XKb5ymQtS3vSYDAhxhieqxtlavH8sMqitoaIg2QXoLs0KJpKXqX3DX
+	fKZtmTCAZsLR8HIdE=
+X-Received: by 2002:a05:620a:7001:b0:939:b057:daf2 with SMTP id
+ af79cd13be357-93f6f7fef1amr89402385a.45.1792698080536; Thu, 22 Oct 2026
+ 12:41:20 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -127,98 +104,113 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
- <4e031de2-6564-4e63-9102-799a0b435689@oss.qualcomm.com> <CAAnD8RZtjvwOAfRWGyQzaVqPepozCWOkRiP9F-eiG2=E0QKXrA@mail.gmail.com>
-In-Reply-To: <CAAnD8RZtjvwOAfRWGyQzaVqPepozCWOkRiP9F-eiG2=E0QKXrA@mail.gmail.com>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Thu, 22 Oct 2026 12:38:09 -0700
-X-Gm-Features: AclHuK95qFCeUwl242qMGo3Fu1gmxqdkDvdX3kdt1R7h9PnHSpX_D8gdjAjKyps
-Message-ID: <CACSVV03n3WD8pF0i1UC-HSJAqwnAhXio_oKMD=xP2=dJJnJysw@mail.gmail.com>
-Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
-To: Jeff Roach <jeff.roach0@gmail.com>
-Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org
+References: <20261022033638.32460-1-thatsme.saurav@gmail.com> <16d56f7b-6295-4ac8-b0c9-8b490dd0d582@leemhuis.info>
+In-Reply-To: <16d56f7b-6295-4ac8-b0c9-8b490dd0d582@leemhuis.info>
+From: saurav kumar <thatsme.saurav@gmail.com>
+Date: Thu, 22 Oct 2026 15:41:08 -0400
+X-Gm-Features: AclHuK8DakwZw0LIt6ofHcRsAHS0pyqF6XCOnFZsjF1b3JyRhz1B6T7MRSrjzRc
+Message-ID: <CAHmbrkmPc5+NrKUn-Bfi6_U4nxYNsUZe0xFNackUS3v2rbWJjQ@mail.gmail.com>
+Subject: Re: [REGRESSION] i2c: qcom-geni: HID keyboard fails reset on x1e80100
+ (Yoga Slim 7x) since 7.2.9
+To: Thorsten Leemhuis <regressions@leemhuis.info>
+Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, Andi Shyti <andi.shyti@kernel.org>, 
+	linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	regressions@lists.linux.dev, stable@vger.kernel.org, 
+	Praveen Talari <praveen.talari@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Sasha Levin <sashal@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA3OCBTYWx0ZWRfX6i8yeYkjqBG0
- a3PNV25tYq3QN+fCoTO1SHUUeyUnppOWeCPBrGYo/8e//e0ZXIP0dFDmvpIG7XGkQKfcPXXq8d+
- a1mflTTVnG/myoDEtZ89iSn0hrLhlnsL9GRkTzpeF+reT+ALoSEPVNlbw4kFNbr3kXRnDrf4ePP
- /jJcjC1d5UgTHW8XvI1hFCAFYx8OFBE2eP0xwKyhzcSfWjYVHHXfbZPGnLTf1tpo+uOxvTFXa/d
- larvYRar5XKBHT3kLuJ1GMTM4nSKA/x7EVv//+dNNX+PzOk03M4e/uWS4rP/+4R/6rNB8EKR0Qv
- iZvYd3jdSomF0qE9q10zL2gUR9MtsBMiSop15mNQKiZDcTGh3vA8avquUZhw1P/prn89ENcHSih
- 1mOxsoQihya+nseJdPYRc0AEQkXHkv1etoS4PyrAQpdh1oUbJ6Cd5/Hl2lmh8a/v4duzzXLB3wl
- yQ/Brbu5V2hULWsIxlw==
-X-Proofpoint-GUID: rFOt4biRWsjhxxOfTMOb0ypH5A3DGotH
-X-Authority-Analysis: v=2.4 cv=feg4WEQF c=1 sm=1 tr=0 ts=6ada662d cx=c_pps
- a=wURt19dY5n+H4uQbQt9s7g==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8
- a=OfTDJP6xk-uteGZONjsA:9 a=QEXdDO2ut3YA:10 a=-UhsvdU3ccFDOXFxFb4l:22
-X-Proofpoint-ORIG-GUID: rFOt4biRWsjhxxOfTMOb0ypH5A3DGotH
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA3OCBTYWx0ZWRfXwmDtr16x5hxS
- XDYwPe588a/RfPejiV59W/aboo8eHHkJOnzJjcW404RLw6LB3SQd8lPEw5ydwS9d72KaJYiRWeq
- J3wlzH+eG6M/CXqUG4P5+tbJf5CKofM=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_06,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 suspectscore=0
- spamscore=0 adultscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220078
 
-On Thu, Oct 22, 2026 at 12:03=E2=80=AFPM Jeff Roach <jeff.roach0@gmail.com>=
- wrote:
+Tested 8cb5c17be3a2 ("i2c: qcom-geni: Restore the source-clock
+selection policy") on top of 7.2.11 on the Lenovo Yoga Slim 7x
+(x1e80100); internal keyboard works again after reboot.
+
+Tested-by: Saurav <thatsme.saurav@gmail.com>
+
+#regzbot fix: 8cb5c17be3a2
+
+On Thu, 22 Oct 2026 at 01:44, Thorsten Leemhuis
+<regressions@leemhuis.info> wrote:
 >
-> On Thu, Oct 22, 2026 at 3:17=E2=80=AFAM Akhil P Oommen <akhilpo@oss.qualc=
-omm.com> wrote:
+> On 10/22/26 05:36, Saurav wrote:
+> > Since 7.2.9, the internal keyboard on the Lenovo Yoga Slim 7x
+> > (x1e80100) no longer works. 7.2.8 is fine. 7.2.11 still ships the
+> > same i2c-qcom-geni.c as 7.2.9, so I expect it is affected too.
 > >
-> > https://lore.kernel.org/lkml/20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.q=
-ualcomm.com/
+> > The keyboard is a HID-over-I2C device on i2c0 (i2c@b80000, 400 kHz),
+> > address 0x3a, VID:PID 048D:8987, IRQ tlmm 67. On 7.2.9 it fails with:
 > >
-> > Please check this series for Mahua support, especially the DT patch.
+> >   i2c_hid_of 1-003a: device did not ack reset within 1000 ms
+>
+> Searching for this error msg on lore found a change that fixes such an
+> error on Lenovo Yoga Slim 7x Gen 11: 39e8e085710a2d ("HID: i2c-hid: add
+> reset quirk for Lenovo Yoga Slim 7x Gen 11 keyboard")
+>
+> Could you try if it helps? The stable team plans to pick this up for
+> 6.18 already, so your feedback might speed things up (and get this into
+> 7.2 before it's EOL, too):
+>
+> https://lore.kernel.org/all/20261019135441.1420968-216-sashal@kernel.org/
+>
+> Ciao, Thorsten
+> > The touchpad on the same bus (0x2c, hid-descr-addr 0x20) keeps
+> > working. A USB keyboard works as normal.
 > >
-> > -Akhil.
+> > If I build 7.2.9 with drivers/i2c/busses/i2c-qcom-geni.c taken from
+> > 7.2.8 and change nothing else, the keyboard works again. So the
+> > regression is in that file.
+> >
+> > Five commits touched that file between v7.2.8 and v7.2.9:
+> >
+> >   82339215fc00 i2c: qcom-geni: release DMA channels on probe error
+> >                (upstream 268aacb2e2a5)
+> >   139efdb3ee6e i2c: qcom-geni: Fix hardcoded clock index in SE_GENI_CLK_SEL
+> >                (upstream cb97bf3d4f91)
+> >   6c3420d6ba34 i2c: qcom-geni: Store of_device_id data in driver private struct
+> >                (upstream 692e0c84db5f, Stable-dep-of cb97bf3d4f91)
+> >   4edab037132b i2c: qcom-geni: Move resource initialization to separate function
+> >                (upstream ed4b34033db2, Stable-dep-of cb97bf3d4f91)
+> >   fb54df3645d8 i2c: qcom-geni: Isolate serial engine setup
+> >                (upstream d8d3bb127ad1, Stable-dep-of cb97bf3d4f91)
+> >
+> > I have not bisected within this series. My main suspect is
+> > cb97bf3d4f91.
+> >
+> > #regzbot introduced: cb97bf3d4f91
+> >
+> > 7.2.8 always wrote 0 to SE_GENI_CLK_SEL in qcom_geni_i2c_conf().
+> > With cb97bf3d4f91, geni_i2c_clk_map_idx() uses
+> > geni_se_clk_freq_match() to find the index for 32 MHz or 19.2 MHz,
+> > stores it in clk_idx, and qcom_geni_i2c_conf() writes that index to
+> > SE_GENI_CLK_SEL.
+> >
+> > On x1e80100 the QUP SE clocks are registered as DFS RCGs
+> > (gcc_dfs_clocks[] in gcc-x1e80100.c). geni_se_clk_tbl_get() builds
+> > its table from clk_round_rate(), so the table comes out in ascending
+> > rate order. I suspect that index does not always match the hardware
+> > DFS perf level that firmware set up on this machine, where index 0
+> > happened to be correct. If so, the engine runs from a different
+> > source clock than the SCL counters were computed for. I have not
+> > confirmed this yet. So far I have only shown that the 7.2.8 file
+> > fixes it.
+> >
+> > I have not tested mainline yet.
+> >
+> > System:
+> >   Machine:  Lenovo Yoga Slim 7 14Q8X9 (83ED)
+> >   SoC:      Snapdragon X Elite, x1e80100
+> >   BIOS:     NHCN62WW
+> >   DT:       x1e80100-lenovo-yoga-slim7x.dtb (in-tree)
+> >   Kernel:   gentoo-sources 7.2.9 (genpatches do not touch this driver)
+> >   Good:     7.2.8
+> >   Bad:      7.2.9
+> >
+> > I can test patches or run more debugging if useful.
+> >
+> > Thanks,
+> > Saurav
+> >
+> > --
+> > Drafted by Claude.
 >
->
-> Thanks, that was it. I applied patch 3 (drm/msm/a8xx: Add Mahua GPU
-> support) and patch 5 (arm64: dts: qcom: mahua: Support GPU and GMU) on
-> top of the Ubuntu 7.3 kernel (msm.ko built out of tree), and the
-> rendering corruption is gone.
->
-> Details:
-> - The GPU binds, the GMU firmware loads, and there are no faults or
->   hangs in the kernel log.
-> - MSM_PARAM_GMEM_SIZE now reports 0xfc0000 (15.75 MiB) instead of the
->   full Glymur size.
-> - gnome-shell (freedreno GL), a GTK4 Vulkan app (turnip) and WebKitGTK
->   with GPU raster all render cleanly without the FD_MESA_DEBUG=3Dsysmem /
->   TU_DEBUG=3Dsysmem workaround. The WebKit case used to cause CCU write
->   translation faults and hangcheck recoveries; it doesn't anymore.
-> - GMU firmware v5.2.38, Mesa 26.2.4.
->
-> One caveat: the newest released Mesa (26.2.x, 26.2.4 here) does not know
-> chip id 0x44060030, so I added a local hack in MSM_PARAM_CHIP_ID that
-> reports it as 0x44070031 (Glymur's 3-slice X2-85, which Mesa main treats
-> as the same GPU). Is there a plan to get the new id into a Mesa stable
-> release? Until then, users on released Mesa won't get a working GPU from
-> these patches alone.
-
-The chip_id for mahua will be in mesa 26.3 (which should be at ~rc2
-right now, final expected in a couple weeks)
-
-BR,
--R
-
-> For patches 3 and 5, with the above caveat:
->
-> Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (X2
-> Elite, Mahua)
->
-> Since this is outside the series thread, please feel free to carry
-> the tag into v2 by hand.
->
-> Thanks,
-> Jeff Roach
