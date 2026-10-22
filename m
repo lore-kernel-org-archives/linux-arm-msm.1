@@ -1,142 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792668768;
-	b=W709yN6efVqN6r2nWABVxobZGK1e3kgaBUeKzvTav+2dAS1O/HwPMqP+pitBKmc/2gID
-	 rnFVFwOvjLhp7gHC0Ng9gkA2WRvGgq1fehVZw21FP0B8GQ+PXjjD3DNiU5JornqmgFbZg
-	 lsh8ueKShPjxrYwfltuAqymXah07G6zqfIRaN9EOG/nwhCOBhgk2M2sDkx4InKeriRTgF
-	 ITfT8c4fnV/2U/u+bpx0FG3AjoD61AEsgmzt+lQUT9r9CBOrQghUYRnWnVA5kARUawQO7
-	 PpJ5qkO173sgRgDMVP2OKts7z3v1UnI8I/7CSwP7kTXJMrFsjADkmyMupI+baWKwnNQ==
+	t=1792668973;
+	b=ZuYPP0tCj5zPr6P5u/zI67WOV9THCtC7S2TgHfZTKEw+40DbKmGu6MY7jsVwPYv+tFaC
+	 iFkYE/ITsaG/cEVasBkH65aMhQ/maK0/ynzgf4PblWscIiaeXyf8y6hQOtNpN6NSapJXR
+	 9cXPL9oXGjUsSy3MCXBFrnDCG6VgmqwFQO1tQMdqvvyxGvqLQC1d5V2ahh97Ig5z5+55B
+	 ukwMef9MieDiJmfY9kkt9NTYpyQyGKczItNpy+o7s0Rd4eIHZvyW8BTLB3zATvReKyvAt
+	 Gw548zzbBL+AI4cep/oT92qe5FkaVfRKmyWO9vgbK3TVaK4TDAd3ugFDQVvOSrsg8BQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792668768;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=dXEU4fNstySwei7nZv6T8mycxD11pRJ5qnWjwSzk+X8=;
-	b=RUTMk6mOaSz5mc6Wp5rbspugythQrL4t2pnf9zp5+ybi03/uZWqrJoEsbbWuuuejmzYM
-	 rw/opQhC3ngQjWFEZGSItGhnepVdrrelUrncjWShOKeG/n1/YxcMStt6hTaaM074/NnhU
-	 T8rS5Vy6T1S+jW1RZ1br/iiB02uKOfHc/EUNrv3k94ZyxWiYkElGncOBPFPONhPw2yJAB
-	 WLRipq0G+0Jcxry2Pov0107CVNxRM5npheCXT6V967kxYGAon7dCmHDWvj44AvxlnwgmQ
-	 TM0HGoDbmOeXkMTGcRwsuugiarEpZln3AuG6M8wP6/rpf8bR1BsBqouvjfvw9kGkq4A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792668973;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:
+	 X-Google-Original-From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=GuEgk05FDwN2DJJek0xS80ltqqEedDpyTXQSRI6cVIk=;
+	b=yFTFUYro+NDDhkppSGBwHRUuZTLxZqu2nlb3WpCFMfqUPNHK0bgnVx0rkpS3SqTJMBa0
+	 eZvlJW2EHjPuwVXULJ8JskhDId8lNaFsVq0tBi88qwHJ8oF/ovOUTHN2MaVHys1dRnH4S
+	 yFI1P1DNfQGOvpoKzyXqRJZYiFkfOLUbDTeHbYq67mtrwI5GDS3FMgIG/f3ODm0drTqTp
+	 Wbqru0gUxpSpEOiYwBsOH9BqBQ9uLNECOEg3vlaFdJtXp8gz/vUWXNw3KkUZ9NmpMxZR6
+	 OiT7dWVD/MsP5/A0hPVMcJ9/LLqq8i3N+XT916dF8xNoLk1m67qKG8CmRxPsSJ4pFvA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Z3TQBkVB;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QYG1Xf6G;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=D84roI0L;
+	arc=none smtp.remote-ip=209.85.216.51
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 434C6606A320
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:32:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 434C6606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65EF1606A320
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:36:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 65EF1606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Z3TQBkVB;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QYG1Xf6G
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M9xmQ3317704
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:32:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=dXEU4fNstySwei7nZv6T8myc
-	xD11pRJ5qnWjwSzk+X8=; b=Z3TQBkVB20a5qG7u5iAzniVCA6vhy+g7rZAljzZj
-	mkKDSbpW1JcJKAAZtfFabQV0ZGI7TqWZlqo3AXsayy42gSw7v6g+1gGBw7SjWB+n
-	pI/1Oy7K2n9v5746SuqfhYWkIf2AoXKZx7NWoRzDGazf/PJ7zSDG0r8ITgSTVaWD
-	X++JFG2o/fpng6QQASI9c5gvT9cyqvFpKlyEjkkUfw+3nMc2lmsStQqjA6rWtVn9
-	7IAK52MAkALuckgcBtHxE8bPGBRQdIx6RxR4jgkbaZVBXDtVSD8N2PbN3uacqza8
-	ACWxeRJbyW2J468G8zRfklcoM2HtzT0dNPxERQanw7SKTA==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93ajsy9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 11:32:42 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-14373747468so387112c88.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 04:32:42 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=D84roI0L
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3ac9f49b984so509821a91.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 04:36:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792668762; x=1793273562; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=dXEU4fNstySwei7nZv6T8mycxD11pRJ5qnWjwSzk+X8=;
-        b=QYG1Xf6GP63YYCcSETYUUVRYcrLd+SXv8cR6aRb3KCYkvWyZ9y6XMP6DHnmOYLGNGF
-         TFDzwUE34a3SyTiYrJJ//r5FIrAAFFvPREKaSzsNRZxYLRcU/5QAyhJXc4F7R5raz1Nb
-         M1I7A1erKhkQkJMLXwpri4/femNNkvaNhyGmNivHbhl5J5IiVIedzLHVdGKcI2KSUk8K
-         1Ufe2W+v38JrzYqUCuIuk+xdoUJX6T1/JFwB989aRfJVpfYKKJy3yUriQXhxiUPWe85h
-         pn4hHnPjyqYsUOrIhK70lm0zx5BzDqmqhO/+RhImbgfD25K7nhNcCcyEX1sfM47jkimQ
-         uYVQ==
+        d=gmail.com; s=20251104; t=1792668973; x=1793273773; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GuEgk05FDwN2DJJek0xS80ltqqEedDpyTXQSRI6cVIk=;
+        b=D84roI0L/glpLHzixfYSzhSgiaOlSkGX+cwkzJEag6pJYB2c8YXfG8Hj4bbKJyXZJr
+         qkRRxO95H4AiT64Evf2gxOfXTxfX+3Mz+TDIBFutgHxpmCPXnfLOpDWFuW/FWzhdFqP5
+         6RYWlr3cP2c6l2DIkjhFQQQ8jlEhm0BFUukPOpJhLYUEdWJE+IxIXpLRg192Bgh5P1sA
+         74v9gfWrgjZ8v//PPw3sx1EzXOfjQcgzJ8oMTeBk0AX5P4zgMO4HqjYLcqx5wFyh1Nj8
+         6JmKRL/Hp8cnAOfDwL/YBJH2as+bIVZpNOtpmnXQUJVT/FBS1hI4v3G1iIdeWzGc5bEj
+         dRig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792668762; x=1793273562;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dXEU4fNstySwei7nZv6T8mycxD11pRJ5qnWjwSzk+X8=;
-        b=rHF0TU0PemCHk68xmcQxRshm0/ucP5v+l34LfOEjs9h2ARcNjZPqRIsNcFOuzCCg0t
-         q7IfhD0WvjUUM3HjWDPgxFH2lCt15oYK3VN5NsVutNncj2CpMevIFrkhFlpWww0/OzKm
-         FBh4gepXwFGq3DB9mcOTQ3eCzIl/h1cyEM5y0ki7vVXzJcEbP/0snWmz1rjdyEqfI4JB
-         fj5covQiw59T5/8m1ZptPoR9VO6upLZbCSPNcDAH9kffCTX0uKzcFfv1eBPsNUk0Bqod
-         KZc0xx11uCZX4D9uno30wK8CVeCjIkvSWA6VNPcUZO0K6WtGFtrj7tZVqx1WFw5TU4ys
-         K0iw==
-X-Forwarded-Encrypted: i=1; AKwUvBz2yH98WKfdE5u/3sl1A2EDJJ77PKV++PHnXdIrHaKK1AdHKRNBUliIbm9/pEJYglF058w4k83w+8kWHO2g@vger.kernel.org
-X-Gm-Message-State: AFq9FYLTxL8OaSS6+BGeGpsdX28WvAbNrPP4iEJhQTZi2OF1wdy6wkKx
-	XlBauwKOf+iap4MsSQCzaiiYqyVF59DoDWyhspxby/sp9m5F02W2dSg7fIup2Vtg0wM1J+79sx+
-	1i+4wWjOjPw/VwxJjW2cv/6i2orRMsi5OazS+sYzA0pfMa6GrKqr9aPkAOARR9SNpMjF1
-X-Gm-Gg: AYBFou3IO9DkJIdVN5yCdNwBJZLXNPUZHkdjTRJAGYoQe+WtnCwEjzbUFN1zMD6Snzo
-	IRVJINxyiocWFZv/5EJTlxncSecnNHaeKibLlc1LT15hgjbIIAjpNDwnWtsu2hcHrdkuNUuZuYF
-	iAjNvMWMA070At1EjwAsQ/vPZur6m5+vxt3QI9WX1Zq+XjJMrlRbTFs5wXFYx6bwmzdSXIWWlb0
-	55+/zaBlrn/BcTfLRUag9yVIrPfWbnvEN4XIDYb6VvLNGMWsvaa1AJmEtet5DjVwsuAL2Q1B+YP
-	wQ8rS3YlDvNoAIEsWJZprqCEDAmReNCw10sYUSbNSOrOkXtYXhcCjfbcN6SdJKmfR9cZVF7RERp
-	lw74fKvHH6bcfYrwMFeZ6S9PqMA==
-X-Received: by 2002:a05:7022:fa01:b0:141:5281:8a41 with SMTP id a92af1059eb24-190a4f06512mr7988793c88.9.1792668761582;
-        Thu, 22 Oct 2026 04:32:41 -0700 (PDT)
-X-Received: by 2002:a05:7022:fa01:b0:141:5281:8a41 with SMTP id a92af1059eb24-190a4f06512mr7988744c88.9.1792668760893;
-        Thu, 22 Oct 2026 04:32:40 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-190e29381d9sm12143730c88.18.2026.10.22.04.32.29
+        d=1e100.net; s=20260707; t=1792668973; x=1793273773;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GuEgk05FDwN2DJJek0xS80ltqqEedDpyTXQSRI6cVIk=;
+        b=QpsmuV8WSS54eA8w+XDofS061hvnrVHTYMtA+LOOeeNvzXpy0JT0xWeaC4++aG6eVf
+         j/bpyNclepFJoLMBQ3uQoQ1NkhThFYnT42LLhBk/47KEvdyYbsLmCA0aF4kbV+tWe/yn
+         xf5WcYYhXyRyfeHgUi/oahnwFQOcbEeu/6vm3f8LQfV27eL08oMf40qnWkLznopowYtu
+         gyppvoWNEwZPPzPfzYQ+atjGEstjWhJqDAGWeOzGZXKRu8zQMR3pMMFgE/yzDdlBTTub
+         5fstp7TnYmzD27YLBvLsSjDhCYjVXk+WB1HlloHXk3SQYS2qopwmxKFuSECcMMoDe/+0
+         Udrg==
+X-Gm-Message-State: AFq9FYLFXeUj/aX7VvRXo+3GQqO+2F59dSez7tAfD5D59KEbTDlBEQfy
+	Xo0ov6AT8XNgRfTJJtqu1sNqK29IxPoCeMewAmeTmT1wckgQ5SNfEFoe
+X-Gm-Gg: AYBFou3/RGQrGOz24ztw527PBXrnsWEcSlBsR+k5/vNXrI7VGZxM/nHdOru+y+RCAm1
+	t7aheIvsKmJliBMfJgVQ/azSCgQUlBBM6vNnVOq3iNga1nATBpj1aUVDm2MiVYaH61OBiZTgXSp
+	m4vXI9uq4zjwOMbmb80ontwruhHWH4RMX46URlEcT55CTLVQOweze+KqNeYDWngeaDDt6Z3HGr7
+	n0pZl6qKirAmy2sQnYeQCZUDP3/KpI44O96ulQ9V/MFtsIom2T/xLOqZEWdCCwm9eQm0CHfYKmZ
+	ReDCaXqRuH6ZsCLFm7uDvBKNlBVs9Q1nyVTKsu9y/ITtdoPn78KFzwUP0vaIZLMJUmcfZ3bzUNy
+	qPlSuISq0Xqht4ovhQmCskWu0/eYliIS4iSDsJ+29JljZeBLuQfPzZdJ//If8Oo2IuEKIDB2NK1
+	udYmb6QsN1ZJMYQhEPPGUxCfTb75dZQplpI8er57HSty4/HEA2g2/3+TCy7DZpZx/zMQbfI8cwu
+	/WH8saY8Ivn23BHoKaVgHwouO0dEtdAug9CpGLWeZqAAXeC4tOpMFnKjSZ52GVDKnENiOkwRQ==
+X-Received: by 2002:a17:90b:2752:b0:3a4:b509:88bd with SMTP id 98e67ed59e1d1-3ada6c545d3mr1333278a91.2.1792668972657;
+        Thu, 22 Oct 2026 04:36:12 -0700 (PDT)
+Received: from localhost.localdomain ([218.194.41.155])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ada490e5edsm3997668a91.8.2026.10.22.04.36.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 04:32:40 -0700 (PDT)
-Date: Thu, 22 Oct 2026 17:02:26 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
-        Simona Vetter <simona@ffwll.ch>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Alex Elder <elder@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Jeff Johnson <jjohnson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Abel Vesa <abelvesa@kernel.org>, Sean Paul <sean@poorly.run>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-media@vger.kernel.org, netdev@vger.kernel.org,
-        linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
-        linux-remoteproc@vger.kernel.org
-Subject: Re: [PATCH 0/8] Migrate PAS clients to qcom_mdt_pas_load() and
- qcom_pas_prepare_and_auth_reset()
-Message-ID: <20261022113226.tfuhxqrtfl3c4kcx@hu-mojha-hyd.qualcomm.com>
-References: <20260925155737.4161358-1-mukesh.ojha@oss.qualcomm.com>
- <ce3f58f7-f500-49f8-89cd-611d8e1ac6ac@oss.qualcomm.com>
- <20261021130735.h7t2c7txqdfohrs6@hu-mojha-hyd.qualcomm.com>
- <zqu4sweaftstbt26v2u3ajzv7snnqswuyrktm7t7k5gh4zi77e@d6t2fpsinvxc>
+        Thu, 22 Oct 2026 04:36:12 -0700 (PDT)
+From: ShiTou Hong <redstone.dcity@gmail.com>
+X-Google-Original-From: ShiTou Hong <dc_redstone@outlook.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org,
+	conor+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	redstonee <1516235445@qq.com>,
+	ShiTou Hong <dc_redstone@outlook.com>
+Subject: [PATCH 2/6] arm64: dts: qcom: sm8250-hdk: Add LT9611UXC HDMI bridge
+Date: Thu, 22 Oct 2026 19:35:57 +0800
+Message-ID: <20261022113601.2320940-2-dc_redstone@outlook.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261022113601.2320940-1-dc_redstone@outlook.com>
+References: <20261022113601.2320940-1-dc_redstone@outlook.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -146,84 +100,179 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <zqu4sweaftstbt26v2u3ajzv7snnqswuyrktm7t7k5gh4zi77e@d6t2fpsinvxc>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA0NSBTYWx0ZWRfX3tudfJ+Q8669
- hmrzf+MVB97EYkkytYBHRspgHXyLcBVfPq5LHgQpl4Pr5pxEyMNcp13pm0xcjoFujV/IMGXJTq8
- n2P9gGSdJp4dpmDeNdFfEdqxqp+KBjZtWNvH6Eh6eLuTf7KyRLXVdBQSiAPSmn1mjQYT0Jvbroq
- aD3+NiEeKFUp9qWrGJhpHuIR4ExiWILNjfYa5Mt2pzhWrFRcREZ3yI1mENCPCF/dDdBiO+SsGmj
- Lt1TJeLbeWyKbKxHHvHVtcGgaiuTv9TImKsk71Wk4/Hq//c9vtQMZznEv28rxADvlavQTfD1zmV
- bs+y0YnW9VSjR+n0pmkvoNQu8ipZwqr/7/R3Ib3vYTCEL5VV71DFYxmTZZT3grdpa83Ahd8Cx0Y
- u+yHVzL/SxFbmpYMODdXRYBPAHaPP86IzUXKtKyBuIlwc+cZZPRPtbSZ3kXWjct8xlXp+x7WLGy
- rCZuKwBTPpaXn3pLxeg==
-X-Authority-Analysis: v=2.4 cv=H7FOUOYi c=1 sm=1 tr=0 ts=6ad9f45a cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=ZHN8ZsQmYYvh4dXIsskA:9 a=CjuIK1q_8ugA:10 a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-ORIG-GUID: VKxsDblqYDBe5C2YjnYpBr24A2XrxTgc
-X-Proofpoint-GUID: VKxsDblqYDBe5C2YjnYpBr24A2XrxTgc
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA0NSBTYWx0ZWRfX9TLzMJhLz2mb
- QBlDr3FnmVNPWRGSd0mQqD+MgYR5xse0TrqjeBiT5aMd042KOAXwO18xlPmFgEWxJQaXUGO8n8e
- 7f+17CZd7UQ9/1TmTUibLWmPFdoW0KU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- phishscore=0 adultscore=0 spamscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220045
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 21, 2026 at 04:19:59PM +0300, Dmitry Baryshkov wrote:
-> On Wed, Oct 21, 2026 at 06:37:35PM +0530, Mukesh Ojha wrote:
-> > On Wed, Oct 21, 2026 at 01:32:13PM +0200, Konrad Dybcio wrote:
-> > > On 9/25/26 5:57 PM, Mukesh Ojha wrote:
-> > > > In preparation to remove qcom_mdt_load() and qcom_pas_auth_and_reset()
-> > > > public function, migrate every user to the new PAS context-aware API
-> > > > qcom_mdt_pas_load() and qcom_pas_prepare_and_auth_reset().
-> > > > 
-> > > > This series migrates every remaining caller of the deprecated APIs
-> > > > (qcom_wcnss, adreno zap shader, iris, venus, IPA, ath12k) and then
-> > > > removes qcom_mdt_load() and qcom_pas_auth_and_reset() entirely.
-> > > > 
-> > > > This series is based on top of although no dependency as such.
-> > > >   firmware: qcom: pas: Make MDT buffer retention explicit
-> > > 
-> > > LLM has the following comments:
-> > > 
-> > >  1. Metadata buffer (ctx->ptr) is leaked, and overwritten on
-> > > reload, because qcom_pas_metadata_release() is never called
-> > > (patches 1-6)
-> > >  2. devm_qcom_pas_context_alloc() is called from repeatable runtime
-> > > paths, so contexts accumulate until unbind (patches 2, 3, 4, 6)
-> > >  3. use_tzmem is never set, so the shmbridge prepare step never
-> > > runs on SCM and the commit messages are inaccurate; TEE gets
-> > > a real mem_phys/mem_size change
-> > >  4. Not bisectable: patch 4 relies on the NULL mem_region
-> > > handling that only arrives in patch 7
-> > >  5. Patches 3 and 4 don't apply to this tree; iris
-> > > iris_detect_firmware() still needs mem_virt after the load;
-> > > the base of the series is not stated
-> > >  6. Patch 7: NULL mem_region now means "map internally", which
-> > > weakens the -EINVAL sanity check
-> > >  7. Patch 6: redundant second ioremap_wc() on top of ath12k's
-> > > persistent memremap()
-> > >  8. Patch 6: ctx is set under one scm_auth_enabled check and
-> > > used under another, which is fragile
-> > >  9. Patch 2: the context now carries the full region size instead of
-> > > the MDT size, which matters if use_tzmem gets enabled
-> > > 10. Patch 3: stale qcom_mdt_load() comments remain in
-> > > iris_firmware.c
-> > > 11. Patch 8: no issues found
-> > 
-> > Thanks.  Will address them along with Sasiko's one.
-> 
-> Just to check. Did you verify your commits with the lockdep and atomic
-> sleep debugging on?
+From: redstonee <1516235445@qq.com>
 
-For this series, I did not.
+The sm8250-hdk has a video bridge chip LT9611UXC convertng MIPI DSI to HDMI.
 
+Enable the i2c port of the chip, the display controller and DSI port.
+Add the pinctrl of LT9611UXC's rst&irq pins.
+
+Signed-off-by: ShiTou Hong <dc_redstone@outlook.com>
+---
+ arch/arm64/boot/dts/qcom/sm8250-hdk.dts | 123 ++++++++++++++++++++++++
+ 1 file changed, 123 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
+index 5975878ea..d92e569d8 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
++++ b/arch/arm64/boot/dts/qcom/sm8250-hdk.dts
+@@ -44,6 +44,18 @@ vreg_s4a_1p8: pm8150-s4 {
+ 		vin-supply = <&vph_pwr>;
+ 	};
+ 
++	lt9611_1v2: lt9611-vdd12-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "LT9611_1V2";
++
++		regulator-always-on;
++		regulator-boot-on;
++
++		vin-supply = <&vph_pwr>;
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++	};
++
+ 	vreg_s6c_0p88: smpc6-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vreg_s6c_0p88";
+@@ -63,6 +75,17 @@ key-vol-up {
+ 			gpios = <&pm8150_gpios 6 GPIO_ACTIVE_LOW>;
+ 		};
+ 	};
++
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "a";
++
++		port {
++			hdmi_con: endpoint {
++				remote-endpoint = <&lt9611_out>;
++			};
++		};
++	};
+ };
+ 
+ &apps_rsc {
+@@ -396,6 +419,10 @@ &qupv3_id_1 {
+ 	status = "okay";
+ };
+ 
++&qupv3_id_0 {
++	status = "okay";
++};
++
+ &tlmm {
+ 	gpio-reserved-ranges = <28 4>, <40 4>;
+ 
+@@ -404,6 +431,20 @@ sd_ufs_cd_pins: sd-ufs-cd-pins {
+ 		function = "gpio";
+ 		bias-pull-up;
+ 	};
++
++	lt9611_pins: lt9611-pins {
++		irq-pins {
++			pins = "gpio1";
++			function = "gpio";
++			bias-disable;
++		};
++
++		rst-pins {
++			pins = "gpio2";
++			function = "gpio";
++			output-high;
++		};
++	};
+ };
+ 
+ &uart12 {
+@@ -486,3 +527,85 @@ &sdhc_2 {
+ 	pinctrl-0 = <&sdc2_default_state>, <&sd_ufs_cd_pins>;
+ 	pinctrl-1 = <&sdc2_sleep_state>, <&sd_ufs_cd_pins>;
+ };
++
++&adsp {
++	status = "okay";
++	firmware-name = "qcom/sm8250/adsp.mbn";
++};
++
++&cdsp {
++	status = "okay";
++	firmware-name = "qcom/sm8250/cdsp.mbn";
++};
++
++&i2c1 {
++	status = "okay";
++	clock-frequency = <400000>;
++
++	lt9611_codec: hdmi-bridge@2b {
++		compatible = "lontium,lt9611uxc";
++		reg = <0x2b>;
++		#sound-dai-cells = <1>;
++
++		interrupts-extended = <&tlmm 1 IRQ_TYPE_EDGE_FALLING>;
++		reset-gpios = <&tlmm 2 GPIO_ACTIVE_HIGH>;
++
++		vdd-supply = <&lt9611_1v2>;
++		vcc-supply = <&vreg_bob>;
++
++		pinctrl-names = "default";
++		pinctrl-0 = <&lt9611_pins>;
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++
++				lt9611_a: endpoint {
++					remote-endpoint = <&mdss_dsi0_out>;
++				};
++			};
++
++			port@2 {
++				reg = <2>;
++
++				lt9611_out: endpoint {
++					remote-endpoint = <&hdmi_con>;
++				};
++			};
++		};
++	};
++};
++
++&gpi_dma0 {
++	status = "okay";
++};
++
++&mdss {
++	status = "okay";
++};
++
++&mdss_dp {
++	status = "okay";
++};
++
++&mdss_dp_out {
++	data-lanes = <0 1>;
++};
++
++&mdss_dsi0 {
++	status = "okay";
++	vdda-supply = <&vreg_l9a_1p2>;
++};
++
++&mdss_dsi0_out {
++	remote-endpoint = <&lt9611_a>;
++	data-lanes = <0 1 2 3>;
++};
++
++&mdss_dsi0_phy {
++	status = "okay";
++	vdds-supply = <&vreg_l5a_0p88>;
++};
 -- 
--Mukesh Ojha
+2.47.3
+
