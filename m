@@ -1,78 +1,118 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.129.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792681375;
-	b=HJKC0fhgN1bAa3nvjsjPfoAw3wMZi3ryLQqbv/3i7/XIOtRrfie/KWVVRq8VnyrhqfrW
-	 6BuRyxYUYyAqcTj53gASxayGUAyXlDm2Q7SEqHFUAJlQGE17hsAtJIn+5g3daHD5KlMX3
-	 5Wg+KH/jXOBHBJX8OJE4Mp5EwQizXCHYBQU0yPaVFzopaxaCGPSIFxn0tTRXmYda86yTD
-	 ORnWYlmSR9Ib9EQE0hZDKAmBxBpPUWOtClbp6XFXhBhuxhajI92aSejQPSHfOTEOQQtQa
-	 JJDXKSNMTi6QT50ZpUTQyWlTUnQTJMOkUWAddqhma7nK+YIXqQMnesJFQZBtRyMQMug==
+	t=1792681528;
+	b=vosY8y+B8yY2f6fqWbCR7Hc0L+Q84zrjpmmmMJDFiVRN4hIFPTr3Acec6xnfTeE154AC
+	 QxuQ8l7hHqsP0aQXoBGpLkZ2ceRYfkCLfxKGGewKHZFv3dhvUQt3XR8Hc1/jOWWKyul9u
+	 JqScPPYlZzzPT3++YWwF5YYflLkNyI7uthCDO+azQYT+G5CmzNiAmmd35JkfdIpZu88CW
+	 LOK3CQJSShSNlrgQYLnTJRF6OL/i21131uu/Pcdx6xJPNpI+ouKNt2aIdhSyUaTz2Yqw1
+	 6Cpk/ZMbczAW1Ms496MMtrv/FUkOyFrEa8Faqck7zopp95rezyMsO2GGOBTt+tkgyRA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792681375;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Reinject:X-QCInternal:
-	 X-QCInternal:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=JTjoGO24pW2rGChMVPDLJyZmsSGTEsDRxsZhB1wrbkc=;
-	b=vQMpZJUsdJpmDBvqvMAf0Fb5dVNF+hsfCELK/e6vf8PsahF7eOSP7unqlNSkcppAYk46
-	 oE7Ycwp0aozzhaUB8Q3N3hIbcRJqW/bQY9QjdNszfbh9NM7mIH2QC7lCpsWIq89gEVJQK
-	 bLqVfYmA8Vv8JIWs0vcDE4bxOmIGHsrxtSeP1jNG3JDQNw3OWZ7rYcJOajroSc/IJWAru
-	 Ob6xm/sQY2btZdI4Yj6tJ6U8mVY5ghS2SsxQ0iu1n2iMI9BBSd6EHANLkW/PoumTKv102
-	 m8fGKl4UUy02G6prcK06y1aUl+RZuEUmxsGe9UXnofxZYH2SbJu4R+YkfVUCJACX2vw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792681528;
+	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
+	 X-Mimecast-MFC-AGG-ID:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=mHIYATDN2KrkydKOA/m++sLO2Tc2mh0OXohgIjQvZoc=;
+	b=3gs6/cwBEfa+HVHpKDtmxHmpCbJeGGUx702jegtC+frF6hqyoZYarkMeuCaQnWBNrjsx
+	 jRQUlGH7g0E8+/Xp+kWvUwrPNRYYHPZUa8cUFCvX4T9tJSNF0DoutE5/i6pZRVrOWgTBI
+	 YzM7P8V7eV+z7cn/bgiSBqQfjaZczbXn0pdA5UJ3YrMkIHEjZMR542IIKM/3m6QhTCtiG
+	 A5ZMXYEPrOq3dMk9Obkhc187IPjVQMDh3haoG4NLLxbzFDWQTWYJRMddQdJ1OQqfQO8n5
+	 wwRL+IB0Y1RKlbi3y6I73GVfR5Wx34gWYLud0m5u35SdUT7D/lL32n1CG/cAOjyzkug==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ic+zs8tl;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=redhat.com;
+	spf=pass smtp.mailfrom=redhat.com;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CBYMRvQe;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=BHv40pAz;
+	arc=none smtp.remote-ip=170.10.129.124
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF2A8606A31D;
-	Thu, 22 Oct 2026 15:02:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF2A8606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB5BC60A383D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 15:05:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BB5BC60A383D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ic+zs8tl
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69MEFVBf4098326;
-	Thu, 22 Oct 2026 15:02:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=JTjoGO24pW2rGChMVPDLJyZmsSGTEsDRxsZ
-	hB1wrbkc=; b=ic+zs8tlss1Il1wHWRnw3O5ohNiGjmIe4DSv4v1ftRoSqOU9M0u
-	hVORR4mmWXfT7sKkIAYAP6VJfHKfxcUAbBGlEOiDbMe4xbcw8Fsxv461IsfpwA3O
-	jiqxN0rauP9TnvDQe+WV2T2ORqN1XdYkIRKsfPfoD5Ry2p5VV/0Is7s2RmdF2hlV
-	e7whoesbgJ7CBC+gxyKinnuNhKc6PDQBpnLi9EXm2fjF/8ggbpOWXQymAZqHpKYW
-	Ah/xPNsMNwvEFD4CK8jzaihBVFAUIWtEC/zBqyQlxm/JMHqKKSaSc0L6TBwpu6lN
-	havJKK3i5IWFw/2soBRc/fDOHBlO/uQLi2g==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfewq363f-6
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 22 Oct 2026 15:02:52 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 69MCt9qo2331078;
-	Thu, 22 Oct 2026 12:55:09 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ks5-hyd.qualcomm.com [10.147.255.18])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 69MCt9Pf2331070
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 22 Oct 2026 12:55:09 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4763723)
-	id 1533F675; Thu, 22 Oct 2026 18:25:08 +0530 (+0530)
-From: Karthik S <karthik.s@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Karthik S <karthik.s@oss.qualcomm.com>
-Subject: [PATCH v3] arm64: dts: qcom: qcs6490-rb3gen2: Add WCD headset playback and record for qcs6490-rb3gen2 industrial mezzanine
-Date: Thu, 22 Oct 2026 18:25:03 +0530
-Message-Id: <20261022125503.1231758-1-karthik.s@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CBYMRvQe;
+	dkim=pass (2048-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=google header.b=BHv40pAz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792681526;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=mHIYATDN2KrkydKOA/m++sLO2Tc2mh0OXohgIjQvZoc=;
+	b=CBYMRvQe/UomEE7KxpIXNrHpBZ7DiK/Nl4JdYIB+MY3CIBJTEZ7u0OWAuBdECRH8hzyp8S
+	cIsgdITt8gR7mZuVfuihwMNL3smBUOSzgDBBIcRZQjwRUtd0OCuOKQptFybpXNwia4bkEp
+	pUvdJRV867rmmodKdM2+zJzreIDGBOw=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-625-3j2F4s0cO1qmKXHspGsbag-1; Thu, 22 Oct 2026 11:05:25 -0400
+X-MC-Unique: 3j2F4s0cO1qmKXHspGsbag-1
+X-Mimecast-MFC-AGG-ID: 3j2F4s0cO1qmKXHspGsbag_1792681524
+Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-48c430f0f01so1688178f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 08:05:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1792681524; x=1793286324; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mHIYATDN2KrkydKOA/m++sLO2Tc2mh0OXohgIjQvZoc=;
+        b=BHv40pAzNDQh3OUNs68BG/P1mOww7XKXrmb/fJKDIzG2ipOZ6XVRyJDGT5CZWz5xYG
+         gJCnfy38BKpI9PKfdB23Omv0MB4FD5c3uaLNrfcb6fxfWMUmqTBBFNYIAUv3oq8+cO35
+         BV6gHrTy8+4JLQY9usqM/Ura142d4yYYC9mMyXb4YGZZwXof0lHNdMkqbEklPfAR1d5Y
+         KxekEcTIOrCUJxPdvDYDq9+RFocLRdtfFzdmg+A81G+R6rtkaHlLGm6qLScMx2gan8FD
+         FKmSSbrL7cp00+xJgoVXPyynAs+FAIrsG7GuE6B4ebRCy3AU7EH7iZG5CCjxpMeSBDoo
+         WwfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792681524; x=1793286324;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=mHIYATDN2KrkydKOA/m++sLO2Tc2mh0OXohgIjQvZoc=;
+        b=l5tYUyJb8NfeNCIvMhViV/Xta5erThFI56ZHdTOglE2Jv9ULfyQJALWXuFdo89xl0O
+         bNfwd6FRP0XGoKxUWBgW+ExcL5Zl1sm7cQykvvy9hE461Dd9MZmIqhZanOm0cQ4ajnNk
+         Q3F/6O2PaMCzfFnITq1KAlBVdkYFxQRa6xBm9/NTQpNLbdtORcXrqr4Mp6yoFnQPlgf5
+         WY7NAtHRljtRS3ONRXZxhyrwEUViZvVYZ4sDY6HI7vFK2kmaT+XAlqvB2BUcogKjl2Rx
+         1IJsF+0kDmrEPWix1V3P8n0QMnSAvyH/JlLxytFeSck7bKUnAAEOGpyj8+6zi6OJdk+2
+         LXrQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwDJwMx8t6zno3EPIE3IabraIWMkrEtvmsZ7vWnTkzQOTHiF8RMtoMOjd5kH4fB5RM3XqAflKpwE++1PSuO@vger.kernel.org
+X-Gm-Message-State: AFq9FYL9PUgBXhSfhe6ynamMXQg1+IGSqy41yxDdtQiNCqarinATSBFi
+	X/CgT+crEp6P/42w3n5Iw7Qzc984AoldIXVnfBP1L9EMXkjpnw06kHGRfpbU9PBkWy5/ojIpDMi
+	TExcSNj8ni8fJQjhajne8PVrDPMPXoRaQl8TAlx8gwcMWz9dy1mjDLeoixeaGShcuNUA=
+X-Gm-Gg: AYBFou1bXePCNrZkQp2lDisZi9svyZl05koJJnduTfioJc1nOyLt9IzF5uLGOkAA7ax
+	Db4PyGY4/LjnoD3AXRBU/QzA33jyKDbqxV2DQu76Zg9hMcy8bImc/h6bIQEbpmedyQGQ5b9T4UR
+	ZvYP46IF8BYIpj4aHI9RZ748BWmbouczFXNXNC9V5uQBRQUjMhfSQbA1fxfdU5LlzWul//N5TTF
+	iXqmVI3ovc6IxuMTU9pI4/MMZCM3j22EhBISKNejhei9eGuit3Cd/TuFLhnY9xJsrk4K4dFYoyk
+	lU+FRZrWbxjbWyo4R9OBIKxMRrT5P6gZFpBMnM1zJIBhc1p2Or6Vta8OFAgDRGyrNAI=
+X-Received: by 2002:a05:6000:2c0f:b0:488:7b66:140c with SMTP id ffacd0b85a97d-48e26494127mr10574607f8f.28.1792681523947;
+        Thu, 22 Oct 2026 08:05:23 -0700 (PDT)
+X-Received: by 2002:a05:6000:2c0f:b0:488:7b66:140c with SMTP id ffacd0b85a97d-48e26494127mr10574548f8f.28.1792681523470;
+        Thu, 22 Oct 2026 08:05:23 -0700 (PDT)
+Received: from localhost ([46.6.57.114])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e258420e4sm12200375f8f.49.2026.10.22.08.05.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Oct 2026 08:05:22 -0700 (PDT)
+Date: Thu, 22 Oct 2026 17:05:21 +0200
+From: Albert Esteve <aesteve@redhat.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Sarannya S <quic_sarannya@oss.qualcomm.com>,
+	Pranav Mahesh Phansalkar <quic_pphansal@oss.qualcomm.com>,
+	Sudeepgoud Patil <quic_sudeepgo@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/4] soc: qcom: smem: validate private entry list walks
+Message-ID: <atomMZYbzh6phIFk@aesteve-thinkpadp1gen8.rmtes.csb>
+References: <20260924-port-smem-v3-0-fbc2ea81a654@redhat.com>
+ <20260924-port-smem-v3-2-fbc2ea81a654@redhat.com>
+ <a966fe74-4ad7-4212-a164-f9f6fe225dd2@oss.qualcomm.com>
+ <CADSE00L+bJoy5AYYB_0PuJE0NEs-_=y20kDUzPkA=sdD=APs+g@mail.gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -82,228 +122,80 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-GUID: a0zTaGxDWet6G_wF0GVxkk_haokAokVd
-X-Proofpoint-ORIG-GUID: a0zTaGxDWet6G_wF0GVxkk_haokAokVd
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfX1aGe1+/IF+in
- uajkG4x9AWNM8MWM7CWIF3vBi8VozVSeCYZv0tkW5ce3+DGGc1sm7FVMkIlGuGtMcYjSqvD+PEV
- +3bSbb8N8lbm8jPMBMHe/+KxNedtVC4=
-X-Authority-Analysis: v=2.4 cv=G4OJgNk5 c=1 sm=1 tr=0 ts=6ada259c cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=R-2MCYZGcSsRN6MK2dAA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA1OSBTYWx0ZWRfX6M1bwYpRZX7y
- kodrPxEM4JJU2VjDsegCmmpHhYKBYjPx78MsVmZ2WlGKcxHI5cYultZGs5iZ0LbG+A4eGdlU92a
- K8uLugJNo4bKldAjMq2DlGHFxqEJ0md+DR0BvRzkX3fIoC37dVQ5SsbAGUmyEboKpeTAHbtytgh
- vOrqIxnHWv91NgUpbn7rfp2tD7MHUOCqlW1MshZCfO+aIzYuvFlmAyyDTrdat/8Vca1i9RNbsCO
- bVtEO64htu219kDNGAwA5Ioe1Z+SKH4zmEEOtwbJOPHPs5C66Xa66Dlnx5XvbZ19IElwDRSgfqE
- MqiE5rzZb0RsPz0q5vWJaefSnldA6KCRj3TlRtHdkxSksoM+1syhiSI3RHVL9U9PGSM7K0TGcWv
- sRCAZx4o0mSd+dO9rxoDH1WBPuroJWFLe/KP6ytCmQICq+wOawZ2yIJaaPbqHkf4JjRuga7DzOk
- 5hnk2TAO3NqGp8LcLLg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_05,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0
- impostorscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220059
+In-Reply-To: <CADSE00L+bJoy5AYYB_0PuJE0NEs-_=y20kDUzPkA=sdD=APs+g@mail.gmail.com>
 
-Add WCD playback and capture DAI link to sound node. Add WCD
-codec node and corresponding soundwire nodes to perform
-headset playback and record.
+On Thu, Oct 22, 2026 at 10:20:05AM +0200, Albert Esteve wrote:
+> On Wed, Oct 21, 2026 at 2:39 PM Konrad Dybcio
+> <konrad.dybcio@oss.qualcomm.com> wrote:
+> >
+> > On 9/24/26 3:10 PM, Albert Esteve wrote:
+> > > From: Sarannya S <quic_sarannya@oss.qualcomm.com>
+> > >
+> > > When walking private entries, use the uncached/cached free offsets as
+> > > the list bounds, require room for a header before dereferencing, and
+> > > reject a next pointer that does not advance.
+> > >
+> > > Skip the cached list when the cached free offset is at the partition
+> > > end.
+> > >
+> > > Signed-off-by: Sarannya S <quic_sarannya@oss.qualcomm.com>
+> > > Signed-off-by: Pranav Mahesh Phansalkar <quic_pphansal@oss.qualcomm.com>
+> > > Signed-off-by: Sudeepgoud Patil <quic_sudeepgo@oss.qualcomm.com>
+> > > Signed-off-by: Albert Esteve <aesteve@redhat.com>
+> > > ---
+> >
+> > [...]
+> >
+> > > -     while (hdr < end) {
+> > > +     while ((hdr + 1) < end) {
+> >
+> > This will reject a header that's at the tail of the buffer, need
+> > to make this <= instead
+> 
+> Roger. This is a bit hard to read as intuitively I would have thought
+> end is the first free byte after the last header, so `(hdr + 1) < end`
+> should include it? End uses `offset_free_uncached` which should be
+> bigger than `hdr + 1` and it would not miss the tail. But being
+> defensive about its value seems like the right call. I will change it.
+> 
+> >
+> > [...]
+> >
+> > > -     while (e < end) {
+> > > +     while ((e + 1) < uncached_end) {
+> >
+> > Likewise
+> >
+> > [...]
+> >
+> > > -             e = cached_entry_next(e, part->cacheline);
+> > > +             next_e = cached_entry_next(e, part->cacheline);
+> > > +             if (WARN_ON(next_e >= e))
+> > > +                     return ERR_PTR(-EINVAL);
+> > > +
+> > > +             e = next_e;
+> > >       }
+> > >
+> > >       if (WARN_ON((void *)e < (void *)phdr))
+> >
+> > And LLM thinks should compare against cached_end
+> 
+> This is preexisting but I think the LLM is right, and it matches the
+> theme of the patch. I will change it.
 
----
-Changes since v2:
-    - Updated sound card model name to "QCS6490-RB3Gen2-Industrial-Mezz".
-    - Fixed changelog placement (moved to below ---).
+I've sent a new version and Sashiko still complains. Maybe we can just drop the check?
 
-Changes since v1:
-    - "audio-codec" node moved before "regulator".
-    - renaming node from "audio-codec-0" to "audio-codec".
-    - dt-nodes sorted alphabetically.
-    - patchwise run on the patch and indentation errors fixed.
+We can continue the conversation in the new version of the series. I wrote here because it had the context.
 
-Link: https://lore.kernel.org/all/eab2d0b8-a949-47d8-b953-fe34bd2fd869@kernel.org/ [v2]
-Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
----
- .../qcs6490-rb3gen2-industrial-mezzanine.dtso | 133 ++++++++++++++++++
- 1 file changed, 133 insertions(+)
+BR,
+Albert
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
-index 46bb52c667a4..e9713ec71dbf 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
-@@ -6,11 +6,35 @@
- /dts-v1/;
- /plugin/;
- #include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/sound/qcom,q6afe.h>
- #include <dt-bindings/clock/qcom,gcc-sc7280.h>
- #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- 
- &{/} {
- 
-+	wcd9370: audio-codec {
-+		compatible = "qcom,wcd9370-codec";
-+
-+		pinctrl-0 = <&wcd_default>;
-+		pinctrl-names = "default";
-+
-+		reset-gpios = <&tlmm 83 GPIO_ACTIVE_LOW>;
-+		vdd-buck-supply = <&vph_pwr>;
-+		vdd-rxtx-supply = <&vph_pwr>;
-+		vdd-px-supply = <&vph_pwr>;
-+		vdd-mic-bias-supply = <&vph_pwr>;
-+		qcom,micbias1-microvolt = <1800000>;
-+		qcom,micbias2-microvolt = <1800000>;
-+		qcom,micbias3-microvolt = <1800000>;
-+		qcom,micbias4-microvolt = <1800000>;
-+		qcom,hphl-jack-type-normally-closed = <1>;
-+		qcom,ground-jack-type-normally-closed = <1>;
-+		qcom,rx-device = <&wcd937x_rx>;
-+		qcom,tx-device = <&wcd937x_tx>;
-+
-+		#sound-dai-cells = <1>;
-+	};
-+
- 	vreg_0p9: regulator-0v9 {
- 		compatible = "regulator-fixed";
- 		regulator-name = "VREG_0P9";
-@@ -48,6 +72,14 @@ st33htpm0: tpm@0 {
- 	};
- };
- 
-+&lpass_rx_macro {
-+	status = "okay";
-+};
-+
-+&lpass_tx_macro {
-+	status = "okay";
-+};
-+
- &pcie0 {
- 	perst-gpios = <&tlmm 87 GPIO_ACTIVE_LOW>;
- 
-@@ -244,6 +276,101 @@ pcie@0,1 {
- 	};
- };
- 
-+&sound {
-+	model = "QCS6490-RB3Gen2-Industrial-Mezz";
-+	audio-routing = "SpkrLeft IN", "WSA_SPK1 OUT",
-+		"SpkrRight IN", "WSA_SPK2 OUT",
-+		"IN1_HPHL", "HPHL_OUT",
-+		"IN2_HPHR", "HPHR_OUT",
-+		"AMIC2", "MIC BIAS2",
-+		"TX SWR_ADC1", "ADC2_OUTPUT",
-+		"VA DMIC0", "vdd-micb",
-+		"VA DMIC1", "vdd-micb",
-+		"VA DMIC2", "vdd-micb",
-+		"VA DMIC3", "vdd-micb";
-+
-+	wcd-capture-dai-link {
-+		link-name = "WCD Capture";
-+
-+		codec {
-+			sound-dai = <&wcd9370 1>, <&swr1 0>, <&lpass_tx_macro 0>;
-+		};
-+
-+		cpu {
-+			sound-dai = <&q6apmbedai TX_CODEC_DMA_TX_3>;
-+		};
-+
-+		platform {
-+			sound-dai = <&q6apm>;
-+		};
-+	};
-+
-+	wcd-playback-dai-link {
-+		link-name = "WCD Playback";
-+
-+		codec {
-+			sound-dai = <&wcd9370 0>, <&swr0 0>, <&lpass_rx_macro 0>;
-+		};
-+
-+		cpu {
-+			sound-dai = <&q6apmbedai RX_CODEC_DMA_RX_0>;
-+		};
-+
-+		platform {
-+			sound-dai = <&q6apm>;
-+		};
-+	};
-+};
-+
-+&swr0 {
-+	status = "okay";
-+
-+	wcd937x_rx: codec@0,4 {
-+		compatible = "sdw20217010a00";
-+		reg = <0 4>;
-+
-+		/*
-+		 * WCD9370 RX Port 1 (HPH_L/R)       <==>    SWR1 Port 1 (HPH_L/R)
-+		 * WCD9370 RX Port 2 (CLSH)          <==>    SWR1 Port 2 (CLSH)
-+		 * WCD9370 RX Port 3 (COMP_L/R)      <==>    SWR1 Port 3 (COMP_L/R)
-+		 * WCD9370 RX Port 4 (LO)            <==>    SWR1 Port 4 (LO)
-+		 * WCD9370 RX Port 5 (DSD_L/R)       <==>    SWR1 Port 5 (DSD)
-+		 */
-+		qcom,rx-port-mapping = <1 2 3 4 5>;
-+
-+		/*
-+		 * Static channels mapping between slave and master rx port channels.
-+		 * In the order of slave port channels, which is
-+		 * hph_l, hph_r, clsh, comp_l, comp_r, lo, dsd_r, dsd_l.
-+		 */
-+		qcom,rx-channel-mapping = /bits/ 8 <1 2 1 1 2 1 1 2>;
-+	};
-+};
-+
-+&swr1 {
-+	status = "okay";
-+
-+	wcd937x_tx: codec@0,3 {
-+		compatible = "sdw20217010a00";
-+		reg = <0 3>;
-+
-+		/*
-+		 * WCD9370 TX Port 1 (ADC1)               <=> SWR2 Port 2
-+		 * WCD9370 TX Port 2 (ADC2, 3)            <=> SWR2 Port 2
-+		 * WCD9370 TX Port 3 (DMIC0,1,2,3 & MBHC) <=> SWR2 Port 3
-+		 * WCD9370 TX Port 4 (DMIC4,5,6,7)        <=> SWR2 Port 4
-+		 */
-+		qcom,tx-port-mapping = <1 1 2 3>;
-+
-+		/*
-+		 * Static channel mapping between slave and master tx port channels.
-+		 * In the order of slave port channels which is adc1, adc2, adc3,
-+		 * mic0, dmic1, mbhc, dmic2, dmic3, dmci4, dmic5, dmic6, dmic7.
-+		 */
-+		qcom,tx-channel-mapping = /bits/ 8 <1 2 1 1 2 3 3 4 1 2 3 4>;
-+	};
-+};
-+
- &tlmm {
- 	pcie0_tc9563_resx_n: pcie0-tc9563-resx-state {
- 		pins = "gpio78";
-@@ -283,6 +410,12 @@ pcie1_tc9563_resx_n: pcie1-tc9563-resx-state {
- 		output-enable;
- 	};
- 
-+	wcd_default: wcd-reset-n-active-state {
-+		pins = "gpio83";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
- };
- 
- &wifi {
--- 
-2.34.1
+> 
+> >
+> > Konrad
+> >
+> 
 
