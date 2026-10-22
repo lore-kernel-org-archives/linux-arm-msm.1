@@ -1,114 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.170
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792697241;
-	b=J6pi4yKHFWqWr4hFTsdtdwYYbeB7QgW2eskBq6NN1LPdJUZ2sdz43EWNgSwBJyOlIdTR
-	 DzAS0U4D7klENw0JKrtQtB1Z1UmusWh8bLoXDF7ukG81tDjx7fLvbo0I6eJmX0TJ+/1M5
-	 sAYFGbvggc1VZpDcE67MKdy98hts14F/EXNWJzvJQJsDkzPYeFn5JiEvgbWVDurFliXM1
-	 +YSqrQLhu+0TogC6izJCtFdkQMAU7mHdxGt3QpuF/s3uDrUfPQozM9T6wU3vPMxhW0KMa
-	 N/OGJ1vtN/4a7tKLQbaLsoKR+d/J/5ctHphte0v9GYLQ8IAb1alCwbltNCXdg99xabA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792697241;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=UvQHobgH8Zb4rHJc4CXfEofhf12rBgJ9G+UkmAWeH18=;
-	b=1ysRSJVGnoIPxl0EZnuuNcpCvcFEAttIMv+25VMoeNfyH2vjIpdY3i3JkBqAQL0SJLe1
-	 9p6c0yKUA84W7+PnOr24Jg92ReXLVMgBFdB4AZ2csbUgSwIupyg00bicMaR8YQMhY9IO6
-	 YIU5el4BUOgVe6t3uxNsvwJg1CXKZ3UkQAy9E/kwQ+UQHjxUJxLcpGypsj/SL1pxFNYac
-	 qF8gre1xkDw4MON3RFvdThr1iT7NFWJ1yb7QYIlbYbCea/TIaemHSdo6fs/hfn7rZiG2x
-	 0YtydjOi6wRY83GRkmMQPufVslFV5Ki+ytWa5fqbDrMETS5/UbBP5ZPVSiHp1/MVYpQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=thinkoid.org;
-	spf=none smtp.mailfrom=thinkoid.org;
-	dkim=pass header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=zhfZQOTK;
-	arc=none smtp.remote-ip=209.85.222.170
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792697743;
+	b=qucqy7lfxJI1/kyh2WVQAYNqcQxfZBk0k0hRzT/l4pCi4glw0ANpmotCySJKmZaumbXY
+	 cZMwt83GlEIE5JQRkbd2cKPJtqNWH0uHBMsJw01+S/4Em5jFe6pcx9qV0tFljxWs9L8ej
+	 y7oGcOlOBzLm6678BzzYnJrjpPnX3rNVKLeNpeBdjmXOFB/nBVgdC1IN9xZp7lMlFX14C
+	 Xrd6y6zLojesshuFk/QG2A/pUkBfjTLq2j91xlgS8jO0tSg0pVk2fVsxdUzSWzxslb2a0
+	 Q4qnvkeTa1XdVPfKO7PiPhc0lphLLsqjEkh/+oKSqWHptziwyaHFx+iZaF9G/uQTlsg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792697743;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:Reply-To:From:Date:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=3SwfJRNDSzVGJ7LqS7tKEPXSzOdbiOhYhtULwpRYw6E=;
+	b=v28WvYGy/n2yTYJwGQnXvtGix5F/B46l0TNG6eNSPTnSO1BkYeiMKgBjWxLCA091PmbZ
+	 aXX88bniunsZjoPsTW+OwX6U0K9ovzNnb2O+wujDHK1gc1Rw2wjBVZhH4BAcIlIszRmIH
+	 roInnfHb6ODooLpknArtqHA8DPyxaNYlq8BypBCYfbN9IDiaU/fs28fCEr86tcm7Rz7MM
+	 QSbsrPYsZhDc3IQPc1qXn2Me4MUGh+vvnCPSbewg7PtuTiWyH4vFVrGGOp9aPgMj9Rj1e
+	 /g1b6QIB3l9Kl1Pn2jmFTA8SrhVPrAw8ecWnsoru8hwsoy5MrPNFfDYhDgWpEFaVCxw==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mJj+keHN;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gesej0k8;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56EAC606A31B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:27:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56EAC606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ED83606A319
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:35:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3ED83606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=zhfZQOTK
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-93f30660e69so11184685a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:27:20 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mJj+keHN;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gesej0k8
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69MIHOVu4086860
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:35:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:to; s=
+	qcppdkim1; bh=3SwfJRNDSzVGJ7LqS7tKEPXSzOdbiOhYhtULwpRYw6E=; b=mJ
+	j+keHNSH+HrHtN+S66aCnd6SQzwd3tiX/VF5obf+fngzx/S+z7OA8AXuiilvwpNG
+	DlJ9STTNLb7RYMnqMyTqdaJxMHURtiYZBb1ZYF0jm6/zGNM1kFrlK0MJyiQspGlP
+	qf7yy7K6NAc4sursKCyLXsXCm4W1pFsCOHBv88pAIfLedsZKp0SqsJu7kMhb4+JA
+	cRN1V3kDfHthFho+/6LFKhipbzLVrdmUnE5dahRmK2z1LtkRuV6nhQa8WPXwEYaU
+	08CmpYyoIzSVv9PT75DnrbtXmPDoL4rQOGH0l1OGcPcHFmnGi7gQ0rFCofXkets3
+	XeNAEBt4xA43I4Rrzp5g==
+Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com [209.85.160.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmtr937-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 19:35:42 +0000 (GMT)
+Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-448d51840c4so153487fac.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 12:35:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792697741; cv=none;
+        d=google.com; s=arc-20260327;
+        b=GJr6wYTVsdgGlwVO4XDU9s/dMiG4spEEQDhTsaLKgEQtA/aG9+UNTAjaVh0qMxS2DE
+         5suVQ9F0/JFcGFkt1/ZLFt3rLdYykIcvm1gnOzxd1kfMk/ifjExKMSDTW4TIFdj8lQ5i
+         fGhFdbk86jm4neLV1tdxt2LEIgdqWO3bfUxLnpwsF3R7d9QQq7iwgMmV13v7bPzEMWh/
+         U40eLRHK4NX416xEusmVQiHCuPzcOs2XeDdI5mnV9/USbH44RDjWnWwkodUv9V9U3u0/
+         XnQ1ODaL8XQy8g8/OjfCoQBcW12iAw6bLGHNRkiadTxebxGVkKivv/u6FB6Xh75VFpp4
+         yxcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=3SwfJRNDSzVGJ7LqS7tKEPXSzOdbiOhYhtULwpRYw6E=;
+        fh=YtujNNLBZPbNEgWSpU5rqt1qmP79bN7v8YEzkiz7+CI=;
+        b=PSM3mDBFuN4PL0ucbEU5Owv10qRghD/akkute9Q0ugbnosNA5+bkax/0DExCuGLrva
+         7ekzTfsNnfyy4dWFDQ5tMG+L87W8UVSzob1RpiSBDjkIeOkDC4SnZy0Q815PrJmk4h/0
+         ELJmahoSWIeRzHzi5J79hj/DBhQM5WEqrxTNgIhbQ/bmFB01IgjcnSNzmSUecOLpVBuD
+         +0Jl5CL578bVyAvY80Iwy0GUQLWGQSPR7N7FcI3UTZssgxGuRMuHCZ+wreDQFja7UH13
+         JIn1H7DaDK95GSeS20wgPP/N9EwLgKQOP6noWk/D5uK4Agu12UfmBuRYhrtug/qgiGkk
+         N+7A==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1792697239; x=1793302039; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UvQHobgH8Zb4rHJc4CXfEofhf12rBgJ9G+UkmAWeH18=;
-        b=zhfZQOTKLhfJXm5LG7URakF+NxBk8bk9htV9atsIWMIUWrU23y7Sfypddxdak+rC3i
-         PMYT/8uaey1X82aqk34aRLpVr2lJfr0AV634/gAmPx50zofgvvaTW+QNmNoCja4ZjVaL
-         02Nx8Bpbt+v1DsTKhFrexDMQGgpCYQjPIHqvvbCxam1OokDmFvqL2Zf8/2AY3S3aLOUW
-         jTRqtHAprU7w3Ia1FulRoOXZLlwn71GzVkf+/kB8LtXmBY1Y6fhfUSWgxlpTFRVIU4xE
-         s2NVxm4x4w5wU+lSdKeE4oHSfpC5VkQdC1Lh7ikpJgQbh1u39glIH6sgf/+glyqalNrw
-         6qNQ==
+        d=oss.qualcomm.com; s=google; t=1792697741; x=1793302541; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=3SwfJRNDSzVGJ7LqS7tKEPXSzOdbiOhYhtULwpRYw6E=;
+        b=gesej0k8xt5oBHOLKpngwvYAf0QLIMg4AN1lHh+56NHpyDmz7KChyJXvJMHeTv798P
+         9/kBzrqlebqSOuOpWRlTk3L2vdctpWArnqHPMNOMcJQJnzGaDqoTHlYnL9M5LzSl2jL9
+         3TPb5CegbUmicmwDmxRBoJfrGGVydO0AY64/m8bGQqGCq13pNif0avQlqbVz8V+YhFTO
+         DY1H8BpnDpDRIfLfclTVsme8e7T4rgn0W4wb72HP6iYXdRislpI9U1nQWuz1KUMkc1oM
+         9gbq6pxribgYN5qgarB3ARDI1utpPhtvPQjOq9DgDHgdiIXpj/OaC2l6KbdFWWcpunRw
+         mGDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792697239; x=1793302039;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UvQHobgH8Zb4rHJc4CXfEofhf12rBgJ9G+UkmAWeH18=;
-        b=TM/splVIkMniu6J+GQ/fTc0C0IhyRTUGPLtpRvpaKYxC+Vg3FziatHDppV2Jrp74DM
-         EWHgJgi3JRiKQvmRI/zMWY+d8s4qaIXHQ3TCrVtFb7Kvh79+vYmI4+95XaV0JZSoRJrw
-         LDGS1nVmbWbVFts5IiDXZ6aHVpgMFDRos9ghUAv8K86iY36TaOFVfcNoVHDLPs2hw/fD
-         CQcBZVaiCKNRcalxX86MNG0Vs2k6H++AHDW8fNcwA6fPMBdqGyTUWHAUY0a74kygZfyp
-         4pN9A6pyNrnqiY1/RUJtpJ7sTrIDmQdQPO1tbwCQ5JM2yfrtQWma27hGhLRcDnSVmrUx
-         N50A==
-X-Forwarded-Encrypted: i=1; AKwUvBxmw7WQ5bMtOroMGvNyxm6uPSVLMg9SR4lXoi/ogBwXl3RJ19juZvU8w46ev9lT5E6bsB2QsSSke0Aumg4L@vger.kernel.org
-X-Gm-Message-State: AFq9FYIEc+pwDDEn7U1b9+HpszTYfJbsPPDvZUnR19kUd1zETDXzSz1d
-	3+voH/RXBgqRI1nfrVJsfLPw8JOvs5jn1hrAALt3b1WZ9qVBt1nOa2Z/3RE3W88PLLU=
-X-Gm-Gg: AYBFou10s/vJ48QqbAUpsNDTlH0ERz9KS42tsYFlUx3fXGP5Xb4NGrIT9Gc9gFuqs/F
-	Co6ZVfjDCY7NL1Z7t4RGKP10xe78f3kUpI51wxxpV/AP3OahjAGKvP3kYXY3Yl4o5Cjs95EIscc
-	Uv4gZDZSt7SsibOGRLaKnCVrSsdKx2LLRtpInmXpJHftFOlAWOlJfafUvk0Hl3kThtCPD7XVq54
-	MRfLdHkOhEDNzM+dqtY2rMAfbYxo6cr+k4DJlDJHF8yP+jSG6x6P2tLTjEwKC/pnIn1m8ApvhZZ
-	/KRUzqDh/sGjRWL1ZwGuEVSTsX2Ywhaksas/xJkLCjhAGudTo5iO2tNKUddRnRxJK0B44Vc4pGT
-	YVfHqd9cbGn6wESj7nyArdTzx3sTpCGfZ7tsiNetwry/Uie2jM6X2mxhsch5rrEj/LPAaJQOFs7
-	Xl7c/mhbOYTSA+1tAc+LH/zsxOm31bwYHN6/vUgZ3Zzh7Ed1IV0+FtdHETUgD2dYG0eyRxhH9EL
-	Od2C83qaPHkaLgEJ+wminpF8LksSSKdyK4S
-X-Received: by 2002:a05:620a:44d3:b0:93e:fa30:f1dc with SMTP id af79cd13be357-93f6f8c01cemr79549185a.72.1792697238908;
-        Thu, 22 Oct 2026 12:27:18 -0700 (PDT)
-Received: from behemoth ([2605:a601:9b7d:cc00::c])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93f6fb82b87sm30290185a.13.2026.10.22.12.27.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 12:27:18 -0700 (PDT)
-From: Liviu Nicoara <lnicoara@thinkoid.org>
-To: Aleksandrs Vinarskis <alex@vinarskis.com>
-Cc: Michael Burch <me@michaelburch.net>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Tobias Heider <tobias.heider@canonical.com>,
-	Val Packett <val@packett.cool>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Stephan Gerhold <stephan.gerhold@linaro.org>,
-	linux-hardening@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v6 3/3] arm64: dts: qcom: x1e80100-dell-xps13-9345: introduce EC
-Date: Thu, 22 Oct 2026 15:27:09 -0400
-Message-ID: <20261022192709.12149-1-lnicoara@thinkoid.org>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <NCQ5O8k2_GpmJZBjDzgZL67uwdiYmmuSudO9VmdRaFTDq0u7aec6at00VYbzdwwSVvgJnLnGxewwp_TVO9oTjM2pAjP_LoiURf9JCIKXB-w=@vinarskis.com>
-References: <NCQ5O8k2_GpmJZBjDzgZL67uwdiYmmuSudO9VmdRaFTDq0u7aec6at00VYbzdwwSVvgJnLnGxewwp_TVO9oTjM2pAjP_LoiURf9JCIKXB-w=@vinarskis.com>
+        d=1e100.net; s=20260707; t=1792697741; x=1793302541;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3SwfJRNDSzVGJ7LqS7tKEPXSzOdbiOhYhtULwpRYw6E=;
+        b=FJ2EQ41SNWhIvHrLThThaoXsktgdBOvUe2YTl3xds5nPlIxg/3pCA8IxByqchqUXLj
+         w9KAjsHdHpjUqmHF+uKFMgCe9KZYzxH6RsVgP701DljrG2PCbg659EsSCCF4J3WR3D8V
+         SB48ZFA60YEXiAsMuq//ysTwbc7VS48DMi0seNxUxwQPi+TLgZEFfXWWD1j9FQugsYL2
+         Qsuxra4JZSSIdKr2tzh15g7ONbSwywDqXR0xSEpiYd6NB1Kr6zWJybNx4FgWaAekRPA1
+         k3ott/CYo2s2YAPunmnwNxwL/w3+rs+QUe5jVaU6XL+90wxaAVZwdwpUk49rem1Zz6rp
+         BG5g==
+X-Forwarded-Encrypted: i=1; AKwUvBxIH9nN95F0jINHqbzri9gZKOQfaMx01JQ6BubHMfC92Ggwo4egbtCsoxGDa/k8ilPGRkccZ+m0xwlU0I+b@vger.kernel.org
+X-Gm-Message-State: AFq9FYKrTjLE9VoGPKZ7P09wfYTHf94N1DluX7DAI7+Cohxu8ethus1j
+	kc8eT4jOKaeqstUhSnrEUWTAtkR3rEknTM/cJdtTnFYOgxOBWjMW8dgOhbgUGzVdpjNkCVA8QL8
+	96W26oHnmeyvZDjTogJ5Ai0aahYAI6wISMtvYX9OwIJGDlVWolcOrH7cGwWmxXiYCLidShZzvPR
+	GQDmREjrLBxNNQOZl7CvxOM7lHTUC6TAEwWYUSRomjgds=
+X-Gm-Gg: AYBFou2PfD2vOuJ7UZpToF3/YtbSp5GZYX1KqLzajjf33/pijijuLDcVZkPSuazkH7y
+	O8oZSx6osilfwjVcvXfnFlV9Qogh327JWvZiHtSyr0OUXfcF28ZoZhKWfofg4mqim5tFWgvF1no
+	A64YqOOBtAWibVytvcU6nEg20M9jrDq1awU2IsBRAU/G8tQd/RIE3XqnPA7w==
+X-Received: by 2002:a05:6871:331e:b0:4a6:8af0:74b9 with SMTP id 586e51a60fabf-4a7dc266251mr4232375fac.48.1792697741428;
+        Thu, 22 Oct 2026 12:35:41 -0700 (PDT)
+X-Received: by 2002:a05:6871:331e:b0:4a6:8af0:74b9 with SMTP id
+ 586e51a60fabf-4a7dc266251mr4232363fac.48.1792697740950; Thu, 22 Oct 2026
+ 12:35:40 -0700 (PDT)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,100 +127,85 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
+ <0e5df58a-e97f-474b-bd3b-9b1a24ae0c03@oss.qualcomm.com> <CAAnD8RZ4+BFkE_dubDr7cj14wUaOfYUYWMw3_cwS5G0SrTsU-g@mail.gmail.com>
+In-Reply-To: <CAAnD8RZ4+BFkE_dubDr7cj14wUaOfYUYWMw3_cwS5G0SrTsU-g@mail.gmail.com>
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 12:35:29 -0700
+X-Gm-Features: AclHuK8CVLxn2BPN0B2O3IHYYGVSXhUdwy0ODXqj91_c3jnfjNgQbjBJyzPiIqA
+Message-ID: <CACSVV01Y6jJB1YcJhYOUR6oBZFJ2Y0S92ZnDYH9HsziKg=9RmA@mail.gmail.com>
+Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
+To: Jeff Roach <jeff.roach0@gmail.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=Gt3XaU1C c=1 sm=1 tr=0 ts=6ada658e cx=c_pps
+ a=zPxD6eHSjdtQ/OcAcrOFGw==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
+ a=BHDWyJbENOWmE-A1rxEA:9 a=QEXdDO2ut3YA:10 a=y8BKWJGFn5sdPF1Y92-H:22
+X-Proofpoint-GUID: cft6SOytGxfaxBKiA1qpzncEItvXbT8E
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA3OCBTYWx0ZWRfX/uLxBqlHOn6e
+ rWs3gPHZ+fwqMrICVaN8m88QQSZEOSk2kYDg7zlJUYEEE0x7Pv6rBo/z0SPNbUvEADe7UO4vAJE
+ bUASxjPUckqCYMcPDN7E3NW9lvQO2SO6kM37wf+JSVRqbYcjwYE0QdAwW99aCxn+zUB8QRiqETd
+ DNFvTVDfebAlbDWs+wWx2kZDpciQjmXlIbTRkTzhNpsA7WaV9Q03EhiDOwM4BwIiklKKmG9+0qT
+ mMr5Q/iKuUlQK8Bv3fw/cANbcoL7hHKBi3mPoJHlT8Qe74WSKJ6dKxER/RE500CncGHWCUPa32P
+ h1R/gyk6Ey+fu/Adytlu3NRYD/nxiu3QlURO2mylb0JplWsp+gHTV1xPUnuxb/KbdukdYjm6NQF
+ 8hGET6PaiLOBpYzN9OfAcVCHW1521NGyiexmBS+4ubEJ9Gm5ZGtRrtBsnEA0vTwkjudhNf2NXba
+ 9k+60dm5kVmWoncVlpw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA3OCBTYWx0ZWRfXzd2wbecCBUsY
+ Rc3G1XHuSFko/LxXA3LfhZAFSc4cUBODf9C07/uiMNedR9sShd8giv/lq1xS8ZtcJ6YycguaF/b
+ nb+ovE9sDmLZWlKymsht0dB5sQNR+9U=
+X-Proofpoint-ORIG-GUID: cft6SOytGxfaxBKiA1qpzncEItvXbT8E
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_06,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 spamscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610220078
 
-On Thu, 22 Oct 2026 17:07:25 +0000, Aleksandrs Vinarskis wrote:
-> I do not think the left charger you identified is correct - how did
-> you arrive to that conclusion? Curious to compare to my method.
+On Thu, Oct 22, 2026 at 10:46=E2=80=AFAM Jeff Roach <jeff.roach0@gmail.com>=
+ wrote:
+>
+> On Thu, Oct 22, 2026 at 3:30=E2=80=AFAM Konrad Dybcio
+> <konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> > >    - The pm8xxx RTC probe fails with -ENOENT because this machine has=
+ no
+> > >      RTCInfo UEFI variable (qcom,uefi-rtc-info).
+> >
+> > Remove the property.
+>
+> Thanks, I tried that. With qcom,uefi-rtc-info removed from the
+> pmk8850 RTC node, rtc-pm8xxx probes fine and registers rtc0 (no more
+> -ENOENT), read-only as expected.
+>
+> But the raw counter is not wall-clock time on this machine. At boot it
+> read 16385826 s, i.e. 1970-07-09, roughly 190 days of uptime since
+> some earlier power event, and it ticks at 1 Hz. Since
+> CONFIG_RTC_HCTOSYS=3Dy runs at registration, the kernel sets the system
+> clock to 1970-07-09 early in boot; NTP corrects it later once the
+> network is up.
+>
+> So whatever the firmware/Windows use to turn the counter into real
+> time, it is not the RTCInfo variable: that variable does not exist in
+> UEFI on this laptop (checked via efivarfs in DT mode).
+>
+> Do you know where else the offset could be kept on these HP machines?
+> If there is no known location, would you rather the board DTS keep
+> qcom,uefi-rtc-info (probe fails until something creates RTCInfo) or
+> drop it (working but read-only rtc0 that reads 1970)?
 
-I am afraid my method was simpler and coarser than yours: one run per
-port, nineteen samples ten seconds apart, the charger feeding the
-system only (battery at 96 % and not charging), on a 7.2.6 kernel
-with all four GPIO channels in one DTB. The deltas over three minutes:
+We're going to need something different (not efi vars) for RTC on x2..
+but I don't think it would change anything in the per-board dts
 
-Channel                Left charger   Right charger
-0x14b  AMUX2_GPIO          +1.6           -0.9
-0x145  AMUX2_THM           +0.1           +3.4
-0x146  AMUX3_THM           +0.8           -0.1
-0x14a  AMUX1_GPIO          -0.2           +1.3
-0x144  AMUX1_THM           -0.1           +0.2
-0x148  AMUX5_THM           -0.2           +1.2
-0x147  AMUX4_THM           +0.1           +1.8
-0x14d  AMUX4_GPIO          +0.0           -0.0
-
-The other channels fell or held while 0x14b rose, so it was not the
-board warming as a whole. But 1.6 C in three minutes, against your
-2.3 C in ten seconds on the right, might mean that 0x14b is a sensor
-somewhere on the left side of the board, not necessarily on the left
-port's power path. Under SSD load it moved with 0x146 and fell with
-it in cool-down, which puts it close to the SSD. "Left charger" was
-my reading of the sign pattern. Your ten-second test is probably the
-better discriminator for a sensor on a power path. If nothing answers
-the left charger in ten seconds, the simpler reading is that the left
-port has no thermistor of its own among these seven.
-
-> pm8550_gpio_02 does NOT clearly follow. In your test you have
-> waited multiple minutes, which is enough to heat up a larger
-> area on the motherboard.
-
-Agreed. In your left run it was the only channel with a positive
-delta while the board drifted down, which is the same weak signal I
-had, and no more than that.
-
-On the two AMUX3/AMUX4 GPIO channels: neither carries a thermistor
-on this unit, and your tables say the same for yours. 0x14c reads
-130.048 C on every sample, the last row of the conversion table,
-where the driver clamps a voltage at or below the lowest it knows.
-Its input sits near 0 V. Windows' ADC configuration sets up only
-PM8550 GPIO3 and GPIO4 as analog inputs, for AMUX1 and AMUX2, so the
-pin behind AMUX3 is in its digital default, and PM8550's low GPIOs
-read back here as inputs with a 10 uA pull-down. 0x14d held 34.7 C
-within 0.1 C through both chargers and two load runs on this unit,
-and 35.8 to 36.0 C through every one of your tests, the hairdryer
-included. That is a biased pin, not a sensor. Both nodes can go.
-
-> ADC5_GEN3_AMUX1_GPIO_100K_PU - Likely "lpddr5_therm"
-
-I cannot separate 0x14a from 0x144 and 0x148 by heating. Under a
-one-core load reading a file from /dev/shm they rose 14.0, 14.4 and
-14.2 C in lockstep, while the SoC's mem TSENS zone rose 20 C. Your
-RAM stress warmed every PMIC die by 1 to 4 C as well, so it does not
-single out 0x14a either. The three sit with the SoC; which one is the
-memory I cannot tell.
-
-> Looks more like "sys_therm5" is the actual keyboard thermistor.
-
-Consistent with what I see. 0x147 is the coolest of the seven, 29 C
-at idle, and nearly indifferent to board loads: it gained 2.0 C where
-0x144 gained 9.2 under SSD I/O, and 2.5 C where 0x144 gained 14.4
-under the CPU load. A sensor away from the board, on the skin side,
-fits.
-
-On 0x146: under four minutes of direct-I/O reads it rose 8.2 C
-against 10.0 C on the NVMe's own sensor, the largest share of any
-channel, and it fell at once when the load stopped while the
-SoC-side channels kept rising. Under the CPU-only control its share
-halved. I would keep "ssd_conn_therm" on it with partial confidence,
-but I will not argue if it goes with the others.
-
-> Alternatively, I am leaning to drop the labels for anything we are
-> not sure about...
-
-Or just give them pirate names. Jk.
-
-Agreed. 0x145 as the right charger is what both of us measured.
-Everything else is a guess until the teardown. Numbering sys_therm
-from 1 matches Windows' SYS_THERM1 to 7, so that helps too.
-
-One consequence on my side: the 9345 thermal-zones patch
-(20261006185557.23016-1-lnicoara@thinkoid.org) names its zones
-chg-left on 0x14b and ssd on 0x146. I will respin it with neutral
-names for the zones that are not settled, so the two patches agree.
-
-Happy to test a v7, including a lid close on the EC interrupt line,
-which my v6 run did not cover.
-
-I love this laptop, but I will not open it up just to pinpoint the
-right thermistors' locations.
-
-Liviu
+BR,
+-R
