@@ -1,100 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792649722;
-	b=dTRq+9sTR1LOWPGjhDqO5TcGJiPKJKi9tzsJXDWL/mB0yC+vF2JqpcunM+eysu/16AG/
-	 sJRwFA5tEUnyHHqvGVXc3bkErlg44vXLV7nJbRZzbCy9Z+V9teQEBi2d06jcs80IaooFN
-	 P4QMkCgnYqP3ijyR4yLe5rtjD7Puo6SeBy/0oQRHbZcla4iSkHhTJeCsj+amV7koWraF3
-	 1PQMOA3/7rRJh38dasjNWEUdA6opA/QmDVlv4wAU6GrhxbQIL1sceYdYxgAtmIKH0u4Md
-	 WPhsxXmOfVDccHW/fx1TazrnrCL5fnpAjnrzh9+2gP78lJOrx94TS8YusN5FFZsrjSg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792649722;
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.45
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792653275;
+	b=CglfmvzSFDjoS3b2NJ9gBuVQwkmv0wzd5pUk0hT7RIXsRhyu89gaa3/0JJxSECIBwP7s
+	 9bTTodRqFLFS9xYdKd0WZyhu3GfYoEP9Wf1sId3o+GZYlDHnv5OpHooCCjX/XbrL/vF2a
+	 /7z8ykk6PhLi2YKT0ksdd0DJqc1izO31ub3/jnolkVyS7dWKcGcB6+GVMLEsQqDKpUw+X
+	 DUNSlZBmceJSXGP9MVNa+/uUIjh0An5SdAEnIMJe2TlCOIvILvA/FGYwQgy0osgFgInl+
+	 fkoiSg3iWFJM93l7VjrVJBuGu/BNAn3ko5NPRblyUo47EtvY13bWZVhjCqJywP9MMtQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792653275;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=tNAW4moukw1CSqvHk1qqjH8bwOSbgrDYX8YbwR8FDio=;
-	b=Wh8WPdU2RkEl7DeZxDWz00tZa9eb+lEO1VDhZe4IBWWN5+OgN8ETWOywkwmsQyg8Z4x5
-	 Y7eSkNXjIU9hYVUgdgb4JO2XQkGFnk8bZ3NYxfwZl94Ek9AVLzUhcdWWO6yKwcahnhSRJ
-	 wMFaFckuX5hHn1aRop3+LgK1D15xGHscd7iy4xjtuLuTNnOLIcDrDAfISaDB032aE4p21
-	 of3/NIKSu2nqN60Nq1FgFYD2sx9TBySi2MbNPE65MROqpTuo9WY+rAhz0c6iknCvMO/Qh
-	 BYVPF7AVj/f4wzD0mLes9uLtIzDKrPPRHAdrV3qeZn/lVEyi/JLWP31NJ1Nmnc6DVAA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=LeBgHuQ2F+lcGL0HOAeswGNlhahrF/21UKsiSHNd76o=;
+	b=O4QEkericJbg9i7hRQz8j5+OaAqa8kHi89St0dkq2G1WZ+ih8vGFmEuNAe8oHrzEx4Yi
+	 NE9et3AuaR3kMS3afUwfmwo6sxigc4boeGIO7yF/jVNrNyTIMas2r+JAmb/fg3r2go8xx
+	 o8DgReMfzdIENUsV6ZIWZX8zMVSKC7AtHYDnfQYChM/8Amk5enKVG7ogE/d7hDaVazuV5
+	 jxQl9QzeU5PamHQBy6Jb2dOI7wklC38eXN317GGewpvGrz9/zZGJy1dDg2mLwOAfN/0CA
+	 Z/mP6yv2GBENrEbHXL+hnFgASXyFtrbZoWI0ZDp1M/O2D/fc2GYN1Wd7ciM3yqg/HGg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cKTdbRlH;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=lDNVZ+xI;
+	arc=none smtp.remote-ip=74.125.82.45
+Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45FAF606A319
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 06:15:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 45FAF606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDC46606A31D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 07:14:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DDC46606A31D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cKTdbRlH
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-8b0e21048f8so14427817b3.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 21 Oct 2026 23:15:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792649721; cv=none;
-        d=google.com; s=arc-20260327;
-        b=ULpNpBjhO16gFloyb6ICQsbX9AGKiQIDD+2T018PoOYp3d0KHpRU+Ibn16nqGtfxqL
-         2M9+pT9WfED7iab6pfWhYwwY0i2vz08vFWJILe0/3JQiOw7m/8vlktcpMzs31bVG/eBr
-         XegLScC9aLTaePz3eT4kAJpFsyJ3f20VTQdiPMXswEpg8oQzkKLiQitni/OJF+IZBKBq
-         O0tVpDsWtE8Z9t2manzQnDZ4HvZ/SoCPadu7GjtL9XQE72qk1z8KRMPvtZyMUk4OBo89
-         pQQ4gzS1yYooeH+C6CTg7n1BmLQdRTDyKnOaGVmeS9mj2WH7AzYsgwo92ejJdW5mng7B
-         tGzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=tNAW4moukw1CSqvHk1qqjH8bwOSbgrDYX8YbwR8FDio=;
-        fh=9YXikjmYFulaqvJb+fkJSNOOQLhwsAQrL7xyHz2xWZI=;
-        b=b5lJ2iGFBGAZplmLMVOG1TpE+vBpm/XqBpIM2oJPA7PDFwTey+4qfjkdjdI3XezSbp
-         38LVfT8NsEC96E5SyWTX1DwHupcnr7UUptrnwIlhqUDRQagWY24v1gWJi710nfoUKV4k
-         8VgvA4oLCxFAT3YZSzw39I0pPSvWNQMOPoyDjuWJeIcMNK5AGMfTpEeNzqV6KlmT35Ez
-         W5xJNYleGQMSC/2cdELizavgWwXCs0acB/eAkbpXxjZDlAtOwP1d/PFx9zHqmYvSH1t3
-         1ONZMcquTRU19in2uR/0ds9DxMIS9o9XJ8N/+RX014ZJmNsgFzR3iWIRcc9/1m2dy5QV
-         peOA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=lDNVZ+xI
+Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-181516de561so247329c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 00:14:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792649721; x=1793254521; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=tNAW4moukw1CSqvHk1qqjH8bwOSbgrDYX8YbwR8FDio=;
-        b=cKTdbRlH93tw3PHlpA+KIqygaBRjO0n5TBKcvu5IkjSlTY7T8koruWcRN9DthktJ3+
-         l3d7ex8Dt3ArSl3mOX+SL1D9ICQdP9zY9W5kdqc1YW7e3/fZWFt0QgnDzNNysDsrD6i0
-         8oCyZbNM+StCCCXlaJ6tYb6DfJ57pi/FEphV0G/XG73LIqojiujgd4bG2UT15GdWbPvG
-         Or4hdqQCCVAe7pxQ+xYwhylXBjJtRKZTU3KtqwG8zNPOGBMqkYA41bHh69Xh5aTA4TsM
-         1NRemldPZKt78zGFT50bVGLW/JPFgG8LGy2Wb3Sqxl18l8UcSjrw+VeZDPOaf6eZE2Vm
-         v2DA==
+        d=gmail.com; s=20251104; t=1792653274; x=1793258074; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LeBgHuQ2F+lcGL0HOAeswGNlhahrF/21UKsiSHNd76o=;
+        b=lDNVZ+xI4TWk8YtbkTL11n92mW4AB3EEJcGsNKwMrnPi6zNYDDFQGLFaZGqqo+h4Tc
+         Durk78e1tFd31HvcAc9zIzRX9DHyAx/IADWbmbXIU8w+lDgNRVHEyKyR+jqxIk3U+uot
+         SKw2yQy22Ju4zXIBb0WPRCG9bTtsGCNtkOqU1A0hlE1geL4i+uM58BMz82zrPbZNMeFk
+         3xrsCOqmdOL5COho/iEgTPgolIROIIVEPDTwAgnDXjvHficbn/Z4YBODnJ1At2d0bxQ9
+         ARaKtFIKivQPgvJ3RL0W894tmTxyooiqbjwg7tcrUiLOlKbLnNqijx+Y1tvG+cFWf0uV
+         zapA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792649721; x=1793254521;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tNAW4moukw1CSqvHk1qqjH8bwOSbgrDYX8YbwR8FDio=;
-        b=HDpxFeClDTklAeE53JWp89AgvR73MWVa97qFAwfBeJtGoDGPvViIOMqaIBaBeiJwjo
-         vVBr7eV4fLocQZKAprRzde6NB42xK909bMcodIe7JalkSQSpXcSWFT5aLK69nuVAXPcz
-         SGdo8wQyCaWBKimX5725JAzwhMvB6bDHWEqltXu66OCqgBhbtQuG1fOMo3uV5ELxufYY
-         juTQfZfolKBr6XPGkAPYpR03oWu0DqZFTL5I/MafXnHVxwnbMrvt20b+BwusXbAB/eJs
-         23Jny8BlfEDh4IpE/W2wMEu7J0PpPTuKfpRY1s8BNrKWfwQzDT2Tc+3jhzKlHRpvh3+O
-         3UAg==
-X-Forwarded-Encrypted: i=1; AKwUvBxy8LqEgWdZ3VE0eDO0Wy7HvsmVCb+kE0l09A+ZPJFZU6SweXEWKyY8DBaPSxFf+NX0mC/wl71g/TF8D8Cj@vger.kernel.org
-X-Gm-Message-State: AFq9FYIKw/pBus/kl40oazOB7azkCwNyAfchxdNUwM2MWBAw85s92km0
-	QBbGuJJuzeIFBnCJC3Whn9CpIOoKFb3W9yFV3yKv65Jdx9RapEXumRTd00T+qZusrR4NDMvH/0t
-	XyKsw3oJMG+H6KrOK6HVDDz3+QbDNbxs=
-X-Gm-Gg: AYBFou2njOyxK5jIJ4O1DieNGeSOYFCisWUYi0PuSlBdqTaglktym23ZJ3I+zJ+X+9t
-	HKnVppNAmQ+h9UestiEoLjgHMolj8khv85lcKGfrQ67fvKeTxxhPNHifEtMezVTLK0npMP7LubU
-	Eb6+MEQKBBNF2vl5pXPprL/5/6IajEXayETvwBniKH8fouKlUWImSuX6iuXHr7NPPPt1f8skGSr
-	J/qTPUmw8WepiMLkpW6hhHkPXi56Gjd1f/NnnwjX782hyelErsSpKaiZtNJUGKjLxV+4sa7bxdZ
-	Q6lWSk2WVA8oB9CaxsFVho5l20uSMWCeHSh0DHnDMl1TRoA9p8P8HrSNq6r3sxozZQITsooxfl3
-	JE1+eVy1/Q/2qE1ER9kV50tu7DFtr4ny3
-X-Received: by 2002:a05:690c:ec7:b0:8ac:cbaa:1704 with SMTP id
- 00721157ae682-8b133fdcf05mr30804577b3.25.1792649721338; Wed, 21 Oct 2026
- 23:15:21 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792653274; x=1793258074;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LeBgHuQ2F+lcGL0HOAeswGNlhahrF/21UKsiSHNd76o=;
+        b=rbwNUIKV7sZ2Z9K4NhTGGgSHiLUrF6ESiGoh1Ox0rxMGaJVNN5tudrGUGmNiVtoRUQ
+         TPLZFnWm3PiRSAiYvNQIguyINKHlkqFf/8o1mf/6wjP1xHUnC0xSPHtjt3Yr4bHDAJ06
+         h/t9SNU1IVF3ncnQw7Jq7VVxlYxjm1S5gLrT8NHBAJBEc1I2vyM4xNnwS533b/1k+HRU
+         t2VkNbdVxJoUvb62vCHFUjM/DK3BBW/kYiiSmQ1Xb7HqH6Ma2CvcYjeHPZDGtitw1x0u
+         UnDEyUgWC9B9giZY0kdZjMDfsWfRuN7VvGxX3ymA9mtdc8GJY4t16lO4DJXDwtBtpg8W
+         VbNA==
+X-Forwarded-Encrypted: i=1; AKwUvBwQ526ldg5/iQj38604diLJoXmnU2onFhRxlWIfwav4JaoIQrY1KDemA18s4Nz7+p2bLIrM0xwnWzEMOuJN@vger.kernel.org
+X-Gm-Message-State: AFq9FYKcg7y0oXPhWwbowHnQsJ35d7sND0NSU0cOv4cVmm5k9HXiMrE4
+	bAfjU48QlAITXo+np+n2+2vXIt4BoKvlGclYbVHbkj0bTwzM68lMknO2
+X-Gm-Gg: AYBFou02FKsX49BPlXnWfnPqIBHFE4LZBoDaCGiJP1Hp8co0TuUSWXbOXSiq/0guRso
+	4K6PQeLpGzTRexbm+xkt+7x/Tt0jg/7DpIibssiWuilxIVYVbV1i4wEr+frgWNmdZ7IitaAgX2j
+	9LjTGLR2wbAxjUPMOmaDGnMBxxPBeFT53RDMjl1ITmSW2XaCtwse3YNRr4Up3w9QDKxjey4neM4
+	GFYZQjGk8fWrDSGc8/1hLbwi90NJCnsLSDRRAYqEBAC/wQFcVifsdoYsLIBs91vVRPmvBS7Ce0l
+	VaqR5p3xJ91xPWrAIzWsNpu8D9dIn0ixhTFGbJ2Uv4w9qFM1aTsDMlo24rcWcWzO3rjXm80Ttbn
+	V8+/GHLeGOC9FOdwJ8fQbl1xdEhW+SMCl58jPUC2xcr8x+K0nJ7IAzRX9f90Rh358xgEIcnjl8A
+	95ohLnDgaQN9s5KfP/eLDo0bSK28GBF2cqDhg3gj3I6dd+efvxoBIV1+0G/eMr7RUmsqtxb5if5
+	Xc19qIOUnlid5xbTbd4WgkgTz5Zu1s8KlsK3uVLSU9xC/g6JBdLdA==
+X-Received: by 2002:a05:7022:458b:b0:14e:d0ba:75af with SMTP id a92af1059eb24-192eebbb953mr2935796c88.6.1792653273782;
+        Thu, 22 Oct 2026 00:14:33 -0700 (PDT)
+Received: from fedora-x1e ([210.89.35.119])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1903bd6b7ccsm11112321c88.13.2026.10.22.00.14.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Oct 2026 00:14:33 -0700 (PDT)
+From: Saikiran <bjsaikiran@gmail.com>
+To: loic.poulain@oss.qualcomm.com
+Cc: rfoss@kernel.org,
+	andi.shyti@kernel.org,
+	sakari.ailus@linux.intel.com,
+	hansg@kernel.org,
+	bod@kernel.org,
+	mchehab@kernel.org,
+	vladimir.zapolskiy@linaro.org,
+	jishnu.prakash@oss.qualcomm.com,
+	birk.skyum@pm.me,
+	linux-i2c@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org
+Subject: [PATCH v1 0/2] i2c: qcom-cci, media: ov02c10: Fix camera power cycling
+Date: Thu, 22 Oct 2026 12:44:16 +0530
+Message-ID: <20261022071418.26895-1-bjsaikiran@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,37 +104,33 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <13181dfa-b92c-43b5-ae12-912abaf79c41@gmail.com>
- <20261013015728.43307-1-liujianfeng1994@gmail.com> <74d7c3dc-0880-40a4-b056-f9a089a0ddc4@oss.qualcomm.com>
-In-Reply-To: <74d7c3dc-0880-40a4-b056-f9a089a0ddc4@oss.qualcomm.com>
-From: Kaipeng Zeng <kaipeng94@gmail.com>
-Date: Thu, 22 Oct 2026 14:15:09 +0800
-X-Gm-Features: AclHuK_IAy1t3yMlza72vaYDqeOJBevwsP67Waq6VJ7l78GWxOLa1DEch8zh9BE
-Message-ID: <CAHk8ZdvrVt8TkZrSd7qyzi5AirL+FtwUpHT0QLcUd5qBJmhy+w@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] Add device tree for Acer Swift Go Pro AI
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Jianfeng Liu <liujianfeng1994@gmail.com>, jactry92@gmail.com, andersson@kernel.org, 
-	conor+dt@kernel.org, devicetree@vger.kernel.org, konradybcio@kernel.org, 
-	krzk+dt@kernel.org, linux-arm-msm@vger.kernel.org, robh@kernel.org, 
-	krzysztof.kozlowski@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Konrad,
+The OV02C10 camera on the Lenovo Yoga Slim 7x can fail to restart after
+streaming stops. The CCI runtime PM callbacks gate the controller clocks
+but leave the bus pins in their default state while suspended. The X1E80100
+device tree already defines a CCI sleep state with pull-downs for the bus
+pins, so select that state before suspending the controller and restore the
+default state on resume.
 
-Thanks for your reply.
+The OV02C10 driver also enables the sensor supplies before MCLK and disables
+MCLK before the supplies, with the required reset and startup timing. This
+series fixes the power transitions without adding a regulator-off delay or
+runtime autosuspend workaround.
 
-On Wed, Oct 21, 2026 at 8:48=E2=80=AFPM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
->
-> This makes it sound like the retailer made up / confused some names,
-> let's just go with what the manufacturer says
->
+Tested on Lenovo Yoga Slim 7x (Snapdragon X Elite): 20 consecutive Kamoso
+camera open/close cycles. The sensor entered runtime-active on each open and
+returned to runtime-suspended on each close. Both modified driver objects
+build cleanly against the running kernel configuration.
 
-Just want to make sure I don't misunderstand anything, if this is what
-you preferred:
-```
-model =3D "Acer Swift Go Pro AI (SFA14-11)";
-compatible =3D "acer,swift-sfa14-11", "qcom,x1e78100", "qcom,x1e80100";
-```
-Thanks.
+Saikiran (2):
+  i2c: qcom-cci: Select pinctrl states during runtime PM
+  media: ov02c10: Fix sensor power sequencing
+
+ drivers/i2c/busses/i2c-qcom-cci.c | 14 +++++++++++++-
+ drivers/media/i2c/ov02c10.c       | 20 +++++++++++---------
+ 2 files changed, 24 insertions(+), 10 deletions(-)
+
+-- 
+2.56.0
+
