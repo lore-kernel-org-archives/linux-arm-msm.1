@@ -1,92 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792687810;
-	b=jz8O6rHKScYuVUJrdg2IdDomfxKPDnePAkpLuxSI8mbN/bqXYVJSTpq2BAxyApJPh/iK
-	 SMqFIHIzy1Jkt1nDMprG/ZGQetAnN0IbKbYEvchBamRH56pRhkB+MRcBjcj9dyiwNuZqQ
-	 3O5wKnW608AX8TbDvxxHBz/BT//B9BNt3stax5VgIS37OV0VBvYdgdgfmoPYnZKdKyut5
-	 yzEWa/tp8ZozHgM8ctF3NPeUokBYASovNKs3PB8GYkHQv1D1xLFU/n7M4rzjzSdEmnby7
-	 6YAkPd1csJ7yWtfuoEHGxrOohKoHkTrYYVQJY/a+CedRyx9SrhHk1Un8kjgW7RVAxyA==
+	t=1792687907;
+	b=1pDTi7ovjuD7iiJrzT3m5+8zRChxJB9ZJZaHghp+3rpJijN07C/sz/AizZnfZEXDyG8u
+	 ViOQkUgMcdG6SeQLT5s6q3iUiPHeK8K6KP1rUsZz003pe2jinqC7HS7DT/QePweKdkQtR
+	 g/HyI7ReprhwmYxhsv8eHzvLT7uJS8NKyU6IDtH9hmOQEdvaUtGJfMJ9JUXiId7Cvr9i7
+	 m7JM5o9Ac8Yx+kV4K/lJTqdXD67Hubg+vCOZC2yoab2um6hbRiKAKW/855BFVACnF5Nmb
+	 MQmK4TFukjN7d4PM095r6Yr/N5QUlQTiTeG/nzhiA2GAlSR5IEE0ucbdFr2WnbYJOQQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792687810;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792687907;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=DYshgIa6KnBet2+0IXua2x2TyzIJmXFM77y+p9+FuZQ=;
-	b=XyQib1CDrEZbBxGa4nch815jIZrjZM+mR4+lat4UvDcS/T0A0OVa1E6dW3hZxzhpL4UI
-	 XSshSIYUWQ/yIieawi5krY5pByP+tuTgXZFW4AaPKgx0PcdHjivJlfGu9Qz1OxXGfBZ4r
-	 LHKVFy6E8UEtuf56dZTzcXYVyXqVJ1Rps2gVm1yIVUiL83DgXopdZcoLCM78C4QHNuBts
-	 R9HeztlLpw8NlMLthYi3enlXj/xu7I1NXQvEVoekJ6v5SXef8TQRcaiqG6HQbzJnBVs+c
-	 7BfytYLsAsrXZCsoHcGmbnj6Bb4bxzxZkbLMO4CDQ/a1vXeitZVvdH6/I3dQBOEaTOg==
+	bh=MDRQGAeJLdbef9dVZwQAv7nGIbRRq1DpVqeg51obZuA=;
+	b=Kr2yrIw6RJlQKY7PawVT1GnUtCY++dpVX35KTUU2XxUBNR/F52JR4P4drjxM9+wEfo8O
+	 YAc9bhN46SGqax03OuW4ndRIWQWGeMhvb8luWf90ahWfWda6hwBDdad6ilzijE/86vtwI
+	 wzlmHUHh9HUc9yUNxWIr5VxFMCMOomlg4ODSLocQ8GS1IAuSwO2KJ+wVgB8n3AJN+MJsc
+	 id8tf8d1JL/9D5SqzIKQhHXD7W+oXaKBe+6ZXQnLmcG/w6ee/NosppbgcootS14+dXACU
+	 KDuinFElbyn3EV3J9A+kcJRD830PGTK1Tb4LovJVpMNGzRKfYCZwVqpYTMIr33RbxAw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="nus/qRN7";
-	arc=none smtp.remote-ip=209.85.216.52
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=KBp3mBBV;
+	arc=none smtp.remote-ip=74.125.82.53
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44962606A323
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:50:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 44962606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4967606A31A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:51:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4967606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=nus/qRN7
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3ac77270fbfso20057a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:50:10 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=KBp3mBBV
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-18cdcfc05ffso2335086c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792687809; x=1793292609; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1792687906; x=1793292706; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=DYshgIa6KnBet2+0IXua2x2TyzIJmXFM77y+p9+FuZQ=;
-        b=nus/qRN7Tkld78bj3tzJ6Nx4QFUDBHzOCLPO/PimuYIVcI7+dVmbPTw7K9WR+Jsww3
-         o7DIsENk8rW7Peienxm8dB/tzVLd5Vum320SXU7uJN8ykGHXnF6A9vM9/seZ5upCMI77
-         m+VXwJstz78OED2Wq1Yq4JlRUMInBKRz9RzW5nBLHcFqSuJqLV2cFs2/QOiQkG6p9/w3
-         RHBT88gK6TMEWYhIwnZGHIO7vBEzyJLuknEwElthdRTi4tTPLnmv2Tk7JZaaGmpQKk1V
-         TDX91oF8kDMwXi1IIH+Kivp5fBeXZCzYQqAmPkLrj3yLFa1Mfm/+nqPlefMpKcovBv54
-         qb3Q==
+        bh=MDRQGAeJLdbef9dVZwQAv7nGIbRRq1DpVqeg51obZuA=;
+        b=KBp3mBBVD8mfQPf1xPzMq78aeOa7OjwZrfrkFTLv2MOomwMfKo99PpbcsyR98PDW6g
+         tlLlCzCxgP+Il1BNJNs21b8d88NZyIipvWgy701LcDZjekp2TPyi5kfoqZfNifcoLnQv
+         pCVLLkfC4iJTo11uUocrgB6P+bNIQhMrcr3Cv9WAYYPQZkoL0MmkkQ7cBgqIb1s5+SD/
+         LdLxXBZC6br+p7I05cm4zZ1V/+dSp/OcLLSiBU5OkH5QNaEfFB4qR6ZPQX1+MzBum8nj
+         vJ8XEp1KCdtY9mQCDytv2jub6UXE3/+3BsU17StIu8Qf4QJpxIAuxzHzaPZxmwuEzTC1
+         UUzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792687809; x=1793292609;
+        d=1e100.net; s=20260707; t=1792687906; x=1793292706;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DYshgIa6KnBet2+0IXua2x2TyzIJmXFM77y+p9+FuZQ=;
-        b=cZBV4O0uOdicRpvPa+Ui6ZzXUHmemVHjTWO8i2C/FDwSP+Y8ZZz+u1KphtFZrS8pm1
-         ntV8wzxn3fzUCdT1h633FCDNXNgyRreZa5KHdlS1S42l2jHwVynhMUrwHqX68QKf/mRt
-         JcWn9C+qsN3MQ/JoULXUt/yVwDGOFfgjMfVvH10qoUMc0g+DQPZziFR2CxvLRvdrB5xj
-         zGrLqvZgypbOK6kQvFv4xmRr/7+M41Th7eTRRTtQVSrS909Vy2taiFgvbP1Ajh1VN2kY
-         enVUIywuDIupSvkN4/H08YfJbAPG6IoncUQMy2jL1gxYicPkK8L2MYekA0TWvZkN0szs
-         M6pQ==
-X-Forwarded-Encrypted: i=1; AKwUvByZqh79B4rRG2/Tiebxk2Rr2UlNXubkLCtHI1JY6J7YEZkRGkHSk9Ua36xPP7OA3JpoXOHw7HdbAU6lWqGT@vger.kernel.org
-X-Gm-Message-State: AFq9FYIqRxYNBijZYfULXxzbS+Ug2tW6Q3T2NbLpbE2xQdRsiucCTLdQ
-	tR7Cb7o7zNUzvr5sVw65yasxAKIZlEogPCowH1VnBPT1MgocR6FxuoJ8
-X-Gm-Gg: AYBFou0O2wBmdHJSj8pupC0Q6ilEvhqa26OI3Uv/Frt1GXPgN8Ochg9jTbJyxC9nXI7
-	SDp8NmXSDCNiBbkGTnKQlly63RXGfuGApmWOFmjD5Hi30ZKB1sjYMMVm3+/0ZXoV7lP3tGC+RWc
-	rtfV15JeC75t4ZUTA+MMxHwV0CnV6h8KwUPDP3g5bZznMKWuhPJl6zkcWWfBeOE4O5vbprHJADj
-	yU2A9sePZyvlOmjootWw+oIAk1U3QiWhe6WQL+lxWjJF/pni6M2r6LC5O0X9LtgNBnJAflKDA+j
-	PyKrYbeU4Z7qCrmY+GavpCIltjlbNiX7Umcxcd27IblNfDu8KCDgIUYoiCEXhPCjtyvyGo97y2p
-	GM4sy9pY7ONMMlqX2RHWKS8qbiqSX+qfkPZYAo3CFOiIWRSrALyfRpTxRhcQ69ZrUdNugP59cuu
-	Bp131BhN3DvIO2oJYpFmGo8+eS039pa5QItlh6EeBD1gRcR+iRXRfM3qhIeYAWpV0dgaHM78Tm8
-	V4UXOMvtpLTj9kFr8Ef005qfS59ogxxuYpwsULztDFNpwPYeXpFOiiXT8C2766JZ4S2pU4e
-X-Received: by 2002:a17:90b:4d06:b0:3ac:9e76:aa93 with SMTP id 98e67ed59e1d1-3ad86dbc0c6mr4089294a91.7.1792687809336;
-        Thu, 22 Oct 2026 09:50:09 -0700 (PDT)
+        bh=MDRQGAeJLdbef9dVZwQAv7nGIbRRq1DpVqeg51obZuA=;
+        b=HfOfJ7LK/pHT7QPwhzc/gUNiEn2UnfjfwmC9kN7DFyC6GeTWTqMbOUPFNeZNoU8UZ/
+         HEMOnrwX7r6lgayXZ23FkxLVjALVcP9bryG8Ymn9gAoRegUvTgLjBjZMT2Vn9U3gtS0Z
+         P3qYM04UTn7REXGawfsK7dzmtNcyZqLo0xDrL/ceFZiED+c+97MHGKtYJQ2/ki9urnp/
+         eNszK7CJH2K5uA40vNFwF9TrdJ5Ar/3MceDeQ5SnmsVvHHva+eCXvLUwKuNsXNx+YFYV
+         ilR3cT56oMFtJ7PNPh9rpt6N/rH8goA+BxRutGOAUQxBizTVYhTZBXm853uNRZPAygm1
+         WssA==
+X-Forwarded-Encrypted: i=1; AKwUvByquBgeWseNtNm+VaD7A3RtE0lypwaur954hwTv8Wg4/fJf7HnJ5k29bRVhcakg+BTJ+ML83Z4Ue3hsviqP@vger.kernel.org
+X-Gm-Message-State: AFq9FYLTlpMgOiB08jeqJs/z6UP/mSj+gUvNV2YwAmqblcFVbACiqebN
+	uXaQL04xB7dp4wkt/ZbT2YZJ1PG8JUmC4uC6UGkkzqrmiGAySNKGfklH
+X-Gm-Gg: AYBFou0fhS6mDh0INzxyx//l9ItnED/Imtmghp+to3nunVLpjLMGSJKe8gWXDUoabSs
+	wdMwWf0qBlylk4hOuzMD0mcvTuQzBbvCRZJjFRuJf/Pi7hRkjJaaNFcxcOsIkpj3LSwXRdzRTF7
+	GdKwkjxgRcbfyVs1UfG3XZZBwJZr8CTFx8vZY4ttbWzPOY9X4SmxL3M1UhTf1WGRh/gM54Imxdl
+	f0FDqOs2fxFu26Dgn8cHqXVNZb/9IRh2ozxpg6DPOTV7B88WrLrhZlUiSlt7fwImLwFP8CVc9/Z
+	kD3FaXwLpbP1EI3R+yoatLFoLxNIIjfJw2dCR474rfinLKtGlSLE11xGa0ZOkNQg6iInPENof9L
+	YRDPvKBSBhR0BTdtYvOOdtysTgS2sr2YNwcGLeJaYHMzQdJK/a6sZh01Cli4hEWoAtSudlXobFj
+	iBNEqJWY/vrPXg/thV5v5t3GVE6e/tPu0hhNyBPHaeNA594U2fdncVD9RHsRCVJZE2eZ+Oy7fy5
+	MCuUfg/8Q/lMVn38sO109j8W/E+3kCeHFiEuA5nFpRNEAOMmqeYKD1cqfaenluKmmjUO14=
+X-Received: by 2002:a05:701b:42d4:20b0:191:444:425 with SMTP id a92af1059eb24-19104440440mr6489634c88.2.1792687905761;
+        Thu, 22 Oct 2026 09:51:45 -0700 (PDT)
 Received: from DESKTOP-NM9EKIA ([125.134.240.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ada48bb3b6sm5160804a91.13.2026.10.22.09.50.06
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1959dd144aasm46566c88.0.2026.10.22.09.51.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 09:50:07 -0700 (PDT)
+        Thu, 22 Oct 2026 09:51:44 -0700 (PDT)
 From: Joonhoe Kim <26rote@gmail.com>
-To: mani@kernel.org,
-	mkp@kernel.org
-Cc: James.Bottomley@HansenPartnership.com,
-	bvanassche@acm.org,
+To: heikki.krogerus@linux.intel.com,
+	gregkh@linuxfoundation.org
+Cc: neil.armstrong@linaro.org,
+	linux-usb@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] scsi: ufs: qcom: Reprogram ESI after a host controller reset
-Date: Fri, 23 Oct 2026 01:50:06 +0900
-Message-ID: <20261022165006.1275-1-26rote@gmail.com>
+Subject: [PATCH] usb: typec: mux: fsa4480: Keep the USB 2.0 switch on in DP-only modes
+Date: Fri, 23 Oct 2026 01:51:43 +0900
+Message-ID: <20261022165143.1327-1-26rote@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.5
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -99,94 +98,48 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-ufs_qcom_config_esi() returns early once the ESI interrupts are set up.
-ufshcd_config_mcq() also calls it after every host controller reset,
-which clears the ESI base address, the vector mask and ESI enable. After
-the error handler has reset the controller, the completions then arrive
-only on the legacy interrupt while mcq_esi_enabled stays set.
+DisplayPort pin assignments C and E give all four SuperSpeed lanes to
+DisplayPort, but the USB 2.0 D+/D- pair is not part of the pin
+assignment and stays available. The FSA4480 sits on that pair, and in
+these modes the driver turns its USB switch off, so a USB 2.0 hub or
+device behind a DisplayPort sink is disconnected as soon as the
+DisplayPort mode is set.
 
-Allocate the MSIs and request their interrupts only once, but program
-the ESI registers on every call. The MSI message is not cached for
-platform MSIs, so keep the one written at allocation.
+Configure the USB switch the same way in all DisplayPort modes.
 
-Fixes: 519b6274a777 ("scsi: ufs: qcom: Add MCQ ESI config vendor specific ops")
+Fixes: c7054c31c1c9 ("usb: typec: fsa4480: rework mux & switch setup to handle more states")
 Signed-off-by: Joonhoe Kim <26rote@gmail.com>
 ---
 Tested on a Lenovo Y700 Gen 5 (TB323FU, Kaanapali; out-of-tree board
-support) on v7.3-rc4 with commit b52d695d0620 ("scsi: ufs: core: Keep
-internal commands dispatchable during error handling") applied, forcing
-a full reset through the debugfs saved_err file: before,
-REG_UFS_MEM_CFG, ESILBA and ESIUBA read 0 after the reset and all
-completions came on the legacy interrupt; with this patch they come on
-the ESI interrupts again.
+support) with a USB-C monitor in pin assignment C: its USB 2.0 hub was
+disconnected when the mux was set; with this change the hub and the
+keyboard behind it stay connected.
 
- drivers/ufs/host/ufs-qcom.c | 12 +++++++++---
- drivers/ufs/host/ufs-qcom.h |  2 ++
- 2 files changed, 11 insertions(+), 3 deletions(-)
+ drivers/usb/typec/mux/fsa4480.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-index fee9b54ba5e1..ea2a106cbe26 100644
---- a/drivers/ufs/host/ufs-qcom.c
-+++ b/drivers/ufs/host/ufs-qcom.c
-@@ -2414,7 +2414,9 @@ static void ufs_qcom_write_msi_msg(struct msi_desc *desc, struct msi_msg *msg)
- {
- 	struct device *dev = msi_desc_to_dev(desc);
- 	struct ufs_hba *hba = dev_get_drvdata(dev);
-+	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
- 
-+	host->esi_msg = *msg;
- 	ufshcd_mcq_config_esi(hba, msg);
- }
- 
-@@ -2442,8 +2444,10 @@ static int ufs_qcom_config_esi(struct ufs_hba *hba)
- 	struct ufs_qcom_irq *qi;
- 	int nr_irqs, ret;
- 
--	if (host->esi_enabled)
--		return 0;
-+	if (host->esi_enabled) {
-+		ufshcd_mcq_config_esi(hba, &host->esi_msg);
-+		goto enable;
-+	}
- 
- 	/*
- 	 * 1. We only handle CQs as of now.
-@@ -2481,12 +2485,14 @@ static int ufs_qcom_config_esi(struct ufs_hba *hba)
- 		}
- 	}
- 
-+	host->esi_enabled = true;
-+
-+enable:
- 	if (host->hw_ver.major >= 6) {
- 		ufshcd_rmwl(hba, ESI_VEC_MASK, FIELD_PREP(ESI_VEC_MASK, MAX_ESI_VEC - 1),
- 			    REG_UFS_CFG3);
- 	}
- 	ufshcd_mcq_enable_esi(hba);
--	host->esi_enabled = true;
- 	return 0;
- }
- 
-diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
-index 944b2e532a09..d2647695abe3 100644
---- a/drivers/ufs/host/ufs-qcom.h
-+++ b/drivers/ufs/host/ufs-qcom.h
-@@ -5,6 +5,7 @@
- #ifndef UFS_QCOM_H_
- #define UFS_QCOM_H_
- 
-+#include <linux/msi.h>
- #include <linux/reset-controller.h>
- #include <linux/reset.h>
- #include <soc/qcom/ice.h>
-@@ -360,6 +361,7 @@ struct ufs_qcom_host {
- 	u32 phy_gear;
- 
- 	bool esi_enabled;
-+	struct msi_msg esi_msg;
- 
- 	u32 saved_tx_eq_g1_setting;
- 	u32 boot_spare_cfg;
+diff --git a/drivers/usb/typec/mux/fsa4480.c b/drivers/usb/typec/mux/fsa4480.c
+index bea0c1deec94..e05ab3c10c81 100644
+--- a/drivers/usb/typec/mux/fsa4480.c
++++ b/drivers/usb/typec/mux/fsa4480.c
+@@ -93,16 +93,9 @@ static int fsa4480_set(struct fsa4480 *fsa)
+ 		sel = FSA4480_SEL_USB;
+ 	} else if (fsa->svid) {
+ 		switch (fsa->mode) {
+-		/* DP Only */
+ 		case TYPEC_DP_STATE_C:
+-		case TYPEC_DP_STATE_E:
+-			enable |= FSA4480_ENABLE_SBU;
+-			if (reverse)
+-				sel = FSA4480_SEL_SBU_REVERSE;
+-			break;
+-
+-		/* DP + USB */
+ 		case TYPEC_DP_STATE_D:
++		case TYPEC_DP_STATE_E:
+ 		case TYPEC_DP_STATE_F:
+ 			enable |= FSA4480_ENABLE_USB | FSA4480_ENABLE_SBU;
+ 			sel = FSA4480_SEL_USB;
 
 base-commit: 2efb7a11f1aa4d2dc285fe2680cca22cb9f72f64
 -- 
