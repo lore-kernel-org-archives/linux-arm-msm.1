@@ -1,99 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792701359;
-	b=VCcWA+rmbX8vuIaExC+wsGqZfk5qRETHKAc+V0eNF3LTuzqwcKhCuf+CMfRIn3ny+9Ds
-	 njjCKhEo1bDyAW2ErQuWYsnAsYyg0Yan7uM7+4z5YYJ0oGnxVOLrjKVP1Tnj+nxRwocRo
-	 rcn1Nt6bnYabdqkKQA1baJKVOGlybzpZ2Ra5CZRufss96tpD7xlLJmZjiQArr+P9c9AB0
-	 bDS+WNCswgbldRKyJaGvkjHvUvWw6rZ+2Xv0P8Ic17U+l/5flgYTbNa9Ox51c2iDg5QPz
-	 fHQmEcJ08juhWeefwIcL02ffNO5bYFFE5UlzFV7KqZKa5C0GtL/+TpzsGuniBJeudXA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792701359;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
-	b=Kz1xou3p2pZvt5CFRTRWQk+22mPq9cb5v4K3AAQGBpTBsZDGh+JJAzYhg7a4as02L4Tz
-	 3DJ6RZIJihz/t8aAnavfkwA6Vq76yt9UN1hLiO0icEk2QF+f1saYfxzkF44FbNE5RLyru
-	 0W4Dz6JhL9bQ1V4xt+rfZCZIHd3KOo5O/nVPJBpS9V7zez8gEbilIwU7E/s3ad2FE3BwD
-	 iyzrJ8wwAinFXTdArO63i/Un0FRt+x7vFh8FMGmx+lW41kHxUQNv+tO9aers4Y5TUFEYv
-	 BcYpoXF2pke0R+3Y+xqakzirrBBwmU3wd6evgLRlK9sonvoqsLCXUVjiev1zFfoNoKQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cIydL7QE;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.175
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=109.224.244.107
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792704048;
+	b=1sZv3WRss+e5g0BitDto3Z0WtnfMmMbcVYBZey7v6w8lvS+lIywNBL3SIYkepE29MStU
+	 9OWRGbtXJ8y4MoHQGRh5ycASezOFSSJRXYud2sIteHO4kF3PFcgrOdHs4d/jkAwl2jXAF
+	 JUrliT8i91mULee2HLDF/xLu+RXKN6p/8iKw7bMixC/PkPuYBya11oOVulD68/qtYUXR4
+	 Au6bIuf7s9aDfwqZhyMELseekkyqnDPJBFnklkHO0d2Zz3QX1t5Qolx0xCHvkGIOopblx
+	 RrtCRD3Yr+8Z9bzqcxM8qVndbMKCb3wOHsclhybkd/ykkdIQjBxxpOXfUV3d0xcRJrQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792704048;
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
+	 Subject:Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=950KdLW0jnAJ0wqJwszXohKCZ8YD/JsTFwKjc2h3nTg=;
+	b=4f5/L/XAe2NvH8Kz2vSL6TSU5ZacF56ASFTYPVg2+PP/P7ggV33BzOQ0u3qLTqfbcexl
+	 tp3cf604a93ouHyf5uC8/oJ3iXRjZ3CXbZhQKj5K00zDRgx/X6QfQ5jFtlmG7DT8QlWK6
+	 zkW7TPaWpqT3uhFCdQXThdtJIizrqFyunUCTQLlEtwxSQjJJq9JbKuii/BnS3JsvDrPTI
+	 TdMx7l3PESWa5UCqrv1ropej0x4x6GCnRU+OAFUKTyphXpKD5iL3N7WV0d/dRO+JVPVG7
+	 /J+KKQio41CchTmQ0aF65bSiz6qFtoIVRYAHs7swWOc1VyAMgF8MxBHg+5jFqBuWACA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=Eq95cS4K;
+	arc=none smtp.remote-ip=109.224.244.107
+Received: from mail-244107.protonmail.ch (mail-244107.protonmail.ch [109.224.244.107])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1995606A320
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 20:35:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1995606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E74E3606A331
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 21:20:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E74E3606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cIydL7QE
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-8b0dba37a7fso2531937b3.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 13:35:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792701358; cv=none;
-        d=google.com; s=arc-20260327;
-        b=SHAby8Ns2QTyq6XWO0YkeFKBV8aDreiWYIpcpYgfSuH32o5G7IueqtRjRJR00Zno9u
-         uf9N3/EcfF6Dh/FRPWqnHtN5gsyEbfKjK1RcqP1W06561z6KL4LzLErs3XtMbo56eRnr
-         MqSjNEliW/rh5iq/03cg5u4KWPwG3DIikEncMHVBfGpIx4jD1uxjLbhVtQlbKD+tn0qi
-         hrE6Qn6c8kBGOIq6T6TCtrg8eN1R7AcA0rp5mvrztfRfL1qCwKCSdUcEfSdZYMttuD5c
-         j7KZ4sTeyTF+vxa8Sx+Lpa6Hk7V41nyOf8MlaztSAONgGH1KnN9Os+3vGAJSr6Zchbr2
-         qIMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
-        fh=QMHcqEJR9ethHbXf5ME9F58li0chVxDK9sX8SnFo5FY=;
-        b=d/JIgRbR6J3+mgx0hn+uPJIyjazHEP3nSupj+GJ9ze9DOgPsUV+74vFZGiC0nCNf3K
-         hmVQpYpnTwJVTIUQutAqQRftyT6ZIUN5t7VZ7K3fsgncbnYJmSPiZF6KlbvBQQCYQVXz
-         WGyLD9VJHwEf1V8w7f3Xq45USEwOFRejBCvJD8jgj4ZlTUF9Q9TCfbf3DrzLYtw9hB6D
-         RkOCYRINzSbJEccYAkHubLAvYC9RNWKjxPSB1X2qHTNZyZatuQmekKDYCZal0wJHQQAn
-         B5jBSd4kTcg4fMR2JK/dwmZOz3GE4df+r4jYuFgS1N1bdD/ytUhn12J9Hsd+/djq8/ad
-         TRUw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=Eq95cS4K
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792701358; x=1793306158; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
-        b=cIydL7QEMmCY8flsUamB32fs05+2ptLxtZZLT6mz28i3jQanOo20QchRyKcMSNhGCh
-         vfWHoa/dBxcWaWx4BjUJN9Xb9C1it5yllobIaf6gnLBvxu5wtgY8g6w14mQFoVKxND0B
-         nesCOq3x54OSB3glP1RztVydcHrgelrf3MsWaQA6zLz2GX3MBM+5+ZSIYx4Ybhe62iQo
-         EbDuuyvtXVbP04VzAgX/Dv6F4xMpujQDxP3qCAVF8eSvzJHvmux20sAVhuOjFXNdhqak
-         qWWBt/vPdTf9wJupcgaLPagwRyhIWSphjTg+MrI4IAmtVTgQKQ4jXiGL8x6l81CVCu4V
-         ytCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792701358; x=1793306158;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HnDYe3NHhf/4uICbOTOnoAX8q2Q8uj0G6Q6jfHYnHzk=;
-        b=CT5T8feYh0khoduI0srCRqyf8JnPV5PI1+pZjSMRV42A3DzOXejFCRi9tDGijvhoTs
-         LqUEOjHQ2YtRCHTXRtNV9i57Q4Z5ri5cDcT3NMMZSpme7j5k7X54i11vAS31R895pwXk
-         mMygqUgr+9nH7ND0iaxw8/O4QPxHNAzvIQKWFrZuOFjbKrYvyN/pRIT1CkaAo3BeE64M
-         4gcjhYfNdRpTaFV1BGkUIyXRM7+3vrxe9zfNSGteNVVzCayV6LdUYln52rtC0/VZdTv8
-         Bl8fZlbONHH6OaBXPDOnxfoVEvVGt0Gxg+xp61obT/NaIUmvVM/d+SkgKqLqkU2+O5z2
-         IybA==
-X-Gm-Message-State: AFq9FYKcd5uUwvoONZZgrX/XrhqNyHMRH6jAhwAgYf/IjrEEwpDtqCVv
-	FXWYYMePOacOtiRLYtU5rTf8eNOLYZQ4J+Ff4hSXX0UlNWrtgVR/0d84gfFzPmtETxATDgPpq6p
-	kmttkybDZ2WOKbXyRAK+9zo7j+tZStH9J7qKOqk/Pmg==
-X-Gm-Gg: AYBFou1zqh2mfKjpTdso++NyTOSVTAXuhPRuI4aVnZ7q+UCK1ipo+12KEu1ncNHG1mo
-	Q8LfHYDWIllhikTpFWozDHiU3b3azwB3sEunE6beQHXBTpgmMq4Q+Gt5oOocHqFhRskxFEiZ24q
-	tfpL5rhH9ZgZk9gWjy9fkVaVEbbeJj7lRNISp5LU+kIbd96dXdeITPzt2yrTTco7ZOTPk6XGt4t
-	XraZINwdUw34HiEixr+u7+wyfpoXvMnSnyDMRCsr/f07qlTDIpwRGoJgxyNxsmJXB7B2nzxkJ3O
-	d2bJrRHNFBUQFZYLgIcqA6lHLahFjALpTb0nq6NECkgCYvsiMk1yR0tZ/catuDSA+ZkSeR9NIYl
-	c9QEUg1BGBh6paYfPI1cpuUicwqvJnmq1hwPeRA==
-X-Received: by 2002:a05:690e:14c6:b0:679:abf5:1478 with SMTP id
- 956f58d0204a3-67a35b1015amr75503d50.50.1792701357664; Thu, 22 Oct 2026
- 13:35:57 -0700 (PDT)
+	d=michaelmcallister.org; s=protonmail2; t=1792704045; x=1792963245;
+	bh=950KdLW0jnAJ0wqJwszXohKCZ8YD/JsTFwKjc2h3nTg=;
+	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=Eq95cS4KS/2bjs6zmfBcXhbmO/Zs7UAmCpjGnzgiwQ/h7wdy6DhyXshgVFIN0EZ7n
+	 aDvRBO/04bvowaFjfvMZw/MtQok5+0PcUx4YH1HAS2VavlHlThP4UkDcB1U/2u/wOZ
+	 Lm3kB7VjjPqmXVYaSC6Vdd70BIKzesxxFn+yIXhVJXYrC5to83SHfdAIB2YyXRdnLs
+	 cP71iloVnOVA3w1x4mGXUgjmmcsHWW1jc8GeOI3LwdscXo6o1fGc2oZ0zQmLaVHOqi
+	 D6mQvo1vvhJaX8bYyGltEvvrzHyc9s0oZ2fhPuPzH0mOKLRyHgC4uQBMxHIdxMnF5n
+	 ACkRTDzsWnMTg==
+X-Pm-Submission-Id: 4j9fFl2wwdz1DFG0
+From: Michael McAllister <me@michaelmcallister.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Thu, 22 Oct 2026 21:40:27 +0100
+Subject: [PATCH 2/2] arm64: dts: qcom: Add Motorola Moto G10
+Message-ID: <9d30c98a7eb0e57b09f239e8276f6d84422d9fd4.1792703903.git.me@michaelmcallister.org>
+In-Reply-To: <cover.1792703903.git.me@michaelmcallister.org>
+References: <cover.1792703903.git.me@michaelmcallister.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,142 +67,493 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
-In-Reply-To: <CAAnD8Rb4ZZrHFWMJayabioB_8bOHh1mqZ5LCXZz0jTNGMA7UZQ@mail.gmail.com>
-From: Jeff Roach <jeff.roach0@gmail.com>
-Date: Thu, 22 Oct 2026 15:35:46 -0500
-X-Gm-Features: AclHuK8BQZdV2f1iffSFbYwwrKQTOhYGtR91ViuizkGRA5Tky2cU2koe5WWRIn4
-Message-ID: <CAAnD8RZKDiv7eW=63HP+obgwXEUCvoQLNzC+xa3quy3P=PT-QA@mail.gmail.com>
-Subject: Re: HP OmniBook X 16 (X2 Elite, Mahua): DT bring-up report and questions
-To: linux-arm-msm@vger.kernel.org, pankaj.patil@oss.qualcomm.com
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
-	"jagadeesh.kona@oss.qualcomm.com" <jagadeesh.kona@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-> +Abel is the fix for that out now?
->
->The fix was posted for usb gdsc but wider discussion is pending which
->might make the patch obsolete
->https://lore.kernel.org/all/20261016-glymur-usb-ret-on-v1-1->1790a523fd9c@=
-oss.qualcomm.com/
->Use this series for the usb context fault
+Add an initial board description for the SM4250-based Motorola Moto G10
+(codenamed capri), including eMMC, USB-C, buttons, GPU, Wi-Fi and
+Bluetooth. Use the firmware framebuffer until native panel support is
+available.
 
-Thanks, that fixes it. I applied "clk: qcom: gcc-glymur: Use
-PWRSTS_RET_ON flag for USB" (20261016-glymur-usb-ret-on-v1-1-
-1790a523fd9c@oss.qualcomm.com) to the Ubuntu 7.3 kernel (gcc-glymur.ko
-built out of tree) and disabled my workaround (unbinding the usb_hs
-controller before suspend) for the test.
+Describe the board-specific firmware carveouts and PSCI state IDs, and
+use the shared PM6125 and PMI632 definitions. Put the modem, ADSP and
+GPU firmware paths under qcom/motorola/capri/.
 
-Result over two s2idle suspend/resume cycles:
-- No arm-smmu context fault for SID 0xce0 and no "xHCI host not
-  responding / HC died" on resume.
-- The webcam on usb_hs (HP True Vision FHD Camera) stays connected
-  (only the normal "reset high-speed USB device" on resume) and gives a
-  picture in the camera app after resume.
-- Resume no longer has the ~10 s xHCI timeout, and the second suspend
-  succeeds (before, it failed with -22 from xhci-hcd once usb_hs had
-  died).
-- The other USB controllers, NVMe and Wi-Fi resume as before.
+Panel, touchscreen, amplifier, sound-card and battery-monitor support
+still depend on local drivers and are left for separate submissions.
 
-Deep (PSCI SYSTEM_SUSPEND) is still refused by the firmware here
-(-EOPNOTSUPP), so this is s2idle only.
+Signed-off-by: Michael McAllister <me@michaelmcallister.org>
+---
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/sm4250-motorola-capri.dts   | 452 ++++++++++++++++++
+ 2 files changed, 453 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
 
-Tested-by: Jeff Roach <jeff.roach0@gmail.com> # HP OmniBook X 16 (X2
-Elite, Mahua)
-
-Since this is outside the patch thread, please feel free to carry the
-tag over by hand.
-
-Thanks,
-Jeff Roach
-
-On Wed, Oct 21, 2026 at 5:34=E2=80=AFPM Jeff Roach <jeff.roach0@gmail.com> =
-wrote:
->
-> Hi all,
->
-> I have a device tree for the HP OmniBook X Laptop 16-cp1xxx (board
-> 8F46, Snapdragon X2 Elite 12-core, "qcom,mahua") that boots and runs a
-> full desktop. This is a bring-up report, not a patch: the DTS is
-> currently based on the Ubuntu linux-qcom-x1e 7.3 tree and still
-> carries my verification notes. I'd like to rebase it and send it
-> properly, and would welcome advice before I do.
->
-> The DTS sits on mahua.dtsi, uses the same PMIC deletions as
-> mahua-crd.dts, and copies board wiring from
-> glymur-hp-elitebook-x-g2q.dts. I checked it against this laptop's ACPI
-> tables where I could. DTS, notes and test results:
->
->   https://github.com/jeffroach0/omnibook-x16-linux
->
-> Disclosure: I'm not a kernel developer. Most of the analysis and the
-> DTS were done with an AI coding assistant (Claude); I did the testing
-> on the hardware and checked the results. I'll do my best to answer
-> questions and test things, but please be patient with me.
->
-> Working (kernel 7.3.0-21-qcom-x1e, Mesa 26.2.4):
-> - eDP OLED panel via msm (samsung,atna33xc20), DP-AUX backlight
-> - GPU (Adreno X2-85), with the workaround in (1) below
-> - Keyboard and touchpad (i2c-hid), lid, power key
-> - NVMe on pcie5; Wi-Fi QCC2072 on pcie4 (ath12k, modelled as a
->   pcie-m2-e-connector)
-> - Bluetooth QCC2072 on uart14, using the posted QCC2072 UART series
->   (btqca/hci_qca and pwrseq-pcie-m2 patches) built out of tree
-> - usb_0/usb_1 Type-C (SuperSpeed in both orientations, PD charging
->   through pmic-glink), usb_2 USB-A (no repeater node needed, UEFI leaves
->   it set up), usb_hs (webcam)
-> - ADSP/CDSP with OEM firmware from the Windows install; battery through
->   qcom_battmgr
-> - 2x WSA884x speakers on swr0 plus VA DMICs
-> - s2idle suspend
->
-> Issues and questions:
->
-> 1. GPU GMEM size on 3-slice Mahua. MSM_PARAM_GMEM_SIZE reports the
->    catalog's full (4-slice) GMEM, so Mesa's tiled rendering corrupts
->    the screen (garbage bands, diagonal half-drawn quads, and CCU write
->    translation faults from WebKit's Skia GPU raster). FD_MESA_DEBUG=3Dsys=
-mem
->    and TU_DEBUG=3Dsysmem make it clean. I think the a8xx slice-info chang=
-e
->    in linux-next ("report the active share" of GMEM) fixes this. Is it
->    going to be backported to stable?
->
-> 2. CPU frequency. scmi_cpufreq fails: "timed out in resp" and "Failed
->    to query supported version for protocol 0x13", probe -110. The SCMI
->    base protocol answers at boot ("Qualcomm:PDP0"). The perf
->    protocol never does. The clocks stay where UEFI left them (about 3.5
->    and 3.9 GHz). Is perf over SCMI expected to work on Mahua with
->    production firmware, or is something else needed?
->
-> 3. Suspend. PSCI SYSTEM_SUSPEND (deep) returns -EOPNOTSUPP, so s2idle
->    only. On resume from s2idle, usb_hs (a200000) gets an arm-smmu context
->    fault for SID 0xce0, then "xHCI host not responding ... HC died", and
->    every later suspend fails until reboot. Unbinding dwc3-qcom before
->    suspend and rebinding it after works around it. pcie4 also logs
->    "Timeout waiting for L2 entry! LTSSM 0x11" on suspend, but the link
->    recovers.
->
-> 4. Smaller things:
->    - "GICv3: SPI 4115 out of range (use ESPI?)" right after the SPMI
->      arbiter probes. I haven't tracked down which node causes it.
->    - The pm8xxx RTC probe fails with -ENOENT because this machine has no
->      RTCInfo UEFI variable (qcom,uefi-rtc-info).
->    - The headphone jack is a Qualcomm SoundWire SDCA codec (only in ACPI,
->      \_SB.ADSP.ADCM). I didn't try it.
->
-> For an upstream submission I assume the right base is the qcom
-> for-next tree, with a dt-bindings patch for "hp,omnibook-x16". Please
-> tell me if anything in the approach above (for example the /chosen
-> simple-framebuffer that keeps MMCX/MXC on before msm probes, or
-> dropping usb-role-switch while running host-only) shouldn't go
-> upstream as it is.
->
-> I'm happy to test patches and other things mentioned in this post on
-> this machine to the best of my and Claude's ability (mine being fairly
-> meager).
->
-> Thanks,
-> Jeff
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 88230c4e00..6f2dd88a14 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -383,6 +383,7 @@ shikra-iqs-evk-imx577-camera-dtbs	:= shikra-iqs-evk.dtb shikra-iqs-evk-imx577-ca
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk-imx577-camera.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk-imx577-camera.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-imx577-camera.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-motorola-capri.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
+diff --git a/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts b/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
+new file mode 100644
+index 0000000000..b079f0cdc8
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/sm4250-motorola-capri.dts
+@@ -0,0 +1,452 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
++/*
++ * Copyright (c) 2026 Michael McAllister <me@michaelmcallister.org>
++ *
++ * PM6125 regulator definitions derived from sm4250-oneplus-billie2.dts:
++ * Copyright (c) 2021 Iskren Chernev <iskren.chernev@gmail.com>
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include "sm4250.dtsi"
++#include "pm6125.dtsi"
++#include "pmi632.dtsi"
++
++/ {
++	model = "Motorola Moto G10";
++	compatible = "motorola,capri", "qcom,sm4250";
++
++	/* Used by the bootloader to select the board. */
++	qcom,msm-id = <0x1a1 0x10000>;
++	qcom,board-id = <0 0xb200>;
++
++	aliases {
++		display0 = &framebuffer0;
++		mmc0 = &sdhc_1;
++		serial0 = &uart3;
++	};
++
++	chosen {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		stdout-path = "display0";
++
++		framebuffer0: framebuffer@5c000000 {
++			compatible = "simple-framebuffer";
++			reg = <0 0x5c000000 0 (720 * 1600 * 4)>;
++			display = <&mdss>;
++			format = "a8r8g8b8";
++			height = <1600>;
++			stride = <(720 * 4)>;
++			vddio-supply = <&vreg_l9a>;
++			width = <720>;
++		};
++	};
++
++	gpio-keys {
++		compatible = "gpio-keys";
++		pinctrl-0 = <&volume_up_default>;
++		pinctrl-names = "default";
++
++		key-volume-up {
++			debounce-interval = <15>;
++			gpios = <&pm6125_gpios 5 GPIO_ACTIVE_LOW>;
++			label = "Volume Up";
++			linux,code = <KEY_VOLUMEUP>;
++			wakeup-source;
++		};
++	};
++};
++
++/* The stock firmware uses CPU mode 3 and affinity level 1 for these states. */
++&cluster_0_sleep_0 {
++	arm,psci-suspend-param = <0x41000023>;
++};
++
++&cluster_0_sleep_1 {
++	arm,psci-suspend-param = <0x41000043>;
++};
++
++&cluster_1_sleep_0 {
++	arm,psci-suspend-param = <0x41000023>;
++};
++
++&cluster_1_sleep_1 {
++	arm,psci-suspend-param = <0x41000043>;
++};
++
++&gpu {
++	status = "okay";
++};
++
++&gpu_zap_shader {
++	firmware-name = "qcom/motorola/capri/a610_zap.mdt";
++};
++
++&pil_cdsp_mem {
++	reg = <0 0x51a00000 0 0x800000>;
++};
++
++&pm6125_gpios {
++	volume_up_default: volume-up-state {
++		pins = "gpio5";
++		function = "normal";
++		bias-pull-up;
++		input-enable;
++		power-source = <0>;
++	};
++};
++
++&pmi632_typec {
++	status = "okay";
++
++	connector {
++		compatible = "usb-c-connector";
++		data-role = "dual";
++		pd-disable;
++		power-role = "dual";
++		self-powered;
++		typec-power-opmode = "default";
++		vbus-supply = <&pmi632_vbus>;
++
++		port {
++			pmi632_hs_in: endpoint {
++				remote-endpoint = <&usb_dwc3_hs>;
++			};
++		};
++	};
++};
++
++&pmi632_vbus {
++	regulator-min-microamp = <500000>;
++	regulator-max-microamp = <500000>;
++
++	status = "okay";
++};
++
++&pon_pwrkey {
++	status = "okay";
++};
++
++&pon_resin {
++	linux,code = <KEY_VOLUMEDOWN>;
++
++	status = "okay";
++};
++
++&qupv3_id_0 {
++	status = "okay";
++};
++
++&remoteproc_adsp {
++	firmware-name = "qcom/motorola/capri/adsp2.mdt";
++
++	status = "okay";
++};
++
++&remoteproc_mpss {
++	firmware-name = "qcom/motorola/capri/modem.mdt";
++
++	status = "okay";
++};
++
++&reserved_memory {
++	/delete-node/ memory@53800000;
++	/delete-node/ memory@56100000;
++	/delete-node/ memory@56110000;
++	/delete-node/ memory@56115000;
++
++	/* The ADSP and following carveouts differ from the SM6115 defaults. */
++	pil_adsp_mem: memory@52200000 {
++		reg = <0 0x52200000 0 0x1c00000>;
++		no-map;
++	};
++
++	pil_ipa_fw_mem: memory@53e00000 {
++		reg = <0 0x53e00000 0 0x10000>;
++		no-map;
++	};
++
++	pil_ipa_gsi_mem: memory@53e10000 {
++		reg = <0 0x53e10000 0 0x5000>;
++		no-map;
++	};
++
++	pil_gpu_mem: memory@53e15000 {
++		reg = <0 0x53e15000 0 0x2000>;
++		no-map;
++	};
++
++	/* Bootloader debug data. */
++	memory@aef9d800 {
++		reg = <0 0xaef9d800 0 0x62800>;
++		no-map;
++	};
++
++	ramoops@af000000 {
++		compatible = "ramoops";
++		reg = <0 0xaf000000 0 0xbf800>;
++		console-size = <0x40000>;
++		pmsg-size = <0x40000>;
++		record-size = <0x20000>;
++	};
++};
++
++&rpm_requests {
++	regulators-0 {
++		compatible = "qcom,rpm-pm6125-regulators";
++
++		vreg_s6a: s6 {
++			regulator-min-microvolt = <320000>;
++			regulator-max-microvolt = <1456000>;
++		};
++
++		vreg_s7a: s7 {
++			regulator-min-microvolt = <1280000>;
++			regulator-max-microvolt = <2040000>;
++		};
++
++		vreg_s8a: s8 {
++			regulator-min-microvolt = <1064000>;
++			regulator-max-microvolt = <1304000>;
++		};
++
++		vreg_l1a: l1 {
++			regulator-min-microvolt = <952000>;
++			regulator-max-microvolt = <1152000>;
++		};
++
++		vreg_l4a: l4 {
++			regulator-min-microvolt = <488000>;
++			regulator-max-microvolt = <1000000>;
++		};
++
++		vreg_l5a: l5 {
++			regulator-min-microvolt = <1648000>;
++			regulator-max-microvolt = <3056000>;
++		};
++
++		vreg_l6a: l6 {
++			regulator-min-microvolt = <576000>;
++			regulator-max-microvolt = <656000>;
++		};
++
++		vreg_l7a: l7 {
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1304000>;
++		};
++
++		vreg_l8a: l8 {
++			/* Handset ICNSS DT overrides CX/MX to 640 mV. */
++			regulator-min-microvolt = <640000>;
++			regulator-max-microvolt = <640000>;
++		};
++
++		vreg_l9a: l9 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			/* Display and touch share this rail with Bluetooth. */
++			regulator-boot-on;
++		};
++
++		vreg_l10a: l10 {
++			regulator-min-microvolt = <1704000>;
++			regulator-max-microvolt = <1904000>;
++		};
++
++		vreg_l11a: l11 {
++			regulator-min-microvolt = <1704000>;
++			regulator-max-microvolt = <1952000>;
++		};
++
++		vreg_l12a: l12 {
++			regulator-min-microvolt = <1624000>;
++			regulator-max-microvolt = <1984000>;
++		};
++
++		vreg_l13a: l13 {
++			regulator-min-microvolt = <1504000>;
++			regulator-max-microvolt = <1952000>;
++		};
++
++		vreg_l14a: l14 {
++			regulator-min-microvolt = <1704000>;
++			regulator-max-microvolt = <1904000>;
++		};
++
++		vreg_l15a: l15 {
++			regulator-min-microvolt = <2920000>;
++			regulator-max-microvolt = <3232000>;
++		};
++
++		vreg_l16a: l16 {
++			/* ICNSS WCN3990 XO supply setting. */
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
++
++		vreg_l17a: l17 {
++			regulator-min-microvolt = <1304000>;
++			regulator-max-microvolt = <1304000>;
++		};
++
++		vreg_l18a: l18 {
++			regulator-min-microvolt = <1104000>;
++			regulator-max-microvolt = <1304000>;
++		};
++
++		vreg_l19a: l19 {
++			regulator-min-microvolt = <1624000>;
++			regulator-max-microvolt = <3304000>;
++		};
++
++		vreg_l20a: l20 {
++			regulator-min-microvolt = <1624000>;
++			regulator-max-microvolt = <3304000>;
++		};
++
++		vreg_l21a: l21 {
++			regulator-min-microvolt = <2400000>;
++			regulator-max-microvolt = <3544000>;
++		};
++
++		vreg_l22a: l22 {
++			regulator-min-microvolt = <2952000>;
++			regulator-max-microvolt = <3304000>;
++		};
++
++		vreg_l23a: l23 {
++			regulator-min-microvolt = <3296000>;
++			regulator-max-microvolt = <3304000>;
++		};
++
++		vreg_l24a: l24 {
++			regulator-min-microvolt = <2704000>;
++			regulator-max-microvolt = <3544000>;
++		};
++	};
++};
++
++&sdhc_1 {
++	pinctrl-0 = <&sdc1_state_on>;
++	pinctrl-1 = <&sdc1_state_off>;
++	pinctrl-names = "default", "sleep";
++	vmmc-supply = <&vreg_l24a>;
++	vqmmc-supply = <&vreg_l11a>;
++	max-frequency = <50000000>;
++	non-removable;
++
++	status = "okay";
++};
++
++&sleep_clk {
++	clock-frequency = <32764>;
++};
++
++&tlmm {
++	gpio-reserved-ranges = <14 4>;
++
++	bt_uart_default: bt-uart-default-state {
++		cts-pins {
++			pins = "gpio8";
++			function = "qup3";
++			bias-disable;
++			drive-strength = <2>;
++		};
++
++		rts-pins {
++			pins = "gpio9";
++			function = "qup3";
++			bias-pull-down;
++			drive-strength = <2>;
++		};
++
++		tx-rx-pins {
++			pins = "gpio10", "gpio11";
++			function = "qup3";
++			/* Keep RX idle high while the controller TX is tristated. */
++			bias-pull-up;
++			drive-strength = <2>;
++		};
++	};
++
++	bt_uart_sleep: bt-uart-sleep-state {
++		cts-rts-pins {
++			pins = "gpio8", "gpio9";
++			function = "gpio";
++			bias-pull-down;
++			drive-strength = <2>;
++		};
++
++		tx-rx-pins {
++			pins = "gpio10", "gpio11";
++			function = "gpio";
++			bias-pull-up;
++			drive-strength = <2>;
++		};
++	};
++};
++
++&uart3 {
++	interrupts-extended = <&intc GIC_SPI 330 IRQ_TYPE_LEVEL_HIGH>,
++			      <&tlmm 11 IRQ_TYPE_EDGE_FALLING>;
++	pinctrl-0 = <&bt_uart_default>;
++	pinctrl-1 = <&bt_uart_sleep>;
++	pinctrl-names = "default", "sleep";
++
++	status = "okay";
++
++	bluetooth {
++		compatible = "qcom,wcn3950-bt";
++		max-speed = <3000000>;
++		vddch0-supply = <&vreg_l23a>;
++		vddio-supply = <&vreg_l9a>;
++		vddrf-supply = <&vreg_l17a>;
++		vddxo-supply = <&vreg_l16a>;
++	};
++};
++
++&usb {
++	/* The connector exposes only the USB 2.0 data pair. */
++	qcom,select-utmi-as-pipe-clk;
++
++	status = "okay";
++};
++
++&usb_dwc3 {
++	dr_mode = "otg";
++	maximum-speed = "high-speed";
++	phy-names = "usb2-phy";
++	phys = <&usb_hsphy>;
++	role-switch-default-mode = "peripheral";
++};
++
++&usb_dwc3_hs {
++	remote-endpoint = <&pmi632_hs_in>;
++};
++
++&usb_hsphy {
++	vdd-supply = <&vreg_l4a>;
++	vdda-phy-dpdm-supply = <&vreg_l15a>;
++	vdda-pll-supply = <&vreg_l12a>;
++
++	status = "okay";
++};
++
++&wifi {
++	vdd-0.8-cx-mx-supply = <&vreg_l8a>;
++	vdd-1.3-rfa-supply = <&vreg_l17a>;
++	vdd-1.8-xo-supply = <&vreg_l16a>;
++	vdd-3.3-ch0-supply = <&vreg_l23a>;
++	qcom,calibration-variant = "Motorola_Capri";
++
++	status = "okay";
++};
++
++&xo_board {
++	clock-frequency = <19200000>;
++};
