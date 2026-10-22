@@ -1,55 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792678109;
-	b=j3I5ZQSwGd8IDE9o63VW56oL40FmfgrEW41JGC6J9K3Oz92Cscgs0mA61TKB+jpqU9AA
-	 mUsLqaQv4MSDSk6W26z0YyABKPF8D/zutuIih0hINTmFkBOC0Imnkmnoc9V1KvkqAVLCV
-	 F0u96bcTfabGeodNAn9LS6hV4J6J5V7d2BRMowJKhvTrM0fyMgSbqfLIN8h7fzBXxF5/b
-	 3IvZp67NoVyt53SfJAvo4hsXWWwA1QJwIlYvPuF/6FAvL3FuWdDWVyRm0H7DEVJut4+Gm
-	 umtIle6fqsiYy2wSRqDgGFkWuta070QzCPmXEPXxL73Bczje4PNcomsZzMagnzJxOlQ==
+	t=1792678756;
+	b=kMw8aaq/LqNVIWRpYm1Hu9Hhb9ErxDJ5DW61CWJ+2xFzxsEBqA+XblPffb0rPCkGs9SH
+	 XaFoWDPzgjnJVa/rO+QMYB4aUp8hiBVtZ7MLGeqeWgcpDnX0Fd77dRhu3Wm50fwPL/P/4
+	 4eAVW2ld5k204wViUICHKtQYLvmiL6BrdD+lutzZ3F6e95m+jotAruQJpEnd80Evjy1EF
+	 ZPCRtqddVxLveFgSZGviqosGOss0HnBVg9sqr28WirrwD4oPqKu/zSInRD6masJR1aCwc
+	 IixdFjhsrjyleFN9M2hNZ7TNg570jRGdfUhaRMeW96+hAgvpmCkIYwKXfoPfOfbIrIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792678109;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=/6YGebWgHGPWMyBtJuZLEzuWWT6Sl+na3jZ5wK/Q9Gc=;
-	b=R+B4IVjzUvmzbM0zkkqLf/wm6knKN++QKsDiepVnEzADofuoedj8ohTJGws7cAGCnNPj
-	 eovVSClRVJ1pn2Jwgu3huDRiEEYchAAB9C+hHBnWtBfkkDtSEC12JKDzgrADMIQx8CMex
-	 x4xgzBhpmmu4RAlma2VlS38IIJVg1FbgprVFP8UbLh/6knqn5aq8JOYFe2ahmX5/v2jru
-	 NQl3h2/3B+3L0m76wIs/gdZwMnydDZ4M/FoOW5Ip3Mk1cPoylL7QuH8H2ZPBHKDU4aZIW
-	 Y7lsMhgKbiIyPFKp9WvpCpcDxjPW3yhTVU1A5+ZulqTU9BwMnqNLQBpKYzypYXxZxNA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792678756;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=Iorya9CJVmbbeV06oongNxWV99dGCu9hixBeNSCACWI=;
+	b=mui7yUBi2ajeBue3lxfMZSXjthRdQw6CnBhVQGbR8d6mZSVLZ5lWGO1zkU8C9cXQihzg
+	 d9Pd2mK8I4MfwvU2AP1bSzYxYVoE3ZM3JEC84nh0k6KfR9+6Tb5aRqxQ74RI0VnGllWSU
+	 2rdUHuRLMjY6vHLNyShfbehKUd/3YATRuCORabZUq18kgiHWKLgQCI70EL0JLqVaJMTdU
+	 o55Tg/w8nx7FL0M4wp1/rkYJf1CxuU2252HrZhTWmAqdB5AclBWS9dV4dVNZxfi0FaYc3
+	 yDh8o3vcasiiEPtXlQ1/0dZ4sETgU/kwrU+6acTFASwwsoHPuVayyp5fYv7KInAiLng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A749606A32A;
-	Thu, 22 Oct 2026 14:08:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2A749606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Be6NBfr9;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="NVZCD/mu";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21EC1606A319
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 14:19:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 21EC1606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Be6NBfr9;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NVZCD/mu
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69M9xlwA2573496
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 13:39:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Iorya9CJVmbbeV06oongNxWV99dGCu9hixBeNSCACWI=; b=Be6NBfr9WxHlkwvF
+	6nOUpLIAC3TICYgkTGSPqkQGmc9FrbjdwwbEoeyHY4x0F4/oPnHenlt1Ed9kc2Hu
+	jhAiWVqtYm+bO4j5UPJaLOWq8OAL80XWTnv8l0j7n+APsNAuw1Gkh9KD61DwQQN+
+	lOQzfqTo3WkpCSZsUjiNGvviNfyK4OYpTTxyAN9bqw4SU3yMczekcce5hfcfyR/3
+	+3HeutSj7kN9AKcFVnLGpCtK9O+FkzZxnnw93IbTFBDw6Zpzd4dbv+fdIzqdqsza
+	wNQARzANHSc0UN5oOnySx9p1vBNM/MU/XOqmgSq1rDh5xrXo4IsghUysItnogfRS
+	szIYNA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf93aksxs-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 13:39:53 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso3477348eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 06:39:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=/6YGebWgHG
-	PWMyBtJuZLEzuWWT6Sl+na3jZ5wK/Q9Gc=; b=QJiqP6gQTgjJKSdLMuHpl9ylZQ
-	RiCVSNG73OYs/zsz6CKC2Q0B3vlVlEeEBpITmu72b5Ve7uq/lqWHHqapbRqBOfC1
-	g/Sec9EzLiHwjBfn6Wrm9xFIBPyDcD7P6OEgFTtQdVdFGsQHbR/D9p2jHM/9jzN5
-	03qOaaOz1l3t4itn8=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.229.107])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgDXWj_LGNpqZUstAA--.273S2;
-	Thu, 22 Oct 2026 22:08:11 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-arm-msm@vger.kernel.org
-Cc: linux-clk@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>
-Subject: [RFC PATCH] clk: qcom: dispcc-sm8750: reset the MDSS blocks at probe when the bootloader left them running
-Date: Thu, 22 Oct 2026 22:08:10 +0800
-Message-ID: <20261022140811.469417-1-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
+        d=oss.qualcomm.com; s=google; t=1792676393; x=1793281193; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Iorya9CJVmbbeV06oongNxWV99dGCu9hixBeNSCACWI=;
+        b=NVZCD/muE0lO60jqUZKKgtOyvNnOmvIHPHMpENRJ9MFesMq5HIM4e7aaNAT5m8FlzB
+         i8wMySKrS2V1v+n2mOUtgeUXgG3yEMnnUhoFE+FfHwcoNN0z1jEdATXO9a0S3HrRwiSt
+         VEbN1A3V6NoSGJnjw6H4XSL8SqEiddkKq04tOdpFtt5jlUu7eneVaGHxabIGUZJhIdXQ
+         VGlIJdqcs1xzOyMXRH+T4oeUF4Kwb7OcvrBUCiimnxiSHCrbohwmAfKc9V7b19lB676b
+         ThWpPSYgamnOap4DplpqCj5dU4P6USpYroA1Iw6Douqxuc7WR3xRE46EXop7F4YjyjF0
+         VQSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792676393; x=1793281193;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Iorya9CJVmbbeV06oongNxWV99dGCu9hixBeNSCACWI=;
+        b=UN2yvOMsyz/fhDwOsZPEe+FB5ac1yXOFLTCuYdZG7Pyl5pyhsqycBo0Ev8thBq+xL1
+         Rw9p9m/nY84CSrDeJPQdC3oyw2VQS0RpdJOg6dcxXHaiA4zpsVCDLnvDdjZHXQBsmaG+
+         qgJ727GtvEb8WNPZ2kjv581Aykadn0OdUEA08720dFfjF9YXgBxcTMjF4GxNzd0/RJdh
+         cPK9P1xJioxExWQX7PT/W2YztQkK44Ctk8Zu+9YrMbdSZOA6fjgJnogwMxXwko3AV4hN
+         D8SQH0ANor6W+B18/WfbThZ0m6GTCvxtRIAo5u0stm6JZT0LZhbabtS+ULw/xXmMRrU+
+         m81Q==
+X-Forwarded-Encrypted: i=1; AKwUvBy4DzCpIjiem859P2R+kpEwWyEjZcWUR/PS+pq4MvVFFvTtF/Dc98cPggK53Fvrb2/D9lfBX8l20ooG3DK9@vger.kernel.org
+X-Gm-Message-State: AFq9FYLX9fC0tI2KKo4xCM+TclvUhcSKnX8O3X4ZKIMdKzWWRHbsAdSG
+	Il72weH8wU0f4pykE26JAB+ROs4iV2QFlcL2ZtrTwDZmMn1b6M1sx5uCU7Pu8jxsoNNEeEU2r3q
+	bkXrdOy56a1vpxsloo5yUWUay5PW7BSSS9r/coqk05r8mqw3qxkhP6FdMRqcZvLTaAeYb
+X-Gm-Gg: AYBFou2qQ9n2iLr8Dvj+pjinnn068QlI85DrTgZbsfy0GXQDjh4GU1rmhSCcH+ZL3+z
+	FVZHV30hdjA22l7GNgxl3R7qujTTK40URUE/QqkKO++MOY1reD2+E7Ze1UQgn5iRM0WCWwWob5b
+	g3LPNbPjFA/sCEKfFEgcKywAWWLtHWPxIP2gFfd7i5pzMKFjuv738flCF0CNt0gCqt0kuHaOAza
+	TF8w7VUrmoAwdLPEx0k06PS1hyW9pIK6a3oB1llSzmFvPdlZMZT2/QLiUOL+KnHkuJiYDcZPChm
+	bHOFxNPi/dNvfZdwu5zpx8kclcLD0it+JrPgEXnG9O2mQRGRXmlvAbE0vtOvICdfNFerkttQwdC
+	HSi1u3OUQivoD6FRUh8O6TIbpY4rOtg==
+X-Received: by 2002:a05:693c:87d3:20b0:369:7c:bfce with SMTP id 5a478bee46e88-369008c220fmr2325107eec.14.1792676392855;
+        Thu, 22 Oct 2026 06:39:52 -0700 (PDT)
+X-Received: by 2002:a05:693c:87d3:20b0:369:7c:bfce with SMTP id 5a478bee46e88-369008c220fmr2325059eec.14.1792676392215;
+        Thu, 22 Oct 2026 06:39:52 -0700 (PDT)
+Received: from [192.168.1.9] ([106.222.235.141])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-367416a1fb9sm14556522eec.20.2026.10.22.06.39.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Oct 2026 06:39:50 -0700 (PDT)
+Message-ID: <f83c366e-e3fe-4921-8407-ffa90b7f933f@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 19:09:42 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,133 +115,123 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgDXWj_LGNpqZUstAA--.273S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZr4xJF1kXw15Xr48Zr17Awb_yoWrtF1DpF
-	sFyF45Kr4kCFyfXFy3Aa1Du3WrJ34ktFy5try3G347AwnxJFn3AFZ2y3sIkFWDtrs7JF1j
-	qFW7KFWkCF1vqFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkab7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
-	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
-	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
-	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l
-	42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
-	WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAK
-	I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
-	4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY
-	6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07bYYLPUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREIB2rZEtVwHAAQsX
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] arm64: dts: qcom: kodiak: use thermal hw-bin trips
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+References: <20261002-thermal_bin-v1-0-5a29be7e8ec5@oss.qualcomm.com>
+ <20261002-thermal_bin-v1-5-5a29be7e8ec5@oss.qualcomm.com>
+ <9800eb77-0188-4b16-a672-adb7ee1a603c@oss.qualcomm.com>
+Content-Language: en-US
+From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+In-Reply-To: <9800eb77-0188-4b16-a672-adb7ee1a603c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: kvRGVV5DfBsUWlBrQkdQobXaIytc-vua
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA1NCBTYWx0ZWRfX0VPG2ggt9iBD
+ HAqZBaLFafMRxk717djGmht84Ea7z2EtMK9b8USWirfXctRDMBAWlhr4iMkxXuXbiAFLKbenbYD
+ 5SVTeMGNZ1SA1qhq9nKfKv5d06Bsg1w=
+X-Proofpoint-ORIG-GUID: kvRGVV5DfBsUWlBrQkdQobXaIytc-vua
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA1NCBTYWx0ZWRfX9+jEAJb0N5A+
+ kwKd5yVdO7VhODf9x6MP4wDkPb6n2T9uqBdWRtikeOlNJX8TnUiVhZlH9GNZqbSC1iN2LnNohxe
+ ID6ma4NeRoEgYKFtvfVHKM8HJKQ3kqWcr2Ou1wVeYsOZHHCyTz2gBVFKbu6B/NZiAllxZsbhW8t
+ gFkOPd2Maftyv8DB0ExFosS9JezpTiBIx+NQdh6gHVf51qlXiX/dMQfjh31kdwh8rMahy5bL95g
+ 7KB/+i34A6WIEVSW1xwmIV6LPiaC0bMhGyr3bJ76I3zlxIUhjiUG6fCrbEfNLavZgSa1isQnPqC
+ nbppe7/naz79X3ESIS6dPv4M3zapqChO10KZ9raPTm+WH1Brq0gLd/hoOq2eyDomXwF2wt/yBXm
+ axhxIW5c4Wpl82892gnh8bBjIusBAojGhYI3x4xFPk4l+/fUvLg97xZdav71iRQm5dOKtDzn60W
+ AC6xQjgMZxrMj4HKoRw==
+X-Authority-Analysis: v=2.4 cv=dOszC+Zb c=1 sm=1 tr=0 ts=6ada1229 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=8wa5AUNoahJ04lRaSfAPWg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=2wNLjvyEnIyB1ESV7yEA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 adultscore=0 phishscore=0 bulkscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610220054
 
-On Lenovo Legion Y700 Gen4 (SM8750, "lenovo,elden") the bootloader hands
-over with the display block fully active: the dispcc PLLs are locked and
-MDSS core / core_int2 / RSCC are out of reset.  The kernel's mdss_reset()
-and clk_*_pll_configure() then run on top of that live state and the
-command-mode panel fails to initialise:
 
-  msm_dsi ae94000.dsi: command DMA timeout: status=0x2200200
-  msm_dsi ae94000.dsi: bonded command DMA failed: master=-110 peer=-110
-  panel-novatek-nt36536: Failed to initialize panel: -5
 
-The result is a cold boot with backlight only and no /dev/dri/card0.
+On 10/22/2026 2:39 PM, Konrad Dybcio wrote:
+> On 10/2/26 12:47 PM, Gaurav Kohli wrote:
+>> From: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+>>
+>> kodiak-based SoCs are binned at manufacturing time, with the bin
+>> computed from the jtag-id and feat-id qfprom fuses.  The tsens driver
+>> now reads these and feeds the resulting bin to the thermal core, which
+>> selects per-bin trip temperatures.
+>>
+>> Add the jtag-id and feat-id nvmem cells to the tsens nodes and convert
+>> the passive mitigation trip points from a fixed 95C to per-bin values
+>> (95C for bin 0x1, 105C for bin 0x2) using the new
+>> temperature-bin/thermal-hw-bin properties.
+>>
+>> Signed-off-by: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+>> Co-developed-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+>> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+>> ---
+>>   arch/arm64/boot/dts/qcom/kodiak.dtsi | 56 +++++++++++++++++++++++++++---------
+>>   1 file changed, 42 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/arch/arm64/boot/dts/qcom/kodiak.dtsi b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>> index 347815e5983e..f3bb9cd8f393 100644
+>> --- a/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>> +++ b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>> @@ -1019,6 +1019,16 @@ gpu_speed_bin: gpu-speed-bin@1e9 {
+>>   				reg = <0x1e9 0x2>;
+>>   				bits = <5 8>;
+>>   			};
+>> +			jtag_id: jtag-id@180 {
+>> +				reg = <0x180 0x4>;
+>> +				/* bits = <offset width>: 20 bits at offset 0 */
+>> +				bits = <0 20>;
+>> +			};
+>> +			feat_id: feat-id@180 {
+>> +				reg = <0x180 0x4>;
+>> +				/* bits = <offset width>: 8 bits at offset 20 */
+>> +				bits = <20 8>;
+>> +			};
+> 
+> Couple nits: please keep a \n between each subnode
 
-Asseting the three dispcc block resets and releasing them before the PLLs
-are programmed makes the block start from a known-zero state, after which
-the same panel initialises reliably.
+thanks for review, will fix this in v2.
 
-Measured on the same device, downstream 7.2 payload, alternating real
-power-on cold boots (fastboot boot of two images that differ only in this
-hunk and the DSI PHY change mentioned below):
+> 
+> 
+> [...]
+> 
+>>   				cpu0_alert1: trip-point1 {
+>> -					temperature = <95000>;
+>> +					temperature-bin = <95000 105000>;
+> 
+> Please do <foo>, <bar> instead of <foo bar>
 
-  without the reset:  5 of 9 cold boots failed (command DMA timeout)
-  with the reset:    15 of 15 cold boots OK (two variants, see below)
+Sure, will update.
 
-As an RFC I have gated it to lenovo,elden because I cannot tell whether
-other boards that hand over with a live display would benefit or would be
-broken by resetting the block.  Two questions:
-
-1. Is a per-board workaround in dispcc probe the right place, or should
-   this be expressed as a DT property (e.g. qcom,reset-mdss-at-probe) or
-   be handled unconditionally in the dispcc driver / in mdss?
-2. LinuxLoader solves the same problem on the bootloader side under the
-   name "DisableDisplayHW".  Would you rather see the reset done by
-   mdss_reset()/DPU before the PLLs are configured, so that it also helps
-   other bootloaders that leave the block running?
-
-Separately, and relevant to Dmitry's "drm/msm/dsi/phy: power up the digital
-top before starting the 7nm PLL" series: on the same board the missing
-DIGTOP_PWRDN_B handling produces exactly the reported
-
-  DSI PLL(0) lock failed, status=0x00000000
-
-four times per boot (the PHY PLL is enabled by the clock framework from
-of_clk_set_defaults() before the PHY is touched).  With DIGTOP_PWRDN_B set
-and cleared together with PLL_SHUTDOWNB that message disappears from every
-boot I measured (10 out of 10), but it does not change the command DMA
-behaviour above: an image with only that change still failed 3 of 4 cold
-boots with the PLL reported locked.  So the two are independent, and the
-DIGTOP change looks correct on its own.
-
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- drivers/clk/qcom/dispcc-sm8750.c | 35 ++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
-
-diff --git a/drivers/clk/qcom/dispcc-sm8750.c b/drivers/clk/qcom/dispcc-sm8750.c
-index e1d9534..c2a1705 100644
---- a/drivers/clk/qcom/dispcc-sm8750.c
-+++ b/drivers/clk/qcom/dispcc-sm8750.c
-@@ -5,9 +5,11 @@
-  */
- 
- #include <linux/clk-provider.h>
-+#include <linux/delay.h>
- #include <linux/err.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
-+#include <linux/of.h>
- #include <linux/platform_device.h>
- #include <linux/regmap.h>
- #include <linux/pm_runtime.h>
-@@ -1919,6 +1921,39 @@ static int disp_cc_sm8750_probe(struct platform_device *pdev)
- 		goto err_put_rpm;
- 	}
- 
-+	/*
-+	 * Some bootloaders hand over with the display block still fully
-+	 * active: dispcc PLLs locked and MDSS core / core_int2 / RSCC out of
-+	 * reset. Probing on top of that live state makes the command-mode
-+	 * panel fail to initialise (command DMA timeout, panel init -EIO).
-+	 *
-+	 * Assert the three block resets and release them before the PLLs are
-+	 * configured, so the block starts from a known-zero state.
-+	 *
-+	 * Limited to Lenovo Elden for now: it is the only board where this
-+	 * handover behaviour was observed and the fix verified.
-+	 */
-+	if (of_machine_is_compatible("lenovo,elden")) {
-+		static const u16 elden_bcrs[] = {
-+			DISP_CC_MDSS_CORE_BCR,
-+			DISP_CC_MDSS_CORE_INT2_BCR,
-+			DISP_CC_MDSS_RSCC_BCR,
-+		};
-+		unsigned int reg;
-+		int i;
-+
-+		for (i = 0; i < ARRAY_SIZE(elden_bcrs); i++) {
-+			reg = disp_cc_sm8750_resets[elden_bcrs[i]].reg;
-+			regmap_write(regmap, reg, 0x1);
-+		}
-+		/* Hold for one full ~30 Hz frame before releasing. */
-+		msleep(50);
-+		for (i = ARRAY_SIZE(elden_bcrs) - 1; i >= 0; i--) {
-+			reg = disp_cc_sm8750_resets[elden_bcrs[i]].reg;
-+			regmap_write(regmap, reg, 0x0);
-+		}
-+	}
-+
- 	clk_taycan_elu_pll_configure(&disp_cc_pll0, regmap, &disp_cc_pll0_config);
- 	clk_taycan_elu_pll_configure(&disp_cc_pll1, regmap, &disp_cc_pll1_config);
- 	clk_pongo_elu_pll_configure(&disp_cc_pll2, regmap, &disp_cc_pll2_config);
+> 
+> Konrad
 
