@@ -1,82 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792687343;
-	b=QkLFbroZTSNnuvB0YGOg5QvOMMRZf+IYlXDZZq8M5A+1V5C3H71tfYDzvC9+HkwyeRny
-	 xqoRAhtR+KveCbXenLb7gSFMUm2fAIlvQOibJq3rwflGK4qfpDgOc9UH2Euz5maahjFkV
-	 ghCTJK50EC6ETmeEbtXZOyWQWEiO6Mpe36H27yU6u1p4FqqZx7o8gBJ3oa3IvQMZZ1FZk
-	 ZQuKcLXPJFYqlK1ZG1/DyZYyrs9yfk/efsQggMV7ibXohRk/rFqgV9ru+ssmN8SUllFKn
-	 N55dM8gXAIyQ4OhsqbByZK2YqKoPSzgwe7/guOPdtYkINtHX9SfOTxFGvXHyxXv+TZg==
+	t=1792687348;
+	b=TLdHUCiAf0VqPjKJJHiwRfKgbNs2sWqsh2yV4YqUD6QdXWbut1iSiy2Py/QYQok0fIBU
+	 Kf4u9ShNLg3B39cJfTbnQIXIPsfFToygAGB7oJTN5Y3mxD39DG0r7tnLL/Xv1m1rgIQ+A
+	 3d5u2S5Vg4vCEwFEklyQ6XvO5nkObsaQmXV6dXoaXmNV6PF9VPZABX4k/Ivj8DGF75aG0
+	 9qSeHPFzUpiWyxZ+CEBNn49LoaehkpqwQ0rhKp/+I+52qExs/rlPMCdE9/XdikmEbAnx/
+	 sOh8vOlRhrCqBLX+afh7LY2Ya+Rw0YiqgiSArluTobkyAeXsF07AICNSxvTi0TkgtuQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792687343;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792687348;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
-	b=IAktrEk83uVm2YF4pWOVcOf/cOzaau0DdGYG/t/8rd0Z30wL15ylBgocQTdL1McghxEm
-	 EiBAKmy1xhalxjJkk8pQHwQmIDXI0+JRIfzOFJuN4/8IfQqecTYF67xRg8Ce0hTOIXd94
-	 +XilmPqOU4lBA8LqUOF5y5EfOyDzNpQJ7tn5Z6NrxUuV+6O0JKNtNWFHr2nU6vzg64IPY
-	 Hi5kF/s0HSmpsNOJmvV/aHbvjY7x5kG/Ap+AroxaHfy/6BPnJ8r3RbwathnaTPTiqhgzM
-	 U+ZSD9S7iaa2xjHJfI6loBL3/RdOolgObcqH0eW1JrmimR8CvCc3SQjTxWKKwfi/NNQ==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=zblh9RJVoqtDhwxOvvPdwA42GF2EgXCszh/ysjfgfTI=;
+	b=ccTwpEcyROPFJObKkvsdMgcuOAqZQ9rx+EP+RTGNjAq25W3xERYHfIZ/F/+/cEgvFabA
+	 EIHZ/3egdfbe6O0osFJQehYFEZHXHQgei48p+PkDmf1+sjMSqhmQjeM9zCOct2NumfDrw
+	 sjRrQGM0PdYFtgtvhoP8CVb027o7m5OP1NuXA9Sis4OH4FYP+2kC8gFqcCAODIZ7RsSP7
+	 djRXw599PhDjmUyU+u9sQM/WVGoc4DZbTUIBJ7UKFlRVZTFtjESbZsMvX7NBanM0K/6L2
+	 jdJkA2BCQUBOV9XYnljg6IAITQFn3elsmt2O3i4iHLq8QC1vw2kjyTOHX+9y7ROLGSA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="Zly/bhuk";
-	arc=none smtp.remote-ip=209.85.221.44
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=HVUIURyu;
+	arc=none smtp.remote-ip=209.85.221.45
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C86D606A320
-	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:42:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C86D606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E80D606A32F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 16:42:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0E80D606A32F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Zly/bhuk
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48dfdd0678dso8666f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:42:22 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=HVUIURyu
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48e00eee27dso12720f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 22 Oct 2026 09:42:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792687341; x=1793292141; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
-        b=Zly/bhukMS6FJUjJfT1eSqtaTbkAgukn20PNTV+vr3KX4kG2j6DGVJa+PChtvWhfPj
-         cdXq80B0ssJ8Ip3qy11meFWs6jY7RkF8Q3FGJs5gDYEdqQkMSSk1U1wVUxeRl+ftO1Tq
-         nRm0yyPMkb7PklYx0RwaGNe9HE7sn30WOkLhrgixmaTTKwS3TtkE4wVzTZ4SKrZAWMq0
-         eUsrqrd0Poi1f29mM47ne04K55Z1jqBV6MAsAJqLEwAvSK0FBd0e9sBxl4q6jgKUpl2D
-         BXHLa7GhF1owwciNJ9qIyfOxGvc90wf5zKVlJfOGde0GUKoIW7KJFz6j4uXKmyIVj+xd
-         nJ6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792687341; x=1793292141;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792687346; x=1793292146; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BpFS6ySbwG4J+0ZDYOqEgZMFTp6XLFpyMVM4kuMmIEU=;
-        b=fIXC/vybFY7Wn1JyvLieDeVSu11EgBjHZ9/9tku3sbi0JjBTwcOoJbqCIFXnq++8sX
-         QXEcRWaFaHtQPskrXgQBHkhbdPWiD0NIBj6/FCFyrpsEPCvamArnxJySi5wH6RNRn80S
-         PLB4uTBPbM4+fNl+1zOABFdDgsIxHMBLQCQnaOkZ9IIQ3QXvw3VZhu1LpIe0U59EPWN8
-         /+Vjf7/AUTpt82QxOvEk4PONCbqzEU4zQqb8yf/OqfJTdfm2wC1slDIrWHQ8vBxMy1Iy
-         q1LTjo5sk409GzXcpMQOtju5lFbvWjmAkEqIqZQ6190mYsluRw11Y60NtU+zm3Tv9bno
-         ek5A==
-X-Forwarded-Encrypted: i=1; AKwUvBy5HiPLQDMJ2I2M3W0Ux1t3+CPz2QD33mUx95RyokfHWupk8VNITs1V3iGvDpluGMDNohctv3Rh231zV6AU@vger.kernel.org
-X-Gm-Message-State: AFq9FYLwvod+AahobB3Ax5KnXoFRbOOcqLNz1jZ1ixaOVQbQRRZT6Ja/
-	vNemHct05WzriODFpkdC/J32b3mJ2CgW0QYpddnl42a992ZIWrZW5rRw
-X-Gm-Gg: AYBFou3WyXuta6tkXKRN2c3J7aBA9hjCG2FX8E7nwf4g5CxeDtm8gyERjRM9wHK/JZj
-	OYSxbVPz621PDkcyldFJ9kjiCmfqbkZLa0pJbxpSgip8S5/5gywD9ifHu+NHbBinjvrBZ+aAd8n
-	zwunPVfUTqckY0i30ZoVH1G1Whd13yU2j27LqmGcj4EwHyiOSalgO1+wgd8qDkZ5DNf58q2dewX
-	9F72CsMVPngOi+mXIGalcpBaUz+sDtiFOcTTBhq8WlI1lkfaD6mEkWCz3teomZT7E6whArQAFm1
-	v0ar1Cx8X6vQI5nFo0sghO9pVvyM3BOjNUPCOcdNYMF1Wx9YEYhZ/H8gBDnMF1KsBpRjCufW6iX
-	Z39x2rPC98EoauvDoJVHUFEvTnM86QOpM4VHtrzRKgUSVxKzTKvfPU+TBWJZojmmV1oHt4JIVjU
-	g5ck8BI4dg8j1YVEzt1UonlDAjo2elbRcKJiwEQGUtaZOu/k9jVi2lSCkjzIbgWQAgmzcXYt3eB
-	GegcfzfFU0k9GkYLUoMXomMn2n6Rphn0xn3iL8a353t5ArNck5FbTk23xWph0cGyK6g28pxKvkV
-	lUJw7A==
-X-Received: by 2002:a05:6000:50:b0:48d:e696:8a65 with SMTP id ffacd0b85a97d-48e264db1a1mr8359382f8f.46.1792687341082;
-        Thu, 22 Oct 2026 09:42:21 -0700 (PDT)
+        bh=zblh9RJVoqtDhwxOvvPdwA42GF2EgXCszh/ysjfgfTI=;
+        b=HVUIURyu90T8GjQn2XXazP7dCqrkiXuYpUxCekjY7600wY09bAmNd4mE46R5Ssogk2
+         CFN6+ZBuNhKlfANZH2F9nzhjn71dnyQbdos+w+SU0yfZwElm7P9o1S4gULAkrdjPI7UL
+         XTodH5b6q94BoS+3Y98uhDdz7YVJrYmsHiJ7kyb3HN4vfUH8UeiU7tByzCLzy+8ADjRp
+         3NZcDrkHTPmVWg7034QG1bqxqVpommIF7hvUmnY9VCBWIPRHvdgdY/cpWD7fMImCMFud
+         MnRjBah85GPQEsKA2fKzvsJ9rDigodkvJHh/PImruCVzjkKI9SmsGI1C2TuEdOd/q7oS
+         x9ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792687346; x=1793292146;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zblh9RJVoqtDhwxOvvPdwA42GF2EgXCszh/ysjfgfTI=;
+        b=21M00INiHNiwLio7Pt9KVCHBgo18oIu1GNtJqmE8SGZMsU+PWGB+Vs2xS2Ww3BNexJ
+         y0eOAZO9QRgEjUwmx0a7dDt5s3rq8r3TYrrmk5uZVdCEfucrag9g5J12UnEOVIAaw8mD
+         EbhJ7ocYj8pAIfy2fRiClb3eXWM804aPTesJQet6E5qH6zHkSCGYlq17O91QTfFFYq+C
+         ZV/G/pn7qpcldbmQ2DvYSOd5HyuAaiqG+ZZVhoLMixQqwKJRGkVV8i3Je8cirDW78ryt
+         rrhfuShZL6/t5JB/P3+cW/27LmTAYKMvGv/S2r6u2nY4fmpgUzoMPur4tIzGYSocvr9m
+         cG5g==
+X-Forwarded-Encrypted: i=1; AKwUvBxvelPAZ/n1eufeHjEbFczXbXAweSiH8+hGAZZmeVWoe/+zwCBtyn3MguY1ZGtl9K493iimQxU5w46jNjJD@vger.kernel.org
+X-Gm-Message-State: AFq9FYJpSqI+fWe6wYzWZPuMxOBvv0cqe/w/DWdBTxJ9lCTDWHC2SI+P
+	naRsUdjGF5lSspp7oXEC+z276CgCVIX3YEtnWLEgCd4T1GH8Xqtfswjw
+X-Gm-Gg: AYBFou0tUmcu9Q+yfxzrtOK1qKbUQ1UpJr4jl9Y7PZ+FpG3Jspv4t3BbUySmyMwF4kj
+	Ktl9/9al0uyBTyv24aV7MkP+p9FcVKMUunCC1vpKPr+O02p9urkeg1KKxCnGNxx53YEw+1nZBEj
+	//AWTf22WCauE3Pma3MMYvjcvBjqd65PCNITR/V3egJ7YpTvEzs508KAXorjbRGksZDQQ2jdDH+
+	Zgpt2Tg5j18dCx/P+fYqoVvtjFtL9rUOAzPw+6xUz2Xvc64CIR5ZKUG3DlIFegggsrh0ou9fJvK
+	wDpE2SbYGKJ/xrzOqnkKGBEEcx0QKNCO8JzgpzhKR6hcrHRiWG9p77EsYcDZprnmnpl+Fasgho3
+	XnkgdwFrAw77KWN2681DIQr8N6rlH58wNLUlEp37R64AJxoCQwRvq4NvfILVXaH/cjeI1U5eqLk
+	tpcMpEulgAd1wsIa/CMbQgBYHIB2SuV2h+dT3jA8WaGNw6RbsGSC4sQVQn3GjjNE3kzekoQcvLt
+	jdIvg1tNTPkOuI5xDhcg0URTaBwIGMMmbi4xMLGm2XhPnBfqRcNV0fwuIb6Z+Q0tlt5KZ5yQOwL
+	mFEDKKsOFuvNZQg8F3gqsPIW/w4=
+X-Received: by 2002:adf:fc4a:0:b0:48d:fbee:3dec with SMTP id ffacd0b85a97d-48e264c8742mr9406786f8f.29.1792687346264;
+        Thu, 22 Oct 2026 09:42:26 -0700 (PDT)
 Received: from localhost.localdomain ([188.190.249.216])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2584c3b0sm15040175f8f.57.2026.10.22.09.42.19
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e2584c3b0sm15040175f8f.57.2026.10.22.09.42.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Oct 2026 09:42:20 -0700 (PDT)
+        Thu, 22 Oct 2026 09:42:26 -0700 (PDT)
 From: Vladyslav Tymoshchuk <tvlad744@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>
@@ -101,10 +102,12 @@ Cc: Abel Vesa <abelvesa@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Vladyslav Tymoshchuk <tvlad744@gmail.com>
-Subject: [RFC PATCH 0/4] soc: qcom: pmic_glink: Hold back notifications over system sleep
-Date: Thu, 22 Oct 2026 19:41:47 +0300
-Message-ID: <20261022164151.592-1-tvlad744@gmail.com>
+Subject: [RFC PATCH 3/4] usb: typec: ucsi: glink: Wake up the system on connector changes
+Date: Thu, 22 Oct 2026 19:41:50 +0300
+Message-ID: <20261022164151.592-4-tvlad744@gmail.com>
 X-Mailer: git-send-email 2.45.1.windows.1
+In-Reply-To: <20261022164151.592-1-tvlad744@gmail.com>
+References: <20261022164151.592-1-tvlad744@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,174 +119,54 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The GLINK interrupt that delivers the PMIC GLINK messages is requested
-with IRQF_NO_SUSPEND, so the clients get notifications during system
-suspend and resume and in suspend-to-idle, and the work they schedule
-for them can run while devices are suspended. Commit c7c56b6ec077
-("soc: qcom: pmic_glink: Fix device access from worker during
-suspend") moved the altmode worker to system_freezable_wq as a
-stop-gap, and left the proper fix for later:
+The UCSI notifications from PMIC GLINK report connector changes, a USB
+cable being plugged in or out for one, and the completion of UCSI
+commands. Enable wakeup on the device, so that pmic_glink reports them
+as wakeup events: a cable change brings the system out of
+suspend-to-idle and aborts a suspend in progress.
 
-  The final shape of the rework of the pmic glink driver in order to
-  fulfill both the filtering of the messages that need to be able to
-  wake-up the system and the queueing of these messages until the
-  system has properly resumed is still being discussed and it is
-  planned as a future effort.
+The completion of a command arrives only while the command is in
+flight, so it can wake up the system only when a suspend has started
+in the middle of one.
 
-This series is a proposal for that shape, to have something concrete
-to discuss:
+The same was proposed in [1], with the wakeup event reported from the
+callback. pmic_glink reports it now, also for the notifications that
+it holds back over system sleep.
 
-- Patch 1 does the queueing: from ->prepare() on, pmic_glink holds the
-  notifications back, and passes them on from system_freezable_wq once
-  the system has resumed, in order, without duplicates, at most 64.
-  Responses are passed on right away. The service UP is held back as
-  well and passed on after the notifications, DOWN is passed on right
-  away.
+Link: https://lore.kernel.org/all/20260722-ucsi_glink_wakeup-v2-1-b43dee56df24@oss.qualcomm.com/ [1]
+Signed-off-by: Vladyslav Tymoshchuk <tvlad744@gmail.com>
+---
+I used an AI assistant (Claude) for the analysis and to draft this
+patch and its description; I reviewed the result. The testing is
+described in the cover letter.
 
-- Patch 2 does the filtering: a notification is a wakeup event if the
-  client's device may wake up the system, see device_may_wakeup(), and
-  the client's optional wakeup filter accepts it, which is the
-  callback that Casey suggested [1]. pmic_glink reports the event when
-  the notification arrives, and keeps the client's wakeup source
-  active until the notification is delivered.
+ drivers/usb/typec/ucsi/ucsi_glink.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-- Patch 3 enables wakeup for ucsi_glink, as Jishnu Prakash proposed
-  [5], without the event in the callback.
-
-- Patch 4 makes qcom_battmgr wakeup capable, with a filter for the
-  charger notifications, but leaves wakeup disabled: Bjorn does not
-  want a laptop to wake up in a backpack [9], and a battery charging
-  state notification woke up Abel's laptop with some chargers [10].
-
-The UCSI connector work running before the devices it uses have
-resumed has been hit on three boards so far [3]: on X Elite with a
-PS8830 retimer [2], on SM8850 with an FSA4480 switch, and on SM8750
-with the dwc3-qcom role switch, where the register access with the
-clocks off resets the SoC [4]. With patch 1, the clients don't have to
-keep the work for their notifications off the system workqueue: Abel's
-UCSI RFC [2] would not be needed, and the altmode stop-gap can stay or
-go.
-
-The earlier discussion is in the thread of the first version of the
-altmode fix [1]. Krzysztof:
-
-  Regardless whether we call pmic_glink a bus or some sort of
-  transport mechanism, the users of its interface should not be
-  called after they are suspended.
-
-Bjorn asked whether a bus would mean "some mechanism for pmic_glink to
-defer these messages until resume has happened". Abel found queueing
-the messages fine, but noted that it does not decide when to wake up.
-On the UCSI RFC, Dmitry asked to fix PMIC GLINK instead [2].
-
-Why not in GLINK: dropping IRQF_NO_SUSPEND would break the other users
-of the interrupt, as the description of c7c56b6ec077 says, and would
-not close the race [6].
-
-Why not a bus: patch 1 gives the guarantee Krzysztof asks for from the
-pm callbacks of the pmic_glink device, and the wakeup policy stays
-with the client devices, which reviewers preferred, according to [5],
-over making the GLINK interrupt a wakeup interrupt [8]. cros_ec does
-much the same: it passes the events that came during suspend on to its
-clients in ->complete(), and decides whether an event wakes up the
-system by its type and device_may_wakeup(). Its default wake mask
-leaves out the battery events and the AC disconnect as "not actionable
-wake events".
-
-Open questions:
-
-- ucsi_glink wakes the system up on a cable change by default, as in
-  [5]. Should it only be wakeup capable, like qcom_battmgr?
-
-- pmic_glink does not wait for the work that a client queues for a
-  notification, so if a suspend starts right after a notification was
-  passed on, the work can still overlap the suspend of devices. Should
-  ucsi_glink cancel the UCSI work in its ->suspend() with
-  ucsi_suspend(), like ucsi_acpi, or should a wakeup notification keep
-  the system awake for a while, like the timeout in [5]?
-
-- Only the latest of identical notifications is kept. That relies on
-  the clients treating a notification as state, or as a hint to read
-  the state, which holds for the in-tree ones. Should a client be able
-  to opt out?
-
-- qcom_battmgr notifications no longer reach power_supply_changed()
-  during a suspend, so its wakeup source no longer aborts a suspend
-  started through /sys/power/wakeup_count. Does anything rely on that?
-
-- Patches 3 and 4 depend on the API added in patch 2. Should the whole
-  series go through the Qualcomm SoC tree, with acks for those two?
-
-Tested with suspend-to-idle on SM8750 (OnePlus Pad 3): the series on
-top of the v7.3-rc5 based kernel that the device runs, with debug
-prints added. That kernel does not have the dwc3-qcom fix [4].
-
-- Awake, with qcom_battmgr wakeup enabled: of the 23 qcom_battmgr
-  notifications for an unplug and replug, only the four USB property
-  notifications were wakeup events.
-
-- Cable plugged in (one run) or unplugged (two runs) during
-  suspend-to-idle, with the default wakeup settings: the held-back UCSI
-  notification woke the system up. 10 to 13 notifications were held
-  back and 6 to 8 passed on after resume, none dropped. The wakeup
-  source of ucsi_glink stayed active until they were passed on, about
-  1.5 s. The UCSI work and the role switch ran only after that, and the
-  SoC did not reset.
-
-- With only qcom_battmgr wakeup enabled, a plug-in during
-  suspend-to-idle woke the system up with the USB property
-  notification. The UCSI notification before it was held back without
-  a wakeup.
-
-- With wakeup disabled for both clients, an unplug during
-  suspend-to-idle did not wake the system up. The 11 notifications were
-  held back until the RTC alarm 55 s later, and the SoC did not reset,
-  so the queueing of patch 1 is enough to avoid the reset.
-
-- 25 minutes of suspend-to-idle while charging: one qcom_battmgr
-  notification came, was held back without a wakeup, and was passed on
-  after resume, with the battery state updated right after.
-
-Not tested: PDR during suspend, more than 64 notifications held back,
-hibernation.
-
-Kamal Wadhwa's PMIC GLINK RTC series [7] also changes pmic_glink.c, so
-whichever goes in second needs a rebase. Its driver enables wakeup on
-its device, so with patch 2 its notifications would become wakeup
-events without further changes; today, the alarm only reports a soft
-wakeup event through rtc_update_irq(), which does not end
-suspend-to-idle.
-
-I used an AI assistant (Claude) for the analysis and to draft these
-patches and their descriptions; I reviewed the result and ran the
-tests on my device.
-
-[1] https://lore.kernel.org/all/20250110-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v1-1-e32fd6bf322e@linaro.org/
-[2] https://lore.kernel.org/all/20250205-ucsi-schedule-conn-worker-on-freezable-wq-v1-1-107d1356b77b@linaro.org/
-[3] https://lore.kernel.org/all/20261020132432.998-1-26rote@gmail.com/
-[4] https://lore.kernel.org/all/20261018143126.3978-1-tvlad744@gmail.com/
-[5] https://lore.kernel.org/all/20260722-ucsi_glink_wakeup-v2-1-b43dee56df24@oss.qualcomm.com/
-[6] https://lore.kernel.org/all/CAMVG2ssS4=Kb=OxuVXb_062fgvBfKz+X0q1N2rFob0TH6JypYg@mail.gmail.com/
-[7] https://lore.kernel.org/all/20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com/
-[8] https://lore.kernel.org/all/20240603073648.3475123-1-quic_deesin@quicinc.com/
-[9] https://lore.kernel.org/all/ZnIe2hjPgWipDfgG@hu-bjorande-lv.qualcomm.com/
-[10] https://lore.kernel.org/all/Z5taRZ0om5y%2FDJ69@linaro.org/
-
-Vladyslav Tymoshchuk (4):
-  soc: qcom: pmic_glink: Hold back notifications over system sleep
-  soc: qcom: pmic_glink: Report wakeup events on behalf of clients
-  usb: typec: ucsi: glink: Wake up the system on connector changes
-  power: supply: qcom_battmgr: Allow charger changes to wake up the
-    system
-
- drivers/power/supply/qcom_battmgr.c |  19 ++
- drivers/soc/qcom/pmic_glink.c       | 257 +++++++++++++++++++++++++++-
- drivers/usb/typec/ucsi/ucsi_glink.c |   6 +
- include/linux/soc/qcom/pmic_glink.h |   2 +
- 4 files changed, 281 insertions(+), 3 deletions(-)
-
-
-base-commit: 9a482184d910775cf648863148944945b74e2815
+diff --git a/drivers/usb/typec/ucsi/ucsi_glink.c b/drivers/usb/typec/ucsi/ucsi_glink.c
+index 1db0c88d817e..b03320f5a6bb 100644
+--- a/drivers/usb/typec/ucsi/ucsi_glink.c
++++ b/drivers/usb/typec/ucsi/ucsi_glink.c
+@@ -7,6 +7,7 @@
+ #include <linux/module.h>
+ #include <linux/mutex.h>
+ #include <linux/of_device.h>
++#include <linux/pm_wakeup.h>
+ #include <linux/property.h>
+ #include <linux/soc/qcom/pdr.h>
+ #include <linux/usb/typec_mux.h>
+@@ -455,6 +456,11 @@ static int pmic_glink_ucsi_probe(struct auxiliary_device *adev,
+ 		ucsi->port_orientation[port] = desc;
+ 	}
+ 
++	/* pmic_glink reports the notifications as wakeup events */
++	ret = devm_device_init_wakeup(dev);
++	if (ret)
++		return ret;
++
+ 	ucsi->client = devm_pmic_glink_client_alloc(dev, PMIC_GLINK_OWNER_USBC,
+ 						    pmic_glink_ucsi_callback,
+ 						    pmic_glink_ucsi_pdr_notify,
 -- 
 2.43.0
 
