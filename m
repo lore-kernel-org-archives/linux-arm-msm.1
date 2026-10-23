@@ -1,79 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792749215;
-	b=w4DJfVkeJJpU58Rb/h2KFvKVnxlpkpNBvpS9Q7sreu0WG1nIAeUO1cdmrvvheGzdsl6D
-	 nPvHPift2sMlpe+0QO38sovmi7BwFLbqyt1RhDWB9gRPPE06jFqPuNMJKkgbOjwKSLl7j
-	 igQzVdgKE2Txw8/Ree3TTTFobO4FOYoeSU/1Py9pyt9K8Gs4zbt1i7v7+InkNzlXtHpZ7
-	 DeWgub+ddzp63W6TYkFVGYYJBZw0SGrVF0DDzahBfQSvte5JLbi4SHEytkvgR+EbIHr88
-	 U1qnIQicqf6gdfFPpJLGVR/kyrWR6d+FwBcUjENWccsL7E/0srCwPayKMRD+k96e0Rg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792749215;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=VUDVfZ4Vm4rtes1P599jpk6slY3wpNCJJtGt/qWOQzs=;
-	b=ZusGKssUVdxblS6awGsjG/Skt4X3k5yj+ReuflSTIjlR7n6oTcwCmPH1geFZEy5NUANv
-	 QzRZyst+1kFNIkUI/dkBXvdwaU/GedK11nD1VqwebIVFMBiRI04W+3dwVj54Gq4VAZ0I3
-	 tmS1yue/1Iln4KuvD22UqQXALSl8zIrqT4BZyntP2EbMG5/mWJ1QpR+bJyIFS/IuttYwA
-	 a2gY9ywx0gKMB1vJaaoWWugXdVpUOVfgCs5PyTUfz0gUXv1fwI2FqpnhcXEO9UGI7d2ne
-	 LUJAZX+rFBcQGo6l/8HGnNuF0bMhCu1D6ILNWTX3mRqPZHZw4i9dWtDx4oLSfXUge3A==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kZupb3I3;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A1DF606A31A;
-	Fri, 23 Oct 2026 09:53:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kZupb3I3
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1792749215;
-	b=U0hKPdnWNO6+NFSbDuLcYS65Dv1Ma+iB15H2PE9dyEFBxNsWNBv8VEZNQBKx2FYzuuPw
-	 kRC1ywkJXzpoqn9ZheclY/je9/q8x4un13mRc1KUqg+njGq3xHXTofyK9zFuroKek6XRG
-	 ulYVY8gqJw73Llfeo8EooUjXRRtJ6IkvZM80UTl62j3DnNlwmgn3tiNvbD1dy6UfJFzFX
-	 no3SZveuX/rlVmm8zeEpT//A3aMZ3532MjHzygfrCrxdXelQX3Ur3BQQ/ylJbKeBRB104
-	 0O0jCoUJUZ95bMevNMT6CGYqy2Ag9wCVJ2gcL6dR795KF+aKO/RUlmhnJC6sPJtNCvw==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792749215;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=VUDVfZ4Vm4rtes1P599jpk6slY3wpNCJJtGt/qWOQzs=;
-	b=T4glxUKA3l4sjZQiQAyFOEkgb5/gqt9jPfq+/do5VSuyW+gHke7rbBhyd+v74vOYkT88
-	 b2zJC/oSlsYY5+5QU3ZWFYq+c1dZRlx1H0mlYT4ZP/ia8u6pPtpyQRg7YMgoT5Xe+5oiO
-	 xxv3BhsumCxw0dPayynyZ0YTzYOujYxrgycpZ6/xFCpxXE3oDB69Tuo/sm6sT7+7fMyBJ
-	 QqC7MhU6mSMtFrQt156VEnCFy/Ef1R7kXYfHCT/12PNUy8wbd/e7LX6eC2bgrFUdPQHlx
-	 dGwzSFjaSnbgLFJ3NWG2JSRI0iqvtBCoPPzoMG1WzA9Ct2TzzlZO/7OG/d9moNxY/EA==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792749716;
+	b=E7ljsPbelOO3VB87ntGs8Xhl/9aIlZXU5ODzJSRnGJVSIRgY8oVZgV44wsxlspgLoQBv
+	 lqWBGzTnXDOnO9qNeGzTS1qu6d1aoO/F8lCQaTXa54mTP+wIA0UMVBfuWs3KkRkcGbvyV
+	 pYrYxleSmDxVaNPl99v1b1u92/jg+R19FugwhFtpY3Th98AtciZUXbv+DKSl3/QEryGXG
+	 gBwHcgty+6LsNcWVed+WgFq4yqz28odu1J5W4H+22YYvTTKrxNi2xs7b9Heg9TpNj1N/Z
+	 ZAA9tSJY8akFlZWdr2v2+vrbGolIbYSlEBxmrBXkTuyw8++Eiu/QhSN/XKSibnUl2sQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792749716;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=P3vkGi9yXh1Hfl4jyyTeq/iWmAsjHdgA8DwWS7cx5pw=;
+	b=Ep1rF1hTbaUW9mgFp0oZ3+xTyCLt2pai2rJ19s7+eDWwvzuKOsHzvYy3eyNnfQ6ak6pJ
+	 FID920cJB7lubWzD+Wc92kXL+q/+EZ5WfgA3wIxza83s915KUP/MwExcNho+LnN9qxfEZ
+	 USB7gSwU1sf5IIK4cCQjbR3ZAWgHynkgyCddTt835iJKUEvhYDdde6bV/Ma+jkqkJ+MTd
+	 HQahp2b0bG2t9KY+EDLF5qBvW8d4mvzFvtObJTmXAmVrWOx5zTUKkx2H3JnaH1M89oKbd
+	 rwkibs497hlZxld3pctdERtYcEKNGYprbK5uSHdFO40rUI3iSDqQ3BY3kJjiWbrmGFA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Igw7C6kq;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xuzohqpz;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 38B571F01828;
-	Fri, 23 Oct 2026 09:53:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792749215;
-	bh=VUDVfZ4Vm4rtes1P599jpk6slY3wpNCJJtGt/qWOQzs=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=kZupb3I3VZ2+4yAVAdBEPX3bu7sClLzFvKLaVtZWDa/kX7o4kG/KD4nmfPA+8uA82
-	 8Ig7sTDDALs2aB50G31SyiJbsP4ZVTbMZJ0hXnvHSJ2a2UDDXhpLIG9b7Tm1ijz/9u
-	 AYBk7yQl8ZkWA0q6USH5kylXCJ9i032dJQSSvg5xnA0bJ2xhnDPQUJ9JiHNPKcKh9z
-	 xCUNpAoxMnHiIpQFkQn3lqAZcPLBw12YOEfe7gGClj3Glf+mLRC9m6pBBHiaPmfqNF
-	 9oH+rUfyKI/pRsBuOrN2SSHdkbuN5ogyjYxz9/OpWgt4BQ8NQHoWwM2hOBgJi0mwxF
-	 sNjsQ8tRXAC8A==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id AAD0644478;
-	Fri, 23 Oct 2026 09:53:33 +0000 (UTC)
-From: Ishu Brar via B4 Relay <devnull+patches.brar.si@kernel.org>
-Subject: [PATCH v3 0/4] drm/msm/adreno: Add Adreno 620
-Date: Fri, 23 Oct 2026 15:23:30 +0530
-Message-Id: <20261023-adreno-a620-v3-0-2d1d566e5e13@brar.si>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A614606A326
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:01:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6A614606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Igw7C6kq;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xuzohqpz
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69N7F9m82067808
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:01:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	P3vkGi9yXh1Hfl4jyyTeq/iWmAsjHdgA8DwWS7cx5pw=; b=Igw7C6kqP0xyItZm
+	Etw1IZcD9bspaQAgs5mNzvbWksWxoUXirU5ckGiAbJyL06M3wUp3nWO0H2nGNmdK
+	MqoTiMW9o//JWohy34gDd3RKG0pe1DVED+SObNrJqfJEHb2P4FyvJRnICftRIy1B
+	zLobDQOUljfcbiP26emQF55ZLkhR80LxqRnUHHriCMZ8Eo2QHduyttXKst4Ol4u+
+	wIxig2g3a1AoobXnuaAnC02Rz2bsV1ynYWZ3bNLj/wzeySdCPESnYNu+TcDOHr+k
+	MiX5BJ7pcExnDBASmo8wZ12tR5nAUkUGCcNSz0wvHtbgz7DcXRtUiRX2cxn/o8Vm
+	IN255Q==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfnyw3m5t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 10:01:54 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3ab2cb8d5dbso674367a91.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 23 Oct 2026 03:01:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792749714; x=1793354514; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=P3vkGi9yXh1Hfl4jyyTeq/iWmAsjHdgA8DwWS7cx5pw=;
+        b=XuzohqpzlArhuWC0FCNvzfLh/cMAoEaO5Km+sJ6S2PxeYTfnL1wWf9pSqNfcPlPvw5
+         0lWTtk+agRc5JnCT1T0HJRklBht9TVuF2Cc9k0wywisgFVtwrUvF7e17BV9X9zOdk1+b
+         0clTmpquDKhRFa4AymzWMUJ4JG/glyWKnhLV+JIEcKofuOwbRMA2RkLoQJSEJ6PKtw5I
+         xHQf5cgKrdepOeX1Ne3W1C9Y9i/4SlV25QfnogjB/aUxkbjg8MRuZGoGELMioQNsvR6F
+         sYiEEpKWUxFQ435ZOZpYSIOGO67VZi5bnrLc8t4FAG1JydpA52mrx42NR1czdsraESGe
+         gxUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792749714; x=1793354514;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=P3vkGi9yXh1Hfl4jyyTeq/iWmAsjHdgA8DwWS7cx5pw=;
+        b=bef7SwEdzpaG5gMH1gQIoMdl+SaFAAgg9vbAlLgMcWE9Ryd+TVobEcb+KKMYywqiOF
+         98HUrWS9LaktrQq14h0vRma+AI7E0smDdZjK1sIZVvlZkHeQWXWU/YdRDQrbpqUrD9Ju
+         ZtO7zTFilwm86qVIsNtRzFeb5kkp+XWNWRdFTOwXCptRho8d+HYViROyRhV1JMhR4z4Q
+         6aO+H+d5m9ghT4OSbvsKZFDPbZok6dvnIUfy0Nl/TOgknuhmX0znWg3RGr6B8Gc/ocEp
+         5BCUcJ1aCBlMpvSXT45trOLHiwaDc2Mxkv2mh2xurTQP8wB63L7EvCoLs3Xf2jdrWPwi
+         nDhg==
+X-Forwarded-Encrypted: i=1; AKwUvByRk+v8+eLv76/diq34nkB9WMp5mlgLFVNxDQnoU0aV8OBebDsBvHuuXYuN0LKY+e7e/fG0xlxZ5xvFC6Sy@vger.kernel.org
+X-Gm-Message-State: AFq9FYL/H4XoSUkt1Ys7Q4KyqcJAAgce3ue6UqKxsG6Sl9ZQIEM6DnbB
+	NN7y48Sw4Uh9Inqggw5hEvD4ixGaFz9XPZaN+TO0pYPVaGqnjX7yE++5v9E80U/EPmGzs0O9a3a
+	qsygF0VG6W/aSBe5ZdPc99cuWj3DkjkthypfcRMouTDy7P/ZN+z/5+DChK5NAKjZqYm0X
+X-Gm-Gg: AYBFou36DcIUPa9Z2jaL1XuiGxYtfct/RlG4Gc35WkmC3hsyrN+ebtpc0Vi0cZ7F4pq
+	ip35RKRq/BCuj9pdaGp1KesG4xqeTmI1koqmiR2nkVSuzUobAzOF0eND+y1EmyomW99+RqOY0O2
+	4byUkhQ2/wo0QrRSTLIyGjiuLUNPCXRkbUJ4NQQv8i4IHpQiCwKzdQNEBjd5AF8xBm/l5/WOyke
+	Q+tRfKMnwU/T3u9Qz/BVhEEj2QNHc9DscuJhkzAuTfJ8UvlvgQj+6AylC4qu2XJGLnup+Yg36sg
+	3C2wPdyf3Vx5bpwTCK2aZQJJGRfOBsoMJCfSwvk51i6K8l98QmT83hO7ST27kv+8aZYC7KJg656
+	1qqCsKKDm5w8nfiddei+tj3AR3ztGIg==
+X-Received: by 2002:a17:90b:5906:b0:3ab:3437:554f with SMTP id 98e67ed59e1d1-3adce0073a2mr1437362a91.29.1792749713316;
+        Fri, 23 Oct 2026 03:01:53 -0700 (PDT)
+X-Received: by 2002:a17:90b:5906:b0:3ab:3437:554f with SMTP id 98e67ed59e1d1-3adce0073a2mr1437283a91.29.1792749712338;
+        Fri, 23 Oct 2026 03:01:52 -0700 (PDT)
+Received: from [192.168.1.9] ([106.222.235.141])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ada48ed70dsm8098149a91.4.2026.10.23.03.01.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Oct 2026 03:01:51 -0700 (PDT)
+Message-ID: <e832301a-6129-4697-a5e4-94671072622b@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 15:31:42 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,139 +115,372 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] thermal: qcom: tsens: add hardware-bin trip-point
+ filtering
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+References: <20261002-thermal_bin-v1-0-5a29be7e8ec5@oss.qualcomm.com>
+ <20261002-thermal_bin-v1-4-5a29be7e8ec5@oss.qualcomm.com>
+ <7cd708de-a58e-47fd-acd4-0e37be77de92@oss.qualcomm.com>
+Content-Language: en-US
+From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+In-Reply-To: <7cd708de-a58e-47fd-acd4-0e37be77de92@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NwQ6CMBAFf4X0bE27hSKe/A/jodCtrAcgLTYaw
- r/b4kFNPE7yZt7CAnrCwI7FwjxGCjQOCdSuYF1vhitysokZCNBSSM2N9TiM3GgQ3BlE3TStOoB
- jyZg8OnpstfPlzeHe3rCbcyIvegrz6J/bXZR5978cJRe8NDVaDVLY2p5ab/w+EMvdCF8mqF8Tk
- imtrspOuQps9THXdX0B3G78avAAAAA=
-X-Change-ID: 20261016-adreno-a620-faee699b382f
-To: Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
- Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Ishu Brar <patches@brar.si>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792749211; l=5003;
- i=patches@brar.si; h=from:subject:message-id;
- bh=q46zBhiazj9Xsh580kJqKCGh/wiL2DqG+nYc6I/waQg=;
- b=d++vNnmxKYjiPwNGMBGPCpNwz4XIfHtO66axuDrueods6TC1fLl2qj8WLX+02xj8LUVAzS84n
- fk7Ln1MlrYIDjvafH1tLuVe9O3eP/N6Utqv8Ucu2EdK8EdgnCYBz9+0
-X-Developer-Key: i=patches@brar.si; a=ed25519;
- pk=Ds+E23E3ntzjPzuBDyVRkOouclcNI5k75R+N42yJtCk=
-X-Endpoint-Received: by B4 Relay for patches@brar.si/default with
- auth_id=1189
-X-Original-From: Ishu Brar <patches@brar.si>
-Reply-To: patches@brar.si
+X-Proofpoint-GUID: 79dMIAmIRSMYRMOczVXv0jQl3So7t7K1
+X-Proofpoint-ORIG-GUID: 79dMIAmIRSMYRMOczVXv0jQl3So7t7K1
+X-Authority-Analysis: v=2.4 cv=dphOmFg4 c=1 sm=1 tr=0 ts=6adb3092 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=8wa5AUNoahJ04lRaSfAPWg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=gzkphQoz22865OLWFksA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDAzOSBTYWx0ZWRfX5zU7vdWnj3G6
+ 0vBYHmdQw93Zkxi5kxdgFO8qJUjWewV1yfGIS0FcXcHFX9YNeN3TcEaAJq0XVYdmXZVtVjgpqLl
+ mE5amNpz6XFRC+Ls/aLHstDH6Lgz1QI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDAzOSBTYWx0ZWRfXyxNWfQF4Om+F
+ GqwkT/Zxn/HBuofH3JWzTpLBZF3xjew06cs+9cwhGjv11ktFYqMizFJqbjnbA6WUtzEK61scv8i
+ 9U4QG4TL0eBY9AzajOuN/NObzqgw00DG5B+5OPefTtFsYileDyQNdksTi50ZSqFJugW0ppef/pr
+ hMSVO7LZHIipkeV+TK+iFfbBHCjDconjtVxbJuxsUAW5OG+hAGI573iU30f9jCqORKjFC02zdSj
+ RugDtdOQojKowXKQjBHGdwNWKcP6MJjirphbBjjKepMvkg7dSfO/X1vlfjnQid2Fj+I7TH6fohm
+ O1HW27abVG7Fb0kxRNJ86cM31SWFkTLwDs+X/3cR6iCBpQqgG3Vd/n+Z1Dtu5tPSahlOES6/Afp
+ 0HGRxXJ8DaIj5IoZ3cdEfl407LVb6FceeMH72xKEdTfdWgD/w+ffxcMO0OF0+X/ufB8/ISbcQzv
+ VaxXo5yi7dZ1awRBwvg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 clxscore=1015 impostorscore=0 adultscore=0
+ lowpriorityscore=0 priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230039
 
-This adds the Adreno 620 GPU found in the Qualcomm SM7250 (Snapdragon
-765/765G/768G) to the msm driver. It is an A650 derivative using the a650
-SQE/GMU firmware and a620_zap.mbn. On top of the catalog entry it needs
-one A620 specific GMU change: the A620 has no PDC setup from AOP, so the
-PDC sequencer is programmed from the driver (xo/mx/cx addresses from
-cmd-db). Without it the RSC never acks the second power-up and the device
-hangs.
 
-Tested on a OnePlus Nord (SM7250) running mainline: the GPU, GMU and
-Vulkan work. This needs the SM7250 SMMU series [1], otherwise the device
-is reset when the first per-process pagetable is created. It also needs
-the SM7250 interconnect series [2]: the GPU OPP table gets its bandwidth
-levels from those providers and the GMU bandwidth table is generated from
-them and the BCM list of the catalog entry. Without bandwidth levels the
-GMU falls back to the generic A630 table, whose BCM addresses do not
-exist on SM7250, and the first GX performance vote times out.
-The SoC devicetree nodes are not part of this series; they will be sent
-separately once the SoC dtsi is accepted.
 
-[1] https://lore.kernel.org/all/20261023-smmu-sm7250-v2-0-8bb881ce19f5@brar.si/
-[2] https://lore.kernel.org/all/20261023-icc-sm7250-v1-0-1e47c1226857@brar.si/
+On 10/22/2026 2:39 PM, Konrad Dybcio wrote:
+> On 10/2/26 12:46 PM, Gaurav Kohli wrote:
+>> From: Amit Kucheria <amit.kucheria@oss.qualcomm.com>
+>>
+>> Some Qualcomm SoCs are binned at manufacturing time and expose the bin
+>> in qfprom fuses.  The thermal core's supported_hw_bin mechanism filters
+>> trip points by hardware version; wire tsens up to feed it.
+> 
+> [...]
+> 
+>> +	/* Hardware-bin values for thermal-hw-bin matching in DT. */
+>> +	const u32 hw_bin_std = 0x1;
+>> +	const u32 hw_bin_elevated = 0x2;
+>> +
+>> +	/* Higher thermal profile identification for qcm6490/sc7280 bins. */
+>> +	const u32 tsens_chip_id0 = 0x197;
+>> +	const u32 tsens_chip_id1 = 0x198;
+>> +	const u32 tsens_chip_id2 = 0x20e;
+>> +	const u32 tsens_chip_id3 = 0x20f;
+>> +	const u8 tsens_feat_id2 = 0x2;
+>> +	const u8 tsens_feat_id3 = 0x3;
+>> +	const u8 tsens_feat_id4 = 0x4;
+> 
+> Isn't that (also) exposed over SMEM?
 
-Signed-off-by: Ishu Brar <patches@brar.si>
----
-Changes in v3:
-- Dropped the bandwidth table patch: the GMU table is generated from the
-  BCM list in the catalog entry, which needs bandwidth levels in the OPP
-  table, provided by the interconnect series [2] (Konrad).
-- Moved adreno_is_a620() to the PDC patch, its only user.
-- New patch: factor the common BCM list out of the A690 entry into a
-  shared array; the A620 entry refers to it (Konrad).
-- Reworded the catalog patch message accordingly.
-- Testing: the generated-table path is the one tested for v2 on the
-  OnePlus Nord, unchanged here; the shared BCM list refactor was build
-  tested.
-- Link to v2: https://patch.msgid.link/20261023-adreno-a620-v2-0-1d654c3f52d5@brar.si
+Thanks Konrad, for review.
 
-Changes in v2:
-- Patch 3: also program the VRM command (vrm.soc + 4) in TCS1 and TCS3
-  when cmd-db has it, as the downstream driver does (Konrad).
-- Patch 4: GMU clock gating mode is 0x00020202 as downstream (was
-  0x00020200); add the SH0/MC0/ACV BCM list for the generic bandwidth
-  table. The bus widths are the ones the other A6xx/A7xx parts use.
-- Patch 2 is kept for now: the generic table is only used when the OPP
-  table has bandwidth levels, which needs the SM7250 interconnect
-  driver and DT that are not upstream yet. Without it the A620 would
-  fall back to the A630 table.
-- Testing: v2 was re-tested on the OnePlus Nord (these changes on top
-  of my 7.3-rc7 port tree, not on msm-next), with the interconnect
-  path and OPP bandwidth levels in the GPU node. Vulkan workloads ran
-  across GPU power cycles and all four GPU frequencies; each frequency
-  selected its own bandwidth level, the generated BCM votes scale
-  linearly with the OPP bandwidth and the GMU accepted the table. I
-  could not read back the resulting DDR frequency.
-- Protect map (patch 4 follow-up suggested by Konrad): not included
-  yet, waiting for the downstream reference of the 0x1c800 range.
-- Link to v1: https://patch.msgid.link/20261016-adreno-a620-v1-0-4a7ed6210d7d@brar.si
+SMEM has related socinfo data, but there is no exported helper for the
+exact fields needed here, such as feat-id, which is also used as the bin
+value.
 
-To: Rob Clark <robin.clark@oss.qualcomm.com>
-To: Dmitry Baryshkov <lumag@kernel.org>
-To: Abhinav Kumar <abhinav.kumar@linux.dev>
-To: Jessica Zhang <jesszhan0024@gmail.com>
-To: Sean Paul <sean@poorly.run>
-To: Marijn Suijten <marijn.suijten@somainline.org>
-To: David Airlie <airlied@gmail.com>
-To: Simona Vetter <simona@ffwll.ch>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-To: Maxime Ripard <mripard@kernel.org>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org
-Cc: freedreno@lists.freedesktop.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
+This jtag-id/feat-id decoding is Kodiak/QCM6490-specific, and the
+thermal-bin mapping needs both values. Other/future targets are expected
+to use only the generic i-temp fuse bit, like Hamoa.
 
----
-Ishu Brar (4):
-      dt-bindings: display: msm: Document Adreno 620 and its GMU
-      drm/msm/a6xx: Program the PDC sequencer on Adreno 620
-      drm/msm/a6xx: Factor out the common BCM list
-      drm/msm/adreno: Add Adreno 620
-
- .../devicetree/bindings/display/msm/gmu.yaml       |  2 +
- .../devicetree/bindings/display/msm/gpu.yaml       |  1 +
- drivers/gpu/drm/msm/adreno/a6xx_catalog.c          | 48 +++++++++++++++++-----
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c              | 35 +++++++++++++---
- drivers/gpu/drm/msm/adreno/adreno_gpu.h            |  5 +++
- 5 files changed, 75 insertions(+), 16 deletions(-)
----
-base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
-change-id: 20261016-adreno-a620-faee699b382f
-
-Best regards,
---  
-Ishu Brar <patches@brar.si>
-
+> 
+> Konrad
+> 
+>> +
+>> +	if (nfuse < 2)
+>> +		return -EINVAL;
+>> +
+>> +	tsens_jtag = fuse[0] & GENMASK(19, 0);
+>> +	tsens_feat_id = fuse[1] & GENMASK(7, 0);
+>> +
+>> +	elevate_trip =
+>> +		(tsens_jtag == tsens_chip_id0 && tsens_feat_id == tsens_feat_id3) ||
+>> +		(tsens_jtag == tsens_chip_id1 && tsens_feat_id == tsens_feat_id4) ||
+>> +		(tsens_jtag == tsens_chip_id2 && tsens_feat_id == tsens_feat_id3) ||
+>> +		(tsens_jtag == tsens_chip_id3 && tsens_feat_id == tsens_feat_id2);
+>> +
+>> +	hw[0] = elevate_trip ? hw_bin_elevated : hw_bin_std;
+>> +	*count = 1;
+>> +
+>> +	dev_dbg(dev,
+>> +		"qcm6490 hw-bin from jtag-id=0x%x feat-id=0x%x => 0x%x\n",
+>> +		tsens_jtag, tsens_feat_id, hw[0]);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int tsens_compute_hw_version_i_temp(struct device *dev,
+>> +					   const u32 *fuse, unsigned int nfuse,
+>> +					   u32 *hw, unsigned int *count)
+>> +{
+>> +	if (nfuse < 1)
+>> +		return -EINVAL;
+>> +
+>> +	/* Single bit: set bit 1 for high-temp bin, bit 0 for standard bin */
+>> +	hw[0]  = (fuse[0] & BIT(0)) ? 0x2u : 0x1u;
+>> +	*count = 1;
+>> +
+>> +	dev_dbg(dev, "i-temp hw-bin from i-temp=0x%x => 0x%x\n",
+>> +		fuse[0], hw[0]);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const char * const tsens_cells_qcm6490[] = { "jtag-id", "feat-id" };
+>> +static const char * const tsens_cells_i_temp[]  = { "i-temp" };
+>> +
+>> +const struct tsens_hw_bin_desc tsens_hw_bin_desc_qcm6490 = {
+>> +	.cell_names         = tsens_cells_qcm6490,
+>> +	.ncells             = ARRAY_SIZE(tsens_cells_qcm6490),
+>> +	.compute_hw_version = tsens_compute_hw_version_qcm6490,
+>> +};
+>> +
+>> +const struct tsens_hw_bin_desc tsens_hw_bin_desc_i_temp = {
+>> +	.cell_names         = tsens_cells_i_temp,
+>> +	.ncells             = ARRAY_SIZE(tsens_cells_i_temp),
+>> +	.compute_hw_version = tsens_compute_hw_version_i_temp,
+>> +};
+>> +
+>> +/**
+>> + * tsens_populate_hw_bin_info - read fuse cells and populate priv->hw_bin_info
+>> + * @priv: tsens private data
+>> + * @data: platform data containing the optional hw_bin_desc pointer
+>> + *
+>> + * If data->hw_bin_desc is NULL, this is a no-op and returns 0.  Otherwise,
+>> + * reads the nvmem cells named in hw_bin_desc->cell_names, calls the
+>> + * compute_hw_version() callback, and stores the result in priv->hw_bin_info
+>> + * for later use by tsens_register().
+>> + *
+>> + * Return: 0 on success, negative errno on failure.
+>> + */
+>> +static int tsens_populate_hw_bin_info(struct tsens_priv *priv,
+>> +				      const struct tsens_plat_data *data)
+>> +{
+>> +	const struct tsens_hw_bin_desc *desc;
+>> +	u32 fuse_vals[TSENS_HW_BIN_MAX_CELLS];
+>> +	u32 hw_versions[THERMAL_HW_BIN_MAX_LEVELS] = { 0 };
+>> +	unsigned int hw_count = 0;
+>> +	int i, ret;
+>> +
+>> +	if (!data->hw_bin_desc)
+>> +		return 0;
+>> +
+>> +	desc = data->hw_bin_desc;
+>> +
+>> +	if (!desc->ncells || desc->ncells > TSENS_HW_BIN_MAX_CELLS) {
+>> +		dev_err(priv->dev, "hw_bin_desc ncells %u out of range\n",
+>> +			desc->ncells);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	for (i = 0; i < (int)desc->ncells; i++) {
+>> +		ret = nvmem_cell_read_variable_le_u32(priv->dev,
+>> +						      desc->cell_names[i],
+>> +						      &fuse_vals[i]);
+>> +		if (ret < 0) {
+>> +			dev_err(priv->dev,
+>> +				"failed to read nvmem cell '%s': %d\n",
+>> +				desc->cell_names[i], ret);
+>> +			return ret;
+>> +		}
+>> +	}
+>> +
+>> +	ret = desc->compute_hw_version(priv->dev, fuse_vals, desc->ncells,
+>> +				       hw_versions, &hw_count);
+>> +	if (ret) {
+>> +		dev_err(priv->dev, "compute_hw_version failed: %d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	if (!hw_count || hw_count > THERMAL_HW_BIN_MAX_LEVELS) {
+>> +		dev_err(priv->dev,
+>> +			"compute_hw_version returned invalid hw_count %u\n",
+>> +			hw_count);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	/*
+>> +	 * Store a copy of the hw-version array in priv->hw_bin_info.  We can't
+>> +	 * call thermal_zone_set_supported_hw_bin() here because the thermal zones
+>> +	 * haven't been registered yet; tsens_register() will pass &priv->hw_bin_info
+>> +	 * directly to devm_thermal_of_zone_register_with_bin() instead.
+>> +	 *
+>> +	 * Use devm_kmemdup so the copy is freed when the device is unbound.
+>> +	 */
+>> +	priv->hw_bin_info.supported_hw_bin = devm_kmemdup(priv->dev, hw_versions,
+>> +							  hw_count * sizeof(u32),
+>> +							  GFP_KERNEL);
+>> +	if (!priv->hw_bin_info.supported_hw_bin)
+>> +		return -ENOMEM;
+>> +
+>> +	priv->hw_bin_info.supported_hw_bin_count = hw_count;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>>   int tsens_read_calibration(struct tsens_priv *priv, int shift, u32 *p1, u32 *p2, bool backup)
+>>   {
+>>   	u32 mode;
+>> @@ -1206,6 +1368,12 @@ static const struct of_device_id tsens_table[] = {
+>>   	}, {
+>>   		.compatible = "qcom,msm8996-tsens",
+>>   		.data = &data_8996,
+>> +	}, {
+>> +		.compatible = "qcom,qcm6490-tsens",
+>> +		.data = &data_sc7280,
+>> +	}, {
+>> +		.compatible = "qcom,sc7280-tsens",
+>> +		.data = &data_sc7280,
+>>   	}, {
+>>   		.compatible = "qcom,tsens-v1",
+>>   		.data = &data_tsens_v1,
+>> @@ -1218,6 +1386,9 @@ static const struct of_device_id tsens_table[] = {
+>>   	}, {
+>>   		.compatible = "qcom,sa8255p-tsens",
+>>   		.data = &data_automotive_v2,
+>> +	}, {
+>> +		.compatible = "qcom,x1e80100-tsens",
+>> +		.data = &data_x1e80100,
+>>   	},
+>>   	{}
+>>   };
+>> @@ -1327,12 +1498,18 @@ static int tsens_register(struct tsens_priv *priv)
+>>   {
+>>   	int i, ret;
+>>   	struct thermal_zone_device *tzd;
+>> +	const struct thermal_hw_bin_info *bin_info;
+>> +
+>> +	bin_info = priv->hw_bin_info.supported_hw_bin_count ?
+>> +		   &priv->hw_bin_info : NULL;
+>>   
+>>   	for (i = 0;  i < priv->num_sensors; i++) {
+>>   		priv->sensor[i].priv = priv;
+>> -		tzd = devm_thermal_of_zone_register(priv->dev, priv->sensor[i].hw_id,
+>> -						    &priv->sensor[i],
+>> -						    &tsens_of_ops);
+>> +		tzd = devm_thermal_of_zone_register_with_bin(priv->dev,
+>> +							     priv->sensor[i].hw_id,
+>> +							     &priv->sensor[i],
+>> +							     &tsens_of_ops,
+>> +							     bin_info);
+>>   		if (IS_ERR(tzd))
+>>   			continue;
+>>   		priv->sensor[i].tzd = tzd;
+>> @@ -1425,6 +1602,12 @@ static int tsens_probe(struct platform_device *pdev)
+>>   	priv->feat = data->feat;
+>>   	priv->fields = data->fields;
+>>   
+>> +	ret = tsens_populate_hw_bin_info(priv, data);
+>> +	if (ret)
+>> +		dev_warn(&pdev->dev,
+>> +			 "thermal-bin failed to read FUSE data (%d): trips with temperature-bin will use first entry\n",
+>> +			 ret);
+>> +
+>>   	platform_set_drvdata(pdev, priv);
+>>   
+>>   	device_init_wakeup(dev, !data->no_irq_wake);
+>> diff --git a/drivers/thermal/qcom/tsens.h b/drivers/thermal/qcom/tsens.h
+>> index e8376accdff3..496ae6572bb8 100644
+>> --- a/drivers/thermal/qcom/tsens.h
+>> +++ b/drivers/thermal/qcom/tsens.h
+>> @@ -40,6 +40,29 @@ enum tsens_ver {
+>>   	VER_2_X_NO_RPM,
+>>   };
+>>   
+>> +/**
+>> + * struct tsens_hw_bin_desc - per-SoC descriptor for hardware-bin fuse reading
+>> + * @cell_names: NULL-terminated array of nvmem cell names to read
+>> + * @ncells:     number of entries in @cell_names
+>> + * @compute_hw_version: callback that converts raw fuse values to hw-version
+>> + *                      bitfields suitable for thermal_zone_set_supported_hw_bin()
+>> + *
+>> + * Embed a pointer to this struct in tsens_plat_data.hw_bin_desc to enable
+>> + * hardware-bin trip filtering for a given SoC.  Set to NULL to disable.
+>> + */
+>> +struct tsens_hw_bin_desc {
+>> +	const char * const	*cell_names;
+>> +	unsigned int		 ncells;
+>> +	int (*compute_hw_version)(struct device *dev,
+>> +				  const u32 *fuse, unsigned int nfuse,
+>> +				  u32 *hw, unsigned int *count);
+>> +};
+>> +
+>> +#define TSENS_HW_BIN_MAX_CELLS	8
+>> +
+>> +extern const struct tsens_hw_bin_desc tsens_hw_bin_desc_qcm6490;
+>> +extern const struct tsens_hw_bin_desc tsens_hw_bin_desc_i_temp;
+>> +
+>>   enum tsens_irq_type {
+>>   	LOWER,
+>>   	UPPER,
+>> @@ -533,6 +556,7 @@ struct tsens_features {
+>>    * @feat: features of the IP
+>>    * @fields: bitfield locations
+>>    * @no_irq_wake: if set, TSENS interrupts will not be configured as wakeup sources
+>> + * @hw_bin_desc: optional hardware-bin fuse descriptor for trip filtering
+>>    */
+>>   struct tsens_plat_data {
+>>   	const u32		num_sensors;
+>> @@ -541,6 +565,7 @@ struct tsens_plat_data {
+>>   	struct tsens_features	*feat;
+>>   	const struct reg_field		*fields;
+>>   	bool		no_irq_wake;
+>> +	const struct tsens_hw_bin_desc	*hw_bin_desc;
+>>   };
+>>   
+>>   /**
+>> @@ -568,6 +593,7 @@ struct tsens_context {
+>>    * @feat: features of the IP
+>>    * @fields: bitfield locations
+>>    * @ops: pointer to list of callbacks supported by this device
+>> + * @hw_bin_info: hardware binning info read from SoC fuse (populated at probe)
+>>    * @debug_root: pointer to debugfs dentry for all tsens
+>>    * @debug: pointer to debugfs dentry for tsens controller
+>>    * @uplow_irq: IRQ number for uplow (upper/lower) threshold interrupts
+>> @@ -591,6 +617,8 @@ struct tsens_priv {
+>>   	const struct reg_field		*fields;
+>>   	const struct tsens_ops		*ops;
+>>   
+>> +	struct thermal_hw_bin_info		 hw_bin_info;
+>> +
+>>   	struct dentry			*debug_root;
+>>   	struct dentry			*debug;
+>>   
+>> @@ -677,6 +705,7 @@ extern const struct tsens_plat_data data_ipq5018;
+>>   /* TSENS v2 targets */
+>>   extern struct tsens_plat_data data_8996, data_ipq8074, data_tsens_v2;
+>>   extern const struct tsens_plat_data data_ipq5332, data_ipq5424;
+>> +extern const struct tsens_plat_data data_x1e80100, data_sc7280;
+>>   
+>>   /* TSENS automotive targets */
+>>   extern struct tsens_plat_data data_automotive_v2;
+>>
 
